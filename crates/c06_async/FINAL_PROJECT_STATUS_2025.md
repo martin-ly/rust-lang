@@ -174,7 +174,6 @@ crates/c06_async/
 ├── PROJECT_ADVANCEMENT_SUMMARY_2025.md          # 项目推进总结
 └── FINAL_PROJECT_STATUS_2025.md                 # 最终项目状态
 ```
-
 ## 🧪 测试验证结果
 
 ### 单元测试结果
@@ -183,7 +182,6 @@ crates/c06_async/
 running 40 tests
 test result: ok. 38 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out
 ```
-
 ### 示例运行结果
 
 - **简化异步设计模式**: ✅ 成功运行，展示8种设计模式

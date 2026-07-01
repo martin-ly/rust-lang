@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -50,7 +49,6 @@ fn copy_semantics() {
     println!("x = {}, y = {}", x, y);  // 两者都可用
 }
 ```
-
 ### 借用作为能力（Capability） {#借用作为能力capability}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -74,7 +72,6 @@ fn capabilities_demo() {
     r3[0] = 10;
 }
 ```
-
 ### 生命周期作为区域（Region） {#生命周期作为区域region}
 
 生命周期可以形式化为程序执行中的时间区域：
@@ -99,7 +96,6 @@ impl<'input> Parser<'input> {
     }
 }
 ```
-
 ## 知识结构思维导图 {#知识结构思维导图}
 
 ```mermaid
@@ -119,7 +115,6 @@ mindmap
       类型系统
       证明与验证
 ```
-
 ## 与核心文档的关联 {#与核心文档的关联}
 
 | 本文档 | 核心文档 | 关系 |
@@ -168,17 +163,10 @@ mindmap
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

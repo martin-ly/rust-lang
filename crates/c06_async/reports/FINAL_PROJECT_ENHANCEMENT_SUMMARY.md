@@ -84,18 +84,15 @@
    - 并发控制
    - 错误处理
    - 性能测试
-
 2. **runtime_comparison_demo.rs** - 运行时对比演示
    - Tokio vs Smol 性能对比
    - 内存使用分析
    - 选择指南
-
 3. **async_best_practices.rs** - 最佳实践演示
    - 资源管理
    - 错误处理
    - 性能优化
    - 监控和调试
-
 4. **async_patterns_demo.rs** - 异步编程模式演示
    - 生产者-消费者模式
    - 发布-订阅模式
@@ -103,7 +100,6 @@
    - 背压处理
    - 优雅关闭
    - 错误恢复
-
 5. **async_network_demo.rs** - 异步网络编程演示
    - HTTP 客户端并发请求
    - TCP 服务器和客户端
@@ -111,7 +107,6 @@
    - 网络超时和重试
    - 连接池管理
    - 性能测试
-
 6. **async_database_demo.rs** - 异步数据库和缓存演示
    - 数据库连接池管理
    - 异步查询和事务
@@ -119,7 +114,6 @@
    - 批量操作优化
    - 读写分离
    - 分布式锁
-
 7. **async_performance_demo.rs** - 异步性能优化演示
    - 内存优化和零拷贝
    - 并发控制和资源管理
@@ -127,7 +121,6 @@
    - 缓存策略
    - 异步I/O优化
    - 性能监控和指标
-
 8. **real_world_app_demo.rs** - 真实世界应用场景演示
    - Web API 服务器
    - 消息队列处理
@@ -191,7 +184,6 @@ crates/c06_async/
 ├── docs/                  # 文档（新增 1 个完整指南）
 └── README.md              # 项目说明（已更新）
 ```
-
 ## 🚀 使用方式
 
 ### 运行基础示例
@@ -206,7 +198,6 @@ cargo run --example runtime_comparison_demo
 # 最佳实践演示
 cargo run --example async_best_practices
 ```
-
 ### 运行高级示例
 
 ```bash
@@ -219,7 +210,6 @@ cargo run --example async_network_demo
 # 异步数据库和缓存演示
 cargo run --example async_database_demo
 ```
-
 ### 运行专业示例
 
 ```bash
@@ -229,14 +219,12 @@ cargo run --example async_performance_demo
 # 真实世界应用场景演示
 cargo run --example real_world_app_demo
 ```
-
 ### 阅读文档
 
 ```bash
 # 异步语义全面梳理指南
 cat docs/ASYNC_SEMANTICS_COMPREHENSIVE_GUIDE.md
 ```
-
 ## 🎉 项目价值
 
 ### 1. 教育价值

@@ -110,7 +110,6 @@ graph TB
     style Signaling fill:#95e1d3,color:#333
     style Atomic fill:#ffd93d,color:#333
 ```
-
 ### 同步原语决策树
 
 ```mermaid
@@ -142,7 +141,6 @@ graph TD
     style UseCondvar fill:#ffd43b,color:#333
     style UseAtomic fill:#ff8787,color:#fff
 ```
-
 ---
 
 ## 📊 同步原语多维对比矩阵
@@ -235,7 +233,6 @@ fn main() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 ```
-
 #### 2.1.2 结构体Mutex
 
 ```rust
@@ -293,7 +290,6 @@ impl BankAccount {
     }
 }
 ```
-
 ### 2.2 递归Mutex
 
 #### 2.2.1 递归锁实现
@@ -336,7 +332,6 @@ impl RecursiveCounter {
     }
 }
 ```
-
 ## 3. 读写锁 (RwLock)
 
 ### 3.1 基本RwLock使用
@@ -385,7 +380,6 @@ impl SharedData {
     }
 }
 ```
-
 ## 4. 条件变量 (Condition Variable)
 
 ### 4.1 基本条件变量
@@ -430,7 +424,6 @@ impl SharedState {
     }
 }
 ```
-
 ## 5. 信号量 (Semaphore)
 
 ### 5.1 基本信号量
@@ -478,7 +471,6 @@ impl Semaphore {
     }
 }
 ```
-
 ## 6. 屏障 (Barrier)
 
 ### 6.1 基本屏障
@@ -521,7 +513,6 @@ fn main() {
     println!("All threads completed");
 }
 ```
-
 ## 7. 原子操作 (Atomic)
 
 ### 7.1 基本原子类型
@@ -566,7 +557,6 @@ impl AtomicCounter {
     }
 }
 ```
-
 ## 8. 最佳实践
 
 ### 8.1 锁的粒度
@@ -606,7 +596,6 @@ impl FineGrainedCounter {
     }
 }
 ```
-
 ### 8.2 避免死锁
 
 #### 8.2.1 锁顺序策略
@@ -654,7 +643,6 @@ impl BankAccount {
     }
 }
 ```
-
 ## 9. 总结
 
 Rust 2025的线程同步机制提供了强大而安全的并发控制能力。通过合理使用各种同步原语，开发者可以构建高效、正确的多线程应用程序。

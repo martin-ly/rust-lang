@@ -51,7 +51,6 @@
 > **变更日志**:
 >
 > - v1.0 (2026-05-26): 初始创建——覆盖数据科学 Rust 生态、Polars/DataFusion、统计计算、可视化、Python 互操作
-
 > **前置概念**: N/A
 ---
 
@@ -83,7 +82,6 @@ Rust 数据科学栈分层:
 Rust 的最佳切入点：底层基础设施（数据处理、存储、网络）
 Python 的不可撼动地位：交互探索、可视化、ML 模型生态
 ```
-
 > **来源**: [Rust Data Science Blog](https://pola.rs/) · [Polars Benchmarks](https://pola.rs/benchmarks.html)
 
 ### 1.2 核心矛盾：Python 生态 vs Rust 性能
@@ -147,7 +145,6 @@ fn polars_etl() -> Result<DataFrame, PolarsError> {
     Ok(df)
 }
 ```
-
 **Polars 的 Rust vs Python API 差异**:
 
 ```text
@@ -165,7 +162,6 @@ Rust API 独特优势:
   · 零成本抽象: 无 Python GIL 开销
   · 嵌入式部署: 静态链接到二进制，无 Python 依赖
 ```
-
 > **来源**: [Polars Lazy API](https://docs.pola.rs/user-guide/lazy/) · [Polars Streaming](https://docs.pola.rs/user-guide/concepts/streaming/)
 
 ### 3.2 DataFusion：查询执行
@@ -197,7 +193,6 @@ async fn datafusion_query() -> Result<(), DataFusionError> {
     Ok(())
 }
 ```
-
 > **来源**: [DataFusion User Guide](https://arrow.apache.org/datafusion/user-guide/introduction.html) · [InfluxDB IOx](https://www.influxdata.com/blog/announcing-influxdb-iox/)
 
 ---
@@ -246,7 +241,6 @@ fn linear_regression(x: &DMatrix<f64>, y: &DVector<f64>) -> Result<DVector<f64>,
     Ok(beta)
 }
 ```
-
 > **来源**: [ndarray for NumPy Users](https://docs.rs/ndarray/latest/ndarray/doc/ndarray_for_numpy_users/index.html)
 
 ---
@@ -281,7 +275,6 @@ fn draw_histogram(data: &[f64], output: &str) -> Result<(), Box<dyn std::error::
     Ok(())
 }
 ```
-
 > **来源**: [plotters GitHub](https://github.com/plotters-rs/plotters) · [egui-plot](https://docs.rs/egui-plot/latest/egui_plot/)
 
 ### 5.2 Jupyter 内核
@@ -304,7 +297,6 @@ evcxr_jupyter 工作流程:
   · 状态管理: 变量跨 cell 持久化，但类型不能改变
   · 内存: 编译产物累积，需定期重启内核
 ```
-
 > **来源**: [evcxr Documentation](https://github.com/evcxr/evcxr) · [Jupyter Kernel Protocol](https://jupyter-client.readthedocs.io/en/latest/messaging.html)
 
 ---
@@ -342,7 +334,6 @@ fn my_data science_lib(_py: Python, m: &PyModule) -> PyResult<()> {
     Ok(())
 }
 ```
-
 **PyO3 在数据科学中的设计模式**:
 
 ```text
@@ -364,7 +355,6 @@ fn my_data science_lib(_py: Python, m: &PyModule) -> PyResult<()> {
   · PyO3 + ort (ONNX Runtime)
   · 优势: 兼顾生态和性能
 ```
-
 > **来源**: [maturin Documentation](https://www.maturin.rs/) · [ruff GitHub](https://github.com/astral-sh/ruff) · [ort Crate](https://docs.rs/ort/latest/ort/)
 
 ---
@@ -404,7 +394,6 @@ fn my_data science_lib(_py: Python, m: &PyModule) -> PyResult<()> {
 └── 根结论: ❌ Rust 的多线程潜力大，但实际加速取决于数据规模、
            操作类型和硬件。自动并行（如 Polars）比手动更可靠。
 ```
-
 > **来源**: [Polars vs Pandas](https://pola.rs/benchmarks.html) · [Python GIL PEP 703](https://peps.python.org/pep-0703/)
 
 ### 7.2 边界极限
@@ -443,7 +432,6 @@ let result = LazyCsvReader::new("huge_file.csv")
     .agg([...])
     .collect()?; // 仅在最后 collect，Polars 自动流式执行
 ```
-
 > **来源**: [Polars Lazy API](https://docs.pola.rs/user-guide/lazy/) · [Polars Streaming](https://docs.pola.rs/user-guide/concepts/streaming/)
 
 ### 8.2 边界测试：PyO3 GIL 死锁
@@ -472,7 +460,6 @@ fn bad_function(py: Python<'_>) -> PyResult<()> {
 // 2. 使用 py.allow_threads(|| { ... }) 释放 GIL 执行 Rust 计算
 // 3. 避免在持有锁时跨越语言边界
 ```
-
 > **来源**: [PyO3 Concurrency](https://pyo3.rs/main/parallelism) · [Python GIL](https://docs.python.org/3/glossary.html#term-global-interpreter-lock)
 
 ### 8.3 边界测试：未处理 CSV 解析中的畸形数据
@@ -499,7 +486,6 @@ fn robust_csv_read() -> Result<DataFrame, PolarsError> {
     Ok(df)
 }
 ```
-
 > **来源**: [Polars CSV Reader](https://docs.pola.rs/user-guide/io/csv/) · [CSV Parsing Best Practices](https://datatracker.ietf.org/doc/html/rfc4180)
 
 ---
@@ -601,9 +587,7 @@ Arrow 的列式内存格式是语言无关的。Rust `arrow-rs` 和 Python `pyar
 | Rust for Data Science（Rust 数据科学） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Rust for Data Science（Rust 数据科学） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Rust for Data Science（Rust 数据科学） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Rust for Data Science（Rust 数据科学） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

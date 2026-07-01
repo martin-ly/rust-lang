@@ -50,7 +50,6 @@
 
 > **[Wikipedia — Entity component system](https://en.wikipedia.org/wiki/Entity_component_system)** Entity component system (ECS) is a software architectural pattern mostly used in video game development for the representation of game world objects. An ECS comprises entities composed from components of data, with systems which read and update component data.
 > **来源**: <https://en.wikipedia.org/wiki/Entity_component_system>
-
 > **[Data-Oriented Design]** The purpose of all programs, and all parts of those programs, is to transform data from one form to another.
 > **来源**: [Richard Fabian — Data-Oriented Design]
 
@@ -58,7 +57,6 @@
 
 ## 认知路径（Cognitive Path）
 >
-
 > **学习递进**: 从"ECS 是什么"的游戏开发直觉，深入到"所有权（Ownership）模型如何使 System 调度在编译期可验证"的形式化理解。
 
 ### 第 1 步：为什么传统 OOP 在游戏引擎中遇到瓶颈？
@@ -138,10 +136,8 @@ erDiagram
         Query query
     }
 ```
-
 > **认知功能**: 此 ER 图帮助建立 ECS 数据模型的关系骨架——World 作为中心枢纽组织 Entity、Component 与 System 的关联，理解这一点是设计缓存友好架构的起点。建议在实现自定义 ECS 存储时，先画出版本化的 ER 图验证组件访问路径的合理性。关键洞察：System 不直接持有 Component，而是通过 World 间接查询，这种间接性是并行调度安全的前提。[来源: 💡 原创分析]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-
 > **思维表征说明**: `erDiagram` 是 Mermaid 的**实体关系图**语法，与 `classDiagram` 不同——它强调**实体间的 cardinality（基数）关系**（`||--o{` 表示一对多），天然适合表达 ECS 中「一个 World 包含多个 Entity」「一个 Entity 拥有多个 Component」「一个 System 查询多个 Component」的关系。这与 `graph TD` 层次图（展示概念分类）形成互补——ER 图展示的是**数据模型中的实体关联**。 [来源: Bevy ECS Docs; Chen, *The Entity-Relationship Model*, 1976]
 
 ### 1.2 极简 ECS 实现示例
@@ -206,7 +202,6 @@ fn main() {
     }
 }
 ```
-
 > **设计意图**: 此示例刻意保持最小化，以展示 ECS 的**数据与行为分离**核心——`World` 拥有数据（Component 存储），`update_positions` 作为 System 只读取/写入数据，不持有状态。Rust 的借用检查器在此模型下自然保证：同一时刻只有一个 System 能可变访问某一类 Component（若使用真实 ECS 的并行调度器，则通过 `&mut`/`&` 分区实现）。 [来源: 💡 原创实现]
 
 **ECS 类型层次（Mermaid classDiagram）**:
@@ -265,9 +260,7 @@ classDiagram
     Component <|-- Transform
     Component <|-- Velocity
 ```
-
 > **认知功能**: 此 classDiagram 从类型系统（Type System）视角固化 ECS 的静态结构——Component 是数据 trait，System 是行为 trait，Query 是借用检查的代理。建议在深入 Bevy 源码前，以此图为锚点理解泛型（Generics）参数的传播路径。关键洞察：Archetype 不是类型层次的节点，而是运行期存储优化的产物，这解释了为何 ECS 能在零成本抽象（Zero-Cost Abstraction）下实现 SOA 布局。[来源: 💡 原创分析]
-
 > **思维表征说明**: 此 `classDiagram` 从**类型系统（Type System）**视角展示 ECS 架构——`World` 是容器根，`Entity` 是标识符，`Component` 是数据 trait，`System` 是行为 trait，`Query` 是借用检查的代理，`Archetype` 是存储优化结构。`-->` 表示组合关系，`..>` 表示依赖关系，`<|--` 表示继承。这种表征帮助程序员理解「ECS 不是 OOP 的替代品，而是数据导向的重新组织」。 [来源: Bevy ECS Docs; Data-Oriented Design Book]
 
 ### 1.2 缓存友好性与 SoA 存储
@@ -298,7 +291,6 @@ fn update_positions(
     }
 }
 ```
-
 Bevy 的 Archetype 存储将相同组件组合的实体数据**连续存放**（Structure of Arrays）：
 
 | 存储方式 | 布局 | 缓存命中率 | Rust 实现 |
@@ -341,9 +333,7 @@ graph TD
     G -.->|无冲突| I
     H -.->|无冲突| I
 ```
-
 > **认知功能**: 此调度图展示了 Bevy 的帧阶段流水线与 System 依赖关系——Update 阶段内的 System Set 按 Query 签名自动分析冲突并并行执行。建议将高频 System 注册到同一阶段，利用无冲突 Query 的自动并行提升吞吐。关键洞察：`&mut T` 与 `&T` 的互斥/共享关系直接映射到 System 的串行/并行调度，借用检查器成为调度器的形式化验证后端。[来源: 💡 原创分析]
-
 > **Bevy 调度安全**: 默认并行调度器在**编译期**收集所有 System 的 `Query` 签名，在**运行期**构建依赖图。`&mut T` vs `&T` 的冲突分析由 Rust 借用检查器保证，跨线程调度由 `Send` / `Sync` 保证。
 
 ### 2.3 wgpu：跨平台 GPU 抽象与所有权
@@ -362,7 +352,6 @@ encoder.begin_render_pass(...); // 消耗 &mut encoder
 // Queue::submit 消耗 encoder（所有权转移），防止二次提交
 queue.submit(std::iter::once(encoder.finish()));
 ```
-
 | wgpu 资源 | Rust 所有权表达 | GPU 安全语义 |
 |:---|:---|:---|
 | `Device` | `Arc`-like 内部引用（Reference） | GPU 上下文生命周期（Lifetimes） |
@@ -399,7 +388,6 @@ queue.submit(std::iter::once(encoder.finish()));
 | **ESP32 系列** | 240 MHz Xtensa/RISC-V；520 KB SRAM | `esp-hal` + `no_std` + `alloc` | `bevy_ecs` 已移植（2025） | `esp-idf-hal`、`bevy_ecs` |
 
 > **Playdate 生态**: Playdate Developer Forum 上已有开发者使用 `hecs` 构建游戏原型，验证了 `no_std` + `alloc` 下 ECS 的可行性。其 16 MB RAM 对 ECS 极为充裕，但 1-bit 屏幕要求渲染系统与 ECS 解耦，通常采用帧缓冲（framebuffer）+ Sprite 批处理模式。
-
 > **ESP32 突破**: Espressif 于 2025 年发布了基于 `bevy_ecs` 的 `no_std` 迷宫游戏演示，标志着 Bevy 的 ECS 核心已正式下探到 MCU 级别。该演示使用 `embedded-graphics` crate 进行帧缓冲渲染，事件通过 Bevy 的 `EventReader<T>` 分发。
 
 [来源: Espressif Developer Blog — Bevy ECS on ESP32] · [来源: Playdate Developer Forum — Rust Development Thread]
@@ -415,7 +403,6 @@ queue.submit(std::iter::once(encoder.finish()));
 | **`legion`** | ⚠️ 部分 | 是 | Archetype | 中 | 社区维护；`no_std` 支持不完整 |
 
 > **体积权衡**: `bevy_ecs` 即使在 `no_std` 下仍包含大量泛型（Generics）单态化（Monomorphization）代码，对 Flash < 1 MB 的 MCU 可能过重。`hecs` 的代码体积极小，更适合 ROM 受限场景。
-
 > **调度差异**: `shipyard` 的 Sparse Set 在固定容量下实现更简单（只需固定大小的 `dense`/`sparse` 数组），而 `hecs` 的 Archetype 存储在 `no_std` 下仍需 `alloc` 支持 archetype 分桶。对于无 `alloc` 场景，自定义固定容量 Sparse Set 往往是更实际的选择。
 
 [来源: Bevy ECS no_std Discussion #10680] · [来源: hecs Documentation] · [来源: Shipyard GitHub — Cargo Features]
@@ -431,7 +418,6 @@ graph LR
     B --> D["Component B<br/>[MaybeUninit&lt;U&gt;; MAX]"]
     B --> E["Generation<br/>[u8; MAX]"]
 ```
-
 > **认知功能**: 此图揭示了无 `alloc` 环境下 ECS 的静态存储本质——Entity ID 作为索引直接定位固定容量的组件数组，消除了动态分配的不确定性。建议在为掌机/嵌入式设计 ECS 时，用此模式替换桌面端的 HashMap 动态存储。关键洞察：`MaybeUninit` 数组与代际生成号的组合，在零堆分配条件下实现了实体复用与 ABA 问题的防御。[来源: 💡 原创分析]
 
 **设计模式要素**：
@@ -496,7 +482,6 @@ impl FixedArchetype {
     }
 }
 ```
-
 > **内存布局优势**: 固定容量 Archetype Table 的组件数组在 `.bss` 段静态分配，无运行时分配开销，且保证 SOA（Structure of Arrays）布局，缓存行为完全可预测。
 
 [来源: Embedded Rust Working Group — no_std Patterns] · [来源: Data-Oriented Design Book]
@@ -530,7 +515,6 @@ fn render_system(
     }
 }
 ```
-
 > **来源**: [Playdate SDK Documentation] · [embedded-graphics Crate Docs]
 
 #### 2.4.6 `no_std` + `alloc` 下的容器替代方案
@@ -565,7 +549,6 @@ enum Command {
     InsertComponent(u8, ComponentType),
 }
 ```
-
 > **来源**: [heapless Documentation] · [arrayvec Documentation] · [TinyVec Documentation] · [hashbrown Documentation]
 
 #### 2.4.7 代码示例：在 `no_std` 环境中使用 `hecs`
@@ -634,7 +617,6 @@ fn blit_sprite(_fb: &mut FrameBuffer, _pos: &Position, _sprite: &Sprite) {
     // 平台特定的位图绘制
 }
 ```
-
 > **设计要点**: 在 `no_std` 下，`hecs` 的 `World` 仍然使用 `alloc` 进行内部存储，但 API 与桌面完全一致。系统不再由自动调度器并行执行，而是显式顺序调用。这种"框架降级"模式保持了 ECS 的数据-行为分离哲学，同时完全剔除了 `std` 依赖。
 
 [来源: hecs Documentation] · [来源: Espressif Developer Blog — Bevy ECS on ESP32]
@@ -656,7 +638,6 @@ fn system_b(mut query: Query<&mut Transform>) { /* ... */ }
 // app.add_systems(Update, (system_a, system_b));
 // ↑ 运行时 panic：duplicate mutable access to Transform
 ```
-
 > **Bevy 的解决方案**: 通过 `Res` / `ResMut` / `Query` 的显式声明，调度器在**应用启动时**验证 System 兼容性。这与 Rust 借用检查器的关系是**同构的扩展**——从编译期单线程扩展到运行期多线程。
 
 ### 3.2 命令队列（Command Buffers）与延迟修改
@@ -679,7 +660,6 @@ fn spawn_enemy(
     ));
 }
 ```
-
 | 模式 | 问题 | Rust/ECS 解决方案 | 形式化对应 |
 |:---|:---|:---|:---|
 | **迭代中删除** | 迭代器（Iterator）失效 / use-after-free | Command queue 延迟执行 | 线性逻辑：消耗操作延迟到安全点 |
@@ -716,7 +696,6 @@ pub fn update_positions_simd(
     // ... unsafe block 仅在 crate 内部
 }
 ```
-
 > **安全边界**: Bevy 的 `unsafe` 代码比例约 3-5%，集中在 `bevy_ecs` 的存储布局和 `bevy_render` 的 GPU 命令生成。这些边界通过 Miri 和模糊测试持续验证。
 
 ---
@@ -731,7 +710,6 @@ graph LR
     B -->|Send| C[GPU Thread<br/>Submit Commands]
     C --> D[GPU Hardware]
 ```
-
 > **认知功能**: 此管线图展示了跨线程渲染中的数据流动——游戏逻辑状态经 `Send` 传递到渲染线程，再提交到 GPU 驱动。建议将非 Send 资源（如 OpenGL 上下文）隔离在单线程的 RenderWorld 中。关键洞察：三线程分离不仅提升吞吐，更通过 Rust 的 `Send`/`Sync` 约束在编译期排除了跨线程数据竞争的全部可能空间。[来源: 💡 原创分析]
 
 | 阶段 | 线程 | Rust 保证 |
@@ -759,7 +737,6 @@ fn extract_sprites(
     }
 }
 ```
-
 ---
 
 ## 六、Bevy RenderGraph 与 wgpu 的所有权交互
@@ -837,7 +814,6 @@ impl Node for MyRenderNode {
     }
 }
 ```
-
 > **RenderGraph 的所有权层级**: `TextureView`（借用）→ `RenderPass`（`&mut encoder` 的临时借用）→ `CommandBuffer`（`encoder.finish()` 消耗所有权）→ `Queue::submit()`（最终所有权转移）。每一层消费都确保前一层不再可访问——**线性使用链**。
 
 ### 6.2 Extract → Prepare → Render 三阶段的所有权转移
@@ -851,7 +827,6 @@ graph LR
     C -->|Render: consume| D[CommandBuffer<br/>GPU 命令]
     D -->|Submit: move| E[Queue<br/>驱动层]
 ```
-
 > **认知功能**: 此图追踪了渲染所有权从 World 到 GPU Queue 的完整转移链条——Extract 跨线程移动，Prepare 可变借用（Mutable Borrow），Render 消费生成 CommandBuffer，Submit 最终转移所有权。建议在自定义 RenderNode 时严格遵循这一单向流动，避免在节点间保留对已消费资源的引用。关键洞察：wgpu 的 API 设计本质上是线性类型理论的工程实现，每一次所有权转移都对应一次形式化的资源消耗。[来源: 💡 原创分析]
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
@@ -887,9 +862,7 @@ let pass: RenderPass;
     pass = encoder.begin_render_pass(...); // 错误：pass 引用 encoder，encoder 在此作用域结束后失效
 }
 ```
-
 > **核心洞察**: wgpu 的 API 通过 Rust 所有权系统实现了**GPU 资源的编译期线性检查**——CommandEncoder 的一次性消费、RenderPass 的借用生命周期、TextureView 的不超过纹理生命期，这些都是线性类型理论在 GPU 编程中的工程实现。
-
 > **来源**: [Bevy — Render Graph Internals] · [wgpu — API Design Rationale] · [WebGPU — Command Encoder Spec]
 
 ---
@@ -942,7 +915,6 @@ app.add_systems(
     physics_system.in_set(PhysicsSet::Step),
 );
 ```
-
 ### 7.2 回滚网络的工作原理
 
 ```mermaid
@@ -962,7 +934,6 @@ sequenceDiagram
     S->>S: 用真实输入重新模拟 N-2 → N
     Note over S: 状态校正，可能产生跳帧
 ```
-
 > **认知功能**: 此序列图刻画了回滚网络的核心时序——本地预测、远程输入延迟到达、快照回滚、重模拟校正。建议将 World 快照与输入历史数组分离管理，确保回滚点的状态可完整恢复。关键洞察：Rust ECS 的确定性保证了“重模拟”与“正向模拟”产生完全相同的状态序列，使回滚不是 hack，而是类型系统支持的标准操作。[来源: 💡 原创分析]
 
 | 回滚阶段 | ECS 实现 | 所有权考量 |
@@ -1013,7 +984,6 @@ struct PlayerInput {
     buttons: u8, // 位掩码：上/下/左/右/攻击/跳跃
 }
 ```
-
 > **GGRS 的关键设计**: 回滚类型必须通过 `rollback_component_with_clone` 注册，GGRS 在后台每帧自动快照这些 Component 的 clone。Rust 的 `Clone` trait 确保了快照的 deep copy 是显式的、无隐式共享可变状态的。
 
 ### 7.4 非确定性陷阱与 Rust 的防御
@@ -1051,7 +1021,6 @@ struct Children(Vec<Entity>);
 // - 删除父实体时，Children 组件需要清理
 // - 关系数据（如"连接强度"）无法直接表达
 ```
-
 Bevy 0.15+ 的 Relations 将关系提升为**一等公民**：
 
 | 特性 | 传统 ECS（Component 模拟）| 关系型 ECS（Bevy 0.15+）|
@@ -1090,7 +1059,6 @@ fn process_children(query: Query<(Entity, &ChildOf)>) {
     }
 }
 ```
-
 ### 8.2 关系对所有权模型的扩展
 
 Relations 引入了**图结构**到 ECS 中，这对 Rust 所有权模型提出了新的挑战和表达：
@@ -1119,7 +1087,6 @@ struct ChildOf {
 // 等价于：父实体被销毁时，所有子实体自动销毁
 // 这与线性逻辑中的"资源随容器销毁而销毁"同构
 ```
-
 | 级联策略 | 语义 | 形式化对应 |
 |:---|:---|:---|
 | `OnReplace::Destroy` | 关系被替换时，旧目标实体销毁 | 线性逻辑：旧资源被消耗 |
@@ -1168,9 +1135,7 @@ struct ChildOf {
 | 应用领域 | [`./04_application_domains.md`](04_application_domains.md) | 游戏作为 L6 应用域 |
 
 > **[来源: Bevy Book; Bevy ECS Docs; Fyrox Docs; wgpu Documentation; Data-Oriented Design Book]** 游戏开发分析基于官方引擎文档和 DOD 研究。✅
-
 > **来源: [Wikipedia — Entity component system; Richard Fabian — Data-Oriented Design; Niko Matsakis Blog](https://en.wikipedia.org/wiki/Entity_component_system%3B_Richard_Fabian_%E2%80%94_Data_Oriented_Design%3B_Niko_Matsakis_Blog)** ECS 和 DOD 概念参考了权威定义和核心开发者博客。✅
-
 > **[来源: Rust Concurrency Book; Rayon Docs; Rust Book Ch.16]** 并发渲染分析基于 Rust 并发安全（Concurrency Safety）的核心文献。✅
 ---
 
@@ -1220,7 +1185,6 @@ fn movement_system(query: Query<&mut Position, &Velocity>) {
 // ❌ 编译错误: Query 语法错误，应为 Query<(&mut Position, &Velocity)>
 // Bevy 的 Query 使用元组组合多个组件
 ```
-
 > **修正**: Bevy 的 `Query` 使用元组语法组合多个组件：`Query<(&Position, &Velocity)>`。Query 自动过滤缺少任一组件的实体，只返回拥有所有 queried 组件的实体。这与 Unity 的 `GetComponent<T>()`（运行时空引用检查）不同——Bevy 在编译期确定组件类型，运行期通过 archetype 存储实现 O(1) 查询，无类型检查开销。ECS 的内存布局（SOA - Structure of Arrays）优化缓存局部性，Rust 的类型系统保证查询安全。[来源: [Bevy Documentation](https://docs.rs/bevy/)]
 
 ### 10.2 边界测试：ECS 中的可变引用冲突（编译错误）
@@ -1246,7 +1210,6 @@ fn fixed_system(mut query: Query<&mut Health>) {
     }
 }
 ```
-
 > **修正**: Bevy 的系统函数在编译期检查 Query 的兼容性——两个返回相同组件可变引用（Mutable Reference）的 Query 不能同时存在。`ParamSet` 允许顺序访问冲突的 Query，确保运行时不会同时持有同一组件的多个可变引用。这是 Rust 借用检查器在 ECS 架构中的延伸——编译期保证无数据竞争，即使在高并发游戏循环中。来源: [Bevy Documentation]
 
 ### 10.3 边界测试：ECS 的 archetype 变更与引用失效（运行时 panic）
@@ -1262,7 +1225,6 @@ fn system(query: Query<&mut Position>) {
     }
 }
 ```
-
 > **修正**: ECS（Entity-Component-System）的 **archetype** 是具有相同组件组合的实体集合。添加/移除组件改变实体的 archetype，可能需要将实体移动到不同的存储块。在系统（system）执行期间修改 archetype（如给实体添加 `Velocity` 组件），可能导致迭代器失效——与 C++ 的 `vector` 插入导致迭代器失效类似。Bevy 的解决方案：1) **命令缓冲**（Commands）：延迟 archetype 变更到帧末；2) **分阶段执行**（stages）：先读系统，后写系统；3) **不稳定的 `query.iter_mut()` 与命令缓冲结合**。这与 Unity 的 `GameObject.AddComponent`（运行时修改，无编译期检查）或 C++ 的 EnTT（类似 Bevy，archetype-based）类似——ECS 的性能来自紧密打包的内存布局，但布局变更的成本需要显式管理。[来源: [Bevy ECS Documentation](https://docs.rs/bevy_ecs/)] · [来源: [ECS Pattern](https://en.wikipedia.org/wiki/Entity_component_system)]
 
 ### 10.4 边界测试：多线程 ECS 与 `Send`/`Sync` 的组件约束（编译错误）
@@ -1284,7 +1246,6 @@ fn parallel_system(query: Query<&SharedData>) {
     }
 }
 ```
-
 > **修正**: Bevy 的 ECS 调度器分析系统间的数据依赖，自动并行化无冲突的系统。但组件类型必须是 `Send`（跨线程）和 `Sync`（多线程共享），才能参与并行调度。`Rc<T>` 不是 `Send`，因此包含 `Rc` 的组件不能放入并行系统。解决方案：1) 使用 `Arc<T>` 替代 `Rc<T>`；2) 将非 `Send` 数据放在资源（`Resource`）中，限制在单线程系统访问；3) 使用 `bevy::ecs::system::NonSend` 标记资源只能在主线程访问。这与 Unity 的 `Component`（无 `Send`/`Sync` 概念，主线程访问）或 Godot 的节点树（单线程）不同——Rust 的 ECS 利用类型系统实现自动并行化，但要求组件满足线程安全约束。[来源: [Bevy ECS Documentation](https://docs.rs/bevy_ecs/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)]
 
 ### 10.4 边界测试：Bevy ECS 的 `Query` 与 `ResMut` 的冲突（编译错误）
@@ -1301,7 +1262,6 @@ fn parallel_system(query: Query<&SharedData>) {
 
 fn main() {}
 ```
-
 > **修正**: Bevy 的 ECS **system 参数冲突**：1) `Query<&mut T>` 与 `Query<&T>` 不能共存（同一组件的可变和不可变查询）；2) `ResMut<R>` 与 `Res<R>` 不能共存（同一资源的可变和不可变引用（Immutable Reference））；3) `Query<&mut T>` 与 `Commands` 在特定情况下冲突（`Commands` 可能删除实体，影响 Query）。解决：1) `ParamSet` — 显式声明互斥参数集；2) 分多个 system — 通过事件或 `Commands` 通信；3) `Without<T>` 过滤 — 排除特定组件。Bevy 的编译期检查利用 Rust 的类型系统防止 ECS 冲突，是 ECS + Rust 的独特优势。这与 Unity 的 ECS（运行时检查冲突，可能抛出异常）或 flecs（C ECS，类似编译期检查但不完全）不同——Bevy 的编译期保证消除了大量运行时错误。[来源: [Bevy ECS](https://bevyengine.org/learn/book/)] · [来源: [Bevy Query](https://docs.rs/bevy_ecs/)]
 > **过渡**: Game Development & ECS Architecture（游戏开发与 ECS 架构） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Game Development & ECS Architecture（游戏开发与 ECS 架构） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

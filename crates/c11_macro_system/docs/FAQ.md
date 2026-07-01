@@ -62,7 +62,6 @@ macro_rules! double {
     ($x:expr) => { $x * 2 };
 }
 ```
-
 ---
 
 ### 2. 什么时候应该使用宏？
@@ -100,7 +99,6 @@ macro_rules! example {
     };
 }
 ```
-
 ---
 
 ### 4. 宏卫生(Hygiene)是什么？
@@ -120,7 +118,6 @@ let x = 1;
 define_x!();
 println!("{}", x);  // 输出: 1，不是42
 ```
-
 ---
 
 ## 声明宏问题
@@ -138,7 +135,6 @@ macro_rules! print_all {
 
 print_all!(1, 2, 3);  // 接受任意数量参数
 ```
-
 ---
 
 ### 6. 如何实现递归宏？
@@ -154,7 +150,6 @@ macro_rules! count {
     };
 }
 ```
-
 ---
 
 ### 7. 宏中的`tt`、`expr`、`ident`等是什么？
@@ -186,7 +181,6 @@ macro_rules! my_macro {
 // 其他crate中
 use my_crate::my_macro;
 ```
-
 ---
 
 ## 过程宏问题
@@ -212,7 +206,6 @@ syn = "2.0"
 quote = "1.0"
 proc-macro2 = "1.0"
 ```
-
 ```rust
 // lib.rs
 use proc_macro::TokenStream;
@@ -222,7 +215,6 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
     // 实现逻辑
 }
 ```
-
 ---
 
 ### 11. `syn`和`quote`是什么？
@@ -250,7 +242,6 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 ```
-
 ---
 
 ## 调试问题
@@ -263,7 +254,6 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 cargo install cargo-expand
 cargo expand --example my_example
 ```
-
 **方法2**: 使用`trace_macros`
 
 ```rust
@@ -272,7 +262,6 @@ trace_macros!(true);
 my_macro!();
 trace_macros!(false);
 ```
-
 ---
 
 ### 13. 宏编译错误如何调试？
@@ -293,7 +282,6 @@ macro_rules! debug_macro {
     };
 }
 ```
-
 ---
 
 ### 14. 过程宏如何调试？
@@ -306,7 +294,6 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     // ...
 }
 ```
-
 ---
 
 ## 高级问题
@@ -324,7 +311,6 @@ macro_rules! platform_specific {
     };
 }
 ```
-
 ---
 
 ### 16. 宏可以访问环境变量吗？
@@ -338,7 +324,6 @@ pub fn env_macro(_input: TokenStream) -> TokenStream {
     // 使用环境变量生成代码
 }
 ```
-
 ---
 
 ### 17. 如何测试宏？
@@ -352,7 +337,6 @@ fn test_my_macro() {
     assert_eq!(result, 2);
 }
 ```
-
 **过程宏测试** (使用trybuild):
 
 ```rust
@@ -363,7 +347,6 @@ fn test_proc_macro() {
     t.compile_fail("tests/fail/*.rs");
 }
 ```
-
 ---
 
 ### 18. 宏有性能影响吗？
@@ -396,7 +379,6 @@ macro_rules! make_macro {
 make_macro!(greet);
 greet!();  // 输出: Hello
 ```
-
 ---
 
 ### 20. 如何构建DSL？
@@ -429,7 +411,6 @@ let page = html! {
     }
 };
 ```
-
 ---
 
 ## 获取帮助

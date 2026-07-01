@@ -1,6 +1,6 @@
 # Rust 1.96 特性速查表 {#rust-196-特性速查表}
 
-> **内容重叠提示**: 本文与 [`concept/07_future/rust_1_96_stabilized.md`](../../../concept/07_future/rust_1_96_stabilized.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为快速参考。
+> **内容重叠提示**: 本文与 [`concept/07_future/rust_1_96_stabilized.md`](../../../../concept/07_future/rust_1_96_stabilized.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为快速参考。
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 > **版本**: Rust 1.96
@@ -64,7 +64,6 @@ match value {
     _ => {}
 }
 ```
-
 ### 链式守卫 {#链式守卫}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -83,7 +82,6 @@ match event {
     _ => {}
 }
 ```
-
 ### 对比表 {#对比表}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -122,7 +120,6 @@ match message {
     _ => {}
 }
 ```
-
 ---
 
 ## Range 类型对比 {#range-类型对比}
@@ -166,7 +163,6 @@ match x {
 vec.drain(0..5);               // 移除 0-4
 vec.get(0..=5);                // 获取 0-5
 ```
-
 ### Range 方法 {#range-方法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -205,7 +201,6 @@ vec.get(0..=5);                // 获取 0-5
 #![warn(redundant_guards)]
 #![deny(opaque_hidden_inferred_bound)]
 ```
-
 ```toml
 # 在 Cargo.toml {#在-cargotoml}
 [lints.rust]
@@ -213,7 +208,6 @@ unused_tuple_struct_fields = "warn"
 redundant_guards = "warn"
 opaque_hidden_inferred_bound = "allow"
 ```
-
 ### 命令行使用 {#命令行使用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -228,7 +222,6 @@ cargo build -- -A redundant_guards
 # 将 lint 视为错误 {#将-lint-视为错误}
 cargo build -- -D unused_tuple_struct_fields
 ```
-
 ---
 
 ## 快速参考示例 {#快速参考示例}
@@ -264,7 +257,6 @@ match value {
     _ => { }
 }
 ```
-
 ### Range 常用模式 {#range-常用模式}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -290,7 +282,6 @@ match age {
     _ => "senior",
 }
 ```
-
 ### PinCoerceUnsized 快速使用（nightly 前瞻，实验性） {#pincoerceunsized-快速使用nightly-前瞻实验性}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -314,7 +305,6 @@ async fn demo() {
     let result = fut.await;
 }
 ```
-
 ### 元组 Coercion 示例 {#元组-coercion-示例}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -333,7 +323,6 @@ where
 let narrow: (i8, i16) = (1, 2);
 let wide: (i64, i64) = widen(narrow);
 ```
-
 ---
 
 ## 迁移检查清单 {#迁移检查清单}

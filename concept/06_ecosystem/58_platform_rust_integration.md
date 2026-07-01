@@ -96,7 +96,6 @@ rust_binary {
     ],
 }
 ```
-
 关键点：
 
 - `rust_binary` / `rust_library` / `rust_proc_macro` / `rust_test` 等模块（Module）类型
@@ -115,7 +114,6 @@ pub trait IMyService: Interface {
     fn add(&self, a: i32, b: i32) -> binder::Result<i32>;
 }
 ```
-
 > **边界**：Rust AIDL 绑定目前覆盖常用类型，但复杂 Parcelable / 文件描述符传递需要额外注意生命周期（Lifetimes）与所有权（Ownership）。
 
 ### 2.4 C / C++ / Java 互操作
@@ -150,7 +148,6 @@ rust_static_library("my_rust_parser") {
   deps = [ "//third_party/rust/cxx/v1:cxx" ]
 }
 ```
-
 `cxx` crate 是 Chromium Rust↔C++ 互操作的核心：
 
 ```rust
@@ -165,7 +162,6 @@ mod ffi {
     }
 }
 ```
-
 > **认知要点**：`cxx` 在编译期检查类型兼容性，避免手动 FFI 中常见的 ABI 错误。它是 Chromium 将 Rust 集成到 C++ 代码库的首选方案。
 
 ### 3.3 引入第三方 crate
@@ -198,7 +194,6 @@ fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
 ```
-
 - `#![no_std]`：禁用 `std`，仅保留 `core`
 - `#![no_main]`：不提供默认入口，由链接脚本或启动代码接管
 - `alloc`：若需要堆分配，需显式引入并设置全局分配器
@@ -214,7 +209,6 @@ fn panic(_info: &PanicInfo) -> ! {
           └── Peripheral Access Crate (PAC) // 寄存器级访问
               └── SVF/包厂商提供的 SVD
 ```
-
 | 层级 | 示例 crate | 作用 |
 |:---|:---|:---|
 | PAC | `stm32f4xx-pac` | 直接映射寄存器 |
@@ -237,7 +231,6 @@ unsafe fn uart_putc(c: u8) {
     write_volatile(UART_DR, c as u32);
 }
 ```
-
 > **安全要点**：MMIO 访问必须使用 `volatile` 读写，防止编译器优化掉硬件状态检查。
 
 ---
@@ -255,7 +248,6 @@ unsafe fn uart_putc(c: u8) {
 └── 否，无 OS 或 RTOS
     └── 学习路径：no_std → PAC/HAL → embedded-hal → 链接脚本
 ```
-
 ---
 
 ## 六、常见陷阱

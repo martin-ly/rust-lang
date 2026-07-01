@@ -1,7 +1,6 @@
 # 研究工具使用指南 {#研究工具使用指南}
 >
 > **概念族**: 方法论 / 工具 / 指南
-
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -93,7 +92,6 @@ cargo install prusti-launch
 # 验证安装 {#验证安装-2}
 cargo prusti --version
 ```
-
 **基本使用**:
 
 ```rust,ignore
@@ -111,7 +109,6 @@ fn abs(x: i32) -> i32 {
     if x < 0 { -x } else { x }
 }
 ```
-
 **运行验证**:
 
 ```bash
@@ -121,7 +118,6 @@ cargo prusti
 # 验证特定文件 {#验证特定文件}
 cargo prusti --file src/lib.rs
 ```
-
 **与形式化衔接**：Prusti 可验证 [ownership_model](formal_methods/10_ownership_model.md) 定理 T2（移动语义）、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 定理 T1（借用规则）；`#[requires]`/`#[ensures]` 对应前置/后置条件。
 
 **版本与官方资源**:
@@ -151,7 +147,6 @@ cargo install kani-verifier
 # 验证安装 {#验证安装-2}
 cargo kani --version
 ```
-
 **基本使用**:
 
 ```rust,ignore
@@ -166,7 +161,6 @@ fn abs(x: i32) -> i32 {
     if x < 0 { -x } else { x }
 }
 ```
-
 **运行验证**:
 
 ```bash
@@ -176,7 +170,6 @@ cargo kani
 # 验证特定函数 {#验证特定函数}
 cargo kani --function test_abs
 ```
-
 **与形式化衔接**：Kani 可验证 [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 无数据竞争、[ownership_model](formal_methods/10_ownership_model.md) 内存安全；`kani::any()` 对应全称量化。
 
 **版本与官方资源**:
@@ -208,7 +201,6 @@ cargo install --path creusot-rustc
 cargo install --path cargo-creusot
 cargo creusot setup install
 ```
-
 **基本使用**:
 
 ```rust,ignore
@@ -220,7 +212,6 @@ fn increment(x: i32) -> i32 {
     x + 1
 }
 ```
-
 **版本与官方资源**:
 
 - 推荐版本：**0.1.1+**（以 [Creusot GitHub Releases](https://github.com/creusot-rs/creusot/releases) 为准）；依赖特定 nightly Rust。
@@ -246,7 +237,6 @@ charon cargo --preset=aeneas
 # 2. 用 Aeneas 翻译到目标证明助手 {#2-用-aeneas-翻译到目标证明助手}
 ./bin/aeneas -backend lean|coq|fstar|hol4 file.llbc
 ```
-
 **版本与官方资源**:
 
 - 推荐版本：以 [Aeneas GitHub](https://github.com/AeneasVerif/aeneas) 最新 commit 为准；与 Charon 版本需匹配。
@@ -270,7 +260,6 @@ git clone https://github.com/verus-lang/verus.git
 cd verus/source
 # 按仓库 README 安装依赖并运行 vargo build {#按仓库-readme-安装依赖并运行-vargo-build}
 ```
-
 **基本使用**:
 
 ```rust,ignore
@@ -285,7 +274,6 @@ verus! {
     }
 }
 ```
-
 **版本与官方资源**:
 
 - 推荐版本：以 [Verus GitHub](https://github.com/verus-lang/verus) 最新 commit / release 为准。
@@ -332,7 +320,6 @@ criterion = { version = "0.5", features = ["html_reports"] }
 name = "my_benchmark"
 harness = false
 ```
-
 **基本使用**:
 
 ```rust,ignore
@@ -355,13 +342,11 @@ fn benchmark_fibonacci(c: &mut Criterion) {
 criterion_group!(benches, benchmark_fibonacci);
 criterion_main!(benches);
 ```
-
 **运行基准测试**:
 
 ```bash
 cargo bench
 ```
-
 **相关资源**:
 
 - Criterion.rs 文档
@@ -386,7 +371,6 @@ sudo apt-get install linux-perf
 # 或使用包管理器 {#或使用包管理器}
 sudo apt-get install perf
 ```
-
 **基本使用**:
 
 ```bash
@@ -402,7 +386,6 @@ perf top
 # 统计信息 {#统计信息}
 perf stat ./target/release/my_program
 ```
-
 **相关资源**:
 
 - perf 文档
@@ -428,7 +411,6 @@ cargo install flamegraph
 # Ubuntu/Debian {#ubuntudebian-3}
 sudo apt-get install flamegraph
 ```
-
 **基本使用**:
 
 ```bash
@@ -438,7 +420,6 @@ cargo flamegraph --bin my_program
 # 指定输出文件 {#指定输出文件}
 cargo flamegraph -o flamegraph.svg --bin my_program
 ```
-
 **相关资源**:
 
 - [flamegraph 文档](https://github.com/flamegraph-rs/flamegraph)
@@ -465,7 +446,6 @@ rustup component add miri
 # 验证安装 {#验证安装-2}
 miri --version
 ```
-
 **基本使用**:
 
 ```bash
@@ -475,7 +455,6 @@ MIRIFLAGS="-Zmiri-tag-raw-pointers" cargo miri test
 # 运行特定测试 {#运行特定测试-1}
 cargo miri test --test my_test
 ```
-
 **与形式化衔接**：Miri 检测违反 [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 的 UB；
 与 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md) 契约体系对应。
 
@@ -504,7 +483,6 @@ sudo apt-get install valgrind
 # macOS (使用 Homebrew) {#macos-使用-homebrew}
 brew install valgrind
 ```
-
 **基本使用**:
 
 ```bash
@@ -514,7 +492,6 @@ valgrind --leak-check=full ./target/release/my_program
 # 详细报告 {#详细报告}
 valgrind --tool=memcheck --leak-check=yes ./target/release/my_program
 ```
-
 **相关资源**:
 
 - [Valgrind 文档](https://valgrind.org/docs/manual/manual.html)
@@ -542,7 +519,6 @@ cmake ..
 make
 sudo make install
 ```
-
 **基本使用**:
 
 ```bash
@@ -552,7 +528,6 @@ heaptrack ./target/release/my_program
 # 查看报告 {#查看报告-1}
 heaptrack_gui heaptrack.my_program.12345.gz
 ```
-
 **相关资源**:
 
 - [heaptrack 文档](https://github.com/KDE/heaptrack)
@@ -585,7 +560,6 @@ cargo test -- --nocapture
 # 多线程测试 {#多线程测试}
 cargo test -- --test-threads=1
 ```
-
 ---
 
 ### proptest {#proptest}
@@ -601,7 +575,6 @@ cargo test -- --test-threads=1
 [dev-dependencies]
 proptest = "1.0"
 ```
-
 **基本使用**:
 
 ```rust,ignore
@@ -614,7 +587,6 @@ proptest! {
     }
 }
 ```
-
 **相关资源**:
 
 - proptest 文档
@@ -635,7 +607,6 @@ proptest! {
 [dev-dependencies]
 loom = "0.5"
 ```
-
 **基本使用**:
 
 ```rust
@@ -655,7 +626,6 @@ mod tests {
     }
 }
 ```
-
 **相关资源**:
 
 - loom 文档
@@ -679,7 +649,6 @@ mod tests {
 # 安装 Clippy {#安装-clippy}
 rustup component add clippy
 ```
-
 **基本使用**:
 
 ```bash
@@ -692,7 +661,6 @@ cargo clippy --fix
 # 显示所有警告 {#显示所有警告}
 cargo clippy -- -W clippy::all
 ```
-
 **相关资源**:
 
 - [Clippy 文档](https://github.com/rust-lang/rust-clippy)
@@ -717,7 +685,6 @@ git clone https://github.com/rust-lang/rust-analyzer.git
 cd rust-analyzer
 cargo xtask install --server
 ```
-
 **基本使用**:
 rust-analyzer 通常在 IDE 中自动使用，提供：
 
@@ -745,7 +712,6 @@ rust-analyzer 通常在 IDE 中自动使用，提供：
 # 安装 cargo-expand {#安装-cargo-expand}
 cargo install cargo-expand
 ```
-
 **基本使用**:
 
 ```bash
@@ -758,7 +724,6 @@ cargo expand my_macro
 # 输出到文件 {#输出到文件}
 cargo expand > expanded.rs
 ```
-
 **相关资源**:
 
 - [cargo-expand 文档](https://github.com/dtolnay/cargo-expand)
@@ -855,7 +820,6 @@ cargo expand > expanded.rs
 ## 🆕 权威国际化内容升级 (Rust 1.96.0+) {#权威国际化内容升级-rust-1960}
 >
 > **来源**: [Rust Research Community]
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 

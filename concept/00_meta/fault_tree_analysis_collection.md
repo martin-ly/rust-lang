@@ -94,7 +94,6 @@ mindmap
       FFI层[FFI 边界层]
       Miri逃逸层[Miri 检测逃逸层]
 ```
-
 > **认知功能**: 本 mindmap 展示五棵失效分析树的**分层结构**。每个顶事件下有三个层次：最上层是编译器/类型系统的保证（最难失效），中间层是标准库的抽象（中等风险），最下层是 unsafe/FFI 的逃逸（最高风险）。这种分层对应 Rust 的安全哲学：**安全保证是逐层递减的梯度，而非二元开关**。[来源: 💡 原创分析]
 
 ---
@@ -130,7 +129,6 @@ mindmap
     ↓
 步骤 6: 提出风险缓解建议
 ```
-
 ---
 
 ## 二、内存安全失效树
@@ -202,7 +200,6 @@ graph TD
     style B6 fill:#f99,stroke:#333
     style B7 fill:#f99,stroke:#333
 ```
-
 > **认知功能**: 本故障树的关键发现：**顶事件几乎不可能通过 Safe Rust 路径触发**（绿色节点 I1/I4）。所有实际风险都集中在 **Unsafe Rust（I2）** 和 **FFI（I3）** 两个分支。这与 Rust 的安全哲学一致：编译器保证排除了大部分路径，剩余的"窄缝"需要程序员通过契约和工具来管理。[来源: 💡 原创分析]
 
 ### 2.3 基本事件概率与补偿
@@ -301,7 +298,6 @@ graph TD
     style B8 fill:#ff9,stroke:#333
     style B9 fill:#ff9,stroke:#333
 ```
-
 > **认知功能**: 数据竞争（I1）是**或门**分解——任一基本事件即可触发；死锁（I2）是**与门**——需要多个条件同时满足（嵌套锁 + 顺序不一致）。这与 Rust 的类型系统能力一致：编译器可阻止大部分数据竞争（通过 Send/Sync），但**无法阻止死锁**（死锁是不可判定的，Rice 定理）。活锁（I3）则是运行时行为问题，完全超出类型系统的范畴。[来源: 💡 原创分析]
 
 ### 3.3 基本事件概率与补偿
@@ -400,7 +396,6 @@ graph TD
     style B6 fill:#ff9,stroke:#333
     style B7 fill:#ff9,stroke:#333
 ```
-
 > **认知功能**: 类型系统失效树中，**Coherence 破坏（I1）** 需要**两个条件同时满足**（AND 门）——这是 Rust 设计的重要洞察：
 > 单独的 Orphan Rule 违反或单独的重叠 impl 都不足以破坏类型系统，但两者结合可以。
 > 编译器通过拒绝**任一**条件来防止 Coherence 破坏。Unsound impl（I2）则是**或门**——任一 unsafe 错误即可破坏类型安全。[来源: 💡 原创分析]
@@ -492,7 +487,6 @@ graph TD
     style B5 fill:#f99,stroke:#333
     style B6 fill:#ff9,stroke:#333
 ```
-
 > **认知功能**: 异步失效树的独特之处在于：**跨 await 引用悬垂（I2）** 是**与门**——需要"引用栈变量"和"生命周期超过 Future"同时发生。编译器通过生命周期检查阻止了大部分此类情况。Pin 违反（I1）和 Future 移动（I3）则是**或门**——任一 unsafe 错误即可触发，这是 async 安全的主要风险点。[来源: 💡 原创分析]
 
 ### 5.3 基本事件概率与补偿
@@ -620,7 +614,6 @@ graph TD
     style B15 fill:#ff9,stroke:#333
     style B16 fill:#ff9,stroke:#333
 ```
-
 > **认知功能**: Unsafe 契约失效树是**最宽泛的顶事件**——几乎所有其他树的叶节点（基本事件）都可以归入此树。
 > 这反映了 Rust 的安全模型：所有 UB 最终都通过 unsafe 边界进入系统。
 > 关键洞察：**安全抽象契约破坏（I5）** 是**与门**——需要"unsafe 内部错误"和"safe API 封装不完整"同时发生。
@@ -670,7 +663,6 @@ graph TD
     T -.->|"unsound 类型导致内存错误"| M
     A -.->|"Future 移动导致内存错误"| M
 ```
-
 > **关键洞察**: **Unsafe 契约失效树是所有其他树的"上游"**—— Unsafe 中的错误可以向下游触发内存、并发、类型、异步四个领域的失效。这验证了 Rust 安全设计的核心策略：**将风险集中在单一的、可审计的 unsafe 边界上**，而非分散在整个代码库中。[来源: 💡 原创分析]
 
 ---
@@ -710,7 +702,7 @@ graph TD
 
 ---
 
-> **相关文件**: [概念判定森林](concept_definition_decision_forest.md) · [边界扩展树](boundary_extension_tree.md) · [安全边界](../05_comparative/04_safety_boundaries.md) · [Miri 验证](../../reports/MIRI_VALIDATION_2026_05_23.md)
+> **相关文件**: [概念判定森林](concept_definition_decision_forest.md) · [边界扩展树](boundary_extension_tree.md) · [安全边界](../05_comparative/04_safety_boundaries.md) · [Miri 验证](../../reports/MIRI_VALIDATION_2026_05_27.md)
 
 ## 认知路径
 

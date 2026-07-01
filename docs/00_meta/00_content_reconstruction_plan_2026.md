@@ -108,7 +108,6 @@ graph TD
     style A fill:#f9f,stroke:#333
     style F fill:#bbf,stroke:#333
 ```
-
 ### 模块 4: 机制解释（Mechanistic Explanation） {#模块-4-机制解释mechanistic-explanation}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**

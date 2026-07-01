@@ -146,7 +146,6 @@
     内存  计算  数组  旋转  综合
     管理  优化  操作  操作  应用
 ```
-
 ### 性能提升汇总表
 
 | 特性  | 小数据 (100) | 中数据 (1K) | 大数据 (10K) | 平均提升 |
@@ -229,7 +228,7 @@
 
 - [Rust 1.92.0 WASM 改进文档](RUST_192_WASM_IMPROVEMENTS.md) - 详细说明
 - [Rust 1.92.0 WASM 快速参考](RUST_192_QUICK_REFERENCE.md) - 快速查找
-- [性能优化指南](tier_02_guides/04_性能优化指南.md) - 优化技巧
+- [性能优化指南](tier_02_guides/04_performance_optimization_guide.md) - 优化技巧
 - [示例代码](../examples/rust_192_features_demo.rs) - 完整示例
 
 ---

@@ -91,7 +91,6 @@ graph LR
     style Boundary fill:#ffebee
     style CSide fill:#fff3e0
 ```
-
 > **认知功能**: 此图展示 FFI 边界的**安全截断机制**——Rust 的安全保证在 `extern` 块处终止，外部代码的行为不受 Rust 类型系统（Type System）约束。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html)]
 > **使用建议**: 所有 FFI 调用都应通过**薄封装层**（thin wrapper）进行，在封装层内用 `unsafe` 块隔离，向外暴露 safe API。
@@ -124,7 +123,6 @@ Rust 支持的 ABI:
 ├── "cdecl" — C declaration（x86）
 └── "Rust" — Rust 内部 ABI（默认，不稳定）
 ```
-
 > **ABI 选择原则**: 与 C 库交互用 `"C"`；与 Windows API 交互用 `"system"`；与特定平台代码交互用对应平台 ABI。
 > [来源: [Rust Reference — ABIs](https://doc.rust-lang.org/reference/items/external-blocks.html#abi)]
 
@@ -187,7 +185,6 @@ unsafe {
     assert_eq!(result, 42);
 }
 ```
-
 > **技术要点**:
 >
 > 1. `extern "C"` 块内声明的函数默认是 `unsafe` 的——因为 Rust 无法验证外部代码的安全性
@@ -236,7 +233,6 @@ impl Drop for SafeConnection {
     }
 }
 ```
-
 > **封装模式**: 外部不透明指针 + Rust 安全封装结构体（Struct） + Drop trait 管理生命周期（Lifetimes）。这是 FFI 中最常见的安全化模式。
 > [来源: [Rust FFI Patterns](https://doc.rust-lang.org/nomicon/ffi.html)]
 
@@ -278,7 +274,6 @@ where
     // ⚠️ 注意: 此处有内存泄漏风险，需设计注销机制释放 user_data
 }
 ```
-
 > **回调难点**:
 >
 > 1. C 回调必须是 `extern "C" fn`（函数指针），不能是闭包（Closures）
@@ -308,7 +303,6 @@ graph TD
         K["valgrind"] -->|"内存检查"| L["C/Rust 交互"]
     end
 ```
-
 > **认知功能**: 此图展示 Rust FFI 生态的**工具链层次**——从自动生成绑定到运行时（Runtime）动态加载，再到验证工具。
 > **使用建议**: 优先使用 `bindgen`/`cbindgen` 自动生成绑定，减少手工错误；复杂场景使用 `libloading` 动态加载；所有 FFI 代码应用 Miri 和 valgrind 验证。
 > [来源: [bindgen User Guide](https://rust-lang.github.io/rust-bindgen/)]
@@ -334,7 +328,6 @@ graph TD
     style FALSE1 fill:#ffebee
     style ALT fill:#fff3e0
 ```
-
 > **认知功能**: 此决策树评估 C 库是否适合被 Rust 安全封装。核心判断标准是**不变量的文档化程度**和**可表达性**。
 > **使用建议**: 优先封装有清晰 API 契约的 C 库（如 OpenSSL、SQLite）；避免封装内部行为不透明的遗留代码。
 > **关键洞察**: FFI 安全封装的本质是**将 C 的不变量映射到 Rust 的类型系统（Type System）**。如果 C 库本身没有明确的不变量，映射就不可能完整。
@@ -367,7 +360,6 @@ graph TD
 ├── Rust 的 Send/Sync 标记需根据 C 库的实际线程安全性推断
 └── 错误推断会导致数据竞争或死锁
 ```
-
 > **边界要点**: FFI 的边界不是 Rust 语言的限制，而是**两种语言语义模型差异**的必然结果。安全封装需要深入理解两边的语义。
 
 ---
@@ -405,7 +397,6 @@ graph TD
   4. 对 FFI 代码运行 Miri 和 valgrind
   5.  panic 边界处必须 catch_unwind
 ```
-
 > **实践要点**: FFI 代码的错误往往隐藏在**看似正确的类型匹配**之下。最安全的策略是最小化 FFI 边界面积，最大化 safe Rust 封装。
 > [来源: [Rust FFI Best Practices](https://doc.rust-lang.org/nomicon/ffi.html)]
 
@@ -423,7 +414,6 @@ fn main() {
     c_function();
 }
 ```
-
 > **修正**: 所有 FFI 调用必须包裹在 `unsafe { }` 块中，或通过 safe wrapper 封装。
 
 ```rust,ignore
@@ -438,7 +428,6 @@ fn repr_c_violation() {
     let s = RustStruct { data: String::from("hello") };
 }
 ```
-
 > **修正**: `#[repr(C)]` 结构体的字段必须是 C 兼容类型（`i32`、`*const T`、裸指针等）。复杂类型需通过 `Box` 或引用传递。
 
 ```rust,ignore
@@ -457,7 +446,6 @@ fn main() {
     });
 }
 ```
-
 > **修正**: FFI 回调中必须 `catch_unwind` 防止 panic 跨越语言边界。对于非 `UnwindSafe` 类型，需使用 `AssertUnwindSafe` 包装。
 
 ### 3.4 边界测试：C 结构体布局不匹配（编译错误 / 运行时 UB）
@@ -487,7 +475,6 @@ fn verify_layout() {
     // ✅ 使用 static_assertions 或 bindgen 生成验证
 }
 ```
-
 > **修正**: `#[repr(C)]` 只保证 Rust 编译器使用 C 兼容的布局规则，但**不保证**与特定 C 编译器的布局完全一致（尤其是 bit field、packing pragma）。跨 FFI 传递结构体时，应使用 `bindgen` 自动生成布局验证，或手动使用 `static_assertions::assert_eq_size!` 检查。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 3.5 边界测试：裸指针生命周期与 FFI 边界（编译错误）
@@ -511,7 +498,6 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
     std::slice::from_raw_parts(ptr, len) // 'a 生命周期由调用者控制
 }
 ```
-
 > **修正**: C 函数返回的裸指针没有生命周期信息。将其转换为 Rust 引用时，必须显式标注生命周期（通常是 `'a` 由调用者提供）。若 C 函数返回的指针指向局部变量或已释放内存，Rust 引用将悬垂——这是 unsafe 边界，编译器无法检测。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ---
@@ -588,7 +574,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**: FFI 边界是 Rust 安全保证的**信任边界**：Rust 编译器无法验证 C 代码的行为。传递空指针、悬垂指针或未初始化内存到 C 函数是 UB。防御策略：1) 在 Rust 侧验证指针非空（`if ptr.is_null() { return Err(...) }`）；2) 使用 `NonNull<T>` 类型（编译期保证非空）；3) 用 `cbindgen`/`cxx` 生成安全的 C++ 绑定；4) 对 C API 包装为 safe Rust 函数（`unsafe fn raw_c_call` → `pub fn safe_call`）。Rust 的 `unsafe` 块是 FFI 的必要之恶——最小化 unsafe 范围，在边界处建立安全抽象层。这与 Go 的 cgo（自动处理指针，但性能开销大）或 Java 的 JNI（JVM 管理对象生命周期）不同——Rust 的 FFI 提供零成本抽象（Zero-Cost Abstraction），但安全责任完全在开发者。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/ffi.html)] · [来源: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html)]
 
 ### 10.5 边界测试：所有权移动后的再次使用
@@ -601,7 +586,6 @@ fn main() {
     println!("{}", s);
 }
 ```
-
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
@@ -623,9 +607,7 @@ fn main() {
 > 跨语言调用安全 ⟸ C ABI 兼容 ⟸ 布局一致性（Coherence）
 > 内存管理边界 ⟸ Box::into_raw / from_raw ⟸ 所有权转移
 > **过渡**: 掌握 Rust FFI：与外部代码的安全边界 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 Rust FFI：与外部代码的安全边界 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: Rust FFI：与外部代码的安全边界 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
@@ -739,7 +721,6 @@ extern "C" {
 // C 侧
 int c_function(int x) { ... }  // 相同的调用约定
 ```
-
 > 如果不指定 `extern "C"`，Rust 和 C 对栈的操作方式不同，会导致崩溃或数据损坏。
 </details>
 
@@ -756,7 +737,6 @@ typedef struct {
     float score;
 } Student;
 ```
-
 - A. `struct Student { name: String, age: u32, score: f32 }`
 - B. `struct Student { name: [u8; 32], age: u32, score: f32 }`
 - C. `#[repr(C)] struct Student { name: [u8; 32], age: u32, score: f32 }`
@@ -788,7 +768,6 @@ pub struct Student {
     pub score: f32,
 }
 ```
-
 **为什么不选 D**：
 
 - `#[repr(packed)]` 禁用所有填充（padding），可能导致未对齐访问，在 ARM 等架构上引发崩溃
@@ -818,7 +797,6 @@ fn call_process(input: &str) {
     // 问题在这里！
 }
 ```
-
 - A. `CString::new` 可能 panic，应该使用 `expect`
 - B. `into_raw()` 转移了所有权给 C，但 C 可能不释放内存，导致泄露
 - C. `process_string` 之后应该调用 `CString::from_raw(ptr)` 回收所有权
@@ -841,7 +819,6 @@ fn call_process(input: &str) {
     let _ = unsafe { CString::from_raw(ptr) };
 }
 ```
-
 **关键规则**：
 
 | 方法 | 作用 | 风险 |
@@ -863,7 +840,6 @@ fn call_process(input: &str) {
     }
 }
 ```
-
 **如果 C 会释放内存**：
 
 ```rust,ignore
@@ -871,7 +847,6 @@ fn call_process(input: &str) {
 unsafe { process_string(ptr); }
 // 不要调用 from_raw！C 已经释放了
 ```
-
 > **核心原则**: FFI 边界上的所有权必须**文档化并严格遵守**。Rust 和 C 的内存管理协议不一致是崩溃和泄露的主要来源。
 </details>
 

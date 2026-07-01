@@ -44,7 +44,6 @@ wasm-pack build --target web
 # 3. 创建 HTML 文件并引入
 # 查看 demo/ 目录中的示例
 ```
-
 #### 方式2：直接编译
 
 ```bash
@@ -57,7 +56,6 @@ cargo build --example 01_basic_add --target wasm32-unknown-unknown --release
 # 3. 查看生成的 WASM 文件
 ls -lh target/wasm32-unknown-unknown/release/examples/
 ```
-
 ### WASI 环境 (Command-line)
 
 #### 使用 WasmEdge
@@ -75,7 +73,6 @@ cargo build --example 05_wasi_file_processor --target wasm32-wasip1 --release
 # 4. 运行
 wasmedge target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm count test.txt
 ```
-
 #### 使用 Wasmtime
 
 ```bash
@@ -88,7 +85,6 @@ cargo build --example 05_wasi_file_processor --target wasm32-wasip1 --release
 # 3. 运行
 wasmtime target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm count test.txt
 ```
-
 ## 📝 详细说明
 
 ### 01_basic_add.rs - 基础加法运算
@@ -102,7 +98,6 @@ cargo build --example 01_basic_add --target wasm32-unknown-unknown --release
 # 在 JavaScript 中使用
 # 见示例代码中的注释
 ```
-
 **学习要点**：
 
 - `#[wasm_bindgen]` 宏的使用
@@ -117,7 +112,6 @@ cargo build --example 01_basic_add --target wasm32-unknown-unknown --release
 # 使用 wasm-pack 构建
 wasm-pack build --target web
 ```
-
 **学习要点**：
 
 - 字符串内存管理
@@ -157,7 +151,6 @@ cargo build --example 05_wasi_file_processor --target wasm32-wasip1 --release
 wasmedge target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm count test.txt
 wasmedge target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm search test.txt "hello"
 ```
-
 **学习要点**：
 
 - WASI API 使用
@@ -204,52 +197,44 @@ wasmedge target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm searc
    ```bash
    curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
    ```
-
 2. **WasmEdge** - 高性能 WASM 运行时
 
    ```bash
    curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
    ```
-
 3. **wasmtime** - 独立 WASM 运行时
 
    ```bash
    curl https://wasmtime.dev/install.sh -sSf | bash
    ```
-
 4. **wasm-opt** - WASM 优化工具
 
    ```bash
    # 使用 wasm-opt 优化二进制大小
    wasm-opt -Oz -o output.wasm input.wasm
    ```
-
 ### 调试工具
 
 1. **Chrome DevTools** - 浏览器调试
    - 打开 Chrome DevTools
    - 在 Sources 面板中可以看到 WASM 模块
    - 支持断点调试
-
 2. **Console logging** - 日志输出
 
    ```rust
    use web_sys::console;
    console::log_1(&"Debug message".into());
    ```
-
 ## 📚 学习路径
 
 1. **第1周：基础入门**
    - 完成 01-04 基础示例
    - 理解 wasm-bindgen 工作原理
    - 掌握基本的数据类型传递
-
 2. **第2周：进阶学习**
    - 完成 05-06 高级示例
    - 学习 WASI 应用开发
    - 掌握异步编程
-
 3. **第3周：实战应用**
    - 完成 07 设计模式示例
    - 创建自己的 WASM 项目
@@ -264,7 +249,6 @@ wasmedge target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm searc
 rustup target add wasm32-unknown-unknown
 rustup target add wasm32-wasip1
 ```
-
 ### Q: 二进制文件太大
 
 ```bash
@@ -279,7 +263,6 @@ strip = true
 # 2. 使用 wasm-opt 优化
 wasm-opt -Oz -o optimized.wasm original.wasm
 ```
-
 ### Q: JavaScript 中无法调用 WASM 函数
 
 ```javascript
@@ -292,7 +275,6 @@ await init()
 // 然后才能使用函数
 const result = add(2, 3)
 ```
-
 ## 🤝 贡献
 
 欢迎提交新的示例！请确保：

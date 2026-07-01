@@ -42,7 +42,6 @@ obs-tracing = ["tracing", "tracing-subscriber"]
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["fmt", "env-filter"] }
 ```
-
 ## 初始化示例
 
 ```rust
@@ -55,7 +54,6 @@ fn init_tracing() {
     tracing::subscriber::set_global_default(subscriber).ok();
 }
 ```
-
 ## 链式调用标注
 
 - 在每个处理步骤创建子 span 或事件；
@@ -70,7 +68,6 @@ fn init_tracing() {
 ```bash
 cargo run --example tracing_chain --features obs-tracing | cat
 ```
-
 ## 完整的可观测性实践
 
 ### 1. 三大支柱详解
@@ -101,7 +98,6 @@ pub fn structured_logging_example() {
     );
 }
 ```
-
 **日志级别最佳实践**：
 
 - `trace`: 非常详细的信息（调试用）
@@ -153,7 +149,6 @@ pub fn metrics_endpoint() -> String {
     String::from_utf8(buffer).unwrap()
 }
 ```
-
 #### 1.3 分布式追踪 (Tracing)
 
 **完整的 OpenTelemetry 集成**：
@@ -219,7 +214,6 @@ async fn process_payment(order: &Order) -> Result<(), String> {
     Ok(())
 }
 ```
-
 ---
 
 ### 2. 设计模式的可观测性
@@ -264,7 +258,6 @@ pub struct Response {
     pub status: u16,
 }
 ```
-
 #### 2.2 装饰器模式的性能监控
 
 ```rust
@@ -302,7 +295,6 @@ impl<C: Component> Component for TimingDecorator<C> {
     }
 }
 ```
-
 ---
 
 ### 3. 生产环境配置
@@ -331,7 +323,6 @@ pub fn init_production_observability() {
         .expect("Failed to set subscriber");
 }
 ```
-
 #### 3.2 性能影响分析
 
 **基准测试对比**：
@@ -370,7 +361,6 @@ criterion_main!(benches);
 // with_tracing: 100-200ns (10-20x开销)
 // 建议：生产环境仅在关键路径使用 info 级别
 ```
-
 ---
 
 ## 最佳实践清单
@@ -409,7 +399,7 @@ criterion_main!(benches);
 ## 相关资源
 
 - **Tier 3**: [技术参考](tier_03_references/README.md)
-- **Tier 4**: [工程实践](tier_04_advanced/04_工程实践与生产级模式.md)
+- **Tier 4**: [工程实践](tier_04_advanced/04_engineering_and_production_patterns.md)
 - **OpenTelemetry**: [官方文档](https://opentelemetry.io/)
 - **Prometheus**: [官方指南](https://prometheus.io/docs/introduction/overview/)
 

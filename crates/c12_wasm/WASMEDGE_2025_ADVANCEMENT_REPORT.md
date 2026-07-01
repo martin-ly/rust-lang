@@ -91,7 +91,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------------------- param($
 
 ### 1. 容器技术深度文档 ✨
 
-**新增文档**: `docs/tier_04_advanced/06_容器技术深度集成.md`
+**新增文档**: `docs/tier_04_advanced/06_container_technology_integration.md`
 
 **内容涵盖**:
 
@@ -109,7 +109,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------------------- param($
 
 ### 2. 云原生 CI/CD 实践 ✨
 
-**新增文档**: `docs/tier_04_advanced/07_云原生CI_CD实践.md`
+**新增文档**: `docs/tier_04_advanced/07_cloud_native_ci_cd_practice.md`
 
 **内容涵盖**:
 
@@ -128,7 +128,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------------------- param($
 
 ### 3. 监控与可观测性 ✨
 
-**新增文档**: `docs/tier_04_advanced/08_监控与可观测性实践.md`
+**新增文档**: `docs/tier_04_advanced/08_monitoring_and_observability_practice.md`
 
 **内容涵盖**:
 
@@ -223,7 +223,6 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------------------- param($
 │ Prometheus + Grafana + Loki + Jaeger    │
 └─────────────────────────────────────────┘
 ```
-
 ### 2. WasmEdge 容器优势
 
 | 维度 | Linux 容器 | Wasm 容器 | 提升 |
@@ -244,7 +243,6 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $
 缺点：回滚较慢
 适用：日常更新
 ```
-
 **蓝绿部署 (Blue-Green)**:
 
 ```text
@@ -252,7 +250,6 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $
 缺点：资源占用翻倍
 适用：重要发布
 ```
-
 **金丝雀发布 (Canary)**:
 
 ```text
@@ -260,7 +257,6 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $
 缺点：流程复杂
 适用：高风险变更
 ```
-
 ---
 
 ## 📚 文档体系
@@ -269,9 +265,9 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $
 
 | 文档 | 路径 | 类型 | 行数 |
 param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
-| 容器技术深度集成 | `docs/tier_04_advanced/06_容器技术深度集成.md` | Tier 4 | ~1,100 |
-| 云原生CI/CD实践 | `docs/tier_04_advanced/07_云原生CI_CD实践.md` | Tier 4 | ~900 |
-| 监控与可观测性实践 | `docs/tier_04_advanced/08_监控与可观测性实践.md` | Tier 4 | ~800 |
+| 容器技术深度集成 | `docs/tier_04_advanced/06_container_technology_integration.md` | Tier 4 | ~1,100 |
+| 云原生CI/CD实践 | `docs/tier_04_advanced/07_cloud_native_ci_cd_practice.md` | Tier 4 | ~900 |
+| 监控与可观测性实践 | `docs/tier_04_advanced/08_monitoring_and_observability_practice.md` | Tier 4 | ~800 |
 
 **总计**: ~2,800 行专业级文档
 
@@ -497,7 +493,6 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match
 ────────────────────────────────────────
 整体完成度      ████████████████████ 100%
 ```
-
 ### 质量评分
 
 | 维度 | 分数 | 评级 |

@@ -118,7 +118,6 @@ D5 并发            Send/Sync + Mutex + async/rayon      无绿色线程；无 
 D6 抽象            Trait + 泛型 + 宏 + 零成本           无类型类；无结构化类型；无 first-class 模块
 D7 安全            编译期 safe + unsafe 逃逸门          不保证活性/终止/功能正确
 ```
-
 **核心结论**: Rust 的语义设计遵循**"有纪律的表达力"**原则——在系统编程需要的维度上接近 C++ 的表达力，在类型安全维度上接近 Haskell 的保证，在简洁性维度上接受 Go 的约束，但**拒绝在三者之间做简单折中**，而是通过所有权系统重新定义了安全与表达力的帕累托前沿。
 
 ---
@@ -154,7 +153,6 @@ Ch.17 Constant Evaluation         →  D1 (计算子集)
 Ch.18 ABI                         →  D6 (FFI 与外部交互)
 Ch.19 The Rust runtime            →  D5 (并发运行时)
 ```
-
 > **关键洞察**: Rust Reference 的章节结构本身就是语义空间的最权威划分。本文件不是 Reference 的重复，而是将 Reference 的**纵向章节**重组为**横向表达力光谱**，并引入"边界分析"和"跨语言对比"两个 Reference 不包含的维度。
 
 ---
@@ -190,7 +188,6 @@ graph LR
     D6 -.->|"无类型类"| W
     D7 -.->|"不保证活性"| W
 ```
-
 > **认知功能**: 此图以**双域映射**呈现 Rust 七维表达力的空间结构——左域定位各语义维度，右域统一标定表达力强度。建议在深入单维分析前 30 秒速览此图，建立"能力-边界"锚点。关键洞察：所有维度均指向同一弱极，印证 Rust 的缺失不是功能遗漏，而是"有纪律的表达力"的系统性设计。 [来源: 💡 原创分析]
 > [来源: [Wikipedia — Programming Language]]
 
@@ -232,7 +229,6 @@ const trait impl (~const): 泛型常量     unsafe: 底层操作
   ↓                                       ↓
 [边界] 编译期无堆分配                  [边界] 停机问题不可判定
 ```
-
 ### 3.3 编译期计算边界
 
 Rust 的常量求值器（const evaluator）是 MIR 解释器的一个子集，**deliberately restricted**：
@@ -274,7 +270,6 @@ Rust 的常量求值器（const evaluator）是 MIR 解释器的一个子集，*
     ↓
   超限 → 编译错误（非运行时错误）
 ```
-
 > **来源**: [Rust Reference: Constant Evaluation — Query cycles](https://doc.rust-lang.org/reference/) · [Rust Internals: const eval step limit]
 
 ### 3.6 映射到 L0-L7
@@ -304,7 +299,6 @@ Rust 类型系统能编码什么不变式？它能表达哪些其他语言用不
   bool        Vec<T>       dyn Trait                  Array<T, N>
   struct      fn<T>(T)     trait bounds
 ```
-
 **Rust 的定位**: 参数多态 + 存在类型（受限）+ 依赖类型子集（`const` generics）+ **无**高阶类型。
 
 ### 4.3 类型系统特征矩阵
@@ -366,7 +360,6 @@ Rust 削减:
   - 无完整依赖类型
   - 无隐式子类型（仅生命周期）
 ```
-
 > **来源**: [Pierce 2002 TAPL Ch.23-29] · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Oxide: Ownership and Borrowing in Rust]
 
 ### 4.7 映射到 L0-L7
@@ -398,7 +391,6 @@ Rust 如何表达计算的控制结构？从结构化控制到异常处理到异
   match        Option/?     catch      await      yield
                               unwinding
 ```
-
 ### 5.3 控制流机制矩阵
 
 | 机制 | 语法 | 语义 | 零成本？ | 与类型系统关系 |
@@ -454,7 +446,6 @@ Rust 如何表达计算的控制结构？从结构化控制到异常处理到异
   无额外分配（默认）
   无调度器开销（仅在 .await 点让出）
 ```
-
 > **来源**: [without.boats blog: Zero-cost async] · [Rust Reference: Async blocks](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ### 5.7 映射到 L0-L7
@@ -485,7 +476,6 @@ Rust 如何表达内存布局、生命周期、所有权转移和内部可变性
   常量        局部变量      Box<T>      &T/&mut T   RefCell/Mutex   *const/*mut
                (RAII)        Vec<T>                    UnsafeCell
 ```
-
 ### 6.3 内存管理机制矩阵
 
 | 机制 | 语法 | 所有权语义 | 释放时机 | 零成本？ | 形式化对应 |
@@ -523,7 +513,6 @@ L3: 机器内存模型（LLVM）
 
 关键保证: L1 ⟹ L2 ⟹ L3，安全 Rust 代码在三层模型中行为一致
 ```
-
 > **来源**: [Rust Reference: Memory model](https://doc.rust-lang.org/reference/) · [Jung et al. POPL 2019 — Stacked Borrows] · [Pichon-Pharabod & Dreyer — Tree Borrows]
 
 ### 6.5 与四语言对比
@@ -558,7 +547,6 @@ A ⊸ B            fn(T) -> U —— 消耗 T 产生 U
   仿射性: Move 语义 = 资源可消耗但不可复制
   分数权限: &T = 共享读取（π < 1），&mut T = 独占写入（π = 1）
 ```
-
 > **来源**: [Girard 1987 — Linear Logic] · [04_formal/01_linear_logic.md] · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ### 6.7 映射到 L0-L7
@@ -590,7 +578,6 @@ Rust 如何表达并发和并行？从共享状态到消息传递到数据并行
   RwLock          mpsc           par_iter       tokio::spawn
   AtomicUsize
 ```
-
 ### 7.3 并发原语矩阵
 
 | 原语 | 同步模型 | 类型安全保证 | 运行时成本 | 适用场景 |
@@ -618,7 +605,6 @@ unsafe impl Sync for MyType {}   // MyType 可跨线程共享引用（&MyType: S
 // 定理: Send + Sync 的正确实现 ⟹ 无数据竞争
 // RustBelt 在 Iris 中机械证明了该定理
 ```
-
 | 类型 | `Send` | `Sync` | 原因 |
 |:---|:---:|:---:|:---|
 | `i32` | ✅ | ✅ | 值类型，复制安全 |
@@ -662,7 +648,6 @@ unsafe impl Sync for MyType {}   // MyType 可跨线程共享引用（&MyType: S
   - 活锁 / 饥饿
   - 自定义同步原语（需人工 Iris 协议验证）
 ```
-
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [O'Hearn 2007 — Separation Logic] · [Iris Project: iris-project.org]
 
 ### 7.7 映射到 L0-L7
@@ -691,7 +676,6 @@ Rust 如何组合代码、隐藏实现细节、创建可复用抽象？从函数
 函数 ──→ 模块 ──→ Trait ──→ 泛型 ──→ 宏 ──→ 过程宏 ──→ FFI
   fn      mod      trait     <T>      macro!    #[derive]   extern
 ```
-
 ### 8.3 抽象机制矩阵
 
 | 机制 | 组合方式 | 信息隐藏 | 零成本？ | 元编程能力 |
@@ -726,7 +710,6 @@ Rust 的宏系统分为两层：
   ├── 完整 AST 访问 — 可分析/变换任意语法
   └── 例: serde::Deserialize, tokio::main
 ```
-
 | 维度 | Rust | C++ | Go | Haskell |
 |:---|:---|:---|:---|:---|
 | **声明宏** | ✅ `macro_rules!`（hygienic） | ⚠️ 预处理器（无卫生） | ❌ 无 | ❌ 无（Template Haskell 是过程式） |
@@ -751,7 +734,6 @@ Rust 的宏系统分为两层：
     ↓
   `unsafe` 和 `extern` 进一步削弱了保证
 ```
-
 > **来源**: [Wadler 1989 — Theorems for Free] · [Rust Reference: Generic parameters](https://doc.rust-lang.org/reference/) · [RFC 1210: coherence](https://github.com/rust-lang/rfcs/pull/1210)
 
 ### 8.6 映射到 L0-L7
@@ -785,7 +767,6 @@ safe Rust ──→ unsafe 块 ──→ FFI ──→ 外部世界
 无数据竞争     内联汇编       系统调用    用户输入
 类型安全       自定义布局     其他语言    物理世界
 ```
-
 ### 9.3 安全保证矩阵
 
 | 保证 | safe Rust | `unsafe` 块 | FFI | 形式化验证 |
@@ -833,7 +814,6 @@ RustBelt 证明范围:
   动态    有界符号   演绎验证    定理证明
   找反例   穷举路径    功能正确    完整数学
 ```
-
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Kani Documentation] · [Verus Documentation]
 
 ### 9.6 与四语言对比
@@ -893,7 +873,6 @@ RustBelt 证明范围:
   Go:      计算=3 类型=3 控制流=4 内存=4 并发=6 抽象=4 安全=5  → 中等均衡，低复杂度
   Haskell: 计算=5 类型=9 控制流=6 内存=3 并发=5 抽象=8 安全=7  → 高类型 + 低内存控制
 ```
-
 ### 10.2 表达力-安全性帕累托前沿
 
 ```text
@@ -914,7 +893,6 @@ RustBelt 证明范围:
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
      3   4   5   6   7   8   9
 ```
-
 > **核心结论**: Rust 位于表达力-安全性的**帕累托前沿**上——在相同表达力级别下比 C++ 更安全，在相同安全级别下比 Haskell 更具底层控制力。Go 选择了"低复杂度"路径，牺牲了表达力上限。这不是优劣判断，而是**设计目标的差异**。
 
 ### 10.3 "Rust 刻意不做"清单
@@ -964,7 +942,6 @@ Rust 的任何语义扩展必须满足以下约束（由语言设计哲学决定
   ❌ 完整依赖类型: 不满足可判定性
   ❌ GC: 不满足零成本 + 确定性
 ```
-
 ---
 
 ## 十二、相关概念链接（L0-L7 映射）
@@ -1038,7 +1015,6 @@ mindmap
       不保证活性
       不保证终止
 ```
-
 > **认知功能**: 此 mindmap 是七维表达力光谱的**放射式紧凑视图**。
 > 与正文中逐项展开的矩阵和雷达图形成互补——mindmap 适合「快速回顾」场景，读者可在 10 秒内扫视全部七个维度及其核心边界特征，建立整体认知锚点。
 > 关键认知：每个维度都同时标注了「Rust 能做到什么」和「Rust 刻意不做什么」，这种「能力 + 边界」的双面标注是 Rust 设计哲学的缩影
@@ -1081,9 +1057,7 @@ mindmap
 | Semantic Expressiveness 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-
 > **过渡**: Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
-
 > **过渡**: 将 Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界

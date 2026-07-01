@@ -100,7 +100,6 @@
   - Rust 1.89 新特性演示
   - 综合应用示例
   - 数据处理、异步编程、错误处理、性能优化、并发编程示例
-
 - **`examples/rust_189_new_features_showcase.rs`** (600+ 行代码)
   - 专门展示 Rust 1.89 新特性
   - let_chains 特性展示
@@ -198,25 +197,21 @@
 ```bash
 cargo run --example rust_189_basic_syntax_comprehensive
 ```
-
 ### 运行新特性展示
 
 ```bash
 cargo run --example rust_189_new_features_showcase
 ```
-
 ### 运行测试
 
 ```bash
 cargo test
 ```
-
 ### 查看文档
 
 ```bash
 cargo doc --open
 ```
-
 ## 🔧 技术实现
 
 ### 1. 模块化设计

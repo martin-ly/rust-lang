@@ -64,7 +64,6 @@ runner = "miri"
 [env.miri]
 MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = false }
 ```
-
 ### 2. Miri 测试文件 {#2-miri-测试文件}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -97,7 +96,6 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 #[cfg(test)]
 pub mod miri_tests;
 ```
-
 ### 4. 运行脚本 {#4-运行脚本}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -108,14 +106,12 @@ pub mod miri_tests;
 #!/bin/bash
 # 自动安装 Miri，设置环境变量，运行所有测试 {#自动安装-miri设置环境变量运行所有测试}
 ```
-
 **文件**: `scripts/run-miri.bat` (Windows)
 
 ```batch
 @echo off
 # Windows 版本的 Miri 测试脚本 {#windows-版本的-miri-测试脚本}
 ```
-
 ### 5. 文档 {#5-文档}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -163,7 +159,6 @@ let z = &mut *y;  // 重新借用
 *z = 1;
 *y = 2;  // Tree Borrows: OK, Stacked Borrows: UB
 ```
-
 **项目默认使用 Tree Borrows 模型**。
 
 ## 如何使用 {#如何使用}
@@ -182,7 +177,6 @@ scripts\run-miri.bat         # Windows
 # 或手动运行 {#或手动运行}
 cargo miri test --workspace -- miri_tests
 ```
-
 ### 运行特定 crate 的测试 {#运行特定-crate-的测试}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -190,7 +184,6 @@ cargo miri test --workspace -- miri_tests
 ```bash
 cargo miri test -p c01_ownership_borrow_scope -- miri_tests
 ```
-
 ### 使用特定 Miri 选项 {#使用特定-miri-选项}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -198,7 +191,6 @@ cargo miri test -p c01_ownership_borrow_scope -- miri_tests
 ```bash
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ```
-
 ## 测试结构 {#测试结构}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -215,12 +207,10 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **现有依赖问题**: 项目中的 `common` crate 缺少 `tracing` 依赖，这会导致 Miri 测试编译失败。这需要单独修复。
-
 2. **Miri 限制**:
    - 不支持所有系统调用
    - 某些 FFI 代码无法测试
    - 时间相关测试可能表现不同
-
 3. **测试隔离**: 使用 `-Zmiri-disable-isolation` 允许文件系统访问
 
 ## 后续建议 {#后续建议}

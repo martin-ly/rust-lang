@@ -39,7 +39,6 @@ git clone https://github.com/your-username/c04_generic.git
 cd c04_generic
 git checkout -b feature/your-feature-name
 ```
-
 #### 开发流程
 
 1. **代码质量**
@@ -47,12 +46,10 @@ git checkout -b feature/your-feature-name
    - 运行 `cargo fmt` 格式化代码
    - 运行 `cargo clippy` 检查代码质量
    - 确保所有测试通过
-
 2. **测试覆盖**
    - 为新功能添加测试用例
    - 确保测试覆盖率不降低
    - 运行 `cargo test` 验证
-
 3. **文档更新**
    - 更新相关文档
    - 添加代码注释
@@ -70,7 +67,6 @@ test: 添加边界情况测试
 refactor: 重构关联类型实现
 style: 格式化代码
 ```
-
 #### 提交 Pull Request
 
 1. 推送您的分支到 GitHub
@@ -138,7 +134,6 @@ cargo build
 # 运行演示
 cargo run --bin c04_generic
 ```
-
 ## 📚 学习资源
 
 在贡献之前，建议了解：
@@ -147,12 +142,10 @@ cargo run --bin c04_generic
    - 所有权和借用
    - 生命周期
    - 错误处理
-
 2. **泛型编程**
    - 类型参数
    - Trait 约束
    - 关联类型
-
 3. **项目结构**
    - 模块组织
    - 测试框架
@@ -164,12 +157,10 @@ cargo run --bin c04_generic
    - 友善的交流
    - 建设性的反馈
    - 包容的态度
-
 2. **专业精神**
    - 高质量的代码
    - 清晰的文档
    - 及时的响应
-
 3. **持续改进**
    - 学习新知识
    - 分享经验

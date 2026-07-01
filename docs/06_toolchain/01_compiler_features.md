@@ -160,7 +160,6 @@
 │   链接器     │ → 可执行文件
 └─────────────┘
 ```
-
 ---
 
 ### 1.2 编译器版本 {#12-编译器版本}
@@ -185,7 +184,6 @@ rustc --version --verbose
 # release: 1.96.0 {#release-1960}
 # LLVM version: 21.0.0  (minimum external LLVM for building rustc from source is 21) {#llvm-version-2100-minimum-external-llvm-for-building-rustc-from-source-is-21}
 ```
-
 **查看编译器支持的目标平台**:
 
 ```bash
@@ -198,7 +196,6 @@ rustc --print target-list
 # aarch64-unknown-linux-gnu {#aarch64-unknown-linux-gnu}
 # wasm32-unknown-unknown {#wasm32-unknown-unknown}
 ```
-
 ---
 
 ## 2. 增量编译 (Rust 1.54+) {#2-增量编译-rust-154}
@@ -237,7 +234,6 @@ incremental = true  # 默认开启
 [profile.release]
 incremental = false  # 生产环境建议关闭
 ```
-
 **环境变量**:
 
 ```bash
@@ -250,7 +246,6 @@ export CARGO_INCREMENTAL=0
 # 指定增量编译缓存目录 {#指定增量编译缓存目录}
 export CARGO_INCREMENTAL_DIR=/custom/cache/path
 ```
-
 **清理增量编译缓存**:
 
 ```bash
@@ -261,7 +256,6 @@ cargo clean
 rm -rf target/debug/incremental
 rm -rf target/release/incremental
 ```
-
 ---
 
 ### 2.3 性能影响 {#23-性能影响}
@@ -302,7 +296,6 @@ opt-level = 0  # 无优化 (快速编译)
 [profile.release]
 opt-level = 3  # 最大优化 (最快运行)
 ```
-
 **优化级别说明**:
 
 | 级别  | 说明         | 编译时间 | 运行性能 | 二进制大小 |
@@ -330,7 +323,6 @@ overflow-checks = false    # 禁用溢出检查
 debug = false              # 不生成调试信息
 debug-assertions = false   # 禁用断言
 ```
-
 **针对特定包的优化**:
 
 ```toml
@@ -340,7 +332,6 @@ opt-level = 2  # 依赖包使用 O2 优化
 [profile.dev.package.my-crate]
 opt-level = 0  # 自己的 crate 保持无优化
 ```
-
 ---
 
 ## 4. Link-Time Optimization (LTO) {#4-link-time-optimization-lto}
@@ -357,7 +348,6 @@ opt-level = 0  # 自己的 crate 保持无优化
 [profile.release]
 lto = "thin"
 ```
-
 - 平衡编译时间和优化效果
 - 并行度高
 - 增加编译时间 ~20-40%
@@ -371,7 +361,6 @@ lto = "fat"
 # 或 {#或}
 lto = true
 ```
-
 - 全程序优化
 - 编译时间显著增加
 - 增加编译时间 ~50-200%
@@ -390,7 +379,6 @@ lto = true
 lto = "fat"
 codegen-units = 1  # LTO 需要单一代码生成单元以达到最佳效果
 ```
-
 **针对库的 LTO**:
 
 ```toml
@@ -400,7 +388,6 @@ lto = true
 [profile.release.package."*"]
 lto = true  # 所有依赖包也启用 LTO
 ```
-
 ---
 
 ### 4.3 性能权衡 {#43-性能权衡}
@@ -450,7 +437,6 @@ lto = true  # 所有依赖包也启用 LTO
 │ 步骤 4: 使用性能数据重新构建，生成优化的可执行文件   │
 └───────────────────────────────────────────────────┘
 ```
-
 ---
 
 ### 5.2 实施 PGO {#52-实施-pgo}
@@ -466,7 +452,6 @@ export RUSTFLAGS="-Cprofile-generate=/tmp/pgo-data"
 # 构建 {#构建}
 cargo build --release
 ```
-
 **步骤 2: 运行并收集数据**:
 
 ```bash
@@ -475,7 +460,6 @@ cargo build --release
 
 # 这将生成 /tmp/pgo-data/*.profraw 文件 {#这将生成-tmppgo-dataprofraw-文件}
 ```
-
 **步骤 3: 合并性能数据**:
 
 ```bash
@@ -484,7 +468,6 @@ llvm-profdata merge \
     -o /tmp/pgo-data/merged.profdata \
     /tmp/pgo-data/*.profraw
 ```
-
 **步骤 4: 使用 PGO 数据重新构建**:
 
 ```bash
@@ -497,7 +480,6 @@ export RUSTFLAGS="-Cprofile-use=/tmp/pgo-data/merged.profdata"
 # 重新构建 {#重新构建}
 cargo build --release
 ```
-
 ---
 
 ### 5.3 性能提升 {#53-性能提升}
@@ -540,7 +522,6 @@ RUSTFLAGS="-C target-cpu=haswell" cargo build --release
 # 查看支持的 CPU {#查看支持的-cpu}
 rustc --print target-cpus
 ```
-
 **启用特定 CPU 特性**:
 
 ```bash
@@ -553,7 +534,6 @@ RUSTFLAGS="-C target-feature=+avx2,+fma,+bmi2" cargo build --release
 # 查看支持的特性 {#查看支持的特性}
 rustc --print target-features
 ```
-
 **Cargo.toml 配置**:
 
 ```toml
@@ -561,7 +541,6 @@ rustc --print target-features
 [profile.release.build-override]
 rustflags = ["-C", "target-cpu=native"]
 ```
-
 ---
 
 ### 6.2 代码模型 {#62-代码模型}
@@ -578,7 +557,6 @@ RUSTFLAGS="-C code-model=medium" cargo build --release
 # 大代码模型 (> 4GB) {#大代码模型-4gb}
 RUSTFLAGS="-C code-model=large" cargo build --release
 ```
-
 ---
 
 ## 7. 调试信息 {#7-调试信息}
@@ -598,7 +576,6 @@ debug = 0  # 无调试信息
 # 或保留部分调试信息用于 profiling {#或保留部分调试信息用于-profiling}
 debug = 1  # 仅行号信息
 ```
-
 **级别说明**:
 
 | 级别 | 说明       | 二进制增加 | 编译时间 |
@@ -617,7 +594,6 @@ debug = 1  # 仅行号信息
 split-debuginfo = "packed"  # macOS/Windows: 打包到单独文件
 # split-debuginfo = "unpacked"  # Linux: 分散到多个文件 {#split-debuginfo-unpacked-linux-分散到多个文件}
 ```
-
 **平台差异**:
 
 | 平台    | 默认值     | 推荐值                             |
@@ -638,7 +614,6 @@ RUSTFLAGS="-C debuginfo=2 -C dwarf-version=5" cargo build
 # 使用 DWARF 4 (兼容性更好) {#使用-dwarf-4-兼容性更好}
 RUSTFLAGS="-C debuginfo=2 -C dwarf-version=4" cargo build
 ```
-
 **Rust 1.88**: DWARF 5 稳定化
 
 ---
@@ -656,7 +631,6 @@ RUSTFLAGS="-C debuginfo=2 -C dwarf-version=4" cargo build
 ```bash
 cargo install sccache
 ```
-
 **配置**:
 
 ```bash
@@ -669,14 +643,12 @@ sccache --show-stats
 # 清理缓存 {#清理缓存-1}
 sccache --stop-server
 ```
-
 **Cargo 配置** (`.cargo/config.toml`):
 
 ```toml
 [build]
 rustc-wrapper = "/path/to/sccache"
 ```
-
 ---
 
 ### 8.2 配置缓存 {#82-配置缓存}
@@ -689,20 +661,17 @@ rustc-wrapper = "/path/to/sccache"
 export SCCACHE_DIR=~/.cache/sccache
 export SCCACHE_CACHE_SIZE="10G"
 ```
-
 **Redis 缓存** (团队共享):
 
 ```bash
 export SCCACHE_REDIS="redis://localhost:6379"
 ```
-
 **S3 缓存** (CI/CD):
 
 ```bash
 export SCCACHE_BUCKET="my-build-cache"
 export SCCACHE_REGION="us-west-2"
 ```
-
 ---
 
 ## 9. 编译时间优化 {#9-编译时间优化}
@@ -720,14 +689,12 @@ cargo build -j 8
 # 或通过环境变量 {#或通过环境变量}
 export CARGO_BUILD_JOBS=8
 ```
-
 **Cargo.toml 配置**:
 
 ```toml
 [build]
 jobs = 8  # 默认为 CPU 核心数
 ```
-
 ---
 
 ### 9.2 依赖优化 {#92-依赖优化}
@@ -745,7 +712,6 @@ tokio = { version = "1.0", features = ["rt-multi-thread", "macros"] }
 # 避免不必要的依赖 {#避免不必要的依赖}
 # ❌ regex = "1.0" {#regex-10}
 ```
-
 **使用 workspace**:
 
 ```toml
@@ -756,7 +722,6 @@ members = ["crate1", "crate2", "crate3"]
 [workspace.dependencies]
 tokio = { version = "1.0", features = ["full"] }
 ```
-
 ---
 
 ### 9.3 代码组织 {#93-代码组织}
@@ -783,7 +748,6 @@ pub mod api;
 // lib.rs
 pub mod everything_in_one_file; // 10000+ lines
 ```
-
 ---
 
 ## 10. 编译器插件与扩展 {#10-编译器插件与扩展}
@@ -809,7 +773,6 @@ struct Data { /* ... */ }
 // ⚠️ 避免复杂的 attribute 宏
 // #[complex_macro_that_generates_thousands_of_lines]
 ```
-
 ---
 
 ### 10.2 编译器内置工具 {#102-编译器内置工具}
@@ -821,19 +784,16 @@ struct Data { /* ... */ }
 ```bash
 cargo clippy --all-targets --all-features
 ```
-
 **Rustfmt** (代码格式化):
 
 ```bash
 cargo fmt --all
 ```
-
 **Miri** (内存安全检查):
 
 ```bash
 cargo +nightly miri test
 ```
-
 ---
 
 ## 11. 高级编译技术 {#11-高级编译技术}
@@ -848,7 +808,6 @@ cargo +nightly miri test
 # 启用 Polly (实验性) {#启用-polly-实验性}
 RUSTFLAGS="-C passes=polly" cargo build --release
 ```
-
 ---
 
 ### 11.2 自定义构建脚本 {#112-自定义构建脚本}
@@ -870,7 +829,6 @@ fn main() {
     }
 }
 ```
-
 ---
 
 ## 12. 实战案例 {#12-实战案例}
@@ -894,7 +852,6 @@ debug = false
 [profile.release.build-override]
 opt-level = 0  # 构建脚本无需优化
 ```
-
 **构建命令**:
 
 ```bash
@@ -902,7 +859,6 @@ opt-level = 0  # 构建脚本无需优化
 export RUSTFLAGS="-C target-cpu=native -C profile-use=merged.profdata"
 cargo build --release
 ```
-
 ---
 
 ### 12.2 开发环境优化配置 {#122-开发环境优化配置}
@@ -919,7 +875,6 @@ split-debuginfo = "unpacked"
 [profile.dev.package."*"]
 opt-level = 2          # 依赖包使用 O2
 ```
-
 ---
 
 ## 13. 性能基准 {#13-性能基准}
@@ -952,7 +907,6 @@ export CARGO_BUILD_JOBS=2
 
 # 或增加 swap 空间 {#或增加-swap-空间}
 ```
-
 **2. 增量编译损坏**:
 
 ```bash
@@ -960,7 +914,6 @@ export CARGO_BUILD_JOBS=2
 cargo clean
 rm -rf ~/.cargo/registry/cache
 ```
-
 **3. LTO 失败**:
 
 ```toml
@@ -969,7 +922,6 @@ rm -rf ~/.cargo/registry/cache
 lto = "thin"
 codegen-units = 16  # 增加代码生成单元
 ```
-
 ---
 
 ## 15. 编译器特性的形式化分析 {#15-编译器特性的形式化分析}
@@ -992,7 +944,6 @@ MIR     --(优化)-->  优化后MIR
 优化后MIR --(代码生成)--> LLVM IR
 LLVM IR --(LLVM优化)--> 目标代码
 ```
-
 形式化表示为：
 
 ```rust,ignore
@@ -1020,7 +971,6 @@ fn compile(source: SourceCode) -> Result<ObjectCode, CompileError> {
         .and_then(codegen)       // 代码生成
 }
 ```
-
 ### 15.2 借用检查的形式化 {#152-借用检查的形式化}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -1064,7 +1014,6 @@ fn borrow_check_example() {
     // println!("{}", r4);
 }
 ```
-
 ### 15.3 优化级别的形式化语义 {#153-优化级别的形式化语义}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -1119,7 +1068,6 @@ impl OptimizationLevel {
     }
 }
 ```
-
 ### 15.4 LTO 的形式化分析 {#154-lto-的形式化分析}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -1153,7 +1101,6 @@ pub fn caller_lto() -> i32 {
     85  // 编译时常量折叠
 }
 ```
-
 ### 15.5 PGO 的形式化模型 {#155-pgo-的形式化模型}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -1191,7 +1138,6 @@ fn pgo_workflow() {
     // rustc -C profile-use=merged.profdata
 }
 ```
-
 ---
 
 ## 16. 相关资源 {#16-相关资源}
@@ -1244,7 +1190,6 @@ fn pgo_workflow() {
 ## Rust 1.96+ 更新 {#rust-196-更新}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **最新版本**: Rust 1.96.0+ (2026-05-28)
 
 本文档基于 Rust 1.96.0，涵盖 1.93–1.96 关键特性。历史版本请参见：
@@ -1278,21 +1223,13 @@ fn pgo_workflow() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
-
 > **来源: [Wikipedia - LLVM](https://en.wikipedia.org/wiki/LLVM)**
-
 > **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
-
 > **来源: [Rust Reference - Compiler Plugins](https://doc.rust-lang.org/reference/)**
-
 > **[来源: ACM - Compiler Frontend Design]**
-
 > **[来源: IEEE - Code Generation Standards]**
-
 > **[来源: Nicholas Nethercote - How to Speed Up the Rust Compiler]**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1301,7 +1238,6 @@ fn pgo_workflow() {
 > **来源: [IEEE](https://standards.ieee.org/)**
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 > **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
 > **来源: [LLVM Documentation](https://llvm.org/docs/)**

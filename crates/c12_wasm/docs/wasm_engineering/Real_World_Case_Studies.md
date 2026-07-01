@@ -87,7 +87,6 @@ JavaScript (UI逻辑)
      ↓
   Canvas 2D API
 ```
-
 **代码片段**（简化）：
 
 ```cpp
@@ -113,7 +112,6 @@ private:
     }
 };
 ```
-
 **JS 胶水代码**：
 
 ```javascript
@@ -136,7 +134,6 @@ document.addEventListener("mousemove", e => {
   })
 })
 ```
-
 ### 性能结果
 
 **对比**：
@@ -176,7 +173,6 @@ Atomics.notify(view, 0, 1)
 Atomics.wait(view, 0, 0)
 const task = Atomics.load(view, 0)
 ```
-
 **问题 2: Wasm 内存增长导致卡顿**:
 
 **症状**：
@@ -202,7 +198,6 @@ void init_memory() {
     *p = 0;
 }
 ```
-
 ### 关键经验
 
 ✅ **成功因素**：
@@ -247,7 +242,6 @@ emcc src/geometry/*.cpp src/renderer/*.cpp \
     -s EXPORTED_FUNCTIONS='["_compute_intersection", "_render_scene"]' \
     -O3 -o autocad-core.js
 ```
-
 **Phase 2: UI 层重写**:
 
 - React + Three.js (新 UI)
@@ -273,7 +267,6 @@ document.getElementById("open-file").addEventListener("click", async () => {
   fileModule.open_dialog()
 })
 ```
-
 ### 性能优化
 
 **问题: 大文件加载慢**:
@@ -303,7 +296,6 @@ public:
     }
 };
 ```
-
 **优化 2: Web Worker 并行**:
 
 ```javascript
@@ -318,7 +310,6 @@ const results = await Promise.all(
   chunks.map((chunk, i) => workers[i % workers.length].parse(chunk))
 )
 ```
-
 **最终性能**：
 
 - 打开 100MB 文件：**8 秒** (5.6× 提升)
@@ -346,7 +337,6 @@ autocad-web/
     ├── unit/             # C++ 单元测试
     └── integration/      # JS + Wasm 集成测试
 ```
-
 ### 关键指标
 
 **开发成本**：
@@ -392,7 +382,6 @@ autocad-web/
 ```text
 Video Stream → Wasm (AI 推理) → Canvas (合成) → Output
 ```
-
 **Wasm 模块**：
 
 ```cpp
@@ -427,7 +416,6 @@ private:
     }
 };
 ```
-
 **WebGL 加速**：
 
 ```javascript
@@ -454,7 +442,6 @@ const featherShader = `
   }
 `
 ```
-
 ### 性能优化2
 
 **问题: CPU 占用过高**:
@@ -468,7 +455,6 @@ Total: 45ms/frame (无法达到 30fps)
 ├─ 边缘处理: 5ms (11%)
 └─ 合成: 2ms (5%)
 ```
-
 **优化策略**：
 
 1. **降采样**：
@@ -479,7 +465,6 @@ Total: 45ms/frame (无法达到 30fps)
    auto mask_low = segment(downsampled);
    auto mask_high = upsample(mask_low, 1920, 1080);
    ```
-
 2. **SIMD 加速**：
 
    ```cpp
@@ -494,7 +479,6 @@ Total: 45ms/frame (无法达到 30fps)
        }
    }
    ```
-
 3. **多线程**：
 
    ```javascript
@@ -507,7 +491,6 @@ Total: 45ms/frame (无法达到 30fps)
      return mergeResults(results)
    }
    ```
-
 **最终性能**：
 
 - 处理时间：**18ms/frame**
@@ -535,7 +518,6 @@ python quantize_model.py --input model.tflite --output model_q.tflite
 
 # 精度损失：< 2%（可接受）
 ```
-
 **渐进式加载**：
 
 ```javascript
@@ -548,7 +530,6 @@ loadModel("model_full.wasm").then(fullModel => {
   replaceModel(fullModel) // 无缝切换
 })
 ```
-
 ### 经验总结
 
 ✅ **成功点**：
@@ -617,7 +598,6 @@ public:
     }
 };
 ```
-
 **前端集成**：
 
 ```javascript
@@ -634,7 +614,6 @@ document.getElementById("upload").addEventListener("change", async e => {
   uploadToServer(compressed)
 })
 ```
-
 ### 成本节省
 
 **对比分析**：
@@ -684,7 +663,6 @@ function getCompressionQuality() {
 const worker = new Worker("compressor-worker.js")
 worker.postMessage({ image, quality: getCompressionQuality() })
 ```
-
 ---
 
 ## 通用经验总结
@@ -740,7 +718,6 @@ for (let i = 0; i < 1000000; i++) {
 // ✅ 正确：批量处理
 const result = wasmModule.processBatch(data) // 单次调用
 ```
-
 **反模式 3: 盲目使用 Wasm**:
 
 **案例**：一个简单的表单验证逻辑也用 Wasm
@@ -772,7 +749,6 @@ const result = wasmModule.processBatch(data) // 单次调用
             ├─ 是 → ✅ 使用 Wasm
             └─ 否 → 使用 JavaScript
 ```
-
 ---
 
 ## 最佳实践清单

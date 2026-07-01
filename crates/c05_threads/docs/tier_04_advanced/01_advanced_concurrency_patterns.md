@@ -1,0 +1,821 @@
+# C05 Tier 4 高级主题 01：高级并发模式
+
+> **文档版本**: v2.0.0 | **Rust 版本**: 1.92.0+ | **最后更新**: 2025-12-11
+
+## 目录
+
+- [C05 Tier 4 高级主题 01：高级并发模式](#c05-tier-4-高级主题-01高级并发模式)
+  - [目录](#目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+    - [多维概念对比矩阵](#多维概念对比矩阵)
+    - [决策树图](#决策树图)
+    - [证明树图](#证明树图)
+  - [1. 工作窃取（Work Stealing）](#1-工作窃取work-stealing)
+    - [1.1 原理](#11-原理)
+    - [1.2 简化实现](#12-简化实现)
+    - [1.3 Rayon 的工作窃取](#13-rayon-的工作窃取)
+  - [2. Actor 模型](#2-actor-模型)
+    - [2.1 原理](#21-原理)
+    - [2.2 简单实现](#22-简单实现)
+    - [2.3 使用 Actix](#23-使用-actix)
+  - [3. Fork-Join 并行](#3-fork-join-并行)
+    - [3.1 原理](#31-原理)
+  - [4. Map-Reduce 模式](#4-map-reduce-模式)
+    - [4.1 并行 Map-Reduce](#41-并行-map-reduce)
+  - [5. 流水线并行](#5-流水线并行)
+    - [5.1 多阶段流水线](#51-多阶段流水线)
+  - [6. 数据并行 vs 任务并行](#6-数据并行-vs-任务并行)
+    - [6.1 数据并行](#61-数据并行)
+    - [6.2 任务并行](#62-任务并行)
+  - [7. 响应式编程](#7-响应式编程)
+    - [7.1 事件驱动模式](#71-事件驱动模式)
+  - [8. 实战案例](#8-实战案例)
+    - [8.1 并行 Web 爬虫](#81-并行-web-爬虫)
+  - [9. 参考资源](#9-参考资源)
+    - [官方文档](#官方文档)
+    - [推荐阅读](#推荐阅读)
+    - [内部文档](#内部文档)
+  - [**文档维护**: C05 Threads Team | **最后审核**: 2025-10-22 | **质量评分**: 95/100](#文档维护-c05-threads-team--最后审核-2025-10-22--质量评分-95100)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**高级并发模式 (Advanced Concurrency Patterns)**:
+
+- **定义**: Rust 1.92.0 在并发编程中使用的高级模式和算法，用于优化性能和解决复杂并发问题
+- **类型**: 高级主题文档
+- **范畴**: 并发编程、高性能计算
+- **版本**: Rust 1.92.0+ (Edition 2024)
+- **相关概念**: 工作窃取、Actor模型、Fork-Join、Map-Reduce、流水线并行、响应式编程
+
+**工作窃取 (Work Stealing)**:
+
+- **定义**: 动态负载均衡算法，空闲线程从繁忙线程的队列中"窃取"任务
+- **类型**: 调度算法
+- **属性**: 动态负载均衡、自动调度、高效利用
+- **关系**: 与线程池、并行计算相关
+
+### 属性特征
+
+**核心属性**:
+
+- **动态负载均衡**: 自动分配任务
+- **高效利用**: 充分利用所有线程
+- **低开销**: 窃取操作开销小
+- **可扩展性**: 支持大量线程
+
+**性能特征**:
+
+- **负载均衡**: 自动平衡线程负载
+- **适用场景**: 并行计算、任务调度、数据处理
+
+### 关系连接
+
+**继承关系**:
+
+- 工作窃取 --[is-a]--> 调度算法
+- Actor 模型 --[is-a]--> 并发模式
+
+**组合关系**:
+
+- 并行程序 --[uses]--> 高级并发模式
+- Rayon --[uses]--> 工作窃取
+
+**依赖关系**:
+
+- 高级并发模式 --[depends-on]--> 线程支持
+- 工作窃取 --[depends-on]--> 任务队列
+
+### 思维导图
+
+```text
+高级并发模式
+│
+├── 工作窃取
+│   └── 动态负载均衡
+├── Actor 模型
+│   └── 消息传递
+├── Fork-Join 并行
+│   └── 分治并行
+├── Map-Reduce 模式
+│   └── 数据并行
+├── 流水线并行
+│   └── 多阶段处理
+└── 响应式编程
+    └── 事件驱动
+```
+### 多维概念对比矩阵
+
+| 并发模式       | 性能 | 复杂度 | 适用场景   | 线程安全 | Rust 1.92.0 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **工作窃取**   | 高   | 中     | 并行计算   | ✅       | ✅ 改进     |
+| **Actor 模型** | 中   | 高     | 分布式系统 | ✅       | ✅          |
+| **Fork-Join**  | 高   | 低     | 分治算法   | ✅       | ✅          |
+| **Map-Reduce** | 高   | 中     | 大数据处理 | ✅       | ✅          |
+| **流水线并行** | 中   | 中     | 多阶段处理 | ✅       | ✅          |
+| **响应式编程** | 中   | 高     | 事件驱动   | ✅       | ✅          |
+
+### 决策树图
+
+```text
+选择并发模式
+│
+├── 是否需要动态负载均衡？
+│   ├── 是 → 工作窃取
+│   └── 否 → 继续判断
+│       ├── 是否需要消息传递？
+│       │   ├── 是 → Actor 模型
+│       │   └── 否 → 继续判断
+│       │       ├── 是否需要分治？
+│       │       │   ├── 是 → Fork-Join
+│       │       │   └── 否 → Map-Reduce
+│       │       └── 是否需要多阶段处理？
+│       │           ├── 是 → 流水线并行
+│       │           └── 否 → 响应式编程
+```
+### 证明树图
+
+```text
+并发安全性证明
+│
+├── 数据竞争预防
+│   ├── 所有权系统
+│   └── 借用检查器
+├── 死锁预防
+│   ├── 锁顺序
+│   └── 无锁数据结构
+└── 内存安全
+    ├── 类型系统
+    └── 生命周期系统
+```
+---
+
+## 1. 工作窃取（Work Stealing）
+
+### 1.1 原理
+
+工作窃取是一种动态负载均衡算法，空闲线程可以从繁忙线程的队列中"窃取"任务。
+
+```text
+┌──────────────────────────────────────────────────┐
+│           工作窃取调度器                           │
+├──────────────────────────────────────────────────┤
+│                                                  │
+│  Thread 1: [Task1][Task2][Task3][Task4]         │
+│                                      ▲           │
+│  Thread 2: []  (空闲)                 │           │
+│                └──────── 窃取 ────────┘           │
+│                                                  │
+│  Thread 3: [TaskA][TaskB]                       │
+│                         ▲                        │
+│  Thread 4: []  (空闲)   │                        │
+│                └─────────┘                       │
+│                                                  │
+└──────────────────────────────────────────────────┘
+```
+### 1.2 简化实现
+
+```rust
+use std::collections::VecDeque;
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+type Task = Box<dyn FnOnce() + Send>;
+
+struct Worker {
+    id: usize,
+    queue: Arc<Mutex<VecDeque<Task>>>,
+}
+
+impl Worker {
+    fn new(id: usize) -> Self {
+        Worker {
+            id,
+            queue: Arc::new(Mutex::new(VecDeque::new())),
+        }
+    }
+
+    fn push(&self, task: Task) {
+        self.queue.lock().unwrap().push_back(task);
+    }
+
+    fn pop(&self) -> Option<Task> {
+        self.queue.lock().unwrap().pop_front()
+    }
+
+    fn steal(&self) -> Option<Task> {
+        self.queue.lock().unwrap().pop_back()
+    }
+}
+
+struct WorkStealingPool {
+    workers: Vec<Worker>,
+}
+
+impl WorkStealingPool {
+    fn new(size: usize) -> Self {
+        let workers: Vec<_> = (0..size)
+            .map(|id| Worker::new(id))
+            .collect();
+
+        WorkStealingPool { workers }
+    }
+
+    fn submit(&self, worker_id: usize, task: Task) {
+        self.workers[worker_id % self.workers.len()].push(task);
+    }
+
+    fn run(&self) {
+        let workers_ref: Vec<_> = self.workers.iter()
+            .map(|w| (w.id, Arc::clone(&w.queue)))
+            .collect();
+
+        let handles: Vec<_> = workers_ref.into_iter()
+            .map(|(id, queue)| {
+                let all_queues: Vec<_> = self.workers.iter()
+                    .map(|w| Arc::clone(&w.queue))
+                    .collect();
+
+                thread::spawn(move || {
+                    loop {
+                        // 1. 尝试从自己的队列获取任务
+                        if let Some(task) = queue.lock().unwrap().pop_front() {
+                            task();
+                            continue;
+                        }
+
+                        // 2. 尝试窃取其他线程的任务
+                        let mut found = false;
+                        for other_queue in &all_queues {
+                            if let Some(task) = other_queue.lock().unwrap().pop_back() {
+                                println!("Worker {} stole task", id);
+                                task();
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if !found {
+                            break; // 所有队列都空了
+                        }
+                    }
+                })
+            })
+            .collect();
+
+        for handle in handles {
+            handle.join().unwrap();
+        }
+    }
+}
+
+fn main() {
+    let pool = WorkStealingPool::new(4);
+
+    // 提交任务到不同的worker
+    for i in 0..20 {
+        pool.submit(i % 2, Box::new(move || {
+            println!("Task {} executing", i);
+            thread::sleep(std::time::Duration::from_millis(100));
+        }));
+    }
+
+    pool.run();
+}
+```
+### 1.3 Rayon 的工作窃取
+
+Rayon 内部使用工作窃取算法：
+
+```rust
+use rayon::prelude::*;
+
+fn main() {
+    let data: Vec<_> = (0..1000).collect();
+
+    // Rayon 自动使用工作窃取
+    let sum: i32 = data.par_iter()
+        .map(|&x| x * x)
+        .sum();
+
+    println!("Sum: {}", sum);
+}
+```
+---
+
+## 2. Actor 模型
+
+### 2.1 原理
+
+Actor 模型中，每个 actor 是独立的计算单元，通过消息传递通信。
+
+```text
+┌───────────────────────────────────────────────────┐
+│               Actor 系统                           │
+├───────────────────────────────────────────────────┤
+│                                                   │
+│  ┌──────────┐  msg1  ┌──────────┐                │
+│  │ Actor A  │ ────► │ Actor B  │                 │
+│  │          │        │          │                 │
+│  │ state    │ ◄──── │ state    │                 │
+│  │ behavior │  msg2  │ behavior │                 │
+│  └──────────┘        └──────────┘                 │
+│       │                    │                       │
+│       │ msg3               │ msg4                  │
+│       ▼                    ▼                       │
+│  ┌──────────┐        ┌──────────┐                │
+│  │ Actor C  │        │ Actor D  │                 │
+│  └──────────┘        └──────────┘                 │
+│                                                   │
+└───────────────────────────────────────────────────┘
+```
+### 2.2 简单实现
+
+```rust
+use std::sync::mpsc::{self, Sender, Receiver};
+use std::thread;
+
+enum Message {
+    Increment(i32),
+    GetValue(Sender<i32>),
+    Stop,
+}
+
+struct CounterActor {
+    receiver: Receiver<Message>,
+    value: i32,
+}
+
+impl CounterActor {
+    fn new(receiver: Receiver<Message>) -> Self {
+        CounterActor {
+            receiver,
+            value: 0,
+        }
+    }
+
+    fn run(&mut self) {
+        loop {
+            match self.receiver.recv() {
+                Ok(Message::Increment(n)) => {
+                    self.value += n;
+                    println!("Counter value: {}", self.value);
+                }
+                Ok(Message::GetValue(reply)) => {
+                    reply.send(self.value).unwrap();
+                }
+                Ok(Message::Stop) => {
+                    println!("Actor stopping");
+                    break;
+                }
+                Err(_) => break,
+            }
+        }
+    }
+}
+
+struct CounterActorHandle {
+    sender: Sender<Message>,
+}
+
+impl CounterActorHandle {
+    fn spawn() -> Self {
+        let (tx, rx) = mpsc::channel();
+
+        thread::spawn(move || {
+            let mut actor = CounterActor::new(rx);
+            actor.run();
+        });
+
+        CounterActorHandle { sender: tx }
+    }
+
+    fn increment(&self, n: i32) {
+        self.sender.send(Message::Increment(n)).unwrap();
+    }
+
+    fn get_value(&self) -> i32 {
+        let (tx, rx) = mpsc::channel();
+        self.sender.send(Message::GetValue(tx)).unwrap();
+        rx.recv().unwrap()
+    }
+
+    fn stop(&self) {
+        self.sender.send(Message::Stop).unwrap();
+    }
+}
+
+fn main() {
+    let actor = CounterActorHandle::spawn();
+
+    actor.increment(5);
+    actor.increment(10);
+
+    println!("Value: {}", actor.get_value());
+
+    actor.stop();
+    thread::sleep(std::time::Duration::from_millis(100));
+}
+```
+### 2.3 使用 Actix
+
+```rust
+// 使用 actix crate
+use actix::prelude::*;
+
+#[derive(Message)]
+#[rtype(result = "i32")]
+struct GetValue;
+
+#[derive(Message)]
+#[rtype(result = "()")]
+struct Increment(i32);
+
+struct Counter {
+    value: i32,
+}
+
+impl Actor for Counter {
+    type Context = Context<Self>;
+}
+
+impl Handler<Increment> for Counter {
+    type Result = ();
+
+    fn handle(&mut self, msg: Increment, _ctx: &mut Context<Self>) {
+        self.value += msg.0;
+    }
+}
+
+impl Handler<GetValue> for Counter {
+    type Result = i32;
+
+    fn handle(&mut self, _msg: GetValue, _ctx: &mut Context<Self>) -> i32 {
+        self.value
+    }
+}
+
+#[actix::main]
+async fn main() {
+    let addr = Counter { value: 0 }.start();
+
+    addr.send(Increment(5)).await.unwrap();
+    addr.send(Increment(10)).await.unwrap();
+
+    let value = addr.send(GetValue).await.unwrap();
+    println!("Value: {}", value);
+}
+```
+---
+
+## 3. Fork-Join 并行
+
+### 3.1 原理
+
+将大任务分解为小任务（Fork），并行执行后合并结果（Join）。
+
+```rust
+use rayon::prelude::*;
+
+fn parallel_sum(data: &[i32]) -> i32 {
+    const THRESHOLD: usize = 1000;
+
+    if data.len() <= THRESHOLD {
+        // Base case: 串行求和
+        data.iter().sum()
+    } else {
+        // Recursive case: Fork-Join
+        let mid = data.len() / 2;
+        let (left, right) = data.split_at(mid);
+
+        let (sum_left, sum_right) = rayon::join(
+            || parallel_sum(left),
+            || parallel_sum(right)
+        );
+
+        sum_left + sum_right
+    }
+}
+
+fn main() {
+    let data: Vec<i32> = (0..10_000_000).collect();
+
+    let start = std::time::Instant::now();
+    let sum = parallel_sum(&data);
+    println!("Sum: {}, Time: {:?}", sum, start.elapsed());
+}
+```
+---
+
+## 4. Map-Reduce 模式
+
+### 4.1 并行 Map-Reduce
+
+```rust
+use rayon::prelude::*;
+use std::collections::HashMap;
+
+fn word_count(documents: &[String]) -> HashMap<String, usize> {
+    documents.par_iter()
+        // Map: 每个文档生成 (word, 1) 对
+        .flat_map(|doc| {
+            doc.split_whitespace()
+                .map(|word| (word.to_lowercase(), 1))
+                .collect::<Vec<_>>()
+        })
+        // Reduce: 合并计数
+        .fold(
+            || HashMap::new(),
+            |mut acc, (word, count)| {
+                *acc.entry(word).or_insert(0) += count;
+                acc
+            }
+        )
+        .reduce(
+            || HashMap::new(),
+            |mut acc, map| {
+                for (word, count) in map {
+                    *acc.entry(word).or_insert(0) += count;
+                }
+                acc
+            }
+        )
+}
+
+fn main() {
+    let documents = vec![
+        "hello world".to_string(),
+        "hello rust".to_string(),
+        "world of rust".to_string(),
+    ];
+
+    let counts = word_count(&documents);
+    println!("{:?}", counts);
+}
+```
+---
+
+## 5. 流水线并行
+
+### 5.1 多阶段流水线
+
+```rust
+use crossbeam::channel;
+use std::thread;
+
+fn pipeline_example() {
+    let (tx1, rx1) = channel::unbounded();
+    let (tx2, rx2) = channel::unbounded();
+    let (tx3, rx3) = channel::unbounded();
+
+    // Stage 1: 生成数据
+    let stage1 = thread::spawn(move || {
+        for i in 0..100 {
+            tx1.send(i).unwrap();
+        }
+    });
+
+    // Stage 2: 处理数据（平方）
+    let stage2 = thread::spawn(move || {
+        for i in rx1 {
+            tx2.send(i * i).unwrap();
+        }
+    });
+
+    // Stage 3: 过滤数据（只保留偶数）
+    let stage3 = thread::spawn(move || {
+        for i in rx2 {
+            if i % 2 == 0 {
+                tx3.send(i).unwrap();
+            }
+        }
+    });
+
+    // 收集结果
+    let collector = thread::spawn(move || {
+        let results: Vec<_> = rx3.iter().collect();
+        results
+    });
+
+    stage1.join().unwrap();
+    stage2.join().unwrap();
+    stage3.join().unwrap();
+
+    let results = collector.join().unwrap();
+    println!("Results: {:?}", &results[..10]);
+}
+
+fn main() {
+    pipeline_example();
+}
+```
+---
+
+## 6. 数据并行 vs 任务并行
+
+### 6.1 数据并行
+
+对相同操作应用于不同数据：
+
+```rust
+use rayon::prelude::*;
+
+fn data_parallelism() {
+    let data: Vec<_> = (0..1000).collect();
+
+    // 数据并行：同一操作应用于所有数据
+    let results: Vec<_> = data.par_iter()
+        .map(|&x| x * x)
+        .collect();
+
+    println!("First 10 results: {:?}", &results[..10]);
+}
+```
+### 6.2 任务并行
+
+不同任务并行执行：
+
+```rust
+use rayon;
+
+fn task_parallelism() {
+    // 任务并行：不同的任务同时执行
+    let (result1, result2, result3) = rayon::join(
+        || expensive_computation_1(),
+        || rayon::join(
+            || expensive_computation_2(),
+            || expensive_computation_3()
+        )
+    );
+
+    println!("Results: {}, {}, {}", result1, result2.0, result2.1);
+}
+
+fn expensive_computation_1() -> i32 {
+    std::thread::sleep(std::time::Duration::from_millis(100));
+    42
+}
+
+fn expensive_computation_2() -> i32 {
+    std::thread::sleep(std::time::Duration::from_millis(100));
+    100
+}
+
+fn expensive_computation_3() -> i32 {
+    std::thread::sleep(std::time::Duration::from_millis(100));
+    200
+}
+
+fn main() {
+    task_parallelism();
+}
+```
+---
+
+## 7. 响应式编程
+
+### 7.1 事件驱动模式
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+use std::time::Duration;
+
+enum Event {
+    UserInput(String),
+    TimerTick,
+    NetworkData(Vec<u8>),
+}
+
+fn event_loop() {
+    let (tx, rx) = mpsc::channel();
+
+    // 用户输入线程
+    let tx_input = tx.clone();
+    thread::spawn(move || {
+        for i in 0..5 {
+            thread::sleep(Duration::from_millis(500));
+            tx_input.send(Event::UserInput(format!("Input {}", i))).unwrap();
+        }
+    });
+
+    // 定时器线程
+    let tx_timer = tx.clone();
+    thread::spawn(move || {
+        for _ in 0..10 {
+            thread::sleep(Duration::from_millis(200));
+            tx_timer.send(Event::TimerTick).unwrap();
+        }
+    });
+
+    // 事件处理循环
+    drop(tx);
+    for event in rx {
+        match event {
+            Event::UserInput(input) => println!("Received input: {}", input),
+            Event::TimerTick => println!("Timer tick"),
+            Event::NetworkData(data) => println!("Network data: {} bytes", data.len()),
+        }
+    }
+}
+
+fn main() {
+    event_loop();
+}
+```
+---
+
+## 8. 实战案例
+
+### 8.1 并行 Web 爬虫
+
+```rust
+use rayon::prelude::*;
+use std::collections::HashSet;
+use std::sync::{Arc, Mutex};
+
+struct WebCrawler {
+    visited: Arc<Mutex<HashSet<String>>>,
+}
+
+impl WebCrawler {
+    fn new() -> Self {
+        WebCrawler {
+            visited: Arc::new(Mutex::new(HashSet::new())),
+        }
+    }
+
+    fn crawl(&self, urls: Vec<String>) -> Vec<String> {
+        urls.par_iter()
+            .flat_map(|url| {
+                // 检查是否已访问
+                {
+                    let mut visited = self.visited.lock().unwrap();
+                    if visited.contains(url) {
+                        return vec![];
+                    }
+                    visited.insert(url.clone());
+                }
+
+                // 模拟爬取页面
+                println!("Crawling: {}", url);
+                std::thread::sleep(std::time::Duration::from_millis(100));
+
+                // 返回发现的新URL
+                vec![
+                    format!("{}/page1", url),
+                    format!("{}/page2", url),
+                ]
+            })
+            .collect()
+    }
+}
+
+fn main() {
+    let crawler = WebCrawler::new();
+    let initial_urls = vec!["http://example.com".to_string()];
+
+    let new_urls = crawler.crawl(initial_urls);
+    println!("Found {} new URLs", new_urls.len());
+}
+```
+---
+
+## 9. 参考资源
+
+### 官方文档
+
+- [Rayon Documentation](https://docs.rs/rayon)
+- [Actix Documentation](https://actix.rs/)
+
+### 推荐阅读
+
+- "The Art of Multiprocessor Programming"
+- "Parallel Programming Patterns"
+
+### 内部文档
+
+- [← 返回 Tier 3：参考文档](../tier_03_references/README.md)
+- [→ 下一篇：NUMA 架构优化](02_NUMA架构优化.md)
+- [↑ 返回主索引](../tier_01_foundations/02_navigation.md)
+
+---
+
+**文档维护**: C05 Threads Team | **最后审核**: 2025-10-22 | **质量评分**: 95/100
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

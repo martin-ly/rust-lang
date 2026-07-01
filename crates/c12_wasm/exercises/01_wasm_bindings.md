@@ -48,7 +48,6 @@ pub fn create_element(tag: &str, text: &str) -> Result<(), JsValue> {
     Ok(())
 }
 ```
-
 **HTML 使用示例**:
 
 ```html
@@ -74,7 +73,6 @@ pub fn create_element(tag: &str, text: &str) -> Result<(), JsValue> {
 </body>
 </html>
 ```
-
 ---
 
 ## 练习 2: Canvas 绘图
@@ -144,7 +142,6 @@ pub fn clear_canvas(canvas_id: &str) -> Result<(), JsValue> {
     Ok(())
 }
 ```
-
 ---
 
 ## 练习 3: 计算器应用
@@ -215,7 +212,6 @@ impl Calculator {
     }
 }
 ```
-
 ---
 
 ## 📚 相关文档

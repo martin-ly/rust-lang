@@ -1,5 +1,8 @@
 # C12 WebAssembly - 文档中心
 
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
+>
 > **创建日期**: 2025-10-30
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -46,7 +49,6 @@ impl Point {
     }
 }
 ```
-
 ---
 
 ## 文档结构导航
@@ -56,7 +58,7 @@ impl Point {
 | 文档 | 描述 | 难度 |
 | :--- | :--- | :--- |
 | [ONE_PAGE_SUMMARY.md](ONE_PAGE_SUMMARY.md) | 一页纸总结 | ⭐⭐ |
-| [代码示例索引.md](代码示例索引.md) | 完整示例索引 | ⭐⭐ |
+| [code_examples_index.md](code_examples_index.md) | 完整示例索引 | ⭐⭐ |
 | [WASM_MIND_MAPS.md](WASM_MIND_MAPS.md) | 思维导图集合 | ⭐⭐ |
 | [WASM_CONCEPT_MATRIX.md](WASM_CONCEPT_MATRIX.md) | 概念对比矩阵 | ⭐⭐⭐ |
 | [WASM_DECISION_TREE.md](WASM_DECISION_TREE.md) | 决策树图 | ⭐⭐⭐ |
@@ -98,7 +100,6 @@ pub fn process_data(data: &[u8]) -> Vec<u8> {
     data.iter().map(|b| b * 2).collect()
 }
 ```
-
 ### 2. wasm-bindgen 集成
 
 ```rust
@@ -123,7 +124,6 @@ pub fn calculate(x: f64) -> f64 {
     x.sin() * x.cos()
 }
 ```
-
 ### 3. WASI 开发
 
 ```rust
@@ -146,7 +146,6 @@ pub fn write_file(path: &str, data: &str) -> Result<(), std::io::Error> {
     Ok(())
 }
 ```
-
 ### 4. 性能优化
 
 ```toml
@@ -157,7 +156,6 @@ lto = true           # 链接时优化
 strip = true         # 去除符号
 panic = "abort"      #  panic 处理
 ```
-
 ```rust
 // 使用 wee_alloc 减少二进制大小
 #[cfg(target_arch = "wasm32")]
@@ -172,7 +170,6 @@ pub fn process_large_data(data: &[u8]) -> Result<(), JsValue> {
     Ok(())
 }
 ```
-
 ---
 
 ## 学习路径指引
@@ -193,7 +190,6 @@ wasm-pack new hello-wasm
 cd hello-wasm
 wasm-pack build
 ```
-
 - 学习 WASM 核心概念
 - 理解线性内存模型
 - 掌握基本数据类型映射
@@ -238,32 +234,32 @@ wasm-pack build
 
 ### Tier 1: 基础层 (2-4小时)
 
-- [项目概览](tier_01_foundations/01_项目概览.md) - WASM 与 Rust 概览
-- [主索引导航](tier_01_foundations/02_主索引导航.md) - 完整文档导航
-- [术语表](tier_01_foundations/03_术语表.md) - WASM 核心术语
-- [常见问题](tier_01_foundations/04_常见问题.md) - FAQ 解答
+- [项目概览](tier_01_foundations/01_project_overview.md) - WASM 与 Rust 概览
+- [主索引导航](tier_01_foundations/02_navigation.md) - 完整文档导航
+- [术语表](tier_01_foundations/03_glossary.md) - WASM 核心术语
+- [常见问题](tier_01_foundations/04_faq.md) - FAQ 解答
 
 ### Tier 2: 实践层 (10-20小时)
 
-- [WASM 基础指南](tier_02_guides/01_wasm_基础指南.md) - 入门与实践
-- [Rust 编译 WASM](tier_02_guides/02_rust_编译_wasm.md) - 编译流程
-- [JavaScript 互操作](tier_02_guides/03_javascript_互操作.md) - wasm-bindgen
-- [性能优化指南](tier_02_guides/04_性能优化指南.md) - 大小与性能优化
+- [WASM 基础指南](tier_02_guides/01_wasm_basics.md) - 入门与实践
+- [Rust 编译 WASM](tier_02_guides/02_compiling_rust_to_wasm.md) - 编译流程
+- [JavaScript 互操作](tier_02_guides/03_javascript_interop.md) - wasm-bindgen
+- [性能优化指南](tier_02_guides/04_performance_optimization_guide.md) - 大小与性能优化
 
 ### Tier 3: 参考层 (按需查阅)
 
-- [API 参考](tier_03_references/01_api_参考.md) - wasm-bindgen API
-- [工具链参考](tier_03_references/02_工具链参考.md) - 工具使用手册
-- [最佳实践](tier_03_references/03_最佳实践.md) - 开发规范
+- [API 参考](tier_03_references/01_api_reference.md) - wasm-bindgen API
+- [工具链参考](tier_03_references/02_toolchain_reference.md) - 工具使用手册
+- [最佳实践](tier_03_references/03_best_practices.md) - 开发规范
 
 ### Tier 4: 高级层 (20-30小时)
 
-- [WASI 深入](tier_04_advanced/01_wasi_深入.md) - WASI 系统接口
-- [性能分析与优化](tier_04_advanced/02_性能分析与优化.md) - 高级优化
-- [生产级部署](tier_04_advanced/03_生产级部署.md) - 部署与监控
-- [容器技术深度集成](tier_04_advanced/06_容器技术深度集成.md) - Docker/K8s
-- [云原生 CI/CD 实践](tier_04_advanced/07_云原生CI_CD实践.md) - GitHub Actions
-- [监控与可观测性实践](tier_04_advanced/08_监控与可观测性实践.md) - Prometheus
+- [WASI 深入](tier_04_advanced/01_wasi_in_depth.md) - WASI 系统接口
+- [性能分析与优化](tier_04_advanced/02_performance_analysis_and_optimization.md) - 高级优化
+- [生产级部署](tier_04_advanced/03_production_deployment.md) - 部署与监控
+- [容器技术深度集成](tier_04_advanced/06_container_technology_integration.md) - Docker/K8s
+- [云原生 CI/CD 实践](tier_04_advanced/07_cloud_native_ci_cd_practice.md) - GitHub Actions
+- [监控与可观测性实践](tier_04_advanced/08_monitoring_and_observability_practice.md) - Prometheus
 
 ---
 
@@ -311,7 +307,6 @@ cargo run --example 06_async_fetch
 cargo run --example 07_design_patterns
 cargo run --example 08_container_microservice
 ```
-
 ### 工具链
 
 | 工具 | 用途 | 链接 |
@@ -345,7 +340,6 @@ wasmedge target/wasm32-wasip1/release/wasi-app.wasm input.txt
 # 3. 运行测试
 cargo test -p c12_wasm
 ```
-
 ---
 
 [返回模块主页](../README.md) | [返回文档中心](../../docs/README.md)

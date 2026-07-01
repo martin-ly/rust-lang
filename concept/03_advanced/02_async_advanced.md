@@ -70,7 +70,6 @@ poll 返回 Poll::Pending ⟹ Waker 已被注册到 Reactor
     ∃ event_source: Reactor 持有 cx.waker() 的克隆
     ∧ 当 event_source 就绪时，Reactor 将调用 Waker::wake()
 ```
-
 > **来源**: [Rust Reference: Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) · [RFC 2394 §4: Waker contract](https://rust-lang.github.io/rfcs/2394-async_await.html) · [Async Book: Waker](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html)
 **活性（Liveness）**：
 
@@ -92,7 +91,6 @@ poll 返回 Poll::Pending ⟹ Waker 已被注册到 Reactor
     - Reactor 无法获取有效 Waker
     - 结果: 永久 Pending
 ```
-
 > **来源**: [Async Book: Waker](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html) · [Tokio Documentation: Task scheduling] · [RFC 2394 §4: Liveness](https://rust-lang.github.io/rfcs/2394-async_await.html)
 
 ```mermaid
@@ -112,7 +110,6 @@ graph TD
     style T1 fill:#6f6
     style T2 fill:#6f6
 ```
-
 > **认知功能**: 活性调试路径图——当 Future 陷入永久 Pending 时，按此决策树定位故障根因。
 > 读者可逐层检查 Waker 注册、Reactor 唤醒调用、poll 返回值合法性三个环节。
 > 关键洞察：`poll → Pending → wake → poll` 的闭环是异步执行器活性（liveness）的根本保证，任一环节断裂即导致活锁或饥饿。
@@ -177,7 +174,6 @@ fn create_waker(task: Arc<Task>) -> Waker {
     unsafe { Waker::from_raw(raw) }
 }
 ```
-
 > **来源**: [Rust Reference: RawWakerVTable](https://doc.rust-lang.org/reference/) · [futures-rs docs: Waker] · [Rust std: std::task::Waker]
 
 **Context 与 Waker 的关系**
@@ -209,7 +205,6 @@ impl Future for TimerFuture {
     }
 }
 ```
-
 > **来源**: [Rust Reference: Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) · [Async Book: Executors](https://rust-lang.github.io/async-book/02_execution/02_future.html) · [futures-rs docs: Timer]
 
 **自定义 Waker：基于 epoll/kqueue/IOCP 的 Reactor**
@@ -247,7 +242,6 @@ impl Reactor {
     }
 }
 ```
-
 > **来源**: [mio docs: Poll] · [Tokio 源码: Reactor] · [Async Book: Executors](https://rust-lang.github.io/async-book/02_execution/02_future.html)
 
 **反例：Waker 被过早释放或遗忘 wake**
@@ -266,7 +260,6 @@ impl Future for BadFuture {
     }
 }
 ```
-
 > **来源**: [Rust Reference: Waker safety](https://doc.rust-lang.org/reference/) · [Async Book: Common mistakes](https://rust-lang.github.io/async-book/)
 
 ```rust,ignore
@@ -285,7 +278,6 @@ impl Future for ForgetWakeFuture {
     }
 }
 ```
-
 > **来源**: [Rust Reference: Future::poll contract](https://doc.rust-lang.org/reference/) · [Async Book: Waker registration](https://rust-lang.github.io/async-book/)
 
 **边界：Waker 的 `wake` vs `wake_by_ref`**
@@ -307,7 +299,6 @@ Waker 四契约:
   4. drop: 释放 Waker 资源
   5. 线程安全: Waker 实现 Send + Sync，可在任意线程 wake
 ```
-
 **`std::task::Wake` trait：高级自定义 Waker**
 
 > **[Rust std 文档]** `std::task::Wake` trait 提供了比 `RawWakerVTable` 更安全的自定义 Waker 路径。实现 `Wake` 后，可通过 `Waker::from(Arc<T>)` 直接构造 `Waker`，无需手动管理 `RawWaker` 和 `RawWakerVTable` 的生命周期（Lifetimes）。✅ 已验证
@@ -337,7 +328,6 @@ fn create_waker(task_id: u64, scheduler: Arc<Scheduler>) -> Waker {
     Waker::from(waker) // 利用 Wake trait 自动构造 Waker
 }
 ```
-
 > **关键差异**: `Wake` trait 隐藏了 `RawWakerVTable` 的 unsafe 细节，但底层仍通过 vtable 实现类型擦除。`Waker::from(Arc<T>)` 在内部自动构建符合 `clone`/`wake`/`wake_by_ref`/`drop` 契约的 vtable。[来源: Rust std: std::task::Wake]
 
 **与 OS 异步（Async） I/O 的唤醒路径**
@@ -385,22 +375,18 @@ impl UringReactor {
     }
 }
 ```
-
 > **[来源: tokio-rs/tokio-uring 设计文档]** io_uring 的 `user_data` 字段天然适合存储 Waker 标识，避免了 epoll 的 fd→Waker HashMap 查找开销。但 io_uring 的共享环设计对线程安全提出更高要求——Waker 的 `wake` 需是线程安全的（`Send + Sync`），因为完成事件可能在任意 CPU 核心上产生。
-
 > **Bloom 层级**: 分析 —— 理解 Waker 与 OS 的交互边界，是手写 Future 和自定义运行时（Runtime）的必要知识。
 
 ---
 
 ### 8.10 `Stream` / `Sink` trait 完整分析
 >
-
 > **章节过渡**：Future 表示单个异步计算，但许多场景需要处理异步序列（如网络数据包流、消息队列）。`Stream` 将异步能力扩展到迭代器（Iterator）领域，`Sink` 则提供异步生产者抽象。理解它们与 `Iterator`、`Future` 的关系，是构建异步管道的关键。
 
 **`Stream`：异步迭代器（Iterator）**
 
 > **[futures-rs 文档]** `Stream` 是异步版的 `Iterator`，其核心方法为 `poll_next`，返回 `Poll<Option<Self::Item>>`。每次 `poll_next` 可能返回 `Pending`，表示下一个元素尚未就绪。✅ 已验证
-
 > **[The Rust Async Book](https://rust-lang.github.io/async-book/)** `Stream` 允许在 `await` 循环中逐个消费异步产生的元素，是 `Iterator` 在异步世界的直接对应物。✅ 已验证
 
 ```rust,ignore
@@ -433,7 +419,6 @@ impl Stream for IntervalStream {
 
 // 使用: while let Some(tick) = stream.next().await { ... }
 ```
-
 > **来源**: [futures-rs docs: Stream] · [Tokio Documentation: StreamExt] · [Rust Async Book: Streams](https://rust-lang.github.io/async-book/05_streams/01_chapter.html)
 
 **`Stream` vs `Iterator` 对比**
@@ -480,7 +465,6 @@ async fn send_all<T, E>(
     Ok(())
 }
 ```
-
 **关系图：Future / Stream / Sink / AsyncRead / AsyncWrite**
 
 ```text
@@ -499,7 +483,6 @@ Future: 单次异步计算 → Poll<T>
   - Sink 与 Stream 可组合: stream.forward(sink) 将 Stream 的所有项发送给 Sink
   - AsyncRead/AsyncWrite 是字节层面的抽象；Stream/Sink 是消息层面的抽象
 ```
-
 > **来源**: [futures-rs docs] · [Tokio Documentation: I/O abstractions] · [RFC 2394 附录: Async I/O 抽象](https://rust-lang.github.io/rfcs/2394-async_await.html)
 
 **反例：Stream 的 `poll_next` 未注册 Waker**
@@ -521,7 +504,6 @@ impl Stream for BadStream {
     }
 }
 ```
-
 **边界：Stream 的 `fuse` 语义**
 
 > **[futures-rs: StreamExt::fuse]** 标准 `Stream` 在返回 `None` 后再次 `poll_next` 的行为未定义（类似 `Iterator` 的 `fuse` 问题）。使用 `StreamExt::fuse()` 可保证返回 `None` 后不再被 poll。✅ 已验证
@@ -534,7 +516,6 @@ if let Some(x) = s.next().await { /* ... */ }
 // 修正: 使用 Fuse 包装
 let mut s = some_stream().fuse();
 ```
-
 **`poll_next` 与 `next` 的对应关系**
 
 > **[futures-rs 文档]** `Stream` 的 `poll_next` 是底层原语，而 `next` 是 `StreamExt` 提供的辅助方法，返回 `Future<Option<Self::Item>>`。`next` 本质上是将 `poll_next` 包装为一个 Future，使其可在 `.await` 中使用。✅ 已验证
@@ -553,7 +534,6 @@ Stream::poll_next 的语义层级:
   - Stream::next().await 是异步挂起的——未就绪时交出控制权
   - Stream::next() 返回的 Future 必须被 .await 后才能消费元素
 ```
-
 **`Sink` 状态机完整分析**
 
 `Sink` 的四个方法构成严格的状态转换协议。错误的状态序列会导致 panic 或数据丢失：
@@ -579,7 +559,6 @@ Sink 状态机:
   3. poll_close 隐含 flush 语义——关闭前必须排空所有数据
   4. 一旦进入 Closed，再次 start_send 是逻辑错误（可能 panic）
 ```
-
 > **来源**: [futures-rs: Sink trait 文档] · [RFC 2394 附录: Async I/O 抽象](https://rust-lang.github.io/rfcs/2394-async_await.html)
 
 ```rust,ignore
@@ -599,7 +578,6 @@ where
     Ok(())
 }
 ```
-
 **`futures::stream` 与 `tokio_stream` 生态对比**
 
 | **维度** | **`futures::stream`** | **`tokio_stream`** |
@@ -647,22 +625,18 @@ async fn pipeline() {
     println!("sum = {}", sum);
 }
 ```
-
 > **[来源: futures-rs: StreamExt API 文档]** `buffer_unordered` 是异步编程的核心组合子——它允许在保持背压的同时最大化并发度。与 `tokio::join!` 不同，`buffer_unordered` 按完成顺序产出结果，而非输入顺序。
-
 > **交叉链接**: `Stream` 的异步惰性求值与 1.3 形式化定义 中 Future 的惰性语义一致；`Sink` 的线性状态机与 [../04_formal/03_ownership_formal.md](../04_formal/03_ownership_formal.md) §5.2 的线性类型资源管理形成对偶。
 
 ---
 
 ### 8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异
 >
-
 > **章节过渡**：定理 T1 声称 async/await 是零成本抽象（Zero-Cost Abstraction），但实践中我们常常看到 `Box::pin` 和 `dyn Future`。理解静态分发与动态分发的边界、栈 pinning 与堆 pinning 的差异，是判断"何时零成本成立"的关键。
 
 **动态分发 vs 静态分发的 async 开销**
 
 > **[Tokio 博客]** `impl Future` 使用静态分发（单态化），编译器内联 `poll` 调用；`dyn Future` 通过虚表（vtable）跳转，引入间接调用开销和指令缓存不友好。✅ 已验证
-
 > **[Rust Reference](https://doc.rust-lang.org/reference/)** `async fn` 默认返回匿名具体类型（`impl Future`），这是零成本的基础；`Pin<Box<dyn Future>>` 是显式 opting-in 到动态分发。✅ 已验证
 
 | 维度 | `impl Future` | `Pin<Box<dyn Future>>` |
@@ -695,7 +669,6 @@ fn main() {
     // 适合局部 Future 的临时 pin
 }
 ```
-
 ```rust,ignore
 // ✅ 正确: 堆 pinning（需跨越作用域或 trait 对象时）
 use std::pin::Pin;
@@ -711,7 +684,6 @@ async fn heap_pinning() {
     spawn_task(Box::pin(f)); // 堆分配 + 类型擦除
 }
 ```
-
 **反例：递归 async fn 导致状态机无限膨胀**
 
 ```rust,compile_fail
@@ -726,7 +698,6 @@ async fn recursive(n: u32) -> u32 {
 
 // 编译错误: recursive async function has infinite size
 ```
-
 > **来源**: [Rust Reference: Recursive async fn](https://doc.rust-lang.org/reference/) · [RFC 2394 §3: State machine size](https://rust-lang.github.io/rfcs/2394-async_await.html) · [Tokio Documentation: Recursion]
 
 ```rust
@@ -744,7 +715,6 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
     })
 }
 ```
-
 **边界：零成本抽象（Zero-Cost Abstraction）的失效条件**
 
 ```text
@@ -755,13 +725,11 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
   4. ✅ 合理状态机大小: 跨 await 存活的局部变量尽量少
   5. ❌ 不满足以上条件 → 性能退化，但语义仍正确
 ```
-
 > **[Tokio 博客: Pinning]** 栈 pinning 是零成本抽象（Zero-Cost Abstraction）的最后一块拼图——在 `pin!` 稳定之前，即使临时 Future 也需要 `Box::pin`，造成不必要的堆分配。✅ 已验证
 
 **编译期优化差异：单态化 vs 虚调用**
 
 > **[Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html)** `impl Future` 通过单态化（monomorphization）为每个具体类型生成专属的 `poll` 函数。编译器可内联 poll 调用、跨过程优化状态机、消除死代码，最终输出与手写状态机等价的机器码。✅ 已验证
-
 > **[The Rust Performance Book](https://nnethercote.github.io/perf-book/)** `dyn Future` 的虚调用阻止了编译器内联。每次 `poll` 需通过 vtable 间接跳转（`call *offset(%rax)`），导致：① 指令缓存不友好（跳转目标不可预测）；② 阻止寄存器分配优化；③ 无法跨过程分析状态机结构。✅ 已验证
 
 ```text
@@ -777,9 +745,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
   2. 去虚拟化失败: 编译器无法推断实际类型，无法内联
   3. 指针别名: Box<dyn Future> 的堆指针阻止某些 LICM（循环不变量外提）优化
 ```
-
 > **来源**: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [without.boats blog: The cost of dynamic dispatch in Rust]
-
 > **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[来源: without.boats blog: "The cost of dynamic dispatch in Rust"; Rust Performance Book: "Dynamic dispatch"]
 
 **何时选择哪种：API 边界 vs 内部实现**
@@ -805,7 +771,6 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
                 ├── 是 → Pin<Box<dyn Future>> 打破递归
                 └── 否 → impl Future（默认最优路径）
 ```
-
 > **交叉链接**: 单态化机制见 [../02_intermediate/02_generics.md](../02_intermediate/02_generics.md) §4.5（泛型（Generics）单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §4.3（trait object 与 vtable）。
 
 ---
@@ -817,7 +782,6 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 **loom 的用途与原理**
 
 > **[loom 文档]** loom 是一个用于测试并发 Rust 代码的模型检测器。它通过控制标准库同步原语的实现，系统地探索所有可能的执行交错，从而在测试中发现数据竞争、死锁和原子性违反。✅ 已验证
-
 > **[Tokio 博客]** Tokio 团队使用 loom 验证其内部并发原语（如 `tokio::sync::Mutex`、`broadcast` channel）的正确性。loom 的测试覆盖度远超随机并发测试。✅ 已验证
 
 ```rust,ignore
@@ -842,7 +806,6 @@ fn test_concurrent_counter() {
     });
 }
 ```
-
 ```rust,ignore
 // ✅ 正确: 使用 loom::sync::Mutex 测试临界区
 use loom::sync::{Arc, Mutex};
@@ -870,7 +833,6 @@ fn test_mutex_concurrent_access() {
     });
 }
 ```
-
 **loom 与 miri 的区别**
 
 | 维度 | `loom` | `miri` |
@@ -905,7 +867,6 @@ fn bad_loom_test() {
     });
 }
 ```
-
 **边界：loom 的并发度限制**
 
 > **[loom 文档]** loom 默认最多探索 3 个线程和有限的内存操作历史。超过此限制需显式配置 `LOOM_MAX_PREEMPTIONS` 或 `LOOM_MAX_BRANCHES`，但状态空间会指数增长。✅ 已验证
@@ -941,7 +902,6 @@ fn controlled_loom_test() {
     });
 }
 ```
-
 > **[loom 文档]** loom 不是性能测试工具——它的 `sync` 类型比 `std::sync` 慢数个数量级，因为需要记录和回溯执行历史。loom 仅用于并发正确性验证。✅ 已验证
 
 **`loom::future` 与异步并发原语测试**
@@ -975,7 +935,6 @@ fn test_async_ready_flag() {
     });
 }
 ```
-
 > **注意**: `loom::future` 的异步支持主要用于测试**同步原语在异步上下文中的使用**（如 `Mutex`、`Atomic` 在 async 块中的交互），而非测试 async/await 本身的调度语义。async 调度语义由执行器（Tokio 等）保证，不在 loom 的验证范围内。[来源: loom docs: loom::future module]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
@@ -1065,9 +1024,7 @@ mod tests {
     }
 }
 ```
-
 > **Bloom 层级**: 应用 —— 使用 loom 验证并发原语是生产级 Rust 并发编程的标准实践。
-
 > **交叉链接**: 内存序模型见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/03_unsafe.md](03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
 
 ### 8.13 Miri 动态验证：async 状态机的内存安全检测
@@ -1087,7 +1044,6 @@ fn main() {
     }
 }
 ```
-
 **Miri 输出**（`-Zmiri-tree-borrows`）：
 
 ```text
@@ -1109,9 +1065,7 @@ help: alloc232 was deallocated here:
 6 |         drop(Box::from_raw(r)); // 释放内存
   |         ^^^^^^^^^^^^^^^^^^^^^^
 ```
-
 > **关键洞察**: Miri 不仅报告 UB，还精确追踪**分配点**和**释放点**，帮助开发者理解指针何时变为悬垂。这对于 async 状态机中的自引用（Reference）结构尤为重要——状态机被 Pin 后若被 unsafe 代码移动，内部自引用指针会变为悬垂，Miri 能精确定位违规的 `move` 操作。
-
 >
 #### 场景 2：无效值检测（非法 bool 构造）
 
@@ -1123,7 +1077,6 @@ fn main() {
     if b { println!("true"); } else { println!("false"); }
 }
 ```
-
 **Miri 输出**（`-Zmiri-tree-borrows`）：
 
 ```text
@@ -1134,7 +1087,6 @@ error: Undefined Behavior: constructing invalid value of type bool:
 4 |     let b: bool = unsafe { std::mem::transmute(x) };
   |                            ^^^^^^^^^^^^^^^^^^^^^^ Undefined Behavior occurred here
 ```
-
 > **关键洞察**: Rust 编译器假设 `bool` 只能是 `0x00` 或 `0x01`，并基于此做分支优化（如将 `if b` 编译为跳转表）。无效 `bool` 值会导致控制流跳转到任意位置。async 状态机的 discriminant（状态标签）同理——若通过 unsafe 构造无效状态标签，恢复执行时会进入不存在的状态分支。
 >
 #### 场景 3：async 状态机中的未初始化内存
@@ -1154,7 +1106,6 @@ fn main() {
     let _ = fut;
 }
 ```
-
 **Miri 输出**（`-Zmiri-tree-borrows`）：
 
 ```text
@@ -1165,9 +1116,7 @@ warning: the type `bool` does not permit being left uninitialized
   |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   |                            this code causes undefined behavior when executed
 ```
-
 > **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体（Struct）。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
-
 >
 #### Miri 与 async 状态机的特殊关联
 
@@ -1186,14 +1135,12 @@ Miri 的局限（与 loom 互补）:
   - ❌ 不检测功能正确性（只检测 UB，不检测逻辑错误）
   - ✅ 检测别名违规、悬垂指针、无效值、未初始化内存、越界访问
 ```
-
 > **来源**: [Miri Book](https://github.com/rust-lang/miri) · [Rust Reference: Undefined behavior](https://doc.rust-lang.org/reference/) · [rustc-dev-guide: Miri and async]
 
 ---
 
 ## 九、知识来源关系（Provenance）
 >
-
 > **章节过渡**：所有论断均有出处。以下表格明确每条核心论断的来源与可信度等级，便于读者追溯与验证。
 
 | **论断** | **来源** | **可信度** |
@@ -1259,7 +1206,6 @@ async fn fixed_select() {
     }
 }
 ```
-
 > **修正**: `tokio::select!`（以及 `futures::select!`）在编译时生成状态机，但只有**一个**分支完成执行。其他分支的绑定变量在 `select!` 之后不可用。试图在 `select!` 块外使用分支变量是编译错误（或未定义行为，取决于宏（Macro）实现）。这类似于 `match` 的变量绑定只在对应臂中有效。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.2 边界测试：`Stream::next()` 与所有权冲突（编译错误）
@@ -1285,7 +1231,6 @@ async fn fixed_stream() {
     }
 }
 ```
-
 > **修正**: `Stream::next()` 获取 `&mut self`，返回的 `Item` 可能与 Stream 的内部状态关联。在 `while let Some(item) = s.next().await` 中，`s` 被可变借用（Mutable Borrow）直到 `item` 释放。不能在循环体内再次调用 `s.next()`。这与迭代器（Iterator）的借用规则一致——`Iterator::next(&mut self)` 要求独占可变访问。[来源: [futures-rs Documentation](https://docs.rs/futures/)]
 
 ### 10.5 边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）
@@ -1317,7 +1262,6 @@ fn main() {
     // std::mem::swap(&mut pinned, &mut Box::pin(SelfRef::new())); // 可能移动!
 }
 ```
-
 > **修正**: `Pin<P<T>>` 只在 `T: !Unpin` 时保证 `T` 不被移动。`SelfRef` 未包含 `std::marker::PhantomPinned`，因此自动实现 `Unpin`——`Pin<&mut SelfRef>` 允许 `get_mut()` 获取 `&mut SelfRef`，进而允许移动。正确做法：`struct SelfRef { data: String, ptr: *const String, _pin: std::marker::PhantomPinned }`，显式标记 `!Unpin`。这与 C++ 的 `std::pin`（C++20，类似概念）或 Swift 的 `inout`（无 Pin 概念）不同——Rust 的 `Unpin` 是自动 trait，`PhantomPinned` 是显式禁用自动实现的方法。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/std/pin/index.html)]
 
 ### 10.3 边界测试：类型不匹配的基础错误
@@ -1328,7 +1272,6 @@ fn main() {
     let x: i32 = "hello";
 }
 ```
-
 > **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
 
 ## 逆向推理链（Backward Reasoning）
@@ -1342,15 +1285,10 @@ fn main() {
 ## 参考来源
 
 > [来源: [Rust Reference — Async Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks)]
-
 > [来源: [RFC 2515 — Pinning](https://rust-lang.github.io/rfcs//2515-type_alias_impl_trait.html)]
-
 > [来源: [Pin API Documentation](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
-
 > [来源: [Futures crate](https://docs.rs/futures/)]
-
 > [来源: [Tokio Internals](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
@@ -1369,9 +1307,7 @@ fn main() {
 > 异步状态机安全 ⟸ Pin 不动性 ⟸ Future::poll
 > 取消安全 ⟸ async drop 设计 ⟸ 结构化并发
 > **过渡**: 掌握 Async/Await 高级主题 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 Async/Await 高级主题 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: Async/Await 高级主题 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
@@ -1447,7 +1383,6 @@ trait HttpClient {
 //     fn fetch(&self, url: &str) -> impl Future<Output = Result<String, Error>> + '_;
 // }
 ```
-
 **为什么不再需要 `#[async_trait]`**：
 
 - 原生实现没有 `Box` 堆分配
@@ -1480,7 +1415,6 @@ impl futures::Stream for Interval {
     }
 }
 ```
-
 - A. `Stream` trait 需要 `#[pin_project]` 或手动 `Pin` 处理
 - B. `self` 参数应为 `&mut self` 而非 `Pin<&mut Self>`
 - C. Stream 已经稳定于标准库，应使用 `std::stream::Stream`
@@ -1524,7 +1458,6 @@ impl Stream for MyInterval {
 // 方案2: 使用 tokio_stream::wrappers::IntervalStream（生产环境推荐）
 // let stream = tokio_stream::wrappers::IntervalStream::new(interval(Duration::from_secs(1)));
 ```
-
 > **关键洞察**: `Pin<&mut Self>` 是 async/await 生态的基石。任何包含 `.await` 点的结构体（Struct）都需要 `Pin` 保证，因为编译器生成的状态机可能自引用。
 </details>
 
@@ -1550,7 +1483,6 @@ async fn compute_hash(data: &str) -> String {
     result
 }
 ```
-
 - A. 没有问题，Tokio 会自动调度 CPU 密集型任务
 - B. `compute_hash` 会阻塞当前线程的 async 任务，应使用 `tokio::spawn_blocking`
 - C. 应该将 `for` 循环替换为 `rayon::join`
@@ -1572,7 +1504,6 @@ async fn bad(data: &str) -> String {
     expensive_cpu_work(data)  // 阻塞！
 }
 ```
-
 **修复方案**：
 
 ```rust
@@ -1592,7 +1523,6 @@ async fn compute_hash(data: &str) -> String {
     .expect("spawn_blocking failed")
 }
 ```
-
 **spawn_blocking 内部机制**：
 
 - Tokio 维护一个独立线程池（默认 512 线程）
@@ -1624,7 +1554,6 @@ async fn traverse_dir(path: &std::path::Path) -> Vec<String> {
     files
 }
 ```
-
 - A. 递归 async fn 需要 `Box::pin`，因为编译器无法确定返回类型大小
 - B. `tokio::fs::read_dir` 不支持嵌套调用
 - C. 应使用 `loop` 替代递归，避免栈溢出
@@ -1645,7 +1574,6 @@ async fn traverse_dir(path: &std::path::Path) -> Vec<String> {
 // 这个子 traverse_dir 也是一个状态机，可能还包含孙子 traverse_dir...
 // 类型大小 = 无限！
 ```
-
 **修复方案 — 使用 `Box::pin`**：
 
 ```rust
@@ -1671,7 +1599,6 @@ fn traverse_dir(path: &Path) -> Pin<Box<dyn Future<Output = Vec<String>> + Send 
     })
 }
 ```
-
 **或者使用 `async_recursion` 宏**（简化版）：
 
 ```rust,ignore
@@ -1683,7 +1610,6 @@ async fn traverse_dir(path: &Path) -> Vec<String> {
     // ...
 }
 ```
-
 > **核心洞察**: `async fn` 的递归 = 返回类型的递归 = 需要 `Box` 消除无限大小。这是 Rust 类型系统（Type System）的根本限制，不是 Tokio 的问题。
 </details>
 

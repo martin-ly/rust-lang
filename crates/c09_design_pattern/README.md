@@ -99,7 +99,6 @@
   - 组合：Facade + Builder + Strategy + Circuit Breaker
   - 完整实现和集成测试
   - 并发安全验证
-
 - ✅ **游戏引擎子系统案例** (`src/pattern_combinations.rs`)
   - 组合：Observer + Command + State
   - 完整实现和集成测试
@@ -107,15 +106,15 @@
 
 ### 📖 Tier 3 文档完善 🎉
 
-- ✅ **新增模式使用快速参考** ([tier*03_references/06*模式使用快速参考.md](docs/tier_03_references/06_模式使用快速参考.md))
+- ✅ **新增模式使用快速参考** ([tier*03_references/06*模式使用快速参考.md](docs/tier_03_references/06_pattern_quick_reference.md))
   - 为每个模式提供：何时使用/避免、复杂度、线程安全性
   - 覆盖所有 GoF 模式、并发模式和 Rust 特有模式
   - 包含 Rust 特性说明和实现要点
 
 ### 📖 Tier 1 文档完善 🎉
 
-- ✅ **新增 Tier 1 术语表** ([tier*01_foundations/03*术语表.md](docs/tier_01_foundations/03_术语表.md)) - 核心术语快速参考
-- ✅ **新增 Tier 1 常见问题** ([tier*01_foundations/04*常见问题.md](docs/tier_01_foundations/04_常见问题.md)) - 新手常见问题解答
+- ✅ **新增 Tier 1 术语表** ([tier*01_foundations/03*术语表.md](docs/tier_01_foundations/03_glossary.md)) - 核心术语快速参考
+- ✅ **新增 Tier 1 常见问题** ([tier*01_foundations/04*常见问题.md](docs/tier_01_foundations/04_faq.md)) - 新手常见问题解答
 - ✅ **完善 Tier 1 基础层** - 4个文档全部完成
 - ✅ **更新文档链接** - 所有交叉引用已更新
 
@@ -138,10 +137,10 @@
 
 **从这里开始学习** ⭐:
 
-- 🎯 [项目概览](docs/tier_01_foundations/01_项目概览.md) - 快速了解设计模式
-- 🗺️ [主索引导航](docs/tier_01_foundations/02_主索引导航.md) - 找到适合你的学习路径
-- 📖 [术语表](docs/tier_01_foundations/03_术语表.md) - 核心术语速查
-- ❓ [常见问题](docs/tier_01_foundations/04_常见问题.md) - 解决常见疑问
+- 🎯 [项目概览](docs/tier_01_foundations/01_project_overview.md) - 快速了解设计模式
+- 🗺️ [主索引导航](docs/tier_01_foundations/02_navigation.md) - 找到适合你的学习路径
+- 📖 [术语表](docs/tier_01_foundations/03_glossary.md) - 核心术语速查
+- ❓ [常见问题](docs/tier_01_foundations/04_faq.md) - 解决常见疑问
 
 **文档层级结构**:
 
@@ -354,7 +353,6 @@ cargo test --all-features
 # 5. 运行性能基准测试
 cargo bench
 ```
-
 ### 阅读建议路径
 
 ```text
@@ -381,7 +379,6 @@ cargo bench
 ├─ 贡献新的模式实现
 └─ 撰写技术博客分享经验
 ```
-
 ---
 
 ## 🛠️ 实践练习
@@ -472,7 +469,6 @@ cargo bench
 
 - **Q: 什么时候使用设计模式？**
 - **A: 当遇到重复出现的设计问题时，使用相应的模式可以提高代码的可维护性和可扩展性。**
-
 - **Q: Rust中的设计模式有什么特点？**
 - **A: Rust中的设计模式需要考虑所有权、生命周期和类型安全，通常使用trait和泛型来实现。**
 
@@ -480,7 +476,6 @@ cargo bench
 
 - **Q: 如何在Rust中实现线程安全的单例？**
 - **A: 可以使用OnceCell、LazyStatic或者std::sync::Once来实现。**
-
 - **Q: 异步模式与同步模式有什么区别？**
 - **A: 异步模式使用Future和async/await，可以处理大量并发连接，而同步模式使用线程和锁。**
 
@@ -488,7 +483,6 @@ cargo bench
 
 - **Q: 设计模式会影响性能吗？**
 - **A: 在Rust中，零成本抽象使得很多设计模式在编译时被优化掉，对运行时性能影响很小。**
-
 - **Q: 如何选择高性能的设计模式？**
 - **A: 优先考虑零成本抽象、编译时多态和所有权转移，避免运行时开销。**
 
@@ -615,7 +609,6 @@ cargo run -p c09_design_pattern --example pipeline_iter_demo
 # 启用 Tokio 门控并运行测试
 cargo test -p c09_design_pattern --features tokio-bench
 ```
-
 ### Benchmark（Criterion）
 
 ```bash
@@ -632,7 +625,6 @@ cargo bench -p c09_design_pattern -- --save-baseline main
 # 与已保存的基线对比
 cargo bench -p c09_design_pattern -- --baseline main
 ```
-
 ### 新增示例与基准索引
 
 - 示例：
@@ -658,7 +650,6 @@ block_on(bus.run_with_strategy(&events, BackpressureStrategy::DropOldest));
 block_on(bus.run_with_strategy(&events, BackpressureStrategy::Batch(2)));
 block_on(bus.run_with_timeout_like(&events, 3));
 ```
-
 - 基准：
   - `benches/async_gats_benches.rs`: 异步事件总线与 GATs 观察者基准
 

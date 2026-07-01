@@ -32,7 +32,6 @@ pub fn greet(name: &str) -> String {
     format!("Hello, {}!", name)
 }
 ```
-
 ---
 
 ## wasm-bindgen
@@ -70,7 +69,6 @@ impl Calculator {
     }
 }
 ```
-
 ---
 
 ## wasm-pack
@@ -86,7 +84,6 @@ wasm-pack build --target web
 wasm-pack build --target bundler
 wasm-pack build --target nodejs
 ```
-
 ---
 
 **维护者**: Rust 学习项目团队

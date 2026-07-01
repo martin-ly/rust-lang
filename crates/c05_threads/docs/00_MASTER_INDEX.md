@@ -178,11 +178,9 @@
 1. 基础文档 (Day 1-2)
    - 01系列 - 线程基础
    - 02系列 - 并发范式
-
 2. 并发模式 (Day 3-4)
    - [03_concurrency_patterns](03_concurrency_patterns.md)
    - [03_synchronization_primitives](03_synchronization_primitives.md)
-
 3. 并发与并行 (Day 5-7)
    - [04_parallelism_and_beyond](04_parallelism_and_beyond.md)
    - [06_parallel_algorithms](06_parallel_algorithms.md)
@@ -192,10 +190,8 @@
 1. 高级编程 (Day 1-3)
    - [04_lock_free_programming](04_lock_free_programming.md)
    - [05_advanced_topics_and_summary](05_advanced_topics_and_summary.md)
-
 2. 性能优化 (Day 4-5)
    - [advanced_concurrency_optimization](advanced_concurrency_optimization.md)
-
 3. 项目实践 (Day 6-7)
    - 学习示例代码
    - 完成实践项目
@@ -208,12 +204,10 @@
    - 研读所有文档
    - 理解底层原理
    - 分析性能特征
-
 2. **高级应用**
    - 无锁数据结构
    - 高性能并发算法
    - 实时系统设计
-
 3. **持续更新**
    - 关注 Rust 版本更新
    - 学习最新并发特性

@@ -39,7 +39,6 @@
   - [7. 事件响应](#7-事件响应)
     - [7.1 漏洞响应流程](#71-漏洞响应流程)
     - [7.2 应急响应检查表](#72-应急响应检查表)
-  - [*供应链安全是现代软件开发的关键组成部分。*](#供应链安全是现代软件开发的关键组成部分)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -442,6 +441,7 @@ jobs:
 ---
 
 *供应链安全是现代软件开发的关键组成部分。*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -470,17 +470,11 @@ jobs:
 ## 权威来源索引
 
 > **[来源: Wikipedia - Supply Chain Security]**
-
 > **[来源: NIST - Software Supply Chain Security]**
-
 > **[来源: SLSA Framework]**
-
 > **[来源: ACM - Software Supply Chain Attacks]**
-
 > **[来源: IEEE - Cybersecurity Standards]**
-
 > **[来源: OWASP - Software Supply Chain Risks]**
-
 > **[来源: ISO 26262 - Functional Safety]**
 > **[来源: IEC 61508 - Safety Standards]**
 > **[来源: MISRA Rust Guidelines]**

@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -54,7 +53,6 @@ fn process<T: Drawable + Clone + Send>(item: &T) {
     drop(copy);
 }
 ```
-
 ## 关联类型 {#关联类型}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -81,7 +79,6 @@ impl Iterator for Counter {
 // 泛型：外部选择类型（Vec<T> 用户可以选 T）
 // 关联类型：实现者选择类型（Iterator::Item 由实现决定）
 ```
-
 ## Trait 对象与动态分发 {#trait-对象与动态分发}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -111,7 +108,6 @@ fn demo() {
     ];
 }
 ```
-
 ## 更多代码示例 {#更多代码示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -160,7 +156,6 @@ where
     }
 }
 ```
-
 ### 高级 Trait 模式 {#高级-trait-模式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -226,7 +221,6 @@ impl Distance for Kilometers {
     fn as_meters(&self) -> u32 { self.0 * 1000 }
 }
 ```
-
 ### Trait 对象与对象安全 {#trait-对象与对象安全}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -277,7 +271,6 @@ fn heterogeneous_collection() {
     }
 }
 ```
-
 ---
 
 ## 相关研究笔记 {#相关研究笔记}
@@ -308,13 +301,9 @@ fn heterogeneous_collection() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
-
 > **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
-
 > **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
-
 > **来源: [ACM - AI Systems](https://dl.acm.org/)**
-
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**

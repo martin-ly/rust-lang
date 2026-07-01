@@ -96,27 +96,22 @@
   - Mermaid 可视化图表
   - 概念属性矩阵
   - 三元组关系表示 (IS_A, HAS_A, USES, IMPLEMENTS...)
-
 - **多层次概念关系**
   - OSI 七层模型映射
   - Rust 类型层次结构
   - 概念依赖有向图 (DAG)
-
 - **协议层次图谱**
   - TCP/IP 协议族知识图
   - 协议特性对比矩阵 (7个维度)
   - 协议演化时间线 (1980s-2024)
-
 - **并发模式知识网络**
   - 并发模型概念图
   - Rust 异步生态系统图谱
   - 完整的异步编程示例代码
-
 - **性能优化知识图**
   - 性能维度知识图谱
   - 优化技术矩阵
   - 零拷贝、连接池、批处理示例
-
 - **安全属性关系图**
   - 安全属性知识图谱 (CIA三要素)
   - 安全威胁与对策矩阵
@@ -137,7 +132,6 @@ pub trait NetworkStream: AsyncRead + AsyncWrite + Unpin + Send {
     fn peer_addr(&self) -> Result<Self::Address, Self::Error>;
 }
 ```
-
 ---
 
 ### 2. 多维矩阵对比分析
@@ -153,27 +147,22 @@ pub trait NetworkStream: AsyncRead + AsyncWrite + Unpin + Send {
   - 传输层协议全面对比 (TCP/UDP/QUIC/SCTP/WebSocket/HTTP/2/3)
   - 应用层协议详细对比 (8个协议)
   - 协议性能对比 (实测数据)
-
 - **并发模型对比**
   - 8种并发模型全面对比
   - 性能基准测试代码
   - 并发模式适用场景分析
-
 - **异步运行时对比**
   - Tokio vs smol vs Glommio vs Monoio
   - 15个维度详细对比
   - 运行时性能基准代码
-
 - **序列化格式对比**
   - 10种格式全面对比
   - 性能测试代码
   - 大小/速度/可读性权衡
-
 - **TLS实现对比**
   - rustls vs native-tls vs openssl vs boring
   - 安全性、性能、生态对比
   - TLS性能基准代码
-
 - **错误处理策略对比**
   - Result/anyhow/thiserror/eyre/snafu
   - 代码示例对比
@@ -209,7 +198,6 @@ pub fn protocol_comparison() -> Vec<ProtocolBenchmark> {
     ]
 }
 ```
-
 #### 对比矩阵表格
 
 | 协议 | 可靠性 | 有序性 | 连接性 | 开销 | 延迟 | 吞吐量 | 适用场景 |
@@ -235,25 +223,21 @@ pub fn protocol_comparison() -> Vec<ProtocolBenchmark> {
   - TCP/IP协议族
   - Socket编程
   - 网络性能指标
-
 - **协议知识层**
   - HTTP协议族 (HTTP/1.0 → HTTP/3)
   - WebSocket协议
   - DNS协议
   - gRPC协议
   - 自定义协议设计
-
 - **并发编程层**
   - Rust异步编程体系
   - 异步运行时
   - 异步I/O
   - 并发原语
   - 并发模式
-
 - **高级特性层**
   - 性能优化技术
   - 安全与加密
-
 - **工程实践层**
   - 测试体系
   - 监控可观测性
@@ -278,7 +262,6 @@ pub fn protocol_comparison() -> Vec<ProtocolBenchmark> {
   Week 11-12: 工程实践
   Week 13-14: 大型项目
 ```
-
 ---
 
 ### 4. Rust 1.90 实战示例大全 Part 1
@@ -294,7 +277,6 @@ pub fn protocol_comparison() -> Vec<ProtocolBenchmark> {
   - async trait 特性详解 (完整示例)
   - async closure 特性详解 (3个实战场景)
   - const 泛型推断 (类型安全的数据包)
-
 - **TCP编程完整示例**
   - 高性能TCP服务器
     - 并发处理
@@ -304,7 +286,6 @@ pub fn protocol_comparison() -> Vec<ProtocolBenchmark> {
     - 重连机制
     - 超时控制
     - 配置灵活
-
 - **UDP编程完整示例**
   - UDP服务器 (回显模式 + 自定义处理)
   - UDP客户端 (超时控制)
@@ -364,7 +345,6 @@ impl TcpEchoServer {
     }
 }
 ```
-
 ---
 
 ### 5. Rust 1.90 实战示例大全 Part 2
@@ -383,13 +363,11 @@ impl TcpEchoServer {
   - 内存缓存
   - 并发请求
   - 流式下载
-
 - **WebSocket完整示例**
   - 自动重连
   - 心跳机制
   - 事件驱动
   - 消息队列
-
 - **DNS解析完整示例**
   - 多种记录类型 (A/AAAA/MX/TXT/PTR)
   - 多DNS服务器支持 (Google/Cloudflare/系统)
@@ -464,7 +442,6 @@ impl WsClient {
     }
 }
 ```
-
 ---
 
 ### 6. 文档索引与导航
@@ -564,7 +541,6 @@ fn process_packet<const N: usize>(data: [u8; N]) -> u32 {
     data.iter().fold(0u32, |acc, &byte| acc.wrapping_add(byte as u32))
 }
 ```
-
 ### 3. 生产级代码示例
 
 所有示例都包含:
@@ -600,12 +576,10 @@ fn process_packet<const N: usize>(data: [u8; N]) -> u32 {
    - 先看: 思维导图 → 知识图谱
    - 再做: 实战示例 Part 1
    - 参考: 多维矩阵
-
 2. **中级开发者**
    - 重点: 实战示例 Part 1 & 2
    - 参考: 多维矩阵对比
    - 深入: 知识图谱理论
-
 3. **架构师**
    - 核心: 多维矩阵对比
    - 理论: 知识图谱
@@ -618,19 +592,16 @@ fn process_packet<const N: usize>(data: [u8; N]) -> u32 {
    ```text
    思维导图 → 知识图谱 → 实战示例 → 多维矩阵
    ```
-
 2. **技术选型决策**
 
    ```text
    多维矩阵 → 知识图谱 → 实战示例验证
    ```
-
 3. **项目实施**
 
    ```text
    实战示例 → 多维矩阵 → 原有详细文档
    ```
-
 ---
 
 ## 🔄 后续计划

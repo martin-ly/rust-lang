@@ -138,7 +138,6 @@ git checkout -b feature/your-feature-name
 # 5. 运行测试确保环境正常
 cargo test --all
 ```
-
 ---
 
 ## 🔄 贡献流程
@@ -166,7 +165,6 @@ cargo test --all
    ↓
 10. 合并 ✅
 ```
-
 ### 详细步骤
 
 #### 1. 创建 Issue (可选但推荐)
@@ -183,19 +181,17 @@ cargo test --all
 - 预期效果
 - 可能的实现方案
 ```
-
 #### 2. 开发您的贡献
 
 **文档修改**:
 
 ```bash
 # 编辑文档
-vim docs/tier_03_references/06_高级所有权模式参考.md
+vim docs/tier_03_references/06_advanced_ownership_patterns_reference.md
 
 # 检查格式
 # (确保使用一致的 Markdown 格式)
 ```
-
 **代码示例**:
 
 ```bash
@@ -208,7 +204,6 @@ cargo run --example your_example
 # 添加测试
 cargo test --example your_example
 ```
-
 #### 3. 提交更改
 
 **提交信息格式**:
@@ -220,7 +215,6 @@ cargo test --example your_example
 
 <footer>
 ```
-
 **Type 类型**:
 
 - `feat`: 新功能
@@ -242,7 +236,6 @@ git commit -m "docs(tier3): 添加 Arc 循环引用示例
 
 Closes #123"
 ```
-
 #### 4. 推送并创建 PR
 
 ```bash
@@ -251,13 +244,11 @@ git push origin feature/your-feature-name
 
 # 在 GitHub 上创建 Pull Request
 ```
-
 **PR 标题格式**:
 
 ```text
 [Tier N] 简短描述 (#issue-number)
 ```
-
 **PR 描述模板**:
 
 ```markdown
@@ -300,7 +291,6 @@ Closes #issue-number
 - [ ] 所有测试通过
 - [ ] 已阅读贡献指南
 ```
-
 ---
 
 ## 📖 文档贡献
@@ -316,7 +306,6 @@ docs/
 ├── tier_03_references/    # 高级实践 (Tier 3)
 └── tier_04_advanced/     # 理论深度 (Tier 4)
 ```
-
 ### 文档标准
 
 #### 必须包含
@@ -331,7 +320,6 @@ docs/
    **最后更新**: 2025-12-11
    **文档类型**: Tier N [类型]
    ```
-
 2. **目录**:
 
    ```markdown
@@ -340,7 +328,6 @@ docs/
    - [章节 1](#章节-1)
    - [章节 2](#章节-2)
    ```
-
 3. **学习目标** (Tier 1-3):
 
    ```markdown
@@ -349,7 +336,6 @@ docs/
    - ✅ 理解...
    - ✅ 掌握...
    ```
-
 4. **前置知识** (Tier 2+):
 
    ```markdown
@@ -358,7 +344,6 @@ docs/
    - ✅ 需要了解...
    - ✅ 推荐先学习...
    ```
-
 5. **相关资源**:
 
    ```markdown
@@ -368,7 +353,6 @@ docs/
 
    - **[文档名](路径.md)**: 简短描述
    ```
-
 #### 代码示例规范
 
 ````rust
@@ -391,7 +375,6 @@ fn ownership_transfer_example() {
     // s1 不再可用
 }
 ````
-
 ```rust
 // ❌ 避免: 缺少注释和说明
 
@@ -401,7 +384,6 @@ fn example() {
     println!("{}", s2);
 }
 ```
-
 #### Markdown 格式
 
 - **标题**: 使用 `#` 层级标题，不超过 4 级
@@ -437,7 +419,6 @@ cargo fmt --all
 # 运行 Clippy 检查
 cargo clippy --all -- -D warnings
 ```
-
 #### 命名规范
 
 - **变量/函数**: `snake_case`
@@ -473,7 +454,6 @@ pub fn function_name(param1: Type1, param2: Type2) -> ReturnType {
     // 实现
 }
 ````
-
 ### 测试要求
 
 #### 单元测试
@@ -496,7 +476,6 @@ mod tests {
     }
 }
 ```
-
 #### 集成测试
 
 ```rust
@@ -507,7 +486,6 @@ fn test_complete_workflow() {
     // 完整流程测试
 }
 ```
-
 #### 测试覆盖
 
 ```bash
@@ -520,7 +498,6 @@ cargo test test_name
 # 生成覆盖率报告 (需要 tarpaulin)
 cargo tarpaulin --out Html
 ```
-
 ### 性能考虑
 
 - 提供性能基准测试 (使用 Criterion.rs)
@@ -559,17 +536,14 @@ cargo tarpaulin --out Html
    - 技术内容准确无误
    - 符合 Rust 最佳实践
    - 引用权威来源
-
 2. **代码质量** ⭐⭐⭐⭐
    - 遵循 Rust 风格指南
    - 有充分的测试覆盖
    - 通过所有检查
-
 3. **文档质量** ⭐⭐⭐⭐
    - 语言清晰准确
    - 格式统一规范
    - 结构逻辑清晰
-
 4. **用户价值** ⭐⭐⭐⭐
    - 解决实际问题
    - 提供学习价值
@@ -622,7 +596,6 @@ git push origin feature/your-feature-name
 
 # 3. 在 PR 中回复审查者
 ```
-
 ---
 
 ## 🌟 社区规范

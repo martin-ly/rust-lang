@@ -1,35 +1,22 @@
 # 组合软件工程有效性定理与证明 {#组合软件工程有效性定理与证明}
 
 > **概念族**: 软件设计 / 组合工程
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-12
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
-
 > **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/` 迁回，正在按 [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、[Tower Layer/Service Docs](https://docs.rs/tower/latest/tower/trait.Layer.html)、[Rust Design Patterns](https://rust-unofficial.github.io/patterns/) 等权威来源升级。
-
 >
-
 > **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Tower Docs](https://docs.rs/tower/latest/tower/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📑 目录 {#目录}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [组合软件工程有效性定理与证明 {#组合软件工程有效性定理与证明}](#组合软件工程有效性定理与证明-组合软件工程有效性定理与证明)
@@ -60,11 +47,8 @@
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 > **创建日期**: 2026-02-12
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
 
 ---
@@ -72,7 +56,6 @@
 ## 公理与定义 {#公理与定义}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def 1.1（模块组合）**:
@@ -80,9 +63,7 @@
 设 $M_1, \ldots, M_n$ 为模块。组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足：
 
 - 各模块通过 `pub` 接口暴露，依赖通过 `use` 或 `mod` 建立
-
 - 无循环依赖：$\mathrm{dep}(M_i)$ 的传递闭包不包含 $M_i$
-
 - 类型环境：$\Gamma_C = \bigcup_i \Gamma_{M_i}$ 且无冲突
 
 **Axiom CE0**：组合不引入新的全局可变状态；或新状态通过 `const`/`static` 正确初始化。
@@ -92,15 +73,12 @@
 ## 定理陈述与证明 {#定理陈述与证明}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 定理 CE-T1（组合保持内存安全） {#定理-ce-t1组合保持内存安全}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **陈述**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/10_ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
@@ -108,15 +86,10 @@
 **证明思路**：
 
 1. **归纳基**：单模块 $M_1$ 由前提满足 T2、T3。
-
 2. **归纳步**：设 $C' = M_1 \oplus \cdots \oplus M_{n-1}$ 满足内存安全。添加 $M_n$ 时：
-
    - 模块边界：值通过函数参数/返回值传递，或通过 `pub` 结构体字段；所有权转移符合 T2。
-
    - 调用链：$M_n$ 调用 $C'$ 或反向；参数为值或引用，不违反借用规则。
-
    - 无新分配模式：$M_n$ 的 `Box`/`Vec` 等由所有权管理；释放由 RAII 保证。
-
 3. **结论**：组合不引入悬垂、双重释放、泄漏；由 T2、T3 的归纳结构。
 
 ---
@@ -124,9 +97,7 @@
 ### 定理 CE-T2（组合保持数据竞争自由） {#定理-ce-t2组合保持数据竞争自由}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **陈述**：若各模块满足 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) 定理 T1（数据竞争自由），且跨线程传递仅 Send 类型、共享仅 Sync 类型，则组合保持数据竞争自由。
@@ -134,11 +105,8 @@
 **证明思路**：
 
 1. **Send/Sync 结构性质**：若 $T$ 的所有字段为 Send，则 $T$ 为 Send；Sync 同理。组合不改变字段类型。
-
 2. **跨模块边界**：`pub fn` 的签名若包含 `T: Send` 约束，则调用者保证传入 Send；组合后约束仍成立。
-
 3. **borrow T1**：各模块内无数据竞争；跨模块调用在同一线程内为顺序，无交错；跨线程仅通过 Send 类型，无共享可变。
-
 4. **结论**：组合保持数据竞争自由。
 
 ---
@@ -146,9 +114,7 @@
 ### 定理 CE-T3（组合保持类型安全） {#定理-ce-t3组合保持类型安全}
 
 > **来源: [ACM](https://dl.acm.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **陈述**：若各模块良型，且 [type_system_foundations](../../type_theory/10_type_system_foundations.md) 进展性 T1、保持性 T2、类型安全 T3 成立，则组合程序良型且类型安全。
@@ -156,11 +122,8 @@
 **证明思路**：
 
 1. **模块良型**：各 $M_i$ 通过 `cargo check`；类型检查在模块边界通过 `pub` 接口进行。
-
 2. **类型环境合并**：$\Gamma_C$ 为各模块导出类型与调用的并；无冲突因 `mod` 路径隔离。
-
 3. **保持性**：跨模块调用时，实参类型与形参一致；返回值类型与调用处期望一致。由 type_system T2。
-
 4. **结论**：组合后良型；由 T3 类型安全。
 
 ---
@@ -168,7 +131,6 @@
 ## 引理与推论 {#引理与推论}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **引理 CE-L1（模块无环）**：若 $C = M_1 \oplus \cdots \oplus M_n$ 满足 Def 1.1，则依赖图 $G$ 为 DAG；$M_i \prec^* M_j \land M_j \prec^* M_i \Rightarrow \bot$。
@@ -184,19 +146,13 @@
 ### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 内容 | 本页对应 |
-
 | :--- | :--- | :--- |
-
 | **概念定义层** | Def 1.1（模块组合）、Axiom CE0（无新全局可变） | §公理与定义 |
-
 | **属性关系层** | Def 1.1 → CE-T1/T2/T3 → CE-L1 → CE-C1/C2 → CE-PAT1；依赖 ownership T2/T3、borrow T1、type T1–T3 | §定理陈述、§引理与推论 |
-
 | **解释论证层** | CE-T1/T2/T3 证明思路、CE-PAT1 完整证明；反例：CE-C2 | 各定理节 |
 
 ---
@@ -204,7 +160,6 @@
 ## 定理 CE-PAT1（模式组合 CE 保持） {#定理-ce-pat1模式组合-ce-保持}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **陈述**：设模式 $A$、$B$ 各自满足 CE-T1、CE-T2、CE-T3（作为独立模块）。若组合 $A \circ B$ 的接口满足 [03_integration_theory](03_integration_theory.md) IT-T1（跨模块所有权保持）、IT-T2（Send/Sync 传递）、IT-L1（生命周期约束），则 $A \circ B$ 保持 CE-T1、CE-T2、CE-T3。
@@ -212,9 +167,7 @@
 **证明**：
 
 1. **CE-T1**：$A$、$B$ 各自内存安全；组合时值/引用经 `pub fn` 边界传递，所有权转移符合 IT-T1；无新分配泄漏、无悬垂。由 ownership T2、T3。
-
 2. **CE-T2**：$A$、$B$ 各自无数据竞争；跨模块调用顺序执行；跨线程仅 Send 类型，由 IT-T2。由 borrow T1、Send/Sync 结构性质。
-
 3. **CE-T3**：$A$、$B$ 各自良型；跨模块实参/形参一致，由 IT-L1 与 type_system 保持性。∎
 
 **推论 CE-PAT-C1**：Builder∘Factory、Decorator∘Strategy、Observer∘Command、Composite∘Visitor、Repository∘Service∘DTO 等组合，若满足 IT-T1/IT-T2/IT-L1，则保持 CE-T1–T3。
@@ -222,13 +175,9 @@
 **组合推导示例（Builder + Factory）**：
 
 - 接口：`Factory::create(&self) -> Builder`；`Builder::build(self) -> T`
-
 - IT-T1：`create` 返回 Builder 所有权转移；`build` 消费 Builder 返回 T，所有权链完整
-
 - IT-T2：若跨线程，Builder、T 需 `Send`；单线程则无约束
-
 - IT-L1：无跨模块引用返回，不涉及
-
 - **结论**：Builder∘Factory 保持 CE-T1–T3。∎
 
 ---
@@ -236,11 +185,9 @@
 ## 代码示例：模块组合 {#代码示例模块组合}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
-
 // crate::module_a
 
 pub struct A { pub x: i32 }
@@ -252,7 +199,6 @@ impl A {
     pub fn get(&self) -> i32 { self.x }
 
 }
-
 
 
 // crate::module_b
@@ -268,7 +214,6 @@ impl B {
 }
 
 
-
 // 组合：main 使用 A 和 B
 
 fn main() {
@@ -280,9 +225,7 @@ fn main() {
     assert_eq!(b.run(), 42);
 
 }
-
 ```
-
 **形式化对应**：`A`、`B` 为模块；`main` 组合两者。所有权：`a` 移入 `B::new`，符合 T2；无悬垂、无泄漏。
 
 ---
@@ -290,17 +233,12 @@ fn main() {
 ## 定理应用示例 {#定理应用示例}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 定理 | 应用场景 |
-
 | :--- | :--- |
-
 | CE-T1 | 多 crate 项目：各 crate 内 Safe，组合后仍内存安全 |
-
 | CE-T2 | 跨线程：只有 `Send` 类型跨线程传递，`Sync` 类型共享 |
-
 | CE-T3 | 泛型模块：`fn f<T: Trait>(x: T)` 组合时类型检查在边界完成 |
 
 ---
@@ -312,9 +250,7 @@ fn main() {
 **定理 CE-MW-T1（Layer 组合保持）**：设 $L_1, \ldots, L_n$ 为 Tower `Layer`，各自对任意 `Service` $S$ 满足：
 
 1. $L_i(S)$ 保持 $S$ 的 `Service` 类型约束；
-
 2. $L_i(S)$ 不引入跨请求共享可变状态；
-
 3. $L_i(S)$ 的错误类型可转换为外层错误类型。
 
 则 $L_n \circ \cdots \circ L_1(S)$ 保持 CE-T1、CE-T2、CE-T3。
@@ -322,9 +258,7 @@ fn main() {
 *证明*：
 
 1. **CE-T1**：每个 `Layer` 不改变请求/响应的所有权传递；内部状态由 `self` 持有，符合 ownership T2/T3。
-
 2. **CE-T2**：`Service::call` 通常以 `&mut self` 调用；若跨任务共享则通过 `Clone` 或 `Arc<Mutex>`，受 Send/Sync 约束。
-
 3. **CE-T3**：`Layer` 组合在编译期单态化；类型环境合并无冲突。∎
 
 **应用**：Timeout、RateLimit、Retry、Buffer、ConcurrencyLimit 等 Tower 中间件可任意堆叠而不破坏组合安全性。
@@ -334,17 +268,12 @@ fn main() {
 ## 验证方法 {#验证方法}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 定理 | 验证手段 |
-
 | :--- | :--- |
-
 | CE-T1 | `cargo build` 无 unsafe 泄漏；`Valgrind`/`MIRI` 无内存错误 |
-
 | CE-T2 | `cargo clippy` 检查 Send/Sync；无 `Rc` 跨线程 |
-
 | CE-T3 | `cargo check` 通过；类型在 `pub` 边界一致 |
 
 组合后运行测试套件；新增模块需补足单元测试。
@@ -354,7 +283,6 @@ fn main() {
 ## 组合有效性验证工作流（实质指南） {#组合有效性验证工作流实质指南}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 新增模块纳入组合时的检查清单 {#新增模块纳入组合时的检查清单}
@@ -362,19 +290,12 @@ fn main() {
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 步骤 | 动作 | 验证 CE-T1/T2/T3 |
-
 | :--- | :--- | :--- |
-
 | 1 | 确认 `pub` 接口无 `unsafe` 泄漏 | CE-T1 |
-
 | 2 | 跨线程类型检查 `Send`/`Sync` | CE-T2 |
-
 | 3 | `cargo check` 通过 | CE-T3 |
-
 | 4 | `cargo clippy` 无 Rc 跨线程、无双重借用 | CE-T2 |
-
 | 5 | 可选：`MIRI` 检测未定义行为 | CE-T1 |
-
 | 6 | 依赖图无环：`cargo tree` 检查 | Def 1.3 |
 
 ### 组合反例详解（何时定理不成立） {#组合反例详解何时定理不成立}
@@ -382,17 +303,11 @@ fn main() {
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 反例 | 违反定理 | 形式化说明 |
-
 | :--- | :--- | :--- |
-
 | `pub fn leak_raw(p: *mut T)` | CE-T1 | 泄漏裸指针违反 ownership 唯一性 |
-
 | `pub fn spawn_rc(rc: Rc<T>)` | CE-T2 | Rc 非 Send，跨线程传递导致编译错误 |
-
 | `pub fn bad_return<T>() -> T` | CE-T3 | 返回类型未约束，调用处类型推断失败 |
-
 | `mod a { use super::b; } mod b { use super::a; }` | 引理 CE-L1 | 循环依赖，编译失败 |
-
 | 泛型约束不一致 | CE-T3 | `impl<T: Trait> Service for T` 与 `Service<U>` 边界冲突 |
 
 ### 完整应用链示例：三层架构 {#完整应用链示例三层架构}
@@ -402,13 +317,11 @@ fn main() {
 **场景**：Web API 订单处理（表示层 + 业务层 + 数据层）。
 
 ```rust,ignore
-
 // 层 1：DTO（跨边界）
 
 #[derive(serde::Serialize, serde::Deserialize)]
 
 pub struct PlaceOrderDto { pub items: Vec<ItemDto> }
-
 
 
 // 层 2：Domain + Service（业务逻辑）
@@ -422,13 +335,11 @@ impl Order {
 }
 
 
-
 pub trait OrderRepository {
 
     fn save(&mut self, o: &Order) -> Result<(), String>;
 
 }
-
 
 
 pub struct OrderService<R: OrderRepository> { repo: R }
@@ -448,7 +359,6 @@ impl<R: OrderRepository> OrderService<R> {
 }
 
 
-
 // 层 3：Controller（表示层，组合 Service）
 
 pub struct OrderController<S: OrderServiceTrait> { service: S }
@@ -462,9 +372,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
     }
 
 }
-
 ```
-
 **CE-T1/T2/T3 验证**：各层 Safe；所有权沿 DTO→Order→Repository 传递；无共享可变；`cargo check` 通过即 CE-T3。
 
 ---
@@ -472,7 +380,6 @@ impl<S: OrderServiceTrait> OrderController<S> {
 ## 与 PROOF_INDEX 衔接 {#与-proof_index-衔接}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本部分定理纳入 [PROOF_INDEX](../../10_proof_index.md)，按「组合软件工程」领域分类。
@@ -482,11 +389,8 @@ impl<S: OrderServiceTrait> OrderController<S> {
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -498,15 +402,10 @@ impl<S: OrderServiceTrait> OrderController<S> {
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -514,15 +413,12 @@ impl<S: OrderServiceTrait> OrderController<S> {
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -534,9 +430,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -552,11 +446,9 @@ impl<S: OrderServiceTrait> OrderController<S> {
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [04_compositional_engineering 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -564,17 +456,11 @@ impl<S: OrderServiceTrait> OrderController<S> {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
-
 > **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ---

@@ -1,0 +1,1840 @@
+# Tier 2: 跨平台实践
+
+> **文档类型**: 实践指南
+> **难度**: ⭐⭐⭐ 中级
+> **预计时间**: 2小时
+> **适用版本**: Rust 1.92.0+
+
+---
+
+## 目录
+
+- [Tier 2: 跨平台实践](#tier-2-跨平台实践)
+  - [目录](#目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+  - [学习目标](#学习目标)
+  - [1. 平台差异](#1-平台差异)
+    - [1.1 核心系统差异](#11-核心系统差异)
+    - [1.2 进程创建差异](#12-进程创建差异)
+    - [1.3 信号与进程终止](#13-信号与进程终止)
+    - [1.4 进程组管理](#14-进程组管理)
+    - [1.5 文件系统路径](#15-文件系统路径)
+    - [1.6 环境变量](#16-环境变量)
+    - [1.7 性能差异](#17-性能差异)
+  - [2. 跨平台命令](#2-跨平台命令)
+    - [2.1 Shell命令抽象](#21-shell命令抽象)
+    - [2.2 跨平台Shell封装](#22-跨平台shell封装)
+    - [2.3 通用命令映射](#23-通用命令映射)
+    - [2.4 文件操作抽象](#24-文件操作抽象)
+    - [2.5 网络命令抽象](#25-网络命令抽象)
+    - [2.6 系统信息命令](#26-系统信息命令)
+  - [3. 平台特定功能](#3-平台特定功能)
+    - [3.1 Unix特定功能](#31-unix特定功能)
+    - [3.2 Windows特定功能](#32-windows特定功能)
+    - [3.3 macOS特定功能](#33-macos特定功能)
+    - [3.4 统一抽象层](#34-统一抽象层)
+  - [4. 最佳实践](#4-最佳实践)
+    - [4.1 设计原则](#41-设计原则)
+    - [4.2 抽象命令执行器](#42-抽象命令执行器)
+    - [4.3 跨平台配置管理](#43-跨平台配置管理)
+    - [4.4 测试策略](#44-测试策略)
+    - [4.5 常见陷阱与解决方案](#45-常见陷阱与解决方案)
+    - [4.6 性能优化建议](#46-性能优化建议)
+    - [4.7 调试技巧](#47-调试技巧)
+  - [5. 实战案例](#5-实战案例)
+    - [案例1: 跨平台进程监控](#案例1-跨平台进程监控)
+    - [案例2: 跨平台自动更新](#案例2-跨平台自动更新)
+  - [6. 总结](#6-总结)
+  - [**适用版本**: Rust 1.92.0+](#适用版本-rust-1920)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**跨平台实践 (Cross-Platform Practice)**:
+
+- **定义**: 编写可在多个平台上运行的代码的技术和实践
+- **类型**: 编程实践
+- **范畴**: 系统编程、跨平台开发
+- **版本**: Rust 1.0+
+- **相关概念**: 条件编译、平台抽象、平台特定功能
+
+### 属性特征
+
+**核心属性**:
+
+- **平台抽象**: 统一不同平台的API
+- **条件编译**: 使用 `#[cfg]` 进行平台特定编译
+- **兼容性**: 处理平台差异
+- **可移植性**: 代码可在多平台运行
+
+**性能特征**:
+
+- **抽象开销**: 平台抽象可能有少量开销
+- **适用场景**: 跨平台应用、系统工具、库开发
+
+### 关系连接
+
+**组合关系**:
+
+- 跨平台应用 --[uses]--> 跨平台实践
+- 平台抽象 --[uses]--> 条件编译
+
+**依赖关系**:
+
+- 跨平台实践 --[depends-on]--> 平台支持
+- 跨平台代码 --[depends-on]--> 条件编译
+
+### 思维导图
+
+```text
+跨平台实践
+│
+├── 平台差异
+│   ├── Windows
+│   ├── Unix/Linux
+│   └── macOS
+├── 跨平台命令
+│   ├── Shell命令抽象
+│   └── 通用命令映射
+├── 平台特定功能
+│   ├── Unix特定
+│   └── Windows特定
+└── 最佳实践
+    ├── 设计原则
+    └── 测试策略
+```
+---
+
+## 学习目标
+
+- ✅ 理解Windows和Unix的差异
+- ✅ 编写跨平台代码
+- ✅ 使用条件编译
+- ✅ 处理平台特定功能
+
+---
+
+## 1. 平台差异
+
+### 1.1 核心系统差异
+
+**核心差异对照表**:
+
+| 特性       | Unix/Linux             | Windows                  | 兼容性           |
+| :--- | :--- | :--- | :--- || 进程创建   | fork+exec              | CreateProcess            | 不同 API         |
+| 信号系统   | SIGTERM, SIGKILL, etc. | GenerateConsoleCtrlEvent | 部分兼容         |
+| 进程组     | 进程组ID (PGID)        | 作业对象 (Job Objects)   | 不同机制         |
+| 路径分隔符 | `/`                    | `\`                      | PathBuf 自动处理 |
+| Shell      | sh, bash, zsh          | cmd, powershell          | 需要抽象层       |
+| 文件权限   | chmod, umask           | ACL                      | 完全不同         |
+| 环境变量   | $VAR                   | %VAR%                    | 可用但语法不同   |
+| 行结束符   | LF (`\n`)              | CRLF (`\r\n`)            | 需要注意         |
+| 进程树终止 | kill -TERM -PGID       | TerminateJobObject       | 需要平台特定代码 |
+| 守护进程   | daemon()               | Windows Service          | 完全不同         |
+
+---
+
+### 1.2 进程创建差异
+
+**Unix: fork+exec模型**:
+
+```rust
+#[cfg(unix)]
+use std::os::unix::process::CommandExt;
+
+#[cfg(unix)]
+fn unix_process_creation() {
+    Command::new("ls")
+        .arg("-la")
+        // Unix特定选项
+        .uid(1000)  // 设置用户ID
+        .gid(1000)  // 设置组ID
+        .process_group(0)  // 新进程组
+        .spawn()
+        .expect("Failed to spawn");
+}
+```
+**Windows: CreateProcess**:
+
+```rust
+#[cfg(windows)]
+use std::os::windows::process::CommandExt;
+
+#[cfg(windows)]
+fn windows_process_creation() {
+    const CREATE_NO_WINDOW: u32 = 0x08000000;
+    const CREATE_NEW_PROCESS_GROUP: u32 = 0x00000200;
+
+    Command::new("cmd")
+        .args(["/C", "dir"])
+        // Windows特定选项
+        .creation_flags(CREATE_NO_WINDOW | CREATE_NEW_PROCESS_GROUP)
+        .spawn()
+        .expect("Failed to spawn");
+}
+```
+---
+
+### 1.3 信号与进程终止
+
+**Unix信号**:
+
+```rust
+#[cfg(unix)]
+use nix::sys::signal::{Signal, kill};
+#[cfg(unix)]
+use nix::unistd::Pid;
+
+#[cfg(unix)]
+fn send_signal_unix(pid: u32, signal: Signal) -> Result<(), Box<dyn std::error::Error>> {
+    let pid = Pid::from_raw(pid as i32);
+    kill(pid, signal)?;
+    Ok(())
+}
+
+#[cfg(unix)]
+fn graceful_shutdown_unix(pid: u32) -> Result<(), Box<dyn std::error::Error>> {
+    let pid = Pid::from_raw(pid as i32);
+
+    // 先发送 SIGTERM
+    kill(pid, Signal::SIGTERM)?;
+
+    // 等待一段时间
+    std::thread::sleep(Duration::from_secs(5));
+
+    // 检查是否还活着
+    match kill(pid, Signal::Signal(0)) {  // signal 0 只检查，不发送
+        Ok(_) => {
+            // 进程还活着，发送 SIGKILL
+            println!("⚠️  Process didn't respond to SIGTERM, sending SIGKILL");
+            kill(pid, Signal::SIGKILL)?;
+        }
+        Err(_) => {
+            println!("✅ Process terminated gracefully");
+        }
+    }
+
+    Ok(())
+}
+```
+**Windows进程终止**:
+
+```rust
+#[cfg(windows)]
+use winapi::um::wincon::GenerateConsoleCtrlEvent;
+#[cfg(windows)]
+use winapi::um::processthreadsapi::TerminateProcess;
+
+#[cfg(windows)]
+fn terminate_windows(child: &mut std::process::Child) -> std::io::Result<()> {
+    // Windows上只能强制终止
+    child.kill()
+}
+
+#[cfg(windows)]
+fn send_ctrl_c_windows(pid: u32) -> Result<(), Box<dyn std::error::Error>> {
+    unsafe {
+        // 尝试发送Ctrl+C
+        if GenerateConsoleCtrlEvent(0, pid) == 0 {
+            return Err("Failed to send Ctrl+C".into());
+        }
+    }
+    Ok(())
+}
+```
+---
+
+### 1.4 进程组管理
+
+**Unix进程组**:
+
+```rust
+#[cfg(unix)]
+use std::os::unix::process::CommandExt;
+
+#[cfg(unix)]
+fn create_process_group() -> Result<std::process::Child, std::io::Error> {
+    Command::new("sh")
+        .arg("-c")
+        .arg("sleep 100 & sleep 100 &")
+        .process_group(0)  // 创建新进程组
+        .spawn()
+}
+
+#[cfg(unix)]
+fn kill_process_group(pgid: i32) -> Result<(), Box<dyn std::error::Error>> {
+    use nix::sys::signal::{killpg, Signal};
+    use nix::unistd::Pid;
+
+    // 终止整个进程组
+    killpg(Pid::from_raw(pgid), Signal::SIGTERM)?;
+    Ok(())
+}
+```
+**Windows作业对象**:
+
+```rust
+#[cfg(windows)]
+use winapi::um::jobapi2::*;
+#[cfg(windows)]
+use winapi::um::handleapi::CloseHandle;
+#[cfg(windows)]
+use std::ptr;
+
+#[cfg(windows)]
+struct JobObject {
+    handle: *mut winapi::ctypes::c_void,
+}
+
+#[cfg(windows)]
+impl JobObject {
+    fn create() -> Result<Self, Box<dyn std::error::Error>> {
+        unsafe {
+            let handle = CreateJobObjectW(ptr::null_mut(), ptr::null());
+            if handle.is_null() {
+                return Err("Failed to create job object".into());
+            }
+            Ok(Self { handle })
+        }
+    }
+
+    fn assign_process(&self, child: &std::process::Child) -> Result<(), Box<dyn std::error::Error>> {
+        unsafe {
+            use std::os::windows::io::AsRawHandle;
+            use winapi::um::jobapi2::AssignProcessToJobObject;
+
+            let process_handle = child.as_raw_handle();
+            if AssignProcessToJobObject(self.handle, process_handle) == 0 {
+                return Err("Failed to assign process to job".into());
+            }
+        }
+        Ok(())
+    }
+
+    fn terminate_all(&self) -> Result<(), Box<dyn std::error::Error>> {
+        unsafe {
+            if TerminateJobObject(self.handle, 1) == 0 {
+                return Err("Failed to terminate job".into());
+            }
+        }
+        Ok(())
+    }
+}
+
+#[cfg(windows)]
+impl Drop for JobObject {
+    fn drop(&mut self) {
+        unsafe {
+            CloseHandle(self.handle);
+        }
+    }
+}
+```
+---
+
+### 1.5 文件系统路径
+
+**跨平台路径处理**:
+
+```rust
+use std::path::{Path, PathBuf};
+
+fn get_home_dir() -> PathBuf {
+    if cfg!(windows) {
+        PathBuf::from(std::env::var("USERPROFILE").unwrap_or_else(|_| "C:\\Users\\Default".to_string()))
+    } else {
+        PathBuf::from(std::env::var("HOME").unwrap_or_else(|_| "/home/user".to_string()))
+    }
+}
+
+fn get_temp_dir() -> PathBuf {
+    std::env::temp_dir()  // 跨平台！
+}
+
+fn normalize_path(path: &str) -> PathBuf {
+    // 自动处理 / 和 \
+    PathBuf::from(path)
+}
+
+// 构建路径
+fn build_config_path() -> PathBuf {
+    let mut path = get_home_dir();
+    path.push(".myapp");
+    path.push("config.toml");
+    path  // 自动使用正确的分隔符
+}
+```
+---
+
+### 1.6 环境变量
+
+**跨平台环境变量处理**:
+
+```rust
+use std::env;
+
+fn get_path_separator() -> char {
+    if cfg!(windows) {
+        ';'
+    } else {
+        ':'
+    }
+}
+
+fn add_to_path(dir: &str) -> String {
+    let current_path = env::var("PATH").unwrap_or_default();
+    let separator = get_path_separator();
+
+    format!("{}{}{}", dir, separator, current_path)
+}
+
+fn set_environment_for_command(cmd: &mut Command) {
+    if cfg!(windows) {
+        cmd.env("SYSTEMROOT", r"C:\Windows");
+        cmd.env("PATHEXT", ".COM;.EXE;.BAT;.CMD");
+    } else {
+        cmd.env("HOME", env::var("HOME").unwrap_or_else(|_| "/home/user".to_string()));
+        cmd.env("SHELL", "/bin/sh");
+    }
+}
+```
+---
+
+### 1.7 性能差异
+
+**进程创建性能对比**:
+
+| 操作          | Linux       | Windows   | 差异  |
+| :--- | :--- | :--- | :--- || 创建1个进程   | ~1-3 ms     | ~10-20 ms | 3-10x |
+| 创建100个进程 | ~100-300 ms | ~1-2 s    | 3-7x  |
+| fork()        | ~50 μs      | N/A       | -     |
+| exec()        | ~1-2 ms     | ~10-20 ms | 5-10x |
+
+**优化建议**:
+
+- Windows: 减少进程创建，使用线程或进程池
+- Unix: 可以更自由地创建进程
+- 跨平台: 使用异步+进程池
+
+---
+
+## 2. 跨平台命令
+
+### 2.1 Shell命令抽象
+
+**基础Shell抽象**:
+
+```rust
+use std::process::Command;
+
+fn run_shell_command(cmd: &str) -> Result<String, std::io::Error> {
+    let output = if cfg!(windows) {
+        Command::new("cmd")
+            .args(["/C", cmd])
+            .output()?
+    } else {
+        Command::new("sh")
+            .args(["-c", cmd])
+            .output()?
+    };
+
+    if output.status.success() {
+        Ok(String::from_utf8_lossy(&output.stdout).to_string())
+    } else {
+        Err(std::io::Error::new(
+            std::io::ErrorKind::Other,
+            String::from_utf8_lossy(&output.stderr).to_string()
+        ))
+    }
+}
+
+// 使用示例
+fn main() -> Result<(), std::io::Error> {
+    let result = run_shell_command("echo Hello World")?;
+    println!("{}", result);
+    Ok(())
+}
+```
+---
+
+### 2.2 跨平台Shell封装
+
+```rust
+pub enum Shell {
+    Sh,
+    Bash,
+    Cmd,
+    PowerShell,
+}
+
+impl Shell {
+    pub fn default() -> Self {
+        if cfg!(windows) {
+            Shell::PowerShell
+        } else {
+            Shell::Bash
+        }
+    }
+
+    pub fn execute(&self, script: &str) -> Result<String, Box<dyn std::error::Error>> {
+        let output = match self {
+            Shell::Sh => Command::new("sh").args(["-c", script]).output()?,
+            Shell::Bash => Command::new("bash").args(["-c", script]).output()?,
+            Shell::Cmd => Command::new("cmd").args(["/C", script]).output()?,
+            Shell::PowerShell => Command::new("powershell")
+                .args(["-Command", script])
+                .output()?,
+        };
+
+        if output.status.success() {
+            Ok(String::from_utf8_lossy(&output.stdout).to_string())
+        } else {
+            Err(format!("Command failed: {}",
+                String::from_utf8_lossy(&output.stderr)).into())
+        }
+    }
+}
+
+// 使用示例
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let shell = Shell::default();
+
+    #[cfg(windows)]
+    let result = shell.execute("Get-Process | Select-Object -First 5")?;
+
+    #[cfg(unix)]
+    let result = shell.execute("ps aux | head -5")?;
+
+    println!("{}", result);
+    Ok(())
+}
+```
+---
+
+### 2.3 通用命令映射
+
+```rust
+use std::collections::HashMap;
+
+struct CommandMapper {
+    mappings: HashMap<String, PlatformCommands>,
+}
+
+struct PlatformCommands {
+    unix: String,
+    windows: String,
+}
+
+impl CommandMapper {
+    fn new() -> Self {
+        let mut mappings = HashMap::new();
+
+        // 列出文件
+        mappings.insert("list_files".to_string(), PlatformCommands {
+            unix: "ls -la".to_string(),
+            windows: "dir".to_string(),
+        });
+
+        // 复制文件
+        mappings.insert("copy_file".to_string(), PlatformCommands {
+            unix: "cp".to_string(),
+            windows: "copy".to_string(),
+        });
+
+        // 删除文件
+        mappings.insert("delete_file".to_string(), PlatformCommands {
+            unix: "rm".to_string(),
+            windows: "del".to_string(),
+        });
+
+        // 显示当前目录
+        mappings.insert("current_dir".to_string(), PlatformCommands {
+            unix: "pwd".to_string(),
+            windows: "cd".to_string(),
+        });
+
+        // 查看进程
+        mappings.insert("list_processes".to_string(), PlatformCommands {
+            unix: "ps aux".to_string(),
+            windows: "tasklist".to_string(),
+        });
+
+        // 终止进程
+        mappings.insert("kill_process".to_string(), PlatformCommands {
+            unix: "kill".to_string(),
+            windows: "taskkill /F /PID".to_string(),
+        });
+
+        Self { mappings }
+    }
+
+    fn get_command(&self, key: &str) -> Option<String> {
+        self.mappings.get(key).map(|cmds| {
+            if cfg!(windows) {
+                cmds.windows.clone()
+            } else {
+                cmds.unix.clone()
+            }
+        })
+    }
+
+    fn execute(&self, key: &str, args: &[&str]) -> Result<String, Box<dyn std::error::Error>> {
+        let cmd = self.get_command(key)
+            .ok_or("Command not found")?;
+
+        let output = if cfg!(windows) {
+            Command::new("cmd")
+                .args(["/C", &cmd])
+                .args(args)
+                .output()?
+        } else {
+            Command::new("sh")
+                .arg("-c")
+                .arg(format!("{} {}", cmd, args.join(" ")))
+                .output()?
+        };
+
+        Ok(String::from_utf8_lossy(&output.stdout).to_string())
+    }
+}
+
+// 使用示例
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mapper = CommandMapper::new();
+
+    // 跨平台列出文件
+    let files = mapper.execute("list_files", &[])?;
+    println!("{}", files);
+
+    // 跨平台查看进程
+    let processes = mapper.execute("list_processes", &[])?;
+    println!("{}", processes);
+
+    Ok(())
+}
+```
+---
+
+### 2.4 文件操作抽象
+
+```rust
+use std::fs;
+use std::path::Path;
+
+pub struct CrossPlatformFile;
+
+impl CrossPlatformFile {
+    pub fn copy(src: &str, dst: &str) -> Result<(), Box<dyn std::error::Error>> {
+        if cfg!(windows) {
+            Command::new("cmd")
+                .args(["/C", "copy", src, dst])
+                .output()?;
+        } else {
+            Command::new("cp")
+                .args([src, dst])
+                .output()?;
+        }
+        Ok(())
+    }
+
+    pub fn move_file(src: &str, dst: &str) -> Result<(), Box<dyn std::error::Error>> {
+        if cfg!(windows) {
+            Command::new("cmd")
+                .args(["/C", "move", src, dst])
+                .output()?;
+        } else {
+            Command::new("mv")
+                .args([src, dst])
+                .output()?;
+        }
+        Ok(())
+    }
+
+    pub fn delete(path: &str) -> Result<(), Box<dyn std::error::Error>> {
+        if cfg!(windows) {
+            if Path::new(path).is_dir() {
+                Command::new("cmd")
+                    .args(["/C", "rmdir", "/S", "/Q", path])
+                    .output()?;
+            } else {
+                Command::new("cmd")
+                    .args(["/C", "del", "/F", "/Q", path])
+                    .output()?;
+            }
+        } else {
+            Command::new("rm")
+                .args(["-rf", path])
+                .output()?;
+        }
+        Ok(())
+    }
+
+    // 更好的方式：使用Rust标准库
+    pub fn copy_native(src: &str, dst: &str) -> std::io::Result<u64> {
+        fs::copy(src, dst)
+    }
+
+    pub fn delete_native(path: &str) -> std::io::Result<()> {
+        if Path::new(path).is_dir() {
+            fs::remove_dir_all(path)
+        } else {
+            fs::remove_file(path)
+        }
+    }
+}
+```
+---
+
+### 2.5 网络命令抽象
+
+```rust
+pub struct NetworkCommands;
+
+impl NetworkCommands {
+    pub fn ping(host: &str) -> Result<String, Box<dyn std::error::Error>> {
+        let output = if cfg!(windows) {
+            Command::new("ping")
+                .args(["-n", "4", host])
+                .output()?
+        } else {
+            Command::new("ping")
+                .args(["-c", "4", host])
+                .output()?
+        };
+
+        Ok(String::from_utf8_lossy(&output.stdout).to_string())
+    }
+
+    pub fn get_ip() -> Result<String, Box<dyn std::error::Error>> {
+        let output = if cfg!(windows) {
+            Command::new("ipconfig").output()?
+        } else {
+            Command::new("ip").args(["addr"]).output()?
+        };
+
+        Ok(String::from_utf8_lossy(&output.stdout).to_string())
+    }
+
+    pub fn check_port(port: u16) -> Result<bool, Box<dyn std::error::Error>> {
+        let output = if cfg!(windows) {
+            Command::new("netstat")
+                .args(["-ano"])
+                .output()?
+        } else {
+            Command::new("ss")
+                .args(["-tuln"])
+                .output()?
+        };
+
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        Ok(stdout.contains(&format!(":{}", port)))
+    }
+}
+```
+---
+
+### 2.6 系统信息命令
+
+```rust
+pub struct SystemInfo;
+
+impl SystemInfo {
+    pub fn get_os_info() -> Result<String, Box<dyn std::error::Error>> {
+        let output = if cfg!(windows) {
+            Command::new("systeminfo").output()?
+        } else {
+            Command::new("uname").args(["-a"]).output()?
+        };
+
+        Ok(String::from_utf8_lossy(&output.stdout).to_string())
+    }
+
+    pub fn get_cpu_info() -> Result<String, Box<dyn std::error::Error>> {
+        let output = if cfg!(windows) {
+            Command::new("wmic")
+                .args(["cpu", "get", "name"])
+                .output()?
+        } else if cfg!(target_os = "macos") {
+            Command::new("sysctl")
+                .args(["-n", "machdep.cpu.brand_string"])
+                .output()?
+        } else {
+            Command::new("cat")
+                .arg("/proc/cpuinfo")
+                .output()?
+        };
+
+        Ok(String::from_utf8_lossy(&output.stdout).to_string())
+    }
+
+    pub fn get_memory_info() -> Result<String, Box<dyn std::error::Error>> {
+        let output = if cfg!(windows) {
+            Command::new("wmic")
+                .args(["OS", "get", "FreePhysicalMemory,TotalVisibleMemorySize"])
+                .output()?
+        } else if cfg!(target_os = "macos") {
+            Command::new("vm_stat").output()?
+        } else {
+            Command::new("free").args(["-h"]).output()?
+        };
+
+        Ok(String::from_utf8_lossy(&output.stdout).to_string())
+    }
+}
+```
+---
+
+## 3. 平台特定功能
+
+### 3.1 Unix特定功能
+
+**进程组与会话**:
+
+```rust
+#[cfg(unix)]
+use std::os::unix::process::CommandExt;
+
+#[cfg(unix)]
+fn unix_process_options() {
+    use std::process::Command;
+
+    Command::new("my_daemon")
+        // 设置进程组
+        .process_group(0)
+        // 设置用户ID
+        .uid(1000)
+        // 设置组ID
+        .gid(1000)
+        .spawn()
+        .expect("Failed to spawn");
+}
+
+// 创建守护进程
+#[cfg(unix)]
+fn daemonize() -> Result<(), Box<dyn std::error::Error>> {
+    use nix::unistd::{fork, setsid, ForkResult};
+
+    // 第一次fork
+    match unsafe { fork()? } {
+        ForkResult::Parent { .. } => {
+            // 父进程退出
+            std::process::exit(0);
+        }
+        ForkResult::Child => {}
+    }
+
+    // 创建新会话
+    setsid()?;
+
+    // 第二次fork
+    match unsafe { fork()? } {
+        ForkResult::Parent { .. } => {
+            std::process::exit(0);
+        }
+        ForkResult::Child => {}
+    }
+
+    // 现在是守护进程
+    Ok(())
+}
+```
+---
+
+**Unix信号处理**:
+
+```rust
+#[cfg(unix)]
+use signal_hook::{consts::SIGTERM, iterator::Signals};
+
+#[cfg(unix)]
+fn setup_signal_handler() -> Result<(), Box<dyn std::error::Error>> {
+    let mut signals = Signals::new(&[SIGTERM])?;
+
+    std::thread::spawn(move || {
+        for sig in signals.forever() {
+            println!("Received signal {:?}", sig);
+            match sig {
+                SIGTERM => {
+                    println!("Shutting down gracefully...");
+                    std::process::exit(0);
+                }
+                _ => {}
+            }
+        }
+    });
+
+    Ok(())
+}
+
+#[cfg(unix)]
+fn ignore_sigpipe() {
+    unsafe {
+        libc::signal(libc::SIGPIPE, libc::SIG_IGN);
+    }
+}
+```
+---
+
+**文件描述符操作**:
+
+```rust
+#[cfg(unix)]
+use std::os::unix::io::{AsRawFd, FromRawFd};
+
+#[cfg(unix)]
+fn dup_fd(cmd: &mut Command) {
+    use std::process::Stdio;
+    use std::fs::File;
+
+    let file = File::create("/tmp/output.log").unwrap();
+    let fd = file.as_raw_fd();
+
+    // 重定向 stdout 到文件
+    unsafe {
+        cmd.stdout(Stdio::from_raw_fd(fd));
+    }
+}
+
+#[cfg(unix)]
+fn set_close_on_exec(fd: i32) {
+    use libc::{fcntl, F_SETFD, FD_CLOEXEC};
+
+    unsafe {
+        fcntl(fd, F_SETFD, FD_CLOEXEC);
+    }
+}
+```
+---
+
+**资源限制**:
+
+```rust
+#[cfg(unix)]
+use libc::{setrlimit, getrlimit, rlimit, RLIMIT_NOFILE};
+
+#[cfg(unix)]
+fn set_file_limit(limit: u64) -> Result<(), Box<dyn std::error::Error>> {
+    let rlim = rlimit {
+        rlim_cur: limit,
+        rlim_max: limit,
+    };
+
+    unsafe {
+        if setrlimit(RLIMIT_NOFILE, &rlim) != 0 {
+            return Err("Failed to set file limit".into());
+        }
+    }
+
+    Ok(())
+}
+
+#[cfg(unix)]
+fn get_file_limit() -> Result<u64, Box<dyn std::error::Error>> {
+    let mut rlim = rlimit {
+        rlim_cur: 0,
+        rlim_max: 0,
+    };
+
+    unsafe {
+        if getrlimit(RLIMIT_NOFILE, &mut rlim) != 0 {
+            return Err("Failed to get file limit".into());
+        }
+    }
+
+    Ok(rlim.rlim_cur)
+}
+```
+---
+
+### 3.2 Windows特定功能
+
+**创建标志**:
+
+```rust
+#[cfg(windows)]
+use std::os::windows::process::CommandExt;
+
+#[cfg(windows)]
+fn windows_process_flags() {
+    use std::process::Command;
+
+    const CREATE_NO_WINDOW: u32 = 0x08000000;
+    const CREATE_NEW_CONSOLE: u32 = 0x00000010;
+    const CREATE_NEW_PROCESS_GROUP: u32 = 0x00000200;
+    const DETACHED_PROCESS: u32 = 0x00000008;
+
+    Command::new("my_app.exe")
+        // 不创建控制台窗口
+        .creation_flags(CREATE_NO_WINDOW)
+        .spawn()
+        .expect("Failed to spawn");
+
+    Command::new("app_with_console.exe")
+        // 创建新控制台
+        .creation_flags(CREATE_NEW_CONSOLE)
+        .spawn()
+        .expect("Failed to spawn");
+
+    Command::new("background_task.exe")
+        // 后台进程
+        .creation_flags(DETACHED_PROCESS)
+        .spawn()
+        .expect("Failed to spawn");
+}
+```
+---
+
+**Windows服务**:
+
+```rust
+#[cfg(windows)]
+use windows_service::{
+    define_windows_service,
+    service::{
+        ServiceControl, ServiceControlAccept, ServiceExitCode,
+        ServiceState, ServiceStatus, ServiceType,
+    },
+    service_control_handler::{self, ServiceControlHandlerResult},
+    service_dispatcher,
+};
+
+#[cfg(windows)]
+define_windows_service!(ffi_service_main, my_service_main);
+
+#[cfg(windows)]
+fn my_service_main(arguments: Vec<std::ffi::OsString>) {
+    if let Err(e) = run_service(arguments) {
+        // 记录错误
+        eprintln!("Service error: {}", e);
+    }
+}
+
+#[cfg(windows)]
+fn run_service(_arguments: Vec<std::ffi::OsString>) -> Result<(), Box<dyn std::error::Error>> {
+    let event_handler = move |control_event| -> ServiceControlHandlerResult {
+        match control_event {
+            ServiceControl::Stop => {
+                // 处理停止
+                ServiceControlHandlerResult::NoError
+            }
+            ServiceControl::Interrogate => ServiceControlHandlerResult::NoError,
+            _ => ServiceControlHandlerResult::NotImplemented,
+        }
+    };
+
+    let status_handle = service_control_handler::register("my_service", event_handler)?;
+
+    // 报告运行状态
+    status_handle.set_service_status(ServiceStatus {
+        service_type: ServiceType::OWN_PROCESS,
+        current_state: ServiceState::Running,
+        controls_accepted: ServiceControlAccept::STOP,
+        exit_code: ServiceExitCode::Win32(0),
+        checkpoint: 0,
+        wait_hint: std::time::Duration::default(),
+        process_id: None,
+    })?;
+
+    // 服务逻辑...
+
+    Ok(())
+}
+```
+---
+
+**作业对象高级用法**:
+
+```rust
+#[cfg(windows)]
+use winapi::um::jobapi2::*;
+#[cfg(windows)]
+use winapi::um::winnt::*;
+
+#[cfg(windows)]
+struct AdvancedJobObject {
+    handle: *mut winapi::ctypes::c_void,
+}
+
+#[cfg(windows)]
+impl AdvancedJobObject {
+    fn create_with_limits() -> Result<Self, Box<dyn std::error::Error>> {
+        unsafe {
+            let handle = CreateJobObjectW(std::ptr::null_mut(), std::ptr::null());
+            if handle.is_null() {
+                return Err("Failed to create job object".into());
+            }
+
+            // 设置内存限制
+            let mut limits = JOBOBJECT_EXTENDED_LIMIT_INFORMATION {
+                BasicLimitInformation: JOBOBJECT_BASIC_LIMIT_INFORMATION {
+                    PerProcessUserTimeLimit: 0,
+                    PerJobUserTimeLimit: 0,
+                    LimitFlags: JOB_OBJECT_LIMIT_PROCESS_MEMORY,
+                    MinimumWorkingSetSize: 0,
+                    MaximumWorkingSetSize: 0,
+                    ActiveProcessLimit: 0,
+                    Affinity: 0,
+                    PriorityClass: 0,
+                    SchedulingClass: 0,
+                },
+                ProcessMemoryLimit: 100 * 1024 * 1024,  // 100 MB
+                JobMemoryLimit: 0,
+                PeakProcessMemoryUsed: 0,
+                PeakJobMemoryUsed: 0,
+                ..std::mem::zeroed()
+            };
+
+            SetInformationJobObject(
+                handle,
+                JobObjectExtendedLimitInformation,
+                &mut limits as *mut _ as *mut _,
+                std::mem::size_of::<JOBOBJECT_EXTENDED_LIMIT_INFORMATION>() as u32,
+            );
+
+            Ok(Self { handle })
+        }
+    }
+
+    fn set_cpu_limit(&self, percent: u32) -> Result<(), Box<dyn std::error::Error>> {
+        unsafe {
+            let mut cpu_limit = JOBOBJECT_CPU_RATE_CONTROL_INFORMATION {
+                ControlFlags: JOB_OBJECT_CPU_RATE_CONTROL_ENABLE | JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP,
+                Value: percent * 100,  // 以1/100%为单位
+            };
+
+            SetInformationJobObject(
+                self.handle,
+                JobObjectCpuRateControlInformation,
+                &mut cpu_limit as *mut _ as *mut _,
+                std::mem::size_of::<JOBOBJECT_CPU_RATE_CONTROL_INFORMATION>() as u32,
+            );
+        }
+        Ok(())
+    }
+}
+```
+---
+
+**注册表操作**:
+
+```rust
+#[cfg(windows)]
+use winreg::RegKey;
+#[cfg(windows)]
+use winreg::enums::*;
+
+#[cfg(windows)]
+fn read_registry() -> Result<String, Box<dyn std::error::Error>> {
+    let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
+    let key = hklm.open_subkey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion")?;
+    let version: String = key.get_value("ProductName")?;
+    Ok(version)
+}
+
+#[cfg(windows)]
+fn write_registry() -> Result<(), Box<dyn std::error::Error>> {
+    let hkcu = RegKey::predef(HKEY_CURRENT_USER);
+    let (key, _disp) = hkcu.create_subkey("Software\\MyApp")?;
+    key.set_value("Version", &"1.0.0")?;
+    Ok(())
+}
+```
+---
+
+### 3.3 macOS特定功能
+
+**Launch Agent/Daemon**:
+
+```rust
+#[cfg(target_os = "macos")]
+fn create_launchd_plist() -> String {
+    r#"<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.example.myapp</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/myapp</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/myapp.out</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/myapp.err</string>
+</dict>
+</plist>"#.to_string()
+}
+
+#[cfg(target_os = "macos")]
+fn install_launchd_service() -> Result<(), Box<dyn std::error::Error>> {
+    use std::fs;
+    use std::path::PathBuf;
+
+    let home = std::env::var("HOME")?;
+    let mut plist_path = PathBuf::from(home);
+    plist_path.push("Library/LaunchAgents/com.example.myapp.plist");
+
+    let plist = create_launchd_plist();
+    fs::write(plist_path, plist)?;
+
+    // 加载服务
+    Command::new("launchctl")
+        .args(["load", "-w", "~/Library/LaunchAgents/com.example.myapp.plist"])
+        .output()?;
+
+    Ok(())
+}
+```
+---
+
+### 3.4 统一抽象层
+
+**跨平台进程管理器**:
+
+```rust
+pub trait ProcessManager {
+    fn spawn(&self, cmd: &str, args: &[&str]) -> Result<u32, Box<dyn std::error::Error>>;
+    fn kill(&self, pid: u32) -> Result<(), Box<dyn std::error::Error>>;
+    fn list(&self) -> Result<Vec<ProcessInfo>, Box<dyn std::error::Error>>;
+}
+
+pub struct ProcessInfo {
+    pub pid: u32,
+    pub name: String,
+    pub cpu_usage: f32,
+    pub memory: u64,
+}
+
+#[cfg(unix)]
+pub struct UnixProcessManager;
+
+#[cfg(unix)]
+impl ProcessManager for UnixProcessManager {
+    fn spawn(&self, cmd: &str, args: &[&str]) -> Result<u32, Box<dyn std::error::Error>> {
+        let child = Command::new(cmd).args(args).spawn()?;
+        Ok(child.id())
+    }
+
+    fn kill(&self, pid: u32) -> Result<(), Box<dyn std::error::Error>> {
+        use nix::sys::signal::{kill, Signal};
+        use nix::unistd::Pid;
+
+        kill(Pid::from_raw(pid as i32), Signal::SIGTERM)?;
+        Ok(())
+    }
+
+    fn list(&self) -> Result<Vec<ProcessInfo>, Box<dyn std::error::Error>> {
+        // 解析 ps 输出
+        let output = Command::new("ps")
+            .args(["aux"])
+            .output()?;
+
+        // 简化示例，实际需要解析输出
+        Ok(vec![])
+    }
+}
+
+#[cfg(windows)]
+pub struct WindowsProcessManager;
+
+#[cfg(windows)]
+impl ProcessManager for WindowsProcessManager {
+    fn spawn(&self, cmd: &str, args: &[&str]) -> Result<u32, Box<dyn std::error::Error>> {
+        let child = Command::new(cmd).args(args).spawn()?;
+        Ok(child.id())
+    }
+
+    fn kill(&self, pid: u32) -> Result<(), Box<dyn std::error::Error>> {
+        Command::new("taskkill")
+            .args(["/F", "/PID", &pid.to_string()])
+            .output()?;
+        Ok(())
+    }
+
+    fn list(&self) -> Result<Vec<ProcessInfo>, Box<dyn std::error::Error>> {
+        // 解析 tasklist 输出
+        let output = Command::new("tasklist").output()?;
+
+        // 简化示例
+        Ok(vec![])
+    }
+}
+
+pub fn get_process_manager() -> Box<dyn ProcessManager> {
+    #[cfg(unix)]
+    return Box::new(UnixProcessManager);
+
+    #[cfg(windows)]
+    return Box::new(WindowsProcessManager);
+}
+```
+---
+
+## 4. 最佳实践
+
+### 4.1 设计原则
+
+**✅ DO**:
+
+1. **优先使用Rust标准库**:
+   - `std::path::PathBuf` 自动处理路径
+   - `std::env` 处理环境变量
+   - `std::fs` 处理文件操作
+2. **使用条件编译**:
+
+   ```rust
+   #[cfg(windows)]
+   fn platform_specific() {
+       // Windows实现
+   }
+
+   #[cfg(unix)]
+   fn platform_specific() {
+       // Unix实现
+   }
+   ```
+3. **创建抽象层**:
+
+   ```rust
+   pub trait CrossPlatform {
+       fn execute(&self) -> Result<(), Error>;
+   }
+   ```
+4. **全平台测试**:
+   - 使用CI/CD在多平台测试
+   - GitHub Actions, GitLab CI
+
+---
+
+**❌ DON'T**:
+
+1. **硬编码路径**:
+
+   ```rust
+   // ❌ 错误
+   let path = "/usr/bin/app";
+
+   // ✅ 正确
+   let path = std::env::var("PATH").unwrap_or_default();
+   ```
+2. **假设Shell存在**:
+
+   ```rust
+   // ❌ 错误
+   Command::new("sh").arg("-c").arg("ls");
+
+   // ✅ 正确
+   if cfg!(windows) {
+       Command::new("cmd").args(["/C", "dir"]);
+   } else {
+       Command::new("sh").args(["-c", "ls"]);
+   }
+   ```
+---
+
+### 4.2 抽象命令执行器
+
+```rust
+use std::process::Command;
+
+pub struct CrossPlatformCommand {
+    program: String,
+    args: Vec<String>,
+    env: Vec<(String, String)>,
+    cwd: Option<String>,
+}
+
+impl CrossPlatformCommand {
+    pub fn new(program: &str) -> Self {
+        Self {
+            program: program.to_string(),
+            args: Vec::new(),
+            env: Vec::new(),
+            cwd: None,
+        }
+    }
+
+    pub fn arg(mut self, arg: &str) -> Self {
+        self.args.push(arg.to_string());
+        self
+    }
+
+    pub fn args(mut self, args: &[&str]) -> Self {
+        for arg in args {
+            self.args.push(arg.to_string());
+        }
+        self
+    }
+
+    pub fn env(mut self, key: &str, value: &str) -> Self {
+        self.env.push((key.to_string(), value.to_string()));
+        self
+    }
+
+    pub fn current_dir(mut self, dir: &str) -> Self {
+        self.cwd = Some(dir.to_string());
+        self
+    }
+
+    pub fn execute(&self) -> Result<String, Box<dyn std::error::Error>> {
+        let mut cmd = Command::new(&self.program);
+        cmd.args(&self.args);
+
+        for (key, value) in &self.env {
+            cmd.env(key, value);
+        }
+
+        if let Some(cwd) = &self.cwd {
+            cmd.current_dir(cwd);
+        }
+
+        let output = cmd.output()?;
+
+        if output.status.success() {
+            Ok(String::from_utf8_lossy(&output.stdout).to_string())
+        } else {
+            Err(format!("Command failed: {}",
+                String::from_utf8_lossy(&output.stderr)).into())
+        }
+    }
+
+    pub fn spawn(&self) -> Result<std::process::Child, Box<dyn std::error::Error>> {
+        let mut cmd = Command::new(&self.program);
+        cmd.args(&self.args);
+
+        for (key, value) in &self.env {
+            cmd.env(key, value);
+        }
+
+        if let Some(cwd) = &self.cwd {
+            cmd.current_dir(cwd);
+        }
+
+        Ok(cmd.spawn()?)
+    }
+}
+
+// 使用示例
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let result = CrossPlatformCommand::new("echo")
+        .arg("Hello")
+        .arg("World")
+        .env("MY_VAR", "value")
+        .execute()?;
+
+    println!("{}", result);
+    Ok(())
+}
+```
+---
+
+### 4.3 跨平台配置管理
+
+```rust
+use std::path::PathBuf;
+use std::fs;
+use serde::{Serialize, Deserialize};
+
+#[derive(Serialize, Deserialize)]
+pub struct AppConfig {
+    pub data_dir: PathBuf,
+    pub log_dir: PathBuf,
+    pub temp_dir: PathBuf,
+}
+
+impl AppConfig {
+    pub fn default() -> Self {
+        Self {
+            data_dir: Self::get_data_dir(),
+            log_dir: Self::get_log_dir(),
+            temp_dir: std::env::temp_dir(),
+        }
+    }
+
+    fn get_data_dir() -> PathBuf {
+        if cfg!(windows) {
+            let appdata = std::env::var("APPDATA")
+                .unwrap_or_else(|_| "C:\\ProgramData".to_string());
+            PathBuf::from(appdata).join("MyApp")
+        } else if cfg!(target_os = "macos") {
+            let home = std::env::var("HOME")
+                .unwrap_or_else(|_| "/Users/Shared".to_string());
+            PathBuf::from(home).join("Library/Application Support/MyApp")
+        } else {
+            let home = std::env::var("HOME")
+                .unwrap_or_else(|_| "/tmp".to_string());
+            PathBuf::from(home).join(".local/share/MyApp")
+        }
+    }
+
+    fn get_log_dir() -> PathBuf {
+        if cfg!(windows) {
+            let appdata = std::env::var("LOCALAPPDATA")
+                .unwrap_or_else(|_| "C:\\ProgramData".to_string());
+            PathBuf::from(appdata).join("MyApp\\logs")
+        } else if cfg!(target_os = "macos") {
+            let home = std::env::var("HOME")
+                .unwrap_or_else(|_| "/tmp".to_string());
+            PathBuf::from(home).join("Library/Logs/MyApp")
+        } else {
+            PathBuf::from("/var/log/myapp")
+        }
+    }
+
+    pub fn load() -> Result<Self, Box<dyn std::error::Error>> {
+        let config_path = Self::config_file_path();
+
+        if config_path.exists() {
+            let contents = fs::read_to_string(config_path)?;
+            Ok(toml::from_str(&contents)?)
+        } else {
+            Ok(Self::default())
+        }
+    }
+
+    pub fn save(&self) -> Result<(), Box<dyn std::error::Error>> {
+        let config_path = Self::config_file_path();
+
+        // 确保目录存在
+        if let Some(parent) = config_path.parent() {
+            fs::create_dir_all(parent)?;
+        }
+
+        let contents = toml::to_string_pretty(self)?;
+        fs::write(config_path, contents)?;
+
+        Ok(())
+    }
+
+    fn config_file_path() -> PathBuf {
+        if cfg!(windows) {
+            let appdata = std::env::var("APPDATA")
+                .unwrap_or_else(|_| "C:\\ProgramData".to_string());
+            PathBuf::from(appdata).join("MyApp\\config.toml")
+        } else {
+            let home = std::env::var("HOME")
+                .unwrap_or_else(|_| "/tmp".to_string());
+            PathBuf::from(home).join(".config/myapp/config.toml")
+        }
+    }
+}
+```
+---
+
+### 4.4 测试策略
+
+**单元测试跨平台代码**:
+
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_shell_command() {
+        let result = run_shell_command("echo test");
+        assert!(result.is_ok());
+
+        #[cfg(windows)]
+        assert!(result.unwrap().contains("test"));
+
+        #[cfg(unix)]
+        assert_eq!(result.unwrap().trim(), "test");
+    }
+
+    #[test]
+    #[cfg(unix)]
+    fn test_unix_specific() {
+        // Unix特定测试
+    }
+
+    #[test]
+    #[cfg(windows)]
+    fn test_windows_specific() {
+        // Windows特定测试
+    }
+}
+```
+**CI/CD配置示例 (GitHub Actions)**:
+
+```yaml
+name: Cross-Platform Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        rust: [stable, beta]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust }}
+          override: true
+
+      - name: Run Tests
+        run: cargo test --all-features
+
+      - name: Run Examples
+        run: cargo run --example cross_platform
+```
+---
+
+### 4.5 常见陷阱与解决方案
+
+**陷阱1: 行结束符差异**:
+
+```rust
+// ❌ 问题：Windows和Unix行结束符不同
+let lines: Vec<&str> = output.split('\n').collect();
+
+// ✅ 解决：使用lines()方法
+let lines: Vec<&str> = output.lines().collect();
+```
+---
+
+**陷阱2: 路径分隔符**:
+
+```rust
+// ❌ 问题：硬编码路径分隔符
+let path = format!("{}{}config.toml", home, "/");
+
+// ✅ 解决：使用PathBuf
+let mut path = PathBuf::from(home);
+path.push("config.toml");
+```
+---
+
+**陷阱3: 权限模型差异**:
+
+```rust
+#[cfg(unix)]
+fn set_permissions(path: &str) -> Result<(), Box<dyn std::error::Error>> {
+    use std::os::unix::fs::PermissionsExt;
+    use std::fs;
+
+    let metadata = fs::metadata(path)?;
+    let mut permissions = metadata.permissions();
+    permissions.set_mode(0o755);
+    fs::set_permissions(path, permissions)?;
+
+    Ok(())
+}
+
+#[cfg(windows)]
+fn set_permissions(path: &str) -> Result<(), Box<dyn std::error::Error>> {
+    // Windows使用ACL，需要winapi或专门的crate
+    println!("⚠️  Permission management on Windows requires ACL");
+    Ok(())
+}
+```
+---
+
+**陷阱4: 进程退出码**:
+
+```rust
+fn check_exit_code(status: std::process::ExitStatus) {
+    #[cfg(unix)]
+    {
+        use std::os::unix::process::ExitStatusExt;
+        if let Some(signal) = status.signal() {
+            println!("Process killed by signal {}", signal);
+        }
+    }
+
+    if let Some(code) = status.code() {
+        println!("Exit code: {}", code);
+    }
+}
+```
+---
+
+### 4.6 性能优化建议
+
+**Windows优化**:
+
+```rust
+#[cfg(windows)]
+fn optimize_windows_process_creation() {
+    // 1. 减少进程创建次数
+    // 2. 使用线程池代替进程
+    // 3. 批量处理命令
+    // 4. 缓存进程句柄
+}
+```
+**Unix优化**:
+
+```rust
+#[cfg(unix)]
+fn optimize_unix_process_creation() {
+    // 1. 使用vfork代替fork（谨慎）
+    // 2. 利用进程池
+    // 3. 使用exec族函数的最快变体
+}
+```
+---
+
+### 4.7 调试技巧
+
+**跨平台调试**:
+
+```rust
+fn debug_platform_info() {
+    println!("Platform: {}", std::env::consts::OS);
+    println!("Architecture: {}", std::env::consts::ARCH);
+    println!("Family: {}", std::env::consts::FAMILY);
+
+    #[cfg(windows)]
+    println!("Windows version: {:?}", std::env::var("OS"));
+
+    #[cfg(unix)]
+    {
+        let output = Command::new("uname").arg("-a").output().unwrap();
+        println!("Unix info: {}", String::from_utf8_lossy(&output.stdout));
+    }
+}
+
+fn debug_command(cmd: &Command) {
+    println!("🔍 Command: {:?}", cmd);
+    println!("   Program: {:?}", cmd.get_program());
+    println!("   Args: {:?}", cmd.get_args().collect::<Vec<_>>());
+    println!("   Env: {:?}", cmd.get_envs().collect::<Vec<_>>());
+}
+```
+---
+
+## 5. 实战案例
+
+### 案例1: 跨平台进程监控
+
+```rust
+pub struct ProcessMonitor {
+    #[cfg(unix)]
+    unix_impl: UnixProcessMonitor,
+
+    #[cfg(windows)]
+    windows_impl: WindowsProcessMonitor,
+}
+
+impl ProcessMonitor {
+    pub fn new() -> Self {
+        Self {
+            #[cfg(unix)]
+            unix_impl: UnixProcessMonitor::new(),
+
+            #[cfg(windows)]
+            windows_impl: WindowsProcessMonitor::new(),
+        }
+    }
+
+    pub fn get_process_list(&self) -> Result<Vec<ProcessInfo>, Box<dyn std::error::Error>> {
+        #[cfg(unix)]
+        return self.unix_impl.get_process_list();
+
+        #[cfg(windows)]
+        return self.windows_impl.get_process_list();
+    }
+}
+```
+---
+
+### 案例2: 跨平台自动更新
+
+```rust
+pub struct Updater;
+
+impl Updater {
+    pub fn download_and_install(url: &str) -> Result<(), Box<dyn std::error::Error>> {
+        // 下载
+        let temp_file = Self::download(url)?;
+
+        // 安装
+        #[cfg(windows)]
+        {
+            Command::new("msiexec")
+                .args(["/i", &temp_file, "/quiet"])
+                .output()?;
+        }
+
+        #[cfg(unix)]
+        {
+            Command::new("dpkg")
+                .args(["-i", &temp_file])
+                .output()?;
+        }
+
+        Ok(())
+    }
+
+    fn download(url: &str) -> Result<String, Box<dyn std::error::Error>> {
+        // 下载逻辑
+        Ok("/tmp/installer".to_string())
+    }
+}
+```
+---
+
+## 6. 总结
+
+**关键要点**:
+
+1. ✅ 优先使用Rust标准库的跨平台API
+2. ✅ 使用条件编译 (#[cfg]) 处理平台特定代码
+3. ✅ 创建抽象层统一接口
+4. ✅ 在所有目标平台上测试
+5. ✅ 注意路径、权限、信号等差异
+
+**推荐工具**:
+
+- `sysinfo`: 跨平台系统信息
+- `nix`: Unix系统调用
+- `winapi`: Windows API
+- `crossbeam`: 跨平台并发原语
+
+---
+
+**下一步**:
+
+- [进程管理快速入门](01_process_management_quick_start.md)
+- [IPC通信实践](02_ipc_communication_practice.md)
+- [进程监控与诊断](05_process_monitoring_and_diagnostics.md)
+
+---
+
+**参考**: [跨平台进程管理](../06_cross_platform_process_management.md)
+
+---
+
+**文档维护**: Documentation Team
+**创建日期**: 2025-10-22
+**适用版本**: Rust 1.92.0+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

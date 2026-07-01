@@ -19,7 +19,6 @@ cargo run --example <example_name>
 # 运行特定示例
 cargo run --example algorithm_comprehensive_demo
 ```
-
 ### 示例列表
 
 | 示例文件                                | 说明             | 主要功能                                   |
@@ -52,7 +51,6 @@ cargo run --example algorithm_comprehensive_demo
 ```bash
 cargo run --example algorithm_comprehensive_demo
 ```
-
 **主要内容**:
 
 - 排序算法（同步/并行/异步）
@@ -70,7 +68,6 @@ cargo run --example algorithm_comprehensive_demo
 ```bash
 cargo run --example algorithm_comparison_demo
 ```
-
 **主要内容**:
 
 - 排序算法性能对比
@@ -86,7 +83,6 @@ cargo run --example algorithm_comparison_demo
 ```bash
 cargo run --example algorithm_complexity_demo
 ```
-
 **主要内容**:
 
 - 时间复杂度分析
@@ -102,7 +98,6 @@ cargo run --example algorithm_complexity_demo
 ```bash
 cargo run --example algorithm_optimization_demo
 ```
-
 **主要内容**:
 
 - 编译期优化
@@ -118,7 +113,6 @@ cargo run --example algorithm_optimization_demo
 ```bash
 cargo run --example backtracking_algorithms_demo
 ```
-
 **主要内容**:
 
 - N皇后问题
@@ -134,7 +128,6 @@ cargo run --example backtracking_algorithms_demo
 ```bash
 cargo run --example comprehensive_network_async_demo
 ```
-
 **主要内容**:
 
 - 异步图遍历
@@ -150,7 +143,6 @@ cargo run --example comprehensive_network_async_demo
 ```bash
 cargo run --example cross_module_integration_demo
 ```
-
 **主要内容**:
 
 - 模块间数据传递
@@ -166,7 +158,6 @@ cargo run --example cross_module_integration_demo
 ```bash
 cargo run --example data_structures_demo
 ```
-
 **主要内容**:
 
 - 栈和队列
@@ -182,7 +173,6 @@ cargo run --example data_structures_demo
 ```bash
 cargo run --example divide_conquer_demo
 ```
-
 **主要内容**:
 
 - 最大子段和
@@ -198,7 +188,6 @@ cargo run --example divide_conquer_demo
 ```bash
 cargo run --example dynamic_programming_demo
 ```
-
 **主要内容**:
 
 - 最长公共子序列（LCS）
@@ -214,7 +203,6 @@ cargo run --example dynamic_programming_demo
 ```bash
 cargo run --example graph_algorithms_demo
 ```
-
 **主要内容**:
 
 - 广度优先搜索（BFS）
@@ -231,7 +219,6 @@ cargo run --example graph_algorithms_demo
 ```bash
 cargo run --example greedy_algorithms_demo
 ```
-
 **主要内容**:
 
 - 活动选择问题
@@ -247,7 +234,6 @@ cargo run --example greedy_algorithms_demo
 ```bash
 cargo run --example searching_algorithms_demo
 ```
-
 **主要内容**:
 
 - 线性搜索
@@ -263,7 +249,6 @@ cargo run --example searching_algorithms_demo
 ```bash
 cargo run --example sorting_algorithms_demo
 ```
-
 **主要内容**:
 
 - 快速排序
@@ -280,7 +265,6 @@ cargo run --example sorting_algorithms_demo
 ```bash
 cargo run --example string_algorithms_demo
 ```
-
 **主要内容**:
 
 - KMP算法
@@ -313,7 +297,7 @@ cargo run --example string_algorithms_demo
 
 - [主 README](../README.md) - 项目概览
 - [文档索引](../docs/00_MASTER_INDEX.md) - 完整文档导航
-- [快速入门指南](../docs/tier_02_guides/01_算法快速入门.md) - 学习指南
+- [快速入门指南](../docs/tier_02_guides/01_algorithms_quick_start.md) - 学习指南
 
 ## 🔧 开发说明
 

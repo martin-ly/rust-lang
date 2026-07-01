@@ -1,27 +1,16 @@
 # 长事务模式形式化定义 {#长事务模式形式化定义}
 
 > **概念族**: 软件设计 / 工作流模式 / 长事务 / Saga
-
 > **内容分级**: [归档级]
-
 > **分级**: [B]
-
 > **Bloom 层级**: L4-L6 (分析/评价/创造)
-
 > **模式类型**: 长事务 / 分布式事务协调
-
 > **创建日期**: 2026-06-29
-
 > **版本**: v1.0
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
-
 > **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/02_workflow/` 迁回，正在按 [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)、[Tokio Tutorial](https://tokio.rs/tokio/tutorial)、[Rust Reference](https://doc.rust-lang.org/reference/) 等权威来源升级。
-
 > **权威来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ---
@@ -86,7 +75,6 @@
 ```text
 LRT := (W, R, P, C)
 ```
-
 其中：
 
 - `W`：工作项集合，每个工作项是一个可独立提交的步骤。
@@ -103,7 +91,6 @@ LRT := (W, R, P, C)
 ```text
 ∀ w ∈ W, committed(w) → observable(w)
 ```
-
 ### Axiom LT2: 持久化可靠性 {#axiom-lt2-持久化可靠性}
 
 > **来源**: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)
@@ -113,7 +100,6 @@ LRT := (W, R, P, C)
 ```text
 ∀ w ∈ W, scheduled(w) ∨ completed(w) ∨ compensated(w) → persisted(state(w))
 ```
-
 ### Theorem LT1: 业务一致性 {#theorem-lt1-业务一致性}
 
 > **来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
@@ -298,7 +284,6 @@ fn main() {
     c.run().unwrap();
 }
 ```
-
 > **来源**: [Rust Standard Library](https://doc.rust-lang.org/std/)
 
 **实现要点**：
@@ -329,7 +314,6 @@ impl BadCoordinator {
     }
 }
 ```
-
 若进程在执行完某步后崩溃，`executed` 丢失，重启后会重复执行该步骤，违反业务一致性。
 
 **修复**：
@@ -346,7 +330,6 @@ let items = vec![
 ];
 let order = topo_order(&items); // Err: DependencyCycle
 ```
-
 `R` 中出现循环依赖时，拓扑排序无法完成，长事务无法启动。
 
 **修复**：在定义工作项时通过 DAG 约束依赖；启动前显式检测循环。

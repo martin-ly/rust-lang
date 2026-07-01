@@ -1,5 +1,7 @@
 # 供应链安全审计报告
 
+> **历史版本**: 本报告 superseded 旧版存放于 `archive/reports/`：
+> `SUPPLY_CHAIN_AUDIT_2026_06_10.md`、`SUPPLY_CHAIN_AUDIT_2026_06_22.md`。
 > **生成时间**: 2026-06-25
 > **工具**: `cargo audit` 0.22.1（网络已恢复，可直接拉取 RustSec advisory-db）
 > **Rust 版本**: 1.96.0 (Edition 2024)
@@ -9,7 +11,6 @@
 ```bash
 cargo audit
 ```
-
 - **退出码**: 0
 - **安全漏洞**: 0
 - **允许警告**: 0（已清理 `atomic-polyfill`；剩余 3 个 unmaintained 警告已通过 `.cargo/audit.toml` 显式忽略并记录 rationale）

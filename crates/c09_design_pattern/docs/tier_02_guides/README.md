@@ -45,10 +45,10 @@
 
 **快速参考**:
 
-- [项目概览](../tier_01_foundations/01_项目概览.md) - 模块介绍、学习路径
-- [主索引导航](../tier_01_foundations/02_主索引导航.md) - 完整导航系统
-- [术语表](../tier_01_foundations/03_术语表.md) - 核心术语参考
-- [常见问题](../tier_01_foundations/04_常见问题.md) - FAQ 解答
+- [项目概览](../tier_01_foundations/01_project_overview.md) - 模块介绍、学习路径
+- [主索引导航](../tier_01_foundations/02_navigation.md) - 完整导航系统
+- [术语表](../tier_01_foundations/03_glossary.md) - 核心术语参考
+- [常见问题](../tier_01_foundations/04_faq.md) - FAQ 解答
 
 ---
 

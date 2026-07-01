@@ -92,7 +92,6 @@
 ├── 形式化验证与工业实践之间存在巨大鸿沟
 └── 认证成本高昂（占项目成本 30-50%）
 ```
-
 > **核心痛点**:
 > 传统安全关键开发使用 C/C++，内存安全（Memory Safety）缺陷（use-after-free、缓冲区溢出）是认证中的**主要风险源**。
 > Rust 的所有权（Ownership）模型从源头上消除了这类缺陷，但 Rust 工具链本身需要通过认证才能用于安全关键项目。
@@ -124,7 +123,6 @@ graph TD
 
     Ferrocene --> 认证
 ```
-
 > **认知功能**: 此图展示 Ferrocene 在 Rust 生态与工业认证标准之间的**桥梁位置**——它不是替代上游 Rust，而是为特定版本的上游 Rust 提供认证证据包。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 安全关键项目选择 Ferrocene 而非上游 Rust；一般项目继续使用上游 Rust。
@@ -149,7 +147,6 @@ Ferrocene 的认证范围（当前）:
 ├── proc-macro（编译期代码生成难以形式化验证）
 └── 非选定目标平台（如 RISC-V、Wasm）
 ```
-
 > **范围说明**:
 > Ferrocene 采取**保守的认证策略**——先认证最小可用子集（core + 无 OS 目标），逐步扩展。
 > 这与安全关键领域的"先证明核心正确，再扩展边界"原则一致。
@@ -197,7 +194,6 @@ graph LR
     上游演进 --> Ferrocene版本
     Ferrocene版本 --> 延迟
 ```
-
 > **认知功能**: 此图展示 Ferrocene 与上游 Rust 的**版本延迟关系**——认证需要时间，Ferrocene 总是落后上游 6-12 个月。
 > **关键洞察**: 这种延迟是**设计上的必然**——认证不能加速，因为它涉及第三方审计机构的独立审查。安全关键项目接受这种延迟以换取可信性。
 > [来源: [Ferrous Systems — Ferrocene Update](https://ferrous-systems.com/blog/)]
@@ -225,7 +221,6 @@ Ferrocene 证据包构成:
   4. 过程文档 (Process)
      └── 开发过程的质量保证记录（评审、变更控制、配置管理）
 ```
-
 > **证据包意义**: Ferrocene 不仅提供"工具可用"的结论，更提供**完整的证据链**——从需求到测试到分析，使认证机构能够独立验证每个安全声明。
 > [来源: [Ferrocene Specification — Evidence](https://spec.ferrocene.dev/)]
 
@@ -338,7 +333,6 @@ graph TD
     style FALSE2 fill:#ffebee
     style ALT fill:#fff3e0
 ```
-
 > **认知功能**: 此决策树帮助评估 Ferrocene 是否适合特定项目。核心判断标准是**std 依赖**、**目标平台支持**和**功能延迟容忍度**。
 > **使用建议**: 裸机/RTOS 嵌入式项目优先考虑 Ferrocene；需要 std 或异步（Async）运行时的项目需评估替代方案。
 > **关键洞察**: Ferrocene 的**不适用场景**同样重要——明确边界避免项目在选择工具链时做出错误决策。
@@ -369,7 +363,6 @@ graph TD
 ├── 不替代 Kani/Verus/Creusot 的形式化证明
 └── 最高完整性等级可能需要 Ferrocene + 形式化验证的组合
 ```
-
 > **边界要点**:
 > Ferrocene 是 Rust 进入安全关键领域的**第一步**，但不是终点。
 > 未来的方向是"Ferrocene + 形式化验证"的组合，在工具链认证的基础上为关键模块（Module）提供数学级保证。
@@ -402,11 +395,9 @@ graph TD
 | [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
 | [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Ferrocene Project](https://ferrocene.dev/) | ✅ 一级 | 官方网站与文档 |
@@ -424,7 +415,6 @@ fn main() {
     println!("{}", feature);
 }
 ```
-
 ## 相关概念文件
 
 - [Toolchain](../06_ecosystem/01_toolchain.md) — Rust 工具链
@@ -473,7 +463,6 @@ fn process(data: &[u8]) -> u32 {
     unsafe { *ptr } // 违反 forbid(unsafe_code) 和子集约束
 }
 ```
-
 > **修正**:
 > Ferrocene 是 Rust 的 ISO 26262（汽车功能安全）和 IEC 61508（工业功能安全）认证工具链。
 > 它定义了**安全关键子集**（safety-critical subset）：禁止 `unsafe` 代码、禁止某些标准库 API（如 `std::mem::transmute`）、要求确定性执行（无 panic、无分配失败）。
@@ -498,7 +487,6 @@ fn lookup() -> i32 {
     *map.get("key").unwrap()
 }
 ```
-
 > **修正**:
 > `HashMap` 的默认哈希算法（SipHash 1-3）使用随机种子防止 HashDoS 攻击，但导致迭代顺序非确定性——每次运行可能不同。
 > 在安全关键系统中，非确定性使测试覆盖率和形式化验证困难：无法保证所有执行路径都被测试。
@@ -523,7 +511,6 @@ fn main() {
     map.insert("key", 42);
 }
 ```
-
 > **修正**:
 > Ferrocene 的安全关键子集排除某些标准库类型和函数，原因包括：
 >
@@ -546,7 +533,6 @@ fn compute(x: f64) -> f64 {
     x * 2.0 + 1.0
 }
 ```
-
 > **修正**:
 > 浮点数的**确定性执行**是形式化验证的难点：
 >

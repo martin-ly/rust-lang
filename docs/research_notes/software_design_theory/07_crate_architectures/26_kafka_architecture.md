@@ -1,3 +1,9 @@
+> **Canonical 说明**: 本文件专注 **rdkafka 客户端的 Producer/Consumer 与 Stream 架构**。
+>
+> 若只需要使用指南与生态定位，请优先参考：
+> - [流处理生态](../../../../concept/06_ecosystem/36_stream_processing_ecosystem.md)
+>
+> 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **⚠️ 历史文档提示**：
 >
 > 本文档涉及的消息中间件生态以 Apache Kafka 与 `rdkafka` crate 为主。
@@ -62,7 +68,6 @@ let record = FutureRecord::to("topic")
 
 let status = producer.send(record, std::time::Duration::from_secs(5)).await?;
 ```
-
 > [来源: [rdkafka Producer Examples](https://github.com/fede10247/rust-rdkafka/tree/master/examples)]
 
 ---
@@ -87,7 +92,6 @@ graph LR
     P2 -.->|assign| C1[Consumer 1]
     P3 -.->|assign| C2[Consumer 2]
 ```
-
 > [来源: [Kafka Introduction](https://kafka.apache.org/intro)]
 
 | 概念 | 说明 | 在 rdkafka 中的对应 |
@@ -132,7 +136,6 @@ match producer.send(record, Duration::from_secs(5)).await {
     }
 }
 ```
-
 > [来源: [rdkafka FutureProducer](https://docs.rs/rdkafka/latest/rdkafka/producer/type.FutureProducer.html)]
 
 ### 3.2 BaseProducer：同步/手动轮询 {#32-baseproducer同步手动轮询}
@@ -151,7 +154,6 @@ producer.send(
 )?;
 producer.poll(Duration::from_millis(100));
 ```
-
 > [来源: [rdkafka BaseProducer](https://docs.rs/rdkafka/latest/rdkafka/producer/struct.BaseProducer.html)]
 
 ### 3.3 幂等性与事务 {#33-幂等性与事务}
@@ -204,7 +206,6 @@ while let Some(result) = consumer.stream().next().await {
     }
 }
 ```
-
 > [来源: [rdkafka StreamConsumer](https://docs.rs/rdkafka/latest/rdkafka/consumer/struct.StreamConsumer.html)]
 
 ### 4.2 Consumer Group 的再均衡 {#42-consumer-group-的再均衡}
@@ -255,7 +256,6 @@ match producer.send(record, timeout).await {
     }
 }
 ```
-
 > [来源: [rdkafka error module](https://docs.rs/rdkafka/latest/rdkafka/error/)]
 
  librdkafka 内部已对网络抖动、Broker 不可用、leader 切换等进行重试。业务层应关注：
@@ -351,12 +351,10 @@ match producer.send(record, timeout).await {
 > - [来源: [rdkafka Documentation](https://docs.rs/rdkafka/latest/rdkafka/)]
 > - [来源: [rdkafka crates.io](https://crates.io/crates/rdkafka)]
 > - [来源: [Apache Kafka 官方文档](https://kafka.apache.org/documentation/)]
-
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [Kafka: a Distributed Messaging System for Log Processing](https://www.microsoft.com/en-us/research/publication/kafka-a-distributed-messaging-system-for-log-processing/)] — Kafka 原始设计论文
 > - [来源: [Discretized Streams: Fault-Tolerant Streaming Computation at Scale (Spark Streaming)](https://people.csail.mit.edu/matei/papers/2013/sosp_spark_streaming.pdf)] — 流处理语义参考
-
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [rdkafka GitHub Repository](https://github.com/fede10247/rust-rdkafka)]

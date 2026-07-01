@@ -48,13 +48,9 @@
 ### 1.1 Wikipedia 定义
 
 > **[Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic)** Linear logic is a substructural logic proposed by Jean-Yves Girard as a refinement of classical and intuitionistic logic, joining the dualities of the former with many of the constructive properties of the latter. The key operational intuition behind linear logic is that logical assumptions are consumed in proving a conclusion, rather than merely used as in classical logic. [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
-
 > **[Wikipedia: Affine logic](https://en.wikipedia.org/wiki/Affine_logic)** Affine logic is a substructural logic whose proof theory rejects the structural rule of contraction. It can also be characterized as linear logic with weakening. In affine logic, each hypothesis may be used at most once—unlike in linear logic, where each hypothesis must be used exactly once.
-
 > **[学术来源: Girard 1987, *Linear Logic* (Theoretical Computer Science 50:1-102)]** Linear logic introduces a new connective, the exponential `!A` ("of course A"), which allows a formula to be copied or discarded. Without `!`, every assumption must be used exactly once. This makes linear logic a **resource-sensitive logic**: propositions represent resources, and proofs represent resource-transforming processes. [来源] ✅
-
 > **[学术来源: Pierce 2002, *Types and Programming Languages* (TAPL) §15.3]** Pierce 将子结构类型系统（substructural type systems）定位为"通过控制变量的使用次数来管理资源 [来源: [Linear Logic](https://plato.stanford.edu/entries/logic-linear/)]"的类型理论。线性类型（linear types）对应"恰好使用一次"，仿射类型（affine types）对应"最多使用一次"，这构成了 Rust 所有权（Ownership）系统的理论先声。此处为 L1/01_ownership.md §1 "什么是所有权" 的精确对应——Pierce 的形式化定义是 Rust 所有权规则的先验类型论基础。 [来源] ✅
-
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** Rust's ownership system can be understood as an **affine type system** embedded in a larger language with managed copying (`Clone`) and shared borrowing (`&T`). The core insight is that ownership tracking enforces the resource discipline of affine logic at compile time. [来源] ✅
 
 ---
@@ -117,7 +113,6 @@ graph TD
     style CLASSICAL fill:#e3f2fd
     style ORDERED fill:#ffebee
 ```
-
 > **认知功能**: 此谱系图将子结构逻辑的**结构规则削减**过程可视化。从经典逻辑到有序逻辑，每向下一步就移除一个结构规则，表达能力递减但资源控制递增。**Rust 位于仿射逻辑节点**——允许 weakening（丢弃资源）但禁止 contraction（复制资源），这恰好对应 `drop` 自动调用和 `move` 语义。颜色的冷暖梯度表达"资源控制严格度"：红色最严格（有序逻辑），绿色最实用（Rust/仿射逻辑）。
 > [来源: [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_Logic)]
 
@@ -151,7 +146,6 @@ Rust 对应:
   let b = B::new();   // Δ ⊢ B
   let pair = (a, b);  // Γ, Δ ⊢ A ⊗ B
 ```
-
 > 此处为 L1/01_ownership.md §2 "所有权规则" 的精确对应——元组构造 `(a, b)` 同时消耗 `a` 和 `b` 的所有权，对应 ⊗-intro 中上下文 `Γ` 和 `Δ` 的合并。 [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
 
 ```text
@@ -165,7 +159,6 @@ Rust 对应:
   // 前提: 拥有 A 可构造 B
   // 结论: 此函数是 A ⊸ B 的证明 [来源] ✅
 ```
-
 > 此处为 L1/01_ownership.md §3.2 "函数参数 move" 的精确对应——函数参数按值传递时，调用者失去所有权（`A` 被消耗），被调用者获得构造 `B` 的资源，这正是 `A ⊸ B` 的编程语言实现。
 
 ```text
@@ -178,9 +171,7 @@ Rust 对应:
   fn ignore<T>(_x: T) {}  // 允许丢弃资源（weakening）
   // 但线性逻辑中此操作非法！
 ```
-
 > 此处为 L1/01_ownership.md §3 "Move 语义" 的精确对应——Rust 允许未使用变量（触发 warning 而非 error），这是仿射逻辑 weakening 规则的工程体现；严格线性语言会拒绝编译。
-
 > **[学术来源: Girard 1987, *Linear Logic* §1.2 指数模态]** 指数模态 `!`（of course）与 `?`（why not）是线性逻辑中允许资源突破线性约束的核心机制。
 
 ```text
@@ -195,7 +186,6 @@ Rust 对应:
   例: i32: Copy     →  !i32
   例: String: !Copy →  String 受线性约束 [来源] ✅
 ```
-
 > 此处为 L1/01_ownership.md §4 "Copy trait" 的精确对应——Girard 的 Dereliction 规则 `!A ⊢ A` 解释了 Copy 类型的隐式复制行为：编译器自动将 `!T` 推导为 `T` 的多个副本，无需显式 move。
 
 ---
@@ -235,7 +225,6 @@ graph TD
     F --> F2[T2: 会话类型 ⟹ 协议安全]
     F --> F3[C1: 所有权 ⟹ 工程实现]
 ```
-
 > **认知功能**: 此思维导图提供线性逻辑知识的**五维导航框架**（结构规则、连接词、指数模态、Rust 映射、定理链）。建议在学习初期用作概念定位图，在复习时检验知识覆盖度。关键洞察：线性逻辑不是孤立的形式游戏，而是从 Girard 的推理规则到 Rust borrow checker 的连续谱系。[来源: 💡 原创分析]
 
 ---
@@ -264,7 +253,6 @@ graph TD
     style C1 fill:#9f6
     style C2 fill:#ff9
 ```
-
 > **认知功能**: 此决策树拆解"线性逻辑禁止所有复制"的过度简化命题，引导读者通过**指数模态判定**到达精确结论。建议在遇到"Rust 禁止复制"等模糊论断时回溯此树。关键洞察：`!A` 是线性逻辑故意设计的"经典出口"，Copy trait 不是规则的破坏而是框架内的特权通道。[来源: 💡 原创分析]
 
 **形式化澄清**: Girard 设计 `!A` 的明确意图就是**在资源敏感框架内恢复经典推理**。Dereliction (`!A ⊢ A`) 是线性逻辑中最关键的"向下转换"规则——它允许将不受限资源降级为线性资源使用。此处为 L1/01_ownership.md §4 "Copy trait" 的精确对应：`i32: Copy` 在 Rust 中正是 `!i32` 的 Dereliction 实现。
@@ -287,7 +275,6 @@ graph TD
     style C3 fill:#9f6
     style C4 fill:#ff9
 ```
-
 > **认知功能**: 此决策树揭示"线性类型系统（Type System）可判定性"的**条件性真理**，通过递归类型与高阶多态两个分支暴露理论边界。建议在评估类型系统复杂度或理解 Rust borrow checker 设计取舍时参考。关键洞察：Rust 的工程实用性来自于故意回避不可判定区域——显式生命周期（Lifetimes）标注是理论限制向用户体验的优雅妥协。[来源: 💡 原创分析]
 
 **形式化澄清**: Rust 通过**拒绝部分递归类型模式**（如直接递归的 `Box<dyn Fn>` 需要显式类型擦除）和**显式生命周期（Lifetimes）参数**来保持 borrow checker 的可判定性。Pierce (TAPL §15.3) 指出："线性类型推断的复杂度取决于结构规则的限制程度——限制越多，推断越易。"此处为 L2/02_type_system.md §5 "类型推断（Type Inference）" 的精确对应——Rust 的类型推断有意保留显式标注点，正是为了避免线性约束下的不可判定区域。
@@ -313,7 +300,6 @@ graph TD
     style P3 fill:#f96
     style C5 fill:#9f6
 ```
-
 > **认知功能**: 此决策树对"Rust = 线性逻辑"的**等同谬误**进行三步拆解，从 weakening、内部可变性到生命周期逐层揭示映射偏差。建议在跨层解释 Rust 所有权时优先使用此树校准精确度。关键洞察：Rust 所有权是仿射逻辑、区域类型和分离逻辑的三元合成体——线性逻辑只是其必要核心而非充分描述。[来源: 💡 原创分析]
 
 **形式化澄清**: 这是最关键的反命题。RustBelt (Jung et al. 2017, 2018) 明确将 Rust 建模为**仿射类型系统**（affine type system），而非严格线性类型系统。三个关键偏差：
@@ -339,7 +325,6 @@ T1(切消定理) ⟹ L1(线性命题) ⟹ C1(Rust所有权) ⟹ C2(仿射move语
                      ↓
                     T2(会话类型) ⟹ T6(&With/⅋Par)
 ```
-
 ### 6.1 定理一致性矩阵（10行完整版）
 >
 
@@ -378,7 +363,6 @@ A ⊢ A                      ─────────────────
 ─────────── (⊗L)         ─────────────────────── (⊸R)
 Γ, A ⊗ B ⊢ Δ             Γ, Γ' ⊢ A ⊸ B, Δ, Δ'
 ```
-
 | 规则 | 逻辑形式 | Rust 对应 | 语义 |
 |:---|:---|:---|:---|
 | **⊗R** (Tensor Right) | 合并两个独立证明 | `(a, b)` 元组构造 | 资源 A 和资源 B 同时存在，互不干扰 |
@@ -397,7 +381,6 @@ A ⊢ A                      ─────────────────
 ─────────────────────── (⊕R)
 Γ, A & B ⊢ Δ
 ```
-
 | 规则 | 逻辑形式 | Rust 对应 | 语义 |
 |:---|:---|:---|:---|
 | **⊕** (Plus/和类型) | 选择 A 或 B | `enum E { A, B }` | 资源是 A 或 B 之一，但非同时 |
@@ -415,7 +398,6 @@ A ⊢ A                      ─────────────────
 ─────────── (!L)
 Γ, !A ⊢ Δ
 ```
-
 | 规则 | 逻辑形式 | Rust 对应 | 语义 |
 |:---|:---|:---|:---|
 | **!A** (Of course/Bang) | 资源 A 可任意复制 | `impl Copy for T` | 从线性资源降级为直觉主义资源，允许 weakening 和 contraction |
@@ -443,7 +425,6 @@ Rust 编译期的相位模型:
   Phase 4 (单态化): 泛型展开 ──→ 对应证明的具体实例化
   Phase 5 (运行期): 实际执行 ──→ 对应 proof nets 的归约（cut elimination）
 ```
-
 > **[来源: Girard 1987 §5 Phase Semantics]** 相位语义将线性逻辑从证明论（proof theory）延伸到模型论（model theory）。Rust 编译器的 borrow checker 可视为一个**自动定理证明器**：它验证程序代码是否是"资源安全"这一逻辑定理的有效证明。
 > **[来源: 💡 原创映射]** "编译期检查 = 证明验证；运行期执行 = 证明归约"——这是 Curry-Howard 对应在 Rust 工程中的直接体现。💡
 
@@ -464,7 +445,6 @@ fn affine_demo() {
     println!("{}", t);              // ✅ t 使用资源
 } // t 被 drop，资源释放
 ```
-
 > 此处为 L1/01_ownership.md §3 "Move 语义" 的精确对应——`let t = s` 是仿射逻辑中资源从 `s` 到 `t` 的线性转移，原变量 `s` 被标记为 moved。 [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]
 
 ```rust
@@ -476,7 +456,6 @@ fn exponential_demo() {
     println!("{} {} {}", n, a, b);  // ✅ 全部可用
 }
 ```
-
 > 此处为 L1/01_ownership.md §4 "Copy trait" 的精确对应——`i32: Copy` 对应 `!i32`，每次使用都隐式触发 Dereliction 规则 `!i32 ⊢ i32`，无需 move。
 
 ```rust
@@ -487,7 +466,6 @@ fn weakening_demo() {
     // 严格线性逻辑中此操作非法
 } // s 自动 drop
 ```
-
 > 此处为 L1/01_ownership.md §3 "Move 语义" 的精确对应——Rust 对未使用变量发出 `dead_code` warning 而非 error，这是仿射逻辑 weakening 规则的工程折衷。
 
 ### 7.2 会话类型与线性通道
@@ -504,7 +482,6 @@ fn session_demo() {
     println!("{}", received);
 } // received drop
 ```
-
 > 此处为 L3/c05_threads.md §3 "通道通信" 的精确对应——`mpsc::channel()` 的 `send` 操作将值线性转移到通道缓冲区，`recv` 将其线性转移出来。通道的**单所有权**语义保证了无数据竞争。
 
 ### 7.3 映射精度评估
@@ -541,7 +518,6 @@ fn session_demo() {
 代码验证: 在 Rust 中 `let a = String::new(); let _ = a; let _ = a;` → E0382
 边界测试: Copy trait (`!A`) 是经典逻辑在线性框架内的"残留飞地"
 ```
-
 > 此处为 L1/01_ownership.md §1 "什么是所有权" 的精确对应——所有权的根本动机正是打破"命题可任意复制"的经典逻辑假设，将命题重新解释为资源。
 
 ### Step 2: "资源消耗和逻辑推理的关系？"
@@ -554,7 +530,6 @@ fn session_demo() {
 代码验证: `let coffee = buy(cash);` // cash 被 move，coffee 获得
 边界测试: `!A`（信用卡/数字货币）允许不消耗前提多次"使用"
 ```
-
 > 此处为 L1/01_ownership.md §2 "所有权规则" 的精确对应——Rust 所有权的"消耗"语义直接映射线性逻辑的 sequent 演算，是 Girard 1987 资源直觉的工程实现。
 
 ### Step 3: "线性逻辑的切规则是什么？"
@@ -567,7 +542,6 @@ fn session_demo() {
 代码验证: Rust 编译器的 MIR 优化会内联小函数——消除中间绑定
 边界测试: 切消定理保证**规范形式存在**→类型检查器总能给出明确结论
 ```
-
 > 此处为 L4/04_formal/02_type_theory.md（类型论）的精确对应——切消定理是证明论的核心元定理，它保证了线性逻辑的一致性（consistency）和类型系统的可判定性边界。
 
 ### Step 4: "Rust 怎么用了线性逻辑？"
@@ -580,7 +554,6 @@ fn session_demo() {
 代码验证: `rustc --explain E0382` 明确说 "use of moved value"
 边界测试: `unsafe` 块、`Rc<RefCell>`、`mem::forget` 都是线性/仿射约束的逃逸口
 ```
-
 > 此处为 L1/01_ownership.md §3 "Move 语义" 的精确对应——E0382 错误信息是仿射逻辑约束在编译器错误报告中的最直接呈现，`use of moved value` 本质上是 `Γ, x: T ⊢ ...` 中 `x` 已被线性消耗后的sequent不可推导。 [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
 
 ### Step 5: "还有什么没覆盖？"
@@ -594,7 +567,6 @@ fn session_demo() {
 代码验证: `fn foo<'a>(x: &'a str) -> &'a str` ——生命周期是区域类型的显式语法
 边界测试: RustBelt 使用 Iris（高阶分离逻辑）才能完整形式化 Rust
 ```
-
 > 此处为 L2/02_borrowing.md "借用与生命周期" 的精确对应——借用不是线性逻辑的原生概念，需要分离逻辑（L3 层）和区域类型（L2 层）的联合扩展。线性逻辑是 Rust 形式化的**必要核心**，但不是**充分完整**的理论框架。
 
 **认知脚手架**:
@@ -641,7 +613,6 @@ fn session_demo() {
 > **过渡: L4 → L1**
 > 线性逻辑的 `⊗`（tensor）对应 Rust 的元组所有权，`⊸`（lollipop）对应所有权的转移（move），`!`（exponential）对应 `Copy` trait 的 weakening 规则。从形式化符号到编译器实际行为的映射，是理解 "为什么 Rust 不需要垃圾回收" 的理论根基。
 > 工程实践中的对应见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权规则）与 [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md)（借用作为分数权限的弱化形式）。
-
 > **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 十、相关概念链接
@@ -674,7 +645,6 @@ Par 节点 (⅋):             A ──┐
                           B ──┘── A ⅋ B
 切 (Cut):                 A ──── A⊥
 ```
-
 **正确性标准（Correctness Criterion）**: 一个 proof net 是**正确**的，当且仅当对其中每个 ⊗ 节点，删除该节点后图分为两个不连通分量（Danos-Regnier 标准）。这确保了证明结构对应于一个有效的 sequent calculus 证明。 [来源: [Wikipedia — Affine Logic](https://en.wikipedia.org/wiki/Affine_logic)]
 
 > **与 sequent calculus 的等价性**: Girard 证明了任何 cut-free sequent calculus 证明都可以唯一地转换为一个 proof net，反之，任何正确的 proof net 都可以顺序化（sequentialize）为一个 sequent calculus 证明。Proof nets 是线性逻辑的 **Church-Rosser 规范形式**。
@@ -699,7 +669,6 @@ Proof nets 的图结构天然适合建模**并发资源流**：
   ─────────────────────────  (⊗-intro in process calculus)
   Γ, Δ ⊢ P ∥ Q : A ⊗ B
 ```
-
 ### 11.3 Rust 并发通道的 Proof net 可视化
 
 ```rust
@@ -722,7 +691,6 @@ fn channel_as_proof_net() {
     println!("{}", received);                // 资源在新的上下文中使用
 }
 ```
-
 **> [L1↔L4: concurrency]** L3/c05_threads.md §3 "通道通信" 的精确对应——`mpsc::channel()` 的 `send`/`recv` 在 proof net 中是一条 **Cut 边**，连接生产者线程的 `A` 和消费者线程的 `A⊥`。Cut 消除定理保证了这条边可以被安全地归约为直接资源转移，即通信是无数据竞争的。
 
 ### 11.4 Proof nets 的归约与 Cut 消除
@@ -737,7 +705,6 @@ Cut 消除规则（线性逻辑核心元定理）:
 
   对应并发语义:  fork/join 归约为直接组合
 ```
-
 > **关键洞察**: Cut 消除定理在并发语义中对应 **进程归约**——复杂的通信协议可以被逐步简化为直接资源交换。这是 Caires & Pfenning 2010 会话类型（Session Types）与线性逻辑深层对应的图形化表达。 [来源: [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
 
 ---
@@ -767,7 +734,6 @@ g x = ...  -- x 可被使用 0 次、1 次或多次
 h :: a %m -> b
 h x = ...  -- m 是重数变量
 ```
-
 **重数（Multiplicity）格**:
 
 ```text
@@ -775,7 +741,6 @@ h x = ...  -- m 是重数变量
      /
     1（线性，恰好一次）
 ```
-
 ### 12.2 Rust vs Linear Haskell: 类型系统对比
 
 | **维度** | **Rust** | **Linear Haskell** | **C++** | **Go** |
@@ -794,7 +759,6 @@ h x = ...  -- m 是重数变量
 > **[来源: Bernardy et al. 2017, *Linear Haskell*]** Linear Haskell 通过重数（multiplicity）在现有类型系统中嵌入线性约束，是严格线性类型系统的工业级实验。 ✅
 > **[来源: C++ Reference: Smart pointers]** C++ 无内置线性/仿射类型系统；`unique_ptr` 提供运行时（Runtime）所有权管理，但编译器不检查 use-after-move。 ✅
 > **来源: Go Spec: Memory Model** Go 无线性/仿射类型概念，内存安全完全依赖 GC，引用（Reference）有效性无编译期检查。 ✅
-
 > **核心区别**: Rust 是**仿射类型系统**（允许 weakening，即资源可丢弃），而 Linear Haskell 是**严格线性类型系统**（weakening 不成立，资源必须精确使用一次）。C++ 和 Go 不在线性逻辑谱系中——C++ 依赖运行时（Runtime） RAII 和程序员自律，Go 依赖 GC。这使得 Rust 和 Linear Haskell 在"编译期资源安全"维度上形成独特阵营，而 C++ 和 Go 选择运行时方案。
 
 ### 12.3 代码对比: 线性资源管理
@@ -820,7 +784,6 @@ readFileLinear path = do
 --     handle <- IO.openFile path IO.ReadMode
 --     IO.hGetContents handle  -- ❌ handle 未被使用（未关闭）
 ```
-
 **Rust**:
 
 ```rust
@@ -846,7 +809,6 @@ fn read_file_manual(path: &str) -> io::Result<String> {
     Ok(contents)
 }
 ```
-
 ### 12.4 Pure Borrow：在 Linear Haskell 中实现 Rust 风格借用（PLDI 2026）
 
 **[PLDI 2026 — Matsushita & Ishii]** Pure Borrow 是 Kyoto University 提出的理论框架，首次在 **Linear Haskell** 中完整实现了 **Rust 风格的非局部借用（non-local borrowing）**。这是一个重要的理论里程碑：它证明了 Rust 的核心借用机制可以嵌入纯函数式语言，且无需修改编译器（仅作为库实现，兼容 GHC 9.10+）。
@@ -868,7 +830,6 @@ share :: Mut a ⊸ Ur (Share a)
 -- 生命周期结束后 reclaim 所有权
 reclaim :: Lend a → End ⊸ a
 ```
-
 **与 Rust 的对应关系**：
 
 | Rust 概念 | Pure Borrow 对应 | 关键差异 |
@@ -894,9 +855,7 @@ Rust 所有权系统（仿射变体）:
   Σ; Γ ⊢ e : τ {Σ'}
   where Γ 允许未使用变量（weakening），Σ 追踪 move 状态
 ```
-
 > **关键洞察**: Linear Haskell 的 `%1 ->` 精确对应线性逻辑的 `⊸`（线性蕴含），而 Rust 的 `fn(T) -> U` 更接近**仿射蕴含**——允许调用者丢弃参数而不使用。这是两种语言在"资源敏感性"光谱上的关键差异：Linear Haskell 追求**形式纯度**，Rust 追求**工程实用性**。
-
 > **来源**: [Bernardy et al. 2017, *Linear Haskell*] · [GHC 9.0+ LinearTypes Documentation] · [Pierce 2002, TAPL §15.3] · [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic)
 
 ---
@@ -913,7 +872,6 @@ Rust 所有权系统（仿射变体）:
 > **过渡: L4 → L3**
 > 线性逻辑的 `⊗`（tensor）和 `⊸`（lollipop）不是纯理论游戏——它们直接对应 Rust 的元组构造和所有权转移。当你写 `let y = x;` 时，你正在执行一个 lollipop 消除规则；当你写 `let pair = (x, y);` 时，你正在构造一个 tensor 积。
 > 工程对应见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)（unsafe 作为线性规则的逃逸门）与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)（并发作为线性资源的交互）。
-
 > **过渡: L4 → L5**
 > 线性逻辑在不同语言中有不同实现：Rust 用所有权、Haskell 用 LinearTypes 扩展、ATS 用依赖类型 + 线性类型。比较这些实现能揭示 "线性逻辑是必要不充分条件"——线性类型保证内存安全，但内存安全不需要完整的线性类型系统。
 > 对比视角见 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)（类型系统谱系）。
@@ -991,7 +949,6 @@ fn fixed() {
     use_resource(r); // ✅ r 仍可用
 }
 ```
-
 > **修正**: 线性逻辑的核心是**资源的一次性使用**。Rust 的默认语义是 move（对非 Copy 类型），即资源在传参时被消耗。这与传统命令式语言的"复制传参"（pass-by-value 复制）或"引用传参"（pass-by-reference）不同——Rust 的传参语义由类型的 `Copy`/`Clone` trait 决定。`String`、`Vec` 等堆分配类型默认 move，避免隐式深拷贝；`i32`、`bool` 等标量类型默认 copy，因为它们的大小固定且拷贝成本低。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：借用与所有权的分权（编译错误）
@@ -1018,7 +975,6 @@ fn fixed() {
     r3.push(4);
 }
 ```
-
 > **修正**: 线性逻辑的 **multiplicative conjunction**（`⊗`）对应 Rust 的元组/结构体（Struct）所有权分割，**additive conjunction**（`&`）对应共享借用。Rust 的借用规则是线性逻辑 **ILL**（Intuitionistic Linear Logic）的实用化变体：独占资源（`own`）可分割为共享权限（`shr`）和独占权限（`own ∗ shr`），但共享权限不能升级为独占权限。这保证了"读取者-写入者"互斥——多个读者或单个写者，永不会同时存在。来源: [RustBelt Paper]
 
 ### 10.3 边界测试：所有权转移与线性逻辑的析取（编译错误）
@@ -1038,7 +994,6 @@ fn branch(use_a: bool) {
 fn consume_a(_: String) {}
 fn consume_b(_: String) {}
 ```
-
 > **修正**: 线性逻辑中的**析取**（disjunction，`A ⊸ (B ∨ C)`）要求资源在使用后消失。Rust 的 `if/else` 分支中，变量在其中一个分支被移动后，在整个表达式后不可用——即使逻辑上"只有一个分支会执行"，编译器仍保守地要求变量在分支后不可用。这是线性逻辑的资源守恒：资源进入分支，在分支内消耗，不能"凭空再生"。这与 C++ 的 `if`（变量在两个分支都可用，因为是复制）或 Haskell 的 `if`（惰性求值，资源按需使用）不同——Rust 的 `if` 是严格求值的，资源在分支点被判定为已消耗。正确做法：在需要保留的分支中 `clone`，或重构代码使分支返回值而非消耗资源。[来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)]
 
 ### 10.4 边界测试：`!` 类型与线性逻辑的底（编译错误）
@@ -1058,7 +1013,6 @@ fn main() {
     let z: i32 = diverges();    // ! → i32
 }
 ```
-
 > **修正**: `!`（never type）在类型论中对应于**底**（bottom，⊥），表示不可达计算。在线性逻辑中，⊥ 是零资源——从 ⊥ 可推导任意命题（ex falso quodlibet）。Rust 中 `!` 可 coerce 为任意类型，因此 `let y: String = diverges()` 合法：编译器知道 `diverges()` 永不返回，赋值永不执行，类型兼容性是形式上的。但 `!` 本身没有值，不能调用方法或打印。`!` 的稳定化（从实验到部分稳定）是 Rust 类型系统的演进标志。这与 Haskell 的 `Void`（无 inhabitant，需 `absurd` 转换）或 TypeScript 的 `never`（类似语义）类似——Rust 的 `!` 在控制流分析中发挥关键作用（`if`/`match` 分支类型统一、 `?` 运算符）。[来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
 
 ### 10.3 边界测试：线性类型与 `Copy` 的冲突（编译错误）
@@ -1079,7 +1033,6 @@ fn main() {
     use_resource(res);
 }
 ```
-
 > **修正**: Rust 的所有权系统本质是**仿射类型系统**（affine types）：值可被使用一次或零次（可选择丢弃）。线性逻辑要求值**必须**使用恰好一次（不可丢弃）。Rust 的 `Drop` trait 允许自定义丢弃逻辑，但不强制使用。要实现真正的线性类型：1) `must_use` 属性（警告未使用，但不编译错误）；2) 闭包/回调模式（将资源传入 continuation，强制使用）；3) 类型状态模式（状态转换消耗旧状态）。这与 Idris 的 `LinearTypes`（1.0+ 原生支持，编译期强制使用一次）或 Haskell 的 `LinearTypes`（GHC 9.x+，`-XLinearTypes`）不同——Rust 的 affine 类型更实用（允许未使用），但牺牲了一些形式化保证。[来源: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
 
 ### 10.4 边界测试：线性类型的 drop 约束与资源泄漏检测（编译错误）
@@ -1101,7 +1054,6 @@ fn main() {
     res.consume();
 }
 ```
-
 > **修正**: Rust 的 **所有权** 实现了**近似线性类型**（affine type）：1) 值可使用一次（move）或多次（`Copy`）；2) 非 `Copy` 类型 move 后不可再用；3) `Drop` 在值离开作用域时自动调用（除非 `mem::forget`）。纯线性类型（如 Linear Haskell）要求值**必须**使用一次（不能丢弃），Rust 是**affine**（可用零次或一次）。资源管理：1) `File` — `drop` 关闭文件描述符；2) `MutexGuard` — `drop` 释放锁；3) `Box` — `drop` 释放堆内存。显式泄漏：`mem::forget(res)` — 不调用 `drop`，内存/资源泄漏（有时 intentional）。这与 C++ 的 RAII（类似，但允许拷贝和多次使用）或 Java 的 try-with-resources（运行时检查，编译器不保证使用）不同——Rust 的所有权是编译期资源管理。[来源: [Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)] · [来源: [Linear Logic](https://plato.stanford.edu/entries/logic-linear/)]
 
 ### 10.1 边界测试：match 分支返回类型不一致
@@ -1117,7 +1069,6 @@ fn main() {
     println!("{}", v);
 }
 ```
-
 > **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。
 
 ## 嵌入式测验（Embedded Quiz）

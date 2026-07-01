@@ -57,7 +57,6 @@ fn create_server(bind_addr: SocketAddr) -> anyhow::Result<Endpoint> {
     Ok(endpoint)
 }
 ```
-
 ### 条件编译
 
 由于 QUIC 依赖可选，代码使用 feature gate：
@@ -73,7 +72,6 @@ pub mod quic_stub {
     // 占位实现与概念说明
 }
 ```
-
 ## 编译与运行
 
 ```bash
@@ -82,7 +80,6 @@ cargo check -p c10_networks --features quic
 
 # 注意：QUIC 示例需要有效的 TLS 证书配置才能运行服务端
 ```
-
 ## 参考
 
 - [RFC 9000 - QUIC](https://datatracker.ietf.org/doc/html/rfc9000)

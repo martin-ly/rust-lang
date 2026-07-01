@@ -71,7 +71,6 @@ c10_networks = "0.1.0"
 tokio = { version = "1.0", features = ["full"] }
 bytes = "1.0"
 ```
-
 ### 第一个网络程序
 
 ```rust
@@ -95,7 +94,6 @@ async fn main() -> io::Result<()> {
     Ok(())
 }
 ```
-
 ## 基础教程
 
 ### TCP 客户端/服务器
@@ -138,7 +136,6 @@ async fn main() -> io::Result<()> {
     }
 }
 ```
-
 #### 创建 TCP 客户端
 
 ```rust
@@ -165,7 +162,6 @@ async fn main() -> io::Result<()> {
     Ok(())
 }
 ```
-
 ### UDP 通信
 
 #### UDP 服务器
@@ -192,7 +188,6 @@ async fn main() -> std::io::Result<()> {
     }
 }
 ```
-
 #### UDP 客户端
 
 ```rust
@@ -216,7 +211,6 @@ async fn main() -> std::io::Result<()> {
     Ok(())
 }
 ```
-
 ### HTTP 客户端
 
 #### 基本 HTTP 请求
@@ -257,7 +251,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 #### 带认证的 HTTP 请求
 
 ```rust
@@ -284,7 +277,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### WebSocket 连接
 
 #### WebSocket 客户端
@@ -360,7 +352,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ## 高级教程
 
 ### 异步网络编程
@@ -417,7 +408,6 @@ fn process_request(request: &str) -> String {
     }
 }
 ```
-
 #### 连接池管理
 
 ```rust
@@ -463,7 +453,6 @@ async fn main() -> std::io::Result<()> {
     Ok(())
 }
 ```
-
 ### 错误处理
 
 #### 自定义错误类型
@@ -515,7 +504,6 @@ async fn handle_network_operation() -> Result<(), CustomError> {
     }
 }
 ```
-
 #### 错误恢复策略
 
 ```rust
@@ -565,7 +553,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 性能优化
 
 #### 零拷贝优化
@@ -593,7 +580,6 @@ fn build_packet_efficiently() -> Packet {
         .build()
 }
 ```
-
 #### 内存池使用
 
 ```rust
@@ -628,7 +614,6 @@ fn process_data(data: &[u8]) -> Vec<u8> {
     data.iter().map(|&b| b.wrapping_add(1)).collect()
 }
 ```
-
 ### 安全配置
 
 #### TLS 配置
@@ -677,7 +662,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 }
 ```
-
 #### 认证和授权
 
 ```rust
@@ -725,7 +709,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ## 最佳实践
 
 ### 代码组织
@@ -754,7 +737,6 @@ pub use client::TcpClient;
 pub use server::TcpServer;
 pub use connection::TcpConnection;
 ```
-
 #### 配置管理
 
 ```rust
@@ -795,7 +777,6 @@ impl ServerConfig {
     }
 }
 ```
-
 ### 资源管理
 
 #### 连接生命周期管理
@@ -846,7 +827,6 @@ impl ConnectionManager {
     }
 }
 ```
-
 #### 内存管理
 
 ```rust
@@ -888,7 +868,6 @@ impl ResourceManager {
     }
 }
 ```
-
 ### 测试策略
 
 #### 单元测试
@@ -928,7 +907,6 @@ mod tests {
     }
 }
 ```
-
 #### 集成测试
 
 ```rust
@@ -967,7 +945,6 @@ mod integration_tests {
     }
 }
 ```
-
 ### 部署指南
 
 #### Docker 部署
@@ -986,7 +963,6 @@ COPY --from=builder /app/target/release/c10_networks /usr/local/bin/c10_networks
 EXPOSE 8080
 CMD ["c10_networks"]
 ```
-
 #### Kubernetes 部署
 
 ```yaml
@@ -1033,7 +1009,6 @@ spec:
       targetPort: 8080
   type: LoadBalancer
 ```
-
 ## 常见问题
 
 ### Q: 如何处理网络连接超时？
@@ -1061,7 +1036,6 @@ async fn handle_timeout() -> Result<(), NetworkError> {
     }
 }
 ```
-
 ### Q: 如何优化大量并发连接的性能？
 
 A: 使用连接池和异步处理：
@@ -1101,7 +1075,6 @@ impl HighPerformanceServer {
     }
 }
 ```
-
 ### Q: 如何实现自定义协议？
 
 A: 实现 `Packet` trait 和相关的序列化/反序列化逻辑：
@@ -1163,7 +1136,6 @@ impl Packet for CustomPacket {
     }
 }
 ```
-
 ## 进阶主题
 
 ### 自定义协议
@@ -1214,7 +1186,6 @@ impl Protocol for CustomProtocol {
     }
 }
 ```
-
 ### 网络监控
 
 #### 实现网络监控
@@ -1263,7 +1234,6 @@ impl NetworkMonitor {
     }
 }
 ```
-
 ### 负载均衡
 
 #### 实现简单的负载均衡
@@ -1330,7 +1300,6 @@ impl BalancedClient {
     }
 }
 ```
-
 ### 故障恢复
 
 #### 实现故障恢复机制
@@ -1382,7 +1351,6 @@ impl FaultTolerantClient {
     }
 }
 ```
-
 这个教程涵盖了 c10_networks 库的主要功能和使用方法，从基础的网络编程到高级的性能优化和安全配置。通过遵循这些最佳实践，您可以构建高效、可靠和安全的网络应用程序
 
 ---

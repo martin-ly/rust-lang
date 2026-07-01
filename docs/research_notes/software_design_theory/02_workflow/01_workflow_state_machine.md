@@ -1,27 +1,16 @@
 # 工作流状态机模式形式化定义 {#工作流状态机模式形式化定义}
 
 > **概念族**: 软件设计 / 工作流模式 / 状态机
-
 > **内容分级**: [归档级]
-
 > **分级**: [B]
-
 > **Bloom 层级**: L4-L6 (分析/评价/创造)
-
 > **模式类型**: 工作流状态机
-
 > **创建日期**: 2026-06-29
-
 > **版本**: v1.0
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
-
 > **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/02_workflow/` 迁回，正在按 [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)、[Tokio Tutorial](https://tokio.rs/tokio/tutorial)、[Rust Reference](https://doc.rust-lang.org/reference/) 等权威来源升级。
-
 > **权威来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ---
@@ -89,7 +78,6 @@
 ```text
 M := (S, E, T ⊆ S × E × S, s₀ ∈ S, F ⊆ S)
 ```
-
 其中：
 
 - `S`：有限非空状态集合。
@@ -107,7 +95,6 @@ M := (S, E, T ⊆ S × E × S, s₀ ∈ S, F ⊆ S)
 ```text
 ∀ instance, ∀ t, ∃! s ∈ S : state(instance, t) = s
 ```
-
 ### Theorem WF1: 状态可达性 {#theorem-wf1-状态可达性}
 
 > **来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
@@ -177,7 +164,6 @@ fn main() {
     assert!(matches!(err, Err(TransitionError::InvalidTransition { .. })));
 }
 ```
-
 > **来源**: [Rust Standard Library](https://doc.rust-lang.org/std/)
 
 ### 4.2 Typestate 模式 {#42-typestate-模式}
@@ -230,7 +216,6 @@ fn main() {
     // let bad = Order::new(43).ship();
 }
 ```
-
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ### 4.3 持久化工作流 {#43-持久化工作流}
@@ -316,7 +301,6 @@ fn main() {
     assert_eq!(wf.current().unwrap(), OrderState::Shipped);
 }
 ```
-
 > **来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
 
 ---
@@ -331,7 +315,6 @@ fn main() {
 let state = OrderState::Shipped;
 state.transition(OrderEvent::Pay).unwrap(); // Err: invalid transition
 ```
-
 **违反**：Axiom WF1 与 Theorem WF1 要求迁移必须属于 `T`。
 
 **修复**：在应用事件前检查当前状态与事件的组合是否合法；Typestate 模式可进一步在编译期禁止。
@@ -360,7 +343,6 @@ t1.join().unwrap();
 t2.join().unwrap();
 // 实际结果依赖线程调度顺序，可能出现非预期状态
 ```
-
 **违反**：Axiom WF1 的状态唯一性在逻辑层面被打破。
 
 **修复**：
@@ -407,14 +389,12 @@ t2.join().unwrap();
 > - [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > - [Rust Standard Library](https://doc.rust-lang.org/std/)
 > - [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-
 > **P1 权威来源（Rust 社区与工程实践）**:
 >
 > - [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
 > - [Tokio Tutorial](https://tokio.rs/tokio/tutorial)
 > - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
-
 > **P2 权威来源（学术与行业经典）**:
 >
 > - [Wikipedia - Finite-state machine](https://en.wikipedia.org/wiki/Finite-state_machine)

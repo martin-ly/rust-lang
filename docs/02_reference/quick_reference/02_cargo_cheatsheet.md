@@ -114,7 +114,6 @@ cargo init
 # 创建库项目（当前目录） {#创建库项目当前目录}
 cargo init --lib
 ```
-
 ## 📑 目录 {#目录-1}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -200,7 +199,6 @@ my_project/
 └── src/
     └── main.rs     # 主文件（二进制）或 lib.rs（库）
 ```
-
 ---
 
 ## 🔨 构建命令 {#构建命令}
@@ -226,7 +224,6 @@ cargo check
 # 清理构建产物 {#清理构建产物}
 cargo clean
 ```
-
 ### 指定目标 {#指定目标}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -250,7 +247,6 @@ cargo build --example my_example
 cargo build --target x86_64-unknown-linux-gnu
 cargo build --target wasm32-unknown-unknown
 ```
-
 ### 特性标志 {#特性标志}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -267,7 +263,6 @@ cargo build --all-features
 # 不使用默认特性 {#不使用默认特性}
 cargo build --no-default-features
 ```
-
 ### 并行和优化 {#并行和优化}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -285,7 +280,6 @@ cargo build -vv  # 更详细
 # 显示编译命令 {#显示编译命令}
 cargo build --verbose
 ```
-
 ---
 
 ## 🧪 测试命令 {#测试命令}
@@ -314,7 +308,6 @@ cargo test -- --nocapture
 # 单线程运行（调试用） {#单线程运行调试用}
 cargo test -- --test-threads=1
 ```
-
 ### 测试选项 {#测试选项}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -335,7 +328,6 @@ cargo test --test integration_test
 # 运行文档测试 {#运行文档测试}
 cargo test --doc
 ```
-
 ### 基准测试 {#基准测试}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -350,7 +342,6 @@ cargo bench --bench my_benchmark
 # 运行特定测试 {#运行特定测试-1}
 cargo bench --bench my_benchmark test_name
 ```
-
 ---
 
 ## 📚 依赖管理 {#依赖管理}
@@ -377,7 +368,6 @@ cargo add --build serde_codegen
 # 添加特定版本 {#添加特定版本}
 cargo add serde@1.0
 ```
-
 ### 更新依赖 {#更新依赖-1}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -392,7 +382,6 @@ cargo update -p serde
 # 精确版本更新 {#精确版本更新}
 cargo update -p serde --precise 1.0.100
 ```
-
 ### 查看依赖 {#查看依赖}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -413,7 +402,6 @@ cargo tree --depth 2
 # 显示特性 {#显示特性}
 cargo tree -f "{p} {f}"
 ```
-
 ### 依赖检查 {#依赖检查}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -430,7 +418,6 @@ cargo audit
 # 自动修复安全问题 {#自动修复安全问题}
 cargo audit fix
 ```
-
 ---
 
 ## 📤 发布命令 {#发布命令}
@@ -454,7 +441,6 @@ cargo publish -p package_name
 # 发布时允许脏工作目录 {#发布时允许脏工作目录}
 cargo publish --allow-dirty
 ```
-
 ### 版本管理 {#版本管理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -469,7 +455,6 @@ cargo release --workspace
 # 预览发布 {#预览发布}
 cargo release --workspace --dry-run
 ```
-
 ---
 
 ## 🏢 工作空间 {#工作空间}
@@ -493,7 +478,6 @@ cargo test --workspace
 # 检查所有成员 {#检查所有成员}
 cargo check --workspace
 ```
-
 ### 工作空间结构 {#工作空间结构}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -510,7 +494,6 @@ members = [
 serde = "1.0"
 tokio = { version = "1.0", features = ["full"] }
 ```
-
 ---
 
 ## ⚙️ 配置文件 {#配置文件}
@@ -542,7 +525,6 @@ serde_codegen = "1.0"
 default = ["std"]
 async = ["tokio"]
 ```
-
 ### 构建配置 {#构建配置}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -560,7 +542,6 @@ codegen-units = 1
 strip = true
 panic = "abort"
 ```
-
 ### 特性配置 {#特性配置}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -572,7 +553,6 @@ std = []
 async = ["tokio"]
 serde = ["dep:serde"]
 ```
-
 ---
 
 ## 🛠️ 常用工具 {#常用工具}
@@ -593,7 +573,6 @@ cargo fmt -- --check
 # 格式化所有文件 {#格式化所有文件}
 cargo fmt --all
 ```
-
 ### 代码检查 {#代码检查}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -611,7 +590,6 @@ cargo clippy --all-features
 # 修复建议 {#修复建议}
 cargo clippy --fix
 ```
-
 ### 文档生成 {#文档生成}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -629,7 +607,6 @@ cargo doc --workspace
 # 不构建依赖文档 {#不构建依赖文档}
 cargo doc --no-deps
 ```
-
 ### 代码覆盖率 {#代码覆盖率}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -647,7 +624,6 @@ cargo tarpaulin --out Stdout
 # 设置覆盖率阈值 {#设置覆盖率阈值}
 cargo tarpaulin --fail-under 80
 ```
-
 ### 宏展开 {#宏展开}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -662,7 +638,6 @@ cargo expand
 # 展开特定项 {#展开特定项}
 cargo expand my_function
 ```
-
 ---
 
 ## 🎯 常用别名 {#常用别名}
@@ -694,7 +669,6 @@ clippy-pedantic = "clippy --all -- -W clippy::pedantic"
 # 格式化别名 {#格式化别名}
 fmt-check = "fmt --all -- --check"
 ```
-
 ### 使用别名 {#使用别名}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -705,7 +679,6 @@ cargo test-all
 cargo build-release
 cargo clippy-all
 ```
-
 ---
 
 ## 📊 常用工作流 {#常用工作流}
@@ -733,7 +706,6 @@ cargo fmt            # 格式化
 # 4. 构建发布版本 {#4-构建发布版本}
 cargo build --release
 ```
-
 ### CI/CD 工作流 {#cicd-工作流}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -757,7 +729,6 @@ cargo build --release
 # 文档 {#文档}
 cargo doc --no-deps
 ```
-
 ### 发布工作流 {#发布工作流}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -776,7 +747,6 @@ cargo publish --dry-run
 # 4. 发布 {#4-发布}
 cargo publish
 ```
-
 ---
 
 ## 🔍 故障排查 {#故障排查}
@@ -798,7 +768,6 @@ cargo clean -p package_name
 rm -rf target/
 cargo build
 ```
-
 ### 依赖问题 {#依赖问题}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -813,7 +782,6 @@ cargo update
 # 检查依赖版本 {#检查依赖版本}
 cargo tree -p problematic_crate
 ```
-
 ### 构建问题 {#构建问题}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -828,7 +796,6 @@ cargo check --features "feature1,feature2"
 # 检查目标平台 {#检查目标平台}
 cargo build --target <target>
 ```
-
 ---
 
 ## 🚫 反例速查 {#反例速查}
@@ -846,7 +813,6 @@ cargo build --target <target>
 tokio = "1.0"   # crate A
 other = "2.0"  # 内部依赖 tokio 1.5  ❌ 可能冲突
 ```
-
 **原因**: 不同 crate 依赖同一库的不同版本，导致重复编译或行为不一致。
 
 **修正**: 使用 `[workspace.dependencies]` 统一版本，或 `cargo tree` 检查。
@@ -863,7 +829,6 @@ other = "2.0"  # 内部依赖 tokio 1.5  ❌ 可能冲突
 [dependencies]
 tempfile = "3.0"  # 若仅测试用，不应放这里
 ```
-
 **原因**: 生产构建会包含不需要的依赖。
 
 **修正**: 测试专用依赖放 `[dev-dependencies]`。
@@ -950,7 +915,6 @@ std = []
 no_std = ["alloc"]
 alloc = []
 ```
-
 ### 场景 2: 工作空间发布管理 {#场景-2-工作空间发布管理}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -980,7 +944,6 @@ serde = { version = "1.0", features = ["derive"] }
 # 开发依赖 {#开发依赖}
 criterion = "0.5"
 ```
-
 ```bash
 # 发布流程 {#发布流程}
 # 1. 更新版本 {#1-更新版本-1}
@@ -1000,7 +963,6 @@ $ cargo publish -p utils
 $ cargo publish -p core-lib
 $ cargo publish -p app
 ```
-
 ### 场景 3: 性能优化构建配置 {#场景-3-性能优化构建配置}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -1031,7 +993,6 @@ codegen-units = 1
 panic = "abort"
 strip = true
 ```
-
 ```bash
 # 构建优化版本 {#构建优化版本}
 $ cargo build --profile release-native
@@ -1042,7 +1003,6 @@ $ cargo build --profile size-optimized
 # 分析二进制大小 {#分析二进制大小}
 $ cargo bloat --release
 ```
-
 ---
 
 ## 📐 形式化方法链接 {#形式化方法链接}
@@ -1125,7 +1085,6 @@ pub fn get_config() -> Option<&'static Config> {
 let phi = f64::consts::GOLDEN_RATIO;
 let gamma = f64::consts::EULER_GAMMA;
 ```
-
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.96+ 特性)

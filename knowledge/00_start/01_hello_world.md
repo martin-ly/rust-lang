@@ -41,7 +41,6 @@
 cargo new hello_world
 cd hello_world
 ```
-
 Cargo 会创建以下结构：
 
 ```
@@ -51,7 +50,6 @@ hello_world/
 └── src/
     └── main.rs     # 主程序入口
 ```
-
 ## 📄 项目文件详解
 >
 > **[来源: Rust Official Docs]**
@@ -69,7 +67,6 @@ edition = "2024"      # Rust 版本
 [dependencies]
 # 依赖项（目前为空）
 ```
-
 ### src/main.rs
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -79,7 +76,6 @@ fn main() {
     println!("Hello, world!");
 }
 ```
-
 ## 🏃 编译和运行
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -91,7 +87,6 @@ fn main() {
 ```bash
 cargo run
 ```
-
 输出：
 
 ```
@@ -100,7 +95,6 @@ cargo run
      Running `target/debug/hello_world`
 Hello, world!
 ```
-
 ### 发布模式（优化编译）
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -108,7 +102,6 @@ Hello, world!
 ```bash
 cargo run --release
 ```
-
 ## 🧠 代码解析
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -130,7 +123,6 @@ println!("Hello, world!");           // 基本用法
 println!("Hello, {}!", "Rust");      // 格式化
 println!("1 + 1 = {}", 1 + 1);       // 表达式
 ```
-
 注意 `!` 表示这是一个**宏**，不是普通函数。
 
 ## ✨ 增强示例
@@ -155,7 +147,6 @@ fn main() {
     println!("你好, {}!", name.trim());
 }
 ```
-
 运行：
 
 ```bash
@@ -164,7 +155,6 @@ $ cargo run
 Alice
 你好, Alice!
 ```
-
 ### 示例 2: 计算程序
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -180,7 +170,6 @@ fn main() {
     println!("x * y = {}", x * y);
 }
 ```
-
 ## 📁 项目结构详解
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -199,7 +188,6 @@ my_project/
     ├── debug/          # 开发构建
     └── release/        # 发布构建
 ```
-
 ## ⚠️ 常见错误
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -224,7 +212,6 @@ my_project/
 Hello, Rust!
 版本: 1.96.0+
 ```
-
 ### 练习 2: 简单计算器
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -255,7 +242,6 @@ fn main() {
     println!("商: {}", a / b);
 }
 ```
-
 </details>
 
 ## ✅ 自我检测

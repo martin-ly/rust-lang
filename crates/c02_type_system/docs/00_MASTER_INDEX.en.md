@@ -22,9 +22,9 @@
 
 ### By Role
 
-- **Beginner**: [Project Overview](tier_01_foundations/01_项目概览.md) | [Glossary](tier_01_foundations/03_术语表.md) | [FAQ](tier_01_foundations/04_常见问题.md)
-- **Intermediate**: [Basic Types Guide](tier_02_guides/01_基础类型指南.md) | [Generics Guide](tier_02_guides/03_泛型编程指南.md) | [Trait System Guide](tier_02_guides/04_Trait系统指南.md)
-- **Advanced**: [Type System Spec](tier_03_references/01_类型系统规范.md) | [Variance Reference](tier_03_references/02_类型型变参考.md) | [Dispatch Reference](tier_03_references/03_分派机制参考.md)
+- **Beginner**: [Project Overview](tier_01_foundations/01_project_overview.md) | [Glossary](tier_01_foundations/03_glossary.md) | [FAQ](tier_01_foundations/04_faq.md)
+- **Intermediate**: [Basic Types Guide](tier_02_guides/01_basic_types_guide.md) | [Generics Guide](tier_02_guides/03_generics_programming_guide.md) | [Trait System Guide](tier_02_guides/04_trait_system_guide.md)
+- **Advanced**: [Type System Spec](tier_03_references/01_type_system_specification.md) | [Variance Reference](tier_03_references/02_variance_reference.md) | [Dispatch Reference](tier_03_references/03_dispatch_mechanisms_reference.md)
 
 ### Tier Structure
 
@@ -62,7 +62,6 @@ cargo run -p c02_type_system --example <example_name>
 # Run all tests
 cargo test -p c02_type_system
 ```
-
 ---
 
 ## Cheatsheet & Rustlings

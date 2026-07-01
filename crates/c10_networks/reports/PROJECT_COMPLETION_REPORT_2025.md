@@ -115,7 +115,6 @@ fn parse_request(data: &[u8]) -> NetworkResult<HttpRequest> {
         .flatten()
 }
 ```
-
 ### 2. 现代化错误处理
 
 ```rust
@@ -130,7 +129,6 @@ pub enum NetworkError {
     // ... 更多错误类型
 }
 ```
-
 ### 3. 异步网络编程
 
 ```rust
@@ -146,7 +144,6 @@ async fn main() -> NetworkResult<()> {
     }
 }
 ```
-
 ### 4. 零拷贝优化
 
 ```rust
@@ -157,7 +154,6 @@ struct ZeroCopyBuffer {
     slices: Vec<IoSlice<'static>>,
 }
 ```
-
 ## 📊 项目统计
 
 ### 代码统计
@@ -211,7 +207,6 @@ tracing-subscriber = "0.3"
 ring = "0.17"
 rustls = "0.21"
 ```
-
 ### 开发工具
 
 ```toml
@@ -220,7 +215,6 @@ tokio-test = "0.4"
 criterion = { version = "0.5", features = ["html_reports"] }
 futures = "0.3"
 ```
-
 ## 📚 文档体系
 
 ### 1. 技术文档

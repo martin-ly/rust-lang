@@ -1,0 +1,2025 @@
+﻿# 4.5 Rust 类型系统 - 设计模式集
+
+> **文档类型**: Tier 4 - 高级层
+> **文档定位**: Rust 设计模式完整参考
+> **适用对象**: 中级 → 高级开发者
+> **前置知识**: [2.3 泛型编程指南](../tier_02_guides/03_generics_programming_guide.md), [2.4 Trait系统指南](../tier_02_guides/04_trait_system_guide.md)
+> **最后更新**: 2025-12-11
+
+---
+
+## 📋 目录
+
+- [4.5 Rust 类型系统 - 设计模式集](#45-rust-类型系统---设计模式集)
+  - [📋 目录](#-目录)
+  - [🎯 概述](#-概述)
+  - [1. 创建型模式](#1-创建型模式)
+    - [Builder 模式](#builder-模式)
+    - [Factory 模式](#factory-模式)
+  - [2. 结构型模式](#2-结构型模式)
+    - [Adapter 模式](#adapter-模式)
+    - [Decorator 模式](#decorator-模式)
+  - [3. 行为型模式](#3-行为型模式)
+    - [Strategy 模式](#strategy-模式)
+    - [Visitor 模式](#visitor-模式)
+    - [Iterator 模式](#iterator-模式)
+  - [4. Rust 特有模式](#4-rust-特有模式)
+    - [RAII (Resource Acquisition Is Initialization)](#raii-resource-acquisition-is-initialization)
+    - [Typestate 模式](#typestate-模式)
+    - [Extension Trait 模式](#extension-trait-模式)
+  - [5. 并发模式](#5-并发模式)
+    - [Actor 模式](#actor-模式)
+  - [6. 最佳实践](#6-最佳实践)
+    - [组合优于继承](#组合优于继承)
+    - [使用 Trait 对象实现多态](#使用-trait-对象实现多态)
+  - [6. 错误处理模式](#6-错误处理模式)
+    - [Result组合模式](#result组合模式)
+    - [自定义错误类型](#自定义错误类型)
+    - [Try trait模式](#try-trait模式)
+  - [7. 内存管理模式](#7-内存管理模式)
+    - [Arena分配模式](#arena分配模式)
+    - [对象池模式](#对象池模式)
+  - [8. Trait对象模式](#8-trait对象模式)
+    - [动态分发](#动态分发)
+    - [枚举分发（更高效）](#枚举分发更高效)
+  - [9. 类型安全API设计](#9-类型安全api设计)
+    - [幻影类型参数](#幻影类型参数)
+    - [Session Types](#session-types)
+  - [10. 函数式模式](#10-函数式模式)
+    - [Monad-like模式](#monad-like模式)
+    - [Lens模式（聚焦数据）](#lens模式聚焦数据)
+    - [10.1 高级函数式模式：Applicative与Monad深化](#101-高级函数式模式applicative与monad深化)
+    - [10.2 Free Monad模式](#102-free-monad模式)
+    - [10.3 Zipper模式（高效导航）](#103-zipper模式高效导航)
+    - [10.4 Optics模式（Prism与Iso）](#104-optics模式prism与iso)
+    - [10.5 Reader Monad模式（依赖注入）](#105-reader-monad模式依赖注入)
+    - [10.6 Writer Monad模式（日志累积）](#106-writer-monad模式日志累积)
+    - [10.7 State Monad模式（状态转换）](#107-state-monad模式状态转换)
+    - [10.8 并发模式深化](#108-并发模式深化)
+    - [10.9 性能优化模式集](#109-性能优化模式集)
+  - [11. 总结](#11-总结)
+  - [8. 参考资源](#8-参考资源)
+  - [**🎉 完成设计模式集学习！** 🦀](#-完成设计模式集学习-)
+
+---
+
+## 🎯 概述
+
+Rust 设计模式分类：
+
+| 类别         | 模式                              |
+| :--- | :--- |
+| **创建型**   | Builder, Factory, Singleton       |
+| **结构型**   | Adapter, Decorator, Newtype       |
+| **行为型**   | Strategy, Visitor, Iterator       |
+| **Rust特有** | RAII, Typestate, Extension Traits |
+
+---
+
+## 1. 创建型模式
+
+### Builder 模式
+
+```rust
+struct Server {
+    host: String,
+    port: u16,
+    timeout: u64,
+    max_connections: usize,
+}
+
+struct ServerBuilder {
+    host: Option<String>,
+    port: Option<u16>,
+    timeout: Option<u64>,
+    max_connections: Option<usize>,
+}
+
+impl ServerBuilder {
+    fn new() -> Self {
+        ServerBuilder {
+            host: None,
+            port: None,
+            timeout: None,
+            max_connections: None,
+        }
+    }
+
+    fn host(mut self, host: String) -> Self {
+        self.host = Some(host);
+        self
+    }
+
+    fn port(mut self, port: u16) -> Self {
+        self.port = Some(port);
+        self
+    }
+
+    fn timeout(mut self, timeout: u64) -> Self {
+        self.timeout = Some(timeout);
+        self
+    }
+
+    fn max_connections(mut self, max: usize) -> Self {
+        self.max_connections = Some(max);
+        self
+    }
+
+    fn build(self) -> Result<Server, String> {
+        Ok(Server {
+            host: self.host.ok_or("host is required")?,
+            port: self.port.unwrap_or(8080),
+            timeout: self.timeout.unwrap_or(30),
+            max_connections: self.max_connections.unwrap_or(100),
+        })
+    }
+}
+
+fn main() {
+    let server = ServerBuilder::new()
+        .host(String::from("localhost"))
+        .port(3000)
+        .timeout(60)
+        .build()
+        .unwrap();
+
+    println!("Server: {}:{}", server.host, server.port);
+}
+```
+### Factory 模式
+
+```rust
+trait Animal {
+    fn speak(&self);
+}
+
+struct Dog;
+struct Cat;
+
+impl Animal for Dog {
+    fn speak(&self) {
+        println!("Woof!");
+    }
+}
+
+impl Animal for Cat {
+    fn speak(&self) {
+        println!("Meow!");
+    }
+}
+
+enum AnimalType {
+    Dog,
+    Cat,
+}
+
+struct AnimalFactory;
+
+impl AnimalFactory {
+    fn create(animal_type: AnimalType) -> Box<dyn Animal> {
+        match animal_type {
+            AnimalType::Dog => Box::new(Dog),
+            AnimalType::Cat => Box::new(Cat),
+        }
+    }
+}
+
+fn main() {
+    let animals: Vec<Box<dyn Animal>> = vec![
+        AnimalFactory::create(AnimalType::Dog),
+        AnimalFactory::create(AnimalType::Cat),
+    ];
+
+    for animal in animals {
+        animal.speak();
+    }
+}
+```
+---
+
+## 2. 结构型模式
+
+### Adapter 模式
+
+```rust
+// 旧接口
+struct OldLogger;
+
+impl OldLogger {
+    fn log_message(&self, msg: &str) {
+        println!("[OLD] {}", msg);
+    }
+}
+
+// 新接口
+trait Logger {
+    fn log(&self, level: &str, msg: &str);
+}
+
+// Adapter
+struct LoggerAdapter {
+    old_logger: OldLogger,
+}
+
+impl Logger for LoggerAdapter {
+    fn log(&self, level: &str, msg: &str) {
+        let formatted = format!("[{}] {}", level, msg);
+        self.old_logger.log_message(&formatted);
+    }
+}
+
+fn main() {
+    let adapter = LoggerAdapter {
+        old_logger: OldLogger,
+    };
+
+    adapter.log("INFO", "Application started");
+}
+```
+### Decorator 模式
+
+```rust
+trait Component {
+    fn operation(&self) -> String;
+}
+
+struct ConcreteComponent;
+
+impl Component for ConcreteComponent {
+    fn operation(&self) -> String {
+        String::from("ConcreteComponent")
+    }
+}
+
+struct DecoratorA<T: Component> {
+    component: T,
+}
+
+impl<T: Component> Component for DecoratorA<T> {
+    fn operation(&self) -> String {
+        format!("DecoratorA({})", self.component.operation())
+    }
+}
+
+struct DecoratorB<T: Component> {
+    component: T,
+}
+
+impl<T: Component> Component for DecoratorB<T> {
+    fn operation(&self) -> String {
+        format!("DecoratorB({})", self.component.operation())
+    }
+}
+
+fn main() {
+    let component = ConcreteComponent;
+    let decorated_a = DecoratorA { component };
+    let decorated_b = DecoratorB { component: decorated_a };
+
+    println!("{}", decorated_b.operation());
+}
+```
+---
+
+## 3. 行为型模式
+
+### Strategy 模式
+
+```rust
+trait CompressionStrategy {
+    fn compress(&self, data: &str) -> String;
+}
+
+struct ZipCompression;
+struct GzipCompression;
+
+impl CompressionStrategy for ZipCompression {
+    fn compress(&self, data: &str) -> String {
+        format!("ZIP: {}", data)
+    }
+}
+
+impl CompressionStrategy for GzipCompression {
+    fn compress(&self, data: &str) -> String {
+        format!("GZIP: {}", data)
+    }
+}
+
+struct Compressor<S: CompressionStrategy> {
+    strategy: S,
+}
+
+impl<S: CompressionStrategy> Compressor<S> {
+    fn new(strategy: S) -> Self {
+        Compressor { strategy }
+    }
+
+    fn compress_data(&self, data: &str) -> String {
+        self.strategy.compress(data)
+    }
+}
+
+fn main() {
+    let data = "Hello, World!";
+
+    let zip_compressor = Compressor::new(ZipCompression);
+    println!("{}", zip_compressor.compress_data(data));
+
+    let gzip_compressor = Compressor::new(GzipCompression);
+    println!("{}", gzip_compressor.compress_data(data));
+}
+```
+### Visitor 模式
+
+```rust
+trait Visitor {
+    fn visit_circle(&mut self, circle: &Circle);
+    fn visit_rectangle(&mut self, rectangle: &Rectangle);
+}
+
+trait Shape {
+    fn accept(&self, visitor: &mut dyn Visitor);
+}
+
+struct Circle {
+    radius: f64,
+}
+
+struct Rectangle {
+    width: f64,
+    height: f64,
+}
+
+impl Shape for Circle {
+    fn accept(&self, visitor: &mut dyn Visitor) {
+        visitor.visit_circle(self);
+    }
+}
+
+impl Shape for Rectangle {
+    fn accept(&self, visitor: &mut dyn Visitor) {
+        visitor.visit_rectangle(self);
+    }
+}
+
+struct AreaCalculator {
+    total_area: f64,
+}
+
+impl Visitor for AreaCalculator {
+    fn visit_circle(&mut self, circle: &Circle) {
+        self.total_area += std::f64::consts::PI * circle.radius * circle.radius;
+    }
+
+    fn visit_rectangle(&mut self, rectangle: &Rectangle) {
+        self.total_area += rectangle.width * rectangle.height;
+    }
+}
+
+fn main() {
+    let shapes: Vec<Box<dyn Shape>> = vec![
+        Box::new(Circle { radius: 5.0 }),
+        Box::new(Rectangle { width: 10.0, height: 20.0 }),
+    ];
+
+    let mut calculator = AreaCalculator { total_area: 0.0 };
+
+    for shape in &shapes {
+        shape.accept(&mut calculator);
+    }
+
+    println!("Total area: {}", calculator.total_area);
+}
+```
+### Iterator 模式
+
+```rust
+struct Counter {
+    count: usize,
+    max: usize,
+}
+
+impl Counter {
+    fn new(max: usize) -> Self {
+        Counter { count: 0, max }
+    }
+}
+
+impl Iterator for Counter {
+    type Item = usize;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.count < self.max {
+            let current = self.count;
+            self.count += 1;
+            Some(current)
+        } else {
+            None
+        }
+    }
+}
+
+fn main() {
+    let counter = Counter::new(5);
+
+    for i in counter {
+        println!("{}", i);
+    }
+}
+```
+---
+
+## 4. Rust 特有模式
+
+### RAII (Resource Acquisition Is Initialization)
+
+```rust
+use std::fs::File;
+use std::io::{self, Write};
+
+struct FileWriter {
+    file: File,
+}
+
+impl FileWriter {
+    fn new(path: &str) -> io::Result<Self> {
+        Ok(FileWriter {
+            file: File::create(path)?,
+        })
+    }
+
+    fn write_line(&mut self, line: &str) -> io::Result<()> {
+        writeln!(self.file, "{}", line)
+    }
+}
+
+impl Drop for FileWriter {
+    fn drop(&mut self) {
+        println!("Closing file");
+        // 文件自动关闭
+    }
+}
+
+fn main() -> io::Result<()> {
+    let mut writer = FileWriter::new("output.txt")?;
+    writer.write_line("Hello, RAII!")?;
+    // 离开作用域时自动关闭文件
+    Ok(())
+}
+```
+### Typestate 模式
+
+```rust
+use std::marker::PhantomData;
+
+struct Locked;
+struct Unlocked;
+
+struct Safe<State> {
+    content: String,
+    _state: PhantomData<State>,
+}
+
+impl Safe<Locked> {
+    fn new(content: String) -> Self {
+        Safe {
+            content,
+            _state: PhantomData,
+        }
+    }
+
+    fn unlock(self, password: &str) -> Result<Safe<Unlocked>, String> {
+        if password == "secret" {
+            Ok(Safe {
+                content: self.content,
+                _state: PhantomData,
+            })
+        } else {
+            Err(String::from("Wrong password"))
+        }
+    }
+}
+
+impl Safe<Unlocked> {
+    fn get_content(&self) -> &str {
+        &self.content
+    }
+
+    fn lock(self) -> Safe<Locked> {
+        Safe {
+            content: self.content,
+            _state: PhantomData,
+        }
+    }
+}
+
+fn main() {
+    let safe = Safe::<Locked>::new(String::from("treasure"));
+
+    match safe.unlock("secret") {
+        Ok(unlocked) => {
+            println!("Content: {}", unlocked.get_content());
+            let _locked_again = unlocked.lock();
+        }
+        Err(e) => println!("Error: {}", e),
+    }
+}
+```
+### Extension Trait 模式
+
+```rust
+trait StringExt {
+    fn is_palindrome(&self) -> bool;
+    fn reverse(&self) -> String;
+}
+
+impl StringExt for str {
+    fn is_palindrome(&self) -> bool {
+        let chars: Vec<char> = self.chars().collect();
+        chars == chars.iter().rev().copied().collect::<Vec<_>>()
+    }
+
+    fn reverse(&self) -> String {
+        self.chars().rev().collect()
+    }
+}
+
+fn main() {
+    println!("'radar' is palindrome: {}", "radar".is_palindrome());
+    println!("'hello' reversed: {}", "hello".reverse());
+}
+```
+---
+
+## 5. 并发模式
+
+### Actor 模式
+
+```rust
+use std::sync::mpsc::{self, Sender, Receiver};
+use std::thread;
+
+enum Message {
+    Increment,
+    Decrement,
+    Get(Sender<i32>),
+    Stop,
+}
+
+struct Counter {
+    value: i32,
+    receiver: Receiver<Message>,
+}
+
+impl Counter {
+    fn new(receiver: Receiver<Message>) -> Self {
+        Counter {
+            value: 0,
+            receiver,
+        }
+    }
+
+    fn run(&mut self) {
+        while let Ok(msg) = self.receiver.recv() {
+            match msg {
+                Message::Increment => self.value += 1,
+                Message::Decrement => self.value -= 1,
+                Message::Get(sender) => {
+                    sender.send(self.value).unwrap();
+                }
+                Message::Stop => break,
+            }
+        }
+    }
+}
+
+fn main() {
+    let (sender, receiver) = mpsc::channel();
+
+    thread::spawn(move || {
+        let mut counter = Counter::new(receiver);
+        counter.run();
+    });
+
+    sender.send(Message::Increment).unwrap();
+    sender.send(Message::Increment).unwrap();
+    sender.send(Message::Decrement).unwrap();
+
+    let (result_sender, result_receiver) = mpsc::channel();
+    sender.send(Message::Get(result_sender)).unwrap();
+
+    let value = result_receiver.recv().unwrap();
+    println!("Counter value: {}", value);
+
+    sender.send(Message::Stop).unwrap();
+}
+```
+---
+
+## 6. 最佳实践
+
+### 组合优于继承
+
+```rust
+// ✅ 组合
+struct Engine {
+    power: u32,
+}
+
+impl Engine {
+    fn start(&self) {
+        println!("Engine started with {} HP", self.power);
+    }
+}
+
+struct Car {
+    engine: Engine,
+    model: String,
+}
+
+impl Car {
+    fn start(&self) {
+        self.engine.start();
+        println!("Car {} is ready", self.model);
+    }
+}
+
+fn main() {
+    let car = Car {
+        engine: Engine { power: 200 },
+        model: String::from("Model S"),
+    };
+
+    car.start();
+}
+```
+### 使用 Trait 对象实现多态
+
+```rust
+trait Drawable {
+    fn draw(&self);
+}
+
+struct Circle;
+struct Square;
+
+impl Drawable for Circle {
+    fn draw(&self) {
+        println!("Drawing circle");
+    }
+}
+
+impl Drawable for Square {
+    fn draw(&self) {
+        println!("Drawing square");
+    }
+}
+
+fn draw_all(shapes: &[Box<dyn Drawable>]) {
+    for shape in shapes {
+        shape.draw();
+    }
+}
+
+fn main() {
+    let shapes: Vec<Box<dyn Drawable>> = vec![
+        Box::new(Circle),
+        Box::new(Square),
+    ];
+
+    draw_all(&shapes);
+}
+```
+---
+
+## 6. 错误处理模式
+
+### Result组合模式
+
+**链式错误处理**:
+
+```rust
+use std::fs::File;
+use std::io::{self, Read};
+
+fn read_username() -> Result<String, io::Error> {
+    File::open("username.txt")?
+        .bytes()
+        .collect::<Result<Vec<_>, _>>()
+        .map(|bytes| String::from_utf8_lossy(&bytes).to_string())
+}
+
+// 使用
+fn main() {
+    match read_username() {
+        Ok(name) => println!("Username: {}", name),
+        Err(e) => eprintln!("Error: {}", e),
+    }
+}
+```
+### 自定义错误类型
+
+**使用thiserror**:
+
+```rust
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+enum DataStoreError {
+    #[error("Data not found: {key}")]
+    NotFound { key: String },
+
+    #[error("Failed to write data")]
+    WriteError(#[from] std::io::Error),
+
+    #[error("Invalid format: {0}")]
+    InvalidFormat(String),
+
+    #[error(transparent)]
+    Other(#[from] anyhow::Error),
+}
+
+fn fetch_data(key: &str) -> Result<String, DataStoreError> {
+    if key.is_empty() {
+        return Err(DataStoreError::InvalidFormat(
+            "Key cannot be empty".to_string(),
+        ));
+    }
+    // ... 实际逻辑
+    Err(DataStoreError::NotFound {
+        key: key.to_string()
+    })
+}
+```
+### Try trait模式
+
+```rust
+use std::ops::Try;
+
+// 自定义可Try的类型
+enum MyResult<T, E> {
+    Ok(T),
+    Err(E),
+}
+
+impl<T, E> Try for MyResult<T, E> {
+    type Output = T;
+    type Residual = MyResult<std::convert::Infallible, E>;
+
+    fn from_output(output: Self::Output) -> Self {
+        MyResult::Ok(output)
+    }
+
+    fn branch(self) -> std::ops::ControlFlow<Self::Residual, Self::Output> {
+        match self {
+            MyResult::Ok(v) => std::ops::ControlFlow::Continue(v),
+            MyResult::Err(e) => std::ops::ControlFlow::Break(MyResult::Err(e)),
+        }
+    }
+}
+```
+---
+
+## 7. 内存管理模式
+
+### Arena分配模式
+
+```rust
+struct Arena {
+    storage: Vec<u8>,
+    offset: usize,
+}
+
+impl Arena {
+    fn new(capacity: usize) -> Self {
+        Arena {
+            storage: Vec::with_capacity(capacity),
+            offset: 0,
+        }
+    }
+
+    fn alloc<T>(&mut self, value: T) -> &mut T {
+        use std::mem;
+
+        let size = mem::size_of::<T>();
+        let align = mem::align_of::<T>();
+
+        // 对齐
+        let offset = (self.offset + align - 1) & !(align - 1);
+
+        unsafe {
+            let ptr = self.storage.as_mut_ptr().add(offset) as *mut T;
+            ptr.write(value);
+            self.offset = offset + size;
+            &mut *ptr
+        }
+    }
+}
+
+// 使用
+fn main() {
+    let mut arena = Arena::new(1024);
+    let num = arena.alloc(42);
+    let string = arena.alloc(String::from("hello"));
+
+    println!("{}, {}", num, string);
+}
+```
+### 对象池模式
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::collections::VecDeque;
+
+struct Pool<T> {
+    objects: Arc<Mutex<VecDeque<T>>>,
+    factory: Box<dyn Fn() -> T + Send + Sync>,
+}
+
+impl<T> Pool<T> {
+    fn new<F>(size: usize, factory: F) -> Self
+    where
+        F: Fn() -> T + Send + Sync + 'static,
+    {
+        let mut objects = VecDeque::with_capacity(size);
+        for _ in 0..size {
+            objects.push_back(factory());
+        }
+
+        Pool {
+            objects: Arc::new(Mutex::new(objects)),
+            factory: Box::new(factory),
+        }
+    }
+
+    fn acquire(&self) -> PoolGuard<T> {
+        let obj = self.objects
+            .lock()
+            .unwrap()
+            .pop_front()
+            .unwrap_or_else(|| (self.factory)());
+
+        PoolGuard {
+            obj: Some(obj),
+            pool: self.objects.clone(),
+        }
+    }
+}
+
+struct PoolGuard<T> {
+    obj: Option<T>,
+    pool: Arc<Mutex<VecDeque<T>>>,
+}
+
+impl<T> Drop for PoolGuard<T> {
+    fn drop(&mut self) {
+        if let Some(obj) = self.obj.take() {
+            self.pool.lock().unwrap().push_back(obj);
+        }
+    }
+}
+
+impl<T> std::ops::Deref for PoolGuard<T> {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        self.obj.as_ref().unwrap()
+    }
+}
+```
+---
+
+## 8. Trait对象模式
+
+### 动态分发
+
+```rust
+trait Shape {
+    fn area(&self) -> f64;
+    fn perimeter(&self) -> f64;
+}
+
+struct Circle { radius: f64 }
+struct Rectangle { width: f64, height: f64 }
+
+impl Shape for Circle {
+    fn area(&self) -> f64 {
+        std::f64::consts::PI * self.radius * self.radius
+    }
+
+    fn perimeter(&self) -> f64 {
+        2.0 * std::f64::consts::PI * self.radius
+    }
+}
+
+impl Shape for Rectangle {
+    fn area(&self) -> f64 {
+        self.width * self.height
+    }
+
+    fn perimeter(&self) -> f64 {
+        2.0 * (self.width + self.height)
+    }
+}
+
+// 异构集合
+fn total_area(shapes: &[Box<dyn Shape>]) -> f64 {
+    shapes.iter().map(|s| s.area()).sum()
+}
+
+fn main() {
+    let shapes: Vec<Box<dyn Shape>> = vec![
+        Box::new(Circle { radius: 10.0 }),
+        Box::new(Rectangle { width: 5.0, height: 10.0 }),
+    ];
+
+    println!("Total area: {}", total_area(&shapes));
+}
+```
+### 枚举分发（更高效）
+
+```rust
+enum ShapeEnum {
+    Circle { radius: f64 },
+    Rectangle { width: f64, height: f64 },
+}
+
+impl ShapeEnum {
+    fn area(&self) -> f64 {
+        match self {
+            ShapeEnum::Circle { radius } =>
+                std::f64::consts::PI * radius * radius,
+            ShapeEnum::Rectangle { width, height } =>
+                width * height,
+        }
+    }
+}
+
+// 静态分发，更快
+fn total_area_enum(shapes: &[ShapeEnum]) -> f64 {
+    shapes.iter().map(|s| s.area()).sum()
+}
+```
+---
+
+## 9. 类型安全API设计
+
+### 幻影类型参数
+
+```rust
+use std::marker::PhantomData;
+
+struct Meter;
+struct Foot;
+
+struct Distance<Unit> {
+    value: f64,
+    _unit: PhantomData<Unit>,
+}
+
+impl Distance<Meter> {
+    fn to_feet(self) -> Distance<Foot> {
+        Distance {
+            value: self.value * 3.28084,
+            _unit: PhantomData,
+        }
+    }
+}
+
+impl Distance<Foot> {
+    fn to_meters(self) -> Distance<Meter> {
+        Distance {
+            value: self.value / 3.28084,
+            _unit: PhantomData,
+        }
+    }
+}
+
+// 类型安全：不能混用单位
+fn main() {
+    let d1 = Distance::<Meter> {
+        value: 100.0,
+        _unit: PhantomData
+    };
+    let d2 = d1.to_feet();
+
+    // ❌ 编译错误：类型不匹配
+    // let sum = d1.value + d2.value;
+}
+```
+### Session Types
+
+```rust
+use std::marker::PhantomData;
+
+struct Authenticated;
+struct Unauthenticated;
+
+struct Session<State> {
+    token: Option<String>,
+    _state: PhantomData<State>,
+}
+
+impl Session<Unauthenticated> {
+    fn new() -> Self {
+        Session {
+            token: None,
+            _state: PhantomData,
+        }
+    }
+
+    fn login(self, credentials: &str) -> Session<Authenticated> {
+        // 验证逻辑
+        Session {
+            token: Some(credentials.to_string()),
+            _state: PhantomData,
+        }
+    }
+}
+
+impl Session<Authenticated> {
+    fn access_protected_resource(&self) -> String {
+        format!("Accessing with token: {:?}", self.token)
+    }
+
+    fn logout(self) -> Session<Unauthenticated> {
+        Session {
+            token: None,
+            _state: PhantomData,
+        }
+    }
+}
+
+fn main() {
+    let session = Session::new();
+    // session.access_protected_resource(); // ❌ 编译错误
+
+    let session = session.login("token123");
+    println!("{}", session.access_protected_resource()); // ✅ OK
+}
+```
+---
+
+## 10. 函数式模式
+
+### Monad-like模式
+
+```rust
+// Option monad
+fn safe_divide(a: f64, b: f64) -> Option<f64> {
+    if b != 0.0 {
+        Some(a / b)
+    } else {
+        None
+    }
+}
+
+fn computation() -> Option<f64> {
+    safe_divide(10.0, 2.0)?
+        .then(|x| safe_divide(x, 2.0))
+        .flatten()
+}
+
+// 自定义Functor
+trait Functor<A> {
+    type Output<B>;
+    fn fmap<B, F>(self, f: F) -> Self::Output<B>
+    where
+        F: FnOnce(A) -> B;
+}
+
+impl<T> Functor<T> for Option<T> {
+    type Output<U> = Option<U>;
+
+    fn fmap<U, F>(self, f: F) -> Option<U>
+    where
+        F: FnOnce(T) -> U,
+    {
+        self.map(f)
+    }
+}
+```
+### Lens模式（聚焦数据）
+
+```rust
+struct Lens<S, A> {
+    get: Box<dyn Fn(&S) -> A>,
+    set: Box<dyn Fn(&S, A) -> S>,
+}
+
+impl<S, A> Lens<S, A> {
+    fn new<G, St>(get: G, set: St) -> Self
+    where
+        G: Fn(&S) -> A + 'static,
+        St: Fn(&S, A) -> S + 'static,
+    {
+        Lens {
+            get: Box::new(get),
+            set: Box::new(set),
+        }
+    }
+
+    fn view(&self, source: &S) -> A {
+        (self.get)(source)
+    }
+
+    fn set_value(&self, source: &S, value: A) -> S {
+        (self.set)(source, value)
+    }
+}
+
+#[derive(Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+fn main() {
+    let name_lens = Lens::new(
+        |p: &Person| p.name.clone(),
+        |p, n| Person { name: n, age: p.age },
+    );
+
+    let person = Person {
+        name: "Alice".to_string(),
+        age: 30,
+    };
+
+    let new_person = name_lens.set_value(&person, "Bob".to_string());
+    println!("{}", new_person.name); // Bob
+}
+```
+### 10.1 高级函数式模式：Applicative与Monad深化
+
+**Applicative Functor模式**:
+
+```rust
+trait Applicative<T>: Functor<T> {
+    fn pure(value: T) -> Self;
+    fn ap<U, F>(self, f: Self::Output<F>) -> Self::Output<U>
+    where
+        F: FnOnce(T) -> U;
+}
+
+// Option的Applicative实现
+impl<T> Applicative<T> for Option<T> {
+    fn pure(value: T) -> Self {
+        Some(value)
+    }
+
+    fn ap<U, F>(self, f: Option<F>) -> Option<U>
+    where
+        F: FnOnce(T) -> U,
+    {
+        match (self, f) {
+            (Some(x), Some(func)) => Some(func(x)),
+            _ => None,
+        }
+    }
+}
+
+// 实战案例：表单验证
+struct ValidationResult<T> {
+    value: Option<T>,
+    errors: Vec<String>,
+}
+
+impl<T> ValidationResult<T> {
+    fn valid(value: T) -> Self {
+        ValidationResult {
+            value: Some(value),
+            errors: vec![],
+        }
+    }
+
+    fn invalid(error: String) -> Self {
+        ValidationResult {
+            value: None,
+            errors: vec![error],
+        }
+    }
+
+    fn combine<U, F>(self, other: ValidationResult<U>, f: F) -> ValidationResult<(T, U)>
+    where
+        F: FnOnce(T, U) -> (T, U),
+    {
+        let mut errors = self.errors;
+        errors.extend(other.errors);
+
+        match (self.value, other.value) {
+            (Some(a), Some(b)) => ValidationResult {
+                value: Some(f(a, b)),
+                errors,
+            },
+            _ => ValidationResult {
+                value: None,
+                errors,
+            },
+        }
+    }
+}
+```
+**Monad Transformers模式**:
+
+```rust
+// OptionT Monad Transformer
+struct OptionT<M, T> {
+    inner: M,
+    _phantom: std::marker::PhantomData<T>,
+}
+
+impl<M, T> OptionT<M, Option<T>> {
+    fn new(inner: M) -> Self {
+        OptionT {
+            inner,
+            _phantom: std::marker::PhantomData,
+        }
+    }
+
+    fn run(self) -> M {
+        self.inner
+    }
+}
+
+// 实战案例：异步 + Option组合
+use std::future::Future;
+
+async fn fetch_user_id(username: &str) -> Option<u64> {
+    // 模拟异步数据库查询
+    if username == "admin" {
+        Some(1)
+    } else {
+        None
+    }
+}
+
+async fn fetch_user_profile(user_id: u64) -> Option<String> {
+    // 模拟异步API调用
+    Some(format!("Profile of user {}", user_id))
+}
+
+async fn get_user_profile_by_name(username: &str) -> Option<String> {
+    let user_id = fetch_user_id(username).await?;
+    fetch_user_profile(user_id).await
+}
+```
+### 10.2 Free Monad模式
+
+**Free Monad实现**:
+
+```rust
+use std::marker::PhantomData;
+
+enum Free<F, A> {
+    Pure(A),
+    Free(F),
+}
+
+// DSL示例：文件操作
+enum FileOp<Next> {
+    Read { path: String, next: Box<dyn FnOnce(String) -> Next> },
+    Write { path: String, content: String, next: Next },
+}
+
+type FileProgram<A> = Free<FileOp<FileProgram<A>>, A>;
+
+impl<A> FileProgram<A> {
+    fn read(path: String) -> FileProgram<String> {
+        Free::Free(FileOp::Read {
+            path,
+            next: Box::new(|content| Free::Pure(content)),
+        })
+    }
+
+    fn write(path: String, content: String) -> FileProgram<()> {
+        Free::Free(FileOp::Write {
+            path,
+            content,
+            next: Free::Pure(()),
+        })
+    }
+}
+
+// 解释器模式
+trait Interpreter<F, A> {
+    fn interpret(&self, program: Free<F, A>) -> A;
+}
+
+// 实际的文件系统解释器
+struct RealFileSystem;
+
+impl Interpreter<FileOp<FileProgram<String>>, String> for RealFileSystem {
+    fn interpret(&self, program: Free<FileOp<FileProgram<String>>, String>) -> String {
+        match program {
+            Free::Pure(a) => a,
+            Free::Free(FileOp::Read { path, next }) => {
+                let content = std::fs::read_to_string(&path).unwrap_or_default();
+                self.interpret(next(content))
+            },
+            Free::Free(FileOp::Write { path, content, next }) => {
+                std::fs::write(&path, &content).ok();
+                self.interpret(next)
+            },
+        }
+    }
+}
+```
+### 10.3 Zipper模式（高效导航）
+
+**Zipper数据结构**:
+
+```rust
+// 树的Zipper
+#[derive(Clone, Debug)]
+enum Tree<T> {
+    Leaf(T),
+    Node(Box<Tree<T>>, Box<Tree<T>>),
+}
+
+#[derive(Clone, Debug)]
+enum Crumb<T> {
+    LeftCrumb(Box<Tree<T>>),
+    RightCrumb(Box<Tree<T>>),
+}
+
+#[derive(Clone, Debug)]
+struct Zipper<T> {
+    focus: Box<Tree<T>>,
+    breadcrumbs: Vec<Crumb<T>>,
+}
+
+impl<T: Clone> Zipper<T> {
+    fn new(tree: Tree<T>) -> Self {
+        Zipper {
+            focus: Box::new(tree),
+            breadcrumbs: vec![],
+        }
+    }
+
+    fn go_left(mut self) -> Option<Self> {
+        match *self.focus {
+            Tree::Node(left, right) => {
+                self.breadcrumbs.push(Crumb::LeftCrumb(right));
+                self.focus = left;
+                Some(self)
+            },
+            _ => None,
+        }
+    }
+
+    fn go_right(mut self) -> Option<Self> {
+        match *self.focus {
+            Tree::Node(left, right) => {
+                self.breadcrumbs.push(Crumb::RightCrumb(left));
+                self.focus = right;
+                Some(self)
+            },
+            _ => None,
+        }
+    }
+
+    fn go_up(mut self) -> Option<Self> {
+        match self.breadcrumbs.pop() {
+            Some(Crumb::LeftCrumb(right)) => {
+                let new_focus = Tree::Node(self.focus, right);
+                self.focus = Box::new(new_focus);
+                Some(self)
+            },
+            Some(Crumb::RightCrumb(left)) => {
+                let new_focus = Tree::Node(left, self.focus);
+                self.focus = Box::new(new_focus);
+                Some(self)
+            },
+            None => None,
+        }
+    }
+
+    fn modify<F>(mut self, f: F) -> Self
+    where
+        F: FnOnce(Tree<T>) -> Tree<T>,
+    {
+        self.focus = Box::new(f(*self.focus));
+        self
+    }
+}
+```
+### 10.4 Optics模式（Prism与Iso）
+
+**Prism模式（处理Sum类型）**:
+
+```rust
+struct Prism<S, A> {
+    preview: Box<dyn Fn(&S) -> Option<A>>,
+    review: Box<dyn Fn(A) -> S>,
+}
+
+impl<S, A> Prism<S, A> {
+    fn new<P, R>(preview: P, review: R) -> Self
+    where
+        P: Fn(&S) -> Option<A> + 'static,
+        R: Fn(A) -> S + 'static,
+    {
+        Prism {
+            preview: Box::new(preview),
+            review: Box::new(review),
+        }
+    }
+
+    fn preview(&self, source: &S) -> Option<A> {
+        (self.preview)(source)
+    }
+
+    fn review(&self, value: A) -> S {
+        (self.review)(value)
+    }
+}
+
+// 示例：Option Prism
+fn some_prism<T: Clone + 'static>() -> Prism<Option<T>, T> {
+    Prism::new(
+        |opt: &Option<T>| opt.clone(),
+        |val: T| Some(val),
+    )
+}
+```
+**Iso模式（同构）**:
+
+```rust
+struct Iso<S, A> {
+    from: Box<dyn Fn(S) -> A>,
+    to: Box<dyn Fn(A) -> S>,
+}
+
+impl<S, A> Iso<S, A> {
+    fn new<F, T>(from: F, to: T) -> Self
+    where
+        F: Fn(S) -> A + 'static,
+        T: Fn(A) -> S + 'static,
+    {
+        Iso {
+            from: Box::new(from),
+            to: Box::new(to),
+        }
+    }
+
+    fn from(&self, source: S) -> A {
+        (self.from)(source)
+    }
+
+    fn to(&self, value: A) -> S {
+        (self.to)(value)
+    }
+
+    fn reverse(self) -> Iso<A, S> {
+        Iso {
+            from: self.to,
+            to: self.from,
+        }
+    }
+}
+
+// 示例：Celsius ↔ Fahrenheit
+fn celsius_fahrenheit_iso() -> Iso<f64, f64> {
+    Iso::new(
+        |c| c * 1.8 + 32.0,  // Celsius -> Fahrenheit
+        |f| (f - 32.0) / 1.8, // Fahrenheit -> Celsius
+    )
+}
+```
+### 10.5 Reader Monad模式（依赖注入）
+
+**Reader Monad实现**:
+
+```rust
+struct Reader<R, A> {
+    run: Box<dyn Fn(R) -> A>,
+}
+
+impl<R: Clone + 'static, A: 'static> Reader<R, A> {
+    fn new<F>(f: F) -> Self
+    where
+        F: Fn(R) -> A + 'static,
+    {
+        Reader {
+            run: Box::new(f),
+        }
+    }
+
+    fn run(&self, env: R) -> A {
+        (self.run)(env)
+    }
+
+    fn map<B, F>(self, f: F) -> Reader<R, B>
+    where
+        F: Fn(A) -> B + 'static,
+    {
+        Reader::new(move |env: R| {
+            let a = (self.run)(env);
+            f(a)
+        })
+    }
+
+    fn flat_map<B, F>(self, f: F) -> Reader<R, B>
+    where
+        F: Fn(A) -> Reader<R, B> + 'static,
+    {
+        Reader::new(move |env: R| {
+            let a = (self.run)(env.clone());
+            f(a).run(env)
+        })
+    }
+}
+
+// 实战案例：配置依赖注入
+#[derive(Clone)]
+struct Config {
+    database_url: String,
+    api_key: String,
+    timeout: u64,
+}
+
+fn get_database_url() -> Reader<Config, String> {
+    Reader::new(|config: Config| config.database_url)
+}
+
+fn get_api_key() -> Reader<Config, String> {
+    Reader::new(|config: Config| config.api_key)
+}
+
+fn connect_with_auth() -> Reader<Config, String> {
+    get_database_url()
+        .flat_map(|url| {
+            get_api_key().map(move |key| {
+                format!("Connecting to {} with key {}", url, key)
+            })
+        })
+}
+```
+### 10.6 Writer Monad模式（日志累积）
+
+**Writer Monad实现**:
+
+```rust
+use std::fmt::Display;
+
+struct Writer<W, A> {
+    value: A,
+    log: W,
+}
+
+impl<W: Monoid, A> Writer<W, A> {
+    fn new(value: A, log: W) -> Self {
+        Writer { value, log }
+    }
+
+    fn run(self) -> (A, W) {
+        (self.value, self.log)
+    }
+
+    fn map<B, F>(self, f: F) -> Writer<W, B>
+    where
+        F: FnOnce(A) -> B,
+    {
+        Writer {
+            value: f(self.value),
+            log: self.log,
+        }
+    }
+
+    fn flat_map<B, F>(self, f: F) -> Writer<W, B>
+    where
+        F: FnOnce(A) -> Writer<W, B>,
+    {
+        let Writer { value: b, log: log2 } = f(self.value);
+        Writer {
+            value: b,
+            log: self.log.mappend(log2),
+        }
+    }
+
+    fn tell(log: W) -> Writer<W, ()> {
+        Writer::new((), log)
+    }
+}
+
+// Monoid trait（可结合的幺半群）
+trait Monoid: Clone {
+    fn mempty() -> Self;
+    fn mappend(self, other: Self) -> Self;
+}
+
+impl Monoid for String {
+    fn mempty() -> Self {
+        String::new()
+    }
+
+    fn mappend(mut self, other: Self) -> Self {
+        self.push_str(&other);
+        self
+    }
+}
+
+impl<T> Monoid for Vec<T> {
+    fn mempty() -> Self {
+        Vec::new()
+    }
+
+    fn mappend(mut self, mut other: Self) -> Self {
+        self.append(&mut other);
+        self
+    }
+}
+
+// 实战案例：带日志的计算
+fn factorial_with_log(n: u64) -> Writer<String, u64> {
+    if n == 0 {
+        Writer::new(1, format!("factorial(0) = 1\n"))
+    } else {
+        factorial_with_log(n - 1)
+            .flat_map(move |prev| {
+                let result = n * prev;
+                Writer::new(
+                    result,
+                    format!("factorial({}) = {} * {} = {}\n", n, n, prev, result),
+                )
+            })
+    }
+}
+```
+### 10.7 State Monad模式（状态转换）
+
+**State Monad实现**:
+
+```rust
+struct State<S, A> {
+    run: Box<dyn FnOnce(S) -> (A, S)>,
+}
+
+impl<S: 'static, A: 'static> State<S, A> {
+    fn new<F>(f: F) -> Self
+    where
+        F: FnOnce(S) -> (A, S) + 'static,
+    {
+        State {
+            run: Box::new(f),
+        }
+    }
+
+    fn run(self, initial_state: S) -> (A, S) {
+        (self.run)(initial_state)
+    }
+
+    fn map<B, F>(self, f: F) -> State<S, B>
+    where
+        F: FnOnce(A) -> B + 'static,
+    {
+        State::new(|s| {
+            let (a, s2) = (self.run)(s);
+            (f(a), s2)
+        })
+    }
+
+    fn flat_map<B, F>(self, f: F) -> State<S, B>
+    where
+        F: FnOnce(A) -> State<S, B> + 'static,
+    {
+        State::new(|s| {
+            let (a, s2) = (self.run)(s);
+            f(a).run(s2)
+        })
+    }
+
+    fn get() -> State<S, S>
+    where
+        S: Clone,
+    {
+        State::new(|s: S| (s.clone(), s))
+    }
+
+    fn put(new_state: S) -> State<S, ()> {
+        State::new(|_| ((), new_state))
+    }
+
+    fn modify<F>(f: F) -> State<S, ()>
+    where
+        F: FnOnce(S) -> S + 'static,
+    {
+        State::new(|s| ((), f(s)))
+    }
+}
+
+// 实战案例：随机数生成器
+struct RNG {
+    seed: u64,
+}
+
+impl RNG {
+    fn next(self) -> (u64, RNG) {
+        let new_seed = (self.seed.wrapping_mul(1103515245).wrapping_add(12345)) & 0x7FFFFFFF;
+        (new_seed, RNG { seed: new_seed })
+    }
+}
+
+fn random_int() -> State<RNG, u64> {
+    State::new(|rng| rng.next())
+}
+
+fn random_range(min: u64, max: u64) -> State<RNG, u64> {
+    random_int().map(move |n| min + (n % (max - min)))
+}
+
+fn random_pair() -> State<RNG, (u64, u64)> {
+    random_int().flat_map(|x| {
+        random_int().map(move |y| (x, y))
+    })
+}
+```
+### 10.8 并发模式深化
+
+**CSP (Communicating Sequential Processes) 模式**:
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+
+// CSP风格的并发
+fn csp_pattern() {
+    let (tx1, rx) = mpsc::channel();
+    let tx2 = tx1.clone();
+
+    // Worker 1
+    thread::spawn(move || {
+        for i in 0..5 {
+            tx1.send(format!("Worker1: {}", i)).unwrap();
+            thread::sleep(std::time::Duration::from_millis(100));
+        }
+    });
+
+    // Worker 2
+    thread::spawn(move || {
+        for i in 0..5 {
+            tx2.send(format!("Worker2: {}", i)).unwrap();
+            thread::sleep(std::time::Duration::from_millis(150));
+        }
+    });
+
+    // Coordinator
+    for received in rx {
+        println!("Received: {}", received);
+    }
+}
+```
+**STM (Software Transactional Memory) 风格**:
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+// 模拟STM的原子事务
+struct Transaction<T> {
+    value: Arc<Mutex<T>>,
+}
+
+impl<T: Clone> Transaction<T> {
+    fn new(value: T) -> Self {
+        Transaction {
+            value: Arc::new(Mutex::new(value)),
+        }
+    }
+
+    fn atomically<F, R>(&self, f: F) -> R
+    where
+        F: FnOnce(&mut T) -> R,
+    {
+        let mut guard = self.value.lock().unwrap();
+        f(&mut *guard)
+    }
+}
+
+// 银行转账示例
+fn transfer(from: &Transaction<u64>, to: &Transaction<u64>, amount: u64) -> bool {
+    from.atomically(|from_balance| {
+        if *from_balance >= amount {
+            *from_balance -= amount;
+            to.atomically(|to_balance| {
+                *to_balance += amount;
+            });
+            true
+        } else {
+            false
+        }
+    })
+}
+```
+**Actor模式深化**:
+
+```rust
+use std::sync::mpsc::{channel, Sender, Receiver};
+use std::thread;
+
+enum Message {
+    Increment,
+    Decrement,
+    Get(Sender<i32>),
+    Stop,
+}
+
+struct CounterActor {
+    receiver: Receiver<Message>,
+    count: i32,
+}
+
+impl CounterActor {
+    fn new() -> (Self, Sender<Message>) {
+        let (sender, receiver) = channel();
+        (
+            CounterActor {
+                receiver,
+                count: 0,
+            },
+            sender,
+        )
+    }
+
+    fn run(mut self) {
+        thread::spawn(move || {
+            loop {
+                match self.receiver.recv() {
+                    Ok(Message::Increment) => self.count += 1,
+                    Ok(Message::Decrement) => self.count -= 1,
+                    Ok(Message::Get(reply)) => {
+                        reply.send(self.count).ok();
+                    },
+                    Ok(Message::Stop) | Err(_) => break,
+                }
+            }
+        });
+    }
+}
+```
+### 10.9 性能优化模式集
+
+**零拷贝模式**:
+
+```rust
+use std::borrow::Cow;
+
+// Cow (Clone on Write)模式
+fn process_data<'a>(data: Cow<'a, str>) -> Cow<'a, str> {
+    if data.contains("special") {
+        // 需要修改，会发生克隆
+        Cow::Owned(data.replace("special", "normal"))
+    } else {
+        // 无需修改，零拷贝
+        data
+    }
+}
+
+fn main() {
+    let original = "Hello world";
+    let result = process_data(Cow::Borrowed(original));
+    // 没有发生复制
+}
+```
+**延迟计算模式**:
+
+```rust
+struct Lazy<T, F>
+where
+    F: FnOnce() -> T,
+{
+    init: Option<F>,
+    value: Option<T>,
+}
+
+impl<T, F> Lazy<T, F>
+where
+    F: FnOnce() -> T,
+{
+    fn new(init: F) -> Self {
+        Lazy {
+            init: Some(init),
+            value: None,
+        }
+    }
+
+    fn force(&mut self) -> &T {
+        if self.value.is_none() {
+            let init = self.init.take().unwrap();
+            self.value = Some(init());
+        }
+        self.value.as_ref().unwrap()
+    }
+}
+
+// 实战案例：延迟加载配置
+fn expensive_computation() -> String {
+    println!("Computing...");
+    std::thread::sleep(std::time::Duration::from_secs(1));
+    "Result".to_string()
+}
+
+fn main() {
+    let mut lazy = Lazy::new(expensive_computation);
+    println!("Lazy created");  // 不会触发计算
+    println!("Value: {}", lazy.force());  // 触发计算
+    println!("Value: {}", lazy.force());  // 使用缓存结果
+}
+```
+**内存池模式实战**:
+
+```rust
+struct Pool<T> {
+    items: Vec<Option<T>>,
+    available: Vec<usize>,
+}
+
+impl<T> Pool<T> {
+    fn new() -> Self {
+        Pool {
+            items: Vec::new(),
+            available: Vec::new(),
+        }
+    }
+
+    fn allocate(&mut self, item: T) -> usize {
+        if let Some(index) = self.available.pop() {
+            self.items[index] = Some(item);
+            index
+        } else {
+            let index = self.items.len();
+            self.items.push(Some(item));
+            index
+        }
+    }
+
+    fn deallocate(&mut self, index: usize) {
+        if index < self.items.len() {
+            self.items[index] = None;
+            self.available.push(index);
+        }
+    }
+
+    fn get(&self, index: usize) -> Option<&T> {
+        self.items.get(index).and_then(|item| item.as_ref())
+    }
+}
+```
+---
+
+## 11. 总结
+
+**设计模式分类总结**:
+
+| 模式          | 用途         | Rust 特色         |
+| :--- | :--- | :--- || **Builder**   | 复杂对象构建 | 链式调用 + Result |
+| **Factory**   | 对象创建     | Trait 对象        |
+| **Adapter**   | 接口转换     | Newtype           |
+| **Decorator** | 功能扩展     | 泛型组合          |
+| **Strategy**  | 算法替换     | Trait             |
+| **Visitor**   | 操作分离     | Trait + 枚举      |
+| **RAII**      | 资源管理     | 所有权 + Drop     |
+| **Typestate** | 状态编码     | PhantomData       |
+| **Actor**     | 并发通信     | Channel + Thread  |
+
+**核心原则**:
+
+1. ✅ 零成本抽象
+2. ✅ 编译时检查
+3. ✅ 明确的所有权
+4. ✅ 类型安全
+
+---
+
+## 8. 参考资源
+
+**官方资料**:
+
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+- [The Rust Book](https://doc.rust-lang.org/book/)
+
+**相关文档**:
+
+- [2.3 泛型编程指南](../tier_02_guides/03_generics_programming_guide.md)
+- [2.4 Trait系统指南](../tier_02_guides/04_trait_system_guide.md)
+- [4.2 高级泛型模式](02_advanced_generics_patterns.md)
+
+---
+
+**最后更新**: 2025-12-11
+**适用版本**: Rust 1.92.0+
+**文档类型**: Tier 4 - 高级层
+
+---
+
+**🎉 完成设计模式集学习！** 🦀
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -50,14 +50,12 @@
 ```powershell
 ./scripts/cargo-build-optimized.ps1 install-tools
 ```
-
 **Linux/macOS:**
 
 ```bash
 ./scripts/cargo-build-optimized.sh install-tools
 chmod +x ./scripts/cargo-build-optimized.sh
 ```
-
 ### 2. 使用优化脚本编译 {#2-使用优化脚本编译}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -77,7 +75,6 @@ chmod +x ./scripts/cargo-build-optimized.sh
 # 查看统计 {#查看统计}
 ./scripts/cargo-build-optimized.ps1 stats
 ```
-
 ## ⚙️ 环境变量配置 {#环境变量配置}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -111,7 +108,6 @@ $env:CARGO_PROFILE_DEV_LTO = "off"
 $env:CARGO_PROFILE_RELEASE_LTO = "thin"
 $env:CARGO_PROFILE_RELEASE_CODEGEN_UNITS = "16"
 ```
-
 ### Linux/macOS (Bash/Zsh) {#linuxmacos-bashzsh}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -135,7 +131,6 @@ export CARGO_PROFILE_DEV_LTO="off"
 export CARGO_PROFILE_RELEASE_LTO="thin"
 export CARGO_PROFILE_RELEASE_CODEGEN_UNITS="16"
 ```
-
 ## 📊 优化效果对比 {#优化效果对比}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -171,7 +166,6 @@ linker = "rust-lld.exe"
 [registries.crates-io]
 protocol = "sparse"
 ```
-
 ### Cargo.toml Profile 配置 {#cargotoml-profile-配置}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -190,7 +184,6 @@ opt-level = 0
 debug = 0
 codegen-units = 1024
 ```
-
 ## 🛠️ 推荐工具 {#推荐工具}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -221,7 +214,6 @@ cat .cargo-build-times
 # 使用脚本查看统计 {#使用脚本查看统计}
 ./scripts/cargo-build-optimized.ps1 stats
 ```
-
 ### sccache 统计 {#sccache-统计}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -229,7 +221,6 @@ cat .cargo-build-times
 ```bash
 sccache --show-stats
 ```
-
 ## 🧹 清理和重置 {#清理和重置}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -245,7 +236,6 @@ cargo clean
 Remove-Item -Recurse -Force target
 sccache --stop-server
 ```
-
 ## 🔬 进阶优化 {#进阶优化}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -257,7 +247,6 @@ sccache --stop-server
 ```bash
 rustup default nightly
 ```
-
 启用实验性优化：
 
 ```toml
@@ -266,7 +255,6 @@ incremental-parallel = true
 fast-debuginfo = true
 parallel-frontend = true
 ```
-
 ### 内存优化（大型项目） {#内存优化大型项目}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -280,7 +268,6 @@ export CARGO_BUILD_JOBS=4
 # 减少代码生成单元 {#减少代码生成单元}
 export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 ```
-
 ## ⚠️ 注意事项 {#注意事项}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

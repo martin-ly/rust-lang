@@ -1,23 +1,14 @@
 # 分布式模式特性矩阵 {#分布式模式特性矩阵}
 
 > **概念族**: 软件设计 / 分布式系统
-
 > **内容分级**: [归档级]
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-03-10
-
 > **版本**: v1.0
-
 > **描述**: 分布式系统设计模式的完整特性对比矩阵
-
 > **状态**: ✅ 已完成
 
 ---
@@ -25,9 +16,7 @@
 ## 📑 目录 {#目录}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [分布式模式特性矩阵 {#分布式模式特性矩阵}](#分布式模式特性矩阵-分布式模式特性矩阵)
@@ -64,7 +53,6 @@
 ## 一、概述 {#一概述}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供分布式系统设计中常用模式的完整特性矩阵，帮助架构师根据系统需求选择合适的模式组合。
@@ -74,7 +62,6 @@
 ## 二、模式总览 {#二模式总览}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 事务模式 {#21-事务模式}
@@ -82,15 +69,10 @@
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 模式 | 核心思想 | 一致性级别 | 复杂度 |
-
 |------|----------|------------|--------|
-
 | **Saga** | 长事务拆分+补偿 | 最终一致 | 高 |
-
 | **2PC** | 两阶段提交 | 强一致 | 高 |
-
 | **3PC** | 三阶段提交 | 强一致 | 很高 |
-
 | **TCC** | Try-Confirm-Cancel | 最终一致 | 中等 |
 
 ### 2.2 数据模式 {#22-数据模式}
@@ -98,15 +80,10 @@
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 模式 | 核心思想 | 适用场景 | 复杂度 |
-
 |------|----------|----------|--------|
-
 | **CQRS** | 读写分离 | 高读低写 | 中等 |
-
 | **Event Sourcing** | 事件存储 | 审计追踪 | 高 |
-
 | **Outbox** | 事务消息 | 可靠消息 | 低 |
-
 | **CDC** | 变更数据捕获 | 数据同步 | 中等 |
 
 ### 2.3 容错模式 {#23-容错模式}
@@ -114,17 +91,11 @@
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 模式 | 核心思想 | 保护目标 | 复杂度 |
-
 |------|----------|----------|--------|
-
 | **Circuit Breaker** | 故障隔离 | 级联故障 | 低 |
-
 | **Retry** | 失败重试 | 临时故障 | 低 |
-
 | **Timeout** | 超时控制 | 资源耗尽 | 低 |
-
 | **Fallback** | 降级策略 | 服务不可用 | 中等 |
-
 | **Bulkhead** | 资源隔离 | 资源竞争 | 中等 |
 
 ### 2.4 通信模式 {#24-通信模式}
@@ -132,15 +103,10 @@
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 模式 | 核心思想 | 耦合度 | 复杂度 |
-
 |------|----------|--------|--------|
-
 | **RPC** | 远程调用 | 紧耦合 | 低 |
-
 | **Message Queue** | 异步消息 | 松耦合 | 中等 |
-
 | **Pub/Sub** | 发布订阅 | 松耦合 | 低 |
-
 | **Event Bus** | 事件总线 | 松耦合 | 中等 |
 
 ---
@@ -148,7 +114,6 @@
 ## 三、特性对比矩阵 {#三特性对比矩阵}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 核心特性矩阵 {#31-核心特性矩阵}
@@ -156,29 +121,17 @@
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 模式 | 一致性 | 可用性 | 分区容错 | 延迟 | 吞吐量 | 复杂度 | 运维成本 |
-
 |------|:------:|:------:|:--------:|:----:|:------:|:------:|:--------:|
-
 | **Saga** | ⚠️ | ✅ | ✅ | 低 | 高 | 高 | 高 |
-
 | **2PC** | ✅ | ❌ | ❌ | 高 | 低 | 高 | 中等 |
-
 | **CQRS** | ⚠️ | ✅ | ✅ | 低 | 很高 | 中等 | 中等 |
-
 | **Event Sourcing** | ✅ | ✅ | ✅ | 中等 | 高 | 高 | 高 |
-
 | **Outbox** | ✅ | ✅ | ✅ | 低 | 高 | 低 | 低 |
-
 | **Circuit Breaker** | - | ✅ | ✅ | - | - | 低 | 低 |
-
 | **Retry** | - | ⚠️ | ⚠️ | 可变 | - | 低 | 低 |
-
 | **Timeout** | - | ⚠️ | ⚠️ | 可控 | - | 低 | 低 |
-
 | **Fallback** | - | ✅ | ✅ | - | - | 中等 | 中等 |
-
 | **RPC** | - | ⚠️ | ❌ | 低 | 高 | 低 | 低 |
-
 | **Message Queue** | ⚠️ | ✅ | ✅ | 中等 | 很高 | 中等 | 中等 |
 
 *✅ 优秀 | ⚠️ 中等/条件 | ❌ 差 | - 不适用*:
@@ -188,19 +141,12 @@
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 场景 | 推荐模式 | 不推荐 | 理由 |
-
 |------|----------|--------|------|
-
 | 金融交易 | 2PC, Saga | 纯最终一致 | 强一致需求 |
-
 | 电商订单 | Saga, Outbox | 2PC | 高可用需求 |
-
 | 日志处理 | CQRS, Pub/Sub | 2PC | 高吞吐需求 |
-
 | 配置管理 | Event Sourcing | - | 变更追踪 |
-
 | 微服务通信 | Message Queue | RPC直连 | 解耦需求 |
-
 | 第三方集成 | Circuit Breaker+Retry | 直接调用 | 容错需求 |
 
 ### 3.3 故障处理矩阵 {#33-故障处理矩阵}
@@ -208,19 +154,12 @@
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 模式 | 网络分区 | 服务宕机 | 超时 | 重复消息 | 消息丢失 |
-
 |------|----------|----------|------|----------|----------|
-
 | **Saga** | 补偿 | 补偿 | 重试/补偿 | 幂等 | Outbox |
-
 | **2PC** | 阻塞 | 阻塞 | 阻塞 | - | - |
-
 | **CQRS** | 最终一致 | 读副本 | 降级 | - | - |
-
 | **Circuit Breaker** | 打开 | 打开 | 打开 | - | - |
-
 | **Retry** | 重试 | 失败 | 重试 | - | - |
-
 | **Message Queue** | 重连 | 持久化 | 重试 | 去重 | 持久化 |
 
 ---
@@ -228,7 +167,6 @@
 ## 四、模式组合指南 {#四模式组合指南}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 经典组合 {#41-经典组合}
@@ -236,17 +174,11 @@
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 组合名称 | 组成模式 | 适用系统 | 复杂度 |
-
 |----------|----------|----------|--------|
-
 | **可靠消息** | Outbox + Message Queue | 订单系统 | 中等 |
-
 | **弹性调用** | Circuit Breaker + Retry + Timeout + Fallback | 外部API | 中等 |
-
 | **事件驱动** | Event Sourcing + CQRS + Pub/Sub | 复杂业务 | 很高 |
-
 | **分布式事务** | Saga + Compensation + Outbox | 跨服务事务 | 高 |
-
 | **数据同步** | CDC + Message Queue | 数据迁移 | 中等 |
 
 ### 4.2 组合关系图 {#42-组合关系图}
@@ -254,7 +186,6 @@
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```text
-
 基础层
 
 ├── Outbox (消息可靠性)
@@ -262,7 +193,6 @@
 ├── Retry (临时故障)
 
 └── Timeout (资源控制)
-
 
 
 中间层
@@ -274,7 +204,6 @@
 └── Bulkhead (资源隔离)
 
 
-
 事务层
 
 ├── Saga (长事务)
@@ -284,7 +213,6 @@
 └── 2PC (强一致)
 
 
-
 数据层
 
 ├── CQRS (读写分离)
@@ -292,21 +220,15 @@
 ├── Event Sourcing (事件存储)
 
 └── CDC (变更捕获)
-
 ```
-
 ### 4.3 互斥模式 {#43-互斥模式}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 模式A | 模式B | 原因 |
-
 |-------|-------|------|
-
 | 2PC | Saga | 一致性模型冲突 |
-
 | Event Sourcing | 直接更新 | 设计理念冲突 |
-
 | 无限Retry | 无Timeout | 资源耗尽风险 |
 
 ---
@@ -314,57 +236,37 @@
 ## 五、Rust 实现映射 {#五rust-实现映射}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 实现状态 {#51-实现状态}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模式 | 形式化定义 | Rust示例 | 完成度 |
-
 |------|------------|----------|--------|
-
 | Saga | ✅ | ✅ | 100% |
-
 | CQRS | ✅ | ✅ | 100% |
-
 | Circuit Breaker | ✅ | ✅ | 100% |
-
 | Event Sourcing | ✅ | ✅ | 100% |
-
 | Outbox | ✅ | ✅ | 100% |
-
 | Retry | ✅ | ✅ | 100% |
-
 | Timeout | ✅ | ✅ | 100% |
-
 | Fallback | ✅ | ✅ | 100% |
-
 | 2PC | ❌ | ❌ | 0% |
-
 | TCC | ❌ | ❌ | 0% |
 
 ### 5.2 相关文档 {#52-相关文档}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 模式 | 形式化文档 | 示例代码 |
-
 |------|------------|----------|
-
 | Saga | `01_saga_pattern.md` | 文档内嵌 |
-
 | CQRS | `02_cqrs_pattern.md` | 文档内嵌 |
-
 | Circuit Breaker | `03_circuit_breaker.md` | 文档内嵌 |
-
 | Event Sourcing | `04_event_sourcing.md` | 文档内嵌 |
-
 | Outbox | `05_outbox_pattern.md` | 文档内嵌 |
 
 ---
@@ -372,45 +274,34 @@
 ## 六、相关资源 {#六相关资源}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 内部文档 {#61-内部文档}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [DISTRIBUTED_CONCEPT_MINDMAP](10_distributed_concept_mindmap.md) — 概念族谱
-
 - [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](10_distributed_architecture_decision_tree.md) — 架构决策树
-
 - [CONCEPT_AXIOM_THEOREM_MATRIX](10_concept_axiom_theorem_matrix.md) — 定理映射
 
 ### 6.2 外部参考 {#62-外部参考}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 资源 | 链接 | 说明 |
-
 |------|------|------|
-
 | Microservices Patterns | microservices.io | 经典模式参考 |
-
 | AWS Well-Architected | aws.amazon.com | 云原生最佳实践 |
-
 | DDD Reference | domainlanguage.com | 领域驱动设计 |
 
 ### 6.3 模式关系图谱 {#63-模式关系图谱}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
-
 分布式系统模式图谱
 
 │
@@ -460,9 +351,7 @@
    ├─ Pub/Sub (发布订阅)
 
    └─ Event Bus (事件总线)
-
 ```
-
 ---
 
 **维护者**: Rust Learning Project Team
@@ -474,17 +363,13 @@
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -492,15 +377,10 @@
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -508,17 +388,13 @@
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - [Rust 1.94 特性速查
-
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -530,9 +406,7 @@
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -548,11 +422,9 @@
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [research_notes 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -560,11 +432,8 @@
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
-
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
-
 > **来源: [Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns)**
-
 > **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
 ---

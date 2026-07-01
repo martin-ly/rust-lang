@@ -1,21 +1,15 @@
 # Rust 研究笔记：全局统一系统化框架 {#rust-研究笔记全局统一系统化框架}
 
 > **概念族**: 综合研究
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录 {#目录}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [Rust 研究笔记：全局统一系统化框架 {#rust-研究笔记全局统一系统化框架}](#rust-研究笔记全局统一系统化框架-rust-研究笔记全局统一系统化框架)
@@ -57,13 +51,9 @@
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 > **创建日期**: 2026-02-12
-
 > **最后更新**: 2026-02-28
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成
-
 > **目标**: 全面整体系统化梳理、全局一致性、语义归纳、多思维表征统一索引
 
 ---
@@ -71,7 +61,6 @@
 ## 🎯 框架宗旨 {#框架宗旨}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **上位文档**：[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) —— 理论体系四层架构、论证体系五层结构、安全与非安全全面论证（顶层框架）。
@@ -79,29 +68,18 @@
 ### 核心问题响应 {#核心问题响应}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 用户反馈 | 本框架应对 |
-
 | :--- | :--- |
-
 | 论证缺乏证明 | 公理-定理-证明全链路图 + PROOF_INDEX 链接 |
-
 | 概念定义属性关系未系统梳理 | 多维概念对比矩阵 + 语义归纳表 |
-
 | 无全面整体系统化梳理 | 全局思维导图 + 统一索引 |
-
 | 无全局一致性 | 全局一致性校验矩阵 + 术语对照 |
-
 | 语义归纳缺失 | 概念族谱 + 一句话语义归纳 |
-
 | 思维表征分散 | 思维导图、矩阵、证明树、决策树、反例统一索引 |
-
 | 缺少编程语言构造性语义 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) |
-
 | 缺少表达能力边界论证 | 同上 + 本框架 § 表达能力边界决策树 |
 
 ---
@@ -109,7 +87,6 @@
 ## 形式化论证（框架一致性） {#形式化论证框架一致性}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def USF1（框架覆盖）**：设 $\mathcal{F}$ 为本框架索引的文档集，$\mathcal{F}$ 包含 formal_methods、type_theory、software_design_theory、05_boundary_system、LANGUAGE_SEMANTICS_EXPRESSIVENESS 等。若文档 $d \in \mathcal{F}$ 有 Def、Axiom、Theorem 及与 PROOF_INDEX 的衔接，则称 $d$ **形式化完备**。
@@ -127,11 +104,9 @@
 ## 🕸️ 全局思维导图：Rust 形式化知识全景 {#全局思维导图rust-形式化知识全景}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
                     Rust 形式化知识全景
 
                               │
@@ -179,21 +154,15 @@
                     │ 可表达 / 不可表达  │
 
                     └──────────────────┘
-
 ```
-
 ### 按论证结构展开的思维导图 {#按论证结构展开的思维导图}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
 论证结构全景
-
 
 
 概念定义层
@@ -203,7 +172,6 @@
 ├── 非形式化描述
 
 └── 定义链与依赖
-
 
 
 属性关系层
@@ -217,7 +185,6 @@
 └── 推论 (C)
 
 
-
 解释论证层
 
 ├── 推导过程
@@ -227,7 +194,6 @@
 └── 论证结构
 
 
-
 形式化证明层
 
 ├── 完整证明
@@ -235,7 +201,6 @@
 ├── 证明思路 + 关键步骤
 
 └── 反例（边界 violation）
-
 
 
 思维表征层
@@ -249,99 +214,63 @@
 ├── 决策树
 
 └── 反例索引
-
 ```
-
 ---
 
 ## 📐 多维概念对比矩阵总览 {#多维概念对比矩阵总览}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 概念-公理-定理-证明方法-反例 五维矩阵 {#1-概念-公理-定理-证明方法-反例-五维矩阵}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 概念 | 公理/定义 | 定理 | 证明方法 | 反例（违反后果） |
-
 | :--- | :--- | :--- | :--- | :--- |
-
 | 所有权 | 规则 1–3, Def 1.1–1.3 | T2 唯一性, T3 内存安全 | 结构归纳、反证 | 使用已移动值 |
-
 | 借用 | 规则 5–8 | 数据竞争自由 | 规则归纳 | 双重可变借用 |
-
 | 生命周期 | $\ell \subseteq \text{lft}$ | 引用有效性 | 三步骤 | 返回局部引用 |
-
 | 子类型 | $S <: T$ | - | - | - |
-
 | 协变 | Def 1.1 | T1 | 直接推导 | - |
-
 | 逆变 | Def 2.1 | T2 | 直接推导 | 参数协变→悬垂 |
-
 | 不变 | Def 3.1 | T3 | 直接推导 | 协变→悬垂引用 |
-
 | 类型安全 | 进展性、保持性 | T3 | 组合 | 类型不匹配 |
-
 | Future | Def 4.1–5.2 | T6.1–T6.3 | 归纳+案例 | 非 Send 跨线程 |
-
 | Pin | Def 1.1–2.2 | T1–T3 | 类型系统 | 移动未 Pin 自引用 |
-
 | Trait 对象 | vtable, 存在类型 | T1–T3 | 类型系统 | 对象安全违规 |
 
 ### 2. 语义范式 vs 概念族 矩阵 {#2-语义范式-vs-概念族-矩阵}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 语义范式 | 内存安全族 | 类型安全族 | 并发安全族 | 表达能力边界 |
-
 | :--- | :--- | :--- | :--- | :--- |
-
 | 操作语义 | 归约保持所有权 | 保持性 T2 | 数据竞争自由 | 规则即边界 |
-
 | 指称语义 | - | 类型=命题 | - | 构造性限制 |
-
 | 公理语义 | 分离逻辑 | Hoare | unsafe 契约 | 前置/后置 |
-
 | 设计机制 | Pin 堆/栈、Send/Sync、Trait 对象 | 动机→决策→论证→反例 | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) |
 
 ### 3. 证明完成度 vs 论证缺口 矩阵 {#3-证明完成度-vs-论证缺口-矩阵}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模块 | D1 | D2 | R1 | R2 | P1 | P2 | 证明完成度 |
-
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-
 | ownership_model | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
-
 | borrow_checker_proof | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
-
 | lifetime_formalization | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
-
 | type_system_foundations | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
-
 | variance_theory | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
-
 | async_state_machine | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
-
 | pin_self_referential | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
-
 | trait_system_formalization | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
-
 | advanced_types | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
 
 ---
@@ -349,11 +278,9 @@
 ## 🌳 公理-定理-证明全链路逻辑推进图 {#公理-定理-证明全链路逻辑推进图}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
 公理/定义层
 
 ═══════════════════════════════════════════════════════════════
@@ -417,15 +344,12 @@
 │ 非 Send 跨线程 │ 移动未 Pin 自引用 │ 对象安全违规 │
 
 ═══════════════════════════════════════════════════════════════
-
 ```
-
 ### 证明依赖 DAG（简化） {#证明依赖-dag简化}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```text
-
                     [Axiom/规则]
 
                           │
@@ -461,15 +385,12 @@
                ▼
 
         [T2 引用有效性]
-
 ```
-
 ---
 
 ## 🌲 决策树总览：论证与选型 {#决策树总览论证与选型}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 论证缺口决策树 {#1-论证缺口决策树}
@@ -477,7 +398,6 @@
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
-
 发现论证缺口？
 
 ├── 定义缺失 (D1) → 给出形式化定义
@@ -491,15 +411,12 @@
 ├── 证明草稿 (P1) → 补全归纳步骤或案例
 
 └── 证明无结构 (P2) → 标注 A→L→T→C 链
-
 ```
-
 ### 2. 表达能力边界决策树 {#2-表达能力边界决策树}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```text
-
 需要表达 X？
 
 ├── 内存管理
@@ -531,15 +448,12 @@
     ├── 终将完成 → ✅ 有限 Future
 
     └── 可能永久挂起 → ⚠️ 需超时/取消
-
 ```
-
 ### 3. 思维表征选型决策树 {#3-思维表征选型决策树}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
-
 需要哪种思维表征？
 
 ├── 概念关联、层级 → 思维导图 (MIND_MAP_COLLECTION)
@@ -553,53 +467,32 @@
 ├── 边界违反、反例 → 反例索引 (FORMAL_PROOF_SYSTEM_GUIDE § 反例)
 
 └── 语义归纳、族谱 → 概念族谱 (COMPREHENSIVE_SYSTEMATIC_OVERVIEW § 语义归纳)
-
 ```
-
 ---
 
 ## ⚠️ 反例总索引 {#反例总索引}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 领域 | 反例 | 违反的边界 | 文档 |
-
 | :--- | :--- | :--- | :--- |
-
 | 型变 | `&mut T` 协变 | 唯一可变借用 | [variance_theory](type_theory/10_variance_theory.md) |
-
 | 型变 | `fn(T)` 参数协变 | 生命周期 | [variance_theory](type_theory/10_variance_theory.md) |
-
 | 型变 | `Cell<T>` 协变 | 内部可变 | [variance_theory](type_theory/10_variance_theory.md) |
-
 | 所有权 | 使用已移动值 | 唯一性 | [ownership_model](formal_methods/10_ownership_model.md) |
-
 | 借用 | 双重可变借用 | 互斥 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) |
-
 | 生命周期 | 返回局部引用 | outlives | lifetime_formalization |
-
 | 生命周期 | 存储短生命周期引用 | 约束冲突 | lifetime_formalization |
-
 | 异步 | 非 Send 跨线程 | Send 边界 | [async_state_machine](formal_methods/10_async_state_machine.md) |
-
 | 异步 | 未 Pin 自引用 | Pin 边界 | [async_state_machine](formal_methods/10_async_state_machine.md) |
-
 | Pin | 移动未 Pin 自引用 | 位置稳定 | [pin_self_referential](formal_methods/10_pin_self_referential.md) |
-
 | Trait | 对象安全违规 | vtable 约束 | [trait_system_formalization](type_theory/10_trait_system_formalization.md) |
-
 | 类型系统 | 类型不匹配 | 类型安全 | [type_system_foundations](type_theory/10_type_system_foundations.md) |
-
 | 设计模式 | Singleton 全局可变未同步 | 数据竞争 | [singleton](software_design_theory/01_design_patterns_formal/01_creational/10_singleton.md) |
-
 | 设计模式 | Observer 共享可变无 Mutex | 数据竞争 | [observer](software_design_theory/01_design_patterns_formal/03_behavioral/10_observer.md) |
-
 | 设计模式 | Composite 循环引用 | 所有权无法表达 | [composite](software_design_theory/01_design_patterns_formal/02_structural/10_composite.md) |
-
 | 设计模式 | Builder 必填未设 | 不变式违反 | [builder](software_design_theory/01_design_patterns_formal/01_creational/10_builder.md) |
-
 | 设计模式 | Memento 恢复非法状态 | 不变式违反 | [memento](software_design_theory/01_design_patterns_formal/03_behavioral/10_memento.md) |
 
 ---
@@ -607,7 +500,6 @@
 ## 🧬 语义归纳与概念族谱统一 {#语义归纳与概念族谱统一}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 语义归纳表（一句话总结） {#语义归纳表一句话总结}
@@ -615,29 +507,17 @@
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 概念 | 语义归纳 | 证明文档 |
-
 | :--- | :--- | :--- |
-
 | 所有权 | 每个值恰有一个所有者，移动后原变量无效 | ownership_model |
-
 | 借用 | 不可变借用可多个，可变借用独占；互斥保证 | borrow_checker_proof |
-
 | 生命周期 | 引用生命周期必须 outlives 被引用对象 | lifetime_formalization |
-
 | 类型安全 | 良型程序不会出现类型错误（进展+保持） | type_system_foundations |
-
 | 型变 | 协变同向、逆变反向、不变无子类型；违反则悬垂 | variance_theory |
-
 | 异步状态机 | Future 状态合法、Send/Sync 则并发安全、有限则终将 Ready | async_state_machine |
-
 | Pin | 非 Unpin 被 Pin 后位置不变，自引用安全 | pin_self_referential |
-
 | Trait 对象 | vtable 动态分发、对象安全约束、解析正确 | trait_system_formalization |
-
 | 操作语义 | 程序通过归约/求值执行，保持类型与所有权 | type_system, ownership |
-
 | 指称语义 | 类型=命题，程序=证明，Result/! 对应 ∨/⊥ | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) |
-
 | 公理语义 | 前置/后置条件刻画 unsafe 契约 | 同上 |
 
 ### 概念族依赖关系 {#概念族依赖关系}
@@ -645,11 +525,9 @@
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```text
-
 所有权 ──┬──→ 借用 ──→ 生命周期
 
          └──→ 内存安全 (T3)
-
 
 
 类型系统 ──→ 型变 ──→ 子类型关系
@@ -657,31 +535,24 @@
          └──→ 进展性、保持性 ──→ 类型安全
 
 
-
 所有权 + 借用 ──→ 数据竞争自由
-
 
 
 Send/Sync + Future ──→ 并发安全 (T6.2)
 
 
-
 Pin ──→ 自引用安全
-
 
 
 操作语义 ──→ 指称语义 ──→ 公理语义
 
          └──→ 表达能力边界
-
 ```
-
 ---
 
 ## 🔗 全局一致性校验矩阵 {#全局一致性校验矩阵}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 术语一致性 {#术语一致性}
@@ -689,19 +560,12 @@ Pin ──→ 自引用安全
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 术语 | 形式化方法 | 类型理论 | 语义文档 | 一致性 |
-
 | :--- | :--- | :--- | :--- | :--- |
-
 | 生命周期 | $\ell$, $\&'a T$, outlives | 区域类型 | 操作语义 | ✅ |
-
 | 子类型 | 未显式 | $S <: T$ | 指称语义 | ✅ |
-
 | 所有权 | $\Omega$, 规则 1–3 | - | 分离逻辑 | ✅ |
-
 | 借用 | 规则 5–8 | - | 操作语义 | ✅ |
-
 | 类型安全 | 进展性、保持性 | 同左 | 操作语义 | ✅ |
-
 | 型变 | Def 1.1–3.1 | 同左 | 指称语义 | ✅ |
 
 ### 公理编号一致性 {#公理编号一致性}
@@ -709,17 +573,11 @@ Pin ──→ 自引用安全
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 前缀 | 含义 | 使用范围 |
-
 | :--- | :--- | :--- |
-
 | A | Axiom | PROOF_INDEX, FORMAL_PROOF_SYSTEM_GUIDE |
-
 | L | Lemma | 同上 |
-
 | T | Theorem | 各模块 |
-
 | C | Corollary | 同上 |
-
 | Def | Definition | 型变、Pin、异步 |
 
 ---
@@ -727,7 +585,6 @@ Pin ──→ 自引用安全
 ## 📑 按特性族/类型族/执行模型子索引 {#按特性族类型族执行模型子索引}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 按特性族 {#按特性族}
@@ -735,71 +592,47 @@ Pin ──→ 自引用安全
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 | 特性族 | 矩阵 | 决策树 | 完整链 |
-
 | :--- | :--- | :--- | :--- |
-
 | **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](10_rust_193_feature_matrix.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) |
-
 | **内存与所有权** | 五维矩阵 § 所有权/借用 | 表达能力边界决策树 § 内存管理 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) 所有权/借用 |
-
 | **类型系统** | 五维矩阵 § 类型安全/协变 | 表达能力边界决策树 § 类型多态 | [construction_capability](type_theory/10_construction_capability.md) |
-
 | **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) Trait/泛型 |
-
 | **控制流** | - | - | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) match/for/? |
-
 | **并发与异步** | 五维矩阵 § Future/Pin | 表达能力边界决策树 § 并发/异步 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) Send/Sync/Future |
 
 ### 按类型族 {#按类型族}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 类型族 | 构造能力 | 决策树 | 文档 |
-
 | :--- | :--- | :--- | :--- |
-
 | **基本类型** | TCON 矩阵 Unique | 类型构造决策树 | [construction_capability](type_theory/10_construction_capability.md) |
-
 | **复合类型** | struct/enum/tuple | 同上 | [construction_capability](type_theory/10_construction_capability.md) |
-
 | **泛型/GAT** | Multi 或 Unique | 同上 | [construction_capability](type_theory/10_construction_capability.md)、[advanced_types](type_theory/10_advanced_types.md) |
-
 | **impl Trait / dyn Trait** | Unique | 同上 | [trait_system_formalization](type_theory/10_trait_system_formalization.md) |
 
 ### 按执行模型 {#按执行模型}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 模型 | 边界 | 确定性判定 | 文档 |
-
 | :--- | :--- | :--- | :--- |
-
 | **同步** | 五模型 × 三维边界 | Def EB-DET1 Sequential | [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md) |
-
 | **异步** | 同上 | Interleaved | 同上 |
-
 | **并发** | 同上 | Interleaved；并发 vs 并行判定 | 同上 |
-
 | **并行** | 同上 | Parallel | 同上 |
-
 | **分布式** | 同上 | Distributed | 同上 |
 
 ### 设计模式表征与组件构建 {#设计模式表征与组件构建}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | 决策树 | 文档 |
-
 | :--- | :--- | :--- |
-
 | **设计模式表达** | [04_expressiveness_boundary](software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md) | 等价/近似/不可表达 |
-
 | **组件构建** | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) 构建能力确定性判定树 | Def CE-MAT1、L1–L4 成熟度 |
 
 ---
@@ -807,41 +640,24 @@ Pin ──→ 自引用安全
 ## 📚 文档交叉引用总索引 {#文档交叉引用总索引}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 用途 |
-
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) | **顶层框架**：理论体系、论证体系、安全与非安全 |
-
 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md) | 安全与非安全全面论证、契约、UB、安全抽象 |
-
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md) | 全面系统化梳理总览、语义归纳、概念族谱 |
-
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) | 构造性语义形式化、表达能力边界 |
-
 | [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
-
 | [PROOF_INDEX](10_proof_index.md) | 形式化证明索引、公理编号规范 |
-
 | [INDEX](INDEX.md) | 研究笔记完整索引 |
-
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念矩阵 |
-
 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 思维导图集合 |
-
 | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 决策树 |
-
 | [PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) | 证明图网 |
-
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/07_knowledge_structure_framework.md) | 知识结构、概念定义、思维表征 |
-
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论**：设计模式形式化、23/43 模型、执行模型、组合工程 |
-
 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) | 13 项核心特性完整链 |
-
 | [FEATURE_TEMPLATE](10_feature_template.md) | 79 项特性精简模板 |
-
 | [INCREMENTAL_UPDATE_FLOW](10_incremental_update_flow.md) | 版本增量更新流程 |
 
 ---
@@ -857,17 +673,13 @@ Pin ──→ 自引用安全
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -875,15 +687,10 @@ Pin ──→ 自引用安全
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -891,17 +698,13 @@ Pin ──→ 自引用安全
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - [Rust 1.94 特性速查
-
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -913,9 +716,7 @@ Pin ──→ 自引用安全
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -931,11 +732,9 @@ Pin ──→ 自引用安全
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [research_notes 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -943,19 +742,12 @@ Pin ──→ 自引用安全
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

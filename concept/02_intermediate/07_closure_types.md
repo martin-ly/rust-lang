@@ -92,7 +92,6 @@ impl<'a> Fn<(i32,)> for __Closure_1<'a> {
     }
 }
 ```
-
 > **核心洞察**: 闭包的"魔法"在于编译器自动推断**捕获哪些变量**、**以什么方式捕获**（引用（Reference）/移动）、以及**实现哪个 Trait**（Fn/FnMut/FnOnce）。
 > [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
 
@@ -119,7 +118,6 @@ graph TD
         L["FnMut 次之"] -->|"满足 FnMut 的闭包"| M["自动满足 FnOnce"]
     end
 ```
-
 > **认知功能**: 此图展示三种闭包 Trait 的**继承关系和能力层级**——Fn 最严格（只读），FnMut 次之（可修改），FnOnce 最宽松（可消费）。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 > **使用建议**: 泛型（Generics）约束优先使用最严格的 Trait（Fn → FnMut → FnOnce），以获得最大的调用灵活性。
@@ -154,7 +152,6 @@ graph TD
   - 闭包体修改变量 → &mut T 捕获 → FnMut
   - 闭包体移动变量（如 drop）→ T 捕获 → FnOnce
 ```
-
 > **推导原则**: 编译器选择**最宽松**的捕获方式——优先不可变借用（Mutable Borrow），其次可变借用，最后移动。
 > [来源: [Rust Reference — Closure Capture Modes](https://doc.rust-lang.org/reference/types/closure.html#capture-modes)]
 
@@ -182,7 +179,6 @@ let f3 = || drop(s);  // s 被移动到闭包内
 // f3(); // ✅ 第一次调用
 // f3(); // ❌ 编译错误：值已被移动
 ```
-
 > **技术要点**: 闭包的 Trait 实现是**自动推导**的，不是显式声明的。编译器分析闭包体对捕获变量的使用方式，决定实现哪个 Trait。
 
 ---
@@ -205,7 +201,6 @@ graph LR
         G["函数指针"] -->|"自动实现"| H["Fn/FnMut/FnOnce"]
     end
 ```
-
 > **认知功能**: 此图对比函数指针与闭包的**本质区别**——函数指针无环境，闭包有环境（捕获的变量）。
 > **使用建议**: 不需要环境时用函数指针（更轻量）；需要环境时用闭包。不捕获的闭包可自动转换为函数指针。
 > **关键洞察**: `fn(i32) -> i32` 实现了 `Fn(i32) -> i32`，因此任何接受闭包的地方都可传入函数指针。
@@ -239,7 +234,6 @@ let n = 5;
 let f3 = move || n + 1;  // n 被复制（i32: Copy）
 println!("{}", n);  // ✅ n 仍可用（因为 Copy）
 ```
-
 > **move 语义**: `move` 关键字**强制**闭包按值捕获所有变量，而非让编译器自动推导。对于 `Copy` 类型，按值捕获就是复制；对于非 `Copy` 类型，按值捕获就是移动。
 > [来源: [TRPL — move Closures](https://doc.rust-lang.org/book/ch13-01-closures.html#moving-captured-values-out-of-closures-and-the-move-keyword)]
 
@@ -277,7 +271,6 @@ println!("{}", n);  // ✅ n 仍可用（因为 Copy）
   let add5 = make_adder(5);
   assert_eq!(add5(3), 8);
 ```
-
 > **最佳实践**: 泛型（Generics）约束优先用 `Fn`（最灵活），只在需要修改状态时用 `FnMut`，只在需要消费所有权（Ownership）时用 `FnOnce`。
 > [来源: [Rust API Guidelines — Closure Types](https://rust-lang.github.io/api-guidelines/)]
 
@@ -302,7 +295,6 @@ graph TD
     style TRUE2 fill:#c8e6c9
     style ALT fill:#fff3e0
 ```
-
 > **认知功能**: 此决策树帮助选择闭包 Trait 约束。核心判断标准是**状态修改需求**和**复用性**。
 > **使用建议**: 优先 `Fn`，需要时升级到 `FnMut`，极少情况需要 `FnOnce`。
 > **关键洞察**: Trait 约束的选择是**API 契约设计**——约束越严格，调用者越灵活；约束越宽松，实现者越自由。
@@ -335,7 +327,6 @@ graph TD
 ├── async || {} 是异步闭包（Rust 1.85.0+ stable）
 └── 闭包 + async 的组合带来额外的 Pin 约束
 ```
-
 > **边界要点**: 闭包的匿名性和生命周期（Lifetimes）捕获是日常使用中的主要限制。理解这些边界有助于设计更灵活的 API。
 
 ---
@@ -370,7 +361,6 @@ graph TD
      }).collect();
      // i 被复制（i32: Copy）到线程
 ```
-
 > **陷阱总结**: 闭包的大多数问题源于**生命周期（Lifetimes）**和**所有权（Ownership）**——这正是 Rust 的核心关注领域。`move` 关键字和正确的 Trait 约束是解决之道。
 > [来源: [Rust Common Mistakes — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
@@ -456,7 +446,6 @@ fn fixed() {
     takes_fn(closure); // ✅ 强制转换: closure → fn pointer
 }
 ```
-
 > **修正**: Rust 的闭包是匿名结构体（Struct），实现 `Fn`/`FnMut`/`FnOnce` trait。只有**不捕获环境**的闭包可以强制转换为函数指针（`fn`）。捕获环境变量的闭包有唯一的匿名类型，不能当作 `fn` 使用。这类似于 C++ 的 lambda——捕获变量的 lambda 不能转换为函数指针，无捕获的可以。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：`dyn Fn` 与泛型闭包的性能差异（逻辑错误）
@@ -478,7 +467,6 @@ fn main() {
     println!("{} {}", r1, r2);
 }
 ```
-
 > **修正**: `dyn Fn` 使用动态分发（vtable），有间接调用开销。泛型（Generics） `F: Fn` 通过单态化（Monomorphization）生成直接调用，无运行时（Runtime）开销。在性能关键路径上，优先使用泛型而非 trait object。这与 C++ 的模板 vs 虚函数对比一致——Rust 的零成本抽象（Zero-Cost Abstraction）要求显式选择静态或动态分发。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
 ### 10.3 边界测试：`Fn` trait 的自动实现与 `move` 闭包（编译错误）
@@ -497,7 +485,6 @@ fn main() {
     call_fn(closure);
 }
 ```
-
 > **修正**:
 > 闭包根据捕获变量的使用方式自动实现 `Fn`、`FnMut`、`FnOnce`：只读引用（Reference）捕获 → `Fn`（可多次调用）；
 > 可变引用（Mutable Reference）捕获 → `FnMut`（可多次调用，需 `&mut`）；
@@ -519,7 +506,6 @@ fn main() {
     println!("{}", fib(10));
 }
 ```
-
 > **修正**: Rust 的闭包类型推断（Type Inference）是单向的——编译器需要知道闭包的完整类型才能生成代码，但递归闭包在定义时引用（Reference）自身，形成循环依赖。解决方案：1) 使用 `fn` 函数（有明确类型）；2) 使用 `Box<dyn Fn(i32) -> i32>` 或 `Rc<dyn Fn(i32) -> i32>` 延迟类型解析；3) 使用 Y 组合子或固定点组合子（函数式编程技巧）。
 > 这与 Haskell 的递归 let（`let fib n = ... in fib 10`， Hindley-Milner 类型推断自动处理递归）或 JavaScript（无静态类型，无此问题）不同——Rust 的类型系统（Type System）要求所有类型在编译期解析，递归闭包的自引用需要通过间接层（指针、trait 对象）打破循环。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
@@ -537,7 +523,6 @@ fn main() {
     println!("{}", f(5));
 }
 ```
-
 > **修正**: Rust 中每个闭包表达式有**唯一的匿名类型**，即使捕获环境和签名完全相同。`match` 要求所有臂返回同一类型，因此两个不同的闭包不能直接作为 match 结果。
 > 解决方案：1) 使用函数指针 `fn(i32) -> i32`（仅适用于无捕获闭包）：`match true { true => (|x: i32| x + 1) as fn(i32) -> i32, ... }`；2) 使用 `Box<dyn Fn(i32) -> i32>`（有堆分配）；3) 使用枚举（Enum）包装不同闭包，手动分发。
 > 这与 C++ 的 lambda（每个 lambda 有唯一类型，但 `std::function` 可统一）或 JavaScript 的函数（无类型差异）不同——Rust 的闭包类型系统（Type System）在提供零成本抽象（Zero-Cost Abstraction）的同时，增加了类型操作的复杂性。
@@ -553,7 +538,6 @@ fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
 
 fn main() {}
 ```
-
 > **修正**: **生命周期标注**：1) `&'a str` 表示引用至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
 
 ## 实践
@@ -576,7 +560,6 @@ fn main() {}
 let s = String::from("hello");
 let f = || drop(s);
 ```
-
 - A. `Fn`、`FnMut`、`FnOnce`
 - B. 仅 `FnOnce`
 - C. 仅 `Fn`
@@ -609,7 +592,6 @@ fn make_closure() -> impl Fn() -> i32 {
     || x
 }
 ```
-
 - A. 能，因为 `i32` 实现了 `Copy`
 - B. 不能，闭包捕获了局部变量的引用
 - C. 能，因为闭包自动按值捕获
@@ -629,7 +611,6 @@ fn make_closure() -> impl Fn() -> i32 {
     move || x  // x 被 copy 进闭包（i32 实现 Copy）
 }
 ```
-
 `move` 常用于返回闭包、spawn 线程等需要延长捕获变量生命周期的场景。
 </details>
 
@@ -647,7 +628,6 @@ fn main() {
     take_fn(closure);
 }
 ```
-
 - A. 能，因为闭包等价于函数指针
 - B. 不能，闭包捕获环境，不能转换为 `fn`
 - C. 能，只要闭包不捕获环境
@@ -664,7 +644,6 @@ fn main() {
 ```rust
 let f: fn(i32) -> i32 = |x| x + 1; // ✅
 ```
-
 但一旦闭包捕获了环境，它就有独一无二的具体类型，无法转换为 `fn`。
 </details>
 
@@ -681,7 +660,6 @@ let f = || {
     println!("{}", s);
 };
 ```
-
 - A. `s` 的值被 move 进闭包
 - B. `&mut s` — 可变引用（Mutable Reference）捕获
 - C. `&s` — 不可变引用（Immutable Reference）捕获
@@ -740,9 +718,7 @@ let f = || {
 > 环境捕获类型安全 ⟸ Fn/FnMut/FnOnce 选择 ⟸ 借用（Borrowing）检查
 > 高阶函数组合 ⟸ 闭包生命周期推断 ⟸ HRTB
 > **过渡**: 掌握 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

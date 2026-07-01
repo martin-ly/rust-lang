@@ -80,7 +80,6 @@ description = "A short description"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/you/my-crate"
 ```
-
 > 来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)` section](<https://doc.rust-lang.org/cargo/reference/manifest.html#the-package-section>)
 
 ---
@@ -127,7 +126,6 @@ tokio = { git = "https://github.com/tokio-rs/tokio", branch = "main" }
 local = { path = "../local" }
 private = { version = "1.0", registry = "my-registry" }
 ```
-
 ---
 
 ## 四、`[features]`
@@ -138,7 +136,6 @@ default = ["std"]
 std = []
 serde = ["dep:serde", "bitflags/serde"]
 ```
-
 - `default` 在没有 `--no-default-features` 时自动启用；
 - `feature = ["dep:crate"]` 用于启用可选依赖；
 - 可使用 `?` 弱依赖：`["dep:serde", "tokio?/rt"]`。
@@ -161,7 +158,6 @@ version = "0.1.0"
 [workspace.dependencies]
 serde = "1.0.217"
 ```
-
 成员包继承：
 
 ```toml
@@ -173,7 +169,6 @@ edition.workspace = true
 [dependencies]
 serde = { workspace = true }
 ```
-
 ---
 
 ## 六、`[profile.*]`
@@ -187,7 +182,6 @@ strip = "symbols"
 [profile.dev.package."*"]
 opt-level = 2
 ```
-
 常用设置：`opt-level`、`debug`、`lto`、`panic`、`incremental`、`codegen-units`、`overflow-checks`、`debug-assertions`、`strip`。
 
 > 详见 [Cargo Profiles and Lints](65_cargo_profiles_and_lints.md)。
@@ -205,7 +199,6 @@ unsafe_code = "forbid"
 [lints.clippy]
 enum_glob_use = "deny"
 ```
-
 - 影响当前包，不影响依赖；
 - 工作区可定义 `workspace.lints`，成员继承需 `lints.workspace = true`。
 
@@ -215,7 +208,6 @@ enum_glob_use = "deny"
 [hints]
 # 目前尚无稳定 hint
 ```
-
 > 注意：Cargo lints 目前仍需 nightly。
 
 ---
@@ -232,7 +224,6 @@ enum_glob_use = "deny"
 [patch.crates-io]
 serde = { path = "../serde-fix" }
 ```
-
 ---
 
 ## 九、其他表

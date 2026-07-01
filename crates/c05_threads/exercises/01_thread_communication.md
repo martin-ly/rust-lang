@@ -44,7 +44,6 @@ fn main() {
     }
 }
 ```
-
 **任务**:
 
 1. 统计每个生产者的消息数量
@@ -80,7 +79,6 @@ fn main() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 ```
-
 **任务**:
 
 1. 优化性能（减少锁持有时间）
@@ -119,7 +117,6 @@ fn main() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 ```
-
 </details>
 
 ---
@@ -189,7 +186,6 @@ fn main() {
     thread::sleep(std::time::Duration::from_secs(5));
 }
 ```
-
 **任务**:
 
 1. 添加优雅关闭功能

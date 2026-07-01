@@ -682,12 +682,12 @@ def main():
     print(f"\n生成质量仪表盘...")
     dashboard = generate_dashboard(audits, dead_links)
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    REPORT_PATH.write_text(dashboard, encoding="utf-8")
+    REPORT_PATH.write_text(dashboard, encoding="utf-8", newline="\n")
     print(f"  ✅ 已保存: {REPORT_PATH}")
 
     print(f"\n导出 JSON...")
     kb_data = export_json(audits)
-    JSON_PATH.write_text(json.dumps(kb_data, ensure_ascii=False, indent=2), encoding="utf-8")
+    JSON_PATH.write_text(json.dumps(kb_data, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
     print(f"  ✅ 已保存: {JSON_PATH}")
 
     # 统计摘要

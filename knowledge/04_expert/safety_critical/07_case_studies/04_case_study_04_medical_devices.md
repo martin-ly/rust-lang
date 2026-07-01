@@ -77,7 +77,6 @@
 │  └─────────────┘ └─────────────┘ └─────────────────────┘   │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 ### Rust模块结构
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -422,7 +421,6 @@ impl PidController {
     }
 }
 ```
-
 ---
 
 ## 验证策略
@@ -451,7 +449,6 @@ Level 3: 系统测试
 ├── 故障注入
 └── 性能测试
 ```
-
 ### 测试覆盖率要求
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -501,7 +498,6 @@ mod verification {
     }
 }
 ```
-
 ---
 
 ## 认证经验
@@ -538,7 +534,6 @@ mod verification {
 缓解: Ferrocene预认证编译器
 残余风险: 低
 ```
-
 ### FDA提交经验
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -650,7 +645,6 @@ mod verification {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [案例研究1: Ferrocene认证工具链](01_case_study_01_ferrocene_certification.md)
 - [案例研究2: NASA核心飞行系统(cFS) Rust集成](02_case_study_02_nasa_cfs_rust.md)
 

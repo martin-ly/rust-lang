@@ -84,7 +84,6 @@
 │  └──────────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 2.2 代码组织原则
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -113,7 +112,6 @@ src/
     ├── interrupt_handler/
     └── memory_manager/
 ```
-
 ### 2.3 关键技术决策
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -156,7 +154,6 @@ some-niche-crate = "0.5"  # 需要审计报告
 [patch.crates-io]
 # 使用私有注册替换高风险crate
 ```
-
 ---
 
 ## 三、标准合规建议
@@ -188,7 +185,6 @@ some-niche-crate = "0.5"  # 需要审计报告
 - 安全分析 (FMEA/FTA)
 - 工具鉴定 (Tool Qualification)
 ```
-
 #### 航空航天 (DO-178C)
 
 ```text
@@ -206,7 +202,6 @@ some-niche-crate = "0.5"  # 需要审计报告
 - 集成SPARK进行关键组件验证
 - 建立DO-178C模板和检查单
 ```
-
 ### 3.2 MISRA C:2025 Addendum 6 实施建议
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -284,7 +279,6 @@ Level 4: 认证实践 (2周)
 ├── 审计准备
 └── 模拟认证
 ```
-
 #### 外部认证
 
 | 认证 | 机构 | 时间 | 成本 | 优先级 |
@@ -341,7 +335,6 @@ Level 3 - 低风险 (监控)
 4. 供应商评估流程
 5. 内部fork准备
 ```
-
 ---
 
 ## 六、工具链建议
@@ -386,7 +379,6 @@ quality_gates:
   coverage: >80%
   audit: no_high_vulns
 ```
-
 ---
 
 ## 七、关键意见总结
@@ -401,17 +393,14 @@ quality_gates:
    - 编译期保证消除整类错误
    - 零成本抽象保持性能
    - 工业认证生态日趋成熟
-
 2. **认证路径已打通**
    - Ferrocene提供ASIL D/SIL 4工具链
    - MISRA正在制定Rust专用规范
    - 多个行业成功案例
-
 3. **人才是最大瓶颈**
    - 需要系统性培训投入
    - 建议与大学建立合作
    - 认证体系加速成长
-
 4. **生态风险可控**
    - 分层架构隔离风险
    - 私有注册管理依赖
@@ -490,7 +479,6 @@ quality_gates:
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [Rust安全关键系统采用策略与ROI分析](01_adoption_strategy_and_roi_analysis.md)
 - [学术研究全景](../01_mind_maps/01_academic_research_landscape.md)
 

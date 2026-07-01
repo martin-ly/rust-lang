@@ -1,7 +1,6 @@
 # 宏速查卡 {#宏速查卡}
 >
 > **概念族**: 速查卡
-
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -10,7 +9,6 @@
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) | [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
 
 ---
@@ -78,7 +76,6 @@ macro_rules! say_hello {
 
 say_hello!();  // 展开: println!("Hello!");
 ```
-
 ### 参数模式 {#参数模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -101,7 +98,6 @@ macro_rules! print_value {
 print_value!(42);
 print_value!(1, 2);
 ```
-
 ### 重复模式 {#重复模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -124,7 +120,6 @@ macro_rules! vec {
 vec![1, 2, 3];
 vec![1, 2, 3,];  // 带结尾逗号
 ```
-
 ### 常见片段类型 {#常见片段类型}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -172,7 +167,6 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 #[derive(MyDerive)]
 struct MyStruct;
 ```
-
 ### 属性宏 {#属性宏-1}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -192,7 +186,6 @@ pub fn my_attr(args: TokenStream, input: TokenStream) -> TokenStream {
 #[my_attr(arg1, arg2)]
 fn my_func() {}
 ```
-
 ### 函数式宏 {#函数式宏}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -209,7 +202,6 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 // 使用
 my_macro!(...);
 ```
-
 ---
 
 ## 常见宏示例 {#常见宏示例}
@@ -227,7 +219,6 @@ my_macro!(...);
 let v = vec![1, 2, 3];
 let v = vec![0; 5];  // [0, 0, 0, 0, 0]
 ```
-
 ### println! / format {#println-format}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -239,7 +230,6 @@ println!("{:?}", debug_value);
 println!("{:.2}", float);  // 两位小数
 println!("{:>8}", text);   // 右对齐，宽度8
 ```
-
 ### assert {#assert}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -250,7 +240,6 @@ assert_eq!(a, b);
 assert_ne!(a, b);
 assert!(cond, "message: {}", arg);  // 自定义消息
 ```
-
 ### todo! / unimplemented {#todo-unimplemented}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -264,7 +253,6 @@ fn stub() {
     unimplemented!();  // panic
 }
 ```
-
 ### include {#include}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -274,7 +262,6 @@ include!("path/to/file.rs");  // 包含文件内容
 include_str!("path/to/file.txt");  // 包含为&str
 include_bytes!("path/to/file.bin");  // 包含为&[u8]
 ```
-
 ---
 
 ## 宏调试技巧 {#宏调试技巧}
@@ -292,7 +279,6 @@ cargo expand
 # 或 nightly {#或-nightly}
 cargo rustc -- -Z unpretty=expanded
 ```
-
 ### trace_macros {#trace_macros}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -304,7 +290,6 @@ trace_macros!(true);
 my_macro!(...);  // 打印展开过程
 trace_macros!(false);
 ```
-
 ---
 
 ## 宏卫生性 (Hygiene) {#宏卫生性-hygiene}
@@ -320,7 +305,6 @@ macro_rules! using_a {
 
 let four = using_a!(a / 10);  // 错误! a在宏外不可见
 ```
-
 宏内部定义的标识符不会与外部冲突。
 
 ---
@@ -338,7 +322,6 @@ macro_rules! count_exprs {
 
 count_exprs!(1, 2, 3);  // 3
 ```
-
 ---
 
 ## 条件编译宏 {#条件编译宏}
@@ -355,7 +338,6 @@ impl Serialize for MyType {}
 #[cfg_attr(feature = "serde", derive(Serialize))]
 struct MyStruct;
 ```
-
 ---
 
 ## 编译器内置宏 {#编译器内置宏}
@@ -399,7 +381,6 @@ struct MyStruct;
 #[derive(Debug, Clone, PartialEq)]
 struct Point { x: i32, y: i32 }
 ```
-
 常用trait: `Debug`, `Clone`, `Copy`, `PartialEq`, `Eq`, `PartialOrd`, `Ord`, `Hash`, `Default`
 
 ---
@@ -414,7 +395,6 @@ struct Point { x: i32, y: i32 }
 #[cfg(test)]      // 条件编译
 #[derive(...)]    // 自动实现
 ```
-
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-06-29
 **状态**: ✅ 完成
@@ -520,5 +500,4 @@ struct Point { x: i32, y: i32 }
 ---
 
 > **来源: [ACM Digital Library](https://dl.acm.org/)**
-
 > **来源: [IEEE Standards](https://standards.ieee.org/)**

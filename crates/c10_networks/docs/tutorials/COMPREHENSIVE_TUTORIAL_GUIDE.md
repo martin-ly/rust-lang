@@ -97,7 +97,6 @@ source ~/.cargo/env
 rustc --version
 cargo --version
 ```
-
 **安装必要工具**：
 
 ```bash
@@ -110,7 +109,6 @@ rustup component add clippy
 # 安装rust-analyzer（IDE支持）
 rustup component add rust-analyzer
 ```
-
 #### 1.2 项目创建
 
 **创建新项目**：
@@ -126,7 +124,6 @@ cargo add tokio --features full
 cargo add anyhow
 cargo add thiserror
 ```
-
 **项目结构**：
 
 ```text
@@ -144,7 +141,6 @@ c10_networks_tutorial/
 ├── tests/
 └── benches/
 ```
-
 #### 1.3 依赖配置
 
 **Cargo.toml配置**：
@@ -169,7 +165,6 @@ tracing-subscriber = "0.3"
 tokio-test = "0.4"
 criterion = { version = "0.5", features = ["html_reports"] }
 ```
-
 #### 1.4 开发工具
 
 **VS Code配置**：
@@ -182,7 +177,6 @@ criterion = { version = "0.5", features = ["html_reports"] }
   "editor.defaultFormatter": "rust-lang.rust-analyzer"
 }
 ```
-
 **常用命令**：
 
 ```bash
@@ -201,7 +195,6 @@ cargo run --example tcp_server
 # 性能测试
 cargo bench
 ```
-
 ### 2. 网络编程基础
 
 #### 2.1 网络概念
@@ -244,7 +237,6 @@ cargo bench
 ├── 信号编码：NRZ, Manchester
 └── 物理接口：RJ45, USB, HDMI
 ```
-
 **TCP/IP协议栈**：
 
 ```text
@@ -270,7 +262,6 @@ cargo bench
 ├── WiFi
 └── 其他物理网络
 ```
-
 #### 2.2 协议栈理解
 
 **协议分层原理**：
@@ -326,7 +317,6 @@ impl ProtocolLayer for TransportLayer {
     }
 }
 ```
-
 #### 2.3 异步编程基础
 
 **异步编程概念**：
@@ -418,7 +408,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 #### 2.4 错误处理
 
 **错误类型定义**：
@@ -518,7 +507,6 @@ async fn retry_operation() -> NetworkResult<()> {
     Err(NetworkError::Timeout)
 }
 ```
-
 ### 3. 第一个网络程序
 
 #### 3.1 TCP回显服务器
@@ -588,7 +576,6 @@ async fn main() -> NetworkResult<()> {
     server.run().await
 }
 ```
-
 #### 3.2 TCP客户端
 
 **基础TCP客户端**：
@@ -679,7 +666,6 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 #### 3.3 测试连接
 
 **测试脚本**：
@@ -813,7 +799,6 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 #### 3.4 错误处理实践
 
 **错误处理示例**：
@@ -932,7 +917,6 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 ## 🔧 第二阶段：协议实现
 
 ### 1. HTTP协议
@@ -1146,7 +1130,6 @@ impl HttpResponse {
     }
 }
 ```
-
 ## 🔗 相关文档
 
 - [NETWORK_COMMUNICATION_THEORY_ENHANCED.md](NETWORK_COMMUNICATION_THEORY_ENHANCED.md) - 网络通信理论增强版

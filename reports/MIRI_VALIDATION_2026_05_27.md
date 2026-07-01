@@ -1,5 +1,9 @@
 # Miri 验证报告 — 2026-05-27
 
+> **历史版本**: 本报告 superseded 旧版存放于 `archive/reports/`：
+> `MIRI_VALIDATION_2026_05_18.md`、`MIRI_VALIDATION_2026_05_20.md`、`MIRI_VALIDATION_2026_05_23.md`。
+> 补充材料保留：`MIRI_VALIDATION_2026_05_18_COMPREHENSIVE.md`、`MIRI_VALIDATION_2026_05_20_APPENDIX.md`、`MIRI_VALIDATION_LOCKFREE_AND_RAW_REFERENCES.md`。
+
 ## 执行环境
 
 - **日期**: 2026-05-27

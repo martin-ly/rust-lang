@@ -73,7 +73,6 @@ fn main() {
     println!("{out}");
 }
 ```
-
 **Q1**: 这段代码能否编译？
 
 <details>
@@ -101,7 +100,6 @@ fn main() {
     println!("{:?}", s);
 }
 ```
-
 **Q1**: 这段代码能否编译？
 
 <details>
@@ -138,7 +136,6 @@ fn main() {
     println!("{result}");
 }
 ```
-
 **Q1**: 这段代码能否编译？
 
 <details>

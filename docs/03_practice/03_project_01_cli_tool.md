@@ -85,7 +85,6 @@ fn add_todo(todos: &mut Vec<String>, item: String) {
     todos.push(item);  // 所有权转移
 }
 ```
-
 ### 2. 错误处理 {#2-错误处理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -97,7 +96,6 @@ fn load_todos() -> Result<Vec<String>, std::io::Error> {
         .map(|content| content.lines().map(String::from).collect())
 }
 ```
-
 ### 3. 文件IO {#3-文件io}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -115,7 +113,6 @@ fn save_todos(todos: &[String]) -> std::io::Result<()> {
     Ok(())
 }
 ```
-
 ---
 
 ## 项目结构 {#项目结构}
@@ -131,7 +128,6 @@ todo-cli/
     ├── storage.rs     # 文件存储
     └── models.rs      # 数据结构
 ```
-
 ---
 
 ## 实现步骤 {#实现步骤}
@@ -146,7 +142,6 @@ todo-cli/
 cargo new todo-cli
 cd todo-cli
 ```
-
 ### 步骤 2: 定义数据结构 {#步骤-2-定义数据结构}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -160,7 +155,6 @@ struct Todo {
     completed: bool,
 }
 ```
-
 ### 步骤 3: 实现存储 {#步骤-3-实现存储}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -193,7 +187,6 @@ impl TodoStorage {
     }
 }
 ```
-
 ### 步骤 4: 实现命令处理 {#步骤-4-实现命令处理}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -216,7 +209,6 @@ pub fn list(storage: &TodoStorage) {
     }
 }
 ```
-
 ### 步骤 5: 主程序 {#步骤-5-主程序}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -253,7 +245,6 @@ fn main() {
     }
 }
 ```
-
 ---
 
 ## 测试验证 {#测试验证}
@@ -279,7 +270,6 @@ cargo build --release
 # 1. 买牛奶 {#1-买牛奶}
 # 2. 写代码 {#2-写代码}
 ```
-
 ---
 
 ## 参考实现 {#参考实现}

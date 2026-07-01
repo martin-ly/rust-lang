@@ -50,7 +50,6 @@
 │                                             │
 └─────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 🔐 依赖安全
@@ -67,7 +66,6 @@ cargo audit
 # 在 CI 中使用
 cargo audit --deny warnings
 ```
-
 **输出示例**:
 
 ```text
@@ -79,7 +77,6 @@ ID:        RUSTSEC-2022-0013
 URL:       https://rustsec.org/advisories/RUSTSEC-2022-0013
 Solution:  upgrade to >= 1.5.5
 ```
-
 ### 依赖最小化
 
 ```toml
@@ -95,7 +92,6 @@ serde = { version = "1", default-features = false }
 # 去除 panic 信息减少攻击面
 panic = "abort"
 ```
-
 ---
 
 ## 🛡️ 代码安全
@@ -113,7 +109,6 @@ mod unsafe_impl {
     }
 }
 ```
-
 **审计清单**:
 
 - [ ] 每个 `unsafe` 块都有 `// SAFETY:` 注释
@@ -142,7 +137,6 @@ pub fn validate_username(input: &str) -> Result<String, ValidationError> {
     Ok(input.to_lowercase())
 }
 ```
-
 ### Secret 管理
 
 ```rust
@@ -168,7 +162,6 @@ impl SecretKey {
 
 // SecretKey 离开作用域时自动 zeroize 内存
 ```
-
 ---
 
 ## 📦 构建安全
@@ -182,7 +175,6 @@ impl SecretKey {
 debug = false
 lto = true
 ```
-
 ### Supply Chain
 
 ```bash
@@ -192,7 +184,6 @@ cargo vet
 # 或使用 cargo-cyclonedx 生成 SBOM
 cargo cyclonedx
 ```
-
 ---
 
 ## 🚀 部署安全
@@ -210,7 +201,6 @@ COPY --from=builder /app/target/release/myapp /usr/local/bin/
 USER nonroot:nonroot
 ENTRYPOINT ["/usr/local/bin/myapp"]
 ```
-
 **安全要点**:
 
 - 使用 distroless 或 Alpine 镜像

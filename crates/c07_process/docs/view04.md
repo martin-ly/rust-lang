@@ -85,7 +85,6 @@ let status = Command::new("ls") // 要执行的命令
 
 println!("ls finished with: {}", status);
 ```
-
 - **定义 (Command)**：`Command` 结构体代表一个将要被创建和执行的外部命令的配置蓝图。它本身不代表一个运行中的进程。
 - **核心操作 (spawn)**：`spawn()` 方法是实际执行系统调用（如 Unix 上的 `fork`+`exec` 或 Windows 上的 `CreateProcess`）来创建新进程的动作。它返回一个 `Result<Child>`，`Child` 结构体代表了新创建的子进程句柄。
 - **配置项**：包括命令路径、参数、环境变量、工作目录、标准输入/输出/错误流的处理方式 (`Stdio`) 等。
@@ -120,7 +119,6 @@ let status = child.wait().expect("Failed to wait on grep");
 println!("grep exited with: {}", status);
 println!("grep output: {}", stdout_str);
 ```
-
 - **`Child` 结构体**：包含子进程的 PID (通过 `id()` 方法获取，类型为 `u32`)，以及对其标准流 (stdin, stdout, stderr) 的可选句柄 (类型为 `ChildStdin`, `ChildStdout`, `ChildStderr`，如果配置为 `piped()`）。
 - **等待 (`wait`)**：阻塞当前线程直到子进程结束，返回 `ExitStatus`。
 - **尝试等待 (`try_wait`)**：非阻塞地检查子进程是否已结束。
@@ -305,12 +303,10 @@ Rust 标准库对这些模型的直接支持程度不同。
   - `Release`: 用于写入操作。确保当前线程中，在此 `Release` 写入**之前**的所有内存操作，不会被重排到此写入**之后**。并且，它的写入对进行 `Acquire` 读取的线程可见。
   - `AcqRel` (Acquire/Release): 用于读-修改-写操作，同时具有 `Acquire` 和 `Release` 的语义。
   - `SeqCst` (Sequentially Consistent): 最强的顺序。提供全局一致的操作顺序，所有线程看到的 `SeqCst` 操作顺序都是一致的。最容易推理，但通常性能最低。
-
 - **形式化模型 (内存模型)**：内存顺序的精确语义由 C++11 内存模型定义，Rust 遵循该模型。这是一个复杂的形式系统，涉及“先行发生 (happens-before)”、“同步于 (synchronizes-with)”、“释放序列 (release sequence)”等概念。
   - **`synchronizes-with`**: `Release` 操作 A 与 `Acquire` 操作 B `synchronizes-with`，如果 B 读取了 A 写入的值（或后续 `Release` 写入的值）。
   - **`happens-before`**: 传递闭包关系，结合了程序顺序和 `synchronizes-with`。如果 A `happens-before` B，则 A 的内存效果对 B 可见。
   - **数据竞争 (Data Race)**：如果两个不同线程的内存访问（至少一个是写入，且至少一个不是原子操作）访问同一内存位置，且它们之间没有 `happens-before` 关系，则构成数据竞争，导致未定义行为 (UB)。**Rust 的安全代码保证无数据竞争**。`unsafe` 代码或 FFI 可能引入数据竞争。
-
 - **定理 (SeqCst Simplicity)**：所有 `SeqCst` 操作构成一个单一的全局总顺序 S，所有线程都同意这个顺序。这使得推理变得简单，但硬件实现成本高。
 
 ### 4.5 其他原语：`Barrier`, `OnceCell`/`LazyCell`
@@ -426,7 +422,6 @@ Rust 进程、通信与同步机制
     ├── 平台差异的抽象与泄漏
     └── 对生态系统和开发者系统知识的依赖
 ```
-
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

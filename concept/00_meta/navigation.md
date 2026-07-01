@@ -161,7 +161,6 @@ L1: ownership → borrowing → lifetimes → type_system
 L2: traits → generics → memory_management → error_handling
 L3: concurrency → async
 ```
-
 **Checkpoint**: 完成 L1 后应能回答：为什么 `let s2 = s1; println!("{}", s1);` 编译失败？
 
 ### C/C++ 开发者
@@ -171,7 +170,6 @@ L1: ownership（对比 unique_ptr） + L5: rust_vs_cpp
 L3: unsafe（对比 C 指针安全）
 L5: rust_vs_cpp（本体论差异系统对比）
 ```
-
 **加速技巧**: `Box<T>` ≈ `unique_ptr<T>`，`Rc<T>` ≈ `shared_ptr<T>`（无循环回收），`&mut T` ≈ `T*`（编译器保证无别名）
 
 ### Java/Go 开发者
@@ -182,7 +180,6 @@ L2: traits（对比 Java Interface/Go Interface）
 L3: concurrency（对比 goroutine/channel）
 L5: rust_vs_go
 ```
-
 **关键心智转换**: GC 对象生命周期 → 所有权系统管理生命周期
 
 ### Haskell/ML 开发者
@@ -192,7 +189,6 @@ L2: traits + generics（利用类型论基础）
 L4: linear_logic + type_theory（形式化视角）
 L5: paradigm_matrix（Rust 在设计空间中的位置）
 ```
-
 **加速技巧**: Trait ≈ Type Class，Lifetime ≈ Region Type，`?` ≈ Monad 的 `>>=`
 
 ---
@@ -243,9 +239,7 @@ L5: paradigm_matrix（Rust 在设计空间中的位置）
 | Navigation 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-
 > **过渡**: Rust 知识体系全景导航（Navigation Hub） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
-
 > **过渡**: 将 Rust 知识体系全景导航（Navigation Hub） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界

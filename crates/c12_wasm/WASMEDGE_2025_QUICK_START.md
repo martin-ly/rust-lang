@@ -20,9 +20,9 @@
 
 | 文档                                                                       | 内容                           | 难度       | 时长     |
 | :--- | :--- | :--- | :--- |
-| [06\_容器技术深度集成](docs/tier_04_advanced/06_容器技术深度集成.md)     | Docker/K8s/containerd 完整集成 | ⭐⭐⭐⭐⭐ | 2-3 小时 |
-| [07\_云原生CI_CD实践](docs/tier_04_advanced/07_云原生CI_CD实践.md)       | GitHub Actions/GitLab CI 流程  | ⭐⭐⭐⭐⭐ | 1-2 小时 |
-| [08\_监控与可观测性实践](docs/tier_04_advanced/08_监控与可观测性实践.md) | Prometheus/Grafana/Loki/Jaeger | ⭐⭐⭐⭐⭐ | 2-3 小时 |
+| [06\_容器技术深度集成](docs/tier_04_advanced/06_container_technology_integration.md)     | Docker/K8s/containerd 完整集成 | ⭐⭐⭐⭐⭐ | 2-3 小时 |
+| [07\_云原生CI_CD实践](docs/tier_04_advanced/07_cloud_native_ci_cd_practice.md)       | GitHub Actions/GitLab CI 流程  | ⭐⭐⭐⭐⭐ | 1-2 小时 |
+| [08\_监控与可观测性实践](docs/tier_04_advanced/08_monitoring_and_observability_practice.md) | Prometheus/Grafana/Loki/Jaeger | ⭐⭐⭐⭐⭐ | 2-3 小时 |
 
 ---
 
@@ -52,7 +52,6 @@ docker run --rm \
 # 4. 测试
 curl http://localhost:8080/health
 ```
-
 **期望结果**: `{"status":"healthy"}`
 
 ### 2. 部署到 Kubernetes (10分钟)
@@ -78,7 +77,6 @@ kubectl get svc -n wasm-prod
 kubectl port-forward -n wasm-prod svc/wasm-microservice 8080:80
 curl http://localhost:8080/health
 ```
-
 **期望结果**: 3 个 Pod 运行，服务正常响应
 
 ### 3. 配置监控 (15分钟)
@@ -104,7 +102,6 @@ kubectl create configmap grafana-dashboards \
 kubectl port-forward -n monitoring svc/grafana 3000:3000
 # 访问 http://localhost:3000 (admin/admin)
 ```
-
 ### 4. 配置 CI/CD (15分钟)
 
 #### GitHub Actions
@@ -127,7 +124,6 @@ git push origin main
 # 4. 查看 Actions 标签页
 # 应该看到自动触发的流程
 ```
-
 ---
 
 ## 📖 学习路径
@@ -136,7 +132,7 @@ git push origin main
 
 ```text
 1️⃣ 阅读项目概览 (30分钟)
-   └─ docs/tier_01_foundations/01_项目概览.md
+   └─ docs/tier_01_foundations/01_project_overview.md
 
 2️⃣ 运行示例代码 (1小时)
    └─ examples/08_container_microservice.rs
@@ -150,27 +146,25 @@ git push origin main
 5️⃣ 配置基础监控 (1小时)
    └─ deployment/monitoring/
 ```
-
 ### 路径 2: 深入学习 (1周)
 
 ```text
 Day 1-2: 容器技术
-  └─ 阅读 06_容器技术深度集成.md
+  └─ 阅读 06_container_technology_integration.md
   └─ 实践 Docker 和 Kubernetes 部署
 
 Day 3-4: CI/CD
-  └─ 阅读 07_云原生CI_CD实践.md
+  └─ 阅读 07_cloud_native_ci_cd_practice.md
   └─ 配置 GitHub Actions/GitLab CI
 
 Day 5-6: 监控
-  └─ 阅读 08_监控与可观测性实践.md
+  └─ 阅读 08_monitoring_and_observability_practice.md
   └─ 部署 Prometheus/Grafana/Loki
 
 Day 7: 综合实践
   └─ 部署完整的生产环境
   └─ 性能测试和优化
 ```
-
 ### 路径 3: 生产部署 (2周)
 
 ```text
@@ -187,7 +181,6 @@ Week 2: 应用部署
   ├─ 负载测试
   └─ 灾备演练
 ```
-
 ---
 
 ## 🎯 核心特性
@@ -222,7 +215,6 @@ deployment/k8s/wasm-deployment.yaml
   ├─ NetworkPolicy      # 网络策略
   └─ ServiceMonitor     # Prometheus 监控
 ```
-
 ### Docker
 
 ```bash
@@ -234,7 +226,6 @@ deployment/docker/Dockerfile.wasm
 deployment/docker/docker-compose.yaml
   └─ 完整服务栈（应用+数据库+缓存+监控）
 ```
-
 ### CI/CD
 
 ```bash
@@ -247,7 +238,6 @@ deployment/ci/github-actions.yml
   ├─ 部署到 Staging
   └─ 部署到 Production
 ```
-
 ### 监控
 
 ```bash
@@ -263,7 +253,6 @@ deployment/monitoring/alerts/wasm-alerts.yml
 deployment/monitoring/grafana-dashboard.json
   └─ 可视化面板配置
 ```
-
 ---
 
 ## 💡 常见问题
@@ -278,7 +267,6 @@ sudo tar -C /usr/local/bin -xzf containerd-shim-wasmedge-v1-linux-x86_64.tar.gz
 # 验证
 containerd-shim-wasmedge-v1 --version
 ```
-
 ### Q2: 如何优化 Wasm 二进制大小?
 
 ```toml
@@ -289,12 +277,10 @@ lto = true           # 链接时优化
 strip = true         # 移除符号
 panic = "abort"      # 减小二进制
 ```
-
 ```bash
 # 使用 wasm-opt 进一步优化
 wasm-opt -Oz --strip-debug app.wasm -o app-optimized.wasm
 ```
-
 ### Q3: 如何调试 Wasm 容器?
 
 ```bash
@@ -307,7 +293,6 @@ kubectl exec -it pod/wasm-microservice-xxx -n wasm-prod -- /bin/sh
 # 查看事件
 kubectl describe pod/wasm-microservice-xxx -n wasm-prod
 ```
-
 ### Q4: 性能如何?
 
 **实测数据** (相比 Linux 容器):

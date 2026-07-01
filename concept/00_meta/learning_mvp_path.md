@@ -3,7 +3,6 @@
 > **EN**: Learning Mvp Path
 > **Summary**: Learning Mvp Path. Core Rust concept.
 > ```text Week 1: 基础能力构建（20h） ├─ Day 1-2: Hello World + 基础语法      [4h] ├─ Day 3-4: ownership与borrowing                [6h] ├─ Day 5-6: types系统与错误处理          [6h] └─ Day 7:   第一个 CLI 工具（无concurrency）    [4h] Week 2: concurrency与工程化（20h） ├─ Day 8-9:  集合与迭代器               [4h] ├─ Day 10-11: 多线程与concurrency              [6h] ├─ Day 12-13: async基础```
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 应用
@@ -40,7 +39,6 @@ Week 2: 并发与工程化（20h）
 ├─ Day 12-13: 异步基础                  [6h]  🟡
 └─ Day 14:   综合项目：多线程/异步 CLI  [4h]  🔴
 ```
-
 ### 必修/选修快速对照
 
 | 模块 | 类型 | 对应 L3 测验 | TRPL 3rd Ed 章节 |
@@ -266,7 +264,6 @@ cargo test --test l3_advanced_systems
 cargo test --test l3_async_concurrency
 cargo test --test l3_ecosystem_alignment
 ```
-
 ---
 
 ## 扩展路径
@@ -321,9 +318,7 @@ cargo test --test l3_ecosystem_alignment
 | Learning Mvp Path 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-
 > **过渡**: MVP 学习路径：从零到多线程 CLI（40 小时） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
-
 > **过渡**: 将 MVP 学习路径：从零到多线程 CLI（40 小时） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界

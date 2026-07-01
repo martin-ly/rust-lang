@@ -165,7 +165,6 @@ CVE-2026-5223 (Medium)
 ├── 对私有 registry 启用上传校验，拒绝符号链接
 └── 使用 cargo-audit 监控依赖中的已知 CVE
 ```
-
 > [来源: [Rust 1.96 Release Notes — Two Cargo advisories](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)]
 
 ---
@@ -180,7 +179,6 @@ rustup update stable
 rustc --version  # >= 1.96.0
 cargo --version  # >= 1.96.0
 ```
-
 > 两个 CVE 的受影响版本都是 **Rust 1.96.0 之前的 Cargo**（CVE-2026-5222 具体为 1.68 到 1.96 之间）。升级是最直接、最有效的缓解措施。
 
 ---
@@ -194,7 +192,6 @@ cargo metadata --format-version 1 | jq '.packages[] | {name, source}'
 # 检查 Cargo.lock 中是否出现非 crates.io 的 registry URL
 grep -E '"registry\+"' Cargo.lock
 ```
-
 对于私有/第三方 registry，建议：
 
 - 在 CI 中记录并告警所有非 crates.io 依赖。
@@ -218,7 +215,6 @@ for f in **/*.crate; do
     fi
 done
 ```
-
 > 更可靠的方式是在 registry 服务端拒绝上传包含符号链接的包。 crates.io 即采用此策略，因此 CVE-2026-5223 对其无效。
 
 ---
@@ -247,7 +243,6 @@ internal-utils = { version = "0.4", registry = "my-company-registry" }
 # 本地开发用 git fork，发布时使用 registry 版本
 experimental-feature = { git = "https://git.example.com/fork", registry = "my-company-registry", version = "0.2" }
 ```
-
 > [来源: [Cargo Reference — Registries](https://doc.rust-lang.org/cargo/reference/registries.html)] ·
 > [Rust 1.96 Release Notes — Dependency with both git and registry](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)]
 
@@ -268,7 +263,6 @@ replace-with = "my-company-mirror"
 [source.my-company-mirror]
 registry = "sparse+https://crates.example.com/mirror"
 ```
-
 > [来源: [Cargo Source Replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html)]
 
 #### 示例 3：CI 中集成安全扫描
@@ -285,7 +279,6 @@ jobs:
       - run: cargo audit
       - run: cargo tree --edges normal --prefix none | sort -u
 ```
-
 > `cargo audit` 会检查 `Cargo.lock` 中是否存在已知安全公告，是供应链安全的基础工具。
 
 ---
@@ -309,7 +302,6 @@ graph TD
     style NOT fill:#ffebee
     style MIT fill:#fff3e0
 ```
-
 > **认知功能**：该决策树说明两个 CVE 的攻击面非常具体，绝大多数 crates.io 用户没有直接风险；但生产环境中若涉及第三方 registry，升级是必要动作。
 
 ### 3.2 边界极限

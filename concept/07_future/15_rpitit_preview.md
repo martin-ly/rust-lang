@@ -43,7 +43,6 @@ impl Factory for MyFactory {
 
 fn main() {}
 ```
-
 > **修正**:
 > **RPITIT**（Return Position Impl Trait In Traits，稳定于 1.75.0）允许 trait 方法返回 `impl Trait`：
 >
@@ -62,7 +61,6 @@ fn main() {}
 >
 > [来源: [RPITIT RFC](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)] ·
 > [来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)]
-
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)

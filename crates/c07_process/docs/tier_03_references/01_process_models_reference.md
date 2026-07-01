@@ -1,0 +1,1507 @@
+# Tier 3: 进程模型参考
+
+> **文档类型**: 技术参考
+> **适用版本**: Rust 1.92.0+
+> **前置知识**: [进程管理快速入门](../tier_02_guides/01_process_management_quick_start.md)
+
+---
+
+## 目录
+
+- [Tier 3: 进程模型参考](#tier-3-进程模型参考)
+  - [目录](#目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+  - [1. 进程模型理论](#1-进程模型理论)
+    - [1.1 进程的定义与本质](#11-进程的定义与本质)
+    - [1.2 进程与线程的对比](#12-进程与线程的对比)
+    - [1.3 进程的资源隔离](#13-进程的资源隔离)
+    - [1.4 进程的优缺点分析](#14-进程的优缺点分析)
+  - [2. 进程状态机模型](#2-进程状态机模型)
+    - [2.1 经典五状态模型](#21-经典五状态模型)
+    - [2.2 七状态模型（包含挂起）](#22-七状态模型包含挂起)
+    - [2.3 Rust中的进程状态映射](#23-rust中的进程状态映射)
+    - [2.4 状态转换触发条件](#24-状态转换触发条件)
+    - [2.5 僵尸进程与孤儿进程](#25-僵尸进程与孤儿进程)
+  - [3. 进程属性与资源](#3-进程属性与资源)
+    - [3.1 进程标识符](#31-进程标识符)
+    - [3.2 进程资源](#32-进程资源)
+  - [4. 进程生命周期管理](#4-进程生命周期管理)
+    - [4.1 创建阶段](#41-创建阶段)
+    - [4.2 运行阶段](#42-运行阶段)
+    - [4.3 终止阶段](#43-终止阶段)
+    - [4.4 回收阶段](#44-回收阶段)
+  - [5. 进程控制块（PCB）](#5-进程控制块pcb)
+  - [6. 进程调度模型](#6-进程调度模型)
+    - [6.1 调度算法](#61-调度算法)
+  - [7. 进程间关系](#7-进程间关系)
+    - [7.1 父子关系](#71-父子关系)
+    - [7.2 进程组](#72-进程组)
+    - [7.3 会话（Session）](#73-会话session)
+  - [8. Unix vs Windows 进程模型差异](#8-unix-vs-windows-进程模型差异)
+  - [9. Rust进程模型实现](#9-rust进程模型实现)
+    - [9.1 Command Builder](#91-command-builder)
+    - [9.2 进程句柄 (Child)](#92-进程句柄-child)
+  - [10. 实战案例](#10-实战案例)
+    - [案例: 进程生命周期管理器](#案例-进程生命周期管理器)
+  - [11. 总结与最佳实践](#11-总结与最佳实践)
+    - [核心要点](#核心要点)
+    - [最佳实践](#最佳实践)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**进程模型 (Process Model)**:
+
+- **定义**: 操作系统中进程的定义、状态、生命周期和资源管理的理论模型
+- **类型**: 系统理论模型
+- **范畴**: 操作系统、系统编程
+- **版本**: Rust 1.0+
+- **相关概念**: 进程、线程、进程状态、进程控制块、进程调度
+
+### 属性特征
+
+**核心属性**:
+
+- **独立性**: 每个进程拥有独立的地址空间
+- **动态性**: 进程是动态创建、执行和消亡的
+- **并发性**: 多个进程可以并发执行
+- **异步性**: 进程以不可预知的速度推进
+
+**性能特征**:
+
+- **资源隔离**: 进程间资源隔离
+- **开销**: 进程创建和切换开销较大
+- **适用场景**: 系统服务、独立应用、资源隔离
+
+### 关系连接
+
+**继承关系**:
+
+- 进程 --[is-a]--> 执行实体
+- 进程状态 --[is-a]--> 状态模型
+
+**组合关系**:
+
+- 进程模型 --[uses]--> 进程控制块
+- 操作系统 --[uses]--> 进程模型
+
+**依赖关系**:
+
+- 进程模型 --[depends-on]--> 操作系统支持
+- 进程管理 --[depends-on]--> 进程模型
+
+### 思维导图
+
+```text
+进程模型参考
+│
+├── 进程模型理论
+│   ├── 进程定义
+│   └── 进程与线程对比
+├── 进程状态机模型
+│   ├── 五状态模型
+│   └── 七状态模型
+├── 进程属性与资源
+│   ├── 进程标识符
+│   └── 进程资源
+├── 进程生命周期管理
+│   ├── 创建阶段
+│   ├── 运行阶段
+│   └── 终止阶段
+└── 进程调度模型
+    └── 调度算法
+```
+---
+
+## 1. 进程模型理论
+
+### 1.1 进程的定义与本质
+
+**定义**: 进程（Process）是操作系统中资源分配和调度的基本单位，是程序的一次执行实例。
+
+**核心特征**:
+
+1. **独立性**: 每个进程拥有独立的地址空间
+2. **动态性**: 进程是动态创建、执行和消亡的
+3. **并发性**: 多个进程可以并发执行
+4. **异步性**: 进程以不可预知的速度推进
+
+**进程 vs 程序**:
+
+| 对比维度 | 程序           | 进程                     |
+| :--- | :--- | :--- || 本质     | 静态的指令集合 | 动态的执行实体           |
+| 生命周期 | 永久存储       | 临时存在                 |
+| 资源     | 不占用系统资源 | 占用CPU、内存等资源      |
+| 关系     | 一对多         | 一个程序可以对应多个进程 |
+
+**Rust中的进程**:
+
+```rust
+use std::process::Command;
+
+// 程序：磁盘上的可执行文件
+let program = "/usr/bin/ls";
+
+// 进程：程序的执行实例
+let process1 = Command::new(program).spawn()?;  // 第1个实例
+let process2 = Command::new(program).spawn()?;  // 第2个实例
+
+// 两个进程独立运行，拥有不同的PID
+println!("Process 1 PID: {}", process1.id());
+println!("Process 2 PID: {}", process2.id());
+```
+---
+
+### 1.2 进程与线程的对比
+
+**根本区别**: 进程是资源分配单位，线程是调度单位。
+
+| 对比维度     | 进程                       | 线程                             |
+| :--- | :--- | :--- || **地址空间** | 独立                       | 共享                             |
+| **资源开销** | 大（需要独立的内存空间）   | 小（共享进程资源）               |
+| **创建开销** | 大（需要fork+exec）        | 小（只需分配栈）                 |
+| **通信方式** | IPC（管道、共享内存等）    | 直接访问共享变量                 |
+| **安全性**   | 高（隔离性好）             | 低（需要同步机制）               |
+| **稳定性**   | 一个进程崩溃不影响其他进程 | 一个线程崩溃可能导致整个进程崩溃 |
+| **并发性**   | 多进程并发                 | 多线程并发                       |
+
+**使用场景**:
+
+**选择进程**:
+
+- ✅ 需要强隔离和安全性
+- ✅ 不同模块之间耦合度低
+- ✅ 利用多核CPU（分布式计算）
+- ✅ 不同编程语言混合使用
+
+**选择线程**:
+
+- ✅ 需要频繁通信和数据共享
+- ✅ 对性能要求高（创建/切换开销小）
+- ✅ 同一程序内的并发任务
+- ✅ 内存资源受限
+
+**Rust示例对比**:
+
+```rust
+use std::process::Command;
+use std::thread;
+
+// 1. 多进程方式
+fn multi_process() {
+    let mut handles = vec![];
+
+    for i in 0..4 {
+        let child = Command::new("worker")
+            .arg(i.to_string())
+            .spawn()
+            .expect("Failed to spawn");
+        handles.push(child);
+    }
+
+    for mut child in handles {
+        child.wait().expect("Failed to wait");
+    }
+}
+
+// 2. 多线程方式
+fn multi_thread() {
+    let mut handles = vec![];
+
+    for i in 0..4 {
+        let handle = thread::spawn(move || {
+            // 工作逻辑
+            println!("Thread {} working", i);
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().expect("Failed to join");
+    }
+}
+```
+---
+
+### 1.3 进程的资源隔离
+
+**隔离的资源类型**:
+
+**1. 内存隔离**:
+
+```text
+进程A地址空间              进程B地址空间
+┌──────────────┐          ┌──────────────┐
+│   内核空间   │          │   内核空间   │
+├──────────────┤          ├──────────────┤
+│     栈       │          │     栈       │
+│      ↓       │          │      ↓       │
+│              │          │              │
+│      ↑       │          │      ↑       │
+│     堆       │          │     堆       │
+├──────────────┤          ├──────────────┤
+│   数据段     │          │   数据段     │
+├──────────────┤          ├──────────────┤
+│   代码段     │          │   代码段     │
+└──────────────┘          └──────────────┘
+   独立空间                  独立空间
+```
+**2. 文件描述符隔离**:
+
+```rust
+use std::fs::File;
+use std::process::Command;
+use std::os::unix::io::AsRawFd;
+
+fn main() -> std::io::Result<()> {
+    // 父进程打开文件
+    let file = File::open("/etc/hosts")?;
+    let fd = file.as_raw_fd();
+
+    println!("Parent FD: {}", fd);
+
+    // 子进程有自己独立的FD表
+    let child = Command::new("ls")
+        .arg("-la")
+        .arg("/proc/self/fd")
+        .spawn()?;
+
+    child.wait_with_output()?;
+
+    // 文件描述符不会互相影响
+    Ok(())
+}
+```
+**3. 环境变量隔离**:
+
+```rust
+use std::process::Command;
+use std::env;
+
+fn main() {
+    // 父进程环境变量
+    env::set_var("PARENT_VAR", "parent_value");
+
+    // 子进程继承但独立
+    let output = Command::new("sh")
+        .arg("-c")
+        .arg("echo $PARENT_VAR")
+        .env("CHILD_VAR", "child_value")
+        .output()
+        .expect("Failed");
+
+    println!("Child sees: {}", String::from_utf8_lossy(&output.stdout));
+
+    // 父进程不受影响
+    assert_eq!(env::var("CHILD_VAR").is_err(), true);
+}
+```
+**4. 工作目录隔离**:
+
+```rust
+let child1 = Command::new("pwd")
+    .current_dir("/tmp")
+    .spawn()?;
+
+let child2 = Command::new("pwd")
+    .current_dir("/home")
+    .spawn()?;
+
+// 两个进程拥有不同的工作目录
+```
+**隔离的实现机制**:
+
+- **虚拟内存**: 每个进程有独立的页表
+- **命名空间（Linux）**: PID, Mount, Network, IPC, UTS, User命名空间
+- **Cgroups**: 资源限制和隔离
+- **权限控制**: UID/GID, Capabilities
+
+---
+
+### 1.4 进程的优缺点分析
+
+**优点** ✅:
+
+1. **强隔离性**:
+   - 一个进程崩溃不影响其他进程
+   - 适合运行不可信代码
+2. **安全性**:
+   - 独立的地址空间防止内存越界
+   - 可以设置不同的权限（UID/GID）
+3. **稳定性**:
+   - 模块化设计，易于维护
+   - 可以独立重启某个服务
+4. **跨语言**:
+   - 不同语言编写的模块可以通过进程通信
+   - 无需考虑ABI兼容性
+
+**缺点** ❌:
+
+1. **资源开销大**:
+   - 每个进程需要独立的内存空间
+   - 创建和销毁开销较大
+2. **通信复杂**:
+   - 需要使用IPC机制（管道、Socket等）
+   - 性能不如线程的直接内存访问
+3. **调试困难**:
+   - 多进程调试比单进程复杂
+   - 需要专门的工具（如gdb attach）
+4. **同步问题**:
+   - 进程间同步需要额外机制
+   - 比线程的互斥锁等更复杂
+
+**性能对比**:
+
+```rust
+use std::time::Instant;
+
+// 测试进程创建开销
+fn benchmark_process_creation() {
+    let start = Instant::now();
+
+    for _ in 0..100 {
+        let child = Command::new("true").spawn().unwrap();
+        child.wait_with_output().unwrap();
+    }
+
+    let duration = start.elapsed();
+    println!("100 processes: {:?}", duration);  // 约 500-1000ms
+}
+
+// 测试线程创建开销
+fn benchmark_thread_creation() {
+    let start = Instant::now();
+
+    for _ in 0..100 {
+        let handle = thread::spawn(|| {});
+        handle.join().unwrap();
+    }
+
+    let duration = start.elapsed();
+    println!("100 threads: {:?}", duration);  // 约 10-50ms
+}
+```
+**典型应用场景**:
+
+**进程适用**:
+
+- 🔹 Web服务器（Nginx: master-worker模型）
+- 🔹 数据库（PostgreSQL: 每个连接一个进程）
+- 🔹 Chrome浏览器（每个标签页一个进程）
+- 🔹 容器化应用（Docker: 每个容器一个主进程）
+
+**线程适用**:
+
+- 🔹 GUI应用（主线程+工作线程）
+- 🔹 游戏引擎（渲染、物理、AI线程）
+- 🔹 高性能计算（数据并行）
+- 🔹 异步I/O框架（Tokio: 多线程运行时）
+
+---
+
+## 2. 进程状态机模型
+
+### 2.1 经典五状态模型
+
+**状态定义**:
+
+```text
+       ┌─────────┐
+       │   新建  │ (NEW)
+       │  (创建) │
+       └────┬────┘
+            │ 进程创建完成
+            ↓
+       ┌─────────┐
+   ┌──→│  就绪   │←──┐
+   │   │ (READY) │   │ 时间片用完/被抢占
+   │   └────┬────┘   │
+   │        │ 调度   │
+   │        ↓        │
+   │   ┌─────────┐   │
+   │   │  运行   │───┘
+   │   │(RUNNING)│
+   │   └────┬────┘
+   │        │ I/O请求
+   │        ↓
+   │   ┌─────────┐
+   └───│  阻塞   │
+       │(BLOCKED)│
+       └────┬────┘
+            │ 进程终止
+            ↓
+       ┌─────────┐
+       │  终止   │ (TERMINATED)
+       └─────────┘
+```
+**状态详解**:
+
+**1. NEW (新建)**:
+
+- 进程正在被创建
+- 分配进程控制块（PCB）
+- 尚未进入就绪队列
+
+**2. READY (就绪)**:
+
+- 进程已准备好运行
+- 等待CPU调度
+- 在就绪队列中排队
+
+**3. RUNNING (运行)**:
+
+- 进程正在CPU上执行
+- 单核CPU同时只有一个进程运行
+
+**4. BLOCKED (阻塞)**:
+
+- 进程等待某个事件（I/O完成、信号等）
+- 不能被调度执行
+- 事件发生后转为就绪状态
+
+**5. TERMINATED (终止)**:
+
+- 进程执行完成或被终止
+- 等待父进程回收资源
+
+**Rust代码示例**:
+
+```rust
+use std::process::{Command, Stdio};
+use std::time::Duration;
+use std::thread;
+
+fn demonstrate_process_states() -> std::io::Result<()> {
+    // NEW → READY → RUNNING
+    let mut child = Command::new("sleep")
+        .arg("10")
+        .spawn()?;  // 进程从 NEW → READY → RUNNING
+
+    println!("进程已创建，PID: {}", child.id());
+
+    // RUNNING 状态
+    thread::sleep(Duration::from_secs(2));
+
+    // 检查状态（RUNNING 或 READY）
+    match child.try_wait()? {
+        None => println!("进程仍在运行"),
+        Some(status) => println!("进程已终止: {:?}", status),
+    }
+
+    // 终止进程 (RUNNING → TERMINATED)
+    child.kill()?;
+
+    // TERMINATED 状态
+    let status = child.wait()?;
+    println!("进程已终止，退出码: {:?}", status.code());
+
+    Ok(())
+}
+```
+### 2.2 七状态模型（包含挂起）
+
+**扩展状态**:
+
+```text
+               ┌─────────┐
+               │   新建  │
+               └────┬────┘
+                    │
+                    ↓
+     ┌──────────────────────────┐
+     │        就绪队列            │
+     │  ┌─────────┐  ┌─────────┐│
+     │  │ 就绪挂起│  │   就绪  ││
+     │  └────┬────┘  └────┬────┘│
+     └───────┼────────────┼─────┘
+             │            │
+             │            ↓
+             │       ┌─────────┐
+             │       │  运行   │
+             │       └────┬────┘
+             │            │
+             │            ↓
+     ┌───────┼────────────────────┐
+     │       │      阻塞队列        │
+     │  ┌────┴────┐  ┌─────────┐  │
+     │  │ 阻塞挂起│  │  阻塞   │  │
+     │  └─────────┘  └─────────┘  │
+     └─────────────────────────────┘
+                    │
+                    ↓
+               ┌─────────┐
+               │  终止   │
+               └─────────┘
+```
+**新增状态解释**:
+
+**READY_SUSPEND (就绪挂起)**:
+
+- 进程已就绪但被挂起到磁盘
+- 内存不足时，将部分就绪进程挂起
+- 激活后转为就绪状态
+
+**BLOCKED_SUSPEND (阻塞挂起)**:
+
+- 进程等待事件且被挂起到磁盘
+- 双重等待：事件完成 + 内存资源
+- 适用于长时间等待的进程
+
+**Rust模拟挂起**:
+
+```rust
+use std::process::{Command, Stdio};
+
+#[cfg(unix)]
+fn suspend_resume_process() -> std::io::Result<()> {
+    use nix::sys::signal::{kill, Signal};
+    use nix::unistd::Pid;
+
+    let mut child = Command::new("sleep")
+        .arg("60")
+        .spawn()?;
+
+    let pid = child.id() as i32;
+
+    // 挂起进程 (SIGSTOP)
+    kill(Pid::from_raw(pid), Signal::SIGSTOP).ok();
+    println!("进程已挂起");
+
+    std::thread::sleep(Duration::from_secs(5));
+
+    // 恢复进程 (SIGCONT)
+    kill(Pid::from_raw(pid), Signal::SIGCONT).ok();
+    println!("进程已恢复");
+
+    child.wait()?;
+    Ok(())
+}
+```
+---
+
+### 2.3 Rust中的进程状态映射
+
+**Rust类型 vs 操作系统状态**:
+
+| Rust类型              | OS状态                | 说明                   |
+| :--- | :--- | :--- || `Command::new()`      | -                     | 仅构建命令，未创建进程 |
+| `spawn()`             | NEW → READY/RUNNING   | 创建进程并立即运行     |
+| `Child`               | RUNNING/READY/BLOCKED | 运行中的进程           |
+| `try_wait() → None`   | RUNNING/READY/BLOCKED | 进程仍在运行           |
+| `try_wait() → Some()` | TERMINATED            | 进程已结束             |
+| `ExitStatus`          | TERMINATED            | 终止状态详情           |
+
+**状态检测**:
+
+```rust
+use std::process::Command;
+use std::time::Duration;
+
+pub enum ProcessState {
+    Running,
+    Terminated(Option<i32>),
+    Unknown,
+}
+
+pub fn check_process_state(child: &mut Child) -> ProcessState {
+    match child.try_wait() {
+        Ok(Some(status)) => ProcessState::Terminated(status.code()),
+        Ok(None) => ProcessState::Running,
+        Err(_) => ProcessState::Unknown,
+    }
+}
+
+// 使用示例
+fn main() -> std::io::Result<()> {
+    let mut child = Command::new("sleep").arg("5").spawn()?;
+
+    loop {
+        match check_process_state(&mut child) {
+            ProcessState::Running => {
+                println!("[{}] 进程运行中...", child.id());
+            }
+            ProcessState::Terminated(code) => {
+                println!("[{}] 进程已终止，退出码: {:?}", child.id(), code);
+                break;
+            }
+            ProcessState::Unknown => {
+                eprintln!("无法检测进程状态");
+                break;
+            }
+        }
+
+        std::thread::sleep(Duration::from_secs(1));
+    }
+
+    Ok(())
+}
+```
+---
+
+### 2.4 状态转换触发条件
+
+**状态转换表**:
+
+| 当前状态        | 事件         | 下一状态        |
+| :--- | :--- | :--- || NEW             | 进程创建完成 | READY           |
+| READY           | CPU调度      | RUNNING         |
+| RUNNING         | 时间片用完   | READY           |
+| RUNNING         | I/O请求      | BLOCKED         |
+| RUNNING         | 进程终止     | TERMINATED      |
+| RUNNING         | 挂起         | READY_SUSPEND   |
+| BLOCKED         | I/O完成      | READY           |
+| BLOCKED         | 挂起         | BLOCKED_SUSPEND |
+| READY_SUSPEND   | 激活         | READY           |
+| BLOCKED_SUSPEND | I/O完成      | READY_SUSPEND   |
+| BLOCKED_SUSPEND | 激活         | BLOCKED         |
+
+**Rust触发状态转换**:
+
+```rust
+use std::process::{Command, Stdio};
+use std::io::Write;
+
+fn trigger_state_transitions() -> std::io::Result<()> {
+    // NEW → READY → RUNNING
+    let mut child = Command::new("cat")
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .spawn()?;
+
+    println!("1. 进程创建: NEW → RUNNING");
+
+    // RUNNING → BLOCKED (等待输入)
+    println!("2. 进程阻塞: RUNNING → BLOCKED (等待stdin)");
+    std::thread::sleep(Duration::from_secs(2));
+
+    // BLOCKED → READY → RUNNING (提供输入)
+    if let Some(mut stdin) = child.stdin.take() {
+        writeln!(stdin, "Hello")?;
+        println!("3. 解除阻塞: BLOCKED → READY → RUNNING");
+    }
+
+    std::thread::sleep(Duration::from_secs(1));
+
+    // RUNNING → TERMINATED (终止进程)
+    child.kill()?;
+    println!("4. 进程终止: RUNNING → TERMINATED");
+
+    child.wait()?;
+
+    Ok(())
+}
+```
+---
+
+### 2.5 僵尸进程与孤儿进程
+
+**僵尸进程 (Zombie Process)**:
+
+**定义**: 进程已终止，但父进程尚未调用`wait()`回收其资源。
+
+**特征**:
+
+- 进程已结束，但PCB仍保留
+- 占用PID，不占用其他资源
+- 状态显示为`Z (zombie)`
+
+**危害**: 大量僵尸进程会耗尽PID资源
+
+**避免僵尸进程**:
+
+```rust
+use std::process::Command;
+use std::thread;
+
+// ❌ 错误：不回收子进程
+fn create_zombie() {
+    let _child = Command::new("true").spawn().unwrap();
+    // 没有调用 wait()，创建僵尸进程！
+}
+
+// ✅ 正确：及时回收子进程
+fn proper_cleanup() -> std::io::Result<()> {
+    let mut child = Command::new("true").spawn()?;
+    child.wait()?;  // 回收子进程
+    Ok(())
+}
+
+// ✅ 正确：使用RAII模式
+struct ManagedChild(Child);
+
+impl Drop for ManagedChild {
+    fn drop(&mut self) {
+        // 自动回收
+        self.0.wait().ok();
+    }
+}
+```
+**检测僵尸进程**:
+
+```rust
+#[cfg(unix)]
+fn find_zombie_processes() -> std::io::Result<()> {
+    use std::fs;
+
+    let entries = fs::read_dir("/proc")?;
+
+    for entry in entries {
+        if let Ok(entry) = entry {
+            let path = entry.path();
+            if let Some(pid_str) = path.file_name().and_then(|n| n.to_str()) {
+                if pid_str.chars().all(|c| c.is_digit(10)) {
+                    // 读取进程状态
+                    let status_path = path.join("stat");
+                    if let Ok(content) = fs::read_to_string(status_path) {
+                        // 第三个字段是状态
+                        let fields: Vec<&str> = content.split_whitespace().collect();
+                        if fields.len() > 2 && fields[2] == "Z" {
+                            println!("僵尸进程: PID {}", pid_str);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    Ok(())
+}
+```
+---
+
+**孤儿进程 (Orphan Process)**:
+
+**定义**: 父进程先于子进程退出，子进程被`init`(PID 1)或`systemd`收养。
+
+**特征**:
+
+- PPID变为1（init进程）
+- 正常运行，不会成为僵尸进程
+- init会自动回收其退出状态
+
+**创建孤儿进程**:
+
+```rust
+use std::process::Command;
+use std::thread;
+use std::time::Duration;
+
+fn create_orphan() -> std::io::Result<()> {
+    // 父进程
+    let parent_pid = std::process::id();
+    println!("父进程 PID: {}", parent_pid);
+
+    // 创建子进程
+    let mut child = Command::new("sleep")
+        .arg("30")
+        .spawn()?;
+
+    let child_pid = child.id();
+    println!("子进程 PID: {}", child_pid);
+
+    // 父进程立即退出，不等待子进程
+    // 子进程变成孤儿进程
+    std::process::exit(0);  // 父进程退出
+
+    // 这里的代码不会执行
+}
+
+// 守护进程化（刻意创建孤儿进程）
+#[cfg(unix)]
+fn daemonize() -> std::io::Result<()> {
+    use nix::unistd::{fork, ForkResult, setsid};
+
+    // 第一次fork
+    match unsafe { fork() } {
+        Ok(ForkResult::Parent { .. }) => {
+            // 父进程退出，让子进程成为孤儿
+            std::process::exit(0);
+        }
+        Ok(ForkResult::Child) => {
+            // 子进程成为会话领导者
+            setsid().ok();
+
+            // 第二次fork，确保不是会话领导者
+            match unsafe { fork() } {
+                Ok(ForkResult::Parent { .. }) => std::process::exit(0),
+                Ok(ForkResult::Child) => {
+                    // 真正的守护进程
+                    println!("守护进程运行中，PID: {}", std::process::id());
+                    // ... 守护进程逻辑
+                }
+                Err(e) => return Err(e.into()),
+            }
+        }
+        Err(e) => return Err(e.into()),
+    }
+
+    Ok(())
+}
+```
+**对比**:
+
+| 特性         | 僵尸进程                 | 孤儿进程             |
+| :--- | :--- | :--- || **成因**     | 父进程未回收已终止子进程 | 父进程先于子进程退出 |
+| **状态**     | TERMINATED (Z)           | RUNNING              |
+| **PPID**     | 原父进程PID              | 1 (init)             |
+| **资源占用** | 仅占用PID                | 正常占用             |
+| **危害**     | 耗尽PID                  | 无（init会回收）     |
+| **解决**     | 父进程调用wait()         | 无需解决（正常行为） |
+
+---
+
+## 3. 进程属性与资源
+
+### 3.1 进程标识符
+
+**PID (Process ID)**:
+
+- 系统唯一的进程标识符
+- Unix: 1-32768 (可配置)
+- Windows: 任意正整数
+
+```rust
+use std::process::{Command, id as current_pid};
+
+// 当前进程PID
+let my_pid = current_pid();
+println!("当前进程: {}", my_pid);
+
+// 子进程PID
+let child = Command::new("sleep").arg("10").spawn()?;
+println!("子进程: {}", child.id());
+```
+**PPID (Parent PID)**:
+
+```rust
+#[cfg(unix)]
+fn get_parent_pid() -> u32 {
+    unsafe {
+        libc::getppid() as u32
+    }
+}
+```
+---
+
+### 3.2 进程资源
+
+**资源类型**:
+
+1. **CPU时间**: 进程占用的CPU时间片
+2. **内存**: 虚拟地址空间、物理内存
+3. **文件描述符**: 打开的文件、Socket、管道
+4. **信号**: 注册的信号处理器
+5. **环境**: 环境变量、命令行参数
+
+**Rust资源管理**:
+
+```rust
+use std::process::Command;
+use std::env;
+
+pub struct ProcessResources {
+    pub pid: u32,
+    pub env_vars: Vec<(String, String)>,
+    pub args: Vec<String>,
+    pub cwd: std::path::PathBuf,
+}
+
+impl ProcessResources {
+    pub fn current() -> Self {
+        Self {
+            pid: std::process::id(),
+            env_vars: env::vars().collect(),
+            args: env::args().collect(),
+            cwd: env::current_dir().unwrap_or_default(),
+        }
+    }
+
+    pub fn print_summary(&self) {
+        println!("PID: {}", self.pid);
+        println!("CWD: {:?}", self.cwd);
+        println!("Args: {:?}", self.args);
+        println!("Env count: {}", self.env_vars.len());
+    }
+}
+```
+---
+
+## 4. 进程生命周期管理
+
+### 4.1 创建阶段
+
+**Unix: fork + exec模型**:
+
+```text
+父进程           子进程
+  │
+  ├─ fork() ──→ 创建副本
+  │              │
+  │              ├─ exec() ──→ 加载新程序
+  │              │
+  │              └─ 运行
+```
+**Windows: CreateProcess**:
+
+```text
+父进程
+  │
+  └─ CreateProcess() ──→ 直接创建新进程
+```
+**Rust统一接口**:
+
+```rust
+// Rust隐藏了平台差异
+let child = Command::new("program")
+    .arg("arg1")
+    .spawn()?;  // Unix: fork+exec / Windows: CreateProcess
+```
+---
+
+### 4.2 运行阶段
+
+**进程行为**:
+
+- 执行指令
+- 系统调用
+- 响应信号（Unix）
+- 访问资源
+
+**监控运行中的进程**:
+
+```rust
+use std::time::{Duration, Instant};
+
+pub fn monitor_until_complete(mut child: Child) -> std::io::Result<()> {
+    let start = Instant::now();
+
+    loop {
+        match child.try_wait()? {
+            Some(status) => {
+                let duration = start.elapsed();
+                println!("进程运行了 {:?}", duration);
+                println!("退出状态: {:?}", status.code());
+                break;
+            }
+            None => {
+                // 进程仍在运行
+                std::thread::sleep(Duration::from_millis(100));
+            }
+        }
+    }
+
+    Ok(())
+}
+```
+---
+
+### 4.3 终止阶段
+
+**终止方式**:
+
+1. **正常退出**: `return` / `exit()`
+2. **异常退出**: 未捕获的panic、段错误
+3. **被杀死**: `kill()` / 信号
+
+**Rust终止控制**:
+
+```rust
+use std::process::Command;
+
+// 1. 等待自然终止
+let status = child.wait()?;
+
+// 2. 强制终止
+child.kill()?;
+let status = child.wait()?;
+
+// 3. Unix信号终止
+#[cfg(unix)]
+{
+    use nix::sys::signal::{kill, Signal};
+    use nix::unistd::Pid;
+
+    let pid = Pid::from_raw(child.id() as i32);
+    kill(pid, Signal::SIGTERM)?;  // 优雅终止
+
+    // 等待5秒
+    std::thread::sleep(Duration::from_secs(5));
+
+    // 如果还未终止，强制杀死
+    if child.try_wait()?.is_none() {
+        kill(pid, Signal::SIGKILL)?;
+    }
+}
+```
+---
+
+### 4.4 回收阶段
+
+**为什么需要回收**:
+
+- 获取退出状态
+- 释放PCB资源
+- 防止僵尸进程
+
+**正确的回收模式**:
+
+```rust
+// ✅ RAII模式自动回收
+pub struct ManagedProcess {
+    child: Option<Child>,
+}
+
+impl ManagedProcess {
+    pub fn spawn(cmd: &str) -> std::io::Result<Self> {
+        let child = Command::new(cmd).spawn()?;
+        Ok(Self {
+            child: Some(child),
+        })
+    }
+}
+
+impl Drop for ManagedProcess {
+    fn drop(&mut self) {
+        if let Some(mut child) = self.child.take() {
+            // 尝试优雅终止
+            child.kill().ok();
+            child.wait().ok();
+        }
+    }
+}
+```
+---
+
+## 5. 进程控制块（PCB）
+
+**PCB包含的信息**:
+
+```text
+┌──────────────────────────────────┐
+│   Process Control Block (PCB)   │
+├──────────────────────────────────┤
+│ 1. 进程标识                      │
+│    - PID, PPID, UID, GID         │
+├──────────────────────────────────┤
+│ 2. 进程状态                      │
+│    - NEW/READY/RUNNING/BLOCKED  │
+├──────────────────────────────────┤
+│ 3. CPU寄存器                     │
+│    - PC, SP, 通用寄存器          │
+├──────────────────────────────────┤
+│ 4. 调度信息                      │
+│    - 优先级, 时间片              │
+├──────────────────────────────────┤
+│ 5. 内存管理                      │
+│    - 页表指针, 内存限制          │
+├──────────────────────────────────┤
+│ 6. 文件描述符表                  │
+│    - 打开的文件列表              │
+├──────────────────────────────────┤
+│ 7. 信号信息                      │
+│    - 信号掩码, 处理器            │
+└──────────────────────────────────┘
+```
+**在Rust中模拟PCB**:
+
+```rust
+#[derive(Debug)]
+pub struct ProcessControlBlock {
+    pub pid: u32,
+    pub ppid: u32,
+    pub state: ProcessState,
+    pub priority: u8,
+    pub cpu_time: Duration,
+    pub memory_usage: usize,
+    pub open_files: Vec<String>,
+}
+
+impl ProcessControlBlock {
+    pub fn new(pid: u32, ppid: u32) -> Self {
+        Self {
+            pid,
+            ppid,
+            state: ProcessState::Running,
+            priority: 0,
+            cpu_time: Duration::from_secs(0),
+            memory_usage: 0,
+            open_files: Vec::new(),
+        }
+    }
+
+    pub fn update_state(&mut self, new_state: ProcessState) {
+        println!("PID {} 状态变更: {:?} -> {:?}",
+            self.pid, self.state, new_state);
+        self.state = new_state;
+    }
+}
+```
+---
+
+## 6. 进程调度模型
+
+### 6.1 调度算法
+
+**常见算法**:
+
+1. **FCFS (先来先服务)**:
+   - 简单，但可能导致长作业阻塞
+2. **SJF (最短作业优先)**:
+   - 最优平均等待时间
+   - 可能导致饥饿
+3. **优先级调度**:
+   - 支持不同重要性的进程
+   - 可能导致优先级反转
+4. **时间片轮转 (RR)**:
+   - 公平，响应时间好
+   - 上下文切换开销
+5. **多级反馈队列 (MLFQ)**:
+   - 兼顾I/O密集和CPU密集型进程
+   - Linux CFS使用类似机制
+
+**Rust模拟调度器**:
+
+```rust
+use std::collections::VecDeque;
+
+pub struct RoundRobinScheduler {
+    ready_queue: VecDeque<u32>,  // PID队列
+    time_quantum: Duration,
+}
+
+impl RoundRobinScheduler {
+    pub fn new(time_quantum: Duration) -> Self {
+        Self {
+            ready_queue: VecDeque::new(),
+            time_quantum,
+        }
+    }
+
+    pub fn add_process(&mut self, pid: u32) {
+        self.ready_queue.push_back(pid);
+    }
+
+    pub fn schedule(&mut self) -> Option<u32> {
+        self.ready_queue.pop_front()
+    }
+
+    pub fn time_slice_expired(&mut self, pid: u32) {
+        // 时间片用完，放回队尾
+        self.ready_queue.push_back(pid);
+    }
+}
+```
+---
+
+## 7. 进程间关系
+
+### 7.1 父子关系
+
+**继承关系**:
+
+- 子进程继承父进程的部分资源
+- 环境变量（可修改）
+- 工作目录（可修改）
+- 文件描述符（可选继承）
+
+```rust
+use std::fs::File;
+use std::os::unix::io::AsRawFd;
+
+// 父进程打开文件
+let file = File::open("data.txt")?;
+
+// 子进程默认会继承打开的文件
+let child = Command::new("cat")
+    .stdin(Stdio::from(file))
+    .spawn()?;
+```
+---
+
+### 7.2 进程组
+
+**概念**: 一组相关进程的集合，方便统一管理。
+
+**Unix进程组**:
+
+```rust
+#[cfg(unix)]
+fn create_process_group() -> std::io::Result<()> {
+    use nix::unistd::{setpgid, Pid};
+
+    let mut child = Command::new("sleep").arg("100").spawn()?;
+    let pid = child.id() as i32;
+
+    // 设置进程组
+    setpgid(Pid::from_raw(pid), Pid::from_raw(pid))?;
+
+    println!("进程 {} 成为进程组组长", pid);
+
+    Ok(())
+}
+```
+---
+
+### 7.3 会话（Session）
+
+**会话 > 进程组 > 进程**:
+
+```text
+会话 (Session)
+  ├─ 前台进程组
+  │   ├─ 进程1
+  │   └─ 进程2
+  └─ 后台进程组
+      ├─ 进程3
+      └─ 进程4
+```
+---
+
+## 8. Unix vs Windows 进程模型差异
+
+**核心差异对比**:
+
+| 特性         | Unix                    | Windows          |
+| :--- | :--- | :--- || **创建方式** | fork + exec             | CreateProcess    |
+| **资源继承** | COW (写时复制)          | 显式继承         |
+| **进程树**   | 树形结构                | 扁平结构         |
+| **终止方式** | 信号 (SIGTERM, SIGKILL) | TerminateProcess |
+| **退出码**   | 0-255                   | 0-4294967295     |
+| **守护进程** | daemon                  | Windows Service  |
+
+**Rust跨平台处理**:
+
+```rust
+pub fn terminate_process(child: &mut Child) -> std::io::Result<()> {
+    #[cfg(unix)]
+    {
+        use nix::sys::signal::{kill, Signal};
+        use nix::unistd::Pid;
+
+        let pid = Pid::from_raw(child.id() as i32);
+        kill(pid, Signal::SIGTERM)?;
+    }
+
+    #[cfg(windows)]
+    {
+        child.kill()?;
+    }
+
+    Ok(())
+}
+```
+---
+
+## 9. Rust进程模型实现
+
+### 9.1 Command Builder
+
+**构建器模式**:
+
+```rust
+let child = Command::new("program")
+    .arg("arg1")                    // 参数
+    .env("VAR", "value")            // 环境变量
+    .current_dir("/tmp")            // 工作目录
+    .stdin(Stdio::piped())          // 标准输入
+    .stdout(Stdio::piped())         // 标准输出
+    .stderr(Stdio::null())          // 忽略错误
+    .spawn()?;                      // 启动
+```
+---
+
+### 9.2 进程句柄 (Child)
+
+**关键方法**:
+
+```rust
+pub struct Child {
+    // 获取PID
+    pub fn id(&self) -> u32;
+
+    // 等待进程结束（阻塞）
+    pub fn wait(&mut self) -> io::Result<ExitStatus>;
+
+    // 非阻塞检查状态
+    pub fn try_wait(&mut self) -> io::Result<Option<ExitStatus>>;
+
+    // 终止进程
+    pub fn kill(&mut self) -> io::Result<()>;
+
+    // 标准I/O流
+    pub stdin: Option<ChildStdin>;
+    pub stdout: Option<ChildStdout>;
+    pub stderr: Option<ChildStderr>;
+}
+```
+---
+
+## 10. 实战案例
+
+### 案例: 进程生命周期管理器
+
+```rust
+use std::collections::HashMap;
+use std::time::Instant;
+
+pub struct ProcessLifecycleManager {
+    processes: HashMap<u32, ProcessInfo>,
+}
+
+struct ProcessInfo {
+    child: Child,
+    start_time: Instant,
+    name: String,
+}
+
+impl ProcessLifecycleManager {
+    pub fn new() -> Self {
+        Self {
+            processes: HashMap::new(),
+        }
+    }
+
+    pub fn spawn(&mut self, name: String, cmd: &str) -> std::io::Result<u32> {
+        let child = Command::new(cmd).spawn()?;
+        let pid = child.id();
+
+        self.processes.insert(pid, ProcessInfo {
+            child,
+            start_time: Instant::now(),
+            name,
+        });
+
+        println!("✅ 进程 '{}' (PID {}) 已启动", name, pid);
+
+        Ok(pid)
+    }
+
+    pub fn check_all(&mut self) {
+        let pids: Vec<u32> = self.processes.keys().copied().collect();
+
+        for pid in pids {
+            if let Some(info) = self.processes.get_mut(&pid) {
+                match info.child.try_wait() {
+                    Ok(Some(status)) => {
+                        let uptime = info.start_time.elapsed();
+                        println!("✅ 进程 '{}' (PID {}) 已结束，运行时间: {:?}",
+                            info.name, pid, uptime);
+                        self.processes.remove(&pid);
+                    }
+                    Ok(None) => {
+                        // 仍在运行
+                    }
+                    Err(e) => {
+                        eprintln!("❌ 检查进程 {} 失败: {}", pid, e);
+                        self.processes.remove(&pid);
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn kill_all(&mut self) {
+        for (pid, info) in &mut self.processes {
+            println!("🛑 终止进程 '{}' (PID {})", info.name, pid);
+            info.child.kill().ok();
+        }
+    }
+}
+```
+---
+
+## 11. 总结与最佳实践
+
+### 核心要点
+
+1. ✅ **进程是资源分配的基本单位**
+2. ✅ **理解进程状态转换机制**
+3. ✅ **避免僵尸进程：始终回收子进程**
+4. ✅ **使用RAII模式管理进程生命周期**
+5. ✅ **跨平台差异由Rust抽象**
+
+### 最佳实践
+
+**1. 进程创建**:
+
+```rust
+// ✅ 使用Command builder
+let child = Command::new("app")
+    .args(["arg1", "arg2"])
+    .spawn()?;
+```
+**2. 进程回收**:
+
+```rust
+// ✅ 总是调用wait()
+child.wait()?;
+
+// ✅ 或使用RAII
+let _managed = ManagedProcess::spawn("app")?;
+```
+**3. 错误处理**:
+
+```rust
+// ✅ 检查退出状态
+let status = child.wait()?;
+if !status.success() {
+    eprintln!("进程失败: {:?}", status.code());
+}
+```
+**4. 资源清理**:
+
+```rust
+// ✅ 实现Drop trait
+impl Drop for ProcessManager {
+    fn drop(&mut self) {
+        self.kill_all();
+    }
+}
+```
+---
+
+**下一步**: [02_IPC机制参考](02_ipc_mechanisms_reference.md)
+
+---
+
+**文档维护**: Documentation Team
+**创建日期**: 2025-10-22
+**最后更新**: 2025-12-11
+**适用版本**: Rust 1.92.0+
+
+**阶段**:
+
+1. **创建**: `Command::new()`.`spawn()`
+2. **运行**: 进程执行
+3. **等待**: `wait()` / `try_wait()`
+4. **终止**: `kill()` / 自然退出
+5. **回收**: 读取退出状态
+
+**最佳实践**: 始终调用 `wait()` 回收子进程
+
+---
+
+**参考**: [进程管理快速入门](../tier_02_guides/01_process_management_quick_start.md)
+
+---
+
+**文档维护**: Documentation Team
+**创建日期**: 2025-10-22
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -39,7 +39,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**: **Inline const patterns**（`const { expr }` in patterns）允许在 match arm 中直接写常量表达式：
 >
 > 1) `match x { const { 1 + 1 } => ... }` — 编译期计算；

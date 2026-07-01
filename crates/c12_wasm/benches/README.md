@@ -26,7 +26,6 @@ cargo bench --bench design_patterns_bench
 # 运行特定的测试函数
 cargo bench --bench array_processing_bench -- sum_array
 ```
-
 ### 查看基准测试结果
 
 基准测试结果会自动生成 HTML 报告：
@@ -38,7 +37,6 @@ cargo bench
 # 查看 HTML 报告
 # 浏览器打开 target/criterion/report/index.html
 ```
-
 ### 比较基准测试结果
 
 ```bash
@@ -53,7 +51,6 @@ cargo bench -- --save-baseline before
 # ... 进行代码更改 ...
 cargo bench -- --baseline before
 ```
-
 ## 📊 基准测试详情
 
 ### array_processing_bench.rs - 数组处理性能
@@ -73,7 +70,6 @@ cargo bench -- --baseline before
 ```bash
 cargo bench --bench array_processing_bench
 ```
-
 **性能指标**：
 
 - 小数据集 (< 100): 应该 < 1μs
@@ -96,7 +92,6 @@ cargo bench --bench array_processing_bench
 ```bash
 cargo bench --bench string_operations_bench
 ```
-
 **性能指标**：
 
 - 短字符串 (< 50字符): 应该 < 100ns
@@ -119,7 +114,6 @@ cargo bench --bench string_operations_bench
 ```bash
 cargo bench --bench design_patterns_bench
 ```
-
 **关键发现**：
 
 - 工厂模式创建开销应该 < 50ns
@@ -150,7 +144,6 @@ cargo flamegraph --bench array_processing_bench
 # 查看火焰图
 # 浏览器打开 flamegraph.svg
 ```
-
 ### 3. 性能对比
 
 ```bash
@@ -164,7 +157,6 @@ cargo bench -- --baseline old
 
 # Criterion 会自动显示性能提升百分比
 ```
-
 ### 4. 详细分析
 
 ```bash
@@ -177,7 +169,6 @@ cargo bench -- --sample-size 1000
 # 增加测试时间
 cargo bench -- --measurement-time 10
 ```
-
 ## 📈 性能优化建议
 
 ### 1. 数组操作优化
@@ -193,7 +184,6 @@ let result: Vec<i32> = data.iter()
     .map(|&x| x * 2)
     .collect();
 ```
-
 ### 2. 字符串操作优化
 
 ```rust
@@ -212,7 +202,6 @@ for word in words {
     result.push(' ');
 }
 ```
-
 ### 3. 避免不必要的克隆
 
 ```rust
@@ -226,7 +215,6 @@ fn process(data: &[i32]) -> Vec<i32> {
     data.iter().filter(|&&x| x > 0).copied().collect()
 }
 ```
-
 ### 4. 使用 SIMD（单指令多数据）
 
 ```rust
@@ -238,7 +226,6 @@ fn sum_simd(data: &[f32]) -> f32 {
     // 性能提升可达 4-8x
 }
 ```
-
 ## 🎯 性能目标
 
 ### WASM 环境性能目标
@@ -278,7 +265,6 @@ jobs:
           tool: "cargo"
           output-file-path: target/criterion/*/new/estimates.json
 ```
-
 ## 📚 参考资源
 
 ### 工具和库

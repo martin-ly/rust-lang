@@ -1,23 +1,14 @@
 # 工作流引擎能力矩阵 {#工作流引擎能力矩阵}
 
 > **概念族**: 软件设计 / 工作流模式
-
 > **内容分级**: [归档级]
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-03-10
-
 > **版本**: v1.0
-
 > **描述**: 工作流引擎核心能力的完整对比矩阵
-
 > **状态**: ✅ 已完成
 
 ---
@@ -25,9 +16,7 @@
 ## 📑 目录 {#目录}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [工作流引擎能力矩阵 {#工作流引擎能力矩阵}](#工作流引擎能力矩阵-工作流引擎能力矩阵)
@@ -62,7 +51,6 @@
 ## 一、概述 {#一概述}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档定义工作流引擎的核心能力维度，并提供完整的能力评估矩阵。
@@ -74,7 +62,6 @@
 ## 二、能力维度 {#二能力维度}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 维度分类 {#21-维度分类}
@@ -82,17 +69,11 @@
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 类别 | 维度 | 说明 |
-
 |------|------|------|
-
 | **建模能力** | 流程定义、状态模型、控制流 | 定义工作流的能力 |
-
 | **执行能力** | 任务执行、并发控制、资源调度 | 运行工作流的能力 |
-
 | **事务能力** | 补偿、持久化、恢复 | 保证一致性的能力 |
-
 | **集成能力** | 服务调用、事件处理、外部系统 | 与外部集成的能力 |
-
 | **治理能力** | 监控、审计、版本控制 | 管理工作流的能力 |
 
 ### 2.2 维度层次 {#22-维度层次}
@@ -100,7 +81,6 @@
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```text
-
 工作流引擎能力层次
 
 │
@@ -142,15 +122,12 @@
    ├─ 分布式执行
 
    └─ 自适应调整
-
 ```
-
 ---
 
 ## 三、核心能力矩阵 {#三核心能力矩阵}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 建模能力矩阵 {#31-建模能力矩阵}
@@ -158,23 +135,14 @@
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 能力项 | 描述 | 复杂度 | 必要性 |
-
 |--------|------|--------|--------|
-
 | **顺序流程** | 按顺序执行任务 | 低 | 必需 |
-
 | **条件分支** | 基于条件选择路径 | 低 | 必需 |
-
 | **并行分支** | 同时执行多条路径 | 中 | 常用 |
-
 | **循环结构** | 重复执行直到条件 | 中 | 常用 |
-
 | **子流程** | 嵌套其他流程 | 中 | 推荐 |
-
 | **动态分支** | 运行时确定分支数 | 高 | 可选 |
-
 | **事件驱动** | 响应外部事件 | 高 | 推荐 |
-
 | **规则引擎** | 基于业务规则 | 高 | 可选 |
 
 ### 3.2 执行能力矩阵 {#32-执行能力矩阵}
@@ -182,39 +150,25 @@
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 能力项 | 同步执行 | 异步执行 | 定时执行 | 事件触发 |
-
 |--------|:--------:|:--------:|:--------:|:--------:|
-
 | **用户任务** | ✅ | ✅ | ❌ | ✅ |
-
 | **服务任务** | ✅ | ✅ | ❌ | ✅ |
-
 | **脚本任务** | ✅ | ❌ | ❌ | ✅ |
-
 | **邮件任务** | ❌ | ✅ | ✅ | ✅ |
-
 | **定时任务** | ❌ | ✅ | ✅ | ❌ |
-
 | **消息任务** | ❌ | ✅ | ❌ | ✅ |
 
 ### 3.3 网关能力矩阵 {#33-网关能力矩阵}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 网关类型 | 分裂 | 合并 | 特点 | 使用频率 |
-
 |----------|:----:|:----:|------|----------|
-
 | **排他网关 (XOR)** | ✅ | ✅ | 单一路径 | 高 |
-
 | **并行网关 (AND)** | ✅ | ✅ | 全部路径 | 高 |
-
 | **包容网关 (OR)** | ✅ | ✅ | 可选路径 | 中 |
-
 | **事件网关** | ✅ | ❌ | 基于事件 | 中 |
-
 | **复杂网关** | ✅ | ✅ | 自定义逻辑 | 低 |
 
 ---
@@ -222,59 +176,38 @@
 ## 四、模式支持矩阵 {#四模式支持矩阵}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 BPMN 模式支持 {#41-bpmn-模式支持}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模式 | 描述 | 支持度 | 实现复杂度 |
-
 |------|------|--------|------------|
-
 | **Sequence** | 顺序执行 | 100% | 低 |
-
 | **Parallel Split** | 并行分裂 | 100% | 低 |
-
 | **Synchronization** | 同步合并 | 100% | 中 |
-
 | **Exclusive Choice** | 排他选择 | 100% | 低 |
-
 | **Simple Merge** | 简单合并 | 100% | 低 |
-
 | **Multi Choice** | 多选 | 80% | 中 |
-
 | **Multi Merge** | 多合并 | 70% | 高 |
-
 | **Discriminator** | 鉴别器 | 60% | 高 |
-
 | **N-out-of-M Join** | 部分合并 | 50% | 很高 |
-
 | **Deferred Choice** | 延迟选择 | 70% | 高 |
 
 ### 4.2 高级模式支持 {#42-高级模式支持}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 模式 | 描述 | 支持度 | 难度 |
-
 |------|------|--------|------|
-
 | **Milestone** | 里程碑模式 | 40% | 高 |
-
 | **Cancel Activity** | 取消活动 | 80% | 中 |
-
 | **Cancel Case** | 取消案例 | 70% | 高 |
-
 | **Loop** | 循环模式 | 90% | 中 |
-
 | **Transient Trigger** | 瞬时触发 | 60% | 高 |
-
 | **Persistent Trigger** | 持久触发 | 80% | 中 |
 
 ---
@@ -282,65 +215,44 @@
 ## 五、事务能力矩阵 {#五事务能力矩阵}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 事务特性矩阵 {#51-事务特性矩阵}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 特性 | Saga支持 | 补偿支持 | 持久化 | 恢复能力 |
-
 |------|:--------:|:--------:|:------:|:--------:|
-
 | **ACID兼容** | ❌ | ❌ | ✅ | ⚠️ |
-
 | **最终一致** | ✅ | ✅ | ✅ | ✅ |
-
 | **故障隔离** | ⚠️ | ⚠️ | ✅ | ✅ |
-
 | **状态恢复** | ✅ | ✅ | ✅ | ✅ |
-
 | **超时处理** | ✅ | ✅ | ✅ | ✅ |
 
 ### 5.2 补偿能力矩阵 {#52-补偿能力矩阵}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 能力 | 描述 | 实现复杂度 | 必要性 |
-
 |------|------|------------|--------|
-
 | **自动补偿** | 失败自动回滚 | 高 | 推荐 |
-
 | **手动补偿** | 人工干预回滚 | 中 | 可选 |
-
 | **补偿链** | 多步补偿 | 高 | 推荐 |
-
 | **补偿幂等** | 补偿操作幂等 | 中 | 必需 |
-
 | **补偿监控** | 补偿过程可视 | 中 | 推荐 |
 
 ### 5.3 持久化矩阵 {#53-持久化矩阵}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 持久化级别 | 描述 | 性能影响 | 可靠性 |
-
 |------------|------|----------|--------|
-
 | **无持久化** | 内存执行 | 无 | 低 |
-
 | **状态快照** | 关键状态保存 | 低 | 中 |
-
 | **事件日志** | 全事件记录 | 中 | 高 |
-
 | **完全持久化** | 每步保存 | 高 | 最高 |
 
 ---
@@ -348,45 +260,34 @@
 ## 六、相关资源 {#六相关资源}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 内部文档 {#61-内部文档}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [WORKFLOW_CONCEPT_MINDMAP](10_workflow_concept_mindmap.md) — 概念族谱
-
 - [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](10_distributed_architecture_decision_tree.md) — 架构决策
-
 - [CONCEPT_AXIOM_THEOREM_MATRIX](10_concept_axiom_theorem_matrix.md) — 定理映射
 
 ### 6.2 工作流定义文档 {#62-工作流定义文档}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 路径 | 描述 |
-
 |------|------|------|
-
 | 状态机形式化 | `02_workflow/01_workflow_state_machine.md` | 核心形式化 |
-
 | 补偿链 | `02_workflow/02_compensation_chain.md` | 补偿机制 |
-
 | 长事务 | `02_workflow/03_long_running_transaction.md` | 事务管理 |
 
 ### 6.3 能力评估框架 {#63-能力评估框架}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
-
 工作流引擎评估框架
 
 │
@@ -426,9 +327,7 @@
    ├─ 吞吐量 (5%)
 
    └─ 延迟 (5%)
-
 ```
-
 ---
 
 **维护者**: Rust Learning Project Team
@@ -440,17 +339,13 @@
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -458,15 +353,10 @@
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -474,17 +364,13 @@
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - [Rust 1.94 特性速查
-
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -496,9 +382,7 @@
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -514,11 +398,9 @@
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [research_notes 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -526,17 +408,11 @@
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ---

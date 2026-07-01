@@ -22,7 +22,6 @@
   - 添加了所有 Rust 1.92.0 特性在 WASM 中的应用
   - 包括：MaybeUninit、NonZero::div_ceil、联合体原始引用、迭代器特化、rotate_right、Location 调试等
   - 实现了完整的 WASM 内存管理、FFI 互操作、性能优化等功能
-
 - ✅ **创建示例代码**
   - `rust_192_features_demo.rs` - 完整的 Rust 1.92.0 WASM 特性演示
   - 包含所有特性的实际应用示例
@@ -59,7 +58,6 @@
   - wasm-bindgen 生态思维导图
   - WASI 系统接口思维导图
   - Rust 1.92.0 WASM 特性思维导图
-
 - ✅ **WASM_CONCEPT_MATRIX.md** - 多维概念对比矩阵
   - WASM 编译目标对比矩阵
   - 内存管理方案对比矩阵
@@ -71,7 +69,6 @@
   - 构建工具选型矩阵
   - 性能对比矩阵（编译、运行时、二进制大小）
   - 安全性对比矩阵
-
 - ✅ **WASM_DECISION_TREE.md** - 决策树图
   - 编译目标选择决策树
   - 内存管理决策树
@@ -81,7 +78,6 @@
   - 特性组合决策
   - 性能优化决策
   - 安全保证决策
-
 - ✅ **WASM_PROOF_TREE.md** - 证明树图
   - 安全的 WASM 内存管理证明
   - 安全的 WASM FFI 互操作证明
@@ -94,22 +90,19 @@
 
 #### 2.3 导航文档更新
 
-- ✅ **项目概览文档** (`tier_01_foundations/01_项目概览.md`)
+- ✅ **项目概览文档** (`tier_01_foundations/01_project_overview.md`)
   - 添加了思维表征方式引用
   - 更新了版本信息到 Rust 1.92.0
   - 更新了项目统计信息
-
-- ✅ **主索引导航** (`tier_01_foundations/02_主索引导航.md`)
+- ✅ **主索引导航** (`tier_01_foundations/02_navigation.md`)
   - 添加了思维表征方式文档链接
   - 更新了文档清单
   - 更新了版本信息
-
 - ✅ **README.md**
   - 添加了思维表征方式章节
   - 更新了模块状态信息
   - 添加了新增内容说明
-
-- ✅ **性能优化指南** (`tier_02_guides/04_性能优化指南.md`)
+- ✅ **性能优化指南** (`tier_02_guides/04_performance_optimization_guide.md`)
   - 添加了 Rust 1.92.0 特性引用
   - 添加了性能优化示例
 
@@ -193,8 +186,8 @@
 ### 核心文档
 
 - [Rust 1.92.0 WASM 改进文档](docs/RUST_192_WASM_IMPROVEMENTS.md)
-- [项目概览](docs/tier_01_foundations/01_项目概览.md)
-- [主索引导航](docs/tier_01_foundations/02_主索引导航.md)
+- [项目概览](docs/tier_01_foundations/01_project_overview.md)
+- [主索引导航](docs/tier_01_foundations/02_navigation.md)
 
 ### 思维表征方式
 
@@ -218,7 +211,6 @@
 ✅ cargo check --example rust_192_features_demo
    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.35s
 ```
-
 ### 文档验证
 
 - ✅ 所有文档链接有效

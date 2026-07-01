@@ -1,3 +1,8 @@
+> **文档治理**:
+>
+> 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
+>
 > **生态状态提示**：
 >
 > 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
@@ -69,7 +74,6 @@ async fn main() {
     println!("所有任务完成！");
 }
 ```
-
 ### 运行示例
 
 ```bash
@@ -86,20 +90,19 @@ cargo test
 # 运行性能测试
 cargo bench
 ```
-
 ### 推荐学习路径
 
 **🎯 快速入门** (3-5天):
 
 1. [tier_02_guides/01_异步编程快速入门](tier_02_guides/01_异步编程快速入门.md) - 基础概念和第一个程序
 2. [core/01_introduction_and_philosophy.md](core/01_introduction_and_philosophy.md) - 理解异步哲学
-3. [tier_02_guides/02_Future与Executor机制](tier_02_guides/02_Future与Executor机制.md) - 掌握基础机制
+3. [tier_02_guides/02_Future与Executor机制](tier_02_guides/02_future_and_executor_mechanisms.md) - 掌握基础机制
 
 **📚 系统学习** (2-3周):
 
 1. 核心系列 [core/](core) - 深入理解
 2. [runtimes/01_comparison_2025.md](runtimes/01_comparison_2025.md) - 选择合适的运行时
-3. [tier_02_guides/04_异步设计模式实践](tier_02_guides/04_异步设计模式实践.md) - 编写高质量代码
+3. [tier_02_guides/04_异步设计模式实践](tier_02_guides/04_async_design_patterns_practice.md) - 编写高质量代码
 
 **🚀 专家进阶** (持续):
 
@@ -188,7 +191,6 @@ c06_async/docs/
     ├── completion_reports/       # 完成报告
     └── deprecated/               # 已废弃文档
 ```
-
 ### 🎯 示例代码 (89个)
 
 ```bash
@@ -204,7 +206,6 @@ examples/
 ├── 05_performance/      # 性能优化
 └── 06_applications/     # 实际应用
 ```
-
 ---
 
 ## 🎯 核心理念
@@ -240,7 +241,6 @@ pub trait Future {
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
 ```
-
 **核心特点**:
 
 - 惰性求值 - 不调用`.await`不执行
@@ -255,7 +255,6 @@ async fn fetch_data() -> String {
     process_data(data).await
 }
 ```
-
 **编译器转换**: `async fn` → 返回`impl Future`的状态机
 
 ### 3. 运行时 - 执行环境
@@ -280,7 +279,6 @@ while let Some(item) = stream.next().await {
     println!("{}", item);
 }
 ```
-
 ---
 
 ## 📖 学习资源
@@ -306,7 +304,6 @@ while let Some(item) = stream.next().await {
 ✅ 量化 - 多维度评分和决策模型
 ✅ 理论化 - 从操作语义到代数语义的完整理论
 ```
-
 ### 本模块资源
 
 - 📋 **[主索引](00_MASTER_INDEX.md)** - 完整文档导航（必看）
@@ -393,7 +390,6 @@ futures = "0.3"
 tokio-stream = "0.1"
 async-trait = "0.1"
 ```
-
 ### 适用场景
 
 ✅ **适合使用异步**:
@@ -418,11 +414,11 @@ async-trait = "0.1"
 
 ### 按学习阶段
 
-- **第1天**: [01_异步编程快速入门](tier_02_guides/01_异步编程快速入门.md) → [01_项目概览](tier_01_foundations/01_项目概览.md)
-- **第2-3天**: [02_Future与Executor机制](tier_02_guides/02_Future与Executor机制.md) → [02_主索引导航](tier_01_foundations/02_主索引导航.md)
+- **第1天**: [01_异步编程快速入门](tier_02_guides/01_异步编程快速入门.md) → [01_项目概览](tier_01_foundations/01_project_overview.md)
+- **第2-3天**: [02_Future与Executor机制](tier_02_guides/02_future_and_executor_mechanisms.md) → [02_主索引导航](tier_01_foundations/02_navigation.md)
 - **第4-5天**: [core/03_pinning](core/03_pinning_and_unsafe_foundations.md) → [core/04_streams](core/04_streams_and_sinks.md)
 - **第2周**: [core/05_traits](core/05_async_in_traits_and_ecosystem.md) → [runtimes/01_comparison](runtimes/01_comparison_2025.md)
-- **第3周**: [04_异步设计模式实践](tier_02_guides/04_异步设计模式实践.md) → [05_异步性能优化指南](tier_02_guides/05_异步性能优化指南.md)
+- **第3周**: [04_异步设计模式实践](tier_02_guides/04_async_design_patterns_practice.md) → [05_异步性能优化指南](tier_02_guides/05_async_performance_optimization_guide.md)
 
 ### 按问题类型
 

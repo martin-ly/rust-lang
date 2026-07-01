@@ -34,7 +34,7 @@
       - [2.8 选型决策树](#28-选型决策树)
       - [2.9 混合模式](#29-混合模式)
     - [3. ✅ 更新文档交叉引用](#3--更新文档交叉引用)
-      - [3.1 更新 `异步编程全面梳理_README_2025_10_06.md`](#31-更新-异步编程全面梳理_readme_2025_10_06md)
+      - [3.1 更新 `async_programming_comprehensive_review_readme_2025_10_06.md`](#31-更新-异步编程全面梳理_readme_2025_10_06md)
       - [3.2 更新 `README.md`](#32-更新-readmemd)
   - [📊 完整度统计](#-完整度统计)
     - [三大架构模式](#三大架构模式)
@@ -93,7 +93,6 @@ impl<M: ActorMessage> Clone for ActorRef<M> {
     }
 }
 ```
-
 #### 问题 2: SystemMessage Clone
 
 ```rust
@@ -105,7 +104,6 @@ pub enum SystemMessage { ... }
 #[derive(Debug)]
 pub enum SystemMessage { ... }
 ```
-
 #### 问题 3: BankAccountMessage Clone
 
 ```rust
@@ -117,7 +115,6 @@ pub enum BankAccountMessage { ... }
 #[derive(Debug)]
 pub enum BankAccountMessage { ... }
 ```
-
 #### 问题 4: ActorStats Default 实现
 
 ```rust
@@ -140,7 +137,6 @@ impl Default for ActorStats {
     }
 }
 ```
-
 #### 问题 5: ActorContext Clone
 
 ```rust
@@ -152,7 +148,6 @@ pub struct ActorContext<M: ActorMessage> { ... }
 let ctx = Arc::new(ActorContext::new(...));
 let ctx_clone = Arc::clone(&ctx);
 ```
-
 #### 问题 6: 性能测试中的类型不匹配
 
 ```rust
@@ -175,7 +170,6 @@ if i % 2 == 0 {
     rx.await.ok();
 }
 ```
-
 **编译结果**:
 
 ```bash
@@ -183,7 +177,6 @@ if i % 2 == 0 {
 cargo check --example actor_pattern_comprehensive_2025
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.40s
 ```
-
 ---
 
 ### 2. ✅ 创建综合模式对比文档
@@ -320,7 +313,6 @@ cargo check --example actor_pattern_comprehensive_2025
   |   ├─ 是 → Actor 模式
   |   └─ 否 → CSP 模式
 ```
-
 #### 2.9 混合模式
 
 **Reactor + CSP**: Web 服务器 + 后台任务处理
@@ -331,7 +323,7 @@ cargo check --example actor_pattern_comprehensive_2025
 
 ### 3. ✅ 更新文档交叉引用
 
-#### 3.1 更新 `异步编程全面梳理_README_2025_10_06.md`
+#### 3.1 更新 `async_programming_comprehensive_review_readme_2025_10_06.md`
 
 添加了模式对比文档的引用:
 
@@ -347,7 +339,6 @@ cargo check --example actor_pattern_comprehensive_2025
 - 生态系统对比
 - 选型决策树
 ```
-
 #### 3.2 更新 `README.md`
 
 添加了模式对比文档作为核心文档:
@@ -364,7 +355,6 @@ cargo check --example actor_pattern_comprehensive_2025
 - 生态系统对比 (库、框架、工具)
 - 选型决策树 (快速选型指南)
 ```
-
 ---
 
 ## 📊 完整度统计
@@ -444,11 +434,10 @@ cargo run --example csp_pattern_comprehensive_2025
 # 5. 查看知识分类体系
 cat docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md
 ```
-
 ### 推荐阅读顺序
 
 1. **模式对比文档** (`docs/ASYNC_PATTERNS_COMPARISON_2025.md`) ⭐⭐⭐ 新增
-2. **快速入门指南** (`异步编程全面梳理_README_2025_10_06.md`)
+2. **快速入门指南** (`async_programming_comprehensive_review_readme_2025_10_06.md`)
 3. **知识分类体系** (`docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md`)
 4. **Reactor 模式示例** (`examples/reactor_pattern_comprehensive_2025.rs`)
 5. **Actor 模式示例** (`examples/actor_pattern_comprehensive_2025.rs`) ✅ 已修复
@@ -488,12 +477,10 @@ cat docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md
    - 解决了 11 个编译错误
    - 解决了 3 个编译警告
    - 现在可以正常编译和运行
-
 2. ✅ **创建了综合模式对比文档**
    - 6,000+ 字详细对比
    - 涵盖 8 个主要方面
    - 提供选型决策树
-
 3. ✅ **更新了文档交叉引用**
    - 更新了快速入门指南
    - 更新了主 README
@@ -512,12 +499,10 @@ cat docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md
    - Web 服务器 (基于 Reactor)
    - 聊天系统 (基于 Actor)
    - 数据处理管道 (基于 CSP)
-
 2. 🧪 **增加测试覆盖率**
    - 集成测试
    - 性能基准测试
    - 压力测试
-
 3. 📚 **扩展文档**
    - 添加更多设计模式
    - 添加性能调优指南

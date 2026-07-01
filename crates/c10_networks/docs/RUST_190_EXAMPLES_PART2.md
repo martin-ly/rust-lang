@@ -303,7 +303,6 @@ pub async fn demo_http_client() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ---
 
 ## WebSocket完整示例
@@ -551,7 +550,6 @@ pub async fn demo_websocket_client() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ---
 
 ## DNS解析完整示例
@@ -812,7 +810,6 @@ pub async fn demo_dns_resolver() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ---
 
 ## 总结

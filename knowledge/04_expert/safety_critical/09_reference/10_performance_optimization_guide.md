@@ -40,7 +40,6 @@ pub fn process<T: Processor>(item: T) -> T::Output {
 // fn process_i32(item: I32Processor) -> i32
 // fn process_f64(item: F64Processor) -> f64
 ```
-
 ### 1.2 迭代器优化
 >
 > **[来源: Rust Official Docs]**
@@ -56,7 +55,6 @@ pub fn sum_of_squares(nums: &[i32]) -> i32 {
 
 // 编译后等效于手写循环，无函数调用开销
 ```
-
 ---
 
 ## 2. 内存布局优化
@@ -97,7 +95,6 @@ struct PackedLayout {
     d: u64,
 }
 ```
-
 ### 2.2 缓存友好设计
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -130,7 +127,6 @@ impl ParticleSoA {
     }
 }
 ```
-
 ---
 
 ## 3. 编译时计算
@@ -190,7 +186,6 @@ const fn crc32_table() -> [u32; 256] {
 
 static CRC32_TABLE: [u32; 256] = crc32_table();
 ```
-
 ### 3.2 常量求值
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -205,7 +200,6 @@ const fn validate_config(max_size: usize, min_size: usize) -> usize {
 
 const MAX_BUFFER_SIZE: usize = validate_config(512, 16);
 ```
-
 ---
 
 ## 4. 运行时优化
@@ -243,7 +237,6 @@ pub fn process_safe(value: Option<i32>) -> i32 {
     }
 }
 ```
-
 ### 4.2 SIMD向量化
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -273,7 +266,6 @@ pub fn simd_add(a: &[f32], b: &[f32], result: &mut [f32]) {
     }
 }
 ```
-
 ---
 
 ## 5. 嵌入式特定优化
@@ -325,7 +317,6 @@ impl<'a, T> Drop for PoolRef<'a, T> {
     }
 }
 ```
-
 ### 5.2 中断延迟优化
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -353,7 +344,6 @@ impl MinimalCriticalSection {
     }
 }
 ```
-
 ---
 
 ## 6. 性能测量
@@ -383,7 +373,6 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
-
 ### 6.2 运行时性能监控
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -425,7 +414,6 @@ impl Drop for PerformanceCounter {
     }
 }
 ```
-
 ---
 
 ## 7. 优化检查清单
@@ -482,7 +470,6 @@ impl Drop for PerformanceCounter {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [API设计指南](01_api_design_guidelines.md)
 - [Rust安全关键系统 - 检查清单与模板](02_checklists_and_templates.md)
 

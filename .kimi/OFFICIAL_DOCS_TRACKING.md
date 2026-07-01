@@ -62,7 +62,6 @@
   - [ ] 运行 check_version_facts.py
   - [ ] 更新 CHANGELOG
 ```
-
 ---
 
 ## 四、已知需持续关注项

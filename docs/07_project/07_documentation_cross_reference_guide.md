@@ -125,7 +125,6 @@
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 文档层次结构 {#文档层次结构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -171,7 +170,6 @@ docs/
     ├── 07_knowledge_structure_framework.md ←→ research_notes/*/ (知识结构)
     └── 07_project_architecture_guide.md ←→ crates/*/ (架构映射)
 ```
-
 ---
 
 ## 🔄 核心模块交叉引用 {#核心模块交叉引用}
@@ -184,7 +182,7 @@ docs/
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_主索引导航.md` | ←→ [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) ←→ [UNSAFE_RUST_GUIDE](../../concept/03_advanced/03_unsafe.md) |
+| **主索引** | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_navigation.md` | ←→ [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) ←→ [UNSAFE_RUST_GUIDE](../../concept/03_advanced/03_unsafe.md) |
 | **速查卡** | [02_ownership_cheatsheet.md](../02_reference/quick_reference/02_ownership_cheatsheet.md) | → [ownership_model](../research_notes/formal_methods/10_ownership_model.md) → [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) → [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) |
 | **形式化** | [10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | ←→ [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) ←→ [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) ←→ [CORE_THEOREMS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) |
 | **指南** | [05_unsafe_rust_guide.md](../../concept/03_advanced/03_unsafe.md) | ← [ownership_model](../research_notes/formal_methods/10_ownership_model.md) ← [SAFE_UNSAFE_ANALYSIS](../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
@@ -197,14 +195,13 @@ ownership_cheatsheet → ownership_model ↔ borrow_checker_proof ↔ lifetime_f
      ↓                      ↓                    ↓                      ↓
 UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 ```
-
 ### C02 - 类型系统 {#c02---类型系统}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c02_type_system/docs/tier_01_foundations/02_主索引导航.md` | ←→ [type_system](../02_reference/quick_reference/02_type_system.md) ←→ [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) |
+| **主索引** | `crates/c02_type_system/docs/tier_01_foundations/02_navigation.md` | ←→ [type_system](../02_reference/quick_reference/02_type_system.md) ←→ [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) |
 | **速查卡** | [02_type_system.md](../02_reference/quick_reference/02_type_system.md) | → [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) → [trait_system_formalization](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) → [variance_theory](../research_notes/type_theory/10_variance_theory.md) |
 | **形式化** | [10_type_system_foundations.md](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | ←→ [trait_system_formalization](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) ←→ [variance_theory](../research_notes/type_theory/10_variance_theory.md) ←→ [CORE_THEOREMS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) |
 | **指南** | [05_advanced_topics_deep_dive.md](../05_guides/05_advanced_topics_deep_dive.md) | ← [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) ← [advanced_types](../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md) |
@@ -216,7 +213,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c03_control_fn/docs/tier_01_foundations/02_主索引导航.md` | ←→ [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
+| **主索引** | `crates/c03_control_fn/docs/tier_01_foundations/02_navigation.md` | ←→ [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
 | **速查卡** | [02_control_flow_functions_cheatsheet.md](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | → [formal_methods/README](../../archive/research_notes_2026_06_25/formal_methods/README.md) §控制流形式化 → [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
 | **形式化** | [formal_methods/README.md](../../archive/research_notes_2026_06_25/formal_methods/README.md) §A-CF1 | ←→ [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) §MATCH/FOR/QUERY |
 | **指南** | [05_macro_system_usage_guide.md](../05_guides/05_macro_system_usage_guide.md) | ← [control_flow](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
@@ -227,7 +224,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c04_generic/docs/tier_01_foundations/02_主索引导航.md` | ←→ [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) ←→ [type_system](../02_reference/quick_reference/02_type_system.md) |
+| **主索引** | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` | ←→ [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) ←→ [type_system](../02_reference/quick_reference/02_type_system.md) |
 | **速查卡** | [02_generics_cheatsheet.md](../02_reference/quick_reference/02_generics_cheatsheet.md) | → [trait_system_formalization](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) → [advanced_types](../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md) |
 | **形式化** | [10_trait_system_formalization.md](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) | ←→ [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) ←→ [variance_theory](../research_notes/type_theory/10_variance_theory.md) |
 | **指南** | [05_advanced_topics_deep_dive.md](../05_guides/05_advanced_topics_deep_dive.md) | ← [trait_system_formalization](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) |
@@ -238,7 +235,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c05_threads/docs/tier_01_foundations/02_主索引导航.md` | ←→ [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) |
+| **主索引** | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md` | ←→ [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) |
 | **速查卡** | [02_threads_concurrency_cheatsheet.md](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | → [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) → [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) §CHAN/MUTEX |
 | **形式化** | [10_send_sync_formalization.md](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | ←→ [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) ←→ [06_boundary_analysis](../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md) |
 | **指南** | [05_threads_concurrency_usage_guide.md](../05_guides/05_threads_concurrency_usage_guide.md) | ← [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) ← [06_boundary_analysis](../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md) |
@@ -250,7 +247,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c06_async/docs/tier_01_foundations/02_主索引导航.md` | ←→ [async_patterns](../02_reference/quick_reference/02_async_patterns.md) ←→ [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) |
+| **主索引** | `crates/c06_async/docs/tier_01_foundations/02_navigation.md` | ←→ [async_patterns](../02_reference/quick_reference/02_async_patterns.md) ←→ [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) |
 | **速查卡** | [02_async_patterns.md](../02_reference/quick_reference/02_async_patterns.md) | → [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) → [pin_self_referential](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) → [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 | **形式化** | [10_async_state_machine.md](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | ←→ [pin_self_referential](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) ←→ [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) ←→ [03_execution_models/02_async](../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/02_async.md) |
 | **指南** | [05_async_programming_usage_guide.md](../05_guides/05_async_programming_usage_guide.md) | ← [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) ← [pin_self_referential](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) |
@@ -262,7 +259,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c07_process/docs/tier_01_foundations/02_主索引导航.md` | ←→ [process_management_cheatsheet](../02_reference/quick_reference/02_process_management_cheatsheet.md) |
+| **主索引** | `crates/c07_process/docs/tier_01_foundations/02_navigation.md` | ←→ [process_management_cheatsheet](../02_reference/quick_reference/02_process_management_cheatsheet.md) |
 | **速查卡** | [02_process_management_cheatsheet.md](../02_reference/quick_reference/02_process_management_cheatsheet.md) | → [05_guides/CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) → [SAFE_UNSAFE_ANALYSIS](../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
 | **指南** | [05_cli_applications_guide.md](../05_guides/05_cli_applications_guide.md) | ← [process_management_cheatsheet](../02_reference/quick_reference/02_process_management_cheatsheet.md) |
 
@@ -272,7 +269,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c08_algorithms/docs/tier_01_foundations/02_主索引导航.md` | ←→ [algorithms_cheatsheet](../02_reference/quick_reference/02_algorithms_cheatsheet.md) |
+| **主索引** | `crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md` | ←→ [algorithms_cheatsheet](../02_reference/quick_reference/02_algorithms_cheatsheet.md) |
 | **速查卡** | [02_algorithms_cheatsheet.md](../02_reference/quick_reference/02_algorithms_cheatsheet.md) | → [ownership_model](../research_notes/formal_methods/10_ownership_model.md) §智能指针 → [05_guides/PERFORMANCE_TUNING_GUIDE](../05_guides/05_performance_tuning_guide.md) |
 | **指南** | [05_performance_tuning_guide.md](../05_guides/05_performance_tuning_guide.md) | ← [algorithms_cheatsheet](../02_reference/quick_reference/02_algorithms_cheatsheet.md) |
 
@@ -282,7 +279,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c09_design_pattern/docs/tier_01_foundations/02_主索引导航.md` | ←→ design_patterns_cheatsheet |
+| **主索引** | `crates/c09_design_pattern/docs/tier_01_foundations/02_navigation.md` | ←→ design_patterns_cheatsheet |
 | **速查卡** | design_patterns_cheatsheet.md | → [01_design_patterns_formal](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md) → [04_compositional_engineering](../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md) |
 | **形式化** | [01_design_patterns_formal/](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md) | ←→ [ownership_model](../research_notes/formal_methods/10_ownership_model.md) ←→ [04_compositional_engineering](../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md) |
 | **指南** | [05_design_patterns_usage_guide.md](../05_guides/05_design_patterns_usage_guide.md) | ← [01_design_patterns_formal](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md) ← [04_compositional_engineering](../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md) |
@@ -294,7 +291,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c10_networks/docs/tier_01_foundations/02_主索引导航.md` | ←→ [network_programming_cheatsheet](../02_reference/quick_reference/02_network_programming_cheatsheet.md) |
+| **主索引** | `crates/c10_networks/docs/tier_01_foundations/02_navigation.md` | ←→ [network_programming_cheatsheet](../02_reference/quick_reference/02_network_programming_cheatsheet.md) |
 | **速查卡** | [02_network_programming_cheatsheet.md](../02_reference/quick_reference/02_network_programming_cheatsheet.md) | → [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) → [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 | **指南** | [05_async_programming_usage_guide.md](../05_guides/05_async_programming_usage_guide.md) | ← [network_programming_cheatsheet](../02_reference/quick_reference/02_network_programming_cheatsheet.md) |
 
@@ -314,7 +311,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md` | ←→ [wasm_cheatsheet](../02_reference/quick_reference/02_wasm_cheatsheet.md) |
+| **主索引** | `crates/c12_wasm/docs/tier_01_foundations/02_navigation.md` | ←→ [wasm_cheatsheet](../02_reference/quick_reference/02_wasm_cheatsheet.md) |
 | **速查卡** | [02_wasm_cheatsheet.md](../02_reference/quick_reference/02_wasm_cheatsheet.md) | → [WASM_USAGE_GUIDE](../05_guides/05_wasm_usage_guide.md) → [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) |
 | **指南** | [05_wasm_usage_guide.md](../05_guides/05_wasm_usage_guide.md) | ← [wasm_cheatsheet](../02_reference/quick_reference/02_wasm_cheatsheet.md) |
 
@@ -410,7 +407,6 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 📖 速查卡交叉引用 {#速查卡交叉引用}
@@ -487,7 +483,6 @@ crates/c01_ownership_borrow_scope/docs/
     ↓
 05_guides/10_best_practices.md
 ```
-
 #### 开发者路径 {#开发者路径}
 
 ```text
@@ -501,7 +496,6 @@ research_notes/formal_methods/ (深入形式化)
     ↓
 crates/*/examples/ (代码示例)
 ```
-
 #### 研究者路径 {#研究者路径}
 
 ```text
@@ -517,7 +511,6 @@ research_notes/10_core_theorems_full_proofs.md
     ↓
 04_thinking/04_proof_graph_network.md
 ```
-
 #### 维护者路径 {#维护者路径}
 
 ```text
@@ -531,7 +524,6 @@ research_notes/10_cross_reference_index.md
     ↓
 07_project/07_task_index.md
 ```
-
 ### 按主题导航 {#按主题导航}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -543,7 +535,6 @@ ownership_cheatsheet → ownership_model → borrow_checker_proof → lifetime_f
        ↓                      ↓                    ↓                      ↓
 UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 ```
-
 #### 并发编程主题 {#并发编程主题}
 
 ```text
@@ -555,7 +546,6 @@ send_sync_formalization ←────→ async_state_machine
        ↓
 THREADS_CONCURRENCY_USAGE_GUIDE / ASYNC_PROGRAMMING_USAGE_GUIDE
 ```
-
 #### 类型系统主题 {#类型系统主题}
 
 ```text
@@ -567,7 +557,6 @@ variance_theory ←──────→ advanced_types
     ↓
 ADVANCED_TOPICS_DEEP_DIVE
 ```
-
 #### 设计模式主题 {#设计模式主题}
 
 ```text
@@ -581,7 +570,6 @@ DESIGN_PATTERNS_USAGE_GUIDE
     ↓
 CROSS_MODULE_INTEGRATION_EXAMPLES
 ```
-
 ### 快速查找路径 {#快速查找路径}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -659,7 +647,6 @@ graph TB
     style CROSS fill:#f9f,stroke:#333,stroke-width:4px
     style MASTER fill:#bbf,stroke:#333,stroke-width:4px
 ```
-
 ### 横向关联 {#横向关联}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -709,7 +696,6 @@ graph TB
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## ✅ 双向链接验证 {#双向链接验证}
@@ -773,7 +759,6 @@ struct LinkValidator {
     }
 }
 ```
-
 ---
 
 ## 最佳实践 {#最佳实践}
@@ -790,13 +775,11 @@ struct LinkValidator {
 [类型系统速查卡](../02_reference/quick_reference/02_type_system.md)
 [所有权模型形式化](../research_notes/formal_methods/10_ownership_model.md)
 ```
-
 **❌ 错误**:
 
 ```markdown
 [类型系统速查卡](../02_reference/quick_reference/02_type_system.md)
 ```
-
 ### 2. 提供描述性链接文本 {#2-提供描述性链接文本}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -806,13 +789,11 @@ struct LinkValidator {
 ```markdown
 查看 [类型系统速查卡](../02_reference/quick_reference/02_type_system.md) 了解类型系统
 ```
-
 **❌ 错误**:
 
 ```markdown
 点击 [这里](../02_reference/quick_reference/02_type_system.md)
 ```
-
 ### 3. 维护链接完整性 {#3-维护链接完整性}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -883,7 +864,6 @@ struct LinkValidator {
 ## Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 

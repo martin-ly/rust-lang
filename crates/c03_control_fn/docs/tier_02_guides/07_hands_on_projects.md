@@ -1,0 +1,610 @@
+# ⚙️ C03: Control Flow & Functions - 实战项目集
+
+> **创建日期**: 2025-10-25
+> **文档版本**: v1.0
+> **适用模块**: C03 控制流和函数
+> **目标**: 通过实战项目掌握控制流、函数和错误处理
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**实战项目集 (Practical Projects Collection)**:
+
+- **定义**: 收集和组织的实战项目集合，用于演示控制流和函数系统的实际应用
+- **类型**: 项目集合文档
+- **范畴**: 控制流、函数系统、项目实践
+- **版本**: Rust 1.0+
+- **相关概念**: 控制流、函数、错误处理、项目实践
+
+### 属性特征
+
+**核心属性**:
+
+- **层次性**: 从简单到复杂的项目
+- **实用性**: 解决实际问题
+- **完整性**: 每个项目都有完整实现
+- **可运行性**: 所有项目都可以运行
+
+### 关系连接
+
+**组合关系**:
+
+- 实战项目集 --[contains]--> 多个实战项目
+- 学习路径 --[uses]--> 实战项目集
+
+**依赖关系**:
+
+- 实战项目集 --[depends-on]--> 控制流和函数知识
+- 项目实践 --[depends-on]--> 实战项目集
+
+### 思维导图
+
+```text
+实战项目集
+│
+├── 计算器 CLI
+│   └── 控制流、match
+├── 错误处理框架
+│   └── Result、? 操作符
+└── 表达式解析器
+    └── 递归、闭包
+```
+---
+
+## 📋 项目概览
+
+| #   | 项目名称 | 难度   | 预计时间 | 核心概念 |
+| :--- | :--- | :--- | :--- | :--- |
+| 1   | [计算器 CLI](#项目1-计算器-cli)     | ⭐     | 1-2小时  | 控制流、match、函数          |
+| 2   | [错误处理框架](#项目2-错误处理框架) | ⭐⭐   | 2-3小时  | Result、自定义错误、? 操作符 |
+| 3   | [表达式解析器](#项目3-表达式解析器) | ⭐⭐⭐ | 3-4小时  | 递归、闭包、高阶函数         |
+
+---
+
+## 项目1: 计算器 CLI
+
+### 📖 项目说明
+
+**难度**: ⭐
+**预计时间**: 1-2小时
+
+### 学习目标
+
+- 掌握 `match` 表达式
+- 理解控制流语句
+- 实现命令行交互
+- 处理用户输入
+
+### 核心代码
+
+```rust
+use std::io::{self, Write};
+
+fn main() {
+    println!("===== 简单计算器 =====");
+    println!("支持: +, -, *, /");
+    println!("输入 'quit' 退出\n");
+
+    loop {
+        print!("请输入表达式 (如: 5 + 3): ");
+        io::stdout().flush().unwrap();
+
+        let mut input = String::new();
+        io::stdin().read_line(&mut input).unwrap();
+
+        let input = input.trim();
+
+        if input == "quit" {
+            println!("再见！");
+            break;
+        }
+
+        match calculate(input) {
+            Ok(result) => println!("结果: {}\n", result),
+            Err(e) => println!("❌ 错误: {}\n", e),
+        }
+    }
+}
+
+fn calculate(expr: &str) -> Result<f64, String> {
+    let parts: Vec<&str> = expr.split_whitespace().collect();
+
+    if parts.len() != 3 {
+        return Err("格式错误，应为: 数字 运算符 数字".to_string());
+    }
+
+    let a: f64 = parts[0].parse()
+        .map_err(|_| format!("无效的数字: {}", parts[0]))?;
+    let op = parts[1];
+    let b: f64 = parts[2].parse()
+        .map_err(|_| format!("无效的数字: {}", parts[2]))?;
+
+    match op {
+        "+" => Ok(a + b),
+        "-" => Ok(a - b),
+        "*" => Ok(a * b),
+        "/" => {
+            if b == 0.0 {
+                Err("除数不能为零".to_string())
+            } else {
+                Ok(a / b)
+            }
+        }
+        _ => Err(format!("未知运算符: {}", op)),
+    }
+}
+```
+### 测试输出
+
+```text
+===== 简单计算器 =====
+支持: +, -, *, /
+输入 'quit' 退出
+
+请输入表达式 (如: 5 + 3): 10 + 20
+结果: 30
+
+请输入表达式 (如: 5 + 3): 15 / 3
+结果: 5
+
+请输入表达式 (如: 5 + 3): 10 / 0
+❌ 错误: 除数不能为零
+```
+---
+
+## 项目2: 错误处理框架
+
+### 📖 项目说明2
+
+**难度**: ⭐⭐
+**预计时间**: 2-3小时
+
+### 学习目标2
+
+- 定义自定义错误类型
+- 实现 `Error` trait
+- 使用 `?` 操作符
+- 错误转换和传播
+
+### 核心代码2
+
+```rust
+use std::fmt;
+use std::error::Error;
+use std::num::ParseIntError;
+use std::io;
+
+/// 自定义错误类型
+#[derive(Debug)]
+enum AppError {
+    Io(io::Error),
+    Parse(ParseIntError),
+    Validation(String),
+    NotFound(String),
+}
+
+impl fmt::Display for AppError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            AppError::Io(err) => write!(f, "IO 错误: {}", err),
+            AppError::Parse(err) => write!(f, "解析错误: {}", err),
+            AppError::Validation(msg) => write!(f, "验证错误: {}", msg),
+            AppError::NotFound(msg) => write!(f, "未找到: {}", msg),
+        }
+    }
+}
+
+impl Error for AppError {}
+
+// 错误转换
+impl From<io::Error> for AppError {
+    fn from(error: io::Error) -> Self {
+        AppError::Io(error)
+    }
+}
+
+impl From<ParseIntError> for AppError {
+    fn from(error: ParseIntError) -> Self {
+        AppError::Parse(error)
+    }
+}
+
+/// 用户管理系统
+struct UserManager {
+    users: Vec<User>,
+}
+
+struct User {
+    id: u32,
+    name: String,
+    age: u8,
+}
+
+impl UserManager {
+    fn new() -> Self {
+        UserManager { users: Vec::new() }
+    }
+
+    /// 添加用户 - 演示验证错误
+    fn add_user(&mut self, name: String, age: u8) -> Result<(), AppError> {
+        // 验证年龄
+        if age < 18 {
+            return Err(AppError::Validation(
+                "年龄必须大于等于18".to_string()
+            ));
+        }
+
+        // 验证姓名
+        if name.is_empty() {
+            return Err(AppError::Validation(
+                "姓名不能为空".to_string()
+            ));
+        }
+
+        let id = self.users.len() as u32 + 1;
+        self.users.push(User { id, name, age });
+        Ok(())
+    }
+
+    /// 查找用户 - 演示 NotFound 错误
+    fn find_user(&self, id: u32) -> Result<&User, AppError> {
+        self.users.iter()
+            .find(|u| u.id == id)
+            .ok_or_else(|| AppError::NotFound(format!("用户 {} 不存在", id)))
+    }
+
+    /// 解析用户输入 - 演示 ? 操作符和错误转换
+    fn parse_age(input: &str) -> Result<u8, AppError> {
+        let age: u8 = input.parse()?;  // ParseIntError 自动转换为 AppError
+
+        if age > 120 {
+            return Err(AppError::Validation(
+                "年龄不合理".to_string()
+            ));
+        }
+
+        Ok(age)
+    }
+}
+
+fn main() -> Result<(), AppError> {
+    println!("===== 错误处理框架测试 =====\n");
+
+    let mut manager = UserManager::new();
+
+    // 测试1: 成功添加用户
+    println!("测试1: 添加有效用户");
+    manager.add_user("Alice".to_string(), 25)?;
+    manager.add_user("Bob".to_string(), 30)?;
+    println!("✅ 成功添加 2 个用户\n");
+
+    // 测试2: 验证错误
+    println!("测试2: 验证错误");
+    match manager.add_user("Charlie".to_string(), 15) {
+        Ok(_) => println!("成功"),
+        Err(e) => println!("❌ {}\n", e),
+    }
+
+    // 测试3: 查找用户
+    println!("测试3: 查找用户");
+    match manager.find_user(1) {
+        Ok(user) => println!("✅ 找到用户: {} (年龄: {})", user.name, user.age),
+        Err(e) => println!("❌ {}", e),
+    }
+
+    match manager.find_user(999) {
+        Ok(user) => println!("找到: {}", user.name),
+        Err(e) => println!("❌ {}\n", e),
+    }
+
+    // 测试4: 解析错误
+    println!("测试4: 解析年龄");
+    match UserManager::parse_age("25") {
+        Ok(age) => println!("✅ 解析成功: {}", age),
+        Err(e) => println!("❌ {}", e),
+    }
+
+    match UserManager::parse_age("abc") {
+        Ok(age) => println!("解析: {}", age),
+        Err(e) => println!("❌ {}\n", e),
+    }
+
+    Ok(())
+}
+```
+### 测试输出2
+
+```text
+===== 错误处理框架测试 =====
+
+测试1: 添加有效用户
+✅ 成功添加 2 个用户
+
+测试2: 验证错误
+❌ 验证错误: 年龄必须大于等于18
+
+测试3: 查找用户
+✅ 找到用户: Alice (年龄: 25)
+❌ 未找到: 用户 999 不存在
+
+测试4: 解析年龄
+✅ 解析成功: 25
+❌ 解析错误: invalid digit found in string
+```
+---
+
+## 项目3: 表达式解析器
+
+### 📖 项目说明3
+
+**难度**: ⭐⭐⭐
+**预计时间**: 3-4小时
+
+### 学习目标3
+
+- 实现递归函数
+- 使用闭包和高阶函数
+- 模式匹配高级用法
+- 解析算法实现
+
+### 核心代码（简化版）
+
+```rust
+/// 表达式节点
+#[derive(Debug, PartialEq)]
+enum Expr {
+    Number(f64),
+    BinaryOp {
+        op: Op,
+        left: Box<Expr>,
+        right: Box<Expr>,
+    },
+}
+
+#[derive(Debug, PartialEq)]
+enum Op {
+    Add,
+    Sub,
+    Mul,
+    Div,
+}
+
+/// 词法分析器
+struct Lexer {
+    input: Vec<char>,
+    pos: usize,
+}
+
+impl Lexer {
+    fn new(input: &str) -> Self {
+        Lexer {
+            input: input.chars().collect(),
+            pos: 0,
+        }
+    }
+
+    fn peek(&self) -> Option<char> {
+        if self.pos < self.input.len() {
+            Some(self.input[self.pos])
+        } else {
+            None
+        }
+    }
+
+    fn advance(&mut self) {
+        self.pos += 1;
+    }
+
+    fn skip_whitespace(&mut self) {
+        while let Some(c) = self.peek() {
+            if c.is_whitespace() {
+                self.advance();
+            } else {
+                break;
+            }
+        }
+    }
+}
+
+/// 递归下降解析器
+struct Parser {
+    lexer: Lexer,
+}
+
+impl Parser {
+    fn new(input: &str) -> Self {
+        Parser {
+            lexer: Lexer::new(input),
+        }
+    }
+
+    fn parse(&mut self) -> Result<Expr, String> {
+        self.parse_expr()
+    }
+
+    fn parse_expr(&mut self) -> Result<Expr, String> {
+        // 解析加减法
+        let mut left = self.parse_term()?;
+
+        loop {
+            self.lexer.skip_whitespace();
+            match self.lexer.peek() {
+                Some('+') => {
+                    self.lexer.advance();
+                    let right = self.parse_term()?;
+                    left = Expr::BinaryOp {
+                        op: Op::Add,
+                        left: Box::new(left),
+                        right: Box::new(right),
+                    };
+                }
+                Some('-') => {
+                    self.lexer.advance();
+                    let right = self.parse_term()?;
+                    left = Expr::BinaryOp {
+                        op: Op::Sub,
+                        left: Box::new(left),
+                        right: Box::new(right),
+                    };
+                }
+                _ => break,
+            }
+        }
+
+        Ok(left)
+    }
+
+    fn parse_term(&mut self) -> Result<Expr, String> {
+        // 解析乘除法
+        let mut left = self.parse_number()?;
+
+        loop {
+            self.lexer.skip_whitespace();
+            match self.lexer.peek() {
+                Some('*') => {
+                    self.lexer.advance();
+                    let right = self.parse_number()?;
+                    left = Expr::BinaryOp {
+                        op: Op::Mul,
+                        left: Box::new(left),
+                        right: Box::new(right),
+                    };
+                }
+                Some('/') => {
+                    self.lexer.advance();
+                    let right = self.parse_number()?;
+                    left = Expr::BinaryOp {
+                        op: Op::Div,
+                        left: Box::new(left),
+                        right: Box::new(right),
+                    };
+                }
+                _ => break,
+            }
+        }
+
+        Ok(left)
+    }
+
+    fn parse_number(&mut self) -> Result<Expr, String> {
+        self.lexer.skip_whitespace();
+
+        let mut num_str = String::new();
+        while let Some(c) = self.lexer.peek() {
+            if c.is_numeric() || c == '.' {
+                num_str.push(c);
+                self.lexer.advance();
+            } else {
+                break;
+            }
+        }
+
+        if num_str.is_empty() {
+            return Err("期望数字".to_string());
+        }
+
+        let num: f64 = num_str.parse()
+            .map_err(|_| "无效的数字".to_string())?;
+
+        Ok(Expr::Number(num))
+    }
+}
+
+/// 求值器
+fn eval(expr: &Expr) -> Result<f64, String> {
+    match expr {
+        Expr::Number(n) => Ok(*n),
+        Expr::BinaryOp { op, left, right } => {
+            let left_val = eval(left)?;
+            let right_val = eval(right)?;
+
+            match op {
+                Op::Add => Ok(left_val + right_val),
+                Op::Sub => Ok(left_val - right_val),
+                Op::Mul => Ok(left_val * right_val),
+                Op::Div => {
+                    if right_val == 0.0 {
+                        Err("除数不能为零".to_string())
+                    } else {
+                        Ok(left_val / right_val)
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn main() {
+    println!("===== 表达式解析器测试 =====\n");
+
+    let test_cases = vec![
+        "3 + 5",
+        "10 - 3",
+        "4 * 5",
+        "20 / 4",
+        "2 + 3 * 4",
+        "10 / 2 + 3",
+    ];
+
+    for expr_str in test_cases {
+        println!("表达式: {}", expr_str);
+
+        let mut parser = Parser::new(expr_str);
+        match parser.parse() {
+            Ok(expr) => {
+                println!("  AST: {:?}", expr);
+                match eval(&expr) {
+                    Ok(result) => println!("  ✅ 结果: {}\n", result),
+                    Err(e) => println!("  ❌ 求值错误: {}\n", e),
+                }
+            }
+            Err(e) => println!("  ❌ 解析错误: {}\n", e),
+        }
+    }
+}
+```
+### 测试输出3
+
+```text
+===== 表达式解析器测试 =====
+
+表达式: 3 + 5
+  AST: BinaryOp { op: Add, left: Number(3.0), right: Number(5.0) }
+  ✅ 结果: 8
+
+表达式: 2 + 3 * 4
+  AST: BinaryOp { op: Add, left: Number(2.0), right: BinaryOp { ... } }
+  ✅ 结果: 14
+```
+---
+
+## 📝 总结
+
+### 关键概念
+
+| 概念       | 项目1  | 项目2  | 项目3  |
+| :--- | :--- | :--- | :--- || 控制流     | ✅✅✅ | ✅✅   | ✅✅   |
+| match      | ✅✅✅ | ✅✅   | ✅✅✅ |
+| Result     | ✅✅   | ✅✅✅ | ✅✅✅ |
+| 自定义错误 | ❌     | ✅✅✅ | ✅✅   |
+| 递归       | ❌     | ❌     | ✅✅✅ |
+| 闭包       | ❌     | ✅     | ✅✅   |
+
+---
+
+**文档版本**: v1.0
+**创建日期**: 2025-10-25
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

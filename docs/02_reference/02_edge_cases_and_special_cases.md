@@ -112,7 +112,6 @@ assert_eq!(empty.len(), 0);
 empty.first();  // ✅ 返回 None
 empty.get(0);   // ✅ 返回 None
 ```
-
 ### 空 HashMap / BTreeMap {#空-hashmap-btreemap}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -126,7 +125,6 @@ let map: HashMap<i32, &str> = HashMap::new();
 map.get(&1);  // ✅ 返回 None，不 panic
 map.insert(1, "a");  // 插入后非空
 ```
-
 ### 空切片 {#空切片}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -138,7 +136,6 @@ let slice: &[i32] = &[];
 assert!(slice.is_empty());
 slice.iter().next();  // ✅ 返回 None
 ```
-
 ---
 
 ## 算法特例 {#算法特例}
@@ -160,7 +157,6 @@ let one = vec![1];
 one.binary_search(&1);  // ✅ Ok(0)
 one.binary_search(&0);  // ✅ Err(0)
 ```
-
 ### 单元素与双元素 {#单元素与双元素}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -172,7 +168,6 @@ let single = vec![42];
 single.windows(2).next();  // None，窗口大小 > len
 single.chunks(1).count();  // 1
 ```
-
 ---
 
 ## 并发特例 {#并发特例}
@@ -192,7 +187,6 @@ for h in handles {
 }
 // ✅ 正常，无任务
 ```
-
 ### 通道已关闭 {#通道已关闭}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -206,7 +200,6 @@ let (tx, rx) = mpsc::channel();
 drop(tx);
 rx.recv();  // ✅ Err，表明通道已关闭
 ```
-
 ### Mutex poison {#mutex-poison}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -221,7 +214,6 @@ match mutex.lock() {
     }
 }
 ```
-
 ---
 
 ## 数值溢出 {#数值溢出}
@@ -238,7 +230,6 @@ let x: u8 = 255;
 let y = x.wrapping_add(1);  // ✅ 明确 wrapping，y = 0
 let z = x.saturating_add(1);  // ✅ 饱和，z = 255
 ```
-
 ### 除零 {#除零}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -249,7 +240,6 @@ let x: i32 = 1;
 let zero = 0;
 let y = x.checked_div(zero);  // ✅ None
 ```
-
 ---
 
 ## 字符串与切片 {#字符串与切片}
@@ -266,7 +256,6 @@ assert!(s.is_empty());
 s.chars().next();  // None
 s.as_bytes();      // &[]
 ```
-
 ### 字节边界上的字符切分 {#字节边界上的字符切分}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -281,7 +270,6 @@ for c in s.chars() {
     // 按字符处理
 }
 ```
-
 ### 零长度范围 {#零长度范围}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -290,7 +278,6 @@ for c in s.chars() {
 let s = "hello";
 let sub = &s[2..2];  // ✅ ""
 ```
-
 ---
 
 ## unsafe 与 FFI {#unsafe-与-ffi}
@@ -308,7 +295,6 @@ if !ptr.is_null() {
     let _ = unsafe { *ptr };
 }
 ```
-
 ### FFI 边界：C 传入空指针 {#ffi-边界c-传入空指针}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -326,7 +312,6 @@ fn safe_wrapper() -> Option<&'static Foo> {
     if ptr.is_null() { None } else { Some(unsafe { &*ptr }) }
 }
 ```
-
 ### 悬垂引用典型反例 {#悬垂引用典型反例}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -341,7 +326,6 @@ fn bad() -> &i32 {
 // ✅ 返回传入的引用或拥有所有权
 fn good(x: &i32) -> &i32 { x }
 ```
-
 ---
 
 ## WASM 特例 {#wasm-特例}
@@ -357,7 +341,6 @@ fn good(x: &i32) -> &i32 { x }
 // 无 std::thread、std::sync::Mutex 等
 // 使用 core / alloc
 ```
-
 ### 阻塞 API 在 WASM {#阻塞-api-在-wasm}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -370,7 +353,6 @@ fn good(x: &i32) -> &i32 { x }
 #[cfg(target_arch = "wasm32")]
 // 使用 web_sys 或 js_sys 的异步 API
 ```
-
 ---
 
 ## panic 边界 {#panic-边界}
@@ -390,7 +372,6 @@ let res: Result<i32, &str> = Err("error");
 // res.unwrap();  // ❌ panic
 res.unwrap_or_default();  // ✅ 或 map_err 处理
 ```
-
 ### 断言边界 {#断言边界}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -400,7 +381,6 @@ let v = vec![1, 2, 3];
 // v[10];  // ❌ panic: index out of bounds
 v.get(10);  // ✅ 返回 None
 ```
-
 ---
 
 ## 空 Future 与异步 {#空-future-与异步}
@@ -422,7 +402,6 @@ tokio::select! {
     _ = async { } => {}
 }
 ```
-
 ### 已完成 Future {#已完成-future}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -433,7 +412,6 @@ use std::future::ready;
 let f = std::future::ready(42);
 // f 立即完成，poll 一次即返回 Ready(42)
 ```
-
 ---
 
 ## Rust 1.93 行为变更特例 {#rust-193-行为变更特例}
@@ -459,7 +437,6 @@ a.append(&mut b);
 // 1.93 起：a[1] 保留为 "a"，b 中 (1,"b") 被丢弃
 assert_eq!(a.get(&1), Some(&"a"));
 ```
-
 ### Copy specialization 移除 {#copy-specialization-移除}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -471,7 +448,6 @@ assert_eq!(a.get(&1), Some(&"a"));
 let v: Vec<i32> = vec![1, 2, 3];
 let v2 = v.clone();  // 可能受影响
 ```
-
 ### vec::IntoIter 与 RefUnwindSafe {#vecintoiter-与-refunwindsafe}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -486,7 +462,6 @@ use std::vec::IntoIter;
 fn assert_unwind_safe<T: UnwindSafe>() {}
 assert_unwind_safe::<IntoIter<*mut i32>>();  // 1.93 可行
 ```
-
 ---
 
 ## 更多边界情况代码示例 {#更多边界情况代码示例}
@@ -524,7 +499,6 @@ fn partial_move() {
     // let name2 = person.name;  // 错误
 }
 ```
-
 #### Copy 类型的隐式复制 {#copy-类型的隐式复制}
 
 ```rust
@@ -537,7 +511,6 @@ fn copy_behavior() {
     println!("{} {} {}", x, y, z);
 }
 ```
-
 ### 生命周期边界 {#生命周期边界}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -560,7 +533,6 @@ fn mix_lifetimes<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
     x  // 只能返回 x，因为 y 的生命周期可能更短
 }
 ```
-
 #### NLL (Non-Lexical Lifetimes) 边界 {#nll-non-lexical-lifetimes-边界}
 
 ```rust
@@ -574,7 +546,6 @@ fn nll_example() {
     z.push_str(" world");
 }
 ```
-
 ### 泛型边界 {#泛型边界}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -598,7 +569,6 @@ fn recursive_type() {
     let list = List::Cons(1, Box::new(List::Cons(2, Box::new(List::Nil))));
 }
 ```
-
 #### 零大小类型 (ZST) {#零大小类型-zst}
 
 ```rust
@@ -613,7 +583,6 @@ fn zero_sized_types() {
     assert_eq!(size_of::<[(); 1000]>(), 0);  // 1000 个 ZST 数组仍是 ZST
 }
 ```
-
 ### 模式匹配边界 {#模式匹配边界}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -652,7 +621,6 @@ fn at_binding(x: Option<i32>) -> i32 {
     }
 }
 ```
-
 ### 并发边界 {#并发边界-1}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -676,7 +644,6 @@ fn deadlock_risk() {
 
 // ✅ 解决方案：一致的加锁顺序或使用 std::sync::LockGuard
 ```
-
 #### Send/Sync 自动派生边界 {#sendsync-自动派生边界}
 
 ```rust
@@ -697,7 +664,6 @@ fn auto_trait_bounds() {
     });
 }
 ```
-
 ### unsafe 边界 {#unsafe-边界-1}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -721,7 +687,6 @@ fn raw_pointer_edges() {
     }
 }
 ```
-
 #### 未对齐指针边界 {#未对齐指针边界}
 
 ```rust
@@ -739,7 +704,6 @@ fn unaligned_pointer() {
     }
 }
 ```
-
 ### 迭代器边界 {#迭代器边界}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -760,7 +724,6 @@ fn iterator_invalidation() {
     v.extend(to_add);
 }
 ```
-
 ---
 
 ## 🔗 形式化边界分析 {#形式化边界分析}

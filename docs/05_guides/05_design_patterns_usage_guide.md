@@ -123,7 +123,6 @@ impl Singleton {
     }
 }
 ```
-
 ### 工厂模式 {#工厂模式}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -161,7 +160,6 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
     }
 }
 ```
-
 ---
 
 ## 📊 核心模式 {#核心模式}
@@ -235,7 +233,6 @@ let config = ConfigBuilder::new()
     .timeout(60)
     .build()?;
 ```
-
 ### 2. 结构型模式 {#2-结构型模式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -270,7 +267,6 @@ impl NewInterface for Adapter {
     }
 }
 ```
-
 #### 装饰器模式 {#装饰器模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -299,7 +295,6 @@ impl Component for Decorator {
     }
 }
 ```
-
 ### 3. 行为型模式 {#3-行为型模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -341,7 +336,6 @@ impl Context {
     }
 }
 ```
-
 #### 观察者模式 {#观察者模式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -385,7 +379,6 @@ impl Subject {
     }
 }
 ```
-
 ---
 
 ## 📐 23种设计模式完整实现 {#23种设计模式完整实现}
@@ -427,7 +420,6 @@ impl Config {
 // ❌ 不要：单例持有大量可变状态
 // ✅ 要：单例尽量只读或提供有限的原子操作
 ```
-
 #### 2. 工厂方法 (Factory Method) {#2-工厂方法-factory-method}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -482,7 +474,6 @@ impl Creator for ConcreteCreatorB {
 // ❌ 不要：只有一个产品时过度设计
 // ✅ 要：产品族扩展时使用
 ```
-
 #### 3. 抽象工厂 (Abstract Factory) {#3-抽象工厂-abstract-factory}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -556,7 +547,6 @@ fn render_ui(factory: &dyn GUIFactory) {
 // ❌ 不要：频繁添加新产品时
 // ✅ 要：产品族稳定但需要切换实现时
 ```
-
 #### 4. 建造者模式 (Builder) {#4-建造者模式-builder}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -639,7 +629,6 @@ let request = HttpRequestBuilder::post()
 // ❌ 不要：只有2-3个参数时使用
 // ✅ 要：必选/可选参数混合、需要验证时
 ```
-
 #### 5. 原型模式 (Prototype) {#5-原型模式-prototype}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -695,7 +684,6 @@ impl PrototypeRegistry {
 // ❌ 不要：简单类型手动实现原型
 // ✅ 要：复杂对象需要深拷贝或动态创建时
 ```
-
 ### 结构型模式 (Structural Patterns) {#结构型模式-structural-patterns}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -758,7 +746,6 @@ impl SpecificInterface for Adaptee {
 // ❌ 不要：可以完全重构时强行适配
 // ✅ 要：无法修改源码但需要兼容时
 ```
-
 #### 7. 桥接模式 (Bridge) {#7-桥接模式-bridge}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -832,7 +819,6 @@ impl Shape for RectangleShape {
 // ❌ 不要：只有单一变化维度时
 // ✅ 要：形状和渲染方式独立变化时
 ```
-
 #### 8. 组合模式 (Composite) {#8-组合模式-composite}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -906,7 +892,6 @@ impl Graphic for CompoundGraphic {
 // ❌ 不要：只有一层级时
 // ✅ 要：递归树结构、文档对象模型时
 ```
-
 #### 9. 装饰器模式 (Decorator) {#9-装饰器模式-decorator}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -966,7 +951,6 @@ println!("{}: ${}", coffee.description(), coffee.cost());
 // ❌ 不要：静态行为使用装饰器
 // ✅ 要：运行时动态组合功能时
 ```
-
 #### 10. 外观模式 (Facade) {#10-外观模式-facade}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -1030,7 +1014,6 @@ impl ComputerFacade {
 // ❌ 不要：简单系统添加外观
 // ✅ 要：复杂子系统需要简化接口时
 ```
-
 #### 11. 享元模式 (Flyweight) {#11-享元模式-flyweight}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1099,7 +1082,6 @@ impl Tree {
 // ❌ 不要：每个对象都独特时
 // ✅ 要：大量重复状态、内存受限时
 ```
-
 #### 12. 代理模式 (Proxy) {#12-代理模式-proxy}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -1184,7 +1166,6 @@ impl<T: Image> Image for ProtectedImage<T> {
 // ❌ 不要：无额外控制需求时
 // ✅ 要：需要控制访问或延迟加载时
 ```
-
 ### 行为型模式 (Behavioral Patterns) {#行为型模式-behavioral-patterns}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -1270,7 +1251,6 @@ impl Handler for LoggingHandler {
 // ❌ 不要：处理顺序固定不变时
 // ✅ 要：动态调整处理顺序、可插拔处理器时
 ```
-
 #### 14. 命令模式 (Command) {#14-命令模式-command}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -1351,7 +1331,6 @@ impl CommandManager {
 // ❌ 不要：无需撤销、记录操作时
 // ✅ 要：需要 undo/redo、延迟执行时
 ```
-
 #### 15. 解释器模式 (Interpreter) {#15-解释器模式-interpreter}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -1421,7 +1400,6 @@ let result = expression.interpret(&context);
 // ❌ 不要：复杂语法分析（用 parser 生成器）
 // ✅ 要：简单语法、频繁变化的规则时
 ```
-
 #### 16. 迭代器模式 (Iterator) {#16-迭代器模式-iterator}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -1494,7 +1472,6 @@ impl<'a> Iterator for ReverseBookIterator<'a> {
 // ❌ 不要：重复实现标准 Iterator
 // ✅ 要：特殊遍历需求时
 ```
-
 #### 17. 中介者模式 (Mediator) {#17-中介者模式-mediator}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -1567,7 +1544,6 @@ impl User for ChatUser {
 // ❌ 不要：简单对象关系时
 // ✅ 要：星型通信结构、需要集中管理时
 ```
-
 #### 18. 备忘录模式 (Memento) {#18-备忘录模式-memento}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -1660,7 +1636,6 @@ impl History {
 // ❌ 不要：大量数据频繁快照
 // ✅ 要：有限状态、需要回滚时
 ```
-
 #### 19. 观察者模式 (Observer) {#19-观察者模式-observer}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -1729,7 +1704,6 @@ impl Observer for NewsChannel {
 // ❌ 不要：一对一简单通知
 // ✅ 要：一对多、动态订阅关系时
 ```
-
 #### 20. 状态模式 (State) {#20-状态模式-state}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -1819,7 +1793,6 @@ impl Document {
 // ❌ 不要：只有2-3个简单状态时
 // ✅ 要：多状态、转换复杂、行为随状态变化时
 ```
-
 #### 21. 策略模式 (Strategy) {#21-策略模式-strategy}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1917,7 +1890,6 @@ impl ShoppingCart {
 // ❌ 不要：永远只用一种策略
 // ✅ 要：多种可互换算法、需要动态切换时
 ```
-
 #### 22. 模板方法模式 (Template Method) {#22-模板方法模式-template-method}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -2002,7 +1974,6 @@ impl DataMiner for CsvDataMiner {
 // ❌ 不要：无共同步骤时
 // ✅ 要：有固定流程、部分步骤可定制时
 ```
-
 #### 23. 访问者模式 (Visitor) {#23-访问者模式-visitor}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -2106,7 +2077,6 @@ impl ShapeCollection {
 // ❌ 不要：类层次不稳定时
 // ✅ 要：数据结构稳定、需要多种操作算法时
 ```
-
 ---
 
 ## 🦀 Rust 特有模式 {#rust-特有模式}
@@ -2133,7 +2103,6 @@ fn process_order(id: OrderId) { /* ... */ }
 // process_user(OrderId(1)); // 错误！
 // process_user(UserId(1));  // 正确
 ```
-
 ### 2. RAII 模式 {#2-raii-模式}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -2162,7 +2131,6 @@ impl Drop for FileGuard {
 
 // 使用场景：资源管理、锁守卫、连接池
 ```
-
 ### 3. 类型状态模式 (Type State) {#3-类型状态模式-type-state}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -2203,7 +2171,6 @@ impl Connection<Connected> {
 // 使用场景：状态机、API 使用顺序约束、编译期状态检查
 // 编译期确保：必须先 connect 才能 send
 ```
-
 ### 4. Builder 模式（消耗型 vs 非消耗型） {#4-builder-模式消耗型-vs-非消耗型}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -2244,7 +2211,6 @@ builder.url("https://example.com").method("POST");
 let req1 = builder.build()?;
 let req2 = builder.build()?; // 可以重用
 ```
-
 ---
 
 ## 📚 相关文档 {#相关文档}
@@ -2252,14 +2218,13 @@ let req2 = builder.build()?; // 可以重用
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [完整文档](../../crates/c09_design_pattern/README.md)
-- [GoF 模式](../../crates/c09_design_pattern/docs/tier_02_guides/01_创建型模式指南.md)
-- [Rust 特有模式](../../crates/c09_design_pattern/docs/tier_02_guides/05_最佳实践与反模式.md)
+- [GoF 模式](../../crates/c09_design_pattern/docs/tier_02_guides/01_creational_patterns_guide.md)
+- [Rust 特有模式](../../crates/c09_design_pattern/docs/tier_02_guides/05_best_practices_and_antipatterns.md)
 - [设计模式形式化文档](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md) - 23种设计模式的形式化定义与分析
 
 ## 🆕 Rust 1.95+ 特性在设计模式中的应用 {#rust-195-特性在设计模式中的应用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
 > **适用版本**: Rust 1.96.0+
 
 Rust 1.95+ 引入的新特性为设计模式实现提供了更优雅、更高效的解决方案。
@@ -2472,7 +2437,6 @@ graph TD
     I --> I1[Into/From]
     I --> I2[Drop 保证]
 ```
-
 ---
 
 ## 决策树：设计模式选择 {#决策树设计模式选择}
@@ -2490,7 +2454,6 @@ graph TD
     Q4 -->|是| A4[Newtype 模式]
     Q4 -->|否| A5[函数组合即可]
 ```
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

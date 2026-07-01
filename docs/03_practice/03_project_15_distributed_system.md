@@ -64,7 +64,6 @@ struct RaftNode {
     log: Vec<LogEntry>,
 }
 ```
-
 ---
 
 ## 参考实现 {#参考实现}

@@ -84,7 +84,6 @@ n = 5
 add_one(n)
 print(n)           # 5（不变）
 ```
-
 **按名调用（Call by Name, CBN）**
 
 ```haskell
@@ -92,7 +91,6 @@ print(n)           # 5（不变）
 if' c t e = if c then t else e
 result = if' True (1 `div` 0) 2   -- 不报错！因为 e 分支未被求值
 ```
-
 **按需调用（Call by Need, CBNeed）**
 
 ```haskell
@@ -101,7 +99,6 @@ xs = [1..1000000]      -- 不立即生成
 head xs                -- 只计算第一个元素，并记住结果
 head xs                -- 直接使用记住的结果
 ```
-
 **Rust 的策略**：
 
 Rust 是**严格的 CBV**（eager evaluation），但引入了**所有权（Ownership）移动**：
@@ -113,7 +110,6 @@ let s = String::from("hello");
 take_ownership(s);      // s 的所有权移入函数
 // println!("{}", s);   // 编译错误！s 已失效
 ```
-
 这与 CBV 的区别：CBV 通常意味着"复制参数"，而 Rust 的 CBV 对于非 `Copy` 类型意味着"移动参数"。
 
 ### 1.3 对比表
@@ -143,7 +139,6 @@ fn increment() -> i32 {
     unsafe { COUNTER += 1; COUNTER }  // 修改了外部状态
 }
 ```
-
 ### 2.2 副作用与并发的关系
 
 为什么 Rust 能" fearless concurrency"？因为**所有权（Ownership）系统本质上是一种副作用控制机制**：
@@ -163,7 +158,6 @@ fn increment() -> i32 {
 -- Haskell：通过类型系统隔离副作用（IO Monad）
 readFile :: FilePath -> IO String   -- IO 标记"此函数有副作用"
 ```
-
 ```rust,ignore
 // Rust：通过所有权隔离副作用
 fn read_file(path: &str) -> Result<String, io::Error> {
@@ -172,13 +166,11 @@ fn read_file(path: &str) -> Result<String, io::Error> {
     fs::read_to_string(path)
 }
 ```
-
 ```javascript
 // JavaScript：副作用隐式、无约束
 let data;
 fetch('/api').then(r => r.json()).then(d => { data = d; });  // 副作用无处不在
 ```
-
 ---
 
 ## 三、变量模型：环境 vs 存储
@@ -201,7 +193,6 @@ let s = String::from("hi");
                       // 存储: S2 → (ptr, len, cap)
                       //        ptr → 堆位置 H1 → "hi"
 ```
-
 ### 3.2 Move 的存储层面解释
 
 ```rust
@@ -211,7 +202,6 @@ let s2 = s1;                       // 环境: s1 → ?（失效）
                                    // 存储: S2 → (ptr=H1, len=5, cap=5)
                                    //       H1 未复制！
 ```
-
 > **关键**: Move 只修改**环境**（哪个变量名绑定到哪个存储位置），不修改**存储**（不复制堆数据）。这是 Rust move 既高效又安全的根源。
 
 ### 3.3 对比 C++ 和 Java
@@ -226,7 +216,6 @@ std::string s3 = std::move(s1);
                        // 浅拷贝 + 置空 s1
                        // 需要程序员确保之后不使用 s1
 ```
-
 ```java
 // Java：引用复制（环境层面）
 String s1 = new String("hello");  // s1 → H1
@@ -234,7 +223,6 @@ String s2 = s1;                   // s2 → H1（环境复制，存储共享）
 // GC 管理 H1 的生命周期，不存在双重释放
 // 但也没有编译期的独占性保证
 ```
-
 ```rust
 // Rust：环境移动（编译期保证唯一绑定）
 let s1 = String::from("hello");   // s1 → H1
@@ -242,7 +230,6 @@ let s2 = s1;                      // s2 → H1, s1 失效
 // 编译器确保 s1 之后不会被使用
 // 无需 GC，无深拷贝，无手动管理
 ```
-
 ---
 
 ## 四、Continuation 与 CPS
@@ -256,7 +243,6 @@ let s2 = s1;                      // s2 → H1, s1 失效
 let x = 1 + 2;        // 计算 1+2=3，然后 continuation 是 "let x = 3; ..."
 println!("{}", x);    // continuation 是 "println!(..., 3)"
 ```
-
 ### 4.2 CPS：Continuation Passing Style
 
 将隐式 continuation 显式化为函数参数：
@@ -271,7 +257,6 @@ println!("{}", r);
 fn add_cps(a: i32, b: i32, k: fn(i32)) { k(a + b) }
 add_cps(1, 2, |r| println!("{}", r));
 ```
-
 ### 4.3 async/await 的本质：CPS 变换
 
 Rust 的 `async fn` 是编译器自动执行的 CPS 变换：
@@ -284,7 +269,6 @@ async fn fetch_data(url: &str) -> String {
     text
 }
 ```
-
 ```rust
 // 编译器生成的状态机（简化版）
 enum FetchDataFuture {
@@ -322,7 +306,6 @@ impl Future for FetchDataFuture {
     }
 }
 ```
-
 > **核心洞察**: `await` 不是阻塞，而是**将当前函数的剩余部分（continuation）打包成一个状态机回调**，注册到事件循环中。当 I/O 完成时，事件循环调用这个回调（状态机的 `poll`），从上次暂停处继续执行。
 
 ### 4.4 与操作系统线程的对比
@@ -367,7 +350,6 @@ for item in &collection {   // 不可变借用覆盖整个循环体
     // 无法修改 collection，因此迭代器不会失效
 }
 ```
-
 ### 5.3 为什么 `goto` 有害？
 
 Dijkstra 的《Goto Statement Considered Harmful》核心论点：**无约束的跳转破坏了程序状态的可追踪性**。
@@ -380,7 +362,6 @@ unsafe {
     // 程序员必须手动保证不变量
 }
 ```
-
 > **结构化程序定理的 Rust 版本**: 在 safe Rust 中，控制流的所有路径都可由编译器静态分析，因此所有资源（内存、文件、锁）的生命周期（Lifetimes）都可追踪。`unsafe` 打破了这一保证，需要程序员手动维护。
 
 ---
@@ -492,9 +473,7 @@ unsafe {
 > 类型安全 ⟸ 静态类型检查 ⟸ 语法与语义一致性（Coherence）
 > 程序正确性 ⟸ 无副作用推理 ⟸ 纯函数基础
 > **过渡**: 掌握 编程语言理论基础（PL Prerequisites） 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 编程语言理论基础（PL Prerequisites） 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 编程语言理论基础（PL Prerequisites） 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

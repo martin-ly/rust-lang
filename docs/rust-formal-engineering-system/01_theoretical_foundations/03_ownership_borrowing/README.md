@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -39,7 +38,6 @@ mindmap
       Send Trait
       Sync Trait
 ```
-
 ## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -111,7 +109,6 @@ fn partial_use() {
     resource.push(4);  // 现在可以修改
 }
 ```
-
 ### 借用检查器的形式化规则 {#借用检查器的形式化规则}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -154,7 +151,6 @@ fn borrow_rules() {
     // println!("{}", r7);  // r7 将引用已释放的内存
 }
 ```
-
 ### 非词法生命周期（NLL） {#非词法生命周期nll}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -186,7 +182,6 @@ fn nll_control_flow() {
     data.push(4);  // ✅ 允许
 }
 ```
-
 ### 内部可变性模式 {#内部可变性模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -248,7 +243,6 @@ fn arc_mutex_demo() {
     println!("Result: {}", *data.lock().unwrap());  // 10
 }
 ```
-
 ### 所有权与并发的形式化 {#所有权与并发的形式化}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -299,7 +293,6 @@ fn non_send_sync() {
     // 必须使用 Arc 代替
 }
 ```
-
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -316,11 +309,7 @@ fn non_send_sync() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 > **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
-
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
-
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
-
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**

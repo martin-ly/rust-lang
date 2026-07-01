@@ -97,7 +97,6 @@
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 📚 模块详细映射 {#模块详细映射}
@@ -154,7 +153,6 @@
         ▼
     回到理论...
 ```
-
 ---
 
 ## 🎯 推荐学习路径 {#推荐学习路径}
@@ -172,7 +170,6 @@ C01 → C02 → C03 → C04 → C06 → content/ecosystem/async_runtimes/
                                     ↓
                            content/scenarios/web_app/
 ```
-
 ### 路径 B: 系统开发者 {#路径-b-系统开发者}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -182,7 +179,6 @@ C01 → C02 → C05 → C07 → C10 → content/production/
                                     ↓
                            content/emerging/
 ```
-
 ### 路径 C: 研究者 {#路径-c-研究者}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -192,7 +188,6 @@ C01 → C04 → C11 → docs/research_notes/
                          ↓
                   content/academic/
 ```
-
 ---
 
 ## 🔗 快速链接 {#快速链接}

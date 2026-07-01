@@ -1,5 +1,9 @@
 # C08 Algorithms 文档体系
 
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
+>
+
 欢迎来到 Rust 算法与数据结构的完整文档体系！
 
 **版本**: 2.0.0
@@ -24,12 +28,12 @@
 
 1. **[主 README](../README.md)** - 了解项目概览和安装方法
 2. **[本文档](#-文档体系结构)** - 理解文档组织方式
-3. **[算法快速入门](tier_02_guides/01_算法快速入门.md)** - 学习基础知识
+3. **[算法快速入门](tier_02_guides/01_algorithms_quick_start.md)** - 学习基础知识
 4. **[主索引](00_MASTER_INDEX.md)** - 开始系统学习
 
 ### ⚡ 快速查找
 
-- **找算法** → [01_算法分类参考](tier_03_references/01_算法分类参考.md)
+- **找算法** → [01_算法分类参考](tier_03_references/01_algorithm_categories_reference.md)
 - **学基础** → [tier_02_guides/](tier_02_guides/README.md)
 - **看理论** → [tier_04_advanced/](tier_04_advanced/README.md)
 - **查特性** → [RUST_192_ALGORITHMS_IMPROVEMENTS](RUST_192_ALGORITHMS_IMPROVEMENTS.md)
@@ -47,11 +51,11 @@
 
 包含算法复杂度、数据结构、异步编程、性能优化等实用指南。
 
-- [03_算法复杂度分析](tier_02_guides/03_算法复杂度分析.md) - 复杂度分析
-- [02_数据结构实践](tier_02_guides/02_数据结构实践.md) - 数据结构
+- [03_算法复杂度分析](tier_02_guides/03_algorithm_complexity_analysis.md) - 复杂度分析
+- [02_数据结构实践](tier_02_guides/02_data_structures_practice.md) - 数据结构
 - [05_并行与异步算法](tier_02_guides/05_并行与异步算法.md) - 异步算法
-- [04_性能优化实践](tier_02_guides/04_性能优化实践.md) - 性能优化
-- [04_算法性能参考](tier_03_references/04_算法性能参考.md) - 基准测试
+- [04_性能优化实践](tier_02_guides/04_performance_optimization_practice.md) - 性能优化
+- [04_算法性能参考](tier_03_references/04_algorithm_performance_reference.md) - 基准测试
 
 **[→ 查看完整指南目录](tier_02_guides/README.md)**
 
@@ -126,9 +130,9 @@
 
 ```text
 1. 基础知识
-   ├─ tier_02_guides/01_算法快速入门.md
-   ├─ tier_02_guides/03_算法复杂度分析.md
-   └─ tier_02_guides/02_数据结构实践.md
+   ├─ tier_02_guides/01_algorithms_quick_start.md
+   ├─ tier_02_guides/03_algorithm_complexity_analysis.md
+   └─ tier_02_guides/02_data_structures_practice.md
 
 2. 实践
    ├─ 查看 src/ 中的实现
@@ -138,24 +142,22 @@
 3. 巩固
    └─ 做算法题目（LeetCode 等）
 ```
-
 ### 🚀 进阶路径 (3-4 周)
 
 ```text
 1. 异步编程
    ├─ tier_02_guides/05_并行与异步算法.md
-   ├─ tier_04_advanced/02_并发算法模式.md
+   ├─ tier_04_advanced/02_concurrent_algorithm_patterns.md
    └─ ../../c09_design_pattern/docs/ACTOR_REACTOR_PATTERNS.md
 
 2. 性能优化
-   ├─ tier_02_guides/04_性能优化实践.md
-   ├─ tier_03_references/04_算法性能参考.md
-   └─ tier_04_advanced/04_算法工程实践.md
+   ├─ tier_02_guides/04_performance_optimization_practice.md
+   ├─ tier_03_references/04_algorithm_performance_reference.md
+   └─ tier_04_advanced/04_algorithm_engineering_practice.md
 
 3. 实战项目
    └─ 实现高性能算法库
 ```
-
 ### 🎯 专家路径 (持续学习)
 
 ```text
@@ -168,7 +170,6 @@
 3. 研究创新
    └─ 实现新算法、发表论文
 ```
-
 ---
 
 ## 🔍 如何查找内容
@@ -185,7 +186,7 @@
 
 ### 按类型查找
 
-- **教程**: tier_02_guides/, tier_02_guides/01_算法快速入门.md
+- **教程**: tier_02_guides/, tier_02_guides/01_algorithms_quick_start.md
 - **理论**: tier_04_advanced/
 - **专题**: tier_04_advanced/
 - **参考**: tier_03_references/
@@ -196,14 +197,14 @@
 
 ### 📚 系统学习
 
-1. 从 **tier_02_guides/01_算法快速入门.md** 开始
+1. 从 **tier_02_guides/01_algorithms_quick_start.md** 开始
 2. 按 **[学习路径](#-学习路径推荐)** 逐步学习
 3. 结合 **源代码** 和 **示例** 实践
 4. 完成 **练习** 巩固知识
 
 ### 🔍 快速查阅
 
-1. 使用 **[01_算法分类参考](tier_03_references/01_算法分类参考.md)** 查找算法
+1. 使用 **[01_算法分类参考](tier_03_references/01_algorithm_categories_reference.md)** 查找算法
 2. 查看对应的源码实现
 3. 运行相关示例
 4. 参考文档了解细节
@@ -228,7 +229,6 @@
 **Rust版本**: 1.xx+
 **最后更新**: YYYY-MM-DD
 ```
-
 ### 难度标识
 
 - ⭐ - 初级（适合初学者）

@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -32,7 +31,6 @@ mindmap
       边界检查
       借用检查
 ```
-
 ## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -104,7 +102,6 @@ fn no_use_after_free() {
     // println!("{}", r);
 }
 ```
-
 ## 更多代码示例 {#更多代码示例}
 
 ### 内存布局与对齐 {#内存布局与对齐}
@@ -137,7 +134,6 @@ fn memory_layout() {
     println!("&u8: {} 字节", mem::size_of::<&u8>());
 }
 ```
-
 ### 安全抽象边界 {#安全抽象边界}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -195,7 +191,6 @@ impl Drop for SafeBuffer {
     }
 }
 ```
-
 ### 编译时内存安全检查 {#编译时内存安全检查}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -228,7 +223,6 @@ fn prevent_use_after_free() {
     println!("{}", r);  // 保证 r 仍然有效
 }
 ```
-
 ---
 
 ## 相关研究笔记 {#相关研究笔记}
@@ -257,12 +251,8 @@ fn prevent_use_after_free() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
-
 > **来源: [Coq Reference](https://coq.inria.fr/doc/)**
-
 > **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
-
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
-
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

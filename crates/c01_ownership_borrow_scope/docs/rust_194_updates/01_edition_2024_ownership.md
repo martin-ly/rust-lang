@@ -51,7 +51,6 @@ fn with_capture(data: Vec<i32>) -> impl FnOnce() -> Vec<i32> + use<data> {
     }
 }
 ```
-
 **优势**:
 
 - 明确的捕获语义
@@ -70,7 +69,6 @@ let sum: i32 = numbers.iter()
     .map(|&x| x * 2)      // 自动推断 i32 -> i32
     .sum();
 ```
-
 ---
 
 ## 智能指针改进
@@ -129,7 +127,6 @@ fn main() {
     println!("New port: {}", server_config.port);
 }
 ```
-
 **适用场景**:
 
 - 大型配置结构的部分访问
@@ -163,7 +160,6 @@ fn init_box<T>(uninit: Box<MaybeUninit<T>>, value: T) -> Box<T> {
     }
 }
 ```
-
 ---
 
 ## 内存布局优化
@@ -197,7 +193,6 @@ impl<T> CacheLineAligned<T> {
     }
 }
 ```
-
 ### 3.2 零成本抽象验证
 
 ```rust
@@ -219,7 +214,6 @@ pub fn optimized_filter_map() {
 // 编译器 Explorer (godbolt.org) 验证：
 // 生成的汇编代码与手写循环相当
 ```
-
 ---
 
 ## MaybeUninit 最佳实践
@@ -286,7 +280,6 @@ impl<T, const N: usize> Drop for SafeArray<T, N> {
     }
 }
 ```
-
 ### 4.2 与标准库集成
 
 ```rust
@@ -319,7 +312,6 @@ pub fn read_exact_uninit<R: Read>(reader: &mut R, buf: &mut [MaybeUninit<u8>]) -
     Ok(())
 }
 ```
-
 ---
 
 ## 实战示例
@@ -410,7 +402,6 @@ fn main() {
     assert!(obj2.capacity() >= 1024);
 }
 ```
-
 ### 5.2 线程安全的细粒度锁
 
 ```rust
@@ -460,7 +451,6 @@ impl<K: Eq + std::hash::Hash, V> FineGrainedCache<K, V> {
     }
 }
 ```
-
 ---
 
 ## 相关文档

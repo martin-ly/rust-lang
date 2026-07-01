@@ -67,7 +67,6 @@ graph LR
     E[Rust 库] -->|cbindgen| F[C 头文件]
     G[C++ 头文件] -->|autocxx| H[Rust 绑定]
 ```
-
 **选型建议**：
 
 - 新项目或需要**双向安全保证**时，优先使用 `cxx`。
@@ -100,7 +99,6 @@ sequenceDiagram
     Gen->>Bridge: FFI 边界转换
     Bridge->>Rust: 安全调用 Rust 实现
 ```
-
 ---
 
 ## 4. 场景：将 Rust 库集成到 C++ {#4-场景将-rust-库集成到-c}
@@ -179,7 +177,6 @@ graph TD
     style C fill:#f96,stroke:#333,stroke-width:2px
     style A fill:#9f9,stroke:#333,stroke-width:2px
 ```
-
 ---
 
 ## 8. 与 Rust for Linux 的关系 {#8-与-rust-for-linux-的关系}
@@ -231,7 +228,6 @@ fn main() {
     println!("metadata: {}", client.metadata(blobid));
 }
 ```
-
 ```cpp
 // cpp/include/blob_store.h
 #pragma once
@@ -248,7 +244,6 @@ public:
 
 std::unique_ptr<BlobStoreClient> new_blob_store_client();
 ```
-
 ### 9.2 C++ 调用 Rust {#92-c-调用-rust}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -279,7 +274,6 @@ impl Multiplier {
     }
 }
 ```
-
 ```cpp
 // cpp/src/main.cpp
 #include "rust/cxx.h"
@@ -291,7 +285,6 @@ int main() {
     return 0;
 }
 ```
-
 ---
 
 ## 10. 总结 {#10-总结}

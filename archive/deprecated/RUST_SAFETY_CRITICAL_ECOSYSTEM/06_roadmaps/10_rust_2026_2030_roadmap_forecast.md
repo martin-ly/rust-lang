@@ -1,4 +1,6 @@
-> **归档状态**: 📦 已归档
+> **归档状态**:
+>
+> 📦 已归档
 > **归档日期**: 2026-06-02
 > **归档原因**: 方案废弃，不再维护
 >
@@ -61,7 +63,6 @@
   - [结论](#结论)
     - [关键预测总结](#关键预测总结)
     - [行动建议](#行动建议)
-  - [*免责声明：本路线图基于当前公开信息和趋势分析，实际发展可能因技术突破、市场变化或不可预见因素而有所不同。*](#免责声明本路线图基于当前公开信息和趋势分析实际发展可能因技术突破市场变化或不可预见因素而有所不同)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -675,6 +676,7 @@ WASI 0.3:
 ---
 
 *免责声明：本路线图基于当前公开信息和趋势分析，实际发展可能因技术突破、市场变化或不可预见因素而有所不同。*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -703,19 +705,12 @@ WASI 0.3:
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
 
 ---

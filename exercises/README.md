@@ -40,7 +40,6 @@ exercises/
 ├── tests/                        # 集成测试（预留）
 └── rustlings_style/              # 编译修复练习题（10 道）
 ```
-
 ---
 
 ## 快速开始
@@ -50,7 +49,6 @@ exercises/
 ```bash
 cargo test -p exercises
 ```
-
 ### 按主题运行测试
 
 ```bash
@@ -63,13 +61,11 @@ cargo test -p exercises async_programming::
 # 错误处理
 cargo test -p exercises error_handling::
 ```
-
 ### 运行单道练习的测试
 
 ```bash
 cargo test -p exercises ownership_borrowing::ex01_borrow_checker_fix
 ```
-
 ### 自动化评测
 
 使用提供的脚本生成完整报告：
@@ -83,7 +79,6 @@ cargo test -p exercises ownership_borrowing::ex01_borrow_checker_fix
 ./scripts/exercise-check.sh
 ./scripts/exercise-check.sh --topic concurrency
 ```
-
 ---
 
 ## 练习题清单
@@ -167,7 +162,6 @@ cargo check    # 观察编译错误
 # 修复 src/lib.rs
 cargo test     # 验证修复
 ```
-
 | 编号 | 题目 | 考点 | 难度 |
 | :--- | :--- | :--- | :--- |
 | ex01 | borrow_fix | 借用检查器基本规则 | Easy |

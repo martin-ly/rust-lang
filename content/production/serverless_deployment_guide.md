@@ -43,7 +43,6 @@ Rust 的零成本抽象和极小的运行时使其成为 Serverless 场景的理
 ├─ Azure Functions: Custom Handler + 原生绑定 (预览)
 └─ Cloudflare Workers: worker crate + WASM 目标成熟
 ```
-
 ---
 
 ## ☁️ AWS Lambda
@@ -82,7 +81,6 @@ async fn handler(
     }))
 }
 ```
-
 **Cargo.toml 关键依赖**：
 
 ```toml
@@ -91,7 +89,6 @@ lambda_runtime = "0.13"
 tokio = { version = "1", features = ["macros"] }
 serde_json = "1"
 ```
-
 ### Cargo Lambda 工具链
 
 ```bash
@@ -113,7 +110,6 @@ cargo lambda build --release \
 cargo lambda deploy --region us-east-1 \
     --iam-role arn:aws:iam::ACCOUNT:role/lambda-role
 ```
-
 ---
 
 ## ☁️ Azure Functions
@@ -163,7 +159,6 @@ fn main() {
     // Azure Functions Host 通过 HTTP 调用 Custom Handler
 }
 ```
-
 ### 自定义 Handler
 
 ```json
@@ -185,7 +180,6 @@ fn main() {
   }
 }
 ```
-
 ---
 
 ## ☁️ Cloudflare Workers
@@ -217,7 +211,6 @@ pub async fn main(req: Request, env: Env, _ctx: Context) -> Result<Response> {
     }
 }
 ```
-
 **Cargo.toml**：
 
 ```toml
@@ -233,7 +226,6 @@ worker = "0.5"
 serde_json = "1"
 console_error_panic_hook = "0.1"
 ```
-
 ### Wrangler 部署
 
 ```bash
@@ -251,7 +243,6 @@ cargo install wasm-pack
 wasm-pack build --target web
 wrangler deploy
 ```
-
 ---
 
 ## ⚡ 冷启动优化
@@ -289,7 +280,6 @@ async fn handler(event: LambdaEvent<Value>) -> Result<Value, Error> {
     // ...
 }
 ```
-
 ---
 
 ## 📦 二进制体积优化
@@ -305,7 +295,6 @@ codegen-units = 1      # 单代码生成单元
 panic = "abort"        # 移除 panic 展开
 strip = true           # 移除符号表
 ```
-
 | 技术 | 体积减少 | 代价 |
 |------|----------|------|
 | `opt-level = "z"` | ~20% | 运行速度略降 |
@@ -323,7 +312,6 @@ cargo bloat --release --crates
 cargo install twiggy
 twiggy top -n 10 pkg/worker_bg.wasm
 ```
-
 ---
 
 ## 🌲 决策树：选择哪个平台
@@ -354,7 +342,6 @@ twiggy top -n 10 pkg/worker_bg.wasm
     └─ Azure Functions: 10min (消费) / 无限制 (专用)
     └─ Cloudflare Workers: 30s (免费) / 5min (付费)
 ```
-
 ---
 
 ## 📊 平台对比矩阵

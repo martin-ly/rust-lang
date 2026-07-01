@@ -54,8 +54,7 @@ let s1 = String::from("hello");
 let s2 = s1; // 所有权转移
 // s1 不再有效
 ```
-
-**相关**: [01_theory/06_类型系统理论.md](tier_04_advanced/06_类型系统理论.md)
+**相关**: [01_theory/06_type_system_theory.md](tier_04_advanced/06_type_system_theory.md)
 
 ---
 
@@ -78,8 +77,7 @@ let r2 = &s; // 可以有多个
 let mut s = String::from("hello");
 let r = &mut s; // 可变借用（唯一）
 ```
-
-**相关**: [02_core/02_借用实践指南.md](tier_02_guides/02_借用实践指南.md)
+**相关**: [02_core/02_borrowing_practice_guide.md](tier_02_guides/02_borrowing_practice_guide.md)
 
 ---
 
@@ -103,8 +101,7 @@ let mut y = 5;
 let r = &mut y; // 可变引用
 *r += 1;
 ```
-
-**相关**: [02_core/02_借用实践指南.md](tier_02_guides/02_借用实践指南.md)
+**相关**: [02_core/02_borrowing_practice_guide.md](tier_02_guides/02_borrowing_practice_guide.md)
 
 ---
 
@@ -125,10 +122,9 @@ struct ImportantExcerpt<'a> {
     part: &'a str,
 }
 ```
-
 **生命周期省略规则**: 编译器在某些情况下自动推导
 
-**相关**: [02_core/03_生命周期实践.md](tier_02_guides/03_生命周期实践.md)
+**相关**: [02_core/03_lifetimes_practice.md](tier_02_guides/03_lifetimes_practice.md)
 
 ---
 
@@ -153,8 +149,7 @@ let v1 = vec![1, 2, 3];
 let v2 = v1; // Move
 // v1 不再有效
 ```
-
-**相关**: [02_core/01_所有权快速入门.md](tier_02_guides/01_所有权快速入门.md)
+**相关**: [02_core/01_ownership_quick_start.md](tier_02_guides/01_ownership_quick_start.md)
 
 ---
 
@@ -188,8 +183,7 @@ struct Point {
     y: i32,
 }
 ```
-
-**相关**: [02_core/01_所有权快速入门.md](tier_02_guides/01_所有权快速入门.md)
+**相关**: [02_core/01_ownership_quick_start.md](tier_02_guides/01_ownership_quick_start.md)
 
 ---
 
@@ -214,8 +208,7 @@ let v1 = vec![1, 2, 3];
 let v2 = v1.clone();
 // v1 和 v2 都有效
 ```
-
-**相关**: [02_core/01_所有权快速入门.md](tier_02_guides/01_所有权快速入门.md)
+**相关**: [02_core/01_ownership_quick_start.md](tier_02_guides/01_ownership_quick_start.md)
 
 ---
 
@@ -238,8 +231,7 @@ let v2 = v1.clone();
 
 // s不再有效
 ```
-
-**相关**: [02_core/04_作用域管理实践.md](tier_02_guides/04_作用域管理实践.md)
+**相关**: [02_core/04_scope_management_practice.md](tier_02_guides/04_scope_management_practice.md)
 
 ---
 
@@ -254,7 +246,6 @@ pub trait Drop {
     fn drop(&mut self);
 }
 ```
-
 **示例**:
 
 ```rust
@@ -274,8 +265,7 @@ impl Drop for CustomSmartPointer {
     };
 } // drop自动调用
 ```
-
-**相关**: [02_core/04_作用域管理实践.md](tier_02_guides/04_作用域管理实践.md)
+**相关**: [02_core/04_scope_management_practice.md](tier_02_guides/04_scope_management_practice.md)
 
 ---
 
@@ -301,8 +291,7 @@ let a = Rc::new(5);
 let b = Rc::clone(&a); // 引用计数+1
 println!("count: {}", Rc::strong_count(&a)); // 2
 ```
-
-**相关**: [03_advanced/05_智能指针API参考.md](tier_03_references/05_智能指针API参考.md)
+**相关**: [03_advanced/05_smart_pointer_api_reference.md](tier_03_references/05_smart_pointer_api_reference.md)
 
 ---
 
@@ -325,8 +314,7 @@ use std::cell::RefCell;
 let data = RefCell::new(5);
 *data.borrow_mut() += 1; // 运行时借用检查
 ```
-
-**相关**: [03_advanced/06_高级所有权模式参考.md](tier_03_references/06_高级所有权模式参考.md)
+**相关**: [03_advanced/06_advanced_ownership_patterns_reference.md](tier_03_references/06_advanced_ownership_patterns_reference.md)
 
 ---
 
@@ -352,8 +340,7 @@ impl<T> Deref for Box<T> {
 let x = Box::new(5);
 assert_eq!(*x, 5);
 ```
-
-**相关**: [03_advanced/05_智能指针API参考.md](tier_03_references/05_智能指针API参考.md)
+**相关**: [03_advanced/05_smart_pointer_api_reference.md](tier_03_references/05_smart_pointer_api_reference.md)
 
 ---
 
@@ -378,8 +365,7 @@ fn no_dangle() -> String {
     s // 转移所有权
 }
 ```
-
-**相关**: [04_safety/01_memory_safety.md](tier_03_references/08_内存安全参考.md)
+**相关**: [04_safety/01_memory_safety.md](tier_03_references/08_memory_safety_reference.md)
 
 ---
 
@@ -403,8 +389,7 @@ fn no_dangle() -> String {
     // 使用file
 } // file自动关闭
 ```
-
-**相关**: [04_safety/01_memory_safety.md](tier_03_references/08_内存安全参考.md)
+**相关**: [04_safety/01_memory_safety.md](tier_03_references/08_memory_safety_reference.md)
 
 ---
 
@@ -423,7 +408,7 @@ fn no_dangle() -> String {
 
 - 查看 [示例代码](../examples/README.md)
 - 运行 [测试用例](../tests)
-- 阅读 [最佳实践](tier_01_foundations/04_常见问题.md)
+- 阅读 [最佳实践](tier_01_foundations/04_faq.md)
 
 ---
 

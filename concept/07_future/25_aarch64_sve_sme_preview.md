@@ -65,7 +65,6 @@ SVE 不依赖传统 SIMD 的"剩余元素处理"，而是通过**谓词寄存器
 // ptrue_b32：全部活跃
 // pfalse_b32：全部非活跃
 ```
-
 ### 1.3 SME：从向量到矩阵
 
 SME 在 SVE 基础上增加**二维可伸缩矩阵运算**：
@@ -83,7 +82,6 @@ SME 在 SVE 基础上增加**二维可伸缩矩阵运算**：
 ```rust,ignore
 #![feature(stdarch_aarch64_sve)]
 ```
-
 ### 2.2 跟踪 Issue
 
 | Issue | 标题 | 状态 | 创建日期 |
@@ -126,7 +124,6 @@ pub struct uint8x16_t(pub(crate) [u8; 16]); // NEON，固定 128-bit
 // SVE：类型大小在编译期未知
 pub struct svuint8_t(/* opaque，硬件决定宽度 */);
 ```
-
 这意味着：
 
 - `size_of::<svuint8_t>()` 无法在编译期求值

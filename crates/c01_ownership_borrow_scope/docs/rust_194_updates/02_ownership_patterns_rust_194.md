@@ -51,7 +51,6 @@ fn example_use_syntax() {
     println!("Name: {}", name);
 }
 ```
-
 ### 2.2 在 trait 实现中的应用
 
 ```rust
@@ -82,7 +81,6 @@ impl DataProcessor for StatefulProcessor {
     }
 }
 ```
-
 ---
 
 ## 所有权与异步结合
@@ -135,7 +133,6 @@ impl AsyncBuffer {
     }
 }
 ```
-
 ---
 
 ## 内存高效模式
@@ -192,7 +189,6 @@ impl Write for ZeroCopyBuffer {
     }
 }
 ```
-
 ### 2.5 自定义 Drop 链
 
 ```rust
@@ -255,7 +251,6 @@ macro_rules! tuple_struct {
     };
 }
 ```
-
 ---
 
 ## 错误处理中的所有权
@@ -325,7 +320,6 @@ where
     }
 }
 ```
-
 ---
 
 ## 性能对比

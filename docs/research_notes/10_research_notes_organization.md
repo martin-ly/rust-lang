@@ -1,7 +1,6 @@
 # research_notes 全面梳理 {#research_notes-全面梳理}
 >
 > **概念族**: 元/导航/索引
-
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -102,7 +101,6 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 # 例如：10_00_organization_and_navigation、10_proof_index、10_authoritative_alignment_guide、 {#例如10_00_organization_and_navigation10_proof_index10_authoritative_alignment_guide}
 # 10_international_formal_verification_index、10_authoritative_alignment_gap_matrix 等 {#10_international_formal_verification_index10_authoritative_alignment_gap_matrix-等}
 ```
-
 ---
 
 ## 三、归档约定 {#三归档约定}
@@ -206,7 +204,6 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 >
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 

@@ -59,7 +59,6 @@ rustup default 1.96.0
 rustup component add rustfmt clippy rust-analyzer
 cargo install cargo-update cargo-tree cargo-outdated
 ```
-
 ### 2. 代码现代化 {#2-代码现代化}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -83,7 +82,6 @@ lazy_static! {
 use std::sync::LazyLock;
 static CONFIG: LazyLock<String> = LazyLock::new(|| load_config());
 ```
-
 #### async-trait → 原生async trait {#async-trait-原生async-trait}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -102,7 +100,6 @@ trait Storage {
     async fn read(&self) -> Vec<u8>;
 }
 ```
-
 #### 生成器 → gen关键字 {#生成器-gen关键字}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -117,7 +114,6 @@ trait Storage {
 // 新代码 (Edition 2024)
 gen fn my_gen() -> i32 { yield 1; }
 ```
-
 ### 3. 配置更新 {#3-配置更新}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -143,7 +139,6 @@ correctness = "deny"
 unused_tuple_struct_fields = "warn"
 redundant_guards = "warn"
 ```
-
 ### 4. CI/CD更新 {#4-cicd更新}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -158,7 +153,6 @@ redundant_guards = "warn"
     toolchain: "1.96.0"
     components: rustfmt, clippy
 ```
-
 ---
 
 ## Rust 1.96 迁移章节 {#rust-196-迁移章节}
@@ -193,7 +187,6 @@ rustup update stable
 # 验证版本 {#验证版本}
 rustc --version  # 应显示 1.96.0 或更高
 ```
-
 #### 步骤 2: 依赖更新 {#步骤-2-依赖更新}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -208,7 +201,6 @@ cargo outdated
 # 自动更新兼容版本 {#自动更新兼容版本}
 cargo update --aggressive
 ```
-
 #### 步骤 3: 代码迁移 {#步骤-3-代码迁移}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -224,7 +216,6 @@ unused_tuple_struct_fields = "warn"
 redundant_guards = "warn"
 opaque_hidden_inferred_bound = "warn"
 ```
-
 **3.2 重构 if let 模式**
 
 将嵌套的 `if let` 转换为守卫模式：
@@ -253,7 +244,6 @@ match event {
     _ => {}
 }
 ```
-
 **3.3 更新 Range 类型使用**
 
 ```rust
@@ -268,7 +258,6 @@ for i in 0..=10 {  // 更清晰
     // 处理逻辑
 }
 ```
-
 **3.4 更新 Pin 相关代码**
 
 ```rust
@@ -281,7 +270,6 @@ fn box_future<T>(f: impl Future<Output = T> + 'static) -> Pin<Box<dyn Future<Out
     Box::pin(f)
 }
 ```
-
 #### 步骤 4: 测试验证 {#步骤-4-测试验证}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -302,7 +290,6 @@ cargo doc --no-deps
 # 格式化检查 {#格式化检查}
 cargo fmt --check
 ```
-
 #### 步骤 5: 持续集成更新 {#步骤-5-持续集成更新}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -341,7 +328,6 @@ jobs:
       - name: Test
         run: cargo test --all-features
 ```
-
 ### 常见问题 {#常见问题}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -357,7 +343,6 @@ rustc --version
 # 如果版本低于 1.95，更新工具链 {#如果版本低于-195更新工具链}
 rustup update stable
 ```
-
 #### Q2: RangeInclusive 类型不匹配？ {#q2-rangeinclusive-类型不匹配}
 
 **问题**: `(0..=10)` 与 `Range<i32>` 类型不兼容。
@@ -375,7 +360,6 @@ process(0..=10);
 // 或者明确标注类型
 let range: RangeInclusive<i32> = 0..=10;
 ```
-
 #### Q3: 新的 lint 警告导致 CI 失败？ {#q3-新的-lint-警告导致-ci-失败}
 
 **问题**: `unused_tuple_struct_fields` 等 lint 产生大量警告。
@@ -388,7 +372,6 @@ let range: RangeInclusive<i32> = 0..=10;
 unused_tuple_struct_fields = "allow"
 redundant_guards = "allow"
 ```
-
 #### Q4: Pin 转换失败？ {#q4-pin-转换失败}
 
 **问题**: `Box::pin()` 结果无法转换为 trait object。
@@ -404,7 +387,6 @@ fn create_future() -> Pin<Box<dyn Future<Output = i32> + Send>> {
     Box::pin(async { 42 })
 }
 ```
-
 #### Q5: 元组 coercion 不生效？ {#q5-元组-coercion-不生效}
 
 **问题**: 预期的自动类型转换没有发生。
@@ -416,7 +398,6 @@ let narrow: (i8, i16) = (1, 2);
 // 显式转换
 let wide: (i32, i32) = (narrow.0 as i32, narrow.1 as i32);
 ```
-
 ### 版本兼容性表 {#版本兼容性表}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -448,7 +429,6 @@ cargo update
 # 如果使用了新特性，需要回滚代码更改 {#如果使用了新特性需要回滚代码更改}
 git checkout -- .
 ```
-
 ---
 
 ## 参考资源 {#参考资源}

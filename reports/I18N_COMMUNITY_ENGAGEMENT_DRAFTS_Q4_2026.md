@@ -41,7 +41,6 @@ Links:
 
 Thanks!
 ```
-
 ---
 
 ## 二、Rust Users Forum 英文帖
@@ -69,7 +68,6 @@ Questions:
 
 Looking forward to your thoughts.
 ```
-
 ---
 
 ## 三、Rust 中文社区进度更新帖
@@ -102,7 +100,6 @@ Looking forward to your thoughts.
 
 详细审计报告：reports/I18N_AUDIT_2026_06_28.md
 ```
-
 ---
 
 ## 四、发布节奏

@@ -47,7 +47,6 @@ fn get_file_info(path: &Path) -> std::io::Result<()> {
     Ok(())
 }
 ```
-
 ### 目录遍历 {#目录遍历}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -64,7 +63,6 @@ fn list_files(dir: &str) -> std::io::Result<Vec<String>> {
     Ok(files)
 }
 ```
-
 ---
 
 ## 参考实现 {#参考实现}

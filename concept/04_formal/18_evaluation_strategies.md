@@ -67,7 +67,6 @@ fn strict_example() {
 -- lazy_example = let result = divide 10 0 in 42
 -- 不会 panic！因为 result 从未被使用，0 不会被求值
 ```
-
 ### 2.2 四种核心求值策略
 
 ```text
@@ -78,7 +77,6 @@ Call-by-Reference (CBR) → 传递参数的地址/引用
 
 Plotkin (1975) 的经典论文证明了 CBV 与 CBN 可通过 continuation-passing style (CPS) 相互转换，并奠定了这两种策略在形式语义中的对偶地位。
 ```
-
 **形式化对比**:
 
 | 策略 | 参数传递 | 副作用行为 | 性能特征 |
@@ -116,7 +114,6 @@ fn main() {
     // println!("{}", text); // ❌ 编译错误: value moved
 }
 ```
-
 **Rust 对 CBV 的独特扩展**:
 
 | 类型 | CBV 行为 | 等价于经典 PL |
@@ -143,7 +140,6 @@ fn main() {
     assert_eq!(x, 6); // ✅ 原值被修改
 }
 ```
-
 **与 C++ 引用（Reference）的对比**:
 
 | 维度 | C++ 引用 | Rust 引用 |
@@ -169,7 +165,6 @@ fn main() {
     let _ = true || side_effect();  // side_effect 不会被执行！
 }
 ```
-
 **形式化描述**:
 
 ```text
@@ -181,7 +176,6 @@ fn main() {
   e1 || e2 ≡ if e1 then true else e2
   → e1 为 true 时，e2 不求值（非严格）
 ```
-
 > **与 Haskell 的对比**: Haskell 的函数参数**默认**是非严格的；Rust 的函数参数**默认**是严格的，仅在特定运算符（`&&`, `||`, `?:`）中局部引入非严格性。
 
 ### 3.4 惰性构造：Future 与 Iterator
@@ -197,7 +191,6 @@ let result: Vec<_> = iter.collect(); // 消费时才计算
 let fut = async { println!("lazy"); }; // 未执行
 // fut.await; // await 时才执行
 ```
-
 **与 Haskell 惰性的本质差异**:
 
 | 维度 | Haskell 惰性 | Rust 显式惰性 |
@@ -241,7 +234,6 @@ Rust 明确规定了表达式的求值顺序：
 4. 赋值: 右侧先求值，然后左侧 place expression 被赋值
 5. 复合赋值（+= 等）: 左侧先求值作为 place，右侧再求值
 ```
-
 **与 C/C++ 的对比**:
 
 | 场景 | C/C++ | Rust |
@@ -276,7 +268,6 @@ fn mutate(x: &mut i32) {
 -- mutate :: IORef Int -> IO ()
 -- mutate ref = modifyIORef ref (+1)
 ```
-
 > **形式化命题** [Tier 2]: Rust 的 `&mut T` 在类型系统（Type System）中编码了**局部可变性效果**（local mutation effect），等价于将 CBR 的可变性限制在线性逻辑框架内。
 > **证明草图**: `&mut T` 满足线性逻辑的 `⊗`（张量积）规则：创建 `&mut T` 消耗 `T` 的所有权，归还 `&mut T` 恢复 `T` 的所有权。在此区间内，存储被独占修改，无别名干扰。来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
@@ -302,7 +293,6 @@ fn lazy_solution() {
     }
 }
 ```
-
 > **认知功能**: 此反例展示了 Rust 严格求值的代价。工程上通过 `Fn` 闭包（Closures）、`Iterator` 适配器链、`Future` 等显式惰性机制来弥补。[来源: 💡 原创分析]
 
 ### 6.2 边界测试：求值顺序的确定性验证
@@ -322,7 +312,6 @@ fn push_three(v: &mut Vec<i32>, a: i32, b: i32, c: i32) {
     v.push(a); v.push(b); v.push(c);
 }
 ```
-
 ### 6.3 边界测试：Move 作为 CBV 的线性扩展
 
 ```rust,compile_fail
@@ -341,7 +330,6 @@ fn linear_move() {
 // String s = "hello"; // 实际: s 指向字符串对象
 // String t = s;       // t 指向同一对象（共享）
 ```
-
 > **边界洞察**: 同样的"赋值"语法在三种语言中表示三种截然不同的语义：C++ = 深拷贝，Java = 引用共享，Rust = 所有权转移。这是变量模型差异的最直接体现。
 
 ---
@@ -405,7 +393,6 @@ fn main() {
     println!("{:?}", cfg.data);
 }
 ```
-
 > **修正**:
 >
 > Rust 的默认参数传递是**按值移动**（move semantics）：未实现 `Copy` 的类型在传参时转移所有权。
@@ -435,7 +422,6 @@ fn main() {
     println!("{:?}", collected);
 }
 ```
-
 > **修正**:
 > Rust 的迭代器（Iterator）适配器（`map`、`filter`、`flat_map`）是**惰性求值**的——它们返回新的迭代器，不立即执行。
 > 副作用（`println`、修改外部状态）在迭代器（Iterator）被消费（`collect`、`for_each`、`fold`）时才发生。
@@ -462,7 +448,6 @@ fn main() {
     println!("{}", bad_index);
 }
 ```
-
 > **修正**:
 >
 > Rust 的核心语言是**严格求值**（eager evaluation），但某些抽象引入惰性：
@@ -496,7 +481,6 @@ fn main() {
     let _d = process(c);
 }
 ```
-
 > **修正**:
 > Rust 的**按值传递**（move semantics）对大类型（如 `[u8; 10000]`）可能产生隐式内存复制（memcpy）。
 > 虽然 Rust 的所有权系统保证无双重释放，但性能上：
@@ -527,7 +511,6 @@ const fn foo(x: i32) -> i32 {
 
 fn main() {}
 ```
-
 > **修正**: **Const fn**：
 >
 > 1) 函数体必须是编译期可计算的；

@@ -63,13 +63,11 @@ thread::spawn(move || {
     println!("{}", d); // ❌ Rc<T> 未实现 Send
 });
 ```
-
 ### 编译器错误 {#编译器错误-1}
 
 ```text
 error[E0277]: `Rc<i32>` cannot be sent between threads safely
 ```
-
 ### 修复方案 {#修复方案-6}
 
 - 使用 `Arc<T>` 替代 `Rc<T>`。
@@ -93,13 +91,11 @@ for _ in 0..4 {
     });
 }
 ```
-
 ### 编译器错误 {#编译器错误-1}
 
 ```text
 error[E0277]: `RefCell<i32>` cannot be shared between threads safely
 ```
-
 ### 修复方案 {#修复方案-6}
 
 - 使用 `Mutex<T>` 或 `RwLock<T>`：`Arc<Mutex<i32>>`。
@@ -130,7 +126,6 @@ thread::spawn(move || {
     let _ga = a2.lock().unwrap(); // 与上相反顺序，死锁
 });
 ```
-
 ### 后果 {#后果-2}
 
 运行时线程互相等待，程序挂起。
@@ -154,7 +149,6 @@ async fn bad(data: &Mutex<i32>) {
     drop(guard);
 }
 ```
-
 ### 后果 {#后果-2}
 
 - 锁在线程调度期间被持有，阻塞其他任务，降低并发度。
@@ -184,7 +178,6 @@ fn broken(pin: Pin<&mut SelfRef>) {
     mut_ref.text.push('!'); // ❌ 可能使 ptr 悬垂
 }
 ```
-
 ### 根因 {#根因}
 
 自引用类型要求 `Pin` 之后不再移动其指向的内存，且不能进行可能重新分配的操作。
@@ -212,7 +205,6 @@ impl Drop for AsyncDrop {
     }
 }
 ```
-
 ### 修复方案 {#修复方案-6}
 
 - 使用显式异步析构模式：`async fn dispose(self)`。
@@ -241,7 +233,6 @@ impl Future for BadFuture {
     }
 }
 ```
-
 ### 后果 {#后果-2}
 
 任务永远不会被唤醒，future 永远挂起。
@@ -284,7 +275,6 @@ impl Future for BadFuture {
 
 - [RFC 到反例自动化映射索引](../10_rfc_to_counterexample_mapping.md)
 - [Rust RFCs 官方索引](https://rust-lang.github.io/rfcs/)
-
 - [RFC 2394: async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
 - [RFC 3185: Static async fn in traits](https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html)
 

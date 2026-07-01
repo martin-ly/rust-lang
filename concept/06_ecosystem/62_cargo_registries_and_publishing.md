@@ -75,7 +75,6 @@ Cargo 通过索引找到可用版本，通过 crate 存储下载源码。
 [registries.crates-io]
 protocol = "git"
 ```
-
 > **状态**: Rust 1.96 默认使用 sparse 协议。
 >
 > [来源: Cargo Book — Registry Protocols](https://doc.rust-lang.org/cargo/reference/registries.html#registry-protocols)
@@ -99,7 +98,6 @@ cargo publish --dry-run
 # 4. 正式发布
 cargo publish
 ```
-
 ### 3.2 Cargo.toml 必填字段
 
 ```toml
@@ -113,7 +111,6 @@ authors = ["Your Name <you@example.com>"]
 repository = "https://github.com/you/my-crate"
 rust-version = "1.96.0"
 ```
-
 > **注意**: crates.io 要求 `license` 或 `license-file` 至少一个。
 >
 > [来源: Cargo Book — Publishing on crates.io](https://doc.rust-lang.org/cargo/reference/publishing.html)
@@ -131,7 +128,6 @@ cargo yank --vers 0.1.0
 # 撤销撤回（24 小时内可恢复）
 cargo yank --vers 0.1.0 --undo
 ```
-
 - Yank 不会删除源码或已下载的 crate；
 - 已有 `Cargo.lock` 的项目仍可继续构建；
 - 新项目执行解析时不会再选择 yanked 版本。
@@ -148,7 +144,6 @@ cargo owner --remove github:rust-lang:libs
 # 列出 owner
 cargo owner --list
 ```
-
 ---
 
 ## 五、认证与 Token
@@ -176,14 +171,12 @@ Cargo 支持多种 token 存储方式：
 [registries.my-company]
 index = "sparse+https://crates.my-company.com/git/index/"
 ```
-
 在 `Cargo.toml` 中引用（Reference）：
 
 ```toml
 [dependencies]
 internal-utils = { version = "1.0", registry = "my-company" }
 ```
-
 ### 6.2 Source Replacement（源替换）
 
 可以把 crates.io 替换为镜像或本地路径：
@@ -196,7 +189,6 @@ replace-with = 'my-mirror'
 [source.my-mirror]
 registry = "sparse+https://mirrors.my-company.com/crates.io-index/"
 ```
-
 > **注意**: Source replacement 只影响索引和下载位置，不改变 crate 名称或版本要求。
 >
 > [来源: Cargo Book — Source Replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html)
@@ -215,7 +207,6 @@ registry = "sparse+https://mirrors.my-company.com/crates.io-index/"
 - [ ] 版本号符合 SemVer 规范
 - [ ] 若存在破坏性变更，已升级主版本号
 ```
-
 ---
 
 ## 嵌入式测验

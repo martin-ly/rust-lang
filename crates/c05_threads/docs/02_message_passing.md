@@ -115,7 +115,6 @@ graph TB
     style Channel fill:#4ecdc4,color:#fff
     style Pattern fill:#95e1d3,color:#333
 ```
-
 ### 通道数据流图
 
 ```mermaid
@@ -138,7 +137,6 @@ sequenceDiagram
 
     Note over P1,C: Rust 1.92.0: 优化的通道性能
 ```
-
 ---
 
 ## 📊 通道类型多维对比
@@ -232,7 +230,6 @@ fn main() {
     // ...
 }
 ```
-
 `send` 方法返回一个 `Result<T, E>`，如果接收端已经被丢弃 (dropped)，发送操作会失败并返回一个错误。
 
 ### 2.2. 接收数据：`recv` 与 `try_recv`
@@ -243,7 +240,6 @@ fn main() {
    - 如果通道中有可用的消息，它会立即返回一个 `Ok(value)`。
    - 如果通道为空，当前线程将被阻塞，直到有新消息到来。
    - 如果所有发送端都已被丢弃，并且通道中再也不会有新消息，`recv()` 会返回一个 `Err` 来表示通道已关闭。
-
 2. **`try_recv()`**: 这是一个**非阻塞 (non-blocking)** 方法。
    - 它会立即尝试从通道获取消息，不会阻塞线程。
    - 如果通道中有消息，返回 `Ok(value)`。
@@ -260,7 +256,6 @@ fn main() {
 let received = rx.recv().unwrap();
 println!("主线程：接收到消息 '{}'", received);
 ```
-
 这个例子保证了主线程会等待工作线程完成它的发送任务。
 
 ## 3. 所有权与消息传递的交互
@@ -322,7 +317,6 @@ fn main() {
     }
 }
 ```
-
 当所有 `Sender` 的克隆都被丢弃后，接收端的迭代器 (`for received in rx`) 会优雅地结束。
 
 ## 4. 哲学批判性分析
@@ -368,7 +362,6 @@ graph LR
     style B2 fill:#51cf66,color:#fff
     style B4 fill:#51cf66,color:#fff
 ```
-
 ### 🚀 示例 1: Rust 1.92.0 改进的 MPSC 通道（自 Rust 1.90 引入）
 
 ```rust
@@ -418,7 +411,6 @@ fn main() {
     consumer.join().unwrap();
 }
 ```
-
 ### 🚀 示例 2: 有界通道与背压处理
 
 ```rust
@@ -461,7 +453,6 @@ fn main() {
     consumer.join().unwrap();
 }
 ```
-
 ### 🚀 示例 3: 多生产者模式
 
 ```rust
@@ -520,7 +511,6 @@ fn main() {
     println!("\n所有消息已处理!");
 }
 ```
-
 ### 📊 性能基准对比
 
 | 场景      | Rust 1.89 | Rust 1.90 | 改进    |
@@ -572,7 +562,6 @@ mindmap
         标准库
         成熟库
 ```
-
 ---
 
 ## 📋 快速参考
@@ -623,12 +612,10 @@ mindmap
    - 简单场景: `std::mpsc`
    - 高性能: `crossbeam` 或 `flume`
    - 异步: `tokio::sync`
-
 2. **合理设置缓冲区大小**
    - 无界: 突发负载，注意内存
    - 有界: 稳定负载，实现背压
    - Rendezvous(0): 严格同步
-
 3. **错误处理**
    - 始终处理 `send/recv` 的错误
    - 使用 `Result` 模式传播错误

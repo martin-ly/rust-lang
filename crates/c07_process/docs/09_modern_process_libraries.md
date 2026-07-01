@@ -114,7 +114,6 @@ enum ProcessLibrary {
     Subprocess,
 }
 ```
-
 ## 2. Tokio 异步进程管理
 
 ### 2.1 基础异步进程
@@ -175,7 +174,6 @@ async fn tokio_process_with_timeout() -> Result<(), Box<dyn std::error::Error>> 
     Ok(())
 }
 ```
-
 ### 2.2 高级异步特性
 
 ```rust
@@ -316,7 +314,6 @@ pub struct ProcessConfig {
     pub timeout: Option<Duration>,
 }
 ```
-
 ### 2.3 性能优化策略
 
 ```rust
@@ -415,7 +412,6 @@ impl HighPerformanceTokioPool {
     }
 }
 ```
-
 ## 3. Async-Std [已归档] 进程管理
 
 ### 3.1 标准库风格
@@ -530,7 +526,6 @@ impl AsyncStdProcessManager {
     }
 }
 ```
-
 ### 3.2 与 Tokio 对比
 
 ```rust
@@ -596,7 +591,6 @@ pub struct ComparisonResults {
     pub async_std_max_time: Duration,
 }
 ```
-
 ### 3.3 迁移策略
 
 ```rust
@@ -673,7 +667,6 @@ impl MigrationStrategy {
     }
 }
 ```
-
 ## 4. Duct 进程组合
 
 ### 4.1 管道组合语法
@@ -738,7 +731,6 @@ fn advanced_duct_pipes() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 4.2 复杂命令构建
 
 ```rust
@@ -852,7 +844,6 @@ fn use_duct_command_builder() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 4.3 错误处理机制
 
 ```rust
@@ -947,7 +938,6 @@ async fn use_duct_error_handler() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ## 5. Subprocess 高级控制
 
 ### 5.1 高级进程控制
@@ -1088,7 +1078,6 @@ impl SubprocessManager {
     }
 }
 ```
-
 ### 5.2 跨平台兼容
 
 ```rust
@@ -1232,7 +1221,6 @@ fn use_cross_platform_subprocess() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 5.3 安全性增强
 
 ```rust
@@ -1391,7 +1379,6 @@ fn use_secure_subprocess() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ## 6. 性能基准测试
 
 ```rust
@@ -1560,7 +1547,6 @@ impl ProcessLibraryBenchmark {
     }
 }
 ```
-
 ## 7. 最佳实践
 
 ### 7.1 库选择最佳实践
@@ -1657,7 +1643,6 @@ pub enum RecommendedLibrary {
     Subprocess,
 }
 ```
-
 ### 7.2 性能优化最佳实践
 
 ```rust
@@ -1749,7 +1734,6 @@ pub struct ProcessConfig {
     pub priority: ProcessPriority,
 }
 ```
-
 ## 8. 小结
 
 现代 Rust 进程管理库生态提供了丰富的选择，每个库都有其独特的优势和适用场景：

@@ -74,7 +74,6 @@ fn main() {
     println!("{}", *lazy_value); // 只打印 "Hello, Lazy!"
 }
 ```
-
 #### 2.2 实际应用：配置文件缓存
 
 ```rust
@@ -115,7 +114,6 @@ fn main() {
     println!("API Key: {:?}", config.get("api_key"));
 }
 ```
-
 #### 2.3 实际应用：昂贵计算缓存
 
 ```rust,ignore
@@ -148,7 +146,6 @@ impl DataProcessor {
     }
 }
 ```
-
 ### 3. LazyLock - 线程安全延迟初始化
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -180,7 +177,6 @@ fn main() {
     println!("Main: {:?}", *GLOBAL_CONFIG);
 }
 ```
-
 #### 3.2 实际应用：数据库连接池
 
 ```rust
@@ -216,7 +212,6 @@ fn main() {
     }
 }
 ```
-
 #### 3.3 实际应用：HTTP 客户端
 
 ```rust,ignore
@@ -240,7 +235,6 @@ async fn fetch_data(url: &str) -> Result<String, reqwest::Error> {
         .await
 }
 ```
-
 ### 4. LazyCell vs LazyLock 对比
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -279,7 +273,6 @@ fn use_value() {
     println!("{}", *VALUE);
 }
 ```
-
 ### 模块 3: 概念依赖图
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -304,7 +297,6 @@ graph TD
     style D fill:#bfb,stroke:#333,stroke-width:2px
     style G fill:#bbf,stroke:#333,stroke-width:2px
 ```
-
 #### 承上（前置知识回溯）
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
@@ -402,7 +394,6 @@ fn main() {
     println!("User: {}", ctx.get_user().name);
 }
 ```
-
 ## 模块 6: 反例集
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -418,13 +409,11 @@ use std::cell::RefCell;
 // ❌ 编译错误: RefCell<i32> 不是 Sync
 static BAD: LazyLock<RefCell<i32>> = LazyLock::new(|| RefCell::new(0));
 ```
-
 **编译器错误**:
 
 ```text
 error[E0277]: `RefCell<i32>` cannot be shared between threads safely
 ```
-
 **根因推导**: `LazyLock<T>` 要求 `T: Sync`，因为它允许多线程共享访问。`RefCell<T>` 使用内部可变性但**不是线程安全**的（无原子操作），因此不是 `Sync`。
 
 **修复方案**:
@@ -436,7 +425,6 @@ use std::sync::Mutex;
 // ✅ Mutex<i32> 是 Sync
 static GOOD: LazyLock<Mutex<i32>> = LazyLock::new(|| Mutex::new(0));
 ```
-
 **抽象原则**: **"线程安全边界不可穿透"**：`LazyLock` 是线程安全的容器，但容器内的内容也必须是线程安全的。这是 Rust 类型系统保证并发安全的核心机制。
 
 ---
@@ -460,7 +448,6 @@ fn main() {
     // LazyLock 的内部状态已被破坏
 }
 ```
-
 **根因推导**: `LazyLock` 使用 `OnceLock` 实现，初始化闭包 panic 会导致 `OnceLock` 进入**poisoned 状态**。后续访问会触发新的 panic（`OnceLock` 不缓存 panic，而是每次重新尝试初始化并 panic）。
 
 **修复方案**:
@@ -479,7 +466,6 @@ fn main() {
     }
 }
 ```
-
 ---
 
 #### 反例 3: 循环依赖导致死锁
@@ -503,7 +489,6 @@ fn main() {
     println!("{}", *A);  // 死锁或 panic（取决于平台）
 }
 ```
-
 **根因推导**: `LazyLock` 的初始化是**惰性**的且通常持有锁。如果 `A` 的初始化闭包访问 `B`，而 `B` 的初始化又访问 `A`，形成循环依赖，可能导致死锁（线程 A 持有 A 的锁等待 B，线程 B 持有 B 的锁等待 A）。
 
 **修复方案**:
@@ -527,7 +512,6 @@ fn init_config() {
     CONFIG.get_or_init(|| (42, 100));
 }
 ```
-
 ---
 
 ## 🗺️ 模块 7: 思维表征套件
@@ -569,7 +553,6 @@ fn init_config() {
        └─► 不需要延迟初始化
            └── 直接使用值或 const
 ```
-
 ### 表征 B: 延迟初始化性能对比矩阵
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -618,7 +601,6 @@ LazyLock<T> / OnceLock<T> 状态机
 • Initializing 状态阻塞其他线程
 • 无 Initialized → Uninitialized 转换（不可逆）
 ```
-
 ---
 
 ## ⚠️ 常见陷阱
@@ -695,7 +677,6 @@ fn main() {
     println!("{}", memo.get(&5)); // 从缓存读取
 }
 ```
-
 </details>
 
 ## 📚 模块 8: 国际化对齐
@@ -798,9 +779,7 @@ fn main() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **`LazyLock<T>` 为什么要求 `T: Sync`？** 如果 `T` 不是 `Sync`，有哪些替代方案？
-
 2. **`LazyLock` 的初始化闭包 panic 后，为什么后续访问会重复 panic 而不是返回错误？** 这种设计权衡的优缺点是什么？
-
 3. **`LazyCell` 基于 `RefCell` 实现，而 `LazyLock` 基于 `OnceLock` 实现。这两种内部机制在"首次访问的竞争条件"处理上有何根本差异？**
 
 ### 代码修复题
@@ -819,7 +798,6 @@ fn increment() {
     COUNTER.set(COUNTER.get() + 1);
 }
 ```
-
 <details>
 <summary>参考答案</summary>
 
@@ -837,7 +815,6 @@ fn increment() {
     COUNTER.fetch_add(1, Ordering::Relaxed);
 }
 ```
-
 </details>
 
 **题 2**: 以下代码试图实现配置热重载，但有问题。请分析并给出更合适的方案：
@@ -854,7 +831,6 @@ fn reload_config() {
     // 但 LazyLock 不可变！
 }
 ```
-
 <details>
 <summary>参考答案</summary>
 
@@ -877,7 +853,6 @@ fn get_config() -> String {
     CONFIG.read().unwrap().clone()
 }
 ```
-
 或使用 `arc-swap` crate 实现无锁热重载：
 
 ```rust,ignore
@@ -891,7 +866,6 @@ fn reload_config() {
     CONFIG.store(Arc::new(content));
 }
 ```
-
 </details>
 
 ### 开放设计题

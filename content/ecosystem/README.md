@@ -4,6 +4,13 @@
 > **覆盖**: Web框架、数据库、序列化、测试、监控等核心领域
 > **版本**: 跟随最新稳定版本
 > **状态**: 🔄 持续扩充
+>
+> **Canonical 说明**: 以下主题的权威深度解析已迁移到 `knowledge/06_ecosystem/`：
+>
+> - Axum → [`knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md`](../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md)
+> - Tokio → [`knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md`](../../knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md)
+> - Sea-ORM → [`knowledge/06_ecosystem/databases/01_sea_orm_deep_dive.md`](../../knowledge/06_ecosystem/databases/01_sea_orm_deep_dive.md)
+> - SQLx → [`knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md`](../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md)
 
 ---
 
@@ -109,7 +116,6 @@ async fn get_user(
         .map_err(|_| StatusCode::NOT_FOUND)
 }
 ```
-
 **核心设计**:
 
 - 基于 Tower 的服务抽象
@@ -166,7 +172,6 @@ async fn main() -> std::io::Result<()> {
     .await
 }
 ```
-
 **核心设计**:
 
 - Actor 模型架构
@@ -217,7 +222,6 @@ fn rocket() -> _ {
         .mount("/", routes![create_user, get_user])
 }
 ```
-
 **核心设计**:
 
 - 宏驱动的声明式路由
@@ -278,7 +282,6 @@ async fn transfer_funds(
     Ok(())
 }
 ```
-
 **核心优势**:
 
 - 编译时 SQL 验证
@@ -330,7 +333,6 @@ fn create_user(conn: &mut PgConnection, name: &str, email: &str) -> QueryResult<
         .get_result(conn)
 }
 ```
-
 ---
 
 ### Sea-ORM
@@ -361,7 +363,6 @@ async fn find_user_with_posts(db: &DatabaseConnection, user_id: i32) -> Result<O
         .map(|result| result.into_iter().next())
 }
 ```
-
 ---
 
 ## ⚡ 异步运行时
@@ -416,7 +417,6 @@ async fn task_management_example() {
     }
 }
 ```
-
 **性能调优**:
 
 - 工作线程数 = CPU 核心数
@@ -457,7 +457,6 @@ mod custom_format {
     }
 }
 ```
-
 ---
 
 ## 🧪 测试工具
@@ -492,7 +491,6 @@ mod tests {
     }
 }
 ```
-
 ---
 
 ## 📈 监控与可观测性
@@ -527,7 +525,6 @@ fn init_tracing() {
         .init();
 }
 ```
-
 ---
 
 ## 🔗 参考资源

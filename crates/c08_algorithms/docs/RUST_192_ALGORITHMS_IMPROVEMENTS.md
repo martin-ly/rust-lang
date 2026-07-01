@@ -82,7 +82,6 @@ impl<T> CircularBuffer<T> {
     }
 }
 ```
-
 ---
 
 ## NonZero::div_ceil 在算法中的应用
@@ -106,7 +105,6 @@ pub fn calculate_pages(total_items: usize, items_per_page: NonZeroUsize) -> usiz
     total.div_ceil(items_per_page).get()
 }
 ```
-
 ---
 
 ## 迭代器方法特化在算法中的应用
@@ -120,7 +118,6 @@ pub fn compare_arrays<T: PartialEq>(arr1: &[T], arr2: &[T]) -> bool {
     arr1.iter().eq(arr2.iter())
 }
 ```
-
 ---
 
 ## 实际应用示例
@@ -184,7 +181,6 @@ impl<K: Ord, V> Cache<K, V> {
     }
 }
 ```
-
 ### 性能优势
 
 - **减少查找**: 避免先查找再插入的开销
@@ -205,7 +201,6 @@ Rust 1.92.0 中，即使使用 `-Cpanic=abort` 选项，展开表也会默认启
 [profile.release]
 panic = "abort"  # 即使使用 abort，展开表也会启用
 ```
-
 ### 优势
 
 - **更好的调试体验**: 即使使用 `panic = "abort"`，也能获得完整的回溯信息
@@ -234,7 +229,6 @@ where
     }
 }
 ```
-
 ### 性能影响
 
 - **减少开销**: 不再访问线程本地存储，减少函数调用开销

@@ -108,7 +108,6 @@ fn drop_and_use() {
     drop(s);
 }
 ```
-
 > **认知功能**: 词法生命周期（Lifetimes）的**核心问题**是过度保守——它假设借用一直有效到作用域结束，而非实际最后一次使用。
 > [来源: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs//2094-nll.html)]
 
@@ -139,7 +138,6 @@ NLL (Non-Lexical Lifetimes) 的核心思想:
   ├── 2018 Edition 默认启用
   └── 所有 Edition 最终都迁移到 NLL
 ```
-
 > **NLL 洞察**: NLL 是 Rust **借用检查器的第一次重大演进**——它将理论上的仿射类型系统（Type System）变得更实用，同时不牺牲安全性。
 > [来源: [The Rust Compiler Guide — NLL](https://rustc-dev-guide.rust-lang.org/borrow_check/region_inference.html)]
 
@@ -177,7 +175,6 @@ Polonius: 下一代借用检查器
   ├── 循环中的更精确分析
   └── 某些当前需要 unsafe 的安全模式
 ```
-
 > **Polonius 洞察**: Polonius 代表了借用检查从**专门算法**向**通用约束求解**的转变——它为未来的进一步精确化奠定了基础。
 > [来源: [Polonius Repository](https://github.com/rust-lang/polonius)]
 
@@ -226,7 +223,6 @@ NLL 的数据流分析:
   ├── 旧: 基于 AST 的词法作用域
   └── 新: 基于 MIR 的数据流分析
 ```
-
 > **实现洞察**: NLL 使用 **MIR 级别的数据流分析**——这是 Rust 编译器内部表示的成熟应用。
 > [来源: [rustc-dev-guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html)]
 
@@ -262,7 +258,6 @@ Polonius 的约束模型:
   ├── 增量计算（只需重新分析变化的部分）
   └── 易于扩展新规则
 ```
-
 > **约束洞察**: Polonius 使用 **Datalog** 表达借用约束——这是一种**声明式逻辑编程语言**，使约束求解更加清晰和可扩展。
 > [来源: [Polonius — Datalog Approach](https://github.com/rust-lang/polonius/blob/master/README.md)]
 
@@ -302,7 +297,6 @@ Polonius 的约束模型:
   ├── Polonius 可能进一步优化（增量求解）
   └── 但代码质量提升值得代价
 ```
-
 > **演进洞察**: 借用检查器的**三代演进**展示了 Rust **"不妥协安全，但持续改善 ergonomics"**的设计哲学。
 > [来源: [Rust Compiler Team — Polonius](https://rust-lang.github.io/compiler-team/working-groups/polonius/)]
 
@@ -340,7 +334,6 @@ NLL / Polonius 影响的代码模式:
   ├── use(x, y);
   └── // NLL 后更灵活
 ```
-
 > **影响矩阵**: NLL 主要改善了**"提前释放"**和**"条件借用"**模式，Polonius 将进一步改善**循环**和**交叉借用**。
 > [来源: [NLL Stabilization Report](https://github.com/rust-lang/rust/issues/43234)]
 
@@ -364,7 +357,6 @@ graph TD
     style ACCEPT fill:#c8e6c9
     style CONSERVATIVE fill:#fff3e0
 ```
-
 > **认知功能**: NLL 和 Polonius **只放宽"过度保守"**——它们不会接受任何不安全的代码。
 > [来源: [RFC 2094 — NLL Safety](https://rust-lang.github.io/rfcs//2094-nll.html#safety)]
 
@@ -404,7 +396,6 @@ graph TD
 ├── Polonius 可能跨 Edition 启用
 └── 无用户可见的 Edition 依赖
 ```
-
 > **边界要点**: NLL/Polonius 的边界主要与**仍保守的情况**、**编译时间**、**unsafe 交互**、**教学**和 **Edition** 相关。
 > [来源: [Polonius Limitations](https://github.com/rust-lang/polonius/blob/master/README.md)]
 
@@ -449,7 +440,6 @@ graph TD
   ✅ 根据场景选择工具
      // 借用、Rc、Arc 各有适用场景
 ```
-
 > **陷阱总结**: NLL/Polonius 的陷阱主要与**过度期望**、**drop 顺序**、**unsafe 边界**、**Edition 差异**和**过度优化**相关。
 > [来源: [Common NLL Misconceptions](https://github.com/rust-lang/rust/issues/43234)]
 
@@ -465,7 +455,6 @@ fn nll_scope_limitation() {
     data.push(4); // E0502
 }
 ```
-
 > **修正**: NLL（Non-Lexical Lifetimes）已将借用分析从"作用域级"精确到"使用点级"。但如果共享借用 `r` 在可变借用（Mutable Borrow） `data.push()` 之后仍被使用，编译器仍会拒绝。
 
 ```rust,ignore
@@ -479,7 +468,6 @@ fn polonius_dataflow() {
     *y += 1;
 }
 ```
-
 > **修正**: Polonius 是下一代借用检查器，支持基于数据流的精确分析。当前 stable 仍使用传统 NLL，对条件分支中的借用模式更严格。
 
 ```rust,ignore
@@ -493,7 +481,6 @@ fn drop_order_nll() {
     drop(data);
 }
 ```
-
 > **修正**: NLL 下，可变借用（Mutable Borrow） `r` 的生命周期精确到其最后一次使用。`drop(r)` 显式结束借用后，`data` 才能被移动/释放。
 
 ---
@@ -522,7 +509,6 @@ fn main() {
     println!("{:?}", data);
 }
 ```
-
 ### 编译验证示例
 
 ```rust
@@ -534,7 +520,6 @@ fn main() {
     println!("{:?}", data);
 }
 ```
-
 ```rust
 fn main() {
     let mut s = String::from("hello");
@@ -543,7 +528,6 @@ fn main() {
     drop(s);
 }
 ```
-
 ## 相关概念文件
 
 - [Borrowing](../01_foundation/02_borrowing.md) — 借用系统
@@ -599,7 +583,6 @@ fn main() {
     println!("{}", p);
 }
 ```
-
 > **修正**: Polonius 是 Rust 的下一代借用检查器，基于**数据流分析**而非 NLL 的**基于位置的分析**。
 > Polonius 能精确追踪引用（Reference）的"最后使用点"：
 > 上述代码中 `r` 在 `*r = 1` 后不再使用，因此 `p = &x` 应合法。
@@ -625,7 +608,6 @@ fn main() {
     println!("{}", x);
 }
 ```
-
 > **修正**:
 > NLL（Non-Lexical Lifetimes）已大幅改进 Rust 的借用检查：引用（Reference）的生命周期基于**最后使用点**而非词法作用域。
 > 但 NLL 仍**保守**：某些情况下编译器无法证明安全，选择拒绝。
@@ -658,7 +640,6 @@ let y = &x;
 println!("{}", y);
 x.push_str(" world");
 ```
-
 - A. 可变借用和不可变借用（Immutable Borrow）永远不能共存
 - B. 旧借用检查器按词法作用域判断生命周期，`y` 被认为直到块结束才失效
 - C. `x.push_str` 需要独占所有权（Ownership）
@@ -771,7 +752,6 @@ if condition {
     *y += 1;
 }
 ```
-
 NLL 有时会因为保守分析而拒绝这类代码（尤其在更复杂的变体中），Polonius 通过更精确的数据流分析能接受。
 
 选项 A 和 C 无论哪一代借用检查器都会拒绝，因为它们违反核心借用规则。

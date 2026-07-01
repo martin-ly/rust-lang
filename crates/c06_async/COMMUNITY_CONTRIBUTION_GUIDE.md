@@ -75,24 +75,20 @@ cargo install cargo-audit cargo-deny cargo-criterion
 # 运行测试确保环境正常
 cargo test
 ```
-
 #### 贡献流程
 
 1. **Fork 仓库**
    - 在 GitHub 上 Fork 主仓库
    - 克隆您的 Fork 到本地
-
 2. **创建功能分支**
 
    ```bash
    git checkout -b feature/your-feature-name
    ```
-
 3. **开发新功能**
    - 遵循代码规范（见下方）
    - 添加适当的测试
    - 更新相关文档
-
 4. **运行测试**
 
    ```bash
@@ -102,14 +98,12 @@ cargo test
    cargo fmt --check
    cargo audit
    ```
-
 5. **提交更改**
 
    ```bash
    git add .
    git commit -m "feat: 添加新的异步特性示例"
    ```
-
 6. **创建 Pull Request**
    - 推送到您的 Fork
    - 创建 Pull Request 到主仓库
@@ -130,12 +124,10 @@ cargo test
    - 为公共函数和结构体添加文档注释
    - 包含使用示例
    - 解释参数和返回值
-
 2. **教程文档**
    - 编写异步编程教程
    - 创建最佳实践指南
    - 提供常见问题解答
-
 3. **示例代码**
    - 添加实用的代码示例
    - 演示不同的使用场景
@@ -168,7 +160,6 @@ pub struct AsyncResourceManager {
     // ...
 }
 ````
-
 ### 3. 问题报告
 
 #### 报告 Bug
@@ -179,12 +170,10 @@ pub struct AsyncResourceManager {
    - Rust 版本
    - 操作系统
    - 依赖版本
-
 2. **重现步骤**
    - 详细的重现步骤
    - 最小可重现示例
    - 预期行为和实际行为
-
 3. **附加信息**
    - 错误日志
    - 相关截图
@@ -198,12 +187,10 @@ pub struct AsyncResourceManager {
    - 详细的功能说明
    - 使用场景和用例
    - 预期效果
-
 2. **技术考虑**
    - 实现复杂度评估
    - 与现有功能的兼容性
    - 性能影响分析
-
 3. **替代方案**
    - 其他可能的实现方式
    - 相关的外部库
@@ -252,7 +239,6 @@ crates/c06_async/
 └── benches/              # 基准测试
     └── performance_benchmarks.rs
 ```
-
 ## 开发工具
 
 ### 推荐 IDE 配置
@@ -267,7 +253,6 @@ crates/c06_async/
   "rust-analyzer.rustfmt.extraArgs": ["--edition", "2021"]
 }
 ```
-
 #### IntelliJ IDEA / CLion
 
 - 安装 Rust 插件
@@ -293,7 +278,6 @@ cargo fmt --check                    # 格式化检查
 cargo audit                          # 安全审计
 cargo deny check                     # 许可证检查
 ```
-
 ## 社区准则
 
 ### 行为准则

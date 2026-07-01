@@ -16,7 +16,6 @@
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Ecosystem Tower](05_formal_ecosystem_tower.md) · [Performance Optimization](15_performance_optimization.md)
 > **主要来源**: [CLRS — Introduction to Algorithms] · [LeetCode] · [Codeforces] · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [VeriContest arXiv 2026-05-08] · [Kani Docs] · [CSES Problem Set]
-
 >
 > **来源**: [std::collections](https://doc.rust-lang.org/std/collections/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/) · [The Algorithms — Rust](https://github.com/TheAlgorithms/Rust)
 ---
@@ -33,10 +32,8 @@
 
 > **[来源: CLRS — Introduction to Algorithms, 4th Edition]** An algorithm is any well-defined computational procedure that takes some value, or set of values, as input and produces some value, or set of values, as output.
 > **来源**: <https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/>
-
 > **来源: [Wikipedia — Competitive Programming](https://en.wikipedia.org/wiki/Competitive_Programming)** Competitive programming is a mind sport usually held over the internet or a local network, involving participants trying to program according to provided specifications.
 > **来源**: <https://en.wikipedia.org/wiki/Competitive_programming>
-
 > **[来源: VeriContest arXiv 2026-05-08]** VeriContest: A Benchmark of 946 LeetCode and Codeforces Problems for Rust + Verus Formal Verification.
 > **来源**: <https://arxiv.org/abs/2026.05.08> (概念引用（Reference）)
 
@@ -44,7 +41,6 @@
 
 ## 认知路径（Cognitive Path）
 >
-
 > **学习递进**: 从"Rust 能不能打竞赛"的直觉质疑，深入到"所有权（Ownership）模型如何在不牺牲性能的前提下消除算法实现中的内存错误"的形式化理解。
 
 ### 第 1 步：为什么 Rust 在算法竞赛中被低估？
@@ -141,7 +137,6 @@ pub fn par_merge_sort<T: Ord + Send + Clone>(arr: &mut [T]) {
     // 合并逻辑...
 }
 ```
-
 > 来源: [Rust Standard Library] `split_at_mut` 返回 `(&mut [T], &mut [T])`，编译器通过借用（Borrowing）检查器保证两段切片（Slice）生命周期（Lifetimes）互斥。
 > [来源: [Rayon Docs](https://docs.rs/rayon)] Rayon 的 `join` 在编译期要求闭包（Closures）满足 `Send`，将数据竞争转化为类型错误。
 
@@ -178,7 +173,6 @@ pub fn dijkstra(graph: &[Vec<(usize, u64)>], start: usize) -> Vec<u64> {
     dist
 }
 ```
-
 > [来源: [CLRS] §16, §24] Dijkstra 的正确性依赖于非负权重的贪心选择性质；负权边会导致贪心失败，需改用 Bellman-Ford。
 
 **贪心失败反例**:
@@ -238,7 +232,6 @@ pub fn tsp(dist: &[Vec<u64>]) -> u64 {
     (1..n).map(|i| dp[full_mask][i] + dist[i][0]).min().unwrap_or(u64::MAX)
 }
 ```
-
 > [来源: [LeetCode 416. Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/)] 0/1 背包的 Rust 实现需注意 `usize` 的饱和加法与溢出处理。
 
 ---
@@ -316,7 +309,6 @@ pub fn topological_sort(graph: &[Vec<usize>], indegree: &mut [usize]) -> Option<
     if result.len() == n { Some(result) } else { None }
 }
 ```
-
 > [来源: [CLRS] §21, §22] 并查集路径压缩的摊还复杂度为 $O(\alpha(n))$，其中 $\alpha$ 为反阿克曼函数，实际可视为常数。
 
 ---
@@ -384,7 +376,6 @@ impl Trie {
     }
 }
 ```
-
 > [来源: [LeetCode 208. Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/)] 数组实现 Trie 的空间复杂度为 $O(N \cdot L)$，查询时间为 $O(L)$。
 
 ---
@@ -430,7 +421,6 @@ pub fn coordinate_compress(coords: &[i64]) -> Vec<usize> {
     coords.iter().map(|&x| sorted.binary_search(&x).unwrap()).collect()
 }
 ```
-
 > [来源: [Codeforces Geometry Tag](https://codeforces.com/problemset?tags=geometry)] 整数坐标下的凸包实现应避免浮点运算，全部使用交叉乘积判定方向。
 
 ---
@@ -472,7 +462,6 @@ impl<R: BufRead> FastScanner<R> {
     }
 }
 ```
-
 > [来源: [Rust Competitive Programming Guide](https://github.com/namanlp/rustp)] 竞赛编程中 I/O 优化是 TLE 的第一道防线；`BufRead::read_until` 比逐字符解析快 5-10 倍。
 
 ### 3.2 零分配算法
@@ -503,7 +492,6 @@ fn partition(arr: &mut [i32]) -> usize {
     arr.swap(i, len - 1); i
 }
 ```
-
 ### 3.3 位运算技巧
 
 ```rust
@@ -524,7 +512,6 @@ pub fn bit_tricks() {
     }
 }
 ```
-
 > [来源: [LeetCode 191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)] `count_ones()` 编译为 CPU `POPCNT` 指令，O(1) 硬件级性能。
 
 ### 3.4 模运算安全
@@ -554,7 +541,6 @@ pub fn pow_mod(mut base: u64, mut exp: u64) -> u64 {
     res
 }
 ```
-
 > [来源: [Codeforces MOD Operations](https://codeforces.com/blog/entry/72527)] 竞赛编程中 `u128` 中间值是防止 `u64` 乘法溢出的标准做法。
 
 ---
@@ -581,7 +567,6 @@ pub fn mat_mul<const N: usize, const M: usize, const P: usize>(
 }
 // let c = mat_mul(&a, &b); // 编译期推断维度，维度不匹配则编译错误
 ```
-
 > [来源: [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html)] Const generics 稳定于 Rust 1.51，允许数组大小编码进类型。
 
 ### 4.2 Type-Level 自然数（概念性）
@@ -600,7 +585,6 @@ impl<T: Fib + 'static> Fib for S<S<T>> where S<T>: Fib {
 }
 // <N2 as Fib>::VALUE == 1
 ```
-
 > [来源: [typenum crate](https://docs.rs/typenum)] 生产环境推荐使用 `typenum`，已广泛应用于 `nalgebra` 等科学计算库。
 
 ### 4.3 Iterator `size_hint` 作为复杂度提示
@@ -619,7 +603,6 @@ impl Iterator for RangeIter {
 }
 impl ExactSizeIterator for RangeIter {}
 ```
-
 > [来源: [Rust Standard Library — Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] `size_hint` 允许下游优化（如 `collect` 预分配容量），是零成本抽象的组成部分。
 
 ---
@@ -646,7 +629,6 @@ impl ExactSizeIterator for RangeIter {}
 // ensures:  返回索引处值等于 target，或 None 时全不等于 target
 // invariant: left/right 边界维护搜索区间外的否定条件
 ```
-
 ### 5.2 Kani 验证
 
 ```rust
@@ -669,7 +651,6 @@ mod verification {
     }
 }
 ```
-
 > [来源: [AWS Kani Docs](https://model-checking.github.io/kani/)] Kani 使用 CBMC 作为后端，支持符号执行验证有界程序属性。
 
 ### 5.3 何时值得形式验证？
@@ -739,7 +720,6 @@ pub fn iterative_dfs(graph: &[Vec<usize>], start: usize) -> Vec<usize> {
     order
 }
 ```
-
 ### 7.2 `usize` / `isize` 的平台依赖性
 
 ```rust
@@ -753,7 +733,6 @@ let x: u64 = 1 << 40;
 let n: usize = 100;
 let idx = n as i32;
 ```
-
 > [来源: [Rust Reference — Integer Types](https://doc.rust-lang.org/reference/types/numeric.html)] `usize` 宽度取决于目标平台指针大小；竞赛编程中处理大数时应显式使用 `u64` / `i64`。
 
 ### 7.3 浮点精度陷阱
@@ -768,7 +747,6 @@ if (a - 0.3).abs() < EPS { /* 视为相等 */ }
 
 // ✅ 更好：整数运算替代浮点（坐标乘以 1e6 转为 i64）
 ```
-
 ### 7.4 过度 `clone()` 导致 TLE
 
 ```rust,ignore
@@ -779,7 +757,6 @@ let mut temp = nums.clone(); // O(n) 每次迭代
 let mut temp = Vec::with_capacity(n);
 temp.extend_from_slice(&nums[..]);
 ```
-
 > [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)] 内存分配是竞赛编程中的主要性能瓶颈；`clone()` 的隐式成本常被低估。
 
 ---
@@ -848,7 +825,6 @@ fn main() {
     dfs(1000); // ✅ 安全深度
 }
 ```
-
 > **修正**: Rust 的默认线程栈大小（Linux 上 8MB）对竞赛编程中的深度递归可能不足。栈溢出在 Rust 中是 panic（可捕获）而非段错误（SIGSEGV），但这仍导致程序终止。解决方案：1) 将递归改写为迭代（显式栈 `Vec`）；2) 使用 `#![recursion_limit = "256"]` 增加宏（Macro）递归限制（不影响运行时递归）；3) 在 `main` 中使用 `std::thread::Builder::new().stack_size(64 * 1024 * 1024).spawn(...)` 增加栈大小。竞赛编程中，Rust 的栈溢出保护比 C++ 更友好（panic 信息明确），但迭代写法仍是最佳实践。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/thread/struct.Builder.html)]
 
 ### 10.2 边界测试：`Vec` 索引越界与 `get` 的安全替代（编译错误/运行时 panic）
@@ -866,7 +842,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**: Rust 的索引操作 `v[i]` 在越界时 panic（与 C 的未定义行为、Python 的 `IndexError` 类似）。但 Rust 提供 `get` 方法返回 `Option<&T>`，允许安全处理越界情况。竞赛编程中，输入数据的不确定性（如边界条件、空数组）要求防御式编程：`v.get(i).copied().unwrap_or(0)` 是常见模式。Rust 的边界检查在 debug 模式下完全启用，release 模式下编译器可能优化掉已证明安全的检查（如迭代器（Iterator）遍历）。这与 C++ 的 `vector::at()`（越界抛异常）或 `operator[]`（无检查）不同——Rust 在安全和性能间提供明确选择：`[]` 快速但 panic，`get` 安全但略慢。来源: [The Rust Programming Language] · 来源: [Rust Standard Library]
 
 ### 10.3 边界测试：自定义排序的比较器错误（编译错误/运行时 panic）
@@ -883,7 +858,6 @@ fn main() {
     });
 }
 ```
-
 > **修正**: `sort_by` 要求比较器实现**严格弱序**（strict weak ordering）：1) 反自反性（`a < a` 为假）；2) 非对称性（`a < b` ⇒ `b < a` 为假）；3) 传递性（`a < b` ∧ `b < c` ⇒ `a < c`）。违反这些性质的比较器导致 `sort` panic（debug 模式）或产生未定义顺序（release 模式）。常见错误：比较浮点数时未处理 `NaN`（`NaN < x` 和 `NaN > x` 都为假，破坏严格弱序）。安全替代：`partial_cmp` 返回 `Option<Ordering>`，`NaN` 时返回 `None`；`sort_by` 的闭包（Closures）必须返回 `Ordering`（非 `Option`），因此需要显式处理 `NaN`（如映射到特定值或使用 `total_cmp`）。这与 C++ 的 `std::sort`（同样要求严格弱序，违反时 UB）类似，但 Rust 在 debug 模式下检查并 panic。来源: [Rust Standard Library] · 来源: [The Rust Programming Language]
 
 ### 10.4 边界测试：大数组栈分配导致的编译错误
@@ -895,7 +869,6 @@ fn main() {
     println!("{}", huge[0]);
 }
 ```
-
 > **修正**: Rust 的数组 `[T; N]` 在栈上分配，大小为 `N * size_of::<T>()`。过大的数组导致栈溢出（运行时）或编译器/链接器错误（编译时）。LLVM 对单个栈帧大小有限制（通常数 GB），但操作系统线程栈大小通常仅 8MB。竞赛编程中常见陷阱：使用 `let dist = [[0i64; 1000]; 1000];`（8MB，接近栈限制），在递归函数中分配会导致栈溢出。解决方案：1) 使用 `Vec`（堆分配）；2) 使用 `static` 或 `thread_local!`；3) 增加线程栈大小（`thread::Builder::new().stack_size(...)`）。Rust 不限制数组大小本身，但运行时栈大小是硬约束。这与 C 的 `int arr[1000000];`（编译通过，运行时栈溢出或段错误）类似，但 Rust 的 panic 信息更友好。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [Rust Reference — Array Types](https://doc.rust-lang.org/reference/types/array.html)]
 
 ### 10.6 边界测试：`binary_search` 的比较器一致性（运行时 panic/逻辑错误）
@@ -916,7 +889,6 @@ fn main() {
     // v.binary_search(&4); // 默认升序，结果未定义
 }
 ```
-
 > **修正**: `slice::binary_search` 要求切片**按相同顺序排序**（默认升序）。若切片无序或使用不同比较器排序，结果是未定义的（可能返回错误位置、可能 panic）。`binary_search_by` 允许自定义比较器，但比较器必须与排序时使用的比较器一致。这与 C++ 的 `std::binary_search`（同样要求有序，否则 UB）或 Python 的 `bisect`（同样要求有序）相同——二分查找的前提条件。竞赛编程中常见错误：1) 忘记先 `sort`；2) 降序排序后用默认 `binary_search`；3) 自定义比较器与排序不一致。Rust 在 debug 模式下不检查有序性（检查成本 O(n)，抵消二分查找的优势），依赖开发者保证。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.slice.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.7 边界测试：`BinaryHeap` 的 `peek_mut` 与忘记 `drop`（逻辑错误/UB）
@@ -940,7 +912,6 @@ fn main() {
     assert_eq!(heap.peek(), Some(&0));
 }
 ```
-
 > **修正**: `BinaryHeap::peek_mut()` 返回 `PeekMut` guard，允许修改堆顶元素，drop 时自动 `sift_down` 恢复堆性质。若通过 `std::mem::forget(peek_mut)` 或循环引用阻止 drop：1) 堆性质破坏（父节点 < 子节点）；2) 后续 `pop()` 返回错误元素。这是 Rust "leak safety" 哲学的一部分：标准库不保证防泄漏（`mem::forget` 是 safe），但泄漏不应导致内存不安全——`PeekMut` 的泄漏仅破坏逻辑不变量，不触发 UB。这与 C++ 的 `std::priority_queue::top()`（返回 const 引用（Reference），不可修改）或 Java 的 `PriorityQueue.peek()`（不可修改）不同——Rust 的 `peek_mut` 是独特设计，修改 + 自动恢复，但需理解 guard 模式。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ### 10.3 边界测试：`BinaryHeap` 的 `peek_mut` 与忘记 drop（逻辑错误）
@@ -964,7 +935,6 @@ fn main() {
     assert_eq!(heap.peek(), Some(&0));
 }
 ```
-
 > **修正**: `BinaryHeap::peek_mut()` 返回 `PeekMut` guard，允许修改堆顶元素，drop 时自动 `sift_down` 恢复堆性质。若通过 `std::mem::forget(peek_mut)` 阻止 drop：1) 堆性质破坏（父节点 < 子节点）；2) 后续 `pop()` 返回错误元素；3) 但不触发内存不安全（`forget` 是 safe）。这是 Rust "leak safety" 的体现：泄漏只破坏逻辑不变量，不导致 UB。安全使用：1) 避免 `mem::forget`；2) 不在 `peek_mut` 活跃时修改堆的其他元素；3) 使用 `pop` + `push` 替代（若需完全替换堆顶）。这与 C++ 的 `std::priority_queue::top()`（const 引用（Reference），不可修改）或 Java 的 `PriorityQueue.peek()`（不可修改）不同——Rust 的 `peek_mut` 是独特设计，修改 + 自动恢复。来源: [Rust Standard Library] · 来源: [Rust API Guidelines]
 > **过渡**: 算法与竞赛编程 (Algorithms & Competitive Programming) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 算法与竞赛编程 (Algorithms & Competitive Programming) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

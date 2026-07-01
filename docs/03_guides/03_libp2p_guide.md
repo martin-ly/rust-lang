@@ -55,7 +55,6 @@ libp2p 协议栈
 │  传输层: TCP / QUIC / WebRTC / WebSocket │
 └─────────────────────────────────────────┘
 ```
-
 ---
 
 ## 核心概念 {#核心概念}
@@ -73,7 +72,6 @@ libp2p 使用 **multiaddr** 统一描述网络地址：
 /ip4/192.168.1.1/udp/4001/quic  → QUIC 监听
 /dns4/bootstrap.libp2p.io/tcp/443/wss  → WebSocket Secure
 ```
-
 ### PeerId —— 去中心化身份 {#peerid-去中心化身份}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -81,7 +79,6 @@ libp2p 使用 **multiaddr** 统一描述网络地址：
 ```text
 PeerId = multihash(public_key)
 ```
-
 每个 libp2p 节点通过加密密钥对标识，无需中心化注册。
 
 ### 核心协议 {#核心协议}
@@ -116,7 +113,6 @@ PeerId = multihash(public_key)
     └── 简单文件共享?
             └── 局域网优先? ──▶ libp2p + mDNS 发现
 ```
-
 ---
 
 ## 代码示例 {#代码示例}
@@ -157,7 +153,6 @@ fn create_node() -> Result<Swarm<Ping>, Box<dyn std::error::Error>> {
     Ok(swarm)
 }
 ```
-
 ### GossipSub 发布/订阅 {#gossipsub-发布订阅}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -206,7 +201,6 @@ match event {
     _ => {}
 }
 ```
-
 ### Kademlia DHT 内容路由 {#kademlia-dht-内容路由}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -243,7 +237,6 @@ kademlia.put_record(record, Quorum::One)?;
 // 查询键
 kademlia.get_record(Key::from(vec![1, 2, 3]));
 ```
-
 ---
 
 ## 与中心化方案的对比 {#与中心化方案的对比}
@@ -318,17 +311,11 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Peer-to-Peer](https://en.wikipedia.org/wiki/Peer_to_Peer)**
-
 > **来源: [Wikipedia - Distributed Hash Table](https://en.wikipedia.org/wiki/Distributed_Hash_Table)**
-
 > **[来源: libp2p Specification]**
-
 > **[来源: ACM - Peer-to-Peer Networking]**
-
 > **[来源: IEEE - Decentralized Network Protocols]**
-
 > **[来源: Protocol Labs - libp2p Docs]**
-
 > **来源: [Rust Reference - Networking](https://doc.rust-lang.org/reference/)**
 
 ---

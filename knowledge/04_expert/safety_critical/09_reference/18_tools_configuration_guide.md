@@ -31,7 +31,6 @@
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 开发环境配置
@@ -75,7 +74,6 @@
   "rust-analyzer.lens.references.adlItem.enable": true
 }
 ```
-
 #### VSCode扩展推荐 (.vscode/extensions.json)
 >
 > **[来源: Rust Official Docs]**
@@ -93,7 +91,6 @@
   ]
 }
 ```
-
 ### Rust工具链安装脚本
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -162,7 +159,6 @@ cargo install cargo-vet
 echo "=== Installation Complete ==="
 echo "Please restart your terminal or run 'source $HOME/.cargo/env'"
 ```
-
 ---
 
 ## 静态分析工具
@@ -222,7 +218,6 @@ avoid-breaking-exported-api = false
 # 忽略测试中的某些lint
 test-stdin-width = 120
 ```
-
 #### 严格模式配置 (用于ASIL D)
 
 ```rust
@@ -245,7 +240,6 @@ test-stdin-width = 120
 #![allow(clippy::similar_names)]
 #![allow(clippy::missing_errors_doc)]
 ```
-
 ### Cargo Audit配置
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -281,7 +275,6 @@ fi
 
 echo "=== Audit Complete ==="
 ```
-
 #### 忽略配置 (.cargo/audit.toml)
 
 ```toml
@@ -303,7 +296,6 @@ quiet = false
 # 显示依赖树
 show_tree = true
 ```
-
 ---
 
 ## 测试工具配置
@@ -338,7 +330,6 @@ cargo miri test --target x86_64-unknown-linux-gnu -- module_name::test_name
 
 echo "=== Miri Tests Complete ==="
 ```
-
 #### 项目配置 (.cargo/config.toml)
 
 ```toml
@@ -348,7 +339,6 @@ MIRIFLAGS = "-Zmiri-strict-provenance -Zmiri-symbolic-alignment-check -Zmiri-dis
 [target.x86_64-unknown-linux-gnu]
 runner = "cargo miri"
 ```
-
 ### Kani配置
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -376,7 +366,6 @@ cargo kani --visualize
 
 echo "=== Kani Verification Complete ==="
 ```
-
 #### Kani配置 (kani.toml)
 
 ```toml
@@ -401,7 +390,6 @@ unwind = 20
 [proof.another_proof]
 timeout = 3600  # 1小时
 ```
-
 ### 测试覆盖率
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -430,7 +418,6 @@ cargo tarpaulin \
 echo "=== Coverage Report Generated ==="
 echo "Open target/coverage/tarpaulin-report.html"
 ```
-
 #### 配置文件 (.tarpaulin.toml)
 
 ```toml
@@ -464,7 +451,6 @@ branch = true
 # 清理构建
 clean = true
 ```
-
 ---
 
 ## 嵌入式开发工具
@@ -513,7 +499,6 @@ rustflags = [
 [env]
 DEFMT_LOG = "info"
 ```
-
 ### 调试配置
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -544,7 +529,6 @@ DEFMT_LOG = "info"
   ]
 }
 ```
-
 ---
 
 ## CI/CD配置
@@ -698,7 +682,6 @@ jobs:
             LICENSE
             README.md
 ```
-
 ---
 
 ## 工具速查表
@@ -738,7 +721,6 @@ jobs:
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [API设计指南](01_api_design_guidelines.md)
 - [Rust安全关键系统 - 检查清单与模板](02_checklists_and_templates.md)
 

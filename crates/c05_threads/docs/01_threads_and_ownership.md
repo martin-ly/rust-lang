@@ -55,7 +55,6 @@ fn main() {
     handle.join().unwrap();
 }
 ```
-
 `thread::spawn` 会返回一个 `JoinHandle`。
 这个 `JoinHandle` 是一个拥有所有权的值，调用它的 `join()` 方法可以阻塞当前线程，直到 `spawn` 出来的线程执行结束。
 
@@ -91,7 +90,6 @@ fn main() {
     handle.join().unwrap();
 }
 ```
-
 `move` 关键字确保了 `v` 与新线程一同存活，从而在编译时就杜绝了潜在的内存安全问题。
 这种将所有权与线程生命周期绑定的机制，是 Rust "无畏并发" (Fearless Concurrency) 的核心体现。
 

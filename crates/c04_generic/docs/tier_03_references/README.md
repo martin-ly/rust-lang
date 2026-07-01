@@ -15,7 +15,7 @@
 
 ## 📘 核心文档
 
-### 01. [泛型语法参考](01_泛型语法参考.md)
+### 01. [泛型语法参考](01_generics_syntax_reference.md)
 
 **内容**: 完整的泛型语法 BNF 定义、类型规则、作用域规则
 
@@ -36,7 +36,7 @@
 
 ---
 
-### 02. [Trait 系统参考](02_Trait系统参考.md)
+### 02. [Trait 系统参考](02_trait_system_reference.md)
 
 **内容**: Trait 完整 API、标准库 trait 参考
 
@@ -57,7 +57,7 @@
 
 ---
 
-### 03. [边界约束参考](03_边界约束参考.md)
+### 03. [边界约束参考](03_trait_bounds_reference.md)
 
 **内容**: Where 子句、HRTB、约束语法完整参考
 
@@ -78,7 +78,7 @@
 
 ---
 
-### 04. [关联类型参考](04_关联类型参考.md)
+### 04. [关联类型参考](04_associated_types_reference.md)
 
 **内容**: 关联类型和 GAT 完整语法
 
@@ -99,7 +99,7 @@
 
 ---
 
-### 05. [编译器行为参考](05_编译器行为参考.md)
+### 05. [编译器行为参考](05_compiler_behavior_reference.md)
 
 **内容**: 单态化、类型擦除、优化行为
 
@@ -124,11 +124,11 @@
 
 ### 如何使用本目录
 
-1. **语法查询**: 遇到语法问题时查阅 [01\_泛型语法参考.md](01_泛型语法参考.md)
-2. **Trait 查询**: 需要了解 trait 时查阅 [02_Trait系统参考.md](02_Trait系统参考.md)
-3. **约束问题**: 约束编译错误时查阅 [03\_边界约束参考.md](03_边界约束参考.md)
-4. **关联类型**: 使用关联类型时查阅 [04\_关联类型参考.md](04_关联类型参考.md)
-5. **性能理解**: 需要理解性能时查阅 [05\_编译器行为参考.md](05_编译器行为参考.md)
+1. **语法查询**: 遇到语法问题时查阅 [01\_泛型语法参考.md](01_generics_syntax_reference.md)
+2. **Trait 查询**: 需要了解 trait 时查阅 [02_trait_system_reference.md](02_trait_system_reference.md)
+3. **约束问题**: 约束编译错误时查阅 [03\_边界约束参考.md](03_trait_bounds_reference.md)
+4. **关联类型**: 使用关联类型时查阅 [04\_关联类型参考.md](04_associated_types_reference.md)
+5. **性能理解**: 需要理解性能时查阅 [05\_编译器行为参考.md](05_compiler_behavior_reference.md)
 
 ### 推荐学习路径
 
@@ -157,7 +157,7 @@
 | 文档  | 预计行数  | 主要内容  | 代码示例 |
 | :--- | :--- | :--- | :--- |
 | 01\_泛型语法参考.md   | 2000+       | BNF 语法、规则    | 50+      |
-| 02_Trait系统参考.md   | 2500+       | Trait API、标准库 | 60+      |
+| 02_trait_system_reference.md   | 2500+       | Trait API、标准库 | 60+      |
 | 03\_边界约束参考.md   | 2000+       | 约束语法、HRTB    | 40+      |
 | 04\_关联类型参考.md   | 1800+       | 关联类型、GAT     | 35+      |
 | 05\_编译器行为参考.md | 2200+       | 单态化、优化      | 30+      |
@@ -171,7 +171,7 @@
 
 - [../tier_02_guides/](../tier_02_guides) - 实践指南
 - [../tier_04_advanced/](../tier_04_advanced/README.md) - 高级主题
-- [../tier_01_foundations/04_常见问题.md](../tier_01_foundations/04_常见问题.md) - 常见问题
+- [../tier_01_foundations/04_faq.md](../tier_01_foundations/04_faq.md) - 常见问题
 
 **外部资源**:
 

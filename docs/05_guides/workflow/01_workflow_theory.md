@@ -74,7 +74,6 @@
 ```text
 W = (CF, DF, RM, EH)
 ```
-
 其中：
 
 - CF = (V, E, λ) 是控制流模型，V 是活动集合，E 是转换关系，λ 是活动类型映射
@@ -171,14 +170,12 @@ WorkflowStep = {
     ]
 }
 ```
-
 **定义 14.2.1** (Future与工作流映射)
 Future类型 F 可以映射到工作流节点 N：
 
 ```text
 F: Future<Output = T> → N: WorkflowNode<Output = T>
 ```
-
 ### 14.2.2 类型系统映射 {#1422-类型系统映射}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -201,7 +198,6 @@ type WorkflowComposition<A, B> = Workflow<A> -> Workflow<B>;
 // 条件分支类型
 type ConditionalWorkflow<T> = Workflow<bool> -> Workflow<T> -> Workflow<T> -> Workflow<T>;
 ```
-
 **定理 14.2.2** (类型安全的工作流组合)
 如果工作流 W₁: Workflow<T₁> 和 W₂: Workflow<T₂> 类型正确，则它们的组合 W₁ >> W₂ 也是类型安全的。
 
@@ -246,7 +242,6 @@ impl Future for WorkflowState {
     }
 }
 ```
-
 ## 14.3 工作流形式化验证 {#143-工作流形式化验证}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -297,7 +292,6 @@ impl WorkflowPetriNet {
     }
 }
 ```
-
 ### 14.3.2 π演算模型 {#1432-π演算模型}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -308,7 +302,6 @@ impl WorkflowPetriNet {
 ```text
 P ::= 0 | α.P | P + P | P | P | νx.P | !P
 ```
-
 其中 α 可以是：
 
 - x(y) - 输入通道
@@ -347,7 +340,6 @@ impl PiProcess {
     }
 }
 ```
-
 ### 14.3.3 时态逻辑验证 {#1433-时态逻辑验证}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -358,7 +350,6 @@ impl PiProcess {
 ```text
 φ ::= p | ¬φ | φ ∧ φ | φ ∨ φ | φ → φ | □φ | ◇φ | φ U φ
 ```
-
 其中：
 
 - □φ 表示"总是φ"
@@ -397,7 +388,6 @@ impl TemporalFormula {
     }
 }
 ```
-
 ## 14.4 AI与工作流融合理论 {#144-ai与工作流融合理论}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -445,7 +435,6 @@ impl AIWorkflowCycle {
     }
 }
 ```
-
 ### 14.4.2 自洽续洽它洽机制 {#1442-自洽续洽它洽机制}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -460,7 +449,6 @@ trait SelfConsistent {
     fn self_optimize(&mut self) -> OptimizationResult;
 }
 ```
-
 **定义 14.4.3** (续洽机制)
 续洽机制是指系统能够持续学习和适应的能力：
 
@@ -471,7 +459,6 @@ trait ContinuousLearning {
     fn evolve_strategy(&mut self) -> EvolutionResult;
 }
 ```
-
 **定义 14.4.4** (它洽机制)
 它洽机制是指系统能够与其他系统协作的能力：
 
@@ -482,7 +469,6 @@ trait Collaborative {
     fn coordinate_actions(&self, partners: &[&dyn Collaborative]) -> CoordinationResult;
 }
 ```
-
 ### 14.4.3 演化式工作流代数 {#1443-演化式工作流代数}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -524,7 +510,6 @@ impl EvolutionaryWorkflowAlgebra {
     }
 }
 ```
-
 ## 14.5 工作流实现架构 {#145-工作流实现架构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -557,7 +542,6 @@ struct WorkflowEngine {
     storage: Storage,
 }
 ```
-
 **实现示例**：
 
 ```rust,ignore
@@ -598,7 +582,6 @@ impl WorkflowEngine {
     }
 }
 ```
-
 ### 14.5.2 分布式执行模型 {#1452-分布式执行模型}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -651,7 +634,6 @@ impl DistributedWorkflow {
     }
 }
 ```
-
 ### 14.5.3 故障恢复机制 {#1453-故障恢复机制}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -686,7 +668,6 @@ enum RecoveryStrategy {
     },
 }
 ```
-
 **实现示例**：
 
 ```rust,ignore
@@ -716,7 +697,6 @@ impl WorkflowEngine {
     }
 }
 ```
-
 ## 14.6 跨领域应用模型 {#146-跨领域应用模型}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -773,7 +753,6 @@ impl ManufacturingWorkflow {
     }
 }
 ```
-
 ### 14.6.2 金融服务工作流 {#1462-金融服务工作流}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -818,7 +797,6 @@ impl FinancialWorkflow {
     }
 }
 ```
-
 ### 14.6.3 智能家居工作流 {#1463-智能家居工作流}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -869,7 +847,6 @@ impl SmartHomeWorkflow {
     }
 }
 ```
-
 ## 14.7 形式化证明与验证 {#147-形式化证明与验证}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -905,7 +882,6 @@ fn reachability_analysis(workflow: &Workflow, target_state: &State) -> bool {
     false
 }
 ```
-
 ### 14.7.2 死锁检测 {#1472-死锁检测}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -942,7 +918,6 @@ impl Workflow {
     }
 }
 ```
-
 ### 14.7.3 活性验证 {#1473-活性验证}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -991,7 +966,6 @@ impl Workflow {
     }
 }
 ```
-
 ## 14.8 结论与展望 {#148-结论与展望}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -1076,7 +1050,6 @@ fn analyze_state_transitions(states: &[WorkflowState]) -> Vec<StateTransition> {
         .collect()
 }
 ```
-
 ### LazyLock 在工作流引擎配置中的应用 {#lazylock-在工作流引擎配置中的应用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -1095,7 +1068,6 @@ pub fn get_engine_config() -> Option<&'static EngineConfig> {
     LazyLock::get(&WORKFLOW_ENGINE_CONFIG)
 }
 ```
-
 ### ControlFlow 在工作流执行控制中的应用 {#controlflow-在工作流执行控制中的应用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -1121,7 +1093,6 @@ fn execute_workflow_steps(
     ControlFlow::Continue(())
 }
 ```
-
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
 
 ---

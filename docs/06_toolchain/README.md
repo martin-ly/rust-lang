@@ -41,7 +41,6 @@ cargo fmt
 # 生成文档 {#生成文档}
 cargo doc --open
 ```
-
 ```toml
 # Cargo.toml 配置示例 {#cargotoml-配置示例}
 [package]
@@ -58,7 +57,6 @@ tokio = { version = "1.35", features = ["full"] }
 opt-level = 3
 lto = true
 ```
-
 ---
 
 ## 🔬 形式化理论 {#形式化理论}
@@ -418,7 +416,6 @@ codegen-units = 1
 panic = "abort"
 strip = true
 ```
-
 **详细指南**: [01_compiler_features.md#12.1](01_compiler_features.md#121-生产环境优化配置)
 
 ---
@@ -437,7 +434,6 @@ resolver = "2"
 serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "1.0", features = ["full"] }
 ```
-
 **详细指南**: 02_cargo_workspace_guide.md#2
 
 ---
@@ -467,7 +463,6 @@ pub fn function(a: i32, b: i32) -> i32 {
     a + b
 }
 ````
-
 **详细指南**: [03_rustdoc_advanced.md#2](03_rustdoc_advanced.md#2-文档注释语法)
 
 ---
@@ -506,9 +501,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Rust 1.89→1.93 累积特性总览](../../archive/docs/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md)（已归档）
 - [Rust 1.93 Cargo 与 Rustdoc 变更详解](06_11_rust_1_93_cargo_rustdoc_changes.md) 🆕
 - [Rust 1.93 语言特性全面分析（92 项设计论证）](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) 🆕
-
 - [Rust 1.94 研究笔记](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md) 🆕
-
 - [Cranelift 后端指南](06_cranelift_backend_guide.md) ⭐ (Rust 1.96+)
 - [TOML v1.1 Cargo 指南](06_toml_v11_cargo_guide.md) ⭐ (Cargo 1.96+)
 
@@ -537,7 +530,6 @@ opt-level = 1          # 轻度优化
 incremental = true     # 增量编译
 debug = 2              # 完整调试信息
 ```
-
 ### 生产环境 {#生产环境}
 
 ```toml
@@ -547,7 +539,6 @@ lto = "fat"           # Fat LTO
 codegen-units = 1      # 单一代码生成单元
 strip = true          # 移除符号表
 ```
-
 ### Workspace 管理 {#workspace-管理}
 
 ```toml
@@ -558,7 +549,6 @@ serde = { version = "1.0", features = ["derive"] }
 [workspace]
 resolver = "2"  # 使用 Resolver 2
 ```
-
 ---
 
 ## ⚠️ 常见陷阱 {#常见陷阱}
@@ -587,7 +577,6 @@ resolver = "2"  # 使用 Resolver 2
 [workspace.dependencies]
 tokio = { version = "1.0", features = ["full"] }
 ```
-
 **参考**: 02_cargo_workspace_guide.md#3.3
 
 ---
@@ -709,7 +698,6 @@ pub fn get_config() -> Option<&'static Config> {
 let phi = f64::consts::GOLDEN_RATIO;
 let gamma = f64::consts::EULER_GAMMA;
 ```
-
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)

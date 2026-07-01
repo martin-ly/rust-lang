@@ -44,7 +44,6 @@
 //! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 ```
-
 ### 2. rust*190*\*.rs 文件
 
 类似地，`rust_190_*.rs` 文件应包含：
@@ -56,7 +55,6 @@
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
 ```
-
 ### 3. rust*191*\*.rs 文件
 
 `rust_191_*.rs` 文件应包含：
@@ -68,7 +66,6 @@
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
 ```
-
 ---
 
 ## 🔧 批量更新方法
@@ -84,14 +81,12 @@ Get-ChildItem -Path "crates" -Recurse -Filter "rust_189_*.rs" | ForEach-Object {
     Set-Content -Path $_.FullName -Value $content
 }
 ```
-
 ### 方法 2: 使用 sed (Linux/Mac)
 
 ```bash
 # 查找所有历史版本文件
 find crates -name "rust_189_*.rs" -type f -exec sed -i 's/旧文本/新文本/g' {} \;
 ```
-
 ### 方法 3: 手动更新关键文件
 
 对于关键文件，建议手动更新以确保准确性。

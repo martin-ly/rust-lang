@@ -285,7 +285,6 @@
 Trait示例1, Trait示例2, ...
 GATs示例1, GATs示例2, ...
 ```
-
 **知识体系方式**:
 
 ```text
@@ -296,7 +295,6 @@ Generic = {
     示例: [...]
 }
 ```
-
 ### 2. 多维度对比分析
 
 不再是孤立的描述，而是系统化的矩阵对比：
@@ -396,12 +394,10 @@ Generic = {
 1. **第一步**: 阅读 [知识体系 README](docs/knowledge_system/README.md)
    - 了解整体结构
    - 选择适合自己的入口点
-
 2. **第二步**: 根据背景选择路径
    - 初学者 → [核心概念思维导图](docs/knowledge_system/20_core_concepts_mindmap.md)
    - 开发者 → [Trait模式对比矩阵](docs/knowledge_system/10_trait_pattern_comparison_matrix.md)
    - 研究者 → [类型理论](docs/knowledge_system/31_type_theory.md)
-
 3. **第三步**: 深入探索
    - 通过关系网络导航
    - 参考属性空间对比
@@ -424,7 +420,6 @@ Generic = {
 4. 理论深化
    └─ 理论基础 (知识体系) + 源码分析 → 理解本质
 ```
-
 ---
 
 ## 🤝 贡献和反馈

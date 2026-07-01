@@ -15,7 +15,6 @@ WASI 0.2 (Preview 2) ──→ 2024 ──→ 组件模型引入，WIT 接口，
 WASI 0.3 (Preview 3) ──→ 2026-02 ──→ 原生异步 I/O，Worlds 升级
 WASI 1.0 (Standard)   ──→ 2026Q4~2027Q1 ──→ 标准化，替代部分容器场景
 ```
-
 ---
 
 ## 二、WASI 0.3 核心变更
@@ -43,7 +42,6 @@ interface streams {
     }
 }
 ```
-
 **与 0.2 的对比**:
 
 | 维度 | WASI 0.2 | WASI 0.3 |
@@ -71,7 +69,6 @@ world command {
     export run: func() -> result;
 }
 ```
-
 ### 2.3 资源类型增强
 
 - `borrow<T>` 和 `own<T>` 显式区分资源所有权
@@ -99,7 +96,6 @@ extern "C" {
 // 方案 2: 使用 RUSTFLAGS 恢复旧行为（不推荐长期）
 // RUSTFLAGS="-Clink-arg=--allow-undefined" cargo build --target wasm32-wasip2
 ```
-
 ---
 
 ## 四、WASI 1.0 标准化展望

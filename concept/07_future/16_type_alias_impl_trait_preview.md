@@ -35,7 +35,6 @@ fn make_recursive() -> Recursive {
 
 fn main() {}
 ```
-
 > **修正**:
 > **TAIT**（Type Alias Impl Trait，稳定于 1.75）允许：
 >

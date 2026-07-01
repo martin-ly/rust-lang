@@ -83,7 +83,6 @@ if let Some(a) = opt_a {
     }
 }
 ```
-
 ### 1.2 while let chains {#12-while-let-chains}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -96,7 +95,6 @@ while let Some(a) = iter_a.next() && let Some(b) = iter_b.next() {
     println!("配对: ({}, {})", a, b);
 }
 ```
-
 ### 1.3 if let guards in match {#13-if-let-guards-in-match}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -111,7 +109,6 @@ fn classify(msg: Option<String>) -> String {
     }
 }
 ```
-
 [来源: The Rust Programming Language (2024 Edition)]
 
 ---
@@ -136,7 +133,6 @@ if let Some(entry) = map.get("key") && let Ok(num) = entry.parse::<i32>() {
     println!("解析成功: {}", num);
 }
 ```
-
 ### 2.2 混合使用布尔条件和 let {#22-混合使用布尔条件和-let}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -149,7 +145,6 @@ if flag && let Some(n) = opt && n > 5 {
     println!("flag 为真，且 opt 包含大于 5 的值: {}", n);
 }
 ```
-
 ### 2.3 不能用 `||` 混合 let {#23-不能用-混合-let}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -160,7 +155,6 @@ if let Some(a) = opt_a || let Some(b) = opt_b {
     // ...
 }
 ```
-
 原因：`||` 的短路语义与 `let` 绑定的作用域规则冲突。若 `opt_a` 为 `Some`，`b` 未绑定却进入分支体，会导致未定义变量。
 
 来源: [Rust Reference, Let Chains](https://doc.rust-lang.org/reference/)
@@ -199,7 +193,6 @@ if let Some(ref s) = value && let Ok(n) = s.parse::<i32>() {
     println!("非整数");
 }
 ```
-
 两者语义等价，选择取决于代码结构：
 
 - **match guard**：需要对多个不同模式做不同处理
@@ -230,7 +223,6 @@ fn get_timeout(config: &std::collections::HashMap<String, String>) -> Option<u64
     }
 }
 ```
-
 ### 4.2 异步条件等待 {#42-异步条件等待}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -247,7 +239,6 @@ async fn wait_for_state(rx: &mut watch::Receiver<Option<String>>) {
     }
 }
 ```
-
 ### 4.3 错误累积报告 {#43-错误累积报告}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -263,7 +254,6 @@ fn validate_user(name: Option<&str>, age: Option<&str>) -> Result<(), String> {
     }
 }
 ```
-
 [来源: Rust By Example, "Flow Control"]
 
 ---
@@ -288,7 +278,6 @@ match (opt_a, opt_b) {
     (None, None) => println!("都为空"),
 }
 ```
-
 ### 5.2 陷阱 2：所有权与借用冲突 {#52-陷阱-2所有权与借用冲突}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -308,7 +297,6 @@ if let Some(ref s) = msg && s.len() > 3 {
 }
 // msg 仍然可用
 ```
-
 ### 5.3 陷阱 3：变量遮蔽的意外 {#53-陷阱-3变量遮蔽的意外}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -321,7 +309,6 @@ if let Some(x) = x && x > 5 {
     println!("{}", x); // 10
 }
 ```
-
 ### 5.4 陷阱 4：与早期返回混用 {#54-陷阱-4与早期返回混用}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -349,7 +336,6 @@ fn process(data: Option<&str>) -> Result<i32, String> {
     }
 }
 ```
-
 [来源: Rust Internals Forum, "Let Chains Gotchas"]
 
 ---
@@ -383,7 +369,6 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 // │ let A = a && let B = b;          ❌ 语句非法│
 // └─────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 八、延伸阅读 {#八延伸阅读}
@@ -415,11 +400,8 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
-
 > **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
-
 > **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
-
 > **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

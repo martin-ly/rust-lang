@@ -72,7 +72,6 @@ impl<T> ThreadSafeUninitBuffer<T> {
     }
 }
 ```
-
 ---
 
 ## rotate_right 在线程池管理中的应用
@@ -95,7 +94,6 @@ impl ThreadPoolTaskQueue {
     }
 }
 ```
-
 ---
 
 ## NonZero::div_ceil 在线程数量计算中的应用
@@ -115,7 +113,6 @@ pub fn calculate_thread_pool_size(
     total.div_ceil(work_per_thread).get()
 }
 ```
-
 ---
 
 ## 实际应用示例
@@ -175,7 +172,6 @@ impl ConfigManager {
     }
 }
 ```
-
 ### 性能优势
 
 - **减少锁操作**: 避免写锁释放后再获取读锁的开销
@@ -196,7 +192,6 @@ Rust 1.92.0 中，即使使用 `-Cpanic=abort` 选项，展开表也会默认启
 [profile.release]
 panic = "abort"  # 即使使用 abort，展开表也会启用
 ```
-
 ### 优势
 
 - **更好的调试体验**: 即使使用 `panic = "abort"`，也能获得完整的回溯信息
@@ -231,7 +226,6 @@ match result {
     Err(_) => println!("操作失败，但程序继续运行"),
 }
 ```
-
 ---
 
 ## 总结

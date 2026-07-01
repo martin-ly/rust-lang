@@ -141,7 +141,6 @@ pub async fn demo_async_trait() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ````
-
 ### 2. async closure
 
 Rust 1.90 支持 `async` 闭包，可以更灵活地处理异步操作。
@@ -212,7 +211,6 @@ pub async fn demo_async_closure() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 3. impl Trait in associated types
 
 ```rust
@@ -274,7 +272,6 @@ pub async fn demo_impl_trait_assoc_type() -> Result<(), Box<dyn std::error::Erro
     Ok(())
 }
 ```
-
 ---
 
 ## 异步运行时实战
@@ -430,7 +427,6 @@ pub async fn demo_tokio_server() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 2. async-std [已归档] 文件处理
 
 ```rust
@@ -537,7 +533,6 @@ pub async fn demo_async_std_files() -> Result<(), Box<dyn std::error::Error + Se
     Ok(())
 }
 ```
-
 ### 3. Smol 轻量级任务调度
 
 ```rust
@@ -635,7 +630,6 @@ pub async fn demo_smol_scheduler() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ---
 
 ## 异步并发模式
@@ -731,7 +725,6 @@ pub async fn demo_structured_concurrency() -> Result<(), Box<dyn std::error::Err
     Ok(())
 }
 ```
-
 ### 2. Select 多路选择
 
 ```rust
@@ -838,7 +831,6 @@ pub async fn demo_select() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 3. 超时和取消
 
 ```rust
@@ -930,7 +922,6 @@ pub async fn demo_timeout_cancellation() -> Result<(), Box<dyn std::error::Error
     Ok(())
 }
 ```
-
 ---
 
 由于篇幅限制，完整文档包含以下更多内容（约3000+行）：

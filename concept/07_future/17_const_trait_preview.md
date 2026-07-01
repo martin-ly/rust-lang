@@ -37,7 +37,6 @@ fn main() {
     // const fn double<T: std::ops::Add>(x: T) -> T { x + x } // 错误
 }
 ```
-
 > **修正**:
 >
 > **Const traits** 是 Rust 常量求值的关键扩展：
@@ -56,7 +55,6 @@ fn main() {
 > 这与 C++ 的 `constexpr`（函数可自动在编译期/运行期使用，无需特殊标记）或 D 的 `CTFE`（Compile Time Function Execution，类似但更灵活）不同——Rust 追求显式控制：const 函数有严格的副作用限制，trait 的 const 支持需显式声明。
 > [来源: [Const Trait RFC](https://github.com/rust-lang/rust/issues/67792)] ·
 > [来源: [Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
-
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)

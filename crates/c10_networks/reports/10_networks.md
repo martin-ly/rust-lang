@@ -65,7 +65,6 @@ TCP/IP = {L₁:链路, L₂:网络, L₃:传输, L₄:应用}
 enum Layer { Physical, DataLink, Network, Transport, Session, Presentation, Application }
 struct Packet { layer: Layer, data: Vec<u8> }
 ```
-
 ### 1.2 协议状态机的数学表示
 
 **理论定义**：
@@ -129,7 +128,6 @@ impl ProtocolStateMachine {
     }
 }
 ```
-
 **简要说明**：
 协议状态机确保了网络协议的正确性和可靠性。
 
@@ -149,7 +147,6 @@ let (tx, rx): (Sender<i32>, Receiver<i32>) = channel();
 tx.send(42).unwrap();
 let v = rx.recv().unwrap();
 ```
-
 **简要说明**：
 通道模型简化了消息传递与并发通信的实现。
 
@@ -210,7 +207,6 @@ impl Socket {
     }
 }
 ```
-
 **简要说明**：
 套接字提供了网络通信的统一接口。
 
@@ -253,7 +249,6 @@ async fn main() {
     }
 }
 ```
-
 **简要说明**：
 异步网络模型提高了高并发场景下的性能。
 
@@ -319,7 +314,6 @@ impl NetworkBuffer {
     }
 }
 ```
-
 **简要说明**：
 缓冲区管理优化了网络I/O的性能。
 
@@ -437,7 +431,6 @@ impl HttpResponse {
     }
 }
 ```
-
 **简要说明**：
 HTTP协议实现了Web应用的基础通信。
 
@@ -597,7 +590,6 @@ impl WebSocketFrame {
     }
 }
 ```
-
 **简要说明**：
 WebSocket协议实现了实时双向通信。
 
@@ -722,7 +714,6 @@ impl ProtocolParser for HttpParser {
     }
 }
 ```
-
 **简要说明**：
 协议解析器提供了网络协议的标准化处理。
 
@@ -738,7 +729,6 @@ impl ProtocolParser for HttpParser {
 ```text
 ConnectionPool = { connections: Vec<Connection>, max_size: usize }
 ```
-
 **Rust 伪代码**：
 
 ```rust
@@ -826,7 +816,6 @@ impl ConnectionPool {
     }
 }
 ```
-
 **简要说明**：
 连接池管理提高了网络应用的性能。
 
@@ -907,7 +896,6 @@ impl FlowController {
     }
 }
 ```
-
 **简要说明**：
 流量控制确保了网络传输的稳定性和公平性。
 
@@ -921,7 +909,6 @@ impl FlowController {
 ```text
 LoadBalancer = { servers: Vec<Server>, algorithm: LoadBalancingAlgorithm }
 ```
-
 **Rust 伪代码**：
 
 ```rust
@@ -1036,7 +1023,6 @@ impl LoadBalancer {
     }
 }
 ```
-
 **简要说明**：
 负载均衡提高了系统的可用性和性能。
 
@@ -1102,7 +1088,6 @@ impl SecureChannel {
     }
 }
 ```
-
 **简要说明**：
 加密通信保护了数据传输的机密性。
 
@@ -1205,7 +1190,6 @@ impl Certificate {
     }
 }
 ```
-
 **简要说明**：
 数字签名和证书确保了通信的认证和完整性。
 
@@ -1252,7 +1236,6 @@ cargo run --example udp_echo
 cargo run --example grpc_server
 cargo run --example grpc_client
 ```
-
 参考实现：见 `examples/` 下对应示例源码与 `README.md` 运行指引。
 
 ## 附录A. P2P 网络（新增）
@@ -1276,13 +1259,11 @@ Peer = { id, keys, addrs, protocols }
 Overlay = (V, E), V=Peer 集合, E=连接集合
 Route(k) = 〈hop₁, hop₂, …, hopₙ〉 // 键 k 的路径
 ```
-
 消息发布订阅：
 
 ```text
 GossipSub = { join(topic), leave(topic), publish(topic, msg), on_msg(topic, msg) }
 ```
-
 ### A.3 Rust 抽象（伪代码）
 
 ```rust
@@ -1304,7 +1285,6 @@ trait PubSub {
     fn publish(&mut self, topic: &str, data: &[u8]);
 }
 ```
-
 ### A.4 基于 libp2p 的最小工作示例
 
 ```rust
@@ -1342,7 +1322,6 @@ async fn main() -> anyhow::Result<()> {
     }
 }
 ```
-
 ### A.5 可达性与 NAT 穿透
 
 - 优先 QUIC/UDP 打洞，失败则回退中继/中转。

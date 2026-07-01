@@ -71,7 +71,6 @@ fn vtable_analysis() {
     // 输出: 8 bytes (一个指针)
 }
 ```
-
 **VTable 结构**：
 
 ```text
@@ -87,7 +86,6 @@ fn vtable_analysis() {
 | move_to() ptr     | ← 方法指针
 +-------------------+
 ```
-
 ---
 
 ### VTable 生成示例
@@ -127,7 +125,6 @@ static CAT_ANIMAL_VTABLE: VTable = VTable {
     move_to: Cat::move_to,
 };
 ```
-
 ---
 
 ## ⚡ 性能优化技术
@@ -167,7 +164,6 @@ fn performance_comparison() {
     }
 }
 ```
-
 ---
 
 ### 2. Devirtualization（去虚化）
@@ -193,7 +189,6 @@ fn process_animals(animals: Vec<Box<dyn Animal>>) {
     }
 }
 ```
-
 ---
 
 ### 3. 缓存优化（Cache Locality）
@@ -230,7 +225,6 @@ impl EnumProcessor {
     }
 }
 ```
-
 ---
 
 ## 📊 性能基准测试
@@ -356,7 +350,6 @@ fn run_all_benchmarks() {
     println!("Dynamic: {} ns ({:.2}x)", dynamic_ns, dynamic_ns as f64 / static_ns as f64);
 }
 ```
-
 **典型性能结果**（Intel i7, Release mode）：
 
 | 分派方式     | 时间 (ns)  | 相对速度 | 说明       |
@@ -381,7 +374,6 @@ fn static_call(dog: &Dog) {
 // call Dog::speak  ; 直接调用
 // ret
 ```
-
 ---
 
 ### 动态分派的汇编
@@ -398,7 +390,6 @@ fn dynamic_call(animal: &dyn Animal) {
 // call rax               ; 间接调用
 // ret
 ```
-
 **关键区别**：
 
 - 静态：1条call指令
@@ -430,7 +421,6 @@ fn process_batched(fast: &[FastProcessor], slow: &[SlowProcessor]) {
     }
 }
 ```
-
 ---
 
 ### 2. 小对象优化（Small Object Optimization）
@@ -460,7 +450,6 @@ impl<T> SmallBox<T> {
     }
 }
 ```
-
 ---
 
 ### 3. 专门化（Specialization）
@@ -489,7 +478,6 @@ impl Process for i32 {
     }
 }
 ```
-
 ---
 
 ## 📈 选择决策树
@@ -518,7 +506,6 @@ impl Process for i32 {
                               • 考虑缓存局部性
                               • 使用内联存储
 ```
-
 ---
 
 ## 🧪 实战案例：插件系统
@@ -615,7 +602,6 @@ fn plugin_system_example() {
     println!("Result: {}", result);
 }
 ```
-
 ---
 
 ## 🏆 最佳实践总结

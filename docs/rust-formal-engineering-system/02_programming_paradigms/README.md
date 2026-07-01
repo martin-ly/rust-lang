@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -52,7 +51,6 @@ fn synchronous_example() {
     println!("Result: {}", final_result);
 }
 ```
-
 ### 异步编程 {#异步编程}
 
 ```rust,ignore
@@ -78,7 +76,6 @@ async fn async_operation2() -> String {
     "Operation 2 complete".to_string()
 }
 ```
-
 ### 并发编程 {#并发编程}
 
 ```rust
@@ -97,7 +94,6 @@ fn concurrent_example() {
     println!("{}", message);
 }
 ```
-
 ---
 
 ## 与核心文档的关联 {#与核心文档的关联}
@@ -123,17 +119,10 @@ fn concurrent_example() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

@@ -130,7 +130,6 @@
 ### 1.3 形式化定义（区域类型）
 
 > **[Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management)** Rust uses a system of lifetimes that can be understood as **region types** (Tofte & Talpin, 1994) adapted for an imperative, non-GC language. Each reference `&'a T` is parameterized by a lifetime `'a` representing the region during which the reference is guaranteed to be valid.
-
 > **过渡**: 权威定义从学术和官方来源确立了生命周期的语义——引用有效期的编译期保证。而概念属性矩阵则将这些语义转化为可操作的规则对比——`'a` 标注的不同形式、生命周期关系的推导规则、以及它们与所有权（Ownership）、借用（Borrowing）系统的交互约束。
 
 ### 1.3b Tofte-Talpin 区域推断算法的 Rust 适配
@@ -160,7 +159,6 @@ Tofte-Talpin 区域推断的核心思想:
     - 运行时由区域栈管理内存（无需 GC，但需区域分配器）
     - 所有引用都是局部的——没有全局/静态引用
 ```
-
 > **来源**: [Tofte & Talpin 1994 — POPL] · [Walker 2000 — Cornell Tech Report]
 
 #### Rust 的三项关键适配
@@ -184,7 +182,6 @@ Tofte-Talpin 区域推断的核心思想:
   影响: 区域约束的求解从"基于作用域树"变为"基于控制流图（CFG）"
         引用的生命周期是 CFG 上的一组点，而非连续的语法范围
 ```
-
 > **来源**: [Rust Reference: Non-Lexical Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) · [rustc NLL RFC 2094] · [Rust Internals: NLL design notes]
 
 #### Rust 中的区域约束生成与求解
@@ -215,7 +212,6 @@ NLL 的关键改进:
   NLL: 生命周期 = 控制流图（CFG）中从定义点到最后一次使用点的路径集合
   求解器: 从基于"作用域嵌套树"变为基于"CFG 数据流分析"
 ```
-
 > **来源**: [rustc NLL [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — Non-Lexical Lifetimes] · [Rust Reference: Lifetime resolution](https://doc.rust-lang.org/reference/) · [rustc borrow_check/src/region_inference/mod.rs]
 
 #### 与 Polonius 的演进关系
@@ -243,7 +239,6 @@ Polonius 的改进:
   每一代都在 "保持 soundness" 的前提下 "减少保守拒绝"
   即: 接受集单调递增，拒绝集单调递减
 ```
-
 > **来源**: [Polonius GitHub: README and design docs] · [rustc Polonius tracking issue] · [Niko Matsakis blog: From NLL to Polonius]
 
 ---
@@ -319,7 +314,6 @@ graph TD
     F --> F2['_: 匿名生命周期]
     F --> F3[HRTB: for<'a> 高阶]
 ```
-
 > **认知功能**: 此思维导图将生命周期知识组织为「标注—推断—约束—检查—特殊形式」五维结构。生命周期的学习难点在于「何时需要标注、何时可以省略、为什么编译器报错」，此图通过 B（显式）与 C（隐式）的对照，帮助读者理解编译器的「推断边界」——Elision 覆盖 90% 场景，复杂场景需显式标注。F 分支的 HRTB 和 'static 是高阶用法的入口，提醒读者生命周期不仅是「语法标注」，更是「类型系统（Type System）的参数化扩展」。 [来源: 💡 原创分析]
 > [来源: [TRPL — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
@@ -343,7 +337,6 @@ graph TD
     ↓
   ⟹ 悬垂指针（dangling pointer）在 Safe Rust 的编译期被消除
 ```
-
 > **来源: [Tofte & Talpin 1994](https://en.wikipedia.org/wiki/Region-based_memory_management)** 区域类型的核心公理：引用值的有效区域不能超出被引用值的有效区域。✅
 
 ### 4.2 引理：生命周期构成偏序集 ⟹ outlives 关系可传递
@@ -358,7 +351,6 @@ graph TD
     ↓
   ⟹ 编译器可通过约束求解判断任意生命周期组合的有效性
 ```
-
 > **[来源: [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html)]** Rust 中生命周期子类型关系 'static <: 'a 的形式化定义。✅
 
 **生命周期偏序集 Hasse 图（Mermaid）**:
@@ -382,7 +374,6 @@ graph BT
     style D fill:#fff,stroke:#333
     style E fill:#fff,stroke:#333
 ```
-
 > **认知功能**: 此 Hasse 图将抽象的「生命周期偏序关系」转化为**可视化的层次结构**。读者可直观理解三个核心事实：(1) 'static 是「祖宗」，outlives 一切；(2) 生命周期形成从顶到底的偏序链；(3) 并列节点（如 'a 和 'b）不可比较，不能互相替代。此图特别有助于理解协变/逆变：协变 = 沿箭头向下替换安全，逆变 = 沿箭头向上替换安全。建议读者在编写泛型（Generics）约束时，将此图作为「哪个生命周期可以替代哪个」的参考。 [来源: Davey & Priestley, *Introduction to Lattices and Order*; Tofte & Talpin 1994]
 
 ### 4.3 定理：函数签名中的生命周期省略规则 ⟹ Elision 的完备性
@@ -396,7 +387,6 @@ graph BT
     ↓
   ⟹ Elision 是完备且一致的语法糖，不会引入额外约束或遗漏约束
 ```
-
 > **[来源: [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html)]** 三条省略规则基于 Hindley-Milner 风格的模式推导，覆盖 90% 以上函数签名场景。✅
 
 ### 4.4 定理：NLL 流敏感安全 ⟹ 比词法作用域更精确的存活期
@@ -410,7 +400,6 @@ graph BT
     ↓
   ⟹ 合法的 Rust 程序集在 NLL 下严格大于词法作用域下的程序集
 ```
-
 > **来源: [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)** NLL 将生命周期从词法作用域扩展到基于数据流的实际使用期，减少不必要的借用冲突。✅
 
 ### 4.5 定理：Variance 子类型安全 ⟹ 生命周期替换的合法性
@@ -424,7 +413,6 @@ graph BT
     ↓
   ⟹ 长生命周期引用可安全替代短生命周期引用，无悬垂风险
 ```
-
 > **来源: [Rust Reference: Variance]** 生命周期协变/逆变/不变的类型系统（Type System）规则基于子类型理论。✅
 
 ### 4.6 推论：'static 生命周期 ⟹ 全局/泄漏数据的安全性
@@ -438,7 +426,6 @@ graph BT
     ↓
   ⟹ Box::leak、LazyLock、字符串字面量等全局/泄漏数据的使用是类型安全的
 ```
-
 > **来源: [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)** 'static 作为最长生命周期，可安全 coercion 为任意较短生命周期。✅
 
 ### 4.7 推论：HRTB 全称量化 ⟹ 高阶回调的类型安全
@@ -452,7 +439,6 @@ graph BT
     ↓
   ⟹ 高阶函数可接受任意生命周期的引用，回调接口的类型表达力完备
 ```
-
 > **[来源: [Rust Reference: HRTB](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds)]** HRTB `for<'a>` 对应高阶逻辑中的全称量词 ∀。✅
 
 ### 4.8 推论：GATs + where Self: 'a ⟹ 自引用集合的表达能力
@@ -466,7 +452,6 @@ graph BT
     ↓
   ⟹ LendingIterator 等自引用集合可在 Safe Rust 中安全表达
 ```
-
 > **[来源: [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) (GATs)]** GATs 中 `where Self: 'a` 确保关联类型的生命周期自洽。✅
 
 ### 4.9 定理一致性矩阵
@@ -507,7 +492,6 @@ fn main() {
     println!("{}", result);  // ✅ "hello"
 } // result, s1, s2 按正确顺序释放
 ```
-
 ### 5.2 正确示例：结构体中的生命周期
 
 ```rust
@@ -525,7 +509,6 @@ fn main() {
     println!("{}", excerpt.part);  // ✅
 } // excerpt 先 drop，然后 novel drop，顺序正确
 ```
-
 ### 5.3 反例：返回局部引用（E0106 / E0716）
 
 ```rust,ignore
@@ -538,9 +521,7 @@ fn dangling() -> &String {
 fn main() {
     let d = dangling();  // E0716: temporary value dropped while borrowed
 }
-
 ```
-
 **错误分析**：
 
 - `s` 的生命周期 = `dangling()` 函数体
@@ -560,7 +541,6 @@ fn borrow_from_input<'a>(s: &'a str) -> &'a str {
     s
 }
 ```
-
 ### 5.4 反例：生命周期不匹配（E0597）
 
 ```rust,ignore
@@ -574,9 +554,7 @@ fn main() {
     } // novel 在这里被 drop
     println!("{}", excerpt);  // E0597: borrowed value does not live long enough
 }
-
 ```
-
 **修正方案**：
 
 ```rust
@@ -590,7 +568,6 @@ fn main() {
     println!("{}", excerpt);  // ✅ novel 在 excerpt 之后释放
 }
 ```
-
 ### 5.5 边界示例：NLL 减少借用冲突
 
 ```rust
@@ -604,7 +581,6 @@ fn main() {
     r2.push_str(" world");
 }
 ```
-
 ---
 
 ## 六、反命题与边界分析（Inverse Propositions & Boundary Analysis）
@@ -628,7 +604,6 @@ graph TD
     style F3 fill:#f96
     style T fill:#6f6
 ```
-
 > **认知功能**: 此决策树按**危险层级**排列生命周期的失效路径：unsafe（编译器完全放弃检查，最危险）→ 自引用未 Pin（Safe Rust 边界情况，编译器本应阻止但自引用结构特殊）→ Rc 循环（非悬垂，但资源泄漏）。关键认知：生命周期系统不是「万能防悬垂盾」，它的保证有明确边界——unsafe 和特殊结构（自引用）是主要缺口。底部的「四层分类」表格进一步系统化这些边界，帮助读者从「编译错误」反向定位违规层次。 [来源: 💡 原创分析]
 
 **四层分类**：
@@ -660,7 +635,6 @@ graph TD
     style T4 fill:#6f6
     style F1 fill:#f66
 ```
-
 > **认知功能**: 此图是 Elision 规则的**反向验证器**。四个绿色节点覆盖了「无需显式标注」的全部场景，红色节点标记了唯一例外。读者可从此图中提炼出极简记忆法则：「无引用 → 不标；单输入 → 不标；方法 &self → 不标；多输入多输出非方法 → 必须标」。这消除了「何时需要写 <'a>」的犹豫，将生命周期标注从「凭经验猜测」转化为「按条件判定」。 [来源: 💡 原创分析]
 
 **核心洞察**：Elision 的三条规则覆盖了绝大多数函数签名，只有在"多输入生命周期 + 返回引用 + 非方法"的交集处才需要显式标注。
@@ -684,7 +658,6 @@ graph TD
     style F1 fill:#f66
     style F2 fill:#f66
 ```
-
 > **认知功能**: 此图解构了 'static 的**多重身份**。四种合法来源（字符串字面量、全局常量、Box::leak、LazyLock）本质不同——有的来自静态数据段，有的来自故意泄漏，有的来自延迟初始化——但类型系统将它们统一为 'static。关键认知：'static 不是「存储位置」的约束，而是「存活时间」的约束。两个反例展示了试图「伪造」'static 的后果：编译期拦截（局部变量）或运行时（Runtime） UB（unsafe 伪造）。这帮助读者理解 'static 的语义本质：它是「时间」的 ⊤，而非「空间」的全局。 [来源: 💡 原创分析]
 
 ---
@@ -713,7 +686,6 @@ fn main() {
     transitive_outlives(&s, &s, &s);
 }
 ```
-
 ### 7.2 边界：HRTB 与闭包生命周期的极限
 
 ```rust
@@ -739,7 +711,6 @@ fn main() {
     call_with_any(|r| println!("{r}"));  // ✅
 }
 ```
-
 ### 7.3 边界：'static 的构造与协变收窄
 
 ```rust
@@ -768,7 +739,6 @@ fn main() {
     accept_any(&*GLOBAL);  // ✅ 'static 数据可传入任意上下文
 }
 ```
-
 ---
 
 ## 八、边界测试：生命周期规则的编译错误
@@ -787,7 +757,6 @@ fn first_word_fixed<'a>(s: &'a str) -> &'a str {
     &s[0..1] // ✅ 返回值生命周期与输入绑定
 }
 ```
-
 > **修正**: 当函数返回引用且输入参数也是引用时，必须显式标注生命周期以建立两者的关系。
 
 ### 8.2 边界测试：生命周期过短（编译错误）
@@ -809,7 +778,6 @@ fn main_fixed() {
     println!("{}", r);
 }
 ```
-
 > **修正**: 引用的生命周期不能长于被引用数据的生命周期。借用检查器通过生命周期约束图静态验证这一点。
 
 ### 8.4 边界测试：生命周期在闭包中的捕获（编译错误）
@@ -826,7 +794,6 @@ fn main() {
     closure();
 }
 ```
-
 > **修正**: 闭包（Closures）捕获引用时，被引用数据的生命周期必须覆盖闭包的整个使用范围。如需在闭包外使用，使用 `move` 闭包转移所有权。
 
 ### 8.5 边界测试：方法签名中 self 引用的生命周期省略冲突（编译错误）
@@ -844,7 +811,6 @@ impl Parser {
     }
 }
 ```
-
 > **修正**: 结构体方法返回引用时，必须显式标注生命周期（`fn first_word<'a>(&'a self) -> &'a str`），将返回值与 `self` 绑定。
 
 ### 8.3 边界测试：生命周期与泛型冲突（编译错误）
@@ -865,7 +831,6 @@ fn main() {
     println!("{}", c.data);
 }
 ```
-
 > **修正**: 泛型参数的生命周期约束（`T: 'a`）确保被引用数据的生命周期覆盖引用的使用范围。
 
 ### 8.4 边界测试：`'static` 误用（编译错误）
@@ -883,7 +848,6 @@ fn fixed() {
     println!("{}", r);
 }
 ```
-
 > **修正**: 只有程序整个生命周期存活的数据（如字符串字面量、全局静态变量、`Box::leak` 的堆内存）才具有 `'static` 生命周期（Lifetimes）。局部变量不能强制转换为 `'static`。`'static` 不等同于"静态分配"，而是"存活到程序结束"。
 
 ### 8.5 边界测试：生命周期省略规则在复杂签名中失效（编译错误）
@@ -900,7 +864,6 @@ fn complex_lifetime_fixed<'a, 'b>(a: &'a str, b: &'b str, _c: &str) -> (&'a str,
     (a, b) // ✅ 返回引用的生命周期与对应输入绑定
 }
 ```
-
 > **修正**:
 >
 > 生命周期省略（Lifetime Elision）规则仅适用于简单情况（单输入引用 → 单输出引用）。
@@ -928,7 +891,6 @@ fn fixed() {
     println!("{}", t);
 }
 ```
-
 > **修正**:
 >
 > Rust 的所有权转移（move）与借用是互斥的。若变量已被借用（无论是共享借用 `&T` 还是可变借用（Mutable Borrow） `&mut T`），在借用释放前不能转移其所有权。
@@ -959,7 +921,6 @@ fn main() {
     let _result = longest(&s1, &s2);
 }
 ```
-
 > **修正**:
 >
 > 生命周期（Lifetimes）**省略规则**（lifetime elision）的三条规则：
@@ -985,7 +946,6 @@ fn main() {
     println!("{}", r);
 }
 ```
-
 > **修正**:
 >
 > `'static` 是 Rust 中最长的生命周期：程序整个运行期间。
@@ -1018,13 +978,11 @@ fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
 }
 ```
-
 **答案**：需要显式生命周期标注，因为返回的引用可能是 `x` 或 `y`，编译器无法推断：
 
 ```rust,ignore
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { ... }
 ```
-
 表示返回的引用与 `x` 和 `y` 中**较短的生命周期**相同。
 </details>
 
@@ -1034,7 +992,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { ... }
 ```rust,ignore
 fn first_word(s: &str) -> &str { ... }
 ```
-
 **答案**：应用了**省略规则 1**：每个引用参数获得独立的生命周期参数，即 `fn first_word<'a>(s: &'a str) -> &'a str`。由于只有一个输入生命周期，它被赋予给输出生命周期。
 </details>
 
@@ -1046,7 +1003,6 @@ struct BorrowedString {
     text: &str,
 }
 ```
-
 **答案**：❌ 编译错误。结构体包含引用时，必须显式标注生命周期：
 
 ```rust
@@ -1054,7 +1010,6 @@ struct BorrowedString<'a> {
     text: &'a str,
 }
 ```
-
 否则编译器不知道 `text` 引用的数据何时失效。
 </details>
 
@@ -1069,7 +1024,6 @@ fn get_greeting() -> &'static str {
     // C. let s = Box::new("hello"); &*s
 }
 ```
-
 **答案**：
 
 - **A** → ❌ `&s` 指向局部变量，`s` 在函数返回后被 Drop，不能返回其引用。
@@ -1084,7 +1038,6 @@ fn get_greeting() -> &'static str {
 ```rust,ignore
 fn print_it<T: Display + 'static>(t: T) { ... }
 ```
-
 **答案**：`T` 必须实现 `Display`，且 `T` 中**不包含任何非 `'static` 的引用**。注意：`T: 'static` 不表示 `T` 本身必须存活整个程序运行期，而是表示 `T` 内部没有引用局部数据（即 `T` 可以安全地在线程间传递或长期存储）。例如 `String: 'static`，`&'static str: 'static`，但 `&'a i32`（其中 `'a` 不是 `'static`）不满足 `T: 'static`。
 </details>
 
@@ -1131,7 +1084,6 @@ fn first_word(s: &str) -> &str { }
 
 fn longest(x: &str, y: &str) -> &str { }
 ```
-
 哪个需要显式标注，哪个可以省略？
 
 </details>
@@ -1151,7 +1103,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
-
 > `'a` 表示返回的生命周期与两个参数中**较短的那个**相同。
 
 </details>
@@ -1195,7 +1146,6 @@ struct Book {
     author: &str,  // 这里需要什么？
 }
 ```
-
 `author` 字段使用 `&str` 而非 `String` 时，结构体需要什么修改？
 
 </details>
@@ -1211,7 +1161,6 @@ struct Book<'a> {
     author: &'a str,  // author 引用的有效期至少为 'a
 }
 ```
-
 **规则**: 如果结构体包含引用类型的字段，结构体本身必须参数化生命周期。实例的有效期不能超过其引用字段的生命周期。
 
 ```rust,ignore
@@ -1219,7 +1168,6 @@ let title = String::from("Rust Book");
 let author = "Steve Klabnik";
 let book = Book { title, author };  // book 不能活得比 author 久
 ```
-
 </details>
 
 ### Q5: 以下代码的编译结果是什么？
@@ -1237,7 +1185,6 @@ fn main() {
     println!("{}", r);
 }
 ```
-
 </details>
 
 <details>
@@ -1256,7 +1203,6 @@ fn main() {
     println!("{}", r);  // ✅ x 和 r 同作用域
 }
 ```
-
 > 这是生命周期检查最基本的原则：引用的有效期不能超过被引用数据的有效期。
 
 </details>
@@ -1295,7 +1241,6 @@ fn main() {
 ```rust,ignore
 fn first_word(s: &str) -> &str
 ```
-
 - A. 不会，必须显式标注 `'a`
 - B. 会，应用生命周期省略规则 1（输入→输出）
 
@@ -1318,7 +1263,6 @@ fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
 }
 ```
-
 - A. `&str` 参数需要显式生命周期标注
 - B. 返回类型的生命周期与输入参数不明确
 - C. `if` 表达式不能返回引用
@@ -1333,7 +1277,6 @@ fn longest(x: &str, y: &str) -> &str {
 ```rust,ignore
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ```
-
 这告诉编译器：返回的引用至少与 `x` 和 `y` 中较短的生命周期一样长。
 </details>
 
@@ -1349,7 +1292,6 @@ fn dangle() -> &String {
     &s
 }
 ```
-
 - A. `s` 在函数返回后被 drop，返回悬垂引用
 - B. `String` 不能返回引用
 - C. 缺少生命周期标注
@@ -1380,7 +1322,6 @@ where
     println!("{}", r);
 }
 ```
-
 - A. `f` 接受任意生命周期的引用，但返回值的生命周期独立于输入
 - B. `f` 接受任意生命周期的引用，且返回值必须与输入引用同生命周期
 - C. `f` 只能接受 `'static` 引用
@@ -1408,7 +1349,6 @@ println!("{}", y);
 let z = &mut x;
 z.push_str(" world");
 ```
-
 - A. 所有版本都能编译：NLL 允许非词法生命周期
 - B. 仅 Polonius+ 能编译：需要数据流敏感分析
 - C. 所有版本都失败：不可变和可变借用（Mutable Borrow）不能共存

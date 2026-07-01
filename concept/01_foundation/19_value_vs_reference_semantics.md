@@ -44,7 +44,6 @@ int b = a;  // b 是 a 的副本
 b = 100;    // 不影响 a
 std::cout << a; // 42
 ```
-
 ```rust
 // Rust
 let a = 42;
@@ -52,7 +51,6 @@ let b = a;  // b 是 a 的副本（i32 实现 Copy）
 let b = 100; // 不影响 a
 println!("{}", a); // 42
 ```
-
 ### 2.2 值语义的语言
 
 - **C**：基本类型和 struct 都是值语义。
@@ -75,7 +73,6 @@ b = a   # b 和 a 指向同一个列表对象
 b[0] = 99
 print(a)  # [99, 2, 3]
 ```
-
 ```java
 // Java
 List<Integer> a = new ArrayList<>(Arrays.asList(1, 2, 3));
@@ -83,7 +80,6 @@ List<Integer> b = a; // b 和 a 指向同一个对象
 b.set(0, 99);
 System.out.println(a); // [99, 2, 3]
 ```
-
 ### 3.2 引用语义的语言
 
 - **Java**：对象都是引用语义，基本类型是值语义。
@@ -102,7 +98,6 @@ let s1 = String::from("hello");
 let s2 = s1; // 不是复制，而是 move：所有权从 s1 转移到 s2
 // println!("{}", s1); // ❌ 编译错误
 ```
-
 Rust 的 `String` 看起来像引用语义语言中的对象，但行为完全不同（Rust Reference: [Moved and Copied Types](https://doc.rust-lang.org/reference/expressions.html#moved-and-copied-types)）：
 
 - 赋值不复制数据，而是转移所有权。
@@ -116,7 +111,6 @@ let s1 = String::from("hello");
 let s2 = &s1; // 显式借用
 println!("{} {}", s1, s2); // ✅ 都可用
 ```
-
 Rust 把"引用"从默认行为变成了显式选择，并通过生命周期（Lifetimes）和借用规则保证安全。
 
 ---
@@ -144,7 +138,6 @@ Rust owned type ........ 值语义 + 所有权转移
 Rust &T / &mut T ....... 显式受限引用
 Java/Python object ..... 引用语义
 ```
-
 > **关键洞察**：Rust 的独特之处在于，它把"值语义"从"复制数据"推进到"转移所有权"，从而在不使用垃圾回收的情况下，同时获得值语义的可预测性和引用语义的共享能力（通过显式借用）。
 
 ---

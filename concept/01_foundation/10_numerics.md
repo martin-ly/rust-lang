@@ -116,7 +116,6 @@ Rust 整数类型:
   └── 未标注类型的整数默认 i32
       // let x = 5;  // 类型: i32
 ```
-
 > **认知功能**: Rust 的**显式整数类型**（无默认"int"）是类型安全的设计选择——它迫使开发者考虑数值的范围和符号，防止隐式截断。
 > [来源: [Rust Reference — Integer Types](https://doc.rust-lang.org/reference/types/numeric.html#integer-types)]
 
@@ -155,7 +154,6 @@ Rust 浮点类型 (IEEE 754 标准):
   ├── 科学计数法: 1.2e5
   └── 必须有小数点或指数: 5f64, 5.0
 ```
-
 > **浮点洞察**: Rust 的 `f64` 默认选择反映了**"安全优先"**的设计哲学——在大多数平台上 f64 不比 f32 慢，但精度翻倍。
 > [来源: [IEEE 754 Wikipedia](https://en.wikipedia.org/wiki/IEEE_754)]
 
@@ -199,7 +197,6 @@ a.overflowing_add(b);  // (44, true)
 // - checked: 算术运算，溢出时优雅处理
 // - overflowing: 多精度算术、进位传播
 ```
-
 > **溢出洞察**: Rust 的**显式溢出方法**将 C/C++ 的"未定义行为"转化为**明确的选择**——开发者必须显式选择溢出语义。
 > [来源: [RFC 0560 — Integer Overflow](https://github.com/rust-lang/rfcs/blob/master/text/0560-integer-overflow.md)]
 
@@ -248,7 +245,6 @@ let f: i8 = e.try_into()?;  // Err(Overflow)!
 // - 拓宽转换（安全）: 使用 into()
 // - 位模式转换: 使用 as
 ```
-
 > **转换洞察**: Rust 的**显式转换**（`as`、`From`、`TryFrom`）消除了 C/C++ 的**隐式类型转换陷阱**。
 > [来源: [std::convert](https://doc.rust-lang.org/std/convert/index.html)]
 
@@ -293,7 +289,6 @@ assert!(overflowed);
 │ overflowing_add│ 多精度算术、进位传播                   │
 └────────────────┴────────────────────────────────────────┘
 ```
-
 > **方法洞察**: 四种方法覆盖了**所有合理的溢出语义**——从数学正确性（checked）到性能（wrapping）到安全性（saturating）。
 > [来源: [std::num::Wrapping](https://doc.rust-lang.org/std/num/struct.Wrapping.html)]
 
@@ -326,7 +321,6 @@ let size = NonZeroU32::new(1024).unwrap();
 // Option<&T>: 使用 null 指针表示 None（同为 niche optimization）
 // Option<NonNull<T>>: 双重优化
 ```
-
 > **NonZero 洞察**: `NonZero` 类型是 Rust **类型系统（Type System）与优化**结合的经典案例——编译器利用**niche value**（零）压缩 `Option<T>` 的表示。
 > [来源: [std::num::NonZeroU32](https://doc.rust-lang.org/std/num/type.NonZeroU32.html)]
 
@@ -361,7 +355,6 @@ SIMD (Single Instruction Multiple Data):
   ├── 对齐要求
   └── 边界处理
 ```
-
 > **SIMD 洞察**: **SIMD 是数值计算性能的最后防线**——向量化可将吞吐量提升 4-16 倍。
 > [来源: [std::simd](https://doc.rust-lang.org/std/simd/index.html)]
 
@@ -397,7 +390,6 @@ SIMD (Single Instruction Multiple Data):
   ├── ✅ 使用整数（分/厘为单位）
   └── 或使用 rust_decimal 等库
 ```
-
 > **类型选择**: Rust 的**精确数值类型**迫使开发者思考数值的真实语义——这是避免整数溢出和精度错误的**第一道防线**。
 > [来源: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html)]
 
@@ -421,7 +413,6 @@ graph TD
     style WRAP fill:#fff3e0
     style SAT fill:#c8e6c9
 ```
-
 > **认知功能**: 数值运算方法的选择是一个**三元权衡**——性能（wrapping）、安全（checked）、可用性（saturating）。
 
 ---
@@ -475,7 +466,6 @@ graph TD
 ├── 应避免在 FFI 边界依赖 C 的“基本整型”
 └── 缓解: 使用 libc crate 的明确类型（如 c_int、c_long）
 ```
-
 > **边界要点**: 数值运算的边界主要与**浮点精度**、**整数除法语义**、**移位位数**、**char 转换**、**平台依赖**、**常量求值**、**性能开销**和**FFI 映射**相关。
 > [来源: [Rust Reference — Operator Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html)] · [Rust Performance Book](https://nnethercote.github.io/perf-book/)
 
@@ -515,7 +505,6 @@ graph TD
   ❌ if x & 1 == 0 { ... }  // 实际为 x & (1 == 0)
   ✅ if (x & 1) == 0 { ... }
 ```
-
 > **陷阱总结**: 数值陷阱主要与**截断**、**类型转换**、**浮点比较**、**溢出**、**索引类型**、**除零**和**位运算优先级**相关。
 > [来源: [Rust Reference — Numeric Types](https://doc.rust-lang.org/reference/types/numeric.html)]
 
@@ -587,7 +576,6 @@ fn main() {
     println!("y={} z={} w={:?}", y, z, w);
 }
 ```
-
 > **修正**: Rust 整数溢出在 Debug 模式 panic（安全检查），在 Release 模式静默环绕（性能优化）。
 > 这不同于 C/C++ 的未定义行为——Rust 明确定义了环绕语义，只是默认在 Debug 时 panic。
 > 生产代码应使用显式方法（`wrapping_*`、`saturating_*`、`checked_*`、`overflowing_*`）表达意图，避免依赖编译模式。
@@ -613,7 +601,6 @@ fn approx_eq(a: f64, b: f64, epsilon: f64) -> bool {
     (a - b).abs() < epsilon // 近似相等
 }
 ```
-
 > **修正**: 浮点数（IEEE 754）不能进行精确相等比较，因为二进制表示无法精确表达大多数十进制小数。
 > Rust 编译器会警告 `a == b`（clippy::float_cmp），但不阻止编译。
 > 正确做法是比较差值是否小于某个 epsilon。对于财务计算，考虑使用 `rust_decimal` 或 `bigdecimal` 库避免浮点误差。
@@ -636,7 +623,6 @@ fn fixed() {
     println!("{}", y);
 }
 ```
-
 > **修正**: Rust 禁止隐式整数转换，即使是缩小范围（`i32` → `i8`）也需要 `as` 关键字。`as` 执行截断转换（truncating cast），高位丢弃。
 > 如需安全检查，使用 `TryInto::try_into()`（返回 `Result`）。
 > 这与 C 的隐式转换（`int` → `char` 静默截断）形成对比——Rust 的显式性消除了意外截断 bug。
@@ -662,7 +648,6 @@ fn fixed() {
     }
 }
 ```
-
 > **修正**: Rust 的 `match` 要求模式是**精确匹配**的，浮点数因精度问题不能用于模式。
 > `0.1 + 0.2 != 0.3` 在二进制浮点中是事实，因此 `match 0.3` 可能永远不会匹配。
 > 编译器直接拒绝浮点模式，强制开发者使用 epsilon 比较或区间检查。
@@ -684,7 +669,6 @@ fn main() {
     println!("{}", small);
 }
 ```
-
 > **修正**: Rust 的 `as` 关键字执行**截断/扩展转换**（truncating/widening cast），不检查值是否在目标类型范围内。
 > `i32 → u32` 是位的重新解释（two's complement），`i32 → i8` 截断低 8 位。
 > 这些转换永不 panic，但可能产生意外结果。
@@ -714,7 +698,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**: IEEE 754 规定 `NaN != NaN`，因此 `x == f64::NAN` 总是 `false`。
 > 检测 `NaN` 必须使用 `is_nan()`。
 > 这是浮点数的常见陷阱：排序、去重、哈希时 `NaN` 破坏常规假设。
@@ -737,7 +720,6 @@ fn main() {
     // let y: u8 = x.try_into().unwrap(); // 运行时 panic
 }
 ```
-
 > **修正**:
 > Rust 的数值转换分三层：
 >
@@ -768,7 +750,6 @@ fn fixed() {
     println!("len={}", arr.len());
 }
 ```
-
 > **修正**: `usize` 在 32 位平台是 32 位，64 位平台是 64 位。
 > 依赖 `usize` 精确大小的代码不可移植；跨平台数据交换应使用固定大小的 `u32`/`u64`。
 > 数组大小 `[T; N]` 中的 `N` 必须是 `usize`，超大数组在栈上分配会导致栈溢出。
@@ -795,7 +776,6 @@ fn fixed() {
     println!("{:b}", c);
 }
 ```
-
 > **修正**: Rust 严格区分位运算（`&`、`|`、`^`、`!`）和逻辑运算（`&&`、`||`、`!`）。位运算作用于整数类型，逻辑运算作用于 `bool`。
 > C/C++ 中 `&&` 和 `&` 在某些上下文可互换（非零即真），但 Rust 不允许。这消除了 C 语言中常见的 `if (flags & MASK)` 与 `if (flags && MASK)` 混淆错误。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -812,7 +792,6 @@ fn main() {
     let c = a + b;
 }
 ```
-
 > **修正**: `Wrapping<T>` 是一个 newtype 包装器，提供**环绕算术**（wrapping arithmetic）：溢出时静默环绕（`255u8 + 1 = 0`）。
 > 但它与原始类型 `T` 是不同的类型，不能直接混用运算。
 > 正确：`Wrapping(255u8) + Wrapping(1u8)` 或 `a.0 + b`（解包后）。
@@ -899,7 +878,6 @@ fn main() {
     println!("d = {}", d);
 }
 ```
-
 - A. `b = -1`, `d = 300`
 - B. `b = 4294967295`, `d = 44`
 - C. 编译错误
@@ -973,7 +951,6 @@ fn main() {
     }
 }
 ```
-
 - A. `equal` → `is_nan`
 - B. `not equal` → `is_nan`
 - C. `equal` → （无输出）

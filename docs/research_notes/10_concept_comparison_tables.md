@@ -1,23 +1,14 @@
 # 概念对比表汇编 {#概念对比表汇编}
 
 > **概念族**: 概念框架
-
 > **内容分级**: [归档级]
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成权威国际化来源对齐升级
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-24
-
 > **目标**: 通过对比理解概念差异
-
 > **级别**: L1 (给人看的)
 
 ---
@@ -25,9 +16,7 @@
 ## 📑 目录 {#目录}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [概念对比表汇编 {#概念对比表汇编}](#概念对比表汇编-概念对比表汇编)
@@ -76,105 +65,67 @@
 ## 一、所有权相关对比 {#一所有权相关对比}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Move vs Copy {#move-vs-copy}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | Move | Copy |
-
 | :--- | :--- | :--- |
-
 | **所有权** | 转移 | 复制 |
-
 | **原变量** | 无效 | 仍有效 |
-
 | **性能** | O(1)指针复制 | 视大小而定 |
-
 | **实现条件** | 默认 | 只含标量值 |
-
 | **示例类型** | `String`, `Vec<T>` | `i32`, `bool`, `(i32, i32)` |
-
 | **使用场景** | 转移资源所有权 | 简单值复制 |
 
 ### &T vs &mut T {#t-vs-mut-t}
 
 > **来源: [ACM](https://dl.acm.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | &T (不可变借用) | &mut T (可变借用) |
-
 | :--- | :--- | :--- |
-
 | **读** | ✅ | ✅ |
-
 | **写** | ❌ | ✅ |
-
 | **数量** | 多个 | 只能一个 |
-
 | **与其他借用共存** | 可以 | 不能 |
-
 | **排他性** | 共享 | 独占 |
-
 | **类比** | 多人阅读 | 一个人修改 |
 
 ### Box vs Rc vs Arc {#box-vs-rc-vs-arc}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | Box<T> | Rc<T> | Arc<T> |
-
 | :--- | :--- | :--- | :--- |
-
 | **所有权** | 唯一 | 共享 | 共享 |
-
 | **线程安全** | ✅ | ❌ | ✅ |
-
 | **引用计数** | 无 | 非原子 | 原子 |
-
 | **开销** | 最低 | 低 | 中等 |
-
 | **克隆行为** | 转移所有权 | 引用+1 | 引用+1 |
-
 | **使用场景** | 堆分配唯一值 | 单线程共享 | 多线程共享 |
 
 ### Cell vs RefCell vs Mutex vs RwLock {#cell-vs-refcell-vs-mutex-vs-rwlock}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | Cell<T> | RefCell<T> | Mutex<T> | RwLock<T> |
-
 | :--- | :--- | :--- | :--- | :--- |
-
 | **线程安全** | ❌ | ❌ | ✅ | ✅ |
-
 | **检查时机** | 编译时 | 运行时 | 运行时 | 运行时 |
-
 | **借用检查** | 无（ Copy类型） | 有 | 有 | 有 |
-
 | **并发读** | N/A | N/A | ❌ | ✅ |
-
 | **适用类型** | Copy类型 | 任意 | 任意 | 任意 |
-
 | **性能** | 最高 | 高 | 中等 | 中等 |
-
 | **典型错误** | 无 | BorrowMutError | Deadlock | Deadlock |
 
 ---
@@ -182,81 +133,52 @@
 ## 二、类型系统对比 {#二类型系统对比}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### impl Trait vs dyn Trait {#impl-trait-vs-dyn-trait}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | impl Trait | dyn Trait |
-
 | :--- | :--- | :--- |
-
 | **分发方式** | 静态 | 动态 |
-
 | **运行时开销** | 无 | 虚表查找 |
-
 | **代码生成** | 单态化 | 统一接口 |
-
 | **编译时大小** | 大（代码膨胀） | 小 |
-
 | **运行时大小** | 小 | 大（胖指针） |
-
 | **使用场景** | 性能敏感 | 需要运行时多态 |
-
 | **返回类型** | ✅ 支持 | ⚠️ 需要Box |
 
 ### Sized vs ?Sized {#sized-vs-sized}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | Sized | ?Sized (DST) |
-
 | :--- | :--- | :--- |
-
 | **编译时大小** | 已知 | 未知 |
-
 | **使用位置** | 栈/寄存器 | 必须间接（&/Box） |
-
 | **示例** | i32, String | str, [i32], dyn Trait |
-
 | **泛型默认** | ✅ | 需显式标注 |
-
 | **使用场景** | 通用 | 特化场景 |
 
 ### 型变对比 {#型变对比}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类型构造器 | 型变 | 说明 | 示例 |
-
 | :--- | :--- | :--- | :--- |
-
 | `Box<T>` | 协变(+) | 保持方向 | `Box<&'static str> <: Box<&'a str>` |
-
 | `Vec<T>` | 协变(+) | 保持方向 | `Vec<&'static str> <: Vec<&'a str>` |
-
 | `Option<T>` | 协变(+) | 保持方向 | `Option<&'static str> <: Option<&'a str>` |
-
 | `fn(T)` | 逆变(-) | 反转方向 | `fn(&'a str) <: fn(&'static str)` |
-
 | `fn() -> T` | 协变(+) | 保持方向 | `fn() -> &'static str <: fn() -> &'a str` |
-
 | `&mut T` | 不变(=) | 必须相同 | `&mut &'static str` 与 `&mut &'a str` 无关 |
-
 | `Cell<T>` | 不变(=) | 必须相同 | `Cell<&'static str>` 独立 |
 
 ---
@@ -264,31 +186,21 @@
 ## 三、并发对比 {#三并发对比}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Send vs Sync {#send-vs-sync}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | Send | Sync |
-
 | :--- | :--- | :--- |
-
 | **含义** | 可跨线程转移 | 可跨线程共享 |
-
 | **等价定义** | T: Send | &T: Send |
-
 | **示例类型** | i32, String, Arc<T> | i32, String, Arc<T> |
-
 | **非示例** | Rc<T>, *const T | Cell<T>, RefCell<T>, Rc<T> |
-
 | **保证** | 线程间转移安全 | 线程间共享安全 |
-
 | **同时满足** | 可以 | 可以 |
 
 ### thread::spawn vs tokio::spawn {#threadspawn-vs-tokiospawn}
@@ -296,19 +208,12 @@
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 特性 | thread::spawn | tokio::spawn |
-
 | :--- | :--- | :--- |
-
 | **创建** | OS线程 | 异步任务 |
-
 | **成本** | ~MB栈空间 | ~KB上下文 |
-
 | **数量限制** | ~几百 | ~数百万 |
-
 | **切换成本** | 高（内核） | 低（用户态） |
-
 | **适用场景** | CPU密集型 | IO密集型 |
-
 | **阻塞操作** | 可以 | 必须避免 |
 
 ### Mutex vs RwLock {#mutex-vs-rwlock}
@@ -316,21 +221,13 @@
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 特性 | Mutex | RwLock |
-
 | :--- | :--- | :--- |
-
 | **读并发** | ❌ 独占 | ✅ 共享 |
-
 | **写并发** | ❌ 独占 | ❌ 独占 |
-
 | **实现** | 简单 | 复杂 |
-
 | **性能** | 高 | 读高/写中等 |
-
 | **写者饥饿** | 无 | 可能 |
-
 | **使用场景** | 通用 | 读多写少 |
-
 | **推荐** | 默认选择 | 明确读多写少 |
 
 ---
@@ -338,69 +235,46 @@
 ## 四、异步对比 {#四异步对比}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### async fn vs 普通fn {#async-fn-vs-普通fn}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | fn | async fn |
-
 | :--- | :--- | :--- |
-
 | **返回值** | 立即返回 | 返回Future |
-
 | **执行** | 立即执行 | 惰性求值 |
-
 | **状态** | 无 | 状态机 |
-
 | **挂起** | 不能 | .await处可以 |
-
 | **运行时** | 不需要 | 需要 |
-
 | **传染性** | 无 | 调用者需await |
 
 ### Future vs Task {#future-vs-task}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | Future | Task |
-
 | :--- | :--- | :--- |
-
 | **定义** | 异步计算描述 | 运行时调度单位 |
-
 | **创建** | async块/async fn | tokio::spawn |
-
 | **执行** | 惰性 | 立即加入调度 |
-
 | **取消** | 通过Drop | 通过AbortHandle |
-
 | **并发** | 单描述 | 可真正并行 |
 
 ### Pin<&mut T> vs &mut T {#pinmut-t-vs-mut-t}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特性 | &mut T | Pin<&mut T> |
-
 | :--- | :--- | :--- |
-
 | **可移动** | ✅ | ❌ |
-
 | **使用场景** | 通用 | 自引用结构 |
-
 | **开销** | 无 | 无（零成本） |
-
 | **安全保证** | 借用规则 | + 位置稳定 |
-
 | **典型使用** | 通用借用 | async/await |
 
 ---
@@ -408,75 +282,49 @@
 ## 五、分布式模式对比 {#五分布式模式对比}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### Saga vs 2PC {#saga-vs-2pc}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 特性 | Saga | 2PC |
-
 | :--- | :--- | :--- |
-
 | **一致性** | 最终一致 | 强一致 |
-
 | **复杂度** | 中 | 高 |
-
 | **性能** | 高 | 低（阻塞） |
-
 | **故障恢复** | 补偿操作 | 协调者恢复 |
-
 | **协调方式** | 编排/编制 | 集中协调 |
-
 | **适用场景** | 长事务 | 短事务 |
-
 | **隔离性** | 弱 | 强 |
 
 ### 编排式 vs 编制式 Saga {#编排式-vs-编制式-saga}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 特性 | 编排式(Orchestration) | 编制式(Choreography) |
-
 | :--- | :--- | :--- |
-
 | **协调** | 集中协调器 | 事件驱动，各自决策 |
-
 | **复杂度** | 协调器复杂 | 服务间耦合 |
-
 | **可见性** | 高（集中） | 低（分散） |
-
 | **灵活性** | 低 | 高 |
-
 | **调试** | 容易 | 困难 |
-
 | **适用场景** | 流程固定 | 流程灵活 |
 
 ### CQRS vs CRUD {#cqrs-vs-crud}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 特性 | CRUD | CQRS |
-
 | :--- | :--- | :--- |
-
 | **模型** | 统一 | 读写分离 |
-
 | **复杂度** | 低 | 高 |
-
 | **查询灵活性** | 受限于写模型 | 专门优化 |
-
 | **一致性** | 立即 | 最终一致 |
-
 | **适用场景** | 简单应用 | 读多写少 |
-
 | **事件溯源** | 不需要 | 通常配合 |
 
 ---
@@ -484,49 +332,33 @@
 ## 六、工作流对比 {#六工作流对比}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 编排 vs 编制 {#编排-vs-编制}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | 编排(Orchestration) | 编制(Choreography) |
-
 | :--- | :--- | :--- |
-
 | **控制** | 集中 | 分散 |
-
 | **可见性** | 高 | 低 |
-
 | **耦合** | 低（服务只对接协调器） | 高（服务间直接通信） |
-
 | **复杂度** | 协调器复杂 | 流程分散难理解 |
-
 | **灵活性** | 低 | 高 |
-
 | **典型实现** | Temporal/Camunda | 事件驱动架构 |
 
 ### 向后补偿 vs 向前补偿 {#向后补偿-vs-向前补偿}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | 向后补偿 | 向前补偿 |
-
 | :--- | :--- | :--- |
-
 | **方向** | 撤销已执行操作 | 继续执行补偿操作 |
-
 | **语义** | 回滚 | 修正 |
-
 | **复杂度** | 高（需要补偿逻辑） | 中 |
-
 | **适用场景** | 标准Saga | 可交换更新 |
-
 | **示例** | 退款、释放库存 | 发送纠正通知 |
 
 ---
@@ -534,31 +366,21 @@
 ## 七、证明层级对比 {#七证明层级对比}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### L1 vs L2 vs L3 {#l1-vs-l2-vs-l3}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 特性 | L1 (证明思路) | L2 (完整证明) | L3 (机器证明) |
-
 | :--- | :--- | :--- | :--- |
-
 | **详细程度** | 核心思想 | 完整步骤 | 完全形式化 |
-
 | **受众** | 所有人 | 研究者 | 机器+专家 |
-
 | **验证** | 人工审查 | 人工审查 | 机器验证 |
-
 | **工作量** | 低 | 中 | 高 |
-
 | **形式化程度** | 低 | 中 | 高 |
-
 | **可读性** | 高 | 中 | 低 |
-
 | **本项目优先级** | ⭐⭐⭐ 高 | ⭐⭐⭐ 高 | ⭐⭐ 中 |
 
 ---
@@ -566,17 +388,14 @@
 ## 八、快速决策表 {#八快速决策表}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 选择何种智能指针？ {#选择何种智能指针}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
-
 需要唯一所有权？
 
 ├── 是 → Box<T>
@@ -594,17 +413,13 @@
         ├── 是 → Rc<RefCell<T>> / Arc<Mutex<T>>
 
         └── 否 → Rc<T> / Arc<T>
-
 ```
-
 ### 选择何种锁？ {#选择何种锁}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
-
 读多写少？
 
 ├── 是 → RwLock<T>
@@ -616,17 +431,13 @@
     │   ├── 是 → RwLock<T>（注意死锁）
 
     │   └── 否 → Mutex<T>（默认推荐）
-
 ```
-
 ### 选择何种并发模型？ {#选择何种并发模型}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
-
 CPU密集型？
 
 ├── 是 → thread::spawn
@@ -634,17 +445,13 @@ CPU密集型？
 └── 否（IO密集型）
 
     └── tokio::spawn
-
 ```
-
 ### 选择何种事务模式？ {#选择何种事务模式}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
-
 事务短？
 
 ├── 是 → 2PC
@@ -664,9 +471,7 @@ CPU密集型？
             ├── 是 → 向前补偿
 
             └── 否 → 向后补偿
-
 ```
-
 ---
 
 **维护者**: Rust Formal Methods Research Team
@@ -680,23 +485,17 @@ CPU密集型？
 ## 🆕 Rust 1.94 研究更新 {#rust-194-研究更新}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### 核心研究点 {#核心研究点}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - rray_windows 的形式化语义
-
 - ControlFlow 的代数结构
-
 - LazyCell/LazyLock 的延迟语义
-
 - 与现有理论框架的集成
 
 详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
@@ -708,17 +507,13 @@ CPU密集型？
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -726,15 +521,10 @@ CPU密集型？
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -742,17 +532,13 @@ CPU密集型？
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - Rust 1.94 特性速查
-
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -764,9 +550,7 @@ CPU密集型？
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -782,11 +566,9 @@ CPU密集型？
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -794,19 +576,12 @@ CPU密集型？
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

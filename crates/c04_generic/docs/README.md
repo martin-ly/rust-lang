@@ -1,5 +1,8 @@
 # C04 泛型编程 - 文档中心
 
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
+>
 > **创建日期**: 2025-10-22
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -42,7 +45,6 @@ where
     }
 }
 ```
-
 ---
 
 ## 文档结构导航
@@ -96,7 +98,6 @@ enum Result<T, E> {
     Err(E),
 }
 ```
-
 ### 2. Trait 系统
 
 ```rust
@@ -117,7 +118,6 @@ fn render<T: Drawable>(item: &T) {
     item.draw();
 }
 ```
-
 ### 3. 关联类型
 
 ```rust
@@ -138,7 +138,6 @@ trait LendingIterator {
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 }
 ```
-
 ### 4. 高级特性
 
 ```rust
@@ -163,7 +162,6 @@ impl<T: std::fmt::Display> ToString for T {
     }
 }
 ```
-
 ---
 
 ## 学习路径指引
@@ -272,7 +270,6 @@ cargo test --test rust_192_comprehensive_tests
 # 运行基准测试
 cargo bench -p c04_generic
 ```
-
 ### 外部资源
 
 - [The Rust Book - 泛型](https://doc.rust-lang.org/book/ch10-00-generics.html)

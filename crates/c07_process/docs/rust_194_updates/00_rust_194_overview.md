@@ -47,7 +47,6 @@ version = "0.1.0"
 edition = "2024"
 rust-version = "1.94"
 ```
-
 ---
 
 ## 代码示例
@@ -60,7 +59,6 @@ pub fn example() {
     println!("子进程管理与 IPC");
 }
 ```
-
 ### 2.2 高级模式
 
 ```rust
@@ -69,7 +67,6 @@ pub fn advanced_example<T>(value: T) -> T {
     value
 }
 ```
-
 ---
 
 ## 迁移指南

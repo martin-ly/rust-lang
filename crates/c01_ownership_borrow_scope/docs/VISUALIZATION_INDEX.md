@@ -105,7 +105,6 @@ graph TB
     style Doc3 fill:#fff5e1
     style Doc4 fill:#f5e1ff
 ```
-
 ## 📖 文档详细介绍
 
 ### 1. 知识图谱 (Knowledge Graph)
@@ -242,9 +241,9 @@ graph TB
 
 #### 🔗 相关章节3
 
-- [最佳实践](tier_01_foundations/04_常见问题.md)
-- [常见陷阱](tier_01_foundations/04_常见问题.md)
-- [性能调优](tier_03_references/09_性能优化参考.md)
+- [最佳实践](tier_01_foundations/04_faq.md)
+- [常见陷阱](tier_01_foundations/04_faq.md)
+- [性能调优](tier_03_references/09_performance_optimization_reference.md)
 
 ---
 
@@ -298,7 +297,7 @@ graph TB
 
 - [高级所有权](tier_03_references/01_advanced_ownership.md)
 - [高级借用](tier_03_references/02_advanced_borrowing.md)
-- [高级生命周期](tier_03_references/03_生命周期参考.md)
+- [高级生命周期](tier_03_references/03_lifetimes_reference.md)
 
 ---
 
@@ -417,7 +416,6 @@ npm install -g @mermaid-js/mermaid-cli
 # 生成 SVG/PNG
 mmdc -i KNOWLEDGE_GRAPH.md -o output.svg
 ```
-
 #### 导出为图片
 
 ```bash
@@ -427,7 +425,6 @@ mmdc -i MULTIDIMENSIONAL_MATRIX.md -o matrix.png
 mmdc -i MIND_MAP.md -o mindmap.png
 mmdc -i CONCEPT_RELATIONSHIP_NETWORK.md -o network.png
 ```
-
 ## 🔗 与核心文档的关联
 
 ### 理论基础文档
@@ -454,17 +451,17 @@ mmdc -i CONCEPT_RELATIONSHIP_NETWORK.md -o network.png
 | :--- | :--- |
 | [高级所有权](tier_03_references/01_advanced_ownership.md)   | 概念关系网络-所有权核心关系 |
 | [高级借用](tier_03_references/02_advanced_borrowing.md)     | 概念关系网络-借用检查器网络 |
-| [高级生命周期](tier_03_references/03_生命周期参考.md) | 概念关系网络-生命周期关系网 |
+| [高级生命周期](tier_03_references/03_lifetimes_reference.md) | 概念关系网络-生命周期关系网 |
 | [智能指针](tier_03_references/04_smart_pointers.md)         | 思维导图-智能指针生态树     |
 
 ### 实践应用文档
 
 | 实践文档                                           | 对应可视化章节            |
 | :--- | :--- |
-| [设计模式](tier_02_guides/07_实战项目集.md)    | 知识图谱-设计模式与所有权 |
-| [最佳实践](tier_01_foundations/04_常见问题.md)     | 多维矩阵-最佳实践决策树   |
-| [常见陷阱](tier_01_foundations/04_常见问题.md)    | 思维导图-常见错误诊断树   |
-| [性能调优](tier_03_references/09_性能优化参考.md) | 概念关系网络-性能优化网络 |
+| [设计模式](tier_02_guides/07_hands_on_projects.md)    | 知识图谱-设计模式与所有权 |
+| [最佳实践](tier_01_foundations/04_faq.md)     | 多维矩阵-最佳实践决策树   |
+| [常见陷阱](tier_01_foundations/04_faq.md)    | 思维导图-常见错误诊断树   |
+| [性能调优](tier_03_references/09_performance_optimization_reference.md) | 概念关系网络-性能优化网络 |
 
 ## 📈 学习建议
 

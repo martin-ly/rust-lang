@@ -117,7 +117,6 @@ mod windows_specific {
     }
 }
 ```
-
 ### 1.2 Unix/Linux 特性
 
 ```rust
@@ -214,7 +213,6 @@ mod unix_specific {
     }
 }
 ```
-
 ### 1.3 macOS 特性
 
 ```rust
@@ -286,7 +284,6 @@ mod macos_specific {
     }
 }
 ```
-
 ## 2. 跨平台抽象层
 
 ### 2.1 统一接口设计
@@ -398,7 +395,6 @@ pub enum ProcessError {
     PlatformNotSupported(String),
 }
 ```
-
 ### 2.2 平台特定实现
 
 ```rust
@@ -590,7 +586,6 @@ impl CrossPlatformProcessManager for unix_specific::UnixProcessManager {
     }
 }
 ```
-
 ### 2.3 条件编译策略
 
 ```rust
@@ -655,7 +650,6 @@ impl PlatformCapabilities {
     }
 }
 ```
-
 ## 3. 进程创建差异
 
 ### 3.1 命令解析差异
@@ -765,7 +759,6 @@ pub enum CommandParseError {
     UnsupportedPlatform(String),
 }
 ```
-
 ### 3.2 环境变量处理
 
 ```rust
@@ -862,7 +855,6 @@ impl CrossPlatformEnvManager {
     }
 }
 ```
-
 ### 3.3 工作目录设置
 
 ```rust
@@ -931,7 +923,6 @@ pub enum WorkingDirError {
     PermissionDenied(String),
 }
 ```
-
 ## 4. IPC 机制差异
 
 ### 4.1 管道实现差异
@@ -1030,7 +1021,6 @@ pub enum PipeError {
     IoFailed(String),
 }
 ```
-
 ### 4.2 信号处理差异
 
 ```rust
@@ -1131,7 +1121,6 @@ pub enum SignalError {
     UnsupportedSignal(String),
 }
 ```
-
 ## 5. 权限和安全
 
 ### 5.1 用户权限模型
@@ -1246,7 +1235,6 @@ pub enum UserError {
     UserNotFound(String),
 }
 ```
-
 ## 6. 性能优化
 
 ### 6.1 平台特定优化
@@ -1318,7 +1306,6 @@ pub enum OptimizationError {
     PlatformNotSupported(String),
 }
 ```
-
 ## 7. 测试策略
 
 ```rust
@@ -1482,7 +1469,6 @@ impl CrossPlatformTestSuite {
     }
 }
 ```
-
 ## 8. 最佳实践
 
 ### 8.1 跨平台开发最佳实践
@@ -1603,7 +1589,6 @@ pub enum Severity {
     Critical,
 }
 ```
-
 ## 9. 小结
 
 跨平台进程管理是 Rust 系统编程中的重要主题，需要充分考虑不同平台的差异和特性：

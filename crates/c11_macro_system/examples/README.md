@@ -81,7 +81,6 @@ cargo run --example 03_repetition
 # 运行递归宏示例
 cargo run --example 04_recursive_macros
 ```
-
 ### 查看宏展开
 
 ```bash
@@ -94,7 +93,6 @@ cargo expand --example 02_pattern_matching
 cargo expand --example 03_repetition
 cargo expand --example 04_recursive_macros
 ```
-
 ### 运行 Rust 版本特性示例
 
 ```bash
@@ -107,7 +105,6 @@ cargo run --example rust_191_features_demo
 # Rust 1.90 特性演示（历史参考）
 cargo run --example rust_190_features_demo
 ```
-
 ### 运行测试
 
 ```bash
@@ -120,7 +117,6 @@ cargo test declarative_tests
 # 运行过程宏测试（在 proc crate 中）
 cargo test -p c11_macro_system_proc
 ```
-
 ---
 
 ## 学习建议
@@ -132,27 +128,22 @@ cargo test -p c11_macro_system_proc
    ```bash
    cargo run --example 01_macro_rules_basics
    ```
-
    - `macro_rules!` 语法
    - 基本模式匹配
    - 简单替换
-
 2. **掌握模式匹配**
 
    ```bash
    cargo run --example 02_pattern_matching
    ```
-
    - 片段分类符 (`expr`, `ty`, `ident` 等)
    - 多重匹配分支
    - 捕获组
-
 3. **学习重复模式**
 
    ```bash
    cargo run --example 03_repetition
    ```
-
    - `$()*` - 零次或多次
    - `$()+` - 一次或多次
    - `$()?` - 零次或一次
@@ -165,11 +156,9 @@ cargo test -p c11_macro_system_proc
    ```bash
    cargo run --example 04_recursive_macros
    ```
-
    - TT muncher 模式
    - 递归终止条件
    - 复杂 token 处理
-
 2. **探索宏卫生性**
    - 宏内部作用域
    - 变量捕获规则
@@ -189,7 +178,6 @@ cargo test -p c11_macro_system_proc
    ```bash
    cargo run --example rust_192_features_demo
    ```
-
    - `rotate_right` 在宏展开队列中的应用
    - `NonZero::div_ceil` 在宏缓存中的应用
    - 宏展开性能监控
@@ -231,7 +219,6 @@ macro_rules! vec_mac {
     };
 }
 ```
-
 ### 片段分类符
 
 | 分类符 | 匹配内容 | 示例 |
@@ -265,7 +252,6 @@ macro_rules! print_all_tts {
 // 使用
 print_all_tts!(fn main() { println!("hello"); });
 ```
-
 ### 宏的卫生性
 
 ```rust
@@ -280,7 +266,6 @@ macro_rules! using_a {
 
 let four = using_a!(a / 10); // 错误！宏内部的 a 在外部不可见
 ```
-
 ### 常用宏模式
 
 ```rust
@@ -323,7 +308,6 @@ macro_rules! test_cases {
     };
 }
 ```
-
 ---
 
 ## 过程宏说明
@@ -356,7 +340,6 @@ pub fn sql(input: TokenStream) -> TokenStream {
     // ...
 }
 ```
-
 ---
 
 ## 相关文档
@@ -414,7 +397,6 @@ macro_rules! ensure {
 // ✅ 好的宏：避免过于复杂的递归
 // 复杂逻辑考虑使用过程宏
 ```
-
 ### 常见模式总结
 
 | 模式 | 用途 | 示例 |
@@ -449,7 +431,6 @@ macro_rules! debug_macro {
     }};
 }
 ```
-
 ---
 
 *示例基于 Rust 1.94+，Edition 2024*:

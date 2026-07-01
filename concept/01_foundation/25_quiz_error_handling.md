@@ -45,7 +45,6 @@ fn main() {
     println!("{:?} {:?}", x.is_ok(), y.is_err());
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -90,7 +89,6 @@ fn main() {
     println!("{:?}", caller());
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -107,7 +105,6 @@ let val = match may_fail() {
     Err(e) => return Err(e.into()),
 };
 ```
-
 **关键约束**：`?` 只能在返回 `Result`、`Option` 或实现 `Try` trait 的类型的函数中使用。
 
 **转换能力**：`?` 会自动调用 `.into()` 进行错误类型转换（要求目标错误类型实现 `From<SourceError>`）。
@@ -131,7 +128,6 @@ fn main() {
     println!("{m}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -143,7 +139,6 @@ fn main() {
 42
 thread 'main' panicked at 'should be a number: ParseIntError { ... }'
 ```
-
 **解析**：
 
 - `s.parse().unwrap()` ✅ `"42"` 可解析为 `i32`
@@ -165,7 +160,6 @@ let m = bad.parse().unwrap_or(0);        // 失败时用默认值
 let m = bad.parse().unwrap_or_default(); // 失败时用类型默认值
 let m = bad.parse()?;                    // 传播错误
 ```
-
 **知识点**：`unwrap` 是 Rust 中最常见的 panic 来源之一。生产代码应尽量避免，或用 `unwrap_or` / `unwrap_or_else` 替代。[→ 错误处理（Error Handling）基础详解](10_error_handling_basics.md)
 
 </details>
@@ -187,7 +181,6 @@ fn main() {
     println!("{:?}", b.unwrap_or(0));
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -199,7 +192,6 @@ None
 Some(6)
 0
 ```
-
 **解析**：
 
 | 表达式 | 结果 | 说明 |
@@ -244,7 +236,6 @@ fn main() {
     println!("Count: {value}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -254,7 +245,6 @@ fn main() {
 Mode: debug
 Count: 0
 ```
-
 **解析**：
 
 | 语法 | 适用场景 | 优势 |
@@ -272,7 +262,6 @@ let Some(mode) = config else {
 };
 println!("Mode: {mode}");
 ```
-
 **知识点**：Rust 提供多种 Option 解构语法，选择取决于"需要处理多少种情况"和"是否需要提前返回"。[→ 控制流详解](07_control_flow.md)
 
 </details>
@@ -290,7 +279,6 @@ fn main() {
     println!("{}", v[idx]);
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -317,7 +305,6 @@ if let Some(val) = v.get(idx) {
     println!("Index out of bounds");
 }
 ```
-
 **知识点**：Rust 区分"可恢复错误"（`Result`）和"不可恢复错误"（`panic`）。选择正确的错误处理策略是健壮程序的基础。[→ Panic 详解](13_panic_and_abort.md)
 
 </details>
@@ -343,7 +330,6 @@ fn main() {
     println!("{result}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -402,7 +388,6 @@ fn main() {
     println!("{:?}", read_config());
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -425,7 +410,6 @@ let content = match std::fs::read_to_string("config.txt") {
     Err(e) => return Err(AppError::from(e)), // 自动调用 From
 };
 ```
-
 **进阶**：Rust 1.81+ 的 `std::error::Error` trait 改进和 `anyhow`/`thiserror` crate 进一步简化了自定义错误。
 
 **知识点**：`From` trait 是实现统一错误类型的关键，`?` 运算符的自动转换能力消除了手动包装错误的大量样板代码。[→ 错误处理进阶](../02_intermediate/04_error_handling.md)
@@ -457,7 +441,6 @@ fn main() {
     }
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -468,7 +451,6 @@ fn main() {
 1: failed - invalid digit found in string
 2: failed - invalid digit found in string
 ```
-
 **解析**：
 
 - `s1 = "42"` → `Ok(42)` ✅
@@ -490,7 +472,6 @@ let all_ok: Result<Vec<i32>, _> = vec![s1, s2, s3]
     .map(|s| s.parse())
     .collect(); // Result 实现了 FromIterator
 ```
-
 **知识点**：`Result` 实现了 `FromIterator`，允许 `collect()` 将 `Vec<Result<T, E>>` 转换为 `Result<Vec<T>, E>`（第一个错误即整体失败）。→ 迭代器（Iterator）详解
 
 </details>
@@ -511,7 +492,6 @@ fn main() {
     println!("{:?}", parse_and_scale("xyz"));
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -523,7 +503,6 @@ fn main() {
 Ok(50)
 Err("Parse failed: invalid digit found in string")
 ```
-
 **解析**：
 
 | 方法 | 作用 | 对 `Ok` | 对 `Err` |
@@ -538,7 +517,6 @@ s.parse::<i32>()           // "5" → Ok(5), "xyz" → Err(ParseIntError)
     .map(|n| n * 10)       // Ok(5) → Ok(50), Err → 不变
     .map_err(|e| ...)      // Ok → 不变, Err(e) → Err("Parse failed: ...")
 ```
-
 **常见组合**：
 
 ```rust,ignore
@@ -548,7 +526,6 @@ result
     .map_err(|e| Error::from(e))
     .and_then(|v| v.validate())
 ```
-
 **知识点**：`map` / `map_err` 是 `Result` 的"端点转换"工具，允许在不展开的情况下修改成功值或错误值。[→ 错误处理基础详解](10_error_handling_basics.md)
 
 </details>

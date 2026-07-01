@@ -19,14 +19,16 @@
 > **前置概念**:
 >
 > [Rust 版本跟踪](05_rust_version_tracking.md) ·
-> [Pattern Matching](../02_intermediate/08_pattern_matching.md) ·
+> [Control Flow](../01_foundation/07_control_flow.md) ·
 > [Atomic](../03_advanced/11_atomics_and_memory_ordering.md) ·
 > [Unsafe](../03_advanced/03_unsafe.md)
 >
 > **后置概念**:
 >
 > [Rust 1.96.0 稳定特性](rust_1_96_stabilized.md) ·
-> [Rust 1.97 前沿特性预览](rust_1_97_preview.md)
+> [Rust 1.97 前沿特性预览](rust_1_97_preview.md) ·
+> [Toolchain](../06_ecosystem/01_toolchain.md) ·
+> [Security Practices](../06_ecosystem/19_security_practices.md)
 >
 
 ---
@@ -58,7 +60,6 @@ let arch_str = cfg_select! {
     _ => "unknown",
 };
 ```
-
 ### 1.2 `if let` guards on match arms
 
 稳定版本：**1.95.0**
@@ -72,7 +73,6 @@ match value {
     None => println!("no value"),
 }
 ```
-
 ### 1.3 路径段关键字重命名导入
 
 稳定版本：**1.95.0**
@@ -80,7 +80,6 @@ match value {
 ```rust
 use std::keyword as kw;  // 重命名关键字路径段
 ```
-
 ### 1.4 PowerPC/PowerPC64 内联汇编稳定化
 
 稳定版本：**1.95.0**
@@ -91,7 +90,6 @@ unsafe {
     asm!("nop", options(nomem, nostack));
 }
 ```
-
 ---
 
 ## 2. 标准库层
@@ -115,7 +113,6 @@ for i in range {
     print!("{} ", i); // 1 2 3 4 5
 }
 ```
-
 ### 2.2 原子操作 — `update` / `try_update`
 
 稳定版本：**1.95.0**
@@ -135,7 +132,6 @@ let result = counter.try_update(Ordering::Relaxed, Ordering::Relaxed, |current| 
 // update: 重试直到成功（spin loop）
 counter.update(Ordering::Relaxed, Ordering::Relaxed, |current| current + 1);
 ```
-
 ### 2.3 集合 — 获取可变引用的插入操作
 
 稳定版本：**1.95.0**
@@ -154,7 +150,6 @@ let mut dq = VecDeque::new();
 let front = dq.push_front_mut(1);
 *front *= 2;
 ```
-
 ### 2.4 裸指针 — 不安全转引用
 
 稳定版本：**1.95.0**
@@ -168,7 +163,6 @@ let r: &i32 = unsafe { ptr.as_ref_unchecked() };
 let mut_ptr: *mut String = &mut String::from("hi");
 let m: &mut String = unsafe { mut_ptr.as_mut_unchecked() };
 ```
-
 ### 2.5 布局计算 — `Layout` 新 API
 
 稳定版本：**1.95.0**
@@ -182,7 +176,6 @@ let repeated = layout.repeat(10).unwrap().0;
 let packed = layout.repeat_packed(10);
 let extended = layout.extend_packed(Layout::new::<u8>()).unwrap().0;
 ```
-
 ### 2.6 提示 — `cold_path`
 
 稳定版本：**1.95.0**
@@ -199,7 +192,6 @@ fn handle_error(e: Option<&str>) {
     }
 }
 ```
-
 ### 2.7 布尔转换 — `TryFrom<{integer}>`
 
 稳定版本：**1.95.0**
@@ -209,7 +201,6 @@ let b: bool = bool::try_from(1u8).unwrap(); // true
 let b0: bool = bool::try_from(0u8).unwrap(); // false
 let err = bool::try_from(2u8); // Err(()) — 仅 0 和 1 有效
 ```
-
 ### 2.8 `MaybeUninit` 数组互转
 
 稳定版本：**1.95.0**
@@ -221,7 +212,6 @@ let arr: [MaybeUninit<i32>; 3] = [MaybeUninit::new(1), MaybeUninit::new(2), Mayb
 let uninit_arr: MaybeUninit<[i32; 3]> = MaybeUninit::from(arr);
 let back: [MaybeUninit<i32>; 3] = uninit_arr.into();
 ```
-
 ### 2.9 `Cell` 数组引用
 
 稳定版本：**1.95.0**
@@ -233,7 +223,6 @@ let cell_arr: Cell<[i32; 3]> = Cell::new([1, 2, 3]);
 let ref_arr: &[Cell<i32>; 3] = cell_arr.as_ref();
 let ref_slice: &[Cell<i32>] = cell_arr.as_ref();
 ```
-
 ---
 
 ## 3. 编译器与平台
@@ -247,7 +236,6 @@ let ref_slice: &[Cell<i32>] = cell_arr.as_ref();
 ```bash
 rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 ```
-
 ### 3.2 平台支持提升
 
 | 目标 | 新级别 |
@@ -283,7 +271,6 @@ const fn check_control(cf: ControlFlow<i32, ()>) -> bool {
     cf.is_break()
 }
 ```
-
 ---
 
 ## 5. 与 Rust 2024 Edition 的关联

@@ -108,7 +108,6 @@ fn test_resource_manager() {
     assert_eq!(manager.get_resource(0), Some(&42));
 }
 ```
-
 ---
 
 ## 示例2: 异步与网络编程集成 {#示例2-异步与网络编程集成}
@@ -146,7 +145,6 @@ async fn async_http_server() -> Result<(), Box<dyn std::error::Error>> {
     }
 }
 ```
-
 ---
 
 ## 示例3: 线程与进程管理集成 {#示例3-线程与进程管理集成}
@@ -219,7 +217,6 @@ impl Drop for ThreadPool {
     }
 }
 ```
-
 ---
 
 ## 示例4: 宏系统与设计模式集成 {#示例4-宏系统与设计模式集成}
@@ -271,7 +268,6 @@ fn test_singleton() {
     assert_eq!(config.get_value(), Some("test".to_string()));
 }
 ```
-
 ---
 
 ## 示例5: 算法与性能优化集成 {#示例5-算法与性能优化集成}
@@ -310,7 +306,6 @@ fn test_data_pipeline() {
     assert_eq!(data, vec![1, 2, 3, 4, 5, 6, 9]);
 }
 ```
-
 ---
 
 ## 示例6: WASM与跨平台集成 {#示例6-wasm与跨平台集成}
@@ -342,7 +337,6 @@ fn test_wasm_integration() {
     assert_eq!(wasm_add(3, 4), 7);
 }
 ```
-
 ---
 
 ## 最佳实践 {#最佳实践}
@@ -398,7 +392,6 @@ fn test_wasm_integration() {
 // 前端：WASM + 共享类型定义
 // 共享：C02 类型系统定义的通用数据结构
 ```
-
 ### 场景2: 高性能数据处理系统 {#场景2-高性能数据处理系统}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -461,7 +454,6 @@ fn test_wasm_integration() {
 ## Rust 1.95+ 跨模块集成最佳实践 {#rust-195-跨模块集成最佳实践}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### LazyLock 在跨模块配置共享中的应用 {#lazylock-在跨模块配置共享中的应用}
@@ -483,7 +475,6 @@ pub fn is_config_ready() -> bool {
     LazyLock::get(&SHARED_CONFIG).is_some()
 }
 ```
-
 ### ControlFlow 在跨模块错误处理中的应用 {#controlflow-在跨模块错误处理中的应用}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -512,7 +503,6 @@ where
     module2.validate(&intermediate)
 }
 ```
-
 ### array_windows 在跨模块数据流中的应用 {#array_windows-在跨模块数据流中的应用}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -529,7 +519,6 @@ pub fn process_module_pipeline(
         .collect()
 }
 ```
-
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
 
 ---

@@ -71,44 +71,37 @@
    ┌────┼────┐
    基础  复合  高级
    ```
-
 2. **基础类型体系** - 完整的类型分类树
    - 标量类型（整数/浮点/布尔/字符）
    - 引用类型（&T / &mut T / 裸指针）
    - 复合类型（元组/数组/切片/结构体/枚举）
    - 智能指针（Box/Rc/Arc/RefCell/Pin）
-
 3. **泛型与Trait系统** - 层次化展示
    - 函数/结构体/枚举泛型
    - Trait定义/实现/约束
    - 关联类型 / GAT / RPITIT / async trait
    - Const泛型 / 标记Trait
-
 4. **生命周期系统** - 规则可视化
    - 生命周期标注语法
    - 3条省略规则
    - NLL (非词法生命周期)
    - 'static生命周期
-
 5. **高级类型特性** - 深度技术
    - 类型转换（From/Into/TryFrom/as）
    - PhantomData和类型状态模式
    - HRTB (高阶Trait约束)
    - Variance (型变理论)
    - repr属性
-
 6. **学习路径导航**
    - 🌱 初学者路径（2-3周）
    - ⚡ 进阶路径（2-3周）
    - 🎓 专家路径（3-4周）
    - 每条路径都有详细的学习计划和实践建议
-
 7. **问题诊断树**
    - 类型不匹配 → 解决方案
    - Trait约束不满足 → 解决方案
    - 生命周期错误 → 解决方案
    - 借用检查错误 → 解决方案
-
 8. **技术选型决策树**
    - 编译期 vs 运行时多态
    - 单线程 vs 多线程共享所有权
@@ -142,7 +135,6 @@ fn print_array<T: Display>(arr: impl IntoIterator<Item = T>) {
     }
 }
 ```
-
 **GAT (泛型关联类型)**:
 
 ```rust
@@ -151,7 +143,6 @@ trait LendingIterator {
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 }
 ```
-
 **RPITIT (返回位置 impl Trait)**:
 
 ```rust
@@ -159,7 +150,6 @@ trait Factory {
     fn create(&self) -> impl Display;  // Rust 1.75+
 }
 ```
-
 #### 2. 基础类型系统
 
 - **标量类型实战** - 整数/浮点/布尔/字符的全面使用
@@ -269,7 +259,6 @@ trait Factory {
 完整闭环:
 理论 ⇄ 实践 ⇄ 应用
 ```
-
 ---
 
 ## 📈 使用建议

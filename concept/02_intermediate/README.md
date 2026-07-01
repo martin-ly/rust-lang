@@ -64,7 +64,6 @@ mindmap
       Option[Option<T>]
       传播[? 运算符]
 ```
-
 > **认知功能**: 本图是 L2 层的**全景认知地图**，帮助读者在深入学习前建立"四核机制"的整体拓扑框架。
 > 建议在学习各子模块（Module）前通览此图，定位当前概念在四核中的位置。
 > 关键洞察：Trait 是 Rust 行为抽象的基石，Trait Bounds 是 Trait 与泛型（Generics）的枢纽交叉点。
@@ -137,7 +136,6 @@ graph TB
     style MM fill:#9f9,stroke:#333
     style EH fill:#ff9,stroke:#333
 ```
-
 > **认知功能**: 本图是 L2 层的**概念关系网络图**，可视化四核心概念间的互构关系及与 L1/L3 的跨层连接。建议在遇到概念交叉问题时查阅，定位依赖路径与前置后置关系。关键洞察：Trait Bounds 是 L2 的枢纽交叉点，L2 整体是连接 L1 所有权（Ownership）基础与 L3 并发异步（Async）的语义桥梁。
 
 ### 1.1 概念间语义链接
@@ -170,7 +168,6 @@ Trait Bounds 是 L2 的"枢纽概念"：
                ▼
           零成本抽象
 ```
-
 ---
 
 ## 二、文件索引与关系
@@ -232,7 +229,6 @@ L1 Foundation
     ▼              ▼
 L3 Advanced (Concurrency / Async)
 ```
-
 ### 3.1 严格依赖路径
 
 ```text
@@ -256,7 +252,6 @@ Error Handling
     │ 后置: 异步错误传播, ? 在闭包中的使用
     │ 反事实: 若无 Result 类型，错误处理退化为异常或返回值检查
 ```
-
 ---
 
 ## 四、形式化层级定位
@@ -300,7 +295,6 @@ Error Handling
 "如何处理错误？"             "函数可能失败            "Result = 显式         "错误 Monad         "fn f() -> Result<T,E>" "? 在闭包中的
                              怎么返回值？"            错误通道"             (Either A E)"                           限制"
 ```
-
 ---
 
 ## 七、跨层出口

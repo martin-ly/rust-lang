@@ -55,7 +55,6 @@ let mut buf = WasmBuffer193::new(16);
 buf.write_from_slice(b"hello");
 let slice = unsafe { buf.get_initialized_ref(5) };
 ```
-
 ### 2. String/Vec into_raw_parts
 
 **用途**: WASM 与 JS 间零拷贝传递时获取原始指针、长度、容量
@@ -68,7 +67,6 @@ let (ptr, len, capacity) = s.into_raw_parts();
 // 可传递给 FFI 或重建
 let s = unsafe { String::from_raw_parts(ptr, len, capacity) };
 ```
-
 ### 3. VecDeque pop_front_if / pop_back_if
 
 **用途**: 条件性移除前端或后端元素，适用于流式数据处理
@@ -81,7 +79,6 @@ while let Some(v) = deque.pop_front_if(|x| *x < 0) {}
 while let Some(v) = deque.pop_back_if(|x| *x > 100) {}
 // deque: [2, 3, 5]
 ```
-
 ### 4. slice.as_array()
 
 **用途**: 将切片安全转换为固定大小数组引用
@@ -92,7 +89,6 @@ while let Some(v) = deque.pop_back_if(|x| *x > 100) {}
 let slice = &[1, 2, 3, 4];
 let array: Option<&[i32; 4]> = slice.as_array();
 ```
-
 ### 5. Duration::from_nanos_u128
 
 **用途**: 高精度纳秒级时间（u128 支持更长范围）
@@ -103,7 +99,6 @@ let array: Option<&[i32; 4]> = slice.as_array();
 let d = Duration::from_nanos_u128(1_000_000_000);
 assert_eq!(d.as_secs(), 1);
 ```
-
 ### 6. char::MAX_LEN_UTF8 / MAX_LEN_UTF16
 
 **用途**: 预分配 UTF-8/UTF-16 编码缓冲区
@@ -113,7 +108,6 @@ assert_eq!(d.as_secs(), 1);
 ```rust
 let buf_size = char::MAX_LEN_UTF8;  // 4
 ```
-
 ### 7. fmt::from_fn
 
 **用途**: 创建自定义 Display 实现
@@ -123,7 +117,6 @@ let buf_size = char::MAX_LEN_UTF8;  // 4
 ```rust
 let f = fmt::from_fn(|f| write!(f, "WASM[{}]", 42));
 ```
-
 ---
 
 ## 实现模块

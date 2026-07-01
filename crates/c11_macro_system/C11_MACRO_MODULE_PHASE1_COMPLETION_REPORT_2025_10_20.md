@@ -142,7 +142,6 @@ crates/C11_macro_system/
 ├── proc_macros/               # 过程宏crate (待实现)
 └── reports/                    # 报告目录
 ```
-
 ### 2.2 核心代码
 
 #### 声明宏库实现
@@ -182,7 +181,6 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match
 ```bash
 cargo run -p C11_macro_system --example 01_macro_rules_basics
 ```
-
 **输出示例**:
 
 ```text
@@ -209,7 +207,6 @@ max!(10, 5, 20, 15) = 20
 
 === 示例完成 ===
 ```
-
 ### 2.3 学习文档
 
 #### 核心导航文档 (3篇)
@@ -291,13 +288,11 @@ members = [
     "crates/C11_macro_system",  # ✅ 新增
 ]
 ```
-
 ### 3.2 编译验证
 
 ```bash
 cargo check -p C11_macro_system
 ```
-
 **结果**: ✅ 编译成功，无错误无警告
 
 ### 3.3 测试验证
@@ -305,7 +300,6 @@ cargo check -p C11_macro_system
 ```bash
 cargo test -p C11_macro_system
 ```
-
 **结果**: ✅ 所有测试通过
 
 ---
@@ -322,7 +316,6 @@ cargo test -p C11_macro_system
    - ✅ C13: 可靠性框架
    - 🚧 C11: 宏系统 (正在开发)
    ```
-
 2. **进行中模块** - 在中期规划中添加详细状态
 
    ```markdown
@@ -336,9 +329,7 @@ cargo test -p C11_macro_system
      - [ ] 高级主题（5篇）
      - [ ] 最佳实践（4篇）
    ```
-
 3. **模块编号调整** - 原C11-C17顺延为C15-C18
-
 4. **版本和状态** - 更新为v1.1-dev
 
 ---
@@ -386,7 +377,6 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match
 ✅ cargo test -p C11_macro_system
 ✅ cargo clippy -p C11_macro_system
 ```
-
 **结果**: 全部通过，无警告
 
 ### 6.2 示例验证
@@ -486,12 +476,10 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match
    - 多维度索引（难度、角色、主题）
    - 进度追踪清单
    - 灵活的学习路径
-
 2. **理论与实践结合**
    - 深入的理论基础
    - 大量可运行示例
    - 实践练习设计
-
 3. **高质量文档**
    - 清晰的结构
    - 丰富的代码示例
@@ -601,7 +589,6 @@ cargo doc -p C11_macro_system --open
 # 宏展开
 cargo expand -p C11_macro_system
 ```
-
 ---
 
 **报告编制**: AI Assistant

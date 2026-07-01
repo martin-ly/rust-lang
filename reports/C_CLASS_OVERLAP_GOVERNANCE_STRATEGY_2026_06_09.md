@@ -33,7 +33,6 @@ docs/research_notes/  ←── C类（研究笔记）
     ↓
 docs/rust-ownership-decidability/  ←── C类（形式化工程）
 ```
-
 ## 2. 重复类型分类
 
 ### 2.1 预期内重复（无需处理）
@@ -113,7 +112,6 @@ python scripts/detect_content_overlap.py
 # --threshold 0.75  # 调整相似度阈值
 # --output reports/overlap_report.md
 ```
-
 ### 新文档检查清单
 
 创建新文档前，检查：

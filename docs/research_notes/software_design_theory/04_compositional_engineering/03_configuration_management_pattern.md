@@ -143,7 +143,6 @@ fn load_config() -> Result<AppConfig, config::ConfigError> {
         .try_deserialize()
 }
 ```
-
 设计要点：
 
 - **`required(false)`**：配置文件可选，避免本地开发必须携带配置文件。
@@ -172,7 +171,6 @@ cd crates/c07_process
 APP__SERVER__PORT=9000 APP__LOG_LEVEL=debug \
   cargo run --example configuration_management_pattern
 ```
-
 示例要点：
 
 1. 通过 `Config::builder()` 组合三种来源。
@@ -196,7 +194,6 @@ let cfg = AppConfig {
     ..Default::default()
 };
 ```
-
 **正确做法**：敏感字段仅通过环境变量或加密密钥管理服务注入，结构体实现 `Debug` 时遮蔽字段。
 
 ```rust
@@ -212,7 +209,6 @@ impl std::fmt::Debug for Secrets {
     }
 }
 ```
-
 ### 2. 配置热加载竞态 {#2-配置热加载竞态}
 
 **错误做法**：多线程共享可变 `Config` 并在收到文件变更通知时直接替换。
@@ -225,7 +221,6 @@ fn reload() {
     unsafe { CONFIG = Some(load_config().unwrap()); }
 }
 ```
-
 **正确做法**：使用 `Arc<RwLock<AppConfig>>` 或 `Arc<AtomicPtr<...>>` 保证读取者看到完整一致的快照；必要时引入版本号，旧任务继续使用旧配置。
 
 ### 3. 类型不匹配 {#3-类型不匹配}
@@ -237,7 +232,6 @@ fn reload() {
 #[derive(Deserialize)]
 struct ServerConfig { port: u16 }
 ```
-
 **正确做法**：启用 `Environment::try_parsing(true)`，或对字段使用自定义反序列化器处理空值/缺省值。
 
 ### 4. 配置缺失未处理 {#4-配置缺失未处理}
@@ -247,7 +241,6 @@ struct ServerConfig { port: u16 }
 ```rust,ignore
 let cfg: AppConfig = load_config().unwrap();
 ```
-
 **正确做法**：使用 `thiserror`/`anyhow` 将 `config::ConfigError` 转换为可读错误，并在入口统一报告。
 
 ---

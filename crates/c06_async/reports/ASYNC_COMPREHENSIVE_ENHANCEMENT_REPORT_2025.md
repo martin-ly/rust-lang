@@ -124,19 +124,16 @@ Config = (A, M)
   β(state(a), m) = (s', actions)
   ⟹ (A, M) → (A', M')
 ```
-
 **章节结构**:
 
 1. 异步编程理论基础
    - 数学模型
    - 异步语义
    - 调度理论
-
 2. 并发模型形式化
    - Actor 模型形式化
    - Reactor 模型形式化
    - CSP 模型形式化
-
 3. Future 与状态机
    - 状态机转换
    - Pin 与内存安全
@@ -187,7 +184,6 @@ CLI 工具 → Smol (轻量快速)
 嵌入式 → Smol (体积小)
 学习入门 → smol (API友好)
 ```
-
 **章节结构**:
 
 1. 运行时概览
@@ -197,13 +193,11 @@ CLI 工具 → Smol (轻量快速)
    - 任务管理
    - 同步原语
    - I/O 操作
-
 3. Smol 轻量级实践
    - 架构特点
    - 基础使用
    - 任务与并发
    - I/O 操作
-
 4. 性能对比与基准测试
 5. 选型决策指南
 6. 混合运行时方案
@@ -229,7 +223,6 @@ CLI 工具 → Smol (轻量快速)
    - 生命周期管理
    - 银行账户示例
    ```
-
 2. **Reactor 模式实现** (250+ 行)
 
    ```rust
@@ -240,7 +233,6 @@ CLI 工具 → Smol (轻量快速)
    - 异步事件分发
    - 日志和统计处理器
    ```
-
 3. **CSP 模式实现** (200+ 行)
 
    ```rust
@@ -250,7 +242,6 @@ CLI 工具 → Smol (轻量快速)
    - Fan-out/Fan-in
    - Select 多路复用
    ```
-
 4. **异步设计模式** (200+ 行)
 
    ```rust
@@ -260,7 +251,6 @@ CLI 工具 → Smol (轻量快速)
    - 超时控制
    - 错误处理
    ```
-
 5. **生产级架构模式** (150+ 行)
 
    ```rust
@@ -270,7 +260,6 @@ CLI 工具 → Smol (轻量快速)
    - 资源管理
    - 监控集成
    ```
-
 **运行效果**:
 
 ```text
@@ -296,7 +285,6 @@ CLI 工具 → Smol (轻量快速)
   [Consumer] 消费: P0-Item0
   ...
 ```
-
 ---
 
 ## 🎯 技术亮点
@@ -318,7 +306,6 @@ Actor 不变量:
     2. 状态封装: ∀ a₁, a₂: state(a₁) ⊥ state(a₂)
     3. 位置透明: send(addr, msg) 不依赖物理位置
 ```
-
 ### 2. 实践广度
 
 **覆盖场景**:
@@ -362,7 +349,6 @@ Actor 不变量:
   ↓
   分布式系统
 ```
-
 ---
 
 ## 📊 内容统计
@@ -431,7 +417,6 @@ Actor 不变量:
 │   • 流处理                           │
 └─────────────────────────────────────┘
 ```
-
 ### 技能树
 
 **Level 1: 基础** (✅ 已覆盖)
@@ -527,7 +512,6 @@ fn main() {
     });
 }
 ```
-
 ### 2. 错误处理
 
 ```rust
@@ -549,7 +533,6 @@ async fn load_config() -> Option<Config> {
     toml::from_slice(&data).ok()
 }
 ```
-
 ### 3. 取消与超时
 
 ```rust
@@ -566,7 +549,6 @@ select! {
     result = work() => { /* 完成 */ }
 }
 ```
-
 ### 4. 资源管理
 
 ```rust
@@ -583,7 +565,6 @@ impl Drop for Resource {
     fn drop(&mut self) { /* cleanup */ }
 }
 ```
-
 ### 5. 优雅关闭
 
 ```rust
@@ -604,7 +585,6 @@ tokio::spawn(async move {
 // 触发关闭
 shutdown_tx.send(()).unwrap();
 ```
-
 ---
 
 ## 📈 性能优化技巧
@@ -623,7 +603,6 @@ for i in 0..1000 {
     tokio::spawn(async move { work(i).await }).await;
 }
 ```
-
 ### 2. 通道选择
 
 ```rust
@@ -636,7 +615,6 @@ let (tx, rx) = oneshot::channel();
 // 广播 - 使用 broadcast
 let (tx, rx) = broadcast::channel(100);
 ```
-
 ### 3. 锁优化
 
 ```rust
@@ -651,7 +629,6 @@ process(value).await; // 在锁外处理
 let rwlock = RwLock::new(data);
 let read = rwlock.read().await; // 允许并发读
 ```
-
 ---
 
 ## 🚀 未来扩展方向

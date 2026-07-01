@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -56,7 +55,6 @@ impl Future for TimerFuture {
     }
 }
 ```
-
 ### async/await 语法 {#asyncawait-语法}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -112,7 +110,6 @@ async fn race_example() {
     }
 }
 ```
-
 ### 异步状态机 {#异步状态机}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -168,7 +165,6 @@ fn pin_demo() {
     // Pin<Box<dyn Future>> 是常见的运行时类型
 }
 ```
-
 ### 流（Streams） {#流streams}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -206,7 +202,6 @@ async fn stream_combinators() {
     println!("{:?}", result);  // [6, 8, 10]
 }
 ```
-
 ### 异步运行时 {#异步运行时}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -262,7 +257,6 @@ async fn async_channels() {
     println!("{}", msg);
 }
 ```
-
 ### 取消与超时 {#取消与超时}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -317,7 +311,6 @@ fn cancellation_demo() {
     });
 }
 ```
-
 ### 并发控制 {#并发控制}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -378,7 +371,6 @@ where
     results
 }
 ```
-
 ---
 
 ## 使用场景 {#使用场景}
@@ -456,13 +448,9 @@ where
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
-
 > **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
-
 > **来源: [Tokio Documentation](https://tokio.rs/)**
-
 > **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)**
-
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**

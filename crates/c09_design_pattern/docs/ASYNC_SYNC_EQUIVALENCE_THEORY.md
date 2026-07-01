@@ -101,7 +101,6 @@
 ```text
 f_cps: (A, (B → R)) → R
 ```
-
 使得 `∀x ∈ A, k ∈ (B → R): f_cps(x, k) ≡ k(f(x))`
 
 **证明**：
@@ -129,7 +128,6 @@ f_cps: (A, (B → R)) → R
 ────────────────────────────────────── (Sync-App)
 ⟨e₁ e₂, σ⟩ ⇓ ⟨f v, σ''⟩
 ```
-
 **解释**：每步计算必须完成才能进入下一步，状态转移是原子的。
 
 #### 异步执行语义（Small-Step with Continuations）
@@ -145,7 +143,6 @@ f_cps: (A, (B → R)) → R
 ──────────────────────────────── (Async-Suspend)
 ⟨await e, k, σ⟩ → suspend(e, k, σ)
 ```
-
 **解释**：计算可以挂起（suspend），将延续 `k` 和状态 `σ` 保存，等待未来恢复。
 
 ### 2.2 Monad语义
@@ -168,7 +165,6 @@ impl SyncM<T> {
     }
 }
 ```
-
 #### 异步Monad（Future）
 
 ```rust
@@ -206,7 +202,6 @@ impl AsyncM<T> {
     }
 }
 ```
-
 ### 2.3 单子律验证
 
 #### 左单位律（Left Identity）
@@ -214,7 +209,6 @@ impl AsyncM<T> {
 ```text
 pure(x) >>= f  ≡  f(x)
 ```
-
 **证明（同步）**：
 
 ```rust
@@ -222,7 +216,6 @@ SyncM::pure(x).bind(f)
 = SyncM(x).bind(f)
 = f(x)  ✓
 ```
-
 **证明（异步）**：
 
 ```rust
@@ -231,13 +224,11 @@ AsyncM::pure(x).bind(f)
 = AsyncM { state: f(x).state }
 = f(x)  ✓
 ```
-
 #### 右单位律（Right Identity）
 
 ```text
 m >>= pure  ≡  m
 ```
-
 **证明（同步）**：
 
 ```rust
@@ -245,13 +236,11 @@ m.bind(SyncM::pure)
 = SyncM(m.0)
 = m  ✓
 ```
-
 #### 结合律（Associativity）
 
 ```text
 (m >>= f) >>= g  ≡  m >>= (λx. f(x) >>= g)
 ```
-
 **证明略**（通过归纳法和替换）。
 
 ---
@@ -282,7 +271,6 @@ fn async_to_sync<T>(fut: impl Future<Output = T>) -> T {
     block_on(fut)
 }
 ```
-
 **证明左逆**：
 
 ```rust
@@ -290,7 +278,6 @@ async_to_sync(sync_to_async(x))
 = block_on(async { x })
 = x  ✓
 ```
-
 **证明右逆**：
 
 ```rust
@@ -298,7 +285,6 @@ sync_to_async(async_to_sync(fut))
 = async { block_on(fut) }
 ≡ fut  （语义等价）✓
 ```
-
 ### 3.2 控制流等价性
 
 #### 命题3.1（顺序组合等价）
@@ -307,7 +293,6 @@ sync_to_async(async_to_sync(fut))
 同步：x = f(); y = g(x); return h(y)
 异步：x = await f(); y = await g(x); return h(y)
 ```
-
 **证明**：通过CPS变换和Monad绑定的等价性。
 
 #### 命题3.2（并发执行的差异）
@@ -322,7 +307,6 @@ let (a, b) = join!(f(), g());
 let a = f();
 let b = g();
 ```
-
 **注**：此处的"等价"限于**单线程执行语义**，并发情况下需扩展为**交错语义（interleaving semantics）**。
 
 ---
@@ -376,7 +360,6 @@ impl Future for ExampleStateMachine {
     }
 }
 ```
-
 **关键性质**：
 
 1. **零堆分配**：状态机在栈上，大小在编译时确定
@@ -417,7 +400,6 @@ pub fn block_on<F: Future>(mut fut: F) -> F::Output {
     }
 }
 ```
-
 **语义映射**：
 
 - `block_on(async { expr })` ≡ `expr` （同步语义）
@@ -442,7 +424,6 @@ pub fn block_on<F: Future>(mut fut: F) -> F::Output {
    ↓
 [Exit]
 ```
-
 **性质**：线性、确定性、顺序执行
 
 #### 异步CFG
@@ -460,7 +441,6 @@ pub fn block_on<F: Future>(mut fut: F) -> F::Output {
    ↓                                  ↓
 [Exit] ←──────────────────────────────┘
 ```
-
 **性质**：非线性、可中断、协作式调度
 
 ### 5.2 执行流的形式化
@@ -486,7 +466,6 @@ pub fn block_on<F: Future>(mut fut: F) -> F::Output {
 ```text
 ∀s ∈ Sync: final(trace_sync(s)) = final(trace_async(φ(s)))
 ```
-
 **证明**：通过操作语义的归纳和Monad律。∎
 
 ### 5.3 数据流分析
@@ -513,7 +492,6 @@ async fn async_version() -> i32 {
     d
 }
 ```
-
 **依赖图**：
 
 ```text
@@ -522,7 +500,6 @@ async fn async_version() -> i32 {
               t4  （t2 和 t3 可并行）
       t2 ─────↗
 ```
-
 ---
 
 ## 6. 实践示例
@@ -540,7 +517,6 @@ fn fib_sync(n: u64) -> u64 {
     }
 }
 ```
-
 #### 异步实现（无实际异步操作）
 
 ```rust
@@ -554,7 +530,6 @@ async fn fib_async(n: u64) -> u64 {
     }
 }
 ```
-
 **分析**：
 
 - **等价性**：`fib_sync(n) = block_on(fib_async(n))`
@@ -576,7 +551,6 @@ async fn fib_async_concurrent(n: u64) -> u64 {
     }
 }
 ```
-
 **分析**：
 
 - **并发度**：每个join点创建并发任务
@@ -602,7 +576,6 @@ fn process_files_sync(paths: &[&str]) -> Vec<String> {
     // 顺序处理，总时间 = Σ(单个文件时间)
 }
 ```
-
 #### 异步IO
 
 ```rust
@@ -623,7 +596,6 @@ async fn process_files_async(paths: &[&str]) -> Vec<String> {
     // 并发处理，总时间 ≈ max(单个文件时间)
 }
 ```
-
 **性能对比**：
 
 | 场景                | 同步时间 | 异步时间 | 加速比 |
@@ -675,7 +647,6 @@ fn bench_async(c: &mut Criterion) {
 criterion_group!(benches, bench_sync, bench_async);
 criterion_main!(benches);
 ```
-
 **典型结果**（CPU密集）：
 
 - `fib_sync(20)`: ~1.2μs
@@ -707,7 +678,6 @@ criterion_main!(benches);
 ```text
 ∀f: A → B. eval(f(x)) = eval(block_on(async { f(x) }))
 ```
-
 #### 定理7.2（强等价）
 
 在**多线程**和**有副作用**的情况下，需要考虑**内存模型**：
@@ -732,7 +702,6 @@ tokio::spawn(async move { *x1.lock().await += 1; });
 tokio::spawn(async move { *x2.lock().await += 1; });
 // 最终值可能是0, 1, 或2（取决于调度）
 ```
-
 ---
 
 ## 8. 结论

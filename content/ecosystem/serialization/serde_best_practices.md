@@ -38,7 +38,6 @@ Serde 采用 **序列化-反序列化分离** 架构：
 └─────────────┘                    │  Bincode/... │
                                    └─────────────┘
 ```
-
 **核心 trait**:
 
 - `Serialize`: Rust → 外部格式
@@ -67,7 +66,6 @@ pub struct User {
     pub internal_token: String,
 }
 ```
-
 **JSON 序列化/反序列化**:
 
 ```rust
@@ -87,7 +85,6 @@ let json = serde_json::to_string_pretty(&user)?;
 // 反序列化
 let parsed: User = serde_json::from_str(&json)?;
 ```
-
 ---
 
 ## 🔧 高级特性
@@ -125,7 +122,6 @@ pub struct Event {
     pub timestamp: DateTime<Utc>,
 }
 ```
-
 ### 扁平化结构
 
 ```rust
@@ -145,7 +141,6 @@ pub struct ResponseData {
 
 // JSON: { "status": "ok", "users": [...], "total": 100 }
 ```
-
 ### 多态反序列化
 
 ```rust
@@ -161,7 +156,6 @@ pub enum Message {
 // { "type": "Text", "payload": { "content": "hello" } }
 // { "type": "Image", "payload": { "url": "...", "width": 100, "height": 100 } }
 ```
-
 ---
 
 ## 📊 性能优化
@@ -190,13 +184,11 @@ pub enum Message {
    let config: Config = serde_json::from_str(input)?;
    // 确保输入大小已限制
    ```
-
 2. **栈溢出**: 深度嵌套结构可能导致栈溢出
 
    ```rust
    // 使用 #[serde(deserialize_with)] 限制深度
    ```
-
 3. **枚举反序列化**: 不受信任的 `tag` 值可能导致 panic
 
    ```rust
@@ -204,7 +196,6 @@ pub enum Message {
    #[serde(other)]
    Unknown,
    ```
-
 ---
 
 ## 🔗 参考资源

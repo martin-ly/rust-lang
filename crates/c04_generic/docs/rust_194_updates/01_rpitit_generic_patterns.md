@@ -74,7 +74,6 @@ impl From<RawItem> for ProcessedItem {
     }
 }
 ```
-
 ### 1.2 泛型 trait 与 impl Trait 结合
 
 ```rust
@@ -118,7 +117,6 @@ fn main() {
     assert_eq!(output, vec![2, 4, 6, 8, 10]);
 }
 ```
-
 ---
 
 ## use<> 精确捕获模式
@@ -162,7 +160,6 @@ impl<'a, T> LendingIterator<'a> for BufferLender<'a, T> {
     }
 }
 ```
-
 ### 2.2 use<> 在闭包中的应用
 
 ```rust
@@ -190,7 +187,6 @@ impl Context {
     }
 }
 ```
-
 ---
 
 ## 泛型类型推断增强
@@ -227,7 +223,6 @@ fn generic_chain<T, U, V>(
     move |input| second(first(input))
 }
 ```
-
 ### 3.2 ControlFlow 在泛型中的应用
 
 ```rust
@@ -276,7 +271,6 @@ fn find_first_matching<T>(
     )
 }
 ```
-
 ---
 
 ## 实战设计模式
@@ -383,7 +377,6 @@ fn builder_example() {
     assert_eq!(query_with_where, "SELECT id, name FROM users WHERE active = true");
 }
 ```
-
 ### 4.2 泛型策略模式
 
 ```rust
@@ -440,7 +433,6 @@ where
     }
 }
 ```
-
 ---
 
 ## 性能优化指南
@@ -468,7 +460,6 @@ impl OptimizedProcessor for MyProcessor {
 
 struct MyProcessor;
 ```
-
 ### 5.2 零成本抽象验证
 
 ```rust
@@ -494,7 +485,6 @@ where
     items.map(|x| x * 2).filter(|&x| x > 100)
 }
 ```
-
 ---
 
 ## 相关文档

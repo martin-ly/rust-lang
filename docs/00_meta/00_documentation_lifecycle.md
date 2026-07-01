@@ -38,7 +38,6 @@
 ```text
 创建 → 评审 → 发布 → 维护 → 归档 → 删除
 ```
-
 | 阶段 | 说明 | 触发条件 |
 |------|------|----------|
 | **创建** | 新文档编写 | 新特性、新模块、新需求 |
@@ -78,7 +77,6 @@
 # Step 4: 在 archive/ 目录的 README 中记录归档信息 {#step-4-在-archive-目录的-readme-中记录归档信息}
 # Step 5: 90 天后评估是否删除 {#step-5-90-天后评估是否删除}
 ```
-
 ### 2.3 归档标记模板 {#23-归档标记模板}
 
 ```markdown
@@ -87,7 +85,6 @@
 > **替代文档**: [链接到新文档]
 > **归档位置**: `docs/archive/deprecated_YYYYMMDD/...`
 ```
-
 ---
 
 ## 3. 版本升级检查清单 {#3-版本升级检查清单}
@@ -113,7 +110,6 @@
 # 检查所有 .md 文件中的版本标注 {#检查所有-md-文件中的版本标注}
 python3 scripts/check_version_consistency.py
 ```
-
 检查项：
 
 - 文件标注版本 < 项目目标版本 - 1 → 警告
@@ -125,14 +121,12 @@ python3 scripts/check_version_consistency.py
 # 基于标题和内容相似度扫描重复文档 {#基于标题和内容相似度扫描重复文档}
 python3 scripts/check_doc_duplicates.py --threshold 0.7
 ```
-
 ### 4.3 过时标记检查 {#43-过时标记检查}
 
 ```bash
 # 检查标记过时超过 30 天但仍留在原位的文档 {#检查标记过时超过-30-天但仍留在原位的文档}
 python3 scripts/check_deprecated_markers.py --days 30
 ```
-
 ---
 
 ## 5. 删除策略 {#5-删除策略}

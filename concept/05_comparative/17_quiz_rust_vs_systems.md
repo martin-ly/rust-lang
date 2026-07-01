@@ -8,7 +8,6 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
-
 > **后置概念**: N/A
 ---
 
@@ -46,7 +45,6 @@ int main() {
     return 0;
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -65,7 +63,6 @@ fn main() {
     println!("{}", s); // ✅ 安全
 }
 ```
-
 **若尝试返回引用（Reference）**：
 
 ```rust,compile_fail
@@ -74,7 +71,6 @@ fn greet() -> &str {
     &msg // ❌ 编译错误！返回局部变量的引用
 }
 ```
-
 错误信息：`cannot return reference to local variable msg`
 
 **对比**：
@@ -101,7 +97,6 @@ func main() {
     fmt.Println(*ptr)
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -117,7 +112,6 @@ fn main() {
     }
 }
 ```
-
 **但 Rust 的 safe 代码中**：
 
 ```rust
@@ -130,7 +124,6 @@ fn main() {
     }
 }
 ```
-
 **对比**：
 
 | 方面 | Go | Rust |
@@ -170,7 +163,6 @@ int main() {
     return 0;
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -197,7 +189,6 @@ fn main() {
     });
 }
 ```
-
 错误信息：`cannot borrow`counter`as mutable more than once at a time`
 
 **Rust 的正确写法**：
@@ -223,7 +214,6 @@ fn main() {
     println!("{}", *counter.lock().unwrap()); // 200000
 }
 ```
-
 **对比**：
 
 | 方面 | C++ | Rust |
@@ -251,7 +241,6 @@ func main() {
     // 忘记接收 ch
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -275,7 +264,6 @@ async fn main() {
     println!("{}", val);
 }
 ```
-
 **Rust 的优势**：
 
 1. **所有权追踪**：`tx` 的生命周期（Lifetimes）与任务绑定，若 `tx` 被 drop 而 `rx` 仍在等待，`recv()` 返回 `None`
@@ -311,7 +299,6 @@ char buf[100];
 fgets(buf, 100, f);  // 若 f 为 NULL，UB！
 fclose(f);
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -342,7 +329,6 @@ fn main() {
     }
 }
 ```
-
 **Rust 的改进**：
 
 | 方面 | C | Rust |
@@ -372,7 +358,6 @@ fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
     a + b
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -398,7 +383,6 @@ fn add_generic<T: Add>(a: T, b: T) -> T { a + b }
 
 // 编译后，add_generic::<i32> 和 add_i32 生成完全相同的机器码
 ```
-
 **对比其他语言**：
 
 | 语言 | 泛型（Generics）实现 | 运行时开销 |
@@ -433,7 +417,6 @@ int* arr = malloc(1000000 * sizeof(int));
 // 未初始化内存！arr[0] 可能是任意值
 // 忘记 free → 内存泄漏
 ```
-
 **C++**：
 
 ```cpp
@@ -441,7 +424,6 @@ std::vector<int> arr(1000000); // 零初始化
 int sum = std::accumulate(arr.begin(), arr.end(), 0);
 // 安全，但有堆分配开销
 ```
-
 **Go**：
 
 ```go
@@ -450,7 +432,6 @@ sum := 0
 for _, v := range arr { sum += v }
 // 安全，但切片是堆分配的，GC 管理
 ```
-
 **Rust**：
 
 ```rust
@@ -459,7 +440,6 @@ let sum: i64 = arr.iter().map(|&x| x as i64).sum();
 // 或零成本迭代器链：
 let sum: i64 = (0..1_000_000).map(|x| x as i64).sum();
 ```
-
 **对比总结**：
 
 | 维度 | C | C++ | Go | Rust |
@@ -510,7 +490,6 @@ pub extern "C" fn _start() {
     }
 }
 ```
-
 **Rust for Linux**：
 
 - 截至 2026 年，Rust for Linux 仅剩 2 个不稳定特性待稳定化
@@ -532,7 +511,6 @@ std::shared_ptr<int> p1 = std::make_shared<int>(42);
 std::shared_ptr<int> p2 = p1;  // 引用计数 +1
 // p1, p2 离开作用域 → 引用计数归零 → 内存释放
 ```
-
 **Rust**：
 
 ```rust,ignore
@@ -540,7 +518,6 @@ let p1 = Rc::new(42);
 let p2 = Rc::clone(&p1);  // 引用计数 +1
 // p1, p2 离开作用域 → 引用计数归零 → 内存释放
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -563,7 +540,6 @@ std::thread::spawn(move || {
     println!("{}", *p); // ❌ 编译错误！
 });
 ```
-
 C++ 的 `shared_ptr` 允许这样做（因为原子引用计数是线程安全的），但 Rust 的 `Rc` 在编译期阻止——迫使你在多线程场景使用 `Arc`。
 
 **性能对比**：
@@ -596,7 +572,6 @@ if (!fgets(buf, 100, f)) { fclose(f); return -1; }
 int val = atoi(buf);  // 错误时返回 0，无法区分"0"和错误
 fclose(f);
 ```
-
 **C++**：
 
 ```cpp
@@ -609,7 +584,6 @@ try {
     std::cerr << e.what() << std::endl;
 }
 ```
-
 **Go**：
 
 ```go
@@ -621,7 +595,6 @@ func readConfig() (int, error) {
     return val, nil
 }
 ```
-
 **Rust**：
 
 ```rust
@@ -631,7 +604,6 @@ fn read_config() -> Result<i32, Box<dyn std::error::Error>> {
     Ok(val)
 }
 ```
-
 **哲学对比**：
 
 | 语言 | 哲学 | 优点 | 缺点 |

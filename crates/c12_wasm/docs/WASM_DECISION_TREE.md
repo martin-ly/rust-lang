@@ -95,7 +95,6 @@ graph TD
     Check3 -->|是| Mem[使用 MaybeUninit]
     Check3 -->|否| Perf[使用迭代器特化]
 ```
-
 ---
 
 ## 📦 模块化决策树
@@ -130,7 +129,6 @@ graph TD
 │       │           ├── 是 → wasm32-wasip1 (WasmEdge)
 │       │           └── 否 → wasm32-unknown-unknown
 ```
-
 **决策规则**:
 
 - **wasm32-unknown-unknown**: 浏览器/Node.js 应用，无需系统接口
@@ -166,7 +164,6 @@ graph TD
 │           ├── 是 → wee_alloc
 │           └── 否 → dlmalloc
 ```
-
 **Rust 1.92.0 改进**:
 
 - **MaybeUninit 文档化**: 提供更安全的使用模式
@@ -209,7 +206,6 @@ JavaScript 互操作选择
 │       │           ├── 是 → 手动 FFI
 │       │           └── 否 → wasm-bindgen 自动生成
 ```
-
 ---
 
 ### 4. 性能优化决策树
@@ -242,7 +238,6 @@ JavaScript 互操作选择
     ├── 预分配容量 → Vec::with_capacity
     └── 对象池 → WasmObjectPool<T>
 ```
-
 **Rust 1.92.0 性能提升**:
 
 - **迭代器比较**: +15-25% (特化优化)
@@ -286,7 +281,6 @@ Rust 1.92.0 特性选择
 │       │       │       │       │               ├── 是 → Location::file_as_c_str
 │       │       │       │       │               └── 否 → 标准方案
 ```
-
 ---
 
 ## ⚡ 特性选择决策
@@ -324,7 +318,6 @@ Rust 1.92.0 特性选择
     ├── Location::file_as_c_str (调试信息)
     └── 类型安全绑定 (wasm-bindgen)
 ```
-
 ---
 
 ## 🚀 性能优化决策
@@ -357,7 +350,6 @@ Rust 1.92.0 特性选择
     ├── 压缩 (gzip/brotli)
     └── 缓存策略
 ```
-
 ---
 
 ### 性能 vs 安全性权衡
@@ -398,7 +390,6 @@ Rust 1.92.0 特性选择
     ├── 边界检查
     └── 类型验证
 ```
-
 ---
 
 ### Rust 1.92.0 安全改进
@@ -429,7 +420,7 @@ Rust 1.92.0 特性选择
 
 ## 🔗 相关文档
 
-- [项目概览](tier_01_foundations/01_项目概览.md)
+- [项目概览](tier_01_foundations/01_project_overview.md)
 - [Rust 1.92.0 WASM 改进文档](RUST_192_WASM_IMPROVEMENTS.md)
 - [WASM 思维导图集合](WASM_MIND_MAPS.md)
 - [WASM 多维概念对比矩阵](WASM_CONCEPT_MATRIX.md)

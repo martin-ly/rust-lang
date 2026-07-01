@@ -66,8 +66,7 @@ let result = match value {
     None => 0,
 };
 ```
-
-**相关**: [条件语句指南](tier_02_guides/01_条件语句指南.md)
+**相关**: [条件语句指南](tier_02_guides/01_conditionals_guide.md)
 
 ---
 
@@ -103,8 +102,7 @@ let y = {
     a + b; // 有分号，返回 ()
 };
 ```
-
-**相关**: [条件语句指南](tier_02_guides/01_条件语句指南.md)
+**相关**: [条件语句指南](tier_02_guides/01_conditionals_guide.md)
 
 ---
 
@@ -119,7 +117,6 @@ fn function_name(param: Type) -> ReturnType {
     // 函数体
 }
 ```
-
 **特性**:
 
 - 参数必须显式标注类型
@@ -138,8 +135,7 @@ fn print_message(msg: &str) {
     // 隐式返回 ()
 }
 ```
-
-**相关**: [函数系统指南](tier_02_guides/03_函数系统指南.md)
+**相关**: [函数系统指南](tier_02_guides/03_functions_guide.md)
 
 ---
 
@@ -153,7 +149,6 @@ fn print_message(msg: &str) {
 |param1, param2| expression
 |param1, param2| { statements }
 ```
-
 **捕获方式**:
 
 - **不可变借用**: `Fn`
@@ -174,8 +169,7 @@ let mut count = 0;
 let mut increment = || count += 1;
 increment();
 ```
-
-**相关**: [闭包深入](tier_04_advanced/02_闭包深入.md)
+**相关**: [闭包深入](tier_04_advanced/02_closures_in_depth.md)
 
 ---
 
@@ -206,8 +200,7 @@ match point {
     Point { x, y } => println!("at ({}, {})", x, y),
 }
 ```
-
-**相关**: [高级模式匹配](tier_04_advanced/01_高级模式匹配.md)
+**相关**: [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md)
 
 ---
 
@@ -244,8 +237,7 @@ let Some(x) = option else {
     return;
 };
 ```
-
-**相关**: [高级模式匹配](tier_04_advanced/01_高级模式匹配.md)
+**相关**: [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md)
 
 ---
 
@@ -277,8 +269,7 @@ match value {
     _ => println!("other"),
 }
 ```
-
-**相关**: [高级模式匹配](tier_04_advanced/01_高级模式匹配.md)
+**相关**: [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md)
 
 ---
 
@@ -294,7 +285,6 @@ pub trait Iterator {
     fn next(&mut self) -> Option<Self::Item>;
 }
 ```
-
 **常用方法**:
 
 - `map`: 转换元素
@@ -315,8 +305,7 @@ let sum: i32 = numbers
 
 println!("{}", sum); // 12
 ```
-
-**相关**: [迭代器参考](tier_03_references/02_迭代器参考.md)
+**相关**: [迭代器参考](tier_03_references/02_iterators_reference.md)
 
 ---
 
@@ -351,8 +340,7 @@ fn forever() -> ! {
     }
 }
 ```
-
-**相关**: [错误处理进阶](tier_04_advanced/04_错误处理进阶.md)
+**相关**: [错误处理进阶](tier_04_advanced/04_advanced_error_handling.md)
 
 ---
 
@@ -386,8 +374,7 @@ fn read_file(path: &str) -> Result<String, std::io::Error> {
     Ok(content)
 }
 ```
-
-**相关**: [错误处理指南](tier_02_guides/05_错误处理指南.md)
+**相关**: [错误处理指南](tier_02_guides/05_error_handling_guide.md)
 
 ---
 
@@ -422,8 +409,7 @@ fn call_fn_once<F>(f: F) where F: FnOnce() {
     f(); // 只能调用一次
 }
 ```
-
-**相关**: [闭包深入](tier_04_advanced/02_闭包深入.md)
+**相关**: [闭包深入](tier_04_advanced/02_closures_in_depth.md)
 
 ---
 
@@ -453,8 +439,7 @@ fn make_adder(x: i32) -> impl Fn(i32) -> i32 {
 let add5 = make_adder(5);
 println!("{}", add5(3)); // 8
 ```
-
-**相关**: [函数系统指南](tier_02_guides/03_函数系统指南.md)
+**相关**: [函数系统指南](tier_02_guides/03_functions_guide.md)
 
 ---
 
@@ -469,7 +454,6 @@ let pattern = expression else {
     // 匹配失败时执行
 };
 ```
-
 **示例**:
 
 ```rust
@@ -489,8 +473,7 @@ fn process(data: Option<String>) -> Result<usize, &'static str> {
     }
 }
 ```
-
-**相关**: [高级模式匹配](tier_04_advanced/01_高级模式匹配.md)
+**相关**: [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md)
 
 ---
 
@@ -505,7 +488,6 @@ fn process(data: Option<String>) -> Result<usize, &'static str> {
     // ...
 }
 ```
-
 **示例**:
 
 ```rust
@@ -526,8 +508,7 @@ let result = 'block: {
     0
 };
 ```
-
-**相关**: [循环结构指南](tier_02_guides/02_循环结构指南.md)
+**相关**: [循环结构指南](tier_02_guides/02_loops_guide.md)
 
 ---
 

@@ -1,0 +1,739 @@
+# 2.1 Rust 类型系统 - 所有权实践指南
+
+> **文档类型**: Tier 2 - 指南层
+> **文档定位**: 类型系统中的所有权实践
+> **适用对象**: 中级开发者
+> **前置知识**: [基础类型指南](01_basic_types_guide.md)
+> **预计学习时间**: 6-8 小时
+> **最后更新**: 2025-12-11
+> **Rust版本**: 1.92.0+
+
+---
+
+## 📋 目录
+
+- [2.1 Rust 类型系统 - 所有权实践指南](#21-rust-类型系统---所有权实践指南)
+  - [📋 目录](#-目录)
+  - [🎯 学习目标](#-学习目标)
+  - [📊 章节概览](#-章节概览)
+  - [1. 类型系统中的所有权](#1-类型系统中的所有权)
+    - [1.1 所有权与类型系统](#11-所有权与类型系统)
+    - [1.2 类型级别的所有权保证](#12-类型级别的所有权保证)
+    - [1.3 所有权类型设计](#13-所有权类型设计)
+  - [2. 结构体中的所有权](#2-结构体中的所有权)
+    - [2.1 拥有字段](#21-拥有字段)
+    - [2.2 引用字段](#22-引用字段)
+    - [2.3 所有权转移模式](#23-所有权转移模式)
+  - [3. 枚举中的所有权](#3-枚举中的所有权)
+    - [3.1 拥有数据的枚举](#31-拥有数据的枚举)
+    - [3.2 引用数据的枚举](#32-引用数据的枚举)
+    - [3.3 所有权模式匹配](#33-所有权模式匹配)
+  - [4. 泛型与所有权](#4-泛型与所有权)
+    - [4.1 泛型参数的所有权](#41-泛型参数的所有权)
+    - [4.2 所有权约束](#42-所有权约束)
+    - [4.3 移动语义与泛型](#43-移动语义与泛型)
+  - [5. 智能指针与所有权](#5-智能指针与所有权)
+    - [5.1 Box 的所有权语义](#51-box-的所有权语义)
+    - [5.2 Rc 与共享所有权](#52-rc-与共享所有权)
+    - [5.3 Arc 与线程安全的所有权](#53-arc-与线程安全的所有权)
+  - [6. 集合类型的所有权](#6-集合类型的所有权)
+    - [6.1 Vec 的所有权管理](#61-vec-的所有权管理)
+    - [6.2 HashMap 的所有权](#62-hashmap-的所有权)
+    - [6.3 集合的所有权传递](#63-集合的所有权传递)
+  - [7. 函数签名与所有权](#7-函数签名与所有权)
+    - [7.1 参数所有权设计](#71-参数所有权设计)
+    - [7.2 返回值所有权](#72-返回值所有权)
+    - [7.3 所有权最佳实践](#73-所有权最佳实践)
+  - [8. 实战案例](#8-实战案例)
+    - [8.1 案例1: 配置管理系统](#81-案例1-配置管理系统)
+    - [8.2 案例2: 资源管理器](#82-案例2-资源管理器)
+    - [8.3 案例3: 数据管道](#83-案例3-数据管道)
+  - [9. 常见问题与解决方案](#9-常见问题与解决方案)
+    - [问题1: 所有权转移后无法使用](#问题1-所有权转移后无法使用)
+    - [问题2: 结构体字段所有权](#问题2-结构体字段所有权)
+    - [问题3: 循环中的所有权](#问题3-循环中的所有权)
+  - [10. 总结与最佳实践](#10-总结与最佳实践)
+    - [核心原则](#核心原则)
+    - [最佳实践](#最佳实践)
+    - [下一步学习](#下一步学习)
+
+---
+
+## 🎯 学习目标
+
+完成本文档后，你将能够：
+
+- ✅ 理解类型系统如何保证所有权安全
+- ✅ 掌握结构体和枚举中的所有权设计
+- ✅ 理解泛型与所有权的交互
+- ✅ 掌握智能指针的所有权语义
+- ✅ 设计合理的函数所有权签名
+- ✅ 解决常见的所有权相关问题
+
+---
+
+## 📊 章节概览
+
+| 章节                  | 内容     | 难度     | 预计时间 |
+| :--- | :--- | :--- | :--- || 1. 类型系统中的所有权 | 基础概念 | ⭐⭐     | 1h       |
+| 2. 结构体中的所有权   | 实践应用 | ⭐⭐⭐   | 1.5h     |
+| 3. 枚举中的所有权     | 实践应用 | ⭐⭐⭐   | 1h       |
+| 4. 泛型与所有权       | 高级主题 | ⭐⭐⭐⭐ | 1.5h     |
+| 5. 智能指针与所有权   | 实践应用 | ⭐⭐⭐   | 1h       |
+| 6. 集合类型的所有权   | 实践应用 | ⭐⭐⭐   | 1h       |
+| 7. 函数签名与所有权   | 最佳实践 | ⭐⭐⭐   | 1h       |
+| 8. 实战案例           | 综合应用 | ⭐⭐⭐⭐ | 2h       |
+| 9. 常见问题           | 问题解决 | ⭐⭐     | 0.5h     |
+| 10. 总结              | 知识整合 | ⭐       | 0.5h     |
+
+---
+
+## 1. 类型系统中的所有权
+
+### 1.1 所有权与类型系统
+
+Rust 的类型系统在编译期保证所有权规则，这是 Rust 内存安全的核心。
+
+**核心原则**:
+
+```rust
+// 每个值都有唯一的所有者
+let s = String::from("hello");  // s 是 "hello" 的所有者
+
+// 所有权转移
+let s2 = s;  // s 的所有权转移到 s2
+// println!("{}", s);  // ❌ 编译错误：s 不再拥有数据
+```
+**类型系统保证**:
+
+```rust
+fn take_ownership(s: String) {
+    // s 进入函数，所有权转移
+    println!("{}", s);
+} // s 离开作用域，自动释放
+
+fn main() {
+    let s = String::from("hello");
+    take_ownership(s);
+    // println!("{}", s);  // ❌ 编译错误：s 已移动
+}
+```
+### 1.2 类型级别的所有权保证
+
+类型系统在编译期检查所有权规则：
+
+```rust
+// 编译期检查：确保引用有效
+fn borrow_string(s: &String) -> &str {
+    &s[..]  // 返回的引用生命周期与参数绑定
+}
+
+fn main() {
+    let s = String::from("hello");
+    let slice = borrow_string(&s);
+    println!("{}", slice);  // ✅ s 仍然有效
+}
+```
+### 1.3 所有权类型设计
+
+设计类型时考虑所有权：
+
+```rust
+// 拥有数据的结构体
+struct Config {
+    name: String,      // 拥有 String
+    value: Vec<i32>,   // 拥有 Vec
+}
+
+// 引用数据的结构体（需要生命周期参数）
+struct ConfigRef<'a> {
+    name: &'a str,     // 借用字符串切片
+    value: &'a [i32],  // 借用数组切片
+}
+```
+---
+
+## 2. 结构体中的所有权
+
+### 2.1 拥有字段
+
+结构体可以拥有数据：
+
+```rust
+struct Person {
+    name: String,
+    age: u32,
+    hobbies: Vec<String>,
+}
+
+fn main() {
+    let person = Person {
+        name: String::from("Alice"),
+        age: 30,
+        hobbies: vec![String::from("reading"), String::from("coding")],
+    };
+
+    // person 拥有所有字段
+    println!("{} is {} years old", person.name, person.age);
+} // person 及其所有字段被释放
+```
+### 2.2 引用字段
+
+结构体可以包含引用，但需要生命周期参数：
+
+```rust
+struct PersonRef<'a> {
+    name: &'a str,
+    age: &'a u32,
+}
+
+fn main() {
+    let name = String::from("Alice");
+    let age = 30;
+
+    let person = PersonRef {
+        name: &name,
+        age: &age,
+    };
+
+    println!("{} is {} years old", person.name, person.age);
+} // person 被释放，但 name 和 age 仍然有效
+```
+### 2.3 所有权转移模式
+
+结构体的所有权转移：
+
+```rust
+struct Data {
+    value: String,
+}
+
+fn take_data(d: Data) {
+    println!("{}", d.value);
+} // d 被释放
+
+fn main() {
+    let data = Data {
+        value: String::from("hello"),
+    };
+
+    take_data(data);  // data 的所有权转移
+    // println!("{}", data.value);  // ❌ 编译错误
+}
+```
+---
+
+## 3. 枚举中的所有权
+
+### 3.1 拥有数据的枚举
+
+枚举变体可以拥有数据：
+
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+fn process_message(msg: Message) {
+    match msg {
+        Message::Write(s) => {
+            println!("Writing: {}", s);
+            // s 在这里被使用
+        }
+        Message::Move { x, y } => {
+            println!("Moving to ({}, {})", x, y);
+        }
+        _ => {}
+    }
+} // msg 及其数据被释放
+```
+### 3.2 引用数据的枚举
+
+枚举也可以包含引用：
+
+```rust
+enum MessageRef<'a> {
+    Text(&'a str),
+    Number(&'a i32),
+}
+
+fn main() {
+    let text = String::from("hello");
+    let num = 42;
+
+    let msg1 = MessageRef::Text(&text);
+    let msg2 = MessageRef::Number(&num);
+
+    match msg1 {
+        MessageRef::Text(s) => println!("{}", s),
+        _ => {}
+    }
+}
+```
+### 3.3 所有权模式匹配
+
+模式匹配时的所有权：
+
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+fn take_option(o: Option<String>) {
+    match o {
+        Option::Some(s) => {
+            // s 的所有权转移到这个分支
+            println!("Got: {}", s);
+        }
+        Option::None => {
+            println!("Nothing");
+        }
+    }
+    // s 在这里已被释放
+}
+```
+---
+
+## 4. 泛型与所有权
+
+### 4.1 泛型参数的所有权
+
+泛型类型遵循所有权规则：
+
+```rust
+struct Container<T> {
+    value: T,
+}
+
+impl<T> Container<T> {
+    fn new(value: T) -> Self {
+        Container { value }
+    }
+
+    fn get(self) -> T {
+        self.value  // 所有权转移
+    }
+}
+
+fn main() {
+    let container = Container::new(String::from("hello"));
+    let value = container.get();  // container 的所有权转移
+    println!("{}", value);
+}
+```
+### 4.2 所有权约束
+
+使用 trait 约束控制所有权：
+
+```rust
+use std::fmt::Display;
+
+fn print_and_drop<T: Display>(value: T) {
+    println!("{}", value);
+} // value 被释放
+
+fn main() {
+    let s = String::from("hello");
+    print_and_drop(s);
+    // println!("{}", s);  // ❌ 编译错误
+}
+```
+### 4.3 移动语义与泛型
+
+泛型函数中的移动语义：
+
+```rust
+fn move_value<T>(value: T) -> T {
+    value  // 返回所有权
+}
+
+fn main() {
+    let s = String::from("hello");
+    let s2 = move_value(s);  // s 的所有权转移
+    println!("{}", s2);
+}
+```
+---
+
+## 5. 智能指针与所有权
+
+### 5.1 Box 的所有权语义
+
+`Box<T>` 拥有堆上数据的所有权：
+
+```rust
+fn main() {
+    let boxed = Box::new(String::from("hello"));
+    // boxed 拥有堆上 String 的所有权
+
+    let s = *boxed;  // 解引用获取所有权
+    println!("{}", s);
+    // boxed 不再有效
+}
+```
+### 5.2 Rc 与共享所有权
+
+`Rc<T>` 提供共享所有权：
+
+```rust
+use std::rc::Rc;
+
+fn main() {
+    let data = Rc::new(String::from("hello"));
+
+    let data1 = Rc::clone(&data);
+    let data2 = Rc::clone(&data);
+
+    // data, data1, data2 共享所有权
+    println!("{}", data);
+    println!("{}", data1);
+    println!("{}", data2);
+} // 所有引用计数归零时，数据被释放
+```
+### 5.3 Arc 与线程安全的所有权
+
+`Arc<T>` 提供线程安全的共享所有权：
+
+```rust
+use std::sync::Arc;
+use std::thread;
+
+fn main() {
+    let data = Arc::new(String::from("hello"));
+
+    let data1 = Arc::clone(&data);
+    let handle = thread::spawn(move || {
+        println!("Thread: {}", data1);
+    });
+
+    println!("Main: {}", data);
+    handle.join().unwrap();
+}
+```
+---
+
+## 6. 集合类型的所有权
+
+### 6.1 Vec 的所有权管理
+
+`Vec<T>` 拥有其元素的所有权：
+
+```rust
+fn main() {
+    let mut vec = Vec::new();
+    vec.push(String::from("hello"));
+    vec.push(String::from("world"));
+
+    // vec 拥有所有 String 的所有权
+    for s in vec {
+        println!("{}", s);
+        // s 的所有权在每次迭代中转移
+    }
+    // vec 不再有效
+}
+```
+### 6.2 HashMap 的所有权
+
+`HashMap<K, V>` 拥有键和值的所有权：
+
+```rust
+use std::collections::HashMap;
+
+fn main() {
+    let mut map = HashMap::new();
+    map.insert(String::from("key"), String::from("value"));
+
+    // map 拥有键和值的所有权
+    for (k, v) in map {
+        println!("{}: {}", k, v);
+    }
+}
+```
+### 6.3 集合的所有权传递
+
+集合的所有权转移：
+
+```rust
+fn take_vec(v: Vec<String>) {
+    for s in v {
+        println!("{}", s);
+    }
+}
+
+fn main() {
+    let vec = vec![String::from("a"), String::from("b")];
+    take_vec(vec);  // vec 的所有权转移
+    // println!("{:?}", vec);  // ❌ 编译错误
+}
+```
+---
+
+## 7. 函数签名与所有权
+
+### 7.1 参数所有权设计
+
+设计函数时考虑所有权：
+
+```rust
+// 拥有参数：函数获得所有权
+fn process_owned(data: String) {
+    println!("{}", data);
+}
+
+// 借用参数：函数借用数据
+fn process_borrowed(data: &String) {
+    println!("{}", data);
+}
+
+// 可变借用：函数可以修改数据
+fn process_mut(data: &mut String) {
+    data.push_str(" world");
+}
+```
+### 7.2 返回值所有权
+
+返回值的所有权：
+
+```rust
+// 返回拥有的值
+fn create_string() -> String {
+    String::from("hello")
+}
+
+// 返回引用（需要生命周期参数）
+fn get_slice<'a>(s: &'a str) -> &'a str {
+    &s[..]
+}
+```
+### 7.3 所有权最佳实践
+
+**推荐模式**:
+
+1. **优先使用借用**: 如果不需要所有权，使用引用
+2. **明确所有权转移**: 使用 `move` 关键字明确转移
+3. **返回所有权**: 需要时返回拥有的值
+
+```rust
+// ✅ 推荐：使用借用
+fn process(data: &String) {
+    println!("{}", data);
+}
+
+// ✅ 推荐：需要所有权时明确转移
+fn take_ownership(data: String) -> String {
+    format!("Processed: {}", data)
+}
+```
+---
+
+## 8. 实战案例
+
+### 8.1 案例1: 配置管理系统
+
+```rust
+struct Config {
+    name: String,
+    settings: Vec<String>,
+}
+
+impl Config {
+    fn new(name: String) -> Self {
+        Config {
+            name,
+            settings: Vec::new(),
+        }
+    }
+
+    fn add_setting(&mut self, setting: String) {
+        self.settings.push(setting);
+    }
+
+    fn into_settings(self) -> Vec<String> {
+        self.settings  // 转移所有权
+    }
+}
+
+fn main() {
+    let mut config = Config::new(String::from("my_config"));
+    config.add_setting(String::from("setting1"));
+
+    let settings = config.into_settings();
+    // config 不再有效，但 settings 可用
+    println!("Settings: {:?}", settings);
+}
+```
+### 8.2 案例2: 资源管理器
+
+```rust
+struct Resource {
+    id: String,
+    data: Vec<u8>,
+}
+
+struct ResourceManager {
+    resources: Vec<Resource>,
+}
+
+impl ResourceManager {
+    fn new() -> Self {
+        ResourceManager {
+            resources: Vec::new(),
+        }
+    }
+
+    fn add_resource(&mut self, resource: Resource) {
+        self.resources.push(resource);
+    }
+
+    fn take_resource(&mut self, id: &str) -> Option<Resource> {
+        let pos = self.resources.iter().position(|r| r.id == id)?;
+        Some(self.resources.remove(pos))
+    }
+}
+
+fn main() {
+    let mut manager = ResourceManager::new();
+    manager.add_resource(Resource {
+        id: String::from("res1"),
+        data: vec![1, 2, 3],
+    });
+
+    if let Some(resource) = manager.take_resource("res1") {
+        println!("Got resource: {}", resource.id);
+    }
+}
+```
+### 8.3 案例3: 数据管道
+
+```rust
+struct DataProcessor {
+    data: Vec<String>,
+}
+
+impl DataProcessor {
+    fn new(data: Vec<String>) -> Self {
+        DataProcessor { data }
+    }
+
+    fn process(mut self) -> Vec<String> {
+        self.data.iter_mut().for_each(|s| {
+            s.push_str("_processed");
+        });
+        self.data  // 返回处理后的数据
+    }
+}
+
+fn main() {
+    let processor = DataProcessor::new(vec![
+        String::from("data1"),
+        String::from("data2"),
+    ]);
+
+    let processed = processor.process();
+    println!("{:?}", processed);
+}
+```
+---
+
+## 9. 常见问题与解决方案
+
+### 问题1: 所有权转移后无法使用
+
+**错误代码**:
+
+```rust
+let s = String::from("hello");
+let s2 = s;
+println!("{}", s);  // ❌ 编译错误
+```
+**解决方案**:
+
+```rust
+let s = String::from("hello");
+let s2 = s.clone();  // 克隆数据
+println!("{}", s);   // ✅ 现在可以了
+```
+### 问题2: 结构体字段所有权
+
+**错误代码**:
+
+```rust
+struct Person {
+    name: String,
+}
+
+let person = Person { name: String::from("Alice") };
+let name = person.name;  // 所有权转移
+println!("{}", person.name);  // ❌ 编译错误
+```
+**解决方案**:
+
+```rust
+let name = person.name.clone();  // 克隆
+// 或
+let name = &person.name;  // 借用
+```
+### 问题3: 循环中的所有权
+
+**错误代码**:
+
+```rust
+let vec = vec![String::from("a"), String::from("b")];
+for s in vec {
+    println!("{}", s);
+}
+println!("{:?}", vec);  // ❌ 编译错误
+```
+**解决方案**:
+
+```rust
+let vec = vec![String::from("a"), String::from("b")];
+for s in &vec {  // 借用
+    println!("{}", s);
+}
+println!("{:?}", vec);  // ✅
+```
+---
+
+## 10. 总结与最佳实践
+
+### 核心原则
+
+1. **每个值有唯一所有者**: 类型系统保证这一点
+2. **所有权可以转移**: 通过移动语义实现
+3. **借用避免所有权转移**: 使用引用共享数据
+4. **生命周期保证引用有效**: 编译期检查
+
+### 最佳实践
+
+1. **优先使用借用**: 不需要所有权时使用 `&T`
+2. **明确所有权意图**: 需要所有权时明确转移
+3. **合理使用智能指针**: `Rc`/`Arc` 用于共享所有权
+4. **设计清晰的API**: 函数签名明确所有权语义
+
+### 下一步学习
+
+- [引用与借用实践指南](02_references_and_borrowing_practice.md)
+- [泛型编程指南](03_generics_programming_guide.md)
+- [生命周期指南](05_lifetimes_guide.md)
+
+---
+
+**最后更新**: 2025-12-11
+**Rust版本**: 1.92.0+
+**文档版本**: v1.0
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

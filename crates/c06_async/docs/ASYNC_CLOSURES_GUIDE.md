@@ -62,7 +62,6 @@ let async_closure = async |x: i32| {
 };
 let result = async_closure(21).await; // result == 42
 ```
-
 ### 为什么需要 Async Closures？
 
 在 async closures 稳定之前，Rust 开发者使用以下**旧范式**来模拟异步闭包：
@@ -74,7 +73,6 @@ let old_style = |s: String| async move {
     s.len()
 };
 ```
-
 这个旧范式存在三个核心问题：
 
 1. **强制 `move`**: 旧范式需要 `async move` 来捕获变量，导致所有权转移，无法借用
@@ -106,7 +104,6 @@ graph LR
     O1 --> O2 --> O3 --> O4
     N1 --> N2 --> N3 --> N4
 ```
-
 ### 详细对比矩阵
 
 | 维度 | 旧范式 `\|x\| async move { ... }` | Async Closure `async \|x\| { ... }` (1.85.0+) |
@@ -150,7 +147,6 @@ pub trait AsyncFnOnce<Args>: AsyncFnMut<Args> {
     fn async_call_once(self, args: Args) -> Self::CallOnceFuture;
 }
 ```
-
 > **注意**:
 > `AsyncFn` / `AsyncFnMut` / `AsyncFnOnce` traits 及其 `async_call` / `async_call_mut` / `async_call_once` 方法自 **Rust 1.85.0 stable** 起可用；
 > 通常使用直接调用语法 `closure(args).await`。
@@ -196,7 +192,6 @@ let multi = async |a: i32, b: i32| a + b;
 let generic = async |s: &str| s.len();
 // 等价于：for<'a> async |s: &'a str| -> usize
 ```
-
 ### 在函数参数中使用
 
 ```rust
@@ -219,7 +214,6 @@ let numbers = vec![1, 2, 3, 4, 5];
 let evens = async_filter(numbers, async |x: &i32| *x % 2 == 0).await;
 assert_eq!(evens, vec![2, 4]);
 ```
-
 ---
 
 ## 5. Wikipedia 概念对齐
@@ -254,7 +248,6 @@ where
     results
 }
 ```
-
 ### 场景 2：中间件模式
 
 ```rust
@@ -280,7 +273,6 @@ let handler = async |req: Request| {
 };
 let response = middleware(request, handler).await;
 ```
-
 ### 场景 3：事件处理
 
 ```rust
@@ -294,7 +286,6 @@ struct TypedEventBus {
     // 由于 AsyncFn 不是 dyn-safe，使用泛型或枚举
 }
 ```
-
 > **注意**: 由于 `AsyncFn` 不是 dyn-compatible，事件总线需要使用泛型或 `BoxFuture` 模式。
 
 ---
@@ -309,7 +300,6 @@ fn make_dyn() -> Box<dyn AsyncFn(i32) -> bool> {
     Box::new(async |x| x > 0)
 }
 ```
-
 **原因**: `AsyncFn` 的关联类型 `CallRefFuture` 使 vtable 无法统一构造。
 
 **替代方案**:
@@ -323,7 +313,6 @@ fn make_boxed() -> impl Fn(i32) -> Pin<Box<dyn Future<Output = bool>>> {
     |x| Box::pin(async move { x > 0 })
 }
 ```
-
 ### ❌ Send bound 表达仍复杂
 
 ```rust
@@ -336,7 +325,6 @@ where
     // tokio::spawn 需要 Send future
 }
 ```
-
 **临时解决方案**: 使用 `async move` 闭包 + `Fn` bound（旧范式）直到 RTN (Return Type Notation) 稳定。
 
 ### ❌ 与 `Fn() -> impl Future` 的互操作
@@ -349,7 +337,6 @@ let new_style = async |x: i32| x * 2;
 // new_style 实现 AsyncFn(i32) -> i32
 // 两者不能直接在同一个泛型参数中使用
 ```
-
 ---
 
 ## 8. 决策树
@@ -371,7 +358,6 @@ graph TD
     Q5 -->|是| A5[使用 AsyncFn trait<br/>predicate(&item).await]
     Q5 -->|否| A6[使用 Fn trait<br/>返回 Future]
 ```
-
 ---
 
 ## 9. 与其他特性的关系
@@ -390,7 +376,6 @@ graph TD
     B2 --> C2[Send bound 表达]
     B3 --> C3[异步生成器]
 ```
-
 ---
 
 ## 10. 迁移指南
@@ -422,7 +407,6 @@ let handler = async |s: &str| {
     db.query(s).await
 };
 ```
-
 #### 步骤 4：Trait bound 更新
 
 ```rust
@@ -441,7 +425,6 @@ where
     // 注意：Send bound 仍需要 RTN
 }
 ```
-
 ---
 
 ## 参考资源

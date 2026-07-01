@@ -76,7 +76,6 @@
 rustc --edition 2024 scripts/probe_rust_198_apis.rs -o /tmp/probe_198
 /tmp/probe_198
 ```
-
 ---
 
 *本报告由 `scripts/probe_rust_198_apis.rs` 自动生成，仅供参考。最终稳定 API 集合以 Rust 官方 Release Notes 为准。*

@@ -34,7 +34,6 @@ rust-lang/
 │   └── 06_toolchain/ # 工具链文档
 └── examples/         # 综合示例
 ```
-
 ## 术语表 {#术语表}
 
 完整术语对照表: [concept/00_meta/terminology_glossary.md](../concept/00_meta/terminology_glossary.md)

@@ -36,7 +36,6 @@ struct Point {
 
 Point p{3, 4}; // 列表初始化
 ```
-
 C++ 提供多种初始化语法（`()`、`{}`、`=`、默认初始化、值初始化），并允许：
 
 - 多个构造函数重载
@@ -61,7 +60,6 @@ impl Point {
 let p = Point::new(3, 4);
 let q = Point { x: 1, ..p }; // 结构体更新语法
 ```
-
 - 字段默认不可外部访问，除非标记为 `pub`。
 - 创建对象使用结构体字面量或关联函数（通常是 `new`）。
 - 不存在隐式转换，因此不需要 `explicit`。
@@ -121,7 +119,6 @@ public:
     friend class Auditor; // Auditor 可访问私有成员
 };
 ```
-
 `friend` 破坏了类的封装边界，允许指定类或函数访问私有成员。
 
 ### 5.2 Rust 模块可见性
@@ -138,7 +135,6 @@ mod wallet {
     }
 }
 ```
-
 - `pub`：完全公开
 - `pub(crate)`：crate 内可见
 - `pub(super)`：父模块可见

@@ -103,7 +103,6 @@ strip = true           # 移除符号信息
 # 针对特定 CPU 优化 {#针对特定-cpu-优化}
 # rustflags = ["-C", "target-cpu=native"] {#rustflags--c-target-cpunative}
 ```
-
 ### 2. 特性标志优化 {#2-特性标志优化}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -122,7 +121,6 @@ default = ["std"]
 std = []
 no-std = []
 ```
-
 ### 3. 增量编译 {#3-增量编译}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -137,7 +135,6 @@ incremental = true
 [profile.test]
 opt-level = 2  # 测试时启用优化，加速测试执行
 ```
-
 ---
 
 ## 💾 内存优化 {#内存优化}
@@ -166,7 +163,6 @@ for i in 0..1000 {
 // 使用 resize 一次性分配
 let mut vec = vec![0; 1000];
 ```
-
 ### 2. 使用切片而非 Vec {#2-使用切片而非-vec}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -189,7 +185,6 @@ fn process_generic<T: AsRef<[i32]>>(data: T) -> i32 {
     data.as_ref().iter().sum()
 }
 ```
-
 ### 3. 使用 Cow 避免克隆 {#3-使用-cow-避免克隆}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -210,7 +205,6 @@ fn process_data(data: Cow<str>) -> String {
 let borrowed: Cow<str> = Cow::Borrowed("hello");
 let owned: Cow<str> = Cow::Owned(String::from("world"));
 ```
-
 ### 4. 使用 Box 减少栈分配 {#4-使用-box-减少栈分配}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -229,7 +223,6 @@ enum TreeNode {
     Branch(Box<TreeNode>, Box<TreeNode>),
 }
 ```
-
 ### 5. 内存池模式 {#5-内存池模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -270,7 +263,6 @@ impl<T: Send> ObjectPool<T> {
     }
 }
 ```
-
 ---
 
 ## ⚡ 运行时优化 {#运行时优化}
@@ -299,7 +291,6 @@ let stats = data.iter().fold(
     |stats, &x| stats.update(x)
 );
 ```
-
 ### 2. 避免不必要的克隆 {#2-避免不必要的克隆}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -323,7 +314,6 @@ fn maybe_modify(s: Cow<str>) -> String {
     }
 }
 ```
-
 ### 3. 使用 `#[inline]` 提示 {#3-使用-inline-提示}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -341,7 +331,6 @@ fn critical_path(x: i32) -> i32 {
 
 // 注意：不要滥用 inline，编译器通常比人更懂
 ```
-
 ### 4. 使用 `#[cold]` 标记冷路径 {#4-使用-cold-标记冷路径}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -365,7 +354,6 @@ fn main_path() {
 #[cold]
 fn unlikely_branch() {}
 ```
-
 ### 5. SIMD 优化 {#5-simd-优化}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -396,7 +384,6 @@ use std::arch::x86_64::*;
 #[cfg(target_arch = "aarch64")]
 use std::arch::aarch64::*;
 ```
-
 ---
 
 ## 🔄 并发优化 {#并发优化}
@@ -417,7 +404,6 @@ use std::sync::Arc;
 let data = Arc::new(shared_data);
 let data_clone = Arc::clone(&data);
 ```
-
 ### 2. 减少锁竞争 {#2-减少锁竞争}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -449,7 +435,6 @@ let read_guard = data.read().unwrap();
 // 独占写入
 let write_guard = data.write().unwrap();
 ```
-
 ### 3. 使用无锁数据结构 {#3-使用无锁数据结构}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -472,7 +457,6 @@ while let Some(item) = queue.pop() {
     println!("{}", item);
 }
 ```
-
 ### 4. 工作窃取调度 {#4-工作窃取调度}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -497,7 +481,6 @@ pool.install(|| {
     println!("{}", sum);
 });
 ```
-
 ### 5. 并行迭代器 {#5-并行迭代器}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -520,7 +503,6 @@ let filtered: Vec<_> = data
 // 并行归约
 let sum: f64 = data.par_iter().map(|x| x * 2.0).sum();
 ```
-
 ---
 
 ## 🌐 异步优化 {#异步优化}
@@ -559,7 +541,6 @@ async fn with_timeout<T>(
     }
 }
 ```
-
 ### 2. 使用有界通道 {#2-使用有界通道}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -584,7 +565,6 @@ while let Some(batch) = rx.recv_many(10).await {
     process_batch(batch).await;
 }
 ```
-
 ### 3. 批量处理 {#3-批量处理}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -615,7 +595,6 @@ while let Some(result) = tasks.next().await {
     handle(result).await;
 }
 ```
-
 ### 4. 避免阻塞 {#4-避免阻塞}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -645,7 +624,6 @@ async fn read_file(path: &str) -> Result<String, io::Error> {
     tokio::fs::read_to_string(path).await
 }
 ```
-
 ---
 
 ## 📊 性能分析 {#性能分析}
@@ -682,7 +660,6 @@ fn benchmark_fib(c: &mut Criterion) {
 criterion_group!(benches, benchmark_fib);
 criterion_main!(benches);
 ```
-
 ### 2. 使用 perf 分析 {#2-使用-perf-分析}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -702,7 +679,6 @@ perf report
 # 生成火焰图 {#生成火焰图-1}
 perf script | stackcollapse-perf.pl | flamegraph.pl > flamegraph.svg
 ```
-
 ### 3. 使用 cargo-flamegraph {#3-使用-cargo-flamegraph}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -719,7 +695,6 @@ cargo flamegraph --bin my_app -- arg1 arg2
 
 # 使用 dtrace (macOS) 或 perf (Linux) {#使用-dtrace-macos-或-perf-linux}
 ```
-
 ### 4. 使用 valgrind (Linux) {#4-使用-valgrind-linux}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -738,7 +713,6 @@ kcachegrind callgrind.out.*
 # 内存泄漏检测 {#内存泄漏检测}
 valgrind --leak-check=full ./target/debug/my_app
 ```
-
 ---
 
 ## 🎯 优化策略 {#优化策略}
@@ -770,7 +744,6 @@ let (result, duration) = measure_performance(|| {
 });
 println!("耗时: {:?}", duration);
 ```
-
 ### 2. 热点分析 {#2-热点分析}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -789,7 +762,6 @@ let span = span!(Level::INFO, "hot_section");
 let _enter = span.enter();
 // 热点代码
 ```
-
 ### 3. 渐进优化 {#3-渐进优化}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -814,7 +786,6 @@ fn optimized_implementation(data: &[i32]) -> i32 {
 // 4. 验证优化效果
 // cargo bench 对比结果
 ```
-
 ---
 
 ## 使用场景 {#使用场景}
@@ -834,7 +805,6 @@ opt-level = 3
 lto = true
 codegen-units = 1
 ```
-
 ### 场景2: 内存密集型应用优化 {#场景2-内存密集型应用优化}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -901,7 +871,6 @@ codegen-units = 1
 ## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### 新特性深度解析 {#新特性深度解析}
@@ -946,7 +915,6 @@ fn moving_average_array_windows(data: &[f64], window_size: usize) -> Vec<f64> {
     }
 }
 ```
-
 **生产级示例**：股票技术分析中的 MACD 指标计算，利用 `array_windows` 检测价格交叉信号，实现零分配的高性能时间序列分析。
 
 ---
@@ -981,7 +949,6 @@ pub fn has_available_connection(connections: &[Connection]) -> bool {
     )
 }
 ```
-
 ---
 
 #### 3. `LazyLock/LazyCell` 增强 {#3-lazylocklazycell-增强}
@@ -1007,7 +974,6 @@ pub fn get_db_url() -> &'static str {
     }
 }
 ```
-
 ---
 
 #### 4. `f32/f64::consts` 新增数学常量 {#4-f32f64consts-新增数学常量}
@@ -1030,7 +996,6 @@ where
     (left + right) / 2.0
 }
 ```
-
 **最后更新**: 2026-05-08 (Rust 1.95+ 深度性能分析)
 
 ---

@@ -1,5 +1,9 @@
 # c13 嵌入式系统 - 文档指南
 
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
+>
+
 ## 模块定位
 
 本 crate 提供 Rust 裸机嵌入式系统学习模块，涵盖 `no_std` 编程、内存映射寄存器、UART 驱动、中断处理、HAL 设计模式、FFI 与 C 互操作、以及 Embassy / RTIC 异步嵌入式框架。
@@ -26,7 +30,6 @@ cargo check -p c13_embedded
 # 运行演示程序
 cargo run -p c13_embedded --bin embedded_demo
 ```
-
 ---
 
 **文档版本**: 1.0

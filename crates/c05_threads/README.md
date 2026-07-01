@@ -110,13 +110,13 @@
 ### 📚 快速开始
 
 - 🎊 **[最终完成报告](docs/reports/C05_PHASE10_TIER4_FINAL_2025_10_22.md)** - **Phase 10 完成报告 (强烈推荐！)**
-- 📘 **[项目概览](docs/tier_01_foundations/01_项目概览.md)** - 了解模块全貌
-- 📘 **[主索引导航](docs/tier_01_foundations/02_主索引导航.md)** - 完整文档地图（28 份文档）
+- 📘 **[项目概览](docs/tier_01_foundations/01_project_overview.md)** - 了解模块全貌
+- 📘 **[主索引导航](docs/tier_01_foundations/02_navigation.md)** - 完整文档地图（28 份文档）
 - 📖 **[Tier 2: 实践指南](docs/tier_02_guides/README.md)** - 5 篇核心实践指南
 - 📚 **[Tier 3: 参考文档](docs/tier_03_references/README.md)** - 3 篇技术参考
 - 🚀 **[Tier 4: 高级主题](docs/tier_04_advanced/README.md)** - 4 篇前沿技术文档
-- 📘 **[术语表](docs/tier_01_foundations/03_术语表.md)** - 60+ 并发术语
-- 📘 **[常见问题](docs/tier_01_foundations/04_常见问题.md)** - 20+ FAQ
+- 📘 **[术语表](docs/tier_01_foundations/03_glossary.md)** - 60+ 并发术语
+- 📘 **[常见问题](docs/tier_01_foundations/04_faq.md)** - 20+ FAQ
 
 ---
 
@@ -130,17 +130,14 @@
    - Mermaid 可视化图表 + 概念三元组 + 技术演化时间线
    - 完整的 Rust 类型层次映射 + Send/Sync 决策树
    - 并发模式分类 + 性能与安全知识图
-
 2. **[多维矩阵对比分析](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐⭐⭐⭐⭐
    - 同步原语/并发模型/线程池全面对比 + 性能基准代码
    - 无锁数据结构对比 + 通道实现对比
    - 内存顺序对比 + 第三方库生态对比
-
 3. **[思维导图集合](../../docs/04_thinking/MIND_MAP_COLLECTION.md)** ⭐⭐⭐⭐⭐
    - ASCII 艺术知识结构 + 完整学习路径 (初/中/高级)
    - 问题诊断树 + 性能优化金字塔
    - 技术选型决策树 + 检查清单
-
 4. **[Rust 1.93.0 实战示例](../../archive/docs/version_reports/README.md)** ⭐⭐⭐⭐⭐
    - 线程创建与管理 (8个示例) + thread::scope 实战
    - Channel 消息传递 (4个示例) + 同步原语 (7个示例)
@@ -163,19 +160,16 @@
 cargo build --release
 cargo test -p c05_threads
 ```
-
 - 运行示例：
 
 ```bash
 cargo run -p c05_threads --example basic
 ```
-
 - 运行基准（如有 benches）：
 
 ```bash
 cargo bench -p c05_threads
 ```
-
 ## 模块结构
 
 ### 1. 并发控制 (concurrency)
@@ -282,7 +276,6 @@ let allocator = rust_192_features::ThreadResourceAllocator::new(
 );
 let max_threads = allocator.max_threads();
 ```
-
 ### 1. 作用域线程 (Rust 1.93.0+ 特性)
 
 ```rust
@@ -305,7 +298,6 @@ thread::scope(|s| {
 // 所有线程在作用域结束前完成
 println!("处理后的数据: {:?}", data);
 ```
-
 ### 2. 工作窃取调度器
 
 ```rust
@@ -321,7 +313,6 @@ if let Some(task) = scheduler.steal_task(0) {
     println!("处理任务: {}", task);
 }
 ```
-
 ### 3. 无锁环形缓冲区
 
 ```rust
@@ -335,7 +326,6 @@ if let Some(value) = buffer.try_pop() {
     println!("接收到: {}", value);
 }
 ```
-
 ### 4. 自适应锁
 
 ```rust
@@ -349,7 +339,6 @@ lock.lock(|data| {
 let stats = lock.get_stats();
 println!("锁竞争率: {:.2}%", stats.get_contention_ratio() * 100.0);
 ```
-
 ### 5. 优先级通道
 
 ```rust
@@ -362,7 +351,6 @@ channel.send(3, "低优先级消息").unwrap();
 // 接收消息（按优先级顺序）
 let message = channel.recv();
 ```
-
 ## 性能优化
 
 ### 1. 内存布局优化
@@ -400,7 +388,6 @@ demo::run_performance_benchmarks();
 // 运行内存分析
 demo::run_memory_analysis();
 ```
-
 ### 运行 Rust 1.93.0 特性演示
 
 ```bash
@@ -419,7 +406,6 @@ cargo run -p c05_threads --example advanced_rust190_demo
 # 启用 tokio 特性运行异步演示
 cargo run -p c05_threads --example rust_190_features_demo --features tokio
 ```
-
 ### 运行特定模块演示
 
 ```rust
@@ -436,7 +422,6 @@ lockfree_ring_buffer::demonstrate_lockfree_ring_buffers();
 // 自适应锁演示
 adaptive_locks::demonstrate_adaptive_locks();
 ```
-
 ### 消息传递综合示例
 
 运行示例：
@@ -444,7 +429,6 @@ adaptive_locks::demonstrate_adaptive_locks();
 ```bash
 cargo run -p c05_threads --example message_passing_demo
 ```
-
 示例覆盖：标准库 channel、crossbeam mpsc、sync_channel、watch 与基于 `ReceiverStream` 的同步流。
 
 ### 限速 + 批量示例
@@ -454,7 +438,6 @@ cargo run -p c05_threads --example message_passing_demo
 ```bash
 cargo run -p c05_threads --example stream_rate_batch_demo
 ```
-
 示例覆盖：限速桥接、`next_batch_with_max_wait` 批处理消费。
 
 ### 优先级通道示例
@@ -464,7 +447,6 @@ cargo run -p c05_threads --example stream_rate_batch_demo
 ```bash
 cargo run -p c05_threads --example priority_channels_demo
 ```
-
 示例覆盖：简化与完整优先级通道的发送与接收顺序对比。
 
 ### Stream + 背压综合示例
@@ -474,7 +456,6 @@ cargo run -p c05_threads --example priority_channels_demo
 ```bash
 cargo run -p c05_threads --example stream_backpressure_demo
 ```
-
 示例覆盖：用丢弃型背压通道调节生产者速率，桥接为 `ReceiverStream` 并通过超时消费。
 
 ### 背压处理总览示例
@@ -484,7 +465,6 @@ cargo run -p c05_threads --example stream_backpressure_demo
 ```bash
 cargo run -p c05_threads --example backpressure_overview_demo
 ```
-
 示例覆盖：Blocking/Dropping/Adaptive/FlowControl 四种背压策略的基础行为对比。
 
 ## 基准测试与性能调优
@@ -501,7 +481,6 @@ cargo bench --bench rust_192_benchmarks
 # 运行并发基准测试
 cargo bench --bench concurrency_benchmark
 ```
-
 ### Rust 1.93.0 特性基准测试 ⭐ NEW
 
 新增的 `rust_192_benchmarks` 基准测试套件包括：
@@ -520,14 +499,12 @@ cargo bench --bench concurrency_benchmark
 ```bash
 RUSTFLAGS="-C target-cpu=native" cargo bench -p c05_threads
 ```
-
 在 Windows PowerShell 下：
 
 ```powershell
 $env:RUSTFLAGS = "-C target-cpu=native"
 cargo bench -p c05_threads
 ```
-
 - 构建优化：使用 `--release`，在 `Cargo.toml` 的 `[profile.release]` 中可考虑开启 `lto = true`、`codegen-units = 1`、`opt-level = "z"|"s"|3` 视场景调整。
 - 绑定亲和性：在多核/NUMA 机器上结合 `threads/thread_affinity.rs` 将计算线程绑定至本地节点，减少跨 NUMA 访存。
 - 伪共享规避：关键共享结构使用 `crossbeam_utils::CachePadded` 或等价手段做缓存行填充。
@@ -542,13 +519,11 @@ cargo bench -p c05_threads
 ```bash
 cargo test -p c05_threads
 ```
-
 运行 Rust 1.93.0 特性测试：
 
 ```bash
 cargo test --test rust_192_comprehensive_tests
 ```
-
 运行特定模块测试：
 
 ```bash
@@ -557,7 +532,6 @@ cargo test lockfree::lockfree_ring_buffer
 cargo test synchronization::adaptive_locks
 cargo test rust_192_features
 ```
-
 ## 平台与环境注意事项
 
 1. Windows 线程亲和性与优先级：请参考 `threads/os_thread_features.rs` 与 `threads/thread_affinity.rs`，部分策略在不同版本的 Windows 上权限/效果有所差异。

@@ -109,15 +109,12 @@
    - `FileHandle<State>` - 编译时状态验证
    - `DatabaseConnection<State>` - 资源生命周期管理
    - 形式化证明：非法状态转换在编译时被拒绝
-
 2. **不变量验证**
    - 单例模式的唯一性不变量（`OnceLock`）
    - 观察者模式的一致性不变量（循环不变量证明）
-
 3. **终止性证明**
    - 快速排序的良基归纳证明
    - 测度函数定义与递归参数减小证明
-
 4. **并发安全性证明**
    - `SafeCounter` - 数据竞争自由证明（Mutex）
    - 生产者-消费者 - 死锁自由证明（资源排序）
@@ -161,7 +158,6 @@
 存在双射函数 φ: Sync<T> → Async<T> 和 ψ: Async<T> → Sync<T>
 满足：ψ(φ(s)) = s 且 φ(ψ(a)) = a
 ```
-
 **实践意义**：
 
 - 异步和同步在单线程执行语义下**结果等价**
@@ -178,7 +174,6 @@
 对于任意Actor系统 AS = {α₁, ..., αₙ}，
 存在Reactor系统 R 使得 behavior(AS) ≡ behavior(R)
 ```
-
 **编码方案**：
 
 - Actor邮箱 → IO源（管道/socket）
@@ -217,7 +212,6 @@ fn async_factorial(n: u64) -> Pin<Box<dyn Future<Output = u64>>> {
     })
 }
 ```
-
 **性能分析**：
 
 - 异步递归比同步慢10-50倍（Box堆分配开销）
@@ -256,7 +250,6 @@ pub trait AsyncHandler {
     async fn handle(&self, event: Event);  // Rust 1.75+ 稳定
 }
 ```
-
 ---
 
 ## 📈 性能基准测试
@@ -344,7 +337,6 @@ cargo test --all-features
 # 性能基准测试
 cargo bench
 ```
-
 ### 生成文档
 
 ```bash
@@ -354,7 +346,6 @@ cargo doc --no-deps --open
 # 查看模块文档
 cargo doc --lib --open
 ```
-
 ---
 
 ## 🌟 核心亮点

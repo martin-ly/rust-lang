@@ -86,7 +86,6 @@ P ::= STOP              // 死锁进程
     | P || Q            // 同步并行
     | P \ A             // 隐藏事件集A
 ```
-
 ### 1.2 Channel通信
 
 #### 定义1.2（Channel）
@@ -104,7 +103,6 @@ Channel `c` 是一个通信媒介，支持操作：
 ─────────────────────── (Channel-Sync)
 系统状态： τ → (P || Q[v/x])
 ```
-
 其中 `τ` 是内部动作（不可观察）。
 
 ### 1.3 进程代数语义
@@ -118,7 +116,6 @@ traces(STOP) = {⟨⟩}
 traces(a → P) = {⟨⟩} ∪ {⟨a⟩ ⌢ t | t ∈ traces(P)}
 traces(P ||| Q) = {interleave(t₁, t₂) | t₁ ∈ traces(P), t₂ ∈ traces(Q)}
 ```
-
 #### 失败语义（Failure Semantics）
 
 引入失败集合 `failures(P)` 来刻画拒绝行为：
@@ -126,7 +123,6 @@ traces(P ||| Q) = {interleave(t₁, t₂) | t₁ ∈ traces(P), t₂ ∈ traces(
 ```text
 failures(P) = {(t, X) | t ∈ traces(P), X 是 P 在轨迹 t 后可以拒绝的事件集}
 ```
-
 ---
 
 ## 2. Golang的CSP实现
@@ -141,7 +137,6 @@ go func() {
     // 并发执行的代码
 }()
 ```
-
 **语义**：
 
 - **M:N调度**：M个goroutine映射到N个OS线程
@@ -163,7 +158,6 @@ val := <-ch
 // 缓冲channel（异步通信，容量N）
 ch := make(chan int, N)
 ```
-
 **形式化**：
 
 ```text
@@ -180,7 +174,6 @@ ch := make(chan int, N)
     ───────────────────────────────────
     ⟨recv(ch, x), σ⟩ → ⟨(), σ[x := v, buffer(ch) := [v₁, ..., vₖ]]⟩
 ```
-
 ### 2.2 Select语句
 
 #### 多路选择语义
@@ -197,7 +190,6 @@ default:
     // 所有channel都未就绪时执行
 }
 ```
-
 **形式化（非确定选择）**：
 
 ```text
@@ -205,7 +197,6 @@ ready(ch₁) ∨ ready(ch₂) ∨ ... ∨ ready(chₙ)
 ────────────────────────────────────────── (Select)
 select {case chᵢ: Pᵢ} → Pᵢ  (非确定选择任一就绪分支)
 ```
-
 ### 2.3 经典CSP模式
 
 #### 生产者-消费者
@@ -230,7 +221,6 @@ func main() {
     consumer(ch)
 }
 ```
-
 ---
 
 ## 3. Rust的异步模型
@@ -251,7 +241,6 @@ pub enum Poll<T> {
     Pending,       // 需要等待
 }
 ```
-
 **语义差异**：
 
 - **惰性求值**：Future不会自动执行，需要executor驱动
@@ -283,7 +272,6 @@ tx.send(42).unwrap();
 assert_eq!(rx1.recv().await.unwrap(), 42);
 assert_eq!(rx2.recv().await.unwrap(), 42);
 ```
-
 **形式化（mpsc channel）**：
 
 ```rust
@@ -316,7 +304,6 @@ async fn recv(&mut self) -> Option<T> {
     }
 }
 ```
-
 ### 3.3 Select宏（Tokio）
 
 #### 多路异步选择
@@ -336,7 +323,6 @@ select! {
     }
 }
 ```
-
 **实现原理**（简化）：
 
 ```rust
@@ -366,7 +352,6 @@ loop {
     park();
 }
 ```
-
 ---
 
 ## 4. 语义模型对比
@@ -400,7 +385,6 @@ loop {
 - channel操作
 - 异步抢占（Go 1.14+）
 ```
-
 #### Rust：协作式调度
 
 ```text
@@ -417,7 +401,6 @@ yield点：
 - 显式yield
 - （无抢占）
 ```
-
 **关键差异**：
 
 - **Golang**：运行时可以在任意点抢占goroutine（公平性好，实时性差）
@@ -463,7 +446,6 @@ std::thread::spawn(move || {
 });
 *x.lock().unwrap() = 2;
 ```
-
 ---
 
 ## 5. 形式化证明
@@ -477,7 +459,6 @@ std::thread::spawn(move || {
 ```text
 traces(P) ≡ traces(F)
 ```
-
 **构造**：
 
 ```rust
@@ -500,7 +481,6 @@ async fn external_choice(p: impl Future, q: impl Future) {
     }
 }
 ```
-
 **证明**：
 
 1. 事件前缀 `a → P` 对应 `event().await; future()`
@@ -518,7 +498,6 @@ Golang的channel通信可以用Rust的mpsc channel模拟：
 Golang: ch <- v; x := <-ch
 Rust: tx.send(v).await; x = rx.recv().await
 ```
-
 满足：
 
 ```text
@@ -526,7 +505,6 @@ happens-before(send, recv)  (Golang)
   ≡
 happens-before(send.await, recv.await)  (Rust)
 ```
-
 **证明**：
 
 - 两者都保证发送在接收之前完成
@@ -544,7 +522,6 @@ func main() {
 }
 // panic: all goroutines are asleep - deadlock!
 ```
-
 #### Rust死锁（编译时部分检测）
 
 ```rust
@@ -556,7 +533,6 @@ async fn main() {
     // 编译通过，但运行时永久挂起
 }
 ```
-
 **差异**：
 
 - **Golang**：运行时检测全局死锁
@@ -599,7 +575,6 @@ func main() {
     wg.Wait()
 }
 ```
-
 #### Rust版本
 
 ```rust
@@ -639,7 +614,6 @@ async fn main() {
     }
 }
 ```
-
 **注意**：Rust的`mpsc::Receiver`不是`Clone`，只能有一个消费者。多消费者需要使用`broadcast`或手动分发。
 
 **修正版（使用broadcast）**：
@@ -678,7 +652,6 @@ async fn main() {
     }
 }
 ```
-
 ### 6.2 Pipeline模式
 
 #### 6.2.1 Golang版本
@@ -715,7 +688,6 @@ func main() {
     }
 }
 ```
-
 #### 6.2.2 Rust版本
 
 ```rust
@@ -755,7 +727,6 @@ async fn main() {
     }
 }
 ```
-
 **对比**：
 
 - **Golang**：更简洁，channel作为返回值很自然
@@ -783,7 +754,6 @@ func BenchmarkChannel(b *testing.B) {
 }
 // 结果：~50ns/op，20M ops/sec
 ```
-
 ```rust
 // Rust (Tokio)
 #[tokio::test]
@@ -800,7 +770,6 @@ async fn bench_channel() {
 }
 // 结果：~30ns/op，33M ops/sec
 ```
-
 **结论**：Rust的mpsc channel略快（零成本抽象，无GC）。
 
 ### 7.2 延迟对比
@@ -838,7 +807,6 @@ async fn bench_channel() {
 ```text
 ∀P ∈ CSP: ∃F ∈ Rust_Async. traces(P) = traces(F)
 ```
-
 #### 定理8.2（强差异性）
 
 在有副作用和内存共享的场景下，两者**不等价**：

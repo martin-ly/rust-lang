@@ -99,7 +99,6 @@ graph LR
     COMPILE --> TEST
     EXTRACT --> SEARCH
 ```
-
 > **认知功能**: 此图展示 rustdoc 的**工作流**——它不仅是文档渲染器，还是**文档测试运行器**。这是 Rust 文档生态区别于其他语言的关键特性。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 将 rustdoc 视为 CI 的一部分——`cargo test --doc` 应在每次提交时运行。
@@ -141,7 +140,6 @@ graph LR
   /// let result = my_function();
   /// ```
 ```
-
 > **Doctest 洞察**: Rust 的**文档测试**是生态的独特优势——示例代码不会过时，因为 CI 会验证它们是否能编译和运行。这解决了技术文档的**示例腐烂**（bit rot）问题。
 > [来源: [TRPL — Documentation Comments](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#documentation-comments)]
 
@@ -178,7 +176,6 @@ Rust 文档文化的独特性:
   │ 类型链接  │ intra-doc links │ 无              │ 无              │
   └───────────┴─────────────────┴─────────────────┴─────────────────┘
 ```
-
 > **文档文化洞察**: Rust 的文档生态不是**事后补充**，而是**开发流程的组成部分**——从 [RFC 1574](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html) 的标准化到 docs.rs 的自动托管，文档质量被提升到与代码质量同等重要的地位。
 > [来源: [RFC 1574 — API Documentation](https://github.com/rust-lang/rfcs/pull/1574)]
 
@@ -221,7 +218,6 @@ pub fn documented() {}
 //! - 功能 A
 //! - 功能 B
 ```
-
 > **注释规范**: `///` 用于项文档，`//!` 用于容器（模块（Module）/crate）文档。[RFC 1574](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html) 建议使用 Markdown 格式和特定章节结构（Examples、Panics、Errors、Safety）。
 > [来源: [RFC 1574 — Documentation Conventions](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html)]
 
@@ -248,7 +244,6 @@ pub fn demo() {}
 // - 生成可点击的 HTML 链接
 // - 支持路径解析（包括 use 别名）
 ```
-
 > **Intra-doc Links**: intra-doc links 是 Rust 文档的**杀手级特性**——它们在编译期验证链接有效性，解决了技术文档中最常见的**链接腐烂**问题。
 > [来源: [RFC 1946 — Intra-rustdoc links](https://github.com/rust-lang/rfcs/pull/1946)]
 
@@ -283,7 +278,6 @@ mdBook: Rust 生态的静态站点生成器
   2. mdbook build 生成静态站点
   3. 部署到 GitHub Pages / Netlify / 自有服务器
 ```
-
 > **mdBook 洞察**: mdBook 的设计哲学与 Rust 一致——**简单、可扩展、以内容为中心**。它不试图成为全能 CMS，而是专注于将 Markdown 转换为漂亮的文档站点。
 > [来源: [mdBook Documentation](https://rust-lang.github.io/mdBook/)]
 
@@ -352,7 +346,6 @@ API 文档规范（RFC 1574 推荐）:
   ├── Safety 注释完整（unsafe API）
   └── CHANGELOG.md 记录重大变更
 ```
-
 > **最佳实践**: Rust 的文档规范不是**可选的**——`cargo doc` 会对未文档化的公共项发出警告（`#[warn(missing_docs)]`）， crates.io 上的高质量 crate 都有完整的文档。
 > [来源: [Rust API Guidelines — Documentation](https://rust-lang.github.io/api-guidelines//documentation.html)]
 
@@ -376,7 +369,6 @@ graph TD
     style TEXT fill:#c8e6c9
     style IGNORE fill:#c8e6c9
 ```
-
 > **认知功能**: 此决策树帮助选择正确的代码块属性。核心原则是**默认使用 doctest**，只有在确实不需要验证时才使用 ignore/text。
 > **使用建议**: doctest 会增加编译时间，但对于公共 API 的示例来说是值得的。
 > [来源: [rustdoc — Documentation tests](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html)]
@@ -419,7 +411,6 @@ graph TD
 │   └── 此前默认构建 5 个目标；需多目标文档时须在 Cargo.toml 显式声明
 └── 解决方案: 使用 docs.rs metadata 配置构建设项
 ```
-
 > **边界要点**: 文档生态的边界主要与**编译时间**、**同步维护**、**工具限制**和**托管平台约束**相关。2026-05-01 的默认目标变更意味着跨平台 crate 需要主动配置 `[package.metadata.docs.rs]`，否则 Windows/macOS 等目标文档将不再自动生成。
 > [来源: [docs.rs Build Limits](https://docs.rs/about/builds)] ·
 > [来源: [Rust Blog — docs.rs: building fewer targets by default](https://blog.rust-lang.org/2026/04/04/docsrs-only-default-targets/)]
@@ -463,7 +454,6 @@ graph TD
   ✅ 优先文档化公共 API
   // 私有函数用简洁注释说明意图即可
 ```
-
 > **陷阱总结**: 文档生态的陷阱主要与**doctest 可靠性**、**链接有效性**、**同步维护**和**文档优先级**相关。
 > [来源: [Rust [RFC 1574](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html) — Common Mistakes](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html)]
 
@@ -534,7 +524,6 @@ fn documented() {}
 // }
 // ```
 ```
-
 > **修正**: Rust 的文档测试（doctest）自动将代码块包裹在 `fn main() { ... }` 中。
 > 若代码块包含 `fn main()` 或返回类型，需使用 `no_run` 或 `compile_fail` 属性。`compile_fail` 属性验证代码确实编译失败
 > ——这是测试"编译期保证"的独特方式。
@@ -552,7 +541,6 @@ pub fn linked() {}
 /// // ✅ 正确链接到标准库类型
 pub fn linked_fixed() {}
 ```
-
 > **修正**:
 > Rust 1.48+ 的 `rustdoc` 支持 intra-doc links——用 `[`Name`]` 语法链接到 crate 内的项或标准库类型。
 > 未解析的链接产生编译警告（CI 中可提升为错误）。这要求文档维护者确保所有引用（Reference）有效，避免死链接。
@@ -569,7 +557,6 @@ fn documented_function() {}
 
 fn main() {}
 ```
-
 > **修正**:
 > Rust 的 **doctest**（文档测试）支持 `compile_fail` 属性：代码应编译失败，若编译通过则测试失败。
 > `ignore` 属性：跳过测试（不编译也不运行）。`no_run` 属性：编译但不运行。

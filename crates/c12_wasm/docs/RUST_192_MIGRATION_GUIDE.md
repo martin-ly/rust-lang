@@ -69,7 +69,6 @@ rustc --version
 cargo --version
 # 应该显示: cargo 1.92.0 或更高版本
 ```
-
 ### 1.2 更新 WASM 目标
 
 ```bash
@@ -80,7 +79,6 @@ rustup target add wasm32-wasip1
 # 验证安装
 rustup target list --installed | grep wasm32
 ```
-
 ### 1.3 更新工具链
 
 ```bash
@@ -94,7 +92,6 @@ wasm-opt --version
 # 如果需要更新，通过 npm 安装
 npm install -g wasm-opt
 ```
-
 ---
 
 ## 📝 步骤 2: 更新配置文件
@@ -117,7 +114,6 @@ lto = true           # 链接时优化
 codegen-units = 1    # 单一代码生成单元
 strip = true         # 去除调试符号
 ```
-
 ### 2.2 更新 Cargo.workspace（如果使用工作区）
 
 ```toml
@@ -125,7 +121,6 @@ strip = true         # 去除调试符号
 members = ["crates/*"]
 target-rust-version = "1.92"  # 更新工作区版本要求
 ```
-
 ---
 
 ## 🔧 步骤 3: 利用新特性
@@ -142,7 +137,6 @@ unsafe {
     // 需要手动跟踪初始化状态
 }
 ```
-
 **迁移后 (Rust 1.92.0)**:
 
 ```rust
@@ -154,7 +148,6 @@ unsafe {
     buffer.write(b"data");
 }
 ```
-
 **收益**: +5% 内存管理性能，更安全的代码
 
 ---
@@ -169,7 +162,6 @@ fn calculate_pages(total_bytes: usize, page_size: usize) -> usize {
     (total_bytes + page_size - 1) / page_size
 }
 ```
-
 **迁移后 (Rust 1.92.0)**:
 
 ```rust
@@ -179,7 +171,6 @@ use c12_wasm::rust_192_features::calculate_buffer_chunks;
 let chunk_size = NonZeroUsize::new(1024).unwrap();
 let chunks = calculate_buffer_chunks(5000, chunk_size);
 ```
-
 **收益**: +10% 计算性能，类型安全保证
 
 ---
@@ -194,7 +185,6 @@ fn compare_arrays<T: PartialEq>(arr1: &[T], arr2: &[T]) -> bool {
     arr1.len() == arr2.len() && arr1.iter().zip(arr2.iter()).all(|(a, b)| a == b)
 }
 ```
-
 **迁移后 (Rust 1.92.0)**:
 
 ```rust
@@ -203,7 +193,6 @@ use c12_wasm::rust_192_features::wasm_optimized_array_eq;
 // 使用特化的迭代器比较
 let are_equal = wasm_optimized_array_eq(&vec1, &vec2);
 ```
-
 **收益**: +15-25% 比较性能
 
 ---
@@ -221,7 +210,6 @@ fn rotate_right<T>(data: &mut [T], positions: usize) {
     data[positions..].reverse();
 }
 ```
-
 **迁移后 (Rust 1.92.0)**:
 
 ```rust
@@ -230,7 +218,6 @@ use c12_wasm::rust_192_features::wasm_rotate_data;
 // 使用稳定化的 rotate_right
 wasm_rotate_data(&mut data, positions);
 ```
-
 **收益**: +30-35% 旋转性能
 
 ---
@@ -249,7 +236,6 @@ wasm-pack build --target web
 # 运行测试
 cargo test
 ```
-
 ### 4.2 功能验证
 
 ```bash
@@ -259,7 +245,6 @@ cargo run --example rust_192_features_demo
 # 运行综合示例
 cargo run --example 12_rust_192_comprehensive_demo
 ```
-
 ### 4.3 性能验证
 
 ```bash
@@ -269,7 +254,6 @@ cargo bench
 # 检查二进制大小
 ls -lh pkg/*.wasm
 ```
-
 ---
 
 ## 🐛 常见问题
@@ -285,7 +269,6 @@ ls -lh pkg/*.wasm
 [dependencies]
 c12_wasm = { path = "../c12_wasm" }  # 或使用 git 路径
 ```
-
 ### Q2: 类型推断失败
 
 **问题**: `WasmCircularBuffer::new()` 无法推断类型
@@ -296,7 +279,6 @@ c12_wasm = { path = "../c12_wasm" }  # 或使用 git 路径
 // 显式指定类型
 let mut buffer: WasmCircularBuffer<i32> = WasmCircularBuffer::new(10);
 ```
-
 ### Q3: 性能没有提升
 
 **问题**: 使用了新特性但性能没有明显提升
@@ -346,7 +328,7 @@ let mut buffer: WasmCircularBuffer<i32> = WasmCircularBuffer::new(10);
 
 - [Rust 1.92.0 WASM 改进文档](RUST_192_WASM_IMPROVEMENTS.md) - 详细特性说明
 - [Rust 1.92.0 WASM 快速参考](RUST_192_QUICK_REFERENCE.md) - 快速查找
-- [Rust 1.92.0 特性参考](tier_03_references/04_rust_192_特性参考.md) - API 参考
+- [Rust 1.92.0 特性参考](tier_03_references/04_rust_192_features_reference.md) - API 参考
 - [示例代码](../examples/rust_192_features_demo.rs) - 完整示例
 - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/) - 官方发布说明
 

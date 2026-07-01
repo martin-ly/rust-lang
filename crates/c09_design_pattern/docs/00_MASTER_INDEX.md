@@ -98,8 +98,8 @@
 | **FAQ**                | [FAQ](FAQ.md)                                                                 | 常见问题解答                            |
 | **术语表**             | [Glossary](Glossary.md)                                                       | 核心概念快速参考                        |
 | **Tier 1 基础层**      | [tier_01_foundations/](tier_01_foundations/README.md)                                  | 快速入门和基础参考                      |
-| **Tier 1 术语表**      | [tier*01_foundations/03*术语表.md](tier_01_foundations/03_术语表.md)          | 核心术语快速参考                        |
-| **Tier 1 常见问题**    | [tier*01_foundations/04*常见问题.md](tier_01_foundations/04_常见问题.md)      | 新手常见问题解答                        |
+| **Tier 1 术语表**      | [tier*01_foundations/03*术语表.md](tier_01_foundations/03_glossary.md)          | 核心术语快速参考                        |
+| **Tier 1 常见问题**    | [tier*01_foundations/04*常见问题.md](tier_01_foundations/04_faq.md)      | 新手常见问题解答                        |
 
 ---
 
@@ -248,7 +248,6 @@ cargo test -p c09_design_pattern --features tokio-bench
 # 运行性能基准
 cargo bench -p c09_design_pattern
 ```
-
 ---
 
 ## 📚 学习路径
@@ -384,8 +383,8 @@ cargo bench -p c09_design_pattern
 
 ### 2025-12-25 - Tier 1 文档完善 🎉
 
-- ✅ **新增 Tier 1 术语表** ([tier*01_foundations/03*术语表.md](tier_01_foundations/03_术语表.md)) - 核心术语快速参考
-- ✅ **新增 Tier 1 常见问题** ([tier*01_foundations/04*常见问题.md](tier_01_foundations/04_常见问题.md)) - 新手常见问题解答
+- ✅ **新增 Tier 1 术语表** ([tier*01_foundations/03*术语表.md](tier_01_foundations/03_glossary.md)) - 核心术语快速参考
+- ✅ **新增 Tier 1 常见问题** ([tier*01_foundations/04*常见问题.md](tier_01_foundations/04_faq.md)) - 新手常见问题解答
 - ✅ **完善 Tier 1 基础层** - 4个文档全部完成
 - ✅ **更新文档链接** - 所有交叉引用已更新
 
@@ -415,10 +414,10 @@ cargo bench -p c09_design_pattern
 ### 问题解决
 
 1. **查看 FAQ**:
-   - [Tier 1 常见问题](tier_01_foundations/04_常见问题.md) - 新手快速参考
+   - [Tier 1 常见问题](tier_01_foundations/04_faq.md) - 新手快速参考
    - [完整FAQ](FAQ.md) - 详细问题解答
 2. **查看术语表**:
-   - [Tier 1 术语表](tier_01_foundations/03_术语表.md) - 核心术语快速参考
+   - [Tier 1 术语表](tier_01_foundations/03_glossary.md) - 核心术语快速参考
    - [完整术语表](Glossary.md) - 所有术语详细定义
 3. **查看示例**: examples/ - 可运行的示例代码
 4. **运行测试**: `cargo test` - 验证功能

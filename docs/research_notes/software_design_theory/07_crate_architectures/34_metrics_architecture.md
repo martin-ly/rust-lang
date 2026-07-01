@@ -1,3 +1,9 @@
+> **Canonical 说明**: 本文件专注 **metrics 指标门面与 Prometheus 导出的 Recorder trait 架构**。
+>
+> 若只需要使用指南与生态定位，请优先参考：
+> - [日志与可观测性](../../../../concept/06_ecosystem/13_logging_observability.md)
+>
+> 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
@@ -52,7 +58,6 @@ process_query().await;
 histogram!("query_duration_seconds").record(start.elapsed().as_secs_f64());
 counter!("queries_total", "op" => "search").increment(1);
 ```
-
 > [来源: [metrics Examples](https://github.com/metrics-rs/metrics/tree/main/metrics/examples)]
 
 ---
@@ -71,7 +76,6 @@ graph TD
     RECORDER -->|implements| TCP[metrics-exporter-tcp]
     RECORDER -->|implements| OTLP[OpenTelemetry integration]
 ```
-
 > [来源: [metrics Recorder Docs](https://docs.rs/metrics/latest/metrics/trait.Recorder.html)]
 
 | 类型 | 职责 | 关键方法 |
@@ -107,7 +111,6 @@ PrometheusBuilder::new()
     .with_http_listener("0.0.0.0:9090".parse()?)
     .install()?;
 ```
-
 > [来源: [metrics-exporter-prometheus docs.rs](https://docs.rs/metrics-exporter-prometheus/latest/metrics_exporter_prometheus/)]
 
 ### 2.4 描述指标 {#24-描述指标}
@@ -118,7 +121,6 @@ PrometheusBuilder::new()
 metrics::describe_counter!("http_requests_total", "Total number of HTTP requests");
 metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HTTP request latency");
 ```
-
 > [来源: [metrics describe_counter Docs](https://docs.rs/metrics/latest/metrics/macro.describe_counter.html)]
 
 ---
@@ -208,12 +210,10 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 > - [来源: [metrics crates.io](https://crates.io/crates/metrics)]
 > - [来源: [metrics-exporter-prometheus Documentation](https://docs.rs/metrics-exporter-prometheus/latest/metrics_exporter_prometheus/)]
 > - [来源: [Prometheus Best Practices](https://prometheus.io/docs/practices/)]
-
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [Borgmon: Google’s Large-Scale Monitoring System](https://dl.acm.org/doi/10.1145/2741948.2741950)] — 白盒监控与指标理论基础
 > - [来源: [Adaptive Thresholding for Monitoring](https://dl.acm.org/doi/10.1145/3190508.3190528)] — 指标告警策略参考
-
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [metrics-rs GitHub Repository](https://github.com/metrics-rs/metrics)]

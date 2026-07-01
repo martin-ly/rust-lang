@@ -107,12 +107,10 @@
    - C01: 所有权与借用（重点）
    - C03: 控制流与函数
    - 实践: 编写简单的 CLI 工具
-
 2. **第 3-4 周: 类型系统**
    - C02: 类型系统
    - C04: 泛型编程（基础部分）
    - 实践: 实现简单的数据结构
-
 3. **第 5-6 周: 综合实践**
    - 完成第一个项目: 文件处理工具
    - 复习和巩固
@@ -142,23 +140,19 @@
    - C02: 类型系统
    - C03: 控制流与函数
    - 实践: 对比其他语言的差异
-
 2. **第 3-4 周: 高级特性**
    - C04: 泛型编程
    - C05: 线程与并发
    - C06: 异步编程
    - 实践: 并发/异步项目
-
 3. **第 5-6 周: 系统编程**
    - C07: 进程管理
    - C10: 网络编程
    - 实践: 网络服务器项目
-
 4. **第 7-8 周: 专业领域**
    - C08: 算法与数据结构（含 [算法决策树](../../crates/c08_algorithms/src/algorithm_decision_trees.rs)）
    - C09: 设计模式
    - 实践: 综合项目
-
 5. **第 9-10 周: 进阶专题（本轮新增）**
    - c01: [Pin 与自引用结构](../../crates/c01_ownership_borrow_scope/src/pin_and_self_referential.rs)（高级所有权深入）
    - exercises: [Rust 1.95 特性练习](../../exercises/src/rust_195_feature_exercises.rs)
@@ -189,17 +183,14 @@
    - C05: 线程与并发（深入）
    - C06: 异步编程（深入）
    - 实践: 高性能并发应用
-
 2. **第 3-4 周: 系统编程**
    - C07: 进程管理（完整）
    - C10: 网络编程（完整）
    - 实践: 分布式系统
-
 3. **第 5-6 周: 算法与设计**
    - C08: 算法与数据结构（深入）
    - C09: 设计模式（完整）
    - 实践: 算法优化项目
-
 4. **第 7-8 周: 高级主题**
    - C11: 宏系统
    - C12: WASM
@@ -207,13 +198,11 @@
    - c02: [类型系统前沿](../../crates/c02_type_system/src/type_system_frontier.rs)（Never type `!`、TAIT、RPITIT/AFIT）
    - c08: [算法决策树](../../crates/c08_algorithms/src/algorithm_decision_trees.rs)（根据场景选择最优算法）
    - 实践: 宏、WASM、高性能算法与类型系统结合项目
-
 5. **第 9-10 周: 新特性巩固**
    - exercises: [Rust 1.95 特性练习](../../exercises/src/rust_195_feature_exercises.rs)（`if let` guards、`cfg_select!`、`Atomic::update` 等）
    - content/emerging/: 前沿特性跟踪（Generic Const Expressions、Async Closures 等）
    - content/ecosystem/: 生态深度（Tokio、Axum、SQLx 内部原理）
    - 实践: 综合运用新特性重构旧代码
-
 6. **第 11-12 周: 综合项目**
    - 完成大型综合项目
    - 性能优化实践
@@ -243,22 +232,18 @@
    - 大型项目架构
    - 模块化设计
    - 性能优化
-
 2. **生态系统**
    - 主流库和框架
    - 工具链深入
    - 社区最佳实践
-
 3. **专业领域**
    - 嵌入式 Rust
    - 区块链开发
    - 系统编程
-
 4. **前沿特性跟踪（本轮新增）**
    - content/emerging/: 前沿特性跟踪（Async Closures、Generic Const Expressions、TAIT 等）
    - content/ecosystem/: 生态深度（Tokio 运行时、Axum 服务抽象、SQLx 编译时检查）
    - 跟踪最新稳定版本特性，保持技术敏锐度
-
 5. **形式化与验证（研究者路径）**
    - [形式化证明系统指南](../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md)
    - [核心定理完整证明](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)
@@ -363,7 +348,6 @@ fn calculate_length(s: &String) -> usize {
     s.len()
 }
 ```
-
 ### 路径 2 代码示例：并发编程实践 {#路径-2-代码示例并发编程实践}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -385,7 +369,6 @@ fn main() {
     println!("收到: {}", received);
 }
 ```
-
 ### 路径 3 代码示例：异步编程实践 {#路径-3-代码示例异步编程实践}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -405,7 +388,6 @@ async fn main() {
     println!("{}", result);
 }
 ```
-
 ### 路径 4 代码示例：高级特性实践 {#路径-4-代码示例高级特性实践}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -429,7 +411,6 @@ fn main() {
     println!("{}", process("文本"));
 }
 ```
-
 ---
 
 ## 🎯 学习建议 {#学习建议}
@@ -621,7 +602,6 @@ fn main() {
 ├── 错误处理基础
 └── 准备进入中级学习
 ```
-
 **推荐资源**:
 
 - [Rust Book 中文版](https://kaisery.github.io/trpl-zh-cn/)
@@ -666,7 +646,6 @@ fn main() {
 ├── C10: 网络编程
 └── 实践: 构建 HTTP 服务器
 ```
-
 **代码示例 - 从 Python 迁移到 Rust**:
 
 ```rust
@@ -679,7 +658,6 @@ fn process_data(data: &[i32]) -> Vec<i32> {
         .collect()
 }
 ```
-
 **推荐资源**:
 
 - [跨语言对比文档](../02_reference/02_cross_language_comparison.md)
@@ -723,7 +701,6 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ├── [国际对标索引](../../archive/research_notes_2026_06_25/10_international_formal_verification_index.md)
 └── 研究项目: 选择一个开放问题深入研究
 ```
-
 **关键形式化文档索引**:
 
 | 主题 | 文档 | 核心定理 |
@@ -766,7 +743,6 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ├── FFI 与系统接口
 └── 实践: 维护 crate 或贡献标准库
 ```
-
 **推荐资源**:
 
 - [Rust 编译器开发指南](https://rustc-dev-guide.rust-lang.org/)
@@ -871,7 +847,6 @@ fn process_data(data: &[i32]) -> Vec<i32> {
        ├── Axum 服务抽象
        └── SQLx 编译时检查
 ```
-
 ### 学习资源 {#学习资源}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**

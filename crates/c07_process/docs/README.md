@@ -1,5 +1,8 @@
 # C07 进程管理 (c07_process)
 
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
+>
 > **文档定位**: C07进程管理模块主入口，提供快速开始指南、IPC通信机制介绍和完整的学习资源导航
 > **先修知识**: [C01 所有权](../../c01_ownership_borrow_scope/docs/README.md) | [C05 线程](../../c05_threads/docs/README.md)
 > **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](FAQ.md) | [Glossary](Glossary.md)
@@ -55,7 +58,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 运行示例
 
 ```bash
@@ -74,7 +76,6 @@ cargo test
 # 运行性能测试
 cargo bench
 ```
-
 ### 推荐学习路径
 
 **🎯 快速入门** (3-5天):
@@ -142,7 +143,6 @@ c07_process/docs/
 │
 └── 📊 视角分析 (view01-05)
 ```
-
 ---
 
 ## 🎯 核心理念
@@ -183,7 +183,6 @@ let mut child = Command::new("my_app")
 // 等待完成
 let status = child.wait()?;
 ```
-
 **核心特点**:
 
 - 类型安全的API
@@ -216,7 +215,6 @@ cmd.process_group(0);
 #[cfg(windows)]
 cmd.creation_flags(0x08000000);
 ```
-
 ### 4. 异步进程管理
 
 ```rust
@@ -226,7 +224,6 @@ let output = Command::new("app")
     .output()
     .await?;
 ```
-
 ---
 
 ## 📖 学习资源
@@ -312,7 +309,6 @@ tokio = { version = "1.35", features = ["process", "io-util"] }
 nix = "0.27"  # Unix系统调用
 winapi = "0.3"  # Windows API
 ```
-
 ### 适用场景
 
 ✅ **适合使用进程**:

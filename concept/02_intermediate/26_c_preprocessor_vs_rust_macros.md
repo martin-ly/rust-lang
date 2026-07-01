@@ -39,7 +39,6 @@
 int a = SQUARE(5);      // 展开为 ((5) * (5))
 int b = SQUARE(2 + 3);  // 展开为 ((2 + 3) * (2 + 3))
 ```
-
 由于纯文本替换，必须加括号防止优先级问题。
 
 ### 2.2 副作用陷阱
@@ -50,7 +49,6 @@ int b = SQUARE(2 + 3);  // 展开为 ((2 + 3) * (2 + 3))
 int x = 5;
 int m = MAX(x++, 3); // x++ 可能被求值两次
 ```
-
 C 宏对求值次数、副作用、作用域一无所知。
 
 ### 2.3 条件编译与头文件保护
@@ -61,7 +59,6 @@ C 宏对求值次数、副作用、作用域一无所知。
 // ... declarations ...
 #endif
 ```
-
 条件编译基于符号是否被 `#define`，用于跨平台代码、调试开关、头文件包含保护。
 
 ---
@@ -80,7 +77,6 @@ macro_rules! square {
 let a = square!(5);
 let b = square!(2 + 3);
 ```
-
 `macro_rules!` 匹配 token 模式并生成 token 树，展开后进入 AST 解析和类型检查。
 
 ### 3.2 卫生性（Hygiene）
@@ -97,7 +93,6 @@ fn main() {
     println!("{}", x); // ✅ 可以访问
 }
 ```
-
 Rust 宏内部引入的标识符不会与外部冲突，反之亦然。这由 hygiene 系统保证。
 
 ### 3.3 条件编译：`cfg` 属性
@@ -111,7 +106,6 @@ fn linux_only() {}
 #[cfg(feature = "serde")]
 impl Serialize for MyType {}
 ```
-
 对比 C：
 
 | 能力 | C | Rust |
@@ -156,7 +150,6 @@ fn max<T: Ord>(a: T, b: T) -> T {
     if a > b { a } else { b }
 }
 ```
-
 ### 5.3 什么时候用过程宏
 
 - `#[derive(...)]` 自动生成 trait 实现
@@ -175,14 +168,12 @@ C 预处理器的语义可以形式化为**文本重写系统**：
 #define M(x) E
 M(t)  ⟶  E[x/t]
 ```
-
 Rust `macro_rules!` 的语义可以形式化为**hygienic 树重写系统**：
 
 ```text
 macro_rules! M($x:expr) => { E };
 M!(t)  ⟶  E[x := α(t)]
 ```
-
 其中 `α(t)` 表示对 `t` 中绑定标识符进行 α-重命名，以保持 hygiene。
 
 ---

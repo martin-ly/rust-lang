@@ -50,19 +50,16 @@
    - Monad 结构与法则
    - 异步与同步的等价关系
    - CPS (Continuation-Passing Style) 变换
-
 2. **掌握异步递归的深层原理**
    - 递归与迭代的等价转换
    - 尾递归优化技术
    - 异步递归的实现挑战与解决方案
    - 内存模型与栈管理
-
 3. **理解并发模式的理论基础**
    - Actor 模型的形式化定义
    - Reactor 模式的事件驱动机制
    - Tokio 运行时架构深度解析
    - 并发模型的对比与选择
-
 4. **对比不同并发模型的语义差异**
    - Rust vs Golang CSP 模型
    - Channel 语义与通信模式
@@ -98,7 +95,6 @@ async fn main() {
     formal_verification::deadlock_detection::demo_deadlock_scenario().await;
 }
 ```
-
 **形式化系统:**
 
 ```text
@@ -114,7 +110,6 @@ Hoare 三元组:
 度量函数 φ: State → ℕ
 ∀s. B(s) ⟹ φ(C(s)) < φ(s)
 ```
-
 ### 1. 异步语义理论 (`async_semantics_theory`)
 
 **核心内容:**
@@ -141,7 +136,6 @@ async fn main() {
     async_semantics_theory::monad_laws::verify_all().await;
 }
 ```
-
 **关键理论:**
 
 ```text
@@ -158,7 +152,6 @@ Monad 法则:
 2. 右单位元: m >>= return ≡ m
 3. 结合律: (m >>= f) >>= g ≡ m >>= (λx. f(x) >>= g)
 ```
-
 ### 2. 异步递归分析 (`async_recursion_analysis`)
 
 **核心内容:**
@@ -186,7 +179,6 @@ async fn main() {
     async_recursion_analysis::tree_traversal::verify_equivalence().await;
 }
 ```
-
 **关键技术:**
 
 ```rust
@@ -212,7 +204,6 @@ fn fibonacci(n: u64) -> Pin<Box<dyn Future<Output = u64> + Send>> {
     })
 }
 ```
-
 ### 3. Actor/Reactor 模式 (`actor_reactor_patterns`)
 
 **核心内容:**
@@ -240,7 +231,6 @@ async fn main() {
     actor_reactor_patterns::tokio_reactor_analysis::demo_event_loop().await;
 }
 ```
-
 **形式化定义:**
 
 ```text
@@ -256,7 +246,6 @@ Reactor = (EventDemultiplexer, EventHandlers, EventLoop)
 - EventHandlers: 处理器集合
 - EventLoop: 事件循环
 ```
-
 ### 4. CSP 模型对比 (`csp_model_comparison`)
 
 **核心内容:**
@@ -287,7 +276,6 @@ async fn main() {
     csp_model_comparison::pipeline::compare().await;
 }
 ```
-
 **对比表:**
 
 | 特性         | Golang    | Rust             |
@@ -315,7 +303,6 @@ cargo test --lib async_recursion_analysis
 cargo test --lib actor_reactor_patterns
 cargo test --lib csp_model_comparison
 ```
-
 ### 学习路径建议
 
 #### 1. 理论基础阶段 (1-2周)
@@ -366,7 +353,6 @@ cargo test --lib csp_model_comparison
 │  Ready  │
 └─────────┘
 ```
-
 ### Tokio 运行时架构
 
 ```text
@@ -387,7 +373,6 @@ cargo test --lib csp_model_comparison
 │  └──────────────────────────────────┘  │
 └─────────────────────────────────────────┘
 ```
-
 ## 🎓 学习资源
 
 ### 官方文档
@@ -407,11 +392,9 @@ cargo test --lib csp_model_comparison
 1. **异步编程基础**
    - "Asynchronous Programming in Rust" - Carl Lerche
    - "Zero-cost futures in Rust" - Aaron Turon
-
 2. **并发模型**
    - "Actors vs Reactors" - Various
    - "CSP in Modern Languages" - Comparative Studies
-
 3. **形式化方法**
    - "Formal Semantics of Programming Languages" - Glynn Winskel
    - "Types and Programming Languages" - Benjamin Pierce
@@ -447,7 +430,6 @@ cargo test csp_model_comparison
 # 运行性能基准测试
 cargo bench
 ```
-
 ## 📈 进度跟踪
 
 - [ ] 完成异步语义理论学习

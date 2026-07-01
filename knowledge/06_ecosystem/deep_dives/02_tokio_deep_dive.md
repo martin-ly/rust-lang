@@ -124,7 +124,6 @@ graph TD
     E --> E1[阻塞任务1]
     E --> E2[阻塞任务2]
 ```
-
 ### 任务调度
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -144,7 +143,6 @@ graph TD
 4. 执行
    轮询 Future 到完成
 ```
-
 ---
 
 ### 模块 1: 概念定义
@@ -188,7 +186,6 @@ graph TD
 
     style C fill:#f9f,stroke:#333,stroke-width:2px
 ```
-
 #### 承上（前置知识回溯）
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
@@ -239,7 +236,6 @@ async fn named_task() {
         .unwrap();
 }
 ```
-
 ### 执行器 (Executor)
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -275,7 +271,6 @@ fn multi_threaded() {
     });
 }
 ```
-
 ### I/O 驱动
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -311,7 +306,6 @@ async fn tcp_server() -> tokio::io::Result<()> {
     }
 }
 ```
-
 ### 定时器
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -347,7 +341,6 @@ async fn slow_operation() -> String {
     "Done".to_string()
 }
 ```
-
 ---
 
 ## 🚀 高级用法
@@ -392,7 +385,6 @@ fn optimized_runtime() {
     rt.block_on(async_main());
 }
 ```
-
 ### 任务管理
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -441,7 +433,6 @@ async fn cancel_task() {
     }
 }
 ```
-
 ### 并发模式
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -494,7 +485,6 @@ async fn shared_state() {
     println!("Final count: {}", *counter.read().await);
 }
 ```
-
 ---
 
 ## ⚡ 性能优化
@@ -549,7 +539,6 @@ async fn local_tasks() {
     }).await;
 }
 ```
-
 ### 性能调优参数
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -569,7 +558,6 @@ let rt = tokio::runtime::Builder::new_multi_thread()
     .build()
     .unwrap();
 ```
-
 ---
 
 ## 🗺️ 模块 7: 思维表征
@@ -610,7 +598,6 @@ let rt = tokio::runtime::Builder::new_multi_thread()
       }).await.unwrap();
   }
 ```
-
 ---
 
 ## 📚 模块 8: 国际化对齐
@@ -647,7 +634,6 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **Tokio 的 `spawn` 与 `spawn_blocking` 有何根本区别？** 在什么场景下必须使用 `spawn_blocking`？
-
 2. **以下代码有什么问题？如何修复？**
 
 ```rust,compile_fail
@@ -660,7 +646,6 @@ async fn main() {
     println!("{}", handle.await.unwrap());
 }
 ```
-
 <details>
 <summary>参考答案</summary>
 
@@ -680,7 +665,6 @@ async fn main() {
     println!("{}", handle.await.unwrap());
 }
 ```
-
 </details>
 
 ---
@@ -731,7 +715,6 @@ async fn main() {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 标准库速查](../../05_reference/03_std_library_cheatsheet.md)
-
 - [Axum 深度解析](01_axum_deep_dive.md)
 - [Deep Dives 深度解析](README.md)
 

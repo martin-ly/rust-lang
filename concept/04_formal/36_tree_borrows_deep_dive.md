@@ -16,11 +16,8 @@
 > **后置延伸**: [BorrowSanitizer](34_borrow_sanitizer_in_formal.md)
 >
 > **来源**: [Tree Borrows 论文 (PLDI 2023)](https://pldi23.sigplan.org/) · [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/mod.rs) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
-
 > **内容重叠提示**: 本文与 [`docs/content/academic/10_tree_borrows_guide.md`](../../docs/content/academic/10_tree_borrows_guide.md) 内容高度重叠。`docs/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
-
 > **内容重叠提示**: 本文与 [`knowledge/04_expert/miri/01_tree_borrows.md`](../../knowledge/04_expert/miri/01_tree_borrows.md) 内容高度重叠。`knowledge/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
-
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
@@ -47,7 +44,6 @@ let r1 = &mut x;
 let r2 = &mut x; // 重新借用
 *r1 = 1; // Stacked Borrows 可能认为 r1 已失效
 ```
-
 虽然安全 Rust 不会出现这种模式，但在 unsafe 代码、自引用（Reference）结构、某些 FFI 场景中，开发者需要更灵活的别名规则。
 
 ---
@@ -96,7 +92,6 @@ let r2 = &mut x; // 重新借用
 ```bash
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ```
-
 自 Miri 某版本起，Tree Borrows 已成为默认模型。Stacked Borrows 仍可通过 `-Zmiri-stacked-borrows` 启用。
 
 ---

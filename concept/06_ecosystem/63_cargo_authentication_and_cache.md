@@ -86,7 +86,6 @@ global-credential-providers = [
     "cargo:wincred",
 ]
 ```
-
 > **注意**: 列表中越靠后的 provider 优先级越高。
 >
 > [来源: Cargo Book — Recommended configuration](https://doc.rust-lang.org/cargo/reference/registry-authentication.html#recommended-configuration)
@@ -104,13 +103,11 @@ cargo login <token>
 # 登出
 cargo logout
 ```
-
 ### 3.2 环境变量
 
 ```bash
 export CARGO_REGISTRIES_MYREGISTRY_TOKEN="my-token"
 ```
-
 > **重要**: 只有 `cargo:token` provider 被配置时，环境变量才会生效。
 
 ### 3.3 自定义 Provider
@@ -119,7 +116,6 @@ export CARGO_REGISTRIES_MYREGISTRY_TOKEN="my-token"
 [registry]
 global-credential-providers = ["cargo-credential-1password --account my.1password.com"]
 ```
-
 自定义 provider 必须实现 [Credential Provider Protocol](https://doc.rust-lang.org/cargo/reference/credential-provider-protocol.html)。
 
 ---
@@ -141,7 +137,6 @@ global-credential-providers = ["cargo-credential-1password --account my.1passwor
     ├── checkouts/    # git 依赖的检出目录
     └── db/           # git 依赖的 bare 仓库
 ```
-
 > [来源: Cargo Book — Cargo Home](https://doc.rust-lang.org/cargo/guide/cargo-home.html)
 
 ---
@@ -168,7 +163,6 @@ target/
     ├── debug/
     └── release/
 ```
-
 ### 5.3 Build Dir（中间产物）
 
 Rust 1.96+ 把中间产物（如 `deps/`、`incremental/`、`build/`）放到独立的 build dir，默认与 target dir 相同。可通过 `CARGO_BUILD_BUILD_DIR` 或 `build.build-dir` 单独配置。
@@ -185,7 +179,6 @@ Rust 1.96+ 把中间产物（如 `deps/`、`incremental/`、`build/`）放到独
 # target/debug/foo.d
 /path/to/myproj/target/debug/foo: /path/to/myproj/src/lib.rs /path/to/myproj/src/main.rs
 ```
-
 用途：
 
 - 外部构建系统判断是否需要重新调用 Cargo；
@@ -208,7 +201,6 @@ export RUSTC_WRAPPER=sccache
 [build]
 rustc-wrapper = "sccache"
 ```
-
 > **收益**: 在 CI 或多项目开发中显著减少重复编译时间。
 
 ---

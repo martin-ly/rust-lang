@@ -114,7 +114,6 @@ let result = if condition {
     "false"
 };
 ```
-
 ### match 表达式 {#match-表达式}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -149,7 +148,6 @@ match value {
     None => println!("无值"),
 }
 ```
-
 ### if let 表达式 {#if-let-表达式}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -174,7 +172,6 @@ if let Some(a) = option1 && let Some(b) = option2 {
     println!("都有值: {} {}", a, b);
 }
 ```
-
 ### let-else 语句 (Rust 1.65+) {#let-else-语句-rust-165}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -195,7 +192,6 @@ fn process(value: Option<i32>) -> i32 {
     x * 2
 }
 ```
-
 ---
 
 ## 🔁 循环结构 {#循环结构}
@@ -225,7 +221,6 @@ let result = loop {
     }
 };
 ```
-
 ### while 循环 {#while-循环}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -243,7 +238,6 @@ while let Some(item) = iterator.next() {
     println!("{}", item);
 }
 ```
-
 ### for 循环 {#for-循环}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -276,7 +270,6 @@ for (index, value) in vec.iter().enumerate() {
     println!("{}: {}", index, value);
 }
 ```
-
 ### 循环控制 {#循环控制}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -302,7 +295,6 @@ for i in 1..=10 {
     }
 }
 ```
-
 ---
 
 ## 🎭 模式匹配 {#模式匹配}
@@ -338,7 +330,6 @@ match x {
     _ => println!("其他"),
 }
 ```
-
 ### 解构模式 {#解构模式}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -370,7 +361,6 @@ match msg {
     Message::Write(s) => println!("写入: {}", s),
 }
 ```
-
 ### 引用模式 {#引用模式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -392,7 +382,6 @@ match mut_value {
     ref mut m => *m = 10,
 }
 ```
-
 ---
 
 ## 📝 函数定义 {#函数定义}
@@ -424,7 +413,6 @@ fn add(a: i32, b: i32) -> i32 {
     return a + b;
 }
 ```
-
 ### 函数参数 {#函数参数}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -450,7 +438,6 @@ fn process(x: i32, y: i32, z: i32) -> i32 {
     x + y + z
 }
 ```
-
 ### 函数返回值 {#函数返回值}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -476,7 +463,6 @@ fn parse_number(s: &str) -> Result<i32, std::num::ParseIntError> {
     s.parse()
 }
 ```
-
 ### 函数指针 {#函数指针}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -495,7 +481,6 @@ fn apply(f: fn(i32, i32) -> i32, x: i32, y: i32) -> i32 {
     f(x, y)
 }
 ```
-
 ---
 
 ## 🔒 闭包 {#闭包}
@@ -522,7 +507,6 @@ let multiply = |x, y| {
     result
 };
 ```
-
 ### 闭包捕获 {#闭包捕获}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -546,7 +530,6 @@ let move_closure = move || {
 };
 // x 不再可用
 ```
-
 ### 闭包类型 {#闭包类型}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -567,7 +550,6 @@ fn call_fn_once<F: FnOnce()>(f: F) {
     f();
 }
 ```
-
 ### 闭包作为参数 {#闭包作为参数}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -588,7 +570,6 @@ let result = apply(double);
 // 内联闭包
 let result = apply(|x| x * 3);
 ```
-
 ### 闭包作为返回值 {#闭包作为返回值}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -603,7 +584,6 @@ fn make_adder(x: i32) -> impl Fn(i32) -> i32 {
 let add5 = make_adder(5);
 let result = add5(3); // 8
 ```
-
 ---
 
 ## 🎯 常用模式 {#常用模式}
@@ -622,7 +602,6 @@ fn process(value: Option<i32>) -> i32 {
     x * 2
 }
 ```
-
 ### 链式调用 {#链式调用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -640,7 +619,6 @@ let result = "42"
     .map(|x| x * 2)
     .map_err(|e| format!("错误: {}", e));
 ```
-
 ### 模式匹配与解构 {#模式匹配与解构}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -662,7 +640,6 @@ match result {
     Err(e) => println!("错误: {}", e),
 }
 ```
-
 ### 函数式编程 {#函数式编程}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -686,7 +663,6 @@ let sum: i32 = vec![1, 2, 3, 4, 5]
     .iter()
     .fold(0, |acc, x| acc + x);
 ```
-
 ### 递归函数 {#递归函数}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -710,7 +686,6 @@ fn factorial_tail(n: u64, acc: u64) -> u64 {
     }
 }
 ```
-
 ---
 
 ## 🚫 反例速查 {#反例速查}
@@ -729,7 +704,6 @@ let _ = match x {
     Some(v) => v,  // ❌ 未处理 None
 };
 ```
-
 **原因**: match 必须穷尽所有可能。
 
 **修正**:
@@ -740,7 +714,6 @@ let _ = match x {
     None => 0,
 };
 ```
-
 ---
 
 ### 反例 2: 闭包捕获可变引用导致冲突 {#反例-2-闭包捕获可变引用导致冲突}
@@ -754,7 +727,6 @@ let mut v = vec![1, 2, 3];
 let f = || v.push(4);  // ❌ 闭包可变借用 v
 // let r = &v;  // 再借用会冲突
 ```
-
 **原因**: 闭包捕获可变引用后，外部不能再借用。
 
 **修正**:
@@ -765,7 +737,6 @@ let mut f = || v.push(4);
 f();
 let _ = &v;
 ```
-
 ---
 
 ## 📚 相关文档 {#相关文档}
@@ -871,7 +842,6 @@ fn main() {
     }
 }
 ```
-
 ### 场景 2: 递归下降解析器 {#场景-2-递归下降解析器}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -935,7 +905,6 @@ fn main() {
     }
 }
 ```
-
 ### 场景 3: 自定义迭代器 {#场景-3-自定义迭代器}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -979,7 +948,6 @@ fn main() {
     println!();
 }
 ```
-
 ---
 
 ## ⚠️ 边界情况 {#边界情况}
@@ -1011,7 +979,6 @@ fn main() {
     println!("最终计数: {}", count); // 2
 }
 ```
-
 ### 边界 2: 递归深度限制 {#边界-2-递归深度限制}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -1043,7 +1010,6 @@ fn main() {
     println!("迭代求和 100000: {}", sum);
 }
 ```
-
 ### 边界 3: 模式匹配穷尽性 {#边界-3-模式匹配穷尽性}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -1075,7 +1041,6 @@ fn main() {
     }
 }
 ```
-
 ### 形式化理论 {#形式化理论}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -1096,7 +1061,6 @@ fn main() {
 ## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### 核心特性速查 {#核心特性速查}
@@ -1131,7 +1095,6 @@ pub fn get_config() -> Option<&'static Config> {
 let phi = f64::consts::GOLDEN_RATIO;
 let gamma = f64::consts::EULER_GAMMA;
 ```
-
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)

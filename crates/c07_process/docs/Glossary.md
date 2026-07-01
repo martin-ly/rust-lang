@@ -96,7 +96,6 @@ match unsafe { fork() } {
     Err(e) => eprintln!("Fork失败: {}", e),
 }
 ```
-
 **注意**: Windows不支持fork，使用`CreateProcess`代替
 
 **相关**: [01_process_model_and_lifecycle](01_process_model_and_lifecycle.md)
@@ -155,7 +154,6 @@ let child = Command::new("cat")
     .stdout(Stdio::piped())
     .spawn()?;
 ```
-
 **相关**: [02_ipc_mechanisms](02_ipc_mechanisms.md)
 
 ---
@@ -196,7 +194,6 @@ use nix::sys::signal::{kill, Signal};
 // 发送信号
 kill(child_pid, Signal::SIGTERM)?;
 ```
-
 **注意**: Windows不支持Unix信号
 
 **相关**: [01_process_model_and_lifecycle](01_process_model_and_lifecycle.md)
@@ -254,7 +251,6 @@ Command::new("app")
     .process_group(0) // 创建新进程组
     .spawn()?;
 ```
-
 **相关**: [04_advanced_process_management](04_advanced_process_management.md)
 
 ---
@@ -301,7 +297,6 @@ Command::new("app")
     .stderr(Stdio::inherit())
     .spawn()?;
 ```
-
 **相关**: [12_std_process_deep_dive](11_practical_examples/12_std_process_deep_dive.md)
 
 ---
@@ -325,7 +320,6 @@ if status.success() {
     println!("失败: {:?}", status.code());
 }
 ```
-
 **相关**: [01_process_model_and_lifecycle](01_process_model_and_lifecycle.md)
 
 ---

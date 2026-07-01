@@ -49,7 +49,6 @@
 ```text
 引用透明: expr ≡ value_of(expr) 在任何上下文中成立
 ```
-
 **引用透明的表达式**:
 
 - 纯数学函数：`2 + 3` ≡ `5`
@@ -98,7 +97,6 @@
 int process(int x); // 这个函数会修改全局状态吗？会 IO 吗？会抛异常吗？
                       // 不知道！必须阅读实现或文档。
 ```
-
 Haskell 通过 **Monad** 显式化副作用：
 
 ```haskell
@@ -108,7 +106,6 @@ processIO :: Int -> IO Int          -- 有 IO 副作用
 processState :: Int -> State s Int  -- 有状态副作用
 processExcept :: Int -> Either Error Int  -- 可能抛出异常
 ```
-
 Rust 通过 **所有权（Ownership） + 类型系统（Type System）** 显式化副作用：
 
 ```rust,ignore
@@ -125,7 +122,6 @@ fn process_unsafe(ptr: *mut i32) {  // unsafe 块表示未定义效果
     unsafe { *ptr = 42; }
 }
 ```
-
 > **形式化命题** [Tier 3]: Rust 的类型系统（Type System）是一种**效果系统（Effect System）的原型**——`&mut T` = write effect, `unsafe` = undefined effect, `async` = async effect, `Result<T, E>` = exception effect。
 >
 > **论证**:
@@ -164,7 +160,6 @@ fn increment(counter: &mut i32) {
 let mut x = 0;
 increment(&mut x); // 调用者明确知道 x 会被修改
 ```
-
 **与 C/C++ 的对比**:
 
 | 语言 | 副作用表达 | 调用者知情度 |
@@ -189,7 +184,6 @@ unsafe fn raw_access(ptr: *const i32, offset: isize) -> i32 {
     *ptr.offset(offset) // 编译器不验证；程序员保证 offset 合法
 }
 ```
-
 **关键设计**: `unsafe` 不是关闭类型系统（Type System），而是**显式声明"此处的效果超出编译器验证范围"**。这与 C/C++ 的默认 unsafe 形成鲜明对比。
 
 ### 4.3 `Result<T, E>` 作为异常效果（Exception Effect）
@@ -209,7 +203,6 @@ fn compose() -> Result<i32, Error> {
     Ok(a + b)
 }
 ```
-
 **与 Haskell `Either` / Java `try-catch` 的对比**:
 
 | 语言 | 异常效果表达 | 强制处理 |
@@ -234,7 +227,6 @@ async fn fetch_data() -> Vec<u8> {
 // 调用点必须 await 才能触发实际计算
 let data = fetch_data().await;
 ```
-
 **效果追踪**: `async` 函数不能调用同步阻塞 IO（除非在 `spawn_blocking` 中），因为编译器会阻止跨越 async 边界的错误效果传播。
 
 ---
@@ -258,7 +250,6 @@ fn random_number() -> i32 { rand::random() } // 每次调用结果不同
 // 不纯函数（有副作用）
 fn log_message(msg: &str) { println!("{}", msg); } // 有 IO 副作用
 ```
-
 ### 5.2 Rust 中的"准纯函数"
 
 Rust 没有全局引用透明的保证，但可以通过类型系统识别纯函数：
@@ -281,7 +272,6 @@ fn sum(data: &[i32]) -> i32 {
     data.iter().sum()
 }
 ```
-
 > **关键洞察**: Rust 的 `&T` 参数类型可以作为**纯度的局部保证**——如果函数只接受 `&T` 参数（没有 `&mut T`、没有 `unsafe`、没有 IO 类型），则该函数对调用者而言是纯的（不修改调用者的状态）。这是 Rust 在"命令式语言"和"纯函数式语言"之间找到的中间地带。[来源: 💡 原创分析]
 
 ---
@@ -320,7 +310,6 @@ fn functional_sum(data: &[i32]) -> i32 {
 
 // 两者等价，Rust 编译器生成相同的机器码（零成本抽象）
 ```
-
 **代数数据类型（ADT）的函数式遗产**:
 
 ```rust,compile_fail
@@ -338,7 +327,6 @@ fn unwrap_or_default(opt: Option<i32>) -> i32 {
     }
 }
 ```
-
 > **关键洞察**: Rust 通过**所有权（Ownership）系统**将函数式语言的"引用透明"理念部分地带入命令式世界：在 `&T` 借用（Borrowing）的范围内，数据不可变，函数调用具有局部引用透明性。[来源: 💡 原创分析]
 
 ---
@@ -362,7 +350,6 @@ fn implicit_side_effect() {
 // x = 6; // C++ 允许！r 仍然指向 x，但语义已混乱
 // std::cout << *r;
 ```
-
 > **关键洞察**: C++ 允许在存在别名的情况下修改数据，导致语义混乱；Rust 的 borrow checker 在编译期阻止此类隐式副作用。来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ✅
 
 ### 7.2 边界测试：`unsafe` 中的副作用逃逸
@@ -381,7 +368,6 @@ fn unsafe_effect_escape() {
     println!("{}", x); // 未定义行为！
 }
 ```
-
 > **边界洞察**: `unsafe` 块允许副作用"逃逸"类型系统的约束。这是 Rust 设计中唯一的效果逃逸口——Safe Rust 保证无副作用逃逸，Unsafe Rust 将保证责任转移给程序员。[来源: NOM — What is unsafe?] ✅
 
 ### 7.3 边界测试：`const fn` 中的副作用逃逸（编译错误）
@@ -394,7 +380,6 @@ const fn impure_const() -> i32 {
     x
 }
 ```
-
 > **边界洞察**: `const fn` 是 Rust 中纯度要求最严格的上下文——不允许可变变量、不允许堆分配、不允许非 `const` 操作。任何副作用尝试都会在编译期被拒绝。这构成了 Rust 效果系统的"核心纯净区"。来源: [Rust Reference — §6.10.1 const contexts](https://doc.rust-lang.org/reference/) ✅
 
 ### 7.4 边界测试：闭包捕获的副作用
@@ -413,7 +398,6 @@ fn closure_effect() {
     println!("{}", counter); // ✅ 2
 }
 ```
-
 > **认知功能**: 此示例展示了 Rust 如何通过闭包（Closures）类型（`Fn`, `FnMut`, `FnOnce`）将副作用限制在明确的边界内。`FnMut` = 可修改捕获的环境，`Fn` = 只读环境，`FnOnce` = 消费环境。来源: [Rust Reference — §8.2.13 Closure expressions](https://doc.rust-lang.org/reference/) ✅
 
 ---
@@ -489,7 +473,6 @@ const fn make_counter_fixed() -> Counter {
     Counter::new_const(42) // ✅ 调用 const fn
 }
 ```
-
 > **修正**: `const fn` 的效果约束限制其只能调用其他 `const fn`、使用常量、执行基本控制流。任何涉及堆分配、I/O、可变静态变量的操作都被禁止。这与 Haskell 的 `IO` monad 或纯函数语言的效果追踪类似——Rust 通过 `const` 关键字在编译期划分"纯计算"与"效果ful计算"的边界。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：`unsafe` 块的传染性与 FFI 边界（编译错误）
@@ -516,7 +499,6 @@ fn safe_wrapper_fixed(size: usize) -> Vec<u8> {
     unsafe { Vec::from_raw_parts(ptr, 0, size) } // ✅ unsafe 块明确标记
 }
 ```
-
 > **修正**:
 > `unsafe` 效果具有"传染性"——调用 `unsafe fn` 或解引用裸指针必须在 `unsafe` 块内进行。
 > 但 `unsafe` 块**不自动**使周围代码变为 unsafe；它只是告诉编译器"程序员已验证此处的安全性"。
@@ -535,7 +517,6 @@ fn main() {
     let _v = allocate();
 }
 ```
-
 > **修正**:
 > `const fn` 有严格的**编译期求值**限制：
 >
@@ -557,7 +538,6 @@ fn main() {
     let x: i32 = "hello";
 }
 ```
-
 > **修正**:
 > **类型不匹配**是 Rust 最常见的编译错误：
 >

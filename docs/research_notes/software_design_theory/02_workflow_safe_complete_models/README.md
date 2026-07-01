@@ -1,27 +1,16 @@
 # 工作流：23 安全 vs 43 完全模型 {#工作流23-安全-vs-43-完全模型}
 
 > **概念族**: 软件设计 / 工作流模式
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-12
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
-
 > **对齐说明**: 本目录已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/02_workflow_safe_complete_models/` 迁回，正在按 [Rustonomicon – Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)、[Crossbeam Docs](https://docs.rs/crossbeam/latest/crossbeam/)、[Rayon Docs](https://docs.rs/rayon/latest/rayon/) 等权威来源升级。
-
 >
-
 > **权威来源**: [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Crossbeam Docs](https://docs.rs/crossbeam/latest/crossbeam/) | [Rayon Docs](https://docs.rs/rayon/latest/rayon/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ---
@@ -29,7 +18,6 @@
 ## 📊 目录 {#目录}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [工作流：23 安全 vs 43 完全模型 {#工作流23-安全-vs-43-完全模型}](#工作流23-安全-vs-43-完全模型-工作流23-安全-vs-43-完全模型)
@@ -58,7 +46,6 @@
 ## 宗旨 {#宗旨}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 建立「23 种安全设计模型」与「43 种完全模型」的形式边界与语义论证，明确安全子集与扩展目录的构成。
@@ -68,15 +55,11 @@
 ## 定义 {#定义}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 概念 | 定义 |
-
 | :--- | :--- |
-
 | **23 安全模型** | GoF 23 种设计模式中，可**纯 Safe** 实现的子集 |
-
 | **43 完全模型** | GoF 23 + 扩展 20（Fowler EAA/DDD：Domain Model、Repository、Service Layer、Gateway、DTO、Event Sourcing 等） |
 
 ---
@@ -84,19 +67,13 @@
 ## 文档索引 {#文档索引}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 内容 |
-
 | :--- | :--- |
-
 | `01_safe_23_catalog` | 23 种安全设计模型索引 |
-
 | [02_complete_43_catalog](02_complete_43_catalog.md) | 43 种完全模型索引 |
-
 | `03_semantic_boundary_map` | 语义边界图 |
-
 | [04_expressiveness_boundary](04_expressiveness_boundary.md) | 充分表达 vs 非充分表达论证 |
 
 ---
@@ -104,11 +81,9 @@
 ## 核心关系 {#核心关系}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **23 安全 ⊆ 43 完全**：23 为纯 Safe 子集
-
 - **扩展 20**：企业/分布式模式，绝大部分亦纯 Safe；Gateway 在 FFI 场景可能需 unsafe
 
 ---
@@ -116,15 +91,11 @@
 ## 使用流程 {#使用流程}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **查 23 安全**：模式是否纯 Safe → `01_safe_23_catalog`
-
 2. **查 43 完全**：扩展模式（Repository、DTO 等）→ [02_complete_43_catalog](02_complete_43_catalog.md)
-
 3. **查语义边界**：选模式 → `03_semantic_boundary_map`
-
 4. **查表达边界**：等价 vs 近似 → [04_expressiveness_boundary](04_expressiveness_boundary.md)
 
 ---
@@ -132,19 +103,13 @@
 ## 快速参考 {#快速参考}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 需求 | 首选文档 |
-
 | :--- | :--- |
-
 | 我要选一个 GoF 模式 | 03_semantic_boundary_map → 按需求反向查模式 |
-
 | 需要企业/分布式模式 | 02_complete_43_catalog → 扩展模式选型决策树 |
-
 | 模式在 Rust 里能等价实现吗 | 04_expressiveness_boundary → 等价/近似/不可表达表 |
-
 | 23 安全 vs 43 完全区别 | 本文档「核心关系」+ 01/02 索引 |
 
 ---
@@ -152,19 +117,13 @@
 ## 层次推进阅读路径 {#层次推进阅读路径}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 读者 | 阅读顺序 | 产出 |
-
 | :--- | :--- | :--- | :--- |
-
 | **L1 基础** | 初学者 | 01_safe_23_catalog → 按分类索引 + 典型场景 | 熟悉 23 安全、快速示例 |
-
 | **L2 选型** | 实践者 | 03_semantic_boundary_map → 模式选取示例 + 按需求反向查 | 能按需求选模式 |
-
 | **L3 扩展** | 架构师 | 02_complete_43_catalog → 扩展模式代码 + 选型决策树 | 企业/分布式模式实现 |
-
 | **L4 论证** | 理论关注 | 04_expressiveness_boundary → 等价/近似代码示例 | 理解 Rust 与 OOP 差异 |
 
 ---
@@ -172,21 +131,14 @@
 ## 23 vs 43 选型指南（实质内容） {#23-vs-43-选型指南实质内容}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 推荐 | 理由 |
-
 | :--- | :--- | :--- |
-
 | 纯业务逻辑、无持久化 | 23 安全 | GoF 足够；Factory、Strategy、State |
-
 | 需持久化抽象 | 43 完全 → Repository | 见 [02_complete_43_catalog](02_complete_43_catalog.md) |
-
 | 需用例编排、事务 | 43 完全 → Service Layer | 见 02_complete_43_catalog |
-
 | 需跨边界传输 | 43 完全 → DTO | 见 02_complete_43_catalog |
-
 | 需外部系统集成 | 43 完全 → Gateway | 需 FFI 时可能 unsafe |
 
 **扩展模式深入**：20 种扩展模式均有 Rust 实现、核心意图、与 23 安全的关系；见 [02_complete_43_catalog](02_complete_43_catalog.md) 扩展模式选型决策树。
@@ -196,13 +148,11 @@
 ## 场景→模式→代码完整链条（实质内容） {#场景模式代码完整链条实质内容}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 链条 1：Web API 分层 {#链条-1web-api-分层}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **场景**：REST API 处理订单请求；需校验、持久化、返回 DTO。
@@ -212,7 +162,6 @@
 **代码骨架**：
 
 ```rust,ignore
-
 // 请求 DTO
 
 struct PlaceOrderRequest { items: Vec<ItemDto> }
@@ -250,9 +199,7 @@ impl OrderService {
     }
 
 }
-
 ```
-
 ### 链条 2：可撤销编辑器 {#链条-2可撤销编辑器}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -268,13 +215,9 @@ impl OrderService {
 ## 工作流引擎表达力（状态机、补偿、Temporal 式） {#工作流引擎表达力状态机补偿temporal-式}
 
 | 能力 | 表达 | Rust 实现 | 说明 |
-
 | :--- | :--- | :--- | :--- |
-
 | **状态机** | 等价 | 枚举 + match；`#[derive(StateMachine)]` 宏；类型状态 | 与 23 安全 State 模式一致；穷尽匹配保证覆盖 |
-
 | **补偿（Compensation）** | 近似 | `Result` + 补偿闭包；`async` 编排；显式 `rollback()` | 无内置 Saga 编排器；需显式实现补偿链 |
-
 | **Temporal 式工作流** | 近似 | `temporal-sdk`、`cadence` 等 Rust 客户端 | 编排在服务端；Rust 实现 Activity/Workflow 定义；需外部运行时 |
 
 **等价论证（状态机）**：Rust 枚举 + match 与有限状态机语义等价；类型状态可编译时约束非法转换。
@@ -288,9 +231,7 @@ impl OrderService {
 ## 权威对标 {#权威对标}
 
 - **GoF (1994)**：23 种经典模式
-
 - **Fowler EAA**：企业应用架构模式（Domain Model、Repository、Service Layer、Gateway、DTO 等）
-
 - **Core J2EE**：表示层、业务层、集成层模式
 
 ---
@@ -300,11 +241,8 @@ impl OrderService {
 **Def WF-REL1（层次关系）**：23 安全、43 完全为**构建块层**（模式目录）；工作流为**编排层**（状态转换、补偿、长事务、人工任务）。二者**正交**：选型时先选模式（23/43），再选编排（状态机/补偿/Temporal）。
 
 | 层次 | 内容 | 选型顺序 |
-
 | :--- | :--- | :--- |
-
 | **构建块** | 23 安全、43 完全（Domain Model、Repository、DTO、Event Sourcing 等） | 先选 |
-
 | **编排** | 状态机、补偿链、Temporal 式工作流 | 后选 |
 
 **工作流定义**：工作流 = 多步骤业务过程 + 状态转换 + 可选补偿 + 可选人工任务 + 超时/重试。与执行模型（同步/异步/并发/分布式）为不同维度：工作流关注**业务编排语义**，执行模型关注**运行时模型**。
@@ -318,7 +256,6 @@ impl OrderService {
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -332,15 +269,10 @@ impl OrderService {
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -348,17 +280,13 @@ impl OrderService {
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - Rust 1.94 特性速查
-
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -370,9 +298,7 @@ impl OrderService {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -388,17 +314,10 @@ impl OrderService {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

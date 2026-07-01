@@ -34,7 +34,6 @@ cargo test -- --nocapture
 # 显示测试详细信息
 cargo test -- --test-threads=1 --nocapture
 ```
-
 ### 运行 WASI 测试
 
 ```bash
@@ -51,7 +50,6 @@ wasmedge target/wasm32-wasip1/debug/deps/wasi_tests-*.wasm
 # 使用 Wasmtime 运行
 wasmtime target/wasm32-wasip1/debug/deps/wasi_tests-*.wasm
 ```
-
 ### 运行浏览器测试（wasm-bindgen-test）
 
 ```bash
@@ -66,7 +64,6 @@ wasm-pack test --headless --chrome
 wasm-pack test --firefox
 wasm-pack test --chrome
 ```
-
 ## 📊 测试覆盖率
 
 ### 生成测试覆盖率报告
@@ -81,7 +78,6 @@ cargo tarpaulin --out Html --output-dir ./coverage
 # 查看报告
 # 浏览器打开 ./coverage/index.html
 ```
-
 ### 使用 llvm-cov
 
 ```bash
@@ -94,7 +90,6 @@ cargo llvm-cov --html
 # 查看报告
 cargo llvm-cov --open
 ```
-
 ## 🔍 测试详情
 
 ### basic_tests.rs - 基础功能测试
@@ -113,7 +108,6 @@ cargo llvm-cov --open
 ```bash
 cargo test --test basic_tests
 ```
-
 **重点测试用例**：
 
 - `test_add_function` - 测试基础加法
@@ -136,7 +130,6 @@ cargo test --test basic_tests
 ```bash
 cargo test --target wasm32-wasip1 --test wasi_tests
 ```
-
 **重点测试用例**：
 
 - `test_read_write_file` - 测试文件读写
@@ -166,7 +159,6 @@ cargo test --target wasm32-wasip1 --test wasi_tests
 ```bash
 cargo test --test design_patterns_tests
 ```
-
 **重点测试用例**：
 
 - `test_factory_pattern` - 测试工厂模式
@@ -188,7 +180,6 @@ cargo test --test design_patterns_tests
 ```bash
 cargo test --test rust_192_features_tests
 ```
-
 **重点测试用例**：
 
 - `test_let_else_with_some` - 测试 let-else 成功情况
@@ -210,7 +201,6 @@ cargo test -- --show-output
 # 运行单个测试并显示输出
 cargo test test_add_function -- --nocapture
 ```
-
 ### 测试失败时的调试
 
 ```bash
@@ -223,7 +213,6 @@ cargo test --lib
 # 使用 rust-gdb 调试
 rust-gdb --args target/debug/deps/basic_tests-*
 ```
-
 ### 性能分析
 
 ```bash
@@ -233,7 +222,6 @@ cargo bench
 # 使用 flamegraph 生成火焰图
 cargo flamegraph --test basic_tests
 ```
-
 ## 📝 编写测试的最佳实践
 
 ### 1. 测试命名规范
@@ -254,7 +242,6 @@ fn test_add_negative_numbers() { }
 #[test]
 fn test_add_zero() { }
 ```
-
 ### 2. AAA 模式（Arrange-Act-Assert）
 
 ```rust
@@ -270,7 +257,6 @@ fn test_example() {
     assert_eq!(result, 6);
 }
 ```
-
 ### 3. 边界情况测试
 
 ```rust
@@ -286,7 +272,6 @@ fn test_edge_cases() {
     assert_eq!(sum_array(&[-1, -2, -3]), -6);
 }
 ```
-
 ### 4. 错误处理测试
 
 ```rust
@@ -302,7 +287,6 @@ fn test_panic() {
     let _ = 10 / 0;
 }
 ```
-
 ## 🔧 持续集成
 
 ### GitHub Actions 配置
@@ -341,7 +325,6 @@ jobs:
       - name: Upload coverage
         uses: codecov/codecov-action@v2
 ```
-
 ## 📚 参考资源
 
 - [Rust 测试指南](https://doc.rust-lang.org/book/ch11-00-testing.html)

@@ -68,20 +68,17 @@
   - 改进的对齐检查
   - 枚举判别值规范
   - 生命周期转换增强
-
 - **async_control_flow_190.rs**: 异步控制流增强
   - AsyncStateMachine190: 异步状态机
   - AsyncResourceManager: 资源管理
   - AsyncErrorHandler190: 错误处理和重试
   - AsyncConcurrencyController: 并发控制
-
 - **performance_optimization_190.rs**: 性能优化特性
   - 并行编译优化演示
   - 特质求解器性能测试
   - 借用检查器性能对比
   - 内存布局优化
   - 零成本抽象验证
-
 - **formal_verification_190.rs**: 形式化验证工具链
   - Prusti 验证演示
   - SMACK 模型检查
@@ -96,7 +93,6 @@
   - 异步控制流演示
   - 性能优化演示
   - 实际应用场景模拟
-
 - **comprehensive_tests**: 全面的测试套件
   - 114 个测试用例全部通过
   - 覆盖所有新特性
@@ -187,7 +183,6 @@ c03_control_fn/
 │   └── ...                            # 其他测试
 └── docs/                              # 文档目录
 ```
-
 ### 关键技术
 
 - **异步编程**: Tokio 生态系统

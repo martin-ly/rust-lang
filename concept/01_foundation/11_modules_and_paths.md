@@ -113,7 +113,6 @@ Rust 模块系统的核心实体:
                   ├── mod.rs        // 目录模块
                   └── hosting.rs    // 子模块
 ```
-
 > **认知功能**: Rust 的模块系统与**文件系统解耦**——`mod` 声明显式控制哪些文件被包含，不同于 Python/JS 的自动文件映射。
 > [来源: [TRPL — Modules](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html)]
 
@@ -161,7 +160,6 @@ mod outer {
 │ pub(self)      │ 等同于私有（显式）                      │
 └────────────────┴─────────────────────────────────────────┘
 ```
-
 > **可见性洞察**: Rust 的**默认私有**设计遵循"最小权限原则"——与 Python/JavaScript 的默认公开形成鲜明对比。
 > [来源: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)]
 
@@ -202,7 +200,6 @@ use std::{
 // pub use: 重导出（重构 API 表面）
 pub use self::hosting::add_to_waitlist;  // 外部可见
 ```
-
 > **路径洞察**: Rust 的**Uniform Paths**（统一路径）在 2018 Edition 中引入，消除了 `extern crate` 的需要，使路径系统更直观。
 > [来源: [RFC 2126 — Path Clarity](https://rust-lang.github.io/rfcs//2126-path-clarity.html)]
 
@@ -245,7 +242,6 @@ pub use self::hosting::add_to_waitlist;  // 外部可见
       ├── hosting.rs
       └── serving.rs
 ```
-
 > **文件映射洞察**: 2021 Edition 的**模块系统改进**消除了 `mod.rs` 的需要，使文件结构更清晰（类似 Python 的 `__init__.py`）。
 > [来源: [Rust Edition Guide — 2021](https://doc.rust-lang.org/edition-guide/rust-2021/index.html)]
 
@@ -286,7 +282,6 @@ pub use self::{
     client::Client,
 };
 ```
-
 > **重导出洞察**: `pub use` 是 Rust **API 设计**的核心工具——它允许内部模块保持清晰结构，同时对外暴露简洁的 API 表面。
 > [来源: [Rust API Guidelines — Re-exports](https://rust-lang.github.io/api-guidelines//naming.html#casing-conforms-to-rfc-430-c-casing)]
 
@@ -309,7 +304,6 @@ resolver = "2"
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
-
 ```text
 工作空间结构:
 
@@ -335,7 +329,6 @@ serde = { version = "1", features = ["derive"] }
   ├── 分层架构: core → domain → application
   └── 单体工作空间: 所有微服务在一个仓库
 ```
-
 > **工作空间洞察**: Cargo Workspace 是 Rust **大型项目组织**的标准方式——它将单一代码库（monorepo）的优势与 crate 的模块化结合。
 > [来源: [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html)]
 
@@ -366,7 +359,6 @@ serde = { version = "1", features = ["derive"] }
   → mod async_impl;
   → 特性控制模块包含
 ```
-
 > **模式矩阵**: Rust 的模块系统与**Cargo 特性**（features）结合，实现强大的**条件编译和可选依赖**管理。
 > [来源: [Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html)]
 
@@ -390,7 +382,6 @@ graph TD
     style PUB_CRATE fill:#fff3e0
     style PRIVATE fill:#c8e6c9
 ```
-
 > **认知功能**: 可见性的**核心决策**是"谁需要访问"——默认私有，按需放宽。
 > [来源: [Rust API Guidelines — Exposure](https://rust-lang.github.io/api-guidelines//naming.html)]
 
@@ -428,7 +419,6 @@ graph TD
 ├── 需要显式路径或别名
 └── 缓解: 使用 fully qualified syntax
 ```
-
 > **边界要点**: 模块系统的边界主要与**循环依赖**、**集成测试限制**、**宏（Macro）交互**和**路径冲突**相关。
 > [来源: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html)]
 
@@ -472,7 +462,6 @@ graph TD
 
   ✅ 在 workspace.dependencies 中统一管理
 ```
-
 > **陷阱总结**: 模块系统的陷阱主要与**文件命名**、**可见性**、**use/mod 混淆**、**循环依赖**和**workspace 版本管理**相关。
 > [来源: [TRPL — Common Module Issues](https://doc.rust-lang.org/book/ch07-05-separating-modules-into-different-files.html)]
 
@@ -554,7 +543,6 @@ mod inner_fixed {
     }
 }
 ```
-
 > **修正**: Rust 的可见性默认是私有的（`private`）。结构体（Struct）字段、模块项、trait 方法等除非标记 `pub`，否则只能在定义模块内访问。这与 C++ 的 `public`/`private` 类似，但 Rust 默认私有，需显式公开。公共 API 设计应通过方法暴露数据，而非直接公开字段。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)]
 
 ### 10.2 边界测试：`use` 路径循环依赖（编译错误）
@@ -576,7 +564,6 @@ mod inner_fixed {
 // a.rs: use crate::common::Shared;
 // b.rs: use crate::common::Shared;
 ```
-
 > **修正**: Rust 严格禁止模块间的循环依赖（circular dependency）。
 > 这与 C/C++ 的前向声明（forward declaration）不同——Rust 的模块系统要求依赖关系是有向无环图（DAG）。
 > 若出现循环依赖，需重构代码：提取公共类型到独立模块，或使用 trait 抽象打破循环。
@@ -608,7 +595,6 @@ mod sibling {
     }
 }
 ```
-
 > **修正**: Rust 的可见性修饰符精确控制作用域：
 > `pub`（完全公开）、`pub(crate)`（当前 crate）、`pub(super)`（父模块）、`pub(in path)`（指定路径）。
 > `pub(crate)` 和 `pub(super)` 的区别在大型 crate 中尤为重要——`pub(crate)` 允许 crate 内任何模块访问，`pub(super)` 限制为直接父模块。
@@ -634,7 +620,6 @@ pub use crate::a::A;
 // ❌ 编译错误: 循环 use 导致模块解析失败
 // Rust 允许模块间的循环依赖（通过 `use`），但 item 的定义不能循环
 ```
-
 > **修正**: Rust 的模块系统允许**循环 `use`**（模块（Module） A `use` 模块 B 的项，模块 B `use` 模块 A 的项），因为 `use` 只是别名，不定义新项。
 > 但**项的定义不能循环**：`struct A { b: B }` 和 `struct B { a: A }` 是无限大小类型，编译错误。
 > `use` 循环的常见场景：
@@ -660,7 +645,6 @@ pub use crate::a::A;
 
 // ❌ 编译错误: foo.rs 和 foo/mod.rs 同时存在时，编译器无法确定模块入口
 ```
-
 > **修正**: Rust 2018 Edition 后，模块的**文件系统映射**规则：
 >
 > 1) `mod foo;` → 查找 `foo.rs` 或 `foo/mod.rs`（不能同时存在）；
@@ -693,7 +677,6 @@ fn main() {
     outer::public_fn();
 }
 ```
-
 > **修正**: `pub use` 是**重导出**（re-export）：将其他模块的项在当前模块的公共接口中暴露。
 > 重导出的项必须本身是 `pub` 的（或在与当前模块相同的可见性范围内）。
 > `pub use` 的常见用途：
@@ -793,7 +776,6 @@ use self::front_of_house::hosting::add_to_waitlist;  // ②
 use crate::front_of_house::hosting::add_to_waitlist;  // ③
 use super::front_of_house::hosting::add_to_waitlist;  // ④
 ```
-
 - A. 仅 ① 和 ③
 - B. 仅 ② 和 ③
 - C. ①、②、③ 都合法（取决于上下文）
@@ -864,7 +846,6 @@ mod external_user {
     }
 }
 ```
-
 - A. `internal::public_fn` 和 `internal::private_fn`
 - B. 仅 `api::public_fn`
 - C. `api::public_fn` 和 `internal::public_fn`

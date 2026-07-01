@@ -47,7 +47,6 @@
 ├── 安全评估员
 └──  Rust形式化验证专家
 ```
-
 ### 认证对比
 >
 > **[来源: Rust Official Docs]**
@@ -87,7 +86,6 @@ Rust特定扩展:
 ├── 类型系统安全
 └── 零成本抽象
 ```
-
 #### Part 2: 功能安全管理 (10%)
 
 ```
@@ -104,7 +102,6 @@ Rust考点:
 ├── Clippy/Miri工具链
 └── 开源组件评估
 ```
-
 #### Part 3: 概念阶段 (15%)
 
 ```
@@ -121,7 +118,6 @@ Rust应用:
 ├── 并发安全设计
 └── FFI边界安全
 ```
-
 #### Part 4: 产品开发: 系统层面 (15%)
 
 ```
@@ -138,7 +134,6 @@ Rust系统开发:
 ├── RTOS集成
 └── 硬件抽象层设计
 ```
-
 #### Part 5: 产品开发: 硬件层面 (10%)
 
 ```
@@ -154,7 +149,6 @@ Rust相关:
 ├── DMA安全
 └── 中断处理
 ```
-
 #### Part 6: 产品开发: 软件层面 (35%)
 
 ```
@@ -189,7 +183,6 @@ Rust特定考点 (60%权重):
     ├── Rust 2018/2021/2024
     └── 安全关键规范
 ```
-
 #### Part 7: 操作与维护 (5%)
 
 ```
@@ -198,7 +191,6 @@ Rust特定考点 (60%权重):
 ├── 操作、维护和退役
 └── 现场监控
 ```
-
 #### Part 8: 支持过程 (5%)
 
 ```
@@ -210,7 +202,6 @@ Rust特定考点 (60%权重):
 ├── 软件工具鉴定
 └── 组件重用
 ```
-
 #### Part 9: ASIL分析 (2%)
 
 ```
@@ -220,7 +211,6 @@ Rust特定考点 (60%权重):
 ├── 要素共存分析
 └── ASIL剪裁
 ```
-
 ### 备考建议
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -246,7 +236,6 @@ Rust特定:
 ├── SGS汽车功能安全
 └── Rust基金会安全关键课程
 ```
-
 #### 模拟试题
 
 ```rust,ignore
@@ -264,7 +253,6 @@ Rust特定:
 4. 形式化验证关键算法 (Kani/Verus)
 5. 故障注入测试
 ```
-
 ```rust,ignore
 // 试题2: 工具鉴定
 // 题目: 如何使用Rust工具链满足TCL 1要求？
@@ -276,7 +264,6 @@ Rust特定:
 4. 覆盖率: cargo-tarpaulin
 5. 文档: rustdoc + 安全案例集成
 ```
-
 ---
 
 ## IEC 61508 认证备考
@@ -301,7 +288,6 @@ Rust特定:
 ├── 长生命周期维护
 └── 认证工具链
 ```
-
 ### Part 3: 软件要求 (重点)
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -322,7 +308,6 @@ Rust实现:
 ├── 工具链鉴定
 └── 验证方法选择
 ```
-
 ### 表格A.1 - 技术措施 (Rust映射)
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -362,7 +347,6 @@ Rust实现:
 ├── 形式化内存模型证明
 └── 补充工具鉴定
 ```
-
 ### 软件等级与验证方法
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -396,7 +380,6 @@ Rust特定活动:
 ├──  Miri测试报告
 └──  覆盖率分析
 ```
-
 ---
 
 ## 考试策略
@@ -425,7 +408,6 @@ ISO 26262考试 (3小时):
 ├── 复杂题: 5分钟/题
 └── 预留15分钟检查
 ```
-
 ### 答题技巧
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -449,7 +431,6 @@ ISO 26262考试 (3小时):
 ├── 解释为什么选择Rust
 └── 提及相关工具
 ```
-
 ### 复习计划
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -482,7 +463,6 @@ ISO 26262考试 (3小时):
 ├── 考试准备
 └── 状态调整
 ```
-
 ---
 
 ## 实用工具
@@ -507,7 +487,6 @@ ISO 26262考试 (3小时):
 ├── "Safety Critical Systems Handbook"
 └── "Rust for Rustaceans"
 ```
-
 ### 练习资源
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -525,7 +504,6 @@ ISO 26262考试 (3小时):
 ├── DEKRA练习册
 └── 自定义Rust安全题目
 ```
-
 ---
 
 ## 考试当天
@@ -550,7 +528,6 @@ ISO 26262考试 (3小时):
 ├── 技术措施列表
 └── Rust工具链知识
 ```
-
 ### 注意事项
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -568,7 +545,6 @@ ISO 26262考试 (3小时):
 ├── 结合Rust特性分析
 └── 注意标准版本
 ```
-
 ---
 
 **文档版本**: 1.0
@@ -590,7 +566,6 @@ ISO 26262考试 (3小时):
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [评估与认证体系](01_assessment_and_certification.md)
 - [动手实验练习](03_hands_on_lab_exercises.md)
 
@@ -618,165 +593,89 @@ ISO 26262考试 (3小时):
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ## 📚 模块 8: 国际化对齐

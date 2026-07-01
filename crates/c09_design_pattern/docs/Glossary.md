@@ -105,7 +105,6 @@ pub fn get_instance() -> &'static Config {
     INSTANCE.get_or_init(|| Config::new())
 }
 ```
-
 **相关**: [src/creational/singleton/](../src/creational/singleton)
 
 ---
@@ -133,7 +132,6 @@ impl Subject {
     }
 }
 ```
-
 **相关**: [src/behavioral/observer/](../src/behavioral/observer), [examples/gats_observer_demo.rs](../examples/gats_observer_demo.rs)
 
 ---
@@ -161,7 +159,6 @@ fn sort_data_dynamic(strategy: &dyn SortStrategy, data: &mut [i32]) {
     strategy.sort(data);
 }
 ```
-
 **相关**: [src/behavioral/strategy/](../src/behavioral/strategy)
 
 ---
@@ -203,7 +200,6 @@ impl PersonBuilder {
     }
 }
 ```
-
 **相关**: [src/creational/builder/](../src/creational/builder)
 
 ---
@@ -252,7 +248,6 @@ impl Document<Published> {
     }
 }
 ```
-
 **相关**: [src/behavioral/state/](../src/behavioral/state)
 
 ---
@@ -290,7 +285,6 @@ impl Actor {
     }
 }
 ```
-
 **相关**: [docs/ACTOR_REACTOR_PATTERNS.md](ACTOR_REACTOR_PATTERNS.md)
 
 ---
@@ -334,7 +328,6 @@ std::thread::spawn(move || {
 
 let value = rx.recv().unwrap();
 ```
-
 **相关**: [docs/CSP_VS_ASYNC_ANALYSIS.md](CSP_VS_ASYNC_ANALYSIS.md)
 
 ---
@@ -351,7 +344,6 @@ pub trait Future {
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
 ```
-
 **状态机**: async/await 编译为状态机
 
 **相关**: [src/concurrency/asynchronous/](../src/concurrency/asynchronous)
@@ -373,7 +365,6 @@ async fn fetch_data() -> Result<Data> {
     Ok(data)
 }
 ```
-
 **相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](ASYNC_SYNC_EQUIVALENCE_THEORY.md)
 
 ---
@@ -401,7 +392,6 @@ fn process(handler: &dyn Handler) {
     handler.handle(&data); // 动态分派
 }
 ```
-
 **相关**: [FAQ.md](FAQ.md#q13-设计模式会影响性能吗)
 
 ---
@@ -429,7 +419,6 @@ fn process_dyn(handler: &dyn Handler) {
     handler.handle(); // 运行时分派
 }
 ```
-
 **相关**: [benches/pattern_benchmarks.rs](../benches/pattern_benchmarks.rs)
 
 ---
@@ -458,7 +447,6 @@ impl Observer for StringObserver {
     }
 }
 ```
-
 **相关**: [src/behavioral/observer/](../src/behavioral/observer), [examples/gats_observer_demo.rs](../examples/gats_observer_demo.rs)
 
 ---
@@ -490,7 +478,6 @@ impl TextSource for Document {
     }
 }
 ```
-
 **相关**: [src/rust_190_features.rs](../src/rust_190_features.rs)
 
 ---
@@ -514,7 +501,6 @@ fn get_config() -> &'static Config {
     })
 }
 ```
-
 **vs lazy_static**: 标准库支持，无需外部依赖
 
 **相关**: [src/creational/singleton/](../src/creational/singleton)
@@ -551,7 +537,6 @@ where
     })
 }
 ```
-
 **相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](ASYNC_SYNC_EQUIVALENCE_THEORY.md)
 
 ---
@@ -580,7 +565,6 @@ fn chain<T, U>(opt: Option<T>, f: impl FnOnce(T) -> Option<U>) -> Option<U> {
     opt.and_then(f)
 }
 ```
-
 **相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](ASYNC_SYNC_EQUIVALENCE_THEORY.md)
 
 ---
@@ -615,7 +599,6 @@ impl Future for ExampleStateMachine {
     }
 }
 ```
-
 **相关**: [docs/ASYNC_RECURSION_ANALYSIS.md](ASYNC_RECURSION_ANALYSIS.md)
 
 ---
@@ -643,7 +626,6 @@ async fn async_version() -> i32 {
     x + y
 }
 ```
-
 **证明方法**: CPS 变换、Monad 同态
 
 **相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](ASYNC_SYNC_EQUIVALENCE_THEORY.md)
@@ -670,7 +652,6 @@ fn use_pinned(pinned: Pin<&mut SelfReferential>) {
     // pinned 保证不会移动
 }
 ```
-
 **相关**: [docs/ASYNC_RECURSION_ANALYSIS.md](ASYNC_RECURSION_ANALYSIS.md)
 
 ---
@@ -680,8 +661,8 @@ fn use_pinned(pinned: Pin<&mut SelfReferential>) {
 - [主索引](00_MASTER_INDEX.md) - 完整文档导航
 - [FAQ](FAQ.md) - 常见问题解答（完整版）
 - [Tier 1 基础层](tier_01_foundations/README.md) - 快速入门和基础参考
-- [Tier 1 术语表](tier_01_foundations/03_术语表.md) - 核心术语快速参考
-- [Tier 1 常见问题](tier_01_foundations/04_常见问题.md) - 新手常见问题解答
+- [Tier 1 术语表](tier_01_foundations/03_glossary.md) - 核心术语快速参考
+- [Tier 1 常见问题](tier_01_foundations/04_faq.md) - 新手常见问题解答
 - [README](README.md) - 项目概述
 - [综合指南](COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 深度学习
 - [形式化理论文档](ASYNC_SYNC_EQUIVALENCE_THEORY.md) - 理论基础

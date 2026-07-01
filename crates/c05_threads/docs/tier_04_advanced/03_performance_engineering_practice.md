@@ -1,0 +1,1245 @@
+﻿# 性能工程实践
+
+> **文档版本**: Rust 1.92.0+ | **更新日期**: 2025-12-11
+> **文档层级**: Tier 4 - 高级主题 | **难度**: ⭐⭐⭐⭐⭐
+
+---
+
+## 📋 目录
+
+- [性能工程实践](#性能工程实践)
+  - [📋 目录](#-目录)
+  - [🎯 概述](#-概述)
+  - [1. 性能分析工具链](#1-性能分析工具链)
+    - [1.1 Linux perf 工具](#11-linux-perf-工具)
+      - [基本用法](#基本用法)
+      - [Rust 程序优化](#rust-程序优化)
+      - [perf 分析输出](#perf-分析输出)
+    - [1.2 Valgrind 套件](#12-valgrind-套件)
+      - [Memcheck (内存检测)](#memcheck-内存检测)
+      - [Cachegrind (缓存分析)](#cachegrind-缓存分析)
+      - [Rust 示例](#rust-示例)
+    - [1.3 flamegraph 火焰图](#13-flamegraph-火焰图)
+      - [安装和使用](#安装和使用)
+      - [Rust 示例1](#rust-示例1)
+      - [火焰图解读](#火焰图解读)
+    - [1.4 Rust 专用工具](#14-rust-专用工具)
+      - [cargo-bench](#cargo-bench)
+      - [cargo-bloat](#cargo-bloat)
+      - [cargo-asm](#cargo-asm)
+  - [2. CPU Profiling 实战](#2-cpu-profiling-实战)
+    - [2.1 采样式 Profiling](#21-采样式-profiling)
+      - [使用 pprof](#使用-pprof)
+    - [2.2 插桩式 Profiling](#22-插桩式-profiling)
+      - [手动插桩](#手动插桩)
+    - [2.3 热点分析](#23-热点分析)
+      - [完整示例](#完整示例)
+      - [优化后](#优化后)
+  - [3. 内存 Profiling 实战](#3-内存-profiling-实战)
+    - [3.1 内存泄漏检测](#31-内存泄漏检测)
+      - [使用 Valgrind](#使用-valgrind)
+    - [3.2 内存分配分析](#32-内存分配分析)
+      - [使用 jemalloc profiling](#使用-jemalloc-profiling)
+    - [3.3 堆分析](#33-堆分析)
+      - [自定义分配追踪](#自定义分配追踪)
+  - [4. 锁竞争分析与优化](#4-锁竞争分析与优化)
+    - [4.1 锁竞争检测](#41-锁竞争检测)
+      - [使用 parking\_lot 的统计功能](#使用-parking_lot-的统计功能)
+    - [4.2 锁竞争可视化](#42-锁竞争可视化)
+      - [自定义锁监控](#自定义锁监控)
+    - [4.3 优化策略](#43-优化策略)
+      - [分片锁 (Lock Striping)](#分片锁-lock-striping)
+  - [5. 性能回归测试](#5-性能回归测试)
+    - [5.1 基准测试框架](#51-基准测试框架)
+      - [使用 Criterion.rs](#使用-criterionrs)
+    - [5.2 CI/CD 集成](#52-cicd-集成)
+      - [GitHub Actions 配置](#github-actions-配置)
+    - [5.3 性能监控](#53-性能监控)
+      - [自定义性能监控](#自定义性能监控)
+  - [6. 优化迭代流程](#6-优化迭代流程)
+    - [6.1 性能优化方法论](#61-性能优化方法论)
+      - [优化流程](#优化流程)
+      - [实战检查清单](#实战检查清单)
+    - [6.2 完整优化案例](#62-完整优化案例)
+      - [原始版本（慢）](#原始版本慢)
+      - [优化版本 1：批量操作](#优化版本-1批量操作)
+      - [优化版本 2：无锁设计](#优化版本-2无锁设计)
+      - [性能对比](#性能对比)
+  - [7. 最佳实践](#7-最佳实践)
+    - [性能工程原则](#性能工程原则)
+    - [工具选择建议](#工具选择建议)
+  - [🔗 相关资源](#-相关资源)
+    - [核心文档](#核心文档)
+    - [外部资源](#外部资源)
+
+---
+
+## 🎯 概述
+
+性能工程是系统化、数据驱动的性能优化实践。本文档详细介绍：
+
+- **性能分析工具链**：perf、Valgrind、flamegraph 等工具的使用
+- **CPU/内存 Profiling**：定位性能瓶颈的方法
+- **锁竞争分析**：检测和优化并发瓶颈
+- **性能回归测试**：确保性能不退化
+- **优化迭代流程**：系统化的性能工程方法论
+
+---
+
+## 1. 性能分析工具链
+
+### 1.1 Linux perf 工具
+
+**perf** 是 Linux 内核自带的性能分析工具，功能强大。
+
+#### 基本用法
+
+```bash
+# 记录程序执行过程
+perf record -g ./target/release/my_program
+
+# 查看报告
+perf report
+
+# 实时监控
+perf top
+
+# 统计信息
+perf stat ./target/release/my_program
+```
+#### Rust 程序优化
+
+```rust
+// Cargo.toml
+[profile.release]
+debug = true  // 保留调试信息用于 profiling
+
+// 示例：性能热点检测
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let data = Arc::new(Mutex::new(vec![0u64; 1000000]));
+    let mut handles = vec![];
+
+    for i in 0..8 {
+        let data = Arc::clone(&data);
+        handles.push(thread::spawn(move || {
+            for _ in 0..10000 {
+                let mut v = data.lock().unwrap();
+                v[i * 125000] += 1;  // 高竞争点
+            }
+        }));
+    }
+
+    for h in handles {
+        h.join().unwrap();
+    }
+}
+```
+#### perf 分析输出
+
+```text
+# perf record -g -F 99 ./target/release/example
+# perf report --stdio
+
+# Overhead  Command   Shared Object       Symbol
+# ........  ........  ..................  .......................
+#
+    45.23%  example   example             [.] std::sync::Mutex::lock
+    12.45%  example   [kernel]            [k] _raw_spin_lock
+     8.76%  example   example             [.] alloc::vec::Vec::push
+     3.21%  example   libc.so.6           [.] pthread_mutex_lock
+```
+---
+
+### 1.2 Valgrind 套件
+
+**Valgrind** 提供内存泄漏、缓存分析等多种工具。
+
+#### Memcheck (内存检测)
+
+```bash
+# 检测内存泄漏
+valgrind --leak-check=full --show-leak-kinds=all \
+  ./target/debug/my_program
+
+# 检测数据竞争
+valgrind --tool=helgrind ./target/debug/my_program
+
+# 检测 DRD (数据竞争检测器)
+valgrind --tool=drd ./target/debug/my_program
+```
+#### Cachegrind (缓存分析)
+
+```bash
+# 分析缓存命中率
+valgrind --tool=cachegrind ./target/release/my_program
+
+# 可视化结果
+kcachegrind cachegrind.out.12345
+```
+#### Rust 示例
+
+```rust
+use std::sync::Arc;
+use std::thread;
+
+fn main() {
+    let mut data = vec![0u64; 10000];
+
+    // 故意制造数据竞争（仅用于演示）
+    let ptr = data.as_mut_ptr();
+
+    let handles: Vec<_> = (0..4).map(|i| {
+        thread::spawn(move || {
+            unsafe {
+                for j in 0..2500 {
+                    *ptr.add(i * 2500 + j) += 1;
+                }
+            }
+        })
+    }).collect();
+
+    for h in handles {
+        h.join().unwrap();
+    }
+}
+```
+---
+
+### 1.3 flamegraph 火焰图
+
+火焰图直观展示程序的性能热点。
+
+#### 安装和使用
+
+```bash
+# 安装 cargo-flamegraph
+cargo install flamegraph
+
+# 生成火焰图
+cargo flamegraph --bin my_program
+
+# 查看火焰图（自动在浏览器打开）
+# flamegraph.svg
+```
+#### Rust 示例1
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn expensive_computation(n: u64) -> u64 {
+    (0..n).fold(0, |acc, x| acc + x * x)
+}
+
+fn main() {
+    let result = Arc::new(Mutex::new(0u64));
+    let mut handles = vec![];
+
+    for _ in 0..8 {
+        let result = Arc::clone(&result);
+        handles.push(thread::spawn(move || {
+            let r = expensive_computation(1000000);
+            *result.lock().unwrap() += r;
+        }));
+    }
+
+    for h in handles {
+        h.join().unwrap();
+    }
+
+    println!("Result: {}", *result.lock().unwrap());
+}
+```
+#### 火焰图解读
+
+```text
+火焰图宽度 = CPU 时间占比
+火焰图高度 = 函数调用栈深度
+
+宽的横条 = 性能热点
+应优先优化
+```
+---
+
+### 1.4 Rust 专用工具
+
+#### cargo-bench
+
+```rust
+// benches/my_benchmark.rs
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
+
+fn fibonacci(n: u64) -> u64 {
+    match n {
+        0 => 0,
+        1 => 1,
+        n => fibonacci(n - 1) + fibonacci(n - 2),
+    }
+}
+
+fn criterion_benchmark(c: &mut Criterion) {
+    c.bench_function("fib 20", |b| b.iter(|| fibonacci(black_box(20))));
+}
+
+criterion_group!(benches, criterion_benchmark);
+criterion_main!(benches);
+```
+```bash
+# 运行基准测试
+cargo bench
+```
+#### cargo-bloat
+
+```bash
+# 分析二进制大小
+cargo install cargo-bloat
+
+# 查看最大的函数
+cargo bloat --release
+
+# 查看 crate 大小
+cargo bloat --release --crates
+```
+#### cargo-asm
+
+```bash
+# 查看汇编代码
+cargo install cargo-asm
+
+# 查看函数汇编
+cargo asm --release my_crate::my_function
+```
+---
+
+## 2. CPU Profiling 实战
+
+### 2.1 采样式 Profiling
+
+采样式 profiling 定期采样程序状态，开销较小。
+
+#### 使用 pprof
+
+```rust
+// Cargo.toml
+[dependencies]
+pprof = { version = "0.13", features = ["flamegraph"] }
+
+// src/main.rs
+use pprof::ProfilerGuard;
+use std::fs::File;
+use std::io::Write;
+
+fn main() {
+    let guard = ProfilerGuard::new(100).unwrap();
+
+    // 你的代码
+    expensive_work();
+
+    // 生成报告
+    if let Ok(report) = guard.report().build() {
+        let file = File::create("flamegraph.svg").unwrap();
+        report.flamegraph(file).unwrap();
+    }
+}
+
+fn expensive_work() {
+    for _ in 0..1000000 {
+        let _ = (0..100).sum::<i32>();
+    }
+}
+```
+---
+
+### 2.2 插桩式 Profiling
+
+插桩式 profiling 在每个函数入口/出口插入代码，精确但开销大。
+
+#### 手动插桩
+
+```rust
+use std::time::Instant;
+use std::collections::HashMap;
+use std::sync::Mutex;
+
+lazy_static::lazy_static! {
+    static ref TIMINGS: Mutex<HashMap<&'static str, Vec<u128>>> =
+        Mutex::new(HashMap::new());
+}
+
+macro_rules! profile {
+    ($name:expr, $code:block) => {{
+        let start = Instant::now();
+        let result = $code;
+        let elapsed = start.elapsed().as_micros();
+        TIMINGS.lock().unwrap()
+            .entry($name)
+            .or_insert_with(Vec::new)
+            .push(elapsed);
+        result
+    }};
+}
+
+fn main() {
+    for _ in 0..1000 {
+        profile!("task_a", {
+            task_a();
+        });
+
+        profile!("task_b", {
+            task_b();
+        });
+    }
+
+    // 打印统计
+    let timings = TIMINGS.lock().unwrap();
+    for (name, times) in timings.iter() {
+        let avg = times.iter().sum::<u128>() / times.len() as u128;
+        println!("{}: avg {}μs", name, avg);
+    }
+}
+
+fn task_a() {
+    std::thread::sleep(std::time::Duration::from_micros(100));
+}
+
+fn task_b() {
+    std::thread::sleep(std::time::Duration::from_micros(200));
+}
+```
+---
+
+### 2.3 热点分析
+
+#### 完整示例
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+use std::time::Instant;
+
+fn hot_path_1(data: &mut Vec<u64>) {
+    // 热路径 1：大量计算
+    for i in 0..data.len() {
+        data[i] = data[i].wrapping_mul(3).wrapping_add(7);
+    }
+}
+
+fn hot_path_2(data: &mut Vec<u64>) {
+    // 热路径 2：排序
+    data.sort_unstable();
+}
+
+fn cold_path(data: &Vec<u64>) {
+    // 冷路径：很少执行
+    if data.len() > 1000000 {
+        println!("Large data: {}", data.len());
+    }
+}
+
+fn main() {
+    let data = Arc::new(Mutex::new(vec![1u64; 100000]));
+
+    let start = Instant::now();
+
+    let mut handles = vec![];
+    for _ in 0..8 {
+        let data = Arc::clone(&data);
+        handles.push(thread::spawn(move || {
+            for _ in 0..100 {
+                let mut d = data.lock().unwrap();
+                hot_path_1(&mut d);
+                hot_path_2(&mut d);
+                cold_path(&d);
+            }
+        }));
+    }
+
+    for h in handles {
+        h.join().unwrap();
+    }
+
+    println!("Elapsed: {:?}", start.elapsed());
+}
+```
+#### 优化后
+
+```rust
+use rayon::prelude::*;
+use std::time::Instant;
+
+fn main() {
+    let mut data = vec![1u64; 100000];
+
+    let start = Instant::now();
+
+    // 并行处理，避免锁竞争
+    data.par_iter_mut().for_each(|x| {
+        *x = x.wrapping_mul(3).wrapping_add(7);
+    });
+
+    data.par_sort_unstable();
+
+    println!("Elapsed: {:?}", start.elapsed());
+}
+```
+---
+
+## 3. 内存 Profiling 实战
+
+### 3.1 内存泄漏检测
+
+#### 使用 Valgrind
+
+```rust
+use std::sync::Arc;
+use std::thread;
+
+fn leaky_function() {
+    let data = Arc::new(vec![0u8; 1024 * 1024]);  // 1MB
+
+    // 故意泄漏（仅用于演示）
+    std::mem::forget(data);
+}
+
+fn main() {
+    for _ in 0..10 {
+        leaky_function();
+    }
+
+    // 应该释放但没释放 10MB
+}
+```
+```bash
+valgrind --leak-check=full ./target/debug/example
+
+# 输出:
+# ==12345== 10,485,760 bytes in 10 blocks are definitely lost
+```
+---
+
+### 3.2 内存分配分析
+
+#### 使用 jemalloc profiling
+
+```rust
+// Cargo.toml
+[dependencies]
+jemallocator = "0.5"
+
+// src/main.rs
+use jemallocator::Jemalloc;
+
+#[global_allocator]
+static GLOBAL: Jemalloc = Jemalloc;
+
+fn main() {
+    // 设置 jemalloc profiling
+    std::env::set_var("MALLOC_CONF", "prof:true,prof_prefix:jeprof.out");
+
+    let mut data = Vec::new();
+    for i in 0..1000000 {
+        data.push(i);
+    }
+
+    println!("Data len: {}", data.len());
+}
+```
+```bash
+# 生成堆分析
+jeprof --show_bytes --pdf target/release/example jeprof.out.* > heap.pdf
+```
+---
+
+### 3.3 堆分析
+
+#### 自定义分配追踪
+
+```rust
+use std::alloc::{GlobalAlloc, Layout, System};
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+struct TrackingAllocator;
+
+static ALLOCATED: AtomicUsize = AtomicUsize::new(0);
+static DEALLOCATED: AtomicUsize = AtomicUsize::new(0);
+
+unsafe impl GlobalAlloc for TrackingAllocator {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        let ret = System.alloc(layout);
+        if !ret.is_null() {
+            ALLOCATED.fetch_add(layout.size(), Ordering::SeqCst);
+        }
+        ret
+    }
+
+    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
+        System.dealloc(ptr, layout);
+        DEALLOCATED.fetch_add(layout.size(), Ordering::SeqCst);
+    }
+}
+
+#[global_allocator]
+static GLOBAL: TrackingAllocator = TrackingAllocator;
+
+fn main() {
+    let data = vec![0u8; 1024 * 1024];  // 1MB
+
+    println!("Allocated: {} bytes", ALLOCATED.load(Ordering::SeqCst));
+    println!("Deallocated: {} bytes", DEALLOCATED.load(Ordering::SeqCst));
+    println!("Current: {} bytes",
+        ALLOCATED.load(Ordering::SeqCst) - DEALLOCATED.load(Ordering::SeqCst));
+
+    drop(data);
+
+    println!("After drop:");
+    println!("Allocated: {} bytes", ALLOCATED.load(Ordering::SeqCst));
+    println!("Deallocated: {} bytes", DEALLOCATED.load(Ordering::SeqCst));
+    println!("Current: {} bytes",
+        ALLOCATED.load(Ordering::SeqCst) - DEALLOCATED.load(Ordering::SeqCst));
+}
+```
+---
+
+## 4. 锁竞争分析与优化
+
+### 4.1 锁竞争检测
+
+#### 使用 parking_lot 的统计功能
+
+```rust
+use parking_lot::{Mutex, MutexGuard};
+use std::sync::Arc;
+use std::thread;
+use std::time::{Duration, Instant};
+
+fn measure_lock_contention() {
+    let counter = Arc::new(Mutex::new(0u64));
+    let start = Instant::now();
+
+    let handles: Vec<_> = (0..8).map(|_| {
+        let counter = Arc::clone(&counter);
+        thread::spawn(move || {
+            for _ in 0..100000 {
+                let mut guard = counter.lock();
+                *guard += 1;
+                // 模拟临界区工作
+                std::thread::sleep(Duration::from_nanos(100));
+            }
+        })
+    }).collect();
+
+    for h in handles {
+        h.join().unwrap();
+    }
+
+    println!("Time with high contention: {:?}", start.elapsed());
+}
+
+fn optimized_version() {
+    let counter = Arc::new(Mutex::new(0u64));
+    let start = Instant::now();
+
+    let handles: Vec<_> = (0..8).map(|_| {
+        let counter = Arc::clone(&counter);
+        thread::spawn(move || {
+            let mut local = 0u64;
+            for _ in 0..100000 {
+                local += 1;
+                std::thread::sleep(Duration::from_nanos(100));
+            }
+            // 批量更新，减少锁竞争
+            *counter.lock() += local;
+        })
+    }).collect();
+
+    for h in handles {
+        h.join().unwrap();
+    }
+
+    println!("Time with low contention: {:?}", start.elapsed());
+}
+
+fn main() {
+    println!("Measuring lock contention...");
+    measure_lock_contention();
+
+    println!("\nOptimized version:");
+    optimized_version();
+}
+```
+---
+
+### 4.2 锁竞争可视化
+
+#### 自定义锁监控
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+use std::time::{Duration, Instant};
+use std::collections::HashMap;
+
+struct MonitoredMutex<T> {
+    inner: Mutex<T>,
+    lock_times: Mutex<Vec<Duration>>,
+    wait_times: Mutex<Vec<Duration>>,
+}
+
+impl<T> MonitoredMutex<T> {
+    fn new(value: T) -> Self {
+        Self {
+            inner: Mutex::new(value),
+            lock_times: Mutex::new(Vec::new()),
+            wait_times: Mutex::new(Vec::new()),
+        }
+    }
+
+    fn lock(&self) -> std::sync::MutexGuard<T> {
+        let wait_start = Instant::now();
+        let guard = self.inner.lock().unwrap();
+        let wait_time = wait_start.elapsed();
+
+        self.wait_times.lock().unwrap().push(wait_time);
+        guard
+    }
+
+    fn stats(&self) -> (Duration, Duration) {
+        let waits = self.wait_times.lock().unwrap();
+        let avg_wait = if !waits.is_empty() {
+            waits.iter().sum::<Duration>() / waits.len() as u32
+        } else {
+            Duration::ZERO
+        };
+
+        let max_wait = waits.iter().max().copied().unwrap_or(Duration::ZERO);
+
+        (avg_wait, max_wait)
+    }
+}
+
+fn main() {
+    let mutex = Arc::new(MonitoredMutex::new(0u64));
+
+    let handles: Vec<_> = (0..8).map(|_| {
+        let mutex = Arc::clone(&mutex);
+        thread::spawn(move || {
+            for _ in 0..1000 {
+                let mut guard = mutex.lock();
+                *guard += 1;
+                std::thread::sleep(Duration::from_micros(10));
+            }
+        })
+    }).collect();
+
+    for h in handles {
+        h.join().unwrap();
+    }
+
+    let (avg_wait, max_wait) = mutex.stats();
+    println!("Average wait time: {:?}", avg_wait);
+    println!("Max wait time: {:?}", max_wait);
+}
+```
+---
+
+### 4.3 优化策略
+
+#### 分片锁 (Lock Striping)
+
+```rust
+use std::sync::Mutex;
+use std::hash::{Hash, Hasher};
+use std::collections::hash_map::DefaultHasher;
+
+struct StripedMap<K, V> {
+    stripes: Vec<Mutex<std::collections::HashMap<K, V>>>,
+}
+
+impl<K: Hash + Eq, V> StripedMap<K, V> {
+    fn new(stripe_count: usize) -> Self {
+        let mut stripes = Vec::with_capacity(stripe_count);
+        for _ in 0..stripe_count {
+            stripes.push(Mutex::new(std::collections::HashMap::new()));
+        }
+        Self { stripes }
+    }
+
+    fn stripe_index(&self, key: &K) -> usize {
+        let mut hasher = DefaultHasher::new();
+        key.hash(&mut hasher);
+        (hasher.finish() as usize) % self.stripes.len()
+    }
+
+    fn insert(&self, key: K, value: V) -> Option<V> {
+        let idx = self.stripe_index(&key);
+        self.stripes[idx].lock().unwrap().insert(key, value)
+    }
+
+    fn get(&self, key: &K) -> Option<V> where V: Clone {
+        let idx = self.stripe_index(key);
+        self.stripes[idx].lock().unwrap().get(key).cloned()
+    }
+}
+
+fn main() {
+    use std::sync::Arc;
+    use std::thread;
+
+    let map = Arc::new(StripedMap::new(16));
+
+    let handles: Vec<_> = (0..8).map(|i| {
+        let map = Arc::clone(&map);
+        thread::spawn(move || {
+            for j in 0..10000 {
+                map.insert(i * 10000 + j, j);
+            }
+        })
+    }).collect();
+
+    for h in handles {
+        h.join().unwrap();
+    }
+
+    println!("Done");
+}
+```
+---
+
+## 5. 性能回归测试
+
+### 5.1 基准测试框架
+
+#### 使用 Criterion.rs
+
+```rust
+// benches/performance.rs
+use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn mutex_benchmark(c: &mut Criterion) {
+    let mut group = c.benchmark_group("mutex_contention");
+
+    for thread_count in [1, 2, 4, 8].iter() {
+        group.bench_with_input(
+            BenchmarkId::from_parameter(thread_count),
+            thread_count,
+            |b, &thread_count| {
+                b.iter(|| {
+                    let counter = Arc::new(Mutex::new(0u64));
+                    let handles: Vec<_> = (0..thread_count).map(|_| {
+                        let counter = Arc::clone(&counter);
+                        thread::spawn(move || {
+                            for _ in 0..1000 {
+                                *counter.lock().unwrap() += 1;
+                            }
+                        })
+                    }).collect();
+
+                    for h in handles {
+                        h.join().unwrap();
+                    }
+                });
+            },
+        );
+    }
+
+    group.finish();
+}
+
+criterion_group!(benches, mutex_benchmark);
+criterion_main!(benches);
+```
+```bash
+# 运行基准测试
+cargo bench
+
+# 比较两次基准测试
+cargo bench --bench performance -- --save-baseline before
+# ... 修改代码 ...
+cargo bench --bench performance -- --baseline before
+```
+---
+
+### 5.2 CI/CD 集成
+
+#### GitHub Actions 配置
+
+```yaml
+# .github/workflows/benchmark.yml
+name: Performance Benchmarks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Run benchmarks
+        run: cargo bench --bench performance -- --save-baseline pr-${{ github.event.pull_request.number }}
+
+      - name: Store benchmark result
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          tool: "cargo"
+          output-file-path: target/criterion/reports/index.html
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: true
+```
+---
+
+### 5.3 性能监控
+
+#### 自定义性能监控
+
+```rust
+use std::time::{Duration, Instant};
+use std::collections::VecDeque;
+use std::sync::{Arc, Mutex};
+
+struct PerformanceMonitor {
+    name: String,
+    samples: Mutex<VecDeque<Duration>>,
+    max_samples: usize,
+}
+
+impl PerformanceMonitor {
+    fn new(name: impl Into<String>, max_samples: usize) -> Self {
+        Self {
+            name: name.into(),
+            samples: Mutex::new(VecDeque::with_capacity(max_samples)),
+            max_samples,
+        }
+    }
+
+    fn record(&self, duration: Duration) {
+        let mut samples = self.samples.lock().unwrap();
+        if samples.len() >= self.max_samples {
+            samples.pop_front();
+        }
+        samples.push_back(duration);
+    }
+
+    fn stats(&self) -> MonitorStats {
+        let samples = self.samples.lock().unwrap();
+        if samples.is_empty() {
+            return MonitorStats::default();
+        }
+
+        let sum: Duration = samples.iter().sum();
+        let avg = sum / samples.len() as u32;
+        let min = samples.iter().min().copied().unwrap();
+        let max = samples.iter().max().copied().unwrap();
+
+        // 计算 P95
+        let mut sorted: Vec<_> = samples.iter().copied().collect();
+        sorted.sort();
+        let p95_idx = (sorted.len() as f64 * 0.95) as usize;
+        let p95 = sorted[p95_idx.min(sorted.len() - 1)];
+
+        MonitorStats { avg, min, max, p95 }
+    }
+
+    fn report(&self) {
+        let stats = self.stats();
+        println!("[{}] avg: {:?}, min: {:?}, max: {:?}, p95: {:?}",
+            self.name, stats.avg, stats.min, stats.max, stats.p95);
+    }
+}
+
+#[derive(Default)]
+struct MonitorStats {
+    avg: Duration,
+    min: Duration,
+    max: Duration,
+    p95: Duration,
+}
+
+fn main() {
+    let monitor = Arc::new(PerformanceMonitor::new("task_execution", 1000));
+
+    for _ in 0..100 {
+        let start = Instant::now();
+
+        // 模拟任务
+        std::thread::sleep(Duration::from_millis(10));
+
+        monitor.record(start.elapsed());
+    }
+
+    monitor.report();
+}
+```
+---
+
+## 6. 优化迭代流程
+
+### 6.1 性能优化方法论
+
+#### 优化流程
+
+```text
+1. 测量 (Measure)
+   ├── 建立性能基线
+   ├── 识别性能目标
+   └── 收集 profiling 数据
+
+2. 分析 (Analyze)
+   ├── 识别热点
+   ├── 分析瓶颈原因
+   └── 提出优化假设
+
+3. 优化 (Optimize)
+   ├── 实施优化方案
+   ├── 单元测试验证
+   └── 基准测试对比
+
+4. 验证 (Validate)
+   ├── 性能提升确认
+   ├── 功能正确性验证
+   └── 回归测试
+
+5. 迭代 (Iterate)
+   └── 重复 1-4 直到达到目标
+```
+#### 实战检查清单
+
+```rust
+// 性能优化检查清单
+struct OptimizationChecklist {
+    items: Vec<(&'static str, bool)>,
+}
+
+impl OptimizationChecklist {
+    fn new() -> Self {
+        Self {
+            items: vec![
+                ("✓ 建立性能基线", false),
+                ("✓ 使用 perf/flamegraph 分析", false),
+                ("✓ 识别热点函数", false),
+                ("✓ 检查锁竞争", false),
+                ("✓ 检查内存分配", false),
+                ("✓ 实施优化", false),
+                ("✓ 运行基准测试", false),
+                ("✓ 验证性能提升 (>10%)", false),
+                ("✓ 验证功能正确性", false),
+                ("✓ 提交代码审查", false),
+            ],
+        }
+    }
+
+    fn check(&mut self, index: usize) {
+        if index < self.items.len() {
+            self.items[index].1 = true;
+        }
+    }
+
+    fn report(&self) {
+        println!("Optimization Progress:");
+        for (item, done) in &self.items {
+            println!("{} {}", if *done { "[✓]" } else { "[ ]" }, item);
+        }
+    }
+}
+
+fn main() {
+    let mut checklist = OptimizationChecklist::new();
+
+    // 模拟优化流程
+    checklist.check(0);  // 建立基线
+    checklist.check(1);  // 分析
+    checklist.check(2);  // 识别热点
+
+    checklist.report();
+}
+```
+---
+
+### 6.2 完整优化案例
+
+#### 原始版本（慢）
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+use std::time::Instant;
+
+fn slow_version() -> Duration {
+    let data = Arc::new(Mutex::new(Vec::new()));
+    let start = Instant::now();
+
+    let handles: Vec<_> = (0..8).map(|i| {
+        let data = Arc::clone(&data);
+        thread::spawn(move || {
+            for j in 0..10000 {
+                // 问题1: 频繁加锁
+                data.lock().unwrap().push(i * 10000 + j);
+            }
+        })
+    }).collect();
+
+    for h in handles {
+        h.join().unwrap();
+    }
+
+    start.elapsed()
+}
+```
+#### 优化版本 1：批量操作
+
+```rust
+fn optimized_v1() -> Duration {
+    let data = Arc::new(Mutex::new(Vec::new()));
+    let start = Instant::now();
+
+    let handles: Vec<_> = (0..8).map(|i| {
+        let data = Arc::clone(&data);
+        thread::spawn(move || {
+            let mut local = Vec::with_capacity(10000);
+            for j in 0..10000 {
+                local.push(i * 10000 + j);
+            }
+            // 批量操作，减少锁竞争
+            data.lock().unwrap().extend(local);
+        })
+    }).collect();
+
+    for h in handles {
+        h.join().unwrap();
+    }
+
+    start.elapsed()
+}
+```
+#### 优化版本 2：无锁设计
+
+```rust
+use crossbeam_channel::unbounded;
+
+fn optimized_v2() -> Duration {
+    let (tx, rx) = unbounded();
+    let start = Instant::now();
+
+    let handles: Vec<_> = (0..8).map(|i| {
+        let tx = tx.clone();
+        thread::spawn(move || {
+            for j in 0..10000 {
+                tx.send(i * 10000 + j).unwrap();
+            }
+        })
+    }).collect();
+
+    drop(tx);
+
+    let collector = thread::spawn(move || {
+        let mut data = Vec::new();
+        while let Ok(value) = rx.recv() {
+            data.push(value);
+        }
+        data
+    });
+
+    for h in handles {
+        h.join().unwrap();
+    }
+
+    let _data = collector.join().unwrap();
+    start.elapsed()
+}
+```
+#### 性能对比
+
+```rust
+fn main() {
+    println!("Running performance comparison...");
+
+    let slow = slow_version();
+    println!("Slow version: {:?}", slow);
+
+    let opt1 = optimized_v1();
+    println!("Optimized v1: {:?} ({}x faster)",
+        opt1, slow.as_micros() / opt1.as_micros());
+
+    let opt2 = optimized_v2();
+    println!("Optimized v2: {:?} ({}x faster)",
+        opt2, slow.as_micros() / opt2.as_micros());
+}
+```
+---
+
+## 7. 最佳实践
+
+### 性能工程原则
+
+1. **先测量，后优化**
+   - 不要凭直觉优化
+   - 建立可靠的性能基线
+   - 使用数据驱动决策
+2. **优先优化热点**
+   - 80/20 法则：80% 时间花在 20% 代码上
+   - 使用 flamegraph 找到宽的横条
+   - 优先解决最耗时的函数
+3. **降低锁竞争**
+   - 减少临界区大小
+   - 使用批量操作
+   - 考虑无锁数据结构
+4. **减少内存分配**
+   - 预分配容量
+   - 重用内存
+   - 使用对象池
+5. **性能回归测试**
+   - 集成到 CI/CD
+   - 自动化基准测试
+   - 监控性能趋势
+
+### 工具选择建议
+
+| 场景             | 推荐工具    | 备选工具         |
+| :--- | :--- | :--- || **CPU 热点分析** | flamegraph  | perf, pprof      |
+| **内存泄漏检测** | Valgrind    | AddressSanitizer |
+| **锁竞争分析**   | helgrind    | ThreadSanitizer  |
+| **基准测试**     | Criterion   | cargo-bench      |
+| **代码大小分析** | cargo-bloat | bloaty           |
+
+---
+
+## 🔗 相关资源
+
+### 核心文档
+
+- [主索引导航](../tier_01_foundations/02_navigation.md)
+- [高级并发模式](01_advanced_concurrency_patterns.md)
+- [系统编程优化](02_systems_programming_optimization.md)
+
+### 外部资源
+
+- [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
+- [Criterion.rs Documentation](https://bheisler.github.io/criterion.rs/book/)
+- [flamegraph.rs](https://github.com/flamegraph-rs/flamegraph)
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

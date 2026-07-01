@@ -40,7 +40,6 @@ let old_closure = |s: String| async move {
 };
 // 问题：s 被 move 进 Future，调用时所有权转移
 ```
-
 ### 1.2 三大痛点
 
 | 痛点 | 说明 | 影响 |
@@ -65,7 +64,6 @@ let new_closure = async |s: &str| {
 };
 // 优势：s 被借用而非 move，生命周期推断更精确
 ```
-
 ### 2.2 AsyncFn trait family
 
 ```rust
@@ -79,7 +77,6 @@ pub trait AsyncFn<Args> {
 pub trait AsyncFnMut<Args> { /* ... */ }
 pub trait AsyncFnOnce<Args> { /* ... */ }
 ```
-
 ### 2.3 核心优势
 
 ```rust
@@ -96,7 +93,6 @@ async fn native_async(x: i32) -> i32 { x * 2 }
 // 3. 与迭代器适配器结合
 // items.filter(async |x| x.is_valid().await)
 ```
-
 ---
 
 ## 三、应用场景
@@ -110,7 +106,6 @@ async fn filter_valid(users: Vec<User>) -> Vec<User> {
         .collect()
 }
 ```
-
 ### 3.2 中间件链
 
 ```rust
@@ -124,7 +119,6 @@ where
     resp
 }
 ```
-
 ### 3.3 事件处理
 
 ```rust
@@ -133,7 +127,6 @@ let on_click = async |event: ClickEvent| {
     update_ui(data).await;
 };
 ```
-
 ---
 
 ## 四、限制与反例
@@ -146,7 +139,6 @@ fn make_dyn() -> Box<dyn AsyncFn(i32) -> bool> {
     Box::new(async |x| x > 0)
 }
 ```
-
 **原因**: `AsyncFn` 有关联类型 `CallRefFuture`，vtable 无法表示。
 
 **解决**: 使用泛型或 `impl AsyncFn`。
@@ -162,7 +154,6 @@ fn old_style(x: i32) -> impl Future<Output = bool> {
 
 // 可能不直接兼容，需要显式转换
 ```
-
 ### ❌ Send bound 仍需要 RTN
 
 ```rust
@@ -175,7 +166,6 @@ where
     tokio::spawn(async move { f.async_call((req,)).await });
 }
 ```
-
 **解决**: 等待 RTN (Return Type Notation) 稳定。
 
 ---
@@ -192,7 +182,6 @@ where
 │           └── 否 → |x| async move {} (stable)
 └── 不需要回调 → 直接 async fn
 ```
-
 ---
 
 ## 六、权威来源

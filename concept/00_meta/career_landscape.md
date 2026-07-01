@@ -92,7 +92,6 @@ AI/ML 推理         ████                   7%
 年增长率: 35–45%（2024–2026）
 对比: Go 岗位增长 18%，C++ 岗位增长 5%
 ```
-
 > **增长驱动因素**: (1) Linux 内核 Rust 支持成熟；(2) 加密货币市场回暖；(3) 云厂商（AWS/Azure/GCP）核心服务采用 Rust；(4) 安全合规要求提升。[来源: [GitHub Octoverse 2025](https://octoverse.github.com/)]
 
 ---
@@ -141,7 +140,6 @@ Rust 岗位远程工作比例（2025–2026）:
 结论: Rust 岗位的远程友好度显著高于行业平均
 原因: 候选人稀缺 → 公司更愿意放宽地理限制
 ```
-
 > **来源**: [Stack Overflow Remote Work Report 2025](https://survey.stackoverflow.com/)
 
 ---

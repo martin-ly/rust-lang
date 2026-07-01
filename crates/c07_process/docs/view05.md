@@ -88,7 +88,6 @@ let mut cmd = Command::new("program_name")
 // 等待子进程完成并获取退出状态
 let status = cmd.wait().expect("Failed to wait for process");
 ```
-
 从实现角度，Rust的进程API是对操作系统进程管理功能的安全封装。`std::process::Command`提供了流畅的构建器模式接口，而`Child`代表正在运行的子进程实例。
 
 **定理 2.2.1 (资源安全性)** 在Rust的进程模型中，若P是一个`Child`实例，则当P的所有者离开作用域时，操作系统资源（如文件描述符、内存）会被确定性释放。
@@ -148,7 +147,6 @@ drop(stdin); // 关闭写入端，发送EOF
 let mut output = String::new();
 stdout.read_to_string(&mut output).expect("Failed to read from stdout");
 ```
-
 **定理 3.2.1 (管道完整性)** 在管道通信中，若发送进程写入n字节且接收进程能够读取，则接收进程必然能读取到全部n字节，顺序不变。
 
 管道通信是单向的，数据按FIFO（先进先出）原则流动，确保了消息顺序的完整性。
@@ -175,7 +173,6 @@ shmem.as_slice_mut()[0..4].copy_from_slice(&[1, 2, 3, 4]);
 
 // 其他进程可以通过相同的标识符访问该内存段
 ```
-
 **定理 3.3.1 (共享内存一致性)** 在没有同步机制的情况下，不能保证多个进程对共享内存的操作遵循任何特定顺序。
 
 这突出了共享内存的主要挑战：需要显式同步机制确保一致性。
@@ -207,7 +204,6 @@ let (tx, rx) = server.accept().expect("Failed to accept connection");
 tx.send(message).expect("Failed to send message");
 let received = rx.recv().expect("Failed to receive message");
 ```
-
 **定理 3.4.1 (消息传递可靠性)** 在可靠通道上，发送者发送的消息m要么被完整接收，要么完全不接收。
 
 消息传递与共享内存相比，具有更清晰的所有权语义和更简单的同步模型。
@@ -237,7 +233,6 @@ let encoded: Vec<u8> = bincode::serialize(&msg).expect("Serialization failed");
 // 反序列化
 let decoded: Message = bincode::deserialize(&encoded).expect("Deserialization failed");
 ```
-
 **定理 3.5.1 (序列化一致性)** 对于任意可序列化的值v，若D是反序列化函数，S是序列化函数，则D(S(v)) = v。
 
 序列化框架的选择影响IPC的效率、兼容性和表达能力。
@@ -282,7 +277,6 @@ if let Ok(mut value) = counter.try_lock() {
     *value += 1;
 }
 ```
-
 **定理 4.2.1 (互斥保证)** 若资源R由互斥锁μ保护，则任何时刻最多有一个线程可以访问R。
 
 **证明：** 假设在时刻t，线程T₁和T₂同时访问R。要访问R，线程必须先获取μ的锁。由于μ是二元的，若T₁持有锁，则μ处于锁定状态，T₂无法同时获取锁。这与假设矛盾。因此，任何时刻最多有一个线程可以访问R。
@@ -319,7 +313,6 @@ let data = RwLock::new(vec![1, 2, 3]);
     values.push(4);
 } // 写锁在此释放
 ```
-
 **定理 4.3.1 (读写锁性质)** 读写锁满足以下性质：
 
 1. 多个读取操作可以并发执行
@@ -355,7 +348,6 @@ let mut ready = lock.lock().unwrap();
 *ready = true;
 cvar.notify_all(); // 或 cvar.notify_one() 只唤醒一个等待线程
 ```
-
 **定理 4.4.1 (条件变量正确性)** 若一组线程使用条件变量C等待条件P，则当P为真且通过C.notify_all()通知时，所有等待线程最终会被唤醒。
 
 **补充：** 条件变量通常与互斥锁配合使用，形成"监视器"模式，确保条件检查和更新的原子性。
@@ -388,7 +380,6 @@ for i in 0..3 {
     });
 }
 ```
-
 **定理 4.5.1 (屏障同步)** 若n个线程使用大小为n的屏障B，则任何通过B.wait()后执行的代码，只有在所有n个线程都调用B.wait()后才会执行。
 
 **定义 4.5.2 (信号量)** 信号量是一个整数计数器S，支持P(获取)和V(释放)操作，满足S ≥ 0的不变量。
@@ -406,7 +397,6 @@ let permit = semaphore.acquire().await.unwrap();
 // 使用受限资源
 drop(permit); // 释放许可
 ```
-
 **定理 4.5.2 (信号量不变量)** 对于初始值为n的信号量S，在任何时刻，已获取但未释放的许可数量不超过n。
 
 信号量常用于限制对资源的并发访问数量，如连接池、线程池等。
@@ -437,7 +427,6 @@ let value = flag.load(Ordering::SeqCst);
 let counter = AtomicUsize::new(0);
 let previous = counter.fetch_add(1, Ordering::SeqCst);
 ```
-
 **定理 5.1.1 (原子操作可见性)** 若线程T₁执行原子写入W，线程T₂执行原子读取R，且W在R之前完成，则T₂通过R可观察到W的结果。
 
 原子操作的形式化语义依赖于内存序模型，不同的Ordering参数提供不同的保证。
@@ -466,7 +455,6 @@ B = atomic.load(Acquire);
 if B observes value written by A then
     A happens-before B
 ```
-
 ### 5.3 内存屏障的理论与实践
 
 内存屏障强制执行特定的内存操作顺序：
@@ -486,7 +474,6 @@ fence(Ordering::Release);
 // 之前的Release操作在此可见
 fence(Ordering::Acquire);
 ```
-
 **定理 5.3.1 (内存屏障效果)** Release屏障确保其之前的所有内存访问在屏障之前完成；
 Acquire屏障确保其之后的所有内存访问在屏障之后开始。
 
@@ -535,7 +522,6 @@ struct UnsafeData {
 unsafe impl Send for UnsafeData {}
 unsafe impl Sync for UnsafeData {}
 ```
-
 **定理 6.3.1 (标记trait安全性)** 不正确地手动实现Send或Sync可能破坏Rust的并发安全保证，因此需要unsafe标记。
 
 某些类型有意不实现Send或Sync，如`Rc<T>`、`RefCell<T>`，以保持设计清晰和安全保证。
@@ -567,7 +553,6 @@ for received in rx {
     println!("Got: {}", received);
 }
 ```
-
 **定理 7.1.1 (通道消息顺序)** 在单生产者单消费者通道中，消息按发送顺序被接收。
 
 **定理 7.1.2 (通道消息完整性)** 若消息m通过通道从线程T₁发送到T₂，则T₂接收到的m与T₁发送的完全相同。
@@ -605,7 +590,6 @@ thread::spawn(move || {
     values.push(4);
 });
 ```
-
 **定理 7.2.1 (读者-写者公平性)** 不同读写锁实现可能偏好读者或写者，或提供平等机会，影响吞吐量和延迟特性。
 
 读者-写者模式适用于读操作远多于写操作的场景，如缓存、配置数据等。
@@ -638,7 +622,6 @@ impl LockFreeCounter {
     }
 }
 ```
-
 **定理 7.3.1 (无锁正确性)** 正确实现的无锁算法满足线性化(linearizability)，即并发操作可等价于某种串行操作顺序。
 
 **定理 7.3.2 (无锁无等待)** 无等待(wait-free)算法保证所有线程在有限步骤内完成操作，无论其他线程的调度情况。
@@ -664,7 +647,6 @@ let output = Command::new("echo")
     .output()
     .expect("Failed to execute command");
 ```
-
 **定理 8.1.1 (抽象层正确性)** 对于给定操作O，不同平台上其抽象实现A(O)应保持相同的语义和可观察行为。
 
 在Rust中，这种抽象通常通过条件编译和特定平台模块实现：
@@ -680,7 +662,6 @@ mod windows {
     // Windows特定实现
 }
 ```
-
 ### 8.2 平台特定优化与通用接口
 
 不同平台提供的同步原语有性能和功能差异：
@@ -697,7 +678,6 @@ use std::sync::Mutex;
 // 在Windows上可能使用SRWLock或CRITICAL_SECTION
 let mutex = Mutex::new(0);
 ```
-
 **定理 8.2.1 (优化与兼容性)** 平台特定优化不应破坏通用接口的语义保证，保持抽象层的正确性。
 
 某些特性可能只在特定平台可用，Rust通过特性检测和条件编译处理这种情况。
@@ -740,7 +720,6 @@ fn concurrent_increment_test() {
     });
 }
 ```
-
 ### 9.2 类型系统的形式化保证
 
 Rust的类型系统提供了静态并发安全保证：
@@ -754,7 +733,6 @@ Rust的类型系统提供了静态并发安全保证：
 ```math
 ∀P. (is_safe_rust(P) ⇒ ¬has_data_race(P) ∧ ¬has_dangling_ref(P))
 ```
-
 这种保证依赖于Rust的所有权系统和Send/Sync特性的正确性。
 
 ### 9.3 Rust并发安全性的形式化证明
@@ -926,7 +904,6 @@ Rust进程与同步机制
         ├── 借用检查规则
         └── RustBelt验证
 ```
-
 这个思维导图提供了Rust进程与同步机制的概念框架，
 
 从理论形式化定义到实际实现细节，再到验证技术，全面展现了这一主题的关键方面

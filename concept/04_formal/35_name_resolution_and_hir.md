@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: Name Resolution · AST · HIR · THIR · Namespace · Rib · `DefId` · `HirId` · `rustc_resolve` — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Rustc 名称解析与 HIR
@@ -62,7 +61,6 @@
   → THIR（Typed HIR，带类型 HIR）
   → MIR（Mid-level IR，中层中间表示）
 ```
-
 > **关键洞察**: AST 接近源码；HIR 已做部分解糖（如 `for` 循环变成 `loop`），但仍保留模块（Module）/函数/impl 等结构；MIR 则是控制流图，供借用（Borrowing）检查和优化使用。
 >
 > [来源: Rustc Dev Guide — The HIR](https://rustc-dev-guide.rust-lang.org/hir.html)
@@ -91,7 +89,6 @@ let v: Vec<i32> = Vec::new();
 //     ^^^        ^^^
 //     类型名      值/函数名
 ```
-
 > **定理**: 在第二阶段，每个名字只需要尝试解析一次，因为 AST 已经完整，不会再新增名字。
 > **证明**: 宏展开已完成，源码结构冻结，`rustc_resolve::late` 可以安全地自顶向下遍历。
 >
@@ -117,7 +114,6 @@ Rust 中不同类型的名字可以同名，因为它们处于不同命名空间
 type x = u32; // 类型命名空间
 let x: x = 1; // 值 x 与类型 x 不冲突
 ```
-
 ### 3.2 Rib（作用域抽象）
 
 `rustc_resolve` 用 **Rib** 表示一个作用域。每当可见名字集合可能变化时，就压入一个新的 Rib：
@@ -138,7 +134,6 @@ fn outer() {
     }
 }
 ```
-
 > **注意**: 嵌套函数（非闭包（Closures））比较特殊——内层函数不能访问外层函数的局部变量和参数，即使按普通作用域规则应该可见。
 >
 > [来源: Rustc Dev Guide — Name Resolution — Scopes and ribs](https://rustc-dev-guide.rust-lang.org/name-resolution.html#scopes-and-ribs)
@@ -166,13 +161,11 @@ Lowering 把 AST 转换为 HIR，主要做两件事：
 ```rust
 fn foo(x: &i32) -> &i32 { x }
 ```
-
 在 HIR 中，省略的生命周期被显式补充：
 
 ```rust,ignore
 fn foo<'a>(x: &'a i32) -> &'a i32 { x }
 ```
-
 ---
 
 ## 五、HIR 中的关键标识符
@@ -206,7 +199,6 @@ cargo rustc -- -Z unpretty=hir
 # 查看 HIR 树结构（更详细）
 cargo rustc -- -Z unpretty=hir-tree
 ```
-
 > ⚠️ 这些选项需要 nightly 工具链。
 
 ---
@@ -226,7 +218,6 @@ graph TD
     style LATE fill:#c8e6c9
     style LATE2 fill:#c8e6c9
 ```
-
 ### 7.2 边界极限
 
 - **Items 可以前向引用**: 模块（Module）级 item 即使在使用之后才定义也能被解析，因此每个块需要先扫描 item 再解析体。

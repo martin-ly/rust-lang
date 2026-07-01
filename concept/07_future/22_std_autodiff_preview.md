@@ -52,7 +52,6 @@ Burn:   自定义 ADBackend trait + 宏生成 backward 图
 Candle: 手动实现 backward 操作（每个 op 需写 grad fn）
 tch-rs: 绑定 PyTorch Autograd（C++ 运行时）
 ```
-
 **问题**:
 
 1. **碎片化**: 每个框架有自己的 AD 抽象，模型无法跨框架
@@ -96,7 +95,6 @@ fn main() {
     println!("loss = {loss}, ∇params = {grads:?}");
 }
 ```
-
 ### 2.2 前向模式 vs 反向模式
 
 | 模式 | 适用场景 | 内存复杂度 | 计算复杂度 |
@@ -115,7 +113,6 @@ fn f(x: f64) -> f64 { x.sin() }
 fn g(x: f64, y: f64) -> f64 { x * y + x.powi(2) }
 // 生成: g.grad(x, y) -> (f64, (f64, f64)) = (value, (∂g/∂x, ∂g/∂y))
 ```
-
 ### 2.3 与现有生态的对比
 
 ```text
@@ -137,7 +134,6 @@ fn g(x: f64, y: f64) -> f64 { x * y + x.powi(2) }
 │  · 目标: 任意纯函数自动可微 · 支持自定义类型和 control flow    │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 三、技术挑战与状态
@@ -163,21 +159,18 @@ fn g(x: f64, y: f64) -> f64 { x * y + x.powi(2) }
    }
    // 编译器需生成: 记录分支选择，反向时沿相同分支传播
    ```
-
 2. **自定义类型的可微性**
 
    ```rust,ignore
    struct Complex { re: f64, im: f64 }
    // 需 impl Differentiable for Complex，或编译器自动推导
    ```
-
 3. **与泛型（Generics）和 Trait 的集成**
 
    ```rust,ignore
    fn dot<T: Mul<Output=T> + Add<Output=T>>(a: &[T], b: &[T]) -> T { ... }
    // #[reverse] dot 需 T 也支持梯度运算
    ```
-
 4. **内存管理（反向模式）**
    - 反向模式需保存前向计算的中间值（activations）
    - 与 Rust 的所有权（Ownership）系统交互：谁拥有这些中间值？何时 drop？
@@ -205,7 +198,6 @@ std::autodiff 适合所有 Rust 数值计算?
     └─> 需要与 Python 生态互通?
         └─> 是 → ⚠️ 需绑定层（如 PyO3），语言级 AD 优势减弱
 ```
-
 ### 4.2 边界极限
 
 - **不可微操作**: `println!`、`File::open`、随机数生成（非种子化）等副作用操作无法自动微分

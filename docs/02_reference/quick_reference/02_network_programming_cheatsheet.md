@@ -94,7 +94,6 @@ let response = client
     .send()
     .await?;
 ```
-
 ### TCP 服务器 {#tcp-服务器}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -124,7 +123,6 @@ loop {
     });
 }
 ```
-
 ---
 
 ## 📋 常用 API {#常用-api}
@@ -182,7 +180,6 @@ if let Some(msg) = ws.recv().await? {
     }
 }
 ```
-
 ### DNS 解析 {#dns-解析}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -206,7 +203,6 @@ for ip in ips {
     println!("IPv6: {}", ip);
 }
 ```
-
 ---
 
 ## 🔧 配置选项 {#配置选项}
@@ -226,7 +222,6 @@ let client = HttpClient::builder()
     .user_agent("MyApp/1.0")
     .build()?;
 ```
-
 ### TCP 服务器配置 {#tcp-服务器配置}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -237,7 +232,6 @@ let listener = TcpListener::bind("127.0.0.1:8080")
     .with_keepalive(Duration::from_secs(60))
     .await?;
 ```
-
 ---
 
 ## ⚡ 异步模式 {#异步模式}
@@ -263,7 +257,6 @@ let futures = urls.into_iter().map(|url| {
 
 let results = future::join_all(futures).await;
 ```
-
 ### 流式处理 {#流式处理}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -278,7 +271,6 @@ while let Some(chunk) = stream.next().await {
     println!("Received chunk: {} bytes", chunk.len());
 }
 ```
-
 ---
 
 ## 🐛 错误处理 {#错误处理}
@@ -301,7 +293,6 @@ match client.get(url).await {
     Err(e) => println!("Other error: {}", e),
 }
 ```
-
 ---
 
 ## 🔒 安全特性 {#安全特性}
@@ -318,7 +309,6 @@ let client = HttpClient::builder()
     .danger_accept_invalid_certs(false)  // 生产环境设为 false
     .build()?;
 ```
-
 ### 认证 {#认证}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -338,7 +328,6 @@ let response = client
     .send()
     .await?;
 ```
-
 ---
 
 ## 📊 性能优化 {#性能优化}
@@ -355,7 +344,6 @@ let client = HttpClient::builder()
     .pool_idle_timeout(Duration::from_secs(90))
     .build()?;
 ```
-
 ### 压缩 {#压缩}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -367,7 +355,6 @@ let response = client
     .send()
     .await?;
 ```
-
 ---
 
 ## 🚫 反例速查 {#反例速查}
@@ -383,7 +370,6 @@ let response = client
 ```rust,ignore
 let stream = TcpStream::connect("127.0.0.1:8080").unwrap();  // ❌ 失败即 panic
 ```
-
 **原因**: 网络不可靠，应处理连接失败。
 
 **修正**:
@@ -391,7 +377,6 @@ let stream = TcpStream::connect("127.0.0.1:8080").unwrap();  // ❌ 失败即 pa
 ```rust,ignore
 let stream = TcpStream::connect("127.0.0.1:8080")?;
 ```
-
 ---
 
 ### 反例 2: 未设置超时导致无限阻塞 {#反例-2-未设置超时导致无限阻塞}
@@ -404,7 +389,6 @@ let stream = TcpStream::connect("127.0.0.1:8080")?;
 let mut buf = [0u8; 1024];
 stream.read(&mut buf);  // ❌ 可能永久阻塞
 ```
-
 **原因**: 对方不响应时 read 会一直等待。
 
 **修正**: 使用 `set_read_timeout` 或 `tokio::time::timeout`。
@@ -474,7 +458,6 @@ async fn create_user(client: &Client, name: &str, email: &str) -> Result<UserRes
     Ok(response)
 }
 ```
-
 ### 场景 2: 实时聊天服务器 {#场景-2-实时聊天服务器}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -518,7 +501,6 @@ async fn chat_server() -> anyhow::Result<()> {
     Ok(())
 }
 ```
-
 ### 场景 3: 高性能代理服务器 {#场景-3-高性能代理服务器}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -549,7 +531,6 @@ async fn proxy_server() -> io::Result<()> {
     Ok(())
 }
 ```
-
 ---
 
 ## 📐 形式化方法链接 {#形式化方法链接}
@@ -593,9 +574,9 @@ async fn proxy_server() -> io::Result<()> {
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [完整文档](../../../crates/c10_networks/README.md)
-- [HTTP 指南](../../../crates/c10_networks/docs/tier_02_guides/02_HTTP客户端开发.md)
-- [TCP/UDP 指南](../../../crates/c10_networks/docs/tier_02_guides/04_TCP_UDP编程.md)
-- [WebSocket 指南](../../../crates/c10_networks/docs/tier_02_guides/03_WebSocket实时通信.md)
+- [HTTP 指南](../../../crates/c10_networks/docs/tier_02_guides/02_http_client_development.md)
+- [TCP/UDP 指南](../../../crates/c10_networks/docs/tier_02_guides/04_tcp_udp_programming.md)
+- [WebSocket 指南](../../../crates/c10_networks/docs/tier_02_guides/03_websocket_realtime_communication.md)
 - [形式化方法研究](../../../archive/research_notes_2026_06_25/formal_methods/README.md)
 
 ### 相关速查卡 {#相关速查卡}
@@ -651,7 +632,6 @@ pub fn get_config() -> Option<&'static Config> {
 let phi = f64::consts::GOLDEN_RATIO;
 let gamma = f64::consts::EULER_GAMMA;
 ```
-
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
@@ -682,7 +662,6 @@ pub fn process_request(req: Request) -> ControlFlow<Response, Request> {
     ControlFlow::Continue(req)
 }
 ```
-
 ### LazyLock 在连接池管理中的应用 {#lazylock-在连接池管理中的应用}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -702,7 +681,6 @@ pub fn get_connection() -> Option<Connection> {
     LazyLock::get(&CONNECTION_POOL)?.get()
 }
 ```
-
 ### 性能提升总结 {#性能提升总结}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**

@@ -11,7 +11,6 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
-
 > **后置概念**: N/A
 ---
 
@@ -42,7 +41,6 @@ serde = "^1.0"
 tokio = "~1.35"
 regex = "=1.10.2"
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -76,7 +74,6 @@ cargo check
 cargo clippy -- -D warnings
 cargo test --all-targets
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -115,7 +112,6 @@ resolver = "3"
 serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "1.35", default-features = false }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -137,7 +133,6 @@ tokio = { version = "1.35", default-features = false }
 serde = { workspace = true }
 tokio = { workspace = true, features = ["rt-multi-thread"] }
 ```
-
 **resolver = "3" 的改进**：
 
 - 更积极的特性统一（feature unification）
@@ -162,7 +157,6 @@ fn main() {
     }
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -178,7 +172,6 @@ fn main() {
     }
 }
 ```
-
 **Clippy lint 类别**：
 
 | 类别 | 前缀 | 说明 |
@@ -199,7 +192,6 @@ fn main() {
 #![warn(clippy::pedantic)]        // 启用 pedantic 类别
 #![deny(clippy::correctness)]     // 将 correctness 提升为错误
 ```
-
 **知识点**：Clippy 拥有 600+ lint，是 Rust 代码质量的第一道防线。`cargo clippy --fix` 可自动修复部分警告。[→ Clippy 详解](01_toolchain.md)
 
 </details>
@@ -221,7 +213,6 @@ fn main() {
     println!("{x}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -232,7 +223,6 @@ fn main() {
 ```
 error: Undefined Behavior: attempting to write to ... but tag ... does not have write permission
 ```
-
 **解析**：
 
 - `let ptr1 = &mut x as *mut u32`：创建独占引用（Reference） `&mut x`，再转换为原始指针（Raw Pointer）
@@ -256,7 +246,6 @@ fn main() {
     println!("{x}");
 }
 ```
-
 **Miri 的作用**：
 
 - 检测**未定义行为**（UB），而非一般性 bug
@@ -283,7 +272,6 @@ linker = "rust-lld.exe"
 [registries.crates-io]
 protocol = "sparse"
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -306,7 +294,6 @@ lto = true          # 链接时优化
 opt-level = 3       # 最高优化级别
 strip = true        # 移除 debug 符号
 ```
-
 **知识点**：`.cargo/config.toml` 是项目级构建配置，`.cargo/config.toml`（无点）是用户级全局配置。合理配置可显著改善编译性能和产物体积。[→ Cargo 工具链详解](01_toolchain.md)
 
 </details>
@@ -322,7 +309,6 @@ cargo doc --open
 cargo doc --no-deps
 cargo doc --document-private-items
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -348,7 +334,6 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ```
-
 `cargo test --doc` 会编译并运行文档中的代码示例。
 
 **常用 doc 属性**：
@@ -360,7 +345,6 @@ pub fn add(a: i32, b: i32) -> i32 {
 /// # Examples
 /// [`ModuleName`](crate::module::ModuleName) — 内部链接
 ```
-
 **知识点**：文档测试是 Rust 独特的质量保证机制——确保文档中的示例代码始终可编译、可通过。[→ 工具链详解](01_toolchain.md)
 
 </details>
@@ -374,7 +358,6 @@ cargo login
 cargo publish --dry-run
 cargo publish
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -422,7 +405,6 @@ lto = "fat"
 codegen-units = 1
 panic = "abort"
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -462,7 +444,6 @@ RUST_BACKTRACE=1 cargo run
  cargo audit
  cargo outdated
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 

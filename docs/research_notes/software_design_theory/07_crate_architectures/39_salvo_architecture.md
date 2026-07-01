@@ -1,3 +1,9 @@
+> **Canonical 说明**: 本文件专注 **Salvo Web 框架的 Router / Handler / FlowCtrl 中间件架构**。
+>
+> 若只需要使用指南与生态定位，请优先参考：
+> - [Web 框架生态](../../../../concept/06_ecosystem/27_web_frameworks.md)
+>
+> 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
@@ -59,7 +65,6 @@ async fn main() {
     Server::new(acceptor).serve(router).await;
 }
 ```
-
 > [来源: [salvo examples](https://github.com/salvo-rs/salvo/tree/main/examples)]
 
 ---
@@ -78,7 +83,6 @@ graph LR
     METHOD --> HANDLER[#[handler] async fn]
     HANDLER --> |Response| HTTP
 ```
-
 Salvo 的请求生命周期分为四层：
 
 1. **网络层**：`TcpListener` 接受连接，Hyper 负责 HTTP/1.1 与 HTTP/2 解析。
@@ -102,7 +106,6 @@ async fn create_user(
     res.render(Json(user));
 }
 ```
-
 > [来源: [salvo::handler 文档](https://docs.rs/salvo/latest/salvo/handler/index.html)]
 
 被修饰的函数可以按需声明 `&mut Request`、`&mut Response`、`&mut FlowCtrl`、`Depot` 等参数，宏在编译期生成对应的 trait 调用，无动态分发开销。
@@ -120,7 +123,6 @@ async fn greet(req: &mut Request) -> String {
 
 let router = Router::with_path("greet/<name>").get(greet);
 ```
-
 > [来源: [salvo::extract 文档](https://docs.rs/salvo/latest/salvo/extract/index.html)]
 
 对于 JSON/Query/Form，Salvo 提供 `req.parse_json::<T>()`、`req.query::<T>(name)` 等便捷方法，将 HTTP 协议的动态性限制在类型转换层。
@@ -138,7 +140,6 @@ async fn logger(req: &mut Request, depot: &mut Depot, res: &mut Response, ctrl: 
 
 let router = Router::new().hoop(logger).get(hello);
 ```
-
 > [来源: [salvo::routing::Router::hoop](https://docs.rs/salvo/latest/salvo/routing/struct.Router.html#method.hoop)]
 
 这种设计消除了中间件与 handler 之间的抽象鸿沟，代价是 `FlowCtrl` 的调用顺序需要开发者显式管理。

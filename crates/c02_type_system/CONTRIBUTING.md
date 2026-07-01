@@ -96,7 +96,6 @@
 4. 测试验证 → 5. 提交 PR → 6. 代码审查 →
 7. 合并到主分支
 ```
-
 ---
 
 ## 🎯 贡献类型
@@ -158,7 +157,6 @@
 # 版本控制
 - Git 2.x+
 ```
-
 ### 安装 Rust
 
 ```bash
@@ -168,7 +166,6 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # Windows
 # 访问 https://rustup.rs/ 下载安装程序
 ```
-
 ### 克隆项目
 
 ```bash
@@ -179,7 +176,6 @@ cd rust-lang/crates/c02_type_system
 # 添加上游仓库
 git remote add upstream https://github.com/ORIGINAL_OWNER/rust-lang.git
 ```
-
 ### 安装依赖
 
 ```bash
@@ -192,7 +188,6 @@ cargo test
 # 检查代码
 cargo clippy
 ```
-
 ---
 
 ## 📖 文档贡献
@@ -213,7 +208,6 @@ docs/
 ├── knowledge_system/   # 知识体系 (28文档, 19,300行)
 └── theory_enhanced/    # 理论增强 (5文档, 2,631行)
 ```
-
 ### 文档编写标准
 
 #### 文档格式
@@ -246,14 +240,12 @@ docs/
     ### 小节1.1
 
     内容...
-
     ```rust
     // 代码示例
     fn example() {
         // 代码注释要清晰
     }
     ```
-
     ---
 
     ## 📚 参考资源
@@ -266,7 +258,6 @@ docs/
     **最后更新**: YYYY-MM-DD
     **维护者**: [姓名]
 ````
-
 #### 代码示例标准
 
 ```rust
@@ -285,7 +276,6 @@ fn good_example<T: Display>(value: T) {
 // ❌ 避免的情况：不完整、无注释、过于复杂
 fn bad_example(x) { x + 1 }  // 类型不明确，缺少说明
 ```
-
 #### 技术术语规范
 
 - **一致性**: 使用统一的技术术语
@@ -299,7 +289,6 @@ fn bad_example(x) { x + 1 }  // 类型不明确，缺少说明
 
 在后续使用时可以只用中文："泛型系统..."
 ```
-
 ### 文档质量检查
 
 提交前请确保：
@@ -343,7 +332,6 @@ tests/
 ├── generics_tests.rs       # 泛型测试
 └── ... (其他测试)
 ```
-
 ### 代码风格
 
 我们遵循 Rust 官方编码规范:
@@ -358,7 +346,6 @@ cargo clippy -- -D warnings
 # 运行测试
 cargo test
 ```
-
 ### 代码示例要求
 
 #### 完整性
@@ -380,7 +367,6 @@ fn print_value(value) {
     println!("{}", value);
 }
 ```
-
 #### 可测试性
 
 ````rust
@@ -402,7 +388,6 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ````
-
 #### 注释清晰
 
 ```rust
@@ -431,7 +416,6 @@ fn process_data<T>(data: T) -> Result<T, Error> {
     Ok(data)
 }
 ```
-
 ### 性能考虑
 
 ```rust
@@ -450,7 +434,6 @@ fn sum_squares(numbers: &[i32]) -> i32 {
     squares.iter().sum()
 }
 ```
-
 ---
 
 ## 📝 示例贡献
@@ -509,7 +492,6 @@ mod tests {
     }
 }
 ````
-
 ---
 
 ## ✅ 质量标准
@@ -551,7 +533,6 @@ mod tests {
 
 [可选的脚注]
 ```
-
 #### 类型 (Type)
 
 - **feat**: 新功能
@@ -593,7 +574,6 @@ git commit -m "perf(examples): 优化大型数据结构示例性能"
 # 文档改进
 git commit -m "docs(theory): 改进范畴论章节的表达"
 ```
-
 ### 分支命名
 
 ```bash
@@ -609,7 +589,6 @@ docs/improve-trait-guide
 # 重构
 refactor/reorganize-examples
 ```
-
 ### Pull Request 标题
 
 ```bash
@@ -621,7 +600,6 @@ refactor/reorganize-examples
 [Fix] 修正生命周期示例中的错误
 [Feat] 新增类型推断实战示例
 ```
-
 ---
 
 ## 🔍 审查流程
@@ -661,7 +639,6 @@ refactor/reorganize-examples
    ↓
 7. 自动部署 (如适用)
 ```
-
 ### 审查时间
 
 - **简单PR**: 1-2个工作日
@@ -756,13 +733,11 @@ refactor/reorganize-examples
     ```rust
     // 相关代码片段
     ```
-
     **已尝试的解决方法**:
 
     - 尝试了...
     - 查阅了...
 ````
-
 ### 常见问题
 
 **Q: 我是新手，可以贡献吗？**

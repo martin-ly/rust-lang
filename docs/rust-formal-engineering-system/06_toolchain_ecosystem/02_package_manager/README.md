@@ -61,7 +61,6 @@ tokio-test = "0.4"
 [build-dependencies]
 cc = "1.0"
 ```
-
 ### 工作空间 {#工作空间-1}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -84,7 +83,6 @@ version = "0.1.0"
 edition = "2024"
 authors = ["Team"]
 ```
-
 ```toml
 # crate-a/Cargo.toml {#crate-acargotoml}
 [package]
@@ -96,7 +94,6 @@ authors.workspace = true
 [dependencies]
 serde = { workspace = true }
 ```
-
 ### 特性管理 {#特性管理}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -118,7 +115,6 @@ full = ["std", "serde", "async"]
 # 内部特性 {#内部特性}
 __internal = []
 ```
-
 ### Cargo 命令 {#cargo-命令}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -160,7 +156,6 @@ cargo build --workspace
 cargo test --workspace
 cargo publish --workspace
 ```
-
 ### 语义版本规范 {#语义版本规范}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -180,7 +175,6 @@ cargo publish --workspace
 // "=1.0.0"    精确版本
 // "*"         任何版本
 ```
-
 ### 自定义配置 {#自定义配置}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -209,7 +203,6 @@ protocol = "sparse"
 git-fetch-with-cli = true
 retry = 3
 ```
-
 ### 虚拟工作空间示例 {#虚拟工作空间示例}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -245,7 +238,6 @@ tracing = "0.1"
 core = { path = "crates/core" }
 utils = { path = "crates/utils" }
 ```
-
 ---
 
 ## 形式化方法 {#形式化方法}

@@ -40,7 +40,6 @@ opt-level = 3
 strip = "symbols"
 panic = "abort"
 ```
-
 **适用场景**: 需要优化但要求快速编译的场景
 **使用方法**: `cargo build --profile release-fast`
 
@@ -56,7 +55,6 @@ strip = true          # 完全剥离符号
 panic = "abort"
 incremental = false   # 禁用增量编译
 ```
-
 **适用场景**: 对二进制体积有严格要求的场景
 **使用方法**: `cargo build --profile size`
 
@@ -147,7 +145,6 @@ incremental = false   # 禁用增量编译
 # 清理后测试
 .\scripts\benchmark_build.ps1 -Profile release-fast -Clean
 ```
-
 ---
 
 ## Profile 对比
@@ -175,14 +172,12 @@ cargo check
 # 使用 check-fast profile 进行快速检查
 cargo check --profile check-fast
 ```
-
 ### 测试
 
 ```bash
 # 运行测试（优化级别 1，平衡速度和质量）
 cargo test
 ```
-
 ### 发布构建
 
 ```bash
@@ -195,14 +190,12 @@ cargo build --profile release-fast
 # 最小体积构建（二进制最小）
 cargo build --profile size
 ```
-
 ### 基准测试
 
 ```bash
 # 使用 bench profile 进行基准测试
 cargo bench
 ```
-
 ---
 
 ## 进一步优化建议

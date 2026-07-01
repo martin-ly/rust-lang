@@ -11,7 +11,7 @@
       - [📄 `docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md` (15,000+ 字)](#-docscomprehensive_async_knowledge_classification_2025md-15000-字)
       - [📄 `docs/COMPREHENSIVE_ASYNC_IMPLEMENTATION_SUMMARY_2025.md` (3,000+ 字)](#-docscomprehensive_async_implementation_summary_2025md-3000-字)
       - [📄 `docs/异步编程全面梳理最终报告_2025_10_06.md` (3,000+ 字)](#-docs异步编程全面梳理最终报告_2025_10_06md-3000-字)
-      - [📄 `异步编程全面梳理_README_2025_10_06.md` (2,000+ 字)](#-异步编程全面梳理_readme_2025_10_06md-2000-字)
+      - [📄 `async_programming_comprehensive_review_readme_2025_10_06.md` (2,000+ 字)](#-异步编程全面梳理_readme_2025_10_06md-2000-字)
     - [2. 核心示例文件 (2个，3,900+ 行代码)](#2-核心示例文件-2个3900-行代码)
       - [📄 `examples/reactor_pattern_comprehensive_2025.rs` (1,800+ 行)](#-examplesreactor_pattern_comprehensive_2025rs-1800-行)
       - [📄 `examples/actor_pattern_comprehensive_2025.rs` (2,100+ 行)](#-examplesactor_pattern_comprehensive_2025rs-2100-行)
@@ -85,43 +85,35 @@
    - 2个核心模式完整实现 (Reactor, Actor)
    - 3,900+ 行详细注释的代码
    - 180+ 个代码示例
-
 2. **✅ 技巧 (Techniques)** - 实用、高效、经过验证
    - 30+ 实用技巧
    - 性能优化、错误处理、资源管理
    - 所有技巧都有完整的代码实现
-
 3. **✅ 应用 (Applications)** - 真实、完整、生产级
    - 银行账户系统 (完整的 Actor 实现)
    - 事件驱动服务器 (完整的 Reactor 实现)
    - 数据处理 Pipeline (CSP 模式)
-
 4. **✅ 设计惯用法 (Design Idioms)** - 标准、清晰、易懂
    - 15+ 设计模式完整实现
    - Builder, Factory, Adapter, Observer, Strategy 等
    - 每个模式都有详细的代码示例
-
 5. **✅ 模式 (Patterns)** - 完整实现和形式化
    - Reactor 模式 (1,800+ 行)
    - Actor 模式 (2,100+ 行)
    - CSP 模式 (已有实现)
-
 6. **✅ 设计架构 (Design Architectures)** - 分层、事件驱动、微服务
    - 分层架构
    - 事件驱动架构
    - 监督树架构
    - 详细的架构分析和对比
-
 7. **✅ Reactor/Actor/CSP 关系分析** - 形式化定义、数学证明、对比分析
    - 完整的形式化定义
    - 数学模型和性质证明
    - 详细的对比分析表格
-
 8. **✅ 完善的注释和解释** - 中英文双语、详细注释、编程技巧
    - 95%+ 的注释覆盖率
    - 100% 中英文双语
    - 每个概念都有详细解释
-
 9. **✅ 结合最新版本** - Rust 1.90、Tokio 1.41+、Smol 2.0+
    - 使用最新的语言特性
    - 使用最新的框架版本
@@ -181,7 +173,6 @@
    ├── 7.2 中级路径 (3-5周)
    └── 7.3 高级路径 (5-8周)
 ```
-
 **特点**:
 
 - ✅ 完整的知识体系分类
@@ -225,7 +216,7 @@
 11. 质量保证
 12. 总结
 
-#### 📄 `异步编程全面梳理_README_2025_10_06.md` (2,000+ 字)
+#### 📄 `async_programming_comprehensive_review_readme_2025_10_06.md` (2,000+ 字)
 
 **快速入门指南**，包含：
 
@@ -278,7 +269,6 @@
 // - 性能测试: 高吞吐量场景 (10,000 事件)
 // - 单元测试 (4个测试用例)
 ```
-
 **关键特性**:
 
 - ✅ 优先级调度 (BinaryHeap 实现)
@@ -344,7 +334,6 @@
 // - 性能测试: 高并发消息处理 (1,000 操作)
 // - 单元测试 (4个测试用例)
 ```
-
 **关键特性**:
 
 - ✅ 完整的 Actor 生命周期管理
@@ -381,7 +370,6 @@ Reactor = (EventQueue, Handlers, Demultiplexer, EventLoop)
 - Demultiplexer: Events → Event   事件分离器
 - EventLoop: () → ()              事件循环
 ```
-
 #### 核心不变量
 
 1. **单线程保证**: ∀ event ∈ EventQueue, process(event) 在同一线程执行
@@ -441,18 +429,14 @@ Actor = (State, Behavior, Mailbox, Address)
 - Mailbox: Queue<Message>           消息队列
 - Address: ActorRef                 Actor 引用
 ```
-
 #### 核心原则
 
 1. **封装性 (Encapsulation)**: Actor 的状态只能通过消息修改
    - ∀ s ∈ State, s 只能被 Behavior 修改
-
 2. **位置透明 (Location Transparency)**: Actor 的位置对调用者透明
    - send(ActorRef, Message) 不关心 Actor 在哪里
-
 3. **异步通信 (Asynchronous Communication)**: 消息发送是异步的，不阻塞发送者
    - send(ref, msg) 立即返回
-
 4. **消息顺序 (Message Ordering)**: 从同一发送者到同一接收者的消息保持顺序
    - 若 msg1 先于 msg2 发送，则 msg1 先于 msg2 到达
 
@@ -463,7 +447,6 @@ Created → Started → Running → Stopping → Stopped
     ↓         ↓         ↓         ↓         ↓
   preStart  receive  receive  postStop   (终止)
 ```
-
 #### 监督策略
 
 1. **Resume**: 继续处理下一条消息
@@ -526,7 +509,6 @@ P ⊓ Q      : Choice
 ch!v       : Send value v on channel ch
 ch?x       : Receive value into x from channel ch
 ```
-
 #### 实现文件2
 
 - `examples/ultimate_async_theory_practice_2025.rs` (CSP 部分)
@@ -673,15 +655,13 @@ ch?x       : Receive value into x from channel ch
 ### 第一步: 查看快速入门指南
 
 ```bash
-cat 异步编程全面梳理_README_2025_10_06.md
+cat async_programming_comprehensive_review_readme_2025_10_06.md
 ```
-
 ### 第二步: 阅读知识分类体系
 
 ```bash
 cat docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md
 ```
-
 ### 第三步: 运行核心示例
 
 ```bash
@@ -691,13 +671,11 @@ cargo run --example reactor_pattern_comprehensive_2025
 # Actor 模式
 cargo run --example actor_pattern_comprehensive_2025
 ```
-
 ### 第四步: 查看最终报告
 
 ```bash
 cat docs/异步编程全面梳理最终报告_2025_10_06.md
 ```
-
 ### 第五步: 深入学习
 
 根据学习路径，逐步深入学习各个主题。
@@ -750,7 +728,7 @@ cat docs/异步编程全面梳理最终报告_2025_10_06.md
 
 ### 快速入门
 
-- `异步编程全面梳理_README_2025_10_06.md` - 快速入门指南
+- `async_programming_comprehensive_review_readme_2025_10_06.md` - 快速入门指南
 
 ### 核心文档
 
@@ -788,7 +766,7 @@ cat docs/异步编程全面梳理最终报告_2025_10_06.md
 
 ```bash
 # 1. 查看快速入门指南
-cat 异步编程全面梳理_README_2025_10_06.md
+cat async_programming_comprehensive_review_readme_2025_10_06.md
 
 # 2. 查看知识分类体系
 cat docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md
@@ -802,7 +780,6 @@ cargo run --example actor_pattern_comprehensive_2025
 # 5. 查看最终报告
 cat docs/异步编程全面梳理最终报告_2025_10_06.md
 ```
-
 **祝您学习愉快！Happy Learning!** 🎉
 ---
 

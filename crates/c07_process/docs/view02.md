@@ -92,7 +92,6 @@ fn run_external_command() -> io::Result<()> {
     Ok(())
 }
 ```
-
 ### 2.3 进程生命周期与交互
 
 `Command::spawn()` 成功后返回一个 `Child` 结构体，代表正在运行的子进程。
@@ -384,7 +383,6 @@ async fn wait_for_child_async(mut child: std::process::Child) -> std::io::Result
         .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))? // 处理 JoinError
 }
 ```
-
 **意义**: 确保了异步执行器线程的非阻塞性，维持了异步系统的响应能力。
 
 ### 5.3 异步原生支持
@@ -478,7 +476,6 @@ Rust 进程、通信与同步机制
     ├── 标准库策略：保守，核心功能，依赖生态扩展
     └── 范式：系统编程务实性，需结合 OS 知识
 ```
-
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

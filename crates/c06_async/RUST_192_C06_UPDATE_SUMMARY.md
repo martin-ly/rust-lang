@@ -20,15 +20,15 @@
 
 #### Tier 1 - 基础层
 
-- ✅ `docs/tier_01_foundations/01_项目概览.md`
+- ✅ `docs/tier_01_foundations/01_project_overview.md`
   - 版本: 1.90+ → 1.92.0+
   - 日期: 2025-10-22 → 2025-12-11
   - 所有版本引用已更新
-- ✅ `docs/tier_01_foundations/02_主索引导航.md`
+- ✅ `docs/tier_01_foundations/02_navigation.md`
   - 版本: 1.90+ → 1.92.0+
   - 日期: 2025-10-22 → 2025-12-11
   - 所有版本引用已更新
-- ✅ `docs/tier_01_foundations/03_术语表.md`
+- ✅ `docs/tier_01_foundations/03_glossary.md`
   - 版本: 1.90+ → 1.92.0+
   - 日期: 2025-10-22 → 2025-12-11
 - ✅ `docs/tier_01_foundations/README.md`
@@ -91,7 +91,6 @@
 ✅ cargo check --package c06_async
    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
 ```
-
 ### 版本一致性检查
 
 - ✅ 所有核心文档版本引用已统一为 1.92.0+

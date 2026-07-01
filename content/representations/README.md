@@ -13,7 +13,6 @@ content/representations/
 ├── README.md                         # 本文件
 └── knowledge_representation_matrix.md # 知识表征矩阵：Bloom × Krathwohl 双维映射
 ```
-
 ---
 
 ## 什么是知识表征

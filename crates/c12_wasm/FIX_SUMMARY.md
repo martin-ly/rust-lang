@@ -25,7 +25,6 @@ let texts = vec![
     ("long", long_text.as_str()),  // ✅ 使用持久变量
 ];
 ```
-
 #### `benches/array_processing_bench.rs`
 
 - **问题**: 找不到 `double_elements` 函数
@@ -37,7 +36,6 @@ b.iter(|| {
     black_box(&data).iter().map(|&x| x * 2).collect::<Vec<i32>>()
 });
 ```
-
 #### `benches/design_patterns_bench.rs`
 
 - **问题1**: 缺少 `SortStrategy` trait 导入
@@ -46,7 +44,6 @@ b.iter(|| {
 ```rust
 use c12_wasm::ecosystem_examples::design_patterns::strategy::SortStrategy;
 ```
-
 - **问题2**: 策略模式排序接口不匹配
 - **修复**: 修改为可变借用方式调用 `sort()`
 
@@ -61,7 +58,6 @@ b.iter(|| {
     data_clone
 });
 ```
-
 - **问题3**: 观察者模式实现不匹配
 - **修复**: 使用正确的 `EventSubject` 和 `ConsoleObserver`
 
@@ -72,17 +68,14 @@ for _ in 0..10 {
 }
 subject.notify(black_box("test event"));
 ```
-
 ### 2. 示例文件
 
 #### `examples/06_async_fetch.rs`
 
 - **问题1**: 缺少 `RequestInit` 和 `RequestMode` features
 - **修复**: 在 `Cargo.toml` 中添加相应 features
-
 - **问题2**: 使用了不存在的 `new_with_str_and_init` 方法
 - **修复**: 改用 `new_with_str()` 方法
-
 - **问题3**: 使用了已弃用的方法（`method()`, `mode()`, `body()`）
 - **修复**: 改用新的 setter 方法
 
@@ -99,12 +92,10 @@ opts.set_method("GET");
 opts.set_mode(RequestMode::Cors);
 opts.set_body(&JsValue::from_str(&body));
 ```
-
 #### `examples/07_design_patterns.rs`
 
 - **问题1**: 缺少 `js_sys` crate 导入
 - **修复**: 添加 `use js_sys;` 并在 `Cargo.toml` 中添加依赖
-
 - **问题2**: 快速排序中的借用检查错误
 - **修复**: 先计算数组长度，避免同时持有可变和不可变借用
 
@@ -116,7 +107,6 @@ Self::quick_sort_impl(&mut arr, 0, (arr.len() - 1) as isize);
 let len = arr.len();
 Self::quick_sort_impl(&mut arr, 0, (len - 1) as isize);
 ```
-
 ### 3. 配置文件
 
 #### `Cargo.toml`
@@ -134,7 +124,6 @@ Self::quick_sort_impl(&mut arr, 0, (len - 1) as isize);
 $ cargo check --all-targets
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
 ```
-
 ✅ 所有目标编译通过，无错误，无警告
 
 ### 测试验证
@@ -155,7 +144,6 @@ test wasmedge_examples::tests::test_process_with_reuse ... ok
 
 test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured
 ```
-
 ✅ 所有单元测试通过
 
 ## 📊 修复统计

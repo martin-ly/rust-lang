@@ -45,7 +45,6 @@ public:
 
 Point p{1.0, 2.0}; // 列表初始化
 ```
-
 C++ 提供丰富的构造机制：
 
 - **默认构造函数**：无参构造
@@ -61,7 +60,6 @@ C++ 提供丰富的构造机制：
 struct Point { double x, y; };
 Point p{1.0, 2.0}; // 聚合初始化
 ```
-
 C++11 起的聚合初始化让 POD/聚合类型可以用类似 C 的语法初始化。
 
 ### 2.3 三/五/零法则（Rule of Three/Five/Zero）
@@ -84,7 +82,6 @@ struct Point { x: f64, y: f64 }
 let p = Point { x: 1.0, y: 2.0 };
 let q = Point { x: 0.0, ..p }; // 结构体更新语法
 ```
-
 Rust 没有构造函数语言特性。创建对象使用结构体字面量或关联函数。
 
 ### 3.2 `new` 约定与关联函数
@@ -103,7 +100,6 @@ impl Point {
 let p = Point::new(1.0, 2.0);
 let o = Point::origin();
 ```
-
 `new` 不是关键字，只是约定。一个类型可以有多个构造关联函数。
 
 ### 3.3 `Default` trait
@@ -117,7 +113,6 @@ struct Config {
 
 let cfg = Config::default();
 ```
-
 `Default::default()` 提供零参数构造的等价物，与 C++ 默认构造函数对应。
 
 ### 3.4 `const fn` 编译期构造
@@ -135,7 +130,6 @@ fn main() {
     let _ = ORIGIN;
 }
 ```
-
 `const fn` 允许在编译期构造值，这是 C++ `constexpr` 构造函数的对应物。
 
 ---
@@ -166,7 +160,6 @@ struct Buffer {
 // 不需要写析构函数、拷贝构造函数、移动构造函数
 // Vec 的 Drop/Clone 会自动处理
 ```
-
 在 Rust 中，只要字段实现了正确的 trait，复合类型自动获得对应能力：
 
 - 所有字段 `Copy` → 整体可 `Copy`
@@ -184,7 +177,6 @@ C++ 构造函数可以形式化为**从参数到对象状态的偏函数**：
 ```text
 construct_T: Args → T ∪ ⊥
 ```
-
 异常或失败时返回 ⊥。
 
 Rust 的构造可以形式化为**结构体字段的元组构造**：
@@ -192,7 +184,6 @@ Rust 的构造可以形式化为**结构体字段的元组构造**：
 ```text
 Point::new(x, y) = Point { x, y }
 ```
-
 没有特殊的构造语义，只是普通的函数返回。
 
 > **关键洞察**：C++ 的构造函数是对象生命周期（Lifetimes）管理的特权语法；Rust 把构造降级为普通函数调用 + 结构体组合，从而让所有构造行为都受相同的类型系统规则约束。

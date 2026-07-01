@@ -109,7 +109,6 @@ Rust 原子类型 (std::sync::atomic):
   ├── Mutex: 任意数据，有锁，更通用
   └── 选择: 能原子则原子，否则锁
 ```
-
 > **认知功能**: 原子操作是**无锁并发的基础原语**——它们提供硬件级别的原子性保证，无需操作系统介入。
 > [来源: [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html)]
 
@@ -153,7 +152,6 @@ Rust 原子类型 (std::sync::atomic):
   // Release 保证 data=42 在 flag=true 之前完成
   // Acquire 保证 flag 读取后，data 的写已可见
 ```
-
 > **内存序洞察**: **内存序是并发编程中最易错的主题**——`SeqCst` 是安全的默认选择，只在性能分析证明是瓶颈时才使用更弱的序。
 > [来源: [C++ Memory Order](https://en.cppreference.com/w/cpp/atomic/memory_order)]
 
@@ -193,7 +191,6 @@ Happens-Before 关系:
   Thread B: if x.load(Relaxed) == 1 { assert!(y == 1); }
   // 可能 assert 失败！因为没有同步关系
 ```
-
 > **Happens-Before 洞察**: **Happens-Before 是理解并发可见性的核心概念**——没有它，一个线程的写对另一个线程可能永远不可见。
 > [来源: [Rust Atomics and Locks — Happens-Before](https://mara.nl/atomics/memory-ordering.html)]
 
@@ -277,7 +274,6 @@ impl SpinLock {
     }
 }
 ```
-
 > **CAS 洞察**: **Compare-And-Swap**是**无锁算法的基石**——它使多个线程可以安全地竞争更新同一内存位置。
 > [来源: [std::sync::atomic::AtomicUsize](https://doc.rust-lang.org/std/sync/atomic/type.AtomicUsize.html)]
 
@@ -318,7 +314,6 @@ impl SpinLock {
   ├── Acquire/Release: 中等，内存屏障开销
   └── SeqCst: 最慢，全局排序开销
 ```
-
 > **选择洞察**: **从 SeqCst 开始，只在性能分析证明是瓶颈时降级**——正确性优先于性能。
 > [来源: [Rust Atomics and Locks — Memory Ordering](https://marabos.nl/atomics/memory-ordering.html)]
 
@@ -395,7 +390,6 @@ impl<T> LockFreeStack<T> {
 // 注意: 此实现缺少 ABA 防护和内存回收
 // 生产代码应使用 crossbeam::epoch
 ```
-
 > **无锁洞察**: **Treiber Stack**是**最简单的无锁数据结构**——它展示了 CAS 循环的核心模式：加载、修改、尝试提交、冲突时重试。
 > [来源: [Treiber Stack Paper](https://domino.research.ibm.com/library/cyberdig.nsf/papers/58319A2ED2B17A64852570C30061D166/$File/r5116.pdf)]
 
@@ -436,7 +430,6 @@ impl<T> LockFreeStack<T> {
   → AcqRel
   → CAS 循环
 ```
-
 > **模式矩阵**: 原子操作的**核心模式**可以归纳为几类——计数器、标志、初始化和 CAS 循环覆盖了大多数应用场景。
 > [来源: [crossbeam::atomic](https://docs.rs/crossbeam/latest/crossbeam/atomic/index.html)]
 
@@ -463,7 +456,6 @@ graph TD
     style ATOMIC2 fill:#fff3e0
     style LOCK2 fill:#c8e6c9
 ```
-
 > **认知功能**: **原子适合简单场景，锁适合复杂状态，无锁算法只在极端性能需求下考虑**。
 > [来源: [Rust Atomics and Locks — When to Use](https://mara.nl/atomics/atomics.html)]
 
@@ -503,7 +495,6 @@ graph TD
 ├── 传统调试器帮助有限
 └── 缓解: loom model checker, TSan
 ```
-
 > **边界要点**: 原子编程的边界主要与**ABA**、**内存回收**、**伪共享**、**公平性**和**调试**相关。
 > [来源: [crossbeam::epoch](https://docs.rs/crossbeam/latest/crossbeam/epoch/index.html)]
 
@@ -556,7 +547,6 @@ graph TD
   ✅ 使用 loom 等工具验证
      // 或保持 SeqCst 除非证明瓶颈
 ```
-
 > **陷阱总结**: 原子操作的陷阱主要与**Relaxed 误用**、**CAS 参数**、**内存序假设**、**原子借用（Borrowing）**和**盲目优化**相关。
 > [来源: [Rust Atomics and Locks — Common Mistakes](https://marabos.nl/atomics/)]
 
@@ -573,7 +563,6 @@ fn atomic_borrow() {
     *r = 1;
 }
 ```
-
 > **修正**: 原子类型（`AtomicUsize`、`AtomicBool` 等）实现了内部可变性。必须通过 `.store()`、`.load()`、`.fetch_add()` 等原子方法访问，不能通过 `&mut`。
 
 ```rust,compile_fail
@@ -589,7 +578,6 @@ fn atomic_send() {
     }
 }
 ```
-
 > **修正**: `static mut` 需要 `unsafe` 块访问。推荐使用 `std::sync::LazyLock` 或 `once_cell` 进行线程安全的延迟初始化，而非 `static mut`。
 
 ```rust,ignore
@@ -602,7 +590,6 @@ fn atomic_ptr_deref() {
     let val = unsafe { *ptr.load(Ordering::Relaxed) };
 }
 ```
-
 > **修正**: `AtomicPtr::load` 返回 `*mut T`，解引用（Reference）需要 `unsafe` 块。编译器在此处可能给出不同错误——核心点是原子指针加载后仍需 unsafe 才能访问目标内存。
 
 ### 4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时 UB）
@@ -625,7 +612,6 @@ fn main() {
     handle.join().unwrap();
 }
 ```
-
 > **修正**: 同一内存位置的原子访问与非原子访问不能混用。C++20 / Rust 内存模型规定：如果一个线程执行原子操作，另一个线程执行非原子读写同一位置，则构成数据竞争（UB）。所有访问必须通过一致的原子 API 进行。[来源: [C++ Reference — Memory Order](https://en.cppreference.com/w/cpp/atomic/memory_order)]
 
 ### 4.5 边界测试：`Ordering::Relaxed` 导致逻辑错误（编译通过但语义错误）
@@ -660,7 +646,6 @@ fn fixed() {
     println!("{}", DATA.load(Ordering::Relaxed)); // ✅ 保证读到 42
 }
 ```
-
 > **修正**: `Relaxed` 只保证原子性（无撕裂读写），但不保证顺序一致性（Coherence）。在"标志位 + 数据"模式中，必须使用 `Release`（写标志）/ `Acquire`（读标志）建立 happens-before 关系，确保数据在标志可见前已完成写入。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ---
@@ -672,7 +657,6 @@ fn fixed() {
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust Atomics and Locks](https://marabos.nl/atomics/) | ✅ 一级 | 权威指南 |
@@ -745,7 +729,6 @@ fn main() {
     );
 }
 ```
-
 > **修正**: **ABA 问题**是无锁数据结构中的经典问题：指针值从 A → B → A，但 `compare_exchange` 无法检测中间变化。
 > `AtomicPtr` 的 `compare_exchange` 只比较地址值，不比较内容。
 > 解决方案：
@@ -780,7 +763,6 @@ fn main() {
     });
 }
 ```
-
 > **修正**: `Ordering::Relaxed` 是**最弱**的原子顺序：保证原子操作本身不撕裂，但不建立**happens-before**关系。
 > 两个线程分别 `Relaxed` store/load 同一变量，load 可能看到旧值——因为编译器/CPU 可能重排序。
 > 需要同步的场景：
@@ -806,7 +788,6 @@ fn main() {
     println!("{}", v);
 }
 ```
-
 > **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。
 
 ## 参考来源
@@ -910,14 +891,12 @@ thread::scope(|s| {
 
 // 结果可能 < 10，因为更新被覆盖！
 ```
-
 **正确的原子递增**：
 
 ```rust,ignore
 // fetch_add 是单一原子操作：读取-修改-写入不可中断
 counter.fetch_add(1, Ordering::Relaxed);  // 保证结果 = 10
 ```
-
 **Rust 原子类型**：
 
 | 类型 | 适用场景 |
@@ -954,7 +933,6 @@ fn consumer() {
     println!("{}", DATA.load(Ordering::Relaxed));
 }
 ```
-
 - A. 没有问题，Relaxed + Acquire 组合是安全的
 - B. 可能打印 0，因为 `DATA.store` 可能重排到 `READY.store` 之后（对消费者可见）
 - C. 会死锁，因为 `Relaxed` 不能保证 `READY` 的修改被其他线程看到
@@ -976,7 +954,6 @@ READY = true  ← 但编译器/CPU  看到 READY = true
 READY = true
 DATA = 42
 ```
-
 **为什么 `Relaxed` 会出问题**：
 
 `Relaxed` 只保证原子性，不保证**操作顺序**对其他线程可见。编译器和 CPU 可以重排 `DATA.store` 和 `READY.store`。
@@ -994,7 +971,6 @@ fn consumer() {
     println!("{}", DATA.load(Ordering::Relaxed));  // 保证看到 42
 }
 ```
-
 **内存序速查表**：
 
 ```mermaid
@@ -1008,7 +984,6 @@ graph LR
     style A fill:#ffcccc
     style E fill:#ccffcc
 ```
-
 | 内存序 | 保证 | 性能 | 场景 |
 |:---|:---|:---:|:---|
 | `Relaxed` | 仅原子性 | ⚡ 最快 | 独立计数器（无数据依赖）|
@@ -1050,7 +1025,6 @@ impl<T> SpinLock<T> {
     }
 }
 ```
-
 - A. 没有问题，这是一个正确的自旋锁
 - B. `compare_exchange` 的两个 `Relaxed` 导致锁释放时数据不可见
 - C. 缺少 `Send` 实现
@@ -1076,7 +1050,6 @@ while self.locked.compare_exchange_weak(
 ).is_err() {}
 // 读取 data → 可能看到旧值！
 ```
-
 **修复方案**：
 
 ```rust,ignore
@@ -1103,7 +1076,6 @@ impl<T> Drop for LockGuard<T> {
     }
 }
 ```
-
 **为什么用 `compare_exchange_weak`**：
 
 - `compare_exchange`：强保证，可能多一次重试
@@ -1139,7 +1111,6 @@ impl TicketLock {
     }
 }
 ```
-
 - A. `SeqCst` 是原子操作的默认内存序，不需要理由
 - B. `Release`/`Acquire` 不够，因为 `next_ticket` 和 `now_serving` 之间需要全局顺序保证
 - C. 可以用 `Relaxed` 替代，因为 CAS 循环会自动重试
@@ -1162,7 +1133,6 @@ next_ticket++      next_ticket++      next_ticket++
 // 线程3 可能看到 now_serving=0 但 next_ticket=3 的异常状态
 // （因为两个变量的更新在不同线程，没有全局顺序）
 ```
-
 **多原子变量的全局顺序问题**：
 
 | 场景 | 所需内存序 |
@@ -1182,7 +1152,6 @@ now_serving  = 当前叫到的号码
 // 当前 serving=4 的线程释放时，serving 变为 5
 // 线程5 看到匹配，进入临界区
 ```
-
 **SeqCst 的代价**：
 
 ```rust
@@ -1194,7 +1163,6 @@ now_serving  = 当前叫到的号码
 // 性能对比（粗略）：
 // Relaxed : SeqCst ≈ 10:1
 ```
-
 **优化方案 — 大多数情况不需要 Ticket Lock**：
 
 ```rust
@@ -1202,7 +1170,6 @@ now_serving  = 当前叫到的号码
 // 读多写少场景：RwLock 或 RCU
 // 计数器场景：AtomicUsize + Relaxed
 ```
-
 > **关键洞察**: `SeqCst` 是"核武器"——它保证**所有线程以相同顺序看到所有原子操作**。只在"多个原子变量间有复杂逻辑依赖"时使用。绝大多数并发场景 `Release`/`Acquire` 足够。
 </details>
 

@@ -39,7 +39,6 @@ rustc -C opt-level=s main.rs     # 优化大小
 rustc --target x86_64-unknown-linux-gnu main.rs
 rustc --target wasm32-unknown-unknown main.rs
 ```
-
 ```rust,ignore
 // 编译器属性示例
 #![feature(...)]  // 启用不稳定特性
@@ -65,7 +64,6 @@ fn error_path() {}
 #[must_use]  // 返回值必须使用
 fn important_result() -> i32 { 42 }
 ```
-
 ### Cargo：构建系统与包管理器 {#cargo构建系统与包管理器}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -118,7 +116,6 @@ panic = "abort"
 opt-level = 1
 incremental = true
 ```
-
 ### 常用 Cargo 命令 {#常用-cargo-命令}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -163,7 +160,6 @@ cargo bench                  # 运行基准测试
 cargo publish                # 发布到 crates.io
 cargo install <crate>        # 安装二进制 crate
 ```
-
 ### 代码质量工具 {#代码质量工具}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -190,7 +186,6 @@ cargo fmt -- --check         # CI 中使用
 # max_width = 100 {#max_width-100}
 # tab_spaces = 4 {#tab_spaces-4}
 ```
-
 ### 形式化验证工具 {#形式化验证工具}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -221,7 +216,6 @@ unsafe fn undefined_behavior_demo() {
 //     assert!(x + y < 200);
 // }
 ```
-
 ### 工作空间示例 {#工作空间示例}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -245,7 +239,6 @@ edition = "2024"
 authors = ["Team <team@example.com>"]
 license = "MIT OR Apache-2.0"
 ```
-
 ### 构建脚本 (build.rs) {#构建脚本-buildrs}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -277,7 +270,6 @@ fn main() {
     println!("cargo:rustc-link-search=native=/usr/local/lib");
 }
 ```
-
 ---
 
 ## 形式化方法 {#形式化方法}
@@ -342,7 +334,6 @@ mindmap
       build.rs
       条件编译
 ```
-
 ## 与核心文档的关联 {#与核心文档的关联}
 
 | 本文档 | 核心文档 | 关系 |

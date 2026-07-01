@@ -135,7 +135,6 @@ pub fn demo_type_state() {
     // file.read_chunk(); // ❌ 错误: FileHandle<Closed> 没有 read_chunk 方法
 }
 ```
-
 ### 2.3 实际应用场景：HTTP 请求构建器
 >
 > **[来源: Rust Official Docs]**
@@ -222,7 +221,6 @@ pub fn demo_request_builder() {
     // RequestBuilder::new().build().send();
 }
 ```
-
 ---
 
 ## 3. Phantom Types（幻影类型）
@@ -309,7 +307,6 @@ pub fn demo_phantom_types() {
     // let sum = d + t;            // ❌ Length 不能和 Time 相加
 }
 ```
-
 ---
 
 ## 4. Capability Tokens（能力令牌）
@@ -410,7 +407,6 @@ pub fn demo_capability_tokens() {
     fs.delete_file(&a, "data.txt"); // ✅ 成功
 }
 ```
-
 ### 4.3 运行时零成本
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -426,7 +422,6 @@ assert_eq!(size_of::<Capability<Read>>(), 0);
 // 函数参数传递零开销
 // fs.read_file(&cap, path) 在运行时和直接调用无区别
 ```
-
 ---
 
 ## 5. 综合示例：类型安全的资源生命周期管理
@@ -532,7 +527,6 @@ pub fn demo_lifecycle_management() {
     assert!(result.is_ok());
 }
 ```
-
 ---
 
 ### 模块 3: 概念依赖图
@@ -565,7 +559,6 @@ graph TD
     style C fill:#bfb,stroke:#333,stroke-width:2px
     style H fill:#bbf,stroke:#333,stroke-width:2px
 ```
-
 #### 承上（前置知识回溯）
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
@@ -638,13 +631,11 @@ fn main() {
     // let f = f.close(); // ❌ 编译错误: File<Open> 没有 close 方法
 }
 ```
-
 **编译器错误**:
 
 ```text
 error[E0599]: no method named `close` found for struct `File<Open>`
 ```
-
 **根因推导**: Type-State 模式要求**每个状态**都必须有**完整的转换方法**。如果 `Open` 状态缺少 `close()` 方法，`File<Open>` 就无法转换回 `File<Closed>`，导致对象"卡住"。
 
 **修复方案**:
@@ -658,7 +649,6 @@ impl File<Open> {
     }
 }
 ```
-
 **抽象原则**: **"状态图完整性"**：Type-State 的设计必须对应一个**完全连通的状态图**。每个状态都必须有入边和出边（除非是终止状态）。缺失转换会导致类型系统层面的"死胡同"。
 
 ---
@@ -687,7 +677,6 @@ fn main() {
     // let sum = d1.add(d2);
 }
 ```
-
 **根因推导**: 虽然类型系统正确地阻止了 `Meter + Second` 的操作，但错误信息仅显示类型不匹配（`Quantity<f64, Meter>` vs `Quantity<f64, Second>`），对用户的提示不够友好。
 
 **修复方案**:
@@ -713,7 +702,6 @@ let d2 = Time::seconds(10.0);
 // d1.add(d2) 的错误现在更友好:
 // expected `Length`, found `Time`
 ```
-
 ---
 
 #### 反例 3: Capability Token 的权限泄露
@@ -741,7 +729,6 @@ fn main() {
     let cap3 = cap.clone();  // 权限无限复制，失去控制意义
 }
 ```
-
 **根因推导**: 如果 `Capability` 实现 `Clone`，任何持有 `Read` 权限的人都可以无限复制并分发该权限。Capability 安全模型的核心假设是"持有即权限"，但无限复制破坏了这一假设。
 
 **修复方案**:
@@ -760,7 +747,6 @@ struct LimitedCapability<P> {
     _token: Arc<()>,  // Arc 的引用计数即为权限副本数
 }
 ```
-
 ---
 
 ## 🗺️ 模块 7: 思维表征套件
@@ -804,7 +790,6 @@ struct LimitedCapability<P> {
        │       │       │
        │       │       └── 考虑运行时检查（简单、灵活）
 ```
-
 ### 表征 B: 编译时检查 vs 运行时检查成本对比矩阵
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -857,7 +842,6 @@ struct LimitedCapability<P> {
    ✓ 非法代码编译失败
    ✓ 错误信息可理解
 ```
-
 ---
 
 ## 7. 注意事项
@@ -940,9 +924,7 @@ Rust 的类型系统结合了以下特性，使其成为 Type-Driven Correctness
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Type-State 模式与 GoF 状态模式（State Pattern）有何本质区别？** 为什么 Rust 的 Type-State 是"零成本"的，而传统的状态模式不是？
-
 2. **Phantom Types 与 Newtype 模式（如 `struct Meters(f64)`）有何异同？** 什么场景下应该选择 Phantom Types 而不是 Newtype？
-
 3. **Capability Tokens 与 RBAC（基于角色的访问控制）在编译时验证方面有何优势？** 它的局限性是什么？
 
 ### 代码修复题
@@ -992,7 +974,6 @@ fn bad_usage() {
     let s = s.stop();  // Ready → ??? 不应该允许！
 }
 ```
-
 <details>
 <summary>参考答案</summary>
 
@@ -1007,7 +988,6 @@ impl Service<Ready> {
     fn stop(self) -> Service<Uninitialized> { ... }  // 如果存在这个就有问题
 }
 ```
-
 **更准确的修复**: 确保每个状态的转换只存在于正确的源状态：
 
 ```rust,ignore
@@ -1023,7 +1003,6 @@ impl Service<Running> {
     }
 }
 ```
-
 </details>
 
 **题 2**: 以下 Capability Token 实现允许权限提升攻击。请分析并修复：
@@ -1045,7 +1024,6 @@ impl From<Capability<Read>> for Capability<Write> {
     }
 }
 ```
-
 <details>
 <summary>参考答案</summary>
 
@@ -1069,7 +1047,6 @@ impl AuthManager {
     }
 }
 ```
-
 </details>
 
 ### 开放设计题
@@ -1211,7 +1188,6 @@ fn main() {
     conn.send("hello");
 }
 ```
-
 > **修正**: **类型状态**（typestate）模式将运行时状态检查移至编译期：`Connection<Disconnected>` 和 `Connection<Connected>` 是不同的类型，只有 `Disconnected` 可以 `connect()`，只有 `Connected` 可以 `send()`。
 > 编译器在编译期阻止无效状态转换。
 > 限制：

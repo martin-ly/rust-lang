@@ -130,7 +130,6 @@
 文档测试    → 文档注释中的代码块
 性能测试    → benches/ 目录下的基准测试
 ```
-
 ---
 
 ## 🔬 单元测试（Unit Tests） {#单元测试unit-tests}
@@ -154,7 +153,6 @@ mod tests {
     }
 }
 ```
-
 ### 断言宏 {#断言宏}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -179,7 +177,6 @@ fn test_assertions() {
     assert_eq!(result.unwrap(), expected);
 }
 ```
-
 ### 测试失败和 panic {#测试失败和-panic}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -201,7 +198,6 @@ fn test_expected_panic() {
     }
 }
 ```
-
 ### 使用 Result 类型 {#使用-result-类型}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -218,7 +214,6 @@ fn test_with_result() -> Result<(), String> {
     }
 }
 ```
-
 ### 忽略测试 {#忽略测试}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -238,7 +233,6 @@ fn network_test() {
     // 被忽略的测试
 }
 ```
-
 ### 测试组织 {#测试组织-1}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -274,7 +268,6 @@ mod tests {
     }
 }
 ```
-
 ---
 
 ## 🔗 集成测试（Integration Tests） {#集成测试integration-tests}
@@ -297,7 +290,6 @@ my_project/
     └── common/
         └── mod.rs
 ```
-
 ### 基本集成测试 {#基本集成测试}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -312,7 +304,6 @@ fn test_integration() {
     assert_eq!(result, 5);
 }
 ```
-
 ### 公共测试模块 {#公共测试模块}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -337,7 +328,6 @@ fn test_with_setup() {
     common::teardown();
 }
 ```
-
 ### 测试子模块 {#测试子模块}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -358,7 +348,6 @@ fn test_api_endpoint() {
     // API 测试
 }
 ```
-
 ---
 
 ## 📚 文档测试（Doc Tests） {#文档测试doc-tests}
@@ -382,7 +371,6 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ````
-
 ### 隐藏辅助代码 {#隐藏辅助代码}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -404,7 +392,6 @@ pub fn factorial(n: u32) -> u32 {
     }
 }
 ````
-
 ### 忽略文档测试 {#忽略文档测试}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -420,7 +407,6 @@ pub fn expensive_operation() -> i32 {
     42
 }
 ````
-
 ### 编译但不运行 {#编译但不运行}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -432,7 +418,6 @@ pub fn expensive_operation() -> i32 {
 /// let x: i32 = "hello"; // 这应该编译失败
 /// ```
 ````
-
 ---
 
 ## ⚡ 性能测试（Benchmark Tests） {#性能测试benchmark-tests}
@@ -451,7 +436,6 @@ criterion = { version = "0.5", features = ["html_reports"] }
 name = "my_benchmark"
 harness = false
 ```
-
 ### Criterion 基准测试 {#criterion-基准测试}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -475,7 +459,6 @@ fn bench_fibonacci(c: &mut Criterion) {
 criterion_group!(benches, bench_fibonacci);
 criterion_main!(benches);
 ```
-
 ### 比较基准测试 {#比较基准测试}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -510,7 +493,6 @@ fn bench_comparison(c: &mut Criterion) {
 criterion_group!(benches, bench_comparison);
 criterion_main!(benches);
 ```
-
 ### 异步基准测试 {#异步基准测试}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -535,7 +517,6 @@ fn bench_async(c: &mut Criterion) {
 criterion_group!(benches, bench_async);
 criterion_main!(benches);
 ```
-
 ### 运行基准测试 {#运行基准测试}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -552,7 +533,6 @@ cargo bench --bench my_benchmark
 # 运行特定测试 {#运行特定测试-1}
 cargo bench --bench my_benchmark fib_20
 ```
-
 ---
 
 ## 🛠️ 测试工具和库 {#测试工具和库}
@@ -583,7 +563,6 @@ tempfile = "3.0"
 # 测试覆盖率 {#测试覆盖率-2}
 cargo-tarpaulin = "0.25"
 ```
-
 ### 异步测试 {#异步测试-1}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -602,7 +581,6 @@ async fn test_multi_thread() {
     // 多线程异步测试
 }
 ```
-
 ### 属性测试（Proptest） {#属性测试proptest}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -638,7 +616,6 @@ proptest! {
     }
 }
 ```
-
 ### Mock 测试（Mockall） {#mock-测试mockall}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -663,7 +640,6 @@ fn test_mock() {
     assert_eq!(5, mock.foo(4));
 }
 ```
-
 ### 参数化测试（Rstest） {#参数化测试rstest}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -689,7 +665,6 @@ fn fixture() -> i32 {
     42
 }
 ```
-
 ### 模糊测试（Cargo-fuzz） {#模糊测试cargo-fuzz}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -708,7 +683,6 @@ name = "my_project"
 [dependencies.libfuzzer-sys]
 version = "0.4"
 ```
-
 ```rust,ignore
 // fuzz/fuzz_targets/parser_fuzz.rs
 #![no_main]
@@ -727,7 +701,6 @@ fn parse_input(input: &str) -> Result<(), String> {
     Ok(())
 }
 ```
-
 ```bash
 # 安装 cargo-fuzz {#安装-cargo-fuzz}
 cargo install cargo-fuzz
@@ -738,7 +711,6 @@ cargo fuzz run parser_fuzz
 # 运行特定时间 {#运行特定时间}
 cargo fuzz run parser_fuzz -- -max_total_time=300
 ```
-
 ---
 
 ## 🎯 测试最佳实践 {#测试最佳实践}
@@ -758,7 +730,6 @@ cargo fuzz run parser_fuzz -- -max_total_time=300
    /   Unit Tests \  70% - 单元测试
   /----------------\
 ```
-
 **比例分配**:
 
 | 测试类型 | 比例 | 特点               | 运行时间 |
@@ -800,7 +771,6 @@ fn fibonacci(n: u32) -> u32 {
     a
 }
 ```
-
 ### 测试命名 {#测试命名}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -820,7 +790,6 @@ fn test1() { }
 #[test]
 fn test_thing() { }
 ```
-
 ### 测试组织 {#测试组织-1}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -870,7 +839,6 @@ mod tests {
     }
 }
 ```
-
 ### 测试私有函数 {#测试私有函数}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -895,7 +863,6 @@ mod tests {
     }
 }
 ```
-
 ### 测试并发代码 {#测试并发代码}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -925,7 +892,6 @@ fn test_concurrent_access() {
     assert_eq!(*data.lock().unwrap(), 10);
 }
 ```
-
 ### 测试文件 I/O {#测试文件-io}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -945,7 +911,6 @@ fn test_file_operations() {
     assert_eq!(content, "test content");
 }
 ```
-
 ---
 
 ## 📊 测试覆盖率 {#测试覆盖率-1}
@@ -969,7 +934,6 @@ cargo tarpaulin --out Stdout
 # 设置覆盖率阈值 {#设置覆盖率阈值}
 cargo tarpaulin --out Html --fail-under 80
 ```
-
 ### tarpaulin.toml 配置 {#tarpaulintoml-配置}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -992,7 +956,6 @@ exclude_lines = [
     "unreachable!",
 ]
 ```
-
 ---
 
 ## 🚀 运行测试 {#运行测试}
@@ -1028,7 +991,6 @@ cargo test -- --test-threads=1
 # 运行特定测试文件 {#运行特定测试文件}
 cargo test --test integration_test
 ```
-
 ### 测试输出 {#测试输出}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -1043,7 +1005,6 @@ cargo test -- --nocapture
 # 只显示失败的测试 {#只显示失败的测试}
 cargo test --quiet
 ```
-
 ### 并行控制 {#并行控制-1}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -1055,7 +1016,6 @@ cargo test -- --test-threads=4
 # 单线程（用于调试） {#单线程用于调试}
 cargo test -- --test-threads=1
 ```
-
 ---
 
 ## 🔍 测试调试 {#测试调试}
@@ -1075,7 +1035,6 @@ fn test_with_debug() {
     assert_eq!(value, 42);
 }
 ```
-
 ### 使用断言消息 {#使用断言消息}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -1091,7 +1050,6 @@ fn test_with_message() {
     );
 }
 ```
-
 ### 测试超时 {#测试超时}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1112,7 +1070,6 @@ fn test_with_timeout() {
     );
 }
 ```
-
 ---
 
 ## 📝 测试模式速查 {#测试模式速查}
@@ -1137,7 +1094,6 @@ fn test_result() {
     assert_eq!(err.unwrap_err(), "error");
 }
 ```
-
 ### 测试 Option 类型 {#测试-option-类型}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -1156,7 +1112,6 @@ fn test_option() {
     assert_eq!(none.unwrap_or(0), 0);
 }
 ```
-
 ### 测试浮点数（近似相等） {#测试浮点数近似相等}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -1175,7 +1130,6 @@ fn test_float_approx() {
     // assert_relative_eq!(a, b);
 }
 ```
-
 ### 测试集合 {#测试集合}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -1198,7 +1152,6 @@ fn test_collections() {
     assert!(map.contains_key("key2"));
 }
 ```
-
 ---
 
 ## 🎓 常见测试场景 {#常见测试场景}
@@ -1222,7 +1175,6 @@ fn test_error_handling() {
     }
 }
 ```
-
 ### 测试生命周期 {#测试生命周期}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -1236,7 +1188,6 @@ fn test_lifetimes() {
     // data 仍然有效
 }
 ```
-
 ### 测试泛型函数 {#测试泛型函数}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -1252,7 +1203,6 @@ fn identity<T>(x: T) -> T {
     x
 }
 ```
-
 ### 测试 trait 实现 {#测试-trait-实现}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -1264,7 +1214,6 @@ fn test_trait_impl() {
     assert_eq!(obj.method(), expected);
 }
 ```
-
 ---
 
 ## 🔄 CI/CD 集成 {#cicd-集成}
@@ -1308,7 +1257,6 @@ jobs:
       - name: Clippy
         run: cargo clippy -- -D warnings
 ```
-
 ### 测试覆盖率 CI {#测试覆盖率-ci}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -1325,7 +1273,6 @@ jobs:
   with:
     files: ./cobertura.xml
 ```
-
 ### 性能测试 CI {#性能测试-ci}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -1339,7 +1286,6 @@ jobs:
     cargo bench --bench my_benchmark > current.txt
     # 与基准比较
 ```
-
 ---
 
 ## 🎓 高级测试模式 {#高级测试模式}
@@ -1359,7 +1305,6 @@ fn test_output() {
     assert_snapshot!(output, @"expected output");
 }
 ```
-
 ### 金标准测试（Golden Tests） {#金标准测试golden-tests}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -1375,7 +1320,6 @@ fn test_golden_file() {
     assert_eq!(result, expected);
 }
 ```
-
 ### 测试夹具（Fixtures） {#测试夹具fixtures}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -1403,7 +1347,6 @@ fn test_with_fixture() {
     assert_eq!(fixture.data.len(), 5);
 }
 ```
-
 ### 参数化测试（高级） {#参数化测试高级}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -1429,7 +1372,6 @@ fn test_with_multiple_fixtures(
     assert_eq!(value2, "test");
 }
 ```
-
 ### 测试并发安全性 {#测试并发安全性}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -1461,7 +1403,6 @@ fn test_thread_safety() {
     assert_eq!(*data.lock().unwrap(), 10000);
 }
 ```
-
 ### 使用 Loom 测试并发 {#使用-loom-测试并发}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -1490,7 +1431,6 @@ fn test_loom_concurrent() {
     });
 }
 ```
-
 ---
 
 ## 🔧 测试工具速查 {#测试工具速查}
@@ -1529,7 +1469,6 @@ cargo test -- --include-ignored   # 运行所有测试（包括被忽略的）
 cargo test -- --list              # 列出所有测试
 cargo test -- --skip test_name    # 跳过特定测试
 ```
-
 ### 测试覆盖率工具 {#测试覆盖率工具}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -1546,7 +1485,6 @@ cargo install grcov
 RUSTFLAGS="-C instrument-coverage" cargo test
 grcov . --binary-path ./target/debug/ -s . -t html --branch --ignore-not-existing -o coverage/
 ```
-
 ### 性能分析工具 {#性能分析工具}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -1562,7 +1500,6 @@ valgrind --leak-check=full cargo test
 # heaptrack (内存分析) {#heaptrack-内存分析}
 heaptrack cargo test
 ```
-
 ---
 
 ## 🚫 反例速查 {#反例速查}
@@ -1581,7 +1518,6 @@ static mut ORDER: i32 = 0;
 #[test] fn a() { unsafe { ORDER = 1; } }
 #[test] fn b() { assert_eq!(unsafe { ORDER }, 1); }  // ❌ 测试顺序不保证
 ```
-
 **原因**: 测试并行执行，顺序未定义；`static mut` 本身在 2024 Edition 已废弃。
 
 **修正**:
@@ -1594,7 +1530,6 @@ static ORDER: AtomicI32 = AtomicI32::new(0);
 #[test] fn a() { ORDER.store(1, Ordering::SeqCst); }
 #[test] fn b() { assert_eq!(ORDER.load(Ordering::SeqCst), 1); } // 仍不推荐：测试间不应有顺序依赖
 ```
-
 ```rust
 // ✅ 方案 2: 每个测试独立状态（推荐）
 #[test]
@@ -1603,7 +1538,6 @@ fn test_order_independent() {
     assert_eq!(order, 1);
 }
 ```
-
 ```rust
 // ✅ 方案 3: 使用 std::sync::Mutex 封装共享状态
 use std::sync::Mutex;
@@ -1612,7 +1546,6 @@ static ORDER: Mutex<i32> = Mutex::new(0);
 #[test] fn a() { *ORDER.lock().unwrap() = 1; }
 #[test] fn b() { assert_eq!(*ORDER.lock().unwrap(), 1); } // 仍不推荐依赖测试顺序
 ```
-
 ---
 
 ### 反例 2: 忽略的测试静默失败 {#反例-2-忽略的测试静默失败}
@@ -1628,7 +1561,6 @@ fn broken_test() {
     panic!("应修复");
 }
 ```
-
 **原因**: `cargo test` 默认不运行 ignore，问题易被忽略。
 
 **修正**: 定期 `cargo test -- --ignored` 验证，或移除 ignore 后修复。
@@ -1791,7 +1723,6 @@ pub fn get_config() -> Option<&'static Config> {
 let phi = f64::consts::GOLDEN_RATIO;
 let gamma = f64::consts::EULER_GAMMA;
 ```
-
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
@@ -1828,7 +1759,6 @@ fn validate_test_results(results: &[TestResult]) -> ControlFlow<Vec<Failure>, ()
     }
 }
 ```
-
 ### LazyLock 在测试固件中的应用 {#lazylock-在测试固件中的应用}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -1846,7 +1776,6 @@ pub fn get_test_db() -> Option<&'static TestDatabase> {
     LazyLock::get(&TEST_DB)
 }
 ```
-
 ### 性能提升总结 {#性能提升总结}
 >
 > **[来源: [crates.io](https://crates.io/)]**

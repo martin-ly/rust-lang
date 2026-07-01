@@ -121,7 +121,6 @@ Tree Borrows 模型:
 │     ✅ 父子可以共存                      │
 └─────────────────────────────────────────┘
 ```
-
 ### 详细行为对比表
 
 | 代码模式 | SB 判定 | TB 判定 | 解释 |
@@ -166,7 +165,6 @@ fn tree_structure_demo() {
     root[2] = 30;  // ✅ OK in TB
 }
 ```
-
 ### 权限状态机
 
 ```text
@@ -193,7 +191,6 @@ fn tree_structure_demo() {
 │  • SharedRW → Shared: 写入访问（降级为只读）                │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 ### 懒初始化机制
 
 ```rust
@@ -224,7 +221,6 @@ fn lazy_initialization_demo() {
     }
 }
 ```
-
 ---
 
 ## 💡 实际代码示例（50+ 场景）
@@ -245,7 +241,6 @@ fn scenario_1_basic_reborrow() {
     assert_eq!(x, 2);
 }
 ```
-
 #### 场景 2: 多次重新借用
 
 ```rust
@@ -264,7 +259,6 @@ fn scenario_2_multiple_reborrow() {
     assert_eq!(x, 4);
 }
 ```
-
 #### 场景 3: 条件重新借用
 
 ```rust
@@ -280,7 +274,6 @@ fn scenario_3_conditional_reborrow(condition: bool) {
     *y = 2;  // ✅ TB: OK (无论 condition 如何)
 }
 ```
-
 #### 场景 4: 循环中的重新借用
 
 ```rust
@@ -297,7 +290,6 @@ fn scenario_4_loop_reborrow() {
     mut_ref.push(6);  // ✅ TB: OK
 }
 ```
-
 #### 场景 5: 匹配中的重新借用
 
 ```rust
@@ -322,7 +314,6 @@ fn scenario_5_match_reborrow() {
     }
 }
 ```
-
 #### 场景 6: 闭包捕获重新借用
 
 ```rust
@@ -341,7 +332,6 @@ fn scenario_6_closure_reborrow() {
     *y = 10;  // ✅ TB: OK
 }
 ```
-
 #### 场景 7: 函数参数重新借用
 
 ```rust
@@ -358,7 +348,6 @@ fn scenario_7_fn_arg_reborrow() {
     inner(&mut data);
 }
 ```
-
 #### 场景 8: 元组解构重新借用
 
 ```rust
@@ -374,7 +363,6 @@ fn scenario_8_tuple_reborrow() {
     r.0 = 30;  // ✅ TB: OK
 }
 ```
-
 #### 场景 9: 数组索引重新借用
 
 ```rust
@@ -393,7 +381,6 @@ fn scenario_9_array_index_reborrow() {
     *elem2 = 30;
 }
 ```
-
 #### 场景 10: 嵌套结构重新借用
 
 ```rust
@@ -416,7 +403,6 @@ fn scenario_10_nested_reborrow() {
     outer_ref.inner.value = 100;  // ✅ TB: OK
 }
 ```
-
 ### 场景 11-20: 指针算术
 
 #### 场景 11: container_of 模式
@@ -443,7 +429,6 @@ fn scenario_11_container_of() {
     }
 }
 ```
-
 #### 场景 12: 数组元素指针算术
 
 ```rust
@@ -460,7 +445,6 @@ fn scenario_12_array_pointer_arithmetic() {
     }
 }
 ```
-
 #### 场景 13: 切片分割指针
 
 ```rust
@@ -480,7 +464,6 @@ fn scenario_13_slice_split_pointer() {
     }
 }
 ```
-
 ### 场景 21-30: 自引用结构
 
 #### 场景 21: 基本自引用
@@ -515,7 +498,6 @@ fn scenario_21_self_referential() {
     let _self_ref = SelfReferential::new(data);  // ✅ TB: 更宽容
 }
 ```
-
 ### 场景 31-40: 迭代器与可变借用
 
 #### 场景 31: Vec 迭代时 push
@@ -535,7 +517,6 @@ fn scenario_31_vec_push_while_iter() {
     }
 }
 ```
-
 #### 场景 32: HashMap 迭代时修改
 
 ```rust
@@ -557,7 +538,6 @@ fn scenario_32_hashmap_modify_while_iter() {
     }
 }
 ```
-
 ### 场景 41-50: FFI 与裸指针
 
 #### 场景 41: C 结构体指针转换
@@ -589,7 +569,6 @@ fn scenario_41_ffi_pointer() {
     }
 }
 ```
-
 ---
 
 ## 🧪 Miri 测试实战指南
@@ -612,7 +591,6 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 # 5. 运行单测（严格模式）
 MIRIFLAGS="-Zmiri-tree-borrows -Zmiri-tag-raw-pointers" cargo miri test
 ```
-
 ### CI/CD 集成
 
 ```yaml
@@ -646,7 +624,6 @@ jobs:
         env:
           MIRIFLAGS: "-Zmiri-tree-borrows -Zmiri-tag-raw-pointers"
 ```
-
 ### 常见错误与解决
 
 | 错误信息 | 原因 | 解决方案 |
@@ -684,7 +661,6 @@ Record LocationState := {
 (* 树结构 *)
 Definition BorrowTree := PointerId -> LocationState.
 ```
-
 ### 与 RustBelt 的关系
 
 ```text
@@ -704,7 +680,6 @@ Definition BorrowTree := PointerId -> LocationState.
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 🔄 迁移指南
@@ -723,7 +698,6 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test 2>&1 | tee tb_results.txt
 # 对比结果
 diff sb_results.txt tb_results.txt
 ```
-
 #### 步骤 2: 修复 SB 特有的 UB
 
 如果代码在 SB 下报错但在 TB 下通过，通常无需修改。但如果需要兼容 SB：
@@ -750,7 +724,6 @@ fn sb_compatible() {
     *y = 2;
 }
 ```
-
 ### 未来兼容性建议
 
 ```rust
@@ -785,7 +758,6 @@ fn use_abstractions() {
     right[0] = 30;
 }
 ```
-
 ---
 
 ## 🔗 参考资源

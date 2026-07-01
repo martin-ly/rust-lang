@@ -67,7 +67,6 @@ impl Device<Initialized> {
 /// 无法错误地调用
 /// device.start(); // 编译错误!
 ```
-
 ### 1.2 不可变优先
 >
 > **[来源: Rust Official Docs]**
@@ -105,7 +104,6 @@ let config = Config::new()
     .with_timeout(Duration::from_secs(60))
     .with_retries(5);
 ```
-
 ---
 
 ## 2. 错误处理设计
@@ -172,7 +170,6 @@ impl std::fmt::Display for DeviceError {
     }
 }
 ```
-
 ### 2.2 错误恢复策略
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -213,7 +210,6 @@ pub trait Recoverable {
     }
 }
 ```
-
 ---
 
 ## 3. 资源管理
@@ -276,7 +272,6 @@ impl<F: FnOnce()> Drop for ScopeGuard<F> {
     // 自动调用清理
 }
 ```
-
 ### 3.2 借用设计
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -327,7 +322,6 @@ impl DataStore {
     }
 }
 ```
-
 ---
 
 ## 4. 异步API设计
@@ -386,7 +380,6 @@ impl<F> Drop for CancelSafe<F> {
     }
 }
 ```
-
 ### 4.2 流式API
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -427,7 +420,6 @@ async fn process_stream() {
         .await;
 }
 ```
-
 ---
 
 ## 5. 文档和示例
@@ -479,7 +471,6 @@ pub struct TemperatureSensor {
     // ...
 }
 ```
-
 ### 5.2 示例代码
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -521,7 +512,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ---
 
 ## 6. 版本兼容性
@@ -564,7 +554,6 @@ pub fn new_method() {
     // ...
 }
 ```
-
 ### 6.2 特性标志
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -583,7 +572,6 @@ no-std = []
 async = ["futures"]
 safety-d = ["formal-verification"]
 ```
-
 ---
 
 ## 7. API审查检查表
@@ -648,7 +636,6 @@ safety-d = ["formal-verification"]
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [Rust安全关键系统 - 检查清单与模板](02_checklists_and_templates.md)
 - [社区参与与贡献指南](03_community_and_contributing.md)
 

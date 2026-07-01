@@ -1,4 +1,4 @@
-name: Monthly Concept Audit
+name: Monthly Knowledge Base Audit
 
 on:
   schedule:
@@ -24,21 +24,28 @@ jobs:
         with:
           toolchain: nightly
       
+      - name: Run KB quality audit
+        run: |
+          python scripts/kb_auditor.py
+        continue-on-error: true
+      
+      - name: Run content overlap detection
+        run: |
+          python scripts/detect_content_overlap.py
+        continue-on-error: true
+      
       - name: Run code block compiler check
         run: |
-          cd concept/..
           python scripts/code_block_compiler.py
         continue-on-error: false
       
       - name: Run concept audit
         run: |
-          cd concept/..
           python scripts/concept_audit.py
         continue-on-error: true
       
       - name: Run cross concept diff
         run: |
-          cd concept/..
           python scripts/cross_concept_diff.py
         continue-on-error: true
       
@@ -47,12 +54,23 @@ jobs:
         with:
           name: audit-reports
           path: |
+            reports/kb_quality_dashboard.md
+            reports/CONTENT_OVERLAP_DETECTION_*.md
             reports/code_block_compile_report.md
             reports/concept_audit_report.md
             reports/cross_concept_diff_report.md
       
       - name: Check for failures
         run: |
+          if grep -q "死链数量 | [1-9]" reports/kb_quality_dashboard.md 2>/dev/null; then
+            echo "⚠️ 发现死链，请检查 reports/kb_quality_dashboard.md"
+          fi
+          if [ -f reports/kb_quality_dashboard.md ]; then
+            echo "✅ KB quality audit completed"
+          fi
+          if [ -f reports/CONTENT_OVERLAP_DETECTION_$(date +%Y_%m_%d).md ]; then
+            echo "✅ Content overlap detection completed"
+          fi
           if [ -f reports/code_block_compile_report.md ]; then
             echo "✅ Code block compile check completed"
           fi

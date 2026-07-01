@@ -22,7 +22,6 @@ L5 对比 ──→ 多语言范式对比、安全边界分析
 L6 生态 ──→ 工具链、设计模式、核心 crate、应用领域
 L7 未来 ──→ AI 集成、形式化方法、语言演进
 ```
-
 ---
 
 ## 核心特性
@@ -46,7 +45,6 @@ L7 未来 ──→ AI 集成、形式化方法、语言演进
 ```bash
 python scripts/kb_auditor.py
 ```
-
 输出：
 
 - 37个文件的7项质量检查
@@ -82,7 +80,6 @@ cat reports/kb_quality_dashboard.md
 # 4. 构建搜索索引
 python scripts/build_search_index.py
 ```
-
 ### 学习路径建议
 
 | 目标 | 起点 | 时长 |

@@ -1,7 +1,6 @@
 # 📚 形式化证明文档索引 {#形式化证明文档索引}
 >
 > **概念族**: 形式化方法
-
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -158,7 +157,6 @@
    - **关键步骤**:
      - 基础情况：初始状态唯一性
      - 归纳步骤：移动操作、复制操作、作用域结束
-
 2. **定理 3 (内存安全框架)** ✅ `L1`
    - **形式化表示**:
      - 无悬垂指针: $\forall x: \text{valid}(x) \rightarrow \text{owner}(x) \neq \emptyset$
@@ -170,35 +168,27 @@
      - 性质1（无悬垂指针）：由所有权唯一性和作用域规则保证
      - 性质2（无双重释放）：由所有权唯一性直接保证
      - 性质3（无内存泄漏）：由规则3（作用域结束）保证
-
 3. **Def RC1/ARC1/CELL1/REFCELL1/BOX1 / 定理 RC-T1/REFCELL-T1/BOX-T1（Rust 1.93 智能指针）** ✅ `L1`
    - **形式化表示**: Rc/Arc 引用计数、Cell/RefCell 内部可变、Box RAII
    - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
-
 4. **Def MAYBEUNINIT1 / 定理 MAYBEUNINIT-T1（MaybeUninit 1.93）** ✅
    - **形式化表示**: assume_init 合法仅当 initialized
    - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
-
 5. **Def ATOMIC1 / 定理 ATOMIC-T1（原子操作）** ✅
    - **形式化表示**: 原子操作与数据竞争自由相容
    - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
-
 6. **Def UNION1（union 非活动字段）** ✅
    - **形式化表示**: 读取非活动字段为 UB
    - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
-
 7. **Def TRANSMUTE1 / 定理 TRANSMUTE-T1（transmute）** ✅
    - **形式化表示**: size/align 约束；与所有权相容
    - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
-
 8. **Def DROP1/DEREF1 / 定理 DROP-T1/DEREF-T1（Drop/Deref trait）** ✅
    - **形式化表示**: Drop 与 RAII 一致；Deref 与借用规则相容
    - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
-
 9. **Def REPR1 / 定理 REPR-T1（内存布局 repr）** ✅
    - **形式化表示**: repr(C) 与 FFI 衔接
    - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
-
 10. **Def CONST_MUT_STATIC1 / 定理 CONST_MUT_STATIC-T1（const &mut static 1.93）** ✅
     - **形式化表示**: const 含 &mut static 需显式 unsafe
     - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
@@ -220,44 +210,34 @@
    - **关键步骤**:
      - 基础情况：单线程执行
      - 归纳步骤：借用规则保证互斥访问
-
 2. **定理 2 (借用规则正确性)** ✅ `L1`
    - **形式化表示**: 借用检查器正确执行借用规则
    - **证明方法**: 规则归纳法
    - **证明位置**: [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)
-
 3. **Def CHAN1 / 定理 CHAN-T1（通道消息传递）** ✅
    - **形式化表示**: 消息传递无共享可变，满足数据竞争自由
    - **证明位置**: [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)
-
 4. **Def MUTEX1 / 定理 MUTEX-T1（Mutex 锁语义）** ✅
    - **形式化表示**: 任一时刻至多一个 MutexGuard 持有 &mut T
    - **证明位置**: [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)
-
 5. **Def RAW1 / 定理 RAW-T1（裸指针与 deref_nullptr）** ✅
    - **形式化表示**: deref 合法仅当 nonnull；deref_nullptr lint 减少 UB
    - **证明位置**: [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)
-
 6. **Def UNSAFE1 / 定理 UNSAFE-T1/T2（unsafe 契约与 borrow/ownership 衔接）** ✅
    - **形式化表示**: pre(C) → safe(C)；unsafe 与借用/所有权相容
    - **证明位置**: [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)
-
 7. **Def MATCH1 / 定理 MATCH-T1（match 穷尽性）** ✅
    - **形式化表示**: 穷尽 match 保证所有值被处理；各分支借用作用域独立
    - **证明位置**: [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)
-
 8. **Def FOR1 / 定理 FOR-T1（for 迭代与借用）** ✅
    - **形式化表示**: 迭代中修改集合违反借用规则 1
    - **证明位置**: [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)
-
 9. **Def EXTERN1 / 定理 EXTERN-T1（extern ABI 边界）** ✅
    - **形式化表示**: extern 与借用检查器边界相容
    - **证明位置**: [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)
-
 10. **Def CVARIADIC1（C variadic 1.93）** ✅
     - **形式化表示**: extern "system" fn(..., ...) FFI 约定
     - **证明位置**: [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)
-
 11. **Def QUERY1 / 定理 QUERY-T1（? 操作符）** ✅
     - **形式化表示**: 错误传播与借用相容
     - **证明位置**: [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)
@@ -284,7 +264,6 @@
    - **形式化表示**: 生命周期推断算法正确推断生命周期参数，保证引用有效性
    - **证明方法**: 由 Def 3.1、Axiom LF2、Def 1.4
    - **证明位置**: 10_lifetime_formalization.md
-
 2. **定理 LF-T2（引用有效性）** ✅
    - **形式化表示**: $\forall r: \text{ref}(r) \land \text{lifetime}(r) = \ell \rightarrow \forall t \in \ell: \text{valid}(r, t)$
    - **证明方法**: 三步骤证明（约束保证、推断正确性、借用检查器验证）
@@ -293,7 +272,6 @@
      - 步骤1：生命周期约束保证
      - 步骤2：生命周期推断正确性（LF-T3）
      - 步骤3：借用检查器验证
-
 3. **定理 LF-T3（推断算法正确性）** ✅
    - **形式化表示**: 生命周期推断算法生成的约束系统一致 ⟺ 程序良型
    - **证明方法**: 双向证明（⇒ 由 Axiom LF2；⇐ 由约束反映语义）
@@ -322,7 +300,6 @@
    - **关键步骤**:
      - 基础情况：值、变量
      - 归纳步骤：函数应用、函数抽象
-
 2. **定理 2 (保持性)** ✅
    - **形式化表示**: $\Gamma \vdash e : \tau \land e \to e' \rightarrow \Gamma \vdash e' : \tau$
    - **证明方法**: 结构归纳法
@@ -330,7 +307,6 @@
    - **关键步骤**:
      - 基础情况：$\beta$ 归约
      - 归纳步骤：函数应用求值
-
 3. **定理 3 (类型安全)** ✅ `L2` — 完整证明见 [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) §4
    - **形式化表示**: $\Gamma \vdash e : \tau \rightarrow \neg \exists e': e \to^* e' \land \text{type\_error}(e')$
    - **证明方法**: 由进展性和保持性直接得出
@@ -339,7 +315,6 @@
      - 进展性保证：程序可以继续执行
      - 保持性保证：类型在执行过程中保持不变
      - 类型错误不可能：类型检查时被拒绝
-
 4. **定理 4 (类型推导正确性)** ✅
    - **形式化表示**: $\text{infer}(\Gamma, e) = \tau \rightarrow \Gamma \vdash e : \tau$
    - **证明方法**: 基于类型规则的正确性
@@ -348,7 +323,6 @@
      - 约束生成正确性
      - 约束求解正确性
      - 类型分配正确性
-
 5. **定理 5 (类型推导算法正确性)** ✅
    - **形式化表示**: $\text{infer}(\Gamma, e) = \tau \leftrightarrow \Gamma \vdash e : \tau$
    - **证明方法**: 充分性和必要性双向证明
@@ -356,7 +330,6 @@
    - **关键步骤**:
      - 充分性：由定理4得出
      - 必要性：结构归纳法
-
 6. **Def LUB1 / 定理 LUB-T1（LUB coercion）** ✅ — Def LUB1：`if c { e1 } else { e2 }` 类型为 LUB(τ₁, τ₂)； theorem LUB-T1：1.93 修正后推断更严格；[证明位置](type_theory/10_type_system_foundations.md)
 7. **Def COP1 / 定理 COP-T1（Copy 与 specialization）** ✅ — Def COP1：1.93 移除 Copy 内部 specialization； theorem COP-T1：impl 解析不再依赖生命周期 specialization；[证明位置](type_theory/10_type_system_foundations.md)
 8. **Def OFFSET1、定理 OFFSET-T1（offset_of!）** ✅ — well-formed 检查、字节偏移；[证明位置](type_theory/10_type_system_foundations.md)
@@ -381,17 +354,14 @@
    - **形式化表示**: $\forall F, s, s': \text{State}(F)=s \land \text{Transition}(F)=s' \rightarrow \text{ValidTransition}(s, s')$
    - **证明方法**: 归纳法 + 案例分析 + 不变式验证
    - **证明位置**: [10_async_state_machine.md#定理-61-状态一致性](formal_methods/10_async_state_machine.md#定理-61-状态一致性)
-
 2. **定理 6.2 (并发安全)** ✅
    - **形式化表示**: $\forall \{F_1,\ldots,F_n\}: (\forall i: \text{Send}(F_i)\land\text{Sync}(F_i)) \rightarrow \text{DataRaceFree}(\text{ConcurrentExec}[\{F_1,\ldots,F_n\}])$
    - **证明方法**: 类型系统保证 + 运行时保证 + 组合性
    - **证明位置**: [10_async_state_machine.md#定理-62-并发安全](formal_methods/10_async_state_machine.md#定理-62-并发安全)
-
 3. **定理 6.3 (进度保证)** ✅
    - **形式化表示**: $\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F,n) \land \text{State}(F)=\text{Ready}(v)$
    - **证明方法**: 有限性假设 + 进度性 + 终止性
    - **证明位置**: [10_async_state_machine.md#定理-63-进度保证](formal_methods/10_async_state_machine.md#定理-63-进度保证)
-
 4. **Def SPAWN1 / 定理 SPAWN-T1（thread::spawn 与 JoinHandle）** ✅
    - **形式化表示**: Send 约束保证 spawn 数据竞争自由
    - **证明位置**: [10_async_state_machine.md](formal_methods/10_async_state_machine.md)
@@ -408,12 +378,10 @@
    - **形式化表示**: 对于非 `Unpin` 类型 $T$ 和 $\text{Pin}[\Box[T]]$，被 Pin 的值在内存中的位置不会改变
    - **证明方法**: 类型系统 + 编译器保证
    - **证明位置**: [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md)
-
 2. **定理 2 (自引用类型安全)** ✅
    - **形式化表示**: 若自引用类型 $T$ 被 Pin，则其自引用字段安全，无悬垂指针
    - **证明方法**: Pin 保证 + 位置稳定
    - **证明位置**: [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md)
-
 3. **定理 3 (Pin 投影安全)** ✅
    - **形式化表示**: 从被 Pin 的结构体中按安全条件投影出的被 Pin 字段仍满足 Pin 保证
    - **证明方法**: 安全条件 + Pin 保证
@@ -775,15 +743,12 @@
 - ✅ **内存安全框架** ([10_ownership_model.md](formal_methods/10_ownership_model.md))
   - 方法：反证法 + 结构归纳法
   - 结果：无悬垂指针、无双重释放、无内存泄漏
-
 - ✅ **数据竞争自由** `L2` ([10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)、[CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) §3)
   - 方法：结构归纳法
   - 结果：程序执行过程中不会出现数据竞争
-
 - ✅ **类型安全** `L2` ([10_type_system_foundations.md](type_theory/10_type_system_foundations.md)、[CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) §4)
   - 方法：由进展性和保持性得出
   - 结果：良型程序不会出现类型错误
-
 - ✅ **并发安全** ([10_async_state_machine.md](formal_methods/10_async_state_machine.md#定理-62-并发安全))
 - ✅ **Pin 保证、自引用类型安全、Pin 投影安全** ([10_pin_self_referential.md](formal_methods/10_pin_self_referential.md))
 - ✅ **协变、逆变、不变、函数类型型变** ([10_variance_theory.md](type_theory/10_variance_theory.md))

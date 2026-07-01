@@ -80,7 +80,6 @@ fn some_operation() -> Result<i32, String> {
     Ok(42)
 }
 ```
-
 ### 集成测试 {#集成测试}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -96,7 +95,6 @@ fn test_add_integration() {
     assert_eq!(add(2, 3), 5);
 }
 ```
-
 ### 文档测试 {#文档测试}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -115,7 +113,6 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ```
-
 ### 属性测试 {#属性测试}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -148,7 +145,6 @@ fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ```
-
 ### 模拟与 Mock {#模拟与-mock}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -176,7 +172,6 @@ mod mock_tests {
     }
 }
 ```
-
 ### 形式化验证测试 {#形式化验证测试}
 
 ```rust
@@ -213,7 +208,6 @@ mod contract_tests {
     }
 }
 ```
-
 ### 并发测试 {#并发测试}
 
 ```rust
@@ -244,7 +238,6 @@ mod concurrency_tests {
     }
 }
 ```
-
 ---
 
 ## 形式化方法 {#形式化方法}
@@ -286,17 +279,10 @@ mod concurrency_tests {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
-
 > **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**
-
 > **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
-
 > **[来源: ACM - Software Testing Methods]**
-
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
-
 > **来源: [Coq Reference](https://coq.inria.fr/doc/)**
-
 > **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
-
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**

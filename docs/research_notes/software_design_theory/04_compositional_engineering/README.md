@@ -77,7 +77,6 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 组合 | 实现要点 | 形式化衔接 |
-
 | :--- | :--- | :--- |
 | Builder + Factory Method | 工厂返回 Builder | CE-T1、CE-T3；[CE-PAT1](02_effectiveness_proofs.md#定理-ce-pat1模式组合-ce-保持)、[模式组合约束 DAG](../01_design_patterns_formal/04_boundary_matrix.md#模式组合约束-dagd15) |
 | Decorator + Strategy | 装饰器持 `impl Strategy` | CE-T2（无共享可变） |
@@ -100,9 +99,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
-
 trait Product { fn name(&self) -> &str; }
-
 
 
 struct Config { host: String, port: u16 }
@@ -132,7 +129,6 @@ impl ConfigBuilder {
 }
 
 
-
 trait ConfigFactory {
 
     fn create(&self) -> Result<Config, String>;
@@ -152,9 +148,7 @@ impl ConfigFactory for DefaultFactory {
 }
 
 // 工厂返回 Builder 链；所有权与 CE-T1 一致
-
 ```
-
 ### 示例 2：Repository + Service Layer + DTO（完整链条） {#示例-2repository-service-layer-dto完整链条}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -162,7 +156,6 @@ impl ConfigFactory for DefaultFactory {
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
-
 // DTO：跨边界
 
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
@@ -170,13 +163,11 @@ impl ConfigFactory for DefaultFactory {
 pub struct OrderDto { pub id: u64, pub amount: u64 }
 
 
-
 // Domain Model
 
 pub struct Order { id: u64, amount: u64 }
 
 impl From<OrderDto> for Order { fn from(d: OrderDto) -> Self { Self { id: d.id, amount: d.amount } } }
-
 
 
 // Repository
@@ -188,7 +179,6 @@ trait OrderRepository {
     fn find(&self, id: u64) -> Option<Order>;
 
 }
-
 
 
 // Service Layer：编排
@@ -210,9 +200,7 @@ impl<R: OrderRepository> OrderService<R> {
 }
 
 // 模块依赖：Service 依赖 Repository；所有权沿调用链传递；CE-T1/T2/T3
-
 ```
-
 ### 实例推导：CE-T1–T3 作用于模式组合（R1-01 最小交付） {#实例推导ce-t1t3-作用于模式组合r1-01-最小交付}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -222,9 +210,7 @@ impl<R: OrderRepository> OrderService<R> {
 **Decorator + Strategy 组合有效性推导**：
 
 1. **CE-T1（内存安全）**：`Decorator` 持 `Box<dyn Strategy>`，所有权唯一；`execute()` 消费 `&self`，无双重释放。由 ownership T2、T3 传递。
-
 2. **CE-T2（数据竞争自由）**：`Strategy` 为 `dyn Trait`，无共享可变；装饰器内部 `RefCell` 若存在，限于单线程或 `Mutex` 封装。由 borrow T1、Send/Sync 约束。
-
 3. **CE-T3（类型安全）**：`impl Strategy for X` 满足 trait 约束；`Decorator<X>` 泛型良型。由 type T1–T3 传递。
 
 **结论**：Decorator∘Strategy 满足 CE-T1、CE-T2、CE-T3，组合有效。*证明*：各子模式 Safe 且良型；组合接口无泄漏；由 CE-C1。∎
@@ -251,9 +237,7 @@ impl<R: OrderRepository> OrderService<R> {
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **组合的形式化**：模块、crate、trait、泛型如何组合？组合满足何种性质？
-
 2. **有效性**：组合后的系统保持内存安全、类型安全、无数据竞争？
-
 3. **与已有证明衔接**：如何引用 ownership、borrow、trait 的定理？
 
 ---
@@ -301,9 +285,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
                    ▼
 
              推论 CE-C1
-
 ```
-
 | 定理 | 依赖 | 来源 |
 | :--- | :--- | :--- |
 | CE-T1 | ownership T2、T3 | [ownership_model](../../../research_notes/formal_methods/10_ownership_model.md) |
@@ -319,11 +301,8 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 设 $\mathit{Level}(C) \in \{\mathrm{L1}, \mathrm{L2}, \mathrm{L3}, \mathrm{L4}\}$ 为组件 $C$ 的**成熟度层级**：
 
 - **L1 单模块**：单一 `mod`；无跨模块依赖；构造路径唯一
-
 - **L2 多模块**：多 `mod` 组合；依赖图为 DAG；CE-T1–T3 可静态判定
-
 - **L3 crate 生态**：多 crate 组合；`Cargo.toml` 依赖；需语义版本与兼容性
-
 - **L4 架构模式**：跨 crate、跨进程或跨网络；Repository、Service Layer、分布式模式；部分需运行时验证
 
 **Axiom CE-MAT1**：$\mathit{Level}(C) \geq \mathit{Level}(C')$ 当且仅当 $C$ 的依赖粒度不细于 $C'$；L1 ⊆ L2 ⊆ L3 ⊆ L4。
@@ -341,25 +320,15 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 **Def CE-VER1（L3/L4 验证手段）**：L3（多 crate）、L4（跨进程/分布式）的有效性判定需在 `cargo check` 之外增加以下手段：
 
 | 层级 | 验证手段 | 说明 |
-
 | :--- | :--- | :--- |
-
 | **L3 多 crate** | cargo check + 集成测试 | 跨 crate 类型兼容、语义版本约束 |
-
 | :--- | :--- | :--- |
-
 | :--- | :--- | :--- |
-
 | :--- | :--- | :--- |
-
 | **L4 跨进程/分布式** | 集成测试 | 端到端、跨进程调用 |
-
 | :--- | :--- | :--- |
-
 | :--- | :--- | :--- |
-
 | :--- | :--- | :--- |
-
 | :--- | :--- | :--- |
 
 ### L3/L4 验证工具索引 {#l3l4-验证工具索引}
@@ -367,23 +336,14 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 工具 | 用途 | 层级 | 链接/命令 |
-
 | :--- | :--- | :--- | :--- |
-
 | **cargo-semver-checks** | 语义版本兼容性检查 | L3 | `cargo install cargo-semver-checks` |
-
 | **cargo-audit** | 依赖漏洞扫描 | L3 | `cargo install cargo-audit` |
-
 | **cargo-udeps** | 未使用依赖检测 | L3 | `cargo install cargo-udeps` |
-
 | **cargo-fuzz** | 模糊测试 | L4 | `cargo install cargo-fuzz` |
-
 | **Miri** | 未定义行为检测 | L4 | `cargo +nightly miri test` |
-
 | **Pact** | 消费者契约测试 | L4 | pact.io |
-
 | **OpenAPI/Swagger** | API 契约定义与校验 | L4 | 契约即文档、代码生成 |
-
 | **gRPC/protobuf** | 跨进程契约 | L4 | tonic、prost |
 
 ---
@@ -393,21 +353,13 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 与 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md) 的 20 扩展模式对应：
 
 | 架构模式 | 成熟度层级 | 说明 |
-
 | :--- | :--- | :--- |
-
 | Domain Model、Value Object、Specification | L1–L2 | 单模块或同 crate 内 |
-
 | Repository、Service Layer、Unit of Work、Data Mapper | L2–L3 | 多模块、可能跨 crate |
-
 | DTO、Gateway、Remote Facade | L3–L4 | 跨 crate、跨进程/网络 |
-
 | Registry、Identity Map、Lazy Load、Plugin | L1–L2 | 单 crate 内 |
-
 | MVC、Front Controller | L2–L3 | Web 分层、可能多 crate |
-
 | Table Data Gateway、Active Record | L2–L3 | 数据层、可能跨 crate |
-
 | Optimistic Offline Lock、Event Sourcing | L2–L4 | 并发/分布式场景 |
 
 **Def CE-ARCH1**：Repository、Service Layer、DTO、Gateway 等模式在 L4 场景下需显式引用 CE-T1–T3；跨边界时所有权、Send/Sync 沿序列化/反序列化传递。
@@ -417,7 +369,6 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 ## 构建能力确定性判定树 {#构建能力确定性判定树}
 
 ```text
-
 目标架构是什么？
 
 ├── 单模块（单文件/单 mod）
@@ -435,9 +386,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 └── 跨进程/跨网络（分布式、微服务）
 
     └── L4；架构模式（Repository、Gateway、DTO）+ 契约/集成测试/Miri/模糊测试（见 § L3/L4 验证手段）
-
 ```
-
 **衔接**：与 [02_workflow_safe_complete_models](../02_workflow_safe_complete_models/README.md)、
 
 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md)、
@@ -453,13 +402,11 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 **用途**：选型时同时考虑「表达边界」（等价/近似/不可表达）与「组合层级」（L1–L4）。
 
 ```text
-
 模式选型 = 表达力 × 组合层级
 
 ├── 表达力：等价 / 近似 / 不可表达（见 04_expressiveness_boundary）
 
 └── 组合层级：L1 单模块 / L2 多模块 / L3 多 crate / L4 跨进程
-
 
 
 联合判定示例：
@@ -471,17 +418,11 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 ├── 等价 + L3/L4 → 需集成测试、契约；如 DTO、Gateway、Remote Facade
 
 └── 不可表达 → 规避或重构；如全局可变、多继承
-
 ```
-
 | 表达力 | L1/L2 | L3/L4 |
-
 | :--- | :--- | :--- |
-
 | **等价** | cargo check 判定 CE-T1–T3 | cargo check + 集成测试 + 契约 |
-
 | **近似** | 选 Rust 惯用替代；cargo check | 替代 + 跨边界验证 |
-
 | **不可表达** | 规避；重构为等价/近似 | 同上 |
 
 **引用**：[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) 等价/近似/不可表达表；
@@ -503,7 +444,6 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```mermaid
-
 flowchart TB
 
     subgraph 粒度层次
@@ -587,19 +527,15 @@ flowchart TB
     L2 --> L2_L4模式
 
     L4 --> L2_L4模式
-
 ```
-
 ### ASCII 形式化树图（模块→crate→进程→网络） {#ascii-形式化树图模块crate进程网络}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
-
 组件构建能力形式化树（与 02_complete_43_catalog 联合）
 
 ═══════════════════════════════════════════════════════════════
-
 
 
 粒度层次
@@ -607,7 +543,6 @@ flowchart TB
   模块 ──→ crate ──→ 进程 ──→ 网络
 
   L1        L2       L3       L4
-
 
 
 L1 单模块（单 mod）
@@ -619,7 +554,6 @@ L1 单模块（单 mod）
 └── 模式：Domain Model、Value Object、Specification、Registry、Identity Map、Lazy Load、Plugin
 
 
-
 L2 多模块（同 crate 内多 mod）
 
 ├── 验证：cargo check、依赖图 DAG
@@ -627,7 +561,6 @@ L2 多模块（同 crate 内多 mod）
 ├── 定理：CE-MAT-T1 静态判定
 
 └── 模式：Repository、Service Layer、Unit of Work、Data Mapper、MVC、Front Controller、Table Data Gateway、Active Record
-
 
 
 L3 多 crate（Cargo 依赖）
@@ -639,7 +572,6 @@ L3 多 crate（Cargo 依赖）
 └── 模式：DTO、Gateway（跨 crate）、Remote Facade
 
 
-
 L4 跨进程/跨网络（分布式、微服务）
 
 ├── 验证：契约/集成测试/Miri/模糊测试
@@ -649,11 +581,8 @@ L4 跨进程/跨网络（分布式、微服务）
 └── 模式：DTO、Gateway、Remote Facade、Optimistic Offline Lock、Event Sourcing
 
 
-
 架构模式→成熟度层级（与 02_complete_43_catalog 20 扩展模式对应）
-
 ```
-
 ---
 
 ## 定理速查 {#定理速查}
@@ -681,7 +610,6 @@ L4 跨进程/跨网络（分布式、微服务）
 ## 组合选型决策树（层次推进） {#组合选型决策树层次推进}
 
 ```text
-
 需组合多模块/多模式？
 ├── 创建 + 构建？ → Builder + Factory Method
 ├── 编排 + 持久化？ → Service Layer + Repository + DTO
@@ -691,7 +619,6 @@ L4 跨进程/跨网络（分布式、微服务）
 ├── 需事务边界？ → Unit of Work + Repository
 └── 需跨边界？ → DTO + Gateway + Remote Facade
 ```
-
 ---
 
 ## 组合反例（层次推进） {#组合反例层次推进}

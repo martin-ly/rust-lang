@@ -60,7 +60,6 @@ Rust 数据库生态谱系:
     ├── rocksdb-rs — RocksDB Rust 绑定
     └── SQLite 的 Rust 封装（rusqlite）
 ```
-
 ---
 
 ## 二、TiKV：分布式事务与 Percolator 协议
@@ -82,7 +81,6 @@ Phase 2: Commit
   2. 写入 commit 记录（key + commit_ts → start_ts）
   3. 清理锁
 ```
-
 ### 2.2 Rust 实现的优势
 
 | 维度 | TiKV（Rust） | 传统实现（Java/Go） |
@@ -116,7 +114,6 @@ impl Txn {
     }
 }
 ```
-
 ---
 
 ## 三、Materialize：流式 SQL 与增量视图维护
@@ -136,7 +133,6 @@ WHERE o.status = 'shipped';
 -- 即使 orders 和 customers 来自不同 CDC 源（Kafka + PostgreSQL），
 -- 结果也保证严格串行化——不会出现 "看到 customer 更新但没看到 order 更新" 的异常
 ```
-
 ### 3.2 与 CockroachDB 的对比
 
 | 维度 | Materialize | CockroachDB |
@@ -186,7 +182,6 @@ impl Index {
     }
 }
 ```
-
 > **关键洞察**: 搜索引擎的"段（segment）不可变性"与 Rust 的所有权（Ownership）模型天然匹配。Lucene/Elasticsearch 的段一旦写入即不可变，新的写入创建新段，后台合并旧段。Rust 的 `&T` 共享引用（Reference）完美表达了"段可被并发读取但不可修改"的语义，无需额外的读写锁。[来源: 💡 原创分析] · [Tantivy 设计文档] ✅
 
 ---
@@ -213,7 +208,6 @@ SELECT * FROM person WHERE age > 25;
 SELECT name, ->knows->person.name AS friends
 FROM person:tobie;
 ```
-
 ### 5.2 Rust 实现的安全保证
 
 | 特性 | SurrealDB（Rust） | MongoDB（C++） | Neo4j（Java） |
@@ -314,7 +308,6 @@ fn main() {
     }
 }
 ```
-
 > **设计意图**: 此示例展示数据库系统的**数据模型**与**查询接口**核心——`HashMap` 作为最小存储引擎，`query_by_prefix` 模拟索引扫描。Rust 的 `HashMap` 在标准库中已针对缓存局部性优化（Robin Hood 哈希），与生产级嵌入式数据库（如 RocksDB、Sled）的设计哲学一致：数据局部性优先。 [来源: 💡 原创实现]
 
 ---
@@ -340,7 +333,6 @@ fn db_connection_pool() {
     });
 }
 ```
-
 > **修正**: 数据库连接池必须使用 `Arc<Mutex<T>>` 或 `Arc<RwLock<T>>` 实现线程安全的内部可变性。
 
 ### 编译错误 2：泛型 Trait bound 未满足
@@ -360,7 +352,6 @@ impl<T> Query<T> {
     }
 }
 ```
-
 > **修正**: 泛型（Generics）数据库操作必须添加 Trait bound（`T: Display` 或 `T: Serialize`）。
 
 ### 编译错误 3：生命周期不匹配导致悬垂引用
@@ -373,7 +364,6 @@ fn query_result() -> &str {
     &result
 }
 ```
-
 > **修正**: 数据库查询结果通常需要返回拥有所有权的类型（`String`、`Vec<u8>`）或 `Box<str>`，不能返回局部数据的引用（Reference）。
 
 ### 编译错误 4：并发连接池的 `Send` 约束不满足（编译错误）
@@ -403,7 +393,6 @@ struct PoolFixed {
     connections: Mutex<Vec<Arc<Connection>>>, // ✅ Arc 是 Send + Sync
 }
 ```
-
 > **修正**: 数据库连接池通常需要在多线程间共享。`Rc<T>` 使用非原子引用计数，不能跨线程。必须使用 `Arc<T>`（原子引用计数）包装连接对象。这是 Rust 并发模型的基本约束——共享状态必须是 `Send + Sync`。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 编译错误 5：SQLx 查询类型不匹配（编译错误）
@@ -429,7 +418,6 @@ async fn good_query(pool: &sqlx::SqlitePool) -> Result<(), sqlx::Error> {
     Ok(())
 }
 ```
-
 > **修正**: SQLx 的宏（Macro）（`query!`、`query_as!`）在编译期解析 SQL 并验证返回类型与数据库 schema 的一致性（Coherence）。若类型不匹配，编译错误而非运行时 panic。这是 Rust"将错误提前到编译期"哲学在数据库访问层的典型应用。与 Go/Java 的运行时反射映射相比，SQLx 提供零开销、类型安全的查询接口。[来源: [SQLx Documentation](https://docs.rs/sqlx/)]
 
 ---
@@ -451,7 +439,6 @@ async fn good_query(pool: &sqlx::SqlitePool) -> Result<(), sqlx::Error> {
 
 fn main() {}
 ```
-
 > **修正**: Rust 的 ORM 生态（`Sea-ORM`、`Diesel`、`sqlx`）的 schema 验证：1) **Sea-ORM** — 运行时验证，代码优先（entity 生成 migration）；2) **Diesel** — 编译期验证（`table!` 宏（Macro）从 migration 生成 Rust 代码，schema 变更需重新运行 migration）；3) **sqlx** — 编译期验证（`query!` 宏在编译时连接数据库检查 SQL）。`sqlx` 的 compile-time checked queries 是 Rust 数据库访问的独特优势：SQL 语法、列名、类型在编译期验证，避免运行时错误。但这要求编译时数据库可访问（CI 中需配置 `SQLX_OFFLINE` + query 缓存文件）。这与 Python 的 SQLAlchemy（运行时反射）或 Java 的 Hibernate（注解 + 运行时验证）不同——Rust 的 ORM 趋向编译期安全。来源: [Sea-ORM] · 来源: [Diesel] · 来源: [sqlx]
 > **过渡**: 数据库系统：Rust 在存储引擎中的语义 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 数据库系统：Rust 在存储引擎中的语义 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -536,9 +523,7 @@ Rust 的显式哲学和数据所有权使延迟加载（lazy loading）难以安
 | 数据库系统：Rust 在存储引擎中的语义 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 数据库系统：Rust 在存储引擎中的语义 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 数据库系统：Rust 在存储引擎中的语义 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: 数据库系统：Rust 在存储引擎中的语义 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

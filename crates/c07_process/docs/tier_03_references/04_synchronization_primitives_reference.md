@@ -1,0 +1,1398 @@
+# Tier 3: 同步原语参考
+
+> **文档类型**: 技术参考
+> **适用版本**: Rust 1.92.0+
+> **前置知识**: [IPC通信实践](../tier_02_guides/02_ipc_communication_practice.md)
+
+---
+
+## 目录
+
+- [Tier 3: 同步原语参考](#tier-3-同步原语参考)
+  - [目录](#目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+  - [1. 同步原语概述](#1-同步原语概述)
+  - [2. 线程内同步](#2-线程内同步)
+    - [2.1 Mutex互斥锁](#21-mutex互斥锁)
+    - [2.2 RwLock读写锁](#22-rwlock读写锁)
+    - [2.3 Condvar条件变量](#23-condvar条件变量)
+    - [2.4 Barrier屏障](#24-barrier屏障)
+    - [2.5 Once一次性初始化](#25-once一次性初始化)
+  - [3. 原子操作](#3-原子操作)
+  - [4. 进程间同步](#4-进程间同步)
+    - [4.1 文件锁](#41-文件锁)
+    - [4.2 信号量](#42-信号量)
+    - [4.3 共享内存同步](#43-共享内存同步)
+  - [5. 死锁预防](#5-死锁预防)
+  - [6. 性能对比](#6-性能对比)
+  - [7. 无锁编程](#7-无锁编程)
+  - [8. 异步同步原语](#8-异步同步原语)
+  - [9. 最佳实践](#9-最佳实践)
+  - [10. 实战案例](#10-实战案例)
+    - [案例: 线程安全的进程池](#案例-线程安全的进程池)
+  - [总结](#总结)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**同步原语参考 (Synchronization Primitives Reference)**:
+
+- **定义**: 用于协调多个并发执行单元（线程/进程）访问共享资源的机制的技术参考
+- **类型**: 技术参考文档
+- **范畴**: 并发编程、系统编程
+- **版本**: Rust 1.0+
+- **相关概念**: 同步原语、互斥锁、条件变量、信号量
+
+### 属性特征
+
+**核心属性**:
+
+- **线程内同步**: Mutex、RwLock、Condvar、Barrier
+- **进程间同步**: 文件锁、信号量、共享内存同步
+- **原子操作**: 原子类型和操作
+- **死锁预防**: 死锁预防策略
+
+**性能特征**:
+
+- **锁性能**: 不同锁的性能对比
+- **适用场景**: 线程同步、进程同步、共享资源保护
+
+### 关系连接
+
+**继承关系**:
+
+- Mutex --[is-a]--> 同步原语
+- RwLock --[is-a]--> 同步原语
+
+**组合关系**:
+
+- 同步原语参考 --[contains]--> 多个同步原语
+- 并发程序 --[uses]--> 同步原语
+
+**依赖关系**:
+
+- 同步原语参考 --[depends-on]--> 操作系统支持
+- 并发安全 --[depends-on]--> 同步原语
+
+### 思维导图
+
+```text
+同步原语参考
+│
+├── 线程内同步
+│   ├── Mutex
+│   ├── RwLock
+│   ├── Condvar
+│   └── Barrier
+├── 原子操作
+│   └── 原子类型
+├── 进程间同步
+│   ├── 文件锁
+│   └── 信号量
+└── 死锁预防
+    └── 预防策略
+```
+---
+
+## 1. 同步原语概述
+
+**定义**: 用于协调多个并发执行单元（线程/进程）访问共享资源的机制。
+
+**分类**:
+
+```text
+同步原语
+├─ 线程内同步
+│  ├─ Mutex (互斥锁)
+│  ├─ RwLock (读写锁)
+│  ├─ Condvar (条件变量)
+│  ├─ Barrier (屏障)
+│  ├─ Once (一次性初始化)
+│  └─ Atomic (原子操作)
+└─ 进程间同步
+   ├─ 文件锁 (flock/fcntl)
+   ├─ 信号量 (Semaphore)
+   ├─ 共享内存同步
+   └─ 消息传递
+```
+**为什么需要同步**:
+
+```rust
+// ❌ 数据竞争示例
+use std::thread;
+
+let mut counter = 0;
+
+let handles: Vec<_> = (0..10)
+    .map(|_| {
+        thread::spawn(|| {
+            counter += 1;  // 数据竞争！
+        })
+    })
+    .collect();
+
+// ✅ 正确的同步
+use std::sync::{Arc, Mutex};
+
+let counter = Arc::new(Mutex::new(0));
+
+let handles: Vec<_> = (0..10)
+    .map(|_| {
+        let counter = Arc::clone(&counter);
+        thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+            *num += 1;
+        })
+    })
+    .collect();
+```
+---
+
+## 2. 线程内同步
+
+### 2.1 Mutex互斥锁
+
+**原理**: 确保同一时刻只有一个线程访问共享资源。
+
+**内部实现**:
+
+- **Unix**: `pthread_mutex_t` (futex)
+- **Windows**: `CRITICAL_SECTION` / `SRWLOCK`
+- **优化**: 自旋 + 系统调用混合模式
+
+**性能特性**:
+
+| 特性      | 说明                |
+| :--- | :--- || 锁获取    | ~10-50 ns (无竞争)  |
+| 锁竞争    | ~1-10 μs (系统调用) |
+| 公平性    | 非公平 (FIFO不保证) |
+| Poisoning | 自动检测panic       |
+
+**基本用法**:
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+let data = Arc::new(Mutex::new(0));
+let mut handles = vec![];
+
+for _ in 0..10 {
+    let data = Arc::clone(&data);
+    let handle = thread::spawn(move || {
+        let mut num = data.lock().unwrap();
+        *num += 1;
+    });
+    handles.push(handle);
+}
+
+for handle in handles {
+    handle.join().unwrap();
+}
+
+println!("Result: {}", *data.lock().unwrap());  // 10
+```
+**高级用法**:
+
+```rust
+use std::sync::Mutex;
+
+// 带超时的锁获取（需parking_lot库）
+use parking_lot::Mutex as ParkingMutex;
+use std::time::Duration;
+
+let mutex = ParkingMutex::new(42);
+
+if let Some(guard) = mutex.try_lock_for(Duration::from_secs(1)) {
+    println!("获取锁成功: {}", *guard);
+} else {
+    println!("获取锁超时");
+}
+
+// 死锁检测
+let mutex = ParkingMutex::new(0);
+let _guard1 = mutex.lock();
+// let _guard2 = mutex.lock();  // 死锁！
+```
+**性能优化**:
+
+```rust
+// ❌ 低效：锁持有时间过长
+let data = Arc::new(Mutex::new(vec![1, 2, 3]));
+{
+    let mut vec = data.lock().unwrap();
+    for i in 0..1000 {
+        vec.push(i);  // 锁持有整个循环
+    }
+}
+
+// ✅ 高效：减少锁持有时间
+let data = Arc::new(Mutex::new(vec![1, 2, 3]));
+let new_items: Vec<_> = (0..1000).collect();
+{
+    let mut vec = data.lock().unwrap();
+    vec.extend(new_items);  // 锁持有时间短
+}
+```
+**Poisoning 处理详解**:
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+let data = Arc::new(Mutex::new(vec![1, 2, 3]));
+let data_clone = Arc::clone(&data);
+
+// 线程中发生panic
+let handle = thread::spawn(move || {
+    let mut vec = data_clone.lock().unwrap();
+    vec.push(4);
+    panic!("模拟错误");  // 锁进入poisoned状态
+});
+
+let _ = handle.join();
+
+// 处理poisoned锁
+match data.lock() {
+    Ok(guard) => {
+        println!("正常获取锁: {:?}", *guard);
+    }
+    Err(poisoned) => {
+        // 方法1: 恢复数据
+        let mut guard = poisoned.into_inner();
+        println!("锁已poisoned，恢复数据: {:?}", *guard);
+        guard.clear();  // 修复数据
+
+        // 方法2: 忽略poison状态
+        // let guard = data.lock().unwrap_or_else(|e| e.into_inner());
+    }
+}
+```
+**公平性与饥饿问题**:
+
+```rust
+use parking_lot::FairMutex;  // 公平锁实现
+use std::thread;
+use std::time::Duration;
+
+let fair_mutex = Arc::new(FairMutex::new(0));
+
+// 高优先级线程
+for i in 0..5 {
+    let mutex = Arc::clone(&fair_mutex);
+    thread::spawn(move || {
+        thread::sleep(Duration::from_millis(i * 10));
+        let _guard = mutex.lock();
+        println!("线程 {} 获取锁", i);
+    });
+}
+
+// parking_lot::FairMutex 保证 FIFO 顺序
+// std::sync::Mutex 不保证顺序（可能导致饥饿）
+```
+**Mutex vs Atomic 性能对比**:
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::thread;
+
+// Mutex版本
+let mutex_counter = Arc::new(Mutex::new(0_usize));
+let start = std::time::Instant::now();
+let handles: Vec<_> = (0..4).map(|_| {
+    let counter = Arc::clone(&mutex_counter);
+    thread::spawn(move || {
+        for _ in 0..1_000_000 {
+            *counter.lock().unwrap() += 1;
+        }
+    })
+}).collect();
+for h in handles { h.join().unwrap(); }
+println!("Mutex: {:?}", start.elapsed());  // ~50ms
+
+// Atomic版本
+let atomic_counter = Arc::new(AtomicUsize::new(0));
+let start = std::time::Instant::now();
+let handles: Vec<_> = (0..4).map(|_| {
+    let counter = Arc::clone(&atomic_counter);
+    thread::spawn(move || {
+        for _ in 0..1_000_000 {
+            counter.fetch_add(1, Ordering::Relaxed);
+        }
+    })
+}).collect();
+for h in handles { h.join().unwrap(); }
+println!("Atomic: {:?}", start.elapsed());  // ~10ms (5x faster)
+```
+**结论**: 对于简单操作，优先使用 `Atomic`
+
+---
+
+### 2.2 RwLock读写锁
+
+**原理**: 允许多个读者或一个写者。
+
+**性能特性**:
+
+| 场景                | RwLock | Mutex | 性能对比      |
+| :--- | :--- | :--- | :--- || 读多写少 (90% read) | 10 ns  | 50 ns | **5x faster** |
+| 读写均衡 (50% read) | 60 ns  | 50 ns | 1.2x slower   |
+| 写多读少 (10% read) | 100 ns | 50 ns | **2x slower** |
+
+**适用场景**:
+
+- ✅ 配置读取 (读多写少)
+- ✅ 缓存系统 (读>>写)
+- ❌ 频繁更新的计数器 (用Atomic)
+- ❌ 读写均衡 (用Mutex更简单)
+
+**基本用法**:
+
+```rust
+use std::sync::{Arc, RwLock};
+use std::thread;
+
+let data = Arc::new(RwLock::new(0));
+
+// 多个读者线程
+for _ in 0..5 {
+    let data = Arc::clone(&data);
+    thread::spawn(move || {
+        let n = data.read().unwrap();
+        println!("Reader: {}", *n);
+    });
+}
+
+// 单个写者线程
+let data_clone = Arc::clone(&data);
+thread::spawn(move || {
+    let mut n = data_clone.write().unwrap();
+    *n += 1;
+    println!("Writer: updated to {}", *n);
+});
+```
+**性能对比**:
+
+| 场景               | Mutex | RwLock  |
+| :--- | :--- | :--- || 纯读（10线程）     | 1.0x  | 5.2x ✅ |
+| 纯写（10线程）     | 1.0x  | 0.8x    |
+| 读写混合（9读1写） | 1.0x  | 3.5x ✅ |
+
+**适用场景**: 读多写少
+
+**写饥饿问题与解决方案**:
+
+```rust
+use std::sync::{Arc, RwLock};
+use std::thread;
+use std::time::Duration;
+
+let data = Arc::new(RwLock::new(0));
+
+// 大量读者持续占用
+for i in 0..100 {
+    let data = Arc::clone(&data);
+    thread::spawn(move || loop {
+        let _guard = data.read().unwrap();
+        thread::sleep(Duration::from_micros(10));
+        // 读锁持续占用，写者可能饿死
+    });
+}
+
+// 写者可能永远无法获得锁
+let data_clone = Arc::clone(&data);
+thread::spawn(move || {
+    println!("写者等待中...");
+    let mut guard = data_clone.write().unwrap();
+    *guard += 1;
+    println!("终于获得写锁！");
+});
+
+// 解决方案1: 使用parking_lot::RwLock (写者优先)
+use parking_lot::RwLock as ParkingRwLock;
+
+let data = Arc::new(ParkingRwLock::new(0));
+// parking_lot 的 RwLock 会给写者更高优先级
+
+// 解决方案2: 读锁超时机制
+let data = Arc::new(ParkingRwLock::new(0));
+if let Some(guard) = data.try_read_for(Duration::from_millis(100)) {
+    // 使用读锁
+} else {
+    // 让出，避免饥饿
+}
+```
+**锁升级与降级**:
+
+```rust
+use parking_lot::{RwLock, RwLockUpgradableReadGuard};
+
+let lock = RwLock::new(vec![1, 2, 3]);
+
+// 可升级的读锁
+let upgradable = lock.upgradable_read();
+println!("当前值: {:?}", *upgradable);
+
+// 需要修改时，升级为写锁
+if upgradable.len() < 5 {
+    let mut write_guard = RwLockUpgradableReadGuard::upgrade(upgradable);
+    write_guard.push(4);
+    write_guard.push(5);
+}
+
+// 注意: std::sync::RwLock 不支持锁升级
+// 尝试升级会导致死锁：
+// let read = lock.read().unwrap();
+// let write = lock.write().unwrap();  // 死锁！
+```
+**RwLock vs Mutex 决策树**:
+
+```text
+读写比例 > 80%?
+├─ Yes → RwLock (读多写少)
+│   ├─ 写者频繁等待? → parking_lot::RwLock (写者优先)
+│   └─ 需要锁升级? → parking_lot::RwLock (支持upgradable_read)
+└─ No → Mutex (读写均衡或写多)
+    ├─ 简单操作? → Atomic (更快)
+    └─ 复杂操作? → Mutex
+```
+**实战案例: 配置热更新**:
+
+```rust
+use std::sync::{Arc, RwLock};
+use std::collections::HashMap;
+use std::thread;
+use std::time::Duration;
+
+#[derive(Clone, Debug)]
+struct Config {
+    settings: HashMap<String, String>,
+}
+
+struct ConfigManager {
+    config: Arc<RwLock<Config>>,
+}
+
+impl ConfigManager {
+    fn new() -> Self {
+        Self {
+            config: Arc::new(RwLock::new(Config {
+                settings: HashMap::new(),
+            })),
+        }
+    }
+
+    // 高频读取
+    fn get(&self, key: &str) -> Option<String> {
+        let config = self.config.read().unwrap();
+        config.settings.get(key).cloned()
+    }
+
+    // 低频更新
+    fn update(&self, key: String, value: String) {
+        let mut config = self.config.write().unwrap();
+        config.settings.insert(key, value);
+        println!("配置已更新");
+    }
+
+    // 批量更新（避免多次获取写锁）
+    fn batch_update(&self, updates: HashMap<String, String>) {
+        let mut config = self.config.write().unwrap();
+        for (k, v) in updates {
+            config.settings.insert(k, v);
+        }
+    }
+}
+
+// 使用
+let manager = Arc::new(ConfigManager::new());
+
+// 多个读者线程
+for i in 0..10 {
+    let mgr = Arc::clone(&manager);
+    thread::spawn(move || {
+        loop {
+            if let Some(val) = mgr.get("max_connections") {
+                println!("线程 {} 读取配置: {}", i, val);
+            }
+            thread::sleep(Duration::from_millis(100));
+        }
+    });
+}
+
+// 单个写者线程
+let mgr = Arc::clone(&manager);
+thread::spawn(move || {
+    loop {
+        mgr.update("max_connections".to_string(), "100".to_string());
+        thread::sleep(Duration::from_secs(5));
+    }
+});
+```
+---
+
+### 2.3 Condvar条件变量
+
+**原理**: 线程等待特定条件成立。
+
+**生产者-消费者模式**:
+
+```rust
+use std::sync::{Arc, Mutex, Condvar};
+use std::thread;
+use std::collections::VecDeque;
+
+struct Queue {
+    data: Mutex<VecDeque<i32>>,
+    not_empty: Condvar,
+}
+
+impl Queue {
+    fn new() -> Self {
+        Self {
+            data: Mutex::new(VecDeque::new()),
+            not_empty: Condvar::new(),
+        }
+    }
+
+    fn push(&self, value: i32) {
+        let mut queue = self.data.lock().unwrap();
+        queue.push_back(value);
+        self.not_empty.notify_one();
+    }
+
+    fn pop(&self) -> i32 {
+        let mut queue = self.data.lock().unwrap();
+        while queue.is_empty() {
+            queue = self.not_empty.wait(queue).unwrap();
+        }
+        queue.pop_front().unwrap()
+    }
+}
+
+// 使用
+let queue = Arc::new(Queue::new());
+
+// 消费者
+let q = Arc::clone(&queue);
+thread::spawn(move || {
+    let value = q.pop();
+    println!("Got: {}", value);
+});
+
+// 生产者
+queue.push(42);
+```
+**虚假唤醒处理**:
+
+```rust
+use std::sync::{Arc, Mutex, Condvar};
+
+let pair = Arc::new((Mutex::new(false), Condvar::new()));
+let (lock, cvar) = &*pair;
+
+// ❌ 错误：不处理虚假唤醒
+let mut ready = lock.lock().unwrap();
+cvar.wait(ready).unwrap();  // 可能虚假唤醒
+// 这里条件可能仍不满足！
+
+// ✅ 正确：使用while循环
+let mut ready = lock.lock().unwrap();
+while !*ready {  // 重新检查条件
+    ready = cvar.wait(ready).unwrap();
+}
+// 条件确保满足
+
+// ✅ 更好：使用wait_while
+let ready = lock.lock().unwrap();
+let ready = cvar.wait_while(ready, |ready| !*ready).unwrap();
+// 自动处理虚假唤醒
+```
+**超时机制**:
+
+```rust
+use std::sync::{Arc, Mutex, Condvar};
+use std::time::Duration;
+
+let pair = Arc::new((Mutex::new(false), Condvar::new()));
+let (lock, cvar) = &*pair;
+
+let mut ready = lock.lock().unwrap();
+let result = cvar.wait_timeout(ready, Duration::from_secs(1)).unwrap();
+
+if result.1.timed_out() {
+    println!("等待超时");
+} else {
+    println!("条件已满足");
+}
+
+// 带超时的wait_while
+let ready = lock.lock().unwrap();
+let (ready, timeout_result) = cvar.wait_timeout_while(
+    ready,
+    Duration::from_secs(1),
+    |ready| !*ready
+).unwrap();
+
+if timeout_result.timed_out() {
+    println!("超时，条件未满足");
+}
+```
+**多条件变量模式**:
+
+```rust
+use std::sync::{Arc, Mutex, Condvar};
+use std::collections::VecDeque;
+
+struct BoundedQueue<T> {
+    data: Mutex<VecDeque<T>>,
+    not_empty: Condvar,
+    not_full: Condvar,
+    capacity: usize,
+}
+
+impl<T> BoundedQueue<T> {
+    fn new(capacity: usize) -> Self {
+        Self {
+            data: Mutex::new(VecDeque::new()),
+            not_empty: Condvar::new(),
+            not_full: Condvar::new(),
+            capacity,
+        }
+    }
+
+    fn push(&self, value: T) {
+        let mut queue = self.data.lock().unwrap();
+        // 队列满时等待
+        while queue.len() >= self.capacity {
+            queue = self.not_full.wait(queue).unwrap();
+        }
+        queue.push_back(value);
+        self.not_empty.notify_one();
+    }
+
+    fn pop(&self) -> T {
+        let mut queue = self.data.lock().unwrap();
+        // 队列空时等待
+        while queue.is_empty() {
+            queue = self.not_empty.wait(queue).unwrap();
+        }
+        let value = queue.pop_front().unwrap();
+        self.not_full.notify_one();
+        value
+    }
+}
+
+// 使用
+let queue = Arc::new(BoundedQueue::new(10));
+
+// 生产者
+let q = Arc::clone(&queue);
+std::thread::spawn(move || {
+    for i in 0..20 {
+        q.push(i);  // 队列满时自动阻塞
+        println!("推入: {}", i);
+    }
+});
+
+// 消费者
+let q = Arc::clone(&queue);
+std::thread::spawn(move || {
+    for _ in 0..20 {
+        let val = q.pop();  // 队列空时自动阻塞
+        println!("弹出: {}", val);
+    }
+});
+```
+**Condvar vs Channel 性能对比**:
+
+| 场景              | Condvar    | Channel    | 推荐       |
+| :--- | :--- | :--- | :--- || 简单通知          | 20 ns      | 50 ns      | Condvar ✅ |
+| 数据传递          | 需手动实现 | 内置支持   | Channel ✅ |
+| 多生产者/多消费者 | 复杂       | 简单       | Channel ✅ |
+| 等待多个条件      | 灵活       | 需 select! | Condvar ✅ |
+
+---
+
+### 2.4 Barrier屏障
+
+**原理**: 等待所有线程到达同步点。
+
+```rust
+use std::sync::{Arc, Barrier};
+use std::thread;
+
+let barrier = Arc::new(Barrier::new(3));
+
+for i in 0..3 {
+    let barrier = Arc::clone(&barrier);
+    thread::spawn(move || {
+        println!("Thread {} 开始工作", i);
+
+        // 模拟工作
+        thread::sleep(std::time::Duration::from_millis(i * 100));
+
+        println!("Thread {} 到达屏障", i);
+        barrier.wait();
+
+        println!("Thread {} 继续执行", i);
+    });
+}
+```
+**输出**:
+
+```text
+Thread 0 开始工作
+Thread 1 开始工作
+Thread 2 开始工作
+Thread 0 到达屏障
+Thread 1 到达屏障
+Thread 2 到达屏障
+Thread 0 继续执行
+Thread 1 继续执行
+Thread 2 继续执行
+```
+---
+
+### 2.5 Once一次性初始化
+
+**原理**: 确保初始化代码只执行一次。
+
+```rust
+use std::sync::Once;
+
+static INIT: Once = Once::new();
+
+fn expensive_initialization() {
+    INIT.call_once(|| {
+        println!("初始化（只执行一次）");
+        // 耗时初始化
+    });
+}
+
+// 多次调用，但只初始化一次
+expensive_initialization();
+expensive_initialization();
+```
+**LazyLock (Rust 1.80+)**:
+
+```rust
+use std::sync::LazyLock;
+
+static CONFIG: LazyLock<Config> = LazyLock::new(|| {
+    Config::load_from_file("config.toml")
+});
+
+// 首次访问时初始化
+println!("{:?}", *CONFIG);
+```
+---
+
+## 3. 原子操作
+
+**无锁的并发**: 使用硬件支持的原子指令。
+
+**基本原子类型**:
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+let counter = AtomicUsize::new(0);
+
+// 原子递增
+counter.fetch_add(1, Ordering::SeqCst);
+
+// 原子比较并交换
+let expected = 1;
+let new_value = 2;
+counter.compare_exchange(
+    expected,
+    new_value,
+    Ordering::SeqCst,
+    Ordering::SeqCst,
+);
+```
+**内存顺序 (Ordering)**:
+
+| 顺序      | 说明     | 性能 | 适用场景 |
+| :--- | :--- | :--- | :--- || `Relaxed` | 最弱保证 | 最快 | 计数器   |
+| `Acquire` | 读操作   | 中   | 读锁     |
+| `Release` | 写操作   | 中   | 写锁     |
+| `AcqRel`  | 读写操作 | 中   | 原子交换 |
+| `SeqCst`  | 最强保证 | 最慢 | 默认选择 |
+
+**性能对比** (10M操作):
+
+| 方法                    | 耗时  |
+| :--- | :--- || `AtomicUsize (Relaxed)` | 50ms  |
+| `AtomicUsize (SeqCst)`  | 80ms  |
+| `Mutex`                 | 450ms |
+
+**适用场景**: 简单计数器、标志位。
+
+---
+
+## 4. 进程间同步
+
+### 4.1 文件锁
+
+**flock/fcntl锁**:
+
+```rust
+use std::fs::OpenOptions;
+use fs2::FileExt;
+
+fn acquire_file_lock() -> std::io::Result<()> {
+    let file = OpenOptions::new()
+        .write(true)
+        .create(true)
+        .open("/tmp/myapp.lock")?;
+
+    // 尝试获取排他锁
+    match file.try_lock_exclusive() {
+        Ok(_) => {
+            println!("✅ 获取锁成功");
+
+            // 临界区
+            std::thread::sleep(std::time::Duration::from_secs(5));
+
+            file.unlock()?;
+            println!("✅ 释放锁");
+        }
+        Err(e) => {
+            println!("❌ 锁已被占用: {}", e);
+        }
+    }
+
+    Ok(())
+}
+```
+**应用场景**: 防止程序多开、保护共享文件。
+
+---
+
+### 4.2 信号量
+
+**原理**: 控制对有限资源的并发访问。
+
+**分类**:
+
+- **二进制信号量** (值0或1) - 类似Mutex
+- **计数信号量** (值0-N) - 资源池
+
+**异步信号量 (tokio::sync::Semaphore)**:
+
+```rust
+use std::sync::Arc;
+use tokio::sync::Semaphore;
+
+#[tokio::main]
+async fn main() {
+    let semaphore = Arc::new(Semaphore::new(3));  // 最多3个并发
+
+    let mut handles = vec![];
+
+    for i in 0..10 {
+        let sem = Arc::clone(&semaphore);
+        let handle = tokio::spawn(async move {
+            let _permit = sem.acquire().await.unwrap();
+            println!("Task {} 执行中 (并发: 3)", i);
+            tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
+            // permit drop时自动释放
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.await.unwrap();
+    }
+}
+```
+**POSIX命名信号量 (跨进程)**:
+
+```rust
+use nix::sys::sem::*;
+use nix::sys::stat::Mode;
+use nix::fcntl::OFlag;
+
+fn use_named_semaphore() -> Result<(), Box<dyn std::error::Error>> {
+    // 创建命名信号量
+    let name = std::ffi::CString::new("/my_semaphore")?;
+    let sem = sem_open(
+        &name,
+        OFlag::O_CREAT,
+        Mode::S_IRUSR | Mode::S_IWUSR,
+        3  // 初始值3
+    )?;
+
+    // 等待信号量 (P操作)
+    sem_wait(&sem)?;
+    println!("获取信号量");
+
+    // 临界区
+    std::thread::sleep(std::time::Duration::from_secs(1));
+
+    // 释放信号量 (V操作)
+    sem_post(&sem)?;
+    println!("释放信号量");
+
+    // 清理
+    sem_close(sem)?;
+    sem_unlink(&name)?;
+
+    Ok(())
+}
+```
+**限流器实现**:
+
+```rust
+use std::sync::Arc;
+use tokio::sync::Semaphore;
+use std::time::{Duration, Instant};
+
+struct RateLimiter {
+    semaphore: Arc<Semaphore>,
+    rate: usize,  // 每秒允许的请求数
+}
+
+impl RateLimiter {
+    fn new(rate: usize) -> Self {
+        let limiter = Self {
+            semaphore: Arc::new(Semaphore::new(rate)),
+            rate,
+        };
+
+        // 后台任务：每秒补充许可
+        let sem = Arc::clone(&limiter.semaphore);
+        tokio::spawn(async move {
+            loop {
+                tokio::time::sleep(Duration::from_secs(1)).await;
+                // 释放所有许可（补充到rate）
+                sem.add_permits(rate);
+            }
+        });
+
+        limiter
+    }
+
+    async fn acquire(&self) {
+        let _permit = self.semaphore.acquire().await.unwrap();
+        // permit自动drop
+    }
+}
+
+// 使用限流器
+#[tokio::main]
+async fn main() {
+    let limiter = Arc::new(RateLimiter::new(10));  // 每秒10个请求
+
+    for i in 0..100 {
+        let limiter = Arc::clone(&limiter);
+        tokio::spawn(async move {
+            limiter.acquire().await;
+            println!("请求 {} 处理中", i);
+            // 处理请求
+        });
+    }
+
+    tokio::time::sleep(Duration::from_secs(15)).await;
+}
+```
+**连接池实现 (信号量 + Arc)**:
+
+```rust
+use std::sync::Arc;
+use tokio::sync::Semaphore;
+
+struct ConnectionPool<T> {
+    connections: Vec<Arc<T>>,
+    semaphore: Arc<Semaphore>,
+}
+
+impl<T> ConnectionPool<T> {
+    fn new(connections: Vec<T>) -> Self {
+        let count = connections.len();
+        Self {
+            connections: connections.into_iter().map(Arc::new).collect(),
+            semaphore: Arc::new(Semaphore::new(count)),
+        }
+    }
+
+    async fn acquire(&self) -> PoolGuard<T> {
+        let permit = self.semaphore.acquire().await.unwrap();
+        let conn = Arc::clone(&self.connections[0]);  // 简化版本
+        PoolGuard {
+            conn,
+            _permit: permit,
+        }
+    }
+}
+
+struct PoolGuard<T> {
+    conn: Arc<T>,
+    _permit: tokio::sync::SemaphorePermit<'static>,
+}
+
+impl<T> std::ops::Deref for PoolGuard<T> {
+    type Target = T;
+    fn deref(&self) -> &Self::Target {
+        &self.conn
+    }
+}
+
+// 使用
+struct DbConnection;
+
+#[tokio::main]
+async fn main() {
+    let pool = Arc::new(ConnectionPool::new(vec![
+        DbConnection, DbConnection, DbConnection
+    ]));
+
+    let mut handles = vec![];
+    for i in 0..10 {
+        let pool = Arc::clone(&pool);
+        let handle = tokio::spawn(async move {
+            let conn = pool.acquire().await;
+            println!("连接 {} 获取", i);
+            tokio::time::sleep(Duration::from_secs(1)).await;
+            // conn drop时自动归还
+        });
+        handles.push(handle);
+    }
+
+    for h in handles {
+        h.await.unwrap();
+    }
+}
+```
+**信号量 vs Mutex**:
+
+| 特性     | Semaphore    | Mutex    |
+| :--- | :--- | :--- || 并发数   | N (可配置)   | 1        |
+| 适用场景 | 资源池、限流 | 互斥访问 |
+| 性能     | 中等         | 高       |
+| 灵活性   | 高           | 低       |
+
+---
+
+### 4.3 共享内存同步
+
+**原子操作 + 共享内存**:
+
+```rust
+use shared_memory::*;
+use std::sync::atomic::{AtomicU32, Ordering};
+
+// 进程A：写入
+fn process_a() -> Result<(), Box<dyn std::error::Error>> {
+    let shmem = ShmemConf::new().size(4096).create()?;
+
+    unsafe {
+        let counter = shmem.as_ptr() as *mut AtomicU32;
+        (*counter).store(0, Ordering::SeqCst);
+
+        for _ in 0..1000 {
+            (*counter).fetch_add(1, Ordering::SeqCst);
+        }
+    }
+
+    Ok(())
+}
+
+// 进程B：读取
+fn process_b() -> Result<(), Box<dyn std::error::Error>> {
+    let shmem = ShmemConf::new().size(4096).open()?;
+
+    unsafe {
+        let counter = shmem.as_ptr() as *const AtomicU32;
+        let value = (*counter).load(Ordering::SeqCst);
+        println!("Counter: {}", value);
+    }
+
+    Ok(())
+}
+```
+---
+
+## 5. 死锁预防
+
+**死锁的4个必要条件**:
+
+1. **互斥**: 资源不可共享
+2. **持有并等待**: 持有资源的同时等待其他资源
+3. **不可抢占**: 资源不能被强制释放
+4. **循环等待**: 形成资源请求环路
+
+**预防策略**:
+
+**1. 锁顺序**:
+
+```rust
+// ❌ 死锁风险
+thread::spawn(|| {
+    let _a = lock_a.lock();
+    let _b = lock_b.lock();
+});
+
+thread::spawn(|| {
+    let _b = lock_b.lock();  // 反向！
+    let _a = lock_a.lock();
+});
+
+// ✅ 正确：统一顺序
+thread::spawn(|| {
+    let _a = lock_a.lock();
+    let _b = lock_b.lock();
+});
+
+thread::spawn(|| {
+    let _a = lock_a.lock();  // 相同顺序
+    let _b = lock_b.lock();
+});
+```
+**2. try_lock**:
+
+```rust
+loop {
+    let guard_a = lock_a.lock();
+
+    if let Ok(guard_b) = lock_b.try_lock() {
+        // 同时持有两个锁
+        break;
+    }
+
+    // 释放lock_a，稍后重试
+    drop(guard_a);
+    std::thread::sleep(std::time::Duration::from_millis(10));
+}
+```
+**3. 超时机制** (需parking_lot):
+
+```rust
+use parking_lot::Mutex;
+
+let mutex = Mutex::new(0);
+
+if let Some(guard) = mutex.try_lock_for(Duration::from_secs(5)) {
+    println!("获取锁成功");
+} else {
+    println!("超时，可能存在死锁");
+}
+```
+---
+
+## 6. 性能对比
+
+**延迟对比** (单次操作):
+
+| 同步原语                | 延迟   |
+| :--- | :--- || `AtomicUsize (Relaxed)` | ~5 ns  |
+| `AtomicUsize (SeqCst)`  | ~8 ns  |
+| `Mutex`                 | ~45 ns |
+| `RwLock (read)`         | ~40 ns |
+| `RwLock (write)`        | ~50 ns |
+
+**吞吐量对比** (10线程，100万操作):
+
+| 同步原语         | 操作/秒    |
+| :--- | :--- || `AtomicUsize`    | 22M ops/s  |
+| `Mutex`          | 2.2M ops/s |
+| `RwLock (90%读)` | 8.5M ops/s |
+| 无同步(单线程)   | 100M ops/s |
+
+---
+
+## 7. 无锁编程
+
+**无锁队列**:
+
+```rust
+use crossbeam::queue::ArrayQueue;
+
+let queue = ArrayQueue::new(10);
+
+// 生产者
+queue.push(42).ok();
+
+// 消费者
+if let Some(value) = queue.pop() {
+    println!("Got: {}", value);
+}
+```
+**优点**: 高性能、无死锁风险
+**缺点**: 实现复杂、难以调试
+
+---
+
+## 8. 异步同步原语
+
+**Tokio同步原语**:
+
+```rust
+use tokio::sync::{Mutex, RwLock, Semaphore};
+
+// 异步Mutex
+let mutex = Mutex::new(0);
+{
+    let mut guard = mutex.lock().await;
+    *guard += 1;
+}
+
+// 异步RwLock
+let lock = RwLock::new(0);
+{
+    let read = lock.read().await;
+    println!("{}", *read);
+}
+
+// 信号量
+let sem = Semaphore::new(3);
+let permit = sem.acquire().await.unwrap();
+```
+**关键区别**: 异步原语在等待时不阻塞线程。
+
+---
+
+## 9. 最佳实践
+
+**1. 最小化锁范围**:
+
+```rust
+// ❌ 锁持有时间长
+let mut data = shared_data.lock().unwrap();
+heavy_computation(&data);
+
+// ✅ 锁持有时间短
+let snapshot = {
+    let data = shared_data.lock().unwrap();
+    data.clone()
+};
+heavy_computation(&snapshot);
+```
+**2. 选择合适的同步原语**:
+
+- **简单计数器**: `AtomicUsize`
+- **读多写少**: `RwLock`
+- **一般场景**: `Mutex`
+- **生产者-消费者**: `Condvar` 或 `channel`
+- **一次性初始化**: `Once` / `LazyLock`
+
+**3. 避免嵌套锁**:
+
+```rust
+// ❌ 嵌套锁（死锁风险）
+let _a = lock_a.lock();
+let _b = lock_b.lock();
+
+// ✅ 单一锁
+let _combined = combined_lock.lock();
+```
+**4. 使用RAII**:
+
+```rust
+// ✅ 自动释放锁
+{
+    let _guard = mutex.lock().unwrap();
+    // 作用域结束时自动释放
+}
+```
+---
+
+## 10. 实战案例
+
+### 案例: 线程安全的进程池
+
+```rust
+use std::sync::{Arc, Mutex, Condvar};
+use std::collections::VecDeque;
+use std::process::{Child, Command};
+
+pub struct ProcessPool {
+    available: Arc<(Mutex<VecDeque<Child>>, Condvar)>,
+    max_size: usize,
+}
+
+impl ProcessPool {
+    pub fn new(max_size: usize) -> Self {
+        Self {
+            available: Arc::new((Mutex::new(VecDeque::new()), Condvar::new())),
+            max_size,
+        }
+    }
+
+    pub fn acquire(&self) -> Child {
+        let (lock, cvar) = &*self.available;
+        let mut queue = lock.lock().unwrap();
+
+        while queue.is_empty() && queue.len() < self.max_size {
+            queue = cvar.wait(queue).unwrap();
+        }
+
+        queue.pop_front().unwrap_or_else(|| {
+            Command::new("worker").spawn().unwrap()
+        })
+    }
+
+    pub fn release(&self, child: Child) {
+        let (lock, cvar) = &*self.available;
+        let mut queue = lock.lock().unwrap();
+        queue.push_back(child);
+        cvar.notify_one();
+    }
+}
+```
+---
+
+## 总结
+
+**同步原语选择指南**:
+
+| 需求         | 推荐原语            |
+| :--- | :--- |
+| 简单计数器   | `AtomicUsize`       |
+| 共享可变状态 | `Mutex`             |
+| 读多写少     | `RwLock`            |
+| 等待条件     | `Condvar`           |
+| 同步点       | `Barrier`           |
+| 一次性初始化 | `Once` / `LazyLock` |
+| 进程间同步   | 文件锁 / 信号量     |
+| 异步场景     | `tokio::sync::*`    |
+
+**关键原则**:
+
+1. ✅ 选择合适的同步原语
+2. ✅ 最小化锁范围
+3. ✅ 避免嵌套锁
+4. ✅ 使用超时机制
+5. ✅ 优先使用无锁数据结构
+
+---
+
+**下一步**: [05\_性能优化参考](05_performance_optimization_reference.md)
+
+---
+
+**文档维护**: Documentation Team
+**创建日期**: 2025-10-22
+**最后更新**: 2025-12-11
+**适用版本**: Rust 1.92.0+
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

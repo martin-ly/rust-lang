@@ -89,11 +89,8 @@
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 > **创建日期**: 2025-11-15
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 
 ---
@@ -101,45 +98,33 @@
 ## 🎯 研究目标 {#研究目标}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究旨在深入分析 Rust 并发实现的性能特征，评估不同并发原语和模式的性能表现，包括：
 
 1. **并发原语性能**：比较不同同步原语的性能
-
 2. **并发模式性能**：评估不同并发模式的效率
-
 3. **异步运行时性能**：分析异步运行时的性能特征
-
 4. **并发安全开销**：评估并发安全的性能开销
 
 ### 核心问题 {#核心问题}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Rust 并发原语的性能特征是什么？**
-
 2. **不同并发模式的性能差异如何？**
-
 3. **如何优化并发实现的性能？**
 
 ### 预期成果 {#预期成果}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 建立并发性能基准测试套件
-
 - 识别并发性能瓶颈
-
 - 提供并发优化最佳实践
 
 ---
@@ -147,15 +132,12 @@
 ## 📚 理论基础 {#理论基础}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化论证与实验衔接 {#形式化论证与实验衔接}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def CP1（并发实验验证）**：并发性能实验 $E$ 验证 [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md) T1、[async_state_machine](../../research_notes/formal_methods/10_async_state_machine.md) T6.2，当且仅当 $E$ 在观测下无数据竞争。
@@ -173,11 +155,8 @@
 **推论 CP-C1**：Mutex、channel 等并发原语性能开销可实验测量；形式化保证正确性，性能需实验评估。
 
 | 实验类型 | 形式化定理 | 验证目标 |
-
 | :--- | :--- | :--- |
-
 | 多线程性能 | borrow T1 | 无数据竞争；Send/Sync 约束 |
-
 | 异步性能 | async T6.2 | 并发安全；Future 状态一致 |
 
 **引用**：[experiments/README](README.md) 定理 EX-T1、EX-T2；[FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)。
@@ -185,9 +164,7 @@
 ### 相关概念 {#相关概念}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **并发性能（Concurrency Performance）**：评估并发程序在多核处理器上的执行效率和资源利用率。
@@ -195,29 +172,21 @@
 **关键指标**：
 
 - **吞吐量（Throughput）**：单位时间内完成的任务数
-
 - **延迟（Latency）**：单个任务的响应时间
-
 - **可扩展性（Scalability）**：性能随核心数增加的能力
-
 - **竞争开销（Contention Overhead）**：锁竞争导致的性能损失
 
 ### 理论背景 {#理论背景}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **并发模型**：
 
 - **共享内存模型**：通过共享内存进行通信
-
 - **消息传递模型**：通过消息传递进行通信
-
 - **Actor 模型**：通过 Actor 进行并发计算
-
 - **CSP 模型**：通过通道进行通信
 
 #### The Rust Performance Book 并行视角 {#the-rust-performance-book-并行视角}
@@ -227,13 +196,9 @@
 Rust 并发性能优化应关注：
 
 - **减少锁竞争**：缩小临界区、使用读写锁（`RwLock`）或原子操作（`Atomic*`）。
-
 - **消息传递 vs 共享状态**：通道（channel）可解耦生产者与消费者，降低显式锁需求；`crossbeam::channel` 在高吞吐场景下通常优于 std mpsc。
-
 - **数据并行**：对 CPU 密集型任务，使用 `rayon` 的 `par_iter` 自动实现工作窃取（work-stealing）。
-
 - **异步 I/O**：对高并发 I/O，使用 Tokio 的协作式调度，避免每个连接一个 OS 线程。
-
 - **内存顺序（Ordering）**：`Relaxed` 最快但最弱；`Acquire`/`Release`/`AcqRel` 用于同步点；`SeqCst` 最强但开销最大。
 
 ---
@@ -241,15 +206,12 @@ Rust 并发性能优化应关注：
 ## 🔬 实验设计 {#实验设计}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 同步原语性能测试 {#1-同步原语性能测试}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **测试目标**：比较不同同步原语的性能
@@ -257,29 +219,21 @@ Rust 并发性能优化应关注：
 **测试场景**：
 
 - `Mutex` vs `RwLock` 性能比较
-
 - `Arc` vs `Rc` 性能比较
-
 - `Atomic` 类型性能测试
-
 - `Condvar` 性能测试
 
 **测试指标**：
 
 - 锁获取时间
-
 - 竞争开销
-
 - 吞吐量
-
 - 可扩展性
 
 ### 2. 通道性能测试 {#2-通道性能测试}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **测试目标**：评估不同通道实现的性能
@@ -287,19 +241,14 @@ Rust 并发性能优化应关注：
 **测试场景**：
 
 - `std::sync::mpsc::channel` vs `tokio::sync::mpsc::unbounded_channel`（Tokio 异步通道）
-
 - `crossbeam::channel` 性能测试
-
 - 通道容量对性能的影响
-
 - 多生产者多消费者性能
 
 **测试指标**：
 
 - 消息发送/接收延迟
-
 - 吞吐量
-
 - 内存使用
 
 ### 3. 异步运行时性能测试 {#3-异步运行时性能测试}
@@ -311,19 +260,14 @@ Rust 并发性能优化应关注：
 **测试场景**：
 
 - Tokio（推荐） vs smol 性能比较；async-std 不再作为推荐运行时
-
 - 任务调度性能
-
 - 异步 I/O 性能
-
 - 并发任务数量对性能的影响
 
 **测试指标**：
 
 - 任务调度延迟
-
 - I/O 吞吐量
-
 - 资源使用效率
 
 ### 4. 并发模式性能测试 {#4-并发模式性能测试}
@@ -335,19 +279,14 @@ Rust 并发性能优化应关注：
 **测试场景**：
 
 - 工作池模式性能
-
 - 生产者-消费者模式性能
-
 - Actor 模式性能
-
 - 数据并行性能
 
 **测试指标**：
 
 - 任务处理速度
-
 - 负载均衡效果
-
 - 资源利用率
 
 ---
@@ -355,33 +294,22 @@ Rust 并发性能优化应关注：
 ### Rust 1.96+ / Edition 2024 工具链 {#rust-196-edition-2024-工具链}
 
 > **来源: [The Rust Performance Book – Parallelism](https://nnethercote.github.io/perf-book/parallelism.html)**
-
 >
-
 > **来源: [Tokio Docs](https://docs.rs/tokio/latest/tokio/)**
 
 - **工具链版本**：`rustup update stable`（建议 `1.96.0+`）；`edition = "2024"`。
-
 - **同步原语**：使用 `std::sync::{Mutex, RwLock, Arc, Atomic*}`、`std::sync::mpsc`。
-
 - **异步运行时**：`tokio = { version = "1", features = ["full"] }`；使用 `#[tokio::main]` 与 `tokio::spawn`。
-
 - **并发测试工具**：
-
   - `cargo test` + `loom`：模型检查并发顺序与数据竞争。
-
   - `cargo +nightly miri test`：检测未定义行为与数据竞争。
-
   - `RUSTFLAGS="-Z sanitizer=thread" cargo test`：ThreadSanitizer（需 nightly）。
-
 - **性能分析**：`perf record -g`、`cargo flamegraph`、`cargo bench`（Criterion）。
-
 - **可重复性**：固定线程数、CPU 亲和性、CPU governor；记录核心数与超线程状态。
 
 ## 💻 代码示例 {#代码示例}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 示例 1：Mutex vs RwLock 性能测试 {#示例-1mutex-vs-rwlock-性能测试}
@@ -389,7 +317,6 @@ Rust 并发性能优化应关注：
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
-
 use std::sync::{Arc, Mutex, RwLock};
 
 use std::thread;
@@ -397,11 +324,9 @@ use std::thread;
 use std::time::Instant;
 
 
-
 const ITERATIONS: usize = 1_000_000;
 
 const THREADS: usize = 4;
-
 
 
 fn mutex_benchmark() -> u128 {
@@ -409,7 +334,6 @@ fn mutex_benchmark() -> u128 {
     let data = Arc::new(Mutex::new(0));
 
     let start = Instant::now();
-
 
 
     let handles: Vec<_> = (0..THREADS)
@@ -435,7 +359,6 @@ fn mutex_benchmark() -> u128 {
         .collect();
 
 
-
     for handle in handles {
 
         handle.join().unwrap();
@@ -443,11 +366,9 @@ fn mutex_benchmark() -> u128 {
     }
 
 
-
     start.elapsed().as_millis()
 
 }
-
 
 
 fn rwlock_benchmark() -> u128 {
@@ -455,7 +376,6 @@ fn rwlock_benchmark() -> u128 {
     let data = Arc::new(RwLock::new(0));
 
     let start = Instant::now();
-
 
 
     let handles: Vec<_> = (0..THREADS)
@@ -481,7 +401,6 @@ fn rwlock_benchmark() -> u128 {
         .collect();
 
 
-
     for handle in handles {
 
         handle.join().unwrap();
@@ -489,11 +408,9 @@ fn rwlock_benchmark() -> u128 {
     }
 
 
-
     start.elapsed().as_millis()
 
 }
-
 
 
 fn main() {
@@ -503,21 +420,17 @@ fn main() {
     let rwlock_time = rwlock_benchmark();
 
 
-
     println!("Mutex 时间: {} ms", mutex_time);
 
     println!("RwLock 时间: {} ms", rwlock_time);
 
 }
-
 ```
-
 ### 示例 2：通道性能测试 {#示例-2通道性能测试}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
-
 use std::sync::mpsc;
 
 use std::thread;
@@ -525,9 +438,7 @@ use std::thread;
 use std::time::Instant;
 
 
-
 const MESSAGES: usize = 1_000_000;
-
 
 
 fn channel_benchmark() -> u128 {
@@ -535,7 +446,6 @@ fn channel_benchmark() -> u128 {
     let (tx, rx) = mpsc::channel();
 
     let start = Instant::now();
-
 
 
     let sender = thread::spawn(move || {
@@ -547,7 +457,6 @@ fn channel_benchmark() -> u128 {
         }
 
     });
-
 
 
     let receiver = thread::spawn(move || {
@@ -569,17 +478,14 @@ fn channel_benchmark() -> u128 {
     });
 
 
-
     sender.join().unwrap();
 
     receiver.join().unwrap();
 
 
-
     start.elapsed().as_millis()
 
 }
-
 
 
 #[tokio::main]
@@ -591,7 +497,6 @@ async fn tokio_unbounded_channel_benchmark() {
     let start = tokio::time::Instant::now();
 
 
-
     let sender = tokio::spawn(async move {
 
         for i in 0..MESSAGES {
@@ -601,7 +506,6 @@ async fn tokio_unbounded_channel_benchmark() {
         }
 
     });
-
 
 
     let receiver = tokio::spawn(async move {
@@ -623,11 +527,9 @@ async fn tokio_unbounded_channel_benchmark() {
     });
 
 
-
     sender.await.unwrap();
 
     receiver.await.unwrap();
-
 
 
     let duration = start.elapsed();
@@ -635,23 +537,18 @@ async fn tokio_unbounded_channel_benchmark() {
     println!("Tokio unbounded channel 时间: {:?}", duration);
 
 }
-
 ```
-
 ### 示例 3：异步任务性能测试 {#示例-3异步任务性能测试}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
-
 use tokio::time::Instant;
 
 use std::time::Duration;
 
 
-
 const TASKS: usize = 10_000;
-
 
 
 #[tokio::main]
@@ -659,7 +556,6 @@ const TASKS: usize = 10_000;
 async fn async_task_benchmark() {
 
     let start = Instant::now();
-
 
 
     let handles: Vec<_> = (0..TASKS)
@@ -679,7 +575,6 @@ async fn async_task_benchmark() {
         .collect();
 
 
-
     for handle in handles {
 
         handle.await.unwrap();
@@ -687,21 +582,17 @@ async fn async_task_benchmark() {
     }
 
 
-
     let duration = start.elapsed();
 
     println!("异步任务时间: {:?}", duration);
 
 }
-
 ```
-
 ---
 
 ## 📊 实验结果 {#实验结果}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 同步原语性能对比 {#1-同步原语性能对比}
@@ -711,31 +602,22 @@ async fn async_task_benchmark() {
 **测试环境**：
 
 - CPU: 8 核
-
 - Rust 版本: 1.96.0+
-
 - 优化级别: `-O2`
 
 **结果**：
 
 | 原语 | 操作时间 (ms) | 吞吐量 (ops/s) |
-
 | :--- | :--- | :--- |
-
 | Mutex | 245 | 4,081,633 |
-
 | RwLock (写) | 280 | 3,571,429 |
-
 | RwLock (读) | 120 | 8,333,333 |
-
 | Atomic | 85 | 11,764,706 |
 
 **分析**：
 
 - `Atomic` 类型性能最好，适合简单操作
-
 - `RwLock` 在读多写少场景下性能更好
-
 - `Mutex` 在写操作频繁时性能稳定
 
 ### 2. 通道性能对比 {#2-通道性能对比}
@@ -745,21 +627,15 @@ async fn async_task_benchmark() {
 **结果**：
 
 | 通道类型 | 延迟 (ns) | 吞吐量 (msg/s) |
-
 | :--- | :--- | :--- |
-
 | mpsc::channel | 45 | 22,222,222 |
-
 | mpsc::unbounded | 38 | 26,315,789 |
-
 | crossbeam::channel | 32 | 31,250,000 |
 
 **分析**：
 
 - `crossbeam::channel` 性能最好
-
 - 无界通道性能略好于有界通道
-
 - 通道容量对性能有显著影响
 
 ### 结果分析模板 {#结果分析模板}
@@ -769,37 +645,23 @@ async fn async_task_benchmark() {
 将 `cargo bench`（Mutex/RwLock/Atomic、mpsc/crossbeam、async 任务）的产出填入下表：
 
 | 类别 | 指标 | 实测值 | 单位 | 备注 |
-
 | :--- | :--- | :--- | :--- | :--- |
-
 | 同步 | Mutex 操作时间        | **\_** | ms   | 1M 次/4 线程  |
-
 | 同步 | RwLock 写 操作时间    | **\_** | ms   | 同上          |
-
 | 同步 | RwLock 读 操作时间    | **\_** | ms   | 读多场景      |
-
 | 通道 | mpsc 延迟             | **\_** | ns   | 或 吞吐 msg/s |
-
 | 通道 | crossbeam 延迟        | **\_** | ns   | 对比 mpsc     |
-
 | 异步 | Tokio 1 万任务 总时间 | **\_** | ms   | 含 sleep(1μs) |
 
 **示例填写**（典型 x86_64、Rust 1.96+、4 核）：
 
 | 类别 | 指标 | 示例值 | 单位 | 备注 |
-
 | :--- | :--- | :--- | :--- | :--- |
-
 | 同步 | Mutex 操作时间        | 85    | ms   | 1M 次/4 线程  |
-
 | 同步 | RwLock 写 操作时间    | 120   | ms   | 同上          |
-
 | 同步 | RwLock 读 操作时间    | 22    | ms   | 读多场景，约 5× 快于写 |
-
 | 通道 | mpsc 延迟             | 45    | ns   | 有界 1024     |
-
 | 通道 | crossbeam 延迟        | 32    | ns   | 约 40% 快于 mpsc |
-
 | 异步 | Tokio 1 万任务 总时间 | 12    | ms   | 含 sleep(1μs) |
 
 **结论填写**：与文中对照，说明读多写少选 RwLock、消息传递选 crossbeam 等；若用 Rust 1.96+ 的 `thread_local` 分配器，可注明多线程分配对并发基准的影响。
@@ -809,7 +671,6 @@ async fn async_task_benchmark() {
 ## 📋 数据收集执行指南 {#数据收集执行指南}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 环境要求 {#环境要求}
@@ -817,7 +678,6 @@ async fn async_task_benchmark() {
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - **Rust**: 1.96.0+；**Tokio**：`tokio = { version = "1", features = ["full"] }`；**Criterion**：工作区已配置
-
 - 建议固定 CPU 频率、关闭节能；多线程 bench 需注意核心数与负载隔离
 
 ### 执行步骤 {#执行步骤}
@@ -825,11 +685,8 @@ async fn async_task_benchmark() {
 > **来源: [ACM](https://dl.acm.org/)**
 
 1. **同步原语**：运行 `mutex_benchmark`、`rwlock_benchmark`，以及 Atomic、Condvar 的 bench；记录 ITERATIONS/THREADS 与耗时。
-
 2. **通道**：运行 `channel_benchmark`（std mpsc）、`tokio_unbounded_channel_benchmark`（Tokio async），若有 crossbeam 则一并对比；记录 MESSAGES 与延迟/吞吐。
-
 3. **异步**：`#[tokio::main]` 下跑 `async_task_benchmark`，变化 TASKS 与 `sleep` 时长；不推荐与 async-std 对比（已进入维护模式）。
-
 4. **留存**：将 `target/criterion/` 的 `estimates.json` 或主要指标录入「结果分析模板」。
 
 ---
@@ -837,7 +694,6 @@ async fn async_task_benchmark() {
 ## 📐 性能优化建议与工具改进 {#性能优化建议与工具改进}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 性能优化建议 {#性能优化建议}
@@ -845,27 +701,19 @@ async fn async_task_benchmark() {
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 - **同步**：读多写少用 `RwLock`；简单标量用 `Atomic`；减少锁粒度与持锁时间。
-
 - **通道**：高吞吐优先 `crossbeam`；有背压需求用有界 `mpsc`；避免在热路径上 `clone` 大消息。
-
 - **异步**：合理设置 `tokio` 的 `worker_threads`；避免在 async 中阻塞；用 `tokio::spawn` 控制任务数量。
-
 - **Rust 1.96+**：`thread_local` 分配器可降低多线程分配竞争，重跑并发基准以更新基线。
 
 ### 原子内存顺序选型决策树 {#原子内存顺序选型决策树}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 场景 | 推荐 Ordering | 说明 |
-
 | :--- | :--- | :--- |
-
 | 需全局顺序保证、调试 | `SeqCst` | 最强、开销最大；ownership_model ATOMIC1 |
-
 | 锁/同步点、happens-before | `Acquire`/`Release`/`AcqRel` | 获取-释放语义；Mutex 内部 |
-
 | 纯计数器、无跨线程依赖 | `Relaxed` | 最弱、最快；仅需原子性 |
 
 **引用**：
@@ -879,15 +727,10 @@ async fn async_task_benchmark() {
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 工具 | 用途 | 说明 |
-
 | :--- | :--- | :--- |
-
 | **Miri** | 未定义行为、数据竞争 | `cargo +nightly miri test` |
-
 | **loom** | 并发调度穷举测试 | 依赖 `loom` crate |
-
 | **cargo-deadlock** | 潜在死锁检测 | `cargo install cargo-deadlock` |
-
 | **ThreadSanitizer** | 数据竞争 | `RUSTFLAGS="-Z sanitizer=thread" cargo test` |
 
 **说明**：死锁无法静态判定；见 [06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) § 静态判定 vs 运行时验证。
@@ -897,9 +740,7 @@ async fn async_task_benchmark() {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - **loom**：做并发顺序与数据竞争的模型检查，与 bench 互补。
-
 - **perf / flamegraph**：定位锁竞争、调度与 I/O 热点。
-
 - **Criterion**：用 `BenchmarkId` 区分 THREADS、MESSAGES、TASKS 等维度，便于做可复现的并发报告。
 
 ### 性能报告 {#性能报告}
@@ -913,39 +754,31 @@ async fn async_task_benchmark() {
 ## 🔗 系统集成与实际应用 {#系统集成与实际应用}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 与形式化方法的集成 {#与形式化方法的集成}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **异步状态机**：见 [10_async_state_machine.md](../../research_notes/formal_methods/10_async_state_machine.md)。异步任务的 Poll、Waker 与状态转换，可与本研究的 async 基准对应；并发安全定理与「无数据竞争」可共同验证。
-
 - **借用检查器**：见 [10_borrow_checker_proof.md](../../research_notes/formal_methods/10_borrow_checker_proof.md)。Rust 的并发原语（Mutex、Arc、channel）在类型与借用层面保证数据竞争自由，本研究的性能数据不改变该结论，但可指导「在安全前提下选更快实现」。
 
 ### 与实验研究的集成 {#与实验研究的集成}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **性能基准测试**：见 [10_performance_benchmarks.md](10_performance_benchmarks.md)。并发一节与本文的 Mutex/RwLock、通道、async 可共用 `cargo bench` 与 Criterion 流程。
-
 - **内存分析**：见 [10_memory_analysis.md](10_memory_analysis.md)。`Arc`、有界通道的缓冲、Tokio 任务队列与 `thread_local` 分配器会影响内存；分析时需区分配置（线程数、任务数、通道容量）。
 
 ### 实际应用案例 {#实际应用案例}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **服务端**：Mutex/RwLock 用于共享缓存；crossbeam 用于工作池任务队列；Tokio 用于 I/O 并发；按「结果分析模板」做上线前基准。
-
 - **嵌入式 / 实时**：在 `no_std` 下用 `Atomic`、自旋锁或 RTOS 原语；异步可用 `embassy` 等，基准方法可复用（更换原语与运行时）。
-
 - **Rust 1.96+**：`thread_local` 分配器、musl 1.2.5 对网络与多线程负载有影响，重跑以更新并发与 I/O 基线。
 
 ---
@@ -953,51 +786,37 @@ async fn async_task_benchmark() {
 ## 📖 参考文献 {#参考文献}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 学术论文 {#学术论文}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **并发性能优化研究**
-
    - 作者: 相关研究团队
-
    - 摘要: 并发原语性能分析和优化
 
 ### 官方文档 {#官方文档}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust 并发文档](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
-
 - [Tokio 性能指南](https://tokio.rs/tokio/tutorial/performance)
-
 - [The Rust Performance Book – Parallelism](https://nnethercote.github.io/perf-book/parallelism.html) - Rust 并行性能权威指南
-
 - [TRPL Ch. 16 – Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) - Rust 并发基础
-
 - [Tokio Docs](https://docs.rs/tokio/latest/tokio/) - 异步运行时官方文档
-
 - [Rayon Docs](https://docs.rs/rayon/latest/rayon/) - 数据并行库官方文档
-
 - [Crossbeam Docs](https://docs.rs/crossbeam/latest/crossbeam/) - 并发原语官方文档
-
 - [Rust Standard Library – std::sync](https://doc.rust-lang.org/std/) - Mutex、RwLock、Arc、Atomic API
 
 ### 相关代码 {#相关代码}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [并发性能测试代码](../../../crates/c05_threads/docs/README.md)
-
 - [异步性能测试代码](../../../crates/c06_async/docs/README.md)
 
 ---
@@ -1013,17 +832,13 @@ async fn async_task_benchmark() {
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -1031,15 +846,10 @@ async fn async_task_benchmark() {
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -1047,17 +857,13 @@ async fn async_task_benchmark() {
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - [Rust 1.94 特性速查
-
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -1069,9 +875,7 @@ async fn async_task_benchmark() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -1087,51 +891,30 @@ async fn async_task_benchmark() {
 ## 权威来源对照表 {#权威来源对照表}
 
 | 概念/方法 | 权威来源 URL | 章节/要点 |
-
 | :--- | :--- | :--- |
-
 | 并发性能优化 | [The Rust Performance Book – Parallelism](https://nnethercote.github.io/perf-book/parallelism.html) | 锁竞争、消息传递、数据并行 |
-
 | Fearless Concurrency | [TRPL Ch. 16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | `Mutex`、`Arc`、`channel`、`Send`/`Sync` |
-
 | Tokio 异步运行时 | [Tokio Docs](https://docs.rs/tokio/latest/tokio/) | `tokio::spawn`、`#[tokio::main]`、通道 |
-
 | Rayon 数据并行 | [Rayon Docs](https://docs.rs/rayon/latest/rayon/) | `par_iter`、工作窃取 |
-
 | Crossbeam 通道 | [Crossbeam Docs](https://docs.rs/crossbeam/latest/crossbeam/) | `crossbeam::channel`、无锁数据结构 |
-
 | 原子操作 Ordering | [Rust Standard Library – std::sync::atomic](https://doc.rust-lang.org/std/) | `Ordering::Relaxed` / `Acquire` / `Release` / `SeqCst` |
 
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
-
 > **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
-
 > **来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/)**
-
 > **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
-
 > **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
-
 > **[来源: Criterion.rs Documentation]**
-
 > **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
-
 > **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 
 ---

@@ -51,7 +51,6 @@ public:
     }
 };
 ```
-
 `friend` 可以授予：
 
 - 另一个类（`friend class X;`）
@@ -97,7 +96,6 @@ mod audit {
     }
 }
 ```
-
 ### 3.2 可见性级别
 
 | 修饰符 | 含义 |
@@ -142,7 +140,6 @@ pub(crate) mod internal {
     pub struct InnerState { pub(crate) value: i32 }
 }
 ```
-
 `pub(crate)` 允许同一 crate 内的所有模块访问，类似"crate 级 friend"。
 
 ### 5.2 通过 trait 暴露受控接口
@@ -160,7 +157,6 @@ mod sensor {
     }
 }
 ```
-
 通过 trait 暴露只读访问，比 C++ `friend` 更结构化。
 
 ---
@@ -172,7 +168,6 @@ C++ 的封装模型可以形式化为：
 ```text
 access(c, m, x) = private  unless  friend(c, x) ∨ x ∈ c
 ```
-
 即类 `c` 的成员 `m` 默认对类外 `x` 不可访问，除非 `x` 被声明为 friend。
 
 Rust 的封装模型可以形式化为：
@@ -180,7 +175,6 @@ Rust 的封装模型可以形式化为：
 ```text
 access(item, module) = visible  iff  item 在 module 的可见范围内
 ```
-
 可见范围由模块树和 `pub(...)` 修饰符共同决定，不需要特例授权。
 
 > **关键洞察**：C++ 的 `friend` 是封装规则的"例外列表"；Rust 的模块可见性是封装规则的"范围定义"。前者需要显式维护授权关系，后者通过结构本身表达边界。

@@ -63,7 +63,6 @@ pub struct Process {
     inner: imp::Process,
 }
 ```
-
 - **内存隔离**：Rust 进程模型依赖操作系统的虚拟内存机制，确保进程间内存安全隔离。
 - **所有权模型**：Rust 类型系统和所有权机制防止跨进程悬垂指针和未定义行为。
 
@@ -104,7 +103,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 #### 改进的模式匹配
 
 ```rust
@@ -128,7 +126,6 @@ fn handle_process_status(status: ExitStatus) {
     }
 }
 ```
-
 #### 增强的错误处理
 
 ```rust
@@ -152,7 +149,6 @@ async fn robust_process_execution() -> Result<String, Box<dyn Error>> {
     }
 }
 ```
-
 ### 1.3 内存安全与所有权
 
 Rust 的所有权模型在进程管理中提供了独特的安全保证：
@@ -186,7 +182,6 @@ fn safe_process_management() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ## 2. 生命周期管理
 
 ### 2.1 进程状态机
@@ -230,7 +225,6 @@ async fn async_lifecycle() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 2.2 异步生命周期管理
 
 Rust 1.92.0 提供了更好的异步进程生命周期管理：
@@ -380,7 +374,6 @@ pub struct ProcessConfig {
     pub timeout: Option<Duration>,
 }
 ```
-
 ### 2.3 资源自动释放
 
 - **资源释放**：`Child` 实现 `Drop` trait，析构时自动释放系统资源（文件描述符、内存等）。
@@ -422,7 +415,6 @@ fn automatic_resource_management() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ## 3. 进程属性与资源控制
 
 ### 3.1 基础属性配置
@@ -479,7 +471,6 @@ fn enhanced_env_handling() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 3.2 高级资源限制
 
 - **资源限制**：可通过平台 API（如 Linux 的 `setrlimit`）设置内存、文件数等限制
@@ -546,7 +537,6 @@ fn cross_platform_resource_management() -> Result<(), Box<dyn std::error::Error>
     Ok(())
 }
 ```
-
 ### 3.3 跨平台资源管理
 
 - **继承与隔离**：子进程默认继承父进程资源限制，可显式修改。
@@ -672,7 +662,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ## 4. Rust 的进程安全抽象
 
 ### 4.1 类型安全保证
@@ -716,7 +705,6 @@ fn type_safe_process_management() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 4.2 错误处理机制
 
 ```rust
@@ -764,7 +752,6 @@ async fn enhanced_error_handling() -> Result<String, ProcessError> {
     }
 }
 ```
-
 ### 4.3 平台兼容性
 
 ```rust
@@ -803,7 +790,6 @@ fn cross_platform_process_management() -> Result<(), Box<dyn std::error::Error>>
     Ok(())
 }
 ```
-
 ## 5. 现代库集成
 
 ### 5.1 Tokio 异步进程
@@ -842,7 +828,6 @@ async fn tokio_async_process() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 5.2 Async-Std [已归档] 进程管理
 
 ```rust
@@ -879,7 +864,6 @@ async fn async_std_process() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 5.3 Duct 进程组合
 
 ```rust
@@ -913,7 +897,6 @@ fn duct_process_composition() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ## 6. 最佳实践
 
 ### 6.1 资源管理最佳实践
@@ -952,7 +935,6 @@ async fn resource_management_best_practices() -> Result<(), Box<dyn std::error::
     Ok(())
 }
 ```
-
 ### 6.2 错误处理最佳实践
 
 ```rust
@@ -996,7 +978,6 @@ fn error_handling_best_practices() -> Result<(), BestPracticeError> {
     Ok(())
 }
 ```
-
 ## 7. 小结
 
 Rust 1.92.0 进程模型以类型系统和所有权为基础，结合操作系统原语，提供了安全、可移植、易用的进程管理能力。生命周期管理、资源控制和错误处理机制共同确保了系统级编程的健壮性和安全性。

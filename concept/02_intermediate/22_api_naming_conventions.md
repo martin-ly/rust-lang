@@ -83,7 +83,6 @@ impl Task {
     }
 }
 ```
-
 > **约定**：一个类型通常只应有一个 `new`；若存在多种构造方式，用 `with_` / `from_` / `try_` 区分。
 
 ### 2.2 `with_`
@@ -104,7 +103,6 @@ impl Task {
 
 let task = Task::new("compile").with_priority(5);
 ```
-
 > **认知提示**：`with_` 构造函数通常表示“在默认构造基础上追加配置”，返回同一类型。
 
 ### 2.3 `from_` / `into_`
@@ -119,7 +117,6 @@ impl Task {
     }
 }
 ```
-
 > **优先顺序**：先实现标准 `From`/`TryFrom`；只有在需要额外参数时才使用 `from_xxx` 自由函数。
 
 ### 2.4 `try_`
@@ -146,7 +143,6 @@ impl Task {
     }
 }
 ```
-
 > **约定**：`try_` 前缀暗示调用者必须处理错误，返回值类型通常为 `Result<T, E>`。
 
 ---
@@ -164,7 +160,6 @@ impl Task {
     }
 }
 ```
-
 > **约定**：`is_xxx` 通常无副作用、不接收额外参数，且不应在内部修改状态。
 
 ### 3.2 `as_` / `to_`
@@ -187,7 +182,6 @@ impl Task {
     }
 }
 ```
-
 ---
 
 ## 四、可变访问
@@ -207,7 +201,6 @@ impl Task {
     }
 }
 ```
-
 > **注意**：现代 Rust 更推荐使用 `name_mut(&mut self)` 形式（动词后置），因为可读性更好：`task.name_mut().push_str("!");`。Google 课程两种形式都提及；标准库中既有 `get_mut` 也有 `iter_mut`，并无绝对统一。关键是：**同一 crate 内保持一致**。
 
 ---
@@ -222,7 +215,6 @@ impl Task {
 let s: String = "hello".to_string(); // 分配
 let v: Vec<i32> = [1, 2, 3].to_vec(); // 分配
 ```
-
 ### 5.2 `as_`
 
 `as_` 表示一个**廉价、返回借用（Borrowing）/视图**的转换。
@@ -232,7 +224,6 @@ let s = String::from("hello");
 let slice: &str = s.as_str(); // 无分配
 let bytes: &[u8] = s.as_bytes(); // 无分配
 ```
-
 ### 5.3 `into_`
 
 `into_` 表示**消耗自身**的转换，常与 `From`/`Into` trait 配合使用。
@@ -249,7 +240,6 @@ let name: String = "hello".into(); // String: From<&str>
 let task = Task::new("hello");
 let owned_name: String = task.into_name(); // 消耗 Task
 ```
-
 ### 5.4 `from`
 
 标准 trait `From<T>` 的实现方法。若一个类型可从多种源构造，优先实现 `From` 而非手写多个 `from_xxx`。
@@ -261,7 +251,6 @@ impl From<&str> for Task {
     }
 }
 ```
-
 ---
 
 ## 六、动作与回调
@@ -283,7 +272,6 @@ where
     tasks.sort_by(f);
 }
 ```
-
 ### 6.2 `with` 闭包形式
 
 接收闭包（Closures）以自定义行为的 API，通常用 `with_` 前缀。
@@ -298,7 +286,6 @@ where
     }
 }
 ```
-
 ---
 
 ## 七、常见陷阱
@@ -342,7 +329,6 @@ pub struct Config {
     port: u16,
 }
 ```
-
 应提供：
 
 - 主构造函数
@@ -391,7 +377,6 @@ impl From<(&str, u16)> for Config {
     }
 }
 ```
-
 </details>
 
 ---

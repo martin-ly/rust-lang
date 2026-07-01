@@ -70,38 +70,32 @@
    - Monoio: 字节跳动开源的 Rust 异步运行时
    - Glommio: Datadog 的线程本地异步运行时
    - 完整示例：文件服务器、网络服务器、批量I/O
-
 2. **零拷贝技术深入** (~500行代码)
    - 4种零拷贝方法对比（传统 read/write vs sendfile vs io_uring）
    - sendfile 系统调用详解
    - mmap 内存映射文件I/O
    - io_uring Fixed Buffers
    - 性能对比测试代码
-
 3. **HTTP/3 和 QUIC 深入** (~600行代码)
    - 完整 HTTP/3 服务器和客户端实现
    - QUIC 高级特性：0-RTT、连接迁移、多流并发
    - 协议对比分析（HTTP/1.1 → HTTP/2 → HTTP/3）
    - 生产级代码示例
-
 4. **内核旁路和高性能包处理** (~400行代码)
    - AF_XDP: 10Gbps+ 线速包处理
    - eBPF 网络监控和 XDP 程序
    - Rust eBPF 生态（Aya 框架）
    - 性能对比（标准 Socket vs DPDK vs AF_XDP）
-
 5. **综合实战** (~200行代码)
    - 基于 io_uring 的零拷贝高性能文件服务器
    - 实时监控指标
    - 连接池和限流
    - 生产级最佳实践
-
 6. **性能对比分析**
    - 文件 I/O 性能对比矩阵
    - 网络 I/O 性能对比矩阵
    - 延迟分布对比（P50/P99/P999）
    - 吞吐量对比（单核）
-
 7. **技术选型指南**
    - 5种典型场景的技术栈推荐
      - Web API 服务
@@ -147,12 +141,10 @@
    - Tokio 官方支持
    - 与 Tokio 生态无缝集成
    - 适合现有 Tokio 项目升级
-
 2. **Monoio** (0.2+)
    - 字节跳动开源
    - Rent API 零拷贝设计
    - 适合新项目和高性能场景
-
 3. **Glommio** (0.9+)
    - Datadog 开源
    - 线程本地设计
@@ -180,18 +172,15 @@
    - 添加新文档链接（第7项）
    - 更新代码行数统计：4500 → 7000行
    - 更新对比矩阵数量：25+ → 30+
-
 2. **crates/c10_networks/docs/00_MASTER_INDEX.md**
    - 在"2025-10-19重大更新"章节添加第4项
    - 完整描述 io_uring、零拷贝、HTTP/3、内核旁路技术
-
 3. **crates/c10_networks/docs/RUST_190_PRACTICAL_EXAMPLES.md**
    - 添加第7节"现代网络技术 (2025)"
    - 更新文档对比矩阵（新增一行）
    - 更新学习路径
      - 专家路径新增第5步"前沿技术"
      - 新增专项技能路径"高性能系统方向"
-
 4. **新增文件**: `crates/c10_networks/docs/RUST_190_MODERN_NETWORK_TECHNOLOGIES_2025.md`
    - 2500+ 行代码
    - 7 个主要章节
@@ -330,12 +319,10 @@
    - 数据库连接池
    - 反向代理服务器
    - 缓存服务器
-
 2. 扩展 HTTP/3 示例
    - 服务器推送 (Server Push)
    - 请求优先级
    - 连接合并
-
 3. 补充性能测试报告
    - 实测数据
    - 不同内核版本对比
@@ -347,12 +334,10 @@
    - Registered files/buffers
    - SQPOLL 模式
    - Direct descriptors
-
 2. AF_XDP 完整教程
    - 包过滤器
    - 流量整形
    - DDoS 防护
-
 3. eBPF 实战项目
    - 网络监控系统
    - 性能分析工具
@@ -364,12 +349,10 @@
    - Windows IOCP 优化
    - macOS kqueue 优化
    - 统一抽象层
-
 2. 分布式系统
    - RDMA 集成
    - DPDK 集成
    - 硬件卸载
-
 3. 生态系统
    - Crate 发布
    - 社区贡献

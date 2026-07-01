@@ -46,7 +46,6 @@ cargo bench | cat
 # 启用 tokio 异步基准
 cargo bench --features tokio-bench | cat
 ```
-
 ## 结果位置
 
 - 报告目录：`target/criterion/*`
@@ -87,7 +86,6 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
-
 **关键点**：
 
 - `black_box`: 防止编译器过度优化
@@ -120,7 +118,6 @@ fn benchmark_with_sizes(c: &mut Criterion) {
 criterion_group!(benches, benchmark_with_sizes);
 criterion_main!(benches);
 ```
-
 ---
 
 ### 2. 设计模式性能对比
@@ -179,7 +176,6 @@ fn bench_singleton_patterns(c: &mut Criterion) {
 // Lazy:        1-2ns   (最快)
 // Arc<Mutex>:  20-50ns (最慢，有锁开销)
 ```
-
 #### 2.2 策略模式：静态 vs 动态分派
 
 ```rust
@@ -230,7 +226,6 @@ fn bench_strategy_dispatch(c: &mut Criterion) {
 // static_dispatch:  0.5-1ns  (内联优化)
 // dynamic_dispatch: 2-5ns    (虚表查找)
 ```
-
 ---
 
 ### 3. 异步模式基准测试
@@ -262,7 +257,6 @@ fn bench_async_patterns(c: &mut Criterion) {
 criterion_group!(benches, bench_async_patterns);
 criterion_main!(benches);
 ```
-
 ---
 
 ### 4. 内存分配基准
@@ -307,7 +301,6 @@ fn bench_allocation_patterns(c: &mut Criterion) {
 
 // 结果：with_capacity 比 without_capacity 快 20-50%
 ```
-
 ---
 
 ### 5. 性能分析最佳实践
@@ -335,7 +328,6 @@ fn check_regression(baseline: f64, current: f64) -> bool {
     current / baseline > THRESHOLD
 }
 ```
-
 **方法2: 统计显著性检测**:
 
 ```bash
@@ -346,7 +338,6 @@ cargo bench --save-baseline before
 cargo bench --save-baseline after
 critcmp before after
 ```
-
 ---
 
 ### 6. Criterion 高级功能
@@ -373,7 +364,6 @@ fn custom_measurement(c: &mut Criterion<WallTime>) {
     group.finish();
 }
 ```
-
 #### 6.2 吞吐量测量
 
 ```rust
@@ -402,7 +392,6 @@ fn process_data(data: &[u8]) -> usize {
     data.iter().filter(|&&x| x > 128).count()
 }
 ```
-
 ---
 
 ## 附：场景基准
@@ -427,14 +416,13 @@ cargo bench --bench pattern_scenarios
 # 生成火焰图（需要cargo-flamegraph）
 cargo flamegraph --bench pattern_benchmarks
 ```
-
 ---
 
 ## 相关资源
 
 - **Criterion文档**: [https://bheisler.github.io/criterion.rs/book/](https://bheisler.github.io/criterion.rs/book/)
-- **Tier 3**: [性能评估参考](tier_03_references/04_模式性能评估参考.md)
-- **Tier 4**: [工程实践](tier_04_advanced/04_工程实践与生产级模式.md)
+- **Tier 3**: [性能评估参考](tier_03_references/04_pattern_performance_evaluation_reference.md)
+- **Tier 4**: [工程实践](tier_04_advanced/04_engineering_and_production_patterns.md)
 
 ---
 

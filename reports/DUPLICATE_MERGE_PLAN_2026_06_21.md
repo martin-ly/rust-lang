@@ -70,7 +70,6 @@
 > 迁移日期: 2026-06-21
 > 原文件路径: `原文件路径`
 ```
-
 ---
 
 ## 4. 建议的合并执行顺序
@@ -79,24 +78,19 @@
    - 合并 `docs/05_guides/05_unsafe_rust_guide.md` → `concept/03_advanced/03_unsafe.md`
    - 归档其余 4 个 docs/research_notes/docs-rod 重复文件
    - 删除 `docs/05_guides/05_unsafe_rust_guide.md`
-
 2. **Rust for Linux 集群**（涉及 `concept/07_future/19_rust_for_linux.md`）
    - 合并 `docs/06_toolchain/06_rust_for_linux_tooling_guide.md` → `concept/07_future/19_rust_for_linux.md`
    - 将 `docs/03_guides/03_rust_for_linux_guide.md` 替换为重定向
    - 归档 `docs/rust-ownership-decidability/extensions/rust-for-linux.md`
-
 3. **Edition 2024 集群**（涉及 `knowledge/06_ecosystem/02_edition_2024.md`）
    - 合并 `concept/07_future/19_rust_edition_preview.md` 的独特测验 → `knowledge/06_ecosystem/02_edition_2024.md`
    - 合并 `docs/05_guides/06_rust_2024_edition_migration_guide.md` 的迁移实操内容 → `knowledge/06_ecosystem/02_edition_2024.md`
    - 归档 `docs/rust-ownership-decidability/16-program-semantics/rust-194-features/05-edition-2024-semantics.md`
    - 删除 `concept/07_future/19_rust_edition_preview.md` 与 `docs/05_guides/06_rust_2024_edition_migration_guide.md`
-
 4. **Inline Assembly**
    - 将 `knowledge/03_advanced/unsafe/02_inline_asm.md` 替换为重定向
-
 5. **Rust 1.97 Preview**
    - 将 `knowledge/06_ecosystem/emerging/06_rust_1_97_preview.md` 替换为重定向
-
 6. **Coq 形式化验证**
    - 将 `docs/content/academic/10_coq_formalization_guide.md` 替换为重定向
 

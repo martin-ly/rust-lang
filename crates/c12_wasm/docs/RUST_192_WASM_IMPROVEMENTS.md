@@ -62,16 +62,13 @@ Rust 1.92.0 在 WebAssembly (WASM) 开发方面带来了显著的改进和优化
    - `MaybeUninit` 文档化和有效性检查改进
    - 更安全的内存缓冲区管理
    - 优化的对象池实现
-
 2. **性能优化**
    - 迭代器方法特化，提升比较性能
    - `rotate_right` 稳定化，高效数据旋转
    - 优化的内存分配计算
-
 3. **FFI 改进**
    - 联合体原始引用安全访问
    - 更安全的 C/JavaScript 互操作
-
 4. **调试增强**
    - `Location::file_as_c_str` 稳定化
    - 更好的错误定位和调试信息
@@ -98,7 +95,6 @@ unsafe {
     // 需要手动跟踪初始化状态
 }
 ```
-
 **Rust 1.92.0**:
 
 ```rust
@@ -132,7 +128,6 @@ impl WasmBuffer {
     }
 }
 ```
-
 #### 性能对比
 
 | 操作     | Rust 1.91 | Rust 1.92.0 | 改进             |
@@ -153,7 +148,6 @@ unsafe {
     println!("写入 {} 字节", written);
 }
 ```
-
 ---
 
 ### 2. NonZero::div_ceil 在 WASM 缓冲区分配中的应用
@@ -172,7 +166,6 @@ fn calculate_pages(total_bytes: usize, page_size: usize) -> usize {
     (total_bytes + page_size - 1) / page_size
 }
 ```
-
 **Rust 1.92.0**:
 
 ```rust
@@ -190,7 +183,6 @@ pub fn calculate_buffer_chunks(
     total.div_ceil(chunk_size).get()
 }
 ```
-
 #### 性能对比
 
 | 操作       | Rust 1.91 | Rust 1.92.0 | 改进         |
@@ -210,7 +202,6 @@ let total_size = 5000;
 let chunks = calculate_buffer_chunks(total_size, chunk_size);
 println!("需要的块数: {}", chunks); // 5
 ```
-
 ---
 
 ### 3. 联合体原始引用在 WASM FFI 中的应用
@@ -236,7 +227,6 @@ impl WasmFFIUnion {
     }
 }
 ```
-
 **Rust 1.92.0**:
 
 ```rust
@@ -257,7 +247,6 @@ impl WasmFFIUnion {
     }
 }
 ```
-
 #### 性能对比
 
 | 操作       | Rust 1.91 | Rust 1.92.0 | 改进             |
@@ -284,7 +273,6 @@ fn compare_arrays<T: PartialEq>(arr1: &[T], arr2: &[T]) -> bool {
     arr1.len() == arr2.len() && arr1.iter().zip(arr2.iter()).all(|(a, b)| a == b)
 }
 ```
-
 **Rust 1.92.0**:
 
 ```rust
@@ -293,7 +281,6 @@ pub fn wasm_optimized_array_eq<T: PartialEq>(arr1: &[T], arr2: &[T]) -> bool {
     arr1.iter().eq(arr2.iter())
 }
 ```
-
 #### 性能对比
 
 | 数组大小   | Rust 1.91 | Rust 1.92.0 | 性能提升 |
@@ -323,7 +310,6 @@ fn rotate_right<T>(data: &mut [T], positions: usize) {
     data[positions..].reverse();
 }
 ```
-
 **Rust 1.92.0**:
 
 ```rust
@@ -332,7 +318,6 @@ pub fn wasm_rotate_data<T>(data: &mut [T], positions: usize) {
     data.rotate_right(positions);
 }
 ```
-
 #### 性能对比
 
 | 数组大小  | Rust 1.91 | Rust 1.92.0 | 性能提升   |
@@ -357,7 +342,6 @@ Rust 1.92.0 稳定化了 `Location::file_as_c_str` 方法，提供了更好的�
 let location = Location::caller();
 let file = location.file(); // &str
 ```
-
 **Rust 1.92.0**:
 
 ```rust
@@ -380,7 +364,6 @@ impl WasmDebugInfo {
     }
 }
 ```
-
 ---
 
 ## 性能对比
@@ -422,7 +405,6 @@ unsafe {
     buffer.write(data);
 }
 ```
-
 ### 示例 2: WASM 优化的数组处理
 
 ```rust
@@ -435,7 +417,6 @@ let vec2 = vec![1, 2, 3, 4, 5];
 let are_equal = wasm_optimized_array_eq(&vec1, &vec2);
 println!("数组相等: {}", are_equal);
 ```
-
 ### 示例 3: WASM 循环缓冲区
 
 ```rust
@@ -445,7 +426,6 @@ let mut data = vec![1, 2, 3, 4, 5, 6, 7, 8];
 wasm_rotate_data(&mut data, 3);
 println!("旋转后: {:?}", data); // [6, 7, 8, 1, 2, 3, 4, 5]
 ```
-
 ---
 
 ## 迁移指南
@@ -458,7 +438,6 @@ println!("旋转后: {:?}", data); // [6, 7, 8, 1, 2, 3, 4, 5]
 rustup update stable
 rustc --version  # 应该显示 1.92.0 或更高版本
 ```
-
 #### 2. 更新 Cargo.toml
 
 ```toml
@@ -466,7 +445,6 @@ rustc --version  # 应该显示 1.92.0 或更高版本
 rust-version = "1.92"
 edition = "2024"
 ```
-
 #### 3. 利用新特性
 
 - 使用 `MaybeUninit` 的文档化模式

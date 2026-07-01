@@ -234,23 +234,19 @@
    - 完整的数学形式化定义
    - 可运行的代码示例
    - 详细的注释和解释
-
 2. **100% 中英文双语**
    - 所有文档都是双语
    - 所有代码注释都是双语
    - 所有示例输出都是双语
-
 3. **完整的学习路径**
    - 8周完整学习计划
    - 按难度分级
    - 推荐阅读顺序
-
 4. **生产级质量**
    - 所有代码都经过测试
    - 所有示例都可以直接运行
    - 包含性能基准测试
    - 包含错误处理和容错机制
-
 5. **完整的导航系统**
    - 详细的项目索引
    - 按主题/难度/场景查找
@@ -396,7 +392,6 @@
 - 🎓 完整的学习路径建议
 - 📊 项目统计信息
 ```
-
 ---
 
 ## 📊 本阶段统计
@@ -511,7 +506,6 @@
 编译错误: ✅ 0
 编译警告: ✅ 0
 ```
-
 ### 文档成就
 
 ```text
@@ -531,7 +525,6 @@
 双语支持: ✅ 100%
 交叉引用: ✅ 完整
 ```
-
 ### 知识点成就
 
 ```text
@@ -546,7 +539,6 @@
 覆盖率: ✅ 100%
 示例数: 180+
 ```
-
 ---
 
 ## 🎉 项目完成声明
@@ -592,12 +584,11 @@
 cat INDEX.md
 
 # 2. 查看快速入门指南
-cat 异步编程全面梳理_README_2025_10_06.md
+cat async_programming_comprehensive_review_readme_2025_10_06.md
 
 # 3. 运行第一个示例
 cargo run --example tokio_smoke
 ```
-
 ### 深入学习 (1-2周)
 
 ```bash
@@ -612,7 +603,6 @@ cargo run --example reactor_pattern_comprehensive_2025
 cargo run --example actor_pattern_comprehensive_2025
 cargo run --example csp_pattern_comprehensive_2025
 ```
-
 ### 实践应用 (1-2月)
 
 ```bash
@@ -626,7 +616,6 @@ cargo run --example async_debugging_monitoring_2025
 cargo run --example actor_csp_hybrid_advanced
 cargo run --example async_api_gateway_2025
 ```
-
 ---
 
 ## 📚 推荐阅读顺序
@@ -634,7 +623,7 @@ cargo run --example async_api_gateway_2025
 ### 初学者路径
 
 1. **[INDEX.md](INDEX.md)** - 项目索引 ⭐⭐⭐
-2. **[异步编程全面梳理_README_2025_10_06.md](异步编程全面梳理_README_2025_10_06.md)** - 快速入门 ⭐⭐⭐
+2. **[async_programming_comprehensive_review_readme_2025_10_06.md](async_programming_comprehensive_review_readme_2025_10_06.md)** - 快速入门 ⭐⭐⭐
 3. **[README.md](README.md)** - 项目概述 ⭐⭐
 4. 基础示例 (tokio_smoke.rs, futures_smoke.rs) ⭐
 

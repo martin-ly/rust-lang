@@ -192,7 +192,6 @@ let vec: Vec<i32> = vec![1, 2, 3];
 let opt: Option<i32> = Some(42);
 // None 和 Some 在编译后的代码中不占用额外空间（使用 niche optimization）
 ```
-
 #### 1.2.2 内存安全 (Memory Safety) {#122-内存安全-memory-safety}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -214,7 +213,6 @@ let vec = vec![1, 2, 3];
 let slice = &vec[..];  // 不可变借用
 // vec.push(4);  // 编译错误：不能在借用时修改
 ```
-
 #### 1.2.3 显式错误处理 (Explicit Error Handling) {#123-显式错误处理-explicit-error-handling}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -237,7 +235,6 @@ match value {
     None => println!("No value"),
 }
 ```
-
 ### 1.3 Rust 1.92.0 标准库新特性 {#13-rust-1920-标准库新特性}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -264,7 +261,6 @@ let boxed = unsafe { boxed.assume_init() };
 
 // 避免不必要的初始化，提高性能
 ```
-
 **设计动机**:
 
 - **性能**: 避免不必要的初始化
@@ -292,7 +288,6 @@ let rc = unsafe { rc.assume_init() };
 let arc: Arc<[u8; 1024]> = Arc::new_zeroed();
 let arc = unsafe { arc.assume_init() };
 ```
-
 **设计动机**:
 
 - **一致性**: 与 `Box::new_zeroed` 保持一致
@@ -316,7 +311,6 @@ let vec2 = vec![1, 2, 3, 4, 5];
 let equal = vec1.iter().eq(vec2.iter());
 // 编译时优化，运行时性能更好
 ```
-
 **设计动机**:
 
 - **性能**: 利用迭代器长度信息优化
@@ -356,7 +350,6 @@ let mut dst = [MaybeUninit::<i32>::uninit(); 3];
 MaybeUninit::write_copy_of_slice(&mut dst, &src);
 MaybeUninit::write_clone_of_slice(&mut dst, &src);
 ```
-
 **设计动机**：
 
 - **安全性**: 提供更安全的未初始化内存操作
@@ -378,7 +371,6 @@ let v = vec![1, 2, 3];
 let (ptr, len, capacity) = v.into_raw_parts();
 let v = unsafe { Vec::from_raw_parts(ptr, len, capacity) };
 ```
-
 #### 1.4.3 VecDeque 条件弹出 {#143-vecdeque-条件弹出}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -397,7 +389,6 @@ if let Some(value) = deque.pop_back_if(|&x| x < 5) {
     println!("Popped: {}", value);  // 输出: Popped: 4
 }
 ```
-
 #### 1.4.4 整数操作增强 {#144-整数操作增强}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -417,7 +408,6 @@ let shifted_right = unsafe { x.unchecked_shr(2) };
 let y: u32 = 10;
 let shifted = unsafe { y.unchecked_shl(2) };
 ```
-
 #### 1.4.5 切片到数组转换 {#145-切片到数组转换}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -430,7 +420,6 @@ let array: &[i32; 4] = slice.as_array().unwrap();
 let mut slice = &mut [1, 2, 3, 4];
 let array: &mut [i32; 4] = slice.as_mut_array().unwrap();
 ```
-
 #### 1.4.6 Duration 扩展 {#146-duration-扩展}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -443,7 +432,6 @@ let nanos: u128 = 1_000_000_000;
 let duration = Duration::from_nanos_u128(nanos);
 assert_eq!(duration.as_secs(), 1);
 ```
-
 #### 1.4.7 char 常量 {#147-char-常量}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -453,7 +441,6 @@ assert_eq!(duration.as_secs(), 1);
 assert_eq!(char::MAX_LEN_UTF8, 4);
 assert_eq!(char::MAX_LEN_UTF16, 2);
 ```
-
 #### 1.4.8 fmt::from_fn {#148-fmtfrom_fn}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -468,7 +455,6 @@ let formatter = fmt::from_fn(|f: &mut fmt::Formatter<'_>| {
 
 println!("{}", formatter);  // 输出: Custom: 42
 ```
-
 ---
 
 ### 1.5 Rust 1.93.0 标准库行为变更 ⚠️ {#15-rust-1930-标准库行为变更}
@@ -512,7 +498,6 @@ source.insert(1, "b");
 target.append(&mut source);
 // target[1] 仍为 "a"，不再变为 "b"
 ```
-
 **参考**：[PR #145628](https://github.com/rust-lang/rust/pull/145628)
 
 #### 1.5.3 vec::IntoIter RefUnwindSafe 放宽 {#153-vecintoiter-refunwindsafe-放宽}
@@ -566,7 +551,6 @@ for (key, value) in &map {
     println!("{}: {}", key, value);
 }
 ```
-
 **性能分析**:
 
 - **平均时间复杂度**: O(1) 插入、查找、删除
@@ -602,7 +586,6 @@ for item in &vec {
     println!("{}", item);
 }
 ```
-
 **性能分析**:
 
 - **平均时间复杂度**: O(1) 插入（摊销）、O(1) 访问
@@ -635,7 +618,6 @@ deque.push_back(3);
 let front = deque.pop_front();
 let back = deque.pop_back();
 ```
-
 **性能分析**:
 
 - **时间复杂度**: O(1) 两端插入、删除、访问
@@ -676,7 +658,6 @@ for handle in handles {
     handle.join().unwrap();
 }
 ```
-
 **性能分析**:
 
 - **引用计数**: 使用原子操作，有性能开销
@@ -715,7 +696,6 @@ for handle in handles {
 
 println!("Result: {}", *data.lock().unwrap());
 ```
-
 **性能分析**:
 
 - **锁竞争**: 多线程竞争锁时有性能开销
@@ -763,7 +743,6 @@ for handle in readers {
 }
 writer.join().unwrap();
 ```
-
 **性能分析**:
 
 - **读者并发**: 多个读者可以并发访问，性能优于 `Mutex`
@@ -799,7 +778,6 @@ file.read_to_string(&mut contents)?;
 let mut file = File::create("output.txt")?;
 file.write_all(b"Hello, world!")?;
 ```
-
 #### 2.3.2 BufRead Trait {#232-bufread-trait}
 
 **定义**: 带缓冲的读取接口。
@@ -824,7 +802,6 @@ for line in reader.lines() {
     println!("{}", line);
 }
 ```
-
 ### 2.4 线程类型 (std::thread) {#24-线程类型-stdthread}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -850,7 +827,6 @@ let handle = thread::spawn(|| {
 
 handle.join().unwrap();
 ```
-
 #### 2.4.2 `JoinHandle<T>` {#242-joinhandlet}
 
 **定义**: 线程句柄，用于等待线程完成。
@@ -873,7 +849,6 @@ let handle = thread::spawn(|| {
 let result = handle.join().unwrap();
 println!("Thread returned: {}", result);
 ```
-
 ### 2.5 进程类型 (std::process) {#25-进程类型-stdprocess}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -899,7 +874,6 @@ let output = Command::new("echo")
 
 println!("{}", String::from_utf8(output.stdout)?);
 ```
-
 ### 2.6 时间类型 (std::time) {#26-时间类型-stdtime}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -924,7 +898,6 @@ let start = Instant::now();
 let duration = start.elapsed();
 println!("耗时: {:?}", duration);
 ```
-
 #### 2.6.2 Duration {#262-duration}
 
 **定义**: 时间间隔。
@@ -944,7 +917,6 @@ let duration = Duration::from_secs(5);
 let millis = duration.as_millis();
 println!("{} 毫秒", millis);
 ```
-
 ### 2.7 错误处理 (std::error, std::result) {#27-错误处理-stderror-stdresult}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -972,7 +944,6 @@ fn read_file(path: &str) -> std::io::Result<String> {
     Ok(contents)
 }
 ```
-
 #### 2.7.2 `Option<T>` {#272-optiont}
 
 **定义**: 表示可能为空的值。
@@ -998,7 +969,6 @@ let result = value
     .map(|v| v * 2)
     .and_then(|v| if v > 0 { Some(v) } else { None });
 ```
-
 ---
 
 ## 🔍 3. 标准库设计论证 {#3-标准库设计论证}
@@ -1028,7 +998,6 @@ let vec = vec![1, 2, 3];
 let opt: Option<&i32> = Some(&42);
 // None 使用空指针表示，不占用额外空间
 ```
-
 ### 3.2 所有权系统 {#32-所有权系统}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -1054,7 +1023,6 @@ let vec = vec![1, 2, 3];
 let slice = &vec[..];  // 不可变借用
 // vec.push(4);  // 编译错误：不能在借用时修改
 ```
-
 ### 3.3 内存安全 {#33-内存安全}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -1082,7 +1050,6 @@ fn get_slice() -> &[i32] {
     &vec[..]  // 编译错误：返回局部变量的引用
 }
 ```
-
 ### 3.4 性能优化 {#34-性能优化}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -1109,7 +1076,6 @@ use std::collections::HashMap;
 let mut map = HashMap::new();
 map.insert("key", "value");  // O(1) 平均
 ```
-
 ---
 
 ## 📝 4. 标准库使用最佳实践 {#4-标准库使用最佳实践}
@@ -1141,7 +1107,6 @@ let mut map = HashMap::new();
 use std::sync::Mutex;
 let data = Mutex::new(0);
 ```
-
 ### 4.2 何时使用第三方库 {#42-何时使用第三方库}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -1165,7 +1130,6 @@ use tokio::runtime::Runtime;
 // ⚠️ 使用第三方库 serde 的序列化（功能更全面）
 use serde::{Serialize, Deserialize};
 ```
-
 ### 4.3 标准库与第三方库的权衡 {#43-标准库与第三方库的权衡}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -1187,7 +1151,6 @@ use serde::{Serialize, Deserialize};
     ├─ 是 → 评估第三方库
     └─ 否 → 使用标准库 ✅
 ```
-
 ---
 
 ## 🎓 5. 项目中的标准库使用 {#5-项目中的标准库使用}
@@ -1268,7 +1231,6 @@ if let Some(value) = map.get("key1") {
     println!("{}", value);
 }
 ```
-
 #### 示例 2: 使用 Arc 和 Mutex {#示例-2-使用-arc-和-mutex}
 
 ```rust
@@ -1289,7 +1251,6 @@ for handle in handles {
     handle.join().unwrap();
 }
 ```
-
 #### 示例 3: 使用 Command {#示例-3-使用-command}
 
 ```rust,ignore
@@ -1301,7 +1262,6 @@ let output = Command::new("echo")
 
 println!("{}", String::from_utf8(output.stdout)?);
 ```
-
 ### 5.3 标准库使用最佳实践 {#53-标准库使用最佳实践}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -1315,7 +1275,6 @@ use std::collections::HashMap;
 // ⚠️ 仅在需要特殊功能时使用第三方库
 // use hashbrown::HashMap;  // 仅当需要性能优化时
 ```
-
 #### 实践 2: 充分利用标准库特性 {#实践-2-充分利用标准库特性}
 
 ```rust,ignore
@@ -1326,7 +1285,6 @@ let sum: i32 = vec.iter().sum();
 // ✅ 使用标准库的错误处理
 let file = std::fs::File::open("file.txt")?;
 ```
-
 #### 实践 3: 理解标准库的实现 {#实践-3-理解标准库的实现}
 
 ```rust,ignore
@@ -1337,7 +1295,6 @@ let mut vec = Vec::with_capacity(100);  // 预分配容量
 use std::collections::HashMap;
 let mut map = HashMap::with_capacity(100);  // 预分配容量
 ```
-
 ---
 
 ## 💻 代码示例 {#代码示例}
@@ -1380,7 +1337,6 @@ fn main() {
     verify_type_safety();
 }
 ```
-
 ### 示例: 标准库内存安全验证 {#示例-标准库内存安全验证}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -1414,7 +1370,6 @@ fn main() {
     verify_memory_safety();
 }
 ```
-
 ---
 
 ## 🔗 形式化链接 {#形式化链接}
@@ -1463,7 +1418,7 @@ fn main() {
 - [Rust 标准库文档](https://doc.rust-lang.org/std/)
 - [Rust 1.93.0 发布说明](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0) 🆕
 - [Rust 1.92.0 发布说明](https://blog.rust-lang.org/2024/12/19/Rust-1.92.0.html)
-- [项目标准库算法参考](../../crates/c08_algorithms/docs/tier_03_references/05_标准库算法参考.md)
+- [项目标准库算法参考](../../crates/c08_algorithms/docs/tier_03_references/05_standard_library_algorithms_reference.md)
 - [Rust 1.92.0 特性对齐文档](../../archive/docs/version_reports/RUST_192_FEATURES_ALIGNMENT.md)
 
 ---

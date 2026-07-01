@@ -131,7 +131,6 @@ mindmap
       内存安全
       不可移动类型
 ```
-
 ---
 
 ## 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}
@@ -177,7 +176,6 @@ graph TD
     O --> P[状态转换安全]
     P --> L
 ```
-
 ### 异步执行决策树 {#异步执行决策树}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -200,7 +198,6 @@ graph TD
     Z{需要超时?} -->|是| AA[timeout 包装]
     Z -->|否| AB[直接 await]
 ```
-
 ---
 
 ## 🎯 核心概念 {#核心概念}
@@ -224,7 +221,6 @@ pub enum Poll<T> {
     Pending,     // 未完成，等待唤醒
 }
 ```
-
 ---
 
 ## 🚀 基本模式 {#基本模式}
@@ -248,7 +244,6 @@ async fn main() {
     println!("{}", data);
 }
 ```
-
 ---
 
 ### 模式 2: 并发执行 {#模式-2-并发执行}
@@ -270,7 +265,6 @@ async fn main() {
     println!("{} {}", r1, r2);
 }
 ```
-
 ---
 
 ### 模式 3: 选择第一个完成 {#模式-3-选择第一个完成}
@@ -289,7 +283,6 @@ async fn operation() {
     }
 }
 ```
-
 ---
 
 ### 模式 4: 超时控制 {#模式-4-超时控制}
@@ -303,7 +296,6 @@ async fn fetch_with_timeout() -> Result<String, tokio::time::error::Elapsed> {
     timeout(Duration::from_secs(5), fetch_data()).await
 }
 ```
-
 ---
 
 ## 🏗️ 运行时对比 {#运行时对比}
@@ -329,7 +321,6 @@ async fn main() {
 #[tokio::main(flavor = "current_thread")]
 async fn main() { }
 ```
-
 **优势**:
 
 - ✅ 功能最全（网络、文件、时间、信号）
@@ -351,7 +342,6 @@ async fn main() {
     // API 接近 std
 }
 ```
-
 **优势**:
 
 - ✅ API 设计简洁
@@ -373,7 +363,6 @@ fn main() {
     });
 }
 ```
-
 **优势**:
 
 - ✅ 小巧精悍
@@ -408,7 +397,6 @@ async fn fan_out(items: Vec<i32>) -> Vec<i32> {
     results
 }
 ```
-
 ---
 
 ### 模式 2: Stream 处理 {#模式-2-stream-处理}
@@ -426,7 +414,6 @@ async fn process_stream() {
     }
 }
 ```
-
 ---
 
 ### 模式 3: Actor 模式 {#模式-3-actor-模式}
@@ -452,7 +439,6 @@ impl Actor {
     }
 }
 ```
-
 ---
 
 ### 模式 4: CSP 模式（Channel） {#模式-4-csp-模式channel}
@@ -478,7 +464,6 @@ async fn csp_pattern() {
     }
 }
 ```
-
 ---
 
 ## 🔐 共享状态 {#共享状态}
@@ -514,7 +499,6 @@ async fn main() {
     println!("{}", *data.lock().await);  // 10
 }
 ```
-
 ---
 
 ### 模式 2: Arc + RwLock（读多写少） {#模式-2-arc-rwlock读多写少}
@@ -534,7 +518,6 @@ let read2 = data.read().await;
 let mut write = data.write().await;
 write.push(4);
 ```
-
 ---
 
 ## 🌐 网络编程模式 {#网络编程模式}
@@ -568,7 +551,6 @@ async fn main() -> std::io::Result<()> {
     }
 }
 ```
-
 ---
 
 ### HTTP Client {#http-client}
@@ -589,7 +571,6 @@ async fn main() -> Result<(), reqwest::Error> {
     Ok(())
 }
 ```
-
 ---
 
 ## ⚡ 性能优化 {#性能优化}
@@ -618,7 +599,6 @@ async fn batch_processor() {
     }
 }
 ```
-
 ---
 
 ### 2. 连接池 {#2-连接池}
@@ -636,7 +616,6 @@ async fn with_pool() {
     // 使用连接
 }
 ```
-
 ---
 
 ### 3. 取消任务 {#3-取消任务}
@@ -666,7 +645,6 @@ async fn cancellable_task() {
     task.await.unwrap();
 }
 ```
-
 ---
 
 ## ⚠️ 常见陷阱 {#常见陷阱}
@@ -688,7 +666,6 @@ async fn good() {
     tokio::time::sleep(Duration::from_secs(1)).await;
 }
 ```
-
 ---
 
 ### 陷阱 2: 持有 MutexGuard 跨 await {#陷阱-2-持有-mutexguard-跨-await}
@@ -712,7 +689,6 @@ async fn good(mutex: Arc<Mutex<i32>>) {
     some_async_fn().await;
 }
 ```
-
 ---
 
 ### 陷阱 3: 忘记 spawn 导致串行 {#陷阱-3-忘记-spawn-导致串行}
@@ -733,7 +709,6 @@ async fn good() {
     let (r1, r2) = tokio::join!(h1, h2);
 }
 ```
-
 ---
 
 ## 🚫 反例速查 {#反例速查}
@@ -772,7 +747,6 @@ async fn bad(mutex: Arc<Mutex<i32>>) {
     // guard 在 await 点被持有，阻塞其他任务
 }
 ```
-
 **原因**: 异步任务可能在持锁时挂起，阻塞其他等待同一锁的任务，导致死锁或性能退化。
 
 **修正**:
@@ -788,7 +762,6 @@ async fn good(mutex: Arc<Mutex<i32>>) {
     tokio::time::sleep(Duration::from_secs(1)).await;
 }
 ```
-
 ---
 
 ## 🎯 选择决策树 {#选择决策树}
@@ -810,7 +783,6 @@ async fn good(mutex: Arc<Mutex<i32>>) {
 └─ CPU 密集？
    └─ 考虑 rayon（并行）或 spawn_blocking
 ```
-
 ---
 
 ## 📊 Tokio 完整功能 {#tokio-完整功能}
@@ -831,7 +803,6 @@ tokio = { version = "1", features = [
     "process",     // 异步进程
 ] }
 ```
-
 ---
 
 ## 🔗 快速跳转 {#快速跳转}
@@ -842,9 +813,9 @@ tokio = { version = "1", features = [
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-- [Future 机制详解](../../../crates/c06_async/docs/tier_02_guides/02_Future与Executor机制.md)
-- [Tokio API 参考](../../../crates/c06_async/docs/tier_03_references/02_Tokio完整API参考.md)
-- [异步并发模式](../../../crates/c06_async/docs/tier_04_advanced/01_异步并发模式.md)
+- [Future 机制详解](../../../crates/c06_async/docs/tier_02_guides/02_future_and_executor_mechanisms.md)
+- [Tokio API 参考](../../../crates/c06_async/docs/tier_03_references/02_tokio_complete_api_reference.md)
+- [异步并发模式](../../../crates/c06_async/docs/tier_04_advanced/01_async_concurrency_patterns.md)
 
 ### 代码示例 {#代码示例}
 
@@ -904,7 +875,6 @@ async fn main() -> std::io::Result<()> {
     }
 }
 ```
-
 ### 场景 2: 批量数据获取 {#场景-2-批量数据获取}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -945,7 +915,6 @@ async fn main() {
     println!("并发耗时: {:?}", start.elapsed());
 }
 ```
-
 ### 场景 3: 生产者-消费者模式 {#场景-3-生产者-消费者模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -978,7 +947,6 @@ async fn main() {
     let _ = tokio::join!(producer, consumer);
 }
 ```
-
 ---
 
 ## ⚠️ 边界情况 {#边界情况}
@@ -1013,7 +981,6 @@ async fn main() {
     println!("10! = {}", async_factorial(10).await);
 }
 ```
-
 ### 边界 2: 异步 Drop {#边界-2-异步-drop}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -1053,7 +1020,6 @@ async fn main() {
     drop(resource);  // 同步 Drop
 }
 ```
-
 ### 边界 3: 限流与背压 {#边界-3-限流与背压}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -1084,7 +1050,6 @@ async fn main() {
     }
 }
 ```
-
 ---
 
 ---
@@ -1106,7 +1071,6 @@ use std::net::TcpStream;
 // ✅ 1.93: musl 1.2.5 改进了 DNS 解析，特别是大型 DNS 记录
 let stream = TcpStream::connect("example.com:80")?;
 ```
-
 **影响**:
 
 - 更可靠的 DNS 解析
@@ -1142,7 +1106,6 @@ async fn process_stream() {
         .await;
 }
 ```
-
 ### JIT 编译器优化 {#jit-编译器优化}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -1245,7 +1208,6 @@ where
     ControlFlow::Continue(results)
 }
 ```
-
 ### LazyLock 在异步运行时配置中的应用 {#lazylock-在异步运行时配置中的应用}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -1262,7 +1224,6 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
     LazyLock::get(&ASYNC_CONFIG)
 }
 ```
-
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
 
 ---

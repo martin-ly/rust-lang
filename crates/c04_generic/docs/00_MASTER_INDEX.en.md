@@ -21,8 +21,8 @@
 
 ### By Role
 
-- **Beginner**: [README](README.md) | [Generics Basics Guide](tier_02_guides/01_泛型基础指南.md) | [Trait System Guide](tier_02_guides/02_Trait系统指南.md)
-- **Intermediate**: [Code Examples](tier_02_guides/06_代码示例集合.md) | [Associated Types](tier_02_guides/03_关联类型指南.md) | [Type Erasure](tier_02_guides/04_类型擦除指南.md)
+- **Beginner**: [README](README.md) | [Generics Basics Guide](tier_02_guides/01_generics_basics.md) | [Trait System Guide](tier_02_guides/02_trait_system.md)
+- **Intermediate**: [Code Examples](tier_02_guides/06_code_examples.md) | [Associated Types](tier_02_guides/03_associated_types.md) | [Type Erasure](tier_02_guides/04_类型擦除指南.md)
 - **Advanced**: [tier_03_references/](tier_03_references/README.md) | [tier_04_advanced/](tier_04_advanced/README.md)
 
 ### Tier Structure
@@ -52,7 +52,6 @@ cargo run -p c04_generic --example <example_name>
 # Run all tests
 cargo test -p c04_generic
 ```
-
 ---
 
 ## Related

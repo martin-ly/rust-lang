@@ -109,7 +109,6 @@ pub struct TcpConfig {
     tcp_nodelay: bool,        // TCP_NODELAY 选项
 }
 ```
-
 **配置参数详解**:
 
 - `address`: 目标服务器的 IP 地址和端口号
@@ -134,7 +133,6 @@ let config = TcpConfig {
 let mut socket = TcpSocket::new(config);
 socket.connect().await?;
 ```
-
 **连接过程**:
 
 1. **套接字创建**: 创建 TCP 套接字
@@ -187,7 +185,6 @@ loop {
     }
 }
 ```
-
 **并发模型**:
 
 - **异步 I/O**: 使用 `tokio::spawn` 创建并发任务
@@ -217,7 +214,6 @@ async fn handle_connection(
     Ok(())
 }
 ```
-
 **处理流程**:
 
 1. **数据读取**: 从客户端读取数据
@@ -264,7 +260,6 @@ let (n, peer_addr) = socket.recv_from(&mut buffer).await?;
 // 数据发送
 socket.send_to(&buffer[..n], peer_addr).await?;
 ```
-
 **UDP 特点**:
 
 - **无状态**: 服务器不需要维护连接状态
@@ -289,7 +284,6 @@ async fn udp_echo_server() -> NetworkResult<()> {
     }
 }
 ```
-
 #### 🚀 使用场景3
 
 - **实时应用**: 游戏、视频流等对延迟敏感的应用
@@ -339,7 +333,6 @@ pub struct HttpResponse {
     pub body: Vec<u8>,          // 响应体
 }
 ```
-
 #### 💡 代码解析4
 
 ```rust
@@ -364,7 +357,6 @@ let mut response = HttpResponse::new(
 response.add_header("Content-Type", "application/json");
 response.set_body(r#"{"message": "Hello from Rust 1.89!"}"#);
 ```
-
 #### 🚀 使用场景4
 
 - **Web 应用**: 构建 Web 应用和 API
@@ -414,7 +406,6 @@ pub enum WebSocketOpcode {
     Pong,    // Pong 帧
 }
 ```
-
 #### 💡 代码解析5
 
 ```rust
@@ -433,7 +424,6 @@ request.set_host("example.com");
 request.set_websocket_key("dGhlIHNhbXBsZSBub25jZQ==");
 request.set_websocket_version("13");
 ```
-
 #### 🚀 使用场景5
 
 - **实时通信**: 聊天应用、在线游戏
@@ -480,7 +470,6 @@ pub enum DnsRecordType {
     PTR,    // 指针记录
 }
 ```
-
 #### 💡 代码解析6
 
 ```rust
@@ -499,7 +488,6 @@ let mx = doh.lookup_mx("gmail.com").await.unwrap_or_default();
 // 逆向解析
 let names = sys.reverse_lookup(ip).await.unwrap_or_default();
 ```
-
 #### 🚀 使用场景6
 
 - **域名解析**: 将域名转换为 IP 地址
@@ -548,7 +536,6 @@ pub struct NetworkMetrics {
     pub dropped: u64,
 }
 ```
-
 #### 💡 代码解析7
 
 ```rust
@@ -571,7 +558,6 @@ async fn monitor_interface(interface: NetworkInterface) -> NetworkResult<()> {
     }
 }
 ```
-
 #### 🚀 使用场景7
 
 - **网络管理**: 监控网络状态和性能
@@ -616,7 +602,6 @@ pub struct ProtocolStatistics {
     pub dns_queries: u64,
 }
 ```
-
 #### 💡 代码解析8
 
 ```rust
@@ -646,7 +631,6 @@ async fn analyze_packet(packet: &Packet) -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 #### 🚀 使用场景8
 
 - **协议研究**: 研究网络协议实现
@@ -700,7 +684,6 @@ pub struct TestResults {
     pub throughput: f64,
 }
 ```
-
 #### 💡 代码解析9
 
 ```rust
@@ -747,7 +730,6 @@ async fn run_performance_test(config: TestConfig) -> NetworkResult<TestResults> 
     Ok(results)
 }
 ```
-
 #### 🚀 使用场景9
 
 - **性能评估**: 评估网络性能
@@ -790,7 +772,6 @@ async fn network_operation() -> NetworkResult<()> {
     }
 }
 ```
-
 ### 资源管理
 
 ```rust
@@ -809,7 +790,6 @@ impl Drop for NetworkConnection {
     }
 }
 ```
-
 ### 性能优化
 
 ```rust
@@ -838,7 +818,6 @@ impl ConnectionPool {
     }
 }
 ```
-
 ### 安全考虑
 
 ```rust
@@ -865,7 +844,6 @@ impl SecureTransport {
     }
 }
 ```
-
 ## 🔗 相关文档
 
 - [网络通信理论](NETWORK_COMMUNICATION_THEORY.md) - 网络通信的理论基础

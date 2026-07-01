@@ -1,5 +1,9 @@
 # c09 设计模式：完整文档指南
 
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
+>
+
 ## 📚 文档总览
 
 本模块提供了 Rust 设计模式的完整文档体系，涵盖从基础概念到高级应用的所有内容，特别关注 Rust 1.93.0 版本的最新特性。
@@ -18,10 +22,10 @@
 
 ### Tier 1 基础层 ⭐ NEW
 
-- [🎯 项目概览](tier_01_foundations/01_项目概览.md) - 快速了解设计模式
-- [🗺️ 主索引导航](tier_01_foundations/02_主索引导航.md) - 找到适合你的学习路径
-- [📖 术语表](tier_01_foundations/03_术语表.md) - 核心术语速查
-- [❓ 常见问题](tier_01_foundations/04_常见问题.md) - 解决常见疑问
+- [🎯 项目概览](tier_01_foundations/01_project_overview.md) - 快速了解设计模式
+- [🗺️ 主索引导航](tier_01_foundations/02_navigation.md) - 找到适合你的学习路径
+- [📖 术语表](tier_01_foundations/03_glossary.md) - 核心术语速查
+- [❓ 常见问题](tier_01_foundations/04_faq.md) - 解决常见疑问
 
 ### 主题分类
 
@@ -76,10 +80,10 @@
 ### 🚀 初学者路径
 
 1. **Tier 1 基础层** → [tier_01_foundations/](tier_01_foundations/README.md)
-   - [项目概览](tier_01_foundations/01_项目概览.md)
-   - [主索引导航](tier_01_foundations/02_主索引导航.md)
-   - [术语表](tier_01_foundations/03_术语表.md)
-   - [常见问题](tier_01_foundations/04_常见问题.md)
+   - [项目概览](tier_01_foundations/01_project_overview.md)
+   - [主索引导航](tier_01_foundations/02_navigation.md)
+   - [术语表](tier_01_foundations/03_glossary.md)
+   - [常见问题](tier_01_foundations/04_faq.md)
 2. **基础概念** → [OVERVIEW.md](OVERVIEW.md)
 3. **项目概述** → [../README.md](../README.md)
 4. **创建型模式** → [../src/creational/](../src/creational)
@@ -112,7 +116,6 @@ cargo doc --open
 # 生成特定模块文档
 cargo doc --package c09_design_pattern
 ```
-
 ### 🧪 测试运行
 
 ```bash
@@ -125,7 +128,6 @@ cargo test design_pattern
 # 运行集成测试
 cargo test --test integration_tests
 ```
-
 ### 📊 代码分析
 
 ```bash
@@ -138,7 +140,6 @@ cargo clippy
 # 安全检查
 cargo audit
 ```
-
 ## 🎯 核心特性
 
 ### ✨ Rust 1.89 新特性集成
@@ -241,7 +242,6 @@ fn main() -> Result<(), DesignPatternError> {
     Ok(())
 }
 ```
-
 ### 异步示例
 
 ```rust
@@ -262,7 +262,6 @@ async fn main() {
     assert_eq!(result, "task done");
 }
 ```
-
 ### 限流与超时组合示例
 
 ```rust
@@ -292,7 +291,6 @@ async fn main() {
     }
 }
 ```
-
 ## 📊 性能基准测试
 
 ### 基准测试结果
@@ -308,7 +306,6 @@ async fn main() {
 ```bash
 cargo bench
 ```
-
 ## 🎯 模式分类
 
 ### 按执行模型分类

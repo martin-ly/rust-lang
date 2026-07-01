@@ -76,7 +76,6 @@ timeline
     2026 : Polonius (开发中)
          : 基于 Datalog 的逻辑推断
 ```
-
 ### 核心定位 {#核心定位}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -119,7 +118,6 @@ fn nll_limitation() {
     println!("{}", first); // 只在 else 分支使用 first
 }
 ```
-
 ### 2.2 Polonius 的核心改进 {#22-polonius-的核心改进}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -139,7 +137,6 @@ graph TD
     style C fill:#ffcccc
     style E fill:#ccffcc
 ```
-
 在上图中，Polonius 能识别出 `first` 和 `vec.push` **不会在同一条执行路径上共存**，从而允许编译通过。
 
 ---
@@ -196,7 +193,6 @@ error(P) :-
     borrow_live_at(L, P),
     loan_invalidated_at(L, P).
 ```
-
 ### 3.4 Datafrog 引擎 {#34-datafrog-引擎}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -215,7 +211,6 @@ flowchart LR
     D -->|是| E[生成生命周期错误]
     D -->|否| F[编译继续]
 ```
-
 ---
 
 ## 4. 与 NLL 的对比 {#4-与-nll-的对比}
@@ -239,7 +234,6 @@ pub fn polonius_wins(vec: &mut Vec<i32>) -> i32 {
     0                   // Polonius：✅ first 在上分支已结束
 }
 ```
-
 ### 4.2 核心差异总结 {#42-核心差异总结}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -275,7 +269,6 @@ RUSTFLAGS="-Zpolonius" cargo check
 [build]
 rustflags = ["-Zpolonius"]
 ```
-
 ### 5.2 验证 Polonius 是否生效 {#52-验证-polonius-是否生效}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -298,7 +291,6 @@ pub fn test() {
 
 fn main() {}
 ```
-
 ### 5.3 与 Miri 的联合使用 {#53-与-miri-的联合使用}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -309,7 +301,6 @@ fn main() {}
 cargo +nightly miri test
 RUSTFLAGS="-Zpolonius" cargo +nightly check
 ```
-
 ---
 
 ## 6. 当前限制与路线图 {#6-当前限制与路线图}
@@ -347,7 +338,6 @@ gantt
     IDE 集成          :c1, 2026-06, 12M
     错误诊断改进      :c2, 2026-04, 12M
 ```
-
 ### 6.3 与 Rust for Linux 的关系 {#63-与-rust-for-linux-的关系}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -396,7 +386,6 @@ flowchart TD
     E --> I[等待 Polonius 稳定]
     G --> I
 ```
-
 ---
 
 ## 8. 参考文献 {#8-参考文献}
@@ -456,19 +445,12 @@ flowchart TD
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

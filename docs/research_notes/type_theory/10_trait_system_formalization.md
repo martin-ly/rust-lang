@@ -98,11 +98,8 @@
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 > **创建日期**: 2025-01-27
-
 > **最后更新**: 2026-03-05
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成 | Deref Trait形式化已添加
 
 ---
@@ -110,7 +107,6 @@
 ## 🎯 研究目标 {#研究目标}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究的目的是形式化定义 Rust 的 Trait 系统，并理解其类型理论基础。
@@ -118,29 +114,21 @@
 ### 核心问题 {#核心问题}
 
 > **来源: [ACM](https://dl.acm.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Trait 的形式化定义**: 如何用类型理论精确描述 Trait？
-
 2. **Trait 对象语义**: Trait 对象的类型理论解释是什么？
-
 3. **泛型 Trait**: 泛型 Trait 的类型推导如何工作？
 
 ### 预期成果 {#预期成果}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - Trait 系统的形式化定义
-
 - Trait 对象的类型理论模型
-
 - 泛型 Trait 的类型推导算法
 
 ---
@@ -148,31 +136,23 @@
 ## 📚 理论基础 {#理论基础}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Trait 核心概念 {#trait-核心概念}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Trait 定义**: 定义一组方法签名
-
 2. **Trait 实现**: 为类型实现 Trait
-
 3. **Trait 对象**: 动态分发的 Trait 类型
-
 4. **泛型 Trait**: 带类型参数的 Trait
 
 ### 相关概念 {#相关概念}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Trait 定义 (Trait Definition)**: 定义一组方法签名，描述类型必须实现的行为。Trait 类似于接口，但更强大。
@@ -192,9 +172,7 @@
 ### 相关理论 {#相关理论}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **类型类 (Type Class)**: Haskell 的类型类系统。Rust 的 Trait 系统受到类型类的启发，但有所不同。
@@ -210,9 +188,7 @@
 ### 理论背景 {#理论背景}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **类型类理论 (Type Class Theory)**: Trait 系统基于类型类理论，但增加了更多特性，如关联类型和生命周期参数。
@@ -226,41 +202,31 @@
 ### 类型类的理论基础 {#类型类的理论基础}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **类型类 (Type Class)** 是 Haskell 中的核心概念，用于定义类型必须满足的约束：
 
 1. **类型类定义**: 定义一组函数签名，描述类型必须实现的操作
-
 2. **类型类实例**: 为特定类型实现类型类
-
 3. **类型类约束**: 在函数签名中使用类型类约束
 
 **与 Rust Trait 的对应关系**:
 
 - 类型类定义 ↔ Trait 定义
-
 - 类型类实例 ↔ Trait 实现 (`impl`)
-
 - 类型类约束 ↔ Trait 约束 (`T: Trait`)
 
 **关键区别**:
 
 - Rust Trait 支持关联类型，Haskell 类型类使用函数依赖
-
 - Rust Trait 支持默认实现，Haskell 类型类使用默认方法
-
 - Rust Trait 对象提供动态分发，Haskell 使用存在类型
 
 ### Trait 对象的理论基础 {#trait-对象的理论基础}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **存在类型 (Existential Type)** 是类型理论中的核心概念：
@@ -280,17 +246,13 @@ $$\text{dyn } T = \exists \tau. \tau : T \land \tau$$
 **虚函数表 (vtable)**:
 
 - Trait 对象包含指向实际数据的指针和指向虚函数表的指针
-
 - 虚函数表包含所有 Trait 方法的函数指针
-
 - 动态分发通过虚函数表实现
 
 **类型擦除 (Type Erasure)**:
 
 - Trait 对象擦除了具体类型信息
-
 - 只保留 Trait 接口信息
-
 - 允许在运行时选择具体实现
 
 ### 泛型 Trait 的理论基础 {#泛型-trait-的理论基础}
@@ -318,9 +280,7 @@ $$\tau : T[\tau']$$
 **类型推导**:
 
 - 编译器根据使用情况推导类型参数
-
 - 使用统一算法（unification）求解类型约束
-
 - 确保类型安全和一致性
 
 ### 相关学术论文的详细分析 {#相关学术论文的详细分析}
@@ -334,25 +294,19 @@ $$\tau : T[\tau']$$
 **核心贡献**:
 
 - 类型类系统的完整理论基础
-
 - 类型类实例解析算法
-
 - 类型类约束的类型推导
 
 **关键结果**:
 
 - 类型类系统的形式化定义
-
 - 实例解析的正确性证明
-
 - 类型推导算法的复杂度分析
 
 **与本研究的关联**:
 
 - 提供了 Trait 系统的理论基础
-
 - 提供了类型类约束的类型推导方法
-
 - 提供了实例解析的算法
 
 #### 2. Existential Types for Object-Oriented Programming {#2-existential-types-for-object-oriented-programming}
@@ -362,25 +316,19 @@ $$\tau : T[\tau']$$
 **核心贡献**:
 
 - 存在类型在面向对象编程中的应用
-
 - 存在类型的类型安全保证
-
 - 存在类型的实现方法
 
 **关键结果**:
 
 - 存在类型的类型理论模型
-
 - 类型安全的形式化证明
-
 - 虚函数表的语义
 
 **与本研究的关联**:
 
 - 提供了 Trait 对象的理论基础
-
 - 提供了动态分发的类型理论解释
-
 - 提供了类型擦除的语义
 
 #### 3. The RustBelt Project: Formalizing Rust's Type System {#3-the-rustbelt-project-formalizing-rusts-type-system}
@@ -390,25 +338,19 @@ $$\tau : T[\tau']$$
 **核心贡献**:
 
 - Rust Trait 系统的形式化
-
 - Trait 对象的类型安全证明
-
 - 泛型 Trait 的类型推导算法
 
 **关键结果**:
 
 - Trait 系统的完整形式化定义
-
 - Trait 对象类型安全的形式化证明
-
 - 泛型 Trait 类型推导的正确性证明
 
 **与本研究的关联**:
 
 - 提供了 Rust Trait 系统形式化的方法
-
 - 提供了 Trait 对象类型安全的证明方法
-
 - 提供了工具支持（Iris 框架）
 
 ---
@@ -416,7 +358,6 @@ $$\tau : T[\tau']$$
 ## 🔬 形式化定义 {#形式化定义}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. Trait 定义 {#1-trait-定义}
@@ -430,17 +371,13 @@ $$T = \{m_1 : \tau_1 \to \tau_1', m_2 : \tau_2 \to \tau_2', \ldots, \text{AT}_i 
 其中：
 
 - $m_i$ 是方法名
-
 - $\tau_i \to \tau_i'$ 是方法签名
-
 - $\text{AT}_i : \tau_i$ 是关联类型
 
 **定义 1.2 (Trait 实现)**: 类型 $\tau$ 实现 Trait $T$，记作 $\tau : T$，如果：
 
 1. $\tau$ 提供了 $T$ 中所有方法的实现
-
 2. $\tau$ 为所有关联类型指定了具体类型
-
 3. 所有方法签名与 Trait 定义匹配
 
 **形式化表示**：
@@ -464,7 +401,6 @@ $$\text{dyn } T = \exists \tau. \tau : T \land \tau$$
 **定义 2.2 (Trait 对象语义)**: Trait 对象是一个存在类型，包含：
 
 - **数据指针**: 指向实际对象，类型为 $\exists \tau. \tau$
-
 - **虚函数表 (vtable)**: 包含方法指针，类型为 $\text{VTable}[T]$
 
 **形式化表示**：
@@ -526,11 +462,8 @@ $$
 **定义 4.2 (Trait 解析规则)**:
 
 1. **直接实现**: 如果存在 `impl T for τ`，返回该实现
-
 2. **泛型实现**: 如果存在 `impl<T> T for U<T>` 且可以统一，返回统一后的实现
-
 3. **关联 Trait**: 如果 $\tau : T'$ 且 $T' \subseteq T$，返回关联实现
-
 4. **默认实现**: 如果 Trait 有默认实现且无冲突，返回默认实现
 
 **算法形式化**：
@@ -540,9 +473,7 @@ $$\text{Resolve}(\tau, T) = \text{DirectImpl}(\tau, T) \cup \text{GenericImpl}(\
 **定义 4.3 (Trait 解析正确性)**: Trait 解析算法是正确的，如果：
 
 1. **完备性**: 如果 $\tau : T$，则 $\text{Resolve}(\tau, T) \neq \text{None}$
-
 2. **一致性**: 如果 $\text{Resolve}(\tau, T) = \text{Some}(\text{impl})$，则 $\tau : T$
-
 3. **唯一性**: 如果存在实现，则实现是唯一的（在无冲突的情况下）
 
 ### 5. Trait 对象语义 {#5-trait-对象语义}
@@ -560,9 +491,7 @@ $$\tau : T \rightarrow \text{SafeCoerce}(\tau, \text{dyn } T)$$
 **证明思路**:
 
 - Trait 对象包含虚函数表，确保方法调用的类型安全
-
 - 存在类型语义保证类型转换的安全性
-
 - 虚函数表中的方法指针类型与 Trait 定义匹配
 
 **公理链标注**：定义（vtable、存在类型 $\exists \tau. \tau : T$）→ 定理 1。
@@ -578,9 +507,7 @@ $$\tau : T \leftrightarrow \forall m \in T: \text{signature}(\text{impl}_m) = \t
 **证明思路**:
 
 - Trait 定义约束了实现必须提供的方法
-
 - 类型检查器确保实现的方法签名与 Trait 定义一致
-
 - 编译时检查保证运行时安全
 
 **公理链标注**：Trait 定义（方法集合、签名） + 类型检查规则 → 定理 2。
@@ -596,9 +523,7 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 **证明思路**:
 
 - 解析算法覆盖所有实现情况
-
 - 类型检查器验证解析结果的正确性
-
 - 冲突检测确保唯一性
 
 **公理链标注**：Resolve 算法定义 + 完备性（$\tau : T \rightarrow \text{Resolve}(\tau,T) \neq \text{None}$）+ 一致性（$\text{Resolve}(\tau,T) = \text{Some}(\text{impl}) \rightarrow \tau : T$）→ 定理 3。
@@ -722,23 +647,15 @@ GAT 约束 $A[P] : B[P]$ 在 [advanced_types](10_advanced_types.md) AT-L1 衔接
 ## ⚠️ 反例：违反 Trait 规则 {#反例违反-trait-规则}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 反例 | 违反规则 | 后果 | 说明 |
-
 | :--- | :--- | :--- | :--- |
-
 | 方法签名不匹配 | 定理 2 实现一致性 | 编译错误 | `impl` 中方法签名与 Trait 定义不一致 |
-
 | 冲突的 blanket impl | 定理 3 解析唯一性 | 编译错误 | 两个 impl 同时适用同一类型 |
-
 | 对象安全性违规 | 定理 1 对象安全 | 编译错误 | 包含泛型方法的 Trait 不能做成 `dyn` |
-
 | 孤儿规则违反 | Axiom COH1 / Def ORPH1 | 编译错误 | 为外部类型实现外部 Trait |
-
 | 正负 impl 冲突 | Axiom NEG1 | 编译错误 | 同时 `impl T for τ` 与 `impl !T for τ` |
-
 | 重复/重叠 impl | 定理 3 | 编译错误 | 两个 impl 重叠覆盖同一类型 |
 
 ---
@@ -746,13 +663,10 @@ GAT 约束 $A[P] : B[P]$ 在 [advanced_types](10_advanced_types.md) AT-L1 衔接
 ## 🌳 公理-定理证明树 {#公理-定理证明树}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
 Trait 系统安全性证明树
-
 
 
   定义: Trait 定义、Trait 对象、泛型 Trait
@@ -808,9 +722,7 @@ Trait 系统安全性证明树
   └─ Def DYN-IMPL1 ─────────────────→ 定理 DYN-T1、推论 DYN-C1
 
       （impl Trait 与 dyn Trait 可替换边界）
-
 ```
-
 ---
 
 ### 证明工作完成总结 {#证明工作完成总结}
@@ -824,9 +736,7 @@ Trait 系统安全性证明树
 **证明完成**：
 
 - Trait 对象包含虚函数表，确保方法调用的类型安全
-
 - 存在类型语义保证类型转换的安全性
-
 - 虚函数表中的方法指针类型与 Trait 定义匹配
 
 **形式化验证**：
@@ -840,9 +750,7 @@ $$\tau : T \rightarrow \text{SafeCoerce}(\tau, \text{dyn } T)$$
 **证明完成**：
 
 - Trait 定义约束了实现必须提供的方法
-
 - 类型检查器确保实现的方法签名与 Trait 定义一致
-
 - 编译时检查保证运行时安全
 
 **形式化验证**：
@@ -856,9 +764,7 @@ $$\tau : T \leftrightarrow \forall m \in T: \text{signature}(\text{impl}_m) = \t
 **证明完成**：
 
 - 解析算法覆盖所有实现情况（直接实现、泛型实现、关联 Trait、默认实现）
-
 - 类型检查器验证解析结果的正确性
-
 - 冲突检测确保唯一性
 
 **形式化验证**：
@@ -868,27 +774,16 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 **证明步骤**：
 
 1. **完备性证明**：
-
    - 如果类型 $\tau$ 实现 Trait $T$，则存在实现路径
-
    - 解析算法会找到该实现路径
-
    - $\tau : T \rightarrow \text{Resolve}(\tau, T) \neq \text{None}$
-
 2. **一致性证明**：
-
    - 如果解析算法返回实现，则该实现是正确的
-
    - 类型检查器验证实现的正确性
-
    - $\text{Resolve}(\tau, T) = \text{Some}(\text{impl}) \rightarrow \tau : T$
-
 3. **唯一性证明**：
-
    - 在无冲突的情况下，实现是唯一的
-
    - 冲突检测机制确保唯一性
-
    - $\text{Resolve}(\tau, T) = \text{Some}(\text{impl}_1) \land \text{Resolve}(\tau, T) = \text{Some}(\text{impl}_2) \rightarrow \text{impl}_1 = \text{impl}_2$
 
 ---
@@ -896,7 +791,6 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 ## ✅ 证明目标 {#证明目标}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 待证明的性质 {#待证明的性质}
@@ -904,9 +798,7 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 1. **Trait 实现正确性**: Trait 实现满足 Trait 定义
-
 2. **Trait 对象类型安全**: Trait 对象的使用是类型安全的
-
 3. **泛型 Trait 类型推导**: 泛型 Trait 的类型推导正确
 
 ### 证明方法 {#证明方法}
@@ -914,9 +806,7 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - **类型推导**: 证明 Trait 约束的类型推导
-
 - **类型检查**: 证明 Trait 实现的类型检查
-
 - **语义证明**: 证明 Trait 对象的语义正确性
 
 ---
@@ -924,7 +814,6 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 ## 💻 代码示例与实践 {#代码示例与实践}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 1: 基本 Trait {#示例-1-基本-trait}
@@ -932,13 +821,11 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
-
 trait Display {
 
     fn display(&self) -> String;
 
 }
-
 
 
 struct Point {
@@ -948,7 +835,6 @@ struct Point {
     y: i32,
 
 }
-
 
 
 impl Display for Point {
@@ -962,7 +848,6 @@ impl Display for Point {
 }
 
 
-
 fn main() {
 
     let p = Point { x: 10, y: 20 };
@@ -970,15 +855,11 @@ fn main() {
     println!("{}", p.display());
 
 }
-
 ```
-
 **形式化描述**:
 
 - $\text{Display} = \{\text{display} : \&self \to \text{String}\}$
-
 - $\text{Point} : \text{Display}$
-
 - $\Gamma \vdash p.\text{display}() : \text{String}$
 
 ### 示例 2: Trait 对象 {#示例-2-trait-对象}
@@ -986,13 +867,11 @@ fn main() {
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
-
 trait Draw {
 
     fn draw(&self);
 
 }
-
 
 
 struct Circle {
@@ -1002,7 +881,6 @@ struct Circle {
 }
 
 
-
 struct Rectangle {
 
     width: f64,
@@ -1010,7 +888,6 @@ struct Rectangle {
     height: f64,
 
 }
-
 
 
 impl Draw for Circle {
@@ -1024,7 +901,6 @@ impl Draw for Circle {
 }
 
 
-
 impl Draw for Rectangle {
 
     fn draw(&self) {
@@ -1036,13 +912,11 @@ impl Draw for Rectangle {
 }
 
 
-
 fn draw_shape(shape: &dyn Draw) {
 
     shape.draw();
 
 }
-
 
 
 fn main() {
@@ -1056,17 +930,12 @@ fn main() {
     draw_shape(&rect);
 
 }
-
 ```
-
 **形式化描述**:
 
 - $\text{Draw} = \{\text{draw} : \&self \to ()\}$
-
 - $\text{Circle} : \text{Draw}$, $\text{Rectangle} : \text{Draw}$
-
 - $\text{draw\_shape} : \&\text{dyn Draw} \to ()$
-
 - Trait 对象类型: $\text{dyn Draw} = \exists \tau. \tau : \text{Draw} \land \tau$
 
 ### 示例 3: 泛型 Trait {#示例-3-泛型-trait}
@@ -1074,7 +943,6 @@ fn main() {
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
-
 trait Container<T> {
 
     fn contains(&self, item: &T) -> bool;
@@ -1084,13 +952,11 @@ trait Container<T> {
 }
 
 
-
 struct VecContainer<T> {
 
     items: Vec<T>,
 
 }
-
 
 
 impl<T: PartialEq> Container<T> for VecContainer<T> {
@@ -1102,7 +968,6 @@ impl<T: PartialEq> Container<T> for VecContainer<T> {
     }
 
 
-
     fn add(&mut self, item: T) {
 
         self.items.push(item);
@@ -1110,15 +975,11 @@ impl<T: PartialEq> Container<T> for VecContainer<T> {
     }
 
 }
-
 ```
-
 **泛型 Trait 分析**：
 
 - `Container<T>` 是泛型 Trait，类型参数为 `T`
-
 - 实现时需要指定具体的 `T`
-
 - 可以添加约束（如 `T: PartialEq`）
 
 ### 示例 4: 关联类型 {#示例-4-关联类型}
@@ -1126,17 +987,14 @@ impl<T: PartialEq> Container<T> for VecContainer<T> {
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
-
 trait Iterator {
 
     type Item;  // 关联类型
 
 
-
     fn next(&mut self) -> Option<Self::Item>;
 
 }
-
 
 
 struct Counter {
@@ -1146,11 +1004,9 @@ struct Counter {
 }
 
 
-
 impl Iterator for Counter {
 
     type Item = u32;  // 指定关联类型
-
 
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -1162,15 +1018,11 @@ impl Iterator for Counter {
     }
 
 }
-
 ```
-
 **关联类型分析**：
 
 - 关联类型由实现者指定
-
 - 每个实现可以有不同的关联类型
-
 - 提供类型级别的抽象
 
 ### 示例 5: Trait 对象与动态分发 {#示例-5-trait-对象与动态分发}
@@ -1178,7 +1030,6 @@ impl Iterator for Counter {
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
-
 trait Draw {
 
     fn draw(&self);
@@ -1186,13 +1037,11 @@ trait Draw {
 }
 
 
-
 struct Circle {
 
     radius: f64,
 
 }
-
 
 
 impl Draw for Circle {
@@ -1206,7 +1055,6 @@ impl Draw for Circle {
 }
 
 
-
 struct Rectangle {
 
     width: f64,
@@ -1214,7 +1062,6 @@ struct Rectangle {
     height: f64,
 
 }
-
 
 
 impl Draw for Rectangle {
@@ -1228,7 +1075,6 @@ impl Draw for Rectangle {
 }
 
 
-
 fn draw_shapes(shapes: &[Box<dyn Draw>]) {
 
     for shape in shapes {
@@ -1238,7 +1084,6 @@ fn draw_shapes(shapes: &[Box<dyn Draw>]) {
     }
 
 }
-
 
 
 fn use_trait_objects() {
@@ -1254,19 +1099,14 @@ fn use_trait_objects() {
     draw_shapes(&shapes);
 
 }
-
 ```
-
 **Trait 对象分析**：
 
 - `dyn Draw` 是 Trait 对象类型
-
 - 允许在运行时选择具体实现
-
 - 使用虚函数表（vtable）实现动态分发
 
 ```rust
-
 trait Add<Rhs = Self> {
 
     type Output;
@@ -1274,7 +1114,6 @@ trait Add<Rhs = Self> {
     fn add(self, rhs: Rhs) -> Self::Output;
 
 }
-
 
 
 impl Add for i32 {
@@ -1290,7 +1129,6 @@ impl Add for i32 {
 }
 
 
-
 fn main() {
 
     let x: i32 = 10;
@@ -1302,17 +1140,12 @@ fn main() {
     println!("{}", z);
 
 }
-
 ```
-
 **形式化描述**:
 
 - $\text{Add}[\alpha, \beta] = \{\text{add} : \alpha \times \beta \to \text{Output}\}$
-
 - $\text{i32} : \text{Add}[\text{i32}, \text{i32}]$
-
 - $\text{Output} = \text{i32}$
-
 - $\Gamma \vdash x.\text{add}(y) : \text{i32}$
 
 ### 示例 6: Trait 约束 {#示例-6-trait-约束}
@@ -1320,7 +1153,6 @@ fn main() {
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
-
 // Trait 约束用于限制泛型类型参数
 
 trait Clone {
@@ -1330,13 +1162,11 @@ trait Clone {
 }
 
 
-
 trait Debug {
 
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result;
 
 }
-
 
 
 // 使用 Trait 约束
@@ -1348,7 +1178,6 @@ fn duplicate<T: Clone>(item: T) -> (T, T) {
 }
 
 
-
 // 多个 Trait 约束
 
 fn print_and_clone<T: Clone + Debug>(item: T) -> T {
@@ -1358,7 +1187,6 @@ fn print_and_clone<T: Clone + Debug>(item: T) -> T {
     item.clone()
 
 }
-
 
 
 // 使用 where 子句
@@ -1378,7 +1206,6 @@ where
     x.clone()
 
 }
-
 
 
 // Trait 约束的泛型函数
@@ -1402,7 +1229,6 @@ fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
 }
 
 
-
 fn main() {
 
     let numbers = vec![34, 50, 25, 100, 65];
@@ -1412,23 +1238,17 @@ fn main() {
     println!("最大数字: {}", result);
 
 }
-
 ```
-
 **Trait 约束分析**：
 
 - `T: Clone` 约束类型 T 必须实现 Clone Trait
-
 - `T: Clone + Debug` 约束类型 T 必须同时实现 Clone 和 Debug
-
 - `where` 子句提供更清晰的约束语法
-
 - Trait 约束确保类型安全和方法可用性
 
 **形式化描述**：
 
 - $\text{duplicate} : \forall \alpha. \alpha : \text{Clone} \to \alpha \to (\alpha, \alpha)$
-
 - $\text{largest} : \forall \alpha. \alpha : \text{PartialOrd} \land \alpha : \text{Copy} \to \&[\alpha] \to \alpha$
 
 ### 示例 7: Trait 对象与生命周期 {#示例-7-trait-对象与生命周期}
@@ -1436,7 +1256,6 @@ fn main() {
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
-
 trait Processor {
 
     fn process(&self, data: &str) -> String;
@@ -1444,9 +1263,7 @@ trait Processor {
 }
 
 
-
 struct TextProcessor;
-
 
 
 impl Processor for TextProcessor {
@@ -1460,7 +1277,6 @@ impl Processor for TextProcessor {
 }
 
 
-
 // Trait 对象与生命周期参数
 
 fn process_with_lifetime<'a>(processor: &'a dyn Processor, data: &'a str) -> String {
@@ -1468,7 +1284,6 @@ fn process_with_lifetime<'a>(processor: &'a dyn Processor, data: &'a str) -> Str
     processor.process(data)
 
 }
-
 
 
 // 返回 Trait 对象
@@ -1480,7 +1295,6 @@ fn get_processor() -> Box<dyn Processor> {
 }
 
 
-
 fn main() {
 
     let processor = get_processor();
@@ -1490,21 +1304,17 @@ fn main() {
     println!("{}", result);
 
 }
-
 ```
-
 ### 示例 8: 高级 Trait 特性 - 默认实现和关联函数 {#示例-8-高级-trait-特性---默认实现和关联函数}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
-
 trait Summary {
 
     // 关联函数（静态方法）
 
     fn new() -> Self;
-
 
 
     // 默认实现
@@ -1516,13 +1326,11 @@ trait Summary {
     }
 
 
-
     // 必须实现的方法
 
     fn title(&self) -> String;
 
 }
-
 
 
 struct Article {
@@ -1532,7 +1340,6 @@ struct Article {
     content: String,
 
 }
-
 
 
 impl Summary for Article {
@@ -1550,13 +1357,11 @@ impl Summary for Article {
     }
 
 
-
     fn title(&self) -> String {
 
         self.title.clone()
 
     }
-
 
 
     // 覆盖默认实现
@@ -1570,7 +1375,6 @@ impl Summary for Article {
 }
 
 
-
 fn main() {
 
     let article = Article {
@@ -1582,19 +1386,15 @@ fn main() {
     };
 
 
-
     println!("{}", article.summarize());
 
 }
-
 ```
-
 ### 示例 9: Trait 对象集合 {#示例-9-trait-对象集合}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
-
 trait Animal {
 
     fn name(&self) -> &str;
@@ -1604,7 +1404,6 @@ trait Animal {
 }
 
 
-
 struct Dog {
 
     name: String,
@@ -1612,13 +1411,11 @@ struct Dog {
 }
 
 
-
 struct Cat {
 
     name: String,
 
 }
-
 
 
 impl Animal for Dog {
@@ -1630,7 +1427,6 @@ impl Animal for Dog {
     }
 
 
-
     fn speak(&self) {
 
         println!("{} 说: 汪汪!", self.name);
@@ -1638,7 +1434,6 @@ impl Animal for Dog {
     }
 
 }
-
 
 
 impl Animal for Cat {
@@ -1650,7 +1445,6 @@ impl Animal for Cat {
     }
 
 
-
     fn speak(&self) {
 
         println!("{} 说: 喵喵!", self.name);
@@ -1658,7 +1452,6 @@ impl Animal for Cat {
     }
 
 }
-
 
 
 fn main() {
@@ -1676,7 +1469,6 @@ fn main() {
     ];
 
 
-
     for animal in animals {
 
         animal.speak();
@@ -1684,15 +1476,11 @@ fn main() {
     }
 
 }
-
 ```
-
 **Trait 对象集合分析**：
 
 - 使用 `Vec<Box<dyn Trait>>` 存储不同类型的 Trait 对象
-
 - 动态分发：运行时选择具体实现
-
 - 类型擦除：只保留 Trait 接口信息
 
 ---
@@ -1700,7 +1488,6 @@ fn main() {
 ## 📖 参考文献 {#参考文献}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 学术论文 {#学术论文}
@@ -1708,19 +1495,12 @@ fn main() {
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 1. **Type Classes: An Exploration of the Design Space**
-
    - 作者: Mark P. Jones
-
    - 年份: 1995
-
    - 摘要: 类型类的设计空间探索
-
 2. **Existential Types for Object-Oriented Programming**
-
    - 作者: K. Bruce, et al.
-
    - 年份: 2003
-
    - 摘要: 面向对象编程中的存在类型
 
 ### 官方文档 {#官方文档}
@@ -1728,9 +1508,7 @@ fn main() {
 > **来源: [ACM](https://dl.acm.org/)**
 
 - [Rust Book - Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)
-
 - [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)
-
 - [Trait 对象](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)
 
 ### 相关代码 {#相关代码}
@@ -1738,9 +1516,7 @@ fn main() {
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 - [Trait 系统实现](../../../crates/c02_type_system/src/README.md)
-
 - [Trait 系统示例](../../../crates/c02_type_system/examples/README.md)
-
 - [形式化工程系统 - Trait](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
 
 ### 工具资源 {#工具资源}
@@ -1748,7 +1524,6 @@ fn main() {
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - Rust Analyzer: Rust 语言服务器，提供类型检查
-
 - [Chalk](https://github.com/rust-lang/chalk): Rust Trait 系统的形式化模型
 
 ---
@@ -1756,7 +1531,6 @@ fn main() {
 ## 🔄 研究进展 {#研究进展}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 已完成 ✅ {#已完成}
@@ -1764,13 +1538,9 @@ fn main() {
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [x] 研究目标定义
-
 - [x] 理论基础整理（包括理论背景和相关概念）
-
 - [x] 初步形式化定义
-
 - [x] 添加 Trait 对象类型安全定理（定理 1）
-
 - [x] 添加 Trait 实现一致性定理（定理 2）
 
 ### 进行中 🔄（已完成） {#进行中-已完成}
@@ -1778,15 +1548,10 @@ fn main() {
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - [x] 完整的形式化定义
-
 - [x] Trait 对象语义形式化
-
 - [x] 泛型 Trait 形式化
-
 - [x] Trait 解析算法形式化
-
 - [x] 代码示例补充（基本 Trait、Trait 对象、泛型 Trait、Trait 约束）
-
 - [x] 证明工作（Trait 系统正确性、Trait 对象语义、Trait 解析算法）
 
 ### 已完成（原计划中）✅ {#已完成原计划中}
@@ -1794,9 +1559,7 @@ fn main() {
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - [x] 与类型系统的集成
-
 - [x] 与生命周期的集成
-
 - [x] 实际应用案例
 
 ---
@@ -1804,7 +1567,6 @@ fn main() {
 ## 🔗 系统集成与实际应用 {#系统集成与实际应用}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 与类型系统的集成 {#与类型系统的集成}
@@ -1834,9 +1596,7 @@ Trait 系统与 Rust 类型系统的集成通过以下形式化关系表达：
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 1. **序列化/反序列化**：`Serde` 的 `Serialize`/`Deserialize` 作为 Trait，多态与 Trait 对象（`Box<dyn Error>`）的典型应用；形式化对应 $\tau : \text{Serialize} \rightarrow \text{to\_bytes}(\tau) : \text{Result}[Vec[u8]]$。
-
 2. **异步运行时**：`Future`、`AsyncRead`/`AsyncWrite` 等 Trait 与 `dyn Future`、`Pin<Box<dyn Future>>` 的交互；对应本研究中的 Trait 对象语义与 Pin 不变式。
-
 3. **插件与策略模式**：`dyn Handler`、`dyn Strategy` 等 Trait 对象的依赖注入与动态分发；对应 $\text{TraitObject}[T]$ 与 $\text{Resolve}$ 的运行时多态。
 
 ---
@@ -1850,21 +1610,15 @@ Trait 系统与 Rust 类型系统的集成通过以下形式化关系表达：
 **完成情况**:
 
 - ✅ 理论基础完善：100%完成（类型类、Trait 对象、泛型 Trait、学术论文分析）
-
 - ✅ 形式化定义：100%完成（Trait 定义、Trait 对象、泛型 Trait、Trait 解析算法）
-
 - ✅ 代码示例：9个完成（基本 Trait、Trait 对象、泛型 Trait、关联类型、动态分发、Trait 约束、生命周期、默认实现、Trait 对象集合）
-
 - ✅ 证明工作：100%完成（定理 1–3 及与类型系统、生命周期的集成论证）
-
 - ✅ Rust 1.93 更新：已完成（全局分配器 thread_local、MaybeUninit 新方法对 Trait 对象的影响分析）
-
 - ✅ 系统集成与实际应用：已完成（与类型系统、生命周期集成及 Serde/异步/插件案例）
 
 ## 🆕 Rust 1.93.0 相关更新 {#rust-1930-相关更新}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 全局分配器与 Trait 对象 {#全局分配器与-trait-对象}
@@ -1876,19 +1630,12 @@ Rust 1.93.0 允许全局分配器使用 `thread_local!` 和 `std::thread::curren
 **形式化影响**：
 
 1. **Trait 对象分配语义增强**：
-
    - 之前：全局分配器不能安全使用线程本地存储
-
    - 现在：全局分配器可以使用线程本地存储，无需担心重入问题
-
    - 形式化表示：$\text{GlobalAlloc} \land \text{ThreadLocal} \rightarrow \text{SafeReentrancy}$
-
 2. **Trait 对象性能优化**：
-
    - Trait 对象的内存分配可以使用线程本地缓存
-
    - 减少跨线程分配开销
-
    - 提升动态分发的性能
 
 ### MaybeUninit 新方法与 Trait 对象 {#maybeuninit-新方法与-trait-对象}
@@ -1898,11 +1645,8 @@ Rust 1.93.0 允许全局分配器使用 `thread_local!` 和 `std::thread::curren
 Rust 1.93.0 稳定化了 `MaybeUninit<T>` 切片的新方法：
 
 - `assume_init_drop`: 安全地 drop 未初始化的切片
-
 - `assume_init_ref`: 获取未初始化切片的引用
-
 - `assume_init_mut`: 获取未初始化切片的可变引用
-
 - `write_copy_of_slice`: 写入切片的副本
 
 **对 Trait 对象形式化的影响**：
@@ -1910,7 +1654,6 @@ Rust 1.93.0 稳定化了 `MaybeUninit<T>` 切片的新方法：
 这些方法为 Trait 对象的底层实现提供了更安全的工具，特别是在处理 Trait 对象集合时：
 
 ```rust,ignore
-
 // Trait 对象集合的安全初始化
 
 let mut objects: Vec<MaybeUninit<dyn Trait>> = Vec::new();
@@ -1918,9 +1661,7 @@ let mut objects: Vec<MaybeUninit<dyn Trait>> = Vec::new();
 // ... 初始化过程
 
 objects.assume_init_drop(); // Rust 1.93.0 新方法
-
 ```
-
 **形式化表示**：
 
 $$\text{TraitObjectInit}[\tau] \equiv \text{MaybeUninit}[\text{dyn Trait}] \rightarrow \text{SafeInit}[\text{dyn Trait}]$$
@@ -1930,13 +1671,9 @@ $$\text{TraitObjectInit}[\tau] \equiv \text{MaybeUninit}[\text{dyn Trait}] \righ
 ## 🆕 Rust Book Ch 15.2 对齐: Deref Trait形式化 {#rust-book-ch-152-对齐-deref-trait形式化}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
 > **新增日期**: 2026-03-05
-
 > **对应**: Rust Book Ch 15.2 Treating Smart Pointers Like Regular References
-
 > **修复**: GAP-DEREF-01
 
 ### 定义 DEREF-1 (Deref Trait) {#定义-deref-1-deref-trait}
@@ -1946,7 +1683,6 @@ $$\text{TraitObjectInit}[\tau] \equiv \text{MaybeUninit}[\text{dyn Trait}] \righ
 `Deref` trait允许类型像引用一样被解引用，实现自定义解引用行为。
 
 ```rust
-
 trait Deref {
 
     type Target;
@@ -1954,9 +1690,7 @@ trait Deref {
     fn deref(&self) -> &Self::Target;
 
 }
-
 ```
-
 **形式化定义**:
 
 $$
@@ -1968,7 +1702,6 @@ $$
 **类型规则**:
 
 ```text
-
 Γ ⊢ x : T
 
 T : Deref
@@ -1978,7 +1711,6 @@ T : Deref
 Γ ⊢ *x : T::Target
 
 
-
 Γ ⊢ x : T
 
 T : Deref<Target = U>
@@ -1986,9 +1718,7 @@ T : Deref<Target = U>
 ─────────────────────────────── (DEREF-2)
 
 Γ ⊢ &*x : &U
-
 ```
-
 ### 定义 DEREF-2 (DerefMut Trait) {#定义-deref-2-derefmut-trait}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1996,15 +1726,12 @@ T : Deref<Target = U>
 `DerefMut` trait允许可变解引用。
 
 ```rust,ignore
-
 trait DerefMut: Deref {
 
     fn deref_mut(&mut self) -> &mut Self::Target;
 
 }
-
 ```
-
 **形式化定义**:
 
 $$
@@ -2042,7 +1769,6 @@ $$
 **类型转换规则**:
 
 ```text
-
 Γ ⊢ x : T
 
 T : Deref<Target = U>
@@ -2050,9 +1776,7 @@ T : Deref<Target = U>
 ─────────────────────────────── (DEREF-COERCE)
 
 Γ ⊢ x : T  ~>  &U  (自动解引用)
-
 ```
-
 ### 定理 DEREF-T1 (Deref一致性) {#定理-deref-t1-deref一致性}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -2100,7 +1824,6 @@ $$
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
-
 fn box_deref() {
 
     let x = Box::new(5);
@@ -2108,29 +1831,23 @@ fn box_deref() {
     assert_eq!(*x, 5);  // 解引用Box<i32>得到i32
 
 
-
     // 形式化: Box<i32> : Deref<Target = i32>
 
     // *x 等价于 *(x.deref())
 
 }
-
 ```
-
 #### 示例2: 自定义智能指针 {#示例2-自定义智能指针}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
-
 struct MyBox<T>(T);
-
 
 
 impl<T> Deref for MyBox<T> {
 
     type Target = T;
-
 
 
     fn deref(&self) -> &T {
@@ -2142,11 +1859,9 @@ impl<T> Deref for MyBox<T> {
 }
 
 
-
 fn custom_smart_pointer() {
 
     let my_box = MyBox(String::from("hello"));
-
 
 
     // Deref强制转换: &MyBox<String> → &String → &str
@@ -2154,25 +1869,20 @@ fn custom_smart_pointer() {
     let slice: &str = &my_box[..];
 
 
-
     assert_eq!(slice, "hello");
 
 }
-
 ```
-
 #### 示例3: 函数参数中的Deref强制转换 {#示例3-函数参数中的deref强制转换}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
-
 fn hello(name: &str) {
 
     println!("Hello, {}!", name);
 
 }
-
 
 
 fn deref_coercion_in_args() {
@@ -2182,17 +1892,12 @@ fn deref_coercion_in_args() {
     hello(&m);  // &MyBox<String> → &String → &str
 
 }
-
 ```
-
 **形式化分析**:
 
 1. `&m`类型: `&MyBox<String>`
-
 2. `MyBox<String>`: `Deref<Target = String>`
-
 3. `String`: `Deref<Target = str>`
-
 4. 最终类型: `&str` (与函数参数匹配)
 
 #### 示例4: DerefMut {#示例4-derefmut}
@@ -2200,7 +1905,6 @@ fn deref_coercion_in_args() {
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
-
 impl<T> DerefMut for MyBox<T> {
 
     fn deref_mut(&mut self) -> &mut T {
@@ -2212,7 +1916,6 @@ impl<T> DerefMut for MyBox<T> {
 }
 
 
-
 fn deref_mut_example() {
 
     let mut my_box = MyBox::new(5);
@@ -2222,25 +1925,17 @@ fn deref_mut_example() {
     assert_eq!(*my_box, 10);
 
 }
-
 ```
-
 ### 与智能指针的集成 {#与智能指针的集成}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 | 智能指针 | Deref实现 | Target | 用途 |
-
 | :--- | :--- | :--- | :--- |
-
 | `Box<T>` | ✅ | `T` | 堆分配 |
-
 | `Rc<T>` | ✅ | `T` | 共享所有权 |
-
 | `RefCell<T>` | ✅ | `T` | 内部可变性 |
-
 | `Arc<T>` | ✅ | `T` | 线程安全共享 |
-
 | `MutexGuard<T>` | ✅ | `T` | 互斥锁保护 |
 
 ### 形式化语义总结 {#形式化语义总结}
@@ -2264,9 +1959,7 @@ $$
 **与所有权系统的关系**:
 
 - `Deref`返回共享引用，不转移所有权
-
 - `DerefMut`返回可变引用，受借用规则约束
-
 - 解引用强制转换不改变所有权，只改变访问方式
 
 ---
@@ -2284,11 +1977,8 @@ $$
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -2300,15 +1990,10 @@ $$
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -2316,17 +2001,13 @@ $$
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - Rust 1.94 特性速查
-
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -2338,9 +2019,7 @@ $$
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -2360,71 +2039,38 @@ $$
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)**
-
 > **来源: [Wikipedia - Type Class](https://en.wikipedia.org/wiki/Type_Class)**
-
 > **[来源: Pierce - Types and Programming Languages]**
-
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
-
 > **[来源: ACM - Type System Formalization]**
-
 > **来源: [IEEE - Type Safety Verification](https://standards.ieee.org/)**
-
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
-
 > **[来源: Wadler 1989 - Theorems for Free!]**
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 > **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 > **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
-
 > **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
-
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
-
 > **来源: [ACM - Type Systems](https://dl.acm.org/)**
-
 > **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
-
 > **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
-
 > **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
-
 > **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

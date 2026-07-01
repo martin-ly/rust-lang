@@ -93,7 +93,6 @@ graph TB
         end
     end
 ```
-
 > **认知功能**: 此图展示 Rust **代码组织的三层结构**。
 > Package 是 Cargo 的构建单元（对应一个 Cargo.toml），Crate 是编译单元（一个 lib.rs 或 main.rs），Module 是命名空间单元（文件或内联模块）。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)]
@@ -136,7 +135,6 @@ Rust 模块系统的文件映射规则:
   └── tests/              # 集成测试
       └── integration.rs
 ```
-
 > **文件映射**: Rust 的模块（Module）声明（`mod foo;`）**显式控制**文件系统映射——不像 Java（文件路径 = 包路径）或 Python（文件即模块）的隐式映射。这种显式性带来了灵活性，但也增加了学习成本。
 > [来源: [Rust Reference — Module Source Filenames](https://doc.rust-lang.org/reference/items/modules.html#module-source-filenames)]
 
@@ -167,7 +165,6 @@ graph LR
     style PUB_SUPER fill:#ff9800
     style PUB_IN fill:#ff9800
 ```
-
 > **认知功能**: 此图展示 Rust 的**可见性层次结构**。默认私有是 Rust 的安全哲学体现——与 C++（默认私有类成员但公开全局函数）和 Java（默认包可见）都不同。
 > **使用建议**: 优先使用默认私有，需要跨模块时提升到 pub(crate)，真正公开的 API 才使用 pub。
 > **关键洞察**: `pub(crate)` 是 Rust 模块系统的**最佳实践**——它允许 crate 内部任意模块访问，但对外部 crate 隐藏。这比 C++ 的 `friend` 或 Java 的包可见性更精确。
@@ -209,7 +206,6 @@ pub use internal::Api;  // 外部可见 internal::Api
 // 7. use 与可见性组合
 pub(crate) use module::internal_util;  // crate 内可见的重新导出
 ```
-
 > **use 设计**: Rust 的 `use` 声明**显式控制命名空间污染**——不像 Python（`from x import *` 默认可用）或 Java（import 只是语法糖）。`pub use` 实现**facade 模式**，这是 Rust 公共 API 设计的核心工具。
 > [来源: [Rust Reference — Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html)]
 
@@ -245,7 +241,6 @@ Edition 2015 vs 2018 路径规则对比:
   │ 父模块               │ use super::foo      │ use super::foo      │
   └──────────────────────┴─────────────────────┴─────────────────────┘
 ```
-
 > **Edition 变更**: Edition 2018 的路径规则消除了**路径歧义**——`crate::` 前缀明确标识本地路径，使代码更易读、更易维护。这是 Rust 版本演进中最重要的模块系统改进。
 > [来源: [Rust Edition Guide — Path Changes](https://doc.rust-lang.org/edition-guide/rust-2018/path-changes.html)]
 
@@ -273,7 +268,6 @@ version = "0.1.0"
 tokio = { workspace = true }  # 使用 workspace 统一版本
 serde = { workspace = true }
 ```
-
 > **Workspace**: Cargo Workspace 允许将多个相关 crate 作为**统一项目**管理——共享依赖版本、统一编译缓存、交叉 crate 依赖自动解析。这是大型 Rust 项目的标准组织方式。
 > [来源: [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html)]
 
@@ -297,7 +291,6 @@ graph TD
     style CRATE fill:#c8e6c9
     style PRIVATE fill:#c8e6c9
 ```
-
 > **认知功能**: 此决策树展示可见性选择的**最佳实践**。Rust 的默认私有设计鼓励最小公开接口原则。
 > **使用建议**: 遵循"需要时才提升可见性"原则，从 private → pub(crate) → pub 逐步开放。
 > **关键洞察**: 过度使用 `pub` 会导致 API 表面积过大，增加维护负担和破坏变更风险。
@@ -332,7 +325,6 @@ graph TD
 ├── 条件模块允许根据 feature flag 选择性编译
 └── 这是 Cargo features 与模块系统的结合点
 ```
-
 > **边界要点**: Rust 模块系统的边界主要与**编译期约束**（循环依赖检测）、**宏（Macro）交互**（卫生性）和**测试可见性**相关。这些边界是 Rust "显式优于隐式"哲学的体现。
 > [来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)]
 
@@ -375,7 +367,6 @@ graph TD
      [workspace.dependencies]
      tokio = "1.35"
 ```
-
 > **陷阱总结**: Rust 模块系统的陷阱主要源于其**显式性**——文件不会自动成为模块，路径不会自动解析，可见性不会自动提升。这些"不便"是 Rust 显式设计的代价，换来的是更清晰的依赖关系和更可靠的编译期检查。
 > [来源: [Rust Compiler Error E0583](https://doc.rust-lang.org/error_codes/E0583.html)]
 
@@ -402,7 +393,6 @@ fn main() {
     println!("{:?}", m);
 }
 ```
-
 ### 编译验证示例
 
 ```rust
@@ -416,7 +406,6 @@ fn main() {
     assert_eq!(helper(), 42);
 }
 ```
-
 ```rust
 mod a {
     pub mod b {
@@ -430,7 +419,6 @@ fn main() {
     assert_eq!(f(), 1);
 }
 ```
-
 ## 相关概念文件
 
 - [Cargo Toolchain](../06_ecosystem/01_toolchain.md) — Cargo 与 Workspace
@@ -485,7 +473,6 @@ mod outer {
     }
 }
 ```
-
 > **修正**:
 > `pub(crate)` 限制可见性为当前 crate，`pub(super)` 限制为父模块。
 > Rust 的可见性修饰符精确控制项的暴露范围：`pub`（完全公开）、`pub(crate)`（crate 内）、`pub(super)`（父模块）、`pub(in path)`（指定路径）。
@@ -514,7 +501,6 @@ mod foo {
     pub mod bar;
 }
 ```
-
 > **修正**:
 > Rust 2018 Edition 后，模块文件组织有两种方式："经典"（`foo/mod.rs` + `foo/bar.rs`）和"扁平"（`foo.rs` + `foo/bar.rs`）。
 > 同一模块不能同时使用两种组织方式（如 `foo.rs` 和 `foo/mod.rs` 同时存在）。
@@ -545,7 +531,6 @@ fn main() {
     sibling_func();
 }
 ```
-
 > **修正**:
 > `self` 关键字在 `use` 语句中指**当前模块**，`super` 指父模块，`crate` 指 crate 根。
 > `self::sibling` 在当前模块无 `sibling` 子模块时编译错误。
@@ -573,7 +558,6 @@ pub mod b {
 // ❌ 编译错误: 若 A 和 B 互相重导出，且未实际定义
 // 循环 use 本身允许，但 item 不存在时失败
 ```
-
 > **修正**:
 > `pub use` 重导出是组织 API 表面的重要工具：将内部模块的项暴露到 crate 根或公共模块。
 > 但重导出不创建新项，只是别名——目标项必须存在。循环 `pub use`（A 重导出 B，B 重导出 A）在项存在时合法（只是双向别名），但若项不存在（如上述代码中 `A` 和 `B` 未定义），编译错误。
@@ -600,7 +584,6 @@ fn main() {
     outer::inner::secret();
 }
 ```
-
 > **修正**:
 > Rust 的**可见性修饰符**：
 >
@@ -625,7 +608,6 @@ fn main() {
 
 fn main() {}
 ```
-
 > **修正**:
 > Cargo **禁止循环依赖**：若 crate A 依赖 B，B 不能直接或间接依赖 A。
 > 循环依赖的设计问题：
@@ -666,9 +648,7 @@ fn main() {}
 > crate 接口稳定 ⟸ pub(restricted) 分层 ⟸ 可见性系统
 > 依赖管理正确 ⟸ workspace 隔离 ⟸ 版本解析
 > **过渡**: 掌握 模块系统：Rust 的代码组织与可见性规则 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 模块系统：Rust 的代码组织与可见性规则 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 模块系统：Rust 的代码组织与可见性规则 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
@@ -689,7 +669,6 @@ src/
 └── utils/
     └── math.rs
 ```
-
 - A. `use math::add;`
 - B. `mod utils::math;`
 - C. `mod utils;` 并在 `utils.rs` 或 `utils/mod.rs` 中声明 `mod math;`
@@ -719,7 +698,6 @@ pub mod api {
     fn secret() {}
 }
 ```
-
 <details>
 <summary>✅ 答案</summary>
 
@@ -735,7 +713,6 @@ pub mod api {
     pub fn secret() {}  // 添加 pub
 }
 ```
-
 Rust 的可见性规则：**默认私有，显式公开**。父模块的 `pub` 不会递归传递给子项。
 </details>
 
@@ -755,7 +732,6 @@ fn main() {
     println!("{}", VALUE);
 }
 ```
-
 <details>
 <summary>✅ 答案</summary>
 
@@ -768,7 +744,6 @@ fn main() {
 ```rust,ignore
 println!("{}", inner::VALUE);  // 完整路径
 ```
-
 </details>
 
 ---
@@ -811,7 +786,6 @@ mylib/
     ├── parser.rs
     └── evaluator.rs
 ```
-
 <details>
 <summary>✅ 答案</summary>
 
@@ -820,7 +794,6 @@ mylib/
 pub mod parser;
 pub mod evaluator;
 ```
-
 `lib.rs` 是 crate 的根模块。`mod parser;` 告诉编译器加载 `src/parser.rs` 作为 `parser` 模块（Module），`mod evaluator;` 同理。
 
 `pub` 修饰使得这两个模块对外部可见。若省略 `pub`，则模块仅在 crate 内部可用。

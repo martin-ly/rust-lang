@@ -69,7 +69,6 @@
    - 线程通过共享变量通信
    - 需要锁/原子操作保证一致性
    - 例：Java Threads, POSIX threads
-
 2. **消息传递模型**（Message Passing）
    - 进程/Actor通过消息通信
    - 无共享状态，消息作为同步点
@@ -96,7 +95,6 @@ Actor `α` 是一个自治的计算实体，定义为五元组：
 ```text
 α = (S, M, B, s₀, addr)
 ```
-
 其中：
 
 - `S`: 内部状态空间
@@ -113,7 +111,6 @@ Actions ::= send(addr, msg)        // 发送消息
           | become(Behavior)        // 改变行为
           | ε                       // 空动作
 ```
-
 ### 2.2 操作语义
 
 #### 消息传递语义
@@ -125,7 +122,6 @@ Actions ::= send(addr, msg)        // 发送消息
                 ↓
 α₂ @ s₂ ─receive(m)→ α₂ @ s₂'
 ```
-
 **关键性质**：
 
 1. **异步性**：发送不阻塞
@@ -142,7 +138,6 @@ mailbox(α) = m::ms    B(s, m) = (s', actions)
 ────────────────────────────────────────────── (Actor-Receive)
 ⟨α @ s, σ⟩ → ⟨actions, σ[α ← s', mailbox(α) ← ms]⟩
 ```
-
 ### 2.3 Actor律（Actor Laws）
 
 #### 律1：消息顺序保证
@@ -152,7 +147,6 @@ mailbox(α) = m::ms    B(s, m) = (s', actions)
 ```text
 send(α, m₁); send(α, m₂)  ⟹  receive(m₁) happens-before receive(m₂)
 ```
-
 #### 律2：不同发送者的消息无序
 
 来自不同发送者的消息可以以任意顺序交错：
@@ -160,7 +154,6 @@ send(α, m₁); send(α, m₂)  ⟹  receive(m₁) happens-before receive(m₂)
 ```text
 send_α₁(β, m₁) ∥ send_α₂(β, m₂)  ⟹  receive_order(m₁, m₂) ∈ {(m₁, m₂), (m₂, m₁)}
 ```
-
 #### 律3：Actor创建的确定性
 
 Actor的创建返回唯一地址：
@@ -168,7 +161,6 @@ Actor的创建返回唯一地址：
 ```text
 create(behavior) ⟹ ∃!addr. actor_at(addr) = behavior
 ```
-
 ### 2.4 Rust中的Actor实现
 
 #### 基于Channel的简单Actor
@@ -246,7 +238,6 @@ impl Actor for CounterActor {
     }
 }
 ```
-
 **使用示例**：
 
 ```rust
@@ -266,7 +257,6 @@ async fn main() {
     println!("Final count: {}", count);
 }
 ```
-
 ---
 
 ## 3. Reactor模式
@@ -280,7 +270,6 @@ Reactor `R` 是事件驱动的调度器，定义为：
 ```text
 R = (EventLoop, Demux, Handlers)
 ```
-
 其中：
 
 - `EventLoop`: 循环等待事件
@@ -295,7 +284,6 @@ Event ::= Readable(fd)      // 文件描述符可读
         | Timer(id)         // 定时器触发
         | Signal(sig)       // 信号到达
 ```
-
 ### 3.2 操作语义
 
 #### Reactor循环（伪代码）
@@ -309,7 +297,6 @@ loop {
     }
 }
 ```
-
 #### 形式化（小步语义）
 
 ```text
@@ -321,7 +308,6 @@ demux.ready() = {e₁, ..., eₙ}    handlers[eᵢ] = hᵢ
 ────────────────────────────────────────────── (Reactor-Dispatch)
 ⟨reactor, σ⟩ → ⟨h₁(e₁); ...; hₙ(eₙ), σ'⟩
 ```
-
 ### 3.3 Reactor模式的关键组件
 
 #### 1. 事件多路复用器（Demultiplexer）
@@ -345,7 +331,6 @@ pub trait Demultiplexer {
     fn unregister(&mut self, fd: RawFd);
 }
 ```
-
 #### 2. 事件处理器（Handler）
 
 ```rust
@@ -355,7 +340,6 @@ pub trait EventHandler {
     fn handle_error(&mut self, fd: RawFd, error: std::io::Error);
 }
 ```
-
 #### 3. Reactor核心
 
 ```rust
@@ -396,7 +380,6 @@ impl Reactor {
     }
 }
 ```
-
 ### 3.4 Tokio中的Reactor实现
 
 Tokio使用**mio**库实现跨平台的Reactor：
@@ -449,7 +432,6 @@ impl TokioReactor {
     }
 }
 ```
-
 ---
 
 ## 4. 对比分析
@@ -491,7 +473,6 @@ impl TokioReactor {
 │  └───────────────────────────┘  │
 └─────────────────────────────────┘
 ```
-
 ### 4.3 性能对比
 
 #### Actor模型
@@ -531,7 +512,6 @@ impl TokioReactor {
 ```text
 behavior(AS) ≡ behavior(R)
 ```
-
 **构造**：
 
 1. 每个Actor邮箱映射为IO源（如管道）
@@ -644,7 +624,6 @@ impl ActorSystem {
     }
 }
 ```
-
 ### 5.2 简化的Reactor实现
 
 ```rust
@@ -727,7 +706,6 @@ impl SimpleReactor {
     }
 }
 ```
-
 ---
 
 ## 6. 形式化证明
@@ -742,7 +720,6 @@ impl SimpleReactor {
 ∀α, β ∈ Actors, ∀m ∈ Messages:
     send(β, m) ⟹ ◇(β receives m)
 ```
-
 其中 `◇` 表示"最终"（时态逻辑）。
 
 **证明**：
@@ -759,7 +736,6 @@ impl SimpleReactor {
 ∀α, β ∈ Actors (α ≠ β):
     state(α) ∩ state(β) = ∅
 ```
-
 **证明**：
 
 - 每个Actor有独立的状态空间
@@ -775,7 +751,6 @@ impl SimpleReactor {
 ```text
 ∀e ∈ Events: ready(e) ⟹ ◇(handle(e))
 ```
-
 **证明**：
 
 1. Reactor循环持续运行
@@ -834,7 +809,6 @@ impl ChatRoomActor {
     }
 }
 ```
-
 ### 7.2 HTTP服务器（Reactor模式）
 
 ```rust
@@ -865,7 +839,6 @@ pub async fn run_http_server(addr: &str) -> std::io::Result<()> {
     }
 }
 ```
-
 ### 7.3 组合：Actor-based HTTP服务
 
 ```rust
@@ -918,7 +891,6 @@ pub async fn run_actor_http_server(addr: &str, actor: ActorAddr) -> std::io::Res
     }
 }
 ```
-
 ---
 
 ## 8. 结论

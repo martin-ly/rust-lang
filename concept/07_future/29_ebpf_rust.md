@@ -109,7 +109,6 @@ graph TB
     style BPFTarget fill:#fff3e0
     style Kernel fill:#e8f5e9
 ```
-
 ### 3.2 compile-once-run-anywhere (CO-RE)
 
 Aya 利用内核的 **BTF (BPF Type Format)** 和 **libbpf** 的 CO-RE 机制，实现了"编译一次，到处运行"：
@@ -126,7 +125,6 @@ pub fn my_kprobe(ctx: ProbeContext) -> u32 {
     }
 }
 ```
-
 CO-RE 的关键依赖：
 
 | 依赖 | 作用 | Rust 侧处理 |
@@ -166,7 +164,6 @@ pub fn xdp_firewall(ctx: XdpContext) -> u32 {
     xdp_action::XDP_PASS
 }
 ```
-
 ### 3.4 `#[aya_ebpf]` 宏系统
 >
 
@@ -188,7 +185,6 @@ pub extern "C" fn xdp_firewall(ctx: *mut xdp_md) -> u32 {
     ret
 }
 ```
-
 宏（Macro）负责：设置正确的 `link_section`、处理 eBPF 调用约定、将原始指针（Raw Pointer）包装为安全的上下文结构体（Struct）。
 
 ### 3.5 Tokio 集成：异步用户态
@@ -225,7 +221,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 }
 ```
-
 ---
 
 ## 4. Rex 革命性方案
@@ -273,7 +268,6 @@ graph LR
     style Traditional fill:#ffebee
     style RexModel fill:#e8f5e9
 ```
-
 Rex 的核心洞察：**Rust 的所有权（Ownership）和借用（Borrowing）系统已经在编译期证明了内存安全（Memory Safety），eBPF 验证器的检查是冗余的**。Rex 通过以下方式实现这一目标：
 
 1. **受限的 Rust 子集**：禁止 `unsafe`、标准库中不安全的部分、动态分发
@@ -316,7 +310,6 @@ fn sys_enter(regs: &mut rex::Registers) -> u32 {
     0
 }
 ```
-
 Rex 的关键安全属性：
 
 | 安全属性 | 传统 C eBPF | Rex Rust |
@@ -361,7 +354,6 @@ impl kernel::Module for MyBpfModule {
     }
 }
 ```
-
 ### 5.2 当前状态与局限
 
 | 方向 | 状态 | 说明 |
@@ -444,7 +436,6 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
     unsafe { core::hint::unreachable_unchecked() }
 }
 ```
-
 ### 6.2 Aya 用户态加载器
 
 ```rust
@@ -499,7 +490,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 6.3 Map 交互：内核态 ↔ 用户态
 
 ```rust,ignore
@@ -537,7 +527,6 @@ async fn aggregate_counts(bpf: &mut Ebpf) -> Result<HashMap<u32, u64>, Box<dyn E
     Ok(result)
 }
 ```
-
 ---
 
 ## 7. 安全模型对比
@@ -571,7 +560,6 @@ graph LR
     style Layer2 fill:#fff8e1
     style Layer3 fill:#e8f5e9
 ```
-
 ### 7.1 三层安全模型详解
 
 | 维度 | C + Verifier (传统) | Rust + Aya (当前) | Rust + Rex (未来) |
@@ -622,7 +610,6 @@ Rust 的所有权系统无法直接绕过这些限制——它们属于 eBPF 执
 static CONNECTIONS: HashMap<ConnectionKey, ConnectionState> =
     HashMap::with_max_entries(65536, 0); // 最多 65536 条连接
 ```
-
 Map 内存来自内核的预留空间，过度分配会影响系统稳定性。生产环境需要基于实际流量模式进行容量规划。
 
 ### 8.3 CO-RE 与 BTF 的依赖
@@ -636,7 +623,6 @@ vmlinux
 
 # 若不存在，CO-RE 无法工作，需回退到编译目标内核版本的头文件
 ```
-
 对于旧内核或自定义内核（如某些嵌入式 Linux），可能需要：
 
 - 自行编译带 BTF 的内核
@@ -732,7 +718,6 @@ pub fn test_prog(ctx: ProbeContext) -> u32 {
     0
 }
 ```
-
 > **修正**:
 > eBPF 程序运行在内核上下文中，资源极其受限：栈大小最大 512 字节（Linux 内核限制），指令数限制 100 万条，无堆分配，无递归，无循环（或有限循环，取决于内核版本）。
 > Rust 的 eBPF 生态（aya、redbpf）在编译期通过编译器插件和验证器检查这些约束。
@@ -760,7 +745,6 @@ struct UserEvent {
     comm: [u8; 16],
 }
 ```
-
 > **修正**:
 > eBPF 程序与用户空间程序通过 BPF map 和 perf buffer 交换数据，共享数据结构必须**逐字节布局一致**。
 > Rust 的 `#[repr(C)]` 确保 C 兼容布局，但字段类型、顺序、大小必须在两端完全一致。
@@ -792,7 +776,6 @@ pub fn trace_handler(ctx: TracePointContext) -> u32 {
     0
 }
 ```
-
 > **修正**:
 > eBPF 程序在加载到内核前需通过**验证器**（verifier）检查：
 >
@@ -835,7 +818,6 @@ fn read_counter(bpf: &mut Bpf) {
     let mut counter: AyaHashMap<_, u32, u64> = AyaHashMap::try_from(bpf.map_mut("COUNTER").unwrap()).unwrap();
 }
 ```
-
 > **修正**:
 > eBPF 的 **map** 是内核中的键值存储，eBPF 程序和用户空间程序通过 map 交换数据。
 > map 的类型（键大小、值大小、最大条目数）在创建时固定，eBPF 侧和用户空间侧必须一致。
@@ -867,7 +849,6 @@ pub fn my_xdp(ctx: XdpContext) -> u32 {
     0
 }
 ```
-
 > **修正**:
 > eBPF（extended Berkeley Packet Filter）的**内核验证器**限制：
 >

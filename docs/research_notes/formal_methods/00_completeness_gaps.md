@@ -51,9 +51,7 @@
 本文档系统列出 formal_methods 目录下各文档的形式化论证覆盖情况：
 
 1. **Rust 1.93 语言特性**：Phase 1–6 已全面覆盖
-
 2. **内存与并发机制**：智能指针、通道、锁、原子操作、thread::spawn 等已形式化
-
 3. **FFI 与 unsafe**：裸指针、union、transmute、extern、C variadic 已与 formal_methods 衔接
 
 ---
@@ -93,7 +91,6 @@ $
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
-
 | :--- | :--- | :--- | :--- |
 | **变量绑定与遮蔽** | ✅ | Def 1.4 变量绑定、Def 1.5 变量遮蔽 | ownership_model |
 | **Box** | ✅ | Def BOX1、定理 BOX-T1 | ownership_model |
@@ -170,15 +167,12 @@ $
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
 ✅ 全部完成（Phase 1–6）
 
 ├── 高优先级：通道、Mutex、Rc/Arc、Cell/RefCell、裸指针、unsafe 契约
 ├── 中优先级：Box、Deref/Drop、MaybeUninit、match、for、? 操作符
 └── 低优先级：原子操作、union、transmute、extern、C variadic、repr、thread::spawn、const &mut static
-
 ```
-
 ---
 
 ## 7. 与已有文档的衔接 {#7-与已有文档的衔接}
@@ -265,13 +259,10 @@ $
 ## 引用 {#引用}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) — 92 项特性；formal_methods 衔接
-
 - [ARGUMENTATION_GAP_INDEX](../10_argumentation_gap_index.md) — 论证缺口追踪
-
 - [type_theory/00_completeness_gaps](../../research_notes/formal_methods/00_completeness_gaps.md) — 类型理论缺口（可交叉引用）
 
 ---
@@ -279,9 +270,7 @@ $
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -295,15 +284,10 @@ $
 > **来源: [ACM](https://dl.acm.org/)**
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -313,9 +297,7 @@ $
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
@@ -323,9 +305,7 @@ $
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - Rust 1.94 迁移指南
-
 - Rust 1.94 特性速查
-
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -337,9 +317,7 @@ $
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -355,11 +333,9 @@ $
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [formal_methods 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -367,15 +343,10 @@ $
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
-
 > **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
-
 > **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
-
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ---

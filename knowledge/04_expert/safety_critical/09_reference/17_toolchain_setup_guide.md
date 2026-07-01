@@ -52,7 +52,6 @@
 │  rustdoc + cargo-deny + SBOM生成 + 安全案例                 │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 基础环境配置
@@ -80,7 +79,6 @@ rustup default stable
 rustup install 1.81.0
 rustup default 1.81.0
 ```
-
 ### 2. Ferrocene工具链 (预认证)
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -98,7 +96,6 @@ rustup override set ferrocene
 # 验证安装
 rustc --version  # 应显示Ferrocene版本
 ```
-
 ### 3. 开发工具安装
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -122,7 +119,6 @@ rustup component add miri
 # 安装LLVM工具 (覆盖率)
 rustup component add llvm-tools-preview
 ```
-
 ---
 
 ## 项目配置
@@ -200,7 +196,6 @@ sil-4 = []
 name = "main"
 path = "src/main.rs"
 ```
-
 ### rust-toolchain.toml
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -223,7 +218,6 @@ targets = [
 ]
 profile = "minimal"
 ```
-
 ### .cargo/config.toml
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -262,7 +256,6 @@ offline = false
 crates-io = { index = "https://github.com/rust-lang/crates.io-index" }
 # company-internal = { index = "https://internal.company.com/git/index" }
 ```
-
 ---
 
 ## Clippy配置
@@ -312,7 +305,6 @@ too-many-arguments-threshold = 5
 # 结构体字段数
 struct-field-name-threshold = 5
 ```
-
 ### 自定义Lint规则
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -353,7 +345,6 @@ impl LintPass for SafetyCriticalLints {
     }
 }
 ```
-
 ---
 
 ## 测试配置
@@ -383,7 +374,6 @@ cargo miri test test_name
 # 检查特定文件
 cargo miri run --bin binary_name
 ```
-
 ### Kani配置
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -405,7 +395,6 @@ cargo kani --harness my_proof --coverage
 # 生成报告
 cargo kani --harness my_proof --visualize
 ```
-
 ### Cargo.toml测试配置
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -423,7 +412,6 @@ debug = false
 lto = true
 codegen-units = 1
 ```
-
 ---
 
 ## 覆盖率配置
@@ -453,7 +441,6 @@ cargo tarpaulin --exclude-files "tests/*" --exclude-files "benches/*"
 # 安全关键要求：MC/DC覆盖
 cargo tarpaulin --mcdc
 ```
-
 ### tarpaulin.toml
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -497,7 +484,6 @@ engine = "llvm"
 # 目标目录
 run-types = ["Tests", "Doctests"]
 ```
-
 ### llvm-cov配置
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -515,7 +501,6 @@ cargo llvm-cov --html
 # 仅包含特定文件
 cargo llvm-cov --html --ignore-filename-regex 'tests/.*'
 ```
-
 ---
 
 ## CI/CD配置
@@ -680,7 +665,6 @@ jobs:
           name: release-binary
           path: target/release/safety-critical-module
 ```
-
 ---
 
 ## 文档生成
@@ -701,7 +685,6 @@ cargo test --doc
 # 生成并打开
 cargo doc --open
 ```
-
 ### 文档测试
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -732,7 +715,6 @@ pub unsafe fn safe_wrapper(ptr: *const i32) -> i32 {
     *ptr
 }
 ```
-
 ---
 
 ## 依赖管理
@@ -808,7 +790,6 @@ allow-git = []
 [sources.allow-org]
 github = ["your-org"]
 ```
-
 ### Cargo.lock管理
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -823,7 +804,6 @@ cargo update --workspace --locked
 # 在CI中检查
 cargo update --workspace --locked --dry-run
 ```
-
 ---
 
 ## IDE配置
@@ -864,7 +844,6 @@ cargo update --workspace --locked --dry-run
     "rust-analyzer.procMacro.attributes.enable": true,
 }
 ```
-
 ---
 
 **文档版本**: 1.0
@@ -886,7 +865,6 @@ cargo update --workspace --locked --dry-run
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [API设计指南](01_api_design_guidelines.md)
 - [Rust安全关键系统 - 检查清单与模板](02_checklists_and_templates.md)
 

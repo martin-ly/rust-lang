@@ -86,7 +86,6 @@ cargo install wasm-pack
 # 安装 wasm-bindgen {#安装-wasm-bindgen}
 cargo install wasm-bindgen-cli
 ```
-
 ### 创建 WASM 项目 {#创建-wasm-项目}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -101,7 +100,6 @@ wasm-pack new my-wasm-project
 cargo new --lib my-wasm-project
 cd my-wasm-project
 ```
-
 ---
 
 ## 📊 核心功能 {#核心功能}
@@ -128,7 +126,6 @@ pub fn greet(name: &str) -> String {
     format!("Hello, {}!", name)
 }
 ```
-
 ### 2. 与 JavaScript 互操作 {#2-与-javascript-互操作}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -156,7 +153,6 @@ pub fn log_message(message: &str) {
     log(message);
 }
 ```
-
 ### 3. 处理 JavaScript 对象 {#3-处理-javascript-对象}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -190,7 +186,6 @@ impl Person {
     }
 }
 ```
-
 ### 4. 异步函数 {#4-异步函数}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -215,7 +210,6 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
     Ok(json)
 }
 ```
-
 ---
 
 ## 🔧 编译配置 {#编译配置}
@@ -249,7 +243,6 @@ web-sys = { version = "0.3", features = [
 [dev-dependencies]
 wasm-bindgen-test = "0.3"
 ```
-
 ### 2. 编译命令 {#2-编译命令}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -263,7 +256,6 @@ wasm-pack build --target nodejs
 wasm-pack build --target bundler
 wasm-pack build --target no-modules
 ```
-
 ---
 
 ## 🌐 在浏览器中使用 {#在浏览器中使用}
@@ -297,7 +289,6 @@ wasm-pack build --target no-modules
   </body>
 </html>
 ```
-
 ### 2. Node.js 示例 {#2-nodejs-示例}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -310,7 +301,6 @@ wasm.init().then(() => {
   console.log(wasm.greet("World")) // "Hello, World!"
 })
 ```
-
 ---
 
 ## 🧪 测试 {#测试}
@@ -331,7 +321,6 @@ fn test_add() {
     assert_eq!(add(2, 3), 5);
 }
 ```
-
 ### 2. 运行测试 {#2-运行测试}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -341,7 +330,6 @@ wasm-pack test --headless --firefox
 wasm-pack test --headless --chrome
 wasm-pack test --headless --safari
 ```
-
 ---
 
 ## ⚡ 性能优化 {#性能优化}
@@ -360,7 +348,6 @@ codegen-units = 1
 panic = "abort"
 strip = true
 ```
-
 ### 2. 使用 wasm-opt {#2-使用-wasm-opt}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -372,7 +359,6 @@ npm install -g wasm-opt
 # 优化 WASM 文件 {#优化-wasm-文件}
 wasm-opt -Os pkg/my_wasm_project_bg.wasm -o pkg/my_wasm_project_optimized.wasm
 ```
-
 ### 3. 避免不必要的分配 {#3-避免不必要的分配}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -390,7 +376,6 @@ pub fn process(data: &str) -> String {
     data.trim().to_uppercase()
 }
 ```
-
 ---
 
 ## 使用场景 {#使用场景}
@@ -408,7 +393,6 @@ pub fn process(data: &str) -> String {
 // 使用 web-sys 操作 DOM
 // 适用于：计算密集型任务、游戏引擎、图像处理
 ```
-
 ### 场景2: 跨平台桌面应用 {#场景2-跨平台桌面应用}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -447,10 +431,10 @@ pub fn process(data: &str) -> String {
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
-| **核心模块** | [C12 WASM](../../crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md) |
+| **核心模块** | [C12 WASM](../../crates/c12_wasm/docs/tier_01_foundations/02_navigation.md) |
 | :--- | :--- |
 | :--- | :--- |
-| **C12 详细文档** | [WASM 基础指南](../../crates/c12_wasm/docs/tier_02_guides/01_wasm_基础指南.md) |
+| **C12 详细文档** | [WASM 基础指南](../../crates/c12_wasm/docs/tier_02_guides/01_wasm_basics.md) |
 | :--- | :--- |
 | **相关指南** | [03_embedded_rust_guide.md](05_embedded_rust_guide.md) |
 | :--- | :--- |
@@ -465,13 +449,12 @@ pub fn process(data: &str) -> String {
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [完整文档](../../crates/c12_wasm/README.md)
-- [WASM 指南](../../crates/c12_wasm/docs/tier_02_guides/01_wasm_基础指南.md)
-- [JavaScript 互操作](../../crates/c12_wasm/docs/tier_02_guides/03_javascript_互操作.md)
+- [WASM 指南](../../crates/c12_wasm/docs/tier_02_guides/01_wasm_basics.md)
+- [JavaScript 互操作](../../crates/c12_wasm/docs/tier_02_guides/03_javascript_interop.md)
 
 ## Rust 1.95+ 在 WASM 开发中的应用 {#rust-195-在-wasm-开发中的应用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### array_windows 在图像处理中的应用 {#array_windows-在图像处理中的应用}
@@ -490,7 +473,6 @@ pub fn apply_kernel(data: &[u8], width: usize) -> Vec<u8> {
         .collect()
 }
 ```
-
 ### LazyLock 在 WASM 状态管理中的应用 {#lazylock-在-wasm-状态管理中的应用}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -514,7 +496,6 @@ pub fn get_state_json() -> String {
     }
 }
 ```
-
 **性能提示**: WASM 环境下，`array_windows` 的零分配特性尤为重要。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)

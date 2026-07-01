@@ -34,7 +34,6 @@
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 借用规则矩阵
 >
 > **[来源: Rust Official Docs]**
@@ -80,7 +79,6 @@
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 内存安全保证矩阵
@@ -136,7 +134,6 @@ struct Aligned {
     data: [u8; 64],
 }
 ```
-
 ---
 
 ## 并发安全模型
@@ -182,7 +179,6 @@ struct Aligned {
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 实际代码示例
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -236,7 +232,6 @@ fn lock_free_counter() {
     assert_eq!(COUNTER.load(Ordering::Relaxed), 10000);
 }
 ```
-
 ---
 
 ## 安全关键系统内存管理
@@ -301,7 +296,6 @@ fn use_pool() {
     }
 }
 ```
-
 ### 内存对齐和填充
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -347,7 +341,6 @@ struct PackedSensorData {
     status: u8,
 }
 ```
-
 ---
 
 ## 零成本抽象验证
@@ -376,7 +369,6 @@ fn manual_sum(values: &[i32]) -> i32 {
 // 两者编译后的汇编代码相同（Release模式）
 // 证明：Rust的迭代器是零成本抽象
 ```
-
 ### 编译器优化验证
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -392,7 +384,6 @@ cargo rustc --release -- --emit=asm
 # 使用godbolt对比
 # https://godbolt.org/z/rust
 ```
-
 ---
 
 ## 形式化语义基础
@@ -424,7 +415,6 @@ cargo rustc --release -- --emit=asm
   ──────────────────────────────
   Γ ⊢ e : T ⇓ v, Γ'[x ↦ moved]
 ```
-
 ### 类型系统规则
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -478,7 +468,6 @@ impl<const N: usize> FixedBuffer<N> {
 // 使用
 static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 ```
-
 ### 内存安全检查清单
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -508,7 +497,6 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [综合语言对比矩阵](01_comprehensive_language_comparison_matrix.md)
 - [Rust生态系统多维概念矩阵对比](02_rust_multi_dimensional_matrix.md)
 

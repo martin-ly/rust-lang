@@ -105,7 +105,6 @@ WebAssembly 核心架构
         ├── 内存导入
         └── 全局变量导入
 ```
-
 ### 2. Rust WASM 编译流程思维导图
 
 ```text
@@ -171,7 +170,6 @@ Rust WASM 编译流程
         ├── wasm-pack 打包
         └── 发布准备
 ```
-
 ### 3. WASM 内存模型思维导图
 
 ```text
@@ -239,7 +237,6 @@ WASM 内存模型
         ├── 内存泄漏检测
         └── 性能分析工具
 ```
-
 ### 4. JavaScript 互操作思维导图
 
 ```text
@@ -320,7 +317,6 @@ JavaScript 互操作
         ├── 组件通信
         └── 变更检测
 ```
-
 ### 5. WASM 性能优化思维导图
 
 ```text
@@ -399,7 +395,6 @@ WASM 性能优化
         ├── 回归测试
         └── 持续监控
 ```
-
 ---
 
 ## 📊 技术栈思维导图
@@ -464,7 +459,6 @@ wasm-bindgen 生态
         ├── 调试支持
         └── 日志记录
 ```
-
 ### 2. WASI 系统接口思维导图
 
 ```text
@@ -523,7 +517,6 @@ WASI 系统接口
         ├── 游戏应用
         └── 测试应用
 ```
-
 ### 3. Rust 1.92.0 WASM 特性思维导图
 
 ```text
@@ -602,7 +595,6 @@ Rust 1.92.0 WASM 特性
         ├── 高效实现
         └── 数据操作
 ```
-
 ---
 
 ## 🔗 知识关联思维导图
@@ -646,12 +638,11 @@ WASM 知识关联
     └── 加载优化
         └── 加载时间
 ```
-
 ---
 
 ## 📚 相关文档
 
-- [项目概览](tier_01_foundations/01_项目概览.md)
+- [项目概览](tier_01_foundations/01_project_overview.md)
 - [Rust 1.92.0 WASM 改进文档](RUST_192_WASM_IMPROVEMENTS.md)
 - [WASM 多维概念对比矩阵](WASM_CONCEPT_MATRIX.md)
 - [WASM 决策树图](WASM_DECISION_TREE.md)

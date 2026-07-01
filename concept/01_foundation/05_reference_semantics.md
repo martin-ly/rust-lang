@@ -131,7 +131,6 @@ Rust 中的"引用"层次:
   - 借用引用 ≠ 智能指针（后者有所有权）
   - 智能指针通过 Deref 模拟引用行为
 ```
-
 > **核心洞察**: Rust 的"引用（Reference）"是一个**语义家族**，而非单一概念。理解各成员的区别是掌握 Rust 内存模型的关键。
 > [来源: [Rust Reference — Reference Types](https://doc.rust-lang.org/reference/types/pointer.html#shared-references-)]
 
@@ -157,7 +156,6 @@ graph LR
         G -->|"多次 deref"| I["&目标类型"]
     end
 ```
-
 > **认知功能**: 此图展示 Rust 中三种**隐式引用/解引用机制**——自动引用（方法调用）、自动解引用（显式 * 操作）和 Deref 强制（类型转换）。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)] · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch04-02-references-and-borrowing.html)
 > **使用建议**: 利用自动机制简化代码，但理解其背后的规则以避免意外行为。
@@ -190,7 +188,6 @@ let s: &str = &b;  // ✅ &MyBox<String> → &String → &str
 // 2. Deref: &MyBox<String> → &String
 // 3. Deref (String deref to str): &String → &str
 ```
-
 > **Deref 强制规则**:
 >
 > 1. 从 `&T` 到 `&U`，当 `T: Deref<Target=U>`
@@ -225,7 +222,6 @@ s2.push('!');   // 自动: (&mut s2).push('!')
 let b = Box::new(String::from("hi"));
 b.len();        // 自动: (&*b).len() → &String::len()
 ```
-
 > **自动引用规则**:
 >
 > 1. 编译器尝试 `s.method()` → `(&s).method()` → `(&mut s).method()` → `(*s).method()`
@@ -266,7 +262,6 @@ Rust 的类型强制（隐式转换）:
   ├── i32 → i64 必须显式: i64::from(x)
   └── f64 → f32 必须显式: x as f32
 ```
-
 > **强制规则**: Rust 的类型强制是**保守的**——只在类型安全且语义明确时发生。数值类型之间无隐式转换，避免 C/C++ 中的隐式截断 bug。
 > [来源: [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html)]
 
@@ -292,7 +287,6 @@ graph TD
         I["Deref 强制"] -->|"在借用检查之后"| J["无安全问题"]
     end
 ```
-
 > **认知功能**: 此图展示 Deref 强制与借用检查器的**协作关系**——Deref 强制发生在借用检查之后，因此不会绕过安全保证。
 > **关键洞察**: Deref 返回的引用**仍然受借用检查器约束**。`DerefMut::deref_mut` 返回的 `&mut self.0` 遵守所有可变引用的规则。
 > [来源: [Rust Reference — Borrow Checker](https://doc.rust-lang.org/reference/statements-and-expressions.html)]
@@ -335,7 +329,6 @@ graph TD
   let r: &&&i32 = &&&5;
   let v: &i32 = r;  // 意图清晰
 ```
-
 > **最佳实践**: 利用 Deref 使自定义类型"像引用一样工作"，但避免过度嵌套的引用类型，保持代码清晰。
 > [来源: [Rust API Guidelines — Smart Pointers](https://rust-lang.github.io/api-guidelines/)]
 
@@ -356,7 +349,6 @@ graph TD
     style TRUE fill:#c8e6c9
     style FALSE fill:#ffebee
 ```
-
 > **认知功能**: 此决策树判断是否应为类型实现 Deref。核心判断标准是**语义是否属于"引用（Reference）"家族**。
 > **使用建议**: Deref 只用于**智能指针（Smart Pointer）/引用包装器**。普通封装应使用显式方法，而非 Deref。
 > **关键洞察**: Deref 的滥用会导致**隐式行为过度**——调用者无法从代码中看出转换发生，增加理解成本。
@@ -388,7 +380,6 @@ graph TD
 ├── 但过度隐式可能影响代码可读性
 └── 与 C++ 的隐式转换不同，Rust 的转换是确定性的、可预测的
 ```
-
 > **边界要点**: Deref 的设计是**克制而精确的**——提供足够的便利性，但不引入不可预测的隐式行为。
 > [来源: [Rust Reference — Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html)]
 
@@ -423,7 +414,6 @@ graph TD
   println!("{}", r);   // 自动解引用（某些上下文）
   // 实际上，对于 Copy 类型，&T 在某些上下文中自动解引用
 ```
-
 > **困惑总结**: 大多数困惑源于**隐式转换的边界不清晰**。记住：Rust 的自动机制只在**方法调用**和**赋值/传参**时触发，其他场景需显式操作。
 > [来源: [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 
@@ -492,7 +482,6 @@ let r3 = &r2;      // r3: &&&i32
 // 自动解引用链：r3 → r2 → r1 → x
 assert_eq!(***r3, 42);
 ```
-
 类型推断（Type Inference）行为：当写 `let r = &&&5;` 时，Rust 编译器推断的类型是 `&&&i32`，其中每一级引用都获得独立的匿名生命周期。
 
 ```rust
@@ -500,7 +489,6 @@ let r = &&&5;
 // 等价于：
 let r: &&&i32 = &&&5;
 ```
-
 自动解引用链（Auto-deref chain）在方法调用和某些操作符上下文中自动展开：
 
 ```rust,ignore
@@ -509,7 +497,6 @@ let r: &&&i32 = &&&5;
 assert_eq!(r, &42);     // ✅ 编译器展开: &&&i32 → &&i32 → &i32 → i32
                         // 实际比较的是 *r == 42（通过 PartialEq 的递归解引用）
 ```
-
 > **关键洞察**: `&&&&T` 在需要 `&T` 的上下文中会通过**连续的自动解引用**逐步降级，但这是**单向**的——只能从外向内解引用，不能自动将 `&T` 升级为 `&&T`。
 > [来源: [Rust Reference — Method Call Expressions](https://doc.rust-lang.org/reference/expressions/method-call-expr.html#autoderef)]
 
@@ -526,7 +513,6 @@ let r2 = &mut r1;      // r2: &mut &mut i32
 **r2 = 20;
 assert_eq!(x, 20);
 ```
-
 三级嵌套可变引用的结构：
 
 ```text
@@ -539,7 +525,6 @@ assert_eq!(x, 20);
    ├── **r3: &mut i32（可变引用，可修改目标值）
    └── ***r3: i32（实际值）
 ```
-
 > **重要区分**: `&mut &T` 与 `&&mut T` 是完全不同的类型：
 >
 > - `&mut &T`: 一个可变引用，其目标是一个共享引用。你可以修改这个可变引用使其指向**另一个**共享引用，但不能通过它修改最终目标（因为内层是 `&T`）。
@@ -558,7 +543,6 @@ let r_shared = &r_mut;      // r_shared: &&mut i32
 // 但可以通过原始的可变引用修改 x
 *r_mut = 10;                // ✅ x 现在是 10
 ```
-
 #### 7.1.3 弱化的不可逆性
 
 引用类型之间存在一个明确的**偏序关系**：
@@ -571,7 +555,6 @@ graph LR
     C -->|"自动弱化"| F["&&mut T"]
     F -->|"自动弱化"| E
 ```
-
 > **核心规则**: `&mut T` → `&T` 的弱化是**自动且安全**的，但 `&T` → `&mut T` 的强化永远不可能——这会破坏别名规则（Aliasing XOR Mutation）。
 
 ```rust
@@ -585,7 +568,6 @@ takes_shared(r_mut);    // ✅ &mut i32 → &i32 自动弱化
 let r_shared = &x;
 // takes_mut(r_shared); // ❌ &i32 不能转换为 &mut i32
 ```
-
 ---
 
 ### 7.2 部分重借用（Partial Reborrows）
@@ -614,7 +596,6 @@ fn partial_reborrow_demo(p: &mut Point3D) {
     p.z = 3.0;
 }
 ```
-
 此机制的关键在于：编译器将 `&mut Point3D` 视为三个独立字段的可变访问权限的**联合**，当只使用其中一个字段时，其余字段仍然可用。
 
 #### 7.2.2 部分重借用的类型学限制
@@ -639,7 +620,6 @@ fn child_set_value(parent: &mut Parent) -> &mut Child {
                         // 且 parent.other 的修改与返回的借用冲突
 }
 ```
-
 上述代码的实际问题是：一旦执行 `&mut parent.child`，编译器认为 `parent` 整体被借用，因此在此之前对 `parent.other` 的修改必须完成，且返回借用后 `parent` 的其他字段不能再被访问。
 
 > **当前限制**: 借用检查器虽然内部跟踪字段粒度，但这种粒度**不跨越函数边界**传递。函数签名只能表达"借用整个 `Parent`"或"借用某个字段"，不能表达"借用整个结构体（Struct），但排除特定字段"。
@@ -662,7 +642,6 @@ fn workaround(parent: &mut Parent) {
     parent.other += 1;
 }
 ```
-
 #### 7.2.3 Polonius 与未来的改进
 
 NLL（Non-Lexical Lifetimes）已经极大地改善了部分重借用的可用性。未来的 **Polonius** 借用检查器（基于数据流分析）将进一步提升对字段级借用的精确跟踪能力，可能支持更复杂的跨字段借用模式。
@@ -676,7 +655,6 @@ graph LR
     style B fill:#c8e6c9
     style C fill:#fff9c4
 ```
-
 ---
 
 ### 7.3 返回可变引用的形式化语义
@@ -706,7 +684,6 @@ fn demo_two_move() {
     arr[1] = 20;
 }
 ```
-
 Verus 项目使用 `after<>` 块来形式化建模这种 lender/borrower 关系：lender 在借出期间暂时放弃对资源的独占访问权，borrower 在持有引用期间获得该权利，归还后 lender 恢复权利。
 
 #### 7.3.2 实用模式：`split_first_mut` 与 `split_mut`
@@ -727,7 +704,6 @@ let (left, right) = slice.split_mut(2);
 left[0] = 100;     // ✅ left 和 right 是不相交的区域
 right[0] = 200;
 ```
-
 ```mermaid
 graph TD
     A["&mut [1,2,3,4,5]"] -->|"split_mut(2)"| B["&mut [1,2]"]
@@ -737,7 +713,6 @@ graph TD
     style B fill:#c8e6c9
     style C fill:#c8e6c9
 ```
-
 > **核心保证**: `split_mut` 通过运行时（Runtime）检查（索引边界）确保返回的两个 `&mut [T]` 指向**不重叠的内存区域**，因此可以同时存在而不违反别名规则。
 > [来源: [Rust Standard Library — slice::split_mut](https://doc.rust-lang.org/std/primitive.slice.html)]（一级来源）
 
@@ -773,7 +748,6 @@ graph TD
         T2 -->|"reborrow"| T4["grandchild: &mut T"]
     end
 ```
-
 #### 7.4.2 权限树：Foreign / Read / Write / Unique
 
 Tree Borrows 为每个内存位置维护一棵权限树，每个节点拥有以下权限之一：
@@ -786,7 +760,6 @@ Tree Borrows 权限层级:
   Write      ── 可读写（需 Unique）
   Unique     ── 独占访问（可变引用 &mut T）
 ```
-
 在 `&mut &mut T` 的情况下：
 
 ```rust,ignore
@@ -796,7 +769,6 @@ let r2 = &mut r1;      // 树节点 B: Unique (指向 r1), 节点 A 变为 Reser
 
 **r2 = 10;             // 通过 B 的权限链访问 x
 ```
-
 树模型允许 `r2` 存在时 `r1` 暂时被"冻结"（从 Unique 降级为 Reserved），当 `r2` 释放后 `r1` 恢复 Unique 权限。这种"临时降级"在栈模型中难以表达，但在树模型中自然成为父子节点的权限转换。
 
 > **关键洞察**: Tree Borrows 使得 `&mut &mut T` 的行为更加可预测——内层引用可以在外层引用的生命周期内被"临时冻结"，而不会触发 UB（Undefined Behavior）。
@@ -821,7 +793,6 @@ let opt_mut: Option<&mut i32> = Some(&mut x);
 // 关键：内层的 &mut i32 被弱化为 &i32
 let opt_shared: Option<&i32> = opt_mut.as_ref();
 ```
-
 类型转换的精确映射：
 
 ```text
@@ -837,7 +808,6 @@ as_mut() 的转换行为:
   Option<&mut T>    →  Option<&mut T> (无变化，保持可变性)
   Result<&mut T, E> →  Result<&mut T, E> (保持可变性)
 ```
-
 #### 7.5.2 生命周期行为
 
 ```rust,ignore
@@ -845,7 +815,6 @@ fn demo_lifetime_propagation<'a>(opt: &'a Option<&'a mut i32>) -> Option<&'a i32
     opt.as_ref()  // 生命周期 'a 从输入传播到输出
 }
 ```
-
 > **关键洞察**: `as_ref()` 不创建新的引用，而是**重新打包**现有的引用，保持原始生命周期不变。对于嵌套引用，这意味着内层引用的生命周期约束会被完整保留。
 > [来源: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)]（一级来源）
 
@@ -871,7 +840,6 @@ fn nested_reference_patterns() {
     assert_eq!(***r, 5);
 }
 ```
-
 #### 7.6.2 结构体字段的部分重借用
 
 ```rust
@@ -898,7 +866,6 @@ impl Buffer {
     }
 }
 ```
-
 #### 7.6.3 `split_mut` 创建不相交可变引用
 
 ```rust,ignore
@@ -913,7 +880,6 @@ fn parallel_update(matrix: &mut [[i32; 3]; 2]) {
     row1[0] = 2;
 }
 ```
-
 #### 7.6.4 迭代器可变链
 
 ```rust
@@ -928,7 +894,6 @@ fn iterator_mut_chains() {
     assert_eq!(vec, vec![10, 21, 32]);
 }
 ```
-
 > **关键洞察**: `iter_mut()` 返回的迭代器（Iterator）产生 `&mut T`，后续适配器（如 `enumerate()`）通过**部分重借用**原理将 `&mut T` 包装为 `(usize, &mut T)` 而不破坏可变性。
 > [来源: [Rust Standard Library — Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)]（一级来源）
 
@@ -959,7 +924,6 @@ let r3 = r2;        // r3: &&mut i32（复制共享引用是允许的）
 *r1 = 10;           // ✅
 // *r2 = 20;        // ❌ 不能通过共享引用修改
 ```
-
 **命题 C**: "部分重借用适用于所有复合类型"
 
 - ⚠️ **大部分成立，但有例外**: 结构体字段、元组元素、数组元素都支持部分重借用。但以下类型存在限制：
@@ -978,7 +942,6 @@ fn union_demo(u: &mut MyUnion) {
     // u.b = 1.0;             // 可能与 a_ref 指向的内存重叠
 }
 ```
-
 > [来源: [Rust Reference — Unions](https://doc.rust-lang.org/reference/items/unions.html)]（一级来源）
 
 #### 7.7.2 边界极限
@@ -999,7 +962,6 @@ fn union_demo(u: &mut MyUnion) {
 ├── Miri（Rust 的解释器/检查器）已支持 Tree Borrows
 └── rustc 编译器后端仍基于类似 Stacked Borrows 的模型，但逐步对齐
 ```
-
 > [来源: [Miri — Tree Borrows](https://github.com/rust-lang/miri)]（二级来源）
 
 ---
@@ -1018,7 +980,6 @@ let r: &&i32;
     r = &r1;        // ❌ 错误：r1 的生命周期不够长
 } // x 和 r1 在这里释放
 ```
-
 编译器为每个临时引用生成**独立的临时值**：
 
 ```rust
@@ -1030,7 +991,6 @@ let r: &&i32;
     r = tmp2;           // r 依赖 tmp1 和 x 的生命周期
 }
 ```
-
 > **关键**: `&&5` 涉及**三个**值：原始值 `5`、第一层临时引用、第二层临时引用。整个链的生命周期受最弱环节（最短生命周期）限制。
 > [来源: [Rust Reference — Temporary Values](https://doc.rust-lang.org/reference/expressions.html#temporaries)]（一级来源）
 
@@ -1050,7 +1010,6 @@ let r3: &mut i32 = &mut x;
 let r4: &&mut i32 = &r3;       // r4 是共享引用，不能修改 r3 的指向
 // *r4 = &mut y;               // ❌ 错误：不能通过共享引用赋值
 ```
-
 | 类型 | 可读 | 可修改目标值 | 可修改引用指向 |
 |:---|:---:|:---:|:---:|
 | `&mut &T` | ✅ | ❌（内层是共享引用） | ✅（外层是可变的） |
@@ -1068,7 +1027,6 @@ let r_mut: &mut &mut i32 = &mut &mut x;
 // let target: &mut i32 = r_mut;  // ❌ 不会自动解引用！
 let target: &mut i32 = *r_mut;    // ✅ 必须显式解引用
 ```
-
 原因：**可变引用的自动解引用在赋值/传参上下文中有更严格的限制**。编译器不会隐式地将 `&mut &mut T` 转换为 `&mut T`，因为这会隐藏内存 indirection 的层级，而在可变访问中，每一级 indirection 的语义都至关重要。
 
 > **原则**: Rust 的隐式转换是**保守的**——对于共享引用，多次自动解引用是安全的（只读）；对于可变引用，编译器要求显式控制以避免意外的别名破坏。
@@ -1093,7 +1051,6 @@ let target: &mut i32 = *r_mut;    // ✅ 必须显式解引用
                               * (l2 ↦ T) * exclusive(l2)
                               * (value(l1) = T)
 ```
-
 Tree Borrows 的权限树在 Iris 框架中可以建模为**分式权限（Fractional Permissions）**的层次化分配：每个节点持有父节点授予的权限子集，当子节点活跃时，父节点的对应权限被冻结。
 
 > **学术连接**: Tree Borrows 模型已被整合进 RustBelt 项目的 Iris 框架中，为 Rust 的 unsafe 代码验证提供了更精确的内存模型基础。
@@ -1116,7 +1073,6 @@ Tree Borrows 的权限树在 Iris 框架中可以建模为**分式权限（Fract
 let r1: &&i32 = &&5;           // ✅ & 构造子可嵌套
 let r2: &mut &mut String = &mut &mut String::from("hi"); // ✅ 多层可变
 ```
-
 - `&` / `&mut` 的嵌套深度、自动解引用链、引用弱化（`&mut` → `&`）均遵循**结构规则**，与目标类型 `T` 是否是名义类型无关。
 
 **目标类型的名义约束传导**：
@@ -1130,7 +1086,6 @@ struct SessionId(u64);
 let uid: &UserId = &UserId(42);
 // let sid: &SessionId = uid;   // ❌ 错误：&UserId ≠ &SessionId（名义不等价）
 ```
-
 即使 `UserId` 和 `SessionId` 内部都是 `u64`，`&UserId` 与 `&SessionId` 仍因名义身份而不兼容。
 
 **部分重借用的名义/结构边界**：
@@ -1155,7 +1110,6 @@ let s: &mut &Secret = &mut &Secret(String::from("x"));
 // *s = &Public(String::from("y"));  // ❌ 错误：&Public ≠ &Secret
 // 即使都是 &String 的包装，名义身份阻止了跨类型赋值
 ```
-
 > **分析**: 这一边界是 Rust 类型系统（Type System）安全性的核心支柱之一——多级引用提供了表达复杂内存关系的灵活性（结构规则），但名义类型确保了语义契约在任何引用层级都不会被意外破坏（名义规则）。
 > [来源: [Rust Reference: Types] · [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rust Reference: Type Coercions](https://doc.rust-lang.org/reference/)]（一级来源）
 > **与类型系统的关联**: 详见 [`04_type_system.md`](04_type_system.md) 对名义类型与结构类型的完整分析——其中第 11.7 节专门论证了引用构造的结构本质与目标类型名义约束的交互关系。
@@ -1223,7 +1177,6 @@ fn fixed() {
     println!("{}", y);
 }
 ```
-
 > **修正**: Rust 的自动解引用（auto-deref）在方法调用时最多递归应用，但在赋值和类型匹配时不会无限解引用。`&&&&T` 不会自动变成 `T`，需要显式使用 `*` 运算符。这保持了类型系统的显式性和可预测性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：`&str` 与 `String` 的混用（编译错误）
@@ -1251,7 +1204,6 @@ fn fixed() {
     println!("{}", owned);
 }
 ```
-
 > **修正**:
 > `String` 实现 `Deref<Target = str>`，因此 `&String` 可自动转为 `&str`（Deref coercion）。
 > 但 `&str` 不能自动转为 `String`（需要分配堆内存）。
@@ -1270,7 +1222,6 @@ fn main() {
     println!("{}", r1);
 }
 ```
-
 > **修正**:
 > `&mut *r1` 是对 `r1` 指向内容的**重新借用**（reborrow）：`r2` 借用（Borrowing） `*r1`，在 `r2` 活跃期间 `r1` 不能被使用（即使 `r1` 是可变的）。
 > 这是 Rust 借用检查的精细规则：重新借用的生命周期是原借用的子集，原借用在此期间被"冻结"。
@@ -1295,7 +1246,6 @@ fn main() {
     println!("{}", r);
 }
 ```
-
 > **修正**: `RefCell` 提供**内部可变性**（interior mutability）：通过 `&RefCell<T>`（共享引用）获取 `&mut T`（可变引用）。
 > 这是运行时借用检查：`borrow()` 增加共享计数，`borrow_mut()` 检查共享计数为 0，否则 panic。
 > 编译器无法静态验证 `RefCell` 的借用规则，因为 `RefCell` 的内部状态是动态的。
@@ -1317,7 +1267,6 @@ fn main() {
     *r2 = 20;
 }
 ```
-
 > **修正**: `&mut *r1` 是对 `r1` 指向内容的**重新借用**（reborrow）。
 > 重新借用的生命周期是原借用的子集，原借用在此期间被冻结。`r1` 在 `r2` 活跃期间（`r2` 的最后使用点之前）不能被使用。
 > 这是 Rust 借用检查的精细规则：重新借用不是创建独立的新借用，而是临时的、受原借用约束的子借用。
@@ -1336,7 +1285,6 @@ fn get_ref() -> &i32 {
 
 fn main() {}
 ```
-
 > **修正**: **悬垂引用**是 Rust borrow checker 的核心防护：1) 局部变量在函数结束时 drop；2) 返回其引用 → 引用指向已释放内存；3) 解决：返回所有权（Ownership）（`i32` 而非 `&i32`）或使用 `Box::leak` 获取 `'static` 引用。
 
 ## 嵌入式测验（Embedded Quiz）

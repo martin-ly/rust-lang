@@ -93,7 +93,6 @@ where
     // 必须保证 ptr 的内存布局兼容
 }
 ```
-
 > **核心痛点**:
 >
 > 1. 每个自定义智能指针都需要**重复**这些 unsafe 实现
@@ -126,7 +125,6 @@ graph TD
         I -->|"已验证正确"| J["零 unsafe 代码"]
     end
 ```
-
 > **认知功能**: 此图对比了当前手动实现与目标派生方案的**安全差异**——手动实现引入 unsafe 风险，而派生宏由编译器生成已验证的代码。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 对于任何自定义智能指针，优先使用 `#[derive(CoercePointee)]`；仅在特殊布局需求时手动实现。
@@ -149,7 +147,6 @@ struct MyBox<T: ?Sized> {
 // impl<T, U> CoerceUnsized<MyBox<U>> for MyBox<T> where T: Unsize<U> { ... }
 // impl<T, U> DispatchFromDyn<MyBox<U>> for MyBox<T> where T: Unsize<U> { ... }
 ```
-
 > **设计原则**:
 >
 > 1. `#[pointee(T)]` 显式标记**哪个类型参数**参与强制转换
@@ -180,7 +177,6 @@ struct SmartPtr<T: ?Sized> {
   5. 生成 DispatchFromDyn impl:
      - 类似逻辑，但用于 dyn Trait 方法调用
 ```
-
 > **技术要点**: 派生宏不是普通的 procedural macro，而是**编译器内建**的派生——它直接访问编译器的类型布局和强制转换内部表示，确保生成的 impl 与编译器的强制规则完全一致。
 > [来源: [Rust Compiler Internals](https://rustc-dev-guide.rust-lang.org/)]
 
@@ -223,7 +219,6 @@ graph LR
         J --> G
     end
 ```
-
 > **认知功能**: 此图展示 `CoercePointee` 在智能指针 Trait 生态中的**边界**——它只自动化与类型强制相关的两个 Trait，其他 Trait（Deref、AsRef、Borrow）仍需手动实现。
 > **使用建议**: `CoercePointee` 是智能指针实现的**补充**而非替代。完整的智能指针仍需实现 Deref、DerefMut 等。
 > **关键洞察**: Rust 的标准库智能指针（Box、Rc、Arc）未来也可能使用 `#[derive(CoercePointee)]` 简化实现，降低维护负担。
@@ -249,7 +244,6 @@ graph LR
 │ └── 与编译器强制规则完全一致                                  │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 > **安全核心论点**: `CoercePointee` 派生将**智能指针类型强制**这一机械性、易错的 unsafe 操作转化为编译器管理的自动代码生成，显著降低自定义智能指针的安全门槛。
 > [来源: [Rust [RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html) — Motivation](https://github.com/rust-lang/rfcs/pull/3621)]
 
@@ -274,7 +268,6 @@ graph TD
     style ALT1 fill:#fff3e0
     style ALT2 fill:#fff3e0
 ```
-
 > **认知功能**: 此决策树帮助判断是否可以使用 `#[derive(CoercePointee)]`。核心判断标准是结构体（Struct）是否满足约束条件以及是否需要特殊的强制行为。
 > **使用建议**: 对于绝大多数自定义智能指针（如引用（Reference）计数、自定义 Box），派生宏完全足够；仅在非常规布局（如分片存储、内联小对象优化）时需要手动实现。
 > **关键洞察**: `CoercePointee` 覆盖约 **80-90%** 的自定义智能指针场景，剩余场景需要手动 unsafe 实现。
@@ -300,7 +293,6 @@ graph TD
 ├── 不支持自定义强制逻辑（如类型转换时的额外检查）
 └── 生成的 impl 是固定的，无法通过配置调整
 ```
-
 > **边界要点**: `CoercePointee` 是**保守的正确性方案**——只在编译器能证明安全的情况下自动生成代码。不满足约束的场景仍需手动 unsafe 实现，这是设计上的有意限制。
 > [来源: [Rust [RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html) — Drawbacks](https://github.com/rust-lang/rfcs/pull/3621)]
 
@@ -375,7 +367,6 @@ fn main() {
     let s: MyBox<str> = todo!();
 }
 ```
-
 > **修正**: `CoercePointee`（[RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html)，Rust 1.95+）允许自定义智能指针参与**强制点转换**（unsized coercion），如 `MyBox<String>` → `MyBox<str>`（通过 `Deref`）。
 > 关键约束：智能指针类型必须是 `#[repr(transparent)]`——保证其内存布局与内部指针完全相同。
 > 这是编译器进行强制转换的前提：转换只需修改类型标记，无需调整内存。
@@ -399,7 +390,6 @@ struct BadPointer<T: ?Sized> {
 
 fn main() {}
 ```
-
 > **修正**:
 > `#[repr(transparent)]` 要求 struct 只有一个非零大小（non-zero-sized）字段，其余必须是零大小类型（`PhantomData<T>`、单元类型 `()` 等）。
 > `extra: usize` 使 `BadPointer` 的大小变为 `sizeof(*const T) + sizeof(usize)`，不再是透明包装。
@@ -428,7 +418,6 @@ fn main() {
     let s: MyBox<str> = todo!();
 }
 ```
-
 > **修正**:
 > `CoercePointee` 允许智能指针参与 unsized coercion（如 `MyBox<String>` → `MyBox<str>`），但要求目标类型 `T` 的**元数据布局**与编译器期望的一致。
 > 标准 DST（`str`、`[T]`、`dyn Trait`）的元数据是编译器内置的（长度或 vtable 指针）。
@@ -458,7 +447,6 @@ fn main() {
     // let r2: Ref<str> = r; // 生命周期约束可能不满足
 }
 ```
-
 > **修正**:
 > `CoercePointee` 不仅涉及类型 coercion（`String` → `str`），还涉及**生命周期（Lifetimes） coercion**。
 > `Ref<'a, T>` 的 `'a` 是引用（Reference）的生命周期（Lifetimes），`T` 的变化（`String` → `str`）需保持生命周期约束。
@@ -483,7 +471,6 @@ fn main() {
 
 fn main() {}
 ```
-
 > **修正**:
 > **`CoercePointee`** 是 Rust 智能指针生态的重要扩展：
 >

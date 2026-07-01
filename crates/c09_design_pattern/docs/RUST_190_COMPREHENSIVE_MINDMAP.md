@@ -39,7 +39,6 @@
 创建  结构  Actor  STM  RAII 类型状态
 Builder Adapter CSP  MVU  Newtype Builder
 ```
-
 ---
 
 ## 🎨 GoF设计模式
@@ -117,7 +116,6 @@ Builder Adapter CSP  MVU  Newtype Builder
 ├─ 并发通信 → Actor/CSP
 └─ 类型安全 → Newtype/Type State
 ```
-
 ---
 
 **文档版本**: v1.0

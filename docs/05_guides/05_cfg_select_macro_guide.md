@@ -63,7 +63,6 @@ fn os_name() -> &'static str { "Windows" }
 #[cfg(not(any(target_os = "linux", target_os = "windows")))]
 fn os_name() -> &'static str { "Unknown" }
 ```
-
 `cfg_select!` 允许在**表达式级别**直接选择：
 
 ```rust
@@ -73,7 +72,6 @@ let name = cfg_select! {
     _ => "Unknown",
 };
 ```
-
 ---
 
 ## 二、基本语法 {#二基本语法}
@@ -86,7 +84,6 @@ cfg_select! {
     _ => fallback_expression,
 }
 ```
-
 ### 规则 {#规则}
 
 | 规则 | 说明 |
@@ -110,7 +107,6 @@ fn main() {
     println!("Pointer size: {} bytes", ptr_size);
 }
 ```
-
 ---
 
 ## 三、使用场景与示例 {#三使用场景与示例}
@@ -130,7 +126,6 @@ const LINE_ENDING: &'static str = cfg_select! {
     _ => "\n",
 };
 ```
-
 ### 场景 2：平台相关的类型别名 {#场景-2平台相关的类型别名}
 
 ```rust
@@ -142,7 +137,6 @@ type NativeSocket = cfg_select! {
     _ => std::net::TcpStream,
 };
 ```
-
 ### 场景 3：功能特性的默认配置 {#场景-3功能特性的默认配置}
 
 ```rust
@@ -154,7 +148,6 @@ const DEFAULT_BUFFER_SIZE: usize = cfg_select! {
     _ => 8192,                            // 桌面/服务器默认
 };
 ```
-
 ### 场景 4：与 `match` 结合 {#场景-4与-match-结合}
 
 ```rust
@@ -182,7 +175,6 @@ fn handle_error(code: u32) -> &'static str {
     }
 }
 ```
-
 ---
 
 ## 四、与 `#[cfg]` 的对比 {#四与-cfg-的对比}
@@ -227,7 +219,6 @@ fn get_allocator() -> &'static str {
     }
 }
 ```
-
 ### 模式 2：与 `cfg!` 宏对比 {#模式-2与-cfg-宏对比}
 
 ```rust
@@ -244,7 +235,6 @@ let strategy = cfg_select! {
     _ => GenericStrategy,
 };
 ```
-
 ### 模式 3：在常量上下文中使用 {#模式-3在常量上下文中使用}
 
 ```rust
@@ -262,7 +252,6 @@ const CACHE_LINE_SIZE: usize = cfg_select! {
     _ => 32,
 };
 ```
-
 ---
 
 ## 六、常见陷阱 {#六常见陷阱}
@@ -277,7 +266,6 @@ cfg_select! {
     // 编译错误：未覆盖所有情况
 }
 ```
-
 ### 陷阱 2：分支类型不一致 {#陷阱-2分支类型不一致}
 
 ```rust
@@ -287,7 +275,6 @@ cfg_select! {
     _ => "unknown",  // 错误：expected u32, found &str
 }
 ```
-
 ### 陷阱 3：在运行时条件中使用 {#陷阱-3在运行时条件中使用}
 
 ```rust
@@ -297,7 +284,6 @@ cfg_select! {
     target_os = runtime_os => ...,  // 错误：cfg 条件必须是编译期常量
 }
 ```
-
 ### 陷阱 4：过度使用导致可读性下降 {#陷阱-4过度使用导致可读性下降}
 
 ```rust
@@ -315,7 +301,6 @@ let x = cfg_select! {
 // ✅ 建议：提取为命名常量或函数
 const VALUE: u32 = cfg_select! { ... };
 ```
-
 ---
 
 ## 七、参考 {#七参考}

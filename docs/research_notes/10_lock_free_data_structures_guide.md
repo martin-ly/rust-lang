@@ -92,7 +92,6 @@ pub struct LockFreeStack<T> {
     head: Atomic<Node<T>>,
 }
 ```
-
 - 节点使用 `Option<T>` 存储数据，弹出时 `take()` 避免重复释放。
 - 使用 `crossbeam-epoch` 的 `Guard` 保护读取，成功 CAS 后通过 `defer_unchecked` 延迟释放节点。
 
@@ -127,7 +126,6 @@ pub struct LockFreeQueue<T> {
     tail: Atomic<Node<T>>,
 }
 ```
-
 - `enqueue` 需要帮助推进落后的 `tail`（helping 机制）。
 - `dequeue` 移动 `head` 后，旧哨兵节点与新头节点的数据都需要延迟释放。
 
@@ -158,7 +156,6 @@ pub struct HazardPointer {
     guard: Guard,
 }
 ```
-
 - `pin()`：进入当前 epoch，等效于声明 hazard pointer。
 - `Guard` drop：自动 unpin，等效于清除 hazard pointer。
 - `defer_unchecked`：将节点延迟到安全 epoch 释放。
@@ -226,7 +223,6 @@ self.head.compare_exchange(head, new, Release, Acquire, guard)
 let head = self.head.load(Acquire, guard);
 let next = head_ref.next.load(Acquire, guard);
 ```
-
 - `Acquire` 读 `head`：确保看到其他线程 `Release` 写入的完整节点。
 - `Release` 写 `head`：确保节点初始化对其他线程可见。
 - `next` 在 push 时用 `Relaxed` 存储即可，因为 push 的 `Release` CAS 已经保证了发布顺序。
@@ -246,7 +242,6 @@ let data = unsafe {
     boxed.data
 };
 ```
-
 **问题**：其他线程可能仍持有 `current_head` 的 hazard pointer，导致 use-after-free。
 
 **正确做法**：使用 `crossbeam-epoch` 延迟释放。
@@ -257,7 +252,6 @@ let data = unsafe {
 // 反例：使用 Relaxed 读取 head
 let head = self.head.load(Relaxed, guard);
 ```
-
 **问题**：可能读到未完全初始化的节点（data race）。
 
 **正确做法**：读取共享指针使用 `Acquire`。
@@ -267,7 +261,6 @@ let head = self.head.load(Relaxed, guard);
 ```rust
 // 反例：MS Queue 中直接 CAS tail.next，不帮助推进 tail
 ```
-
 **问题**：若 `tail` 落后，CAS 会反复失败，导致活锁或性能退化。
 
 **正确做法**：enqueue/dequeue 都提供帮助推进逻辑。
@@ -277,7 +270,6 @@ let head = self.head.load(Relaxed, guard);
 ```rust
 // 反例：pop 中先 defer_delete，再读取数据
 ```
-
 **问题**：`defer_unchecked` 可能在当前线程继续执行前触发回收（虽然 EBR 保证在 Guard 内不回收，但逻辑上仍应避免）。
 
 **正确做法**：在 `Guard` 保护下读取数据，再提交延迟释放。
@@ -307,5 +299,4 @@ let head = self.head.load(Relaxed, guard);
 | P2 | Rustonomicon | <https://doc.rust-lang.org/nomicon/> | unsafe Rust、裸指针、内存回收 |
 
 > **来源: [ACM Digital Library](https://dl.acm.org/)**
-
 > **来源: [IEEE Standards](https://standards.ieee.org/)**

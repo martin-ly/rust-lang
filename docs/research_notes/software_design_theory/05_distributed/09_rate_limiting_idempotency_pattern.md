@@ -87,7 +87,6 @@ RateLimiter := (S, policy, classifier)
     policy = (limit, window)
     classifier: Request → key  -- 按客户端、IP、接口等维度分组
 ```
-
 ### Def RL2: Token Bucket（令牌桶） {#def-rl2-token-bucket令牌桶}
 
 > **来源: [Wikipedia - Token Bucket](https://en.wikipedia.org/wiki/Token_bucket)**
@@ -100,7 +99,6 @@ TokenBucket := (capacity, refill_rate, tokens)
     refill_rate ∈ ℝ⁺          -- 每秒回填令牌数（长期平均速率）
     tokens ∈ [0, capacity]    -- 当前可用令牌数
 ```
-
 允许一定突发，但长期速率受 `refill_rate` 约束。
 
 ### Def RL3: Leaky Bucket（漏桶） {#def-rl3-leaky-bucket漏桶}
@@ -115,7 +113,6 @@ LeakyBucket := (capacity, leak_rate, queue)
     leak_rate ∈ ℝ⁺      -- 恒定流出速率
     queue: FIFO         -- 待处理请求队列
 ```
-
 输出速率平滑，但可能引入排队延迟；超出容量则直接拒绝。
 
 ### Def RL4: Fixed Window（固定窗口） {#def-rl4-fixed-window固定窗口}
@@ -130,7 +127,6 @@ FixedWindow := (window, limit, counter)
     limit ∈ ℕ
     counter 在每个窗口开始时重置
 ```
-
 实现简单，但在窗口边界处可能出现 **2×limit** 的突发流量。
 
 ### Def RL5: Sliding Window（滑动窗口） {#def-rl5-sliding-window滑动窗口}
@@ -144,7 +140,6 @@ SlidingWindow := (window, limit, timestamps)
     timestamps = { t₁, t₂, ..., tₙ | tᵢ ∈ [now - window, now] }
     |timestamps| ≤ limit
 ```
-
 通过维护最近一段时间内的请求时间戳，消除固定窗口的边界突发问题。
 
 ### Def ID1: Idempotency（幂等性） {#def-id1-idempotency幂等性}
@@ -158,7 +153,6 @@ SlidingWindow := (window, limit, timestamps)
 ```text
 Idempotent(Op) := ∀n ≥ 1. Opⁿ ≡ Op¹
 ```
-
 在分布式系统中，幂等性是重试、超时恢复、消息队列至少一次投递的前提。
 
 ### Def ID2: Idempotency Key（幂等键） {#def-id2-idempotency-key幂等键}
@@ -174,7 +168,6 @@ IdempotencyKey := (client_id, scope, nonce, ttl)
     nonce: 客户端生成的唯一值
     ttl: 键的有效期
 ```
-
 幂等键通常由客户端生成，服务端在 TTL 内保存 `<key, result>` 映射以实现去重。
 
 ---
@@ -190,7 +183,6 @@ IdempotencyKey := (client_id, scope, nonce, ttl)
 ```text
 capacity ≥ 0 ∧ limit ≥ 0
 ```
-
 限流器的容量与阈值必须为非负数。
 
 ### Axiom RL2: 请求计数单调 {#axiom-rl2-请求计数单调}
@@ -200,7 +192,6 @@ capacity ≥ 0 ∧ limit ≥ 0
 ```text
 t₁ < t₂ → count(t₁) ≤ count(t₂)
 ```
-
 在不重置窗口的前提下，累计请求数不会减少。
 
 ### Axiom ID1: 幂等键唯一性 {#axiom-id1-幂等键唯一性}
@@ -210,7 +201,6 @@ t₁ < t₂ → count(t₁) ≤ count(t₂)
 ```text
 (k₁ ≠ k₂) → Op(k₁) 与 Op(k₂) 相互独立
 ```
-
 不同幂等键应对应不同的业务语义；键冲突将导致错误去重。
 
 ### Axiom ID2: 幂等结果不变性 {#axiom-id2-幂等结果不变性}
@@ -220,7 +210,6 @@ t₁ < t₂ → count(t₁) ≤ count(t₂)
 ```text
 key = k ∧ ttl_not_expired(k) → result(k) 保持不变
 ```
-
 在有效期内，同一幂等键返回的结果必须一致。
 
 ---
@@ -236,7 +225,6 @@ key = k ∧ ttl_not_expired(k) → result(k) 保持不变
 ```text
 lim_{T→∞} allowed(T) / T ≤ refill_rate
 ```
-
 **证明概要**:
 
 1. 桶内令牌数上限为 `capacity`。
@@ -250,7 +238,6 @@ lim_{T→∞} allowed(T) / T ≤ refill_rate
 ```text
 ∀t. |{ r | time(r) ∈ [t - window, t] }| ≤ limit
 ```
-
 **证明概要**:
 
 1. 每次请求前先清理过期时间戳。
@@ -264,7 +251,6 @@ lim_{T→∞} allowed(T) / T ≤ refill_rate
 ```text
 ∀k. (first_success(k) → result) ∧ (retry(k) within ttl) → result' = result
 ```
-
 **证明概要**:
 
 1. 首次成功执行后，服务端保存 `<k, result>`。
@@ -363,7 +349,6 @@ impl IdempotencyStore {
     }
 }
 ```
-
 ---
 
 ## 5. 反例边界 {#5-反例边界}
@@ -394,7 +379,6 @@ impl IdempotencyStore {
 支付请求 A: key = "abc"
 支付请求 B: key = "abc"  -- 不同金额、不同收款方
 ```
-
 - 服务端误以为 B 是 A 的重试，返回错误结果。
 
 **边界条件**:
@@ -414,7 +398,6 @@ Instance 2: 同时检查 key 不存在 → 也开始执行业务
 Instance 1: 执行完成，写入 key
 Instance 2: 执行完成，覆盖 key
 ```
-
 - 两个实例都执行了实际写操作，幂等性被破坏。
 
 **边界条件**:
@@ -443,9 +426,7 @@ Instance 2: 执行完成，覆盖 key
 ## 🆕 Rust 1.96 深度整合更新 {#rust-196-深度整合更新}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-06-29
 
 ### 本文档的 Rust 1.96 更新要点 {#本文档的-rust-196-更新要点}
@@ -502,37 +483,25 @@ Instance 2: 执行完成，覆盖 key
 ### P0（核心官方 / 生产级文档） {#p0核心官方-生产级文档}
 
 > **来源: [Tower Docs - RateLimit](https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html)**
-
 > **来源: [Tokio Time](https://docs.rs/tokio/latest/tokio/time/index.html)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
 ### P1（行业最佳实践 / 权威工程指南） {#p1行业最佳实践-权威工程指南}
 
 > **来源: [Stripe Idempotency](https://stripe.com/docs/api/idempotent_requests)**
-
 > **来源: [AWS Architecture Center](https://docs.aws.amazon.com/)**
-
 > **来源: [Martin Fowler - Idempotent Receiver](https://martinfowler.com/)**
 
 ### P2（学术 / 社区参考） {#p2学术-社区参考}
 
 > **来源: [Wikipedia - Token Bucket](https://en.wikipedia.org/wiki/Token_bucket)**
-
 > **来源: [Wikipedia - Leaky Bucket](https://en.wikipedia.org/wiki/Leaky_bucket)**
-
 > **来源: [Wikipedia - Rate Limiting](https://en.wikipedia.org/wiki/Rate_limiting)**
-
 > **来源: [IETF RFC 9110 - HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110.html)**
-
 > **来源: [Redis Distributed Locks](https://redis.io/docs/manual/patterns/distributed-locks/)**
-
 > **来源: [ACM - Fault-Tolerant Design Patterns](https://dl.acm.org/)**
-
 > **来源: [IEEE - Resilient Software Architecture](https://standards.ieee.org/)**
 
 ---

@@ -69,7 +69,6 @@
        度   │  (手动管理)     │(内核模块)│
             └──────────────────────────┘
 ```
-
 ---
 
 ## Embassy：异步嵌入式 {#embassy异步嵌入式}
@@ -98,7 +97,6 @@ main loop {           #[embassy_executor::main]
                           }
                       }
 ```
-
 ### 关键特性 {#关键特性-1}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -136,7 +134,6 @@ async fn main(_spawner: Spawner) {
     }
 }
 ```
-
 ### 多任务并发 {#多任务并发}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -164,7 +161,6 @@ async fn consumer() {
     }
 }
 ```
-
 ---
 
 ## RTIC：实时中断驱动并发 {#rtic实时中断驱动并发}
@@ -185,7 +181,6 @@ RTIC 调度模型:
 硬件优先级 1:  lowest_priority_task
 硬件优先级 0:  idle loop
 ```
-
 **关键洞察**: RTIC 不使用软件调度器，而是直接利用 NVIC (ARM) 或 PLIC (RISC-V) 的硬件优先级机制。
 
 ### 关键特性 {#关键特性-1}
@@ -253,7 +248,6 @@ mod app {
     }
 }
 ```
-
 ---
 
 ## Embassy vs RTIC 对比 {#embassy-vs-rtic-对比}
@@ -294,7 +288,6 @@ mod app {
     └── 极简资源 (< 16KB RAM)?
             └── 无堆分配硬性要求? ──▶ RTIC 或裸机 HAL
 ```
-
 ---
 
 ## 参考 {#参考}
@@ -338,7 +331,6 @@ graph TD
     D --> D2[defmt]
     D --> D3[OpenOCD]
 ```
-
 ---
 
 ## 决策树：嵌入式框架选择 {#决策树嵌入式框架选择}
@@ -357,32 +349,22 @@ graph TD
     Q4 -->|是| A5[裸机 + Embassy HAL]
     Q4 -->|否| A6[Embassy 完整框架]
 ```
-
 ---
 
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
-
 > **来源: [Wikipedia - Real-Time Operating System](https://en.wikipedia.org/wiki/Real_Time_Operating_System)**
-
 > **来源: [Wikipedia - Microcontroller](https://en.wikipedia.org/wiki/Microcontroller)**
-
 > **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)**
-
 > **[来源: Embassy Book - embassy.dev]**
-
 > **[来源: RTIC Book - rtic.rs]**
-
 > **[来源: IEEE - Embedded Software Standards]**
-
 > **[来源: ACM - Embedded Systems Survey]**
-
 > **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
 > **来源: [Rust Embedded WG](https://rust-embedded.github.io/book/)**
 > **来源: [Embassy Book](https://embassy.dev/book/)**
 > **[来源: IEEE - Embedded Software]**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 

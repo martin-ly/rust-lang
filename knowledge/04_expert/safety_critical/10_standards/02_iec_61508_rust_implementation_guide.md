@@ -29,7 +29,6 @@ IEC 61508-x:
 ├── Part 7: 技术和措施概览
 └── Part 8: 应用指南1 (整体安全生命周期)
 ```
-
 ---
 
 ## Part 3: 软件要求详解
@@ -144,7 +143,6 @@ pub enum SafetyError {
     SensorFault,
 }
 ```
-
 ### 7.4.3 软件安全验证
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -205,7 +203,6 @@ mod verification {
     }
 }
 ```
-
 ---
 
 ## Part 6: 软件开发和验证技术
@@ -300,7 +297,6 @@ pub enum CommunicationResult<T> {
     SequenceError,
 }
 ```
-
 ### Table A.2 - 数据导向技术
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -366,7 +362,6 @@ fn enter_safe_state() {
     warn!("进入安全状态");
 }
 ```
-
 ---
 
 ## Part 7: 技术和措施
@@ -388,7 +383,6 @@ fn enter_safe_state() {
 
 Rust适用性: SCL 2-3
 ```
-
 ### 硬件容错要求
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -453,7 +447,6 @@ impl Voter {
     }
 }
 ```
-
 ---
 
 ## 工业协议集成
@@ -529,7 +522,6 @@ pub trait ModbusTransport {
     fn receive(&mut self, timeout: Duration) -> Result<Vec<u8>, TransportError>;
 }
 ```
-
 ### OPC UA
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -588,7 +580,6 @@ impl SafetyOpcUaServer {
     }
 }
 ```
-
 ---
 
 ## 开发检查表
@@ -659,7 +650,6 @@ impl SafetyOpcUaServer {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [DO-178C Rust合规路径](01_do_178c_rust_compliance_pathway.md)
 - [ISO 26262 Rust实施指南](03_iso_26262_rust_implementation_guide.md)
 

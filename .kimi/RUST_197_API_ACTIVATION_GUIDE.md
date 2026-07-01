@@ -113,7 +113,6 @@ sed -i 's|// deque.truncate_front(2);|deque.truncate_front(2);|' rust_197_featur
 sed -i '/当前等效实现（从尾部遍历）:/,/assert_eq!(deque.make_contiguous(), \&\[2, 4\]);/d' rust_197_features.rs
 sed -i 's|// deque.retain_back(|x| x % 2 == 0);|deque.retain_back(|x| x % 2 == 0);|' rust_197_features.rs
 ```
-
 ---
 
 ## 发布日执行顺序

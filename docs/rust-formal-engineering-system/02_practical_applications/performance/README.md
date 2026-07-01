@@ -41,7 +41,6 @@ mindmap
       Criterion
       性能分析
 ```
-
 ## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -85,7 +84,6 @@ fn manual_loop(data: &[i32]) -> i32 {
     sum
 }
 ```
-
 ### 内存布局优化 {#内存布局优化}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -123,7 +121,6 @@ struct PackedLayout {
     b: u64,
 }
 ```
-
 ### SIMD 优化 {#simd-优化}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -147,7 +144,6 @@ fn simd_add(a: &[f32], b: &[f32], c: &mut [f32]) {
     }
 }
 ```
-
 ### 缓存友好性优化 {#缓存友好性优化}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -187,7 +183,6 @@ fn blocked_access(matrix: &mut [[f64; N]; N], block_size: usize) {
     }
 }
 ```
-
 ### 内联与分支预测提示 {#内联与分支预测提示}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -219,7 +214,6 @@ fn error_handler(e: &str) {
     eprintln!("Error: {}", e);
 }
 ```
-
 ### 无锁数据结构 {#无锁数据结构}
 
 ```rust,ignore
@@ -263,7 +257,6 @@ fn lock_free_queue_demo() {
     }
 }
 ```
-
 ### 基准测试 {#基准测试}
 
 ```rust,ignore
@@ -287,7 +280,6 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
-
 ---
 
 ## 使用场景 {#使用场景}

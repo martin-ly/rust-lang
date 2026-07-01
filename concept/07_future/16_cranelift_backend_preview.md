@@ -96,7 +96,6 @@ LLVM 后端编译时间分解（典型中型 crate）:
 ├── 即使 Debug 模式（-C opt-level=0），LLVM 仍有可观开销
 └── 增量编译时，LLVM 的模块级缓存效率有限
 ```
-
 > **核心痛点**: LLVM 是为**生产编译**设计的——追求极致优化，牺牲编译速度。对于**开发迭代**（频繁的编译-测试-调试循环），LLVM 的优化能力通常是浪费的。
 > [来源: [Rust Compiler Benchmarks](https://perf.rust-lang.org/)]
 
@@ -125,7 +124,6 @@ graph LR
         J["发布阶段"] -->|"极致优化"| LLVM
     end
 ```
-
 > **认知功能**: 此图展示 Cranelift 与 LLVM 的**互补定位**——Cranelift 负责快速 Debug 编译，LLVM 负责优化 Release 编译。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 开发迭代使用 Cranelift（`cargo build`）；CI/发布使用 LLVM（`cargo build --release`）。
@@ -150,7 +148,6 @@ rustc_codegen_cranelift 项目:
 ├── 定期同步: 追踪 rustc 的 nightly 版本
 └── 长期目标: 可能合并到主仓库作为可选后端
 ```
-
 > **项目状态**: `rustc_codegen_cranelift` 是 Rust 编译器团队的**官方实验项目**，由核心贡献者维护。它不是第三方工具，而是 Rust 编译器生态的正式组成部分。
 > [来源: [rustc_codegen_cranelift README](https://github.com/rust-lang/rustc_codegen_cranelift)]
 
@@ -198,7 +195,6 @@ graph TD
         J["生产发布"] --> C
     end
 ```
-
 > **认知功能**: 此图展示 Cranelift 与 LLVM 在不同**优化级别**下的编译速度与运行时性能权衡。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: Cranelift Debug 的**运行时性能约为 LLVM Debug 的 80%**，但编译速度快 2-5 倍。对于开发迭代，这是极佳的权衡。
@@ -222,7 +218,6 @@ graph TD
   ├── 仅 Cranelift: 100s → 60s
   └── 两者结合: 100s → 40-60s（协同效应明显）
 ```
-
 > **协同效应**: 并行前端和 Cranelift 后端是正交优化——前端减少"做什么"的时间，后端减少"怎么做"的时间。两者结合实现最大的编译加速。
 > [来源: [Rust Compiler Team — Performance](https://github.com/rust-lang/compiler-team/)]
 
@@ -268,7 +263,6 @@ graph TD
     style FALSE2 fill:#ffebee
     style ALT fill:#fff3e0
 ```
-
 > **认知功能**: 此决策树帮助判断是否使用 Cranelift。核心判断标准是**构建类型**、**平台支持**和**LTO 需求**。
 > **使用建议**: 开发迭代默认使用 Cranelift；Release 构建、交叉编译、LTO 场景使用 LLVM。
 > **关键洞察**: Cranelift 的**边界非常清晰**——它是 Debug 编译的专用工具，不试图替代 LLVM 的通用地位。
@@ -300,7 +294,6 @@ graph TD
 ├── 与某些 Cargo 插件/工作流可能不兼容
 └── 长期目标: 成为 rustc 的一等公民后端
 ```
-
 > **边界要点**: Cranelift 的边界是**设计上的有意限制**——专注于做好 Debug 编译，不追求全覆盖。这与 Rust 的"做一件事并做好"哲学一致。
 > [来源: [rustc_codegen_cranelift — Known Issues](https://github.com/rust-lang/rustc_codegen_cranelift)]
 
@@ -334,11 +327,9 @@ graph TD
 | [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
 | [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [rustc_codegen_cranelift](https://github.com/rust-lang/rustc_codegen_cranelift) | ✅ 一级 | 官方项目仓库 |
@@ -356,7 +347,6 @@ fn main() {
     println!("{}", feature);
 }
 ```
-
 ## 相关概念文件
 
 - [Toolchain](../06_ecosystem/01_toolchain.md) — Rust 工具链
@@ -402,7 +392,6 @@ fn main() {
     println!("{}", y); // 0
 }
 ```
-
 > **修正**:
 >
 > Cranelift 是 Rust 的替代代码生成后端（`rustc_codegen_cranelift`），目标是为 debug 构建提供更快的编译速度。
@@ -435,7 +424,6 @@ fn cpuid() {
     }
 }
 ```
-
 > **修正**:
 >
 > Cranelift 的内联汇编（Inline Assembly）支持正在开发中，某些复杂约束（如特定寄存器分配、内存操作数、标志位读写）可能不被支持或生成次优代码。
@@ -469,7 +457,6 @@ fn main() {
     println!("{}", recursive(1_000_000));
 }
 ```
-
 > **修正**:
 >
 > 尾调用优化（TCO）将尾递归转换为循环，避免栈增长。LLVM 在某些情况下执行 TCO（`-C opt-level=2`），但 Cranelift 当前不支持。
@@ -497,7 +484,6 @@ fn simd_operation() {
     }
 }
 ```
-
 > **修正**:
 >
 > Cranelift 的 SIMD 支持覆盖 SSE、SSE2、SSE4.1、AVX、AVX2，但 AVX-512（512 位向量）的支持仍在开发中。
@@ -524,7 +510,6 @@ fn main() {
     println!("{}", x);
 }
 ```
-
 > **修正**: Cranelift 的 debug 信息生成（DWARF）是正在开发的功能。
 > 与 LLVM 相比：
 >
@@ -558,7 +543,6 @@ fn main() {
     // 实际上两者都 panic，但 panic 消息和栈回溯格式可能不同
 }
 ```
-
 > **修正**:
 >
 > Cranelift 作为 Rust 的替代代码生成后端，设计目标：
@@ -593,7 +577,6 @@ fn main() {
     println!("{}", x);
 }
 ```
-
 > **修正**:
 > Cranelift 作为 Rust 的替代代码生成后端，设计目标：
 >
@@ -722,7 +705,6 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 
 # 或在 .cargo/config.toml 中持久化配置
 ```
-
 ```toml
 # .cargo/config.toml
 [unstable]
@@ -731,7 +713,6 @@ codegen-backend = true
 [build]
 rustflags = ["-Zcodegen-backend=cranelift"]
 ```
-
 ### 性能对比实测
 
 ```rust,ignore
@@ -755,7 +736,6 @@ fn main() {
     println!("fib(40) = {} in {:?}", result, elapsed);
 }
 ```
-
 **预期结果**（debug 模式，中型项目）：
 
 | 后端 | 编译时间 | 运行性能 |

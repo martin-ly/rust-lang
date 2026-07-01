@@ -64,8 +64,7 @@ fn gcd(mut a: u64, mut b: u64) -> u64 {
     a
 }
 ```
-
-**相关**: [algorithm_index](tier_03_references/01_算法分类参考.md)
+**相关**: [algorithm_index](tier_03_references/01_algorithm_categories_reference.md)
 
 ---
 
@@ -82,7 +81,7 @@ fn gcd(mut a: u64, mut b: u64) -> u64 {
 - O(n²) - 平方时间
 - O(2ⁿ) - 指数时间
 
-**相关**: [algorithm_complexity](tier_02_guides/03_算法复杂度分析.md)
+**相关**: [algorithm_complexity](tier_02_guides/03_algorithm_complexity_analysis.md)
 
 ---
 
@@ -103,8 +102,7 @@ fn reverse(arr: &[i32]) -> Vec<i32> {
     arr.iter().rev().copied().collect()  // 需要n空间
 }
 ```
-
-**相关**: [algorithm_complexity](tier_02_guides/03_算法复杂度分析.md)
+**相关**: [algorithm_complexity](tier_02_guides/03_algorithm_complexity_analysis.md)
 
 ---
 
@@ -130,8 +128,7 @@ while x > 1 {
     x /= 2;  // 每次减半
 }
 ```
-
-**相关**: [algorithm_complexity](tier_02_guides/03_算法复杂度分析.md)
+**相关**: [algorithm_complexity](tier_02_guides/03_algorithm_complexity_analysis.md)
 
 ---
 
@@ -155,7 +152,6 @@ fn factorial(n: u64) -> u64 {
     }
 }
 ```
-
 **相关**: [ASYNC_RECURSION_ANALYSIS](ASYNC_RECURSION_ANALYSIS.md)
 
 ---
@@ -189,7 +185,6 @@ fn fibonacci_dp(n: usize) -> u64 {
     dp[n]
 }
 ```
-
 **经典问题**:
 
 - 背包问题
@@ -229,14 +224,13 @@ fn coin_change_greedy(amount: u32, coins: &[u32]) -> Vec<u32> {
     result
 }
 ```
-
 **经典问题**:
 
 - 活动选择
 - 霍夫曼编码
 - 最小生成树 (Prim/Kruskal)
 
-**相关**: [algorithm_index](tier_03_references/01_算法分类参考.md)
+**相关**: [algorithm_index](tier_03_references/01_algorithm_categories_reference.md)
 
 ---
 
@@ -276,14 +270,13 @@ fn merge<T: Ord>(left: &[T], right: &[T], result: &mut [T]) {
     // 合并逻辑
 }
 ```
-
 **经典算法**:
 
 - 归并排序
 - 快速排序
 - 二分查找
 
-**相关**: [algorithm_index](tier_03_references/01_算法分类参考.md)
+**相关**: [algorithm_index](tier_03_references/01_algorithm_categories_reference.md)
 
 ---
 
@@ -329,14 +322,13 @@ fn is_valid(board: &[Vec<char>], row: usize, col: usize) -> bool {
     true
 }
 ```
-
 **经典问题**:
 
 - N皇后
 - 数独
 - 全排列
 
-**相关**: [algorithm_index](tier_03_references/01_算法分类参考.md)
+**相关**: [algorithm_index](tier_03_references/01_algorithm_categories_reference.md)
 
 ---
 
@@ -356,13 +348,12 @@ map.insert("key", "value");  // O(1)
 map.get("key");              // O(1)
 map.remove("key");           // O(1)
 ```
-
 **冲突解决**:
 
 - 链地址法 (Chaining)
 - 开放寻址 (Open Addressing)
 
-**相关**: [data_structures](tier_02_guides/02_数据结构实践.md)
+**相关**: [data_structures](tier_02_guides/02_data_structures_practice.md)
 
 ---
 
@@ -398,14 +389,13 @@ impl<T: Ord> TreeNode<T> {
     }
 }
 ```
-
 **变种**:
 
 - AVL树 (平衡)
 - 红黑树 (BTreeMap内部实现)
 - B树/B+树
 
-**相关**: [data_structures](tier_02_guides/02_数据结构实践.md)
+**相关**: [data_structures](tier_02_guides/02_data_structures_practice.md)
 
 ---
 
@@ -429,7 +419,6 @@ type Graph = HashMap<usize, Vec<usize>>;
 // 邻接矩阵
 type AdjMatrix = Vec<Vec<bool>>;
 ```
-
 **经典算法**:
 
 - DFS (深度优先搜索)
@@ -438,7 +427,7 @@ type AdjMatrix = Vec<Vec<bool>>;
 - Floyd-Warshall (全源最短路径)
 - Kruskal/Prim (最小生成树)
 
-**相关**: [algorithm_index](tier_03_references/01_算法分类参考.md)
+**相关**: [algorithm_index](tier_03_references/01_algorithm_categories_reference.md)
 
 ---
 
@@ -460,14 +449,13 @@ heap.push(2);
 heap.pop();        // O(log n) 返回最大值3
 heap.peek();       // O(1) 查看最大值
 ```
-
 **应用**:
 
 - 优先队列
 - 堆排序
 - Top K问题
 
-**相关**: [data_structures](tier_02_guides/02_数据结构实践.md)
+**相关**: [data_structures](tier_02_guides/02_data_structures_practice.md)
 
 ---
 
@@ -497,8 +485,7 @@ fn next_greater_elements(nums: Vec<i32>) -> Vec<i32> {
     result
 }
 ```
-
-**相关**: [data_structures](tier_02_guides/02_数据结构实践.md)
+**相关**: [data_structures](tier_02_guides/02_data_structures_practice.md)
 
 ---
 
@@ -528,10 +515,9 @@ impl PrefixSum {
     }
 }
 ```
-
 **应用**: 区间查询
 
-**相关**: [data_structures](tier_02_guides/02_数据结构实践.md)
+**相关**: [data_structures](tier_02_guides/02_data_structures_practice.md)
 
 ---
 

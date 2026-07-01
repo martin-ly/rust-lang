@@ -75,7 +75,6 @@ let arch_str = cfg_select! {
     _ => "unknown",
 };
 ```
-
 ### 2. `if let` guards on match arms {#2-if-let-guards-on-match-arms}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -93,7 +92,6 @@ match value {
     None => println!("no value"),
 }
 ```
-
 ### 3. 路径段关键字重命名导入 {#3-路径段关键字重命名导入}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -103,7 +101,6 @@ match value {
 ```rust,ignore
 use std::keyword as kw;  // 重命名关键字路径段
 ```
-
 ### 4. PowerPC/PowerPC64 内联汇编稳定化 {#4-powerpcpowerpc64-内联汇编稳定化}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -116,7 +113,6 @@ unsafe {
     asm!("nop", options(nomem, nostack));
 }
 ```
-
 ---
 
 ## 二、标准库新 API {#二标准库新-api}
@@ -142,7 +138,6 @@ for i in range {
     print!("{} ", i); // 1 2 3 4 5
 }
 ```
-
 ### 原子操作 — `update` / `try_update` {#原子操作-update-try_update}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -164,7 +159,6 @@ let result = counter.try_update(Ordering::Relaxed, Ordering::Relaxed, |current| 
 // update: 重试直到成功（spin loop）
 counter.update(Ordering::Relaxed, Ordering::Relaxed, |current| current + 1);
 ```
-
 | 类型 | `try_update` | `update` |
 |------|-------------|----------|
 | `AtomicPtr<T>` | ✅ | ✅ |
@@ -200,7 +194,6 @@ let mut list = LinkedList::new();
 let head = list.push_front_mut("hello");
 head.push_str(" world");
 ```
-
 ### 裸指针 — 不安全转引用 {#裸指针-不安全转引用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -216,7 +209,6 @@ let r: &i32 = unsafe { ptr.as_ref_unchecked() };
 let mut_ptr: *mut String = &mut String::from("hi");
 let m: &mut String = unsafe { mut_ptr.as_mut_unchecked() };
 ```
-
 ### 布局计算 — `Layout` 新 API {#布局计算-layout-新-api}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -239,7 +231,6 @@ let packed = layout.repeat_packed(10);
 // 紧凑扩展
 let extended = layout.extend_packed(Layout::new::<u8>()).unwrap().0;
 ```
-
 ### 提示 — `cold_path` {#提示-cold_path}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -257,7 +248,6 @@ fn handle_error(e: Option<&str>) {
     }
 }
 ```
-
 ### 布尔转换 — `TryFrom<{integer}>` {#布尔转换-tryfrominteger}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -268,7 +258,6 @@ let b: bool = bool::try_from(1u8).unwrap(); // true
 let b0: bool = bool::try_from(0u8).unwrap(); // false
 let err = bool::try_from(2u8); // Err(()) — 仅 0 和 1 有效
 ```
-
 ### `MaybeUninit` 数组互转 {#maybeuninit-数组互转}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -283,7 +272,6 @@ let uninit_arr: MaybeUninit<[i32; 3]> = MaybeUninit::from(arr);
 // 反向转换
 let back: [MaybeUninit<i32>; 3] = uninit_arr.into();
 ```
-
 ### `Cell` 数组引用 {#cell-数组引用}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -296,7 +284,6 @@ let cell_arr: Cell<[i32; 3]> = Cell::new([1, 2, 3]);
 let ref_arr: &[Cell<i32>; 3] = cell_arr.as_ref();
 let ref_slice: &[Cell<i32>] = cell_arr.as_ref();
 ```
-
 ---
 
 ## 三、编译器与平台 {#三编译器与平台}
@@ -312,7 +299,6 @@ let ref_slice: &[Cell<i32>] = cell_arr.as_ref();
 ```bash
 rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 ```
-
 ### 平台支持提升 {#平台支持提升}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -354,7 +340,6 @@ const fn check_control(cf: ControlFlow<i32, ()>) -> bool {
     cf.is_break() // 1.96.0+ 可在 const fn 中使用
 }
 ```
-
 ---
 
 ## 五、与 Rust 2024 Edition 的关联 {#五与-rust-2024-edition-的关联}

@@ -136,7 +136,6 @@ let async_closure = async |config: ProcessConfig| -> ProcessResult<u32> {
     Ok(pid)
 };
 ```
-
 ### 2. 改进的模式匹配
 
 ```rust
@@ -148,7 +147,6 @@ match result {
     // ... 更多模式
 }
 ```
-
 ### 3. 现代迭代器
 
 ```rust
@@ -159,7 +157,6 @@ let pids: Vec<u32> = configs
     .map(|config| generate_pid(config))
     .collect();
 ```
-
 ### 4. 改进的错误处理
 
 ```rust
@@ -171,7 +168,6 @@ let result: ProcessResult<()> = (|| -> ProcessResult<()> {
     Ok(())
 })();
 ```
-
 ## 📊 性能提升预期
 
 ### 预期收益

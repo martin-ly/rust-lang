@@ -103,11 +103,9 @@ Brown 书是 TRPL 3rd Ed 的研究分支，核心差异：
 1. **在学习路径中标注 TRPL 3rd Ed 对应章节**
    - 修改 `concept/00_meta/learning_mvp_path.md`，为每个 Day 增加「TRPL 3rd Ed 参考章节」列。
    - 在 `concept/03_advanced/02_async.md` 顶部添加指向 TRPL Ch 17 的链接。
-
 2. **在所有权文档中引用 Brown 研究**
    - 在 `concept/01_foundation/01_ownership.md` 和 `02_borrowing.md` 的「来源与延伸阅读」中补充 Brown 书及其两篇 OOPSLA 论文。
    - 新增「Fixing Ownership Errors」小节，总结 Brown 书中常见的 5 种错误模式与修复策略。
-
 3. **统一 TRPL 来源链接至 3rd Ed**
    - 扫描 `concept/` 中对 `doc.rust-lang.org/book/` 的引用，确保指向稳定版 3rd Ed 的对应章节（而非 2nd Ed 或特定旧版本）。
 
@@ -116,7 +114,6 @@ Brown 书是 TRPL 3rd Ed 的研究分支，核心差异：
 1. **引入 Ownership Inventory 机制**
    - 在 `concept/02_intermediate/` 和 `concept/03_advanced/` 的关键节点（collections / generics / smart pointers / concurrency）后增加「所有权盘点」复习页。
    - 形式：5 道诊断题 + 错误模式索引。
-
 2. **评估 Aquascope 可视化集成**
    - Aquascope 是 Rust 生态工具，可生成 SVG 展示代码行的权限变化。
    - 调研是否可在本项目的 mdBook/GitHub Pages 构建流程中集成 Aquascope，或先用静态图片替代。

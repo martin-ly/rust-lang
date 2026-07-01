@@ -89,7 +89,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 1.2 改进的模式匹配
 
 Rust 1.90 增强了模式匹配能力，特别是在进程状态处理方面。
@@ -115,7 +114,6 @@ fn handle_process_status(status: ExitStatus) {
     }
 }
 ```
-
 ### 1.3 改进的迭代器
 
 Rust 1.90 改进了迭代器性能，特别适用于处理大量进程输出。
@@ -149,7 +147,6 @@ fn process_output_lines() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 1.4 改进的错误处理
 
 Rust 1.90 提供了更好的错误处理机制。
@@ -175,7 +172,6 @@ async fn robust_process_execution() -> Result<String, Box<dyn Error>> {
     }
 }
 ```
-
 ### 1.5 新的生命周期特性
 
 Rust 1.90 引入了改进的生命周期推断和更灵活的生命周期管理。
@@ -215,7 +211,6 @@ async fn enhanced_process_management() -> Result<(), Box<dyn std::error::Error>>
     Ok(())
 }
 ```
-
 ### 1.6 改进的宏系统
 
 Rust 1.90 改进了宏系统，提供更好的进程管理宏支持。
@@ -252,7 +247,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ## 2. 标准库 Process 模块增强
 
 ### 2.1 异步进程管理
@@ -278,7 +272,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 2.2 改进的进程监控
 
 ```rust
@@ -308,7 +301,6 @@ async fn monitor_process_with_timeout() -> Result<(), Box<dyn std::error::Error>
     Ok(())
 }
 ```
-
 ### 2.3 增强的进程间通信
 
 ```rust
@@ -344,7 +336,6 @@ async fn enhanced_ipc_example() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 2.4 新的进程属性控制
 
 Rust 1.90 增强了进程属性控制能力。
@@ -412,7 +403,6 @@ fn cross_platform_process_attributes() -> Result<(), Box<dyn std::error::Error>>
     Ok(())
 }
 ```
-
 ### 2.5 改进的 I/O 重定向
 
 ```rust
@@ -478,7 +468,6 @@ async fn streaming_io_processing() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ## 3. 性能优化特性
 
 ### 3.1 零拷贝数据传输
@@ -508,7 +497,6 @@ fn zero_copy_example() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 3.2 内存池优化
 
 ```rust
@@ -553,7 +541,6 @@ impl ProcessPool {
     }
 }
 ```
-
 ### 3.3 并发优化
 
 Rust 1.90 提供了更好的并发优化特性。
@@ -687,7 +674,6 @@ impl WorkStealingScheduler {
     }
 }
 ```
-
 ### 3.4 CPU 亲和性设置
 
 ```rust
@@ -813,7 +799,6 @@ impl IntelligentLoadBalancer {
     }
 }
 ```
-
 ## 4. 安全增强
 
 ### 4.1 改进的权限控制
@@ -845,7 +830,6 @@ fn secure_process_execution() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 4.2 沙箱执行
 
 ```rust
@@ -877,7 +861,6 @@ async fn sandboxed_execution() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 4.3 内存安全增强
 
 Rust 1.90 提供了更强的内存安全保障。
@@ -1100,7 +1083,6 @@ impl MemoryLeakDetector {
     }
 }
 ```
-
 ### 4.4 进程隔离
 
 ```rust
@@ -1342,7 +1324,6 @@ impl ProcessIsolationManager {
     }
 }
 ```
-
 ## 5. 现代库生态集成
 
 ### 5.1 Tokio 1.0+ 集成
@@ -1482,7 +1463,6 @@ impl TokioProcessPool {
     }
 }
 ```
-
 ### 5.2 Async-Std 2.0 特性
 
 Async-Std 2.0 提供了标准库风格的异步进程管理。
@@ -1610,7 +1590,6 @@ impl AsyncStdProcessGroup {
     }
 }
 ```
-
 ### 5.3 现代进程管理库
 
 集成现代进程管理库，提供更高级的功能。
@@ -1815,7 +1794,6 @@ pub struct ProcessRequirements {
     pub simple_api: bool,
 }
 ```
-
 ## 6. 实际应用示例
 
 ### 5.1 高性能进程管理器
@@ -1867,7 +1845,6 @@ impl HighPerformanceProcessManager {
     }
 }
 ```
-
 ### 5.2 智能进程监控系统
 
 ```rust
@@ -1945,7 +1922,6 @@ struct ProcessResources {
     memory_mb: u64,
 }
 ```
-
 ## 6. 最佳实践
 
 ### 6.1 错误处理策略
@@ -2006,7 +1982,6 @@ pub struct ProcessResult {
     pub execution_time: Duration,
 }
 ```
-
 ### 6.2 资源管理
 
 ```rust
@@ -2072,7 +2047,6 @@ impl ResourceManager {
     }
 }
 ```
-
 ## 7. 总结
 
 Rust 1.90 版本为进程管理带来了显著的改进：

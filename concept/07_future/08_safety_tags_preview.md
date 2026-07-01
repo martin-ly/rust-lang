@@ -89,7 +89,6 @@ pub unsafe fn read_bytes(ptr: *const u8, count: usize) -> Vec<u8> {
     // ...
 }
 ```
-
 > **当前局限**: `/// # Safety` 注释是**纯文本**——编译器不理解，工具无法验证，AI 难以遵循。
 > [来源: [Rust Reference — Unsafe Functions](https://doc.rust-lang.org/reference/items/functions.html)]
 
@@ -105,7 +104,6 @@ pub unsafe fn read_bytes(ptr: *const u8, count: usize) -> Vec<u8> {
     // ...
 }
 ```
-
 ---
 
 ### 1.2 Safety Tags 的设计目标
@@ -126,7 +124,6 @@ graph LR
         E -->|✅ AI 遵循| I[生成代码有契约]
     end
 ```
-
 > **认知功能**: 此图展示 Safety Tags 的**三重受众**——人类开发者、编译器/工具、AI 生成系统。当前文本注释只能服务人类；Safety Tags 同时服务三者。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 设计 Safety Tags 时，需同时考虑人类可读性和机器可解析性。纯逻辑表达式对人类不友好，需要注释+标注的混合形式。
@@ -165,7 +162,6 @@ Safety Tags 的核心是**霍尔逻辑**（Hoare Logic）的三元组：
   C = 代码 (command)
   Q = 后置条件 (postcondition)
 ```
-
 > **形式化映射**:
 >
 > - `requires:` → 前置条件 P
@@ -192,7 +188,6 @@ graph TD
     A --> G[文本注释时代: 无验证]
     G --> H[仅依赖人工审查]
 ```
-
 > **认知功能**: 此图展示 Safety Tags 在整个 Rust 安全验证生态中的**枢纽位置**——它是连接人工契约、静态检查、动态检测、形式化证明和 AI 生成的中间层。
 > **使用建议**: Safety Tags 的设计应兼容多种下游工具：编译器检查语法、BorrowSanitizer 检查运行时（Runtime）、Kani/Prusti 证明形式化属性。
 > **关键洞察**: Safety Tags 不是独立的验证工具，而是**契约的通用表示格式**——类似于类型签名之于类型检查器。
@@ -214,7 +209,6 @@ AI 代码生成场景:
 ├── BorrowSanitizer 检查: 运行时契约满足 ✅
 └── 人类审查: 关注复杂逻辑，而非基础契约
 ```
-
 > **关键洞察**: Safety Tags 使 AI 生成代码的**安全边界**显式化、可验证化。这是 AI × Rust 集成的关键基础设施。
 > [来源: [AI Integration in Rust](https://blog.rust-lang.org/inside-rust/)]
 
@@ -234,7 +228,6 @@ pub unsafe fn kernel_spinlock_acquire(lock: *mut spinlock_t) -> Result<Guard, Er
     // ...
 }
 ```
-
 > **需求驱动**: Rust for Linux 项目需要明确的 unsafe 契约来通过内核代码审查。Safety Tags 可将隐式契约转化为显式、可检查的标注。
 > [来源: [Rust for Linux](https://rust-for-linux.com/)]
 
@@ -254,7 +247,6 @@ unsafe extern "C" {
     // ^ safe 表示调用者无需 unsafe 块
 }
 ```
-
 Safety Tags 将在此基础上扩展**前置/后置条件**：
 
 ```ignore
@@ -263,7 +255,6 @@ unsafe extern "C" {
     safe fn strlen(s: *const c_char) -> usize;
 }
 ```
-
 ---
 
 ## 四、反命题与边界分析
@@ -288,7 +279,6 @@ graph TD
     style FALSE2 fill:#ffebee
     style FALSE3 fill:#ffebee
 ```
-
 > **认知功能**: 此决策树揭示 Safety Tags 的**能力边界**——即使契约可机器验证，契约本身的正确性仍需人类保证。
 > **使用建议**: Safety Tags 降低但不消除人工审查需求。审查重点从"基础契约"转向"复杂不变量"和"工具未覆盖的边界"。
 > **关键洞察**: Safety Tags 的价值不是"消除审查"，而是"将审查提升到更高抽象层次"。
@@ -314,7 +304,6 @@ graph TD
 ├── 现有代码迁移 — 大量 unsafe 代码无 Safety Tags
 └── 社区共识 — RFC 需要广泛支持
 ```
-
 > **边界要点**: Safety Tags 的最大挑战不是技术实现，而是**社区采纳**和**与现有生态的集成**。需要与 Miri、BorrowSanitizer、Kani 等工具形成统一的契约语义。
 > [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
@@ -394,7 +383,6 @@ fn safe_use(ptr: *mut u8) {
     unsafe { *ptr = 0; }
 }
 ```
-
 > **修正**:
 > Safety Tags（实验性概念）是为 unsafe 代码提供形式化安全契约的元数据系统。
 > 函数或模块（Module）标记为 `"memory-safe"`、`"thread-safe"`、`"panic-safe"` 等，静态分析工具验证代码行为与标签一致。
@@ -419,7 +407,6 @@ fn safe_add(a: i32, b: i32) -> i32 {
     a.wrapping_add(b) // ✅ 显式处理溢出
 }
 ```
-
 > **修正**:
 > `"no-panic"` 标签要求函数在任何输入下都不 panic。
 > Rust 的许多基本操作在 debug 模式下会 panic（整数溢出、数组越界、除零），在 release 模式下则回绕（wrap）或产生 UB（`get_unchecked`）。
@@ -445,7 +432,6 @@ fn main() {
     safe_function();
 }
 ```
-
 > **修正**:
 > Safety Tags 是 Rust 安全代码 WG 提出的实验性概念，但目前**无编译器支持**，无标准语义。
 > 标签如 `"memory-safe"`、`"thread-safe"`、`"no-panic"` 是声明式的，工具（lint、验证器）可选择性识别。
@@ -476,7 +462,6 @@ fn main() {
     wrapper();
 }
 ```
-
 > **修正**:
 >
 > 安全标签是**信任机制**，非**验证机制**：开发者声明代码满足某些安全属性，但编译器不自动验证（除非结合 Kani/Prusti 等工具）。
@@ -507,7 +492,6 @@ fn main() {
 
 fn main() {}
 ```
-
 > **修正**:
 >
 > **Safety Tags** 是 Rust 形式化验证的前沿方向：

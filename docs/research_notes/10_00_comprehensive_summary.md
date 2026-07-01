@@ -1,12 +1,10 @@
 # Rust 研究笔记：完整总结综合 {#rust-研究笔记完整总结综合}
 >
 > **概念族**: 元/导航/索引
-
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -94,7 +92,6 @@
    UNIFIED_SYSTEMATIC_FRAMEWORK                       ← 统一框架
    ARGUMENTATION_GAP_INDEX                            ← 论证缺口
 ```
-
 ### 3.1 按领域一句话 {#31-按领域一句话}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -134,7 +131,6 @@
     │            │            │            │            │
  Def/Axiom     A/L/T/C      推导、引用链   完整证明/思路  导图/矩阵/决策树/反例
 ```
-
 **核心论证链**：
 
 1. **所有权→内存安全**：规则 1–3 → T2 唯一性 → T3 无悬垂/无双重释放/无泄漏

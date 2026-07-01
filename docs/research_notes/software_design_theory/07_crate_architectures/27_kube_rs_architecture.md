@@ -1,3 +1,10 @@
+> **Canonical 说明**: 本文件专注 **kube-rs Kubernetes 客户端、Controller 与 CRD 派生架构**。
+>
+> 若只需要使用指南与生态定位，请优先参考：
+> - [云原生](../../../../concept/06_ecosystem/24_cloud_native.md)
+> - [微服务模式](../../../../concept/06_ecosystem/31_microservice_patterns.md)
+>
+> 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **⚠️ 历史文档提示**：
 >
 > 本文档涉及的 Kubernetes 生态以 `kube-rs` crate 为主。
@@ -56,7 +63,6 @@ let client = Client::try_default().await?;
 let pods: Api<Pod> = Api::namespaced(client, "default");
 let list = pods.list(&ListParams::default().limit(10)).await?;
 ```
-
 > [来源: [kube-rs Client Examples](https://github.com/kube-rs/kube/tree/main/examples)]
 
 ---
@@ -80,7 +86,6 @@ use kube::{Api, Client};
 let client = Client::try_default().await?;
 let pods: Api<Pod> = Api::namespaced(client, "default");
 ```
-
 > [来源: [kube docs.rs – Api](https://docs.rs/kube/latest/kube/struct.Api.html)]
 
 ### 2.2 Controller / Controller::new {#22-controller-controllernew}
@@ -100,7 +105,6 @@ Controller::new(pods_api, watcher::Config::default())
     })
     .await;
 ```
-
 > [来源: [kube-rs Controller Guide](https://kube.rs/controllers/intro/)]
 
 ### 2.3 Informer 与 watcher {#23-informer-与-watcher}
@@ -119,7 +123,6 @@ while let Some(pod) = stream.next().await {
     // 处理 Applied 事件
 }
 ```
-
 > [来源: [kube docs.rs – watcher](https://docs.rs/kube/latest/kube/runtime/watcher/index.html)]
 
 ### 2.4 CRD 派生 {#24-crd-派生}
@@ -137,7 +140,6 @@ struct MyAppSpec {
     replicas: i32,
 }
 ```
-
 > [来源: [kube-rs CRD Guide](https://kube.rs/controllers/crds/)]
 
 ---

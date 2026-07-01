@@ -16,7 +16,6 @@
 > **前置概念**: [Patterns](02_patterns.md) · [Concurrency Patterns](../03_advanced/10_concurrency_patterns.md) · [Async Patterns](../03_advanced/02_async_patterns.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Distributed Systems](18_distributed_systems.md) · [System Design Principles](05_system_design_principles.md)
 > **主要来源**: [GoF — Design Patterns] · [POSA — Pattern-Oriented Software Architecture] · [Category Theory for Programmers, Bartosz Milewski] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
-
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 ---
@@ -46,7 +45,6 @@
   ⊕ (和/选择):      Pattern A ⊕ Pattern B = 根据条件选择 A 或 B
   → (精炼/细化):    Pattern A → Pattern B = A 是 B 的特化或实现细节
 ```
-
 ### 2.2 并行组合（⊗）：独立共存[来源: [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)]
 
 ```rust,ignore
@@ -71,7 +69,6 @@ impl EventSystem {
     }
 }
 ```
-
 **组合不变量**: 若 Pattern A 和 Pattern B 操作不相交的数据集，则 A ⊗ B 安全。
 
 ### 2.3 串行复合（∘）：流水线
@@ -87,7 +84,6 @@ fn process_request(req: Request) -> Result<Response, Error> {
     Ok(Response::success(persisted))
 }
 ```
-
 **组合不变量**: 若 Pattern A 的输出类型满足 Pattern B 的输入约束，则 A ∘ B 类型安全。[来源: [Rust Type System — Trait Bounds](https://doc.rust-lang.org/reference/type-system.html)]
 
 ### 2.4 选择和（⊕）：条件分支
@@ -114,7 +110,6 @@ impl ResilienceStrategy {
     }
 }
 ```
-
 ### 2.5 精炼（→）：实现细化[来源: [Refactoring Guru — Design Patterns](https://refactoring.guru/design-patterns)]
 
 ```rust,ignore
@@ -144,7 +139,6 @@ impl StrategyCommand {
     }
 }
 ```
-
 ---
 
 ## 三、常见模式组合与冲突矩阵
@@ -202,7 +196,6 @@ impl StrategyCommand {
                 └── 否 → 需要复用对象？
                     └── 是 → Flyweight（享元，共享状态）
 ```
-
 ### 4.2 并发场景的模式选择
 
 ```text
@@ -225,7 +218,6 @@ impl StrategyCommand {
         └── 否 → 数据并行？
             └── 是 → SIMD / GPU（`wgpu`）
 ```
-
 ---
 
 ## 五、Rust 特有的模式组合
@@ -269,7 +261,6 @@ impl Server<Initialized> {
 let server = Server::new().with_port(8080).initialize().start();
 // server.initialize(); // ❌ 编译错误: Server<Running> 没有 initialize 方法
 ```
-
 ### 5.2 Ownership + RAII + Scope Guard：资源安全组合
 
 ```rust
@@ -303,7 +294,6 @@ fn write_atomic(path: &str, data: &[u8]) -> io::Result<()> {
     Ok(())
 }
 ```
-
 ### 5.3 Trait Object + Strategy：动态分发与零成本抽象的融合
 
 ```rust,ignore
@@ -339,7 +329,6 @@ impl DynamicCheckout {
     }
 }
 ```
-
 ---
 
 ## 六、分布式系统的模式组合
@@ -360,7 +349,6 @@ let service = ServiceBuilder::new()
 // 执行顺序: Timeout → Retry → CircuitBreaker → Backend
 // 语义: 先熔断检查 → 再执行（带重试）→ 每次执行带超时
 ```
-
 ### 6.2 Saga 模式：分布式事务的组合
 
 ```rust,ignore
@@ -395,7 +383,6 @@ impl Saga {
     }
 }
 ```
-
 ---
 
 ## 七、反例与边界测试
@@ -427,7 +414,6 @@ impl Service for BadService {
     }
 }
 ```
-
 > **解决方案**: 使用 DI 容器管理单例生命周期（Lifetimes），而非全局 `instance()` 方法。
 
 ### 7.2 边界测试：Observer + Singleton 组合的所有权冲突（编译错误）
@@ -465,7 +451,6 @@ fn main() {
     // 内存泄漏！即使离开作用域也不会释放
 }
 ```
-
 > **解决方案**: 使用 `Weak<RefCell<Subject>>` 打破循环引用（Reference），或改用 `tokio::sync::broadcast` 等无环通道。
 
 ### 7.3 边界测试：模式组合的状态空间爆炸
@@ -497,7 +482,6 @@ enum CircuitState {
 
 // 非法状态: HalfOpen 时 retry_count > 1 → 需要运行时检查
 ```
-
 ---
 
 ## 八、模式组合的定理系统
@@ -507,10 +491,8 @@ enum CircuitState {
 > **定理 C-001** [Tier 3]: 若模式 A 和模式 B 操作不相交的数据集，则 A ⊗ B（并行组合）是类型安全的。
 >
 > **论证**: Rust 的所有权（Ownership）系统保证不相交的数据集不能被同时可变借用（Mutable Borrow）。若 A 和 B 只读取共享数据，或各自操作独立数据，则 `A ⊗ B` 无数据竞争。
-
 > **定理 C-002** [Tier 3]: 若模式 A 的输出类型 `T_A` 满足模式 B 的输入约束 `C_B[T]`，则 `A ∘ B`（串行复合）是类型安全的。
 > **论证**: Rust 的类型系统（Type System）保证函数复合的类型一致性。若 `A: Fn() -> T_A` 且 `B: Fn(T) -> U where T: C_B`，则当 `T_A: C_B` 时，`B(A())` 类型正确。
-
 > **定理 C-003** [Tier 3]: Singleton 与 Dependency Injection 在逻辑上互斥——Singleton 隐藏全局依赖，DI 要求依赖显式化。
 > **论证**: Singleton 模式通过全局访问点隐藏了依赖关系；DI 模式通过构造函数/参数显式注入依赖。二者对"依赖可见性"的哲学相反，不能在同一设计层级同时使用而不引入矛盾。
 
@@ -571,7 +553,6 @@ impl Machine<Running> {
     fn stop(self) -> Machine<Idle> { Machine { _state: std::marker::PhantomData } }
 }
 ```
-
 > **修正**: 类型状态模式（Typestate Pattern）将状态机的状态编码为类型参数，非法的状态转换在编译期被拒绝。这是范畴论中**有限状态机作为类型**的直接应用：状态是类型，转换是函数，可达性由类型系统（Type System）的可达性保证。与运行时（Runtime）状态检查（switch/case）相比，类型状态消除了运行时开销和遗漏分支的可能。来源: [Rust Design Patterns]
 
 ### 10.2 边界测试：组合子模式的所有权链（编译错误）
@@ -594,7 +575,6 @@ fn fixed() {
     println!("{}", inner);
 }
 ```
-
 > **修正**: 组合子模式（Combinator Pattern）通过小函数组合构建复杂行为。Rust 的所有权（Ownership）系统要求组合链中的每个中间结果必须正确传递或释放。部分 move（如 `w.0` 被 move 但 `w` 仍被视为整体）会导致编译错误。解构（`let Wrapper(inner) = w`）是安全的替代方案，它明确声明"消耗整个结构体（Struct），提取其字段"。这与 Haskell 的无限惰性组合链不同——Rust 的组合是严格的、所有权感知的。来源: [The Rust Programming Language]
 
 ### 10.3 边界测试：组合子嵌套过深导致的类型爆炸（编译错误/编译超时）
@@ -625,7 +605,6 @@ fn option_h(_: i32) -> Option<i32> { Some(8) }
 fn option_i(_: i32) -> Option<i32> { Some(9) }
 fn option_j(_: i32) -> Option<i32> { Some(10) }
 ```
-
 > **修正**: `Option`/`Result` 的 `and_then` 嵌套是**组合子模式**，但过度嵌套导致：1) 类型签名膨胀（每个 `and_then` 增加一层泛型（Generics））；2) 编译时间增加（类型推导复杂度）；3) 错误信息难读（10 层嵌套的错误链）。Rust 的替代方案：1) **`?` 运算符**：`let a = option_a()?; let b = option_b(a)?; ...`（扁平化，可读性高）；2) **`async`/`await`**：用异步（Async）组合替代同步组合子；3) **do-notation 宏（Macro）**（如 `try_block!`）。这与 Haskell 的 `do` notation（语法糖扁平化 Monad 嵌套）或 Scala 的 `for` comprehension（类似）不同——Rust 的 `?` 运算符是编译器内建的特殊语法，不是通用 Monad 操作，但提供了等价的扁平化能力。来源: [The Rust Programming Language] · 来源: [Rust Error Handling]
 
 ---
@@ -722,9 +701,7 @@ fn option_j(_: i32) -> Option<i32> { Some(10) }
 | 模式组合代数：设计模式的结构化关联与冲突分析 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 模式组合代数：设计模式的结构化关联与冲突分析 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 模式组合代数：设计模式的结构化关联与冲突分析 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: 模式组合代数：设计模式的结构化关联与冲突分析 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

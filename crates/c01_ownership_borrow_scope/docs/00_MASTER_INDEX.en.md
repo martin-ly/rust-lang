@@ -20,9 +20,9 @@
 
 ### By Role
 
-- **Beginner**: [Quick Start](tier_01_foundations/1.2_快速开始指南.md) | [Glossary](tier_01_foundations/03_术语表.md) | [FAQ](tier_01_foundations/04_常见问题.md)
-- **Intermediate**: [Ownership Guide](tier_02_guides/01_所有权快速入门.md) | [Borrow Checker](tier_03_references/02_借用检查器详解.md) | [Lifetimes](tier_02_guides/03_生命周期实践.md)
-- **Advanced**: [Advanced Ownership](tier_03_references/06_高级所有权模式参考.md) | [Zero-Cost Abstractions](tier_03_references/07_零成本抽象参考.md)
+- **Beginner**: [Quick Start](tier_01_foundations/1.2_quick_start_guide.md) | [Glossary](tier_01_foundations/03_glossary.md) | [FAQ](tier_01_foundations/04_faq.md)
+- **Intermediate**: [Ownership Guide](tier_02_guides/01_ownership_quick_start.md) | [Borrow Checker](tier_03_references/02_borrow_checker_in_depth.md) | [Lifetimes](tier_02_guides/03_lifetimes_practice.md)
+- **Advanced**: [Advanced Ownership](tier_03_references/06_advanced_ownership_patterns_reference.md) | [Zero-Cost Abstractions](tier_03_references/07_zero_cost_abstractions_reference.md)
 
 ### Tier Structure
 

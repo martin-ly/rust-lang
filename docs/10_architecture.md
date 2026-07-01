@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
-
 > **版本**: Rust 1.96.0
 > **Edition**: 2024
 > **最后更新**: 2026-04-10
@@ -123,7 +122,6 @@ graph TB
     C11 --> COMMON
     C12 --> COMMON
 ```
-
 ---
 
 ## Crate 关系图 {#crate-关系图}
@@ -168,7 +166,6 @@ flowchart LR
     C01 --> SERDE
     C06 --> TRACING
 ```
-
 ### Crate 特性矩阵 {#crate-特性矩阵}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -281,7 +278,6 @@ graph TB
     C10_Lib --> C10_WS
     C10_Lib --> C10_GRPC
 ```
-
 ---
 
 ## 数据流图 {#数据流图}
@@ -324,7 +320,6 @@ flowchart LR
     F --> J
     G --> K
 ```
-
 ### 运行时数据流（以异步模块为例） {#运行时数据流以异步模块为例}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -347,7 +342,6 @@ sequenceDiagram
     Task->>Res: 处理结果
     Res-->>Main: 返回最终结果
 ```
-
 ---
 
 ## 架构决策记录 {#架构决策记录}
@@ -465,19 +459,12 @@ sequenceDiagram
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

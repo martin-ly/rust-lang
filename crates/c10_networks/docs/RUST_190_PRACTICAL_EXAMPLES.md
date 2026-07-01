@@ -270,29 +270,24 @@
   - Monoio: 字节跳动开源运行时，Rent API零拷贝设计
   - Glommio: Datadog运行时，线程本地异步，适合CPU密集+I/O混合
   - 性能对比：传统epoll vs io_uring (延迟降低50-70%，吞吐量提升2-5倍)
-
 - **零拷贝技术深入**
   - sendfile 系统调用：减少2次拷贝
   - splice/mmap：真正的零拷贝
   - io_uring Fixed Buffers：预注册缓冲区，避免虚拟地址映射
   - 性能对比：4种方法完整测试代码
-
 - **HTTP/3 和 QUIC 深入**
   - 完整HTTP/3服务器和客户端实现
   - 0-RTT连接建立：减少握手延迟
   - 连接迁移：WiFi↔4G无感知切换
   - QUIC高级特性：多流并发、流级重传
-
 - **内核旁路技术**
   - AF_XDP：10Gbps+线速包处理，<10μs延迟
   - eBPF网络监控：XDP程序、Aya框架
   - 与DPDK性能对比
-
 - **综合实战**
   - 基于io_uring的零拷贝高性能文件服务器
   - 实时监控指标
   - 生产级代码示例
-
 - **技术选型指南**
   - Web API服务
   - 高性能文件服务器
@@ -455,7 +450,6 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $m
               ↓
          生产项目
 ```
-
 ---
 
 ## 💡 使用建议

@@ -65,7 +65,6 @@ fn collision_detection(
     }
 }
 ```
-
 **关键决策**:
 
 - 引擎: Bevy（数据驱动 ECS，编译期系统调度）
@@ -118,7 +117,6 @@ impl Renderer {
     }
 }
 ```
-
 **关键决策**:
 
 - 渲染: wgpu（WebGPU 标准，Vulkan/Metal/DX12 抽象）
@@ -166,7 +164,6 @@ async fn game_server() {
     }
 }
 ```
-
 **关键决策**:
 
 - 网络: `tokio` + 自定义 UDP 协议

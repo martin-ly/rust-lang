@@ -109,7 +109,6 @@ Hoare 三元组的形式化定义:
   │ Rust 工具   │ 借用检查器              │ Prusti/Creusot/Kani     │
   └─────────────┴─────────────────────────┴─────────────────────────┘
 ```
-
 > **认知功能**: Hoare 三元组是**程序验证的原子单位**——它将"程序正确性"这一模糊概念转化为可验证的数学陈述：给定前提，执行代码，得到保证。这与 Rust 类型系统（Type System）的"给定输入类型，执行函数，得到输出类型"在结构上同构。
 > [来源: [Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1093/comjnl/12.4.576)]
 
@@ -145,7 +144,6 @@ Hoare 三元组的形式化定义:
   }
   // 等价 Hoare 三元组: {x > 0} increment(x) {result > 1}
 ```
-
 > **认知功能**: WP 演算的**核心洞察**——它不是"验证程序是否满足规格"，而是"从规格反向推导出程序必须满足的前提"，这种"反向推理"是自动化验证的基础。
 > [来源: [Dijkstra 1976 — A Discipline of Programming](https://dl.acm.org/doi/book/10.5555/1243380)]
 
@@ -182,7 +180,6 @@ Hoare 三元组的形式化定义:
   │         sum' == arr[0..i'].iter().sum() ✅
   └── 终止: i >= arr.len() ∧ I → sum == arr[0..arr.len()].iter().sum() ✅
 ```
-
 > **认知功能**: 循环不变量的**本质**——它不是"循环做什么"的操作描述，而是"循环维护了什么性质"的逻辑刻画。找到好的不变量需要理解循环的"目的"而非"步骤"。
 > [来源: [Floyd 1967 — Assigning Meanings to Programs](https://doi.org/10.1007/978-94-011-1793-7_4)]
 
@@ -229,7 +226,6 @@ Hoare 三元组的形式化定义:
   ├── 后置: 返回值 > 0
   └── 等价: {x: i32 ∧ x > 0} foo(x) {result: i32 ∧ result > 0}
 ```
-
 > **认知功能**: Hoare 规则系统的**组合性**——复杂程序的正确性可以从简单命令的正确性推导而来，这与 Rust 类型系统的"从小类型构建大类型"（组合子逻辑）在方法论上同构。
 > [来源: [Hoare 1969](https://doi.org/10.1093/comjnl/12.4.576)]
 
@@ -264,7 +260,6 @@ Hoare 逻辑的局限性 → 分离逻辑的扩展:
   │ frame rule      │ 借用检查器的局部推理    │
   └─────────────────┴─────────────────────────┘
 ```
-
 ```mermaid
 graph LR
     A[Hoare Logic<br/>1969] --> B{指针程序?}
@@ -275,7 +270,6 @@ graph LR
     F --> G[Rust Ownership<br/>借用检查器]
     G --> H[自动化验证<br/>Prusti/Creusot]
 ```
-
 > **认知功能**: 从 Hoare 到分离逻辑的演进揭示了**形式化方法如何响应实践需求**——经典 Hoare 逻辑无法优雅处理别名，分离逻辑通过"资源分离"的原语解决了这一问题，而 Rust 的 ownership 系统可以看作是分离逻辑的工程化实现。
 > [来源: [Reynolds 2002 — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf)]
 
@@ -321,7 +315,6 @@ Rust unsafe 代码的 Hoare 三元组视角:
   │ 逻辑正确性      │ 函数语义符合预期        │
   └─────────────────┴─────────────────────────┘
 ```
-
 > **认知功能**: 用 Hoare 逻辑审视 unsafe Rust，可以发现**借用（Borrowing）检查器本质上是一个自动化的 Hoare 验证器**——它为 safe Rust 自动生成并验证前置/后置条件，而 unsafe Rust 将这些责任显式交还给开发者。
 > [来源: [The Rustonomicon — What Unsafe Can Do](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)]
 
@@ -369,7 +362,6 @@ Rust unsafe 代码的 Hoare 三元组视角:
   ├── 自动: ❌ 手动证明
   └── 局限: 人月级成本
 ```
-
 > **认知功能**: 形式化验证的**成本-精度权衡**——完全自动化但能力受限（类型系统），到表达能力无限但需人工证明（Coq），中间存在连续光谱，工具选择取决于安全关键程度和时间预算。
 > [来源: [Verification Toolchain Selection Guide](05_verification_toolchain.md)]
 
@@ -407,7 +399,6 @@ Rust unsafe 代码的 Hoare 三元组视角:
 > [来源: [Floyd 1967](https://doi.org/10.1007/978-94-011-1793-7_4)]
 > [来源: [Wikipedia — Loop Invariant](https://en.wikipedia.org/wiki/Loop_invariant)]
 ```
-
 > **认知功能**: 反命题分析揭示了形式化方法的**能力边界**——Hoare 逻辑是框架而非万能药，需要人类提供创造性洞察（不变量），工具只负责验证推导。
 > [来源: [TAPL — Undecidability](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 
@@ -434,7 +425,6 @@ Rust unsafe 代码的 Hoare 三元组视角:
   ├── 并发: 分离逻辑可处理，但验证成本高
   └── 极限: 标准库 unsafe 代码的完全形式化是 RustBelt 的目标，尚未完成
 ```
-
 > **认知功能**: 边界极限指明了从 Hoare 逻辑到工业验证的**现实差距**——理论上的"可验证"不等于实践中的"已验证"，工具链、规格工程和人类洞察都是关键瓶颈。
 > [来源: [RustBelt — Limitations](https://plv.mpi-sws.org/rustbelt/)]
 
@@ -488,7 +478,6 @@ Rust unsafe 代码的 Hoare 三元组视角:
      // 规格即文档，文档即代码
 > [来源: [Continuous Verification](https://www.verifythis.org/)]
 ```
-
 > **陷阱总结**: Hoare 逻辑应用的陷阱集中在**正确性层次混淆**、**不变量设计**、**unsafe 契约**、**运行时（Runtime） vs 编译期验证**和**规格同步**五个方面——每个都反映了形式化方法从理论到实践的鸿沟。
 > [来源: [Prusti User Guide](https://www.pm.inf.ethz.ch/research/prusti.html)]
 
@@ -537,7 +526,6 @@ graph TD
         J --> K[Formal Tools<br/>Prusti/Creusot/Kani]
     end
 ```
-
 ## 相关概念文件
 
 - [Ownership Formalization](03_ownership_formal.md) — 所有权形式化理论
@@ -592,7 +580,6 @@ fn divide_fixed(a: i32, b: NonZeroI32) -> i32 {
     a / b.get() // ✅ b 保证非零
 }
 ```
-
 > **修正**:
 > Hoare 逻辑的三元组 `{P} C {Q}` 中，前置条件 `P` 和后置条件 `Q` 是逻辑断言。
 > Rust 的类型系统可部分编码这些条件：`NonZeroI32` 类型编码 `b ≠ 0` 的前置条件，`Result<T, E>` 编码可能失败的后置条件。
@@ -620,7 +607,6 @@ fn find_max(arr: &[i32]) -> Option<i32> {
     Some(max)
 }
 ```
-
 > **修正**:
 > Hoare 逻辑要求循环具有**不变量**（invariant）——在每次迭代前后保持为真的断言。
 > `find_max` 的循环不变量是 `max = max(arr[0..i])`（`max` 是已遍历部分的最大值）。
@@ -643,7 +629,6 @@ fn drain_map(map: &mut std::collections::HashMap<i32, String>) {
     }
 }
 ```
-
 > **修正**:
 > 霍尔逻辑中的循环不变量（loop invariant）要求在循环体执行前后保持某个断言。
 > Rust 的借用（Borrowing）检查在 `while let` 中隐式追踪不变量：
@@ -671,7 +656,6 @@ fn abs(x: i32) -> i32 {
 // ❌ 验证失败: x = i32::MIN 时，-x 溢出（panic 或 wrapping）
 //  weakest precondition 应要求 x != i32::MIN
 ```
-
 > **修正**:
 > weakest precondition（WP）演算从后向前推导程序的前置条件。
 > `abs` 的规范 `ensures(ret >= 0)` 要求：
@@ -703,7 +687,6 @@ fn gcd(a: u32, b: u32) -> u32 {
 // ❌ 验证失败: 自动工具难以发现循环不变量
 // 不变量: gcd(x, y) == gcd(a, b) && x >= 0 && y >= 0
 ```
-
 > **修正**:
 > 霍尔逻辑中，**循环不变量**（loop invariant）是证明循环正确性的关键：在每次迭代前后保持为真的断言。
 > 发现不变量通常是**人类智慧**的任务——自动工具（Dafny、Why3）可验证给定的不变量，但难以自动发现。
@@ -727,7 +710,6 @@ fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
 
 fn main() {}
 ```
-
 > **修正**: **生命周期（Lifetimes）标注**：1) `&'a str` 表示引用（Reference）至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
 
 ## 嵌入式测验（Embedded Quiz）
@@ -799,7 +781,6 @@ while i < n {
 }
 // 目标: sum == n * (n - 1) / 2
 ```
-
 - A. `sum == i * (i - 1) / 2 && 0 <= i <= n`
 - B. `sum == i * (i + 1) / 2`
 - C. `sum == 0`
@@ -841,7 +822,6 @@ fn divide(a: i32, b: NonZeroI32) -> i32 {
     a / b.get() // 安全：b 保证非零
 }
 ```
-
 Hoare 逻辑视角：
 
 - `NonZeroI32` 的构造前提 `b ≠ 0` —— **前置条件**

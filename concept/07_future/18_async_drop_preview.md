@@ -103,7 +103,6 @@
   ├── 文件未 flush → 数据丢失
   └── 网络流未 shutdown → 对端收到 RST 而非 FIN
 ```
-
 > **核心问题**: Rust 的 `Drop::drop` 是**同步接口**，但现代异步资源需要**异步关闭**。这是 Rust async 生态的**语义鸿沟**。
 > [来源: [Rust Internals — Async Drop Discussion](https://internals.rust-lang.org/t/asynchronous-destructors/11127)]
 
@@ -141,7 +140,6 @@ AsyncDrop 的提案设计（Async Drop Initiative，简化版）:
   2. 如果类型只实现 Drop:
      └── 调用同步 drop()
 ```
-
 > **认知功能**: AsyncDrop 的核心设计挑战是**双重保证**——既要在正常情况下优雅关闭，又要在异常情况下（内存损坏、executor 关闭）安全清理。
 > **关键洞察**: 这与 C++ 析构函数的**不抛异常保证**类似——析构必须完成，即使部分资源无法优雅释放。
 > [来源: [Async Drop Initiative](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/async_drop.html)]
@@ -173,7 +171,6 @@ AsyncDrop 与 Pin 的复杂关系:
   ├── Bar 的 drop 可能在 await 点触发
   └── 编译器需确保 Bar::async_drop 在正确的 executor 上执行
 ```
-
 > **Pin 交互洞察**: AsyncDrop 与 Pin 的交互是设计中最复杂的部分——它涉及**自引用（Reference）类型的安全销毁**、**executor 上下文传递**和**编译期代码生成**三个层面的协调。
 > [来源: [Tracking Issue #126482](https://github.com/rust-lang/rust/issues/126482)]
 
@@ -232,7 +229,6 @@ impl<T: AsyncClose> Drop for CloseOnDrop<T> {
     }
 }
 ```
-
 > **Workaround 评价**: 当前 workaround 都是**部分解决方案**——要么依赖程序员记住调用 close()，要么将异步关闭委托给运行时（Runtime）（可能不可靠）。没有一种方案能像 AsyncDrop 那样在编译期保证正确性。
 > [来源: [Tokio Documentation — Graceful Shutdown](https://docs.rs/tokio/latest/tokio/runtime/struct.Runtime.html#method.shutdown_timeout)]
 
@@ -267,7 +263,6 @@ impl<T: AsyncClose> Drop for CloseOnDrop<T> {
 │ }
 └── 编译器需要生成包含 await 的 Err 清理代码
 ```
-
 > **实现洞察**: AsyncDrop 的**最大挑战**不是 trait 设计，而是**编译器和运行时的集成**——它需要在编译期生成正确的异步销毁代码，同时保证在所有边界条件下（panic、executor 关闭）都能安全执行。
 > [来源: [Without Boats — Async Drop](https://without.boats/blog/let-futures-be-futures/)]
 
@@ -299,7 +294,6 @@ graph TD
     style SYNC fill:#fff3e0
     style FALLBACK fill:#ffcdd2
 ```
-
 > **认知功能**: 此图展示 AsyncDrop 的**多层级回退策略**。正常路径优先异步优雅关闭，异常路径回退到同步清理，极端异常（内存损坏）使用最小化 fallback。
 > **使用建议**: 当前代码应同时实现 `Drop`（同步 fallback）和显式 `close()`（异步优雅），为未来的 AsyncDrop 做准备。
 > **关键洞察**: AsyncDrop 不会**替代** Drop，而是**扩展**它——类似 `async fn` 不替代 `fn`，而是增加异步能力。
@@ -328,7 +322,6 @@ Panic 中的资源清理:
   → 当前: Drop 同步清理
   → 未来: 如果 unwind 允许，尝试 AsyncDrop；否则 Drop fallback
 ```
-
 > **演进路径**: AsyncDrop 的落地将**消除大量 boilerplate**——不再需要手动调用 close()，不再需要 Drop Guard 模式，不再需要运行时依赖的异步清理。
 > [来源: [Rust Async Working Group Roadmap](https://rust-lang.github.io/async-fundamentals-initiative/roadmap.html)]
 
@@ -352,7 +345,6 @@ graph TD
     style SYNC fill:#fff3e0
     style BLOCK fill:#ffcdd2
 ```
-
 > **认知功能**: 此决策树判断是否应等待 AsyncDrop。核心判断标准是**是否需要优雅关闭**和**是否在异步上下文中**。
 > **使用建议**: 不在异步上下文中时，同步 Drop 或显式 block_on 可能是更安全的选择。
 > **关键洞察**: AsyncDrop 不是银弹——它增加了复杂度（需要 executor），在不需要优雅关闭的场景下是过度设计。
@@ -388,7 +380,6 @@ graph TD
 ├── 可能需要 FFI 边界强制使用同步 Drop
 └── 这与 Drop 的 C ABI 兼容性相关
 ```
-
 > **边界要点**: AsyncDrop 的边界主要与**编译期代码生成**、**? 运算符语义**、**Pin 不动性**和**FFI 兼容性**相关。这些边界反映了将同步销毁模型扩展到异步世界的根本性挑战。
 
 ---
@@ -440,7 +431,6 @@ graph TD
 
   ✅ 保持异步边界清晰，同步代码不使用需要优雅关闭的异步资源
 ```
-
 > **陷阱总结**: AsyncDrop 相关的主要陷阱源于**当前异步销毁的不完善**——程序员需要在同步 Drop 的限制下模拟异步行为，这导致了各种 workaround 和潜在问题。
 > [来源: [Tokio Best Practices](https://docs.rs/tokio/latest/tokio/)]
 
@@ -513,7 +503,6 @@ fn main() {
     // ❌ 编译错误: 同步作用域结束不能 .await
 } // res 在这里 drop，但 main 是 sync 函数
 ```
-
 > **修正**:
 > `async drop`（[Async Drop Initiative](https://github.com/rust-lang/rust/issues/126482)）允许析构函数执行异步操作（`.await`），但要求 drop 发生在异步上下文中。
 > 同步函数（`fn main()`）中，值在作用域结束时自动 drop，无法 `.await`。
@@ -542,7 +531,6 @@ impl AsyncDrop for Guard {
 
 async fn some_condition() -> bool { true }
 ```
-
 > **修正**:
 > 异步析构中的 panic 处理比同步析构更复杂。同步 `Drop::drop` 中 panic 导致双重 panic → `abort`，这是 Rust 的现有行为。
 > 异步析构增加了状态机挂起/恢复的可能性：若 async drop 在 `.await` 点被取消（task aborted），析构可能未完成。
@@ -575,7 +563,6 @@ fn main() {
     // 异步资源永不被清理
 }
 ```
-
 > **修正**:
 >
 > `std::mem::forget` 故意阻止值的析构，是安全的（不 unsafe），但导致资源泄漏。
@@ -610,7 +597,6 @@ fn main() {
     panic!("main failed");
 }
 ```
-
 > **修正**:
 > `AsyncDrop` 中的 panic 处理比同步 `Drop` 更复杂：
 >
@@ -648,7 +634,6 @@ async fn use_resource() {
 
 fn main() {}
 ```
-
 > **修正**:
 >
 > Rust 当前**不支持 async drop**：`Drop::drop` 是同步方法，不能 `await`。

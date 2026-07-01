@@ -52,7 +52,6 @@ fn main() {
     println!("{s1}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -81,7 +80,6 @@ fn take_ownership(s: String) {
     println!("{s}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -100,7 +98,6 @@ fn take_ownership(s: &String) {
     println!("{s}");
 }
 ```
-
 1. **显式克隆**（有堆分配成本）：
 
 ```rust,ignore
@@ -108,7 +105,6 @@ let s = String::from("hello");
 take_ownership(s.clone());
 println!("{s}");
 ```
-
 **知识点**：通过引用（Reference）借用（Borrowing）可以避免所有权（Ownership）转移。→ 借用详解
 
 </details>
@@ -149,7 +145,6 @@ fn main() {
     println!("{r1} {r2}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -172,7 +167,6 @@ fn main() {
     println!("{r2}");
 }
 ```
-
 **知识点**：Rust 借用（Borrowing）检查器通过作用域分析（而非运行时（Runtime）锁）保证内存安全（Memory Safety）。[→ 借用规则详解](02_borrowing.md)
 
 </details>
@@ -190,7 +184,6 @@ fn main() {
     println!("{r1} {r2} {r3}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -212,7 +205,6 @@ fn main() {
     println!("{r3}");
 }
 ```
-
 **知识点**：Rust 使用**非词法生命周期（NLL）**分析引用（Reference）的实际使用位置，而非仅依赖词法作用域。[→ NLL 与 Polonius](../03_advanced/08_nll_and_polonius.md)
 
 </details>
@@ -227,7 +219,6 @@ fn dangle() -> &String {
     &s
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -245,7 +236,6 @@ fn no_dangle() -> String {
     s // 移动所有权，而非返回引用
 }
 ```
-
 **知识点**：Rust 通过**生命周期（lifetime）**系统跟踪引用的有效范围，确保引用永不超出被引用数据的生命周期。[→ 生命周期详解](03_lifetimes.md)
 
 </details>
@@ -261,7 +251,6 @@ fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -276,7 +265,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
-
 **语义**：返回的引用生命周期（Lifetimes）至少与 `x` 和 `y` 中**较短的那个**一样长。
 
 **知识点**：生命周期（Lifetimes）标注不改变运行时（Runtime）代码，仅向编译器提供**借用关系约束**。→ 生命周期语法
@@ -302,7 +290,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -324,7 +311,6 @@ fn main() {
     }
 }
 ```
-
 **知识点**：生命周期约束遵循"**最小公约数**"原则——返回引用的有效期不超过任何输入引用的有效期。[→ 生命周期详解](03_lifetimes.md)
 
 </details>
@@ -343,7 +329,6 @@ fn main() {
     println!("{first}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -363,7 +348,6 @@ fn main() {
     println!("{first}");
 }
 ```
-
 **知识点**：`Vec::push` 可能触发重新分配，因此 Rust 禁止在存在元素引用时修改 `Vec`。[→ 集合类型详解](08_collections.md)
 
 </details>
@@ -382,7 +366,6 @@ fn main() {
     println!("{}", Rc::strong_count(&data));
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -394,7 +377,6 @@ fn main() {
 shared shared
 2
 ```
-
 **解析**：
 
 - `Rc<T>`（Reference Counted）提供**单线程共享所有权**

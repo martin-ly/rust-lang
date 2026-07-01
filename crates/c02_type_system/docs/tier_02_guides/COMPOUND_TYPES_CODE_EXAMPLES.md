@@ -107,7 +107,6 @@ fn json_example() {
     }
 }
 ```
-
 ---
 
 ### 案例 6: 状态机（游戏角色）
@@ -257,7 +256,6 @@ fn character_example() {
     println!("Final position: {:?}", hero.position);
 }
 ```
-
 ---
 
 ### 案例 7: 类型安全的单位系统
@@ -359,7 +357,6 @@ fn physics_example() {
     // let wrong = speed * distance;
 }
 ```
-
 ---
 
 ### 案例 8: 构建器模式（高级）
@@ -534,7 +531,6 @@ fn builder_example() -> Result<(), BuilderError> {
     Ok(())
 }
 ```
-
 ---
 
 ## 📊 性能优化进阶
@@ -592,7 +588,6 @@ fn layout_example() {
     // PackedLayout size: 10 bytes (但访问速度可能变慢)
 }
 ```
-
 ---
 
 ### 枚举判别式优化
@@ -640,7 +635,6 @@ fn discriminant_example() {
     println!("Error code: {}", code.as_u16());
 }
 ```
-
 ---
 
 ## 🔥 高级模式匹配技巧
@@ -666,7 +660,6 @@ fn process_media(msg: Message) {
     }
 }
 ```
-
 ---
 
 ### 范围模式
@@ -690,7 +683,6 @@ fn classify_char(c: char) -> &'static str {
     }
 }
 ```
-
 ---
 
 ### 嵌套匹配与解构
@@ -724,7 +716,6 @@ fn handle_response(response: Response) {
     }
 }
 ```
-
 ---
 
 ## 🎯 实战练习题
@@ -798,7 +789,6 @@ fn parser_example() {
     println!("Output: {:?}", parser.get_option("output"));
 }
 ```
-
 ---
 
 **更新日期**: 2025-10-24

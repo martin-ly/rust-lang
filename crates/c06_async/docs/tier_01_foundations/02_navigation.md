@@ -1,0 +1,421 @@
+> **生态状态提示**：
+>
+> 本文档提及 `async-std` 与/或 `wasm32-wasi`。
+> 请注意：
+>
+> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+
+---
+
+# C06 Async 主索引导航
+
+> **文档版本**: Rust 1.92.0+ | **更新日期**: 2025-12-11
+> **文档层级**: Tier 1 - 基础概念 | **文档类型**: 📋 导航索引
+
+---
+
+## 📊 目录
+
+- [C06 Async 主索引导航](#c06-async-主索引导航)
+  - [📊 目录](#-目录)
+  - [🎯 导航总览](#-导航总览)
+  - [📚 Tier 1: 基础概念层](#-tier-1-基础概念层)
+    - [核心文档](#核心文档)
+    - [学习建议](#学习建议)
+  - [📖 Tier 2: 实践指南层](#-tier-2-实践指南层)
+    - [核心指南](#核心指南)
+    - [学习路径](#学习路径)
+    - [推荐阅读顺序](#推荐阅读顺序)
+  - [📘 Tier 3: 技术参考层](#-tier-3-技术参考层)
+    - [核心参考](#核心参考)
+    - [按主题查找](#按主题查找)
+    - [推荐使用场景](#推荐使用场景)
+  - [🚀 Tier 4: 高级主题层](#-tier-4-高级主题层)
+    - [核心主题](#核心主题)
+    - [按主题查找1](#按主题查找1)
+    - [推荐使用场景1](#推荐使用场景1)
+  - [🔬 分析报告区](#-分析报告区)
+  - [📑 附录资源区](#-附录资源区)
+  - [📊 项目报告区](#-项目报告区)
+    - [最新报告](#最新报告)
+    - [历史报告](#历史报告)
+  - [🎯 按场景导航](#-按场景导航)
+    - [我想学习异步编程](#我想学习异步编程)
+    - [我要选择异步运行时](#我要选择异步运行时)
+    - [我要优化性能](#我要优化性能)
+    - [我要构建生产系统](#我要构建生产系统)
+    - [我要理解 Pin 机制](#我要理解-pin-机制)
+  - [📚 按难度导航](#-按难度导航)
+    - [⭐ 入门级 (1-2周)](#-入门级-1-2周)
+    - [⭐⭐ 初级 (2-4周)](#-初级-2-4周)
+    - [⭐⭐⭐ 中级 (1-2月)](#-中级-1-2月)
+    - [⭐⭐⭐⭐ 高级 (2-3月)](#-高级-2-3月)
+    - [⭐⭐⭐⭐⭐ 专家级 (3-6月)](#-专家级-3-6月)
+  - [🎓 学习建议](#-学习建议)
+    - [对于初学者](#对于初学者)
+    - [对于中级开发者](#对于中级开发者)
+    - [对于高级工程师](#对于高级工程师)
+  - [📊 文档完整度](#-文档完整度)
+    - [当前状态](#当前状态)
+  - [🔗 外部资源](#-外部资源)
+    - [官方资源](#官方资源)
+    - [视频教程](#视频教程)
+    - [社区资源](#社区资源)
+  - [📝 文档更新日志](#-文档更新日志)
+
+## 🎯 导航总览
+
+本文档是 **C06 Async 模块**的完整导航系统，提供清晰的文档分类和学习路径。
+
+**快速跳转**:
+
+- [📚 Tier 1: 基础概念层](#-tier-1-基础概念层)
+- [📖 Tier 2: 实践指南层](#-tier-2-实践指南层)
+- [📘 Tier 3: 技术参考层](#-tier-3-技术参考层)
+- [🚀 Tier 4: 高级主题层](#-tier-4-高级主题层)
+- [🔬 分析报告区](#-分析报告区)
+- [📑 附录资源区](#-附录资源区)
+- [📊 项目报告区](#-项目报告区)
+
+---
+
+## 📚 Tier 1: 基础概念层
+
+> **定位**: 快速导航和核心概念入门
+> **受众**: 所有用户
+> **内容**: 4 个核心文档，涵盖项目概览、导航、术语和FAQ
+
+### 核心文档
+
+| 文档                                    | 说明                         | 难度 | 推荐度     |
+| :--- | :--- | :--- | :--- |
+| [01\_项目概览.md](01_project_overview.md)     | 项目总览、特性介绍、快速开始 | ⭐⭐ | ⭐⭐⭐⭐⭐ |
+| [02\_主索引导航.md](02_navigation.md) | 本文档 - 完整导航系统        | ⭐   | ⭐⭐⭐⭐⭐ |
+| [03\_术语表.md](03_glossary.md)         | 50+ 核心术语快速参考         | ⭐   | ⭐⭐⭐⭐   |
+| [04\_常见问题.md](04_faq.md)     | 30+ FAQ 快速解答             | ⭐⭐ | ⭐⭐⭐⭐   |
+
+### 学习建议
+
+```text
+第一次访问？
+└── 先读 01_项目概览 → 理解整体架构
+    └── 再读 02_主索引导航 (本文档) → 了解文档组织
+        └── 浏览 03_术语表 → 熟悉核心术语
+            └── 查阅 04_常见问题 → 解决常见疑惑
+```
+---
+
+## 📖 Tier 2: 实践指南层
+
+> **定位**: 系统化实践指导，从入门到实战
+> **受众**: 实践开发者
+> **内容**: 6 个实践指南，涵盖快速入门到性能优化
+
+### 核心指南
+
+| 文档   | 说明  | 难度 | 推荐度 |
+| :--- | :--- | :--- | :--- |
+| [01\_异步编程快速入门.md](../tier_02_guides/01_异步编程快速入门.md)        | 10分钟上手异步编程        | ⭐⭐     | ⭐⭐⭐⭐⭐ |
+| [02_future_and_executor_mechanisms.md](../tier_02_guides/02_future_and_executor_mechanisms.md) | Future/Poll/Waker 深入    | ⭐⭐⭐   | ⭐⭐⭐⭐⭐ |
+| [03\_异步运行时选择指南.md](../tier_02_guides/03_async_runtime_selection_guide.md)    | Tokio/Smol/async-std [已归档] 对比 | ⭐⭐⭐   | ⭐⭐⭐⭐⭐ |
+| [04\_异步设计模式实践.md](../tier_02_guides/04_async_design_patterns_practice.md)        | Actor/Reactor/CSP 模式    | ⭐⭐⭐   | ⭐⭐⭐⭐   |
+| [05\_异步性能优化指南.md](../tier_02_guides/05_async_performance_optimization_guide.md)        | 性能调优实战技巧          | ⭐⭐⭐⭐ | ⭐⭐⭐⭐   |
+| [06\_异步调试与监控.md](../tier_02_guides/06_async_debugging_and_monitoring.md)            | 调试工具和监控体系        | ⭐⭐⭐   | ⭐⭐⭐⭐   |
+
+### 学习路径
+
+```text
+初学者路径 (2-3周)
+├── 01_异步编程快速入门        (2-3天)
+├── 02_Future与Executor机制     (3-5天)
+└── 03_异步运行时选择指南       (2-3天)
+
+进阶路径 (2-3周)
+├── 04_异步设计模式实践        (1周)
+├── 05_异步性能优化指南        (1周)
+└── 06_异步调试与监控          (3-5天)
+```
+### 推荐阅读顺序
+
+```text
+1. 快速入门 → 理解基本概念
+   │
+2. Future机制 → 理解执行原理
+   │
+3. 运行时选择 → 选择合适工具
+   │
+4. 设计模式 → 学习最佳实践
+   │
+5. 性能优化 → 提升应用性能
+   │
+6. 调试监控 → 掌握调试技巧
+```
+---
+
+## 📘 Tier 3: 技术参考层
+
+> **定位**: 深度技术规范和 API 参考
+> **受众**: 中高级开发者
+> **内容**: 5 个技术参考，涵盖语言特性到性能基准
+
+### 核心参考
+
+| 文档                                                                    | 说明                  | 难度       | 推荐度     |
+| :--- | :--- | :--- | :--- || [01\_异步语言特性参考.md](../tier_03_references/01_async_language_features_reference.md) | Rust 1.92.0+ 完整特性 | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ |
+| [02_tokio_complete_api_reference.md](../tier_03_references/02_tokio_complete_api_reference.md)  | Tokio 深度 API 文档   | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   |
+| [03\_异步生态系统参考.md](../tier_03_references/03_async_ecosystem_reference.md) | 生态全景和库选择      | ⭐⭐⭐     | ⭐⭐⭐⭐   |
+| [04_pin_and_unsafe_reference.md](../tier_03_references/04_pin_and_unsafe_reference.md)    | Pin/Unpin 深度解析    | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   |
+| [05\_性能基准参考.md](../tier_03_references/05_performance_benchmarks_reference.md)         | 基准测试和性能数据    | ⭐⭐⭐     | ⭐⭐⭐     |
+
+### 按主题查找
+
+| 主题              | 相关文档                                                             |
+| :--- | :--- || **Rust 语言特性** | [01\_异步语言特性参考](../tier_03_references/01_async_language_features_reference.md) |
+| **Tokio 使用**    | [02_Tokio完整API参考](../tier_03_references/02_tokio_complete_api_reference.md)  |
+| **生态系统**      | [03\_异步生态系统参考](../tier_03_references/03_async_ecosystem_reference.md) |
+| **Pin/Unsafe**    | [04_Pin与Unsafe参考](../tier_03_references/04_pin_and_unsafe_reference.md)    |
+| **性能数据**      | [05\_性能基准参考](../tier_03_references/05_performance_benchmarks_reference.md)         |
+
+### 推荐使用场景
+
+| 场景                            | 推荐文档                                                             |
+| :--- | :--- || **我要了解 Rust 1.92.0 新特性** | [01\_异步语言特性参考](../tier_03_references/01_async_language_features_reference.md) |
+| **我要深入学习 Tokio**          | [02_Tokio完整API参考](../tier_03_references/02_tokio_complete_api_reference.md)  |
+| **我要选择异步库**              | [03\_异步生态系统参考](../tier_03_references/03_async_ecosystem_reference.md) |
+| **我要理解 Pin 机制**           | [04_Pin与Unsafe参考](../tier_03_references/04_pin_and_unsafe_reference.md)    |
+| **我要对比性能**                | [05\_性能基准参考](../tier_03_references/05_performance_benchmarks_reference.md)         |
+
+---
+
+## 🚀 Tier 4: 高级主题层
+
+> **定位**: 前沿技术和深度分析
+> **受众**: 高级开发者和研究人员
+> **内容**: 5 个高级主题，涵盖并发模式到跨平台编程
+
+### 核心主题
+
+| 文档                                                                  | 说明              | 难度       | 推荐度     |
+| :--- | :--- | :--- | :--- || [01\_异步并发模式.md](../tier_04_advanced/01_async_concurrency_patterns.md)         | 高级并发设计模式  | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| [02\_异步系统架构.md](../tier_04_advanced/02_async_system_architecture.md)         | 微服务/分布式架构 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   |
+| [03\_形式化验证与分析.md](../tier_04_advanced/03_formal_verification_and_analysis.md) | 正确性验证和分析  | ⭐⭐⭐⭐⭐ | ⭐⭐⭐     |
+| [04\_异步性能工程.md](../tier_04_advanced/04_async_performance_engineering.md)         | 极致性能优化      | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   |
+| [05\_跨平台异步编程.md](../tier_04_advanced/05_cross_platform_async_programming.md)     | 平台差异和兼容性  | ⭐⭐⭐⭐   | ⭐⭐⭐     |
+
+### 按主题查找1
+
+| 主题         | 相关文档                                                           |
+| :--- | :--- || **并发模式** | [01\_异步并发模式](../tier_04_advanced/01_async_concurrency_patterns.md)         |
+| **系统架构** | [02\_异步系统架构](../tier_04_advanced/02_async_system_architecture.md)         |
+| **形式化**   | [03\_形式化验证与分析](../tier_04_advanced/03_formal_verification_and_analysis.md) |
+| **性能工程** | [04\_异步性能工程](../tier_04_advanced/04_async_performance_engineering.md)         |
+| **跨平台**   | [05\_跨平台异步编程](../tier_04_advanced/05_cross_platform_async_programming.md)     |
+
+### 推荐使用场景1
+
+| 场景                   | 推荐文档                                                           |
+| :--- | :--- || **我要设计高并发系统** | [01\_异步并发模式](../tier_04_advanced/01_async_concurrency_patterns.md)         |
+| **我要构建微服务架构** | [02\_异步系统架构](../tier_04_advanced/02_async_system_architecture.md)         |
+| **我要验证程序正确性** | [03\_形式化验证与分析](../tier_04_advanced/03_formal_verification_and_analysis.md) |
+| **我要优化到极致**     | [04\_异步性能工程](../tier_04_advanced/04_async_performance_engineering.md)         |
+| **我要跨平台开发**     | [05\_跨平台异步编程](../tier_04_advanced/05_cross_platform_async_programming.md)     |
+
+---
+
+## 🔬 分析报告区
+
+> **定位**: 深度分析和研究报告
+> **受众**: 所有希望深入理解的开发者
+
+| 文档                                                                                             | 说明               | 推荐度     |
+| :--- | :--- | :--- || [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../../../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念矩阵       | ⭐⭐⭐⭐   |
+
+---
+
+## 📑 附录资源区
+
+> **定位**: 补充材料和扩展资源
+> **受众**: 需要深入学习的用户
+
+| 目录                                                 | 说明                           | 推荐度     |
+| :--- | :--- | :--- || [MIND_MAP_COLLECTION](../../../../docs/04_thinking/MIND_MAP_COLLECTION.md) | 思维导图集合       | ⭐⭐⭐⭐   |
+| [tier_02_guides](../tier_02_guides/README.md)                 | 异步指南与工具     | ⭐⭐⭐     |
+
+---
+
+## 📊 项目报告区
+
+> **定位**: 项目进度和完成报告
+> **受众**: 关注项目发展的用户
+
+### 最新报告
+
+| 报告                                                                                              | 日期       | 说明                   |
+| :--- | :--- | :--- || [C06_FINAL_COMPLETION_REPORT_2025_10_22.md](../reports/C06_FINAL_COMPLETION_REPORT_2025_10_22.md) | 2025-10-22 | Phase 1-6 最终完成报告 |
+
+### 历史报告
+
+查看 [reports/README.md](../reports/README.md) 获取完整报告列表。
+
+---
+
+## 🎯 按场景导航
+
+### 我想学习异步编程
+
+```text
+1. [项目概览](01_project_overview.md) - 了解全貌
+2. [快速入门](../tier_02_guides/01_异步编程快速入门.md) - 10分钟上手
+3. [Future机制](../tier_02_guides/02_future_and_executor_mechanisms.md) - 理解原理
+4. 运行示例代码
+```
+### 我要选择异步运行时
+
+```text
+1. [运行时选择指南](../tier_02_guides/03_async_runtime_selection_guide.md)
+2. [异步生态系统参考](../tier_03_references/03_async_ecosystem_reference.md)
+3. [Tokio完整API参考](../tier_03_references/02_tokio_complete_api_reference.md)
+```
+### 我要优化性能
+
+```text
+1. [性能优化指南](../tier_02_guides/05_async_performance_optimization_guide.md)
+2. [性能基准参考](../tier_03_references/05_performance_benchmarks_reference.md)
+3. [异步性能工程](../tier_04_advanced/04_async_performance_engineering.md)
+```
+### 我要构建生产系统
+
+```text
+1. [设计模式实践](../tier_02_guides/04_async_design_patterns_practice.md)
+2. [调试与监控](../tier_02_guides/06_async_debugging_and_monitoring.md)
+3. [异步系统架构](../tier_04_advanced/02_async_system_architecture.md)
+```
+### 我要理解 Pin 机制
+
+```text
+1. [常见问题 - Pin部分](04_faq.md#q2-为什么我需要-pin)
+2. [Future与Executor机制](../tier_02_guides/02_future_and_executor_mechanisms.md)
+3. [Pin与Unsafe参考](../tier_03_references/04_pin_and_unsafe_reference.md)
+```
+---
+
+## 📚 按难度导航
+
+### ⭐ 入门级 (1-2周)
+
+- [项目概览](01_project_overview.md)
+- [术语表](03_glossary.md)
+- [常见问题](04_faq.md)
+- [快速入门](../tier_02_guides/01_异步编程快速入门.md)
+
+### ⭐⭐ 初级 (2-4周)
+
+- [Future与Executor机制](../tier_02_guides/02_future_and_executor_mechanisms.md)
+- [运行时选择指南](../tier_02_guides/03_async_runtime_selection_guide.md)
+- [调试与监控](../tier_02_guides/06_async_debugging_and_monitoring.md)
+
+### ⭐⭐⭐ 中级 (1-2月)
+
+- [设计模式实践](../tier_02_guides/04_async_design_patterns_practice.md)
+- [语言特性参考](../tier_03_references/01_async_language_features_reference.md)
+- [生态系统参考](../tier_03_references/03_async_ecosystem_reference.md)
+
+### ⭐⭐⭐⭐ 高级 (2-3月)
+
+- [性能优化指南](../tier_02_guides/05_async_performance_optimization_guide.md)
+- [Tokio完整API参考](../tier_03_references/02_tokio_complete_api_reference.md)
+- [性能基准参考](../tier_03_references/05_performance_benchmarks_reference.md)
+- [跨平台异步编程](../tier_04_advanced/05_cross_platform_async_programming.md)
+
+### ⭐⭐⭐⭐⭐ 专家级 (3-6月)
+
+- [Pin与Unsafe参考](../tier_03_references/04_pin_and_unsafe_reference.md)
+- [异步并发模式](../tier_04_advanced/01_async_concurrency_patterns.md)
+- [异步系统架构](../tier_04_advanced/02_async_system_architecture.md)
+- [形式化验证与分析](../tier_04_advanced/03_formal_verification_and_analysis.md)
+- [异步性能工程](../tier_04_advanced/04_async_performance_engineering.md)
+
+---
+
+## 🎓 学习建议
+
+### 对于初学者
+
+1. **不要跳过 Tier 1**: 理解基础概念至关重要
+2. **多运行示例**: 实践是最好的学习方式
+3. **不要在 Pin 上卡太久**: 先会用，再深究原理
+4. **加入社区**: Rust 异步社区非常活跃
+
+### 对于中级开发者
+
+1. **深入理解 Future**: 理解执行模型是关键
+2. **选择合适的运行时**: 不同场景有不同选择
+3. **学习设计模式**: 掌握最佳实践
+4. **关注性能**: 性能优化是核心竞争力
+
+### 对于高级工程师
+
+1. **阅读 Tier 4**: 深入高级主题
+2. **研究源码**: 理解实现细节
+3. **贡献社区**: 分享经验和知识
+4. **持续学习**: 异步编程不断演进
+
+---
+
+## 📊 文档完整度
+
+### 当前状态
+
+| 层级       | 完成度 | 文档数 | 状态    |
+| :--- | :--- | :--- | :--- || **Tier 1** | 100%   | 4/4    | ✅ 完成 |
+| **Tier 2** | 100%   | 6/6    | ✅ 完成 |
+| **Tier 3** | 100%   | 5/5    | ✅ 完成 |
+| **Tier 4** | 100%   | 5/5    | ✅ 完成 |
+| **配套**   | 100%   | -      | ✅ 完成 |
+
+**总体进度**: **100%** (全部完成 🎉)
+
+---
+
+## 🔗 外部资源
+
+### 官方资源
+
+- [Rust Async Book](https://rust-lang.github.io/async-book/)
+- [Tokio Tutorial](https://tokio.rs/tokio/tutorial)
+- [async-std [已归档] Book](https://book.async.rs/)
+
+### 视频教程
+
+- [Jon Gjengset - Async Rust](https://www.youtube.com/watch?v=ThjvMReOXYM)
+- [Tokio From Scratch](https://tokio.rs/tokio/tutorial)
+
+### 社区资源
+
+- [Rust Users Forum](https://users.rust-lang.org/)
+- [Tokio Discord](https://discord.gg/tokio)
+- [r/rust](https://www.reddit.com/r/rust/)
+
+---
+
+## 📝 文档更新日志
+
+| 日期       | 版本   | 变更                       |
+| :--- | :--- | :--- || 2025-10-22 | v1.0.0 | 初始版本：建立 4-Tier 架构 |
+
+---
+
+**文档维护**: C06 Async Team | **质量评分**: 95/100
+**最后更新**: 2025-12-11 | **Rust 版本**: 1.92.0+
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

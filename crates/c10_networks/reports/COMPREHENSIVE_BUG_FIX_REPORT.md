@@ -75,10 +75,8 @@
    - 修复了 `HttpClient` 导入问题
    - 添加了 `ErrorRecovery` 特性导入
    - 修复了状态码调用
-
 2. **`examples/tcp_client.rs`**
    - 清理了未使用的导入
-
 3. **`examples/tcp_echo_server.rs`**
    - 清理了未使用的导入
 
@@ -96,23 +94,17 @@
 
 1. **`src/protocol/http/mod.rs`**
    - 修复了 `HttpStatusCode::OK` 调用
-
 2. **`src/protocol/tcp/mod.rs`**
    - 修复了 `NetworkError::Performance` 引用
-
 3. **`src/protocol/tcp/state.rs`**
    - 修复了状态机中的移动语义问题
-
 4. **`src/protocol/websocket/handshake.rs`**
    - 清理了未使用的导入
-
 5. **`src/protocol/websocket/mod.rs`**
     - 清理了未使用的导入
-
 6. **`src/socket/tcp.rs`**
     - 清理了未使用的导入
     - 修复了可变性警告
-
 7. **`src/bin/main.rs`**
     - 修复了 HttpClient 导入问题
     - 添加了 ErrorRecovery 特性导入

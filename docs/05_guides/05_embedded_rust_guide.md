@@ -115,7 +115,6 @@ fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
 ```
-
 ### 2. 嵌入式 HAL 示例 {#2-嵌入式-hal-示例}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -146,7 +145,6 @@ fn main() -> ! {
     }
 }
 ```
-
 ### 3. 中断处理示例 {#3-中断处理示例}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -196,7 +194,6 @@ fn TIM2() {
     });
 }
 ```
-
 ### 4. 无锁数据结构 {#4-无锁数据结构}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -216,7 +213,6 @@ fn get_counter() -> u32 {
     COUNTER.load(Ordering::Relaxed)
 }
 ```
-
 ### 5. 内存管理技巧 {#5-内存管理技巧}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -274,7 +270,6 @@ impl StaticPool {
     }
 }
 ```
-
 ### 6. RTIC (Real-Time Interrupt-driven Concurrency) {#6-rtic-real-time-interrupt-driven-concurrency}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -323,7 +318,6 @@ mod app {
     }
 }
 ```
-
 ---
 
 ## 推荐学习路径 {#推荐学习路径}
@@ -368,7 +362,6 @@ const SAMPLE_RATE: u32 = 48_000;
 
 static BUFFER: UnsafeCell<[u8; BUFFER_SIZE]> = UnsafeCell::new([0; BUFFER_SIZE]);
 ```
-
 ### 2. 避免动态分配（无堆环境） {#2-避免动态分配无堆环境}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -382,7 +375,6 @@ static TX_BUFFER: UnsafeCell<[u8; 256]> = UnsafeCell::new([0; 256]);
 // 不推荐（无堆环境）
 // let buffer = vec![0; 256];
 ```
-
 ### 3. 中断安全的数据共享 {#3-中断安全的数据共享}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -399,7 +391,6 @@ fn update_data(value: u32) {
     });
 }
 ```
-
 ---
 
 ## 使用场景 {#使用场景}
@@ -418,7 +409,6 @@ fn update_data(value: u32) {
 // 直接操作寄存器，无运行时开销
 // 适用于：传感器节点、电机控制、实时系统
 ```
-
 ### 场景2: 实时操作系统 (RTOS) 集成 {#场景2-实时操作系统-rtos-集成}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -485,7 +475,6 @@ fn update_data(value: u32) {
 ## Rust 1.95+ 在嵌入式开发中的应用 {#rust-195-在嵌入式开发中的应用}
 >
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### array_windows 在传感器数据处理中的应用 {#array_windows-在传感器数据处理中的应用}
@@ -522,7 +511,6 @@ pub fn edge_detection(samples: &[u16], threshold: u16) -> Vec<usize> {
         .collect()
 }
 ```
-
 ### LazyLock 在硬件抽象层中的应用 {#lazylock-在硬件抽象层中的应用}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -546,7 +534,6 @@ pub fn is_dma_ready() -> bool {
     LazyLock::get(&DMA_CONTROLLER).is_some()
 }
 ```
-
 ### ControlFlow 在错误恢复中的应用 {#controlflow-在错误恢复中的应用}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -574,7 +561,6 @@ fn initialize_peripherals() -> ControlFlow<InitError, ()> {
     ControlFlow::Continue(())
 }
 ```
-
 ### 内存优化：array_windows 的零分配特性 {#内存优化array_windows-的零分配特性}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -602,7 +588,6 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
     arr[1]  // 中值
 }
 ```
-
 **内存优势**: `array_windows` 在 `no_std` 环境下零堆分配，适合资源受限的嵌入式设备。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)

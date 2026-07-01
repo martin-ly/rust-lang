@@ -124,7 +124,6 @@ cargo run --example observer
 cargo run --example strategy
 cargo run --example command
 ```
-
 ### 运行 Rust 特有模式
 
 ```bash
@@ -137,7 +136,6 @@ cargo run --example event_bus_demo
 # GATs 观察者
  cargo run --example gats_observer_demo
 ```
-
 ### 运行异步模式示例
 
 ```bash
@@ -150,7 +148,6 @@ cargo run --example async_trait_demo
 # 流水线迭代器
 cargo run --example pipeline_iter_demo
 ```
-
 ### 运行测试
 
 ```bash
@@ -163,7 +160,6 @@ cargo test --lib formal_verification_examples
 # 运行所有功能测试
 cargo test --all-features
 ```
-
 ### 运行基准测试
 
 ```bash
@@ -177,7 +173,6 @@ cargo bench -p c09_design_pattern -- proxy_request
 # 保存基线
 cargo bench -p c09_design_pattern -- --save-baseline main
 ```
-
 ---
 
 ## 学习建议
@@ -192,7 +187,6 @@ cargo run --example factory
 cargo run --example builder
 cargo run --example prototype
 ```
-
 - 学习 `OnceLock` 实现单例
 - 掌握泛型工厂
 - 理解类型状态 Builder
@@ -206,7 +200,6 @@ cargo run --example decorator
 cargo run --example proxy
 cargo run --example facade
 ```
-
 - Trait 适配
 - 组合扩展功能
 - 智能指针代理
@@ -220,7 +213,6 @@ cargo run --example strategy
 cargo run --example command
 cargo run --example state
 ```
-
 - 事件通知系统
 - 可插拔算法
 - 命令队列
@@ -233,7 +225,6 @@ cargo run --example typestate
 cargo run --example RAII_guard
 cargo run --example newtype
 ```
-
 - 编译时状态验证
 - 资源自动管理
 - 类型安全包装
@@ -247,22 +238,18 @@ cargo run --example newtype
    cargo run --example reactor_demo
    cargo run --example event_bus_demo
    ```
-
    - Actor 消息传递
    - Reactor 事件驱动
    - 异步事件总线
-
 2. **掌握异步模式**
 
    ```bash
    cargo run --example async_trait_demo
    cargo run --example gats_observer_demo
    ```
-
    - 原生 async trait
    - GATs 借用视图
    - 零拷贝通知
-
 3. **探索高级模式**
 
    ```bash
@@ -270,7 +257,6 @@ cargo run --example newtype
    cargo run --example visitor
    cargo run --example chain_of_responsibility
    ```
-
    - 返回位 impl Trait
    - Trait 访问者
    - 责任链处理
@@ -282,18 +268,15 @@ cargo run --example newtype
    ```bash
    cargo run --example rust_192_features_demo
    ```
-
    - let-else 表达式
    - 返回位 impl Trait
    - RPITIT
    - dyn 上行转型
-
 2. **形式化验证**
 
    ```bash
    cargo test --lib formal_verification_examples
    ```
-
    - 类型级状态机
    - 终止性证明
    - 并发安全性
@@ -328,7 +311,6 @@ impl HttpRequestBuilder<Ready> {
     fn build(self) -> HttpRequest { /* ... */ }
 }
 ```
-
 ### Observer 模式 (GATs)
 
 ```rust
@@ -345,7 +327,6 @@ trait BorrowingObserver {
     fn update<'a>(&mut self, item: Self::Item<'a>);
 }
 ```
-
 ### Strategy 模式
 
 ```rust
@@ -366,7 +347,6 @@ fn process_data(data: &mut [i32], strategy: &dyn SortStrategy) {
     strategy.sort(data);
 }
 ```
-
 ### Actor 模式
 
 ```rust
@@ -392,7 +372,6 @@ impl Actor {
     }
 }
 ```
-
 ---
 
 ## 相关文档
@@ -432,21 +411,18 @@ impl Actor {
    impl Drawable for Button { /* ... */ }
    impl Clickable for Button { /* ... */ }
    ```
-
 2. **零成本抽象**
 
    ```rust
    // ✅ 泛型在编译期单态化，零运行时开销
    fn process<T: Strategy>(item: T) { /* ... */ }
    ```
-
 3. **类型状态模式**
 
    ```rust
    // ✅ 使用类型系统防止非法状态
    Builder<Ready>::build() // 只有 Ready 状态才能 build
    ```
-
 ---
 
 *示例基于 Rust 1.94+，Edition 2024*:

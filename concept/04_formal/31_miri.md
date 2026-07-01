@@ -93,14 +93,12 @@ Miri 目前能检测的主要 UB 类别包括：
 ```bash
 rustup component add miri
 ```
-
 Miri 需要 **nightly toolchain**。如果当前默认工具链不是 nightly：
 
 ```bash
 rustup component add miri --toolchain nightly
 rustup run nightly cargo miri --version
 ```
-
 ### 运行测试
 
 在项目根目录运行所有 Miri 测试：
@@ -112,14 +110,12 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 # 使用旧版 Stacked Borrows 模型
 MIRIFLAGS="-Zmiri-stacked-borrows" cargo miri test miri_tests
 ```
-
 ### 运行单个示例或二进制
 
 ```bash
 cargo miri run --manifest-path crates/c01_ownership_borrow_scope/Cargo.toml --bin ts
 cargo miri test --manifest-path crates/c02_type_system/Cargo.toml miri_tests
 ```
-
 ### 常用 Miri 环境变量
 
 | 变量 | 作用 |
@@ -157,7 +153,6 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 # 说明代码依赖了更宽松的别名规则；优先修复代码，
 # 除非能证明该模式在官方内存模型中会被接受。
 ```
-
 > **深度文档**: [Tree Borrows 深度解析](36_tree_borrows_deep_dive.md)
 
 ---
@@ -189,7 +184,6 @@ fn test_dangling_pointer() {
     unsafe { assert_eq!(*ptr, 42); }
 }
 ```
-
 修复后：
 
 ```rust
@@ -207,7 +201,6 @@ fn test_heap_pointer() {
     }
 }
 ```
-
 ---
 
 ## 六、常见错误与修复模式
@@ -241,7 +234,6 @@ graph TD
     style CAUTION fill:#fff3e0
     style OK fill:#c8e6c9
 ```
-
 ### 7.2 边界极限
 
 - Miri 运行在 nightly 工具链上，不能替代 stable CI。

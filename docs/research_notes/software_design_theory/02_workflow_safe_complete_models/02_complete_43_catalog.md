@@ -90,117 +90,68 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 来源 | 数量 | 模式 |
-
 | :--- | :--- | :--- |
-
 | **GoF 23** | 23 | 创建型 5、结构型 7、行为型 11 |
-
 | **企业/分布式扩展** | 20 | 见下表 |
 
 ### 扩展模式（20） {#扩展模式20}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 参考 [Fowler EAA](https://martinfowler.com/eaaCatalog/)、Core J2EE 等权威 catalog，20 项构成如下：
 
 | # | 模式 | 来源 | 分类 | Rust 安全边界 |
-
 | :--- | :--- | :--- | :--- | :--- |
-
 | 1 | Domain Model | Fowler EAA | 业务层 | 纯 Safe |
-
 | 2 | Service Layer | Fowler EAA | 业务层 | 纯 Safe |
-
 | 3 | Repository | Fowler EAA | 数据层 | 纯 Safe |
-
 | 4 | Unit of Work | Fowler EAA | 数据层 | 纯 Safe |
-
 | 5 | Data Mapper | Fowler EAA | 数据层 | 纯 Safe |
-
 | 6 | Table Data Gateway (DAO) | Fowler EAA | 数据层 | 纯 Safe |
-
 | 7 | Active Record | Fowler EAA | 数据层 | 纯 Safe |
-
 | 8 | Gateway | Fowler EAA | 集成层 | 纯 Safe / 需 unsafe（FFI） |
-
 | 9 | Model View Controller | Fowler EAA | 表示层 | 纯 Safe |
-
 | 10 | Front Controller | Fowler EAA | 表示层 | 纯 Safe |
-
 | 11 | Data Transfer Object | Fowler EAA | 分布式 | 纯 Safe |
-
 | 12 | Remote Facade | Fowler EAA | 分布式 | 纯 Safe |
-
 | 13 | Value Object | Fowler EAA | 基础 | 纯 Safe |
-
 | 14 | Registry (Service Locator) | Fowler EAA | 基础 | 纯 Safe |
-
 | 15 | Identity Map | Fowler EAA | 数据层 | 纯 Safe |
-
 | 16 | Lazy Load | Fowler EAA | 数据层 | 纯 Safe |
-
 | 17 | Plugin (Dependency Injection) | Fowler EAA | 基础 | 纯 Safe |
-
 | 18 | Optimistic Offline Lock | Fowler EAA | 并发 | 纯 Safe |
-
 | 19 | Specification | DDD | 业务层 | 纯 Safe |
-
 | 20 | Event Sourcing | DDD/CQRS | 业务层 | 纯 Safe |
 
 ### 扩展模式简要说明 {#扩展模式简要说明}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 核心意图 | Rust 典型实现 |
-
 | :--- | :--- | :--- |
-
 | Domain Model | 业务逻辑封装为领域对象 | `struct` + 方法、无贫血模型 |
-
 | Service Layer | 用例编排、事务边界 | `struct` + `async fn`、事务封装 |
-
 | Repository | 集合式抽象、持久化隔离 | `trait Repository<T>` + `impl` |
-
 | Unit of Work | 批量提交、一致性 | `struct` 持有待提交实体、`commit()` |
-
 | Data Mapper | ORM 映射层 | `From`/`Into`、serde、diesel/sqlx |
-
 | Table Data Gateway | 表级数据访问 | `struct` 封装 SQL、`async fn` |
-
 | Active Record | 对象即行 | `struct` 持 `Connection`、`save()` |
-
 | Gateway | 外部系统集成 | trait + FFI/HTTP 客户端 |
-
 | Model View Controller | 分离模型/视图/控制器 | `struct` 分层、`axum`/`actix` |
-
 | Front Controller | 单一入口、路由分发 | `Router`、`match` 路径 |
-
 | Data Transfer Object | 跨边界数据传输 | `struct` + serde、无行为 |
-
 | Remote Facade | 粗粒度远程接口 | gRPC/HTTP 服务端 |
-
 | Value Object | 不可变值、相等性 | `#[derive(Clone, PartialEq)]` |
-
 | Registry | 服务定位 | `OnceLock<HashMap>` 或 DI |
-
 | Identity Map | 会话内实体去重 | `HashMap<Id, Arc<T>>` |
-
 | Lazy Load | 延迟加载 | `impl Default`、`Option`、`OnceCell` |
-
 | Plugin | 依赖注入、可替换实现 | `trait` + `Box<dyn Trait>` |
-
 | Optimistic Offline Lock | 乐观并发控制 | `version: u64`、CAS |
-
 | Specification | 业务规则组合 | `trait Spec`、`and`/`or` 组合 |
-
 | Event Sourcing | 事件溯源、审计 | `Vec<Event>`、`fold` 重建状态 |
 
 ---
@@ -208,19 +159,15 @@
 ## 扩展模式 Rust 代码示例 {#扩展模式-rust-代码示例}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Domain Model {#domain-model}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
-
 // 领域模型：业务逻辑封装在领域对象内，非贫血
 
 #[derive(Clone)]
@@ -228,11 +175,9 @@
 pub struct OrderItem { pub id: u64, pub amount: u64 }
 
 
-
 #[derive(PartialEq)]
 
 pub enum OrderStatus { Draft, Submitted, Shipped }
-
 
 
 pub struct Order {
@@ -244,7 +189,6 @@ pub struct Order {
     status: OrderStatus,
 
 }
-
 
 
 impl Order {
@@ -270,19 +214,14 @@ impl Order {
     }
 
 }
-
 ```
-
 ### Unit of Work {#unit-of-work}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
-
 // 批量提交、一致性边界
 
 trait Repository<T> {
@@ -294,7 +233,6 @@ trait Repository<T> {
 }
 
 
-
 pub struct UnitOfWork<T> {
 
     new_entities: Vec<T>,
@@ -302,7 +240,6 @@ pub struct UnitOfWork<T> {
     dirty_entities: Vec<T>,
 
 }
-
 
 
 impl<T> UnitOfWork<T> {
@@ -324,23 +261,17 @@ impl<T> UnitOfWork<T> {
     }
 
 }
-
 ```
-
 ### Data Mapper {#data-mapper}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
-
 // ORM 映射层：领域 ↔ 持久化；From/Into 实现双向转换
 
 struct UserEntity { id: u64, name: String, email: String }
-
 
 
 // 假设 DbRow 为数据库行抽象
@@ -360,23 +291,17 @@ impl From<UserEntity> for (u64, String, String) {
     fn from(u: UserEntity) -> Self { (u.id, u.name, u.email) }
 
 }
-
 ```
-
 ### Value Object {#value-object}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
-
 #[derive(Clone, PartialEq, Eq)]
 
 pub enum Currency { USD, EUR }
-
 
 
 #[derive(Clone, PartialEq, Eq)]
@@ -388,7 +313,6 @@ pub struct Money {
     currency: Currency,
 
 }
-
 
 
 impl Money {
@@ -404,19 +328,14 @@ impl Money {
     }
 
 }
-
 ```
-
 ### Registry (Service Locator) {#registry-service-locator}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
-
 use std::sync::{OnceLock, Mutex};
 
 use std::collections::HashMap;
@@ -424,11 +343,9 @@ use std::collections::HashMap;
 use std::any::{TypeId, Any};
 
 
-
 type ServiceMap = HashMap<TypeId, Box<dyn Any + Send>>;
 
 static REGISTRY: OnceLock<Mutex<ServiceMap>> = OnceLock::new();
-
 
 
 fn register<T: Send + 'static>(service: T) {
@@ -442,23 +359,17 @@ fn register<T: Send + 'static>(service: T) {
 }
 
 // get：需按具体需求设计（返回引用或克隆）；实际项目常用 tioc 等 DI crate
-
 ```
-
 ### Identity Map {#identity-map}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
-
 use std::collections::HashMap;
 
 use std::sync::Arc;
-
 
 
 pub struct IdentityMap<T> {
@@ -466,7 +377,6 @@ pub struct IdentityMap<T> {
     map: HashMap<u64, Arc<T>>,
 
 }
-
 
 
 impl<T> IdentityMap<T> {
@@ -478,21 +388,17 @@ impl<T> IdentityMap<T> {
     }
 
 }
-
 ```
-
 ### Service Layer {#service-layer}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
-
 pub struct OrderService {
 
     repo: Box<dyn Repository<Order>>,
 
 }
-
 
 
 impl OrderService {
@@ -510,15 +416,12 @@ impl OrderService {
 }
 
 // 事务边界：由调用方或框架控制；Rust 用 async/await 或 block_on
-
 ```
-
 ### Repository {#repository}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
-
 trait Repository<T> {
 
     fn find(&self, id: u64) -> Option<T>;
@@ -526,7 +429,6 @@ trait Repository<T> {
     fn save(&mut self, entity: T) -> Result<(), String>;
 
 }
-
 
 
 struct UserRepository { /* 内部持 Connection 等 */ }
@@ -538,15 +440,12 @@ impl Repository<User> for UserRepository {
     fn save(&mut self, entity: User) -> Result<(), String> { /* ... */ }
 
 }
-
 ```
-
 ### DTO {#dto}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
-
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
 
 pub struct UserDto {
@@ -560,19 +459,15 @@ pub struct UserDto {
 }
 
 // 无行为，仅数据传输；跨边界序列化
-
 ```
-
 ### Event Sourcing {#event-sourcing}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
-
 #[derive(Clone)]
 
 enum Event { Created { id: u64 }, Updated { name: String } }
-
 
 
 struct Aggregate { id: u64, name: String }
@@ -600,21 +495,17 @@ impl Aggregate {
 }
 
 // 事件日志：Vec<Event> 持久化；重现时 fold 重建状态
-
 ```
-
 ### Specification {#specification}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
-
 trait Specification<T> {
 
     fn is_satisfied_by(&self, candidate: &T) -> bool;
 
 }
-
 
 
 struct AndSpec<A, B>(A, B);
@@ -630,15 +521,12 @@ impl<T, A: Specification<T>, B: Specification<T>> Specification<T> for AndSpec<A
 }
 
 // 业务规则组合：and/or/not；trait 组合优于继承
-
 ```
-
 ### Table Data Gateway (DAO) {#table-data-gateway-dao}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
-
 // 表级数据访问：一张表对应一个 Gateway
 
 pub struct UserGateway {
@@ -646,7 +534,6 @@ pub struct UserGateway {
     // 内部持 Connection 等；实际项目用 sqlx/diesel；Connection 为 trait 抽象
 
 }
-
 
 
 impl UserGateway {
@@ -662,15 +549,12 @@ impl UserGateway {
 }
 
 // 表级 API；与 Repository 区别：Repository 为领域抽象，Gateway 为表映射
-
 ```
-
 ### Active Record {#active-record}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
-
 // 对象即行：领域对象持有数据库连接，自身负责持久化
 
 pub struct User {
@@ -684,7 +568,6 @@ pub struct User {
     pub version: u64,  // 乐观锁版本
 
 }
-
 
 
 trait Connection {
@@ -724,15 +607,12 @@ impl User {
 }
 
 // 与 DTO 区别：Active Record 有行为；适合简单 CRUD 领域
-
 ```
-
 ### Gateway（外部系统集成） {#gateway外部系统集成}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
-
 // 外部系统集成：封装 HTTP 客户端、FFI 等
 
 pub trait PaymentGateway: Send + Sync {
@@ -740,7 +620,6 @@ pub trait PaymentGateway: Send + Sync {
     fn charge(&self, amount: u64, token: &str) -> Result<ChargeId, String>;
 
 }
-
 
 
 pub struct StripeGateway { /* 持有 HTTP 客户端 */ }
@@ -756,15 +635,12 @@ impl PaymentGateway for StripeGateway {
 }
 
 // FFI 场景：若需 C 库绑定，内部可能 unsafe；对外仍为 Safe trait
-
 ```
-
 ### Model View Controller (MVC) {#model-view-controller-mvc}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
-
 // 分离模型/视图/控制器；模块分层
 
 mod model {
@@ -800,15 +676,12 @@ mod controller {
 }
 
 // axum/actix 中：Router 为 Front Controller；Controller 为 handler
-
 ```
-
 ### Front Controller {#front-controller}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
-
 // 单一入口、路由分发
 
 pub struct Router {
@@ -816,7 +689,6 @@ pub struct Router {
     routes: Vec<(String, Box<dyn Fn(&str) -> String>)>,
 
 }
-
 
 
 impl Router {
@@ -840,15 +712,12 @@ impl Router {
 }
 
 // 与 axum::Router::route().get(...) 对应；match 路径分发
-
 ```
-
 ### Remote Facade {#remote-facade}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
-
 // 粗粒度远程接口：减少跨边界调用次数
 
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -860,7 +729,6 @@ pub struct OrderBatchRequest {
 }
 
 
-
 #[derive(serde::Serialize, serde::Deserialize)]
 
 pub struct OrderBatchResponse {
@@ -868,7 +736,6 @@ pub struct OrderBatchResponse {
     pub orders: Vec<OrderDto>,
 
 }
-
 
 
 pub async fn handle_order_batch(req: OrderBatchRequest) -> OrderBatchResponse {
@@ -882,17 +749,13 @@ pub async fn handle_order_batch(req: OrderBatchRequest) -> OrderBatchResponse {
 }
 
 // gRPC/HTTP 服务端；粗粒度接口减少延迟
-
 ```
-
 ### Lazy Load {#lazy-load}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
-
 use std::sync::OnceLock;
-
 
 
 // 延迟加载：首次访问时加载
@@ -902,7 +765,6 @@ pub struct LazyResource {
     loaded: OnceLock<String>,
 
 }
-
 
 
 impl LazyResource {
@@ -916,9 +778,7 @@ impl LazyResource {
 }
 
 
-
 fn expensive_load() -> String { "data".to_string() }
-
 
 
 // 或 Option + 闭包：load_on_first_access
@@ -940,15 +800,12 @@ impl<T> Lazy<T> {
     }
 
 }
-
 ```
-
 ### Plugin (Dependency Injection) {#plugin-dependency-injection}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
-
 // 依赖注入、可替换实现
 
 pub trait Storage: Send + Sync {
@@ -960,13 +817,11 @@ pub trait Storage: Send + Sync {
 }
 
 
-
 pub struct App {
 
     storage: Box<dyn Storage>,
 
 }
-
 
 
 impl App {
@@ -982,17 +837,13 @@ impl App {
 }
 
 // 测试时注入 MockStorage；生产注入 SqlStorage
-
 ```
-
 ### Optimistic Offline Lock {#optimistic-offline-lock}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
-
 // 乐观并发控制：版本号 + CAS
 
 pub struct Entity {
@@ -1004,7 +855,6 @@ pub struct Entity {
     pub version: u64,
 
 }
-
 
 
 pub fn update_optimistic(
@@ -1030,23 +880,17 @@ pub fn update_optimistic(
 }
 
 // 或 AtomicU64 compare_exchange；见 [ownership_model](../../formal_methods/10_ownership_model.md) Def ATOMIC1
-
 ```
-
 ---
 
 ## 安全边界 {#安全边界}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 子集 | 安全边界 |
-
 | :--- | :--- |
-
 | GoF 23 | 绝大部分纯 Safe；Singleton 部分实现可需 unsafe |
-
 | 扩展 20 | 绝大部分纯 Safe；Gateway 在 FFI 场景需 unsafe |
 
 ---
@@ -1054,11 +898,9 @@ pub fn update_optimistic(
 ## 与 23 安全的关系 {#与-23-安全的关系}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 23 安全 ⊆ 43 完全
-
 - 43 完全 = 23 安全 + 扩展 20（Fowler EAA/DDD 权威来源）
 
 ---
@@ -1066,11 +908,9 @@ pub fn update_optimistic(
 ## 与 23 安全的分层关系 {#与-23-安全的分层关系}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
-
 43 完全
 
 ├── 23 安全（GoF 纯 Safe 子集）
@@ -1092,33 +932,22 @@ pub fn update_optimistic(
     ├── 分布式：DTO, Remote Facade
 
     └── 基础：Value Object, Registry, Plugin, Optimistic Offline Lock
-
 ```
-
 ---
 
 ## 扩展模式选型 {#扩展模式选型}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 需求 | 推荐模式 |
-
 | :--- | :--- |
-
 | 领域逻辑封装 | Domain Model |
-
 | 用例编排、事务 | Service Layer |
-
 | 持久化抽象 | Repository、Unit of Work |
-
 | 跨边界数据传输 | DTO |
-
 | 外部系统集成 | Gateway |
-
 | 业务规则组合 | Specification |
-
 | 审计、溯源 | Event Sourcing |
 
 ---
@@ -1126,11 +955,9 @@ pub fn update_optimistic(
 ## 扩展模式选型决策树 {#扩展模式选型决策树}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
-
 企业/分布式需求？
 
 ├── 业务层
@@ -1182,59 +1009,35 @@ pub fn update_optimistic(
     ├── 依赖注入、可替换？ → Plugin
 
     └── 乐观并发控制？ → Optimistic Offline Lock
-
 ```
-
 ---
 
 ## 扩展模式形式化对应（深入） {#扩展模式形式化对应深入}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 模式 | 形式化对应 | 与 23 安全组合 |
-
 | :--- | :--- | :--- |
-
 | Domain Model | 结构体 + 方法；无贫血；见 [ownership_model](../../formal_methods/10_ownership_model.md) 规则 1–3 | 与 State、Strategy 组合 |
-
 | Service Layer | 模块依赖、trait 组合；见 [03_integration_theory](../04_compositional_engineering/03_integration_theory.md) IT-T1 | 编排 Repository、Factory |
-
 | Repository | 见 [02_effectiveness_proofs](../04_compositional_engineering/02_effectiveness_proofs.md) CE-T1；trait 泛型约束 | 可与 Factory Method、Builder 组合 |
-
 | Unit of Work | 批量提交；所有权收集；见 ownership 规则 3 drop 顺序 | 与 Repository、Data Mapper 组合 |
-
 | Data Mapper | `From`/`Into` 转换；所有权转移；见 [ownership_model](../../formal_methods/10_ownership_model.md) | 与 Repository 组合 |
-
 | Table Data Gateway | 表级 API；`async fn`；见 [async_state_machine](../../formal_methods/10_async_state_machine.md) | 与 Repository 二选一 |
-
 | Active Record | 对象持 Connection；`save`/`load`；见 ownership 规则 2 | 简单 CRUD；与 DTO 区别：有行为 |
-
 | Gateway | trait + FFI/HTTP；见 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) Def EXTERN1 | 外部集成；FFI 时可能 unsafe |
-
 | MVC | 模块分层；见 [05_boundary_system](../05_boundary_system/README.md) | 与 Front Controller 组合 |
-
 | Front Controller | `Router`、`match` 路径；见 `03_semantic_boundary_map` | 与 MVC 组合 |
-
 | DTO | 结构体 + serde；无行为；所有权转移 | 与 Remote Facade、Gateway 组合 |
-
 | Remote Facade | 粗粒度接口；batch 减少 RPC；见 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) CHAN1 | 与 DTO 组合 |
-
 | Value Object | `Clone`、`PartialEq`；不可变；见 [06_rust_idioms](../06_rust_idioms.md) Def NW1 | 与 Newtype、DTO 衔接 |
-
 | Registry | `OnceLock<HashMap>`；见 [singleton](../01_design_patterns_formal/01_creational/10_singleton.md) | 服务定位；与 Plugin 二选一 |
-
 | Identity Map | `HashMap<Id, Arc<T>>`；见 [ownership_model](../../formal_methods/10_ownership_model.md) Def ARC1 | 会话内去重 |
-
 | Lazy Load | `OnceLock`、`Option`；见 [proxy](../01_design_patterns_formal/02_structural/10_proxy.md) | 延迟加载 |
-
 | Plugin | `trait` + `Box<dyn Trait>`；依赖注入；见 [strategy](../01_design_patterns_formal/03_behavioral/10_strategy.md) | 可替换实现 |
-
 | Optimistic Offline Lock | `version: u64`、CAS；见 [ownership_model](../../formal_methods/10_ownership_model.md) Def ATOMIC1 | 乐观并发 |
-
 | Specification | `trait Spec` + `and`/`or`；组合模式；见 [composite](../01_design_patterns_formal/02_structural/10_composite.md) | 业务规则组合 |
-
 | Event Sourcing | `Vec<Event>` + `fold`；无共享可变；见 [ownership_model](../../formal_methods/10_ownership_model.md) | 与 Command、Memento 概念衔接 |
 
 ---
@@ -1242,31 +1045,19 @@ pub fn update_optimistic(
 ## 扩展模式典型场景（实质内容） {#扩展模式典型场景实质内容}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 模式 | 典型场景 | 实际项目示例 |
-
 | :--- | :--- | :--- |
-
 | Domain Model | 订单、商品、支付；业务规则封装 | 电商订单状态机、库存扣减校验 |
-
 | Service Layer | 用例编排、事务边界 | `place_order`：校验→创建→持久化→发事件 |
-
 | Repository | 持久化抽象、测试可 Mock | `UserRepository`、`OrderRepository` |
-
 | Unit of Work | 批量提交、一致性 | 多实体修改后一次性 `commit` |
-
 | DTO | API 请求/响应、跨服务边界 | REST `UserDto`、gRPC `OrderMessage` |
-
 | Gateway | 支付、短信、邮件 | `StripeGateway`、`SendGridGateway` |
-
 | Event Sourcing | 审计、溯源、CQRS | 订单历史、审计日志、事件重放 |
-
 | Specification | 业务规则组合、查询构建 | `OrderSpec::pending().and(OrderSpec::over(100))` |
-
 | MVC | Web 应用分层 | `axum`/`actix` Router + Handler + 模板 |
-
 | Lazy Load | 关联数据按需加载 | ORM 关联、大对象延迟 |
 
 ---
@@ -1274,11 +1065,9 @@ pub fn update_optimistic(
 ## 权威来源 {#权威来源}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Fowler EAA Catalog](https://martinfowler.com/eaaCatalog/)
-
 - [Core J2EE Patterns](https://corej2eepatterns.com/)
 
 ---
@@ -1286,17 +1075,13 @@ pub fn update_optimistic(
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -1304,15 +1089,10 @@ pub fn update_optimistic(
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -1320,17 +1100,13 @@ pub fn update_optimistic(
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - Rust 1.94 特性速查
-
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -1342,9 +1118,7 @@ pub fn update_optimistic(
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -1360,11 +1134,9 @@ pub fn update_optimistic(
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [02_workflow_safe_complete_models 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -1372,31 +1144,18 @@ pub fn update_optimistic(
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
-
 > **来源: [Wikipedia - Software Architecture](https://en.wikipedia.org/wiki/Software_Architecture)**
-
 > **[来源: ACM - Design Patterns Survey]**
-
 > **[来源: IEEE - Software Design Standards]**
-
 > **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
-
 > **[来源: Martin Fowler - Patterns of Enterprise Application Architecture]**
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

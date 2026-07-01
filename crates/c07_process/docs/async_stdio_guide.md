@@ -25,7 +25,6 @@
 c07_process = { path = "crates/c07_process", features = ["async"] }
 tokio = { version = "1.0", features = ["full"] }
 ```
-
 ### 基本使用示例
 
 ```rust
@@ -68,7 +67,6 @@ async fn main() -> Result<()> {
     Ok(())
 }
 ```
-
 ---
 
 ## 📚 API 参考
@@ -82,7 +80,6 @@ async fn main() -> Result<()> {
 ```rust
 let manager = AsyncProcessManager::new().await;
 ```
-
 #### `spawn(config: ProcessConfig) -> ProcessResult<u32>`
 
 异步启动进程。
@@ -101,7 +98,6 @@ let manager = AsyncProcessManager::new().await;
 ```rust
 let pid = manager.spawn(config).await?;
 ```
-
 #### `write_stdin(pid: u32, data: &[u8]) -> ProcessResult<()>`
 
 异步写入进程的标准输入。
@@ -121,7 +117,6 @@ let pid = manager.spawn(config).await?;
 ```rust
 manager.write_stdin(pid, b"hello world\n").await?;
 ```
-
 #### `close_stdin(pid: u32) -> ProcessResult<()>`
 
 关闭进程的标准输入（EOF）。
@@ -140,7 +135,6 @@ manager.write_stdin(pid, b"hello world\n").await?;
 ```rust
 manager.close_stdin(pid).await?;
 ```
-
 #### `read_stdout(pid: u32) -> ProcessResult<Vec<u8>>`
 
 异步读取进程的标准输出。
@@ -161,7 +155,6 @@ let output = manager.read_stdout(pid).await?;
 let output_str = String::from_utf8_lossy(&output);
 println!("输出: {}", output_str);
 ```
-
 #### `read_stderr(pid: u32) -> ProcessResult<Vec<u8>>`
 
 异步读取进程的标准错误。
@@ -184,7 +177,6 @@ if !error.is_empty() {
     eprintln!("错误: {}", error_str);
 }
 ```
-
 #### `wait_with_timeout(pid: u32, timeout: Duration) -> ProcessResult<Option<ExitStatus>>`
 
 带超时的等待进程完成。
@@ -210,7 +202,6 @@ match manager.wait_with_timeout(pid, Duration::from_secs(5)).await? {
     None => println!("进程超时，仍在运行"),
 }
 ```
-
 #### `kill(pid: u32) -> ProcessResult<()>`
 
 异步终止进程。
@@ -229,7 +220,6 @@ match manager.wait_with_timeout(pid, Duration::from_secs(5)).await? {
 ```rust
 manager.kill(pid).await?;
 ```
-
 #### `get_info(pid: u32) -> ProcessResult<ProcessInfo>`
 
 获取进程信息。
@@ -250,7 +240,6 @@ let info = manager.get_info(pid).await?;
 println!("进程名称: {}", info.name);
 println!("进程状态: {:?}", info.status);
 ```
-
 #### `list_all() -> Vec<ProcessInfo>`
 
 列出所有管理的进程。
@@ -267,7 +256,6 @@ for process in processes {
     println!("PID: {}, 名称: {}", process.pid, process.name);
 }
 ```
-
 ---
 
 ## 💡 完整示例
@@ -319,7 +307,6 @@ async fn main() -> Result<()> {
     Ok(())
 }
 ```
-
 ### 示例 2: 监控长时间运行的进程
 
 ```rust
@@ -363,7 +350,6 @@ async fn main() -> Result<()> {
     Ok(())
 }
 ```
-
 ### 示例 3: 跨平台兼容示例
 
 ```rust
@@ -420,19 +406,14 @@ async fn main() -> Result<()> {
     Ok(())
 }
 ```
-
 ---
 
 ## ⚠️ 注意事项
 
 1. **进程生命周期**: 确保在进程退出后不要尝试读取或写入。使用 `wait_with_timeout` 来检查进程状态。
-
 2. **标准输入关闭**: 对于某些进程（如 `cat`），必须在写入完所有数据后关闭标准输入（发送 EOF），进程才会完成。
-
 3. **超时处理**: 长时间运行的进程应该使用 `wait_with_timeout` 设置超时，避免无限期等待。
-
 4. **错误处理**: 所有 IO 操作都可能失败，务必处理错误情况。
-
 5. **跨平台兼容性**: Windows 和 Unix 系统的命令和参数可能不同，使用条件编译确保跨平台兼容性。
 
 ---

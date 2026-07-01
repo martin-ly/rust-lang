@@ -50,7 +50,6 @@
 - 内部可变性交待清晰
 - 共享状态最小化
 ```
-
 ### 1.2 安全等级对应规范
 >
 > **[来源: Rust Official Docs]**
@@ -88,7 +87,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
-
 **禁止 (MUST NOT)**:
 
 ```rust,ignore
@@ -104,7 +102,6 @@ let ref1 = &data;
 let ref2 = &mut data;  // 错误: 不能同时存在
 println!("{}", ref1[0]);
 ```
-
 ### 2.2 生命周期管理
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -128,7 +125,6 @@ impl<'a> Parser<'a> {
     }
 }
 ```
-
 **避免 (SHOULD NOT)**:
 
 ```rust,ignore
@@ -137,7 +133,6 @@ struct BadParser {
     input: &str,  // 缺少显式生命周期
 }
 ```
-
 ### 2.3 智能指针使用
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -159,7 +154,6 @@ use std::cell::RefCell;
 let data = RefCell::new(0);
 *data.borrow_mut() += 1;
 ```
-
 **警告 (WARNING)**:
 
 ```rust,ignore
@@ -178,7 +172,6 @@ struct Node {
     children: RefCell<Vec<Rc<Node>>>,
 }
 ```
-
 ---
 
 ## 3. unsafe代码规范
@@ -207,7 +200,6 @@ pub unsafe fn read_value<T>(ptr: *const T) -> T {
     ptr.read()
 }
 ```
-
 ### 3.2 必需文档
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -248,7 +240,6 @@ where
     std::ptr::read(ptr)
 }
 ```
-
 ### 3.3 常见模式
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -291,7 +282,6 @@ impl<T> SafeSlice<T> {
     }
 }
 ```
-
 ---
 
 ## 4. 并发安全规范
@@ -327,7 +317,6 @@ for handle in handles {
 
 assert_eq!(*data.lock().unwrap(), 10);
 ```
-
 **禁止 (MUST NOT)**:
 
 ```rust,ignore
@@ -339,7 +328,6 @@ thread::spawn(move || {
     println!("{}", data);  // 编译错误: Rc不是Send
 });
 ```
-
 ### 4.2 同步原语
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -365,7 +353,6 @@ impl ThreadSafeData {
     }  // 锁在这里自动释放
 }
 ```
-
 **避免 (SHOULD NOT)**:
 
 ```rust,ignore
@@ -380,7 +367,6 @@ fn deadlock_risk(a: &Mutex<i32>, b: &Mutex<i32>) {
     let _guard2 = b.lock().unwrap();  // 如果另一个线程相反顺序获取锁...
 }
 ```
-
 ### 4.3 异步代码
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -403,7 +389,6 @@ tokio::spawn(async move {
     }
 });
 ```
-
 ---
 
 ## 5. 错误处理规范
@@ -441,7 +426,6 @@ match operation() {
 let value = maybe_value
     .ok_or_else(|| Error::ValueMissing)?;
 ```
-
 **禁止 (MUST NOT)**:
 
 ```rust,ignore
@@ -454,7 +438,6 @@ let file = File::open("config.txt").unwrap();  // 可能panic!
 // ❌ 不处理Option
 let value = maybe_value.unwrap();  // 可能panic!
 ```
-
 ### 5.2 自定义错误类型
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -505,7 +488,6 @@ impl Error for SafetyError {
     }
 }
 ```
-
 ### 5.3 错误转换
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -539,7 +521,6 @@ fn load_data(path: &str) -> Result<Data> {
     Ok(data)
 }
 ```
-
 ---
 
 ## 6. 嵌入式特定规范
@@ -582,7 +563,6 @@ let ptr = uninit.as_mut_ptr();
 unsafe { ptr.write(Data::new()) };
 let data = unsafe { uninit.assume_init() };
 ```
-
 ### 6.2 硬件抽象
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -610,7 +590,6 @@ unsafe fn set_pa5() {
     core::ptr::write_volatile(GPIOA_ODR, 1 << 5);
 }
 ```
-
 ---
 
 ## 7. 测试规范
@@ -652,7 +631,6 @@ mod tests {
     }
 }
 ```
-
 ### 7.2 集成测试
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -679,7 +657,6 @@ fn test_safety_system_end_to_end() {
     assert!(system.is_in_safe_state());
 }
 ```
-
 ### 7.3 文档测试
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -699,7 +676,6 @@ pub fn safety_check(value: u32) -> bool {
     value > 0
 }
 ```
-
 ---
 
 ## 8. 代码度量标准
@@ -775,7 +751,6 @@ pub fn read_sensor(sensor_id: u8, timeout_ms: u32) -> Result<SensorValue, Sensor
     // 实现...
 }
 ```
-
 ### 9.2 实现注释
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -800,7 +775,6 @@ fn complex_algorithm(input: &[u8]) -> Result<Output, Error> {
     // 继续处理...
 }
 ```
-
 ---
 
 **文档版本**: 1.0
@@ -822,7 +796,6 @@ fn complex_algorithm(input: &[u8]) -> Result<Output, Error> {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [API设计指南](01_api_design_guidelines.md)
 - [Rust安全关键系统 - 检查清单与模板](02_checklists_and_templates.md)
 

@@ -1,19 +1,12 @@
 # 证明技术概念族谱 {#证明技术概念族谱}
 
 > **概念族**: 形式化方法
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **最后更新**: 2026-03-12
-
 > **状态**: ✅ 活跃维护
 
 ---
@@ -21,9 +14,7 @@
 ## 📑 目录 {#目录}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [证明技术概念族谱 {#证明技术概念族谱}](#证明技术概念族谱-证明技术概念族谱)
@@ -51,11 +42,9 @@
 ## 概念族谱概览 {#概念族谱概览}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
-
 mindmap
 
   root((形式化证明))
@@ -185,27 +174,21 @@ mindmap
         Kani
 
         Aeneas
-
 ```
-
 ---
 
 ## 核心证明技术 {#核心证明技术}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 归纳法 {#1-归纳法}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
-
 // 结构归纳示例：证明列表长度
 
 #[cfg(test)]
@@ -225,7 +208,6 @@ mod proofs {
     }
 
 
-
     // 归纳：若 xs 长度为 n，则 x::xs 长度为 n+1
 
     #[test]
@@ -241,15 +223,12 @@ mod proofs {
     }
 
 }
-
 ```
-
 ### 2. 分离逻辑 {#2-分离逻辑}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
-
 // 分离逻辑概念在 Rust 中的体现
 
 // Box::new 创建独占所有权（类似 * 分离合取）
@@ -261,21 +240,17 @@ fn separation_logic_example() {
     let y = Box::new(43); // 另一独立资源
 
 
-
     // 可以同时持有，因为它们分离
 
     assert_eq!(*x + *y, 85);
 
 } // 资源在此处分别释放
-
 ```
-
 ### 3. 双模拟 {#3-双模拟}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
-
 // 状态机双模拟概念
 
 #[derive(Clone, Debug, PartialEq)]
@@ -291,13 +266,11 @@ enum State {
 }
 
 
-
 trait Bisimulation {
 
     // 两个状态是否观察等价
 
     fn is_bisimilar(&self, other: &Self) -> bool;
-
 
 
     // 转移关系
@@ -307,17 +280,13 @@ trait Bisimulation {
 }
 
 
-
 struct Action(String);
-
 ```
-
 ---
 
 ## 程序逻辑 {#程序逻辑}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Hoare 三元组 {#hoare-三元组}
@@ -325,9 +294,7 @@ struct Action(String);
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
-
 {P} C {Q}
-
 
 
 P: 前置条件
@@ -335,13 +302,9 @@ P: 前置条件
 C: 命令/程序
 
 Q: 后置条件
-
 ```
-
 ```rust
-
 // Hoare 逻辑在 Rust 中的体现（通过类型系统）
-
 
 
 // 前置条件: T: Default
@@ -355,7 +318,6 @@ fn create_default<T: Default>() -> T {
 }
 
 
-
 // 前置条件: slice 非空
 
 // 后置条件: 返回最大元素
@@ -365,23 +327,16 @@ fn find_max(slice: &[i32]) -> Option<&i32> {
     slice.iter().max()
 
 }
-
 ```
-
 ### Iris 框架概念 {#iris-框架概念}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 概念 | 描述 | Rust 对应 |
-
 |------|------|-----------|
-
 | 资源代数 | 可组合的资源 | Ownership |
-
 | 不变式 | 持久断言 | Type invariants |
-
 | 模态算子 | 时间属性 | Lifetime |
-
 | 高阶协议 | 复杂交互 | Traits |
 
 ---
@@ -389,7 +344,6 @@ fn find_max(slice: &[i32]) -> Option<&i32> {
 ## 工具链集成 {#工具链集成}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 验证工具能力对比 {#验证工具能力对比}
@@ -397,7 +351,6 @@ fn find_max(slice: &[i32]) -> Option<&i32> {
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```mermaid
-
 graph LR
 
     A[待验证代码] --> B{验证目标}
@@ -411,7 +364,6 @@ graph LR
     B -->|数学证明| F[Creusot]
 
 
-
     C --> C1[UB检测]
 
     D --> D1[符号执行]
@@ -419,27 +371,18 @@ graph LR
     E --> E1[Viper后端]
 
     F --> F1[Why3后端]
-
 ```
-
 ### 证明策略选择 {#证明策略选择}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 目标 | 推荐方法 | 工具 |
-
 |------|----------|------|
-
 | 无数据竞争 | 类型系统 | Rust 编译器 |
-
 | 内存安全 | 动态检查 | Miri |
-
 | 函数正确性 | 契约验证 | Prusti |
-
 | 协议合规 | 模型检测 | Kani |
-
 | 复杂不变式 | 交互式证明 | Coq/Creusot |
 
 ---
@@ -447,13 +390,10 @@ graph LR
 ## 相关文档 {#相关文档-1}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [验证工具对比矩阵](10_verification_tools_matrix.md)
-
 - [验证工具选型决策树](10_verification_tools_decision_tree.md)
-
 - [形式化方法概述](formal_methods/README.md)
 
 ---
@@ -467,17 +407,13 @@ graph LR
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -485,15 +421,10 @@ graph LR
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -501,17 +432,13 @@ graph LR
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档-1}
 
 - Rust 1.94 迁移指南
-
 - Rust 1.94 特性速查
-
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -523,9 +450,7 @@ graph LR
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -541,11 +466,9 @@ graph LR
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---

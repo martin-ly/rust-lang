@@ -1,23 +1,14 @@
 # Rust形式化方法面试题集锦 {#rust形式化方法面试题集锦}
 
 > **概念族**: 学习资源
-
 > **内容分级**: [归档级]
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成权威国际化来源对齐升级
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-24
-
 > **目标**: 面试准备、自我检测、知识点巩固
-
 > **级别**: L1/L2 (给人看的)
 
 ---
@@ -25,9 +16,7 @@
 ## 📑 目录 {#目录}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [Rust形式化方法面试题集锦 {#rust形式化方法面试题集锦}](#rust形式化方法面试题集锦-rust形式化方法面试题集锦)
@@ -73,17 +62,13 @@
 ## 使用指南 {#使用指南}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **难度分级**:
 
 - ⭐ 基础 - 初级开发者
-
 - ⭐⭐ 进阶 - 中级开发者
-
 - ⭐⭐⭐ 高级 - 高级/核心开发者
-
 - ⭐⭐⭐⭐ 专家 - 研究者/架构师
 
 ---
@@ -91,15 +76,12 @@
 ## 一、所有权与借用 (20题) {#一所有权与借用-20题}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ⭐ 基础题 {#基础题-2}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Q1: 什么是所有权？三规则是什么？**
@@ -111,9 +93,7 @@
 所有权是Rust内存管理的核心机制：
 
 1. 每个值有且只有一个所有者
-
 2. 所有者离开作用域，值被丢弃
-
 3. 所有权可以转移(Move)或借用(Borrow)
 
 </details>
@@ -127,7 +107,6 @@
 <summary>答案</summary>
 
 - **Move**: 转移所有权，原变量不再有效
-
 - **Copy**: 复制值，原变量仍然有效
 
 实现Copy的条件：只包含标量值或其他Copy类型。
@@ -143,7 +122,6 @@
 <summary>答案</summary>
 
 1. 要么一个可变引用(&mut)，要么多个不可变引用(&)
-
 2. 引用必须始终有效（不能悬垂）
 
 </details>
@@ -153,15 +131,12 @@
 **Q4: 为什么这段代码编译错误？如何修复？**
 
 ```rust,ignore
-
 let x = String::from("hello");
 
 let y = x;
 
 println!("{}", x);
-
 ```
-
 <details>
 
 <summary>答案</summary>
@@ -171,19 +146,15 @@ println!("{}", x);
 **修复方案**:
 
 ```rust,ignore
-
 // 方案1: clone
 
 let y = x.clone();
 
 
-
 // 方案2: 借用
 
 let y = &x;
-
 ```
-
 </details>
 
 ---
@@ -191,9 +162,7 @@ let y = &x;
 ### ⭐⭐ 进阶题 {#进阶题-4}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Q5: 解释`Rc`和`Arc`的区别，为什么`Rc`不是Send？**
@@ -203,11 +172,8 @@ let y = &x;
 <summary>答案</summary>
 
 | 特性 | Rc | Arc |
-
 | :--- | :--- | :--- |
-
 | 线程安全 | 否 | 是 |
-
 | 引用计数 | 非原子 | 原子 |
 
 `Rc`不是Send因为引用计数更新非线程安全，多线程同时修改会导致数据竞争。
@@ -223,7 +189,6 @@ let y = &x;
 <summary>答案</summary>
 
 - `RefCell`: 单线程运行时借用检查
-
 - `Mutex`: 多线程互斥锁，线程安全
 
 相同点：都提供内部可变性。
@@ -241,7 +206,6 @@ let y = &x;
 允许在不可变引用下修改数据：
 
 ```rust
-
 use std::cell::Cell;
 
 let cell = Cell::new(5);
@@ -249,9 +213,7 @@ let cell = Cell::new(5);
 let x = &cell;
 
 x.set(10);  // 内部修改
-
 ```
-
 常用类型：`Cell`, `RefCell`, `Mutex`, `RwLock`
 
 </details>
@@ -261,7 +223,6 @@ x.set(10);  // 内部修改
 **Q8: 解释这段代码为什么错误：**
 
 ```rust,ignore
-
 let mut x = 5;
 
 let r1 = &x;
@@ -269,9 +230,7 @@ let r1 = &x;
 let r2 = &mut x;
 
 println!("{}", r1);
-
 ```
-
 <details>
 
 <summary>答案</summary>
@@ -289,9 +248,7 @@ println!("{}", r1);
 ### ⭐⭐⭐ 高级题 {#高级题-4}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Q9: 什么是非词法生命周期(NLL)？它解决了什么问题？**
@@ -305,7 +262,6 @@ NLL基于值的使用位置而非词法作用域判断生命周期。
 **解决的问题**:
 
 ```rust
-
 let mut x = 5;
 
 let y = &x;
@@ -315,9 +271,7 @@ println!("{}", y);  // y最后一次使用
 // 这里y已经结束，即使还在作用域内
 
 let z = &mut x;  // 在NLL之前编译错误
-
 ```
-
 </details>
 
 ---
@@ -331,7 +285,6 @@ let z = &mut x;  // 在NLL之前编译错误
 零大小类型，用于告诉编译器使用了某个类型，影响生命周期。
 
 ```rust,ignore
-
 struct Slice<'a, T: 'a> {
 
     ptr: *const T,
@@ -339,9 +292,7 @@ struct Slice<'a, T: 'a> {
     _marker: PhantomData<&'a T>,
 
 }
-
 ```
-
 </details>
 
 ---
@@ -367,17 +318,13 @@ async/await需要Pin因为Future是状态机，可能自引用。
 <summary>答案</summary>
 
 - `swap`: 交换两个可变引用的值
-
 - `replace`: 替换值并返回旧值
 
 ```rust,ignore
-
 mem::swap(&mut a, &mut b);  // a和b交换
 
 let old = mem::replace(&mut a, new);  // a=new，返回旧值
-
 ```
-
 </details>
 
 ---
@@ -385,9 +332,7 @@ let old = mem::replace(&mut a, new);  // a=new，返回旧值
 ### ⭐⭐⭐⭐ 专家题 {#专家题-3}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Q13: 如何理解"所有权系统防止内存泄漏"这个说法？**
@@ -399,7 +344,6 @@ let old = mem::replace(&mut a, new);  // a=new，返回旧值
 严格来说不完全正确：
 
 - 所有权系统主要防止**内存不安全**（use-after-free, double-free）
-
 - 内存泄漏仍可能发生（`Rc`循环引用、`mem::forget`）
 
 但所有权+RAII确实有助于减少泄漏。
@@ -417,17 +361,12 @@ let old = mem::replace(&mut a, new);  // a=new，返回旧值
 将堆内存泄漏为`'static`引用：
 
 ```rust
-
 let x: &'static str = Box::leak(Box::new(String::from("hello")));
-
 ```
-
 用途：
 
 - 全局状态
-
 - 与C FFI交互
-
 - 运行时单例
 
 </details>
@@ -443,13 +382,11 @@ let x: &'static str = Box::leak(Box::new(String::from("hello")));
 使用`AtomicUsize`作为引用计数：
 
 ```rust,ignore
-
 struct Arc<T> {
 
     ptr: NonNull<ArcInner<T>>,
 
 }
-
 
 
 struct ArcInner<T> {
@@ -459,9 +396,7 @@ struct ArcInner<T> {
     data: T,
 
 }
-
 ```
-
 clone: `count.fetch_add(1, Relaxed)`
 
 drop: `if count.fetch_sub(1, Release) == 1 { 释放 }`
@@ -473,15 +408,12 @@ drop: `if count.fetch_sub(1, Release) == 1 { 释放 }`
 ## 二、类型系统 (15题) {#二类型系统-15题}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ⭐ 基础题 {#基础题-2}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Q16: 什么是`Sized` trait？**
@@ -503,13 +435,9 @@ drop: `if count.fetch_sub(1, Release) == 1 { 释放 }`
 <summary>答案</summary>
 
 | 特性 | impl Trait | dyn Trait |
-
 | :--- | :--- | :--- |
-
 | 分发 | 静态 | 动态 |
-
 | 开销 | 无 | 虚表查找 |
-
 | 返回类型 | 支持 | 需要Box |
 
 </details>
@@ -525,7 +453,6 @@ drop: `if count.fetch_sub(1, Release) == 1 { 释放 }`
 Trait中定义的占位类型，由实现者指定：
 
 ```rust
-
 trait Iterator {
 
     type Item;
@@ -533,9 +460,7 @@ trait Iterator {
     fn next(&mut self) -> Option<Self::Item>;
 
 }
-
 ```
-
 每个实现只能有一个Item类型。
 
 </details>
@@ -545,9 +470,7 @@ trait Iterator {
 ### ⭐⭐ 进阶题 {#进阶题-4}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Q19: 什么是型变(Variance)？协变、逆变、不变有什么区别？**
@@ -557,13 +480,9 @@ trait Iterator {
 <summary>答案</summary>
 
 | 型变 | 含义 | 示例 |
-
 | :--- | :--- | :--- |
-
 | 协变(+) | 保持方向 | `Box<&'static str> <: Box<&'a str>` |
-
 | 逆变(-) | 反转方向 | `fn(&'a str) <: fn(&'static str)` |
-
 | 不变(=) | 必须相同 | `&mut T`, `Cell<T>` |
 
 </details>
@@ -577,9 +496,7 @@ trait Iterator {
 <summary>答案</summary>
 
 1. 每个引用参数有自己的生命周期
-
 2. 只有一个输入生命周期 → 赋给输出
-
 3. `&self`存在 → `self`的生命周期赋给输出
 
 </details>
@@ -595,11 +512,8 @@ trait Iterator {
 高阶trait bound (HRTB)，表示"对于所有生命周期"。
 
 ```rust,ignore
-
 F: for<'a> Fn(&'a str) -> &'a str
-
 ```
-
 </details>
 
 ---
@@ -607,9 +521,7 @@ F: for<'a> Fn(&'a str) -> &'a str
 ### ⭐⭐⭐ 高级题 {#高级题-4}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Q22: 什么是泛型关联类型(GAT)？**
@@ -621,7 +533,6 @@ F: for<'a> Fn(&'a str) -> &'a str
 允许关联类型有泛型参数：
 
 ```rust,ignore
-
 trait Container {
 
     type Item<'a>;
@@ -629,9 +540,7 @@ trait Container {
     fn get(&self, index: usize) -> Option<Self::Item<'_>>;
 
 }
-
 ```
-
 </details>
 
 ---
@@ -645,13 +554,10 @@ trait Container {
 为特定类型提供泛型的特殊实现：
 
 ```rust,ignore
-
 impl<T> Trait for T { default fn method() {} }
 
 impl Trait for i32 { fn method() {} }  // 特化
-
 ```
-
 目前不稳定，需要feature flag。
 
 </details>
@@ -667,11 +573,8 @@ impl Trait for i32 { fn method() {} }  // 特化
 `Option<&T>`和`&T`大小相同，用0表示`None`。
 
 ```rust
-
 assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
-
 ```
-
 </details>
 
 ---
@@ -679,9 +582,7 @@ assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 ### ⭐⭐⭐⭐ 专家题 {#专家题-3}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Q25: 如何实现一个自定义DST？**
@@ -693,7 +594,6 @@ assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 DST需要大小信息存储在胖指针中：
 
 ```rust
-
 struct MySlice {
 
     data: [u8],  // DST
@@ -701,13 +601,10 @@ struct MySlice {
 }
 
 
-
 // 使用胖指针
 
 let ptr: *const MySlice;  // 包含长度信息
-
 ```
-
 通常与`#[repr(C)]`和指针操作配合。
 
 </details>
@@ -717,7 +614,6 @@ let ptr: *const MySlice;  // 包含长度信息
 ## 三、并发与异步 (15题) {#三并发与异步-15题}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ⭐ 基础题 {#基础题-2}
@@ -731,7 +627,6 @@ let ptr: *const MySlice;  // 包含长度信息
 <summary>答案</summary>
 
 - **Send**: 可跨线程转移所有权
-
 - **Sync**: 可跨线程共享（通过`&T`）
 
 等价定义：`T: Sync ⇔ &T: Send`
@@ -747,7 +642,6 @@ let ptr: *const MySlice;  // 包含长度信息
 <summary>答案</summary>
 
 - 读多写少 → `RwLock`
-
 - 通用场景 → `Mutex`（默认推荐）
 
 `RwLock`可能有写者饥饿问题。
@@ -763,13 +657,9 @@ let ptr: *const MySlice;  // 包含长度信息
 <summary>答案</summary>
 
 | 特性 | thread::spawn | tokio::spawn |
-
 | :--- | :--- | :--- |
-
 | 创建 | OS线程 | 异步任务 |
-
 | 成本 | ~MB | ~KB |
-
 | 数量 | 几百 | 数百万 |
 
 </details>
@@ -791,11 +681,8 @@ let ptr: *const MySlice;  // 包含长度信息
 避免策略：
 
 1. 锁顺序一致
-
 2. 使用`try_lock`
-
 3. 避免嵌套锁
-
 4. 使用作用域锁
 
 </details>
@@ -811,9 +698,7 @@ let ptr: *const MySlice;  // 包含长度信息
 编译器将async函数转换为状态机：
 
 ```rust,ignore
-
 async fn foo() { bar().await; }
-
 
 
 // 转换为：
@@ -827,9 +712,7 @@ enum FooFuture {
     Done,
 
 }
-
 ```
-
 执行器轮询Future，在`.await`处可能让出。
 
 </details>
@@ -877,13 +760,11 @@ enum FooFuture {
 `.await`前释放锁：
 
 ```rust,ignore
-
 // ❌ 危险
 
 let guard = mutex.lock().unwrap();
 
 some_async().await;
-
 
 
 // ✅ 安全
@@ -899,13 +780,10 @@ some_async().await;
 some_async().await;
 
 
-
 // 或使用tokio::sync::Mutex
 
 let guard = tokio_mutex.lock().await;
-
 ```
-
 </details>
 
 ---
@@ -919,7 +797,6 @@ let guard = tokio_mutex.lock().await;
 等待多个Future，哪个先完成就执行哪个：
 
 ```rust,ignore
-
 tokio::select! {
 
     _ = task1 => println!("task1"),
@@ -927,9 +804,7 @@ tokio::select! {
     _ = task2 => println!("task2"),
 
 }
-
 ```
-
 </details>
 
 ---
@@ -947,21 +822,16 @@ tokio::select! {
 核心组件：
 
 1. Task队列
-
 2. Executor轮询
-
 3. Reactor处理IO事件
-
 4. Waker唤醒Task
 
 ```rust,ignore
-
 struct Runtime {
 
     task_queue: VecDeque<Task>,
 
 }
-
 
 
 impl Runtime {
@@ -981,9 +851,7 @@ impl Runtime {
     }
 
 }
-
 ```
-
 </details>
 
 ---
@@ -991,7 +859,6 @@ impl Runtime {
 ## 四、形式化方法 (10题) {#四形式化方法-10题}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ⭐⭐ 进阶题 {#进阶题-4}
@@ -1005,9 +872,7 @@ impl Runtime {
 <summary>答案</summary>
 
 - **L1**: 证明思路（给人看的）
-
 - **L2**: 完整数学证明
-
 - **L3**: 机器证明（Coq/Lean）
 
 </details>
@@ -1053,7 +918,6 @@ impl Runtime {
 <summary>答案</summary>
 
 - **进展性**: 良类型表达式可以继续求值或已是值
-
 - **保持性**: 求值保持类型
 
 类型安全 = 进展性 + 保持性
@@ -1073,9 +937,7 @@ impl Runtime {
 核心概念：
 
 - 资源断言：`l ↦ v`（位置l存储值v）
-
 - 分离合取：`P * Q`（P和Q拥有不相交资源）
-
 - 框架规则：`{P} C {Q} ⊢ {P*R} C {Q*R}`
 
 </details>
@@ -1085,7 +947,6 @@ impl Runtime {
 ## 五、分布式与工作流 (10题) {#五分布式与工作流-10题}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ⭐⭐ 进阶题 {#进阶题-4}
@@ -1111,13 +972,9 @@ impl Runtime {
 <summary>答案</summary>
 
 | 特性 | 编排式 | 编制式 |
-
 | :--- | :--- | :--- |
-
 | 控制 | 集中协调器 | 事件驱动 |
-
 | 可见性 | 高 | 低 |
-
 | 灵活性 | 低 | 高 |
 
 </details>
@@ -1131,9 +988,7 @@ impl Runtime {
 <summary>答案</summary>
 
 - 读多写少
-
 - 复杂查询
-
 - 需要事件溯源
 
 </details>
@@ -1153,9 +1008,7 @@ impl Runtime {
 状态机：
 
 - Closed: 正常
-
 - Open: 错误率过高，快速失败
-
 - Half-Open: 试探恢复
 
 </details>
@@ -1169,9 +1022,7 @@ impl Runtime {
 <summary>答案</summary>
 
 - 需要持久化 → Temporal/Cadence
-
 - 简单流程 → 自研状态机
-
 - 人工任务 → Camunda
 
 </details>
@@ -1181,7 +1032,6 @@ impl Runtime {
 ## 六、系统设计题 (5题) {#六系统设计题-5题}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ⭐⭐⭐⭐ 专家题 {#专家题-3}
@@ -1195,11 +1045,9 @@ impl Runtime {
 <summary>答案</summary>
 
 ```rust,ignore
-
 use std::collections::HashMap;
 
 use std::sync::Mutex;
-
 
 
 struct LruCache<K, V> {
@@ -1211,19 +1059,14 @@ struct LruCache<K, V> {
 }
 
 
-
 // 使用Mutex保护HashMap
 
 // 内部维护访问顺序（链表）
-
 ```
-
 关键点：
 
 - `Mutex`保护共享状态
-
 - 处理容量超限
-
 - 更新访问顺序
 
 </details>
@@ -1237,7 +1080,6 @@ struct LruCache<K, V> {
 <summary>答案</summary>
 
 ```rust,ignore
-
 struct Saga {
 
     steps: Vec<Step>,
@@ -1245,7 +1087,6 @@ struct Saga {
     compensations: Vec<Compensation>,
 
 }
-
 
 
 impl Saga {
@@ -1283,9 +1124,7 @@ impl Saga {
     }
 
 }
-
 ```
-
 </details>
 
 ---
@@ -1297,7 +1136,6 @@ impl Saga {
 <summary>答案</summary>
 
 ```rust,ignore
-
 struct ConnectionPool {
 
     connections: Mutex<Vec<Connection>>,
@@ -1305,7 +1143,6 @@ struct ConnectionPool {
     max_size: usize,
 
 }
-
 
 
 impl ConnectionPool {
@@ -1321,7 +1158,6 @@ impl ConnectionPool {
     }
 
 
-
     async fn put(&self, conn: Connection) {
 
         // 归还连接
@@ -1333,9 +1169,7 @@ impl ConnectionPool {
     }
 
 }
-
 ```
-
 </details>
 
 ---
@@ -1347,7 +1181,6 @@ impl ConnectionPool {
 <summary>答案</summary>
 
 ```rust,ignore
-
 struct MyFuture {
 
     state: State,
@@ -1355,11 +1188,9 @@ struct MyFuture {
 }
 
 
-
 impl Future for MyFuture {
 
     type Output = i32;
-
 
 
     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
@@ -1397,9 +1228,7 @@ impl Future for MyFuture {
     }
 
 }
-
 ```
-
 </details>
 
 ---
@@ -1413,19 +1242,14 @@ impl Future for MyFuture {
 核心组件：
 
 1. **Event Store**: 存储事件
-
 2. **Aggregate**: 领域模型
-
 3. **Projection**: 读模型
-
 4. **Command Handler**: 处理命令
 
 ```rust,ignore
-
 // 事件
 
 trait Event {}
-
 
 
 // 聚合
@@ -1439,7 +1263,6 @@ trait Aggregate {
 }
 
 
-
 // 事件存储
 
 trait EventStore {
@@ -1449,9 +1272,7 @@ trait EventStore {
     fn get(&self, id: &str) -> Vec<Box<dyn Event>>;
 
 }
-
 ```
-
 </details>
 
 ---
@@ -1459,7 +1280,6 @@ trait EventStore {
 ## 附录：自我评估 {#附录自我评估}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 初学者 (答对15-25题) {#初学者-答对15-25题}
@@ -1467,9 +1287,7 @@ trait EventStore {
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - 掌握所有权、借用基础
-
 - 能写简单Rust程序
-
 - 建议继续学习并发
 
 ### 进阶者 (答对25-35题) {#进阶者-答对25-35题}
@@ -1477,9 +1295,7 @@ trait EventStore {
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - 理解类型系统
-
 - 能处理生命周期
-
 - 建议学习形式化方法
 
 ### 高级 (答对35-45题) {#高级-答对35-45题}
@@ -1487,9 +1303,7 @@ trait EventStore {
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - 掌握并发异步
-
 - 理解高级类型特性
-
 - 建议参与开源
 
 ### 专家 (答对45-50题) {#专家-答对45-50题}
@@ -1497,9 +1311,7 @@ trait EventStore {
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - 深入理解原理
-
 - 能设计复杂系统
-
 - 建议贡献研究
 
 ---
@@ -1515,11 +1327,8 @@ trait EventStore {
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -1533,15 +1342,10 @@ trait EventStore {
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -1551,9 +1355,7 @@ trait EventStore {
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
@@ -1561,9 +1363,7 @@ trait EventStore {
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - Rust 1.94 迁移指南
-
 - [Rust 1.94 特性速查
-
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -1575,9 +1375,7 @@ trait EventStore {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -1597,11 +1395,9 @@ trait EventStore {
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [research_notes 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -1609,53 +1405,29 @@ trait EventStore {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
-
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ---

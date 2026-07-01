@@ -12,13 +12,9 @@
 本次审计对项目的目录结构、内容主题、版本工具链、国际化、链接引用、代码与文档、脚本工具、元数据状态等 8 个维度进行了全面梳理，发现以下最关键问题：
 
 1. **版本/工具链声明与实际严重不符**：项目对外宣称 MSRV 1.96.0 stable、Edition 2024，但 `rust-toolchain.toml` 锁定 `nightly`，CI 使用 nightly，且全仓库存在大量 `#![feature(...)]` nightly feature gate。稳定版用户无法直接构建，MSRV 形同虚设。
-
 2. **治理文档“多主控”**：`.kimi/` 中存在 30+ 份计划/状态文件，互相声称“唯一主控”或“主控来源”，导致真实优先级与待办来源混乱。
-
 3. **同一主题高度分散且重复**：例如 `ownership` 出现在 26 个文件中、`borrow` 29 个、`async` 26 个、`lifetime` 12 个，分布在 `concept/`、`docs/`、`knowledge/`、`docs/rust-ownership-decidability/` 中；同时存在多个同名/同编号文件。
-
 4. **脚本与文档工具严重失控**：`scripts/README.md` 仅覆盖约 1/3 的活跃脚本；多个 `fix_dead_links.py/v2/v3` 等重复版本并存；`scripts/archive/` 已堆积 72 个历史脚本。
-
 5. **归档边界不清晰**：`docs/archive/` 含 258 个文件，最近 30 天内仍有大量 archive 文件被修改，说明 archive 并非只读历史，而是活跃内容的“临时堆放区”。
 
 ---

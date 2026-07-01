@@ -1,3 +1,10 @@
+> **Canonical 说明**: 本文件专注 **regex crate 的 DFA/NFA/Hybrid 正则引擎架构**。
+>
+> 若只需要使用指南与生态定位，请优先参考：
+> - [字符串与文本](../../../../concept/01_foundation/09_strings_and_text.md)
+> - [字符串与编码](../../../../concept/01_foundation/18_strings_and_encoding.md)
+>
+> 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **⚠️ 历史文档提示**：
 >
 > 本文档反映 regex 1.11+ 在 Rust 1.96+ 生态下的设计状态。
@@ -16,13 +23,9 @@
 # regex Crate 架构解构 {#regex-crate-架构解构}
 
 >
-
 > **最后更新**: 2026-06-29
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
 > **Bloom 层级**: L3-L5 (应用/分析/评价)
 > **知识领域**: 正则表达式、字符串处理、文本解析、模式验证
@@ -33,7 +36,6 @@
 ## 1. 引言：Rust `regex` crate 的生态定位 {#1-引言rust-regex-crate-的生态定位}
 
 >
-
 > **[来源: [regex crates.io](https://crates.io/crates/regex)]**
 
 `regex` crate 是 Rust 生态中最广泛使用的正则表达式引擎，由 Rust 核心团队维护。它以**安全、高性能、Unicode 正确**著称，被 `ripgrep`、`clap`、`tracing`、`serde` 等众多工业级 crate 间接或直接依赖，是 Rust 文本处理基础设施的关键组成部分。
@@ -58,7 +60,6 @@ use regex::Regex;
 let re = Regex::new(r"\d{4}-\d{2}-\d{2}").unwrap();
 assert!(re.is_match("2026-06-29"));
 ```
-
 > [来源: regex Examples](https://docs.rs/regex/latest/regex/#example)
 
 ---
@@ -66,7 +67,6 @@ assert!(re.is_match("2026-06-29"));
 ## 2. 核心 API 架构 {#2-核心-api-架构}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 三层入口：`Regex` / `RegexBuilder` / `RegexSet` {#21-三层入口regex-regexbuilder-regexset}
@@ -84,7 +84,6 @@ graph TD
     RE -->|captures| CAP
     RE -->|replace_all| SUB
 ```
-
 > [来源: regex Regex Docs](https://docs.rs/regex/latest/regex/struct.Regex.html)
 
 | 类型 | 职责 | 典型使用场景 |
@@ -109,7 +108,6 @@ assert_eq!(&caps[0], "2026-06-29");
 assert_eq!(&caps["year"], "2026");
 assert_eq!(&caps["month"], "06");
 ```
-
 > [来源: regex Captures Docs](https://docs.rs/regex/latest/regex/struct.Captures.html)
 
 **关键设计**：`Captures` 通过生命周期借用输入字符串，避免匹配过程中的拷贝；`caps.name("year")` 返回 `Option<Match>`，强制调用者处理缺失的分组。
@@ -126,7 +124,6 @@ for ident in re.find_iter("let foo = bar + 1;") {
     println!("{}", ident.as_str());
 }
 ```
-
 > [来源: regex Match Docs](https://docs.rs/regex/latest/regex/struct.Match.html)
 
 | 方法 | 返回类型 | 语义 |
@@ -152,7 +149,6 @@ let incremented = re.replace_all("a1b2c3", |caps: &regex::Captures| {
     caps[0].parse::<i32>().unwrap().wrapping_add(1).to_string()
 });
 ```
-
 > [来源: regex Replacer Docs](https://docs.rs/regex/latest/regex/trait.Replacer.html)
 
 **类型注意**：`replace_all` 返回 `Cow<str>`，当没有匹配时直接借用原字符串，无需分配。
@@ -173,7 +169,6 @@ let set = RegexSet::new(&[
 let matches: Vec<usize> = set.matches("abc123").into_iter().collect();
 assert!(matches.contains(&2));
 ```
-
 > [来源: regex RegexSet Docs](https://docs.rs/regex/latest/regex/struct.RegexSet.html)
 
 ---
@@ -181,7 +176,6 @@ assert!(matches.contains(&2));
 ## 3. 性能特征 {#3-性能特征}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 `regex` crate 的引擎实现为**混合自动机（Hybrid Automaton）**，根据模式与输入在编译期/运行期选择 DFA、NFA 或 Literal 优化路径：
@@ -205,7 +199,6 @@ graph LR
     LIT -->|前缀命中| EXEC
     NFA -->|捕获/复杂模式| EXEC
 ```
-
 > [来源: regex Implementation Notes](https://docs.rs/regex/latest/regex/#module-level-documentation)
 
 **关键保证**：`regex` 默认拒绝包含无界量词嵌套的结构（如 `(a+)+`），从源头避免灾难性回溯。这一限制通过**禁止部分 PCRE 风格扩展**（如反向引用、递归模式）实现。
@@ -215,7 +208,6 @@ graph LR
 ## 4. 反例边界 {#4-反例边界}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 反例 | 错误表现 | 正确做法 |
@@ -236,7 +228,6 @@ graph LR
 ## 5. 类型系统利用 {#5-类型系统利用}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | API | 类型系统价值 |
@@ -254,7 +245,6 @@ graph LR
 ## 6. 代码示例锚点 {#6-代码示例锚点}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 示例 | 文件 | 说明 |
@@ -269,7 +259,6 @@ graph LR
 ## 7. 相关架构与延伸阅读 {#7-相关架构与延伸阅读}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Clap CLI 解析架构](04_clap_architecture.md) — 参数验证中常用的正则模式
@@ -282,17 +271,11 @@ graph LR
 ## 权威来源索引 {#权威来源索引}
 
 > **[来源: [regex crates.io](https://crates.io/crates/regex)]**
-
 > **[来源: [regex docs.rs](https://docs.rs/regex/latest/regex/)]**
-
 > **[来源: [regex GitHub](https://github.com/rust-lang/regex)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **权威来源**: [regex crates.io](https://crates.io/crates/regex), [regex docs.rs](https://docs.rs/regex/latest/regex/), [regex GitHub](https://github.com/rust-lang/regex)
-
 >
-
 > **权威来源对齐变更日志**: 2026-06-29 创建 regex 生态专题，对齐 regex 1.11 官方文档与 Rust Reference
 
 ---
@@ -305,12 +288,10 @@ graph LR
 > - [来源: [regex crates.io](https://crates.io/crates/regex)]
 > - [来源: [The Rust Reference](https://doc.rust-lang.org/reference/)]
 > - [来源: [Rust Standard Library – str](https://doc.rust-lang.org/std/primitive.str.html)]
-
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [Regular Expression Matching Can Be Simple And Fast (Russ Cox)](https://swtch.com/~rsc/regexp/regexp1.html)] — 正则表达式理论与 DFA/NFA 实现
 > - [来源: [Regular Expression Matching: the Virtual Machine Approach (Russ Cox)](https://swtch.com/~rsc/regexp/regexp2.html)] — Thompson NFA 虚拟机实现
-
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [regex GitHub Repository](https://github.com/rust-lang/regex)]

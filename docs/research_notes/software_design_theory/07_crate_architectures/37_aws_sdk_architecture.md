@@ -1,3 +1,9 @@
+> **Canonical 说明**: 本文件专注 **aws-sdk-rust 的 Smithy 生成代码与 SdkError 架构**。
+>
+> 若只需要使用指南与生态定位，请优先参考：
+> - [云原生](../../../../concept/06_ecosystem/24_cloud_native.md)
+>
+> 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
@@ -57,7 +63,6 @@ let client = Client::new(&config);
 let resp = client.list_buckets().send().await?;
 println!("buckets = {:?}", resp.buckets());
 ```
-
 > [来源: [AWS SDK for Rust Getting Started](https://docs.aws.amazon.com/sdk-for-rust/latest/dg/getting-started.html)]
 
 ---
@@ -92,7 +97,6 @@ let sdk_config = aws_config::from_env()
 let s3 = aws_sdk_s3::Client::new(&sdk_config);
 let dynamodb = aws_sdk_dynamodb::Client::new(&sdk_config);
 ```
-
 > [来源: [AWS SDK for Rust Config](https://docs.aws.amazon.com/sdk-for-rust/latest/dg/configure.html)]
 
 ### 2.2 强类型操作构造器 {#22-强类型操作构造器}
@@ -107,7 +111,6 @@ let resp = client
     .send()
     .await?;
 ```
-
 > [来源: [aws-sdk-s3 operation docs](https://docs.rs/aws-sdk-s3/latest/aws_sdk_s3/operation/get_object/index.html)]
 
 ### 2.3 分页与流式响应 {#23-分页与流式响应}
@@ -122,7 +125,6 @@ while let Some(obj) = paginator.next().await {
     println!("{:?}", obj?.key());
 }
 ```
-
 > [来源: [AWS SDK for Rust Paginators](https://docs.aws.amazon.com/sdk-for-rust/latest/dg/paginators.html)]
 
 ---
@@ -213,12 +215,10 @@ while let Some(obj) = paginator.next().await {
 > - [来源: [aws-sdk-rust GitHub](https://github.com/awslabs/aws-sdk-rust)]
 > - [来源: [smithy-rs GitHub](https://github.com/smithy-lang/smithy-rs)]
 > - [来源: [aws-config docs.rs](https://docs.rs/aws-config/latest/aws_config/)]
-
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [Smithy: A Language for Defining Services and SDKs](https://smithy.io/2.0/index.html)] — AWS SDK 代码生成模型规范
 > - [来源: [AWS IAM Roles and Security Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)] — 凭证与安全最佳实践
-
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [AWS SDK Rust Examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rustv1)]

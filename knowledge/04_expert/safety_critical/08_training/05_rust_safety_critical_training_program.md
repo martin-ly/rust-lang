@@ -31,7 +31,6 @@
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## Level 1: Rust基础 (2周)
@@ -51,7 +50,6 @@
   - 移动语义
   - 复制trait
   - Drop trait
-
 - **实践** (4h)
 
   ```rust
@@ -68,7 +66,6 @@
       data.iter().sum()
   }
   ```
-
 #### 模块2: 借用与生命周期 (2天)
 >
 > **[来源: Rust Official Docs]**
@@ -78,7 +75,6 @@
   - 可变借用
   - 生命周期标注
   - 生命周期省略
-
 - **实践** (4h)
 
   ```rust
@@ -98,7 +94,6 @@
       }
   }
   ```
-
 #### 模块3: 类型系统 (1天)
 
 - **理论** (2h)
@@ -106,7 +101,6 @@
   - Option和Result
   - trait系统
   - 泛型
-
 - **实践** (2h)
   - 状态机实现
   - 错误处理模式
@@ -167,7 +161,6 @@
   - 原始指针
   - FFI基础
   - 不变量文档
-
 - **实践** (4h)
 
   ```rust
@@ -193,7 +186,6 @@
       }
   }
   ```
-
 #### 模块9: 并发编程 (1天)
 
 - 线程管理
@@ -250,12 +242,10 @@
   - ASIL等级
   - 安全生命周期
   - 需求管理
-
 - **IEC 61508** (工业)
   - SIL等级
   - 系统安全
   - 硬件软件接口
-
 - **DO-178C** (航空)
   - DAL等级
   - 基于需求的测试
@@ -293,7 +283,6 @@
       assert!(result <= 200);
   }
   ```
-
 - **Miri**: UB检测
 - **Verus**: 定理证明
 
@@ -384,7 +373,6 @@ rustup component add clippy rustfmt llvm-tools-preview
 cargo install cargo-audit cargo-fuzz cargo-tarpaulin
 cargo install kani-verifier verus
 ```
-
 ### 参考书籍
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -421,7 +409,6 @@ cargo install kani-verifier verus
 ├── AdaCore培训认证
 └── 厂商提供
 ```
-
 ### 组织认证
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -514,7 +501,6 @@ cargo install kani-verifier verus
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [评估与认证体系](01_assessment_and_certification.md)
 - [功能安全认证备考指南](02_certification_prep_guide.md)
 

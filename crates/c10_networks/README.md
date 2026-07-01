@@ -105,29 +105,22 @@
 
 1. **[知识图谱与概念关系](docs/theory/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** ⭐⭐⭐⭐⭐
    - Mermaid可视化图表 + 概念三元组 + 协议演化时间线
-
 2. **[多维矩阵对比分析](docs/theory/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** ⭐⭐⭐⭐⭐
    - 协议/运行时/序列化格式全面对比 + 性能基准代码
-
 3. **[网络编程思维导图](docs/RUST_190_COMPREHENSIVE_EXAMPLES.md)** ⭐⭐⭐⭐⭐
    - ASCII艺术知识结构 + 完整学习路径
-
 4. **[Rust 1.90 实战示例 Part 1](docs/RUST_190_EXAMPLES_COLLECTION.md)** ⭐⭐⭐⭐⭐
    - async trait/closure + TCP/UDP完整实现
-
 5. **[Rust 1.90 实战示例 Part 2](docs/RUST_190_EXAMPLES_PART2.md)** ⭐⭐⭐⭐⭐
    - HTTP客户端 + WebSocket + DNS解析器
-
 6. **[Rust 1.90 实战示例 Part 3](docs/RUST_190_EXAMPLES_PART3_ADVANCED_PROTOCOLS.md)** ⭐⭐⭐⭐⭐
    - gRPC (4种RPC模式) + MQTT (QoS/重连) + QUIC + AMQP + GraphQL + SSE + 微服务架构
-
 7. **[Rust 1.90 现代网络技术 (2025)](docs/RUST_190_MODERN_NETWORK_TECHNOLOGIES_2025.md)** ⭐⭐⭐⭐⭐ 🆕🔥
    - **io_uring革命性I/O**: tokio-uring/Monoio/Glommio 三大运行时完整实战
    - **零拷贝技术**: sendfile/splice/mmap/io_uring 性能对比
    - **HTTP/3和QUIC**: 完整实现 + 0-RTT + 连接迁移
    - **内核旁路**: AF_XDP高性能包处理 + eBPF网络监控
    - **综合实战**: 基于io_uring的零拷贝高性能文件服务器
-
 8. **[Rust 1.90 综合思维导图](docs/RUST_190_COMPREHENSIVE_MINDMAP.md)** ⭐⭐⭐⭐⭐ 🆕 (2025-10-20)
    - **ASCII艺术图表**: 协议栈/I/O模型/应用层完整体系
    - **io_uring + 零拷贝**: 2025最新高性能技术栈可视化
@@ -135,7 +128,6 @@
    - **3级学习路径**: 初学者/进阶/专家(2-10周)
    - **问题诊断树**: 网络错误快速定位
    - **适合**: 快速overview、复习、知识结构梳理
-
 9. **[文档索引与导航](docs/RUST_190_PRACTICAL_EXAMPLES.md)**
    - 所有文档总索引 + 学习路径推荐
 
@@ -169,7 +161,6 @@ C10 Networks 是一个基于 Rust 1.92.0 的现代网络编程库，提供了完
 [dependencies]
 c10_networks = "0.1.0"
 ```
-
 ## 📡 抓包与流量分析（libpnet 实战）
 
 本库内置基于 `libpnet` 的抓包与流量分析能力：
@@ -193,7 +184,6 @@ c10_networks = "0.1.0"
 Set-ExecutionPolicy Bypass -Scope Process -Force
 ./crates/c10_networks/scripts/setup_windows_env.ps1 -WithNpcap -InstallNasm
 ```
-
 ### 构建与示例
 
 ```powershell
@@ -211,19 +201,16 @@ cargo run -p c10_networks --example udp_custom_server -- 127.0.0.1:9000
 # 终端2
 cargo run -p c10_networks --example udp_custom_demo -- 127.0.0.1:9000
 ```
-
 启用 offline 特性读取 PCAP（需自备 `capture.pcap`）：
 
 ```powershell
 cargo run -p c10_networks --features offline --example pcap_offline -- capture.pcap
 ```
-
 启用 pcap_live 实时过滤抓包（需管理员）：
 
 ```powershell
 cargo run -p c10_networks --features pcap_live --example pcap_live_tcp -- "Ethernet" "tcp port 80"
 ```
-
 ### 编程接口（精简）
 
 ```rust
@@ -232,7 +219,6 @@ use c10_networks::sniff::{
   UdpCustomMessage, udp_custom_roundtrip,
 };
 ```
-
 - ARP（同步）：`ArpSniffer::sniff_arp_sync(cfg, Some(n)) -> Vec<ArpRecord>`
 - ARP（异步）：`arp_stream(cfg, size) -> mpsc::Receiver<ArpRecord>`
 - TCP 一次性统计：`monitor_tcp_once(iface, secs) -> TcpTrafficReport`
@@ -262,7 +248,6 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 ### 错误处理示例
 
 ```rust
@@ -281,7 +266,6 @@ async fn handle_network_operation() -> NetworkResult<()> {
     }
 }
 ```
-
 ### 异步网络服务器示例
 
 ```rust
@@ -312,7 +296,6 @@ async fn handle_connection(mut stream: tokio::net::TcpStream) {
     response.write_to(&mut stream).await.unwrap();
 }
 ```
-
 ## 📚 模块结构
 
 ```text
@@ -330,7 +313,6 @@ c10_networks/
 ├── network_topology/  # 网络拓扑
 └── p2p/               # P2P（身份、发现、DHT、PubSub、NAT）
 ```
-
 ## 🔎 DNS（基于 Hickory-DNS）
 
 快速查询示例：
@@ -353,7 +335,6 @@ async fn main() -> anyhow::Result<()> {
     Ok(())
 }
 ```
-
 更多细节见 `docs/dns_hickory_integration.md` 与示例 `examples/dns_lookup.rs`。
 
 ### 一体化示例与脚本
@@ -392,7 +373,6 @@ impl AsyncNetworkClient for MyClient {
     }
 }
 ```
-
 ### 异步闭包改进
 
 ```rust
@@ -405,7 +385,6 @@ let results = futures::future::try_join_all(
     })
 ).await?;
 ```
-
 ### 常量泛型推断
 
 ```rust
@@ -415,7 +394,6 @@ fn process_packet(data: [u8; _]) -> NetworkResult<u32> {
     Ok(checksum)
 }
 ```
-
 ### 性能基准测试
 
 ```bash
@@ -425,7 +403,6 @@ cargo run --example rust_190_async_features_demo
 # 运行性能基准测试
 cargo run --example rust_190_performance_benchmark
 ```
-
 ## 🌐 P2P 最小示例（基于 libp2p）
 
 ```rust
@@ -459,7 +436,6 @@ async fn main() -> anyhow::Result<()> {
     }
 }
 ```
-
 ### 生命周期语法检查
 
 ```rust
@@ -468,7 +444,6 @@ async fn handle_connection<'a>(stream: &'a TcpStream) -> NetworkResult<()> {
     // 处理连接
 }
 ```
-
 ### 常量泛型推断1
 
 ```rust
@@ -480,7 +455,6 @@ fn process_packet<const N: usize>(data: [u8; N]) -> NetworkResult<()> {
 // 调用时使用 _
 let result = process_packet([0u8; _]);
 ```
-
 ### Result::flatten 方法
 
 ```rust
@@ -491,7 +465,6 @@ fn parse_http_request(data: &[u8]) -> NetworkResult<HttpRequest> {
         .flatten()
 }
 ```
-
 ## 🧪 测试
 
 运行所有测试：
@@ -499,13 +472,11 @@ fn parse_http_request(data: &[u8]) -> NetworkResult<HttpRequest> {
 ```bash
 cargo test
 ```
-
 运行性能测试：
 
 ```bash
 cargo bench
 ```
-
 运行示例程序：
 
 ```bash
@@ -525,7 +496,6 @@ cargo run --example grpc_client
 # P2P 最小示例
 cargo run --example p2p_minimal
 ```
-
 ## 🧩 统一 API 示例
 
 ```rust
@@ -548,7 +518,6 @@ async fn main() -> c10_networks::NetworkResult<()> {
     Ok(())
 }
 ```
-
 ## 🛠️ 网络诊断快速使用
 
 ```rust
@@ -564,7 +533,6 @@ async fn main() {
     println!("open ports: {:?}", open);
 }
 ```
-
 ## 🔁 带重试的统一 API
 
 ```rust
@@ -583,7 +551,6 @@ async fn main() -> c10_networks::NetworkResult<()> {
     Ok(())
 }
 ```
-
 ## 📊 性能特性
 
 - **零拷贝网络编程**: 使用 `bytes::Bytes` 和 `IoSlice` 减少内存拷贝

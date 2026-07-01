@@ -29,7 +29,6 @@ scripts/
 ├── templates/                         # 文档模板
 └── i18n/                              # 国际化/双语标注工具
 ```
-
 ---
 
 ## 活跃脚本速查
@@ -39,7 +38,6 @@ scripts/
 ```bash
 ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 ```
-
 ### 🔍 审计与检查
 
 | 脚本 | 功能 |
@@ -204,12 +202,10 @@ docs/ crate 文档样板模板。
    - 使用 `snake_case` 或 `kebab-case`
    - 名称应清晰描述功能
    - 添加适当的文件扩展名
-
 2. **文档要求**：
    - 脚本头部添加注释说明功能
    - 复杂脚本添加使用示例
    - 更新此 README
-
 3. **权限设置**：
    - Shell 脚本: `chmod +x script.sh`
    - Python 脚本: 添加 shebang `#!/usr/bin/env python3`

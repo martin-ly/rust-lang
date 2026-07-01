@@ -178,7 +178,6 @@ fn main() {
     println!("{}", async_programming.generate_markdown());
 }
 ```
-
 ### 知识结构批量生成器 {#知识结构批量生成器}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -274,7 +273,6 @@ fn main() {
     generator.generate_all();
 }
 ```
-
 ### 思维表征模板生成器 {#思维表征模板生成器}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -350,7 +348,6 @@ impl ThinkingRepresentationTemplates {
                     ├── 类型安全: [保证]
                     └── 内存安全: [保证]
                 ```
-
                 "#, goal)
         }
     }
@@ -363,9 +360,7 @@ fn main() {
     println!("{}", ThinkingRepresentationTemplates::decision_tree_template("使用异步"));
     println!("{}", ThinkingRepresentationTemplates::proof_tree_template("实现线程安全"));
 }
-
 ```
-
 ---
 
 ## 形式化链接 {#形式化链接}
@@ -431,7 +426,6 @@ fn main() {
 - [相关概念1]
 - [相关概念2]
 ```
-
 #### 示例：异步编程 {#示例异步编程}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -458,7 +452,6 @@ fn main() {
 - 异步运行时
 - 并发执行
 ```
-
 ### 2. 属性特征补充 {#2-属性特征补充}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -488,7 +481,6 @@ fn main() {
 - **空间复杂度**: [复杂度]
 - **适用场景**: [场景描述]
 ```
-
 ### 3. 关系连接补充 {#3-关系连接补充}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -518,7 +510,6 @@ fn main() {
 
 - [概念A] --[implements]--> [概念B]
 ```
-
 ### 4. 解释论证补充 {#4-解释论证补充}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -550,7 +541,6 @@ fn main() {
 - **安全保证**: [安全性]
 - **性能保证**: [性能特性]
 ```
-
 ### 5. 形式证明补充 {#5-形式证明补充}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -582,7 +572,6 @@ fn main() {
 - **类型安全**: [证明]
 - **内存安全**: [证明]
 ```
-
 ---
 
 ## 🗺️ 思维表征方式补充 {#思维表征方式补充}
@@ -599,7 +588,6 @@ fn main() {
 
 ````markdown
     ### 思维导图
-
     ```text
     [主题]
     │
@@ -611,7 +599,6 @@ fn main() {
     └── [子主题3]
     ```
 ````
-
 ### 2. 概念矩阵补充 {#2-概念矩阵补充}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -629,7 +616,6 @@ fn main() {
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 概念B | 属性1 | 属性2 | 评估结果 |
 ```
-
 ### 3. 决策图网补充 {#3-决策图网补充}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -638,7 +624,6 @@ fn main() {
 
 ````markdown
     ### 决策图网
-
     ```text
     需要[需求]？
     ├── 是
@@ -647,7 +632,6 @@ fn main() {
     └── 否 → [默认方案]
     ```
 ````
-
 ### 4. 证明图网补充 {#4-证明图网补充}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -656,7 +640,6 @@ fn main() {
 
 ````markdown
     ### 证明图网
-
     ```text
     目标: [要实现的功能]
     ├── 前提1: [基础条件1]
@@ -665,7 +648,6 @@ fn main() {
     └── 结论: [最终结果和保证]
     ```
 ````
-
 ---
 
 ## 📊 模块文档知识结构 {#模块文档知识结构}
@@ -893,7 +875,6 @@ fn main() {
 ## Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 

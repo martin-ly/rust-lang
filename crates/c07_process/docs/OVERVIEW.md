@@ -17,7 +17,6 @@
   - [view03.md](view03.md)
   - [view04.md](view04.md)
   - [view05.md](view05.md)
-
 - 关联文档
   - 顶层说明：`README.md`
   - 项目总结：`FINAL_PROJECT_COMPLETION_SUMMARY.md`、`PROJECT_COMPLETION_REPORT_2025.md`
@@ -49,15 +48,12 @@
 - 路径与 Shell 差异
   - Windows 默认 `cmd.exe`/PowerShell，不支持 Unix 管道语法的某些细节；建议使用 `Command` + 显式参数数组
   - 可执行文件后缀（`.exe`）与 PATH 解析差异；使用绝对路径更稳妥
-
 - I/O 与编码
   - Windows 控制台编码可能为 CP936/GBK；将输出视作字节并按需转换为 UTF-8
   - 行结束符差异（CRLF vs LF）；对文本处理使用平台无关库
-
 - 权限与进程模型
   - 进程组/信号：Unix `SIGTERM/SIGKILL`，Windows 需通过 Job 对组进行终止
   - 临时文件与重定向：Windows 对独占/共享访问更敏感，打开文件时显式共享策略
-
 - 最小示例（跨平台 Command）
 
 ```rust
@@ -77,7 +73,6 @@ fn run_echo() -> anyhow::Result<String> {
     Ok(String::from_utf8_lossy(&out.stdout).to_string())
 }
 ```
-
 ### 与网络工具链联动（补全）
 
 - 典型场景：通过子进程调用 `curl`/`iperf`/`tcpdump` 收集网络指标；以管道将数据输送给统计程序

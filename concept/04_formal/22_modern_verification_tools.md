@@ -12,15 +12,12 @@
 > **双维定位**: F×Eva — 评估现代验证工具的适用性与局限
 > **前置概念**: [Verification Toolchain](05_verification_toolchain.md) · [Hoare 逻辑](15_hoare_logic.md) · [RustBelt](04_rustbelt.md)
 > **主要来源**: [AutoVerus arXiv 2025] · [Kani 0.65 Release] · [ESBMC Rust] · [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [TrustInSoft]
-
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
-
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
 
 ## 目录
@@ -84,7 +81,6 @@ Rust 代码 + 自然语言规范
         ↓
    可编译通过的 Verus 注解
 ```
-
 ### 能力边界
 
 | 场景 | AutoVerus 成功率 | 人工仍需介入 |
@@ -124,7 +120,6 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 // invariant: forall|i: int| 0 <= i < low ==> arr[i] < target
 // invariant: forall|i: int| high <= i < arr.len() ==> arr[i] > target
 ```
-
 **权威来源**: [AutoVerus — arXiv 2025](https://arxiv.org/abs/2409.13082) · [Verus Lang](https://verus-lang.github.io/verus/guide/)
 
 ---
@@ -150,7 +145,6 @@ fn increment_all(a: &mut [u32]) {
     }
 }
 ```
-
 > `#[kani::modifies(...)]` 声明函数修改的内存位置；`#[kani::ensures(...)]` 声明后置条件。循环体内部不再需要展开，验证器通过归纳法处理。
 
 ### 新特性 2：Autoharness
@@ -164,14 +158,12 @@ fn check_increment() {
     increment_all(&mut arr);
 }
 ```
-
 Autoharness 自动生成这些 harness：
 
 ```bash
 # 自动生成并运行 harness
 kani autoharness --harness-depth 2 --function increment_all
 ```
-
 | 参数 | 含义 |
 |:---|:---|
 | `--harness-depth` | 生成 harness 时递归调用其他函数的深度 |
@@ -189,7 +181,6 @@ fn verify_vec_push_safety() {
     assert!(v.last() == Some(&elem));
 }
 ```
-
 **权威来源**: [Kani 0.65 Release Notes](https://model-checking.github.io/kani/) · [AWS Kani Blog](https://aws.amazon.com/blogs/aws/)
 
 ---
@@ -224,7 +215,6 @@ fn add_with_check(a: i32, b: i32) -> Option<i32> {
 // ESBMC 验证：对所有可能的 a, b，函数不会 panic
 // 命令：esbmc --rust file.rs --function add_with_check --overflow-check
 ```
-
 ### C/Rust FFI 验证
 
 ESBMC 的独特优势是验证跨语言调用：
@@ -233,7 +223,6 @@ ESBMC 的独特优势是验证跨语言调用：
 // C 代码
 int c_compute(int x);
 ```
-
 ```rust,ignore
 // Rust FFI
 extern "C" {
@@ -246,7 +235,6 @@ fn rust_wrapper(x: i32) -> i32 {
 
 // ESBMC 可验证：C 代码的内存安全假设与 Rust 的所有权规则是否兼容
 ```
-
 **权威来源**: [ESBMC GitHub](https://github.com/esbmc/esbmc) · [ESBMC Rust Frontend Paper](https://arxiv.org/)
 
 ---
@@ -276,7 +264,6 @@ pub unsafe fn read_slice<T>(ptr: *const T, len: usize) -> &[T] {
     std::slice::from_raw_parts(ptr, len)
 }
 ```
-
 ### 工具链集成愿景
 
 ```text
@@ -287,7 +274,6 @@ Safety Tags
     ├── rustdoc: 自动生成 # Safety 文档
     └── Verus: 将 requires/ensures 转换为形式化规范
 ```
-
 ### 状态
 
 - **RFC 阶段**: Draft（2025-2026）
@@ -315,7 +301,6 @@ Safety Tags
             ↓ 验证
 "无运行时错误"的结论
 ```
-
 与模型检查（Kani）和演绎验证（Verus）的区别：
 
 | 方法 | 保证 | 误报 | 适用场景 |
@@ -345,7 +330,6 @@ pub fn safe_wrapper(data: &[u8]) -> u32 {
     }
 }
 ```
-
 **权威来源**: [TrustInSoft Official](https://trust-in-soft.com/) · [Abstract Interpretation — Cousot 1977](https://doi.org/10.1145/512950.512973)
 
 ---
@@ -382,7 +366,6 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test --package c01_ownership_borrow_s
 # 检查单个文件的未定义行为
 cargo miri run --manifest-path crates/c01_ownership_borrow_scope/Cargo.toml --bin ts
 ```
-
 ### Kani（AWS 有界模型检查器）
 
 > 📚 **深度概念页**: [Kani：Rust 有界模型检查器](32_kani.md)
@@ -398,7 +381,6 @@ cargo kani --harness verify_vec_push_safety
 # Autoharness 自动生成测试
 kani autoharness --function increment_all
 ```
-
 ### BorrowSanitizer（运行时借用检查 Sanitizer）
 
 ```bash
@@ -407,7 +389,6 @@ RUSTFLAGS="-Zsanitizer=borrow" cargo run --target x86_64-unknown-linux-gnu
 
 # 注意: BSan 需要 nightly toolchain 和目标平台的 sanitizer 运行时支持
 ```
-
 **适用场景**: 生产环境部署前的借用安全检查，Miri 太慢（100-1000x）时的替代方案。
 
 **关键限制**: 仅检测运行时可达路径；静态分析覆盖不如 Miri 全面。
@@ -427,7 +408,6 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 # 验证 Rust 文件
 ./target/release/verus your_file.rs
 ```
-
 ---
 
 ## 嵌入式测验
@@ -453,7 +433,6 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 ---
 
 > **权威来源**: [AutoVerus arXiv 2025] · [Kani 0.65 Release Notes](https://model-checking.github.io/kani/) · [ESBMC GitHub](https://github.com/esbmc/esbmc) · [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [TrustInSoft](https://trust-in-soft.com/)
-
 > **文档版本**: 1.1
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-06-26
@@ -473,9 +452,7 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 | 现代 Rust 验证工具生态（2025-2026） 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 现代 Rust 验证工具生态（2025-2026） 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 现代 Rust 验证工具生态（2025-2026） 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 现代 Rust 验证工具生态（2025-2026） 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

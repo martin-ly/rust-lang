@@ -88,7 +88,6 @@ macro_rules! vec_of_strings {
     ($($x:expr),*) => { vec![$($x.to_string()),*] };
 }
 ```
-
 ### Derive Macro
 
 **派生宏** - 过程宏的一种，用于自动实现trait。
@@ -97,7 +96,6 @@ macro_rules! vec_of_strings {
 #[derive(Debug, Clone)]
 struct Point { x: i32, y: i32 }
 ```
-
 ### DSL (Domain Specific Language)
 
 **领域特定语言** - 针对特定问题域设计的语言，可以使用宏实现。
@@ -119,7 +117,6 @@ macro_rules! double {
     ($x:expr) => { $x * 2 };
 }
 ```
-
 ---
 
 ## F
@@ -135,7 +132,6 @@ macro_rules! double {
 ```rust
 let query = sql!("SELECT * FROM users");
 ```
-
 ---
 
 ## H
@@ -149,7 +145,6 @@ macro_rules! define_x {
     () => { let x = 42; };  // 这个x不影响外部
 }
 ```
-
 ---
 
 ## I
@@ -165,7 +160,6 @@ macro_rules! create_fn {
     };
 }
 ```
-
 ---
 
 ## M
@@ -179,7 +173,6 @@ macro_rules! my_macro {
     () => { ... };
 }
 ```
-
 ### `#[macro_export]`
 
 **宏导出属性** - 使宏可以被其他crate使用。
@@ -190,7 +183,6 @@ macro_rules! public_macro {
     () => { ... };
 }
 ```
-
 ### Metaprogramming
 
 **元编程** - 编写能够生成或操作其他程序的程序，宏是Rust的元编程工具。
@@ -209,7 +201,6 @@ macro_rules! calc {
     (sub $a:expr, $b:expr) => { $a - $b };
 }
 ```
-
 ### Procedural Macro
 
 **过程宏** - 使用Rust代码编写的宏，有三种类型：派生宏、属性宏、函数式宏。
@@ -222,7 +213,6 @@ macro_rules! calc {
 [lib]
 proc-macro = true
 ```
-
 ---
 
 ## Q
@@ -237,7 +227,6 @@ let code = quote! {
     fn hello() { println!("Hello"); }
 };
 ```
-
 ---
 
 ## R
@@ -254,7 +243,6 @@ macro_rules! count {
     };
 }
 ```
-
 ### Repetition
 
 **重复** - 使用`$(...)*`或`$(...)+`语法来处理可变数量的输入。
@@ -266,7 +254,6 @@ macro_rules! vec_of_strings {
     };
 }
 ```
-
 ---
 
 ## S
@@ -279,7 +266,6 @@ macro_rules! vec_of_strings {
 use syn::{parse_macro_input, DeriveInput};
 let ast = parse_macro_input!(input as DeriveInput);
 ```
-
 ---
 
 ## T
@@ -300,7 +286,6 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     // ...
 }
 ```
-
 ### `tt` (Token Tree)
 
 **Token树片段指定符** - 可以匹配任意单个token或用括号括起来的token序列。
@@ -310,7 +295,6 @@ macro_rules! accept_anything {
     ($($tt:tt)*) => { };  // 接受任意token
 }
 ```
-
 ### `ty`
 
 **类型片段指定符** - 匹配Rust类型。
@@ -322,7 +306,6 @@ macro_rules! make_struct {
     };
 }
 ```
-
 ---
 
 ## 符号
@@ -354,7 +337,6 @@ macro_rules! vec_of_strings {
     };
 }
 ```
-
 ---
 
 ## 相关工具
@@ -367,7 +349,6 @@ macro_rules! vec_of_strings {
 cargo install cargo-expand
 cargo expand
 ```
-
 ### rust-analyzer
 
 **Rust语言服务器** - 提供IDE功能，包括宏展开提示。
@@ -383,7 +364,6 @@ fn test_proc_macro() {
     t.pass("tests/pass/*.rs");
 }
 ```
-
 ---
 
 ## 片段指定符完整列表

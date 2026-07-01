@@ -47,7 +47,6 @@ fn calculate(a: i32, b: i32, op: Op) -> i32 {
 }
 // 总圈复杂度: 4
 ```
-
 ### 1.2 代码规模
 >
 > **[来源: Rust Official Docs]**
@@ -70,7 +69,6 @@ fn calculate(a: i32, b: i32, op: Op) -> i32 {
     ├── 定义: 空行/总行数
     └── 目标: 10-20%
 ```
-
 ---
 
 ## 2. 测试覆盖率度量
@@ -107,7 +105,6 @@ cargo llvm-cov --all-features --html
 # 仅测试特定模块
 cargo llvm-cov -p my-crate --lcov
 ```
-
 ### 2.3 覆盖率检查表
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -139,7 +136,6 @@ mod coverage {
     }
 }
 ```
-
 ---
 
 ## 3. 缺陷度量
@@ -176,7 +172,6 @@ mod coverage {
 ├── 文档缺陷
 └── 流程缺陷
 ```
-
 ---
 
 ## 4. 过程度量
@@ -212,7 +207,6 @@ mod coverage {
 ├── 中等缺陷: 2周
 └── 轻微缺陷: 下次迭代
 ```
-
 ---
 
 ## 5. 安全特定度量
@@ -252,7 +246,6 @@ mod coverage {
     ├── 目标: < 5%
     └── 处理: 手动审查
 ```
-
 ---
 
 ## 6. 工具链度量
@@ -282,7 +275,6 @@ mod coverage {
 ├── 恢复时间: < 1小时
 └── 变更前置时间: < 1天
 ```
-
 ---
 
 ## 7. 度量报告模板
@@ -320,7 +312,6 @@ mod coverage {
 - 验证通过: 9个
 - 失败分析: 1个进行中
 ```
-
 ### 7.2 月度报告模板
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -348,7 +339,6 @@ mod coverage {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 1. 补充测试用例 (负责人: XXX, 截止: XX)
 ```
-
 ---
 
 ## 8. 度量工具
@@ -372,7 +362,6 @@ mod coverage {
     # 复杂度
     cargo clippy --message-format=json | jq '.complexity'
 ```
-
 ### 8.2 可视化
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -384,7 +373,6 @@ mod coverage {
 ├── GitHub Insights: 仓库统计
 └── 自定义Dashboard: 项目特定
 ```
-
 ---
 
 **文档版本**: 1.0
@@ -406,7 +394,6 @@ mod coverage {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [API设计指南](01_api_design_guidelines.md)
 - [Rust安全关键系统 - 检查清单与模板](02_checklists_and_templates.md)
 

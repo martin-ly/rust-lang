@@ -42,31 +42,24 @@
 > **[Wikipedia: Software engineering](https://en.wikipedia.org/wiki/Software_engineering)** Software engineering is an engineering-based approach to software development.
 > A software engineer is a person who applies the engineering design process to design, develop, test, maintain, and evaluate computer software.
 > **来源**: <https://en.wikipedia.org/wiki/Software_engineering>
-
 > **[Wikipedia: Systems programming](https://en.wikipedia.org/wiki/Systems_programming)** Systems programming is the activity of programming computer system software.
 > The primary distinguishing characteristic of systems programming when compared to application programming is that application programming aims to produce software which provides services to the user,
 > whereas systems programming aims to produce software and software platforms which provide services to other software. [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
 > **来源**: <https://en.wikipedia.org/wiki/Systems_programming>
-
 > **[Wikipedia: Web framework](https://en.wikipedia.org/wiki/Web_framework)** A web framework (WF) or web application framework (WAF) is a software framework that is designed to support the development of web applications including web services,
 > web resources, and web APIs.
 > **来源**: <https://en.wikipedia.org/wiki/Web_framework>
-
 > **[Wikipedia: Embedded system](https://en.wikipedia.org/wiki/Embedded_system)** An embedded system is a computer system—a combination of a computer processor,
 > computer memory, and input/output peripheral devices—that has a dedicated function within a larger mechanical or electronic system.
 > **来源**: <https://en.wikipedia.org/wiki/Embedded_system>
-
 > **[Wikipedia: Blockchain](https://en.wikipedia.org/wiki/Blockchain)** A blockchain is a distributed ledger with growing lists of records (blocks) that are securely linked together via cryptographic hashes.
 > **来源**: <https://en.wikipedia.org/wiki/Blockchain>
-
 > **[Wikipedia: Game engine](https://en.wikipedia.org/wiki/Game_engine)** A game engine is a software framework primarily designed for the development of video games,
 > and generally includes relevant libraries and support programs. [来源: [Are We Game Yet](https://arewegameyet.rs/)]
 > **来源**: <https://en.wikipedia.org/wiki/Game_engine>
-
 > **[Wikipedia: Command-line interface](https://en.wikipedia.org/wiki/Command_line_interface)** A command-line interface (CLI) is a means of interacting with a device or
 > computer program with commands from a user or client, and responses from the device or program, in the form of lines of text.
 > **来源**: <https://en.wikipedia.org/wiki/Command-line_interface>
-
 > **[Wikipedia: Machine learning](https://en.wikipedia.org/wiki/Machine_learning)** Machine learning (ML) is a field of study in artificial intelligence concerned with the development and
 > study of statistical algorithms that can learn from data and generalize to unseen data.
 > **来源**: <https://en.wikipedia.org/wiki/Machine_learning>
@@ -75,7 +68,6 @@
 
 ## 认知路径（Cognitive Path）
 >
-
 > **学习递进**: 从直觉出发，逐层深入核心概念。
 [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
@@ -178,7 +170,6 @@ graph TD
     F --> F2[Dev Tools<br/>rust-analyzer + cargo]
     F --> F3[Network Infra<br/>quinn + rustls]
 ```
-
 > **认知功能**: 建立 Rust 生态全景认知框架，将分散的领域按技术属性聚类为五大板块。作为技术选型的第一层过滤——先定位大类（Web/系统/数据/创意/基础设施），再深入具体栈。Rust 的核心优势并非均匀分布：系统编程和 CLI 最为成熟，GUI 和 ML 训练仍在快速追赶中。 [来源: [Are We Web Yet](https://www.arewewebyet.org/)]
 > [来源: 💡 原创分析]
 
@@ -407,7 +398,6 @@ Rust 在区块链领域占据**主导地位**的原因：
 | **`unused_features` lint 兼容** | Rust 1.96 重新启用 `unused_features` lint，内核全局启用的 feature 列表触发大量警告 | 内核构建系统全局允许该 lint，避免逐 crate 修改 |
 
 > **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。pin-init 的 soundness 修复尤其重要：它展示了 Rust 内核代码如何通过类型系统（Type System）级别的封闭（sealed token）来消除初始化顺序相关的漏洞类别——这是 C 语言无法实现的保证。来源: [Rust Project Goals — Rust for Linux] · 来源: [Rust Blog — Project Goals Update 2026-04] · 来源: [Linux Kernel v7.0-rc4] · 可信度: ✅
-
 > **来源**: [Rust for Linux] · [LWN] · 可信度: ✅
 
 ### 4.7-B Android AOSP：Rust 集成的实证研究（FSE 2026）
@@ -455,7 +445,6 @@ Rust 在区块链领域占据**主导地位**的原因：
 | **总计** | **371 KB** | Pixel modem 内存不紧张，优先社区支持和代码质量 |
 
 > **关键洞察**: Google Pixel 基带 Rust 集成是 **"现有固件代码库中渐进式引入 Rust"** 的教科书级案例。它展示了在**没有操作系统**（bare-metal）、**没有标准库**（`no_std`）、**现有 C/C++ 构建系统**（Pigweed/GN）的极端约束下，如何将 Rust 组件嵌入现有固件。与 Rust for Linux（内核子系统）不同，基带场景更苛刻：无 `std`、无 `cargo`、30+ 第三方 crate 依赖、弱符号冲突等。这为嵌入式/IoT/汽车电子等领域提供了可复制的迁移 playbook。
-
 > **来源**: [Google Security Blog — Bringing Rust to the Pixel Baseband](https://blog.google/security/bringing-rust-to-the-pixel-baseband/) · [Help Net Security](https://www.helpnetsecurity.com/2026/04/13/google-pixel-rust-baseband-modem-security/) · 可信度: ✅
 
 ### 4.8 桌面 GUI 与跨平台应用
@@ -524,7 +513,6 @@ Rust 编译为 WASM 的核心优势：
 | 调试 | GDB + stdlib | `probe-rs` + RTT + `defmt` |
 
 ```rust,ignore
-
 # ![no_std]
 
 # ![no_main]
@@ -541,9 +529,7 @@ fn main() -> ! {
         // 轮询或中断驱动
     }
 }
-
 ```
-
 **选型决策**：
 
 - 需要 `alloc`（Vec、String）但无 std → 启用 `extern crate alloc`
@@ -588,9 +574,7 @@ fn main() -> Result<()> {
         .map_err(|e| anyhow::anyhow!("无法读取配置: {}", e))?;
     Ok(())
 }
-
 ```
-
 > **关键洞察**: Rust CLI 的**分发优势**是其他语言难以比拟的——`cargo build --release` 生成单二进制，`cargo-dist` 自动打包 Windows `.msi`、macOS `.dmg`、Linux `.deb`。无需运行时、无依赖地狱。
 [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 
@@ -628,7 +612,6 @@ fn move_player(
 // 2. With<Player> 过滤保证仅处理玩家实体
 // 3. 多个不重叠的 Query 可并行调度
 ```
-
 > **关键洞察**: Bevy 的调度器在**编译期分析系统签名**，构建数据依赖有向无环图（DAG），自动并行化无依赖的系统。这是 Rust 借用（Borrowing）检查器在**运行时调度**中的延伸应用。
 [来源: [Tokio Docs](https://tokio.rs/)]
 
@@ -675,7 +658,6 @@ graph TD
     style F4 fill:#f96
     style T fill:#ff9
 ```
-
 > **认知功能**: 训练批判性思维，通过反例迭代削弱"Rust 万能"的绝对化命题。在技术讨论中遇到过度推广时，可用此决策树定位反驳切入点。命题的成立性取决于约束条件的显式化——"适合"是性能、安全、开发速度、生态成熟度四维权衡的结果，而非二元判断。
 
 ### 6.1 各领域的 Rust 不适用场景
@@ -783,9 +765,7 @@ graph TD
     style A9 fill:#6f6
     style A10 fill:#6f6
 ```
-
 > **认知功能**: 将抽象的技术选型转化为可操作的决策路径，从约束出发而非从语言偏好出发。沿分支匹配具体领域栈时，应优先识别硬约束（性能/安全/并发）与软约束（开发速度/生态数量）的权重。当性能和安全中任意两项为硬约束时，Rust 通常是最佳选择；当开发速度为唯一约束时，混合架构（Python/Go 原型 + Rust 核心）往往更优。
-
 > **关键洞察**: 领域选择不是“Rust 是否适合”，而是**“约束优先级排序”**。当性能、安全、并发中任意两项为硬约束时，Rust 通常是最佳选择；当开发速度和生态数量为唯一约束时，其他语言可能更优。
 [来源: [Wikipedia — Software engineering](https://en.wikipedia.org/wiki/Software_engineering)]
 
@@ -874,7 +854,6 @@ fn main() {
     println!("Router type system verified");
 }
 ```
-
 > **关键洞察**: axum 的路由系统利用 Rust 的类型系统保证 handler 函数的签名与路由路径匹配——`Path<u32>` 提取器要求 URL 参数可解析为 `u32`，`Json` 返回类型要求响应可序列化。这些约束在编译期验证，而非运行时出错。 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ---
@@ -909,7 +888,6 @@ fn main() {
     println!("{:?}", counts);  // {"apple": 2, "banana": 1}
 }
 ```
-
 > **迁移策略**：
 >
 > 1. **Phase 1**：用 PyO3 将 Rust 作为 Python 扩展模块（保留 Python 生态）
@@ -952,7 +930,6 @@ async fn main() {
     }
 }
 ```
-
 ### 9.2 "Rust 不适合" 的失败案例分析
 
 Rust 并非银弹。以下是真实场景中的**不适合案例**：
@@ -969,7 +946,6 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 **真实失败案例**：
 
 1. **Dropbox 的 Rust 迁移反思**：Dropbox 早期尝试将部分 Python 服务迁移到 Rust，发现**开发速度下降 2-3 倍**，最终选择仅在性能关键路径使用 Rust，保留 Python 业务逻辑层。
-
 2. **某初创公司的全栈 Rust 决策**：一家 5 人初创选择 Rust 全栈（后端 + WASM 前端），结果**招聘困难**（Rust 开发者稀缺）、**开发周期延长**（相比 Node.js 全栈延迟 6 个月发布 MVP），最终重写为 Go + React。
 
 > **教训**：Rust 的**正确性保证**是有**开发速度成本**的。在需要快速验证市场、团队规模小、非性能关键的场景中，Rust 的优势无法抵消其复杂性成本。
@@ -1032,7 +1008,6 @@ fn main() {
     println!("{:?}", row);
 }
 ```
-
 **Rust vs Python 科学计算性能对比**：
 
 | 任务 | Python (NumPy) | Rust (ndarray/faer) | 加速比 |
@@ -1070,7 +1045,6 @@ fn view(app: &App, frame: Frame) {
     draw.to_frame(app, &frame).unwrap();
 }
 ```
-
 > **来源**: [Nannou 文档] · [Rodio docs] · [vst-rs GitHub] · [Are We Audio Yet]
 
 ---
@@ -1084,19 +1058,12 @@ fn view(app: &App, frame: Frame) {
 > **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
 | 断言 | 前提条件 | 结论 | 反例/边界条件 | 典型场景 |
-
 |:---|:---|:---|:---|:---|
-
 | **Rust 擅长系统编程** | 所有权+零成本抽象（Zero-Cost Abstraction） ⟹ | 替代C/C++系统代码 | FFI（FFI）复杂度 | 操作系统/驱动/内核模块 |
-
 | **Rust Web 后端性能优秀** | async零成本 ⟹ | 内存安全减少漏洞 | 生态数量vs Go/Java | 高并发API服务 |
-
 | **Rust 嵌入式安全** | no_std支持 ⟹ | 确定性内存 | 硬件抽象层覆盖 | IoT/实时系统 |
-
 | **Rust 区块链主流** | 内存安全防漏洞 ⟹ | 高性能共识 | 智能合约语言竞争 | Solana/Substrate |
-
 | **Rust 游戏开发兴起** | bevy/ecs ⟹ | 性能+安全 | vs Unity/Unreal生态 | 独立游戏/引擎开发 |
-
 | **领域选择多维决策** | 性能/安全/生态/人才 ⟹ | 无银弹 | 混合语言架构 | 技术选型框架 |
 
 ## 反命题分析（Anti-Propositions）
@@ -1106,7 +1073,6 @@ fn view(app: &App, frame: Frame) {
 ### 1. "Rust 适合所有编程任务"
 
 ```mermaid
-
 graph TD
 
     P1["Rust 适合所有编程任务"] --> Q{成立？}
@@ -1130,15 +1096,12 @@ graph TD
     Q -->|修正| T1["命题在限定条件下成立"]
 
     style T1 fill:#6f6
-
 ```
-
 > **认知功能**: 通过反例枚举（Enum）建立命题边界意识，避免将 Rust 的系统编程优势过度泛化到所有场景。初学者可用此图自我校准期望——Rust 是系统编程领域的升级方案，并非所有编程任务的最优解。四个反例覆盖开发速度、学习门槛、生态成熟度、脚本复杂度四个维度，恰好对应 Rust 在设计上为"正确性"所付出的权衡成本。
 
 ### 2. "Rust 在 Web 后端已经取代 Go/Java"
 
 ```mermaid
-
 graph TD
 
     P2["Rust 在 Web 后端已经取代 Go/Java"] --> Q{成立？}
@@ -1162,15 +1125,12 @@ graph TD
     Q -->|修正| T2["命题在限定条件下成立"]
 
     style T2 fill:#6f6
-
 ```
-
 > **认知功能**: 拆解具体领域的"取代"命题，区分"技术优势"与"市场/生态优势"。Web 后端的竞争不仅是性能和安全竞争，更是人才供给、框架数量、运维惯性的综合竞争。在团队技术选型讨论中，用此图区分"Rust 更快更安全"（技术事实）与"Rust 生态更丰富"（市场判断），避免混淆两类论证。
 
 ### 3. "嵌入式 Rust 完全替代 C"
 
 ```mermaid
-
 graph TD
 
     P3["嵌入式 Rust 完全替代 C"] --> Q{成立？}
@@ -1194,20 +1154,15 @@ graph TD
     Q -->|修正| T3["命题在限定条件下成立"]
 
     style T3 fill:#6f6
-
 ```
-
 > **认知功能**: 揭示技术替代的非技术阻力——硬件覆盖率、行业认证、遗留代码、调试工具链成熟度是嵌入式领域切换语言的隐形壁垒。在嵌入式选型时，应先评估目标平台的 HAL 完整性和认证需求（如 FDA/DO-178C），再评估语言特性收益。Rust 的内存安全是充分条件而非必要条件；在已通过 MISRA-C 认证且运行稳定的项目中，切换语言的边际收益可能远低于迁移成本。
-
 > **过渡: L6 → L3**
 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > 每个应用领域都面临特定的 unsafe 边界：嵌入式需要裸指针操作、WASM 需要 FFI 桥接、游戏引擎需要自定义内存分配器。这些场景不是"绕过 Rust 的安全保证"，而是"在理解安全边界的前提下精确控制"。
 > unsafe 边界见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)。
-
 > **过渡: L6 → L5**
 > 不同语言在不同领域有各自的优势：Go 在微服务、Python 在 AI、C++ 在游戏引擎。Rust 正在所有领域同时扩张，但这不是因为 Rust 万能，而是因为它的"零成本抽象 + 内存安全"组合在越来越多的场景下成为最优解。 [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 > 对比视角见 [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) 与 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)。
-
 > **过渡: L6 → L7**
 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > 应用领域是技术演进的试验场：WASM 推动 Rust 的 `no_std` 生态成熟、AI 推理推动 `unsafe` 张量操作的封装标准化、嵌入式推动 `const generics` 的编译期计算。Rust 的未来方向由实际应用需求驱动。
@@ -1352,7 +1307,6 @@ graph TD
 
 ## 十二、定理一致性矩阵（领域安全层）
 >
-
 > **[来源类型: 原创分析; Embassy Book; Rust for Linux; Aya Docs; QUIC RFC]** 以下矩阵梳理各应用领域的关键安全保证与失效条件。
 
 | 编号 | 应用领域 | 安全前提 | 结论 | 失效条件 | 后果 |
@@ -1365,9 +1319,7 @@ graph TD
 | **D6** | AI/ML (Candle) | 张量形状编译期检查 | 无越界张量访问 | 动态形状；`unsafe` 内核优化 | 内存越界 / 数值错误 |
 
 > **⟹ 推理链**: D1-D6 的共同主题是**将领域特定的安全需求映射到 Rust 已有的类型系统保证**。没有领域需要 Rust 之外的新安全机制——差异仅在于哪些类型系统特性（所有权、生命周期、`Send`/`Sync`、`const`）被重点利用。
-
 > **[来源: Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs]** 应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅
-
 > **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC [RFC 9000](https://www.rfc-editor.org/info/rfc9000); wgpu Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
 
 ---
@@ -1380,9 +1332,7 @@ graph TD
 | v1.1 | 2026-05-13 | 新增 §11 生态前沿的形式化梳理（Embassy/内核/eBPF/io_uring/QUIC/GUI/AI/Cargo Script）|
 
 > **[来源: Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs]** 应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅
-
 > **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC [RFC 9000](https://www.rfc-editor.org/info/rfc9000); wgpu Docs; egui Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
-
 > **[来源: Rust Blockchain Report 2024; Solana Docs; Polkadot Substrate Docs; Near Protocol Docs]** 区块链方向基于公开协议文档和社区报告。✅
 ---
 
@@ -1436,7 +1386,6 @@ struct AppStateFixed {
     counter: Arc<i32>,
 }
 ```
-
 > **修正**: Web 服务器通常使用线程池或异步运行时处理并发请求。应用状态必须在多个线程间共享。`Rc<T>` 使用非原子引用计数，不能跨线程；`Arc<T>` 使用原子操作（Atomic Operations），是 `Send + Sync`。Rust 编译器在编译期验证这些约束——试图将 `Rc` 状态传递给多线程框架是编译错误。这与 Node.js 的全局状态（单线程事件循环）或 Python 的 GIL（全局解释器锁）不同——Rust 的并发安全（Concurrency Safety）通过类型系统静态保证，无运行时检查开销。[来源: [Actix Documentation](https://docs.rs/actix-web/)]
 
 ### 10.2 边界测试：游戏引擎中的 ECS 组件查询（编译错误）
@@ -1456,7 +1405,6 @@ fn main() {
     update(&mut pos, &vel);
 }
 ```
-
 > **修正**: ECS（Entity-Component-System）是游戏开发的核心架构。Rust 的 ECS 框架（Bevy、hecs、legion）利用类型系统保证查询安全：系统函数签名定义所需的组件组合，编译器验证查询与组件存储的一致性（Coherence）。若系统要求 `Query<&mut Position, &Velocity>`，但某实体缺少 `Velocity`，该实体自动被过滤出查询结果。这与 Unity 的反射式组件访问或 C++ 的手动类型转换不同——Rust 的 ECS 在编译期保证组件类型安全，运行时无类型检查开销。来源: [Bevy Documentation]
 
 ### 10.3 边界测试：嵌入式中的 `std` 依赖误用（编译错误）
@@ -1473,7 +1421,6 @@ fn main() {
     arr[0] = 1;
 }
 ```
-
 > **修正**: 嵌入式系统（ bare-metal、RTOS、WASM 微内核）通常使用 `#![no_std]`，禁用标准库 `std`（依赖操作系统：文件系统、网络、线程、堆分配）。`no_std`  crate 只能使用 `core`（基本类型、迭代器（Iterator）、选项/结果）和可选的 `alloc`（`Vec`、`String`、`Box`，需全局分配器）。常见错误：1) 依赖的 crate 使用了 `std`（即使是简单的 `println!`）；2) 使用了 `std::collections::HashMap`（需 `std` 的随机数生成器，嵌入式中改用 `heapless::LinearMap`）；3) 使用了 `std::time`（嵌入式中改用 `embassy_time` 或硬件定时器）。`cargo tree` 和 `cargo-nono` 工具帮助检查 `no_std` 兼容性。这与 C 的嵌入式开发（无标准库依赖，直接使用寄存器）或 Arduino 的 C++（简化标准库）类似——Rust 的 `no_std` 提供了现代类型系统在资源受限环境中的应用。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.4 边界测试：Web 服务中的阻塞操作与 async runtime 的冲突（运行时性能崩溃）
@@ -1492,7 +1439,6 @@ async fn handler() -> String {
     "done".to_string()
 }
 ```
-
 > **修正**: Async runtime（tokio）基于**协作式多任务** [历史: async-std [已归档]]：任务在 `.await` 点 yield 控制权，让 runtime 调度其他任务。
 > 若在 async 函数中执行**阻塞操作**（`std::thread::sleep`、`std::fs::read`、CPU 密集型计算、数据库同步查询），当前线程被阻塞，该线程上的所有任务都无法执行。
 > 在多线程 runtime 中，一个线程阻塞降低整体吞吐；在单线程 runtime 中，整个应用死锁。

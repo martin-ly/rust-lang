@@ -62,7 +62,7 @@
 
 #### Tier 3 文档
 
-- ✅ **模式使用快速参考** (`docs/tier_03_references/06_模式使用快速参考.md`)
+- ✅ **模式使用快速参考** (`docs/tier_03_references/06_pattern_quick_reference.md`)
   - 为每个模式提供：
     - ✅ 何时使用指南
     - ✅ 何时避免指南
@@ -98,7 +98,7 @@
   - `src/pattern_combinations.rs` (~800行)
   - `tests/pattern_combinations_tests.rs` (~290行)
 - **新增文档**: 1个
-  - `docs/tier_03_references/06_模式使用快速参考.md` (~960行)
+  - `docs/tier_03_references/06_pattern_quick_reference.md` (~960行)
 - **测试用例**: 12+ 个集成测试
 
 ### 文档统计
@@ -148,7 +148,7 @@
 
 - **源码**: `src/pattern_combinations.rs`
 - **测试**: `tests/pattern_combinations_tests.rs`
-- **文档**: `docs/tier_03_references/06_模式使用快速参考.md`
+- **文档**: `docs/tier_03_references/06_pattern_quick_reference.md`
 - **概览**: `docs/OVERVIEW.md`
 - **主 README**: `README.md`
 

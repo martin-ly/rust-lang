@@ -40,7 +40,6 @@ Pin<P> 的核心保证:
 │  2. 直到 Drop 前，T 始终在同一位置         │
 └─────────────────────────────────────────┘
 ```
-
 | 概念 | 说明 | 典型类型 |
 |------|------|---------|
 | `Pin<P>` | 固定指针包装器 | `Pin<&mut T>`, `Pin<Box<T>>` |
@@ -65,7 +64,6 @@ use std::pin::pin;
 let data = MyStruct::new();
 let pinned: Pin<&mut MyStruct> = pin!(data);
 ```
-
 ### 堆固定 {#堆固定}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -73,7 +71,6 @@ let pinned: Pin<&mut MyStruct> = pin!(data);
 ```rust,ignore
 let pinned: Pin<Box<MyStruct>> = Box::pin(MyStruct::new());
 ```
-
 ### 自引用结构（概念） {#自引用结构概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -87,7 +84,6 @@ struct SelfRef {
     _pin: PhantomPinned,
 }
 ```
-
 ### 安全投影规则 {#安全投影规则}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -103,7 +99,6 @@ impl MyStruct {
     // fn get_ptr(self: Pin<&Self>) -> &String { &self.data }
 }
 ```
-
 ---
 
 ## 📊 Pin 使用决策树 {#pin-使用决策树}
@@ -120,7 +115,6 @@ impl MyStruct {
 ├── 是 ───────────────────→ PhantomPinned + Pin<&mut Self>
 └── 否 ───────────────────→ 不需要 Pin
 ```
-
 ---
 
 ## 🔗 参考 {#参考}

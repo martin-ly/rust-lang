@@ -50,7 +50,6 @@ impl<T: Default + Copy, const N: usize> GenericArray<T, N> {
     }
 }
 ```
-
 **特性说明**: 允许在泛型参数中使用 `_` 进行推断，简化了常量泛型的使用。
 
 ### 2. 改进的异步编程特性
@@ -70,7 +69,6 @@ pub async fn async_number_generator(start: u32, count: u32) -> impl Iterator<Ite
     numbers.into_iter()
 }
 ```
-
 **特性说明**: 支持 `-> impl Trait` 和 `async fn` 语法，为未来的异步生成器功能做准备。
 
 ### 3. 增强的类型系统
@@ -90,7 +88,6 @@ pub fn error_handling_with_never() -> Result<i32, std::convert::Infallible> {
     Ok(42)
 }
 ```
-
 **特性说明**: 改进了 `!` 类型的回退行为，增强了类型系统的表达能力。
 
 ### 4. 性能优化特性
@@ -120,7 +117,6 @@ impl PerformanceOptimizations {
     }
 }
 ```
-
 **特性说明**: 利用内联汇编、SIMD 向量化和内存预取等性能优化技术。
 
 ### 5. 高级并发特性
@@ -157,7 +153,6 @@ impl AdvancedConcurrency {
     }
 }
 ```
-
 **特性说明**: 改进了线程池、无锁数据结构和内存屏障的使用。
 
 ## 项目更新内容
@@ -206,7 +201,6 @@ cargo run -p c05_threads --example rust_190_features_demo --features tokio
 # 启用所有特性
 cargo run -p c05_threads --example rust_190_features_demo --features "tokio,unstable"
 ```
-
 ### 在代码中使用
 
 ```rust
@@ -222,7 +216,6 @@ let array: rust_190_features::GenericArray<i32, 5> = rust_190_features::GenericA
 let struct_instance = rust_190_features::ImprovedStruct { data: 42 };
 let result: Vec<i32> = struct_instance.process(10).collect();
 ```
-
 ## 兼容性说明
 
 - **Rust 版本**: 需要 Rust 1.90 或更高版本

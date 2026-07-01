@@ -71,7 +71,6 @@ cargo build
 cargo test
 cargo run --bin c04_generic
 ```
-
 ### Linux/macOS 用户
 
 ```bash
@@ -87,7 +86,6 @@ cargo build
 cargo test
 cargo run --bin c04_generic
 ```
-
 ## 配置说明
 
 ### 代码格式化 (rustfmt.toml)

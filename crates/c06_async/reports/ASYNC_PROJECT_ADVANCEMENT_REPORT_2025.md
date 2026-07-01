@@ -112,7 +112,6 @@ pub struct TaskPoolMetrics {
     pub throughput_per_second: f64,
 }
 ```
-
 ### 3. 生产级错误处理
 
 - 完整的错误处理机制
@@ -150,7 +149,6 @@ cargo test
 # 运行性能基准测试
 cargo bench --no-run
 ```
-
 ### 示例运行
 
 ```bash
@@ -166,7 +164,6 @@ cargo run --example microservice_patterns
 # 流处理演示
 cargo run --example stream_processing_backpressure
 ```
-
 ### 文档查看
 
 ```bash
@@ -176,7 +173,6 @@ cargo doc --open
 # 查看性能优化指南
 cat docs/async_performance_optimization_2025.md
 ```
-
 ## 最佳实践总结
 
 ### 1. 异步任务池使用

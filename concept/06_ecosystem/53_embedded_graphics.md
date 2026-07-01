@@ -84,7 +84,6 @@
   ├── OLED
   └── E-Paper
 ```
-
 > **架构洞察**: **嵌入式显示系统的核心是 MCU + 显示控制器 + 帧缓冲的三元组**——帧缓冲的大小直接决定可支持的分辨率和色深。
 > [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)]
 > **关键约束**: MCU 的 SRAM 通常仅有 128KB~1MB，一个 480×320×16bit 的帧缓冲需要约 300KB，已接近许多 MCU 的极限。
@@ -130,7 +129,6 @@
   示例: 320×240×16bpp = 320 × 240 × 2 = 153,600 字节 ≈ 150 KB
   示例: 800×480×16bpp = 800 × 480 × 2 = 768,000 字节 ≈ 750 KB
 ```
-
 > **色彩洞察**: **RGB565 是嵌入式系统的甜点**——在色彩质量和内存占用之间取得平衡，且大多数 TFT 控制器原生支持。
 > [来源: [embedded-graphics Core Concepts](https://docs.rs/embedded-graphics/latest/embedded_graphics/index.html)]
 > [来源: [embedded-graphics PixelColor](https://docs.rs/embedded-graphics/latest/embedded_graphics/pixelcolor/index.html)]
@@ -172,7 +170,6 @@
   ├── 支持多点触控
   └── 成本较高，需专用控制器 (FT5x06, CST816)
 ```
-
 > **实时洞察**: **60fps UI 要求整个渲染管线在 16.67ms 内完成**——从输入事件处理到帧缓冲传输，任何阻塞操作都会导致掉帧。
 > [来源: [LVGL Performance Guide [已失效]]<!-- 原链接: https://docs.lvgl.io/8.3/overview/perf.html -->]
 > [来源: [Embedded Display Refresh](https://en.wikipedia.org/wiki/Refresh_rate)]
@@ -218,7 +215,6 @@ graphics      | 支持         | 支持         | 支持
 Rust 生态     | ✅ 丰富      | ✅ 丰富      | ⚠️ 中等
 评价          | (大量示例)   | (大量示例)   | (驱动较少)
 ```
-
 > **矩阵洞察**: **Rust 嵌入式图形生态在 LCD 和 OLED 领域已相当成熟**，E-Paper 因应用场景相对小众，驱动和高级库支持略少，但核心协议驱动完整。
 > [来源: [embedded-graphics Supported Displays](https://github.com/embedded-graphics/embedded-graphics#supported-displays)]
 > [来源: [Rust Embedded Devices](https://github.com/rust-embedded/awesome-embedded-rust#display)]
@@ -282,7 +278,6 @@ embedded-graphics crate:
   Text::new("Hello Rust!", Point::new(20, 80), text_style)
       .draw(&mut display)?;
 ```
-
 > **架构洞察**: **embedded-graphics 的核心设计是 DrawTarget trait**——将像素操作抽象为 trait，使任何显示设备只需实现 `draw_iter` 即可兼容整个生态。
 > [来源: [embedded-graphics DrawTarget](https://docs.rs/embedded-graphics/latest/embedded_graphics/draw_target/trait.DrawTarget.html)]
 > [来源: [embedded-graphics Book](https://docs.rs/embedded-graphics/latest/embedded_graphics/)]
@@ -326,7 +321,6 @@ lvgl-rs: Rust 绑定到 LVGL (Light and Versatile Graphics Library)
 
   loop { lvgl::task_handler(); lvgl::tick_inc(5); }
 ```
-
 > **绑定洞察**: **lvgl-rs 将 C 的 widget 系统包装为 Rust 的安全 API**——但底层仍依赖 LVGL 的 C 内存管理，需要谨慎处理生命周期（Lifetimes）和自定义分配器。
 > [来源: [lvgl-rs GitHub](https://github.com/lvgl/lv_binding_rust)]
 > [来源: [LVGL Rust Bindings](https://docs.rs/lvgl/latest/lvgl/)]
@@ -379,7 +373,6 @@ Slint (原 sixtyfps): 声明式 UI 框架
       window.run().unwrap();
   }
 ```
-
 > **声明式洞察**: **Slint 将 UI 描述与业务逻辑分离**——设计师编写 .slint，开发者编写 Rust，编译时生成类型安全的绑定。
 > [来源: [Slint Documentation](https://docs.slint.dev/latest/docs/rust/slint/)]
 > [来源: [Slint Language](https://slint-ui.com/docs/slint/)]
@@ -420,7 +413,6 @@ egui: 即时模式 GUI (Immediate Mode GUI)
       });
   }
 ```
-
 > **范式洞察**: **egui 的即时模式将 UI 视为纯函数**——输入是应用状态，输出是绘制命令，无隐式副作用，极易于测试和推理。
 > [来源: [egui Documentation](https://docs.rs/egui/latest/egui/)]
 > [来源: [egui Immediate Mode](https://docs.rs/egui/latest/egui/#immediate-mode)]
@@ -472,7 +464,6 @@ egui: 即时模式 GUI (Immediate Mode GUI)
   ├── 缺点: 需大量引脚和外部 SRAM
   └── 典型: 800×480
 ```
-
 > **接口洞察**: **SPI 是嵌入式图形最常见的接口**——虽然带宽有限，但对于 320×240 以下屏幕足以支持 60fps。高分辨率必须转向并行或 RGB 接口。
 > [来源: [Wikipedia — SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface)]
 > [来源: [Wikipedia — I2C](https://en.wikipedia.org/wiki/I%C2%B2C)]
@@ -511,7 +502,6 @@ DMA (Direct Memory Access) 在图形中的应用:
   ├── hal::dma::WriteDma trait
   └── unsafe: DMA 缓冲区需要静态生命周期和正确对齐
 ```
-
 > **DMA 洞察**: **DMA 是高分辨率嵌入式图形的必需品**——没有 DMA，CPU 将全部时间花在数据搬运上，无法处理用户输入或业务逻辑。
 > [来源: [STM32 DMA Application Note](https://www.st.com/resource/en/application_note/an4031-using-the-stm32f2-stm32f4-and-stm32f7-series-dma-controllers-stmicroelectronics.pdf)]
 > [来源: [DMA Cache Coherency](https://developer.arm.com/documentation/dai0298/a/)]
@@ -564,7 +554,6 @@ DMA (Direct Memory Access) 在图形中的应用:
   ├── 字距调整 (Kerning)
   └── 需要 harfbuzz 或等价库（嵌入式中罕见）
 ```
-
 > **字体洞察**: **位图字体是嵌入式系统的默认选择**——牺牲灵活性换取确定性的渲染性能和内存占用，与 Rust 的零成本抽象（Zero-Cost Abstraction）哲学一致。
 > [来源: [embedded-graphics Fonts](https://docs.rs/embedded-graphics/latest/embedded_graphics/mono_font/index.html)]
 > [来源: [embedded-fonts Crate](https://docs.rs/embedded-fonts/latest/embedded_fonts/)]
@@ -644,7 +633,6 @@ Rust 实现模式:
       }
   }
 ```
-
 > **输入洞察**: **触摸处理是典型的事件驱动架构**——中断触发读取，主循环处理手势状态机，与 UI 渲染解耦。
 > [来源: [embedded-hal InputPin](https://docs.rs/embedded-hal/latest/embedded_hal/digital/trait.InputPin.html)]
 > [来源: [embedded-hal I2C](https://docs.rs/embedded-hal/latest/embedded_hal/)]
@@ -696,7 +684,6 @@ graph TD
     style CUSTOM fill:#c8e6c9
     style THEME fill:#c8e6c9
 ```
-
 > **反命题洞察 1**: **"嵌入式 GUI 需要 OS"是错误命题**——`no_std` + `embedded-graphics` 或 `lvgl-rs` 已能在 64KB Flash 的 Cortex-M0+ 上驱动完整 UI。
 > [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)]
 > **反命题洞察 2**: **"Rust 太慢"是错误命题**——零成本抽象（Zero-Cost Abstraction）使迭代器（Iterator）、闭包（Closures）、泛型（Generics）在优化后等价于手写 C；DMA 卸载数据传输后，CPU 只需处理逻辑。
@@ -734,7 +721,6 @@ graph TD
 ├── DMA 支持在不同 HAL 中不一致
 └── 缓解: 参照 C 驱动自行实现、贡献社区、使用 `embedded-hal` 标准接口
 ```
-
 > **边界要点**: 嵌入式图形的边界与**内存**、**计算**、**体积**、**实时性**和**生态覆盖度**相关。
 > [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
 > [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
@@ -794,7 +780,6 @@ graph TD
      rst.set_high().unwrap();
      delay_ms(120); // 等待退出睡眠模式
 ```
-
 > **陷阱总结**: 嵌入式图形的陷阱主要与**总线共享**、**内存安全（Memory Safety）**、**中断约束**、**缓存一致性（Coherence）**和**硬件时序**相关。
 > [来源: [embedded-graphics Examples](https://github.com/embedded-graphics/examples)]
 > [来源: [Rust Embedded Patterns](https://docs.rust-embedded.org/book/peripherals/index.html)]
@@ -826,7 +811,6 @@ graph TD
 ---
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 >
 > **权威来源对齐变更日志**: 2026-05-26 创建 [来源: Authority Source Sprint Batch 12]
@@ -884,7 +868,6 @@ fn start_dma_transfer() {
     }
 }
 ```
-
 > **修正**: ARM Cortex-M7 等核心带有数据缓存（D-Cache），DMA 直接访问物理 SRAM 而不经过缓存。**如果帧缓冲在 cacheable 区域，CPU 写入后必须显式 `clean_dcache` 或配置 MPU 将帧缓冲标记为 `non-cacheable`**。缓冲区首地址还应 32 字节对齐以匹配缓存行大小。这是嵌入式图形中最隐蔽的 bug 之一——代码逻辑完全正确，但显示结果随机错误。Rust 的 `cortex-m` crate 提供 `SCB::clean_dcache_by_address`。这与 Linux 的 `dma_alloc_coherent` 类似，但在裸机中需手动管理缓存一致性。[来源: [ARM Cortex-M7 TRM](https://developer.arm.com/documentation/100240/latest/)] · [来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/)] · [来源: [cortex-m Crate](https://docs.rs/cortex-m/latest/cortex_m/peripheral/struct.SCB.html)] · [来源: [STM32 HAL DMA](https://github.com/stm32-rs/stm32f4xx-hal)]
 
 ---
@@ -914,7 +897,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**: 嵌入式系统中，帧缓冲通常以 `static mut [u16; N]` 分配，直接指针操作是 `unsafe` 的且**无边界检查**。越界写入可能破坏相邻的静态变量、栈数据，甚至硬件寄存器映射。**正确做法**: 1) 使用 `embedded-graphics` 的 `DrawTarget` trait（自动裁剪到显示区域）；2) 手动检查 `x < width && y < height`；3) 利用 Rust 数组索引检查（`framebuffer[offset]` 在 debug 下会 panic，但 `unsafe` 指针不会）。Rust 要求 `unsafe` 块起到警示作用，但正确性仍需人工验证。[来源: [Rustonomicon — References](https://doc.rust-lang.org/nomicon/references.html)] · [来源: [embedded-graphics DrawTarget](https://docs.rs/embedded-graphics/latest/embedded_graphics/draw_target/trait.DrawTarget.html)] · [来源: [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html)]
 
 ---
@@ -949,7 +931,6 @@ unsafe extern "C" fn touch_isr() {
     }
 }
 ```
-
 > **修正**: **中断服务程序（ISR）必须尽可能短**——在 Cortex-M 中，硬实时要求 ISR 执行时间在微秒级。阻塞 SPI 传输需要数百个时钟周期，若在中断中执行，将延迟所有同级和更低优先级中断。**解决方案**: 1) ISR 中仅设置原子标志；2) 主循环检测到标志后执行 SPI 通信；3) 使用 SPI + DMA，ISR 中启动 DMA，在 DMA 完成中断中处理数据。embassy 框架的 `async` 模型通过 `Future` 和 `Waker` 将中断安全桥接到异步（Async）任务。这与 C 的 ISR 尽量短原则一致，但 Rust 的类型系统（Type System）可帮助确保共享状态的安全访问。来源: [RTIC Documentation] · 来源: [embassy Interrupts] · 来源: [ARM Cortex-M Interrupt Handling] · 来源: [Ferrous Systems — Real-Time]
 > **过渡**: Rust 嵌入式图形系统开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 嵌入式图形系统开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -1034,9 +1015,7 @@ unsafe extern "C" fn touch_isr() {
 | Rust 嵌入式图形系统开发 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Rust 嵌入式图形系统开发 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Rust 嵌入式图形系统开发 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Rust 嵌入式图形系统开发 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

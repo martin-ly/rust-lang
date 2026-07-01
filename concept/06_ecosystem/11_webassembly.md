@@ -89,7 +89,6 @@ Wasm 的内存模型:
 ├── 边界检查: 所有内存访问自动边界检查（安全核心）
 └── 与 Rust 的契合: Rust 的所有权/借用模型天然适合 Wasm 的安全约束
 ```
-
 > **设计洞察**: Wasm 的**无未定义行为**保证与 Rust 的**安全子集**高度契合。C/C++ 编译到 Wasm 时，许多 UB 行为（如越界访问）被 Wasm 运行时（Runtime）捕获；而 Rust 在编译期就消除了这类 UB。
 > [来源: [WebAssembly Specification — Security](https://webassembly.github.io/spec/core/appendix/index.html)]
 
@@ -111,7 +110,6 @@ pub extern "C" fn greet(name_ptr: *const u8, name_len: usize) {
     };
 }
 ```
-
 ---
 
 ### 1.2 Rust → Wasm 的编译模型
@@ -135,7 +133,6 @@ graph LR
         I["wit-bindgen"] -->|"组件模型绑定"| J["跨语言组件调用"]
     end
 ```
-
 > **认知功能**: 此图展示 Rust → Wasm 的**完整编译与运行链路**，以及不同运行时的互操作层。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 浏览器场景用 `wasm-bindgen`；服务端/边缘用 `wasmtime` + WASI；组件化系统用 `wit-bindgen` + 组件模型。
@@ -189,7 +186,6 @@ Rust 的 Wasm 目标:
   ├── sys: emscripten
   └── 用途: 兼容 Emscripten 的编译（逐渐被淘汰）
 ```
-
 > **目标选择**: 浏览器场景用 `wasm32-unknown-unknown` + `wasm-bindgen`；服务端/边缘用 `wasm32-wasip1` 或 `wasm32-wasip2` + `wasmtime`。
 > [来源: [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)]
 
@@ -229,7 +225,6 @@ impl Point {
     }
 }
 ```
-
 > **wasm-bindgen 机制**: 宏（Macro）生成**JS 胶水代码**和**Wasm 导入/导出包装**，自动处理：
 >
 > 1. 字符串编码（UTF-8 ↔ UTF-16）
@@ -260,7 +255,6 @@ graph TD
         J["Go 组件"] <-->|"WIT"| K["C++ 组件"]
     end
 ```
-
 > **认知功能**: 此图对比当前**模块（Module）级 Wasm** 与未来的**组件模型**。组件模型通过 WIT（Wasm Interface Types）实现跨语言的类型安全组合。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 当前项目使用模块（Module）级 Wasm + wasm-bindgen；面向未来的组件化系统开始评估 wit-bindgen。
@@ -271,7 +265,6 @@ graph TD
 
 ### 2.4 Rust 1.96 链接器行为变更：`--allow-undefined` 默认移除
 >
-
 > **生态状态提示**：本小节涉及 2026-05-28 发布的 Rust 1.96 中的 **breaking change**。
 
 Rust 1.96 起，所有 WebAssembly 目标在链接时**不再默认**向 `wasm-ld` 传递 `--allow-undefined`。此前，Rust 代码中未定义的 `extern "C"` 符号会被 wasm-ld 静默转换为 Wasm 模块的导入（通常来自 `"env"` 模块（Module））；现在，未定义符号将像原生平台一样产生**链接错误**。
@@ -285,7 +278,6 @@ unsafe extern "C" {
     fn js_log(n: u32);
 }
 ```
-
 **推荐迁移方案**：使用 `#[link(wasm_import_module = "env")]` 显式声明导入模块。该写法在 Rust 1.96 之前和之后行为一致：
 
 ```rust,ignore
@@ -295,7 +287,6 @@ unsafe extern "C" {
     fn js_log(n: u32);
 }
 ```
-
 JS 侧实例化保持不变：
 
 ```javascript
@@ -303,13 +294,11 @@ let instance = await WebAssembly.instantiate(module, {
     env: { js_log: n => console.log(n) }
 });
 ```
-
 **临时回退方案**：若需快速恢复旧行为，可在 `RUSTFLAGS` 中传递：
 
 ```bash
 RUSTFLAGS="-Clink-arg=--allow-undefined" cargo build --target wasm32-unknown-unknown
 ```
-
 > **认知功能**：这一变更是 Rust WebAssembly 目标与原生平台行为对齐的重要一步，能提前捕获函数名拼写错误、依赖缺失等“幽灵导入”问题。
 > [来源: [Rust Blog — Changes to WebAssembly targets and handling undefined symbols](https://blog.rust-lang.org/2026/04/04/changes-to-webassembly-targets-and-handling-undefined-symbols/)] ·
 > [来源: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)] · 可信度: ✅
@@ -351,7 +340,6 @@ graph TD
     style ALT1 fill:#fff3e0
     style ALT2 fill:#fff3e0
 ```
-
 > **认知功能**: 此决策树评估 Rust + Wasm 的适用性。核心判断标准是**宿主交互频率**和**二进制大小敏感度**。
 > **使用建议**: 计算密集型、沙箱化需求高的场景优先 Rust + Wasm；与宿主频繁交互的场景需评估跨边界开销。
 > **关键洞察**: Wasm 的**跨边界调用**（Wasm ↔ Host）有固定开销（序列化/边界检查）。如果应用是"细粒度频繁调用"型，原生实现可能更优。
@@ -384,7 +372,6 @@ graph TD
 ├── 尾调用提案仍在讨论中，影响函数式编程风格
 └── 这些限制对大多数应用无实质影响
 ```
-
 > **边界要点**: Wasm 的边界反映了其**"最小可行产品 + 渐进扩展"**的设计哲学。Rust 与 Wasm 的契合度在 MVP 阶段已经很高，随着提案落地会进一步提升。
 > [来源: [WebAssembly Proposals](https://github.com/WebAssembly/proposals)]
 
@@ -420,7 +407,6 @@ Rust Wasm 工具链:
   ├── wasm-bindgen-test: 浏览器内测试
   └── wasm-pack test: 自动化 headless 测试
 ```
-
 > **工具链建议**: 入门用 `wasm-pack`；优化用 `wasm-opt`；服务端用 `Wasmtime`；需要组件模型用 `wit-bindgen`。
 > [来源: [Rust Wasm Book — Tools](https://rustwasm.github.io/book/reference/tools.html)]
 
@@ -430,7 +416,6 @@ Rust Wasm 工具链:
 >
 
 | 来源 | 可信度 | 说明 |
-
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
@@ -502,7 +487,6 @@ fn main() {
 // 正确: 使用 wasm-bindgen-futures 进行异步编程
 // 或使用 Web Workers（通过 js-sys）
 ```
-
 > **修正**: `wasm32-unknown-unknown` 目标没有操作系统支持，因此 `std::thread`、`std::fs`、`std::net` 等模块不可用。WebAssembly 的线程支持通过 `wasm32-wasip1` 或 `wasm32-wasip2` 或 `wasm32-unknown-emscripten` 目标实现，或浏览器的 Web Workers。Rust 编译器在编译期拒绝 wasm32 上不支持的 API，防止运行时错误。这与 C/C++ 的 WASM 编译（可能链接失败或运行时崩溃）不同——Rust 在类型系统（Type System）层面保证目标平台兼容性。[来源: [Rust and WebAssembly](https://rustwasm.github.io/book/)]
 
 ### 10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）
@@ -518,7 +502,6 @@ pub fn process(data: String) -> Vec<u8> {
 // ❌ 编译错误: wasm-bindgen 不直接支持 Vec<u8> 返回类型
 // 需要返回 JsValue 或使用 #[wasm_bindgen] 标记的类型
 ```
-
 > **修正**: `wasm-bindgen` 在 Rust 和 JavaScript 之间自动生成绑定代码，但不是所有 Rust 类型都可自动映射。`String`、`Vec<T>`（特定 T）、`Option<T>` 等支持自动转换，但自定义结构体（Struct）需要 `#[wasm_bindgen]` 标记，复杂类型需手动序列化为 `JsValue`。这与 AssemblyScript 的自动类型映射不同——Rust 的设计更保守，要求显式控制 FFI 边界，避免隐式转换导致的性能问题或语义差异。[来源: [wasm-bindgen Documentation](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ### 10.3 边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）
@@ -534,7 +517,6 @@ pub extern "C" fn process(data: *mut u8, len: usize) {
     slice[0] = 1;
 }
 ```
-
 > **修正**: WASM 的线性内存（Linear Memory）是一个连续的 byte 数组，Rust 的引用（`&T`、`&mut T`）要求**非空、对齐、有效**。从 host 传递的指针可能：1) 为 null；2) 未对齐；3) 越界。`slice::from_raw_parts_mut` 不验证这些条件，违反即 UB。安全封装：1) 验证 `data != null`；2) 验证 `data + len <= memory_size`；3) 使用 `wasm-bindgen` 生成的绑定（自动处理类型转换）。这与 C 的 WASM 模块（同样需验证指针）或 AssemblyScript（类型安全的 TypeScript 子集编译到 WASM）类似——WASM 的低级接口需要显式安全检查。`wasm-bindgen` 和 `wit-bindgen` 提供高层绑定生成，减少手动指针操作。[来源: [WASM Linear Memory](https://webassembly.org/docs/modules/#linear-memory)] · [来源: [wasm-bindgen Documentation](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ### 10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）
@@ -548,7 +530,6 @@ fn main() {
     panic!("something went wrong");
 }
 ```
-
 > **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 `wasm32-wasip1` 或 `wasm32-wasip2` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理（Error Handling）。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]
 > **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -634,9 +615,7 @@ WASM 使用单一的连续字节数组作为内存，通过偏移量访问。Rus
 | WebAssembly 生态：Rust 的浏览器外运行时 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 WebAssembly 生态：Rust 的浏览器外运行时 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 WebAssembly 生态：Rust 的浏览器外运行时 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

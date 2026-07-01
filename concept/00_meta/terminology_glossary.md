@@ -157,137 +157,77 @@
 - **`proc_macro_value`** (proc_macro_value) [L3] — 允许过程宏在编译期产生值而不仅是 token 流，为 const 泛型提供更强大的元编程能力（等待 review） — [PR #152092](https://github.com/rust-lang/rust/pull/152092)
 - **`size_of_val_raw`** (size_of_val_raw) [L3] — 计算裸值（`dyn Trait` 等）的尺寸而不需要已知类型，配合 `align_of_val_raw` 和 `Layout::for_value_raw`（等待 review） — [PR #157572](https://github.com/rust-lang/rust/pull/157572)
 - **`stack-protector`** (Stack Protector) [L3] — 栈保护编译器选项，在函数入口插入 canary 检测栈溢出攻击（PFCP 中） — [PR #148051](https://github.com/rust-lang/rust/pull/148051)
-
 - **`alignment_type`** (alignment_type) [L3] — 类型级对齐抽象，允许在类型系统中表达和传递对齐要求（PFCP 中） — [PR #154065](https://github.com/rust-lang/rust/pull/154065)
-
 - **`breakpoint`** (breakpoint) [L3] — 标准库断点函数，跨平台触发调试器断点（PFCP 中） — [PR #142824](https://github.com/rust-lang/rust/pull/142824)
-
 - **`supertrait_item_shadowing`** (Supertrait Item Shadowing) [L3] — 允许子 trait 覆盖父 trait 的关联项，解决 trait 层次中的命名冲突（PFCP 中） — [PR #150055](https://github.com/rust-lang/rust/pull/150055)
-
 - **虚表** (VTable) [L3] — 动态分发使用的函数指针表，dyn Trait 的胖指针携带 vtable 地址 — [Reference](https://doc.rust-lang.org/reference/items/traits.html#dyn-trait-object-type-layout)
-
 - **动态分发** (Dynamic Dispatch) [L3] — 运行时通过 vtable 解析 trait 方法调用的机制，dyn Trait 使用 — [TRPL](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)
-
 - **静态分发** (Static Dispatch) [L3] — 编译期通过单态化将泛型替换为具体类型的调用机制 — [TRPL](https://doc.rust-lang.org/book/ch10-01-syntax.html)
-
 - **单态化** (Monomorphization) [L3] — 编译器为每个泛型具体类型生成独立代码实例的过程 — [Reference](https://doc.rust-lang.org/reference/items/generics.html#monomorphization)
 
 ## L4 形式化（Formal Methods）
 
 - **分离逻辑** (Separation Logic) [L4] — 扩展 Hoare 逻辑以推理共享可变状态 — [Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf)
-
 - **线性逻辑** (Linear Logic) [L4] — 资源敏感、假设被消费而非重复的逻辑 — [Girard 1987](https://girard.perso.math.cnrs.fr/linear.pdf)
-
 - **Hoare 逻辑** (Hoare Logic) [L4] — 基于前后置条件的形式化程序推理系统 — [Hoare 1969](https://doi.org/10.1145/363235.363259)
-
 - **操作语义** (Operational Semantics) [L4] — 通过抽象机器步骤定义程序执行 — [Winskel 1993](https://mitpress.mit.edu/9780262731034)
-
 - **指称语义** (Denotational Semantics) [L4] — 将程序映射到数学对象的语义方法 — [Winskel 1993](https://mitpress.mit.edu/9780262731034)
-
 - **公理语义** (Axiomatic Semantics) [L4] — 基于逻辑公理推导程序正确性 — [Winskel 1993](https://mitpress.mit.edu/9780262731034)
-
 - **类型论** (Type Theory) [L4] — 将类型作为数学对象研究的逻辑基础 — [TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)
-
 - **子类型** (Subtyping) [L4] — 类型间替代关系的层级结构 — [Reference](https://doc.rust-lang.org/reference/subtyping.html)
-
 - **类型推断** (Type Inference) [L4] — 编译器自动推导表达式类型的机制 — [Reference](https://doc.rust-lang.org/reference/types.html)
-
 - **RustBelt** (RustBelt) [L4] — 在 Iris 中形式化验证 Rust 不安全代码的项目 — [POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
-
 - **Iris** (Iris) [L4] — 高阶并发分离逻辑框架，RustBelt 的理论基础 — [RustBelt](https://plv.mpi-sws.org/rustbelt/)
-
 - **Kani** (Kani) [L4] — Rust 代码的自动模型检测工具 — [Kani Docs](https://model-checking.github.io/kani/)
-
 - **Tree Borrows** (Tree Borrows) [L4] — 比 Stacked Borrows 更宽松的别名分析模型，允许某些合法的重叠借用模式 — [RFC](https://github.com/rust-lang/rfcs/pull/3367)
-
 - **Stacked Borrows** (Stacked Borrows) [L4] — Rust 的严格别名分析模型，Miri 默认使用以检测 UB，但比 Tree Borrows 更保守 — [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/)
-
 - **Safety Tags** (Safety Tags) [L4] — 编译器自动为 unsafe 代码块生成的形式化安全契约标记，用于静态验证和文档生成 — [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/2026/)
-
 - **Prusti** (Prusti) [L4] — 基于 Viper 验证器基础设施的 Rust 静态验证工具，支持前置/后置条件规范 — [Prusti Project](https://www.pm.inf.ethz.ch/research/prusti.html)
-
 - **Creusot** (Creusot) [L4] — 基于 Why3 验证平台的 Rust 形式化验证工具，使用 ML 风格规范语言 — [Creusot Docs](https://creusot-rs.github.io/)
-
 - **Verus** (Verus) [L4] — 支持 Rust 的演绎验证与证明助手 — [Verus Docs](https://verus-lang.github.io/verus/guide/)
-
 - **Miri** (Miri) [L4] — 检测未定义行为的 Rust 中间表示解释器 — [Miri](https://github.com/rust-lang/miri)
-
 - **高级中间表示** (HIR) [L4] — High-level IR，Rust 编译器中经过类型推断和宏展开后的高级中间表示 — [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/hir.html)
-
 - **抽象语法树** (AST) [L4] — Abstract Syntax Tree，源代码解析后的树形结构表示，编译器前端输出 — [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/syntax-intro.html)
 
 ## L5+ 生态/专家（Ecosystem & Expert）
 
 - **Tokio** (Tokio) [L5+] — 异步 Rust 的运行时与网络 IO 生态核心 — [Tokio](https://tokio.rs/)
-
 - **Rayon** (Rayon) [L5+] — 数据并行计算的 work-stealing 线程池库 — [docs.rs](https://docs.rs/rayon/latest/rayon/)
-
 - **Serde** (Serde) [L5+] — Rust 生态通用的序列化与反序列化框架 — [serde.rs](https://serde.rs/)
-
 - **Protobuf** (Protocol Buffers) [L5+] — Google 的二进制数据交换格式与代码生成 — [protobuf.dev](https://protobuf.dev/)
-
 - **gRPC** (gRPC) [L5+] — 基于 HTTP/2 的高性能远程过程调用框架 — [grpc.io](https://grpc.io/)
-
 - **WebAssembly** (WebAssembly / WASM) [L5+] — 可移植二进制指令格式，Rust 可编译为目标 — [Rust and WASM](https://rustwasm.github.io/book/)
-
 - **WASI** (WASI) [L5+] — WebAssembly 的系统接口标准规范 — [WASI Spec](https://github.com/WebAssembly/WASI)
-
 - **嵌入式** (Embedded) [L5+] — 无操作系统或 RTOS 环境下的 Rust 开发 — [Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)
-
 - **实时系统** (Real-Time Systems) [L5+] — 有严格时间约束的确定性执行环境 — [Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)
-
 - **no_std** (no_std) [L5+] — 不链接标准库，仅使用 `core` 的运行环境 — [Reference](https://doc.rust-lang.org/reference/crates-and-source-files.html#prelude)
 
 ---
 
 - **执行器** (Executor) [L5+] — 异步运行时中调度和执行 Future 的核心组件，如 Tokio runtime — [Tokio](https://docs.rs/tokio/latest/tokio/runtime/struct.Runtime.html)
-
 - **反应器** (Reactor) [L5+] — 异步运行时中监听 OS IO 事件并唤醒对应任务的底层组件 — [mio](https://docs.rs/mio/latest/mio/)
-
 - **不固定** (Unpin) [L5+] — 标记类型在内存中可被安全移动的 auto trait，大多数类型自动实现 — [std](https://doc.rust-lang.org/std/marker/trait.Unpin.html)
-
 - **特性门控** (Feature Gate) [L5+] — 通过 #![feature(...)] 启用编译器不稳定 nightly 特性的机制 — [Unstable Book](https://doc.rust-lang.org/unstable-book/index.html)
-
 - **交叉编译** (Cross-compilation) [L5+] — 在一种架构/OS 上编译生成另一种架构/OS 可执行文件的过程 — [Cargo Book](https://doc.rust-lang.org/cargo/reference/config.html#target)
-
 - **构建脚本** (Build Script) [L5+] — Cargo 在编译主 crate 前执行的 build.rs，用于代码生成或 C 库链接 — [Cargo Book](https://doc.rust-lang.org/cargo/reference/build-scripts.html)
-
 - **零成本抽象** (Zero-Cost Abstraction) [L5+] — 高级语言特性编译后不产生运行时开销的设计原则 — [C++ Origins [已失效]]<!-- 原链接: https://www.stroustrup.com/FSM/0cost.pdf --> · [Rust Blog](https://blog.rust-lang.org/2015/05/11/traits.html)
-
 - **Clap** (Clap) [L5+] — Rust 生态最流行的命令行参数解析库，支持派生宏和构建器模式 — [docs.rs](https://docs.rs/clap/latest/clap/)
-
 - **`cargo-script`** (cargo-script) [L5+] — 直接运行单个 Rust 文件而无需 Cargo.toml，FCP 已结束但被 edition policy 阻塞 — [RFC 3503](https://rust-lang.github.io/rfcs//3503-frontmatter.html)
-
 - **Cranelift** (Cranelift) [L5+] — Wasmtime 项目开发的替代后端编译器，Rust 编译器的实验性后端，因资金不足进展停滞（2026-05） — [GitHub](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift)
-
 - **cargo-audit** (cargo-audit) [L5+] — 扫描 Cargo.lock 中的已知安全漏洞（RUSTSEC），与 `cargo-deny` 配合使用 — [GitHub](https://github.com/RustSec/rustsec/tree/main/cargo-audit)
-
 - **cargo-expand** (cargo-expand) [L5+] — 展开宏并显示生成的代码，调试宏和检查派生宏输出的必备工具 — [GitHub](https://github.com/dtolnay/cargo-expand)
-
 - **sccache** (sccache) [L5+] — Mozilla 开发的共享编译缓存，支持本地磁盘和云存储（S3、Redis 等），加速 CI 构建 — [GitHub](https://github.com/mozilla/sccache)
-
 - **cross** (cross) [L5+] — 基于 Docker/QEMU 的零配置交叉编译工具，简化多目标平台构建 — [GitHub](https://github.com/cross-rs/cross)
-
 - **rustdoc** (rustdoc) [L5+] — Rust 内置文档生成工具，支持 Markdown、文档测试、交叉引用和搜索索引 — [Rustdoc Book](https://doc.rust-lang.org/rustdoc/)
-
 - **rustfmt** (rustfmt) [L5+] — Rust 官方代码格式化工具，基于 `rustfmt.toml` 配置统一代码风格 — [GitHub](https://github.com/rust-lang/rustfmt)
-
 - **Anyhow** (Anyhow) [L5+] — 基于 dyn Error 的灵活错误处理库，简化 ? 传播和错误上下文 — [docs.rs](https://docs.rs/anyhow/latest/anyhow/)
-
 - **serde_json** (serde_json) [L5+] — Serde 生态的 JSON 序列化/反序列化后端，零拷贝解析支持 — [docs.rs](https://docs.rs/serde_json/latest/serde_json/)
-
 - **Reqwest** (Reqwest) [L5+] — 基于 hyper 和 tokio 的高级异步 HTTP 客户端库 — [docs.rs](https://docs.rs/reqwest/latest/reqwest/)
-
 - **Tracing** (Tracing) [L5+] — 结构化的异步感知日志与分布式追踪框架，Tokio 生态核心 — [docs.rs](https://docs.rs/tracing/latest/tracing/)
-
 - **作用域守卫** (Scope Guard) [L3] — 在作用域退出时自动执行清理逻辑的 RAII 模式（如 defer、guard）— [Scopeguard crate](https://docs.rs/scopeguard/latest/scopeguard/)
-
 - **新类型模式** (Newtype Pattern) [L2] — 通过单字段元组结构体为现有类型创建强类型包装，实现 orphan rule 规避和类型安全 — [API Guidelines](https://rust-lang.github.io/api-guidelines//type-safety.html#c-newtype)
-
 - **孤儿规则** (Orphan Rule) [L3] — 禁止为外部类型实现外部 trait 的一致性规则，确保 trait 解析全局唯一 — [Reference](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)
-
 - **Cargo Workspace** (Cargo Workspace) [L5+] — 共享 Cargo.lock 和输出目录的多 crate 项目管理机制 — [Cargo Book](https://doc.rust-lang.org/cargo/reference/workspaces.html)
-
 - **内联汇编** (Inline Assembly) [L3] — 通过 `asm!` 宏在 Rust 中直接嵌入目标架构汇编指令 — [Reference](https://doc.rust-lang.org/reference/inline-assembly.html)
 
 ## 验证记录
@@ -326,41 +266,27 @@
 ### ✅ 已验证可用（nightly 2026-06-26，待 1.97 Release Notes 最终确认）
 
 - **`NonZero::highest_one` / `lowest_one` / `bit_width`** (NonZero bit operations) [L2] — `NonZero` 整数的位查询方法，避免零值特殊处理 — [tracking issue #130369](https://github.com/rust-lang/rust/issues/130369) — 状态：✅ nightly 可用 / 1.97 预期稳定
-
 - **`char::is_control` const** (const char::is_control) [L2] — `char::is_control()` 在常量上下文中可用 — 状态：✅ nightly 可用 / 1.97 预期稳定
-
 - **`NonZeroU32::midpoint`** (NonZero midpoint) [L2] — 计算两个 `NonZero` 值的中点，避免溢出 — 状态：✅ nightly 可用 / 1.97 预期稳定
-
 - **`NonZeroU32::isqrt`** (NonZero isqrt) [L2] — `NonZero` 整数的整数平方根 — 状态：✅ nightly 可用 / 1.97 预期稳定
-
 - **`ptr::fn_addr_eq`** (fn_addr_eq) [L2] — 比较两个函数指针的地址是否相等，替代不稳定的 `==` 比较 — 状态：✅ nightly 可用 / 1.97 预期稳定
-
 - **`const size_of_val` / `const align_of_val`** (const size_of_val / align_of_val) [L2] — `std::mem::size_of_val` / `align_of_val` 在 `const fn` 中可用 — 状态：✅ nightly 可用 / 1.97 预期稳定
-
 - **`BuildHasherDefault::new` const** (const BuildHasherDefault::new) [L2] — `BuildHasherDefault::new()` 为 `const fn` — 状态：✅ nightly 可用 / 1.97 预期稳定
-
 - **`Box::as_ptr` / `Box::as_mut_ptr`** (Box as_ptr / as_mut_ptr) [L2] — 不物化引用的 `Box` 原始指针访问，带 aliasing 保证 — [tracking issue #129090](https://github.com/rust-lang/rust/issues/129090) — 状态：✅ nightly 可用 / 1.97 候选（需核对 beta cutoff 2026-05-22）
-
 - **`int::format_into`** (Integer format_into) [L2] — 将整数直接格式化为 `core::fmt::NumBuffer`，避免堆分配 — [tracking issue #138215](https://github.com/rust-lang/rust/issues/138215) — 状态：✅ nightly 可用 / 1.97 候选（需核对 beta cutoff 2026-05-22）
 
 ### ❌ 当前 nightly 仍不可用 / 存在推迟风险
 
 - **`VecDeque::truncate_front`** (VecDeque truncate_front) [L2] — 截断双端队列前部，保留后部 `n` 个元素；与 `truncate` 互补 — [tracking issue #140667](https://github.com/rust-lang/rust/issues/140667) — 状态：❌ 仍需 `#![feature(vec_deque_truncate_front)]`，可能推迟至 1.98+
-
 - **`VecDeque::retain_back`** (VecDeque retain_back) [L2] — 从尾部开始保留满足条件的元素；与 `retain` 互补 — [PR #151973](https://github.com/rust-lang/rust/pull/151973) — 状态：❌ 当前 nightly 方法不存在，可能已移除或推迟至 1.98+
-
 - **`Box::into_non_null`** / **`Vec::into_non_null`** (Box/Vec into_non_null) [L2] — 将 `Box<T>` / `Vec<T>` 转换为 `NonNull<T>`，避免空指针检查 — [tracking issue #130364](https://github.com/rust-lang/rust/issues/130364) — 状态：❌ 当前 nightly 方法不存在，保留等效实现
 
 ### 🔄 仍处于 PFCP / 等待 review 的候选
 
 - **`float_algebraic`** (Float Algebraic Optimization) [L3] — 允许编译器按代数规则重组浮点运算，以精度换性能 — [PR #157168](https://github.com/rust-lang/rust/pull/157168) — 状态：🔄 PFCP / 1.98 候选
-
 - **`RandomSource`** (RandomSource) [L2] — 标准库随机数源 trait，统一 `OsRng`、`thread_rng` 等来源 — [PR #157226](https://github.com/rust-lang/rust/pull/157226) — 状态：🔄 PFCP / 1.98 候选
-
 - **`DefaultRandomSource`** (DefaultRandomSource) [L2] — `RandomSource` 的标准库默认实现 — [PR #157226](https://github.com/rust-lang/rust/pull/157226) — 状态：🔄 PFCP / 1.98 候选
-
 - **`C-variadic definitions`** (C Variadic Function Definitions) [L3] — 在 Rust 中直接定义 `unsafe extern "C" fn f(fmt: *const u8, args: ...)` 风格的可变参数函数 — [PR #155942](https://github.com/rust-lang/rust/pull/155942) — 状态：🔄 PFCP / 1.98 候选
-
 - **`proc_macro_value`** (Proc Macro Value) [L3] — 允许过程宏在编译期产生值（而不仅是 token 流） — [PR #152092](https://github.com/rust-lang/rust/pull/152092) — 状态：📋 等待 review / 1.98 候选
 
 ---

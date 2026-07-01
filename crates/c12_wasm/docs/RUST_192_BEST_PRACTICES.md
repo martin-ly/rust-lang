@@ -67,7 +67,6 @@ unsafe {
 use c12_wasm::rust_192_features::WasmObjectPool;
 let mut pool: WasmObjectPool<String> = WasmObjectPool::new(10);
 ```
-
 #### ❌ 避免做法
 
 ```rust
@@ -83,7 +82,6 @@ for i in 0..1000 {
     let obj = String::new(); // 频繁分配
 }
 ```
-
 **最佳实践要点**:
 
 - ✅ 使用 `WasmBuffer` 管理未初始化内存
@@ -119,7 +117,6 @@ wasm_rotate_data(&mut data, 3);
 let chunk_size = NonZeroUsize::new(1024).unwrap();
 let chunks = calculate_buffer_chunks(5000, chunk_size);
 ```
-
 #### ❌ 避免做法
 
 ```rust
@@ -136,7 +133,6 @@ fn rotate_right<T>(data: &mut [T], positions: usize) {
     data[positions..].reverse();
 }
 ```
-
 **最佳实践要点**:
 
 - ✅ 使用特化的迭代器比较方法
@@ -173,7 +169,6 @@ impl WasmFFIUnion {
     }
 }
 ```
-
 #### ❌ 避免做法
 
 ```rust
@@ -185,7 +180,6 @@ pub union WasmFFIUnion {
 // 直接访问，不安全
 let value = unsafe { union.integer };
 ```
-
 **最佳实践要点**:
 
 - ✅ 使用原始引用进行 FFI 操作
@@ -227,7 +221,6 @@ impl WasmBuffer {
     pub unsafe fn write(&mut self, data: &[u8]) -> usize { /* ... */ }
 }
 ```
-
 #### ❌ 避免做法
 
 ```rust
@@ -235,7 +228,6 @@ impl WasmBuffer {
 // ❌ 不要暴露内部实现细节
 // ❌ 不要使用全局可变状态
 ```
-
 **最佳实践要点**:
 
 - ✅ 模块化组织代码
@@ -303,8 +295,8 @@ impl WasmBuffer {
 - [Rust 1.92.0 WASM 改进文档](RUST_192_WASM_IMPROVEMENTS.md) - 详细说明
 - [Rust 1.92.0 WASM 快速参考](RUST_192_QUICK_REFERENCE.md) - 快速查找
 - [Rust 1.92.0 WASM 迁移指南](RUST_192_MIGRATION_GUIDE.md) - 迁移步骤
-- [Rust 1.92.0 特性参考](tier_03_references/04_rust_192_特性参考.md) - API 参考
-- [最佳实践](tier_03_references/03_最佳实践.md) - 通用最佳实践
+- [Rust 1.92.0 特性参考](tier_03_references/04_rust_192_features_reference.md) - API 参考
+- [最佳实践](tier_03_references/03_best_practices.md) - 通用最佳实践
 
 ---
 

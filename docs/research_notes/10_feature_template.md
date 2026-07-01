@@ -1,23 +1,14 @@
 # Rust 特性精简模板 {#rust-特性精简模板}
 
 > **概念族**: 版本特性
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-12
-
 > **最后更新**: 2026-02-28
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成
-
 > **目标**: 为 92 项特性中非核心特性建立统一「概念→形式化引用→反例」精简模板
 
 ---
@@ -25,9 +16,7 @@
 ## 📑 目录 {#目录}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [Rust 特性精简模板 {#rust-特性精简模板}](#rust-特性精简模板-rust-特性精简模板)
@@ -53,19 +42,14 @@
 ## 模板结构 {#模板结构}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 除 [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) 所列 13 项核心特性外，其余特性采用以下**精简模板**：
 
 | 列 | 必填 | 说明 |
-
 | :--- | :--- | :--- |
-
 | **概念** | 是 | 特性一句话定义；与 RUST_193 对应 |
-
 | **形式化引用** | 若有 | 指向 formal_methods、type_theory、toolchain 等 Def/定理 |
-
 | **反例** | 若有 | 违反后果；编译错误或 UB |
 
 ---
@@ -73,21 +57,16 @@
 ## 模板应用示例 {#模板应用示例}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 1：if/else（控制流族） {#示例-1ifelse控制流族}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 概念 | 形式化引用 | 反例 |
-
 | :--- | :--- | :--- |
-
 | 条件分支；表达式；必须返回同类型 | - | 分支类型不一致编译错误 |
 
 ### 示例 2：声明宏（宏族） {#示例-2声明宏宏族}
@@ -95,9 +74,7 @@
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 概念 | 形式化引用 | 反例 |
-
 | :--- | :--- | :--- |
-
 | 代码生成、DSL；macro_rules!、卫生宏 | - | 意外捕获、宏展开错误 |
 
 ### 示例 3：mod（模块族） {#示例-3mod模块族}
@@ -105,9 +82,7 @@
 > **来源: [ACM](https://dl.acm.org/)**
 
 | 概念 | 形式化引用 | 反例 |
-
 | :--- | :--- | :--- |
-
 | 代码组织；mod、文件即模块 | [01_formal_composition](software_design_theory/04_compositional_engineering/01_formal_composition.md) Def 1.2 依赖 | 循环依赖编译失败 |
 
 ### 示例 4：const（常量族） {#示例-4const常量族}
@@ -115,9 +90,7 @@
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 | 概念 | 形式化引用 | 反例 |
-
 | :--- | :--- | :--- |
-
 | 编译期常量；const X: T = ... | [advanced_types](type_theory/10_advanced_types.md) | 非常量表达式编译错误 |
 
 ---
@@ -125,15 +98,12 @@
 ## 与 RUST_193 的对应 {#与-rust_193-的对应}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) 中 92 项特性的表格列「动机」「设计决策」「形式化」「反例」与本模板一致：
 
 - **概念** ← 动机 + 设计决策（合并为一句话）
-
 - **形式化引用** ← 形式化列
-
 - **反例** ← 反例列
 
 **核心特性**（13 项）采用完整链，见 [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md)。
@@ -145,15 +115,11 @@
 ## 索引 {#索引}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 用途 |
-
 | :--- | :--- |
-
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) | 92 项特性完整表格 |
-
 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) | 13 项核心特性完整链 |
 
 ---
@@ -167,9 +133,7 @@
 ## 🆕 Rust 1.94 更新 {#rust-194-更新}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
@@ -181,11 +145,8 @@
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -197,15 +158,10 @@
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -213,17 +169,13 @@
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - Rust 1.94 特性速查
-
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -235,9 +187,7 @@
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -253,11 +203,9 @@
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [research_notes 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -265,17 +213,11 @@
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ---

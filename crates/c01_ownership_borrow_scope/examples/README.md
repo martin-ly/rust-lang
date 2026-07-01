@@ -96,7 +96,6 @@ cargo run --example borrow_checker_demo
 # 运行生命周期示例
 cargo run --example scope_lifetime
 ```
-
 ### 运行测试
 
 ```bash
@@ -109,7 +108,6 @@ cargo test --example rust_190_rich_practical_examples
 # 运行 Rust 1.93.0 特性测试
 cargo test --test rust_192_comprehensive_tests
 ```
-
 ### 运行基准测试
 
 ```bash
@@ -119,7 +117,6 @@ cargo bench -p c01_ownership_borrow_scope
 # 运行 Rust 1.93.0 特性基准测试
 cargo bench --bench rust_192_benchmarks
 ```
-
 ---
 
 ## 学习建议
@@ -131,28 +128,23 @@ cargo bench --bench rust_192_benchmarks
    ```bash
    cargo run --example ownership_basics
    ```
-
    - 理解所有权三大规则
    - 学习 Copy vs Move
    - 掌握所有权转移
-
 2. **学习借用规则**
 
    ```bash
    cargo run --example borrow_checker_demo
    ```
-
    - 不可变借用 (`&T`)
    - 可变借用 (`&mut T`)
    - 借用检查器原理
-
 3. **理解生命周期**
 
    ```bash
    cargo run --example scope_lifetime
    cargo run --example lifetime_annotations
    ```
-
    - 词法作用域
    - 生命周期省略规则
    - 显式标注
@@ -164,18 +156,15 @@ cargo bench --bench rust_192_benchmarks
    ```bash
    cargo run --example rc_refcell_demo
    ```
-
    - `Box<T>`
    - `Rc<T>` / `Arc<T>`
    - `RefCell<T>` / `Mutex<T>`
-
 2. **学习高级模式**
 
    ```bash
    cargo run --example advanced_ownership_patterns
    cargo run --example advanced_scope_examples
    ```
-
    - 内部可变性
    - 自引用结构
    - 非词法生命周期
@@ -188,17 +177,14 @@ cargo bench --bench rust_192_benchmarks
    cargo run --example aeneas_first_intro
    cargo run --example ownership_verification
    ```
-
    - Aeneas 验证工具
    - 定理证明基础
    - 形式化语义
-
 2. **Rust 1.93.0 新特性**
 
    ```bash
    cargo run --example rust_192_features_demo
    ```
-
    - `MaybeUninit` 改进
    - 原始引用安全访问
    - 更好的错误提示
@@ -219,7 +205,6 @@ let s2 = s; // s 的所有权转移到 s2，s 不再有效
 // 规则3: 所有者离开作用域，值被释放
 } // s2 在这里被释放
 ```
-
 ### 借用规则
 
 ```rust
@@ -232,7 +217,6 @@ let r3 = &mut s;
 
 // 但不能同时存在
 ```
-
 ### 生命周期标注
 
 ```rust
@@ -246,7 +230,6 @@ struct ImportantExcerpt<'a> {
     part: &'a str,
 }
 ```
-
 ---
 
 ## 相关文档

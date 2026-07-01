@@ -1,0 +1,2004 @@
+> **生态状态提示**：
+>
+> 本文档提及 `async-std` 与/或 `wasm32-wasi`。
+> 请注意：
+>
+> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+
+---
+
+# C06 Async 常见问题
+
+> **文档版本**: Rust 1.92.0+ | **更新日期**: 2025-12-11
+> **文档层级**: Tier 1 - 基础概念 | **文档类型**: ❓ FAQ参考
+
+---
+
+## 📑 目录
+
+- [C06 Async 常见问题](#c06-async-常见问题)
+  - [📑 目录](#-目录)
+  - [1. 基础概念](#1-基础概念)
+    - [Q1.1: `async/await` 和普通的线程有什么区别？我应该用哪个？](#q11-asyncawait-和普通的线程有什么区别我应该用哪个)
+    - [Q1.2: 什么时候不应该使用 `async/await`？](#q12-什么时候不应该使用-asyncawait)
+    - [Q1.3: `Future` 什么时候开始执行？](#q13-future-什么时候开始执行)
+    - [Q1.4: `.await` 和 `poll()` 有什么区别？](#q14-await-和-poll-有什么区别)
+    - [Q1.5: `async fn` 返回的是什么类型？](#q15-async-fn-返回的是什么类型)
+  - [2. 运行时选择](#2-运行时选择)
+    - [Q2.1: Tokio、async-std \[已归档\] 和 Smol 如何选择？](#q21-tokioasync-std-已归档-和-smol-如何选择)
+    - [Q2.2: 可以在同一项目中混用多个运行时吗？](#q22-可以在同一项目中混用多个运行时吗)
+    - [Q2.3: 如何选择单线程还是多线程运行时？](#q23-如何选择单线程还是多线程运行时)
+  - [3. Pin 与内存安全](#3-pin-与内存安全)
+    - [Q3.1: 为什么我需要 `Pin`？它看起来非常复杂](#q31-为什么我需要-pin它看起来非常复杂)
+    - [Q3.2: 什么是 `Unpin`？](#q32-什么是-unpin)
+    - [Q3.3: 如何获取 `Pin<&mut T>` 中的 `&mut T`？](#q33-如何获取-pinmut-t-中的-mut-t)
+  - [4. 性能与优化](#4-性能与优化)
+    - [Q4.1: 如何在 `async` 代码中执行 CPU 密集型任务？](#q41-如何在-async-代码中执行-cpu-密集型任务)
+    - [Q4.2: 如何优化 Tokio 运行时性能？](#q42-如何优化-tokio-运行时性能)
+    - [Q4.3: 如何测量异步代码的性能？](#q43-如何测量异步代码的性能)
+  - [5. 错误处理与调试](#5-错误处理与调试)
+    - [Q5.1: 如何在异步代码中处理错误？](#q51-如何在异步代码中处理错误)
+    - [Q5.2: 如何调试异步代码？](#q52-如何调试异步代码)
+    - [Q5.3: 如何处理 Timeout？](#q53-如何处理-timeout)
+  - [6. 设计模式与最佳实践](#6-设计模式与最佳实践)
+    - [Q6.1: 为什么我的 `Future` 没有执行？](#q61-为什么我的-future-没有执行)
+    - [Q6.2: 如何在 `Drop` 中执行异步清理？](#q62-如何在-drop-中执行异步清理)
+    - [Q6.3: 如何优雅取消异步任务？](#q63-如何优雅取消异步任务)
+  - [7. 生态系统与兼容性](#7-生态系统与兼容性)
+    - [Q7.1: Tokio 和 async-std \[已归档\] 的库可以互相使用吗？](#q71-tokio-和-async-std-已归档-的库可以互相使用吗)
+    - [Q7.2: 如何编写运行时无关的异步库？](#q72-如何编写运行时无关的异步库)
+    - [Q7.3: `async-trait` crate 是做什么的？](#q73-async-trait-crate-是做什么的)
+  - [8. 高级主题](#8-高级主题)
+    - [Q8.1: 如何手动实现 `Future`？](#q81-如何手动实现-future)
+    - [Q8.2: 如何在 trait 中定义异步方法（Rust 1.92.0）？（自 Rust 1.90 引入）](#q82-如何在-trait-中定义异步方法rust-1920自-rust-190-引入)
+    - [Q8.3: 如何实现 `AsyncDrop`？](#q83-如何实现-asyncdrop)
+  - [🔗 相关资源](#-相关资源)
+    - [官方文档](#官方文档)
+    - [推荐阅读](#推荐阅读)
+    - [社区资源](#社区资源)
+  - [📝 贡献指南](#-贡献指南)
+
+---
+
+## 1. 基础概念
+
+### Q1.1: `async/await` 和普通的线程有什么区别？我应该用哪个？
+
+**回答**:
+
+**核心区别**:
+
+| 特性  | 线程 (`std::thread`)  | `async/await` |
+| :--- | :--- | :--- |
+| **调度方式**   | 抢占式（OS 调度）            | 协作式（运行时调度） |
+| **内存开销**   | 每个线程 ~2MB 栈空间         | 每个任务 ~KB 级别    |
+| **适用场景**   | CPU 密集型任务               | I/O 密集型任务       |
+| **并发数量**   | 受限于系统资源（通常几百个） | 可轻松管理数万个任务 |
+| **上下文切换** | 较慢（需要内核态）           | 较快（用户态）       |
+
+**示例对比**:
+
+```rust
+// 线程方式 (适合 CPU 密集型)
+use std::thread;
+
+fn main() {
+    let handle = thread::spawn(|| {
+        // 计算密集型工作
+        heavy_computation()
+    });
+    handle.join().unwrap();
+}
+
+// async 方式 (适合 I/O 密集型)
+#[tokio::main]
+async fn main() {
+    let handle = tokio::spawn(async {
+        // I/O 密集型工作
+        fetch_data_from_network().await
+    });
+    handle.await.unwrap();
+}
+```
+**选择建议**:
+
+- **CPU 密集型任务**: 使用线程或 `rayon`（数据并行）
+- **I/O 密集型任务**: 使用 `async/await`
+- **混合场景**: 在 `async` 运行时中使用 `spawn_blocking` 执行阻塞任务
+
+**相关问题**: [Q1.2](#q12-什么时候不应该使用-asyncawait), [Q4.1](#q41-如何在-async-代码中执行-cpu-密集型任务)
+
+---
+
+### Q1.2: 什么时候不应该使用 `async/await`？
+
+**回答**:
+
+以下场景**不适合**使用 `async`:
+
+1. **纯 CPU 密集型计算**:
+
+   ```rust
+   // ❌ 不推荐：async 无法提升性能
+   async fn calculate_pi() -> f64 {
+       // 纯计算，无 I/O
+   }
+
+   // ✅ 推荐：直接使用线程或 rayon
+   fn calculate_pi_parallel() -> f64 {
+       use rayon::prelude::*;
+       // 利用多核并行计算
+   }
+   ```
+2. **简单的单任务程序**:
+
+   ```rust
+   // ❌ 过度工程：引入不必要的复杂性
+   #[tokio::main]
+   async fn main() {
+       println!("Hello, world!");
+   }
+
+   // ✅ 简单直接
+   fn main() {
+       println!("Hello, world!");
+   }
+   ```
+3. **与阻塞式 C 库交互**:
+
+   ```rust
+   // ❌ 不推荐：阻塞整个运行时
+   async fn call_c_library() {
+       unsafe { blocking_c_function() };
+   }
+
+   // ✅ 推荐：使用 spawn_blocking
+   async fn call_c_library_correctly() {
+       tokio::task::spawn_blocking(|| {
+           unsafe { blocking_c_function() }
+       }).await.unwrap();
+   }
+   ```
+**相关问题**: [Q1.1](#q11-asyncawait-和普通的线程有什么区别我应该用哪个), [Q4.1](#q41-如何在-async-代码中执行-cpu-密集型任务)
+
+---
+
+### Q1.3: `Future` 什么时候开始执行？
+
+**回答**:
+
+**关键点**: `Future` 是**惰性的**（lazy），只有在被 `.await` 或 `poll()` 时才开始执行。
+
+**示例**:
+
+```rust
+async fn expensive_operation() {
+    println!("This will NOT print immediately!");
+    // 耗时操作
+}
+
+async fn example() {
+    let future = expensive_operation(); // ❌ 什么也不会发生
+
+    // 只有 await 之后才开始执行
+    future.await; // ✅ 现在才打印 "This will NOT print immediately!"
+}
+```
+**对比 JavaScript Promise**:
+
+```javascript
+// JavaScript: Promise 立即开始执行
+const promise = fetch("https://api.example.com") // ✅ 立即开始请求
+
+// Rust: Future 惰性执行
+let future = reqwest::get("https://api.example.com") // ❌ 什么也不会发生
+future.await // ✅ 现在才开始请求
+```
+**实践建议**:
+
+- 如果需要后台执行，使用 `tokio::spawn`:
+
+```rust
+// 立即开始后台执行
+let handle = tokio::spawn(expensive_operation());
+```
+**相关问题**: [Q1.4](#q14-await-和-poll-有什么区别), [Q6.1](#q61-为什么我的-future-没有执行)
+
+---
+
+### Q1.4: `.await` 和 `poll()` 有什么区别？
+
+**回答**:
+
+**`.await`** 是高层次语法糖，**`poll()`** 是底层机制。
+
+**关系**:
+
+```text
+.await (用户代码)
+  │
+  ├── 编译器展开
+  │
+  └──> poll() (由运行时调用)
+```
+**示例**:
+
+```rust
+// 用户代码：使用 .await
+async fn user_code() {
+    let result = async_operation().await;
+}
+
+// 编译器生成的等价代码（简化版）
+fn user_code() -> impl Future<Output = ()> {
+    // 状态机
+    enum State {
+        Start,
+        Waiting(SomeFuture),
+        Done,
+    }
+
+    struct UserCodeFuture {
+        state: State,
+    }
+
+    impl Future for UserCodeFuture {
+        type Output = ();
+
+        fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<()> {
+            match self.state {
+                State::Start => { /* 开始 */ }
+                State::Waiting(ref mut fut) => {
+                    // 调用内部 Future 的 poll
+                    match fut.poll(cx) {
+                        Poll::Ready(val) => { /* 处理结果 */ }
+                        Poll::Pending => return Poll::Pending,
+                    }
+                }
+                State::Done => Poll::Ready(()),
+            }
+        }
+    }
+
+    UserCodeFuture { state: State::Start }
+}
+```
+**何时需要手动实现 `poll()`**:
+
+- 实现自定义 `Future` 类型
+- 编写底层异步原语
+- 性能敏感的场景
+
+**相关问题**: [Q1.3](#q13-future-什么时候开始执行), [Q8.1](#q81-如何手动实现-future)
+
+---
+
+### Q1.5: `async fn` 返回的是什么类型？
+
+**回答**:
+
+`async fn` 返回一个**匿名的 `impl Future<Output = T>`** 类型。
+
+**示例**:
+
+```rust
+// 这个函数：
+async fn get_number() -> i32 {
+    42
+}
+
+// 等价于：
+fn get_number() -> impl Future<Output = i32> {
+    async { 42 }
+}
+```
+**类型特点**:
+
+- **不透明**: 具体类型由编译器生成，你无法命名它
+- **零大小**（在未 poll 前）: 只是一个状态机
+- **Unpin**: 大多数情况下是 `!Unpin`（不可移动）
+
+**命名问题**:
+
+```rust
+// ❌ 不能直接命名类型
+fn get_future() -> ??? {  // 类型无法写出来
+    async { 42 }
+}
+
+// ✅ 使用 impl Trait
+fn get_future() -> impl Future<Output = i32> {
+    async { 42 }
+}
+
+// ✅ 或者 Box (有性能开销)
+fn get_future() -> Box<dyn Future<Output = i32> + Send> {
+    Box::new(async { 42 })
+}
+```
+**相关问题**: [Q1.3](#q13-future-什么时候开始执行), [Q7.3](#q73-async-trait-crate-是做什么的)
+
+---
+
+## 2. 运行时选择
+
+### Q2.1: Tokio、async-std [已归档] 和 Smol 如何选择？
+
+**回答**:
+
+**快速决策树**:
+
+```text
+需要生产级稳定性？
+  ├── 是 → Tokio (生态最完善)
+  └── 否
+      ├── 追求 API 简洁？ → smol
+      └── 追求轻量级？ → Smol
+```
+**详细对比**:
+
+| 特性         | Tokio                    | async-std [已归档]        | Smol             |
+| :--- | :--- | :--- | :--- || **生态系统** | ★★★★★                    | ★★★              | ★★               |
+| **性能**     | ★★★★★                    | ★★★★             | ★★★★             |
+| **学习曲线** | ★★★                      | ★★★★★            | ★★★★             |
+| **文档质量** | ★★★★★                    | ★★★★             | ★★★              |
+| **适用场景** | 生产环境、大型项目       | 学习、中小型项目 | 嵌入式、小型服务 |
+| **特色功能** | 多线程调度、tracing 集成 | 类似标准库 API   | 极简、低依赖     |
+
+**代码示例**:
+
+```rust
+// Tokio
+#[tokio::main]
+async fn main() {
+    tokio::spawn(async { println!("Tokio"); }).await.unwrap();
+}
+
+// async-std [已归档]
+#[async_std::main]
+async fn main() {
+    async_std::task::spawn(async { println!("async-std [已归档]"); }).await;
+}
+
+// Smol
+fn main() {
+    smol::block_on(async {
+        smol::spawn(async { println!("Smol"); }).await;
+    });
+}
+```
+**推荐**:
+
+- **99% 的场景**: 选择 **Tokio**
+- **教学/学习**: 选择 **async-std [已归档]**
+- **嵌入式/低资源**: 选择 **Smol**
+
+**相关问题**: [Q2.2](#q22-可以在同一项目中混用多个运行时吗), [Q7.1](#q71-tokio-和-async-std [已归档]-的库可以互相使用吗)
+
+---
+
+### Q2.2: 可以在同一项目中混用多个运行时吗？
+
+**回答**:
+
+**简短回答**: 技术上可以，但**强烈不推荐**。
+
+**为什么不推荐**:
+
+1. **I/O 类型不兼容**: `tokio::net::TcpStream` ≠ `async_std::net::TcpStream`
+2. **运行时开销**: 每个运行时都有自己的线程池和调度器
+3. **复杂性**: 需要额外的兼容层（如 `async-compat`）
+
+**如果必须混用**:
+
+```rust
+// 使用 async-compat 桥接
+use async_compat::Compat;
+
+#[tokio::main]
+async fn main() {
+    // 在 tokio 中运行 async-std [已归档] 代码
+    let result = Compat::new(async {
+        async_std::task::sleep(Duration::from_secs(1)).await;
+    }).await;
+}
+```
+**更好的方案**:
+
+- **统一选择**: 项目开始时就选定一个运行时
+- **使用运行时无关的库**: 如 `hyper`, `reqwest` (可配置底层运行时)
+
+**相关问题**: [Q2.1](#q21-tokio-和-smol-如何选择), [Q7.1](#q71-tokio-和-async-std [已归档]-的库可以互相使用吗)
+
+---
+
+### Q2.3: 如何选择单线程还是多线程运行时？
+
+**回答**:
+
+**Tokio 示例**:
+
+```rust
+// 多线程运行时 (默认)
+#[tokio::main] // 等价于 #[tokio::main(flavor = "multi_thread")]
+async fn main() {
+    // 可以利用多核
+}
+
+// 单线程运行时
+#[tokio::main(flavor = "current_thread")]
+async fn main() {
+    // 只在当前线程运行
+}
+```
+**选择建议**:
+
+| 场景                    | 推荐           | 原因                     |
+| :--- | :--- | :--- || **生产环境 Web 服务器** | 多线程         | 充分利用多核，处理高并发 |
+| **测试/基准测试**       | 单线程         | 结果更可预测，易于调试   |
+| **嵌入式/低资源环境**   | 单线程         | 减少资源占用             |
+| **纯 I/O 任务**         | 单线程可能足够 | 避免线程切换开销         |
+| **混合 CPU + I/O**      | 多线程         | CPU 任务可并行执行       |
+
+**性能考虑**:
+
+```rust
+// 多线程：任务可能在不同线程执行
+#[tokio::main]
+async fn main() {
+    for i in 0..10 {
+        tokio::spawn(async move {
+            println!("Task {} on thread {:?}", i, std::thread::current().id());
+        });
+    }
+}
+
+// 单线程：所有任务在同一线程
+#[tokio::main(flavor = "current_thread")]
+async fn main() {
+    for i in 0..10 {
+        tokio::spawn(async move {
+            println!("Task {} on thread {:?}", i, std::thread::current().id());
+            // 所有任务都在同一线程
+        });
+    }
+}
+```
+**相关问题**: [Q2.1](#q21-tokio-和-smol-如何选择), [Q4.2](#q42-如何优化-tokio-运行时性能)
+
+---
+
+## 3. Pin 与内存安全
+
+### Q3.1: 为什么我需要 `Pin`？它看起来非常复杂
+
+**回答**:
+
+`Pin` 解决了 **自引用结构** 的安全问题。
+
+**问题场景**:
+
+```rust
+// async 函数内部的状态机（简化版）
+struct AsyncState {
+    buffer: Vec<u8>,
+    buffer_ref: *const u8, // 指向 buffer 的指针
+}
+
+// 如果结构被移动，指针就会变成悬垂指针！
+let mut state = AsyncState { /* ... */ };
+let moved_state = state; // ❌ buffer_ref 现在指向无效内存
+```
+**`Pin` 如何解决**:
+
+```rust
+use std::pin::Pin;
+
+// Pin 保证：一旦被固定，对象在内存中的地址永远不变
+fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+    // 现在 self 的地址是稳定的，自引用是安全的
+}
+```
+**实际开发中**:
+
+```rust
+// ✅ 大多数情况下，你不需要直接使用 Pin
+async fn user_code() {
+    // 编译器和运行时会自动处理 Pin
+    let result = async_operation().await;
+}
+
+// ❌ 只有在手动实现 Future 时才需要
+impl Future for MyFuture {
+    type Output = ();
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<()> {
+        // 这里需要理解 Pin
+    }
+}
+```
+**类比**: `Pin` 就像"钉住"一幅画，确保它不会在墙上移动位置。
+
+**相关问题**: [Q3.2](#q32-什么是-unpin), [Q3.3](#q33-如何获取-pinmut-t-中的-mut-t), [Q8.1](#q81-如何手动实现-future)
+
+---
+
+### Q3.2: 什么是 `Unpin`？
+
+**回答**:
+
+`Unpin` 是一个 **auto trait**，表示"即使被 `Pin` 也可以安全移动"。
+
+**关键点**:
+
+- **大多数类型自动实现 `Unpin`**: `i32`, `String`, `Vec<T>` 等
+- **只有自引用类型是 `!Unpin`**: 如 `async` 块生成的 `Future`
+
+**示例**:
+
+```rust
+// 普通类型：实现 Unpin
+fn is_unpin<T: Unpin>(_t: T) {}
+
+is_unpin(42);           // ✅ i32 是 Unpin
+is_unpin(String::new()); // ✅ String 是 Unpin
+
+// async 生成的 Future：!Unpin
+let future = async { 42 };
+// is_unpin(future);    // ❌ 编译错误：Future 不是 Unpin
+```
+**实践影响**:
+
+```rust
+use tokio::io::{AsyncRead, AsyncReadExt};
+
+async fn read_example() {
+    let mut buffer = vec![0u8; 1024];
+
+    // ✅ buffer 是 Unpin，可以直接传引用
+    let n = stream.read(&mut buffer).await.unwrap();
+
+    // ❌ 如果传递 !Unpin 类型，需要 Pin
+    // let future = async { /* ... */ };
+    // stream.read_from_future(future).await; // 可能需要 Box::pin(future)
+}
+```
+**如何判断**:
+
+```rust
+use std::marker::Unpin;
+
+fn check_unpin<T: Unpin>() {
+    println!("T 是 Unpin");
+}
+
+// 编译通过 = Unpin
+// 编译失败 = !Unpin
+```
+**相关问题**: [Q3.1](#q31-为什么我需要-pin它看起来非常复杂), [Q3.3](#q33-如何获取-pinmut-t-中的-mut-t)
+
+---
+
+### Q3.3: 如何获取 `Pin<&mut T>` 中的 `&mut T`？
+
+**回答**:
+
+**根据 `T` 是否实现 `Unpin` 有不同方法**:
+
+**情况 1: `T: Unpin`** (安全)
+
+```rust
+use std::pin::Pin;
+
+fn example(pinned: Pin<&mut String>) {
+    // ✅ 安全：String 实现了 Unpin
+    let s: &mut String = pinned.get_mut();
+    s.push_str("Hello");
+}
+```
+**情况 2: `T: !Unpin`** (需要 unsafe)
+
+```rust
+use std::pin::Pin;
+
+struct NotUnpin {
+    data: i32,
+    self_ref: *const i32,
+}
+
+fn example(pinned: Pin<&mut NotUnpin>) {
+    // ❌ 不能直接 get_mut()
+    // let data = pinned.get_mut(); // 编译错误
+
+    // ✅ 需要 unsafe + 手动保证安全
+    unsafe {
+        let data = Pin::get_unchecked_mut(pinned);
+        // 必须保证不移动 data
+    }
+}
+```
+**实践建议**:
+
+- **避免需要 `get_mut()` 的场景**: 设计 API 时直接接受 `Pin<&mut T>`
+- **使用 `pin_project` 宏**: 自动生成安全的字段访问
+
+```rust
+use pin_project::pin_project;
+
+#[pin_project]
+struct MyFuture {
+    #[pin]
+    inner: SomeFuture,
+    counter: u32, // 不需要 pin
+}
+
+impl Future for MyFuture {
+    type Output = ();
+
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<()> {
+        let this = self.project(); // 安全地访问字段
+        this.inner.poll(cx)
+    }
+}
+```
+**相关问题**: [Q3.1](#q31-为什么我需要-pin它看起来非常复杂), [Q3.2](#q32-什么是-unpin), [Q8.1](#q81-如何手动实现-future)
+
+---
+
+## 4. 性能与优化
+
+### Q4.1: 如何在 `async` 代码中执行 CPU 密集型任务？
+
+**回答**:
+
+**核心原则**: 永远不要在 `async` 任务中直接执行长时间的 CPU 密集型计算，这会阻塞整个运行时。
+
+**正确做法**: 使用 `spawn_blocking`
+
+```rust
+use tokio::task;
+
+async fn example() {
+    // ❌ 错误：阻塞异步运行时
+    let result = expensive_computation(); // 长时间 CPU 计算
+
+    // ✅ 正确：在专用线程池执行
+    let result = task::spawn_blocking(|| {
+        expensive_computation() // 在阻塞线程池执行
+    }).await.unwrap();
+
+    println!("Result: {}", result);
+}
+
+fn expensive_computation() -> i32 {
+    // 耗时 CPU 计算
+    (0..1_000_000).sum()
+}
+```
+**性能考虑**:
+
+```rust
+// 批量处理：减少 spawn_blocking 调用
+async fn process_batch(items: Vec<Item>) {
+    // ✅ 一次性处理整个批次
+    let results = task::spawn_blocking(move || {
+        items.into_iter()
+            .map(|item| expensive_process(item))
+            .collect::<Vec<_>>()
+    }).await.unwrap();
+}
+
+// ❌ 避免：每个项目都 spawn_blocking
+async fn process_items_bad(items: Vec<Item>) {
+    for item in items {
+        // 过多的线程切换开销
+        task::spawn_blocking(move || expensive_process(item)).await.unwrap();
+    }
+}
+```
+**使用 `rayon` 实现并行**:
+
+```rust
+use tokio::task;
+use rayon::prelude::*;
+
+async fn parallel_computation(data: Vec<i32>) -> Vec<i32> {
+    task::spawn_blocking(move || {
+        // 在 rayon 线程池中并行计算
+        data.par_iter()
+            .map(|&x| expensive_fn(x))
+            .collect()
+    }).await.unwrap()
+}
+```
+**相关问题**: [Q1.1](#q11-asyncawait-和普通的线程有什么区别我应该用哪个), [Q4.2](#q42-如何优化-tokio-运行时性能)
+
+---
+
+### Q4.2: 如何优化 Tokio 运行时性能？
+
+**回答**:
+
+**1. 调整工作线程数**:
+
+```rust
+// 默认：CPU 核心数
+#[tokio::main]
+async fn main() {
+    // 自动使用所有核心
+}
+
+// 自定义线程数
+#[tokio::main(worker_threads = 4)]
+async fn main() {
+    // 使用 4 个工作线程
+}
+
+// 编程方式配置
+use tokio::runtime;
+
+fn main() {
+    let rt = runtime::Builder::new_multi_thread()
+        .worker_threads(8)
+        .thread_name("my-pool")
+        .build()
+        .unwrap();
+
+    rt.block_on(async {
+        // 异步代码
+    });
+}
+```
+**2. 使用 `LocalSet` 减少跨线程开销**:
+
+```rust
+use tokio::task::LocalSet;
+
+#[tokio::main]
+async fn main() {
+    let local = LocalSet::new();
+
+    // 所有任务在同一线程执行，避免 Send 约束
+    local.spawn_local(async {
+        // 可以使用 Rc, RefCell 等非 Send 类型
+        let data = std::rc::Rc::new(42);
+    });
+
+    local.await;
+}
+```
+**3. 避免过度 `spawn`**:
+
+```rust
+// ❌ 低效：过多的任务开销
+async fn bad_example() {
+    for i in 0..1_000_000 {
+        tokio::spawn(async move {
+            println!("{}", i);
+        });
+    }
+}
+
+// ✅ 高效：批量处理
+async fn good_example() {
+    let batch_size = 1000;
+    for batch in (0..1_000_000).step_by(batch_size) {
+        tokio::spawn(async move {
+            for i in batch..(batch + batch_size) {
+                println!("{}", i);
+            }
+        });
+    }
+}
+```
+**4. 使用 `join!` 而非顺序 `.await`**:
+
+```rust
+// ❌ 顺序执行：总时间 = 2 + 3 = 5 秒
+async fn sequential() {
+    task1().await; // 2 秒
+    task2().await; // 3 秒
+}
+
+// ✅ 并发执行：总时间 = max(2, 3) = 3 秒
+async fn concurrent() {
+    tokio::join!(task1(), task2());
+}
+```
+**5. 启用性能分析**:
+
+```toml
+[dependencies]
+tokio = { version = "1", features = ["full", "tracing"] }
+console-subscriber = "0.2"
+```
+```rust
+fn main() {
+    console_subscriber::init();
+    // 使用 tokio-console 实时监控
+}
+```
+**相关问题**: [Q4.1](#q41-如何在-async-代码中执行-cpu-密集型任务), [Q4.3](#q43-如何测量异步代码的性能)
+
+---
+
+### Q4.3: 如何测量异步代码的性能？
+
+**回答**:
+
+**1. 使用 `tokio::time::Instant`**:
+
+```rust
+use tokio::time::{Instant, Duration};
+
+async fn measure_performance() {
+    let start = Instant::now();
+
+    // 执行异步操作
+    expensive_async_operation().await;
+
+    let duration = start.elapsed();
+    println!("Operation took: {:?}", duration);
+}
+```
+**2. 使用 `tracing` 进行详细分析**:
+
+```rust
+use tracing::{info, instrument};
+
+#[instrument]
+async fn traced_function() {
+    info!("Starting operation");
+    operation1().await;
+    info!("Operation 1 complete");
+    operation2().await;
+    info!("Operation 2 complete");
+}
+
+// 使用 tracing-subscriber
+#[tokio::main]
+async fn main() {
+    tracing_subscriber::fmt()
+        .with_max_level(tracing::Level::INFO)
+        .init();
+
+    traced_function().await;
+}
+```
+**3. 使用 `criterion` 进行基准测试**:
+
+```rust
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use tokio::runtime::Runtime;
+
+fn benchmark_async(c: &mut Criterion) {
+    let rt = Runtime::new().unwrap();
+
+    c.bench_function("async_operation", |b| {
+        b.iter(|| {
+            rt.block_on(async {
+                black_box(async_operation().await)
+            })
+        });
+    });
+}
+
+criterion_group!(benches, benchmark_async);
+criterion_main!(benches);
+```
+**4. 使用 `tokio-console` 实时监控**:
+
+```bash
+# 安装
+cargo install tokio-console
+
+# 运行应用
+tokio-console
+
+# 查看实时任务状态、资源使用等
+```
+**相关问题**: [Q4.2](#q42-如何优化-tokio-运行时性能), [Q5.2](#q52-如何调试异步代码)
+
+---
+
+## 5. 错误处理与调试
+
+### Q5.1: 如何在异步代码中处理错误？
+
+**回答**:
+
+**1. 使用 `Result` 和 `?` 操作符**:
+
+```rust
+async fn fetch_data() -> Result<String, Box<dyn std::error::Error>> {
+    let response = reqwest::get("https://api.example.com").await?;
+    let body = response.text().await?;
+    Ok(body)
+}
+
+async fn process() {
+    match fetch_data().await {
+        Ok(data) => println!("Data: {}", data),
+        Err(e) => eprintln!("Error: {}", e),
+    }
+}
+```
+**2. 使用 `anyhow` 简化错误处理**:
+
+```rust
+use anyhow::{Context, Result};
+
+async fn fetch_with_context() -> Result<String> {
+    let response = reqwest::get("https://api.example.com").await
+        .context("Failed to send request")?;
+
+    let body = response.text().await
+        .context("Failed to read response body")?;
+
+    Ok(body)
+}
+```
+**3. 处理多个 Future 的错误**:
+
+```rust
+use tokio::try_join;
+
+async fn parallel_with_errors() -> Result<(), Box<dyn std::error::Error>> {
+    // 任何一个失败都会返回错误
+    let (result1, result2) = try_join!(
+        async_operation1(),
+        async_operation2(),
+    )?;
+
+    Ok(())
+}
+```
+**4. 优雅处理 `spawn` 任务中的错误**:
+
+```rust
+async fn spawn_with_error_handling() {
+    let handle = tokio::spawn(async {
+        // 任务可能失败
+        risky_operation().await
+    });
+
+    match handle.await {
+        Ok(Ok(result)) => println!("Success: {:?}", result),
+        Ok(Err(e)) => eprintln!("Task error: {}", e),
+        Err(e) => eprintln!("Join error (task panicked): {}", e),
+    }
+}
+```
+**相关问题**: [Q5.2](#q52-如何调试异步代码), [Q5.3](#q53-如何处理-timeout)
+
+---
+
+### Q5.2: 如何调试异步代码？
+
+**回答**:
+
+**1. 使用 `dbg!` 和 `println!`**:
+
+```rust
+async fn debug_example() {
+    dbg!("Before await");
+    let result = async_operation().await;
+    dbg!(&result);
+    println!("Result: {:?}", result);
+}
+```
+**2. 使用 `tracing` 进行结构化日志**:
+
+```rust
+use tracing::{debug, info, warn, error, instrument};
+
+#[instrument]
+async fn traced_operation() {
+    info!("Starting operation");
+    debug!("Detailed debug info");
+
+    if let Err(e) = risky_op().await {
+        error!("Operation failed: {:?}", e);
+    }
+}
+```
+**3. 使用 `tokio-console` 实时监控**:
+
+```toml
+[dependencies]
+tokio = { version = "1", features = ["full", "tracing"] }
+console-subscriber = "0.2"
+```
+```rust
+fn main() {
+    console_subscriber::init();
+    // 在另一个终端运行: tokio-console
+}
+```
+**4. 在 IDE 中调试**:
+
+- **VSCode**: 使用 `CodeLLDB` 或 `C/C++` 扩展
+- **RustRover/CLion**: 内置支持
+
+**调试技巧**:
+
+```rust
+// 设置断点友好的代码结构
+async fn debuggable() {
+    let step1 = operation1().await; // 可以在这里设置断点
+    let step2 = operation2(step1).await; // 和这里
+    let step3 = operation3(step2).await; // 和这里
+}
+
+// 避免：难以调试的链式调用
+async fn hard_to_debug() {
+    operation1().await
+        .and_then(|r1| operation2(r1).await)
+        .and_then(|r2| operation3(r2).await);
+}
+```
+**5. 使用 `RUST_BACKTRACE`**:
+
+```bash
+RUST_BACKTRACE=1 cargo run
+```
+**相关问题**: [Q5.1](#q51-如何在异步代码中处理错误), [Q5.3](#q53-如何处理-timeout), [Q4.3](#q43-如何测量异步代码的性能)
+
+---
+
+### Q5.3: 如何处理 Timeout？
+
+**回答**:
+
+**1. 使用 `tokio::time::timeout`**:
+
+```rust
+use tokio::time::{timeout, Duration};
+
+async fn with_timeout() {
+    match timeout(Duration::from_secs(5), long_operation()).await {
+        Ok(result) => println!("Completed: {:?}", result),
+        Err(_) => eprintln!("Operation timed out!"),
+    }
+}
+```
+**2. 对多个操作设置总超时**:
+
+```rust
+use tokio::time::{timeout, Duration};
+
+async fn multiple_operations_timeout() {
+    let result = timeout(Duration::from_secs(10), async {
+        operation1().await?;
+        operation2().await?;
+        operation3().await?;
+        Ok::<(), Box<dyn std::error::Error>>(())
+    }).await;
+
+    match result {
+        Ok(Ok(())) => println!("All operations completed"),
+        Ok(Err(e)) => eprintln!("Operation error: {}", e),
+        Err(_) => eprintln!("Timeout after 10 seconds"),
+    }
+}
+```
+**3. 使用 `tokio::select!` 实现更复杂的超时逻辑**:
+
+```rust
+use tokio::{time::{sleep, Duration}, select};
+
+async fn select_with_timeout() {
+    select! {
+        result = long_operation() => {
+            println!("Operation completed: {:?}", result);
+        }
+        _ = sleep(Duration::from_secs(5)) => {
+            eprintln!("Operation timed out!");
+        }
+    }
+}
+```
+**4. 可取消的超时**:
+
+```rust
+use tokio::time::{timeout, Duration};
+use tokio::sync::oneshot;
+
+async fn cancellable_timeout() {
+    let (tx, rx) = oneshot::channel();
+
+    tokio::spawn(async move {
+        sleep(Duration::from_secs(3)).await;
+        let _ = tx.send(());
+    });
+
+    select! {
+        _ = rx => println!("Received cancel signal"),
+        result = long_operation() => println!("Completed: {:?}", result),
+        _ = sleep(Duration::from_secs(10)) => eprintln!("Timeout"),
+    }
+}
+```
+**相关问题**: [Q5.1](#q51-如何在异步代码中处理错误), [Q6.3](#q63-如何优雅取消异步任务)
+
+---
+
+## 6. 设计模式与最佳实践
+
+### Q6.1: 为什么我的 `Future` 没有执行？
+
+**回答**:
+
+**最常见原因**: 忘记 `.await` 或 `spawn`。
+
+**问题代码**:
+
+```rust
+async fn bug_example() {
+    // ❌ 创建了 Future 但没有执行
+    fetch_data(); // 什么也不会发生！
+
+    println!("Done"); // 立即打印，fetch_data 从未运行
+}
+```
+**修复方案 1**: 使用 `.await`
+
+```rust
+async fn fixed_with_await() {
+    // ✅ 等待 Future 完成
+    fetch_data().await;
+    println!("Done");
+}
+```
+**修复方案 2**: 使用 `spawn` 后台执行
+
+```rust
+async fn fixed_with_spawn() {
+    // ✅ 在后台执行
+    tokio::spawn(fetch_data());
+    println!("Started background task");
+}
+```
+**调试技巧**: 启用 `#[must_use]` 警告
+
+```rust
+#[must_use = "Future does nothing unless awaited"]
+async fn fetch_data() {
+    // ...
+}
+
+// 编译器会警告：
+// warning: unused `impl Future` that must be used
+fetch_data();
+```
+**相关问题**: [Q1.3](#q13-future-什么时候开始执行), [Q6.2](#q62-如何在-drop-中执行异步清理)
+
+---
+
+### Q6.2: 如何在 `Drop` 中执行异步清理？
+
+**回答**:
+
+**核心问题**: `Drop::drop()` 是同步方法，不能 `.await`。
+
+**解决方案 1**: 使用 `block_on` (不推荐，可能死锁)
+
+```rust
+struct Resource {
+    handle: Handle,
+}
+
+impl Drop for Resource {
+    fn drop(&mut self) {
+        // ⚠️ 危险：可能死锁
+        tokio::runtime::Handle::current()
+            .block_on(async {
+                self.handle.close().await;
+            });
+    }
+}
+```
+**解决方案 2**: 提供显式清理方法 (推荐)
+
+```rust
+struct Resource {
+    handle: Option<Handle>,
+}
+
+impl Resource {
+    async fn close(mut self) {
+        if let Some(handle) = self.handle.take() {
+            handle.close().await;
+        }
+    }
+}
+
+impl Drop for Resource {
+    fn drop(&mut self) {
+        if self.handle.is_some() {
+            eprintln!("Warning: Resource not properly closed!");
+        }
+    }
+}
+
+// 使用
+async fn usage() {
+    let resource = Resource::new();
+    // ... 使用 resource ...
+    resource.close().await; // 显式清理
+}
+```
+**解决方案 3**: 使用 `spawn_blocking`
+
+```rust
+impl Drop for Resource {
+    fn drop(&mut self) {
+        let handle = self.handle.take();
+        tokio::spawn(async move {
+            if let Some(h) = handle {
+                h.close().await;
+            }
+        });
+    }
+}
+```
+**最佳实践**: RAII + 显式异步清理
+
+```rust
+struct ResourceGuard {
+    resource: Option<Resource>,
+}
+
+impl ResourceGuard {
+    async fn new() -> Self {
+        Self {
+            resource: Some(Resource::init().await),
+        }
+    }
+
+    async fn close(mut self) {
+        if let Some(r) = self.resource.take() {
+            r.cleanup().await;
+        }
+    }
+}
+
+impl Drop for ResourceGuard {
+    fn drop(&mut self) {
+        if self.resource.is_some() {
+            log::warn!("ResourceGuard dropped without calling close()!");
+        }
+    }
+}
+```
+**相关问题**: [Q6.3](#q63-如何优雅取消异步任务), [Q8.3](#q83-如何实现-asyncdrop)
+
+---
+
+### Q6.3: 如何优雅取消异步任务？
+
+**回答**:
+
+**方法 1**: 使用 `JoinHandle::abort()`
+
+```rust
+async fn cancellation_example() {
+    let handle = tokio::spawn(async {
+        loop {
+            println!("Working...");
+            tokio::time::sleep(Duration::from_secs(1)).await;
+        }
+    });
+
+    // 等待 5 秒后取消
+    tokio::time::sleep(Duration::from_secs(5)).await;
+    handle.abort();
+
+    match handle.await {
+        Ok(_) => println!("Task completed"),
+        Err(e) if e.is_cancelled() => println!("Task was cancelled"),
+        Err(e) => eprintln!("Task panicked: {}", e),
+    }
+}
+```
+**方法 2**: 使用 `CancellationToken` (推荐)
+
+```rust
+use tokio_util::sync::CancellationToken;
+
+async fn cooperative_cancellation() {
+    let token = CancellationToken::new();
+    let child_token = token.child_token();
+
+    let handle = tokio::spawn(async move {
+        loop {
+            tokio::select! {
+                _ = child_token.cancelled() => {
+                    println!("Received cancellation signal");
+                    break;
+                }
+                _ = do_work() => {
+                    // 继续工作
+                }
+            }
+        }
+    });
+
+    // 发送取消信号
+    tokio::time::sleep(Duration::from_secs(5)).await;
+    token.cancel();
+
+    handle.await.unwrap();
+}
+```
+**方法 3**: 使用 `oneshot` 通道
+
+```rust
+use tokio::sync::oneshot;
+
+async fn channel_cancellation() {
+    let (tx, mut rx) = oneshot::channel();
+
+    let handle = tokio::spawn(async move {
+        loop {
+            tokio::select! {
+                _ = &mut rx => {
+                    println!("Shutdown signal received");
+                    break;
+                }
+                _ = do_work() => {}
+            }
+        }
+    });
+
+    // 发送取消信号
+    let _ = tx.send(());
+    handle.await.unwrap();
+}
+```
+**最佳实践**:
+
+```rust
+use tokio_util::sync::CancellationToken;
+
+struct Service {
+    cancel_token: CancellationToken,
+}
+
+impl Service {
+    fn new() -> Self {
+        Self {
+            cancel_token: CancellationToken::new(),
+        }
+    }
+
+    async fn run(&self) {
+        loop {
+            tokio::select! {
+                _ = self.cancel_token.cancelled() => {
+                    self.cleanup().await;
+                    break;
+                }
+                _ = self.do_work() => {}
+            }
+        }
+    }
+
+    fn shutdown(&self) {
+        self.cancel_token.cancel();
+    }
+
+    async fn cleanup(&self) {
+        // 清理资源
+    }
+}
+```
+**相关问题**: [Q5.3](#q53-如何处理-timeout), [Q6.2](#q62-如何在-drop-中执行异步清理)
+
+---
+
+## 7. 生态系统与兼容性
+
+### Q7.1: Tokio 和 async-std [已归档] 的库可以互相使用吗？
+
+**回答**:
+
+**简短回答**: I/O 相关的**不能**，纯计算的**可以**。
+
+**不兼容的原因**:
+
+```rust
+// ❌ 不能混用 I/O 类型
+use tokio::net::TcpStream as TokioStream;
+use async_std::net::TcpStream as AsyncStdStream;
+
+#[tokio::main]
+async fn main() {
+    // ❌ AsyncStdStream 在 tokio 运行时中无法工作
+    let stream = AsyncStdStream::connect("127.0.0.1:8080").await.unwrap();
+}
+```
+**可以混用的情况**:
+
+```rust
+// ✅ 纯计算逻辑可以共享
+async fn pure_computation(x: i32) -> i32 {
+    x * 2
+}
+
+// 在 tokio 中使用
+#[tokio::main]
+async fn tokio_main() {
+    let result = pure_computation(21).await;
+}
+
+// 在 async-std [已归档] 中使用
+#[async_std::main]
+async fn async_std_main() {
+    let result = pure_computation(21).await;
+}
+```
+**解决方案**: 使用运行时无关的库
+
+```rust
+// ✅ reqwest 可以配置底层运行时
+[dependencies]
+reqwest = { version = "0.11", default-features = false, features = ["rustls-tls"] }
+
+// ✅ hyper 也支持多种运行时
+[dependencies]
+hyper = { version = "0.14", features = ["full"] }
+```
+**相关问题**: [Q2.2](#q22-可以在同一项目中混用多个运行时吗), [Q7.2](#q72-如何编写运行时无关的异步库)
+
+---
+
+### Q7.2: 如何编写运行时无关的异步库？
+
+**回答**:
+
+**原则**: 只依赖 `std::future` 和 `futures` crate，不依赖特定运行时。
+
+**示例**:
+
+```rust
+// ✅ 运行时无关
+use std::future::Future;
+use std::pin::Pin;
+use std::task::{Context, Poll};
+
+pub async fn my_library_function(x: i32) -> i32 {
+    x * 2 // 纯计算
+}
+
+// ✅ 返回 impl Future，由调用者选择运行时
+pub fn my_async_fn() -> impl Future<Output = i32> {
+    async { 42 }
+}
+```
+**I/O 操作**: 通过泛型抽象
+
+```rust
+use futures::io::{AsyncRead, AsyncWrite};
+
+pub async fn copy_data<R, W>(reader: &mut R, writer: &mut W) -> std::io::Result<()>
+where
+    R: AsyncRead + Unpin,
+    W: AsyncWrite + Unpin,
+{
+    // 使用 futures 的 AsyncRead/AsyncWrite trait
+    futures::io::copy(reader, writer).await?;
+    Ok(())
+}
+```
+**Feature flags 方式**:
+
+```toml
+[features]
+default = []
+tokio-runtime = ["tokio"]
+// async-std [已归档]-runtime [已归档]
+
+[dependencies]
+tokio = { version = "1", optional = true }
+// async-std [已归档]
+```
+```rust
+// 根据 feature 选择不同实现
+#[cfg(feature = "tokio-runtime")]
+pub use tokio::time::sleep;
+
+#[cfg(feature = "async-std [已归档]-runtime")]
+pub use async_std::task::sleep;
+```
+**最佳实践**:
+
+1. **核心逻辑**: 只使用 `std::future`
+2. **I/O 操作**: 使用 trait 抽象（`AsyncRead`/`AsyncWrite`）
+3. **定时器**: 让用户提供（或使用 feature flags）
+4. **测试**: 同时在多个运行时测试
+
+**相关问题**: [Q7.1](#q71-tokio-和-async-std [已归档]-的库可以互相使用吗), [Q2.1](#q21-tokio-和-smol-如何选择)
+
+---
+
+### Q7.3: `async-trait` crate 是做什么的？
+
+**回答**:
+
+`async-trait` 允许在 **trait 中定义 `async fn`**，并支持对象安全（`dyn Trait`）。
+
+> **当前状态提示（2026-06-26）**：`async fn in dyn trait`（AFIDT）仍为 nightly 实验特性，暂无稳定时间表。生产环境中 `dyn Trait` 的异步方法应继续使用 `async-trait`；仅泛型/`impl Trait` 场景可使用 Rust 1.75+ 稳定的原生 AFIT。
+
+**问题背景**:
+
+```rust
+// ❌ 在当前 Rust 中，trait 中的 async fn 有限制
+trait MyTrait {
+    async fn my_method(&self) -> i32; // 编译错误或限制多
+}
+
+// ❌ 特别是无法创建 trait 对象
+let obj: Box<dyn MyTrait> = ...; // 不支持
+```
+**`async-trait` 解决方案**:
+
+```rust
+use async_trait::async_trait;
+
+#[async_trait]
+trait MyTrait {
+    async fn my_method(&self) -> i32;
+}
+
+#[async_trait]
+impl MyTrait for MyStruct {
+    async fn my_method(&self) -> i32 {
+        42
+    }
+}
+
+// ✅ 现在可以使用 trait 对象
+async fn use_trait(obj: Box<dyn MyTrait>) {
+    let result = obj.my_method().await;
+}
+```
+**工作原理**:
+
+```rust
+// async-trait 将这个：
+#[async_trait]
+trait MyTrait {
+    async fn my_method(&self) -> i32;
+}
+
+// 转换为：
+trait MyTrait {
+    fn my_method(&self) -> Pin<Box<dyn Future<Output = i32> + Send + '_>>;
+}
+```
+**性能代价**:
+
+- **堆分配**: 每次调用都会 `Box` 分配
+- **动态分派**: 使用虚表调用
+
+**是否需要**:
+
+| 场景                | 推荐                    |
+| :--- | :--- || **需要 trait 对象** | ✅ 使用 `async-trait`   |
+| **插件系统**        | ✅ 使用                 |
+| **模拟测试**        | ✅ 使用                 |
+| **追求极致性能**    | ❌ 使用 GATs 或其他方案 |
+| **简单泛型**        | ❌ 不需要，直接用泛型   |
+
+**替代方案**:
+
+```rust
+// 使用 GATs (Rust 1.65+)
+trait MyTrait {
+    type Future<'a>: Future<Output = i32>
+    where
+        Self: 'a;
+
+    fn my_method(&self) -> Self::Future<'_>;
+}
+
+// 实现
+impl MyTrait for MyStruct {
+    type Future<'a> = impl Future<Output = i32> + 'a;
+
+    fn my_method(&self) -> Self::Future<'_> {
+        async { 42 }
+    }
+}
+```
+**相关问题**: [Q7.1](#q71-tokio-和-async-std [已归档]-的库可以互相使用吗), [Q8.2](#q82-如何在-trait-中定义异步方法rust-190)
+
+---
+
+## 8. 高级主题
+
+### Q8.1: 如何手动实现 `Future`？
+
+**回答**:
+
+**基本结构**:
+
+```rust
+use std::future::Future;
+use std::pin::Pin;
+use std::task::{Context, Poll};
+
+struct MyFuture {
+    completed: bool,
+}
+
+impl Future for MyFuture {
+    type Output = i32;
+
+    fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+        if self.completed {
+            Poll::Ready(42)
+        } else {
+            self.completed = true;
+            // 注册 Waker 以便稍后唤醒
+            cx.waker().wake_by_ref();
+            Poll::Pending
+        }
+    }
+}
+
+// 使用
+#[tokio::main]
+async fn main() {
+    let result = MyFuture { completed: false }.await;
+    println!("Result: {}", result);
+}
+```
+**真实示例：延迟 Future**:
+
+```rust
+use std::future::Future;
+use std::pin::Pin;
+use std::task::{Context, Poll, Waker};
+use std::time::{Duration, Instant};
+
+struct Delay {
+    when: Instant,
+    waker: Option<Waker>,
+}
+
+impl Delay {
+    fn new(duration: Duration) -> Self {
+        Self {
+            when: Instant::now() + duration,
+            waker: None,
+        }
+    }
+}
+
+impl Future for Delay {
+    type Output = ();
+
+    fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<()> {
+        if Instant::now() >= self.when {
+            Poll::Ready(())
+        } else {
+            // 保存 Waker
+            self.waker = Some(cx.waker().clone());
+
+            // 在实际实现中，应该注册定时器回调
+            // 这里简化为立即唤醒
+            if let Some(waker) = &self.waker {
+                waker.wake_by_ref();
+            }
+
+            Poll::Pending
+        }
+    }
+}
+
+// 使用
+async fn example() {
+    println!("Start");
+    Delay::new(Duration::from_secs(2)).await;
+    println!("2 seconds later");
+}
+```
+**使用 `pin_project` 简化**:
+
+```rust
+use pin_project::pin_project;
+use std::future::Future;
+use std::pin::Pin;
+use std::task::{Context, Poll};
+
+#[pin_project]
+struct MyComplexFuture<F> {
+    #[pin]
+    inner: F,
+    counter: usize,
+}
+
+impl<F> Future for MyComplexFuture<F>
+where
+    F: Future<Output = i32>,
+{
+    type Output = i32;
+
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<i32> {
+        let this = self.project();
+
+        match this.inner.poll(cx) {
+            Poll::Ready(val) => {
+                *this.counter += 1;
+                Poll::Ready(val)
+            }
+            Poll::Pending => Poll::Pending,
+        }
+    }
+}
+```
+**相关问题**: [Q3.1](#q31-为什么我需要-pin它看起来非常复杂), [Q3.3](#q33-如何获取-pinmut-t-中的-mut-t), [Q8.2](#q82-如何在-trait-中定义异步方法rust-190)
+
+---
+
+### Q8.2: 如何在 trait 中定义异步方法（Rust 1.92.0）？（自 Rust 1.90 引入）
+
+**回答**:
+
+**Rust 1.75+ 已支持 trait 中的 `async fn`**，但有一些限制。
+
+**基本使用**:
+
+```rust
+// ✅ Rust 1.75+ 支持
+trait AsyncTrait {
+    async fn my_method(&self) -> i32;
+}
+
+struct MyStruct;
+
+impl AsyncTrait for MyStruct {
+    async fn my_method(&self) -> i32 {
+        42
+    }
+}
+
+// 使用
+async fn example() {
+    let s = MyStruct;
+    let result = s.my_method().await;
+}
+```
+**限制 1: 无法创建 trait 对象**:
+
+```rust
+// ❌ 编译错误
+let obj: Box<dyn AsyncTrait> = Box::new(MyStruct);
+```
+**解决方案**: 使用 `async-trait`
+
+```rust
+use async_trait::async_trait;
+
+#[async_trait]
+trait AsyncTrait {
+    async fn my_method(&self) -> i32;
+}
+
+#[async_trait]
+impl AsyncTrait for MyStruct {
+    async fn my_method(&self) -> i32 {
+        42
+    }
+}
+
+// ✅ 现在可以使用 trait 对象
+let obj: Box<dyn AsyncTrait> = Box::new(MyStruct);
+```
+**限制 2: 泛型参数受限**:
+
+```rust
+// ⚠️ 需要仔细处理生命周期
+trait AsyncTrait {
+    async fn process<T>(&self, data: T) -> T
+    where
+        T: Send + 'static;
+}
+```
+**使用 GATs 的高级方案**:
+
+```rust
+trait AsyncTrait {
+    type ProcessFuture<'a, T>: Future<Output = T> + Send + 'a
+    where
+        Self: 'a,
+        T: 'a;
+
+    fn process<T>(&self, data: T) -> Self::ProcessFuture<'_, T>
+    where
+        T: Send + 'static;
+}
+
+impl AsyncTrait for MyStruct {
+    type ProcessFuture<'a, T> = impl Future<Output = T> + Send + 'a
+    where
+        Self: 'a,
+        T: 'a;
+
+    fn process<T>(&self, data: T) -> Self::ProcessFuture<'_, T>
+    where
+        T: Send + 'static,
+    {
+        async move { data }
+    }
+}
+```
+**推荐做法**:
+
+- **简单场景**: 直接使用 trait 中的 `async fn`
+- **需要 trait 对象**: 使用 `async-trait`
+- **追求性能**: 使用 GATs
+
+**相关问题**: [Q7.3](#q73-async-trait-crate-是做什么的), [Q8.1](#q81-如何手动实现-future)
+
+---
+
+### Q8.3: 如何实现 `AsyncDrop`？
+
+**回答**:
+
+**背景**: Rust 目前没有 `AsyncDrop` trait（正在提案中）。
+
+**临时解决方案 1**: 显式清理方法
+
+```rust
+struct Resource {
+    handle: Option<Handle>,
+}
+
+impl Resource {
+    async fn new() -> Self {
+        Self {
+            handle: Some(Handle::open().await),
+        }
+    }
+
+    // 显式异步清理
+    async fn close(mut self) {
+        if let Some(handle) = self.handle.take() {
+            handle.close().await;
+        }
+    }
+}
+
+impl Drop for Resource {
+    fn drop(&mut self) {
+        if self.handle.is_some() {
+            log::warn!("Resource not properly closed! Call .close().await");
+        }
+    }
+}
+
+// 使用
+async fn usage() {
+    let resource = Resource::new().await;
+    // ... 使用 resource ...
+    resource.close().await; // 显式清理
+}
+```
+**临时解决方案 2**: 使用 `async-dropper` crate
+
+```rust
+use async_dropper::{AsyncDrop, AsyncDropper};
+use async_trait::async_trait;
+
+struct Resource {
+    handle: Handle,
+}
+
+#[async_trait]
+impl AsyncDrop for Resource {
+    async fn async_drop(&mut self) {
+        self.handle.close().await;
+    }
+}
+
+// 使用
+async fn usage() {
+    let resource = AsyncDropper::new(Resource { handle });
+    // 当 AsyncDropper 被 drop 时，会自动调用 async_drop
+}
+```
+**临时解决方案 3**: 使用 `scopeguard` + `spawn`
+
+```rust
+use scopeguard::defer;
+
+async fn usage() {
+    let resource = Resource::new().await;
+
+    defer! {
+        tokio::spawn(async move {
+            resource.close().await;
+        });
+    }
+
+    // ... 使用 resource ...
+}
+```
+**未来展望**:
+
+```rust
+// 提案中的 AsyncDrop (未来可能支持)
+trait AsyncDrop {
+    async fn drop(&mut self);
+}
+
+// 使用将会非常简单
+struct Resource;
+
+impl AsyncDrop for Resource {
+    async fn drop(&mut self) {
+        cleanup().await;
+    }
+}
+```
+**当前最佳实践**:
+
+- **优先**: 使用显式 `close()` 方法
+- **辅助**: 实现同步 `Drop` 作为安全网，检测未清理的资源
+
+**相关问题**: [Q6.2](#q62-如何在-drop-中执行异步清理), [Q6.3](#q63-如何优雅取消异步任务)
+
+---
+
+## 🔗 相关资源
+
+### 官方文档
+
+- [Rust Async Book](https://rust-lang.github.io/async-book/)
+- [Tokio Tutorial](https://tokio.rs/tokio/tutorial)
+- [std::future](https://doc.rust-lang.org/std/future/)
+
+### 推荐阅读
+
+- [项目概览](01_project_overview.md) - 模块整体介绍
+- [主索引导航](02_navigation.md) - 完整文档导航
+- [术语表](03_glossary.md) - 核心术语参考
+
+### 社区资源
+
+- [Tokio Discord](https://discord.gg/tokio)
+- [r/rust Subreddit](https://www.reddit.com/r/rust/)
+- [Rust Users Forum](https://users.rust-lang.org/)
+
+---
+
+## 📝 贡献指南
+
+欢迎补充新问题！
+
+**添加流程**:
+
+1. 确认问题具有代表性
+2. 提供清晰的回答和代码示例
+3. 标注相关问题链接
+4. 更新目录
+
+---
+
+**文档维护**: C06 Async Team | **质量评分**: 95/100
+**最后更新**: 2025-10-22 | **问题总数**: 35+
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

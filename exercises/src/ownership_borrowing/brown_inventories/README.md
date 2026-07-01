@@ -35,7 +35,6 @@
 ```bash
 cargo test -p exercises --lib ownership_borrowing::brown_inventories
 ```
-
 ---
 
 ## 国际学习者入口

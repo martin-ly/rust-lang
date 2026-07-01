@@ -1,3 +1,9 @@
+> **Canonical 说明**: 本文件专注 **tract 纯 Rust 推理引擎的类型化计算图与 SimplePlan 架构**。
+>
+> 若只需要使用指南与生态定位，请优先参考：
+> - [机器学习生态](../../../../concept/06_ecosystem/46_machine_learning_ecosystem.md)
+>
+> 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
@@ -57,7 +63,6 @@ let outputs = model.run(tvec![input])?;
 let view = outputs[0].to_array_view::<f32>()?;
 println!("output shape = {:?}", view.shape());
 ```
-
 > [来源: [tract-onnx examples](https://github.com/snipsco/tract/tree/main/examples)]
 
 ---
@@ -89,7 +94,6 @@ let model = tract_onnx::onnx()
     .into_optimized()?                   // 2. 常量折叠、算子融合等优化
     .into_runnable()?;                   // 3. 生成可执行计划
 ```
-
 > [来源: [tract docs.rs – Onnx](https://docs.rs/tract-onnx/latest/tract_onnx/struct.Onnx.html)]
 
 ### 2.2 程序化构造计算图 {#22-程序化构造计算图}
@@ -113,7 +117,6 @@ model.auto_outputs()?;
 let plan = SimplePlan::new(&model)?;
 let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 ```
-
 > [来源: [tract-core examples](https://docs.rs/tract-core/latest/tract_core/index.html)]
 
 ### 2.3 量化与体积优化 {#23-量化与体积优化}

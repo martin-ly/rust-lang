@@ -12,26 +12,26 @@
 
 | #   | 文档                                                   | 内容               | 难度       | 更新       |
 | :--- | :--- | :--- | :--- | :--- |
-| 01  | [WASI 深入](01_wasi_深入.md)                         | WASI 系统接口详解  | ⭐⭐⭐⭐   | 2025-10-22 |
-| 02  | [性能分析与优化](02_性能分析与优化.md)               | 高级性能优化技术   | ⭐⭐⭐⭐⭐ | 2025-10-22 |
-| 03  | [生产级部署](03_生产级部署.md)                       | 生产环境部署与监控 | ⭐⭐⭐⭐   | 2025-10-22 |
-| 05  | [WasmEdge 与新技术深入](05_wasmedge_与新技术深入.md) | WasmEdge 高级特性  | ⭐⭐⭐⭐⭐ | 2025-10-30 |
+| 01  | [WASI 深入](01_wasi_in_depth.md)                         | WASI 系统接口详解  | ⭐⭐⭐⭐   | 2025-10-22 |
+| 02  | [性能分析与优化](02_performance_analysis_and_optimization.md)               | 高级性能优化技术   | ⭐⭐⭐⭐⭐ | 2025-10-22 |
+| 03  | [生产级部署](03_production_deployment.md)                       | 生产环境部署与监控 | ⭐⭐⭐⭐   | 2025-10-22 |
+| 05  | [WasmEdge 与新技术深入](05_wasmedge_and_emerging_tech.md) | WasmEdge 高级特性  | ⭐⭐⭐⭐⭐ | 2025-10-30 |
 
 ### 🆕 2025-10-30 容器技术深化
 
 | #   | 文档                                                 | 内容                                      | 难度       | 状态        |
 | :--- | :--- | :--- | :--- | :--- |
-| 06  | [**容器技术深度集成**](06_容器技术深度集成.md)     | **Docker/Kubernetes/containerd 完整集成** | ⭐⭐⭐⭐⭐ | ✅ 生产就绪 |
-| 07  | [**云原生CI/CD实践**](07_云原生CI_CD实践.md)       | **GitHub Actions/GitLab CI 端到端流程**   | ⭐⭐⭐⭐⭐ | ✅ 生产就绪 |
-| 08  | [**监控与可观测性实践**](08_监控与可观测性实践.md) | **Prometheus/Grafana/Loki/Jaeger 完整栈** | ⭐⭐⭐⭐⭐ | ✅ 生产就绪 |
+| 06  | [**容器技术深度集成**](06_container_technology_integration.md)     | **Docker/Kubernetes/containerd 完整集成** | ⭐⭐⭐⭐⭐ | ✅ 生产就绪 |
+| 07  | [**云原生CI/CD实践**](07_cloud_native_ci_cd_practice.md)       | **GitHub Actions/GitLab CI 端到端流程**   | ⭐⭐⭐⭐⭐ | ✅ 生产就绪 |
+| 08  | [**监控与可观测性实践**](08_monitoring_and_observability_practice.md) | **Prometheus/Grafana/Loki/Jaeger 完整栈** | ⭐⭐⭐⭐⭐ | ✅ 生产就绪 |
 
 ### 🆕 2025-10-30 最新技术对标
 
 | #   | 文档                                                               | 内容                                        | 难度       | 状态    |
 | :--- | :--- | :--- | :--- | :--- |
-| 09  | [**WASI 0.2 组件模型深度指南**](09_WASI_0.2_组件模型深度指南.md) | **组件模型/WIT/资源管理/组件组合**          | ⭐⭐⭐⭐⭐ | ✅ 完成 |
-| 10  | [**WasmEdge 插件系统开发指南**](10_WasmEdge_插件系统开发指南.md) | **插件架构/WASI-NN/WASI-Crypto/自定义插件** | ⭐⭐⭐⭐⭐ | ✅ 完成 |
-| 11  | [**性能优化深度指南**](11_性能优化深度指南.md)                   | **AOT编译/零拷贝/SIMD/内存优化/性能分析**   | ⭐⭐⭐⭐⭐ | ✅ 完成 |
+| 09  | [**WASI 0.2 组件模型深度指南**](09_wasi_0_2_component_model_in_depth_guide.md) | **组件模型/WIT/资源管理/组件组合**          | ⭐⭐⭐⭐⭐ | ✅ 完成 |
+| 10  | [**WasmEdge 插件系统开发指南**](10_wasmedge_plugin_system_development_guide.md) | **插件架构/WASI-NN/WASI-Crypto/自定义插件** | ⭐⭐⭐⭐⭐ | ✅ 完成 |
+| 11  | [**性能优化深度指南**](11_performance_optimization_in_depth_guide.md)                   | **AOT编译/零拷贝/SIMD/内存优化/性能分析**   | ⭐⭐⭐⭐⭐ | ✅ 完成 |
 
 ---
 
@@ -43,21 +43,21 @@
 
 ```text
 Week 1: 容器技术基础
-  ├─ 阅读 06_容器技术深度集成.md
+  ├─ 阅读 06_container_technology_integration.md
   │  ├─ Docker 集成 (2小时)
   │  ├─ Kubernetes 集成 (3小时)
   │  └─ containerd 集成 (2小时)
   └─ 实践: 部署第一个 Wasm 容器
 
 Week 2: CI/CD 自动化
-  ├─ 阅读 07_云原生CI_CD实践.md
+  ├─ 阅读 07_cloud_native_ci_cd_practice.md
   │  ├─ GitHub Actions 配置 (2小时)
   │  ├─ GitLab CI 配置 (2小时)
   │  └─ 部署策略 (3小时)
   └─ 实践: 搭建完整 CI/CD 流程
 
 Week 3: 监控与可观测性
-  ├─ 阅读 08_监控与可观测性实践.md
+  ├─ 阅读 08_monitoring_and_observability_practice.md
   │  ├─ Prometheus 监控 (2小时)
   │  ├─ Grafana 可视化 (2小时)
   │  ├─ 日志聚合 (2小时)
@@ -71,7 +71,6 @@ Week 4: 综合实践
      ├─ 安全加固
      └─ 灾备演练
 ```
-
 ### 路径 2: 性能优化专家
 
 **适合**: 关注性能的开发者
@@ -82,7 +81,6 @@ Week 4: 综合实践
 3. 容器技术深度集成 → 容器性能调优
 4. 监控与可观测性实践 → 性能监控
 ```
-
 ### 路径 3: DevOps/SRE 工程师
 
 **适合**: 运维和 SRE 工程师
@@ -93,7 +91,6 @@ Week 4: 综合实践
 3. 云原生CI/CD实践 → 自动化流程
 4. 监控与可观测性实践 → 运维监控
 ```
-
 ---
 
 ## 📚 内容概览
@@ -106,17 +103,14 @@ Week 4: 综合实践
   - Docker Desktop 配置
   - 多平台镜像构建
   - 镜像优化技术
-
 - ✅ Kubernetes 深度集成
   - RuntimeClass 配置
   - CRI 插件集成
   - Workload 部署策略
   - HPA 自动扩缩容
-
 - ✅ containerd 集成
   - containerd shim 机制
   - runwasi 项目
-
 - ✅ 容器编排最佳实践
 - ✅ 生产环境部署
 - ✅ 监控与可观测性
@@ -138,19 +132,16 @@ Week 4: 综合实践
   - 镜像构建
   - 安全扫描
   - 多环境部署
-
 - ✅ GitLab CI 配置
 - ✅ 构建优化
   - 缓存策略
   - 并行构建
   - 增量构建
-
 - ✅ 测试策略
 - ✅ 部署策略
   - 滚动更新
   - 蓝绿部署
   - 金丝雀发布
-
 - ✅ 监控和回滚
 - ✅ 最佳实践
 
@@ -166,31 +157,25 @@ Week 4: 综合实践
   - Metrics (指标)
   - Logs (日志)
   - Traces (追踪)
-
 - ✅ Prometheus 监控
   - 完整配置
   - 关键指标
   - PromQL 查询
-
 - ✅ Grafana 可视化
   - 仪表板配置
   - Golden Signals
   - RED/USE 方法
-
 - ✅ Loki 日志聚合
   - Promtail 配置
   - LogQL 查询
   - 结构化日志
-
 - ✅ Jaeger 分布式追踪
   - OpenTelemetry 集成
   - Trace 分析
-
 - ✅ 告警配置
   - Alertmanager
   - 告警规则
   - 告警分级
-
 - ✅ 最佳实践
   - SLO/SLI/SLA
   - 监控即代码
@@ -238,7 +223,6 @@ Week 4: 综合实践
 │ 安全性:    Namespace → Wasm沙箱 (更强)   │
 └──────────────────────────────────────────┘
 ```
-
 ### 生产级特性
 
 - ✅ **高可用**: 多副本 + HPA + 健康检查
@@ -260,7 +244,6 @@ Week 4: 综合实践
 4. 08_监控与可观测性实践 → 监控
 5. 07_云原生CI_CD实践 → 自动化
 ```
-
 ### 对于有经验的开发者
 
 ```text
@@ -274,7 +257,6 @@ Week 4: 综合实践
 - 02_性能分析与优化
 - 05_wasmedge_与新技术深入
 ```
-
 ---
 
 ## 🎓 学习目标
@@ -304,7 +286,6 @@ Week 4: 综合实践
 配置文件       ████████████████████ 100%
 生产就绪       ████████████████████ 100%
 ```
-
 **状态**: ✅ **生产就绪 (Production-Ready)**
 
 ---

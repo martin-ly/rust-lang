@@ -95,7 +95,6 @@ fn demo() {
     actor.stop();
 }
 ```
-
 ### 异步 Actor {#异步-actor}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -163,7 +162,6 @@ impl AsyncProcessor {
     }
 }
 ```
-
 ### Actor 监督与容错 {#actor-监督与容错}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -248,7 +246,6 @@ impl Supervisor {
     }
 }
 ```
-
 ### 路由与负载均衡 {#路由与负载均衡}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -319,7 +316,6 @@ impl<M: Clone + Send + 'static> BroadcastRouter<M> {
     }
 }
 ```
-
 ### 请求-响应模式 {#请求-响应模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -406,7 +402,6 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
     }
 }
 ```
-
 ---
 
 ## 使用场景 {#使用场景}
@@ -479,19 +474,11 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
-
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**

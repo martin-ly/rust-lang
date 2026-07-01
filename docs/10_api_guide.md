@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
-
 > **最后更新**: 2026-04-10
 > **版本**: Rust 1.96.0
 
@@ -47,7 +46,6 @@
 c01_ownership_borrow_scope = { path = "../crates/c01_ownership_borrow_scope" }
 c02_type_system = { path = "../crates/c02_type_system" }
 ```
-
 ### 基本使用 {#基本使用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -61,7 +59,6 @@ fn main() {
     let map = HashMapExample::new();
 }
 ```
-
 ---
 
 ## Crate API 概览 {#crate-api-概览}
@@ -148,7 +145,6 @@ fn do_something() -> Result<i32> {
     Ok(value * 2)
 }
 ```
-
 ### 异步代码 {#异步代码}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -161,7 +157,6 @@ async fn main() {
     let result = async_operation().await;
 }
 ```
-
 ### 并发控制 {#并发控制}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -172,7 +167,6 @@ use tokio::sync::Mutex;
 
 let data = Arc::new(Mutex::new(Vec::new()));
 ```
-
 ---
 
 ## 参考文档 {#参考文档}

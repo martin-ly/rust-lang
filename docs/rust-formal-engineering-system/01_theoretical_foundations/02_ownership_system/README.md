@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -42,7 +41,6 @@ fn rule3() {
     // s 不再有效
 }
 ```
-
 ## 所有权与函数 {#所有权与函数}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -74,7 +72,6 @@ fn demo() {
     // s2 仍然有效，因为只是借用
 }
 ```
-
 ## 相关研究笔记 {#相关研究笔记-1}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -134,7 +131,6 @@ fn custom_copy() {
     println!("p1 = {:?}, p2 = {:?}", p1, p2);  // 两者都有效
 }
 ```
-
 ### Drop 与资源管理 {#drop-与资源管理}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -183,7 +179,6 @@ fn raii_pattern() {
     }  // 锁在这里自动释放
 }
 ```
-
 ### 所有权与闭包 {#所有权与闭包}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -237,7 +232,6 @@ fn call_fn<F: Fn()>(f: F) { f(); }
 fn call_fn_mut<F: FnMut()>(f: &mut F) { f(); }
 fn call_fn_once<F: FnOnce()>(f: F) { f(); }
 ```
-
 ---
 
 ## 相关研究笔记 {#相关研究笔记-1}
@@ -265,20 +259,12 @@ fn call_fn_once<F: FnOnce()>(f: F) { f(); }
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 > **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
-
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
-
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
-
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
-
 > **来源: [Coq Reference](https://coq.inria.fr/doc/)**
-
 > **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
-
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
-
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

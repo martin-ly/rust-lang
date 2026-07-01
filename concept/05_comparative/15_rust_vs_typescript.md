@@ -17,7 +17,6 @@
 ---
 
 > **来源**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TC39 ECMAScript](https://tc39.es/ecma262/) · [WASM Specification](https://webassembly.github.io/spec/) · [Rust and WASM](https://rustwasm.github.io/book/) · [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) · [ts-rs crate](https://docs.rs/ts-rs/latest/ts_rs/) · [oxc project](https://oxc.rs/) · [swc project](https://swc.rs/) · [Type System — Wikipedia](https://en.wikipedia.org/wiki/Type_system) · [Structural vs Nominal Typing](https://www.typescriptlang.org/docs/handbook/type-compatibility.html) · [Rustnomicon](https://doc.rust-lang.org/nomicon/) · [Node.js Performance](https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
 ## 📑 目录
@@ -69,10 +68,8 @@
 
 ### 1.1 TypeScript 权威定义
 >
-
 > **[TypeScript Handbook]** TypeScript is JavaScript with syntax for types. TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
 > **来源**: <https://www.typescriptlang.org/docs/handbook/intro.html>
-
 > **[Wikipedia: TypeScript](https://en.wikipedia.org/wiki/TypeScript)** TypeScript is a free and open-source high-level programming language developed by Microsoft that adds static typing with optional type annotations to JavaScript.
 > **来源**: <https://en.wikipedia.org/wiki/TypeScript>
 
@@ -97,7 +94,6 @@ TypeScript 核心特征:
   └── 设计目标: 系统编程的安全与性能
   > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 ```
-
 > **认知功能**: TypeScript 的"类型擦除"与 Rust 的"类型单态化（Monomorphization）"是根本不同的编译策略——TypeScript 类型只影响编译期检查，Rust 类型决定代码生成和内存布局。
 > [来源: [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/)] · [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]
 
@@ -141,7 +137,6 @@ TypeScript 核心特征:
   └─────────────────┴─────────────────────┴─────────────────────┘
   > [来源: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)] · [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 ```
-
 > **认知功能**: TypeScript 的"渐进式类型"允许**逐步迁移** JavaScript 代码库，而 Rust 的"穷尽式类型"要求**upfront 设计**——这是两种截然不同的工程哲学。
 > [来源: [TypeScript — Gradual Typing](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
@@ -184,7 +179,6 @@ TypeScript 核心特征:
   └─────────────────┴─────────────────────┴─────────────────────┘
   > [来源: [Node.js Performance](https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop)] · [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 ```
-
 > **认知功能**: TypeScript 牺牲编译期保证换取**开发速度和生态兼容**，Rust 牺牲开发速度换取**运行时安全和性能**——这是"开发效率"与"运行时效率"的经典权衡。
 > [来源: [TypeScript Design Goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals)] · [来源: [TRPL — Zero Cost Abstractions](https://doc.rust-lang.org/book/ch10-00-generics.html)]
 
@@ -222,7 +216,6 @@ TypeScript 核心特征:
   └── 结论: Rust 降低泄漏概率，但不完全消除
   > [来源: [Rustnomicon — Leaking](https://doc.rust-lang.org/nomicon/leaking.html)]
 ```
-
 > **认知功能**: Rust 的"编译期内存管理"不是消除内存泄漏，而是将**泄漏原因从"隐式共享+GC 失效"转变为"显式循环引用（Reference）"**——后者更容易在代码审查中发现。
 > [来源: [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 
@@ -266,7 +259,6 @@ TypeScript 核心特征:
   // 使用 const generics 可实现更复杂类型级计算
   > [来源: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)]
 ```
-
 > **认知功能**: TypeScript 的"类型体操"允许在类型层面进行复杂计算，但增加了认知负担；Rust 的 trait 系统更侧重于**编译期多态和零成本抽象（Zero-Cost Abstraction）**。
 > [来源: [TypeScript — Type Challenges](https://github.com/type-challenges/type-challenges)] · [来源: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)]
 
@@ -309,7 +301,6 @@ TypeScript 核心特征:
   └─────────────────────┴─────────────────────┴─────────────────────┘
   > [来源: [TypeScript Handbook — Async/Await](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-1-7.html)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 ```
-
 > **认知功能**: JavaScript 的 async/await 建立在**Promise + 事件循环**之上，取消是外显的（AbortController）；Rust 的 async/await 建立在**Future + Waker**之上，取消是内隐的（drop 即取消）。
 > [来源: [JavaScript MDN — AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)] · [来源: [Rust Async Book — Cancellation](https://rust-lang.github.io/async-book/)]
 
@@ -359,7 +350,6 @@ TypeScript 核心特征:
   let result = divide(10.0, 0.0)?;
   > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 ```
-
 > **认知功能**: TypeScript 的错误处理（Error Handling）依赖**约定和 linter**，Rust 的错误处理是**类型系统的一部分**——调用 `?` 的函数必须返回 Result，形成编译期传播链。
 > [来源: [TRPL — The ? Operator](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)]
 
@@ -411,7 +401,6 @@ WASM 互操作模型:
   └──────────────────────────────────────────────┘
   > [来源: [Rust and WASM — Use Cases](https://rustwasm.github.io/book/)]
 ```
-
 > **认知功能**: WASM 是 Rust 与 TypeScript/JavaScript **协作而非竞争**的桥梁——Rust 处理性能敏感计算，TypeScript 处理 UI 和业务逻辑。
 > [来源: [WASM Specification](https://webassembly.github.io/spec/)] · [来源: [Rust and WASM](https://rustwasm.github.io/book/)]
 
@@ -445,7 +434,6 @@ WASM 互操作模型:
   └── 基础设施: Rust（CLI、部署工具）
   > [来源: [Rust and WASM](https://rustwasm.github.io/book/)] · [来源: [swc project](https://swc.rs/)]
 ```
-
 > **选型原则**: TypeScript 适合**快速迭代、Web 生态、团队迁移**；Rust 适合**性能关键、系统层、长期维护**——两者在 WASM 场景下可协同。
 > [来源: [oxc project](https://oxc.rs/)] · [来源: [swc project](https://swc.rs/)]
 
@@ -492,7 +480,6 @@ graph TB
     style Rust fill:#7cb342,color:#fff
     style Common fill:#f5a623,color:#fff
 ```
-
 > **认知功能**: 此图揭示 TypeScript 和 Rust 的**共同目标**（消除运行时类型错误）与**不同路径**（擦除 vs 证明、渐进 vs 穷尽）。
 > [来源: [TypeScript Design Goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals)] · [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **关键洞察**: TypeScript 的"渐进"允许**局部收益**（给 JS 加类型即可获益），Rust 的"穷尽"要求**全局一致**（整个程序需满足所有权规则）。
@@ -536,7 +523,6 @@ graph TD
     style TS3 fill:#4a90d9,color:#fff
     style WASM fill:#f5a623,color:#fff
 ```
-
 > **认知功能**: 此决策树从"性能是否关键"出发，通过团队背景、交付周期、维护周期等维度引导至最优选择。
 > **使用建议**: WASM 场景是两者的**交汇点**——Rust 负责计算密集型模块（Module），TypeScript 负责 UI 和协调层。
 > [来源: [Rust and WASM](https://rustwasm.github.io/book/)]
@@ -576,7 +562,6 @@ graph TD
   └── 结论: ❌ 错误 — WASM 适合计算密集型隔离任务，不适合高频 JS 交互
   > [来源: [WASM Performance](https://webassembly.github.io/spec/core/appendix/index.html)] · [来源: [wasm-bindgen — Performance](https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/js-objects-in-rust.html)]
 ```
-
 > **层次一致性（Coherence）**: 反命题分析区分了**类型系统的力量**（Rust 的穷尽保证 vs TS 的渐进检查）和**运行时的真实行为**（TS 类型擦除后即为无类型 JS）。
 > [来源: [TypeScript — Design Non-Goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals)]
 
@@ -611,7 +596,6 @@ graph TD
   └── 边界: 过度类型体操导致 tsc 性能问题
   > [来源: [Type Challenges](https://github.com/type-challenges/type-challenges)]
 ```
-
 ---
 
 ## 六、常见陷阱
@@ -650,7 +634,6 @@ graph TD
   └── 或: 使用 zod/io-ts 进行运行时校验
   > [来源: [TypeScript Handbook — Narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)]
 ```
-
 ---
 
 ## 七、来源与延伸阅读
@@ -681,7 +664,6 @@ fn main() {
     println!("{}", msg);
 }
 ```
-
 ## 相关概念文件
 >
 
@@ -739,7 +721,6 @@ fn fixed() {
     let v = Value::Text(String::from("hello")); // shadowing
 }
 ```
-
 > **TypeScript 对比**: TypeScript 的 `any` 类型绕过所有类型检查，允许任意操作（`x.foo()` 不会报错，即使 `foo` 不存在）。Rust 没有 `any` 等价物——所有操作必须在编译期验证。`enum` 是 Rust 表达"多种可能类型"的方式，但调用者必须通过 `match` 处理每个变体。这与 TypeScript 的联合类型（`number | string`）类似，但 Rust 的穷尽性检查更严格——必须覆盖所有变体，不能遗漏。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：TypeScript 的可选属性与 Rust 的 Option（编译错误）
@@ -764,7 +745,6 @@ fn fixed() {
     println!("{}", addr);
 }
 ```
-
 > **TypeScript 对比**: TypeScript 的可选属性（`host?: string`）在访问时可能是 `undefined`，但编译器只在 `strictNullChecks` 开启时检查。Rust 的 `Option<T>` 是枚举（Enum）类型，无论何种编译模式，访问内部值必须通过 `match`、`if let` 或 `unwrap`。这与 TypeScript 4.4+ 的 `--exactOptionalPropertyTypes` 类似，但 Rust 的设计更根本——可空性不是类型的属性，而是独立的类型构造器。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：TypeScript 的结构类型与 Rust 的名义类型的互操作（编译错误）
@@ -796,7 +776,6 @@ fn main() {
     // usePoint(p); // ✅ 结构类型兼容
 }
 ```
-
 > **修正**: TypeScript 使用**结构类型**（structural typing）：若两个类型有相同的结构（字段和类型），则它们兼容。Rust 使用**名义类型**（nominal typing）：类型兼容性由名称决定，即使结构完全相同。结构类型的优势：灵活性（无需显式转换）、 duck typing 的静态版本。名义类型的优势：类型安全（同名不同义的类型不会混淆）、更好的错误信息、支持 newtype 模式（`struct Meters(u32)` 与 `struct Seconds(u32)` 不兼容）。Rust 的选择与 Java、C#、Haskell 一致，TypeScript 的选择与 Go 的接口（隐式实现，类似结构类型）类似。从 TypeScript 迁移到 Rust 时，需注意：相同字段的 struct 不能互换，必须显式转换或实现 `From`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch05-01-defining-structs.html)] · [来源: [TypeScript Type Compatibility](https://www.typescriptlang.org/docs/handbook/type-compatibility.html)]
 
 ### 10.4 边界测试：TypeScript 的 `any` 与 Rust 的 `unsafe` 的语义鸿沟（编译错误/运行时 UB）
@@ -818,7 +797,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**: TypeScript 的 `any` 是**类型系统的逃生舱**：禁用所有类型检查，允许任意操作。Rust 无 `any` 等价物——最接近的是 `dyn Any`（运行时类型信息，需向下转型）和 `unsafe`（绕过编译器检查）。`any` 在 TypeScript 中是便利工具（快速原型、迁移遗留代码），但也是 bug 来源（类型安全丧失）。Rust 的设计拒绝 `any`：即使是 `dyn Any`，向下转型也是类型安全的（失败时返回 `None`），不会导致未定义行为。`unsafe` 是更低级的逃逸，但标记了人工审查边界。这与 Python 的动态类型（无 static type，运行时检查）或 C 的 `void*`（无类型，任意转换）不同——Rust 在类型安全上不提供"方便但危险"的捷径。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)] · [来源: [TypeScript any Type](https://www.typescriptlang.org/docs/handbook/basic-types.html#any)]
 
 ### 10.3 边界测试：TypeScript 的结构性类型与 Rust 的名义类型（编译错误）
@@ -837,7 +815,6 @@ fn main() {
     use_point(c);
 }
 ```
-
 > **修正**: Rust 使用**名义类型系统**（nominal typing）：类型的同一性由名称决定，而非结构。`Point` 和 `Coordinate` 有相同字段但不同名称，是完全不同的类型。TypeScript 使用**结构性类型系统**（structural typing）：`{ x: number, y: number }` 与 `Point` 兼容，只要结构匹配。Rust 的名义类型：优势——重构安全（重命名字段不影响其他类型）、清晰的错误信息；劣势——需显式转换（`From` trait）。TypeScript 的结构类型：优势——灵活、易于接口组合；劣势——意外兼容（两个不相关的类型因结构相同而混用）。Rust 的 newtype 模式（`struct Meters(u32)`）利用名义类型创建零成本抽象（Zero-Cost Abstraction）。这与 Go 的接口（结构性满足）或 Haskell 的 `newtype`（名义类型包装）类似——Rust 在名义类型的基础上提供结构化的模式匹配（Pattern Matching）（`match`）。
 
 ## 嵌入式测验（Embedded Quiz）
@@ -913,9 +890,7 @@ Rust 可通过 WASM 运行在浏览器中，但 DOM 操作需通过 JS 桥接，
 | Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

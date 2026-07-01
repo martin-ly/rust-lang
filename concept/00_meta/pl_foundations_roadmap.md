@@ -81,7 +81,6 @@ Control Flow（理解控制流的结构化与连续性）
     ↓
 Data Abstraction Spectrum（理解 Rust enum+trait 在数据抽象史中的位置）
 ```
-
 ### 路径 B：从 Rust 问题出发反向学习 PL 机制
 
 | 你遇到的 Rust 问题 | 对应的 PL 基座 | 文件 |

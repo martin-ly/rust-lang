@@ -27,14 +27,12 @@
 cd exercises
 cargo test macros::ex02_derive_macro_stub
 ```
-
 或运行整个主题的测试：
 
 ```bash
 cd exercises
 cargo test macros::
 ```
-
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

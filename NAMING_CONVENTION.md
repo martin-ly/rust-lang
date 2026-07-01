@@ -72,7 +72,6 @@ python scripts/lint_filenames.py
 # 检查相对于某个基线的变更
 python scripts/lint_filenames.py --since-ref origin/main
 ```
-
 ---
 
 *本规范随 Phase 1 治理计划执行。*

@@ -31,7 +31,6 @@ cfg_select! {
     _ => fallback_expr,
 }
 ```
-
 ### 与现有方案对比
 >
 > **[来源: Rust Official Docs]**
@@ -59,7 +58,6 @@ const PAGE_SIZE: usize = cfg_select! {
     _ => 4096,
 };
 ```
-
 ### 2.2 特性标志选择
 >
 > **[来源: Rust Official Docs]**
@@ -73,7 +71,6 @@ fn hasher_name() -> &'static str {
     }
 }
 ```
-
 ### 2.3 架构特定优化
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -88,7 +85,6 @@ fn simd_lanes() -> usize {
     }
 }
 ```
-
 ---
 
 ## 三、应用场景
@@ -105,7 +101,6 @@ const PATH_SEP: char = cfg_select! {
     _ => '/',
 };
 ```
-
 ### 3.2 嵌入式目标选择
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -119,7 +114,6 @@ fn max_priority() -> u8 {
     }
 }
 ```
-
 ---
 
 ## 四、限制与反例
@@ -137,7 +131,6 @@ cfg_select! {
     _ => mod generic_impl;
 }
 ```
-
 ### ❌ 所有分支类型必须一致
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -149,7 +142,6 @@ let x = cfg_select! {
     _ => "fallback",  // 类型不匹配
 };
 ```
-
 ### ❌ 运行时条件无效
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -159,7 +151,6 @@ let runtime_flag = true;
 // 错误：runtime_flag 不是 cfg 条件
 // cfg_select! { runtime_flag => ... }
 ```
-
 ---
 
 ## 五、决策树
@@ -174,7 +165,6 @@ let runtime_flag = true;
 │   └── 条件复杂或多分支？ → cfg_select!
 └── 需要表达式值？ → cfg_select!
 ```
-
 ---
 
 ### 模块 3: 概念依赖图
@@ -194,7 +184,6 @@ graph TD
     style E fill:#f9f,stroke:#333,stroke-width:2px
     style F fill:#bfb,stroke:#333,stroke-width:2px
 ```
-
 #### 承上（前置知识回溯）
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
@@ -254,7 +243,6 @@ graph TD
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **`cfg_select!` 与 `#[cfg]` 的根本区别是什么？** 为什么 `cfg_select!` 不能用于条件编译整个函数？
-
 2. **以下代码有什么问题？如何修复？**
 
 ```rust,ignore
@@ -263,7 +251,6 @@ let x = cfg_select! {
     target_os = "macos" => 100,
 };
 ```
-
 <details>
 <summary>参考答案</summary>
 
@@ -278,7 +265,6 @@ let x = cfg_select! {
     _ => 0,  // 默认分支
 };
 ```
-
 </details>
 
 ---

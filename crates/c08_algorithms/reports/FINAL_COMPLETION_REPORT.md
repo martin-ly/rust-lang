@@ -243,7 +243,6 @@ c08_algorithms/
 ├── docs/                     # 文档
 └── tests/                    # 集成测试
 ```
-
 ## 性能表现
 
 ### 基准测试结果
@@ -285,7 +284,6 @@ use c08_algorithms::sorting::{sort_sync, SortingAlgo};
 let mut data = vec![3, 1, 4, 1, 5];
 sort_sync(&mut data, SortingAlgo::Quick);
 ```
-
 ### 异步使用
 
 ```rust
@@ -294,7 +292,6 @@ use c08_algorithms::sorting::sort_async;
 let data = vec![3, 1, 4, 1, 5];
 let sorted = sort_async(data, SortingAlgo::Quick).await?;
 ```
-
 ### 并行使用
 
 ```rust
@@ -303,7 +300,6 @@ use c08_algorithms::sorting::sort_parallel;
 let mut data = vec![3, 1, 4, 1, 5];
 sort_parallel(&mut data, SortingAlgo::Quick);
 ```
-
 ## 运行命令
 
 ### 构建项目
@@ -312,32 +308,27 @@ sort_parallel(&mut data, SortingAlgo::Quick);
 cargo build
 cargo build --release
 ```
-
 ### 运行测试
 
 ```bash
 cargo test
 cargo test --release
 ```
-
 ### 运行基准测试
 
 ```bash
 cargo bench
 ```
-
 ### 运行示例
 
 ```bash
 cargo run --example comprehensive_algorithm_demo
 ```
-
 ### 生成文档
 
 ```bash
 cargo doc --open
 ```
-
 ## 总结
 
 本项目成功实现了以下目标：

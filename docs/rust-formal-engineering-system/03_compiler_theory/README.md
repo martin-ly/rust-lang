@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -41,7 +40,6 @@ mindmap
       安全检查
       程序员责任
 ```
-
 ## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -86,7 +84,6 @@ LLVM 优化 → 优化后的 LLVM IR
     ↓
 链接器 → 可执行文件/库
 ```
-
 ### MIR（中级中间表示） {#mir中级中间表示}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -107,7 +104,6 @@ fn add(a: i32, b: i32) -> i32 {
 //     }
 // }
 ```
-
 ### 借用检查的 MIR 分析 {#借用检查的-mir-分析}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -131,7 +127,6 @@ fn borrow_check_example() {
 //     _3 = _1;             // 使用 x
 // }
 ```
-
 ### 编译器优化 {#编译器优化}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -158,7 +153,6 @@ fn dead_code() {
     println!("Hello");
 }
 ```
-
 ### 泛型单态化 {#泛型单态化}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -180,7 +174,6 @@ fn monomorphization_demo() {
     let _ = identity(String::from("hello"));
 }
 ```
-
 ### 生命周期擦除 {#生命周期擦除}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -203,7 +196,6 @@ fn lifetime_erasure() {
     println!("{}", result);
 }
 ```
-
 ### 属性宏与派生宏 {#属性宏与派生宏}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -236,7 +228,6 @@ fn with_serde() {}
 // 编译期断言
 const _: () = assert!(std::mem::size_of::<usize>() == 8, "64-bit only");
 ```
-
 ### unsafe 代码检查边界 {#unsafe-代码检查边界}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -270,7 +261,6 @@ unsafe fn very_dangerous() {
     // 调用者必须确保调用条件
 }
 ```
-
 ---
 
 ## 使用场景 {#使用场景}
@@ -345,9 +335,6 @@ unsafe fn very_dangerous() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
-
 > **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
-
 > **来源: [LLVM Documentation](https://llvm.org/docs/)**
-
 > **来源: [ACM](https://dl.acm.org/)**

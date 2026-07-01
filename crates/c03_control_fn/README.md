@@ -24,7 +24,6 @@ src/
 ├── closures/           # 闭包
 └── error_handling/     # 错误处理
 ```
-
 ## 主要概念
 
 ### 控制流表达式
@@ -69,7 +68,6 @@ fn process_message(msg: Message) {
     }
 }
 ```
-
 ### 闭包
 
 ```rust
@@ -93,7 +91,6 @@ fn main() {
     }
 }
 ```
-
 ### 错误处理
 
 ```rust
@@ -112,7 +109,6 @@ fn read_username_from_file_short() -> Result<String, io::Error> {
     std::fs::read_to_string("hello.txt")
 }
 ```
-
 ## 依赖关系
 
 ### 上游依赖
@@ -130,7 +126,6 @@ anyhow = { workspace = true }
 thiserror = { workspace = true }
 tracing = { workspace = true }
 ```
-
 ## 运行方式
 
 ```bash
@@ -143,7 +138,6 @@ cargo run -p c03_control_fn
 # 运行示例
 cargo run -p c03_control_fn --example control_flow_example
 ```
-
 ## 学习路径建议
 
 1. 学习 `match` 表达式的穷尽性检查

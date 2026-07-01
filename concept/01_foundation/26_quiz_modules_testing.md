@@ -45,7 +45,6 @@ fn main() {
     front_of_house::hosting::add_to_waitlist();
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -64,7 +63,6 @@ fn main() {
 ```rust,ignore
 mod front_of_house; // 查找 src/front_of_house.rs 或 src/front_of_house/mod.rs
 ```
-
 **可见性层级**：
 
 | 修饰符 | 可见范围 |
@@ -99,7 +97,6 @@ mod outer {
 
 fn main() {}
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -123,7 +120,6 @@ crate::outer::inner::bar();
 outer::inner::bar();
 super::foo();  // 从 inner 模块引用 outer
 ```
-
 **注意**：`self` 通常可省略，`self::baz()` 等价于 `baz()`。但在 `use` 语句中有特殊用途：
 
 ```rust,ignore
@@ -131,7 +127,6 @@ use self::inner::bar;     // 显式引用当前模块的 inner
 use super::foo;           // 引用父模块的 foo
 use crate::utils::helper; // 引用 crate 根的 utils
 ```
-
 **知识点**：`super` 常用于测试模块访问被测代码的私有项（测试通常放在 `super` 模块中）。[→ 模块系统详解](11_modules_and_paths.md)
 
 </details>
@@ -158,7 +153,6 @@ fn main() {
     println!("{}", square_area(3.0));
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -168,7 +162,6 @@ fn main() {
 12.566370614359172
 9
 ```
-
 **解析**：
 
 | `use` 写法 | 效果 |
@@ -184,13 +177,11 @@ fn main() {
 use std::io::{self, Write, Read}; // self = std::io 本身
 use std::collections::*;          // 导入所有公共项
 ```
-
 **重导出（Re-export）**：
 
 ```rust,ignore
 pub use shapes::circle; // 外部用户可通过 crate::circle 访问
 ```
-
 **知识点**：`use` 只是创建别名，不复制代码。`pub use` 是构建 crate 公共 API 的常用技巧。[→ 模块系统详解](11_modules_and_paths.md)
 
 </details>
@@ -224,7 +215,6 @@ mod tests {
 
 fn main() {}
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -235,7 +225,6 @@ running 2 tests
 test tests::test_add ... ok
 test tests::test_overflow ... ok
 ```
-
 **解析**：
 
 | 属性 | 作用 |
@@ -261,7 +250,6 @@ assert_eq!(left, right);
 assert_ne!(left, right);
 assert!(result.is_ok(), "Expected Ok, got {:?}", result);
 ```
-
 **知识点**：`#[cfg(test)]` 确保测试代码不会编译进最终产物。集成测试放在 `tests/` 目录下，每个文件是一个独立的二进制。[→ 测试详解](16_testing_basics.md)
 
 </details>
@@ -279,7 +267,6 @@ fn test_add_integration() {
     assert_eq!(add(2, 3), 5);
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -305,7 +292,6 @@ my_project/
     └── common/
         └── mod.rs        # 共享测试辅助代码
 ```
-
 **共享辅助代码**：
 
 `tests/common/mod.rs` 不会被视为测试文件（因为 `common` 不是 `.rs` 测试文件），但可被其他测试文件引用（Reference）：
@@ -315,7 +301,6 @@ my_project/
 mod common;
 use common::setup;
 ```
-
 **知识点**：集成测试验证 crate 的公共 API 契约。它们不能访问 `pub(crate)` 或私有项，这强制开发者从用户视角验证设计。[→ 测试详解](16_testing_basics.md)
 
 </details>
@@ -353,7 +338,6 @@ mod tests {
 
 fn main() {}
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -371,7 +355,6 @@ fn test_ok() -> Result<(), &'static str> {
     Ok(()) // 必须返回 Ok(()) 表示成功
 }
 ```
-
 | 测试返回类型 | 成功 | 失败 |
 |:---|:---|:---|
 | `()` | 正常返回 | panic |
@@ -388,7 +371,6 @@ assert!(result.is_err());
 assert_eq!(result.unwrap(), expected);
 assert_eq!(result.unwrap_err(), expected_err);
 ```
-
 **知识点**：返回 `Result` 的测试函数使错误处理（Error Handling）测试更简洁，是 Rust 测试的惯用模式。[→ 测试详解](16_testing_basics.md)
 
 </details>
@@ -408,7 +390,6 @@ my_workspace/
 └── tests/
     └── integration.rs
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -440,7 +421,6 @@ path = "src/server.rs"
 name = "my_lib"
 path = "src/lib.rs"
 ```
-
 **常见布局**：
 
 ```
@@ -451,7 +431,6 @@ src/
     ├── tool1.rs    # 额外二进制 crate
     └── tool2.rs
 ```
-
 **知识点**：理解 package/crate/module 的层级关系是管理 Rust 项目结构的基础。[→ 模块系统详解](11_modules_and_paths.md)
 
 </details>
@@ -478,7 +457,6 @@ fn main() {
     outer::parent_visible();
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -501,7 +479,6 @@ fn main() {
     // outer::parent_visible(); // ❌ pub(super) 仅 outer 的父模块可见
 }
 ```
-
 **使用场景**：
 
 ```rust
@@ -510,7 +487,6 @@ mod database {
     pub(super) fn internal_helper() {} // 仅 database 的父模块可用
 }
 ```
-
 **知识点**：限制可见性是封装的核心。Rust 鼓励使用最严格的可见性（默认私有 → `pub(super)` → `pub(crate)` → `pub`）。[→ 模块系统详解](11_modules_and_paths.md)
 
 </details>
@@ -544,7 +520,6 @@ mod tests {
 
 fn main() {}
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -555,7 +530,6 @@ fn main() {}
 ```
 assertion `left != right` failed: IDs should be unique, but both were 42
 ```
-
 **解析**：`generate_id()` 总是返回 42，因此两个 ID 相等，`assert_ne!` 失败。
 
 **自定义错误消息**：所有断言宏（Macro）都支持格式化字符串：
@@ -565,7 +539,6 @@ assert!(condition, "message: {}", value);
 assert_eq!(left, right, "expected {}, got {}", expected, actual);
 assert_ne!(left, right, "should not be equal to {}", forbidden);
 ```
-
 **修复方案**：使用随机或递增 ID：
 
 ```rust
@@ -577,7 +550,6 @@ fn generate_id() -> u64 {
     COUNTER.fetch_add(1, Ordering::SeqCst)
 }
 ```
-
 **知识点**：自定义断言消息极大提升了测试失败时的调试效率。`assert_ne!` 在验证唯一性、非退化场景时特别有用。[→ 测试详解](16_testing_basics.md)
 
 </details>
@@ -609,7 +581,6 @@ mod tests {
 
 fn main() {}
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -621,7 +592,6 @@ fn main() {}
 cargo test -- --ignored
 cargo test -- --include-ignored  # 运行所有测试，包括忽略的
 ```
-
 **属性对比**：
 
 | 属性 | 作用 | 适用场景 |
@@ -637,7 +607,6 @@ cargo test test_normal       # 运行名称匹配的测试
 cargo test -- --nocapture    # 显示 println! 输出
 cargo test -- --test-threads=1  # 单线程运行测试
 ```
-
 **知识点**：`#[ignore]` 是管理"已知问题"测试的标准方式。`should_panic` 测试确保代码在错误条件下确实失败，而非静默继续。[→ 测试详解](16_testing_basics.md)
 
 </details>

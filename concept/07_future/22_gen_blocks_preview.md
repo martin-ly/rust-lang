@@ -37,7 +37,6 @@
 
 fn main() {}
 ```
-
 > **修正**:
 > **`gen` block** 是 Rust generator 生态的关键扩展：
 >

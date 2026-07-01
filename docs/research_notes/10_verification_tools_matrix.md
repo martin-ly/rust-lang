@@ -1,19 +1,12 @@
 # 验证工具对比矩阵 {#验证工具对比矩阵}
 
 > **概念族**: 安全 / 验证
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **最后更新**: 2026-03-12
-
 > **状态**: ✅ 活跃维护
 
 ---
@@ -21,9 +14,7 @@
 ## 📑 目录 {#目录}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [验证工具对比矩阵 {#验证工具对比矩阵}](#验证工具对比矩阵-验证工具对比矩阵)
@@ -52,23 +43,15 @@
 ## 工具对比总览 {#工具对比总览}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 工具 | 类型 | 验证方法 | 学习曲线 | 成熟度 | Rust 支持 |
-
 |------|------|----------|----------|--------|-----------|
-
 | Miri | 解释器 | 动态检查 | 低 | ⭐⭐⭐⭐⭐ | 原生 |
-
 | Kani | 模型检查 | 符号执行 | 中 | ⭐⭐⭐⭐ | 原生 |
-
 | Prusti | 定理证明 | 契约验证 | 高 | ⭐⭐⭐ | 原生 |
-
 | Creusot | 定理证明 | Why3 后端 | 高 | ⭐⭐⭐ | 原生 |
-
 | Aeneas | 定理证明 | 区域类型 | 高 | ⭐⭐ | 原生 |
-
 | Coq of Rust | 交互式 | Coq 后端 | 极高 | ⭐⭐ | 转换器 |
 
 ---
@@ -76,19 +59,15 @@
 ## 详细对比 {#详细对比}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. Miri - 内存安全检查器 {#1-miri---内存安全检查器}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
-
 // Miri 可以检测的未定义行为
 
 fn undefined_behavior_example() {
@@ -104,33 +83,25 @@ fn undefined_behavior_example() {
     }
 
 }
-
 ```
-
 **适用场景**:
 
 - 不安全代码审查
-
 - 内存布局验证
-
 - 并发原语测试
 
 **命令**:
 
 ```bash
-
 rustup component add miri
 
 miri run  # 或 cargo miri test
-
 ```
-
 ### 2. Kani - 位精确模型检查器 {#2-kani---位精确模型检查器}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
-
 // Kani 验证示例
 
 #[kani::proof]
@@ -148,21 +119,14 @@ fn check_vector_push() {
     assert!(vec[0] == 1);
 
 }
-
 ```
-
 **能力矩阵**:
 
 | 特性 | 支持度 | 说明 |
-
 |------|--------|------|
-
 | 整数溢出 | ✅ | 自动检测 |
-
 | 内存安全 | ✅ | 通过 MIR 分析 |
-
 | 并发 bug | ⚠️ | 部分支持 |
-
 | 终止性 | ✅ | 可配置 |
 
 ### 3. Prusti - 契约式验证 {#3-prusti---契约式验证}
@@ -170,11 +134,9 @@ fn check_vector_push() {
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
-
 // Prusti 契约示例
 
 use prusti_contracts::*;
-
 
 
 #[ensures(result > a && result > b)]
@@ -184,7 +146,6 @@ fn max(a: i32, b: i32) -> i32 {
     if a > b { a } else { b }
 
 }
-
 
 
 #[requires(!arr.is_empty())]
@@ -198,15 +159,12 @@ fn find_min(arr: &[i32]) -> usize {
     0
 
 }
-
 ```
-
 ---
 
 ## 验证能力矩阵 {#验证能力矩阵}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 功能覆盖对比 {#功能覆盖对比}
@@ -214,7 +172,6 @@ fn find_min(arr: &[i32]) -> usize {
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```mermaid
-
 graph TD
 
     A[验证需求] --> B[内存安全]
@@ -226,13 +183,11 @@ graph TD
     A --> E[并发安全]
 
 
-
     B --> B1[Miri]
 
     B --> B2[Kani]
 
     B --> B3[Prusti]
-
 
 
     C --> C1[编译器]
@@ -242,7 +197,6 @@ graph TD
     C --> C3[Creusot]
 
 
-
     D --> D1[Kani]
 
     D --> D2[Prusti]
@@ -250,29 +204,21 @@ graph TD
     D --> D3[测试]
 
 
-
     E --> E1[Miri]
 
     E --> E2[Kani]
 
     E --> E3[Loom]
-
 ```
-
 ### 性能与可扩展性 {#性能与可扩展性}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 工具 | 分析速度 | 内存占用 | 代码侵入性 | CI 友好 |
-
 |------|----------|----------|------------|---------|
-
 | Miri | 慢 | 高 | 无 | ✅ |
-
 | Kani | 中等 | 中等 | 注解 | ✅ |
-
 | Prusti | 慢 | 高 | 契约 | ⚠️ |
-
 | Creusot | 慢 | 中等 | 注解 | ⚠️ |
 
 ---
@@ -282,7 +228,6 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
-
 需要验证什么？
 
 ├── 不安全代码正确性 → Miri
@@ -300,27 +245,19 @@ graph TD
 └── 运行时监控
 
     └── 测试 + sanitizers
-
 ```
-
 ---
 
 ## 与 Rust 版本兼容性 {#与-rust-版本兼容性}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 工具 | 1.70 | 1.75 | 1.80 | 1.90 | 1.94 |
-
 |------|------|------|------|------|------|
-
 | Miri | ✅ | ✅ | ✅ | ✅ | ✅ |
-
 | Kani | ✅ | ✅ | ✅ | ✅ | ✅ |
-
 | Prusti | ⚠️ | ⚠️ | ⚠️ | ❓ | ❓ |
-
 | Creusot | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ---
@@ -328,7 +265,6 @@ graph TD
 ## 集成示例 {#集成示例}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### CI/CD 配置 {#cicd-配置}
@@ -336,11 +272,9 @@ graph TD
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```yaml
-
 # .github/workflows/verification.yml {#githubworkflowsverificationyml}
 
 name: Formal Verification
-
 
 
 jobs:
@@ -358,7 +292,6 @@ jobs:
       - run: cargo miri test
 
 
-
   kani:
 
     runs-on: ubuntu-latest
@@ -372,21 +305,16 @@ jobs:
         with:
 
           args: "--workspace"
-
 ```
-
 ---
 
 ## 相关文档 {#相关文档-1}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [验证工具选型决策树](10_verification_tools_decision_tree.md)
-
 - [形式化方法概述](formal_methods/README.md)
-
 - [证明技术概念族谱](10_proof_techniques_mindmap.md)
 
 ---
@@ -400,9 +328,7 @@ jobs:
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -416,15 +342,10 @@ jobs:
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -432,17 +353,13 @@ jobs:
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档-1}
 
 - Rust 1.94 迁移指南
-
 - Rust 1.94 特性速查
-
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -454,9 +371,7 @@ jobs:
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -472,11 +387,9 @@ jobs:
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -484,19 +397,12 @@ jobs:
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
-
 > **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**
-
 > **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
-
 > **来源: [IEEE - Formal Specification Standards](https://standards.ieee.org/)**
-
 > **来源: [POPL - Automated Verification](https://www.sigplan.org/Conferences/POPL/)**
-
 > **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
-
 > **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
-
 > **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)**
 
 ---

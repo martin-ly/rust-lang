@@ -80,7 +80,6 @@ edition = "2021"        # 从 "2024" 修正
 resolver = "2"          # 从 "3" 修正
 rust-version = "1.75"   # 从 "1.90" 修正
 ```
-
 ### 2. 特性声明与实际不符 ✅ 已修正
 
 #### 问题描述2
@@ -104,7 +103,6 @@ rust-version = "1.75"   # 从 "1.90" 修正
 //! 注意：AsyncDrop、Async Generators 等特性仍在开发中，
 //! 本模块提供了模拟实现以供学习和测试使用。
 ```
-
 ### 3. 依赖版本过时 ✅ 已修正
 
 #### 问题描述3
@@ -119,7 +117,6 @@ rust-version = "1.75"   # 从 "1.90" 修正
 lru = "0.13.0"    # 从 "0.12.0" 更新
 smol = "1.3"      # 从 "2.0.2" 修正（版本号格式错误）
 ```
-
 ### 4. 文档与代码脱节 ✅ 已修正
 
 #### 问题描述4
@@ -145,7 +142,6 @@ let manager = ImprovedAsyncResourceManager::new(5);
 let resource = manager.acquire_with_timeout(Duration::from_millis(100)).await?;
 let stats = manager.get_statistics().await;
 ```
-
 ### 2. 结构化并发支持
 
 #### 功能特性5
@@ -163,7 +159,6 @@ let tasks = vec![
 ];
 let results = manager.process_with_structured_concurrency(tasks).await?;
 ```
-
 ### 3. 异步任务调度器
 
 #### 功能特性6
@@ -184,7 +179,6 @@ let task = ScheduledTask {
 };
 scheduler.schedule_task(task).await?;
 ```
-
 ### 4. 错误恢复机制
 
 #### 功能特性7
@@ -204,7 +198,6 @@ let result = recovery.execute_with_retry(|| {
     Box::pin(async { /* 可能失败的操作 */ })
 }).await?;
 ```
-
 ## 📊 性能对比数据
 
 ### 1. 实际测试结果

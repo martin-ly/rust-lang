@@ -1,0 +1,1396 @@
+# 02 数据结构实践
+
+> **文档类型**: Tier 2 - 实践指南
+> **目标读者**: 数据结构初学者 → 进阶者
+> **预计学习时间**: 3-4小时
+> **前置知识**: [算法快速入门](01_algorithms_quick_start.md)
+
+## 📋 目录
+
+- [02 数据结构实践](#02-数据结构实践)
+  - [📋 目录](#-目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+    - [概念矩阵](#概念矩阵)
+  - [🎯 学习目标](#-学习目标)
+  - [1. 线性数据结构](#1-线性数据结构)
+    - [1.1 Vector（动态数组）](#11-vector动态数组)
+    - [1.2 VecDeque（双端队列）](#12-vecdeque双端队列)
+    - [1.3 LinkedList（链表）](#13-linkedlist链表)
+  - [2. 栈与队列](#2-栈与队列)
+    - [2.1 栈的实现](#21-栈的实现)
+    - [2.2 队列的实现](#22-队列的实现)
+    - [2.3 优先队列](#23-优先队列)
+  - [3. 树结构](#3-树结构)
+    - [3.1 二叉搜索树（BST）](#31-二叉搜索树bst)
+    - [3.2 平衡树（AVL）](#32-平衡树avl)
+    - [3.3 B树](#33-b树)
+  - [4. 哈希表](#4-哈希表)
+    - [4.1 HashMap 原理](#41-hashmap-原理)
+    - [4.2 HashSet 应用](#42-hashset-应用)
+    - [4.3 自定义哈希](#43-自定义哈希)
+  - [5. 图结构](#5-图结构)
+    - [5.1 图的表示](#51-图的表示)
+    - [5.2 图的遍历](#52-图的遍历)
+    - [5.3 最短路径](#53-最短路径)
+  - [6. 高级数据结构](#6-高级数据结构)
+    - [6.1 跳表（Skip List）](#61-跳表skip-list)
+    - [6.2 红黑树（Red-Black Tree）](#62-红黑树red-black-tree)
+    - [6.3 Treap（树堆）](#63-treap树堆)
+    - [6.4 可持久化线段树](#64-可持久化线段树)
+    - [6.5 布隆过滤器](#65-布隆过滤器)
+    - [6.6 并查集（Union-Find）](#66-并查集union-find)
+  - [7. 实战案例](#7-实战案例)
+    - [案例 1: LRU 缓存](#案例-1-lru-缓存)
+    - [案例 2: 前缀树（Trie）](#案例-2-前缀树trie)
+    - [案例 3: 最小堆实现任务调度](#案例-3-最小堆实现任务调度)
+  - [8. 性能对比](#8-性能对比)
+  - [9. 最佳实践](#9-最佳实践)
+  - [🔗 相关资源](#-相关资源)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**数据结构 (Data Structure)**:
+
+- **定义**: 数据的组织、管理和存储格式，用于高效访问和修改数据
+- **类型**: 抽象概念
+- **范畴**: 计算机科学
+- **相关概念**: 算法、复杂度分析、内存布局
+
+**线性数据结构**:
+
+- **定义**: 数据元素按线性顺序排列的数据结构
+- **类型**: 数据结构类别
+- **属性**: 顺序访问、索引访问、动态大小
+- **关系**: 与数组、链表、队列相关
+
+**树结构**:
+
+- **定义**: 层次化的数据结构，由节点和边组成
+- **类型**: 数据结构类别
+- **属性**: 层次关系、递归结构、搜索效率
+- **关系**: 与图、搜索算法相关
+
+### 属性特征
+
+**核心属性**:
+
+- **访问模式**: 顺序访问、随机访问、层次访问
+- **存储方式**: 连续存储、链式存储、树形存储
+- **操作复杂度**: 插入、删除、查找的时间复杂度
+- **内存效率**: 空间复杂度和内存布局
+
+**性能特征**:
+
+- **Vector**: O(1) 随机访问，O(1) 尾部插入
+- **HashMap**: O(1) 平均查找，O(n) 最坏情况
+- **Tree**: O(log n) 查找，O(log n) 插入
+- **适用场景**: 不同数据结构适用于不同场景
+
+### 关系连接
+
+**继承关系**:
+
+- VecDeque --[is-a]--> 线性数据结构
+- 二叉搜索树 --[is-a]--> 树结构
+
+**组合关系**:
+
+- 数据结构 --[uses]--> 内存分配
+- 算法 --[uses]--> 数据结构
+
+**依赖关系**:
+
+- 数据结构 --[depends-on]--> 内存管理
+- 高效算法 --[depends-on]--> 合适的数据结构
+
+### 思维导图
+
+```text
+数据结构实践
+│
+├── 线性数据结构
+│   ├── Vector
+│   ├── VecDeque
+│   └── LinkedList
+├── 栈与队列
+│   ├── 栈
+│   ├── 队列
+│   └── 优先队列
+├── 树结构
+│   ├── 二叉搜索树
+│   ├── AVL 树
+│   └── B 树
+├── 哈希表
+│   ├── HashMap
+│   └── HashSet
+├── 图结构
+│   ├── 邻接表
+│   └── 邻接矩阵
+└── 高级数据结构
+    ├── 跳表
+    ├── 红黑树
+    ├── Treap
+    ├── 可持久化线段树
+    ├── 布隆过滤器
+    └── 并查集
+```
+### 概念矩阵
+
+| 数据结构   | 访问复杂度 | 插入复杂度 | 删除复杂度 | 适用场景     |
+| :--- | :--- | :--- | :--- | :--- |
+| Vector     | O(1)       | O(1) 尾部  | O(n)       | 随机访问     |
+| VecDeque   | O(1)       | O(1) 两端  | O(1) 两端  | 双端操作     |
+| LinkedList | O(n)       | O(1)       | O(1)       | 频繁插入删除 |
+| HashMap    | O(1) 平均  | O(1) 平均  | O(1) 平均  | 键值查找     |
+| 二叉搜索树 | O(log n)   | O(log n)   | O(log n)   | 有序数据     |
+| 栈         | O(1)       | O(1)       | O(1)       | LIFO 操作    |
+| 队列       | O(1)       | O(1)       | O(1)       | FIFO 操作    |
+
+---
+
+## 🎯 学习目标
+
+完成本指南后，你将能够：
+
+- ✅ 掌握 Rust 标准库中的核心数据结构
+- ✅ 实现自定义数据结构（栈、队列、树、图）
+- ✅ 理解不同数据结构的时间空间复杂度
+- ✅ 选择合适的数据结构解决实际问题
+- ✅ 使用 Rust 特性优化数据结构性能
+
+---
+
+## 1. 线性数据结构
+
+### 1.1 Vector（动态数组）
+
+`Vec<T>` 是 Rust 中最常用的动态数组：
+
+```rust
+fn main() {
+    // 创建
+    let mut v: Vec<i32> = Vec::new();
+    let v2 = vec![1, 2, 3];  // 宏创建
+
+    // 添加元素
+    v.push(1);
+    v.push(2);
+    v.push(3);
+
+    // 访问
+    let first = v[0];  // 直接索引
+    let second = v.get(1);  // 安全访问，返回 Option<&T>
+
+    // 迭代
+    for item in &v {
+        println!("{}", item);
+    }
+
+    // 容量管理
+    let mut v3 = Vec::with_capacity(10);  // 预分配容量
+    println!("容量: {}", v3.capacity());
+    println!("长度: {}", v3.len());
+}
+```
+**性能特性**：
+
+- 索引访问: O(1)
+- 尾部插入: O(1) 摊销
+- 中间插入: O(n)
+- 查找: O(n)
+
+### 1.2 VecDeque（双端队列）
+
+高效的首尾操作：
+
+```rust
+use std::collections::VecDeque;
+
+fn main() {
+    let mut deque = VecDeque::new();
+
+    // 两端添加
+    deque.push_back(1);   // 尾部添加
+    deque.push_front(2);  // 头部添加
+
+    // 两端删除
+    let back = deque.pop_back();   // Some(1)
+    let front = deque.pop_front(); // Some(2)
+
+    // 实现循环缓冲区
+    let mut buffer = VecDeque::with_capacity(5);
+    for i in 0..10 {
+        buffer.push_back(i);
+        if buffer.len() > 5 {
+            buffer.pop_front();
+        }
+    }
+    println!("最近5个元素: {:?}", buffer);
+}
+```
+**性能特性**：
+
+- 首尾插入/删除: O(1)
+- 中间插入/删除: O(n)
+- 索引访问: O(1)
+
+### 1.3 LinkedList（链表）
+
+双向链表实现：
+
+```rust
+use std::collections::LinkedList;
+
+fn main() {
+    let mut list = LinkedList::new();
+
+    list.push_back(1);
+    list.push_back(2);
+    list.push_front(0);
+
+    // 迭代
+    for item in &list {
+        println!("{}", item);
+    }
+
+    // 分割和合并
+    let mut list2 = list.split_off(2);  // 从第2个位置分割
+    list.append(&mut list2);  // 合并
+}
+```
+**何时使用**：
+
+- ✅ 需要频繁在中间插入/删除
+- ❌ 需要随机访问（改用 Vec）
+- ❌ 关注缓存局部性（改用 Vec）
+
+---
+
+## 2. 栈与队列
+
+### 2.1 栈的实现
+
+使用 Vec 实现栈：
+
+```rust
+struct Stack<T> {
+    items: Vec<T>,
+}
+
+impl<T> Stack<T> {
+    fn new() -> Self {
+        Stack { items: Vec::new() }
+    }
+
+    fn push(&mut self, item: T) {
+        self.items.push(item);
+    }
+
+    fn pop(&mut self) -> Option<T> {
+        self.items.pop()
+    }
+
+    fn peek(&self) -> Option<&T> {
+        self.items.last()
+    }
+
+    fn is_empty(&self) -> bool {
+        self.items.is_empty()
+    }
+
+    fn len(&self) -> usize {
+        self.items.len()
+    }
+}
+
+fn main() {
+    let mut stack = Stack::new();
+
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+
+    while let Some(item) = stack.pop() {
+        println!("{}", item);  // 3, 2, 1
+    }
+}
+```
+**经典应用 - 括号匹配**：
+
+```rust
+fn is_valid_parentheses(s: &str) -> bool {
+    let mut stack = Vec::new();
+
+    for ch in s.chars() {
+        match ch {
+            '(' | '[' | '{' => stack.push(ch),
+            ')' => if stack.pop() != Some('(') { return false; },
+            ']' => if stack.pop() != Some('[') { return false; },
+            '}' => if stack.pop() != Some('{') { return false; },
+            _ => {}
+        }
+    }
+
+    stack.is_empty()
+}
+
+fn main() {
+    assert!(is_valid_parentheses("()[]{}"));
+    assert!(!is_valid_parentheses("([)]"));
+}
+```
+### 2.2 队列的实现
+
+使用 VecDeque 实现队列：
+
+```rust
+use std::collections::VecDeque;
+
+struct Queue<T> {
+    items: VecDeque<T>,
+}
+
+impl<T> Queue<T> {
+    fn new() -> Self {
+        Queue { items: VecDeque::new() }
+    }
+
+    fn enqueue(&mut self, item: T) {
+        self.items.push_back(item);
+    }
+
+    fn dequeue(&mut self) -> Option<T> {
+        self.items.pop_front()
+    }
+
+    fn peek(&self) -> Option<&T> {
+        self.items.front()
+    }
+
+    fn is_empty(&self) -> bool {
+        self.items.is_empty()
+    }
+}
+
+fn main() {
+    let mut queue = Queue::new();
+
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
+
+    while let Some(item) = queue.dequeue() {
+        println!("{}", item);  // 1, 2, 3
+    }
+}
+```
+### 2.3 优先队列
+
+使用 BinaryHeap：
+
+```rust
+use std::collections::BinaryHeap;
+use std::cmp::Reverse;
+
+fn main() {
+    // 最大堆（默认）
+    let mut max_heap = BinaryHeap::new();
+    max_heap.push(3);
+    max_heap.push(1);
+    max_heap.push(4);
+
+    while let Some(item) = max_heap.pop() {
+        println!("{}", item);  // 4, 3, 1
+    }
+
+    // 最小堆
+    let mut min_heap = BinaryHeap::new();
+    min_heap.push(Reverse(3));
+    min_heap.push(Reverse(1));
+    min_heap.push(Reverse(4));
+
+    while let Some(Reverse(item)) = min_heap.pop() {
+        println!("{}", item);  // 1, 3, 4
+    }
+}
+```
+---
+
+## 3. 树结构
+
+### 3.1 二叉搜索树（BST）
+
+基本实现：
+
+```rust
+#[derive(Debug)]
+struct TreeNode {
+    val: i32,
+    left: Option<Box<TreeNode>>,
+    right: Option<Box<TreeNode>>,
+}
+
+impl TreeNode {
+    fn new(val: i32) -> Self {
+        TreeNode {
+            val,
+            left: None,
+            right: None,
+        }
+    }
+}
+
+struct BST {
+    root: Option<Box<TreeNode>>,
+}
+
+impl BST {
+    fn new() -> Self {
+        BST { root: None }
+    }
+
+    fn insert(&mut self, val: i32) {
+        self.root = Self::insert_recursive(self.root.take(), val);
+    }
+
+    fn insert_recursive(node: Option<Box<TreeNode>>, val: i32) -> Option<Box<TreeNode>> {
+        match node {
+            None => Some(Box::new(TreeNode::new(val))),
+            Some(mut node) => {
+                if val < node.val {
+                    node.left = Self::insert_recursive(node.left.take(), val);
+                } else if val > node.val {
+                    node.right = Self::insert_recursive(node.right.take(), val);
+                }
+                Some(node)
+            }
+        }
+    }
+
+    fn search(&self, val: i32) -> bool {
+        Self::search_recursive(&self.root, val)
+    }
+
+    fn search_recursive(node: &Option<Box<TreeNode>>, val: i32) -> bool {
+        match node {
+            None => false,
+            Some(node) => {
+                if val == node.val {
+                    true
+                } else if val < node.val {
+                    Self::search_recursive(&node.left, val)
+                } else {
+                    Self::search_recursive(&node.right, val)
+                }
+            }
+        }
+    }
+
+    fn inorder_traversal(&self) -> Vec<i32> {
+        let mut result = Vec::new();
+        Self::inorder(&self.root, &mut result);
+        result
+    }
+
+    fn inorder(node: &Option<Box<TreeNode>>, result: &mut Vec<i32>) {
+        if let Some(node) = node {
+            Self::inorder(&node.left, result);
+            result.push(node.val);
+            Self::inorder(&node.right, result);
+        }
+    }
+}
+
+fn main() {
+    let mut bst = BST::new();
+
+    bst.insert(5);
+    bst.insert(3);
+    bst.insert(7);
+    bst.insert(1);
+    bst.insert(9);
+
+    assert!(bst.search(7));
+    assert!(!bst.search(4));
+
+    println!("中序遍历: {:?}", bst.inorder_traversal());  // [1, 3, 5, 7, 9]
+}
+```
+### 3.2 平衡树（AVL）
+
+AVL 树的高度平衡：
+
+```rust
+#[derive(Debug)]
+struct AVLNode {
+    val: i32,
+    height: i32,
+    left: Option<Box<AVLNode>>,
+    right: Option<Box<AVLNode>>,
+}
+
+impl AVLNode {
+    fn new(val: i32) -> Self {
+        AVLNode {
+            val,
+            height: 1,
+            left: None,
+            right: None,
+        }
+    }
+
+    fn height(node: &Option<Box<AVLNode>>) -> i32 {
+        node.as_ref().map_or(0, |n| n.height)
+    }
+
+    fn update_height(node: &mut AVLNode) {
+        node.height = 1 + Self::height(&node.left).max(Self::height(&node.right));
+    }
+
+    fn balance_factor(node: &AVLNode) -> i32 {
+        Self::height(&node.left) - Self::height(&node.right)
+    }
+
+    fn rotate_left(mut node: Box<AVLNode>) -> Box<AVLNode> {
+        let mut new_root = node.right.take().unwrap();
+        node.right = new_root.left.take();
+        Self::update_height(&mut node);
+        new_root.left = Some(node);
+        Self::update_height(&mut new_root);
+        new_root
+    }
+
+    fn rotate_right(mut node: Box<AVLNode>) -> Box<AVLNode> {
+        let mut new_root = node.left.take().unwrap();
+        node.left = new_root.right.take();
+        Self::update_height(&mut node);
+        new_root.right = Some(node);
+        Self::update_height(&mut new_root);
+        new_root
+    }
+}
+```
+### 3.3 B树
+
+使用标准库 BTreeMap/BTreeSet：
+
+```rust
+use std::collections::BTreeMap;
+
+fn main() {
+    let mut btree = BTreeMap::new();
+
+    btree.insert(5, "five");
+    btree.insert(2, "two");
+    btree.insert(8, "eight");
+    btree.insert(1, "one");
+
+    // 有序迭代
+    for (key, value) in &btree {
+        println!("{}: {}", key, value);
+    }
+
+    // 范围查询
+    for (key, value) in btree.range(2..=5) {
+        println!("范围内: {}: {}", key, value);
+    }
+}
+```
+---
+
+## 4. 哈希表
+
+### 4.1 HashMap 原理
+
+基本操作：
+
+```rust
+use std::collections::HashMap;
+
+fn main() {
+    let mut map = HashMap::new();
+
+    // 插入
+    map.insert("apple", 3);
+    map.insert("banana", 2);
+
+    // 访问
+    if let Some(&count) = map.get("apple") {
+        println!("apples: {}", count);
+    }
+
+    // 更新
+    *map.entry("apple").or_insert(0) += 1;
+
+    // 删除
+    map.remove("banana");
+
+    // 迭代
+    for (key, value) in &map {
+        println!("{}: {}", key, value);
+    }
+}
+```
+**应用 - 计数器**：
+
+```rust
+use std::collections::HashMap;
+
+fn count_words(text: &str) -> HashMap<String, usize> {
+    let mut counts = HashMap::new();
+
+    for word in text.split_whitespace() {
+        *counts.entry(word.to_string()).or_insert(0) += 1;
+    }
+
+    counts
+}
+
+fn main() {
+    let text = "hello world hello rust world";
+    let counts = count_words(text);
+
+    for (word, count) in counts {
+        println!("{}: {}", word, count);
+    }
+}
+```
+### 4.2 HashSet 应用
+
+去重和查找：
+
+```rust
+use std::collections::HashSet;
+
+fn main() {
+    let mut set = HashSet::new();
+
+    set.insert(1);
+    set.insert(2);
+    set.insert(1);  // 重复元素不会被添加
+
+    assert!(set.contains(&1));
+    assert_eq!(set.len(), 2);
+
+    // 集合操作
+    let set1: HashSet<_> = [1, 2, 3].iter().collect();
+    let set2: HashSet<_> = [2, 3, 4].iter().collect();
+
+    let union: HashSet<_> = set1.union(&set2).collect();
+    let intersection: HashSet<_> = set1.intersection(&set2).collect();
+    let difference: HashSet<_> = set1.difference(&set2).collect();
+
+    println!("并集: {:?}", union);
+    println!("交集: {:?}", intersection);
+    println!("差集: {:?}", difference);
+}
+```
+### 4.3 自定义哈希
+
+实现自定义 Hash：
+
+```rust
+use std::collections::HashMap;
+use std::hash::{Hash, Hasher};
+
+#[derive(Debug, Eq)]
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl PartialEq for Point {
+    fn eq(&self, other: &Self) -> bool {
+        self.x == other.x && self.y == other.y
+    }
+}
+
+impl Hash for Point {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.x.hash(state);
+        self.y.hash(state);
+    }
+}
+
+fn main() {
+    let mut map = HashMap::new();
+    map.insert(Point { x: 1, y: 2 }, "A");
+    map.insert(Point { x: 3, y: 4 }, "B");
+
+    if let Some(value) = map.get(&Point { x: 1, y: 2 }) {
+        println!("Found: {}", value);
+    }
+}
+```
+---
+
+## 5. 图结构
+
+### 5.1 图的表示
+
+邻接表表示：
+
+```rust
+use std::collections::{HashMap, HashSet};
+
+struct Graph {
+    adj_list: HashMap<i32, Vec<i32>>,
+}
+
+impl Graph {
+    fn new() -> Self {
+        Graph {
+            adj_list: HashMap::new(),
+        }
+    }
+
+    fn add_edge(&mut self, u: i32, v: i32) {
+        self.adj_list.entry(u).or_insert(Vec::new()).push(v);
+        self.adj_list.entry(v).or_insert(Vec::new()).push(u);  // 无向图
+    }
+
+    fn neighbors(&self, node: i32) -> &[i32] {
+        self.adj_list.get(&node).map_or(&[], |v| v.as_slice())
+    }
+}
+
+fn main() {
+    let mut graph = Graph::new();
+
+    graph.add_edge(1, 2);
+    graph.add_edge(1, 3);
+    graph.add_edge(2, 3);
+
+    println!("节点1的邻居: {:?}", graph.neighbors(1));
+}
+```
+### 5.2 图的遍历
+
+**深度优先搜索（DFS）**：
+
+```rust
+use std::collections::{HashMap, HashSet};
+
+fn dfs(
+    graph: &HashMap<i32, Vec<i32>>,
+    node: i32,
+    visited: &mut HashSet<i32>,
+    result: &mut Vec<i32>,
+) {
+    if visited.contains(&node) {
+        return;
+    }
+
+    visited.insert(node);
+    result.push(node);
+
+    if let Some(neighbors) = graph.get(&node) {
+        for &neighbor in neighbors {
+            dfs(graph, neighbor, visited, result);
+        }
+    }
+}
+
+fn main() {
+    let mut graph = HashMap::new();
+    graph.insert(1, vec![2, 3]);
+    graph.insert(2, vec![4]);
+    graph.insert(3, vec![4]);
+    graph.insert(4, vec![]);
+
+    let mut visited = HashSet::new();
+    let mut result = Vec::new();
+
+    dfs(&graph, 1, &mut visited, &mut result);
+    println!("DFS 遍历: {:?}", result);
+}
+```
+**广度优先搜索（BFS）**：
+
+```rust
+use std::collections::{HashMap, HashSet, VecDeque};
+
+fn bfs(graph: &HashMap<i32, Vec<i32>>, start: i32) -> Vec<i32> {
+    let mut visited = HashSet::new();
+    let mut queue = VecDeque::new();
+    let mut result = Vec::new();
+
+    queue.push_back(start);
+    visited.insert(start);
+
+    while let Some(node) = queue.pop_front() {
+        result.push(node);
+
+        if let Some(neighbors) = graph.get(&node) {
+            for &neighbor in neighbors {
+                if !visited.contains(&neighbor) {
+                    visited.insert(neighbor);
+                    queue.push_back(neighbor);
+                }
+            }
+        }
+    }
+
+    result
+}
+
+fn main() {
+    let mut graph = HashMap::new();
+    graph.insert(1, vec![2, 3]);
+    graph.insert(2, vec![4]);
+    graph.insert(3, vec![4]);
+    graph.insert(4, vec![]);
+
+    let result = bfs(&graph, 1);
+    println!("BFS 遍历: {:?}", result);
+}
+```
+### 5.3 最短路径
+
+Dijkstra 算法：
+
+```rust
+use std::collections::{BinaryHeap, HashMap};
+use std::cmp::Reverse;
+
+fn dijkstra(graph: &HashMap<i32, Vec<(i32, usize)>>, start: i32) -> HashMap<i32, usize> {
+    let mut dist = HashMap::new();
+    let mut heap = BinaryHeap::new();
+
+    dist.insert(start, 0);
+    heap.push(Reverse((0, start)));
+
+    while let Some(Reverse((cost, node))) = heap.pop() {
+        if cost > *dist.get(&node).unwrap_or(&usize::MAX) {
+            continue;
+        }
+
+        if let Some(neighbors) = graph.get(&node) {
+            for &(next, weight) in neighbors {
+                let new_cost = cost + weight;
+                if new_cost < *dist.get(&next).unwrap_or(&usize::MAX) {
+                    dist.insert(next, new_cost);
+                    heap.push(Reverse((new_cost, next)));
+                }
+            }
+        }
+    }
+
+    dist
+}
+
+fn main() {
+    let mut graph = HashMap::new();
+    graph.insert(1, vec![(2, 4), (3, 2)]);
+    graph.insert(2, vec![(4, 5)]);
+    graph.insert(3, vec![(2, 1), (4, 8)]);
+    graph.insert(4, vec![]);
+
+    let distances = dijkstra(&graph, 1);
+
+    for (node, dist) in distances {
+        println!("到节点 {} 的最短距离: {}", node, dist);
+    }
+}
+```
+---
+
+## 6. 高级数据结构
+
+### 6.1 跳表（Skip List）
+
+简化实现：
+
+```rust
+struct SkipNode {
+    value: i32,
+    next: Vec<Option<Box<SkipNode>>>,
+}
+
+struct SkipList {
+    head: SkipNode,
+    max_level: usize,
+}
+
+impl SkipList {
+    fn new(max_level: usize) -> Self {
+        SkipList {
+            head: SkipNode {
+                value: i32::MIN,
+                next: vec![None; max_level],
+            },
+            max_level,
+        }
+    }
+
+    fn search(&self, target: i32) -> bool {
+        let mut current = &self.head;
+
+        for level in (0..self.max_level).rev() {
+            while let Some(ref next_node) = current.next[level] {
+                if next_node.value < target {
+                    current = next_node;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        current.next[0]
+            .as_ref()
+            .map_or(false, |node| node.value == target)
+    }
+}
+```
+### 6.2 红黑树（Red-Black Tree）
+
+红黑树是自平衡二叉搜索树，通过五条颜色规则保证树高不超过 2 log(n+1)，
+从而所有操作的最坏时间复杂度均为 O(log n)。
+
+```rust
+use c08_algorithms::data_structure::RedBlackTree;
+
+fn main() {
+    let mut tree = RedBlackTree::new();
+    for v in [10, 5, 15, 3, 7, 12, 20] {
+        tree.insert(v);
+    }
+    println!("中序遍历: {:?}", tree.sorted()); // [3, 5, 7, 10, 12, 15, 20]
+    assert!(tree.contains(12));
+    tree.delete(10);
+    println!("删除 10 后: {:?}", tree.sorted()); // [3, 5, 7, 12, 15, 20]
+}
+```
+### 6.3 Treap（树堆）
+
+Treap 是二叉搜索树与堆的结合：按键维护 BST 性质，按随机优先级维护堆性质，
+期望时间复杂度为 O(log n)。通过维护子树大小，还可支持第 k 小/排名查询。
+
+```rust
+use c08_algorithms::data_structure::Treap;
+
+fn main() {
+    let mut treap = Treap::new();
+    for (i, key) in [50, 30, 70, 20, 40].iter().enumerate() {
+        treap.insert(*key, (i + 1) as u64); // 实际应使用随机优先级
+    }
+    println!("中序遍历: {:?}", treap.sorted());
+    println!("第 2 小: {:?}", treap.kth(2));
+    println!("40 的排名: {}", treap.rank(40));
+}
+```
+### 6.4 可持久化线段树
+
+可持久化线段树每次单点更新都会生成一条新路径，并复用未修改的子树，
+从而在 O(log n) 时间和空间内生成一个历史版本。
+
+```rust
+use c08_algorithms::data_structure::PersistentSegmentTree;
+
+fn main() {
+    let arr = vec![1, 2, 3, 4, 5];
+    let (mut pst, root0) = PersistentSegmentTree::from_slice(&arr);
+    let root1 = pst.update(root0, 2, 10);
+
+    println!("版本 0 区间和: {}", pst.query(root0, 0, 4)); // 15
+    println!("版本 1 区间和: {}", pst.query(root1, 0, 4)); // 22
+}
+```
+### 6.5 布隆过滤器
+
+概率数据结构：
+
+```rust
+use std::hash::{Hash, Hasher};
+use std::collections::hash_map::DefaultHasher;
+
+struct BloomFilter {
+    bits: Vec<bool>,
+    hash_count: usize,
+}
+
+impl BloomFilter {
+    fn new(size: usize, hash_count: usize) -> Self {
+        BloomFilter {
+            bits: vec![false; size],
+            hash_count,
+        }
+    }
+
+    fn insert<T: Hash>(&mut self, item: &T) {
+        for i in 0..self.hash_count {
+            let hash = self.hash(item, i);
+            let index = hash % self.bits.len();
+            self.bits[index] = true;
+        }
+    }
+
+    fn might_contain<T: Hash>(&self, item: &T) -> bool {
+        for i in 0..self.hash_count {
+            let hash = self.hash(item, i);
+            let index = hash % self.bits.len();
+            if !self.bits[index] {
+                return false;
+            }
+        }
+        true
+    }
+
+    fn hash<T: Hash>(&self, item: &T, seed: usize) -> usize {
+        let mut hasher = DefaultHasher::new();
+        item.hash(&mut hasher);
+        seed.hash(&mut hasher);
+        hasher.finish() as usize
+    }
+}
+
+fn main() {
+    let mut filter = BloomFilter::new(1000, 3);
+
+    filter.insert(&"hello");
+    filter.insert(&"world");
+
+    assert!(filter.might_contain(&"hello"));
+    assert!(!filter.might_contain(&"foo"));  // 可能假阳性
+}
+```
+### 6.6 并查集（Union-Find）
+
+用于动态连通性：
+
+```rust
+struct UnionFind {
+    parent: Vec<usize>,
+    rank: Vec<usize>,
+}
+
+impl UnionFind {
+    fn new(size: usize) -> Self {
+        UnionFind {
+            parent: (0..size).collect(),
+            rank: vec![0; size],
+        }
+    }
+
+    fn find(&mut self, x: usize) -> usize {
+        if self.parent[x] != x {
+            self.parent[x] = self.find(self.parent[x]);  // 路径压缩
+        }
+        self.parent[x]
+    }
+
+    fn union(&mut self, x: usize, y: usize) -> bool {
+        let root_x = self.find(x);
+        let root_y = self.find(y);
+
+        if root_x == root_y {
+            return false;  // 已经在同一集合
+        }
+
+        // 按秩合并
+        if self.rank[root_x] < self.rank[root_y] {
+            self.parent[root_x] = root_y;
+        } else if self.rank[root_x] > self.rank[root_y] {
+            self.parent[root_y] = root_x;
+        } else {
+            self.parent[root_y] = root_x;
+            self.rank[root_x] += 1;
+        }
+
+        true
+    }
+
+    fn connected(&mut self, x: usize, y: usize) -> bool {
+        self.find(x) == self.find(y)
+    }
+}
+
+fn main() {
+    let mut uf = UnionFind::new(5);
+
+    uf.union(0, 1);
+    uf.union(1, 2);
+    uf.union(3, 4);
+
+    assert!(uf.connected(0, 2));
+    assert!(!uf.connected(0, 3));
+}
+```
+---
+
+## 7. 实战案例
+
+### 案例 1: LRU 缓存
+
+使用 HashMap + VecDeque：
+
+```rust
+use std::collections::{HashMap, VecDeque};
+
+struct LRUCache {
+    capacity: usize,
+    cache: HashMap<i32, i32>,
+    order: VecDeque<i32>,
+}
+
+impl LRUCache {
+    fn new(capacity: usize) -> Self {
+        LRUCache {
+            capacity,
+            cache: HashMap::new(),
+            order: VecDeque::new(),
+        }
+    }
+
+    fn get(&mut self, key: i32) -> Option<i32> {
+        if let Some(&value) = self.cache.get(&key) {
+            // 移动到最前面
+            self.order.retain(|&k| k != key);
+            self.order.push_front(key);
+            Some(value)
+        } else {
+            None
+        }
+    }
+
+    fn put(&mut self, key: i32, value: i32) {
+        if self.cache.contains_key(&key) {
+            self.cache.insert(key, value);
+            self.order.retain(|&k| k != key);
+            self.order.push_front(key);
+        } else {
+            if self.cache.len() >= self.capacity {
+                if let Some(oldest) = self.order.pop_back() {
+                    self.cache.remove(&oldest);
+                }
+            }
+            self.cache.insert(key, value);
+            self.order.push_front(key);
+        }
+    }
+}
+
+fn main() {
+    let mut cache = LRUCache::new(2);
+
+    cache.put(1, 1);
+    cache.put(2, 2);
+    assert_eq!(cache.get(1), Some(1));
+    cache.put(3, 3);  // 淘汰键 2
+    assert_eq!(cache.get(2), None);
+}
+```
+### 案例 2: 前缀树（Trie）
+
+字符串快速查找：
+
+```rust
+use std::collections::HashMap;
+
+#[derive(Default)]
+struct TrieNode {
+    children: HashMap<char, Box<TrieNode>>,
+    is_end: bool,
+}
+
+struct Trie {
+    root: TrieNode,
+}
+
+impl Trie {
+    fn new() -> Self {
+        Trie {
+            root: TrieNode::default(),
+        }
+    }
+
+    fn insert(&mut self, word: &str) {
+        let mut node = &mut self.root;
+
+        for ch in word.chars() {
+            node = node.children
+                .entry(ch)
+                .or_insert_with(|| Box::new(TrieNode::default()));
+        }
+
+        node.is_end = true;
+    }
+
+    fn search(&self, word: &str) -> bool {
+        let mut node = &self.root;
+
+        for ch in word.chars() {
+            match node.children.get(&ch) {
+                Some(next_node) => node = next_node,
+                None => return false,
+            }
+        }
+
+        node.is_end
+    }
+
+    fn starts_with(&self, prefix: &str) -> bool {
+        let mut node = &self.root;
+
+        for ch in prefix.chars() {
+            match node.children.get(&ch) {
+                Some(next_node) => node = next_node,
+                None => return false,
+            }
+        }
+
+        true
+    }
+}
+
+fn main() {
+    let mut trie = Trie::new();
+
+    trie.insert("apple");
+    trie.insert("app");
+
+    assert!(trie.search("apple"));
+    assert!(!trie.search("appl"));
+    assert!(trie.starts_with("app"));
+}
+```
+### 案例 3: 最小堆实现任务调度
+
+```rust
+use std::collections::BinaryHeap;
+use std::cmp::Reverse;
+
+#[derive(Eq, PartialEq, Debug)]
+struct Task {
+    priority: i32,
+    id: usize,
+}
+
+impl Ord for Task {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.priority.cmp(&other.priority)
+    }
+}
+
+impl PartialOrd for Task {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+struct TaskScheduler {
+    tasks: BinaryHeap<Reverse<Task>>,
+}
+
+impl TaskScheduler {
+    fn new() -> Self {
+        TaskScheduler {
+            tasks: BinaryHeap::new(),
+        }
+    }
+
+    fn add_task(&mut self, priority: i32, id: usize) {
+        self.tasks.push(Reverse(Task { priority, id }));
+    }
+
+    fn execute_next(&mut self) -> Option<usize> {
+        self.tasks.pop().map(|Reverse(task)| task.id)
+    }
+}
+
+fn main() {
+    let mut scheduler = TaskScheduler::new();
+
+    scheduler.add_task(3, 1);
+    scheduler.add_task(1, 2);
+    scheduler.add_task(2, 3);
+
+    // 按优先级执行
+    while let Some(task_id) = scheduler.execute_next() {
+        println!("执行任务: {}", task_id);
+    }
+}
+```
+---
+
+## 8. 性能对比
+
+| 数据结构   | 访问       | 搜索     | 插入     | 删除     | 空间 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Vec        | O(1)       | O(n)     | O(n)     | O(n)     | O(n) |
+| VecDeque   | O(1)       | O(n)     | O(1)\*   | O(1)\*   | O(n) |
+| LinkedList | O(n)       | O(n)     | O(1)\*   | O(1)\*   | O(n) |
+| HashMap    | -          | O(1)\*\* | O(1)\*\* | O(1)\*\* | O(n) |
+| BTreeMap   | -          | O(log n) | O(log n) | O(log n) | O(n) |
+| BinaryHeap | O(1)\*\*\* | O(n)     | O(log n) | O(log n) | O(n) |
+
+\* 首尾操作
+\*\* 平均情况
+\*\*\* 仅最大/最小元素
+
+---
+
+## 9. 最佳实践
+
+1. **选择合适的数据结构**:
+   - ✅ 默认使用 `Vec`（缓存友好）
+   - ✅ 需要双端操作用 `VecDeque`
+   - ✅ 需要快速查找用 `HashMap`
+   - ✅ 需要有序迭代用 `BTreeMap`
+2. **性能优化**:
+   - ✅ 使用 `with_capacity` 预分配
+   - ✅ 避免不必要的克隆
+   - ✅ 使用 `entry` API 避免双重查找
+3. **内存管理**:
+   - ✅ 及时清理不用的数据
+   - ✅ 使用 `shrink_to_fit` 释放多余容量
+4. **避免常见陷阱**:
+   - ❌ 不要在 HashMap 中使用浮点数作为键
+   - ❌ 避免在 Vec 中间频繁插入删除
+   - ❌ 注意链表的缓存局部性问题
+
+---
+
+## 🔗 相关资源
+
+**内部文档**:
+
+- [算法快速入门](01_algorithms_quick_start.md) - 前置内容
+- [算法复杂度分析](03_algorithm_complexity_analysis.md) - 深入理解
+- [性能优化实践](04_performance_optimization_practice.md) - 优化技巧
+
+**外部资源**:
+
+- 🦀 [Rust 标准库文档](https://doc.rust-lang.org/std/collections/)
+- 📘 [数据结构与算法分析](https://www.coursera.org/specializations/data-structures-algorithms)
+- 🌐 [VisuAlgo](https://visualgo.net/) - 数据结构可视化
+
+---
+
+**返回**: [Tier 2 索引](README.md) | **下一步**: [算法复杂度分析](03_algorithm_complexity_analysis.md)
+
+---
+
+**文档维护**: Documentation Team
+**创建日期**: 2025-10-23
+**最后更新**: 2025-10-23
+**文档状态**: ✅ 完成
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

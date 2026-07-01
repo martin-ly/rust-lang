@@ -67,7 +67,6 @@
 [dependencies]
 c07_process = { path = "../c07_process", features = ["async"] }
 ```
-
 ### 基本使用
 
 ```rust
@@ -126,7 +125,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ---
 
 ## 📊 核心功能
@@ -148,7 +146,6 @@ match result.performance_gain {
     _ => println!("Light or no optimization needed"),
 }
 ```
-
 **优化策略**：
 
 - **内存压力 > 90%**: 激进优化（清理未使用缓存、强制垃圾回收、减少内存分配）
@@ -194,7 +191,6 @@ let result = manager.optimize_cpu(|cpu_usage| async move {
     }
 }).await;
 ```
-
 ### 3. I/O优化
 
 I/O优化可以改进读写性能，减少I/O阻塞：
@@ -209,7 +205,6 @@ println!("Read operations: {}", io_stats.read_operations);
 println!("Write operations: {}", io_stats.write_operations);
 println!("Total bytes: {}", io_stats.total_bytes);
 ```
-
 ### 4. 缓存管理
 
 缓存管理器提供了智能缓存策略：
@@ -227,7 +222,6 @@ manager.cache_manager.set_cache_policy("process_info", CachePolicy {
     eviction_strategy: EvictionStrategy::Lru,
 }).await;
 ```
-
 ---
 
 ## 🔧 高级用法
@@ -248,7 +242,6 @@ let custom_rule = OptimizationRule {
 
 manager.optimizer.add_optimization_rule(custom_rule).await;
 ```
-
 ### 性能监控
 
 后台监控任务会自动运行，也可以手动触发：
@@ -267,7 +260,6 @@ for entry in history {
         entry.timestamp, entry.memory_pressure * 100.0, entry.cpu_usage * 100.0);
 }
 ```
-
 ### 内存泄漏检测
 
 内存泄漏检测器可以自动检测潜在的内存泄漏：
@@ -278,7 +270,6 @@ for entry in history {
 let leak_detector = manager.memory_monitor.leak_detector.clone();
 // 检测器会在后台监控内存使用模式
 ```
-
 ---
 
 ## 📈 性能指标
@@ -317,7 +308,6 @@ pub struct PerformanceConfig {
     pub history_retention: Duration,       // 历史数据保留时间
 }
 ```
-
 ### 推荐配置
 
 **开发环境**:
@@ -334,7 +324,6 @@ PerformanceConfig {
     history_retention: Duration::from_secs(1800),  // 30分钟
 }
 ```
-
 **生产环境**:
 
 ```rust
@@ -349,7 +338,6 @@ PerformanceConfig {
     history_retention: Duration::from_secs(3600),  // 1小时
 }
 ```
-
 ---
 
 ## 🎯 最佳实践
@@ -388,8 +376,8 @@ PerformanceConfig {
 
 - [C07 主文档](../README.md)
 - [异步标准IO使用指南](async_stdio_guide.md)
-- [性能优化参考](tier_03_references/05_性能优化参考.md)
-- [高级进程管理](tier_04_advanced/01_高级进程管理.md)
+- [性能优化参考](tier_03_references/05_performance_optimization_reference.md)
+- [高级进程管理](tier_04_advanced/01_advanced_process_management.md)
 
 ---
 

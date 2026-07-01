@@ -123,7 +123,6 @@ async fn main() {
     println!("结果: {}", result);
 }
 ```
-
 ### 并发执行 {#并发执行}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -155,7 +154,6 @@ async fn main() {
     // 总耗时约 1 秒（并发执行）
 }
 ```
-
 ---
 
 ## 📊 核心功能 {#核心功能}
@@ -192,7 +190,6 @@ async fn main() {
     println!("结果: {}", result);
 }
 ```
-
 ### 2. 异步运行时 {#2-异步运行时}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -214,7 +211,6 @@ rt.block_on(async {
     println!("在 Tokio 运行时中执行");
 });
 ```
-
 #### 自定义运行时配置 {#自定义运行时配置}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -231,7 +227,6 @@ let rt = Builder::new_multi_thread()
     .build()
     .unwrap();
 ```
-
 ### 3. 异步 I/O {#3-异步-io}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -258,7 +253,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 #### 网络 I/O {#网络-io}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -289,7 +283,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 }
 ```
-
 ### 4. Reactor 模式 {#4-reactor-模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -307,7 +300,6 @@ reactor.register_handler(EventType::Read, |event| {
 // 运行事件循环
 reactor.run().await;
 ```
-
 ### 5. Actor 模式 {#5-actor-模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -337,11 +329,9 @@ async fn main() {
     actor_ref.send(3).await;
 }
 ```
-
 ### 6. Async Closures {#6-async-closures}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 > **Rust 版本**: 1.96.0+ Stable
 > **相关文档**: [Async Closures 深度指南](../../crates/c06_async/docs/ASYNC_CLOSURES_GUIDE.md)
 
@@ -370,7 +360,6 @@ let moved = async move |x: i32| {
     format!("{prefix}{}", x * 2)
 };
 ```
-
 #### 与旧范式对比 {#与旧范式对比}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -407,7 +396,6 @@ let numbers = vec![1, 2, 3, 4, 5];
 let evens = async_filter(numbers, async |x: &i32| *x % 2 == 0).await;
 assert_eq!(evens, vec![2, 4]);
 ```
-
 > **与 Tokio 生态集成**：async closures 与 Tokio 的任务系统、通道系统天然配合。
 > 详见 [Tokio 异步运行时深度解析](../../knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md)。
 
@@ -439,7 +427,6 @@ async fn main() {
     }
 }
 ```
-
 ### 2. 使用 Stream {#2-使用-stream}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -456,7 +443,6 @@ async fn main() {
     }
 }
 ```
-
 ### 3. 背压处理 {#3-背压处理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -477,7 +463,6 @@ while let Some(value) = rx.recv().await {
     println!("接收: {}", value);
 }
 ```
-
 ---
 
 ## 🔧 错误处理 {#错误处理}
@@ -505,7 +490,6 @@ async fn main() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 ```
-
 ### Rust 1.95+ ControlFlow API 高级错误控制 {#rust-195-controlflow-api-高级错误控制}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -518,7 +502,6 @@ pub enum ControlFlow<B, C = ()> {
     Break(B),     // 提前终止，携带最终结果
 }
 ```
-
 #### 为什么使用 ControlFlow？ {#为什么使用-controlflow}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -659,7 +642,6 @@ async fn schedule_retry(items: Vec<(String, String)>) {
     println!("🔄 延迟重试 {} 个失败项", items.len());
 }
 ```
-
 #### 递归遍历与短路求值 {#递归遍历与短路求值}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -722,7 +704,6 @@ async fn find_node_by_value() {
     }
 }
 ```
-
 #### ControlFlow 与 Try  trait 集成 {#controlflow-与-try-trait-集成}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -768,7 +749,6 @@ async fn fold_all_errors<T, E>(
     }
 }
 ```
-
 #### 组合模式：ControlFlow 管道 {#组合模式controlflow-管道}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -850,7 +830,6 @@ impl Response {
     fn bad_request(msg: &str) -> Self { Self }
 }
 ```
-
 > **Rust 1.95+ 重要更新**：`ControlFlow` 现在实现了 `Iterator::try_fold` 的更高效版本，在迭代器链中使用 `ControlFlow` 进行短路操作不再分配额外内存，性能比 `Result` 方案提升 15-20%。
 
 ---
@@ -881,7 +860,6 @@ async fn with_timeout() -> Result<String, &'static str> {
     }
 }
 ```
-
 ### 模式 2: 限流与速率控制 {#模式-2-限流与速率控制}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -939,7 +917,6 @@ impl TokenBucket {
     }
 }
 ```
-
 ### 模式 3: 重试与退避策略 {#模式-3-重试与退避策略}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -988,7 +965,6 @@ where
     }
 }
 ```
-
 ### 模式 4: 批处理与缓冲 {#模式-4-批处理与缓冲}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -1045,7 +1021,6 @@ impl<T: Send + 'static> BatchProcessor<T> {
     }
 }
 ```
-
 ### 模式 5: 断路器模式 {#模式-5-断路器模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -1130,7 +1105,6 @@ impl CircuitBreaker {
     }
 }
 ```
-
 ---
 
 ## 🌍 真实应用场景 {#真实应用场景}
@@ -1244,7 +1218,6 @@ struct CreateUserRequest {
     email: String,
 }
 ```
-
 ### 场景 2: 数据处理管道 {#场景-2-数据处理管道}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -1375,7 +1348,6 @@ async fn store_batch(batch: &[ProcessedData]) -> Result<(), Box<dyn std::error::
     Ok(())
 }
 ```
-
 ### 场景 3: 实时消息系统 {#场景-3-实时消息系统}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -1511,7 +1483,6 @@ impl std::fmt::Display for Message {
 use std::collections::HashMap;
 use tokio::sync::RwLock;
 ```
-
 ---
 
 ## 🐛 常见问题与解决方案 {#常见问题与解决方案}
@@ -1545,7 +1516,6 @@ async fn blocking_operation() -> String {
     .unwrap()
 }
 ```
-
 ### 问题 2: Future 必须 Send {#问题-2-future-必须-send}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -1571,7 +1541,6 @@ async fn good_example() {
     });
 }
 ```
-
 ### 问题 3: 持有锁跨越 await 点 {#问题-3-持有锁跨越-await-点}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -1606,7 +1575,6 @@ async fn better_example(mutex: &std::sync::Mutex<String>) {
     some_async_operation().await;
 }
 ```
-
 ### 问题 4: 忘记处理 Cancel Safety {#问题-4-忘记处理-cancel-safety}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -1638,7 +1606,6 @@ async fn cancel_safe() {
     }
 }
 ```
-
 ### 问题 5: 递归 async 函数 {#问题-5-递归-async-函数}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1671,7 +1638,6 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 // #[async_recursion]
 // async fn recursive_with_crate(n: i32) -> i32 { ... }
 ```
-
 ---
 
 ## 📚 相关文档 {#相关文档}
@@ -1680,8 +1646,8 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 
 - [完整文档](../../crates/c06_async/README.md)
 - [异步编程指南](../../crates/c06_async/docs/tier_02_guides/README.md)
-- [Reactor 模式](../../crates/c06_async/docs/tier_04_advanced/01_异步并发模式.md)
-- [Actor 模式](../../crates/c06_async/docs/tier_02_guides/04_异步设计模式实践.md)
+- [Reactor 模式](../../crates/c06_async/docs/tier_04_advanced/01_async_concurrency_patterns.md)
+- [Actor 模式](../../crates/c06_async/docs/tier_02_guides/04_async_design_patterns_practice.md)
 - [异步状态机形式化](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) - Future/Poll 状态机形式化定义与证明
 
 ---
@@ -1689,7 +1655,6 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 ## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
 > **适用版本**: Rust 1.96.0+
 
 ### ControlFlow 在异步编程中的应用 {#controlflow-在异步编程中的应用}
@@ -1726,7 +1691,6 @@ async fn find_negative(items: &[i32]) -> Option<i32> {
     result.break_value()
 }
 ```
-
 ### Peekable 迭代器增强 {#peekable-迭代器增强}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -1746,7 +1710,6 @@ async fn parse_number(chars: &mut Peekable<impl Iterator<Item = char>>) -> Optio
     })
 }
 ```
-
 ### `cfg_select!` 在异步配置中的应用 {#cfg_select-在异步配置中的应用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -1787,7 +1750,6 @@ async fn create_runtime() -> tokio::runtime::Runtime {
         .unwrap()
 }
 ```
-
 #### 特性门控的异步模块加载 {#特性门控的异步模块加载}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -1806,7 +1768,6 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
     Ok(String::new())
 }
 ```
-
 > **项目示例**: `crates/c08_algorithms/src/rust_195_features.rs` 中展示了 `cfg_select!` 与异步代码的更多结合模式。
 > **相关文档**: [Rust 1.95 稳定特性全景](../../knowledge/06_ecosystem/emerging/03_rust_1_95.md)
 
@@ -1875,7 +1836,6 @@ graph TD
     E --> E1[Work Stealing]
     E --> E2[Reactor + Executor]
 ```
-
 ---
 
 ## 决策树：运行时选择 {#决策树运行时选择}
@@ -1892,7 +1852,6 @@ graph TD
     Q3 -->|Tokio 生态| A4[Tokio]
     Q3 -->|独立| A5[smol]
 ```
-
 ---
 
 ## 权威来源索引 {#权威来源索引}

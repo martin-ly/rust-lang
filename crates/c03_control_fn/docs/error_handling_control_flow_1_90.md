@@ -19,7 +19,6 @@ fn read_number(s: &str) -> Result<i32, String> {
     Ok(num)
 }
 ```
-
 要点：`?` 等价于 `match` 早退；自动从错误类型转换到函数返回错误类型。
 
 ## `FromResidual` 与跨类型传播
@@ -32,7 +31,6 @@ fn opt_chain(x: Option<i32>) -> Option<i32> {
     Some(x? + y)
 }
 ```
-
 ## `try` 块（稳定）
 
 将一段内部使用 `?` 的表达式整体化，便于在表达式位置编写错误传播逻辑。
@@ -43,7 +41,6 @@ fn sum3(a: Result<i32, &'static str>, b: Result<i32, &'static str>) -> Result<i3
     s
 }
 ```
-
 ## 边界设计建议
 
 - 对外 API 使用语义明确的错误类型（可结合 `thiserror`）；

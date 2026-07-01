@@ -39,7 +39,6 @@ fn main() {
     println!("{}", contents);
 }
 ```
-
 > **修正**:
 > **WASI**（WebAssembly System Interface）的**capability-based security**：
 >

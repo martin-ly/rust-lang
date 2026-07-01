@@ -79,7 +79,6 @@ cargo bench
 cargo clippy
 cargo fmt
 ```
-
 ### 3. 推荐的开发工具
 
 - **IDE**: VS Code + rust-analyzer 扩展
@@ -110,7 +109,6 @@ cd rust-lang
 # 3. 添加上游远程仓库
 git remote add upstream https://github.com/original-username/rust-lang.git
 ```
-
 ### 3. 创建功能分支
 
 ```bash
@@ -123,7 +121,6 @@ git checkout -b feature/your-feature-name
 # 或者
 git checkout -b fix/your-bug-fix
 ```
-
 ### 4. 开发代码
 
 在开发过程中，请遵循以下原则：
@@ -185,7 +182,6 @@ mod tests {
     }
 }
 ```
-
 ### 6. 提交代码
 
 ```bash
@@ -203,7 +199,6 @@ git commit -m "feat: add new sorting algorithm
 # 3. 推送到你的 Fork
 git push origin feature/your-feature-name
 ```
-
 ### 7. 创建 Pull Request
 
 1. 在 GitHub 上创建 Pull Request
@@ -266,7 +261,6 @@ async fn test_async_functionality() { /* ... */ }
 #[bench]
 fn benchmark_performance(b: &mut Bencher) { /* ... */ }
 ```
-
 ### 3. 测试数据
 
 - 使用各种大小的测试数据
@@ -307,7 +301,6 @@ fn benchmark_performance(b: &mut Bencher) { /* ... */ }
     ```rust
     // 代码示例
     ```
-
     ## 性能说明
 
     性能特征和优化建议
@@ -316,7 +309,6 @@ fn benchmark_performance(b: &mut Bencher) { /* ... */ }
 
     使用时的注意事项
 ````
-
 ---
 
 ## 🚀 性能优化贡献
@@ -360,7 +352,6 @@ mod benchmarks {
     criterion_main!(benches);
 }
 ```
-
 ---
 
 ## 🔍 代码审查流程

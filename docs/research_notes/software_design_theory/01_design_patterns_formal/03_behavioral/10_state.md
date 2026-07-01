@@ -1,33 +1,21 @@
 # State 形式化分析 {#state-形式化分析}
 
 > **概念族**: 软件设计 / 设计模式
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-12
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
-
 > **对齐说明**: 本文档已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
-
 >
-
 > **权威来源**: [Rust Design Patterns – Behavioral](https://rust-unofficial.github.io/patterns/patterns/behavioural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📊 目录 {#目录}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [State 形式化分析 {#state-形式化分析}](#state-形式化分析-state-形式化分析)
@@ -84,23 +72,15 @@
 ## 权威来源对照 {#权威来源对照}
 
 >
-
 > **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)** | **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** | **来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
 | 权威来源 | 对应章节 / 条款 | 与本模式关系 |
-
 | :--- | :--- | :--- |
-
 | Rust Design Patterns | [Behavioral Patterns – State](https://rust-unofficial.github.io/patterns/patterns/behavioural/state.html) | Rust 惯用实现与模式定位 |
-
 | Rust API Guidelines | [C-STATE / C-TRAIT-OBJ](https://rust-lang.github.io/api-guidelines/type-safety.html) | API 设计与类型安全约束 |
-
 | GoF *Design Patterns* | Chapter 5.8 (Behavioral Patterns – State) | 经典意图、结构与适用性 |
-
 | The Rust Programming Language | [Traits & Generics](https://doc.rust-lang.org/book/ch10-00-generics.html) | trait 抽象与多态 |
-
 | Rust Reference | [Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) | 动态分发与生命周期 |
-
 | Rustonomicon | [Safe Abstractions](https://doc.rust-lang.org/nomicon/) | `unsafe` 边界与 Safe 封装 |
 
 > **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权、借用检查与 trait 系统对实现方式的约束。
@@ -110,25 +90,19 @@
 ## 形式化定义 {#形式化定义}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def 1.1（State 结构） {#def-11state-结构}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 设 $C$ 为上下文类型，$S$ 为状态类型。State 是一个三元组 $\mathcal{ST} = (C, S, \mathit{transition})$，满足：
 
 - $C$ 持有当前状态：$C \supset S$
-
 - $\mathit{request}(c)$ 委托 $c.\mathit{state}.\mathit{handle}(c)$
-
 - 状态可转换：$\mathit{state}(c) \mapsto S'$，由当前状态决定下一状态
-
 - **状态机**：转移函数全定义，无非法状态
 
 **形式化表示**：
@@ -140,9 +114,7 @@ $$\mathcal{ST} = \langle C, S, \mathit{transition}: C \times S \rightarrow S' \r
 ### Axiom ST1（状态机全定义公理） {#axiom-st1状态机全定义公理}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s'$$
@@ -154,9 +126,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 ### 定理 ST-T1（枚举穷尽定理） {#定理-st-t1枚举穷尽定理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 枚举 + match 或类型状态（零开销）实现；由 [type_system_foundations](../../../type_theory/10_type_system_foundations.md) 穷尽匹配保证完备性。
@@ -166,23 +136,16 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 1. **枚举状态**：
 
    ```rust
-
    enum State { A, B, C }
-
    ```
-
 2. **穷尽匹配**：
 
    > 以下代码片段为示意性伪代码，非完整可编译示例。
 
    ```rust,ignore
-
    match state { State::A => ..., State::B => ..., State::C => ... }
-
    ```
-
    - 编译器检查所有变体被处理
-
 3. **完备性**：所有状态转换有定义
 
 由 type_system_foundations 穷尽匹配，得证。$\square$
@@ -192,9 +155,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 ### 定理 ST-T2（类型状态编译期消除定理） {#定理-st-t2类型状态编译期消除定理}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 类型状态模式（泛型相位）在编译期消除非法状态；如 `Locked` 与 `Unlocked` 为不同类型。
@@ -206,31 +167,23 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
    > 以下代码片段为示意性伪代码，非完整可编译示例。
 
    ```rust,ignore
-
    struct Config<State> { data: i32, _marker: PhantomData<State> }
 
    struct Locked;
 
    struct Unlocked;
-
    ```
-
 2. **状态特定方法**：
 
    > 以下代码片段为示意性伪代码，非完整可编译示例。
 
    ```rust,ignore
-
    impl Config<Locked> { fn unlock(self) -> Config<Unlocked> { ... } }
 
    impl Config<Unlocked> { fn lock(self) -> Config<Locked> { ... } fn get(&self) -> i32 { ... } }
-
    ```
-
 3. **编译期检查**：
-
    - `Config<Locked>::get()` 不存在 → 编译错误
-
    - 非法状态不可构造
 
 由 Rust 类型系统，得证。$\square$
@@ -240,9 +193,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 ### 推论 ST-C1（纯 Safe State） {#推论-st-c1纯-safe-state}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。
@@ -250,9 +201,7 @@ State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。
 **证明**：
 
 1. `enum` + `match`：纯 Safe
-
 2. 类型状态：泛型约束，纯 Safe
-
 3. 无 `unsafe` 块
 
 由 ST-T1、ST-T2 及 [safe_unsafe_matrix](../../05_boundary_system/10_safe_unsafe_matrix.md) SBM-T1，得证。$\square$
@@ -262,19 +211,13 @@ State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。
 ### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 内容 | 本页对应 |
-
 | :--- | :--- | :--- |
-
 | **概念定义层** | Def 1.1（State 结构）、Axiom ST1（转换全定义） | 上 |
-
 | **属性关系层** | Axiom ST1 $\rightarrow$ 定理 ST-T1/ST-T2 $\rightarrow$ 推论 ST-C1 | 上 |
-
 | **解释论证层** | ST-T1/ST-T2 完整证明；反例：非法状态转换 | §完整证明、§反例 |
 
 ---
@@ -282,17 +225,13 @@ State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。
 ## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
-
 enum State { A, B, C }
 
 
-
 struct Context { state: State }
-
 
 
 impl Context {
@@ -314,7 +253,6 @@ impl Context {
 }
 
 
-
 // 类型状态（零成本）
 
 struct Config<State> { data: i32, _marker: std::marker::PhantomData<State> }
@@ -322,7 +260,6 @@ struct Config<State> { data: i32, _marker: std::marker::PhantomData<State> }
 struct Locked;
 
 struct Unlocked;
-
 
 
 impl Config<Locked> {
@@ -334,7 +271,6 @@ impl Config<Locked> {
 }
 
 
-
 impl Config<Unlocked> {
 
     fn lock(self) -> Config<Locked> { Config { data: self.data, _marker: std::marker::PhantomData } }
@@ -342,27 +278,22 @@ impl Config<Unlocked> {
     fn get(&self) -> i32 { self.data }
 
 }
-
 ```
-
 ---
 
 ## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
-
 > **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
 
 以下示例已在 **Rust 1.96.0+ (Edition 2024)** 语义下校验，使用 `trait State、Box<dyn State>、状态转移` 等现代惯用法。
 
 ```rust
-
 trait State {
 
     fn handle(self: Box<Self>) -> Box<dyn State>;
 
 }
-
 
 
 struct Draft;
@@ -380,7 +311,6 @@ impl State for Draft {
 }
 
 
-
 struct Moderation;
 
 impl State for Moderation {
@@ -396,7 +326,6 @@ impl State for Moderation {
 }
 
 
-
 struct Published;
 
 impl State for Published {
@@ -404,7 +333,6 @@ impl State for Published {
     fn handle(self: Box<Self>) -> Box<dyn State> { self }
 
 }
-
 
 
 struct Post { state: Box<dyn State> }
@@ -418,7 +346,6 @@ impl Post {
 }
 
 
-
 fn main() {
 
     let mut post = Post::new();
@@ -428,21 +355,14 @@ fn main() {
     post.request_review();
 
 }
-
 ```
-
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
-
 | :--- | :--- | :--- |
-
 | `rust_2024` 保留字 | 新关键字（`gen`、`unsafe` 修饰等） | 避免将保留字用作标识符 |
-
 | 尾表达式路径匹配 | `match` / `if let` | 模式绑定语义更清晰 |
-
 | `impl Trait` 生命周期 | 复杂 trait bound | 生命周期捕获规则更严格 |
-
 | `&` / `&mut` 自动借用细化 | 方法调用 | 减少显式 `&` / `&mut` 转换 |
 
 ---
@@ -450,7 +370,6 @@ fn main() {
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
-
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
 
 ### 所有权约束 {#所有权约束}
@@ -468,17 +387,11 @@ fn main() {
 ### 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}
 
 | Rust 机制 | 本模式使用方式 | 保证 |
-
 | :--- | :--- | :--- |
-
 | 所有权转移 | `Box<dyn State>` 拥有当前状态 | 无双重释放 / 无悬垂 |
-
 | 借用检查 | `&mut self` 替换状态 | 无数据竞争 |
-
 | 生命周期 | 状态对象无外部生命周期依赖 | 引用有效性 |
-
 | trait / 关联类型 | State trait 统一状态接口 | 编译期多态安全 |
-
 | Send / Sync | `Box<dyn State + Send>` 支持跨线程 | 跨线程安全 |
 
 ---
@@ -486,19 +399,15 @@ fn main() {
 ## 完整证明 {#完整证明}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化论证链 {#形式化论证链}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
 Axiom ST1 (状态机全定义)
 
     ↓ 实现
@@ -516,39 +425,30 @@ enum + match / 类型状态
     ↓ 结论
 
 推论 ST-C1 (纯 Safe State)
-
 ```
-
 ---
 
 ## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
-
 > **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
 
 ### 不变式（Invariants） {#不变式invariants}
 
 1. 上下文在任一时刻只有一个状态对象。
-
 2. 状态转移由当前状态决定。
-
 3. 非法操作在类型或运行时不可达。
 
 ### 前置条件（Preconditions） {#前置条件preconditions}
 
 1. 状态 trait 已实现。
-
 2. 转移目标状态有效。
-
 3. 上下文持有状态所有权。
 
 ### 后置条件（Postconditions） {#后置条件postconditions}
 
 1. 旧状态被消费。
-
 2. 新状态替换旧状态。
-
 3. 后续行为由新状态决定。
 
 ### 安全边界（Safety Boundary） {#安全边界safety-boundary}
@@ -558,15 +458,12 @@ enum + match / 类型状态
 ### 形式化规约汇总 {#形式化规约汇总}
 
 ```text
-
 { I  }  // 不变式
 
 { P  }  method(...)
 
 { Q  }  // 后置条件
-
 ```
-
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -574,19 +471,13 @@ enum + match / 类型状态
 ## 典型场景 {#典型场景}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 说明 |
-
 | :--- | :--- |
-
 | 连接状态 | 未连接/连接中/已连接/断开 |
-
 | 订单状态 | 待支付/已支付/已发货/已完成 |
-
 | 门/锁 | Locked/Unlocked（类型状态） |
-
 | 解析器 | 解析阶段状态机 |
 
 ---
@@ -594,19 +485,15 @@ enum + match / 类型状态
 ## 完整场景示例：订单状态机 {#完整场景示例订单状态机}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
-
 #[derive(Clone, Copy, PartialEq)]
 
 enum OrderState { Pending, Paid, Shipped, Completed }
 
 
-
 struct Order { id: u64, state: OrderState }
-
 
 
 impl Order {
@@ -650,25 +537,18 @@ impl Order {
     }
 
 }
-
 ```
-
 ---
 
 ## 相关模式 {#相关模式}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 关系 |
-
 | :--- | :--- |
-
 | [Strategy](10_strategy.md) | 策略可替换；State 可转换；实现相似 |
-
 | [Memento](10_memento.md) | 保存/恢复状态 |
-
 | [Observer](10_observer.md) | 状态转换可通知观察者 |
 
 ---
@@ -676,17 +556,12 @@ impl Order {
 ## 实现变体 {#实现变体}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 变体 | 说明 | 适用 |
-
 | :--- | :--- | :--- |
-
 | 枚举 + match | 运行时状态；转换灵活 | 状态多、转换复杂 |
-
 | 类型状态（泛型相位） | 编译期；非法状态不可构造 | 门/锁、有限状态机 |
-
 | trait 状态对象 | `Box<dyn State>`；多态状态 | 状态实现各异、需动态扩展 |
 
 ---
@@ -694,7 +569,6 @@ impl Order {
 ## 反例：常见误用及编译器错误 {#反例常见误用及编译器错误}
 
 >
-
 > **来源: [Rust By Example – Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)** | **来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 
 ### 反例 1：状态转移后仍使用旧状态 {#反例-1状态转移后仍使用旧状态}
@@ -702,15 +576,12 @@ impl Order {
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
 ```rust,ignore
-
 let old = post.state;
 
 post.request_review();
 
 old.handle(); // 错误：old 已移动
-
 ```
-
 **编译器错误**：`use of moved value: old`。
 
 ### 反例 2：状态未实现 Send 导致跨线程失败 {#反例-2状态未实现-send-导致跨线程失败}
@@ -718,11 +589,8 @@ old.handle(); // 错误：old 已移动
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
 ```rust,ignore
-
 fn send_post(p: Post) -> impl FnOnce() { move || { p.request_review(); } }
-
 ```
-
 若 `Box<dyn State>` 未 `+ Send`，无法将闭包发送到线程。
 
 ### 反例 3：允许非法状态转移 {#反例-3允许非法状态转移}
@@ -730,15 +598,12 @@ fn send_post(p: Post) -> impl FnOnce() { move || { p.request_review(); } }
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
 ```rust,ignore
-
 impl Post {
 
     fn publish(&mut self) { self.state = Box::new(Published); } // 任意跳转
 
 }
-
 ```
-
 **风险**：绕过 Draft/Moderation 直接 Published，破坏业务规则。
 
 ---
@@ -746,11 +611,9 @@ impl Post {
 ## 选型决策树 {#选型决策树}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
-
 需要状态转换、非法状态不可达？
 
 ├── 是 → 编译期保证？ → 类型状态泛型
@@ -760,25 +623,18 @@ impl Post {
 ├── 需可替换算法？ → Strategy
 
 └── 需保存/恢复？ → Memento
-
 ```
-
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | GoF | Rust 对应 | 差异 |
-
 | :--- | :--- | :--- |
-
 | 状态类层次 | 枚举或 trait | 枚举更严格 |
-
 | 上下文委托 | 持有 State 字段 | 等价 |
-
 | 类型状态 | 泛型相位 | Rust 更强 |
 
 ---
@@ -786,17 +642,12 @@ impl Post {
 ## 边界 {#边界}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | 分类 |
-
 | :--- | :--- |
-
 | 安全 | 纯 Safe |
-
 | 支持 | 原生 |
-
 | 表达 | 等价 |
 
 ---
@@ -804,15 +655,11 @@ impl Post {
 ## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 1.93 特性 | 与本模式 | 说明 |
-
 | :--- | :--- | :--- |
-
 | 无新增影响 | — | 1.93 无影响 State 语义的变更 |
-
 | 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md) 特定项 |
 
 ---
@@ -820,11 +667,9 @@ impl Post {
 ## 思维导图 {#思维导图}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
-
 mindmap
 
   root((State<br/>状态模式))
@@ -862,19 +707,15 @@ mindmap
       门锁控制
 
       解析器
-
 ```
-
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
-
 graph LR
 
     S[State<br/>状态模式] -->|相似实现| SG[Strategy<br/>策略模式]
@@ -890,31 +731,21 @@ graph LR
     style M fill:#9C27B0,stroke:#6A1B9A,color:#fff
 
     style O fill:#9C27B0,stroke:#6A1B9A,color:#fff
-
 ```
-
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 自检项 | 状态 | 说明 |
-
 | :--- | :--- | :--- |
-
 | 形式化 | ✅ | Def 1.1、Axiom ST1、定理 ST-T1/T2（L3 完整证明）、推论 ST-C1 |
-
 | 代码 | ✅ | 可运行示例、订单状态机 |
-
 | 场景 | ✅ | 典型场景、完整示例 |
-
 | 反例 | ✅ | 非法状态转换 |
-
 | 衔接 | ✅ | ownership、CE-T2、match |
-
 | 权威对应 | ✅ | [GoF](../README.md)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../10_international_formal_verification_index.md) |
 
 ---
@@ -922,11 +753,8 @@ graph LR
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -940,15 +768,10 @@ graph LR
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -958,9 +781,7 @@ graph LR
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
@@ -968,9 +789,7 @@ graph LR
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - Rust 1.94 迁移指南
-
 - [Rust 1.94 特性速查
-
 - [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -982,9 +801,7 @@ graph LR
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -1000,11 +817,9 @@ graph LR
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [03_behavioral 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -1012,31 +827,18 @@ graph LR
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
-
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
-
 > **来源: [Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns)**
-
 > **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
-
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
-
 > **来源: [Coq Reference](https://coq.inria.fr/doc/)**
-
 > **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
-
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ---

@@ -45,7 +45,6 @@ Pass 2:  252 files,    449 replacements
 ----------------------------------------
 Total:  1261 files, 11,828 replacements
 ```
-
 覆盖目录：
 
 - `docs/`
@@ -80,7 +79,6 @@ Total:  1261 files, 11,828 replacements
 cargo check --workspace
 # Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.47s
 ```
-
 Markdown 变更未影响 Rust 构建。
 
 ---

@@ -41,7 +41,6 @@ fn main() {
     println!("cargo:rustc-link-search=native=/usr/local/lib");
 }
 ```
-
 ### 平台特定构建 {#平台特定构建}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -69,7 +68,6 @@ fn main() {
     }
 }
 ```
-
 ### 代码生成构建脚本 {#代码生成构建脚本}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -99,7 +97,6 @@ pub const FEATURES: &[&str] = &["std", "alloc"];
 // 在 src/lib.rs 中使用
 // include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 ```
-
 ### 常用构建工具 {#常用构建工具}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -132,7 +129,6 @@ cargo chef cook --release
 cargo install wasm-pack
 wasm-pack build --target web
 ```
-
 ### Makefile.toml (cargo-make) {#makefiletoml-cargo-make}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -166,7 +162,6 @@ dependencies = ["test"]
 [tasks.ci-flow]
 dependencies = ["format", "lint", "test", "build"]
 ```
-
 ### Justfile 示例 {#justfile-示例}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -208,7 +203,6 @@ clean:
 release: check
     @echo "Ready for release!"
 ```
-
 ### 交叉编译配置 {#交叉编译配置}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -229,7 +223,6 @@ runner = "wasm-bindgen-test-runner"
 [build]
 target = "x86_64-unknown-linux-musl"  # 静态链接
 ```
-
 ### 条件编译完整示例 {#条件编译完整示例}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -265,7 +258,6 @@ mod sync_impl {
     }
 }
 ```
-
 ---
 
 ## 形式化方法 {#形式化方法}

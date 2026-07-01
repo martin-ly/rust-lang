@@ -90,7 +90,6 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 认证详情
@@ -165,7 +164,6 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 ├── 已知问题列表
 └── 安全手册
 ```
-
 ### 发布周期
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -351,7 +349,6 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [案例研究2: NASA核心飞行系统(cFS) Rust集成](02_case_study_02_nasa_cfs_rust.md)
 - [案例研究3: 汽车ECU Rust应用](03_case_study_03_automotive_ecus.md)
 

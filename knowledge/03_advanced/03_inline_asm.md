@@ -23,7 +23,6 @@ fn main() {
     assert_eq!(x, 142);
 }
 ```
-
 > **修正**:
 > Rust 的内联汇编（`asm!` macro，1.59+ stable）要求精确的**约束**（constraints）：
 >

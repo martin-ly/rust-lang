@@ -90,7 +90,6 @@
   let s: &'static str = "hello";  // 字符串字面量: 'static
   let r: &'a str = s;             // ✅ 'static <: 'a
 ```
-
 > **子类型方向**: Rust 生命周期（Lifetimes）子类型是**反直觉的**——"长生命周期"是"短生命周期"的子类型。这与面向对象的类继承方向相反（Dog <: Animal，特化的是子类型）。
 > [来源: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html)]
 
@@ -116,7 +115,6 @@ graph LR
         K["例: &mut T, Cell<T>"] -->|"无子类型关系"| L["必须类型完全匹配"]
     end
 ```
-
 > **认知功能**: 此图展示变型三态的**核心定义**——协变保持子类型方向，逆变反转方向，不变消除关系。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch20-03-advanced-types.html)]
 > **记忆口诀**:
@@ -149,7 +147,6 @@ Rust 类型的变型规则:
   结构体/枚举: 根据字段位置推导
   泛型参数: 默认协变，可通过 PhantomData 控制
 ```
-
 > **规则洞察**: Rust 的变型规则遵循**安全原则**——任何允许修改内部值的类型（&mut, Cell, Mutex）都是不变的，因为协变/逆变可能导致类型安全的破坏。
 > [来源: [Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html)]
 
@@ -181,7 +178,6 @@ let r: &mut &'a str = &mut s;  // ❌ 编译错误！
 // 原因: 通过 &mut 可以修改指向的值
 // 如果允许转换，可能将短生命周期引用写入长生命周期位置
 ```
-
 > **技术要点**: `&mut T` 的不变性是 Rust **别名规则**（Aliasing Rules）的直接结果。如果 `&mut` 是协变的，可以通过子类型转换创建悬空 `&mut`。
 > [来源: [Rustonomicon — Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html)]
 
@@ -216,7 +212,6 @@ enum Option<'a, T> {
 
 // Option<'static, str> <: Option<'a, str> ✅
 ```
-
 > **推导规则**: 结构体（Struct）/枚举（Enum）对类型参数 X 的变型是其所有字段对 X 变型的**最小上界**——如果任何字段是不变的，整体就是不变的。
 > [来源: [Rust Reference — Variance](https://doc.rust-lang.org/reference/subtyping.html#variance)]
 
@@ -244,7 +239,6 @@ let f: fn(&'static str) = takes_a;  // ✅ fn(&'a str) <: fn(&'static str)
 fn returns_static() -> &'static str { "hello" }
 let f: fn() -> &'a str = returns_static;  // ✅ &'static str <: &'a str
 ```
-
 > **函数变型直觉**:
 >
 > - **参数逆变**: 函数能接受"更多"输入，就能替代"更少"输入的函数
@@ -284,7 +278,6 @@ let f: fn() -> &'a str = returns_static;  // ✅ &'static str <: &'a str
     则可以将 &mut &'a str 写入 &'static str 的位置
     然后写入短生命周期引用 → 悬空引用 → 内存不安全
 ```
-
 > **形式化洞察**: Rust 的变型规则是**类型安全的必要条件**，而非随意选择。每个类型的变型状态都经过严格推导，确保子类型转换不会引入内存不安全。
 > [来源: [RustBelt — Logical Relations](https://plv.mpi-sws.org/rustbelt/)]
 
@@ -305,7 +298,6 @@ graph TD
     style TRUE fill:#c8e6c9
     style FALSE fill:#ffebee
 ```
-
 > **认知功能**: 此决策树判断是否可以将泛型（Generics）容器设计为协变。核心判断标准是**内部可修改性**。
 > **使用建议**: 设计新类型时，如果类型允许内部修改（即使通过安全 API），则对相关类型参数使用不变变型。
 > **关键洞察**: `Cell<T>` 和 `&mut T` 都是不变的，不是因为它们有相似的 API，而是因为它们都允许**通过共享访问修改内部值**——这正是变型规则需要阻止的不安全模式。
@@ -338,7 +330,6 @@ graph TD
 ├── Rust 的类型推断不直接使用子类型约束
 ├── 而是通过生命周期包含关系（'a: 'b）间接处理
 ```
-
 > **边界要点**: 变型规则是 Rust 类型系统的**深层机制**——大多数开发者无需显式理解，但遇到生命周期相关编译错误时，变型知识是理解错误原因的关键。
 > [来源: [Rust Reference — Variance](https://doc.rust-lang.org/reference/subtyping.html)]
 
@@ -371,7 +362,6 @@ graph TD
   ✅ struct MyPtr<T>(*const T, PhantomData<Cell<T>>);
      // 显式标记为不变
 ```
-
 > **错误解析**: 大多数变型相关错误的核心信息是"类型/生命周期不匹配"。理解变型规则可以帮助快速定位：是生命周期问题、还是变型约束问题。
 > [来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/index.html)]
 
@@ -450,7 +440,6 @@ fn fixed() {
     let r: &'static str = s; // ✅ 'static 是任何生命周期的子类型
 }
 ```
-
 > **修正**: 生命周期在 Rust 中是**协变**（covariant）的——较长生命周期是较短生命周期的子类型。`'static: 'a` 对任何 `'a` 成立，因此 `&'static T` 可隐式转为 `&'a T`。但反过来不行：`&'a T` 不能转为 `&'static T`。这与面向对象中的子类型多态（`Dog` 是 `Animal` 的子类型）方向一致——"更具体/更长久"是"更通用/更短暂"的子类型。错误的生命周期假设会导致悬垂引用（Reference），编译器通过变异性检查阻止此类转换。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.2 边界测试：`UnsafeCell` 的不变性（编译错误）
@@ -474,7 +463,6 @@ fn fixed() {
     }
 }
 ```
-
 > **修正**: `UnsafeCell<T>` 对 `T` 是**不变**（invariant）的——不允许任何生命周期缩短或延长。这是因为 `UnsafeCell` 提供内部可变性，若允许协变，可能将短生命周期引用（Reference）存储在期望长生命周期的上下文中，导致悬垂引用。`&mut T` 对 `T` 也是不变的，`Box<T>` 对 `T` 是协变的，`*const T` 对 `T` 是协变的，`*mut T` 对 `T` 是不变的。变异性的选择是 Rust 类型系统安全性的关键设计。来源: [Rustonomicon]
 
 ### 10.3 边界测试：逆变与 `fn` 参数的不变性（编译错误）
@@ -493,7 +481,6 @@ fn main() {
     // 因此 fn(&str) 是 fn(&'static str) 的子类型（协变返回，逆变参数）
 }
 ```
-
 > **修正**: 函数指针 `fn(T) -> U` 的**变异性**（variance）：`T` 位置是**逆变**（contravariant），`U` 位置是**协变**（covariant）。逆变意味着：若 `A` 是 `B` 的子类型，则 `fn(B)` 是 `fn(A)` 的子类型。对生命周期而言，`&'static str` 比 `&'a str` 长（`'static: 'a`），因此 `&'static str` 是 `&'a str` 的子类型。逆变的参数位置意味着 `fn(&'a str)` 是 `fn(&'static str)` 的子类型——接受短引用的函数可以接受长引用（能力更强），反之不行。这与 Java 的泛型（Generics）（默认不变，`? super T` 逆变，`? extends T` 协变）或 Scala 的变型注解（`+T` 协变，`-T` 逆变）类似——Rust 的变异性是隐式的，由类型构造器的位置决定，开发者通常不直接操作，但在高级泛型代码中理解变异性至关重要。来源: [Rust Reference — Variance] · 来源: [The Rustonomicon]
 
 ### 10.4 边界测试：`UnsafeCell` 的不变性（编译错误/运行时 UB）
@@ -509,7 +496,6 @@ fn main() {
     println!("{} {}", r1, r2);
 }
 ```
-
 > **修正**: `UnsafeCell` 是 Rust 内部可变性的底层原语，它**关闭**了编译器的可变性和别名假设——通过 `UnsafeCell` 获取的指针可同时存在多个读写别名。但 `UnsafeCell` 本身不改变语义：从 `UnsafeCell` 获取的 `&mut T` 和 `&T` 仍不能同时活跃，除非使用 `UnsafeCell` 的特定 API（如 `Cell::get` 的按位复制）。上述代码是 UB，因为 `r1` 和 `r2` 同时存在。正确用法：`UnsafeCell` 应配合显式同步原语（`Mutex`、`RwLock`）或单线程运行时检查（`RefCell`）使用。`UnsafeCell` 的变异性是**不变**（invariant）的：不能将 `UnsafeCell<&'long T>` 赋值给 `UnsafeCell<&'short T>`，因为内部可变可能通过 `&mut` 改变引用的生命周期。这与 Java 的 `Object[]`（数组是协变的，运行时（Runtime） `ArrayStoreException`）或 C++ 的 `std::vector<T>`（无变异性概念）不同——Rust 的 `UnsafeCell` 不变性防止了通过内部可变性破坏子类型关系。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/concurrency.html)]
 
 ### 10.3 边界测试：逆变（contravariant）与函数参数的生命周期（编译错误）
@@ -527,7 +513,6 @@ fn main() {
     foo(f);
 }
 ```
-
 > **修正**: Rust 的生命周期**变型**（variance）：1) `&'a T` — 对 `'a` **协变**（covariant）：`'long <: 'short` 则 `&'long T <: &'short T`；2) `&mut 'a T` — 对 `'a` 协变，对 `T` **不变**（invariant）；3) `fn(T) -> U` — 对 `T` **逆变**（contravariant），对 `U` 协变。逆变意味着：若 `'a <: 'b`，则 `fn(&'b T) <: fn(&'a T)`（函数能接受更短生命周期的输入是更"通用"的）。`fn(&'static str)` 要求输入活得更长，因此**不能**替代 `fn(&'short str)`。变型是 Rust 类型系统的深层理论，影响 trait 对象、泛型约束和生命周期子类型。这与 Java 的泛型（通配符 `? super T` 显式逆变）或 C++ 的模板（无显式变型概念，依赖具体实例化）不同——Rust 的变型是隐式推导的，编译器自动计算。[来源: [Rust Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)] · [来源: [Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html)]
 
 ### 10.4 边界测试：协变/逆变与生命周期子类型的错误转换（编译错误）
@@ -541,7 +526,6 @@ fn extend_lifetime<'a>(r: &'a i32) -> &'static i32 {
 
 fn main() {}
 ```
-
 > **修正**: **生命周期子类型**：1) `'static: 'a`（`'static` 是所有生命周期的子类型，因为 `'static` 比任何 `'a` 都长）；2) `&'static T` 可安全转为 `&'a T`（协变）；3) `&'a T` 不能转为 `&'static T`（逆变/不変）。协变位置：1) `&'a T` — `'a` 和 `T` 都协变；2) `Box<T>`、`Vec<T>` — `T` 协变；3) `fn(T) -> U` — `T` 逆变，`U` 协变。逆变：1) `fn(&'a T)` 的参数位置 — `'a` 越长，函数越具体（子类型关系反转）；2) `&mut T` — `T` 不变（同时读写要求类型完全相同）。这与 Java 的泛型协变（`List<? extends T>`，通配符）或 C# 的 `in`/`out` 关键字（显式声明协变/逆变）不同——Rust 的协变/逆变是隐式的，由类型构造器的位置决定。[来源: [Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.4 边界测试：函数重复定义
@@ -552,7 +536,6 @@ fn duplicate() {}
 
 fn main() {}
 ```
-
 > **修正**: **名称唯一性**：1) 同一作用域内不能有两个同名函数；2) trait 方法可同名（通过 trait 区分）；3) 重载（overloading）不支持（除 trait 外）。
 
 ## 嵌入式测验（Embedded Quiz）
@@ -628,9 +611,7 @@ fn main() {}
 | 子类型与变型：Rust 类型系统中的协变、逆变与不变 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 子类型与变型：Rust 类型系统中的协变、逆变与不变 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 子类型与变型：Rust 类型系统中的协变、逆变与不变 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 子类型与变型：Rust 类型系统中的协变、逆变与不变 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

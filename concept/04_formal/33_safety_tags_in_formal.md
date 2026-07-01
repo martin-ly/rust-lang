@@ -16,7 +16,6 @@
 > **后置延伸**: [BorrowSanitizer](34_borrow_sanitizer_in_formal.md) · [AutoVerus](24_autoverus.md) · [Rust for Linux 案例](../07_future/19_rust_for_linux.md)
 >
 > **来源**: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [Safety Tags 研究仓库](https://github.com/safer-rust/safety-tags) · [safety-tool slides](https://os-checker.github.io/slides/safety-tags) · [Rust for Linux Safety Standard](https://rust-for-linux.com/)
-
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
@@ -51,7 +50,6 @@ pub unsafe fn read<T>(src: *const T) -> T {
     // ...
 }
 ```
-
 每个标签由**键**（标准标签名）和**人类可读说明**组成。键的集合由 Rust Project 标准化，形成共享词汇表。
 
 ### 2.2 调用点消除标签：`#[safety::checked(...)]`
@@ -65,7 +63,6 @@ let v = unsafe {
     read(r)
 };
 ```
-
 调用者必须在 `#[safety::checked(...)]` 中勾选被调用函数要求的所有标签。工具可据此检查：
 
 - 是否遗漏标签；

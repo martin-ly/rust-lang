@@ -64,7 +64,6 @@
    - ✅ 进程监控和资源统计
    - ✅ 进程组管理
    - ✅ 进程构建器模式
-
 2. **IPC通信模块** (`src/inter_process_communication/`)
    - ✅ 消息队列实现
    - ✅ 共享内存管理
@@ -72,7 +71,6 @@
    - ✅ Socket通信（TCP/Unix域）
    - ✅ 文件系统通道
    - ✅ IPC管理器统一接口
-
 3. **同步原语模块** (`src/concurrency/`)
    - ✅ 互斥锁（Mutex）
    - ✅ 读写锁（RwLock）
@@ -80,20 +78,17 @@
    - ✅ 条件变量（CondVar）
    - ✅ 屏障（Barrier）
    - ✅ 同步管理器
-
 4. **进程池模块** (`src/process/pool.rs`)
    - ✅ 进程池配置和初始化
    - ✅ 负载均衡策略
    - ✅ 自动扩展配置
    - ✅ 健康检查和进程回收
    - ✅ 统计信息收集
-
 5. **异步运行时模块** (`src/async_runtime/`)
    - ✅ 异步进程管理器
    - ✅ 异步进程池
    - ✅ 异步任务调度器
    - ✅ Tokio集成支持
-
 6. **类型定义和错误处理** (`src/types/`, `src/error/`)
    - ✅ 完整的类型系统
    - ✅ 统一的错误处理
@@ -107,7 +102,6 @@
    - ✅ `sync_demo` - 同步原语演示
    - ✅ `process_pool_demo` - 进程池演示
    - ✅ `async_demo` - 异步功能演示
-
 2. **测试覆盖**
    - ✅ 单元测试
    - ✅ 集成测试
@@ -173,14 +167,12 @@ unix           启用 Unix 平台增强（nix）              nix
 windows        启用 Windows 平台增强                  -
 full           组合特性（std+async+unix+windows）     上述全部
 ```
-
 启用方式示例：
 
 ```bash
 cargo build --features async
 cargo build --features full
 ```
-
 ### 二进制清单（与 Cargo.toml 对齐）
 
 ```text
@@ -196,7 +188,6 @@ group_demo          进程组演示
 async_stdio_demo    异步标准IO占位（需 --features async）
 group_control_demo  进程组控制演示
 ```
-
 ### 基础进程管理
 
 ```rust
@@ -217,7 +208,6 @@ let config = ProcessConfig {
 let pid = manager.spawn(config)?;
 println!("进程启动成功，PID: {}", pid);
 ```
-
 ### 进程池使用
 
 ```rust
@@ -240,7 +230,6 @@ let pid = pool.get_process()?;
 // 使用进程...
 pool.release_process(pid)?;
 ```
-
 ### 异步操作
 
 ```rust
@@ -255,7 +244,6 @@ async fn main() -> Result<()> {
     Ok(())
 }
 ```
-
 ## 项目结构
 
 ```text
@@ -298,7 +286,6 @@ crates/c07_process/
 ├── Cargo.toml                 # 项目配置
 └── README.md                  # 项目说明
 ```
-
 ## 部署和使用
 
 ### 系统要求
@@ -333,7 +320,6 @@ cargo test
 # 运行性能基准测试
 cargo bench
 ```
-
 ```powershell
 # Windows PowerShell（工作区根目录）
 git clone <repository>
@@ -349,7 +335,6 @@ cargo test
 # 运行性能基准测试
 cargo bench
 ```
-
 运行二进制示例：
 
 ```bash
@@ -360,7 +345,6 @@ cargo run --bin sync_demo
 cargo run --bin process_pool_demo
 cargo run --bin async_demo --features async
 ```
-
 ```powershell
 # 在 crates/c07_process 目录下
 cargo run --bin process_demo
@@ -369,19 +353,16 @@ cargo run --bin sync_demo
 cargo run --bin process_pool_demo
 cargo run --bin async_demo --features async
 ```
-
 从工作区根目录运行（可选）：
 
 ```bash
 cargo run -p c07_process --bin process_demo
 cargo run -p c07_process --bin async_demo --features async
 ```
-
 ```powershell
 cargo run -p c07_process --bin process_demo
 cargo run -p c07_process --bin async_demo --features async
 ```
-
 ### 配置说明
 
 - **进程池配置**：可调整进程数量、超时时间、负载均衡策略

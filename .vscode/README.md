@@ -11,7 +11,6 @@
 1. **Markdownlint** (必需)
    - ID: `DavidAnson.vscode-markdownlint`
    - 功能：Markdown 格式检查和自动修复
-
 2. **Markdown All in One** (推荐)
    - ID: `yzhang.markdown-all-in-one`
    - 功能：TOC 生成、快捷键、列表自动续写等
@@ -85,7 +84,6 @@ Markdownlint 规则配置（项目根目录）：
 <!-- ✅ 允许长行（代码块、链接等） -->
 这是一个很长很长很长的行...
 ```
-
 ### 自动修复的问题
 
 - ❌ 行尾空格 → ✅ 自动删除
@@ -117,7 +115,6 @@ Markdownlint 规则配置（项目根目录）：
   "MD规则编号": false
 }
 ```
-
 ### 某个文件想要跳过检查
 
 在文件开头添加注释：
@@ -127,7 +124,6 @@ Markdownlint 规则配置（项目根目录）：
 文件内容
 <!-- markdownlint-enable -->
 ```
-
 或禁用特定规则：
 
 ```markdown
@@ -135,7 +131,6 @@ Markdownlint 规则配置（项目根目录）：
 <details>内容</details>
 <!-- markdownlint-enable MD033 -->
 ```
-
 ## 📚 参考文档
 
 - [Markdownlint 规则列表](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md)

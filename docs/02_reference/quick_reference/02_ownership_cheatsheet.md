@@ -102,7 +102,6 @@ mindmap
       无数据竞争
       无内存泄漏
 ```
-
 ---
 
 ## 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}
@@ -130,7 +129,6 @@ mindmap
 2. 同一时刻只能有一个可变借用，或多个不可变借用
 3. 所有者离开作用域，值被自动 drop
 ```
-
 ### 所有权转移决策树 {#所有权转移决策树}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -153,7 +151,6 @@ graph TD
     L -->|单线程| M[Rc<T>]
     L -->|多线程| N[Arc<T>]
 ```
-
 ---
 
 ## 🎯 常见模式速查 {#常见模式速查}
@@ -172,7 +169,6 @@ let s2 = s1;  // s1 失效，所有权转移给 s2
 // println!("{}", s1); // ❌ 编译错误
 println!("{}", s2);    // ✅ OK
 ```
-
 **何时发生**:
 
 - 赋值: `let b = a;`
@@ -196,7 +192,6 @@ let s = String::from("hello");
 process(&s);  // 借用
 println!("{}", s);  // ✅ s 仍然有效
 ```
-
 **规则**:
 
 - ✅ 可以有多个不可变借用
@@ -220,7 +215,6 @@ let mut s = String::from("hello");
 modify(&mut s);
 println!("{}", s);  // "hello world"
 ```
-
 **规则**:
 
 - ✅ 可以修改数据
@@ -240,7 +234,6 @@ let s1 = String::from("hello");
 let s2 = s1.clone();  // 显式深拷贝
 println!("{} {}", s1, s2);  // ✅ 都有效
 ```
-
 **代价**: 堆内存分配，性能开销
 
 ---
@@ -256,7 +249,6 @@ let x = 5;
 let y = x;  // i32 实现了 Copy
 println!("{} {}", x, y);  // ✅ 都有效
 ```
-
 **实现 Copy 的类型**:
 
 - 所有整数类型: `i32`, `u64`, etc.
@@ -289,7 +281,6 @@ println!("{} {}", x, y);  // ✅ 都有效
 └─ 需要自引用结构？
    └─ Pin<Box<T>>
 ```
-
 ---
 
 ## ⚡ 常见错误与解决 {#常见错误与解决}
@@ -307,7 +298,6 @@ let r1 = &s;
 let r2 = &mut s;  // 错误：不可变借用期间不能可变借用
 println!("{}", r1);
 ```
-
 ```rust
 // ✅ 解决
 let mut s = String::from("hello");
@@ -316,7 +306,6 @@ println!("{}", r1);  // r1 的作用域结束
 let r2 = &mut s;     // ✅ OK
 s.push_str(" world");
 ```
-
 ---
 
 ### 错误 2: 悬垂引用 {#错误-2-悬垂引用}
@@ -330,7 +319,6 @@ fn dangle() -> &String {
     &s  // s 将被 drop，引用无效
 }
 ```
-
 ```rust
 // ✅ 解决方案 1: 返回所有权
 fn no_dangle() -> String {
@@ -343,7 +331,6 @@ fn no_dangle2<'a>(input: &'a String) -> &'a String {
     input
 }
 ```
-
 ---
 
 ### 错误 3: 循环中的借用 {#错误-3-循环中的借用}
@@ -357,14 +344,12 @@ for i in &v {
     v.push(*i);  // 错误：遍历时不能修改
 }
 ```
-
 ```rust
 // ✅ 解决
 let mut v = vec![1, 2, 3];
 let to_add: Vec<_> = v.iter().map(|x| *x).collect();
 v.extend(to_add);
 ```
-
 ---
 
 ## 🏗️ 智能指针速查 {#智能指针速查}
@@ -379,7 +364,6 @@ v.extend(to_add);
 let b = Box::new(5);
 // 用途：递归类型、大型数据、trait 对象
 ```
-
 ### `Rc<T>` - 引用计数（单线程） {#rct---引用计数单线程}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -390,7 +374,6 @@ let a = Rc::new(5);
 let b = Rc::clone(&a);  // 引用计数 +1
 // 用途：多重所有权（单线程）
 ```
-
 ### `Arc<T>` - 原子引用计数（多线程） {#arct---原子引用计数多线程}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -401,7 +384,6 @@ let a = Arc::new(5);
 let b = Arc::clone(&a);  // 线程安全的引用计数
 // 用途：多线程共享数据
 ```
-
 ### `RefCell<T>` - 内部可变性（单线程） {#refcellt---内部可变性单线程}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -412,7 +394,6 @@ let data = RefCell::new(5);
 *data.borrow_mut() += 1;
 // 用途：运行时借用检查
 ```
-
 ### `Mutex<T>` - 互斥锁（多线程） {#mutext---互斥锁多线程}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -426,7 +407,6 @@ let m = Mutex::new(5);
 }
 // 用途：多线程可变共享
 ```
-
 ---
 
 ## 🎓 生命周期速查 {#生命周期速查}
@@ -442,7 +422,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
-
 ### 生命周期省略规则 {#生命周期省略规则}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -453,19 +432,16 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
    fn foo(x: &i32)          // fn foo<'a>(x: &'a i32)
    fn foo(x: &i32, y: &i32) // fn foo<'a, 'b>(x: &'a i32, y: &'b i32)
    ```
-
 2. **规则 2**: 单参数时，返回值使用相同生命周期
 
    ```rust,ignore
    fn foo(x: &i32) -> &i32  // fn foo<'a>(x: &'a i32) -> &'a i32
    ```
-
 3. **规则 3**: 方法中，返回值使用 `&self` 的生命周期
 
    ```rust,ignore
    fn method(&self) -> &str // fn method<'a>(&'a self) -> &'a str
    ```
-
 ---
 
 ## 📊 性能提示 {#性能提示}
@@ -481,20 +457,17 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
    ```rust,ignore
    fn process(s: &String) { ... }  // ✅ 高效
    ```
-
 2. **使用切片**
 
    ```rust,ignore
    fn first_word(s: &str) -> &str { ... }  // ✅ 灵活
    ```
-
 3. **避免不必要的 clone**
 
    ```rust,ignore
    let s = String::from("hello");
    process(&s);  // ✅ 而非 process(s.clone())
    ```
-
 ### ⚠️ 低效模式 {#低效模式}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -504,13 +477,11 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
    ```rust,ignore
    let s2 = s1.clone();  // ⚠️ 堆分配开销
    ```
-
 2. **过度使用 Rc/Arc**
 
    ```rust,ignore
    Rc<Rc<Vec<String>>>  // ⚠️ 双重引用计数
    ```
-
 ---
 
 ## 🚫 反例速查 {#反例速查}
@@ -528,7 +499,6 @@ let s = String::from("hello");
 let s2 = s;  // 所有权转移
 println!("{}", s);  // ❌ 编译错误：s 已失效
 ```
-
 **原因**: 值移动后原变量不可用。
 
 **修正**:
@@ -538,7 +508,6 @@ let s = String::from("hello");
 let s2 = s.clone();  // 或借用 &s
 println!("{}", s);
 ```
-
 ---
 
 ### 反例 2: 可变借用与不可变借用冲突 {#反例-2-可变借用与不可变借用冲突}
@@ -552,7 +521,6 @@ let mut v = vec![1, 2, 3];
 let r1 = &v;
 let r2 = &mut v;  // ❌ 编译错误：已有不可变借用
 ```
-
 **原因**: 同一时刻不能同时存在可变借用和不可变借用。
 
 **修正**:
@@ -565,7 +533,6 @@ let mut v = vec![1, 2, 3];
 }
 let r2 = &mut v;  // r1 已离开作用域
 ```
-
 ---
 
 ### 反例 3: 返回悬垂引用 {#反例-3-返回悬垂引用}
@@ -580,7 +547,6 @@ fn dangle() -> &String {
     &s  // ❌ 编译错误：s 即将被 drop
 }
 ```
-
 **原因**: 引用不能 outlive 所有者。
 
 **修正**:
@@ -591,7 +557,6 @@ fn no_dangle() -> String {
     s  // 转移所有权
 }
 ```
-
 ---
 
 ## 🔗 快速跳转 {#快速跳转}
@@ -602,9 +567,9 @@ fn no_dangle() -> String {
 
 > **来源: [ACM](https://dl.acm.org/)**
 
-- [完整所有权教程](../../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/01_所有权快速入门.md)
-- [借用检查器详解](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md)
-- [智能指针 API](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
+- [完整所有权教程](../../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/01_ownership_quick_start.md)
+- [借用检查器详解](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_borrow_checker_in_depth.md)
+- [智能指针 API](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_smart_pointer_api_reference.md)
 
 ### 代码示例 {#代码示例}
 
@@ -617,8 +582,8 @@ fn no_dangle() -> String {
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-- [类型系统理论](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/06_类型系统理论.md)
-- [形式化验证](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/07_形式化验证.md)
+- [类型系统理论](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/06_type_system_theory.md)
+- [形式化验证](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/07_formal_verification.md)
 - [所有权模型形式化](../../research_notes/formal_methods/10_ownership_model.md) — Def 2.1–2.3、定理 T2.1–T2.5
 - [借用检查器证明](../../research_notes/formal_methods/10_borrow_checker_proof.md) — 定理 3.1–3.3、引理 L3.1–L3.4
 - 生命周期形式化 — Def 1.1–1.4、定理 T1.1–T1.3
@@ -665,7 +630,6 @@ fn main() {
     // args 仍然可用，config.host 拥有独立所有权
 }
 ```
-
 ### 场景 2: 缓存实现 {#场景-2-缓存实现}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -705,7 +669,6 @@ fn main() {
     }
 }
 ```
-
 ### 场景 3: 读取文件并处理 {#场景-3-读取文件并处理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -734,7 +697,6 @@ fn main() {
     }
 }
 ```
-
 ---
 
 ## ⚠️ 边界情况 {#边界情况}
@@ -761,7 +723,6 @@ struct SafeSelfReferential {
     _pin: PhantomPinned,
 }
 ```
-
 ### 边界 2: 跨线程所有权 {#边界-2-跨线程所有权}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -786,7 +747,6 @@ fn main() {
     // data 不再可用
 }
 ```
-
 ### 边界 3: 循环引用与内存泄漏 {#边界-3-循环引用与内存泄漏}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -820,7 +780,6 @@ fn main() {
     println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
 }
 ```
-
 ---
 
 ---
@@ -848,7 +807,6 @@ for i in 0..1000 {
     map.insert(i, format!("value_{}", i));
 }
 ```
-
 **影响**:
 
 - 异步场景下的内存分配性能提升
@@ -952,7 +910,6 @@ pub fn get_config() -> Option<&'static Config> {
 let phi = f64::consts::GOLDEN_RATIO;
 let gamma = f64::consts::EULER_GAMMA;
 ```
-
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)

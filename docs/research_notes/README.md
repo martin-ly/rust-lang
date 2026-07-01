@@ -1,7 +1,6 @@
 # 🔬 Rust 研究笔记 {#rust-研究笔记}
 >
 > **概念族**: 元/导航/索引
-
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -108,7 +107,6 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 # 例如：10_00_organization_and_navigation、10_proof_index、10_authoritative_alignment_guide、 {#例如10_00_organization_and_navigation10_proof_index10_authoritative_alignment_guide}
 # 10_international_formal_verification_index、10_authoritative_alignment_gap_matrix 等 {#10_international_formal_verification_index10_authoritative_alignment_gap_matrix-等}
 ```
-
 ---
 
 ## 🎯 研究目标 {#研究目标}
@@ -306,24 +304,19 @@ research_notes/                  # 主索引、组织说明与正在升级的核
    - 创建日期和最后更新日期
    - Rust 版本
    - 状态（进行中/已完成）
-
 2. **研究目标**
    - 明确的研究问题
    - 预期成果
-
 3. **理论基础**
    - 相关数学/逻辑基础
    - 形式化定义
-
 4. **方法与实践**
    - 研究方法
    - 实验设计
    - 代码示例
-
 5. **结果与分析**
    - 研究发现
    - 结论与展望
-
 6. **参考文献**
    - 相关论文
    - 官方文档
@@ -426,17 +419,14 @@ research_notes/                  # 主索引、组织说明与正在升级的核
    - 大型 DNS 记录处理机制研究
    - 递归名称服务器支持改进
    - 相关笔记: [故障排查指南](../05_guides/05_troubleshooting_guide.md)
-
 2. **全局分配器线程本地存储支持研究**
    - 全局分配器使用 `thread_local!` 的机制分析
    - 重入问题避免策略研究
    - 相关笔记: [并发性能研究](experiments/10_concurrency_performance.md)
-
 3. **MaybeUninit API 增强研究**
    - 新增安全方法的类型理论分析
    - 未初始化内存的安全性形式化
    - 相关笔记: [类型系统基础](type_theory/10_type_system_foundations.md)、[高级类型特性](type_theory/10_advanced_types.md)
-
 4. **`cfg` 属性在 `asm!` 行上研究**
    - 内联汇编条件编译的改进
    - 平台特定代码简化策略
@@ -460,17 +450,14 @@ research_notes/                  # 主索引、组织说明与正在升级的核
    - 性能提升 15-20% 的机制分析
    - 异步迭代器链式操作优化研究
    - 相关笔记: [并发性能研究](experiments/10_concurrency_performance.md)
-
 2. **const 上下文增强研究**
    - 对非静态常量引用的形式化分析
    - const 泛型配置系统研究
    - 相关笔记: [类型系统基础](type_theory/10_type_system_foundations.md)
-
 3. **JIT 编译器优化研究**
    - 异步代码性能提升机制
    - 内联优化策略分析
    - 相关笔记: [编译器优化](experiments/10_compiler_optimizations.md)
-
 4. **内存分配优化研究**
    - 小对象分配性能提升 25-30% 分析
    - 内存碎片减少机制研究
@@ -548,7 +535,6 @@ grep -r "关键词" docs/research_notes/
 # 查找特定主题 {#查找特定主题}
 find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 ```
-
 ---
 
 ## 📞 联系方式 {#联系方式}

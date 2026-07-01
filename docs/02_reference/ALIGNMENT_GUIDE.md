@@ -126,7 +126,6 @@ struct Example {
 assert_eq!(align_of::<Example>(), 8);
 assert_eq!(size_of::<Example>(), 24);
 ```
-
 ### 2.2 常用 API {#22-常用-api}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -174,7 +173,6 @@ struct CacheAligned { data: [u8; 64]; }
 #[repr(C, align(32))]
 struct CLayoutAligned { x: u64; y: u64; }
 ```
-
 ### 2.4 字段重排序优化 {#24-字段重排序优化}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -188,7 +186,6 @@ struct Bad { a: u8; b: u64; c: u8; }  // 24 bytes
 // ✅ 大字段前置减少填充
 struct Good { b: u64; a: u8; c: u8; } // 16 bytes
 ```
-
 ### 2.5 对齐计算（Rust 1.92+） {#25-对齐计算rust-192}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -210,7 +207,6 @@ fn align_up_div_ceil(size: usize, alignment: NonZeroUsize) -> usize {
     size.div_ceil(alignment).get() * alignment.get()
 }
 ```
-
 ### 2.6 Layout API（自定义分配） {#26-layout-api自定义分配}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -231,7 +227,6 @@ let padding = layout.padding_needed_for(Layout::new::<u64>());
 // 将布局对齐到更大边界
 let aligned = layout.align_to(Layout::new::<u64>().align()).unwrap();
 ```
-
 *参考*: [std::alloc::Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html)
 
 ### 2.7 平台差异 {#27-平台差异}
@@ -261,7 +256,6 @@ println!("{:<10}", x);   // 左对齐
 println!("{:^10}", x);   // 居中对齐
 println!("{:*>10}", x);  // 右对齐，* 填充
 ```
-
 ---
 
 ## 四、unsafe 与对齐 {#四unsafe-与对齐}
@@ -299,7 +293,6 @@ fn parse_u64_unaligned(bytes: &[u8], offset: usize) -> u64 {
     unsafe { ptr::read_unaligned(ptr) }  // 允许未对齐，比 read 慢
 }
 ```
-
 ### 4.3 transmute 对齐约束 {#43-transmute-对齐约束}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -319,7 +312,6 @@ let b: u32 = unsafe { std::mem::transmute::<u32, u32>(a) };
 
 // 未对齐时用 read_unaligned，不要用 transmute
 ```
-
 ---
 
 ## 五、缓存行对齐与并发 {#五缓存行对齐与并发}
@@ -340,7 +332,6 @@ struct CacheLinePadded {
     _pad: [u8; 56],  // 8 + 56 = 64 字节，占满缓存行
 }
 ```
-
 ### 5.2 数据局部性：AoS vs SoA {#52-数据局部性aos-vs-soa}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -351,7 +342,7 @@ struct CacheLinePadded {
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **SoA** (Structure of Arrays) | `positions_x: Vec<f32>`, `velocities_x: Vec<f32>` 等 | 批量处理单字段，通常快 2–4x |
 
-*详见* [c01 09_性能优化参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/09_性能优化参考.md#32-缓存友好设计)
+*详见* [c01 09_性能优化参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/09_performance_optimization_reference.md#32-缓存友好设计)
 
 ### 5.3 工具验证与量化数据 {#53-工具验证与量化数据}
 >
@@ -392,7 +383,6 @@ struct CacheLinePadded {
    ├─ 多线程共享、避免伪共享？ → #[repr(align(64))] + 填充
    └─ 组合需求？ → #[repr(C, align(N))]
 ```
-
 | 场景 | 推荐 |
 | :--- | :--- | :--- | :--- | :--- |
 | C 互操作、FFI | `#[repr(C)]` |
@@ -412,9 +402,9 @@ struct CacheLinePadded {
 
 | 主题 | 路径 |
 | :--- | :--- | :--- | :--- | :--- |
-| 性能优化参考 | [c01/tier_03/09_性能优化参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/09_性能优化参考.md) |
-| 内存安全参考 | [c01/tier_03/08_内存安全参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/08_内存安全参考.md) |
-| 缓存行对齐 | [c05/02_系统编程优化](../../crates/c05_threads/docs/tier_04_advanced/02_系统编程优化.md#51-缓存行对齐) |
+| 性能优化参考 | [c01/tier_03/09_性能优化参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/09_performance_optimization_reference.md) |
+| 内存安全参考 | [c01/tier_03/08_内存安全参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/08_memory_safety_reference.md) |
+| 缓存行对齐 | [c05/02_系统编程优化](../../crates/c05_threads/docs/tier_04_advanced/02_systems_programming_optimization.md#51-缓存行对齐) |
 | 无锁编程 | [c05/04_lock_free_programming](../../crates/c05_threads/docs/04_lock_free_programming.md) |
 | 格式化对齐 | [strings_formatting_cheatsheet](quick_reference/02_strings_formatting_cheatsheet.md) |
 

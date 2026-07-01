@@ -1,7 +1,6 @@
 # Rust 2024 Edition (1.85.0+ stable)
 
 > **内容重叠提示**: 本文与 [`knowledge/06_ecosystem/02_edition_2024.md`](../../knowledge/06_ecosystem/02_edition_2024.md) 内容高度重叠。`knowledge/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
-
 > **EN**: Rust 2024 Edition Preview and Migration Notes
 > **Summary**: Rust 2024 Edition, stabilized in Rust 1.85.0, introduces language improvements including the reserved `gen` keyword, async closures, never type fallback, lifetime capture in `impl Trait`, and narrowed `if let` temporary scopes. This concept previews the major changes, explains how the edition mechanism lets crates opt into new syntax without breaking dependencies, and provides migration guidance using `cargo fix --edition` from the 2021 Edition.
 >
@@ -50,7 +49,6 @@ cargo fix --edition
 # 4. 更新 Cargo.toml 中的 edition 字段
 # edition = "2024"
 ```
-
 ---
 
 ## 四、权威来源

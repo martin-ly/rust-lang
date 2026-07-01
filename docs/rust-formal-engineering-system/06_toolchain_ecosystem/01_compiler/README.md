@@ -32,7 +32,6 @@
 // 7. 代码生成：MIR → LLVM IR
 // 8. LLVM 优化和代码生成
 ```
-
 ### 编译器属性 {#编译器属性}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -70,7 +69,6 @@ extern "C" {
     fn c_function();
 }
 ```
-
 ### 编译器标志 {#编译器标志}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -94,7 +92,6 @@ rustc -C codegen-units=1  # 单代码生成单元（最大优化）
 rustc -C target-cpu=native  # 针对本机 CPU
 rustc -C target-cpu=haswell # 针对特定 CPU
 ```
-
 ### 条件编译示例 {#条件编译示例}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -125,7 +122,6 @@ pub fn advanced_feature() {
 // 编译时断言
 const _: () = assert!(std::mem::size_of::<usize>() == 8, "64-bit only");
 ```
-
 ### 过程宏示例 {#过程宏示例}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -160,7 +156,6 @@ pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
     item
 }
 ```
-
 ### 编译期计算 {#编译期计算}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -186,7 +181,6 @@ impl<T, const N: usize> Array<T, N> {
     }
 }
 ```
-
 ---
 
 ## 形式化方法 {#形式化方法}

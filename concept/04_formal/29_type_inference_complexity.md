@@ -20,7 +20,6 @@
 > [Rustc Dev Guide — Type Inference](https://rustc-dev-guide.rust-lang.org/type-inference.html) ·
 > [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html)
 >
-
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md)
 > **后置概念**: N/A
 ---
@@ -118,7 +117,6 @@ unify(α, τ)            = {α ↦ τ}        （α 不在 τ 中，出现检查
 unify(T<A1,...>, T<B1,...>) = unify(A1,B1) ∪ ...
 unify(τ1, τ2)          = 失败           （构造器冲突）
 ```
-
 Robinson 合一在最坏情况下 $O(n^2)$ 到 $O(n^3)$，且必然终止——这是因为它每次成功合一都减少了未实例化变量的数量，并受限于出现检查（occurs check）。
 
 > **来源**: [Robinson 1965 — A Machine-Oriented Logic Based on the Resolution Principle](https://doi.org/10.1145/321250.321253)
@@ -142,7 +140,6 @@ let id = |x| x;   // HM 会推断 id: ∀α. α -> α
 id(1);
 id("hi");
 ```
-
 Rust 的局部类型推断保留了这一思想，但函数签名通常需要显式标注，且泛化必须考虑 trait bound 和生命周期参数，因此不能像纯 HM 那样全局推广。
 
 ---
@@ -165,7 +162,6 @@ solve(T: Trait) =
       return θ
   fail
 ```
-
 在 coherence 规则保证下，候选集合有限；但 where 约束可能递归，最坏情况需要指数级搜索。实践中 rustc 通过缓存、特化规则与新一代 solver 大幅缓解。
 
 > **来源**: [Rustc Dev Guide — Trait resolution](https://rustc-dev-guide.rust-lang.org/traits/resolution.html) · [Rustc Dev Guide — Next-gen trait solving](https://rustc-dev-guide.rust-lang.org/solve/the-solver.html)
@@ -251,7 +247,6 @@ let infcx = tcx.infer_ctxt().build();
 let typeck_results = tcx.typeck(item_def_id);
 // typeck_results 包含每个表达式的 Ty、obligations、区域约束
 ```
-
 Snapshot/回滚机制让 `InferCtxt` 可以在 trait 候选尝试失败后无损恢复，这正是理论 PSPACE 算法在工程上的启发式优化。
 
 > **来源**: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html) · [Rustc Dev Guide — HIR Type checking](https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html)
@@ -270,14 +265,12 @@ fn main() {
     println!("{:?}", v);
 }
 ```
-
 `collect()` 可返回任何实现 `FromIterator` 的类型；没有上下文时编译器无法确定具体集合类型。修正：
 
 ```rust,ignore
 let v: Vec<_> = [1, 2, 3].iter().map(|x| x * 2).collect();
 // 或 .collect::<Vec<_>>()
 ```
-
 ### 9.2 高阶 trait bound 需要显式量词
 
 ```rust,ignore
@@ -290,7 +283,6 @@ where
     assert_eq!(*r, 1);
 }
 ```
-
 `for<'a>` 明确声明了高阶多态；Rust 无法从函数体单独推断出这种嵌套量词。
 
 ### 9.3 关联类型投影需要足够上下文
@@ -305,7 +297,6 @@ fn main() {
     let x = first(v.iter()); // 推断 I::Item = &i32
 }
 ```
-
 若调用点无法确定具体迭代器（Iterator）类型，`I::Item` 就无法归约，需要显式 turbofish 或类型标注。
 
 ---

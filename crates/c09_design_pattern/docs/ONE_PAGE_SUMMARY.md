@@ -22,7 +22,7 @@
 | :--- | :--- || 过度设计 | 先满足需求；模式按需引入 |
 | OOP 思维照搬 | Rust 用 trait + enum；避免继承层次 |
 | 全局可变状态 | 用 `Arc<Mutex<T>>` 或依赖注入 |
-| 模式组合复杂 | 参考 [模式组合参考](tier_03_references/04_模式性能评估参考.md) |
+| 模式组合复杂 | 参考 [模式组合参考](tier_03_references/04_pattern_performance_evaluation_reference.md) |
 
 ---
 

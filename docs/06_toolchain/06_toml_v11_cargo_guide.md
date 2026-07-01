@@ -5,7 +5,6 @@
 >
 > **受众**: [进阶]
 > **内容分级**: [专家级]
-
 > **文档状态**: 活跃维护
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+ (TOML v1.1 支持)
@@ -65,7 +64,6 @@ timeline
     2026 : Cargo 1.96 正式支持 TOML v1.1
          : Rust 工具链集成
 ```
-
 ### 为什么 Cargo 需要跟进 TOML v1.1 {#为什么-cargo-需要跟进-toml-v11}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -101,7 +99,6 @@ version = "1.0.0"
 authors = ["Alice <alice@example.com>", "Bob <bob@example.com>"]
 description = "A very long description that makes the line extremely long and hard to read in code review"
 ```
-
 **TOML v1.1 — 允许多行内联表**：
 
 ```toml
@@ -115,7 +112,6 @@ authors = [
 ]
 description = "A very long description"
 ```
-
 ### 2.2 尾部逗号 (Trailing Commas) {#22-尾部逗号-trailing-commas}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -133,7 +129,6 @@ tokio = { version = "1.0", features = [
 
 serde = { version = "1.0", default-features = false, features = ["derive",] }
 ```
-
 **为什么尾部逗号重要**：
 
 ```diff
@@ -145,7 +140,6 @@ serde = { version = "1.0", default-features = false, features = ["derive",] }
 # 有尾部逗号的 diff（1 行变更） {#有尾部逗号的-diff1-行变更}
 +    "sync",
 ```
-
 ### 2.3 扩展裸键规则 (Extended Bare Keys) {#23-扩展裸键规则-extended-bare-keys}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -163,7 +157,6 @@ path = "../my-lib"
 # 仍必须使用引号键的场景 {#仍必须使用引号键的场景}
 ["weird.key.with.dots"] = 42  # 含点的键
 ```
-
 > ⚠️ **Cargo 建议**：尽管 TOML v1.1 允许 Unicode 键名，**仍强烈建议使用 ASCII 键名**，以保持跨平台兼容性和工具链支持。
 
 ---
@@ -211,7 +204,6 @@ windows-sys = { version = "0.59", features = [
     "Win32_System_Threading",
 ], }
 ```
-
 ### 3.2 Workspace 成员配置 {#32-workspace-成员配置}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -239,7 +231,6 @@ axum = { version = "0.8", features = [
 ], }
 tower = { version = "0.5", default-features = false }
 ```
-
 ### 3.3 Profile 配置优化 {#33-profile-配置优化}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -261,7 +252,6 @@ strip = true           # 剥离符号，减小二进制体积
 [profile.test]
 opt-level = 2          # 测试运行更快，编译仍可接受
 ```
-
 ---
 
 ## 4. 与 TOML v1.0 的兼容性 {#4-与-toml-v10-的兼容性}
@@ -280,7 +270,6 @@ flowchart LR
     style B fill:#ccffcc
     style D fill:#ffcccc
 ```
-
 **关键原则**：
 
 - TOML v1.1 解析器 **完全兼容** 所有有效的 TOML v1.0 文件
@@ -304,7 +293,6 @@ flowchart LR
 name = "my-lib"
 rust-version = "1.96.0"  # ← 1.96+：使用 TOML v1.1 语法
 ```
-
 ---
 
 ## 5. Cargo 1.96 的 TOML 解析改进 {#5-cargo-196-的-toml-解析改进}
@@ -340,7 +328,6 @@ tokio = { version = "1.43", features = [
     "sync",
 ], }
 ```
-
 ### 5.3 诊断改进 {#53-诊断改进}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -357,7 +344,6 @@ Caused by:
    |                           ^
   expected `.`, `=`
 ```
-
 ---
 
 ## 6. 最佳实践与反模式 {#6-最佳实践与反模式}
@@ -386,7 +372,6 @@ exclude = [
 [workspace.dependencies]
 common-error = { path = "crates/common-error" }
 ```
-
 ### 6.2 ❌ 避免的做法 {#62-避免的做法}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -410,7 +395,6 @@ serde = "1.0"
 [profile.发布]
 opt-level = 3
 ```
-
 ### 6.3 决策流 {#63-决策流}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -426,7 +410,6 @@ flowchart TD
     E --> G
     F --> G
 ```
-
 ---
 
 ## 7. 参考文献 {#7-参考文献}
@@ -486,19 +469,12 @@ flowchart TD
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
-
 > **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
-
 > **来源: [LLVM Documentation](https://llvm.org/docs/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)**
-
 > **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)**
-
 > **来源: [Rust Reference - Cargo](https://doc.rust-lang.org/cargo/)**
-
 > **来源: [crates.io Documentation](https://crates.io/)**
 
 ---

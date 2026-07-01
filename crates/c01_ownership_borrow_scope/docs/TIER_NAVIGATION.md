@@ -67,7 +67,6 @@ graph TD
     D1[理论基础] --> D
     D2[学术研究] --> D
 ```
-
 ---
 
 ## 📖 Tier 1: 基础文档层
@@ -80,10 +79,10 @@ graph TD
 
 | #   | 文档                                                       | 内容                 | 时长   |
 | :--- | :--- | :--- | :--- |
-| 1.1 | [项目概览](tier_01_foundations/01_项目概览.md)             | 项目介绍、目标、特色 | 15分钟 |
-| 1.2 | [快速开始指南](tier_01_foundations/1.2_快速开始指南.md)     | 30分钟快速上手       | 30分钟 |
-| 1.3 | [核心概念术语表](tier_01_foundations/03_术语表.md) | 关键术语速查         | 20分钟 |
-| 1.4 | [常见问题解答](tier_01_foundations/04_常见问题.md)     | 新手常见问题         | 30分钟 |
+| 1.1 | [项目概览](tier_01_foundations/01_project_overview.md)             | 项目介绍、目标、特色 | 15分钟 |
+| 1.2 | [快速开始指南](tier_01_foundations/1.2_quick_start_guide.md)     | 30分钟快速上手       | 30分钟 |
+| 1.3 | [核心概念术语表](tier_01_foundations/03_glossary.md) | 关键术语速查         | 20分钟 |
+| 1.4 | [常见问题解答](tier_01_foundations/04_faq.md)     | 新手常见问题         | 30分钟 |
 
 ### 🎯 学习成果
 
@@ -108,10 +107,10 @@ graph TD
 
 | #   | 文档                                                  | 内容               | 时长    |
 | :--- | :--- | :--- | :--- |
-| 2.1 | [所有权快速入门](tier_02_guides/01_所有权快速入门.md) | 所有权完整机制     | 4-6小时 |
-| 2.2 | [借用实践指南](tier_02_guides/02_借用实践指南.md) | 借用规则和检查机制 | 4-6小时 |
-| 2.3 | [生命周期实践](tier_02_guides/03_生命周期实践.md)     | 生命周期系统详解   | 3-5小时 |
-| 2.4 | [作用域管理实践](tier_02_guides/04_作用域管理实践.md) | 作用域和资源管理   | 2-4小时 |
+| 2.1 | [所有权快速入门](tier_02_guides/01_ownership_quick_start.md) | 所有权完整机制     | 4-6小时 |
+| 2.2 | [借用实践指南](tier_02_guides/02_borrowing_practice_guide.md) | 借用规则和检查机制 | 4-6小时 |
+| 2.3 | [生命周期实践](tier_02_guides/03_lifetimes_practice.md)     | 生命周期系统详解   | 3-5小时 |
+| 2.4 | [作用域管理实践](tier_02_guides/04_scope_management_practice.md) | 作用域和资源管理   | 2-4小时 |
 
 ### 🎯 学习成果2
 
@@ -136,10 +135,10 @@ graph TD
 
 | #   | 文档                                                         | 内容           | 时长    |
 | :--- | :--- | :--- | :--- |
-| 3.1 | [高级所有权模式](tier_03_references/06_高级所有权模式参考.md)     | 复杂所有权设计 | 3-4小时 |
-| 3.2 | [零成本抽象](tier_03_references/07_零成本抽象参考.md)             | 性能优化原理   | 2-3小时 |
-| 3.3 | [内存安全最佳实践](tier_03_references/08_内存安全参考.md) | 内存安全指南   | 2-3小时 |
-| 3.4 | [性能优化](tier_03_references/09_性能优化参考.md)                 | 实战优化技巧   | 2-3小时 |
+| 3.1 | [高级所有权模式](tier_03_references/06_advanced_ownership_patterns_reference.md)     | 复杂所有权设计 | 3-4小时 |
+| 3.2 | [零成本抽象](tier_03_references/07_zero_cost_abstractions_reference.md)             | 性能优化原理   | 2-3小时 |
+| 3.3 | [内存安全最佳实践](tier_03_references/08_memory_safety_reference.md) | 内存安全指南   | 2-3小时 |
+| 3.4 | [性能优化](tier_03_references/09_performance_optimization_reference.md)                 | 实战优化技巧   | 2-3小时 |
 
 ### 🎯 学习成果3
 
@@ -164,9 +163,9 @@ graph TD
 
 | #   | 文档                                                    | 内容               | 时长    |
 | :--- | :--- | :--- | :--- |
-| 4.1 | [类型系统理论](tier_04_advanced/06_类型系统理论.md) | 所有权类型系统理论 | 6-8小时 |
-| 4.2 | [形式化验证](tier_04_advanced/07_形式化验证.md)     | 形式化验证方法     | 4-6小时 |
-| 4.3 | [学术研究](tier_04_advanced/08_学术研究.md)         | 学术论文和研究     | 持续    |
+| 4.1 | [类型系统理论](tier_04_advanced/06_type_system_theory.md) | 所有权类型系统理论 | 6-8小时 |
+| 4.2 | [形式化验证](tier_04_advanced/07_formal_verification.md)     | 形式化验证方法     | 4-6小时 |
+| 4.3 | [学术研究](tier_04_advanced/08_academic_research.md)         | 学术论文和研究     | 持续    |
 
 ### 🎯 学习成果4
 
@@ -193,7 +192,6 @@ Week 2: Tier 2.2 借用检查器 + Tier 2.3 生命周期
 Week 3: Tier 2.4 作用域规则 + 实践项目
 Week 4: 复习和巩固
 ```
-
 ### 💼 有经验的开发者
 
 **推荐路径**: Tier 1 (快速浏览) → Tier 2 (深入学习) → Tier 3
@@ -204,7 +202,6 @@ Day 3-4: 完成 Tier 2.3-2.4
 Day 5-7: 学习 Tier 3，实践高级特性
 Week 2+: 根据需要学习 Tier 4
 ```
-
 ### 🔬 研究者/高级用户
 
 **推荐路径**: Tier 1-2 (选择性阅读) → Tier 3 → Tier 4
@@ -215,7 +212,6 @@ Week 2+: 根据需要学习 Tier 4
 重点研究 Tier 4 理论内容
 阅读相关学术论文
 ```
-
 ---
 
 ## 📊 分层对比

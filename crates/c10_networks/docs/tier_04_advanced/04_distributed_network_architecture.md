@@ -1,0 +1,454 @@
+# 分布式网络架构
+
+**主题**: 服务网格、负载均衡、分布式追踪
+**难度**: ⭐⭐⭐⭐⭐
+**预计学习时间**: 20-24 小时
+
+---
+
+## 📖 内容概览
+
+本文档涵盖分布式网络架构的核心技术：
+
+1. 服务网格 (Service Mesh) 实现
+2. 负载均衡算法
+3. 分布式追踪系统
+4. 故障注入与混沌工程
+5. 高可用架构设计
+
+---
+
+## 1. 服务网格实现
+
+### 1.1 Sidecar Proxy模式
+
+```rust
+use tokio::net::{TcpListener, TcpStream};
+use std::sync::Arc;
+
+/// Sidecar代理
+struct SidecarProxy {
+    upstream_addr: String,
+    metrics: Arc<NetworkMetrics>,
+}
+
+impl SidecarProxy {
+    async fn run(&self, listen_addr: &str) -> io::Result<()> {
+        let listener = TcpListener::bind(listen_addr).await?;
+        println!("🔄 Sidecar代理启动: {}", listen_addr);
+        println!("   上游服务: {}", self.upstream_addr);
+
+        loop {
+            let (client_stream, client_addr) = listener.accept().await?;
+            println!("📥 新连接: {}", client_addr);
+
+            let upstream_addr = self.upstream_addr.clone();
+            let metrics = self.metrics.clone();
+
+            tokio::spawn(async move {
+                if let Err(e) = Self::proxy_connection(
+                    client_stream,
+                    &upstream_addr,
+                    metrics,
+                ).await {
+                    eprintln!("❌ 代理错误: {}", e);
+                }
+            });
+        }
+    }
+
+    async fn proxy_connection(
+        mut client: TcpStream,
+        upstream_addr: &str,
+        metrics: Arc<NetworkMetrics>,
+    ) -> io::Result<()> {
+        // 1. 连接上游服务
+        let mut upstream = TcpStream::connect(upstream_addr).await?;
+        println!("✅ 已连接上游: {}", upstream_addr);
+
+        // 2. 双向数据转发
+        let (mut client_read, mut client_write) = client.split();
+        let (mut upstream_read, mut upstream_write) = upstream.split();
+
+        let client_to_upstream = async {
+            let mut buffer = [0u8; 8192];
+            loop {
+                let n = client_read.read(&mut buffer).await?;
+                if n == 0 { break; }
+
+                upstream_write.write_all(&buffer[..n]).await?;
+                metrics.record_sent(n as u64);
+            }
+            Ok::<_, io::Error>(())
+        };
+
+        let upstream_to_client = async {
+            let mut buffer = [0u8; 8192];
+            loop {
+                let n = upstream_read.read(&mut buffer).await?;
+                if n == 0 { break; }
+
+                client_write.write_all(&buffer[..n]).await?;
+                metrics.record_received(n as u64);
+            }
+            Ok::<_, io::Error>(())
+        };
+
+        // 并发执行双向转发
+        tokio::try_join!(client_to_upstream, upstream_to_client)?;
+
+        println!("✅ 连接关闭");
+        Ok(())
+    }
+}
+
+#[tokio::main]
+async fn main() -> io::Result<()> {
+    let metrics = NetworkMetrics::new();
+    let proxy = SidecarProxy {
+        upstream_addr: "localhost:8080".to_string(),
+        metrics: metrics.clone(),
+    };
+
+    // 启动代理
+    tokio::spawn(async move {
+        proxy.run("0.0.0.0:7000").await.ok();
+    });
+
+    // 定期报告指标
+    tokio::spawn(async move {
+        let mut interval = tokio::time::interval(Duration::from_secs(10));
+        loop {
+            interval.tick().await;
+            metrics.report();
+        }
+    });
+
+    tokio::signal::ctrl_c().await?;
+    Ok(())
+}
+```
+---
+
+## 2. 负载均衡算法
+
+### 2.1 多种负载均衡策略
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+/// 负载均衡器
+struct LoadBalancer {
+    backends: Vec<String>,
+    strategy: BalancingStrategy,
+    counter: AtomicUsize,
+}
+
+#[derive(Debug, Clone)]
+enum BalancingStrategy {
+    RoundRobin,
+    LeastConnections,
+    Random,
+    WeightedRoundRobin(Vec<u32>),
+}
+
+impl LoadBalancer {
+    fn new(backends: Vec<String>, strategy: BalancingStrategy) -> Self {
+        Self {
+            backends,
+            strategy,
+            counter: AtomicUsize::new(0),
+        }
+    }
+
+    /// 选择后端服务器
+    fn select_backend(&self) -> &str {
+        match &self.strategy {
+            BalancingStrategy::RoundRobin => {
+                let index = self.counter.fetch_add(1, Ordering::Relaxed)
+                    % self.backends.len();
+                &self.backends[index]
+            }
+            BalancingStrategy::Random => {
+                use rand::Rng;
+                let index = rand::thread_rng().gen_range(0..self.backends.len());
+                &self.backends[index]
+            }
+            BalancingStrategy::WeightedRoundRobin(weights) => {
+                // 加权轮询实现
+                let total_weight: u32 = weights.iter().sum();
+                let mut cumulative = 0u32;
+                let target = (self.counter.fetch_add(1, Ordering::Relaxed) as u32)
+                    % total_weight;
+
+                for (i, &weight) in weights.iter().enumerate() {
+                    cumulative += weight;
+                    if target < cumulative {
+                        return &self.backends[i];
+                    }
+                }
+
+                &self.backends[0]
+            }
+            BalancingStrategy::LeastConnections => {
+                // 简化版：随机选择（实际需要追踪连接数）
+                let index = rand::thread_rng().gen_range(0..self.backends.len());
+                &self.backends[index]
+            }
+        }
+    }
+}
+
+/// 负载均衡代理服务器
+async fn run_load_balancer(listen_addr: &str, balancer: Arc<LoadBalancer>) -> io::Result<()> {
+    let listener = TcpListener::bind(listen_addr).await?;
+    println!("⚖️  负载均衡器启动: {}", listen_addr);
+    println!("   后端: {:?}", balancer.backends);
+    println!("   策略: {:?}", balancer.strategy);
+
+    loop {
+        let (client_stream, _) = listener.accept().await?;
+        let balancer = balancer.clone();
+
+        tokio::spawn(async move {
+            let backend = balancer.select_backend();
+            println!("🎯 路由到后端: {}", backend);
+
+            if let Err(e) = proxy_to_backend(client_stream, backend).await {
+                eprintln!("❌ 代理错误: {}", e);
+            }
+        });
+    }
+}
+
+async fn proxy_to_backend(mut client: TcpStream, backend: &str) -> io::Result<()> {
+    let mut upstream = TcpStream::connect(backend).await?;
+
+    tokio::io::copy_bidirectional(&mut client, &mut upstream).await?;
+    Ok(())
+}
+```
+### 2.2 健康检查
+
+```rust
+use tokio::time::{interval, Duration};
+
+struct HealthChecker {
+    backends: Vec<String>,
+    healthy: Arc<Mutex<HashSet<String>>>,
+}
+
+impl HealthChecker {
+    async fn run(&self) {
+        let mut check_interval = interval(Duration::from_secs(5));
+
+        loop {
+            check_interval.tick().await;
+
+            for backend in &self.backends {
+                let healthy = self.healthy.clone();
+                let backend = backend.clone();
+
+                tokio::spawn(async move {
+                    match TcpStream::connect(&backend).await {
+                        Ok(_) => {
+                            healthy.lock().await.insert(backend.clone());
+                            println!("✅ 健康: {}", backend);
+                        }
+                        Err(_) => {
+                            healthy.lock().await.remove(&backend);
+                            println!("❌ 不健康: {}", backend);
+                        }
+                    }
+                });
+            }
+        }
+    }
+}
+```
+---
+
+## 3. 分布式追踪
+
+### 3.1 OpenTelemetry集成
+
+```rust
+use opentelemetry::{global, trace::{Tracer, Span, SpanKind}, KeyValue};
+use opentelemetry_sdk::trace as sdktrace;
+
+/// 初始化追踪
+fn init_tracer() -> sdktrace::Tracer {
+    opentelemetry_jaeger::new_agent_pipeline()
+        .with_service_name("my-service")
+        .install_simple()
+        .expect("Failed to install tracer")
+}
+
+/// 追踪HTTP请求
+async fn handle_request_with_tracing(req: HttpRequest) -> HttpResponse {
+    let tracer = global::tracer("http-server");
+
+    // 创建Span
+    let mut span = tracer
+        .span_builder("handle_request")
+        .with_kind(SpanKind::Server)
+        .with_attributes(vec![
+            KeyValue::new("http.method", req.method.to_string()),
+            KeyValue::new("http.url", req.url.clone()),
+        ])
+        .start(&tracer);
+
+    // 记录事件
+    span.add_event("Processing request", vec![]);
+
+    // 实际处理
+    let response = process_request(req).await;
+
+    // 记录结果
+    span.set_attribute(KeyValue::new("http.status_code", response.status));
+    span.end();
+
+    response
+}
+```
+---
+
+## 4. 故障注入与混沌工程
+
+### 4.1 网络故障注入
+
+```rust
+use rand::Rng;
+
+/// 故障注入器
+struct ChaosInjector {
+    latency_ms: Option<u64>,
+    packet_loss_rate: f64,
+    error_rate: f64,
+}
+
+impl ChaosInjector {
+    async fn inject_chaos<F, Fut, T>(&self, operation: F) -> io::Result<T>
+    where
+        F: FnOnce() -> Fut,
+        Fut: Future<Output = io::Result<T>>,
+    {
+        let mut rng = rand::thread_rng();
+
+        // 1. 注入延迟
+        if let Some(latency) = self.latency_ms {
+            tokio::time::sleep(Duration::from_millis(latency)).await;
+            println!("⏱️  注入延迟: {}ms", latency);
+        }
+
+        // 2. 模拟丢包
+        if rng.gen::<f64>() < self.packet_loss_rate {
+            println!("📦 模拟丢包");
+            return Err(io::Error::new(io::ErrorKind::TimedOut, "Packet lost"));
+        }
+
+        // 3. 模拟错误
+        if rng.gen::<f64>() < self.error_rate {
+            println!("❌ 模拟错误");
+            return Err(io::Error::new(io::ErrorKind::Other, "Injected error"));
+        }
+
+        // 正常执行
+        operation().await
+    }
+}
+
+/// 使用示例
+#[tokio::main]
+async fn main() {
+    let injector = ChaosInjector {
+        latency_ms: Some(100),
+        packet_loss_rate: 0.05,  // 5% 丢包率
+        error_rate: 0.02,         // 2% 错误率
+    };
+
+    for i in 0..10 {
+        let result = injector.inject_chaos(|| async {
+            // 模拟网络请求
+            Ok(format!("Response {}", i))
+        }).await;
+
+        match result {
+            Ok(data) => println!("✅ 成功: {}", data),
+            Err(e) => println!("❌ 失败: {}", e),
+        }
+    }
+}
+```
+---
+
+## 5. 高可用架构
+
+### 5.1 故障转移
+
+```rust
+/// 带故障转移的客户端
+struct FailoverClient {
+    primary: String,
+    fallback: Vec<String>,
+    max_retries: usize,
+}
+
+impl FailoverClient {
+    async fn call_with_failover(&self, request: Vec<u8>) -> io::Result<Vec<u8>> {
+        // 1. 尝试主节点
+        match self.try_connect(&self.primary, &request).await {
+            Ok(response) => return Ok(response),
+            Err(e) => println!("⚠️  主节点失败: {}", e),
+        }
+
+        // 2. 故障转移到备用节点
+        for (i, fallback) in self.fallback.iter().enumerate() {
+            println!("🔄 故障转移到备用节点 {}: {}", i + 1, fallback);
+
+            match self.try_connect(fallback, &request).await {
+                Ok(response) => return Ok(response),
+                Err(e) => println!("⚠️  备用节点 {} 失败: {}", i + 1, e),
+            }
+        }
+
+        Err(io::Error::new(io::ErrorKind::Other, "All nodes failed"))
+    }
+
+    async fn try_connect(&self, addr: &str, request: &[u8]) -> io::Result<Vec<u8>> {
+        let mut stream = TcpStream::connect(addr).await?;
+        stream.write_all(request).await?;
+
+        let mut response = Vec::new();
+        stream.read_to_end(&mut response).await?;
+
+        Ok(response)
+    }
+}
+```
+---
+
+## 总结
+
+分布式网络架构的核心要素：
+
+1. **服务网格**: Sidecar代理 + 流量管理
+2. **负载均衡**: 多种策略 + 健康检查
+3. **可观测性**: 分布式追踪 + 指标收集
+4. **韧性**: 故障转移 + 混沌工程
+
+---
+
+**下一篇**: [05\_网络编程前沿技术.md](05_frontier_network_programming.md)
+
+**返回**: [Tier 4 README](README.md)
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

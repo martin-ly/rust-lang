@@ -47,13 +47,11 @@ winget install Rustlang.Rustup
 Invoke-WebRequest -Uri https://win.rustup.rs -OutFile rustup-init.exe
 .\rustup-init.exe
 ```
-
 #### macOS / Linux
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
-
 ### 2. 配置环境变量
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -66,7 +64,6 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env  # Linux/macOS
 # 或重启 PowerShell     # Windows
 ```
-
 ### 3. 验证安装
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -76,7 +73,6 @@ rustc --version   # 应显示: rustc 1.95.0 (xxxxxx)
 cargo --version   # 应显示: cargo 1.95.0
 rustup --version  # 应显示: rustup 1.x.x
 ```
-
 ## 🔧 工具链管理
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -88,7 +84,6 @@ rustup --version  # 应显示: rustup 1.x.x
 ```bash
 rustup show
 ```
-
 ### 切换到特定版本
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -97,7 +92,6 @@ rustup show
 rustup install 1.93.0
 rustup default 1.93.0
 ```
-
 ### 更新到最新版
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -105,7 +99,6 @@ rustup default 1.93.0
 ```bash
 rustup update
 ```
-
 ## 📝 配置 Cargo
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -117,7 +110,6 @@ rustup update
 ```bash
 mkdir -p ~/.cargo
 ```
-
 ### 常用配置 (~/.cargo/config.toml)
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -135,7 +127,6 @@ lto = true             # 链接时优化
 retry = 3              # 网络重试次数
 git-fetch-with-cli = true  # 使用系统 git
 ```
-
 ## 💻 IDE 配置
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -149,7 +140,6 @@ git-fetch-with-cli = true  # 使用系统 git
    - **rust-analyzer**: Rust 语言服务器
    - **CodeLLDB**: 调试支持
    - **Even Better TOML**: Cargo.toml 支持
-
 3. 配置 settings.json:
 
 ```json
@@ -159,7 +149,6 @@ git-fetch-with-cli = true  # 使用系统 git
   "rust-analyzer.procMacro.enable": true
 }
 ```
-
 ### 其他 IDE
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -191,7 +180,6 @@ replace-with = 'ustc'
 [source.ustc]
 registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 ```
-
 ## 🎮 练习
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -207,7 +195,6 @@ rustc --version
 cargo --version
 rustup show
 ```
-
 ### 练习 2: 工具链切换
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -219,7 +206,6 @@ rustup install nightly
 rustup run nightly rustc --version
 rustup default stable  # 切回稳定版
 ```
-
 ## ✅ 自我检测
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -257,7 +243,6 @@ rustup default stable  # 切回稳定版
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Hello World](01_hello_world.md)
-
 - [Hello, World](01_hello_world.md)
 - [Rust 学习路线图](03_learning_roadmap.md)
 - [Rust 哲学与设计原则](04_rust_philosophy.md)

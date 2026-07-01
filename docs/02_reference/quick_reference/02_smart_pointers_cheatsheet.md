@@ -105,7 +105,6 @@
         │  └─ 否 → Mutex<T> 或 RwLock<T>
         └─ 否 → 使用普通引用 &T 或 &mut T
 ```
-
 ---
 
 ## 📦 `Box<T>` - 堆分配 {#boxt---堆分配}
@@ -132,7 +131,6 @@ fn print_value(b: Box<i32>) {
     println!("{}", b); // 自动解引用
 }
 ```
-
 ### 使用场景 {#使用场景-6}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -160,7 +158,6 @@ fn take_ownership(b: Box<i32>) {
     // Box 在栈上只有指针大小
 }
 ```
-
 ### API {#api-6}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -180,7 +177,6 @@ let value = b.as_mut(); // &mut T
 // 消耗 Box 获取值
 let value = *b; // 或 Box::into_inner(b)
 ```
-
 ---
 
 ## 🔗 `Rc<T>` - 引用计数（单线程） {#rct---引用计数单线程}
@@ -208,7 +204,6 @@ println!("{}", *b);
 // 引用计数
 println!("count: {}", Rc::strong_count(&a));
 ```
-
 ### 使用场景 {#使用场景-6}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -230,7 +225,6 @@ let node = Rc::new(Node {
 let child1 = Rc::clone(&node);
 let child2 = Rc::clone(&node);
 ```
-
 ### API {#api-6}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -259,7 +253,6 @@ if let Some(data) = Rc::get_mut(&mut rc) {
 // 解引用
 let value = *rc;
 ```
-
 ---
 
 ## 🔗 `Arc<T>` - 原子引用计数（多线程） {#arct---原子引用计数多线程}
@@ -289,7 +282,6 @@ let handle2 = thread::spawn(move || {
 handle1.join().unwrap();
 handle2.join().unwrap();
 ```
-
 ### 使用场景 {#使用场景-6}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -314,7 +306,6 @@ for handle in handles {
     handle.join().unwrap();
 }
 ```
-
 ### API {#api-6}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -327,7 +318,6 @@ let arc = Arc::new(value);
 let arc2 = Arc::clone(&arc);
 let count = Arc::strong_count(&arc);
 ```
-
 ---
 
 ## 🔓 `RefCell<T>` - 内部可变性（单线程） {#refcellt---内部可变性单线程}
@@ -352,7 +342,6 @@ drop(r); // 显式释放
 let mut r = data.borrow_mut();
 *r += 1;
 ```
-
 ### 使用场景 {#使用场景-6}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -373,7 +362,6 @@ impl Counter {
     }
 }
 ```
-
 ### API {#api-6}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -394,7 +382,6 @@ let r = cell.try_borrow_mut();      // Result<RefMut<T>, BorrowMutError>
 // 获取内部值（消耗 RefCell）
 let value = cell.into_inner();
 ```
-
 ### 运行时借用检查 {#运行时借用检查}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -411,7 +398,6 @@ drop(r2);
 
 let r3 = cell.borrow_mut();  // OK
 ```
-
 ---
 
 ## 🔒 `Mutex<T>` - 互斥锁（多线程） {#mutext---互斥锁多线程}
@@ -444,7 +430,6 @@ for handle in handles {
 
 println!("Result: {}", *counter.lock().unwrap());
 ```
-
 ### 使用场景 {#使用场景-6}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -465,7 +450,6 @@ impl SharedData {
     }
 }
 ```
-
 ### API {#api-6}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -485,7 +469,6 @@ let value = *guard;
 
 // 锁自动释放（guard 被 drop）
 ```
-
 ---
 
 ## 🔓 `RwLock<T>` - 读写锁（多线程） {#rwlockt---读写锁多线程}
@@ -525,7 +508,6 @@ for handle in handles {
 }
 writer.join().unwrap();
 ```
-
 ### 使用场景 {#使用场景-6}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -550,7 +532,6 @@ impl Cache {
     }
 }
 ```
-
 ### API {#api-6}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -568,7 +549,6 @@ let r = rwlock.try_read();           // Result<RwLockReadGuard<T>, TryLockError>
 let mut w = rwlock.write().unwrap(); // RwLockWriteGuard<T>
 let w = rwlock.try_write();          // Result<RwLockWriteGuard<T>, TryLockError>
 ```
-
 ---
 
 ## 🔗 `Weak<T>` - 弱引用 {#weakt---弱引用}
@@ -600,7 +580,6 @@ drop(strong);
 // 弱引用无法升级
 assert!(weak.upgrade().is_none());
 ```
-
 ### 使用场景 {#使用场景-6}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -630,7 +609,6 @@ let branch = Rc::new(Node {
 
 *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
 ```
-
 ### API {#api-6}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -648,7 +626,6 @@ let strong = weak.upgrade(); // Option<Rc<T>>
 let strong_count = weak.strong_count();
 let weak_count = weak.weak_count();
 ```
-
 ---
 
 ## 🔄 组合模式 {#组合模式}
@@ -674,7 +651,6 @@ let data2 = Rc::clone(&data);
 
 println!("{}", *data.borrow()); // 8
 ```
-
 ### `Arc<Mutex<T>>` - 多线程共享可变数据 {#arcmutext---多线程共享可变数据}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -697,7 +673,6 @@ for handle in handles {
     handle.join().unwrap();
 }
 ```
-
 ### `Arc<RwLock<T>>` - 多线程读写锁 {#arcrwlockt---多线程读写锁}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -724,7 +699,6 @@ thread::spawn(move || {
     *w += 1;
 });
 ```
-
 ### `Rc<RefCell<Vec<T>>>` - 共享可变向量 {#rcrefcellvect---共享可变向量}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -743,7 +717,6 @@ vec2.borrow_mut().push(5);
 
 println!("{:?}", vec.borrow()); // [1, 2, 3, 4, 5]
 ```
-
 ---
 
 ## 💡 代码示例 {#代码示例}
@@ -798,7 +771,6 @@ list.push_front(2);
 list.push_front(3);
 assert_eq!(list.pop_front(), Some(3));
 ```
-
 ### 示例 2: 带父指针的树结构（避免循环引用） {#示例-2-带父指针的树结构避免循环引用}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -843,7 +815,6 @@ if let Some(parent) = child.get_parent() {
 
 // 当 root 被 drop 后，child 的 parent 自动变为 None
 ```
-
 ### 示例 3: 自定义智能指针 {#示例-3-自定义智能指针}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -881,7 +852,6 @@ fn hello(name: &str) {
 let m = MyBox::new(String::from("Rust"));
 hello(&m);  // 自动解引用 &MyBox<String> -> &String -> &str
 ```
-
 ### 示例 4: LazyCell 和 LazyLock（Rust 1.80+，Rust 1.95+ 增强） {#示例-4-lazycell-和-lazylockrust-180rust-195-增强}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -910,7 +880,6 @@ fn main() {
     println!("Max connections: {}", CONFIG.max_connections);
 }
 ```
-
 #### Rust 1.95+ 新增 API {#rust-195-新增-api}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -1002,7 +971,6 @@ impl AppConfig {
     }
 }
 ```
-
 #### 性能对比 {#性能对比-1}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1062,7 +1030,6 @@ impl SelfReferential {
 let data = SelfReferential::new("Hello".to_string());
 println!("{}", data.get_data());
 ```
-
 ---
 
 ## 🎯 使用场景 {#使用场景-7}
@@ -1136,7 +1103,6 @@ impl<T> Graph<T> {
     }
 }
 ```
-
 ---
 
 ## 🎯 选择指南 {#选择指南}
@@ -1162,7 +1128,6 @@ impl<T> Graph<T> {
         │      └─ 否 → Mutex<T>
         └─ 否 → 使用普通引用
 ```
-
 ### 性能对比 {#性能对比-1}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -1203,7 +1168,6 @@ thread::spawn(|| {
     println!("{}", rc);  // ❌ Rc 不是 Send
 });
 ```
-
 **原因**: `Rc` 非线程安全，多线程用 `Arc`。
 
 **修正**:
@@ -1212,7 +1176,6 @@ thread::spawn(|| {
 let arc = Arc::new(1);
 thread::spawn(move || println!("{}", arc));
 ```
-
 ---
 
 ### 反例 2: RefCell 在已借出时再次借用 {#反例-2-refcell-在已借出时再次借用}
@@ -1226,7 +1189,6 @@ let r = RefCell::new(1);
 let g1 = r.borrow_mut();
 let g2 = r.borrow();  // ❌ panic: 已借出可变借用
 ```
-
 **原因**: 运行时借用检查，同一时刻只能有一个可变借用或多个不可变借用。
 
 **修正**:
@@ -1236,7 +1198,6 @@ let g1 = r.borrow_mut();
 drop(g1);  // 先释放
 let g2 = r.borrow();
 ```
-
 ---
 
 ### 反例 3: 循环引用导致内存泄漏 {#反例-3-循环引用导致内存泄漏}
@@ -1261,7 +1222,6 @@ let b = Rc::new(Node { value: 2, next: RefCell::new(None) });
 *b.next.borrow_mut() = Some(Rc::clone(&a));
 // a 和 b 形成循环引用，永远不会被释放
 ```
-
 **原因**: `Rc` 使用强引用，循环引用会导致引用计数永不为零。
 
 **修正**: 使用 `Weak` 打破循环：
@@ -1276,7 +1236,6 @@ struct Node {
     children: RefCell<Vec<Rc<Node>>>,
 }
 ```
-
 ---
 
 ### 反例 4: 错误地使用 Mutex 守卫 {#反例-4-错误地使用-mutex-守卫}
@@ -1295,7 +1254,6 @@ let first = &lock[0];  // 持有对锁内数据的引用
 // lock 守卫在此之后被 drop，但 first 引用仍然"有效"
 // 实际上这是未定义行为（编译器通常会阻止）
 ```
-
 **原因**: MutexGuard 被释放后，锁内数据的引用会变为悬空指针。
 
 **修正**:
@@ -1306,7 +1264,6 @@ let first = {
     lock[0]  // 复制值，而不是返回引用
 }; // lock 在此处释放
 ```
-
 ---
 
 ### 反例 5: Pin 误用导致未定义行为 {#反例-5-pin-误用导致未定义行为}
@@ -1335,7 +1292,6 @@ impl Unmovable {
     }
 }
 ```
-
 **原因**: 直接修改 `Pin<Box<T>>` 可能破坏自引用不变量。
 
 **修正**: 使用 `Pin::get_unchecked_mut` 在 unsafe 块中修改：
@@ -1356,7 +1312,6 @@ impl Unmovable {
     }
 }
 ```
-
 ---
 
 ## 📚 相关文档 {#相关文档}
@@ -1364,7 +1319,7 @@ impl Unmovable {
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [所有权与智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
-- [智能指针 API 参考](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
+- [智能指针 API 参考](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_smart_pointer_api_reference.md)
 
 ## 🧩 相关示例代码 {#相关示例代码}
 >
@@ -1393,7 +1348,7 @@ impl Unmovable {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [完整智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
+- [完整智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_smart_pointer_api_reference.md)
 - [智能指针示例](../../../crates/c01_ownership_borrow_scope/examples/README.md)
 - [所有权系统研究](../../research_notes/formal_methods/10_ownership_model.md)
 

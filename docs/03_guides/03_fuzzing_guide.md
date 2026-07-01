@@ -76,7 +76,6 @@ cargo install cargo-fuzz --locked
 # 验证安装 {#验证安装}
 cargo fuzz --version
 ```
-
 > **注意**: cargo-fuzz 目前需要 nightly 工具链。如果当前环境无法安装，标记为 "待 CI 验证"。
 
 ---
@@ -93,7 +92,6 @@ cargo fuzz --version
 cd crates/c08_algorithms
 cargo fuzz init
 ```
-
 这会创建：
 
 ```text
@@ -102,7 +100,6 @@ fuzz/
 └── src/
     └── lib.rs          # 生成的示例 fuzz target
 ```
-
 ### 编写 Fuzz Target {#编写-fuzz-target}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -138,7 +135,6 @@ fuzz_target!(|data: &[u8]| {
     assert_eq!(sorted.len(), numbers.len());
 });
 ```
-
 ### 运行 Fuzzer {#运行-fuzzer}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -156,7 +152,6 @@ cargo fuzz run sort_fuzzer -- -jobs=4 -workers=4
 # 从已有的 corpus 继续 {#从已有的-corpus-继续}
 cargo fuzz run sort_fuzzer corpus/
 ```
-
 ---
 
 ## 4. 本项目 Fuzz Target {#4-本项目-fuzz-target}
@@ -194,7 +189,6 @@ fuzz_target!(|data: &[u8]| {
     }
 });
 ```
-
 ### 注册到 fuzz/Cargo.toml {#注册到-fuzzcargotoml}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -206,7 +200,6 @@ path = "src/parser_fuzzer.rs"
 test = false
 doc = false
 ```
-
 ---
 
 ## 5. 高级技巧 {#5-高级技巧}
@@ -239,7 +232,6 @@ fuzz_target!(|packet: Packet| {
     process_packet(&packet);
 });
 ```
-
 ### 与 Miri 结合 {#与-miri-结合}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -250,7 +242,6 @@ cargo fuzz run target_name
 # 崩溃后，corpus 目录会保存触发崩溃的输入 {#崩溃后corpus-目录会保存触发崩溃的输入}
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test -- crash_input
 ```
-
 ### 覆盖率引导 {#覆盖率引导}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -260,7 +251,6 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test -- crash_input
 cargo fuzz coverage target_name
 # 输出在 fuzz/coverage/ {#输出在-fuzzcoverage}
 ```
-
 ---
 
 ## 6. CI 集成 {#6-ci-集成}
@@ -282,7 +272,6 @@ fuzzing:
         cd crates/c08_algorithms
         cargo fuzz run parser_fuzzer -- -max_total_time=60
 ```
-
 > **建议**: CI 中 fuzzing 时间限制为 60-120 秒，作为回归测试。长时间 fuzzing 在专门的 fuzzing 基础设施上运行。
 
 ---

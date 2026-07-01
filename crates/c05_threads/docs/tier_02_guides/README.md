@@ -4,7 +4,7 @@
 
 ## 📚 指南列表
 
-### [01. 线程基础与生命周期](01_线程基础与生命周期.md)
+### [01. 线程基础与生命周期](01_thread_basics_and_lifetimes.md)
 
 **核心内容**:
 
@@ -19,7 +19,7 @@
 
 ---
 
-### [02. 同步原语实践](02_同步原语实践.md)
+### [02. 同步原语实践](02_synchronization_primitives_practice.md)
 
 **核心内容**:
 
@@ -34,7 +34,7 @@
 
 ---
 
-### [03. 消息传递模式](03_消息传递模式.md)
+### [03. 消息传递模式](03_message_passing_patterns.md)
 
 **核心内容**:
 
@@ -49,7 +49,7 @@
 
 ---
 
-### [04. 并行编程指南](04_并行编程指南.md)
+### [04. 并行编程指南](04_parallel_programming_guide.md)
 
 **核心内容**:
 
@@ -64,7 +64,7 @@
 
 ---
 
-### [05. 异步集成实践](05_异步集成实践.md)
+### [05. 异步集成实践](05_async_integration_practice.md)
 
 **核心内容**:
 
@@ -100,7 +100,6 @@
 │                                                     │
 └─────────────────────────────────────────────────────┘
 ```
-
 ### 按场景选择
 
 | 你的需求                | 推荐阅读                  |
@@ -116,9 +115,9 @@
 
 ### 前置知识
 
-- [Tier 1: 项目概览](../tier_01_foundations/01_项目概览.md)
-- [Tier 1: 术语表](../tier_01_foundations/03_术语表.md)
-- [Tier 1: 常见问题](../tier_01_foundations/04_常见问题.md)
+- [Tier 1: 项目概览](../tier_01_foundations/01_project_overview.md)
+- [Tier 1: 术语表](../tier_01_foundations/03_glossary.md)
+- [Tier 1: 常见问题](../tier_01_foundations/04_faq.md)
 
 ### 进阶阅读
 

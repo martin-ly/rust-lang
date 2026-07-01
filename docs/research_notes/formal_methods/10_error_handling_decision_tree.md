@@ -1,21 +1,13 @@
 # Rust 错误处理决策树 {#rust-错误处理决策树}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成权威国际化来源对齐升级（已迁回并持续推进）
-
 > **概念族**: 错误处理 / 决策树
-
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链节点持续推进。
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > 一个系统化的错误处理策略选择指南
 
 ---
@@ -23,13 +15,9 @@
 ## 目录 {#目录}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
-
 > **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)** ·
-
 > **来源: [Wikipedia - Error Detection and Correction](https://en.wikipedia.org/wiki/Error_Detection_and_Correction)** ·
-
 > **[来源: ACM - Error Handling Patterns]** · **[来源: IEEE - Fault-Tolerant Software Design]**
 
 - [Rust 错误处理决策树 {#rust-错误处理决策树}](#rust-错误处理决策树-rust-错误处理决策树)
@@ -105,11 +93,9 @@
 ## 决策树总览 {#决策树总览}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
                     ┌─────────────────────────────────────┐
 
                     │        开始错误处理决策              │
@@ -171,41 +157,30 @@
                     │ • 跨服务: 序列化错误   │
 
                     └───────────────────────┘
-
 ```
-
 ---
 
 ## 决策维度详解 {#决策维度详解}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 维度 1: 错误类型 - 可恢复 vs 不可恢复 {#维度-1-错误类型---可恢复-vs-不可恢复}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特征 | 可恢复错误 | 不可恢复错误 |
-
 | :--- | :--- | :--- |
-
 | **定义** | 程序可以继续运行 | 程序状态已损坏，无法继续 |
-
 | **示例** | 文件不存在、网络超时、无效输入 | 数组越界、空指针解引用、内部不一致 |
-
 | **处理方式** | `Result<T, E>` | `panic!` |
-
 | **恢复策略** | 重试、降级、返回错误 | 终止线程/进程 |
 
 **决策问题**: *如果忽略这个错误，程序是否仍然处于有效状态？*
 
 - **是** → 可恢复错误
-
 - **否** → 不可恢复错误
 
 ---
@@ -213,15 +188,11 @@
 ### 维度 2: 错误传播范围 {#维度-2-错误传播范围}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
 传播范围决策流程:
-
 
 
 ┌──────────────────────────────────────────────────────────────┐
@@ -271,49 +242,32 @@
               │ • 内部状态   │    │ • 上下文包装  │
 
               └──────────────┘    └───────────────┘
-
 ```
-
 #### 2.1 本地处理场景 {#21-本地处理场景}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 推荐方式 | 示例 |
-
 | :--- | :--- | :--- |
-
 | 配置解析 | `expect` + 明确消息 | `config.parse::<u32>().expect("PORT must be a number")` |
-
 | 默认值 | `unwrap_or` / `unwrap_or_else` | `timeout.unwrap_or(DEFAULT_TIMEOUT)` |
-
 | 可选字段 | `Option` + `if let` | `if let Some(name) = user.nickname { ... }` |
 
 #### 2.2 错误传播场景 {#22-错误传播场景}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 边界类型 | 传播方式 | 注意事项 |
-
 | :--- | :--- | :--- |
-
 | 函数边界 | `Result<T, E>` + `?` | 保持错误类型一致性 |
-
 | 模块边界 | 定义模块级错误类型 | 使用 `thiserror` 派生 |
-
 | Crate 边界 | 公开错误类型 | 文档化错误条件 |
-
 | 线程边界 | `channel` + 专用错误类型 | 错误必须实现 `Send` |
-
 | 异步边界 | `Result` in `Future` | 正确处理 `JoinHandle` |
-
 | 服务边界 | 序列化错误 (JSON/Proto) | 包含错误码和消息 |
 
 ---
@@ -321,13 +275,10 @@
 ### 维度 3: 错误处理策略 {#维度-3-错误处理策略}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
 ┌──────────────────────────────────────────────────────────────┐
 
 │                    选择处理策略                              │
@@ -353,43 +304,29 @@
    │              策略选择矩阵                        │
 
    └────────────────────────────────────────────────┘
-
 ```
-
 #### 策略选择矩阵 {#策略选择矩阵}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 错误特征 | 立即处理 | 传播 | 重试 | 降级 | 典型场景 |
-
 | :--- | :--- | :--- | :--- | :--- | :--- |
-
 | 配置错误 | ✅ | ❌ | ❌ | ❌ | 启动时检查 |
-
 | 输入验证 | ✅ | ✅ | ❌ | ✅ | API 请求处理 |
-
 | IO 错误 | ❌ | ✅ | ✅ | ✅ | 文件/网络操作 |
-
 | 超时 | ❌ | ✅ | ✅ | ✅ | 外部服务调用 |
-
 | 资源不足 | ❌ | ✅ | ✅ | ✅ | 内存/连接池 |
-
 | 内部 Bug | ❌ | ❌ | ❌ | ❌ | `panic` |
 
 #### 3.1 重试策略决策 {#31-重试策略决策}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
-
 // 重试决策树
 
 fn should_retry(error: &Error) -> RetryDecision {
@@ -407,13 +344,11 @@ fn should_retry(error: &Error) -> RetryDecision {
         ErrorKind::TimedOut => RetryDecision::RetryWithBackoff,
 
 
-
         // 配置错误 → 不重试
 
         ErrorKind::InvalidInput |
 
         ErrorKind::NotFound => RetryDecision::FailFast,
-
 
 
         // 服务器错误 → 可能重试
@@ -435,27 +370,18 @@ fn should_retry(error: &Error) -> RetryDecision {
     }
 
 }
-
 ```
-
 #### 3.2 降级策略 {#32-降级策略}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 服务状态 | 降级策略 | 示例 |
-
 | :--- | :--- | :--- |
-
 | 推荐服务不可用 | 使用缓存 | 显示上次推荐 |
-
 | 认证服务超时 | 允许本地缓存凭证 | 短期免密登录 |
-
 | 日志服务满载 | 丢弃日志 | 采样记录 |
-
 | 数据库慢查询 | 返回简化数据 | 仅返回关键字段 |
 
 ---
@@ -465,7 +391,6 @@ fn should_retry(error: &Error) -> RetryDecision {
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
-
 ┌─────────────────────────────────────────────────────────────┐
 
 │                   库代码 (Library)                          │
@@ -529,27 +454,18 @@ fn should_retry(error: &Error) -> RetryDecision {
                     │ • 开发效率高      │
 
                     └───────────────────┘
-
 ```
-
 #### 对比表 {#对比表}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 方面 | 库代码 (Library) | 应用程序 (Application) |
-
 | :--- | :--- | :--- |
-
 | **错误库** | `thiserror` | `anyhow` |
-
 | **错误类型** | 具体、可枚举 | 动态、上下文丰富 |
-
 | **错误转换** | 显式 `From` 实现 | 自动转换 |
-
 | **错误匹配** | 用户可 `match` | 通常只报告 |
-
 | **性能考虑** | 重要 | 相对次要 |
-
 | **二进制大小** | 敏感 | 相对次要 |
 
 ---
@@ -557,7 +473,6 @@ fn should_retry(error: &Error) -> RetryDecision {
 ## 对比分析 {#对比分析}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Result vs Option vs panic {#result-vs-option-vs-panic}
@@ -565,7 +480,6 @@ fn should_retry(error: &Error) -> RetryDecision {
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```text
-
 ┌─────────────────────────────────────────────────────────────────┐
 
 │                    Result<T, E>                                  │
@@ -609,27 +523,18 @@ fn should_retry(error: &Error) -> RetryDecision {
     │ 转为 Result         │        │ Result + assert!      │
 
     └────────────────────┘        └───────────────────────┘
-
 ```
-
 #### 详细对比 {#详细对比-1}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 特性 | `Result<T, E>` | `Option<T>` | `panic!` |
-
 | :--- | :--- | :--- | :--- |
-
 | **用途** | 可恢复错误 | 可选值 | 不可恢复错误 |
-
 | **错误信息** | 丰富 (E) | 无 (仅 None) | 消息 + 回溯 |
-
 | **传播** | `?` 操作符 | `?` 操作符 (需转换) | 不可传播 |
-
 | **性能开销** | 正常 | 最小 | 高 (展开栈) |
-
 | **编译时检查** | 强制处理 | 强制处理 | 无 |
-
 | **适用边界** | 库/应用边界 | 函数内部 | 仅程序终止 |
 
 #### 转换关系 {#转换关系}
@@ -637,13 +542,11 @@ fn should_retry(error: &Error) -> RetryDecision {
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
-
 // Option → Result
 
 let result = option.ok_or(Error::NotFound)?;
 
 let result = option.ok_or_else(|| Error::compute())?;
-
 
 
 // Result → Option
@@ -653,15 +556,12 @@ let option = result.ok();           // 丢弃错误
 let option = result.err();          // 仅保留错误
 
 
-
 // Result → panic (显式选择)
 
 let value = result.expect("critical: must succeed");
 
 let value = result.unwrap();        // 仅用于原型/测试
-
 ```
-
 ---
 
 ### thiserror vs anyhow {#thiserror-vs-anyhow}
@@ -669,7 +569,6 @@ let value = result.unwrap();        // 仅用于原型/测试
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
-
 ┌────────────────────────────────────────────────────────────────┐
 
 │                      thiserror                                 │
@@ -693,7 +592,6 @@ let value = result.unwrap();        // 仅用于原型/测试
 └────────────────────────────────────────────────────────────────┘
 
 
-
 ┌────────────────────────────────────────────────────────────────┐
 
 │                      anyhow                                    │
@@ -715,31 +613,20 @@ let value = result.unwrap();        // 仅用于原型/测试
 │   • 与 ? 操作符无缝集成                                         │
 
 └────────────────────────────────────────────────────────────────┘
-
 ```
-
 #### 详细对比 {#详细对比-1}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 特性 | `thiserror` | `anyhow` |
-
 | :--- | :--- | :--- |
-
 | **目标** | 库开发 | 应用开发 |
-
 | **错误类型** | 静态、具体 | 动态、类型擦除 |
-
 | **错误匹配** | 支持 (`match`) | 不支持 (通常) |
-
 | **上下文** | 手动添加 | `.context()` 链式 |
-
 | **回溯** | 需手动实现 | 内置支持 |
-
 | **编译时开销** | 零 | 极小 |
-
 | **运行时开销** | 零 | 极小 |
-
 | **典型使用** | 定义错误枚举 | 函数返回类型 |
 
 #### 混合使用模式 {#混合使用模式}
@@ -747,11 +634,9 @@ let value = result.unwrap();        // 仅用于原型/测试
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
-
 // 库代码 (lib.rs)
 
 use thiserror::Error;
-
 
 
 #[derive(Error, Debug)]
@@ -763,11 +648,9 @@ pub enum DataError {
     Io(#[from] std::io::Error),
 
 
-
     #[error("parse error: {0}")]
 
     Parse(String),
-
 
 
     #[error("not found: {0}")]
@@ -777,7 +660,6 @@ pub enum DataError {
 }
 
 
-
 pub fn load_data(path: &str) -> Result<Data, DataError> {
 
     // 返回具体的 DataError
@@ -785,11 +667,9 @@ pub fn load_data(path: &str) -> Result<Data, DataError> {
 }
 
 
-
 // 应用代码 (main.rs)
 
 use anyhow::{Context, Result};
-
 
 
 fn main() -> Result<()> {
@@ -801,13 +681,10 @@ fn main() -> Result<()> {
     // 转换为 anyhow::Error，添加上下文
 
 
-
     Ok(())
 
 }
-
 ```
-
 ---
 
 ### 自定义错误类型设计 {#自定义错误类型设计}
@@ -815,7 +692,6 @@ fn main() -> Result<()> {
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```text
-
 ┌────────────────────────────────────────────────────────────────┐
 
 │                   错误类型设计层次                              │
@@ -887,25 +763,17 @@ fn main() -> Result<()> {
     │ }                      │
 
     └────────────────────────┘
-
 ```
-
 #### 设计原则 {#设计原则}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 原则 | 说明 | 示例 |
-
 | :--- | :--- | :--- |
-
 | **正交分类** | 错误类别不重叠 | `NetworkError` vs `ParseError` |
-
 | **信息丰富** | 包含诊断所需信息 | `NotFound { resource: String, id: String }` |
-
 | **可序列化** | API 边界需支持序列化 | `#[derive(Serialize)]` |
-
 | **可匹配** | 用户能针对性处理 | `Error::NotFound { .. }` |
-
 | **向后兼容** | 添加变体不破坏 API | `#[non_exhaustive]` |
 
 #### 推荐模式 {#推荐模式}
@@ -913,11 +781,9 @@ fn main() -> Result<()> {
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
-
 use thiserror::Error;
 
 use serde::Serialize;
-
 
 
 // 错误码设计
@@ -933,11 +799,9 @@ pub enum ErrorCode {
     NotFound = 404,
 
 
-
     #[error("invalid_input")]
 
     InvalidInput = 400,
-
 
 
     #[error("internal_error")]
@@ -945,7 +809,6 @@ pub enum ErrorCode {
     InternalError = 500,
 
 }
-
 
 
 // 结构化错误
@@ -969,7 +832,6 @@ pub struct ApiError {
 }
 
 
-
 // 分层模块错误
 
 #[derive(Error, Debug)]
@@ -981,11 +843,9 @@ pub enum AppError {
     Config(#[from] config::ConfigError),
 
 
-
     #[error("database error: {0}")]
 
     Database(#[from] db::DbError),
-
 
 
     #[error("external service error: {0}")]
@@ -993,15 +853,12 @@ pub enum AppError {
     External(#[from] external::ServiceError),
 
 
-
     #[error("internal error: {0}")]
 
     Internal(String),
 
 }
-
 ```
-
 ---
 
 ### 错误链和上下文 {#错误链和上下文}
@@ -1009,9 +866,7 @@ pub enum AppError {
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
-
 错误链结构:
-
 
 
 ┌────────────────────────────────────────────────────────────────┐
@@ -1039,17 +894,13 @@ pub enum AppError {
 │ "expected ':', found '}'"                                      │
 
 └────────────────────────────────────────────────────────────────┘
-
 ```
-
 #### anyhow 上下文链 {#anyhow-上下文链}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
-
 use anyhow::{Context, Result};
-
 
 
 fn process_user(user_id: Uuid) -> Result<()> {
@@ -1059,11 +910,9 @@ fn process_user(user_id: Uuid) -> Result<()> {
         .with_context(|| format!("failed to find user {}", user_id))?;
 
 
-
     let config = fs::read_to_string(&user.config_path)
 
         .with_context(|| format!("failed to read config at {}", user.config_path))?;
-
 
 
     let settings: Settings = serde_yaml::from_str(&config)
@@ -1071,17 +920,14 @@ fn process_user(user_id: Uuid) -> Result<()> {
         .context("failed to parse config as YAML")?;
 
 
-
     apply_settings(user_id, settings)
 
         .context("failed to apply settings")?;
 
 
-
     Ok(())
 
 }
-
 
 
 // 输出:
@@ -1099,17 +945,13 @@ fn process_user(user_id: Uuid) -> Result<()> {
 //   2: while reading config at /home/user/.config/app.yaml
 
 //   3: failed to find user 550e8400-e29b-41d4-a716-446655440000
-
 ```
-
 #### thiserror 错误源 {#thiserror-错误源}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
-
 use thiserror::Error;
-
 
 
 #[derive(Error, Debug)]
@@ -1129,7 +971,6 @@ pub enum ConfigError {
     },
 
 
-
     #[error("failed to parse config: {message}")]
 
     Parse {
@@ -1143,7 +984,6 @@ pub enum ConfigError {
     },
 
 }
-
 
 
 // 使用
@@ -1161,7 +1001,6 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
         })?;
 
 
-
     serde_yaml::from_str(&content)
 
         .map_err(|e| ConfigError::Parse {
@@ -1173,15 +1012,12 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
         })
 
 }
-
 ```
-
 ---
 
 ## 最佳实践 {#最佳实践}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 错误类型设计模式 {#1-错误类型设计模式}
@@ -1193,7 +1029,6 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
-
 // 领域层错误
 
 #[derive(Error, Debug)]
@@ -1205,13 +1040,11 @@ pub enum DomainError {
     Validation(String),
 
 
-
     #[error("business rule violated: {0}")]
 
     BusinessRule(String),
 
 }
-
 
 
 // 应用层错误
@@ -1225,13 +1058,11 @@ pub enum ApplicationError {
     Domain(#[from] DomainError),
 
 
-
     #[error("infrastructure error: {0}")]
 
     Infrastructure(#[source] InfrastructureError),
 
 }
-
 
 
 // 接口层错误
@@ -1249,11 +1080,9 @@ pub enum ApiError {
     BadRequest { message: String },
 
 
-
     #[error("not_found")]
 
     NotFound { resource: String },
-
 
 
     #[error("internal_error")]
@@ -1261,7 +1090,6 @@ pub enum ApiError {
     InternalError { request_id: Uuid },
 
 }
-
 
 
 // 错误转换
@@ -1289,21 +1117,17 @@ impl From<ApplicationError> for ApiError {
     }
 
 }
-
 ```
-
 #### 模式 B: 错误状态码映射 {#模式-b-错误状态码映射}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
-
 pub trait HttpStatusCode {
 
     fn status_code(&self) -> StatusCode;
 
 }
-
 
 
 impl HttpStatusCode for ApiError {
@@ -1327,15 +1151,12 @@ impl HttpStatusCode for ApiError {
     }
 
 }
-
 ```
-
 #### 模式 C: 错误 Builder {#模式-c-错误-builder}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
-
 #[derive(Debug)]
 
 pub struct ErrorBuilder {
@@ -1349,7 +1170,6 @@ pub struct ErrorBuilder {
     context: HashMap<String, String>,
 
 }
-
 
 
 impl ErrorBuilder {
@@ -1371,7 +1191,6 @@ impl ErrorBuilder {
     }
 
 
-
     pub fn message(mut self, msg: impl Into<String>) -> Self {
 
         self.message = Some(msg.into());
@@ -1379,7 +1198,6 @@ impl ErrorBuilder {
         self
 
     }
-
 
 
     pub fn source(mut self, err: impl Into<Box<dyn std::error::Error + Send + Sync>>) -> Self {
@@ -1391,7 +1209,6 @@ impl ErrorBuilder {
     }
 
 
-
     pub fn context(mut self, key: &str, value: impl Into<String>) -> Self {
 
         self.context.insert(key.to_string(), value.into());
@@ -1399,7 +1216,6 @@ impl ErrorBuilder {
         self
 
     }
-
 
 
     pub fn build(self) -> AppError {
@@ -1421,7 +1237,6 @@ impl ErrorBuilder {
 }
 
 
-
 // 使用
 
 let err = ErrorBuilder::new(ErrorCode::NotFound)
@@ -1433,9 +1248,7 @@ let err = ErrorBuilder::new(ErrorCode::NotFound)
     .context("operation", "login")
 
     .build();
-
 ```
-
 ---
 
 ### 2. 错误转换和映射 {#2-错误转换和映射}
@@ -1447,9 +1260,7 @@ let err = ErrorBuilder::new(ErrorCode::NotFound)
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
-
 use std::io;
-
 
 
 #[derive(Error, Debug)]
@@ -1461,11 +1272,9 @@ pub enum AppError {
     Io(#[from] io::Error),
 
 
-
     #[error("parse error: {0}")]
 
     Parse(#[from] serde_json::Error),
-
 
 
     #[error("database error: {0}")]
@@ -1473,7 +1282,6 @@ pub enum AppError {
     Database(#[from] sqlx::Error),
 
 }
-
 
 
 // 现在 ? 会自动转换
@@ -1487,15 +1295,12 @@ fn read_config() -> Result<Config, AppError> {
     Ok(config)
 
 }
-
 ```
-
 #### 2.2 映射错误 (`map_err`) {#22-映射错误-map_err}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
-
 // 当需要自定义错误信息时
 
 fn parse_port(s: &str) -> Result<u16, AppError> {
@@ -1513,7 +1318,6 @@ fn parse_port(s: &str) -> Result<u16, AppError> {
 }
 
 
-
 // 或者使用 anyhow 添加上下文
 
 fn load_users() -> Result<Vec<User>> {
@@ -1527,21 +1331,15 @@ fn load_users() -> Result<Vec<User>> {
         .map_err(|e| anyhow!("failed to load users from database: {}", e))
 
 }
-
 ```
-
 #### 2.3 错误类型转换矩阵 {#23-错误类型转换矩阵}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 从 / 到 | `Result<T, E1>` | `Result<T, E2>` | `Option<T>` | `panic` |
-
 | :--- | :--- | :--- | :--- | :--- |
-
 | `Result<T, E>` | `map_err` | `map_err` + `From` | `ok()` | `unwrap` |
-
 | `Option<T>` | `ok_or` | `ok_or` + `From` | - | `unwrap` |
-
 | `panic` | 捕获 (`catch_unwind`) | 捕获 + 转换 | 不支持 | - |
 
 ---
@@ -1555,9 +1353,7 @@ fn load_users() -> Result<Vec<User>> {
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
-
 use tracing::{error, warn, info, instrument};
-
 
 
 #[instrument(skip(db), fields(user_id = %user_id))]
@@ -1573,7 +1369,6 @@ async fn authenticate_user(
 ) -> Result<User, AuthError> {
 
     info!("attempting authentication");
-
 
 
     let user = db.find_user(user_id)
@@ -1595,7 +1390,6 @@ async fn authenticate_user(
         })?;
 
 
-
     if !verify_token(&user, token) {
 
         warn!(
@@ -1611,25 +1405,20 @@ async fn authenticate_user(
     }
 
 
-
     info!("authentication successful");
 
     Ok(user)
 
 }
-
 ```
-
 #### 3.2 用户友好的错误报告 {#32-用户友好的错误报告}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
-
 pub fn format_error_report(err: &anyhow::Error) -> String {
 
     let mut report = String::new();
-
 
 
     // 用户友好的顶层消息
@@ -1641,13 +1430,11 @@ pub fn format_error_report(err: &anyhow::Error) -> String {
     report.push('\n');
 
 
-
     // 建议的解决步骤
 
     report.push_str("\n建议:\n");
 
     report.push_str(&suggest_fixes(err));
-
 
 
     // 技术细节（用于调试）
@@ -1661,7 +1448,6 @@ pub fn format_error_report(err: &anyhow::Error) -> String {
     }
 
 
-
     // 回溯（如果有）
 
     if let Some(backtrace) = err.backtrace() {
@@ -1673,11 +1459,9 @@ pub fn format_error_report(err: &anyhow::Error) -> String {
     }
 
 
-
     report
 
 }
-
 
 
 fn suggest_fixes(err: &anyhow::Error) -> String {
@@ -1697,17 +1481,13 @@ fn suggest_fixes(err: &anyhow::Error) -> String {
     }
 
 }
-
 ```
-
 #### 3.3 错误聚合和监控 {#33-错误聚合和监控}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
-
 use metrics::{counter, gauge, histogram};
-
 
 
 pub fn report_error(err: &AppError) {
@@ -1717,7 +1497,6 @@ pub fn report_error(err: &AppError) {
     counter!("app.errors.total", 1, "type" => error_type_name(err));
 
 
-
     // 按错误码计数
 
     if let Some(code) = error_code(err) {
@@ -1725,7 +1504,6 @@ pub fn report_error(err: &AppError) {
         counter!("app.errors.by_code", 1, "code" => code.to_string());
 
     }
-
 
 
     // 严重错误告警
@@ -1739,9 +1517,7 @@ pub fn report_error(err: &AppError) {
     }
 
 }
-
 ```
-
 ---
 
 ### 4. 测试错误处理 {#4-测试错误处理}
@@ -1753,13 +1529,11 @@ pub fn report_error(err: &AppError) {
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
-
 #[cfg(test)]
 
 mod tests {
 
     use super::*;
-
 
 
     #[test]
@@ -1775,9 +1549,7 @@ mod tests {
         );
 
 
-
         let app_err: AppError = io_err.into();
-
 
 
         assert!(matches!(app_err, AppError::Io(_)));
@@ -1785,7 +1557,6 @@ mod tests {
         assert!(app_err.to_string().contains("file not found"));
 
     }
-
 
 
     #[test]
@@ -1799,11 +1570,9 @@ mod tests {
         }.into();
 
 
-
         // 可以 downcast 回具体类型
 
         assert!(err.downcast_ref::<ConfigError>().is_some());
-
 
 
         // 检查具体变体
@@ -1817,15 +1586,12 @@ mod tests {
     }
 
 }
-
 ```
-
 #### 4.2 测试错误传播 {#42-测试错误传播}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
-
 #[test]
 
 fn test_error_propagation() {
@@ -1833,7 +1599,6 @@ fn test_error_propagation() {
     // 使用 assert_matches! (需要 nightly) 或自定义宏
 
     let result = load_config("nonexistent.json");
-
 
 
     match result {
@@ -1851,15 +1616,12 @@ fn test_error_propagation() {
     }
 
 }
-
 ```
-
 #### 4.3 测试错误处理逻辑 {#43-测试错误处理逻辑}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
-
 #[tokio::test]
 
 async fn test_retry_logic() {
@@ -1889,7 +1651,6 @@ async fn test_retry_logic() {
     ).await;
 
 
-
     assert!(result.is_ok());
 
     assert_eq!(attempts, 3);
@@ -1897,13 +1658,11 @@ async fn test_retry_logic() {
 }
 
 
-
 #[tokio::test]
 
 async fn test_circuit_breaker() {
 
     let mut cb = CircuitBreaker::new(3, Duration::from_secs(60));
-
 
 
     // 触发断路器
@@ -1915,11 +1674,9 @@ async fn test_circuit_breaker() {
     }
 
 
-
     // 断路器应打开
 
     assert!(cb.is_open());
-
 
 
     // 后续请求应快速失败
@@ -1929,15 +1686,12 @@ async fn test_circuit_breaker() {
     assert!(matches!(result, Err(CircuitBreakerError::Open)));
 
 }
-
 ```
-
 ---
 
 ## 反模式警示 {#反模式警示}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ❌ 反模式 1: 滥用 `unwrap()` {#反模式-1-滥用-unwrap}
@@ -1945,13 +1699,11 @@ async fn test_circuit_breaker() {
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
-
 // ❌ 错误: 生产代码中使用 unwrap
 
 let config = fs::read_to_string("config.json").unwrap();
 
 let port = config.parse::<u16>().unwrap();
-
 
 
 // ✅ 正确: 使用 ? 传播错误
@@ -1965,7 +1717,6 @@ let port = config.parse::<u16>()
     .context("invalid port number")?;
 
 
-
 // ✅ 仅在以下情况使用 unwrap:
 
 // 1. 测试代码
@@ -1975,15 +1726,12 @@ let port = config.parse::<u16>()
 // 3. 使用 expect 提供有意义的错误消息
 
 let val = Some(42).expect("this is a bug: value should exist");
-
 ```
-
 ### ❌ 反模式 2: 过度使用 `String` 作为错误 {#反模式-2-过度使用-string-作为错误}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
-
 // ❌ 错误: 使用 String 丢失类型安全
 
 fn do_something() -> Result<(), String> {
@@ -1991,7 +1739,6 @@ fn do_something() -> Result<(), String> {
     Err("something went wrong".to_string())
 
 }
-
 
 
 // ❌ 错误: 调用者无法匹配具体错误
@@ -2003,7 +1750,6 @@ match do_something() {
     _ => ...,
 
 }
-
 
 
 // ✅ 正确: 使用结构化错误类型
@@ -2023,7 +1769,6 @@ enum MyError {
 }
 
 
-
 match do_something() {
 
     Err(MyError::NotFound(_)) => ..., // 类型安全
@@ -2033,15 +1778,12 @@ match do_something() {
     _ => ...,
 
 }
-
 ```
-
 ### ❌ 反模式 3: 错误的 `?` 使用导致信息丢失 {#反模式-3-错误的-使用导致信息丢失}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
-
 // ❌ 错误: 丢失了上下文信息
 
 fn process_file(path: &str) -> Result<Data, io::Error> {
@@ -2057,7 +1799,6 @@ fn process_file(path: &str) -> Result<Data, io::Error> {
 }
 
 
-
 // ✅ 正确: 使用合适的错误类型
 
 fn process_file(path: &str) -> Result<Data, AppError> {
@@ -2069,7 +1810,6 @@ fn process_file(path: &str) -> Result<Data, AppError> {
     Ok(data)
 
 }
-
 
 
 // ✅ 或者使用 anyhow 保留所有错误
@@ -2087,15 +1827,12 @@ fn process_file(path: &str) -> Result<Data> {
     Ok(data)
 
 }
-
 ```
-
 ### ❌ 反模式 4: 混淆 `Option` 和 `Result` {#反模式-4-混淆-option-和-result}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
-
 // ❌ 错误: Option 表示错误
 
 fn find_user(id: Uuid) -> Option<User> {
@@ -2105,7 +1842,6 @@ fn find_user(id: Uuid) -> Option<User> {
     // 调用者无法区分 "不存在" 和 "出错了"
 
 }
-
 
 
 // ✅ 正确: Result 表示操作可能失败
@@ -2119,7 +1855,6 @@ fn find_user(id: Uuid) -> Result<Option<User>, DbError> {
     // Err(e) = 数据库错误
 
 }
-
 
 
 // ✅ 或者使用自定义错误明确语义
@@ -2139,25 +1874,20 @@ enum FindUserError {
 }
 
 
-
 fn find_user(id: Uuid) -> Result<User, FindUserError> {
 
     // ...
 
 }
-
 ```
-
 ### ❌ 反模式 5: 忽略错误 {#反模式-5-忽略错误}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
-
 // ❌ 错误: 完全忽略错误
 
 let _ = file.write_all(data);
-
 
 
 // ❌ 错误: 空 match 分支
@@ -2171,7 +1901,6 @@ match write_file(path, data) {
 }
 
 
-
 // ✅ 正确: 至少记录错误
 
 if let Err(e) = file.write_all(data) {
@@ -2179,7 +1908,6 @@ if let Err(e) = file.write_all(data) {
     log::error!("failed to write file: {}", e);
 
 }
-
 
 
 // ✅ 正确: 使用 let_else 语法
@@ -2191,19 +1919,15 @@ let Ok(result) = operation() else {
 };
 
 
-
 // ✅ 正确: 如果确实应该忽略，明确注释
 
 let _ = cache.insert(key, value); // 缓存失败可接受
-
 ```
-
 ### ❌ 反模式 6: 过度详细的错误类型 {#反模式-6-过度详细的错误类型}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
-
 // ❌ 错误: 过于详细的错误枚举
 
 #[derive(Error, Debug)]
@@ -2231,7 +1955,6 @@ enum DatabaseError {
 }
 
 
-
 // ✅ 正确: 结构化错误信息
 
 #[derive(Error, Debug)]
@@ -2243,11 +1966,9 @@ enum DatabaseError {
     ConnectionTimeout { duration: u64 },
 
 
-
     #[error("connection failed: {backend}")]
 
     ConnectionFailed { backend: BackendType },
-
 
 
     #[error("query failed: {message}")]
@@ -2255,15 +1976,12 @@ enum DatabaseError {
     QueryFailed { message: String },
 
 }
-
 ```
-
 ### ❌ 反模式 7: 跨线程边界传递非 Send 错误 {#反模式-7-跨线程边界传递非-send-错误}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
-
 // ❌ 错误: Rc 不能跨线程
 
 #[derive(Error, Debug)]
@@ -2275,7 +1993,6 @@ enum BadError {
     Inner(Rc<dyn std::error::Error>), // Rc 不是 Send!
 
 }
-
 
 
 // ❌ 这会导致编译错误
@@ -2291,7 +2008,6 @@ async fn bad_function() -> Result<(), BadError> {
 }
 
 
-
 // ✅ 正确: 使用 Arc 或 Box
 
 #[derive(Error, Debug)]
@@ -2303,15 +2019,12 @@ enum GoodError {
     Inner(#[source] Box<dyn std::error::Error + Send + Sync>),
 
 }
-
 ```
-
 ### ❌ 反模式 8: 在热路径中创建错误字符串 {#反模式-8-在热路径中创建错误字符串}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
-
 // ❌ 错误: 每次调用都分配字符串，即使成功
 
 fn parse_hot(input: &[u8]) -> Result<Item, String> {
@@ -2325,7 +2038,6 @@ fn parse_hot(input: &[u8]) -> Result<Item, String> {
     // ... 解析逻辑
 
 }
-
 
 
 // ✅ 正确: 使用静态错误或延迟格式化
@@ -2345,7 +2057,6 @@ enum ParseError {
 }
 
 
-
 // 或使用 thiserror 的 lazy format
 
 #[derive(Error, Debug)]
@@ -2357,15 +2068,12 @@ enum LazyError {
     At { location: &'static str },
 
 }
-
 ```
-
 ---
 
 ## 代码示例 {#代码示例}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 完整示例 1: 分层错误处理架构 {#完整示例-1-分层错误处理架构}
@@ -2373,9 +2081,7 @@ enum LazyError {
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
-
 //! 完整的多层错误处理示例
-
 
 
 use std::collections::HashMap;
@@ -2389,15 +2095,12 @@ use serde::{Serialize, Deserialize};
 use uuid::Uuid;
 
 
-
 // ==================== 领域层 (Domain Layer) ====================
-
 
 
 pub mod domain {
 
     use super::*;
-
 
 
     #[derive(Error, Debug, Clone, PartialEq)]
@@ -2409,11 +2112,9 @@ pub mod domain {
         Required { field: String },
 
 
-
         #[error("field '{field}' must be at least {min} characters")]
 
         TooShort { field: String, min: usize },
-
 
 
         #[error("invalid email format: {email}")]
@@ -2421,7 +2122,6 @@ pub mod domain {
         InvalidEmail { email: String },
 
     }
-
 
 
     #[derive(Error, Debug, Clone, PartialEq)]
@@ -2433,11 +2133,9 @@ pub mod domain {
         DuplicateUser { email: String },
 
 
-
         #[error("insufficient balance: required {required}, available {available}")]
 
         InsufficientBalance { required: f64, available: f64 },
-
 
 
         #[error("operation not permitted for user status: {status}")]
@@ -2447,9 +2145,7 @@ pub mod domain {
     }
 
 
-
     pub type DomainResult<T> = Result<T, DomainError>;
-
 
 
     #[derive(Error, Debug, Clone, PartialEq)]
@@ -2461,7 +2157,6 @@ pub mod domain {
         Validation(#[from] ValidationError),
 
 
-
         #[error("business rule violated: {0}")]
 
         Business(#[from] BusinessError),
@@ -2471,9 +2166,7 @@ pub mod domain {
 }
 
 
-
 // ==================== 应用层 (Application Layer) ====================
-
 
 
 pub mod application {
@@ -2481,7 +2174,6 @@ pub mod application {
     use super::*;
 
     use super::domain::*;
-
 
 
     #[derive(Error, Debug)]
@@ -2493,11 +2185,9 @@ pub mod application {
         Database(String),
 
 
-
         #[error("cache error: {0}")]
 
         Cache(String),
-
 
 
         #[error("external service error: {code} - {message}")]
@@ -2505,7 +2195,6 @@ pub mod application {
         ExternalService { code: u16, message: String },
 
     }
-
 
 
     #[derive(Error, Debug)]
@@ -2517,17 +2206,14 @@ pub mod application {
         Domain(#[from] DomainError),
 
 
-
         #[error(transparent)]
 
         Infrastructure(#[from] InfrastructureError),
 
 
-
         #[error("concurrent modification detected")]
 
         ConcurrentModification,
-
 
 
         #[error("operation timeout after {0:?}")]
@@ -2537,15 +2223,12 @@ pub mod application {
     }
 
 
-
     pub type AppResult<T> = Result<T, ApplicationError>;
 
 }
 
 
-
 // ==================== 接口层 (Interface Layer) ====================
-
 
 
 pub mod interface {
@@ -2555,7 +2238,6 @@ pub mod interface {
     use super::application::*;
 
     use super::domain::*;
-
 
 
     #[derive(Debug, Serialize, Deserialize)]
@@ -2583,7 +2265,6 @@ pub mod interface {
     }
 
 
-
     #[derive(Debug, Serialize)]
 
     pub struct ApiErrorResponse {
@@ -2605,7 +2286,6 @@ pub mod interface {
     }
 
 
-
     #[derive(Error, Debug)]
 
     #[error("API error: {response:?}")]
@@ -2615,7 +2295,6 @@ pub mod interface {
         response: ApiErrorResponse,
 
     }
-
 
 
     impl ApiError {
@@ -2729,7 +2408,6 @@ pub mod interface {
             };
 
 
-
             Self {
 
                 response: ApiErrorResponse {
@@ -2751,7 +2429,6 @@ pub mod interface {
         }
 
 
-
         pub fn into_response(self) -> ApiErrorResponse {
 
             self.response
@@ -2763,9 +2440,7 @@ pub mod interface {
 }
 
 
-
 // ==================== 使用示例 ====================
-
 
 
 use domain::*;
@@ -2773,7 +2448,6 @@ use domain::*;
 use application::*;
 
 use interface::*;
-
 
 
 fn validate_user_input(email: &str, name: &str) -> DomainResult<()> {
@@ -2789,7 +2463,6 @@ fn validate_user_input(email: &str, name: &str) -> DomainResult<()> {
     }
 
 
-
     if !email.contains('@') {
 
         return Err(ValidationError::InvalidEmail {
@@ -2799,7 +2472,6 @@ fn validate_user_input(email: &str, name: &str) -> DomainResult<()> {
         }.into());
 
     }
-
 
 
     if name.len() < 2 {
@@ -2815,17 +2487,14 @@ fn validate_user_input(email: &str, name: &str) -> DomainResult<()> {
     }
 
 
-
     Ok(())
 
 }
 
 
-
 fn create_user(email: String, name: String) -> AppResult<User> {
 
     validate_user_input(&email, &name)?;
-
 
 
     // 模拟检查重复用户
@@ -2835,7 +2504,6 @@ fn create_user(email: String, name: String) -> AppResult<User> {
         return Err(BusinessError::DuplicateUser { email }.into());
 
     }
-
 
 
     // 模拟数据库操作
@@ -2851,11 +2519,9 @@ fn create_user(email: String, name: String) -> AppResult<User> {
     }
 
 
-
     Ok(User { email, name })
 
 }
-
 
 
 #[derive(Debug)]
@@ -2869,13 +2535,11 @@ struct User {
 }
 
 
-
 // HTTP 处理函数
 
 fn handle_create_user(email: String, name: String) -> Result<ApiErrorResponse, ApiErrorResponse> {
 
     let request_id = Uuid::new_v4();
-
 
 
     match create_user(email, name) {
@@ -2903,7 +2567,6 @@ fn handle_create_user(email: String, name: String) -> Result<ApiErrorResponse, A
 }
 
 
-
 fn main() {
 
     // 成功场景
@@ -2919,7 +2582,6 @@ fn main() {
     }
 
 
-
     // 验证错误
 
     println!("\n=== Test 2: Invalid email ===");
@@ -2931,7 +2593,6 @@ fn main() {
         Err(e) => println!("Error: {:?}", e),
 
     }
-
 
 
     // 业务错误
@@ -2947,7 +2608,6 @@ fn main() {
     }
 
 
-
     // 基础设施错误
 
     println!("\n=== Test 4: Database error ===");
@@ -2961,17 +2621,13 @@ fn main() {
     }
 
 }
-
 ```
-
 ### 完整示例 2: 带重试和断路器的错误处理 {#完整示例-2-带重试和断路器的错误处理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
-
 //! 生产级错误处理：重试、断路器、超时
-
 
 
 use std::future::Future;
@@ -2989,9 +2645,7 @@ use tokio::time::sleep;
 use thiserror::Error;
 
 
-
 // ==================== 错误定义 ====================
-
 
 
 #[derive(Error, Debug, Clone)]
@@ -3003,13 +2657,11 @@ pub enum RetryError<E> {
     MaxRetriesExceeded { attempts: u32, last_error: E },
 
 
-
     #[error("non-retryable error: {0}")]
 
     NonRetryable(E),
 
 }
-
 
 
 #[derive(Error, Debug, Clone)]
@@ -3021,7 +2673,6 @@ pub enum CircuitBreakerError {
     Open,
 
 
-
     #[error("half-open state rejected request")]
 
     HalfOpenRejected,
@@ -3029,9 +2680,7 @@ pub enum CircuitBreakerError {
 }
 
 
-
 // ==================== 重试策略 ====================
-
 
 
 #[derive(Debug, Clone, Copy)]
@@ -3047,7 +2696,6 @@ pub struct RetryPolicy {
     pub backoff_multiplier: f64,
 
 }
-
 
 
 impl Default for RetryPolicy {
@@ -3071,7 +2719,6 @@ impl Default for RetryPolicy {
 }
 
 
-
 impl RetryPolicy {
 
     pub fn exponential_backoff(&self, attempt: u32) -> Duration {
@@ -3087,7 +2734,6 @@ impl RetryPolicy {
     }
 
 
-
     pub fn with_jitter(&self, delay: Duration) -> Duration {
 
         use rand::Rng;
@@ -3101,9 +2747,7 @@ impl RetryPolicy {
 }
 
 
-
 // ==================== 可重试错误 trait ====================
-
 
 
 pub trait Retryable {
@@ -3113,9 +2757,7 @@ pub trait Retryable {
 }
 
 
-
 // ==================== 重试实现 ====================
-
 
 
 pub async fn retry<F, Fut, T, E>(
@@ -3139,7 +2781,6 @@ where
     let mut last_error = None;
 
 
-
     for attempt in 0..policy.max_attempts {
 
         match operation().await {
@@ -3155,9 +2796,7 @@ where
                 }
 
 
-
                 last_error = Some(err);
-
 
 
                 if attempt < policy.max_attempts - 1 {
@@ -3187,7 +2826,6 @@ where
     }
 
 
-
     Err(RetryError::MaxRetriesExceeded {
 
         attempts: policy.max_attempts,
@@ -3199,9 +2837,7 @@ where
 }
 
 
-
 // ==================== 断路器 ====================
-
 
 
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -3215,7 +2851,6 @@ pub enum CircuitState {
     HalfOpen,    // 尝试恢复
 
 }
-
 
 
 #[derive(Debug)]
@@ -3233,7 +2868,6 @@ struct CircuitBreakerInner {
 }
 
 
-
 pub struct CircuitBreaker {
 
     inner: Arc<RwLock<CircuitBreakerInner>>,
@@ -3245,7 +2879,6 @@ pub struct CircuitBreaker {
     timeout: Duration,
 
 }
-
 
 
 impl CircuitBreaker {
@@ -3275,7 +2908,6 @@ impl CircuitBreaker {
         }
 
     }
-
 
 
     pub async fn call<F, Fut, T, E>(&self, operation: F) -> Result<T, CircuitBreakerError>
@@ -3349,11 +2981,9 @@ impl CircuitBreaker {
         }
 
 
-
         // 执行操作
 
         let result = operation().await;
-
 
 
         // 更新状态
@@ -3407,7 +3037,6 @@ impl CircuitBreaker {
                 inner.last_failure_time = Some(Instant::now());
 
 
-
                 if inner.failure_count >= self.failure_threshold {
 
                     inner.state = CircuitState::Open;
@@ -3431,13 +3060,11 @@ impl CircuitBreaker {
     }
 
 
-
     pub async fn state(&self) -> CircuitState {
 
         self.inner.read().await.state
 
     }
-
 
 
     pub async fn is_open(&self) -> bool {
@@ -3449,9 +3076,7 @@ impl CircuitBreaker {
 }
 
 
-
 // ==================== 超时包装 ====================
-
 
 
 pub async fn with_timeout<F, Fut, T>(
@@ -3475,9 +3100,7 @@ where
 }
 
 
-
 // ==================== 组合使用 ====================
-
 
 
 pub struct ResilientClient {
@@ -3489,7 +3112,6 @@ pub struct ResilientClient {
     timeout: Duration,
 
 }
-
 
 
 impl ResilientClient {
@@ -3507,7 +3129,6 @@ impl ResilientClient {
         }
 
     }
-
 
 
     pub async fn call<F, Fut, T, E>(&self, operation: F) -> Result<T, ClientError<E>>
@@ -3531,11 +3152,9 @@ impl ResilientClient {
         }
 
 
-
         // 2. 执行带重试的操作
 
         let result = retry(operation.clone(), self.retry_policy.clone()).await;
-
 
 
         match result {
@@ -3573,7 +3192,6 @@ impl ResilientClient {
 }
 
 
-
 #[derive(Error, Debug)]
 
 pub enum ClientError<E> {
@@ -3583,17 +3201,14 @@ pub enum ClientError<E> {
     CircuitBreakerOpen,
 
 
-
     #[error("max retries exceeded after {attempts} attempts")]
 
     MaxRetriesExceeded { attempts: u32 },
 
 
-
     #[error("non-retryable error: {0:?}")]
 
     NonRetryable(E),
-
 
 
     #[error("timeout")]
@@ -3603,9 +3218,7 @@ pub enum ClientError<E> {
 }
 
 
-
 // ==================== 测试 ====================
-
 
 
 #[cfg(test)]
@@ -3615,7 +3228,6 @@ mod tests {
     use super::*;
 
 
-
     #[derive(Debug, Clone)]
 
     struct TestError {
@@ -3623,7 +3235,6 @@ mod tests {
         retryable: bool,
 
     }
-
 
 
     impl Retryable for TestError {
@@ -3637,7 +3248,6 @@ mod tests {
     }
 
 
-
     impl std::fmt::Display for TestError {
 
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -3649,9 +3259,7 @@ mod tests {
     }
 
 
-
     impl std::error::Error for TestError {}
-
 
 
     #[tokio::test]
@@ -3659,7 +3267,6 @@ mod tests {
     async fn test_retry_success_on_second_attempt() {
 
         let mut attempts = 0;
-
 
 
         let result = retry(
@@ -3689,13 +3296,11 @@ mod tests {
         ).await;
 
 
-
         assert!(result.is_ok());
 
         assert_eq!(attempts, 2);
 
     }
-
 
 
     #[tokio::test]
@@ -3715,11 +3320,9 @@ mod tests {
         ).await;
 
 
-
         assert!(matches!(result, Err(RetryError::NonRetryable(_))));
 
     }
-
 
 
     #[tokio::test]
@@ -3727,7 +3330,6 @@ mod tests {
     async fn test_circuit_breaker_opens_after_failures() {
 
         let cb = CircuitBreaker::new(3, Duration::from_secs(60));
-
 
 
         // 触发 3 次失败
@@ -3743,11 +3345,9 @@ mod tests {
         }
 
 
-
         // 断路器应该打开
 
         assert!(cb.is_open().await);
-
 
 
         // 后续请求应快速失败
@@ -3759,21 +3359,16 @@ mod tests {
     }
 
 }
-
 ```
-
 ### 完整示例 3: anyhow + thiserror 混合使用 {#完整示例-3-anyhow-thiserror-混合使用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
-
 //! anyhow 和 thiserror 的最佳实践组合
 
 
-
 // ==================== 库代码 (使用 thiserror) ====================
-
 
 
 use thiserror::Error;
@@ -3781,11 +3376,9 @@ use thiserror::Error;
 use std::path::PathBuf;
 
 
-
 pub mod core {
 
     use super::*;
-
 
 
     #[derive(Error, Debug)]
@@ -3799,11 +3392,9 @@ pub mod core {
         NotFound { path: PathBuf },
 
 
-
         #[error("invalid configuration format: {message}")]
 
         InvalidFormat { message: String },
-
 
 
         #[error("missing required field: {field}")]
@@ -3811,11 +3402,9 @@ pub mod core {
         MissingField { field: String },
 
 
-
         #[error("io error while reading config: {0}")]
 
         Io(#[from] std::io::Error),
-
 
 
         #[error("parse error: {0}")]
@@ -3823,7 +3412,6 @@ pub mod core {
         Parse(#[from] serde_json::Error),
 
     }
-
 
 
     #[derive(Error, Debug)]
@@ -3837,11 +3425,9 @@ pub mod core {
         ConnectionRefused { address: String },
 
 
-
         #[error("connection timed out after {duration:?}")]
 
         Timeout { duration: std::time::Duration },
-
 
 
         #[error("dns resolution failed for {hostname}")]
@@ -3849,13 +3435,11 @@ pub mod core {
         DnsFailed { hostname: String },
 
 
-
         #[error("tls handshake failed: {reason}")]
 
         TlsFailed { reason: String },
 
     }
-
 
 
     impl Retryable for NetworkError {
@@ -3877,7 +3461,6 @@ pub mod core {
     }
 
 
-
     #[derive(Error, Debug)]
 
     #[non_exhaustive]
@@ -3889,11 +3472,9 @@ pub mod core {
         Config(#[from] ConfigError),
 
 
-
         #[error("network error: {0}")]
 
         Network(#[from] NetworkError),
-
 
 
         #[error("internal error: {message}")]
@@ -3903,9 +3484,7 @@ pub mod core {
     }
 
 
-
     pub type CoreResult<T> = Result<T, CoreError>;
-
 
 
     pub trait Retryable {
@@ -3913,7 +3492,6 @@ pub mod core {
         fn is_retryable(&self) -> bool;
 
     }
-
 
 
     impl Retryable for CoreError {
@@ -3931,13 +3509,11 @@ pub mod core {
     }
 
 
-
     // 库函数返回结构化错误
 
     pub fn load_config(path: &str) -> CoreResult<Config> {
 
         use std::fs;
-
 
 
         let content = fs::read_to_string(path)
@@ -3957,7 +3533,6 @@ pub mod core {
             })?;
 
 
-
         let config: Config = serde_json::from_str(&content)
 
             .map_err(|e| ConfigError::InvalidFormat {
@@ -3967,15 +3542,12 @@ pub mod core {
             })?;
 
 
-
         config.validate()?;
-
 
 
         Ok(config)
 
     }
-
 
 
     #[derive(Debug, serde::Deserialize)]
@@ -3987,7 +3559,6 @@ pub mod core {
         pub database: DatabaseConfig,
 
     }
-
 
 
     impl Config {
@@ -4011,7 +3582,6 @@ pub mod core {
     }
 
 
-
     #[derive(Debug, serde::Deserialize)]
 
     pub struct ServerConfig {
@@ -4021,7 +3591,6 @@ pub mod core {
         pub port: u16,
 
     }
-
 
 
     #[derive(Debug, serde::Deserialize)]
@@ -4037,15 +3606,12 @@ pub mod core {
 }
 
 
-
 // ==================== 应用代码 (使用 anyhow) ====================
-
 
 
 use anyhow::{Context, Result as AnyhowResult, bail, ensure};
 
 use core::*;
-
 
 
 fn main() -> AnyhowResult<()> {
@@ -4055,13 +3621,11 @@ fn main() -> AnyhowResult<()> {
     tracing_subscriber::fmt::init();
 
 
-
     // 加载配置
 
     let config = core::load_config("config.json")
 
         .context("failed to load application configuration")?;
-
 
 
     tracing::info!(
@@ -4075,13 +3639,11 @@ fn main() -> AnyhowResult<()> {
     );
 
 
-
     // 初始化应用
 
     let app = Application::new(config)
 
         .context("failed to initialize application")?;
-
 
 
     // 运行应用
@@ -4091,11 +3653,9 @@ fn main() -> AnyhowResult<()> {
         .context("application runtime error")?;
 
 
-
     Ok(())
 
 }
-
 
 
 struct Application {
@@ -4103,7 +3663,6 @@ struct Application {
     config: Config,
 
 }
-
 
 
 impl Application {
@@ -4119,11 +3678,9 @@ impl Application {
         );
 
 
-
         Ok(Self { config })
 
     }
-
 
 
     fn run(&self) -> AnyhowResult<()> {
@@ -4131,9 +3688,7 @@ impl Application {
         tracing::info!("starting application");
 
 
-
         // 业务逻辑...
-
 
 
         Ok(())
@@ -4143,13 +3698,10 @@ impl Application {
 }
 
 
-
 // ==================== 错误处理中间件模式 ====================
 
 
-
 use std::fmt;
-
 
 
 /// 为 anyhow::Error 添加结构化上下文
@@ -4161,7 +3713,6 @@ pub trait ErrorContext {
     fn with_help_url(self, url: impl Into<String>) -> Self;
 
 }
-
 
 
 impl ErrorContext for anyhow::Error {
@@ -4177,7 +3728,6 @@ impl ErrorContext for anyhow::Error {
     }
 
 
-
     fn with_help_url(self, url: impl Into<String>) -> Self {
 
         self.context(format!("Help: {}", url.into()))
@@ -4187,7 +3737,6 @@ impl ErrorContext for anyhow::Error {
 }
 
 
-
 /// 格式化错误报告给用户
 
 pub fn format_user_facing_error(err: &anyhow::Error) -> String {
@@ -4195,13 +3744,11 @@ pub fn format_user_facing_error(err: &anyhow::Error) -> String {
     let mut output = String::new();
 
 
-
     output.push_str("Error: ");
 
     output.push_str(&err.to_string());
 
     output.push('\n');
-
 
 
     // 收集上下文链
@@ -4221,11 +3768,9 @@ pub fn format_user_facing_error(err: &anyhow::Error) -> String {
     }
 
 
-
     output
 
 }
-
 
 
 /// 格式化错误报告给开发者
@@ -4233,7 +3778,6 @@ pub fn format_user_facing_error(err: &anyhow::Error) -> String {
 pub fn format_debug_error(err: &anyhow::Error) -> String {
 
     let mut output = format_user_facing_error(err);
-
 
 
     if let Some(backtrace) = err.backtrace() {
@@ -4245,15 +3789,12 @@ pub fn format_debug_error(err: &anyhow::Error) -> String {
     }
 
 
-
     output
 
 }
 
 
-
 // ==================== 具体使用示例 ====================
-
 
 
 #[cfg(test)]
@@ -4261,7 +3802,6 @@ pub fn format_debug_error(err: &anyhow::Error) -> String {
 mod examples {
 
     use super::*;
-
 
 
     /// 示例 1: 简单错误传播
@@ -4273,11 +3813,9 @@ mod examples {
             .context("failed to read data file")?;
 
 
-
         let parsed: serde_json::Value = serde_json::from_str(&data)
 
             .context("failed to parse JSON data")?;
-
 
 
         println!("{:?}", parsed);
@@ -4285,7 +3823,6 @@ mod examples {
         Ok(())
 
     }
-
 
 
     /// 示例 2: 选择性处理特定错误
@@ -4325,7 +3862,6 @@ mod examples {
     }
 
 
-
     /// 示例 3: 批量操作收集错误
 
     fn example_collect_errors(paths: &[&str]) -> AnyhowResult<Vec<Config>> {
@@ -4333,11 +3869,9 @@ mod examples {
         use anyhow::anyhow;
 
 
-
         let mut configs = Vec::new();
 
         let mut errors = Vec::new();
-
 
 
         for path in paths {
@@ -4353,7 +3887,6 @@ mod examples {
         }
 
 
-
         if !errors.is_empty() {
 
             let error_details: Vec<_> = errors
@@ -4363,7 +3896,6 @@ mod examples {
                 .map(|(p, e)| format!("  - {}: {}", p, e))
 
                 .collect();
-
 
 
             bail!(
@@ -4379,11 +3911,9 @@ mod examples {
         }
 
 
-
         Ok(configs)
 
     }
-
 
 
     /// 示例 4: 错误转换和适配
@@ -4391,7 +3921,6 @@ mod examples {
     fn example_error_adaptation() -> AnyhowResult<()> {
 
         let result: Result<(), core::CoreError> = core::load_config("test.json").map(|_| ());
-
 
 
         // 转换为 anyhow 并添加上下文
@@ -4421,21 +3950,17 @@ mod examples {
             })?;
 
 
-
         Ok(())
 
     }
 
 }
-
 ```
-
 ---
 
 ## 附录 {#附录}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### A. 快速决策参考表 {#a-快速决策参考表}
@@ -4443,25 +3968,15 @@ mod examples {
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 场景 | 推荐方案 | 代码示例 |
-
 | :--- | :--- | :--- |
-
 | 函数返回可能失败 | `Result<T, E>` | `fn foo() -> Result<T, MyError>` |
-
 | 值可能不存在 | `Option<T>` | `fn find() -> Option<T>` |
-
 | 内部不变性违反 | `panic!` | `unreachable!()` |
-
 | 库错误定义 | `thiserror` | `#[derive(Error)] enum Error { ... }` |
-
 | 应用错误处理 | `anyhow` | `fn main() -> anyhow::Result<()>` |
-
 | 跨函数传播 | `?` 操作符 | `let x = may_fail()?;` |
-
 | 添加上下文 | `.context()` | `.context("while reading file")?` |
-
 | 临时故障 | 重试 | `retry(operation, policy).await?` |
-
 | 下游故障 | 断路器 | `circuit_breaker.call(op).await?` |
 
 ### B. 常用 crate 对比 {#b-常用-crate-对比}
@@ -4469,17 +3984,11 @@ mod examples {
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | Crate | 用途 | 开销 | 推荐场景 |
-
 | :--- | :--- | :--- | :--- |
-
 | `thiserror` | 定义错误类型 | 零 | 库代码 |
-
 | `anyhow` | 处理错误 | 极小 | 应用代码 |
-
 | `eyre` | 增强 anyhow | 极小 | 需要自定义报告 |
-
 | `snafu` | 结构化错误 | 零 | 复杂错误场景 |
-
 | `fehler` | 异常式错误 | 极小 | 简化错误处理 |
 
 ### C. 进一步阅读 {#c-进一步阅读}
@@ -4487,13 +3996,9 @@ mod examples {
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [Rust Error Handling Best Practices](https://doc.rust-lang.org/stable/rust-by-example/error.html)
-
 - [thiserror 文档](https://docs.rs/thiserror)
-
 - [anyhow 文档](https://docs.rs/anyhow)
-
 - [Rust API Guidelines: Error Handling](https://rust-lang.github.io/api-guidelines/interoperability.html#error-types-are-meaningful-and-well-behaved-c-good-err)
-
 - [Error Handling in Rust - Andrew Gallant](https://blog.burntsushi.net/rust-error-handling/)
 
 ---
@@ -4501,11 +4006,8 @@ mod examples {
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -4519,15 +4021,10 @@ mod examples {
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -4537,9 +4034,7 @@ mod examples {
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
@@ -4547,9 +4042,7 @@ mod examples {
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 - Rust 1.94 迁移指南
-
 - Rust 1.94 特性速查
-
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -4561,9 +4054,7 @@ mod examples {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -4583,89 +4074,47 @@ mod examples {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)**
-
 > **来源: [Wikipedia - Error Detection and Correction](https://en.wikipedia.org/wiki/Error_Detection_and_Correction)**
-
 > **来源: [Wikipedia - Fault Tolerance](https://en.wikipedia.org/wiki/Fault_Tolerance)**
-
 > **来源: [Wikipedia - Recovery Block](https://en.wikipedia.org/wiki/Recovery_Block)**
-
 > **[来源: IEEE - Fault-Tolerant Software Design]**
-
 > **[来源: ACM - Error Handling Patterns]**
-
 > **来源: [Rust Reference - Error Handling](https://doc.rust-lang.org/reference/)**
-
 > **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
-
 > **来源: [RFC 0243 - Trait-based Exception Handling](https://github.com/rust-lang/rfcs/pull/0243)**
-
 > **[来源: anyhow.rs Documentation]**
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 > **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 > **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Wikipedia - Decision Tree](https://en.wikipedia.org/wiki/Decision_Tree)**
-
 > **[来源: ACM - Decision Support Systems]**
-
 > **[来源: IEEE - Risk Analysis]**
-
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
-
 > **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)**
-
 > **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
-
 > **来源: [Rust Reference - Result](https://doc.rust-lang.org/std/result/)**
-
 > **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-try-trait.html)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
-
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ---

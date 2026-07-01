@@ -73,7 +73,6 @@ fn download_concurrent(urls: Vec<String>) {
     }
 }
 ```
-
 ### 异步下载 {#异步下载}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -87,7 +86,6 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
     Ok(bytes.to_vec())
 }
 ```
-
 ---
 
 ## 参考实现 {#参考实现}

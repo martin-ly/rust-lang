@@ -100,7 +100,6 @@
   ├── 形式化验证工具的建模挑战
   └── 安全关键认证（Ferrocene）的证据缺口
 ```
-
 > **核心痛点**: Rust 缺乏一个**单一、完整、精确**的语言规范。这在一般开发中不是问题（rustc 实现足够可靠），但在安全关键认证、形式化验证和编译器替代实现（如 gccrs）中成为根本障碍。
 > [来源: [Rust RFC 3355](https://github.com/rust-lang/rfcs/pull/3355)]
 
@@ -127,7 +126,6 @@ graph TD
 
     用户层 --> 规范层
 ```
-
 > **认知功能**: 此图展示 Rust 规范需要服务的**多层次用户群体**，以及对应的规范分层结构。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 不同场景查阅不同层次的规范——开发看参考文档，认证看技术规范，形式化验证看逻辑规约。
@@ -165,7 +163,6 @@ Ferrocene 规范的局限:
 ├── 与 rustc 版本绑定，不跟踪 nightly
 └── 独立维护，非 rust-lang 官方项目
 ```
-
 > **先行价值**: Ferrocene 规范是 Rust **技术规范可行性的概念验证**。它证明了：即使不完美，一个比 Reference 更精确的规范对认证和工具开发有巨大价值。
 > [来源: [Ferrocene Specification](https://spec.ferrocene.dev/)]
 
@@ -199,7 +196,6 @@ Ferrocene 规范的局限:
       ├── 内容: 参考解释器、一致性测试套件
       └── 形式: 可运行的代码 + 测试用例
 ```
-
 > **技术要点**: 各层次之间需要**可追溯性**——L1 的每个论断应能在 L2 中找到对应条款，L2 的每个规则应能在 L3 中找到形式化表达。
 > [来源: [Rust Project Goals — Specification](https://rust-lang.github.io/rust-project-goals/)]
 
@@ -230,7 +226,6 @@ graph LR
     规范 --> 验证
     规范 --> 证据
 ```
-
 > **认知功能**: 此图展示语言规范作为**形式化验证和工业认证的共同基础**——一个精确的规范使验证工具和认证证据能够建立在同一语义基础上。
 > **关键洞察**: 当前形式化验证工具各自维护对 Rust 语义的**独立理解**，导致结果不可比较。统一规范将解决这一碎片化问题。
 > [来源: [Formal Methods Preview](02_formal_methods.md)]
@@ -263,7 +258,6 @@ Rust 规范维护的核心挑战:
      ├── 不同子社区（embedded, web, safety-critical）有不同需求
      └── 达成共识的过程可能比编写规范本身更耗时
 ```
-
 > **挑战本质**: Rust 规范的困难不是技术性的，而是**社会-技术性的**——它涉及资源分配、优先级排序和社区治理。
 > [来源: [Rust Internals — Specification Discussion](https://internals.rust-lang.org/)]
 
@@ -308,7 +302,6 @@ graph TD
     style FALSE2 fill:#ffebee
     style ALT fill:#fff3e0
 ```
-
 > **认知功能**: 此决策树评估编写完整形式化规范的**时机和方式**。核心判断标准是语言稳定性、资源可用性和需求紧迫性。
 > **使用建议**: 当前阶段（2026）应采取**渐进策略**——先完善 L1/L2（Reference + 技术规范），在语言更稳定后再推进 L3/L4（形式化/可执行规约）。
 > **关键洞察**: Ferrocene 的先行探索证明了"渐进可行"——从认证需要的子集开始，逐步扩展，而非等待"一次性完整规范"。
@@ -342,7 +335,6 @@ graph TD
 ├── 规范需要说明"在哪个 Edition 下有效"
 └── 长期维护多 Edition 规范的成本不可忽视
 ```
-
 > **边界要点**: Rust 规范工作面临的根本张力是**"精确性"与"可维护性"**的权衡。过于追求完美形式化会导致规范无法跟上语言演进；过于务实则失去规范的价值。
 > [来源: [Rust Compiler Team — Specification Challenges](https://github.com/rust-lang/compiler-team/)]
 
@@ -383,7 +375,6 @@ fn main() {
     println!("{}", feature);
 }
 ```
-
 ## 相关概念文件
 
 - [Formal Methods](02_formal_methods.md) — 形式化方法工业化
@@ -436,7 +427,6 @@ fn main() {
     println!("{}", x);
 }
 ```
-
 > **修正**:
 > Rust 规范（The Rust Specification）正在编写中，目标是精确定义哪些程序是合法的、哪些是未定义行为（UB）。
 > 当前 Rust 的 UB 定义分散在 Reference、Nomicon、RFC 和学术 paper 中，存在模糊地带。
@@ -462,7 +452,6 @@ fn main() {
     println!("{}", r);
 }
 ```
-
 > **修正**: 在某些情况下，规范可能允许比当前编译器更宽松的程序。
 > 例如：Polonius（下一代借用（Borrowing）检查器）将接受一些 NLL（Non-Lexical Lifetimes）拒绝的合法程序。
 > `maybe_dangle` 的例子中，编译器拒绝是因为 `&y` 的生命周期（Lifetimes）不能超出函数作用域——即使从语义上看，返回值实际上等价于 `x` 的某个函数（若优化器内联并常量传播）。
@@ -488,7 +477,6 @@ fn main() {
     println!("{}", x);
 }
 ```
-
 > **修正**: Rust 规范未最终确定时，编译器实现与形式化模型（Stacked Borrows、Tree Borrows）可能存在不一致。
 > 上述代码在**当前稳定编译器**上可能编译通过（NLL 接受），但 Miri（基于 Stacked Borrows）报告 UB。
 > 这是过渡状态的表现：1) 编译器更宽松（接受更多程序）；2) 形式化工具更严格（标记潜在 UB）；3) 规范将最终裁定。
@@ -513,7 +501,6 @@ fn main() {
     // 若规范文本与实现有歧义，以实现为准（de facto 标准）
 }
 ```
-
 > **修正**:
 > Rust 规范项目（Ferrocene、Rust Specification）的目标是创建**权威参考文档**，但开发中的风险：
 >
@@ -545,7 +532,6 @@ fn main() {
     assert_eq!(x, 6); // 实际行为
 }
 ```
-
 > **修正**:
 > Rust 规范项目的目标是创建**权威参考文档**，但开发中风险：1) 规范描述的行为与实际编译器不一致；2) 规范更新滞后于语言演进；3) 规范与 Miri 的行为定义冲突。
 > 策略：1) 规范以 rustc 行为为基准（reference implementation）；2) Miri 作为可执行规范验证不一致；3) 发现不一致时，先确定是 rustc bug 还是规范 bug，再修复。

@@ -116,7 +116,6 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 │  裸指针、MaybeUninit、transmute、union、FFI、asm!         │
 └──────────────────────────────────────────────────────────┘
 ```
-
 ### 1.3 为何需要 unsafe？ {#13-为何需要-unsafe}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -181,7 +180,6 @@ typing rules ──→ 进展性 T1、保持性 T2 ──→ 类型安全 T3
 
 Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全 T6.2
 ```
-
 ---
 
 ## 三、unsafe 契约体系 {#三unsafe-契约体系}
@@ -314,7 +312,6 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
     ├── 用安全 API 封装
     └── 验证（Miri、测试、形式化）
 ```
-
 ---
 
 ## 六、安全 vs 非安全多维矩阵 {#六安全-vs-非安全多维矩阵}

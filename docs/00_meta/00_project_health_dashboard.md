@@ -72,7 +72,6 @@
 最后成功: <!-- CI 填充 -->
 平均编译时间: <!-- CI 填充 --> 秒
 ```
-
 ### 各 Crate 编译状态 {#各-crate-编译状态}
 
 | Crate | 编译 | 测试 | 文档 | 状态 |
@@ -260,7 +259,6 @@
 # 或在 PowerShell 中 {#或在-powershell-中}
 .\scripts\update-health-dashboard.ps1
 ```
-
 ---
 
 ## 📁 关联文档 {#关联文档}

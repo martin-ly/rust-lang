@@ -94,7 +94,6 @@ graph TD
     E -.->|反馈| C
     H -.->|反馈| F
 ```
-
 > **认知功能**: 该图展示人类架构师、AI生成与Rust形式验证之间的分层协作架构。
 > [来源: [Rust ML]]
 > **功能定位**：将Prompt规约、代码层和系统验证视为相互反馈的三层闭环。
@@ -171,7 +170,6 @@ fn rl_fix_borrow_error() {
     println!("{}", r1);
 }
 ```
-
 **Rust 编译器的 RL 环境优势**:
 
 | 特性 | C/C++ 编译器 | Python 解释器 | Rust 编译器 (`rustc`) |
@@ -194,7 +192,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 
 有效子集 / 总语法空间 ≈ 极小比例（估计 < 0.1%）
 ```
-
 这种过滤对 AI 具有双重效应：
 
 - **正面**: 编译通过的代码几乎保证内存安全（Memory Safety）（无 UAF/DF/数据竞争）
@@ -216,7 +213,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 │   └── 形式化验证辅助 → Kani + LLM 规格生成
 └── 否 → 手动编写 + Clippy + Miri
 ```
-
 > **建议**: 工具选择应基于"生成-验证"闭环的完整性。单一工具无法覆盖全链路，建议组合使用：LLM 生成 → rustc 过滤 → Miri/Kani 验证 → 人工审查。
 
 ---
@@ -265,7 +261,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
   确定性编译器：对修改后的代码运行 rustc → 获取新诊断
   episode 终止条件：编译通过 或 达到最大迭代次数（通常 5-10 步）
 ```
-
 > **[来源: Gupta et al., AAAI 2019 — Deep RL for Syntactic Error Repair]** 在学生程序修复任务中，使用编译通过作为最终奖励，中间奖励为错误数量变化，agent 在 5,156 个错误消息上训练，成功完全修复 1,625 个程序。✅
 > **语义等价验证**：编译通过仅是必要条件。工业级 RL 系统还需运行 `cargo test` 或 Miri 验证修复的语义等价性，避免"通过编译但逻辑错误"的补丁。[来源: Monperrus, Living Review on Automated Program Repair]
 
@@ -317,7 +312,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 
 输出: 指针网络（Pointer Network）预测的编辑位置 + 序列生成的替换 token
 ```
-
 > **实验结果**：在超过 50 万真实构建错误数据集上，Graph2Diff 的修复准确率是 DeepDelta 的两倍以上，且能生成更精确的细粒度 diff（而非整文件重写）。[来源: Tarlow et al., arXiv:1911.01205]
 
 #### 6.3.4 Break-It-Fix-It / DrRepair（Stanford，ICML 2020/2021）
@@ -338,7 +332,6 @@ Break-It-Fix-It 训练循环:
     - 若 P_fixed 编译通过: 正样本，更新 Fixer
     - 若未通过: 负样本，训练 Fixer 避免此类修复
 ```
-
 > **关键贡献**：摆脱了对人工标注 `<错误, 修复>` 对的依赖，使 RL agent 可以通过自举（bootstrapping）无限扩展训练数据。[来源: Yasunaga & Liang, ICML 2021]
 
 #### 6.3.5 DeepFix & Deep RL（IISc Bangalore / IIT Kanpur，AAAI 2017/2019）
@@ -414,7 +407,6 @@ Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，
   ]
 }
 ```
-
 | 结构化字段 | RL 状态空间利用 | 优势 |
 |:---|:---|:---|
 | `code` (E0XXX) | 错误类型 one-hot 编码 | 1,000+ 个错误码提供细粒度分类 |
@@ -475,7 +467,6 @@ RUSTFLAGS="--error-format=json" cargo check 2> errors.json
 python -m rust_rl_repair --env rustc --reward compile+test \
     --policy ppo --episodes 10000
 ```
-
 > **来源**: [RustRepair-RL, ETH Zurich, 2024] · [Compiler-Guided Fine-Tuning, CMU, 2025] · [Error2Learn, MPI-SWS] · [PLDI 2024/2025 Compiler-Guided Code Generation] · [rustc JSON Diagnostic Format]
 
 ### 7.1 概念定义
@@ -490,7 +481,6 @@ python -m rust_rl_repair --env rustc --reward compile+test \
 确定性过程 = Rust 编译器（确定性）+ 固定工具链版本
 确定性输出 = 可复现的二进制 + 可验证的哈希
 ```
-
 ### 7.2 为什么对 AI 重要
 
 AI 生成代码具有统计不确定性：同一 Prompt 多次调用可能产生不同实现。确定性容器通过以下方式约束：
@@ -558,7 +548,6 @@ graph LR
     T1 -.->|反馈| H1
     T2 -.->|反馈| H2
 ```
-
 > **认知功能**: 全景呈现AI辅助Rust开发的分层验证架构与工具链映射。
 > **功能定位**：将人类需求、AI生成、Rust编译、形式验证和运行时监控串联为完整流水线。
 > **使用建议**：根据开发阶段选择工具层——Copilot加速生成，Kani/Creusot保障正确性。
@@ -578,7 +567,6 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
   编译器确保只有逻辑一致的样本进入生态
   这类似于: 蛋白质折叠的自由度被物理定律约束为功能结构
 ```
-
 ---
 
 ## 十、学术论文与研究方向
@@ -661,7 +649,6 @@ fn main() {
     // assert_eq!(ai_binary_search(&arr, 10), None); // 可能失败！
 }
 ```
-
 > **关键洞察**: Rust 的类型系统保证内存安全，但**不保证逻辑正确**。AI 生成的代码即使通过编译，仍需单元测试、属性测试（proptest）或形式化验证（Kani）来验证功能正确性。[来源: 💡 原创分析]
 
 ### 13.2 边界测试：AI 生成 unsafe 代码的 Miri 验证
@@ -687,7 +674,6 @@ fn main() {
     assert_eq!(safe_slice_access(&data, 10), None); // 安全
 }
 ```
-
 > **认知功能**: 此反例展示了 AI 生成 unsafe 代码的典型风险模式——**隐式假设输入有效**。Rust 的安全抽象要求将这些假设转化为类型系统可检查的契约（如 `Option<T>` 或 `Result<T, E>`）。[来源: NOM — Validity Invariant] ✅
 
 ### 13.3 边界测试：生命周期标注的 AI 生成质量
@@ -712,7 +698,6 @@ fn correct_fix(s: &str) -> String {
     String::from(s) // 返回所有权，生命周期问题消除
 }
 ```
-
 > **关键洞察**:
 > 生命周期错误（E0716、E0515）是 AI 生成 Rust 代码的**最大弱点**之一。
 > RustRepair-RL 报告显示，RL 模型在修复 `E0382`（use of moved value）上达到 78% 准确率，但 `E0716`（lifetime mismatch）仅 45%。
@@ -769,7 +754,6 @@ fn predict_safe(model: &dyn Fn(&Array2<f32>) -> Array2<f32>, input: Array2<f32>)
     println!("{:?}", output);
 }
 ```
-
 > **修正**:
 >
 > Rust 的类型系统目前无法在编译期验证张量形状（tensor shape）。
@@ -808,7 +792,6 @@ fn fixed() {
     println!("weights: {:?}", model2.weights); // ✅ 只读访问
 }
 ```
-
 > **修正**:
 >
 > AI 模型（权重、配置）在加载后通常是只读的。
@@ -829,7 +812,6 @@ fn ai_generated_parse(data: &[u8]) -> &[u8] {
     }
 }
 ```
-
 > **修正**:
 >
 > AI 辅助编程工具（Copilot、CodeWhisperer、ChatGPT）生成 Rust 代码时，**unsafe 块的错误率显著高于 safe 代码**：
@@ -869,7 +851,6 @@ fn main() {
     let _result = ai_generated_parse(&data);
 }
 ```
-
 > **修正**:
 >
 > AI 辅助编程工具生成 Rust 代码时，**unsafe 块的错误率显著高于 safe 代码**：
@@ -907,7 +888,6 @@ fn main() {
     let _s = ai_function();
 }
 ```
-
 > **修正**: AI 工具（Copilot、ChatGPT）生成 Rust 代码时，**所有权和生命周期**是最常见的错误类型：
 >
 > 1) 返回局部引用（Reference）（悬垂引用）；

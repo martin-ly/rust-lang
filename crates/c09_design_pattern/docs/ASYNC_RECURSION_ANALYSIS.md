@@ -79,7 +79,6 @@
 ```text
 f(x) = if base(x) then base_value(x) else combine(x, f(recursive_call(x)))
 ```
-
 **组成部分**：
 
 1. **基础情况**（Base Case）：`base(x)` 为真时直接返回
@@ -110,7 +109,6 @@ f(3):
   │  └─ combine(1, ...) = 1
   └─ combine(2, 1, ...) = 2
 ```
-
 **栈深度**：O(递归深度)，栈溢出是主要问题。
 
 ---
@@ -130,7 +128,6 @@ fn factorial(n: u64) -> u64 {
     }
 }
 ```
-
 **执行模型**：
 
 - 调用 `factorial(n)` → 压栈
@@ -146,7 +143,6 @@ fn factorial(n: u64) -> u64 {
 [factorial(0)]
 [main]
 ```
-
 ### 2.2 异步递归
 
 #### 示例：异步阶乘（初步尝试）
@@ -161,7 +157,6 @@ async fn factorial_async(n: u64) -> u64 {
 }
 // error: `async fn` recursion is not supported
 ```
-
 **问题**：
 
 - `async fn` 返回 `impl Future<Output = u64>`
@@ -175,7 +170,6 @@ size(Future<factorial>) = size(n) + size(factorial_async(n-1))
                         = size(n) + size(Future<factorial>)
                         → ∞  (无穷大)
 ```
-
 ---
 
 ## 3. 异步递归的挑战
@@ -191,7 +185,6 @@ struct RecursiveFuture {
     inner: RecursiveFuture,  // 错误：无限大小
 }
 ```
-
 #### 解决方案：间接引用（Indirection）
 
 ```rust
@@ -199,7 +192,6 @@ struct RecursiveFuture {
     inner: Box<RecursiveFuture>,  // OK：Box是指针，大小固定
 }
 ```
-
 ### 3.2 编译器的处理
 
 #### `async fn` 的展开（desugaring）
@@ -217,7 +209,6 @@ fn foo(x: i32) -> impl Future<Output = i32> {
     }
 }
 ```
-
 对于递归函数：
 
 ```rust
@@ -241,7 +232,6 @@ fn factorial(n: u64) -> impl Future<Output = u64> {
     }
 }
 ```
-
 ---
 
 ## 4. Rust中的实现模式
@@ -264,7 +254,6 @@ fn factorial_async(n: u64) -> Pin<Box<dyn Future<Output = u64> + Send>> {
     })
 }
 ```
-
 **说明**：
 
 - `Pin<Box<dyn Future>>` 是trait对象，大小固定（指针 + vtable）
@@ -295,7 +284,6 @@ fn bench_factorial_async(c: &mut Criterion) {
 criterion_group!(benches, bench_factorial_async);
 criterion_main!(benches);
 ```
-
 **结果**（示例）：
 
 - `factorial_async(20)`: ~500ns
@@ -318,7 +306,6 @@ async fn factorial(n: u64) -> u64 {
     }
 }
 ```
-
 **原理**：
 
 - `#[async_recursion]` 宏自动添加 `Box::pin`
@@ -337,7 +324,6 @@ fn factorial(n: u64) -> Pin<Box<dyn Future<Output = u64> + Send>> {
     })
 }
 ```
-
 ### 4.3 模式3：迭代转换（Tail Call Optimization）
 
 #### 尾递归（Tail Recursion）
@@ -362,7 +348,6 @@ async fn factorial_iter(n: u64) -> u64 {
     acc
 }
 ```
-
 **优势**：
 
 - 无堆分配
@@ -395,7 +380,6 @@ async fn main() {
     }
 }
 ```
-
 **特点**：
 
 - 惰性求值
@@ -421,7 +405,6 @@ fn f(n: Nat) -> T {
     }
 }
 ```
-
 若 `n ∈ ℕ`，则 `f(n)` 在有限步内终止。
 
 **证明**：
@@ -447,7 +430,6 @@ async fn f(n: Nat) -> T {
     }
 }
 ```
-
 若 `n ∈ ℕ` 且执行器公平调度，则 `f(n)` 最终完成。
 
 **证明**：
@@ -482,13 +464,11 @@ async fn f(n: Nat) -> T {
 fn f_sync(n: u64) -> T { ... }
 async fn f_async(n: u64) -> T { ... }
 ```
-
 若两者逻辑相同，则：
 
 ```text
 f_sync(n) = block_on(f_async(n))
 ```
-
 **证明**：
 
 - 通过操作语义的结构归纳
@@ -581,7 +561,6 @@ fn bench_fibonacci(c: &mut Criterion) {
 criterion_group!(benches, bench_fibonacci);
 criterion_main!(benches);
 ```
-
 #### 结果（示例，单位：μs）
 
 | n   | sync | async | iter | async/sync | iter/sync |
@@ -613,7 +592,6 @@ async fn odd(n: u64) -> bool {
 }
 // 编译错误：递归类型
 ```
-
 #### 解决方案
 
 ```rust
@@ -632,7 +610,6 @@ fn odd(n: u64) -> Pin<Box<dyn Future<Output = bool> + Send>> {
     })
 }
 ```
-
 ### 7.2 树的异步遍历
 
 #### 二叉树定义
@@ -695,7 +672,6 @@ impl Node {
     }
 }
 ```
-
 **性能对比**：
 
 - **顺序遍历**：O(n) 时间，O(depth) 栈/堆
@@ -736,7 +712,6 @@ fn factorial_trampoline(n: u64, acc: u64) -> Trampoline<u64> {
 // 使用
 let result = factorial_trampoline(100000, 1).run();  // 不会栈溢出
 ```
-
 **异步Trampoline**：
 
 ```rust
@@ -756,7 +731,6 @@ impl<T> AsyncTrampoline<T> {
     }
 }
 ```
-
 ---
 
 ## 8. 最佳实践
@@ -799,7 +773,6 @@ async fn sum_array(arr: &[i32]) -> i32 {
     sum
 }
 ```
-
 #### 2. 使用尾递归优化
 
 ```rust
@@ -812,7 +785,6 @@ async fn sum_tail(arr: &[i32], acc: i32) -> i32 {
     }
 }
 ```
-
 #### 3. 并行化
 
 ```rust
@@ -833,7 +805,6 @@ async fn parallel_sum(arr: &[i32]) -> i32 {
     }
 }
 ```
-
 ---
 
 ## 9. 结论
@@ -858,7 +829,6 @@ async fn parallel_sum(arr: &[i32]) -> i32 {
    └─ 深度 > 1000？
       └─ 是 → 考虑Trampoline或迭代
 ```
-
 ---
 
 **文档版本**: 1.0

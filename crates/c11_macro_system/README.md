@@ -75,7 +75,6 @@ macro_rules! vec_of_strings {
 
 let strings = vec_of_strings!["hello", "world"];
 ```
-
 ### 🔸 过程宏 (Procedural Macros)
 
 **派生宏 (Derive Macros)**:
@@ -87,20 +86,17 @@ struct Config {
     value: i32,
 }
 ```
-
 **属性宏 (Attribute Macros)**:
 
 ```rust
 #[route(GET, "/api/users")]
 fn get_users() -> Response { }
 ```
-
 **函数式宏 (Function-like Macros)**:
 
 ```rust
 let query = sql!("SELECT * FROM users WHERE id = ?");
 ```
-
 ---
 
 ## 🗂️ 模块结构
@@ -121,7 +117,6 @@ C11_macro_system/
 ├── tests/                          # 测试用例
 └── benches/                        # 基准测试
 ```
-
 ### 主 crate 与 proc 模块关系
 
 - **主 crate** (`c11_macro_system`): 导出 `declarative`（声明宏）、`utils`、Rust 1.91/1.92/1.93 特性。可直接 `use c11_macro_system::*` 使用声明宏。
@@ -137,12 +132,10 @@ C11_macro_system/
   - 宏展开队列轮转优化
   - 宏缓存大小计算优化
   - 实现位置: `src/rust_192_features.rs`
-
 - ✅ **迭代器方法特化**: 宏列表比较性能提升
   - Iterator::eq 为 TrustedLen 迭代器特化
   - 宏展开状态检查优化
   - 实现位置: `src/rust_192_features.rs`
-
 - ✅ **宏展开性能监控**: 新增性能监控工具
   - 展开时间统计
   - 缓存命中率分析
@@ -155,37 +148,31 @@ C11_macro_system/
   - 优化的宏展开算法
   - JIT 优化对宏展开的影响
   - 实现位置: `src/rust_191_features.rs`
-
 - ✅ **增强的 const 上下文**: 支持对非静态常量的引用
   - const 上下文中的宏配置计算
   - 更灵活的宏常量配置
   - 配置系统和常量引用示例
   - 实现位置: `src/rust_191_features.rs`
-
 - ✅ **优化的内存分配器**: 小对象分配性能提升 25-30%
   - 小对象池优化（< 32 bytes）
   - 更快的宏数据结构创建
   - 内存碎片减少
   - 实现位置: `src/rust_191_features.rs`
-
 - ✅ **宏展开缓存机制**: 编译时优化，减少重复展开
   - 宏展开结果缓存
   - 智能缓存管理
   - 编译时间减少 10-20%
   - 实现位置: `src/rust_191_features.rs`
-
 - ✅ **改进的宏错误消息**: 开发体验提升
   - 更详细的错误信息
   - 自动生成修复建议
   - 友好的错误格式
   - 实现位置: `src/rust_191_features.rs`
-
 - ✅ **过程宏编译优化**: 编译时间减少
   - 过程宏缓存
   - 增量编译支持
   - 编译时间减少 10-20%
   - 实现位置: `src/rust_191_features.rs`
-
 - 📚 **新增文档**: [Rust 1.93.0 宏系统改进文档](docs/RUST_192_MACRO_IMPROVEMENTS.md) ⭐ NEW!
 - 📚 **历史文档**: [Rust 1.91 宏系统改进文档](docs/RUST_191_MACRO_IMPROVEMENTS.md) (历史参考)
 - 💻 **新增示例**: [Rust 1.93.0 特性演示示例](examples/rust_192_features_demo.rs) ⭐ NEW!
@@ -202,7 +189,6 @@ C11_macro_system/
 ```bash
 cat docs/00_MASTER_INDEX.md
 ```
-
 ### 2. 运行示例
 
 ```bash
@@ -221,7 +207,6 @@ cargo run --example rust_192_features_demo
 # 查看所有示例
 cargo run --example --list
 ```
-
 **Rust 1.93.0 演示程序**展示了以下特性：
 
 - `rotate_right`: 在宏展开队列管理中实现高效的轮转
@@ -238,7 +223,6 @@ cargo test
 # 特定测试
 cargo test declarative_tests
 ```
-
 ---
 
 ## 📖 学习路径
@@ -247,7 +231,7 @@ cargo test declarative_tests
 
 **Week 1: 宏基础**:
 
-1. 阅读理论文档 → `docs/tier_02_guides/01_声明宏实践指南.md`
+1. 阅读理论文档 → `docs/tier_02_guides/01_declarative_macros_practice_guide.md`
 2. 学习声明宏基础 → `docs/02_declarative/01_macro_rules_basics.md`
 3. 实践基础示例 → `examples/01_*.rs`
 
@@ -315,7 +299,6 @@ macro_rules! double {
     ($x:expr) => { $x * 2 };
 }
 ```
-
 ---
 
 ## 🛠️ 开发工具
@@ -329,7 +312,6 @@ cargo install cargo-expand
 # 查看宏展开
 cargo expand --example 01_macro_rules_basics
 ```
-
 ### 调试技巧
 
 ```rust
@@ -337,7 +319,6 @@ cargo expand --example 01_macro_rules_basics
 #![feature(trace_macros)]
 trace_macros!(true);
 ```
-
 ---
 
 ## 📚 相关资源
@@ -383,7 +364,6 @@ trace_macros!(true);
 🧪 测试用例: 100+ 个
 🎯 练习项目: 5+ 个
 ```
-
 ---
 
 ## ⚡ 快速参考
@@ -417,7 +397,6 @@ macro_rules! count {
     ($x:expr, $($rest:expr),*) => { 1 + count!($($rest),*) };
 }
 ```
-
 ---
 
 ### 🔬 形式化理论

@@ -102,7 +102,6 @@ Rust 中的类型变换:
   │ 失败可能        │ 无              │ 无（静默截断）  │ 编译期保证      │
   └─────────────────┴─────────────────┴─────────────────┴─────────────────┘
 ```
-
 > **认知功能**: Rust **严格区分**隐式安全转换（coercion）和显式可能危险转换（cast）——避免了 C/C++ 的隐式截断陷阱。
 > [来源: [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html)]
 
@@ -148,7 +147,6 @@ fn takes_mut(s: &mut str) { }
 let mut string = String::from("hello");
 takes_mut(&mut string);  // &mut String → &mut str
 ```
-
 > **Deref 洞察**: `Deref` 强制是 Rust **"透明包装器"**模式的基础——它使自定义类型可以无缝替换底层类型。
 > [来源: [std::ops::Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html)]
 
@@ -185,7 +183,6 @@ takes_mut(&mut string);  // &mut String → &mut str
   let x = 42;
   takes_trait(&x);  // &i32 → &dyn Display
 ```
-
 > **子类型洞察**: 生命周期（Lifetimes）子类型是 Rust **借用（Borrowing）检查器的核心**——它允许"长生命周期的值用于短生命周期的上下文"。
 > [来源: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html)]
 
@@ -226,7 +223,6 @@ let void_ptr = fn_ptr as *const ();  // fn() → *const ()
 // 注意: as 不检查合法性
 // let bad: *const u8 = 0xdeadbeef as *const u8;  // 编译通过但可能无效
 ```
-
 > **as 洞察**: `as` 是 Rust 的**"我相信你"**操作——编译器不验证转换的合法性，开发者承担全部责任。
 > [来源: [Rust Reference — Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#cast-expressions)]
 
@@ -285,7 +281,6 @@ impl TryFrom<u8> for NonZeroU8 {
 let ok = NonZeroU8::try_from(5)?;   // ✅
 let err = NonZeroU8::try_from(0)?;  // ❌ Err
 ```
-
 > **From 洞察**: `From`/`Into` 是 Rust **类型转换的惯用方式**——它比 `as` 更安全，比自定义函数更标准。
 > [来源: [std::convert::From](https://doc.rust-lang.org/std/convert/trait.From.html)]
 
@@ -326,7 +321,6 @@ let aligned = Aligned([0; 64]);
 let ptr = &aligned as *const Aligned as *const u8;
 // ptr 是 16 字节对齐的
 ```
-
 > **指针洞察**: Rust 的**原始指针（Raw Pointer）**（*const T,*mut T）是**unsafe 的入口**——它们可以指向任意地址，解引用（Reference）需要 unsafe 块。
 > [来源: [Rust Reference — Raw Pointers](https://doc.rust-lang.org/reference/types/pointer.html#raw-pointers-const-and-mut)]
 
@@ -367,7 +361,6 @@ let ptr = &aligned as *const Aligned as *const u8;
   → 需要验证指针有效性
   → unsafe { &*raw_ptr }
 ```
-
 > **模式矩阵**: Rust 的**类型转换分层**——安全转换用 Into，可能失败用 TryInto，位操作用 as，指针用 unsafe。
 > [来源: [Rust API Guidelines — Conversions](https://rust-lang.github.io/api-guidelines//naming.html#ad-hoc-conversions-follow-as_-to_-into_-conventions-c-conv)]
 
@@ -391,7 +384,6 @@ graph TD
     style TRY fill:#c8e6c9
     style AS fill:#fff3e0
 ```
-
 > **认知功能**: **as 是最后手段**——优先使用类型系统（Type System）保证安全的转换方式。
 > [来源: [Rust Clippy — Casting Lints](https://rust-lang.github.io/rust-clippy//master/index.html#/cast)]
 
@@ -431,7 +423,6 @@ graph TD
 ├── 随 Rust 版本逐步放宽
 └── 缓解: 使用 const fn 支持的子集
 ```
-
 > **边界要点**: 类型转换的边界主要与**transmute**、**浮点**、**字符**、**胖指针**和 **const** 相关。
 > [来源: [std::mem::transmute](https://doc.rust-lang.org/std/mem/fn.transmute.html)]
 
@@ -474,7 +465,6 @@ graph TD
 
   ✅ let t: &dyn Display = &42;  // i32 实现 Display
 ```
-
 > **陷阱总结**: 类型转换的陷阱主要与**as 截断**、**无效指针**、**transmute 大小**、**Deref 冗余**和**Trait Object**相关。
 
 ---
@@ -545,7 +535,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**: `as` 执行截断转换（truncating cast），不检查范围。
 > 将大类型转为小类型时，高位被丢弃。
 > 如需安全检查，使用 `TryInto::try_into()`（返回 `Result`）。
@@ -572,7 +561,6 @@ unsafe fn ptr_to_ref(ptr: *const i32) -> Option<&'static i32> {
     }
 }
 ```
-
 > **修正**: 引用（Reference） → 裸指针是安全操作（隐式转换），但裸指针 → 引用必须在 `unsafe` 块中进行，且程序员必须保证指针有效、对齐、不悬垂。
 > 这是 Rust 安全边界的典型设计：从安全区到 unsafe 区容易，从 unsafe 区回到安全区需要显式承诺。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
@@ -591,7 +579,6 @@ fn main() {
     println!("{}", obj);
 }
 ```
-
 > **修正**: `Box<dyn Trait>` 的构造要求具体类型 `T` 是 `Sized`，因为 `Box::new` 需要在编译期知道分配大小。
 > 对于 DST（`str`、`[T]`、`dyn Trait`），不能直接 `Box::new`，必须使用 `Box::from_raw` 或特殊构造方法。
 > 若函数需要接受可能非 `Sized` 的类型，应使用 `?Sized` bound：`fn to_trait_object<T: ?Sized + Display>(x: Box<T>) -> Box<dyn Display>`。
@@ -609,7 +596,6 @@ fn main() {
     let s = v as String;
 }
 ```
-
 > **修正**: Rust 的 `as` 关键字支持有限的原语转换：数值类型间（`i32` → `u64`、`f32` → `i32`）、指针间（`*mut T` → `*mut U`）、引用到指针（`&T` → `*const T`）。
 > 不支持：1) 任意 struct 间转换；2) `Vec<T>` → `String`；3) `&str` → `String`（需 `.to_string()`）；4)  trait 对象转换（需显式 `as` 或 `From`）。
 > 这是 Rust"显式转换"原则的体现：危险的转换（如截断、位重解释）用 `as`，安全的转换用 `From`/`Into`，任意的转换用 `mem::transmute`（unsafe）。
@@ -631,7 +617,6 @@ fn upcast(b: &dyn B) -> &dyn A {
     todo!()
 }
 ```
-
 > **修正**: Trait object 的**向上转型**（upcasting）：`dyn B` → `dyn A`（`B: A`）在 Rust 中长期不支持，因为 vtable 布局问题：`dyn B` 的 vtable 包含 `B` 的方法，`dyn A` 的 vtable 只包含 `A` 的方法，需要额外的 vtable 指针或调整。
 > Rust 1.86+ 引入了 trait upcasting（不稳定特性），允许 `b as &dyn A`。
 > 旧版 workaround：1) 在 trait 中定义 `as_a(&self) -> &dyn A` 方法；2) 使用泛型（Generics）而非 trait object；3) 使用 `downcast_ref`（若具体类型已知）。
@@ -664,7 +649,6 @@ fn main() {
     let s: String = w; // 需要实现 DerefMove（不存在）
 }
 ```
-
 > **修正**: `Deref` trait 提供**自动解引用**：`&Wrapper` 自动转为 `&String`（若 `Wrapper: Deref<Target = String>`），再转为 `&str`（若 `String: Deref<Target = str>`）。
 > 但 `Deref` 的限制：
 >
@@ -698,7 +682,6 @@ fn main() {
     // takes_fn(closure_capture); // ❌ 编译错误
 }
 ```
-
 > **修正**: 闭包（Closures）与函数指针的类型关系：
 >
 > 1) **无捕获闭包（Closures）**（`Fn` / `FnMut` / `FnOnce` 不捕获环境）可**强制转换**为函数指针 `fn(T) -> U`；
@@ -721,7 +704,6 @@ const fn foo(x: i32) -> i32 {
 
 fn main() {}
 ```
-
 > **修正**: **Const fn**：
 >
 > 1) 函数体必须是编译期可计算的；
@@ -764,7 +746,6 @@ fn main() {
     greet(&s);
 }
 ```
-
 - A. `String` 是 `&str` 的子类型
 - B. `String` 实现了 `Deref<Target = str>`，编译器自动解引用
 - C. `&String` 可以隐式转换为 `&str` 是因为两者大小相同
@@ -821,7 +802,6 @@ fn main() {
     let w: Wrapper = 42.into();
 }
 ```
-
 - A. 编译失败：不能为自定义类型实现 `From`
 - B. 编译失败：`into()` 需要显式类型标注
 - C. 编译通过
@@ -846,7 +826,6 @@ fn main() {
 let raw_ptr: *const i32 = &42;
 let ref_ptr: &i32 = unsafe { &*raw_ptr };
 ```
-
 - A. 裸指针不能转换为引用
 - B. 引用指向的数据生命周期（Lifetimes）不够长（字面量 `42` 是临时值）
 - C. 代码完全安全

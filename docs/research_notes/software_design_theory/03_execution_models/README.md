@@ -1,35 +1,20 @@
 # 执行模型形式化框架 {#执行模型形式化框架}
 
 > **概念族**: 软件设计 / 执行模型
-
 > **内容分级**: [归档级]
-
 > **创建日期**: 2026-02-12
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
-
 > **对齐说明**: 本目录已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/03_execution_models/` 迁回，正在按 [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)、[Tokio Tutorial](https://tokio.rs/tokio/tutorial)、[Rayon Docs](https://docs.rs/rayon/latest/rayon/) 等权威来源升级。
-
 >
-
 > **权威来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | [Rayon Docs](https://docs.rs/rayon/latest/rayon/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-12
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
 
 ---
@@ -37,7 +22,6 @@
 ## 📊 目录 {#目录}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [执行模型形式化框架 {#执行模型形式化框架}](#执行模型形式化框架-执行模型形式化框架)
@@ -72,7 +56,6 @@
 ## 宗旨 {#宗旨}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 对同步、异步、并发、并行、分布式五类执行模型进行形式化分析，并与 Rust 形式化基础（async_state_machine、pin、Send/Sync、ownership、borrow）衔接。
@@ -82,21 +65,14 @@
 ## 执行模型分类 {#执行模型分类}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模型 | 定义 | 形式化文档 |
-
 | :--- | :--- | :--- |
-
 | 同步 | 顺序执行，单线程 | [01_synchronous](01_synchronous.md) |
-
 | 异步 | Future、async/await、单线程协作式多任务 | [02_async](02_async.md) |
-
 | 并发 | 多线程、Send/Sync、消息传递/共享状态 | [03_concurrent](03_concurrent.md) |
-
 | 并行 | 数据并行、任务并行 | [04_parallel](04_parallel.md) |
-
 | 分布式 | 跨进程/跨节点、Actor、RPC | [05_distributed](05_distributed.md) |
 
 ---
@@ -104,23 +80,16 @@
 ## 执行模型多维对比矩阵 {#执行模型多维对比矩阵}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 下表为同步/异步/并发/并行/分布式的**概念定义/属性关系/选型**多维对比；与 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../10_hierarchical_mapping_and_summary.md) 文档↔思维表征映射衔接。各子文档在本矩阵中的位置见「形式化文档」列。
 
 | 模型 | 确定性 | 数据竞争 | 表达力/典型用途 | 选型条件 | 形式化文档 |
-
 | :--- | :--- | :--- | :--- | :--- | :--- |
-
 | **同步** | 顺序确定 | 单线程无竞争 | 顺序执行、批处理、脚本 | 单线程、无 I/O 等待 | [01_synchronous](01_synchronous.md) |
-
 | **异步** | 单线程交错确定 | 单线程无竞争 | I/O 多路复用、高并发连接 | 多 I/O、高并发连接 | [02_async](02_async.md) |
-
 | **并发** | 交错非确定 | Send/Sync 保证无数据竞争 | 多线程、消息传递、共享状态 | 多线程、生产者-消费者 | [03_concurrent](03_concurrent.md) |
-
 | **并行** | 数据/任务并行 | 无共享或同步 | CPU 密集、批量计算 | CPU 密集、rayon 风格 | [04_parallel](04_parallel.md) |
-
 | **分布式** | 跨节点、最终一致 | 跨进程无共享内存 | 跨节点通信、Actor、RPC | 跨节点、微服务 | [05_distributed](05_distributed.md) |
 
 **边界与选型决策树**：[06_boundary_analysis](06_boundary_analysis.md) 含并发选型决策树（Actor/channel/async/Mutex）及与本矩阵的衔接。
@@ -132,23 +101,15 @@
 ## 依赖引用 {#依赖引用}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 依赖 | 文档 |
-
 | :--- | :--- |
-
 | 异步状态机 | [async_state_machine](../../../research_notes/formal_methods/10_async_state_machine.md) |
-
 | Pin | [pin_self_referential](../../../research_notes/formal_methods/10_pin_self_referential.md) |
-
 | 借用 | [borrow_checker_proof](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
-
 | 所有权 | [ownership_model](../../../research_notes/formal_methods/10_ownership_model.md) |
-
 | Rust Book Ch16 | 线程、消息传递、Send/Sync |
-
 | Async Book | Future、async/await、Pin |
 
 ---
@@ -156,7 +117,6 @@
 ## 边界分析 {#边界分析}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 [06_boundary_analysis](06_boundary_analysis.md)：各模型的安全/支持/表达边界。
@@ -166,21 +126,14 @@
 ## 模型选型决策（实质内容） {#模型选型决策实质内容}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 需求组合 | 推荐模型 | 典型场景 |
-
 | :--- | :--- | :--- |
-
 | 单线程、无 I/O 等待 | 同步 | 批处理、脚本、算法核心 |
-
 | 多 I/O、高并发连接 | 异步 | Web 服务、数据库、网络 |
-
 | 多线程、消息传递 | 并发 | 生产者-消费者、多工作者 |
-
 | CPU 密集、批量计算 | 并行 | 图像处理、数据分析、rayon |
-
 | 跨节点通信 | 分布式 | tonic、actix、RPC |
 
 **与设计模式映射**：同步—全部 23；异步—Observer、Command、State；并发—Singleton、Observer、Mediator；并行—Strategy、Iterator；分布式—Proxy、Gateway、DTO。详见 [06_boundary_analysis](06_boundary_analysis.md)。
@@ -190,21 +143,14 @@
 ## 模型选择速查 {#模型选择速查}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 需求 | 推荐模型 | crate |
-
 | :--- | :--- | :--- |
-
 | 顺序执行 | 同步 | std |
-
 | I/O 密集、高并发连接 | 异步 | tokio |
-
 | 多线程、消息传递 | 并发 | std::thread、mpsc |
-
 | CPU 密集、批量计算 | 并行 | rayon |
-
 | 跨节点通信 | 分布式 | tonic、actix |
 
 ---
@@ -212,19 +158,16 @@
 ## 典型场景与设计模式组合（实质内容） {#典型场景与设计模式组合实质内容}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 场景 1：批处理流水线（同步 + 策略） {#场景-1批处理流水线同步-策略}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **需求**：对一批数据按可配置策略处理。
 
 ```rust
-
 trait ProcessStrategy { fn process(&self, data: &[i32]) -> Vec<i32>; }
 
 struct FilterPositive;
@@ -244,19 +187,15 @@ fn process_batch<S: ProcessStrategy>(data: Vec<i32>, strategy: &S) -> Vec<i32> {
     strategy.process(&data)  // 同步、顺序
 
 }
-
 ```
-
 ### 场景 2：高并发 Web 服务（异步 + Observer + 通道） {#场景-2高并发-web-服务异步-observer-通道}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **需求**：请求处理 → 发事件 → 多订阅者（日志、通知、库存）。
 
 ```rust,ignore
-
 // 异步 + broadcast channel
 
 let (tx, _) = tokio::sync::broadcast::channel::<OrderEvent>(32);
@@ -270,9 +209,7 @@ tokio::spawn(async move {
 });
 
 // 处理请求后 tx.send(event)
-
 ```
-
 ### 场景 3：图像处理（并行 + Iterator） {#场景-3图像处理并行-iterator}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -280,7 +217,6 @@ tokio::spawn(async move {
 **需求**：对像素块并行处理。
 
 ```rust,ignore
-
 use rayon::prelude::*;
 
 let processed: Vec<u8> = pixels
@@ -292,9 +228,7 @@ let processed: Vec<u8> = pixels
     .flatten()
 
     .collect();
-
 ```
-
 ### 场景 4：多服务编排（分布式 + Proxy + DTO） {#场景-4多服务编排分布式-proxy-dto}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -302,7 +236,6 @@ let processed: Vec<u8> = pixels
 **需求**：订单服务调用库存服务、支付服务。
 
 ```rust,ignore
-
 trait InventoryService { fn reserve(&self, req: ReserveDto) -> Result<(), String>; }
 
 trait PaymentService { fn charge(&self, req: ChargeDto) -> Result<(), String>; }
@@ -314,15 +247,12 @@ struct OrderOrchestrator<I: InventoryService, P: PaymentService> {
     payment: P,
 
 }
-
 ```
-
 ### 选型决策流程（层次推进） {#选型决策流程层次推进}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```text
-
 1. 有 I/O 等待？ → 是 → 异步（tokio）
 
 2. 需 CPU 并行？ → 是 → 并行（rayon）
@@ -330,25 +260,17 @@ struct OrderOrchestrator<I: InventoryService, P: PaymentService> {
 3. 需跨进程？ → 是 → 分布式（tonic）
 
 4. 否 → 同步（std）
-
 ```
-
 ---
 
 ## 常见陷阱与规避（执行模型） {#常见陷阱与规避执行模型}
 
 | 陷阱 | 后果 | 规避 |
-
 | :--- | :--- | :--- |
-
 | 同步中阻塞 I/O | 整个线程卡住 | 用 async 或 spawn |
-
 | 异步中阻塞操作 | 阻塞 executor | 用 `spawn_blocking` |
-
 | 并发用 Rc | 编译错误 | 用 Arc |
-
 | 并行中共享可变 | 数据竞争 | 用 channel 或 Arc\<Mutex> |
-
 | 分布式无超时 | 请求挂起 | 设置超时、重试策略 |
 
 ---
@@ -362,7 +284,6 @@ struct OrderOrchestrator<I: InventoryService, P: PaymentService> {
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
-
 fn main() {
 
     trait ProcessStrategy {
@@ -396,7 +317,6 @@ fn main() {
     }
 
 
-
     let data = vec![-1, 2, -3, 4, 5];
 
     let out = FilterPositive.process(&data);
@@ -408,15 +328,12 @@ fn main() {
     assert_eq!(out2, vec![4, 8, 10]);
 
 }
-
 ```
-
 ### 示例 2：并发 + Observer（std::thread + mpsc） {#示例-2并发-observerstdthread-mpsc}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
-
 fn main() {
 
     use std::sync::mpsc;
@@ -424,9 +341,7 @@ fn main() {
     use std::thread;
 
 
-
     let (tx, rx) = mpsc::channel::<i32>();
-
 
 
     let tx2 = tx.clone();
@@ -442,7 +357,6 @@ fn main() {
     });
 
 
-
     let mut results = vec![];
 
     while let Ok(v) = rx.recv() {
@@ -456,21 +370,17 @@ fn main() {
     assert_eq!(results, vec![1, 2, 3]);
 
 }
-
 ```
-
 ### 示例 3：并行 + Strategy（rayon，需 `cargo add rayon`） {#示例-3并行-strategyrayon需-cargo-add-rayon}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
-
 // Cargo.toml: rayon = "1.10"
 
 fn main() {
 
     use rayon::prelude::*;
-
 
 
     trait FilterStrategy: Sync {
@@ -488,7 +398,6 @@ fn main() {
     }
 
 
-
     let data: Vec<i32> = (-100..100).collect();
 
     let filtered: Vec<i32> = data.par_iter()
@@ -502,15 +411,12 @@ fn main() {
     assert_eq!(filtered.len(), 99);
 
 }
-
 ```
-
 ---
 
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -522,15 +428,10 @@ fn main() {
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -538,17 +439,13 @@ fn main() {
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - Rust 1.94 特性速查
-
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -560,9 +457,7 @@ fn main() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -578,21 +473,12 @@ fn main() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)**
-
 > **来源: [Tokio Tutorial](https://tokio.rs/tokio/tutorial)**
-
 > **来源: [Rayon Docs](https://docs.rs/rayon/latest/rayon/)**
-
 > **来源: [Crossbeam Docs](https://docs.rs/crossbeam/latest/crossbeam/)**
-
 > **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
-
 > **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

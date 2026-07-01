@@ -231,7 +231,6 @@ pub struct ProcessPoolStats {
     pub average_usage_per_process: f64,
 }
 ```
-
 ### 1.2 负载均衡策略
 
 ```rust
@@ -351,7 +350,6 @@ impl LoadBalancedProcessPool {
     }
 }
 ```
-
 ## 2. 进程监控与健康检查
 
 ### 2.1 进程健康监控系统
@@ -607,7 +605,6 @@ pub struct HealthSummary {
     pub dead_processes: usize,
 }
 ```
-
 ### 2.2 自动故障恢复
 
 ```rust
@@ -715,7 +712,6 @@ pub struct ProcessConfig {
     pub working_dir: Option<String>,
 }
 ```
-
 ## 3. 资源限制与配额管理
 
 ### 3.1 进程资源限制
@@ -816,7 +812,6 @@ pub enum ResourceLimitError {
     ExecutionTimeLimitExceeded { current: Duration, limit: Duration },
 }
 ```
-
 ### 3.2 配额管理系统
 
 ```rust
@@ -953,7 +948,6 @@ pub enum QuotaError {
     ExecutionTimeQuotaExceeded { current: Duration, limit: Duration },
 }
 ```
-
 ## 4. 进程调度与优先级管理
 
 ### 4.1 进程调度器
@@ -1137,7 +1131,6 @@ pub enum SchedulerError {
     Generic(String),
 }
 ```
-
 ## 5. 总结
 
 本章介绍了 Rust 中的高级进程管理技术：

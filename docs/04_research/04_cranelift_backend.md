@@ -66,7 +66,6 @@
 2024  Rust 1.78+ 引入 `codegen-backend` unstable 标志支持 Cranelift
 2025  持续优化中，目标: debug 构建速度提升 20-50%
 ```
-
 ### 1.2 架构位置 {#12-架构位置}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -103,7 +102,6 @@ Standard (LLVM backend):           Cranelift backend:
 
 关键区别: Cranelift 跳过了 LLVM 的重量级优化阶段
 ```
-
 ---
 
 ## 2. Cranelift 与 LLVM 的对比 {#2-cranelift-与-llvm-的对比}
@@ -180,7 +178,6 @@ rustup toolchain install nightly
 # 安装 Cranelift 组件 {#安装-cranelift-组件}
 rustup component add rustc-codegen-cranelift-preview --toolchain nightly
 ```
-
 ### 3.2 项目级配置 {#32-项目级配置}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -196,14 +193,12 @@ codegen-backend = true
 [profile.dev]
 codegen-backend = "cranelift"
 ```
-
 或在 `Cargo.toml` 的 `[profile.dev]` 中添加：
 
 ```toml
 [profile.dev]
 codegen-backend = "cranelift"
 ```
-
 ### 3.3 单次编译配置 {#33-单次编译配置}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -217,7 +212,6 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 # 或指定 dev profile {#或指定-dev-profile}
 cargo +nightly build --profile dev
 ```
-
 ### 3.4 验证是否生效 {#34-验证是否生效}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -229,7 +223,6 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build -v
 # 预期输出包含: {#预期输出包含}
 # Running `rustc ... -Zcodegen-backend=cranelift ...` {#running-rustc--zcodegen-backendcranelift}
 ```
-
 ---
 
 ## 4. 已知限制与注意事项 {#4-已知限制与注意事项}
@@ -285,7 +278,6 @@ codegen-backend = true
 # 注意: 取消注释以下行以启用，需要 nightly 工具链 {#注意-取消注释以下行以启用需要-nightly-工具链}
 # codegen-backend = "cranelift" {#codegen-backend-cranelift}
 ```
-
 > 由于 Cranelift 需要 nightly，且本项目使用 stable 1.96 作为默认工具链，
 > 建议在 `.cargo/config.toml` 中注释掉 Cranelift 配置，
 > 需要时在命令行显式启用。
@@ -299,13 +291,11 @@ codegen-backend = true
 $env:RUSTFLAGS="-Zcodegen-backend=cranelift"
 cargo +nightly build
 ```
-
 ```bash
 # enable-cranelift.sh (Bash) {#enable-craneliftsh-bash}
 export RUSTFLAGS="-Zcodegen-backend=cranelift"
 cargo +nightly build
 ```
-
 ---
 
 ## 6. 跟踪状态 {#6-跟踪状态}
@@ -343,7 +333,6 @@ cargo +nightly build
    <https://github.com/bjorn3/rustc_codegen_cranelift>
 
 3. **Stichert, J.** "Speeding up Rust compile times with Cranelift". RustConf 2023.
-
 4. **Bytecode Alliance**. "Cranelift IR Reference".
    <https://docs.rs/cranelift-codegen/latest/cranelift_codegen/ir/index.html>
 

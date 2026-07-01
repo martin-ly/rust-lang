@@ -77,7 +77,6 @@ for window in data.array_windows::<3>() {
     println!("{:?}", window); // [1,2,3], [2,3,4], [3,4,5]
 }
 ```
-
 ### 滑动窗口平均值 {#滑动窗口平均值}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -95,7 +94,6 @@ fn sliding_average(data: &[f64], window_size: usize) -> Vec<f64> {
     }
 }
 ```
-
 ### 模式检测（ABBA） {#模式检测abba}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -110,7 +108,6 @@ fn has_abba_pattern(s: &str) -> bool {
 assert!(has_abba_pattern("abba"));
 assert!(!has_abba_pattern("abcd"));
 ```
-
 ---
 
 ## 2. LazyCell & LazyLock 新方法 {#2-lazycell-lazylock-新方法}
@@ -142,7 +139,6 @@ if let Some(value) = cell.get_mut() {
 // force_mut() - 强制初始化并获取可变引用
 let value: &mut String = LazyCell::force_mut(&cell);
 ```
-
 ### LazyLock（多线程） {#lazylock多线程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -162,7 +158,6 @@ std::thread::spawn(|| {
     }
 });
 ```
-
 ---
 
 ## 3. 数学常量 {#3-数学常量}
@@ -184,7 +179,6 @@ const PHI: f64 = f64::consts::GOLDEN_RATIO;  // ≈ 1.61803399
 let gamma_f32 = f32::consts::EULER_GAMMA;
 let phi_f32 = f32::consts::GOLDEN_RATIO;
 ```
-
 ### 黄金分割搜索 {#黄金分割搜索}
 
 ```rust,ignore
@@ -211,7 +205,6 @@ where
     (a + b) / 2.0
 }
 ```
-
 ### 调和级数估算 {#调和级数估算}
 
 ```rust,ignore
@@ -220,7 +213,6 @@ fn harmonic_approximation(n: usize) -> f64 {
     gamma + (n as f64).ln() + 1.0 / (2.0 * n as f64)
 }
 ```
-
 ---
 
 ## 4. Peekable 迭代器 {#4-peekable-迭代器}
@@ -245,7 +237,6 @@ let result = iter.next_if_map(|&x| {
 assert_eq!(result, None);
 // iter 仍指向 4
 ```
-
 ### 词法分析器示例 {#词法分析器示例}
 
 ```rust,ignore
@@ -273,7 +264,6 @@ impl<I: Iterator<Item = char>> Lexer<I> {
     }
 }
 ```
-
 ---
 
 ## 5. char 到 usize 转换 {#5-char-到-usize-转换}
@@ -295,7 +285,6 @@ assert_eq!(code, 0x1F980); // 129408
 // 使用 as 关键字（如果确定不会溢出）
 let code = c as usize; // 简单但需注意溢出
 ```
-
 ### 应用场景 {#应用场景}
 
 ```rust,ignore
@@ -321,7 +310,6 @@ impl CharMapper {
     }
 }
 ```
-
 ---
 
 ## 🔧 完整示例 {#完整示例}
@@ -377,7 +365,6 @@ impl DataProcessor {
     }
 }
 ```
-
 ---
 
 ## 📚 相关资源 {#相关资源}
@@ -418,7 +405,6 @@ let sums: Vec<i32> = data.array_windows::<3>()
     .map(|&[a, b, c]| a + b + c)
     .collect();
 ```
-
 ### ControlFlow {#controlflow}
 
 ```rust,ignore
@@ -433,7 +419,6 @@ fn find_first_match(items: &[T]) -> ControlFlow<T, ()> {
     ControlFlow::Continue(())
 }
 ```
-
 ### LazyLock {#lazylock}
 
 ```rust,ignore
@@ -446,7 +431,6 @@ pub fn get_config() -> Option<&'static Config> {
     CONFIG.get()
 }
 ```
-
 ### 数学常量 {#数学常量}
 
 ```rust,ignore
@@ -454,7 +438,6 @@ let phi = f64::consts::GOLDEN_RATIO;      // 黄金比例
 let gamma = f64::consts::EULER_GAMMA;     // 欧拉常数
 let ln2 = f64::consts::LN_2;              // ln(2)
 ```
-
 **最后更新**: 2026-05-08 (深度整合完成)
 
 ---

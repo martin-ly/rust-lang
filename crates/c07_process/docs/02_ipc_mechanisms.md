@@ -30,7 +30,6 @@ let mut child = Command::new("wc")
     .stdin(Stdio::piped())
     .spawn()?;
 ```
-
 - **命名管道（FIFO）**：具名、可在无亲缘关系进程间通信，需依赖平台 API（如 Unix 的 `mkfifo`）。
 
 ## 2. 套接字通信
@@ -46,7 +45,6 @@ for stream in listener.incoming() {
     // 处理 stream
 }
 ```
-
 - **Unix 域套接字**：`std::os::unix::net::UnixStream` 支持本地进程间高效通信。
 
 ## 3. 共享内存
@@ -58,7 +56,6 @@ for stream in listener.incoming() {
 // 伪代码示例
 let mmap = memmap2::MmapOptions::new().map(&file)?;
 ```
-
 - **同步问题**：共享内存需配合锁、信号量等同步原语，防止数据竞争。
 
 ## 4. 信号机制
@@ -73,7 +70,6 @@ for sig in signals.forever() {
     // 处理信号
 }
 ```
-
 ## 5. 消息队列
 
 - **消息队列**：内核或用户空间的 FIFO 队列，实现进程间异步消息传递。
@@ -85,7 +81,6 @@ let (tx, rx) = unbounded();
 tx.send("hello")?;
 let msg = rx.recv()?;
 ```
-
 - **平台 API**：可通过 FFI 调用 POSIX 消息队列（`mq_open` 等）。
 
 ## 6. 机制对比与选型建议

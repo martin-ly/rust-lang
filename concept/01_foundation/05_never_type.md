@@ -100,7 +100,6 @@ fn fatal_error() -> ! {
     std::process::exit(1)
 }
 ```
-
 > **认知功能**: `!` 填补了 Rust 类型系统的"底部"——在所有类型的层级中，`!` 位于最底层，可以隐式转换为任何其他类型。
 
 ### 1.2 形式语义：底类型
@@ -124,7 +123,6 @@ fn fatal_error() -> ! {
        \   |   /
         ! (bottom)
 ```
-
 > **关键洞察**: `!` 是**所有类型的子类型**（在类型论的子类型关系中）。这意味着 wherever 期望一个 `T`，都可以提供一个 `!`——因为 `!` 永远不会实际存在，所以这种替换是安全的。
 
 ### 1.3 Coercion 规则
@@ -142,7 +140,6 @@ fn demo_coercion(flag: bool) -> String {
     }
 }
 ```
-
 **Coercion 发生的上下文**：
 
 | 上下文 | 示例 |
@@ -178,7 +175,6 @@ pub fn get_config() -> Config {
     }
 }
 ```
-
 ### 2.2 `Result<T, !>` — 不可能失败
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/result/)]**
@@ -199,7 +195,6 @@ pub fn unwrap_infallible<T>(result: Result<T, !>) -> T {
     }
 }
 ```
-
 **与 `Result<T, Infallible>` 的关系**：
 
 在 Rust 标准库中，`std::convert::Infallible` 是 `!` 的一个类型别名（在将来会完全统一）。当前推荐使用 `!`（Rust 1.96+）。
@@ -224,7 +219,6 @@ pub fn handle_impossible(opt: Option<!>) -> &'static str {
     }
 }
 ```
-
 ---
 
 ## 三、穷尽性检查
@@ -261,7 +255,6 @@ pub fn handle_events(event: Event<i32, !>) -> Option<i32> {
     }
 }
 ```
-
 > **认知功能**: 穷尽性检查将运行时（Runtime）错误转化为编译时保证。`!` 的类型空性使编译器能够"删除"逻辑上不可能的分支，减少代码冗余的同时提升安全性。
 
 ### 3.2 与空枚举的对比
@@ -289,7 +282,6 @@ fn new_style() -> Result<i32, !> {
     Ok(42)
 }
 ```
-
 ---
 
 ## 四、Never Type 稳定化进展
@@ -356,7 +348,6 @@ impl Config {
     }
 }
 ```
-
 > **关键洞察**: 1.96 之前，某些边缘情况下 `!` 在 tuple 中不会被自动 coercion，导致需要显式处理。1.96 统一了这一行为，使 `!` 的语义更加一致。
 >
 > ```rust
@@ -380,7 +371,6 @@ pub const fn compile_time_compute(input: u32) -> Result<u32, !> {
     Ok(input * 2)
 }
 ```
-
 ### 模式 2：流处理中的不可能错误
 
 ```rust,ignore
@@ -389,7 +379,6 @@ pub fn filtered_stream(items: Vec<Result<i32, String>>) -> Vec<Result<i32, !>> {
     items.into_iter().filter_map(|r| r.ok().map(Ok)).collect()
 }
 ```
-
 ### 模式 3：与 `ControlFlow` 结合
 
 ```rust,ignore
@@ -406,7 +395,6 @@ fn find_target(items: &[i32]) -> ControlFlow<i32, !> {
     unreachable!()
 }
 ```
-
 ---
 
 ## 六、边界测试
@@ -421,7 +409,6 @@ fn make_never() -> ! {
     42 // 错误：i32 不是 !
 }
 ```
-
 > **修正**: `!` 没有值，只能通过 diverging 操作（panic、exit、无限循环）"产生"。
 
 ### 6.2 边界测试：`Some(!)` 不可构造（编译错误）
@@ -432,7 +419,6 @@ fn impossible_some() -> Option<!> {
     Some(???) // 没有任何值可以填入此处
 }
 ```
-
 > **修正**: `Option<!>` 的唯一可能值是 `None`，因为 `!` 不可构造。
 
 ### 6.3 边界测试：忘记处理 `Ok` 分支（编译错误）
@@ -445,7 +431,6 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
     }
 }
 ```
-
 > **修正**: 即使 `Err(!)` 不需要处理，`Ok(v)` 分支仍然必须存在。编译器只"删除"包含 `!` 的变体，不删除其他变体。
 
 ---

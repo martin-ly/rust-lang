@@ -89,7 +89,6 @@ fn makes_copy(some_integer: i32) {
     println!("{}", some_integer);
 } // some_integer 离开作用域，无特殊操作（栈上复制）
 ```
-
 ### 1.3 返回值与所有权转移 {#13-返回值与所有权转移}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -106,7 +105,6 @@ fn takes_and_gives_back(a_string: String) -> String {
     a_string // 所有权返回给调用者
 }
 ```
-
 ### 1.4 引用计数：共享所有权 {#14-引用计数共享所有权}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -122,7 +120,6 @@ let data = Rc::new(String::from("shared"));
 let data2 = Rc::clone(&data); // 引用计数 +1
 println!("引用计数: {}", Rc::strong_count(&data)); // 2
 ```
-
 ---
 
 ## 2. 借用：不转移所有权的访问 {#2-借用不转移所有权的访问}
@@ -146,7 +143,6 @@ fn calculate_length(s: &String) -> usize {
     s.len()
 } // s 离开作用域，但它不拥有引用的值，所以不释放
 ```
-
 ### 2.2 可变借用 {#22-可变借用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -164,7 +160,6 @@ fn change(some_string: &mut String) {
     some_string.push_str(", world");
 }
 ```
-
 ### 2.3 借用规则：数据竞争的死结 {#23-借用规则数据竞争的死结}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -178,7 +173,6 @@ let r3 = &mut s; // ❌ 大问题！编译错误
 
 println!("{}, {}, 和 {}", r1, r2, r3);
 ```
-
 **为什么？** 如果读者（r1, r2）和写者（r3）同时存在，读者可能读到半写入的状态，导致数据竞争。
 
 ### 2.4 非词法生命周期 (NLL) {#24-非词法生命周期-nll}
@@ -195,7 +189,6 @@ println!("{}", r1); // r1 在此处最后一次使用
 let r2 = &mut s; // ✅ NLL 允许：r1 已"死亡"
 r2.push_str(" world");
 ```
-
 ---
 
 ## 3. 生命周期：引用的有效期证明 {#3-生命周期引用的有效期证明}
@@ -213,7 +206,6 @@ fn first_word(s: &str) -> &str { // 等价于 fn first_word<'a>(s: &'a str) -> &
     &s[0..1]
 }
 ```
-
 ### 3.2 显式生命周期标注 {#32-显式生命周期标注}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -234,7 +226,6 @@ fn main() {
     }
 }
 ```
-
 ### 3.3 结构体中的生命周期 {#33-结构体中的生命周期}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -255,7 +246,6 @@ impl<'a> ImportantExcerpt<'a> {
     }
 }
 ```
-
 ### 3.4 生命周期子类型 {#34-生命周期子类型}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -270,7 +260,6 @@ fn use_any_lifetime(s: &str) {
     println!("{}", s);
 }
 ```
-
 ---
 
 ## 4. 常见陷阱与解决方案 {#4-常见陷阱与解决方案}
@@ -298,11 +287,9 @@ struct SelfReferentialFixed {
     _pin: PhantomPinned,
 }
 ```
-
 ### 4.2 `static mut` 的废弃 {#42-static-mut-的废弃}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > ⚠️ **警告**: `static mut` 在 Rust 2024 Edition 中引用已被禁止（`unsafe_code = "forbid"` 默认启用）。
 > 以下 ❌ 示例仅用于说明该特性被废弃的原因。请始终使用右侧 ✅ 的替代方案。
 
@@ -318,7 +305,6 @@ use std::sync::atomic::{AtomicI32, Ordering};
 static COUNTER: AtomicI32 = AtomicI32::new(0);
 COUNTER.fetch_add(1, Ordering::Relaxed);
 ```
-
 ### 4.3 生命周期过长 {#43-生命周期过长}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -330,7 +316,6 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
     result.as_str() // result 是局部变量，不能返回引用
 }
 ```
-
 ---
 
 ## 5. 思维模型 {#5-思维模型}
@@ -349,7 +334,6 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
   ├─ 可变借用 ─→ &mut T (独占写访问)
   └─ 离开作用域 ─→ Drop::drop()
 ```
-
 ### 借用检查器的工作流程 {#借用检查器的工作流程}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -368,7 +352,6 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
    ├─ ✅ 通过 ─→ 继续编译
    └─ ❌ 失败 ─→ 编译错误 (E0499, E0502 等)
 ```
-
 ---
 
 ## 6. 进阶阅读 {#6-进阶阅读}

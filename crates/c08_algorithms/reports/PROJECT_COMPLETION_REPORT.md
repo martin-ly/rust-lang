@@ -196,7 +196,6 @@ pub trait AsyncSorter: Send + Sync {
         T: Ord + Send + Sync;
 }
 ```
-
 #### 1.2 异步图算法
 
 ```rust
@@ -209,7 +208,6 @@ impl AsyncGraphProcessor {
     pub async fn async_dfs(&self, start_id: u64, target_id: u64) -> Result<Option<Vec<u64>>, Box<dyn Error + Send + Sync>>;
 }
 ```
-
 ### 2. 泛型算法容器
 
 #### 2.1 GATs 应用
@@ -224,7 +222,6 @@ pub trait AlgorithmContainer {
     fn async_iter(&self) -> Self::AsyncIterator<'_>;
 }
 ```
-
 #### 2.2 常量泛型应用
 
 ```rust
@@ -237,7 +234,6 @@ impl<T, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
     pub async fn parallel_multiply<const OTHER_COLS: usize>(&self, other: &Matrix<T, COLS, OTHER_COLS>) -> Matrix<T, ROWS, OTHER_COLS>;
 }
 ```
-
 ---
 
 ## 📊 性能提升统计
@@ -295,7 +291,6 @@ lto = true
 codegen-units = 1
 panic = "abort"
 ```
-
 ---
 
 ## 🌟 项目亮点总结

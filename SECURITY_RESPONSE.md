@@ -25,7 +25,6 @@
 检测 → 分级 → 评估 → 修复 → 验证 → 文档 → 复盘
   ↑___________________________________________↓
 ```
-
 ### Step 1: 检测 (Detection)
 
 **自动化检测**（每日/每次 CI）：
@@ -52,7 +51,6 @@
 - **负责人**: @xxx
 - **截止日期**: YYYY-MM-DD
 ```
-
 ### Step 3: 评估 (Assessment)
 
 判断修复可行性：
@@ -75,14 +73,12 @@ cargo check --workspace
 # 4. 测试验证
 cargo test --workspace
 ```
-
 **传递依赖修复**（通过 `[patch]` 或升级直接依赖）：
 
 ```toml
 # 在 Cargo.toml 中临时 patch
 tokio-console = { git = "https://github.com/tokio-rs/console", branch = "main" }
 ```
-
 ### Step 5: 验证 (Verification)
 
 ```bash
@@ -91,7 +87,6 @@ cargo audit
 cargo deny check advisories
 # 确保无新增漏洞
 ```
-
 ### Step 6: 文档 (Documentation)
 
 - 更新 `CHANGELOG.md` 的 Security 章节
@@ -171,7 +166,6 @@ cargo tree -p <crate-name>
 # 查看重复依赖
 cargo tree -d
 ```
-
 ---
 
 ## 六、参考链接

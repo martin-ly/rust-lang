@@ -26,7 +26,6 @@
 [target.'cfg(target_os = "linux")'.dependencies]
 glommio = "0.9.0"
 ```
-
 - ✅ 添加了 Glommio 0.9.0 最新版本
 - ✅ 使用条件依赖，仅在 Linux 上编译
 - ✅ 避免了跨平台兼容性问题
@@ -56,7 +55,6 @@ glommio = "0.9.0"
 #[cfg(target_os = "linux")]
 pub mod glommio;
 ```
-
 ### 3. 综合示例 ✅
 
 **文件**: `examples/glommio_comprehensive_2025.rs` (435 行)
@@ -67,32 +65,26 @@ pub mod glommio;
    - LocalExecutor 使用
    - Task 创建和等待
    - 简单异步操作
-
 2. **多任务并发执行**
    - 10 个并发任务
    - futures::join_all 使用
    - 性能计时
-
 3. **CPU 绑定与亲和性**
    - 多核心执行器创建
    - pin_to_cpu 使用
    - 核心间负载分配
-
 4. **任务优先级调度**
    - 高/低优先级队列
    - Shares 和 Latency 配置
    - 优先级调度演示
-
 5. **跨执行器通信 (Channel Mesh)**
    - MeshBuilder 使用
    - 跨核心消息传递
    - 分布式通信模式
-
 6. **高性能文件 I/O**
    - DMA 文件操作
    - 零拷贝读写
    - 性能优化示例
-
 7. **性能特性展示**
    - 10,000 任务创建
    - 性能指标统计
@@ -104,7 +96,6 @@ pub mod glommio;
 cargo run --example glommio_comprehensive_2025
 # 注意：仅支持 Linux 5.1+ (需要 io_uring)
 ```
-
 ### 4. 最佳实践文档 ✅
 
 **文件**: `docs/tier_02_guides/09_glommio_best_practices_2025.md` (810 行)
@@ -115,58 +106,45 @@ cargo run --example glommio_comprehensive_2025
    - 什么是 Glommio
    - 核心优势
    - 适用场景
-
 2. **快速开始**
    - 系统要求
    - 安装配置
    - 第一个程序
-
 3. **Thread-per-core 架构**
    - 架构原理
    - 与 Work-stealing 对比
    - 最佳实践
-
 4. **CPU 绑定与亲和性**
    - CPU Pinning 基础
    - NUMA 优化
    - 最佳实践
-
 5. **任务调度与优先级**
    - 任务队列
    - 优先级调度
    - 公平性与延迟
-
 6. **高性能 I/O**
    - DMA 文件 I/O
    - 网络 I/O
    - 零拷贝技术
-
 7. **跨执行器通信**
    - Channel Mesh
    - Shared Channels
    - 通信模式
-
 8. **性能优化技巧**
    - 内存管理
    - 批处理优化
    - 缓存友好设计
-
 9. **错误处理**
    - 错误处理策略
    - 恢复机制
-
 10. **监控与调试**
     - 统计信息
     - 性能分析
-
 11. **生产环境部署**
     - 配置建议
     - 容器化部署
-
 12. **常见陷阱与解决方案**
-
 13. **与其他运行时的对比**
-
 14. **参考资源**
 
 ### 5. 运行时对比文档 ✅
@@ -251,7 +229,6 @@ cargo run --example glommio_comprehensive_2025
    ```markdown
    - **Glommio**: 基于 io_uring 的极致性能运行时 (Linux 专用) ⭐ **NEW!**
    ```
-
 2. **示例运行部分** (新增):
 
    ```markdown
@@ -262,14 +239,12 @@ cargo run --example glommio_comprehensive_2025
      - 吞吐量 >2M req/s
      - 适用于高频交易、数据库引擎等
    ```
-
 3. **文档部分** (新增):
 
    ```markdown
    - **[Glommio 运行时对比分析 2025]** ⭐⭐⭐ **NEW! 2025-10-30**
    - **[Glommio 最佳实践指南 2025]** ⭐⭐⭐ **NEW! 2025-10-30**
    ```
-
 ### 8. 性能基准测试 ✅
 
 **文件**: `benches/glommio_benchmarks.rs` (470 行)
@@ -280,27 +255,22 @@ cargo run --example glommio_comprehensive_2025
    - Glommio vs Tokio vs Smol
    - 1000 任务创建
    - 吞吐量测试
-
 2. **文件 I/O** (bench_file_io)
    - Glommio DMA vs Tokio async
    - 4KB 读写测试
    - 零拷贝性能
-
 3. **并发任务** (bench_concurrent_tasks)
    - 100/1000/10000 任务
    - 延迟和吞吐量测试
    - 多运行时对比
-
 4. **CPU 密集型** (bench_cpu_intensive)
    - 计算密集型负载
    - 多核心性能
    - 调度开销对比
-
 5. **延迟测试** (bench_latency)
    - 单任务延迟
    - P50/P99 测量
    - 最小延迟对比
-
 6. **内存使用** (bench_memory_usage)
    - 10,000 任务内存占用
    - 内存分配效率
@@ -312,7 +282,6 @@ cargo run --example glommio_comprehensive_2025
 cargo bench --bench glommio_benchmarks
 # 仅在 Linux 上运行
 ```
-
 ## 📊 统计信息
 
 | 指标       | 数量           |
@@ -396,7 +365,6 @@ crates/c06_async/
 ├── README.md                     # ✅ 更新主文档
 └── GLOMMIO_INTEGRATION_2025_10_30.md  # ✅ 本报告
 ```
-
 ## 🚀 快速开始
 
 ### 1. 检查系统环境
@@ -411,7 +379,6 @@ cat /proc/sys/kernel/io_uring_disabled  # 应该为 0
 # 安装依赖
 sudo apt-get install liburing-dev
 ```
-
 ### 2. 运行示例
 
 ```bash
@@ -421,7 +388,6 @@ cargo run --example glommio_comprehensive_2025
 # 性能基准测试
 cargo bench --bench glommio_benchmarks
 ```
-
 ### 3. 阅读文档
 
 1. [快速入门](docs/tier_01_foundations/05_glommio_quick_start.md) - 5分钟上手
@@ -441,7 +407,6 @@ cargo bench --bench glommio_benchmarks
     ├─ 不需要丰富的第三方库
     └─ 高性能计算/金融/游戏服务器
 ```
-
 ### 选择其他运行时的场景
 
 ```text
@@ -459,24 +424,20 @@ cargo bench --bench glommio_benchmarks
     ├─ CLI 工具或嵌入式应用
     └─ 快速原型开发
 ```
-
 ## 🎓 学习路径
 
 1. **入门** (1-2天)
    - 阅读快速入门文档
    - 运行 Hello World
    - 理解基本概念
-
 2. **进阶** (1周)
    - 学习 Thread-per-core 架构
    - 掌握 CPU 绑定
    - 理解 io_uring
-
 3. **高级** (2-4周)
    - NUMA 优化
    - Channel Mesh
    - 性能调优
-
 4. **精通** (2-3月)
    - 生产环境部署
    - 监控和调试

@@ -24,7 +24,6 @@ src/
 ├── smart_pointers/     # 智能指针
 └── threads/            # 多线程与所有权
 ```
-
 ## 主要类型和 Trait
 
 ### 核心类型
@@ -58,7 +57,6 @@ fn main() {
     println!("{}", s2);   // 正确
 }
 ```
-
 ### 借用规则
 
 ```rust
@@ -75,7 +73,6 @@ fn main() {
     r3.push_str(" world");
 }
 ```
-
 ### 智能指针使用
 
 ```rust
@@ -92,7 +89,6 @@ fn main() {
     println!("{}", data.borrow()); // 输出: 15
 }
 ```
-
 ## 依赖关系
 
 ### 上游依赖
@@ -112,7 +108,6 @@ tokio = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 ```
-
 ## 运行方式
 
 ```bash
@@ -130,7 +125,6 @@ cargo run -p c01_ownership_borrow_scope --example layout_api_demo       # Layout
 cargo run -p c01_ownership_borrow_scope --example raw_ptr_ref_demo      # *const/mut T::as_ref_unchecked / as_mut_unchecked
 cargo run -p c01_ownership_borrow_scope --example maybeuninit_cell_array_demo # MaybeUninit/Cell 数组转换
 ```
-
 ## 学习路径建议
 
 1. 首先阅读 `src/ownership/mod.rs` 理解所有权三规则

@@ -50,7 +50,6 @@ Ferrocene:   ⭐⭐⭐⭐⭐ (相同后端)
 GNAT Pro:    ⭐⭐⭐⭐ (LLVM)
 GCC-Rust:    ⭐⭐⭐ (GCC后端)
 ```
-
 ---
 
 ## 2. 静态分析工具评估
@@ -102,7 +101,6 @@ cyclomatic-complexity-threshold = 10
 cognitive-complexity-threshold = 15
 too-many-lines-threshold = 50
 ```
-
 ---
 
 ## 3. 形式化验证工具评估
@@ -150,7 +148,6 @@ too-many-lines-threshold = 50
         ├── 后置条件
         └── 循环不变量
 ```
-
 ---
 
 ## 4. 测试框架评估
@@ -197,7 +194,6 @@ grcov:
 ├── CI: 良好
 └── 推荐: ⭐⭐⭐⭐
 ```
-
 ---
 
 ## 5. IDE和编辑器评估
@@ -235,7 +231,6 @@ grcov:
     }
 }
 ```
-
 ---
 
 ## 6. CI/CD工具评估
@@ -296,7 +291,6 @@ jobs:
           kani-setup
           cargo kani --workspace
 ```
-
 ---
 
 ## 7. 包和依赖管理
@@ -332,7 +326,6 @@ deny = ["GPL-2.0", "GPL-3.0"]
 multiple-versions = "warn"
 wildcards = "deny"
 ```
-
 ---
 
 ## 8. 嵌入式特定工具
@@ -372,7 +365,6 @@ fn main() -> ! {
     }
 }
 ```
-
 ---
 
 ## 9. 工具链推荐组合
@@ -412,7 +404,6 @@ IDE:
 ├── VS Code + rust-analyzer
 └── 或 CLion (商业)
 ```
-
 ### 9.2 SIL 2级项目
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -437,7 +428,6 @@ IDE:
 风险: 可控
 适用: 非最高安全等级
 ```
-
 ---
 
 ## 10. 工具选择检查表
@@ -496,7 +486,6 @@ IDE:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [综合语言对比矩阵](01_comprehensive_language_comparison_matrix.md)
 - [Rust生态系统多维概念矩阵对比](02_rust_multi_dimensional_matrix.md)
 

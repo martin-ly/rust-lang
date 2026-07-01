@@ -33,7 +33,6 @@
 > [cargo-fuzz](https://github.com/rust-fuzz/cargo-fuzz) ·
 > [Miri](https://github.com/rust-lang/miri) ·
 > [Rust [RFC 2318](https://rust-lang.github.io/rfcs//2318-custom-test-frameworks.html) — Custom Test Frameworks](<https://github.com/rust-lang/rfcs/pull/2318>)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
@@ -107,7 +106,6 @@ Rust 测试的三种内置形式:
   ├── #[bench] (nightly): 基准测试
   └── #[test_case] (第三方): 参数化测试
 ```
-
 **可编译示例**:
 
 ```rust
@@ -137,7 +135,6 @@ mod tests {
     }
 }
 ```
-
 > **认知功能**: Rust 的测试框架是**语言内置**的——不需要外部依赖即可写测试。这与 JavaScript（需要 Jest/Mocha）或 Java（需要 JUnit）形成对比。
 > [来源: [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)]
 > **关键洞察**: `#[cfg(test)]` 条件编译使测试代码在生产构建中**完全消除**——零运行时（Runtime）开销。
@@ -174,7 +171,6 @@ graph TD
     LIB --> I1 --> I2
     MOD --> D1 --> D2
 ```
-
 > **认知功能**: 此图展示 Rust 测试的**三层组织**。单元测试验证内部逻辑，集成测试验证公共契约，文档测试验证示例正确性。
 > **使用建议**: 优先写单元测试（快速、定位精确），补充集成测试（验证 API 契约），维护文档测试（保证示例有效）。
 > [来源: [Rust Test Organization](https://doc.rust-lang.org/book/ch11-03-test-organization.html)]
@@ -207,7 +203,6 @@ Rust 类型系统作为验证工具:
   ├── 类型系统已消除整类错误
   └── 测试应聚焦于**业务逻辑**和**边界条件**
 ```
-
 > **编译即验证洞察**: Rust 的**类型系统（Type System）是最大的测试套件**——它在编译期消除了其他语言需要大量测试才能发现的错误。这使得 Rust 的测试可以**聚焦于业务价值**而非语言安全。
 > [来源: [Rust Type System as Verification](https://doc.rust-lang.org/reference/type-system.html)]
 
@@ -249,7 +244,6 @@ proptest! {
 // - 发现边界情况（如空字符串、极大值）
 // - 失败时自动缩小（shrinking）到最小反例
 ```
-
 > **属性测试洞察**: 属性测试是**生成式验证**——它自动发现程序员没想到的边界情况，比手写测试用例更全面地覆盖输入空间。
 > [来源: [proptest Book](https://docs.rs/proptest/latest/proptest/)]
 
@@ -291,7 +285,6 @@ fn test_user_service() {
 // - 支持期望设置（调用次数、参数匹配）
 // - 支持序列和状态机
 ```
-
 > **Mock 洞察**: `mockall` 通过**过程宏（Procedural Macro）**自动生成 Mock 实现——这是 Rust 宏系统的强大应用，避免了手动编写 mock 的繁琐。
 > [来源: [mockall Documentation](https://docs.rs/mockall/latest/mockall/)]
 
@@ -322,7 +315,6 @@ cargo-fuzz: 基于 libFuzzer 的模糊测试
   ├── 文件格式处理
   └── 网络协议实现
 ```
-
 > **模糊测试洞察**: 模糊测试是**暴力发现边界情况**的方法——它通过大量随机输入发现程序员没想到的漏洞。Rust 的类型安全使模糊测试可以聚焦于真正的业务边界。
 > [来源: [cargo-fuzz](https://github.com/rust-fuzz/cargo-fuzz)] · [来源: [Rust Fuzz Book](https://rust-fuzz.github.io/book/)]
 
@@ -365,7 +357,6 @@ unsafe 代码验证:
   → Loom (并发模拟)
   → loom::model
 ```
-
 > **策略矩阵**: Rust 的测试生态是**分层验证**——从编译期类型检查到运行时（Runtime）模糊测试，每层针对不同类型的错误。
 > [来源: [Rust Testing Guide](https://doc.rust-lang.org/rust-by-example/testing.html)] · [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
@@ -389,7 +380,6 @@ graph TD
     style MEDIUM fill:#c8e6c9
     style LOW fill:#fff3e0
 ```
-
 > **认知功能**: 此决策树展示测试投入的**优先级**。核心原则是：**公共 API + 复杂逻辑优先**。
 > **关键洞察**: Rust 的类型系统已消除了许多需要测试的"错误类"——测试应聚焦于**业务逻辑**而非**语言安全**。
 > [来源: [Rust API Guidelines — Testing](https://rust-lang.github.io/api-guidelines//debuggability.html)]
@@ -430,7 +420,6 @@ graph TD
 ├── 但 CI 中测试编译时间影响反馈速度
 └── 缓解: 测试并行化、选择性测试
 ```
-
 > **边界要点**: 测试生态的边界主要与**异步（Async）复杂性**、**全局状态**、**外部依赖**、**unsafe 验证**和**编译时间**相关。
 > [来源: [Rust Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)]
 
@@ -475,7 +464,6 @@ graph TD
   ✅ 使用 #[should_panic] 和 Result 测试错误
      // 属性测试自动生成边界输入
 ```
-
 > **陷阱总结**: 测试的陷阱主要与**flakiness**、**过度 mock**、**错误忽略**、**实现耦合**和**成功路径偏见**相关。
 > [来源: [Rust Testing Best Practices](https://rustc-dev-guide.rust-lang.org/tests/intro.html)]
 
@@ -547,7 +535,6 @@ fn broken_test() {
     let x: i32 = "hello"; // 类型不匹配
 }
 ```
-
 > **修正**:
 > `cargo test` 首先编译测试代码（包括 `#[test]` 函数和 `tests/` 目录），然后运行测试。
 > 编译错误导致**无测试运行**——这与测试失败（assertion 失败）不同。
@@ -583,7 +570,6 @@ impl<T: Database> Service<T> {
     fn new(db: T) -> Self { Self { db } }
 }
 ```
-
 > **修正**:
 > Rust 的 mock 对象必须**显式实现**被模拟的 trait。这与 Python 的 `unittest.mock`（动态创建 mock）或 Java 的 Mockito（运行时字节码生成）不同——Rust 没有运行时反射，mock 必须在编译期存在。
 > `mockall` crate 通过过程宏（Procedural Macro）自动生成 mock 实现，但底层仍是"为 trait 生成 struct 并实现"。
@@ -607,7 +593,6 @@ mod more_tests {
     // 实际上不冲突，因为模块路径不同: tests::test_add vs more_tests::test_add
 }
 ```
-
 > **修正**:
 > Rust 的测试函数名在**模块（Module）路径层面**唯一：`tests::test_add` 和 `more_tests::test_add` 是不同的测试。
 > 但 `cargo test` 的过滤器 `--test test_add` 会匹配两者，同时运行。
@@ -633,7 +618,6 @@ mod more_tests {
 /// ```
 fn documented() {}
 ```
-
 > **修正**:
 > Rust 的 doc test 支持多种属性：
 >

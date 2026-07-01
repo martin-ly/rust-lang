@@ -52,7 +52,6 @@ fn fibonacci(n: u64) -> u64 {
     }
 }
 ```
-
 ### 使用 Criterion 进行可靠基准测试 {#使用-criterion-进行可靠基准测试}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -92,7 +91,6 @@ fn fibonacci_benchmark(c: &mut Criterion) {
 criterion_group!(benches, fibonacci_benchmark);
 criterion_main!(benches);
 ```
-
 ### 防止编译器优化（black_box） {#防止编译器优化black_box}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -122,7 +120,6 @@ pub fn custom_black_box<T>(dummy: T) -> T {
     }
 }
 ```
-
 ### 参数化基准测试 {#参数化基准测试}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -153,7 +150,6 @@ fn bench_various_sizes(c: &mut Criterion) {
     group.finish();
 }
 ```
-
 ### 比较不同实现 {#比较不同实现}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -205,7 +201,6 @@ fn bench_comparison(c: &mut Criterion) {
     group.finish();
 }
 ```
-
 ### 异步基准测试 {#异步基准测试}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -235,7 +230,6 @@ fn bench_async(c: &mut Criterion) {
     });
 }
 ```
-
 ### 吞吐量测量 {#吞吐量测量}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -263,7 +257,6 @@ fn bench_with_throughput(c: &mut Criterion) {
     group.finish();
 }
 ```
-
 ---
 
 ## 基准测试最佳实践 {#基准测试最佳实践}
@@ -302,7 +295,6 @@ fn expensive_operation() -> Vec<u32> {
     (0..10000).map(|x| x * x).collect()
 }
 ```
-
 ### 预热与稳定 {#预热与稳定}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -330,7 +322,6 @@ fn cache_sensitive_operation() -> Vec<f64> {
     vec![1.0; 1000].iter().map(|x| x.sqrt()).collect()
 }
 ```
-
 ### 基准测试隔离 {#基准测试隔离}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -356,7 +347,6 @@ fn bench2(c: &mut Criterion) {
     });
 }
 ```
-
 ---
 
 ## 性能分析工具集成 {#性能分析工具集成}
@@ -377,7 +367,6 @@ $ cargo bench -- --profile-time 10
 $ perf record -g target/release/deps/my_benchmark-xxx --bench
 $ perf report
 ```
-
 ## 📑 目录 {#目录}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -422,7 +411,6 @@ $ cargo install flamegraph
 # 生成火焰图 {#生成火焰图}
 $ cargo flamegraph --bench my_benchmark
 ```
-
 ### 内存分配分析 {#内存分配分析}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -447,7 +435,6 @@ fn profile_memory() {
     drop(data);
 }
 ```
-
 ---
 
 ## 常见陷阱与避免方法 {#常见陷阱与避免方法}
@@ -513,7 +500,6 @@ fn good_bench3(c: &mut Criterion) {
     });
 }
 ```
-
 ---
 
 ## 快速开始模板 {#快速开始模板}
@@ -550,7 +536,6 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
-
 ---
 
 ## 相关研究笔记 {#相关研究笔记}
@@ -612,19 +597,12 @@ criterion_main!(benches);
 ## 权威来源索引 {#权威来源索引-1}
 
 > **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
-
 > **[来源: Criterion.rs]**
-
 > **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
-
 > **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
-
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
-
 > **来源: [Coq Reference](https://coq.inria.fr/doc/)**
-
 > **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
-
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---
@@ -651,141 +629,76 @@ criterion_main!(benches);
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**

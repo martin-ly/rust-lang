@@ -106,7 +106,6 @@ Rust 的测试内置机制:
   │ 编译期检查      │ ✅ 类型安全      │ 运行时检查      │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
-
 > **认知功能**: Rust 的**测试是语言的一等公民**——不是事后添加的框架，而是编译器和工具链的核心功能。
 > [来源: [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)]
 
@@ -163,7 +162,6 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ```
-
 > **类型洞察**: Rust 的**三层测试架构**（单元/集成/文档）覆盖了从内到外的完整验证需求。
 > [来源: [Rust Reference — Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)]
 
@@ -199,7 +197,6 @@ pub fn add(a: i32, b: i32) -> i32 {
   ├── cargo test --ignored     # 运行被忽略的测试
   └── cargo test -- --nocapture # 显示 println! 输出
 ```
-
 > **组织洞察**: **tests/ 目录的集成测试作为独立 crate 编译**——它们只能访问 public API，强制测试公共接口。
 > [来源: [Cargo Book — Tests](https://doc.rust-lang.org/cargo/guide/tests.html)]
 
@@ -270,7 +267,6 @@ mod tests {
     }
 }
 ```
-
 > **单元测试洞察**: **#[cfg(test)] 模块（Module）可以访问父模块的私有项**——这是测试私有函数的标准方式。
 > [来源: [TRPL — Unit Tests](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)]
 
@@ -318,7 +314,6 @@ fn test_with_common() {
 // 注意: tests/common/mod.rs 不会作为测试文件执行
 // 只有 tests/*.rs 是测试入口
 ```
-
 > **集成测试洞察**: **集成测试验证 crate 的公共 API**——它们确保对外承诺的行为实际工作。
 > [来源: [TRPL — Integration Tests](https://doc.rust-lang.org/book/ch11-03-test-organization.html)]
 
@@ -378,7 +373,6 @@ pub fn fibonacci(n: u32) -> u64 {
 /// # }
 /// ```
 ```
-
 > **文档测试洞察**: **文档测试是 Rust 的差异化特性**——它解决了"文档示例过时"的普遍问题。
 > [来源: [Rustdoc — Documentation Tests](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html)]
 
@@ -419,7 +413,6 @@ API 契约:
   → 随机输入生成
   → 发现边界情况
 ```
-
 > **模式矩阵**: Rust 的**测试生态覆盖了验证的完整谱系**——从快速单元测试到深度属性测试。
 > [来源: [Rust Testing Best Practices](https://doc.rust-lang.org/rust-by-example/testing.html)]
 
@@ -443,7 +436,6 @@ graph TD
     style FULL fill:#c8e6c9
     style BALANCED fill:#c8e6c9
 ```
-
 > **认知功能**: **测试是投资**——在安全关键和长期维护的代码上回报最高，原型上可适度减少。
 > [来源: [Rust API Guidelines — Testing](https://rust-lang.github.io/api-guidelines//documentation.html#examples-use--not-try-not-unwrap-c-example)]
 
@@ -483,7 +475,6 @@ graph TD
 ├── 但集成测试作为独立 crate 编译
 └── 缓解: 模块化，避免重复编译
 ```
-
 > **边界要点**: 测试的边界主要与**并行执行**、**异步（Async）**、**外部依赖**、**全局状态**和**编译时间**相关。
 > [来源: [Cargo Book — Test Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests)]
 
@@ -529,7 +520,6 @@ graph TD
   ✅ 分层测试金字塔
      // 大量单元测试 + 少量集成测试
 ```
-
 > **陷阱总结**: 测试的陷阱主要与**共享状态**、**文档测试属性**、**错误信息**、**耦合**和**速度**相关。
 > [来源: [Rust Testing Guide](https://doc.rust-lang.org/rust-by-example/testing/unit_testing.html)]
 
@@ -594,7 +584,6 @@ fn test_divide_by_zero() {
     let _ = 1 / 0;
 }
 ```
-
 > **修正**: `#[should_panic(expected = "...")]` 检查 panic 消息是否**包含**指定子串，而非完全相等。`"divide by zero"` 不匹配 `"attempt to divide by zero"`（缺少前缀 `attempt to`），因此测试失败。正确写法：`#[should_panic(expected = "attempt to divide by zero")]` 或更宽松的 `#[should_panic]`（不检查消息）。`expected` 是子串匹配，因此可写关键部分：`"divide by zero"` 在旧版 Rust 中可能匹配（若消息恰好是此子串），但不可靠。测试 panic 的替代：`std::panic::catch_unwind`（在测试中捕获 panic，验证返回的 `Payload`），或 `std::panic::set_hook` 自定义 panic 处理。这与 Java 的 `assertThrows`（检查异常类型，不检查消息）或 Python 的 `pytest.raises`（可检查消息）类似——Rust 的 `should_panic` 是属性宏（Macro），简洁但功能有限。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)] · [来源: [Rust Reference — Testing](https://doc.rust-lang.org/reference/attributes/testing.html)]
 
 ### 10.4 边界测试：集成测试的模块可见性（编译错误）
@@ -615,7 +604,6 @@ fn test_helper() {
 // ❌ 编译错误: `internal` 模块在集成测试中不可见
 // 集成测试像外部 crate，只能访问公开 API
 ```
-
 > **修正**: Rust 的测试分层：1) **单元测试**（`#[cfg(test)]` 模块（Module），在 `src/` 中，可访问私有项）；2) **集成测试**（`tests/` 目录，像外部 crate，只能访问 `pub` API）；3) **文档测试**（`/// ``` ` 中，运行示例代码）。集成测试的隔离性强制库设计者考虑 API 的测试性：私有辅助函数无法直接测试，需通过公开 API 间接测试，或暴露 `#[cfg(test)] pub` 的测试专用接口。这与 Python 的 `unittest`（可访问模块内所有名称）或 Java 的 `JUnit`（`private` 方法通过反射测试）不同——Rust 的模块可见性在测试中同样严格，促进更好的 API 设计。workaround：`pub(crate)` 或 `#[doc(hidden)] pub` 暴露内部接口供集成测试使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-03-test-organization.html)] · [来源: [Rust Reference — Test Organization](https://doc.rust-lang.org/cargo/guide/tests.html)]
 
 ### 10.5 边界测试：`#[should_panic]` 的预期消息匹配（测试失败）
@@ -628,7 +616,6 @@ fn test_divide_by_zero() {
     let _ = 1 / 0;
 }
 ```
-
 > **修正**: `#[should_panic(expected = "...")]` 检查 panic 消息是否**包含**指定子串，而非精确匹配。`"divide by zero"` 不匹配 `"attempt to divide by zero"`，因为缺少前缀 `"attempt to "`。测试失败的输出：`test test_divide_by_zero ... FAILED: panic message "attempt to divide by zero" does not contain "divide by zero"`——实际上它**确实包含**，这个例子在当前 Rust 中可能通过。更准确的失败场景：`expected = "overflow"` 但 panic 消息是 `"attempt to divide by zero"`。`should_panic` 的其他陷阱：1) 预期消息大小写敏感；2) `expected` 是子串匹配，非正则匹配；3) panic 发生在 `should_panic` 的测试函数外部（如 setup 代码）导致意外通过。这与 JUnit 的 `@Test(expected = ...)` 或 pytest 的 `pytest.raises` 类似——Rust 的 `should_panic` 是简单的消息子串检查。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)] · [来源: [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)]
 
 ### 10.6 边界测试：集成测试的模块可见性与 `pub` 要求（编译错误）
@@ -644,7 +631,6 @@ struct InternalStruct {
 
 fn main() {}
 ```
-
 > **修正**: Rust 的**集成测试**（`tests/` 目录）将 crate 作为外部依赖使用，只能访问 `pub` API。`InternalStruct` 不是 `pub`，集成测试无法导入。测试私有代码的方法：1) `#[cfg(test)] mod tests { use super::*; }` — 单元测试在同一文件中，可访问私有项；2) `pub(crate)` — 使项在 crate 内可见（包括单元测试）；3) `pub` — 完全公开（集成测试可用）。设计权衡：集成测试验证公共 API 的行为，单元测试验证内部实现。过度公开内部类型（仅为测试）破坏封装。这与 Java 的 `package-private`（同包内可访问，类似 `pub(crate)`）或 Python 的 `_prefix`（约定私有，但测试可导入）不同——Rust 的可见性是编译期强制的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-03-test-organization.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/workspaces.html)]
 
 ## 嵌入式测验（Embedded Quiz）
@@ -732,9 +718,7 @@ fn main() {}
 > 回归预防 ⟸ 自动化测试覆盖 ⟸ assert/match 验证
 > 代码可靠性 ⟸ TDD 循环 ⟸ 红-绿-重构
 > **过渡**: 掌握 测试基础：从单元测试到集成测试 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 测试基础：从单元测试到集成测试 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 测试基础：从单元测试到集成测试 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

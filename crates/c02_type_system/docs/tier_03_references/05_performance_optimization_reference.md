@@ -1,0 +1,1598 @@
+# 3.5 Rust 类型系统 - 性能优化参考
+
+> **文档类型**: Tier 3 - 参考层
+> **文档定位**: 类型系统性能优化完整参考
+> **适用对象**: 中级 → 高级开发者
+> **前置知识**: [2.3 泛型编程指南](../tier_02_guides/03_generics_programming_guide.md), [3.3 分派机制参考](03_dispatch_mechanisms_reference.md)
+> **最后更新**: 2025-12-11
+
+---
+
+## 📋 目录
+
+- [3.5 Rust 类型系统 - 性能优化参考](#35-rust-类型系统---性能优化参考)
+  - [📋 目录](#-目录)
+  - [🎯 概述](#-概述)
+  - [1. 零成本抽象](#1-零成本抽象)
+    - [1.1 核心原则](#11-核心原则)
+    - [1.2 单态化](#12-单态化)
+    - [1.3 内联优化](#13-内联优化)
+  - [2. 内存布局优化](#2-内存布局优化)
+    - [2.1 结构体布局](#21-结构体布局)
+    - [2.2 枚举优化](#22-枚举优化)
+    - [2.3 零大小类型](#23-零大小类型)
+  - [3. 避免分配](#3-避免分配)
+    - [3.1 栈 vs 堆](#31-栈-vs-堆)
+    - [3.2 SmallVec 和 Cow](#32-smallvec-和-cow)
+    - [3.3 Arena 分配](#33-arena-分配)
+  - [4. 编译时计算](#4-编译时计算)
+    - [4.1 Const 泛型](#41-const-泛型)
+    - [4.2 Const 函数](#42-const-函数)
+    - [4.3 类型级计算](#43-类型级计算)
+    - [4.4 编译时字符串处理](#44-编译时字符串处理)
+    - [4.5 Build-Time Code Generation](#45-build-time-code-generation)
+  - [5. 缓存友好](#5-缓存友好)
+    - [5.1 数据局部性](#51-数据局部性)
+    - [5.2 内存对齐](#52-内存对齐)
+    - [5.3 预取](#53-预取)
+    - [5.4 向量化计算](#54-向量化计算)
+    - [5.5 数据结构的缓存优化](#55-数据结构的缓存优化)
+    - [5.6 批处理优化](#56-批处理优化)
+  - [6. 性能测量](#6-性能测量)
+    - [6.1 Criterion](#61-criterion)
+    - [6.2 Profiling](#62-profiling)
+    - [6.3 优化策略](#63-优化策略)
+  - [7. 实战案例](#7-实战案例)
+    - [案例 1: 高性能集合](#案例-1-高性能集合)
+    - [案例 2: 零拷贝解析](#案例-2-零拷贝解析)
+    - [案例 3: SIMD 优化](#案例-3-simd-优化)
+    - [案例 4: 自定义分配器](#案例-4-自定义分配器)
+    - [案例 5: 内存池优化](#案例-5-内存池优化)
+  - [8. 常见陷阱](#8-常见陷阱)
+  - [9. 编译器优化深度](#9-编译器优化深度)
+    - [9.1 LLVM优化流程](#91-llvm优化流程)
+    - [9.2 内联策略深度](#92-内联策略深度)
+    - [9.3 死代码消除（DCE）](#93-死代码消除dce)
+    - [9.4 循环优化](#94-循环优化)
+    - [9.5 常量折叠与常量传播](#95-常量折叠与常量传播)
+  - [10. 高级优化实战案例集](#10-高级优化实战案例集)
+    - [案例 6: 高性能JSON解析器](#案例-6-高性能json解析器)
+    - [案例 7: 高性能哈希表](#案例-7-高性能哈希表)
+    - [案例 8: 批处理与流水线优化](#案例-8-批处理与流水线优化)
+    - [案例 9: 分层缓存策略](#案例-9-分层缓存策略)
+    - [案例 10: 预计算与查表法](#案例-10-预计算与查表法)
+  - [11. 跨版本兼容性说明](#11-跨版本兼容性说明)
+  - [12. 总结](#12-总结)
+  - [13. 参考资源](#13-参考资源)
+  - [**🎉 完成性能优化参考学习！** 🦀](#-完成性能优化参考学习-)
+
+---
+
+## 🎯 概述
+
+Rust 的类型系统提供了**零成本抽象**：
+
+| 优化维度   | 技术              | 收益         |
+| :--- | :--- | :--- |
+| **编译时** | 单态化 + 内联     | 消除抽象开销 |
+| **内存**   | 布局优化 + ZST    | 减少内存占用 |
+| **分配**   | 栈分配 + Arena    | 减少堆分配   |
+| **缓存**   | 数据局部性 + 对齐 | 提升缓存命中 |
+
+---
+
+## 1. 零成本抽象
+
+### 1.1 核心原则
+
+**"你不用的不付费，你使用的无法写得更快"**-
+
+```rust
+// 抽象代码
+fn sum_generic<T: std::iter::Iterator<Item = i32>>(iter: T) -> i32 {
+    iter.sum()
+}
+
+// 编译后等价于手写循环
+fn sum_manual(slice: &[i32]) -> i32 {
+    let mut total = 0;
+    for &item in slice {
+        total += item;
+    }
+    total
+}
+
+fn main() {
+    let data = vec![1, 2, 3, 4, 5];
+
+    // 两者性能相同
+    let result1 = sum_generic(data.iter().copied());
+    let result2 = sum_manual(&data);
+
+    println!("{} {}", result1, result2);
+}
+```
+### 1.2 单态化
+
+**为每个具体类型生成专门代码**:
+
+```rust
+fn process<T: std::fmt::Display>(value: T) {
+    println!("Value: {}", value);
+}
+
+fn main() {
+    process(42);      // 生成 process_i32
+    process(3.14);    // 生成 process_f64
+    process("hi");    // 生成 process_str
+}
+```
+**性能对比**:
+
+```rust
+use std::time::Instant;
+
+trait Compute {
+    fn compute(&self) -> i64;
+}
+
+struct Simple(i64);
+
+impl Compute for Simple {
+    fn compute(&self) -> i64 {
+        self.0 * 2
+    }
+}
+
+// 静态分发
+fn static_sum<T: Compute>(items: &[T]) -> i64 {
+    items.iter().map(|x| x.compute()).sum()
+}
+
+// 动态分发
+fn dynamic_sum(items: &[&dyn Compute]) -> i64 {
+    items.iter().map(|x| x.compute()).sum()
+}
+
+fn main() {
+    let items: Vec<Simple> = (0..1_000_000).map(Simple).collect();
+
+    let start = Instant::now();
+    let _result = static_sum(&items);
+    println!("Static: {:?}", start.elapsed());
+
+    let dyn_items: Vec<&dyn Compute> = items.iter()
+        .map(|x| x as &dyn Compute)
+        .collect();
+
+    let start = Instant::now();
+    let _result = dynamic_sum(&dyn_items);
+    println!("Dynamic: {:?}", start.elapsed());
+}
+```
+### 1.3 内联优化
+
+**#[inline] 属性**:
+
+```rust
+// 总是内联
+#[inline(always)]
+fn hot_function(x: i32) -> i32 {
+    x * 2 + 1
+}
+
+// 提示编译器内联
+#[inline]
+fn warm_function(x: i32) -> i32 {
+    x + 1
+}
+
+// 禁止内联
+#[inline(never)]
+fn cold_function(x: i32) -> i32 {
+    println!("Called with {}", x);
+    x
+}
+
+fn main() {
+    let result = hot_function(21);
+    println!("Result: {}", result);
+}
+```
+---
+
+## 2. 内存布局优化
+
+### 2.1 结构体布局
+
+**字段顺序影响大小**:
+
+```rust
+use std::mem;
+
+// ❌ 未优化：16 字节 (填充)
+struct Unoptimized {
+    a: u8,   // 1 byte
+    // 3 bytes padding
+    b: u32,  // 4 bytes
+    c: u8,   // 1 byte
+    // 3 bytes padding
+}
+
+// ✅ 优化：8 字节
+struct Optimized {
+    b: u32,  // 4 bytes
+    a: u8,   // 1 byte
+    c: u8,   // 1 byte
+    // 2 bytes padding
+}
+
+fn main() {
+    println!("Unoptimized: {}", mem::size_of::<Unoptimized>());  // 12
+    println!("Optimized: {}", mem::size_of::<Optimized>());      // 8
+}
+```
+### 2.2 枚举优化
+
+**空指针优化**:
+
+```rust
+use std::mem;
+
+// Option<Box<T>> 大小等于 Box<T>
+fn main() {
+    println!("Box<i32>: {}", mem::size_of::<Box<i32>>());           // 8
+    println!("Option<Box<i32>>: {}", mem::size_of::<Option<Box<i32>>>());  // 8
+
+    // 利用 Box 不为 null，None 用 null 表示
+}
+```
+**Discriminant 优化**:
+
+```rust
+use std::mem;
+
+// 小枚举
+enum Small {
+    A,
+    B,
+    C,
+}
+
+// 带数据的枚举
+enum WithData {
+    A(u32),
+    B(u64),
+    C,
+}
+
+fn main() {
+    println!("Small: {}", mem::size_of::<Small>());         // 1
+    println!("WithData: {}", mem::size_of::<WithData>());   // 16 (8 + 8)
+}
+```
+### 2.3 零大小类型
+
+**ZST 不占空间**:
+
+```rust
+use std::mem;
+
+struct Empty;
+
+struct PhantomMarker<T> {
+    _marker: std::marker::PhantomData<T>,
+}
+
+fn main() {
+    println!("Empty: {}", mem::size_of::<Empty>());                // 0
+    println!("PhantomMarker<i32>: {}", mem::size_of::<PhantomMarker<i32>>());  // 0
+
+    // Vec 的分配不受 ZST 影响
+    let vec: Vec<Empty> = vec![Empty; 1000];
+    println!("Vec<Empty> capacity: {}", vec.capacity());  // 不分配
+}
+```
+---
+
+## 3. 避免分配
+
+### 3.1 栈 vs 堆
+
+**优先使用栈**:
+
+```rust
+// ❌ 堆分配
+fn heap_allocation() -> Box<[i32; 1000]> {
+    Box::new([0; 1000])
+}
+
+// ✅ 栈分配
+fn stack_allocation() -> [i32; 1000] {
+    [0; 1000]
+}
+
+// ✅ 引用，避免移动
+fn reference_stack(data: &[i32; 1000]) {
+    println!("Sum: {}", data.iter().sum::<i32>());
+}
+
+fn main() {
+    let data = stack_allocation();
+    reference_stack(&data);
+}
+```
+### 3.2 SmallVec 和 Cow
+
+**SmallVec**:
+
+```rust
+use smallvec::{SmallVec, smallvec};
+
+fn main() {
+    // 小数据在栈上
+    let mut vec: SmallVec<[i32; 4]> = smallvec![1, 2, 3];
+    println!("On stack: {:?}", vec);
+
+    // 超出容量后才堆分配
+    vec.push(4);
+    vec.push(5);
+    println!("Now on heap: {:?}", vec);
+}
+```
+**Cow (Clone on Write)**:
+
+```rust
+use std::borrow::Cow;
+
+fn process(input: &str) -> Cow<str> {
+    if input.contains("bad") {
+        // 需要修改，分配
+        Cow::Owned(input.replace("bad", "good"))
+    } else {
+        // 不需要修改，借用
+        Cow::Borrowed(input)
+    }
+}
+
+fn main() {
+    let text1 = "This is bad";
+    let text2 = "This is fine";
+
+    let result1 = process(text1);  // 分配
+    let result2 = process(text2);  // 不分配
+
+    println!("{} {}", result1, result2);
+}
+```
+### 3.3 Arena 分配
+
+**批量分配，批量释放**:
+
+```rust
+use typed_arena::Arena;
+
+struct Node<'a> {
+    value: i32,
+    next: Option<&'a Node<'a>>,
+}
+
+fn main() {
+    let arena = Arena::new();
+
+    // 在 arena 中分配，无需单独释放
+    let node1 = arena.alloc(Node {
+        value: 1,
+        next: None,
+    });
+
+    let node2 = arena.alloc(Node {
+        value: 2,
+        next: Some(node1),
+    });
+
+    println!("Node2: {}", node2.value);
+
+    // arena 析构时一次性释放所有节点
+}
+```
+---
+
+## 4. 编译时计算
+
+### 4.1 Const 泛型
+
+**编译时确定数组大小**:
+
+```rust
+// 泛型数组，零运行时开销
+fn sum<const N: usize>(arr: &[i32; N]) -> i32 {
+    arr.iter().sum()
+}
+
+fn main() {
+    let arr3 = [1, 2, 3];
+    let arr5 = [1, 2, 3, 4, 5];
+
+    println!("Sum3: {}", sum(&arr3));
+    println!("Sum5: {}", sum(&arr5));
+}
+```
+### 4.2 Const 函数
+
+**编译时求值**:
+
+```rust
+const fn factorial(n: u32) -> u32 {
+    match n {
+        0 | 1 => 1,
+        _ => n * factorial(n - 1),
+    }
+}
+
+// 编译时计算
+const FACT_5: u32 = factorial(5);
+
+fn main() {
+    println!("5! = {}", FACT_5);  // 120，编译时已知
+}
+```
+### 4.3 类型级计算
+
+**使用类型系统进行计算**:
+
+```rust
+use std::marker::PhantomData;
+
+struct Zero;
+struct Succ<N>(PhantomData<N>);
+
+type One = Succ<Zero>;
+type Two = Succ<One>;
+type Three = Succ<Two>;
+
+// 类型级加法
+trait Add<N> {
+    type Output;
+}
+
+impl<N> Add<Zero> for N {
+    type Output = N;
+}
+
+impl<N, M> Add<Succ<M>> for N
+where
+    N: Add<M>,
+    Succ<N::Output>: Sized,
+{
+    type Output = Succ<N::Output>;
+}
+
+fn main() {
+    // 类型系统证明 1 + 2 = 3
+    let _: <One as Add<Two>>::Output = Succ(PhantomData::<Two>);
+}
+```
+### 4.4 编译时字符串处理
+
+**const fn进阶**:
+
+```rust
+const fn parse_hex(s: &str) -> Option<u32> {
+    let bytes = s.as_bytes();
+    if bytes.len() == 0 {
+        return None;
+    }
+
+    let mut result = 0u32;
+    let mut i = 0;
+
+    while i < bytes.len() {
+        let digit = match bytes[i] {
+            b'0'..=b'9' => bytes[i] - b'0',
+            b'a'..=b'f' => bytes[i] - b'a' + 10,
+            b'A'..=b'F' => bytes[i] - b'A' + 10,
+            _ => return None,
+        };
+
+        result = result * 16 + digit as u32;
+        i += 1;
+    }
+
+    Some(result)
+}
+
+const HEX_VALUE: u32 = match parse_hex("FF") {
+    Some(v) => v,
+    None => 0,
+};
+
+fn main() {
+    println!("0xFF = {}", HEX_VALUE);  // 255，编译时已知
+}
+```
+### 4.5 Build-Time Code Generation
+
+**使用build.rs生成代码**:
+
+```rust
+// build.rs
+use std::env;
+use std::fs::File;
+use std::io::Write;
+use std::path::Path;
+
+fn main() {
+    let out_dir = env::var("OUT_DIR").unwrap();
+    let dest_path = Path::new(&out_dir).join("lookup_table.rs");
+    let mut f = File::create(&dest_path).unwrap();
+
+    // 生成查找表
+    writeln!(f, "const LOOKUP_TABLE: [u32; 256] = [").unwrap();
+    for i in 0..256 {
+        writeln!(f, "    {},", compute_expensive(i)).unwrap();
+    }
+    writeln!(f, "];").unwrap();
+}
+
+fn compute_expensive(x: u32) -> u32 {
+    // 昂贵的计算，在编译时执行
+    x * x + 2 * x + 1
+}
+```
+```rust
+// main.rs
+include!(concat!(env!("OUT_DIR"), "/lookup_table.rs"));
+
+fn fast_compute(x: u8) -> u32 {
+    LOOKUP_TABLE[x as usize]  // O(1)查找，无运行时计算
+}
+
+fn main() {
+    println!("Value: {}", fast_compute(10));
+}
+```
+---
+
+## 5. 缓存友好
+
+### 5.1 数据局部性
+
+**SoA vs AoS**:
+
+```rust
+// ❌ AoS (Array of Structs) - 缓存不友好
+struct PointAoS {
+    x: f32,
+    y: f32,
+    z: f32,
+}
+
+fn sum_x_aos(points: &[PointAoS]) -> f32 {
+    points.iter().map(|p| p.x).sum()
+}
+
+// ✅ SoA (Struct of Arrays) - 缓存友好
+struct PointsSoA {
+    x: Vec<f32>,
+    y: Vec<f32>,
+    z: Vec<f32>,
+}
+
+fn sum_x_soa(points: &PointsSoA) -> f32 {
+    points.x.iter().sum()
+}
+
+fn main() {
+    let aos: Vec<PointAoS> = vec![
+        PointAoS { x: 1.0, y: 2.0, z: 3.0 },
+        PointAoS { x: 4.0, y: 5.0, z: 6.0 },
+    ];
+
+    let soa = PointsSoA {
+        x: vec![1.0, 4.0],
+        y: vec![2.0, 5.0],
+        z: vec![3.0, 6.0],
+    };
+
+    println!("AoS sum: {}", sum_x_aos(&aos));
+    println!("SoA sum: {}", sum_x_soa(&soa));
+}
+```
+### 5.2 内存对齐
+
+**对齐到缓存行**:
+
+```rust
+use std::mem;
+
+#[repr(align(64))]  // 对齐到典型缓存行大小
+struct CacheLineAligned {
+    data: [u8; 64],
+}
+
+fn main() {
+    println!("Alignment: {}", mem::align_of::<CacheLineAligned>());
+}
+```
+### 5.3 预取
+
+**预取数据到缓存**:
+
+```rust
+use std::arch::x86_64::{_mm_prefetch, _MM_HINT_T0};
+
+fn process_with_prefetch(data: &[i32]) -> i64 {
+    let mut sum = 0i64;
+
+    for i in 0..data.len() {
+        // 预取下一个元素
+        if i + 1 < data.len() {
+            unsafe {
+                _mm_prefetch(
+                    &data[i + 1] as *const i32 as *const i8,
+                    _MM_HINT_T0,
+                );
+            }
+        }
+        sum += data[i] as i64;
+    }
+
+    sum
+}
+
+fn main() {
+    let data: Vec<i32> = (0..1000).collect();
+    let result = process_with_prefetch(&data);
+    println!("Sum: {}", result);
+}
+```
+### 5.4 向量化计算
+
+**SIMD优化**:
+
+```rust
+use std::arch::x86_64::*;
+
+// 标量版本
+fn add_scalar(a: &[f32], b: &[f32], result: &mut [f32]) {
+    for i in 0..a.len() {
+        result[i] = a[i] + b[i];
+    }
+}
+
+// SIMD版本（使用AVX）
+#[target_feature(enable = "avx")]
+unsafe fn add_simd(a: &[f32], b: &[f32], result: &mut [f32]) {
+    let chunks = a.len() / 8;
+
+    for i in 0..chunks {
+        let offset = i * 8;
+
+        // 加载8个浮点数
+        let va = _mm256_loadu_ps(a.as_ptr().add(offset));
+        let vb = _mm256_loadu_ps(b.as_ptr().add(offset));
+
+        // 向量加法
+        let vr = _mm256_add_ps(va, vb);
+
+        // 存储结果
+        _mm256_storeu_ps(result.as_mut_ptr().add(offset), vr);
+    }
+
+    // 处理剩余元素
+    for i in (chunks * 8)..a.len() {
+        result[i] = a[i] + b[i];
+    }
+}
+
+fn main() {
+    let a = vec![1.0f32; 1000];
+    let b = vec![2.0f32; 1000];
+    let mut result = vec![0.0f32; 1000];
+
+    unsafe {
+        add_simd(&a, &b, &mut result);
+    }
+}
+```
+### 5.5 数据结构的缓存优化
+
+**热/冷数据分离**:
+
+```rust
+// ❌ 混合存储（缓存不友好）
+struct EntityBad {
+    id: u32,
+    position: (f32, f32, f32),
+    velocity: (f32, f32, f32),
+    health: f32,
+    name: String,          // 不常访问
+    description: String,   // 不常访问
+}
+
+// ✅ 分离存储（缓存友好）
+struct EntityHot {
+    id: u32,
+    position: (f32, f32, f32),
+    velocity: (f32, f32, f32),
+    health: f32,
+    cold_index: usize,  // 指向冷数据
+}
+
+struct EntityCold {
+    name: String,
+    description: String,
+}
+
+struct EntitySystem {
+    hot: Vec<EntityHot>,
+    cold: Vec<EntityCold>,
+}
+
+impl EntitySystem {
+    fn update_positions(&mut self, dt: f32) {
+        // 只访问热数据，缓存友好
+        for entity in &mut self.hot {
+            entity.position.0 += entity.velocity.0 * dt;
+            entity.position.1 += entity.velocity.1 * dt;
+            entity.position.2 += entity.velocity.2 * dt;
+        }
+    }
+}
+```
+### 5.6 批处理优化
+
+**批量处理提升缓存命中**:
+
+```rust
+// ❌ 逐个处理
+fn process_individually(items: &[Item]) {
+    for item in items {
+        expensive_operation(item);
+    }
+}
+
+// ✅ 批量处理
+fn process_batched(items: &[Item]) {
+    const BATCH_SIZE: usize = 64;
+
+    for batch in items.chunks(BATCH_SIZE) {
+        // 预处理整个批次
+        let mut preprocessed = Vec::with_capacity(BATCH_SIZE);
+        for item in batch {
+            preprocessed.push(preprocess(item));
+        }
+
+        // 批量处理
+        for data in preprocessed {
+            cheap_operation(&data);
+        }
+    }
+}
+
+struct Item {
+    data: [u8; 16],
+}
+
+fn preprocess(item: &Item) -> [u8; 16] {
+    item.data
+}
+
+fn cheap_operation(_data: &[u8; 16]) {
+    // 快速操作
+}
+
+fn expensive_operation(_item: &Item) {
+    // 昂贵操作
+}
+```
+---
+
+## 6. 性能测量
+
+### 6.1 Criterion
+
+**基准测试**:
+
+```rust
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
+
+fn fibonacci(n: u64) -> u64 {
+    match n {
+        0 | 1 => n,
+        _ => fibonacci(n - 1) + fibonacci(n - 2),
+    }
+}
+
+fn criterion_benchmark(c: &mut Criterion) {
+    c.bench_function("fib 20", |b| b.iter(|| fibonacci(black_box(20))));
+}
+
+criterion_group!(benches, criterion_benchmark);
+criterion_main!(benches);
+```
+### 6.2 Profiling
+
+**使用 perf/flamegraph**:
+
+```bash
+# Linux perf
+cargo build --release
+perf record --call-graph dwarf ./target/release/myapp
+perf report
+
+# Flamegraph
+cargo flamegraph
+```
+### 6.3 优化策略
+
+**逐步优化**:
+
+1. **测量**: 先测量，找到瓶颈
+2. **优化**: 针对热点优化
+3. **验证**: 再次测量，确认效果
+
+```rust
+use std::time::Instant;
+
+fn benchmark<F: Fn()>(name: &str, f: F) {
+    let start = Instant::now();
+    f();
+    println!("{}: {:?}", name, start.elapsed());
+}
+
+fn main() {
+    benchmark("Version 1", || {
+        // 实现 1
+    });
+
+    benchmark("Version 2", || {
+        // 实现 2
+    });
+}
+```
+---
+
+## 7. 实战案例
+
+### 案例 1: 高性能集合
+
+```rust
+use std::collections::HashMap;
+
+// 预分配容量
+fn optimized_hashmap() -> HashMap<i32, String> {
+    let mut map = HashMap::with_capacity(1000);
+
+    for i in 0..1000 {
+        map.insert(i, format!("value{}", i));
+    }
+
+    map
+}
+
+// 使用 FxHash (更快的哈希)
+use rustc_hash::FxHashMap;
+
+fn fast_hashmap() -> FxHashMap<i32, String> {
+    let mut map = FxHashMap::default();
+
+    for i in 0..1000 {
+        map.insert(i, format!("value{}", i));
+    }
+
+    map
+}
+
+fn main() {
+    let _map1 = optimized_hashmap();
+    let _map2 = fast_hashmap();
+}
+```
+### 案例 2: 零拷贝解析
+
+```rust
+use std::str;
+
+// ❌ 分配新字符串
+fn parse_owned(data: &[u8]) -> Vec<String> {
+    str::from_utf8(data)
+        .unwrap()
+        .split(',')
+        .map(|s| s.to_string())
+        .collect()
+}
+
+// ✅ 零拷贝，返回切片
+fn parse_borrowed(data: &[u8]) -> Vec<&str> {
+    str::from_utf8(data)
+        .unwrap()
+        .split(',')
+        .collect()
+}
+
+fn main() {
+    let data = b"a,b,c,d,e";
+
+    let owned = parse_owned(data);
+    let borrowed = parse_borrowed(data);
+
+    println!("Owned: {:?}", owned);
+    println!("Borrowed: {:?}", borrowed);
+}
+```
+### 案例 3: SIMD 优化
+
+```rust
+use std::arch::x86_64::*;
+
+// 标量版本
+fn sum_scalar(data: &[f32]) -> f32 {
+    data.iter().sum()
+}
+
+// SIMD 版本
+unsafe fn sum_simd(data: &[f32]) -> f32 {
+    let mut sum = _mm_setzero_ps();
+    let chunks = data.chunks_exact(4);
+    let remainder = chunks.remainder();
+
+    for chunk in chunks {
+        let values = _mm_loadu_ps(chunk.as_ptr());
+        sum = _mm_add_ps(sum, values);
+    }
+
+    // 水平求和
+    let mut result = [0f32; 4];
+    _mm_storeu_ps(result.as_mut_ptr(), sum);
+    let total = result.iter().sum::<f32>();
+
+    // 加上余数
+    total + remainder.iter().sum::<f32>()
+}
+
+fn main() {
+    let data: Vec<f32> = (0..1000).map(|x| x as f32).collect();
+
+    let result1 = sum_scalar(&data);
+    let result2 = unsafe { sum_simd(&data) };
+
+    println!("Scalar: {}", result1);
+    println!("SIMD: {}", result2);
+}
+```
+### 案例 4: 自定义分配器
+
+**使用自定义分配器**:
+
+```rust
+use std::alloc::{GlobalAlloc, Layout, System};
+use std::ptr;
+
+struct CountingAllocator;
+
+static ALLOCATION_COUNT: std::sync::atomic::AtomicUsize = std::sync::atomic::AtomicUsize::new(0);
+
+unsafe impl GlobalAlloc for CountingAllocator {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        ALLOCATION_COUNT += 1;
+        System.alloc(layout)
+    }
+
+    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
+        System.dealloc(ptr, layout)
+    }
+}
+
+#[global_allocator]
+static GLOBAL: CountingAllocator = CountingAllocator;
+
+fn main() {
+    let data: Vec<i32> = vec![1, 2, 3, 4, 5];
+    println!("Allocated {} times", unsafe { ALLOCATION_COUNT });
+}
+```
+### 案例 5: 内存池优化
+
+**对象池模式**:
+
+```rust
+use std::sync::Mutex;
+
+struct ObjectPool<T> {
+    objects: Mutex<Vec<T>>,
+    factory: fn() -> T,
+}
+
+impl<T> ObjectPool<T> {
+    fn new(factory: fn() -> T, initial_size: usize) -> Self {
+        let objects = (0..initial_size).map(|_| factory()).collect();
+        ObjectPool {
+            objects: Mutex::new(objects),
+            factory,
+        }
+    }
+
+    fn acquire(&self) -> PooledObject<T> {
+        let obj = self.objects.lock().unwrap().pop()
+            .unwrap_or_else(|| (self.factory)());
+        PooledObject {
+            pool: self,
+            obj: Some(obj),
+        }
+    }
+
+    fn release(&self, obj: T) {
+        self.objects.lock().unwrap().push(obj);
+    }
+}
+
+struct PooledObject<'a, T> {
+    pool: &'a ObjectPool<T>,
+    obj: Option<T>,
+}
+
+impl<'a, T> Drop for PooledObject<'a, T> {
+    fn drop(&mut self) {
+        if let Some(obj) = self.obj.take() {
+            self.pool.release(obj);
+        }
+    }
+}
+
+impl<'a, T> std::ops::Deref for PooledObject<'a, T> {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        self.obj.as_ref().unwrap()
+    }
+}
+
+impl<'a, T> std::ops::DerefMut for PooledObject<'a, T> {
+    fn deref_mut(&mut self) -> &mut T {
+        self.obj.as_mut().unwrap()
+    }
+}
+
+// 使用示例
+fn main() {
+    let pool = ObjectPool::new(Vec::<i32>::new, 10);
+
+    {
+        let mut obj = pool.acquire();
+        obj.push(1);
+        obj.push(2);
+        // 自动归还到池中
+    }
+
+    let obj2 = pool.acquire();  // 重用之前的 Vec
+    println!("Len: {}", obj2.len());
+}
+```
+---
+
+## 8. 常见陷阱
+
+**陷阱 1: 过早优化**:
+
+```rust
+// ❌ 不必要的优化
+// fn complex_optimization() { ... }
+
+// ✅ 先写清晰代码，再优化瓶颈
+fn clear_code() {
+    // 清晰易懂的实现
+}
+```
+**陷阱 2: 不测量就优化**:
+
+```rust
+// ❌ 凭感觉优化
+// "这个应该更快"
+
+// ✅ 基于数据优化
+use criterion::{black_box, Criterion};
+
+fn benchmark(c: &mut Criterion) {
+    c.bench_function("version_a", |b| {
+        b.iter(|| black_box(version_a()))
+    });
+
+    c.bench_function("version_b", |b| {
+        b.iter(|| black_box(version_b()))
+    });
+}
+
+fn version_a() {}
+fn version_b() {}
+```
+**陷阱 3: 忽略编译器优化**:
+
+```rust
+// 编译器已经很智能
+// 不要过度手动优化
+
+// ✅ 信任编译器
+fn simple_sum(data: &[i32]) -> i32 {
+    data.iter().sum()  // 已经很快
+}
+```
+---
+
+## 9. 编译器优化深度
+
+### 9.1 LLVM优化流程
+
+**优化管道**:
+
+```rust
+// Rust 编译器的优化流程
+// 1. 前端（rustc）: 类型检查、借用检查、单态化
+// 2. 中端（LLVM）: IR优化、内联、循环优化
+// 3. 后端（LLVM）: 指令选择、寄存器分配、代码生成
+
+// 查看 LLVM IR
+// cargo rustc -- --emit=llvm-ir
+
+// 示例：循环向量化
+fn vectorized_sum(data: &[f32]) -> f32 {
+    data.iter().sum()  // LLVM自动向量化
+}
+
+// 对应的 LLVM IR 会使用 SIMD 指令：
+// %vec_sum = call <4 x float> @llvm.vector.reduce.add.v4f32
+```
+**优化级别**:
+
+```rust
+// Cargo.toml
+[profile.release]
+opt-level = 3           # 最大优化
+lto = "fat"             # 链接时优化
+codegen-units = 1       # 更好的优化（更慢的编译）
+panic = "abort"         # 减少二进制大小
+strip = true            # 移除调试符号
+
+[profile.release-with-debug]
+inherits = "release"
+debug = true            # 保留调试信息用于profiling
+```
+### 9.2 内联策略深度
+
+**内联决策因素**:
+
+```rust
+// ❌ 不会内联：函数太大
+#[inline]  // 编译器可能忽略
+fn large_function() {
+    // 100+ 行代码...
+}
+
+// ✅ 会内联：小函数
+#[inline]
+fn small_function(x: i32) -> i32 {
+    x * 2
+}
+
+// ✅ 强制内联
+#[inline(always)]
+fn critical_hot_path(x: i32) -> i32 {
+    x.wrapping_add(1)
+}
+
+// ✅ 禁止内联（用于基准测试）
+#[inline(never)]
+fn benchmark_target() {
+    // ...
+}
+```
+**跨crate内联**:
+
+```rust
+// lib.rs
+#[inline]  // ❌ 跨 crate 不内联（默认）
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+// 解决方案 1: 使用 LTO
+// Cargo.toml
+// lto = true
+
+// 解决方案 2: 泛型函数自动内联
+#[inline]
+pub fn add_generic<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
+    a + b  // 单态化后自动跨crate内联
+}
+```
+### 9.3 死代码消除（DCE）
+
+```rust
+fn example_dce() {
+    let x = 42;        // ✅ 使用了
+    let y = 100;       // ❌ 未使用，会被消除
+    let z = compute(); // ❌ 无副作用且未使用，会被消除
+
+    println!("{}", x);
+}
+
+fn compute() -> i32 {
+    1 + 1  // 纯函数，结果未使用时会被消除
+}
+
+// 防止DCE（用于基准测试）
+use std::hint::black_box;
+
+fn benchmark() {
+    let result = expensive_computation();
+    black_box(result);  // 告诉编译器不要优化掉
+}
+
+fn expensive_computation() -> i32 { 42 }
+```
+### 9.4 循环优化
+
+```rust
+// ✅ 循环展开
+fn unrolled_sum(data: &[i32; 8]) -> i32 {
+    // 编译器自动展开固定长度数组的循环
+    data.iter().sum()
+    // 展开为: data[0] + data[1] + ... + data[7]
+}
+
+// ✅ 循环向量化
+fn vectorized_multiply(a: &[f32], b: &[f32]) -> Vec<f32> {
+    a.iter()
+        .zip(b.iter())
+        .map(|(x, y)| x * y)  // LLVM自动使用SIMD
+        .collect()
+}
+
+// ✅ 循环不变代码外提（LICM）
+fn licm_example(data: &[i32], multiplier: i32) -> Vec<i32> {
+    data.iter()
+        .map(|&x| {
+            let factor = multiplier * 2;  // 会被提升到循环外
+            x * factor
+        })
+        .collect()
+}
+```
+### 9.5 常量折叠与常量传播
+
+```rust
+// ✅ 编译时计算
+const fn compute_at_compile_time() -> i32 {
+    let mut sum = 0;
+    let mut i = 0;
+    while i < 100 {
+        sum += i;
+        i += 1;
+    }
+    sum
+}
+
+const RESULT: i32 = compute_at_compile_time();  // 编译时计算
+
+fn runtime_example() {
+    // 常量传播
+    let x = 10;
+    let y = 20;
+    let z = x + y;  // 编译器直接替换为 30
+
+    // 条件分支优化
+    if z > 25 {
+        println!("Always executed");  // 其他分支会被消除
+    }
+}
+```
+---
+
+## 10. 高级优化实战案例集
+
+### 案例 6: 高性能JSON解析器
+
+```rust
+use serde::{Deserialize, Serialize};
+
+// ✅ 零拷贝反序列化
+#[derive(Deserialize)]
+struct Event<'a> {
+    #[serde(borrow)]
+    name: &'a str,     // 借用输入字符串，无拷贝
+
+    #[serde(borrow)]
+    data: &'a [u8],    // 借用输入字节，无拷贝
+
+    count: u32,        // 小数据直接拷贝
+}
+
+fn parse_events(json: &str) -> Result<Vec<Event>, serde_json::Error> {
+    serde_json::from_str(json)
+}
+
+// 性能对比
+fn benchmark_json_parsing() {
+    let json = r#"[
+        {"name": "click", "data": [1,2,3], "count": 42},
+        {"name": "view", "data": [4,5,6], "count": 100}
+    ]"#;
+
+    // 零拷贝解析：~2x 更快，~50% 更少内存
+    let events: Vec<Event> = serde_json::from_str(json).unwrap();
+
+    for event in events {
+        println!("{}: {}", event.name, event.count);
+    }
+}
+```
+### 案例 7: 高性能哈希表
+
+```rust
+use std::collections::HashMap;
+use std::hash::{BuildHasher, Hasher};
+
+// ✅ 自定义快速哈希（FxHash）
+struct FxHasher {
+    hash: usize,
+}
+
+impl Hasher for FxHasher {
+    fn finish(&self) -> u64 {
+        self.hash as u64
+    }
+
+    fn write(&mut self, bytes: &[u8]) {
+        for &byte in bytes {
+            self.hash = self.hash.rotate_left(5) ^ byte as usize;
+        }
+    }
+}
+
+// 使用场景：整数键的高性能哈希表
+fn fast_int_map() {
+    // 默认HashMap使用SipHash（安全但较慢）
+    let mut slow_map: HashMap<i32, String> = HashMap::new();
+
+    // 使用FxHash（快3-4倍，但非加密安全）
+    use rustc_hash::FxHashMap;
+    let mut fast_map: FxHashMap<i32, String> = FxHashMap::default();
+
+    for i in 0..10000 {
+        fast_map.insert(i, format!("value{}", i));
+    }
+}
+```
+### 案例 8: 批处理与流水线优化
+
+```rust
+// ✅ 批处理减少函数调用开销
+fn process_batch(items: &[Item]) {
+    const BATCH_SIZE: usize = 64;
+
+    for chunk in items.chunks(BATCH_SIZE) {
+        // 批处理 64 个元素，减少开销
+        process_chunk_optimized(chunk);
+    }
+}
+
+fn process_chunk_optimized(chunk: &[Item]) {
+    // 利用缓存局部性，SIMD等
+    for item in chunk {
+        // 处理逻辑
+    }
+}
+
+// ✅ 流水线：重叠计算与IO
+use std::sync::mpsc;
+use std::thread;
+
+fn pipeline_processing(input: Vec<Data>) {
+    let (tx1, rx1) = mpsc::channel();
+    let (tx2, rx2) = mpsc::channel();
+
+    // 阶段1：IO加载
+    thread::spawn(move || {
+        for data in input {
+            let loaded = load_data(data);
+            tx1.send(loaded).unwrap();
+        }
+    });
+
+    // 阶段2：计算处理（与IO重叠）
+    thread::spawn(move || {
+        for loaded in rx1 {
+            let processed = compute(loaded);
+            tx2.send(processed).unwrap();
+        }
+    });
+
+    // 阶段3：结果输出
+    for result in rx2 {
+        output_result(result);
+    }
+}
+
+struct Data;
+struct LoadedData;
+struct ProcessedData;
+fn load_data(_: Data) -> LoadedData { LoadedData }
+fn compute(_: LoadedData) -> ProcessedData { ProcessedData }
+fn output_result(_: ProcessedData) {}
+```
+### 案例 9: 分层缓存策略
+
+```rust
+struct TieredCache<K, V> {
+    l1: Vec<Option<(K, V)>>,     // 小而快的直接映射缓存
+    l2: HashMap<K, V>,           // 大而全的哈希表
+    l1_size: usize,
+}
+
+impl<K: Clone + Eq + std::hash::Hash, V: Clone> TieredCache<K, V> {
+    fn new(l1_size: usize) -> Self {
+        Self {
+            l1: vec![None; l1_size],
+            l2: HashMap::new(),
+            l1_size,
+        }
+    }
+
+    fn get(&self, key: &K) -> Option<&V> {
+        // L1快速查找（~2ns）
+        let hash = self.hash(key);
+        let index = hash % self.l1_size;
+
+        if let Some((k, v)) = &self.l1[index] {
+            if k == key {
+                return Some(v);  // L1命中
+            }
+        }
+
+        // L2查找（~20ns）
+        self.l2.get(key)
+    }
+
+    fn insert(&mut self, key: K, value: V) {
+        // 同时插入L1和L2
+        let hash = self.hash(&key);
+        let index = hash % self.l1_size;
+        self.l1[index] = Some((key.clone(), value.clone()));
+        self.l2.insert(key, value);
+    }
+
+    fn hash(&self, key: &K) -> usize {
+        use std::collections::hash_map::DefaultHasher;
+        use std::hash::{Hash, Hasher};
+        let mut hasher = DefaultHasher::new();
+        key.hash(&mut hasher);
+        hasher.finish() as usize
+    }
+}
+```
+### 案例 10: 预计算与查表法
+
+```rust
+// ✅ 预计算三角函数表
+struct SinTable {
+    values: Vec<f32>,
+    precision: usize,
+}
+
+impl SinTable {
+    fn new(precision: usize) -> Self {
+        let values: Vec<f32> = (0..precision)
+            .map(|i| {
+                let angle = (i as f32 / precision as f32) * 2.0 * std::f32::consts::PI;
+                angle.sin()
+            })
+            .collect();
+
+        Self { values, precision }
+    }
+
+    // 查表：~10x 比 sin() 快
+    fn sin_fast(&self, angle: f32) -> f32 {
+        let normalized = angle / (2.0 * std::f32::consts::PI);
+        let index = ((normalized * self.precision as f32) as usize) % self.precision;
+        self.values[index]
+    }
+}
+
+// 使用场景：游戏引擎、实时渲染
+fn render_loop() {
+    let sin_table = SinTable::new(1024);  // 预计算
+
+    for frame in 0..10000 {
+        let angle = frame as f32 * 0.01;
+        let y = sin_table.sin_fast(angle);  // 快速查表
+        // render(y);
+    }
+}
+```
+---
+
+## 11. 跨版本兼容性说明
+
+| 特性                 | Rust 1.82 | Rust 1.90 | Rust 1.92.0                 | 说明 |
+| :--- | :--- | :--- | :--- | :--- || 基础泛型优化         | 稳定      | 稳定      | 单态化、内联                |
+| Const泛型            | 稳定      | 稳定      | 编译时数组大小              |
+| Const fn 扩展        | 部分稳定  | 更稳定    | 更多标准库函数支持          |
+| `#[inline]` 属性     | 稳定      | 稳定      | 内联控制                    |
+| LTO (Link Time Opt)  | 稳定      | 稳定      | 链接时优化                  |
+| PGO (Profile-Guided) | 稳定      | 稳定      | 性能分析引导优化            |
+| `repr(C)` 布局       | 稳定      | 稳定      | C兼容布局                   |
+| `repr(transparent)`  | 稳定      | 稳定      | 透明包装                    |
+| SIMD (portable_simd) | 不稳定    | 不稳定    | 需要 nightly + feature flag |
+
+**Rust 1.92.0 改进**:
+
+- 更激进的内联优化
+- 改进的LLVM后端（更好的代码生成）
+- 更快的编译时计算
+- 增强的死代码消除
+
+**迁移建议**:
+
+- 对于生产代码，优先使用稳定特性
+- SIMD可使用 `std::arch`（稳定）或 `portable_simd`（实验）
+- 使用 `cargo +nightly rustc -- -Zprint-type-sizes` 分析布局
+
+---
+
+## 12. 总结
+
+**优化清单**:
+
+| 技术         | 何时使用     | 收益   |
+| :--- | :--- | :--- || **静态分发** | 性能关键路径 | 高     |
+| **内联**     | 小函数       | 中     |
+| **布局优化** | 大量小对象   | 中     |
+| **避免分配** | 热路径       | 高     |
+| **SoA**      | 大量数据处理 | 高     |
+| **SIMD**     | 数值计算     | 非常高 |
+
+**核心原则**:
+
+1. ✅ 先测量，再优化
+2. ✅ 优化热点，不是全部
+3. ✅ 保持代码清晰
+4. ✅ 信任编译器
+5. ✅ 零成本抽象
+
+---
+
+## 13. 参考资源
+
+**工具**:
+
+- [Criterion](https://github.com/bheisler/criterion.rs)
+- [Flamegraph](https://github.com/flamegraph-rs/flamegraph)
+- [perf](https://perf.wiki.kernel.org/)
+
+**相关文档**:
+
+- [2.3 泛型编程指南](../tier_02_guides/03_generics_programming_guide.md)
+- [3.3 分派机制参考](03_dispatch_mechanisms_reference.md)
+- [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
+
+---
+
+**最后更新**: 2025-12-11
+**适用版本**: Rust 1.92.0+
+**文档类型**: Tier 3 - 参考层
+
+---
+
+**🎉 完成性能优化参考学习！** 🦀
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

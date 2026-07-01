@@ -88,7 +88,6 @@ Day 4: Android 与高级主题 (4 小时)
 ├── Async Rust
 └── 宏与测试
 ```
-
 ---
 
 ## 二、章节映射表
@@ -161,7 +160,6 @@ Comprehensive Rust 与本知识体系的互补关系:
   ├── 第 3 周: Comprehensive Rust Day 4 + 本体系 L3 文件
   └── 第 4 周: 本体系 L4-L7 选择性深入
 ```
-
 > **映射洞察**: Comprehensive Rust 是**「宽而浅」**的入门路径，本知识体系是**「窄而深」**的概念网络。两者结合可实现「先建立全局地图，再深入每个 territory」的学习效果。
 
 ---

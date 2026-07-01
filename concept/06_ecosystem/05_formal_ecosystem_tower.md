@@ -93,10 +93,8 @@ graph BT
     L2 -.->|上下文不丢失| L3
     L0 -.->|内存安全基线| L4
 ```
-
 > **认知功能**: 此图是 Rust 生态的**形式化成熟度分层塔**。读者可按项目可靠性需求「对号入座」——需要基本内存安全（Memory Safety）选 L0（ rustc 自动保证），需要类型契约验证选 L1（Serde/SQLx），需要架构组合正确性选 L2（Tokio/Tower），需要可观测性选 L3（Tracing），需要功能正确性证明选 L4（Kani/Verus）。关键认知：形式化不是「全有或全无」的二元选择，而是**可逐层递增的投资**——从 L0 到 L4，每上一层都增加验证深度和开发成本，读者应根据项目安全关键性选择适当的层级组合。 [来源: 💡 原创分析]
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
-
 > **认知路径**: 此分层塔自下而上展示 Rust 生态的**形式化深度递进**。L0 是所有 Rust 代码的基线（编译器自动证明），L1-L3 是工业级成熟层（生态竞争焦点），L4 是前沿扩展层（2026 年工业突破中）。箭头的虚实区分：**实线**表示功能依赖（上层依赖下层），**虚线**表示形式化保证的传递（下层的证明结论被上层继承）。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
 ---
@@ -210,7 +208,6 @@ quadrantChart
     "Firecracker": [0.5, 0.6]
     "Wasmtime": [0.6, 0.55]
 ```
-
 > **认知功能**: quadrantChart 将 ASCII 矩阵升级为**交互式认知地图**。象限 1（右上）是"黄金区域"——Axum、SQLx、Tower 兼具高可组合性和可观的形式化深度。象限 4（右下）是"安全关键专用区"——Kani/Verus 可验证性极高但与其他生态组件的组合性有限（需注解/规格适配）。象限 2（左上）是"基础设施区"——Serde/Tracing 组合性极高但形式化验证价值较低（纯 safe Rust 已足够安全）。 [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 
 **2026 年的黄金组合**（可组合 × 可观测 × 形式化潜力）：
@@ -303,7 +300,6 @@ jobs:
           name: kani-reports
           path: target/kani/
 ```
-
 **Kani CI 最佳实践**：
 
 | 策略 | 配置 | 说明 |
@@ -391,7 +387,6 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 - [L7: Formal Methods](../07_future/02_formal_methods.md) —— Kani/Verus/Creusot 的工业化路径
 
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
-
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 ---
 
@@ -410,7 +405,6 @@ fn main() {
     println!("{:?}", data);
 }
 ```
-
 ---
 
 ## 权威来源索引
@@ -451,7 +445,6 @@ fn sqrt_fixed(x: i32) -> Result<i32, String> {
     }
 }
 ```
-
 > **修正**: 形式化验证工具（Prusti、Creusot、Kani）将程序正确性证明引入编译流程。Prusti 使用 Viper 验证基础设施，要求开发者标注前置条件（`requires`）、后置条件（`ensures`）和循环不变量。若调用者违反前置条件，编译失败。这与传统单元测试不同——形式化验证覆盖**所有**输入，不是抽样检查。Rust 的类型系统已捕获大量错误（空指针、数据竞争），形式化工具进一步验证功能正确性（排序结果有序、除法不溢出等）。[来源: [Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html)]
 
 ### 10.2 边界测试：Kani 的循环展开限制（编译错误）
@@ -473,7 +466,6 @@ fn main() {
     // assert!(sum(100) == 4950);
 }
 ```
-
 > **修正**: Kani（基于 CBMC）是 Rust 的模型检查器，通过符号执行验证所有执行路径。但模型检查器受限于**状态空间爆炸**——无界循环、无界递归、大数组导致验证不可行。Kani 使用循环展开（loop unwinding）处理循环，需要显式标注展开界限（`#[kani::unwind(10)]`）。这与 Prusti 的归纳验证不同——Kani 更适合验证小状态空间的安全属性（无溢出、无 panic），Prusti 更适合验证带循环不变量的功能正确性。两者互补，覆盖不同验证需求。[来源: [Kani Documentation](https://model-checking.github.io/kani/)]
 
 ### 10.3 边界测试：形式化工具链的生态系统碎片化（编译错误）
@@ -489,7 +481,6 @@ fn verified_function(x: i32) -> i32 {
     x * 2
 }
 ```
-
 > **修正**: Rust 的形式化验证生态（Kani、Prusti、Creusot、Miri）各自独立发展，工具链之间**不兼容**：1) Kani 使用 `#[kani::proof]`，Prusti 使用 `#[prusti::requires]`，不能同时使用；2) 各工具对 `unsafe` 代码的支持程度不同；3) 标准库的验证规格不完整（Prusti 需要为 `std` 函数写契约）。形式化生态的碎片化是 Rust 向安全关键领域扩展的障碍：企业需要选择单一工具，或维护多套注解。标准化努力：Rust 验证工具联盟（Rust Verification Tools）推动共享中间表示（MIR 级别的规格），但进展缓慢。这与 Java 的 JML（统一规格语言，但工具支持有限）或 C 的 ACSL（类似 JML）不同——Rust 的形式化生态更年轻，尚未形成统一标准。[来源: [Rust Verification Tools](https://alastairreid.github.io/rust-verification-tools/)] · [来源: [Kani Documentation](https://model-checking.github.io/kani/)]
 
 ### 10.4 边界测试：依赖树中的形式化安全与 unsafe 代码传播（编译错误）
@@ -507,7 +498,6 @@ fn main() {
     // 仅验证顶层 crate 不足够
 }
 ```
-
 > **修正**: 形式化验证的**组合性**是开放问题：若 crate A 经过验证（如 Prusti 证明无 panic、无溢出），crate B 使用 unsafe 调用 A 的函数，验证保证可能被破坏。Rust 的模块系统不自动传播验证结果——每个 crate 的验证是独立的。安全关键项目需要：1) 审计所有依赖（`cargo vet`）；2) 限制 unsafe 使用（`cargo geiger`）；3) 为关键依赖建立形式化规格（昂贵但必要）。这与数学中的"已证定理可组合"不同——软件的形式化验证受限于规格的不完整性和实现细节。RustBelt 项目试图为 Rust 的核心类型系统建立可组合的形式化基础，但覆盖整个生态仍是长期目标。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [cargo-vet Documentation](https://mozilla.github.io/cargo-vet/)]
 
 ### 10.3 边界测试：形式化工具链的 nightly 依赖与稳定化鸿沟（编译错误）
@@ -528,7 +518,6 @@ fn main() {
     println!("{}", increment(5));
 }
 ```
-
 > **修正**: Rust 形式化工具（Prusti、Kani、Creusot）大多依赖 **nightly 编译器**：1) `proc_macro_hygiene`（宏卫生扩展）；2) `rustc_private`（访问编译器内部 API）；3) 自定义 MIR  pass。这导致：1) 生产代码不能使用形式化工具（需 nightly）；2) nightly 版本漂移（工具可能滞后于最新 nightly）；3) CI 复杂（需固定 nightly 版本）。Ferrocene 项目致力于提供**经过认证的稳定 Rust 工具链**，包含形式化验证支持。替代方案：1) `contracts` crate（轻量级运行时契约检查，stable）；2) `assertion-rs`（运行时断言库）；3) 外部验证（F*、Coq 提取后独立验证）。这与 Java 的 JML（标准注释，但工具支持分散）或 .NET 的 Code Contracts（已停止维护）类似——Rust 的形式化生态仍在成熟中，nightly 依赖是主要采纳障碍。[来源: [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html)] · [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)]
 > **过渡**: Formal Ecosystem Tower（Rust 生态形式化分层塔） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Formal Ecosystem Tower（Rust 生态形式化分层塔） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

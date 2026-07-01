@@ -1,27 +1,16 @@
 # 补偿链模式形式化定义 {#补偿链模式形式化定义}
 
 > **概念族**: 软件设计 / 工作流模式 / 补偿 / Saga
-
 > **内容分级**: [归档级]
-
 > **分级**: [B]
-
 > **Bloom 层级**: L4-L6 (分析/评价/创造)
-
 > **模式类型**: 分布式长事务
-
 > **创建日期**: 2026-06-29
-
 > **版本**: v1.0
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
-
 > **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/02_workflow/` 迁回，正在按 [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)、[Tokio Tutorial](https://tokio.rs/tokio/tutorial)、[Rust Reference](https://doc.rust-lang.org/reference/) 等权威来源升级。
-
 > **权威来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ---
@@ -83,7 +72,6 @@
 ```text
 C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 ```
-
 其中：
 
 - `aᵢ`：第 `i` 步正向操作。
@@ -98,7 +86,6 @@ C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 ```text
 ∀ i, state(cᵢ(aᵢ(s))) ≈ state(s)
 ```
-
 ### Axiom CC2: 补偿幂等性 {#axiom-cc2-补偿幂等性}
 
 > **来源**: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)
@@ -108,7 +95,6 @@ C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 ```text
 ∀ c ∈ C. exec(c, s) = s' → exec(c, s') = s'
 ```
-
 ### Theorem CC1: 最终一致性 {#theorem-cc1-最终一致性}
 
 > **来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
@@ -131,7 +117,6 @@ C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 ```text
 ∀ C. |C| = n < ∞ → 补偿过程在至多 n 步后结束
 ```
-
 **证明概要**：已完成正向操作的集合 `completed` 长度不超过 `n`；每执行一次补偿减少一个元素，故有限步后结束。
 
 ---
@@ -260,7 +245,6 @@ fn main() {
     assert!(result.is_err());
 }
 ```
-
 > **来源**: [Tokio Tutorial](https://tokio.rs/tokio/tutorial)
 
 **实现要点**：
@@ -286,7 +270,6 @@ async fn compensate_inventory(item_id: u64) {
         .await;
 }
 ```
-
 若网络超导致补偿被执行两次，库存会多增一次。
 
 **修复**：使用幂等键或状态检查。
@@ -299,7 +282,6 @@ async fn compensate_inventory(item_id: u64, idempotency_key: &str) {
     // 执行补偿并记录 idempotency_key
 }
 ```
-
 ### 反例 2：补偿顺序错误 {#反例-2补偿顺序错误}
 
 ```rust,ignore
@@ -308,7 +290,6 @@ for step in completed {
     step.compensate().await?;
 }
 ```
-
 若正向步骤为"扣库存 → 扣款"，正向顺序补偿会先退款再释放库存，中间状态可能出现"钱已退但库存仍被占用"。
 
 **修复**：必须按正向顺序的逆序执行补偿。
@@ -318,7 +299,6 @@ for &idx in self.completed.iter().rev() {
     self.steps[idx].compensate().await?;
 }
 ```
-
 ### 边界：补偿失败 {#边界补偿失败}
 
 补偿操作本身也可能失败（网络中断、下游服务不可用）。此时：
@@ -351,14 +331,12 @@ for &idx in self.completed.iter().rev() {
 > - [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > - [Rust Standard Library](https://doc.rust-lang.org/std/)
 > - [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-
 > **P1 权威来源（Rust 社区与工程实践）**:
 >
 > - [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
 > - [Tokio Tutorial](https://tokio.rs/tokio/tutorial)
 > - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
-
 > **P2 权威来源（学术与行业经典）**:
 >
 > - [Wikipedia - Saga Pattern](https://en.wikipedia.org/wiki/Saga_Pattern)

@@ -34,10 +34,10 @@ docs/
 │
 ├── tier_01_foundations/                       # 📖 基础层
 ├── tier_02_guides/                            # 📖 实践指南（原 guides/）
-│   ├── 01_算法快速入门.md
-│   ├── 02_数据结构实践.md
-│   ├── 03_算法复杂度分析.md
-│   ├── 04_性能优化实践.md
+│   ├── 01_algorithms_quick_start.md
+│   ├── 02_data_structures_practice.md
+│   ├── 03_algorithm_complexity_analysis.md
+│   ├── 04_performance_optimization_practice.md
 │   └── 05_并行与异步算法.md
 ├── tier_03_references/                        # 📚 技术参考（原 references/）
 ├── tier_04_advanced/                          # 🔬 高级专题（原 theory/ + advanced/）
@@ -49,7 +49,6 @@ docs/
     ├── LEETCODE_INTEGRATION_SUMMARY_2025_11_01.md
     └── PROGRESS_UPDATE_2025_11_01.md
 ```
-
 ---
 
 ## 📖 按类别浏览
@@ -60,11 +59,11 @@ docs/
 
 | 文档  | 主要内容 | 适合人群 |
 | :--- | :--- | :--- |
-| [03_算法复杂度分析](tier_02_guides/03_算法复杂度分析.md)         | 时间/空间复杂度、Big-O、主定理、摊还分析 | 初学者、面试准备 |
-| [02_数据结构实践](tier_02_guides/02_数据结构实践.md)             | 线性表、树、图、高级数据结构             | 所有开发者       |
+| [03_算法复杂度分析](tier_02_guides/03_algorithm_complexity_analysis.md)         | 时间/空间复杂度、Big-O、主定理、摊还分析 | 初学者、面试准备 |
+| [02_数据结构实践](tier_02_guides/02_data_structures_practice.md)             | 线性表、树、图、高级数据结构             | 所有开发者       |
 | [05_并行与异步算法](tier_02_guides/05_并行与异步算法.md)         | 异步算法设计、Tokio、Futures             | 异步编程学习者   |
-| [04_性能优化实践](tier_02_guides/04_性能优化实践.md)             | 编译期优化、运行时优化、SIMD             | 性能优化工程师   |
-| [04_算法性能参考](tier_03_references/04_算法性能参考.md)         | Criterion、性能测试、对比分析            | 性能调优人员     |
+| [04_性能优化实践](tier_02_guides/04_performance_optimization_practice.md)             | 编译期优化、运行时优化、SIMD             | 性能优化工程师   |
+| [04_算法性能参考](tier_03_references/04_algorithm_performance_reference.md)         | Criterion、性能测试、对比分析            | 性能调优人员     |
 
 **学习路径**: 03_算法复杂度分析 → 02_数据结构实践 → 05_并行与异步算法 → 04_性能优化实践
 
@@ -74,11 +73,11 @@ docs/
 
 | 文档  | 主要内容 | 难度   |
 | :--- | :--- | :--- |
-| [01_形式化算法理论](tier_04_advanced/01_形式化算法理论.md)           | 算法分类、形式化定义、计算模型 | ⭐⭐⭐ |
-| [02_并发算法模式](tier_04_advanced/02_并发算法模式.md)               | Actor、Reactor、CSP          | ⭐⭐⭐ |
-| [03_分布式算法](tier_04_advanced/03_分布式算法.md)                  | 分布式系统算法               | ⭐⭐⭐ |
-| [04_算法工程实践](tier_04_advanced/04_算法工程实践.md)              | 工程应用最佳实践             | ⭐⭐⭐ |
-| [05_前沿算法技术](tier_04_advanced/05_前沿算法技术.md)              | 机器学习与前沿研究           | ⭐⭐⭐ |
+| [01_形式化算法理论](tier_04_advanced/01_formal_algorithm_theory.md)           | 算法分类、形式化定义、计算模型 | ⭐⭐⭐ |
+| [02_并发算法模式](tier_04_advanced/02_concurrent_algorithm_patterns.md)               | Actor、Reactor、CSP          | ⭐⭐⭐ |
+| [03_分布式算法](tier_04_advanced/03_distributed_algorithms.md)                  | 分布式系统算法               | ⭐⭐⭐ |
+| [04_算法工程实践](tier_04_advanced/04_algorithm_engineering_practice.md)              | 工程应用最佳实践             | ⭐⭐⭐ |
+| [05_前沿算法技术](tier_04_advanced/05_cutting_edge_algorithms.md)              | 机器学习与前沿研究           | ⭐⭐⭐ |
 
 **学习路径**: 01_形式化算法理论 → 02_并发算法模式 → 03_分布式算法
 
@@ -97,16 +96,16 @@ docs/
 
 | 文档  | 版本 | 主要内容 |
 | :--- | :--- | :--- |
-| [03_Rust190特性参考](tier_03_references/03_Rust190特性参考.md) | 1.90 | 特性应用     |
+| [03_Rust190特性参考](tier_03_references/03_rust_190_features_reference.md) | 1.90 | 特性应用     |
 | [RUST_192_ALGORITHMS_IMPROVEMENTS](RUST_192_ALGORITHMS_IMPROVEMENTS.md) | 1.93 | 算法特性 ⭐  |
 
 ### 5. 参考资料 (tier_03_references/)
 
 | 文档  | 用途  | 适合场景  |
 | :--- | :--- | :--- |
-| [01_算法分类参考](tier_03_references/01_算法分类参考.md)       | 算法索引      | 快速查找算法 |
-| [02_数据结构参考](tier_03_references/02_数据结构参考.md)        | 数据结构 API  | 技术参考     |
-| [04_算法性能参考](tier_03_references/04_算法性能参考.md)       | 性能基准      | 性能调优     |
+| [01_算法分类参考](tier_03_references/01_algorithm_categories_reference.md)       | 算法索引      | 快速查找算法 |
+| [02_数据结构参考](tier_03_references/02_data_structures_reference.md)        | 数据结构 API  | 技术参考     |
+| [04_算法性能参考](tier_03_references/04_algorithm_performance_reference.md)       | 性能基准      | 性能调优     |
 
 ---
 
@@ -118,9 +117,9 @@ docs/
 
 ```text
 Week 1: 基础知识
-  Day 1-2: tier_02_guides/01_算法快速入门.md
-  Day 3-4: tier_02_guides/03_算法复杂度分析.md
-  Day 5-7: tier_02_guides/02_数据结构实践.md + 实践
+  Day 1-2: tier_02_guides/01_algorithms_quick_start.md
+  Day 3-4: tier_02_guides/03_algorithm_complexity_analysis.md
+  Day 5-7: tier_02_guides/02_data_structures_practice.md + 实践
 
 Week 2: 算法实现
   Day 1-3: 查看 src/ 中的排序、搜索实现
@@ -131,7 +130,6 @@ Week 3: 综合练习
   Day 1-5: 完成 examples/ 中的示例
   Day 6-7: 做 LeetCode/竞赛题目
 ```
-
 ### 路径 2: 中级开发者 (3-4 周)
 
 **目标**: 掌握异步编程和性能优化
@@ -139,88 +137,85 @@ Week 3: 综合练习
 ```text
 Week 1: 异步基础
   tier_02_guides/05_并行与异步算法.md
-  tier_04_advanced/02_并发算法模式.md
+  tier_04_advanced/02_concurrent_algorithm_patterns.md
   examples/async_*.rs
 
 Week 2: 异步进阶
   ../../c09_design_pattern/docs/ACTOR_REACTOR_PATTERNS.md
   ../../c09_design_pattern/docs/ASYNC_RECURSION_ANALYSIS.md
-  tier_04_advanced/02_并发算法模式.md
+  tier_04_advanced/02_concurrent_algorithm_patterns.md
 
 Week 3: 性能优化
-  tier_02_guides/04_性能优化实践.md
-  tier_03_references/04_算法性能参考.md
-  tier_04_advanced/04_算法工程实践.md
+  tier_02_guides/04_performance_optimization_practice.md
+  tier_03_references/04_algorithm_performance_reference.md
+  tier_04_advanced/04_algorithm_engineering_practice.md
 
 Week 4: 实战项目
   实现一个高性能算法库
   进行性能测试和优化
 ```
-
 ### 路径 3: 高级研究者 (持续学习)
 
 **目标**: 精通算法理论和形式化方法
 
 ```text
 阶段 1: 理论基础 (2-3 周)
-  tier_04_advanced/01_形式化算法理论.md
+  tier_04_advanced/01_formal_algorithm_theory.md
 
 阶段 2: 异步理论 (2-3 周)
-  tier_04_advanced/02_并发算法模式.md
+  tier_04_advanced/02_concurrent_algorithm_patterns.md
   ../../c09_design_pattern/docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md
   ../../c09_design_pattern/docs/ASYNC_RECURSION_ANALYSIS.md
 
 阶段 3: 高级专题 (4-6 周)
-  tier_04_advanced/01_形式化算法理论.md (形式化验证)
-  tier_04_advanced/03_分布式算法.md
-  tier_04_advanced/02_并发算法模式.md (执行模型)
+  tier_04_advanced/01_formal_algorithm_theory.md (形式化验证)
+  tier_04_advanced/03_distributed_algorithms.md
+  tier_04_advanced/02_concurrent_algorithm_patterns.md (执行模型)
 
 阶段 4: 研究与创新
   阅读相关论文
   实现新算法
   发表研究成果
 ```
-
 ### 路径 4: 工程师 (按需学习)
 
 **目标**: 解决实际工程问题
 
 ```text
 按需查阅:
-  tier_03_references/01_算法分类参考.md
-  tier_02_guides/04_性能优化实践.md
-  tier_03_references/04_算法性能参考.md
-  tier_04_advanced/04_算法工程实践.md
+  tier_03_references/01_algorithm_categories_reference.md
+  tier_02_guides/04_performance_optimization_practice.md
+  tier_03_references/04_algorithm_performance_reference.md
+  tier_04_advanced/04_algorithm_engineering_practice.md
 
 系统学习（可选）:
   按兴趣选择 tier_04_advanced/ 中的专题
   按需学习 Rust 特性
 ```
-
 ---
 
 ## 🔍 快速查找
 
 ### 按主题查找
 
-- **排序算法** → tier_02_guides/02_数据结构实践.md, src/sorting/
-- **搜索算法** → tier_03_references/01_算法分类参考.md, src/searching/
-- **图算法** → tier_02_guides/02_数据结构实践.md, src/graph/
-- **动态规划** → tier_04_advanced/04_算法工程实践.md, src/dynamic_programming/
-- **字符串算法** → tier_02_guides/02_数据结构实践.md, src/string_algorithms/
-- **异步编程** → tier_02_guides/05_并行与异步算法.md, tier_04_advanced/02_并发算法模式.md
-- **性能优化** → tier_02_guides/04_性能优化实践.md, tier_04_advanced/04_算法工程实践.md
-- **形式化** → tier_04_advanced/01_形式化算法理论.md
+- **排序算法** → tier_02_guides/02_data_structures_practice.md, src/sorting/
+- **搜索算法** → tier_03_references/01_algorithm_categories_reference.md, src/searching/
+- **图算法** → tier_02_guides/02_data_structures_practice.md, src/graph/
+- **动态规划** → tier_04_advanced/04_algorithm_engineering_practice.md, src/dynamic_programming/
+- **字符串算法** → tier_02_guides/02_data_structures_practice.md, src/string_algorithms/
+- **异步编程** → tier_02_guides/05_并行与异步算法.md, tier_04_advanced/02_concurrent_algorithm_patterns.md
+- **性能优化** → tier_02_guides/04_performance_optimization_practice.md, tier_04_advanced/04_algorithm_engineering_practice.md
+- **形式化** → tier_04_advanced/01_formal_algorithm_theory.md
 
 ### 按难度查找
 
-- **⭐ 初级**: tier_02_guides/, tier_02_guides/01_算法快速入门.md
+- **⭐ 初级**: tier_02_guides/, tier_02_guides/01_algorithms_quick_start.md
 - **⭐⭐ 中级**: tier_02_guides/05_并行与异步算法.md, tier_04_advanced/
 - **⭐⭐⭐ 高级**: tier_04_advanced/
 
 ### 按 Rust 版本查找
 
-- **Rust 1.90**: tier_03_references/03_Rust190特性参考.md
+- **Rust 1.90**: tier_03_references/03_rust_190_features_reference.md
 - **Rust 1.93.1**: RUST_192_ALGORITHMS_IMPROVEMENTS.md
 
 ---
@@ -265,7 +260,6 @@ Week 4: 实战项目
 
 ## 内容...
 ```
-
 ### 难度标识
 
 - ⭐ - 初级（适合初学者）

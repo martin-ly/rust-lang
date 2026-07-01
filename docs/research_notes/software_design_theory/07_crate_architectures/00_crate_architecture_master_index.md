@@ -1,3 +1,6 @@
+> **Canonical 说明**: 本目录为 `docs/research_notes/software_design_theory/07_crate_architectures/` 下的 crate 架构分析索引。若只需要使用指南与生态定位，请优先参考 `concept/06_ecosystem/`、`knowledge/06_ecosystem/` 与 `content/ecosystem/` 中的对应深度文。本目录保留架构级深度内容，并与权威来源通过 canonical 标注形成互补。
+>
+> 已重定向至权威深度文的 crate：Tokio、Axum、SQLx（含进阶）。
 > **⚠️ 历史文档提示**：
 >
 > 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
@@ -83,16 +86,16 @@
 | 03 | **Diesel** | ORM/查询 | Typestate SQL 构建器 | 连贯接口类型链、FromRow 推导 | ✅ 编译期 SQL 验证 | [03_diesel_architecture.md](03_diesel_architecture.md) |
 | 04 | **Clap** | CLI 解析 | Derive macro + Builder 双 API | FromStr、ValueEnum、 exhaustive match | ✅ 无运行时反射 | [04_clap_architecture.md](04_clap_architecture.md) |
 | 05 | **Bevy** | 游戏引擎 | ECS (Entity-Component-System) | HRTB 安全借用、Archetype 存储 | ✅ 连续内存布局 | [05_bevy_architecture.md](05_bevy_architecture.md) |
-| 06 | **Tokio** | 异步运行时 | Runtime = Scheduler + IO Driver + Timer | Future + Pin、Send/Sync 跨 await 传播 | ✅ 工作窃取无锁队列 | [06_tokio_architecture.md](06_tokio_architecture.md) |
-| 07 | **Axum** | Web 框架 | Router → Handler → Tower Service | FromRequest、State 注入、matchit 路由 | ✅ 编译期路由匹配 | [07_axum_architecture.md](07_axum_architecture.md) |
+| 06 | **Tokio** | 异步运行时 | Runtime = Scheduler + IO Driver + Timer | Future + Pin、Send/Sync 跨 await 传播 | ✅ 工作窃取无锁队列 | [06_tokio_architecture.md](06_tokio_architecture.md)（已重定向 → [Tokio 深度解析](../../../../knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md)） |
+| 07 | **Axum** | Web 框架 | Router → Handler → Tower Service | FromRequest、State 注入、matchit 路由 | ✅ 编译期路由匹配 | [07_axum_architecture.md](07_axum_architecture.md)（已重定向 → [Axum 深度解析](../../../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md)） |
 | 08 | **Hyper** | HTTP 实现 | Body trait + Request/Response | 泛型 Body、零拷贝解析 | ✅ httparse 零分配 | [08_hyper_architecture.md](08_hyper_architecture.md) |
-| 09 | **SQLx** | SQL 工具 | query! / query_as! 宏 + Pool | 编译期查询验证、FromRow、Database trait | ✅ 编译期 SQL 检查 | [09_sqlx_architecture.md](09_sqlx_architecture.md) |
+| 09 | **SQLx** | SQL 工具 | query! / query_as! 宏 + Pool | 编译期查询验证、FromRow、Database trait | ✅ 编译期 SQL 检查 | [09_sqlx_architecture.md](09_sqlx_architecture.md)（已重定向 → [SQLx 深度解析](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md)） |
 | 10 | **Reqwest** | HTTP 客户端 | ClientBuilder → RequestBuilder → Response | 泛型 JSON/Form 体、中间件扩展 | ✅ 复用 Hyper 连接池 | [10_reqwest_architecture.md](10_reqwest_architecture.md) |
 | 11 | **Wgpu** | GPU 图形 | Adapter → Device → Queue → Pipeline | BindGroup 类型安全、Naga 着色器验证 | ✅ 显式 GPU 内存管理 | [11_wgpu_architecture.md](11_wgpu_architecture.md) |
 | 12 | **Actix-web** | Web 框架 | HttpServer → App → Route (Actor 模型) | Actor trait、Transform 中间件、FromRequest | ✅ Actor 无锁消息传递 | [12_actix_web_architecture.md](12_actix_web_architecture.md) |
 | 13 | **Rayon** | 数据并行 | ParallelIterator + join() + scope() | Send 边界、fork-join 类型安全 | ✅ 顺序回退无开销 | [13_rayon_architecture.md](13_rayon_architecture.md) |
 | 14 | **nalgebra / ndarray** | 科学计算 | Matrix<T,R,C,S> / ArrayBase<S,D> | 类型级维度、Const<N>、Dimension trait | ✅ BLAS 可选后端 | [14_nalgebra_architecture.md](14_nalgebra_architecture.md) |
-| 15 | **SQLx (进阶)** | SQL 工具 | 编译期宏展开与连接池深度分析 | `query!` 宏的 Token 流处理、连接池状态机 | ✅ 编译期 SQL 检查 | [15_sqlx_advanced_architecture.md](15_sqlx_advanced_architecture.md) |
+| 15 | **SQLx (进阶)** | SQL 工具 | 编译期宏展开与连接池深度分析 | `query!` 宏的 Token 流处理、连接池状态机 | ✅ 编译期 SQL 检查 | [15_sqlx_advanced_architecture.md](15_sqlx_advanced_architecture.md)（已重定向 → [SQLx 深度解析](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md)） |
 | 16 | **Tonic** | gRPC 框架 | `service` 宏 + `prost` 编解码 + Tower 中间件 | gRPC 状态机类型、流式响应 `Streaming<T>` | ✅ 编译期服务定义 | [09_tonic_architecture.md](09_tonic_architecture.md) |
 | 17 | **wasm-bindgen** | WASM 绑定 | `#[wasm_bindgen]` 宏 + JS 胶水生成 | 跨语言类型映射、内存所有权桥接 | ✅ 零成本 FFI 抽象 | [10_wasm_bindgen_architecture.md](10_wasm_bindgen_architecture.md) |
 | 18 | **Tracing** | 可观测性 | `Span` + `Event` + `Subscriber` + `Layer` | 结构化字段 `Value` trait、零成本条件编译 | ✅ 无 Subscriber 时零开销 | [18_tracing_architecture.md](18_tracing_architecture.md) |
@@ -269,7 +272,6 @@ graph TD
     AWS --> TOKIO
     AZURE --> TOKIO
 ```
-
 > **认知功能**: 此图展示 42 个 crate / 生态专题的**依赖层级关系**——基础设施层 crate 被上层框架依赖，形成 Rust 生态的「技术栈地基」。
 > [来源: crates.io dependency graph analysis]
 
@@ -319,7 +321,6 @@ graph TD
 | **生命周期** | `Deserialize<'de>` 借用反序列化数据 | `Service::call` 返回自有 Future | `Query<'a, T>` 借用连接 | `Query<'w, 's>` 双生命周期 | `Pin<&mut Self>` 自引用 |
 | **宏** | `#[derive(Serialize)]` | 无（纯 trait） | `table!`, `#[derive(Queryable)]` | `#[derive(Component)]` | `select!`, `spawn!` |
 | **零成本证明** | 单态化消除虚调用 | 编译期中间件栈内联 | 类型状态消除运行时 SQL 检查 | Archetype 连续内存无 indirection | work-stealing 无全局锁 |
-
 | 技术维度 | Tonic | wasm-bindgen | Tracing | Crossbeam | Ratatui | mio |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **核心抽象** | `Streaming<T>` / `Response<T>` | `#[wasm_bindgen]` 生成的接口 | `Span` / `Event` / `Subscriber` | `epoch::pin` / `ArrayQueue` | `Widget::render` / `Buffer::diff` | `Poll` / `Registry` / `Token` |
@@ -329,7 +330,6 @@ graph TD
 | **生命周期** | `Streaming<'a, T>` 流借用 | 手动内存管理边界 | `Span` 显式进入/退出 | `pin` 保护对象生命周期 | `Frame` 局部渲染生命周期 | `Registry` 与 `Poll` 同步 |
 | **宏** | `#[tonic::service]` | `#[wasm_bindgen]` | `tracing::instrument!` | 无 | `#[derive(Widget)]` | 无 |
 | **零成本证明** | gRPC 编码零拷贝 | JS ↔ WASM 无额外拷贝 | 无 Subscriber 时编译期消除 | Lock-free 无内核切换 | 差分渲染仅输出变更 | 与直接 epoll 等价的系统调用数 |
-
 | 技术维度 | Salvo | ntex | Askama | Maud |
 | :--- | :--- | :--- | :--- | :--- |
 | **核心抽象** | `Router` / `#[handler]` / `Request` / `Response` | `HttpServer` / `App` / `#[web::get]` / `Service` | `#[derive(Template)]` / `render()` | `html!` macro / `Markup` / `Render` |
@@ -339,11 +339,9 @@ graph TD
 | **生命周期** | `&mut Request` 借用请求对象 | `Payload` 流式 body | 模板字段借用上下文 | `Markup` 持有字符串引用 |
 | **宏** | `#[handler]` | `#[web::get]` 等 | `#[derive(Template)]` | `html!` |
 | **零成本证明** | Handler 调用静态分发 | Service 调用静态分发 | 编译期生成 fmt 调用 | 编译期生成 fmt 调用 |
-
 | 技术维度 | redis-rs |
 | :--- | :--- |
 | **核心抽象** | `Client` / `MultiplexedConnection` / `ConnectionManager` / `PubSub` / `ClusterClient` |
-
 | 技术维度 | GUI / 跨平台 UI |
 | :--- | :--- |
 | **核心抽象** | Tauri `Command` / Dioxus `Element` / Leptos `signal` / egui `Ui` / iced `Model-Message-update-view` |
@@ -359,7 +357,6 @@ graph TD
 | **生命周期** | 异步连接通过 `Arc` 共享，生命周期由运行时管理 |
 | **宏** | 无（纯 trait 与命令构造） |
 | **零成本证明** | 多路复用连接避免每任务一个 TCP 连接 |
-
 | 技术维度 | rdkafka |
 | :--- | :--- |
 | **核心抽象** | `ClientConfig` / `FutureProducer` / `StreamConsumer` / `ConsumerContext` |
@@ -369,7 +366,6 @@ graph TD
 | **生命周期** | `MessageStream` 借用 `Consumer`；`BorrowedMessage` 受限于 poll 周期 |
 | **宏** | 无（纯 trait 与配置驱动） |
 | **零成本证明** | 复用 librdkafka C 实现，Rust 层仅做类型化包装 |
-
 | 技术维度 | kube-rs |
 | :--- | :--- |
 | **核心抽象** | `Client` / `Api<K>` / `Controller` / `watcher` / `#[derive(CustomResource)]` |
@@ -379,7 +375,6 @@ graph TD
 | **生命周期** | `Client` 通过 `Arc` 共享；watcher 返回自有事件对象 |
 | **宏** | `#[derive(CustomResource)]`、`#[kube(...)]` |
 | **零成本证明** | 编译期确定 API 路径，运行时无动态 Group/Version 查找开销 |
-
 | 技术维度 | meilisearch-sdk |
 | :--- | :--- |
 | **核心抽象** | `Client<Http>` / `Index<Http>` / `SearchQuery` / `TaskInfo` |
@@ -389,7 +384,6 @@ graph TD
 | **生命周期** | 搜索命中反序列化为自有值，不依赖原始请求生命周期 |
 | **宏** | 无（纯 trait + builder） |
 | **零成本证明** | 默认 reqwest 连接池复用；序列化单态化消除动态分发 |
-
 | 技术维度 | surrealdb |
 | :--- | :--- |
 | **核心抽象** | `Surreal<C: Connection>` / `Response` / `RecordId` |
@@ -399,7 +393,6 @@ graph TD
 | **生命周期** | `Response::take` 返回自有值，避免借用数据库句柄 |
 | **宏** | 无（纯 trait 与类型参数） |
 | **零成本证明** | 同一泛型 API 覆盖远程/嵌入式，无运行时引擎分发 |
-
 | 技术维度 | vector |
 | :--- | :--- |
 | **核心抽象** | `Vector` trait / `Index<V>` |
@@ -409,7 +402,6 @@ graph TD
 | **生命周期** | `Index::build` 借用原始向量；搜索借用量化向量 |
 | **宏** | 无 |
 | **零成本证明** | 维度在编译期确定，避免运行时向量长度检查 |
-
 | 技术维度 | sentry |
 | :--- | :--- |
 | **核心抽象** | `Client` / `Hub` / `Scope` / `Transaction` / `Span` |
@@ -419,7 +411,6 @@ graph TD
 | **生命周期** | Scope 与 Event 使用 `'static` 或 clone，适配异步任务 |
 | **宏** | `sentry::release_name!`、集成宏 |
 | **零成本证明** | 无 Client 时事件构造仍低成本；Hub 栈避免全局锁 |
-
 | 技术维度 | metrics |
 | :--- | :--- |
 | **核心抽象** | `Recorder` trait / `Key` / `Counter` / `Gauge` / `Histogram` |
@@ -429,7 +420,6 @@ graph TD
 | **生命周期** | 句柄持有 `'static`  Recorder 引用；指标值即时记录 |
 | **宏** | `counter!`、`gauge!`、`histogram!`、`describe_*!` |
 | **零成本证明** | 无 Recorder 时仅一次原子 load；句柄避免重复 key 分配 |
-
 | 技术维度 | ort |
 | :--- | :--- |
 | **核心抽象** | `Session` / `Tensor<T>` / `DynValue` / `ExecutionProvider` |
@@ -439,7 +429,6 @@ graph TD
 | **生命周期** | `SessionOutputs` 拥有输出值，视图借用受限于其作用域 |
 | **宏** | `ort::inputs!` 构造命名/位置输入 |
 | **零成本证明** | Rust API 直接映射到 ONNX Runtime C API，无额外拷贝 |
-
 | 技术维度 | tract |
 | :--- | :--- |
 | **核心抽象** | `Onnx` / `TypedModel` / `SimplePlan` / `Tensor` |
@@ -449,7 +438,6 @@ graph TD
 | **生命周期** | `TypedModel` 优化后生成独立 `SimplePlan`，运行期共享 |
 | **宏** | `tvec!` 小向量字面量 |
 | **零成本证明** | 图优化在加载期完成，运行时按静态计划直接执行 |
-
 | 技术维度 | aws-sdk-rust |
 | :--- | :--- |
 | **核心抽象** | `SdkConfig` / `Client` / Operation Builder / `SdkError<E>` |
@@ -459,7 +447,6 @@ graph TD
 | **生命周期** | `Client` 内含 `Arc<SdkConfig>`，可跨任务克隆复用 |
 | **宏** | 无（由 Smithy 模型生成代码） |
 | **零成本证明** | 强类型 Builder 在编译期消除无效请求构造 |
-
 | 技术维度 | azure-sdk-rust |
 | :--- | :--- |
 | **核心抽象** | `TokenCredential` / `Pager<T>` / `Poller<T>` / `Response<T, F>` |
@@ -587,6 +574,18 @@ graph TD
 
 ---
 
+## Canonical 来源说明 {#canonical-来源说明}
+
+> 为减少 `07_crate_architectures/` 与 `knowledge/06_ecosystem/`、`content/ecosystem/` 之间的主题重叠，以下 crate 的架构文件已改为重定向 stub，其权威内容迁移至对应深度文；其余文件在头部添加了 canonical 说明，指明使用指南应优先查看的位置。
+
+| Crate | 当前状态 | 权威来源 | 使用指南/概念参考 |
+|:---|:---|:---|:---|
+| **Tokio** | 已重定向 | [knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md](../../../../knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md) | [concept/03_advanced/02_async.md](../../../../concept/03_advanced/02_async.md) |
+| **Axum** | 已重定向 | [knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md](../../../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md) | [concept/06_ecosystem/27_web_frameworks.md](../../../../concept/06_ecosystem/27_web_frameworks.md) |
+| **SQLx** | 已重定向 | [knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md) | [concept/06_ecosystem/23_database_access.md](../../../../concept/06_ecosystem/23_database_access.md) |
+| **SQLx (进阶)** | 已重定向 | [knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md) | [concept/06_ecosystem/37_database_systems.md](../../../../concept/06_ecosystem/37_database_systems.md) |
+| 其他 crate | 保留并添加 canonical 说明 | 见各文件头部 | 见各文件头部 |
+
 ## 七、与其他概念文件的交叉引用 {#七与其他概念文件的交叉引用}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -625,8 +624,8 @@ graph TD
 >
 > **文档版本**: 1.1
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-> **最后更新**: 2026-06-29
-> **状态**: ✅ 42 crate / 生态专题架构解构完成
+> **最后更新**: 2026-07-01
+> **状态**: ✅ 已统一 canonical 来源（Tokio / Axum / SQLx 已重定向，其余文件已添加 canonical 说明）
 
 ---
 

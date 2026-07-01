@@ -91,7 +91,6 @@ rustup component add miri --toolchain nightly
 # 设置 nightly 为默认（可选） {#设置-nightly-为默认可选}
 rustup default nightly
 ```
-
 ### 2.2 运行测试 {#22-运行测试}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -111,7 +110,6 @@ cargo miri run --example example_name
 # 运行二进制 {#运行二进制}
 cargo miri run --bin bin_name
 ```
-
 ### 2.3 常用环境变量 {#23-常用环境变量}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -134,7 +132,6 @@ MIRIFLAGS="-Zmiri-preemption-rate=0.1" cargo miri test
 # 检查内存泄漏 {#检查内存泄漏}
 cargo miri test
 ```
-
 ---
 
 ## 三、十大 UB 检测示例 {#三十大-ub-检测示例}
@@ -160,14 +157,12 @@ fn use_init() -> i32 {
     x
 }
 ```
-
 **Miri 报错**：
 
 ```
 error: Undefined Behavior: interpreting allocation ... as i32,
 but the data is uninitialized
 ```
-
 ### 示例 2：违反可变借用唯一性（Stacked Borrows） {#示例-2违反可变借用唯一性stacked-borrows}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -196,13 +191,11 @@ fn no_alias() {
     *r2 += 1;
 }
 ```
-
 **Miri 报错**（Stacked Borrows 模式）：
 
 ```
 error: Undefined Behavior: no item granting read access ...
 ```
-
 ### 示例 3：通过共享引用修改数据（内部可变性违规） {#示例-3通过共享引用修改数据内部可变性违规}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -226,7 +219,6 @@ fn modify_with_interior_mutability() {
     x.set(0); // ✅ 合法
 }
 ```
-
 ### 示例 4：悬空指针解引用 {#示例-4悬空指针解引用}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -255,7 +247,6 @@ fn valid_pointer() {
     }
 }
 ```
-
 ### 示例 5：对齐违规 {#示例-5对齐违规}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -277,7 +268,6 @@ fn aligned_access() {
     }
 }
 ```
-
 ### 示例 6：越界指针算术（即使不解引用也是 UB） {#示例-6越界指针算术即使不解引用也是-ub}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -298,7 +288,6 @@ fn in_bounds_ptr() {
     let _one_past = unsafe { ptr.offset(3) }; // ✅ 允许指向最后一个元素之后
 }
 ```
-
 ### 示例 7：无效枚举判别式 {#示例-7无效枚举判别式}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -319,7 +308,6 @@ fn valid_discriminant() {
     let color: Color = unsafe { std::mem::transmute(raw) }; // ✅ Green = 2
 }
 ```
-
 ### 示例 8：双重释放 {#示例-8双重释放}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -342,7 +330,6 @@ fn single_free() {
     }
 }
 ```
-
 ### 示例 9：数据竞争（实验性检测） {#示例-9数据竞争实验性检测}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -374,7 +361,6 @@ fn no_data_race() {
     });
 }
 ```
-
 ### 示例 10：Strict Provenance 违规（指针<->整数转换） {#示例-10strict-provenance-违规指针-整数转换}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -396,7 +382,6 @@ fn proper_ptr_provenance() {
     let _restored: *const i32 = std::ptr::with_exposed_provenance(addr);
 }
 ```
-
 ---
 
 ## 四、Stacked Borrows vs Tree Borrows {#四stacked-borrows-vs-tree-borrows}
@@ -447,7 +432,6 @@ jobs:
         env:
           MIRIFLAGS: -Zmiri-tree-borrows -Zmiri-disable-isolation
 ```
-
 ---
 
 ## 六、常见陷阱与解决方案 {#六常见陷阱与解决方案}
@@ -505,13 +489,9 @@ jobs:
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Undefined Behavior](https://en.wikipedia.org/wiki/Undefined_Behavior)**
-
 > **来源: [Miri Documentation](https://github.com/rust-lang/miri)**
-
 > **来源: [Rust Reference - Miri](https://doc.rust-lang.org/reference/)**
-
 > **来源: [RFC 2585 - Unsafe Code Guidelines](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html)**
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

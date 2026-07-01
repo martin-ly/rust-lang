@@ -11,7 +11,6 @@ cd tools/kg_rag
 python -m venv .venv
 .venv/Scripts/pip install -r requirements.txt
 ```
-
 依赖：
 
 - `sentence-transformers`
@@ -34,7 +33,6 @@ python -m venv .venv
 .venv/Scripts/python tools/kg_rag/query.py \
   --query "lifetime elision" --rebuild
 ```
-
 首次运行会自动下载 `all-MiniLM-L6-v2` 模型并缓存到 `tools/kg_rag/.cache/`。
 
 ## 设计

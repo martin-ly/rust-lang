@@ -91,7 +91,6 @@ fn main() {
     println!("{:?}", request);
 }
 ```
-
 ### 示例2: Factory模式
 
 ```rust
@@ -138,7 +137,6 @@ fn main() {
     println!("Rectangle area: {}", rectangle.area());
 }
 ```
-
 ---
 
 ## 🏗️ GoF结构型模式
@@ -188,7 +186,6 @@ fn main() {
     adapter.print_with_color("World", "Red");
 }
 ```
-
 ### 示例4: Decorator模式
 
 ```rust
@@ -236,7 +233,6 @@ fn main() {
              coffee_with_milk_and_sugar.cost());
 }
 ```
-
 ---
 
 ## ⚡ GoF行为型模式
@@ -289,7 +285,6 @@ fn main() {
     compressor.compress(data);
 }
 ```
-
 ### 示例6: Observer模式
 
 ```rust
@@ -343,7 +338,6 @@ fn main() {
     subject.notify("Event occurred!");
 }
 ```
-
 ---
 
 ## 🔄 并发模式
@@ -404,7 +398,6 @@ async fn main() {
     tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
 }
 ```
-
 ### 示例8: Producer-Consumer模式
 
 ```rust
@@ -442,7 +435,6 @@ fn main() {
         .unwrap();
 }
 ```
-
 ---
 
 ## 🦀 Rust特有模式
@@ -473,7 +465,6 @@ fn main() {
     println!("{}m = {}ft", distance_m.0, distance_ft.0);
 }
 ```
-
 ### 示例10: Type State模式
 
 ```rust
@@ -527,7 +518,6 @@ fn main() {
     // conn.send("World"); // 编译错误！
 }
 ```
-
 ---
 
 **文档版本**: v1.0

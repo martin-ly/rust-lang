@@ -66,7 +66,6 @@ fn main() {
     println!("Typed vector: {:?}", vec);
 }
 ```
-
 ---
 
 ## 📊 核心功能 {#核心功能}
@@ -104,7 +103,6 @@ fn safe_math() {
     }
 }
 ```
-
 ### 2. 泛型与 Trait {#2-泛型与-trait}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -135,7 +133,6 @@ impl<T: std::ops::Add<Output = T> + Copy> Measurable for Point<T> {
     }
 }
 ```
-
 ### 3. 型变 (Variance) {#3-型变-variance}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -157,7 +154,6 @@ fn demonstrate_contravariance(f: fn(&'static str)) {
     let g: fn(&str) = f; // OK: 逆变
 }
 ```
-
 ### 4. 高级模式匹配 {#4-高级模式匹配}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -178,7 +174,6 @@ fn advanced_matching() {
     println!("Match result: {:?}", result);
 }
 ```
-
 ### 5. 精确捕获 (Precise Capturing) {#5-精确捕获-precise-capturing}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -194,7 +189,6 @@ fn precise_capturing_example() {
     guide.demonstrate_precise_capturing();
 }
 ```
-
 `use<..>` 精确捕获允许你在 `impl Trait` 返回类型中明确指定哪些生命周期被捕获，解决了隐式捕获导致的过度约束问题。
 
 ### 6. Rust 1.95 类型系统增强 {#6-rust-195-类型系统增强}
@@ -218,7 +212,6 @@ fn main() {
     demonstrate_bool_to_float();
 }
 ```
-
 ---
 
 ## ⚡ 性能优化 {#性能优化}
@@ -255,7 +248,6 @@ fn robust_operation() -> Result<(), ContextualError> {
     })
 }
 ```
-
 ---
 
 ## 🐛 常见问题与解决方案 {#常见问题与解决方案}

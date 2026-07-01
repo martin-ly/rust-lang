@@ -59,7 +59,6 @@ async fn main() -> std::io::Result<()> {
     .await
 }
 ```
-
 **特点**:
 
 - 每个连接由独立 Actor 处理
@@ -89,7 +88,6 @@ async fn main() {
     axum::serve(listener, app).await.unwrap();
 }
 ```
-
 **特点**:
 
 - 函数式 Handler 设计
@@ -124,7 +122,6 @@ App::new()
     .wrap(middleware::Compress::default())
     .wrap(middleware::DefaultHeaders::new())
 ```
-
 ### Axum (Tower)
 
 ```rust
@@ -134,7 +131,6 @@ Router::new()
     .layer(TraceLayer::new_for_http())
     .layer(CompressionLayer::new())
 ```
-
 **Tower 生态优势**: 同一套中间件可用于 tonic (gRPC)、hyper 等
 
 ---
@@ -153,7 +149,6 @@ Router::new()
 已有 Tokio 生态深度使用? ──是──→ Axum (更自然)
 需要快速上手? ──是──→ Axum (学习曲线更平缓)
 ```
-
 ---
 
 ## 🔗 参考资源

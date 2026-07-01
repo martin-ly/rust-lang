@@ -1,0 +1,1159 @@
+# C04 泛型编程 - 泛型基础指南
+
+**文档类型**: Tier 2 实践指南
+**难度级别**: ⭐⭐ 初级
+**预计学习时间**: 3-4 小时
+**最后更新**: 2025-10-22
+
+---
+
+## 📋 本文档目录
+
+- [C04 泛型编程 - 泛型基础指南](#c04-泛型编程---泛型基础指南)
+  - [📋 本文档目录](#-本文档目录)
+  - [🎯 学习目标](#-学习目标)
+  - [📚 前置知识](#-前置知识)
+  - [1. 泛型概述](#1-泛型概述)
+    - [1.1 什么是泛型？](#11-什么是泛型)
+    - [1.2 为什么需要泛型？](#12-为什么需要泛型)
+    - [1.3 Rust 泛型的特点](#13-rust-泛型的特点)
+  - [2. 泛型函数](#2-泛型函数)
+    - [2.1 基础语法](#21-基础语法)
+    - [2.2 多个类型参数](#22-多个类型参数)
+    - [2.3 带约束的泛型函数](#23-带约束的泛型函数)
+    - [2.4 实战案例：查找最大值](#24-实战案例查找最大值)
+  - [3. 泛型结构体](#3-泛型结构体)
+    - [3.1 基础语法](#31-基础语法)
+    - [3.2 多个类型参数](#32-多个类型参数)
+    - [3.3 字段中使用泛型](#33-字段中使用泛型)
+    - [3.4 实战案例：坐标点](#34-实战案例坐标点)
+  - [4. 泛型枚举](#4-泛型枚举)
+    - [4.1 标准库中的泛型枚举](#41-标准库中的泛型枚举)
+    - [4.2 自定义泛型枚举](#42-自定义泛型枚举)
+    - [4.3 实战案例：树结构](#43-实战案例树结构)
+  - [5. 泛型方法实现](#5-泛型方法实现)
+    - [5.1 为泛型类型实现方法](#51-为泛型类型实现方法)
+    - [5.2 方法中的泛型参数](#52-方法中的泛型参数)
+    - [5.3 为具体类型实现方法](#53-为具体类型实现方法)
+  - [6. Const 泛型](#6-const-泛型)
+    - [6.1 基础语法](#61-基础语法)
+    - [6.2 实战案例：固定大小数组](#62-实战案例固定大小数组)
+  - [7. 默认类型参数](#7-默认类型参数)
+    - [7.1 基础语法](#71-基础语法)
+    - [7.2 实战案例：可配置的容器](#72-实战案例可配置的容器)
+  - [8. 泛型约束基础](#8-泛型约束基础)
+    - [8.1 单个约束](#81-单个约束)
+    - [8.2 多个约束](#82-多个约束)
+    - [8.3 where 子句](#83-where-子句)
+  - [9. 实战综合案例](#9-实战综合案例)
+    - [9.1 案例 1：通用缓存系统](#91-案例-1通用缓存系统)
+    - [9.2 案例 2：数据转换管道](#92-案例-2数据转换管道)
+  - [10. 常见陷阱与最佳实践](#10-常见陷阱与最佳实践)
+    - [10.1 常见错误](#101-常见错误)
+    - [10.2 最佳实践](#102-最佳实践)
+  - [📚 延伸阅读](#-延伸阅读)
+  - [🎯 练习题](#-练习题)
+  - [📝 小结](#-小结)
+
+---
+
+## 🎯 学习目标
+
+通过本指南的学习，你将能够：
+
+- ✅ 理解泛型的概念和价值
+- ✅ 编写泛型函数、结构体和枚举
+- ✅ 为泛型类型实现方法
+- ✅ 使用 const 泛型和默认类型参数
+- ✅ 掌握基础的泛型约束
+- ✅ 应用泛型解决实际问题
+
+---
+
+## 📚 前置知识
+
+在学习本指南之前，你应该掌握：
+
+- ✅ Rust 基础语法（变量、函数、控制流）
+- ✅ Rust 所有权系统（所有权、借用、生命周期）
+- ✅ 结构体和枚举的定义和使用
+- ✅ trait 的基本概念（在 [02_trait_system.md](02_trait_system.md) 中详细讲解）
+
+---
+
+## 1. 泛型概述
+
+### 1.1 什么是泛型？
+
+**泛型** (Generics) 是一种编程技术，允许我们在定义函数、结构体、枚举和方法时使用**类型参数**，而不是具体的类型。
+
+```rust
+// 非泛型：只能处理 i32
+fn max_i32(a: i32, b: i32) -> i32 {
+    if a > b { a } else { b }
+}
+
+// 泛型：可以处理任何可比较的类型
+fn max<T: PartialOrd>(a: T, b: T) -> T {
+    if a > b { a } else { b }
+}
+
+fn main() {
+    println!("{}", max(10, 20));       // 20
+    println!("{}", max(3.14, 2.71));   // 3.14
+    println!("{}", max('a', 'z'));     // 'z'
+}
+```
+### 1.2 为什么需要泛型？
+
+**问题**: 没有泛型时的代码重复
+
+```rust
+fn max_i32(a: i32, b: i32) -> i32 {
+    if a > b { a } else { b }
+}
+
+fn max_f64(a: f64, b: f64) -> f64 {
+    if a > b { a } else { b }
+}
+
+fn max_char(a: char, b: char) -> char {
+    if a > b { a } else { b }
+}
+
+// 每种类型都需要一个函数！
+```
+**解决方案**: 使用泛型
+
+```rust
+fn max<T: PartialOrd>(a: T, b: T) -> T {
+    if a > b { a } else { b }
+}
+
+// 一个函数处理所有可比较的类型！
+```
+**泛型的价值**:
+
+1. **代码复用**: 一份代码，多种类型
+2. **类型安全**: 编译时类型检查
+3. **零成本抽象**: 运行时无性能损失
+4. **更好的可维护性**: 减少重复代码
+
+### 1.3 Rust 泛型的特点
+
+**1. 静态分发 (Monomorphization)**:
+
+```rust
+fn print<T: std::fmt::Display>(value: T) {
+    println!("{}", value);
+}
+
+fn main() {
+    print(42);      // 编译器生成 print_i32
+    print("hello"); // 编译器生成 print_str
+}
+```
+编译器为每个具体类型生成专门的函数版本，实现零成本抽象。
+
+**2. 约束系统 (Trait Bounds)**:
+
+```rust
+// T 必须实现 Clone 和 Debug trait
+fn duplicate<T: Clone + std::fmt::Debug>(value: T) -> (T, T) {
+    let copy = value.clone();
+    println!("Duplicating: {:?}", value);
+    (value, copy)
+}
+```
+**3. 类型推断**:
+
+```rust
+// 编译器可以自动推断类型参数
+let v = Vec::new();
+v.push(42); // 编译器推断 Vec<i32>
+
+// 也可以显式指定
+let v: Vec<i32> = Vec::new();
+let v = Vec::<i32>::new(); // Turbofish 语法
+```
+---
+
+## 2. 泛型函数
+
+### 2.1 基础语法
+
+**语法格式**:
+
+```rust
+fn function_name<T>(param: T) -> T {
+    // 函数体
+}
+```
+**示例 1: 简单泛型函数**:
+
+```rust
+// 返回传入的值（身份函数）
+fn identity<T>(value: T) -> T {
+    value
+}
+
+fn main() {
+    let num = identity(42);       // i32
+    let text = identity("hello"); // &str
+    let flag = identity(true);    // bool
+
+    println!("{}, {}, {}", num, text, flag);
+}
+```
+**示例 2: 使用泛型引用**:
+
+```rust
+// 返回两个值中的第一个
+fn first<T>(a: T, b: T) -> T {
+    a
+}
+
+// 更实用的版本：使用引用避免所有权转移
+fn first_ref<T>(a: &T, b: &T) -> &T {
+    a
+}
+
+fn main() {
+    let x = String::from("hello");
+    let y = String::from("world");
+
+    // first(x, y); // 错误：x, y 的所有权被移走
+
+    let result = first_ref(&x, &y);
+    println!("{}", result); // "hello"
+    println!("{}, {}", x, y); // x, y 仍然可用
+}
+```
+### 2.2 多个类型参数
+
+```rust
+// 两个不同的类型参数
+fn pair<T, U>(first: T, second: U) -> (T, U) {
+    (first, second)
+}
+
+fn main() {
+    let p1 = pair(42, "answer");     // (i32, &str)
+    let p2 = pair(3.14, true);       // (f64, bool)
+    let p3 = pair("x", 'y');         // (&str, char)
+
+    println!("{:?}", p1);
+}
+```
+### 2.3 带约束的泛型函数
+
+```rust
+use std::fmt::Display;
+
+// T 必须实现 Display trait
+fn print_twice<T: Display>(value: T) {
+    println!("{}", value);
+    println!("{}", value);
+}
+
+fn main() {
+    print_twice(42);
+    print_twice("hello");
+    // print_twice(vec![1, 2, 3]); // 错误：Vec 没有实现 Display
+}
+```
+### 2.4 实战案例：查找最大值
+
+```rust
+// 查找切片中的最大值
+fn find_max<T: PartialOrd + Clone>(list: &[T]) -> Option<T> {
+    if list.is_empty() {
+        return None;
+    }
+
+    let mut max = list[0].clone();
+    for item in list.iter() {
+        if item > &max {
+            max = item.clone();
+        }
+    }
+
+    Some(max)
+}
+
+fn main() {
+    let numbers = vec![34, 50, 25, 100, 65];
+    println!("最大值: {:?}", find_max(&numbers)); // Some(100)
+
+    let chars = vec!['y', 'm', 'a', 'q'];
+    println!("最大字符: {:?}", find_max(&chars)); // Some('y')
+
+    let empty: Vec<i32> = vec![];
+    println!("空列表: {:?}", find_max(&empty)); // None
+}
+```
+---
+
+## 3. 泛型结构体
+
+### 3.1 基础语法
+
+**语法格式**:
+
+```rust
+struct StructName<T> {
+    field: T,
+}
+```
+**示例 1: 简单泛型结构体**:
+
+```rust
+struct Wrapper<T> {
+    value: T,
+}
+
+fn main() {
+    let int_wrapper = Wrapper { value: 42 };
+    let str_wrapper = Wrapper { value: "hello" };
+    let vec_wrapper = Wrapper { value: vec![1, 2, 3] };
+
+    println!("{}", int_wrapper.value);
+}
+```
+### 3.2 多个类型参数
+
+```rust
+struct Pair<T, U> {
+    first: T,
+    second: U,
+}
+
+fn main() {
+    let pair1 = Pair {
+        first: 10,
+        second: "ten",
+    };
+
+    let pair2 = Pair {
+        first: 3.14,
+        second: true,
+    };
+
+    println!("{}, {}", pair1.first, pair1.second);
+}
+```
+### 3.3 字段中使用泛型
+
+```rust
+struct Container<T> {
+    items: Vec<T>,
+    default: T,
+}
+
+impl<T: Clone> Container<T> {
+    fn new(default: T) -> Self {
+        Container {
+            items: Vec::new(),
+            default,
+        }
+    }
+
+    fn add(&mut self, item: T) {
+        self.items.push(item);
+    }
+
+    fn get_or_default(&self, index: usize) -> T {
+        self.items.get(index)
+            .cloned()
+            .unwrap_or_else(|| self.default.clone())
+    }
+}
+
+fn main() {
+    let mut container = Container::new(0);
+    container.add(10);
+    container.add(20);
+
+    println!("{}", container.get_or_default(0)); // 10
+    println!("{}", container.get_or_default(5)); // 0 (default)
+}
+```
+### 3.4 实战案例：坐标点
+
+```rust
+#[derive(Debug, Clone, Copy)]
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Point<T> {
+    fn new(x: T, y: T) -> Self {
+        Point { x, y }
+    }
+}
+
+impl<T: std::ops::Add<Output = T>> Point<T> {
+    fn add(self, other: Point<T>) -> Point<T> {
+        Point {
+            x: self.x + other.x,
+            y: self.y + other.y,
+        }
+    }
+}
+
+impl Point<f64> {
+    fn distance_from_origin(&self) -> f64 {
+        (self.x * self.x + self.y * self.y).sqrt()
+    }
+}
+
+fn main() {
+    let p1 = Point::new(3, 4);
+    let p2 = Point::new(5, 6);
+    let p3 = p1.add(p2);
+    println!("{:?}", p3); // Point { x: 8, y: 10 }
+
+    let pf = Point::new(3.0, 4.0);
+    println!("距离: {}", pf.distance_from_origin()); // 5.0
+}
+```
+---
+
+## 4. 泛型枚举
+
+### 4.1 标准库中的泛型枚举
+
+**`Option<T>`**
+
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+fn divide(a: i32, b: i32) -> Option<i32> {
+    if b == 0 {
+        None
+    } else {
+        Some(a / b)
+    }
+}
+
+fn main() {
+    match divide(10, 2) {
+        Some(result) => println!("结果: {}", result),
+        None => println!("除数为零"),
+    }
+}
+```
+**`Result<T, E>`**
+
+```rust
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+
+fn parse_number(s: &str) -> Result<i32, String> {
+    s.parse::<i32>()
+        .map_err(|_| format!("无法解析: {}", s))
+}
+
+fn main() {
+    match parse_number("42") {
+        Ok(n) => println!("数字: {}", n),
+        Err(e) => println!("错误: {}", e),
+    }
+}
+```
+### 4.2 自定义泛型枚举
+
+```rust
+enum Data<T> {
+    Single(T),
+    Multiple(Vec<T>),
+    Empty,
+}
+
+impl<T> Data<T> {
+    fn count(&self) -> usize {
+        match self {
+            Data::Single(_) => 1,
+            Data::Multiple(vec) => vec.len(),
+            Data::Empty => 0,
+        }
+    }
+}
+
+fn main() {
+    let d1 = Data::Single(42);
+    let d2 = Data::Multiple(vec![1, 2, 3]);
+    let d3: Data<i32> = Data::Empty;
+
+    println!("{}, {}, {}", d1.count(), d2.count(), d3.count());
+    // 输出: 1, 3, 0
+}
+```
+### 4.3 实战案例：树结构
+
+```rust
+#[derive(Debug)]
+enum Tree<T> {
+    Leaf(T),
+    Node {
+        value: T,
+        left: Box<Tree<T>>,
+        right: Box<Tree<T>>,
+    },
+}
+
+impl<T> Tree<T> {
+    fn leaf(value: T) -> Self {
+        Tree::Leaf(value)
+    }
+
+    fn node(value: T, left: Tree<T>, right: Tree<T>) -> Self {
+        Tree::Node {
+            value,
+            left: Box::new(left),
+            right: Box::new(right),
+        }
+    }
+}
+
+impl<T: std::fmt::Display> Tree<T> {
+    fn print(&self, depth: usize) {
+        let indent = "  ".repeat(depth);
+        match self {
+            Tree::Leaf(v) => println!("{}Leaf({})", indent, v),
+            Tree::Node { value, left, right } => {
+                println!("{}Node({})", indent, value);
+                left.print(depth + 1);
+                right.print(depth + 1);
+            }
+        }
+    }
+}
+
+fn main() {
+    let tree = Tree::node(
+        1,
+        Tree::node(2, Tree::leaf(4), Tree::leaf(5)),
+        Tree::leaf(3),
+    );
+
+    tree.print(0);
+}
+```
+---
+
+## 5. 泛型方法实现
+
+### 5.1 为泛型类型实现方法
+
+```rust
+struct Stack<T> {
+    items: Vec<T>,
+}
+
+impl<T> Stack<T> {
+    fn new() -> Self {
+        Stack { items: Vec::new() }
+    }
+
+    fn push(&mut self, item: T) {
+        self.items.push(item);
+    }
+
+    fn pop(&mut self) -> Option<T> {
+        self.items.pop()
+    }
+
+    fn is_empty(&self) -> bool {
+        self.items.is_empty()
+    }
+}
+
+fn main() {
+    let mut stack = Stack::new();
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+
+    while let Some(item) = stack.pop() {
+        println!("{}", item); // 3, 2, 1
+    }
+}
+```
+### 5.2 方法中的泛型参数
+
+```rust
+struct Container<T> {
+    value: T,
+}
+
+impl<T> Container<T> {
+    fn new(value: T) -> Self {
+        Container { value }
+    }
+
+    // 方法有自己的泛型参数 U
+    fn map<U, F>(self, f: F) -> Container<U>
+    where
+        F: FnOnce(T) -> U,
+    {
+        Container {
+            value: f(self.value),
+        }
+    }
+}
+
+fn main() {
+    let c1 = Container::new(42);
+    let c2 = c1.map(|x| x.to_string());
+    let c3 = c2.map(|s| s.len());
+
+    println!("{}", c3.value); // 2
+}
+```
+### 5.3 为具体类型实现方法
+
+```rust
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+// 为所有类型实现
+impl<T> Point<T> {
+    fn new(x: T, y: T) -> Self {
+        Point { x, y }
+    }
+}
+
+// 只为 f64 实现
+impl Point<f64> {
+    fn distance_from_origin(&self) -> f64 {
+        (self.x.powi(2) + self.y.powi(2)).sqrt()
+    }
+}
+
+// 只为 i32 实现
+impl Point<i32> {
+    fn manhattan_distance(&self) -> i32 {
+        self.x.abs() + self.y.abs()
+    }
+}
+
+fn main() {
+    let pf = Point::new(3.0, 4.0);
+    println!("欧几里得距离: {}", pf.distance_from_origin());
+
+    let pi = Point::new(3, 4);
+    println!("曼哈顿距离: {}", pi.manhattan_distance());
+}
+```
+---
+
+## 6. Const 泛型
+
+### 6.1 基础语法
+
+Const 泛型允许在类型参数中使用常量值。
+
+```rust
+struct Array<T, const N: usize> {
+    data: [T; N],
+}
+
+impl<T: Default + Copy, const N: usize> Array<T, N> {
+    fn new() -> Self {
+        Array {
+            data: [T::default(); N],
+        }
+    }
+}
+
+fn main() {
+    let arr1: Array<i32, 5> = Array::new();
+    let arr2: Array<f64, 10> = Array::new();
+
+    println!("arr1 size: {}", arr1.data.len());
+    println!("arr2 size: {}", arr2.data.len());
+}
+```
+### 6.2 实战案例：固定大小数组
+
+```rust
+#[derive(Debug)]
+struct FixedVec<T, const CAP: usize> {
+    data: Vec<T>,
+}
+
+impl<T, const CAP: usize> FixedVec<T, CAP> {
+    fn new() -> Self {
+        FixedVec {
+            data: Vec::with_capacity(CAP),
+        }
+    }
+
+    fn push(&mut self, item: T) -> Result<(), &'static str> {
+        if self.data.len() < CAP {
+            self.data.push(item);
+            Ok(())
+        } else {
+            Err("容量已满")
+        }
+    }
+
+    fn len(&self) -> usize {
+        self.data.len()
+    }
+
+    fn capacity(&self) -> usize {
+        CAP
+    }
+}
+
+fn main() {
+    let mut vec: FixedVec<i32, 3> = FixedVec::new();
+
+    vec.push(1).unwrap();
+    vec.push(2).unwrap();
+    vec.push(3).unwrap();
+
+    match vec.push(4) {
+        Ok(_) => println!("添加成功"),
+        Err(e) => println!("错误: {}", e),
+    }
+
+    println!("长度: {}/{}", vec.len(), vec.capacity());
+}
+```
+---
+
+## 7. 默认类型参数
+
+### 7.1 基础语法
+
+```rust
+struct Container<T = i32> {
+    value: T,
+}
+
+fn main() {
+    let c1 = Container { value: 42 };     // T = i32 (默认)
+    let c2: Container<String> = Container {
+        value: String::from("hello"),
+    };
+
+    println!("{}, {}", c1.value, c2.value);
+}
+```
+### 7.2 实战案例：可配置的容器
+
+```rust
+use std::collections::HashMap;
+use std::hash::Hash;
+
+struct Cache<K, V, S = std::collections::hash_map::RandomState>
+where
+    K: Eq + Hash,
+{
+    map: HashMap<K, V, S>,
+}
+
+impl<K, V> Cache<K, V>
+where
+    K: Eq + Hash,
+{
+    fn new() -> Self {
+        Cache {
+            map: HashMap::new(),
+        }
+    }
+
+    fn insert(&mut self, key: K, value: V) {
+        self.map.insert(key, value);
+    }
+
+    fn get(&self, key: &K) -> Option<&V> {
+        self.map.get(key)
+    }
+}
+
+fn main() {
+    let mut cache = Cache::new();
+    cache.insert("key1", 100);
+    cache.insert("key2", 200);
+
+    println!("{:?}", cache.get(&"key1")); // Some(100)
+}
+```
+---
+
+## 8. 泛型约束基础
+
+### 8.1 单个约束
+
+```rust
+use std::fmt::Display;
+
+fn print_value<T: Display>(value: T) {
+    println!("值: {}", value);
+}
+
+fn main() {
+    print_value(42);
+    print_value("hello");
+    print_value(3.14);
+}
+```
+### 8.2 多个约束
+
+```rust
+use std::fmt::{Display, Debug};
+
+fn print_debug_and_display<T: Display + Debug>(value: T) {
+    println!("Display: {}", value);
+    println!("Debug: {:?}", value);
+}
+
+fn main() {
+    print_debug_and_display(42);
+    print_debug_and_display("hello");
+}
+```
+### 8.3 where 子句
+
+```rust
+use std::fmt::Display;
+
+// 使用 where 子句提高可读性
+fn compare_and_print<T, U>(a: T, b: U)
+where
+    T: Display + PartialOrd,
+    U: Display + PartialOrd,
+{
+    println!("a = {}, b = {}", a, b);
+}
+
+fn main() {
+    compare_and_print(42, 3.14);
+    compare_and_print("hello", "world");
+}
+```
+---
+
+## 9. 实战综合案例
+
+### 9.1 案例 1：通用缓存系统
+
+```rust
+use std::collections::HashMap;
+use std::hash::Hash;
+
+struct Cache<K, V>
+where
+    K: Eq + Hash + Clone,
+    V: Clone,
+{
+    store: HashMap<K, V>,
+    max_size: usize,
+}
+
+impl<K, V> Cache<K, V>
+where
+    K: Eq + Hash + Clone,
+    V: Clone,
+{
+    fn new(max_size: usize) -> Self {
+        Cache {
+            store: HashMap::new(),
+            max_size,
+        }
+    }
+
+    fn get(&self, key: &K) -> Option<V> {
+        self.store.get(key).cloned()
+    }
+
+    fn set(&mut self, key: K, value: V) {
+        if self.store.len() >= self.max_size && !self.store.contains_key(&key) {
+            // 简单的策略：拒绝新条目
+            return;
+        }
+        self.store.insert(key, value);
+    }
+
+    fn len(&self) -> usize {
+        self.store.len()
+    }
+}
+
+fn main() {
+    let mut cache: Cache<String, i32> = Cache::new(3);
+
+    cache.set(String::from("a"), 1);
+    cache.set(String::from("b"), 2);
+    cache.set(String::from("c"), 3);
+    cache.set(String::from("d"), 4); // 被拒绝
+
+    println!("缓存大小: {}", cache.len()); // 3
+    println!("a = {:?}", cache.get(&String::from("a"))); // Some(1)
+    println!("d = {:?}", cache.get(&String::from("d"))); // None
+}
+```
+### 9.2 案例 2：数据转换管道
+
+```rust
+struct Pipeline<T> {
+    data: T,
+}
+
+impl<T> Pipeline<T> {
+    fn new(data: T) -> Self {
+        Pipeline { data }
+    }
+
+    fn map<U, F>(self, f: F) -> Pipeline<U>
+    where
+        F: FnOnce(T) -> U,
+    {
+        Pipeline {
+            data: f(self.data),
+        }
+    }
+
+    fn get(self) -> T {
+        self.data
+    }
+}
+
+fn main() {
+    let result = Pipeline::new(5)
+        .map(|x| x * 2)        // 10
+        .map(|x| x + 3)        // 13
+        .map(|x| x.to_string()) // "13"
+        .map(|s| format!("Result: {}", s))
+        .get();
+
+    println!("{}", result); // "Result: 13"
+}
+```
+---
+
+## 10. 常见陷阱与最佳实践
+
+### 10.1 常见错误
+
+**错误 1: 忘记约束**:
+
+```rust
+// ❌ 错误：T 没有实现 PartialOrd
+fn max<T>(a: T, b: T) -> T {
+    if a > b { a } else { b }
+}
+
+// ✅ 正确
+fn max<T: PartialOrd>(a: T, b: T) -> T {
+    if a > b { a } else { b }
+}
+```
+**错误 2: 类型参数不一致**:
+
+```rust
+// ❌ 错误：x 和 y 的类型不同
+let p = Point { x: 5, y: 4.0 };
+
+// ✅ 正确：使用两个类型参数
+struct Point<T, U> {
+    x: T,
+    y: U,
+}
+```
+**错误 3: 所有权问题**:
+
+```rust
+// ❌ 错误：值被移走
+fn first<T>(a: T, b: T) -> T {
+    a
+}
+let x = String::from("hello");
+let y = String::from("world");
+let z = first(x, y);
+// println!("{}", x); // 错误：x 已被移走
+
+// ✅ 正确：使用引用
+fn first<T>(a: &T, b: &T) -> &T {
+    a
+}
+```
+### 10.2 最佳实践
+
+**1. 优先使用泛型而不是代码复制**:
+
+```rust
+// ❌ 不推荐
+fn print_i32(v: i32) { println!("{}", v); }
+fn print_f64(v: f64) { println!("{}", v); }
+
+// ✅ 推荐
+fn print<T: std::fmt::Display>(v: T) {
+    println!("{}", v);
+}
+```
+**2. 为类型参数选择清晰的名称**:
+
+```rust
+// ❌ 不清晰
+fn convert<T, U, V>(a: T, b: U) -> V { ... }
+
+// ✅ 清晰
+fn convert<Input, Output, Error>(
+    input: Input,
+    converter: Output,
+) -> Result<Output, Error> { ... }
+```
+**3. 使用 where 子句提高可读性**:
+
+```rust
+// ❌ 难读
+fn func<T: Clone + Debug + Display + PartialOrd>(value: T) { ... }
+
+// ✅ 易读
+fn func<T>(value: T)
+where
+    T: Clone + Debug + Display + PartialOrd,
+{ ... }
+```
+**4. 合理使用默认类型参数**:
+
+```rust
+// 为常见情况提供默认值
+struct Container<T, S = Vec<T>> {
+    storage: S,
+    _marker: std::marker::PhantomData<T>,
+}
+```
+---
+
+## 📚 延伸阅读
+
+- [02_trait_system.md](02_trait_system.md) - 深入学习 trait 系统
+- [03\_关联类型指南.md](03_associated_types.md) - 学习关联类型和 GAT
+- [04\_类型推断指南.md](04_type_inference.md) - 理解类型推断机制
+- [../tier_03_references/01_generics_syntax_reference.md](../tier_03_references/01_generics_syntax_reference.md) - 完整语法参考
+- [../tier_01_foundations/03_glossary.md](../tier_01_foundations/03_glossary.md) - 术语定义
+
+---
+
+## 🎯 练习题
+
+**练习 1: 泛型 swap 函数**:
+
+编写一个泛型函数，交换两个值。
+
+```rust
+fn swap<T>(a: &mut T, b: &mut T) {
+    // 你的代码
+}
+
+fn main() {
+    let mut x = 5;
+    let mut y = 10;
+    swap(&mut x, &mut y);
+    assert_eq!(x, 10);
+    assert_eq!(y, 5);
+}
+```
+参考答案
+
+```rust
+fn swap<T>(a: &mut T, b: &mut T) {
+    std::mem::swap(a, b);
+}
+```
+**练习 2: 泛型队列**:
+
+实现一个简单的泛型队列。
+
+```rust
+struct Queue<T> {
+    // 你的字段
+}
+
+impl<T> Queue<T> {
+    fn new() -> Self { todo!() }
+    fn enqueue(&mut self, item: T) { todo!() }
+    fn dequeue(&mut self) -> Option<T> { todo!() }
+}
+```
+参考答案
+
+```rust
+struct Queue<T> {
+    items: Vec<T>,
+}
+
+impl<T> Queue<T> {
+    fn new() -> Self {
+        Queue { items: Vec::new() }
+    }
+
+    fn enqueue(&mut self, item: T) {
+        self.items.push(item);
+    }
+
+    fn dequeue(&mut self) -> Option<T> {
+        if self.items.is_empty() {
+            None
+        } else {
+            Some(self.items.remove(0))
+        }
+    }
+}
+```
+**练习 3: 泛型二叉搜索树**:
+
+实现一个简单的泛型二叉搜索树的插入功能。
+
+---
+
+## 📝 小结
+
+在本指南中，我们学习了：
+
+- ✅ **泛型的概念和价值**: 代码复用、类型安全、零成本抽象
+- ✅ **泛型函数**: 基础语法、多类型参数、约束
+- ✅ **泛型结构体**: 定义、实现方法、具体类型特化
+- ✅ **泛型枚举**: Option、Result、自定义枚举
+- ✅ **Const 泛型**: 编译时常量参数
+- ✅ **默认类型参数**: 简化常见用法
+- ✅ **泛型约束基础**: trait bounds、where 子句
+
+**下一步学习**:
+
+1. [02_trait_system.md](02_trait_system.md) - 深入学习 trait 系统
+2. [03\_关联类型指南.md](03_associated_types.md) - 学习关联类型和 GAT
+3. [05\_实战模式指南.md](05_practical_patterns.md) - 学习泛型设计模式
+
+---
+
+**文档元信息**:
+
+- 创建日期: 2025-10-22
+- 作者: Rust-Lang Project
+- 许可: MIT OR Apache-2.0
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

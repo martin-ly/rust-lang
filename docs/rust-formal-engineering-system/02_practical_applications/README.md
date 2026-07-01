@@ -50,7 +50,6 @@ fn memory_management() {
     let boxed: Box<i32> = Box::new(42);
 }
 ```
-
 ### 性能优化 {#性能优化}
 
 ```rust
@@ -75,7 +74,6 @@ fn simd_operations() {
     }
 }
 ```
-
 ---
 
 ## 与核心文档的关联 {#与核心文档的关联}
@@ -101,17 +99,10 @@ fn simd_operations() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

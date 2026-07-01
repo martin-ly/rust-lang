@@ -84,10 +84,10 @@
 ```text
 c04_generic/docs/
 ├── tier_01_foundations/          【✅ 完成】
-│   ├── 01_项目概览.md            600 行
-│   ├── 02_主索引导航.md          800 行
-│   ├── 03_术语表.md              900 行
-│   └── 04_常见问题.md            700 行
+│   ├── 01_project_overview.md            600 行
+│   ├── 02_navigation.md          800 行
+│   ├── 03_glossary.md              900 行
+│   └── 04_faq.md            700 行
 │   └─ 小计: 4 个文档，3000 行
 │
 ├── tier_02_guides/                【⏳ 待创建】
@@ -117,7 +117,6 @@ c04_generic/docs/
 ├── C04_RESTRUCTURING_PLAN_2025_10_22.md
 └── C04_FRAMEWORK_COMPLETION_2025_10_22.md (本报告)
 ```
-
 ### 完成进度
 
 | 阶段        | 内容        | 状态      | 完成度 |
@@ -269,24 +268,20 @@ C04 泛型编程模块在继承 C02 和 C03 成功经验的同时，展现了独
    - 关系网络 (Relationship Network)
    - 属性空间 (Property Space)
    - 推理规则 (Reasoning Rules)
-
 2. **最全面的对比矩阵**
    - 25+ 详细对比表格
    - 7 大技术领域全覆盖
    - 性能实测数据（100万次操作）
    - 技术选型决策矩阵
-
 3. **最深入的理论分析**
    - 类型理论基础（λ演算、System F）
    - 类型类 (Type Classes) 与 Rust trait 对应
    - Rust 类型系统完整分析
-
 4. **最详细的 Rust 1.92.0 支持**（兼容 Rust 1.90+ 特性）
    - GAT (Generic Associated Types) 完整解析
    - RPITIT 详细说明
    - async trait 支持
    - 版本演化完整历史
-
 5. **最丰富的可视化资源**
    - 10+ Mermaid 图表
    - ASCII 艺术架构图
@@ -301,10 +296,10 @@ C04 泛型编程模块在继承 C02 和 C03 成功经验的同时，展现了独
 
 | 文档               | 行数 | 状态 | 质量       |
 | :--- | :--- | :--- | :--- |
-| `01_项目概览.md`   | 600  | ✅   | ⭐⭐⭐⭐⭐ |
-| `02_主索引导航.md` | 800  | ✅   | ⭐⭐⭐⭐⭐ |
-| `03_术语表.md`     | 900  | ✅   | ⭐⭐⭐⭐⭐ |
-| `04_常见问题.md`   | 700  | ✅   | ⭐⭐⭐⭐⭐ |
+| `01_project_overview.md`   | 600  | ✅   | ⭐⭐⭐⭐⭐ |
+| `02_navigation.md` | 800  | ✅   | ⭐⭐⭐⭐⭐ |
+| `03_glossary.md`     | 900  | ✅   | ⭐⭐⭐⭐⭐ |
+| `04_faq.md`   | 700  | ✅   | ⭐⭐⭐⭐⭐ |
 
 ### Analysis 目录 (32 个文档)
 
@@ -384,27 +379,23 @@ C04 泛型编程模块在继承 C02 和 C03 成功经验的同时，展现了独
 
 创建 5 个实践指南文档，预计每个约 400 行：
 
-1. `01_泛型基础指南.md`
+1. `01_generics_basics.md`
    - 泛型函数、结构体、枚举
    - 类型参数和约束基础
    - 实践练习和案例
-
-2. `02_Trait系统指南.md`
+2. `02_trait_system.md`
    - trait 定义、实现、对象
    - trait 边界和标准库 trait
    - 实践练习和案例
-
-3. `03_关联类型指南.md`
+3. `03_associated_types.md`
    - 关联类型定义和使用
    - GAT (泛型关联类型)
    - 实践练习和案例
-
-4. `04_类型推断指南.md`
+4. `04_type_inference.md`
    - 类型推断机制
    - turbofish 语法
    - 实践技巧和案例
-
-5. `05_实战模式指南.md`
+5. `05_practical_patterns.md`
    - 设计模式和最佳实践
    - 工程建议和案例研究
    - 实践项目
@@ -415,27 +406,23 @@ C04 泛型编程模块在继承 C02 和 C03 成功经验的同时，展现了独
 
 创建 5 个完整参考文档，预计每个约 500 行：
 
-1. `01_泛型语法参考.md`
+1. `01_generics_syntax_reference.md`
    - 完整 BNF 语法
    - 类型规则和作用域规则
    - 语法树和解析规则
-
-2. `02_Trait系统参考.md`
+2. `02_trait_system_reference.md`
    - trait 完整 API 参考
    - 标准库 trait 完整列表
    - 方法索引和语义
-
-3. `03_边界约束参考.md`
+3. `03_trait_bounds_reference.md`
    - where 子句完整语法
    - HRTB 详细说明
    - 约束求解算法
-
-4. `04_关联类型参考.md`
+4. `04_associated_types_reference.md`
    - GAT 完整语法
    - 使用场景和限制
    - 演化历史
-
-5. `05_编译器行为参考.md`
+5. `05_compiler_behavior_reference.md`
    - 单态化详细过程
    - 类型擦除机制
    - 内联和优化策略
@@ -446,27 +433,23 @@ C04 泛型编程模块在继承 C02 和 C03 成功经验的同时，展现了独
 
 创建 5 个高级主题文档，预计每个约 500 行：
 
-1. `01_高级类型技巧.md`
+1. `01_advanced_type_techniques.md`
    - PhantomData 详解
    - 类型状态模式
    - 零大小类型
-
-2. `02_泛型与生命周期.md`
+2. `02_generics_and_lifetimes.md`
    - HRTB 深入
    - variance 详解
    - subtyping 机制
-
-3. `03_零成本抽象.md`
+3. `03_zero_cost_abstractions.md`
    - 性能分析和优化
    - 基准测试技巧
    - LLVM 优化
-
-4. `04_类型级编程.md`
+4. `04_type_level_programming.md`
    - 类型级计算
    - 类型安全 API
    - 编译时保证
-
-5. `05_设计模式进阶.md`
+5. `05_advanced_design_patterns.md`
    - 高级设计模式
    - 架构模式
    - 工程实践
@@ -490,23 +473,19 @@ C04 泛型编程模块在继承 C02 和 C03 成功经验的同时，展现了独
    - 清晰的 4-Tier 架构
    - 从基础到高级的完整路径
    - 适合不同学习阶段
-
 2. **丰富的学习资源**
    - 100+ 术语定义
    - 50+ FAQ 解答
    - 850+ 行代码示例
    - 25+ 对比矩阵
-
 3. **深度理论支撑**
    - 完整的知识图谱体系
    - 类型理论基础
    - Rust 类型系统深入分析
-
 4. **实用的技术参考**
    - 完整的 BNF 语法
    - API 参考手册
    - 技术选型指南
-
 5. **强大的可视化**
    - 10+ Mermaid 图表
    - ASCII 艺术图

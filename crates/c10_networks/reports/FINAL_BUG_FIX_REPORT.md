@@ -64,19 +64,15 @@
 1. **`src/protocol/http/mod.rs`**
    - 修复了 `HttpStatusCode::OK` 调用
    - 统一了状态码创建方式
-
 2. **`src/protocol/tcp/mod.rs`**
    - 修复了 `NetworkError::Performance` 引用
    - 改为使用 `NetworkError::Other`
-
 3. **`src/protocol/tcp/state.rs`**
    - 修复了状态机中的移动语义问题
    - 优化了状态转换逻辑
-
 4. **`src/protocol/websocket/handshake.rs`**
    - 清理了未使用的导入
    - 修复了未使用变量警告
-
 5. **`src/protocol/websocket/mod.rs`**
    - 清理了未使用的导入
 

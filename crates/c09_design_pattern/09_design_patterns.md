@@ -66,7 +66,6 @@ let sync_side = get_patterns_by_execution_model(ExecutionModel::Sync);
 // 混合：Proxy/Decorator/Observer/Repository 等
 let hybrid_side = get_patterns_by_execution_model(ExecutionModel::Hybrid);
 ```
-
 **设计影响**：
 
 - API 形态：`fn foo(&self) -> T` vs `async fn foo(&self) -> T`。
@@ -96,7 +95,6 @@ let hybrid_side = get_patterns_by_execution_model(ExecutionModel::Hybrid);
 ```text
 Factory<T> = { create() → T }
 ```
-
 **Rust 伪代码**：
 
 ```rust
@@ -142,7 +140,6 @@ fn client_code(factory: &dyn Factory) {
     println!("Operation: {}", product.operation());
 }
 ```
-
 **简要说明**：
 工厂模式通过抽象工厂接口，支持产品族的灵活扩展，符合开闭原则。
 
@@ -166,7 +163,6 @@ impl Factory for ConcreteFactory {
     fn create(&self) -> Box<dyn Product> { Box::new(ConcreteProduct) }
 }
 ```
-
 **简要说明**：
 工厂方法模式通过抽象工厂接口，支持产品族的灵活扩展。
 
@@ -190,7 +186,6 @@ impl ProductBuilder {
     fn build(self) -> Product { Product { part_a: self.a, part_b: self.b } }
 }
 ```
-
 **简要说明**：
 建造者模式适合构建步骤复杂且可变的对象。
 
@@ -212,7 +207,6 @@ impl Prototype for ConcretePrototype {}
 let p1 = ConcretePrototype { data: 42 };
 let p2 = p1.clone();
 ```
-
 **简要说明**：
 原型模式适合对象创建成本高或结构复杂的场景。
 
@@ -236,7 +230,6 @@ impl Singleton {
     }
 }
 ```
-
 **简要说明**：
 单例模式常用于全局配置、资源管理等场景。
 
@@ -287,7 +280,6 @@ impl NewInterface for Adapter {
     }
 }
 ```
-
 **简要说明**：
 适配器模式解决了接口不兼容的问题，提高了系统的可扩展性。
 
@@ -340,7 +332,6 @@ impl Abstraction for ConcreteAbstraction {
     }
 }
 ```
-
 **简要说明**：
 桥接模式通过组合关系替代继承关系，提高了系统的灵活性。
 
@@ -354,7 +345,6 @@ impl Abstraction for ConcreteAbstraction {
 ```text
 Component = { Leaf } ∪ { Composite(children: Vec<Component>) }
 ```
-
 **Rust 伪代码**：
 
 ```rust
@@ -403,7 +393,6 @@ impl Component for Composite {
     }
 }
 ```
-
 **简要说明**：
 组合模式统一了叶子节点和容器节点的处理方式。
 
@@ -459,7 +448,6 @@ impl Component for DecoratorB {
     }
 }
 ```
-
 **简要说明**：
 装饰器模式提供了比继承更灵活的扩展功能的方式。
 
@@ -514,7 +502,6 @@ impl Facade {
     }
 }
 ```
-
 **简要说明**：
 外观模式简化了复杂子系统的使用，降低了系统的耦合度。
 
@@ -575,7 +562,6 @@ impl FlyweightFactory {
     }
 }
 ```
-
 **简要说明**：
 享元模式通过共享内部状态减少了内存使用，提高了系统性能。
 
@@ -625,7 +611,6 @@ impl Subject for Proxy {
     }
 }
 ```
-
 **简要说明**：
 代理模式提供了对对象的访问控制，常用于远程代理、虚拟代理等场景。
 
@@ -695,7 +680,6 @@ impl Handler for ConcreteHandlerB {
     }
 }
 ```
-
 **简要说明**：
 责任链模式实现了请求的自动传递和处理。
 
@@ -759,7 +743,6 @@ impl Invoker {
     }
 }
 ```
-
 **简要说明**：
 命令模式将请求封装成对象，支持请求的排队、记录日志、撤销等操作。
 
@@ -833,7 +816,6 @@ impl Expression for AddExpression {
     }
 }
 ```
-
 **简要说明**：
 解释器模式适用于需要解释简单语言的场景。
 
@@ -907,7 +889,6 @@ impl Aggregate for ConcreteAggregate {
     }
 }
 ```
-
 **简要说明**：
 迭代器模式封装了集合的遍历逻辑，提供了统一的访问接口。
 
@@ -1003,7 +984,6 @@ impl Colleague for ConcreteColleagueA {
     }
 }
 ```
-
 **简要说明**：
 中介者模式降低了对象间的耦合度，简化了对象间的交互。
 
@@ -1079,7 +1059,6 @@ impl Caretaker {
     }
 }
 ```
-
 **简要说明**：
 备忘录模式实现了对象状态的保存和恢复功能。
 
@@ -1093,7 +1072,6 @@ impl Caretaker {
 ```text
 Subject = { observers: Vec<Observer> } × { notify() }
 ```
-
 **Rust 伪代码**：
 
 ```rust
@@ -1181,7 +1159,6 @@ impl Observer for ConcreteObserverB {
     }
 }
 ```
-
 **简要说明**：
 观察者模式实现了对象间的松耦合通信机制。
 
@@ -1241,7 +1218,6 @@ impl State for ConcreteStateB {
     }
 }
 ```
-
 **简要说明**：
 状态模式封装了状态转换逻辑，使状态变化更加清晰。
 
@@ -1305,7 +1281,6 @@ impl Strategy for ConcreteStrategyC {
     }
 }
 ```
-
 **简要说明**：
 策略模式封装了算法族，使算法可以独立于使用它的客户而变化。
 
@@ -1368,7 +1343,6 @@ impl AbstractClass for ConcreteClassB {
     }
 }
 ```
-
 **简要说明**：
 模板方法模式定义了算法的骨架，子类可以重定义算法的特定步骤。
 
@@ -1473,7 +1447,6 @@ impl ObjectStructure {
     }
 }
 ```
-
 **简要说明**：
 访问者模式将数据结构与数据操作分离，便于添加新的操作。
 
@@ -1576,7 +1549,6 @@ impl Proxy {
     }
 }
 ```
-
 **简要说明**：
 主动对象模式实现了异步方法调用，提高了系统的响应性。
 
@@ -1667,7 +1639,6 @@ impl LeaderFollower {
     }
 }
 ```
-
 **简要说明**：
 领导者-跟随者模式提高了事件处理的并发性能。
 
@@ -1788,7 +1759,6 @@ fn main() {
     thread::sleep(std::time::Duration::from_secs(10));
 }
 ```
-
 **简要说明**：
 生产者-消费者模式实现了线程间的安全通信。
 

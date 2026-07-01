@@ -37,7 +37,6 @@
     ↓
 代码实现与验证
 ```
-
 ### 研究笔记结构 {#研究笔记结构}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -75,7 +74,6 @@
 - 未解决的疑问
 - 进一步研究方向
 ```
-
 ### 证明验证工具 {#证明验证工具}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -103,7 +101,6 @@ fn double(x: i32) -> i32 {
     x * 2
 }
 ```
-
 ### 研究方法论示例 {#研究方法论示例}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -164,7 +161,6 @@ mod verification_tests {
     }
 }
 ```
-
 ### 类型系统研究示例 {#类型系统研究示例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -191,7 +187,6 @@ fn verify<'long: 'short>(long: &'long str, short: &'short str) {
     // let l: &'long str = short;  // Error: 'short 不 <: 'long
 }
 ```
-
 ### 所有权研究示例 {#所有权研究示例}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -236,7 +231,6 @@ fn borrowing_rules() {
     // let r4 = &data;  // Error: cannot borrow while mutable borrow active
 }
 ```
-
 ### 形式化规范写作 {#形式化规范写作}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -293,7 +287,6 @@ mod property_tests {
     }
 }
 ```
-
 ---
 
 ## 形式化方法 {#形式化方法}

@@ -26,7 +26,6 @@ struct MyStruct {
     field: i32,
 }
 ```
-
 ## 文档
 
 详细文档请参阅 [c11_macro_system](../c11_macro_system)。

@@ -43,7 +43,6 @@ fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
     // O(n log n) 适合大数据
 }
 ```
-
 **2. 时间/空间权衡**:
 
 | 算法         | 时间复杂度 | 空间复杂度 | 适用场景   |
@@ -68,8 +67,7 @@ fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
 4. 权衡时空复杂度
 5. 编写基准测试验证
 ```
-
-**相关**: [algorithm_index](tier_03_references/01_算法分类参考.md) | [algorithm_complexity](tier_02_guides/03_算法复杂度分析.md)
+**相关**: [algorithm_index](tier_03_references/01_algorithm_categories_reference.md) | [algorithm_complexity](tier_02_guides/03_algorithm_complexity_analysis.md)
 
 ---
 
@@ -110,7 +108,6 @@ fn example(n: usize) {
     }
 }
 ```
-
 **常见复杂度**:
 
 | 符号       | 名称     | 示例                   |
@@ -140,7 +137,6 @@ fn binary_search_recursive<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     // 递归深度 log n
 }
 ```
-
 **分析技巧**:
 
 - ✅ 忽略常数因子
@@ -203,7 +199,6 @@ async fn expensive_computation(x: i32) -> i32 {
     x * 2
 }
 ```
-
 **异步递归**:
 
 ```rust
@@ -224,7 +219,6 @@ async fn async_fibonacci(n: u64) -> u64 {
     }
 }
 ```
-
 **优势**:
 
 - 高效处理I/O密集型任务
@@ -266,7 +260,6 @@ fn benchmark_sort(c: &mut Criterion) {
 criterion_group!(benches, benchmark_sort);
 criterion_main!(benches);
 ```
-
 **2. 常见优化技巧**:
 
 ```rust
@@ -287,7 +280,6 @@ let result: Vec<_> = data.par_iter()
     .map(|&x| expensive_fn(x))
     .collect();
 ```
-
 **3. 算法层面优化**:
 
 ```rust
@@ -319,7 +311,6 @@ fn fib_optimal(n: u64) -> u64 {
     a
 }
 ```
-
 **4. 性能分析工具**:
 
 - **Criterion**: 精确基准测试
@@ -335,8 +326,7 @@ fn fib_optimal(n: u64) -> u64 {
 3. 优化 (改进算法/实现)
 4. 验证 (再次测量)
 ```
-
-**相关**: [性能优化实践](tier_02_guides/04_性能优化实践.md) | [算法性能参考](tier_03_references/04_算法性能参考.md)
+**相关**: [性能优化实践](tier_02_guides/04_performance_optimization_practice.md) | [算法性能参考](tier_03_references/04_algorithm_performance_reference.md)
 
 ---
 
@@ -391,7 +381,6 @@ let mut deque = VecDeque::new();
 deque.push_front(1);  // 头部插入 O(1)
 deque.push_back(2);   // 尾部插入 O(1)
 ```
-
 **自定义数据结构**:
 
 ```rust
@@ -411,7 +400,6 @@ fenwick.add(i, x);  // O(log n)
 let mut lru = LruCache::new(capacity);
 lru.get(&key);  // O(1)
 ```
-
 **选择建议**:
 
 1. **默认用Vec**: 大多数场景

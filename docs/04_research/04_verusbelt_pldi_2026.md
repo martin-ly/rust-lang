@@ -61,7 +61,6 @@ Rust 源码 + 规范
    │ ✅ / ❌ │  ── 证明通过或给出反例
    └────────┘
 ```
-
 Verus 的三种函数模式：
 
 | 模式 | 关键字 | 用途 | 运行时开销 |
@@ -131,7 +130,6 @@ VerusBelt 语义层次:
 │  (底层元理论)                         │
 └─────────────────────────────────────┘
 ```
-
 ### 3. 擦除定理 (Erasure Theorem) {#3-擦除定理-erasure-theorem}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -182,7 +180,6 @@ RustBelt (POPL 2018) ── 证明 Rust 所有权系统内存安全
       │
       └──► RefinedRust ── 精炼类型系统实现
 ```
-
 ### Verus 生态最新进展 (2025–2026) {#verus-生态最新进展-20252026}
 
 > **[来源: KVerus arXiv 2026; AutoVerus OOPSLA 2025; Vest USENIX Security 2025]** Verus 验证框架的周边工具链在 2025–2026 年快速扩展，降低了证明门槛并扩展了验证覆盖。
@@ -251,7 +248,6 @@ VerusBelt: A Semantic Foundation for Proof-Oriented Extensions to Rust.
 In Proceedings of the ACM SIGPLAN Conference on Programming Language
 Design and Implementation (PLDI 2026).
 ```
-
 **BibTeX**:
 
 ```bibtex
@@ -264,7 +260,6 @@ Design and Implementation (PLDI 2026).
   doi={10.1145/XXXXXX.XXXXXX}  % 待 PLDI 2026 正式出版后更新
 }
 ```
-
 **相关资源**:
 
 1. **Verus 项目主页**: <https://github.com/verus-lang/verus>

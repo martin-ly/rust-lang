@@ -101,7 +101,6 @@ let info = manager.get_info(pid)?;
 // 终止进程
 manager.kill(pid)?;
 ```
-
 ---
 
 ## 📋 常用 API {#常用-api}
@@ -144,7 +143,6 @@ let output = manager.read_stdout(pid).await?;
 // 带超时等待
 manager.wait_with_timeout(pid, Duration::from_secs(5)).await?;
 ```
-
 ### IPC 通信 {#ipc-通信}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -165,7 +163,6 @@ let memory = ipc.create_shared_memory("my_memory", 1024)?;
 // 创建消息队列
 let queue = ipc.create_message_queue("my_queue", 100)?;
 ```
-
 ### 同步原语 {#同步原语}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -186,7 +183,6 @@ let semaphore = sync.create_semaphore("my_semaphore", 5)?;
 // 创建读写锁
 let rwlock = sync.create_rwlock("my_rwlock")?;
 ```
-
 ---
 
 ## 🔧 配置选项 {#配置选项}
@@ -211,7 +207,6 @@ ProcessConfig {
     resource_limits: ResourceLimits, // 资源限制
 }
 ```
-
 ### 跨平台注意事项 {#跨平台注意事项}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -254,7 +249,6 @@ let manager = EnhancedPerformanceManager::new(config).await;
 // 执行优化
 let result = manager.optimize_memory().await;
 ```
-
 ---
 
 ## 🐛 错误处理 {#错误处理}
@@ -271,7 +265,6 @@ match manager.spawn(config) {
     Err(e) => println!("其他错误: {}", e),
 }
 ```
-
 ---
 
 ## 🚫 反例速查 {#反例速查}
@@ -288,7 +281,6 @@ match manager.spawn(config) {
 let mut child = Command::new("cat").arg("file").spawn()?;
 // 不调用 wait() 可能导致僵尸进程
 ```
-
 **原因**: 未 wait 时子进程可能变成僵尸。
 
 **修正**:
@@ -297,7 +289,6 @@ let mut child = Command::new("cat").arg("file").spawn()?;
 let status = child.wait()?;
 assert!(status.success());
 ```
-
 ---
 
 ### 反例 2: 在 Unix 信号处理中调用非 async-signal-safe 函数 {#反例-2-在-unix-信号处理中调用非-async-signal-safe-函数}
@@ -311,7 +302,6 @@ fn handler(_: i32) {
     println!("signal");  // ❌ 在信号处理中 unsafe
 }
 ```
-
 **原因**: 信号处理函数中只能调用 async-signal-safe 函数。
 
 **修正**: 仅设置原子标志，在主循环中处理；或使用 `signal-hook` 等库。
@@ -418,7 +408,6 @@ impl TaskScheduler {
     }
 }
 ```
-
 ### 场景 2: 安全沙箱执行 {#场景-2-安全沙箱执行}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -445,7 +434,6 @@ fn sandboxed_execute(program: &str, args: &[&str]) -> std::io::Result<std::proce
     Ok(output)
 }
 ```
-
 ### 场景 3: 进程监控与自动重启 {#场景-3-进程监控与自动重启}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -498,7 +486,6 @@ impl ProcessMonitor {
     }
 }
 ```
-
 ---
 
 ## 📐 形式化方法链接 {#形式化方法链接}
@@ -598,7 +585,6 @@ pub fn get_config() -> Option<&'static Config> {
 let phi = f64::consts::GOLDEN_RATIO;
 let gamma = f64::consts::EULER_GAMMA;
 ```
-
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)

@@ -71,11 +71,8 @@
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 > **创建日期**: 2025-11-15
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 
 ---
@@ -83,45 +80,33 @@
 ## 🎯 研究目标 {#研究目标}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究旨在分析 Rust 编译器的优化能力，评估不同优化级别和优化策略的效果，包括：
 
 1. **优化级别比较**：评估不同优化级别的效果
-
 2. **内联优化**：分析函数内联的影响
-
 3. **循环优化**：评估循环优化的效果
-
 4. **死代码消除**：分析死代码消除的效果
 
 ### 核心问题 {#核心问题}
 
 > **来源: [ACM](https://dl.acm.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Rust 编译器的优化能力如何？**
-
 2. **哪些优化对性能影响最大？**
-
 3. **如何编写编译器友好的代码？**
 
 ### 预期成果 {#预期成果}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 建立编译器优化评估方法
-
 - 识别关键优化机会
-
 - 提供代码优化最佳实践
 
 ---
@@ -129,7 +114,6 @@
 ## 形式化论证（与类型系统衔接） {#形式化论证与类型系统衔接}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def CO1（编译器优化保持性）**：设优化 $O$ 将程序 $P$ 变换为 $P'$。若 $\Gamma \vdash P : \tau \Rightarrow \Gamma \vdash P' : \tau$，则称 $O$ **保持类型**。
@@ -151,15 +135,12 @@
 ## 📚 理论基础 {#理论基础}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 相关概念 {#相关概念}
 
 > **来源: [ACM](https://dl.acm.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **编译器优化（Compiler Optimization）**：编译器在编译过程中对代码进行转换，以提高程序的执行效率或减少代码大小。
@@ -167,33 +148,23 @@
 **优化类型**：
 
 - **内联优化（Inlining）**：将函数调用替换为函数体
-
 - **循环优化（Loop Optimization）**：优化循环结构
-
 - **死代码消除（Dead Code Elimination）**：移除不可达代码
-
 - **常量折叠（Constant Folding）**：在编译时计算常量表达式
 
 #### rustc 优化选项（Rust 1.96+） {#rustc-优化选项rust-196}
 
 > **来源: [rustc Book – Optimization Levels](https://doc.rust-lang.org/rustc/codegen-options/index.html#optimization-level)**
-
 >
-
 > **来源: [rustc Book – LTO](https://doc.rust-lang.org/rustc/codegen-options/index.html#linker-plugin-lto)**
-
 >
-
 > **来源: [rustc Book – PGO](https://doc.rust-lang.org/rustc/profile-guided-optimization.html)**
 
 Rust 编译器提供以下核心优化手段：
 
 - **优化级别（`opt-level`）**：`0`（调试）、`1`、`2`（默认 release）、`3`（激进优化）、`s`/`z`（体积优化）。
-
 - **链接时优化（LTO）**：`lto = true`（全 LTO）或 `lto = "thin"`（更快但优化粒度较粗），可跨 crate 内联与消除死代码。
-
 - **配置文件引导优化（PGO）**：通过 `-C profile-generate` 收集运行时剖面，再用 `-C profile-use` 重新编译，提升分支预测与缓存命中率。
-
 - **内联（`#[inline]`）**：提示编译器内联小函数；`#[inline(always)]` 强制内联但可能增加代码体积；`#[inline(never)]` 用于调试或防止代码膨胀。
 
 > **注意**：优化不改变程序语义（由类型系统与 MIR 优化保证）；优化效果（速度、体积）需通过 Criterion 等基准测试量化。
@@ -201,17 +172,13 @@ Rust 编译器提供以下核心优化手段：
 ### 理论背景 {#理论背景}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **优化理论**：
 
 - **数据流分析**：分析数据在程序中的流动
-
 - **控制流分析**：分析程序的控制流
-
 - **别名分析**：分析内存别名关系
 
 ---
@@ -219,15 +186,12 @@ Rust 编译器提供以下核心优化手段：
 ## 🔬 实验设计 {#实验设计}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 优化级别比较 {#1-优化级别比较}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **测试目标**：比较不同优化级别的效果
@@ -235,19 +199,14 @@ Rust 编译器提供以下核心优化手段：
 **测试场景**：
 
 - `-O0` (无优化) vs `-O1` (基本优化)
-
 - `-O1` vs `-O2` (标准优化)
-
 - `-O2` vs `-O3` (最大优化)
-
 - `-Os` (优化大小) vs `-O2`
 
 ### 2. 内联优化分析 {#2-内联优化分析}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **测试目标**：分析函数内联的影响
@@ -255,9 +214,7 @@ Rust 编译器提供以下核心优化手段：
 **测试场景**：
 
 - 小函数内联效果
-
 - 递归函数内联限制
-
 - `#[inline]` 提示的效果
 
 ### 3. 循环优化分析 {#3-循环优化分析}
@@ -269,9 +226,7 @@ Rust 编译器提供以下核心优化手段：
 **测试场景**：
 
 - 循环展开（Loop Unrolling）
-
 - 循环向量化（Loop Vectorization）
-
 - 循环不变代码外提（Loop Invariant Code Motion）
 
 ---
@@ -279,35 +234,23 @@ Rust 编译器提供以下核心优化手段：
 ### Rust 1.96+ / Edition 2024 工具链 {#rust-196-edition-2024-工具链}
 
 > **来源: [rustc Book](https://doc.rust-lang.org/rustc/)**
-
 >
-
 > **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 
 - **工具链版本**：`rustup update stable`（建议 `1.96.0+`）；`edition = "2024"`。
-
 - **优化级别切换**：
-
   - `cargo build --release`（默认 `opt-level = 2`）
-
   - `cargo rustc --release -- -C opt-level=3`
-
   - `cargo rustc --release -- -C opt-level=s` / `-C opt-level=z`（体积优化）
-
 - **LTO**：在 `Cargo.toml` 中设置 `lto = true` / `lto = "thin"`；或 `cargo rustc --release -- -C lto=thin`。
-
 - **PGO**：`rustc -C profile-generate` → 运行工作负载 → `rustc -C profile-use`；详见 [rustc PGO Guide](https://doc.rust-lang.org/rustc/profile-guided-optimization.html)。
-
 - **内联控制**：`#[inline]`、`#[inline(always)]`、`#[inline(never)]`；参考 [Rust Reference – The `inline` attribute](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute)。
-
 - **代码体积分析**：`cargo install cargo-bloat && cargo bloat --release -n 50`。
-
 - **可重复性**：固定 `rust-toolchain.toml`、提交 `Cargo.lock`、记录 `opt-level` / `lto` / `codegen-units` 配置。
 
 ## 💻 代码示例 {#代码示例}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 示例 1：内联优化测试 {#示例-1内联优化测试}
@@ -315,7 +258,6 @@ Rust 编译器提供以下核心优化手段：
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
-
 #[inline]
 
 fn add(a: i32, b: i32) -> i32 {
@@ -323,7 +265,6 @@ fn add(a: i32, b: i32) -> i32 {
     a + b
 
 }
-
 
 
 #[inline(never)]
@@ -335,7 +276,6 @@ fn multiply(a: i32, b: i32) -> i32 {
 }
 
 
-
 fn test_inlining() {
 
     let result1 = add(2, 3);  // 可能被内联
@@ -343,15 +283,11 @@ fn test_inlining() {
     let result2 = multiply(2, 3);  // 不会被内联
 
 }
-
 ```
-
 **优化效果**：
 
 - `#[inline]` 提示编译器内联函数
-
 - `#[inline(never)]` 禁止内联
-
 - 内联可以减少函数调用开销
 
 ### 示例 2：循环优化测试 {#示例-2循环优化测试}
@@ -359,7 +295,6 @@ fn test_inlining() {
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
-
 fn loop_optimization() {
 
     let mut sum = 0;
@@ -373,15 +308,11 @@ fn loop_optimization() {
     // 编译器可能优化为: sum = 499500
 
 }
-
 ```
-
 **优化效果**：
 
 - 循环展开：减少循环开销
-
 - 循环向量化：使用 SIMD 指令
-
 - 常量折叠：编译时计算常量表达式
 
 ### 示例 3：死代码消除测试 {#示例-3死代码消除测试}
@@ -389,7 +320,6 @@ fn loop_optimization() {
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
-
 fn dead_code_elimination() {
 
     let x = 5;
@@ -403,13 +333,10 @@ fn dead_code_elimination() {
     // 编译器会消除 if false 分支
 
 }
-
 ```
-
 ## 💻 代码示例（完整基准测试） {#代码示例完整基准测试}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 以下为含 Criterion 的完整基准测试代码，可与上方简化示例对照；运行 `cargo bench` 可复现「实验结果」中的示例数据。
@@ -419,7 +346,6 @@ fn dead_code_elimination() {
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
-
 // 测试函数
 
 fn compute_sum(n: u32) -> u64 {
@@ -437,11 +363,9 @@ fn compute_sum(n: u32) -> u64 {
 }
 
 
-
 // 基准测试
 
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-
 
 
 fn bench_compute_sum(c: &mut Criterion) {
@@ -455,19 +379,15 @@ fn bench_compute_sum(c: &mut Criterion) {
 }
 
 
-
 criterion_group!(benches, bench_compute_sum);
 
 criterion_main!(benches);
-
 ```
-
 ### 示例 2：内联优化 {#示例-2内联优化}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
-
 // 不使用内联
 
 fn add(a: i32, b: i32) -> i32 {
@@ -475,7 +395,6 @@ fn add(a: i32, b: i32) -> i32 {
     a + b
 
 }
-
 
 
 // 使用内联提示
@@ -489,7 +408,6 @@ fn add_inline(a: i32, b: i32) -> i32 {
 }
 
 
-
 // 强制内联
 
 #[inline(always)]
@@ -501,17 +419,14 @@ fn add_always_inline(a: i32, b: i32) -> i32 {
 }
 
 
-
 // 基准测试
 
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 
-
 fn bench_add(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("add");
-
 
 
     group.bench_function("no_inline", |b| {
@@ -521,13 +436,11 @@ fn bench_add(c: &mut Criterion) {
     });
 
 
-
     group.bench_function("inline", |b| {
 
         b.iter(|| add_inline(black_box(10), black_box(20)))
 
     });
-
 
 
     group.bench_function("always_inline", |b| {
@@ -537,25 +450,20 @@ fn bench_add(c: &mut Criterion) {
     });
 
 
-
     group.finish();
 
 }
 
 
-
 criterion_group!(benches, bench_add);
 
 criterion_main!(benches);
-
 ```
-
 ### 示例 3：循环优化 {#示例-3循环优化}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
-
 // 未优化的循环
 
 fn sum_array_unoptimized(arr: &[i32]) -> i32 {
@@ -573,7 +481,6 @@ fn sum_array_unoptimized(arr: &[i32]) -> i32 {
 }
 
 
-
 // 优化的循环（使用迭代器）
 
 fn sum_array_optimized(arr: &[i32]) -> i32 {
@@ -581,7 +488,6 @@ fn sum_array_optimized(arr: &[i32]) -> i32 {
     arr.iter().sum()
 
 }
-
 
 
 // 手动的循环展开
@@ -595,13 +501,11 @@ fn sum_array_unrolled(arr: &[i32]) -> i32 {
     let remainder = chunks.remainder();
 
 
-
     for chunk in chunks {
 
         sum += chunk[0] + chunk[1] + chunk[2] + chunk[3];
 
     }
-
 
 
     for &val in remainder {
@@ -611,19 +515,15 @@ fn sum_array_unrolled(arr: &[i32]) -> i32 {
     }
 
 
-
     sum
 
 }
-
 ```
-
 ### 示例 4：死代码消除 {#示例-4死代码消除}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
-
 // 死代码示例
 
 fn dead_code_example() {
@@ -635,13 +535,11 @@ fn dead_code_example() {
     let _unused = x + y;  // 可能被消除
 
 
-
     if false {
 
         println!("这段代码永远不会执行");  // 会被消除
 
     }
-
 
 
     #[allow(dead_code)]
@@ -653,15 +551,12 @@ fn dead_code_example() {
     }
 
 }
-
 ```
-
 ---
 
 ## 📊 实验结果 {#实验结果}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 优化级别效果 {#优化级别效果}
@@ -671,25 +566,17 @@ fn dead_code_example() {
 **初步结果**（基于测试环境）：
 
 | 优化级别 | 执行时间 (ns) | 代码大小 (KB) |
-
 | :--- | :--- | :--- |
-
 | -O0 | 1000 | 50 |
-
 | -O1 | 500 | 60 |
-
 | -O2 | 200 | 70 |
-
 | -O3 | 180 | 80 |
-
 | -Os | 250 | 40 |
 
 **分析**：
 
 - `-O2` 是性能和代码大小的良好平衡
-
 - `-O3` 可能带来额外性能提升，但代码更大
-
 - `-Os` 优化代码大小，但可能牺牲性能
 
 ### 内联优化效果 {#内联优化效果}
@@ -699,21 +586,15 @@ fn dead_code_example() {
 **初步结果**：
 
 | 内联策略 | 执行时间 (ns) | 代码大小 (KB) |
-
 | :--- | :--- | :--- |
-
 | 无内联 | 100 | 10 |
-
 | `#[inline]` | 50 | 15 |
-
 | `#[inline(always)]` | 45 | 20 |
 
 **分析**：
 
 - 内联可以显著提升性能
-
 - 但会增加代码大小
-
 - 需要权衡性能和代码大小
 
 ### 结果分析模板 {#结果分析模板}
@@ -723,37 +604,23 @@ fn dead_code_example() {
 将 `cargo bench`（-O0/-O1/-O2/-O3/-Os）与 `cargo bloat` 的产出填入下表：
 
 | 类别 | 指标 | 实测值 | 单位 | 备注 |
-
 | :--- | :--- | :--- | :--- | :--- |
-
 | 优化级别 | -O0 执行时间  | **\_** | ns | 基准 |
-
 | 优化级别 | -O2 执行时间     | **\_** | ns   | 推荐          |
-
 | 优化级别 | -O3 执行时间     | **\_** | ns   | 对比 -O2      |
-
 | 优化级别 | -Os 二进制大小   | **\_** | KB   | 对比 -O2      |
-
 | 内联  | `#[inline]` 收益 | **\_** | %    | 相对无 inline |
-
 | 死代码 | 消除后大小 | **\_** | KB   | cargo bloat   |
 
 **示例填写**（典型 x86_64、Rust 1.96+、compute_sum(1000)）：
 
 | 类别 | 指标 | 示例值 | 单位 | 备注 |
-
 | :--- | :--- | :--- | :--- | :--- |
-
 | 优化级别 | -O0 执行时间 | 1200 | ns   | 基准          |
-
 | 优化级别 | -O2 执行时间     | 180  | ns   | 推荐，约 6.7× 加速 |
-
 | 优化级别 | -O3 执行时间     | 165  | ns   | 略优于 -O2     |
-
 | 优化级别 | -Os 二进制大小   | 42   | KB   | 比 -O2 小约 40% |
-
 | 内联  | `#[inline]` 收益 | 35   | %    | add 小函数内联 |
-
 | 死代码 | 消除后大小 | 38   | KB   | 移除未使用符号 |
 
 **结论填写**：说明 -O2 是否满足多数场景；内联与循环优化的取舍；若使用 Rust 1.96+，可注明 LTO、codegen-units 的影响。
@@ -763,7 +630,6 @@ fn dead_code_example() {
 ## 📋 数据收集执行指南 {#数据收集执行指南}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 环境要求 {#环境要求}
@@ -771,7 +637,6 @@ fn dead_code_example() {
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - **Rust**: 1.96.0+；**cargo-bloat**：`cargo install cargo-bloat`；**Criterion**：工作区已配置
-
 - 建议关掉无关后台、固定 CPU 频率，多次运行取中位数
 
 ### 执行步骤 {#执行步骤}
@@ -779,11 +644,8 @@ fn dead_code_example() {
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 1. **优化级别**：在 `Cargo.toml` 或 `cargo rustc -- -C opt-level=0|1|2|3` 下跑 `cargo bench`，记录 `compute_sum`、`add_*` 等均值。
-
 2. **代码大小**：`cargo build --release` 后 `cargo bloat -n 50 --release`，记录 `.text` 与 top 符号。
-
 3. **内联/循环**：用 `#[inline]`/`#[inline(never)]` 做对照 bench；循环测试用 `iter().sum()` vs 手写循环 vs `chunks_exact`。
-
 4. **留存**：将 `target/criterion/` 的 `estimates.json` 或主要指标录入「结果分析模板」。
 
 ---
@@ -791,7 +653,6 @@ fn dead_code_example() {
 ## 📐 优化建议与工具改进 {#优化建议与工具改进}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 优化建议 {#优化建议}
@@ -799,29 +660,22 @@ fn dead_code_example() {
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - **发布构建**：默认 `opt-level = 2`；对延迟敏感的可试 `opt-level = 3`，配合 `lto = "thin"` 或 `"fat"`。
-
 - **内联**：热路径小函数加 `#[inline]`；避免 `#[inline(always)]` 导致代码膨胀。
-
 - **死代码**：用 `cargo bloat` 定位未使用符号；`--release` 下 `strip = true` 可进一步减小体积。
-
 - **Rust 1.96+**：关注 codegen 与 LTO 的变更，重跑基准以更新基线。
 
 ### 工具改进 {#工具改进}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 - **Compiler Explorer (godbolt.org)**：对比 `opt-level`、`-C target-cpu` 的汇编，验证内联与向量化。
-
 - **cargo-bloat**：定期跑以发现新增膨胀；可与 `—crates` 结合按 crate 分析。
-
 - **opt-report**：`-C llvm-args=-opt-report` 可辅助理解 LLVM 优化决策（若需深入）。
 
 ### 优化报告 {#优化报告}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 按「结果分析模板」+ 各 `opt-level` 的 bench 曲线、bloat 列表，可形成编译器优化报告；建议包含「推荐 profile」「内联与大小权衡」「与 1.96+ 的兼容性」三部分。
@@ -831,39 +685,31 @@ fn dead_code_example() {
 ## 🔗 系统集成与实际应用 {#系统集成与实际应用}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 与类型系统的集成 {#与类型系统的集成}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **类型系统基础**：见 [10_type_system_foundations.md](../type_theory/10_type_system_foundations.md)。类型与单态化直接影响内联与死代码消除；泛型与 `impl Trait` 的 codegen 可在此验证。
-
 - **Trait 系统**：见 [10_trait_system_formalization.md](../type_theory/10_trait_system_formalization.md)。动态分发 (`dyn`) vs 静态分发对 `#[inline]` 与优化级别敏感，可纳入对照实验。
 
 ### 与实验研究的集成 {#与实验研究的集成}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **性能基准测试**：见 [10_performance_benchmarks.md](10_performance_benchmarks.md)。同一 `cargo bench` 流程下，可切换 `opt-level`、`codegen-units` 做 A/B 比较。
-
 - **内存分析**：见 [10_memory_analysis.md](10_memory_analysis.md)。`opt-level` 影响内联与栈使用，分析内存时需固定编译选项。
 
 ### 实际应用案例 {#实际应用案例}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **库作者**：提供 `opt-level=2` 与 `lto` 的推荐配置；对热点路径标注 `#[inline]` 并附 bench。
-
 - **嵌入式**：`-Os` + `panic = "abort"` + `strip` 控制体积；用 bloat 追踪 `no_std` 依赖的 `.text`。
-
 - **Rust 1.96+**：关注状态机 codegen、`asm!` 的 `cfg` 等，在关键 crate 上重跑优化基准。
 
 ---
@@ -871,49 +717,36 @@ fn dead_code_example() {
 ## 📖 参考文献 {#参考文献}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 学术论文 {#学术论文}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **"LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation"**
-
    - 作者: Chris Lattner, Vikram Adve
-
    - 摘要: LLVM 编译器框架
 
 ### 官方文档 {#官方文档}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Rust 编译器优化](https://doc.rust-lang.org/rustc/codegen-options/index.html#optimization-level)
-
 - [LLVM 优化文档](https://llvm.org/docs/Passes.html)
-
 - [rustc Book](https://doc.rust-lang.org/rustc/) - Rust 编译器官方文档（优化级别、LTO、PGO）
-
 - [The Rust Performance Book](https://nnethercote.github.io/perf-book/) - Rust 性能优化权威指南
-
 - [Rust Reference – The `inline` attribute](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute) - 内联控制参考
-
 - [Cargo Reference – Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) - Cargo 构建配置
-
 - [Compiler Explorer](https://godbolt.org/) - 在线对比汇编输出
 
 ### 工具资源 {#工具资源}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Cargo 优化选项](https://doc.rust-lang.org/cargo/reference/profiles.html)
-
 - [Compiler Explorer](https://godbolt.org/) - 在线编译器探索工具
 
 ---
@@ -929,9 +762,7 @@ fn dead_code_example() {
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -943,15 +774,10 @@ fn dead_code_example() {
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -959,17 +785,13 @@ fn dead_code_example() {
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - Rust 1.94 特性速查
-
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -981,9 +803,7 @@ fn dead_code_example() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -999,19 +819,12 @@ fn dead_code_example() {
 ## 权威来源对照表 {#权威来源对照表}
 
 | 概念/方法 | 权威来源 URL | 章节/要点 |
-
 | :--- | :--- | :--- |
-
 | 优化级别 | [rustc Book – optimization-level](https://doc.rust-lang.org/rustc/codegen-options/index.html#optimization-level) | `0`/`1`/`2`/`3`/`s`/`z` |
-
 | 链接时优化 LTO | [rustc Book – linker-plugin-lto](https://doc.rust-lang.org/rustc/codegen-options/index.html#linker-plugin-lto) | `lto = true` / `lto = "thin"` |
-
 | 配置文件引导优化 PGO | [rustc Book – PGO](https://doc.rust-lang.org/rustc/profile-guided-optimization.html) | `profile-generate` / `profile-use` |
-
 | 内联属性 | [Rust Reference – The `inline` attribute](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute) | `#[inline]` / `#[inline(always)]` / `#[inline(never)]` |
-
 | Cargo Profile | [Cargo Reference – Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) | `opt-level`、`lto`、`codegen-units`、`strip` |
-
 | 性能分析 | [The Rust Performance Book – Profiling](https://nnethercote.github.io/perf-book/profiling.html) | `perf`、`flamegraph`、`cachegrind` |
 
 ---
@@ -1019,33 +832,19 @@ fn dead_code_example() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
-
 > **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
-
 > **来源: [LLVM Documentation](https://llvm.org/docs/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
-
 > **[来源: Criterion.rs Documentation]**
-
 > **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
-
 > **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 
 ---

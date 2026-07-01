@@ -56,7 +56,6 @@
     temp_vec
 }
 ```
-
 **解析**：`vec!` 是 Rust 标准库中的**声明宏**（declarative macro），使用 `macro_rules!` 定义。
 
 **声明宏（Macro）的核心特征**：
@@ -102,7 +101,6 @@ fn main() {
     println!("{}", sum!());
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -112,7 +110,6 @@ fn main() {
 6
 0
 ```
-
 **解析**：`$($x:expr),*` 是**重复模式**（repetition pattern）。
 
 | 重复运算符 | 含义 | 最少匹配 |
@@ -128,7 +125,6 @@ fn main() {
 // $(...);*  → 分号分隔
 // $(...)*   → 无分隔符
 ```
-
 **展开过程**（`sum!(1, 2, 3)`）：
 
 ```rust,compile_fail
@@ -140,7 +136,6 @@ fn main() {
     temp
 }
 ```
-
 **注意**：`sum!()` 匹配零次，展开为 `temp = 0`，返回 0。
 
 **知识点**：重复模式是声明宏（Declarative Macro）最强大的特性，允许处理任意数量的参数。分隔符的选择影响宏的调用语法。[→ 宏系统详解](04_macros.md)
@@ -166,7 +161,6 @@ fn main() {
     let x = using_a!(println!("{}", a));
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -185,7 +179,6 @@ fn main() {
     println!("{}", a);    // ❌ 等一下——这里的 a 是哪个？
 }
 ```
-
 实际上输出是 `outer`。这是因为 Rust 的卫生性规则：**宏参数中使用的标识符在宏定义处解析**。
 
 但等一下，这个例子实际上是复杂的。让我澄清：
@@ -198,7 +191,6 @@ fn main() {
 #define SWAP(a, b) { int temp = a; a = b; b = temp; }
 // C 中：SWAP(x, temp) 会导致变量名冲突！
 ```
-
 Rust 的卫生性避免了这种经典宏陷阱。
 
 **知识点**：卫生性是 Rust 宏相对于 C 预处理器的关键优势，但理解"哪些标识符在何处解析"对调试宏仍然重要。[→ 宏系统详解](04_macros.md)
@@ -224,7 +216,6 @@ fn main() {
     println!("{:?}", p1 == p2);
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -250,7 +241,6 @@ impl PartialEq for Point {
     }
 }
 ```
-
 **derive 的限制**：
 
 | 限制 | 说明 |
@@ -280,7 +270,6 @@ fn main() {
     println!("{}", add(1, 2));
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -308,7 +297,6 @@ fn add(a: i32, b: i32) -> i32 {
     result
 }
 ```
-
 **属性宏 vs 函数宏**：
 
 - 属性宏：**修改**已有 AST 节点（函数、结构体（Struct）等）
@@ -337,7 +325,6 @@ fn main() {
     print_expr!({ let x = 5; x * 2 });
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -349,7 +336,6 @@ Value: 3
 Expression: { let x = 5 ; x * 2 }
 Value: 10
 ```
-
 **解析**：`$e:expr` 匹配**完整表达式**，而 `$e:tt`（token tree）匹配任意单个 token 树。
 
 **Fragment Specifier 速查**：
@@ -394,7 +380,6 @@ fn main() {
     println!("{}", count!(a b c d e));
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -414,7 +399,6 @@ count!(a b c d e)
 → 1 + 1 + 1 + 1 + 1 + 0
 → 5
 ```
-
 **递归限制**：
 
 Rust 编译器对宏递归深度有上限（默认 128）。超过会报错：
@@ -422,13 +406,11 @@ Rust 编译器对宏递归深度有上限（默认 128）。超过会报错：
 ```
 recursion limit reached while expanding macro
 ```
-
 可通过属性增加限制：
 
 ```rust
 #![recursion_limit = "256"]
 ```
-
 **尾递归优化**：宏展开没有尾递归优化，每次递归都会增加展开深度。
 
 **知识点**：递归宏是实现编译期计算（如类型列表长度、位掩码生成）的强大工具，但受限于编译器的递归深度。[→ 宏系统详解](04_macros.md)
@@ -448,7 +430,6 @@ fn main() {
     println!("{}", concat!("Line: ", line!()));
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -459,7 +440,6 @@ fn main() {
 Hello World
 Line: 8
 ```
-
 **解析**：
 
 | 宏（Macro） | 输入 | 输出 | 返回类型 |
@@ -483,7 +463,6 @@ macro_rules! make_fn {
 
 make_fn!(foo); // 生成 fn foo() { ... }
 ```
-
 **知识点**：内置宏（built-in macros）是 Rust 编译器提供的特殊宏，在标准库中声明但实际由编译器直接处理。[→ 宏系统详解](04_macros.md)
 
 </details>
@@ -504,7 +483,6 @@ fn main() {
     println!("{:?}", arr);
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -516,7 +494,6 @@ fn main() {
 // build_array!(1, 2, 3) 展开为：
 [1, 2, 3]
 ```
-
 **分隔符匹配的陷阱**：
 
 ```rust
@@ -527,7 +504,6 @@ macro_rules! bad {
 // bad!(1, 2, 3) 展开为：
 // 1 2 3  // 语法错误！
 ```
-
 **正确做法**：
 
 ```rust
@@ -536,7 +512,6 @@ macro_rules! good {
     ($($x:expr);*) => { [$( $x ),*] }; // ✅ 也支持分号分隔的调用
 }
 ```
-
 **注意**：`$(...),*` 在匹配时允许**末尾逗号**（trailing comma），但展开时不会生成末尾逗号。
 
 **知识点**：分隔符在宏定义和展开中必须一致。常见的错误是匹配时用了逗号分隔，但展开时忘了添加分隔符。[→ 宏系统详解](04_macros.md)
@@ -564,7 +539,6 @@ mod inner {
 
 fn main() {}
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -583,7 +557,6 @@ macro_rules! use_std {
     };
 }
 ```
-
 或使用 `$crate`（更 robust）：
 
 ```rust
@@ -593,7 +566,6 @@ macro_rules! make_vec {
     };
 }
 ```
-
 **`$crate` 的作用**：指向定义宏的 crate，避免路径解析歧义。
 
 **最佳实践**：

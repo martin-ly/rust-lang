@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
-
 > **文档目的**: 汇总项目中引用的所有权威来源，确保内容的准确性和可追溯性
 > **更新日期**: 2026-05-12
 > **当前目标版本**: Rust 1.96.0+ (Edition 2024)
@@ -74,7 +73,6 @@
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
 > "Rust 1.94 adds `array_windows`, an iterating method for slices. It works just like `windows` but with a constant length, so the iterator items are `&[T; N]` rather than dynamically-sized `&[T]`. In many cases, the window length may even be inferred by how the iterator is used!"
 >
 > —— **The Rust Programming Language Blog**, 2026-03-05
@@ -88,7 +86,6 @@ fn has_abba(s: &str) -> bool {
         .any(|[a1, b1, b2, a2]| (a1 != b1) && (a1 == a2) && (b1 == b2))
 }
 ```
-
 #### 2. LazyCell/LazyLock API稳定化 {#2-lazycelllazylock-api稳定化}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -120,7 +117,6 @@ fn has_abba(s: &str) -> bool {
 > "AVX-512 FP16 is supported by Intel Xeon Scalable server CPUs since Sapphire Rapids and will be supported on the AMD side with upcoming Zen 6 processors."
 >
 > —— **Phoronix**, 2026-03-05
-
 > "AMD's Zen 6 would support AVX-512 in some fashion... recent patches submitted for the GNU Assembler (Gas)... confirms the new architecture for everything Zen 5 supports, as well as new instruction set extensions: AVX512_BMM, AVX_NE_CONVERT, AVX_IFMA, AVX_VNNI_INT8, and **AVX512_FP16**."
 >
 > —— **HotHardware**, 2025-11-10
@@ -130,7 +126,6 @@ fn has_abba(s: &str) -> bool {
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
 > "Cargo now parses TOML v1.1 for manifests and configuration files. Changes in TOML 1.1 include inline tables across multiple lines and with trailing commas, `\xHH` and `\e` string escape characters, and optional seconds in times."
 >
 > —— **The Rust Programming Language Blog**, 2026-03-05
@@ -157,7 +152,6 @@ fn has_abba(s: &str) -> bool {
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
 > "We are pleased to announce that our paper 'Miri: Practical Undefined Behavior Detection for Rust' has been accepted at **POPL 2026**. Miri has come a long way since its first public release in 2017."
 >
 > —— **Ralf Jung, ETH Zurich Programming Languages Group**, 2025-12-23
@@ -206,7 +200,6 @@ fn has_abba(s: &str) -> bool {
 ### gen关键字权威说明 {#gen关键字权威说明}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > "`gen` is a reserved keyword... `gen` blocks will provide a way to make it easier to write certain kinds of iterators. Reserving the keyword now will make it easier to stabilize `gen` blocks before the next edition."
 >
 > —— **The Rust Edition Guide**, <https://doc.rust-lang.org/edition-guide/rust-2024/gen-keyword.html>
@@ -247,7 +240,6 @@ Cargo：
 ### 功能扩展 (2023-2026) {#功能扩展-2023-2026}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > "系统调用模拟（Shims）：大幅扩展了对 Windows、Linux、macOS 及 Android 等平台的 API 支持；新增了对 Intel AVX-512 等硬件指令集的模拟。"
 >
 > —— **Ralf Jung博客**, 2025-12-22
@@ -255,7 +247,6 @@ Cargo：
 ### 并发与性能改进 {#并发与性能改进}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > "更新至 **C++20 并发语义**，引入了全非确定性调度器。"
 >
 > "**GenMC 集成**：实验性支持结合 GenMC 进行模型检查，以穷举并发程序的执行状态。"
@@ -288,7 +279,6 @@ Cargo：
   doi={10.1145/3735592}
 }
 ```
-
 ---
 
 ## 大型项目迁移案例 {#大型项目迁移案例}
@@ -298,7 +288,6 @@ Cargo：
 ### Rust 2024 Edition迁移实践 {#rust-2024-edition迁移实践}
 >
 > **[来源: [crates.io](https://crates.io/)]**
-
 > "The workspace has close to 400 crates, and more than 1500 rust files... We tend to upgrade very soon after new toolchains are released, and often new language features give us new abilities and new lints help us find latent bugs."
 >
 > —— **Code and Bitters**, 2025-02-06
@@ -329,7 +318,6 @@ Cargo：
 ```
 [作者]. [标题]. In [会议] [年份]. DOI:[doi]
 ```
-
 ### 官方文档引用 {#官方文档引用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -337,7 +325,6 @@ Cargo：
 ```
 [文档名称]. [URL]. [访问日期]
 ```
-
 ### 博客文章引用 {#博客文章引用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -345,7 +332,6 @@ Cargo：
 ```
 [作者]. [标题]. [博客名称], [日期]. [URL]
 ```
-
 ---
 
 ## 验证清单 {#验证清单}
@@ -390,19 +376,12 @@ Cargo：
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

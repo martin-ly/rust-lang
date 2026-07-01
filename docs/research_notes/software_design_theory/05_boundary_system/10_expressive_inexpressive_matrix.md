@@ -1,35 +1,22 @@
 # 充分表达 vs 非充分表达边界矩阵 {#充分表达-vs-非充分表达边界矩阵}
 
 > **概念族**: 软件设计 / 边界系统
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-12
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
-
 > **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/05_boundary_system/` 迁回，正在按 [Rustonomicon](https://doc.rust-lang.org/nomicon/)、[Rust Reference – Unsafe](https://doc.rust-lang.org/reference/unsafe-blocks.html)、[Ferrocene Language Specification](https://spec.ferrocene.dev/) 等权威来源升级。
-
 >
-
 > **权威来源**: [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Ferrocene Language Specification](https://spec.ferrocene.dev/) | [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ## 📑 目录 {#目录}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [充分表达 vs 非充分表达边界矩阵 {#充分表达-vs-非充分表达边界矩阵}](#充分表达-vs-非充分表达边界矩阵-充分表达-vs-非充分表达边界矩阵)
@@ -63,11 +50,8 @@
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 > **创建日期**: 2026-02-12
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
 
 ---
@@ -75,7 +59,6 @@
 ## 形式化定义与公理 {#形式化定义与公理}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def 1.1（表达边界）**:
@@ -85,9 +68,7 @@
 定义表达边界函数 $\mathit{ExprB}(P) \in \{\mathrm{Same},\, \mathrm{Approx},\, \mathrm{NoExpr}\}$：
 
 - **等价表达**：$\mathit{ExprB}(P) = \mathrm{Same}$ 当且仅当 $P_{\mathrm{Rust}}$ 与 $P_{\mathrm{OOP}}$ 语义等价（无信息损失、实现路径自然）
-
 - **近似表达**：$\mathit{ExprB}(P) = \mathrm{Approx}$ 当且仅当 $P_{\mathrm{Rust}}$ 可实现核心意图，但实现方式或约束不同，有语义偏移
-
 - **不可表达**：$\mathit{ExprB}(P) = \mathrm{NoExpr}$ 当且仅当 $P_{\mathrm{Rust}}$ 无法表达或需显著变形
 
 **Def 1.2（语义等价）**:
@@ -161,17 +142,12 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 ## 反例：违反表达边界 {#反例违反表达边界}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 反例 | 后果 | 论证 |
-
 | :--- | :--- | :--- |
-
 | 在 Rust 中实现经典多继承菱形 | 无法表达；无类继承 | 由 Axiom EIM1、定理 EIM-T2 |
-
 | 假设 `dyn Trait` 可向下转型 | 编译错误；无内置反射 | 由 Axiom EIM1 |
-
 | 用 `static mut` 实现 Singleton 且多线程 | UB；违反 Safe 边界 | 见 [safe_unsafe_matrix](10_safe_unsafe_matrix.md) |
 
 ---
@@ -179,17 +155,12 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 ## 定义（非形式化对照） {#定义非形式化对照}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 分类 | 定义 |
-
 | :--- | :--- |
-
 | **等价表达** | 与 GoF/OOP 语义完全等价，无信息损失 |
-
 | **近似表达** | 可实现核心意图，但实现方式或约束不同 |
-
 | **不可表达** | 无法在 Rust 中表达或需显著变形 |
 
 ---
@@ -197,89 +168,56 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 ## 设计模式 × 表达边界 {#设计模式-表达边界}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 创建型（5） {#创建型5}
 
 > **来源: [ACM](https://dl.acm.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 表达边界 | 说明 |
-
 | :--- | :--- | :--- |
-
 | Factory Method | 等价表达 | trait 工厂方法，语义一致 |
-
 | Abstract Factory | 等价表达 | 枚举/结构体族 |
-
 | Builder | 等价表达 | 链式构建，类型状态可增强 |
-
 | Prototype | 等价表达 | Clone trait 直接对应 |
-
 | Singleton | 近似表达 | 无全局可变，用 OnceLock 等替代 |
 
 ### 结构型（7） {#结构型7}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 表达边界 | 说明 |
-
 | :--- | :--- | :--- |
-
 | Adapter | 等价表达 | 包装 + 委托 |
-
 | Bridge | 等价表达 | trait 解耦抽象与实现 |
-
 | Composite | 等价表达 | 枚举递归结构 |
-
 | Decorator | 等价表达 | 结构体包装 |
-
 | Facade | 等价表达 | 模块/结构体 |
-
 | Flyweight | 等价表达 | Arc 共享 |
-
 | Proxy | 等价表达 | 委托、延迟 |
 
 ### 行为型（11） {#行为型11}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 表达边界 | 说明 |
-
 | :--- | :--- | :--- |
-
 | Chain of Responsibility | 等价表达 | Option/链表传递 |
-
 | Command | 等价表达 | 闭包即命令对象 |
-
 | Interpreter | 近似表达 | 无继承，用枚举+match |
-
 | Iterator | 等价表达 | Iterator trait 原生 |
-
 | Mediator | 等价表达 | 结构体协调 |
-
 | Memento | 近似表达 | 需 Serializable/Clone，无私有状态封装 |
-
 | Observer | 近似表达 | 无继承，用 channel/回调 |
-
 | State | 等价表达 | 枚举/类型状态更严格 |
-
 | Strategy | 等价表达 | trait 即策略 |
-
 | Template Method | 近似表达 | trait 默认方法，无继承 |
-
 | Visitor | 近似表达 | 双重分发用 match 或 trait，风格不同 |
 
 ---
@@ -287,21 +225,14 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 ## 执行模型 × 表达边界 {#执行模型-表达边界}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模型 | 表达边界 | 说明 |
-
 | :--- | :--- | :--- |
-
 | 同步 | 等价表达 | 顺序执行，语义一致 |
-
 | 异步 | 等价表达 | Future 模型，await 语义清晰 |
-
 | 并发 | 等价表达 | Send/Sync 提供更强保证 |
-
 | 并行 | 等价表达 | 数据并行、任务并行 |
-
 | 分布式 | 近似表达 | 无内置 RPC，需库支持 |
 
 ---
@@ -309,25 +240,16 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 ## 近似表达详解 {#近似表达详解}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式/模型 | 近似原因 | Rust 替代方案 |
-
 | :--- | :--- | :--- |
-
 | Singleton | 无全局可变；GoF 依赖 static 可变 | OnceLock、LazyLock、依赖注入 |
-
 | Interpreter | 无继承；GoF 用类层次 | 枚举 + match、穷尽匹配 |
-
 | Memento | 无私有状态封装；GoF 有 Originator 私有 | Clone、serde、快照类型 |
-
 | Observer | 无继承；GoF 用 Subject/Observer 继承 | channel、`dyn Fn`、回调 |
-
 | Template Method | 无继承；GoF 用抽象类 | trait 默认方法 |
-
 | Visitor | 双重分发风格不同；GoF 用虚函数 | match、trait、宏 |
-
 | 分布式 | 无内置 RPC | tonic、actix、自定义协议 |
 
 ---
@@ -335,21 +257,17 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 ## 等价表达示例 {#等价表达示例}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Strategy**：trait 即策略接口，`impl Trait` 即具体策略；语义完全等价。
 
 ```rust,ignore
-
 trait SortStrategy { fn sort(&self, data: &mut [i32]); }
 
 struct QuickSort; impl SortStrategy for QuickSort { ... }
 
 struct MergeSort; impl SortStrategy for MergeSort { ... }
-
 ```
-
 **Iterator**：`Iterator` trait 为语言原生；语义等价且更强（零成本抽象）。
 
 ---
@@ -357,19 +275,13 @@ struct MergeSort; impl SortStrategy for MergeSort { ... }
 ## 不可表达边界说明 {#不可表达边界说明}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 类型 | 示例 | Rust 限制 |
-
 | :--- | :--- | :--- |
-
 | 全局可变隐式共享 | 经典 Singleton 的 static 可变 | 无 `static mut` 安全用法；用 OnceLock |
-
 | 多继承 | 菱形继承、混入 | 仅 trait 多实现；无类继承 |
-
 | 运行时反射 | 动态调用、属性注入 | 无内置反射；用宏或 trait 显式 |
-
 | 任意子类型 | 协变/逆变复杂 | 型变严格；见 [variance_theory](../../type_theory/10_variance_theory.md) |
 
 ---
@@ -377,21 +289,14 @@ struct MergeSort; impl SortStrategy for MergeSort { ... }
 ## 从 OOP 迁移建议 {#从-oop-迁移建议}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | OOP 概念 | Rust 对应 | 注意 |
-
 | :--- | :--- | :--- |
-
 | 继承 | trait + 组合 | 无类继承；用委托 |
-
 | 多态 | trait + impl / dyn | 对象安全；无向下转型 |
-
 | 全局单例 | OnceLock | 无 static mut |
-
 | 观察者 | channel | 消息传递替代回调 |
-
 | 访问者 | match + trait | 穷尽匹配替代虚函数 |
 
 迁移时优先保证**等价表达**模式；**近似表达**需文档化差异。
@@ -401,21 +306,17 @@ struct MergeSort; impl SortStrategy for MergeSort { ... }
 ## Adapter 等价表达示例 {#adapter-等价表达示例}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
-
 // 目标接口
 
 trait Target { fn request(&self) -> String; }
 
 
-
 // 被适配者
 
 struct Adaptee { data: String }
-
 
 
 // 适配器：包装 Adaptee，实现 Target
@@ -431,9 +332,7 @@ impl Target for Adapter {
     }
 
 }
-
 ```
-
 **形式化对应**：Adapter 持有 `Adaptee`；`impl Target for Adapter` 委托；所有权清晰：`Adapter` 拥有 `Adaptee`。
 
 ---
@@ -441,11 +340,9 @@ impl Target for Adapter {
 ## Composite 等价表达示例 {#composite-等价表达示例}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
-
 enum Node {
 
     Leaf(i32),
@@ -453,7 +350,6 @@ enum Node {
     Composite(Vec<Box<Node>>),
 
 }
-
 
 
 impl Node {
@@ -471,9 +367,7 @@ impl Node {
     }
 
 }
-
 ```
-
 **形式化对应**：`Box<Node>` 递归；`Vec` 聚合子节点；穷尽 match 保证所有变体处理。
 
 ---
@@ -481,23 +375,15 @@ impl Node {
 ## 不可表达边界说明（扩展） {#不可表达边界说明扩展}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 类型 | 示例 | Rust 限制 |
-
 | :--- | :--- | :--- |
-
 | 全局可变隐式共享 | 经典 Singleton 的 static 可变 | 无 `static mut` 安全用法；用 OnceLock |
-
 | 多继承 | 菱形继承、混入 | 仅 trait 多实现；无类继承 |
-
 | 运行时反射 | 动态调用、属性注入 | 无内置反射；用宏或 trait 显式 |
-
 | 任意子类型 | 协变/逆变复杂 | 型变严格；见 [variance_theory](../../type_theory/10_variance_theory.md) |
-
 | 重载（同名不同签名的函数） | 传统 OOP 多态 | trait 方法 + 泛型；无 ad-hoc 重载 |
-
 | 负约束 | `T: !Trait` | 仅部分支持；RFC 讨论中 |
 
 ---
@@ -505,7 +391,6 @@ impl Node {
 ## 场景化决策示例（层次推进） {#场景化决策示例层次推进}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 示例 1：OOP 继承迁移 {#示例-1oop-继承迁移}
@@ -517,15 +402,12 @@ impl Node {
 **决策**：Rust 无继承 → 用 trait + 组合；$\mathit{ExprB} = \mathrm{Same}$（组合替代继承）。
 
 ```rust
-
 trait Widget { fn render(&self); }
 
 struct Button { label: String }
 
 impl Widget for Button { fn render(&self) { /* ... */ } }
-
 ```
-
 ### 示例 2：观察者模式 {#示例-2观察者模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -547,13 +429,10 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 ## 引用 {#引用}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../10_language_semantics_expressiveness.md)
-
 - [DESIGN_MECHANISM_RATIONALE](../../10_design_mechanism_rationale.md)
-
 - [04_expressiveness_boundary 分布式模式形式化](../02_workflow_safe_complete_models/04_expressiveness_boundary.md#分布式模式形式化边界event-sourcingsagacqrs) — Event Sourcing、Saga、CQRS 与 Rust 表达力边界
 
 ---
@@ -561,11 +440,8 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -579,15 +455,10 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -597,9 +468,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
@@ -607,7 +476,6 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - Rust 1.94 迁移指南
-
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -619,9 +487,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -637,11 +503,9 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [05_boundary_system 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -649,21 +513,13 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [Ferrocene Language Specification](https://spec.ferrocene.dev/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
-
 > **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ---

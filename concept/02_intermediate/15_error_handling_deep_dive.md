@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: 错误处理深入 (Error Handling Deep Dive) · 错误链 (Error Chain) · 回溯 (Backtrace) · anyhow · 错误转换 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 错误处理深入：从 Result 到自定义错误生态
@@ -98,7 +97,6 @@ Option<T> 和 Result<T, E> 是 Rust 错误处理的代数数据类型:
   ├── Result<T, E> 类似于 Either Monad
   └── ? 运算符是 bind (>>=) 的语法糖
 ```
-
 > **认知功能**: `Result` 和 `Option` 将**错误处理（Error Handling）**从控制流（异常）转化为**数据流**（类型）——错误成为值的一部分，而非控制流的跳转。
 > [来源: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)]
 
@@ -135,7 +133,6 @@ fn last_char_of_first_line(text: &str) -> Option<char> {
 // ? 运算符背后使用 Try trait
 // 未来可能支持自定义类型使用 ?
 ```
-
 > **? 洞察**: `?` 运算符是 Rust **错误传播**的核心创新——它将异常处理的便捷性与显式返回的安全性结合。
 > [来源: [RFC 0243 — Trait-based Exception Handling](https://rust-lang.github.io/rfcs//0243-trait-based-exception-handling.html)]
 
@@ -171,7 +168,6 @@ pub trait Error: Debug + Display {
 // - 1.33: Error::source() 替代 Error::cause()
 // - 未来: Error trait 可能增加 backtrace 支持
 ```
-
 > **Error Trait 洞察**: Rust 的 `Error` trait 是**错误类型系统（Type System）的根基**——它要求所有错误都可 `Display`（用户可读）和 `Debug`（开发者调试）。
 > [来源: [std::error::Error](https://doc.rust-lang.org/std/error/trait.Error.html)]
 
@@ -216,7 +212,6 @@ fn read_and_parse() -> Result<i32, AppError> {
 // ? 运算符自动调用 From::from 转换错误类型
 // 要求: Result<T, E> 的 E 必须实现 From<内部错误类型>
 ```
-
 > **转换洞察**: `From` trait 是 `?` 运算符的**自动转换基础**——它为错误类型间的桥接提供了类型安全的机制。
 > [来源: [std::convert::From](https://doc.rust-lang.org/std/convert/trait.From.html)]
 
@@ -272,7 +267,6 @@ impl std::error::Error for ManualError {
     }
 }
 ```
-
 > **自定义错误洞察**: `thiserror` 是**库开发**的标准选择——它通过派生宏（Macro）消除了 `Error` trait 的样板代码。
 > [来源: [thiserror crate](https://docs.rs/thiserror/latest/thiserror/)]
 
@@ -317,7 +311,6 @@ impl std::error::Error for ManualError {
   │ Web 服务        │ thiserror       │ 结构化错误响应  │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
-
 > **框架洞察**: Rust 错误处理生态的**二分法**——`thiserror` 用于需要精确错误类型的**库**，`anyhow` 用于快速开发的**应用**。
 > [来源: [anyhow crate](https://docs.rs/anyhow/latest/anyhow/)]
 
@@ -358,7 +351,6 @@ impl std::error::Error for ManualError {
   → 添加操作上下文
   → file.read_to_string(&mut buf).context("read config")?
 ```
-
 > **模式矩阵**: Rust 错误处理的**核心哲学**是"显式优于隐式"——每个可能的失败点都在类型系统（Type System）中可见。
 > [来源: [Rust Error Handling Patterns](https://doc.rust-lang.org/rust-by-example/error.html)]
 
@@ -382,7 +374,6 @@ graph TD
     style PANIC fill:#ffcdd2
     style ABORT fill:#ffcdd2
 ```
-
 > **认知功能**: 错误处理的**核心判断**是"是否可恢复"——可恢复用 `Result`，不可恢复用 `panic`。
 > [来源: [TRPL — To panic! or Not to panic!](https://doc.rust-lang.org/book/ch09-03-to-panic-or-not-to-panic.html)]
 
@@ -422,7 +413,6 @@ graph TD
 ├── 嵌入式场景错误处理更受限
 └── 缓解: thiserror 支持 no_std（需 alloc）
 ```
-
 > **边界要点**: 错误处理的边界主要与**panic 与 Result 混用**、**错误类型膨胀**、**异步（Async）**、**FFI** 和 **no_std** 相关。
 > [来源: [Rust Error Handling Working Group](https://github.com/rust-lang/project-error-handling)]
 
@@ -482,7 +472,6 @@ graph TD
         }
      }
 ```
-
 > **陷阱总结**: 错误处理的陷阱主要与**unwrap 滥用**、**错误静默**、**From 方向**、**错误链**和 **Drop 中 panic** 相关。
 > [来源: [Rust Error Handling Best Practices](https://doc.rust-lang.org/rust-by-example/error.html)]
 
@@ -574,7 +563,6 @@ fn fixed() -> Result<(), anyhow::Error> {
     Ok(())
 }
 ```
-
 > **修正**: `anyhow::Error` 是动态错误类型（类似 `Box<dyn std::error::Error>`），自动实现 `From<E>`（对任何实现 `std::error::Error` 的 `E`）。`thiserror` 生成的错误类型实现 `std::error::Error`，因此可与 `anyhow` 无缝互操作。混用问题是：库代码应使用 `thiserror`（定义具体错误类型），应用代码使用 `anyhow`（统一错误处理），两者通过 `?` 和 `From` trait 自动桥接。[来源: [thiserror Documentation](https://docs.rs/thiserror/)] · [来源: [anyhow Documentation](https://docs.rs/anyhow/)]
 
 ### 10.2 边界测试：`Result` 嵌套与 `?` 的传播限制（编译错误）
@@ -598,7 +586,6 @@ fn outer_fixed() -> Result<i32, String> {
     Ok(val)
 }
 ```
-
 > **修正**: `?` 运算符自动将 `Result<T, E>` 的 `Err` 分支转换为函数返回类型（通过 `From` trait），但只能处理一层 `Result`。嵌套 `Result`（如 `Result<Result<T, E1>, E2>`）需要显式逐层解包。这是 Rust 显式错误处理哲学的体现——不自动扁平化嵌套错误类型，要求程序员明确每一层错误的语义。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.5 边界测试：`thiserror` 的 `#[from]` 与类型歧义（编译错误）
@@ -623,7 +610,6 @@ fn may_fail() -> Result<(), AppError> {
     Ok(())
 }
 ```
-
 > **修正**: `#[from]` 属性为单个类型生成 `From` 实现：`From<std::io::Error> for AppError`。若多个错误类型需要转换，需为每个类型添加 `#[from]` 变体，或手动实现 `From`。`?` 运算符的自动转换基于 `From` trait，因此一个枚举（Enum）只能有一个变体作为某类型的默认转换目标。这与 `anyhow` 的 `Context` trait（可为任意错误添加上下文）或 `eyre` 的 `WrapErr` 类似——结构化错误（`thiserror`）在类型严格性上有优势，但灵活性不如通用错误类型（`anyhow`）。选择取决于场景：库代码使用 `thiserror`（调用者需匹配错误类型），应用代码使用 `anyhow`（快速传播）。[来源: [thiserror Documentation](https://docs.rs/thiserror/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)]
 
 ### 10.6 边界测试：`eyre` 与 `anyhow` 的混用导致上下文丢失（编译错误）
@@ -642,7 +628,6 @@ fn main() -> Result<()> {
     Ok(())
 }
 ```
-
 > **修正**: `anyhow` 和 `eyre` 都是 Rust 的错误处理库，提供通用错误类型和上下文。但 `anyhow::Error` 和 `eyre::Report` 是不同的类型，不能自动转换。混用导致：1) `?` 运算符无法自动转换；2) 错误链上下文断裂；3) 调试输出格式不一致。项目应统一选择一种：1) `anyhow`（更轻量、生态更广）；2) `eyre`（更丰富的上下文、自定义错误处理钩子）。这与 Go 的单一 `error` 接口（无此问题）或 Java 的异常层次（可混合，但 `catch` 需匹配类型）不同——Rust 的错误生态提供选择，但选择后需统一。[来源: [anyhow Documentation](https://docs.rs/anyhow/)] · [来源: [eyre Documentation](https://docs.rs/eyre/)]
 
 ### 10.4 边界测试：错误类型的 `source()` 链与 `Display` 的循环（运行时栈溢出）
@@ -674,7 +659,6 @@ fn main() {
     // err.source = Some(Box::new(err)); // 无法直接实现，但逻辑上可能
 }
 ```
-
 > **修正**: `Error::source()` 返回错误链的**下一个错误**。标准库的 `Error::chain()` 遍历 source 链。循环引用（Reference）（`A.source = B, B.source = A`）导致无限循环。虽然 Rust 的类型系统（Type System）（`&dyn Error` 是引用，不能拥有循环所有权（Ownership））使直接循环困难，但 `Arc` 或自定义实现可能创建逻辑循环。安全模式：1) 错误链应为**线性**（无分支、无循环）；2) `source` 指向**原始错误**（底层原因），非同一级别的包装；3) 使用 `anyhow`/`eyre` 自动管理错误链。这与 Java 的 `Throwable.getCause()`（同样可能循环，但 JVM 不检测）或 Go 的 `errors.Unwrap`（Go 1.13+ 的链式错误，手动管理）不同——Rust 的 `Error` trait 提供标准化错误链接口。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/error/trait.Error.html)] · [来源: [anyhow](https://docs.rs/anyhow/)]
 
 ## 嵌入式测验（Embedded Quiz）
@@ -762,9 +746,7 @@ fn main() {
 > 错误传播安全 ⟸ ? 运算符自动转换 ⟸ Try trait
 > 错误类型精确 ⟸ thiserror/anyhow 分层 ⟸ 错误架构
 > **过渡**: 掌握 错误处理深入：从 Result 到自定义错误生态 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 错误处理深入：从 Result 到自定义错误生态 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 错误处理深入：从 Result 到自定义错误生态 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

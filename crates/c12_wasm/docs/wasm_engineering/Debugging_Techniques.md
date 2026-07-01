@@ -76,7 +76,6 @@ emcc -g4 --source-map-base=http://localhost:8000/ main.c -o main.html
 RUSTFLAGS="-C debuginfo=2" cargo build --target wasm32-unknown-unknown
 wasm-bindgen --debug --keep-debug --out-dir pkg target/wasm32-unknown-unknown/debug/mylib.wasm
 ```
-
 **断点调试技巧**：
 
 1. **条件断点**：
@@ -85,21 +84,18 @@ wasm-bindgen --debug --keep-debug --out-dir pkg target/wasm32-unknown-unknown/de
    // 在 DevTools 中设置条件
    // 仅当 x > 100 时暂停
    ```
-
 2. **日志点 (Logpoints)**：
 
    ```javascript
    // 不暂停执行，仅打印
    console.log("x =", x, "y =", y)
    ```
-
 3. **监视表达式 (Watch)**：
 
    ```javascript
    // 监视 Wasm 内存
    new Uint8Array(instance.exports.memory.buffer, 0, 100)
    ```
-
 **内存检查器**：
 
 ```javascript
@@ -115,7 +111,6 @@ function inspectWasmMemory(instance, offset, length) {
 console.log(inspectWasmMemory(wasmInstance, 0x1000, 64))
 // 输出: 00 01 02 03 04 05 06 07 ...
 ```
-
 **调用栈分析**：
 
 ```javascript
@@ -133,7 +128,6 @@ function captureStackTrace() {
   })
 }
 ```
-
 ### Firefox Developer Tools
 
 **优势**：
@@ -149,7 +143,6 @@ function captureStackTrace() {
 about: config
 devtools.debugger.features.wasm = true
 ```
-
 ---
 
 ## 命令行调试
@@ -165,7 +158,6 @@ wasm-objdump -x module.wasm | grep -A2 "Function\[123\]"
 # 反汇编该函数
 wasm-objdump -d module.wasm --section=Code | sed -n '/func\[123\]/,/^$/p'
 ```
-
 **分析导入导出**：
 
 ```bash
@@ -179,7 +171,6 @@ wasm-objdump -x module.wasm | grep -A5 "Export\["
 wasm-objdump -x module.wasm | \
   awk '/Import\[/{print "IMPORT:", $0} /Export\[/{print "EXPORT:", $0}' > interface.txt
 ```
-
 **内存布局检查**：
 
 ```bash
@@ -189,7 +180,6 @@ wasm-objdump -s -j Data module.wasm
 # 检查自定义段
 wasm-objdump -s -j name module.wasm
 ```
-
 ### wasm-interp 交互式调试
 
 **单步执行**：
@@ -205,14 +195,12 @@ wasm-interp module.wasm --run-all-exports --trace
 #   3: V:5 | i32.add
 #   4: V:4 | return
 ```
-
 **断点模拟**：
 
 ```bash
 # 在指定指令处停止
 wasm-interp module.wasm --trace --stop-at-instr=100
 ```
-
 ---
 
 ## Printf 调试
@@ -235,7 +223,6 @@ int compute(int x) {
     return result;
 }
 ```
-
 **格式化复杂数据**：
 
 ```c
@@ -247,7 +234,6 @@ void dump_array(int* arr, size_t len) {
     printf("]\n");
 }
 ```
-
 ### Rust println! / eprintln
 
 **Console 输出**：
@@ -265,7 +251,6 @@ pub fn debug_function(x: i32) -> i32 {
     result
 }
 ```
-
 **条件调试**：
 
 ```rust
@@ -284,7 +269,6 @@ macro_rules! debug_log {
 // 使用
 debug_log!("Processing item: {:?}", item);
 ```
-
 ---
 
 ## 内存调试
@@ -300,7 +284,6 @@ emcc -fsanitize=address -g main.c -o main.html
 # 运行时检测
 # 访问越界会触发错误报告
 ```
-
 **手动边界检查**：
 
 ```rust
@@ -314,7 +297,6 @@ fn safe_read(memory: &[u8], offset: usize, len: usize) -> Result<&[u8], String> 
     Ok(&memory[offset..offset + len])
 }
 ```
-
 ### 内存泄漏检测
 
 **手动引用计数**：
@@ -345,7 +327,6 @@ pub fn get_allocation_count() -> usize {
     ALLOCATION_COUNT.load(Ordering::SeqCst)
 }
 ```
-
 **使用示例**：
 
 ```javascript
@@ -357,7 +338,6 @@ console.log("Allocations after alloc:", wasmInstance.get_allocation_count())
 wasmInstance.free_buffer(ptr, 1024)
 console.log("Allocations after free:", wasmInstance.get_allocation_count())
 ```
-
 ---
 
 ## 性能调试
@@ -393,7 +373,6 @@ entries.forEach(entry => {
   console.log(`${entry.name}: ${entry.duration.toFixed(2)}ms`)
 })
 ```
-
 **Wasm 内部计时**：
 
 ```rust
@@ -413,7 +392,6 @@ pub fn benchmark_function() {
     ).into());
 }
 ```
-
 ### 指令级性能分析
 
 **统计指令执行次数**：
@@ -431,7 +409,6 @@ cat trace.log | awk '{print $NF}' | sort | uniq -c | sort -rn | head -20
 #  28900 i32.const
 #  15200 i32.load
 ```
-
 ---
 
 ## 常见问题调试
@@ -453,7 +430,6 @@ Object.keys(imports).forEach(module => {
   })
 })
 ```
-
 **解决方案**：
 
 ```javascript
@@ -467,7 +443,6 @@ const imports = {
   },
 }
 ```
-
 ### 问题 2: "RuntimeError: unreachable"
 
 **定位**：
@@ -478,7 +453,6 @@ emcc -g4 --source-map-base=. main.c -o main.html
 
 # 在浏览器中查看具体代码位置
 ```
-
 **常见原因**：
 
 - 整数除以零
@@ -497,7 +471,6 @@ int divide(int a, int b) {
     return a / b;
 }
 ```
-
 ### 问题 3: 内存错乱
 
 **症状**：
@@ -533,7 +506,6 @@ impl GuardedBuffer {
     }
 }
 ```
-
 ---
 
 ## 远程调试
@@ -549,7 +521,6 @@ chrome --remote-debugging-port=9222
 # 连接到远程 Chrome
 curl http://localhost:9222/json
 ```
-
 **Puppeteer 自动化调试**：
 
 ```javascript
@@ -586,7 +557,6 @@ const puppeteer = require("puppeteer")
   console.log("Result:", result)
 })()
 ```
-
 ---
 
 ## 高级调试技术
@@ -607,7 +577,6 @@ rr replay
 (gdb) reverse-continue
 (gdb) reverse-step
 ```
-
 ### 调试符号优化
 
 **DWARF 符号**：
@@ -622,7 +591,6 @@ wasm-strip module.wasm -o module_stripped.wasm
 # 对比大小
 ls -lh module.wasm module_stripped.wasm
 ```
-
 ### 自定义调试器
 
 **基于 WABT 的调试器**：
@@ -651,7 +619,6 @@ class WasmDebugger:
             # 检查是否命中断点
             pass
 ```
-
 ---
 
 ## 生产环境调试
@@ -682,7 +649,6 @@ try {
   })
 }
 ```
-
 ### 日志采集
 
 **结构化日志**：
@@ -702,7 +668,6 @@ pub fn log_event(event_type: &str, data: &JsValue) {
     web_sys::console::log_1(&log_entry.to_string().into());
 }
 ```
-
 ---
 
 ## 批判性分析
@@ -755,7 +720,6 @@ make debug
 make release
 # → 生成 module_release.wasm (无符号、优化、压缩)
 ```
-
 ### 防御性编程
 
 **断言与检查**：
@@ -772,7 +736,6 @@ pub fn process_buffer(data: &[u8]) {
     }
 }
 ```
-
 ### 日志分级
 
 ```rust
@@ -789,7 +752,6 @@ pub fn set_log_level(level: LogLevel) {
     // 运行时调整日志级别
 }
 ```
-
 ---
 
 ## 参考文献

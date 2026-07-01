@@ -42,7 +42,6 @@ let output = Command::new("ls")
 println!("status: {}", output.status);
 println!("stdout: {}", String::from_utf8_lossy(&output.stdout));
 ```
-
 **核心方法**:
 
 - `spawn()` - 启动进程，立即返回
@@ -70,7 +69,6 @@ let child = Command::new("cat")
     .stdout(Stdio::piped())
     .spawn()?;
 ```
-
 **2. 通道 (Channel)** - 线程间通信
 
 ```rust
@@ -79,7 +77,6 @@ use std::sync::mpsc::channel;
 let (tx, rx) = channel();
 // 在不同进程的线程间通信
 ```
-
 **3. 共享内存** - 高性能、大数据量
 
 - 使用`shared_memory` crate
@@ -139,7 +136,6 @@ let mut cmd = Command::new("my_app");
     cmd.creation_flags(0x08000000); // CREATE_NO_WINDOW
 }
 ```
-
 **推荐库**:
 
 - `nix` - Unix系统调用封装
@@ -197,7 +193,6 @@ loop {
     }
 }
 ```
-
 **最佳实践**:
 
 - ✅ 始终调用`wait()`或`output()`
@@ -256,7 +251,6 @@ async fn run_process(name: &str) -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 **优势**:
 
 - 高效的并发处理

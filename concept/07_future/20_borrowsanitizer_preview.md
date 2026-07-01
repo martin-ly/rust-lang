@@ -91,7 +91,6 @@ fn main() {
     println!("{}", r1);
 }
 ```
-
 > **编译期的局限**: 编译器只能分析**静态可达**的代码路径。以下场景编译器无法检测：
 >
 > 1. **Unsafe 代码块**中的 raw pointer 操作
@@ -112,7 +111,6 @@ Miri 检测的 UB 类别:
 ├── 类型违规: 违反类型不变性（如 bool 非 0/1）
 └── 并发违规: 数据竞争（使用 ThreadSanitizer 模式）
 ```
-
 > **Miri 的局限**:
 >
 > - **速度**: 解释执行比原生代码慢 100-1000 倍
@@ -140,7 +138,6 @@ graph LR
         G --> I[BorrowSanitizer<br/>~80% 代码<br/>2-5x 开销]
     end
 ```
-
 > **认知功能**: 此图展示 Rust 内存安全（Memory Safety）检测的**三层架构**——编译器负责静态保证，Miri 负责深度验证，BorrowSanitizer 负责工业级运行时检测。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 开发阶段使用编译器；测试阶段使用 BorrowSanitizer；深度审计使用 Miri。
@@ -163,7 +160,6 @@ Shadow Stack 数据结构:
 │ ...                                       │
 └─────────────────────────────────────────┘
 ```
-
 **Lock-and-Key 检测机制**（受 CETS 启发）：
 
 1. **每个分配关联一个 lock location**：包含 allocation ID、基址/边界、Tree Borrows 状态树指针
@@ -217,7 +213,6 @@ Tree Borrows 核心规则（简化）:
    - SharedReadWrite 允许单一写或多读（需同步）
    - Unique 允许单一读写，排斥其他访问
 ```
-
 > **形式化视角**: Tree Borrows 将 Rust 的借用检查从**线性栈**（Stacked Borrows）推广到**树形结构**，允许更灵活的借用模式。BorrowSanitizer 的 Shadow Stack 需要实现这一树形结构的运行时跟踪。
 > [来源: [Tree Borrows Paper (POPL 2026)](https://perso.crans.org/vanille/treebor/)]
 
@@ -240,7 +235,6 @@ graph TD
     style C fill:#e3f2fd
     style D fill:#fff3e0
 ```
-
 > **认知功能**: 此图展示 Tree Borrows 形式模型如何分支为三个不同的工程实现：编译器（静态）、Miri（解释）、BorrowSanitizer（运行时插桩）。
 > **使用建议**: 形式模型研究者关注 Tree Borrows 论文；工具开发者关注 Miri 和 BorrowSanitizer 的实现差异。
 > **关键洞察**: 三个实现共享同一**形式化语义**，但在**工程权衡**上不同——静态分析追求零开销，解释执行追求精确性，运行时检测追求可部署性。
@@ -266,7 +260,6 @@ graph TD
     style FALSE1 fill:#ffebee
     style FALSE2 fill:#ffebee
 ```
-
 > **认知功能**: 此决策树帮助项目决策者判断 BorrowSanitizer 是否适合其场景。核心判断标准是"精确性要求"和"性能预算"。
 > **使用建议**: CI 集成测试使用 BorrowSanitizer；深度安全审计仍使用 Miri；生产环境依赖编译器保证。
 > **关键洞察**: BorrowSanitizer 不是 Miri 的替代，而是**Miri 的工业级近似**——覆盖 80% 的 UB 场景，但可集成到标准测试流程中。
@@ -288,7 +281,6 @@ graph TD
 ├── BorrowSanitizer: 检测借用违规
 └── 三者可同时使用（叠加开销）
 ```
-
 > **边界要点**: BorrowSanitizer 专注于**借用语义违规**，不替代 AddressSanitizer 或 ThreadSanitizer。三者形成互补的检测矩阵。
 > [来源: [Sanitizers Wiki](https://github.com/google/sanitizers/wiki)]
 
@@ -339,7 +331,6 @@ fn main() {
     println!("{}", feature);
 }
 ```
-
 ## 相关概念文件
 
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — Unsafe 边界与借用规则
@@ -394,7 +385,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**: BorrowSanitizer（实验性）是 LLVM 的 sanitizers 家族新成员，专门检测 Rust 风格的借用违规。
 > 它与 Miri 类似，但在编译后的二进制中插入检查（类似 AddressSanitizer），因此可检测 FFI 边界和并发场景。
 > 关键挑战：**别名分析的精度**。上述代码中，`p1` 和 `p2` 指向不重叠的数组元素，理论上安全，但 Stacked Borrows 模型可能要求每次通过派生指针写入后"重新借用"原始指针（Raw Pointer）。
@@ -419,7 +409,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**:
 > Sanitizer 的检测代码插入在 LLVM IR 层面，后续优化可能：
 >
@@ -451,7 +440,6 @@ fn main() {
     println!("{}", r1);
 }
 ```
-
 > **修正**:
 > BorrowSanitizer 在 Rust 代码的 MIR/LLVM IR 层面插入检查，但**FFI 边界**是盲区：C 代码中的指针操作对 BorrowSanitizer 不可见。
 > 若 C 代码：
@@ -488,7 +476,6 @@ fn main() {
     println!("{:?}", x);
 }
 ```
-
 > **修正**:
 > BorrowSanitizer 基于特定内存模型（可能是 Stacked Borrows 或 Tree Borrows），**误报**（false positive）是设计权衡的一部分。
 > Stacked Borrows 对指针别名更严格：从同一原始指针（Raw Pointer）派生的所有指针共享一个借用标签，任意写入可能使其他派生指针失效。
@@ -527,7 +514,6 @@ fn alias_violation() {
 // BorrowSanitizer: 依赖插桩，某些优化后代码可能漏检
 // ASan/MSan: 检测内存错误，不检测别名违规
 ```
-
 > **修正**:
 > Rust 的 UB 检测工具谱：
 >
@@ -560,7 +546,6 @@ fn main() {
     // Miri 可检测，BorrowSanitizer（若存在）可能因优化后代码漏检
 }
 ```
-
 > **修正**: Rust 的 UB 检测工具谱：
 >
 > 1) **Miri**（最全面）：解释执行，跟踪 Stacked Borrows / Tree Borrows 标签，检测所有内存和别名违规，但极慢；

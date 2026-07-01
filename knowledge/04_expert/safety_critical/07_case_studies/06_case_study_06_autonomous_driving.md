@@ -67,7 +67,6 @@
 
 关键路径延迟: < 50ms (ASIL D要求)
 ```
-
 ### Rust模块结构
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -215,7 +214,6 @@ pub mod output {
     }
 }
 ```
-
 ---
 
 ## 实时性能优化
@@ -284,7 +282,6 @@ impl PerceptionPipeline {
     }
 }
 ```
-
 ### 内存池管理
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -329,7 +326,6 @@ impl<'a, const N: usize> Drop for PooledImage<'a, N> {
     }
 }
 ```
-
 ---
 
 ## 安全设计
@@ -387,7 +383,6 @@ impl DiverseDetector {
     }
 }
 ```
-
 ### 故障检测
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -423,7 +418,6 @@ impl SafetyMonitor {
     }
 }
 ```
-
 ---
 
 ## 验证与确认
@@ -473,7 +467,6 @@ mod simulation_tests {
     }
 }
 ```
-
 ### 形式化验证
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -510,7 +503,6 @@ mod verification {
     }
 }
 ```
-
 ---
 
 ## 关键指标
@@ -559,7 +551,6 @@ mod verification {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [案例研究1: Ferrocene认证工具链](01_case_study_01_ferrocene_certification.md)
 - [案例研究2: NASA核心飞行系统(cFS) Rust集成](02_case_study_02_nasa_cfs_rust.md)
 

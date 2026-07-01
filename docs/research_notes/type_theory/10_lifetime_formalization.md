@@ -1,20 +1,14 @@
 > **归档提示**:
 > **概念族**: 类型理论
-
 >
-
 > 本文档内容为研究笔记，自 2026-03 前后未再更新，于 2026-06-25 标记为归档参考。
-
 > 核心结论请优先查阅 `concept/` 与 `knowledge/`。
 
 # 生命周期形式化（类型理论视角） {#生命周期形式化类型理论视角}
 
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **视角**: 类型理论视角 — 关注生命周期作为类型系统的组成部分，与类型推导、子类型、泛型、型变的交互。
 > **对应视角**: [形式化方法视角](../formal_methods/10_lifetime_formalization.md) 聚焦定理、公理、证明目标与国际形式化成果映射。
@@ -25,9 +19,7 @@
 ## 📑 目录 {#目录}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [生命周期形式化（类型理论视角） {#生命周期形式化类型理论视角}](#生命周期形式化类型理论视角-生命周期形式化类型理论视角)
@@ -79,13 +71,9 @@
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 > **创建日期**: 2025-01-27
-
 > **最后更新**: 2026-06-29
-
 > **更新内容**: 补充国际形式化成果对标（Oxide / RustBelt / RustSEM / Tree Borrows）
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 
 ---
@@ -93,7 +81,6 @@
 ## 🎯 研究目标 {#研究目标}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究的目的是形式化定义 Rust 的生命周期系统，并理解其类型理论基础。
@@ -101,29 +88,21 @@
 ### 核心问题 {#核心问题}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **生命周期的形式化定义**: 如何用类型理论精确描述生命周期？
-
 2. **生命周期推断算法**: 生命周期推断算法如何工作？
-
 3. **生命周期与类型系统**: 生命周期如何与类型系统集成？
 
 ### 预期成果 {#预期成果}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 生命周期系统的形式化定义
-
 - 生命周期推断算法的形式化描述
-
 - 生命周期与类型系统的集成模型
 
 ---
@@ -131,39 +110,28 @@
 ## 📚 理论基础 {#理论基础}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 生命周期核心概念 {#生命周期核心概念}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **生命周期参数**: 表示引用的有效作用域
-
 2. **生命周期推断**: 自动推断生命周期参数
-
 3. **生命周期约束**: 生命周期之间的关系
-
 4. **子类型关系**: 生命周期之间的子类型关系
 
 ### 相关理论 {#相关理论}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **区域类型 (Region Types)**: 区域类型系统
-
 - **线性类型**: 线性类型系统
-
 - **子类型**: 类型之间的子类型关系
-
 - **约束求解**: 约束求解算法
 
 ---
@@ -171,15 +139,12 @@
 ## 🔬 形式化定义 {#形式化定义}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 生命周期 {#1-生命周期}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 1.1 (生命周期)**: 生命周期 $\ell$ 表示引用的有效作用域，是一个作用域标识符。
@@ -193,9 +158,7 @@ $$\Lambda : \text{LifetimeVar} \to \text{Scope}$$
 ### 2. 生命周期子类型 {#2-生命周期子类型}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 2.1 (生命周期子类型)**: 如果生命周期 $\ell_1$ 包含生命周期 $\ell_2$（$\ell_1 \supseteq \ell_2$），则 $\ell_2$ 是 $\ell_1$ 的子类型，记作 $\ell_2 <: \ell_1$。
@@ -205,9 +168,7 @@ $$\Lambda : \text{LifetimeVar} \to \text{Scope}$$
 ### 3. 生命周期推断 {#3-生命周期推断}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 3.1 (生命周期约束)**: 生命周期约束 $C$ 是一个生命周期关系的集合：
@@ -221,7 +182,6 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 ## 公理、定理与引理 {#公理定理与引理}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Axiom LT1**：引用生命周期 $\ell_r$ 必须为被引用对象生命周期 $\ell_{target}$ 的子类型；$\ell_r <: \ell_{target}$ 即 $\ell_r \subseteq \ell_{target}$。
@@ -249,7 +209,6 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 ## 与 formal_methods 衔接 {#与-formal_methods-衔接}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档为**类型论视角**；formal_methods/lifetime_formalization 为**形式化方法视角**，含完整定理 1–3 证明、公理-定理证明树、反例表。两者互补：类型论侧重 $\ell <:$ 与类型系统的集成；形式化方法侧重约束生成、求解与引用有效性证明。
@@ -259,7 +218,6 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 ## ✅ 证明目标 {#证明目标}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 待证明的性质 {#待证明的性质}
@@ -267,9 +225,7 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 1. **生命周期推断正确性**: 见定理 LT-T2
-
 2. **生命周期约束一致性**: 见 Axiom LT2、定理 LT-T2
-
 3. **引用有效性**: 见定理 LT-T1
 
 ### 证明方法 {#证明方法}
@@ -277,9 +233,7 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - **约束求解**: 定理 LT-T2 证明思路
-
 - **子类型证明**: 引理 LT-L1、推论 LT-C1
-
 - **语义证明**: 定理 LT-T1、与 ownership/borrow 衔接
 
 ---
@@ -287,7 +241,6 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 ## 💻 代码示例与实践 {#代码示例与实践}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 示例 1: 基本生命周期 {#示例-1-基本生命周期}
@@ -295,7 +248,6 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
-
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
     if x.len() > y.len() {
@@ -309,7 +261,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     }
 
 }
-
 
 
 fn main() {
@@ -329,15 +280,11 @@ fn main() {
     println!("{}", result);
 
 }
-
 ```
-
 **形式化描述**:
 
 - $\text{longest} : \forall 'a. \&'a \text{str} \times \&'a \text{str} \to \&'a \text{str}$
-
 - 生命周期参数 $'a$ 表示两个输入和输出的生命周期相同
-
 - 返回值的生命周期是输入生命周期中较短的那个
 
 ### 示例 2: 生命周期推断 {#示例-2-生命周期推断}
@@ -345,7 +292,6 @@ fn main() {
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
-
 fn first_word(s: &str) -> &str {
 
     let bytes = s.as_bytes();
@@ -363,15 +309,11 @@ fn first_word(s: &str) -> &str {
     &s[..]
 
 }
-
 ```
-
 **形式化描述**:
 
 - 编译器自动推断生命周期参数
-
 - $\text{first\_word} : \forall 'a. \&'a \text{str} \to \&'a \text{str}$
-
 - 返回值的生命周期与输入相同
 
 ### 示例 3: 生命周期约束 {#示例-3-生命周期约束}
@@ -379,13 +321,11 @@ fn first_word(s: &str) -> &str {
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
-
 struct ImportantExcerpt<'a> {
 
     part: &'a str,
 
 }
-
 
 
 impl<'a> ImportantExcerpt<'a> {
@@ -397,7 +337,6 @@ impl<'a> ImportantExcerpt<'a> {
     }
 
 
-
     fn announce_and_return_part(&self, announcement: &str) -> &'a str {
 
         println!("Attention please: {}", announcement);
@@ -407,15 +346,11 @@ impl<'a> ImportantExcerpt<'a> {
     }
 
 }
-
 ```
-
 **形式化描述**:
 
 - $\text{ImportantExcerpt}['a] = \{\text{part} : \&'a \text{str}\}$
-
 - 结构体的生命周期参数 $'a$ 约束字段的生命周期
-
 - 方法返回值的生命周期受结构体生命周期约束
 
 ### 示例 4: 生命周期与泛型 {#示例-4-生命周期与泛型}
@@ -423,7 +358,6 @@ impl<'a> ImportantExcerpt<'a> {
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
-
 fn longest_with_an_announcement<'a, T>(
 
     x: &'a str,
@@ -453,15 +387,11 @@ where
     }
 
 }
-
 ```
-
 **生命周期与泛型分析**：
 
 - 生命周期参数和类型参数可以同时使用
-
 - 生命周期参数放在类型参数之前
-
 - 可以使用 `where` 子句添加约束
 
 ### 示例 5: 高阶生命周期 {#示例-5-高阶生命周期}
@@ -469,7 +399,6 @@ where
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
-
 fn apply<'a, F>(f: F, x: &'a str) -> &'a str
 
 where
@@ -481,15 +410,11 @@ where
     f(x)
 
 }
-
 ```
-
 **高阶生命周期分析**：
 
 - 闭包可以捕获生命周期
-
 - 高阶函数可以传递生命周期参数
-
 - 生命周期在闭包中正确传播
 
 ---
@@ -497,61 +422,45 @@ where
 ## 📖 参考文献 {#参考文献}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 学术论文 {#学术论文}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Region-Based Memory Management**
-
    - 作者: Mads Tofte, Jean-Pierre Talpin
-
    - 年份: 1997
-
    - 摘要: 基于区域的内存管理
-
 2. **Lifetimes for Verification**
-
    - 作者: Rust 团队
-
    - 摘要: Rust 生命周期系统的验证
 
 ### 官方文档 {#官方文档}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust Book - Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
-
 - [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)
-
 - [生命周期推断](https://doc.rust-lang.org/reference/lifetime-elision.html)
 
 ### 相关代码 {#相关代码}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [生命周期实现](../../../crates/c02_type_system/src/README.md)
-
 - [生命周期示例](../../../crates/c02_type_system/examples/README.md)
-
 - [形式化工程系统 - 生命周期](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
 
 ### 工具资源 {#工具资源}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Polonius](https://github.com/rust-lang/polonius): 新的借用检查器，改进生命周期分析
-
 - [Chalk](https://github.com/rust-lang/chalk): Rust Trait 系统的形式化模型，包含生命周期
 
 ---
@@ -559,25 +468,20 @@ where
 ## 🔄 研究进展 {#研究进展}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 已完成 ✅ {#已完成}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [x] 研究目标定义
-
 - [x] 理论基础整理
-
 - [x] 初步形式化定义
 
 ### 进行中 🔄（已完成） {#进行中-已完成}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [x] 完整的形式化定义（§1–3 生命周期、子类型、推断）、约束与推断已纳入形式化
@@ -585,7 +489,6 @@ where
 ### 计划中 📋（已完成） {#计划中-已完成}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - x] 与类型系统、借用检查器的集成，实际应用案例（见下方「系统集成与实际应用」）；与 [formal_methods/lifetime_formalization 互补（类型论视角 vs 形式化方法视角）
@@ -595,13 +498,11 @@ where
 ## 🔗 系统集成与实际应用 {#系统集成与实际应用}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 与类型系统的集成 {#与类型系统的集成}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\ell_2 \tau_2$ 参与类型推导；与 [type_system_foundations](10_type_system_foundations.md) 的进展性、保持性在扩展引用与生命周期后一致。
@@ -609,7 +510,6 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 ### 与借用检查器的集成 {#与借用检查器的集成}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 生命周期约束与 NLL、reborrow、Polonius 的约束生成与求解对应；见 [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) 与 lifetime_formalization。
@@ -617,13 +517,10 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 ### 实际应用案例 {#实际应用案例}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **结构体与 HRTB**：`struct S<'a> { r: &'a T }`、`for<'a> Fn(&'a T)` 的约束与推断。
-
 2. **async 与 Pin**：async 块中引用的 `'a` 编译进状态机；与 Pin、[async_state_machine](../formal_methods/10_async_state_machine.md) 一致。
-
 3. **Trait 对象**：`dyn Trait + 'a` 的 outlives 与 vtable 不包含生命周期的分工。
 
 ---
@@ -639,35 +536,24 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 ## 六、与国际形式化成果对标 {#六与国际形式化成果对标}
 
 >
-
 > **学术来源**: [Oxide (ICFP 2023 / arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustBelt (POPL 2018)](https://doi.org/10.1145/3158154) · [Tree Borrows (PLDI 2025)](https://doi.org/10.1145/3735592) · [RustSEM (FMSD 2024)](https://doi.org/10.1007/s10703-024-00460-3)
 
 ### 生命周期形式化的两条主线 {#生命周期形式化的两条主线}
 
 | 主线 | 代表工作 | 生命周期含义 | 证明方法 |
-
 | :--- | :--- | :--- | :--- |
-
 | **类型系统/区域类型** | Oxide | 位置集合（provenance） | Progress & Preservation |
-
 | **分离逻辑/借用命题** | RustBelt | Time Credits / Lifetime Logic | Iris 高阶并发分离逻辑 |
-
 | **操作语义/运行时检查** | RustSEM | 时间戳跨度（timestamp span） | K-Framework 可执行语义 |
-
 | **别名模型** | Tree Borrows | 借用树中节点的存活区间 | Rocq 机械证明 |
 
 ### 与本项目证明索引的映射 {#与本项目证明索引的映射}
 
 | 国际成果 | 对应本文档 | 覆盖范围 | 差距 |
-
 | :--- | :--- | :--- | --- |
-
 | **Oxide** | Def 2.1/2.2（生命周期子类型）、LT-T1/2 | 源级 Safe Rust | 无 Rust 1.96 新特性的区域规则 |
-
 | **RustBelt** | Axiom LT1、LT-T1 | `λ_Rust`（含 unsafe） | 无 Iris 机械证明 |
-
 | **RustSEM** | Def 3.1/3.2（约束与推断） | 内存级 OBS | 无 K 框架实现 |
-
 | **Tree Borrows** | 引用有效性、NLL | 别名模型 | 无树状权限精化 |
 
 ### 生命周期子类型的形式化再表述 {#生命周期子类型的形式化再表述}
@@ -675,27 +561,20 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 借鉴 Oxide 的区域观点，`'long: 'short` 可形式化为：
 
 ```
-
 'long ⊇ 'short   ⇒   &'long T <: &'short T   （协变）
-
 ```
-
 这与 Def 2.2 一致，但 Oxide 进一步将 region 解释为**引用的可能来源集合**，使生命周期约束成为别名安全判断的一部分。
 
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -703,15 +582,10 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -719,17 +593,13 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - Rust 1.94 特性速查
-
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -741,9 +611,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -759,11 +627,9 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [type_theory 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -771,19 +637,12 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Variable Scope](https://en.wikipedia.org/wiki/Variable_Scope)**
-
 > **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)**
-
 > **来源: [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)**
-
 > **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-nll.html)**
-
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
-
 > **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
-
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
-
 > **来源: [ACM - Type Systems](https://dl.acm.org/)**
 
 ---

@@ -15,7 +15,6 @@
 ---
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Zig Documentation](https://ziglang.org/documentation/master/) · [Ziglang.org](https://ziglang.org/) · [Andrew Kelley — Zig Design](https://ziglang.org/learn/overview/) · [Wikipedia — Zig (programming language)](https://en.wikipedia.org/wiki/Zig_(programming_language))
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
 ## 📑 目录
@@ -111,7 +110,6 @@
   ├── Zig 无宏系统，comptime 替代
   └── Rust 宏系统和 const fn 互补
 ```
-
 > **认知功能**: **Zig 的 comptime 是"无宏（Macro）的元编程"**——用同一套语言实现编译期和运行时（Runtime）代码，而 Rust 保持两者分离。
 > [来源: [Zig Overview — comptime](https://ziglang.org/learn/overview/#comptime)]
 
@@ -171,7 +169,6 @@
   ├── Rust 错误类型是具体类型（可带数据）
   └── Zig 无 Result 包装，直接联合类型
 ```
-
 > **错误洞察**: **Zig 的错误处理更底层、更透明**——Rust 的 Result 提供更多组合能力，Zig 的 error unions 更简单直接。
 > [来源: [Zig Error Handling](https://ziglang.org/documentation/master/#Error-Set-Type)]
 
@@ -223,7 +220,6 @@
   ├── Rust 所有权自动管理生命周期
   └── Zig 更灵活，Rust 更安全
 ```
-
 > **内存洞察**: **Zig 的显式分配器设计适合系统编程和嵌入式**——Rust 的自动所有权（Ownership）更适合应用开发。
 > [来源: [Zig Memory](https://ziglang.org/documentation/master/#Memory)]
 
@@ -262,7 +258,6 @@
   │ 构建脚本        │ Zig             │ Rust/TOML       │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
-
 > **构建洞察**: **Zig 的构建系统是语言的延伸**——用 Zig 代码定义构建逻辑，而非学习新的配置语言。
 > [来源: [Zig Build System](https://ziglang.org/learn/build-system/)]
 
@@ -303,7 +298,6 @@
   ├── 为 C 项目提供交叉编译
   └── 适合混合语言项目
 ```
-
 > **交叉编译洞察**: **Zig 的交叉编译是杀手级特性**——它消除了 C/C++ 交叉编译的复杂性，对嵌入式和系统开发极具吸引力。
 > [来源: [Zig Cross Compilation](https://ziglang.org/learn/overview/#cross-compiling-is-a-first-class-use-case)]
 
@@ -349,7 +343,6 @@ C 互操作对比:
         printf(b"Hello, world!\n".as_ptr() as *const c_char);
     }
 ```
-
 > **互操作洞察**: **Zig 的 C 互操作更直接**——无需外部工具，内置头文件解析，降低了与 C 生态的集成成本。
 > [来源: [Zig C Interop](https://ziglang.org/learn/overview/#integration-with-c-libraries-without-ffibindings)]
 
@@ -381,7 +374,6 @@ C 互操作对比:
   ├── C ABI 作为边界
   └── 各自发挥优势
 ```
-
 > **互补洞察**: **Zig 和 Rust 不是直接竞争**——Zig 更适合需要极端控制和 C 互操作的场景，Rust 更适合需要安全保证的大规模系统。
 > [来源: [Zig Use Cases](https://ziglang.org/learn/overview/)]
 
@@ -405,7 +397,6 @@ graph TD
     style ZIG fill:#c8e6c9
     style EITHER fill:#fff3e0
 ```
-
 > **认知功能**: **安全需求选 Rust，控制需求选 Zig**——两者在现代系统编程中各有不可替代的位置。
 > [来源: [Zig vs Rust Discussion](https://news.ycombinator.com/item?id=27608507)]
 
@@ -445,7 +436,6 @@ graph TD
 ├── 企业级采用风险不同
 └── 缓解: 评估项目时间线
 ```
-
 > **边界要点**: Rust vs Zig 的边界主要与**生态成熟度**、**学习曲线**、**工具链**、**编译时间**和**稳定性**相关。
 > [来源: [Zig Status](https://ziglang.org/zsf/)]
 
@@ -490,7 +480,6 @@ graph TD
   ✅ 始终处理错误或使用 try/catch
      // Zig 的错误不可静默忽略
 ```
-
 > **陷阱总结**: Rust vs Zig 的陷阱主要与**风格模仿**、**defer 顺序**、**unsafe 滥用**、**comptime 混淆**和**错误处理（Error Handling）**相关。
 
 ---
@@ -515,7 +504,6 @@ fn main() {
     println!("{}", msg);
 }
 ```
-
 ### 编译验证示例
 
 ```rust
@@ -534,7 +522,6 @@ fn main() {
     println!("{:?}", ARR);
 }
 ```
-
 ```rust
 fn main() {
     let mut v = vec![1, 2, 3];
@@ -542,7 +529,6 @@ fn main() {
     println!("{:?}", v);
 }
 ```
-
 ## 相关概念文件
 
 - [Ownership](../01_foundation/01_ownership.md) — 所有权系统
@@ -598,7 +584,6 @@ fn fixed() {
     println!("{}", size);
 }
 ```
-
 > **Zig 对比**: Zig 的 `comptime` 是更通用的编译期计算机制——任何参数可标记为 `comptime`，函数在编译期执行。Rust 的 `const generics` 是类型系统（Type System）的扩展，仅支持特定上下文（数组大小、类型参数）。Zig 的 `comptime` 更灵活，但错误信息可能更复杂（编译期执行可能 panic）。Rust 的 `const generics` 更受限，但类型安全边界更清晰。两者都追求"编译期计算零运行时（Runtime）成本"，但 Zig 采用"通用编译期执行"，Rust 采用"受限常量泛型（Generics）"。来源: [Rust Reference]
 
 ### 10.2 边界测试：Zig 的显式内存管理与 Rust 的所有权（编译错误）
@@ -619,7 +604,6 @@ fn fixed() {
     println!("{}", r); // ✅ 在 s 有效期间使用
 } // s 在此释放
 ```
-
 > **Zig 对比**: Zig 使用显式分配器（`std.heap.page_allocator`）和手动内存管理——没有 GC，也没有 Rust 的所有权系统。Zig 的安全策略是"在调试模式下检测 UB"（边界检查、use-after-free 检测），但在发布模式移除检查。Rust 的安全策略是"编译期阻止 UB"——通过借用（Borrowing）检查器在编译期拒绝悬垂引用（Reference）、use-after-free、数据竞争。Zig 更灵活（可直接操作原始指针（Raw Pointer）），但安全性依赖运行时检查和程序员纪律；Rust 更严格，但编译器保证安全代码无 UB。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 的能力差异（编译错误）
@@ -642,7 +626,6 @@ fn main() {
     println!("{}", X);
 }
 ```
-
 > **修正**: Zig 的 `comptime` 是**图灵完全**的编译期执行：可在编译期使用几乎所有语言特性（循环、递归、分配内存、文件 I/O）。Rust 的 `const fn` 更保守：1) 不能堆分配；2) 不能调用 trait 方法（`const trait impl` 实验中）；3) 不能 panic（旧版，1.57+ 允许 `const panic`）；4) 不能使用 `dyn Trait`。Rust 的保守设计确保编译期执行的确定性和可预测性：编译器必须能完全求值 `const` 上下文，不能有副作用或无限循环。Zig 的 `comptime` 更强大，但允许更复杂的编译期逻辑（和潜在更长的编译时间）。这与 C++ 的 `constexpr`（C++20 允许堆分配和虚函数，类似 Zig 的方向）或 D 的 CTFE（Compile Time Function Execution，图灵完全）类似——Rust 在编译期能力上选择了渐进增强的路径。[来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)] · [来源: [Zig Documentation](https://ziglang.org/documentation/master/)]
 
 ### 10.4 边界测试：Zig 的显式内存分配与 Rust 的全局分配器（编译错误）
@@ -663,7 +646,6 @@ fn main() {
     println!("{:?}", v);
 }
 ```
-
 > **修正**: Zig 的设计哲学是**显式优于隐式**：每个可能分配的函数接受 `Allocator` 参数，调用者明确控制内存来源。Rust 的默认分配是**隐式**的：`Box::new`、`Vec::push`、`String::push_str` 使用全局分配器（可通过 `#[global_allocator]` 定制）。Zig 的显式分配使资源管理更清晰（尤其在嵌入式、游戏、实时系统），但增加了 API 复杂度。Rust 的隐式分配更符合主流语言习惯，但隐藏了分配点（性能分析困难）。Rust 也支持显式分配器（`Allocator` trait，不稳定），但生态采用率低。这与 C 的 `malloc`/`free`（显式）或 Go 的 GC（完全隐式）不同——Rust 在中间位置：默认隐式，但允许显式控制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/alloc/trait.Allocator.html)] · [来源: [Zig Allocator Design](https://ziglang.org/documentation/master/#Choosing-an-Allocator)]
 
 ### 10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 能力差距（编译错误）
@@ -680,7 +662,6 @@ fn main() {
     let arr = [0; SIZE];
 }
 ```
-
 > **修正**: Rust 的 `const fn` 支持**编译期求值**，但能力有限：1) 不能堆分配（`Vec`、`Box`、`String`）；2) 不能调用非 `const fn`；3) 不能有 `unsafe` 块。Zig 的 `comptime` 更强大：可在编译期执行任意代码（包括内存分配、I/O、网络请求），编译失败时提供堆栈跟踪。Rust 的 `const` 系统保守但安全：保证编译期求值终止（无无限循环），避免编译期副作用。未来演进：`const Heap`（提案中，允许编译期堆分配）、`const_mut_refs`（已稳定，允许 `&mut` 在 const fn 中）。这与 C++ 的 `constexpr`（C++20 支持堆分配和虚函数）或 D 的 CTFE（Compile-Time Function Execution，类似 Zig）不同——Rust 的 const 系统逐步扩展，每次需形式化验证安全性。[来源: [Rust Reference — const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)] · [来源: [Zig Documentation](https://ziglang.org/documentation/master/)]
 
 ## 嵌入式测验（Embedded Quiz）
@@ -756,9 +737,7 @@ Zig 可直接导入 C 头文件（`@cImport`），无需 bindgen 等工具。Rus
 | Rust vs Zig：现代系统语言的两种哲学 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 Rust vs Zig：现代系统语言的两种哲学 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 Rust vs Zig：现代系统语言的两种哲学 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: Rust vs Zig：现代系统语言的两种哲学 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

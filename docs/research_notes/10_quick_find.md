@@ -1,23 +1,14 @@
 # 研究笔记快速查找 {#研究笔记快速查找}
 
 > **概念族**: 综合研究
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2025-01-27
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 完成
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
 
 ---
@@ -25,9 +16,7 @@
 ## 📑 目录 {#目录}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [研究笔记快速查找 {#研究笔记快速查找}](#研究笔记快速查找-研究笔记快速查找)
@@ -79,7 +68,6 @@
 ## 🎯 使用说明 {#使用说明}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **首次使用？** 建议先看
@@ -91,11 +79,8 @@
 **查找方式**:
 
 1. **按关键词查找** - 根据您关心的关键词快速定位
-
 2. **按研究领域查找** - 根据研究领域浏览相关笔记
-
 3. **按研究目标查找** - 根据您的研究目标找到相关笔记
-
 4. **按优先级查找** - 根据研究优先级选择笔记
 
 ---
@@ -103,179 +88,113 @@
 ## 🔍 按关键词查找 {#按关键词查找}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式语言与形式证明 {#形式语言与形式证明}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 关键词 | 相关研究笔记 | 状态 |
-
 | :--- | :--- | :--- |
-
 | 形式语言   | [形式语言与形式证明](10_formal_language_and_proofs.md)      | ✅ 100% |
-
 | 形式证明   | [形式语言与形式证明](10_formal_language_and_proofs.md)      | ✅ 100% |
-
 | 推理规则   | [形式语言与形式证明](10_formal_language_and_proofs.md)      | ✅ 100% |
-
 | 操作语义   | [形式语言与形式证明](10_formal_language_and_proofs.md)      | ✅ 100% |
 
 ### 所有权和借用 {#所有权和借用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 关键词     | 相关研究笔记                                               | 状态    |
-
 | :--- | :--- | :--- |
-
 | 所有权     | [所有权模型形式化](formal_methods/10_ownership_model.md)    | ✅ 100% |
-
 | 借用       | [借用检查器证明](formal_methods/10_borrow_checker_proof.md) | ✅ 100% |
-
 | 借用检查器 | [借用检查器证明](formal_methods/10_borrow_checker_proof.md) | ✅ 100% |
-
 | 数据竞争   | [借用检查器证明](formal_methods/10_borrow_checker_proof.md) | ✅ 100% |
-
 | 内存安全   | [所有权模型形式化](formal_methods/10_ownership_model.md)    | ✅ 100% |
 
 ### 类型系统 {#类型系统-1}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 关键词     | 相关研究笔记                                                    | 状态    |
-
 | :--- | :--- | :--- |
-
 | 类型系统   | [类型系统基础](type_theory/10_type_system_foundations.md)        | ✅ 100% |
-
 | 类型构造能力 | [construction_capability](type_theory/10_construction_capability.md) | ✅ Def TCON1、矩阵、决策树 |
-
 | 核心特性完整链 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) | ✅ 13 项 Def→示例→论证→证明 |
-
 | 类型理论缺口 | [完备性缺口](formal_methods/00_completeness_gaps.md)           | ✅ 阶段 1–7 Def 占位 |
-
 | 形式化方法缺口 | [formal_methods 完备性缺口](formal_methods/00_completeness_gaps.md) | ✅ Phase 1–6 100% |
-
 | Trait      | [Trait 系统形式化](type_theory/10_trait_system_formalization.md) | ✅ 100% |
-
 | 泛型       | [高级类型特性](type_theory/10_advanced_types.md)                 | ✅ 100% |
-
 | GATs       | [高级类型特性](type_theory/10_advanced_types.md)                 | ✅ 100% |
-
 | const 泛型 | [高级类型特性](type_theory/10_advanced_types.md)                 | ✅ 100% |
-
 | 型变       | [型变理论](type_theory/10_variance_theory.md)                    | ✅ 100% |
-
 | 协变       | [型变理论](type_theory/10_variance_theory.md)                    | ✅ 100% |
-
 | 逆变       | [型变理论](type_theory/10_variance_theory.md)                    | ✅ 100% |
 
 ### 生命周期 {#生命周期-1}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 关键词       | 相关研究笔记                                                 | 状态    |
-
 | :--- | :--- | :--- |
-
 | 生命周期     | 生命周期形式化 | ✅ 100% |
-
 | 生命周期推断 | [生命周期形式化](type_theory/10_lifetime_formalization.md)    | ✅ 100% |
-
 | 引用有效性   | 生命周期形式化 | ✅ 100% |
-
 | 区域类型     | [生命周期形式化](type_theory/10_lifetime_formalization.md)    | ✅ 100% |
 
 ### 异步和并发 {#异步和并发}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 关键词      | 相关研究笔记                                                | 状态    |
-
 | :--- | :--- | :--- |
-
 | 异步        | [异步状态机形式化](formal_methods/10_async_state_machine.md) | ✅ 100% |
-
 | Future      | [异步状态机形式化](formal_methods/10_async_state_machine.md) | ✅ 100% |
-
 | async/await | [异步状态机形式化](formal_methods/10_async_state_machine.md) | ✅ 100% |
-
 | 并发        | [并发性能研究](experiments/10_concurrency_performance.md)    | ✅ 100% |
-
 | 执行确定性 | [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md) | ✅ Def EB-DET1、确定性判定树 |
-
 | 组件成熟度 | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) | ✅ Def CE-MAT1、L1–L4 |
-
 | 并发安全    | [异步状态机形式化](formal_methods/10_async_state_machine.md) | ✅ 100% |
-
 | Send/Sync   | [Send/Sync 形式化](formal_methods/10_send_sync_formalization.md)、[异步状态机形式化](formal_methods/10_async_state_machine.md)、[设计机制论证](10_design_mechanism_rationale.md) §Send/Sync | ✅ Def SEND1/SYNC1、SEND-T1/SYNC-T1；六篇并表 |
-
 | 安全可判定机制 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](10_safe_decidable_mechanisms_overview.md)、[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md) | ✅ 总览每机制一节；并发+Trait 族四维表；阶段 A–D 已完成 |
-
 | formal_methods 完备性 | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/10_formal_methods_completeness_checklist.md) | ✅ 六篇×六维自检（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类） |
 
 ### 性能优化 {#性能优化}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 关键词     | 相关研究笔记                                            | 状态    |
-
 | :--- | :--- | :--- |
-
 | 性能       | [性能基准测试](experiments/10_performance_benchmarks.md) | ✅ 100% |
-
 | 基准测试   | [性能基准测试](experiments/10_performance_benchmarks.md) | ✅ 100% |
-
 | 内存分析   | [内存分析](experiments/10_memory_analysis.md)            | ✅ 100% |
-
 | 编译器优化 | [编译器优化](experiments/10_compiler_optimizations.md)   | ✅ 100% |
-
 | 优化       | [编译器优化](experiments/10_compiler_optimizations.md)   | ✅ 100% |
 
 ### 宏系统 {#宏系统}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 关键词   | 相关研究笔记                                                   | 状态    |
-
 | :--- | :--- | :--- |
-
 | 宏       | [宏展开性能分析](experiments/10_macro_expansion_performance.md) | ✅ 100% |
-
 | 宏展开   | [宏展开性能分析](experiments/10_macro_expansion_performance.md) | ✅ 100% |
-
 | 过程宏   | [宏展开性能分析](experiments/10_macro_expansion_performance.md) | ✅ 100% |
-
 | 编译时间 | [宏展开性能分析](experiments/10_macro_expansion_performance.md) | ✅ 100% |
 
 ---
@@ -283,7 +202,6 @@
 ## 📚 按研究领域查找 {#按研究领域查找}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化方法 {#形式化方法}
@@ -293,19 +211,12 @@
 **研究领域**: 对 Rust 核心机制进行形式化建模和证明
 
 | 研究笔记                                                           | 研究目标                                    | 状态      | 完成度 |
-
 | :--- | :--- | :--- | :--- |
-
 | [形式语言与形式证明](10_formal_language_and_proofs.md)             | 推理规则、操作语义、判定形式、形式证明推导树 | ✅ 已完成 | 100%   |
-
 | [所有权模型形式化](formal_methods/10_ownership_model.md)            | 形式化定义所有权系统，证明内存安全          | ✅ 已完成 | 100%   |
-
 | [借用检查器证明](formal_methods/10_borrow_checker_proof.md)         | 形式化定义借用检查器，证明数据竞争自由      | ✅ 已完成 | 100%   |
-
 | [异步状态机形式化](formal_methods/10_async_state_machine.md)        | 形式化定义 Future/Poll 状态机，证明并发安全 | ✅ 已完成 | 100%   |
-
 | 生命周期形式化       | 形式化定义生命周期系统，证明引用有效性      | ✅ 已完成 | 100%   |
-
 | [Pin 和自引用类型形式化](formal_methods/10_pin_self_referential.md) | 形式化定义 Pin 类型和自引用类型，证明安全性 | ✅ 已完成 | 100%   |
 
 ### 类型理论 {#类型理论}
@@ -315,19 +226,12 @@
 **研究领域**: Rust 类型系统的理论基础和形式化定义
 
 | 研究笔记                                                        | 研究目标                                 | 状态      | 完成度 |
-
 | :--- | :--- | :--- | :--- |
-
 | [完备性缺口](formal_methods/00_completeness_gaps.md)             | 形式化论证不充分声明；LUB、Copy、RPITIT 等缺口 | ✅ 阶段 1–7 Def 占位 | 路线图 |
-
 | [类型系统基础](type_theory/10_type_system_foundations.md)        | 形式化定义 Rust 类型系统基础             | ✅ 已完成 | 100%   |
-
 | [Trait 系统形式化](type_theory/10_trait_system_formalization.md) | 形式化定义 Trait 系统，理解类型理论基础  | ✅ 已完成 | 100%   |
-
 | [生命周期形式化](type_theory/10_lifetime_formalization.md)       | 形式化定义生命周期系统，理解类型理论解释 | ✅ 已完成 | 100%   |
-
 | [高级类型特性](type_theory/10_advanced_types.md)                 | 深入分析 GATs、const 泛型和依赖类型      | ✅ 已完成 | 100%   |
-
 | [型变理论](type_theory/10_variance_theory.md)                    | 深入理解型变理论，形式化定义型变规则     | ✅ 已完成 | 100%   |
 
 ### 软件设计理论 {#软件设计理论}
@@ -337,21 +241,13 @@
 **研究领域**: 设计模式形式化、23/43 模型、执行模型、组合工程
 
 | 研究笔记                                                                    | 研究目标                           | 状态      | 完成度 |
-
 | :--- | :--- | :--- | :--- |
-
 | [软件设计理论体系](software_design_theory/README.md)                     | 设计模式、23/43、执行模型、组合工程 | ✅ 已完成 | 100%   |
-
 | [设计模式形式化](software_design_theory/01_design_patterns_formal/README.md)       | GoF 23 种模式形式化                | ✅ 已完成 | 100%   |
-
 | [23/43 模型](software_design_theory/02_workflow_safe_complete_models/README.md)   | 安全 vs 完全模型                   | ✅ 已完成 | 100%   |
-
 | [执行模型](software_design_theory/03_execution_models/README.md)                   | 同步、异步、并发、并行、分布式     | ✅ 已完成 | 100%   |
-
 | [组合工程](software_design_theory/04_compositional_engineering/README.md)          | CE-T1–T3 有效性证明                | ✅ 已完成 | 100%   |
-
 | [Rust 惯用模式](software_design_theory/06_rust_idioms.md)                | RAII、Newtype、类型状态            | ✅ 已完成 | 100%   |
-
 | [反模式与边界](software_design_theory/07_anti_patterns.md)                | 13 反例、反模式分类、规避策略      | ✅ 已完成 | 100%   |
 
 ### 实验研究 {#实验研究}
@@ -361,33 +257,23 @@
 **研究领域**: 通过实验验证理论假设，优化实践
 
 | 研究笔记                                                       | 研究目标                                         | 状态      | 完成度 |
-
 | :--- | :--- | :--- | :--- |
-
 | [性能基准测试](experiments/10_performance_benchmarks.md)        | 通过基准测试评估不同实现的性能特征               | ✅ 已完成 | 100%   |
-
 | [内存分析](experiments/10_memory_analysis.md)                   | 分析内存使用模式，识别内存优化机会               | ✅ 已完成 | 100%   |
-
 | [编译器优化](experiments/10_compiler_optimizations.md)          | 评估编译器优化效果，了解如何编写编译器友好的代码 | ✅ 已完成 | 100%   |
-
 | [并发性能研究](experiments/10_concurrency_performance.md)       | 评估不同并发模型的性能特征                       | ✅ 已完成 | 100%   |
-
 | [宏展开性能分析](experiments/10_macro_expansion_performance.md) | 分析宏展开性能，识别性能瓶颈                     | ✅ 已完成 | 100%   |
 
 ### 综合研究 {#综合研究}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **研究领域**: 实际应用和综合研究
 
 | 研究笔记                                        | 研究目标                                                   | 状态      | 完成度 |
-
 | :--- | :--- | :--- | :--- |
-
 | [实际应用案例研究](10_practical_applications.md) | 通过分析实际应用案例，验证 Rust 理论在实际项目中的应用效果 | ✅ 已完成 | 100%   |
-
 | [研究方法论](10_research_methodology.md)         | 建立 Rust 研究的方法论体系，为研究提供系统化的方法指导     | ✅ 已完成 | 100%   |
 
 ---
@@ -395,23 +281,19 @@
 ## 🎯 按研究目标查找 {#按研究目标查找}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 我想看完整总结与论证脉络 {#我想看完整总结与论证脉络}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **完整总结综合** → [00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md)（项目全貌、三大支柱、知识地图、论证总览）
-
 - **论证脉络关系** → [ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md)（论证五步法、概念→定理 DAG、文档依赖、论证思路示例）
 
 ### 我想看批判性意见与改进计划 {#我想看批判性意见与改进计划}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **批判性分析与可持续改进计划** → RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
@@ -423,105 +305,73 @@
 ### 我想证明某个性质 {#我想证明某个性质}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **形式化证明体系**（2026-02-14 完成）:
 
 - **批判性分析与推进计划** → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md)
-
 - **核心定理完整证明** → [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md)（L2 级 ownership T2、borrow T1、type T3）
-
 - **Coq 证明骨架** → [archive/deprecated/coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)（T-OW2）、[COQ_ISABELLE_PROOF_SCAFFOLDING](../../archive/deprecated/README.md)（已归档）
-
 - **国际对标** → [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](10_international_formal_verification_index.md)、[RUSTBELT_ALIGNMENT](10_rustbelt_alignment.md)
-
 - **权威对齐指南** → [AUTHORITATIVE_ALIGNMENT_GUIDE](10_authoritative_alignment_guide.md)（原三大支柱文档已归档至 `../archive/process_reports/2026_02/`）
-
 - **工具对接** → Aeneas 集成计划、coq-of-rust 集成计划（已归档）
 
 **形式化方法研究**:
 
 - **内存安全** → [所有权模型形式化](formal_methods/10_ownership_model.md)
-
 - **数据竞争自由** → [借用检查器证明](formal_methods/10_borrow_checker_proof.md)
-
 - **并发安全** → [异步状态机形式化](formal_methods/10_async_state_machine.md)
-
 - **引用有效性** → 生命周期形式化
-
 - **内存位置稳定性** → [Pin 和自引用类型形式化](formal_methods/10_pin_self_referential.md)
-
 - **形式化方法完备性** → [formal_methods 完备性缺口](formal_methods/00_completeness_gaps.md)（Phase 1–6 100%）
 
 ### 我想理解某个概念 {#我想理解某个概念}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 **类型理论研究**:
 
 - **类型系统基础** → [类型系统基础](type_theory/10_type_system_foundations.md)
-
 - **类型理论缺口** → [完备性缺口](formal_methods/00_completeness_gaps.md)（LUB、Copy、RPITIT 等；阶段 1–7 Def 占位）
-
 - **形式化方法缺口** → [formal_methods 完备性缺口](formal_methods/00_completeness_gaps.md)（Phase 1–6 100%）
-
 - **Trait 系统** → [Trait 系统形式化](type_theory/10_trait_system_formalization.md)
-
 - **生命周期** → [生命周期形式化](type_theory/10_lifetime_formalization.md)
-
 - **高级类型特性** → [高级类型特性](type_theory/10_advanced_types.md)
-
 - **型变规则** → [型变理论](type_theory/10_variance_theory.md)
 
 **软件设计理论**:
 
 - **设计模式** → [设计模式形式化](software_design_theory/01_design_patterns_formal/README.md)
-
 - **23/43 模型** → [安全 vs 完全模型](software_design_theory/02_workflow_safe_complete_models/README.md)
-
 - **执行模型** → [五模型形式化](software_design_theory/03_execution_models/README.md)
-
 - **组合工程** → [CE-T1–T3 有效性](software_design_theory/04_compositional_engineering/README.md)
-
 - **Rust 惯用模式** → [RAII、Newtype、类型状态](software_design_theory/06_rust_idioms.md)
-
 - **反模式与边界** → [13 反例、规避策略](software_design_theory/07_anti_patterns.md)
 
 ### 我想优化性能 {#我想优化性能}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **实验研究**:
 
 - **性能测试** → [性能基准测试](experiments/10_performance_benchmarks.md)
-
 - **内存优化** → [内存分析](experiments/10_memory_analysis.md)
-
 - **编译优化** → [编译器优化](experiments/10_compiler_optimizations.md)
-
 - **并发优化** → [并发性能研究](experiments/10_concurrency_performance.md)
-
 - **宏优化** → [宏展开性能分析](experiments/10_macro_expansion_performance.md)
 
 ### 我想学习研究方法 {#我想学习研究方法}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **综合研究**:
 
 - **研究方法** → [研究方法论](10_research_methodology.md)
-
 - **实际应用** → [实际应用案例研究](10_practical_applications.md)
-
 - **工具使用** → [研究工具使用指南](10_tools_guide.md)
-
 - **写作指导** → [研究笔记写作指南](10_writing_guide.md)
 
 ---
@@ -529,65 +379,47 @@
 ## 📊 按优先级查找 {#按优先级查找}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 高优先级研究 {#高优先级研究}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **预计完成时间**: 2-3 周
 
 1. [所有权模型形式化](formal_methods/10_ownership_model.md) - 40% 完成度
-
 2. [借用检查器证明](formal_methods/10_borrow_checker_proof.md) - 35% 完成度
-
 3. 生命周期形式化 - 35% 完成度
-
 4. [类型系统基础](type_theory/10_type_system_foundations.md) - 40% 完成度
 
 ### 中优先级研究 {#中优先级研究}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **预计完成时间**: 3-4 周
 
 1. [异步状态机形式化](formal_methods/10_async_state_machine.md) - 35% 完成度
-
 2. [Trait 系统形式化](type_theory/10_trait_system_formalization.md) - 35% 完成度
-
 3. [生命周期形式化](type_theory/10_lifetime_formalization.md) - 35% 完成度
-
 4. [性能基准测试](experiments/10_performance_benchmarks.md) - 30% 完成度
-
 5. [内存分析](experiments/10_memory_analysis.md) - 100% 完成度
-
 6. [编译器优化](experiments/10_compiler_optimizations.md) - 30% 完成度
-
 7. [并发性能研究](experiments/10_concurrency_performance.md) - 30% 完成度
-
 8. [实际应用案例研究](10_practical_applications.md) - 25% 完成度
-
 9. [研究方法论](10_research_methodology.md) - 35% 完成度
-
 10. [型变理论](type_theory/10_variance_theory.md) - 30% 完成度
 
 ### 低优先级研究 {#低优先级研究}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **预计完成时间**: 4-6 周
 
 1. [Pin 和自引用类型形式化](formal_methods/10_pin_self_referential.md) - 30% 完成度
-
 2. [高级类型特性](type_theory/10_advanced_types.md) - 30% 完成度
-
 3. [宏展开性能分析](experiments/10_macro_expansion_performance.md) - 30% 完成度
 
 ---
@@ -595,45 +427,34 @@
 ## 🔗 相关资源 {#相关资源}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 核心文档 {#核心文档}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [研究笔记主索引](README.md)
-
 - [快速参考](10_quick_reference.md)
-
 - [完整索引](INDEX.md)
-
 - [研究路线图](10_research_roadmap.md)
 
 ### 进展跟踪 {#进展跟踪}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [研究进展跟踪](10_progress_tracking.md)
-
 - [研究任务清单](10_task_checklist.md)
-
 - [系统统计报告](10_statistics.md)
 
 ### 工具和指南 {#工具和指南}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [研究工具使用指南](10_tools_guide.md)
-
 - [研究笔记写作指南](10_writing_guide.md)
-
 - [研究方法论](10_research_methodology.md)
 
 ---
@@ -649,17 +470,11 @@
 ## 🌍 权威国际化资源链接 {#权威国际化资源链接}
 
 >
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)**
-
 > **来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)**
-
 > **来源: [cheats.rs](https://cheats.rs/)**
 
 本节为速查内容提供官方权威来源与社区经典参考的直通链接，便于深入验证与扩展阅读。
@@ -667,57 +482,37 @@
 ### Rust Reference 核心章节 {#rust-reference-核心章节}
 
 - [Reference 首页](https://doc.rust-lang.org/reference/)
-
 - [Types](https://doc.rust-lang.org/reference/types.html)
-
 - [Items / Traits](https://doc.rust-lang.org/reference/items/traits.html)
-
 - [Expressions](https://doc.rust-lang.org/reference/expressions.html)
-
 - [Statements](https://doc.rust-lang.org/reference/statements.html)
-
 - [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html)
 
 ### The Rust Programming Language 核心章节 {#the-rust-programming-language-核心章节}
 
 - [TRPL 首页](https://doc.rust-lang.org/book/)
-
 - [Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
-
 - [Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
-
 - [Ch. 10 - Generic Types, Traits, Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)
-
 - [Ch. 13 - Closures](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
-
 - [Ch. 15 - Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)
-
 - [Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
-
 - [Ch. 19 - Advanced Features / Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)
 
 ### Rust Standard Library 核心 API / 模块 {#rust-standard-library-核心-api-模块}
 
 - [std 首页](https://doc.rust-lang.org/std/)
-
 - [std::result](https://doc.rust-lang.org/std/result/)
-
 - [std::option](https://doc.rust-lang.org/std/option/)
-
 - [std::error::Error](https://doc.rust-lang.org/std/error/trait.Error.html)
-
 - [std::fmt](https://doc.rust-lang.org/std/fmt/)
-
 - [std::panic](https://doc.rust-lang.org/std/panic/)
-
 - [std::marker (Send / Sync / PhantomData)](https://doc.rust-lang.org/std/marker/)
 
 ### Rust By Example / Rust Cookbook / cheats.rs {#rust-by-example-rust-cookbook-cheatsrs}
 
 - [Rust By Example 首页](https://doc.rust-lang.org/rust-by-example/)
-
 - [Rust Cookbook 首页](https://rust-lang-nursery.github.io/rust-cookbook/)
-
 - [cheats.rs 首页](https://cheats.rs/)
 
 ---
@@ -725,75 +520,53 @@
 ### 快速查找专属语言 / API 链接 {#快速查找专属语言-api-链接}
 
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 所有权与借用 {#所有权与借用}
 
 - [Reference - Memory allocation and lifetime](https://doc.rust-lang.org/reference/memory-model.html#memory-allocation-and-lifetime)
-
 - [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
-
 - [TRPL Ch. 4 - References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
-
 - [std::cell (Cell / RefCell)](https://doc.rust-lang.org/std/cell/)
-
 - [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html)
-
 - [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)
 
 #### 类型系统 {#类型系统-1}
 
 - [Reference - Types](https://doc.rust-lang.org/reference/types.html)
-
 - [Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)
-
 - [Reference - Generics](https://doc.rust-lang.org/reference/items/generics.html)
-
 - [TRPL Ch. 10 - Generics](https://doc.rust-lang.org/book/ch10-00-generics.html)
-
 - [std::marker (Send / Sync / Copy / Sized)](https://doc.rust-lang.org/std/marker/)
 
 #### 异步与并发 {#异步与并发}
 
 - [TRPL Ch. 17 - Async / Await](https://doc.rust-lang.org/book/ch17-00-async-await.html)
-
 - [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)
-
 - [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)
-
 - [std::sync](https://doc.rust-lang.org/std/sync/)
-
 - [std::thread](https://doc.rust-lang.org/std/thread/)
 
 #### 生命周期 {#生命周期-1}
 
 - [Reference - Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)
-
 - [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
-
 - [cheats.rs - Lifetimes](https://cheats.rs/#lifetimes)
 
 #### 宏与错误处理 {#宏与错误处理}
 
 - [Reference - Macros](https://doc.rust-lang.org/reference/macros.html)
-
 - [TRPL Ch. 19 - Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)
-
 - [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
-
 - [std::result::Result](https://doc.rust-lang.org/std/result/)
-
 - [std::option::Option](https://doc.rust-lang.org/std/option/)
 
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [research_notes 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -801,19 +574,12 @@
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

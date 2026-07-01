@@ -89,7 +89,6 @@ docs/
     └── deprecated/                   # 已废弃文档
         └── ai.md
 ```
-
 ---
 
 ## 📝 文件重命名规范
@@ -181,13 +180,11 @@ docs/
    - `quick_start.md`
    - `QUICK_START_2025.md`
    - 合并为: `guides/01_quick_start.md`
-
 2. **生态系统分析** (3个 → 1个)
    - `RUST_ASYNC_ECOSYSTEM_COMPREHENSIVE_ANALYSIS_2025.md`
    - `async_ecosystem_comprehensive_analysis_2025.md`
    - `async_ecosystem_comprehensive_analysis.md`
    - 合并为: `ecosystem/01_ecosystem_analysis_2025.md`
-
 3. **综合指南** (5个 → 2个)
    - 保留最新和最全的2个
    - 其他归档
@@ -198,12 +195,10 @@ docs/
    - `README_OLD.md`
    - `README_OLD_BACKUP.md`
    - `README (2).md`
-
 2. **完成报告** (3个)
    - `project_completion_summary.md`
    - `C06_ASYNC_完成总结_2025_10_19.md`
    - `异步编程全面梳理最终报告_2025_10_06.md`
-
 3. **其他** (3个)
    - `ai.md`
    - `ASYNC_SEMANTICS_COMPREHENSIVE_GUIDE.md` (如果与其他综合指南重复)

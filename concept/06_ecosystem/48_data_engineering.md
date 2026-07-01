@@ -110,7 +110,6 @@
 │  · 数据库 · 日志文件 · 消息队列 · API · IoT 传感器            │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 > **来源**: [Fundamentals of Data Engineering](https://www.oreilly.com/library/view/fundamentals-of-data/9781098108298/) ·
 > [Apache Airflow Concepts](https://airflow.apache.org/docs/apache-airflow/stable/concepts/index.html)
 
@@ -140,7 +139,6 @@ ELT:
   优点: 利用目标系统并行计算，灵活
   缺点: 目标系统负载高，原始数据可能质量低
 ```
-
 > **来源**: [ETL vs ELT — AWS](https://aws.amazon.com/compare/the-difference-between-etl-and-elt/) ·
 > [dbt — ELT Best Practices](https://docs.getdbt.com/sql-reference)
 
@@ -202,7 +200,6 @@ fn batch_ingest_csv_to_parquet(input: &Path, output: &Path) -> PolarsResult<()> 
     Ok(())
 }
 ```
-
 > **来源**: [Polars I/O](https://docs.pola.rs/user-guide/io/) ·
 > [Parquet Format](https://parquet.apache.org/docs/file-format/)
 
@@ -257,7 +254,6 @@ async fn stream_ingest_kafka(
     }
 }
 ```
-
 > **来源**: [rdkafka Documentation](https://docs.rs/rdkafka/latest/rdkafka/) ·
 > [Tokio Channels](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)
 
@@ -282,7 +278,6 @@ PostgreSQL WAL（Write-Ahead Log）:
   · Debezium 读取 WAL → 生成变更事件
   · 事件格式: { "op": "u", "before": {...}, "after": {...}, "ts_ms": 123456 }
 ```
-
 > **来源**: [Debezium Documentation](https://debezium.io/documentation/reference/stable/index.html) ·
 > [PostgreSQL WAL](https://www.postgresql.org/docs/current/wal-intro.html)
 
@@ -337,7 +332,6 @@ fn transform_user_events(df: LazyFrame) -> PolarsResult<DataFrame> {
         .collect()
 }
 ```
-
 > **来源**: [Polars Lazy API](https://docs.pola.rs/user-guide/lazy/) ·
 > [Polars Window Functions](https://docs.pola.rs/user-guide/expressions/window-functions/)
 
@@ -375,7 +369,6 @@ async fn sql_etl(ctx: &SessionContext) -> datafusion::error::Result<()> {
     Ok(())
 }
 ```
-
 > **来源**: [DataFusion SQL Reference](https://arrow.apache.org/datafusion/user-guide/sql/index.html) ·
 > [DataFusion ETL Example](https://arrow.apache.org/datafusion/user-guide/example-usage.html)
 
@@ -436,7 +429,6 @@ impl EtlPipeline {
     }
 }
 ```
-
 > **来源**: [Rust Design Patterns — Pipeline](https://rust-unofficial.github.io/patterns/patterns/creational/builder.html) ·
 > [Tokio Task Spawning](https://docs.rs/tokio/latest/tokio/task/index.html)
 
@@ -468,7 +460,6 @@ fn read_parquet_schema(path: &str) -> anyhow::Result<Type> {
 // 2. 向前兼容: 旧 reader 读新文件（忽略未知字段）
 // 3. Parquet 支持嵌套结构（Dremel 论文的 record shredding）
 ```
-
 **Parquet 性能优化**:
 
 | **技术** | **效果** | **Rust 支持** |
@@ -519,7 +510,6 @@ async fn object_store_example() -> anyhow::Result<()> {
     Ok(())
 }
 ```
-
 > **来源**: [object_store crate](https://docs.rs/object_store/latest/object_store/) ·
 > [Apache Arrow Object Store](https://docs.rs/object_store/latest/object_store/)
 
@@ -544,7 +534,6 @@ Rust 生态:
   · 支持 S3/Azure/GCS 上的 Delta 表读写
   · 支持 Arrow 格式零拷贝交互
 ```
-
 > **来源**: [Delta Lake Protocol](https://github.com/delta-io/delta/blob/master/PROTOCOL.md) ·
 > [delta-rs GitHub](https://github.com/delta-io/delta-rs) ·
 > [Delta Lake Paper](https://www.vldb.org/pvldb/vol13/p3411-armbrust.pdf)
@@ -593,7 +582,6 @@ impl QueryEngine {
     }
 }
 ```
-
 > **来源**: [Moka Cache](https://docs.rs/moka/latest/moka/) ·
 > [DataFusion Caching](https://datafusion.apache.org/user-guide/configs.html)
 
@@ -635,7 +623,6 @@ async fn analytics_handler(
     Ok(Json(json))
 }
 ```
-
 > **来源**: [axum Documentation](https://docs.rs/axum/latest/axum/) ·
 > [DataFusion as a Service](https://arrow.apache.org/datafusion/user-guide/example-usage.html)
 
@@ -669,7 +656,6 @@ Python 对比:
   Python: 生态丰富但性能受限（GIL、内存开销、类型不安全）
   Rust:  性能接近 C++ 但更安全，生态正在快速成熟
 ```
-
 > **来源**: [Polars Performance](https://pola.rs/benchmarks.html) ·
 > [Why Rust for Data [已失效]]<!-- 原链接: https://pola.rs/posts/rust-for-data/ --> ·
 > [Arrow Rust](https://arrow.apache.org/rust/)
@@ -710,7 +696,6 @@ Python 对比:
 │   └── 随机读取单列时，Parquet 最优；但读取整行时，行式格式可能更快
 └── 根结论: ❌ Parquet 是分析工作负载的最优解，但不是通用解。选型应考虑访问模式。
 ```
-
 > **来源**: [Parquet Best Practices [已失效]]<!-- 原链接: https://parquet.apache.org/docs/file-format/config/ --> ·
 > [When Not to Use Parquet](https://www.onehouse.ai/blog/onehouse-analytics-engine-guide)
 
@@ -746,7 +731,6 @@ fn write_with_schema_evolution() {
     // ❌ 失败：schema 不匹配，email 列不存在于旧 schema
 }
 ```
-
 > **修正**: Parquet 支持 schema 演化，但需遵循规则：
 >
 > 1. **添加列**: 新列必须为 optional（nullable），旧 reader 读到 null
@@ -779,7 +763,6 @@ async fn good_download(store: &dyn ObjectStore, path: &Path) -> anyhow::Result<(
     Ok(())
 }
 ```
-
 > **来源**: [object_store Streaming](https://docs.rs/object_store/latest/object_store/trait.ObjectStore.html#method.get) ·
 > [Tokio Async I/O](https://docs.rs/tokio/latest/tokio/io/index.html)
 
@@ -813,7 +796,6 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
     Ok(df)
 }
 ```
-
 > **来源**: [Polars CSV Options](https://docs.pola.rs/user-guide/io/csv/#read-options) ·
 > [Defensive Data Processing](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)
 
@@ -823,12 +805,10 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 > [来源: [Polars](https://pola.rs/)]
 > [来源: [DataFusion](https://arrow.apache.org/datafusion/)]
 > [来源: [Delta Lake](https://delta.io/)]
-
 > [来源: [Apache Arrow](https://arrow.apache.org/)]
 > [来源: [Polars](https://pola.rs/)]
 > [来源: [DataFusion](https://arrow.apache.org/datafusion/)]
 > [来源: [Delta Lake](https://delta.io/)]
-
 > [来源: [Polars User Guide](https://docs.pola.rs/)]
 > [来源: [Delta Lake Documentation](https://docs.delta.io/latest/index.html)]
 > [来源: [Debezium Documentation](https://debezium.io/documentation/reference/stable/index.html)]

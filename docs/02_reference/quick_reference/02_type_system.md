@@ -104,7 +104,6 @@
 2. 类型推导（省略显式标注）
 3. 零成本抽象（无运行时开销）
 ```
-
 ---
 
 ## 📐 基本类型速查 {#基本类型速查}
@@ -134,7 +133,6 @@ let g: bool = true;
 // 字符
 let h: char = '🦀';    // Unicode 字符
 ```
-
 ---
 
 ### 复合类型 {#复合类型}
@@ -156,7 +154,6 @@ let slice: &[i32] = &array[1..3];  // [2, 3]
 let s1: &str = "hello";           // 字符串切片
 let s2: String = String::from("world");  // 堆字符串
 ```
-
 ---
 
 ## 🏗️ Trait 系统 {#trait-系统}
@@ -190,7 +187,6 @@ impl Summary for Article {
     }
 }
 ```
-
 ---
 
 ### Trait 作为参数 {#trait-作为参数}
@@ -218,7 +214,6 @@ where
     println!("{}", item.summarize());
 }
 ```
-
 ---
 
 ### Trait 作为返回值 {#trait-作为返回值}
@@ -241,7 +236,6 @@ fn returns_trait_object() -> Box<dyn Summary> {
     Box::new(Article { /* ... */ })
 }
 ```
-
 ---
 
 ## 🔄 类型转换 {#类型转换}
@@ -265,7 +259,6 @@ let my = MyType::from(42);
 // Into trait（自动实现）
 let my: MyType = 42.into();
 ```
-
 ---
 
 ### TryFrom/TryInto（可失败转换） {#tryfromtryinto可失败转换}
@@ -289,7 +282,6 @@ impl TryFrom<i32> for PositiveInt {
 
 let pos = PositiveInt::try_from(42)?;
 ```
-
 ---
 
 ### as 转换（基本类型） {#as-转换基本类型}
@@ -301,7 +293,6 @@ let a = 3.14f64;
 let b = a as i32;      // 3（截断）
 let c = 100i32 as u8;  // 100
 ```
-
 ---
 
 ## 📦 泛型编程 {#泛型编程}
@@ -323,7 +314,6 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
     largest
 }
 ```
-
 ---
 
 ### 泛型结构体 {#泛型结构体}
@@ -349,7 +339,6 @@ impl Point<f32> {
     }
 }
 ```
-
 ---
 
 ### 关联类型 {#关联类型}
@@ -371,7 +360,6 @@ impl Iterator for Counter {
     }
 }
 ```
-
 ---
 
 ## 🎭 型变（Variance） {#型变variance}
@@ -391,7 +379,6 @@ where
     x  // ✅ OK: &'long str 可以转为 &'short str
 }
 ```
-
 ---
 
 ### 逆变（Contravariant）- fn(T) {#逆变contravariant--fnt}
@@ -409,7 +396,6 @@ fn contravariant<'short, 'long>(
     f(s);  // ✅ OK
 }
 ```
-
 ---
 
 ### 不变（Invariant）- &mut T {#不变invariant--mut-t}
@@ -422,7 +408,6 @@ fn invariant<'a, 'b>(x: &'a mut i32, y: &'b mut i32) {
     // x 和 y 必须精确匹配生命周期
 }
 ```
-
 ---
 
 ## 🔍 常用 Trait {#常用-trait}
@@ -447,7 +432,6 @@ let p = Point { x: 1, y: 2 };
 println!("{:?}", p);  // Debug
 println!("{}", p);    // Display
 ```
-
 ---
 
 ### Clone & Copy {#clone-copy}
@@ -466,7 +450,6 @@ struct Data { vec: Vec<i32> }
 let d1 = Data { vec: vec![1, 2, 3] };
 let d2 = d1.clone();  // 显式克隆
 ```
-
 ---
 
 ### PartialEq & Eq {#partialeq-eq}
@@ -481,7 +464,6 @@ let p1 = Point { x: 1, y: 2 };
 let p2 = Point { x: 1, y: 2 };
 assert_eq!(p1, p2);
 ```
-
 ---
 
 ### PartialOrd & Ord {#partialord-ord}
@@ -498,7 +480,6 @@ let p1 = Point { x: 1, y: 2 };
 let p2 = Point { x: 3, y: 4 };
 assert!(p1 < p2);
 ```
-
 ---
 
 ## 🧬 高级类型 {#高级类型}
@@ -517,7 +498,6 @@ fn distance() -> Kilometers {
     100
 }
 ```
-
 ---
 
 ### Never 类型 {#never-类型}
@@ -535,7 +515,6 @@ let x: i32 = if some_condition {
     never_returns()  // ! 可以转换为任何类型
 };
 ```
-
 ---
 
 ### PhantomData（零大小类型标记） {#phantomdata零大小类型标记}
@@ -550,7 +529,6 @@ struct MyType<T> {
     _marker: PhantomData<T>,  // 告诉编译器"拥有" T
 }
 ```
-
 ---
 
 ## 🎯 常见模式 {#常见模式}
@@ -573,7 +551,6 @@ fn run(distance: Meters, time: Seconds) {
 // ❌ 编译错误
 // run(Seconds(10), Meters(100));
 ```
-
 ---
 
 ### 类型状态模式 {#类型状态模式}
@@ -609,7 +586,6 @@ let door = Door::<Locked> { _state: PhantomData };
 let door = door.unlock();
 door.open();  // ✅ OK
 ```
-
 ---
 
 ### Builder 模式（类型安全） {#builder-模式类型安全}
@@ -653,7 +629,6 @@ impl EmailBuilder<Set<String>, Set<String>> {
     }
 }
 ```
-
 ---
 
 ## ⚡ 性能提示 {#性能提示}
@@ -674,7 +649,6 @@ fn generic<T: Display>(t: T) {
 generic(5);       // 生成 generic::<i32>
 generic("hello"); // 生成 generic::<&str>
 ```
-
 **优势**: 零运行时开销
 **劣势**: 增加编译时间和二进制大小
 
@@ -699,7 +673,6 @@ fn dynamic_dispatch(item: &dyn Summary) {
 // ✅ 性能：小二进制
 // ⚠️ 代价：虚表查找开销
 ```
-
 ---
 
 ### 内存对齐 {#内存对齐}
@@ -720,8 +693,7 @@ assert_eq!(align_of::<Example>(), 8);
 #[repr(align(64))]
 struct CacheAligned { data: [u8; 64]; }
 ```
-
-**详见**: [ALIGNMENT_GUIDE](../ALIGNMENT_GUIDE.md)、[c01 内存布局优化](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/04_内存布局优化.md)
+**详见**: [ALIGNMENT_GUIDE](../ALIGNMENT_GUIDE.md)、[c01 内存布局优化](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/04_memory_layout_optimization.md)
 
 ---
 
@@ -741,7 +713,6 @@ struct Bad {
     data: String,  // ❌ String 不是 Copy，不能 derive Copy
 }
 ```
-
 **原因**: `Copy` 要求所有字段都是 `Copy`，`String` 不是。
 
 **修正**:
@@ -752,7 +723,6 @@ struct Good {
     data: String,
 }
 ```
-
 ---
 
 ### 反例 2: 生命周期省略导致悬垂引用 {#反例-2-生命周期省略导致悬垂引用}
@@ -767,7 +737,6 @@ fn longest(x: &str, y: &str) -> &str {
 }
 // 若无输入引用，返回的引用可能悬垂
 ```
-
 **原因**: 输出引用生命周期需与输入关联。
 
 **修正**:
@@ -777,7 +746,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
-
 ---
 
 ### 反例 3: 混淆 Sized 与动态大小类型 {#反例-3-混淆-sized-与动态大小类型}
@@ -790,7 +758,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 fn take<T>(t: T) {}  // T: Sized 默认
 take(&[1, 2, 3]);   // ❌ [i32; 3] 是 Sized，但 &[i32] 的 T 是 slice
 ```
-
 **原因**: `&[T]` 为动态大小，需 `T: ?Sized` 或使用 `&[T]` 明确。
 
 **修正**:
@@ -798,7 +765,6 @@ take(&[1, 2, 3]);   // ❌ [i32; 3] 是 Sized，但 &[i32] 的 T 是 slice
 ```rust
 fn take_slice<T>(t: &[T]) {}
 ```
-
 ---
 
 ## 🔗 快速跳转 {#快速跳转}
@@ -810,8 +776,8 @@ fn take_slice<T>(t: &[T]) {}
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [类型系统理论](../../../crates/c02_type_system/docs/tier_04_advanced/README.md)
-- [型变详解](../../../crates/c02_type_system/docs/tier_03_references/02_类型型变参考.md)
-- [Trait 系统](../../../crates/c02_type_system/docs/tier_02_guides/04_Trait系统指南.md)
+- [型变详解](../../../crates/c02_type_system/docs/tier_03_references/02_variance_reference.md)
+- [Trait 系统](../../../crates/c02_type_system/docs/tier_02_guides/04_trait_system_guide.md)
 
 ### 代码示例 {#代码示例}
 
@@ -824,7 +790,7 @@ fn take_slice<T>(t: &[T]) {}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
-- [类型理论深度](../../../crates/c02_type_system/docs/tier_04_advanced/01_类型理论深度.md)
+- [类型理论深度](../../../crates/c02_type_system/docs/tier_04_advanced/01_type_theory_in_depth.md)
 - [类型构造能力](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) — Def TCON1、TCON 矩阵、类型构造决策树、Rust 1.93 新特性
 - [类型构造决策树（直达）](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md#类型构造决策树) — 目标类型→构造路径选择、确定性判定
 - [类型理论完备性缺口](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) — 缺口与对构造能力的影响
@@ -908,7 +874,6 @@ fn main() {
     // machine.start(); // ❌ 编译错误：Idle 状态没有 start 方法
 }
 ```
-
 ### 场景 2: 类型安全的配置构建 {#场景-2-类型安全的配置构建}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -966,7 +931,6 @@ fn main() {
     }
 }
 ```
-
 ### 场景 3: 零成本抽象的数据库查询 {#场景-3-零成本抽象的数据库查询}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -1021,7 +985,6 @@ fn main() {
     // 输出: SELECT * FROM users WHERE age > 18 AND active = true
 }
 ```
-
 ---
 
 ## ⚠️ 边界情况 {#边界情况}
@@ -1051,7 +1014,6 @@ fn main() {
     println!("动态分派: {}", s);
 }
 ```
-
 ### 边界 2: 递归类型与间接 {#边界-2-递归类型与间接}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -1088,7 +1050,6 @@ fn main() {
     println!("递归类型示例完成");
 }
 ```
-
 ### 边界 3: 生命周期子类型 {#边界-3-生命周期子类型}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -1110,7 +1071,6 @@ fn main() {
     println!("在作用域外: {}", result);
 }
 ```
-
 ---
 
 ---
@@ -1138,7 +1098,6 @@ let mutable: &mut String = unsafe { uninit.assume_init_mut() };
 // ✅ 1.93 新增：安全地调用 drop
 unsafe { uninit.assume_init_drop() };
 ```
-
 ### 切片到数组转换 {#切片到数组转换}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -1148,7 +1107,6 @@ unsafe { uninit.assume_init_drop() };
 let slice = &[1, 2, 3, 4];
 let array: &[i32; 4] = slice.as_array().unwrap();
 ```
-
 **影响**: 更安全的未初始化内存操作，更灵活的数组操作
 
 ---
@@ -1172,7 +1130,6 @@ const fn get_value() -> i32 {
 const VALUE: i32 = get_value();
 const REF: &i32 = &VALUE;  // ✅ 现在支持
 ```
-
 **影响**: 更灵活的 const 泛型配置和编译时计算
 
 ---

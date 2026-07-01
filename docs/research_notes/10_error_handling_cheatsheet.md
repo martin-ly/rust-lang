@@ -1,18 +1,15 @@
 # 错误处理速查卡 {#错误处理速查卡}
 >
 > **概念族**: 速查卡
-
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Standard Library](https://doc.rust-lang.org/std/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [RFC 2504](https://rust-lang.github.io/rfcs/2504-fix-error.html)
 > **创建日期**: 2026-02-10
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
-
 > **一页纸速查** - Result、Option、错误处理模式
 
 ---
@@ -70,7 +67,6 @@ opt.ok_or(err)      // Option -> Result
 opt.map(|v| ...)    // 映射
 opt.and_then(|v| ...) // 链式操作
 ```
-
 ### Result {#result}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -81,7 +77,6 @@ res?                // 传播错误
 res.map_err(|e| ...) // 错误映射
 res.and_then(|v| ...) // 链式操作
 ```
-
 ---
 
 ## ?操作符 {#操作符}
@@ -95,7 +90,6 @@ fn may_fail() -> Result<T, Error> {
     Ok(y)
 }
 ```
-
 ---
 
 ## 错误转换 {#错误转换}
@@ -111,7 +105,6 @@ impl From<IOError> for MyError {
 // 使用
 let file = File::open("file")?;  // IOError自动转为MyError
 ```
-
 ---
 
 ## panic vs Result {#panic-vs-result}
@@ -232,5 +225,4 @@ let file = File::open("file")?;  // IOError自动转为MyError
 ---
 
 > **来源: [ACM Digital Library](https://dl.acm.org/)**
-
 > **来源: [IEEE Standards](https://standards.ieee.org/)**

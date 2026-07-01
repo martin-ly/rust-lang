@@ -1,0 +1,1402 @@
+# 3.4 性能优化
+
+**文档版本**: 2.0
+**适用 Rust 版本**: 1.92.0+
+**最后更新**: 2026-01-26
+**文档类型**: Tier 3 高级实践指南
+
+---
+
+## 📋 目录
+
+- [3.4 性能优化](#34-性能优化)
+  - [📋 目录](#-目录)
+  - [文档概览](#文档概览)
+    - [🎯 学习目标](#-学习目标)
+    - [📚 前置知识](#-前置知识)
+    - [🎨 文档特色](#-文档特色)
+  - [1. 性能分析基础](#1-性能分析基础)
+    - [1.1 性能分析工具链](#11-性能分析工具链)
+      - [Criterion.rs - 基准测试框架](#criterionrs---基准测试框架)
+      - [Flamegraph - 性能火焰图](#flamegraph---性能火焰图)
+      - [perf (Linux)](#perf-linux)
+      - [Instruments (macOS)](#instruments-macos)
+      - [cargo-asm - 查看生成的汇编](#cargo-asm---查看生成的汇编)
+    - [1.2 基准测试框架](#12-基准测试框架)
+      - [Criterion 高级用法](#criterion-高级用法)
+      - [统计分析](#统计分析)
+    - [1.3 性能剖析方法](#13-性能剖析方法)
+      - [CPU 性能剖析](#cpu-性能剖析)
+      - [内存剖析](#内存剖析)
+      - [缓存性能分析](#缓存性能分析)
+  - [2. 所有权系统性能影响](#2-所有权系统性能影响)
+    - [2.1 Move vs Copy vs Clone](#21-move-vs-copy-vs-clone)
+      - [性能对比](#性能对比)
+      - [优化策略](#优化策略)
+    - [2.2 借用检查器开销](#22-借用检查器开销)
+      - [运行时开销](#运行时开销)
+      - [RefCell 的运行时开销](#refcell-的运行时开销)
+    - [2.3 生命周期标注优化](#23-生命周期标注优化)
+      - [生命周期零成本](#生命周期零成本)
+  - [3. 内存布局优化](#3-内存布局优化)
+    - [3.1 数据对齐和填充](#31-数据对齐和填充)
+      - [理解内存布局](#理解内存布局)
+      - [字段排序优化](#字段排序优化)
+      - [使用工具检查](#使用工具检查)
+      - [#\[repr\] 属性](#repr-属性)
+    - [3.2 缓存友好设计](#32-缓存友好设计)
+      - [CPU 缓存基础](#cpu-缓存基础)
+      - [数据局部性优化](#数据局部性优化)
+      - [False Sharing 避免](#false-sharing-避免)
+    - [3.3 内存分配优化](#33-内存分配优化)
+      - [预分配容量](#预分配容量)
+      - [重用分配](#重用分配)
+      - [自定义分配器](#自定义分配器)
+  - [4. 编译器优化技巧](#4-编译器优化技巧)
+    - [4.1 内联策略](#41-内联策略)
+      - [内联决策](#内联决策)
+      - [查看内联效果](#查看内联效果)
+    - [4.2 编译标志调优](#42-编译标志调优)
+      - [Cargo.toml 优化配置](#cargotoml-优化配置)
+      - [CPU 特定优化](#cpu-特定优化)
+    - [4.3 LTO 和 PGO](#43-lto-和-pgo)
+      - [LTO (Link-Time Optimization)](#lto-link-time-optimization)
+      - [PGO (Profile-Guided Optimization)](#pgo-profile-guided-optimization)
+  - [5. 算法和数据结构优化](#5-算法和数据结构优化)
+    - [5.1 容器选择](#51-容器选择)
+      - [5.1.1 性能对比](#511-性能对比)
+      - [选择指南](#选择指南)
+    - [5.2 迭代器优化](#52-迭代器优化)
+      - [迭代器 vs 循环](#迭代器-vs-循环)
+      - [并行迭代器](#并行迭代器)
+    - [5.3 字符串处理优化](#53-字符串处理优化)
+      - [字符串连接](#字符串连接)
+  - [6. 并发性能优化](#6-并发性能优化)
+    - [6.1 锁竞争优化](#61-锁竞争优化)
+      - [减少锁持有时间](#减少锁持有时间)
+      - [分片锁](#分片锁)
+    - [6.2 无锁数据结构](#62-无锁数据结构)
+      - [原子操作](#原子操作)
+      - [无锁队列](#无锁队列)
+    - [6.3 并行迭代器](#63-并行迭代器)
+      - [Rayon 并行化](#rayon-并行化)
+  - [7. 实战优化案例](#7-实战优化案例)
+    - [7.1 JSON 解析优化](#71-json-解析优化)
+    - [7.2 HTTP 服务器优化](#72-http-服务器优化)
+    - [7.3 数据处理管道优化](#73-数据处理管道优化)
+  - [相关资源](#相关资源)
+    - [📖 核心文档](#-核心文档)
+    - [🔗 相关主题](#-相关主题)
+    - [🛠️ 工具和资源](#️-工具和资源)
+    - [📚 学习路径](#-学习路径)
+    - [🎯 学习检查清单](#-学习检查清单)
+
+---
+
+## 文档概览
+
+### 🎯 学习目标
+
+完成本文档学习后，你将能够:
+
+- ✅ 使用专业工具进行性能分析和基准测试
+- ✅ 理解所有权系统对性能的影响
+- ✅ 优化内存布局和分配策略
+- ✅ 利用编译器优化提升性能
+- ✅ 选择和优化算法、数据结构
+- ✅ 实现高性能并发代码
+- ✅ 应用优化技巧到实际项目
+
+### 📚 前置知识
+
+学习本文档前，你需要:
+
+- ✅ 精通 Rust 的所有权、借用和生命周期系统
+- ✅ 了解零成本抽象原理
+- ✅ 熟悉性能分析基本概念
+- ✅ 有实际的 Rust 项目经验
+
+**推荐先学习**: [07 零成本抽象参考](07_zero_cost_abstractions_reference.md)
+
+### 🎨 文档特色
+
+本文档提供:
+
+- ⚡ **实战导向**: 真实项目的优化案例
+- 📊 **数据驱动**: 详细的性能测试数据
+- 🛠️ **工具指南**: 完整的工具链使用方法
+- 💡 **优化模式**: 经过验证的优化技巧
+- ⚖️ **权衡分析**: 性能与可维护性的平衡
+
+---
+
+## 1. 性能分析基础
+
+### 1.1 性能分析工具链
+
+#### Criterion.rs - 基准测试框架
+
+```toml
+# Cargo.toml
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+name = "my_benchmark"
+harness = false
+```
+```rust
+// benches/my_benchmark.rs
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
+
+fn fibonacci(n: u64) -> u64 {
+    match n {
+        0 => 1,
+        1 => 1,
+        n => fibonacci(n-1) + fibonacci(n-2),
+    }
+}
+
+fn criterion_benchmark(c: &mut Criterion) {
+    c.bench_function("fib 20", |b| b.iter(|| fibonacci(black_box(20))));
+}
+
+criterion_group!(benches, criterion_benchmark);
+criterion_main!(benches);
+```
+**运行基准测试**:
+
+```bash
+cargo bench
+```
+#### Flamegraph - 性能火焰图
+
+```bash
+# 安装
+cargo install flamegraph
+
+# 生成火焰图
+cargo flamegraph --bin your_app
+
+# 输出: flamegraph.svg
+```
+#### perf (Linux)
+
+```bash
+# 记录性能数据
+perf record --call-graph dwarf ./target/release/your_app
+
+# 查看报告
+perf report
+
+# 生成火焰图
+perf script | stackcollapse-perf.pl | flamegraph.pl > perf.svg
+```
+#### Instruments (macOS)
+
+```bash
+# 使用 Instruments 进行性能分析
+instruments -t "Time Profiler" ./target/release/your_app
+```
+#### cargo-asm - 查看生成的汇编
+
+```bash
+# 安装
+cargo install cargo-asm
+
+# 查看函数的汇编代码
+cargo asm your_crate::module::function
+```
+### 1.2 基准测试框架
+
+#### Criterion 高级用法
+
+```rust
+use criterion::{
+    black_box, criterion_group, criterion_main,
+    BenchmarkId, Criterion, Throughput
+};
+
+fn bench_with_input(c: &mut Criterion) {
+    let mut group = c.benchmark_group("vector_operations");
+
+    for size in [100, 1000, 10000].iter() {
+        group.throughput(Throughput::Elements(*size as u64));
+
+        group.bench_with_input(
+            BenchmarkId::from_parameter(size),
+            size,
+            |b, &size| {
+                let vec: Vec<i32> = (0..size).collect();
+                b.iter(|| {
+                    vec.iter().map(|x| x * 2).sum::<i32>()
+                });
+            },
+        );
+    }
+
+    group.finish();
+}
+
+// 对比不同实现
+fn bench_comparison(c: &mut Criterion) {
+    let mut group = c.benchmark_group("string_concat");
+    let strings: Vec<String> = vec!["hello"; 1000]
+        .into_iter()
+        .map(String::from)
+        .collect();
+
+    group.bench_function("push_str", |b| {
+        b.iter(|| {
+            let mut result = String::new();
+            for s in &strings {
+                result.push_str(s);
+            }
+            result
+        });
+    });
+
+    group.bench_function("join", |b| {
+        b.iter(|| {
+            strings.join("")
+        });
+    });
+
+    group.finish();
+}
+
+criterion_group!(benches, bench_with_input, bench_comparison);
+criterion_main!(benches);
+```
+#### 统计分析
+
+Criterion 自动提供:
+
+- **平均值和中位数**
+- **标准差**
+- **异常值检测**
+- **回归检测**（与之前的运行对比）
+
+### 1.3 性能剖析方法
+
+#### CPU 性能剖析
+
+```rust
+// 使用 pprof-rs 进行 CPU 剖析
+use pprof::ProfilerGuard;
+
+fn main() {
+    let guard = ProfilerGuard::new(100).unwrap();
+
+    // 你的代码
+    expensive_computation();
+
+    if let Ok(report) = guard.report().build() {
+        let file = std::fs::File::create("profile.svg").unwrap();
+        report.flamegraph(file).unwrap();
+    }
+}
+```
+#### 内存剖析
+
+```bash
+# 使用 valgrind (Linux)
+valgrind --tool=massif ./target/release/your_app
+
+# 查看报告
+ms_print massif.out.*
+
+# 使用 heaptrack (Linux)
+heaptrack ./target/release/your_app
+heaptrack_gui heaptrack.your_app.*.gz
+```
+#### 缓存性能分析
+
+```bash
+# perf 缓存分析
+perf stat -e cache-references,cache-misses ./target/release/your_app
+
+# 详细缓存分析
+perf stat -d ./target/release/your_app
+```
+---
+
+## 2. 所有权系统性能影响
+
+### 2.1 Move vs Copy vs Clone
+
+#### 性能对比
+
+```rust
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
+
+#[derive(Clone)]
+struct LargeStruct {
+    data: Vec<u8>,
+}
+
+#[derive(Copy, Clone)]
+struct SmallStruct {
+    x: i64,
+    y: i64,
+}
+
+fn bench_move_copy_clone(c: &mut Criterion) {
+    let mut group = c.benchmark_group("ownership_patterns");
+
+    // Move (零成本)
+    group.bench_function("move_large", |b| {
+        b.iter(|| {
+            let data = LargeStruct { data: vec![0; 1000] };
+            let moved = data;  // Move，只传递指针
+            black_box(moved);
+        });
+    });
+
+    // Clone (昂贵)
+    group.bench_function("clone_large", |b| {
+        let data = LargeStruct { data: vec![0; 1000] };
+        b.iter(|| {
+            let cloned = data.clone();  // 深拷贝
+            black_box(cloned);
+        });
+    });
+
+    // Copy (廉价)
+    group.bench_function("copy_small", |b| {
+        let data = SmallStruct { x: 42, y: 100 };
+        b.iter(|| {
+            let copied = data;  // 栈拷贝，非常快
+            black_box(copied);
+        });
+    });
+
+    group.finish();
+}
+
+criterion_group!(benches, bench_move_copy_clone);
+criterion_main!(benches);
+```
+**典型结果**:
+
+| 操作      | 数据大小 | 时间    | 说明          |
+| :--- | :--- | :--- | :--- |
+| **Move**  | 1KB      | ~2 ns   | 只传递指针    |
+| **Clone** | 1KB      | ~100 ns | 堆分配 + 拷贝 |
+| **Copy**  | 16 bytes | ~0.5 ns | 栈拷贝        |
+
+#### 优化策略
+
+```rust
+// ❌ 不必要的 Clone
+fn process_bad(data: &Vec<i32>) -> Vec<i32> {
+    let mut result = data.clone();  // 昂贵的克隆
+    result.push(42);
+    result
+}
+
+// ✅ 使用 Move
+fn process_good(mut data: Vec<i32>) -> Vec<i32> {
+    data.push(42);
+    data  // Move 返回，零成本
+}
+
+// ✅ 原地修改
+fn process_best(data: &mut Vec<i32>) {
+    data.push(42);
+}
+```
+### 2.2 借用检查器开销
+
+#### 运行时开销
+
+借用检查是**编译时**进行的，**无运行时开销**:
+
+```rust
+fn borrow_example(data: &Vec<i32>) -> i32 {
+    data.iter().sum()
+}
+
+// 编译后等价于 C:
+// int borrow_example(const std::vector<int>* data) {
+//     return std::accumulate(data->begin(), data->end(), 0);
+// }
+```
+**关键点**:
+
+- ✅ 借用检查器不生成任何运行时代码
+- ✅ 引用就是指针，无额外开销
+- ✅ 生命周期在编译后完全擦除
+
+#### RefCell 的运行时开销
+
+```rust
+use std::cell::RefCell;
+use criterion::{black_box, Criterion};
+
+fn bench_refcell_overhead(c: &mut Criterion) {
+    let mut group = c.benchmark_group("borrow_check");
+
+    // 直接访问（无开销）
+    group.bench_function("direct", |b| {
+        let mut data = vec![1, 2, 3];
+        b.iter(|| {
+            data.push(black_box(4));
+            data.pop();
+        });
+    });
+
+    // RefCell（有运行时检查）
+    group.bench_function("refcell", |b| {
+        let data = RefCell::new(vec![1, 2, 3]);
+        b.iter(|| {
+            data.borrow_mut().push(black_box(4));
+            data.borrow_mut().pop();
+        });
+    });
+
+    group.finish();
+}
+```
+**典型开销**: RefCell 增加约 5-10% 的开销（每次 borrow_mut）
+
+### 2.3 生命周期标注优化
+
+#### 生命周期零成本
+
+```rust
+// 复杂的生命周期标注
+fn complex_lifetimes<'a, 'b>(x: &'a str, y: &'b str) -> &'a str
+where 'b: 'a  // 'b 必须至少和 'a 一样长
+{
+    if x.len() > y.len() { x } else { y }
+}
+
+// 编译后：生命周期完全擦除，无开销
+// const char* complex_lifetimes(const char* x, const char* y) {
+//     return strlen(x) > strlen(y) ? x : y;
+// }
+```
+**关键点**:
+
+- ✅ 生命周期是零成本抽象
+- ✅ 只在编译时存在
+- ✅ 运行时等价于原始指针操作
+
+---
+
+## 3. 内存布局优化
+
+### 3.1 数据对齐和填充
+
+#### 理解内存布局
+
+```rust
+use std::mem::{size_of, align_of};
+
+// 默认布局（可能有填充）
+struct Unoptimized {
+    a: u8,   // 1 byte
+    // 7 bytes padding
+    b: u64,  // 8 bytes
+    c: u8,   // 1 byte
+    // 7 bytes padding
+}
+
+// 优化后的布局
+struct Optimized {
+    b: u64,  // 8 bytes
+    a: u8,   // 1 byte
+    c: u8,   // 1 byte
+    // 6 bytes padding
+}
+
+fn main() {
+    println!("Unoptimized: {} bytes", size_of::<Unoptimized>());  // 24
+    println!("Optimized: {} bytes", size_of::<Optimized>());      // 16
+
+    // 节省 33% 内存！
+}
+```
+#### 字段排序优化
+
+```rust
+// ❌ 糟糕的布局
+struct Bad {
+    a: u8,    // 1 byte, 7 padding
+    b: u64,   // 8 bytes
+    c: u16,   // 2 bytes, 6 padding
+    d: u32,   // 4 bytes, 4 padding
+}
+// 总计: 32 bytes
+
+// ✅ 优化后的布局
+struct Good {
+    b: u64,   // 8 bytes (最大的先)
+    d: u32,   // 4 bytes
+    c: u16,   // 2 bytes
+    a: u8,    // 1 byte
+    // 1 byte padding
+}
+// 总计: 16 bytes (节省 50%)
+```
+#### 使用工具检查
+
+```bash
+# 查看类型大小和布局
+cargo rustc -- -Z print-type-sizes
+```
+#### #[repr] 属性
+
+```rust
+// C 兼容布局
+#[repr(C)]
+struct CLayout {
+    a: u8,
+    b: u64,
+}
+
+// 紧凑布局（无填充，但可能未对齐）
+#[repr(packed)]
+struct Packed {
+    a: u8,
+    b: u64,  // ⚠️ 可能未对齐，访问较慢
+}
+
+// 对齐到特定字节
+#[repr(align(64))]  // 缓存行对齐
+struct CacheAligned {
+    data: [u8; 64],
+}
+```
+### 3.2 缓存友好设计
+
+#### CPU 缓存基础
+
+现代 CPU 缓存层次:
+
+```text
+L1 Cache: 32-64 KB, ~4 cycles, 每核私有
+L2 Cache: 256 KB-1 MB, ~12 cycles, 每核私有
+L3 Cache: 8-64 MB, ~40 cycles, 所有核共享
+主内存: GB级, ~100-300 cycles
+```
+**缓存行**: 通常 64 字节
+
+#### 数据局部性优化
+
+```rust
+// ❌ 缓存不友好：AoS (Array of Structures)
+struct ParticleBad {
+    position: [f32; 3],  // 12 bytes
+    velocity: [f32; 3],  // 12 bytes
+    mass: f32,           // 4 bytes
+    _padding: [u8; 8],   // 8 bytes (对齐到 32)
+}
+
+fn update_positions_bad(particles: &mut [ParticleBad]) {
+    for particle in particles {
+        particle.position[0] += particle.velocity[0];
+        particle.position[1] += particle.velocity[1];
+        particle.position[2] += particle.velocity[2];
+    }
+    // 每个粒子占用一个或多个缓存行
+    // 但我们只使用了部分数据（position 和 velocity）
+}
+
+// ✅ 缓存友好：SoA (Structure of Arrays)
+struct ParticlesGood {
+    positions_x: Vec<f32>,
+    positions_y: Vec<f32>,
+    positions_z: Vec<f32>,
+    velocities_x: Vec<f32>,
+    velocities_y: Vec<f32>,
+    velocities_z: Vec<f32>,
+}
+
+fn update_positions_good(particles: &mut ParticlesGood) {
+    for i in 0..particles.positions_x.len() {
+        particles.positions_x[i] += particles.velocities_x[i];
+        particles.positions_y[i] += particles.velocities_y[i];
+        particles.positions_z[i] += particles.velocities_z[i];
+    }
+    // 连续访问，每个缓存行都充分利用
+}
+```
+**性能提升**: SoA 通常比 AoS 快 2-4x
+
+#### False Sharing 避免
+
+```rust
+use std::sync::atomic::{AtomicU64, Ordering};
+use std::thread;
+
+// ❌ False sharing: 多个线程修改同一缓存行
+struct BadCounters {
+    counter1: AtomicU64,  // 8 bytes
+    counter2: AtomicU64,  // 8 bytes (在同一缓存行)
+}
+
+// ✅ 避免 false sharing: 填充到不同缓存行
+#[repr(align(64))]  // 缓存行对齐
+struct GoodCounter {
+    counter: AtomicU64,
+    _padding: [u8; 56],  // 填充到 64 字节
+}
+
+struct GoodCounters {
+    counter1: GoodCounter,
+    counter2: GoodCounter,
+}
+
+fn bench_false_sharing() {
+    let bad = std::sync::Arc::new(BadCounters {
+        counter1: AtomicU64::new(0),
+        counter2: AtomicU64::new(0),
+    });
+
+    let good = std::sync::Arc::new(GoodCounters {
+        counter1: GoodCounter { counter: AtomicU64::new(0), _padding: [0; 56] },
+        counter2: GoodCounter { counter: AtomicU64::new(0), _padding: [0; 56] },
+    });
+
+    // 测试会显示 GoodCounters 快很多
+}
+```
+### 3.3 内存分配优化
+
+#### 预分配容量
+
+```rust
+use criterion::{black_box, Criterion};
+
+fn bench_allocation(c: &mut Criterion) {
+    let mut group = c.benchmark_group("allocation");
+
+    // ❌ 动态增长（多次分配）
+    group.bench_function("dynamic", |b| {
+        b.iter(|| {
+            let mut vec = Vec::new();
+            for i in 0..1000 {
+                vec.push(black_box(i));
+            }
+        });
+    });
+
+    // ✅ 预分配
+    group.bench_function("preallocated", |b| {
+        b.iter(|| {
+            let mut vec = Vec::with_capacity(1000);
+            for i in 0..1000 {
+                vec.push(black_box(i));
+            }
+        });
+    });
+
+    group.finish();
+}
+
+// 性能提升: 2-3x
+```
+#### 重用分配
+
+```rust
+// ✅ 重用 Vec 避免分配
+fn process_batches(batches: &[Vec<i32>]) -> Vec<Vec<i32>> {
+    let mut result = Vec::new();
+    let mut buffer = Vec::new();  // 重用缓冲区
+
+    for batch in batches {
+        buffer.clear();  // 清空但保留容量
+        buffer.extend(batch.iter().filter(|&&x| x > 0));
+        result.push(buffer.clone());
+    }
+
+    result
+}
+
+// 更好：使用对象池
+use std::collections::VecDeque;
+
+struct VecPool {
+    pool: VecDeque<Vec<i32>>,
+}
+
+impl VecPool {
+    fn get(&mut self) -> Vec<i32> {
+        self.pool.pop_front().unwrap_or_else(Vec::new)
+    }
+
+    fn put(&mut self, mut vec: Vec<i32>) {
+        vec.clear();
+        self.pool.push_back(vec);
+    }
+}
+```
+#### 自定义分配器
+
+```rust
+use std::alloc::{GlobalAlloc, System, Layout};
+
+struct CountingAllocator;
+
+static ALLOCATED: std::sync::atomic::AtomicUsize =
+    std::sync::atomic::AtomicUsize::new(0);
+
+unsafe impl GlobalAlloc for CountingAllocator {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        ALLOCATED.fetch_add(layout.size(), std::sync::atomic::Ordering::SeqCst);
+        System.alloc(layout)
+    }
+
+    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
+        ALLOCATED.fetch_sub(layout.size(), std::sync::atomic::Ordering::SeqCst);
+        System.dealloc(ptr, layout)
+    }
+}
+
+#[global_allocator]
+static GLOBAL: CountingAllocator = CountingAllocator;
+
+// 现在可以追踪内存分配
+fn main() {
+    println!("Allocated: {} bytes", ALLOCATED.load(std::sync::atomic::Ordering::SeqCst));
+}
+```
+---
+
+## 4. 编译器优化技巧
+
+### 4.1 内联策略
+
+#### 内联决策
+
+```rust
+// ✅ 小函数：总是内联
+#[inline(always)]
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+// ✅ 中等函数：建议内联
+#[inline]
+fn process(data: &[i32]) -> i32 {
+    data.iter().map(|x| x * 2).sum()
+}
+
+// ❌ 大函数：不内联
+// #[inline]  // 不加
+fn complex_processing(data: &[i32]) -> Vec<i32> {
+    // 50+ 行复杂逻辑
+}
+
+// ✅ 跨 crate 内联
+#[inline]
+pub fn public_api(x: i32) -> i32 {
+    x * 2
+}
+```
+#### 查看内联效果
+
+```bash
+# 查看是否内联
+cargo asm --lib your_crate::function
+
+# 使用 LLVM IR
+cargo rustc --release -- --emit=llvm-ir
+```
+### 4.2 编译标志调优
+
+#### Cargo.toml 优化配置
+
+```toml
+[profile.release]
+# 优化级别 (0-3, s, z)
+opt-level = 3
+
+# LTO: 链接时优化
+lto = true
+
+# 代码生成单元 (越少优化越好，但编译慢)
+codegen-units = 1
+
+# 保留调试信息
+debug = false
+
+# 溢出检查
+overflow-checks = false
+
+# 增量编译
+incremental = false
+
+# 更激进的优化
+[profile.release.build-override]
+opt-level = 3
+```
+#### CPU 特定优化
+
+```toml
+# .cargo/config.toml
+[build]
+rustflags = [
+    "-C", "target-cpu=native",  # 使用本机 CPU 特性
+]
+```
+```bash
+# 命令行
+RUSTFLAGS="-C target-cpu=native" cargo build --release
+```
+### 4.3 LTO 和 PGO
+
+#### LTO (Link-Time Optimization)
+
+```toml
+[profile.release]
+lto = "fat"  # 完整 LTO (最慢但最优)
+# lto = "thin"  # 轻量 LTO (平衡)
+# lto = true  # 等于 "fat"
+```
+**效果**: 通常 5-15% 性能提升
+
+#### PGO (Profile-Guided Optimization)
+
+```bash
+# 步骤 1: 构建 instrumented 版本
+RUSTFLAGS="-Cprofile-generate=/tmp/pgo-data" \
+    cargo build --release
+
+# 步骤 2: 运行典型工作负载
+./target/release/your_app
+
+# 步骤 3: 使用 profile 数据重新编译
+RUSTFLAGS="-Cprofile-use=/tmp/pgo-data/merged.profdata" \
+    cargo build --release
+```
+**效果**: 通常 10-30% 性能提升
+
+---
+
+## 5. 算法和数据结构优化
+
+### 5.1 容器选择
+
+#### 5.1.1 性能对比
+
+| 操作              | Vec     | VecDeque | LinkedList | HashMap | BTreeMap |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Push back**     | O(1)\*  | O(1)\*   | O(1)       | -       | -        |
+| **Push front**    | O(n)    | O(1)\*   | O(1)       | -       | -        |
+| **Random access** | O(1)    | O(1)     | O(n)       | -       | -        |
+| **Insert**        | O(n)    | O(n)     | O(1)       | O(1)\*  | O(log n) |
+| **Search**        | O(n)    | O(n)     | O(n)       | O(1)\*  | O(log n) |
+| **Memory**        | 紧凑    | 较紧凑   | 分散       | 分散    | 分散     |
+| **Cache**         | ✅ 优秀 | ⚠️ 中等  | ❌ 差      | ⚠️ 中等 | ⚠️ 中等  |
+
+\* 摊销
+
+#### 选择指南
+
+```rust
+// ✅ 顺序访问、随机访问 → Vec
+let mut vec = Vec::new();
+vec.push(1);
+let x = vec[0];
+
+// ✅ 双端队列 → VecDeque
+use std::collections::VecDeque;
+let mut deque = VecDeque::new();
+deque.push_front(1);
+deque.push_back(2);
+
+// ❌ 很少需要 LinkedList
+// 只在频繁中间插入且不需要随机访问时考虑
+
+// ✅ 键值查找 → HashMap (快) 或 BTreeMap (有序)
+use std::collections::HashMap;
+let mut map = HashMap::new();
+map.insert("key", "value");
+
+// ✅ 小集合 → SmallVec (栈上优化)
+use smallvec::SmallVec;
+let mut vec: SmallVec<[i32; 8]> = SmallVec::new();
+vec.push(1);  // 前8个元素在栈上
+```
+### 5.2 迭代器优化
+
+#### 迭代器 vs 循环
+
+```rust
+use criterion::{black_box, Criterion};
+
+fn bench_iteration(c: &mut Criterion) {
+    let data: Vec<i32> = (0..10000).collect();
+    let mut group = c.benchmark_group("iteration");
+
+    // 迭代器（零成本）
+    group.bench_function("iterator", |b| {
+        b.iter(|| {
+            data.iter()
+                .filter(|&&x| x % 2 == 0)
+                .map(|&x| x * 2)
+                .sum::<i32>()
+        });
+    });
+
+    // 手写循环（等价性能）
+    group.bench_function("loop", |b| {
+        b.iter(|| {
+            let mut sum = 0;
+            for &x in &data {
+                if x % 2 == 0 {
+                    sum += x * 2;
+                }
+            }
+            sum
+        });
+    });
+
+    group.finish();
+}
+
+// 结果：完全相同的性能
+```
+#### 并行迭代器
+
+```rust
+use rayon::prelude::*;
+
+fn bench_parallel(c: &mut Criterion) {
+    let data: Vec<i32> = (0..1_000_000).collect();
+    let mut group = c.benchmark_group("parallel");
+
+    // 顺序
+    group.bench_function("sequential", |b| {
+        b.iter(|| {
+            data.iter().map(|&x| expensive_computation(x)).sum::<i32>()
+        });
+    });
+
+    // 并行
+    group.bench_function("parallel", |b| {
+        b.iter(|| {
+            data.par_iter().map(|&x| expensive_computation(x)).sum::<i32>()
+        });
+    });
+
+    group.finish();
+}
+
+fn expensive_computation(x: i32) -> i32 {
+    (0..100).fold(x, |acc, _| (acc * 31) % 1000)
+}
+
+// 并行可能快 4-8x (取决于核心数)
+```
+### 5.3 字符串处理优化
+
+#### 字符串连接
+
+```rust
+fn bench_string_concat(c: &mut Criterion) {
+    let strings: Vec<&str> = vec!["hello"; 1000];
+    let mut group = c.benchmark_group("string_concat");
+
+    // ❌ 最慢：重复分配
+    group.bench_function("plus_operator", |b| {
+        b.iter(|| {
+            let mut result = String::new();
+            for s in &strings {
+                result = result + s;  // 每次分配新内存
+            }
+            result
+        });
+    });
+
+    // ✅ 较好：push_str
+    group.bench_function("push_str", |b| {
+        b.iter(|| {
+            let mut result = String::new();
+            for s in &strings {
+                result.push_str(s);
+            }
+            result
+        });
+    });
+
+    // ✅ 最好：预分配 + push_str
+    group.bench_function("with_capacity", |b| {
+        b.iter(|| {
+            let capacity = strings.iter().map(|s| s.len()).sum();
+            let mut result = String::with_capacity(capacity);
+            for s in &strings {
+                result.push_str(s);
+            }
+            result
+        });
+    });
+
+    // ✅ 最佳：使用 join
+    group.bench_function("join", |b| {
+        b.iter(|| strings.join(""));
+    });
+
+    group.finish();
+}
+
+// 性能比较:
+// plus_operator: 100ms
+// push_str: 10ms
+// with_capacity: 5ms
+// join: 5ms
+```
+---
+
+## 6. 并发性能优化
+
+### 6.1 锁竞争优化
+
+#### 减少锁持有时间
+
+```rust
+use std::sync::{Arc, Mutex};
+
+// ❌ 锁持有时间过长
+fn bad_locking(data: Arc<Mutex<Vec<i32>>>, value: i32) {
+    let mut data = data.lock().unwrap();
+    // 在锁内进行昂贵计算
+    let processed = expensive_computation(value);
+    data.push(processed);
+}
+
+// ✅ 最小化锁范围
+fn good_locking(data: Arc<Mutex<Vec<i32>>>, value: i32) {
+    // 在锁外进行昂贵计算
+    let processed = expensive_computation(value);
+
+    // 只在必要时持有锁
+    let mut data = data.lock().unwrap();
+    data.push(processed);
+}
+```
+#### 分片锁
+
+```rust
+use std::sync::Mutex;
+
+// ❌ 单个锁（高竞争）
+struct BadCache {
+    data: Mutex<HashMap<String, String>>,
+}
+
+// ✅ 分片锁（低竞争）
+const SHARDS: usize = 16;
+
+struct GoodCache {
+    shards: [Mutex<HashMap<String, String>>; SHARDS],
+}
+
+impl GoodCache {
+    fn new() -> Self {
+        Self {
+            shards: std::array::from_fn(|_| Mutex::new(HashMap::new())),
+        }
+    }
+
+    fn get(&self, key: &str) -> Option<String> {
+        let shard_idx = self.hash(key) % SHARDS;
+        self.shards[shard_idx].lock().unwrap().get(key).cloned()
+    }
+
+    fn insert(&self, key: String, value: String) {
+        let shard_idx = self.hash(&key) % SHARDS;
+        self.shards[shard_idx].lock().unwrap().insert(key, value);
+    }
+
+    fn hash(&self, key: &str) -> usize {
+        use std::collections::hash_map::DefaultHasher;
+        use std::hash::{Hash, Hasher};
+        let mut hasher = DefaultHasher::new();
+        key.hash(&mut hasher);
+        hasher.finish() as usize
+    }
+}
+```
+### 6.2 无锁数据结构
+
+#### 原子操作
+
+```rust
+use std::sync::atomic::{AtomicU64, Ordering};
+
+// ✅ 无锁计数器
+struct LockFreeCounter {
+    count: AtomicU64,
+}
+
+impl LockFreeCounter {
+    fn new() -> Self {
+        Self { count: AtomicU64::new(0) }
+    }
+
+    fn increment(&self) -> u64 {
+        self.count.fetch_add(1, Ordering::SeqCst)
+    }
+
+    fn get(&self) -> u64 {
+        self.count.load(Ordering::SeqCst)
+    }
+}
+
+// 比 Mutex<u64> 快 10-100x
+```
+#### 无锁队列
+
+```rust
+use crossbeam::queue::SegQueue;
+
+// ✅ 无锁并发队列
+fn lockfree_queue_example() {
+    let queue = Arc::new(SegQueue::new());
+
+    // 多个生产者
+    let mut producers = vec![];
+    for i in 0..4 {
+        let queue = Arc::clone(&queue);
+        producers.push(thread::spawn(move |
+| {
+            for j in 0..1000 {
+                queue.push(i * 1000 + j);
+            }
+        }));
+    }
+
+    // 多个消费者
+    let mut consumers = vec![];
+    for _ in 0..4 {
+        let queue = Arc::clone(&queue);
+        consumers.push(thread::spawn(move |
+| {
+            while let Some(item) = queue.pop() {
+                // 处理
+            }
+        }));
+    }
+
+    for p in producers { p.join().unwrap(); }
+    for c in consumers { c.join().unwrap(); }
+}
+```
+### 6.3 并行迭代器
+
+#### Rayon 并行化
+
+```rust
+use rayon::prelude::*;
+
+// ✅ 简单并行化
+fn parallel_example() {
+    let data: Vec<i32> = (0..1_000_000).collect();
+
+    // 并行 map-reduce
+    let sum: i32 = data.par_iter()
+        .map(|&x| expensive_computation(x))
+        .sum();
+
+    // 并行 filter-map
+    let results: Vec<_> = data.par_iter()
+        .filter(|&&x| x % 2 == 0)
+        .map(|&x| x * 2)
+        .collect();
+
+    // 并行排序
+    let mut data = data;
+    data.par_sort_unstable();
+}
+
+// 性能提升: 通常是核心数的 70-90%
+```
+---
+
+## 7. 实战优化案例
+
+### 7.1 JSON 解析优化
+
+```rust
+use serde_json::Value;
+
+// ❌ 多次解析
+fn bad_json_processing(json_str: &str) -> Result<(), Box<dyn std::error::Error>> {
+    for _ in 0..1000 {
+        let value: Value = serde_json::from_str(json_str)?;
+        // 处理
+    }
+    Ok(())
+}
+
+// ✅ 使用零拷贝解析
+use serde::{Deserialize, Serialize};
+
+#[derive(Deserialize, Serialize)]
+struct Data<'a> {
+    #[serde(borrow)]
+    name: &'a str,
+    value: i32,
+}
+
+fn good_json_processing(json_str: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let data: Data = serde_json::from_str(json_str)?;
+    // data.name 零拷贝引用原始字符串
+    Ok(())
+}
+
+// ✅ 使用 simd-json (更快)
+// use simd_json;
+```
+### 7.2 HTTP 服务器优化
+
+```rust
+// 使用 Tokio 异步运行时优化
+
+// ❌ 阻塞 I/O
+fn sync_handler(request: Request) -> Response {
+    let data = std::fs::read_to_string("file.txt").unwrap();
+    Response::new(data)
+}
+
+// ✅ 异步 I/O
+async fn async_handler(request: Request) -> Response {
+    let data = tokio::fs::read_to_string("file.txt").await.unwrap();
+    Response::new(data)
+}
+
+// ✅ 连接池
+use deadpool_postgres::{Manager, Pool};
+
+async fn with_connection_pool(pool: &Pool, query: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let client = pool.get().await?;
+    let rows = client.query(query, &[]).await?;
+    Ok(())
+}
+```
+### 7.3 数据处理管道优化
+
+```rust
+// ✅ 批处理优化
+fn process_in_batches(data: Vec<Item>) -> Vec<ProcessedItem> {
+    const BATCH_SIZE: usize = 1000;
+
+    data.chunks(BATCH_SIZE)
+        .flat_map(|batch| process_batch(batch))
+        .collect()
+}
+
+// ✅ 流式处理避免内存峰值
+use futures::stream::{self, StreamExt};
+
+async fn streaming_processing() {
+    let stream = stream::iter(0..1_000_000)
+        .map(|x| async move { expensive_async_computation(x).await })
+        .buffer_unordered(100);  // 并发限制
+
+    stream.for_each(|result| async {
+        // 处理结果
+    }).await;
+}
+```
+---
+
+## 相关资源
+
+### 📖 核心文档
+
+- **[性能优化实践](09_performance_optimization_reference.md)**: 深入的性能优化技巧
+- **[零成本抽象](07_zero_cost_abstractions_reference.md)**: 理解零成本抽象原理
+- **[高级所有权模式](06_advanced_ownership_patterns_reference.md)**: 所有权系统的高级用法
+
+### 🔗 相关主题
+
+- **Tier 3 高级主题**
+  - [06 高级所有权模式参考](06_advanced_ownership_patterns_reference.md)
+  - [07 零成本抽象](07_zero_cost_abstractions_reference.md)
+  - [08 内存安全参考](08_memory_safety_reference.md)
+- **Tier 4 理论深度**
+  - [4.1 类型系统理论](../tier_04_advanced/06_type_system_theory.md)
+
+### 🛠️ 工具和资源
+
+**性能工具**:
+
+- `criterion` - 基准测试框架
+- `flamegraph` - 火焰图生成
+- `perf` - Linux 性能分析
+- `cargo-asm` - 汇编代码查看
+- `cargo-bloat` - 二进制大小分析
+- `heaptrack` - 内存剖析
+
+**Crates**:
+
+- `rayon` - 并行迭代器
+- `crossbeam` - 并发原语
+- `parking_lot` - 更快的锁
+- `smallvec` - 栈优化 Vec
+- `ahash` - 更快的哈希函数
+
+**学习资源**:
+
+- [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
+- [Benchmarking and Optimization](https://doc.rust-lang.org/book/ch14-04-performance.html)
+- [Optimizing Rust](https://gist.github.com/jFransham/369a86eff00e5f280ed25121454acec1)
+
+### 📚 学习路径
+
+**进阶路径**:
+
+1. 完成本文档学习（预估 8-12 小时）
+2. 为自己的项目设置性能基准
+3. 使用火焰图识别瓶颈
+4. 应用优化技巧并测量效果
+5. 研究高性能 Rust 项目源码
+
+**实践建议**:
+
+- 🔨 为关键函数编写基准测试
+- 🔨 使用 flamegraph 分析实际应用
+- 🔨 优化一个实际项目的性能瓶颈
+- 🔨 对比不同实现的性能
+- 🔨 学习使用 perf/Instruments
+
+### 🎯 学习检查清单
+
+完成以下任务以验证学习效果:
+
+- [ ] 掌握使用 Criterion 进行基准测试
+- [ ] 能够使用 flamegraph 分析性能
+- [ ] 理解所有权系统的性能特性
+- [ ] 优化内存布局和分配策略
+- [ ] 合理使用编译器优化选项
+- [ ] 选择合适的数据结构和算法
+- [ ] 实现高性能并发代码
+- [ ] 完成至少一个实际项目的性能优化
+
+---
+
+**最后更新**: 2026-01-26
+**文档版本**: 2.0 (扩展版)
+**适用 Rust 版本**: 1.92.0+
+**预估学习时间**: 8-12 小时
+**难度级别**: ⭐⭐⭐⭐ (高级)
+
+---
+
+END OF DOCUMENT
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

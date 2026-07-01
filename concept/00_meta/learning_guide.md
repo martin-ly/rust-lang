@@ -121,7 +121,6 @@ graph TD
     style JAVAGO fill:#fff3e0
     style HASKELL fill:#fce4ec
 ```
-
 > **认知功能**: 此路径图展示**不同背景学习者的最小阻力路径**。完全新手从 L1 基础层线性递进；C++ 开发者利用已有 RAII/指针知识，通过 Rust vs C++ 对比加速；Java/Go 开发者从 GC 思维转换，重点理解所有权替代 GC；Haskell/ML 开发者利用类型论基础，从 L2/L4 进入。颜色对应背景：蓝=新手、绿=C++、橙=Java/Go、粉=Haskell。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
@@ -183,7 +182,6 @@ Step 10: 02_async.md（2h）— Future/Pin/async/await
         https://doc.rust-lang.org/book/ch17-00-async-await.html
 Step 11: 02_patterns.md（1h）— Typestate/Builder/Newtype
 ```
-
 **Checkpoint**（完成 Step 8 后应能回答）:
 
 1. 为什么 `let s2 = s1; println!("{}", s1);` 编译失败？
@@ -204,7 +202,6 @@ Step 4: 03_lifetimes.md（1.5h）— 对比 RAII 与区域类型
 Step 5: 03_unsafe.md（2h）— 理解 Rust 的 unsafe 不是"关闭检查"
 Step 6: 01_concurrency.md（1.5h）— 对比 mutex/原子操作的数据竞争保证
 ```
-
 **加速技巧**:
 
 - 将 `Box<T>` 理解为 `unique_ptr<T>`，但增加了移动语义约束
@@ -225,7 +222,6 @@ Step 4: 01_traits.md（1h）— 对比 Java Interface 和 Rust Trait
 Step 5: 02_generics.md（1h）— 对比 Java 类型擦除和 Rust 单态化
 Step 6: 05_rust_vs_go.md（1.5h）— 并发模型对比：goroutine vs async
 ```
-
 **关键心智转换**:
 
 - Java: 对象由 GC 管理生命周期 → Rust: 对象由所有权系统管理生命周期
@@ -246,7 +242,6 @@ Step 4: 03_ownership_formal.md（1.5h）— 分离逻辑与分数权限
 Step 5: 04_rustbelt.md（2h）— Iris 分离逻辑验证框架
 Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 ```
-
 **加速技巧**:
 
 - 将 `Own(T)` 理解为线性类型 `T`
@@ -511,7 +506,6 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
      ↓
   5. 若仍无法解决 → 查看该文件的"定理一致性矩阵"寻找失效条件
 ```
-
 > **维护说明**: 本索引覆盖 rustc 最常见的 20+ 错误码。随着 Rust 版本演进，错误码和错误信息可能微调，但概念映射关系保持稳定。如发现新错误码需补充，请优先归入已有概念类别。
 
 ---
@@ -542,7 +536,6 @@ Rust 编译器以「详细、准确、可操作」的错误信息著称。研究
   ├── 故意制造类似错误，验证理解
   └── 关键: 主动犯错比被动阅读更深刻
 ```
-
 ### 8.2 故意犯错练习法（Deliberate Error Practice）
 
 不同于「先学概念再写代码」的传统路径，**故意犯错练习法**要求学习者在理解基础规则后，主动尝试突破边界：
@@ -579,17 +572,13 @@ rustc 错误信息结构:
 建议阅读顺序: 2 → 1 → 3 → 4
 （先定位位置，再理解类型，最后深入原理）
 ```
-
 ### 8.4 团队教学策略
 
 对于教授 Rust 的团队或导师，以下策略基于认知负荷理论（Sweller, 1988）：
 
 1. **渐进式错误暴露**: 不要一次性展示所有规则。先让学习者掌握所有权，再引入生命周期，最后接触泛型——每一步都通过编译错误自然触发学习动机。
-
 2. **对比修复法**: 给出「错误代码」和「修复代码」的并排对比，让学习者识别关键差异，而非直接给出答案。
-
 3. **错误日志积累**: 鼓励学习者维护个人「错误日志」——记录遇到的错误码、修复方法和概念关联。这本质上是构建个人化的前置/后置概念网络。
-
 4. **Miri 作为可视化工具**: 对于 unsafe 和生命周期问题，使用 Miri 的详细输出（`--_tb-violation-action=error`）将抽象的 UB 规则转化为具体的执行轨迹。
 
 > **教学洞察**: **编译错误不是失败的标志，而是概念边界的精确标记**。Rust 的类型系统本质上是「可执行的教学材料」——它在代码编写阶段就强制学习者面对所有权的深层语义。

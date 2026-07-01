@@ -180,7 +180,6 @@ impl Drop for AsyncResource {
     }
 }
 ```
-
 ### 2. 异步生成器实现 🔄
 
 ```rust
@@ -190,7 +189,6 @@ pub struct AsyncDataGenerator {
     delay: Duration,
 }
 ```
-
 ### 3. 改进的借用检查器 🔍
 
 ```rust
@@ -199,7 +197,6 @@ pub struct BorrowCheckerDemo {
     semaphore: Arc<Semaphore>,
 }
 ```
-
 ### 4. 性能基准测试 ⚡
 
 ```rust
@@ -207,7 +204,6 @@ pub struct PerformanceBenchmark {
     results: Arc<Mutex<HashMap<String, Vec<Duration>>>>,
 }
 ```
-
 ### 5. 异步状态机 🔄
 
 ```rust
@@ -217,7 +213,6 @@ pub struct AsyncStateMachine190 {
     transition_count: Arc<Mutex<usize>>,
 }
 ```
-
 ## 🎯 项目影响评估
 
 ### 1. 技术影响 🚀

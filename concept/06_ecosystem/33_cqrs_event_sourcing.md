@@ -109,7 +109,6 @@ CQRS 扩展（Young 2010）:
   - 写模型（Command Model）：优化事务一致性、领域规则验证
   - 读模型（Query Model）：优化查询性能、去规范化、物化视图
 ```
-
 ```rust,ignore
 // CQS 在 Rust 中的直接体现
 
@@ -131,7 +130,6 @@ fn bad_example(state: &mut OrderState) -> OrderSummary {
     summary
 }
 ```
-
 > **关键洞察**:
 > CQRS 不是"必须分离数据库"——物理分离是**可选的优化**，而非模式的本质。
 > 在简单场景中，CQRS 可以只在应用层分离读写模型，共享同一个关系数据库。只有在读写负载特征显著不同时（写频繁且复杂，读频繁且简单），才需要物理分离到不同的存储。
@@ -152,7 +150,6 @@ fn bad_example(state: &mut OrderState) -> OrderSummary {
              State_n = fold(InitialState, Events)
              保存完整事件序列 Events
 ```
-
 ```rust,ignore
 // 事件溯源的核心：状态是事件的左折叠（left fold）
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -198,7 +195,6 @@ impl BankAccountState {
     }
 }
 ```
-
 > **与 Rust 所有权（Ownership）的契合**: 事件溯源的**不可变性**与 Rust 的**所有权转移**哲学高度一致：
 >
 > - 事件一旦产生即不可修改（只能通过**补偿事件**修正，如 `DepositReversed`）
@@ -223,7 +219,6 @@ CQRS+ES:
   事件存储 → 投影处理器 → 物化视图（查询端）
   优势: 读写天然分离，查询模型可任意优化，事件流是单一事实来源
 ```
-
 ```mermaid
 graph TB
     subgraph "命令端 (Command Side)"
@@ -253,7 +248,6 @@ graph TB
     style Q1 fill:#e3f2fd
     style C4 fill:#fce4ec
 ```
-
 > **来源**: [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) · [Vernon — Implementing DDD](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577)
 > [来源: [Axon Framework Reference](https://docs.axoniq.io/reference-guide/)] · [来源: [Young — CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)]
 
@@ -363,7 +357,6 @@ impl OrderAggregate {
     }
 }
 ```
-
 > **设计要点**:
 >
 > - **聚合根**（Aggregate Root）是命令端的一致性边界——所有状态变化必须通过聚合根的方法
@@ -429,7 +422,6 @@ impl OrderProjection {
     }
 }
 ```
-
 > **读模型的灵活性**:
 >
 > - 同一个事件流可以投影到**多个不同的读模型**（如订单列表视图、客户订单统计视图、库存影响视图）
@@ -463,7 +455,6 @@ impl OrderProjection {
 // 查询服务（OrderQueryService）→ 独立的部署单元
 // 两者通过事件总线（Kafka）通信
 ```
-
 > **来源**: [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) · [AWS — CQRS Pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html)
 
 ---
@@ -508,7 +499,6 @@ async fn append_with_occ(
     Ok(())
 }
 ```
-
 > **与 Rust 的契合**: 事件存储的追加模型与 Rust 的**不可变数据结构**哲学一致：
 >
 > - `RecordedEvent` 的所有字段都是不可变的（`struct` 默认不可变）
@@ -570,7 +560,6 @@ async fn load_aggregate(
     Ok(aggregate)
 }
 ```
-
 > **快照策略对比**:
 
 | **策略** | **触发条件** | **优点** | **缺点** |
@@ -630,7 +619,6 @@ impl OrderEventUpcaster {
     }
 }
 ```
-
 > **Upcasting 策略对比**:
 
 | **策略** | **实现方式** | **优点** | **缺点** |
@@ -728,7 +716,6 @@ impl OrderSaga {
     }
 }
 ```
-
 > **Saga vs 2PC（两阶段提交）**:
 >
 > - **2PC**: 强一致性，但有协调者单点故障和阻塞问题
@@ -818,7 +805,6 @@ async fn outbox_publisher(db: &sqlx::PgPool, kafka: &FutureProducer) {
     }
 }
 ```
-
 > **Outbox 的至少一次语义**: Outbox 模式保证**至少一次**（At-Least-Once）事件投递：
 >
 > - 若事务提交后、Kafka 确认前进程崩溃，Outbox 记录仍在，重启后会重试
@@ -854,7 +840,6 @@ impl ConsistencyMetrics {
 // - 查询缓存 TTL: 0ms（无缓存）到 5min（激进缓存）
 // - 总延迟: 通常 < 100ms，极端情况下可达数秒
 ```
-
 > **最终一致性的工程处理**:
 >
 > - **前端乐观更新**：用户提交命令后，前端立即显示预期结果，后台异步（Async）同步真实状态
@@ -946,7 +931,6 @@ pub struct OrderItem {
     pub currency: String,
 }
 ```
-
 > **来源**: [来源: [serde Documentation](https://serde.rs/)]
 
 ### 6.2 命令处理器
@@ -1023,7 +1007,6 @@ impl<ES: EventStore + Send + Sync> CommandHandler<PlaceOrderCommand> for PlaceOr
     }
 }
 ```
-
 > **来源**: [来源: [Axon Framework — Commands](https://docs.axoniq.io/axon-framework-reference/5.1/commands/command-handlers/)]
 
 ### 6.3 事件存储与投影
@@ -1103,7 +1086,6 @@ impl EventStore for PostgresEventStore {
     }
 }
 ```
-
 > **来源**: [来源: [EventStoreDB — Projections](https://docs.kurrent.io/server/v24.10/features/projections/)]
 
 ### 6.4 完整 CQRS+ES 微服务骨架
@@ -1168,7 +1150,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 > **来源**: [Axon Framework — Architecture](https://docs.axoniq.io/axon-framework-reference/5.1/) · [EventStoreDB — Getting Started](https://developers.eventstore.com/server/v24.10/quick-start/) · [Rust Event Sourcing Example](https://github.com/rust-lang/async-book/)
 
 ---
@@ -1214,7 +1195,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 └── 根结论: ❌ Outbox 保证至少一次（At-Least-Once），不是恰好一次（Exactly-Once）
          消费者必须实现幂等性
 ```
-
 > **来源**: [来源: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html)]
 
 ### 7.2 边界极限
@@ -1256,7 +1236,6 @@ fn benchmark_rebuild_without_snapshot() {
     // QPS 上限: ~100+ QPS（可接受）
 }
 ```
-
 > **修正**: 快照是生产环境的事件溯源必需品。推荐的快照策略是**计数触发 + 时间触发**的混合：每 1000 个事件或每 1 小时（以先到者为准）创建一次快照。快照存储应使用与事件存储不同的物理存储（如 S3/MinIO 对象存储），以降低成本。[来源: [EventStoreDB — Snapshots [已失效]]<!-- 原链接: https://developers.eventstore.com/server/v24.10/streams.html#snapshots -->] · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 
 ### 10.2 边界测试：双写不一致导致数据丢失（逻辑错误）
@@ -1284,7 +1263,6 @@ async fn another_bad_example(db: &PgPool, kafka: &FutureProducer, cmd: CreateOrd
     insert_order(db, &cmd).await.unwrap();
 }
 ```
-
 > **修正**: **Outbox 模式**是唯一的可靠解决方案：将数据库写入和事件记录放在**同一事务**中。
 > 事务的原子性保证：要么两者都成功，要么两者都失败。
 > 独立的网络调用（如直接发 Kafka）无法保证与数据库事务的一致性。
@@ -1335,7 +1313,6 @@ fn good_deserialization() {
     };
 }
 ```
-
 > **修正**: 事件模式演化需要**向前兼容**（旧代码可读新事件）和**向后兼容**（新代码可读旧事件）。推荐策略：
 >
 > 1. **只添加字段**（从不删除或重命名）
@@ -1357,7 +1334,6 @@ fn good_deserialization() {
 > [来源: [AWS — CQRS Pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html)]
 > [来源: [Debezium — Outbox](https://debezium.io/documentation/reference/stable/transformations/outbox-event-router.html)]
 > [来源: [Vogels — Eventually Consistent](https://www.allthingsdistributed.com/2008/12/eventually_consistent.html)]
-
 > [来源: [EventStoreDB — Projection Best Practices](https://docs.kurrent.io/server/v24.10/features/projections/)]
 > [来源: [Microsoft — Event Sourcing Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing)]
 > [来源: [AWS — CQRS Pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html)]
@@ -1455,9 +1431,7 @@ Command 和 Event 可定义为枚举（Enum）/struct，编译期保证处理器
 | CQRS & Event Sourcing（命令查询职责分离与事件溯源） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 CQRS & Event Sourcing（命令查询职责分离与事件溯源） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 CQRS & Event Sourcing（命令查询职责分离与事件溯源） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

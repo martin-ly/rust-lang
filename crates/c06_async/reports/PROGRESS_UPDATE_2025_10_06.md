@@ -47,15 +47,13 @@
    - ✅ 添加了 2025年核心示例索引
    - ✅ 包含 Reactor、Actor、CSP 三大模式的完整实现链接
    - ✅ 提供了详细的运行命令和内容说明
-
 2. **`README.md`** - 主README文件
    - ✅ 重构了"全面代码梳理和注释"部分
    - ✅ 添加了核心文档体系 (必读)
    - ✅ 详细介绍了知识分类体系、最终报告、快速入门指南
    - ✅ 添加了核心示例 (2025年最新)
    - ✅ 包含 Reactor、Actor、CSP 三个完整实现的详细说明
-
-3. **`异步编程全面梳理_README_2025_10_06.md`** - 中文快速入门指南
+3. **`async_programming_comprehensive_review_readme_2025_10_06.md`** - 中文快速入门指南
    - ✅ 添加了 CSP 模式示例说明
    - ✅ 包含特点、输出示例
    - ✅ 完善了三大架构模式的完整介绍
@@ -79,7 +77,6 @@
      - 死锁自由 (Deadlock Freedom)
      - 消息传递可靠性 (Message Delivery Reliability)
      - 公平性 (Fairness)
-
 2. **核心数据结构** (Core Data Structures)
    - ChannelType (通道类型枚举)
      - Bounded (有界通道)
@@ -89,32 +86,27 @@
    - ProcessState (进程状态)
    - ProcessStats (进程统计信息)
    - CspSystemConfig (CSP 系统配置)
-
 3. **CSP 核心实现** (CSP Core Implementation)
    - CspSystem (CSP 系统管理器)
    - 进程注册和管理
    - 统计信息收集
    - 系统监控
-
 4. **实际应用示例** (Practical Applications)
    - **示例 1: 数据处理流水线** (Data Processing Pipeline)
      - Source (数据源) → Transform (数据转换) → Sink (数据汇聚)
      - 完整的统计信息收集
      - 应用场景: 日志处理、图像处理、数据分析 (ETL)
-
    - **示例 2: 分布式任务调度** (Distributed Task Scheduler)
      - Dispatcher (任务分发器)
      - Workers (工作进程)
      - Collector (结果收集器)
      - 应用场景: 分布式计算、任务队列、负载均衡
-
    - **示例 3: 实时日志聚合系统** (Real-time Log Aggregation System)
      - 多个日志源
      - 日志过滤器 (只保留 WARN 和 ERROR)
      - 日志聚合器 (统计和汇总)
      - 输出显示
      - 应用场景: 日志收集、监控系统、告警系统
-
 5. **示例和测试** (Examples and Tests)
    - 基本通信示例
      - 有界通道 (Bounded Channel)
@@ -142,7 +134,6 @@
 ```bash
 cargo run --example csp_pattern_comprehensive_2025
 ```
-
 **CSP vs Actor vs Reactor 对比**:
 
 | 特性 | CSP | Actor | Reactor |
@@ -243,12 +234,11 @@ cargo run --example reactor_pattern_comprehensive_2025
 cargo run --example csp_pattern_comprehensive_2025
 
 # 4. 查看快速入门指南
-cat 异步编程全面梳理_README_2025_10_06.md
+cat async_programming_comprehensive_review_readme_2025_10_06.md
 
 # 5. 查看最终报告
 cat 异步编程全面梳理最终报告_2025_10_06.md
 ```
-
 ### 推荐学习顺序
 
 1. **第1周**: 阅读知识分类体系，理解整体架构
@@ -271,12 +261,10 @@ cat 异步编程全面梳理最终报告_2025_10_06.md
    - 重构消息类型以避免 oneshot::Sender Clone 问题
    - 修复 Instant 的 Default 实现问题
    - 修复类型不匹配问题
-
 2. ✅ **完善文档交叉引用**
    - 已完成 lib.rs 更新
    - 已完成 README.md 更新
    - 已完成快速入门指南更新
-
 3. 📝 **添加更多实际应用示例**
    - Web 服务器 (基于 Reactor)
    - 聊天系统 (基于 Actor)
@@ -288,12 +276,10 @@ cat 异步编程全面梳理最终报告_2025_10_06.md
    - 添加更多设计模式示例
    - 添加性能调优指南
    - 添加故障排查指南
-
 2. 🧪 **增加测试覆盖率**
    - 单元测试
    - 集成测试
    - 性能基准测试
-
 3. 🌐 **社区贡献**
    - 发布到 crates.io
    - 编写博客文章
@@ -305,12 +291,10 @@ cat 异步编程全面梳理最终报告_2025_10_06.md
    - CLI 工具生成模板
    - IDE 插件支持
    - 调试工具集成
-
 2. 📖 **出版物**
    - 编写完整的电子书
    - 翻译成多种语言
    - 出版纸质书
-
 3. 🎓 **教育资源**
    - 在线课程
    - 工作坊和培训

@@ -65,7 +65,6 @@
 ```bash
 cargo bench
 ```
-
 ### 运行特定基准测试
 
 ```bash
@@ -81,7 +80,6 @@ cargo bench --bench memory_performance
 # 协议性能测试
 cargo bench --bench protocol_performance
 ```
-
 ### 运行特定测试组
 
 ```bash
@@ -91,7 +89,6 @@ cargo bench --bench concurrency_performance error_creation
 # 只运行内存池测试
 cargo bench --bench memory_performance memory_pool
 ```
-
 ## 基准测试结果
 
 基准测试结果会保存在 `target/criterion/` 目录下，包含：

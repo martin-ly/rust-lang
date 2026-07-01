@@ -26,7 +26,6 @@ where
     let _ = f(&s);
 }
 ```
-
 关键点：`for<'a>` 把生命周期参数从调用方“升级”为 universally quantified，使得闭包签名更灵活。
 
 ### 2. 泛型关联类型（GAT）
@@ -42,7 +41,6 @@ trait Container {
     fn get(&self, index: usize) -> Option<Self::Item<'_>>;
 }
 ```
-
 应用场景：自定义 lending iterator、零拷贝解析器、泛型容器抽象。
 
 ### 3. 幽灵类型（Phantom Types / PhantomData）
@@ -61,7 +59,6 @@ struct Kilometers;
 
 struct Length<U>(f64, PhantomData<U>);
 ```
-
 ### 4. 类型级状态机
 
 通过泛型参数把状态编码进类型，让非法状态转移在编译期被拒绝：
@@ -84,7 +81,6 @@ impl StateMachine<Running> {
     fn stop(self) -> StateMachine<Idle> { /* ... */ }
 }
 ```
-
 ### 5. 类型操作与类型转换
 
 - `From` / `TryFrom`：可失败与不可失败转换。

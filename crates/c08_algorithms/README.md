@@ -67,10 +67,10 @@
 
 **从这里开始学习** ⭐:
 
-- 🎯 [项目概览](docs/tier_01_foundations/01_项目概览.md) - 15分钟快速了解
-- 🗺️ [主索引导航](docs/tier_01_foundations/02_主索引导航.md) - 找到适合你的学习路径
-- 📖 [术语表](docs/tier_01_foundations/03_术语表.md) - 核心术语速查
-- ❓ [常见问题](docs/tier_01_foundations/04_常见问题.md) - 解决常见疑问
+- 🎯 [项目概览](docs/tier_01_foundations/01_project_overview.md) - 15分钟快速了解
+- 🗺️ [主索引导航](docs/tier_01_foundations/02_navigation.md) - 找到适合你的学习路径
+- 📖 [术语表](docs/tier_01_foundations/03_glossary.md) - 核心术语速查
+- ❓ [常见问题](docs/tier_01_foundations/04_faq.md) - 解决常见疑问
 
 **文档层级结构**:
 
@@ -228,7 +228,6 @@
 ```bash
 cargo add c08_algorithms
 ```
-
 ### 基础用法（对齐新接口）
 
 ```rust
@@ -284,7 +283,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 可选特性与成熟库对照
 
 - 启用 `with-petgraph`：使用 `petgraph` 进行图算法对照（例如 Dijkstra）。
@@ -294,7 +292,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 # 启用 petgraph 与 aho-corasick 特性
 cargo test -p c08_algorithms --features "with-petgraph with-aho" -- --nocapture
 ```
-
 ```rust
 // 图：与 petgraph 对照（需开启 with-petgraph）
 #[cfg(feature = "with-petgraph")]
@@ -322,7 +319,6 @@ cargo test -p c08_algorithms --features "with-petgraph with-aho" -- --nocapture
     assert!(!matches_fast.is_empty() && !matches_teach.is_empty());
 }
 ```
-
 ---
 
 ## 🔬 性能基准
@@ -346,7 +342,6 @@ cargo run -p c08_algorithms --bin doc_link_scan
 cargo run -p c08_algorithms --bin bench_report > report.csv
 # 用任意表格工具打开 report.csv 进行对比分析
 ```
-
 ---
 
 ## 📖 文档体系
@@ -383,29 +378,25 @@ cargo run -p c08_algorithms --bin bench_report > report.csv
 
 适合日常开发和学习使用：
 
-- [算法复杂度分析](docs/tier_02_guides/03_算法复杂度分析.md) - 时间/空间复杂度、Big-O、主定理
-- [数据结构实现](docs/tier_02_guides/02_数据结构实践.md) - 线性表、树、图、高级数据结构
+- [算法复杂度分析](docs/tier_02_guides/03_algorithm_complexity_analysis.md) - 时间/空间复杂度、Big-O、主定理
+- [数据结构实现](docs/tier_02_guides/02_data_structures_practice.md) - 线性表、树、图、高级数据结构
 - [并行与异步算法](docs/tier_02_guides/05_并行与异步算法.md) - 异步编程与算法设计
-- [性能优化技巧](docs/tier_02_guides/04_性能优化实践.md) - 编译期优化、SIMD、并行化
-- [算法性能参考](docs/tier_03_references/04_算法性能参考.md) - Criterion 使用、性能分析
+- [性能优化技巧](docs/tier_02_guides/04_performance_optimization_practice.md) - 编译期优化、SIMD、并行化
+- [算法性能参考](docs/tier_03_references/04_algorithm_performance_reference.md) - Criterion 使用、性能分析
 
 #### 2. 🔬 理论文档 (tier_04_advanced/) - ⭐⭐⭐
 
 深入的形式化理论和数学模型：
 
-- **[形式化算法理论](docs/tier_04_advanced/01_形式化算法理论.md)** ⭐⭐⭐
+- **[形式化算法理论](docs/tier_04_advanced/01_formal_algorithm_theory.md)** ⭐⭐⭐
   - 算法分类、形式化定义、计算模型、语义模型、复杂度理论
-
-- **[并发算法模式](docs/tier_04_advanced/02_并发算法模式.md)** ⭐⭐⭐
+- **[并发算法模式](docs/tier_04_advanced/02_concurrent_algorithm_patterns.md)** ⭐⭐⭐
   - Actor 模型、Reactor 模式、CSP 理论、形式化验证
-
-- **[分布式算法](docs/tier_04_advanced/03_分布式算法.md)** ⭐⭐⭐
+- **[分布式算法](docs/tier_04_advanced/03_distributed_algorithms.md)** ⭐⭐⭐
   - 分布式系统算法、一致性协议
-
-- **[算法工程实践](docs/tier_04_advanced/04_算法工程实践.md)** ⭐⭐⭐
+- **[算法工程实践](docs/tier_04_advanced/04_algorithm_engineering_practice.md)** ⭐⭐⭐
   - 工程应用最佳实践、性能调优
-
-- **[前沿算法技术](docs/tier_04_advanced/05_前沿算法技术.md)** ⭐⭐⭐
+- **[前沿算法技术](docs/tier_04_advanced/05_cutting_edge_algorithms.md)** ⭐⭐⭐
   - 机器学习与前沿研究
 
 #### 3. 🚀 高级专题 (tier_04_advanced/) - ⭐⭐~⭐⭐⭐
@@ -414,13 +405,13 @@ cargo run -p c08_algorithms --bin bench_report > report.csv
 
 #### 4. ✨ Rust 特性 (tier_03_references/) - ⭐⭐
 
-- [Rust 1.90 特性参考](docs/tier_03_references/03_Rust190特性参考.md)
+- [Rust 1.90 特性参考](docs/tier_03_references/03_rust_190_features_reference.md)
 - [Rust 1.93.0 算法特性](docs/RUST_192_ALGORITHMS_IMPROVEMENTS.md) ⭐ 最新
 
 #### 5. 📚 参考资料 (tier_03_references/) - ⭐~⭐⭐
 
-- [算法分类参考](docs/tier_03_references/01_算法分类参考.md) - 按类别索引
-- [数据结构参考](docs/tier_03_references/02_数据结构参考.md)
+- [算法分类参考](docs/tier_03_references/01_algorithm_categories_reference.md) - 按类别索引
+- [数据结构参考](docs/tier_03_references/02_data_structures_reference.md)
 
 ### 🎓 学习路径
 
@@ -434,21 +425,21 @@ cargo run -p c08_algorithms --bin bench_report > report.csv
 
 **新手必读**:
 
-1. [算法快速入门](docs/tier_02_guides/01_算法快速入门.md)
-2. [算法复杂度分析](docs/tier_02_guides/03_算法复杂度分析.md)
-3. [数据结构实现](docs/tier_02_guides/02_数据结构实践.md)
+1. [算法快速入门](docs/tier_02_guides/01_algorithms_quick_start.md)
+2. [算法复杂度分析](docs/tier_02_guides/03_algorithm_complexity_analysis.md)
+3. [数据结构实现](docs/tier_02_guides/02_data_structures_practice.md)
 
 **进阶阅读**:
 
 1. [并行与异步算法](docs/tier_02_guides/05_并行与异步算法.md)
-2. [并发算法模式](docs/tier_04_advanced/02_并发算法模式.md)
-3. [性能优化实践](docs/tier_02_guides/04_性能优化实践.md)
+2. [并发算法模式](docs/tier_04_advanced/02_concurrent_algorithm_patterns.md)
+3. [性能优化实践](docs/tier_02_guides/04_performance_optimization_practice.md)
 
 **理论深入**:
 
-1. [形式化算法理论](docs/tier_04_advanced/01_形式化算法理论.md)
-2. [并发算法模式](docs/tier_04_advanced/02_并发算法模式.md)
-3. [分布式算法](docs/tier_04_advanced/03_分布式算法.md)
+1. [形式化算法理论](docs/tier_04_advanced/01_formal_algorithm_theory.md)
+2. [并发算法模式](docs/tier_04_advanced/02_concurrent_algorithm_patterns.md)
+3. [分布式算法](docs/tier_04_advanced/03_distributed_algorithms.md)
 
 ### 测试覆盖率
 
@@ -460,7 +451,6 @@ cargo install cargo-llvm-cov
 cargo llvm-cov clean --workspace
 cargo llvm-cov test --workspace --html
 ```
-
 ---
 
 ## 🚀 贡献指南

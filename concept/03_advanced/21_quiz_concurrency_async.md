@@ -51,7 +51,6 @@ fn main() {
     handle.join().unwrap();
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -76,7 +75,6 @@ fn main() {
     handle.join().unwrap();
 }
 ```
-
 **`Send` vs `Sync`**：
 
 | Trait | 语义 | 实现条件 |
@@ -123,7 +121,6 @@ fn main() {
     println!("Counter: {counter}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -161,7 +158,6 @@ fn main() {
     println!("Counter: {}", *counter.lock().unwrap());
 }
 ```
-
 **知识点**：`Arc` 提供共享所有权（Ownership），`Mutex` 提供互斥访问。组合是 Rust 中多线程共享可变状态的标准模式。[→ 并发模式详解](10_concurrency_patterns.md)
 
 </details>
@@ -188,7 +184,6 @@ fn main() {
     }
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -199,7 +194,6 @@ Got: 1
 Got: 2
 Got: 3
 ```
-
 **解析**：`mpsc` = **Multi-Producer Single-Consumer**（多生产者单消费者）。
 
 - `tx`（transmitter）可克隆，多个线程可发送
@@ -237,7 +231,6 @@ async fn main() {
     println!("After await");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -248,7 +241,6 @@ Before await
 Hello
 After await
 ```
-
 **解析**：
 
 - `async fn` 不立即执行，而是返回一个 **Future**
@@ -262,7 +254,6 @@ let future = say_hello(); // 创建 Future，零成本
 // ... 此时可以进行其他工作 ...
 future.await;             // 执行异步操作，可能让出线程
 ```
-
 **Future 状态机**：编译器将 `async fn` 转换为状态机，`.await` 处为状态切换点。
 
 **知识点**：Rust 的 async/await 是**零成本抽象（Zero-Cost Abstraction）**——没有运行时（Runtime）分配，状态机在栈上展开。→ Async/Await 详解
@@ -294,7 +285,6 @@ fn main() {
     // fut.await; // 假设在 async 上下文中
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -314,7 +304,6 @@ async fn example() {
     println!("{}", *ptr); // 若 data 被移动，ptr 悬垂！
 }
 ```
-
 `Pin` 承诺：被固定的值**在内存中不会移动**，从而保证自引用的安全性。
 
 **规则**：
@@ -346,7 +335,6 @@ async fn main() {
     handle.await.unwrap();
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -373,7 +361,6 @@ async fn main() {
     handle.await.unwrap();
 }
 ```
-
 **对比线程与任务**：
 
 | 特性 | `std::thread::spawn` | `tokio::spawn` |
@@ -415,7 +402,6 @@ async fn main() {
     println!("Result: {}", r1 + r2);
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -426,7 +412,6 @@ task1 done
 task2 done
 Result: 3
 ```
-
 **解析**：**顺序 await**——`task1().await` 完全完成后才启动 `task2()`，总耗时 ~150ms。
 
 **并发执行**——使用 `tokio::join!`：
@@ -438,7 +423,6 @@ async fn main() {
     println!("Result: {}", r1 + r2);
 }
 ```
-
 输出变为：
 
 ```
@@ -446,7 +430,6 @@ task2 done
 task1 done
 Result: 3
 ```
-
 总耗时 ~100ms（两者并发执行）。
 
 **对比**：
@@ -478,7 +461,6 @@ fn main() {
     handle.join().unwrap();
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -511,7 +493,6 @@ thread::spawn(move || { println!("{}", s2); });
 let s = String::from("hello");
 thread::spawn(|| { println!("{}", &s); });
 ```
-
 **知识点**：`'static` 不等于"程序全局存活"，而是"不借用（Borrowing）任何非 `'static` 数据"。理解这一点是掌握 Rust 并发闭包的关键。→ 生命周期（Lifetimes）详解
 
 </details>
@@ -540,7 +521,6 @@ fn main() {
     println!("Final: {}", *lock.read().unwrap());
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -550,7 +530,6 @@ fn main() {
 Read: 5 5
 Final: 6
 ```
-
 **解析**：`RwLock<T>`（读写锁）允许多个读锁或一个写锁：
 
 | 锁类型 | 并发数 | 互斥对象 |
@@ -593,7 +572,6 @@ fn main() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -628,14 +606,12 @@ fn main() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 ```
-
 **另一个陷阱**——若不 `join`，可能打印时子线程尚未完成：
 
 ```rust,ignore
 // 错误：可能输出 "Result: 0" 到 "Result: 10" 之间的任意值
 println!("Result: {}", *counter.lock().unwrap());
 ```
-
 **知识点**：`Arc<Mutex<T>>` 是 Rust 多线程共享可变状态的**三板斧**——原子引用计数 + 互斥锁 + 显式 join 同步。[→ 并发模式详解](10_concurrency_patterns.md)
 
 </details>

@@ -20,7 +20,6 @@ real-hardware-demos/
 │   ├── .cargo/config.toml
 │   └── src/main.rs
 ```
-
 ---
 
 ## 前置要求
@@ -34,7 +33,6 @@ rustup target add thumbv6m-none-eabi
 # RTIC (STM32F4 - ARM Cortex-M4F)
 rustup target add thumbv7em-none-eabihf
 ```
-
 ### 2. 安装依赖工具
 
 ```bash
@@ -45,7 +43,6 @@ cargo install probe-rs-tools --locked
 cargo install cargo-binutils
 rustup component add llvm-tools-preview
 ```
-
 ### 3. 硬件准备
 
 | 示例 | 开发板 | 连接方式 |
@@ -65,7 +62,6 @@ rustup component add llvm-tools-preview
 cd embassy-demo
 cargo build --release
 ```
-
 ### 烧录
 
 ```bash
@@ -77,7 +73,6 @@ cargo install elf2uf2-rs --locked
 cargo objcopy --release -- -O binary firmware.bin
 # 按住 BOOTSEL 连接 USB，复制 firmware.bin 到 RPI-RP2 磁盘
 ```
-
 ### 功能
 
 - 异步 LED 闪烁（300ms 间隔）
@@ -96,7 +91,6 @@ cargo objcopy --release -- -O binary firmware.bin
 cd rtic-demo
 cargo build --release
 ```
-
 ### 烧录
 
 ```bash
@@ -107,7 +101,6 @@ cargo run --release
 openocd -f interface/stlink.cfg -f target/stm32f4x.cfg
 arm-none-eabi-gdb target/thumbv7em-none-eabihf/release/rtic-demo
 ```
-
 ### 功能
 
 - 硬件定时器中断驱动的 LED 闪烁
@@ -133,7 +126,6 @@ arm-none-eabi-gdb target/thumbv7em-none-eabihf/release/rtic-demo
 ```
 error: could not compile `cortex-m-rt` (lib) due to 2 previous errors
 ```
-
 这是预期行为。如需在 host 上验证语法，可使用 `cargo check --target thumbv6m-none-eabi` 等交叉编译目标。
 
 ### Q: 我没有硬件，能测试吗？
@@ -146,7 +138,6 @@ cargo install cargo-embed
 # 或使用 QEMU
 cargo run --release --features qemu
 ```
-
 （具体 QEMU 配置请参考各框架官方文档。）
 
 ---

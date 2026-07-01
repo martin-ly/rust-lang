@@ -110,7 +110,6 @@ src/algorithms/
 ├── performance/            # 性能分析 (4个文件)
 └── knowledge_base/         # 知识体系 (4个文件)
 ```
-
 ### 代码量统计
 
 - **总模块数**: 30+ 个模块
@@ -158,7 +157,6 @@ pub struct FixedSizeSorter<const N: usize> {
     data: [i32; N],
 }
 ```
-
 ### 2. 统一的执行模式
 
 ```rust
@@ -178,7 +176,6 @@ let result = ParallelExecutor::execute_with_metrics(parallel_algorithm, data)?;
 let distributed_algorithm = SortingAlgorithmFactory::create_distributed(SortingAlgorithm::QuickSort);
 let result = DistributedExecutor::new().execute_distributed(distributed_algorithm, data, nodes)?;
 ```
-
 ### 3. 形式化验证
 
 ```rust
@@ -197,7 +194,6 @@ let benchmark = SortingBenchmarker::run_comprehensive_benchmark(
     data_sizes, algorithms
 )?;
 ```
-
 ### 4. 完整的知识库
 
 ```rust
@@ -214,7 +210,6 @@ let applications = ApplicationAnalyzer::analyze_sorting_applications("QuickSort"
 // 最佳实践
 let practices = BestPracticesAnalyzer::analyze_sorting_best_practices("QuickSort");
 ```
-
 ## 📈 性能表现
 
 ### 算法性能对比

@@ -28,7 +28,6 @@ L5 对比 ──→ 多语言范式对比、安全边界分析
 L6 生态 ──→ 工具链、设计模式、核心 crate、应用领域
 L7 未来 ──→ AI 集成、形式化方法、语言演进
 ```
-
 ---
 
 ## 🌍 国际学习者入口
@@ -44,6 +43,24 @@ L7 未来 ──→ AI 集成、形式化方法、语言演进
   - [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
 
 > 欢迎通过 Issue 或 PR 反馈术语翻译、链接可达性与跨文化学习体验问题。
+
+---
+
+## 内容治理与 Canonical 规则
+
+> 完整规则见 [`AGENTS.md`](AGENTS.md)。
+
+本项目采用 **单一权威来源（Single Source of Truth）** 原则：
+
+- **`concept/` 是权威概念层**。每个 Rust 概念只应在 `concept/` 中有一份完整、深度、可维护的解释。
+- **`knowledge/`** 只保留精简卡片、速查、学习入口；重复内容改为重定向到 `concept/`。
+- **`docs/`** 只保留指南、参考、研究报告；概念解释必须链接到 `concept/` 权威页。
+- **`content/`** 保留专题深度内容；若与 `concept/` 重叠，应合并到 `concept/` 或改为重定向。
+- **`crates/*/docs/`** 只保留与 crate 直接相关的独特内容，禁止复制通用概念解释。
+- **`archive/`** 是只读历史归档，不得与活跃目录重复。
+- **`book/`** 是 `mdbook build` 输出目录，除 `book/README.md` 外不提交到版本控制。
+
+新增或修改内容前，请先运行 `python scripts/detect_content_overlap.py` 检查重复。
 
 ---
 
@@ -75,7 +92,6 @@ python scripts/build_search_index.py
 cargo build --workspace
 cargo test --workspace
 ```
-
 ### 工具链说明
 
 - 默认工具链为 **stable 1.96.0**（`rust-toolchain.toml` 使用 `stable` 通道）。
@@ -87,7 +103,6 @@ cargo test --workspace
   cargo +nightly clippy --workspace --tests --all-features -- -D warnings
   cargo +nightly test --workspace --all-features
   ```
-
 ---
 
 ## 核心文件导航
@@ -200,7 +215,7 @@ rust-lang/
 │   ├── common/
 │   └── integration_tests/
 ├── exercises/                  # 📝 编程练习（80 个 .rs 文件，10 主题）
-├── book/                       # 📖 mdbook 源文件
+├── book/                       # 📖 mdbook 构建产物（不提交源码，除 README）
 ├── knowledge/                  # 🎯 结构化知识卡片
 ├── docs/                       # 📋 参考文档、研究报告、模板
 ├── scripts/                    # 🔧 自动化脚本（质量审计、链接检查、索引构建）
@@ -209,7 +224,6 @@ rust-lang/
 ├── CHANGELOG.md                # 变更日志
 └── README.md                   # 本文件
 ```
-
 ---
 
 ## 自动化 CI
@@ -233,9 +247,9 @@ rust-lang/
 ---
 
 **维护者**: rust-lang 知识体系项目组
-**最后更新**: 2026-06-21
-**版本**: v3.0.0
-**状态**: ✅ v3.0 活跃维护
+**最后更新**: 2026-07-01
+**版本**: v3.0.1
+**状态**: ✅ 内容去重 Phase 1 进行中
 
 ---
 

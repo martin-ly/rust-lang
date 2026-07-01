@@ -2,7 +2,6 @@
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
-
 >
 > **来源**: [WASI](https://wasi.dev/) · [Rust and WebAssembly Book](https://rustwasm.github.io/book/) · [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html)
 ---
@@ -10,7 +9,6 @@
 # WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: WebAssembly
 > **Summary**: WebAssembly. Guide to 08 Wasi.
@@ -22,7 +20,6 @@
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Unsafe](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/03_unsafe.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [Application Domains](04_application_domains.md) · [Formal Ecosystem Tower](05_formal_ecosystem_tower.md)
 > **主要来源**: [WASI Preview 2 Docs] · [WebAssembly Component Model Spec] · [wit-bindgen Docs] · [WASMtime Docs] · [Rust WASM Working Group] · [Wikipedia: WebAssembly](https://en.wikipedia.org/wiki/WebAssembly)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -38,13 +35,10 @@ $entry
 ## 一、权威定义
 >
 >
-
 > **[Wikipedia: WebAssembly](https://en.wikipedia.org/wiki/WebAssembly)** WebAssembly (Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications.
 > **来源**: <https://en.wikipedia.org/wiki/WebAssembly>
-
 > **[WASI Docs]** WASI (WebAssembly System Interface) is a modular system interface for WebAssembly. It enables WebAssembly modules to interact with the host environment in a capability-safe manner.
 > **来源**: <https://wasi.dev>
-
 > **[Component Model Spec]** The WebAssembly Component Model is a proposal to build upon the WebAssembly standard by defining how modules may be composed together and how they may communicate using high-level types.
 > **来源**: <https:/component-model.bytecodealliance.org>
 
@@ -114,10 +108,8 @@ graph TD
     style Component fill:#e8f5e9
     style App fill:#fce4ec
 ```
-
 > **认知功能**: 此全景图定位 WASI 四层栈的垂直职责分割，建议以颜色分层为记忆锚点自上而下阅读。关键洞察：Component Model 的 WIT/World 抽象将 Wasm 从汇编级模块（Module）提升为可组合软件组件，而宿主能力检查器使 Rust 的所有权（Ownership）语义得以跨沙箱边界强制执行。[来源: 💡 原创分析]
 > [来源: [WASI Spec]]
-
 > **认知路径**: 此架构图展示 WASI 的四层栈。**宿主运行时（Runtime）**（WASMtime）通过能力检查器实施安全策略；**Wasm Core** 提供线性内存和函数表的基础抽象；**Component Model** 引入 WIT 接口类型和世界（World）概念，将 Wasm 从汇编提升到组件级；**应用层**的 Rust 代码通过 `wit-bindgen` 与下层交互。颜色分层：蓝色=宿主基础设施，橙色=核心运行时，绿色=组件抽象，粉色=应用代码。
 
 ---
@@ -146,7 +138,6 @@ graph TD
 │           - 系统调用代理                  │
 └─────────────────────────────────────────┘
 ```
-
 ### 3.2 能力安全模型
 
 > **[来源: WASI Preview 2 Docs; Capability-Based Security Research]** WASI 采用**能力安全（Capability Security）**模型替代传统的 POSIX 系统调用。程序不通过全局文件描述符访问资源，而是通过显式传递的**能力句柄（capability handle）**。
@@ -160,7 +151,6 @@ use wasmtime::component::Resource;
 let dir_cap = preopen_dir("/sandbox/data")?;
 // guest 无法访问 /sandbox/data 之外的任何路径
 ```
-
 **与 Rust 所有权（Ownership）模型的同构性**:
 
 | 概念 | WASI 能力模型 | Rust 所有权模型 |
@@ -205,7 +195,6 @@ sequenceDiagram
 
     Note over Host,Cap: 与 Rust 所有权同构:<br/>能力句柄 ≈ 所有权变量<br/>move = 所有权转移<br/>drop = 资源释放<br/>范围外访问 = 编译错误
 ```
-
 > **认知功能**: 此序列图将 WASI 的**能力安全模型**与 Rust 的**所有权模型**进行同构映射。步骤 1-2 对应所有权转移（`move`），步骤 3-4 对应正常借用（Borrowing）（`&T`），步骤 5-6 对应越界访问被拒绝（编译错误），步骤 7-8 对应 `drop` 析构。这种可视化帮助 Rust 程序员利用已有的所有权直觉理解 WASI 的安全模型。
 
 ### 4.2 WIT（Wasm Interface Types）
@@ -228,7 +217,6 @@ world calculator-world {
     export run: func() -> result<s32, string>;
 }
 ```
-
 ### 4.2 `wit-bindgen` 与 Rust 代码生成
 
 > **[来源: wit-bindgen GitHub; Component Model Tutorial]** `wit-bindgen` 从 WIT 定义生成 Rust 绑定代码：
@@ -237,7 +225,6 @@ world calculator-world {
 # 生成 Rust guest 绑定
 wit-bindgen rust --out-dir src/bindings example.wit
 ```
-
 生成的 Rust 代码提供**类型安全的跨组件调用**：
 
 ```rust,ignore
@@ -259,7 +246,6 @@ fn calc(input: CalcInput) -> Result<i32, String> {
     }
 }
 ```
-
 **类型安全保证**: WIT 的 `result<T, E>` 映射到 Rust 的 `Result<T, String>`，编译器强制处理错误分支——跨组件边界保持了 Rust 的类型安全承诺。[来源: wit-bindgen Docs] ✅
 
 ### 4.3 世界（World）与组件组合
@@ -276,7 +262,6 @@ World = 导入接口集 + 导出接口集
   - 所有导入必须有匹配的导出
   - 类型签名必须精确匹配（协变/逆变检查）
 ```
-
 ---
 
 ## 五、Rust `wasm32-wasip1` 或 `wasm32-wasip2` 目标
@@ -297,7 +282,6 @@ use alloc::vec::Vec;
 // WASI 提供 panic handler 和 allocator
 use wasi::cli::stdout::OutputStream;
 ```
-
 **约束矩阵**:
 
 | 特性 | `wasm32-unknown-unknown` | `wasm32-wasip1` 或 `wasm32-wasip2` |
@@ -317,7 +301,6 @@ resource file {
     read: func(buf: list<u8>) -> result<u32, io-error>;
 }
 ```
-
 ```rust,ignore
 // Rust 实现——编译器强制处理错误
 impl GuestFile for File {
@@ -329,7 +312,6 @@ impl GuestFile for File {
     }
 }
 ```
-
 > **来源**: [WASI Preview 2 Docs; wit-bindgen Tutorial] ✅
 
 ---
@@ -337,7 +319,6 @@ impl GuestFile for File {
 ## 六、定理一致性矩阵（Wasm 安全层）
 >
 >
-
 > **[来源类型: 原创分析; WASI Spec; WebAssembly Spec]** 以下矩阵梳理 Wasm/Component Model 的安全保证与 Rust 的映射关系。
 
 | 编号 | 保证 | 前提 | 结论 | 失效条件 | 后果 |
@@ -363,9 +344,7 @@ impl GuestFile for File {
 | 应用领域 | [`./04_application_domains.md`](04_application_domains.md) | Wasm 的工程落地场景 |
 
 > **[来源: WASI Preview 2 Docs; WebAssembly Component Model Spec; wit-bindgen Docs; WASMtime Docs]** WASI 分析基于 Bytecode Alliance 的官方规范。✅
-
 > **[来源: WebAssembly.org; wasm-bindgen Guide; Rust WASM Working Group]** Wasm 基础概念参考了 W3C 社区组和 Rust WASM 工作组的文档。✅
-
 > **[来源: Capability-Based Security Research; Dennis & Van Horn 1966; Rust Ownership Model]** 能力安全模型基于操作系统安全研究的经典文献。✅
 ---
 
@@ -405,7 +384,6 @@ fn run() -> Result<i32, String> {
     Ok(result)
 }
 ```
-
 ### 8.2 反例：跨组件边界忽略 Result 错误
 
 ```rust,compile_fail
@@ -417,7 +395,6 @@ fn risky_run() -> i32 {
     result.len() // ❌ 编译错误：不能直接访问 Result 的内容
 }
 ```
-
 > **编译错误** (`E0599`): `Result<Vec<u8>, IoError>` 没有 `.len()` 方法。
 > **认知功能**: 此反例展示了 WIT `result<T, E>` → Rust `Result<T, E>` 映射的核心价值——编译器强制处理跨组件边界的错误，消除静默失败。[来源: wit-bindgen Docs] ✅
 
@@ -434,7 +411,6 @@ fn escape_sandbox() {
     let _ = File::open("/etc/passwd"); // ❌ 运行时拒绝
 }
 ```
-
 > **运行时错误**: WASI 能力检查器返回 `ENOTCAPABLE`（无能力）。
 > **与 Rust 所有权的同构**: 这类似于 Rust 编译器阻止无所有权变量的访问——WASI 在运行时强制执行相同的逻辑，但边界是"能力句柄"而非"所有权变量"。
 > **关键洞察**: Rust 的所有权检查在编译期，WASI 的能力检查在运行时，二者形成**互补的安全层**。[来源: 💡 原创分析]
@@ -453,7 +429,6 @@ fn escape_sandbox() {
 
 // 运行时链接错误：类型签名不兼容
 ```
-
 > **组合错误**: WebAssembly 组件组合器（compositor）在链接阶段检测到类型签名不匹配，拒绝组合。
 > **形式化根基**: Component Model 的**类型提升规则**（type lifting）要求导入/导出接口的 WIT 类型完全一致。这是 Wasm 从动态链接（C 的 `dlsym`）向**强类型组合**演进的关键设计。[来源: Component Model Spec] ✅
 
@@ -476,7 +451,6 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 
 // 最终 Guest drop 句柄 → 宿主回收资源
 ```
-
 > **边界洞察**: Resource 句柄的 move 语义与 Rust 的所有权完全一致。但 Wasm 组件边界上的 move 是**运行时行为**（句柄表索引转移），而非编译期检查。这意味着：
 >
 > 1. 同组件内的 Resource 传递由 Rust 编译器检查
@@ -555,7 +529,6 @@ fn main() {
     println!("{}", contents);
 }
 ```
-
 > **修正**: WASI（WebAssembly System Interface）是 capability-based 安全模型：程序不继承环境权限，需显式授予（`--dir=/tmp`）。上述代码在原生 Linux 运行成功，在 WASI 运行时（Wasmtime、Wasmer）失败，除非通过 `--dir=.` 挂载目录。WASI 的 capability 设计：1) 文件系统：按需目录挂载；2) 网络：需显式 socket 权限；3) 时钟：需 `clock` capability。这与 Docker 的 capabilities（`--cap-add`）或 Linux 的 seccomp（系统调用过滤）类似——WASI 在 WebAssembly 层面实现沙箱，安全粒度更细。Rust 的 ``wasm32-wasip1`` target 原生支持 WASI，标准库调用自动映射到 WASI syscalls。这是 Rust 在边缘计算（Cloudflare Workers、Fastly Compute）中的核心优势——编译到 WASM + WASI 即可在隔离环境中运行。[来源: [WASI Overview](https://wasi.dev/)] · [来源: [Rust Wasm Target](https://doc.rust-lang.org/rustc/platform-support/wasm32-wasip1.html)]
 
 ### 10.3 边界测试：WASI 的 capability 缺失与运行时拒绝（运行时错误）
@@ -567,7 +540,6 @@ fn main() {
     // 除非显式授予 --tcplisten=127.0.0.1:8080
 }
 ```
-
 > **修正**: WASI 的 **capability-based security** 要求程序显式声明所需权限。标准 Rust 网络代码（`std::net::TcpStream`）在 WASI 目标（``wasm32-wasip1``）下可能不可用或需要特殊运行时支持。当前 WASI 预览：1) `wasmtime` 支持 TCP/UDP 的实验性扩展；2) `wasip2`（组件模型）提供更丰富的网络 API；3) 多数网络框架（`hyper`、`tokio`）的 WASI 支持仍在开发中。Rust 的边缘计算部署（Cloudflare Workers、Fastly Compute）通常使用平台特定的 API 而非标准库网络。这与 Docker 的 `--cap-add NET_BIND_SERVICE` 或 Linux 的 seccomp 类似——WASI 在 WASM 层面实现细粒度沙箱，安全粒度更细但功能受限。[来源: [WASI Overview](https://wasi.dev/)] · [来源: [Wasmtime Networking](https://docs.wasmtime.dev/)]
 > **过渡**: WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -651,9 +623,7 @@ Rust 无运行时、二进制小、性能高，且所有权系统与 WASM 的沙
 | WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

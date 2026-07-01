@@ -56,10 +56,8 @@ impl Driver for MyDriver {
     }
 }
 ```
-
 > **关键洞察**: Rust for Linux 的核心价值不是"用 Rust 重写整个内核"，而是"在关键子系统中用 Rust 的安全保证替代 C 的脆弱性"。
 > binder 驱动（Android IPC）是首个成功案例——它处理了复杂的跨进程引用（Reference）计数，而 Rust 的所有权（Ownership）系统消除了 C 代码中常见的 use-after-free 和 double-free 漏洞。[来源: LWN — Rust in the Linux Kernel] ✅
-
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
@@ -93,7 +91,6 @@ Theseus 架构:
   3. 类型安全隔离: Rust 的所有权保证一个 cell 不能访问另一个 cell 的私有状态
   4. 热更新: 可在运行时替换单个 crate（类似 Erlang 的代码热加载）
 ```
-
 ### 2.2 Theseus 的类型安全隔离
 
 ```rust,ignore
@@ -110,7 +107,6 @@ trait IPC {
     fn recv(&self) -> Message;
 }
 ```
-
 > **关键洞察**: Theseus 的激进设计证明了 Rust 类型系统（Type System）可以**替代硬件隔离机制**。
 > 传统操作系统依赖 MMU（内存管理单元）进行进程隔离；
 > Theseus 依赖 Rust 的所有权（Ownership）系统——如果一个 cell 没有另一个 cell 的引用（Reference），它就无法访问其内存。
@@ -161,7 +157,6 @@ Rust + aya 的优势:
   - 所有权系统 → 无未初始化内存
   - Result<T, E> → 显式错误处理
 ```
-
 ### 4.2 eBPF 的 Rust 生态
 
 | 工具 | 功能 | 语言 |
@@ -225,7 +220,6 @@ fn kernel_main() {
     let v = std::vec::Vec::new();
 }
 ```
-
 > **修正**: 内核态代码必须使用 `#![no_std]`，使用 `core`（无 alloc）或 `alloc`（有分配器）中的类型。`std` 依赖操作系统服务，在内核中不可用。
 
 ### 编译错误 2：`panic!` 在 `const fn` 中
@@ -238,7 +232,6 @@ const fn kernel_init(value: usize) -> usize {
     value
 }
 ```
-
 > **修正**: Rust for Linux 的 `const fn` 中 `panic!` 受限。使用 `assert!`（若编译期可求值）或将检查推迟到运行时（Runtime）。
 
 ### 编译错误 3：浮点运算在内核中
@@ -252,7 +245,6 @@ fn kernel_compute(x: f32) -> f32 {
     x * 2.0
 }
 ```
-
 > **修正**: 内核态代码应避免浮点运算。
 > 若必须使用，需手动保存/恢复 FPU 上下文（`kernel_fpu_begin`/`kernel_fpu_end` in Linux），或推迟到用户态处理。
 
@@ -282,7 +274,6 @@ fn main() {
     let _ = cell.get();
 }
 ```
-
 > **修正**: Theseus OS 的 Cell 类型是 Rust `std::cell::Cell` 的变体，要求 `T: Copy` 以确保获取值时不会发生所有权转移或别名问题。这与 Rust 标准库 `Cell::get` 的约束一致。Theseus 将这一约束扩展到内核态所有共享状态，通过类型系统排除非 Copy 类型的共享可变访问，从而消除数据竞争的可能。[来源: [Theseus OS Documentation](https://theseus-os.github.io/Theseus/)]
 
 ### 编译错误 5：Redox 的 URL 方案与 Capability 不匹配（编译错误）
@@ -310,9 +301,7 @@ fn open_resource_fixed(url: &str) -> Result<Resource, Error> {
     scheme.open(&url) // ✅ 通过 Scheme 能力模型访问
 }
 ```
-
 > **修正**: Redox OS 将所有资源抽象为 URL，通过 Scheme（类似于文件系统驱动）提供统一访问接口。Redox 的安全模型基于 capability——进程只能访问其拥有 capability 的资源。试图绕过 URL/Scheme 抽象直接操作底层资源违反设计原则，虽然在纯 Rust 代码中可能编译通过，但在 Redox 的运行时（Runtime）环境中会被 capability 系统拒绝。来源: [Redox OS Documentation]
-
 > [来源: [Redox OS Book](https://doc.redox-os.org/book/)]
 > [来源: [seL4 Reference Manual](https://sel4.systems/Info/Docs/seL4-manual-latest.pdf)]
 > [来源: [Tock OS](https://tockos.org/documentation/)]
@@ -405,9 +394,7 @@ fn open_resource_fixed(url: &str) -> Result<Resource, Error> {
 | 操作系统与内核：Rust 的系统级编程 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 操作系统与内核：Rust 的系统级编程 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 操作系统与内核：Rust 的系统级编程 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: 操作系统与内核：Rust 的系统级编程 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

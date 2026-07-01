@@ -9,7 +9,6 @@
 > **后置概念**: N/A
 
 - [Rust 概念知识体系 —— 全面分析论证与权威对齐](README.md)
-
 - [L0 元信息](00_meta/README.md)
   - [Bloom Taxonomy（Bloom 分类法）](00_meta/03_bloom_taxonomy.md)
   - [Cross Reference Matrix（交叉引用矩阵）](00_meta/05_cross_reference_matrix.md)
@@ -54,7 +53,6 @@
   - [Rust 核心术语英中对照表](00_meta/terminology_glossary.md)
   - [Rust 知识体系定理推理森林](00_meta/theorem_inference_forest.md)
   - [全局待办清单（Global TODO Tracker）](00_meta/todos.md)
-
 - [L1 基础概念](01_foundation/README.md)
   - [编程语言理论基础（PL Prerequisites）](01_foundation/00_pl_prerequisites.md)
   - [Rust 起步指南](01_foundation/00_start.md)
@@ -90,7 +88,6 @@
   - [测验：模块系统与测试（L1 试点扩展）](01_foundation/26_quiz_modules_testing.md)
   - [测验：闭包与迭代器（L1 试点扩展）](01_foundation/27_quiz_closures_iterators.md)
   - [测验：通用 PL 基座](01_foundation/29_quiz_pl_foundations.md)
-
 - [L2 进阶概念](02_intermediate/README.md)
   - [Traits（Trait 系统）](02_intermediate/01_traits.md)
   - [Generics（泛型系统）](02_intermediate/02_generics.md)
@@ -121,7 +118,6 @@
   - [构造与初始化：C++ 的构造函数 vs Rust 的结构体字面量](02_intermediate/28_construction_and_initialization.md)
   - [友元 vs 模块可见性：C++ 的 `friend` 与 Rust 的隐私边界](02_intermediate/29_friend_vs_module_privacy.md)
   - [测验：C/C++ → Rust 基础知识对比](02_intermediate/30_quiz_cpp_rust_foundations.md)
-
 - [L3 高级概念](03_advanced/README.md)
   - [是否需要进入 L4 形式化层？](03_advanced/00_before_formal.md)
   - [Concurrency（并发模型）](03_advanced/01_concurrency.md)
@@ -150,7 +146,6 @@
   - [测验：并发与异步（L3 试点扩展）](03_advanced/21_quiz_concurrency_async.md)
   - [测验：Unsafe Rust（L3 试点扩展）](03_advanced/22_quiz_unsafe.md)
   - [测验：宏系统（L3 试点扩展）](03_advanced/23_quiz_macros.md)
-
 - [L4 形式化理论](04_formal/README.md)
   - [Linear Logic & Affine Logic（线性逻辑与仿射逻辑）](04_formal/01_linear_logic.md)
   - [Type Theory（类型论基础）](04_formal/02_type_theory.md)
@@ -187,7 +182,6 @@
   - [BorrowSanitizer 运行时别名模型检测](04_formal/34_borrow_sanitizer_in_formal.md)
   - [Rustc 名称解析与 HIR](04_formal/35_name_resolution_and_hir.md)
   - [Tree Borrows 深度解析](04_formal/36_tree_borrows_deep_dive.md)
-
 - [L5 对比分析](05_comparative/README.md)
   - [Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>](05_comparative/01_rust_vs_cpp.md)
   - [Rust vs C++：ABI、对象模型与内存布局](05_comparative/02_cpp_abi_object_model.md)
@@ -208,7 +202,6 @@
   - [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](05_comparative/15_rust_vs_typescript.md)
   - [C++ vs Rust：构造、运算符、RTTI、友元](05_comparative/16_cpp_rust_surface_features.md)
   - [测验：Rust vs 系统编程语言（L5 试点扩展）](05_comparative/17_quiz_rust_vs_systems.md)
-
 - [L6 生态工程](06_ecosystem/README.md)
   - [Toolchain（工具链与 Cargo）](06_ecosystem/01_toolchain.md)
   - [Design Patterns（设计模式）](06_ecosystem/02_patterns.md)
@@ -270,7 +263,6 @@
   - [Rust 数据科学与科学计算](06_ecosystem/55_rust_for_data_science.md)
   - [C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）](06_ecosystem/56_c_to_rust_translation.md)
   - [测验：Rust 工具链（L6 试点扩展）](06_ecosystem/57_quiz_toolchain.md)
-
 - [L7 前沿趋势](07_future/README.md)
   - [AI × Rust：生成-验证闭环与确定性容器](07_future/01_ai_integration.md)
   - [Formal Methods Industrialization（形式化方法工业化）](07_future/02_formal_methods.md)

@@ -64,20 +64,17 @@
   - 进程属性和控制
   - 进程监控和资源统计
   - 进程组管理
-
 - [x] **进程池管理**
   - 进程池配置和初始化
   - 负载均衡策略（轮询、最少连接、加权轮询）
   - 自动扩展配置
   - 健康检查和进程回收
-
 - [x] **IPC通信机制**
   - 消息队列
   - 共享内存
   - 命名管道
   - Socket通信
   - 文件系统通道
-
 - [x] **同步原语优化**
   - 互斥锁（Mutex）
   - 读写锁（RwLock）
@@ -92,7 +89,6 @@
   - 异步进程池
   - 异步任务调度器
   - Tokio集成支持
-
 - [x] **性能优化**
   - 进程池预分配
   - 负载均衡算法
@@ -105,14 +101,12 @@
   - 单元测试
   - 集成测试
   - 性能基准测试
-
 - [x] **示例程序**
   - 基础进程管理演示
   - IPC通信演示
   - 同步原语演示
   - 进程池演示
   - 异步功能演示
-
 - [x] **文档完善**
   - API文档
   - 使用指南
@@ -185,7 +179,6 @@ unix           启用 Unix 平台增强（nix）              nix
 windows        启用 Windows 平台增强                  -
 full           组合特性（std+async+unix+windows）     上述全部
 ```
-
 启用方式示例：
 
 ```bash
@@ -195,7 +188,6 @@ cargo build --features async
 # 启用完整功能
 cargo build --features full
 ```
-
 ### 二进制清单（与 Cargo.toml 对齐）
 
 ```text
@@ -211,7 +203,6 @@ group_demo          进程组演示
 async_stdio_demo    异步标准IO占位（需 --features async）
 group_control_demo  进程组控制演示
 ```
-
 运行示例见下文“运行二进制示例”。
 
 ### 基础进程管理
@@ -234,7 +225,6 @@ let config = ProcessConfig {
 let pid = manager.spawn(config)?;
 println!("进程启动成功，PID: {}", pid);
 ```
-
 ### 进程池使用
 
 ```rust
@@ -257,7 +247,6 @@ let pid = pool.get_process()?;
 // 使用进程...
 pool.release_process(pid)?;
 ```
-
 ### 异步操作
 
 ```rust
@@ -272,7 +261,6 @@ async fn main() -> Result<()> {
     Ok(())
 }
 ```
-
 ## 项目结构
 
 ```text
@@ -315,7 +303,6 @@ crates/c07_process/
 ├── Cargo.toml                 # 项目配置
 └── README.md                  # 项目说明
 ```
-
 ## 技术亮点
 
 ### 1. 架构设计
@@ -377,7 +364,6 @@ cargo test
 # 运行性能基准测试
 cargo bench
 ```
-
 ```powershell
 # Windows PowerShell（工作区根目录）
 git clone <repository>
@@ -393,7 +379,6 @@ cargo test
 # 运行性能基准测试
 cargo bench
 ```
-
 运行二进制示例：
 
 ```bash
@@ -404,7 +389,6 @@ cargo run --bin sync_demo
 cargo run --bin process_pool_demo
 cargo run --bin async_demo --features async
 ```
-
 ```powershell
 # 在 crates/c07_process 目录下
 cargo run --bin process_demo
@@ -413,19 +397,16 @@ cargo run --bin sync_demo
 cargo run --bin process_pool_demo
 cargo run --bin async_demo --features async
 ```
-
 从工作区根目录运行（可选）：
 
 ```bash
 cargo run -p c07_process --bin process_demo
 cargo run -p c07_process --bin async_demo --features async
 ```
-
 ```powershell
 cargo run -p c07_process --bin process_demo
 cargo run -p c07_process --bin async_demo --features async
 ```
-
 ### 配置说明
 
 - **进程池配置**：可调整进程数量、超时时间、负载均衡策略

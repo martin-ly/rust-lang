@@ -56,7 +56,6 @@ assert_matches!(expression, pattern, "格式化: {}", arg);
 
 debug_assert_matches!(expression, pattern); // 仅 debug 构建触发
 ```
-
 ---
 
 ## 对比：`assert!` vs `assert_matches!` {#对比assert-vs-assert_matches}
@@ -81,7 +80,6 @@ if let Ok(config) = result {
     panic!("Expected Ok, got {:?}", result);
 }
 ```
-
 ### 新方式（1.96+） {#新方式196}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -100,7 +98,6 @@ assert_matches!(
     result
 );
 ```
-
 ---
 
 ## 典型用例 {#典型用例}
@@ -118,7 +115,6 @@ fn test_file_open() {
     assert_matches!(result, Ok(file) if file.metadata().unwrap().len() > 0);
 }
 ```
-
 ### 2. 枚举变体验证 {#2-枚举变体验证}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -142,7 +138,6 @@ fn test_state_machine() {
     );
 }
 ```
-
 ### 3. 嵌套模式 {#3-嵌套模式}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -155,7 +150,6 @@ fn test_nested_result() {
     assert_matches!(data, Ok(Ok(n)) if n > 0);
 }
 ```
-
 ### 4. `Option` 断言 {#4-option-断言}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -167,7 +161,6 @@ fn test_cache_hit() {
     assert_matches!(cache.get("user:123"), Some(entry) if entry.ttl > 0);
 }
 ```
-
 ---
 
 ## `debug_assert_matches!` {#debug_assert_matches}
@@ -184,7 +177,6 @@ fn critical_path(data: &Packet) {
     // 实际处理逻辑...
 }
 ```
-
 ---
 
 ## 与 `assert!` + `matches!` 的关系 {#与-assert-matches-的关系}
@@ -198,7 +190,6 @@ assert!(matches!(result, Ok(_)));
 // 1.96 的原生支持（错误信息更友好）
 assert_matches!(result, Ok(_));
 ```
-
 | 维度 | `assert!(matches!(...))` | `assert_matches!(...)` |
 |:---|:---|:---|
 | 可读性 | 一般 | 优秀 |
@@ -223,7 +214,6 @@ assert!(matches!(result, Ok(Config { key: "test", .. })));
 // After:
 assert_matches!(result, Ok(Config { key: "test", .. }));
 ```
-
 ---
 
 > **权威来源**: [Rust Standard Library: assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html), [Tracking Issue #108099](https://github.com/rust-lang/rust/issues/108099)

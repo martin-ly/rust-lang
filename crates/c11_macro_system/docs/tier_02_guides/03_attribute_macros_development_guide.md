@@ -1,0 +1,501 @@
+# C11 Macro System - Tier 2: 属性宏开发指南
+
+> **文档版本**: v1.0.0
+> **最后更新**: 2025-12-11
+> **Rust 版本**: 1.92.0+
+> **预计阅读**: 30 分钟
+
+---
+
+## 📋 目录
+
+- [C11 Macro System - Tier 2: 属性宏开发指南](#c11-macro-system---tier-2-属性宏开发指南)
+  - [📋 目录](#-目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+  - [1. 属性宏概述](#1-属性宏概述)
+  - [2. 基础语法](#2-基础语法)
+    - [2.1 定义属性宏](#21-定义属性宏)
+    - [2.2 使用属性宏](#22-使用属性宏)
+  - [3. 解析属性](#3-解析属性)
+    - [3.1 解析参数](#31-解析参数)
+    - [3.2 自定义解析](#32-自定义解析)
+  - [4. 修改代码](#4-修改代码)
+    - [4.1 包装函数](#41-包装函数)
+    - [4.2 添加代码](#42-添加代码)
+  - [5. 实战案例](#5-实战案例)
+    - [5.1 HTTP 路由宏](#51-http-路由宏)
+    - [5.2 异步重试宏](#52-异步重试宏)
+    - [5.3 性能计时宏](#53-性能计时宏)
+    - [5.4 数据验证宏](#54-数据验证宏)
+  - [6. 总结](#6-总结)
+    - [核心要点](#核心要点)
+    - [最佳实践](#最佳实践)
+  - [📚 参考资源](#-参考资源)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**属性宏开发指南 (Attribute Macro Development Guide)**:
+
+- **定义**: 开发属性过程宏的实践指南，用于修改或增强代码
+- **类型**: 开发指南文档
+- **范畴**: 过程宏、元编程
+- **版本**: Rust 1.15+ (过程宏)
+- **相关概念**: 属性宏、过程宏、代码修改、框架集成
+
+**属性宏 (Attribute Macro)**:
+
+- **定义**: 可以作用于任何 Rust 项（函数、结构体、模块等）的过程宏
+- **类型**: 过程宏
+- **属性**: 代码修改、参数支持、框架集成
+- **关系**: 与 Derive 宏、函数宏相关
+
+### 属性特征
+
+**核心属性**:
+
+- **作用于任何项**: 函数、结构体、模块等
+- **可接受参数**: 支持属性参数
+- **可修改原始代码**: 可以修改或包装原始代码
+- **框架集成**: 用于框架和库集成
+
+**性能特征**:
+
+- **编译时处理**: 在编译时处理代码
+- **零运行时开销**: 处理后的代码无额外开销
+- **适用场景**: HTTP 路由、异步重试、性能计时、数据验证
+
+### 关系连接
+
+**继承关系**:
+
+- 属性宏 --[is-a]--> 过程宏
+- HTTP 路由宏 --[is-a]--> 属性宏
+
+**组合关系**:
+
+- 属性宏开发指南 --[uses]--> syn 和 quote
+- 框架集成 --[uses]--> 属性宏
+
+**依赖关系**:
+
+- 属性宏 --[depends-on]--> 过程宏支持
+- 代码增强 --[depends-on]--> 属性宏
+
+### 思维导图
+
+```text
+属性宏开发指南
+│
+├── 基础语法
+│   ├── 定义属性宏
+│   └── 使用属性宏
+├── 解析属性
+│   ├── 解析参数
+│   └── 自定义解析
+├── 修改代码
+│   ├── 包装函数
+│   └── 添加代码
+└── 实战案例
+    ├── HTTP 路由宏
+    └── 异步重试宏
+```
+---
+
+## 1. 属性宏概述
+
+**属性宏** 可以作用于任何 Rust 项（函数、结构体、模块等），用于修改或增强代码。
+
+**特点**:
+
+- ✅ 作用于任何项
+- ✅ 可接受参数
+- ✅ 可修改原始代码
+- ✅ 用于框架和库集成
+
+---
+
+## 2. 基础语法
+
+### 2.1 定义属性宏
+
+```rust
+use proc_macro::TokenStream;
+
+#[proc_macro_attribute]
+pub fn my_attribute(attr: TokenStream, item: TokenStream) -> TokenStream {
+    // attr: 属性参数 #[my_attribute(arg1, arg2)]
+    // item: 被修饰的项
+
+    item  // 返回原样
+}
+```
+### 2.2 使用属性宏
+
+```rust
+#[my_attribute]
+fn my_function() {
+    println!("Hello");
+}
+
+#[my_attribute(arg1, arg2)]
+struct MyStruct {
+    field: i32,
+}
+```
+---
+
+## 3. 解析属性
+
+### 3.1 解析参数
+
+```rust
+use syn::{parse_macro_input, AttributeArgs, ItemFn};
+
+#[proc_macro_attribute]
+pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
+    let args = parse_macro_input!(attr as AttributeArgs);
+    let input = parse_macro_input!(item as ItemFn);
+
+    // 解析属性参数
+    for arg in args {
+        // 处理每个参数
+    }
+
+    TokenStream::from(quote! { #input })
+}
+```
+### 3.2 自定义解析
+
+```rust
+use syn::parse::{Parse, ParseStream};
+use syn::{LitStr, Token};
+
+struct RouteArgs {
+    method: LitStr,
+    path: LitStr,
+}
+
+impl Parse for RouteArgs {
+    fn parse(input: ParseStream) -> syn::Result<Self> {
+        let method: LitStr = input.parse()?;
+        input.parse::<Token![,]>()?;
+        let path: LitStr = input.parse()?;
+
+        Ok(RouteArgs { method, path })
+    }
+}
+
+#[proc_macro_attribute]
+pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
+    let args = parse_macro_input!(attr as RouteArgs);
+    let input = parse_macro_input!(item as ItemFn);
+
+    let method = args.method.value();
+    let path = args.path.value();
+
+    // 使用 method 和 path
+    TokenStream::new()
+}
+
+// 使用:
+// #[route("GET", "/users")]
+// fn get_users() { }
+```
+---
+
+## 4. 修改代码
+
+### 4.1 包装函数
+
+```rust
+use quote::quote;
+use syn::{parse_macro_input, ItemFn};
+
+#[proc_macro_attribute]
+pub fn trace(_attr: TokenStream, item: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(item as ItemFn);
+
+    let fn_name = &input.sig.ident;
+    let fn_block = &input.block;
+    let fn_sig = &input.sig;
+
+    let expanded = quote! {
+        #fn_sig {
+            println!("Entering {}", stringify!(#fn_name));
+            let result = (|| #fn_block)();
+            println!("Exiting {}", stringify!(#fn_name));
+            result
+        }
+    };
+
+    TokenStream::from(expanded)
+}
+
+// 使用:
+// #[trace]
+// fn my_function() {
+//     println!("Inside");
+// }
+```
+### 4.2 添加代码
+
+```rust
+#[proc_macro_attribute]
+pub fn cached(_attr: TokenStream, item: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(item as ItemFn);
+
+    let fn_name = &input.sig.ident;
+    let fn_sig = &input.sig;
+    let fn_block = &input.block;
+
+    let cache_name = syn::Ident::new(
+        &format!("{}_CACHE", fn_name.to_string().to_uppercase()),
+        fn_name.span()
+    );
+
+    let expanded = quote! {
+        static #cache_name: once_cell::sync::Lazy<std::sync::Mutex<std::collections::HashMap<String, String>>> =
+            once_cell::sync::Lazy::new(|| std::sync::Mutex::new(std::collections::HashMap::new()));
+
+        #fn_sig {
+            let key = format!("{:?}", (/* 参数 */));
+
+            // 检查缓存
+            if let Some(cached) = #cache_name.lock().unwrap().get(&key) {
+                return cached.clone();
+            }
+
+            // 执行函数
+            let result = (|| #fn_block)();
+
+            // 存入缓存
+            #cache_name.lock().unwrap().insert(key, result.clone());
+
+            result
+        }
+    };
+
+    TokenStream::from(expanded)
+}
+```
+---
+
+## 5. 实战案例
+
+### 5.1 HTTP 路由宏
+
+```rust
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, ItemFn, LitStr};
+
+#[proc_macro_attribute]
+pub fn get(attr: TokenStream, item: TokenStream) -> TokenStream {
+    let path = parse_macro_input!(attr as LitStr);
+    let input = parse_macro_input!(item as ItemFn);
+
+    let fn_name = &input.sig.ident;
+    let fn_block = &input.block;
+
+    let expanded = quote! {
+        pub fn #fn_name() -> impl axum::response::IntoResponse {
+            #fn_block
+        }
+
+        // 注册路由
+        inventory::submit! {
+            Route {
+                method: "GET",
+                path: #path,
+                handler: #fn_name,
+            }
+        }
+    };
+
+    TokenStream::from(expanded)
+}
+
+// 使用:
+// #[get("/users")]
+// fn get_users() -> String {
+//     "User list".to_string()
+// }
+```
+### 5.2 异步重试宏
+
+```rust
+#[proc_macro_attribute]
+pub fn retry(attr: TokenStream, item: TokenStream) -> TokenStream {
+    let max_retries = parse_macro_input!(attr as syn::LitInt).base10_parse::<u32>().unwrap();
+    let input = parse_macro_input!(item as ItemFn);
+
+    let fn_name = &input.sig.ident;
+    let fn_sig = &input.sig;
+    let fn_block = &input.block;
+
+    let expanded = quote! {
+        #fn_sig {
+            let mut attempts = 0;
+            loop {
+                match (async #fn_block).await {
+                    Ok(result) => return Ok(result),
+                    Err(e) if attempts < #max_retries => {
+                        attempts += 1;
+                        println!("Retry {} of {}", attempts, #max_retries);
+                        tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
+                    }
+                    Err(e) => return Err(e),
+                }
+            }
+        }
+    };
+
+    TokenStream::from(expanded)
+}
+
+// 使用:
+// #[retry(3)]
+// async fn fetch_data() -> Result<String, Error> {
+//     Ok("data".to_string())
+// }
+```
+### 5.3 性能计时宏
+
+```rust
+#[proc_macro_attribute]
+pub fn timed(_attr: TokenStream, item: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(item as ItemFn);
+
+    let fn_name = &input.sig.ident;
+    let fn_sig = &input.sig;
+    let fn_block = &input.block;
+
+    let expanded = quote! {
+        #fn_sig {
+            let start = std::time::Instant::now();
+            let result = (|| #fn_block)();
+            let duration = start.elapsed();
+            println!("{} took {:?}", stringify!(#fn_name), duration);
+            result
+        }
+    };
+
+    TokenStream::from(expanded)
+}
+
+// 使用:
+// #[timed]
+// fn expensive_operation() {
+//     std::thread::sleep(std::time::Duration::from_secs(1));
+// }
+```
+### 5.4 数据验证宏
+
+```rust
+#[proc_macro_attribute]
+pub fn validate(_attr: TokenStream, item: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(item as ItemStruct);
+
+    let struct_name = &input.ident;
+    let fields = match &input.fields {
+        syn::Fields::Named(fields) => &fields.named,
+        _ => panic!("Only named fields supported"),
+    };
+
+    let validations = fields.iter().map(|f| {
+        let field_name = &f.ident;
+        quote! {
+            // 添加验证逻辑
+            if self.#field_name.is_empty() {
+                return Err(format!("Field {} is empty", stringify!(#field_name)));
+            }
+        }
+    });
+
+    let expanded = quote! {
+        #input
+
+        impl #struct_name {
+            pub fn validate(&self) -> Result<(), String> {
+                #(#validations)*
+                Ok(())
+            }
+        }
+    };
+
+    TokenStream::from(expanded)
+}
+
+// 使用:
+// #[validate]
+// struct User {
+//     name: String,
+//     email: String,
+// }
+```
+---
+
+## 6. 总结
+
+### 核心要点
+
+1. **定义**: `#[proc_macro_attribute]`
+2. **参数**: `attr` (属性参数), `item` (被修饰项)
+3. **解析**: 使用 `syn` 解析
+4. **生成**: 使用 `quote!` 生成代码
+5. **用途**: 路由、日志、验证、缓存
+
+### 最佳实践
+
+| 场景          | 推荐做法               |
+| :--- | :--- || **HTTP 路由** | 注册路由到全局注册表   |
+| **日志追踪**  | 包装原函数，添加日志   |
+| **缓存**      | 添加静态缓存变量       |
+| **验证**      | 生成 `validate()` 方法 |
+| **异步**      | 处理 `async` 函数签名  |
+
+**常见陷阱**:
+
+- ❌ 修改原函数导致错误
+- ❌ 忽略 `async` 函数
+- ❌ 属性参数解析错误
+- ❌ 缺少错误处理
+- ✅ 保留原函数签名
+- ✅ 正确处理异步函数
+- ✅ 使用自定义解析器
+- ✅ 提供清晰的错误信息
+
+---
+
+## 📚 参考资源
+
+**相关文档**:
+
+- [Tier 2: Derive 宏开发指南](02_derive_macros_development_guide.md)
+- [Tier 2: 函数宏开发指南](04_function_macros_development_guide.md)
+- [Tier 3: 理论参考](../tier_03_references/README.md)
+
+---
+
+**文档维护**: C11 Macro System Team
+**最后审核**: 2025-10-23
+**下次更新**: 2026-01-23
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

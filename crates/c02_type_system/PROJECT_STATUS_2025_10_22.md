@@ -59,7 +59,6 @@ c02_type_system/docs/
 ├─ 📚 appendices/              (18+文档, 8,000+行)
 └─ 📦 07_cargo_package_management/ (11文档, 6,000+行)
 ```
-
 ---
 
 ## 🚀 快速入口
@@ -67,8 +66,8 @@ c02_type_system/docs/
 ### 📌 主要文档
 
 1. **[README.md](README.md)** - 项目首页 ⭐⭐⭐
-2. **[主索引导航](docs/tier_01_foundations/02_主索引导航.md)** - 918行完整导航 ⭐⭐⭐
-3. **[项目概览](docs/tier_01_foundations/01_项目概览.md)** - 完整介绍
+2. **[主索引导航](docs/tier_01_foundations/02_navigation.md)** - 918行完整导航 ⭐⭐⭐
+3. **[项目概览](docs/tier_01_foundations/01_project_overview.md)** - 完整介绍
 
 ### 📋 重要报告
 
@@ -112,7 +111,6 @@ c02_type_system/docs/
 2. 查看 项目概览
 3. 学习 Tier 2 指南
 ```
-
 ### 开发者
 
 ```text
@@ -120,7 +118,6 @@ c02_type_system/docs/
 2. 按需查阅 Tier 2-3
 3. 参考 实战案例
 ```
-
 ### 架构师
 
 ```text
@@ -128,7 +125,6 @@ c02_type_system/docs/
 2. 参考 设计模式集
 3. 查看 性能优化指南
 ```
-
 ### 研究者
 
 ```text
@@ -136,7 +132,6 @@ c02_type_system/docs/
 2. 学习 理论文档
 3. 研究 知识图谱
 ```
-
 ---
 
 ## 🔧 维护状态

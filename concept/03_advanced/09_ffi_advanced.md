@@ -100,7 +100,6 @@ FFI 边界的安全模型:
   ├── 安全包装层提供类型安全
   └── Miri / Sanitizers 动态检测
 ```
-
 > **认知功能**: FFI 的**核心挑战**是**安全契约的隐式性**——C API 通常不形式化其契约，Rust 开发者必须通过文档和测试推断。
 > [来源: [Rust Nomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html)]
 
@@ -159,7 +158,6 @@ extern "C" {
     pub fn context_free(ctx: *mut OpaqueContext);
 }
 ```
-
 > **布局洞察**: `#[repr(C)]` 是 FFI 的**基石**——它保证 Rust 结构体（Struct）的内存布局与 C 完全相同。
 > [来源: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)]
 
@@ -216,7 +214,6 @@ impl Drop for CallbackHandle {
     }
 }
 ```
-
 > **回调洞察**: Rust 闭包（Closures） → C 回调的**桥接**是 FFI 中最复杂的模式之一——它涉及生命周期（Lifetimes）、panic 安全和线程安全的多重考量。
 > [来源: [Rust FFI — Callbacks](https://doc.rust-lang.org/nomicon/ffi.html#callbacks-from-c-code-to-rust-functions)]
 
@@ -262,7 +259,6 @@ impl Drop for CallbackHandle {
   ├── Rust: Option<extern "C" fn(c_int)>
   └── Option 用于允许 NULL 函数指针
 ```
-
 > **映射洞察**: Rust 的 `std::os::raw` 模块（Module）提供**平台无关的 C 类型映射**——但 `c_char` 的符号性（signed/unsigned）因平台而异。
 > [来源: [std::os::raw](https://doc.rust-lang.org/std/os/raw/index.html)]
 
@@ -312,7 +308,6 @@ thread_local! {
 // ├── C 库是否使用 TLS？
 // └── Rust 的 Send/Sync 标记是否准确？
 ```
-
 > **线程安全洞察**: FFI 的**线程安全**不能自动推断——必须查阅 C 库文档或源码，然后显式标记 `Send`/`Sync`。
 > [来源: [Rust Nomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)]
 
@@ -377,7 +372,6 @@ impl<F: FnOnce()> Drop for CleanupGuard<F> {
     }
 }
 ```
-
 > **Panic 安全洞察**: `catch_unwind` 是 FFI 边界的**安全网**——但不应作为常规错误处理（Error Handling）机制使用，它有性能开销且不能捕获所有 panic。
 > [来源: [std::panic::catch_unwind](https://doc.rust-lang.org/std/panic/fn.catch_unwind.html)]
 
@@ -413,7 +407,6 @@ Opaque 指针:
   → 或 C 拥有，Rust 使用
   → 明确所有权避免 double free
 ```
-
 > **模式矩阵**: FFI 的**核心原则**是"在边界处验证"——所有跨边界的假设都必须在 Rust 侧显式检查。
 > [来源: [Rust FFI Guidelines](https://rust-lang.github.io/rust-bindgen/)]
 
@@ -437,7 +430,6 @@ graph TD
     style WRAP fill:#c8e6c9
     style RAW fill:#fff3e0
 ```
-
 > **认知功能**: **Safe 包装是目标**，但**理解 C API 契约是前提**——不安全的包装比直接的 unsafe 更危险。
 > [来源: [Rust API Guidelines — Safety](https://rust-lang.github.io/api-guidelines//documentation.html#function-docs-include-error-conditions-and-panic-conditions-c-failure)]
 
@@ -477,7 +469,6 @@ graph TD
 ├── 静态链接 vs 动态链接
 └── 缓解: build.rs + pkg-config
 ```
-
 > **边界要点**: FFI 的边界主要与**C++ 互操作**、**回调生命周期**、**异常模型**、**调试**和**构建系统**相关。
 > [来源: [Rust FFI — Best Practices](https://doc.rust-lang.org/nomicon/ffi.html#best-practices)]
 
@@ -529,7 +520,6 @@ graph TD
          });
      }
 ```
-
 > **陷阱总结**: FFI 的陷阱主要与**字符串**、**生命周期（Lifetimes）**、**调用约定**、**对齐**和 **panic** 相关。
 > [来源: [Rust FFI — Common Mistakes](https://doc.rust-lang.org/nomicon/ffi.html)]
 
@@ -542,7 +532,6 @@ graph TD
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust Nomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) | ✅ 一级 | 权威指南 |
@@ -620,7 +609,6 @@ extern "C" fn increment_fixed() {
     *guard += 1; // ✅ 无需 unsafe
 }
 ```
-
 > **修正**: `static mut` 在 Rust 中几乎永远不应使用。它绕过所有权（Ownership）和借用（Borrowing）检查，允许数据竞争。FFI 回调若需维护全局状态，应使用 `Mutex<T>`、`RwLock<T>` 或原子类型。`static mut` 的访问需要 `unsafe`，且即使单线程 FFI 调用也可能因信号处理或重入导致未定义行为。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.2 边界测试：`Box::into_raw` 后重复释放（运行时 UB）
@@ -645,7 +633,6 @@ fn fixed() {
     } // 不再次访问 ptr
 }
 ```
-
 > **修正**: `Box::into_raw` 将 `Box` 转为裸指针，放弃 Rust 的自动内存管理。
 > 调用者必须确保：
 >
@@ -672,7 +659,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**: C 的变长参数（variadic functions，`...`）无类型检查，调用者必须确保实参类型与格式字符串一致。
 > Rust 的 FFI 声明 `extern "C" { fn printf(fmt: *const c_char, ...) }` 同样无类型保护——`unsafe` 块中的调用完全信任开发者。
 > 错误传递参数类型（`char*` vs `int`）导致未定义行为：栈布局错误、格式字符串解析越界、可能的安全漏洞。
@@ -710,7 +696,6 @@ fn main() {
     // 若 C 代码多次调用 callback，双重释放
 }
 ```
-
 > **修正**:
 > 将 Rust 对象通过 `Box::into_raw` 传递给 C 代码时，
 > 所有权（Ownership）语义发生断裂：
@@ -740,7 +725,6 @@ fn main() {
     // 需使用 libc crate 或手动定义
 }
 ```
-
 > **修正**: C 的 `long double` 是平台相关的浮点类型：x86 上 80 位扩展精度（16 字节对齐），ARM 上 128 位四精度，某些平台上与 `double` 相同。Rust 标准库**无 `c_longdouble` 类型**，`libc` crate 提供平台特定的定义。FFI 中使用 `long double` 需：1) 查询目标平台的 `sizeof(long double)`；2) 使用 `libc::c_longdouble`（若可用）；3) 或避免在 FFI 边界使用 `long double`（改为 `double` 或自定义结构）。这与 C++ 的 `long double`（原生支持）或 Go 的 `C.longdouble`（通过 cgo 支持）不同——Rust 的 FFI 设计优先覆盖常见场景，`long double` 的边缘情况需额外处理。[来源: [libc Crate](https://docs.rs/libc/)] · [来源: [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)]
 
 ### 10.3 边界测试：C 可变参数函数的不安全绑定（运行时 UB）
@@ -764,7 +748,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**: C 的**可变参数函数**（variadic function，如 `printf`、`sprintf`）在 Rust FFI 中绑定是 `unsafe` 的：1) 参数类型不匹配 → UB（如 `i32` 传给期望 `c_int` 的位置，在 LP64 平台上可能正确，但在 ILP32 上可能错误）；2) 格式字符串与参数数量不匹配 → 缓冲区溢出或读取无效内存；3) Rust 字符串（UTF-8）与 C 字符串（null-terminated bytes）的编码差异。安全策略：1) 避免直接绑定 C 可变参数函数；2) 使用 `libc` crate 的标准绑定（已验证）；3) 用 Rust 的 `format!` + `CString::new` 构造参数，再传递。`va_list` 在 Rust 中可通过 `c_variadic` feature（nightly）或 `va_list-rs` crate 处理。这与 Go 的 cgo（CGO 自动处理部分类型转换）或 Java 的 JNI（JVM 管理类型安全）不同——Rust 的 FFI 是零成本但需完全手动验证。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/ffi.html)] · [来源: [libc crate](https://docs.rs/libc/)]
 
 ### 10.4 边界测试：C 结构体的内存对齐与 Rust 的 `#[repr(C)]`（运行时 ABI 不匹配）
@@ -790,7 +773,6 @@ fn main() {
     // Rust 的 #[repr(C)] 遵循平台 C ABI，但 pragma pack 可能改变对齐
 }
 ```
-
 > **修正**: `#[repr(C)]` 使 Rust struct 遵循**平台 C ABI 的布局规则**：1) 字段按声明顺序排列；2) 对齐要求与 C 相同；3) 大小和对齐是平台相关的（x86_64 上 `u32` 对齐 4 字节）。风险：1) C 代码使用 `#pragma pack(1)` → Rust 需 `#[repr(C, packed)]`；2) C 的位域（bitfields）→ Rust 无直接等价物，需手动掩码；3) C 的 `_Alignas` → Rust 的 `#[repr(align(N))]`。`bindgen` 工具自动从 C 头文件生成 Rust 绑定（含正确的 `repr` 和字段布局）。这与 C++ 的 `extern "C"`（类似 ABI 兼容）或 Go 的 cgo（自动生成，但可能对齐不一致）不同——Rust 的 FFI 要求开发者显式控制内存布局。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/other-reprs.html)] · [来源: [bindgen](https://rust-lang.github.io/rust-bindgen/)]
 
 ### 10.7 边界测试：生命周期参数的不匹配返回
@@ -803,7 +785,6 @@ fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
 
 fn main() {}
 ```
-
 > **修正**: **生命周期标注**：1) `&'a str` 表示引用（Reference）至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
 
 ## 嵌入式测验（Embedded Quiz）
@@ -881,9 +862,7 @@ fn main() {}
 > 复杂类型布局安全 ⟸ repr(C) 兼容 ⟸ 对齐与填充
 > 回调安全 ⟸ 函数指针生命周期 ⟸ 线程边界
 > **过渡**: 掌握 FFI 高级主题：跨语言边界的安全与性能 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 FFI 高级主题：跨语言边界的安全与性能 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: FFI 高级主题：跨语言边界的安全与性能 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

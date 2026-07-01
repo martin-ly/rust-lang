@@ -40,21 +40,21 @@
 
 **🌱 初学者**:
 
-- [项目概览](tier_01_foundations/01_项目概览.md)
-- [术语表](tier_01_foundations/03_术语表.md)
-- [常见问题](tier_01_foundations/04_常见问题.md)
+- [项目概览](tier_01_foundations/01_project_overview.md)
+- [术语表](tier_01_foundations/03_glossary.md)
+- [常见问题](tier_01_foundations/04_faq.md)
 
 **💻 进阶开发者**:
 
-- [基础类型指南](tier_02_guides/01_基础类型指南.md)
-- [泛型编程指南](tier_02_guides/03_泛型编程指南.md)
-- [Trait 系统指南](tier_02_guides/04_Trait系统指南.md)
+- [基础类型指南](tier_02_guides/01_basic_types_guide.md)
+- [泛型编程指南](tier_02_guides/03_generics_programming_guide.md)
+- [Trait 系统指南](tier_02_guides/04_trait_system_guide.md)
 
 **⚡ 高级开发者**:
 
-- [类型系统规范](tier_03_references/01_类型系统规范.md)
-- [类型型变参考](tier_03_references/02_类型型变参考.md)
-- [分派机制参考](tier_03_references/03_分派机制参考.md)
+- [类型系统规范](tier_03_references/01_type_system_specification.md)
+- [类型型变参考](tier_03_references/02_variance_reference.md)
+- [分派机制参考](tier_03_references/03_dispatch_mechanisms_reference.md)
 
 ---
 
@@ -92,7 +92,6 @@ cargo run -p c02_type_system --example <example_name>
 # 运行所有测试
 cargo test -p c02_type_system
 ```
-
 ---
 
 ## 🔗 相关文档

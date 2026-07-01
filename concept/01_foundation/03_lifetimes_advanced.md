@@ -145,7 +145,6 @@
 部变量？"                               Elision =   推断"
                                         模式推导"
 ```
-
 **认知脚手架**：
 
 - **类比**: 生命周期像"借条的到期日"——你必须在物品归还前使用它。
@@ -249,7 +248,6 @@ where
     }
 }
 ```
-
 **当前系统错误**：`map.get_mut(&key)` 的借用（Borrowing）在整个 `match` 期间被认为有效，导致 `map.insert` 被判定为冲突。
 
 **实际安全**：`Some` 分支已返回，`None` 分支中 `get_mut` 的借用实际上已结束——但当前系统无法在控制流层面表达这种"路径敏感"的借用终结。
@@ -297,7 +295,6 @@ if condition {
 // 当前系统：p 的借用覆盖整个 if-else
 // Polonius：p 的借用仅在 condition 为 true 的路径有效
 ```
-
 **T2：两阶段借用（Two-Phase Borrows）的完整支持**:
 
 当前系统对 `&mut` 自借用有特殊的两阶段处理，但实现 ad-hoc。Polonius 将两阶段借用作为 Datalog 规则的自然结果，无需特殊处理。
@@ -331,7 +328,6 @@ rustc -Zpolonius main.rs
 # Cargo 中使用
 RUSTFLAGS="-Zpolonius" cargo build
 ```
-
 **何时使用 Polonius**：
 
 - 当前 borrow checker 报"过度保守"的错误，但代码逻辑上安全
@@ -384,7 +380,6 @@ fn print(s: &str);                       // ⟹ fn print<'a>(s: &'a str)
 fn cmp(a: &str, b: &str);                // ⟹ fn cmp<'a, 'b>(a: &'a str, b: &'b str)
 fn multi(x: &i32, y: &mut f64, z: &str); // ⟹ fn multi<'a, 'b, 'c>(x: &'a i32, y: &'b mut f64, z: &'c str)
 ```
-
 **反例与边界**。
 
 ```rust,ignore
@@ -395,7 +390,6 @@ fn merge(a: &str, b: &str) -> &str {
     if a.len() > b.len() { a } else { b }  // E0106: 无法确定返回生命周期
 }
 ```
-
 **修正**：必须显式标注以强制生命周期相等。
 
 ```rust
@@ -404,7 +398,6 @@ fn merge<'a>(a: &'a str, b: &'a str) -> &'a str {
     if a.len() > b.len() { a } else { b }
 }
 ```
-
 > **来源: [Rust Reference: Lifetime elision §The rules](https://doc.rust-lang.org/reference/lifetime-elision.html#the-rules)** Rule 1 的独立分配是后续规则产生歧义的根源——当 $|L_{in}| > 1$ 且返回含引用时，Rule 2 不适用，必须显式标注。✅
 
 #### 13.1.2 Rule 2：单输入时输出等于输入生命周期
@@ -424,7 +417,6 @@ $$
 fn first(s: &str) -> &str;              // ⟹ fn first<'a>(s: &'a str) -> &'a str
 fn tail(s: &mut [i32]) -> &mut [i32];   // ⟹ fn tail<'a>(s: &'a mut [i32]) -> &'a mut [i32]
 ```
-
 **反例与边界**。
 
 ```rust,ignore
@@ -433,7 +425,6 @@ fn longest(x: &str, y: &str) -> &str {  // E0106
     if x.len() > y.len() { x } else { y }
 }
 ```
-
 此时 $|L_{in}| = 2$，Rule 2 的前提 $|L_{in}| = 1$ 不满足，编译器无法确定返回引用应继承 `x` 还是 `y` 的生命周期。
 
 > **来源: [Rust Reference: Lifetime elision §The rules](https://doc.rust-lang.org/reference/lifetime-elision.html#the-rules)** Rule 2 的核心前提是"函数返回值的生命周期必须源自某个输入"——当存在多个候选源时，Elision 放弃推导以避免 unsound 的猜测。✅
@@ -463,7 +454,6 @@ impl<'a> Buffer<'a> {
     }
 }
 ```
-
 **反例与边界**。
 
 ```rust,ignore
@@ -478,7 +468,6 @@ impl<'a> Parser<'a> {
     }
 }
 ```
-
 上述代码通常可以编译，因为 `other` 的生命周期可通过协变收窄匹配 `self` 的生命周期。但若返回的引用需要**独立于** `self` 存活，则必须显式标注。
 
 ```rust,ignore
@@ -489,7 +478,6 @@ impl<'a> Parser<'a> {
     }
 }
 ```
-
 > **来源: [Rust Reference: Lifetime elision §The rules](https://doc.rust-lang.org/reference/lifetime-elision.html#the-rules)** Rule 3 体现了面向对象方法的语义约定：方法有 `&self`/`&mut self` 时，返回引用（输出）的生命周期与 self 的生命周期一致。✅
 
 ### 13.2 为什么 Elision 是 Sound 的
@@ -520,7 +508,6 @@ $$
    否则：
      保持返回引用的生命周期未解析 → 若存在未解析，报错 E0106
 ```
-
 ```rust,ignore
 // Rule 1: 每个输入引用获得独立生命周期
 fn print(s: &str);                       // ⟹ fn print<'a>(s: &'a str)
@@ -534,7 +521,6 @@ fn get(&self) -> &T;                     // ⟹ fn get<'a>(&'a self) -> &'a T
 // 不符合任何规则: 多输入 + 返回引用 + 非方法
 fn longest(x: &str, y: &str) -> &str;    // ❌ E0106
 ```
-
 > **核心洞察**：Elision 是编译器在"不引入歧义"的前提下的最大努力推导。它的 soundness 来源于**函数返回值不能凭空产生引用**这一 Rust 核心公理——任何返回的引用必须"继承"自某个输入。
 > **来源: [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html)** 完整的 Elision 规则定义于 Reference 的 "Lifetime elision" 章节，覆盖函数签名、方法签名及 trait 对象场景。✅
 
@@ -559,7 +545,6 @@ fn longest(x: &str, y: &str) -> &str;    // ❌ E0106
 若实现类型内部包含 &'a T 或 &'b U 的引用，则 impl Trait 隐式携带这些生命周期参数。
 调用方看到的类型等价于: impl Trait + 'a + 'b（仅当实现类型实际包含对应引用时）
 ```
-
 **正确示例：自动捕获**。
 
 ```rust
@@ -577,7 +562,6 @@ fn main() {
     }
 } // data 在此 drop，iter 在此之前已失效
 ```
-
 **边界：隐式捕获的精确性**。
 
 ```rust
@@ -589,7 +573,6 @@ fn filter<'a, 'b>(
     items.iter()  // 只依赖 'a，'_threshold' 的 'b 未被捕获
 }
 ```
-
 > **来源: [Rust Reference: `impl Trait` in return position](https://doc.rust-lang.org/reference/)** RPIT 的生命周期捕获策略在 [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) 中定义：返回类型自动捕获所有在函数体中被实现类型使用且出现在签名中的生命周期。✅
 
 ### 14.2 `impl Trait` + `+'a` 的显式生命周期约束
@@ -618,7 +601,6 @@ where
     s
 }
 ```
-
 **反例：缺少显式约束的泛型（Generics）返回**。
 
 ```rust,ignore
@@ -629,7 +611,6 @@ fn bad_static(s: &str) -> impl Display + 'static {
     s  // 错误: s 不是 'static
 }
 ```
-
 > **来源: [Rust Reference: Lifetime bounds on `impl Trait`](https://doc.rust-lang.org/reference/)** `impl Trait + 'a` 的语义等价于"实现该 trait 的匿名类型，且该类型中所有引用至少存活 'a"。✅
 
 ### 14.3 `impl Trait` 参数位置（APIT）的生命周期推断差异
@@ -642,7 +623,6 @@ fn bad_static(s: &str) -> impl Display + 'static {
 APIT:  fn foo(x: impl Trait<'a>)      ⟹  fn foo<T: Trait<'a>>(x: T)
 RPIT:  fn foo() -> impl Trait<'a>     ⟹  匿名关联类型，生命周期由实现自动捕获
 ```
-
 关键差异：
 
 1. **APIT 不自动捕获调用方生命周期**：APIT 参数的生命周期由调用方根据 trait bound 推导；
@@ -663,7 +643,6 @@ fn main() {
     print_any("world");  // ✅ &'static str 实现 AsRef<str>
 }
 ```
-
 **对比：显式泛型参数**。
 
 ```rust
@@ -672,7 +651,6 @@ fn print_any_explicit<T: AsRef<str>>(x: T) {
     println!("{}", x.as_ref());
 }
 ```
-
 **反例：APIT 中的生命周期不匹配**。
 
 ```rust,ignore
@@ -682,7 +660,6 @@ fn borrow_from<'a>(x: impl AsRef<str>) -> &'a str {
     x.as_ref()
 }
 ```
-
 **修正**：需显式关联 APIT 与返回生命周期。
 
 ```rust
@@ -694,7 +671,6 @@ where
     x.as_ref()
 }
 ```
-
 > **[来源: [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) (TAFIT)]** APIT 和 RPIT 的生命周期推断遵循不同的隐式捕获策略：APIT 作为泛型语法糖不引入新的生命周期捕获，RPIT 则自动封装实现类型的生命周期依赖。✅
 
 ### 14.4 RPIT vs APIT：生命周期推断对比矩阵
@@ -732,7 +708,6 @@ trait FactoryOld {
     fn create(&self) -> Self::Iter;
 }
 ```
-
 RPITIT 的解决方式是让 `impl Trait` 在 trait 方法中等价于一个**隐式关联类型**，其生命周期由实现自动推断，同时通过编译器内部的**规范化（normalization）**机制确保调用方看到的类型签名一致。
 
 > **[来源: [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) (TAFIT); Rust 1.75 Release Notes]** RPITIT 的稳定解决了 trait 层面返回抽象类型的表达力缺口，但隐式关联类型的生命周期推断仍遵循"自动捕获"原则。✅
@@ -785,7 +760,6 @@ impl<'s> LendingIterator for Words<'s> {
     }
 }
 ```
-
 ### 15.2 为什么标准 Iterator 无法表达
 
 标准 `Iterator` 的定义为：
@@ -796,7 +770,6 @@ trait Iterator {
     fn next(&mut self) -> Option<Self::Item>;
 }
 ```
-
 `Item` 是**无生命周期参数**的关联类型，这意味着：
 
 1. **无法借用 `self`**：`next()` 返回的 `Item` 不能包含对 `self` 内部数据的引用，因为 `Item` 的生命周期与 `&mut self` 解耦
@@ -813,9 +786,7 @@ impl<'s> Iterator for Words<'s> {
         Some(&self.source[..])  // E0495: 无法证明 's 与 &self 的关系
     }
 }
-
 ```
-
 Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where Self: 'a` 确保**迭代器本身至少存活到返回引用的生命周期**，从而安全地表达自引用迭代。这是 GATs 解决表达力鸿沟的经典案例。
 
 > **[来源: [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) (GATs)]** `where Self: 'a` 约束确保关联类型不会引用比 `Self` 更短的生命周期，构成自引用集合的类型安全基础。✅
@@ -857,7 +828,6 @@ union IntOrFloat {
 // 大小: 4 bytes
 // 无 tag！
 ```
-
 **本质区别**:
 
 ```text
@@ -871,7 +841,6 @@ union Value {
     f: f32,
 }
 ```
-
 > **来源: [The Rustonomicon: Unions](https://doc.rust-lang.org/nomicon/other-reprs.html)** `union` 的设计哲学是"零成本类型双关（type punning）"——允许在同一内存位置用不同类型视角解读位模式，但放弃了编译期变体追踪。✅
 
 ### 16.2 unsafe 读取 union field 的必要性
@@ -895,7 +864,6 @@ fn main() {
     }
 }
 ```
-
 **未定义行为边界**:
 
 | **场景** | 行为 | 说明 |
@@ -942,7 +910,6 @@ fn main() {
     // u 离开作用域时不再二次 drop
 }
 ```
-
 **典型错误：双重释放**:
 
 ```rust,ignore
@@ -952,7 +919,6 @@ union BadUnion {
 }
 // 编译错误: unions cannot have fields that need dropping
 ```
-
 > **来源: [The Rustonomicon: Unions](https://doc.rust-lang.org/nomicon/other-reprs.html)** `ManuallyDrop<T>` 阻止编译器自动调用 `T::drop`，使 union 的析构语义完全由程序员控制。这是 union 实现"手动内存管理"的关键抽象。✅
 
 ### 16.4 union 的 impl 限制
@@ -981,7 +947,6 @@ union NonCopyUnion {
 }
 // NonCopyUnion: !Copy
 ```
-
 > **来源: [Rust Reference: Unions](https://doc.rust-lang.org/reference/items/unions.html)** union 的 `Copy` 推导遵循与 struct 相同的规则：仅当所有字段都实现 `Copy`。union 的字段若为 `ManuallyDrop<T>`，则 `Copy` 性取决于 `T`。✅
 
 ### 16.5 与 C 语言 union 的 FFI 互操作
@@ -995,7 +960,6 @@ typedef union {
     float f;
 } c_union_t;
 ```
-
 ```rust,ignore
 #[repr(C)]
 union RustUnion {
@@ -1014,7 +978,6 @@ fn main() {
     }
 }
 ```
-
 > **来源: [Rust Reference: Unions](https://doc.rust-lang.org/reference/items/unions.html)** `#[repr(C)]` 保证 union 的字段顺序、对齐和大小与 C 一致。Rust union 不支持位域（bitfields），需用 `#[repr(C)] struct` 模拟。✅
 
 **C 互操作边界**:
@@ -1060,7 +1023,6 @@ impl Drop for Value {
     }
 }
 ```
-
 **典型错误 1：读取非活跃变体导致类型混淆**:
 
 ```rust
@@ -1078,7 +1040,6 @@ fn main() {
     }
 }
 ```
-
 **典型错误 2：未使用 ManuallyDrop 导致编译失败**:
 
 ```rust,ignore
@@ -1088,7 +1049,6 @@ union Bad {
 }
 // 编译错误: unions cannot have fields that need dropping
 ```
-
 **典型错误 3：活跃变体追踪错误导致双重释放**:
 
 ```rust,ignore
@@ -1105,7 +1065,6 @@ fn risky(u: &mut DoubleFreeRisk) {
     }
 }
 ```
-
 > **来源: [The Rustonomicon: Unions](https://doc.rust-lang.org/nomicon/other-reprs.html)** union 的正确使用模式是：外部维护一个 tag（enum 包装）或使用 `MaybeUninit` 语义，绝不在不知道活跃变体的情况下执行 drop。✅
 
 **安全包装模式：Tagged Union**:
@@ -1119,7 +1078,6 @@ enum SafeValue {
 // 工程实践：几乎总是用 enum 替代裸 union
 // union 仅用于: 1) FFI 互操作; 2) 极端内存优化; 3) 底层系统编程
 ```
-
 > **一致性（Coherence）检查**:
 > union 是 Rust 类型系统的"逃生舱"——它在 `unsafe` 边界内提供了 C 兼容的零成本类型双关，但将类型安全的全部责任转移给程序员。
 > Safe Rust 的默认选择应是 `enum`。✅
@@ -1197,7 +1155,6 @@ where
     f(&x);
 }
 ```
-
 > **修正**: 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。当 trait 方法接受引用参数时，默认的生命周期省略可能不足以表达"对所有生命周期有效"的语义。HRTB 在回调函数、比较器、迭代器（Iterator）适配器等场景中至关重要。来源: [Rust Reference]
 
 ### 10.2 边界测试：自引用结构体的生命周期标注（编译错误）
@@ -1243,7 +1200,6 @@ impl SelfRefFixed {
     }
 }
 ```
-
 > **修正**:
 > 自引用结构体（字段 A 引用字段 B）在 Rust 的生命周期系统中无法安全表达，因为结构体的生命周期参数只能引用外部数据，不能引用结构体自身字段。
 > 解决方案是使用裸指针（`*const T`）+ `Pin` + `PhantomPinned`，完全绕过生命周期系统，转由 unsafe 代码手动保证地址稳定性。
@@ -1268,7 +1224,6 @@ fn main() {
     // s 被闭包捕获，但 call_with_ref 要求闭包对所有生命周期有效
 }
 ```
-
 > **修正**:
 > HRTB（Higher-Ranked Trait Bounds，`for<'a> Fn(&'a i32)`）要求闭包能接受**任意生命周期**的引用。
 > 若闭包捕获了局部变量（如 `s: String`），其生成的 future/闭包的生命周期与 `s` 绑定，不能满足 `for<'a>` 的"对所有 'a 有效"。
@@ -1297,7 +1252,6 @@ fn main() {
     // y 的生命周期在 NLL 下应已结束，但若 y 在内部作用域中...
 }
 ```
-
 > **修正**:
 > NLL（Non-Lexical Lifetimes，Rust 1.31+）将引用的生命周期从"词法作用域"（大括号包围的范围）缩小到"实际使用范围"。
 > 但 NLL 仍有边界：
@@ -1326,7 +1280,6 @@ fn main() {
     call_with_ref(|s| &s[0..1]);
 }
 ```
-
 > **修正**:
 > `for<'a> Fn(&'a str) -> &'a str` 要求闭包对**所有**生命周期（Lifetimes） `'a` 都返回与输入相同生命周期的引用。
 > `|s| &s[0..1]` 中 `s` 是 `&str`（输入引用），`&s[0..1]` 的生命周期与 `s` 相同，这在闭包内部成立。
@@ -1358,7 +1311,6 @@ fn foo(x: &str, y: &str) -> &str
 fn bar(x: &str) -> &str
 fn baz<'a>(x: &'a str, y: &str) -> &'a str
 ```
-
 - A. `foo` 和 `bar`
 - B. 仅 `foo`
 - C. 仅 `baz`
@@ -1393,7 +1345,6 @@ where
     println!("{}", r);
 }
 ```
-
 - A. 限制 F 只能接受 `'static` 引用（Reference）
 - B. 要求 F 能接受任意生命周期的引用，且返回的引用不超出输入
 - C. 要求 F 返回的引用必须比输入活得更长
@@ -1420,7 +1371,6 @@ struct SelfRef {
     ptr: &str,
 }
 ```
-
 - A. `&str` 不能作为结构体字段
 - B. 自引用结构需要显式生命周期标注，但即使标注也无法安全实现
 - C. `String` 和 `&str` 类型不匹配
@@ -1475,7 +1425,6 @@ fn dangle() -> &String {
     &s
 }
 ```
-
 - A. 生命周期标注缺失
 - B. 返回局部变量的引用，形成悬垂引用
 - C. 借用规则冲突（可变 + 不可变同时存在）

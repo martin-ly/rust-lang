@@ -59,7 +59,6 @@ fn count_lines(text: &str) -> usize {
     text.lines().count()
 }
 ```
-
 ---
 
 ## 参考实现 {#参考实现}

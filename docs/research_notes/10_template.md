@@ -139,7 +139,6 @@ fn example_definition() {
     println!("示例定义: {}", x);
 }
 ```
-
 ### 2. 定义/设计要点二 {#2-定义设计要点二}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -153,7 +152,6 @@ fn example_definition() {
 ```text
 [形式化规则或伪代码]
 ```
-
 **Rust 代码对应**:
 
 ```rust
@@ -161,7 +159,6 @@ fn example_two() {
     // 实现与研究目标相关的代码
 }
 ```
-
 ### 3. 定义/设计要点三 {#3-定义设计要点三}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -199,7 +196,6 @@ fn example_two() {
   │
   └─ [引理 1] ─────────→ [定理 3]
 ```
-
 ---
 
 ## ✅ 证明目标 / 实验目标 {#证明目标-实验目标}
@@ -244,7 +240,6 @@ fn main() {
     basic_example();
 }
 ```
-
 **说明**: [示例说明和要点]
 
 ### 示例 2: 进阶示例 {#示例-2-进阶示例}
@@ -264,7 +259,6 @@ fn main() {
     advanced_example();
 }
 ```
-
 **说明**: [示例说明和要点]
 
 ### 示例 3: 研究场景示例 {#示例-3-研究场景示例}
@@ -290,7 +284,6 @@ fn main() {
     research_scenario_example();
 }
 ```
-
 **说明**: [研究场景说明和形式化目标]
 
 ### 示例 4: Coq 形式化示例 {#示例-4-coq-形式化示例}
@@ -324,7 +317,6 @@ Proof.
   - simpl. apply plus_gt_compat; assumption.
 Qed.
 ```
-
 **说明**: [Coq 代码说明和与 Rust 的对应关系]
 
 ---
@@ -341,7 +333,6 @@ Qed.
    - 作者: [作者姓名]
    - 年份: [年份]
    - 摘要: [摘要或链接]
-
 2. **RustBelt: Securing the Foundations of the Rust Programming Language**
    - 作者: Ralf Jung, Jacques-Henri Jourdan, Robbert Krebbers, Derek Dreyer
    - 年份: 2017

@@ -65,7 +65,6 @@
 废弃版本: {{ deprecated_version | default("N/A") }}
 替代特性: {{ replacement | default("N/A") }}
 ```
-
 ---
 
 ## 📝 特性概述 {#特性概述}
@@ -106,7 +105,6 @@
 
 {{ basic_example }}
 ```
-
 ### 进阶用法 {#进阶用法}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -114,7 +112,6 @@
 ```rust,ignore
 {{ advanced_example }}
 ```
-
 ### 生产级示例 {#生产级示例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -122,7 +119,6 @@
 ```rust,ignore
 {{ production_example }}
 ```
-
 ---
 
 ## ⚙️ 配置与选项 {#配置与选项}
@@ -140,7 +136,6 @@ version = "{{ package_version }}"
 rust-version = "{{ rust_version }}"  # 最低 Rust 版本要求
 edition = "{{ edition }}"
 ```
-
 ### 特性标志 {#特性标志}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -150,7 +145,6 @@ edition = "{{ edition }}"
 default = []
 {{ feature_flag }} = []
 ```
-
 ---
 
 ## 📊 性能特征 {#性能特征}
@@ -170,7 +164,6 @@ default = []
 ```text
 {{ benchmark_results }}
 ```
-
 ---
 
 ## 🔄 版本变更 {#版本变更}
@@ -195,7 +188,6 @@ default = []
 // 新代码 ({{ current_version }})
 {{ new_code }}
 ```
-
 ---
 
 ## 🔗 相关资源 {#相关资源}
@@ -249,7 +241,6 @@ default = []
 // ✅ 正确用法
 {{ correct_usage }}
 ```
-
 ### 兼容性问题 {#兼容性问题}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -282,7 +273,6 @@ mod tests {
     }
 }
 ```
-
 ---
 
 ## 📚 深入阅读 {#深入阅读}

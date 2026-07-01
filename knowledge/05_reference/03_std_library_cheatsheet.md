@@ -31,7 +31,6 @@ let mut v = Vec::new();
 let v = vec![1, 2, 3];           // 宏创建
 let v = Vec::with_capacity(10);  // 预分配容量
 ```
-
 | 方法 | 说明 | 示例 |
 |------|------|------|
 | `push(x)` | 尾部添加元素 | `v.push(42)` |
@@ -62,7 +61,6 @@ let v = Vec::with_capacity(10);  // 预分配容量
 let x: Option<i32> = Some(5);
 let y: Option<i32> = None;
 ```
-
 | 方法 | 说明 | 返回值 |
 |------|------|--------|
 | `is_some()` | 是否为 Some | `bool` |
@@ -87,7 +85,6 @@ let x = Some(5).map(|n| n * 2);           // Some(10)
 let x = Some(5).and_then(|n| Some(n*2));  // Some(10)
 let x: Option<i32> = None.or(Some(3));    // Some(3)
 ```
-
 ---
 
 ### std::result - 错误处理
@@ -98,7 +95,6 @@ let x: Option<i32> = None.or(Some(3));    // Some(3)
 let x: Result<i32, &str> = Ok(5);
 let y: Result<i32, &str> = Err("error");
 ```
-
 | 方法 | 说明 | 返回值 |
 |------|------|--------|
 | `is_ok()` | 是否为 Ok | `bool` |
@@ -121,7 +117,6 @@ fn read_file() -> Result<String, io::Error> {
     Ok(content)
 }
 ```
-
 ---
 
 ### std::collections - 集合类型
@@ -138,7 +133,6 @@ m.insert("key", "value");
 // 带初始容量的 HashMap
 let mut m = HashMap::with_capacity(100);
 ```
-
 | 方法 | 说明 |
 |------|------|
 | `insert(k, v)` | 插入/更新，返回旧值 `Option<V>` |
@@ -156,7 +150,6 @@ let mut m = HashMap::with_capacity(100);
 *m.entry("key").or_insert(0) += 1;
 let val = m.entry("key").or_insert_with(|| compute());
 ```
-
 #### `HashSet<T>` / `BTreeSet<T>`
 
 ```rust,ignore
@@ -164,7 +157,6 @@ use std::collections::HashSet;
 let mut s = HashSet::new();
 s.insert(42);
 ```
-
 | 方法 | 说明 |
 |------|------|
 | `insert(x)` | 插入，返回是否已存在 `bool` |
@@ -189,7 +181,6 @@ let mut s = String::new();
 let s = String::from("hello");
 let s = "hello".to_string();
 ```
-
 | 方法 | 说明 |
 |------|------|
 | `push(c)` | 追加字符 |
@@ -220,7 +211,6 @@ let s = format!("{} + {} = {}", 1, 2, 3);
 let s = format!("{:08}", 42);     // 前导零填充
 let s = format!("{:.2}", 3.14159); // 小数位限制
 ```
-
 ---
 
 ### std::io - 输入输出
@@ -230,7 +220,6 @@ let s = format!("{:.2}", 3.14159); // 小数位限制
 ```rust
 use std::io::{self, Read, Write, BufRead, BufReader, BufWriter};
 ```
-
 #### Read Trait
 
 | 方法 | 说明 |
@@ -275,7 +264,6 @@ for line in reader.lines() {
 let stdin = io::stdin();
 let line = stdin.lock().lines().next();
 ```
-
 ---
 
 ### std::fs - 文件系统
@@ -285,7 +273,6 @@ let line = stdin.lock().lines().next();
 ```rust
 use std::fs;
 ```
-
 | 函数 | 说明 | 返回 |
 |------|------|------|
 | `read(path)` | 读取整个文件 | `io::Result<Vec<u8>>` |
@@ -319,7 +306,6 @@ for entry in fs::read_dir("./")? {
     println!("{}", entry.path().display());
 }
 ```
-
 ---
 
 ### std::path - 路径处理
@@ -329,7 +315,6 @@ for entry in fs::read_dir("./")? {
 ```rust
 use std::path::{Path, PathBuf};
 ```
-
 #### Path（不可变路径引用）
 
 | 方法 | 说明 |
@@ -360,7 +345,6 @@ p.pop();               // /usr/local
 let ext = p.extension();
 let parent = p.parent();
 ```
-
 ---
 
 ### std::env - 环境变量
@@ -370,7 +354,6 @@ let parent = p.parent();
 ```rust
 use std::env;
 ```
-
 | 函数 | 说明 | 返回 |
 |------|------|------|
 | `var(key)` | 获取环境变量 | `Result<String, VarError>` |
@@ -393,7 +376,6 @@ let path = env::var("PATH")?;
 let args: Vec<String> = env::args().collect();
 let key = env::var("API_KEY").unwrap_or_default();
 ```
-
 ---
 
 ### std::process - 进程管理
@@ -403,7 +385,6 @@ let key = env::var("API_KEY").unwrap_or_default();
 ```rust
 use std::process::{Command, Stdio};
 ```
-
 #### Command 构建器
 
 ```rust,ignore
@@ -422,7 +403,6 @@ let mut child = Command::new("program")
     .stdin(Stdio::piped())
     .spawn()?;   // 启动不等待
 ```
-
 | 方法 | 说明 |
 |------|------|
 | `new(program)` | 创建命令 |
@@ -442,7 +422,6 @@ let pid = child.id();
 child.kill()?;           // 终止进程
 let status = child.wait()?;  // 等待结束
 ```
-
 | 方法 | 说明 |
 |------|------|
 | `id()` | 进程 ID |
@@ -461,7 +440,6 @@ let status = child.wait()?;  // 等待结束
 use std::thread;
 use std::time::Duration;
 ```
-
 | 函数/方法 | 说明 |
 |-----------|------|
 | `spawn(f)` | 创建新线程 |
@@ -496,7 +474,6 @@ thread::scope(|s| {
     s.spawn(|| println!("线程 B"));
 }); // 自动等待所有线程完成
 ```
-
 ---
 
 ### std::sync - 同步原语
@@ -514,7 +491,6 @@ let m = Mutex::new(5);
     *num = 6;
 } // 自动解锁
 ```
-
 | 方法 | 说明 |
 |------|------|
 | `lock()` | 获取锁，阻塞 `MutexGuard<T>` |
@@ -531,7 +507,6 @@ let lock = RwLock::new(5);
 let r = lock.read().unwrap();   // 多个读
 let w = lock.write().unwrap();  // 独占写
 ```
-
 | 方法 | 说明 |
 |------|------|
 | `read()` | 获取读锁 `RwLockReadGuard` |
@@ -552,7 +527,6 @@ thread::spawn(move || {
     *d += 1;
 });
 ```
-
 | 方法 | 说明 |
 |------|------|
 | `new(x)` | 创建 Arc |
@@ -576,7 +550,6 @@ let (tx, rx) = mpsc::channel();
 tx.send(42).unwrap();
 let val = rx.recv().unwrap();
 ```
-
 ---
 
 ### std::time - 时间处理
@@ -586,7 +559,6 @@ let val = rx.recv().unwrap();
 ```rust
 use std::time::{Duration, Instant, SystemTime};
 ```
-
 #### Duration - 时间间隔
 
 ```rust,ignore
@@ -601,7 +573,6 @@ let diff = dur1 - dur2;
 let mul = dur * 3;
 let div = dur / 2;
 ```
-
 | 方法 | 说明 |
 |------|------|
 | `as_secs()` | 秒数（u64）|
@@ -627,7 +598,6 @@ if start.elapsed() > Duration::from_secs(5) {
     println!("超时!");
 }
 ```
-
 | 方法 | 说明 |
 |------|------|
 | `now()` | 当前时刻 |
@@ -641,7 +611,6 @@ if start.elapsed() > Duration::from_secs(5) {
 let now = SystemTime::now();
 let since_epoch = now.duration_since(SystemTime::UNIX_EPOCH)?;
 ```
-
 ---
 
 ### std::iter - 迭代器
@@ -653,7 +622,6 @@ let since_epoch = now.duration_since(SystemTime::UNIX_EPOCH)?;
 ```rust,ignore
 let v = vec![1, 2, 3, 4, 5];
 ```
-
 | 方法 | 说明 | 消费/惰性 |
 |------|------|-----------|
 | `next()` | 下一个元素 | 消费 |
@@ -700,7 +668,6 @@ let set: HashSet<_> = [1,2,3].iter().collect();
 // 查找
 let first_even = [1,2,3,4].iter().find(|&&x| x % 2 == 0);
 ```
-
 ---
 
 ## 常用 Traits 速查
@@ -730,7 +697,6 @@ impl fmt::Display for Point {
     }
 }
 ```
-
 ### 转换 Trait
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -751,7 +717,6 @@ let s: String = "hello".into(); // Into<String>
 let v: Vec<i32> = Vec::default();
 let v = Vec::<i32>::new();  // 等价
 ```
-
 ### 引用转换 Trait
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -771,7 +736,6 @@ fn is_hello(s: impl AsRef<str>) -> bool {
 is_hello("hello");      // &str
 is_hello(String::new()); // String
 ```
-
 ### 智能指针 Trait
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -789,7 +753,6 @@ impl<T> Deref for MyBox<T> {
     fn deref(&self) -> &T { &self.0 }
 }
 ```
-
 ### 迭代 Trait
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -813,7 +776,6 @@ for item in collection.into_iter() { }
 for item in &collection { }     // iter()
 for item in &mut collection { } // iter_mut()
 ```
-
 ---
 
 ## 常用宏速查
@@ -856,7 +818,6 @@ println!("{:?}", Some(5));       // Option(5)
 println!("{val}", val=5);        // 命名参数
 println!("{0} {1} {0}", a, b);   // 位置参数
 ```
-
 ### 集合宏
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -892,7 +853,6 @@ match value {
     None => unreachable!("已检查过 None"),
 }
 ```
-
 ### 其他常用宏
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -954,7 +914,6 @@ let x = result.expect("msg");      // 带信息 panic
 let x = result.unwrap_or(default); // 或默认值
 let x = result.unwrap_or_default(); // 或 Default
 ```
-
 ### 生命周期标注模式
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -967,7 +926,6 @@ let x = result.unwrap_or_default(); // 或 Default
 fn foo<'a>(x: &'a str) -> &'a str  // 输入输出同生命周期
 fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str  // 多生命周期
 ```
-
 ---
 
 ## 📖 权威来源与延伸阅读
@@ -998,7 +956,6 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str  // 多生命周期
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 标准库速查](03_std_library_cheatsheet.md)
-
 - [Rust 关键字参考手册](01_keywords.md)
 - [数学常量](02_math_constants.md)
 

@@ -1,21 +1,13 @@
 # 研究笔记质量检查清单 {#研究笔记质量检查清单}
 
 > **概念族**: 方法论 / 工具 / 指南
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2025-01-27
-
 > **最后更新**: 2026-02-28
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成
 
 ---
@@ -23,7 +15,6 @@
 ## 形式化论证（质量与论证衔接） {#形式化论证质量与论证衔接}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def QC1（质量完备性）**：设 $D$ 为研究笔记文档。若 $D$ 满足本清单全部必需项，且含 Def/Axiom/Theorem 或与 [PROOF_INDEX](10_proof_index.md) 的衔接，则称 $D$ **质量完备**。
@@ -41,7 +32,6 @@
 ## 📊 目录 {#目录}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [研究笔记质量检查清单 {#研究笔记质量检查清单}](#研究笔记质量检查清单-研究笔记质量检查清单)
@@ -101,41 +91,30 @@
 ## 📋 元信息检查 {#元信息检查}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 必需元信息 {#必需元信息}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 创建日期格式正确（YYYY-MM-DD）
-
 - [ ] 最后更新日期格式正确（YYYY-MM-DD）
-
 - [ ] Rust 版本信息准确（当前为 1.93.1+）
-
 - [ ] Edition 信息准确（当前为 2024）
-
 - [ ] 状态标记正确（📋 规划中 / 🔄 进行中 / ✅ 已完成）
-
 - [ ] 维护者信息完整
 
 ### research_notes 元信息统一模板 {#research_notes-元信息统一模板}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录下所有含 blockquote 元信息的 .md **至少**使用以下字段（可选字段按需增加）：
 
 ```markdown
-
 > **创建日期**: YYYY-MM-DD
 
 > **最后更新**: YYYY-MM-DD
@@ -145,13 +124,9 @@
 > **状态**: 📋 规划中 / 🔄 进行中 / ✅ 已完成
 
 > **用途**: （可选）文档定位、推荐读者
-
 ```
-
 - **子目录扩展**：formal_methods、type_theory、software_design_theory 子文档可增加「分类」「安全边界」「23 模式矩阵」等；与上述五类并存，不替代「Rust 版本」。
-
 - **格式**：每行一条 `> **key**: value`；key 与冒号间无空格，冒号后一空格。
-
 - 详见 FORMAT_AND_CONTENT_ALIGNMENT_PLAN F1.1。
 
 ---
@@ -159,77 +134,56 @@
 ## 📝 内容质量检查 {#内容质量检查}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 研究目标 {#研究目标}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 研究目标明确
-
 - [ ] 核心问题清晰
-
 - [ ] 预期成果具体
 
 ### 理论基础 {#理论基础}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 理论基础充分
-
 - [ ] 相关概念定义准确
-
 - [ ] 理论背景说明清楚
 
 ### 形式化定义 / 实验设计 {#形式化定义-实验设计}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 形式化定义准确（如适用）
-
 - [ ] 实验设计合理（如适用）
-
 - [ ] 定义/设计完整
 
 ### 证明目标 / 实验目标 {#证明目标-实验目标}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 待证明的性质明确（如适用）
-
 - [ ] 待测试的场景清晰（如适用）
-
 - [ ] 证明/测试方法合理
 
 ### 代码示例 {#代码示例}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 代码示例可运行
-
 - [ ] 代码示例相关
-
 - [ ] 代码示例有说明
 
 ### 研究进展 {#研究进展}
@@ -237,11 +191,8 @@
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [ ] 研究进展状态准确
-
 - [ ] 已完成任务明确
-
 - [ ] 进行中任务清晰
-
 - [ ] 计划中任务合理
 
 ### 实质内容（研究笔记必选） {#实质内容研究笔记必选}
@@ -249,13 +200,9 @@
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [ ] 含 Def/Axiom/定理或与 [PROOF_INDEX](10_proof_index.md) 衔接
-
 - [ ] 至少 1 段可运行 Rust 代码（索引/概览类可放宽）
-
 - [ ] 至少 1 个具体场景（非泛泛描述）
-
 - [ ] 至少 1 个反例或边界说明
-
 - [ ] 至少 1 处链接至 formal_methods/type_theory
 
 详见 [BEST_PRACTICES](10_best_practices.md#实质内容不足判断与修复)、[CONTENT_ENHANCEMENT](10_content_enhancement.md) 实质内容自检表。
@@ -265,7 +212,6 @@
 ## 🔬 学术质量检查 {#学术质量检查}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 形式化定义 {#形式化定义}
@@ -273,11 +219,8 @@
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [ ] 数学符号使用正确
-
 - [ ] 数学公式格式正确
-
 - [ ] 定义准确无歧义
-
 - [ ] 定义之间一致
 
 ### 理论证明 {#理论证明}
@@ -285,9 +228,7 @@
 > **来源: [ACM](https://dl.acm.org/)**
 
 - [ ] 证明逻辑正确（如适用）
-
 - [ ] 证明步骤清晰（如适用）
-
 - [ ] 证明完整（如适用）
 
 ### 参考文献 {#参考文献}
@@ -295,11 +236,8 @@
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 - [ ] 参考文献充分
-
 - [ ] 参考文献格式统一
-
 - [ ] 参考文献链接有效
-
 - [ ] 参考文献分类清晰（学术论文、官方文档、相关代码、工具资源）
 
 ---
@@ -307,47 +245,35 @@
 ## 💻 代码质量检查 {#代码质量检查}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 代码格式 {#代码格式}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 代码通过 `cargo fmt` 格式化
-
 - [ ] 代码通过 `cargo clippy` 检查
-
 - [ ] 代码语法正确
-
 - [ ] 代码可编译运行
 
 ### 代码示例 {#代码示例-1}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 代码示例完整
-
 - [ ] 代码示例有注释
-
 - [ ] 代码示例有说明
-
 - [ ] 代码示例相关
 
 ### 代码测试 {#代码测试}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 代码示例可运行
-
 - [ ] 代码示例输出正确（如适用）
-
 - [ ] 代码示例无错误
 
 ---
@@ -355,43 +281,33 @@
 ## 🔗 链接和引用检查 {#链接和引用检查}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 内部链接 {#内部链接}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 所有内部链接有效
-
 - [ ] 链接路径正确
-
 - [ ] 链接格式统一
 
 ### 外部链接 {#外部链接}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 所有外部链接有效
-
 - [ ] 外部链接可访问
-
 - [ ] 外部链接相关
 
 ### 交叉引用 {#交叉引用}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 交叉引用准确
-
 - [ ] 引用格式统一
-
 - [ ] 引用完整
 
 ---
@@ -399,7 +315,6 @@
 ## 形式化论证（质量等级） {#形式化论证质量等级}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Def QC1（质量等级）**：设 $N$ 为研究笔记，$Q(N) \in \{\text{优秀},\, \text{良好},\, \text{需改进}\}$。定义：优秀 = 全部检查项通过；良好 = 大部分通过；需改进 = 存在重大缺口。
@@ -411,47 +326,35 @@
 ## 📐 格式检查 {#格式检查}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Markdown 格式 {#markdown-格式}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] Markdown 语法正确
-
 - [ ] 标题层次合理
-
 - [ ] 列表格式正确
-
 - [ ] 表格格式正确（分隔行用 `| :--- | :--- | :--- |`）
-
 - [ ] 代码块格式正确
 
 ### 数学公式 {#数学公式}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 数学公式格式正确（LaTeX）
-
 - [ ] 数学符号使用正确
-
 - [ ] 公式可渲染
 
 ### 中文格式 {#中文格式}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [ ] 使用中文简体
-
 - [ ] 标点符号正确
-
 - [ ] 术语使用一致
 
 ---
@@ -459,67 +362,48 @@
 ## ✅ 完整性检查 {#完整性检查}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 必需部分 {#必需部分}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 元信息完整
-
 - [ ] 研究目标完整
-
 - [ ] 理论基础完整
-
 - [ ] 形式化定义/实验设计完整
-
 - [ ] 证明目标/实验目标完整
-
 - [ ] 代码示例完整
-
 - [ ] 参考文献完整
-
 - [ ] 研究进展完整
 
 ### 目录结构 {#目录结构}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 目录结构合理
-
 - [ ] 目录链接有效
-
 - [ ] 目录完整
 
 ### 索引更新 {#索引更新}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 更新了相应目录的 README.md
-
 - [ ] 更新了主索引 README.md（如需要）
-
 - [ ] 更新了快速参考 10_quick_reference.md（如需要）
 
 ### 概念定义-属性关系-解释论证 层次化（核心研究笔记建议） {#概念定义-属性关系-解释论证-层次化核心研究笔记建议}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] **概念定义层**：本页 Def/Axiom 以表格或列表列出（或已有形式化定义小节）
-
 - [ ] **属性关系层**：本页定理/推论与公理/引理依赖可追溯（表格或 DAG 片段）
-
 - [ ] **解释论证层**：关键定理含「陈述→依赖→证明/思路→反例」块或证明思路
-
 - [ ] （可选）**相关思维表征**：注明对应思维导图/矩阵/证明树/决策树，见 [HIERARCHICAL_MAPPING_AND_SUMMARY](10_hierarchical_mapping_and_summary.md)
 
 *适用*：formal_methods、type_theory、software_design_theory 核心文档；
@@ -535,49 +419,36 @@
 ## 🎯 质量等级 {#质量等级}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 优秀 ✅✅✅ {#优秀}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 所有检查项通过
-
 - 内容完整准确
-
 - 格式规范统一
-
 - 学术质量高
 
 ### 良好 ✅✅ {#良好}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - 大部分检查项通过
-
 - 内容基本完整
-
 - 格式基本规范
-
 - 学术质量良好
 
 ### 需要改进 ✅ {#需要改进}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 - 部分检查项未通过
-
 - 内容需要补充
-
 - 格式需要调整
-
 - 学术质量需要提升
 
 ---
@@ -585,43 +456,33 @@
 ## 🔧 使用建议 {#使用建议}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 创建新笔记时 {#创建新笔记时}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. 使用 [模板](10_template.md) 创建文件
-
 2. 按照检查清单逐项检查
-
 3. 请他人审查
 
 ### 更新现有笔记时 {#更新现有笔记时}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. 检查相关检查项
-
 2. 确保更新了最后更新日期
-
 3. 更新研究进展状态
 
 ### 审查他人笔记时 {#审查他人笔记时}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. 使用检查清单逐项检查
-
 2. 提供具体的改进建议
-
 3. 标记需要改进的项
 
 ---
@@ -629,15 +490,11 @@
 ## 📖 相关资源 {#相关资源}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [研究笔记规范](README.md#研究笔记规范)
-
 - [研究笔记模板](10_template.md)
-
 - [贡献指南](10_contributing.md)
-
 - [快速参考](10_quick_reference.md)
 
 ---
@@ -653,17 +510,13 @@
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -671,15 +524,10 @@
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -687,17 +535,13 @@
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - [Rust 1.94 特性速查
-
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -709,9 +553,7 @@
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -727,19 +569,12 @@
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

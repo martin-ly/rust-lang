@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -38,7 +37,6 @@ mindmap
       编译时检查
       空指针安全
 ```
-
 ## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -98,7 +96,6 @@ fn implication(x: i32) -> String {
     x.to_string()  // 给定 i32，可以构造 String
 }
 ```
-
 ### 泛型与参数多态 {#泛型与参数多态}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -134,7 +131,6 @@ impl<T> ContainerTrait for Container<T> {
     }
 }
 ```
-
 ### 型变（Variance） {#型变variance}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -169,7 +165,6 @@ fn invariance(x: &mut &'static str) {
 // Cell<T> : 对 T 不变
 // fn(T) -> U : 对 T 逆变，对 U 协变
 ```
-
 ### 类型推导 {#类型推导}
 
 ```rust,ignore
@@ -198,7 +193,6 @@ fn mixed_inference<T: Default>(items: &[T]) -> Vec<T> {
     result
 }
 ```
-
 ### 类型安全保证 {#类型安全保证}
 
 ```rust
@@ -222,7 +216,6 @@ fn type_safety() {
     }
 }
 ```
-
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -239,17 +232,10 @@ fn type_safety() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
-
 > **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
-
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
-
 > **来源: [ACM - Type Systems](https://dl.acm.org/)**
-
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
-
 > **来源: [Coq Reference](https://coq.inria.fr/doc/)**
-
 > **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
-
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**

@@ -102,7 +102,6 @@ graph TB
     K --> N
     M --> O
 ```
-
 ## 🔷 基础层知识图谱
 
 ### 1. 内存管理基础
@@ -129,7 +128,6 @@ graph LR
     style C fill:#e1ffe1
     style D fill:#fff5e1
 ```
-
 #### 内存管理知识点矩阵
 
 | 内存类型     | 分配方式 | 生命周期   | 大小       | 访问速度 | Rust特性           |
@@ -168,7 +166,6 @@ graph TB
     style B fill:#ffe1e1
     style C fill:#e1ffe1
 ```
-
 ## 🔶 核心层知识图谱
 
 ### 1. 所有权系统完整图谱
@@ -214,7 +211,6 @@ graph TB
     style B fill:#ffe1e1
     style C fill:#ffe1e1
 ```
-
 #### 所有权操作对比矩阵
 
 | 操作       | 语义       | 性能成本 | 适用场景     | 类型要求        | Rust 1.90 增强       |
@@ -275,7 +271,6 @@ graph TB
     style B fill:#e1ffe1
     style C fill:#e1ffe1
 ```
-
 #### 借用模式对比矩阵
 
 | 借用模式         | 检查时机 | 运行时开销 | 灵活性 | 安全性         | Rust 1.90 特性   |
@@ -336,7 +331,6 @@ graph TB
     style A fill:#fff5e1
     style K fill:#ffe1e1
 ```
-
 #### 生命周期省略规则矩阵
 
 | 规则      | 条件                         | 推断结果             | 示例                     | Rust 1.90 改进 |
@@ -385,7 +379,6 @@ graph TB
     style E fill:#e1f5ff
     style F fill:#ffe1e1
 ```
-
 ## 🔸 应用层知识图谱
 
 ### 1. 智能指针生态系统
@@ -430,7 +423,6 @@ graph TB
     style E fill:#ffe1e1
     style I fill:#e1ffe1
 ```
-
 #### 智能指针选择矩阵
 
 | 智能指针         | 所有权    | 线程安全 | 运行时开销   | 使用场景         | Rust 1.90 改进 |
@@ -482,7 +474,6 @@ graph TB
     style A fill:#ffe1e1
     style B fill:#ffe1e1
 ```
-
 ## 🔹 实践层知识图谱
 
 ### 1. 设计模式与所有权
@@ -517,7 +508,6 @@ graph TB
     style C fill:#ffe1e1
     style E fill:#e1ffe1
 ```
-
 ### 2. 性能优化路径图
 
 ```mermaid
@@ -549,7 +539,6 @@ graph LR
     style A fill:#ffe1e1
     style M fill:#e1ffe1
 ```
-
 ## 🎓 学习路径知识图谱
 
 ### 初学者路径（0-3个月）
@@ -569,7 +558,6 @@ graph LR
     style A fill:#e1ffe1
     style J fill:#ffe1e1
 ```
-
 ### 进阶路径（3-12个月）
 
 ```mermaid
@@ -587,7 +575,6 @@ graph LR
     style A fill:#e1ffe1
     style J fill:#ffe1e1
 ```
-
 ### 专家路径（1年+）
 
 ```mermaid
@@ -605,7 +592,6 @@ graph LR
     style A fill:#e1ffe1
     style J fill:#ffe1e1
 ```
-
 ## 📊 概念关系矩阵
 
 ### 核心概念相互依赖
@@ -665,7 +651,6 @@ graph TB
     style C fill:#e1ffe1
     style D fill:#fff5e1
 ```
-
 ## 🆕 Rust 1.90 特性知识图谱
 
 ### 新增和增强特性
@@ -696,21 +681,20 @@ graph TB
     style C fill:#e1f5ff
     style D fill:#fff5e1
 ```
-
 ## 📚 参考和扩展阅读
 
 ### 核心文档链接
 
-- [所有权理论](tier_04_advanced/06_类型系统理论.md) - 理论基础
-- [借用系统](tier_02_guides/02_借用实践指南.md) - 核心概念
-- [生命周期注解](tier_02_guides/03_生命周期实践.md) - 高级应用
+- [所有权理论](tier_04_advanced/06_type_system_theory.md) - 理论基础
+- [借用系统](tier_02_guides/02_borrowing_practice_guide.md) - 核心概念
+- [生命周期注解](tier_02_guides/03_lifetimes_practice.md) - 高级应用
 - [Rust 1.90 全面指南](RUST_190_COMPREHENSIVE_MINDMAP.md) - 最新特性
 
 ### 实践指南
 
-- [设计模式](tier_02_guides/07_实战项目集.md) - 模式应用
-- [最佳实践](tier_01_foundations/04_常见问题.md) - 实践建议
-- [性能优化](tier_03_references/09_性能优化参考.md) - 优化技巧
+- [设计模式](tier_02_guides/07_hands_on_projects.md) - 模式应用
+- [最佳实践](tier_01_foundations/04_faq.md) - 实践建议
+- [性能优化](tier_03_references/09_performance_optimization_reference.md) - 优化技巧
 
 ---
 

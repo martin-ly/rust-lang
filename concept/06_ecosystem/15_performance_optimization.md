@@ -120,7 +120,6 @@ Rust 性能优化的核心原则: "先测量，再优化"
   ├── 泛型单态化 ≈ 手写具体类型代码
   └── 所以: 优先写清晰的代码，只在测量后发现热点时优化
 ```
-
 > **认知功能**: 测量优先原则避免了"过早优化"——Rust 的零成本抽象使代码清晰度和性能不再对立。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: 在 Rust 中，**清晰的代码往往也是高性能的代码**——因为编译器的优化能力远超手写低级代码。
@@ -160,7 +159,6 @@ Rust 编译器的优化:
   codegen-units = 1  # 单编译单元，更多优化机会
   panic = "abort"    # 移除 panic 展开代码
 ```
-
 > **编译器洞察**: Rust 编译器（基于 LLVM）的优化能力极强——在 release 模式下，迭代器（Iterator）、闭包（Closures）等抽象通常被完全内联和优化掉。
 > [来源: [Rust Performance Book — Compile Times](https://nnethercote.github.io/perf-book/compile-times.html)]
 
@@ -194,7 +192,6 @@ fn sum_loop(data: &[i32]) -> i32 {
 // cargo asm --release --bin mycrate sum_iter
 // cargo asm --release --bin mycrate sum_loop
 ```
-
 > **零成本验证**: 可以使用 `cargo asm` 或 `cargo show-asm` 查看生成的汇编代码，验证抽象是否真的零成本。
 > [来源: [cargo-asm](https://github.com/gnzlbg/cargo-asm)] · [来源: [cargo-show-asm](https://github.com/pacak/cargo-show-asm)]
 
@@ -230,7 +227,6 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
-
 > **Criterion 洞察**: Criterion 是 Rust 的**事实标准基准测试框架**——它使用统计方法（而非简单的时间平均），提供可靠的性能测量。
 > [来源: [Criterion.rs Book](https://bheisler.github.io/criterion.rs/book/)]
 
@@ -264,7 +260,6 @@ criterion_main!(benches);
   ├── VTune (Intel): 高级分析
   └── cargo-llvm-lines: 分析泛型代码膨胀
 ```
-
 > **火焰图洞察**: 火焰图是**最直观的性能分析工具**——它一眼就能显示"时间花在哪里"，避免了阅读复杂的 profiler 原始数据。
 > [来源: [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph)] · [来源: [Brendan Gregg — Flame Graphs](https://www.brendangregg.com/flamegraphs.html)]
 
@@ -315,7 +310,6 @@ struct Compact {
     value: u64,  // 通常有 7 bytes 填充，packed 消除
 }
 ```
-
 > **缓存洞察**: CPU 缓存是现代性能的关键——**数据局部性**（locality）往往比算法复杂度更重要。Rust 允许精确控制内存布局，这是性能优化的重要工具。
 > [来源: [Rust Performance Book — Memory Layout](https://nnethercote.github.io/perf-book/type-sizes.html)]
 
@@ -358,7 +352,6 @@ SIMD 向量化:
   → cargo-llvm-lines / -Z self-profile
   → 减少泛型膨胀
 ```
-
 > **策略矩阵**: 性能优化是**分层**的——从编译器优化（免费）到算法优化（高投入高回报），再到微架构优化（专家级）。
 > [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
@@ -382,7 +375,6 @@ graph TD
     style OPTIMIZE fill:#c8e6c9
     style UNSAFE fill:#fff3e0
 ```
-
 > **认知功能**: 此决策树展示性能优化的**层次性**。unsafe 是最后手段——绝大多数性能问题可以通过安全代码、编译器优化和算法改进解决。
 > [来源: [Rust Performance Book — Unsafe](https://nnethercote.github.io/perf-book/print.html)]
 
@@ -421,7 +413,6 @@ graph TD
 ├── 某些优化在特定平台上无效或退化
 └── 解决方案: 条件编译 #[cfg(target_arch)]
 ```
-
 > **边界要点**: 性能优化的边界主要与**测量可靠性**、**环境差异**、**维护成本**和**平台可移植性**相关。
 > [来源: [Rust Performance Book — Pitfalls](https://nnethercote.github.io/perf-book/print.html)]
 
@@ -462,7 +453,6 @@ graph TD
 
   ✅ 遵循"测量 → 分析 → 假设 → 优化 → 验证"流程
 ```
-
 > **陷阱总结**: 性能优化的陷阱主要与**测量方法**、**优化目标**、**unsafe 滥用**和**API 复杂度**相关。
 > [来源: [Donald Knuth — Premature Optimization](https://dl.acm.org/doi/10.1145/356635.356640)]
 
@@ -477,11 +467,9 @@ graph TD
 | [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
 | [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 一级 | 官方性能优化指南 |
@@ -556,7 +544,6 @@ fn fixed() {
     data.push(5); // ✅ 现在可以重新分配
 }
 ```
-
 > **修正**: 性能优化常涉及 `unsafe` 代码（裸指针、未初始化内存、`mem::transmute`）。这些优化的前提是遵守 Rust 的内存模型——`Vec` 的 `as_mut_ptr()` 返回的指针只在 `Vec` 不重新分配时有效。任何 `push`、`reserve`、`shrink` 都可能导致重新分配，使旧指针悬垂。Miri 可检测此类违规，但无法在编译期完全阻止——这是 unsafe 代码审查的重点。与 C++ 的 `vector::data()` 相同，但 Rust 要求显式 `unsafe` 块，增加审查可见性。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.2 边界测试：`MaybeUninit` 的未初始化内存（运行时 UB）
@@ -575,7 +562,6 @@ fn main() {
     println!("{}", val);
 }
 ```
-
 > **修正**: `MaybeUninit<T>` 是 Rust 中处理未初始化内存的安全抽象。`assume_init()` 告诉编译器"此值已初始化"，但实际上若未写入就读取，是未定义行为。编译器可能将未初始化值视为 `undef`（LLVM），导致任意行为。正确使用模式：1) `MaybeUninit::uninit()` 分配空间；2) `ptr.write(val)` 初始化；3) `assume_init()` 读取。这与 C 的 `malloc` + 使用未初始化内存相同，但 Rust 的类型系统（Type System）追踪初始化状态，Miri 在运行时（Runtime）验证。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.3 边界测试：`mem::transmute` 的大小不匹配（编译错误）
@@ -588,7 +574,6 @@ fn main() {
     println!("{}", y);
 }
 ```
-
 > **修正**: `mem::transmute` 是 Rust 中最危险的 unsafe 操作之一，要求源类型和目标类型大小完全相同（`size_of::<Src>() == size_of::<Dst>()`）。编译器在编译期检查大小相等，不等则报错。`u32`（4字节）→ `u64`（8字节）的转换必须通过显式扩展（`x as u64`）而非 `transmute`。更隐蔽的错误是 `Vec<T>` → `Vec<U>` 的转换：即使 `size_of::<T>() == size_of::<U>()`，内存布局可能不同（如对齐、drop 逻辑），导致 UB。安全替代：`u32::from_le_bytes`、`bytemuck` crate 的 `Pod` trait（要求无填充、对齐兼容）。这与 C 的 `(type)val` 强制转换（无大小检查）形成对比——Rust 将大小不匹配从运行时崩溃转化为编译错误。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.transmute.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/transmutes.html)]
 
 ### 10.4 边界测试：内联汇编的操作数类型约束（编译错误）
@@ -609,7 +594,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**: Rust 的内联汇编（Inline Assembly）（`asm!` macro，stable since 1.59）在编译期验证操作数类型与约束（constraint）的兼容性。`mov` 指令在 x86-64 上操作 64 位寄存器，但 `x` 是 `u32`（32位），类型不匹配导致编译错误。正确写法：统一为 `u64`，或使用 `in("eax") x` 显式指定 32 位寄存器。Rust 的内联汇编比 C 的 `asm` 关键字类型安全：操作数与 Rust 变量绑定，编译器检查类型和生命周期（Lifetimes），自动处理寄存器分配和 clobber 列表。这是 Rust "zero-cost abstraction with safety" 的延伸：直接控制硬件，同时保持类型系统（Type System）的保护。来源: [Rust Reference — Inline Assembly] · 来源: [Rustonomicon]
 
 ### 10.6 边界测试：`#[inline(always)]` 与代码膨胀（编译错误/链接错误）
@@ -626,7 +610,6 @@ fn main() {
     // 若 huge_function 被调用千次，二进制可能超过链接器限制
 }
 ```
-
 > **修正**: `#[inline(always)]` 强制编译器在每个调用点内联函数，无论大小。对小函数（getter、setter、简单算术），内联消除函数调用开销。但对大函数，内联导致**代码膨胀**（code bloat）：相同代码复制多次，指令缓存（icache）效率下降，二进制体积激增。极端情况下，链接器可能失败（文件过大）或二进制加载失败。Rust 的 `#[inline]`（无参数）是建议性内联，编译器根据启发式决定；`#[inline(always)]` 应仅用于极小的热点函数。`#[inline(never)]` 强制不内联，用于调试或防止代码膨胀。这与 C 的 `inline`（建议性，`__attribute__((always_inline))` 强制）或 C++ 的 `inline`（链接器合并，非内联指令）类似——Rust 的内联属性直接控制 LLVM 的 inlining 决策。[来源: [Rust Reference — Inline Attribute](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
 ### 10.7 边界测试：`inline(always)` 的代码膨胀（编译后性能下降）
@@ -640,7 +623,6 @@ fn tiny_helper(x: i32) -> i32 {
 // ❌ 性能反模式: 过度内联导致指令缓存 miss
 // 若 tiny_helper 在 100 处调用，inline(always) 生成 100 份代码
 ```
-
 > **修正**: `#[inline]` 提示编译器内联函数，`#[inline(always)]` 强制内联（忽略启发式）。内联的收益：消除函数调用开销、允许跨函数优化（常量传播、死代码消除）。内联的成本：代码膨胀（instruction cache pressure）、编译时间增加。`always` 的危险：1) 大函数在多处调用 → 二进制膨胀；2) 递归函数 → 编译错误（无法内联无限递归）；3) 跨 crate 边界 → 链接器可能忽略（需 LTO）。内联决策应交由编译器（`#[inline]` 为提示，`always` 仅在微基准验证后使用）。这与 C++ 的 `inline` 关键字（弱提示，链接器决定）或 Go 的编译器自动内联（无注解控制）不同——Rust 的内联注解是强提示，但 `always` 需极度谨慎。[来源: [Rust Reference — Inline](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/inlining.html)]
 
 ### 10.3 边界测试：SIMD 类型的内存对齐要求（运行时 UB）
@@ -656,7 +638,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**: SIMD（AVX/AVX2/SSE）指令对**内存对齐**有严格要求：1) `__m128`（SSE）需 16 字节对齐；2) `__m256`（AVX）需 32 字节对齐；3) `__m512`（AVX-512）需 64 字节对齐。未对齐加载（`_mm256_loadu_si256`，`u` = unaligned）性能稍低但安全。Rust 的 `std::arch` 模块（Module）提供平台特定的 SIMD 内联函数，是 `unsafe` 的。安全 SIMD 抽象：`packed_simd`（已废弃）、`std::simd`（nightly，portable SIMD）、`auto_vectorization`（编译器自动向量化）。最佳实践：1) 使用 `#[repr(align(32))]` 保证对齐；2) 优先用 `loadu` 除非在极致性能路径；3) 用 `std::simd`（稳定后）替代裸内联函数。这与 C 的 `__m256`（同样对齐要求）或编译器自动向量化（无对齐控制）不同——Rust 的 SIMD 显式暴露硬件约束。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/arch/index.html)] · [来源: [Portable SIMD](https://doc.rust-lang.org/std/simd/index.html)]
 > **过渡**: 性能优化：Rust 代码的测量与调优 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 性能优化：Rust 代码的测量与调优 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -741,9 +722,7 @@ Release 开启优化：内联、循环展开、LTO、向量化等。Debug 关闭
 | 性能优化：Rust 代码的测量与调优 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 性能优化：Rust 代码的测量与调优 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 性能优化：Rust 代码的测量与调优 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: 性能优化：Rust 代码的测量与调优 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

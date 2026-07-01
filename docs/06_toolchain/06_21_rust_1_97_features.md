@@ -1,10 +1,8 @@
 # Rust 1.97.0 稳定特性 {#rust-1970-稳定特性}
 
-> **内容重叠提示**: 本文与 [`knowledge/06_ecosystem/emerging/05_rust_1_96.md`](../../knowledge/06_ecosystem/emerging/05_rust_1_96.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为工具链参考。
-> **内容重叠提示**: 本文与 [`concept/07_future/rust_1_96_stabilized.md`](../../concept/07_future/rust_1_96_stabilized.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为工具链参考。
-> **状态**: 预迁移草稿 — 正式发布日（2026-07-09）根据官方 Release Notes 最终确认勾选。
+> **权威来源**: Rust 1.97 稳定/预览特性的权威来源为 [`concept/07_future/rust_1_97_preview.md`](../../concept/07_future/rust_1_97_preview.md)。
+> **定位**: 本文为工具链视角的预迁移草稿，正式发布日（2026-07-09）根据官方 Release Notes 最终确认后，相关内容应合并到 `concept/07_future/rust_1_97_preview.md`。
 > **Rust 版本**: 1.97.0 stable（预计 2026-07-09）
-> **对应预览文档**: `../../concept/07_future/rust_1_97_preview.md`
 > **发布日执行清单**: `.kimi/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md`
 > **API 激活指南**: `.kimi/RUST_197_API_ACTIVATION_GUIDE.md`
 > **探测报告**: `../../reports/RUST_197_API_PROBE_2026_06_28.md`
@@ -33,7 +31,6 @@ assert_eq!(n.lowest_one(), 2);
 // 表示 self 所需的最少位数（返回同类型 NonZero）
 assert_eq!(n.bit_width(), NonZeroU32::new(5).unwrap());
 ```
-
 ### `char::is_control()` const 稳定化 {#charis_control-const-稳定化}
 
 ```rust
@@ -43,7 +40,6 @@ const NUL_CTRL: bool = '\0'.is_control();  // true
 assert!(!SPACE_CTRL);
 assert!(NUL_CTRL);
 ```
-
 ### `NonZeroU32::midpoint` / `isqrt` {#nonzerou32midpoint-isqrt}
 
 ```rust
@@ -56,7 +52,6 @@ assert_eq!(a.midpoint(b).get(), 15);
 let n = NonZeroU32::new(25).unwrap();
 assert_eq!(n.isqrt().get(), 5);
 ```
-
 ### `ptr::fn_addr_eq` {#ptrfn_addr_eq}
 
 ```rust
@@ -65,7 +60,6 @@ let f: fn() = sample;
 
 assert!(std::ptr::fn_addr_eq(f, f));
 ```
-
 ### `const mem::size_of_val` / `const mem::align_of_val` {#const-memsize_of_val-const-memalign_of_val}
 
 ```rust
@@ -76,7 +70,6 @@ const fn size_and_align<T>(val: &T) -> (usize, usize) {
 let x = 42u64;
 assert_eq!(size_and_align(&x), (8, 8));
 ```
-
 ### `BuildHasherDefault::new` const {#buildhasherdefaultnew-const}
 
 ```rust
@@ -90,7 +83,6 @@ let mut hasher = bh.build_hasher();
 hasher.write_u32(123);
 let _ = hasher.finish();
 ```
-
 ---
 
 ## Beta Cutoff 风险 / 可能推迟至 1.98 的 API {#beta-cutoff-风险-可能推迟至-198-的-api}

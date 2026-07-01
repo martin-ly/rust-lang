@@ -30,7 +30,6 @@
 > [polars — DataFrame Library](https://pola.rs/) ·
 > [Apache Arrow Rust](https://arrow.apache.org/rust/) ·
 > [DataFusion — Query Engine](https://arrow.apache.org/datafusion/)
-
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
@@ -115,7 +114,6 @@ Rust ML 生态全景:
 │  · x86_64 · ARM · RISC-V · NVIDIA GPU · Apple Silicon       │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 > **来源**: [Rust ML Working Group](https://github.com/rust-ml) · [Awesome Rust ML](https://github.com/vaaaaanquish/Awesome-Rust-MachineLearning) · [Are We Learning Yet?](https://www.arewelearningyet.com/)
 
 ### 1.2 数据科学生态分层
@@ -133,7 +131,6 @@ Rust ML 生态全景:
          parquet    arrow-rs      polars/        linfa/        burn/       candle/
          CSV        内存格式      datafusion     candle        tch-rs      ort
 ```
-
 > **来源**: [Apache Arrow Specification](https://arrow.apache.org/docs/format/Columnar.html) · [Polars User Guide](https://docs.pola.rs/)
 
 ---
@@ -183,7 +180,6 @@ fn candle_tensor_ops() -> anyhow::Result<()> {
     Ok(())
 }
 ```
-
 **candle 的设计哲学**:
 
 | **特性** | **candle** | **PyTorch** |
@@ -222,7 +218,6 @@ fn load_llama_model() -> anyhow::Result<Llama> {
     Ok(model)
 }
 ```
-
 > **来源**: [candle-core Documentation](https://docs.rs/candle-core/latest/candle_core/) · [Safetensors Format](https://huggingface.co/docs/safetensors/index) · [Hugging Face Hub](https://huggingface.co/docs/hub/index)
 
 ### 3.2 burn：可移植深度学习框架
@@ -265,7 +260,6 @@ fn run_gpu() {
     // ...
 }
 ```
-
 **burn 后端架构**:
 
 ```text
@@ -277,7 +271,6 @@ fn run_gpu() {
         ├── candle-backend ───→ candle (推理加速)
         └── cuda-backend ─────→ NVIDIA GPU (cuDNN)
 ```
-
 > **来源**: [burn Book — Backend](https://burn.dev/books/burn/building-blocks/backend.html) · [burn GitHub](https://github.com/tracel-ai/burn) · [WGPU Documentation](https://wgpu.rs/)
 
 ### 3.3 tch-rs：PyTorch C++ API 绑定
@@ -322,7 +315,6 @@ fn train_neural_net() {
     }
 }
 ```
-
 **tch-rs 的权衡**:
 
 | **优势** | **劣势** |
@@ -366,7 +358,6 @@ fn onnx_inference() -> anyhow::Result<()> {
     Ok(())
 }
 ```
-
 **ONNX 生态工作流**:
 
 ```text
@@ -376,7 +367,6 @@ PyTorch 模型    →    torch.onnx.export   →   .onnx 文件
 TensorFlow 模型  →   tf2onnx             →   .onnx 文件
                                          →   ort::Session::run()
 ```
-
 > **来源**: [ONNX Runtime Documentation](https://onnxruntime.ai/docs/) · [ONNX Spec](https://onnx.ai/onnx/intro/index.html) · [ort GitHub](https://github.com/pykeio/ort)
 
 ---
@@ -411,7 +401,6 @@ fn kmeans_example() {
     println!("Clusters: {:?}", clusters);
 }
 ```
-
 **linfa 算法生态**:
 
 | **领域** | **算法** | **crate** |
@@ -453,7 +442,6 @@ fn embedded_ml() {
     println!("Predictions: {:?}", prediction);
 }
 ```
-
 > **来源**: [smartcore Documentation](https://docs.rs/smartcore/latest/smartcore/) · [no_std Rust](https://docs.rust-embedded.org/book/intro/no-std.html)
 
 ---
@@ -496,7 +484,6 @@ fn polars_dataframe() -> PolarsResult<()> {
     Ok(())
 }
 ```
-
 **polars vs pandas 性能对比**:
 
 | **操作** | **pandas** | **polars** | **加速比** |
@@ -537,7 +524,6 @@ fn arrow_example() -> arrow::error::Result<()> {
     Ok(())
 }
 ```
-
 **Arrow 的核心优势**:
 
 ```text
@@ -549,7 +535,6 @@ SIMD 优化:
   列式存储使向量化运算（SIMD）成为可能
   聚合: SUM(age) → 一次性加载 age 列到 SIMD 寄存器
 ```
-
 > **来源**: [Apache Arrow Rust](https://arrow.apache.org/rust/) · [Arrow Columnar Format](https://arrow.apache.org/docs/format/Columnar.html) · [Wes McKinney — Apache Arrow](https://wesmckinney.com/blog/apache-arrow-pandas-internals/)
 
 ### 5.3 DataFusion：查询执行引擎
@@ -580,7 +565,6 @@ async fn datafusion_query() -> datafusion::error::Result<()> {
     Ok(())
 }
 ```
-
 > **来源**: [DataFusion User Guide](https://arrow.apache.org/datafusion/user-guide/introduction.html) · [Ballista Distributed SQL](https://arrow.apache.org/ballista/)
 
 ---
@@ -612,7 +596,6 @@ fn load_quantized_model(path: &str) -> anyhow::Result<()> {
     Ok(())
 }
 ```
-
 > **来源**: [GGML Format](https://github.com/ggerganov/ggml) · [Quantization in ML](https://arxiv.org/abs/2103.13630) · [candle Quantized](https://docs.rs/candle-core/latest/candle_core/quantized/)
 
 ### 6.2 边缘部署
@@ -639,7 +622,6 @@ Rust 优势:
   · 低内存占用
   · 跨平台 (ARM/x86/RISC-V + WASM)
 ```
-
 > **来源**: [Edge ML with Rust](https://www.arewelearningyet.com/) · [WASM ML](https://github.com/torch2424/wasm-by-example)
 
 ---
@@ -663,7 +645,6 @@ Rust ML 的解决:
   3. 单二进制：静态链接，独立部署
   4. 编译期检查：张量维度在类型中编码（如 burn 的 Tensor<B, 2>）
 ```
-
 > **来源**: [Rust Performance Book](https://nnethercote.github.io/perf-book/) · [Why Rust for ML](https://burn.dev/blog/a-case-for-rust-in-deep-learning/)
 
 ### 7.2 限制分析
@@ -714,7 +695,6 @@ Rust ML 的解决:
 └── 根结论: ❌ polars 在大数据（> 100MB）和分析查询场景优势明显，但 pandas 在
            探索性数据分析（EDA）和小数据场景中仍然便利。
 ```
-
 > **来源**: [Polars vs Pandas [已失效]]<!-- 原链接: https://pola.rs/posts/polars-pandas-xlsxwriter/ --> · [Why Not Always Rust [已失效]]<!-- 原链接: https://matklad.github.io/2023/03/26/rust-myths-and-vegetables.html -->
 
 ### 8.2 边界极限
@@ -750,7 +730,6 @@ unsafe fn insecure_tensor_alloc(device: &Device) -> anyhow::Result<Tensor> {
 
 // candle 的实现使用安全的零初始化，但并非所有框架都如此
 ```
-
 > **修正**: 始终使用 `Tensor::zeros()` 或 `Tensor::new()` 确保初始化。对于从外部指针创建的张量，使用 `unsafe` 块并显式清零。
 > **来源**: [candle-core Tensor](https://docs.rs/candle-core/latest/candle_core/struct.Tensor.html) · [Memory Safety in ML](https://arxiv.org/abs/2101.11080)
 
@@ -802,7 +781,6 @@ fn good_parallel_df() {
         .unwrap();
 }
 ```
-
 > **来源**: [Polars Thread Safety](https://docs.pola.rs/user-guide/concepts/data-types-and-structures/) · [Arrow Thread Safety](https://arrow.apache.org/docs/cpp/api/thread.html)
 
 ### 9.3 边界测试：模型输入维度不匹配导致 panic（逻辑错误）
@@ -836,7 +814,6 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 // ✅ 更好的修正: 使用类型系统编码维度（burn 的 Tensor<B, D>）
 // Tensor<B, 2> 编译期保证是 2D 张量，但具体大小仍需运行时检查
 ```
-
 > **来源**: [burn Tensor](https://burn.dev/books/burn/building-blocks/tensor.html) · [Defensive Programming](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)
 
 ---
@@ -937,9 +914,7 @@ Rust 主要定位为 ML 基础设施（推理引擎、数据管道、特征存�
 | Machine Learning Ecosystem（机器学习生态） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Machine Learning Ecosystem（机器学习生态） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Machine Learning Ecosystem（机器学习生态） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Machine Learning Ecosystem（机器学习生态） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

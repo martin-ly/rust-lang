@@ -104,7 +104,6 @@ Rust 2025版本在并发编程方面提供了强大的工具和优化技术。
 │                原子操作 (Atomic Operations)                  │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 ## 2. 高性能线程池设计
 
 ### 2.1 架构设计原则
@@ -135,7 +134,6 @@ pub struct HighPerformanceThreadPool {
     global_queue: Arc<GlobalTaskQueue>,
 }
 ```
-
 #### 关键特性
 
 1. **双队列设计**: 全局队列 + 本地队列
@@ -181,7 +179,6 @@ impl HighPerformanceThreadPool {
     }
 }
 ```
-
 #### 2.3.2 负载均衡算法
 
 ```rust
@@ -214,7 +211,6 @@ impl Worker {
     }
 }
 ```
-
 ## 3. 工作窃取调度算法
 
 ### 3.1 算法原理
@@ -256,7 +252,6 @@ impl GlobalTaskQueue {
     }
 }
 ```
-
 ### 3.3 性能分析
 
 #### 3.3.1 窃取概率分析
@@ -295,7 +290,6 @@ pub struct LockFreeRingBuffer<T> {
     size: usize,
 }
 ```
-
 #### 4.2.2 原子操作序列
 
 ```rust
@@ -320,7 +314,6 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
     }
 }
 ```
-
 #### 4.2.3 内存序分析
 
 - **Relaxed**: 用于内部计算，不保证顺序
@@ -337,7 +330,6 @@ struct StackNode<T> {
     next: AtomicUsize,  // 指向下一个节点的索引
 }
 ```
-
 #### 4.3.2 原子操作实现
 
 ```rust
@@ -371,7 +363,6 @@ impl<T> LockFreeStack<T> {
     }
 }
 ```
-
 ## 5. 并发算法优化
 
 ### 5.1 分治策略
@@ -439,7 +430,6 @@ where
     results.iter().fold(identity, |acc, x| op(acc, x))
 }
 ```
-
 #### 5.2.2 性能分析
 
 **加速比**: $S(p) = \frac{T(1)}{T(p)} = \frac{n}{n/p + \log p} \approx p$ (当 $n \gg p$)
@@ -498,7 +488,6 @@ where
     Arc::try_unwrap(results).unwrap().into_inner().unwrap()
 }
 ```
-
 ## 6. 性能基准测试
 
 ### 6.1 测试框架设计
@@ -514,7 +503,6 @@ pub struct BenchmarkConfig {
     pub warmup_iterations: usize,   // 预热迭代次数
 }
 ```
-
 #### 6.1.2 结果结构
 
 ```rust
@@ -529,7 +517,6 @@ pub struct BenchmarkResult {
     pub speedup: f64,           // 加速比
 }
 ```
-
 ### 6.2 测试策略
 
 #### 6.2.1 预热机制
@@ -549,7 +536,6 @@ for _ in 0..config.iterations {
     times.push(start.elapsed().as_micros() as f64 / 1000.0);
 }
 ```
-
 #### 6.2.2 统计分析
 
 ```rust
@@ -569,7 +555,6 @@ BenchmarkResult {
     },
 }
 ```
-
 ### 6.3 报告生成
 
 #### 6.3.1 格式化输出
@@ -609,7 +594,6 @@ pub fn generate_performance_report(results: &[BenchmarkResult]) -> String {
     report
 }
 ```
-
 ## 7. 最佳实践
 
 ### 7.1 线程池配置
@@ -626,7 +610,6 @@ let thread_count = num_cpus::get() * 2;
 // 混合任务
 let thread_count = num_cpus::get() + 1;
 ```
-
 #### 7.1.2 任务粒度控制
 
 ```rust
@@ -638,7 +621,6 @@ if data.len() < min_task_size * thread_count {
     return data.iter().map(f).collect();
 }
 ```
-
 ### 7.2 内存管理
 
 #### 7.2.1 避免频繁分配
@@ -655,7 +637,6 @@ for chunk in data.chunks(chunk_size) {
     results.extend_from_slice(&buffer);
 }
 ```
-
 #### 7.2.2 缓存友好的数据布局
 
 ```rust
@@ -672,7 +653,6 @@ struct Points {
     y: Vec<f64>,
 }
 ```
-
 ### 7.3 错误处理
 
 #### 7.3.1 优雅降级
@@ -691,7 +671,6 @@ where
     }
 }
 ```
-
 #### 7.3.2 超时处理
 
 ```rust
@@ -712,7 +691,6 @@ where
     // ...
 }
 ```
-
 ## 8. 总结
 
 Rust 2025的高级并发优化技术为构建高性能多线程应用程序提供了强大的工具。通过合理使用高性能线程池、工作窃取调度、无锁数据结构和并发算法优化，开发者可以显著提升应用程序的性能和可扩展性。

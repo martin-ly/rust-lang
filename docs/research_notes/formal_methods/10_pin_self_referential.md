@@ -1,17 +1,10 @@
 > **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
-
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
-
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
-
 >
-
 > - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
-
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
-
 > **概念族**: 异步 / Pin / 自引用
-
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 
 ---
@@ -19,23 +12,14 @@
 # Pin 和自引用类型形式化 {#pin-和自引用类型形式化}
 
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2025-01-27
-
 > **最后更新**: 2026-02-28
-
 > **更新内容**: 添加 Unpin/Drop/投影规则定义
-
 > **Rust 版本**: 1.93.1+ (Edition 2024)
-
 > **状态**: ✅ 已完成 (Week 2 任务 P1-W2-T4)
-
 > **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 5 行（Pin）
 
 ---
@@ -43,7 +27,6 @@
 ## 📊 目录 {#目录}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Pin 和自引用类型形式化 {#pin-和自引用类型形式化}](#pin-和自引用类型形式化-pin-和自引用类型形式化)
@@ -105,7 +88,6 @@
 ## 🎯 研究目标 {#研究目标}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究的目的是形式化定义 Rust 的 Pin 类型和自引用类型，并证明其安全性。
@@ -113,29 +95,21 @@
 ### 核心问题 {#核心问题}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Pin 类型的形式化**: 如何用数学语言精确描述 Pin 类型？
-
 2. **自引用类型安全**: 如何证明自引用类型的安全性？
-
 3. **Pin 保证**: Pin 如何保证内存位置的稳定性？
 
 ### 预期成果 {#预期成果}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - Pin 类型的形式化定义
-
 - 自引用类型的形式化模型
-
 - Pin 保证的形式化证明
 
 ---
@@ -143,15 +117,12 @@
 ## 📚 理论基础 {#理论基础}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Pin 类型 {#pin-类型}
 
 > **来源: [ACM](https://dl.acm.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Pin**: `Pin<P>` 是一个智能指针，保证被指向的值不会被移动。Pin 通过类型系统提供内存位置稳定性的保证。
@@ -163,9 +134,7 @@
 ### 自引用类型 {#自引用类型}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **自引用类型 (Self-Referential Type)**: 包含指向自身字段引用的类型。
@@ -179,9 +148,7 @@
 ### 移动语义与 Pin {#移动语义与-pin}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **关系**: Pin 通过类型系统保证，被 Pin 的值不会被移动，从而保证自引用类型的安全性。
@@ -191,9 +158,7 @@
 ### 相关概念 {#相关概念}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **内存位置稳定性 (Memory Location Stability)**: 值在内存中的位置保持不变。Pin 保证非 `Unpin` 类型的值在内存中的位置稳定。
@@ -209,7 +174,6 @@
 **堆固定 (Heap Pinning)**: 使用 `Box::pin` 在堆上固定值。这允许固定非 `Unpin` 类型。
 
 - **设计理由**：堆分配地址在 `Box` 存活期间不变；移动的是 `Box` 本身，其指向的堆块地址不变。故可固定任意类型（含自引用）。
-
 - **形式化**：
 
 $
@@ -225,23 +189,15 @@ $。
 ### 堆与栈固定：使用场景区分与设计论证 {#堆与栈固定使用场景区分与设计论证}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | 栈固定 `Pin::new` | 堆固定 `Box::pin` |
-
 | :--- | :--- | :--- |
-
 | **内存区域** | 栈上局部变量 | 堆上分配 |
-
 | **类型约束** | 必须 $T : \text{Unpin}$ | 任意 $T$（含 $\lnot\text{Unpin}$） |
-
 | **设计理由** | 栈变量可被优化重排；非 Unpin 时调用者可能移动，无法保证 | 堆地址在 `Box` 存活期间不变，满足位置稳定 |
-
 | **适用场景** | 普通 `Unpin` 类型、零开销 | 自引用、`!Unpin`、Future |
-
 | **性能** | 零分配 | 一次堆分配 |
 
 **决策树**：$T : \text{Unpin}$ → 栈固定；$T \not: \text{Unpin}$（自引用）→ 堆固定。详见 [DESIGN_MECHANISM_RATIONALE](../10_design_mechanism_rationale.md)。
@@ -249,9 +205,7 @@ $。
 ### 理论背景 {#理论背景}
 
 > **来源: [ACM](https://dl.acm.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **线性类型系统 (Linear Type System)**: Pin 可以视为线性类型系统的一种应用，确保值不会被意外移动。
@@ -263,19 +217,13 @@ $。
 ## 权威来源对齐 {#权威来源对齐}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 来源 | 内容 | 本文档对应 | 对齐状态 |
-
 | :--- | :--- | :--- | :--- |
-
 | RFC 2349 | Pin API | §形式化定义 | ✅ |
-
 | RustBelt | unsafe abstractions | §安全保证 | ✅ |
-
 | Ferrocene FLS Ch.17 | Async computation | §自引用 | ✅ |
-
 | Stanford CS242 | Type safety | §类型安全 | ✅ |
 
 ---
@@ -283,7 +231,6 @@ $。
 ## 🔬 形式化定义 {#形式化定义}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. Pin 类型形式化 {#1-pin-类型形式化}
@@ -319,7 +266,6 @@ $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
 **证明思路**:
 
 - Pin 通过类型系统防止移动操作
-
 - 编译器保证被 Pin 的值不会被移动
 
 **定理 2 (自引用类型安全)**:
@@ -329,7 +275,6 @@ $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
 **证明思路**:
 
 - Pin 保证值的内存位置稳定
-
 - 自引用字段指向同一值内的字段，位置稳定保证引用有效
 
 **定理 3 (Pin 投影安全)**:
@@ -339,9 +284,7 @@ $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
 **证明思路**:
 
 - Pin 投影需要满足特定的安全条件
-
 - 这些条件保证投影后的字段仍然满足 Pin 保证
-
 - 自引用类型的安全性依赖于 Pin 保证
 
 ### 3.1 Unpin Trait 定义 {#31-unpin-trait-定义}
@@ -359,9 +302,7 @@ $$
 **Unpin 语义**:
 
 - 大多数 Rust 类型自动实现 `Unpin`（auto trait）
-
 - `!Unpin` 类型需显式标记（如使用 `PhantomPinned`）
-
 - 实现 `Unpin` 不需要 unsafe，但撤销 `Unpin` 需要 unsafe
 
 **形式化规则**:
@@ -387,9 +328,7 @@ $$
 **Drop 保证**:
 
 - 如果 $T \not: \text{Unpin}$，则 `Drop::drop` 接收 `Pin<&mut T>`
-
 - 在 Drop 执行期间，被 Pin 的值仍然保证内存位置稳定
-
 - Drop 实现不能移动被 Pin 的值
 
 **形式化**:
@@ -437,9 +376,7 @@ $$
 **投影安全条件**:
 
 1. **结构稳定性**: 投影的字段在结构体中的偏移量固定
-
 2. **生命周期约束**: 投影后字段的生命周期不超过原 Pin
-
 3. **Pin 保持**: 若 $T_i \not: \text{Unpin}$，投影结果仍为 `Pin<&mut T_i>`
 
 **形式化规则**:
@@ -461,13 +398,11 @@ $$
 **投影方法**:
 
 - `map_unchecked_mut`: 不安全投影，需调用者保证安全性
-
 - `pin_project!` 宏: 安全投影，自动生成安全的投影代码
 
 **投影与结构pinning**:
 
 - 若结构体 $S \not: \text{Unpin}$，则其字段也视为受 Pin 保护
-
 - 投影操作不改变值的内存位置，仅改变访问路径
 
 ---
@@ -477,9 +412,7 @@ $$
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 定理 | crates 示例 | 说明 |
-
 | :--- | :--- | :--- |
-
 | T-PIN1 (Pin 保证)、T1-T3 | [c06 async 示例](../../../crates/c06_async/examples/README.md) | Pin、自引用 Future、位置稳定 |
 
 详见 [THEOREM_RUST_EXAMPLE_MAPPING](../10_theorem_rust_example_mapping.md)。
@@ -489,19 +422,13 @@ $$
 ## ⚠️ 反例：违反 Pin 规则 {#反例违反-pin-规则}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 反例 | 违反规则 | 后果 | 说明 |
-
 | :--- | :--- | :--- | :--- |
-
 | 移动未 Pin 自引用类型 | Pin 保证 | 悬垂引用 | 自引用指向旧地址 |
-
 | 非安全 Pin 投影 | 投影安全条件 | UB | 投影出非 Pin 字段后移动 |
-
 | 对非 Unpin 值使用 `Pin::new` | 栈固定要求 | 编译错误 | 非 Unpin 需 `Box::pin` |
-
 | 在 Pin 内调用 `mem::swap` | Pin 不变性 | UB | 违反位置稳定 |
 
 ---
@@ -509,13 +436,10 @@ $$
 ## 🌳 公理-定理证明树 {#公理-定理证明树}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
-
 Pin 安全性证明树
-
 
 
   定义 1.1–1.3: Pin 类型、不变性、Pin 保证
@@ -539,21 +463,15 @@ Pin 安全性证明树
   └─ 投影安全条件 + 定理 1 ─────────→ 定理 3: Pin 投影安全
 
       （投影后仍满足 Pin 保证）
-
 ```
-
 ### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 层次 | 内容 | 本页对应 |
-
 | :--- | :--- | :--- |
-
 | **概念定义层** | Def 1.1–1.3（Pin、不变性、保证）；Def 2.1–2.2（自引用） | §形式化定义 |
-
 | **属性关系层** | Def → 定理 1 → 定理 2/3；投影安全 → 定理 3 | §公理-定理证明树 |
-
 | **解释论证层** | 定理 1/2/3 证明；反例：§反例 | §形式化定义、§反例 |
 
 ---
@@ -561,7 +479,6 @@ Pin 安全性证明树
 ## ✅ 证明目标 {#证明目标}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 待证明的性质 {#待证明的性质}
@@ -569,9 +486,7 @@ Pin 安全性证明树
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 1. **Pin 不变性**: Pin 保证被 Pin 的值不会被移动
-
 2. **自引用类型安全**: 自引用类型在 Pin 下是安全的
-
 3. **Future 安全性**: Future 使用 Pin 保证安全性
 
 ### 证明方法 {#证明方法}
@@ -579,9 +494,7 @@ Pin 安全性证明树
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - **类型系统证明**: 证明 Pin 的类型系统保证
-
 - **语义证明**: 证明 Pin 的语义正确性
-
 - **安全性证明**: 证明自引用类型的安全性
 
 ---
@@ -589,7 +502,6 @@ Pin 安全性证明树
 ## 💻 代码示例与实践 {#代码示例与实践}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 示例 1: Pin 基础 {#示例-1-pin-基础}
@@ -597,9 +509,7 @@ Pin 安全性证明树
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
-
 use std::pin::Pin;
-
 
 
 struct MyStruct {
@@ -609,11 +519,9 @@ struct MyStruct {
 }
 
 
-
 // MyStruct 实现了 Unpin，可以安全移动
 
 impl Unpin for MyStruct {}
-
 
 
 fn main() {
@@ -623,19 +531,15 @@ fn main() {
     let pinned = Pin::new(&mut x);
 
 
-
     // 即使被 Pin，也可以移动（因为实现了 Unpin）
 
     let moved = x;
 
 }
-
 ```
-
 **形式化描述**:
 
 - $\text{MyStruct} : \text{Unpin}$
-
 - $\text{Pin}[\&mut \text{MyStruct}]$ 不阻止移动，因为实现了 `Unpin`
 
 ### 示例 2: 自引用结构 {#示例-2-自引用结构}
@@ -643,11 +547,9 @@ fn main() {
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
-
 use std::pin::Pin;
 
 use std::marker::PhantomPinned;
-
 
 
 struct SelfReferential {
@@ -659,7 +561,6 @@ struct SelfReferential {
     _pin: PhantomPinned,
 
 }
-
 
 
 impl SelfReferential {
@@ -677,17 +578,14 @@ impl SelfReferential {
         });
 
 
-
         let self_ptr: *const String = &boxed.data;
 
         boxed.self_ref = Some(self_ptr);
 
 
-
         boxed
 
     }
-
 
 
     fn get_data(&self) -> &String {
@@ -697,15 +595,11 @@ impl SelfReferential {
     }
 
 }
-
 ```
-
 **形式化描述**:
 
 - $\text{SelfReferential} = \{\text{data} : \text{String}, \text{self\_ref} : \text{Option}(\*const \text{String})\}$
-
 - 自引用: $\text{self\_ref}$ 指向 $\text{data}$
-
 - Pin 保证: $\text{Pin}[\Box[\text{SelfReferential}]]$ 保证内存位置稳定
 
 ### 示例 3: Future 和 Pin {#示例-3-future-和-pin}
@@ -713,13 +607,11 @@ impl SelfReferential {
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
-
 use std::pin::Pin;
 
 use std::future::Future;
 
 use std::task::{Context, Poll};
-
 
 
 struct MyFuture {
@@ -729,11 +621,9 @@ struct MyFuture {
 }
 
 
-
 impl Future for MyFuture {
 
     type Output = i32;
-
 
 
     fn poll(mut self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
@@ -757,7 +647,6 @@ impl Future for MyFuture {
 }
 
 
-
 async fn use_future() {
 
     let future = MyFuture { value: None };
@@ -769,15 +658,11 @@ async fn use_future() {
     println!("结果: {}", result);
 
 }
-
 ```
-
 **Future 和 Pin 分析**：
 
 - Future 可能包含自引用
-
 - Pin 保证 Future 不会被移动
-
 - `Box::pin` 在堆上固定 Future
 
 ### 示例 4: 自引用结构体 {#示例-4-自引用结构体}
@@ -785,11 +670,9 @@ async fn use_future() {
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
-
 use std::pin::Pin;
 
 use std::marker::PhantomPinned;
-
 
 
 struct SelfReferential {
@@ -801,7 +684,6 @@ struct SelfReferential {
     _pin: PhantomPinned,  // 标记为 !Unpin
 
 }
-
 
 
 impl SelfReferential {
@@ -819,7 +701,6 @@ impl SelfReferential {
         });
 
 
-
         let self_ptr: *const String = &boxed.data;
 
         unsafe {
@@ -831,11 +712,9 @@ impl SelfReferential {
         }
 
 
-
         boxed
 
     }
-
 
 
     fn get_data(&self) -> &str {
@@ -851,7 +730,6 @@ impl SelfReferential {
 }
 
 
-
 fn use_self_referential() {
 
     let pinned = SelfReferential::new(String::from("hello"));
@@ -859,15 +737,11 @@ fn use_self_referential() {
     println!("{}", pinned.get_data());
 
 }
-
 ```
-
 **自引用结构体分析**：
 
 - 使用原始指针实现自引用
-
 - `PhantomPinned` 标记为 `!Unpin`
-
 - Pin 保证结构体不会被移动，指针始终有效
 
 ### 示例 5: Pin 投影 {#示例-5-pin-投影}
@@ -875,9 +749,7 @@ fn use_self_referential() {
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
-
 use std::pin::Pin;
-
 
 
 struct Wrapper {
@@ -887,13 +759,11 @@ struct Wrapper {
 }
 
 
-
 struct Inner {
 
     value: i32,
 
 }
-
 
 
 impl Wrapper {
@@ -909,25 +779,19 @@ impl Wrapper {
     }
 
 }
-
 ```
-
 **Pin 投影分析**：
 
 - 从被 Pin 的结构体中获取被 Pin 的字段
-
 - 使用 `map_unchecked_mut` 进行投影
-
 - 需要确保投影的安全性
 
 ```rust
-
 use std::pin::Pin;
 
 use std::future::Future;
 
 use std::task::{Context, Poll};
-
 
 
 struct MyFuture {
@@ -937,11 +801,9 @@ struct MyFuture {
 }
 
 
-
 impl Future for MyFuture {
 
     type Output = i32;
-
 
 
     fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
@@ -953,7 +815,6 @@ impl Future for MyFuture {
 }
 
 
-
 async fn use_future() {
 
     let fut = MyFuture { state: 42 };
@@ -963,15 +824,11 @@ async fn use_future() {
     println!("结果: {}", result);
 
 }
-
 ```
-
 **形式化描述**:
 
 - $\text{Future} = \{\text{poll} : \text{Pin}[\&mut \text{Self}] \times \text{Context} \to \text{Poll}[\text{Output}]\}$
-
 - Pin 保证: Future 的 poll 方法使用 Pin 保证自引用安全性
-
 - 异步执行: `await` 使用 Pin 保证 Future 的内存位置稳定
 
 ---
@@ -979,65 +836,47 @@ async fn use_future() {
 ## 📖 参考文献 {#参考文献}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 学术论文（国际权威） {#学术论文国际权威}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **Pin API (RFC 2349)** — 自引用与 Future 安全
-
    - 链接: <https://rust-lang.github.io/rfcs/2349-pin.html>
-
    - 与本目录: Pin T1–T3、!Unpin、自引用安全对应
-
 2. **RustBelt** (POPL 2018)
-
    - 链接: <https://plv.mpi-sws.org/rustbelt/popl18/>
-
    - 与本目录: unsafe 安全抽象、Pin 保证对应
-
 3. **Ferrocene FLS** — Rust 1.93 形式化规范
-
    - [Ch. 17.3 Asynchronous Computation](https://spec.ferrocene.dev/concurrency.html#asynchronous-computation)
-
    - 与本目录: Pin 与 Future、自引用、!Unpin 对应；Rust 官方采纳 2025
 
 ### 官方文档 {#官方文档}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Pin RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)
-
 - [Pin 文档](https://doc.rust-lang.org/std/pin/index.html)
-
 - [Unpin Trait](https://doc.rust-lang.org/std/marker/trait.Unpin.html)
-
 - [Future Trait](https://doc.rust-lang.org/std/future/trait.Future.html)
 
 ### 相关代码 {#相关代码}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [自引用结构实现](../../../crates/c01_ownership_borrow_scope/README.md)
-
 - [异步 Future 实现](../../../crates/c06_async/README.md)
 
 ### 工具资源 {#工具资源}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - Rust Analyzer: 提供 Pin 类型检查
-
 - [Miri](https://github.com/rust-lang/miri): 检查 Pin 相关的未定义行为
 
 ---
@@ -1045,31 +884,23 @@ async fn use_future() {
 ## 🔄 研究进展 {#研究进展}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 已完成 ✅ {#已完成}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [x] 研究目标定义
-
 - [x] 理论基础整理（包括理论背景和相关概念）
-
 - [x] 初步形式化定义
-
 - [x] 添加自引用类型安全定理（定理 2）
-
 - [x] 添加 Pin 投影安全定理（定理 3）
-
 - [x] 完善 Pin 保证定理的证明思路
 
 ### 进行中 🔄（已完成） {#进行中-已完成}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [x] 完整的形式化定义（§1–3 Pin 类型、自引用、Pin 保证）、Pin 保证与自引用安全已纳入定理 2–3 及证明思路
@@ -1077,7 +908,6 @@ async fn use_future() {
 ### 计划中 📋（已完成） {#计划中-已完成}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [x] 与异步系统的集成、实际应用案例（见下方「系统集成与实际应用」）
@@ -1087,13 +917,11 @@ async fn use_future() {
 ## 🔗 系统集成与实际应用 {#系统集成与实际应用}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 与异步系统的集成 {#与异步系统的集成}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 `Future::poll(self: Pin<&mut Self>, ctx)` 的 `Pin` 保证 `Self` 在 poll 间不移动，满足自引用与 `Waker` 存储的不变式；
@@ -1105,7 +933,6 @@ async fn use_future() {
 ### 与生命周期的集成 {#与生命周期的集成}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 自引用中 `&'a T` 的 `'a` 覆盖包含自引用结构体；Pin 保证移动不发生，故 `'a` 不悬垂。
@@ -1115,13 +942,10 @@ async fn use_future() {
 ### 实际应用案例 {#实际应用案例}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **async/await**：编译器生成的自引用 Future、`PhantomPinned`、`Unpin` 与 `!Unpin` 的区分；Tokio/async-std [已归档] 的 `Pin<Box<dyn Future>>`。
-
 2. **迭代器与 stream**：`Stream`、自引用迭代器的 `next` 返回 `Option<&'a T>` 与 Pin 的配合。
-
 3. **与其他语言**：C++ `std::optional`、Swift 的 inout 与 Rust Pin/Unpin 的对比；Rust 通过类型与 Pin 在库层面保证，无需 GC。
 
 ---
@@ -1129,15 +953,11 @@ async fn use_future() {
 ### 相关思维表征 {#相关思维表征}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 类型 | 位置 |
-
 | :--- | :--- |
-
 | 多维矩阵 | [README §六篇并表](README.md#formal_methods-六篇并表) 第 5 行 |
-
 | 证明树 | 本文 Pin Def/T1–T3 结构；[PROOF_GRAPH_NETWORK](../../04_thinking/04_proof_graph_network.md) |
 
 *依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
@@ -1159,17 +979,13 @@ async fn use_future() {
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -1177,15 +993,10 @@ async fn use_future() {
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -1193,17 +1004,13 @@ async fn use_future() {
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - [Rust 1.94 特性速查
-
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -1215,9 +1022,7 @@ async fn use_future() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -1233,47 +1038,26 @@ async fn use_future() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Pointer (computer programming)](https://en.wikipedia.org/wiki/Pointer_(computer_programming))**
-
 > **来源: [Rust Reference - Pin](https://doc.rust-lang.org/reference/)**
-
 > **来源: [Rustonomicon - Self-Referential Types](https://doc.rust-lang.org/nomicon/)**
-
 > **来源: [TRPL Ch. 17 - Pin](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
-
 > **来源: [RFC 2349 - Pin API](https://rust-lang.github.io/rfcs/2349-pin.html)**
-
 > **[来源: ACM - Safe Self-Referential Structures]**
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

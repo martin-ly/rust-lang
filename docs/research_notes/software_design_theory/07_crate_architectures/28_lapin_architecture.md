@@ -1,3 +1,10 @@
+> **Canonical 说明**: 本文件专注 **lapin AMQP/RabbitMQ 客户端的 Channel 与 Consumer 架构**。
+>
+> 若只需要使用指南与生态定位，请优先参考：
+> - [流处理生态](../../../../concept/06_ecosystem/36_stream_processing_ecosystem.md)
+> - [网络协议](../../../../concept/06_ecosystem/38_network_protocols.md)
+>
+> 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
@@ -68,7 +75,6 @@ channel
     .await?
     .await?;
 ```
-
 > [来源: [lapin examples](https://github.com/amqp-rs/lapin/tree/main/examples)]
 
 ---
@@ -89,7 +95,6 @@ graph LR
     CH -->|路由| EX
     Q -->|basic_consume| C[Consumer]
 ```
-
 > [来源: [RabbitMQ Tutorials](https://www.rabbitmq.com/tutorials)]
 
 | 概念 | 说明 | 在 lapin 中的对应 |
@@ -132,7 +137,6 @@ match confirm.await? {
     Confirmation::NotRequested => {}
 }
 ```
-
 > [来源: [lapin publisher_confirm](https://docs.rs/lapin/latest/lapin/publisher_confirm/)]
 
 ### 2.2 Consumer 与 ACK/NACK {#22-consumer-与-acknack}
@@ -162,7 +166,6 @@ while let Some(delivery) = consumer.next().await {
     delivery.ack(BasicAckOptions::default()).await?;
 }
 ```
-
 > [来源: [lapin Consumer](https://docs.rs/lapin/latest/lapin/consumer/struct.Consumer.html)]
 
 ### 2.3 QoS Prefetch {#23-qos-prefetch}
@@ -174,7 +177,6 @@ while let Some(delivery) = consumer.next().await {
 ```rust,ignore
 channel.basic_qos(10, BasicQosOptions::default()).await?;
 ```
-
 | 配置 | 语义 | 推荐场景 |
 |:--|:--|:--|
 | `prefetch_count = 0` | 无限制，Broker 尽量推送 | 低延迟、快速消费者 |
@@ -210,7 +212,6 @@ channel
     )
     .await?;
 ```
-
 > [来源: [RabbitMQ Exchange Types](https://www.rabbitmq.com/docs/exchanges#exchange-types)]
 
 ---
@@ -232,7 +233,6 @@ channel
 let props = ConnectionProperties::default().enable_auto_recover();
 let conn = Connection::connect(&addr, props).await?;
 ```
-
 恢复后，通道、队列、交换机、绑定与消费者会被自动重建，但发布中的消息仍可能丢失，业务层应设计重试/幂等。
 
 > [来源: [lapin Connection Recovery](https://docs.rs/lapin/latest/lapin/struct.Connection.html)]

@@ -1,0 +1,566 @@
+﻿# 3.2 迭代器参考
+
+> **文档类型**: Tier 3 - 参考层
+> **文档定位**: Rust迭代器完整API参考
+> **适用对象**: 需要查阅迭代器详细用法的开发者
+> **相关文档**: [主索引](../tier_01_foundations/02_navigation.md) | [循环结构指南](../tier_02_guides/02_loops_guide.md)
+
+**最后更新**: 2025-12-11
+**适用版本**: Rust 1.92.0+
+**文档版本**: v2025.1.0
+
+---
+
+## 📋 目录
+
+- [3.2 迭代器参考](#32-迭代器参考)
+  - [📋 目录](#-目录)
+  - [1. Iterator trait](#1-iterator-trait)
+  - [2. 适配器方法](#2-适配器方法)
+  - [3. 消费者方法](#3-消费者方法)
+  - [4. IntoIterator trait](#4-intoiterator-trait)
+  - [5. 自定义迭代器](#5-自定义迭代器)
+  - [6. 性能特性](#6-性能特性)
+  - [7. 完整方法列表](#7-完整方法列表)
+    - [适配器方法（返回新迭代器）](#适配器方法返回新迭代器)
+    - [消费者方法（消耗迭代器）](#消费者方法消耗迭代器)
+
+---
+
+## 1. Iterator trait
+
+**定义**:
+
+```rust
+pub trait Iterator {
+    type Item;
+
+    fn next(&mut self) -> Option<Self::Item>;
+
+    // 提供的方法（约75个）
+    fn size_hint(&self) -> (usize, Option<usize>) { (0, None) }
+    fn count(self) -> usize where Self: Sized { ... }
+    fn last(self) -> Option<Self::Item> where Self: Sized { ... }
+    fn nth(&mut self, n: usize) -> Option<Self::Item> { ... }
+    // ... 更多方法
+}
+```
+**核心方法**:
+
+```rust
+fn main() {
+    // next: 唯一必需实现的方法
+    let mut iter = vec![1, 2, 3].into_iter();
+    assert_eq!(iter.next(), Some(1));
+    assert_eq!(iter.next(), Some(2));
+    assert_eq!(iter.next(), Some(3));
+    assert_eq!(iter.next(), None);
+
+    // size_hint: 返回(下界, 上界)
+    let iter = vec![1, 2, 3].into_iter();
+    assert_eq!(iter.size_hint(), (3, Some(3)));
+}
+```
+---
+
+## 2. 适配器方法
+
+**转换适配器**:
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+
+    // map: 转换元素
+    let doubled: Vec<_> = vec.iter().map(|x| x * 2).collect();
+    assert_eq!(doubled, vec![2, 4, 6, 8, 10]);
+
+    // filter: 过滤元素
+    let even: Vec<_> = vec.iter().filter(|&&x| x % 2 == 0).collect();
+    assert_eq!(even, vec![&2, &4]);
+
+    // filter_map: 组合filter和map
+    let result: Vec<_> = vec.iter()
+        .filter_map(|&x| {
+            if x % 2 == 0 {
+                Some(x * 2)
+            } else {
+                None
+            }
+        })
+        .collect();
+    assert_eq!(result, vec![4, 8]);
+
+    // flat_map: 展平嵌套
+    let result: Vec<_> = vec.iter()
+        .flat_map(|&x| vec![x, x * 2])
+        .collect();
+    assert_eq!(result, vec![1, 2, 2, 4, 3, 6, 4, 8, 5, 10]);
+
+    // flatten: 展平一层
+    let nested = vec![vec![1, 2], vec![3, 4]];
+    let flat: Vec<_> = nested.into_iter().flatten().collect();
+    assert_eq!(flat, vec![1, 2, 3, 4]);
+}
+```
+**选择适配器**:
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+
+    // take: 取前n个
+    let first_three: Vec<_> = vec.iter().take(3).collect();
+    assert_eq!(first_three, vec![&1, &2, &3]);
+
+    // skip: 跳过前n个
+    let skip_two: Vec<_> = vec.iter().skip(2).collect();
+    assert_eq!(skip_two, vec![&3, &4, &5]);
+
+    // take_while: 取满足条件的前缀
+    let result: Vec<_> = vec.iter().take_while(|&&x| x < 4).collect();
+    assert_eq!(result, vec![&1, &2, &3]);
+
+    // skip_while: 跳过满足条件的前缀
+    let result: Vec<_> = vec.iter().skip_while(|&&x| x < 3).collect();
+    assert_eq!(result, vec![&3, &4, &5]);
+
+    // step_by: 按步长迭代
+    let result: Vec<_> = vec.iter().step_by(2).collect();
+    assert_eq!(result, vec![&1, &3, &5]);
+}
+```
+**组合适配器**:
+
+```rust
+fn main() {
+    let vec1 = vec![1, 2, 3];
+    let vec2 = vec![4, 5, 6];
+
+    // chain: 连接迭代器
+    let result: Vec<_> = vec1.iter().chain(vec2.iter()).collect();
+    assert_eq!(result, vec![&1, &2, &3, &4, &5, &6]);
+
+    // zip: 组合两个迭代器
+    let result: Vec<_> = vec1.iter().zip(vec2.iter()).collect();
+    assert_eq!(result, vec![(&1, &4), (&2, &5), (&3, &6)]);
+
+    // enumerate: 添加索引
+    let result: Vec<_> = vec1.iter().enumerate().collect();
+    assert_eq!(result, vec![(0, &1), (1, &2), (2, &3)]);
+}
+```
+**检查适配器**:
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+
+    // inspect: 观察元素（用于调试）
+    let result: Vec<_> = vec.iter()
+        .inspect(|x| println!("before: {}", x))
+        .map(|x| x * 2)
+        .inspect(|x| println!("after: {}", x))
+        .collect();
+
+    // peekable: 允许预览下一个元素
+    let mut iter = vec.iter().peekable();
+    assert_eq!(iter.peek(), Some(&&1));
+    assert_eq!(iter.next(), Some(&1));
+    assert_eq!(iter.peek(), Some(&&2));
+}
+```
+---
+
+## 3. 消费者方法
+
+**收集方法**:
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+
+    // collect: 收集到集合
+    let doubled: Vec<_> = vec.iter().map(|x| x * 2).collect();
+
+    // partition: 分组
+    let (even, odd): (Vec<_>, Vec<_>) = vec.iter()
+        .partition(|&&x| x % 2 == 0);
+    assert_eq!(even, vec![&2, &4]);
+    assert_eq!(odd, vec![&1, &3, &5]);
+
+    // unzip: 拆分元组
+    let pairs = vec![(1, 2), (3, 4), (5, 6)];
+    let (left, right): (Vec<_>, Vec<_>) = pairs.into_iter().unzip();
+    assert_eq!(left, vec![1, 3, 5]);
+    assert_eq!(right, vec![2, 4, 6]);
+}
+```
+**聚合方法**:
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+
+    // fold: 左折叠
+    let sum = vec.iter().fold(0, |acc, &x| acc + x);
+    assert_eq!(sum, 15);
+
+    // reduce: 与fold类似，但返回Option
+    let sum = vec.iter().copied().reduce(|acc, x| acc + x);
+    assert_eq!(sum, Some(15));
+
+    // scan: 有状态的map
+    let running_sum: Vec<_> = vec.iter()
+        .scan(0, |state, &x| {
+            *state += x;
+            Some(*state)
+        })
+        .collect();
+    assert_eq!(running_sum, vec![1, 3, 6, 10, 15]);
+
+    // sum: 求和
+    let sum: i32 = vec.iter().sum();
+    assert_eq!(sum, 15);
+
+    // product: 求积
+    let product: i32 = vec.iter().product();
+    assert_eq!(product, 120);
+}
+```
+**查找方法**:
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+
+    // find: 查找第一个满足条件的元素
+    let result = vec.iter().find(|&&x| x > 3);
+    assert_eq!(result, Some(&4));
+
+    // position: 查找位置
+    let pos = vec.iter().position(|&x| x == 3);
+    assert_eq!(pos, Some(2));
+
+    // rposition: 从右查找位置
+    let pos = vec.iter().rposition(|&x| x % 2 == 0);
+    assert_eq!(pos, Some(3));  // 最后一个偶数的位置
+
+    // max/min: 最大最小值
+    let max = vec.iter().max();
+    assert_eq!(max, Some(&5));
+
+    let min = vec.iter().min();
+    assert_eq!(min, Some(&1));
+
+    // max_by/min_by: 自定义比较
+    let max = vec.iter().max_by(|a, b| a.cmp(b));
+    assert_eq!(max, Some(&5));
+}
+```
+**布尔方法**:
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+
+    // all: 所有元素满足条件
+    assert!(vec.iter().all(|&x| x > 0));
+    assert!(!vec.iter().all(|&x| x > 3));
+
+    // any: 至少一个元素满足条件
+    assert!(vec.iter().any(|&x| x > 4));
+    assert!(!vec.iter().any(|&x| x > 10));
+
+    // none: 没有元素满足条件
+    assert!(vec.iter().none(|&x| x > 10));
+    assert!(!vec.iter().none(|&x| x > 4));
+}
+```
+**计数方法**:
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+
+    // count: 元素数量
+    let count = vec.iter().count();
+    assert_eq!(count, 5);
+
+    // nth: 第n个元素
+    let mut iter = vec.iter();
+    assert_eq!(iter.nth(2), Some(&3));
+
+    // last: 最后一个元素
+    let last = vec.iter().last();
+    assert_eq!(last, Some(&5));
+}
+```
+---
+
+## 4. IntoIterator trait
+
+**定义**:
+
+```rust
+pub trait IntoIterator {
+    type Item;
+    type IntoIter: Iterator<Item = Self::Item>;
+
+    fn into_iter(self) -> Self::IntoIter;
+}
+```
+**实现**:
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3];
+
+    // Vec<T> 实现了三种IntoIterator
+
+    // 1. into_iter() - 获取所有权
+    for item in vec.clone() {
+        println!("{}", item);  // item: i32
+    }
+
+    // 2. &Vec<T>.into_iter() - 不可变借用
+    for item in &vec {
+        println!("{}", item);  // item: &i32
+    }
+
+    // 3. &mut Vec<T>.into_iter() - 可变借用
+    let mut vec = vec.clone();
+    for item in &mut vec {
+        *item *= 2;  // item: &mut i32
+    }
+
+    println!("{:?}", vec);
+}
+```
+---
+
+## 5. 自定义迭代器
+
+**基本实现**:
+
+```rust
+struct Counter {
+    count: usize,
+    max: usize,
+}
+
+impl Counter {
+    fn new(max: usize) -> Self {
+        Counter { count: 0, max }
+    }
+}
+
+impl Iterator for Counter {
+    type Item = usize;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.count < self.max {
+            self.count += 1;
+            Some(self.count)
+        } else {
+            None
+        }
+    }
+
+    // 可选：提供size_hint提升性能
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let remaining = self.max - self.count;
+        (remaining, Some(remaining))
+    }
+}
+
+fn main() {
+    let counter = Counter::new(5);
+    let result: Vec<_> = counter.collect();
+    assert_eq!(result, vec![1, 2, 3, 4, 5]);
+}
+```
+**实现ExactSizeIterator**:
+
+```rust
+impl ExactSizeIterator for Counter {
+    fn len(&self) -> usize {
+        self.max - self.count
+    }
+}
+
+fn main() {
+    let counter = Counter::new(5);
+    assert_eq!(counter.len(), 5);
+}
+```
+**实现DoubleEndedIterator**:
+
+```rust
+struct Range {
+    start: i32,
+    end: i32,
+}
+
+impl Iterator for Range {
+    type Item = i32;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.start < self.end {
+            let result = self.start;
+            self.start += 1;
+            Some(result)
+        } else {
+            None
+        }
+    }
+}
+
+impl DoubleEndedIterator for Range {
+    fn next_back(&mut self) -> Option<Self::Item> {
+        if self.start < self.end {
+            self.end -= 1;
+            Some(self.end)
+        } else {
+            None
+        }
+    }
+}
+
+fn main() {
+    let mut range = Range { start: 0, end: 5 };
+    assert_eq!(range.next(), Some(0));
+    assert_eq!(range.next_back(), Some(4));
+    assert_eq!(range.next(), Some(1));
+    assert_eq!(range.next_back(), Some(3));
+}
+```
+---
+
+## 6. 性能特性
+
+**零成本抽象**:
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+
+    // 迭代器版本
+    let sum: i32 = vec.iter().map(|x| x * 2).sum();
+
+    // 手写循环版本
+    let mut sum2 = 0;
+    for &x in &vec {
+        sum2 += x * 2;
+    }
+
+    // 编译后生成相同的机器码
+    assert_eq!(sum, sum2);
+}
+```
+**延迟求值**:
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+
+    // 迭代器链不会立即执行
+    let iter = vec.iter()
+        .map(|x| {
+            println!("map: {}", x);
+            x * 2
+        })
+        .filter(|x| {
+            println!("filter: {}", x);
+            x > &5
+        });
+
+    println!("迭代器创建完成");
+
+    // 只有在collect时才执行
+    let result: Vec<_> = iter.collect();
+
+    println!("result: {:?}", result);
+}
+```
+**融合优化**:
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+
+    // 多个适配器会被融合为单次迭代
+    let result: Vec<_> = vec.iter()
+        .map(|x| x * 2)      // 融合
+        .filter(|x| x > &5)  // 融合
+        .map(|x| x + 1)      // 融合
+        .collect();          // 单次迭代完成所有操作
+
+    assert_eq!(result, vec![7, 9, 11]);
+}
+```
+---
+
+## 7. 完整方法列表
+
+### 适配器方法（返回新迭代器）
+
+| 方法       | 签名                                                                 | 描述               | 示例                                    |
+| :--- | :--- | :--- | :--- || map        | `map<B, F>(self, f: F) -> Map<Self, F>`                              | 转换元素           | `iter.map(\|x\| x * 2)`                 |
+| filter     | `filter<P>(self, predicate: P) -> Filter<Self, P>`                   | 过滤元素           | `iter.filter(\|x\| x > 0)`              |
+| filter_map | `filter_map<B, F>(self, f: F) -> FilterMap<Self, F>`                 | 过滤并转换         | `iter.filter_map(\|x\| Some(x))`        |
+| enumerate  | `enumerate(self) -> Enumerate<Self>`                                 | 添加索引           | `iter.enumerate()`                      |
+| peekable   | `peekable(self) -> Peekable<Self>`                                   | 允许预览           | `iter.peekable()`                       |
+| skip       | `skip(self, n: usize) -> Skip<Self>`                                 | 跳过n个            | `iter.skip(2)`                          |
+| take       | `take(self, n: usize) -> Take<Self>`                                 | 取前n个            | `iter.take(3)`                          |
+| chain      | `chain<U>(self, other: U) -> Chain<Self, U::IntoIter>`               | 连接迭代器         | `iter1.chain(iter2)`                    |
+| zip        | `zip<U>(self, other: U) -> Zip<Self, U::IntoIter>`                   | 组合迭代器         | `iter1.zip(iter2)`                      |
+| flat_map   | `flat_map<U, F>(self, f: F) -> FlatMap<Self, U, F>`                  | 映射并展平         | `iter.flat_map(\|x\| vec[x])`           |
+| flatten    | `flatten(self) -> Flatten<Self>`                                     | 展平一层           | `iter.flatten()`                        |
+| fuse       | `fuse(self) -> Fuse<Self>`                                           | 终止后永远返回None | `iter.fuse()`                           |
+| inspect    | `inspect<F>(self, f: F) -> Inspect<Self, F>`                         | 观察元素           | `iter.inspect(\|x\| println!("{}", x))` |
+| by_ref     | `by_ref(&mut self) -> &mut Self`                                     | 借用迭代器         | `iter.by_ref()`                         |
+| rev        | `rev(self) -> Rev<Self>`                                             | 反向迭代           | `iter.rev()`                            |
+| step_by    | `step_by(self, step: usize) -> StepBy<Self>`                         | 步长迭代           | `iter.step_by(2)`                       |
+| take_while | `take_while<P>(self, predicate: P) -> TakeWhile<Self, P>`            | 取前缀             | `iter.take_while(\|x\| x < 5)`          |
+| skip_while | `skip_while<P>(self, predicate: P) -> SkipWhile<Self, P>`            | 跳过前缀           | `iter.skip_while(\|x\| x < 3)`          |
+| map_while  | `map_while<B, P>(self, predicate: P) -> MapWhile<Self, P>`           | 映射直到None       | `iter.map_while(\|x\| Some(x))`         |
+| cycle      | `cycle(self) -> Cycle<Self>`                                         | 循环迭代           | `iter.cycle()`                          |
+| scan       | `scan<St, B, F>(self, initial_state: St, f: F) -> Scan<Self, St, F>` | 有状态映射         | `iter.scan(0, \|st, x\| ...)`           |
+
+### 消费者方法（消耗迭代器）
+
+| 方法      | 签名                                                | 描述         | 示例                                     |
+| :--- | :--- | :--- | :--- || collect   | `collect<B: FromIterator<Self::Item>>(self) -> B`   | 收集到集合   | `iter.collect::<Vec<_>>()`               |
+| count     | `count(self) -> usize`                              | 计数         | `iter.count()`                           |
+| last      | `last(self) -> Option<Self::Item>`                  | 最后一个元素 | `iter.last()`                            |
+| nth       | `nth(&mut self, n: usize) -> Option<Self::Item>`    | 第n个元素    | `iter.nth(2)`                            |
+| fold      | `fold<B, F>(self, init: B, f: F) -> B`              | 折叠         | `iter.fold(0, \|a, x\| a + x)`           |
+| reduce    | `reduce<F>(self, f: F) -> Option<Self::Item>`       | 归约         | `iter.reduce(\|a, x\| a + x)`            |
+| all       | `all<F>(self, f: F) -> bool`                        | 全部满足     | `iter.all(\|x\| x > 0)`                  |
+| any       | `any<F>(self, f: F) -> bool`                        | 至少一个满足 | `iter.any(\|x\| x > 5)`                  |
+| find      | `find<P>(self, predicate: P) -> Option<Self::Item>` | 查找元素     | `iter.find(\|x\| x > 3)`                 |
+| position  | `position<P>(self, predicate: P) -> Option<usize>`  | 查找位置     | `iter.position(\|x\| x == 5)`            |
+| max       | `max(self) -> Option<Self::Item>`                   | 最大值       | `iter.max()`                             |
+| min       | `min(self) -> Option<Self::Item>`                   | 最小值       | `iter.min()`                             |
+| sum       | `sum<S>(self) -> S`                                 | 求和         | `iter.sum::<i32>()`                      |
+| product   | `product<P>(self) -> P`                             | 求积         | `iter.product::<i32>()`                  |
+| partition | `partition<B, F>(self, f: F) -> (B, B)`             | 分组         | `iter.partition(\|x\| x % 2 == 0)`       |
+| for_each  | `for_each<F>(self, f: F)`                           | 遍历执行     | `iter.for_each(\|x\| println!("{}", x))` |
+
+---
+
+**最后更新**: 2025-12-11
+**文档版本**: v2025.1.0
+**相关文档**: [主索引](../tier_01_foundations/02_navigation.md) | [README](../../README.md)
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

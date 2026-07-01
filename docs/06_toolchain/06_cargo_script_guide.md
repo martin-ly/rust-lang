@@ -105,7 +105,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 简写依赖语法 {#简写依赖语法}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -120,7 +119,6 @@ serde = "1"
 serde_json = "1"
 ---
 ```
-
 ### 最小示例（无 frontmatter） {#最小示例无-frontmatter}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -135,7 +133,6 @@ fn main() {
     println!("Hello, Cargo Script!");
 }
 ```
-
 ---
 
 ## 3. 完整示例 {#3-完整示例}
@@ -180,13 +177,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 **运行方式**:
 
 ```bash
 cargo +nightly fetch-json.rs
 ```
-
 ### 示例 2：数据处理脚本 {#示例-2数据处理脚本}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -211,7 +206,6 @@ fn main() {
     }
 }
 ```
-
 ### 示例 3：系统管理脚本 {#示例-3系统管理脚本}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -239,7 +233,6 @@ fn main() {
     println!("Analyzing: {}", args.path);
 }
 ```
-
 ---
 
 ## 4. 与现有工具的对比 {#4-与现有工具的对比}
@@ -260,7 +253,6 @@ graph LR
     RS -->|第三方| A3[单文件脚本]
     NB -->|Nightly| A4[runner 属性]
 ```
-
 | 特性 | Cargo Script (1.96+) | cargo-run | rust-script (第三方) |
 |------|---------------------|-----------|---------------------|
 | 官方支持 | ✅ 内置 | ✅ 内置 | ❌ 第三方 |
@@ -299,7 +291,6 @@ fn main() {
     }
 }
 ```
-
 ### 场景 2：教学与演示 {#场景-2教学与演示}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -315,7 +306,6 @@ fn main() {
 - name: Run custom check
   run: cargo scripts/ci-check.rs
 ```
-
 ---
 
 ## 6. 限制与注意事项 {#6-限制与注意事项}

@@ -75,7 +75,6 @@ Axum 设计原则:
 ├─ 中间件链: Tower 中间件支持
 └─ 无全局状态: 显式状态传递
 ```
-
 ---
 
 ## 🏗️ 架构设计
@@ -119,7 +118,6 @@ fn create_router(state: Arc<AppState>) -> Router {
         .layer(middleware::from_fn(logging_middleware))
 }
 ```
-
 ### 请求处理流程
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -143,7 +141,6 @@ sequenceDiagram
     Response->>Middleware: 后置处理
     Middleware->>Client: HTTP Response
 ```
-
 ---
 
 ## 📐 核心概念
@@ -192,7 +189,6 @@ fn custom_handler() -> impl Handler<(), Arc<AppState>> {
     }
 }
 ```
-
 ### Extractor
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -279,7 +275,6 @@ async fn protected_route(api_key: ApiKey) -> String {
     format!("API Key: {:?}", api_key)
 }
 ```
-
 ### Response
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -341,7 +336,6 @@ async fn tuple_response() -> (StatusCode, Json<User>) {
     (StatusCode::CREATED, Json(User::default()))
 }
 ```
-
 ### 中间件
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -408,7 +402,6 @@ fn create_app() -> Router {
         .route_layer(middleware::from_fn(auth_middleware))
 }
 ```
-
 ---
 
 ## 🚀 高级用法
@@ -464,7 +457,6 @@ fn create_router() -> Router {
         .route("/", get(index).with_state(app_state.clone()))
 }
 ```
-
 ### 错误处理
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -539,7 +531,6 @@ async fn get_user(Path(id): Path<i64>) -> Result<Json<User>, AppError> {
     Ok(Json(user))
 }
 ```
-
 ### 认证授权
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -608,7 +599,6 @@ fn protected_routes() -> Router {
         }))
 }
 ```
-
 ### WebSocket
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -666,7 +656,6 @@ async fn handle_socket(socket: WebSocket, state: Arc<AppState>) {
     }
 }
 ```
-
 ---
 
 ## ⚡ 性能优化
@@ -712,7 +701,6 @@ let pool = PgPoolOptions::new()
     HeaderValue::from_static("public, max-age=86400"),
 ))
 ```
-
 ---
 
 ## 🧪 测试
@@ -749,7 +737,6 @@ async fn test_get_user() {
     assert_eq!(user.id, 1);
 }
 ```
-
 ---
 
 ## 🔗 参考资源
@@ -774,7 +761,6 @@ async fn test_get_user() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust 标准库速查](../../05_reference/03_std_library_cheatsheet.md)
-
 - [Deep Dives 深度解析](README.md)
 - [Tokio 运行时深度解析](02_tokio_deep_dive.md)
 

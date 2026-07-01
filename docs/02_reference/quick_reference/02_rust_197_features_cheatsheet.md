@@ -1,6 +1,6 @@
 # Rust 1.97 特性速查表 {#rust-197-特性速查表}
 
-> **权威来源**: 本文对应权威来源为 [`concept/07_future/rust_1_97_preview.md`](../../../concept/07_future/rust_1_97_preview.md)。
+> **权威来源**: 本文对应权威来源为 [`concept/07_future/rust_1_97_preview.md`](../../../../concept/07_future/rust_1_97_preview.md)。
 > 本文与权威来源内容高度重叠；`concept/` 版本为项目权威主轨，本文保留作为快速参考。
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
@@ -61,7 +61,6 @@ where
 // 使用
 let result = call_async(async |x| x * 2, 21).await;
 ```
-
 ---
 
 ## 核心标准库 API {#核心标准库-api}
@@ -88,7 +87,6 @@ assert_eq!(a.midpoint(b), u32::MAX); // 不会溢出
 assert_eq!(16u32.isqrt(), 4);
 assert_eq!((-1i32).checked_isqrt(), None);
 ```
-
 ### 指针与 Strict Provenance {#指针与-strict-provenance}
 
 | API | 签名 | 说明 |
@@ -107,7 +105,6 @@ let addr = ptr.addr();                  // 剥离 provenance
 let shifted = ptr.with_addr(addr + 4);  // 保留 provenance，新地址
 let byte_off = unsafe { ptr.byte_add(4) }; // 按字节偏移
 ```
-
 ### 网络/IP 地址 {#网络ip-地址}
 
 | API | 签名 | 说明 |
@@ -125,7 +122,6 @@ let a = Ipv4Addr::new(192, 168, 0, 0);
 let b = Ipv4Addr::new(0, 0, 255, 255);
 let masked = a & b; // 192.168.0.0
 ```
-
 ### 文件系统 {#文件系统}
 
 | API | 签名 | 说明 |
@@ -139,7 +135,6 @@ let mut times = FileTimes::new();
 times.set_modified(SystemTime::now());
 file.set_times(times)?;
 ```
-
 ### 错误处理 {#错误处理}
 
 | API | 说明 |
@@ -154,7 +149,6 @@ match err.kind() {
     _ => "其他错误",
 }
 ```
-
 ### 集合与迭代器 {#集合与迭代器}
 
 | API | 说明 |
@@ -182,7 +176,6 @@ assert_eq!(opt.as_slice(), &[42]);
 let none: Option<i32> = None;
 assert!(none.as_slice().is_empty());
 ```
-
 ### 异步 {#异步}
 
 | API | 说明 |
@@ -194,7 +187,6 @@ let waker = Waker::noop();
 let mut cx = Context::from_waker(&waker);
 let poll_result = future.poll(&mut cx);
 ```
-
 ### 其他 {#其他}
 
 | API | 说明 |
@@ -247,7 +239,6 @@ fn main() {
     }
 }
 ```
-
 ---
 
 ## 快速参考示例 {#快速参考示例}
@@ -261,7 +252,6 @@ fn binary_search_mid(low: usize, high: usize) -> usize {
     low.midpoint(high)  // 避免 (low + high) / 2 溢出
 }
 ```
-
 ### 异步闭包 trait 约束 {#异步闭包-trait-约束}
 
 ```rust
@@ -276,7 +266,6 @@ where
     results
 }
 ```
-
 ### 严格 provenance 模式 {#严格-provenance-模式}
 
 ```rust
@@ -285,7 +274,6 @@ let addr = ptr.addr();                    // 仅获取数值地址
 let tagged = ptr.map_addr(|a| a | 1);     // 设置低位标记
 let original = tagged.with_addr(addr);    // 恢复原始地址，保留 provenance
 ```
-
 ---
 
 ## 迁移检查清单 {#迁移检查清单}

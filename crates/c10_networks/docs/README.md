@@ -1,5 +1,8 @@
 # C10 Networks 文档中心
 
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
+>
 > 适用范围：Rust 1.93.0+，Tokio 1.35+。文档风格遵循 [`STYLE.md`](STYLE.md)。
 
 **Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
@@ -301,7 +304,6 @@ API参考和规范文档：
   - 性能理论数学模型
   - 网络安全密码学基础
   - 形式化验证理论
-
 - [概念定义增强版](theory/CONCEPT_DEFINITIONS_ENHANCED.md) - 网络通信概念的全面定义和关系分析
   - 网络基础概念形式化定义
   - 通信协议概念详细解释
@@ -309,7 +311,6 @@ API参考和规范文档：
   - 安全概念属性分析
   - 形式化概念逻辑定义
   - 概念关系图和数据模型
-
 - [数学基础](theory/MATHEMATICAL_FOUNDATIONS.md) - 网络编程的数学基础
   - 概率论与随机过程
   - 数论与密码学
@@ -317,7 +318,6 @@ API参考和规范文档：
   - 信息论与编码
   - 线性代数与优化理论
   - 统计学与性能分析
-
 - [形式化证明](theory/FORMAL_PROOFS_AND_MATHEMATICAL_ARGUMENTS.md) - 形式化证明和数学论证
   - 协议正确性证明
   - 性能理论证明
@@ -325,7 +325,6 @@ API参考和规范文档：
   - 形式化方法证明
   - 数学论证工具
   - 定理证明器使用
-
 - [网络理论与通信机制](theory/NETWORK_THEORY_AND_COMMUNICATION_MECHANISMS.md) - 网络理论和通信机制
   - 网络拓扑理论
   - 协议栈理论
@@ -359,7 +358,6 @@ API参考和规范文档：
   - 基准测试（测试设计、测试工具、结果分析）
   - 优化实践（TCP优化、HTTP优化、WebSocket优化、UDP优化）
   - 案例分析（高并发Web服务器优化、实时通信系统优化、分布式系统优化、微服务架构优化）
-
 - [性能优化指南](guides/PERFORMANCE_OPTIMIZATION_GUIDE.md) - 性能优化指南
   - 异步I/O优化（Tokio运行时优化、零拷贝技术、异步流处理、事件驱动架构）
   - 内存管理优化（对象池模式、内存映射、缓存优化、垃圾回收优化）
@@ -377,7 +375,6 @@ API参考和规范文档：
   - 性能优化示例（内存优化、并发优化、网络优化、协议优化）
   - 安全示例（TLS加密通信、身份认证、访问控制、安全监控）
   - 测试示例（单元测试、集成测试、性能测试、压力测试）
-
 - [综合教程指南](tutorials/COMPREHENSIVE_TUTORIAL_GUIDE.md) - 提供完整的学习路径和教程系统
   - 第一阶段：基础入门（环境准备、网络编程基础、第一个网络程序）
   - 第二阶段：协议实现（HTTP协议、WebSocket协议、UDP协议）

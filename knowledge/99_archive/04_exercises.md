@@ -32,7 +32,6 @@ fn take_ownership(s: String) {
     println!("{}", s);
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -56,7 +55,6 @@ fn borrow_string(s: &String) {
     println!("{}", s);
 }
 ```
-
 </details>
 
 ---
@@ -80,7 +78,6 @@ fn main() {
     assert_eq!(s, "HELLO");
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -96,7 +93,6 @@ fn main() {
     println!("✓ 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -120,7 +116,6 @@ fn main() {
     println!("最长的字符串是: {}", longest(&s1, s2));
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -135,7 +130,6 @@ fn main() {
     println!("最长的字符串是: {}", longest(&s1, s2));
 }
 ```
-
 </details>
 
 ---
@@ -168,7 +162,6 @@ fn main() {
     assert_eq!(p.greet(), "你好，我是张三，今年25岁");
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -197,7 +190,6 @@ fn main() {
     println!("✓ 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -221,7 +213,6 @@ fn main() {
     assert_eq!(first_word(s2), "rust");
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -243,7 +234,6 @@ fn main() {
     println!("✓ 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -268,7 +258,6 @@ fn main() {
     assert_eq!(sum_of_even_squares(&nums), 56); // 4 + 16 + 36 = 56
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -287,7 +276,6 @@ fn main() {
     println!("✓ 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -312,7 +300,6 @@ fn main() {
     assert_eq!(counts.get("world"), Some(&1));
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -335,7 +322,6 @@ fn main() {
     println!("✓ 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -370,7 +356,6 @@ fn main() {
     assert_eq!(fib, vec![0, 1, 1, 2, 3, 5, 8, 13, 21, 34]);
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -403,7 +388,6 @@ fn main() {
     println!("✓ 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -424,7 +408,6 @@ fn main() {
     assert_eq!(sort_and_deduplicate(nums), vec![1, 2, 3, 4, 5, 6, 9]);
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -442,7 +425,6 @@ fn main() {
     println!("✓ 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -486,7 +468,6 @@ fn main() {
     assert!(good_students.contains(&&"David".to_string()));
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -528,7 +509,6 @@ fn main() {
     println!("✓ 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -557,7 +537,6 @@ fn main() {
     assert_eq!(binary_search(&words, &"cherry"), Some(2));
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -588,7 +567,6 @@ fn main() {
     println!("✓ 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -625,7 +603,6 @@ fn main() {
     assert!(parse_number("abc").is_err());
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -664,7 +641,6 @@ fn main() {
     println!("✓ 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -700,7 +676,6 @@ fn main() {
     render_all(&shapes);
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -748,7 +723,6 @@ fn main() {
     render_all(&shapes);
 }
 ```
-
 </details>
 
 ---
@@ -783,7 +757,6 @@ fn main() {
     println!("节点数: {}", graph.nodes().len());
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -827,7 +800,6 @@ fn main() {
     println!("边数: {}", graph.edges().len());
 }
 ```
-
 </details>
 
 ---
@@ -863,7 +835,6 @@ fn main() {
     assert_eq!(a * b, Complex::new(-5.0, 10.0));
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -915,7 +886,6 @@ fn main() {
     println!("✓ 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -949,7 +919,6 @@ fn main() {
     assert_eq!(*counter.lock().unwrap(), 1000);
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -980,7 +949,6 @@ fn main() {
     println!("✓ 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -1008,7 +976,6 @@ async fn main() {
     println!("获取了 {} 个响应", results.len());
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -1038,7 +1005,6 @@ async fn main() {
     }
 }
 ```
-
 </details>
 
 ---
@@ -1064,7 +1030,6 @@ fn main() {
     println!("共接收 {} 条消息", received_count);
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -1101,7 +1066,6 @@ fn main() {
     assert_eq!(received_count, 15);
 }
 ```
-
 </details>
 
 ---
@@ -1144,7 +1108,6 @@ fn main() {
     println!("缓存测试完成");
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -1197,7 +1160,6 @@ fn main() {
     println!("缓存测试完成");
 }
 ```
-
 </details>
 
 ---
@@ -1243,7 +1205,6 @@ fn main() {
     println!("任务队列测试完成");
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -1308,7 +1269,6 @@ fn main() {
     println!("任务队列测试完成");
 }
 ```
-
 </details>
 
 ---
@@ -1363,7 +1323,6 @@ fn main() {
     assert_eq!(vec.get(0), Some(&1));
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -1440,7 +1399,6 @@ fn main() {
     println!("✓ MyVec 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -1483,7 +1441,6 @@ fn main() {
     assert_eq!(map.get(&"key1"), Some(100));
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -1532,7 +1489,6 @@ fn main() {
     println!("✓ 并发 HashMap 测试通过!");
 }
 ```
-
 </details>
 
 ---
@@ -1583,7 +1539,6 @@ fn main() {
     rt.run();
 }
 ```
-
 <details>
 <summary>💡 解答</summary>
 
@@ -1655,7 +1610,6 @@ fn main() {
     rt.run();
 }
 ```
-
 </details>
 
 ---
@@ -1700,7 +1654,6 @@ fn main() {
     let _ = factorial(100000);
 }
 ```
-
 > **修正**: Rust 不优化尾递归，`factorial(100000)` 创建 10 万层栈帧，超出栈大小（通常 1-8MB），触发 `thread '<main>' has overflowed its stack` panic。
 > 解决方案：
 >
@@ -1725,7 +1678,6 @@ fn main() {
     // let product: i32 = iter.product();
 }
 ```
-
 > **修正**: Rust 的迭代器是**单次消费**的：`sum()`、`product()`、`collect()` 等终止操作（consuming adaptor）消费迭代器，之后不能再使用。
 > 某些迭代器可通过 `clone()` 复制（若底层数据 `Clone`），但通常需重新创建。
 > `into_iter()` 消费集合本身（`Vec` 被 move），之后 `v` 不可用；`iter()` 借用集合，`v` 仍可用但受借用规则限制；`iter_mut()` 可变借用。
@@ -1755,7 +1707,6 @@ fn main() {
     // ❌ 逻辑问题: 模式绑定中的变量可能被意外遮蔽，导致困惑
 }
 ```
-
 > **修正**: 模式匹配中的**绑定**（binding）：`Some(n)` 将内部值绑定到 `n`，`n` 的生命周期限于该匹配臂。
 > `match` 守卫（`if` 条件）中可使用绑定变量：`Some(n) if n > 3`。
 > 变量遮蔽在 match 臂内允许：`let n = n + 1` 创建新 `n`，不影响外部的 `n`。
@@ -1786,7 +1737,6 @@ fn main() {
     println!("value = {}, opt = {:?}", value, opt); // value = hello, opt = None
 }
 ```
-
 > **修正**: `std::mem::take` 是 `replace(&mut t, T::default())` 的便捷方法：
 > 取走值并留默认值。`Option::take` 特别常用：取走 `Some`，留 `None`。
 > `swap` 用于交换两个同类型值，`take` 用于获取值并替换为默认。
@@ -1823,7 +1773,6 @@ fn main() {
     println!("{:?}", combine());
 }
 ```
-
 > **修正**: `?` 运算符要求错误类型可转换：`Result<T, E>` 中的 `E` 必须实现 `From<InnerE>`，`Option<T>` 在返回 `Result` 的函数中不能直接用 `?`（无错误类型可转换）。
 > 转换方法：
 >
@@ -1853,7 +1802,6 @@ fn main() {
     // }
 }
 ```
-
 > **修正**: `Any` trait 提供**运行时类型反射**：`downcast_ref::<T>()` 将 `&dyn Any` 转为 `Option<&T>`。
 > 类型安全：
 >
@@ -1894,7 +1842,6 @@ fn main() {
     handle.join().unwrap();
 }
 ```
-
 > **修正**: `std::thread::spawn` 要求闭包实现 `'static`：捕获的数据必须拥有 `'static` 生命周期（或转移所有权）。
 > `move || { ... }` 强制按值捕获变量，将所有权转移到新线程。
 > 非 `move` 闭包捕获引用：`|| { println!("{:?}", v); }` 捕获 `&v`，但 `v` 在主线程栈上，新线程可能在其 drop 后访问 → 悬垂引用。
@@ -1927,7 +1874,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**: `mpsc::channel` 的关闭语义：
 >
 > 1) 所有 `Sender` drop → `Receiver::recv()` 返回 `Err(RecvError)`（Disconnected）；

@@ -161,20 +161,17 @@
 cargo check    # ✅ 无错误，无警告
 cargo build    # ✅ 编译成功
 ```
-
 ### 运行状态
 
 ```bash
 cargo run --bin c04_generic  # ✅ 正常运行
 # 输出完整的演示程序，展示所有模块功能
 ```
-
 ### 测试状态
 
 ```bash
 cargo test     # ✅ 90个测试全部通过
 ```
-
 ## 📚 文档质量
 
 ### 代码文档

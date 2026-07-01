@@ -23,12 +23,10 @@
   - 版本: 1.90+ → 1.93.0+（历史记录：1.92.0+）
   - 日期: 2025-10-30 → 2026-01-26
   - Rust 1.90 特性 → Rust 1.93.0+ 特性
-
 - ✅ `README.md`
   - 版本: 1.91.1+ → 1.93.0+（历史记录：1.92.0+）
   - 添加了 Rust 1.93.0+ 特性说明
-
-- ✅ `docs/tier_04_advanced/05_wasmedge_与新技术深入.md`
+- ✅ `docs/tier_04_advanced/05_wasmedge_and_emerging_tech.md`
   - 版本: 1.90+ → 1.93.0+（历史记录：1.92.0+）
   - 日期: 2025-10-30 → 2026-01-26
 
@@ -63,7 +61,6 @@
 ✅ cargo check --package c12_wasm
    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
 ```
-
 ### 版本一致性检查
 
 - ✅ 核心文档版本引用已统一为 1.93.0+（历史记录：1.92.0+ → 1.93.0+）

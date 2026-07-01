@@ -1,0 +1,853 @@
+﻿# 01 创建型模式指南
+
+> **文档类型**: Tier 2 - 实践指南
+> **目标读者**: 需要掌握对象创建模式的开发者
+> **预计学习时间**: 3-4小时
+> **前置知识**: Rust 基础语法、所有权系统
+
+**最后更新**: 2025-12-11
+**适用版本**: Rust 1.92.0+
+
+---
+
+## 📋 目录
+
+- [01 创建型模式指南](#01-创建型模式指南)
+  - [📋 目录](#-目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+    - [概念矩阵](#概念矩阵)
+  - [🎯 学习目标](#-学习目标)
+  - [1. Builder (建造者模式)](#1-builder-建造者模式)
+    - [1.1 基本 Builder](#11-基本-builder)
+    - [1.2 Derive Builder (使用宏)](#12-derive-builder-使用宏)
+    - [1.3 类型状态 Builder](#13-类型状态-builder)
+  - [2. Factory (工厂模式)](#2-factory-工厂模式)
+    - [2.1 简单工厂](#21-简单工厂)
+    - [2.2 工厂方法](#22-工厂方法)
+  - [3. Abstract Factory (抽象工厂)](#3-abstract-factory-抽象工厂)
+  - [4. Singleton (单例模式)](#4-singleton-单例模式)
+    - [4.1 使用 lazy\_static](#41-使用-lazy_static)
+    - [4.2 使用 once\_cell](#42-使用-once_cell)
+  - [5. Prototype (原型模式)](#5-prototype-原型模式)
+    - [5.1 使用 Clone](#51-使用-clone)
+    - [5.2 深拷贝 vs 浅拷贝](#52-深拷贝-vs-浅拷贝)
+  - [6. Object Pool (对象池)](#6-object-pool-对象池)
+  - [7. 最佳实践](#7-最佳实践)
+    - [7.1 选择合适的模式](#71-选择合适的模式)
+    - [7.2 避免过度设计](#72-避免过度设计)
+    - [7.3 利用 Rust 特性](#73-利用-rust-特性)
+  - [🔗 相关资源](#-相关资源)
+  - [**文档状态**: ✅ 完成](#文档状态--完成)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**创建型模式 (Creational Patterns)**:
+
+- **定义**: 处理对象创建的设计模式，提供创建对象的灵活方式
+- **类型**: 设计模式类别
+- **范畴**: 软件设计
+- **相关概念**: 结构型模式、行为型模式、设计模式
+
+**Builder 模式**:
+
+- **定义**: 将复杂对象的构建与其表示分离，使同样的构建过程可以创建不同的表示
+- **类型**: 创建型模式
+- **属性**: 分步构建、链式调用、类型安全
+- **关系**: 与工厂模式、原型模式相关
+
+### 属性特征
+
+**核心属性**:
+
+- **分步构建**: 允许分步骤构建复杂对象
+- **链式调用**: 支持方法链式调用
+- **类型安全**: 编译期保证构建完整性
+- **灵活性**: 支持可选参数和默认值
+
+**性能特征**:
+
+- **构建开销**: 构建过程有一定开销
+- **内存占用**: 需要额外的 Builder 对象
+- **适用场景**: 复杂对象构建、配置对象创建
+
+### 关系连接
+
+**继承关系**:
+
+- Builder 模式 --[is-a]--> 创建型模式
+- Factory 模式 --[is-a]--> 创建型模式
+
+**组合关系**:
+
+- 复杂对象 --[uses]--> Builder
+- 工厂 --[uses]--> 创建方法
+
+**依赖关系**:
+
+- 创建型模式 --[depends-on]--> 对象创建需求
+- Builder --[depends-on]--> 目标对象结构
+
+### 思维导图
+
+```text
+创建型模式
+│
+├── Builder 模式
+│   ├── 基本 Builder
+│   ├── Derive Builder
+│   └── 类型状态 Builder
+├── Factory 模式
+│   ├── 简单工厂
+│   └── 工厂方法
+├── Abstract Factory
+├── Singleton 模式
+│   ├── lazy_static
+│   └── once_cell
+├── Prototype 模式
+│   ├── Clone trait
+│   └── 深拷贝 vs 浅拷贝
+└── Object Pool
+```
+### 概念矩阵
+
+| 模式             | 复杂度 | 灵活性 | 适用场景     | 性能 |
+| :--- | :--- | :--- | :--- | :--- |
+| Builder          | 中     | 高     | 复杂对象构建 | 中   |
+| Factory          | 低     | 中     | 对象创建封装 | 高   |
+| Abstract Factory | 高     | 高     | 产品族创建   | 中   |
+| Singleton        | 低     | 低     | 单例对象     | 高   |
+| Prototype        | 中     | 中     | 对象克隆     | 中   |
+| Object Pool      | 中     | 中     | 对象复用     | 高   |
+
+---
+
+## 🎯 学习目标
+
+- ✅ 掌握 Builder 模式的 Rust 惯用实现
+- ✅ 理解工厂模式的多种变体
+- ✅ 实现线程安全的 Singleton
+- ✅ 使用 Clone trait 实现原型模式
+- ✅ 选择合适的创建型模式
+
+---
+
+## 1. Builder (建造者模式)
+
+### 1.1 基本 Builder
+
+```rust
+#[derive(Debug)]
+struct Server {
+    host: String,
+    port: u16,
+    timeout: u64,
+    max_connections: usize,
+    tls_enabled: bool,
+}
+
+// Builder 结构体
+struct ServerBuilder {
+    host: Option<String>,
+    port: Option<u16>,
+    timeout: Option<u64>,
+    max_connections: Option<usize>,
+    tls_enabled: bool,
+}
+
+impl ServerBuilder {
+    fn new() -> Self {
+        ServerBuilder {
+            host: None,
+            port: None,
+            timeout: None,
+            max_connections: None,
+            tls_enabled: false,
+        }
+    }
+
+    fn host(mut self, host: impl Into<String>) -> Self {
+        self.host = Some(host.into());
+        self
+    }
+
+    fn port(mut self, port: u16) -> Self {
+        self.port = Some(port);
+        self
+    }
+
+    fn timeout(mut self, timeout: u64) -> Self {
+        self.timeout = Some(timeout);
+        self
+    }
+
+    fn max_connections(mut self, max_connections: usize) -> Self {
+        self.max_connections = Some(max_connections);
+        self
+    }
+
+    fn enable_tls(mut self) -> Self {
+        self.tls_enabled = true;
+        self
+    }
+
+    fn build(self) -> Result<Server, String> {
+        Ok(Server {
+            host: self.host.ok_or("host is required")?,
+            port: self.port.unwrap_or(8080),
+            timeout: self.timeout.unwrap_or(30),
+            max_connections: self.max_connections.unwrap_or(100),
+            tls_enabled: self.tls_enabled,
+        })
+    }
+}
+
+fn main() {
+    let server = ServerBuilder::new()
+        .host("localhost")
+        .port(9000)
+        .enable_tls()
+        .build()
+        .unwrap();
+
+    println!("{:?}", server);
+}
+```
+### 1.2 Derive Builder (使用宏)
+
+```rust
+// 使用 derive_builder crate
+use derive_builder::Builder;
+
+#[derive(Debug, Builder)]
+#[builder(setter(into))]
+struct Database {
+    host: String,
+    port: u16,
+    #[builder(default = "String::from(\"admin\")")]
+    username: String,
+    #[builder(default = "5")]
+    pool_size: usize,
+    #[builder(default = "false")]
+    ssl: bool,
+}
+
+fn example_derive_builder() -> Result<(), Box<dyn std::error::Error>> {
+    let db = DatabaseBuilder::default()
+        .host("localhost")
+        .port(5432)
+        .pool_size(10)
+        .build()?;
+
+    println!("{:?}", db);
+    Ok(())
+}
+```
+### 1.3 类型状态 Builder
+
+```rust
+// 使用类型系统确保正确性
+struct ServerBuilder<Host, Port> {
+    host: Host,
+    port: Port,
+    timeout: u64,
+}
+
+struct NoHost;
+struct HasHost(String);
+struct NoPort;
+struct HasPort(u16);
+
+impl ServerBuilder<NoHost, NoPort> {
+    fn new() -> Self {
+        ServerBuilder {
+            host: NoHost,
+            port: NoPort,
+            timeout: 30,
+        }
+    }
+}
+
+impl<Port> ServerBuilder<NoHost, Port> {
+    fn host(self, host: impl Into<String>) -> ServerBuilder<HasHost, Port> {
+        ServerBuilder {
+            host: HasHost(host.into()),
+            port: self.port,
+            timeout: self.timeout,
+        }
+    }
+}
+
+impl<Host> ServerBuilder<Host, NoPort> {
+    fn port(self, port: u16) -> ServerBuilder<Host, HasPort> {
+        ServerBuilder {
+            host: self.host,
+            port: HasPort(port),
+            timeout: self.timeout,
+        }
+    }
+}
+
+impl<Host, Port> ServerBuilder<Host, Port> {
+    fn timeout(mut self, timeout: u64) -> Self {
+        self.timeout = timeout;
+        self
+    }
+}
+
+// 只有 Host 和 Port 都设置后才能 build
+impl ServerBuilder<HasHost, HasPort> {
+    fn build(self) -> Server {
+        Server {
+            host: self.host.0,
+            port: self.port.0,
+            timeout: self.timeout,
+            max_connections: 100,
+            tls_enabled: false,
+        }
+    }
+}
+
+fn example_typestate() {
+    let server = ServerBuilder::new()
+        .host("localhost")  // 必须调用
+        .port(8080)  // 必须调用
+        .build();
+
+    // let server = ServerBuilder::new().build(); // ❌ 编译错误
+}
+```
+---
+
+## 2. Factory (工厂模式)
+
+### 2.1 简单工厂
+
+```rust
+enum LogLevel {
+    Debug,
+    Info,
+    Warning,
+    Error,
+}
+
+trait Logger {
+    fn log(&self, message: &str);
+}
+
+struct ConsoleLogger;
+impl Logger for ConsoleLogger {
+    fn log(&self, message: &str) {
+        println!("[Console] {}", message);
+    }
+}
+
+struct FileLogger {
+    path: String,
+}
+impl Logger for FileLogger {
+    fn log(&self, message: &str) {
+        println!("[File: {}] {}", self.path, message);
+    }
+}
+
+struct SyslogLogger;
+impl Logger for SyslogLogger {
+    fn log(&self, message: &str) {
+        println!("[Syslog] {}", message);
+    }
+}
+
+// 简单工厂
+struct LoggerFactory;
+
+impl LoggerFactory {
+    fn create_logger(logger_type: &str) -> Box<dyn Logger> {
+        match logger_type {
+            "console" => Box::new(ConsoleLogger),
+            "file" => Box::new(FileLogger {
+                path: String::from("/var/log/app.log"),
+            }),
+            "syslog" => Box::new(SyslogLogger),
+            _ => Box::new(ConsoleLogger),
+        }
+    }
+}
+
+fn main() {
+    let logger = LoggerFactory::create_logger("file");
+    logger.log("Application started");
+}
+```
+### 2.2 工厂方法
+
+```rust
+// 使用 trait 定义工厂接口
+trait LoggerFactory {
+    fn create(&self) -> Box<dyn Logger>;
+}
+
+struct ConsoleLoggerFactory;
+impl LoggerFactory for ConsoleLoggerFactory {
+    fn create(&self) -> Box<dyn Logger> {
+        Box::new(ConsoleLogger)
+    }
+}
+
+struct FileLoggerFactory {
+    path: String,
+}
+impl LoggerFactory for FileLoggerFactory {
+    fn create(&self) -> Box<dyn Logger> {
+        Box::new(FileLogger {
+            path: self.path.clone(),
+        })
+    }
+}
+
+fn process_with_logger(factory: &dyn LoggerFactory) {
+    let logger = factory.create();
+    logger.log("Processing started");
+    // ... 业务逻辑
+    logger.log("Processing completed");
+}
+```
+---
+
+## 3. Abstract Factory (抽象工厂)
+
+```rust
+// UI 组件抽象
+trait Button {
+    fn render(&self) -> String;
+}
+
+trait Checkbox {
+    fn render(&self) -> String;
+}
+
+// Windows 风格
+struct WindowsButton;
+impl Button for WindowsButton {
+    fn render(&self) -> String {
+        String::from("[Windows Button]")
+    }
+}
+
+struct WindowsCheckbox;
+impl Checkbox for WindowsCheckbox {
+    fn render(&self) -> String {
+        String::from("[Windows Checkbox]")
+    }
+}
+
+// macOS 风格
+struct MacButton;
+impl Button for MacButton {
+    fn render(&self) -> String {
+        String::from("[Mac Button]")
+    }
+}
+
+struct MacCheckbox;
+impl Checkbox for MacCheckbox {
+    fn render(&self) -> String {
+        String::from("[Mac Checkbox]")
+    }
+}
+
+// 抽象工厂
+trait UIFactory {
+    fn create_button(&self) -> Box<dyn Button>;
+    fn create_checkbox(&self) -> Box<dyn Checkbox>;
+}
+
+struct WindowsUIFactory;
+impl UIFactory for WindowsUIFactory {
+    fn create_button(&self) -> Box<dyn Button> {
+        Box::new(WindowsButton)
+    }
+
+    fn create_checkbox(&self) -> Box<dyn Checkbox> {
+        Box::new(WindowsCheckbox)
+    }
+}
+
+struct MacUIFactory;
+impl UIFactory for MacUIFactory {
+    fn create_button(&self) -> Box<dyn Button> {
+        Box::new(MacButton)
+    }
+
+    fn create_checkbox(&self) -> Box<dyn Checkbox> {
+        Box::new(MacCheckbox)
+    }
+}
+
+fn render_ui(factory: &dyn UIFactory) {
+    let button = factory.create_button();
+    let checkbox = factory.create_checkbox();
+
+    println!("{}", button.render());
+    println!("{}", checkbox.render());
+}
+
+fn main() {
+    let factory: Box<dyn UIFactory> = if cfg!(target_os = "windows") {
+        Box::new(WindowsUIFactory)
+    } else {
+        Box::new(MacUIFactory)
+    };
+
+    render_ui(factory.as_ref());
+}
+```
+---
+
+## 4. Singleton (单例模式)
+
+### 4.1 使用 lazy_static
+
+```rust
+use lazy_static::lazy_static;
+use std::sync::Mutex;
+
+struct Config {
+    api_key: String,
+    max_retries: usize,
+}
+
+lazy_static! {
+    static ref CONFIG: Mutex<Config> = Mutex::new(Config {
+        api_key: String::from("default-key"),
+        max_retries: 3,
+    });
+}
+
+fn get_config() -> &'static Mutex<Config> {
+    &CONFIG
+}
+
+fn main() {
+    // 读取配置
+    {
+        let config = CONFIG.lock().unwrap();
+        println!("API Key: {}", config.api_key);
+    }
+
+    // 修改配置
+    {
+        let mut config = CONFIG.lock().unwrap();
+        config.api_key = String::from("new-key");
+    }
+}
+```
+### 4.2 使用 once_cell
+
+```rust
+use once_cell::sync::OnceCell;
+use std::sync::Mutex;
+
+struct DatabaseConnection {
+    url: String,
+}
+
+impl DatabaseConnection {
+    fn new(url: String) -> Self {
+        DatabaseConnection { url }
+    }
+
+    fn query(&self, sql: &str) {
+        println!("Querying '{}' on {}", sql, self.url);
+    }
+}
+
+static DB: OnceCell<Mutex<DatabaseConnection>> = OnceCell::new();
+
+fn get_db() -> &'static Mutex<DatabaseConnection> {
+    DB.get_or_init(|| {
+        Mutex::new(DatabaseConnection::new(
+            String::from("postgres://localhost:5432"),
+        ))
+    })
+}
+
+fn main() {
+    let db = get_db();
+    let conn = db.lock().unwrap();
+    conn.query("SELECT * FROM users");
+}
+```
+---
+
+## 5. Prototype (原型模式)
+
+### 5.1 使用 Clone
+
+```rust
+#[derive(Clone)]
+struct Document {
+    title: String,
+    content: String,
+    metadata: Vec<(String, String)>,
+}
+
+impl Document {
+    fn new(title: String, content: String) -> Self {
+        Document {
+            title,
+            content,
+            metadata: Vec::new(),
+        }
+    }
+
+    fn add_metadata(&mut self, key: String, value: String) {
+        self.metadata.push((key, value));
+    }
+}
+
+fn main() {
+    // 创建原型
+    let mut template = Document::new(
+        String::from("Template"),
+        String::from("Default content"),
+    );
+    template.add_metadata(String::from("author"), String::from("System"));
+
+    // 克隆原型
+    let mut doc1 = template.clone();
+    doc1.title = String::from("Document 1");
+
+    let mut doc2 = template.clone();
+    doc2.title = String::from("Document 2");
+}
+```
+### 5.2 深拷贝 vs 浅拷贝
+
+```rust
+use std::rc::Rc;
+
+#[derive(Clone)]
+struct Config {
+    name: String,
+    shared_data: Rc<Vec<u8>>,  // 浅拷贝
+}
+
+impl Config {
+    fn deep_clone(&self) -> Self {
+        Config {
+            name: self.name.clone(),
+            shared_data: Rc::new((*self.shared_data).clone()),  // 深拷贝
+        }
+    }
+}
+
+fn main() {
+    let config1 = Config {
+        name: String::from("Config1"),
+        shared_data: Rc::new(vec![1, 2, 3]),
+    };
+
+    // 浅拷贝：共享 shared_data
+    let config2 = config1.clone();
+    println!("Rc count: {}", Rc::strong_count(&config1.shared_data)); // 2
+
+    // 深拷贝：独立的 shared_data
+    let config3 = config1.deep_clone();
+    println!("Rc count: {}", Rc::strong_count(&config3.shared_data)); // 1
+}
+```
+---
+
+## 6. Object Pool (对象池)
+
+```rust
+use std::collections::VecDeque;
+use std::sync::{Arc, Mutex};
+
+struct Connection {
+    id: usize,
+}
+
+impl Connection {
+    fn execute(&self, query: &str) {
+        println!("Connection {}: {}", self.id, query);
+    }
+}
+
+struct ConnectionPool {
+    available: Arc<Mutex<VecDeque<Connection>>>,
+    size: usize,
+}
+
+impl ConnectionPool {
+    fn new(size: usize) -> Self {
+        let mut pool = VecDeque::new();
+        for id in 0..size {
+            pool.push_back(Connection { id });
+        }
+
+        ConnectionPool {
+            available: Arc::new(Mutex::new(pool)),
+            size,
+        }
+    }
+
+    fn acquire(&self) -> Option<PooledConnection> {
+        let mut pool = self.available.lock().unwrap();
+        pool.pop_front().map(|conn| PooledConnection {
+            conn: Some(conn),
+            pool: self.available.clone(),
+        })
+    }
+}
+
+struct PooledConnection {
+    conn: Option<Connection>,
+    pool: Arc<Mutex<VecDeque<Connection>>>,
+}
+
+impl PooledConnection {
+    fn execute(&self, query: &str) {
+        if let Some(ref conn) = self.conn {
+            conn.execute(query);
+        }
+    }
+}
+
+impl Drop for PooledConnection {
+    fn drop(&mut self) {
+        if let Some(conn) = self.conn.take() {
+            self.pool.lock().unwrap().push_back(conn);
+        }
+    }
+}
+
+fn main() {
+    let pool = ConnectionPool::new(3);
+
+    {
+        let conn1 = pool.acquire().unwrap();
+        conn1.execute("SELECT 1");
+
+        let conn2 = pool.acquire().unwrap();
+        conn2.execute("SELECT 2");
+    } // conn1 和 conn2 归还到池中
+
+    let conn3 = pool.acquire().unwrap();
+    conn3.execute("SELECT 3");
+}
+```
+---
+
+## 7. 最佳实践
+
+### 7.1 选择合适的模式
+
+```rust
+// ✅ Builder: 多个可选参数
+let server = ServerBuilder::new()
+    .host("localhost")
+    .port(8080)
+    .timeout(60)
+    .build()?;
+
+// ✅ Factory: 运行时决定类型
+let logger = LoggerFactory::create_logger(&config.logger_type);
+
+// ✅ Singleton: 全局唯一实例
+let db = get_db();
+
+// ✅ Prototype: 需要克隆对象
+let new_doc = template.clone();
+
+// ✅ Object Pool: 昂贵对象复用
+let conn = pool.acquire();
+```
+### 7.2 避免过度设计
+
+```rust
+// ❌ 不必要的工厂
+struct SimpleConfig {
+    value: i32,
+}
+
+trait ConfigFactory {
+    fn create() -> SimpleConfig;
+}
+// 过于复杂！
+
+// ✅ 直接构造
+let config = SimpleConfig { value: 42 };
+```
+### 7.3 利用 Rust 特性
+
+```rust
+// ✅ 使用 trait 实现多态
+trait Shape {
+    fn draw(&self);
+}
+
+// ✅ 使用 enum 替代多个子类
+enum Shape {
+    Circle { radius: f64 },
+    Rectangle { width: f64, height: f64 },
+}
+
+impl Shape {
+    fn area(&self) -> f64 {
+        match self {
+            Shape::Circle { radius } => std::f64::consts::PI * radius * radius,
+            Shape::Rectangle { width, height } => width * height,
+        }
+    }
+}
+```
+---
+
+## 🔗 相关资源
+
+**内部文档**:
+
+- [结构型模式指南](02_structural_patterns_guide.md) - 下一步
+- [行为型模式指南](03_behavioral_patterns_guide.md) - 进阶
+- [详细模式](../patterns) - 完整参考
+
+**外部资源**:
+
+- 🦀 [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/)
+- 📘 [Design Patterns (GoF)](https://en.wikipedia.org/wiki/Design_Patterns)
+- 🌐 [Refactoring.Guru](https://refactoring.guru/design-patterns)
+
+**相关 Crate**:
+
+- `derive_builder` - Builder 模式宏
+- `lazy_static` / `once_cell` - 延迟初始化
+- `r2d2` - 通用对象池
+
+---
+
+**返回**: [Tier 2 索引](README.md) | **下一步**: [结构型模式指南](02_structural_patterns_guide.md)
+
+---
+
+**文档维护**: Documentation Team
+**创建日期**: 2025-10-23
+**文档状态**: ✅ 完成
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -67,7 +67,6 @@ Cargo 通过以下机制与第三方工具集成：
 cargo hello
 # 等价于执行 cargo-hello hello [args...]
 ```
-
 Cargo 调用时会传入：
 
 - 第一个参数：子命令可执行文件本身路径；
@@ -82,7 +81,6 @@ cargo install cargo-hello
 
 # 安装后通常位于 ~/.cargo/bin
 ```
-
 ### 别名
 
 在 `.cargo/config.toml` 中定义别名：
@@ -93,7 +91,6 @@ b = "build"
 t = "test"
 fmt-check = "fmt -- --check"
 ```
-
 ---
 
 ## 三、`cargo metadata` 与 JSON 消息
@@ -103,7 +100,6 @@ fmt-check = "fmt -- --check"
 ```bash
 cargo metadata --format-version 1 --no-deps
 ```
-
 输出包括：
 
 - package 名称、版本、路径；
@@ -119,7 +115,6 @@ Rust 生态中常用 `cargo_metadata` crate 解析该输出。
 ```bash
 cargo build --message-format=json
 ```
-
 JSON 消息类型：
 
 | `reason` | 说明 |
@@ -168,7 +163,6 @@ fn main() {
     // 使用 cargo metadata 获取信息...
 }
 ```
-
 ---
 
 ## 嵌入式测验

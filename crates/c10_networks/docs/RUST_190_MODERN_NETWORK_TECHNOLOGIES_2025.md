@@ -66,7 +66,6 @@ io_uring 模型:
 应用程序 ↔ 共享内存环 ↔ 内核 ↔ 硬件
          (零/少量系统调用，批量处理)
 ```
-
 ### 2. tokio-uring 实战
 
 ````rust
@@ -235,7 +234,6 @@ pub fn demo_tokio_uring() -> Result<()> {
     Ok(())
 }
 ````
-
 ### 3. Monoio 运行时 (字节跳动)
 
 ````rust
@@ -364,7 +362,6 @@ pub fn demo_monoio() -> std::io::Result<()> {
     Ok(())
 }
 ````
-
 ### 4. Glommio 运行时 (Datadog)
 
 ````rust
@@ -499,7 +496,6 @@ pub fn demo_glommio() -> std::io::Result<()> {
     Ok(())
 }
 ````
-
 ---
 
 ## 零拷贝技术深入
@@ -634,7 +630,6 @@ pub fn demo_zero_copy_comparison() -> io::Result<()> {
     ZeroCopyComparison::run_comparison("test_zero_copy.dat")
 }
 ```
-
 ### 2. sendfile 系统调用
 
 ```rust
@@ -692,7 +687,6 @@ impl SendfileServer {
     }
 }
 ```
-
 ### 3. io_uring 零拷贝
 
 ```rust
@@ -737,7 +731,6 @@ impl UringZeroCopy {
     }
 }
 ```
-
 ### 4. mmap 内存映射
 
 ```rust
@@ -824,7 +817,6 @@ pub fn demo_mmap() -> io::Result<()> {
     Ok(())
 }
 ```
-
 ---
 
 ## HTTP/3 和 QUIC 深入
@@ -1047,7 +1039,6 @@ pub async fn demo_http3() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ````
-
 ### 2. QUIC 高级特性
 
 ```rust
@@ -1172,7 +1163,6 @@ pub async fn demo_quic_advanced() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ---
 
 ## 内核旁路和高性能包处理
@@ -1275,7 +1265,6 @@ pub fn demo_af_xdp() {
     AfXdpProcessor::performance_comparison();
 }
 ````
-
 ### 2. eBPF 网络监控
 
 ````rust
@@ -1380,7 +1369,6 @@ pub fn demo_ebpf() {
     EbpfNetworkMonitor::rust_toolchain();
 }
 ````
-
 ---
 
 ## 综合实战：高性能文件服务器
@@ -1544,7 +1532,6 @@ pub fn demo_high_performance_server() -> std::io::Result<()> {
     Ok(())
 }
 ```
-
 ---
 
 ## 性能对比分析
@@ -1641,7 +1628,6 @@ pub fn demo_performance_comparison() {
     println!("   • 游戏服务器");
 }
 ```
-
 ---
 
 ## 📚 技术选型指南
@@ -1714,7 +1700,6 @@ pub fn demo_technology_selection() {
     TechnologySelector::recommend();
 }
 ```
-
 ---
 
 ## 🔗 相关依赖配置
@@ -1758,7 +1743,6 @@ anyhow = "1.0"               # 错误传播
 io-uring = "0.6"             # 底层 io_uring 绑定
 xsk-rs = "0.2"               # AF_XDP Rust 绑定
 ```
-
 ---
 
 ## 🎯 学习路径
@@ -1769,7 +1753,6 @@ xsk-rs = "0.2"               # AF_XDP Rust 绑定
    - 阅读原理部分
    - 运行 tokio-uring 示例
    - 对比传统 I/O
-
 2. **掌握零拷贝技术**
    - sendfile 实践
    - mmap 文件映射
@@ -1781,7 +1764,6 @@ xsk-rs = "0.2"               # AF_XDP Rust 绑定
    - 搭建 HTTP/3 服务器
    - 理解 0-RTT 和连接迁移
    - 性能调优
-
 2. **选择运行时**
    - Monoio 实践
    - Glommio 实践
@@ -1793,7 +1775,6 @@ xsk-rs = "0.2"               # AF_XDP Rust 绑定
    - AF_XDP 原理学习
    - eBPF 网络监控
    - 高性能包处理
-
 2. **生产级优化**
    - 构建高性能服务器
    - 性能基准测试

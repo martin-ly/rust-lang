@@ -10,11 +10,11 @@
 
 | 序号 | 文档 | 内容 | 行数 | 难度 | 状态 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1    | [01\_形式化设计模式理论.md](01_形式化设计模式理论.md)     | 类型理论、范畴论、Curry-Howard 同构 | 1116 | ⭐⭐⭐⭐⭐ | ✅   |
-| 2    | [02\_架构模式演进.md](02_架构模式演进.md)                 | 分层、微服务、事件驱动、CQRS        | 958  | ⭐⭐⭐⭐   | ✅   |
-| 3    | [03\_元编程与生成式模式.md](03_元编程与生成式模式.md)     | 宏、过程宏、代码生成                | 652  | ⭐⭐⭐⭐   | ✅   |
-| 4    | [04\_工程实践与生产级模式.md](04_工程实践与生产级模式.md) | 可观测性、弹性、性能、安全          | 1227 | ⭐⭐⭐⭐⭐ | ✅   |
-| 5    | [05\_前沿研究与创新模式.md](05_前沿研究与创新模式.md)     | Effect 系统、代数效应、能力安全     | 978  | ⭐⭐⭐⭐⭐ | ✅   |
+| 1    | [01\_形式化设计模式理论.md](01_formal_design_pattern_theory.md)     | 类型理论、范畴论、Curry-Howard 同构 | 1116 | ⭐⭐⭐⭐⭐ | ✅   |
+| 2    | [02\_架构模式演进.md](02_architectural_pattern_evolution.md)                 | 分层、微服务、事件驱动、CQRS        | 958  | ⭐⭐⭐⭐   | ✅   |
+| 3    | [03\_元编程与生成式模式.md](03_metaprogramming_and_generative_patterns.md)     | 宏、过程宏、代码生成                | 652  | ⭐⭐⭐⭐   | ✅   |
+| 4    | [04\_工程实践与生产级模式.md](04_engineering_and_production_patterns.md) | 可观测性、弹性、性能、安全          | 1227 | ⭐⭐⭐⭐⭐ | ✅   |
+| 5    | [05\_前沿研究与创新模式.md](05_frontier_research_and_innovative_patterns.md)     | Effect 系统、代数效应、能力安全     | 978  | ⭐⭐⭐⭐⭐ | ✅   |
 
 **总计**: 5 篇核心文档，约 4,931 行（统计基于当前文件行数）
 
@@ -61,10 +61,10 @@
 
 **快速参考**:
 
-- [项目概览](../tier_01_foundations/01_项目概览.md) - 模块介绍、学习路径
-- [主索引导航](../tier_01_foundations/02_主索引导航.md) - 完整导航系统
-- [术语表](../tier_01_foundations/03_术语表.md) - 核心术语参考
-- [常见问题](../tier_01_foundations/04_常见问题.md) - FAQ 解答
+- [项目概览](../tier_01_foundations/01_project_overview.md) - 模块介绍、学习路径
+- [主索引导航](../tier_01_foundations/02_navigation.md) - 完整导航系统
+- [术语表](../tier_01_foundations/03_glossary.md) - 核心术语参考
+- [常见问题](../tier_01_foundations/04_faq.md) - FAQ 解答
 
 ---
 

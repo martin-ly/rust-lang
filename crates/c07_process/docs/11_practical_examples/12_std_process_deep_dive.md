@@ -5,7 +5,7 @@
 
 ---
 
-**内容已整合至**：[01_进程模型参考](../tier_03_references/01_进程模型参考.md) | [01_进程模型与生命周期](../01_process_model_and_lifecycle.md)
+**内容已整合至**：[01_进程模型参考](../tier_03_references/01_process_models_reference.md) | [01_进程模型与生命周期](../01_process_model_and_lifecycle.md)
 
 **相关**: [11_practical_examples](11_practical_examples.md)
 ---

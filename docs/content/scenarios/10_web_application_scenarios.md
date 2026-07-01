@@ -52,7 +52,6 @@ graph TD
     style D fill:#87CEEB
     style E fill:#DDA0DD
 ```
-
 ---
 
 ## 📊 RESTful API 场景 {#restful-api-场景}
@@ -115,7 +114,6 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
     })
 }
 ```
-
 ---
 
 ## 🔗 相关文档 {#相关文档}

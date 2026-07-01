@@ -72,7 +72,6 @@ fn main() -> Result<()> {
     Ok(())
 }
 ```
-
 **关键决策**:
 
 - CLI: `clap` v4（derive 宏，自动 help/completion）
@@ -132,7 +131,6 @@ fn lint_file(source: &str) -> Vec<String> {
     visitor.errors
 }
 ```
-
 **关键决策**:
 
 - AST 解析: `syn`（Rust 官方 proc-macro 生态）
@@ -178,7 +176,6 @@ where
     );
 }
 ```
-
 **关键决策**:
 
 - 工具: `hyperfine`（命令行）或 `criterion`（库）

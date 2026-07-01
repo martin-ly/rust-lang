@@ -15,7 +15,6 @@
 ---
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Scala Documentation](https://docs.scala-lang.org/) · [Scala Book](https://docs.scala-lang.org/scala3/book/introduction.html) · [Wikipedia — Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
 ## 📑 目录
@@ -106,7 +105,6 @@
         iter.map(f)
     }
 ```
-
 > **类型洞察**: **Scala 的类型系统（Type System）更表达丰富（HKT），Rust 的类型系统更安全（所有权）**——两者代表了不同的设计哲学。
 > [来源: [Scala Type System](https://docs.scala-lang.org/scala3/book/types-introduction.html)]
 
@@ -154,7 +152,6 @@
   ├── Scala 有 extractors 自定义模式
   └── Rust 的 match 是表达式（返回值）
 ```
-
 > **匹配洞察**: **Scala 的模式匹配更灵活，Rust 的模式匹配更高效**——两者都提供编译期穷尽性检查。
 > [来源: [Scala Pattern Matching](https://docs.scala-lang.org/tour/pattern-matching.html)]
 
@@ -201,7 +198,6 @@
         a + b
     }
 ```
-
 > **并发洞察**: **Scala 的 Actor 模型适合分布式，Rust 的所有权模型适合系统级**——两者各有主战场。
 > [来源: [Akka](https://akka.io/)]
 
@@ -236,7 +232,6 @@
   ├── Rust 类型通常明确
   └── 两者推断能力都强
 ```
-
 > **推断洞察**: **Scala 的类型推断更学术化，Rust 的类型推断更工程化**——两者都减少样板代码。
 > [来源: [Scala Type Inference](https://docs.scala-lang.org/scala3/book/types-inferred.html)]
 
@@ -287,7 +282,6 @@
   ├── Rust 无隐式转换（安全但啰嗦）
   └── Scala 3 改为 given/using 更明确
 ```
-
 > **隐式洞察**: **Scala 的隐式是"魔法"，Rust 的 Trait 是"契约"**——Rust 更强调显式性。
 > [来源: [Scala 3 Given](https://docs.scala-lang.org/scala3/book/ca-given-using-clauses.html)]
 
@@ -334,7 +328,6 @@
   ├── Rust 宏更易用
   └── Scala 3 inline 简化了部分用例
 ```
-
 > **宏（Macro）洞察**: **Scala 宏更强大但复杂，Rust 宏更简单但受限**——两者适合不同的元编程场景。
 > [来源: [Scala Macros](https://docs.scala-lang.org/scala3/guides/macros/macros.html)]
 
@@ -368,7 +361,6 @@
   ├── Rust 编译中等（单态化）
   └── Scala 启动慢（JVM 预热）
 ```
-
 > **构建洞察**: **Rust 的 Cargo 比 Scala 的 sbt 更易用**——统一工具链减少了配置负担。
 > [来源: [sbt](https://www.scala-sbt.org/)]
 
@@ -406,7 +398,6 @@
   ├── 系统级控制
   └── WebAssembly 优势
 ```
-
 > **互操作洞察**: **Scala 是 JVM 生态的"最佳公民"，Rust 是系统编程的"通用胶水"**。
 > [来源: [Scala Interop](https://docs.scala-lang.org/scala3/book/interacting-with-java.html)]
 
@@ -430,7 +421,6 @@ graph TD
     style SCALA fill:#c8e6c9
     style RUST fill:#c8e6c9
 ```
-
 > **认知功能**: **高阶类型/大数据选 Scala，内存安全（Memory Safety）/系统编程选 Rust**——两者在不同领域不可替代。
 > [来源: [Scala vs Rust Discussion](https://users.scala-lang.org/)]
 
@@ -465,7 +455,6 @@ graph TD
 ├── Rust: 系统编程背景
 └── 培训成本不同
 ```
-
 > **边界要点**: Rust vs Scala 的边界与**学习曲线**、**编译时间**、**性能**、**生态**和**团队**相关。
 > [来源: [Scala Documentation](https://docs.scala-lang.org/)]
 
@@ -510,7 +499,6 @@ graph TD
   ✅ 保持简单
      // KISS 原则
 ```
-
 > **陷阱总结**: Rust vs Scala 的陷阱主要与**风格模仿**、**隐式**、**JVM 开销**和**过度抽象**相关。
 
 ---
@@ -534,7 +522,6 @@ fn main() {
     println!("{}", msg);
 }
 ```
-
 ## 相关概念文件
 
 - [Ownership](../01_foundation/01_ownership.md) — 所有权
@@ -595,7 +582,6 @@ fn fixed() {
     let json = x.to_json(); // ✅ i32 实现了 ToJson
 }
 ```
-
 > **Scala 对比**: Scala 的隐式转换（`implicit def`）允许自动将 `Int` 转为 `JsonValue`。Rust 禁止隐式转换——必须显式 `impl Trait for Type`。Scala 的隐式解析在编译期执行，但可能导致意外转换和难以追踪的编译错误。Rust 的显式实现确保每个类型转换都是设计者的有意选择，错误信息更精确。这与 Scala 3 的 `given`/`using`（显式隐式）方向一致——Rust 从一开始就选择了显式路径。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Scala 的 null 与 Rust 的 Option（编译错误）
@@ -616,7 +602,6 @@ fn fixed() {
     }
 }
 ```
-
 > **Scala 对比**: Scala 运行在 JVM 上，与 Java 互操作，因此存在 `null`（`String = null`）。Scala 推荐使用 `Option[T]`，但无法完全禁止 `null`。Rust 没有 `null`——引用（Reference）类型（`&T`、`Box<T>`）永远指向有效内存，`Option<T>` 是唯一的可空表示。这消除了 NullPointerException 的整个类别，是 Rust 相对于 JVM 语言的核心安全优势。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：Scala 的隐式转换与 Rust 的显式 `From`/`Into`（编译错误）
@@ -642,7 +627,6 @@ fn main() {
     println!("{}", m.0);
 }
 ```
-
 > **修正**: Scala 的**隐式转换**（implicit conversions）允许编译器在类型不匹配时自动插入转换函数：`implicit def kmToM(k: Kilometers): Meters = Meters(k.value * 1000)`。这提供了极大的便利性（如 `5.km` 自动转为 `Meters`），但也导致难以追踪的编译错误（隐式解析失败时的错误信息复杂）和意外行为（不期望的转换被应用）。Rust 的 `From`/`Into` trait 要求**显式** `.into()` 调用，转换点一目了然。这与 C++ 的隐式转换构造函数（单参数构造函数自动成为转换）或 Go 的无转换（必须显式）不同——Rust 选择了 Go 的显式路径，但提供了 `From`/`Into` 的标准化转换接口。Scala 3 的 `given`/`using` 替代了 `implicit`，但隐式转换仍存在（需显式导入）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)] · [来源: [Scala Implicit Conversions](https://docs.scala-lang.org/scala3/reference/contextual/conversions.html)]
 
 ### 10.4 边界测试：Scala 的 actor 模型与 Rust 的 async/channel 的并发模型差异（运行时死锁）
@@ -664,7 +648,6 @@ async fn actor_style() {
     println!("{}", msg);
 }
 ```
-
 > **修正**: Scala/Akka 的 **Actor 模型** 中，每个 actor 有独立的邮箱和单线程执行上下文，消息发送是 fire-and-forget，actor 按顺序处理消息。Rust 的 `tokio::sync::mpsc` 只是**通道**（channel）：发送和接收是显式操作，无内置的 actor 语义。在 Rust 中实现 actor：1) 用 `tokio::spawn` 创建任务作为 actor；2) 用 `mpsc` 作为邮箱；3) 在任务循环中 `recv().await` 处理消息。这比 Akka 更底层但更灵活：无 actor 层次监督（supervision）、无路由（routing）、无持久化（persistence）。`actix` crate 提供了 Rust 的 actor 框架，但不如 Akka 成熟。这与 Erlang/Elixir 的 OTP（成熟的 actor 框架）或 Go 的 CSP（channel + goroutine，类似 Rust）类似——Rust 的并发原语是底层的，高层抽象由库提供。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Akka Actor Model](https://doc.akka.io/docs/akka/current/typed/actors.html)]
 
 ### 10.3 边界测试：Scala 的隐式转换与 Rust 的显式类型安全（编译错误）
@@ -682,7 +665,6 @@ fn main() {
     let f: Feet = m;
 }
 ```
-
 > **修正**: Rust **禁止隐式类型转换**（除少数自动强制：`&T` → `&U` 若 `T: U`、`&mut T` → `&T`、`T` → `U` 若 `T: Into<U>` 但在特定上下文）。`Meters` 和 `Feet` 是不同的类型，即使语义相关，也不能直接赋值。显式转换：1) `impl From<Meters> for Feet` + `let f: Feet = m.into()`；2) `impl Into<Feet> for Meters`；3) 解构：`let Feet(f) = m.into()`。Scala 的隐式转换（`implicit def` / `given` / `using`）允许库作者定义自动转换，但可能导致"隐式解析地狱"（编译时间长、错误信息难读）。Rust 的设计哲学：**显式优于隐式**。这与 C++ 的转换构造函数（单参数构造函数隐式调用）或 Go 的接口实现（隐式满足接口）不同——Rust 的显式转换使代码更易读、错误更易定位。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ## 嵌入式测验（Embedded Quiz）
@@ -758,9 +740,7 @@ Rust 要求函数签名通常显式标注类型（生命周期（Lifetimes）和
 | Rust vs Scala：类型系统的两种哲学 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 Rust vs Scala：类型系统的两种哲学 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 Rust vs Scala：类型系统的两种哲学 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: Rust vs Scala：类型系统的两种哲学 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

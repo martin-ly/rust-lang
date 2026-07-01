@@ -12,7 +12,6 @@
 # cargo-semver-checks 集成指南 {#cargo-semver-checks-集成指南}
 
 > **Bloom 层级**: L2-L3 (理解/应用)
-
 > 本文档对应 Rust 生产级工程实践体系阶段三 —— API 兼容性保护。
 > 参考: Rust Foundation API 兼容性指南、Microsoft 版本管理规范。
 
@@ -97,7 +96,6 @@ cargo install cargo-semver-checks --locked
 # 验证安装 {#验证安装}
 cargo semver-checks --version
 ```
-
 > **注意**: 如果当前环境无法安装，此步骤标记为 "待 CI 验证"。CI 环境已配置自动安装。
 
 ---
@@ -114,7 +112,6 @@ cargo semver-checks --version
 cd crates/c10_networks
 cargo semver-checks
 ```
-
 ### 检查 workspace 中的特定 crate {#检查-workspace-中的特定-crate}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -122,7 +119,6 @@ cargo semver-checks
 ```bash
 cargo semver-checks -p c10_networks
 ```
-
 ### 与 baseline 版本比较 {#与-baseline-版本比较}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -137,7 +133,6 @@ cargo semver-checks -p c10_networks --baseline-rev v0.1.0
 # 与另一个分支比较 {#与另一个分支比较}
 cargo semver-checks -p c10_networks --baseline-rev main
 ```
-
 ### 本地开发工作流 {#本地开发工作流}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -152,7 +147,6 @@ cargo semver-checks
 # 4. 如果是 breaking change，更新 MAJOR 版本号 {#4-如果是-breaking-change更新-major-版本号}
 # 5. 如果只是误报，记录原因 {#5-如果只是误报记录原因}
 ```
-
 ---
 
 ## 4. CI 集成 {#4-ci-集成}
@@ -180,7 +174,6 @@ semver-checks:
     - name: Run semver checks
       run: cargo semver-checks --workspace
 ```
-
 ### CI 策略 {#ci-策略}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -206,7 +199,6 @@ pub struct Config {
     pub new_field: u32, // ✅ 这是 MINOR 变更，semver-checks 不会报告
 }
 ```
-
 ### 场景 2: 有意进行 breaking change（MAJOR 版本升级） {#场景-2-有意进行-breaking-changemajor-版本升级}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -216,7 +208,6 @@ pub struct Config {
 cargo semver-checks --baseline-version 0.1.0
 # 如果当前版本是 1.0.0，则 breaking change 是预期的 {#如果当前版本是-100则-breaking-change-是预期的}
 ```
-
 ### 场景 3: 内部 API 被误判 {#场景-3-内部-api-被误判}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -226,7 +217,6 @@ cargo semver-checks --baseline-version 0.1.0
 #[doc(hidden)]
 pub fn __internal_helper() {} // semver-checks 会忽略此项
 ```
-
 ---
 
 ## 6. 最佳实践 {#6-最佳实践}

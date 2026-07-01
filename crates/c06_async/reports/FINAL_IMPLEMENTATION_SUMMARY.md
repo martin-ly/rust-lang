@@ -49,12 +49,10 @@
   - Tokio：生产级异步运行时
   - async-std [已归档]：标准库兼容的异步运行时
   - smol：轻量级高性能异步运行时
-
 - **集成框架层面分析**：
   - 运行时共性分析
   - 多运行时集成模式
   - 异步同步转换机制
-
 - **聚合组合设计模式**：
   - 适配器模式
   - 装饰器模式
@@ -67,12 +65,10 @@
   - `AsyncExecutionFlowManager`：管理异步执行流程
   - `ExecutionFlow`：跟踪完整的执行流程
   - `ExecutionStep`：跟踪单个执行步骤
-
 - **性能监控**：
   - `AsyncPerformanceMonitor`：实时性能指标收集
   - 系统资源监控
   - 任务执行时间统计
-
 - **调试工具**：
   - `AsyncDebugDecorator`：自动化调试装饰器
   - `ExecutionFlowVisualizer`：执行流可视化
@@ -85,12 +81,10 @@
   - `AsyncRuntime`：统一的运行时抽象
   - `AsyncRuntimeManager`：运行时管理器
   - 支持Tokio和Smol运行时
-
 - **任务包装和装饰**：
   - `AsyncTaskWrapper`：任务包装器
   - `AsyncLogger`：异步日志记录器
   - 自动性能监控
-
 - **异步同步转换**：
   - `AsyncSyncConverter`：异步同步转换器
   - 跨运行时任务转换
@@ -102,12 +96,10 @@
   - `AsyncTaskTracker`：异步任务跟踪器
   - `StructuredLogger`：结构化日志记录器
   - 上下文传播
-
 - **性能监控**：
   - `AsyncPerformanceMonitor`：性能监控器
   - 实时指标收集
   - 性能报告生成
-
 - **本地调试工具**：
   - `LocalDebugger`：本地调试器
   - 断点管理
@@ -152,7 +144,6 @@ crates/c06_async/
 ├── Cargo.toml                                    # 依赖配置
 └── README.md                                     # 项目说明
 ```
-
 ## 依赖管理
 
 项目使用了以下关键依赖：
@@ -183,7 +174,6 @@ let task_id = tracker.start_task(
 // 执行任务...
 tracker.complete_task(&task_id).await?;
 ```
-
 ### 2. 高级执行流跟踪
 
 ```rust
@@ -209,7 +199,6 @@ let step_id = flow_manager.start_step(
 flow_manager.complete_step(&flow_id, &step_id).await?;
 flow_manager.complete_flow(&flow_id).await?;
 ```
-
 ### 3. 多运行时集成
 
 ```rust
@@ -230,7 +219,6 @@ let result = runtime_manager.spawn_task(
     Some("tokio".to_string()),
 ).await?;
 ```
-
 ## 性能特点
 
 - **低开销**：最小化运行时开销

@@ -97,7 +97,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-| 特性 | Box<T> | Rc<T> | Arc<T> |
+| 特性 | `Box<T>` | `Rc<T>` | `Arc<T>` |
 | :--- | :--- | :--- | :--- |
 | **所有权** | 唯一 | 共享 | 共享 |
 | **线程安全** | ✅ | ❌ | ✅ |
@@ -112,7 +112,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-| 特性 | Cell<T> | RefCell<T> | Mutex<T> | RwLock<T> |
+| 特性 | `Cell<T>` | `RefCell<T>` | `Mutex<T>` | `RwLock<T>` |
 | :--- | :--- | :--- | :--- | :--- |
 | **线程安全** | ❌ | ❌ | ✅ | ✅ |
 | **检查时机** | 编译时 | 运行时 | 运行时 | 运行时 |

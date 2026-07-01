@@ -1,7 +1,6 @@
 # Nix 设置指南 {#nix-设置指南}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
 
@@ -36,7 +35,6 @@
   ```bash
   echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
   ```
-
 ## 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -48,7 +46,6 @@
 ```bash
 nix develop
 ```
-
 这将自动加载配置好的 Rust 工具链和开发工具。
 
 ### 使用 direnv（推荐） {#使用-direnv推荐}
@@ -60,14 +57,12 @@ nix develop
    ```bash
    nix profile install nixpkgs#direnv nixpkgs#nix-direnv
    ```
-
 2. 在项目根目录执行:
 
    ```bash
    echo "use flake" > .envrc
    direnv allow
    ```
-
 3. 以后进入项目目录时，开发环境会自动加载。
 
 ## 环境特性 {#环境特性}
@@ -104,7 +99,6 @@ nix develop
 sccache --stop-server
 sccache --start-server
 ```
-
 ### 更新依赖 {#更新依赖}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -114,7 +108,6 @@ sccache --start-server
 ```bash
 nix flake update
 ```
-
 ## 参考 {#参考}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -150,17 +143,10 @@ nix flake update
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

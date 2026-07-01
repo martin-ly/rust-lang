@@ -122,7 +122,6 @@ graph TB
     style L3A fill:#fff5e1
     style L4A fill:#f5e1ff
 ```
-
 ## 🔷 第1层：基础概念关系网络
 
 ### 1.1 所有权核心关系
@@ -181,7 +180,6 @@ graph TB
     style R3 fill:#fff5e1
     style R4 fill:#f5e1ff
 ```
-
 ### 1.2 借用关系网络
 
 ```mermaid
@@ -241,7 +239,6 @@ graph TB
     style Check fill:#fff5e1
     style Pattern fill:#f5e1ff
 ```
-
 ### 1.3 生命周期关系网络
 
 ```mermaid
@@ -314,7 +311,6 @@ graph TB
     style Elision fill:#e1f5ff
     style Bound fill:#f5e1ff
 ```
-
 ## 🔶 第2层：机制层关系网络
 
 ### 2.1 Move语义关系网络
@@ -394,7 +390,6 @@ graph TB
     style Effect fill:#fff5e1
     style Optimize fill:#f5e1ff
 ```
-
 ### 2.2 借用检查器关系网络
 
 ```mermaid
@@ -486,7 +481,6 @@ graph TB
     style Output fill:#fff5e1
     style Optimize fill:#f5e1ff
 ```
-
 ### 2.3 Drop机制关系网络
 
 ```mermaid
@@ -567,7 +561,6 @@ graph TB
     style Trait fill:#e1f5ff
     style Special fill:#f5e1ff
 ```
-
 ## 🔸 第3层：抽象层关系网络
 
 ### 3.1 智能指针关系网络
@@ -673,7 +666,6 @@ graph TB
     style Relation fill:#e1f5ff
     style Usage fill:#fff5e1
 ```
-
 ### 3.2 闭包与所有权关系网络
 
 ```mermaid
@@ -759,7 +751,6 @@ graph TB
     style Lifetime fill:#fff5e1
     style Move fill:#f5e1ff
 ```
-
 ## 🔹 第4层：应用层关系网络
 
 ### 4.1 并发安全关系网络
@@ -875,7 +866,6 @@ graph TB
     style Patterns fill:#e1f5ff
     style Primitives fill:#fff5e1
 ```
-
 ### 4.2 内存安全保证关系网络
 
 ```mermaid
@@ -988,7 +978,6 @@ graph TB
     style Mechanisms fill:#e1f5ff
     style Verification fill:#fff5e1
 ```
-
 ### 4.3 性能优化关系网络
 
 ```mermaid
@@ -1119,7 +1108,6 @@ graph TB
     style Techniques fill:#fff5e1
     style Tradeoffs fill:#f5e1ff
 ```
-
 ## 🆕 Rust 1.90 特性关系网络
 
 ### Rust 1.90 改进影响链
@@ -1204,7 +1192,6 @@ graph TB
     style Lifetime fill:#fff5e1
     style Compiler fill:#f5e1ff
 ```
-
 ## 📚 总结与应用
 
 ### 关键概念依赖链
@@ -1233,7 +1220,6 @@ graph LR
     style D fill:#fff5e1
     style F fill:#f5e1ff
 ```
-
 ## 🔗 相关文档
 
 - [知识图谱](KNOWLEDGE_GRAPH.md) - 概念可视化

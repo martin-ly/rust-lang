@@ -159,7 +159,6 @@ let conn = ConnectionPool::global().acquire()?;
 // ... 使用连接
 ConnectionPool::global().release(conn);
 ```
-
 **性能数据**:
 
 - 首次初始化: ~50 ns
@@ -194,7 +193,6 @@ GATs 零拷贝:
 性能提升: 19x
 内存节省: 10 MB
 ```
-
 ### 3. 原生 async trait 完整应用
 
 **文件**: `examples/native_async_trait_app.rs`
@@ -220,7 +218,6 @@ let result = chain.execute(context, |ctx| async move {
     Ok(process(ctx).await?)
 }).await?;
 ```
-
 **优势**:
 
 - 无 `Box<dyn Future>` 开销
@@ -249,7 +246,6 @@ let pipeline = RangeGenerator::new(1, 11)
 let results: Vec<_> = pipeline.process(()).collect();
 // [4, 16, 36, 64, 100] (偶数的平方)
 ```
-
 **代码对比**:
 
 - RPITIT: 简洁、类型安全、零开销
@@ -293,7 +289,6 @@ if !validate(token) {
     return Err("令牌无效");
 }
 ```
-
 **可读性提升**: ~40%
 
 ### 6. dyn upcasting 适配器模式
@@ -326,7 +321,6 @@ println!("健康: {}", monitorable.get_health());
 let device: &dyn Device = smart_device;
 println!("ID: {}", device.device_id());
 ```
-
 ---
 
 ## 📚 文档结构增强
@@ -395,7 +389,6 @@ cargo run --example let_else_chain_advanced
 # 6. dyn upcasting
 cargo run --example dyn_upcasting_adapter
 ```
-
 ### 实际应用场景映射
 
 创建了 36 个具体的应用场景映射：

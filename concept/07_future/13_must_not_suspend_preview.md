@@ -37,7 +37,6 @@ async fn bad_async() {
 
 fn main() {}
 ```
-
 > **修正**:
 >
 > **`must_not_suspend`** lint（nightly，`-W must_not_suspend`）警告：

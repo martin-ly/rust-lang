@@ -20,26 +20,26 @@
 
 #### Tier 1 - 基础层
 
-- ✅ `docs/tier_01_foundations/01_项目概览.md`
+- ✅ `docs/tier_01_foundations/01_project_overview.md`
   - 版本: 1.90 → 1.92.0
   - 日期: 2025-10-24 → 2025-12-11
   - Rust 1.90 宏特性 → Rust 1.92.0 宏特性
 
 #### Tier 2 - 实践层
 
-- ✅ `docs/tier_02_guides/01_声明宏实践指南.md`
+- ✅ `docs/tier_02_guides/01_declarative_macros_practice_guide.md`
   - 版本: 1.90+ → 1.92.0+
   - 日期: 2025-10-23 → 2025-12-11
-- ✅ `docs/tier_02_guides/02_Derive宏开发指南.md`
+- ✅ `docs/tier_02_guides/02_derive_macros_development_guide.md`
   - 版本: 1.90+ → 1.92.0+
   - 日期: 2025-10-23 → 2025-12-11
-- ✅ `docs/tier_02_guides/03_属性宏开发指南.md`
+- ✅ `docs/tier_02_guides/03_attribute_macros_development_guide.md`
   - 版本: 1.90+ → 1.92.0+
   - 日期: 2025-10-23 → 2025-12-11
-- ✅ `docs/tier_02_guides/04_函数宏开发指南.md`
+- ✅ `docs/tier_02_guides/04_function_macros_development_guide.md`
   - 版本: 1.90+ → 1.92.0+
   - 日期: 2025-10-23 → 2025-12-11
-- ✅ `docs/tier_02_guides/05_宏调试与测试.md`
+- ✅ `docs/tier_02_guides/05_macro_debugging_and_testing.md`
   - 版本: 1.90+ → 1.92.0+
   - 日期: 2025-10-23 → 2025-12-11
 - ✅ `docs/tier_02_guides/README.md`
@@ -114,7 +114,6 @@
 ✅ cargo check --package c11_macro_system
    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
 ```
-
 ### 版本一致性检查
 
 - ✅ 所有文档版本引用已统一为 1.92.0+

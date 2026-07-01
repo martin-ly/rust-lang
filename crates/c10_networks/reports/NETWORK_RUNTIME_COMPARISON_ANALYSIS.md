@@ -126,7 +126,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 }
 ```
-
 **async-std [已归档]网络特性**:
 
 ```rust
@@ -159,7 +158,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 1.3 生态系统对比
 
 #### 1.3.1 HTTP客户端/服务器
@@ -242,7 +240,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 2.2 DNS解析库对比
 
 #### 2.2.1 hickory-dns vs trust-dns
@@ -273,7 +270,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 2.3 P2P网络库对比
 
 #### 2.3.1 libp2p特性分析
@@ -322,7 +318,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 }
 ```
-
 ## 3. 性能基准测试结果
 
 ### 3.1 网络I/O性能对比
@@ -501,7 +496,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // ...
 }
 ```
-
 ### 7.2 渐进式迁移策略
 
 **阶段1: 核心运行时迁移**:

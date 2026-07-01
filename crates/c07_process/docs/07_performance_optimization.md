@@ -90,7 +90,6 @@
 └── 性能监控
     └── 性能指标收集
 ```
-
 ---
 
 ## 1. 内存管理优化
@@ -216,7 +215,6 @@ impl ZeroCopyProcessManager {
     }
 }
 ```
-
 ### 1.2 内存池管理
 
 ```rust
@@ -402,7 +400,6 @@ pub struct PoolStats {
     pub last_used: Instant,
 }
 ```
-
 ## 2. CPU 优化
 
 ### 2.1 CPU 亲和性设置
@@ -585,7 +582,6 @@ pub struct CpuStats {
     pub last_update: std::time::Instant,
 }
 ```
-
 ### 2.2 进程优先级管理
 
 ```rust
@@ -742,7 +738,6 @@ pub struct SchedulerStats {
     pub time_slice: std::time::Duration,
 }
 ```
-
 ## 3. I/O 优化
 
 ### 3.1 异步 I/O 优化
@@ -918,7 +913,6 @@ impl AsyncIOOptimizer {
     }
 }
 ```
-
 ### 3.2 文件描述符优化
 
 ```rust
@@ -1085,7 +1079,6 @@ impl FileDescriptorManager {
     }
 }
 ```
-
 ## 4. 并发优化
 
 ### 4.1 无锁数据结构
@@ -1259,7 +1252,6 @@ pub struct PoolStats {
     pub current_size: usize,
 }
 ```
-
 ### 4.2 工作窃取调度器
 
 ```rust
@@ -1425,7 +1417,6 @@ pub struct SchedulerStatsInfo {
     pub worker_stats: Vec<WorkerStats>,
 }
 ```
-
 ## 5. 性能监控
 
 ### 5.1 性能指标收集
@@ -1617,7 +1608,6 @@ impl MetricCollector for MemoryUsageCollector {
     }
 }
 ```
-
 ### 5.2 性能分析和优化建议
 
 ```rust
@@ -1891,7 +1881,6 @@ impl Default for TrendDirection {
     }
 }
 ```
-
 ## 6. 总结
 
 本章详细介绍了 Rust 进程管理的性能优化技术：

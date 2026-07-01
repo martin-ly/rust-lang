@@ -1,0 +1,534 @@
+# 3.1 Rust 类型系统 - 类型系统规范
+
+> **文档类型**: Tier 3 - 参考层
+> **文档定位**: Rust 类型系统的完整规范参考
+> **适用对象**: 高级开发者、编译器开发者
+> **前置知识**: [基础类型指南](../tier_02_guides/01_basic_types_guide.md)
+> **最后更新**: 2025-12-11
+> **Rust版本**: 1.92.0+
+
+---
+
+## 📋 目录
+
+- [3.1 Rust 类型系统 - 类型系统规范](#31-rust-类型系统---类型系统规范)
+  - [📋 目录](#-目录)
+  - [🎯 概述](#-概述)
+    - [规范范围](#规范范围)
+  - [1. 类型系统基础规范](#1-类型系统基础规范)
+    - [1.1 类型分类](#11-类型分类)
+    - [1.2 类型大小规范](#12-类型大小规范)
+  - [2. 类型推断规范](#2-类型推断规范)
+    - [2.1 局部类型推断](#21-局部类型推断)
+    - [2.2 函数类型推断](#22-函数类型推断)
+    - [2.3 约束传播](#23-约束传播)
+  - [3. 类型检查规范](#3-类型检查规范)
+    - [3.1 类型匹配规则](#31-类型匹配规则)
+    - [3.2 子类型关系](#32-子类型关系)
+    - [3.3 类型强制转换](#33-类型强制转换)
+  - [4. 类型转换规范](#4-类型转换规范)
+    - [4.1 显式转换](#41-显式转换)
+    - [4.2 From/Into Trait](#42-frominto-trait)
+    - [4.3 TryFrom/TryInto](#43-tryfromtryinto)
+  - [5. 泛型系统规范](#5-泛型系统规范)
+    - [5.1 泛型参数规范](#51-泛型参数规范)
+    - [5.2 Trait Bound 规范](#52-trait-bound-规范)
+    - [5.3 关联类型规范](#53-关联类型规范)
+  - [6. Trait 系统规范](#6-trait-系统规范)
+    - [6.1 Trait 定义规范](#61-trait-定义规范)
+    - [6.2 Trait 实现规范](#62-trait-实现规范)
+    - [6.3 对象安全规范](#63-对象安全规范)
+  - [7. 生命周期系统规范](#7-生命周期系统规范)
+    - [7.1 生命周期标注规范](#71-生命周期标注规范)
+    - [7.2 生命周期省略规则](#72-生命周期省略规则)
+    - [7.3 生命周期约束](#73-生命周期约束)
+  - [8. 类型安全保证](#8-类型安全保证)
+    - [8.1 内存安全](#81-内存安全)
+    - [8.2 类型安全](#82-类型安全)
+  - [9. 编译器行为规范](#9-编译器行为规范)
+    - [9.1 类型检查阶段](#91-类型检查阶段)
+    - [9.2 错误报告规范](#92-错误报告规范)
+  - [10. 参考资源](#10-参考资源)
+    - [10.1 官方文档](#101-官方文档)
+    - [10.2 相关文档](#102-相关文档)
+
+---
+
+## 🎯 概述
+
+本文档提供 Rust 类型系统的完整规范参考，包括类型推断、类型检查、类型转换等核心机制的规范定义。
+
+### 规范范围
+
+- 类型系统基础规则
+- 类型推断算法
+- 类型检查规则
+- 类型转换规则
+- 泛型和 Trait 系统规范
+- 生命周期系统规范
+
+---
+
+## 1. 类型系统基础规范
+
+### 1.1 类型分类
+
+Rust 类型系统的基本分类：
+
+```rust
+// 标量类型
+let i: i32 = 42;
+let f: f64 = 3.14;
+let b: bool = true;
+let c: char = 'a';
+
+// 复合类型
+let t: (i32, f64) = (42, 3.14);
+let a: [i32; 3] = [1, 2, 3];
+
+// 引用类型
+let r: &i32 = &42;
+let mr: &mut i32 = &mut 42;
+
+// 指针类型
+let bp: Box<i32> = Box::new(42);
+let rp: *const i32 = &42;
+```
+### 1.2 类型大小规范
+
+**Sized 类型**:
+
+- 编译时已知大小
+- 可以存储在栈上
+- 实现了 `Sized` trait
+
+**Unsized 类型 (DST)**:
+
+- 运行时大小
+- 必须通过指针使用
+- 如 `str`, `[T]`, `dyn Trait`
+
+```rust
+// Sized 类型
+struct Point {
+    x: i32,
+    y: i32,
+}  // 大小: 8 字节
+
+// Unsized 类型
+let s: &str = "hello";  // 通过引用使用
+let slice: &[i32] = &[1, 2, 3];  // 通过切片使用
+```
+---
+
+## 2. 类型推断规范
+
+### 2.1 局部类型推断
+
+编译器推断局部变量类型：
+
+```rust
+let x = 42;  // 推断为 i32
+let y = 3.14;  // 推断为 f64
+let z = "hello";  // 推断为 &str
+```
+### 2.2 函数类型推断
+
+函数参数和返回值的类型推断：
+
+```rust
+// 需要类型注解
+fn add<T>(a: T, b: T) -> T
+where
+    T: std::ops::Add<Output = T>,
+{
+    a + b
+}
+
+// 调用时推断
+let result = add(1, 2);  // T 推断为 i32
+let result2 = add(1.0, 2.0);  // T 推断为 f64
+```
+### 2.3 约束传播
+
+类型约束在推断中传播：
+
+```rust
+fn process<T: Clone>(item: T) -> T {
+    item.clone()
+}
+
+let x = process(42);  // T 推断为 i32，必须实现 Clone
+```
+---
+
+## 3. 类型检查规范
+
+### 3.1 类型匹配规则
+
+类型必须完全匹配：
+
+```rust
+fn takes_i32(x: i32) {}
+
+let x: i32 = 42;
+takes_i32(x);  // ✅ 类型匹配
+
+let y: i64 = 42;
+// takes_i32(y);  // ❌ 类型不匹配
+```
+### 3.2 子类型关系
+
+Rust 中的子类型关系：
+
+```rust
+// 生命周期子类型
+fn longer<'a, 'b: 'a>(x: &'a str, y: &'b str) -> &'a str {
+    x
+}
+
+// 'b: 'a 表示 'b 是 'a 的子类型（'b 生命周期更长）
+```
+### 3.3 类型强制转换
+
+自动类型强制转换：
+
+```rust
+// &String 自动强制转换为 &str
+fn takes_str(s: &str) {}
+
+let string = String::from("hello");
+takes_str(&string);  // ✅ 自动强制转换
+
+// &Vec<T> 自动强制转换为 &[T]
+fn takes_slice(s: &[i32]) {}
+
+let vec = vec![1, 2, 3];
+takes_slice(&vec);  // ✅ 自动强制转换
+```
+---
+
+## 4. 类型转换规范
+
+### 4.1 显式转换
+
+使用 `as` 关键字：
+
+```rust
+let x: i32 = 42;
+let y: i64 = x as i64;  // 显式转换
+let z: f64 = x as f64;  // 显式转换
+```
+### 4.2 From/Into Trait
+
+标准转换 Trait：
+
+```rust
+use std::convert::From;
+
+// 实现 From
+impl From<i32> for MyType {
+    fn from(value: i32) -> Self {
+        MyType(value)
+    }
+}
+
+// 自动获得 Into
+let my: MyType = 42.into();
+```
+### 4.3 TryFrom/TryInto
+
+可能失败的转换：
+
+```rust
+use std::convert::TryFrom;
+
+impl TryFrom<i32> for SmallInt {
+    type Error = String;
+
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        if value < 0 || value > 100 {
+            Err("Value out of range".to_string())
+        } else {
+            Ok(SmallInt(value))
+        }
+    }
+}
+```
+---
+
+## 5. 泛型系统规范
+
+### 5.1 泛型参数规范
+
+泛型参数的生命周期和约束：
+
+```rust
+// 生命周期参数
+struct Ref<'a, T> {
+    value: &'a T,
+}
+
+// 类型参数
+struct Container<T> {
+    value: T,
+}
+
+// 常量参数（Rust 1.51+）
+struct Array<T, const N: usize> {
+    data: [T; N],
+}
+```
+### 5.2 Trait Bound 规范
+
+Trait Bound 的语法和语义：
+
+```rust
+// 基本 Bound
+fn process<T: Clone>(item: T) -> T {
+    item.clone()
+}
+
+// 多个 Bound
+fn process<T: Clone + Debug>(item: T) {
+    println!("{:?}", item.clone());
+}
+
+// where 子句
+fn complex<T, U>(t: T, u: U) -> T
+where
+    T: Clone + Debug,
+    U: Clone,
+{
+    // ...
+}
+```
+### 5.3 关联类型规范
+
+关联类型的使用规范：
+
+```rust
+trait Iterator {
+    type Item;
+
+    fn next(&mut self) -> Option<Self::Item>;
+}
+
+// 实现时指定关联类型
+impl Iterator for Counter {
+    type Item = u32;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        // ...
+    }
+}
+```
+---
+
+## 6. Trait 系统规范
+
+### 6.1 Trait 定义规范
+
+Trait 定义的基本规则：
+
+```rust
+// 基本 Trait
+trait MyTrait {
+    fn method(&self);
+}
+
+// 带默认实现
+trait MyTrait {
+    fn method(&self) {
+        // 默认实现
+    }
+}
+
+// 带关联类型
+trait MyTrait {
+    type Associated;
+    fn method(&self) -> Self::Associated;
+}
+```
+### 6.2 Trait 实现规范
+
+实现 Trait 的规则：
+
+```rust
+// 为类型实现 Trait
+impl MyTrait for MyType {
+    fn method(&self) {
+        // 实现
+    }
+}
+
+// 条件实现
+impl<T: Clone> MyTrait for Vec<T> {
+    fn method(&self) {
+        // 实现
+    }
+}
+```
+### 6.3 对象安全规范
+
+Trait 对象安全的要求：
+
+```rust
+// 对象安全的 Trait
+trait Safe {
+    fn method(&self);  // ✅ 使用 &self
+}
+
+// 不安全的 Trait
+trait Unsafe {
+    fn method() -> Self;  // ❌ 返回 Self
+    fn generic<T>(&self, t: T);  // ❌ 泛型方法
+}
+```
+---
+
+## 7. 生命周期系统规范
+
+### 7.1 生命周期标注规范
+
+生命周期参数的语法：
+
+```rust
+// 函数中的生命周期
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y }
+}
+
+// 结构体中的生命周期
+struct Ref<'a, T> {
+    value: &'a T,
+}
+
+// impl 块中的生命周期
+impl<'a, T> Ref<'a, T> {
+    fn new(value: &'a T) -> Self {
+        Ref { value }
+    }
+}
+```
+### 7.2 生命周期省略规则
+
+编译器自动推断生命周期的规则：
+
+1. 每个引用参数都有自己的生命周期参数
+2. 如果只有一个输入生命周期参数，它被赋予所有输出生命周期参数
+3. 如果方法有 `&self` 或 `&mut self`，`self` 的生命周期被赋予所有输出生命周期参数
+
+### 7.3 生命周期约束
+
+生命周期之间的关系：
+
+```rust
+// 生命周期约束
+struct Ref<'a, 'b: 'a, T> {
+    value: &'a T,
+    other: &'b T,
+}
+
+// 'b: 'a 表示 'b 生命周期至少和 'a 一样长
+```
+---
+
+## 8. 类型安全保证
+
+### 8.1 内存安全
+
+类型系统保证内存安全：
+
+```rust
+// 防止使用后释放
+fn invalid() {
+    let r;
+    {
+        let x = 5;
+        // r = &x;  // ❌ 编译错误：x 生命周期不够长
+    }
+    // println!("{}", r);
+}
+
+// 防止数据竞争
+fn no_data_race() {
+    let mut data = vec![1, 2, 3];
+    let first = &data[0];
+    // data.push(4);  // ❌ 编译错误：不能同时有可变和不可变引用
+    println!("{}", first);
+}
+```
+### 8.2 类型安全
+
+类型系统防止类型错误：
+
+```rust
+fn type_safe() {
+    let x: i32 = 42;
+    // let y: String = x;  // ❌ 编译错误：类型不匹配
+    let y: String = x.to_string();  // ✅ 显式转换
+}
+```
+---
+
+## 9. 编译器行为规范
+
+### 9.1 类型检查阶段
+
+编译器的类型检查流程：
+
+1. **词法分析**: 将源代码转换为 token
+2. **语法分析**: 构建抽象语法树 (AST)
+3. **名称解析**: 解析标识符和路径
+4. **类型推断**: 推断类型
+5. **类型检查**: 验证类型正确性
+6. **借用检查**: 验证借用规则
+7. **代码生成**: 生成目标代码
+
+### 9.2 错误报告规范
+
+类型错误的报告格式：
+
+```rust
+// 示例错误
+error[E0308]: mismatched types
+  --> src/main.rs:3:5
+   |
+ 3 |     let x: i32 = "hello";
+   |         ^ expected `i32`, found `&str`
+```
+---
+
+## 10. 参考资源
+
+### 10.1 官方文档
+
+- [Rust Reference - Type System](https://doc.rust-lang.org/reference/type-system.html)
+- [Rust Reference - Type Inference](https://doc.rust-lang.org/reference/statements.html)
+- [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)
+
+### 10.2 相关文档
+
+- [类型转换参考](01_type_conversions_reference.md)
+- [类型型变参考](02_variance_reference.md)
+- [分派机制参考](03_dispatch_mechanisms_reference.md)
+
+---
+
+**最后更新**: 2025-12-11
+**Rust版本**: 1.92.0+
+**文档版本**: v1.0
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/),
+> [The Rust Programming Language](https://doc.rust-lang.org/book/),
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

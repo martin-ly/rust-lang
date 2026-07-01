@@ -15,7 +15,6 @@ pub enum RustLangError {
     // ... 12 个 crate 的错误
 }
 ```
-
 问题：
 
 1. common crate 必须了解所有其他 crate 的错误类型
@@ -35,7 +34,6 @@ pub trait RustLangError: std::error::Error + Send + Sync + 'static {
     fn max_retries(&self) -> Option<u32>;
 }
 ```
-
 ### 2. 通用错误类型
 
 ```rust
@@ -52,7 +50,6 @@ pub enum CommonError {
 
 impl RustLangError for CommonError { ... }
 ```
-
 ### 3. 最小化统一错误
 
 ```rust
@@ -63,7 +60,6 @@ pub enum UnifiedError {
 
 pub type Result<T, E = UnifiedError> = std::result::Result<T, E>;
 ```
-
 ### 4. 宏简化实现
 
 ```rust
@@ -77,7 +73,6 @@ macro_rules! impl_into_unified_error {
     ($type:ty) => { ... };
 }
 ```
-
 ## 文件修改列表
 
 ### Common Crate
@@ -125,7 +120,6 @@ fn may_fail() -> Result<i32> {
     Ok(42)
 }
 ```
-
 新代码（兼容）：
 
 ```rust
@@ -135,7 +129,6 @@ fn may_fail() -> Result<i32> {
     Ok(42)
 }
 ```
-
 Crate 自定义错误：
 
 ```rust
@@ -151,7 +144,6 @@ pub enum MyCrateError {
 impl_rust_lang_error!(MyCrateError, ErrorCode::Custom);
 impl_into_unified_error!(MyCrateError);
 ```
-
 ## 编译验证
 
 成功编译的 crates：

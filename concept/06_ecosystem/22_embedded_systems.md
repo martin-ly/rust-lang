@@ -127,7 +127,6 @@ no_std:
   │ 格式化          │ println!        │ 需实现          │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
-
 > **认知功能**: **no_std 是 Rust 进入资源受限环境的通行证**——通过剥离标准库，Rust 可以运行在几 KB RAM [来源: [RAM](https://en.wikipedia.org/wiki/Random-access_memory)] 的设备上。
 > [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/intro/no-std.html)]
 
@@ -166,7 +165,6 @@ no_std:
   ├── 中断处理程序（ISR）
   └── 内存布局精确控制
 ```
-
 > **裸机洞察**: **裸机编程是 Rust unsafe 能力的核心应用场景**——直接内存映射、中断处理、寄存器操作都需要 unsafe。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
@@ -203,7 +201,6 @@ no_std:
   ├── core::ptr::read_volatile / write_volatile
   └── 设备寄存器必须 volatile 访问
 ```
-
 > **内存洞察**: **精确的内存布局控制是嵌入式 Rust 的核心能力**——类型系统（Type System）保证寄存器映射的正确性。
 > [来源: [Rust Embedded Book — Memory](https://docs.rust-embedded.org/book/peripherals/index.html)]
 
@@ -238,7 +235,6 @@ PAC (Peripheral Access Crate):
   ├── 类型安全寄存器访问
   └── 由 svd2rust 生成
 ```
-
 > **PAC 洞察**: **PAC 是嵌入式 Rust 的基石**——自动生成的类型安全寄存器访问消除了手写寄存器映射的错误。
 > [来源: [svd2rust](https://docs.rs/svd2rust/latest/svd2rust/)]
 
@@ -276,7 +272,6 @@ HAL (Hardware Abstraction Layer):
   ├──  trait 抽象硬件差异
   └── 生态系统共享驱动
 ```
-
 > **HAL 洞察**: **embedded-hal 是 Rust 嵌入式生态的统一标准**——驱动可跨平台复用，极大提高开发效率。
 > [来源: [embedded-hal](https://docs.rs/embedded-hal/latest/embedded_hal/)]
 
@@ -308,7 +303,6 @@ BSP (Board Support Package):
   ├── 降低入门门槛
   └── 硬件即代码
 ```
-
 > **BSP 洞察**: **BSP 是嵌入式 Rust 的"即插即用"层**——抽象板级细节，让开发者专注于应用逻辑。
 > [来源: [Rust Embedded Book — BSP](https://docs.rust-embedded.org/book/peripherals/a-first-attempt.html)]
 
@@ -345,7 +339,6 @@ BSP (Board Support Package):
   ├── 需要 RTOS 或裸机调度
   └── 中断延迟分析
 ```
-
 > **实时洞察**: **Rust 的无 GC 特性使其成为实时系统的理想选择**——确定性行为是实时系统的核心需求。
 > [来源: [Ferrous Systems — Real-Time](https://ferrous-systems.com/)]
 
@@ -394,7 +387,6 @@ RTIC (Real-Time Interrupt-driven Concurrency):
   ├── 基于 Cortex-M [来源: [ARM Cortex-M](https://developer.arm.com/Processors/Cortex-M)] NVIC [来源: [ARM NVIC](https://developer.arm.com/documentation/100166/0001/Nested-Vectored-Interrupt-Controller)]
   └── 类型安全任务通信
 ```
-
 > **RTIC 洞察**: **RTIC 将 Rust 的所有权（Ownership）模型应用于实时调度**——编译期保证资源无冲突，零运行时（Runtime）开销。
 > [来源: [RTIC](https://rtic.rs/)]
 
@@ -424,7 +416,6 @@ async fn main(_spawner: Spawner) {
     }
 }
 ```
-
 > **Embassy 洞察**: Embassy 将 **Tokio 的异步（Async）模型带入嵌入式**——`async/await` + 非阻塞 I/O，同时保持 `no_std` 的极简资源占用。
 
 ---
@@ -463,7 +454,6 @@ where
     Ok(buf)
 }
 ```
-
 **embedded-hal-async 与同步 embedded-hal 的对比**:
 
 | 特性 | `embedded-hal` (同步) | `embedded-hal-async` |
@@ -498,7 +488,6 @@ embedded-hal-async 生态栈:
   ├── embassy-stm32, embassy-rp, embassy-nrf
   └── 芯片厂商提供的 async HAL
 ```
-
 > **选型建议**: 新项目优先选择 `embedded-hal-async` + Embassy；维护 legacy 代码或资源极度受限（< 16KB RAM）的设备可使用同步 `embedded-hal`。[来源: [Embassy HAL Migration Guide](https://embassy.dev/book/)]
 
 ---
@@ -523,7 +512,6 @@ Ariel OS 架构:
   ├── 网络栈安全（embassy-net + TLS）
   └── 固件更新安全（secure boot + signed updates）
 ```
-
 | 特性 | Ariel OS | Tock | Embassy |
 |:---|:---|:---|:---|
 | **架构** | Library OS | 微内核 | 异步运行时 |
@@ -554,7 +542,6 @@ graph TD
     style RUST fill:#c8e6c9
     style C fill:#fff3e0
 ```
-
 > **认知功能**: **Rust 是 C 的现代替代，但团队技能是决定性因素**——渐进式迁移是最佳策略。
 > [来源: [Rust Embedded WG](https://github.com/rust-embedded/wg)]
 
@@ -588,7 +575,6 @@ graph TD
 ├── 需要 LTO、opt-level = z
 └── 缓解: strip、panic = abort
 ```
-
 > **边界要点**: Rust 嵌入式的边界与**unsafe**、**调试**、**生态**、**编译时间**和**二进制大小**相关。
 > [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
 
@@ -635,7 +621,6 @@ graph TD
   ✅ 使用静态分配或堆
      static mut BUF: [u8; 10000] = [0; 10000];
 ```
-
 > **陷阱总结**: Rust 嵌入式的陷阱主要与**volatile**、**no_std**、**panic**、**并发**和**内存**相关。
 > [来源: [Rust Embedded Book — Troubleshooting](https://docs.rust-embedded.org/book/)]
 
@@ -660,7 +645,6 @@ fn main() {
     println!("{:?}", data);
 }
 ```
-
 ### 编译验证示例
 
 ```rust
@@ -673,7 +657,6 @@ fn main() {
     println!("{}", COUNTER.load(Ordering::Relaxed));
 }
 ```
-
 ```rust
 #[repr(C)]
 struct Register {
@@ -685,7 +668,6 @@ fn main() {
     println!("{:x}", reg.value);
 }
 ```
-
 ## 相关概念文件
 
 - [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust
@@ -742,7 +724,6 @@ fn fixed() {
     hprintln!("hello").unwrap(); // ✅ 通过调试接口输出
 }
 ```
-
 > **修正**:
 > 嵌入式系统（ARM Cortex-M、RISC-V）通常无操作系统，因此 `#![no_std]` 禁用 `std` 库。`println!`、`Vec`、`String` 等需要 OS 支持的 API 不可用。
 > 替代方案：使用 `cortex-m-semihosting`（通过调试器输出）、`rtt-target`（实时传输）、或 UART HAL（硬件串口）。
@@ -762,7 +743,6 @@ extern "C" fn timer_interrupt() {
     COUNTER += 1;
 }
 ```
-
 > **修正**:
 > 嵌入式中断处理器共享全局状态时必须处理并发——中断可能随时抢占主循环。
 > `static mut` 需要 `unsafe` 块访问，且存在数据竞争风险。
@@ -789,7 +769,6 @@ unsafe extern "C" fn isr() {
     COUNTER += 1;
 }
 ```
-
 > **修正**:
 > 嵌入式系统中，**中断服务程序**（ISR）可能随时抢占主代码，共享数据需要临界区保护。
 > `unsafe` 块不保证原子性——`COUNTER += 1` 在 ARM Cortex-M 上是"读-改-写"三指令，ISR 可能在中间插入，导致更新丢失。
@@ -821,7 +800,6 @@ fn main() {
 //     loop {}
 // }
 ```
-
 > **修正**:
 > `#![no_std]` 环境中，标准库的 panic 处理（栈展开、错误消息打印）不可用。
 > 必须提供自定义的 `#[panic_handler]`：
@@ -849,7 +827,6 @@ fn main() {
     v.push(1);
 }
 ```
-
 > **修正**:
 > `#![no_std]` 禁用标准库，但可通过 `extern crate alloc` 使用 `Vec`、`String`、`Box` 等堆分配类型。
 > **必须**提供全局分配器：

@@ -1,7 +1,6 @@
 # Rust 概念层次体系框架 {#rust-概念层次体系框架}
 >
 > **概念族**: 概念框架
-
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -137,7 +136,6 @@
             ├──→ 生命周期标注
             └──→ 生命周期省略
 ```
-
 #### L2.2: 类型概念族 {#l22-类型概念族}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -253,7 +251,6 @@ graph TB
     E --> I
     E --> J
 ```
-
 ---
 
 ### L5: 代码实践 {#l5-代码实践}
@@ -295,7 +292,6 @@ let r = &s;                      // L3: 共享借用
 println!("{}", r);               // L2: 借用规则
                                  // L1: 资源管理
 ```
-
 ---
 
 ## 层间关系映射 {#层间关系映射}
@@ -324,7 +320,6 @@ L4 实现机制 → 理解实现原理
     ▼
 L5 代码实践 → 编写代码
 ```
-
 ### 自底向上映射 {#自底向上映射}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -347,7 +342,6 @@ L2 核心概念族 → 归类概念
     ▼
 L1 元概念 → 理解本质原理
 ```
-
 ---
 
 ## 概念与文档映射 {#概念与文档映射}
@@ -388,7 +382,6 @@ L5 代码实践
 ├── examples/
 └── [代码示例]
 ```
-
 ### 文档层次完整性检查表 {#文档层次完整性检查表}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -460,7 +453,6 @@ graph BT
     T2 --> C2
     T3 --> C2
 ```
-
 ---
 
 ## 📚 相关文档 {#相关文档}
@@ -485,7 +477,6 @@ graph BT
 ## 🆕 Rust 1.94 研究更新 {#rust-194-研究更新}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### 核心研究点 {#核心研究点}
@@ -506,7 +497,6 @@ graph BT
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 

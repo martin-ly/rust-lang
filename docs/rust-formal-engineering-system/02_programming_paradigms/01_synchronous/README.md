@@ -65,7 +65,6 @@ fn channel_communication() {
     }
 }
 ```
-
 ### 共享状态并发 {#共享状态并发}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -136,7 +135,6 @@ fn atomic_demo() {
     println!("Result: {}", counter.load(Ordering::Relaxed));  // 10
 }
 ```
-
 ### 线程同步原语 {#线程同步原语}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -190,7 +188,6 @@ fn condvar_demo() {
     println!("Main thread awakened");
 }
 ```
-
 ### Scoped 线程（无需 'static 生命周期） {#scoped-线程无需-static-生命周期}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -245,7 +242,6 @@ where
     results
 }
 ```
-
 ### 线程局部存储 {#线程局部存储}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -282,7 +278,6 @@ fn thread_local_demo() {
     });
 }
 ```
-
 ---
 
 ## 使用场景 {#使用场景}
@@ -364,9 +359,6 @@ fn thread_local_demo() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
-
 > **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
-
 > **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
-
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**

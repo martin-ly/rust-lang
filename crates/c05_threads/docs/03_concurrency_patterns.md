@@ -85,7 +85,6 @@ graph TB
     style C fill:#e8f5e9
     style D fill:#f3e5f5
 ```
-
 ### 并发模式决策树
 
 ```mermaid
@@ -115,7 +114,6 @@ graph TD
     style DivideConquer fill:#c8e6c9
     style ReactivePattern fill:#c8e6c9
 ```
-
 ---
 
 ## 📊 并发模式多维对比矩阵
@@ -212,7 +210,6 @@ async fn process_stream() {
     }
 }
 ```
-
 ### 2. 异步闭包模式
 
 利用Rust 1.89改进的异步闭包语法：
@@ -272,7 +269,6 @@ async fn example_usage() {
     println!("Results: {:?}", results);
 }
 ```
-
 ## 工作窃取模式
 
 ### 🚀 Rust 1.92.0 工作窃取性能提升（自 Rust 1.90 引入）
@@ -289,7 +285,6 @@ graph LR
     style B fill:#c8e6c9
     style C fill:#81c784
 ```
-
 ### 1. 高性能工作窃取调度器
 
 ```rust
@@ -354,7 +349,6 @@ pub struct Task {
     pub payload: Vec<u8>,
 }
 ```
-
 ### 2. 自适应工作分配
 
 ```rust
@@ -395,7 +389,6 @@ impl AdaptiveWorkDistributor {
     }
 }
 ```
-
 ### 🚀 示例：Rust 1.92.0 工作窃取实战（自 Rust 1.90 引入）
 
 ```rust
@@ -500,7 +493,6 @@ fn main() {
     println!("🎯 窃取比例: {:.1}%", (stolen_count as f64 / completed_count as f64) * 100.0);
 }
 ```
-
 ### 📊 工作窃取性能基准
 
 | 指标             | Rust 1.89 | Rust 1.90 | 提升     |
@@ -599,7 +591,6 @@ impl ParallelDivideAndConquer {
     }
 }
 ```
-
 ### 2. 流水线并发模式
 
 ```rust
@@ -690,7 +681,6 @@ pub fn example_pipeline() {
     }
 }
 ```
-
 ### 🚀 示例：Rust 1.90 高性能流水线
 
 ```rust
@@ -784,7 +774,6 @@ fn main() {
     println!("🎯 最终累积值: {}", final_value);
 }
 ```
-
 ### 📊 流水线模式性能对比
 
 | 阶段数 | 吞吐量 (items/s) | 延迟 | 内存占用 | 最佳场景   |
@@ -854,7 +843,6 @@ impl EventLoop {
     }
 }
 ```
-
 ---
 
 ## 💡 思维导图：并发模式选择策略
@@ -893,7 +881,6 @@ mindmap
         事件流
         复杂UI
 ```
-
 ---
 
 ## 📋 快速参考
@@ -941,7 +928,6 @@ use tokio::sync::mpsc;
 let (tx, mut rx) = mpsc::channel(100);
 tokio::spawn(async move { while let Some(event) = rx.recv().await { } });
 ```
-
 ---
 
 ## 总结
@@ -955,25 +941,21 @@ Rust 1.90 的并发编程模式提供了：
    - ✅ 改进的异步闭包类型推断
    - ✅ 零成本的 Future 抽象
    - 🎯 **适用**: Web服务、流式处理、网络IO
-
 2. **工作窃取**
    - ✅ 高性能的任务调度器
    - ✅ 自适应负载均衡
    - ✅ 优化的缓存局部性
    - 🎯 **适用**: CPU密集型计算、并行处理
-
 3. **分治算法**
    - ✅ 并行分治和归约
    - ✅ SIMD 自动向量化
    - ✅ 智能的任务粒度控制
    - 🎯 **适用**: 排序、搜索、递归问题
-
 4. **流水线处理**
    - ✅ 多阶段并发处理
    - ✅ 改进的通道性能
    - ✅ 背压和流量控制
    - 🎯 **适用**: 数据转换、ETL、批处理
-
 5. **响应式编程**
    - ✅ 事件驱动的并发
    - ✅ 高效的事件分发
@@ -996,19 +978,16 @@ Rust 1.90 的并发编程模式提供了：
    - CPU密集 → 工作窃取或分治
    - 顺序处理 → 流水线
    - 事件响应 → 响应式编程
-
 2. **性能优化**
    - 使用 Rust 1.90 的 SIMD 优化
    - 合理设置任务粒度
    - 关注缓存局部性
    - 避免过度同步
-
 3. **错误处理**
    - 使用 `Result` 类型传播错误
    - 实现优雅的降级策略
    - 添加超时机制
    - 记录并监控失败
-
 4. **可维护性**
    - 保持代码简单
    - 充分的文档和注释
@@ -1042,7 +1021,6 @@ graph LR
     style C fill:#e8f5e9
     style D fill:#f3e5f5
 ```
-
 ---
 
 **📚 相关文档**:

@@ -68,7 +68,6 @@ fn ownership_demo() {
     println!("s2 = {}, s3 = {}", s2, s3);  // 两者都可用
 }  // s2 和 s3 在这里被丢弃
 ```
-
 ### 2. 借用检查 {#2-借用检查}
 
 借用检查器在编译时验证引用有效性：
@@ -91,7 +90,6 @@ fn borrowing_demo() {
     println!("{}", r2);
 }
 ```
-
 ### 3. 类型系统 {#3-类型系统}
 
 Rust 的类型系统基于 Hindley-Milner 类型推导：
@@ -116,7 +114,6 @@ fn render<T: Drawable>(item: T) {
     item.draw();
 }
 ```
-
 ---
 
 ## 形式化文档链接 {#形式化文档链接}

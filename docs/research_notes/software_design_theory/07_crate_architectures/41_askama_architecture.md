@@ -1,3 +1,9 @@
+> **Canonical 说明**: 本文件专注 **Askama 编译期 Jinja-like 模板引擎的派生宏架构**。
+>
+> 若只需要使用指南与生态定位，请优先参考：
+> - [Web 框架生态](../../../../concept/06_ecosystem/27_web_frameworks.md)
+>
+> 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
@@ -57,7 +63,6 @@ fn main() {
     println!("{}", HelloTemplate { name: "Askama" }.render().unwrap());
 }
 ```
-
 > [来源: [askama book](https://djc.github.io/askama/)]
 
 ---
@@ -77,7 +82,6 @@ struct HelloTemplate<'a> {
     name: &'a str,
 }
 ```
-
 > [来源: [askama::Template trait](https://docs.rs/askama/latest/askama/trait.Template.html)]
 
 宏展开后，结构体字段成为模板上下文。模板中引用的变量必须在 struct 中定义，否则编译报错。
@@ -97,7 +101,6 @@ Askama 支持 Jinja 风格的过滤器、循环、条件、继承和包含：
   </ul>
 {% endblock %}
 ```
-
 > [来源: [askama 模板语法](https://djc.github.io/askama/template_syntax.html)]
 
 ### 2.3 渲染流程 {#23-渲染流程}
@@ -109,7 +112,6 @@ graph LR
     DERIVE --> RENDER[render() -> String]
     RENDER --> RESPONSE[IntoResponse / HttpResponse]
 ```
-
 渲染在运行时是纯字符串拼接，无模板解析步骤。由于代码在编译期生成，LLVM 可以内联小型模板，性能接近手写 `format!`。
 
 ### 2.4 Web 框架集成 {#24-web-框架集成}
@@ -119,7 +121,6 @@ graph LR
 ```toml
 askama = { version = "0.16.0", features = ["with-axum"] }
 ```
-
 ```rust,ignore
 use askama::Template;
 use axum::{response::IntoResponse, routing::get, Router};
@@ -132,7 +133,6 @@ async fn page() -> impl IntoResponse {
     PageTemplate { title: "Askama + Axum".into() }
 }
 ```
-
 > [来源: [askama axum integration](https://docs.rs/askama/latest/askama/index.html#integrations)]
 
 ---

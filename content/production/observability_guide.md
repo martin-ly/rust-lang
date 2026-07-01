@@ -46,7 +46,6 @@
     │    统一可视化 + 告警 + 探索           │
     └─────────────────────────────────────┘
 ```
-
 ---
 
 ## 📊 Metrics (指标)
@@ -84,7 +83,6 @@ fn update_connections(count: usize) {
     gauge!("active_connections", count as f64);
 }
 ```
-
 ### Metrics 库选择
 
 | 库 | 场景 | 性能 | 生态 |
@@ -127,7 +125,6 @@ async fn process_order(order_id: u64) {
     info!("order processed successfully");
 }
 ```
-
 **`tracing::instrument` 魔法**:
 
 - 自动生成 span
@@ -161,7 +158,6 @@ info!(
 //   "target": "my_app::orders"
 // }
 ```
-
 ---
 
 ## 🔗 Tracing (分布式追踪)
@@ -191,7 +187,6 @@ fn init_tracing() {
         .init();
 }
 ```
-
 ### Jaeger/Zipkin 导出
 
 ```rust
@@ -204,7 +199,6 @@ fn init_tracing() {
 //   -p 4318:4318 \
 //   jaegertracing/all-in-one:latest
 ```
-
 ---
 
 ## 📐 黄金信号
@@ -253,7 +247,6 @@ async fn trace_middleware<B>(
 let app = Router::new()
     .layer(from_fn(trace_middleware));
 ```
-
 ### 异步任务追踪
 
 ```rust
@@ -272,7 +265,6 @@ tokio::spawn(
     .instrument(background_span)
 );
 ```
-
 ---
 
 ## 📊 与 Go/Java 对比

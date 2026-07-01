@@ -35,7 +35,6 @@ embedded-hal 1.0 的解决:
 ├── 显式所有权: SpiDevice / SpiBus 分离
 └── GPIO 完整状态机: Input/Output/OpenDrain 显式类型
 ```
-
 ---
 
 ## 二、Embedded-HAL 1.0 核心变化
@@ -50,7 +49,6 @@ pub enum MySpiError { Timeout, BusBusy, CsFault }
 impl spi::Write<u8> for MySpi { type Error = MySpiError; }
 // 不同 HAL 的错误类型不兼容，上层库难以通用
 ```
-
 **1.0 写法（统一）**:
 
 ```rust
@@ -65,7 +63,6 @@ impl SpiDevice<u8> for MySpi {
         -> Result<(), Self::Error> { ... }
 }
 ```
-
 ### 2.2 SpiDevice vs SpiBus 分离
 
 1.0 明确区分两种 SPI 使用模式：
@@ -92,7 +89,6 @@ fn device_transfer(dev: &mut impl SpiDevice<u8>) {
     ]).unwrap();
 }
 ```
-
 ### 2.3 异步 HAL (embedded-hal-async)
 
 ```rust
@@ -105,7 +101,6 @@ async fn read_sensor(spi: &mut impl SpiDevice<u8>, drdy: &mut impl Wait) {
     spi.read(&mut buf).await.unwrap();
 }
 ```
-
 ---
 
 ## 三、Embassy v0.5 生产就绪状态
@@ -157,7 +152,6 @@ embassy-executor = { version = "0.5", features = ["task-arena-size-32768"] }
 embassy-time = "0.5"
 embassy-stm32 = { version = "0.5", features = ["stm32g474re"] }
 ```
-
 ### 4.2 代码迁移要点
 
 ```rust
@@ -183,7 +177,6 @@ impl SpiDevice<u8> for MySpi {
         -> Result<(), Self::Error> { ... }
 }
 ```
-
 ### 4.3 迁移检查清单
 
 - [ ] 更新 `Cargo.toml`: `embedded-hal = "1.0"`

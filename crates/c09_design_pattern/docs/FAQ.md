@@ -110,7 +110,6 @@ fn read_config() -> Config {
 use std::sync::OnceLock;
 static CONNECTION_POOL: OnceLock<Pool> = OnceLock::new();
 ```
-
 **相关**: [OVERVIEW.md](OVERVIEW.md)
 
 ---
@@ -125,12 +124,10 @@ static CONNECTION_POOL: OnceLock<Pool> = OnceLock::new();
    - 必须明确数据的所有权转移
    - 使用 `Arc`/`Rc` 实现共享所有权
    - 生命周期影响模式设计
-
 2. **类型系统**
    - 使用 trait 替代接口和抽象类
    - 泛型提供编译时多态（零成本抽象）
    - trait 对象提供运行时多态
-
 3. **内存安全**
    - 无需手动内存管理
    - 编译时防止数据竞争
@@ -153,7 +150,6 @@ fn use_strategy<S: Strategy>(strategy: &S) {
     strategy.execute();
 }
 ```
-
 **相关**: [Glossary.md](Glossary.md#零成本抽象-zero-cost-abstraction)
 
 ---
@@ -189,7 +185,6 @@ fn use_strategy<S: Strategy>(strategy: &S) {
    ├─ 事件驱动 → Reactor
    └─ 异步IO → async/await
 ```
-
 **相关**: [00_MASTER_INDEX.md](00_MASTER_INDEX.md#按场景导航)
 
 ---
@@ -213,7 +208,6 @@ pub fn get_config() -> &'static Config {
     })
 }
 ```
-
 **方案2: lazy_static (兼容旧版本)**:
 
 ```rust
@@ -227,7 +221,6 @@ pub fn get_config() -> &'static Config {
     &CONFIG
 }
 ```
-
 **性能对比**:
 
 - `OnceLock`: 零成本，标准库支持
@@ -302,7 +295,6 @@ impl Builder<Set, Set> {
     }
 }
 ```
-
 **优点**: 编译时保证，零运行时开销
 
 **相关**: [src/creational/builder/](../src/creational/builder)
@@ -345,7 +337,6 @@ impl<T: OldApi> NewApi for Adapter<T> {
     }
 }
 ```
-
 **桥接示例**:
 
 ```rust
@@ -365,7 +356,6 @@ impl<R: Renderer> Shape<R> {
     }
 }
 ```
-
 **相关**: [src/structural/adapter/](../src/structural/adapter), [src/structural/bridge/](../src/structural/bridge)
 
 ---
@@ -396,7 +386,6 @@ impl<T: Component> Component for Decorator<T> {
     }
 }
 ```
-
 **代理模式**:
 
 - **意图**: 控制访问、延迟加载、权限检查
@@ -420,7 +409,6 @@ impl<T: Component> Proxy<T> {
     }
 }
 ```
-
 **相关**: [src/structural/decorator/](../src/structural/decorator), [src/structural/proxy/](../src/structural/proxy)
 
 ---
@@ -448,7 +436,6 @@ impl EventBus {
     }
 }
 ```
-
 **策略2: GATs + 借用视图 (Rust 1.92.0+)**:
 
 ```rust
@@ -470,7 +457,6 @@ impl<O: Observer> Subject<O> {
     }
 }
 ```
-
 **策略3: Arc + Mutex (线程安全)**:
 
 ```rust
@@ -488,7 +474,6 @@ impl Subject {
     }
 }
 ```
-
 **相关**: [src/behavioral/observer/](../src/behavioral/observer), [examples/gats_observer_demo.rs](../examples/gats_observer_demo.rs)
 
 ---
@@ -529,7 +514,6 @@ impl Document<Published> {
     }
 }
 ```
-
 **策略模式（编译时多态）**:
 
 ```rust
@@ -541,7 +525,6 @@ fn sort_data<S: SortStrategy>(strategy: &S, data: &mut [i32]) {
     strategy.sort(data);
 }
 ```
-
 **相关**: [src/behavioral/state/](../src/behavioral/state), [src/behavioral/strategy/](../src/behavioral/strategy)
 
 ---
@@ -583,7 +566,6 @@ async fn handle_request() {
     save_result(result).await;
 }
 ```
-
 **性能对比**:
 
 - async/await: 单线程可处理数万并发
@@ -618,7 +600,6 @@ impl Actor {
     }
 }
 ```
-
 **Reactor 模式**:
 
 - **模型**: 事件驱动，事件循环
@@ -643,7 +624,6 @@ impl Reactor {
     }
 }
 ```
-
 **Rust中的实践**:
 
 - Tokio 基于 Reactor 模式
@@ -673,7 +653,6 @@ fn async_factorial(n: u64) -> Pin<Box<dyn Future<Output = u64> + Send>> {
     })
 }
 ```
-
 **方案2: async-recursion crate**:
 
 ```rust
@@ -688,7 +667,6 @@ async fn factorial(n: u64) -> u64 {
     }
 }
 ```
-
 **方案3: 尾递归优化（转迭代）**:
 
 ```rust
@@ -700,7 +678,6 @@ async fn factorial(n: u64) -> u64 {
     result
 }
 ```
-
 **性能**: 尾递归 > Box::pin > async-recursion
 
 **相关**: [docs/ASYNC_RECURSION_ANALYSIS.md](ASYNC_RECURSION_ANALYSIS.md)
@@ -726,7 +703,6 @@ fn process<T: Handler>(handler: &T, data: Data) {
     handler.handle(data); // 编译时确定，可内联
 }
 ```
-
 **有运行时开销**:
 
 - ❌ trait 对象 (动态分派)
@@ -740,7 +716,6 @@ fn process(handler: &dyn Handler, data: Data) {
     handler.handle(data); // 虚函数调用
 }
 ```
-
 **优化建议**:
 
 1. 优先使用编译时多态（泛型）
@@ -784,7 +759,6 @@ fn benchmark_strategy(c: &mut Criterion) {
 criterion_group!(benches, benchmark_strategy);
 criterion_main!(benches);
 ```
-
 **运行基准**:
 
 ```bash
@@ -792,7 +766,6 @@ cargo bench
 cargo bench -- --save-baseline main
 cargo bench -- --baseline main
 ```
-
 **相关**: [benches/pattern_benchmarks.rs](../benches/pattern_benchmarks.rs)
 
 ---
@@ -818,7 +791,6 @@ impl TextSource for Document {
     }
 }
 ```
-
 **2. async fn in trait (原生支持)**:
 
 ```rust
@@ -834,7 +806,6 @@ impl AsyncHandler for MyHandler {
     }
 }
 ```
-
 **3. dyn trait upcasting (trait 对象上转型)**:
 
 ```rust
@@ -845,7 +816,6 @@ fn upcast(sub: &dyn Sub) {
     let sup: &dyn Super = sub; // 自动上转型
 }
 ```
-
 **4. let-else (早退模式)**:
 
 ```rust
@@ -857,7 +827,6 @@ fn handle(request: Option<Request>) -> Result<()> {
     Ok(())
 }
 ```
-
 **5. OnceLock (标准库单例)**:
 
 ```rust
@@ -869,7 +838,6 @@ fn get_config() -> &'static Config {
     CONFIG.get_or_init(|| Config::load())
 }
 ```
-
 **相关**: [src/rust_190_features.rs](../src/rust_190_features.rs)
 
 ---
@@ -949,7 +917,6 @@ fn get_config() -> &'static Config {
 avoid-breaking-exported-api = true
 enum-variant-names-threshold = 3
 ```
-
 ---
 
 ## 📚 延伸阅读
@@ -958,8 +925,8 @@ enum-variant-names-threshold = 3
 - [README](README.md) - 项目概述
 - [Glossary](Glossary.md) - 术语表（完整版）
 - [Tier 1 基础层](tier_01_foundations/README.md) - 快速入门和基础参考
-- [Tier 1 术语表](tier_01_foundations/03_术语表.md) - 核心术语快速参考
-- [Tier 1 常见问题](tier_01_foundations/04_常见问题.md) - 新手常见问题解答
+- [Tier 1 术语表](tier_01_foundations/03_glossary.md) - 核心术语快速参考
+- [Tier 1 常见问题](tier_01_foundations/04_faq.md) - 新手常见问题解答
 - [综合指南](COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 深度学习
 - [OVERVIEW](OVERVIEW.md) - 文档概览
 

@@ -102,7 +102,6 @@ Rust 游戏引擎生态:
 
 > [来源: [Bevy Engine](https://bevyengine.org/learn/book/introduction/)]
 ```
-
 > **认知功能**: **Bevy 的纯 ECS 架构是 Rust 游戏开发的代表范式**——数据驱动、缓存友好、并行安全。
 > [来源: [Bevy Engine](https://bevyengine.org/learn/book/introduction/)]
 
@@ -153,7 +152,6 @@ ECS (Entity-Component-System):
   ├── 组合优于继承
   └── 运行时灵活
 ```
-
 ```rust
 #[derive(Debug, Clone, Copy)]
 struct Vec2 {
@@ -193,7 +191,6 @@ fn main() {
     println!("{:?}", world);
 }
 ```
-
 > **ECS 洞察**: **ECS 架构天然适合 Rust 的所有权（Ownership）模型**——系统之间不共享可变状态，编译期保证并行安全。
 > [来源: [Bevy ECS Guide](https://bevyengine.org/learn/book/)]
 
@@ -244,7 +241,6 @@ wgpu:
   ├── 现代 GPU 特性（计算着色器）
   └── Rust 内存安全
 ```
-
 > **wgpu 洞察**: **wgpu 让 Rust 游戏可以编译到 WebAssembly 并在浏览器运行**——真正的跨平台。
 > [来源: [wgpu](https://wgpu.rs/)]
 
@@ -275,7 +271,6 @@ wgpu:
   ├── LOD（细节层次）
   └── 遮挡剔除
 ```
-
 > **渲染洞察**: **Rust 的零成本抽象（Zero-Cost Abstraction）让渲染代码既可读又高效**——无运行时（Runtime）开销。
 > [来源: [Bevy Rendering](https://bevyengine.org/learn/book/)]
 
@@ -311,7 +306,6 @@ wgpu:
       sink.sleep_until_end();
   }
 ```
-
 > **音频洞察**: **rodio 提供简单的 Rust 音频播放**——纯 Rust 实现，无外部依赖。
 > [来源: [rodio](https://github.com/RustAudio/rodio)]
 
@@ -348,7 +342,6 @@ wgpu:
 
 > [来源: [Rust GameDev WG](https://gamedev.rs/)]
 ```
-
 ```rust
 #[derive(Debug)]
 enum GameState {
@@ -377,7 +370,6 @@ fn main() {
     println!("{:?}", state);
 }
 ```
-
 > **性能洞察**: **Rust 的编译期保证让游戏性能优化更安全**——无数据竞争、无 use-after-free。
 > [来源: [Rust GameDev WG](https://gamedev.rs/)] · [来源: [Wikipedia — Game Engine](https://en.wikipedia.org/wiki/Game_engine)]
 
@@ -404,7 +396,6 @@ graph TD
     style MACRO fill:#c8e6c9
     style BEVY fill:#c8e6c9
 ```
-
 > **选择洞察**: **独立游戏和 2D 原型首选 Rust，大型 3A 仍用成熟商业引擎**。
 > [来源: [Rust GameDev](https://gamedev.rs/)]
 
@@ -434,7 +425,6 @@ graph TD
   ├── Unity/Unreal 做内容创作
   └── FFI 桥接
 ```
-
 > **场景洞察**: **Rust 在游戏开发中更适合模块（Module）化和独立项目**——大型项目需要生态成熟度。
 > [来源: [Bevy Engine](https://bevyengine.org/)]
 
@@ -478,7 +468,6 @@ graph TD
   ✅ 先实现功能，再 profile
      // 使用 tracing
 ```
-
 > **陷阱总结**: 游戏开发的陷阱与**ECS 设计**、**资源加载**、**系统顺序**和**生命周期（Lifetimes）管理**相关。
 > [来源: [Bevy Best Practices](https://bevyengine.org/learn/book/)]
 
@@ -553,7 +542,6 @@ fn update_system(query: &mut (Vec<&mut Position>, Vec<&mut Velocity>)) {
     }
 }
 ```
-
 > **修正**: ECS（Entity-Component-System）架构中，系统（system）函数通过查询（query）获取组件的引用（Reference）。Bevy 的查询系统在编译期检查借用规则：`Query<&mut Position, &mut Velocity>` 无法在同一系统中共存，因为 Rust 编译器无法证明同一实体的两个组件不会被同时可变借用（Mutable Borrow）。Bevy 的解决方案：1) 使用 `Query<&mut Position, Without<Velocity>>` 分离查询；2) 将更新拆分为两个系统（先读 Velocity 计算新位置，再写 Position）；3) 使用命令缓冲（Commands）延迟修改。这与 Unity 的 `GetComponent`（运行时检查）或 C++ 的裸指针（无检查）不同——Rust 在编译期防止 ECS 中的数据竞争。[来源: [Bevy ECS Documentation](https://docs.rs/bevy_ecs/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 
 ### 10.2 边界测试：图形渲染的生命周期与 `Send` 约束（编译错误）
@@ -573,7 +561,6 @@ fn spawn_render_thread(renderer: Renderer) {
     });
 }
 ```
-
 > **修正**: GPU 上下文（Vulkan `VkDevice`、OpenGL `GLContext`、DirectX `ID3D11Device`）通常是线程不安全的，或仅限于创建线程使用。Rust 中，包含这些句柄的类型默认不是 `Send`，因为裸指针 `*mut T` 和 `*const T` 不自动实现 `Send`/`Sync`。若 GPU API 实际上线程安全（如 Vulkan 的 `VkDevice` 可多线程使用），可手动实现 `unsafe impl Send for Renderer {}`。但错误标记 `Send` 会导致运行时崩溃或 UB。这与 C++ 的 `std::thread`（无 Send 检查，开发者自行保证）或 Unity 的主线程限制（运行时检查）不同——Rust 在编译期强制线程亲和性（thread affinity）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.6 边界测试：游戏状态序列化的循环引用（运行时栈溢出）
@@ -595,7 +582,6 @@ fn main() {
     // let json = serde_json::to_string(&root).unwrap();
 }
 ```
-
 > **修正**: 游戏对象树常包含**循环引用**（如双向链接的节点、父子循环）。`serde` 的默认序列化是深度递归，循环引用导致栈溢出。解决方案：1) 使用 `serde` 的 `serialize_with` 自定义序列化，记录已访问对象 ID；2) 使用 `serde_json` 的 `preserve_order` + 手动打破循环；3) 使用 `slotmap` 或 `petgraph` 的图结构替代原生引用。Bevy 的 ECS 避免了这一问题：实体（Entity）是整数 ID，组件是扁平存储，无引用循环。这与 Unity 的 `SerializeReference`（支持循环引用检测）或 Godot 的节点树（使用 NodePath 而非直接引用）类似——游戏引擎的序列化系统设计需处理循环引用。[来源: [serde Documentation](https://serde.rs/)] · [来源: [Bevy ECS Serialization](https://docs.rs/bevy/)]
 
 ### 10.5 边界测试：ECS 的 archetype 变更与迭代器失效（运行时 panic/UB）
@@ -610,7 +596,6 @@ fn main() {
 //     }
 // }
 ```
-
 > **修正**: Bevy 的 ECS 使用 **archetype** 存储：实体按 component 组合分组（如 `(Transform, Velocity)` 是一个 archetype）。添加/移除 component 导致实体**迁移**到新 archetype。在 `Query::iter_mut()` 期间修改 archetype：1) 当前迭代器（Iterator）引用的内存可能被移动 → use-after-free；2) Bevy 检测到后 panic（"cannot mutate entity during iteration"）。解决方案：1) 使用 `Commands` 延迟执行（`commands.entity(e).remove::<C>()` 在阶段末执行）；2) 使用 `Query::iter()` 收集实体 ID，迭代结束后再修改；3) 使用 `RemovedComponents` 事件监听。这与 Unity 的 ECS（类似 archetype 概念，但允许延迟修改）或 flecs（C ECS 库，类似限制）不同——Bevy 的安全模型强制延迟修改，避免内存不安全。这与 Rust 的所有权（Ownership）哲学一致：编译期无法检测的运行时问题，通过 API 设计（`Commands` 缓冲）避免。来源: [Bevy ECS Documentation] · 来源: [Bevy Query]
 
 ### 10.3 边界测试：Bevy ECS 的 system 参数顺序与冲突（编译错误）
@@ -627,7 +612,6 @@ fn main() {
 //     for t in q2.iter() { println!("{}", t.translation.x); }
 // }
 ```
-
 > **修正**: Bevy 的 ECS **system 参数**在编译期验证冲突：`Query<&mut T>` 和 `Query<&T>` 不能同时在同一 system 中存在，因为这会导致同一组件的别名冲突（一个可变引用（Mutable Reference） + 一个共享引用）。Bevy 的解决：1) **参数集**（`ParamSet`）：`mut p: ParamSet<(Query<&mut Transform>, Query<&Transform>)>`——显式声明互斥访问；2) 分两个 system（通过 `Commands` 或事件通信）；3) 使用 `Without` 过滤（`Query<&Transform, Without<Player>>`）。这与 Unity 的 ECS（运行时检查冲突，可能抛出异常）或 flecs（C ECS，类似编译期检查但不完全）不同——Bevy 利用 Rust 的类型系统（Type System）在编译期排除 ECS 冲突，是 ECS + Rust 的独特优势。[来源: [Bevy ECS](https://bevyengine.org/learn/book/)] · [来源: [Bevy Query](https://docs.rs/bevy_ecs/)]
 > **过渡**: Rust 游戏开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 游戏开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -712,9 +696,7 @@ Rust 编译为原生机器码且静态链接，没有 CLR/JVM 的动态加载能
 | Rust 游戏开发 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Rust 游戏开发 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Rust 游戏开发 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Rust 游戏开发 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

@@ -219,7 +219,6 @@ pub const DEFAULT_THRESHOLD: usize = 100;
 pub const MAX_SIZE_REF: &usize = &MAX_ARRAY_SIZE;
 pub const DOUBLE_THRESHOLD: usize = *MAX_SIZE_REF * DEFAULT_THRESHOLD / 5000;
 ```
-
 **性能影响**: 编译时计算，零运行时开销。
 
 ### 2. 新的稳定 API
@@ -251,7 +250,6 @@ fn parse_array_input(input: &str) -> Result<Vec<i32>, Box<dyn std::error::Error>
     numbers.map_err(|e| e.into())
 }
 ```
-
 #### 2.2 `ControlFlow` 改进
 
 **特性说明**: `ControlFlow` 可以携带更详细的错误信息。
@@ -275,7 +273,6 @@ fn process_numbers(numbers: &[i32]) -> ControlFlow<String, i32> {
     ControlFlow::Continue(sum)
 }
 ```
-
 #### 2.3 `Vec::try_reserve_exact`
 
 **特性说明**: 尝试精确分配容量，可能失败。
@@ -291,7 +288,6 @@ match vec.try_reserve_exact(1000000) {  // ✅ Rust 1.92.0 支持的方法（自
     Err(e) => { /* 优雅处理 OOM */ }
 }
 ```
-
 ### 3. JIT 编译器优化
 
 **特性说明**: Rust 1.92.0 继续优化 JIT 模式下的迭代器操作（自 Rust 1.91 引入）。
@@ -320,7 +316,6 @@ fn process_data(v: &[i32]) -> Vec<i32> {
         .collect()
 }
 ```
-
 ### 4. 内存分配器优化
 
 **特性说明**: Rust 1.92.0 继续优化小对象分配（自 Rust 1.91 引入）。
@@ -369,7 +364,6 @@ let nums = vec![2, 7, 11, 15];
 let result = two_sum(&nums, 9);
 assert_eq!(result, Some((0, 1)));
 ```
-
 #### ✅ 53. Maximum Subarray（最大子数组和）
 
 - **难度**: Medium
@@ -384,7 +378,6 @@ use c08_algorithms::leetcode::array::max_subarray;
 let nums = vec![-2, 1, -3, 4, -1, 2, 1, -5, 4];
 assert_eq!(max_subarray(&nums), 6);
 ```
-
 #### ✅ 15. 3Sum（三数之和）
 
 - **难度**: Medium
@@ -491,7 +484,6 @@ use c08_algorithms::leetcode::binary_search::binary_search;
 let nums = vec![-1, 0, 3, 5, 9, 12];
 assert_eq!(binary_search(nums, 9), 4);
 ```
-
 #### ✅ 33. Search in Rotated Sorted Array（搜索旋转排序数组）
 
 - **难度**: Medium
@@ -1144,7 +1136,6 @@ for problem in array_problems {
     }
 }
 ```
-
 ### 调用算法实现
 
 ```rust
@@ -1160,7 +1151,6 @@ let nums = vec![-2, 1, -3, 4, -1, 2, 1, -5, 4];
 let max_sum = array::max_subarray(&nums);
 println!("最大子数组和: {}", max_sum);
 ```
-
 ---
 
 ## 性能优化说明
@@ -1227,7 +1217,6 @@ mod tests {
     }
 }
 ```
-
 ---
 
 ## 参考资源

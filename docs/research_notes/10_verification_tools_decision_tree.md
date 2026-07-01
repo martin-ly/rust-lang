@@ -1,23 +1,14 @@
 # 验证工具选型决策树 {#验证工具选型决策树}
 
 > **概念族**: 安全 / 验证
-
 > **内容分级**: [归档级]
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-03-10
-
 > **版本**: v1.0
-
 > **描述**: Rust 形式化验证工具选型的决策树指南
-
 > **状态**: ✅ 已完成
 
 ---
@@ -25,9 +16,7 @@
 ## 📑 目录 {#目录}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [验证工具选型决策树 {#验证工具选型决策树}](#验证工具选型决策树-验证工具选型决策树)
@@ -65,7 +54,6 @@
 ## 一、概述 {#一概述}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供系统化的 Rust 形式化验证工具选型决策树。
@@ -77,51 +65,34 @@
 ## 二、快速决策表 {#二快速决策表}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 按需求快速选择 {#21-按需求快速选择}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 你的需求 | 推荐工具 | 备选方案 |
-
 |----------|----------|----------|
-
 | 需要数学级正确性保证 | Coq / Isabelle | Lean 4 |
-
 | 需要 Rust 原生集成 | Creusot / Prusti | Kani |
-
 | 快速检查 Unsafe 代码 | Kani / MIRAI | Rudra |
-
 | 教学/学习目的 | Aeneas / Lean | Coq |
-
 | 工业级应用验证 | Creusot | Prusti |
-
 | 并发安全验证 | RustBelt | Kani |
-
 | 死锁检测 | Lockbud | - |
 
 ### 2.2 按经验水平选择 {#22-按经验水平选择}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 经验水平 | 推荐起点 | 进阶路径 |
-
 |----------|----------|----------|
-
 | 初学者 | MIRAI → Kani | Creusot → Coq |
-
 | 中级 | Kani / Creusot | RustBelt / F* |
-
 | 高级 | Coq / Isabelle | 自定义工具链 |
 
 ---
@@ -129,19 +100,15 @@
 ## 三、详细决策树 {#三详细决策树}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 第一层：验证目标 {#31-第一层验证目标}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
 你的主要验证目标是什么？
 
 │
@@ -191,19 +158,14 @@
        ├─ 现代定理证明 → Lean 4
 
        └─ 经典选择 → Coq
-
 ```
-
 ### 3.2 第二层：项目约束 {#32-第二层项目约束}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
 项目约束条件？
 
 │
@@ -235,19 +197,14 @@
        ├─ 通用目的 → Coq / Isabelle
 
        └─ Rust专用 → RustBelt
-
 ```
-
 ### 3.3 第三层：团队能力 {#33-第三层团队能力}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
 团队形式化方法经验？
 
 │
@@ -281,41 +238,28 @@
        ├─ Isabelle 经验 → Isabelle/HOL
 
        └─ 研究导向 → RustBelt / Iris
-
 ```
-
 ---
 
 ## 四、场景化推荐 {#四场景化推荐}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 4.1 场景矩阵 {#41-场景矩阵}
 
 > **来源: [ACM](https://dl.acm.org/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 首要推荐 | 理由 | 预估投入 |
-
 |------|----------|------|----------|
-
 | **学术论文** | Coq / Lean | 数学严谨性 | 3-6月 |
-
 | **工业项目** | Creusot | 工程实用性 | 2-4周 |
-
 | **开源库** | Kani | 社区友好 | 1-2周 |
-
 | **安全关键** | Coq + RustBelt | 最高保证 | 6月+ |
-
 | **快速原型** | MIRAI | 即时反馈 | 数小时 |
-
 | **团队学习** | Aeneas | 循序渐进 | 2-4周 |
-
 | **合规审计** | Prusti | 契约明确 | 2-4周 |
 
 ### 4.2 典型决策路径 {#42-典型决策路径}
@@ -327,7 +271,6 @@
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```text
-
 需求分析
 
     ↓
@@ -347,15 +290,12 @@
     ├─ Isabelle → 直接上手
 
     └─ 无 → Lean 4 (现代友好)
-
 ```
-
 #### 路径 B：工业应用 {#路径-b工业应用}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
-
 需求分析
 
     ↓
@@ -375,13 +315,10 @@
     ├─ 否 + 需要快速 → Kani
 
     └─ 需要 SPARK 风格 → Prusti
-
 ```
-
 #### 路径 C：安全审计 {#路径-c安全审计}
 
 ```text
-
 需求分析
 
     ↓
@@ -401,25 +338,20 @@
     ├─ 需要自动化 → Kani
 
     └─ 快速扫描 → MIRAI
-
 ```
-
 ---
 
 ## 五、工具组合策略 {#五工具组合策略}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 分层验证策略 {#51-分层验证策略}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
-
 ┌─────────────────────────────────────────┐
 
 │  Level 3: 形式化证明 (Coq/Isabelle)     │
@@ -465,35 +397,25 @@
 │  - 简单错误预防                         │
 
 └─────────────────────────────────────────┘
-
 ```
-
 ### 5.2 推荐组合 {#52-推荐组合}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 组合名称 | 工具组合 | 适用场景 | 成本 |
-
 |----------|----------|----------|------|
-
 | **轻量级** | MIRAI + Clippy | 日常开发 | 低 |
-
 | **标准级** | Kani + Creusot | 中型项目 | 中 |
-
 | **企业级** | Kani + Creusot + Coq | 关键系统 | 高 |
-
 | **研究级** | RustBelt + Coq | 学术研究 | 很高 |
 
 ### 5.3 渐进式采用路径 {#53-渐进式采用路径}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
-
 阶段 1: 快速入门 (第1-2周)
 
 ├── 安装 MIRAI
@@ -501,7 +423,6 @@
 ├── 运行基本检查
 
 └── 理解警告信息
-
 
 
 阶段 2: 深度检查 (第3-4周)
@@ -513,7 +434,6 @@
 └── 学习 proof harness
 
 
-
 阶段 3: 契约编程 (第2-3月)
 
 ├── 尝试 Creusot
@@ -523,7 +443,6 @@
 └── 验证模块属性
 
 
-
 阶段 4: 形式化证明 (3月+)
 
 ├── 学习 Coq/Lean
@@ -531,37 +450,29 @@
 ├── 证明核心定理
 
 └── 建立验证文化
-
 ```
-
 ---
 
 ## 六、相关资源 {#六相关资源}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 内部文档 {#61-内部文档}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [VERIFICATION_TOOLS_MATRIX](10_verification_tools_matrix.md) — 工具详细对比
-
 - [AENEAS_INTEGRATION_PLAN](10_aeneas_integration_plan.md) — Aeneas集成指南
-
 - [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md) — 证明脚手架
 
 ### 6.2 快速参考卡 {#62-快速参考卡}
 
 >
-
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
-
 ┌────────────────────────────────────────────────────────┐
 
 │                 验证工具快速选择卡                      │
@@ -581,29 +492,20 @@
 │  并发验证?     → RustBelt / Kani                       │
 
 └────────────────────────────────────────────────────────┘
-
 ```
-
 ### 6.3 决策检查清单 {#63-决策检查清单}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 选择工具前，确认以下问题：
 
 - [ ] 验证目标是什么？（安全性/活性/功能正确性）
-
 - [ ] 需要多强的保证级别？（测试级/分析级/证明级）
-
 - [ ] 团队有多少形式化方法经验？
-
 - [ ] 项目时间预算是多少？
-
 - [ ] 是否需要 Rust 原生工具链集成？
-
 - [ ] 是否需要持续集成支持？
-
 - [ ] 验证范围是完整项目还是关键模块？
 
 ---
@@ -617,17 +519,13 @@
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -635,15 +533,10 @@
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -651,17 +544,13 @@
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - [Rust 1.94 特性速查
-
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -673,9 +562,7 @@
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -691,11 +578,9 @@
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [research_notes 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -703,19 +588,12 @@
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Decision Tree](https://en.wikipedia.org/wiki/Decision_Tree)**
-
 > **[来源: ACM - Decision Support Systems]**
-
 > **[来源: IEEE - Risk Analysis]**
-
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
-
 > **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)**
-
 > **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
-
 > **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
-
 > **来源: [ACM - Formal Methods](https://dl.acm.org/)**
 
 ---

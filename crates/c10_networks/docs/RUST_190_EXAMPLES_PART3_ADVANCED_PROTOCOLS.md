@@ -372,7 +372,6 @@ pub async fn run_grpc_server() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ````
-
 ### 2. gRPC客户端 (连接池+重试)
 
 ```rust
@@ -632,7 +631,6 @@ pub async fn demo_grpc_client() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 3. gRPC拦截器和中间件
 
 ```rust
@@ -808,7 +806,6 @@ pub async fn run_server_with_interceptors() -> Result<(), Box<dyn std::error::Er
     Ok(())
 }
 ```
-
 ---
 
 ## MQTT完整实现
@@ -1119,7 +1116,6 @@ pub async fn demo_mqtt_publisher() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ````
-
 ### 2. MQTT订阅者 (自动重连)
 
 ```rust
@@ -1438,7 +1434,6 @@ pub async fn demo_mqtt_subscriber() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 3. MQTT桥接器
 
 ```rust
@@ -1596,7 +1591,6 @@ pub async fn demo_mqtt_bridge() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ---
 
 ## QUIC协议实现
@@ -1731,7 +1725,6 @@ pub async fn demo_quic_server() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ````
-
 ### 2. QUIC客户端
 
 ```rust
@@ -1842,7 +1835,6 @@ pub async fn demo_quic_client() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 3. QUIC多路复用
 
 ```rust
@@ -1916,7 +1908,6 @@ pub async fn demo_quic_multiplexing() -> Result<(), Box<dyn std::error::Error>> 
     Ok(())
 }
 ```
-
 ---
 
 ## AMQP实现
@@ -2088,7 +2079,6 @@ pub async fn demo_amqp_producer() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ````
-
 ### 2. AMQP消费者
 
 ```rust
@@ -2279,7 +2269,6 @@ pub async fn demo_amqp_consumer() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 3. AMQP工作队列模式
 
 ```rust
@@ -2350,7 +2339,6 @@ pub async fn demo_amqp_worker_pool() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ---
 
 ## GraphQL over HTTP
@@ -2518,7 +2506,6 @@ pub async fn demo_graphql_client() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ````
-
 ---
 
 ## SSE (Server-Sent Events)
@@ -2669,7 +2656,6 @@ pub async fn demo_sse_client() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ````
-
 ---
 
 ## 综合示例：微服务通信
@@ -2884,7 +2870,6 @@ pub async fn demo_microservices() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ---
 
 ## 📚 使用建议
@@ -2895,13 +2880,11 @@ pub async fn demo_microservices() -> Result<(), Box<dyn std::error::Error>> {
    - gRPC Unary RPC
    - MQTT 基础发布订阅
    - QUIC 基本通信
-
 2. **中级**（2-3周）
    - gRPC Streaming
    - MQTT QoS和自动重连
    - QUIC 多路复用
    - AMQP 工作队列
-
 3. **高级**（3-4周）
    - gRPC 拦截器
    - MQTT 桥接
@@ -2962,7 +2945,6 @@ rand = "0.8"
 [build-dependencies]
 tonic-build = "0.11"
 ```
-
 ---
 
 ## 🔗 相关文档

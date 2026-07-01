@@ -90,7 +90,6 @@ fn main() {
     }
 }
 ```
-
 #### 1.2 与 `windows` 的对比
 >
 > **[来源: Rust Official Docs]**
@@ -124,7 +123,6 @@ fn main() {
     // [11.0, 11.333..., 11.166...]
 }
 ```
-
 #### 1.4 实际应用：模式检测
 
 ```rust
@@ -141,7 +139,6 @@ fn main() {
     println!("Pattern 'abba' count: {}", count);
 }
 ```
-
 ### 2. Peekable::next_if - 条件消费
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -163,7 +160,6 @@ fn main() {
     println!("Next: {:?}", iter.peek()); // Some(3)
 }
 ```
-
 #### 2.2 实际应用：解析器
 
 ```rust
@@ -203,7 +199,6 @@ fn main() {
     println!("Number: {:?}", parser.parse_number()); // Some(42)
 }
 ```
-
 #### 2.3 实际应用：分组处理
 
 ```rust
@@ -236,7 +231,6 @@ fn main() {
     // [[1, 2, 3], [5, 6], [8, 9, 10]]
 }
 ```
-
 ## 💻 综合示例
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -281,7 +275,6 @@ fn main() {
     }
 }
 ```
-
 ## ⚠️ 常见陷阱
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -350,7 +343,6 @@ fn parse_args(input: &str) -> Vec<String> {
     args
 }
 ```
-
 </details>
 
 ## 📖 延伸阅读

@@ -1,5 +1,8 @@
 # C11 宏系统 - 文档中心
 
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
+>
 > **创建日期**: 2025-10-22
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -43,7 +46,6 @@ macro_rules! create_function {
 create_function!(foo);
 create_function!(bar);
 ```
-
 ### 过程宏示例
 
 ```rust
@@ -63,7 +65,6 @@ async fn get_users() -> Json<Vec<User>> {
 // 函数宏
 let query = sql!("SELECT * FROM users WHERE id = ?", user_id);
 ```
-
 ---
 
 ## 文档结构导航
@@ -128,7 +129,6 @@ macro_rules! hashmap {
     };
 }
 ```
-
 ### 2. 宏的卫生性 (Hygiene)
 
 ```rust
@@ -143,7 +143,6 @@ macro_rules! using_a {
 
 let four = using_a!(a / 10); // 错误！宏内部的 a 在外部不可见
 ```
-
 ### 3. TT Muncher 模式
 
 ```rust
@@ -160,7 +159,6 @@ macro_rules! print_all_tts {
 
 print_all_tts!(fn main() { println!("hello"); });
 ```
-
 ### 4. 过程宏类型
 
 | 类型 | 属性 | 用途 | 示例 |
@@ -231,7 +229,6 @@ cargo install cargo-expand
 cargo expand --example 01_macro_rules_basics
 cargo expand --lib
 ```
-
 ### 调试技巧
 
 ```rust
@@ -245,7 +242,6 @@ macro_rules! debug_print {
     ($($tok:tt)*) => { log_syntax!($($tok)*); };
 }
 ```
-
 ### 关键 Crate
 
 | Crate | 用途 | 版本 |
@@ -275,7 +271,6 @@ macro_rules! debug_print {
     ├── 修改/包装代码 → 属性宏
     └── 函数式代码生成 → 函数宏
 ```
-
 ---
 
 ## 形式化理论
@@ -307,7 +302,6 @@ cargo run --example rust_191_features_demo
 cargo run --example rust_192_features_demo
 cargo run --example rust_193_features_demo
 ```
-
 ### 过程宏开发
 
 ```bash
@@ -318,7 +312,6 @@ cargo expand --package c11_macro_system
 cargo test -p c11_macro_system
 cargo test declarative_tests
 ```
-
 ### 外部资源
 
 - [The Rust Book - 宏](https://doc.rust-lang.org/book/ch19-06-macros.html)
@@ -355,7 +348,6 @@ macro_rules! ensure {
     };
 }
 ```
-
 ### 常见模式
 
 | 模式 | 用途 | 示例 |

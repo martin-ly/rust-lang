@@ -32,7 +32,6 @@
 ```bash
 cd crates/c08_algorithms && cargo test --lib
 ```
-
 ---
 
 ## 二、文档状态更新
@@ -77,7 +76,6 @@ cd crates/c08_algorithms && cargo test --lib
 ```bash
 cd exercises && cargo test
 ```
-
 ---
 
 ## 四、术语表更新
@@ -111,7 +109,6 @@ cd exercises && cargo test
 ### Crate 代码
 - ...
 ```
-
 ---
 
 ## 六、执行顺序

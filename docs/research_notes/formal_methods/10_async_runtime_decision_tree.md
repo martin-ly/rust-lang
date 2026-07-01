@@ -113,29 +113,20 @@
     ├── WASM → wasm-bindgen-futures
 
     └── 嵌入式Linux → tokio/rt-multi-thread
-
 ```
-
 ---
 
 ## 主流运行时对比 {#主流运行时对比}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 运行时 | 适用场景 | 特点 | 生态 |
-
 | :--- | :--- | :--- | :--- |
-
 | **Tokio** | 通用服务端 | 成熟、功能全、生态好 | ⭐⭐⭐⭐⭐ |
-
 | **async-std [已归档]** | 标准库兼容 | 类似std API | ⭐⭐⭐ |
-
 | **smol** | 轻量级 | 简单、可组合 | ⭐⭐ |
-
 | **embassy** | 嵌入式 | no_std、实时 | ⭐⭐ |
-
 | **glommio** | 线程-per-core | io_uring、DPDK | ⭐ |
 
 ---
@@ -143,11 +134,9 @@
 ## Tokio配置决策 {#tokio配置决策}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
 使用Tokio
 
 │
@@ -205,25 +194,20 @@
     ├── fs
 
     └── sync (Mutex, RwLock, Notify)
-
 ```
-
 ---
 
 ## 代码示例 {#代码示例}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 基础Tokio应用 {#基础tokio应用}
 
 >
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
-
 #[tokio::main]
 
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -231,7 +215,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 启动TCP服务器
 
     let listener = tokio::net::TcpListener::bind("127.0.0.1:8080").await?;
-
 
 
     loop {
@@ -247,7 +230,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 
-
 async fn handle_connection(mut socket: tokio::net::TcpStream) {
 
     let mut buf = [0; 1024];
@@ -259,17 +241,13 @@ async fn handle_connection(mut socket: tokio::net::TcpStream) {
     socket.write_all(&buf[0..n]).await.unwrap();
 
 }
-
 ```
-
 ### 混合同步/异步代码 {#混合同步异步代码}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
-
 #[tokio::main]
 
 async fn main() {
@@ -283,15 +261,12 @@ async fn main() {
     }).await.unwrap();
 
 
-
     // IO操作使用async
 
     let data = tokio::fs::read_to_string("file.txt").await.unwrap();
 
 }
-
 ```
-
 ---
 
 **维护者**: Rust Formal Methods Research Team
@@ -305,17 +280,13 @@ async fn main() {
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -323,15 +294,10 @@ async fn main() {
 #### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新 {#代码示例更新}
@@ -339,17 +305,13 @@ async fn main() {
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
-
 - Rust 1.94 特性速查
-
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -361,9 +323,7 @@ async fn main() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -379,11 +339,9 @@ async fn main() {
 ## 相关概念 {#相关概念}
 
 >
-
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [formal_methods 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -391,19 +349,12 @@ async fn main() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
-
 > **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
-
 > **来源: [Tokio Documentation](https://tokio.rs/)**
-
 > **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)**
-
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
-
 > **来源: [Coq Reference](https://coq.inria.fr/doc/)**
-
 > **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
-
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---

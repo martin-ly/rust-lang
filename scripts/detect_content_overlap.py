@@ -32,6 +32,34 @@ def extract_title(filepath):
     return ""
 
 
+def is_redirect_stub(filepath):
+    """检测文件是否为重定向/归档 stub（应排除在重复检测外）"""
+    try:
+        content = filepath.read_text(encoding="utf-8", errors="ignore")
+    except Exception:
+        return False
+
+    lines = content.strip().splitlines()
+    # 重定向 stub 通常很短
+    if len(lines) > 25:
+        return False
+
+    stub_markers = [
+        "历史内容已迁移",
+        "本文件不再维护",
+        "权威来源",
+        "归档说明",
+        "内容已整合",
+        "内容已迁移",
+        "已重定向",
+        "superseded",
+    ]
+    lower_content = content.lower()
+    marker_count = sum(1 for m in stub_markers if m.lower() in lower_content)
+    return marker_count >= 2
+
+
+
 def extract_keywords(filepath):
     """提取文件关键词（从标题和目录中的关键术语）"""
     try:
@@ -71,7 +99,7 @@ def jaccard_similarity(set1, set2):
     return intersection / union if union > 0 else 0.0
 
 
-def find_md_files(dirs):
+def find_md_files(dirs, include_stubs=False):
     """查找目录中的所有 Markdown 文件"""
     files = []
     for d in dirs:
@@ -80,11 +108,17 @@ def find_md_files(dirs):
                 continue
             if f.name in ["README.md", "INDEX.md"]:
                 continue
+            if not include_stubs and is_redirect_stub(f):
+                continue
             files.append(f)
     return files
 
 
 def main():
+    import sys
+
+    include_stubs = "--include-stubs" in sys.argv
+
     print("=== 三轨内容相似度检测 ===\n")
 
     dirs = [
@@ -93,7 +127,9 @@ def main():
         PROJECT_ROOT / "docs",
     ]
 
-    files = find_md_files(dirs)
+    files = find_md_files(dirs, include_stubs=include_stubs)
+    if include_stubs:
+        print("模式: 包含重定向 stub")
     print(f"扫描文件数: {len(files)}")
     print(f"相似度阈值: {THRESHOLD}\n")
 
@@ -171,7 +207,7 @@ def main():
     today = datetime.now().strftime("%Y_%m_%d")
     report_path = PROJECT_ROOT / "reports" / f"CONTENT_OVERLAP_DETECTION_{today}.md"
     report_path.parent.mkdir(exist_ok=True)
-    report_path.write_text("".join(report_lines), encoding="utf-8")
+    report_path.write_text("".join(report_lines), encoding="utf-8", newline="\n")
     print(f"报告已保存: {report_path}")
 
 

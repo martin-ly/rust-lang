@@ -387,7 +387,6 @@
 | refines | 权威来源自动补全计划 | 覆盖率提升路径 | 为 P0/P1/P2 缺口提供推荐权威来源与优先级 | [10_authoritative_source_completion_plan.md](10_authoritative_source_completion_plan.md) |
 | implements | 权威来源对齐 / 100% 完成路线图 | 覆盖率提升路径 | 将补全计划落实为 P0/P1/P2 100% 覆盖的冲刺阶段与质量门禁 | [10_authoritative_source_100_percent_roadmap.md](10_authoritative_source_100_percent_roadmap.md) |
 | tracks | 权威来源对齐 / 100% 完成路线图 | 权威来源对齐网络 | 跟踪 P0/P1/P2 覆盖率与 12 项自动化检查状态 | [10_authoritative_source_100_percent_roadmap.md](10_authoritative_source_100_percent_roadmap.md) |
-
 | depends_on | 生命周期 | 所有权 | 生命周期语义建立在所有权规则之上；引用的有效性取决于被引用值的所有权 | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) / P0: [Rust Reference – Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) |
 | depends_on | Pin | Future | `Future::poll` 要求 `Pin<&mut Self>`，Pin 是 Future 安全自引用的实现依赖 | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) / P0: [Async Book – Pinning](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) |
 | depends_on | unsafe | 借用/所有权 | `unsafe` 块绕过借用检查器，其正确性依赖对所有权/借用规则的手工维护 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) / P0: [Rustonomicon – Meet Safe and Unsafe](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) |

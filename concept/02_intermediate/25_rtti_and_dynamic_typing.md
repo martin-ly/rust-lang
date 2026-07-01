@@ -45,7 +45,6 @@ int main() {
     std::cout << ti.name() << std::endl; // 实现定义的名称，如 "i"
 }
 ```
-
 `typeid` 对多态类型返回动态类型信息，对非多态类型返回静态类型信息。
 
 ### 2.2 `dynamic_cast`：安全的向下转换
@@ -60,7 +59,6 @@ if (d) {
     std::cout << d->value << std::endl;
 }
 ```
-
 - `dynamic_cast` 需要至少一个虚函数（即多态类型）。
 - 转换失败时，指针版本返回 `nullptr`，引用（Reference）版本抛出 `std::bad_cast`。
 - 实现依赖于 vtable 中的 RTTI 信息。
@@ -96,7 +94,6 @@ fn main() {
     print_if_string(&42_i32);
 }
 ```
-
 ### 3.2 `TypeId`：编译期稳定的类型指纹
 
 ```rust
@@ -108,7 +105,6 @@ fn main() {
     assert_ne!(id_i32, id_string);
 }
 ```
-
 `TypeId` 是一个不透明的、可比较的值，用于在运行时判断两个类型是否相同（Rust Reference: [TypeId](https://doc.rust-lang.org/std/any/struct.TypeId.html)）。
 
 ### 3.3 `downcast_ref`：受限的向下转换
@@ -120,7 +116,6 @@ fn extract_string(value: Box<dyn Any>) -> Option<String> {
     value.downcast::<String>().ok().map(|b| *b)
 }
 ```
-
 - `downcast` 只能转换回原始类型。
 - 失败时返回 `Err`，不会 panic（除非使用 `.downcast_ref().unwrap()`）。
 - 不需要虚函数表中的 RTTI 信息；类型标识来自单态化（Monomorphization）生成的 `TypeId`。
@@ -153,7 +148,6 @@ fn cause_as<T: Error + 'static>(err: &(dyn Error + 'static)) -> Option<&T> {
     err.downcast_ref::<T>()
 }
 ```
-
 ### 5.2 插件系统的类型分发
 
 ```rust
@@ -174,7 +168,6 @@ impl PluginRegistry {
     }
 }
 ```
-
 ---
 
 ## 六、形式化视角

@@ -39,7 +39,6 @@ async fn main() {
         .unwrap();
 }
 ```
-
 **关键决策**:
 
 - 运行时: tokio（work-stealing，高并发）
@@ -89,7 +88,6 @@ impl KvStore {
     }
 }
 ```
-
 **关键决策**:
 
 - 共识: `raft` crate 或 `openraft`
@@ -145,7 +143,6 @@ fn main() -> Result<()> {
     Ok(())
 }
 ```
-
 **关键决策**:
 
 - CLI: `clap`（派生宏）

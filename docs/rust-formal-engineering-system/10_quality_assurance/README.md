@@ -155,7 +155,6 @@ fuzz_target!(|data: &[u8]| {
     }
 });
 ```
-
 ### MIRI 检测示例 {#miri-检测示例}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -199,7 +198,6 @@ mod miri_tests {
     }
 }
 ```
-
 ### 基准测试示例 {#基准测试示例}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -225,7 +223,6 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
-
 ### 代码覆盖率示例 {#代码覆盖率示例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -244,7 +241,6 @@ cargo llvm-cov --html
 # CI 中的覆盖率检查 {#ci-中的覆盖率检查}
 cargo tarpaulin --fail-under 80  # 覆盖率必须 >= 80%
 ```
-
 ### 形式化验证示例 {#形式化验证示例}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -287,7 +283,6 @@ mod contracts {
     }
 }
 ```
-
 ---
 
 ## 🔗 与 research_notes 衔接 {#与-research_notes-衔接}
@@ -348,7 +343,6 @@ mindmap
       测试检查
       覆盖率检查
 ```
-
 ## 与核心文档的关联 {#与核心文档的关联}
 
 | 本文档 | 核心文档 | 关系 |

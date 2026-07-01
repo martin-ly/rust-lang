@@ -106,7 +106,6 @@ AI 基础设施的挑战:
   │ 启动时间        │ ~1x             │ ~10-100x 更快   │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
-
 > **认知功能**: Rust 在 AI 中的**角色是"生产加速器"**——不是取代研究阶段的 Python，而是优化部署阶段的性能和可靠性。
 > [来源: [Are We Learning Yet?](https://www.arewelearningyet.com/)]
 
@@ -146,7 +145,6 @@ Rust ML 生态分层:
   ├── wasm-bindgen: WebAssembly 导出
   └── tokenizers: Hugging Face tokenizer（Rust 核心）
 ```
-
 > **生态洞察**: Rust ML 生态**正在快速成熟**——从底层的张量运算到高层的推理服务，形成完整链条。
 > [来源: [Hugging Face Candle](https://github.com/huggingface/candle)]
 
@@ -181,7 +179,6 @@ Rust 在 AI 流水线中的定位:
   ├── 批处理 vs 实时
   └── Rust 角色: axum/actix + ort/candle
 ```
-
 > **定位洞察**: Rust 在 AI 中的**最佳切入点是推理和数据工程**——这些场景需要**稳定、高性能、低资源占用**。
 > [来源: [Rust in AI Infrastructure [已失效]]<!-- 原链接: https://www.pingcap.com/article/rust-in-ai/ -->]
 
@@ -223,7 +220,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 // ├── 内置常见模型（LLaMA, Mistral, Stable Diffusion）
 // └── 适合: 嵌入式推理、服务端推理
 ```
-
 > **Candle 洞察**: Candle 的**核心价值**是**"无 Python 依赖的推理"**——单个二进制即可运行大模型推理。
 > [来源: [Candle Documentation](https://huggingface.github.io/candle/)]
 
@@ -268,7 +264,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 // ├── 图优化（常量折叠、算子融合）
 // └── 生产级可靠性
 ```
-
 > **ONNX 洞察**: **ONNX Runtime + Rust** 是**跨框架部署**的理想组合——训练用任何框架，推理用统一的 Rust 服务。
 > [来源: [ort crate](https://github.com/pykeio/ort)]
 
@@ -303,7 +298,6 @@ WASM 推理的优势:
   ├── 隐私敏感的本地推理
   └── 边缘 CDN 缓存
 ```
-
 > **WASM 洞察**: **WASM + Rust** 使**客户端 AI**成为可能——数据不离开设备，保护隐私。
 > [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]
 
@@ -331,7 +325,6 @@ rustc --target nvptx64-nvidia-cuda ...
 # 或显式指定 sm_70 及更新版本
 rustc -C target-cpu=sm_70 --target nvptx64-nvidia-cuda ...
 ```
-
 > **GPU 洞察**: Rust 在 AI 加速器领域仍属前沿生态。基线提升虽然牺牲了对旧硬件的支持，但换来编译器正确性和性能优化空间，符合 Rust "为当前主流硬件提供可靠抽象" 的一贯取舍。
 > **来源**: [Rust Blog — Raising the baseline for the nvptx64-nvidia-cuda target](https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/) · 可信度: ✅
 
@@ -367,7 +360,6 @@ rustc -C target-cpu=sm_70 --target nvptx64-nvidia-cuda ...
   → delta-rs (Lakehouse)
   → 流批一体
 ```
-
 > **场景矩阵**: Rust 在 AI 中的**应用场景正在快速扩展**——从实验性的推理到生产级的数据基础设施。
 > [来源: [Rust ML Ecosystem](https://www.arewelearningyet.com/)]
 
@@ -390,7 +382,6 @@ graph TD
     style RUST fill:#c8e6c9
     style EITHER fill:#fff3e0
 ```
-
 > **认知功能**: **Rust 不是 Python 的替代品**——它们是**互补的**，在 AI 流水线的不同阶段各展所长。
 > [来源: [Python vs Rust for ML](https://www.infoworld.com/article/4078766/ai-and-machine-learning-outside-of-python.html)]
 
@@ -429,7 +420,6 @@ graph TD
 ├── 某些算子不支持
 └── 缓解: 社区持续完善转换工具
 ```
-
 > **边界要点**: Rust 在 AI 中的边界主要与**CUDA 生态**、**研究者习惯**、**动态图**、**调试**和**模型转换**相关。
 > [来源: [Rust ML Challenges](https://www.arewelearningyet.com/)]
 
@@ -473,7 +463,6 @@ graph TD
   ✅ 优雅降级（fallback model）
      // Result 传播，用户友好错误
 ```
-
 > **陷阱总结**: Rust AI 的陷阱主要与**过度优化**、**格式兼容**、**内存管理**、**批处理**和**错误处理（Error Handling）**相关。
 > [来源: [Candle Examples](https://github.com/huggingface/candle/tree/main/candle-examples)]
 
@@ -485,7 +474,6 @@ graph TD
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Candle](https://github.com/huggingface/candle) | ✅ 一级 | Hugging Face Rust ML |
@@ -544,7 +532,6 @@ fn matmul_incompatible() {
     // let c = a.matmul(&b).unwrap(); // 错误!
 }
 ```
-
 > **修正**:
 > 深度学习框架（PyTorch、TensorFlow、candle）中，张量形状不匹配是最常见的错误。
 > Rust 的 candle 库在运行时（Runtime）检查形状兼容性（`a.matmul(&b)` 要求 `a.dims()[1] == b.dims()[0]`），失败时返回 `Result::Err`。
@@ -572,7 +559,6 @@ fn simd_add(a: [f32; 4], b: [f32; 4]) -> [f32; 4] {
     }
 }
 ```
-
 > **修正**:
 > Rust 的 SIMD 支持通过 `std::arch` 模块（Module）提供目标架构特定的内在函数（intrinsics）。
 > `_mm_add_ps`（SSE）和 `_mm256_add_ps`（AVX）要求目标 CPU 支持相应指令集。
@@ -595,7 +581,6 @@ fn load_model(path: &str) -> anyhow::Result<Tensor> {
     Ok(tensor)
 }
 ```
-
 > **修正**:
 > AI 模型的序列化格式（ONNX、Safetensors、GGUF、PyTorch pickle）有版本演进。
 > `candle` 库加载模型时：
@@ -635,7 +620,6 @@ fn inference() -> anyhow::Result<()> {
     Ok(())
 }
 ```
-
 > **修正**:
 >
 > Rust AI 框架（`candle`、`burn`、`tch-rs`）的张量是**引用（Reference）计数**的（类似 `Arc`），但 GPU 内存不受 Rust 所有权（Ownership）直接管理——张量 drop 时释放 GPU 内存，但：
@@ -671,7 +655,6 @@ fn inference() -> anyhow::Result<()> {
 
 fn main() {}
 ```
-
 > **修正**:
 > Rust AI 框架（`candle`、`burn`、`tch-rs`）的张量操作在**运行时（Runtime）**检查维度兼容性，不匹配时 panic（或返回 `Err`）。
 > 这与 PyTorch（Python 中运行时检查，但可广播）或 TensorFlow（graph 模式在构建时检查）不同。

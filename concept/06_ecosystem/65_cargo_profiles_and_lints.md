@@ -76,7 +76,6 @@ panic = "unwind"
 incremental = true
 codegen-units = 256
 ```
-
 ### `release` 默认配置
 
 ```toml
@@ -89,7 +88,6 @@ panic = "unwind"
 incremental = false
 codegen-units = 16
 ```
-
 > **关键洞察**: `dev` 追求编译速度，`release` 追求运行时（Runtime）性能；两者是日常开发中最常用的 profile。
 
 ---
@@ -119,14 +117,12 @@ inherits = "release"
 lto = true
 codegen-units = 1
 ```
-
 使用：
 
 ```bash
 cargo build --profile release-lto
 # 输出到 target/release-lto/
 ```
-
 - 必须指定 `inherits`；
 - 输出目录名与 profile 名相同；
 - 适合为 CI、部署、调试等场景定制专门配置。
@@ -150,7 +146,6 @@ opt-level = 2
 [profile.dev.build-override]
 opt-level = 3
 ```
-
 优先级（从高到低）：
 
 1. 命名包 `[profile.dev.package.name]`
@@ -205,7 +200,6 @@ enum_glob_use = "deny"
 [lints.cargo]
 unused_dependencies = "warn"
 ```
-
 ### 工作区继承
 
 工作区根：
@@ -214,14 +208,12 @@ unused_dependencies = "warn"
 [workspace.lints.rust]
 unsafe_code = "forbid"
 ```
-
 成员包：
 
 ```toml
 [lints]
 workspace = true
 ```
-
 > **注意**: `lints.rust` 控制 rustc lint；`lints.clippy` 控制 Clippy；`lints.cargo` 控制 Cargo 自身 lint。Cargo lints 目前需 nightly。
 >
 > [来源: Cargo Book — Lints](https://doc.rust-lang.org/cargo/reference/lints.html)

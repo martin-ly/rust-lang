@@ -1,7 +1,6 @@
 # research_notes 组织架构与导航 {#research_notes-组织架构与导航}
 >
 > **概念族**: 元/导航/索引
-
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -85,7 +84,6 @@
 ├── 04_compositional_engineering  ← CE-T1–T3、组合反例→错误码
 └── 06_boundary_analysis          ← 并发选型决策树
 ```
-
 **交叉层**：experiments/（实验验证）、practical_applications、BEST_PRACTICES
 
 ---
@@ -129,7 +127,6 @@ research_notes/
     ├── 10_contributing.md、10_quality_checklist.md
     └── 其他运维/参考文档
 ```
-
 ---
 
 ## 四、文档角色速查 {#四文档角色速查}

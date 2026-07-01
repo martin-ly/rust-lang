@@ -78,7 +78,6 @@ where
     }
 }
 ```
-
 **应用场景**:
 
 - 编译时矩阵运算
@@ -110,7 +109,6 @@ async fn new_way() {
     let result = f().await;
 }
 ```
-
 **优势**:
 
 - 更清晰的语法
@@ -162,7 +160,6 @@ impl AsyncIterator for Counter {
     }
 }
 ```
-
 **优势**:
 
 - 隐藏复杂的 Future 类型
@@ -197,7 +194,6 @@ fn recursive_async(n: u32) -> RecursiveFuture {
     }
 }
 ```
-
 **应用场景**:
 
 - 递归异步函数
@@ -223,7 +219,6 @@ timeline
     2027 Q1 : Rust 2.0?
             : - 重大版本规划
 ```
-
 ---
 
 ## 🔗 参考资源

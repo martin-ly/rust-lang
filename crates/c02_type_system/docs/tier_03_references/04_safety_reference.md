@@ -1,0 +1,1587 @@
+﻿# 3.4 Rust 类型系统 - 安全性参考
+
+> **文档类型**: Tier 3 - 参考层
+> **文档定位**: 类型系统安全性完整参考
+> **适用对象**: 中级 → 高级开发者
+> **前置知识**: [2.1 基础类型指南](../tier_02_guides/01_basic_types_guide.md), [2.5 生命周期指南](../tier_02_guides/05_lifetimes_guide.md)
+> **最后更新**: 2025-12-11
+
+---
+
+## 📋 目录
+
+- [3.4 Rust 类型系统 - 安全性参考](#34-rust-类型系统---安全性参考)
+  - [📋 目录](#-目录)
+  - [🎯 概述](#-概述)
+  - [1. 类型安全](#1-类型安全)
+    - [1.1 核心原则](#11-核心原则)
+    - [1.2 强类型系统](#12-强类型系统)
+    - [1.3 类型推断](#13-类型推断)
+  - [2. 内存安全](#2-内存安全)
+    - [2.1 所有权系统](#21-所有权系统)
+    - [2.2 借用检查](#22-借用检查)
+    - [2.3 生命周期](#23-生命周期)
+    - [2.4 移动语义与内存安全](#24-移动语义与内存安全)
+    - [2.5 内存安全的高级模式](#25-内存安全的高级模式)
+    - [2.6 内存安全实战案例](#26-内存安全实战案例)
+  - [3. 线程安全](#3-线程安全)
+    - [3.1 Send 和 Sync](#31-send-和-sync)
+    - [3.2 数据竞争保护](#32-数据竞争保护)
+    - [3.3 并发原语](#33-并发原语)
+    - [3.4 线程安全的高级模式](#34-线程安全的高级模式)
+  - [4. 空指针安全](#4-空指针安全)
+    - [4.1 Option 类型](#41-option-类型)
+    - [4.2 Result 类型](#42-result-类型)
+    - [4.3 消除 null](#43-消除-null)
+  - [5. 内存布局安全](#5-内存布局安全)
+    - [5.1 Sized 和 DST](#51-sized-和-dst)
+    - [5.2 对齐和填充](#52-对齐和填充)
+    - [5.3 repr 属性](#53-repr-属性)
+  - [6. Unsafe 边界](#6-unsafe-边界)
+    - [6.1 Unsafe 操作](#61-unsafe-操作)
+    - [6.2 安全抽象](#62-安全抽象)
+    - [6.3 最佳实践](#63-最佳实践)
+  - [7. 实战案例](#7-实战案例)
+    - [案例 1: 类型安全的 API](#案例-1-类型安全的-api)
+    - [案例 2: 内存安全的缓冲区](#案例-2-内存安全的缓冲区)
+    - [案例 3: 线程安全的计数器](#案例-3-线程安全的计数器)
+  - [8. 常见安全陷阱](#8-常见安全陷阱)
+  - [9. 总结](#9-总结)
+  - [10. 参考资源](#10-参考资源)
+  - [**🎉 完成安全性参考学习！** 🦀](#-完成安全性参考学习-)
+
+---
+
+## 🎯 概述
+
+Rust 的类型系统提供了**三大安全保证**：
+
+| 安全类型     | 保证         | 机制                         |
+| :--- | :--- | :--- |
+| **类型安全** | 防止类型错误 | 强类型系统 + 类型检查        |
+| **内存安全** | 防止内存错误 | 所有权 + 借用检查 + 生命周期 |
+| **线程安全** | 防止数据竞争 | Send/Sync + 借用规则         |
+
+---
+
+## 1. 类型安全
+
+### 1.1 核心原则
+
+**类型安全**：防止在运行时出现类型错误。
+
+```rust
+fn main() {
+    let x: i32 = 42;
+
+    // ✅ 类型安全：编译时检查
+    let y: i32 = x + 10;
+
+    // ❌ 编译错误：类型不匹配
+    // let z: String = x;
+
+    // ✅ 需要显式转换
+    let z: String = x.to_string();
+
+    println!("y: {}, z: {}", y, z);
+}
+```
+### 1.2 强类型系统
+
+**没有隐式转换**:
+
+```rust
+fn process_number(n: i32) {
+    println!("Number: {}", n);
+}
+
+fn main() {
+    let x: i32 = 42;
+    process_number(x);  // ✅
+
+    // ❌ 即使是兼容的数值类型也不能隐式转换
+    // let y: i64 = 42;
+    // process_number(y);  // 编译错误
+
+    // ✅ 需要显式转换
+    let y: i64 = 42;
+    process_number(y as i32);
+}
+```
+### 1.3 类型推断
+
+**编译时推断**:
+
+```rust
+fn main() {
+    // 编译器推断类型
+    let x = 42;          // i32
+    let y = 3.14;        // f64
+    let z = "hello";     // &str
+    let v = vec![1, 2];  // Vec<i32>
+
+    // 需要类型注解的情况
+    let numbers: Vec<i32> = Vec::new();
+
+    // 泛型需要明确类型
+    let parsed: i32 = "42".parse().unwrap();
+
+    println!("{} {} {} {:?} {:?} {}", x, y, z, v, numbers, parsed);
+}
+```
+---
+
+## 2. 内存安全
+
+### 2.1 所有权系统
+
+**防止重复释放和使用后释放**:
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1;  // s1 moved
+
+    // ❌ 编译错误：s1 已被移动
+    // println!("{}", s1);
+
+    println!("{}", s2);  // ✅
+
+    // 防止双重释放
+} // s2 dropped, s1 已失效
+```
+**防止悬垂指针**:
+
+```rust
+fn main() {
+    let reference;
+    {
+        let value = String::from("hello");
+        // ❌ 编译错误：value 生命周期不够长
+        // reference = &value;
+    }
+    // println!("{}", reference);  // 悬垂指针！
+}
+```
+### 2.2 借用检查
+
+**借用规则**:
+
+1. 任意多个不可变引用 **或** 一个可变引用
+2. 引用必须总是有效的
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+
+    // ✅ 多个不可变引用
+    let r1 = &s;
+    let r2 = &s;
+    println!("{} {}", r1, r2);
+
+    // ❌ 不能同时有可变和不可变引用
+    // let r3 = &mut s;
+    // println!("{} {} {}", r1, r2, r3);
+
+    // ✅ 不可变引用作用域结束后可以创建可变引用
+    let r3 = &mut s;
+    r3.push_str(" world");
+    println!("{}", r3);
+}
+```
+### 2.3 生命周期
+
+**生命周期注解**:
+
+```rust
+// 明确引用的生命周期关系
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+
+fn main() {
+    let string1 = String::from("long string");
+    {
+        let string2 = String::from("short");
+        let result = longest(&string1, &string2);
+        println!("Longest: {}", result);
+    }
+
+    // ❌ 如果返回值要在这里使用会编译错误
+    // println!("Longest: {}", result);
+}
+```
+### 2.4 移动语义与内存安全
+
+**移动vs复制**:
+
+```rust
+// Copy类型：按位复制
+fn copy_semantics() {
+    let x = 5;
+    let y = x;  // Copy
+    println!("x={}, y={}", x, y);  // 两者都可用
+}
+
+// Move类型：所有权转移
+fn move_semantics() {
+    let s1 = String::from("hello");
+    let s2 = s1;  // Move
+    // println!("{}", s1);  // ❌ 编译错误：s1已被移动
+    println!("{}", s2);  // ✅
+}
+```
+**部分移动**:
+
+```rust
+#[derive(Debug)]
+struct Data {
+    name: String,
+    count: i32,
+}
+
+fn partial_move() {
+    let data = Data {
+        name: String::from("test"),
+        count: 42,
+    };
+
+    let name = data.name;  // 移动name字段
+    let count = data.count;  // Copy count字段
+
+    // println!("{:?}", data);  // ❌ 编译错误：name已被移动
+    println!("name: {}, count: {}", name, count);  // ✅
+}
+```
+**避免意外移动**:
+
+```rust
+fn avoid_move() {
+    let s = String::from("hello");
+
+    // ❌ 不好：移动到函数
+    // takes_ownership(s);
+    // println!("{}", s);  // 错误：s已被移动
+
+    // ✅ 好：借用
+    borrows(&s);
+    println!("{}", s);  // ✅ s仍然有效
+}
+
+fn takes_ownership(s: String) {
+    println!("{}", s);
+}
+
+fn borrows(s: &String) {
+    println!("{}", s);
+}
+```
+### 2.5 内存安全的高级模式
+
+**模式1：内部可变性**:
+
+```rust
+use std::cell::RefCell;
+
+struct SafeCounter {
+    count: RefCell<i32>,
+}
+
+impl SafeCounter {
+    fn new() -> Self {
+        SafeCounter {
+            count: RefCell::new(0),
+        }
+    }
+
+    fn increment(&self) {
+        *self.count.borrow_mut() += 1;
+    }
+
+    fn get(&self) -> i32 {
+        *self.count.borrow()
+    }
+}
+
+fn main() {
+    let counter = SafeCounter::new();
+    counter.increment();
+    println!("Count: {}", counter.get());
+}
+```
+**模式2：动态分配与Box**:
+
+```rust
+// 大型数据放在堆上
+struct LargeData([u8; 10000]);
+
+fn use_box() {
+    let large = Box::new(LargeData([0; 10000]));
+    // large存储在堆上，只在栈上保存指针
+    println!("Size of Box: {} bytes", std::mem::size_of_val(&large));
+}
+```
+**模式3：引用计数（Rc/Arc）**:
+
+```rust
+use std::rc::Rc;
+
+fn shared_ownership() {
+    let data = Rc::new(String::from("shared"));
+
+    let ref1 = Rc::clone(&data);
+    let ref2 = Rc::clone(&data);
+
+    println!("Count: {}", Rc::strong_count(&data));  // 3
+    println!("Data: {}", data);
+}
+```
+### 2.6 内存安全实战案例
+
+**案例1：安全的链表实现**:
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+
+type Link<T> = Option<Rc<RefCell<Node<T>>>>;
+
+struct Node<T> {
+    value: T,
+    next: Link<T>,
+}
+
+struct LinkedList<T> {
+    head: Link<T>,
+}
+
+impl<T> LinkedList<T> {
+    fn new() -> Self {
+        LinkedList { head: None }
+    }
+
+    fn push(&mut self, value: T) {
+        let new_node = Rc::new(RefCell::new(Node {
+            value,
+            next: self.head.take(),
+        }));
+        self.head = Some(new_node);
+    }
+}
+```
+**案例2：内存池管理**:
+
+```rust
+struct MemoryPool<T> {
+    items: Vec<T>,
+    free_list: Vec<usize>,
+}
+
+impl<T: Default> MemoryPool<T> {
+    fn new(capacity: usize) -> Self {
+        MemoryPool {
+            items: (0..capacity).map(|_| T::default()).collect(),
+            free_list: (0..capacity).collect(),
+        }
+    }
+
+    fn allocate(&mut self) -> Option<&mut T> {
+        self.free_list.pop().map(|idx| &mut self.items[idx])
+    }
+
+    fn deallocate(&mut self, item: &T) {
+        // 安全地回收内存
+        let ptr = item as *const T;
+        let base = self.items.as_ptr();
+        let offset = unsafe { ptr.offset_from(base) };
+        if offset >= 0 && (offset as usize) < self.items.len() {
+            self.free_list.push(offset as usize);
+        }
+    }
+}
+```
+---
+
+## 3. 线程安全
+
+### 3.1 Send 和 Sync
+
+**定义**:
+
+```rust
+// Send: 可以安全地在线程间传递所有权
+pub unsafe auto trait Send {}
+
+// Sync: 可以安全地在线程间共享引用
+pub unsafe auto trait Sync {}
+
+// T: Sync ⇔ &T: Send
+```
+**示例**:
+
+```rust
+use std::thread;
+
+fn main() {
+    // ✅ i32 实现了 Send
+    let number = 42;
+    let handle = thread::spawn(move || {
+        println!("Number: {}", number);
+    });
+    handle.join().unwrap();
+
+    // ✅ String 实现了 Send
+    let s = String::from("hello");
+    let handle = thread::spawn(move || {
+        println!("String: {}", s);
+    });
+    handle.join().unwrap();
+}
+```
+**不满足 Send/Sync 的类型**:
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+use std::thread;
+
+fn main() {
+    // ❌ Rc 不是 Send
+    // let rc = Rc::new(42);
+    // thread::spawn(move || {
+    //     println!("{}", *rc);
+    // });
+
+    // ✅ 使用 Arc (Atomic Rc)
+    use std::sync::Arc;
+    let arc = Arc::new(42);
+    let arc_clone = arc.clone();
+    thread::spawn(move || {
+        println!("{}", *arc_clone);
+    }).join().unwrap();
+}
+```
+### 3.2 数据竞争保护
+
+**Mutex 和 RwLock**:
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());
+}
+```
+### 3.3 并发原语
+
+**原子类型**:
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::Arc;
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(AtomicUsize::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            for _ in 0..1000 {
+                counter.fetch_add(1, Ordering::SeqCst);
+            }
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", counter.load(Ordering::SeqCst));
+}
+```
+### 3.4 线程安全的高级模式
+
+**模式1：无锁数据结构**:
+
+```rust
+use std::sync::atomic::{AtomicPtr, Ordering};
+use std::ptr;
+
+struct LockFreeStack<T> {
+    head: AtomicPtr<Node<T>>,
+}
+
+struct Node<T> {
+    data: T,
+    next: *mut Node<T>,
+}
+
+impl<T> LockFreeStack<T> {
+    fn new() -> Self {
+        LockFreeStack {
+            head: AtomicPtr::new(ptr::null_mut()),
+        }
+    }
+
+    fn push(&self, data: T) {
+        let new_node = Box::into_raw(Box::new(Node {
+            data,
+            next: ptr::null_mut(),
+        }));
+
+        loop {
+            let head = self.head.load(Ordering::Acquire);
+            unsafe { (*new_node).next = head; }
+
+            if self.head.compare_exchange(
+                head,
+                new_node,
+                Ordering::Release,
+                Ordering::Acquire,
+            ).is_ok() {
+                break;
+            }
+        }
+    }
+}
+```
+**模式2：读写锁优化**:
+
+```rust
+use std::sync::RwLock;
+use std::collections::HashMap;
+
+struct Cache<K, V> {
+    data: RwLock<HashMap<K, V>>,
+}
+
+impl<K: Eq + std::hash::Hash + Clone, V: Clone> Cache<K, V> {
+    fn new() -> Self {
+        Cache {
+            data: RwLock::new(HashMap::new()),
+        }
+    }
+
+    fn get(&self, key: &K) -> Option<V> {
+        // 读锁：允许多个并发读取
+        let read_guard = self.data.read().unwrap();
+        read_guard.get(key).cloned()
+    }
+
+    fn insert(&self, key: K, value: V) {
+        // 写锁：独占访问
+        let mut write_guard = self.data.write().unwrap();
+        write_guard.insert(key, value);
+    }
+}
+
+fn main() {
+    use std::thread;
+    use std::sync::Arc;
+
+    let cache = Arc::new(Cache::new());
+
+    // 多个读者
+    let mut handles = vec![];
+    for i in 0..10 {
+        let cache = Arc::clone(&cache);
+        let handle = thread::spawn(move || {
+            cache.get(&i);
+        });
+        handles.push(handle);
+    }
+
+    // 一个写者
+    let cache_writer = Arc::clone(&cache);
+    let writer = thread::spawn(move || {
+        cache_writer.insert(42, "value");
+    });
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    writer.join().unwrap();
+}
+```
+**模式3：Channel通信模式**:
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+use std::time::Duration;
+
+enum Message {
+    Data(String),
+    Terminate,
+}
+
+fn worker_thread_pattern() {
+    let (tx, rx) = mpsc::channel();
+
+    // Worker线程
+    let worker = thread::spawn(move || {
+        loop {
+            match rx.recv() {
+                Ok(Message::Data(data)) => {
+                    println!("Processing: {}", data);
+                    thread::sleep(Duration::from_millis(100));
+                }
+                Ok(Message::Terminate) | Err(_) => {
+                    println!("Worker terminating");
+                    break;
+                }
+            }
+        }
+    });
+
+    // 主线程发送任务
+    for i in 0..5 {
+        tx.send(Message::Data(format!("Task {}", i))).unwrap();
+    }
+
+    tx.send(Message::Terminate).unwrap();
+    worker.join().unwrap();
+}
+```
+**模式4：线程池模式**:
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::sync::mpsc;
+use std::thread;
+
+type Job = Box<dyn FnOnce() + Send + 'static>;
+
+struct ThreadPool {
+    workers: Vec<Worker>,
+    sender: mpsc::Sender<Job>,
+}
+
+impl ThreadPool {
+    fn new(size: usize) -> ThreadPool {
+        let (sender, receiver) = mpsc::channel();
+        let receiver = Arc::new(Mutex::new(receiver));
+
+        let mut workers = Vec::with_capacity(size);
+        for id in 0..size {
+            workers.push(Worker::new(id, Arc::clone(&receiver)));
+        }
+
+        ThreadPool { workers, sender }
+    }
+
+    fn execute<F>(&self, f: F)
+    where
+        F: FnOnce() + Send + 'static,
+    {
+        let job = Box::new(f);
+        self.sender.send(job).unwrap();
+    }
+}
+
+struct Worker {
+    id: usize,
+    thread: thread::JoinHandle<()>,
+}
+
+impl Worker {
+    fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
+        let thread = thread::spawn(move || loop {
+            let job = receiver.lock().unwrap().recv();
+
+            match job {
+                Ok(job) => {
+                    println!("Worker {} executing job", id);
+                    job();
+                }
+                Err(_) => {
+                    println!("Worker {} terminating", id);
+                    break;
+                }
+            }
+        });
+
+        Worker { id, thread }
+    }
+}
+```
+---
+
+## 4. 空指针安全
+
+### 4.1 Option 类型
+
+**消除 null**:
+
+```rust
+fn find_user(id: u32) -> Option<String> {
+    if id == 1 {
+        Some(String::from("Alice"))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    match find_user(1) {
+        Some(name) => println!("Found: {}", name),
+        None => println!("Not found"),
+    }
+
+    // ❌ 不能直接使用，必须处理 None
+    // let name = find_user(2);
+    // println!("{}", name);  // 编译错误
+
+    // ✅ 使用 unwrap_or
+    let name = find_user(2).unwrap_or(String::from("Guest"));
+    println!("{}", name);
+}
+```
+### 4.2 Result 类型
+
+**错误处理**:
+
+```rust
+use std::fs::File;
+use std::io::{self, Read};
+
+fn read_file(path: &str) -> Result<String, io::Error> {
+    let mut file = File::open(path)?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+    Ok(contents)
+}
+
+fn main() {
+    match read_file("data.txt") {
+        Ok(contents) => println!("Contents: {}", contents),
+        Err(e) => println!("Error: {}", e),
+    }
+}
+```
+### 4.3 消除 null
+
+**类型系统保证**:
+
+```rust
+// Rust 没有 null
+// 所有引用都必须指向有效数据
+
+fn main() {
+    // ✅ 引用总是有效的
+    let x = 42;
+    let r = &x;
+    println!("{}", r);
+
+    // ✅ 使用 Option 表示可能不存在的值
+    let maybe_value: Option<i32> = Some(42);
+    if let Some(value) = maybe_value {
+        println!("{}", value);
+    }
+}
+```
+---
+
+## 5. 内存布局安全
+
+### 5.1 Sized 和 DST
+
+**Sized trait**:
+
+```rust
+// 大多数类型都是 Sized
+fn process<T: Sized>(value: T) {
+    // T 的大小在编译时已知
+}
+
+// DST (Dynamically Sized Types)
+fn process_slice(slice: &[i32]) {
+    // [i32] 是 DST，大小在运行时确定
+    println!("Length: {}", slice.len());
+}
+
+fn main() {
+    process(42);
+    process("hello");
+
+    process_slice(&[1, 2, 3]);
+}
+```
+### 5.2 对齐和填充
+
+**内存对齐**:
+
+```rust
+use std::mem;
+
+#[repr(C)]
+struct Point {
+    x: i32,  // 4 bytes
+    y: i32,  // 4 bytes
+}
+
+#[repr(C)]
+struct Mixed {
+    a: u8,   // 1 byte
+    // 3 bytes padding
+    b: u32,  // 4 bytes
+    c: u16,  // 2 bytes
+    // 2 bytes padding
+}
+
+fn main() {
+    println!("Point size: {}", mem::size_of::<Point>());     // 8
+    println!("Point align: {}", mem::align_of::<Point>());   // 4
+
+    println!("Mixed size: {}", mem::size_of::<Mixed>());     // 12
+    println!("Mixed align: {}", mem::align_of::<Mixed>());   // 4
+}
+```
+### 5.3 repr 属性
+
+**控制内存布局**:
+
+```rust
+// Rust 默认布局（可优化）
+struct DefaultRepr {
+    a: u8,
+    b: u32,
+    c: u16,
+}
+
+// C 兼容布局
+#[repr(C)]
+struct CRepr {
+    a: u8,
+    b: u32,
+    c: u16,
+}
+
+// 紧凑布局
+#[repr(packed)]
+struct PackedRepr {
+    a: u8,
+    b: u32,
+    c: u16,
+}
+
+// 对齐到指定字节
+#[repr(align(16))]
+struct AlignedRepr {
+    a: u8,
+}
+
+fn main() {
+    use std::mem::size_of;
+
+    println!("Default: {}", size_of::<DefaultRepr>());  // 优化后可能是 8
+    println!("C: {}", size_of::<CRepr>());              // 12 (带填充)
+    println!("Packed: {}", size_of::<PackedRepr>());    // 7 (无填充)
+    println!("Aligned: {}", size_of::<AlignedRepr>());  // 16
+}
+```
+---
+
+## 6. Unsafe 边界
+
+### 6.1 Unsafe 操作
+
+**五种 unsafe 操作**:
+
+1. 解引用裸指针
+2. 调用 unsafe 函数
+3. 访问或修改可变静态变量
+4. 实现 unsafe trait
+5. 访问 union 字段
+
+```rust
+fn main() {
+    let x = 42;
+    let ptr = &x as *const i32;
+
+    // ❌ 不能在安全代码中解引用裸指针
+    // let value = *ptr;
+
+    // ✅ 必须在 unsafe 块中
+    unsafe {
+        let value = *ptr;
+        println!("Value: {}", value);
+    }
+}
+```
+### 6.2 安全抽象
+
+**封装 unsafe**:
+
+```rust
+pub struct SafeVec<T> {
+    ptr: *mut T,
+    len: usize,
+    cap: usize,
+}
+
+impl<T> SafeVec<T> {
+    pub fn new() -> Self {
+        SafeVec {
+            ptr: std::ptr::null_mut(),
+            len: 0,
+            cap: 0,
+        }
+    }
+
+    // 安全的公共 API
+    pub fn push(&mut self, value: T) {
+        // 内部使用 unsafe，但接口是安全的
+        unsafe {
+            // ... unsafe 实现 ...
+        }
+    }
+
+    // 安全的公共 API
+    pub fn get(&self, index: usize) -> Option<&T> {
+        if index < self.len {
+            unsafe {
+                Some(&*self.ptr.add(index))
+            }
+        } else {
+            None
+        }
+    }
+}
+
+fn main() {
+    let mut vec = SafeVec::new();
+    vec.push(42);  // ✅ 安全调用
+
+    if let Some(value) = vec.get(0) {
+        println!("Value: {}", value);
+    }
+}
+```
+### 6.3 最佳实践
+
+**最小化 unsafe**:
+
+```rust
+// ✅ 好：unsafe 限制在小范围
+fn safe_wrapper(data: &[u8]) -> u32 {
+    assert!(data.len() >= 4);
+    unsafe {
+        // 只有必要的 unsafe 操作
+        *(data.as_ptr() as *const u32)
+    }
+}
+
+// ❌ 坏：整个函数都是 unsafe
+unsafe fn bad_wrapper(data: &[u8]) -> u32 {
+    // 不必要地将整个函数标记为 unsafe
+    let value = *(data.as_ptr() as *const u32);
+    value + 10  // 这部分不需要 unsafe
+}
+
+fn main() {
+    let data = [1, 2, 3, 4];
+    let value = safe_wrapper(&data);
+    println!("Value: {}", value);
+}
+```
+---
+
+## 7. 实战案例
+
+### 案例 1: 类型安全的 API
+
+```rust
+use std::marker::PhantomData;
+
+// 状态类型
+struct Draft;
+struct Published;
+
+// 文档类型，使用状态标记
+struct Document<State> {
+    content: String,
+    _state: PhantomData<State>,
+}
+
+impl Document<Draft> {
+    fn new(content: String) -> Self {
+        Document {
+            content,
+            _state: PhantomData,
+        }
+    }
+
+    fn edit(&mut self, new_content: String) {
+        self.content = new_content;
+    }
+
+    fn publish(self) -> Document<Published> {
+        Document {
+            content: self.content,
+            _state: PhantomData,
+        }
+    }
+}
+
+impl Document<Published> {
+    fn view(&self) -> &str {
+        &self.content
+    }
+
+    // 已发布的文档不能编辑
+    // fn edit(&mut self, new_content: String) {}  // 不提供此方法
+}
+
+fn main() {
+    let mut draft = Document::<Draft>::new(String::from("Initial content"));
+    draft.edit(String::from("Updated content"));
+
+    let published = draft.publish();
+    println!("Published: {}", published.view());
+
+    // ❌ 编译错误：已发布的文档不能编辑
+    // published.edit(String::from("Cannot edit"));
+}
+```
+### 案例 2: 内存安全的缓冲区
+
+```rust
+struct SafeBuffer {
+    data: Vec<u8>,
+    read_pos: usize,
+}
+
+impl SafeBuffer {
+    fn new(capacity: usize) -> Self {
+        SafeBuffer {
+            data: Vec::with_capacity(capacity),
+            read_pos: 0,
+        }
+    }
+
+    fn write(&mut self, bytes: &[u8]) {
+        self.data.extend_from_slice(bytes);
+    }
+
+    fn read(&mut self, len: usize) -> Option<&[u8]> {
+        if self.read_pos + len <= self.data.len() {
+            let slice = &self.data[self.read_pos..self.read_pos + len];
+            self.read_pos += len;
+            Some(slice)
+        } else {
+            None
+        }
+    }
+}
+
+fn main() {
+    let mut buffer = SafeBuffer::new(1024);
+
+    buffer.write(b"Hello, ");
+    buffer.write(b"World!");
+
+    if let Some(data) = buffer.read(5) {
+        println!("Read: {:?}", std::str::from_utf8(data).unwrap());
+    }
+
+    // 不会发生缓冲区溢出
+    if let Some(data) = buffer.read(100) {
+        println!("Read: {:?}", data);
+    } else {
+        println!("Not enough data");
+    }
+}
+```
+### 案例 3: 线程安全的计数器
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+struct ThreadSafeCounter {
+    value: Arc<Mutex<i32>>,
+}
+
+impl ThreadSafeCounter {
+    fn new() -> Self {
+        ThreadSafeCounter {
+            value: Arc::new(Mutex::new(0)),
+        }
+    }
+
+    fn increment(&self) {
+        let mut value = self.value.lock().unwrap();
+        *value += 1;
+    }
+
+    fn get(&self) -> i32 {
+        *self.value.lock().unwrap()
+    }
+
+    fn clone_counter(&self) -> Self {
+        ThreadSafeCounter {
+            value: Arc::clone(&self.value),
+        }
+    }
+}
+
+fn main() {
+    let counter = ThreadSafeCounter::new();
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter_clone = counter.clone_counter();
+        let handle = thread::spawn(move || {
+            for _ in 0..1000 {
+                counter_clone.increment();
+            }
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Final count: {}", counter.get());
+}
+```
+---
+
+## 8. 常见安全陷阱
+
+**陷阱 1: 生命周期推断错误**:
+
+```rust
+// ❌ 错误
+// fn longest(x: &str, y: &str) -> &str {
+//     if x.len() > y.len() { x } else { y }
+// }
+
+// ✅ 正确：明确生命周期
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y }
+}
+```
+**陷阱 2: 可变性和不可变性混用**:
+
+```rust
+fn main() {
+    let mut data = vec![1, 2, 3];
+    let r1 = &data;
+
+    // ❌ 编译错误
+    // data.push(4);
+    // println!("{:?}", r1);
+
+    // ✅ 正确：r1 作用域结束后再修改
+    println!("{:?}", r1);
+    data.push(4);
+}
+```
+**陷阱 3: Unsafe 边界泄漏**:
+
+```rust
+// ❌ 坏：unsafe 泄漏到公共 API
+// pub fn bad_api(ptr: *const i32) -> i32 {
+//     unsafe { *ptr }
+// }
+
+// ✅ 好：封装 unsafe
+pub fn safe_api(value: &i32) -> i32 {
+    // 内部可以使用 unsafe，但不泄漏
+    *value
+}
+```
+**陷阱 4: 数据竞争**:
+
+```rust
+use std::thread;
+use std::sync::{Arc, Mutex};
+
+// ❌ 危险：可能导致数据竞争
+fn bad_shared_counter() {
+    let counter = 0;
+    let handles: Vec<_> = (0..10)
+        .map(|_| {
+            // 编译错误：无法在多线程间共享可变引用
+            // thread::spawn(move || {
+            //     counter += 1;
+            // })
+            unimplemented!()
+        })
+        .collect();
+}
+
+// ✅ 安全：使用Mutex保护
+fn safe_shared_counter() {
+    let counter = Arc::new(Mutex::new(0));
+    let handles: Vec<_> = (0..10)
+        .map(|_| {
+            let counter = Arc::clone(&counter);
+            thread::spawn(move || {
+                let mut num = counter.lock().unwrap();
+                *num += 1;
+            })
+        })
+        .collect();
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+}
+```
+**陷阱 5: 整数溢出**:
+
+```rust
+fn add_numbers(a: u8, b: u8) -> u8 {
+    // ❌ 危险：可能溢出（debug模式panic，release模式回绕）
+    // a + b
+
+    // ✅ 安全：检查溢出
+    a.checked_add(b).expect("Overflow occurred")
+}
+
+fn safe_add(a: u8, b: u8) -> Option<u8> {
+    a.checked_add(b)
+}
+
+fn main() {
+    println!("Safe add: {:?}", safe_add(200, 100)); // None
+}
+```
+**陷阱 6: 悬垂引用**:
+
+```rust
+// ❌ 编译错误：返回悬垂引用
+// fn dangle() -> &String {
+//     let s = String::from("hello");
+//     &s  // s在函数结束时被释放
+// }
+
+// ✅ 正确：返回所有权
+fn no_dangle() -> String {
+    String::from("hello")
+}
+
+// ✅ 或者接受引用参数
+fn borrow_string(s: &String) -> &str {
+    &s[..]
+}
+```
+**陷阱 7: 内存泄漏（循环引用）**:
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+
+#[derive(Debug)]
+struct Node {
+    value: i32,
+    next: Option<Rc<RefCell<Node>>>,
+    prev: Option<Rc<RefCell<Node>>>,
+}
+
+// ❌ 危险：可能导致循环引用
+fn create_cycle() {
+    let node1 = Rc::new(RefCell::new(Node {
+        value: 1,
+        next: None,
+        prev: None,
+    }));
+
+    let node2 = Rc::new(RefCell::new(Node {
+        value: 2,
+        next: Some(Rc::clone(&node1)),
+        prev: None,
+    }));
+
+    node1.borrow_mut().next = Some(Rc::clone(&node2));
+    // 循环引用：node1 -> node2 -> node1
+}
+
+// ✅ 安全：使用Weak打破循环
+use std::rc::Weak;
+
+#[derive(Debug)]
+struct SafeNode {
+    value: i32,
+    next: Option<Rc<RefCell<SafeNode>>>,
+    prev: Option<Weak<RefCell<SafeNode>>>,  // 使用Weak
+}
+```
+**陷阱 8: 未检查的错误处理**:
+
+```rust
+use std::fs::File;
+use std::io::Read;
+
+// ❌ 危险：忽略错误
+fn read_file_bad(path: &str) -> String {
+    let mut file = File::open(path).unwrap();  // 可能panic
+    let mut contents = String::new();
+    file.read_to_string(&mut contents).unwrap();  // 可能panic
+    contents
+}
+
+// ✅ 安全：正确处理错误
+fn read_file_safe(path: &str) -> std::io::Result<String> {
+    let mut file = File::open(path)?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+    Ok(contents)
+}
+```
+**陷阱 9: Unsafe指针解引用**:
+
+```rust
+fn main() {
+    let x = 42;
+    let ptr = &x as *const i32;
+
+    // ❌ 危险：未检查的unsafe
+    unsafe {
+        let value = *ptr;
+        println!("{}", value);
+    }
+
+    // ✅ 更好：保持在安全边界内
+    let safe_value = x;  // 直接使用值
+    println!("{}", safe_value);
+}
+
+// ✅ 最佳：封装unsafe在安全接口后
+pub struct SafePtr<T> {
+    ptr: *const T,
+}
+
+impl<T> SafePtr<T> {
+    pub fn new(value: &T) -> Self {
+        SafePtr { ptr: value as *const T }
+    }
+
+    pub fn get(&self) -> Option<&T> {
+        if self.ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &*self.ptr })
+        }
+    }
+}
+```
+**陷阱 10: 字符串分片越界**:
+
+```rust
+fn main() {
+    let s = String::from("hello");
+
+    // ❌ 危险：可能panic
+    // let slice = &s[0..10];  // panic: 越界
+
+    // ✅ 安全：检查边界
+    let slice = s.get(0..5).unwrap_or("");
+    println!("{}", slice);
+
+    // ✅ 更安全：使用checked方法
+    if let Some(slice) = s.get(0..5) {
+        println!("{}", slice);
+    }
+}
+```
+**陷阱 11: Send/Sync误用**:
+
+```rust
+use std::rc::Rc;
+use std::thread;
+
+// ❌ 编译错误：Rc不是Send
+// fn bad_rc_thread() {
+//     let rc = Rc::new(5);
+//     thread::spawn(move || {
+//         println!("{}", rc);
+//     });
+// }
+
+// ✅ 正确：使用Arc
+use std::sync::Arc;
+
+fn good_arc_thread() {
+    let arc = Arc::new(5);
+    let arc_clone = Arc::clone(&arc);
+    thread::spawn(move || {
+        println!("{}", arc_clone);
+    }).join().unwrap();
+}
+```
+**陷阱 12: 生命周期省略误解**:
+
+```rust
+// ❌ 可能误解：以为都有相同生命周期
+struct BadStruct<'a> {
+    s1: &'a str,
+    s2: &'a str,
+}
+
+// ✅ 正确：明确不同生命周期
+struct GoodStruct<'a, 'b> {
+    s1: &'a str,
+    s2: &'b str,
+}
+
+impl<'a, 'b> GoodStruct<'a, 'b> {
+    fn new(s1: &'a str, s2: &'b str) -> Self {
+        GoodStruct { s1, s2 }
+    }
+}
+```
+**陷阱 13: 不当的clone使用**:
+
+```rust
+use std::sync::Arc;
+
+// ❌ 低效：频繁clone大对象
+fn inefficient_clone(data: &Vec<u8>) -> Vec<u8> {
+    data.clone()  // 复制整个Vec
+}
+
+// ✅ 高效：使用引用或Arc
+fn efficient_borrow(data: &Vec<u8>) -> &[u8] {
+    &data[..]
+}
+
+fn efficient_arc(data: Arc<Vec<u8>>) -> Arc<Vec<u8>> {
+    Arc::clone(&data)  // 只增加引用计数
+}
+```
+**陷阱 14: 拒绝服务（DoS）攻击**:
+
+```rust
+// ❌ 危险：无限制的递归
+fn bad_recursive(n: u32) -> u32 {
+    if n == 0 { 0 }
+    else { n + bad_recursive(n - 1) }  // 大数字可能栈溢出
+}
+
+// ✅ 安全：添加深度限制
+fn safe_recursive(n: u32, max_depth: u32) -> Option<u32> {
+    if max_depth == 0 {
+        return None;
+    }
+    if n == 0 {
+        Some(0)
+    } else {
+        safe_recursive(n - 1, max_depth - 1).map(|sum| n + sum)
+    }
+}
+
+// ✅ 最佳：使用迭代
+fn iterative_sum(n: u32) -> u32 {
+    (0..=n).sum()
+}
+```
+**陷阱 15: 侧信道攻击**:
+
+```rust
+use std::time::Instant;
+
+// ❌ 危险：时间攻击
+fn insecure_compare(a: &[u8], b: &[u8]) -> bool {
+    if a.len() != b.len() {
+        return false;
+    }
+    a.iter().zip(b.iter()).all(|(x, y)| x == y)
+    // 提前返回泄漏信息
+}
+
+// ✅ 安全：常量时间比较
+fn secure_compare(a: &[u8], b: &[u8]) -> bool {
+    if a.len() != b.len() {
+        return false;
+    }
+    let mut result = 0u8;
+    for (x, y) in a.iter().zip(b.iter()) {
+        result |= x ^ y;
+    }
+    result == 0
+}
+```
+---
+
+## 9. 总结
+
+**Rust 安全性保证**:
+
+| 安全类型       | 机制                     | 防止                    |
+| :--- | :--- | :--- || **类型安全**   | 强类型 + 类型检查        | 类型错误                |
+| **内存安全**   | 所有权 + 借用 + 生命周期 | UAF, 双重释放, 悬垂指针 |
+| **线程安全**   | Send/Sync + Mutex        | 数据竞争                |
+| **空指针安全** | Option/Result            | Null 解引用             |
+
+**核心原则**:
+
+1. ✅ 零成本抽象
+2. ✅ 编译时保证
+3. ✅ 内存安全无运行时开销
+4. ✅ 线程安全内建于类型系统
+5. ✅ Unsafe 最小化
+
+---
+
+## 10. 参考资源
+
+**官方文档**:
+
+- [Rust Book - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+- [Rust Book - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
+- [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+
+**相关文档**:
+
+- [2.1 基础类型指南](../tier_02_guides/01_basic_types_guide.md)
+- [2.5 生命周期指南](../tier_02_guides/05_lifetimes_guide.md)
+- [3.5 性能优化参考](05_performance_optimization_reference.md)
+
+---
+
+**最后更新**: 2025-12-11
+**适用版本**: Rust 1.92.0+
+**文档类型**: Tier 3 - 参考层
+
+---
+
+**🎉 完成安全性参考学习！** 🦀
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

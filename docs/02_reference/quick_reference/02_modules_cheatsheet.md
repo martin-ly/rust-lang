@@ -104,7 +104,6 @@ Crate (包)
     │   └── ...
     └── Submodule (子模块)
 ```
-
 ---
 
 ## 📝 模块声明 {#模块声明}
@@ -134,7 +133,6 @@ fn main() {
     // my_module::private_function(); // ❌ 错误：私有
 }
 ```
-
 ### 文件模块 {#文件模块}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -149,7 +147,6 @@ fn main() {
     my_module::public_function();
 }
 ```
-
 ```rust
 // src/my_module.rs
 pub fn public_function() {
@@ -160,7 +157,6 @@ fn private_function() {
     println!("Private function");
 }
 ```
-
 ### 目录模块 {#目录模块-1}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -175,7 +171,6 @@ fn main() {
     my_module::public_function();
 }
 ```
-
 ```rust,ignore
 // src/my_module/mod.rs
 pub fn public_function() {
@@ -184,14 +179,12 @@ pub fn public_function() {
 
 pub mod submodule;
 ```
-
 ```rust
 // src/my_module/submodule.rs
 pub fn sub_function() {
     println!("Sub function");
 }
 ```
-
 ---
 
 ## 🔒 可见性控制 {#可见性控制}
@@ -216,7 +209,6 @@ mod my_module {
     struct PrivateStruct {}
 }
 ```
-
 ### 受限可见性 {#受限可见性}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -238,7 +230,6 @@ mod my_module {
     fn private() {}
 }
 ```
-
 ### 结构体可见性 {#结构体可见性}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -263,7 +254,6 @@ mod my_module {
     }
 }
 ```
-
 ---
 
 ## 📥 use 语句 {#use-语句}
@@ -281,7 +271,6 @@ use std::collections::HashMap;
 // 使用
 let map = HashMap::new();
 ```
-
 ### 导入项 {#导入项}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -300,7 +289,6 @@ use std::collections::{HashMap, HashSet, BTreeMap};
 // 导入所有（不推荐）
 use std::collections::*;
 ```
-
 ### 重命名 {#重命名}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -311,7 +299,6 @@ use std::collections::HashMap as Map;
 
 let map = Map::new();
 ```
-
 ### 嵌套导入 {#嵌套导入}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -324,7 +311,6 @@ use std::{
     fs::File,
 };
 ```
-
 ### self 和 super {#self-和-super}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -339,7 +325,6 @@ use super::parent_module;
 // 导入 crate 根
 use crate::root_module;
 ```
-
 ---
 
 ## 🛤️ 路径系统 {#路径系统}
@@ -357,7 +342,6 @@ use crate::my_module::my_function;
 // 从外部 crate 开始
 use std::collections::HashMap;
 ```
-
 ### 相对路径 {#相对路径}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -373,7 +357,6 @@ mod parent {
     use super::sibling_module;
 }
 ```
-
 ### 路径简写 {#路径简写}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -385,7 +368,6 @@ use std::collections::hash_map::HashMap;
 // 简化路径（推荐）
 use std::collections::HashMap;
 ```
-
 ---
 
 ## 📁 文件组织 {#文件组织}
@@ -401,13 +383,11 @@ src/
 ├── main.rs
 └── lib.rs
 ```
-
 ```rust,ignore
 // src/lib.rs
 pub mod utils;
 pub mod models;
 ```
-
 ### 文件模块1 {#文件模块1}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -418,7 +398,6 @@ src/
 ├── utils.rs
 └── models.rs
 ```
-
 ```rust,ignore
 // src/main.rs
 mod utils;
@@ -429,7 +408,6 @@ fn main() {
     models::User::new();
 }
 ```
-
 ### 目录模块 {#目录模块-1}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -445,19 +423,16 @@ src/
     ├── user.rs
     └── post.rs
 ```
-
 ```rust,ignore
 // src/utils/mod.rs
 pub mod helper;
 
 pub fn util_function() {}
 ```
-
 ```rust
 // src/utils/helper.rs
 pub fn help() {}
 ```
-
 ### 混合组织 {#混合组织}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -474,7 +449,6 @@ src/
     ├── mod.rs
     └── user.rs
 ```
-
 ---
 
 ## 📦 Crate 系统 {#crate-系统}
@@ -492,7 +466,6 @@ pub mod models;
 
 pub fn public_api() {}
 ```
-
 ### 二进制 Crate {#二进制-crate}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -505,7 +478,6 @@ fn main() {
     utils::helper();
 }
 ```
-
 ### 多个二进制文件 {#多个二进制文件}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -518,7 +490,6 @@ src/
     ├── tool1.rs
     └── tool2.rs
 ```
-
 ```rust,ignore
 // src/bin/tool1.rs
 use my_crate::utils;
@@ -527,7 +498,6 @@ fn main() {
     utils::helper();
 }
 ```
-
 ### 外部 Crate {#外部-crate}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -540,13 +510,11 @@ fn main() {
 serde = "1.0"
 tokio = { version = "1", features = ["full"] }
 ```
-
 ```rust,ignore
 // 使用外部 crate
 use serde::{Serialize, Deserialize};
 use tokio::runtime::Runtime;
 ```
-
 ---
 
 ## 🎯 常用模式 {#常用模式}
@@ -566,7 +534,6 @@ mod internal {
 // 重导出，简化 API
 pub use internal::helper;
 ```
-
 ### 条件编译 {#条件编译}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -583,7 +550,6 @@ mod tests {
     fn test_function() {}
 }
 ```
-
 ### 模块别名 {#模块别名}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -595,7 +561,6 @@ pub type Map<K, V> = std::collections::HashMap<K, V>;
 // 使用 use 别名
 use std::collections::HashMap as Map;
 ```
-
 ### 私有模块 {#私有模块}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -611,7 +576,6 @@ pub mod public_module {
     pub fn function() {} // 可以从外部访问
 }
 ```
-
 ### 模块组织最佳实践 {#模块组织最佳实践}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -633,7 +597,6 @@ pub use handlers::handle_request;
 // 4. 公共函数
 pub fn public_api() {}
 ```
-
 ---
 
 ## 📚 路径规则速查 {#路径规则速查}
@@ -655,7 +618,6 @@ super::module::item
 // 外部 crate
 std::collections::HashMap
 ```
-
 ### use 路径 {#use-路径}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -673,7 +635,6 @@ use std::collections::{HashMap, HashSet};
 // 导入所有
 use std::collections::*;
 ```
-
 ---
 
 ## 🎓 常见模式 {#常见模式}
@@ -696,7 +657,6 @@ pub fn setup() {
     config::init();
 }
 ```
-
 ### 模块测试 {#模块测试}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -712,7 +672,6 @@ mod tests {
     }
 }
 ```
-
 ### 特性模块 {#特性模块}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -728,7 +687,6 @@ mod sync_impl {
     pub fn sync_function() {}
 }
 ```
-
 ---
 
 ## 🚫 反例速查 {#反例速查}
@@ -750,7 +708,6 @@ pub struct A { pub b: B }
 use crate::mod_a::A;  // ❌ 循环依赖
 pub struct B { pub a: A }
 ```
-
 **原因**: 循环依赖导致模块图无法解析。
 
 **修正**: 抽取公共类型到独立模块，或使用 trait 解耦。
@@ -769,7 +726,6 @@ mod inner {
 }
 // crate::inner::foo() 仍不可访问
 ```
-
 **原因**: 父模块私有时，子项 pub 也无法从外部访问。
 
 **修正**: 确保路径上的模块可见：`pub mod inner` 或 `pub use`。
@@ -849,7 +805,6 @@ pub mod middleware;  // 中间件
 pub use handlers::user_handler;
 pub use models::User;
 ```
-
 ```rust,ignore
 // src/handlers/mod.rs
 //! HTTP 请求处理器
@@ -871,7 +826,6 @@ impl fmt::Display for HandlerError {
     }
 }
 ```
-
 ```rust,ignore
 // src/handlers/user_handler.rs
 //! 用户相关请求处理
@@ -888,7 +842,6 @@ pub fn create_user(name: &str) -> User {
     User { id: 1, name: name.to_string() }
 }
 ```
-
 ```rust
 // src/models/mod.rs
 //! 数据模型
@@ -904,7 +857,6 @@ pub struct Post {
     pub content: String,
 }
 ```
-
 ### 场景 2: 特性门控模块 {#场景-2-特性门控模块}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -931,7 +883,6 @@ pub mod async_support;  // 异步支持
 #[cfg(feature = "wasm")]
 pub mod wasm_bindings;  // WASM 绑定
 ```
-
 ```rust
 // src/core/mod.rs
 //! 核心功能（无标准库依赖）
@@ -950,7 +901,6 @@ mod tests {
     }
 }
 ```
-
 ```rust
 // src/io/mod.rs
 //! 标准 IO 支持
@@ -961,7 +911,6 @@ pub fn read_file(path: &str) -> Result<String, std::io::Error> {
     fs::read_to_string(path)
 }
 ```
-
 ### 场景 3: 私有实现细节 {#场景-3-私有实现细节}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -1022,7 +971,6 @@ mod tests {
     }
 }
 ```
-
 ---
 
 ## ⚠️ 边界情况 {#边界情况}
@@ -1052,7 +1000,6 @@ fn main() {
     // outer::inner::public_in_inner(); // ❌ 编译错误：inner 是私有的
 }
 ```
-
 ### 边界 2: 重导出与命名空间 {#边界-2-重导出与命名空间}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -1083,7 +1030,6 @@ fn main() {
     let config = configure().build();
 }
 ```
-
 ### 边界 3: 循环依赖解决 {#边界-3-循环依赖解决}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -1122,7 +1068,6 @@ fn main() {
     println!("通过类型模块解耦循环依赖");
 }
 ```
-
 ### 形式化理论 {#形式化理论}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -1177,7 +1122,6 @@ pub fn get_config() -> Option<&'static Config> {
 let phi = f64::consts::GOLDEN_RATIO;
 let gamma = f64::consts::EULER_GAMMA;
 ```
-
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)

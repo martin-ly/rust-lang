@@ -37,7 +37,6 @@
   rustup show
   rustc --version  # 应输出 1.97.0
   ```
-
 - [ ] 运行 `cargo +1.97.0 check --workspace` 确认 stable 编译基线通过
 
 ---
@@ -85,7 +84,6 @@
   ```markdown
   > **官方发布说明**: <https://blog.rust-lang.org/2026/07/09/Rust-1.97.0.html>
   ```
-
 - [ ] 删除或更新 "预计稳定日期" 等前瞻性措辞
 - [ ] 检查所有 `rust,ignore` 代码块，确认 1.97 稳定的示例可改为 `rust` 可编译
 
@@ -97,7 +95,6 @@
   ```markdown
   > **已稳定**: 本文档中的特性已在 Rust 1.97.0 稳定。详细内容已迁移至 `docs/06_toolchain/06_21_rust_1_97_features.md`。
   ```
-
 ### 4.3 相关概念文档状态更新
 
 - [ ] `concept/03_advanced/08_nll_and_polonius.md`：更新时间戳

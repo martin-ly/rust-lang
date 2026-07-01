@@ -18,7 +18,6 @@
 > [事件驱动架构](32_event_driven_architecture.md)
 > **后置延伸**: [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) ·
 > [流处理生态](36_stream_processing_ecosystem.md)
-
 >
 > **来源**: [futures](https://docs.rs/futures/) · [tokio](https://docs.rs/tokio/) · [rxrust](https://docs.rs/rxrust/)
 > **前置概念**: N/A
@@ -85,7 +84,6 @@
 **变更日志**:
 
 > **补充来源**: [Reactive Streams JVM](https://github.com/reactive-streams/reactive-streams-jvm) · [Tokio Stream Internals](https://tokio.rs/tokio/topics)
-
 > **补充来源**: [来源: [RxRust](https://docs.rs/rxrust/latest/rxrust/)] · [来源: [futures-signals](https://docs.rs/futures-signals/latest/futures_signals/)]
 
 - v1.0 (2026-05-25): 初始创建——Reactive Streams、FRP、数据流编程专题，覆盖背压机制、Stream trait 组合子、Rust 实现骨架
@@ -114,7 +112,6 @@ Reactive Manifesto 四特质（2014）:
 │         异步消息传递、无阻塞、背压感知                         │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 > **关键洞察**: Reactive Manifesto 的**响应性**（Responsive）是最终目标，而其他三个特质是**手段**：
 >
 > - **弹性**（Resilience）保证系统部分故障时不完全崩溃 → 从而保持响应
@@ -157,7 +154,6 @@ Processor<T,R>:
   - 同时实现 Publisher<R> 和 Subscriber<T>
   - 用于转换/过滤/映射数据流
 ```
-
 > **来源**: [Reactive Streams Specification](https://www.reactive-streams.org/) ·
 > [来源: [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)] · [来源: [Tokio mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)]
 > [Reactive Streams JVM](https://github.com/reactive-streams/reactive-streams-jvm)
@@ -191,7 +187,6 @@ FRP 组合子:
   accumE :: a → Event (a → a) → Event a
     -- 累积事件，类似 fold
 ```
-
 > **Push-Pull FRP**（Elliott 2009）区分两种求值策略：
 >
 > - **Push**（推）：事件驱动，事件发生时主动推送更新
@@ -254,7 +249,6 @@ pub trait Subscription {
 // Processor: 转换器（Publisher + Subscriber）
 pub trait Processor<T, R>: Publisher<R> + Subscriber<T> {}
 ```
-
 > **与 Rust Stream trait 的区别**: Rust 的 `futures::Stream` 是**拉模型**（Pull-based），而 Reactive Streams 是**推-拉混合**（Push-Pull hybrid）：
 >
 > - `Stream::poll_next()` → 消费者主动拉取（Pull）
@@ -275,7 +269,6 @@ pub trait Stream {
     fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>>;
 }
 ```
-
 Rust 的 `Stream` trait 设计哲学：
 
 ```text
@@ -288,7 +281,6 @@ Stream trait 设计决策:
      - Pending: 元素尚未就绪，注册 waker 后异步唤醒
   4. 零成本: Stream 组合子是零成本抽象（编译期内联）
 ```
-
 ```rust
 use futures::stream::{self, StreamExt};
 
@@ -299,7 +291,6 @@ while let Some(item) = st.next().await {
     println!("{}", item);
 }
 ```
-
 > **来源**: [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) ·
 > [Tokio Stream](https://docs.rs/tokio-stream/latest/tokio_stream/)
 
@@ -328,7 +319,6 @@ let pipeline = stream::iter(0..1000)
 // 收集结果
 let results: Vec<_> = pipeline.collect().await;
 ```
-
 | **组合子** | **类型签名** | **语义** | **背压影响** |
 |:---|:---|:---|:---|
 | `map` | `Stream<A> → (A→B) → Stream<B>` | Functor | 1:1 |
@@ -359,7 +349,6 @@ let results: Vec<_> = pipeline.collect().await;
         无背压 → 内存溢出（OOM）
         有背压 → 系统稳定运行
 ```
-
 | **背压策略** | **机制** | **优点** | **缺点** | **Rust 实现** |
 |:---|:---|:---|:---|:---|
 | **Buffer** | 有界队列缓冲 | 简单、吞吐高 | 队列满时仍需决策 | `mpsc::channel(n)` |
@@ -434,7 +423,6 @@ impl<T> CreditBasedChannel<T> {
     }
 }
 ```
-
 > **来源**: [Reactive Streams Spec — Backpressure](https://www.reactive-streams.org/) ·
 > [Tokio mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html) ·
 > [Tokio broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html)
@@ -463,7 +451,6 @@ Event a = [(Time, a)]              -- 离散语义
   stepper :: a → Event a → Signal a      -- 事件 → 信号（采样保持）
   sample :: Signal a → Event b → Event a -- 信号 → 事件（事件触发采样）
 ```
-
 ```rust
 // Rust 中的 Signal/Event 近似（使用 futures-signals 或手动实现）
 
@@ -524,7 +511,6 @@ impl<T: Send + 'static> Event<T> {
     }
 }
 ```
-
 > **来源**: [Elliott & Hudak 1997](https://haskell.cs.yale.edu/wp-content/uploads/2011/02/frp.pdf) · [futures-signals](https://docs.rs/futures-signals/latest/futures_signals/)
 
 ### 5.2 连续语义 vs 离散语义
@@ -553,7 +539,6 @@ Rust 的现实:
   - tokio::time::interval 模拟连续采样
   - Stream 是离散事件序列的抽象
 ```
-
 > **来源**: [Elliott 2009 — Push-Pull FRP](https://conal.net/papers/push-pull-frp/push-pull-frp.pdf)
 
 ### 5.3 Rust 中的 FRP 限制
@@ -578,7 +563,6 @@ Rust 的所有权（Ownership）系统与 FRP 的**有状态信号**存在根本
 // map/filter/merge 等组合子需要消费 Stream
 // 但 FRP 中信号是长期存在的，不能一次性消费
 ```
-
 | **FRP 特性** | **Haskell** | **Rust** | **限制原因** |
 |:---|:---|:---|:---|
 | 不可变信号 | ✅ 原生 | ⚠️ `Arc<Mutex<T>>` | 所有权（Ownership） vs 共享 |
@@ -614,7 +598,6 @@ Rust 的所有权（Ownership）系统与 FRP 的**有状态信号**存在根本
       tick = interval.tick() => { /* Pull: 定时采样 */ }
   }
 ```
-
 > **来源**: [来源: [Tokio Internals](https://tokio.rs/tokio/topics)]
 
 ### 6.2 与 Rust Stream 的对应
@@ -635,7 +618,6 @@ Rust Stream = Pull-based 的数据流抽象
   命令式: while let Some(e) = rx.recv().await { ... }
           → 显式控制流
 ```
-
 > **来源**: [Tokio Stream](https://docs.rs/tokio-stream/latest/tokio_stream/) · [futures-rs](https://docs.rs/futures/latest/futures/stream/index.html)
 
 ---
@@ -675,7 +657,6 @@ let pipeline = stream
     .take(100)
     .timeout(Duration::from_secs(5));  // tokio-stream 扩展
 ```
-
 > **来源**: [来源: [tokio-stream](https://docs.rs/tokio-stream/latest/tokio_stream/)]
 
 ### 7.2 async-stream
@@ -714,7 +695,6 @@ let network_stream = stream! {
     }
 };
 ```
-
 > **来源**: [来源: [async-stream](https://docs.rs/async-stream/latest/async_stream/)]
 
 ### 7.3 完整数据流处理骨架
@@ -780,7 +760,6 @@ async fn send_alert(log: &LogEntry) -> Result<(), AlertError> {
     Ok(())
 }
 ```
-
 > **来源**: [tokio-stream](https://docs.rs/tokio-stream/latest/tokio_stream/) ·
 > [async-stream](https://docs.rs/async-stream/latest/async_stream/) ·
 > [futures-rs](https://docs.rs/futures/latest/futures/stream/index.html)
@@ -820,7 +799,6 @@ async fn send_alert(log: &LogEntry) -> Result<(), AlertError> {
 │   └── "性能更好"只在消费者能追上的短暂窗口成立
 └── 根结论: ❌ 无界 channel 是反模式。生产环境应始终使用有界 channel + 背压策略。
 ```
-
 > **来源**: [来源: [Reactive Streams Spec](https://www.reactive-streams.org/)]
 
 ### 8.2 边界极限
@@ -868,7 +846,6 @@ async fn unbounded_channel_oom() {
     // 结果: 内存以 ~99MB/s 的速度增长 → OOM killed
 }
 ```
-
 > **修正**: 始终使用**有界 channel**：
 >
 > ```rust
@@ -908,7 +885,6 @@ fn good_stream_send() {
     });
 }
 ```
-
 > **来源**: [Rust Send/Sync](https://doc.rust-lang.org/std/marker/trait.Send.html) ·
 > [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
 
@@ -962,7 +938,6 @@ fn circular_signal_deadlock() {
     // println!("{}", a.lock().unwrap().as_ref().unwrap().get());
 }
 ```
-
 > **修正**: FRP 信号网络必须是无环 DAG（有向无环图）。如果需要循环反馈，应使用：
 >
 > 1. **延迟节点**（Delay node）：引入一个时间步的延迟，打破即时循环
@@ -975,7 +950,6 @@ fn circular_signal_deadlock() {
 ---
 
 > **补充来源索引**: [来源: [Reactive Streams JVM](https://github.com/reactive-streams/reactive-streams-jvm)] · [来源: [Tokio broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html)]
-
 > **来源**: [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
 > **来源**: [Tokio mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)
 
@@ -1075,9 +1049,7 @@ fn circular_signal_deadlock() {
 | Reactive Programming & FRP（响应式编程与函数式响应编程） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Reactive Programming & FRP（响应式编程与函数式响应编程） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Reactive Programming & FRP（响应式编程与函数式响应编程） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Reactive Programming & FRP（响应式编程与函数式响应编程） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

@@ -94,7 +94,6 @@ where
     T: for<'a> OtherTrait<'a>,  // 更灵活的高阶边界
 {}
 ```
-
 **形式化关联**: [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) 需要更新 trait 求解算法描述
 
 ---
@@ -126,7 +125,6 @@ impl AsyncDrop for AsyncResource {
     }
 }
 ```
-
 **形式化关联**: [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md)、[pin_self_referential](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md)
 
 ---
@@ -157,7 +155,6 @@ let iter = std::iter::iter! {
     yield 3;
 };
 ```
-
 **形式化意义**: 需要扩展 [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) 以涵盖生成器状态机
 
 ---
@@ -180,7 +177,6 @@ use_pinned(pinned.as_mut());  // 必须显式 as_mut
 // 未来可能支持隐式重新借用
 use_pinned(pinned);  // 自动重新借用
 ```
-
 **形式化关联**: [pin_self_referential](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) 需要更新重新借用规则
 
 ---
@@ -202,7 +198,6 @@ use_pinned(pinned);  // 自动重新借用
 ```bash
 rustc -Zinstrument-mcount program.rs
 ```
-
 ---
 
 ### 2. `-Cdebuginfo-compression` {#2--cdebuginfo-compression}
@@ -216,7 +211,6 @@ rustc -Zinstrument-mcount program.rs
 ```bash
 rustc -Cdebuginfo-compression=zlib program.rs
 ```
-
 ---
 
 ### 3. `fn_align` 属性 {#3-fn_align-属性}
@@ -233,7 +227,6 @@ fn aligned_function() {
     // 函数地址 16 字节对齐
 }
 ```
-
 ---
 
 ## 标准库实验 {#标准库实验}
@@ -254,7 +247,6 @@ fn aligned_function() {
 let ptr = std::ptr::without_provenance::<i32>(0x1000);
 let addr = ptr.addr();
 ```
-
 **形式化关联**: [ownership_model](../research_notes/formal_methods/10_ownership_model.md) 需要添加严格来源规则
 
 ---
@@ -271,7 +263,6 @@ let addr = ptr.addr();
 // 获取切片字段偏移
 let offset = offset_of!(Struct, field[0]);
 ```
-
 ---
 
 ### 3. `MaybeUninit` 持续改进 {#3-maybeuninit-持续改进}
@@ -301,7 +292,6 @@ let offset = offset_of!(Struct, field[0]);
 ```bash
 cargo build -Zbuild-dir-new-layout
 ```
-
 ---
 
 ### 2. Section Timings {#2-section-timings}
@@ -315,7 +305,6 @@ cargo build -Zbuild-dir-new-layout
 ```bash
 cargo build --timings -Zsection-timings
 ```
-
 ---
 
 ## 形式化研究机会 {#形式化研究机会}
@@ -383,7 +372,6 @@ cargo build --timings -Zsection-timings
 
 ═══════════════════════════════════════════════════════════════════════
 ```
-
 ---
 
 ## 相关文档 {#相关文档}
@@ -408,7 +396,6 @@ cargo build --timings -Zsection-timings
 ## Rust 1.96+ 更新 {#rust-196-更新}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **最新版本**: Rust 1.96.0+ (2026-05-28)
 
 本文档基于 Rust 1.96.0，涵盖 1.93–1.96 关键特性。历史版本请参见：
@@ -434,11 +421,8 @@ cargo build --timings -Zsection-timings
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
-
 > **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
-
 > **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
-
 > **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

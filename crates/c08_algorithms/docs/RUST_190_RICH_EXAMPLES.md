@@ -225,7 +225,6 @@ mod merge_sort_tests {
     }
 }
 ```
-
 ### 1.2 快速排序 - 多种优化
 
 ```rust
@@ -398,7 +397,6 @@ mod quick_sort_tests {
     }
 }
 ```
-
 ### 1.3 堆排序与优先队列
 
 ```rust
@@ -586,7 +584,6 @@ mod heap_tests {
     }
 }
 ```
-
 ---
 
 ## 2. 图算法完整示例
@@ -809,7 +806,6 @@ mod dijkstra_tests {
     }
 }
 ```
-
 ### 2.2 并查集 (Union-Find) - 完整实现
 
 ```rust
@@ -970,7 +966,6 @@ mod union_find_tests {
     }
 }
 ```
-
 ---
 
 ## 3. 动态规划完整示例
@@ -1187,7 +1182,6 @@ mod knapsack_tests {
     }
 }
 ```
-
 ---
 
 ## 🎯 完整示例总结

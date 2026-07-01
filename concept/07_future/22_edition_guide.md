@@ -102,7 +102,6 @@ Rust Edition 机制:
   ├── 大多数变更自动处理
   └── 少数需手动调整
 ```
-
 > **认知功能**: **Edition 机制是 Rust 语言演进的创新**——它解决了"如何改进语言而不分裂生态"的经典难题。
 > [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
 
@@ -137,7 +136,6 @@ Edition 2024 核心特性:
   ├── 新保留关键字
   └── 某些行为的微妙变化
 ```
-
 > **特性洞察**: Edition 2024 聚焦于**异步生态的完善**和**类型系统（Type System）的精确化**——async closures 和 lifetime captures 是长期痛点。
 > [来源: [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)]
 
@@ -174,7 +172,6 @@ Edition 2024 核心特性:
   ├── 无需等待所有依赖迁移
   └── 可以渐进迁移
 ```
-
 > **迁移洞察**: **cargo fix --edition 使迁移 mostly automatic**——但关键代码路径仍需人工审查。
 > [来源: [Rust Edition Migration](https://doc.rust-lang.org/edition-guide/editions/index.html)]
 
@@ -220,7 +217,6 @@ fn async_stream() -> impl Stream<Item = i32> {
 // gen blocks 大幅简化自定义迭代器
 // 编译器自动处理状态机转换
 ```
-
 > **Gen Blocks 洞察**: **gen blocks 是 Rust 生成器的语法糖**——它将复杂的状态机手写代码简化为直观的 yield 语法。
 > [来源: [RFC 3513 — Gen Blocks](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)]
 
@@ -256,7 +252,6 @@ let closure = async |x: &str| -> String {
     format!("{} {}", data, x)  // data 被 async 捕获
 };
 ```
-
 > **Async Closures 洞察**: **async closures 解决了 async move 闭包的捕获语义问题**——参数和环境的捕获更直观、更灵活。
 > [来源: [Async Closures RFC](https://rust-lang.github.io/rfcs//3668-async-closures.html)]
 
@@ -290,7 +285,6 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> impl Display + use<'a> {
 // impl Trait + use<'a, T>  // 捕获 'a 和 T
 // impl Trait + use<>        // 不捕获任何生命周期（'static）
 ```
-
 > **Lifetime 捕获洞察**: **精确的 lifetime captures** 是 Rust **类型系统（Type System）的精细化**——它减少了过度保守的借用（Borrowing）检查拒绝。
 > [来源: [impl Trait Lifetime Capture](https://rust-lang.github.io/rfcs//3498-lifetime-capture-rules-2024.html)]
 
@@ -315,7 +309,6 @@ if let Some(x) = get_string().as_ref() {
 
 fn get_string() -> String { String::from("hello") }
 ```
-
 > **为什么改变**: 2021 Edition 的临时作用域规则（将临时值的生命周期（Lifetimes）延伸到整个 `let` 语句）在某些情况下允许悬垂引用（Reference）通过编译。2024 Edition 收窄了 `if let` 和 `while let` 中临时值的作用域，使其在条件表达式结束时立即释放。
 >
 > **迁移影响**: 极少数代码会因此无法编译——通常是依赖了临时值意外长寿的代码。`cargo fix --edition` 可以自动将受影响的代码重构为显式绑定：
@@ -365,7 +358,6 @@ Tail Expr Drop:
   → 极少数代码行为变化
   → 需要仔细审查
 ```
-
 > **矩阵洞察**: Edition 2024 的**大部分变更是 additions**，少数 breaking changes 有自动迁移支持。
 > [来源: [Rust Edition 2024 Changes](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)]
 
@@ -389,7 +381,6 @@ graph TD
     style REVIEW fill:#fff3e0
     style MIGRATE fill:#c8e6c9
 ```
-
 > **认知功能**: **Edition 迁移不是紧急任务**——Rust 保证旧 Edition 持续支持，可以按项目节奏迁移。
 > [来源: [Rust Edition Policy](https://doc.rust-lang.org/edition-guide/editions/index.html)]
 
@@ -429,7 +420,6 @@ graph TD
 ├── 碎片化风险
 └── 缓解: 社区协调，核心 crate 优先
 ```
-
 > **边界要点**: Edition 迁移的边界主要与**自动迁移局限**、**学习成本**、**CI 兼容性**、**库维护负担**和**生态协调**相关。
 > [来源: [Rust Edition Guide — Migration](https://doc.rust-lang.org/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html)]
 
@@ -473,7 +463,6 @@ graph TD
   ✅ 考虑库的 MSRV 策略
      // 或明确声明最低支持版本
 ```
-
 > **陷阱总结**: Edition 迁移的陷阱主要与**自动迁移信任**、**混合 Edition 误解**、**关键字冲突**、**过度使用新特性**和**MSRV**相关。
 > [来源: [Rust Edition FAQ](https://doc.rust-lang.org/edition-guide/index.html)]
 
@@ -545,7 +534,6 @@ fn main() {
     };
 }
 ```
-
 > **修正**:
 >
 > Rust Edition 2024 引入了**尾表达式作用域**（tail expression scope）的变更：块（`{}`）的尾表达式必须是有值表达式，`if` 无 `else` 分支时类型为 `()`，不能作为非 `()` 上下文的尾表达式。
@@ -570,7 +558,6 @@ fn main() {
     let x = gen!(42);
 }
 ```
-
 > **修正**:
 >
 > Rust 2024 Edition 将 `gen` 设为保留关键字（为 `gen` 块特性预留）。
@@ -601,7 +588,6 @@ fn main() {
 // 可能需要手动调整闭包捕获规则
 // ❌ 编译错误: 某些情况下自动修复不完整
 ```
-
 > **修正**:
 >
 > `cargo fix --edition` 自动应用大多数 Edition 变更，但边缘情况需手动处理：
@@ -635,7 +621,6 @@ mod inner {
 // 2021 edition: 路径解析规则变更
 use inner::helper; // 可能在某些嵌套模块中失效
 ```
-
 > **修正**: Rust 的 **Edition** 机制允许语言演进而不破坏现有代码，但**迁移**（`cargo fix --edition`）的局限：
 >
 > 1) 纯语法变更（`async fn`、统一路径）→ 自动修复；
@@ -675,7 +660,6 @@ fn main() {
     let _ = old_macro!();
 }
 ```
-
 > **修正**:
 > Rust 2021 Edition 引入了 **macros 的 `mixed_site` hygiene**（默认），与 2018 Edition 的 `call_site` 不同。
 > 影响：

@@ -93,7 +93,6 @@ Rust 差异化优势:
   ├── Send/Sync 保证: 跨线程事件传递编译期验证
   └── 无 GC: 消费者长时间运行无停顿
 ```
-
 > **认知功能**: Rust 的事件驱动架构不仅是"高性能消息传递"，而是**类型安全的状态机网络**——每个事件类型在编译期验证，每个处理器状态转换受所有权约束。
 > [来源: [Tokio Documentation](https://tokio.rs/)]
 
@@ -108,7 +107,6 @@ graph LR
     style B fill:#e3f2fd
     style F fill:#fff3e0
 ```
-
 ---
 
 ## 二、发布-订阅
@@ -147,7 +145,6 @@ async fn main() {
     if let Err(e) = tx.send(event) { eprintln!("No receivers: {}", e); }
 }
 ```
-
 | 特性 | `tokio::sync::broadcast` | `tokio::sync::mpsc` | `tokio::sync::watch` |
 | :--- | :--- | :--- | :--- |
 | 模式 | 1:N 广播 | 1:1 或 M:N | 1:N 仅最新值 |
@@ -186,7 +183,6 @@ graph TD
     style B fill:#e3f2fd
     style F fill:#e8f5e9
 ```
-
 ```rust,ignore
 use serde::{Serialize, Deserialize};
 use uuid::Uuid;
@@ -258,7 +254,6 @@ impl EventHandler for EmailHandler {
     fn event_types(&self) -> Vec<&'static str> { vec!["UserCreated", "OrderPlaced"] }
 }
 ```
-
 > **类型安全洞察**: Rust enum 的 `#[serde(tag = "event_type")]` 实现**标记联合**序列化——JSON 中的 `event_type` 字段决定反序列化到哪个变体。反序列化失败是类型错误，不是运行时（Runtime） panic。
 > [来源: [serde enum representations](https://serde.rs/enum-representations.html)]
 
@@ -289,7 +284,6 @@ async fn rabbitmq_example() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 > **AMQP 洞察**: RabbitMQ 的**交换机-队列-绑定**模型提供了灵活的路由能力（direct/topic/headers/fanout）。`lapin` 的 async API 与 Tokio 无缝集成。
 > [来源: [lapin crate](https://docs.rs/lapin/latest/lapin/)]
 
@@ -340,7 +334,6 @@ async fn consume_events(consumer: StreamConsumer) {
     }
 }
 ```
-
 > **Kafka 洞察**: Kafka 的**分区-偏移量**模型使事件成为**不可变日志**。`enable.idempotence=true` 开启幂等生产者，保证单分区内精确一次语义。
 > [来源: [Kafka Documentation](https://kafka.apache.org/documentation/)]
 
@@ -357,7 +350,6 @@ graph LR
     A -->|精确一次| C[Kafka<br/>幂等生产者 + 事务]
     A -->|最多一次| D[NATS Core<br/>自动 ACK]
 ```
-
 | 消息系统 | 最多一次 | 至少一次 | 精确一次 | 持久化 | 吞吐量 |
 |:---|:---:|:---:|:---:|:---:|:---:|
 | **RabbitMQ** | ✅ | ✅ (手动 ACK) | ⚠️ (事务) | ✅ | 中 |
@@ -401,7 +393,6 @@ impl IdempotentProcessor {
     }
 }
 ```
-
 > **幂等洞察**: 幂等性的本质是**操作的可重复性**——数学上 `f(f(x)) = f(x)`。业务层幂等键（如订单 ID）比消息系统层的精确一次更可靠。
 > [来源: [Idempotent Consumer Pattern](https://microservices.io/patterns/communication-style/idempotent-consumer.html)]
 
@@ -421,7 +412,6 @@ impl IdempotentProcessor {
   │ 推荐场景        │ 通用首选             │ 金融级单分区事务     │
   └─────────────────┴──────────────────────┴──────────────────────┘
 ```
-
 ### 5.3 去重机制
 
 | 去重层级 | 实现方式 | 有效期 | 可靠性 |
@@ -440,7 +430,6 @@ async fn dedup_with_redis(redis: &mut redis::aio::MultiplexedConnection, event_i
     Ok(is_new)
 }
 ```
-
 > **去重洞察**: Bloom Filter 是**空间效率最优**的去重结构——适合海量事件流。Rust 的 `bloom` crate 提供计数式布隆过滤器，支持删除操作。
 > [来源: [bloom crate](https://docs.rs/bloom/latest/bloom/)]
 
@@ -462,7 +451,6 @@ stateDiagram-v2
     InventoryFailed --> OrderCancelled: 取消订单
     InventoryReleased --> OrderCancelled: 取消订单
 ```
-
 ```rust,compile_fail
 use std::collections::HashMap;
 
@@ -509,7 +497,6 @@ impl SagaOrchestrator {
     }
 }
 ```
-
 > **编排器洞察**: Saga 编排器是**状态机的事件流解释器**——将异步（Async）分布式流程建模为确定性自动机。Rust 的 `match` + enum 使状态转换在编译期部分可验证。
 > [来源: [rust_fsm crate](https://docs.rs/rust_fsm/latest/rust_fsm/)]
 
@@ -542,7 +529,6 @@ async fn reactive_pipeline() {
         .collect().await;
 }
 ```
-
 | 背压机制 | 实现 | 行为 | 适用场景 |
 |:---|:---|:---|:---|
 | 有界 channel | `mpsc::channel(n)` | 满时阻塞/等待 | 任务队列 |
@@ -644,7 +630,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 > **综合示例洞察**: 该示例展示了 Rust 事件驱动的**全栈组合**——类型安全 enum + Kafka 持久化 + 幂等处理 + 内存去重 + 背压传播。每个组件都可独立测试和替换。
 > [来源: [rdkafka examples](https://github.com/fede1024/rust-rdkafka/tree/master/examples)]
 
@@ -659,7 +644,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   消费: 服务 B 接收字节 → let event = serde_json::from_slice(&bytes)? → 所有权转移到 event
   原则: 不共享引用跨服务; Send 保证线程安全; Arc<DomainEvent> 多处只读避免拷贝
 ```
-
 ```rust,ignore
 fn produce_event(event: DomainEvent) -> Vec<u8> {
     serde_json::to_vec(&event).unwrap() // event move 进序列化器
@@ -672,7 +656,6 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
     for tx in subscribers { let _ = tx.send(Arc::clone(&shared)).await; }
 }
 ```
-
 > **所有权洞察**: Rust 的所有权系统在分布式场景中的隐喻是——**事件作为不可变的值，在服务和线程边界间通过序列化/反序列化转移所有权**。这与事件溯源的"事件不可变"原则完美契合。
 > [来源: [The Rust Programming Language — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
@@ -693,7 +676,6 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
   └── 反命题 5: Send/Sync 保证分布式安全
       └── 否。线程安全 ≠ 业务正确性。缓解: 混沌测试
 ```
-
 > **边界洞察**: 事件驱动的边界在于**认知复杂度**——系统行为由事件流和状态机交互涌现。Rust 降低实现层错误，设计层错误仍需架构纪律。
 > [来源: [Designing Data-Intensive Applications](https://dataintensive.net/)]
 
@@ -708,7 +690,6 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
 陷阱 4: 消费者慢重平衡   →  ❌ 单线程   ✅ 批量拉取 + 并发 + 手动提交
 陷阱 5: 忽略 poison msg →  ❌ 无限重试  ✅ 死信队列 (DLQ)
 ```
-
 > **陷阱总结**: 事件驱动的陷阱多与**分布式系统的时序、故障、规模**相关。Rust 的类型安全和内存安全（Memory Safety）消除了部分陷阱（如序列化竞态），但架构层面的反模式仍需经验规避。
 > [来源: [Anti-patterns in Event-Driven Architecture](https://solace.com/blog/event-driven-architecture-anti-patterns/)]
 
@@ -797,7 +778,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**:
 >
 > 事件驱动架构中，事件通常以 JSON/Protobuf 形式在消息队列（Kafka、RabbitMQ）中传递。
@@ -837,7 +817,6 @@ struct HandlerFixed {
     state: Arc<i32>,
 }
 ```
-
 > **修正**:
 > 事件驱动架构通常使用线程池或异步运行时处理事件。
 > 事件处理器必须实现 `Send`（可跨线程移动）和 `Sync`（可跨线程共享）。
@@ -869,7 +848,6 @@ fn main() {
     // handler 中: event.downcast_ref::<WrongType>().unwrap() // panic!
 }
 ```
-
 > **修正**:
 >
 > 事件驱动架构中，**类型擦除**（`dyn Any`）允许异构事件共存，但 `downcast_ref` 在类型不匹配时返回 `None`。
@@ -902,7 +880,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**:
 >
 > 事件监听器（闭包）的生命周期与捕获的引用绑定。
@@ -943,7 +920,6 @@ fn main() {
     // let event: UserCreatedV2 = bincode::deserialize(old_event).unwrap();
 }
 ```
-
 > **修正**:
 >
 > 事件溯源（Event Sourcing）的**版本兼容**：

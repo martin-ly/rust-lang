@@ -109,7 +109,6 @@
     ├── 跨平台测试
     └── 错误处理策略
 ```
-
 ### 多维概念对比矩阵
 
 | 平台        | 进程管理      | 服务管理     | 路径分隔符 | 信号处理     | Rust 1.92.0 |
@@ -131,7 +130,6 @@
 │   └── 否 → 使用标准库 API
 │       └── 统一抽象层
 ```
-
 ---
 
 ## 1. 平台差异概述
@@ -293,7 +291,6 @@ pub struct CommandResult {
     pub platform: Platform,
 }
 ```
-
 ### 1.2 路径处理
 
 ```rust
@@ -370,7 +367,6 @@ impl CrossPlatformPath {
     }
 }
 ```
-
 ## 2. Windows 特定功能
 
 ### 2.1 Windows 进程管理
@@ -492,7 +488,6 @@ pub struct JobInfo {
     pub total_terminated_processes: u32,
 }
 ```
-
 ### 2.2 Windows 服务管理
 
 ```rust
@@ -640,7 +635,6 @@ pub struct ServiceStatus {
     pub controls_accepted: u32,
 }
 ```
-
 ## 3. Unix/Linux 特定功能
 
 ### 3.1 Unix 进程管理
@@ -789,7 +783,6 @@ pub struct ProcessInfo {
     pub rss: i64,
 }
 ```
-
 ### 3.2 Systemd 服务管理
 
 ```rust
@@ -937,7 +930,6 @@ pub struct ServiceStatus {
     pub active: bool,
 }
 ```
-
 ## 4. macOS 特定功能
 
 ### 4.1 Launchd 服务管理
@@ -1075,7 +1067,6 @@ pub struct ServiceStatus {
     pub active: bool,
 }
 ```
-
 ## 5. 跨平台兼容性处理
 
 ### 5.1 统一接口抽象
@@ -1249,7 +1240,6 @@ impl PlatformProcessManager for GenericProcessManager {
     }
 }
 ```
-
 ### 5.2 环境变量和路径处理
 
 ```rust
@@ -1352,7 +1342,6 @@ impl CrossPlatformEnvironment {
     }
 }
 ```
-
 ## 6. 最佳实践
 
 ### 6.1 跨平台测试
@@ -1415,7 +1404,6 @@ mod tests {
     }
 }
 ```
-
 ### 6.2 错误处理策略
 
 ```rust
@@ -1492,7 +1480,6 @@ impl CrossPlatformErrorHandler {
     }
 }
 ```
-
 ## 7. 总结
 
 本章详细介绍了 Rust 中的跨平台进程管理：

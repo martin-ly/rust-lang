@@ -1,0 +1,437 @@
+# C11 Macro System - Tier 2: 函数宏开发指南
+
+> **文档版本**: v1.0.0
+> **最后更新**: 2025-12-11
+> **Rust 版本**: 1.92.0+
+> **预计阅读**: 30 分钟
+
+---
+
+## 📋 目录
+
+- [C11 Macro System - Tier 2: 函数宏开发指南](#c11-macro-system---tier-2-函数宏开发指南)
+  - [📋 目录](#-目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+  - [1. 函数宏概述](#1-函数宏概述)
+  - [2. 基础语法](#2-基础语法)
+    - [2.1 定义函数宏](#21-定义函数宏)
+    - [2.2 使用函数宏](#22-使用函数宏)
+  - [3. Token 流解析](#3-token-流解析)
+    - [3.1 手动解析](#31-手动解析)
+    - [3.2 使用 syn 解析](#32-使用-syn-解析)
+  - [4. 实战案例](#4-实战案例)
+    - [4.1 SQL 查询宏](#41-sql-查询宏)
+    - [4.2 JSON 宏](#42-json-宏)
+    - [4.3 HTML 模板宏](#43-html-模板宏)
+    - [4.4 正则表达式宏](#44-正则表达式宏)
+    - [4.5 测试宏](#45-测试宏)
+  - [5. 总结](#5-总结)
+    - [核心要点](#核心要点)
+    - [最佳实践](#最佳实践)
+  - [📚 参考资源](#-参考资源)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**函数宏开发指南 (Function-like Macro Development Guide)**:
+
+- **定义**: 开发函数式过程宏的实践指南，用于 DSL 和代码生成
+- **类型**: 开发指南文档
+- **范畴**: 过程宏、元编程
+- **版本**: Rust 1.15+ (过程宏)
+- **相关概念**: 函数宏、过程宏、Token 流、DSL
+
+**函数宏 (Function-like Macro)**:
+
+- **定义**: 看起来像函数调用的过程宏，在编译期展开，可以接受任意 Token 流作为输入
+- **类型**: 过程宏
+- **属性**: 类似函数调用、接受任意语法、返回任意代码
+- **关系**: 与声明宏、属性宏相关
+
+### 属性特征
+
+**核心属性**:
+
+- **类似函数调用**: `macro!(args)` 语法
+- **接受任意语法**: 可以接受任意 Token 流
+- **返回任意代码**: 可以生成任意代码
+- **DSL 支持**: 用于构建 DSL
+
+**性能特征**:
+
+- **编译时展开**: 在编译时展开
+- **零运行时开销**: 展开后的代码无额外开销
+- **适用场景**: DSL、代码生成、模板系统
+
+### 关系连接
+
+**继承关系**:
+
+- 函数宏 --[is-a]--> 过程宏
+- SQL 查询宏 --[is-a]--> 函数宏
+
+**组合关系**:
+
+- 函数宏开发指南 --[uses]--> Token 流解析
+- DSL 构建 --[uses]--> 函数宏
+
+**依赖关系**:
+
+- 函数宏 --[depends-on]--> 过程宏支持
+- DSL 开发 --[depends-on]--> 函数宏
+
+### 思维导图
+
+```text
+函数宏开发指南
+│
+├── 基础语法
+│   ├── 定义函数宏
+│   └── 使用函数宏
+├── Token 流解析
+│   ├── 手动解析
+│   └── 使用 syn 解析
+└── 实战案例
+    ├── SQL 查询宏
+    └── JSON 宏
+```
+---
+
+## 1. 函数宏概述
+
+**函数宏** 看起来像函数调用，但在编译期展开，可以接受任意 Token 流作为输入。
+
+**特点**:
+
+- ✅ 类似函数调用 `macro!(args)`
+- ✅ 接受任意语法
+- ✅ 返回任意代码
+- ✅ 用于 DSL 和代码生成
+
+---
+
+## 2. 基础语法
+
+### 2.1 定义函数宏
+
+```rust
+use proc_macro::TokenStream;
+
+#[proc_macro]
+pub fn my_macro(input: TokenStream) -> TokenStream {
+    // 处理输入，返回输出
+    input
+}
+```
+### 2.2 使用函数宏
+
+```rust
+use my_macros::my_macro;
+
+fn main() {
+    my_macro!(some input here);
+}
+```
+---
+
+## 3. Token 流解析
+
+### 3.1 手动解析
+
+```rust
+use proc_macro::TokenStream;
+
+#[proc_macro]
+pub fn parse_example(input: TokenStream) -> TokenStream {
+    for token in input {
+        println!("{:?}", token);
+    }
+    TokenStream::new()
+}
+```
+### 3.2 使用 syn 解析
+
+```rust
+use syn::parse::{Parse, ParseStream};
+use syn::{Ident, Token, LitStr};
+
+struct SqlQuery {
+    table: Ident,
+    _where: Token![where],
+    condition: LitStr,
+}
+
+impl Parse for SqlQuery {
+    fn parse(input: ParseStream) -> syn::Result<Self> {
+        Ok(SqlQuery {
+            table: input.parse()?,
+            _where: input.parse()?,
+            condition: input.parse()?,
+        })
+    }
+}
+
+#[proc_macro]
+pub fn sql(input: TokenStream) -> TokenStream {
+    let query = parse_macro_input!(input as SqlQuery);
+
+    let table = &query.table;
+    let condition = &query.condition;
+
+    let expanded = quote! {
+        format!("SELECT * FROM {} WHERE {}",
+                stringify!(#table), #condition)
+    };
+
+    TokenStream::from(expanded)
+}
+
+// 使用:
+// let query = sql!(users where "age > 18");
+```
+---
+
+## 4. 实战案例
+
+### 4.1 SQL 查询宏
+
+```rust
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::parse::{Parse, ParseStream};
+use syn::{Ident, LitStr, Token};
+
+struct SelectQuery {
+    _select: Token![select],
+    fields: Vec<Ident>,
+    _from: Token![from],
+    table: Ident,
+    _where: Option<Token![where]>,
+    condition: Option<LitStr>,
+}
+
+impl Parse for SelectQuery {
+    fn parse(input: ParseStream) -> syn::Result<Self> {
+        let _select: Token![select] = input.parse()?;
+
+        let mut fields = Vec::new();
+        loop {
+            fields.push(input.parse()?);
+            if input.peek(Token![from]) {
+                break;
+            }
+            input.parse::<Token![,]>()?;
+        }
+
+        let _from: Token![from] = input.parse()?;
+        let table: Ident = input.parse()?;
+
+        let _where = input.parse().ok();
+        let condition = if _where.is_some() {
+            Some(input.parse()?)
+        } else {
+            None
+        };
+
+        Ok(SelectQuery {
+            _select,
+            fields,
+            _from,
+            table,
+            _where,
+            condition,
+        })
+    }
+}
+
+#[proc_macro]
+pub fn sql_select(input: TokenStream) -> TokenStream {
+    let query = parse_macro_input!(input as SelectQuery);
+
+    let fields = &query.fields;
+    let table = &query.table;
+
+    let field_str = fields.iter()
+        .map(|f| f.to_string())
+        .collect::<Vec<_>>()
+        .join(", ");
+
+    let where_clause = if let Some(cond) = &query.condition {
+        format!(" WHERE {}", cond.value())
+    } else {
+        String::new()
+    };
+
+    let sql = format!("SELECT {} FROM {}{}",
+                      field_str,
+                      table.to_string(),
+                      where_clause);
+
+    let expanded = quote! {
+        #sql
+    };
+
+    TokenStream::from(expanded)
+}
+
+// 使用:
+// let query = sql_select!(select id, name, email from users where "age > 18");
+```
+### 4.2 JSON 宏
+
+```rust
+#[proc_macro]
+pub fn json(input: TokenStream) -> TokenStream {
+    // 简化实现
+    let expanded = quote! {
+        serde_json::json!(#input)
+    };
+    TokenStream::from(expanded)
+}
+
+// 使用:
+// let data = json!({
+//     "name": "Alice",
+//     "age": 30
+// });
+```
+### 4.3 HTML 模板宏
+
+```rust
+#[proc_macro]
+pub fn html(input: TokenStream) -> TokenStream {
+    // 将 HTML DSL 转换为字符串
+    let html_str = input.to_string();
+
+    let expanded = quote! {
+        format!(#html_str)
+    };
+
+    TokenStream::from(expanded)
+}
+
+// 使用:
+// let page = html!{
+//     <html>
+//         <body>
+//             <h1>Hello</h1>
+//         </body>
+//     </html>
+// };
+```
+### 4.4 正则表达式宏
+
+```rust
+#[proc_macro]
+pub fn regex(input: TokenStream) -> TokenStream {
+    let pattern = input.to_string();
+
+    // 编译期验证正则表达式
+    if let Err(e) = regex::Regex::new(&pattern) {
+        panic!("Invalid regex: {}", e);
+    }
+
+    let expanded = quote! {
+        regex::Regex::new(#pattern).unwrap()
+    };
+
+    TokenStream::from(expanded)
+}
+
+// 使用:
+// let re = regex!(r"\d{3}-\d{4}");
+```
+### 4.5 测试宏
+
+```rust
+#[proc_macro]
+pub fn test_cases(input: TokenStream) -> TokenStream {
+    // 解析测试用例列表
+    // 生成多个 #[test] 函数
+
+    let expanded = quote! {
+        #[test]
+        fn test_case_1() {
+            assert_eq!(2 + 2, 4);
+        }
+
+        #[test]
+        fn test_case_2() {
+            assert_eq!(3 + 3, 6);
+        }
+    };
+
+    TokenStream::from(expanded)
+}
+
+// 使用:
+// test_cases! {
+//     (2 + 2) == 4,
+//     (3 + 3) == 6,
+// }
+```
+---
+
+## 5. 总结
+
+### 核心要点
+
+1. **定义**: `#[proc_macro]`
+2. **输入**: `TokenStream` (任意语法)
+3. **输出**: `TokenStream` (生成的代码)
+4. **解析**: 自定义解析或使用 `syn`
+5. **用途**: DSL、代码生成、编译期验证
+
+### 最佳实践
+
+| 场景           | 推荐做法              |
+| :--- | :--- || **DSL**        | 定义清晰的语法规则    |
+| **代码生成**   | 使用 `quote!`         |
+| **编译期验证** | 在宏中进行检查        |
+| **错误处理**   | 使用 `compile_error!` |
+| **文档**       | 提供清晰的用法示例    |
+
+**常见陷阱**:
+
+- ❌ 过于复杂的语法
+- ❌ 错误信息不清晰
+- ❌ 缺少编译期验证
+- ❌ 性能问题
+- ✅ 保持语法简单
+- ✅ 提供有用的错误信息
+- ✅ 利用编译期检查
+- ✅ 避免生成过多代码
+
+---
+
+## 📚 参考资源
+
+**相关文档**:
+
+- [Tier 2: 声明宏实践指南](01_declarative_macros_practice_guide.md)
+- [Tier 2: Derive 宏开发指南](02_derive_macros_development_guide.md)
+- [Tier 2: 宏调试与测试](05_macro_debugging_and_testing.md)
+
+---
+
+**文档维护**: C11 Macro System Team
+**最后审核**: 2025-10-23
+**下次更新**: 2026-01-23
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

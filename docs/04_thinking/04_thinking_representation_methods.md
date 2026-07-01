@@ -161,7 +161,6 @@ mindmap
         属性宏
         函数宏
 ```
-
 ### 1.2 所有权系统完整思维导图 {#12-所有权系统完整思维导图}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -200,7 +199,6 @@ mindmap
       内存安全
       RAII模式
 ```
-
 ### 1.3 借用系统完整思维导图 {#13-借用系统完整思维导图}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -246,7 +244,6 @@ mindmap
         清晰的位置提示
         解决建议
 ```
-
 ### 1.4 生命周期系统完整思维导图 {#14-生命周期系统完整思维导图}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -285,7 +282,6 @@ mindmap
       Trait对象
       自引用结构
 ```
-
 ### 1.5 泛型系统完整思维导图 {#15-泛型系统完整思维导图}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -332,7 +328,6 @@ mindmap
         返回位置
         不透明类型
 ```
-
 ### 1.6 Trait 系统完整思维导图 {#16-trait-系统完整思维导图}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -393,7 +388,6 @@ mindmap
         异构集合
         插件系统
 ```
-
 ### 1.7 并发编程完整思维导图 {#17-并发编程完整思维导图}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -447,7 +441,6 @@ mindmap
         实现条件
       自动推导
 ```
-
 ### 1.8 异步编程完整思维导图 {#18-异步编程完整思维导图}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -500,7 +493,6 @@ mindmap
         tokio fs
         异步读写
 ```
-
 ### 1.9 特性应用场景思维导图 {#19-特性应用场景思维导图}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -541,7 +533,6 @@ mindmap
         关联项多边界
         自动特征改进
 ```
-
 ### 1.10 跨模块概念依赖思维导图 {#110-跨模块概念依赖思维导图}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -586,7 +577,6 @@ mindmap
       wasm-bindgen
       依赖 C06 C10
 ```
-
 ### 1.11 模块级思维导图索引 {#111-模块级思维导图索引}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -649,7 +639,6 @@ mindmap
         代码审查
         社区贡献
 ```
-
 ---
 
 ## 📊 2. 多维矩阵 (Multidimensional Matrix) {#2-多维矩阵-multidimensional-matrix}
@@ -777,7 +766,6 @@ graph TD
     style D5 fill:#ffe1e1
     style D6 fill:#ffe1e1
 ```
-
 ### 3.2 技术选型决策树 {#32-技术选型决策树}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -817,7 +805,6 @@ graph TD
     style Mutex fill:#ffe1e1
     style Result fill:#fff5e1
 ```
-
 ### 3.3 调试决策树 {#33-调试决策树}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -871,7 +858,6 @@ graph TD
     style Lifetime fill:#ffe1e1
     style Logic fill:#fff5e1
 ```
-
 ### 3.4 优化决策树 {#34-优化决策树}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -936,7 +922,6 @@ graph TD
     style Parallel fill:#e1ffe1
     style AsyncOpt fill:#e1ffe1
 ```
-
 ### 3.5 学习路径决策树 {#35-学习路径决策树}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -1012,7 +997,6 @@ graph TD
     style Advanced fill:#fff5e1
     style Practice fill:#ffe1e1
 ```
-
 ### 3.6 迁移决策树 {#36-迁移决策树}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -1042,7 +1026,6 @@ graph TD
     style Quick fill:#e1ffe1
     style Test fill:#fff5e1
 ```
-
 ### 3.7 性能优化决策树 {#37-性能优化决策树}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -1072,7 +1055,6 @@ graph TD
     style Opt2 fill:#ffe1e1
     style Opt3 fill:#ffe1e1
 ```
-
 ### 3.8 应用场景决策树 {#38-应用场景决策树}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -1106,7 +1088,6 @@ graph TD
     Dist --> Dist2[异步 + 网络]
     Dist --> Dist3[模块: C06 C10 C11]
 ```
-
 ### 3.9 转换树图 (Transformation Tree) {#39-转换树图-transformation-tree}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -1140,7 +1121,6 @@ flowchart TD
     style ImmRef fill:#e1ffe1
     style MutRef fill:#ffe1e1
 ```
-
 #### 3.9.2 Option ↔ Result 转换树 {#392-option-result-转换树}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -1166,7 +1146,6 @@ flowchart LR
     Ok -->|map| Ok
     Err -->|map_err| Err
 ```
-
 #### 3.9.3 &T vs &mut T 选择转换树 {#393-t-vs-mut-t-选择转换树}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -1182,7 +1161,6 @@ flowchart TD
     UseRef --> Rule1[可多个 &T 并存]
     UseMut --> Rule2[同一时刻仅一个 &mut T]
 ```
-
 #### 3.9.4 泛型约束转换树 {#394-泛型约束转换树}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -1198,7 +1176,6 @@ flowchart TD
     Multi --> Ex2["fn f<T: Clone + Send>(x: T)"]
     Where --> Ex3["fn f<T>() where T: Debug"]
 ```
-
 #### 3.9.5 生命周期转换树 {#395-生命周期转换树}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -1216,7 +1193,6 @@ flowchart TD
     Explicit --> L1["fn f<'a>(x: &'a T) -> &'a U"]
     L1 --> L2["fn f<'a, 'b>(x: &'a T, y: &'b U) -> &'a V"]
 ```
-
 #### 3.9.6 错误传播转换树 {#396-错误传播转换树}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -1238,7 +1214,6 @@ flowchart TD
     MapErr --> Anyhow[anyhow 应用层]
     MapErr --> ThisErr[thiserror 库]
 ```
-
 ---
 
 ## 🔬 4. 证明树图 (Proof Tree) {#4-证明树图-proof-tree}
@@ -1285,7 +1260,6 @@ graph TD
     style A3 fill:#e1f5ff
     style C1 fill:#ffe1e1
 ```
-
 ### 4.2 内存安全证明树 {#42-内存安全证明树}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -1335,7 +1309,6 @@ graph TD
     style T2 fill:#e1ffe1
     style T3 fill:#e1ffe1
 ```
-
 ### 4.3 类型安全证明树 {#43-类型安全证明树}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1382,7 +1355,6 @@ graph TD
     style Root fill:#e1f5ff
     style C1 fill:#ffe1e1
 ```
-
 ### 4.4 并发安全证明树 {#44-并发安全证明树}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -1432,7 +1404,6 @@ graph TD
     style T2 fill:#e1ffe1
     style T3 fill:#e1ffe1
 ```
-
 ---
 
 ## 📈 5. 概念关系网络图 (Concept Relationship Network) {#5-概念关系网络图-concept-relationship-network}
@@ -1481,7 +1452,6 @@ graph LR
     style M fill:#fff5e1
     style N fill:#fff5e1
 ```
-
 ---
 
 ## 🎯 6. 使用指南 {#6-使用指南}
@@ -1607,7 +1577,6 @@ fn create_ownership_mindmap() -> MindMapGenerator {
     mm
 }
 ```
-
 ### 示例 2: 决策树枚举实现 {#示例-2-决策树枚举实现}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -1662,7 +1631,6 @@ impl DecisionEngine {
     }
 }
 ```
-
 ---
 
 ## 📚 7. 参考资源 {#7-参考资源}

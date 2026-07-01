@@ -53,7 +53,6 @@ Rust 宏系统分为两大类：
 ```text
 M := (P, T)
 ```
-
 其中：
 
 - `P`：匹配模式集合，每个模式包含 matcher（`$x:expr` 等）和重复操作符（`$()*`、`$()+`、`$()?`）。
@@ -66,7 +65,6 @@ M := (P, T)
 ```text
 proc_macro: TokenStream -> Result<TokenStream, CompileError>
 ```
-
 其输入/输出均满足 Rust 词法/语法规则，但函数体可用任意语言编写（通常用 Rust）。
 
 ### Axiom 1.1 卫生性 {#axiom-11-卫生性}
@@ -99,7 +97,6 @@ pub fn cfg_select(input: TokenStream) -> TokenStream {
     input
 }
 ```
-
 > **待补全**：`assert_matches!` / `cfg_select!` 的完整形式化语义、与 1.96 宏特性的衔接。
 
 ---

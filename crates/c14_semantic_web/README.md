@@ -19,7 +19,6 @@ Rust 知识体系知识图谱工具链：解析、验证、推理与查询。
    cargo run -p c14_semantic_web --example kg_validate
    cargo run -p c14_semantic_web --example kg_query
    ```
-
 ## 📚 文档结构
 
 | 文件 | 说明 |
@@ -36,7 +35,6 @@ Rust 知识体系知识图谱工具链：解析、验证、推理与查询。
 ```bash
 cargo test -p c14_semantic_web
 ```
-
 ---
 
 *本文件基于 `docs/README.md` 整理，版本号与 workspace 保持一致。*

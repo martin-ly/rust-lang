@@ -157,7 +157,6 @@ c10_networks/
 ├── examples/                    # 示例代码
 └── docs/                       # 文档
 ```
-
 ### 3.2 异步实现现状
 
 #### 3.2.1 异步运行时
@@ -258,7 +257,6 @@ trait NetworkClient {
     async fn send<'a>(&'a self, data: &'a [u8]) -> NetworkResult<()>;
 }
 ```
-
 #### 5.2.2 异步闭包改进
 
 🔧 **待改进**:
@@ -275,7 +273,6 @@ let result = client.retry_with_backoff(3, 100, async || {
     client.connect().await
 });
 ```
-
 #### 5.2.3 常量泛型推断
 
 🔧 **待改进**:
@@ -291,7 +288,6 @@ fn process_packet(data: [u8; _]) -> NetworkResult<()> {
     // 编译器自动推断长度
 }
 ```
-
 ## 6. 性能优化建议
 
 ### 6.1 异步性能优化

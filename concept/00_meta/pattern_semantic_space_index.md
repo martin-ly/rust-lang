@@ -75,7 +75,6 @@ Architecture Patterns / Microservice Patterns (L4-L5)
     ↓
 Pattern Composition Algebra (L6)
 ```
-
 ### 路径 B：按问题域切入
 
 | 你面临的问题 | 起点 | 延伸阅读 |

@@ -36,7 +36,6 @@
 │ ✅ 代码生成 → 减少样板代码                   │
 └─────────────────────────────────────────────┘
 ```
-
 **适用场景**:
 
 - 微服务间内部通信
@@ -76,7 +75,6 @@ message EchoResponse {
     int64 timestamp = 2;
 }
 ```
-
 ### 2. 生成 Rust 代码
 
 ```toml
@@ -89,7 +87,6 @@ tokio = { version = "1", features = ["full"] }
 [build-dependencies]
 tonic-build = "0.14"
 ```
-
 ```rust
 // build.rs
 fn main() {
@@ -97,7 +94,6 @@ fn main() {
         .unwrap_or_else(|e| panic!("Failed to compile protos: {}", e));
 }
 ```
-
 ### 3. 实现服务端
 
 ```rust
@@ -146,7 +142,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ### 4. 实现客户端
 
 ```rust
@@ -174,7 +169,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ---
 
 ## 🔐 TLS 安全传输
@@ -193,7 +187,6 @@ Server::builder()
     .serve(addr)
     .await?;
 ```
-
 ---
 
 ## 🔄 流式通信
@@ -230,7 +223,6 @@ impl EchoService for EchoServiceImpl {
     }
 }
 ```
-
 ---
 
 ## 📊 与 REST 对比

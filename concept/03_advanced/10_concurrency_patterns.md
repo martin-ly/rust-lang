@@ -106,7 +106,6 @@ Rust 并发的核心洞察:
   │  └─ 可变借用通过 Mutex/Arc [来源: [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)]Mutex 保护    │
   └─────────────────────────────────────────┘
 ```
-
 > **认知功能**: Rust 的**并发安全（Concurrency Safety）不是独立的系统**——它是**所有权（Ownership）规则的自然延伸**。
 > [来源: [TRPL — Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)]
 
@@ -149,7 +148,6 @@ fn spawn_thread<T: Send + 'static>(data: T) {
     });
 }
 ```
-
 > **Send/Sync 洞察**: `Send` 和 `Sync` 是 Rust **并发安全的类型系统（Type System）根基**——它们将线程安全从文档约定提升为**编译期可验证的属性**。
 > [来源: [std::marker::Send](https://doc.rust-lang.org/std/marker/trait.Send.html)]
 
@@ -195,7 +193,6 @@ fn spawn_thread<T: Send + 'static>(data: T) {
         *counter2.lock().unwrap() += 1;
     });
 ```
-
 > **模型洞察**: Rust 的**所有权系统**使两种模型都可以**安全地实现**——消息传递自动转移所有权，共享状态通过类型系统（Type System）保证互斥。
 > [来源: [Rust By Example — Concurrency](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html)]
 
@@ -243,7 +240,6 @@ use tokio::sync::mpsc;
 let (tx, mut rx) = mpsc::channel(100);
 // 异步发送/接收
 ```
-
 > **通道洞察**: **crossbeam 通道**是 Rust **同步并发**的标准选择——它比 std::sync::mpsc 更快且支持 select。
 > [来源: [crossbeam::channel](https://docs.rs/crossbeam/latest/crossbeam/channel/index.html)]
 
@@ -285,7 +281,6 @@ let (tx, mut rx) = mpsc::channel(100);
   ├── 实时系统（避免锁的不可预测性）
   └── 但: 实现复杂，容易出错
 ```
-
 > **无锁洞察**: Rust 的 **Atomic + unsafe** 使**无锁数据结构**可以安全地实现——但 `unsafe` 代码必须经过严格审查。
 > [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
 
@@ -330,7 +325,6 @@ x.store(1, Ordering::SeqCst);
 // ├── 复杂同步: SeqCst
 // └── 不确定时用 SeqCst，确认瓶颈后再优化
 ```
-
 > **内存序洞察**: **内存顺序是并发编程中最复杂的主题**——Rust 暴露这些细节使开发者可以**精确控制性能**，但也要求深入理解硬件内存模型。
 > [source: [std::sync::atomic::Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]
 
@@ -371,7 +365,6 @@ x.store(1, Ordering::SeqCst);
   → 异步超时和间隔
   → 与 async/await 集成
 ```
-
 > **模式矩阵**: Rust 的**并发生态**覆盖了从**高层数据并行**（rayon）到**底层无锁**（crossbeam）的全谱系。
 > [source: [rayon crate](https://docs.rs/rayon/latest/rayon/)]
 
@@ -395,7 +388,6 @@ graph TD
     style LOCKFREE fill:#c8e6c9
     style LEARN fill:#fff3e0
 ```
-
 > **认知功能**: **无锁不是默认选择**——只有在**性能测量**证明锁是瓶颈，且团队有能力正确实现时，才使用无锁。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [source: [Rust Atomics and Locks — When to Use](https://mara.nl/atomics/atomics.html)]
@@ -436,7 +428,6 @@ graph TD
 ├── 传统调试器帮助有限
 └── 缓解: loom model checker, TSan
 ```
-
 > **边界要点**: 并发编程的边界主要与**死锁**、**优先级反转**、**伪共享**、**ABA** 和**调试**相关。
 > [source: [crossbeam::epoch](https://docs.rs/crossbeam/latest/crossbeam/epoch/index.html)]
 
@@ -485,7 +476,6 @@ graph TD
   ✅ flag.store(true, Ordering::Release);
      // 配对的 Acquire 保证可见性
 ```
-
 > **陷阱总结**: 并发陷阱主要与**锁内回调**、**Arc 遗漏**、**锁粒度**、**async 阻塞**和**内存序**相关。
 > [source: [Common Rust Concurrency Mistakes](https://rust-unofficial.github.io/too-many-lists/)]
 
@@ -505,7 +495,6 @@ fn mutex_guard_lifetime() {
     });
 }
 ```
-
 > **修正**: 避免将 `MutexGuard` 移动到闭包（Closures）中。若需跨线程共享数据，使用 `Arc<Mutex<T>>` 并在每个线程中独立 `lock()`。
 
 ```rust,compile_fail
@@ -522,7 +511,6 @@ fn arc_refcell_thread() {
     });
 }
 ```
-
 > **修正**: `RefCell` 提供单线程内部可变性。跨线程场景必须使用 `Mutex<T>`、`RwLock<T>` 或原子类型。
 
 ```rust,compile_fail
@@ -539,7 +527,6 @@ fn thread_spawn_lifetime() {
     handle.join().unwrap();
 }
 ```
-
 > **修正**: `thread::spawn` 要求闭包（Closures）满足 `'static` 生命周期（Lifetimes）。引用（Reference）栈数据必须通过 `move` 闭包转移所有权，或使用 `crossbeam::scope` 进行有界线程。
 
 ### 4.4 边界测试：`ScopedThread` 中引用逃逸（编译错误）
@@ -569,7 +556,6 @@ fn scoped_fixed() {
     println!("{:?}", data);
 }
 ```
-
 > **修正**: `std::thread::scope`（Rust 1.63+）允许创建非 `'static` 线程，保证所有子线程在 scope 结束时 join。这通过编译期生命周期（Lifetimes）检查实现——闭包（Closures）借用（Borrowing）栈数据的生命周期与 scope 绑定。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 4.5 边界测试：`Condvar` 虚假唤醒未处理（逻辑错误）
@@ -617,7 +603,6 @@ fn fixed() {
     }
 }
 ```
-
 > **修正**: `Condvar::wait` 可能因"虚假唤醒"（spurious wakeup）而在未被 `notify` 时返回。必须始终使用 `while` 循环而非 `if` 检查条件，确保在虚假唤醒后重新验证条件。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ---
@@ -629,7 +614,6 @@ fn fixed() {
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust Atomics and Locks](https://marabos.nl/atomics/) | ✅ 一级 | 并发权威 |
@@ -701,7 +685,6 @@ fn main() {
     println!("done"); // 会执行，但无显式关闭通知
 }
 ```
-
 > **修正**: `crossbeam::channel` 的关闭语义：
 >
 > 1) 所有 `Sender` drop → `Receiver::recv()` 返回 `Err(RecvError)`（Disconnected）；
@@ -726,7 +709,6 @@ fn main() {
     }).join().unwrap();
 }
 ```
-
 > **修正**:
 > **`Send`** 和 **`Sync`** 是 auto trait：
 >
@@ -773,9 +755,7 @@ fn main() {
 > 无数据竞争 ⟸ Send/Sync 正确实现 ⟸ 类型系统（Type System）验证
 > 死锁避免 ⟸ 锁顺序协议 ⟸ 类型状态机
 > **过渡**: 掌握 并发 模式：从消息 传递到锁自由的数据结构 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 并发 模式：从消息 传递到锁自由的数据结构 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 并发 模式：从消息 传递到锁自由的数据结构 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
@@ -861,7 +841,6 @@ let config: RwLock<Config> = RwLock::new(Config::default());
 // 场景2: 读写都频繁 → Mutex（更简单，无死锁风险）
 let cache: Mutex<Cache> = Mutex::new(Cache::default());
 ```
-
 > **陷阱**: `RwLock` 在写操作频繁时会**饿死读者**或**饿死写者**（取决于实现）。Tokio 的 `RwLock` 是公平锁，但 std 的 `RwLock` 平台依赖。
 </details>
 
@@ -886,7 +865,6 @@ fn main() {
     handle.join().unwrap();
 }
 ```
-
 - A. 可以编译，`Arc` 自动实现了 `Copy`
 - B. 不能编译，`move` 将 `data` 移入闭包（Closures），主线程无法再使用
 - C. 可以编译，`Arc` 的 `clone()` 在 `move` 闭包中自动调用
@@ -922,7 +900,6 @@ fn main() {
     // 两个 Arc 都 drop 后，内部数据才被释放
 }
 ```
-
 **`Arc::clone(&data)` 的本质**：
 
 ```rust,ignore
@@ -935,7 +912,6 @@ impl<T> Clone for Arc<T> {
     }
 }
 ```
-
 **常见模式**：
 
 ```rust,ignore
@@ -954,7 +930,6 @@ for _ in 0..10 {
 for h in handles { h.join().unwrap(); }
 assert_eq!(*data.lock().unwrap(), 10);
 ```
-
 > **关键洞察**: `Arc` 解决"数据该由谁释放"的问题，`Mutex`/`RwLock` 解决"数据如何安全访问"的问题。两者常配合使用，但职责不同。
 </details>
 
@@ -979,7 +954,6 @@ fn quicksort(arr: &mut [i32]) {
     );
 }
 ```
-
 - A. `join` 自动选择更快的分支先执行
 - B. `join` 将两个闭包分发到不同线程，利用工作窃取调度器平衡负载
 - C. `join` 保证左分支总是先于右分支完成
@@ -996,7 +970,6 @@ fn quicksort(arr: &mut [i32]) {
 线程1: [taskA] [taskB] [taskC] ← 本地队列
 线程2: [taskD] ← 队列为空时，从线程1"窃取"任务
 ```
-
 | 特性 | 说明 |
 |:---|:---|
 | **工作窃取** | 空闲线程从忙碌线程的队列尾部"偷"任务，避免负载不均 |
@@ -1017,7 +990,6 @@ thread::spawn(|| quicksort(right));
 // - 大任务才分发给线程池
 // - 任务粒度由调度器自动决定
 ```
-
 **Rayon 的阈值优化**：
 
 ```rust
@@ -1033,7 +1005,6 @@ fn quicksort(arr: &mut [i32]) {
     rayon::join(|| quicksort(left), || quicksort(right));
 }
 ```
-
 > **核心洞察**: 并行不是越多越好。Rayon 的调度器自动处理任务粒度、负载平衡和线程管理，开发者只需关注"哪些任务可以并行"。
 </details>
 
@@ -1068,7 +1039,6 @@ fn main() {
     });
 }
 ```
-
 - A. 没有死锁风险，`Mutex` 会自动处理
 - B. 线程1先锁a再锁b，线程2先锁b再锁a，形成循环等待 → 死锁
 - C. 应该用 `RwLock` 替代 `Mutex` 避免死锁
@@ -1108,14 +1078,12 @@ fn transfer(from: &Account, to: &Account, amount: i32) {
     // ... 执行转账
 }
 ```
-
 **或者使用 `parking_lot::deadlock` 检测**（开发环境）：
 
 ```rust
 // parking_lot 提供死锁检测功能
 parking_lot::deadlock::check();
 ```
-
 **更优方案 — 无锁转账**：
 
 ```rust
@@ -1131,7 +1099,6 @@ fn transfer(from: &Account, to: &Account, amount: i32) {
 }
 // 无锁 = 无死锁！但无法保证原子性（中间状态可见）
 ```
-
 > **生产环境法则**: 多锁场景必须定义全局顺序（如资源ID升序）。如果无法定义顺序，考虑：a) 使用无锁结构 b) 使用 `try_lock` 超时重试 c) 使用事务内存（如 `stm` crate）。
 </details>
 

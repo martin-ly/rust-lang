@@ -81,7 +81,6 @@ pub mod machine_learning {
     pub mod preprocessing;  // 数据预处理
 }
 ```
-
 #### 1.2 核心 Traits 设计
 
 - **SupervisedLearning**: 监督学习算法统一接口
@@ -221,12 +220,10 @@ pub mod machine_learning {
    - 默克尔树数据结构
    - 工作量证明算法
    - 椭圆曲线数字签名
-
 2. **GPU 加速研究**
    - CUDA 集成调研
    - OpenCL 支持评估
    - 矩阵运算优化
-
 3. **API 统一化**
    - 错误处理机制统一
    - 配置接口标准化

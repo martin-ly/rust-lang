@@ -68,22 +68,18 @@
 1. **扫描范围**
    - 遍历 `docs/research_notes/**/*.md`；
    - 仅关注文件名包含 `counterexample` 或 `反例` 的 Markdown 文件。
-
 2. **RFC 链接识别**
    - 匹配以下两类权威 URL：
      - `https://rust-lang.github.io/rfcs/NNNN-*.html`
      - `https://github.com/rust-lang/rfcs/(pull|issues|blob)/NNNN*`
    - 从 URL 中提取 RFC 编号。
-
 3. **映射输出**
    - 对每个反例文件，输出其中引用的 RFC 编号列表；
    - 对每个 RFC，聚合引用它的反例文件列表；
    - 对未引用任何 RFC 的反例文件，打印 informational 列表（ℹ️），供维护者人工补充，不影响退出码。
-
 4. **与本文档对齐**
    - 将脚本输出与上表人工基线进行 diff；
    - 当新的 RFC 稳定或新的反例文件加入时，触发本文档增量更新。
-
 5. **集成入口**
    - 建议在 `scripts/maintenance/check_research_notes.py` 中新增 `check_rfc_counterexample_mapping()` 作为信息性检查项；
    - 在 CI 中每日运行，生成映射报告并提交到 `.kimi/` 或 `reports/`。

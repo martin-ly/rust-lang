@@ -32,7 +32,6 @@ mindmap
       内存复用
       性能优化
 ```
-
 ## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -68,7 +67,6 @@ fn heap_allocation() {
     let s = String::from("hello"); // String：可变字符串
 }  // 自动调用 drop，释放堆内存
 ```
-
 ### 智能指针 {#智能指针}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -106,7 +104,6 @@ fn refcell_demo() {
     cell.borrow_mut().push(4);  // 运行时检查
 }
 ```
-
 ### 零成本抽象 {#零成本抽象}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -125,7 +122,6 @@ fn zero_cost_iter() {
     // 等效于手写的优化循环
 }
 ```
-
 ### 自定义智能指针与 Drop  trait {#自定义智能指针与-drop-trait}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -169,7 +165,6 @@ fn custom_smart_pointer_demo() {
     // tracked 离开作用域时自动调用 drop
 }
 ```
-
 ### 内存池与对象复用 {#内存池与对象复用}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -214,7 +209,6 @@ fn object_pool_demo() {
     pool.release(buf); // 归还到池中复用
 }
 ```
-
 ---
 
 ## 使用场景 {#使用场景}
@@ -288,15 +282,9 @@ fn object_pool_demo() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
-
 > **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**
-
 > **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
-
 > **来源: [IEEE - Formal Specification Standards](https://standards.ieee.org/)**
-
 > **来源: [POPL - Automated Verification](https://www.sigplan.org/Conferences/POPL/)**
-
 > **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
-
 > **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**

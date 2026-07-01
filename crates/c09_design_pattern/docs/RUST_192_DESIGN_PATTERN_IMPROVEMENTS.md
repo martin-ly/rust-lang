@@ -95,7 +95,6 @@ impl<T> Singleton<T> {
     }
 }
 ```
-
 ---
 
 ## 关联项多边界在设计模式中的应用
@@ -112,7 +111,6 @@ pub trait Strategy {
     fn execute(&self, context: Self::Context) -> Self::Result;
 }
 ```
-
 ---
 
 ## Location::file_as_c_str 在错误处理中的应用
@@ -129,7 +127,6 @@ pub fn log_error_with_location(error: &str) {
     println!("错误: {} 在文件: {:?}", error, file);
 }
 ```
-
 ---
 
 ## 实际应用示例

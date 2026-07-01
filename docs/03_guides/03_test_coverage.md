@@ -75,7 +75,6 @@ cargo install cargo-tarpaulin --locked
 # 验证安装 {#验证安装}
 cargo tarpaulin --version
 ```
-
 > **注意**: Windows 下 tarpaulin 的 ptrace 引擎不可用，需使用 `--engine llvm`。如果当前环境无法安装，标记为 "待 CI 验证"。
 
 ### 基本使用 {#基本使用-1}
@@ -101,7 +100,6 @@ cargo tarpaulin --workspace --exclude-files "*/examples/*" --exclude-files "*/be
 # 设置超时（秒） {#设置超时秒}
 cargo tarpaulin --workspace --timeout 300
 ```
-
 ### 输出文件 {#输出文件}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -130,7 +128,6 @@ rustup component add llvm-tools-preview
 # 安装 cargo-llvm-cov {#安装-cargo-llvm-cov}
 cargo install cargo-llvm-cov --locked
 ```
-
 ### 基本使用 {#基本使用-1}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -145,7 +142,6 @@ cargo llvm-cov --workspace --all-features --lcov --output-path lcov.info
 # 打开 HTML 报告 {#打开-html-报告}
 cargo llvm-cov --workspace --all-features --html --open
 ```
-
 ---
 
 ## 4. CI 集成 {#4-ci-集成}
@@ -181,7 +177,6 @@ coverage:
         name: coverage-report
         path: cobertura.xml
 ```
-
 ### 与 Codecov 集成 {#与-codecov-集成}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -193,7 +188,6 @@ coverage:
     files: cobertura.xml
     fail_ci_if_error: false
 ```
-
 ---
 
 ## 5. 覆盖率目标 {#5-覆盖率目标}
@@ -217,7 +211,6 @@ coverage:
 cargo tarpaulin --workspace --all-features --engine llvm --out html
 # 查看 tarpaulin-report.html {#查看-tarpaulin-reporthtml}
 ```
-
 ---
 
 ## 6. 提高覆盖率的策略 {#6-提高覆盖率的策略}
@@ -245,7 +238,6 @@ A: 使用 `--engine llvm` 标志：
 ```bash
 cargo tarpaulin --engine llvm --out xml
 ```
-
 ### Q: 覆盖率报告包含测试代码本身？ {#q-覆盖率报告包含测试代码本身}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -255,7 +247,6 @@ A: 使用 `--exclude-files` 排除测试文件：
 ```bash
 cargo tarpaulin --exclude-files "*/tests/*" --exclude-files "*/benches/*"
 ```
-
 ### Q: async 代码覆盖率不准确？ {#q-async-代码覆盖率不准确}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**

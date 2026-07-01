@@ -1,0 +1,732 @@
+﻿# 4.3 函数式编程
+
+> **文档类型**: Tier 4 - 高级层
+> **文档定位**: Rust中的函数式编程范式和技巧
+> **适用对象**: 希望使用函数式风格编写Rust代码的开发者
+> **相关文档**: [主索引](../tier_01_foundations/02_navigation.md) | [函数系统指南](../tier_02_guides/03_functions_guide.md)
+
+**最后更新**: 2025-12-11
+**适用版本**: Rust 1.92.0+
+**文档版本**: v2025.1.0
+
+---
+
+## 📋 目录
+
+- [4.3 函数式编程](#43-函数式编程)
+  - [📋 目录](#-目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+  - [1. 不可变性与纯函数](#1-不可变性与纯函数)
+    - [纯函数设计](#纯函数设计)
+    - [持久化数据结构](#持久化数据结构)
+  - [2. 高阶函数](#2-高阶函数)
+    - [map/filter/reduce 模式](#mapfilterreduce-模式)
+    - [自定义高阶函数](#自定义高阶函数)
+  - [3. 函子与单子](#3-函子与单子)
+    - [Functor (函子)](#functor-函子)
+    - [Monad (单子)](#monad-单子)
+    - [Maybe Monad 模式](#maybe-monad-模式)
+  - [4. 函数组合](#4-函数组合)
+    - [基础组合](#基础组合)
+    - [点自由风格（Point-Free Style）](#点自由风格point-free-style)
+  - [5. 惰性求值](#5-惰性求值)
+    - [迭代器惰性](#迭代器惰性)
+    - [自定义惰性结构](#自定义惰性结构)
+  - [6. 递归与尾递归](#6-递归与尾递归)
+    - [递归模式](#递归模式)
+    - [相互递归](#相互递归)
+  - [7. 代数数据类型](#7-代数数据类型)
+    - [和类型（Sum Types）](#和类型sum-types)
+    - [积类型（Product Types）](#积类型product-types)
+  - [8. 实战模式](#8-实战模式)
+    - [Railway-Oriented Programming](#railway-oriented-programming)
+    - [流式数据处理](#流式数据处理)
+    - [函数式错误处理链](#函数式错误处理链)
+  - [**🎯 拥抱函数式编程，编写更简洁、更可靠的Rust代码！** 🦀✨](#-拥抱函数式编程编写更简洁更可靠的rust代码-)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**函数式编程 (Functional Programming)**:
+
+- **定义**: Rust 中的函数式编程范式和技巧
+- **类型**: 高级层文档
+- **范畴**: 控制流、函数式编程
+- **版本**: Rust 1.92.0+
+- **相关概念**: 函数式编程、不可变性、纯函数、高阶函数、函子、单子
+
+### 属性特征
+
+**核心属性**:
+
+- **不可变性与纯函数**: 纯函数设计、持久化数据结构
+- **高阶函数**: map/filter/reduce 模式、自定义高阶函数
+- **函子与单子**: Functor、Monad、Maybe Monad 模式
+- **函数组合**: 基础组合、点自由风格（Point-Free Style）
+
+**性能特征**:
+
+- **零成本抽象**: 函数式编程零运行时开销
+- **编译时优化**: 编译器优化函数式代码
+- **适用场景**: 数据处理、函数式设计、代码复用
+
+### 关系连接
+
+**组合关系**:
+
+- 函数式编程 --[covers]--> 函数式编程完整内容
+- 函数式程序 --[uses]--> 函数式编程
+
+**依赖关系**:
+
+- 函数式编程 --[depends-on]--> 函数和闭包
+- 数据处理 --[depends-on]--> 函数式编程
+
+### 思维导图
+
+```text
+函数式编程
+│
+├── 不可变性与纯函数
+│   └── 纯函数设计
+├── 高阶函数
+│   └── map/filter/reduce
+├── 函子与单子
+│   └── Monad
+└── 函数组合
+    └── 点自由风格
+```
+---
+
+## 1. 不可变性与纯函数
+
+### 纯函数设计
+
+```rust
+// ✅ 纯函数：无副作用，确定性输出
+fn pure_add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+// ✅ 纯函数：不修改输入
+fn pure_filter(numbers: &[i32], threshold: i32) -> Vec<i32> {
+    numbers.iter()
+        .filter(|&&x| x > threshold)
+        .copied()
+        .collect()
+}
+
+// ❌ 非纯函数：有副作用
+fn impure_add(a: i32, b: i32) -> i32 {
+    println!("Adding {} + {}", a, b);  // 副作用
+    a + b
+}
+
+fn main() {
+    assert_eq!(pure_add(2, 3), 5);
+
+    let numbers = vec![1, 2, 3, 4, 5];
+    let filtered = pure_filter(&numbers, 2);
+    assert_eq!(filtered, vec![3, 4, 5]);
+
+    // numbers 未被修改
+    assert_eq!(numbers, vec![1, 2, 3, 4, 5]);
+}
+```
+### 持久化数据结构
+
+```rust
+use std::rc::Rc;
+
+#[derive(Debug, Clone)]
+struct List<T> {
+    head: Option<Rc<Node<T>>>,
+}
+
+#[derive(Debug)]
+struct Node<T> {
+    value: T,
+    next: Option<Rc<Node<T>>>,
+}
+
+impl<T> List<T> {
+    fn new() -> Self {
+        List { head: None }
+    }
+
+    fn prepend(&self, value: T) -> Self {
+        List {
+            head: Some(Rc::new(Node {
+                value,
+                next: self.head.clone(),
+            })),
+        }
+    }
+
+    fn head(&self) -> Option<&T> {
+        self.head.as_ref().map(|node| &node.value)
+    }
+
+    fn tail(&self) -> Self {
+        List {
+            head: self.head.as_ref()
+                .and_then(|node| node.next.clone()),
+        }
+    }
+}
+
+fn main() {
+    let list1 = List::new().prepend(1).prepend(2).prepend(3);
+    let list2 = list1.prepend(4);
+
+    println!("list1 head: {:?}", list1.head());  // Some(3)
+    println!("list2 head: {:?}", list2.head());  // Some(4)
+}
+```
+---
+
+## 2. 高阶函数
+
+### map/filter/reduce 模式
+
+```rust
+fn main() {
+    let numbers = vec![1, 2, 3, 4, 5];
+
+    // Map: 转换
+    let doubled: Vec<_> = numbers.iter()
+        .map(|x| x * 2)
+        .collect();
+
+    // Filter: 过滤
+    let even: Vec<_> = numbers.iter()
+        .filter(|&&x| x % 2 == 0)
+        .collect();
+
+    // Reduce: 聚合
+    let sum: i32 = numbers.iter().sum();
+    let product: i32 = numbers.iter().product();
+
+    // 组合
+    let result: i32 = numbers.iter()
+        .filter(|&&x| x % 2 == 0)
+        .map(|&x| x * x)
+        .sum();
+
+    println!("doubled: {:?}", doubled);
+    println!("even: {:?}", even);
+    println!("sum: {}, product: {}", sum, product);
+    println!("result: {}", result);
+}
+```
+### 自定义高阶函数
+
+```rust
+fn map<T, U, F>(items: Vec<T>, f: F) -> Vec<U>
+where
+    F: Fn(T) -> U,
+{
+    items.into_iter().map(f).collect()
+}
+
+fn filter<T, F>(items: Vec<T>, predicate: F) -> Vec<T>
+where
+    F: Fn(&T) -> bool,
+{
+    items.into_iter().filter(|item| predicate(item)).collect()
+}
+
+fn fold<T, U, F>(items: Vec<T>, init: U, f: F) -> U
+where
+    F: Fn(U, T) -> U,
+{
+    items.into_iter().fold(init, f)
+}
+
+fn main() {
+    let numbers = vec![1, 2, 3, 4, 5];
+
+    let doubled = map(numbers.clone(), |x| x * 2);
+    let even = filter(numbers.clone(), |x| x % 2 == 0);
+    let sum = fold(numbers, 0, |acc, x| acc + x);
+
+    println!("{:?}, {:?}, {}", doubled, even, sum);
+}
+```
+---
+
+## 3. 函子与单子
+
+### Functor (函子)
+
+```rust
+trait Functor<A> {
+    type Output<B>;
+    fn fmap<B, F>(self, f: F) -> Self::Output<B>
+    where
+        F: Fn(A) -> B;
+}
+
+// Option 是函子
+impl<A> Functor<A> for Option<A> {
+    type Output<B> = Option<B>;
+
+    fn fmap<B, F>(self, f: F) -> Option<B>
+    where
+        F: Fn(A) -> B,
+    {
+        self.map(f)
+    }
+}
+
+fn main() {
+    let some_value = Some(42);
+    let mapped = some_value.fmap(|x| x * 2);
+    println!("{:?}", mapped);  // Some(84)
+}
+```
+### Monad (单子)
+
+```rust
+trait Monad<A>: Sized {
+    fn unit(value: A) -> Self;
+    fn bind<B, F>(self, f: F) -> Self::Output<B>
+    where
+        F: Fn(A) -> Self::Output<B>;
+
+    type Output<B>: Monad<B>;
+}
+
+// Option 作为单子
+impl<A> Monad<A> for Option<A> {
+    type Output<B> = Option<B>;
+
+    fn unit(value: A) -> Self {
+        Some(value)
+    }
+
+    fn bind<B, F>(self, f: F) -> Option<B>
+    where
+        F: Fn(A) -> Option<B>,
+    {
+        self.and_then(f)
+    }
+}
+
+fn main() {
+    let result = Option::unit(10)
+        .bind(|x| Some(x + 5))
+        .bind(|x| if x > 10 { Some(x * 2) } else { None });
+
+    println!("{:?}", result);  // Some(30)
+}
+```
+### Maybe Monad 模式
+
+```rust
+fn safe_divide(a: f64, b: f64) -> Option<f64> {
+    if b == 0.0 {
+        None
+    } else {
+        Some(a / b)
+    }
+}
+
+fn safe_sqrt(x: f64) -> Option<f64> {
+    if x < 0.0 {
+        None
+    } else {
+        Some(x.sqrt())
+    }
+}
+
+fn main() {
+    // 链式计算
+    let result = Some(100.0)
+        .and_then(|x| safe_divide(x, 4.0))
+        .and_then(|x| safe_sqrt(x));
+
+    println!("{:?}", result);  // Some(5.0)
+
+    // 中途失败
+    let failed = Some(-100.0)
+        .and_then(|x| safe_divide(x, 4.0))
+        .and_then(|x| safe_sqrt(x));  // 失败在这里
+
+    println!("{:?}", failed);  // None
+}
+```
+---
+
+## 4. 函数组合
+
+### 基础组合
+
+```rust
+fn compose<A, B, C, F, G>(f: F, g: G) -> impl Fn(A) -> C
+where
+    F: Fn(A) -> B,
+    G: Fn(B) -> C,
+{
+    move |x| g(f(x))
+}
+
+fn pipe<A, B, C, F, G>(f: F, g: G) -> impl Fn(A) -> C
+where
+    F: Fn(A) -> B,
+    G: Fn(B) -> C,
+{
+    move |x| g(f(x))
+}
+
+fn main() {
+    let add_one = |x: i32| x + 1;
+    let double = |x: i32| x * 2;
+    let square = |x: i32| x * x;
+
+    // 组合：先double再add_one
+    let f = compose(double, add_one);
+    println!("{}", f(5));  // 11
+
+    // 管道：先add_one再double
+    let g = pipe(add_one, double);
+    println!("{}", g(5));  // 12
+
+    // 多重组合
+    let h = compose(add_one, compose(double, square));
+    println!("{}", h(3));  // 37 ((3+1)*2)^2
+}
+```
+### 点自由风格（Point-Free Style）
+
+```rust
+fn main() {
+    let numbers = vec![1, 2, 3, 4, 5];
+
+    // 传统风格
+    let result1: Vec<_> = numbers.iter()
+        .filter(|&&x| x % 2 == 0)
+        .map(|&x| x * x)
+        .collect();
+
+    // 点自由风格
+    fn is_even(x: &&i32) -> bool { **x % 2 == 0 }
+    fn square(x: &i32) -> i32 { x * x }
+
+    let result2: Vec<_> = numbers.iter()
+        .filter(is_even)
+        .map(square)
+        .collect();
+
+    assert_eq!(result1, result2);
+}
+```
+---
+
+## 5. 惰性求值
+
+### 迭代器惰性
+
+```rust
+fn main() {
+    let numbers = vec![1, 2, 3, 4, 5];
+
+    // 创建迭代器（惰性）
+    let iter = numbers.iter()
+        .inspect(|x| println!("map前: {}", x))
+        .map(|x| {
+            println!("映射: {}", x);
+            x * 2
+        })
+        .inspect(|x| println!("filter前: {}", x))
+        .filter(|&&x| {
+            println!("过滤: {}", x);
+            x > 5
+        });
+
+    println!("迭代器创建完成");
+
+    // 消费迭代器（触发计算）
+    let result: Vec<_> = iter.collect();
+    println!("结果: {:?}", result);
+}
+```
+### 自定义惰性结构
+
+```rust
+struct LazySeq<T, F>
+where
+    F: Fn(usize) -> T,
+{
+    generator: F,
+}
+
+impl<T, F> LazySeq<T, F>
+where
+    F: Fn(usize) -> T,
+{
+    fn new(generator: F) -> Self {
+        LazySeq { generator }
+    }
+
+    fn take(&self, n: usize) -> Vec<T> {
+        (0..n).map(|i| (self.generator)(i)).collect()
+    }
+}
+
+fn main() {
+    // 斐波那契数列（惰性生成）
+    let fib = LazySeq::new(|n| {
+        match n {
+            0 => 0,
+            1 => 1,
+            n => {
+                // 简化版本（实际需要缓存）
+                n
+            }
+        }
+    });
+
+    println!("{:?}", fib.take(10));
+}
+```
+---
+
+## 6. 递归与尾递归
+
+### 递归模式
+
+```rust
+// 标准递归
+fn factorial(n: u64) -> u64 {
+    match n {
+        0 => 1,
+        n => n * factorial(n - 1),
+    }
+}
+
+// 尾递归优化
+fn factorial_tail(n: u64) -> u64 {
+    fn helper(n: u64, acc: u64) -> u64 {
+        match n {
+            0 => acc,
+            n => helper(n - 1, n * acc),
+        }
+    }
+    helper(n, 1)
+}
+
+fn main() {
+    println!("{}", factorial(5));
+    println!("{}", factorial_tail(5));
+}
+```
+### 相互递归
+
+```rust
+fn is_even(n: u32) -> bool {
+    match n {
+        0 => true,
+        n => is_odd(n - 1),
+    }
+}
+
+fn is_odd(n: u32) -> bool {
+    match n {
+        0 => false,
+        n => is_even(n - 1),
+    }
+}
+
+fn main() {
+    println!("4 is even: {}", is_even(4));
+    println!("5 is odd: {}", is_odd(5));
+}
+```
+---
+
+## 7. 代数数据类型
+
+### 和类型（Sum Types）
+
+```rust
+// 枚举是和类型
+enum Shape {
+    Circle(f64),
+    Rectangle(f64, f64),
+    Triangle(f64, f64, f64),
+}
+
+fn area(shape: &Shape) -> f64 {
+    match shape {
+        Shape::Circle(r) => std::f64::consts::PI * r * r,
+        Shape::Rectangle(w, h) => w * h,
+        Shape::Triangle(a, b, c) => {
+            let s = (a + b + c) / 2.0;
+            (s * (s - a) * (s - b) * (s - c)).sqrt()
+        },
+    }
+}
+
+fn main() {
+    let circle = Shape::Circle(5.0);
+    let rect = Shape::Rectangle(3.0, 4.0);
+
+    println!("Circle area: {}", area(&circle));
+    println!("Rectangle area: {}", area(&rect));
+}
+```
+### 积类型（Product Types）
+
+```rust
+// 结构体是积类型
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+struct Color {
+    r: u8,
+    g: u8,
+    b: u8,
+}
+
+// 积类型组合
+struct ColoredPoint {
+    point: Point,
+    color: Color,
+}
+
+fn main() {
+    let cp = ColoredPoint {
+        point: Point { x: 10.0, y: 20.0 },
+        color: Color { r: 255, g: 0, b: 0 },
+    };
+
+    println!("Point: ({}, {})", cp.point.x, cp.point.y);
+}
+```
+---
+
+## 8. 实战模式
+
+### Railway-Oriented Programming
+
+```rust
+type Result<T> = std::result::Result<T, String>;
+
+fn validate_age(age: i32) -> Result<i32> {
+    if age < 0 {
+        Err("年龄不能为负".to_string())
+    } else if age > 150 {
+        Err("年龄不合理".to_string())
+    } else {
+        Ok(age)
+    }
+}
+
+fn calculate_category(age: i32) -> Result<String> {
+    Ok(match age {
+        0..=12 => "儿童",
+        13..=17 => "青少年",
+        18..=59 => "成年人",
+        _ => "老年人",
+    }.to_string())
+}
+
+fn format_result(category: String) -> Result<String> {
+    Ok(format!("分类: {}", category))
+}
+
+fn main() {
+    let process = |age| {
+        validate_age(age)
+            .and_then(calculate_category)
+            .and_then(format_result)
+    };
+
+    println!("{:?}", process(25));    // Ok("分类: 成年人")
+    println!("{:?}", process(-5));    // Err("年龄不能为负")
+    println!("{:?}", process(200));   // Err("年龄不合理")
+}
+```
+### 流式数据处理
+
+```rust
+fn main() {
+    let data = vec![
+        ("Alice", 25),
+        ("Bob", 30),
+        ("Charlie", 35),
+        ("David", 40),
+    ];
+
+    let result: Vec<_> = data.iter()
+        .filter(|(_, age)| *age >= 30)
+        .map(|(name, age)| (name.to_uppercase(), age + 10))
+        .collect();
+
+    println!("{:?}", result);
+}
+```
+### 函数式错误处理链
+
+```rust
+fn parse_int(s: &str) -> Option<i32> {
+    s.parse().ok()
+}
+
+fn double(x: i32) -> Option<i32> {
+    Some(x * 2)
+}
+
+fn validate(x: i32) -> Option<i32> {
+    if x > 100 {
+        None
+    } else {
+        Some(x)
+    }
+}
+
+fn main() {
+    let result = Some("42")
+        .and_then(parse_int)
+        .and_then(double)
+        .and_then(validate);
+
+    println!("{:?}", result);  // Some(84)
+
+    let failed = Some("50")
+        .and_then(parse_int)
+        .and_then(double)
+        .and_then(validate);
+
+    println!("{:?}", failed);  // None (100 > 100)
+}
+```
+---
+
+**最后更新**: 2025-12-11
+**文档版本**: v2025.1.0
+**相关文档**: [主索引](../tier_01_foundations/02_navigation.md) | [README](../../README.md)
+
+---
+
+**🎯 拥抱函数式编程，编写更简洁、更可靠的Rust代码！** 🦀✨
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

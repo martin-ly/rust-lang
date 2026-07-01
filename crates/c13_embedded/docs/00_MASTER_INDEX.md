@@ -48,7 +48,6 @@ cargo run -p c13_embedded --bin embedded_demo
 # 嵌入式目标
 cargo check -p c13_embedded --target thumbv7m-none-eabi --features embedded
 ```
-
 ---
 
 **文档版本**: 1.0

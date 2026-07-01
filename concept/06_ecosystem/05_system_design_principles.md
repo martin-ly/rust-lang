@@ -24,7 +24,6 @@
 ---
 
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置概念**: [Architecture Patterns](35_architecture_patterns.md)
 
 ## 📑 目录
@@ -91,7 +90,6 @@
 容错设计                Result + panic=abort             Erlang Error Kernel             故障隔离
 ─────────────────────────────────────────────────────────────────────────────────────────────────
 ```
-
 ---
 
 ## 一、权威来源与设计原则分类学
@@ -132,7 +130,6 @@ fn process(data: Vec<u8>) { // 获得 data 的 capability
     // read_only 存活期间，data 不可变
 } // process 退出，data 的 capability 被销毁（Drop）
 ```
-
 > **对齐**: Rust 的所有权系统与 SEL4（世界上最安全的操作系统内核）的 capability 模型在**安全保证层面同构**。SEL4 通过形式化验证证明了 capability 模型的无 UAF 性质；Rust 通过类型系统（RustBelt）证明了等价的安全保证。 来源: SEL4 Formal Verification; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ### 2.2 并发安全：Session Types 编译期编码
@@ -183,7 +180,6 @@ trait Service<Request> {
 // (f ∘ g)(x) = f(g(x))
 // Tower 中间件：Logger(Compression(Auth(handler)))(req)
 ```
-
 **洋葱中间件的范畴论语义**:
 
 - 每个中间件 `Layer` 是一个**自函子（endofunctor）**：`Layer: Service → Service`。
@@ -192,7 +188,6 @@ trait Service<Request> {
 
 ### 2.5 分布式一致性：从所有权到共识的隐喻
 >
-
 > **核心隐喻**: Rust 的所有权转移（move）在分布式系统中对应**状态的唯一主节点（single primary）**——任何时刻，数据的所有权只存在于一个节点，避免了分布式系统中的 split-brain 问题。
 
 | Rust 概念 | 分布式系统对应 | 一致性保证 |
@@ -260,7 +255,6 @@ impl Worker {
     }
 }
 ```
-
 ---
 
 ## 三、系统设计决策矩阵
@@ -288,7 +282,6 @@ graph LR
     style B fill:#9f9,stroke:#333,stroke-width:2px
     style E fill:#9f9,stroke:#333,stroke-width:2px
 ```
-
 > **认知功能**: 将多维设计权衡可视化，帮助读者直觉理解「Safe Rust 在安全性、性能、可维护性三维空间中占据帕累托最优位置」。使用时注意，帕累托前沿是动态边界——随着编译器优化和形式化工具成熟，前沿会向右上扩展。[来源: 💡 原创分析]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
@@ -335,7 +328,6 @@ graph TD
     C[形式化保证] --> D[编译期拒绝不安全状态]
     C --> E[分布式系统: 协议验证]
 ```
-
 > **认知功能**: 通过 Rust 类型系统的已有直觉，建立对分布式协议的快速认知桥梁。读者可将编译期已熟悉的所有权、借用（Borrowing）、生命周期（Lifetimes）等概念，迁移理解为分布式系统中的主从复制、锁机制和租约协议。[来源: 💡 原创分析]
 
 **隐喻映射表**:
@@ -367,7 +359,6 @@ graph TD
     L4[L4: 系统级验证<br/>Kani / Creusot / Verus] --> L5
     L5[L5: 运行时验证<br/>监控 / 混沌工程]
 ```
-
 > **认知功能**: 将形式化验证的抽象层级结构化，帮助读者根据项目安全需求和资源投入选择验证深度。关键洞察：L0 是「免费午餐」（编译器自动保证），L4 是「高级定制」（需额外标注和工具投入），跳过中间层直接追求 L5 往往事倍功半。[来源: 💡 原创分析]
 
 | 层级 | 验证目标 | 工具/方法 | 形式化程度 | 覆盖率 |
@@ -400,7 +391,6 @@ graph TD
     style E fill:#9f9
     style F fill:#9f9
 ```
-
 > **认知功能**: 揭示七项设计原则之间的支撑关系，帮助读者建立「内存安全（Memory Safety）是基础、零成本抽象是杠杆、组件组合是放大器」的系统观。绿色节点标识根原则——它们不依赖其他原则，是整个设计体系的公理。[来源: 💡 原创分析]
 
 ### 6.2 系统架构决策树
@@ -424,7 +414,6 @@ graph TD
     K -->|标准| M[Safe Rust + 测试]
     K -->|性能优先| N[unsafe 热点 + Miri 验证]
 ```
-
 > **认知功能**: 将架构设计的多维判断转化为可遍历的决策路径。读者可根据项目约束（性能敏感、容错需求、安全等级）快速定位推荐架构模式。注意：决策树的分支是经验法则而非绝对规则，边界场景需结合定量基准测试验证。[来源: 💡 原创分析]
 
 ---
@@ -509,7 +498,6 @@ graph LR
 
     VERIFY -.->|反馈| REQ
 ```
-
 > **认知功能**: 强调系统设计不是线性瀑布，而是带有反馈回路的迭代过程。
 > 验证层的结果（如 Miri 发现的数据竞争、Kani 证伪的不变式）应回流需求层，驱动需求精化和架构修正。
 > 虚线箭头是「V 模型」在 Rust 生态中的特化表达。[来源: 💡 原创分析]
@@ -561,7 +549,6 @@ fn main() {
     handle.join().unwrap();
 }
 ```
-
 > **修正**: `Rc<T>`（引用（Reference）计数）不是 `Send`，因为其内部计数器非线程安全。跨线程共享数据必须使用 `Arc<T>`（原子引用计数），它使用原子操作（Atomic Operations）维护计数器。这是 Rust 类型系统对**线程安全**的形式化保证：`Send` 标记类型可安全转移到其他线程，`Sync` 标记类型可安全被多个线程共享。编译器通过 trait bound 检查在编译期阻止数据竞争——`thread::spawn` 要求闭包（Closures）是 `'static + Send`，`Rc<i32>` 不满足 `Send` 约束。这比 Java 的 `synchronized` 或 Go 的 `chan` 更根本：Rust 在类型层面消除数据竞争，而非运行时检测。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/marker/trait.Send.html)]
 
 ### 10.2 边界测试：trait 对象的安全性约束（编译错误）
@@ -582,7 +569,6 @@ impl Dispatcher {
     }
 }
 ```
-
 > **修正**: Rust 的 trait 对象安全（object safety）要求：1) 方法不使用 `Self: Sized`；2) 方法不使用泛型类型参数；3) 关联函数（无 `self`）不能是对象安全的。违反这些规则的 trait 不能作为 `dyn Trait` 使用。这是 Rust 动态分发与静态分发的边界：静态单态化（monomorphization）允许泛型方法，但 trait 对象（vtable 动态分发）要求方法签名在编译期确定。与 Java 的接口（总是动态分发）或 C++ 的虚函数（无对象安全概念）不同，Rust 显式区分这两种机制，要求开发者根据场景选择。[来源: [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
 
 ### 10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时开销）
@@ -603,7 +589,6 @@ impl Service {
     }
 }
 ```
-
 > **修正**: 依赖注入（DI）在 Rust 中通常通过**泛型**（静态分发）或 **trait object**（动态分发）实现。泛型无运行时开销，但代码膨胀；trait object 有 vtable 间接开销（约 1-2 个指针解引用（Reference）），但二进制更小。上述代码使用 `Box<dyn Repository>` 实现 DI，每次 `find` 调用有虚函数开销。在性能关键路径上，应使用泛型：`struct Service<R: Repository> { repo: R }`。Rust 的类型系统允许在编译期选择：开发时使用 trait object（快速迭代），发布时重构为泛型（性能优化）。这与 Java 的接口（总是动态分发，JIT 可能内联）或 C++ 的模板（总是静态分发）不同——Rust 提供了两种机制，让开发者根据场景选择。来源: [The Rust Programming Language] · 来源: [Rust Performance Book]
 
 ### 10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）
@@ -628,7 +613,6 @@ impl HttpRequest<Unsent> {
 // ❌ 编译问题: 随着状态数增长，转换矩阵的组合爆炸
 // 若有 5 个状态和 10 个转换，需 50 个 impl 块
 ```
-
 > **修正**: 类型状态（Typestate）模式将运行时状态检查移至编译期，但**状态机复杂度**随状态数指数增长。5 个状态 × 10 个转换 = 50 个 `impl` 块，维护困难。替代方案：1) 简化状态空间（合并相似状态）；2) 使用枚举（Enum）状态 + 运行时检查（`match` + `panic!`），适用于复杂状态机；3) 使用宏（Macro）生成重复实现（`macro_rules!`）。设计原则：类型状态用于**关键路径**（如 `File<Open>` vs `File<Closed>`），普通状态机用枚举。这与 Rust 的"零成本抽象"哲学一致——编译期检查的代价是编译时间增加，而非运行时。这与 Haskell 的 GADT 类型状态或 Idris 的依赖类型状态机类似——Rust 的 PhantomData 是轻量类型状态实现，但复杂度限制在工业规模系统中需权衡。来源: [Typestate Pattern in Rust] · 来源: [Rust Design Patterns]
 
 ### 10.3 边界测试：过度泛型化导致的单态化膨胀（编译后体积爆炸）
@@ -650,7 +634,6 @@ fn main() {
     // ❌ 编译后问题: 每个 T 生成一份 process 的代码，二进制膨胀
 }
 ```
-
 > **修正**: Rust 的**单态化**（monomorphization）为每个具体类型生成独立的机器码。`process<T>` 被调用 8 次（7 种不同类型），生成 8 份代码。这在泛型密集型代码中（如 `Vec<T>`、迭代器（Iterator）适配器）导致二进制膨胀。缓解：1) **动态分发**：`fn process(x: &dyn Display)`（一份代码，vtable 查找）；2) **泛型约束**：限制类型参数的使用场景；3) `cargo bloat` 分析二进制体积。设计原则：公共 API 使用 `&dyn Trait` 或 `impl Trait`（返回类型），内部实现使用泛型（性能关键路径）。这与 C++ 的模板（同样单态化，但编译器可能共享相同布局的实例化）或 Java 的泛型（类型擦除，无单态化）不同——Rust 的单态化提供零成本抽象，但体积代价需权衡。[来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)] · [来源: [cargo-bloat](https://github.com/RazrFalcon/cargo-bloat)]
 > **过渡**: Rust 系统设计原则与国际权威对齐 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 系统设计原则与国际权威对齐 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -735,9 +718,7 @@ Tokio 的异步（Async）任务切换成本远低于 OS 线程（~100ns vs ~1µ
 | Rust 系统设计原则与国际权威对齐 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Rust 系统设计原则与国际权威对齐 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Rust 系统设计原则与国际权威对齐 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Rust 系统设计原则与国际权威对齐 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

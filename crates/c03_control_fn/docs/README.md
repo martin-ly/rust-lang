@@ -1,5 +1,9 @@
 # 🦀 C03 控制流与函数 - 文档中心
 
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
+>
+
 **版本**：v2.0
 **Rust 版本**：1.93.0+
 **文档数量**：35+
@@ -30,11 +34,11 @@
 
 刚开始学习 Rust 控制流？从这里开始：
 
-1. [条件语句指南](tier_02_guides/01_条件语句指南.md) - if/match 入门
-2. [循环结构指南](tier_02_guides/02_循环结构指南.md) - 循环结构掌握
-3. [函数系统指南](tier_02_guides/03_函数系统指南.md) - 函数系统入门
-4. [模式匹配指南](tier_02_guides/04_模式匹配指南.md) - 模式匹配详解
-5. [错误处理指南](tier_02_guides/05_错误处理指南.md) - Result/Option
+1. [条件语句指南](tier_02_guides/01_conditionals_guide.md) - if/match 入门
+2. [循环结构指南](tier_02_guides/02_loops_guide.md) - 循环结构掌握
+3. [函数系统指南](tier_02_guides/03_functions_guide.md) - 函数系统入门
+4. [模式匹配指南](tier_02_guides/04_pattern_matching_guide.md) - 模式匹配详解
+5. [错误处理指南](tier_02_guides/05_error_handling_guide.md) - Result/Option
 
 **完整基础路径** → [Tier 2 指南目录](tier_02_guides/README.md)
 
@@ -42,10 +46,10 @@
 
 已掌握基础，想深入学习？
 
-1. [高级模式匹配](tier_04_advanced/01_高级模式匹配.md) - 复杂模式
-2. [闭包深入](tier_04_advanced/02_闭包深入.md) - 深入闭包
-3. [函数式编程](tier_04_advanced/03_函数式编程.md) - 函数式编程
-4. [错误处理进阶](tier_04_advanced/04_错误处理进阶.md) - 错误处理进阶
+1. [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md) - 复杂模式
+2. [闭包深入](tier_04_advanced/02_closures_in_depth.md) - 深入闭包
+3. [函数式编程](tier_04_advanced/03_functional_programming.md) - 函数式编程
+4. [错误处理进阶](tier_04_advanced/04_advanced_error_handling.md) - 错误处理进阶
 
 **完整进阶路径** → [Tier 4 高级主题目录](tier_04_advanced/README.md)
 
@@ -53,9 +57,9 @@
 
 追求深度理解和最佳实践？
 
-1. [控制流参考](tier_03_references/01_控制流参考.md) - 技术参考
-2. [迭代器参考](tier_03_references/02_迭代器参考.md) - 迭代器API
-3. [函数参考](tier_03_references/03_函数参考.md) - 函数API
+1. [控制流参考](tier_03_references/01_control_flow_reference.md) - 技术参考
+2. [迭代器参考](tier_03_references/02_iterators_reference.md) - 迭代器API
+3. [函数参考](tier_03_references/03_functions_reference.md) - 函数API
 4. [性能优化](tier_04_advanced/05_性能优化.md) - 性能优化
 
 **完整专家路径** → [Tier 3 参考目录](tier_03_references/README.md) + [Tier 4 高级主题](tier_04_advanced/README.md)
@@ -111,41 +115,40 @@ docs/
     ├── 闭包参考
     └── 错误处理参考
 ```
-
 ## 🎯 按主题浏览
 
 ### 条件控制与模式匹配
 
-- [条件语句指南](tier_02_guides/01_条件语句指南.md) ⭐
-- [高级模式匹配](tier_04_advanced/01_高级模式匹配.md) ⭐⭐⭐⭐
-- [模式匹配指南](tier_02_guides/04_模式匹配指南.md) ⭐⭐⭐
-- [控制流参考](tier_03_references/01_控制流参考.md) ⭐⭐⭐
+- [条件语句指南](tier_02_guides/01_conditionals_guide.md) ⭐
+- [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md) ⭐⭐⭐⭐
+- [模式匹配指南](tier_02_guides/04_pattern_matching_guide.md) ⭐⭐⭐
+- [控制流参考](tier_03_references/01_control_flow_reference.md) ⭐⭐⭐
 
 ### 循环与迭代
 
-- [循环结构指南](tier_02_guides/02_循环结构指南.md) ⭐⭐
-- [循环结构指南](tier_02_guides/02_循环结构指南.md) ⭐⭐⭐
-- [迭代器参考](tier_03_references/02_迭代器参考.md) ⭐⭐⭐⭐
+- [循环结构指南](tier_02_guides/02_loops_guide.md) ⭐⭐
+- [循环结构指南](tier_02_guides/02_loops_guide.md) ⭐⭐⭐
+- [迭代器参考](tier_03_references/02_iterators_reference.md) ⭐⭐⭐⭐
 
 ### 函数与闭包
 
-- [函数系统指南](tier_02_guides/03_函数系统指南.md) ⭐⭐
-- [闭包深入](tier_04_advanced/02_闭包深入.md) ⭐⭐⭐⭐
-- [闭包参考](tier_03_references/04_闭包参考.md) ⭐⭐⭐
-- [代码示例集合](tier_02_guides/06_代码示例集合.md) ⭐⭐⭐
+- [函数系统指南](tier_02_guides/03_functions_guide.md) ⭐⭐
+- [闭包深入](tier_04_advanced/02_closures_in_depth.md) ⭐⭐⭐⭐
+- [闭包参考](tier_03_references/04_closures_reference.md) ⭐⭐⭐
+- [代码示例集合](tier_02_guides/06_code_examples.md) ⭐⭐⭐
 
 ### 错误处理
 
-- [错误处理指南](tier_02_guides/05_错误处理指南.md) ⭐⭐⭐
-- [错误处理进阶](tier_04_advanced/04_错误处理进阶.md) ⭐⭐⭐
-- [错误处理参考](tier_03_references/05_错误处理参考.md) ⭐⭐⭐
-- [错误处理进阶](tier_04_advanced/04_错误处理进阶.md) ⭐⭐⭐
+- [错误处理指南](tier_02_guides/05_error_handling_guide.md) ⭐⭐⭐
+- [错误处理进阶](tier_04_advanced/04_advanced_error_handling.md) ⭐⭐⭐
+- [错误处理参考](tier_03_references/05_error_handling_reference.md) ⭐⭐⭐
+- [错误处理进阶](tier_04_advanced/04_advanced_error_handling.md) ⭐⭐⭐
 
 ### 工程实践
 
 - [性能优化](tier_04_advanced/05_性能优化.md) ⭐⭐⭐⭐
-- [常见问题](tier_01_foundations/04_常见问题.md) ⭐⭐⭐
-- [实战项目集](tier_02_guides/07_实战项目集.md) ⭐⭐⭐⭐
+- [常见问题](tier_01_foundations/04_faq.md) ⭐⭐⭐
+- [实战项目集](tier_02_guides/07_hands_on_projects.md) ⭐⭐⭐⭐
 
 ## 📖 重点推荐
 
@@ -153,10 +156,10 @@ docs/
 
 无论你的水平如何，这些文档都值得一读：
 
-1. **📌 [常见问题](tier_01_foundations/04_常见问题.md)**
+1. **📌 [常见问题](tier_01_foundations/04_faq.md)**
    避免 13+ 个常见错误，节省大量调试时间
 
-2. **📌 [实战项目集](tier_02_guides/07_实战项目集.md)**
+2. **📌 [实战项目集](tier_02_guides/07_hands_on_projects.md)**
    状态机、策略、责任链等 5 种模式的 Rust 实现
 
 3. **📌 [性能优化](tier_04_advanced/05_性能优化.md)**
@@ -177,8 +180,8 @@ docs/
 **快速参考**:
 
 - [Rust 1.93.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) - 新特性总览 🆕
-- [高级模式匹配（Rust 1.93.0）](tier_04_advanced/01_高级模式匹配.md) - 模式匹配增强
-- [模式匹配指南](tier_02_guides/04_模式匹配指南.md) - 模式匹配语法
+- [高级模式匹配（Rust 1.93.0）](tier_04_advanced/01_advanced_pattern_matching.md) - 模式匹配增强
+- [模式匹配指南](tier_02_guides/04_pattern_matching_guide.md) - 模式匹配语法
 
 **版本特性目录**:
 
@@ -189,9 +192,9 @@ docs/
 
 ### 参考文档
 
-- [常见问题](tier_01_foundations/04_常见问题.md) - 快速查找问题答案
-- [术语表](tier_01_foundations/03_术语表.md) - 控制流相关术语
-- [控制流参考](tier_03_references/01_控制流参考.md) - 技术参考
+- [常见问题](tier_01_foundations/04_faq.md) - 快速查找问题答案
+- [术语表](tier_01_foundations/03_glossary.md) - 控制流相关术语
+- [控制流参考](tier_03_references/01_control_flow_reference.md) - 技术参考
 
 ### 相关模块
 
@@ -226,7 +229,6 @@ cargo run --example let_else_patterns_handbook
 # 运行实践示例
 cargo run --example error_handling_control_flow
 ```
-
 ### 测试验证
 
 ```bash
@@ -238,7 +240,6 @@ cargo test control_flow
 cargo test --test rust_189_features_tests
 cargo test --test rust_192_comprehensive_tests
 ```
-
 ### 性能测试
 
 ```bash
@@ -248,7 +249,6 @@ cargo bench
 # 查看性能报告
 cargo bench --bench rust_189_benchmarks
 ```
-
 ### 代码检查
 
 ```bash
@@ -261,7 +261,6 @@ cargo clippy
 # 生成文档
 cargo doc --open --package c03_control_fn
 ```
-
 ## 📊 学习进度检查
 
 ### 🔰 初学者检查点
@@ -370,7 +369,7 @@ cargo doc --open --package c03_control_fn
 
 ## 📞 获取帮助
 
-- **📖 文档问题**：查看 [常见问题](tier_01_foundations/04_常见问题.md)
+- **📖 文档问题**：查看 [常见问题](tier_01_foundations/04_faq.md)
 - **💬 讨论交流**：GitHub Discussions
 - **🐛 Bug 报告**：GitHub Issues
 - **📧 联系我们**：通过项目仓库联系维护团队

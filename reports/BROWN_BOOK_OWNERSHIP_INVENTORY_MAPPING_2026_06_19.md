@@ -68,14 +68,12 @@ Ownership Inventory 是 Brown University Cognitive Engineering Lab 在交互式 
    - 说明 Ownership Inventory 的设计思想
    - 列出 4 个 Inventory 的链接与本项目对应章节
    - 提供 3 道示例题（基于真实 StackOverflow 场景）
-
 2. ✅ **在相关章节底部添加「自测入口」**
    - `01_ownership.md` → Inventory #1
    - `02_borrowing.md` → Inventory #1
    - `08_collections.md` → Inventory #2
    - `03_lifetimes.md` → Inventory #3
    - 智能指针章节 → Inventory #4（待有独立文档后补充）
-
 3. ✅ **练习代码映射**
    - 新增 `exercises/src/ownership_borrowing/ex06_string_replace_chain.rs`（Inventory #1）
    - 新增 `exercises/src/ownership_borrowing/ex07_vec_slice_borrow.rs`（Inventory #2）
@@ -106,7 +104,6 @@ fn make_exciting(s: &str) -> String {
     s3
 }
 ```
-
 - **Q1**: `make_exciting` 接收 `&str` 是否安全？返回值的所有权归谁？
 - **Q2**: 若调用者写下 `let s = String::from("hi"); let out = make_exciting(&s);`，`s` 在调用后是否仍可用？
 - **Q3**: 解释为什么 `s.replace(...)` 返回 `String` 而不是 `&str`。
@@ -120,7 +117,6 @@ fn main() {
     println!("{}", s[0]);
 }
 ```
-
 - **Q1**: 此代码能否编译？
 - **Q2**: 若在第 4 行后添加 `v.push(4);`，能否编译？
 - **Q3**: 用生命周期规则解释原因。

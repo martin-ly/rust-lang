@@ -48,7 +48,6 @@
        │                                    │
        └──────── 平台通道 (可选) ────────────┘
 ```
-
 ---
 
 ## 🏗️ 项目结构
@@ -71,7 +70,6 @@ my_app/
 ├── linux/
 └── pubspec.yaml
 ```
-
 ---
 
 ## 🔌 基础用法
@@ -131,7 +129,6 @@ pub fn process_image(data: Vec<u8>) -> Vec<u8> {
         .collect()
 }
 ```
-
 ### Dart 侧调用
 
 ```dart
@@ -168,7 +165,6 @@ class _MyAppState extends State<MyApp> {
   }
 }
 ```
-
 ### 代码生成
 
 ```bash
@@ -181,7 +177,6 @@ flutter_rust_bridge_codegen generate \
     --dart-output lib/src/rust/api/simple.dart \
     --wasm-enabled  # 如果需要 Web 支持
 ```
-
 ---
 
 ## 📊 平台支持矩阵
@@ -218,7 +213,6 @@ dependencies:
 flutter_rust_bridge:
   wasm: true
 ```
-
 ---
 
 ## 🧠 内存安全注意事项
@@ -238,7 +232,6 @@ Dart 使用**标记-清除 GC**，Rust 使用**编译期所有权**。FRB 在边
   对象可达性                          Drop trait
   决定生命周期                         精确控制
 ```
-
 ### 对象生命周期管理
 
 ```rust
@@ -263,7 +256,6 @@ pub fn transform_data(input: Vec<u8>) -> Vec<u8> {
     input.into_iter().map(|b| b.wrapping_add(1)).collect()
 }
 ```
-
 **关键原则**：
 
 | 原则 | 说明 |
@@ -288,7 +280,6 @@ pub async fn heavy_computation(input: Vec<f64>) -> Vec<f64> {
 // ⚠️ 注意：Dart UI isolate 与 Rust 线程池通信有开销
 // 对于 < 1ms 的计算，直接在 Dart 中执行可能更快
 ```
-
 ---
 
 ## ⚡ 性能优化建议
@@ -311,7 +302,6 @@ final results = await Future.wait([
 // ✅ 在 Rust 侧完成聚合
 final summary = await processBatch(ids: List.generate(100, (i) => i));
 ```
-
 ---
 
 ## 🔗 参考资源

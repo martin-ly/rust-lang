@@ -1,0 +1,933 @@
+﻿# C09 Design Pattern - Tier 2: 并发模式指南
+
+> **文档版本**: v1.0.0
+> **最后更新**: 2025-10-23
+> **Rust 版本**: 1.92.0+
+> **预计阅读**: 45 分钟
+
+---
+
+## 📋 目录
+
+- [C09 Design Pattern - Tier 2: 并发模式指南](#c09-design-pattern---tier-2-并发模式指南)
+  - [📋 目录](#-目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+  - [1. 并发模式概述](#1-并发模式概述)
+    - [1.1 为什么需要并发模式？](#11-为什么需要并发模式)
+    - [1.2 并发模式分类](#12-并发模式分类)
+  - [2. Actor 模式](#2-actor-模式)
+    - [2.1 核心概念](#21-核心概念)
+    - [2.2 基础实现](#22-基础实现)
+    - [2.3 高级特性](#23-高级特性)
+  - [3. Pipeline 模式](#3-pipeline-模式)
+    - [3.1 核心概念](#31-核心概念)
+    - [3.2 基础实现](#32-基础实现)
+    - [3.3 通用 Pipeline 框架](#33-通用-pipeline-框架)
+  - [4. Fork-Join 模式](#4-fork-join-模式)
+    - [4.1 核心概念](#41-核心概念)
+    - [4.2 使用 Rayon 实现](#42-使用-rayon-实现)
+    - [4.3 自定义 Fork-Join](#43-自定义-fork-join)
+  - [5. 生产者-消费者模式](#5-生产者-消费者模式)
+    - [5.1 核心概念](#51-核心概念)
+    - [5.2 基础实现](#52-基础实现)
+    - [5.3 多生产者多消费者](#53-多生产者多消费者)
+  - [6. 共享状态模式](#6-共享状态模式)
+    - [6.1 使用 Arc + Mutex](#61-使用-arc--mutex)
+    - [6.2 使用 RwLock](#62-使用-rwlock)
+    - [6.3 使用原子操作](#63-使用原子操作)
+  - [7. 实战案例：并发任务调度器](#7-实战案例并发任务调度器)
+    - [7.1 设计目标](#71-设计目标)
+    - [7.2 完整实现](#72-完整实现)
+  - [8. 性能与最佳实践](#8-性能与最佳实践)
+    - [8.1 性能优化技巧](#81-性能优化技巧)
+    - [8.2 最佳实践](#82-最佳实践)
+    - [8.3 常见陷阱](#83-常见陷阱)
+  - [9. 总结](#9-总结)
+    - [核心要点](#核心要点)
+    - [选择指南](#选择指南)
+  - [📚 参考资源](#-参考资源)
+  - [**下一步**: 学习 最佳实践与反模式，掌握设计模式的进阶技巧](#下一步-学习-最佳实践与反模式掌握设计模式的进阶技巧)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**并发模式指南 (Concurrency Patterns Guide)**:
+
+- **定义**: 系统学习 Rust 并发设计模式的实践指南
+- **类型**: 实践指南文档
+- **范畴**: 并发编程、设计模式
+- **版本**: Rust 1.0+
+- **相关概念**: Actor 模式、Pipeline、Fork-Join、生产者-消费者、共享状态
+
+### 属性特征
+
+**核心属性**:
+
+- **Actor 模式**: 消息传递、隔离状态
+- **Pipeline 模式**: 数据流处理、阶段化处理
+- **Fork-Join 模式**: 任务分解、结果合并
+- **生产者-消费者**: 异步任务处理
+- **共享状态**: Arc + Mutex、RwLock、原子操作
+
+**性能特征**:
+
+- **并发性能**: 多核 CPU 利用
+- **内存安全**: Rust 所有权系统保证
+- **适用场景**: 高并发、任务处理、数据处理
+
+### 关系连接
+
+**组合关系**:
+
+- 并发模式指南 --[covers]--> 多种并发模式
+- 并发程序 --[uses]--> 并发模式
+
+**依赖关系**:
+
+- 并发模式 --[depends-on]--> 并发原语
+- 并发设计 --[depends-on]--> 并发模式指南
+
+### 思维导图
+
+```text
+并发模式指南
+│
+├── Actor 模式
+│   └── 消息传递
+├── Pipeline 模式
+│   └── 数据流处理
+├── Fork-Join 模式
+│   └── 任务分解
+├── 生产者-消费者
+│   └── 异步任务处理
+└── 共享状态
+    └── Arc + Mutex
+```
+---
+
+## 1. 并发模式概述
+
+### 1.1 为什么需要并发模式？
+
+在现代软件开发中，并发是提升性能和响应能力的关键技术。
+Rust 的所有权系统为安全并发提供了独特保障。
+
+**核心挑战**：
+
+- **数据竞争**：多线程同时访问共享数据
+- **死锁**：线程相互等待对方释放资源
+- **任务协调**：如何有效地分配和同步任务
+- **状态管理**：并发环境下的状态一致性
+
+**Rust 的解决方案**：
+
+```rust
+// ✅ Rust 的所有权系统在编译期防止数据竞争
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn safe_concurrency() {
+    let data = Arc::new(Mutex::new(vec![1, 2, 3]));
+    let mut handles = vec![];
+
+    for i in 0..3 {
+        let data = Arc::clone(&data);
+        let handle = thread::spawn(move || {
+            let mut d = data.lock().unwrap();
+            d.push(i);
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("最终数据: {:?}", data.lock().unwrap());
+}
+```
+### 1.2 并发模式分类
+
+| 模式类型     | 代表模式             | 适用场景             |
+| :--- | :--- | :--- || **消息传递** | Actor、Pipeline      | 任务解耦、数据流处理 |
+| **任务分解** | Fork-Join、MapReduce | CPU 密集型计算       |
+| **资源共享** | 读写锁、原子操作     | 共享状态管理         |
+| **协调同步** | Barrier、Semaphore   | 线程同步、资源限制   |
+
+---
+
+## 2. Actor 模式
+
+### 2.1 核心概念
+
+Actor 模式通过消息传递实现并发，每个 Actor 独立处理消息，避免共享状态。
+
+**特点**：
+
+- **封装性**：每个 Actor 拥有独立状态
+- **消息传递**：通过异步消息通信
+- **容错性**：Actor 失败不影响其他 Actor
+
+### 2.2 基础实现
+
+```rust
+use tokio::sync::mpsc;
+use tokio::task;
+
+// 定义 Actor 消息
+enum ActorMessage {
+    Increment(i32),
+    GetValue(mpsc::Sender<i32>),
+    Shutdown,
+}
+
+// 定义 Actor 结构
+struct CounterActor {
+    receiver: mpsc::Receiver<ActorMessage>,
+    value: i32,
+}
+
+impl CounterActor {
+    fn new(receiver: mpsc::Receiver<ActorMessage>) -> Self {
+        Self { receiver, value: 0 }
+    }
+
+    // Actor 消息循环
+    async fn run(mut self) {
+        while let Some(msg) = self.receiver.recv().await {
+            match msg {
+                ActorMessage::Increment(amount) => {
+                    self.value += amount;
+                    println!("计数器增加 {}, 当前值: {}", amount, self.value);
+                }
+                ActorMessage::GetValue(sender) => {
+                    let _ = sender.send(self.value).await;
+                }
+                ActorMessage::Shutdown => {
+                    println!("Actor 关闭");
+                    break;
+                }
+            }
+        }
+    }
+}
+
+// Actor 句柄
+#[derive(Clone)]
+struct CounterHandle {
+    sender: mpsc::Sender<ActorMessage>,
+}
+
+impl CounterHandle {
+    fn new() -> Self {
+        let (sender, receiver) = mpsc::channel(32);
+        let actor = CounterActor::new(receiver);
+        task::spawn(actor.run());
+        Self { sender }
+    }
+
+    async fn increment(&self, amount: i32) {
+        let _ = self.sender.send(ActorMessage::Increment(amount)).await;
+    }
+
+    async fn get_value(&self) -> i32 {
+        let (tx, mut rx) = mpsc::channel(1);
+        let _ = self.sender.send(ActorMessage::GetValue(tx)).await;
+        rx.recv().await.unwrap_or(0)
+    }
+
+    async fn shutdown(&self) {
+        let _ = self.sender.send(ActorMessage::Shutdown).await;
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let counter = CounterHandle::new();
+
+    // 并发发送消息
+    let c1 = counter.clone();
+    let h1 = task::spawn(async move {
+        c1.increment(10).await;
+    });
+
+    let c2 = counter.clone();
+    let h2 = task::spawn(async move {
+        c2.increment(20).await;
+    });
+
+    h1.await.unwrap();
+    h2.await.unwrap();
+
+    let value = counter.get_value().await;
+    println!("最终值: {}", value);
+
+    counter.shutdown().await;
+}
+```
+### 2.3 高级特性
+
+**错误处理**：
+
+```rust
+enum ActorMessage {
+    ProcessData(String, mpsc::Sender<Result<String, String>>),
+}
+
+async fn process_with_error_handling(mut self) {
+    while let Some(msg) = self.receiver.recv().await {
+        match msg {
+            ActorMessage::ProcessData(data, reply) => {
+                let result = if data.is_empty() {
+                    Err("数据为空".to_string())
+                } else {
+                    Ok(format!("处理成功: {}", data))
+                };
+                let _ = reply.send(result).await;
+            }
+        }
+    }
+}
+```
+**Actor 监督**：
+
+```rust
+struct Supervisor {
+    children: Vec<CounterHandle>,
+}
+
+impl Supervisor {
+    async fn restart_failed_actor(&mut self, index: usize) {
+        println!("重启 Actor {}", index);
+        self.children[index] = CounterHandle::new();
+    }
+}
+```
+---
+
+## 3. Pipeline 模式
+
+### 3.1 核心概念
+
+Pipeline 模式将数据处理分为多个阶段，每个阶段并发执行。
+
+**优势**：
+
+- **并行处理**：多阶段同时运行
+- **解耦**：各阶段独立实现
+- **流式处理**：适合大数据量
+
+### 3.2 基础实现
+
+```rust
+use tokio::sync::mpsc;
+use tokio::task;
+
+async fn pipeline_example() {
+    // 阶段 1: 数据生成
+    let (tx1, mut rx1) = mpsc::channel::<i32>(10);
+    task::spawn(async move {
+        for i in 1..=5 {
+            tx1.send(i).await.unwrap();
+            println!("生成: {}", i);
+        }
+    });
+
+    // 阶段 2: 数据处理
+    let (tx2, mut rx2) = mpsc::channel::<i32>(10);
+    task::spawn(async move {
+        while let Some(val) = rx1.recv().await {
+            let processed = val * 2;
+            println!("处理: {} -> {}", val, processed);
+            tx2.send(processed).await.unwrap();
+        }
+    });
+
+    // 阶段 3: 数据消费
+    task::spawn(async move {
+        while let Some(val) = rx2.recv().await {
+            println!("消费: {}", val);
+        }
+    });
+
+    tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
+}
+
+#[tokio::main]
+async fn main() {
+    pipeline_example().await;
+}
+```
+### 3.3 通用 Pipeline 框架
+
+```rust
+use std::marker::PhantomData;
+
+struct Pipeline<T> {
+    sender: mpsc::Sender<T>,
+    _phantom: PhantomData<T>,
+}
+
+impl<T: Send + 'static> Pipeline<T> {
+    fn new<F>(capacity: usize, processor: F) -> (Self, mpsc::Receiver<T>)
+    where
+        F: Fn(T) -> T + Send + 'static,
+    {
+        let (tx, rx) = mpsc::channel(capacity);
+        (
+            Self {
+                sender: tx,
+                _phantom: PhantomData,
+            },
+            rx,
+        )
+    }
+
+    async fn send(&self, item: T) -> Result<(), mpsc::error::SendError<T>> {
+        self.sender.send(item).await
+    }
+}
+
+// 使用示例
+async fn advanced_pipeline() {
+    let (stage1, mut rx1) = Pipeline::new(10, |x: i32| x * 2);
+    let (stage2, mut rx2) = Pipeline::new(10, |x: i32| x + 10);
+
+    // 启动处理任务
+    task::spawn(async move {
+        while let Some(val) = rx1.recv().await {
+            let processed = val * 2; // 处理逻辑
+            stage2.send(processed).await.unwrap();
+        }
+    });
+
+    task::spawn(async move {
+        while let Some(val) = rx2.recv().await {
+            println!("最终结果: {}", val);
+        }
+    });
+
+    // 发送数据
+    for i in 1..=5 {
+        stage1.send(i).await.unwrap();
+    }
+
+    tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
+}
+```
+---
+
+## 4. Fork-Join 模式
+
+### 4.1 核心概念
+
+Fork-Join 将大任务分解为小任务并行执行，最后合并结果。
+
+**适用场景**：
+
+- 数据并行处理
+- 分治算法
+- MapReduce 操作
+
+### 4.2 使用 Rayon 实现
+
+```rust
+use rayon::prelude::*;
+
+// 并行求和
+fn parallel_sum(data: &[i32]) -> i32 {
+    data.par_iter().sum()
+}
+
+// 并行映射
+fn parallel_map(data: &[i32]) -> Vec<i32> {
+    data.par_iter().map(|&x| x * 2).collect()
+}
+
+// 并行过滤
+fn parallel_filter(data: &[i32]) -> Vec<i32> {
+    data.par_iter()
+        .filter(|&&x| x % 2 == 0)
+        .copied()
+        .collect()
+}
+
+fn main() {
+    let data: Vec<i32> = (1..=1000).collect();
+
+    let sum = parallel_sum(&data);
+    println!("并行求和: {}", sum);
+
+    let doubled = parallel_map(&data);
+    println!("并行映射前 5 项: {:?}", &doubled[..5]);
+
+    let evens = parallel_filter(&data);
+    println!("并行过滤结果数量: {}", evens.len());
+}
+```
+### 4.3 自定义 Fork-Join
+
+```rust
+use std::thread;
+
+fn fork_join<T, F>(data: Vec<T>, threshold: usize, f: F) -> Vec<T>
+where
+    T: Send + 'static,
+    F: Fn(Vec<T>) -> Vec<T> + Send + Sync + 'static + Clone,
+{
+    if data.len() <= threshold {
+        return f(data);
+    }
+
+    let mid = data.len() / 2;
+    let (left, right) = data.split_at(mid);
+    let left = left.to_vec();
+    let right = right.to_vec();
+
+    let f_clone = f.clone();
+    let handle = thread::spawn(move || fork_join(left, threshold, f_clone));
+
+    let right_result = fork_join(right, threshold, f);
+    let left_result = handle.join().unwrap();
+
+    [left_result, right_result].concat()
+}
+
+fn main() {
+    let data: Vec<i32> = (1..=100).collect();
+    let result = fork_join(data, 25, |mut vec| {
+        vec.iter_mut().for_each(|x| *x *= 2);
+        vec
+    });
+    println!("前 10 项: {:?}", &result[..10]);
+}
+```
+---
+
+## 5. 生产者-消费者模式
+
+### 5.1 核心概念
+
+生产者-消费者模式通过队列解耦生产和消费过程。
+
+**优势**：
+
+- **缓冲**：平衡生产和消费速度
+- **解耦**：生产者和消费者独立
+- **扩展性**：易于添加多个生产者/消费者
+
+### 5.2 基础实现
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+use std::time::Duration;
+
+fn producer_consumer_example() {
+    let (tx, rx) = mpsc::channel();
+
+    // 生产者
+    let producer = thread::spawn(move || {
+        for i in 1..=5 {
+            println!("生产: {}", i);
+            tx.send(i).unwrap();
+            thread::sleep(Duration::from_millis(100));
+        }
+    });
+
+    // 消费者
+    let consumer = thread::spawn(move || {
+        while let Ok(item) = rx.recv() {
+            println!("消费: {}", item);
+            thread::sleep(Duration::from_millis(200));
+        }
+    });
+
+    producer.join().unwrap();
+    consumer.join().unwrap();
+}
+
+fn main() {
+    producer_consumer_example();
+}
+```
+### 5.3 多生产者多消费者
+
+```rust
+use crossbeam::channel;
+use std::thread;
+
+fn multi_producer_consumer() {
+    let (tx, rx) = channel::unbounded();
+
+    // 3 个生产者
+    let mut producers = vec![];
+    for id in 0..3 {
+        let tx = tx.clone();
+        let handle = thread::spawn(move || {
+            for i in 0..5 {
+                let item = format!("P{}-Item{}", id, i);
+                tx.send(item).unwrap();
+            }
+        });
+        producers.push(handle);
+    }
+    drop(tx); // 关闭发送端
+
+    // 2 个消费者
+    let mut consumers = vec![];
+    for id in 0..2 {
+        let rx = rx.clone();
+        let handle = thread::spawn(move || {
+            while let Ok(item) = rx.recv() {
+                println!("C{} 消费: {}", id, item);
+            }
+        });
+        consumers.push(handle);
+    }
+
+    for h in producers {
+        h.join().unwrap();
+    }
+    for h in consumers {
+        h.join().unwrap();
+    }
+}
+
+fn main() {
+    multi_producer_consumer();
+}
+```
+---
+
+## 6. 共享状态模式
+
+### 6.1 使用 Arc + Mutex
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn shared_state_example() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("最终计数: {}", *counter.lock().unwrap());
+}
+```
+### 6.2 使用 RwLock
+
+```rust
+use std::sync::{Arc, RwLock};
+use std::thread;
+
+fn rwlock_example() {
+    let data = Arc::new(RwLock::new(vec![1, 2, 3]));
+    let mut handles = vec![];
+
+    // 多个读者
+    for i in 0..5 {
+        let data = Arc::clone(&data);
+        let handle = thread::spawn(move || {
+            let d = data.read().unwrap();
+            println!("读者 {} 读取: {:?}", i, *d);
+        });
+        handles.push(handle);
+    }
+
+    // 一个写者
+    let data_clone = Arc::clone(&data);
+    let writer = thread::spawn(move || {
+        let mut d = data_clone.write().unwrap();
+        d.push(4);
+        println!("写者添加元素");
+    });
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    writer.join().unwrap();
+
+    println!("最终数据: {:?}", *data.read().unwrap());
+}
+```
+### 6.3 使用原子操作
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::Arc;
+use std::thread;
+
+fn atomic_example() {
+    let counter = Arc::new(AtomicUsize::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            for _ in 0..1000 {
+                counter.fetch_add(1, Ordering::SeqCst);
+            }
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("原子计数: {}", counter.load(Ordering::SeqCst));
+}
+```
+---
+
+## 7. 实战案例：并发任务调度器
+
+### 7.1 设计目标
+
+实现一个通用的并发任务调度器，支持：
+
+- 任务提交与执行
+- 优先级调度
+- 任务取消
+- 结果获取
+
+### 7.2 完整实现
+
+```rust
+use std::collections::BinaryHeap;
+use std::cmp::Ordering;
+use std::sync::{Arc, Mutex};
+use std::thread;
+use crossbeam::channel;
+
+// 任务定义
+struct Task {
+    id: usize,
+    priority: usize,
+    work: Box<dyn FnOnce() -> String + Send>,
+}
+
+impl PartialEq for Task {
+    fn eq(&self, other: &Self) -> bool {
+        self.priority == other.priority
+    }
+}
+
+impl Eq for Task {}
+
+impl PartialOrd for Task {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Task {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.priority.cmp(&other.priority)
+    }
+}
+
+// 任务调度器
+struct TaskScheduler {
+    task_queue: Arc<Mutex<BinaryHeap<Task>>>,
+    result_tx: channel::Sender<(usize, String)>,
+    result_rx: channel::Receiver<(usize, String)>,
+}
+
+impl TaskScheduler {
+    fn new() -> Self {
+        let (tx, rx) = channel::unbounded();
+        Self {
+            task_queue: Arc::new(Mutex::new(BinaryHeap::new())),
+            result_tx: tx,
+            result_rx: rx,
+        }
+    }
+
+    fn submit<F>(&self, id: usize, priority: usize, work: F)
+    where
+        F: FnOnce() -> String + Send + 'static,
+    {
+        let task = Task {
+            id,
+            priority,
+            work: Box::new(work),
+        };
+        self.task_queue.lock().unwrap().push(task);
+    }
+
+    fn start(&self, num_workers: usize) {
+        for _ in 0..num_workers {
+            let queue = Arc::clone(&self.task_queue);
+            let tx = self.result_tx.clone();
+            thread::spawn(move || loop {
+                let task = {
+                    let mut q = queue.lock().unwrap();
+                    q.pop()
+                };
+
+                if let Some(task) = task {
+                    let result = (task.work)();
+                    tx.send((task.id, result)).unwrap();
+                } else {
+                    thread::sleep(std::time::Duration::from_millis(100));
+                }
+            });
+        }
+    }
+
+    fn get_result(&self) -> Option<(usize, String)> {
+        self.result_rx.try_recv().ok()
+    }
+}
+
+fn main() {
+    let scheduler = TaskScheduler::new();
+
+    // 提交任务
+    scheduler.submit(1, 1, || "低优先级任务".to_string());
+    scheduler.submit(2, 10, || "高优先级任务".to_string());
+    scheduler.submit(3, 5, || "中优先级任务".to_string());
+
+    // 启动工作线程
+    scheduler.start(2);
+
+    // 获取结果
+    thread::sleep(std::time::Duration::from_secs(1));
+    while let Some((id, result)) = scheduler.get_result() {
+        println!("任务 {} 完成: {}", id, result);
+    }
+}
+```
+---
+
+## 8. 性能与最佳实践
+
+### 8.1 性能优化技巧
+
+**减少锁竞争**：
+
+```rust
+// ❌ 频繁加锁
+for i in 0..1000 {
+    let mut data = mutex.lock().unwrap();
+    data.push(i);
+}
+
+// ✅ 批量操作
+let mut batch = Vec::new();
+for i in 0..1000 {
+    batch.push(i);
+}
+let mut data = mutex.lock().unwrap();
+data.extend(batch);
+```
+**选择合适的同步原语**：
+
+- **原子操作**：简单计数器
+- **Mutex**：复杂数据结构
+- **RwLock**：读多写少
+- **Channel**：消息传递
+
+### 8.2 最佳实践
+
+1. **优先使用消息传递**：避免共享状态
+2. **最小化锁作用域**：尽早释放锁
+3. **避免嵌套锁**：防止死锁
+4. **使用 Rayon 进行数据并行**：简化代码
+5. **异步 I/O 使用 Tokio**：提高吞吐量
+
+### 8.3 常见陷阱
+
+**死锁示例**：
+
+```rust
+// ❌ 死锁风险
+let lock1 = Arc::new(Mutex::new(0));
+let lock2 = Arc::new(Mutex::new(0));
+
+// 线程 1: lock1 -> lock2
+// 线程 2: lock2 -> lock1
+
+// ✅ 避免：统一加锁顺序
+```
+**性能陷阱**：
+
+```rust
+// ❌ 过度加锁
+let data = Arc::new(Mutex::new(vec![]));
+for i in 0..1000 {
+    let mut d = data.lock().unwrap();
+    d.push(i); // 每次循环都加锁
+}
+
+// ✅ 减少加锁次数
+let mut local = vec![];
+for i in 0..1000 {
+    local.push(i);
+}
+data.lock().unwrap().extend(local);
+```
+---
+
+## 9. 总结
+
+### 核心要点
+
+| 模式              | 核心思想 | 适用场景           | Rust 工具             |
+| :--- | :--- | :--- | :--- || **Actor**         | 消息传递 | 状态隔离、异步通信 | Tokio, Actix          |
+| **Pipeline**      | 流式处理 | 数据处理管道       | Channel               |
+| **Fork-Join**     | 任务分解 | 数据并行           | Rayon                 |
+| **生产者-消费者** | 队列缓冲 | 速度不匹配         | mpsc, crossbeam       |
+| **共享状态**      | 同步访问 | 必须共享时         | Mutex, RwLock, Atomic |
+
+### 选择指南
+
+- **CPU 密集型**：Fork-Join (Rayon)
+- **I/O 密集型**：Actor (Tokio)
+- **数据流**：Pipeline
+- **简单共享**：Atomic > Mutex > RwLock
+
+---
+
+## 📚 参考资源
+
+- [Rust 并发编程](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
+- [Tokio 异步运行时](https://tokio.rs/)
+- [Rayon 数据并行](https://github.com/rayon-rs/rayon)
+- [Crossbeam 工具集](https://github.com/crossbeam-rs/crossbeam)
+
+---
+
+**下一步**: 学习 [最佳实践与反模式](05_best_practices_and_antipatterns.md)，掌握设计模式的进阶技巧
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

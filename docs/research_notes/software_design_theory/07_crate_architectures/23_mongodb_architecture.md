@@ -1,3 +1,10 @@
+> **Canonical 说明**: 本文件专注 **mongodb-rust-driver 的 BSON 模型与异步连接池架构**。
+>
+> 若只需要使用指南与生态定位，请优先参考：
+> - [数据库访问](../../../../concept/06_ecosystem/23_database_access.md)
+> - [数据库系统](../../../../concept/06_ecosystem/37_database_systems.md)
+>
+> 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **⚠️ 历史文档提示**：
 >
 > 本文档反映 mongodb-rust-driver 3.x 在 Rust 1.96+ 生态下的设计状态。
@@ -16,19 +23,12 @@
 # mongodb-rust-driver Crate 架构解构 {#mongodb-rust-driver-crate-架构解构}
 
 >
-
 > **最后更新**: 2026-06-29
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L3-L5 (应用/分析/评价)
-
 > **知识领域**: 文档数据库、NoSQL、异步 IO、分布式存储
-
 > **对应 Rust 版本**: 1.96.0+ (mongodb 3.0+)
 
 ---
@@ -36,7 +36,6 @@
 ## 1. 引言：Rust MongoDB 客户端的生态定位 {#1-引言rust-mongodb-客户端的生态定位}
 
 >
-
 > **[来源: [mongodb-rust-driver crates.io](https://crates.io/crates/mongodb)]**
 
 `mongodb` crate 是 MongoDB 官方维护的 Rust 驱动，基于 Tokio 异步运行时，使用 `bson` crate 处理 MongoDB 的原生 BSON 数据模型。它为 Rust 应用提供了从单机到副本集、分片集群的统一访问抽象，是 Rust 生态中构建文档型数据持久化层的首选客户端。
@@ -64,7 +63,6 @@ let coll = db.collection::<mongodb::bson::Document>("items");
 
 coll.insert_one(doc! { "name": "rust", "score": 95 }).await?;
 ```
-
 > [来源: mongodb-rust-driver Examples](https://github.com/mongodb/mongo-rust-driver/tree/main/tests)
 
 ---
@@ -72,7 +70,6 @@ coll.insert_one(doc! { "name": "rust", "score": 95 }).await?;
 ## 2. 核心 API 架构 {#2-核心-api-架构}
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 三层命名空间：Client / Database / Collection {#21-三层命名空间client-database-collection}
@@ -87,7 +84,6 @@ graph TD
     COLL -->|create_index| INDEX[IndexModel<br/>索引定义]
     CLIENT -->|start_session| SESSION[ClientSession<br/>事务会话]
 ```
-
 > [来源: mongodb-rust-driver Client Docs](https://docs.rs/mongodb/latest/mongodb/struct.Client.html)
 
 | 类型 | 职责 | 共享能力 |
@@ -119,7 +115,6 @@ typed_coll.insert_one(Item { name: "rust".into(), score: 95 }).await?;
 let doc_coll = db.collection::<mongodb::bson::Document>("items");
 let found = doc_coll.find_one(doc! { "name": "rust" }).await?;
 ```
-
 > [来源: mongodb-rust-driver CRUD Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)
 
 **关键设计**：`insert_one`/`find_one`/`update_one`/`delete_one` 等方法将 BSON 的动态性约束在 `Document` 类型与 serde 序列化边界内，业务层可获得静态类型保证。
@@ -142,7 +137,6 @@ while let Some(doc) = cursor.try_next().await? {
     println!("{:?}", doc);
 }
 ```
-
 > [来源: mongodb-rust-driver Aggregate Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html#method.aggregate)
 
 `Cursor` 同时实现 `Stream<Item = Result<T>>` 与 `advance()`/`deserialize_current()` 手动模式，兼容 `futures::StreamExt`/`TryStreamExt` 组合子。
@@ -159,7 +153,6 @@ let index = IndexModel::builder()
 
 coll.create_index(index).await?;
 ```
-
 > [来源: mongodb-rust-driver Index Docs](https://docs.rs/mongodb/latest/mongodb/struct.IndexModel.html)
 
 索引模型使用 builder 模式避免字段缺失，并通过 `IndexOptions` 控制唯一性、TTL、部分索引等高级行为。
@@ -174,7 +167,6 @@ while let Some(event) = change_stream.next_if_any().await? {
     println!("op={:?}, doc={:?}", event.operation_type, event.full_document);
 }
 ```
-
 > [来源: mongodb-rust-driver ChangeStream Docs](https://docs.rs/mongodb/latest/mongodb/change_stream/struct.ChangeStream.html)
 
 `ChangeStream` 内置断点续传：通过 `resume_token()` 获取恢复令牌，可在故障后使用 `resume_after`/`start_after` 选项重建流。
@@ -193,7 +185,6 @@ coll.delete_one(doc! { "y": 2 }).session(&mut session).await?;
 
 session.commit_transaction().await?;
 ```
-
 > [来源: mongodb-rust-driver Transaction Docs](https://docs.rs/mongodb/latest/mongodb/struct.ClientSession.html)
 
 **重要边界**：事务需要副本集或分片集群；单节点 `mongod` 不支持多文档事务。
@@ -211,7 +202,6 @@ opts.server_api = Some(ServerApi::builder().version(ServerApiVersion::V1).build(
 
 let client = Client::with_options(opts)?;
 ```
-
 > [来源: mongodb-rust-driver ClientOptions Docs](https://docs.rs/mongodb/latest/mongodb/options/struct.ClientOptions.html)
 
 连接池内置于 `Client`，默认大小与 MongoDB 官方驱动推荐值一致；通过 `Clone` 共享 `Client` 即可获得池复用，无需额外引入第三方池 crate。
@@ -221,7 +211,6 @@ let client = Client::with_options(opts)?;
 ## 3. 类型系统利用 {#3-类型系统利用}
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | API | 类型系统价值 |
@@ -239,7 +228,6 @@ let client = Client::with_options(opts)?;
 ## 4. 反例边界 {#4-反例边界}
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 反例 | 错误表现 | 正确做法 |
@@ -261,7 +249,6 @@ let client = Client::with_options(opts)?;
 ## 5. 代码示例锚点 {#5-代码示例锚点}
 
 >
-
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 示例 | 文件 | 说明 |
@@ -276,7 +263,6 @@ let client = Client::with_options(opts)?;
 ## 6. 相关架构与延伸阅读 {#6-相关架构与延伸阅读}
 
 >
-
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Tokio 异步运行时架构](06_tokio_architecture.md)
@@ -291,19 +277,12 @@ let client = Client::with_options(opts)?;
 ## 权威来源索引 {#权威来源索引}
 
 > **[来源: [mongodb-rust-driver crates.io](https://crates.io/crates/mongodb)]**
-
 > **[来源: [mongodb-rust-driver docs.rs](https://docs.rs/mongodb/latest/mongodb/)]**
-
 > **[来源: [mongodb-rust-driver GitHub](https://github.com/mongodb/mongo-rust-driver)]**
-
 > **[来源: [MongoDB 官方文档](https://www.mongodb.com/docs/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **权威来源**: [mongodb-rust-driver crates.io](https://crates.io/crates/mongodb), [mongodb-rust-driver docs.rs](https://docs.rs/mongodb/latest/mongodb/), [MongoDB 官方文档](https://www.mongodb.com/docs/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-06-29 创建 mongodb 生态专题，对齐 mongodb-rust-driver 3.x 官方文档与 MongoDB 官方参考
 
 ---
@@ -316,12 +295,10 @@ let client = Client::with_options(opts)?;
 > - [来源: [mongodb-rust-driver crates.io](https://crates.io/crates/mongodb)]
 > - [来源: [MongoDB 官方文档](https://www.mongodb.com/docs/)]
 > - [来源: [MongoDB BSON 规范](https://bsonspec.org/)]
-
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [MongoDB: The Definitive Guide (O'Reilly)](https://www.oreilly.com/library/view/mongodb-the-definitive/9781491954461/)] — 文档数据库模型与分布式一致性
 > - [来源: [Conflict-free Replicated Data Types](https://hal.inria.fr/file/index/docid/555588/filename/techreport.pdf)] — 与变更流/最终一致性相关的理论基础
-
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [mongodb-rust-driver GitHub Repository](https://github.com/mongodb/mongo-rust-driver)]

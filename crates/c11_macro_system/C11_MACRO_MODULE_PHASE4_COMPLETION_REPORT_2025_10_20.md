@@ -188,7 +188,6 @@ crates/C11_macro_system_proc/
 │   └── lib.rs          # 宏实现
 └── tests/              # 测试
 ```
-
 ### 3.2 实现的宏
 
 | 宏类型   | 宏名称      | 功能            |
@@ -209,7 +208,6 @@ proc-macro2 = "1.0"
 [dev-dependencies]
 trybuild = { version = "1.0", features = ["diff"] }
 ```
-
 ---
 
 ## 4. 知识覆盖完整度
@@ -314,13 +312,11 @@ trybuild = { version = "1.0", features = ["diff"] }
    - 进阶 → 派生宏
    - 高级 → 属性/函数式宏
    - 专家 → TokenStream
-
 2. **完整工具链**
    - syn解析
    - quote生成
    - proc_macro2测试
    - cargo-expand调试
-
 3. **实战导向**
    - Builder模式
    - 路由DSL
@@ -410,17 +406,14 @@ trybuild = { version = "1.0", features = ["diff"] }
    - 22篇文档
    - 30000+行内容
    - 100%知识覆盖
-
 2. **理论与实践结合**
    - 深入的理论讲解
    - 丰富的代码示例
    - 完整的实战项目
-
 3. **系统化学习路径**
    - 从零基础到专家
    - 循序渐进
    - 实用导向
-
 4. **生产级质量**
    - 可运行的代码
    - 完整的测试
@@ -576,7 +569,6 @@ cargo expand --package C11_macro_system
 # 编译文档
 cargo doc --package C11_macro_system_proc --open
 ```
-
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

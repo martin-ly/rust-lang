@@ -144,7 +144,6 @@ timeline
             : --remap-path-scope
             : JSON target specs 去稳定化
 ```
-
 ### 2.2 即将发布的关键特性（1.96.0 / 1.97.0 Nightly）
 
 | 特性 | 预计版本 | 状态 | 项目影响度 |
@@ -295,7 +294,6 @@ graph TD
     E --> E3[Stack Protector<br/>1.97+]
     E --> E4[JSON Target Specs 重新设计<br/>1.97+]
 ```
-
 ### 5.2 趋势论证矩阵
 
 | 趋势 | 证据链 | 置信度 | 对本项目影响 |
@@ -339,7 +337,6 @@ graph TD
     Q8 --> A2[创建 rust_197_preview.rs<br/>标注 nightly feature gate<br/>添加免责声明]
     Q7 --> A3[加入趋势跟踪列表<br/>监控 RFC 进展]
 ```
-
 ### 6.2 Crate 内容更新优先级矩阵
 
 ```mermaid
@@ -366,7 +363,6 @@ quadrantChart
     "c12_wasm: 场景扩展": [0.5, 0.55]
     "c09_design_pattern: 新设计模式": [0.5, 0.5]
 ```
-
 ### 6.3 概念演化推理树：Async Closures
 
 ```mermaid
@@ -395,7 +391,6 @@ graph TD
     AC4 --> AC4c[与 `Fn() -> impl Future` 的互操作需要适配]
     AC4 --> AC4d[发送性约束: `AsyncFn() -> impl Future + Send` 表达复杂]
 ```
-
 ### 6.4 场景决策树：条件编译工具选择
 
 ```mermaid
@@ -413,7 +408,6 @@ graph TD
     Q4 -->|是| A2
     Q4 -->|否| A3
 ```
-
 ---
 
 ## 7. Wikipedia 概念对齐与属性关系
@@ -474,7 +468,6 @@ timeline
          : 对应: Scripting language, Generator, Linear logic
          : 项目状态: 🔴 完全缺失或跟踪中
 ```
-
 ---
 
 ## 8. 后续补充/修复/完善计划
@@ -516,7 +509,6 @@ gantt
     derive(CoercePointee) 跟踪     :f2, 2026-06-15, 5d
     并行前端编译指南               :f3, 2026-06-10, 5d
 ```
-
 ### 8.2 任务清单（可执行级）
 
 #### 已完成 ✅

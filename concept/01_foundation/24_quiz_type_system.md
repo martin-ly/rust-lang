@@ -45,7 +45,6 @@ fn main() {
     println!("{y}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -78,7 +77,6 @@ fn main() {
     println!("{y}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -108,7 +106,6 @@ fn main() {
     println!("{element}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -127,7 +124,6 @@ match element {
     None => println!("Index out of bounds"),
 }
 ```
-
 **知识点**：`[]` 索引访问在越界时 panic，`.get()` 返回 `Option` 提供安全替代。[→ 集合类型详解](08_collections.md)
 
 </details>
@@ -156,7 +152,6 @@ fn main() {
     }
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -193,7 +188,6 @@ fn main() {
     }
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -210,7 +204,6 @@ match some_number {
     _ => {} // 忽略其他所有情况
 }
 ```
-
 **使用场景**：
 
 - 只匹配一个模式，其他情况统一处理
@@ -236,7 +229,6 @@ fn main() {
     }
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -271,7 +263,6 @@ fn main() {
     println!("{b}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -284,7 +275,6 @@ fn main() {
 ```rust,ignore
 let b: u64 = a as u64; // 显式类型转换
 ```
-
 **`as` 关键字的行为**：
 
 | 转换 | 示例 | 行为 |
@@ -311,7 +301,6 @@ fn main() {
     println!("{s3} {s4}");
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -336,7 +325,6 @@ let s = "hello".to_string(); // ✅ 创建 String
 let s: &str = "hello";       // ✅ 字符串切片
 let s = "hello";              // ✅ 类型推断为 &str
 ```
-
 **知识点**：`&str` 是"借用（Borrowing）"，`String` 是"拥有"。Rust 字符串设计的核心是明确所有权（Ownership）边界。→ 字符串详解
 
 </details>
@@ -357,7 +345,6 @@ fn main() {
     println!("{:?}", iter.next());
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -369,7 +356,6 @@ Some(2)
 Some(3)
 None
 ```
-
 **解析**：`.iter()` 创建对 `Vec` 的不可变迭代器（Iterator）。每次 `.next()` 返回 `Option<&T>`：
 
 | 调用 | 返回值 | 说明 |
@@ -402,7 +388,6 @@ fn main() {
     println!("{:#?}", rect);
 }
 ```
-
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -417,7 +402,6 @@ Rectangle {
     height: 20,
 }
 ```
-
 **解析**：
 
 - `#[derive(Debug)]` 为结构体（Struct）**自动实现 `Debug` trait**

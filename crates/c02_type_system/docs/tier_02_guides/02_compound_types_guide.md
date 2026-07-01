@@ -1,0 +1,2574 @@
+# 2.2 Rust 类型系统 - 复合类型指南
+
+> **文档类型**: Tier 2 - 指南层
+> **文档定位**: 深入学习 Rust 复合类型系统
+> **适用对象**: 初学者 → 中级开发者
+> **前置知识**: [2.1 基础类型指南](01_basic_types_guide.md)
+> **预计学习时间**: 5-7 小时
+> **最后更新**: 2025-12-11
+
+---
+
+## 📋 目录
+
+- [2.2 Rust 类型系统 - 复合类型指南](#22-rust-类型系统---复合类型指南)
+  - [📋 目录](#-目录)
+  - [🎯 学习目标](#-学习目标)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+  - [📊 章节概览](#-章节概览)
+  - [1. 复合类型概述](#1-复合类型概述)
+    - [1.1 什么是复合类型](#11-什么是复合类型)
+    - [1.2 Rust 复合类型分类](#12-rust-复合类型分类)
+  - [2. 结构体 (Struct)](#2-结构体-struct)
+    - [2.1 命名字段结构体](#21-命名字段结构体)
+      - [定义和创建](#定义和创建)
+      - [可变性](#可变性)
+      - [字段初始化简写](#字段初始化简写)
+      - [结构体更新语法](#结构体更新语法)
+    - [2.2 元组结构体](#22-元组结构体)
+      - [基本用法](#基本用法)
+      - [实际应用](#实际应用)
+    - [2.3 单元结构体](#23-单元结构体)
+      - [基本概念](#基本概念)
+      - [实际应用2](#实际应用2)
+    - [2.4 结构体方法](#24-结构体方法)
+      - [定义方法](#定义方法)
+    - [2.5 关联函数](#25-关联函数)
+      - [定义关联函数](#定义关联函数)
+    - [2.6 结构体的可见性](#26-结构体的可见性)
+  - [3. 枚举 (Enum)](#3-枚举-enum)
+    - [3.1 基本枚举](#31-基本枚举)
+      - [定义和使用](#定义和使用)
+    - [3.2 带数据的枚举](#32-带数据的枚举)
+      - [基本形式](#基本形式)
+      - [复杂枚举](#复杂枚举)
+    - [3.3 Option 枚举](#33-option-枚举)
+      - [基本概念3](#基本概念3)
+      - [Option 常用方法](#option-常用方法)
+    - [3.4 Result 枚举](#34-result-枚举)
+      - [基本概念34](#基本概念34)
+      - [Result 常用方法](#result-常用方法)
+    - [3.5 枚举方法](#35-枚举方法)
+    - [3.6 枚举的内存表示](#36-枚举的内存表示)
+  - [4. 模式匹配](#4-模式匹配)
+    - [4.1 match 表达式](#41-match-表达式)
+      - [基本用法41](#基本用法41)
+      - [绑定值](#绑定值)
+      - [匹配 Option](#匹配-option)
+      - [通配模式](#通配模式)
+    - [4.2 if let 表达式](#42-if-let-表达式)
+    - [4.3 while let 循环](#43-while-let-循环)
+    - [4.4 解构模式](#44-解构模式)
+      - [解构结构体](#解构结构体)
+      - [解构枚举](#解构枚举)
+    - [4.5 匹配守卫](#45-匹配守卫)
+    - [4.6 @ 绑定](#46--绑定)
+  - [5. 结构体与枚举的对比](#5-结构体与枚举的对比)
+  - [6. 实战案例](#6-实战案例)
+    - [案例 1: 图形系统](#案例-1-图形系统)
+    - [案例 2: 用户系统](#案例-2-用户系统)
+    - [案例 3: 状态机](#案例-3-状态机)
+    - [案例 4: 错误处理](#案例-4-错误处理)
+  - [7. 常见陷阱与最佳实践](#7-常见陷阱与最佳实践)
+    - [7.1 常见陷阱](#71-常见陷阱)
+    - [7.2 最佳实践](#72-最佳实践)
+  - [8. 性能考虑](#8-性能考虑)
+    - [8.1 内存布局](#81-内存布局)
+    - [8.2 性能优化](#82-性能优化)
+    - [8.4 综合实战案例：高性能配置管理系统](#84-综合实战案例高性能配置管理系统)
+  - [9. 总结](#9-总结)
+    - [核心要点](#核心要点)
+    - [下一步学习](#下一步学习)
+  - [10. 参考资源](#10-参考资源)
+  - [复合类型高级代码示例补充](#复合类型高级代码示例补充)
+  - [🚀 高级实战案例](#-高级实战案例)
+    - [案例 5: JSON解析器实现](#案例-5-json解析器实现)
+    - [案例 6: 状态机（游戏角色）](#案例-6-状态机游戏角色)
+    - [案例 7: 类型安全的单位系统](#案例-7-类型安全的单位系统)
+    - [案例 8: 构建器模式（高级）](#案例-8-构建器模式高级)
+  - [📊 性能优化进阶](#-性能优化进阶)
+    - [内存布局优化实例](#内存布局优化实例)
+    - [枚举判别式优化](#枚举判别式优化)
+  - [🔥 高级模式匹配技巧](#-高级模式匹配技巧)
+    - [匹配多个模式](#匹配多个模式)
+    - [范围模式](#范围模式)
+    - [嵌套匹配与解构](#嵌套匹配与解构)
+  - [🎯 实战练习题](#-实战练习题)
+    - [练习 1: 实现命令行参数解析器](#练习-1-实现命令行参数解析器)
+
+---
+
+## 🎯 学习目标
+
+完成本指南后，您将能够：
+
+- ✅ **掌握** 结构体的三种形式（命名字段、元组、单元）
+- ✅ **理解** 枚举和模式匹配
+- ✅ **掌握** 结构体和枚举的方法定义
+- ✅ **应用** Option 和 Result 进行错误处理
+- ✅ **理解** 复合类型的内存布局
+- ✅ **设计** 合理的数据结构
+- ✅ **编写** 健壮的 Rust 程序
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**复合类型指南 (Compound Types Guide)**:
+
+- **定义**: 深入学习 Rust 复合类型系统的实践指南，包括结构体、枚举等
+- **类型**: 实践指南文档
+- **范畴**: 类型系统、数据结构
+- **版本**: Rust 1.0+
+- **相关概念**: 结构体、枚举、复合类型、模式匹配
+
+**复合类型 (Compound Types)**:
+
+- **定义**: 由多个值组合而成的类型
+- **类型**: 类型系统
+- **属性**: 结构体、枚举、元组、数组
+- **关系**: 与基础类型、泛型相关
+
+### 属性特征
+
+**核心属性**:
+
+- **结构体**: 命名字段结构体、元组结构体、单元结构体
+- **枚举**: 基本枚举、带数据的枚举、Option/Result
+- **模式匹配**: match 表达式、if let、解构模式
+- **方法**: 结构体方法、枚举方法、关联函数
+
+**性能特征**:
+
+- **内存布局**: 结构体和枚举的内存表示
+- **零成本抽象**: 复合类型零开销
+- **适用场景**: 数据结构设计、状态机、错误处理
+
+### 关系连接
+
+**继承关系**:
+
+- 结构体 --[is-a]--> 复合类型
+- 枚举 --[is-a]--> 复合类型
+
+**组合关系**:
+
+- 复合类型指南 --[covers]--> 多种复合类型
+- 数据结构设计 --[uses]--> 复合类型
+
+**依赖关系**:
+
+- 复合类型 --[depends-on]--> 基础类型
+- 程序建模 --[depends-on]--> 复合类型
+
+### 思维导图
+
+```text
+复合类型指南
+│
+├── 结构体
+│   ├── 命名字段结构体
+│   └── 元组结构体
+├── 枚举
+│   ├── 基本枚举
+│   └── Option/Result
+├── 模式匹配
+│   └── match 表达式
+└── 方法
+    └── 结构体方法
+```
+---
+
+## 📊 章节概览
+
+| 章节            | 内容                | 难度    | 预计时间 |
+| :--- | :--- | :--- | :--- || 1. 复合类型概述 | 复合类型基本概念    | 🟢 简单 | 20分钟   |
+| 2. 结构体       | 三种结构体形式      | 🟢 简单 | 60分钟   |
+| 3. 枚举         | 枚举定义和使用      | 🟡 中等 | 60分钟   |
+| 4. 模式匹配     | match、if let、解构 | 🟡 中等 | 60分钟   |
+| 5. 对比分析     | 结构体 vs 枚举      | 🟡 中等 | 20分钟   |
+| 6. 实战案例     | 综合应用            | 🟡 中等 | 60分钟   |
+| 7. 最佳实践     | 陷阱与实践          | 🟡 中等 | 30分钟   |
+| 8. 性能考虑     | 内存布局和优化      | 🔴 高级 | 30分钟   |
+
+**总计**: 约 5-6 小时
+
+---
+
+## 1. 复合类型概述
+
+### 1.1 什么是复合类型
+
+**复合类型** (Compound Types) 是将多个值组合成一个类型的数据结构。
+
+**核心特点**:
+
+- 📦 组合多个值
+- 🏗️ 自定义数据结构
+- 🎯 更好的代码组织
+- 🔒 类型安全
+
+**两大类**:
+
+1. **结构体 (Struct)** - 组合不同命名的字段
+2. **枚举 (Enum)** - 表示多种可能的变体
+
+### 1.2 Rust 复合类型分类
+
+```text
+Rust 复合类型
+├── 结构体 (Struct)
+│   ├── 命名字段结构体 (Named Fields)
+│   ├── 元组结构体 (Tuple Struct)
+│   └── 单元结构体 (Unit Struct)
+│
+└── 枚举 (Enum)
+    ├── 无数据枚举
+    ├── 带数据枚举
+    ├── Option<T>
+    └── Result<T, E>
+```
+---
+
+## 2. 结构体 (Struct)
+
+结构体是 Rust 中最常用的复合类型，用于创建自定义的数据类型。
+
+### 2.1 命名字段结构体
+
+#### 定义和创建
+
+```rust
+// 定义结构体
+struct User {
+    username: String,
+    email: String,
+    active: bool,
+    sign_in_count: u64,
+}
+
+fn main() {
+    // 创建实例
+    let user1 = User {
+        email: String::from("someone@example.com"),
+        username: String::from("someusername123"),
+        active: true,
+        sign_in_count: 1,
+    };
+
+    // 访问字段
+    println!("User email: {}", user1.email);
+    println!("Username: {}", user1.username);
+}
+```
+#### 可变性
+
+```rust
+fn main() {
+    // 整个实例必须是可变的
+    let mut user1 = User {
+        email: String::from("someone@example.com"),
+        username: String::from("someusername123"),
+        active: true,
+        sign_in_count: 1,
+    };
+
+    // 修改字段
+    user1.email = String::from("anotheremail@example.com");
+    println!("Updated email: {}", user1.email);
+}
+
+struct User {
+    username: String,
+    email: String,
+    active: bool,
+    sign_in_count: u64,
+}
+```
+#### 字段初始化简写
+
+```rust
+struct User {
+    username: String,
+    email: String,
+    active: bool,
+    sign_in_count: u64,
+}
+
+fn build_user(email: String, username: String) -> User {
+    // 字段初始化简写
+    User {
+        email,      // 等同于 email: email
+        username,   // 等同于 username: username
+        active: true,
+        sign_in_count: 1,
+    }
+}
+
+fn main() {
+    let user1 = build_user(
+        String::from("someone@example.com"),
+        String::from("someusername123"),
+    );
+
+    println!("User: {}", user1.username);
+}
+```
+#### 结构体更新语法
+
+```rust
+struct User {
+    username: String,
+    email: String,
+    active: bool,
+    sign_in_count: u64,
+}
+
+fn main() {
+    let user1 = User {
+        email: String::from("someone@example.com"),
+        username: String::from("someusername123"),
+        active: true,
+        sign_in_count: 1,
+    };
+
+    // 使用结构体更新语法
+    let user2 = User {
+        email: String::from("another@example.com"),
+        ..user1  // 使用 user1 的其余字段
+    };
+
+    // 注意：user1 的 username 已被移动到 user2
+    // println!("{}", user1.username); // 编译错误！
+    println!("User2: {}", user2.username);
+}
+```
+### 2.2 元组结构体
+
+#### 基本用法
+
+```rust
+// 定义元组结构体
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+fn main() {
+    let black = Color(0, 0, 0);
+    let origin = Point(0, 0, 0);
+
+    // 访问字段
+    println!("Black: ({}, {}, {})", black.0, black.1, black.2);
+    println!("Origin: ({}, {}, {})", origin.0, origin.1, origin.2);
+
+    // 注意：Color 和 Point 是不同的类型
+    // let color: Color = origin; // 编译错误！
+}
+```
+#### 实际应用
+
+```rust
+// Newtype 模式
+struct Meters(f64);
+struct Seconds(f64);
+
+fn main() {
+    let distance = Meters(100.0);
+    let time = Seconds(10.0);
+
+    // 类型安全：不能混淆
+    // let speed = distance.0 / time; // 编译错误！类型不匹配
+    let speed = distance.0 / time.0; // ✅ 明确转换
+
+    println!("Speed: {} m/s", speed);
+}
+```
+### 2.3 单元结构体
+
+#### 基本概念
+
+```rust
+// 单元结构体：没有任何字段
+struct AlwaysEqual;
+
+fn main() {
+    let subject = AlwaysEqual;
+
+    // 零大小类型
+    use std::mem;
+    println!("Size of AlwaysEqual: {} bytes", mem::size_of::<AlwaysEqual>());
+}
+```
+#### 实际应用2
+
+```rust
+// 用于实现 trait
+struct FileLogger;
+
+trait Logger {
+    fn log(&self, message: &str);
+}
+
+impl Logger for FileLogger {
+    fn log(&self, message: &str) {
+        println!("[FILE] {}", message);
+    }
+}
+
+fn main() {
+    let logger = FileLogger;
+    logger.log("Application started");
+}
+```
+### 2.4 结构体方法
+
+#### 定义方法
+
+```rust
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    // 方法：第一个参数是 self
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+
+    fn can_hold(&self, other: &Rectangle) -> bool {
+        self.width > other.width && self.height > other.height
+    }
+
+    // 可变方法
+    fn scale(&mut self, factor: u32) {
+        self.width *= factor;
+        self.height *= factor;
+    }
+
+    // 消耗所有权的方法
+    fn into_square(self) -> Rectangle {
+        let size = std::cmp::max(self.width, self.height);
+        Rectangle {
+            width: size,
+            height: size,
+        }
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!("Area: {}", rect1.area());
+
+    let rect2 = Rectangle {
+        width: 10,
+        height: 40,
+    };
+
+    println!("Can hold: {}", rect1.can_hold(&rect2));
+
+    // 可变方法
+    let mut rect3 = Rectangle {
+        width: 10,
+        height: 20,
+    };
+    rect3.scale(2);
+    println!("Scaled: {:?}", rect3);
+}
+```
+### 2.5 关联函数
+
+#### 定义关联函数
+
+```rust
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    // 关联函数：没有 self 参数
+    fn new(width: u32, height: u32) -> Rectangle {
+        Rectangle { width, height }
+    }
+
+    fn square(size: u32) -> Rectangle {
+        Rectangle {
+            width: size,
+            height: size,
+        }
+    }
+}
+
+fn main() {
+    // 使用 :: 调用关联函数
+    let rect1 = Rectangle::new(30, 50);
+    let rect2 = Rectangle::square(20);
+
+    println!("Rectangle: {:?}", rect1);
+    println!("Square: {:?}", rect2);
+}
+```
+### 2.6 结构体的可见性
+
+```rust
+mod shapes {
+    // 公开结构体
+    pub struct Circle {
+        pub radius: f64,  // 公开字段
+        center_x: f64,    // 私有字段
+        center_y: f64,    // 私有字段
+    }
+
+    impl Circle {
+        pub fn new(radius: f64, center_x: f64, center_y: f64) -> Circle {
+            Circle {
+                radius,
+                center_x,
+                center_y,
+            }
+        }
+
+        pub fn area(&self) -> f64 {
+            std::f64::consts::PI * self.radius * self.radius
+        }
+    }
+}
+
+fn main() {
+    let circle = shapes::Circle::new(5.0, 0.0, 0.0);
+
+    // 可以访问公开字段
+    println!("Radius: {}", circle.radius);
+
+    // 不能访问私有字段
+    // println!("Center: ({}, {})", circle.center_x, circle.center_y); // 编译错误！
+
+    println!("Area: {}", circle.area());
+}
+```
+---
+
+## 3. 枚举 (Enum)
+
+枚举允许定义一个类型，它可以是几个可能的变体之一。
+
+### 3.1 基本枚举
+
+#### 定义和使用
+
+```rust
+// 定义枚举
+enum IpAddrKind {
+    V4,
+    V6,
+}
+
+fn main() {
+    // 创建枚举值
+    let four = IpAddrKind::V4;
+    let six = IpAddrKind::V6;
+
+    route(four);
+    route(six);
+}
+
+fn route(ip_kind: IpAddrKind) {
+    // 使用枚举值
+    match ip_kind {
+        IpAddrKind::V4 => println!("IPv4"),
+        IpAddrKind::V6 => println!("IPv6"),
+    }
+}
+```
+### 3.2 带数据的枚举
+
+#### 基本形式
+
+```rust
+// 枚举变体可以携带数据
+enum IpAddr {
+    V4(u8, u8, u8, u8),
+    V6(String),
+}
+
+fn main() {
+    let home = IpAddr::V4(127, 0, 0, 1);
+    let loopback = IpAddr::V6(String::from("::1"));
+
+    print_ip(home);
+    print_ip(loopback);
+}
+
+fn print_ip(ip: IpAddr) {
+    match ip {
+        IpAddr::V4(a, b, c, d) => {
+            println!("IPv4: {}.{}.{}.{}", a, b, c, d);
+        }
+        IpAddr::V6(addr) => {
+            println!("IPv6: {}", addr);
+        }
+    }
+}
+```
+#### 复杂枚举
+
+```rust
+enum Message {
+    Quit,                       // 无数据
+    Move { x: i32, y: i32 },   // 命名字段
+    Write(String),              // 单个 String
+    ChangeColor(i32, i32, i32), // 三个 i32
+}
+
+fn main() {
+    let msg1 = Message::Quit;
+    let msg2 = Message::Move { x: 10, y: 20 };
+    let msg3 = Message::Write(String::from("Hello"));
+    let msg4 = Message::ChangeColor(255, 0, 0);
+
+    process_message(msg1);
+    process_message(msg2);
+    process_message(msg3);
+    process_message(msg4);
+}
+
+fn process_message(msg: Message) {
+    match msg {
+        Message::Quit => {
+            println!("Quit message");
+        }
+        Message::Move { x, y } => {
+            println!("Move to ({}, {})", x, y);
+        }
+        Message::Write(text) => {
+            println!("Text message: {}", text);
+        }
+        Message::ChangeColor(r, g, b) => {
+            println!("Change color to RGB({}, {}, {})", r, g, b);
+        }
+    }
+}
+```
+### 3.3 Option 枚举
+
+#### 基本概念3
+
+```rust
+// Option 是标准库定义的枚举
+// enum Option<T> {
+//     Some(T),
+//     None,
+// }
+
+fn main() {
+    // Some 表示有值
+    let some_number = Some(5);
+    let some_string = Some("a string");
+
+    // None 表示没有值
+    let absent_number: Option<i32> = None;
+
+    // 使用 Option
+    match some_number {
+        Some(value) => println!("Value: {}", value),
+        None => println!("No value"),
+    }
+
+    // Option 方法
+    let x: Option<i32> = Some(2);
+    println!("Is some: {}", x.is_some());
+    println!("Is none: {}", x.is_none());
+
+    // unwrap (不安全，可能 panic)
+    let value = x.unwrap();
+    println!("Unwrapped: {}", value);
+
+    // unwrap_or (提供默认值)
+    let y: Option<i32> = None;
+    let value = y.unwrap_or(0);
+    println!("Value or default: {}", value);
+}
+```
+#### Option 常用方法
+
+```rust
+fn main() {
+    let x = Some(5);
+
+    // map: 转换内部值
+    let y = x.map(|v| v * 2);
+    println!("Mapped: {:?}", y); // Some(10)
+
+    // and_then: 链式操作
+    let z = x.and_then(|v| Some(v * 2));
+    println!("And then: {:?}", z); // Some(10)
+
+    // or: 提供备选
+    let a: Option<i32> = None;
+    let b = a.or(Some(10));
+    println!("Or: {:?}", b); // Some(10)
+
+    // filter: 过滤
+    let c = x.filter(|&v| v > 3);
+    println!("Filtered: {:?}", c); // Some(5)
+}
+```
+### 3.4 Result 枚举
+
+#### 基本概念34
+
+```rust
+// Result 是标准库定义的枚举
+// enum Result<T, E> {
+//     Ok(T),
+//     Err(E),
+// }
+
+fn divide(a: f64, b: f64) -> Result<f64, String> {
+    if b == 0.0 {
+        Err(String::from("Division by zero"))
+    } else {
+        Ok(a / b)
+    }
+}
+
+fn main() {
+    // 成功情况
+    match divide(10.0, 2.0) {
+        Ok(result) => println!("Result: {}", result),
+        Err(e) => println!("Error: {}", e),
+    }
+
+    // 错误情况
+    match divide(10.0, 0.0) {
+        Ok(result) => println!("Result: {}", result),
+        Err(e) => println!("Error: {}", e),
+    }
+
+    // 使用 unwrap (不安全)
+    // let result = divide(10.0, 0.0).unwrap(); // panic!
+
+    // 使用 expect (带自定义消息)
+    // let result = divide(10.0, 0.0).expect("Division failed");
+
+    // 使用 unwrap_or
+    let result = divide(10.0, 0.0).unwrap_or(0.0);
+    println!("Result or default: {}", result);
+}
+```
+#### Result 常用方法
+
+```rust
+fn parse_number(s: &str) -> Result<i32, std::num::ParseIntError> {
+    s.parse::<i32>()
+}
+
+fn main() {
+    // map: 转换 Ok 值
+    let result = parse_number("42").map(|v| v * 2);
+    println!("Mapped: {:?}", result); // Ok(84)
+
+    // map_err: 转换 Err 值
+    let result = parse_number("abc").map_err(|e| format!("Parse error: {}", e));
+    println!("Mapped error: {:?}", result);
+
+    // and_then: 链式操作
+    let result = parse_number("42").and_then(|v| Ok(v * 2));
+    println!("And then: {:?}", result); // Ok(84)
+
+    // or: 提供备选
+    let result = parse_number("abc").or(Ok(0));
+    println!("Or: {:?}", result); // Ok(0)
+
+    // ? 操作符 (在函数中使用)
+    fn double_number(s: &str) -> Result<i32, std::num::ParseIntError> {
+        let num = s.parse::<i32>()?; // 如果是 Err，提前返回
+        Ok(num * 2)
+    }
+
+    println!("Double: {:?}", double_number("42"));
+}
+```
+### 3.5 枚举方法
+
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+impl Message {
+    // 枚举可以有方法
+    fn call(&self) {
+        match self {
+            Message::Quit => println!("Quit"),
+            Message::Move { x, y } => println!("Move to ({}, {})", x, y),
+            Message::Write(text) => println!("Write: {}", text),
+            Message::ChangeColor(r, g, b) => println!("Color: RGB({}, {}, {})", r, g, b),
+        }
+    }
+
+    fn is_quit(&self) -> bool {
+        matches!(self, Message::Quit)
+    }
+}
+
+fn main() {
+    let msg = Message::Write(String::from("Hello"));
+    msg.call();
+
+    println!("Is quit: {}", msg.is_quit());
+}
+```
+### 3.6 枚举的内存表示
+
+```rust
+use std::mem;
+
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+fn main() {
+    // 枚举的大小是最大变体的大小 + 判别值
+    println!("Size of Message: {} bytes", mem::size_of::<Message>());
+
+    // 判别值优化
+    println!("Size of Option<i32>: {} bytes", mem::size_of::<Option<i32>>());
+    println!("Size of Option<Box<i32>>: {} bytes", mem::size_of::<Option<Box<i32>>>());
+
+    // 空指针优化：Option<Box<T>> 和 Box<T> 大小相同
+    println!("Size of Box<i32>: {} bytes", mem::size_of::<Box<i32>>());
+}
+```
+---
+
+## 4. 模式匹配
+
+模式匹配是 Rust 最强大的特性之一。
+
+### 4.1 match 表达式
+
+#### 基本用法41
+
+```rust
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter,
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter => 25,
+    }
+}
+
+fn main() {
+    let coin = Coin::Dime;
+    println!("Value: {} cents", value_in_cents(coin));
+}
+```
+#### 绑定值
+
+```rust
+#[derive(Debug)]
+enum UsState {
+    Alabama,
+    Alaska,
+    // ...
+}
+
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter(UsState),
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter(state) => {
+            println!("State quarter from {:?}!", state);
+            25
+        }
+    }
+}
+
+fn main() {
+    let coin = Coin::Quarter(UsState::Alaska);
+    println!("Value: {} cents", value_in_cents(coin));
+}
+```
+#### 匹配 Option
+
+```rust
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => None,
+        Some(i) => Some(i + 1),
+    }
+}
+
+fn main() {
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
+
+    println!("Six: {:?}", six);
+    println!("None: {:?}", none);
+}
+```
+#### 通配模式
+
+```rust
+fn main() {
+    let dice_roll = 9;
+
+    match dice_roll {
+        3 => println!("You get a hat"),
+        7 => println!("You lose a hat"),
+        other => println!("Move {} spaces", other), // 绑定其他值
+    }
+
+    // 使用 _ 忽略值
+    match dice_roll {
+        3 => println!("You get a hat"),
+        7 => println!("You lose a hat"),
+        _ => println!("Reroll"), // 忽略其他情况
+    }
+}
+```
+### 4.2 if let 表达式
+
+```rust
+fn main() {
+    let config_max = Some(3u8);
+
+    // 使用 match
+    match config_max {
+        Some(max) => println!("The maximum is {}", max),
+        _ => (),
+    }
+
+    // 使用 if let (更简洁)
+    if let Some(max) = config_max {
+        println!("The maximum is {}", max);
+    }
+
+    // if let 可以有 else
+    let value = Some(5);
+    if let Some(v) = value {
+        println!("Value: {}", v);
+    } else {
+        println!("No value");
+    }
+}
+```
+### 4.3 while let 循环
+
+```rust
+fn main() {
+    let mut stack = Vec::new();
+
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+
+    // while let 循环
+    while let Some(top) = stack.pop() {
+        println!("Popped: {}", top);
+    }
+}
+```
+### 4.4 解构模式
+
+#### 解构结构体
+
+```rust
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+fn main() {
+    let p = Point { x: 0, y: 7 };
+
+    // 解构
+    let Point { x, y } = p;
+    println!("x: {}, y: {}", x, y);
+
+    // 重命名
+    let Point { x: a, y: b } = p;
+    println!("a: {}, b: {}", a, b);
+
+    // 部分解构
+    let Point { x, .. } = p;
+    println!("x: {}", x);
+
+    // match 中解构
+    match p {
+        Point { x: 0, y } => println!("On the y axis at {}", y),
+        Point { x, y: 0 } => println!("On the x axis at {}", x),
+        Point { x, y } => println!("On neither axis: ({}, {})", x, y),
+    }
+}
+```
+#### 解构枚举
+
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+fn main() {
+    let msg = Message::ChangeColor(0, 160, 255);
+
+    match msg {
+        Message::Quit => {
+            println!("Quit");
+        }
+        Message::Move { x, y } => {
+            println!("Move to x:{}, y:{}", x, y);
+        }
+        Message::Write(text) => {
+            println!("Text: {}", text);
+        }
+        Message::ChangeColor(r, g, b) => {
+            println!("Change color to red:{}, green:{}, blue:{}", r, g, b);
+        }
+    }
+}
+```
+### 4.5 匹配守卫
+
+```rust
+fn main() {
+    let num = Some(4);
+
+    match num {
+        Some(x) if x < 5 => println!("less than five: {}", x),
+        Some(x) => println!("{}", x),
+        None => (),
+    }
+
+    // 多个模式 + 守卫
+    let x = 4;
+    let y = false;
+
+    match x {
+        4 | 5 | 6 if y => println!("yes"),
+        _ => println!("no"),
+    }
+}
+```
+### 4.6 @ 绑定
+
+```rust
+enum Message {
+    Hello { id: i32 },
+}
+
+fn main() {
+    let msg = Message::Hello { id: 5 };
+
+    match msg {
+        Message::Hello {
+            id: id_variable @ 3..=7,
+        } => println!("Found an id in range: {}", id_variable),
+        Message::Hello { id: 10..=12 } => {
+            println!("Found an id in another range")
+        }
+        Message::Hello { id } => println!("Found some other id: {}", id),
+    }
+}
+```
+---
+
+## 5. 结构体与枚举的对比
+
+| 特性         | 结构体           | 枚举                   |
+| :--- | :--- | :--- || **用途**     | 组合多个字段     | 表示多种可能的变体     |
+| **数据**     | 同时包含所有字段 | 某一时刻只有一个变体   |
+| **内存**     | 所有字段的总和   | 最大变体 + 判别值      |
+| **匹配**     | 解构字段         | match 必须覆盖所有变体 |
+| **适用场景** | 固定的数据结构   | 多种可能的状态         |
+
+**选择建议**:
+
+- ✅ 数据总是同时存在 → 使用结构体
+- ✅ 数据是多选一 → 使用枚举
+- ✅ 需要 Option 语义 → 使用 Option
+- ✅ 需要错误处理 → 使用 Result
+
+---
+
+## 6. 实战案例
+
+### 案例 1: 图形系统
+
+```rust
+#[derive(Debug)]
+enum Shape {
+    Circle { radius: f64 },
+    Rectangle { width: f64, height: f64 },
+    Triangle { base: f64, height: f64 },
+}
+
+impl Shape {
+    fn area(&self) -> f64 {
+        match self {
+            Shape::Circle { radius } => {
+                std::f64::consts::PI * radius * radius
+            }
+            Shape::Rectangle { width, height } => {
+                width * height
+            }
+            Shape::Triangle { base, height } => {
+                0.5 * base * height
+            }
+        }
+    }
+
+    fn perimeter(&self) -> f64 {
+        match self {
+            Shape::Circle { radius } => {
+                2.0 * std::f64::consts::PI * radius
+            }
+            Shape::Rectangle { width, height } => {
+                2.0 * (width + height)
+            }
+            Shape::Triangle { base, height } => {
+                // 简化：假设是直角三角形
+                let hypotenuse = (base * base + height * height).sqrt();
+                base + height + hypotenuse
+            }
+        }
+    }
+}
+
+fn main() {
+    let shapes = vec![
+        Shape::Circle { radius: 5.0 },
+        Shape::Rectangle { width: 10.0, height: 20.0 },
+        Shape::Triangle { base: 6.0, height: 8.0 },
+    ];
+
+    for shape in shapes.iter() {
+        println!("{:?}", shape);
+        println!("Area: {:.2}", shape.area());
+        println!("Perimeter: {:.2}", shape.perimeter());
+        println!();
+    }
+}
+```
+### 案例 2: 用户系统
+
+```rust
+#[derive(Debug)]
+struct User {
+    id: u64,
+    username: String,
+    email: String,
+    role: UserRole,
+    status: UserStatus,
+}
+
+#[derive(Debug)]
+enum UserRole {
+    Admin,
+    Moderator,
+    User,
+}
+
+#[derive(Debug)]
+enum UserStatus {
+    Active,
+    Suspended { reason: String, until: String },
+    Banned,
+}
+
+impl User {
+    fn new(id: u64, username: String, email: String) -> Self {
+        User {
+            id,
+            username,
+            email,
+            role: UserRole::User,
+            status: UserStatus::Active,
+        }
+    }
+
+    fn can_post(&self) -> bool {
+        matches!(self.status, UserStatus::Active)
+    }
+
+    fn suspend(&mut self, reason: String, until: String) {
+        self.status = UserStatus::Suspended { reason, until };
+    }
+
+    fn is_admin(&self) -> bool {
+        matches!(self.role, UserRole::Admin)
+    }
+}
+
+fn main() {
+    let mut user = User::new(
+        1,
+        String::from("alice"),
+        String::from("alice@example.com"),
+    );
+
+    println!("User: {:?}", user);
+    println!("Can post: {}", user.can_post());
+
+    user.suspend(
+        String::from("Spam"),
+        String::from("2025-11-01"),
+    );
+
+    println!("After suspension: {:?}", user);
+    println!("Can post: {}", user.can_post());
+}
+```
+### 案例 3: 状态机
+
+```rust
+#[derive(Debug)]
+enum ConnectionState {
+    Disconnected,
+    Connecting,
+    Connected { session_id: String },
+    Error { message: String },
+}
+
+struct Connection {
+    state: ConnectionState,
+}
+
+impl Connection {
+    fn new() -> Self {
+        Connection {
+            state: ConnectionState::Disconnected,
+        }
+    }
+
+    fn connect(&mut self) -> Result<(), String> {
+        match self.state {
+            ConnectionState::Disconnected => {
+                self.state = ConnectionState::Connecting;
+                // 模拟连接
+                self.state = ConnectionState::Connected {
+                    session_id: String::from("session123"),
+                };
+                Ok(())
+            }
+            _ => Err(String::from("Invalid state transition")),
+        }
+    }
+
+    fn disconnect(&mut self) {
+        self.state = ConnectionState::Disconnected;
+    }
+
+    fn get_status(&self) -> String {
+        match &self.state {
+            ConnectionState::Disconnected => String::from("Disconnected"),
+            ConnectionState::Connecting => String::from("Connecting..."),
+            ConnectionState::Connected { session_id } => {
+                format!("Connected (session: {})", session_id)
+            }
+            ConnectionState::Error { message } => {
+                format!("Error: {}", message)
+            }
+        }
+    }
+}
+
+fn main() {
+    let mut conn = Connection::new();
+
+    println!("Status: {}", conn.get_status());
+
+    conn.connect().unwrap();
+    println!("Status: {}", conn.get_status());
+
+    conn.disconnect();
+    println!("Status: {}", conn.get_status());
+}
+```
+### 案例 4: 错误处理
+
+```rust
+#[derive(Debug)]
+enum AppError {
+    IoError(String),
+    ParseError(String),
+    ValidationError(String),
+    NotFound(String),
+}
+
+type Result<T> = std::result::Result<T, AppError>;
+
+#[derive(Debug)]
+struct Config {
+    host: String,
+    port: u16,
+}
+
+impl Config {
+    fn from_str(s: &str) -> Result<Self> {
+        let parts: Vec<&str> = s.split(':').collect();
+
+        if parts.len() != 2 {
+            return Err(AppError::ValidationError(
+                String::from("Invalid format, expected host:port")
+            ));
+        }
+
+        let host = parts[0].to_string();
+        let port = parts[1].parse::<u16>()
+            .map_err(|e| AppError::ParseError(format!("Invalid port: {}", e)))?;
+
+        if port == 0 {
+            return Err(AppError::ValidationError(
+                String::from("Port cannot be 0")
+            ));
+        }
+
+        Ok(Config { host, port })
+    }
+}
+
+fn main() {
+    // 成功情况
+    match Config::from_str("localhost:8080") {
+        Ok(config) => println!("Config: {:?}", config),
+        Err(e) => println!("Error: {:?}", e),
+    }
+
+    // 错误情况
+    match Config::from_str("localhost:abc") {
+        Ok(config) => println!("Config: {:?}", config),
+        Err(e) => println!("Error: {:?}", e),
+    }
+
+    // 验证错误
+    match Config::from_str("localhost:0") {
+        Ok(config) => println!("Config: {:?}", config),
+        Err(e) => println!("Error: {:?}", e),
+    }
+}
+```
+---
+
+## 7. 常见陷阱与最佳实践
+
+### 7.1 常见陷阱
+
+```rust
+// ❌ 陷阱 1: 忘记所有权转移
+fn mistake1() {
+    #[derive(Debug)]
+    struct Data {
+        value: String,
+    }
+
+    let data = Data {
+        value: String::from("hello"),
+    };
+
+    let copied = Data {
+        value: data.value, // value 被移动
+        ..data
+    };
+
+    // println!("{:?}", data); // 编译错误！value 已被移动
+}
+
+// ✅ 正确做法：使用 Clone
+#[derive(Debug, Clone)]
+struct Data {
+    value: String,
+}
+
+fn correct1() {
+    let data = Data {
+        value: String::from("hello"),
+    };
+
+    let copied = Data {
+        value: data.value.clone(),
+        ..data
+    };
+
+    println!("{:?}", data); // ✅ 可以使用
+}
+
+// ❌ 陷阱 2: match 不完整
+fn mistake2(opt: Option<i32>) {
+    // match opt {
+    //     Some(x) => println!("{}", x),
+    //     // 缺少 None 分支 - 编译错误！
+    // }
+}
+
+// ✅ 正确做法
+fn correct2(opt: Option<i32>) {
+    match opt {
+        Some(x) => println!("{}", x),
+        None => println!("No value"),
+    }
+}
+
+// ❌ 陷阱 3: 枚举大小膨胀
+enum BigEnum {
+    Small(u8),
+    Large([u8; 1000]), // 导致整个枚举变大
+}
+
+// ✅ 正确做法：使用 Box
+enum BetterEnum {
+    Small(u8),
+    Large(Box<[u8; 1000]>), // 只增加指针大小
+}
+
+fn main() {
+    use std::mem;
+    println!("BigEnum size: {}", mem::size_of::<BigEnum>());
+    println!("BetterEnum size: {}", mem::size_of::<BetterEnum>());
+}
+```
+### 7.2 最佳实践
+
+```rust
+// ✅ 1. 为结构体派生常用 trait
+#[derive(Debug, Clone, PartialEq)]
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+// ✅ 2. 使用 builder 模式
+struct User {
+    username: String,
+    email: String,
+    age: Option<u32>,
+    active: bool,
+}
+
+impl User {
+    fn new(username: String, email: String) -> Self {
+        User {
+            username,
+            email,
+            age: None,
+            active: true,
+        }
+    }
+
+    fn age(mut self, age: u32) -> Self {
+        self.age = Some(age);
+        self
+    }
+
+    fn inactive(mut self) -> Self {
+        self.active = false;
+        self
+    }
+}
+
+// ✅ 3. 使用类型别名简化
+type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
+
+// ✅ 4. 枚举使用有意义的名称
+enum PaymentStatus {
+    Pending,
+    Processing,
+    Completed,
+    Failed { reason: String },
+}
+
+// ✅ 5. 为枚举实现 Display
+use std::fmt;
+
+impl fmt::Display for PaymentStatus {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            PaymentStatus::Pending => write!(f, "Pending"),
+            PaymentStatus::Processing => write!(f, "Processing"),
+            PaymentStatus::Completed => write!(f, "Completed"),
+            PaymentStatus::Failed { reason } => write!(f, "Failed: {}", reason),
+        }
+    }
+}
+
+fn main() {
+    let user = User::new(
+        String::from("alice"),
+        String::from("alice@example.com"),
+    )
+    .age(25);
+
+    println!("User: {}", user.username);
+
+    let status = PaymentStatus::Completed;
+    println!("Status: {}", status);
+}
+```
+---
+
+## 8. 性能考虑
+
+### 8.1 内存布局
+
+```rust
+use std::mem;
+
+#[derive(Debug)]
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+#[derive(Debug)]
+enum Shape {
+    Circle { radius: f64 },
+    Rectangle { width: f64, height: f64 },
+}
+
+fn main() {
+    // 结构体大小
+    println!("Size of Point: {} bytes", mem::size_of::<Point>());
+
+    // 枚举大小 = 判别值 + 最大变体
+    println!("Size of Shape: {} bytes", mem::size_of::<Shape>());
+
+    // Option 优化
+    println!("Size of Option<Point>: {} bytes", mem::size_of::<Option<Point>>());
+    println!("Size of Option<Box<Point>>: {} bytes", mem::size_of::<Option<Box<Point>>>());
+    println!("Size of Box<Point>: {} bytes", mem::size_of::<Box<Point>>());
+}
+```
+### 8.2 性能优化
+
+```rust
+// ❌ 性能问题：大枚举
+enum LargeEnum {
+    Small(u32),
+    Large([u8; 10000]),
+}
+
+// ✅ 优化：使用 Box
+enum OptimizedEnum {
+    Small(u32),
+    Large(Box<[u8; 10000]>),
+}
+
+// ✅ 使用小的判别值
+#[repr(u8)]
+enum SmallEnum {
+    A,
+    B,
+    C,
+}
+
+fn main() {
+    use std::mem;
+
+    println!("LargeEnum: {} bytes", mem::size_of::<LargeEnum>());
+    println!("OptimizedEnum: {} bytes", mem::size_of::<OptimizedEnum>());
+    println!("SmallEnum: {} bytes", mem::size_of::<SmallEnum>());
+}
+```
+### 8.4 综合实战案例：高性能配置管理系统
+
+**案例：类型安全的配置系统**:
+
+```rust
+use std::collections::HashMap;
+
+/// 配置值的枚举表示
+#[derive(Debug, Clone)]
+pub enum ConfigValue {
+    String(String),
+    Integer(i64),
+    Float(f64),
+    Boolean(bool),
+    Array(Vec<ConfigValue>),
+    Object(HashMap<String, ConfigValue>),
+}
+
+impl ConfigValue {
+    /// 类型安全的值获取
+    pub fn as_string(&self) -> Option<&str> {
+        match self {
+            ConfigValue::String(s) => Some(s),
+            _ => None,
+        }
+    }
+
+    pub fn as_i64(&self) -> Option<i64> {
+        match self {
+            ConfigValue::Integer(i) => Some(*i),
+            _ => None,
+        }
+    }
+
+    pub fn as_array(&self) -> Option<&Vec<ConfigValue>> {
+        match self {
+            ConfigValue::Array(arr) => Some(arr),
+            _ => None,
+        }
+    }
+}
+
+/// 配置管理器
+pub struct Config {
+    values: HashMap<String, ConfigValue>,
+}
+
+impl Config {
+    pub fn new() -> Self {
+        Self {
+            values: HashMap::new(),
+        }
+    }
+
+    pub fn set(&mut self, key: String, value: ConfigValue) {
+        self.values.insert(key, value);
+    }
+
+    pub fn get(&self, key: &str) -> Option<&ConfigValue> {
+        self.values.get(key)
+    }
+
+    pub fn get_string(&self, key: &str) -> Option<&str> {
+        self.get(key).and_then(|v| v.as_string())
+    }
+}
+
+// 使用示例
+fn main() {
+    let mut config = Config::new();
+
+    config.set("app_name".to_string(), ConfigValue::String("MyApp".to_string()));
+    config.set("max_connections".to_string(), ConfigValue::Integer(100));
+    config.set("debug".to_string(), ConfigValue::Boolean(true));
+
+    // 类型安全的访问
+    if let Some(name) = config.get_string("app_name") {
+        println!("App Name: {}", name);
+    }
+
+    if let Some(max_conn) = config.get("max_connections").and_then(|v| v.as_i64()) {
+        println!("Max Connections: {}", max_conn);
+    }
+}
+```
+**性能优势**:
+
+- ✅ 零开销抽象：枚举的内存布局高效
+- ✅ 类型安全：编译时捕获类型错误
+- ✅ 模式匹配优化：编译器生成高效分支代码
+
+---
+
+## 9. 总结
+
+### 核心要点
+
+1. **结构体**
+   - ✅ 三种形式：命名字段、元组、单元
+   - ✅ 使用 impl 定义方法和关联函数
+   - ✅ 结构体更新语法和字段初始化简写
+2. **枚举**
+   - ✅ 表示多种可能的变体
+   - ✅ 变体可以携带不同类型的数据
+   - ✅ Option 和 Result 是最常用的枚举
+3. **模式匹配**
+   - ✅ match 必须覆盖所有可能
+   - ✅ if let 和 while let 简化匹配
+   - ✅ 解构、守卫、@ 绑定
+4. **最佳实践**
+   - ✅ 派生常用 trait
+   - ✅ 使用 Box 优化大枚举
+   - ✅ 使用类型别名简化复杂类型
+   - ✅ 为公开API实现 Display
+
+### 下一步学习
+
+学完本指南后，建议继续学习：
+
+1. **[2.3 泛型编程指南](03_generics_programming_guide.md)** - 学习泛型系统
+2. **[2.4 Trait系统指南](04_trait_system_guide.md)** - 掌握 trait 设计
+3. **[2.5 生命周期指南](05_lifetimes_guide.md)** - 理解生命周期管理
+4. **[3.1 类型转换参考](../tier_03_references/01_type_conversions_reference.md)** - 深入类型转换
+
+---
+
+## 10. 参考资源
+
+**官方文档**:
+
+- [Rust Book - Chapter 5 (Structs)](https://doc.rust-lang.org/book/ch05-00-structs.html)
+- [Rust Book - Chapter 6 (Enums)](https://doc.rust-lang.org/book/ch06-00-enums.html)
+- [Rust Reference - Types](https://doc.rust-lang.org/reference/types.html)
+
+**相关文档**:
+
+- [2.1 基础类型指南](01_basic_types_guide.md)
+- [1.0 项目概览](../tier_01_foundations/01_project_overview.md)
+- [1.1 主索引导航](../tier_01_foundations/02_navigation.md)
+- [1.2 术语表](../tier_01_foundations/03_glossary.md)
+- [1.3 常见问题](../tier_01_foundations/04_faq.md)
+
+**深度分析**:
+
+- [类型定义](01_basic_types_guide.md)
+- [类型变体](02_compound_types_guide.md)
+
+---
+
+**最后更新**: 2025-12-11
+**适用版本**: Rust 1.92.0+
+**文档类型**: Tier 2 - 指南层
+
+---
+
+**🎉 恭喜完成复合类型指南学习！** 🦀
+
+## 复合类型高级代码示例补充
+
+## 🚀 高级实战案例
+
+### 案例 5: JSON解析器实现
+
+**完整的递归枚举应用**：
+
+```rust
+use std::collections::HashMap;
+use std::fmt;
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum JsonValue {
+    Null,
+    Boolean(bool),
+    Number(f64),
+    String(String),
+    Array(Vec<JsonValue>),
+    Object(HashMap<String, JsonValue>),
+}
+
+impl JsonValue {
+    /// 类型判断辅助方法
+    pub fn is_null(&self) -> bool {
+        matches!(self, JsonValue::Null)
+    }
+
+    pub fn is_object(&self) -> bool {
+        matches!(self, JsonValue::Object(_))
+    }
+
+    pub fn is_array(&self) -> bool {
+        matches!(self, JsonValue::Array(_))
+    }
+
+    /// 路径访问
+    pub fn get(&self, path: &str) -> Option<&JsonValue> {
+        let parts: Vec<&str> = path.split('.').collect();
+        let mut current = self;
+
+        for part in parts {
+            match current {
+                JsonValue::Object(map) => {
+                    current = map.get(part)?;
+                }
+                JsonValue::Array(arr) => {
+                    let index: usize = part.parse().ok()?;
+                    current = arr.get(index)?;
+                }
+                _ => return None,
+            }
+        }
+
+        Some(current)
+    }
+
+    /// 递归转换为字符串
+    pub fn stringify(&self) -> String {
+        match self {
+            JsonValue::Null => "null".to_string(),
+            JsonValue::Boolean(b) => b.to_string(),
+            JsonValue::Number(n) => n.to_string(),
+            JsonValue::String(s) => format!("\"{}\"", s),
+            JsonValue::Array(arr) => {
+                let items: Vec<String> = arr.iter().map(|v| v.stringify()).collect();
+                format!("[{}]", items.join(", "))
+            }
+            JsonValue::Object(obj) => {
+                let items: Vec<String> = obj
+                    .iter()
+                    .map(|(k, v)| format!("\"{}\": {}", k, v.stringify()))
+                    .collect();
+                format!("{{{}}}", items.join(", "))
+            }
+        }
+    }
+}
+
+impl fmt::Display for JsonValue {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", self.stringify())
+    }
+}
+
+// 使用示例
+fn json_example() {
+    let mut user = HashMap::new();
+    user.insert("name".to_string(), JsonValue::String("Alice".to_string()));
+    user.insert("age".to_string(), JsonValue::Number(30.0));
+    user.insert("active".to_string(), JsonValue::Boolean(true));
+
+    let mut address = HashMap::new();
+    address.insert("city".to_string(), JsonValue::String("Beijing".to_string()));
+    address.insert("zip".to_string(), JsonValue::String("100000".to_string()));
+
+    user.insert("address".to_string(), JsonValue::Object(address));
+
+    let json = JsonValue::Object(user);
+
+    // 打印
+    println!("{}", json);
+
+    // 路径访问
+    if let Some(city) = json.get("address.city") {
+        println!("City: {}", city);
+    }
+}
+```
+---
+
+### 案例 6: 状态机（游戏角色）
+
+**类型安全的状态转换**：
+
+```rust
+// 使用类型系统表示状态
+struct Idle;
+struct Walking;
+struct Running;
+struct Jumping;
+
+struct Character<State> {
+    name: String,
+    health: u32,
+    position: (f32, f32),
+    _state: std::marker::PhantomData<State>,
+}
+
+// 通用方法（所有状态共享）
+impl<State> Character<State> {
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn health(&self) -> u32 {
+        self.health
+    }
+
+    fn take_damage(&mut self, damage: u32) {
+        self.health = self.health.saturating_sub(damage);
+    }
+}
+
+// Idle 状态特定方法
+impl Character<Idle> {
+    fn new(name: String) -> Self {
+        Character {
+            name,
+            health: 100,
+            position: (0.0, 0.0),
+            _state: std::marker::PhantomData,
+        }
+    }
+
+    fn start_walking(self) -> Character<Walking> {
+        println!("{} starts walking", self.name);
+        Character {
+            name: self.name,
+            health: self.health,
+            position: self.position,
+            _state: std::marker::PhantomData,
+        }
+    }
+
+    fn jump(self) -> Character<Jumping> {
+        println!("{} jumps from idle", self.name);
+        Character {
+            name: self.name,
+            health: self.health,
+            position: self.position,
+            _state: std::marker::PhantomData,
+        }
+    }
+}
+
+// Walking 状态特定方法
+impl Character<Walking> {
+    fn walk(&mut self, dx: f32, dy: f32) {
+        self.position.0 += dx;
+        self.position.1 += dy;
+        println!("{} walks to {:?}", self.name, self.position);
+    }
+
+    fn stop(self) -> Character<Idle> {
+        println!("{} stops walking", self.name);
+        Character {
+            name: self.name,
+            health: self.health,
+            position: self.position,
+            _state: std::marker::PhantomData,
+        }
+    }
+
+    fn start_running(self) -> Character<Running> {
+        println!("{} starts running", self.name);
+        Character {
+            name: self.name,
+            health: self.health,
+            position: self.position,
+            _state: std::marker::PhantomData,
+        }
+    }
+}
+
+// Running 状态特定方法
+impl Character<Running> {
+    fn run(&mut self, dx: f32, dy: f32) {
+        self.position.0 += dx * 2.0; // 跑步速度是走路的2倍
+        self.position.1 += dy * 2.0;
+        println!("{} runs to {:?}", self.name, self.position);
+    }
+
+    fn slow_down(self) -> Character<Walking> {
+        println!("{} slows down", self.name);
+        Character {
+            name: self.name,
+            health: self.health,
+            position: self.position,
+            _state: std::marker::PhantomData,
+        }
+    }
+}
+
+// Jumping 状态特定方法
+impl Character<Jumping> {
+    fn land(self) -> Character<Idle> {
+        println!("{} lands", self.name);
+        Character {
+            name: self.name,
+            health: self.health,
+            position: self.position,
+            _state: std::marker::PhantomData,
+        }
+    }
+}
+
+// 使用示例：编译时保证状态转换正确
+fn character_example() {
+    let hero = Character::<Idle>::new("Hero".to_string());
+
+    // 编译通过：idle -> walking
+    let mut hero = hero.start_walking();
+    hero.walk(1.0, 0.0);
+
+    // 编译通过：walking -> running
+    let mut hero = hero.start_running();
+    hero.run(2.0, 0.0);
+
+    // 编译通过：running -> walking -> idle
+    let hero = hero.slow_down().stop();
+
+    // 编译错误：idle 状态不能调用 run()
+    // hero.run(1.0, 0.0);
+
+    println!("Final position: {:?}", hero.position);
+}
+```
+---
+
+### 案例 7: 类型安全的单位系统
+
+**零成本抽象的物理单位**：
+
+```rust
+use std::ops::{Add, Sub, Mul, Div};
+use std::marker::PhantomData;
+
+// 单位类型标记
+struct Meters;
+struct Seconds;
+struct MetersPerSecond;
+
+// 带单位的值
+#[derive(Debug, Clone, Copy)]
+struct Quantity<Unit> {
+    value: f64,
+    _unit: PhantomData<Unit>,
+}
+
+impl<Unit> Quantity<Unit> {
+    fn new(value: f64) -> Self {
+        Quantity {
+            value,
+            _unit: PhantomData,
+        }
+    }
+
+    fn value(&self) -> f64 {
+        self.value
+    }
+}
+
+// 相同单位可以相加
+impl<Unit> Add for Quantity<Unit> {
+    type Output = Quantity<Unit>;
+
+    fn add(self, rhs: Self) -> Self::Output {
+        Quantity::new(self.value + rhs.value)
+    }
+}
+
+// 相同单位可以相减
+impl<Unit> Sub for Quantity<Unit> {
+    type Output = Quantity<Unit>;
+
+    fn sub(self, rhs: Self) -> Self::Output {
+        Quantity::new(self.value - rhs.value)
+    }
+}
+
+// 距离 / 时间 = 速度
+impl Div<Quantity<Seconds>> for Quantity<Meters> {
+    type Output = Quantity<MetersPerSecond>;
+
+    fn div(self, rhs: Quantity<Seconds>) -> Self::Output {
+        Quantity::new(self.value / rhs.value)
+    }
+}
+
+// 速度 * 时间 = 距离
+impl Mul<Quantity<Seconds>> for Quantity<MetersPerSecond> {
+    type Output = Quantity<Meters>;
+
+    fn mul(self, rhs: Quantity<Seconds>) -> Self::Output {
+        Quantity::new(self.value * rhs.value)
+    }
+}
+
+// 便捷构造函数
+fn meters(value: f64) -> Quantity<Meters> {
+    Quantity::new(value)
+}
+
+fn seconds(value: f64) -> Quantity<Seconds> {
+    Quantity::new(value)
+}
+
+// 使用示例
+fn physics_example() {
+    let distance = meters(100.0);
+    let time = seconds(10.0);
+
+    // 类型安全：计算速度
+    let speed = distance / time;
+    println!("Speed: {} m/s", speed.value());
+
+    // 类型安全：计算新距离
+    let new_time = seconds(5.0);
+    let new_distance = speed * new_time;
+    println!("New distance: {} m", new_distance.value());
+
+    // 编译错误：不能将距离和时间相加
+    // let wrong = distance + time;
+
+    // 编译错误：不能将速度和距离相乘
+    // let wrong = speed * distance;
+}
+```
+---
+
+### 案例 8: 构建器模式（高级）
+
+**支持复杂验证和默认值**：
+
+```rust
+use std::error::Error;
+use std::fmt;
+
+#[derive(Debug)]
+pub enum BuilderError {
+    MissingField(&'static str),
+    InvalidValue(String),
+}
+
+impl fmt::Display for BuilderError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            BuilderError::MissingField(field) => write!(f, "Missing required field: {}", field),
+            BuilderError::InvalidValue(msg) => write!(f, "Invalid value: {}", msg),
+        }
+    }
+}
+
+impl Error for BuilderError {}
+
+#[derive(Debug, Clone)]
+pub struct DatabaseConfig {
+    host: String,
+    port: u16,
+    database: String,
+    username: String,
+    password: String,
+    pool_size: usize,
+    timeout_seconds: u64,
+    ssl_enabled: bool,
+}
+
+pub struct DatabaseConfigBuilder {
+    host: Option<String>,
+    port: Option<u16>,
+    database: Option<String>,
+    username: Option<String>,
+    password: Option<String>,
+    pool_size: Option<usize>,
+    timeout_seconds: Option<u64>,
+    ssl_enabled: Option<bool>,
+}
+
+impl DatabaseConfigBuilder {
+    pub fn new() -> Self {
+        Self {
+            host: None,
+            port: None,
+            database: None,
+            username: None,
+            password: None,
+            pool_size: None,
+            timeout_seconds: None,
+            ssl_enabled: None,
+        }
+    }
+
+    pub fn host(mut self, host: impl Into<String>) -> Self {
+        self.host = Some(host.into());
+        self
+    }
+
+    pub fn port(mut self, port: u16) -> Self {
+        self.port = Some(port);
+        self
+    }
+
+    pub fn database(mut self, database: impl Into<String>) -> Self {
+        self.database = Some(database.into());
+        self
+    }
+
+    pub fn username(mut self, username: impl Into<String>) -> Self {
+        self.username = Some(username.into());
+        self
+    }
+
+    pub fn password(mut self, password: impl Into<String>) -> Self {
+        self.password = Some(password.into());
+        self
+    }
+
+    pub fn pool_size(mut self, size: usize) -> Self {
+        self.pool_size = Some(size);
+        self
+    }
+
+    pub fn timeout_seconds(mut self, seconds: u64) -> Self {
+        self.timeout_seconds = Some(seconds);
+        self
+    }
+
+    pub fn ssl_enabled(mut self, enabled: bool) -> Self {
+        self.ssl_enabled = Some(enabled);
+        self
+    }
+
+    pub fn build(self) -> Result<DatabaseConfig, BuilderError> {
+        // 验证必填字段
+        let host = self.host
+            .ok_or(BuilderError::MissingField("host"))?;
+
+        let database = self.database
+            .ok_or(BuilderError::MissingField("database"))?;
+
+        let username = self.username
+            .ok_or(BuilderError::MissingField("username"))?;
+
+        let password = self.password
+            .ok_or(BuilderError::MissingField("password"))?;
+
+        // 提供默认值
+        let port = self.port.unwrap_or(5432);
+        let pool_size = self.pool_size.unwrap_or(10);
+        let timeout_seconds = self.timeout_seconds.unwrap_or(30);
+        let ssl_enabled = self.ssl_enabled.unwrap_or(false);
+
+        // 验证值的有效性
+        if port == 0 {
+            return Err(BuilderError::InvalidValue("Port cannot be 0".to_string()));
+        }
+
+        if pool_size == 0 || pool_size > 1000 {
+            return Err(BuilderError::InvalidValue(
+                "Pool size must be between 1 and 1000".to_string()
+            ));
+        }
+
+        Ok(DatabaseConfig {
+            host,
+            port,
+            database,
+            username,
+            password,
+            pool_size,
+            timeout_seconds,
+            ssl_enabled,
+        })
+    }
+}
+
+// 使用示例
+fn builder_example() -> Result<(), BuilderError> {
+    let config = DatabaseConfigBuilder::new()
+        .host("localhost")
+        .database("mydb")
+        .username("admin")
+        .password("secret")
+        .pool_size(20)
+        .ssl_enabled(true)
+        .build()?;
+
+    println!("Config: {:?}", config);
+
+    // 缺少必填字段会编译通过但运行时报错
+    let result = DatabaseConfigBuilder::new()
+        .host("localhost")
+        .build();
+
+    match result {
+        Ok(_) => println!("Unexpected success"),
+        Err(e) => println!("Expected error: {}", e),
+    }
+
+    Ok(())
+}
+```
+---
+
+## 📊 性能优化进阶
+
+### 内存布局优化实例
+
+```rust
+use std::mem;
+
+// ❌ 内存布局不佳
+#[derive(Debug)]
+struct BadLayout {
+    flag: bool,      // 1 byte
+    // padding: 7 bytes (对齐到u64)
+    number: u64,     // 8 bytes
+    small: u8,       // 1 byte
+    // padding: 7 bytes
+}
+
+// ✅ 优化的内存布局
+#[derive(Debug)]
+struct GoodLayout {
+    number: u64,     // 8 bytes
+    flag: bool,      // 1 byte
+    small: u8,       // 1 byte
+    // padding: 6 bytes
+}
+
+// 使用 repr(C) 控制布局
+#[repr(C)]
+struct CLayout {
+    number: u64,
+    flag: bool,
+    small: u8,
+}
+
+// repr(packed) 去除padding（慎用）
+#[repr(packed)]
+struct PackedLayout {
+    flag: bool,
+    number: u64,
+    small: u8,
+}
+
+fn layout_example() {
+    println!("BadLayout size: {} bytes", mem::size_of::<BadLayout>());
+    println!("GoodLayout size: {} bytes", mem::size_of::<GoodLayout>());
+    println!("CLayout size: {} bytes", mem::size_of::<CLayout>());
+    println!("PackedLayout size: {} bytes", mem::size_of::<PackedLayout>());
+
+    // 典型输出：
+    // BadLayout size: 24 bytes  (浪费!)
+    // GoodLayout size: 16 bytes
+    // CLayout size: 16 bytes
+    // PackedLayout size: 10 bytes (但访问速度可能变慢)
+}
+```
+---
+
+### 枚举判别式优化
+
+```rust
+// 使用小的判别式类型
+#[repr(u8)]  // 只使用1字节作为判别值
+enum Status {
+    Pending = 0,
+    InProgress = 1,
+    Completed = 2,
+    Failed = 3,
+}
+
+// 显式指定判别值
+#[repr(u16)]
+enum ErrorCode {
+    NetworkError = 1000,
+    DatabaseError = 2000,
+    AuthError = 3000,
+}
+
+impl ErrorCode {
+    fn as_u16(&self) -> u16 {
+        *self as u16
+    }
+
+    fn from_u16(value: u16) -> Option<Self> {
+        match value {
+            1000 => Some(ErrorCode::NetworkError),
+            2000 => Some(ErrorCode::DatabaseError),
+            3000 => Some(ErrorCode::AuthError),
+            _ => None,
+        }
+    }
+}
+
+fn discriminant_example() {
+    use std::mem;
+
+    let status = Status::Completed;
+    println!("Status size: {} bytes", mem::size_of_val(&status));
+
+    let code = ErrorCode::DatabaseError;
+    println!("Error code: {}", code.as_u16());
+}
+```
+---
+
+## 🔥 高级模式匹配技巧
+
+### 匹配多个模式
+
+```rust
+enum Message {
+    Text(String),
+    Image(String, Vec<u8>),
+    Video(String, Vec<u8>, u32),
+}
+
+fn process_media(msg: Message) {
+    match msg {
+        // 匹配多个模式
+        Message::Image(name, _) | Message::Video(name, _, _) => {
+            println!("Processing media: {}", name);
+        }
+        Message::Text(content) => {
+            println!("Processing text: {}", content);
+        }
+    }
+}
+```
+---
+
+### 范围模式
+
+```rust
+fn classify_age(age: u32) -> &'static str {
+    match age {
+        0..=12 => "Child",
+        13..=19 => "Teenager",
+        20..=64 => "Adult",
+        65.. => "Senior",
+    }
+}
+
+fn classify_char(c: char) -> &'static str {
+    match c {
+        'a'..='z' => "lowercase",
+        'A'..='Z' => "uppercase",
+        '0'..='9' => "digit",
+        _ => "other",
+    }
+}
+```
+---
+
+### 嵌套匹配与解构
+
+```rust
+enum Response {
+    Success(Result<String, String>),
+    Redirect(String),
+    Error(u16, String),
+}
+
+fn handle_response(response: Response) {
+    match response {
+        // 嵌套匹配
+        Response::Success(Ok(data)) => {
+            println!("Success with data: {}", data);
+        }
+        Response::Success(Err(reason)) => {
+            println!("Success but error: {}", reason);
+        }
+        Response::Redirect(url) => {
+            println!("Redirect to: {}", url);
+        }
+        // 守卫 + 解构
+        Response::Error(code, msg) if code >= 500 => {
+            println!("Server error {}: {}", code, msg);
+        }
+        Response::Error(code, msg) => {
+            println!("Client error {}: {}", code, msg);
+        }
+    }
+}
+```
+---
+
+## 🎯 实战练习题
+
+### 练习 1: 实现命令行参数解析器
+
+```rust
+#[derive(Debug)]
+enum Arg {
+    Flag(String),
+    Option(String, String),
+    Positional(String),
+}
+
+struct ArgParser {
+    args: Vec<Arg>,
+}
+
+impl ArgParser {
+    fn parse(input: &[String]) -> Self {
+        let mut args = Vec::new();
+        let mut iter = input.iter();
+
+        while let Some(arg) = iter.next() {
+            if arg.starts_with("--") {
+                let name = arg[2..].to_string();
+                if let Some(value) = iter.next() {
+                    args.push(Arg::Option(name, value.clone()));
+                } else {
+                    args.push(Arg::Flag(name));
+                }
+            } else if arg.starts_with("-") {
+                args.push(Arg::Flag(arg[1..].to_string()));
+            } else {
+                args.push(Arg::Positional(arg.clone()));
+            }
+        }
+
+        ArgParser { args }
+    }
+
+    fn get_flag(&self, name: &str) -> bool {
+        self.args.iter().any(|arg| match arg {
+            Arg::Flag(flag_name) => flag_name == name,
+            _ => false,
+        })
+    }
+
+    fn get_option(&self, name: &str) -> Option<&str> {
+        self.args.iter().find_map(|arg| match arg {
+            Arg::Option(opt_name, value) if opt_name == name => Some(value.as_str()),
+            _ => None,
+        })
+    }
+}
+
+// 使用示例
+fn parser_example() {
+    let args = vec![
+        "--verbose".to_string(),
+        "--output".to_string(),
+        "file.txt".to_string(),
+        "-h".to_string(),
+        "input.txt".to_string(),
+    ];
+
+    let parser = ArgParser::parse(&args);
+
+    println!("Has verbose: {}", parser.get_flag("verbose"));
+    println!("Has help: {}", parser.get_flag("h"));
+    println!("Output: {:?}", parser.get_option("output"));
+}
+```
+---
+
+**更新日期**: 2025-10-24
+**文档版本**: 2.0
+**作者**: C02 Type System Code Examples Team
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

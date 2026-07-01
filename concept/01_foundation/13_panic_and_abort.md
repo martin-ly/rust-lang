@@ -100,7 +100,6 @@ Panic 的定义:
   ├── 不应使用 panic 处理预期错误
   └── 每个 panic 都应是可修复的 bug
 ```
-
 > **认知功能**: Panic 是 Rust **"快速失败"哲学**的体现——当检测到内部不一致时，立即停止而非继续运行在不安全状态。
 > [来源: [TRPL — Unrecoverable Errors](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)]
 
@@ -143,7 +142,6 @@ Panic 的定义:
   └── slice::get_unchecked(index) -> &T
       └── unsafe: 调用者保证索引有效，否则 panic/UB
 ```
-
 > **选择洞察**: **Panic 用于 bug，Result 用于预期错误**——这个区分是 Rust 错误处理（Error Handling）设计的核心。
 > [来源: [Rust API Guidelines — Panics](https://rust-lang.github.io/api-guidelines//documentation.html#function-docs-include-error-conditions-and-panic-conditions-c-failure)]
 
@@ -191,7 +189,6 @@ Panic 传播机制:
   ├── panic 负载必须是 UnwindSafe
   └── FFI 边界不应 panic（UB）
 ```
-
 > **传播洞察**: **栈展开**是 Rust panic 相比 C abort 的**关键安全特性**——它保证资源在崩溃时被释放。
 > [来源: [std::panic::catch_unwind](https://doc.rust-lang.org/std/panic/fn.catch_unwind.html)]
 
@@ -236,7 +233,6 @@ let old_hook = panic::take_hook();
 //     loop {}
 // }
 ```
-
 > **自定义洞察**: Panic 钩子使 Rust 程序可以**集中处理崩溃**——记录、告警、优雅降级，而非简单地打印到 stderr。
 > [来源: [std::panic::set_hook](https://doc.rust-lang.org/std/panic/fn.set_hook.html)]
 
@@ -281,7 +277,6 @@ Panic 与日志集成:
       });
   }));
 ```
-
 > **日志洞察**: **结构化 panic 日志**是生产环境可观测性的关键——它使事后分析成为可能。
 > [来源: [log crate](https://docs.rs/log/latest/log/)]
 
@@ -325,7 +320,6 @@ fn configure_panic() {
 // └── 调试信息减少
 //     └── 无栈跟踪（取决于平台）
 ```
-
 > **Abort 洞察**: `panic = "abort"` 是**嵌入式和 FFI**场景的常见选择——它以牺牲优雅性换取简单性和代码大小。
 > [来源: [Rust Reference — Panic Strategy](https://doc.rust-lang.org/reference/runtime.html#the-panic_strategy-attribute)]
 
@@ -361,7 +355,6 @@ fn configure_panic() {
   → 防止单线程 panic 拖垮进程
   → std::thread::spawn(|| { ... }).join()
 ```
-
 > **模式矩阵**: Panic 的**每种形式都有明确语义**——选择正确的宏（Macro）可以传达意图（todo vs unreachable vs assert）。
 > [来源: [Rust By Example — Panic](https://doc.rust-lang.org/rust-by-example/error/panic.html)]
 
@@ -388,7 +381,6 @@ graph TD
     style PANIC2 fill:#c8e6c9
     style LOG fill:#fff3e0
 ```
-
 > **认知功能**: **Result 是默认选择**——Panic 只在"这不应该发生"时使用。
 > [来源: [Rust API Guidelines — Errors](https://rust-lang.github.io/api-guidelines//interoperability.html#error-types-are-meaningful-and-well-behaved-c-good-err)]
 
@@ -428,7 +420,6 @@ graph TD
 ├── 验证 panic 条件
 └── 但难以精确匹配消息
 ```
-
 > **边界要点**: Panic 的边界主要与**UnwindSafe**、**FFI**、**析构函数**、**性能**和**测试**相关。
 > [来源: [std::panic::UnwindSafe](https://doc.rust-lang.org/std/panic/trait.UnwindSafe.html)]
 
@@ -475,7 +466,6 @@ graph TD
   ✅ let data = mutex.lock().unwrap_or_else(|e| e.into_inner());
      // 明确处理 poison 状态
 ```
-
 > **陷阱总结**: Panic 的陷阱主要与**unwrap 滥用**、**库设计**、**catch_unwind 局限**、**async** 和 **poison** 相关。
 > [来源: [Rust Error Handling Best Practices](https://doc.rust-lang.org/rust-by-example/error.html)]
 
@@ -546,7 +536,6 @@ fn fixed() {
     println!("{:?}", result);
 }
 ```
-
 > **修正**:
 >
 > `catch_unwind` 捕获 panic 并恢复执行，但要求闭包（Closures）实现 `UnwindSafe` trait。
@@ -581,7 +570,6 @@ impl Drop for GoodDrop {
     }
 }
 ```
-
 > **修正**:
 >
 > `Drop::drop` 在值离开作用域或 panic 传播时被调用。
@@ -604,7 +592,6 @@ fn main() {
     });
 }
 ```
-
 > **修正**:
 > `panic=abort` 配置使 panic 直接调用 `abort()` 终止进程，跳过栈展开和 `Drop` 调用。
 > 这消除了 `catch_unwind` 的语义基础——没有展开，就没有可捕获的 panic。
@@ -633,7 +620,6 @@ fn main() {
     // 双重 panic → process abort
 }
 ```
-
 > **修正**:
 > Rust 的 panic 机制设计为"不可恢复"，栈展开过程中调用 `Drop::drop` 释放资源。
 > 若 `drop` 中再次 panic，形成**双重 panic**（double panic），Rust 立即调用 `abort()` 终止进程（不继续展开）。
@@ -663,7 +649,6 @@ fn main() {
     // panic!("abort now");
 }
 ```
-
 > **修正**:
 > `panic=abort` 直接终止进程，**不执行栈展开**，因此不调用任何 `Drop::drop`。
 > 这与 `panic=unwind` 形成对比：unwind 会逐帧调用 Drop，释放资源。
@@ -692,7 +677,6 @@ fn main() {
     }
 }
 ```
-
 > **修正**:
 > `catch_unwind` 只捕获 Rust 的 panic（栈展开），不捕获 C++ 异常、Windows SEH、或 `longjmp`。
 > 若 FFI 调用的 C 代码调用 C++ 库（如通过 C 接口封装），C++ 异常传播过 FFI 边界是 UB。
@@ -714,7 +698,6 @@ fn main() {
     unsafe { core::intrinsics::abort(); }
 }
 ```
-
 > **修正**:
 >
 > `std::process::abort` 和 `core::intrinsics::abort` 都终止进程，但行为不同：
@@ -742,7 +725,6 @@ fn main() {
     println!("{:?}", result);
 }
 ```
-
 > **修正**:
 >
 > `catch_unwind` 捕获 panic 并返回 `Result`，但要求闭包（Closures）实现 `UnwindSafe`——保证 panic 不会破坏共享状态的不变性。
@@ -769,7 +751,6 @@ fn main() {
 fn compute_expensive_value() -> i32 { 42 }
 fn compute_expensive_string() -> String { String::from("expensive") }
 ```
-
 > **修正**:
 >
 > `assert!` 的格式参数在**断言失败时**求值，但 `compute_expensive_string()` 是否在断言通过时求值？实际上，Rust 的 `assert!` 宏（Macro）展开后，格式参数在 panic 时才求值（通过 `format_args!` 的惰性），但闭包（Closures）捕获可能意外触发求值。
@@ -889,7 +870,6 @@ catch_unwind(AssertUnwindSafe(|| {
     panic!("boom");
 }));
 ```
-
 - A. 闭包修改了外部变量，可能留下不一致状态
 - B. `catch_unwind` 只接受无参数函数
 - C. `x` 没有实现 `Copy`

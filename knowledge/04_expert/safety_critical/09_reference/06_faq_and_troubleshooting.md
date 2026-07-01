@@ -71,7 +71,6 @@ Phase 4 (24月+): 完全迁移或保持混合架构
 - 逐步验证每个模块
 - 保留回滚能力
 ```
-
 ### Q2: Rust的学习曲线如何？团队需要多长时间才能上手？
 >
 > **[来源: Rust Official Docs]**
@@ -131,7 +130,6 @@ unsafe fn unsafe_code(ptr: *mut u8) {
     // 建议用Miri测试
 }
 ```
-
 统计数据：Rust代码的内存安全bug比C/C++少约95%
 
 ### Q5: 如何处理C库集成（FFI）？
@@ -184,7 +182,6 @@ impl Drop for SafeWrapper {
     }
 }
 ```
-
 ### Q6: 实时系统中Rust的延迟如何？
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -228,7 +225,6 @@ ASIL D要求:
 
 成功案例: Ferrocene本身达到ASIL D
 ```
-
 ### Q8: DO-178C认证中Rust的地位如何？
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -277,7 +273,6 @@ evidence_package/
     ├── review_records/
     └── change_control.md
 ```
-
 ---
 
 ## 工具链问题
@@ -333,7 +328,6 @@ unsafe {
 
 // 解决: 使用MaybeUninit或重新设计
 ```
-
 ### Q12: Kani证明超时怎么办？
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -374,7 +368,6 @@ fn verify_with_loop() {
     // ...
 }
 ```
-
 ---
 
 ## 性能问题
@@ -402,7 +395,6 @@ strip = true        # 去除符号
 
 # 或者使用zigbuild进行跨平台优化
 ```
-
 ```bash
 # 检查二进制大小
 cargo bloat --release
@@ -410,7 +402,6 @@ cargo bloat --release
 # 使用特定优化
 cargo build --release --target x86_64-unknown-linux-gnu
 ```
-
 ### Q14: 嵌入式系统内存有限，Rust是否合适？
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -434,7 +425,6 @@ static mut DATA: [u8; 1024] = [0; 1024];
 // 零成本抽象
 let slice = &buffer[0..10];  // 无运行时开销
 ```
-
 内存使用通常比C++少，接近C
 
 ---
@@ -454,7 +444,6 @@ error: failed to select a version for `serde`.
     ...
 versions found: 1.0.150, 1.0.149, 1.0.148
 ```
-
 **解决:**
 
 ```bash
@@ -476,7 +465,6 @@ serde = "=1.0.150"
 [dependencies]
 serde = { version = "1.0", default-features = false }
 ```
-
 ### 问题: Clippy报告太多警告
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -491,7 +479,6 @@ serde = { version = "1.0", default-features = false }
 too-many-arguments-threshold = 10
 cognitive-complexity-threshold = 30
 ```
-
 ### 问题: 交叉编译失败
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -514,7 +501,6 @@ runner = "qemu-system-arm"
 # 4. 构建
 cargo build --target thumbv7em-none-eabihf
 ```
-
 ### 问题: Miri测试太慢
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -535,7 +521,6 @@ fn slow_test() {
     // ...
 }
 ```
-
 ### 问题: 安全审计发现漏洞
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -559,7 +544,6 @@ cargo update -p vulnerable-crate
 
 # 5. 如无修复，考虑替代crate
 ```
-
 ---
 
 ## 更多资源
@@ -605,7 +589,6 @@ cargo update -p vulnerable-crate
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [API设计指南](01_api_design_guidelines.md)
 - [Rust安全关键系统 - 检查清单与模板](02_checklists_and_templates.md)
 

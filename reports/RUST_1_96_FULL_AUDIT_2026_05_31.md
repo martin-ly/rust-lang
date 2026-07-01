@@ -253,13 +253,9 @@
 ### 核心结论
 
 1. **高价值特性已全部覆盖**：`assert_matches!`、`core::range`、LazyLock/LazyCell From、`ManuallyDrop` 模式、Never type coercion、expr → cfg 等核心语言和标准库特性，在概念文档、crate 代码和测试中均有完整覆盖。
-
 2. **文档基础设施完善**：`docs/06_toolchain/06_19_rust_1_96_features.md`（296 行）和 `knowledge/06_ecosystem/emerging/05_rust_1_96.md`（249 行）已与官方 Release Notes 逐条核对，覆盖全面。
-
 3. **练习覆盖有缺口**：`NonZero` 范围迭代和 `AssertUnwindSafe From` 缺少专门练习，但 crate 代码中包含示例。
-
 4. **rustdoc 改进完全缺失**：3 项 rustdoc 改进在项目中无任何覆盖。建议补充。
-
 5. **内部变更和平台特定修复缺失**：函数参数推断修复、SGX ToSocketAddr、JSON targets aarch64 softfloat、target specs stricter checks 等缺失。这些影响面窄，可暂不处理。
 
 ### 建议行动

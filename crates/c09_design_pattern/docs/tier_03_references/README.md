@@ -10,12 +10,12 @@
 
 | 序号 | 文档 | 内容 | 行数 | 状态 |
 | :--- | :--- | :--- | :--- | :--- |
-| 1    | [01\_设计模式分类参考.md](01_设计模式分类参考.md)      | GoF + 并发 + Rust特有模式完整分类      | ~900 | ✅   |
-| 2    | [02\_模式实现对比.md](02_模式实现对比.md)              | Trait vs 泛型、同步vs异步、性能对比    | ~650 | ✅   |
-| 3    | [03_Rust190特性应用参考.md](03_Rust190特性应用参考.md) | async fn、GATs、let-else、RPITIT等特性 | ~750 | ✅   |
-| 4    | [04\_模式性能评估参考.md](04_模式性能评估参考.md)      | 基准测试、性能数据、优化建议           | ~800 | ✅   |
-| 5    | [05\_模式选择最佳实践.md](05_模式选择最佳实践.md)      | 决策树、场景驱动、反模式避免           | ~700 | ✅   |
-| 6    | [06\_模式使用快速参考.md](06_模式使用快速参考.md)      | 何时使用/避免、复杂度、线程安全性      | ~960 | ✅   |
+| 1    | [01\_设计模式分类参考.md](01_design_pattern_categories_reference.md)      | GoF + 并发 + Rust特有模式完整分类      | ~900 | ✅   |
+| 2    | [02\_模式实现对比.md](02_pattern_implementation_comparison.md)              | Trait vs 泛型、同步vs异步、性能对比    | ~650 | ✅   |
+| 3    | [03_rust_190_feature_applications_reference.md](03_rust_190_feature_applications_reference.md) | async fn、GATs、let-else、RPITIT等特性 | ~750 | ✅   |
+| 4    | [04\_模式性能评估参考.md](04_pattern_performance_evaluation_reference.md)      | 基准测试、性能数据、优化建议           | ~800 | ✅   |
+| 5    | [05\_模式选择最佳实践.md](05_pattern_selection_best_practices.md)      | 决策树、场景驱动、反模式避免           | ~700 | ✅   |
+| 6    | [06\_模式使用快速参考.md](06_pattern_quick_reference.md)      | 何时使用/避免、复杂度、线程安全性      | ~960 | ✅   |
 
 **总计**: 6 篇核心文档，~4,760 行，400+ 代码示例
 
@@ -29,8 +29,8 @@
 | [FAQ.md](../FAQ.md)                                                               | 常见问题（完整版）                   |
 | [Glossary.md](../Glossary.md)                                                     | 术语表（完整版）                     |
 | [Tier 1 基础层](../tier_01_foundations/README.md)                                          | 快速入门和基础参考                   |
-| [Tier 1 术语表](../tier_01_foundations/03_术语表.md)                              | 核心术语快速参考                     |
-| [Tier 1 常见问题](../tier_01_foundations/04_常见问题.md)                          | 新手常见问题解答                     |
+| [Tier 1 术语表](../tier_01_foundations/03_glossary.md)                              | 核心术语快速参考                     |
+| [Tier 1 常见问题](../tier_01_foundations/04_faq.md)                          | 新手常见问题解答                     |
 | [OVERVIEW.md](../OVERVIEW.md)                                                     | 概览                                 |
 | [KNOWLEDGE_GRAPH.md](../KNOWLEDGE_GRAPH.md)                                       | 知识图谱                             |
 | [MIND_MAP.md](../MIND_MAP.md)                                                     | 思维导图                             |
@@ -46,7 +46,7 @@
 
 1. 01\_设计模式分类参考 → 了解完整分类体系
 2. 06\_模式使用快速参考 → 快速查找模式使用指南（⭐ 新增）
-3. [03_Rust190特性应用参考](03_Rust190特性应用参考.md) → 掌握现代Rust特性（自 Rust 1.90 引入）
+3. [03_Rust190特性应用参考](03_rust_190_feature_applications_reference.md) → 掌握现代Rust特性（自 Rust 1.90 引入）
 4. 02\_模式实现对比 → 理解不同实现权衡
 5. 04\_模式性能评估 → 性能基准与优化
 6. 05\_模式选择最佳实践 → 实战决策指南

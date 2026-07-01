@@ -1,0 +1,747 @@
+# 04 性能优化实践
+
+> **文档类型**: Tier 2 - 实践指南
+> **目标读者**: 关注算法性能优化的开发者
+> **预计学习时间**: 3-4小时
+> **前置知识**: [算法复杂度分析](03_algorithm_complexity_analysis.md)
+
+## 📋 目录
+
+- [04 性能优化实践](#04-性能优化实践)
+  - [📋 目录](#-目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+  - [🎯 学习目标](#-学习目标)
+  - [1. 迭代器优化](#1-迭代器优化)
+    - [1.1 零成本抽象](#11-零成本抽象)
+    - [1.2 避免中间分配](#12-避免中间分配)
+    - [1.3 提前终止](#13-提前终止)
+  - [2. 内存分配优化](#2-内存分配优化)
+    - [2.1 预分配容量](#21-预分配容量)
+    - [2.2 使用 Arena 分配器](#22-使用-arena-分配器)
+    - [2.3 避免不必要的克隆](#23-避免不必要的克隆)
+  - [3. 缓存局部性](#3-缓存局部性)
+    - [3.1 数组 vs 链表](#31-数组-vs-链表)
+    - [3.2 结构体数组 vs 数组结构体](#32-结构体数组-vs-数组结构体)
+    - [3.3 矩阵访问模式](#33-矩阵访问模式)
+  - [4. SIMD 向量化](#4-simd-向量化)
+    - [4.1 使用 packed\_simd](#41-使用-packed_simd)
+    - [4.2 自动向量化](#42-自动向量化)
+  - [5. 并行优化](#5-并行优化)
+    - [5.1 使用 Rayon](#51-使用-rayon)
+    - [5.2 任务并行](#52-任务并行)
+  - [6. 分支预测优化](#6-分支预测优化)
+    - [6.1 减少分支](#61-减少分支)
+    - [6.2 分支预测提示](#62-分支预测提示)
+  - [7. 性能测试与分析](#7-性能测试与分析)
+    - [7.1 Criterion 基准测试](#71-criterion-基准测试)
+    - [7.2 使用 flamegraph](#72-使用-flamegraph)
+    - [7.3 使用 perf](#73-使用-perf)
+  - [8. 实战优化案例](#8-实战优化案例)
+    - [案例 1: 大数组求和优化](#案例-1-大数组求和优化)
+    - [案例 2: 字符串处理优化](#案例-2-字符串处理优化)
+    - [案例 3: 图遍历优化](#案例-3-图遍历优化)
+  - [🔗 相关资源](#-相关资源)
+  - [**文档状态**: ✅ 完成](#文档状态--完成)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**性能优化实践 (Performance Optimization Practice)**:
+
+- **定义**: 优化算法性能的技术和实践，包括迭代器优化、内存优化、缓存优化等
+- **类型**: 性能优化技术
+- **范畴**: 算法学、性能工程
+- **版本**: Rust 1.0+
+- **相关概念**: 性能优化、内存管理、SIMD、并行计算
+
+### 属性特征
+
+**核心属性**:
+
+- **迭代器优化**: 零成本抽象、避免中间分配
+- **内存优化**: 预分配容量、Arena 分配器
+- **缓存局部性**: 数组 vs 链表、结构体布局
+- **SIMD 向量化**: 使用 SIMD 加速计算
+
+**性能特征**:
+
+- **零成本抽象**: 迭代器性能等同于手写循环
+- **内存效率**: 减少内存分配和拷贝
+- **适用场景**: 高性能算法、数值计算、数据处理
+
+### 关系连接
+
+**组合关系**:
+
+- 性能优化实践 --[uses]--> 多种优化技术
+- 算法实现 --[benefits-from]--> 性能优化实践
+
+**依赖关系**:
+
+- 性能优化实践 --[depends-on]--> 性能分析工具
+- 算法优化 --[depends-on]--> 性能优化实践
+
+### 思维导图
+
+```text
+性能优化实践
+│
+├── 迭代器优化
+│   ├── 零成本抽象
+│   └── 避免中间分配
+├── 内存分配优化
+│   ├── 预分配容量
+│   └── Arena 分配器
+├── 缓存局部性
+│   ├── 数组 vs 链表
+│   └── 结构体布局
+├── SIMD 向量化
+│   └── 自动向量化
+├── 并行优化
+│   └── Rayon
+└── 性能测试与分析
+    ├── Criterion
+    └── flamegraph
+```
+---
+
+## 🎯 学习目标
+
+- ✅ 掌握 Rust 迭代器的零成本抽象
+- ✅ 优化内存分配减少性能开销
+- ✅ 利用缓存局部性提升性能
+- ✅ 使用 SIMD 加速数值计算
+- ✅ 应用并行化提升多核性能
+- ✅ 使用性能分析工具定位瓶颈
+
+---
+
+## 1. 迭代器优化
+
+### 1.1 零成本抽象
+
+Rust 迭代器经过编译器优化后性能等同于手写循环：
+
+```rust
+// 方案 1: 手写循环
+fn sum_manual(data: &[i32]) -> i32 {
+    let mut sum = 0;
+    for &item in data {
+        sum += item;
+    }
+    sum
+}
+
+// 方案 2: 迭代器
+fn sum_iterator(data: &[i32]) -> i32 {
+    data.iter().sum()  // 编译后等价于方案1
+}
+
+// 方案 3: 链式操作
+fn sum_filtered(data: &[i32]) -> i32 {
+    data.iter()
+        .filter(|&&x| x > 0)
+        .map(|&x| x * 2)
+        .sum()
+}
+```
+### 1.2 避免中间分配
+
+```rust
+// ❌ 不优：多次分配
+fn process_data_slow(data: &[i32]) -> Vec<i32> {
+    let filtered: Vec<i32> = data.iter()
+        .filter(|&&x| x % 2 == 0)
+        .copied()
+        .collect();
+
+    let mapped: Vec<i32> = filtered.iter()
+        .map(|&x| x * 2)
+        .collect();
+
+    mapped
+}
+
+// ✅ 优化：链式操作，一次分配
+fn process_data_fast(data: &[i32]) -> Vec<i32> {
+    data.iter()
+        .filter(|&&x| x % 2 == 0)
+        .map(|&x| x * 2)
+        .collect()
+}
+```
+### 1.3 提前终止
+
+```rust
+// ✅ 使用 any/all 提前终止
+fn has_negative(data: &[i32]) -> bool {
+    data.iter().any(|&x| x < 0)  // 找到第一个就返回
+}
+
+// ❌ 不优：遍历所有元素
+fn has_negative_slow(data: &[i32]) -> bool {
+    data.iter().filter(|&&x| x < 0).count() > 0
+}
+```
+---
+
+## 2. 内存分配优化
+
+### 2.1 预分配容量
+
+```rust
+use std::time::Instant;
+
+fn benchmark_allocation() {
+    let n = 100_000;
+
+    // ❌ 不优：多次扩容
+    let start = Instant::now();
+    let mut v1 = Vec::new();
+    for i in 0..n {
+        v1.push(i);
+    }
+    println!("未预分配: {:?}", start.elapsed());
+
+    // ✅ 优化：预分配
+    let start = Instant::now();
+    let mut v2 = Vec::with_capacity(n);
+    for i in 0..n {
+        v2.push(i);
+    }
+    println!("预分配: {:?}", start.elapsed());
+}
+```
+### 2.2 使用 Arena 分配器
+
+```rust
+// 使用 bumpalo crate
+use bumpalo::Bump;
+
+fn allocate_many() {
+    let arena = Bump::new();
+
+    // 所有分配来自同一块内存
+    for _ in 0..1000 {
+        let _ = arena.alloc(42);
+    }
+
+    // arena drop时一次性释放所有内存
+}
+```
+### 2.3 避免不必要的克隆
+
+```rust
+#[derive(Clone)]
+struct Data {
+    values: Vec<i32>,
+}
+
+// ❌ 不优：不必要的克隆
+fn process_slow(data: &Data) -> i32 {
+    let cloned = data.clone();  // 昂贵的克隆
+    cloned.values.iter().sum()
+}
+
+// ✅ 优化：直接使用引用
+fn process_fast(data: &Data) -> i32 {
+    data.values.iter().sum()
+}
+```
+---
+
+## 3. 缓存局部性
+
+### 3.1 数组 vs 链表
+
+```rust
+use std::collections::LinkedList;
+use std::time::Instant;
+
+fn benchmark_cache_locality() {
+    let n = 100_000;
+
+    // Vec: 缓存友好
+    let vec: Vec<i32> = (0..n).collect();
+    let start = Instant::now();
+    let sum1: i32 = vec.iter().sum();
+    println!("Vec遍历: {:?}", start.elapsed());
+
+    // LinkedList: 缓存不友好
+    let list: LinkedList<i32> = (0..n).collect();
+    let start = Instant::now();
+    let sum2: i32 = list.iter().sum();
+    println!("LinkedList遍历: {:?}", start.elapsed());
+
+    assert_eq!(sum1, sum2);
+}
+```
+### 3.2 结构体数组 vs 数组结构体
+
+```rust
+// SOA (Structure of Arrays) - 缓存友好
+struct ParticlesSOA {
+    x: Vec<f32>,
+    y: Vec<f32>,
+    vx: Vec<f32>,
+    vy: Vec<f32>,
+}
+
+impl ParticlesSOA {
+    fn update(&mut self, dt: f32) {
+        // 连续访问同类型数据，缓存友好
+        for vx in &mut self.vx {
+            *vx *= dt;
+        }
+        for i in 0..self.x.len() {
+            self.x[i] += self.vx[i];
+        }
+    }
+}
+
+// AOS (Array of Structures) - 可能缓存不友好
+struct Particle {
+    x: f32,
+    y: f32,
+    vx: f32,
+    vy: f32,
+}
+
+struct ParticlesAOS {
+    particles: Vec<Particle>,
+}
+
+impl ParticlesAOS {
+    fn update(&mut self, dt: f32) {
+        for p in &mut self.particles {
+            p.vx *= dt;
+            p.x += p.vx;
+        }
+    }
+}
+```
+### 3.3 矩阵访问模式
+
+```rust
+fn matrix_multiply_slow(a: &[Vec<f32>], b: &[Vec<f32>]) -> Vec<Vec<f32>> {
+    let n = a.len();
+    let mut c = vec![vec![0.0; n]; n];
+
+    // ❌ 不优：列访问 b[k][j] 缓存不友好
+    for i in 0..n {
+        for j in 0..n {
+            for k in 0..n {
+                c[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+
+    c
+}
+
+fn matrix_multiply_fast(a: &[Vec<f32>], b: &[Vec<f32>]) -> Vec<Vec<f32>> {
+    let n = a.len();
+    let mut c = vec![vec![0.0; n]; n];
+
+    // ✅ 优化：调整循环顺序，改善缓存局部性
+    for i in 0..n {
+        for k in 0..n {
+            for j in 0..n {
+                c[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+
+    c
+}
+```
+---
+
+## 4. SIMD 向量化
+
+### 4.1 使用 packed_simd
+
+```rust
+// Cargo.toml: packed_simd = "0.3"
+use packed_simd::*;
+
+// 标量版本
+fn sum_scalar(data: &[f32]) -> f32 {
+    data.iter().sum()
+}
+
+// SIMD 版本
+fn sum_simd(data: &[f32]) -> f32 {
+    let chunks = data.chunks_exact(f32x4::lanes());
+    let remainder = chunks.remainder();
+
+    let mut sum = f32x4::splat(0.0);
+    for chunk in chunks {
+        let v = f32x4::from_slice_unaligned(chunk);
+        sum += v;
+    }
+
+    sum.sum() + remainder.iter().sum::<f32>()
+}
+```
+### 4.2 自动向量化
+
+```rust
+// 编译器自动向量化（需要优化标志）
+#[inline(never)]
+fn add_arrays(a: &[f32], b: &[f32], c: &mut [f32]) {
+    for i in 0..a.len() {
+        c[i] = a[i] + b[i];  // 编译器可能自动向量化
+    }
+}
+
+// 编译: cargo build --release
+// RUSTFLAGS="-C target-cpu=native"
+```
+---
+
+## 5. 并行优化
+
+### 5.1 使用 Rayon
+
+```rust
+use rayon::prelude::*;
+
+// 串行
+fn sum_serial(data: &[i32]) -> i32 {
+    data.iter().sum()
+}
+
+// 并行
+fn sum_parallel(data: &[i32]) -> i32 {
+    data.par_iter().sum()
+}
+
+// 并行 map-reduce
+fn parallel_process(data: &[i32]) -> Vec<i32> {
+    data.par_iter()
+        .filter(|&&x| x % 2 == 0)
+        .map(|&x| x * 2)
+        .collect()
+}
+```
+### 5.2 任务并行
+
+```rust
+use rayon::prelude::*;
+
+fn parallel_tasks() {
+    let (result1, result2) = rayon::join(
+        |
+| expensive_computation_1(),
+        |
+| expensive_computation_2(),
+    );
+
+    println!("结果: {}, {}", result1, result2);
+}
+
+fn expensive_computation_1() -> i32 {
+    (0..10_000_000).sum()
+}
+
+fn expensive_computation_2() -> i32 {
+    (0..10_000_000).product::<i32>().wrapping_rem(1_000_000)
+}
+```
+---
+
+## 6. 分支预测优化
+
+### 6.1 减少分支
+
+```rust
+// ❌ 不优：频繁分支
+fn count_positives_branchy(data: &[i32]) -> usize {
+    let mut count = 0;
+    for &x in data {
+        if x > 0 {
+            count += 1;
+        }
+    }
+    count
+}
+
+// ✅ 优化：无分支
+fn count_positives_branchless(data: &[i32]) -> usize {
+    data.iter().filter(|&&x| x > 0).count()
+}
+```
+### 6.2 分支预测提示
+
+```rust
+// 使用 likely/unlikely 宏（需要 nightly）
+#[cfg(feature = "nightly")]
+fn with_branch_hint(x: i32) -> i32 {
+    if std::intrinsics::likely(x > 0) {
+        x * 2
+    } else {
+        x
+    }
+}
+```
+---
+
+## 7. 性能测试与分析
+
+### 7.1 Criterion 基准测试
+
+```rust
+// benches/my_benchmark.rs
+use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
+
+fn fibonacci_iterative(n: u32) -> u64 {
+    let (mut a, mut b) = (0, 1);
+    for _ in 0..n {
+        let temp = a;
+        a = b;
+        b = temp + b;
+    }
+    a
+}
+
+fn fibonacci_recursive(n: u32) -> u64 {
+    match n {
+        0 => 0,
+        1 => 1,
+        _ => fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2),
+    }
+}
+
+fn bench_fibonacci(c: &mut Criterion) {
+    let mut group = c.benchmark_group("fibonacci");
+
+    for n in [10, 20, 30].iter() {
+        group.bench_with_input(BenchmarkId::new("iterative", n), n, |b, &n| {
+            b.iter(|| fibonacci_iterative(black_box(n)))
+        });
+
+        if *n <= 20 {  // 递归版本太慢
+            group.bench_with_input(BenchmarkId::new("recursive", n), n, |b, &n| {
+                b.iter(|| fibonacci_recursive(black_box(n)))
+            });
+        }
+    }
+
+    group.finish();
+}
+
+criterion_group!(benches, bench_fibonacci);
+criterion_main!(benches);
+```
+### 7.2 使用 flamegraph
+
+```bash
+# 安装
+cargo install flamegraph
+
+# 生成火焰图
+cargo flamegraph --bin myapp
+
+# 查看 flamegraph.svg
+```
+### 7.3 使用 perf
+
+```bash
+# Linux 性能分析
+cargo build --release
+perf record --call-graph=dwarf ./target/release/myapp
+perf report
+```
+---
+
+## 8. 实战优化案例
+
+### 案例 1: 大数组求和优化
+
+```rust
+use std::time::Instant;
+
+// 版本1: 朴素实现
+fn sum_v1(data: &[i32]) -> i64 {
+    let mut sum = 0i64;
+    for &x in data {
+        sum += x as i64;
+    }
+    sum
+}
+
+// 版本2: 迭代器
+fn sum_v2(data: &[i32]) -> i64 {
+    data.iter().map(|&x| x as i64).sum()
+}
+
+// 版本3: 并行
+fn sum_v3(data: &[i32]) -> i64 {
+    use rayon::prelude::*;
+    data.par_iter().map(|&x| x as i64).sum()
+}
+
+// 版本4: SIMD (示例)
+fn sum_v4(data: &[i32]) -> i64 {
+    // 使用 SIMD 指令加速
+    // 实际实现需要 packed_simd 或 std::simd
+    data.iter().map(|&x| x as i64).sum()
+}
+
+fn benchmark_sum() {
+    let data: Vec<i32> = (0..10_000_000).collect();
+
+    let start = Instant::now();
+    let _ = sum_v1(&data);
+    println!("v1 朴素: {:?}", start.elapsed());
+
+    let start = Instant::now();
+    let _ = sum_v2(&data);
+    println!("v2 迭代器: {:?}", start.elapsed());
+
+    let start = Instant::now();
+    let _ = sum_v3(&data);
+    println!("v3 并行: {:?}", start.elapsed());
+}
+```
+### 案例 2: 字符串处理优化
+
+```rust
+// ❌ 不优：多次分配
+fn process_strings_slow(lines: &[String]) -> Vec<String> {
+    lines.iter()
+        .map(|s| s.to_lowercase())
+        .map(|s| s.trim().to_string())
+        .filter(|s| !s.is_empty())
+        .collect()
+}
+
+// ✅ 优化：减少分配
+fn process_strings_fast(lines: &[String]) -> Vec<String> {
+    lines.iter()
+        .filter_map(|s| {
+            let trimmed = s.trim();
+            if trimmed.is_empty() {
+                None
+            } else {
+                Some(trimmed.to_lowercase())
+            }
+        })
+        .collect()
+}
+
+// ✅ 进一步优化：复用内存
+fn process_strings_inplace(lines: &mut [String]) {
+    for s in lines.iter_mut() {
+        s.make_ascii_lowercase();
+        let trimmed = s.trim();
+        if s != trimmed {
+            *s = trimmed.to_string();
+        }
+    }
+    lines.retain(|s| !s.is_empty());
+}
+```
+### 案例 3: 图遍历优化
+
+```rust
+use std::collections::{HashMap, HashSet, VecDeque};
+
+// 方案1: 使用 HashSet 去重
+fn bfs_v1(graph: &HashMap<i32, Vec<i32>>, start: i32) -> Vec<i32> {
+    let mut visited = HashSet::new();
+    let mut queue = VecDeque::new();
+    let mut result = Vec::new();
+
+    queue.push_back(start);
+    visited.insert(start);
+
+    while let Some(node) = queue.pop_front() {
+        result.push(node);
+
+        if let Some(neighbors) = graph.get(&node) {
+            for &neighbor in neighbors {
+                if visited.insert(neighbor) {
+                    queue.push_back(neighbor);
+                }
+            }
+        }
+    }
+
+    result
+}
+
+// 方案2: 使用位向量（适用于节点ID连续）
+fn bfs_v2(graph: &HashMap<i32, Vec<i32>>, start: i32, max_node: usize) -> Vec<i32> {
+    let mut visited = vec![false; max_node + 1];
+    let mut queue = VecDeque::new();
+    let mut result = Vec::new();
+
+    queue.push_back(start);
+    visited[start as usize] = true;
+
+    while let Some(node) = queue.pop_front() {
+        result.push(node);
+
+        if let Some(neighbors) = graph.get(&node) {
+            for &neighbor in neighbors {
+                if !visited[neighbor as usize] {
+                    visited[neighbor as usize] = true;
+                    queue.push_back(neighbor);
+                }
+            }
+        }
+    }
+
+    result
+}
+```
+---
+
+## 🔗 相关资源
+
+**内部文档**:
+
+- [算法复杂度分析](03_algorithm_complexity_analysis.md) - 理论基础
+- [并行与异步算法](05_并行与异步算法.md) - 并行优化
+- [算法工程实践](../tier_04_advanced/04_algorithm_engineering_practice.md) - 工程实践
+
+**外部资源**:
+
+- 🦀 [Rust Performance Book](https://nnethercote.github.io/perf-book/)
+- 📘 [Criterion.rs](https://bheisler.github.io/criterion.rs/book/)
+- 🌐 [Rayon 文档](https://docs.rs/rayon/)
+
+**工具**:
+
+- [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph)
+- [perf](https://perf.wiki.kernel.org/)
+- [valgrind/callgrind](https://valgrind.org/)
+
+---
+
+**返回**: [Tier 2 索引](README.md) | **下一步**: [并行与异步算法](05_并行与异步算法.md)
+
+---
+
+**文档维护**: Documentation Team
+**创建日期**: 2025-10-23
+**文档状态**: ✅ 完成
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

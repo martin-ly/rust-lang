@@ -89,7 +89,6 @@ graph TD
     F --> F2[生命周期模式]
     F --> F3[零成本抽象]
 ```
-
 ### 1.2 创建型模式关系图
 
 ```mermaid
@@ -119,7 +118,6 @@ graph LR
     P ==> |快速复制| UseCase4[游戏对象]
     OP ==> |资源重用| UseCase5[线程池]
 ```
-
 **关系说明**：
 
 | 源模式 | 目标模式 | 关系类型 | 说明                             |
@@ -158,7 +156,6 @@ graph TD
     PR --> |智能指针| RUST4[Arc/Box]
     FL --> |intern| RUST5[字符串池]
 ```
-
 **模式协作矩阵**：
 
 |            | 适配器 | 桥接 | 组合 | 装饰器 | 外观 | 享元 | 代理 |
@@ -211,7 +208,6 @@ graph TB
     ST ==> APP4[协议状态机]
     STR ==> APP5[排序算法]
 ```
-
 **行为型模式的职责分类**：
 
 ```mermaid
@@ -222,7 +218,6 @@ pie title 行为型模式职责分布
     "请求处理" : 15
     "数据遍历" : 10
 ```
-
 ---
 
 ## 🔄 第二部分：模式演化路径
@@ -253,7 +248,6 @@ graph LR
     L1_2 --> L2_2
     L1_3 --> L2_3 --> L3_2
 ```
-
 ### 2.2 Rust特有演化
 
 ```mermaid
@@ -271,7 +265,6 @@ graph TD
     B2 --> C2[观察者 - GATs借用]
     C2 --> D2[观察者 - async trait]
 ```
-
 ---
 
 ## 🧩 第三部分：模式组合策略
@@ -289,7 +282,6 @@ graph LR
     M -.单例.-> DB[(数据库)]
     C -.工厂.-> V
 ```
-
 **Rust实现关键**：
 
 - Model: 使用`观察者模式` + `Arc<RwLock<T>>`
@@ -314,7 +306,6 @@ graph TD
     EventBus -.通知.-> P2
     EventBus -.通知.-> P3
 ```
-
 **Rust实现要点**：
 
 ```rust
@@ -336,7 +327,6 @@ pub struct PluginManager {
     event_bus: Arc<EventBus>,
 }
 ```
-
 #### 组合3: 异步任务系统
 
 ```mermaid
@@ -353,7 +343,6 @@ graph TD
     Monitor --> |装饰器| Logging[日志]
     Monitor --> |装饰器| Metrics[指标]
 ```
-
 **Rust 1.92.0 实现**（自 Rust 1.90 引入）：
 
 ```rust
@@ -384,7 +373,6 @@ pub trait TaskObserver {
     fn on_task_complete(&self, result: &Result<(), Error>);
 }
 ```
-
 ### 3.2 模式组合决策树
 
 ```mermaid
@@ -412,7 +400,6 @@ graph TD
     Algorithm -->|是| UseStrategy[策略<br/>+ 模板方法]
     Algorithm -->|否| UseState[状态<br/>+ 命令]
 ```
-
 ---
 
 ## 📈 第四部分：概念关系性质矩阵
@@ -449,7 +436,6 @@ graph TB
         F8[trait bounds] --> P8[策略模式]
     end
 ```
-
 **特性适配矩阵**：
 
 | Rust 1.92.0 特性  | 最佳适配模式  | 适配度 | 性能提升 | 示例位置  | 完整示例  |
@@ -500,7 +486,6 @@ graph TD
     P7 --> S7
     P8 --> S8
 ```
-
 ### 5.2 性能需求映射
 
 ```mermaid
@@ -531,7 +516,6 @@ graph LR
     N3 --> M3 --> R3
     N4 --> M4 --> R4
 ```
-
 ---
 
 ## 🔍 第六部分：反模式与陷阱
@@ -546,7 +530,6 @@ graph TD
     Anti4[❌ 策略爆炸] --> Fix4[✅ 配置驱动]
     Anti5[❌ 状态图混乱] --> Fix5[✅ 类型状态]
 ```
-
 **反模式对照表**：
 
 | 反模式         | 问题         | Rust陷阱          | 正确做法              |
@@ -587,7 +570,6 @@ impl Subject {
     }
 }
 ```
-
 ---
 
 ## 📊 第七部分：知识图谱统计
@@ -603,7 +585,6 @@ pie title 模式类型分布
     "并行型 (5个)" : 15
     "领域型 (4个)" : 12
 ```
-
 ### 7.2 Rust特性使用统计
 
 | 特性             | 使用次数 | 主要模式               | 优势           |
@@ -631,7 +612,6 @@ graph LR
     High --> |8个模式| H1[观察者、状态等]
     VHigh --> |6个模式| V1[访问者、中介者等]
 ```
-
 ---
 
 ## 🚀 第八部分：学习路径推荐
@@ -665,7 +645,6 @@ graph TD
     Week5 --> W5_2[架构设计]
     Week5 --> W5_3[性能优化]
 ```
-
 ### 8.2 前置依赖关系
 
 | 模式         | 前置知识         | 推荐学习顺序 |
@@ -686,17 +665,14 @@ graph TD
   - [ ] 明确问题域
   - [ ] 识别变化点
   - [ ] 评估复杂度
-
 - [ ] **模式评估**
   - [ ] 查看知识图谱找到候选模式
   - [ ] 检查模式适配矩阵
   - [ ] 考虑模式组合
-
 - [ ] **Rust适配**
   - [ ] 检查Rust特性支持
   - [ ] 评估性能影响
   - [ ] 考虑所有权约束
-
 - [ ] **实施验证**
   - [ ] 编写测试用例
   - [ ] 性能基准测试
@@ -720,7 +696,6 @@ pub mod pattern_checklist {
     }
 }
 ```
-
 ---
 
 ## 🔗 相关文档
@@ -753,7 +728,6 @@ cargo run --example let_else_chain_advanced
 # dyn upcasting - 设备管理系统
 cargo run --example dyn_upcasting_adapter
 ```
-
 ---
 
 **文档维护者**: Rust 设计模式社区

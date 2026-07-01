@@ -1,0 +1,907 @@
+﻿# C09 Design Pattern - Tier 2: 最佳实践与反模式
+
+> **文档版本**: v1.0.0
+> **最后更新**: 2025-10-23
+> **Rust 版本**: 1.92.0+
+> **预计阅读**: 40 分钟
+
+---
+
+## 📊 目录
+
+- [C09 Design Pattern - Tier 2: 最佳实践与反模式](#c09-design-pattern---tier-2-最佳实践与反模式)
+  - [📊 目录](#-目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+  - [1. 设计模式最佳实践](#1-设计模式最佳实践)
+    - [1.1 优先简单设计](#11-优先简单设计)
+    - [1.2 利用 Rust 的类型系统](#12-利用-rust-的类型系统)
+    - [1.3 合理使用 trait object](#13-合理使用-trait-object)
+  - [2. Rust 特有的设计模式](#2-rust-特有的设计模式)
+    - [2.1 Newtype 模式](#21-newtype-模式)
+    - [2.2 RAII 模式](#22-raii-模式)
+    - [2.3 Extension Trait 模式](#23-extension-trait-模式)
+  - [3. 常见反模式](#3-常见反模式)
+    - [3.1 God Object (上帝对象)](#31-god-object-上帝对象)
+    - [3.2 Deref 滥用](#32-deref-滥用)
+    - [3.3 clone() 滥用](#33-clone-滥用)
+    - [3.4 unwrap() 滥用](#34-unwrap-滥用)
+  - [4. 性能反模式](#4-性能反模式)
+    - [4.1 频繁字符串拼接](#41-频繁字符串拼接)
+    - [4.2 不必要的内存分配](#42-不必要的内存分配)
+    - [4.3 过度使用 Box](#43-过度使用-box)
+  - [5. 代码审查清单](#5-代码审查清单)
+    - [5.1 设计原则检查](#51-设计原则检查)
+    - [5.2 Rust 特定检查](#52-rust-特定检查)
+    - [5.3 性能检查](#53-性能检查)
+  - [6. 重构技巧](#6-重构技巧)
+    - [6.1 提取函数](#61-提取函数)
+    - [6.2 引入类型别名](#62-引入类型别名)
+    - [6.3 使用 Builder 简化构造](#63-使用-builder-简化构造)
+  - [7. 实战案例分析](#7-实战案例分析)
+    - [7.1 案例：API 客户端设计](#71-案例api-客户端设计)
+    - [7.2 案例：插件系统设计](#72-案例插件系统设计)
+  - [8. 总结](#8-总结)
+    - [8.1 核心原则](#81-核心原则)
+    - [8.2 反模式速查表](#82-反模式速查表)
+    - [8.3 设计检查清单](#83-设计检查清单)
+  - [📚 参考资源](#-参考资源)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**最佳实践与反模式指南 (Best Practices and Anti-patterns Guide)**:
+
+- **定义**: 设计模式最佳实践和常见反模式的实践指南
+- **类型**: 实践指南文档
+- **范畴**: 设计模式、代码质量
+- **版本**: Rust 1.0+
+- **相关概念**: 最佳实践、反模式、代码审查、重构技巧
+
+### 属性特征
+
+**核心属性**:
+
+- **最佳实践**: 优先简单设计、利用类型系统、合理使用 trait object
+- **Rust 特有模式**: Newtype、RAII、Extension Trait
+- **常见反模式**: God Object、Deref 滥用、clone() 滥用、unwrap() 滥用
+- **性能反模式**: 频繁字符串拼接、不必要的内存分配、过度使用 Box
+
+**性能特征**:
+
+- **代码质量**: 提高代码可维护性
+- **性能优化**: 避免性能反模式
+- **适用场景**: 代码审查、重构、性能优化
+
+### 关系连接
+
+**组合关系**:
+
+- 最佳实践与反模式指南 --[covers]--> 最佳实践和反模式
+- 高质量代码 --[uses]--> 最佳实践与反模式
+
+**依赖关系**:
+
+- 最佳实践 --[depends-on]--> 设计模式知识
+- 代码质量 --[depends-on]--> 最佳实践与反模式指南
+
+### 思维导图
+
+```text
+最佳实践与反模式指南
+│
+├── 最佳实践
+│   ├── 优先简单设计
+│   └── 利用类型系统
+├── Rust 特有模式
+│   ├── Newtype
+│   └── RAII
+├── 常见反模式
+│   ├── God Object
+│   └── clone() 滥用
+└── 性能反模式
+    └── 频繁字符串拼接
+```
+---
+
+## 1. 设计模式最佳实践
+
+### 1.1 优先简单设计
+
+**原则**: 先写简单代码，必要时再引入模式。
+
+```rust
+// ❌ 过度设计：为单一功能引入工厂模式
+trait ShapeFactory {
+    fn create_shape(&self) -> Box<dyn Shape>;
+}
+
+struct CircleFactory;
+impl ShapeFactory for CircleFactory {
+    fn create_shape(&self) -> Box<dyn Shape> {
+        Box::new(Circle { radius: 1.0 })
+    }
+}
+
+// ✅ 简单设计：直接创建
+struct Circle {
+    radius: f64,
+}
+
+impl Circle {
+    fn new(radius: f64) -> Self {
+        Self { radius }
+    }
+}
+
+fn main() {
+    let circle = Circle::new(1.0); // 清晰直接
+}
+```
+### 1.2 利用 Rust 的类型系统
+
+**类型状态模式**：在编译期保证状态正确性。
+
+```rust
+// 使用类型状态模式实现安全的连接管理
+struct Disconnected;
+struct Connected;
+
+struct Connection<State> {
+    url: String,
+    _state: std::marker::PhantomData<State>,
+}
+
+impl Connection<Disconnected> {
+    fn new(url: String) -> Self {
+        Self {
+            url,
+            _state: std::marker::PhantomData,
+        }
+    }
+
+    // 只有断开状态才能连接
+    fn connect(self) -> Connection<Connected> {
+        println!("连接到: {}", self.url);
+        Connection {
+            url: self.url,
+            _state: std::marker::PhantomData,
+        }
+    }
+}
+
+impl Connection<Connected> {
+    // 只有连接状态才能发送数据
+    fn send(&self, data: &str) {
+        println!("发送数据: {}", data);
+    }
+
+    // 只有连接状态才能断开
+    fn disconnect(self) -> Connection<Disconnected> {
+        println!("断开连接");
+        Connection {
+            url: self.url,
+            _state: std::marker::PhantomData,
+        }
+    }
+}
+
+fn main() {
+    let conn = Connection::new("localhost".to_string());
+    // conn.send("data"); // ❌ 编译错误：未连接无法发送
+
+    let conn = conn.connect();
+    conn.send("Hello"); // ✅ 安全发送
+
+    let conn = conn.disconnect();
+    // conn.send("data"); // ❌ 编译错误：已断开无法发送
+}
+```
+### 1.3 合理使用 trait object
+
+**权衡**：
+
+- **静态分派**：编译期确定类型，性能更好
+- **动态分派**：运行时多态，更灵活
+
+```rust
+// ✅ 静态分派：适合已知类型
+fn process_static<T: Display>(item: T) {
+    println!("{}", item);
+}
+
+// ✅ 动态分派：适合异构集合
+fn process_dynamic(items: Vec<Box<dyn Display>>) {
+    for item in items {
+        println!("{}", item);
+    }
+}
+
+use std::fmt::Display;
+
+fn main() {
+    // 静态分派示例
+    process_static(42);
+    process_static("Hello");
+
+    // 动态分派示例
+    let items: Vec<Box<dyn Display>> = vec![
+        Box::new(42),
+        Box::new("Hello"),
+    ];
+    process_dynamic(items);
+}
+```
+---
+
+## 2. Rust 特有的设计模式
+
+### 2.1 Newtype 模式
+
+**目的**：为现有类型添加语义或实现外部 trait。
+
+```rust
+// 为基础类型添加语义
+struct UserId(u64);
+struct OrderId(u64);
+
+impl UserId {
+    fn new(id: u64) -> Self {
+        UserId(id)
+    }
+
+    fn value(&self) -> u64 {
+        self.0
+    }
+}
+
+fn process_user(user_id: UserId) {
+    println!("处理用户: {}", user_id.value());
+}
+
+fn main() {
+    let user_id = UserId::new(123);
+    // let order_id = OrderId(456);
+
+    process_user(user_id);
+    // process_user(order_id); // ❌ 编译错误：类型不匹配
+}
+```
+**孤儿规则绕过**：
+
+```rust
+use std::fmt;
+
+// 为外部类型实现外部 trait
+struct Wrapper(Vec<String>);
+
+impl fmt::Display for Wrapper {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", self.0.join(", "))
+    }
+}
+
+fn main() {
+    let words = Wrapper(vec!["Rust".to_string(), "设计".to_string()]);
+    println!("{}", words);
+}
+```
+### 2.2 RAII 模式
+
+**资源获取即初始化**：利用 Drop trait 自动清理资源。
+
+```rust
+use std::fs::File;
+use std::io::Write;
+
+struct FileGuard {
+    file: File,
+}
+
+impl FileGuard {
+    fn new(path: &str) -> std::io::Result<Self> {
+        Ok(Self {
+            file: File::create(path)?,
+        })
+    }
+
+    fn write(&mut self, data: &str) -> std::io::Result<()> {
+        self.file.write_all(data.as_bytes())
+    }
+}
+
+impl Drop for FileGuard {
+    fn drop(&mut self) {
+        println!("文件自动关闭");
+        // 文件在此自动关闭
+    }
+}
+
+fn main() -> std::io::Result<()> {
+    {
+        let mut guard = FileGuard::new("example.txt")?;
+        guard.write("Hello RAII")?;
+    } // guard 在此离开作用域，自动关闭文件
+
+    println!("文件已安全关闭");
+    Ok(())
+}
+```
+### 2.3 Extension Trait 模式
+
+**扩展现有类型的功能**：
+
+```rust
+trait StringExt {
+    fn truncate_with_ellipsis(&self, max_len: usize) -> String;
+}
+
+impl StringExt for String {
+    fn truncate_with_ellipsis(&self, max_len: usize) -> String {
+        if self.len() <= max_len {
+            self.clone()
+        } else {
+            format!("{}...", &self[..max_len - 3])
+        }
+    }
+}
+
+fn main() {
+    let long_text = String::from("这是一个很长的字符串");
+    let truncated = long_text.truncate_with_ellipsis(10);
+    println!("{}", truncated);
+}
+```
+---
+
+## 3. 常见反模式
+
+### 3.1 God Object (上帝对象)
+
+**问题**：单个结构体承担过多职责。
+
+```rust
+// ❌ 反模式：上帝对象
+struct Application {
+    database: Database,
+    network: Network,
+    ui: UI,
+    auth: Auth,
+    logging: Logger,
+}
+
+impl Application {
+    fn connect_database(&mut self) { /* ... */ }
+    fn send_request(&self) { /* ... */ }
+    fn render_ui(&self) { /* ... */ }
+    fn authenticate(&self) { /* ... */ }
+    fn log(&self) { /* ... */ }
+}
+
+// ✅ 重构：职责分离
+struct DatabaseService {
+    connection: Database,
+}
+
+struct NetworkService {
+    client: Network,
+}
+
+struct Application {
+    database: DatabaseService,
+    network: NetworkService,
+}
+
+impl DatabaseService {
+    fn connect(&mut self) { /* ... */ }
+}
+
+impl NetworkService {
+    fn send_request(&self) { /* ... */ }
+}
+```
+### 3.2 Deref 滥用
+
+**问题**：过度使用 Deref trait 导致隐式行为。
+
+```rust
+use std::ops::Deref;
+
+// ❌ 反模式：滥用 Deref
+struct MyString(String);
+
+impl Deref for MyString {
+    type Target = String;
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+// ✅ 最佳实践：显式方法
+struct MyString2(String);
+
+impl MyString2 {
+    fn as_str(&self) -> &str {
+        &self.0
+    }
+
+    fn into_inner(self) -> String {
+        self.0
+    }
+}
+```
+**规则**：仅在智能指针类型使用 Deref。
+
+### 3.3 clone() 滥用
+
+**问题**：过度 clone 导致性能下降。
+
+```rust
+// ❌ 反模式：不必要的 clone
+fn process_data(data: Vec<i32>) -> Vec<i32> {
+    let cloned = data.clone();
+    cloned.iter().map(|&x| x * 2).collect()
+}
+
+// ✅ 重构：使用引用
+fn process_data_efficient(data: &[i32]) -> Vec<i32> {
+    data.iter().map(|&x| x * 2).collect()
+}
+
+// ✅ 或者：消费所有权
+fn process_data_consume(data: Vec<i32>) -> Vec<i32> {
+    data.into_iter().map(|x| x * 2).collect()
+}
+```
+### 3.4 unwrap() 滥用
+
+**问题**：在生产代码中过度使用 unwrap。
+
+```rust
+// ❌ 反模式：可能 panic
+fn read_config() -> Config {
+    let file = std::fs::read_to_string("config.toml").unwrap();
+    toml::from_str(&file).unwrap()
+}
+
+// ✅ 最佳实践：错误传播
+fn read_config_safe() -> Result<Config, Box<dyn std::error::Error>> {
+    let file = std::fs::read_to_string("config.toml")?;
+    let config = toml::from_str(&file)?;
+    Ok(config)
+}
+
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct Config {
+    port: u16,
+}
+```
+---
+
+## 4. 性能反模式
+
+### 4.1 频繁字符串拼接
+
+**问题**：使用 `+` 运算符频繁拼接字符串。
+
+```rust
+// ❌ 反模式：多次分配
+fn concat_inefficient(items: &[&str]) -> String {
+    let mut result = String::new();
+    for item in items {
+        result = result + item; // 每次创建新字符串
+    }
+    result
+}
+
+// ✅ 优化：使用 push_str
+fn concat_efficient(items: &[&str]) -> String {
+    let mut result = String::new();
+    for item in items {
+        result.push_str(item); // 原地修改
+    }
+    result
+}
+
+// ✅ 更优：预分配容量
+fn concat_best(items: &[&str]) -> String {
+    let total_len: usize = items.iter().map(|s| s.len()).sum();
+    let mut result = String::with_capacity(total_len);
+    for item in items {
+        result.push_str(item);
+    }
+    result
+}
+
+fn main() {
+    let items = vec!["Hello", " ", "Rust", " ", "World"];
+    println!("{}", concat_best(&items));
+}
+```
+### 4.2 不必要的内存分配
+
+```rust
+// ❌ 反模式：每次调用都分配
+fn sum_inefficient(data: &[i32]) -> i32 {
+    let vec: Vec<i32> = data.iter().map(|&x| x * 2).collect();
+    vec.iter().sum()
+}
+
+// ✅ 优化：直接计算
+fn sum_efficient(data: &[i32]) -> i32 {
+    data.iter().map(|&x| x * 2).sum()
+}
+```
+### 4.3 过度使用 Box
+
+```rust
+// ❌ 反模式：不必要的堆分配
+struct Point {
+    x: Box<i32>,
+    y: Box<i32>,
+}
+
+// ✅ 最佳实践：栈分配足够
+struct Point2 {
+    x: i32,
+    y: i32,
+}
+```
+**何时使用 Box**：
+
+- 大型数据结构
+- 递归类型
+- Trait object
+- 运行时大小未知的类型
+
+---
+
+## 5. 代码审查清单
+
+### 5.1 设计原则检查
+
+- [ ] **单一职责**：每个模块/函数只做一件事
+- [ ] **开闭原则**：易于扩展，无需修改
+- [ ] **里氏替换**：子类型可替换父类型
+- [ ] **接口隔离**：避免庞大 trait
+- [ ] **依赖倒置**：依赖抽象而非具体
+
+### 5.2 Rust 特定检查
+
+```rust
+// ✅ 检查项
+// 1. 避免不必要的 clone()
+// 2. 使用引用代替所有权转移
+// 3. 错误处理用 Result 而非 panic
+// 4. 优先使用迭代器而非循环
+// 5. 合理使用生命周期标注
+// 6. 避免过度使用 unsafe
+
+// 示例：优先使用迭代器
+fn process_items_good(items: &[i32]) -> Vec<i32> {
+    items.iter()
+        .filter(|&&x| x > 0)
+        .map(|&x| x * 2)
+        .collect()
+}
+
+// 而非手动循环
+fn process_items_verbose(items: &[i32]) -> Vec<i32> {
+    let mut result = Vec::new();
+    for &item in items {
+        if item > 0 {
+            result.push(item * 2);
+        }
+    }
+    result
+}
+```
+### 5.3 性能检查
+
+- [ ] **预分配容量**：`Vec::with_capacity`
+- [ ] **避免频繁克隆**：使用引用
+- [ ] **选择合适的数据结构**：`HashMap` vs `BTreeMap`
+- [ ] **考虑缓存局部性**：`Vec<Struct>` vs `Vec<Box<Struct>>`
+- [ ] **使用并行迭代器**：CPU 密集型任务用 Rayon
+
+---
+
+## 6. 重构技巧
+
+### 6.1 提取函数
+
+```rust
+// ❌ 重构前：冗长函数
+fn process_user_data(data: &str) {
+    // 解析 JSON
+    let parsed = serde_json::from_str::<serde_json::Value>(data).unwrap();
+
+    // 验证数据
+    if !parsed["name"].is_string() {
+        panic!("无效名称");
+    }
+
+    // 保存到数据库
+    println!("保存: {}", parsed["name"]);
+}
+
+// ✅ 重构后：职责清晰
+fn parse_json(data: &str) -> Result<serde_json::Value, serde_json::Error> {
+    serde_json::from_str(data)
+}
+
+fn validate_user(data: &serde_json::Value) -> Result<(), String> {
+    if !data["name"].is_string() {
+        return Err("无效名称".to_string());
+    }
+    Ok(())
+}
+
+fn save_user(data: &serde_json::Value) {
+    println!("保存: {}", data["name"]);
+}
+
+fn process_user_data_refactored(data: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let parsed = parse_json(data)?;
+    validate_user(&parsed)?;
+    save_user(&parsed);
+    Ok(())
+}
+```
+### 6.2 引入类型别名
+
+```rust
+// ❌ 重构前：类型重复
+fn process(data: Vec<HashMap<String, Vec<i32>>>) -> Vec<HashMap<String, Vec<i32>>> {
+    data
+}
+
+// ✅ 重构后：类型别名
+use std::collections::HashMap;
+
+type DataMap = HashMap<String, Vec<i32>>;
+type DataCollection = Vec<DataMap>;
+
+fn process_clean(data: DataCollection) -> DataCollection {
+    data
+}
+```
+### 6.3 使用 Builder 简化构造
+
+```rust
+// ❌ 重构前：参数过多
+struct Config {
+    host: String,
+    port: u16,
+    timeout: u64,
+    retries: usize,
+}
+
+impl Config {
+    fn new(host: String, port: u16, timeout: u64, retries: usize) -> Self {
+        Self { host, port, timeout, retries }
+    }
+}
+
+// ✅ 重构后：Builder 模式
+struct ConfigBuilder {
+    host: Option<String>,
+    port: Option<u16>,
+    timeout: u64,
+    retries: usize,
+}
+
+impl ConfigBuilder {
+    fn new() -> Self {
+        Self {
+            host: None,
+            port: None,
+            timeout: 30,
+            retries: 3,
+        }
+    }
+
+    fn host(mut self, host: impl Into<String>) -> Self {
+        self.host = Some(host.into());
+        self
+    }
+
+    fn port(mut self, port: u16) -> Self {
+        self.port = Some(port);
+        self
+    }
+
+    fn timeout(mut self, timeout: u64) -> Self {
+        self.timeout = timeout;
+        self
+    }
+
+    fn build(self) -> Result<Config, String> {
+        Ok(Config {
+            host: self.host.ok_or("缺少 host")?,
+            port: self.port.ok_or("缺少 port")?,
+            timeout: self.timeout,
+            retries: self.retries,
+        })
+    }
+}
+
+fn main() {
+    let config = ConfigBuilder::new()
+        .host("localhost")
+        .port(8080)
+        .timeout(60)
+        .build()
+        .unwrap();
+    println!("配置: {}:{}", config.host, config.port);
+}
+```
+---
+
+## 7. 实战案例分析
+
+### 7.1 案例：API 客户端设计
+
+**需求**：设计一个 HTTP API 客户端库。
+
+```rust
+use std::collections::HashMap;
+
+// ✅ 良好设计
+pub struct ApiClient {
+    base_url: String,
+    headers: HashMap<String, String>,
+}
+
+impl ApiClient {
+    pub fn new(base_url: impl Into<String>) -> Self {
+        Self {
+            base_url: base_url.into(),
+            headers: HashMap::new(),
+        }
+    }
+
+    pub fn with_header(mut self, key: impl Into<String>, value: impl Into<String>) -> Self {
+        self.headers.insert(key.into(), value.into());
+        self
+    }
+
+    pub async fn get(&self, path: &str) -> Result<String, Box<dyn std::error::Error>> {
+        let url = format!("{}{}", self.base_url, path);
+        println!("GET {}", url);
+        // 实际实现使用 reqwest 等库
+        Ok("响应数据".to_string())
+    }
+}
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let client = ApiClient::new("https://api.example.com")
+        .with_header("Authorization", "Bearer token")
+        .with_header("User-Agent", "MyApp/1.0");
+
+    let response = client.get("/users").await?;
+    println!("响应: {}", response);
+    Ok(())
+}
+```
+### 7.2 案例：插件系统设计
+
+```rust
+use std::collections::HashMap;
+
+// 定义插件 trait
+trait Plugin: Send + Sync {
+    fn name(&self) -> &str;
+    fn execute(&self, input: &str) -> String;
+}
+
+// 插件管理器
+struct PluginManager {
+    plugins: HashMap<String, Box<dyn Plugin>>,
+}
+
+impl PluginManager {
+    fn new() -> Self {
+        Self {
+            plugins: HashMap::new(),
+        }
+    }
+
+    fn register(&mut self, plugin: Box<dyn Plugin>) {
+        let name = plugin.name().to_string();
+        self.plugins.insert(name, plugin);
+    }
+
+    fn execute(&self, plugin_name: &str, input: &str) -> Option<String> {
+        self.plugins.get(plugin_name).map(|p| p.execute(input))
+    }
+}
+
+// 示例插件
+struct UpperCasePlugin;
+
+impl Plugin for UpperCasePlugin {
+    fn name(&self) -> &str {
+        "uppercase"
+    }
+
+    fn execute(&self, input: &str) -> String {
+        input.to_uppercase()
+    }
+}
+
+fn main() {
+    let mut manager = PluginManager::new();
+    manager.register(Box::new(UpperCasePlugin));
+
+    let result = manager.execute("uppercase", "hello").unwrap();
+    println!("结果: {}", result);
+}
+```
+---
+
+## 8. 总结
+
+### 8.1 核心原则
+
+1. **简单优先**：不过度设计
+2. **类型安全**：利用 Rust 类型系统
+3. **零成本抽象**：性能与抽象兼得
+4. **错误处理**：使用 Result，避免 panic
+5. **所有权优先**：减少不必要的克隆
+
+### 8.2 反模式速查表
+
+| 反模式          | 问题     | 解决方案    |
+| :--- | :--- | :--- || **上帝对象**    | 职责过多 | 职责分离    |
+| **Deref 滥用**  | 隐式行为 | 显式方法    |
+| **clone 滥用**  | 性能下降 | 使用引用    |
+| **unwrap 滥用** | 易 panic | 错误传播    |
+| **频繁分配**    | 内存开销 | 预分配/复用 |
+
+### 8.3 设计检查清单
+
+- [ ] 是否遵循 SOLID 原则？
+- [ ] 是否合理使用 Rust 类型系统？
+- [ ] 错误处理是否完善？
+- [ ] 是否有不必要的 clone？
+- [ ] 是否考虑了性能优化？
+- [ ] 代码是否易于测试？
+
+---
+
+## 📚 参考资源
+
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+- [Effective Rust](https://www.lurklurk.org/effective-rust/)
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+
+---
+
+**🎉 恭喜！** 你已完成 C09 Design Pattern Tier 2 全部实践指南的学习。
+
+**下一步建议**：
+
+- 深入学习 [Tier 3: 技术参考](../tier_03_references/README.md)
+- 探索 [Tier 4: 高级主题](../tier_04_advanced/README.md)
+- 实践应用到实际项目中
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -101,28 +101,22 @@
    - 113+ 个知识点分类
    - 180+ 个代码示例
    - 8周完整学习计划
-
 2. **[模式对比文档](docs/ASYNC_PATTERNS_COMPARISON_2025.md)** (6,000+ 字)
    - 三大模式全面对比
    - 性能基准测试数据
    - 选型决策树
-
 3. **[最终报告](docs/异步编程全面梳理最终报告_2025_10_06.md)** (3,000+ 字)
    - 中文详细报告
    - 完整实现细节
-
 4. **[实现总结](docs/COMPREHENSIVE_ASYNC_IMPLEMENTATION_SUMMARY_2025.md)** (3,000+ 字)
    - 英文技术总结
    - 架构分析
-
-5. **[快速入门指南](异步编程全面梳理_README_2025_10_06.md)** (2,000+ 字)
+5. **[快速入门指南](async_programming_comprehensive_review_readme_2025_10_06.md)** (2,000+ 字)
    - 快速开始步骤
    - 推荐阅读顺序
-
 6. **[项目索引](INDEX.md)** (4,000+ 字) ⭐ 新增
    - 完整导航系统
    - 按主题/难度/场景索引
-
 7. **[主 README](README.md)** (5,000+ 字)
    - 项目概述
    - 完整特性列表
@@ -146,24 +140,20 @@
    - 优先级调度
    - 批处理优化
    - 性能基准测试
-
 2. **Actor 模式** (2,100+ 行)
    - 消息传递并发
    - 银行账户系统
    - 监督策略
    - 性能测试
-
 3. **CSP 模式** (1,100+ 行)
    - 通道通信
    - 数据处理流水线
    - 分布式任务调度
    - 实时日志聚合
-
 4. **终极理论与实践** (1,500+ 行)
    - 三大模式综合
    - 设计模式集合
    - 完整理论形式化
-
 5. **性能优化指南** (600+ 行)
    - 对象池
    - 零拷贝
@@ -313,12 +303,11 @@
 cat INDEX.md
 
 # 2. 查看快速入门指南
-cat 异步编程全面梳理_README_2025_10_06.md
+cat async_programming_comprehensive_review_readme_2025_10_06.md
 
 # 3. 运行第一个示例
 cargo run --example tokio_smoke
 ```
-
 ### 深入学习 (1-2周)
 
 ```bash
@@ -333,7 +322,6 @@ cargo run --example reactor_pattern_comprehensive_2025
 cargo run --example actor_pattern_comprehensive_2025
 cargo run --example csp_pattern_comprehensive_2025
 ```
-
 ### 实践应用 (1-2月)
 
 ```bash
@@ -347,7 +335,6 @@ cargo run --example async_debugging_monitoring_2025
 cargo run --example actor_csp_hybrid_advanced
 cargo run --example async_api_gateway_2025
 ```
-
 ---
 
 ## 📈 项目成果
@@ -372,22 +359,18 @@ cargo run --example async_api_gateway_2025
    - Reactor、Actor、CSP 三大模式
    - 每个模式 1,000+ 行完整代码
    - 包含形式化定义和证明
-
 2. **最详细的文档体系**
    - 41,000+ 字核心文档
    - 120+ 个知识点分类
    - 180+ 个代码示例
-
 3. **最清晰的学习路径**
    - 8周完整学习计划
    - 按难度分级
    - 推荐阅读顺序
-
 4. **最实用的选型指南**
    - 性能基准测试数据
    - 详细的使用场景分析
    - 选型决策树
-
 5. **最完善的导航系统**
    - 完整的项目索引
    - 按主题/难度/场景查找
@@ -482,12 +465,10 @@ cargo run --example async_api_gateway_2025
    - Web 服务器完整实现
    - 聊天系统完整实现
    - 数据处理管道完整实现
-
 2. 增加测试覆盖率
    - 集成测试
    - 压力测试
    - 边界测试
-
 3. 扩展文档
    - 性能调优指南
    - 故障排查指南
@@ -499,12 +480,10 @@ cargo run --example async_api_gateway_2025
    - 基础概念讲解
    - 模式实现演示
    - 实战项目开发
-
 2. 在线课程
    - 系统化课程设计
    - 配套练习题
    - 项目作业
-
 3. 社区建设
    - 开源贡献指南
    - 社区讨论论坛

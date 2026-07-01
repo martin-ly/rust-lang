@@ -5,7 +5,7 @@
 
 ---
 
-**内容已整合至**：[05_进程监控与诊断](../tier_02_guides/05_进程监控与诊断.md)
+**内容已整合至**：[05_进程监控与诊断](../tier_02_guides/05_process_monitoring_and_diagnostics.md)
 
 **相关**: [11_practical_examples](11_practical_examples.md)
 ---

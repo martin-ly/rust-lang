@@ -54,7 +54,6 @@ match opcode {
     _ => unknown(),
 }
 ```
-
 **使用跳转表**：
 
 ```asm
@@ -68,7 +67,6 @@ jump_table:
     dq mul
     dq div
 ```
-
 **不使用跳转表（线性比较）**：
 
 ```asm
@@ -80,7 +78,6 @@ cmp rdi, 2
 je mul
 ; ...
 ```
-
 ### 跳转表的优缺点 {#跳转表的优缺点}
 
 | 维度 | 使用跳转表 | 不使用跳转表 |
@@ -103,7 +100,6 @@ rustc -C jump-tables=true src/main.rs
 # 禁用跳转表 {#禁用跳转表}
 rustc -C jump-tables=false src/main.rs
 ```
-
 ### 配置位置 {#配置位置}
 
 | 位置 | 示例 |
@@ -124,7 +120,6 @@ rustc -C jump-tables=false src/main.rs
 # 安全关键构建 {#安全关键构建}
 RUSTFLAGS="-C jump-tables=false" cargo build --release
 ```
-
 ### 场景 2：分支预测优化 {#场景-2分支预测优化}
 
 当 `match` 的分支值分布不均匀（少数高频分支），线性比较配合分支预测可能优于跳转表：
@@ -138,12 +133,10 @@ match error_code {
     // ... 其他极少出现
 }
 ```
-
 ```bash
 # 测试禁用跳转表后的性能 {#测试禁用跳转表后的性能}
 RUSTFLAGS="-C jump-tables=false" cargo bench
 ```
-
 ### 场景 3：嵌入式系统 {#场景-3嵌入式系统}
 
 资源受限的嵌入式系统可能希望禁用跳转表以节省代码空间或避免间接跳转的开销：
@@ -153,7 +146,6 @@ RUSTFLAGS="-C jump-tables=false" cargo bench
 [target.thumbv7em-none-eabihf]
 rustflags = ["-C", "jump-tables=false"]
 ```
-
 ---
 
 ## 四、对性能的影响 {#四对性能的影响}
@@ -170,7 +162,6 @@ RUSTFLAGS="-C jump-tables=false" cargo bench -- no-jt
 # 3. 对比结果 {#3-对比结果}
 cargo bench -- baseline no-jt
 ```
-
 ### 典型结果 {#典型结果}
 
 | 场景 | 启用跳转表 | 禁用跳转表 |
@@ -191,7 +182,6 @@ cargo bench -- baseline no-jt
 inherits = "release"
 rustflags = ["-C", "jump-tables=false", "-C", "opt-level=3"]
 ```
-
 ### 模式 2：与 PGO 配合 {#模式-2与-pgo-配合}
 
 ```bash
@@ -202,7 +192,6 @@ cargo build --release
 # 2. 最终构建（根据 profile 决定） {#2-最终构建根据-profile-决定}
 # 通常 PGO 会自动处理跳转表优化，无需手动干预 {#通常-pgo-会自动处理跳转表优化无需手动干预}
 ```
-
 ### 模式 3：条件编译中的选择 {#模式-3条件编译中的选择}
 
 ```rust
@@ -212,7 +201,6 @@ const _: () = {
     println!("cargo:rustc-env=RUSTFLAGS=-C jump-tables=false");
 };
 ```
-
 ---
 
 ## 六、参考 {#六参考}

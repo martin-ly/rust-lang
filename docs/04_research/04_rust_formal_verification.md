@@ -111,7 +111,6 @@ Iris 逻辑的核心概念:
 │  • 模态算子 (Modality): ▷ (later), □ (persistently)   │
 └────────────────────────────────────────────────────────┘
 ```
-
 #### 关键逻辑规则（直观理解） {#关键逻辑规则直观理解}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -125,7 +124,6 @@ P ∗ Q 表示资源 P 和 Q 占据不相交的内存区域
 
 例如:  owning(x) ∗ owning(y)  意味着 x 和 y 拥有不同的堆内存
 ```
-
 **点态谓词 (Points-to Predicate)**:
 
 ```
@@ -135,7 +133,6 @@ P ∗ Q 表示资源 P 和 Q 占据不相交的内存区域
 - 如果 ℓ ↦ v 成立，那么 ℓ 的内存是有效的
 - ℓ ↦ v 不能与其他 ℓ ↦ v' 同时成立（唯一所有权）
 ```
-
 ### 2.4 RustBelt 的方法论 {#24-rustbelt-的方法论}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -158,7 +155,6 @@ RustBelt 将 Rust 类型翻译为 Iris 逻辑断言：
 │  ⟦ &T ⟧     =  ∃ ℓ. readonly(ℓ)  (共享只读访问)         │
 └─────────────────────────────────────────────────────────┘
 ```
-
 ### 2.5 RustBelt 的关键结论 {#25-rustbelt-的关键结论}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -247,7 +243,6 @@ RefinedRust 工作流程:
 │     - Isabelle: 交互式 (复杂不变式)                       │
 └─────────────────────────────────────────────────────────┘
 ```
-
 ### 3.4 精炼类型 (Refinement Types) 示例 {#34-精炼类型-refinement-types-示例}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -271,7 +266,6 @@ impl<T> Vec<T> {
     }
 }
 ```
-
 ### 3.5 RefinedRust vs RustBelt 对比 {#35-refinedrust-vs-rustbelt-对比}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -382,7 +376,6 @@ impl<T> Vec<T> {
         │         │  │ 模型    │  │ (PLDI'24)│
         └─────────┘  └─────────┘  └──────────┘
 ```
-
 ---
 
 ## 5. 与项目已有形式化证明内容的衔接 {#5-与项目已有形式化证明内容的衔接}
@@ -454,7 +447,6 @@ impl<T> Vec<T> {
    (Iris 逻辑核心论文)
 
 5. **Jung, R.** *"Understanding and Evolving the Rust Programming Language"*. PhD Thesis, Saarland University, 2020.
-
 6. **Reynolds, J. C.** *"Separation Logic: A Logic for Shared Mutable Data Structures"*. LICS 2002.
    IEEE, 2002.
 
@@ -465,15 +457,10 @@ impl<T> Vec<T> {
    <https://www.ralfj.de/blog/2023/06/02/tree-borrows.html>
 
 9. **Villani, W., Hostert, S., Dreyer, D., & Jung, R.** *"Tree Borrows: A Read-Optimized Aliasing Model for Rust"*. PLDI 2025 Distinguished Paper Award. <https://plv.mpi-sws.org/rustbelt/tree-borrows/>
-
 10. **Miri POPL 2026** (Preprint). *"Miri: An Interpreter for Rust's Mid-level IR"*. 扩展 Miri 语义解释器以支持 Tree Borrows 和 128-bit 平台模拟。
-
 11. **KVerus** (arXiv 2026-05). *"Automated Proof Generation for Rust using Retrieval-Augmented Generation"*. 将自然语言规格自动转换为 Verus 证明义务。
-
 12. **AutoVerus** (OOPSLA 2025). *"Neuro-Symbolic Verification of Rust Programs"*. LLM 生成候选不变式 + SMT 验证的混合工作流。
-
 13. **Vest** (USENIX Security 2025). *"Verified Network Protocol Implementation in Rust"*. 基于 Verus 的可验证 TLS/QUIC 协议栈框架。
-
 14. **Creusot POPL 2026 Tutorial**. *"Verified Software Development with Creusot"*. <https://creusot-rs.github.io/>
 
 ---

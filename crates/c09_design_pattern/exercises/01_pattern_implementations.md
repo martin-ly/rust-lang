@@ -50,7 +50,6 @@ fn main() {
     println!("Singleton verified!");
 }
 ```
-
 **任务**:
 
 1. 实现延迟初始化
@@ -120,7 +119,6 @@ fn main() {
     println!("{}", product_b.operation());
 }
 ```
-
 **任务**:
 
 1. 实现抽象工厂模式
@@ -184,7 +182,6 @@ fn main() {
     event_bus.publish("user.logout", "Alice");
 }
 ```
-
 **任务**:
 
 1. 实现取消订阅
@@ -248,7 +245,6 @@ impl EventBus {
     }
 }
 ```
-
 </details>
 
 ---
@@ -339,7 +335,6 @@ fn main() {
     println!("Quick sorted: {:?}", data);
 }
 ```
-
 **任务**:
 
 1. 添加更多排序策略

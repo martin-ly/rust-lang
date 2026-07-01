@@ -75,7 +75,6 @@ pub struct Process {
     inner: imp::Process,
 }
 ```
-
 **命题2.1.1**：
 Rust进程模型提供了内存安全的隔离保证，
 即一个进程不能直接访问另一个进程的内存空间，除非通过显式的共享机制。
@@ -96,7 +95,6 @@ Rust提供了对进程完整生命周期的管理能力，从创建到终止。
 ```math
 LifeCycle(P) = Created → Running → (Waiting →)* → Terminated
 ```
-
 Rust中的进程生命周期管理主要通过`Command`和`Child`类型实现：
 
 ```rust
@@ -104,7 +102,6 @@ let mut command = Command::new("program");
 let child = command.spawn()?;  // Created → Running
 let status = child.wait()?;   // Wait for Terminated
 ```
-
 **定理2.2.1 (进程终止资源释放)**：
 当Rust中的`Child`对象被丢弃且进程终止时，所有相关系统资源将被安全释放。
 
@@ -127,7 +124,6 @@ pub struct Command {
     // 其他配置参数...
 }
 ```
-
 进程创建的关键操作：
 
 ```rust
@@ -143,7 +139,6 @@ let child = cmd.spawn()?;
 // 或执行并等待完成
 let output = cmd.output()?;
 ```
-
 **定理2.3.1 (进程创建安全性)**：
 Rust的进程创建机制确保了即使子进程出现故障，父进程也不会受到内存安全威胁。
 
@@ -167,7 +162,6 @@ Command::new("program")
     .env_clear()  // 清空环境变量
     .env("PATH", "/usr/bin")  // 设置特定环境变量
 ```
-
 **命题2.4.1 (资源限制继承)**：
 子进程默认继承父进程的资源限制，除非显式修改。
 
@@ -179,7 +173,6 @@ use nix::sys::resource::{setrlimit, Resource};
 // 设置最大虚拟内存限制
 setrlimit(Resource::RLIMIT_AS, 1024 * 1024 * 100, 1024 * 1024 * 200)?;
 ```
-
 ## 3. 进程间通信机制
 
 ### 3.1 管道与命名管道
@@ -210,7 +203,6 @@ if let Some(stdin) = child.stdin.as_mut() {
 // 获取子进程输出
 let output = child.wait_with_output()?;
 ```
-
 **命名管道**（FIFO）允许无关进程通过文件系统路径通信：
 
 ```rust
@@ -227,7 +219,6 @@ let fifo = OpenOptions::new()
     .write(true)
     .open("/tmp/my_fifo")?;
 ```
-
 **定理3.1.1 (管道原子写入)**：
 对管道的写入操作，若小于PIPE_BUF（通常为4KB），保证是原子的。
 
@@ -259,7 +250,6 @@ thread::spawn(move || {
 // 客户端
 let stream = UnixStream::connect("/tmp/sock")?;
 ```
-
 对于网络套接字，Rust标准库提供了`TcpStream`和`UdpSocket`：
 
 ```rust
@@ -274,7 +264,6 @@ for stream in listener.incoming() {
 // TCP客户端
 let stream = TcpStream::connect("127.0.0.1:8080")?;
 ```
-
 **命题3.2.1 (套接字类型安全)**：
 Rust的套接字API通过类型系统确保正确使用协议特定操作，防止协议混用错误。
 
@@ -300,7 +289,6 @@ let shmem = ShmemConf::new()
 let mut data = unsafe { shmem.as_slice_mut() };
 data[0] = 42;
 ```
-
 **定理3.3.1 (共享内存并发访问)**：
 共享内存的并发访问必须通过同步机制保护，否则可能导致数据竞争。
 
@@ -329,7 +317,6 @@ thread::spawn(move || {
     }
 });
 ```
-
 **命题3.4.1 (信号处理器安全性)**：
 信号处理器中的操作应是异步信号安全的，否则可能导致未定义行为。
 
@@ -338,7 +325,6 @@ thread::spawn(move || {
 ```rust
 SafeSignalHandler(H) ⟺ ∀op ∈ H, AsyncSignalSafe(op)
 ```
-
 ### 3.5 消息队列
 
 消息队列提供了结构化的消息传递机制。
@@ -365,7 +351,6 @@ let (_, tx): (_, IpcSender<String>) = server.accept()?;
 // 发送消息
 tx.send("Hello from parent".to_string())?;
 ```
-
 **定理3.5.1 (消息队列原子性)**：
 消息队列保证消息的原子性传递，一个消息要么完全接收，要么完全不接收。
 
@@ -396,7 +381,6 @@ let handle = thread::spawn(move || {
 
 handle.join().unwrap();
 ```
-
 读写锁允许多个读取者或一个写入者：
 
 ```rust
@@ -416,7 +400,6 @@ let data = Arc::new(RwLock::new(vec![1, 2, 3]));
     data_mut.push(4);
 }
 ```
-
 **定理4.1.1 (互斥锁正确性)**：
 正确使用的互斥锁确保受保护资源的互斥访问，防止数据竞争。
 
@@ -426,7 +409,6 @@ let data = Arc::new(RwLock::new(vec![1, 2, 3]));
 ∀t1,t2 ∈ Threads, t1 ≠ t2:
   Holds(t1, M) ⟹ ¬Holds(t2, M)
 ```
-
 其中`Holds(t, M)`表示线程`t`持有互斥锁`M`。
 
 **定理4.1.2 (读写锁正确性)**：
@@ -439,7 +421,6 @@ let data = Arc::new(RwLock::new(vec![1, 2, 3]));
   (HoldsReadLock(t1, RW) ∧ HoldsReadLock(t2, RW)) ⟹ Compatible
   (HoldsWriteLock(t1, RW) ∧ (HoldsReadLock(t2, RW) ∨ HoldsWriteLock(t2, RW))) ⟹ t1 = t2
 ```
-
 ### 4.2 条件变量
 
 条件变量用于线程等待直到特定条件满足。
@@ -469,7 +450,6 @@ while !*started {
     started = cvar.wait(started).unwrap();
 }
 ```
-
 **条件变量的形式化语义**：
 
 ```math
@@ -487,7 +467,6 @@ NotifyAll(CV) = {
   Wake up all threads waiting on CV;
 }
 ```
-
 **命题4.2.1 (条件变量唤醒保证)**：
 条件变量的唤醒操作不保证被唤醒的线程立即执行，唤醒信号可能丢失，因此条件检查应在循环中进行。
 
@@ -513,7 +492,6 @@ for _ in 0..10 {
     });
 }
 ```
-
 屏障用于线程同步至特定点：
 
 ```rust
@@ -528,7 +506,6 @@ for _ in 0..10 {
     });
 }
 ```
-
 **定理4.3.1 (信号量计数保证)**：
 信号量确保同时访问受保护资源的线程数不超过初始计数值。
 
@@ -537,7 +514,6 @@ for _ in 0..10 {
 ```math
 ∀t ∈ Time: ActiveThreads(S, t) ≤ InitialCount(S)
 ```
-
 其中`ActiveThreads(S, t)`表示在时间`t`持有信号量`S`许可的线程数。
 
 ### 4.4 原子操作
@@ -565,7 +541,6 @@ let _ = counter.compare_exchange(
     Ordering::SeqCst
 );
 ```
-
 **定理4.4.1 (原子操作无数据竞争)**：
 正确使用原子操作可以在无锁情况下避免数据竞争。
 
@@ -610,7 +585,6 @@ thread::spawn(move || {
     }
 });
 ```
-
 **定理4.5.1 (释放-获取同步)**：
 如果线程A以释放语义写入一个原子变量，而线程B以获取语义读取同一变量并观察到A的写入，
 则A中写入前的所有写操作对B可见。
@@ -621,7 +595,6 @@ thread::spawn(move || {
 ∀a,b ∈ Operations:
   (a →hb Release(x) →hb Acquire(x) →hb b) ⟹ (a →hb b)
 ```
-
 其中`→hb`表示happens-before关系。
 
 ### 4.6 锁无关数据结构
@@ -645,14 +618,12 @@ queue.push(1).unwrap();
 let value = queue.pop().unwrap();
 assert_eq!(value, 1);
 ```
-
 **锁无关属性形式化定义**：
 
 ```math
 LockFree(A) ⟺ ∀S ⊂ Threads, ∃t ∈ Threads\S:
   Suspended(S) ⟹ Progresses(t, A)
 ```
-
 其中`Suspended(S)`表示线程集合`S`中的所有线程都被挂起，
 `Progresses(t, A)`表示线程`t`可以在有限步内完成算法`A`的操作。
 
@@ -710,7 +681,6 @@ P = a → P' ⊓ b → P''   // P可以选择执行a或b
 Q = a → Q'             // Q执行a
 P ∥ Q                  // P和Q并行执行，在a上同步
 ```
-
 **定理5.3.1 (CSP表达力)**：
 CSP足以表达任何基于消息传递的并发系统的行为。
 
@@ -721,7 +691,6 @@ CSP足以表达任何基于消息传递的并发系统的行为。
 P = new(c).(P' | c⟨v⟩.0)   // 创建新通道c，并发送值v
 Q = c(x).Q'               // 接收通道c上的值到x
 ```
-
 **命题5.3.1 (形式化等价性)**：
 不同IPC机制可以在形式化模型中证明行为等价，尽管实现和性能特性不同。
 
@@ -744,7 +713,6 @@ Q = c(x).Q'               // 接收通道c上的值到x
 ```math
 Deadlock(S) ⟺ ∀p ∈ S: ∃r: Waits(p, r) ∧ ∃p' ∈ S: Holds(p', r) ∧ ¬Progress(p')
 ```
-
 **定理5.4.1 (死锁预防)**：
 消除任一Coffman条件足以预防死锁。
 
@@ -770,7 +738,6 @@ ModelCheck(M, φ) = {
   false otherwise, with counterexample
 }
 ```
-
 **定义5.5.2 (定理证明)**：
 定理证明使用逻辑推理系统，从公理出发，应用推理规则，证明系统满足特定属性。
 
@@ -808,7 +775,6 @@ unsafe impl Send for MyType {}
 // 实现Sync意味着可以安全地通过共享引用跨线程访问
 unsafe impl Sync for MyType {}
 ```
-
 **定理6.1.1 (Send/Sync等价性)**：
 类型`T`是`Sync`当且仅当`&T`是`Send`。
 
@@ -838,7 +804,6 @@ let child_process = Command::new("child")
 // child_process现在拥有stdin的所有权
 let stdin = child_process.stdin.take().unwrap();
 ```
-
 **命题6.2.1 (所有权与资源安全)**：
 Rust的所有权模型确保系统资源（如文件描述符、进程句柄）在不再使用时被正确释放。
 
@@ -860,7 +825,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
-
 **定理6.3.1 (生命周期安全)**：如果程序编译成功，则所有引用在整个程序执行过程中都是有效的。
 
 **证明**：Rust编译器的借用检查器通过静态分析确保所有引用的生命周期不超过它们引用的数据，防止悬垂引用。
@@ -886,7 +850,6 @@ fn data_race_prevented() {
     println!("{:?} {:?}", ref1, ref2);
 }
 ```
-
 **定理6.4.1 (数据竞争消除)**：遵循Rust的安全子集的程序不会有数据竞争。
 
 **证明**：Rust的借用检查器确保在任意时刻，要么只有一个可变引用，要么有多个不可变引用，但不能同时有两者。`Send`和`Sync` trait进一步确保这些保证在多线程环境中也成立。
@@ -897,7 +860,6 @@ fn data_race_prevented() {
 ∀t₁,t₂ ∈ Threads, ∀l ∈ Locations, t₁ ≠ t₂:
   (Writes(t₁, l) ∧ Accesses(t₂, l)) ⟹ Synchronized(t₁, t₂, l)
 ```
-
 ## 7. 高级模式与最佳实践
 
 ### 7.1 进程池与工作窃取
@@ -938,7 +900,6 @@ impl ProcessPool {
     }
 }
 ```
-
 **定义7.1.2 (工作窃取)**：工作窃取是调度策略，允许空闲工作单元从繁忙单元的队列中"窃取"任务。
 
 **命题7.1.1 (进程池效率)**：进程池可以显著减少任务执行的总延迟，当任务数远大于进程数且进程创建成本高时。
@@ -970,7 +931,6 @@ fn transfer(from: &TVar<i32>, to: &TVar<i32>, amount: i32) {
     }).unwrap();
 }
 ```
-
 **定理7.2.1 (STM可组合性)**：STM事务可以组合成更大的事务，保持原子性，解决传统锁定机制的组合性问题。
 
 **命题7.2.2 (乐观并发吞吐量)**：在低冲突工作负载下，乐观并发控制提供比悲观锁更高的吞吐量。
@@ -1035,7 +995,6 @@ impl<T> Queue<T> {
     }
 }
 ```
-
 **定理7.3.1 (无等待属性层次)**：进度保证形成层次：阻塞 < 无锁 < 无等待，每个类别提供更强的活跃性保证。
 
 **命题7.3.2 (无等待实现复杂性)**：实现无等待算法通常比等效的基于锁的算法复杂得多，涉及内存回收、ABA问题和帮助机制。
@@ -1072,7 +1031,6 @@ where
         });
 }
 ```
-
 **定理7.4.1 (Amdahl定律)**：系统的理论最大加速比受程序中串行部分比例的限制。
 
 形式化表述：
@@ -1080,7 +1038,6 @@ where
 ```math
 Speedup ≤ 1 / (s + (1-s)/n)
 ```
-
 其中`s`是串行比例，`n`是处理单元数量。
 
 **命题7.4.2 (局部性原则)**：优化数据访问模式以提高缓存局部性能够显著提升并发系统性能。
@@ -1114,7 +1071,6 @@ cfg_if::cfg_if! {
     }
 }
 ```
-
 **命题8.1.1 (抽象层成本)**：平台抽象层在提供便利的同时可能引入性能开销，特别是当抽象需要屏蔽根本性的平台差异时。
 
 ### 8.2 平台特定功能与限制
@@ -1144,7 +1100,6 @@ fn fork_process() -> Result<(), Error> {
     Ok(())
 }
 ```
-
 **命题8.2.1 (最小公分母问题)**：完全跨平台的库可能被限制为使用所有目标平台支持的功能子集，可能错过平台特定的优化机会。
 
 ### 8.3 可移植性策略
@@ -1176,7 +1131,6 @@ fn create_process() {
     // Windows实现
 }
 ```
-
 **命题8.3.1 (可移植性与性能权衡)**：提高可移植性通常需要牺牲平台特定优化，表现为性能开销或功能限制。
 
 **定理8.3.1 (可移植性层级)**：可以定义可移植性的层级，从源代码兼容性（需要重新编译）到二进制兼容性（可直接执行），每个层级都有不同的约束和成本。
@@ -1347,7 +1301,6 @@ Rust进程、通信与同步机制
     ├── 跨平台抽象改进
     └── 增强型类型安全
 ```
-
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

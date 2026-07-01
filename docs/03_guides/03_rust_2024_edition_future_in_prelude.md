@@ -67,7 +67,6 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
     Box::new(compute())
 }
 ```
-
 ### 之后（Rust 2024 Edition） {#之后rust-2024-edition}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -82,7 +81,6 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
     Box::new(compute())
 }
 ```
-
 ## 影响分析 {#影响分析}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -114,7 +112,6 @@ impl Future for MyTask {
     fn execute(&self) {}
 }
 ```
-
 **解决方案**：
 
 ```rust,ignore
@@ -136,7 +133,6 @@ impl StdFuture for MyTask {
     }
 }
 ```
-
 #### 冲突 2：第三方库中的 `Future` 类型 {#冲突-2第三方库中的-future-类型}
 
 某些旧版库可能导出自己的 `Future` 类型：
@@ -144,7 +140,6 @@ impl StdFuture for MyTask {
 ```rust,ignore
 use some_legacy_lib::Future; // 可能与 prelude 的 Future 冲突
 ```
-
 **解决方案**：
 
 ```rust,ignore
@@ -152,7 +147,6 @@ use some_legacy_lib::Future; // 可能与 prelude 的 Future 冲突
 use std::future::Future as StdFuture;
 use some_legacy_lib::Future as LegacyFuture;
 ```
-
 #### 冲突 3：宏展开中的名称冲突 {#冲突-3宏展开中的名称冲突}
 
 某些宏可能生成 `Future` 相关的代码，在 prelude 自动导入后可能产生歧义。
@@ -175,7 +169,6 @@ use std::future::Future;
 
 // Rust 2024：可以删除这行
 ```
-
 1. **检查自定义 trait 名称**：如果定义了 `Future` trait，考虑重命名或使用全限定路径
 
 ### 对于库开发者 {#对于库开发者}
@@ -218,7 +211,6 @@ where
     Box::new(task)
 }
 ```
-
 ### 与 `async/await` 的关系 {#与-asyncawait-的关系}
 >
 > **[来源: [crates.io](https://crates.io/)]**

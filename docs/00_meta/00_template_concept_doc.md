@@ -99,7 +99,6 @@ fn example() {}
 // 边界操作：展示概念触发点
 fn boundary() {}
 ```
-
 ### 1.3 形式化直觉（Formal Intuition） {#13-形式化直觉formal-intuition}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -150,7 +149,6 @@ graph TD
     C --> E[后续概念 E]
     style C fill:#f9f,stroke:#333,stroke-width:2px
 ```
-
 ### 承上（前置知识回溯） {#承上前置知识回溯}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -208,7 +206,6 @@ vtable 布局、monomorphization 结果、零成本抽象的物理含义：
 ```rust
 fn minimal() {}
 ```
-
 ### 5.2 Realistic（真实场景） {#52-realistic真实场景}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -218,7 +215,6 @@ fn minimal() {}
 ```rust
 fn realistic() {}
 ```
-
 ### 5.3 Production-grade（生产级） {#53-production-grade生产级}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -228,7 +224,6 @@ fn realistic() {}
 ```rust
 fn production() {}
 ```
-
 ---
 
 ## 模块 6: 反例集（Counterexamples & Anti-patterns） {#模块-6-反例集counterexamples-anti-patterns}
@@ -242,14 +237,12 @@ fn production() {}
 ```rust
 fn wrong() {}
 ```
-
 **编译器错误**:
 
 ```text
 error[EXXXX]: ...
   |
 ```
-
 **根因推导**:
 为什么错？触及了哪条规则？
 
@@ -258,7 +251,6 @@ error[EXXXX]: ...
 ```rust
 fn fix_a() {}
 ```
-
 > 优点: ... | 缺点: ...
 
 **修复方案 B**:
@@ -266,7 +258,6 @@ fn fix_a() {}
 ```rust
 fn fix_b() {}
 ```
-
 > 优点: ... | 缺点: ...
 
 **抽象原则**:
@@ -363,7 +354,6 @@ fn fix_b() {}
 ```rust
 fn broken() {}
 ```
-
 **题 2**: ...
 
 ### 开放设计题 {#开放设计题}

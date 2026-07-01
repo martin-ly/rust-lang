@@ -162,7 +162,6 @@ graph TB
     LL -.->|"线性逻辑 vs 经典逻辑"| CP
     RB -.->|"可验证性对比"| FM
 ```
-
 > **认知功能**: 此图是知识体系的**全局层级依赖骨架**。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > 读者可将其作为「学习路径规划器」——从 L0 元信息出发，沿实线箭头逐层深入，理解每一层概念的前置依赖。
@@ -225,7 +224,6 @@ graph LR
     style L3 fill:#fff3e0
     style L4 fill:#fce4ec
 ```
-
 > **认知功能**: 此传递链图将 L1→L2→L3→L4 的**正向递进**与 L4→L1 的**反向形式化证明**可视化。实线箭头表示"概念依赖"（上层依赖下层），粗实线表示"形式化证明"（L4 证明 L1 安全）。颜色分层：蓝=基础、绿=进阶、橙=高级、粉=形式化。关键洞察：**L4 不是 L3 的"更高级版本"，而是 L1-L3 的"数学根基"**——形式化理论向下证明上层概念的安全性。
 
 ---
@@ -278,7 +276,6 @@ graph LR
         ↓ [反事实: unsafe]
 [边界: unsafe 突破条件]    手动 impl Send/Sync 需满足安全契约
 ```
-
 ### 3.3 反向依赖（上层需求驱动下层设计）
 
 | 上层需求 | 驱动下层变化 | 关系说明 |
@@ -328,7 +325,6 @@ graph LR
     边界: unsafe 块不在证明范围内（需手动验证）
     来源: ✅ [Jung et al. POPL 2017] · ✅ [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ```
-
 [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) ·
 [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
@@ -357,7 +353,6 @@ graph LR
     反事实: dyn Trait（动态分发）打破零成本 ⟹ 有 vtable 开销
     来源: ✅ [TRPL Ch10](https://doc.rust-lang.org/book/ch10-00-generics.html) · ✅ [RFC: Trait Objects]
 ```
-
 [来源: [TAPL (Pierce, 2002)](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [RFC 3417 — GATs](https://github.com/rust-lang/rfcs/pull/3417)]
 
 ### 4.3 链 3: 异步正确性
@@ -383,7 +378,6 @@ graph LR
     精度: ⚠️ 部分映射（Rust 的 Pin 比线性逻辑的位置稳定性更弱）
     来源: ✅ [RFC 2349: Pin](https://rust-lang.github.io/rfcs/2349-pin.html) · [PLDI 2024: RefinedRust] · [Jung et al. 2018: Iris]
 ```
-
 [来源: [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html) ·
 [Rust Async Book](https://rust-lang.github.io/async-book/) ·
 [RFC 2349 — Pin](https://rust-lang.github.io/rfcs//2349-pin.html) ·
@@ -433,7 +427,6 @@ L4 形式化保证的边界:
 │ mem::forget / ManuallyDrop   │ Drop 不执行，资源不释放          │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 [来源: [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Wikipedia — Foreign Function Interface](https://en.wikipedia.org/wiki/Foreign_function_interface)]
 
 ### 6.2 跨层断裂点
@@ -454,7 +447,6 @@ L4 形式化保证的边界:
     L5 对比: Rust vs C++ 上升到本体论层面
     分析: 技术机制支持但不必然导出哲学结论，需显式论证
 ```
-
 ---
 
 ## 七、认知路径映射（Bloom 层级）
@@ -522,7 +514,6 @@ L3 边界: unsafe 块可绕过 Drop
     ↓ [形式化边界: RustBelt 不覆盖此路径]
 L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 ```
-
 ### 9.3 L5-L7 层次一致性标注
 
 | 文件 | 标注数量 | 标注格式 |
@@ -580,9 +571,7 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 | 层间依赖 DAG ⟹ 学习路径无循环 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-
 > **过渡**: 跨层知识图谱（Inter-Layer Dependency Map） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
-
 > **过渡**: 将 跨层知识图谱（Inter-Layer Dependency Map） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界

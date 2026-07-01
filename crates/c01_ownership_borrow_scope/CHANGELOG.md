@@ -19,25 +19,22 @@
 
 **Tier 3 高级实践指南 (4 份深度文档)**:
 
-- **3.1 高级所有权模式** (`docs/tier_03_references/06_高级所有权模式参考.md`) - 1,676 行
+- **3.1 高级所有权模式** (`docs/tier_03_references/06_advanced_ownership_patterns_reference.md`) - 1,676 行
   - 内部可变性模式完整指南 (RefCell, Cell, Mutex, RwLock)
   - 智能指针高级用法 (Box, Rc, Arc, Weak)
   - 复杂所有权设计模式 (自引用、树、图、观察者)
   - 实战案例 (Web 服务器、连接池、缓存、插件系统)
-
-- **3.2 零成本抽象** (`docs/tier_03_references/07_零成本抽象参考.md`) - 1,145 行
+- **3.2 零成本抽象** (`docs/tier_03_references/07_zero_cost_abstractions_reference.md`) - 1,145 行
   - 编译器优化机制深度剖析
   - 单态化、内联、死代码消除详解
   - Trait 对象 vs 泛型性能对比
   - 与 C++ 零开销抽象的对比分析
-
-- **3.3 内存安全最佳实践** (`docs/tier_03_references/08_内存安全参考.md`) - 1,282 行
+- **3.3 内存安全最佳实践** (`docs/tier_03_references/08_memory_safety_reference.md`) - 1,282 行
   - Unsafe Rust 使用指南和审计清单
   - FFI 安全性和跨语言互操作
   - 并发安全模式和内存泄漏预防
   - Miri/Clippy/静态分析工具详解
-
-- **3.4 性能优化** (`docs/tier_03_references/09_性能优化参考.md`) - 1,161 行
+- **3.4 性能优化** (`docs/tier_03_references/09_performance_optimization_reference.md`) - 1,161 行
   - 性能分析工具链 (perf, Valgrind, Criterion)
   - 内存布局和缓存局部性优化
   - LTO/PGO 编译器优化实战
@@ -45,19 +42,17 @@
 
 **Tier 4 理论深度指南 (3 份学术文档)**:
 
-- **4.1 类型系统理论** (`docs/tier_04_advanced/06_类型系统理论.md`) - 944 行
+- **4.1 类型系统理论** (`docs/tier_04_advanced/06_type_system_theory.md`) - 944 行
   - 仿射类型和线性类型理论详解
   - 区域推断算法 (NLL) 形式化
   - 所有权系统的数学基础
   - Substructural 类型系统研究
-
-- **4.2 形式化验证** (`docs/tier_04_advanced/07_形式化验证.md`) - 629 行
+- **4.2 形式化验证** (`docs/tier_04_advanced/07_formal_verification.md`) - 629 行
   - RustBelt 项目完整解析
   - Coq 和 Iris 框架应用指南
   - 类型健全性和内存安全性证明
   - Prusti/Creusot/Kani 工具实战
-
-- **4.3 学术研究** (`docs/tier_04_advanced/08_学术研究.md`) - 519 行
+- **4.3 学术研究** (`docs/tier_04_advanced/08_academic_research.md`) - 519 行
   - POPL/PLDI/OOPSLA 顶级论文综述
   - Rust 前沿研究方向 (View types, Session types, Effect handlers)
   - 学术资源和研究起步指南
@@ -69,7 +64,6 @@
   - 完整的 Phase 4 执行总结
   - 质量提升统计和对比分析
   - 7 份深度文档详细介绍
-
 - **最终成就总结** (`docs/C01_FINAL_ACHIEVEMENT_SUMMARY_2025_10_22.md`)
   - 从 Phase 0 到 Phase 4 的完整历程
   - 质量演进图和核心突破点
@@ -109,20 +103,17 @@
 
 **Tier 1 基础文档层** (新建 4 份入门文档)
 
-- **1.1 项目概览** (`docs/tier_01_foundations/01_项目概览.md`)
+- **1.1 项目概览** (`docs/tier_01_foundations/01_project_overview.md`)
   - 项目介绍和目标
   - 核心特性和优势
   - 目标受众和使用场景
-
 - **1.2 快速开始指南** (`docs/tier_01_foundations/02_快速开始指南.md`)
   - 5 分钟快速入门
   - 核心概念速览
   - 学习计划建议
-
 - **1.3 核心概念术语表** (`docs/tier_01_foundations/03_核心概念术语表.md`)
   - 所有权系统关键术语
   - 每个术语的定义、示例和要点
-
 - **1.4 常见问题解答** (`docs/tier_01_foundations/04_常见问题解答.md`)
   - 初学者常见困惑
   - 编译错误解决方案
@@ -130,10 +121,10 @@
 
 **Tier 2 核心概念层** (导航文档)
 
-- **2.1 所有权系统** (`docs/tier_02_guides/01_所有权快速入门.md`)
-- **2.2 借用检查器** (`docs/tier_02_guides/02_借用实践指南.md`)
-- **2.3 生命周期** (`docs/tier_02_guides/03_生命周期实践.md`)
-- **2.4 作用域规则** (`docs/tier_02_guides/04_作用域管理实践.md`)
+- **2.1 所有权系统** (`docs/tier_02_guides/01_ownership_quick_start.md`)
+- **2.2 借用检查器** (`docs/tier_02_guides/02_borrowing_practice_guide.md`)
+- **2.3 生命周期** (`docs/tier_02_guides/03_lifetimes_practice.md`)
+- **2.4 作用域规则** (`docs/tier_02_guides/04_scope_management_practice.md`)
 
 **Tier 3 高级应用层** (导航框架，Phase 4 中扩展)
 
@@ -151,7 +142,6 @@
   - Tier 1-4 完整导航
   - 学习路径推荐
   - 文档速查表
-
 - **Tier 架构实施报告** (`docs/C01_TIER_ARCHITECTURE_IMPLEMENTATION_REPORT_2025_10_22.md`)
 
 **Phase 1 报告**:
@@ -166,17 +156,14 @@
   - 10+ Mermaid 可视化图表
   - 概念关系三元组
   - 技术演化时间线
-
 - **多维矩阵对比分析** (`docs/theory/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md`)
   - 11 大技术领域对比
   - 25+ 性能对比表格
   - 技术选型决策矩阵
-
 - **思维导图 (ASCII 艺术)** (`docs/RUST_190_COMPREHENSIVE_MINDMAP.md`)
   - 10 层知识结构可视化
   - 3 级学习路径
   - 问题诊断导图
-
 - **Rust 1.90 实战示例集** (`docs/RUST_190_EXAMPLES_COLLECTION.md`)
   - ~1000 行可运行代码
   - 9 大主题 × 40+ 示例
@@ -188,12 +175,10 @@
   - 3 种学习路径
   - 12 周课程规划
   - 场景化快速查找
-
 - **丰富示例集成** (`docs/RUST_190_RICH_EXAMPLES_INTEGRATION.md`)
   - 115+ 可运行示例
   - 6000+ 行详细注释
   - 知识图谱 × 多维矩阵 × 代码整合
-
 - **快速开始指南** (`docs/QUICK_START_GUIDE.md`)
   - 5 分钟入门
   - 2 小时核心掌握

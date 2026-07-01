@@ -178,7 +178,7 @@
 
 - [README.md](README.md)
 - [tier_02_guides/01_异步编程快速入门.md](tier_02_guides/01_异步编程快速入门.md)
-- [tier_02_guides/02_Future与Executor机制.md](tier_02_guides/02_Future与Executor机制.md)
+- [tier_02_guides/02_future_and_executor_mechanisms.md](tier_02_guides/02_future_and_executor_mechanisms.md)
 
 **Day 3-4**: 运行时实践
 
@@ -200,13 +200,13 @@
 **第1周**: 核心概念
 
 - [core/](core) 全部6个文档
-- [tier_02_guides/03_异步运行时选择指南.md](tier_02_guides/03_异步运行时选择指南.md)
+- [tier_02_guides/03_async_runtime_selection_guide.md](tier_02_guides/03_async_runtime_selection_guide.md)
 
 **第2周**: 实践应用
 
 - [patterns/](patterns) 设计模式
 - [performance/](performance) 性能优化
-- [tier_02_guides/04_异步设计模式实践.md](tier_02_guides/04_异步设计模式实践.md)
+- [tier_02_guides/04_async_design_patterns_practice.md](tier_02_guides/04_async_design_patterns_practice.md)
 
 **第3周**: 深入研究
 
@@ -275,7 +275,7 @@
 ### 按学习阶段
 
 - **入门新手** → [01_异步编程快速入门](tier_02_guides/01_异步编程快速入门.md)
-- **初级学习** → [02_Future与Executor机制](tier_02_guides/02_Future与Executor机制.md)
+- **初级学习** → [02_Future与Executor机制](tier_02_guides/02_future_and_executor_mechanisms.md)
 - **中级进阶** → [core/](core) + [patterns/](patterns)
 - **高级深入** → [comprehensive/](comprehensive) + [views/](views)
 - **专家级别** → [core/06_critical_analysis...](core/06_critical_analysis_and_advanced_topics.md)

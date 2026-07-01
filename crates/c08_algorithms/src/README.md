@@ -168,7 +168,6 @@ src/
 ├── rust_191_features.rs            # Rust 1.91 特性应用
 └── rust_192_features.rs            # Rust 1.92.0 特性应用
 ```
-
 ## 📖 模块说明
 
 ### 1. lib.rs - 库入口
@@ -277,7 +276,6 @@ lib.rs
 ├── data_structure/      # 数据结构（被 leetcode/ 使用）
 └── machine_learning/    # 机器学习（独立模块）
 ```
-
 ## 📝 代码组织原则
 
 ### 1. 分层架构
@@ -322,7 +320,6 @@ use c08_algorithms::leetcode::array::two_sum;
 // 使用数据结构
 use c08_algorithms::data_structure::stack::Stack;
 ```
-
 ### 添加新算法
 
 1. 在 `algorithms/` 对应分类下添加实现

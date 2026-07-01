@@ -52,20 +52,17 @@
    ```bash
    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
    ```
-
 2. **安装 WASM 工具链**
 
    ```bash
    rustup target add wasm32-unknown-unknown
    rustup target add wasm32-wasip1
    ```
-
 3. **安装 wasm-pack**
 
    ```bash
    curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
    ```
-
 4. **安装开发工具**
 
    ```bash
@@ -78,7 +75,6 @@
    # 覆盖率工具（可选）
    cargo install cargo-tarpaulin
    ```
-
 ### Fork 和克隆
 
 1. Fork 本项目到您的 GitHub 账户
@@ -88,13 +84,11 @@
    git clone https://github.com/YOUR_USERNAME/rust-lang-learning.git
    cd rust-lang-learning/crates/c12_wasm
    ```
-
 3. 添加上游仓库
 
 ```bash
 git remote add upstream https://github.com/rust-lang/rust-lang-learning.git
 ```
-
 ## 🤝 如何贡献
 
 ### 贡献类型
@@ -104,22 +98,18 @@ git remote add upstream https://github.com/rust-lang/rust-lang-learning.git
 1. **Bug 修复** 🐛
    - 修复现有代码中的错误
    - 修复文档中的错误
-
 2. **新功能** ✨
    - 添加新的示例代码
    - 添加新的设计模式实现
    - 添加新的工具函数
-
 3. **文档改进** 📖
    - 改进现有文档
    - 添加新的教程
    - 翻译文档
-
 4. **性能优化** ⚡
    - 优化现有代码性能
    - 减小 WASM 二进制大小
    - 提升编译速度
-
 5. **测试** 🧪
    - 添加单元测试
    - 添加集成测试
@@ -136,7 +126,6 @@ git checkout -b feature/your-feature-name
 # 或者修复 bug
 git checkout -b fix/bug-description
 ```
-
 ### 2. 开发
 
 ```bash
@@ -152,7 +141,6 @@ cargo clippy
 # 格式化代码
 cargo fmt
 ```
-
 ### 3. 提交
 
 ```bash
@@ -162,14 +150,12 @@ git add .
 # 提交（遵循提交规范）
 git commit -m "feat: add new feature"
 ```
-
 ### 4. 推送
 
 ```bash
 # 推送到您的 Fork
 git push origin feature/your-feature-name
 ```
-
 ### 5. 创建 Pull Request
 
 1. 访问您的 Fork 在 GitHub 上的页面
@@ -186,13 +172,11 @@ git push origin feature/your-feature-name
    ```bash
    cargo fmt
    ```
-
 2. **遵循 Clippy 建议**
 
    ```bash
    cargo clippy -- -D warnings
    ```
-
 3. **代码注释**
 
    ````rust
@@ -215,7 +199,6 @@ git push origin feature/your-feature-name
        a + b
    }
    ````
-
 4. **错误处理**
 
    ```rust
@@ -236,7 +219,6 @@ git push origin feature/your-feature-name
        x * 2
    }
    ```
-
 5. **性能考虑**
 
    ```rust
@@ -252,7 +234,6 @@ git push origin feature/your-feature-name
        data.clone().into_iter().filter(|&x| x > 0).collect()
    }
    ```
-
 ### JavaScript 代码规范
 
 1. **使用现代 JavaScript**
@@ -269,7 +250,6 @@ git push origin feature/your-feature-name
      // ...
    })
    ```
-
 2. **错误处理**
 
    ```javascript
@@ -281,7 +261,6 @@ git push origin feature/your-feature-name
      console.error("Error:", err)
    }
    ```
-
 ## 📬 提交规范
 
 使用 [Conventional Commits](https://www.conventionalcommits.org/) 规范：
@@ -315,7 +294,6 @@ git commit -m "perf: optimize array processing with SIMD"
 # 重构
 git commit -m "refactor: simplify error handling in file operations"
 ```
-
 ### 提交消息格式
 
 ```text
@@ -325,7 +303,6 @@ git commit -m "refactor: simplify error handling in file operations"
 
 <footer>
 ```
-
 示例：
 
 ```text
@@ -339,7 +316,6 @@ Add a comprehensive WebSocket example demonstrating:
 
 Closes #123
 ```
-
 ## 🧪 测试要求
 
 ### 1. 单元测试
@@ -359,7 +335,6 @@ mod tests {
     }
 }
 ```
-
 ### 2. 集成测试
 
 复杂功能应该有集成测试：
@@ -373,7 +348,6 @@ fn test_complex_workflow() {
     // 测试完整的工作流程
 }
 ```
-
 ### 3. 运行测试
 
 ```bash
@@ -389,7 +363,6 @@ cargo test -- --nocapture
 # WASI 测试
 cargo test --target wasm32-wasip1
 ```
-
 ### 4. 基准测试
 
 性能相关的改进应该包含基准测试：
@@ -406,7 +379,6 @@ fn bench_my_function(c: &mut Criterion) {
 criterion_group!(benches, bench_my_function);
 criterion_main!(benches);
 ```
-
 ## 📖 文档规范
 
 ### 1. 代码文档
@@ -436,7 +408,6 @@ pub fn calculate_average(numbers: &[f64]) -> f64 {
     // 实现...
 }
 ````
-
 ### 2. Markdown 文档
 
 文档应该包含：
@@ -469,7 +440,6 @@ pub fn calculate_average(numbers: &[f64]) -> f64 {
 
 **A**: 答案
 ```
-
 ### 3. README 更新
 
 如果添加了新功能，更新相关的 README：
@@ -486,19 +456,15 @@ pub fn calculate_average(numbers: &[f64]) -> f64 {
 1. **功能正确性**
    - 代码是否按预期工作？
    - 边界情况是否处理？
-
 2. **代码质量**
    - 代码是否清晰易读？
    - 是否遵循项目规范？
-
 3. **测试覆盖**
    - 是否有足够的测试？
    - 测试是否有意义？
-
 4. **文档完整性**
    - 文档是否清晰？
    - 示例是否正确？
-
 5. **性能影响**
    - 是否有性能回归？
    - 是否有优化空间？

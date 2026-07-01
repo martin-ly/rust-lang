@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: Trait Solver · Selection · Fulfillment · Evaluation · Obligation · Candidate · Winnowing · Coinduction · Next-Gen Solver — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # rustc 中的 Trait Solver
@@ -54,7 +53,6 @@ fn clone_slice<T: Clone>(x: &[T]) -> Vec<T> { ... }
 let v = clone_slice(&[1, 2, 3]);
 // 这里需要证明 obligation: i32 : Clone
 ```
-
 在泛型（Generics）函数体内部，`T: Clone` 也是一个 obligation，但它不能被具体实现，而是由调用者保证。
 
 > **关键洞察**: Trait 求解 = 为每个 obligation 找到一个“证据”：一个 impl、一个 where-clause、或一个内建规则。
@@ -79,7 +77,6 @@ graph LR
     C -->|是| D[成功]
     E[Evaluation] -->|只回答 yes/no/maybe| F[辅助 Selection 决策]
 ```
-
 ---
 
 ## 三、Selection：候选装配与筛选
@@ -104,7 +101,6 @@ impl<T: Get> Get for Box<T> { ... }
 
 let x = Box::new(1_u16).get();
 ```
-
 - 第一个候选要求 `Box<u16>: Copy` → 不成立；
 - 第二个候选要求 `u16: Get` → 递归成立；
 - 筛选后唯一剩下第二个候选。
@@ -119,7 +115,6 @@ impl Convert<usize> for isize { ... }
 
 let y: char = x.convert(); // ❌ confirmation 失败：impl 要求 Target=usize，但这里期望 char
 ```
-
 ---
 
 ## 四、Fulfillment：约束求解工作队列
@@ -138,7 +133,6 @@ fn foo<T: Clone + Debug>(x: T) {
     println!("{:?}", x); // obligation: T: Debug
 }
 ```
-
 这两个 obligation 都由调用者通过 where-clause 提供。
 
 > **定理**: Fulfillment 结束时，所有类型检查阶段的 trait obligation 都必须被证明可解。
@@ -197,7 +191,6 @@ where
     T: All<P>,
 {}
 ```
-
 新 solver 使用 coinduction 来处理这类递归约束，避免无限展开。
 
 > [来源: Rustc Dev Guide — Coinduction](https://rustc-dev-guide.rust-lang.org/solve/coinduction.html)

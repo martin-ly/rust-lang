@@ -113,7 +113,6 @@ pub enum NetworkError {
     // ... 更多错误类型
 }
 ```
-
 ### 2. HTTP 协议实现
 
 ```rust
@@ -126,7 +125,6 @@ pub struct HttpRequest {
     pub body: Bytes,
 }
 ```
-
 ### 3. 异步网络编程支持
 
 ```rust
@@ -138,7 +136,6 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 ### 4. Rust 1.89 新特性应用
 
 ```rust
@@ -159,7 +156,6 @@ fn parse_request(data: &[u8]) -> NetworkResult<HttpRequest> {
         .flatten()
 }
 ```
-
 ## 📊 项目改进成果
 
 ### 1. 依赖项现代化
@@ -218,7 +214,6 @@ tracing-subscriber = "0.3"
 ring = "0.17"
 rustls = "0.21"
 ```
-
 ### 开发工具
 
 ```toml
@@ -226,7 +221,6 @@ rustls = "0.21"
 tokio-test = "0.4"
 criterion = { version = "0.5", features = ["html_reports"] }
 ```
-
 ## 📈 性能优化特性
 
 ### 1. 零拷贝网络编程

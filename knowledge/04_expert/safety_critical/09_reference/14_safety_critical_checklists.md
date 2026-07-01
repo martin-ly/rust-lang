@@ -501,7 +501,6 @@
 □ 提交信息规范
 □ 自测完成
 ```
-
 ### 每周检查
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -514,7 +513,6 @@
 □ 代码审查完成
 □ 进度跟踪
 ```
-
 ### 发布前快速检查
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -529,7 +527,6 @@
 □ 覆盖率达标
 □ 文档完整
 ```
-
 ---
 
 ## 检查表使用指南
@@ -581,7 +578,6 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [API设计指南](01_api_design_guidelines.md)
 - [Rust安全关键系统 - 检查清单与模板](02_checklists_and_templates.md)
 

@@ -109,5 +109,4 @@
 - [知识图谱索引](10_knowledge_graph_index.md)
 
 > **来源: [RustSEM: A Formal Semantics for Rust](https://link.springer.com/article/10.1007/s10703-024-00460-3)**
-
 > **来源: [Aeneas Verification](https://aeneas-verification.github.io/)**

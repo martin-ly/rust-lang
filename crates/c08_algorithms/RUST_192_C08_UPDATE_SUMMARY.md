@@ -22,7 +22,6 @@
   - 版本: 1.91.1+ → 1.92.0+
   - 日期: 2025-11-15 → 2025-12-11
   - 所有版本引用已更新
-
 - ✅ `docs/INTERACTIVE_LEARNING_GUIDE.md`
   - 版本: 1.90.0 → 1.92.0+
   - 添加最后更新日期: 2025-12-11
@@ -58,7 +57,6 @@
 ✅ cargo check --package c08_algorithms
    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
 ```
-
 ### 版本一致性检查
 
 - ✅ 核心文档版本引用已统一为 1.92.0+

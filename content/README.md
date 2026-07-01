@@ -30,7 +30,6 @@ mindmap
       验证工具
       论文对接
 ```
-
 ---
 
 ## 📁 目录结构
@@ -71,7 +70,6 @@ content/
     ├── tree_borrows_authoritative_guide.md
     └── coq_formalization_guide.md
 ```
-
 ---
 
 ## 📌 与官方资源的差异化定位
@@ -122,7 +120,6 @@ content/
        ↓
   学术研究发表后更新 academic/
 ```
-
 ---
 
 ## 🔗 快速导航

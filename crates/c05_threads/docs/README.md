@@ -1,5 +1,8 @@
 # C05 线程与并发编程
 
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
+>
 > **文档定位**: 本文档是C05线程模块的主入口，提供模块概览和快速导航
 > **先修知识**: [C04 泛型](../../c04_generic/docs/README.md)
 > **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](FAQ.md) | [术语表](Glossary.md)
@@ -34,7 +37,6 @@ cargo run -p c05_threads --example basic
 # 运行基准测试
 cargo bench -p c05_threads
 ```
-
 ### 推荐学习路径
 
 **新手入门** (3-5天):
@@ -107,7 +109,6 @@ use std::sync::mpsc;
 let (tx, rx) = mpsc::channel();
 // 不要通过共享内存来通信
 ```
-
 **共享状态** (Shared State):
 
 ```rust
@@ -116,7 +117,6 @@ use std::sync::{Arc, Mutex};
 let data = Arc::new(Mutex::new(0));
 // 使用Mutex保护共享数据
 ```
-
 ---
 
 ## 🌟 核心概念

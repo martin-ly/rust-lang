@@ -64,7 +64,6 @@ C10 Networks 是一个基于 Rust 1.92.0 的现代网络编程库（兼容 Rust 
 git clone https://github.com/your-org/rust-lang.git
 cd rust-lang/crates/c10_networks
 ```
-
 ### 2. 运行示例
 
 ```bash
@@ -78,7 +77,6 @@ cargo run --example ws_echo_client
 # DNS解析示例
 cargo run --example dns_lookup -- example.com
 ```
-
 ### 3. 查看结果
 
 您将看到网络请求的响应、WebSocket消息的传输和DNS解析的结果。
@@ -102,7 +100,6 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 rustc --version
 cargo --version
 ```
-
 ### 开发工具推荐
 
 ```bash
@@ -110,7 +107,6 @@ cargo --version
 rustup component add rustfmt clippy
 cargo install cargo-watch cargo-expand
 ```
-
 ## 📦 安装依赖
 
 ### 在您的项目中添加依赖
@@ -121,7 +117,6 @@ cargo install cargo-watch cargo-expand
 c10_networks = "0.1.0"
 tokio = { version = "1.35", features = ["full"] }
 ```
-
 ### 安装项目依赖
 
 ```bash
@@ -131,7 +126,6 @@ cargo build
 # 或者直接运行示例
 cargo run --example http_client
 ```
-
 ## 🚀 第一个网络程序
 
 创建一个简单的HTTP客户端：
@@ -159,13 +153,11 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 运行示例：
 
 ```bash
 cargo run --example my_first_client
 ```
-
 ## 🌐 HTTP客户端示例
 
 ### 基础HTTP请求
@@ -190,7 +182,6 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 ### 自定义请求头
 
 ```rust
@@ -212,7 +203,6 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 ## 🔌 WebSocket通信示例
 
 ### WebSocket服务器
@@ -258,7 +248,6 @@ async fn main() -> NetworkResult<()> {
     }
 }
 ```
-
 ### WebSocket客户端
 
 ```rust
@@ -302,7 +291,6 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 运行WebSocket示例：
 
 ```bash
@@ -312,7 +300,6 @@ cargo run --example websocket_server
 # 终端2: 启动客户端
 cargo run --example websocket_client
 ```
-
 ## 📡 TCP服务器示例
 
 ### TCP回显服务器
@@ -362,7 +349,6 @@ async fn main() -> NetworkResult<()> {
     }
 }
 ```
-
 ### TCP客户端
 
 ```rust
@@ -392,7 +378,6 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 运行TCP示例：
 
 ```bash
@@ -402,7 +387,6 @@ cargo run --example tcp_echo_server
 # 终端2: 启动客户端
 cargo run --example tcp_client
 ```
-
 ## 🔍 DNS解析示例
 
 ### 基础DNS查询
@@ -437,7 +421,6 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 ### 高级DNS查询
 
 ```rust
@@ -464,14 +447,12 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 运行DNS示例：
 
 ```bash
 cargo run --example dns_basic
 cargo run --example dns_advanced
 ```
-
 ## 📊 性能监控示例
 
 ### 网络性能监控
@@ -519,13 +500,11 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 运行性能监控示例：
 
 ```bash
 cargo run --example performance_monitor
 ```
-
 ## 🔒 安全通信示例
 
 ### HTTPS客户端
@@ -562,7 +541,6 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 ### 客户端证书认证
 
 ```rust
@@ -594,14 +572,12 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
-
 运行安全通信示例：
 
 ```bash
 cargo run --example https_client
 cargo run --example client_cert_auth
 ```
-
 ## 🧪 运行测试
 
 ### 运行所有测试
@@ -621,7 +597,6 @@ cargo test http_client
 cargo test websocket
 cargo test dns_resolver
 ```
-
 ### 测试覆盖率
 
 ```bash
@@ -634,7 +609,6 @@ cargo tarpaulin --out html
 # 查看覆盖率报告
 open tarpaulin-report.html
 ```
-
 ## 📚 下一步学习
 
 ### 深入学习

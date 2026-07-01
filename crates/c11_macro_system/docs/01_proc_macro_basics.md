@@ -27,7 +27,6 @@
 // 2. 属性宏: #[attribute]
 // 3. 函数宏: macro!(...)
 ```
-
 ---
 
 ## 派生宏 (Derive Macro)
@@ -53,7 +52,6 @@ pub fn derive_custom_debug(input: TokenStream) -> TokenStream {
     expanded.into()
 }
 ```
-
 ---
 
 ## 属性宏 (Attribute Macro)
@@ -77,7 +75,6 @@ pub fn trace(attr: TokenStream, item: TokenStream) -> TokenStream {
     expanded.into()
 }
 ```
-
 ---
 
 ## 函数宏 (Function Macro)
@@ -95,7 +92,6 @@ pub fn sql(input: TokenStream) -> TokenStream {
     }.into()
 }
 ```
-
 ---
 
 **维护者**: Rust 学习项目团队

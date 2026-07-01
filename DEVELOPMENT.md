@@ -34,13 +34,11 @@
 git clone <repository-url>
 cd rust-lang
 ```
-
 ### 2. 安装工具链
 
 ```bash
 rustup show
 ```
-
 ### 3. 验证安装
 
 ```bash
@@ -48,7 +46,6 @@ rustc --version
 cargo --version
 cargo build --workspace
 ```
-
 ---
 
 ## 开发工作流
@@ -80,7 +77,6 @@ cargo +nightly clippy --workspace --tests --all-features -- -D warnings
 git add .
 git commit -m "添加新功能"
 ```
-
 ### 构建命令
 
 ```bash
@@ -96,7 +92,6 @@ cargo build -p c01_ownership_borrow_scope
 # 清理构建产物
 cargo clean
 ```
-
 ---
 
 ## IDE 配置
@@ -118,7 +113,6 @@ cargo clean
     "rust-analyzer.cargo.features": "all"
 }
 ```
-
 ### RustRover
 
 - 安装 Rust 插件
@@ -148,7 +142,6 @@ cargo clean
     ]
 }
 ```
-
 ---
 
 ## 性能分析
@@ -162,7 +155,6 @@ cargo bench --workspace
 # 运行特定 crate 的基准测试
 cargo bench -p c08_algorithms
 ```
-
 ### 性能分析工具
 
 ```bash
@@ -170,7 +162,6 @@ cargo bench -p c08_algorithms
 cargo install flamegraph
 cargo flamegraph
 ```
-
 ---
 
 ## 内存安全检测
@@ -184,7 +175,6 @@ rustup component add miri
 # 运行 miri 检查
 cargo miri test
 ```
-
 ---
 
 ## 常见问题
@@ -197,7 +187,6 @@ cargo miri test
 cargo clean
 cargo build
 ```
-
 ### 依赖问题
 
 更新依赖:
@@ -205,7 +194,6 @@ cargo build
 ```bash
 cargo update
 ```
-
 ---
 
 ## 参考文档

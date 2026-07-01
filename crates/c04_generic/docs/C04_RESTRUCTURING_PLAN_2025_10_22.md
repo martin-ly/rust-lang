@@ -76,7 +76,6 @@ c04_generic/docs/
 
 外部 reports/ 目录: 8个项目报告
 ```
-
 ### 1.2 现有优势
 
 ✅ **内容丰富度高**
@@ -134,31 +133,31 @@ c04_generic/docs/
 ```text
 c04_generic/docs/
 ├── tier_01_foundations/          【基础层】
-│   ├── 01_项目概览.md            - 项目简介、特性亮点、快速开始
-│   ├── 02_主索引导航.md          - 统一导航、学习路径、内容地图
-│   ├── 03_术语表.md              - 完整的术语定义和索引
-│   └── 04_常见问题.md            - FAQ、疑难解答、最佳实践
+│   ├── 01_project_overview.md            - 项目简介、特性亮点、快速开始
+│   ├── 02_navigation.md          - 统一导航、学习路径、内容地图
+│   ├── 03_glossary.md              - 完整的术语定义和索引
+│   └── 04_faq.md            - FAQ、疑难解答、最佳实践
 │
 ├── tier_02_guides/                【实践层】
-│   ├── 01_泛型基础指南.md        - 泛型函数、结构体、枚举、约束
-│   ├── 02_Trait系统指南.md       - trait定义、实现、对象、边界
-│   ├── 03_关联类型指南.md        - 关联类型、GAT、高级模式
-│   ├── 04_类型推断指南.md        - 类型推断、turbofish、技巧
-│   └── 05_实战模式指南.md        - 设计模式、最佳实践、案例
+│   ├── 01_generics_basics.md        - 泛型函数、结构体、枚举、约束
+│   ├── 02_trait_system.md       - trait定义、实现、对象、边界
+│   ├── 03_associated_types.md        - 关联类型、GAT、高级模式
+│   ├── 04_type_inference.md        - 类型推断、turbofish、技巧
+│   └── 05_practical_patterns.md        - 设计模式、最佳实践、案例
 │
 ├── tier_03_references/            【参考层】
-│   ├── 01_泛型语法参考.md        - 完整BNF语法、类型规则
-│   ├── 02_Trait系统参考.md       - trait完整API、标准库trait
-│   ├── 03_边界约束参考.md        - where子句、HRTB、约束语法
-│   ├── 04_关联类型参考.md        - GAT完整语法、使用场景
-│   └── 05_编译器行为参考.md      - 单态化、类型擦除、优化
+│   ├── 01_generics_syntax_reference.md        - 完整BNF语法、类型规则
+│   ├── 02_trait_system_reference.md       - trait完整API、标准库trait
+│   ├── 03_trait_bounds_reference.md        - where子句、HRTB、约束语法
+│   ├── 04_associated_types_reference.md        - GAT完整语法、使用场景
+│   └── 05_compiler_behavior_reference.md      - 单态化、类型擦除、优化
 │
 ├── tier_04_advanced/              【高级层】
-│   ├── 01_高级类型技巧.md        - PhantomData、类型状态模式
-│   ├── 02_泛型与生命周期.md      - HRTB、生命周期边界、variance
-│   ├── 03_零成本抽象.md          - 性能分析、优化技巧、基准测试
-│   ├── 04_类型级编程.md          - 类型系统编程、类型安全API
-│   └── 05_设计模式进阶.md        - 高级设计模式、架构模式
+│   ├── 01_advanced_type_techniques.md        - PhantomData、类型状态模式
+│   ├── 02_generics_and_lifetimes.md      - HRTB、生命周期边界、variance
+│   ├── 03_zero_cost_abstractions.md          - 性能分析、优化技巧、基准测试
+│   ├── 04_type_level_programming.md          - 类型系统编程、类型安全API
+│   └── 05_advanced_design_patterns.md        - 高级设计模式、架构模式
 │
 ├── analysis/                      【分析资料】
 │   ├── README.md                 - 分析内容索引
@@ -178,7 +177,6 @@ c04_generic/docs/
     ├── C04_FRAMEWORK_COMPLETION_2025_10_22.md
     └── ... (其他项目报告)
 ```
-
 ### 2.2 核心特性对比
 
 | 维度         | C02 Type System | C03 Control Flow | **C04 Generic (目标)**         |
@@ -222,10 +220,10 @@ c04_generic/docs/
 **预计**: 4个文档，约1200行
 **任务**:
 
-- [ ] `01_项目概览.md` - 项目全貌、特性亮点、快速开始
-- [ ] `02_主索引导航.md` - 统一导航中心、学习路径
-- [ ] `03_术语表.md` - 泛型术语、trait术语、类型系统术语
-- [ ] `04_常见问题.md` - 泛型FAQ、trait FAQ、实践问题
+- [ ] `01_project_overview.md` - 项目全貌、特性亮点、快速开始
+- [ ] `02_navigation.md` - 统一导航中心、学习路径
+- [ ] `03_glossary.md` - 泛型术语、trait术语、类型系统术语
+- [ ] `04_faq.md` - 泛型FAQ、trait FAQ、实践问题
 
 ### Phase 4: 内容整合 ⏳
 
@@ -257,33 +255,33 @@ c04_generic/docs/
 **预计**: 5个文档，约2000行
 **任务**:
 
-- [ ] `01_泛型基础指南.md`
-- [ ] `02_Trait系统指南.md`
-- [ ] `03_关联类型指南.md`
-- [ ] `04_类型推断指南.md`
-- [ ] `05_实战模式指南.md`
+- [ ] `01_generics_basics.md`
+- [ ] `02_trait_system.md`
+- [ ] `03_associated_types.md`
+- [ ] `04_type_inference.md`
+- [ ] `05_practical_patterns.md`
 
 ### Phase 7: Tier 3 完整参考 ⏳
 
 **预计**: 5个文档，约2500行
 **任务**:
 
-- [ ] `01_泛型语法参考.md`
-- [ ] `02_Trait系统参考.md`
-- [ ] `03_边界约束参考.md`
-- [ ] `04_关联类型参考.md`
-- [ ] `05_编译器行为参考.md`
+- [ ] `01_generics_syntax_reference.md`
+- [ ] `02_trait_system_reference.md`
+- [ ] `03_trait_bounds_reference.md`
+- [ ] `04_associated_types_reference.md`
+- [ ] `05_compiler_behavior_reference.md`
 
 ### Phase 8: Tier 4 高级主题 ⏳
 
 **预计**: 5个文档，约2500行
 **任务**:
 
-- [ ] `01_高级类型技巧.md`
-- [ ] `02_泛型与生命周期.md`
-- [ ] `03_零成本抽象.md`
-- [ ] `04_类型级编程.md`
-- [ ] `05_设计模式进阶.md`
+- [ ] `01_advanced_type_techniques.md`
+- [ ] `02_generics_and_lifetimes.md`
+- [ ] `03_zero_cost_abstractions.md`
+- [ ] `04_type_level_programming.md`
+- [ ] `05_advanced_design_patterns.md`
 
 ---
 
@@ -385,12 +383,10 @@ c04_generic/docs/
   - 内部链接 (双向)
   - 实战案例
   - 注意事项
-
 - Tier 3 文档额外需要:
   - BNF 语法定义
   - 类型规则表
   - API 参考表
-
 - Tier 4 文档额外需要:
   - 性能分析
   - 基准测试代码

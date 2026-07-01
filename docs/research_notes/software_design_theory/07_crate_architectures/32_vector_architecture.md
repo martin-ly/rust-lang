@@ -1,3 +1,10 @@
+> **Canonical 说明**: 本文件专注 **vector 向量最近邻搜索的 Index 与 Vector trait 架构**。
+>
+> 若只需要使用指南与生态定位，请优先参考：
+> - [机器学习生态](../../../../concept/06_ecosystem/46_machine_learning_ecosystem.md)
+> - [Rust 数据科学](../../../../concept/06_ecosystem/55_rust_for_data_science.md)
+>
+> 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
@@ -52,7 +59,6 @@ let index = Index::build(&vectors, 1, 1, 42);
 
 let neighbors = index.search(&vectors, &[5.0, 5.0], 2);
 ```
-
 > [来源: [FANN: Vector Search in 200 Lines of Rust](https://github.com/stainless-steel/vector)]
 
 ---
@@ -69,7 +75,6 @@ graph LR
     IDX -->|search| QUERY[query: V<br/>目标向量]
     QUERY -->|k| RESULT[Vec<(usize, f64)><br/>邻居索引与距离]
 ```
-
 > [来源: [vector Index Docs](https://docs.rs/vector/latest/vector/struct.Index.html)]
 
 | 类型 | 职责 | 关键方法 |
@@ -93,7 +98,6 @@ graph LR
 ```rust,ignore
 let index = Index::build(&vectors, 16, 200, 42);
 ```
-
 > [来源: [HNSW Algorithm Parameters](https://arxiv.org/abs/1603.09320)]
 
 ### 2.3 搜索接口 {#23-搜索接口}
@@ -106,7 +110,6 @@ let (indices, distances): (Vec<_>, Vec<_>) = index
     .into_iter()
     .unzip();
 ```
-
 > [来源: [vector search Docs](https://docs.rs/vector/latest/vector/struct.Index.html#method.search)]
 
 ### 2.4 与外部嵌入模型组合 {#24-与外部嵌入模型组合}
@@ -119,7 +122,6 @@ let embeddings: Vec<[f64; 384]> = model.encode(sentences);
 let index = Index::build(&embeddings, 16, 200, 42);
 let hits = index.search(&embeddings, &query_embedding, 5);
 ```
-
 > [来源: [vector GitHub Examples](https://github.com/stainless-steel/vector)]
 
 ---
@@ -204,12 +206,10 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 > - [来源: [vector Documentation](https://docs.rs/vector/latest/vector/)]
 > - [来源: [vector crates.io](https://crates.io/crates/vector)]
 > - [来源: [HNSW: Efficient and Robust ANN Search](https://arxiv.org/abs/1603.09320)]
-
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [Approximate Nearest Neighbor Search in High Dimensions](https://dl.acm.org/doi/10.1145/3186725)] — 高维 ANN 综述
 > - [来源: [FANN: Fast Approximate Nearest Neighbors](https://ieeexplore.ieee.org/document/5346045)] — 快速近似最近邻库方法论
-
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [vector GitHub Repository](https://github.com/stainless-steel/vector)]

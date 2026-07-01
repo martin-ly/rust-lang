@@ -61,7 +61,6 @@ fn takes_animals(animals: &[&Animal]) { /* ... */ }
 let cats: &[&Cat] = &[&Cat];
 takes_animals(cats); // ✅ &[&Cat] 可协变为 &[&Animal]
 ```
-
 反例：误以为 `Vec<&Cat>` 可直接传给 `Vec<&Animal>`：
 
 ```rust
@@ -70,7 +69,6 @@ fn takes_animals_vec(animals: Vec<&Animal>) { /* ... */ }
 let cats: Vec<&Cat> = vec![&Cat];
 takes_animals_vec(cats); // ❌ Vec<T> 对 T 是协变，但这里生命周期/类型不匹配
 ```
-
 ### 修复方案 {#修复方案-6}
 
 - 使用 `&[&Cat]` 切片，切片对元素是协变的。
@@ -89,13 +87,11 @@ fn assign<'a, 'b>(x: &'a str, y: &'b str) -> &'b str {
     x // ❌ 'a 不一定比 'b 长
 }
 ```
-
 ### 编译器错误 {#编译器错误-3}
 
 ```text
 error: lifetime may not live long enough
 ```
-
 ### 修复方案 {#修复方案-6}
 
 ```rust
@@ -103,7 +99,6 @@ fn assign<'a, 'b: 'a>(x: &'a str, y: &'b str) -> &'a str {
     x
 }
 ```
-
 或返回 `x` 本身并让生命周期统一。
 
 ---
@@ -115,13 +110,11 @@ fn assign<'a, 'b: 'a>(x: &'a str, y: &'b str) -> &'a str {
 ```rust
 fn take_trait(obj: dyn Trait) { /* ... */ }
 ```
-
 ### 编译器错误 {#编译器错误-3}
 
 ```text
 error[E0277]: the size for values of type `dyn Trait` cannot be known at compilation time
 ```
-
 ### 修复方案 {#修复方案-6}
 
 - 使用引用/智能指针：`&dyn Trait`、`Box<dyn Trait>`、`Rc<dyn Trait>`、`Arc<dyn Trait>`。
@@ -143,7 +136,6 @@ fn consumer() {
     // 无法判断 a 与 b 是否为同一具体类型
 }
 ```
-
 ### 边界 {#边界-1}
 
 - `impl Trait` 返回类型隐藏具体类型，调用者无法构造相同类型。
@@ -166,13 +158,11 @@ impl serde::Serialize for std::vec::Vec<u8> {
     // ...
 }
 ```
-
 ### 编译器错误 {#编译器错误-3}
 
 ```text
 error[E0117]: only traits defined in the current crate can be implemented for arbitrary types
 ```
-
 ### 修复方案 {#修复方案-6}
 
 - 使用 newtype 模式包装外部类型：`struct MyBytes(Vec<u8>)`。
@@ -196,7 +186,6 @@ fn process<I: Iterator>(it: &mut I) -> Option<I::Item> {
 
 // 同时实现多个 Item 类型不可能，但调用者可能误以为可参数化
 ```
-
 ### 边界 {#边界-1}
 
 - 一个类型对同一个 trait 只能有一种关联类型实现。
@@ -222,13 +211,11 @@ impl Drop for Resource {
     fn drop(&mut self) { /* 释放资源 */ }
 }
 ```
-
 ### 编译器错误 {#编译器错误-3}
 
 ```text
 error[E0184]: the trait `Copy` may not be implemented for this type; the type implements `Drop`
 ```
-
 ### 根因 {#根因}
 
 `Copy` 语义按位复制会产生多个相同资源句柄，与 `Drop` 单次释放语义冲突。
@@ -280,7 +267,6 @@ error[E0184]: the trait `Copy` may not be implemented for this type; the type im
 
 - [RFC 到反例自动化映射索引](../10_rfc_to_counterexample_mapping.md)
 - [Rust RFCs 官方索引](https://rust-lang.github.io/rfcs/)
-
 - [RFC 195: Associated items](https://rust-lang.github.io/rfcs/0195-associated-items.html)
 
 ## 权威来源参考 {#权威来源参考}

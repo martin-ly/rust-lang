@@ -152,7 +152,6 @@ mod tests {
     }
 }
 ```
-
 ### 1.3 示例2: 全局日志器单例
 
 ```rust
@@ -245,7 +244,6 @@ pub fn example_usage() {
     }
 }
 ```
-
 ### 1.4 性能对比
 
 ```rust
@@ -290,7 +288,6 @@ pub fn benchmark_oncelock() {
              duration.as_nanos() / ITERATIONS as u128);
 }
 ```
-
 **基准测试结果** (Intel i7-12700K):
 
 - OnceLock首次初始化: ~50 ns
@@ -389,7 +386,6 @@ pub fn example_gats_observer() {
     subject.set_data("更新的数据".to_string());
 }
 ```
-
 ### 2.3 示例2: GATs迭代器视图
 
 ```rust
@@ -439,7 +435,6 @@ pub fn example_gats_iterator() {
     // 零拷贝：没有克隆任何数据
 }
 ```
-
 ### 2.4 性能对比：GATs vs 克隆
 
 ```rust
@@ -503,7 +498,6 @@ pub fn benchmark_gats() {
     println!("GATs方式: {:?}", start.elapsed());
 }
 ```
-
 **基准测试结果**:
 
 - 克隆方式: ~15 ms (100,000次)
@@ -618,7 +612,6 @@ async fn main() -> Result<(), std::io::Error> {
     Ok(())
 }
 ```
-
 ### 3.3 示例2: 异步事件处理器
 
 ```rust
@@ -687,7 +680,6 @@ pub async fn example_async_handler() {
     println!("处理结果: {:?}", results);
 }
 ```
-
 ### 3.4 性能对比
 
 ```rust
@@ -731,7 +723,6 @@ mod new_async {
 // - 更少的间接调用
 // - 性能提升约 20-30%
 ```
-
 ---
 
 ## 🔄 第四部分：RPITIT - trait方法返回impl Trait
@@ -800,7 +791,6 @@ pub fn example_rpitit() {
     println!("字符串: {:?}", strings);
 }
 ```
-
 ### 4.3 示例2: 并行流水线
 
 ```rust
@@ -847,7 +837,6 @@ pub fn example_parallel_rpitit() {
     println!("并行处理结果: {:?}", results);
 }
 ```
-
 ### 4.4 对比：RPITIT vs 关联类型
 
 ```rust
@@ -870,7 +859,6 @@ pub trait NewCollection {
 // 代码量：减少约30%
 // 可读性：显著提升
 ```
-
 ---
 
 ## 🚀 第五部分：let-else - 早退模式
@@ -967,7 +955,6 @@ pub fn example_let_else_chain() {
     println!("处理结果: {:?}", result);
 }
 ```
-
 ### 5.3 示例2: 工厂模式
 
 ```rust
@@ -1063,7 +1050,6 @@ pub fn example_let_else_factory() {
     }
 }
 ```
-
 ### 5.4 代码对比
 
 ```rust
@@ -1104,7 +1090,6 @@ pub fn new_way(input: Option<String>) -> Result<String, String> {
 // 可读性提升: 约40%
 // 代码行数: 减少约20%
 ```
-
 ---
 
 ## 🔧 第六部分：dyn upcasting - trait对象上转型
@@ -1162,7 +1147,6 @@ pub fn example_dyn_upcasting() {
     process_sub(sub_ref);
 }
 ```
-
 ---
 
 ## 📦 第七部分：综合示例 - 完整应用
@@ -1267,7 +1251,6 @@ async fn main() {
     println!("处理结果: {:?}", results);
 }
 ```
-
 ---
 
 ## 📊 第八部分：性能总结
@@ -1346,7 +1329,6 @@ cargo run --example let_else_chain_advanced
 # dyn upcasting 适配器模式
 cargo run --example dyn_upcasting_adapter
 ```
-
 ## 📊 示例特点总结
 
 | 示例 | 代码行数 | 复杂度 | 实用性 | 学习价值 |

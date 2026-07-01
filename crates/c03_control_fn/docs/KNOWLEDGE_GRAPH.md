@@ -102,7 +102,6 @@ graph TB
     K --> N
     L --> O
 ```
-
 ## 🔷 基础层知识图谱
 
 ### 1. 表达式系统基础
@@ -133,7 +132,6 @@ graph LR
     style C fill:#e1ffe1
     style D fill:#fff5e1
 ```
-
 #### 表达式系统知识点矩阵
 
 | 类型         | 求值方式 | 返回值      | 副作用 | 可组合性 | Rust特性       |
@@ -170,7 +168,6 @@ graph TB
     style D fill:#fff5e1
     style E fill:#f5e1ff
 ```
-
 ## 🔶 核心层知识图谱
 
 ### 1. 条件表达式系统完整图谱
@@ -217,7 +214,6 @@ graph TB
     style B fill:#ffe1e1
     style C fill:#ffe1e1
 ```
-
 #### 条件表达式对比矩阵
 
 | 表达式        | 用途     | 穷尽性   | 模式匹配 | 守卫 | Rust 1.92.0 增强 |
@@ -274,7 +270,6 @@ graph TB
     style B fill:#e1ffe1
     style C fill:#e1ffe1
 ```
-
 #### 循环结构对比矩阵
 
 | 循环类型  | 终止条件   | 典型用途 | break值 | 性能 | Rust 1.92.0 特性 |
@@ -325,7 +320,6 @@ graph TB
     style E fill:#ffe1e1
     style I fill:#e1ffe1
 ```
-
 #### 函数传递方式矩阵
 
 | 传递方式            | 所有权    | 性能成本 | 适用场景 | 类型要求 | 典型签名          |
@@ -379,7 +373,6 @@ graph TB
     style G fill:#ffe1e1
     style K fill:#e1ffe1
 ```
-
 ## 🔸 应用层知识图谱
 
 ### 1. 闭包系统生态
@@ -432,7 +425,6 @@ graph TB
     style G fill:#e1ffe1
     style J fill:#fff5e1
 ```
-
 #### 闭包 Trait 对比矩阵
 
 | Fn Trait   | 捕获方式   | 调用次数 | 可变性 | 常见用途 | Rust 1.92.0 改进 |
@@ -489,7 +481,6 @@ graph TB
     style D fill:#e1ffe1
     style H fill:#fff5e1
 ```
-
 #### 错误处理模式矩阵
 
 | 处理方式          | 简洁性     | 安全性     | 适用场景     | 性能   | 推荐度     |
@@ -539,7 +530,6 @@ graph TB
     style C fill:#ffe1e1
     style I fill:#e1ffe1
 ```
-
 ## 🔹 实践层知识图谱
 
 ### 1. 设计模式与控制流
@@ -578,7 +568,6 @@ graph TB
     style C fill:#ffe1e1
     style F fill:#e1ffe1
 ```
-
 ### 2. 性能优化路径图
 
 ```mermaid
@@ -614,7 +603,6 @@ graph LR
     style A fill:#ffe1e1
     style O fill:#e1ffe1
 ```
-
 ## 🎓 学习路径知识图谱
 
 ### 初学者路径（0-3个月）
@@ -634,7 +622,6 @@ graph LR
     style A fill:#e1ffe1
     style J fill:#ffe1e1
 ```
-
 ### 进阶路径（3-12个月）
 
 ```mermaid
@@ -652,7 +639,6 @@ graph LR
     style A fill:#e1ffe1
     style J fill:#ffe1e1
 ```
-
 ### 专家路径（1年+）
 
 ```mermaid
@@ -670,7 +656,6 @@ graph LR
     style A fill:#e1ffe1
     style J fill:#ffe1e1
 ```
-
 ## 📊 概念关系矩阵
 
 ### 核心概念相互依赖
@@ -724,7 +709,6 @@ graph TB
     style C fill:#e1ffe1
     style D fill:#fff5e1
 ```
-
 ## 🆕 Rust 1.90 特性知识图谱
 
 ### 新增和增强特性
@@ -757,20 +741,19 @@ graph TB
     style C fill:#e1f5ff
     style D fill:#fff5e1
 ```
-
 ## 📚 参考和扩展阅读
 
 ### 核心文档链接
 
-- [条件语句指南](tier_02_guides/01_条件语句指南.md) - 理论基础
-- [高级模式匹配](tier_04_advanced/01_高级模式匹配.md) - 核心概念
-- [闭包深入](tier_04_advanced/02_闭包深入.md) - 高级应用
+- [条件语句指南](tier_02_guides/01_conditionals_guide.md) - 理论基础
+- [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md) - 核心概念
+- [闭包深入](tier_04_advanced/02_closures_in_depth.md) - 高级应用
 - [Rust 1.92.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) - 最新特性 🆕
 
 ### 实践指南
 
-- [代码示例集合](tier_02_guides/06_代码示例集合.md) - 模式应用
-- [错误处理指南](tier_02_guides/05_错误处理指南.md) - 实践建议
+- [代码示例集合](tier_02_guides/06_code_examples.md) - 模式应用
+- [错误处理指南](tier_02_guides/05_error_handling_guide.md) - 实践建议
 - [性能优化](tier_04_advanced/05_性能优化.md) - 优化技巧
 
 ---

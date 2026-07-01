@@ -1,0 +1,1624 @@
+# Tier 2: 进程管理快速入门
+
+> **文档类型**: 实践指南
+> **难度**: ⭐⭐ 初级
+> **预计时间**: 2小时
+> **适用版本**: Rust 1.92.0+
+
+---
+
+## 目录
+
+- [Tier 2: 进程管理快速入门](#tier-2-进程管理快速入门)
+  - [目录](#目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+  - [学习目标](#学习目标)
+  - [1. 创建进程](#1-创建进程)
+    - [1.1 基础用法](#11-基础用法)
+    - [1.2 配置选项](#12-配置选项)
+    - [1.3 三种启动方式](#13-三种启动方式)
+  - [2. 管理进程](#2-管理进程)
+    - [2.1 等待进程完成](#21-等待进程完成)
+    - [2.2 获取进程状态](#22-获取进程状态)
+    - [2.3 终止进程](#23-终止进程)
+  - [3. 进程I/O](#3-进程io)
+    - [3.1 捕获输出](#31-捕获输出)
+    - [3.2 传递输入](#32-传递输入)
+    - [3.3 实时通信](#33-实时通信)
+  - [4. 错误处理](#4-错误处理)
+    - [4.1 启动错误](#41-启动错误)
+    - [4.2 执行错误](#42-执行错误)
+    - [4.3 超时处理](#43-超时处理)
+  - [5. 实战案例](#5-实战案例)
+    - [案例1: 命令行包装器](#案例1-命令行包装器)
+    - [案例2: 进程监控器](#案例2-进程监控器)
+    - [案例3: 批量进程执行器](#案例3-批量进程执行器)
+    - [案例4: 进程管道链](#案例4-进程管道链)
+    - [案例5: 进程池管理器](#案例5-进程池管理器)
+    - [案例6: 进程看门狗](#案例6-进程看门狗)
+    - [案例7: 资源限制执行](#案例7-资源限制执行)
+  - [6. 最佳实践](#6-最佳实践)
+  - [7. 练习题](#7-练习题)
+  - [8. 常见问题解答](#8-常见问题解答)
+    - [Q1: 如何判断进程是否在运行？](#q1-如何判断进程是否在运行)
+    - [Q2: 为什么会出现僵尸进程？](#q2-为什么会出现僵尸进程)
+    - [Q3: 如何处理大量输出避免管道阻塞？](#q3-如何处理大量输出避免管道阻塞)
+    - [Q4: Windows和Unix的进程管理有什么区别？](#q4-windows和unix的进程管理有什么区别)
+    - [Q5: 如何实现进程超时？](#q5-如何实现进程超时)
+    - [Q6: 如何在进程间共享数据？](#q6-如何在进程间共享数据)
+    - [Q7: 如何限制进程资源使用？](#q7-如何限制进程资源使用)
+    - [Q8: 如何捕获Ctrl+C信号并清理子进程？](#q8-如何捕获ctrlc信号并清理子进程)
+    - [Q9: 如何实现进程日志轮转？](#q9-如何实现进程日志轮转)
+    - [Q10: 如何调试进程问题？](#q10-如何调试进程问题)
+  - [9. 性能优化技巧](#9-性能优化技巧)
+    - [9.1 减少进程创建开销](#91-减少进程创建开销)
+    - [9.2 优化输出处理](#92-优化输出处理)
+    - [9.3 并行执行策略](#93-并行执行策略)
+    - [9.4 内存优化](#94-内存优化)
+  - [10. 安全注意事项](#10-安全注意事项)
+    - [10.1 命令注入防护](#101-命令注入防护)
+    - [10.2 权限最小化](#102-权限最小化)
+    - [10.3 输入验证](#103-输入验证)
+    - [10.4 审计和日志](#104-审计和日志)
+  - [下一步](#下一步)
+  - [**适用版本**: Rust 1.92.0+](#适用版本-rust-1920)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**进程 (Process)**:
+
+- **定义**: 程序的执行实例，拥有独立的地址空间和资源
+- **类型**: 系统概念
+- **范畴**: 系统编程
+- **版本**: Rust 1.0+
+- **相关概念**: 线程、IPC、信号、进程组
+
+**进程管理 (Process Management)**:
+
+- **定义**: 创建、监控、控制和终止进程的操作
+- **类型**: 复合概念
+- **属性**: 生命周期管理、资源控制、错误处理
+- **关系**: 与进程、IPC、同步相关
+
+### 属性特征
+
+**核心属性**:
+
+- **独立地址空间**: 每个进程有独立的内存空间
+- **资源隔离**: 进程间资源相互隔离
+- **进程 ID (PID)**: 唯一标识进程
+- **父子关系**: 进程可以创建子进程
+
+**性能特征**:
+
+- **创建开销**: 进程创建开销较大
+- **内存占用**: 每个进程有独立的地址空间
+- **适用场景**: 系统管理、服务守护、任务隔离
+
+### 关系连接
+
+**继承关系**:
+
+- 子进程 --[is-a]--> 进程
+
+**组合关系**:
+
+- 进程组 --[has-a]--> 多个进程
+- 进程池 --[has-a]--> 多个进程
+
+**依赖关系**:
+
+- 进程管理 --[depends-on]--> 操作系统进程支持
+- IPC --[depends-on]--> 进程间通信机制
+
+### 思维导图
+
+```text
+进程管理快速入门
+│
+├── 创建进程
+│   ├── 基础用法
+│   ├── 配置选项
+│   └── 启动方式
+├── 管理进程
+│   ├── 等待完成
+│   ├── 获取状态
+│   └── 终止进程
+├── 进程 I/O
+│   ├── 捕获输出
+│   ├── 传递输入
+│   └── 实时通信
+└── 错误处理
+    ├── 启动错误
+    ├── 执行错误
+    └── 超时处理
+```
+---
+
+## 学习目标
+
+完成本指南后，你将能够：
+
+- ✅ 创建和配置子进程
+- ✅ 管理进程生命周期
+- ✅ 处理进程输入输出
+- ✅ 实现健壮的错误处理
+- ✅ 构建实用的进程管理工具
+
+---
+
+## 1. 创建进程
+
+### 1.1 基础用法
+
+使用 `Command` 创建进程：
+
+```rust
+use std::process::Command;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // 创建并运行进程
+    let output = Command::new("echo")
+        .arg("Hello, World!")
+        .output()?;
+
+    println!("status: {}", output.status);
+    println!("stdout: {}", String::from_utf8_lossy(&output.stdout));
+
+    Ok(())
+}
+```
+**关键点**:
+
+- `Command::new()`: 指定程序路径
+- `.arg()`: 添加命令行参数
+- `.output()`: 等待完成并获取输出
+
+---
+
+### 1.2 配置选项
+
+**设置工作目录**:
+
+```rust
+let output = Command::new("ls")
+    .current_dir("/tmp")
+    .output()?;
+```
+**设置环境变量**:
+
+```rust
+let output = Command::new("env")
+    .env("MY_VAR", "my_value")
+    .env_clear()  // 清除继承的环境变量
+    .env("PATH", "/usr/bin")
+    .output()?;
+```
+**完整配置示例**:
+
+```rust
+let mut child = Command::new("my_program")
+    .arg("--config")
+    .arg("config.toml")
+    .current_dir("/app")
+    .env("LOG_LEVEL", "debug")
+    .stdin(Stdio::piped())
+    .stdout(Stdio::piped())
+    .stderr(Stdio::piped())
+    .spawn()?;
+```
+---
+
+### 1.3 三种启动方式
+
+**方式1: `output()` - 等待并获取输出**:
+
+```rust
+let output = Command::new("ls").output()?;
+// 阻塞直到进程完成
+// 返回 Output { status, stdout, stderr }
+```
+**方式2: `status()` - 只获取退出状态**:
+
+```rust
+let status = Command::new("ls").status()?;
+// 阻塞直到进程完成
+// 只返回 ExitStatus
+```
+**方式3: `spawn()` - 立即返回**:
+
+```rust
+let mut child = Command::new("sleep")
+    .arg("10")
+    .spawn()?;
+// 立即返回，进程在后台运行
+// 返回 Child 对象
+```
+**对比**:
+
+| 方法       | 阻塞 | 返回值       | 用途           |
+| :--- | :--- | :--- | :--- || `output()` | 是   | `Output`     | 需要捕获输出   |
+| `status()` | 是   | `ExitStatus` | 只关心退出状态 |
+| `spawn()`  | 否   | `Child`      | 需要后续操作   |
+
+---
+
+## 2. 管理进程
+
+### 2.1 等待进程完成
+
+**阻塞等待**:
+
+```rust
+let mut child = Command::new("sleep")
+    .arg("5")
+    .spawn()?;
+
+// 阻塞直到子进程完成
+let status = child.wait()?;
+println!("进程退出: {}", status);
+```
+**非阻塞检查**:
+
+```rust
+let mut child = Command::new("long_task").spawn()?;
+
+loop {
+    match child.try_wait()? {
+        Some(status) => {
+            println!("进程完成: {}", status);
+            break;
+        }
+        None => {
+            println!("仍在运行...");
+            std::thread::sleep(std::time::Duration::from_secs(1));
+        }
+    }
+}
+```
+---
+
+### 2.2 获取进程状态
+
+**获取PID**:
+
+```rust
+let child = Command::new("app").spawn()?;
+println!("进程ID: {}", child.id());
+```
+**检查退出状态**:
+
+```rust
+let status = child.wait()?;
+
+if status.success() {
+    println!("成功");
+} else {
+    if let Some(code) = status.code() {
+        eprintln!("失败，退出码: {}", code);
+    } else {
+        eprintln!("被信号终止");
+    }
+}
+```
+**Unix信号检查**:
+
+```rust
+#[cfg(unix)]
+{
+    use std::os::unix::process::ExitStatusExt;
+
+    if let Some(signal) = status.signal() {
+        eprintln!("被信号 {} 终止", signal);
+    }
+}
+```
+---
+
+### 2.3 终止进程
+
+**强制终止**:
+
+```rust
+let mut child = Command::new("app").spawn()?;
+
+// 终止进程
+child.kill()?;
+
+// 回收资源
+child.wait()?;
+```
+**Unix优雅终止**:
+
+```rust
+#[cfg(unix)]
+{
+    use nix::sys::signal::{kill, Signal};
+    use nix::unistd::Pid;
+
+    let pid = Pid::from_raw(child.id() as i32);
+
+    // 发送SIGTERM（优雅终止）
+    kill(pid, Signal::SIGTERM)?;
+
+    // 等待5秒
+    std::thread::sleep(std::time::Duration::from_secs(5));
+
+    // 检查是否还在运行
+    if child.try_wait()?.is_none() {
+        // 强制SIGKILL
+        kill(pid, Signal::SIGKILL)?;
+    }
+
+    child.wait()?;
+}
+```
+---
+
+## 3. 进程I/O
+
+### 3.1 捕获输出
+
+**基础捕获**:
+
+```rust
+let output = Command::new("echo")
+    .arg("Hello")
+    .output()?;
+
+let stdout = String::from_utf8_lossy(&output.stdout);
+let stderr = String::from_utf8_lossy(&output.stderr);
+
+println!("标准输出: {}", stdout);
+println!("标准错误: {}", stderr);
+```
+**分离读取**:
+
+```rust
+use std::io::Read;
+
+let mut child = Command::new("cat")
+    .arg("file.txt")
+    .stdout(Stdio::piped())
+    .spawn()?;
+
+if let Some(mut stdout) = child.stdout.take() {
+    let mut buffer = String::new();
+    stdout.read_to_string(&mut buffer)?;
+    println!("{}", buffer);
+}
+
+child.wait()?;
+```
+---
+
+### 3.2 传递输入
+
+**写入stdin**:
+
+```rust
+use std::io::Write;
+
+let mut child = Command::new("cat")
+    .stdin(Stdio::piped())
+    .stdout(Stdio::piped())
+    .spawn()?;
+
+// 写入数据
+if let Some(mut stdin) = child.stdin.take() {
+    stdin.write_all(b"Hello from stdin!\n")?;
+    // drop(stdin) 自动关闭
+}
+
+// 读取输出
+let output = child.wait_with_output()?;
+println!("{}", String::from_utf8_lossy(&output.stdout));
+```
+---
+
+### 3.3 实时通信
+
+**双向通信**:
+
+```rust
+use std::io::{BufRead, BufReader, Write};
+
+let mut child = Command::new("python")
+    .arg("-u")  // unbuffered
+    .arg("interactive.py")
+    .stdin(Stdio::piped())
+    .stdout(Stdio::piped())
+    .spawn()?;
+
+let mut stdin = child.stdin.take().unwrap();
+let stdout = child.stdout.take().unwrap();
+let reader = BufReader::new(stdout);
+
+// 写入
+stdin.write_all(b"input1\n")?;
+stdin.flush()?;
+
+// 读取响应
+for line in reader.lines().take(1) {
+    println!("Response: {}", line?);
+}
+
+child.kill()?;
+child.wait()?;
+```
+---
+
+## 4. 错误处理
+
+### 4.1 启动错误
+
+```rust
+use std::io::ErrorKind;
+
+match Command::new("nonexistent_program").spawn() {
+    Ok(child) => println!("成功启动: PID {}", child.id()),
+    Err(e) => match e.kind() {
+        ErrorKind::NotFound => {
+            eprintln!("❌ 程序不存在");
+        }
+        ErrorKind::PermissionDenied => {
+            eprintln!("❌ 权限不足");
+        }
+        _ => {
+            eprintln!("❌ 其他错误: {}", e);
+        }
+    }
+}
+```
+---
+
+### 4.2 执行错误
+
+```rust
+let output = Command::new("app")
+    .arg("--config")
+    .arg("missing.toml")
+    .output()?;
+
+if !output.status.success() {
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    eprintln!("执行失败:\n{}", stderr);
+
+    if let Some(code) = output.status.code() {
+        eprintln!("退出码: {}", code);
+    }
+}
+```
+---
+
+### 4.3 超时处理
+
+```rust
+use std::time::{Duration, Instant};
+
+let mut child = Command::new("slow_task").spawn()?;
+let timeout = Duration::from_secs(30);
+let start = Instant::now();
+
+loop {
+    match child.try_wait()? {
+        Some(status) => {
+            println!("✅ 完成: {}", status);
+            break;
+        }
+        None if start.elapsed() >= timeout => {
+            eprintln!("⏰ 超时，终止进程");
+            child.kill()?;
+            child.wait()?;
+            return Err("Timeout".into());
+        }
+        None => {
+            std::thread::sleep(Duration::from_millis(100));
+        }
+    }
+}
+```
+---
+
+## 5. 实战案例
+
+### 案例1: 命令行包装器
+
+封装系统命令，提供友好接口：
+
+```rust
+use std::process::Command;
+
+struct ShellCommand {
+    command: String,
+}
+
+impl ShellCommand {
+    fn new(cmd: &str) -> Self {
+        Self {
+            command: cmd.to_string(),
+        }
+    }
+
+    fn execute(&self) -> Result<String, Box<dyn std::error::Error>> {
+        let output = if cfg!(windows) {
+            Command::new("cmd")
+                .args(["/C", &self.command])
+                .output()?
+        } else {
+            Command::new("sh")
+                .args(["-c", &self.command])
+                .output()?
+        };
+
+        if output.status.success() {
+            Ok(String::from_utf8_lossy(&output.stdout).to_string())
+        } else {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            Err(format!("Command failed: {}", stderr).into())
+        }
+    }
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let cmd = ShellCommand::new("echo Hello && ls");
+    let result = cmd.execute()?;
+    println!("{}", result);
+    Ok(())
+}
+```
+---
+
+### 案例2: 进程监控器
+
+监控进程资源使用：
+
+```rust
+use std::process::Command;
+use std::time::Duration;
+
+struct ProcessMonitor {
+    child: std::process::Child,
+}
+
+impl ProcessMonitor {
+    fn spawn(program: &str) -> Result<Self, std::io::Error> {
+        let child = Command::new(program).spawn()?;
+        Ok(Self { child })
+    }
+
+    fn is_running(&mut self) -> Result<bool, std::io::Error> {
+        match self.child.try_wait()? {
+            Some(_) => Ok(false),
+            None => Ok(true),
+        }
+    }
+
+    fn wait_with_timeout(&mut self, timeout: Duration)
+        -> Result<bool, Box<dyn std::error::Error>>
+    {
+        let start = std::time::Instant::now();
+
+        while start.elapsed() < timeout {
+            if !self.is_running()? {
+                return Ok(true);  // 完成
+            }
+            std::thread::sleep(Duration::from_millis(100));
+        }
+
+        Ok(false)  // 超时
+    }
+}
+
+impl Drop for ProcessMonitor {
+    fn drop(&mut self) {
+        let _ = self.child.kill();
+        let _ = self.child.wait();
+    }
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut monitor = ProcessMonitor::spawn("sleep")?;
+
+    println!("进程启动: PID {}", monitor.child.id());
+
+    if monitor.wait_with_timeout(Duration::from_secs(5))? {
+        println!("✅ 进程完成");
+    } else {
+        println!("⏰ 进程超时");
+    }
+
+    Ok(())
+}
+```
+---
+
+### 案例3: 批量进程执行器
+
+执行多个命令并收集结果：
+
+```rust
+use std::process::Command;
+
+struct BatchExecutor {
+    results: Vec<(String, bool)>,
+}
+
+impl BatchExecutor {
+    fn new() -> Self {
+        Self { results: Vec::new() }
+    }
+
+    fn execute(&mut self, commands: &[(&str, Vec<&str>)]) {
+        for (program, args) in commands {
+            let result = Command::new(program)
+                .args(args)
+                .output();
+
+            match result {
+                Ok(output) => {
+                    let success = output.status.success();
+                    let cmd_str = format!("{} {}", program, args.join(" "));
+                    self.results.push((cmd_str, success));
+
+                    if success {
+                        println!("✅ {}", program);
+                    } else {
+                        println!("❌ {}", program);
+                    }
+                }
+                Err(e) => {
+                    println!("❌ {} failed to start: {}", program, e);
+                    self.results.push((program.to_string(), false));
+                }
+            }
+        }
+    }
+
+    fn summary(&self) {
+        let total = self.results.len();
+        let success = self.results.iter().filter(|(_, ok)| *ok).count();
+        println!("\n📊 Summary: {}/{} succeeded", success, total);
+    }
+}
+
+fn main() {
+    let mut executor = BatchExecutor::new();
+
+    let commands = vec![
+        ("echo", vec!["test"]),
+        ("ls", vec!["-la"]),
+        ("pwd", vec![]),
+    ];
+
+    executor.execute(&commands);
+    executor.summary();
+}
+```
+---
+
+### 案例4: 进程管道链
+
+连接多个进程形成处理管道：
+
+```rust
+use std::process::{Command, Stdio};
+use std::io::Write;
+
+fn execute_pipeline() -> Result<String, Box<dyn std::error::Error>> {
+    // 第一个进程: cat file
+    let mut cat = Command::new("cat")
+        .arg("data.txt")
+        .stdout(Stdio::piped())
+        .spawn()?;
+
+    // 第二个进程: grep pattern
+    let mut grep = Command::new("grep")
+        .arg("pattern")
+        .stdin(cat.stdout.take().unwrap())
+        .stdout(Stdio::piped())
+        .spawn()?;
+
+    // 第三个进程: sort
+    let sort_output = Command::new("sort")
+        .stdin(grep.stdout.take().unwrap())
+        .output()?;
+
+    // 等待前面的进程
+    cat.wait()?;
+    grep.wait()?;
+
+    Ok(String::from_utf8_lossy(&sort_output.stdout).to_string())
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let result = execute_pipeline()?;
+    println!("Pipeline result:\n{}", result);
+    Ok(())
+}
+```
+---
+
+### 案例5: 进程池管理器
+
+管理固定数量的worker进程：
+
+```rust
+use std::process::{Command, Child};
+use std::collections::VecDeque;
+
+struct ProcessPool {
+    max_workers: usize,
+    active: Vec<Child>,
+    pending: VecDeque<(String, Vec<String>)>,
+}
+
+impl ProcessPool {
+    fn new(max_workers: usize) -> Self {
+        Self {
+            max_workers,
+            active: Vec::new(),
+            pending: VecDeque::new(),
+        }
+    }
+
+    fn submit(&mut self, program: String, args: Vec<String>) {
+        self.pending.push_back((program, args));
+        self.try_start_pending();
+    }
+
+    fn try_start_pending(&mut self) {
+        while self.active.len() < self.max_workers {
+            if let Some((program, args)) = self.pending.pop_front() {
+                match Command::new(&program).args(&args).spawn() {
+                    Ok(child) => {
+                        println!("🚀 Started: {} (PID {})", program, child.id());
+                        self.active.push(child);
+                    }
+                    Err(e) => {
+                        eprintln!("❌ Failed to start {}: {}", program, e);
+                    }
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    fn wait_any(&mut self) -> Result<(), std::io::Error> {
+        let mut i = 0;
+        while i < self.active.len() {
+            match self.active[i].try_wait()? {
+                Some(status) => {
+                    let child = self.active.remove(i);
+                    println!("✅ Completed: PID {} - {}", child.id(), status);
+                    self.try_start_pending();
+                }
+                None => {
+                    i += 1;
+                }
+            }
+        }
+        Ok(())
+    }
+
+    fn wait_all(&mut self) -> Result<(), std::io::Error> {
+        while !self.active.is_empty() || !self.pending.is_empty() {
+            self.wait_any()?;
+            std::thread::sleep(std::time::Duration::from_millis(100));
+        }
+        Ok(())
+    }
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut pool = ProcessPool::new(3);
+
+    // Submit 10 tasks
+    for i in 0..10 {
+        pool.submit("sleep".to_string(), vec![format!("{}", i % 3 + 1)]);
+    }
+
+    println!("⏳ Waiting for all tasks...");
+    pool.wait_all()?;
+    println!("✅ All tasks completed!");
+
+    Ok(())
+}
+```
+---
+
+### 案例6: 进程看门狗
+
+自动重启崩溃的进程：
+
+```rust
+use std::process::{Command, Child};
+use std::time::{Duration, Instant};
+
+struct ProcessWatchdog {
+    program: String,
+    args: Vec<String>,
+    child: Option<Child>,
+    restart_count: u32,
+    max_restarts: u32,
+}
+
+impl ProcessWatchdog {
+    fn new(program: String, args: Vec<String>, max_restarts: u32) -> Self {
+        Self {
+            program,
+            args,
+            child: None,
+            restart_count: 0,
+            max_restarts,
+        }
+    }
+
+    fn start(&mut self) -> Result<(), std::io::Error> {
+        let child = Command::new(&self.program)
+            .args(&self.args)
+            .spawn()?;
+
+        println!("🚀 Process started: PID {}", child.id());
+        self.child = Some(child);
+        Ok(())
+    }
+
+    fn monitor(&mut self, check_interval: Duration) -> Result<(), std::io::Error> {
+        self.start()?;
+
+        loop {
+            std::thread::sleep(check_interval);
+
+            if let Some(ref mut child) = self.child {
+                match child.try_wait()? {
+                    Some(status) => {
+                        println!("⚠️  Process exited: {}", status);
+
+                        if self.restart_count < self.max_restarts {
+                            self.restart_count += 1;
+                            println!("🔄 Restarting... ({}/{})",
+                                self.restart_count, self.max_restarts);
+                            self.child = None;
+                            self.start()?;
+                        } else {
+                            println!("❌ Max restarts reached");
+                            break;
+                        }
+                    }
+                    None => {
+                        // Process still running
+                    }
+                }
+            }
+        }
+
+        Ok(())
+    }
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut watchdog = ProcessWatchdog::new(
+        "your_program".to_string(),
+        vec![],
+        3,
+    );
+
+    watchdog.monitor(Duration::from_secs(2))?;
+    Ok(())
+}
+```
+---
+
+### 案例7: 资源限制执行
+
+限制进程的资源使用（Unix）：
+
+```rust
+#[cfg(unix)]
+use std::process::{Command, Stdio};
+
+#[cfg(unix)]
+fn spawn_limited(program: &str, memory_mb: usize) -> std::io::Result<std::process::Child> {
+    Command::new("sh")
+        .arg("-c")
+        .arg(format!(
+            "ulimit -v {} && exec {}",
+            memory_mb * 1024,
+            program
+        ))
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+}
+
+#[cfg(unix)]
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    println!("🚀 Starting process with 512MB memory limit");
+
+    let mut child = spawn_limited("python3", 512)?;
+    let output = child.wait_with_output()?;
+
+    if output.status.success() {
+        println!("✅ Process completed successfully");
+    } else {
+        println!("❌ Process failed: {}",
+            String::from_utf8_lossy(&output.stderr));
+    }
+
+    Ok(())
+}
+
+#[cfg(not(unix))]
+fn main() {
+    println!("This example is Unix-only");
+}
+```
+---
+
+## 6. 最佳实践
+
+**✅ DO**:
+
+- 始终处理错误（使用 `?` 或 `match`）
+- 及时回收子进程（调用 `wait()` 或 `try_wait()`）
+- 使用 `Stdio::null()` 忽略不需要的输出
+- 实现超时机制防止挂起
+- 使用 RAII 模式管理进程生命周期
+
+**❌ DON'T**:
+
+- 不要忽略 `spawn()` 的错误
+- 不要忘记等待子进程（会产生僵尸进程）
+- 不要假设进程一定会成功
+- 不要在生产环境中使用 `unwrap()`
+- 不要忽略信号处理（Unix）
+
+**高级技巧**:
+
+1. **使用 `try_wait()` 实现非阻塞监控**:
+
+   ```rust
+   loop {
+       match child.try_wait()? {
+           Some(status) => {
+               println!("Process finished: {}", status);
+               break;
+           }
+           None => {
+               // Process still running, do other work
+               std::thread::sleep(Duration::from_millis(100));
+           }
+       }
+   }
+   ```
+2. **实现优雅的关闭**:
+
+   ```rust
+   impl Drop for ManagedProcess {
+       fn drop(&mut self) {
+           // Try graceful shutdown first
+           if let Some(ref mut child) = self.child {
+               #[cfg(unix)]
+               {
+                   // Send SIGTERM
+                   unsafe {
+                       libc::kill(child.id() as i32, libc::SIGTERM);
+                   }
+
+                   // Wait briefly
+                   std::thread::sleep(Duration::from_millis(1000));
+
+                   // Force kill if still alive
+                   let _ = child.kill();
+               }
+
+               #[cfg(not(unix))]
+               {
+                   let _ = child.kill();
+               }
+
+               let _ = child.wait();
+           }
+       }
+   }
+   ```
+3. **避免管道死锁**:
+
+   ```rust
+   // ❌ Wrong: can deadlock if buffer fills
+   let mut child = Command::new("program")
+       .stdout(Stdio::piped())
+       .spawn()?;
+   let output = child.wait_with_output()?;
+
+   // ✅ Better: use separate threads or async
+   use std::io::Read;
+   use std::thread;
+
+   let mut child = Command::new("program")
+       .stdout(Stdio::piped())
+       .spawn()?;
+
+   let mut stdout = child.stdout.take().unwrap();
+   let handle = thread::spawn(move || {
+       let mut buffer = String::new();
+       stdout.read_to_string(&mut buffer).unwrap();
+       buffer
+   });
+
+   child.wait()?;
+   let output = handle.join().unwrap();
+   ```
+4. **跨平台进程创建**:
+
+   ```rust
+   fn create_shell_command(cmd: &str) -> Command {
+       if cfg!(windows) {
+           let mut command = Command::new("cmd");
+           command.args(&["/C", cmd]);
+           command
+       } else {
+           let mut command = Command::new("sh");
+           command.args(&["-c", cmd]);
+           command
+       }
+   }
+   ```
+---
+
+## 7. 练习题
+
+**练习1**: 创建一个程序，运行 `ls -la`（Unix）或 `dir`（Windows），并打印输出。
+
+**练习2**: 实现一个超时运行器，如果进程运行超过指定时间就终止它。
+
+**练习3**: 创建一个进程池，同时运行多个进程并等待所有完成。
+
+**练习4**: 实现一个交互式shell包装器，支持多次命令输入输出。
+
+---
+
+## 8. 常见问题解答
+
+### Q1: 如何判断进程是否在运行？
+
+**A**: 使用 `try_wait()` 方法进行非阻塞检查：
+
+```rust
+match child.try_wait()? {
+    Some(_) => println!("Process finished"),
+    None => println!("Process still running"),
+}
+```
+---
+
+### Q2: 为什么会出现僵尸进程？
+
+**A**: 当父进程没有调用 `wait()` 回收子进程时，子进程会成为僵尸进程。解决方法：
+
+```rust
+// ✅ 总是调用 wait() 或 try_wait()
+let status = child.wait()?;
+
+// ✅ 或者使用 Drop trait自动回收
+impl Drop for ProcessGuard {
+    fn drop(&mut self) {
+        let _ = self.child.wait();
+    }
+}
+```
+---
+
+### Q3: 如何处理大量输出避免管道阻塞？
+
+**A**: 使用单独的线程或异步IO读取输出：
+
+```rust
+use std::io::Read;
+use std::thread;
+
+let mut child = Command::new("program")
+    .stdout(Stdio::piped())
+    .spawn()?;
+
+let mut stdout = child.stdout.take().unwrap();
+thread::spawn(move || {
+    let mut buffer = Vec::new();
+    stdout.read_to_end(&mut buffer).unwrap();
+    buffer
+});
+
+child.wait()?;
+```
+---
+
+### Q4: Windows和Unix的进程管理有什么区别？
+
+**A**: 主要区别：
+
+| 特性   | Unix               | Windows         |
+| :--- | :--- | :--- || 进程树 | fork()形成层级     | 独立创建        |
+| 信号   | SIGTERM, SIGKILL等 | 有限支持        |
+| 退出码 | 0-255              | 0-4294967295    |
+| Shell  | sh, bash           | cmd, powershell |
+| 进程组 | 支持               | 有限支持        |
+
+跨平台示例：
+
+```rust
+#[cfg(unix)]
+fn kill_process_group(child: &Child) {
+    use std::os::unix::process::CommandExt;
+    unsafe {
+        libc::killpg(child.id() as i32, libc::SIGTERM);
+    }
+}
+
+#[cfg(windows)]
+fn kill_process_group(child: &Child) {
+    // Windows doesn't have direct process group concept
+    child.kill().ok();
+}
+```
+---
+
+### Q5: 如何实现进程超时？
+
+**A**: 使用 `try_wait()` 循环配合计时器：
+
+```rust
+use std::time::{Duration, Instant};
+
+fn wait_with_timeout(child: &mut Child, timeout: Duration) -> Result<ExitStatus, String> {
+    let start = Instant::now();
+
+    loop {
+        match child.try_wait() {
+            Ok(Some(status)) => return Ok(status),
+            Ok(None) => {
+                if start.elapsed() > timeout {
+                    child.kill().ok();
+                    return Err("Timeout".to_string());
+                }
+                std::thread::sleep(Duration::from_millis(100));
+            }
+            Err(e) => return Err(e.to_string()),
+        }
+    }
+}
+```
+---
+
+### Q6: 如何在进程间共享数据？
+
+**A**: 使用IPC机制：
+
+1. **管道**: 通过stdin/stdout通信
+2. **共享内存**: 使用`shared_memory` crate
+3. **消息队列**: 使用`ipc-channel` crate
+4. **网络socket**: TCP/UDP本地通信
+
+示例（管道）：
+
+```rust
+let mut child = Command::new("grep")
+    .arg("pattern")
+    .stdin(Stdio::piped())
+    .stdout(Stdio::piped())
+    .spawn()?;
+
+// 写入数据
+if let Some(ref mut stdin) = child.stdin {
+    stdin.write_all(b"data to process\n")?;
+}
+
+// 读取结果
+let output = child.wait_with_output()?;
+```
+---
+
+### Q7: 如何限制进程资源使用？
+
+**A**:
+
+**Unix** - 使用 `ulimit` 或 `setrlimit`:
+
+```rust
+#[cfg(unix)]
+use std::os::unix::process::CommandExt;
+
+Command::new("program")
+    .pre_exec(|| {
+        // 限制虚拟内存为512MB
+        unsafe {
+            let limit = libc::rlimit {
+                rlim_cur: 512 * 1024 * 1024,
+                rlim_max: 512 * 1024 * 1024,
+            };
+            libc::setrlimit(libc::RLIMIT_AS, &limit);
+        }
+        Ok(())
+    })
+    .spawn()?;
+```
+**Windows** - 使用Job Objects:
+
+```rust
+// 需要使用 winapi crate
+#[cfg(windows)]
+use winapi::um::jobapi2::*;
+```
+---
+
+### Q8: 如何捕获Ctrl+C信号并清理子进程？
+
+**A**: 使用 `ctrlc` crate:
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::sync::atomic::{AtomicBool, Ordering};
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let running = Arc::new(AtomicBool::new(true));
+    let r = running.clone();
+
+    ctrlc::set_handler(move || {
+        r.store(false, Ordering::SeqCst);
+    })?;
+
+    let mut child = Command::new("long_running_task").spawn()?;
+
+    while running.load(Ordering::SeqCst) {
+        match child.try_wait()? {
+            Some(status) => {
+                println!("Process finished: {}", status);
+                break;
+            }
+            None => std::thread::sleep(Duration::from_millis(100)),
+        }
+    }
+
+    if running.load(Ordering::SeqCst) == false {
+        println!("Received Ctrl+C, killing child...");
+        child.kill()?;
+        child.wait()?;
+    }
+
+    Ok(())
+}
+```
+---
+
+### Q9: 如何实现进程日志轮转？
+
+**A**: 监控输出并自动切换日志文件：
+
+```rust
+use std::fs::OpenOptions;
+use std::io::{BufRead, BufReader, Write};
+
+struct LogRotator {
+    base_path: String,
+    max_size: u64,
+    current_file: usize,
+    current_size: u64,
+}
+
+impl LogRotator {
+    fn new(base_path: String, max_size: u64) -> Self {
+        Self {
+            base_path,
+            max_size,
+            current_file: 0,
+            current_size: 0,
+        }
+    }
+
+    fn write_line(&mut self, line: &str) -> std::io::Result<()> {
+        if self.current_size > self.max_size {
+            self.current_file += 1;
+            self.current_size = 0;
+        }
+
+        let path = format!("{}.{}", self.base_path, self.current_file);
+        let mut file = OpenOptions::new()
+            .create(true)
+            .append(true)
+            .open(path)?;
+
+        writeln!(file, "{}", line)?;
+        self.current_size += line.len() as u64 + 1;
+        Ok(())
+    }
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut child = Command::new("program")
+        .stdout(Stdio::piped())
+        .spawn()?;
+
+    let stdout = child.stdout.take().unwrap();
+    let reader = BufReader::new(stdout);
+
+    let mut rotator = LogRotator::new("output.log".to_string(), 1024 * 1024);
+
+    for line in reader.lines() {
+        let line = line?;
+        rotator.write_line(&line)?;
+    }
+
+    child.wait()?;
+    Ok(())
+}
+```
+---
+
+### Q10: 如何调试进程问题？
+
+**A**: 常用调试技巧：
+
+1. **启用详细输出**:
+
+   ```rust
+   let output = Command::new("program")
+       .env("RUST_LOG", "debug")
+       .env("RUST_BACKTRACE", "1")
+       .output()?;
+
+   println!("stdout: {}", String::from_utf8_lossy(&output.stdout));
+   println!("stderr: {}", String::from_utf8_lossy(&output.stderr));
+   println!("status: {}", output.status);
+   ```
+2. **检查环境变量**:
+
+   ```rust
+   println!("PATH: {:?}", std::env::var("PATH"));
+   println!("Current dir: {:?}", std::env::current_dir());
+   ```
+3. **使用strace/truss(Unix)或Process Monitor(Windows)**:
+
+   ```bash
+   # Unix
+   strace -f your_program
+
+   # Windows
+   procmon.exe
+   ```
+4. **记录所有spawn调用**:
+
+   ```rust
+   fn spawn_logged(cmd: &mut Command) -> std::io::Result<Child> {
+       eprintln!("🚀 Spawning: {:?}", cmd);
+       let child = cmd.spawn()?;
+       eprintln!("✅ PID: {}", child.id());
+       Ok(child)
+   }
+   ```
+---
+
+## 9. 性能优化技巧
+
+### 9.1 减少进程创建开销
+
+进程创建是昂贵的操作，考虑：
+
+1. **进程池复用**:
+
+   ```rust
+   struct ProcessPool {
+       workers: Vec<Child>,
+   }
+
+   impl ProcessPool {
+       fn reuse_worker(&mut self) -> &mut Child {
+           // 复用已完成的worker
+           for worker in &mut self.workers {
+               if let Ok(Some(_)) = worker.try_wait() {
+                   return worker;
+               }
+           }
+           // 或创建新worker
+           self.workers.push(self.spawn_new_worker());
+           self.workers.last_mut().unwrap()
+       }
+   }
+   ```
+2. **批处理任务**:
+
+```rust
+// ❌ 每次创建进程
+for item in items {
+    Command::new("process").arg(item).output()?;
+}
+
+// ✅ 批量处理
+let items_str = items.join("\n");
+Command::new("process")
+    .stdin(Stdio::piped())
+    .spawn()?
+    .stdin.as_mut().unwrap()
+    .write_all(items_str.as_bytes())?;
+```
+---
+
+### 9.2 优化输出处理
+
+避免不必要的缓冲和复制：
+
+```rust
+// ❌ 低效：多次复制
+let output = child.wait_with_output()?;
+let text = String::from_utf8(output.stdout)?;
+
+// ✅ 流式处理
+let stdout = child.stdout.take().unwrap();
+let reader = BufReader::new(stdout);
+for line in reader.lines() {
+    process_line(&line?);
+}
+```
+---
+
+### 9.3 并行执行策略
+
+根据任务类型选择策略：
+
+```rust
+// CPU密集型：限制并发数
+let semaphore = Arc::new(Semaphore::new(num_cpus::get()));
+
+// IO密集型：更高并发
+let semaphore = Arc::new(Semaphore::new(num_cpus::get() * 4));
+
+// 混合型：动态调整
+struct AdaptivePool {
+    cpu_tasks: usize,
+    io_tasks: usize,
+    max_workers: usize,
+}
+```
+---
+
+### 9.4 内存优化
+
+1. **避免输出累积**:
+
+   ```rust
+   // ❌ 内存可能爆炸
+   let output = Command::new("generate_huge_output").output()?;
+
+   // ✅ 流式处理或丢弃
+   Command::new("generate_huge_output")
+       .stdout(Stdio::null())
+       .spawn()?;
+   ```
+2. **及时回收资源**:
+
+   ```rust
+   impl Drop for ManagedChild {
+       fn drop(&mut self) {
+           let _ = self.child.kill();
+           let _ = self.child.wait();
+       }
+   }
+   ```
+---
+
+## 10. 安全注意事项
+
+### 10.1 命令注入防护
+
+**永远不要**直接拼接用户输入：
+
+```rust
+// ❌ 危险！命令注入风险
+let user_input = get_user_input();
+Command::new("sh")
+    .arg("-c")
+    .arg(format!("ls {}", user_input))
+    .spawn()?;
+
+// ✅ 安全：使用参数化
+Command::new("ls")
+    .arg(user_input)
+    .spawn()?;
+```
+---
+
+### 10.2 权限最小化
+
+```rust
+#[cfg(unix)]
+use std::os::unix::process::CommandExt;
+
+#[cfg(unix)]
+Command::new("program")
+    .uid(1000)  // 使用非root用户
+    .gid(1000)
+    .spawn()?;
+```
+---
+
+### 10.3 输入验证
+
+```rust
+fn is_safe_command(cmd: &str) -> bool {
+    // 白名单验证
+    const ALLOWED: &[&str] = &["ls", "cat", "grep"];
+    ALLOWED.contains(&cmd)
+}
+
+fn execute_safely(cmd: &str, args: &[&str]) -> Result<Output, String> {
+    if !is_safe_command(cmd) {
+        return Err(format!("Command '{}' not allowed", cmd));
+    }
+
+    Command::new(cmd)
+        .args(args)
+        .output()
+        .map_err(|e| e.to_string())
+}
+```
+---
+
+### 10.4 审计和日志
+
+```rust
+struct AuditedCommand {
+    command: Command,
+    audit_log: String,
+}
+
+impl AuditedCommand {
+    fn spawn(mut self) -> std::io::Result<Child> {
+        let log_entry = format!(
+            "[{}] {:?} in {:?}",
+            chrono::Utc::now(),
+            self.command,
+            std::env::current_dir()?
+        );
+
+        // 记录到审计日志
+        std::fs::OpenOptions::new()
+            .create(true)
+            .append(true)
+            .open(&self.audit_log)?
+            .write_all(log_entry.as_bytes())?;
+
+        self.command.spawn()
+    }
+}
+```
+---
+
+## 下一步
+
+- [IPC通信实践](02_ipc_communication_practice.md) - 学习进程间通信
+- [异步进程管理](03_async_process_management.md) - 使用Tokio异步管理
+- [进程模型参考](../tier_03_references/01_process_models_reference.md) - 深入理论
+
+---
+
+**文档维护**: Documentation Team
+**创建日期**: 2025-10-22
+**适用版本**: Rust 1.92.0+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -343,7 +343,6 @@ pub enum PoolError {
     PoolOperationFailed(String),
 }
 ```
-
 ### 1.2 进程池使用示例
 
 ```rust
@@ -384,7 +383,6 @@ pub async fn process_pool_example() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
 ## 2. 进程生命周期管理
 
 ### 2.1 生命周期管理器
@@ -722,7 +720,6 @@ pub enum LifecycleError {
     OperationTimeout,
 }
 ```
-
 ## 3. 进程资源监控
 
 ### 3.1 资源监控器
@@ -1097,7 +1094,6 @@ pub enum MonitorError {
     MetricsCollectionFailed(String),
 }
 ```
-
 ## 4. 进程故障恢复
 
 ### 4.1 故障恢复管理器
@@ -1517,7 +1513,6 @@ pub enum RecoveryError {
     CircuitBreakerOpen,
 }
 ```
-
 ## 5. 进程优先级调度
 
 ### 5.1 优先级调度器
@@ -1966,7 +1961,6 @@ pub async fn priority_scheduling_example() -> Result<(), Box<dyn std::error::Err
     Ok(())
 }
 ```
-
 ## 总结
 
 本章提供了高级进程管理的完整示例，包括：

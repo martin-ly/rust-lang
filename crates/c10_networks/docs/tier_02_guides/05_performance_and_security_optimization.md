@@ -1,0 +1,856 @@
+﻿# C10 Networks - Tier 2: 性能与安全优化
+
+> **文档版本**: v1.0.0
+> **最后更新**: 2025-12-11
+> **Rust 版本**: 1.92.0+
+> **预计阅读**: 40 分钟
+
+---
+
+## 📊 目录
+
+- [C10 Networks - Tier 2: 性能与安全优化](#c10-networks---tier-2-性能与安全优化)
+  - [📊 目录](#-目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+  - [1. 性能优化](#1-性能优化)
+    - [1.1 缓冲区优化](#11-缓冲区优化)
+    - [1.2 批量操作](#12-批量操作)
+    - [1.3 并发连接限制](#13-并发连接限制)
+    - [1.4 零拷贝发送文件](#14-零拷贝发送文件)
+  - [2. 网络安全基础](#2-网络安全基础)
+    - [2.1 输入验证](#21-输入验证)
+    - [2.2 IP 白名单/黑名单](#22-ip-白名单黑名单)
+    - [2.3 限流保护](#23-限流保护)
+  - [3. TLS/SSL 实践](#3-tlsssl-实践)
+    - [3.1 TLS 客户端](#31-tls-客户端)
+    - [3.2 TLS 服务器](#32-tls-服务器)
+  - [4. 攻击防护](#4-攻击防护)
+    - [4.1 DDoS 防护](#41-ddos-防护)
+    - [4.2 慢速攻击防护](#42-慢速攻击防护)
+  - [5. 监控与诊断](#5-监控与诊断)
+    - [5.1 连接统计](#51-连接统计)
+    - [5.2 性能分析](#52-性能分析)
+  - [6. 实战案例](#6-实战案例)
+    - [6.1 安全的 HTTP 代理](#61-安全的-http-代理)
+  - [7. 总结](#7-总结)
+    - [性能优化清单](#性能优化清单)
+    - [安全检查清单](#安全检查清单)
+    - [监控指标](#监控指标)
+  - [📚 参考资源](#-参考资源)
+
+## 📐 知识结构
+
+### 概念定义
+
+**性能与安全优化 (Performance and Security Optimization)**:
+
+- **定义**: 优化网络服务性能和安全性的技术和方法
+- **类型**: 优化技术
+- **范畴**: 网络编程、性能优化、网络安全
+- **版本**: Rust 1.0+
+- **相关概念**: 性能优化、网络安全、TLS/SSL、攻击防护
+
+### 属性特征
+
+**核心属性**:
+
+- **性能优化**: 缓冲区优化、批量操作、零拷贝
+- **网络安全**: 输入验证、IP 白名单、限流保护
+- **TLS/SSL**: 加密通信
+- **攻击防护**: DDoS 防护、慢速攻击防护
+
+**性能特征**:
+
+- **吞吐量**: 提升网络吞吐量
+- **延迟**: 降低网络延迟
+- **安全性**: 提升系统安全性
+- **适用场景**: 生产环境、高并发服务、安全关键应用
+
+### 关系连接
+
+**组合关系**:
+
+- 性能与安全优化 --[uses]--> 多种优化技术
+- 网络服务 --[benefits-from]--> 性能与安全优化
+
+**依赖关系**:
+
+- 性能与安全优化 --[depends-on]--> 操作系统支持
+- TLS/SSL --[depends-on]--> 加密库
+
+### 思维导图
+
+```text
+性能与安全优化
+│
+├── 性能优化
+│   ├── 缓冲区优化
+│   ├── 批量操作
+│   └── 零拷贝
+├── 网络安全基础
+│   ├── 输入验证
+│   └── 限流保护
+├── TLS/SSL 实践
+│   ├── TLS 客户端
+│   └── TLS 服务器
+└── 攻击防护
+    ├── DDoS 防护
+    └── 慢速攻击防护
+```
+---
+
+## 1. 性能优化
+
+### 1.1 缓冲区优化
+
+```rust
+use tokio::net::TcpStream;
+use tokio::io::{AsyncReadExt, AsyncWriteExt, BufReader, BufWriter};
+
+async fn buffered_io_example(stream: TcpStream) -> std::io::Result<()> {
+    // ❌ 未缓冲：每次都系统调用
+    // let mut stream = stream;
+    // stream.write_all(b"data").await?;
+
+    // ✅ 使用缓冲：减少系统调用
+    let (read_half, write_half) = tokio::io::split(stream);
+    let mut reader = BufReader::with_capacity(8192, read_half);
+    let mut writer = BufWriter::with_capacity(8192, write_half);
+
+    // 写入数据（先缓存）
+    writer.write_all(b"Hello").await?;
+    writer.write_all(b" World").await?;
+    writer.flush().await?; // 强制刷新
+
+    // 读取数据
+    let mut buffer = String::new();
+    let n = reader.read_to_string(&mut buffer).await?;
+    println!("读取 {} 字节: {}", n, buffer);
+
+    Ok(())
+}
+
+#[tokio::main]
+async fn main() -> std::io::Result<()> {
+    let stream = TcpStream::connect("127.0.0.1:8080").await?;
+    buffered_io_example(stream).await
+}
+```
+### 1.2 批量操作
+
+```rust
+use tokio::net::TcpStream;
+use tokio::io::AsyncWriteExt;
+
+// ❌ 低效：多次小写入
+async fn write_inefficient(stream: &mut TcpStream) -> std::io::Result<()> {
+    for i in 0..100 {
+        stream.write_all(format!("item{}\n", i).as_bytes()).await?;
+    }
+    Ok(())
+}
+
+// ✅ 高效：批量写入
+async fn write_efficient(stream: &mut TcpStream) -> std::io::Result<()> {
+    let mut buffer = String::new();
+    for i in 0..100 {
+        buffer.push_str(&format!("item{}\n", i));
+    }
+    stream.write_all(buffer.as_bytes()).await?;
+    Ok(())
+}
+
+#[tokio::main]
+async fn main() -> std::io::Result<()> {
+    let mut stream = TcpStream::connect("127.0.0.1:8080").await?;
+    write_efficient(&mut stream).await
+}
+```
+### 1.3 并发连接限制
+
+```rust
+use tokio::net::TcpListener;
+use tokio::sync::Semaphore;
+use std::sync::Arc;
+
+#[tokio::main]
+async fn main() -> std::io::Result<()> {
+    let listener = TcpListener::bind("127.0.0.1:8080").await?;
+    let semaphore = Arc::new(Semaphore::new(100)); // 限制最多 100 个并发连接
+
+    println!("服务器启动，最大并发: 100");
+
+    loop {
+        let (stream, addr) = listener.accept().await?;
+        let semaphore = Arc::clone(&semaphore);
+
+        tokio::spawn(async move {
+            // 获取许可
+            let _permit = semaphore.acquire().await.unwrap();
+            println!("处理连接: {}", addr);
+
+            // 处理连接...
+            tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
+
+            println!("连接 {} 处理完成", addr);
+            // permit 在此自动释放
+        });
+    }
+}
+```
+### 1.4 零拷贝发送文件
+
+```rust
+use tokio::net::TcpStream;
+use tokio::fs::File;
+use tokio::io::AsyncWriteExt;
+
+async fn send_file(stream: &mut TcpStream, path: &str) -> std::io::Result<()> {
+    let mut file = File::open(path).await?;
+
+    // 使用 tokio::io::copy 实现零拷贝
+    let bytes_copied = tokio::io::copy(&mut file, stream).await?;
+    println!("发送 {} 字节", bytes_copied);
+
+    Ok(())
+}
+
+#[tokio::main]
+async fn main() -> std::io::Result<()> {
+    let mut stream = TcpStream::connect("127.0.0.1:8080").await?;
+    send_file(&mut stream, "large_file.dat").await
+}
+```
+---
+
+## 2. 网络安全基础
+
+### 2.1 输入验证
+
+```rust
+use std::net::IpAddr;
+
+fn validate_input(input: &str) -> Result<(), String> {
+    // 长度检查
+    if input.len() > 1024 {
+        return Err("输入过长".to_string());
+    }
+
+    // 字符白名单
+    if !input.chars().all(|c| c.is_alphanumeric() || c == '-' || c == '_') {
+        return Err("包含非法字符".to_string());
+    }
+
+    Ok(())
+}
+
+fn validate_ip(ip_str: &str) -> Result<IpAddr, String> {
+    ip_str.parse::<IpAddr>()
+        .map_err(|_| "无效的 IP 地址".to_string())
+}
+
+fn main() {
+    assert!(validate_input("valid_input").is_ok());
+    assert!(validate_input("invalid;input").is_err());
+
+    assert!(validate_ip("192.168.1.1").is_ok());
+    assert!(validate_ip("invalid").is_err());
+}
+```
+### 2.2 IP 白名单/黑名单
+
+```rust
+use std::net::IpAddr;
+use std::collections::HashSet;
+
+struct IpFilter {
+    whitelist: HashSet<IpAddr>,
+    blacklist: HashSet<IpAddr>,
+}
+
+impl IpFilter {
+    fn new() -> Self {
+        Self {
+            whitelist: HashSet::new(),
+            blacklist: HashSet::new(),
+        }
+    }
+
+    fn add_to_whitelist(&mut self, ip: IpAddr) {
+        self.whitelist.insert(ip);
+    }
+
+    fn add_to_blacklist(&mut self, ip: IpAddr) {
+        self.blacklist.insert(ip);
+    }
+
+    fn is_allowed(&self, ip: &IpAddr) -> bool {
+        // 黑名单优先
+        if self.blacklist.contains(ip) {
+            return false;
+        }
+
+        // 如果有白名单，必须在白名单中
+        if !self.whitelist.is_empty() {
+            return self.whitelist.contains(ip);
+        }
+
+        // 默认允许
+        true
+    }
+}
+
+fn main() {
+    let mut filter = IpFilter::new();
+    let ip1: IpAddr = "192.168.1.1".parse().unwrap();
+    let ip2: IpAddr = "10.0.0.1".parse().unwrap();
+
+    filter.add_to_blacklist(ip2);
+
+    assert!(filter.is_allowed(&ip1));
+    assert!(!filter.is_allowed(&ip2));
+}
+```
+### 2.3 限流保护
+
+```rust
+use std::collections::HashMap;
+use std::net::IpAddr;
+use std::time::{Instant, Duration};
+use tokio::sync::RwLock;
+use std::sync::Arc;
+
+struct RateLimiter {
+    requests: Arc<RwLock<HashMap<IpAddr, Vec<Instant>>>>,
+    max_requests: usize,
+    window: Duration,
+}
+
+impl RateLimiter {
+    fn new(max_requests: usize, window: Duration) -> Self {
+        Self {
+            requests: Arc::new(RwLock::new(HashMap::new())),
+            max_requests,
+            window,
+        }
+    }
+
+    async fn check_limit(&self, ip: IpAddr) -> bool {
+        let mut requests = self.requests.write().await;
+        let now = Instant::now();
+
+        let entry = requests.entry(ip).or_insert_with(Vec::new);
+
+        // 清理过期记录
+        entry.retain(|&t| now.duration_since(t) < self.window);
+
+        // 检查限制
+        if entry.len() < self.max_requests {
+            entry.push(now);
+            true
+        } else {
+            false
+        }
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let limiter = RateLimiter::new(5, Duration::from_secs(60));
+    let ip: IpAddr = "192.168.1.1".parse().unwrap();
+
+    for i in 0..10 {
+        if limiter.check_limit(ip).await {
+            println!("请求 {} 允许", i);
+        } else {
+            println!("请求 {} 被限流", i);
+        }
+    }
+}
+```
+---
+
+## 3. TLS/SSL 实践
+
+### 3.1 TLS 客户端
+
+```rust
+use tokio::net::TcpStream;
+use tokio_rustls::{TlsConnector, rustls};
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use std::sync::Arc;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // 创建 TLS 配置
+    let mut root_store = rustls::RootCertStore::empty();
+    root_store.extend(webpki_roots::TLS_SERVER_ROOTS.iter().cloned());
+
+    let config = rustls::ClientConfig::builder()
+        .with_root_certificates(root_store)
+        .with_no_client_auth();
+
+    let connector = TlsConnector::from(Arc::new(config));
+
+    // 连接服务器
+    let stream = TcpStream::connect("www.rust-lang.org:443").await?;
+    let domain = rustls::pki_types::ServerName::try_from("www.rust-lang.org")?;
+
+    let mut tls_stream = connector.connect(domain, stream).await?;
+
+    // 发送 HTTP 请求
+    tls_stream.write_all(b"GET / HTTP/1.1\r\nHost: www.rust-lang.org\r\n\r\n").await?;
+
+    // 读取响应
+    let mut buffer = Vec::new();
+    tls_stream.read_to_end(&mut buffer).await?;
+    println!("响应: {} 字节", buffer.len());
+
+    Ok(())
+}
+```
+### 3.2 TLS 服务器
+
+```rust
+use tokio::net::TcpListener;
+use tokio_rustls::{TlsAcceptor, rustls};
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use std::sync::Arc;
+use std::fs::File;
+use std::io::BufReader;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // 加载证书和私钥
+    let certs = rustls_pemfile::certs(&mut BufReader::new(File::open("cert.pem")?))
+        .collect::<Result<Vec<_>, _>>()?;
+
+    let key = rustls_pemfile::private_key(&mut BufReader::new(File::open("key.pem")?))
+        .unwrap()
+        .unwrap();
+
+    // 创建 TLS 配置
+    let config = rustls::ServerConfig::builder()
+        .with_no_client_auth()
+        .with_single_cert(certs, key)?;
+
+    let acceptor = TlsAcceptor::from(Arc::new(config));
+
+    // 启动服务器
+    let listener = TcpListener::bind("127.0.0.1:8443").await?;
+    println!("TLS 服务器运行在 127.0.0.1:8443");
+
+    loop {
+        let (stream, addr) = listener.accept().await?;
+        let acceptor = acceptor.clone();
+
+        tokio::spawn(async move {
+            match acceptor.accept(stream).await {
+                Ok(mut tls_stream) => {
+                    println!("TLS 连接来自: {}", addr);
+
+                    let mut buffer = [0u8; 1024];
+                    if let Ok(n) = tls_stream.read(&mut buffer).await {
+                        println!("收到: {}", String::from_utf8_lossy(&buffer[..n]));
+                        let _ = tls_stream.write_all(b"HTTP/1.1 200 OK\r\n\r\nHello TLS").await;
+                    }
+                }
+                Err(e) => eprintln!("TLS 握手失败: {}", e),
+            }
+        });
+    }
+}
+```
+---
+
+## 4. 攻击防护
+
+### 4.1 DDoS 防护
+
+```rust
+use std::collections::HashMap;
+use std::net::IpAddr;
+use std::time::{Instant, Duration};
+use tokio::sync::RwLock;
+use std::sync::Arc;
+
+struct DDoSProtector {
+    connection_count: Arc<RwLock<HashMap<IpAddr, usize>>>,
+    connection_times: Arc<RwLock<HashMap<IpAddr, Vec<Instant>>>>,
+    max_connections_per_ip: usize,
+    max_rate: usize, // 每秒最大连接数
+}
+
+impl DDoSProtector {
+    fn new(max_connections_per_ip: usize, max_rate: usize) -> Self {
+        Self {
+            connection_count: Arc::new(RwLock::new(HashMap::new())),
+            connection_times: Arc::new(RwLock::new(HashMap::new())),
+            max_connections_per_ip,
+            max_rate,
+        }
+    }
+
+    async fn should_accept(&self, ip: IpAddr) -> bool {
+        // 检查并发连接数
+        let conn_count = self.connection_count.read().await;
+        if let Some(&count) = conn_count.get(&ip) {
+            if count >= self.max_connections_per_ip {
+                return false;
+            }
+        }
+        drop(conn_count);
+
+        // 检查连接速率
+        let mut times = self.connection_times.write().await;
+        let entry = times.entry(ip).or_insert_with(Vec::new);
+
+        let now = Instant::now();
+        entry.retain(|&t| now.duration_since(t) < Duration::from_secs(1));
+
+        if entry.len() >= self.max_rate {
+            return false;
+        }
+
+        entry.push(now);
+        true
+    }
+
+    async fn on_connect(&self, ip: IpAddr) {
+        let mut count = self.connection_count.write().await;
+        *count.entry(ip).or_insert(0) += 1;
+    }
+
+    async fn on_disconnect(&self, ip: IpAddr) {
+        let mut count = self.connection_count.write().await;
+        if let Some(c) = count.get_mut(&ip) {
+            *c = c.saturating_sub(1);
+            if *c == 0 {
+                count.remove(&ip);
+            }
+        }
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let protector = DDoSProtector::new(10, 5);
+    let ip: IpAddr = "192.168.1.1".parse().unwrap();
+
+    for i in 0..20 {
+        if protector.should_accept(ip).await {
+            println!("连接 {} 接受", i);
+            protector.on_connect(ip).await;
+        } else {
+            println!("连接 {} 拒绝（DDoS 防护）", i);
+        }
+        tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
+    }
+}
+```
+### 4.2 慢速攻击防护
+
+```rust
+use tokio::net::TcpStream;
+use tokio::time::{timeout, Duration};
+use tokio::io::AsyncReadExt;
+
+async fn handle_with_timeout(mut stream: TcpStream) -> std::io::Result<()> {
+    let mut buffer = [0u8; 1024];
+
+    // 设置读取超时（防慢速攻击）
+    match timeout(Duration::from_secs(30), stream.read(&mut buffer)).await {
+        Ok(Ok(n)) => {
+            println!("收到 {} 字节", n);
+            Ok(())
+        }
+        Ok(Err(e)) => {
+            eprintln!("读取错误: {}", e);
+            Err(e)
+        }
+        Err(_) => {
+            eprintln!("读取超时，疑似慢速攻击");
+            Err(std::io::Error::new(std::io::ErrorKind::TimedOut, "慢速攻击"))
+        }
+    }
+}
+
+#[tokio::main]
+async fn main() -> std::io::Result<()> {
+    let stream = TcpStream::connect("127.0.0.1:8080").await?;
+    handle_with_timeout(stream).await
+}
+```
+---
+
+## 5. 监控与诊断
+
+### 5.1 连接统计
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::Arc;
+use tokio::time::{interval, Duration};
+
+struct ConnectionStats {
+    total_connections: AtomicUsize,
+    active_connections: AtomicUsize,
+    total_bytes_sent: AtomicUsize,
+    total_bytes_received: AtomicUsize,
+}
+
+impl ConnectionStats {
+    fn new() -> Arc<Self> {
+        Arc::new(Self {
+            total_connections: AtomicUsize::new(0),
+            active_connections: AtomicUsize::new(0),
+            total_bytes_sent: AtomicUsize::new(0),
+            total_bytes_received: AtomicUsize::new(0),
+        })
+    }
+
+    fn on_connect(&self) {
+        self.total_connections.fetch_add(1, Ordering::Relaxed);
+        self.active_connections.fetch_add(1, Ordering::Relaxed);
+    }
+
+    fn on_disconnect(&self) {
+        self.active_connections.fetch_sub(1, Ordering::Relaxed);
+    }
+
+    fn on_send(&self, bytes: usize) {
+        self.total_bytes_sent.fetch_add(bytes, Ordering::Relaxed);
+    }
+
+    fn on_receive(&self, bytes: usize) {
+        self.total_bytes_received.fetch_add(bytes, Ordering::Relaxed);
+    }
+
+    fn print_stats(&self) {
+        println!("=== 连接统计 ===");
+        println!("总连接数: {}", self.total_connections.load(Ordering::Relaxed));
+        println!("活跃连接: {}", self.active_connections.load(Ordering::Relaxed));
+        println!("发送字节: {}", self.total_bytes_sent.load(Ordering::Relaxed));
+        println!("接收字节: {}", self.total_bytes_received.load(Ordering::Relaxed));
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let stats = ConnectionStats::new();
+    let stats_clone = Arc::clone(&stats);
+
+    // 定期打印统计
+    tokio::spawn(async move {
+        let mut ticker = interval(Duration::from_secs(10));
+        loop {
+            ticker.tick().await;
+            stats_clone.print_stats();
+        }
+    });
+
+    // 模拟连接
+    stats.on_connect();
+    stats.on_send(1024);
+    stats.on_receive(2048);
+    stats.on_disconnect();
+
+    tokio::time::sleep(Duration::from_secs(11)).await;
+}
+```
+### 5.2 性能分析
+
+```rust
+use std::time::{Instant, Duration};
+
+struct RequestTimer {
+    start: Instant,
+    operation: String,
+}
+
+impl RequestTimer {
+    fn new(operation: impl Into<String>) -> Self {
+        Self {
+            start: Instant::now(),
+            operation: operation.into(),
+        }
+    }
+}
+
+impl Drop for RequestTimer {
+    fn drop(&mut self) {
+        let duration = self.start.elapsed();
+        println!("操作 '{}' 耗时: {:?}", self.operation, duration);
+
+        // 慢操作警告
+        if duration > Duration::from_millis(100) {
+            eprintln!("⚠️  慢操作: {} 耗时 {:?}", self.operation, duration);
+        }
+    }
+}
+
+async fn slow_operation() {
+    let _timer = RequestTimer::new("数据库查询");
+    tokio::time::sleep(Duration::from_millis(150)).await;
+}
+
+#[tokio::main]
+async fn main() {
+    slow_operation().await;
+}
+```
+---
+
+## 6. 实战案例
+
+### 6.1 安全的 HTTP 代理
+
+```rust
+use tokio::net::{TcpListener, TcpStream};
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use std::sync::Arc;
+
+struct SecureProxy {
+    rate_limiter: Arc<RateLimiter>,
+    ip_filter: Arc<IpFilter>,
+}
+
+impl SecureProxy {
+    fn new() -> Self {
+        use std::time::Duration;
+        Self {
+            rate_limiter: Arc::new(RateLimiter::new(100, Duration::from_secs(60))),
+            ip_filter: Arc::new(IpFilter::new()),
+        }
+    }
+
+    async fn handle_client(&self, mut client: TcpStream, client_ip: std::net::IpAddr) -> std::io::Result<()> {
+        // IP 过滤
+        if !self.ip_filter.is_allowed(&client_ip) {
+            println!("IP {} 被阻止", client_ip);
+            return Ok(());
+        }
+
+        // 限流检查
+        if !self.rate_limiter.check_limit(client_ip).await {
+            println!("IP {} 超过限流", client_ip);
+            return Ok(());
+        }
+
+        // 读取请求
+        let mut buffer = vec![0u8; 1024];
+        let n = client.read(&mut buffer).await?;
+
+        // 转发到目标服务器
+        let mut server = TcpStream::connect("target-server.com:80").await?;
+        server.write_all(&buffer[..n]).await?;
+
+        // 转发响应
+        let n = server.read(&mut buffer).await?;
+        client.write_all(&buffer[..n]).await?;
+
+        Ok(())
+    }
+}
+
+use std::time::Duration;
+use std::collections::HashSet;
+
+struct IpFilter {
+    whitelist: HashSet<std::net::IpAddr>,
+}
+
+impl IpFilter {
+    fn new() -> Self {
+        Self { whitelist: HashSet::new() }
+    }
+    fn is_allowed(&self, _ip: &std::net::IpAddr) -> bool { true }
+}
+
+struct RateLimiter;
+impl RateLimiter {
+    fn new(_max: usize, _dur: Duration) -> Self { Self }
+    async fn check_limit(&self, _ip: std::net::IpAddr) -> bool { true }
+}
+
+#[tokio::main]
+async fn main() -> std::io::Result<()> {
+    let proxy = Arc::new(SecureProxy::new());
+    let listener = TcpListener::bind("127.0.0.1:8080").await?;
+
+    println!("安全代理服务器运行在 127.0.0.1:8080");
+
+    loop {
+        let (stream, addr) = listener.accept().await?;
+        let proxy = Arc::clone(&proxy);
+
+        tokio::spawn(async move {
+            if let Err(e) = proxy.handle_client(stream, addr.ip()).await {
+                eprintln!("处理错误: {}", e);
+            }
+        });
+    }
+}
+```
+---
+
+## 7. 总结
+
+### 性能优化清单
+
+- [ ] 使用缓冲 I/O
+- [ ] 批量操作减少系统调用
+- [ ] 限制并发连接数
+- [ ] 零拷贝技术
+- [ ] 连接池复用
+
+### 安全检查清单
+
+- [ ] 输入验证
+- [ ] IP 白名单/黑名单
+- [ ] 限流保护
+- [ ] TLS/SSL 加密
+- [ ] DDoS 防护
+- [ ] 超时设置
+
+### 监控指标
+
+| 指标           | 描述         | 告警阈值   |
+| :--- | :--- | :--- |
+| **活跃连接数** | 当前并发连接 | > 80% 容量 |
+| **请求速率**   | 每秒请求数   | 异常波动   |
+| **响应时间**   | 请求处理延迟 | > 1 秒     |
+| **错误率**     | 失败请求比例 | > 1%       |
+
+---
+
+## 📚 参考资源
+
+- [OWASP 网络安全](https://owasp.org/)
+- [Rust TLS 最佳实践](https://docs.rs/tokio-rustls/)
+- [性能优化指南](https://tokio.rs/tokio/topics/performance)
+
+---
+
+**🎉 恭喜！** 你已完成 C10 Networks Tier 2 全部实践指南的学习。
+
+**下一步建议**：
+
+- 深入学习 [Tier 3: 技术参考](../tier_03_references/README.md)
+- 探索 [Tier 4: 高级主题](../tier_04_advanced/README.md)
+- 实践应用到实际项目中
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

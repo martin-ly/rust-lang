@@ -82,7 +82,6 @@ SIL 4系统要求:
                     │   (安全继电器)  │
                     └─────────────────┘
 ```
-
 ### 软件架构
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -537,7 +536,6 @@ pub mod types {
     }
 }
 ```
-
 ---
 
 ## 冗余与多样性
@@ -618,7 +616,6 @@ pub enum ComparisonResult {
     Disagree,
 }
 ```
-
 ---
 
 ## 验证与确认
@@ -681,7 +678,6 @@ mod verification {
     }
 }
 ```
-
 ### 测试覆盖
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -709,12 +705,10 @@ mod verification {
    - 2x2取2架构接受
    - 多样性实现认可
    - 形式化验证方法接受
-
 2. **代码审查**
    - 无unsafe代码确认
    - 复杂度符合要求
    - 覆盖率目标达成
-
 3. **工具链审查**
    - Ferrocene TQL 1接受
    - Kani验证器TQL 3接受
@@ -769,7 +763,6 @@ mod verification {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
-
 - [案例研究1: Ferrocene认证工具链](01_case_study_01_ferrocene_certification.md)
 - [案例研究2: NASA核心飞行系统(cFS) Rust集成](02_case_study_02_nasa_cfs_rust.md)
 

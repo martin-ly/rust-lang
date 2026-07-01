@@ -61,7 +61,6 @@ for x in fibonacci().take(10) {
     println!("{}", x);
 }
 ```
-
 **关键约束**：
 
 - `gen` 块默认按引用捕获变量；需要 `gen move` 获取所有权
@@ -106,7 +105,6 @@ async fn sum_stream() -> i32 {
     sum // 10
 }
 ```
-
 ---
 
 ### `derive(CoercePointee)` — 智能指针自动推导 {#derivecoercepointee-智能指针自动推导}
@@ -131,7 +129,6 @@ impl<'a, T: ?Sized> Deref for MyBox<'a, T> {
 
 // 自动支持 CoerceUnsized，无需手动实现
 ```
-
 **注意**：`#[pointee]` 属性必须标注在泛型参数上（不能用在字段上）。
 
 ---
@@ -158,7 +155,6 @@ fn exhaustive_match(r: Result<i32, !>) -> i32 {
     }
 }
 ```
-
 ---
 
 ### 函数对齐 `#[rustc_align]` {#函数对齐-rustc_align}
@@ -174,7 +170,6 @@ pub fn cache_aligned_entry() -> i32 { 42 }
 #[rustc_align(16)]
 pub fn simd_aligned_entry() -> i32 { 0 }
 ```
-
 **注意**：当前 nightly 使用 `#[rustc_align(N)]` 而非 `#[repr(align(N))]`。
 
 ---
@@ -190,7 +185,6 @@ pub fn debug_pause() {
     unsafe { core::intrinsics::breakpoint() };
 }
 ```
-
 **⚠️ 警告**：无调试器 attached 时，断点指令可能触发信号/异常导致程序终止。
 
 ---
@@ -240,7 +234,6 @@ fn fibonacci() -> impl Iterator<Item = u64> {
 assert_eq!(fibonacci().take(6).collect::<Vec<_>>(),
            vec![0, 1, 1, 2, 3, 5]);
 ```
-
 ### 异步流求和 {#异步流求和}
 
 ```rust
@@ -254,7 +247,6 @@ async fn sum_async<I: AsyncIterator<Item = i32>>(iter: I) -> i32 {
     sum
 }
 ```
-
 ### 自定义智能指针 {#自定义智能指针}
 
 ```rust
@@ -272,7 +264,6 @@ impl<'a, T: ?Sized> Deref for SmartPtr<'a, T> {
     fn deref(&self) -> &T { self.0 }
 }
 ```
-
 ---
 
 ## Feature Gate 清单 {#feature-gate-清单}
@@ -299,7 +290,6 @@ impl<'a, T: ?Sized> Deref for SmartPtr<'a, T> {
 #![feature(core_intrinsics)]
 #![allow(internal_features)]
 ```
-
 ---
 
 ## 相关链接 {#相关链接}

@@ -77,16 +77,14 @@
 
 ### 🌟 推荐起点 | Recommended Starting Points
 
-1. **[快速入门指南](异步编程全面梳理_README_2025_10_06.md)** ⭐⭐⭐ 必读
+1. **[快速入门指南](async_programming_comprehensive_review_readme_2025_10_06.md)** ⭐⭐⭐ 必读
    - 快速开始步骤
    - 核心示例运行方法
    - 推荐阅读顺序
-
 2. **[模式对比文档](docs/ASYNC_PATTERNS_COMPARISON_2025.md)** ⭐⭐⭐ 选型指南
    - Reactor vs Actor vs CSP 全面对比
    - 性能基准测试数据
    - 选型决策树
-
 3. **[知识分类体系](docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md)** ⭐⭐⭐ 学习地图
    - 113+ 个知识点分类
    - 180+ 个代码示例
@@ -100,7 +98,7 @@
 
 | 文档                                                                            | 描述         | 字数   | 难度 |
 | :--- | :--- | :--- | :--- || [README.md](README.md)                                                          | 项目主文档   | 5,000+ | ⭐   |
-| [异步编程全面梳理\_README_2025_10_06.md](异步编程全面梳理_README_2025_10_06.md) | 快速入门指南 | 2,000+ | ⭐   |
+| [异步编程全面梳理\_README_2025_10_06.md](async_programming_comprehensive_review_readme_2025_10_06.md) | 快速入门指南 | 2,000+ | ⭐   |
 | [src/lib.rs](src/lib.rs)                                                        | 库 API 文档  | -      | ⭐⭐ |
 
 ### 理论文档 | Theoretical Documentation
@@ -141,7 +139,6 @@
 ```bash
 cargo run --example reactor_pattern_comprehensive_2025
 ```
-
 **适用场景**:
 
 - Web 服务器 (HTTP/HTTPS)
@@ -167,7 +164,6 @@ cargo run --example reactor_pattern_comprehensive_2025
 ```bash
 cargo run --example actor_pattern_comprehensive_2025
 ```
-
 **适用场景**:
 
 - 分布式系统 (微服务)
@@ -193,7 +189,6 @@ cargo run --example actor_pattern_comprehensive_2025
 ```bash
 cargo run --example csp_pattern_comprehensive_2025
 ```
-
 **适用场景**:
 
 - 数据流水线 (ETL)
@@ -364,16 +359,13 @@ cargo run --example csp_pattern_comprehensive_2025
 1. **对象池 (Object Pool)**
    - 减少 50-80% 分配开销
    - 示例: `examples/async_performance_optimization_2025.rs`
-
 2. **零拷贝 (Zero-Copy)**
    - 使用 Bytes 库
    - 减少 70-90% 拷贝开销
    - 示例: `examples/async_performance_optimization_2025.rs`
-
 3. **批处理 (Batch Processing)**
    - 提升 2-5x 吞吐量
    - 示例: `examples/reactor_pattern_comprehensive_2025.rs`
-
 4. **SIMD 向量化**
    - 提升 2-8x 性能
    - 示例: `examples/async_performance_optimization_2025.rs`
@@ -391,15 +383,12 @@ cargo run --example csp_pattern_comprehensive_2025
 1. **重试机制 (Retry)**
    - 指数退避
    - 示例: `examples/utils_strategy_smoke.rs`
-
 2. **熔断器 (Circuit Breaker)**
    - 故障隔离
    - 示例: `examples/utils_observed_limit_breaker.rs`
-
 3. **超时控制 (Timeout)**
    - 防止无限等待
    - 示例: `examples/csp_pattern_comprehensive_2025.rs`
-
 4. **优雅降级 (Graceful Degradation)**
    - 部分功能可用
    - 示例: `examples/comprehensive_async_patterns_2025.rs`
@@ -414,13 +403,10 @@ cargo run --example csp_pattern_comprehensive_2025
 
 1. **Tracing (结构化日志)**
    - 示例: `examples/async_debugging_monitoring_2025.rs`
-
 2. **Prometheus (指标收集)**
    - 示例: `examples/async_api_gateway_2025.rs`
-
 3. **健康检查 (Health Checks)**
    - 示例: `examples/comprehensive_async_patterns_2025.rs`
-
 4. **Tokio Console (任务监控)**
    - 文档: [Tokio 最佳实践](docs/tokio_best_practices_2025.md)
 
@@ -464,7 +450,7 @@ cargo run --example csp_pattern_comprehensive_2025
 
 **目标**: 掌握基础概念和简单应用
 
-1. 阅读 [快速入门指南](异步编程全面梳理_README_2025_10_06.md)
+1. 阅读 [快速入门指南](async_programming_comprehensive_review_readme_2025_10_06.md)
 2. 运行基础示例:
    - `examples/tokio_smoke.rs`
    - `examples/futures_smoke.rs`

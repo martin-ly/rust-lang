@@ -117,7 +117,6 @@
   - Actor 间通信演示
   - 生命周期管理(started/stopped)
   - 统计信息收集
-
 - ✅ **Reactor 模式形式化** (350+ 行)
   - 事件驱动理论
   - 事件类型和优先级
@@ -125,7 +124,6 @@
   - 事件循环实现
   - 网络服务器示例
   - 统计信息和监控
-
 - ✅ **CSP 模式形式化** (400+ 行)
   - Hoare CSP 数学定义
   - 生产者-消费者模式
@@ -133,7 +131,6 @@
   - Fan-out/Fan-in 模式
   - Select 多路复用
   - 背压控制演示
-
 - ✅ **异步设计模式** (450+ 行)
   - **创建型模式**
     - Builder (构建器模式)
@@ -156,7 +153,6 @@
 ```bash
 cargo run --example ultimate_async_theory_practice_2025
 ```
-
 #### `examples/tokio_smol_latest_features_2025.rs` (800+ 行)
 
 **Tokio 1.41+ 最新特性** (5个):
@@ -166,25 +162,21 @@ cargo run --example ultimate_async_theory_practice_2025
    - 有序/无序结果收集
    - 提前终止支持
    - 错误处理演示
-
 2. **TaskLocal 改进** (120 行)
    - 任务本地存储
    - 上下文传播
    - 多个并发请求演示
    - 分布式追踪应用
-
 3. **Runtime Metrics** (130 行)
    - 活跃任务数统计
    - Worker 线程利用率
    - 调度性能指标
    - 实时监控演示
-
 4. **协作式调度优化** (100 行)
    - CPU 密集型任务处理
    - yield_now 使用
    - 公平调度保证
    - 与 I/O 任务混合演示
-
 5. **Cancellation Token** (100 行)
    - 结构化取消传播
    - 父子令牌层次
@@ -197,17 +189,14 @@ cargo run --example ultimate_async_theory_practice_2025
    - 性能基准测试
    - 内存占用对比
    - 10,000 任务测试
-
 2. **Async-io 集成** (120 行)
    - TCP 服务器示例
    - 异步 I/O 抽象
    - 跨平台支持
-
 3. **与 Tokio 互操作** (80 行)
    - 混合运行时使用
    - 通用异步代码
    - futures 标准库集成
-
 4. **LocalExecutor** (70 行)
    - 单线程优化
    - !Send 任务支持
@@ -225,7 +214,6 @@ cargo run --example ultimate_async_theory_practice_2025
 ```bash
 cargo run --example tokio_smol_latest_features_2025
 ```
-
 ### 2. 完整文档
 
 #### `docs/ULTIMATE_ASYNC_GUIDE_2025_CN.md` (10,000+ 字)
@@ -238,19 +226,16 @@ cargo run --example tokio_smol_latest_features_2025
    - 定义和核心概念
    - 为什么需要异步
    - 异步 vs 并行对比表格
-
 2. Future 与状态机
    - Future trait 定义
    - 状态机转换详解
    - 编译器生成的代码示例
    - Waker 唤醒机制
-
 3. 三大并发模型对比
    - Actor 模型 (数学定义,代码示例)
    - Reactor 模式 (形式化,实现库)
    - CSP 模型 (Hoare 定义,通道类型)
    - 对比总结表格
-
 4. 形式化语义
    - Future 的代数语义
    - Monad 定律
@@ -267,7 +252,6 @@ cargo run --example tokio_smol_latest_features_2025
    - 核心概念和架构图
    - 5个最新特性详解
    - 最佳实践 (配置、任务管理、超时取消)
-
 2. Smol 2.0+ 完全指南
     - 设计哲学和架构
     - 4个主要特性
@@ -436,7 +420,6 @@ while let Some(result) = set.join_next().await {
     process(result);
 }
 ```
-
 #### 1.2 错误处理技巧
 
 ```rust
@@ -447,7 +430,6 @@ async fn fetch_and_parse() -> Result<Data, Error> {
     Ok(data)
 }
 ```
-
 #### 1.3 上下文传播技巧
 
 ```rust
@@ -460,7 +442,6 @@ TRACE_ID.scope(id, async {
     // 所有调用自动获得 trace_id
 }).await
 ```
-
 ### 2. 设计惯用法 (Design Idioms)
 
 #### 2.1 Builder 模式惯用法
@@ -472,7 +453,6 @@ ClientBuilder::new()
     .retries(3)
     .build()
 ```
-
 #### 2.2 RAII 资源管理
 
 ```rust
@@ -487,7 +467,6 @@ impl Drop for Connection {
     }
 }
 ```
-
 #### 2.3 类型状态模式
 
 ```rust
@@ -507,7 +486,6 @@ impl Client<Connected> {
     async fn send(&self, data: &[u8]) { ... }
 }
 ```
-
 ### 3. 应用场景分类
 
 #### 3.1 Web 服务器
@@ -567,7 +545,6 @@ impl Client<Connected> {
 │  • Async I/O                                │
 └─────────────────────────────────────────────┘
 ```
-
 ### 2. 微服务架构示例
 
 ```text
@@ -591,7 +568,6 @@ impl Client<Connected> {
     │ Database │ │  Cache   │ │  Queue   │
     └──────────┘ └──────────┘ └──────────┘
 ```
-
 ---
 
 ## 📈 性能基准数据

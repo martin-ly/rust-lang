@@ -59,7 +59,6 @@ error[E0308]: mismatched types
   = note: expected type `u32`
              found type `&str`
 ```
-
 | 部分 | 说明 |
 |:---|:---|
 | **Level** | `error` / `warning` / `note` / `help` |
@@ -81,7 +80,6 @@ let mut err = sess.dcx().struct_span_err(sp, fluent::my_lint::my_error);
 err.span_label(sp, fluent::my_lint::label);
 err.emit();
 ```
-
 诊断等级：
 
 | 等级 | 含义 |
@@ -114,7 +112,6 @@ err.span_suggestion(
     Applicability::MachineApplicable,
 );
 ```
-
 `Applicability` 表示建议的可靠程度：
 
 | 值 | 含义 |
@@ -141,7 +138,6 @@ declare_lint! {
     "suggest using `loop { }` instead of `while true { }`"
 }
 ```
-
 ### Lint Pass
 
 ```rust,ignore
@@ -153,7 +149,6 @@ impl EarlyLintPass for WhileTrue {
     }
 }
 ```
-
 Lint 运行的时机：
 
 | Pass | 时机 | 信息可用性 |
@@ -174,7 +169,6 @@ Lint 运行的时机：
 ```bash
 rustc --explain E0308
 ```
-
 错误代码的长说明存放在 `compiler/rustc_error_codes/src/error_codes/`。新增错误代码需要同步添加说明文档。
 
 ---
@@ -192,7 +186,6 @@ fn main() {
     //~^ ERROR mismatched types
 }
 ```
-
 `//~^ ERROR` 等注释标记期望的诊断。
 
 ### `--bless`
@@ -202,7 +195,6 @@ fn main() {
 ```bash
 ./x test tests/ui/my_feature --bless
 ```
-
 > **警告**: `--bless` 会覆盖 `.stderr` 文件，应仔细审查变更。
 >
 > [来源: Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html)

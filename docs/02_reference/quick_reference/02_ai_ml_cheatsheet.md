@@ -86,7 +86,6 @@
 burn = "0.20"
 burn-ndarray = "0.20"
 ```
-
 ```rust,ignore
 use burn::tensor::{Tensor, backend::NdArray};
 
@@ -111,7 +110,6 @@ fn main() {
     println!("Sum: {:?}", s.into_scalar());
 }
 ```
-
 ## 📑 目录 {#目录-1}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -194,7 +192,6 @@ impl<B: burn::tensor::backend::Backend> Net<B> {
     }
 }
 ```
-
 ### 示例 3: 模型推理 {#示例-3-模型推理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -216,7 +213,6 @@ fn inference<B: burn::tensor::backend::Backend>(
     predictions
 }
 ```
-
 **文档**: [burn.dev](https://burn.dev/)
 
 ---
@@ -237,7 +233,6 @@ fn inference<B: burn::tensor::backend::Backend>(
 candle-core = "0.8"
 candle-nn = "0.8"
 ```
-
 ```rust,ignore
 use candle_core::{Device, Result, Tensor};
 
@@ -259,7 +254,6 @@ fn main() -> Result<()> {
     Ok(())
 }
 ```
-
 ### 示例 5: 加载 Hugging Face 模型 {#示例-5-加载-hugging-face-模型}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -291,7 +285,6 @@ fn load_model(model_id: &str) -> Result<()> {
     Ok(())
 }
 ```
-
 **文档**: [Candle GitHub](https://github.com/huggingface/candle)
 
 ---
@@ -348,7 +341,6 @@ fn llm_inference() -> anyhow::Result<()> {
     Ok(())
 }
 ```
-
 ### 框架选型表 {#框架选型表}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -402,7 +394,6 @@ impl ImageClassifier {
     }
 }
 ```
-
 ### 场景 2: 实时文本生成 {#场景-2-实时文本生成}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -426,7 +417,6 @@ async fn stream_generate<B: Backend>(
     }
 }
 ```
-
 ---
 
 ## 📐 形式化方法链接 {#形式化方法链接}
@@ -475,7 +465,6 @@ fn bad() {
     // let candle_t: CandleTensor = burn_t;  // 编译错误！
 }
 ```
-
 **原因**: Burn、Candle、tch-rs 各自有独立 API 和类型系统，不能混用。
 
 **修正**: 选定一个框架后统一使用其 API，或通过 trait 抽象隔离。
@@ -490,7 +479,6 @@ pub trait TensorOps {
 // 为不同框架实现
 impl<B: Backend, const D: usize> TensorOps for Tensor<B, D> { ... }
 ```
-
 ---
 
 ### 反例 2: 未根据场景选择后端 {#反例-2-未根据场景选择后端}
@@ -509,7 +497,6 @@ fn slow_inference() {
     // 7B 参数模型在 CPU 上推理可能需数分钟
 }
 ```
-
 **原因**: 大模型在 CPU 上推理延迟高，生产环境应使用 GPU 或量化。
 
 **修正**: 使用 `Device::Cuda(0)` 或 `llm` 的量化模型。
@@ -527,7 +514,6 @@ fn fast_inference() {
     let model = load_quantized_model("llama-7b-q4.gguf").unwrap();
 }
 ```
-
 ---
 
 ### 反例 3: 忽略依赖版本兼容性 {#反例-3-忽略依赖版本兼容性}
@@ -542,7 +528,6 @@ fn fast_inference() {
 burn = "0.18"
 burn-ndarray = "0.20"  # 版本不一致易导致编译错误
 ```
-
 **原因**: burn 与 burn-ndarray 需同版本，否则编译失败。
 
 **修正**: 保持主库与后端扩展版本一致。
@@ -558,7 +543,6 @@ burn-cuda = "0.20"
 burn = { workspace = true }
 burn-ndarray = { workspace = true }
 ```
-
 ---
 
 ### 反例 4: 内存泄漏 - 循环引用张量缓存 {#反例-4-内存泄漏---循环引用张量缓存}
@@ -578,7 +562,6 @@ struct TensorCache {
 
 // a -> b -> a 导致内存无法释放
 ```
-
 **原因**: Rc 循环引用导致引用计数永不为零。
 
 **修正**: 使用 Weak 打破循环。
@@ -592,7 +575,6 @@ struct TensorCache {
     tensors: RefCell<Vec<Weak<TensorCache>>>,  // Weak 不增加引用计数
 }
 ```
-
 ---
 
 ### 反例 5: 边界情况 - 空张量操作 {#反例-5-边界情况---空张量操作}
@@ -607,7 +589,6 @@ fn normalize(tensor: &Tensor) -> Tensor {
     tensor / tensor.sum()  // 空张量 sum 为 0，导致除零
 }
 ```
-
 **原因**: 空张量或零和导致除零错误。
 
 **修正**: 添加边界检查。
@@ -623,7 +604,6 @@ fn normalize(tensor: &Tensor) -> Option<Tensor> {
     }
 }
 ```
-
 ---
 
 ## 相关文档 {#相关文档}
@@ -683,7 +663,6 @@ pub fn extract_time_window_features(signal: &[f32]) -> Vec<WindowFeatures> {
 /// | `windows(10)` | 45.2 | 10,000 次 |
 /// | `array_windows::<10>()` | **28.5** | **0** |
 ```
-
 ---
 
 ### LazyLock 在模型缓存中的应用 {#lazylock-在模型缓存中的应用}
@@ -713,7 +692,6 @@ pub fn batch_classify(images: Vec<Vec<f32>>) -> Vec<Vec<f32>> {
     }
 }
 ```
-
 ---
 
 ### ControlFlow 在训练管道中的应用 {#controlflow-在训练管道中的应用}
@@ -743,7 +721,6 @@ pub fn training_step<B: Backend>(
     ControlFlow::Continue(Metrics { loss: loss.item() })
 }
 ```
-
 ---
 
 ### 数学常量在超参数优化中的应用 {#数学常量在超参数优化中的应用}
@@ -771,7 +748,6 @@ pub fn harmonic_lr_schedule(initial_lr: f64, epoch: usize) -> f64 {
     initial_lr / (n.ln() + f64::consts::EULER_GAMMA)
 }
 ```
-
 ---
 
 ### 生产场景：实时推荐系统 {#生产场景实时推荐系统}
@@ -811,7 +787,6 @@ impl RecommendationService {
     }
 }
 ```
-
 ---
 
 ### 总结 {#总结}

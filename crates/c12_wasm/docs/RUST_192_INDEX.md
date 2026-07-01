@@ -82,22 +82,22 @@
 
 | #   | 文档                                                                                       | 行数 | 用途     | 难度     |
 | :--- | :--- | :--- | :--- | :--- |
-| 1   | [tier*03_references/04_rust_192*特性参考.md](tier_03_references/04_rust_192_特性参考.md) | 300+ | API 参考 | ⭐⭐⭐⭐ |
+| 1   | [tier*03_references/04_rust_192*特性参考.md](tier_03_references/04_rust_192_features_reference.md) | 300+ | API 参考 | ⭐⭐⭐⭐ |
 
 ### 实践指南
 
 | #   | 文档                                                                               | 行数 | 用途       | 难度     |
 | :--- | :--- | :--- | :--- | :--- |
-| 1   | [tier*02_guides/02_rust*编译\_wasm.md](tier_02_guides/02_rust_编译_wasm.md)      | 746+ | 编译指南   | ⭐⭐⭐   |
-| 2   | [tier*02_guides/03_javascript*互操作.md](tier_02_guides/03_javascript_互操作.md) | 382+ | 互操作指南 | ⭐⭐⭐   |
-| 3   | [tier*02_guides/04*性能优化指南.md](tier_02_guides/04_性能优化指南.md)           | 385+ | 性能优化   | ⭐⭐⭐⭐ |
+| 1   | [tier*02_guides/02_rust*编译\_wasm.md](tier_02_guides/02_compiling_rust_to_wasm.md)      | 746+ | 编译指南   | ⭐⭐⭐   |
+| 2   | [tier*02_guides/03_javascript*互操作.md](tier_02_guides/03_javascript_interop.md) | 382+ | 互操作指南 | ⭐⭐⭐   |
+| 3   | [tier*02_guides/04*性能优化指南.md](tier_02_guides/04_performance_optimization_guide.md)           | 385+ | 性能优化   | ⭐⭐⭐⭐ |
 
 ### 高级主题
 
 | #   | 文档                                                                                 | 行数 | 用途     | 难度       |
 | :--- | :--- | :--- | :--- | :--- |
-| 1   | [tier*04_advanced/02*性能分析与优化.md](tier_04_advanced/02_性能分析与优化.md)     | -    | 高级优化 | ⭐⭐⭐⭐⭐ |
-| 2   | [tier*04_advanced/11*性能优化深度指南.md](tier_04_advanced/11_性能优化深度指南.md) | 964+ | 深度优化 | ⭐⭐⭐⭐⭐ |
+| 1   | [tier*04_advanced/02*性能分析与优化.md](tier_04_advanced/02_performance_analysis_and_optimization.md)     | -    | 高级优化 | ⭐⭐⭐⭐⭐ |
+| 2   | [tier*04_advanced/11*性能优化深度指南.md](tier_04_advanced/11_performance_optimization_in_depth_guide.md) | 964+ | 深度优化 | ⭐⭐⭐⭐⭐ |
 
 ---
 

@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -33,7 +32,6 @@ mindmap
       接口抽象
       依赖注入
 ```
-
 ## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -95,7 +93,6 @@ fn type_state_demo() {
     // _door.walk_through();  // 编译错误：Closed 状态没有 walk_through
 }
 ```
-
 ### 构造器模式 {#构造器模式}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -159,7 +156,6 @@ fn builder_demo() -> Result<(), String> {
     Ok(())
 }
 ```
-
 ### RAII 模式 {#raii-模式}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -195,7 +191,6 @@ fn raii_demo() {
     // 使用文件...
 }  // 自动调用 drop，关闭文件
 ```
-
 ### 策略模式（使用 Trait） {#策略模式使用-trait}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -279,7 +274,6 @@ fn strategy_demo() {
     cart.checkout().unwrap();
 }
 ```
-
 ### 访问者模式 {#访问者模式}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -360,7 +354,6 @@ fn visitor_demo() {
     println!("Result: {}", evaluator.result); // 30
 }
 ```
-
 ### 新类型模式（Newtype Pattern） {#新类型模式newtype-pattern}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -409,7 +402,6 @@ fn newtype_demo() {
     // find_user(product_id);  // 编译错误！
 }
 ```
-
 ---
 
 ## 使用场景 {#使用场景}
@@ -497,12 +489,8 @@ fn newtype_demo() {
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
-
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
-
 > **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
-
 > **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
-
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**

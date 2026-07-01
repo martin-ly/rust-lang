@@ -62,7 +62,6 @@ fn bench_naive(b: &mut Bencher) {
     });
 }
 ```
-
 ### 后果 {#后果-1}
 
 测得的是零耗时，无法反映真实算法性能。
@@ -83,7 +82,6 @@ fn compute() -> i32 {
     factorial(10) // ❌ 编译期可能计算为常量
 }
 ```
-
 ### 后果 {#后果-1}
 
 运行时基准测试显示不现实的低延迟。
@@ -104,7 +102,6 @@ fn bench_once(b: &mut Bencher) {
     b.iter(|| heavy_computation(&data));
 }
 ```
-
 ### 问题 {#问题-3}
 
 第一次迭代冷缓存、分支预测未建立，结果波动大。
@@ -126,7 +123,6 @@ b.iter(|| {
     process(input);
 });
 ```
-
 ### 问题 {#问题-3}
 
 `black_box` 用于阻止优化，但不应引入额外分配；否则测的是分配开销。
@@ -146,7 +142,6 @@ b.iter(|| {
 // 单线程测得算法 A 比 B 快 10%
 // 直接推断在多核服务器上 A 也比 B 好
 ```
-
 ### 问题 {#问题-3}
 
 忽略了锁竞争、缓存一致性、伪共享（false sharing）等多线程因素。
@@ -166,7 +161,6 @@ b.iter(|| {
 // 在 glibc malloc 下测得内存占用
 // 直接推断 musl/jemalloc 下相同
 ```
-
 ### 问题 {#问题-3}
 
 不同分配器碎片化和释放策略不同，影响峰值内存和 long-running 占用。
@@ -190,7 +184,6 @@ macro_rules! count {
 
 // 测试时 token 数量变化巨大，结果无法比较
 ```
-
 ### 修复方案 {#修复方案-6}
 
 - 使用参数化输入规模。
@@ -229,7 +222,6 @@ macro_rules! count {
 
 - [RFC 到反例自动化映射索引](../10_rfc_to_counterexample_mapping.md)
 - [Rust RFCs 官方索引](https://rust-lang.github.io/rfcs/)
-
 - [RFC 2394: async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
 - [RFC 3513: gen blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)
 
