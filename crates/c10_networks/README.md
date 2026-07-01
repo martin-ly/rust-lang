@@ -67,8 +67,6 @@
 
 - 🚀 [快速入门](docs/tutorials/QUICK_START.md) - 立即开始
 - 🗺️ [完整索引](docs/00_MASTER_INDEX.md) - 所有文档
-- 📖 [术语表](docs/references/Glossary.md) - 核心术语
-- ❓ [常见问题](docs/references/FAQ.md) - 解决疑问
 
 **文档层级结构**:
 
@@ -161,6 +159,7 @@ C10 Networks 是一个基于 Rust 1.92.0 的现代网络编程库，提供了完
 [dependencies]
 c10_networks = "0.1.0"
 ```
+
 ## 📡 抓包与流量分析（libpnet 实战）
 
 本库内置基于 `libpnet` 的抓包与流量分析能力：
@@ -184,6 +183,7 @@ c10_networks = "0.1.0"
 Set-ExecutionPolicy Bypass -Scope Process -Force
 ./crates/c10_networks/scripts/setup_windows_env.ps1 -WithNpcap -InstallNasm
 ```
+
 ### 构建与示例
 
 ```powershell
@@ -201,16 +201,19 @@ cargo run -p c10_networks --example udp_custom_server -- 127.0.0.1:9000
 # 终端2
 cargo run -p c10_networks --example udp_custom_demo -- 127.0.0.1:9000
 ```
+
 启用 offline 特性读取 PCAP（需自备 `capture.pcap`）：
 
 ```powershell
 cargo run -p c10_networks --features offline --example pcap_offline -- capture.pcap
 ```
+
 启用 pcap_live 实时过滤抓包（需管理员）：
 
 ```powershell
 cargo run -p c10_networks --features pcap_live --example pcap_live_tcp -- "Ethernet" "tcp port 80"
 ```
+
 ### 编程接口（精简）
 
 ```rust
@@ -219,6 +222,7 @@ use c10_networks::sniff::{
   UdpCustomMessage, udp_custom_roundtrip,
 };
 ```
+
 - ARP（同步）：`ArpSniffer::sniff_arp_sync(cfg, Some(n)) -> Vec<ArpRecord>`
 - ARP（异步）：`arp_stream(cfg, size) -> mpsc::Receiver<ArpRecord>`
 - TCP 一次性统计：`monitor_tcp_once(iface, secs) -> TcpTrafficReport`
@@ -248,6 +252,7 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 ```
+
 ### 错误处理示例
 
 ```rust
@@ -266,6 +271,7 @@ async fn handle_network_operation() -> NetworkResult<()> {
     }
 }
 ```
+
 ### 异步网络服务器示例
 
 ```rust
@@ -296,6 +302,7 @@ async fn handle_connection(mut stream: tokio::net::TcpStream) {
     response.write_to(&mut stream).await.unwrap();
 }
 ```
+
 ## 📚 模块结构
 
 ```text
@@ -313,6 +320,7 @@ c10_networks/
 ├── network_topology/  # 网络拓扑
 └── p2p/               # P2P（身份、发现、DHT、PubSub、NAT）
 ```
+
 ## 🔎 DNS（基于 Hickory-DNS）
 
 快速查询示例：
@@ -335,6 +343,7 @@ async fn main() -> anyhow::Result<()> {
     Ok(())
 }
 ```
+
 更多细节见 `docs/dns_hickory_integration.md` 与示例 `examples/dns_lookup.rs`。
 
 ### 一体化示例与脚本
@@ -373,6 +382,7 @@ impl AsyncNetworkClient for MyClient {
     }
 }
 ```
+
 ### 异步闭包改进
 
 ```rust
@@ -385,6 +395,7 @@ let results = futures::future::try_join_all(
     })
 ).await?;
 ```
+
 ### 常量泛型推断
 
 ```rust
@@ -394,6 +405,7 @@ fn process_packet(data: [u8; _]) -> NetworkResult<u32> {
     Ok(checksum)
 }
 ```
+
 ### 性能基准测试
 
 ```bash
@@ -403,6 +415,7 @@ cargo run --example rust_190_async_features_demo
 # 运行性能基准测试
 cargo run --example rust_190_performance_benchmark
 ```
+
 ## 🌐 P2P 最小示例（基于 libp2p）
 
 ```rust
@@ -436,6 +449,7 @@ async fn main() -> anyhow::Result<()> {
     }
 }
 ```
+
 ### 生命周期语法检查
 
 ```rust
@@ -444,6 +458,7 @@ async fn handle_connection<'a>(stream: &'a TcpStream) -> NetworkResult<()> {
     // 处理连接
 }
 ```
+
 ### 常量泛型推断1
 
 ```rust
@@ -455,6 +470,7 @@ fn process_packet<const N: usize>(data: [u8; N]) -> NetworkResult<()> {
 // 调用时使用 _
 let result = process_packet([0u8; _]);
 ```
+
 ### Result::flatten 方法
 
 ```rust
@@ -465,6 +481,7 @@ fn parse_http_request(data: &[u8]) -> NetworkResult<HttpRequest> {
         .flatten()
 }
 ```
+
 ## 🧪 测试
 
 运行所有测试：
@@ -472,11 +489,13 @@ fn parse_http_request(data: &[u8]) -> NetworkResult<HttpRequest> {
 ```bash
 cargo test
 ```
+
 运行性能测试：
 
 ```bash
 cargo bench
 ```
+
 运行示例程序：
 
 ```bash
@@ -496,6 +515,7 @@ cargo run --example grpc_client
 # P2P 最小示例
 cargo run --example p2p_minimal
 ```
+
 ## 🧩 统一 API 示例
 
 ```rust
@@ -518,6 +538,7 @@ async fn main() -> c10_networks::NetworkResult<()> {
     Ok(())
 }
 ```
+
 ## 🛠️ 网络诊断快速使用
 
 ```rust
@@ -533,6 +554,7 @@ async fn main() {
     println!("open ports: {:?}", open);
 }
 ```
+
 ## 🔁 带重试的统一 API
 
 ```rust
@@ -551,6 +573,7 @@ async fn main() -> c10_networks::NetworkResult<()> {
     Ok(())
 }
 ```
+
 ## 📊 性能特性
 
 - **零拷贝网络编程**: 使用 `bytes::Bytes` 和 `IoSlice` 减少内存拷贝

@@ -5,7 +5,7 @@
 >
 > **文档定位**: C07进程管理模块主入口，提供快速开始指南、IPC通信机制介绍和完整的学习资源导航
 > **先修知识**: [C01 所有权](../../c01_ownership_borrow_scope/docs/README.md) | [C05 线程](../../c05_threads/docs/README.md)
-> **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](FAQ.md) | [Glossary](Glossary.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](tier_01_foundations/04_faq.md) | [Glossary](tier_01_foundations/03_glossary.md)
 
 **最后更新**: 2025-12-25
 **适用版本**: Rust 1.93.0+ (Edition 2024)
@@ -231,8 +231,8 @@ let output = Command::new("app")
 ### 本模块资源
 
 - 📋 **[主索引](00_MASTER_INDEX.md)** - 完整文档导航
-- ❓ **[FAQ](FAQ.md)** - 5个核心问答
-- 📚 **[Glossary](Glossary.md)** - 13个核心术语
+- ❓ **[FAQ](tier_01_foundations/04_faq.md)** - 5个核心问答
+- 📚 **[Glossary](tier_01_foundations/03_glossary.md)** - 13个核心术语
 - 📖 **[核心系列01-10](01_process_model_and_lifecycle.md)** - 系统学习
 - 🔬 **[实践系列11-18](11_practical_examples/11_practical_examples.md)** - 实战指南
 
@@ -332,17 +332,17 @@ winapi = "0.3"  # Windows API
 
 ### 按学习阶段
 
-- **第1天**: [01_process_model](01_process_model_and_lifecycle.md) → [FAQ](FAQ.md)
+- **第1天**: [01_process_model](01_process_model_and_lifecycle.md) → [FAQ](tier_01_foundations/04_faq.md)
 - **第2-3天**: [02_ipc](02_ipc_mechanisms.md) → [12_std_process](11_practical_examples/12_std_process_deep_dive.md)
 - **第4-5天**: [实践示例](11_practical_examples/11_practical_examples.md) → 运行所有bin示例
 - **第2周**: [跨平台](10_cross_platform_guide.md) → [性能优化](07_performance_optimization.md)
 
 ### 按问题类型
 
-- **如何创建进程?** → [FAQ Q1](FAQ.md#q1) | [01_process_model](01_process_model_and_lifecycle.md)
-- **进程间通信?** → [FAQ Q2](FAQ.md#q2) | [02_ipc](02_ipc_mechanisms.md)
-- **跨平台实现?** → [FAQ Q3](FAQ.md#q3) | [10_cross_platform](10_cross_platform_guide.md)
-- **僵尸进程?** → [FAQ Q4](FAQ.md#q4)
+- **如何创建进程?** → [](tier_01_foundations/04_faq.mdFAQ Q1) | [01_process_model](01_process_model_and_lifecycle.md)
+- **进程间通信?** → [](tier_01_foundations/04_faq.mdFAQ Q2) | [02_ipc](02_ipc_mechanisms.md)
+- **跨平台实现?** → [](tier_01_foundations/04_faq.mdFAQ Q3) | [10_cross_platform](10_cross_platform_guide.md)
+- **僵尸进程?** → [](tier_01_foundations/04_faq.mdFAQ Q4)
 
 ### 按IPC机制
 
@@ -359,8 +359,8 @@ winapi = "0.3"  # Windows API
 1. **🚀 快速体验** → 运行上面的示例代码
 2. **📚 系统学习** → [01_process_model_and_lifecycle.md](01_process_model_and_lifecycle.md)
 3. **🔍 查找文档** → [00_MASTER_INDEX.md](00_MASTER_INDEX.md)
-4. **❓ 解决问题** → [FAQ.md](FAQ.md)
-5. **💡 查询术语** → [Glossary.md](Glossary.md)
+4. **❓ 解决问题** → [FAQ.md](tier_01_foundations/04_faq.md)
+5. **💡 查询术语** → [Glossary.md](tier_01_foundations/03_glossary.md)
 
 ---
 

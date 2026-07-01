@@ -207,7 +207,7 @@ graph TB
 - 类型推断（Type Inference）复杂度
 - [Aeneas 符号化语义](30_aeneas_symbolic_semantics.md)
 - [通用程序语言理论基础：Rust 的 PL 基座](23_programming_language_foundations.md)
-- [测验：形式化方法概念（嵌入式互动试点）](24_quiz_formal_methods.md)
+- [测验：形式化方法概念（嵌入式互动试点）](25_quiz_formal_methods.md)
 
 ## 三、与上层概念的严格映射
 

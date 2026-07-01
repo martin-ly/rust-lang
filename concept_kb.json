@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 326,
+    "total_files": 327,
     "generated_at": "The system cannot accept the date entered.\nEnter the new date: (yy-mm-dd)"
   },
   "files": [
@@ -56,31 +56,22 @@
       "layer": "L0",
       "title": "Cross Reference Matrix（交叉引用矩阵）",
       "positioning": "",
-      "line_count": 76,
-      "theorem_chains": [
-        {
-          "text": "| 05 Cross Reference Matrix 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
-          "type": "table_row"
-        }
-      ],
-      "anti_propositions": [
-        {
-          "title": "### 反命题"
-        }
-      ],
+      "line_count": 11,
+      "theorem_chains": [],
+      "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
         "03_bloom_taxonomy.md",
         "08_concept_audit_guide.md",
-        "README.md",
+        "concept_index.md",
         "learning_guide.md",
         "semantic_space.md"
       ],
-      "transitions": 6,
-      "has_cognitive_path": true,
+      "transitions": 0,
+      "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 2,
+      "matrix_rows": 0,
       "pre_post": {
         "pre": [],
         "post": []
@@ -170,7 +161,7 @@
       "layer": "L0",
       "title": "概念一致性检查清单（Concept Consistency Audit Checklist）",
       "positioning": "本文件定义 `concept/` 知识体系的**质量门禁**，用于定期审计概念文件的一致性、完备性和关系清晰度。",
-      "line_count": 386,
+      "line_count": 437,
       "theorem_chains": [
         {
           "text": "| Audit Checklist 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -191,12 +182,13 @@
         "authority_source_map.md",
         "inter_layer_map.md",
         "methodology.md",
+        "quality_dashboard_v2.md",
         "sources.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 77,
+      "matrix_rows": 81,
       "pre_post": {
         "pre": [],
         "post": []
@@ -483,28 +475,21 @@
       "layer": "L0",
       "title": "概念一致性（Coherence）检查清单",
       "positioning": "",
-      "line_count": 58,
+      "line_count": 9,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "foundations_gap_closure_index.md",
-        "navigation.md",
-        "quality_dashboard_v2.md",
-        "terminology_glossary.md"
+        "audit_checklist.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "matrix_rows": 0,
       "pre_post": {
-        "pre": [
-          "[Navigation Hub](navigation.md) · [Terminology Glossary](terminology_glossary.md)"
-        ],
-        "post": [
-          "[Foundations Gap Closure Index](foundations_gap_closure_index.md)"
-        ]
+        "pre": [],
+        "post": []
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -1047,72 +1032,22 @@
       "path": "concept\\00_meta\\inter_layer_topology.md",
       "layer": "L0",
       "title": "Rust 知识体系跨层依赖与蕴含拓扑图",
-      "positioning": "本文件建立 L0-L7 八层架构之间的全局依赖与蕴含关系，回答「学习/理解/验证某一概念时，必须前置掌握什么、可后置推导什么、与什么互斥、与什么同构」。",
-      "line_count": 401,
-      "theorem_chains": [
-        {
-          "text": "> **符号约定**: `⟹` 蕴含 / `←` 依赖 / `≡` 同构 / `⊘` 互斥 / `↔` 双向映射",
-          "type": "paragraph"
-        },
-        {
-          "text": "| 所有权唯一性 | Move 语义完备性 | ⟹ | 若值只有一个所有者，则转移所有权后原持有者失效 | `01_ownership.md` T-001 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| Move 语义 | 无 UAF（Safe Rust） | ⟹ | 转移后原引用不可达，编译期拒绝访问 | `01_ownership.md` T-003 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 借用唯一性（AXM） | 无数据竞争（Safe Rust） | ⟹ | `&mut T` 独占保证无并发写；`&T` 共享保证无并发写 | `02_borrowing.md` T-012 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| `Send` + `Sync` | fearless concurrency | ⟹ | 类型系统保证线程安全，无需运行时检查 | `03_concurrency.md` T-040 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 生命周期偏序 | NLL 流敏感安全 | ⟹ | CFG 上活跃性分析保证引用只在有效期间使用 | `03_lifetimes.md` T-021 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| Trait Coherence | 全局唯一 impl | ⟹ | 孤儿规则保证任意类型+Trait 最多一个 impl | `01_traits.md` T-020 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 拓扑结构 ⟹ 概念覆盖无遗漏 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
-          "type": "table_row"
-        }
-      ],
-      "anti_propositions": [
-        {
-          "title": "### 反命题"
-        }
-      ],
+      "positioning": "",
+      "line_count": 13,
+      "theorem_chains": [],
+      "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../01_foundation/01_ownership.md",
-        "../01_foundation/02_borrowing.md",
-        "../archive/PLAN_concept_knowledge_system_v2.md",
-        "boundary_extension_tree.md",
-        "concept_index.md",
-        "decidability_spectrum.md",
-        "expressiveness_multiview.md",
-        "intra_layer_model_map.md",
-        "methodology.md",
-        "theorem_inference_forest.md"
+        "inter_layer_map.md"
       ],
-      "transitions": 6,
+      "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
-      "matrix_rows": 33,
+      "mermaid_blocks": 0,
+      "matrix_rows": 0,
       "pre_post": {
-        "pre": [
-          "本文件建立 L0-L7 八层架构之间的全局依赖与蕴含关系，回答「学习/理解/验证某一概念时，必须前置掌握什么、可后置推导什么、与什么互斥、与什么同构」。"
-        ],
-        "post": [
-          "本文件建立 L0-L7 八层架构之间的全局依赖与蕴含关系，回答「学习/理解/验证某一概念时，必须前置掌握什么、可后置推导什么、与什么互斥、与什么同构」。"
-        ]
+        "pre": [],
+        "post": []
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -3008,16 +2943,20 @@
       "layer": "L0",
       "title": "主题-权威来源对齐图谱 (Topic-Authority Alignment Map)",
       "positioning": "",
-      "line_count": 442,
+      "line_count": 12,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
-      "cross_references": [],
+      "cross_references": [
+        "authority_source_map.md",
+        "concept_index.md",
+        "navigation.md"
+      ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 5,
+      "matrix_rows": 0,
       "pre_post": {
         "pre": [],
         "post": []
@@ -38236,7 +38175,7 @@
       "layer": "L6",
       "title": "Rustdoc 1.96 变更",
       "positioning": "",
-      "line_count": 220,
+      "line_count": 221,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -38261,6 +38200,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../docs/06_toolchain/06_20_rustdoc_196_improvements.md",
         "../02_intermediate/17_macro_patterns.md",
         "../05_comparative/07_rust_vs_python.md",
         "../07_future/05_rust_version_tracking.md",
@@ -44075,6 +44015,107 @@
         ],
         "post": [
           "[Rust 1.98+ 前沿特性预览](rust_1_98_preview.md) · [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "concept\\07_future\\rust_1_97_stabilized.md",
+      "layer": "L7",
+      "title": "Rust 1.97.0 稳定特性",
+      "positioning": "",
+      "line_count": 272,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "#[must_use] struct ImportantToken;  fn give_token() -> Result<ImportantToken, st..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// ❌ 编译错误 #[export_name = \"\"] pub fn foo() {} ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::num::NonZeroU32;  let n = NonZeroU32::new(0b00010100).unwrap(); assert_..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "const SPACE: char = ' '; const IS_CONTROL: bool = SPACE.is_control(); // false ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use std::num::NonZeroU32;  let a = NonZeroU32::new(10).unwrap(); let b = NonZero..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn a() {} fn b() {}  assert!(std::ptr::fn_addr_eq(a, a)); assert!(!std::ptr::fn_..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "const BUF: [u8; 10] = [0; 10]; const SIZE: usize = std::mem::size_of_val(&BUF); ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "use std::hash::BuildHasherDefault; use std::collections::hash_map::DefaultHasher..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "let b = Box::new(42); let p = Box::as_ptr(&b); assert_eq!(unsafe { *p }, 42); ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "let opt = Some(42); assert_eq!(opt.as_slice(), &[42]);  let none: Option<i32> = ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_has_atomic_equal_alignment = \"ptr\")] fn optimized_ptr_atomic() {   ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../docs/02_reference/quick_reference/02_rust_197_features_cheatsheet.md",
+        "../02_intermediate/03_memory_management.md",
+        "../06_ecosystem/01_toolchain.md",
+        "rust_1_96_stabilized.md",
+        "rust_1_98_preview.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 11,
+      "pre_post": {
+        "pre": [
+          "[Rust 1.96 稳定特性](rust_1_96_stabilized.md) · [Toolchain](../06_ecosystem/01_toolchain.md) · [NonZero](../02_intermediate/03_memory_management.md)"
+        ],
+        "post": [
+          "[Rust 1.98 前沿特性预览](rust_1_98_preview.md)"
         ]
       },
       "backward_chains": 0,

@@ -3,7 +3,7 @@
 > **文档类型**: Tier 1 - 基础层
 > **文档定位**: 设计模式学习和实践中的常见问题快速解答，新手入门必备
 > **项目状态**: ✅ 完整完成
-> **相关文档**: [项目概览](01_project_overview.md) | [主索引导航](02_navigation.md) | [术语表](03_glossary.md) | [完整FAQ](../FAQ.md)
+> **相关文档**: [项目概览](01_project_overview.md) | [主索引导航](02_navigation.md) | [术语表](03_glossary.md) | [完整FAQ](tier_01_foundations/04_faq.md)
 
 **最后更新**: 2025-12-25
 **适用版本**: Rust 1.92.0+ (Edition 2024)
@@ -96,7 +96,8 @@
 │   └─ 否 → 简单解决方案即可
 └─ 否 → 不需要设计模式
 ```
-**相关**: [完整FAQ](../FAQ.md#q1-什么时候应该使用设计模式) | [项目概览](01_project_overview.md)
+
+**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [项目概览](01_project_overview.md)
 
 ---
 
@@ -130,7 +131,7 @@
 | 性能开销 | 虚函数表   | 零成本抽象 ✅         |
 | 状态保证 | 运行时检查 | 编译时检查 ✅         |
 
-**相关**: [完整FAQ](../FAQ.md#q2-rust-中的设计模式与其他语言有什么不同) | [术语表](03_glossary.md)
+**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [术语表](03_glossary.md)
 
 ---
 
@@ -158,6 +159,7 @@
     ├─ 需要状态管理 → State (Typestate)
     └─ 需要请求封装 → Command
 ```
+
 **选择矩阵**:
 
 | 问题         | 推荐模式  | 原因                 |
@@ -170,7 +172,7 @@
 | 事件通知     | Observer  | 一对多依赖           |
 | 状态管理     | State     | Typestate 编译时保证 |
 
-**相关**: [完整FAQ](../FAQ.md#q3-如何选择合适的设计模式) | [主索引导航](02_navigation.md)
+**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [主索引导航](02_navigation.md)
 
 ---
 
@@ -199,6 +201,7 @@ fn get_config() -> &'static Config {
     })
 }
 ```
+
 **特点**:
 
 - ✅ 线程安全
@@ -208,7 +211,7 @@ fn get_config() -> &'static Config {
 
 **vs lazy_static**: `OnceLock` 是标准库类型，更推荐使用
 
-**相关**: [完整FAQ](../FAQ.md#q4-rust-中如何实现线程安全的单例模式) | [术语表](03_glossary.md#oncelock)
+**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [术语表](03_glossary.md#oncelock)
 
 ---
 
@@ -256,13 +259,14 @@ let request = RequestBuilder::new()
     .url("https://example.com".to_string())
     .build(); // ✅ 类型安全
 ```
+
 **优势**:
 
 - ✅ 编译时验证
 - ✅ 零运行时开销
 - ✅ 防止非法状态
 
-**相关**: [完整FAQ](../FAQ.md#q5-建造者模式如何保证必填字段) | [术语表](03_glossary.md#typestate-模式)
+**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [术语表](03_glossary.md#typestate-模式)
 
 ---
 
@@ -289,6 +293,7 @@ impl Subject {
     }
 }
 ```
+
 **方法2: GATs 借用视图**:
 
 ```rust
@@ -297,13 +302,14 @@ trait Observer {
     fn update(&self, data: Self::View<'_>);
 }
 ```
+
 **对比**:
 
 | 方法    | 优点             | 缺点         |
 | :--- | :--- | :--- || Channel | 简单、解耦       | 需要克隆数据 |
 | GATs    | 零拷贝、类型安全 | 复杂度较高   |
 
-**相关**: [完整FAQ](../FAQ.md#q8-观察者模式如何避免借用检查问题) | [术语表](03_glossary.md#gats-generic-associated-types)
+**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [术语表](03_glossary.md#gats-generic-associated-types)
 
 ---
 
@@ -323,6 +329,7 @@ trait Observer {
     ├─ 主要 I/O → async/await
     └─ 主要 CPU → 线程
 ```
+
 **对比矩阵**:
 
 | 特性       | 线程             | async/await  |
@@ -332,7 +339,7 @@ trait Observer {
 | 上下文切换 | 操作系统调度     | 用户态调度   |
 | 适用场景   | 并行计算         | 异步 I/O     |
 
-**相关**: [完整FAQ](../FAQ.md#q10-asyncawait-vs-线程如何选择) | [术语表](03_glossary.md#asyncawait)
+**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [术语表](03_glossary.md#asyncawait)
 
 ---
 
@@ -372,7 +379,7 @@ trait Observer {
 - ❌ 为了模式而模式
 - ❌ 忽略简单解决方案
 
-**相关**: [完整FAQ](../FAQ.md#q16-如何在实际项目中应用设计模式) | [项目概览](01_project_overview.md)
+**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [项目概览](01_project_overview.md)
 
 ---
 
@@ -380,7 +387,7 @@ trait Observer {
 
 本文档提供了核心问题的快速参考。如需查看完整的FAQ（包含更多问题、详细解答、代码示例等），请参阅：
 
-- **[完整FAQ](../FAQ.md)** - 包含 17+ 个常见问题的详细解答
+- **[完整FAQ](tier_01_foundations/04_faq.md)** - 包含 17+ 个常见问题的详细解答
 
 **完整FAQ包含**:
 
@@ -407,7 +414,7 @@ trait Observer {
 
 **核心资源**:
 
-- [完整FAQ](../FAQ.md) - 所有问题详细解答
+- [完整FAQ](tier_01_foundations/04_faq.md) - 所有问题详细解答
 - [综合指南](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 完整模式指南
 - [实战示例集](../RUST_190_EXAMPLES_COLLECTION.md) - 800+行代码示例
 
@@ -419,7 +426,7 @@ trait Observer {
 
 ---
 
-**下一步**: 阅读 [主索引导航](02_navigation.md) 规划学习路径，或查看 [完整FAQ](../FAQ.md) 获取更多解答！
+**下一步**: 阅读 [主索引导航](02_navigation.md) 规划学习路径，或查看 [完整FAQ](tier_01_foundations/04_faq.md) 获取更多解答！
 
 ---
 

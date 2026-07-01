@@ -356,10 +356,6 @@ C10 Networks文档体系按照以下结构组织：
 
 | 文档名称               | 描述             | 状态      | 链接                                             |
 | :--- | :--- | :--- | :--- |
-| FAQ.md                 | 常见问题解答     | 🚧 进行中 | [FAQ.md](FAQ.md)                                 |
-| TROUBLESHOOTING_FAQ.md | 故障排查常见问题 | 🚧 进行中 | [TROUBLESHOOTING_FAQ.md](TROUBLESHOOTING_FAQ.md) |
-| PERFORMANCE_FAQ.md     | 性能问题常见问题 | 🚧 进行中 | [PERFORMANCE_FAQ.md](PERFORMANCE_FAQ.md)         |
-| SECURITY_FAQ.md        | 安全问题常见问题 | 🚧 进行中 | [SECURITY_FAQ.md](SECURITY_FAQ.md)               |
 
 ## 🔗 外部资源
 

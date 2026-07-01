@@ -3,7 +3,7 @@
 > **文档类型**: Tier 1 - 基础层
 > **文档定位**: 设计模式核心术语快速参考，快速入门必备
 > **项目状态**: ✅ 完整完成
-> **相关文档**: [项目概览](01_project_overview.md) | [主索引导航](02_navigation.md) | [常见问题](04_faq.md) | [完整术语表](../Glossary.md)
+> **相关文档**: [项目概览](01_project_overview.md) | [主索引导航](02_navigation.md) | [常见问题](04_faq.md) | [完整术语表](tier_01_foundations/03_glossary.md)
 
 **最后更新**: 2025-12-25
 **适用版本**: Rust 1.92.0+ (Edition 2024)
@@ -74,7 +74,7 @@
 
 **Rust 特点**: 需要考虑所有权、借用、生命周期
 
-**相关**: [项目概览](01_project_overview.md) | [完整术语表](../Glossary.md#设计模式-design-pattern)
+**相关**: [项目概览](01_project_overview.md) | [](tier_01_foundations/03_glossary.md完整术语表)
 
 ---
 
@@ -88,7 +88,7 @@
 - **结构型 (7)**: 适配器、桥接、组合、装饰器、外观、享元、代理
 - **行为型 (11)**: 责任链、命令、解释器、迭代器、中介者、备忘录、观察者、状态、策略、模板方法、访问者
 
-**相关**: [项目概览](01_project_overview.md) | [完整术语表](../Glossary.md#gof-gang-of-four)
+**相关**: [项目概览](01_project_overview.md) | [](tier_01_foundations/03_glossary.md完整术语表)
 
 ---
 
@@ -109,6 +109,7 @@ fn get_instance() -> &'static Config {
     INSTANCE.get_or_init(|| Config::new())
 }
 ```
+
 **工厂模式 (Factory)**: 对象创建接口，封装对象创建逻辑。
 
 **建造者模式 (Builder)**: 复杂对象构建，使用 Typestate 模式保证完整性。
@@ -175,7 +176,7 @@ fn get_instance() -> &'static Config {
 - 类型擦除
 - 灵活但有性能代价
 
-**相关**: [完整术语表](../Glossary.md#trait-对象)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表)
 
 ---
 
@@ -189,7 +190,7 @@ fn get_instance() -> &'static Config {
 - 内联优化
 - 编译时计算
 
-**相关**: [完整术语表](../Glossary.md#零成本抽象-zero-cost-abstraction)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表)
 
 ---
 
@@ -205,7 +206,7 @@ fn get_instance() -> &'static Config {
 
 **应用**: Builder 模式、状态机
 
-**相关**: [完整术语表](../Glossary.md#类型状态模式-typestate-pattern)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表)
 
 ---
 
@@ -215,7 +216,7 @@ fn get_instance() -> &'static Config {
 
 **应用**: 观察者模式的借用视图
 
-**相关**: [完整术语表](../Glossary.md#gats-generic-associated-types)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表)
 
 ---
 
@@ -227,7 +228,7 @@ fn get_instance() -> &'static Config {
 
 **vs lazy_static**: 标准库支持，无需外部依赖
 
-**相关**: [完整术语表](../Glossary.md#oncelock)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表)
 
 ---
 
@@ -245,7 +246,7 @@ fn get_instance() -> &'static Config {
 
 **Rust 实现**: `tokio::mpsc`, `actix`
 
-**相关**: [完整术语表](../Glossary.md#actor-模式) | [Actor/Reactor分析](../ACTOR_REACTOR_PATTERNS.md)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [Actor/Reactor分析](../ACTOR_REACTOR_PATTERNS.md)
 
 ---
 
@@ -261,7 +262,7 @@ fn get_instance() -> &'static Config {
 
 **Rust 中**: Tokio 运行时基于 Reactor 模式
 
-**相关**: [完整术语表](../Glossary.md#reactor-模式) | [Actor/Reactor分析](../ACTOR_REACTOR_PATTERNS.md)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [Actor/Reactor分析](../ACTOR_REACTOR_PATTERNS.md)
 
 ---
 
@@ -277,7 +278,7 @@ fn get_instance() -> &'static Config {
 
 **Rust 实现**: `std::sync::mpsc`, `crossbeam`
 
-**相关**: [完整术语表](../Glossary.md#csp-communicating-sequential-processes) | [CSP vs Async](../CSP_VS_ASYNC_ANALYSIS.md)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [CSP vs Async](../CSP_VS_ASYNC_ANALYSIS.md)
 
 ---
 
@@ -293,9 +294,10 @@ pub trait Future {
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
 ```
+
 **状态机**: async/await 编译为状态机
 
-**相关**: [完整术语表](../Glossary.md#future)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表)
 
 ---
 
@@ -305,7 +307,7 @@ pub trait Future {
 
 **工作原理**: 编译器将 async 函数转换为状态机
 
-**相关**: [完整术语表](../Glossary.md#asyncawait) | [异步等价理论](../ASYNC_SYNC_EQUIVALENCE_THEORY.md)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [异步等价理论](../ASYNC_SYNC_EQUIVALENCE_THEORY.md)
 
 ---
 
@@ -313,7 +315,7 @@ pub trait Future {
 
 本文档提供了核心术语的快速参考。如需查看完整的术语表（包含形式化理论、高级概念等），请参阅：
 
-- **[完整术语表](../Glossary.md)** - 包含所有术语的详细定义和示例
+- **[完整术语表](tier_01_foundations/03_glossary.md)** - 包含所有术语的详细定义和示例
 
 **完整术语表包含**:
 
@@ -338,8 +340,8 @@ pub trait Future {
 
 **核心资源**:
 
-- [完整术语表](../Glossary.md) - 所有术语详细定义
-- [FAQ](../FAQ.md) - 常见问题解答
+- [完整术语表](tier_01_foundations/03_glossary.md) - 所有术语详细定义
+- [FAQ](tier_01_foundations/04_faq.md) - 常见问题解答
 - [综合指南](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 完整模式指南
 
 **深度理论**:

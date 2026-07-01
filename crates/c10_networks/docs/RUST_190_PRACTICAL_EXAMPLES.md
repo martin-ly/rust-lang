@@ -434,8 +434,6 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $m
 
 - [API文档](references/API_DOCUMENTATION.md)
 - [最佳实践](references/BEST_PRACTICES.md)
-- [常见问题](references/FAQ.md)
-- [术语表](references/Glossary.md)
 
 ---
 
@@ -450,6 +448,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $m
               ↓
          生产项目
 ```
+
 ---
 
 ## 💡 使用建议

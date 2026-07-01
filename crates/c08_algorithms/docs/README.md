@@ -142,6 +142,7 @@
 3. 巩固
    └─ 做算法题目（LeetCode 等）
 ```
+
 ### 🚀 进阶路径 (3-4 周)
 
 ```text
@@ -158,6 +159,7 @@
 3. 实战项目
    └─ 实现高性能算法库
 ```
+
 ### 🎯 专家路径 (持续学习)
 
 ```text
@@ -170,6 +172,7 @@
 3. 研究创新
    └─ 实现新算法、发表论文
 ```
+
 ---
 
 ## 🔍 如何查找内容
@@ -211,8 +214,8 @@
 
 ### 🎯 问题解决
 
-1. 查看 **[FAQ.md](FAQ.md)** 常见问题
-2. 查阅 **[Glossary.md](Glossary.md)** 术语表
+1. 查看 **[FAQ.md](tier_01_foundations/04_faq.md)** 常见问题
+2. 查阅 **[Glossary.md](tier_01_foundations/03_glossary.md)** 术语表
 3. 搜索相关文档
 4. 查看源码和测试
 
@@ -229,6 +232,7 @@
 **Rust版本**: 1.xx+
 **最后更新**: YYYY-MM-DD
 ```
+
 ### 难度标识
 
 - ⭐ - 初级（适合初学者）
@@ -266,11 +270,11 @@
 
 ### 常见问题
 
-查看 **[FAQ.md](FAQ.md)** 获取常见问题的解答。
+查看 **[FAQ.md](tier_01_foundations/04_faq.md)** 获取常见问题的解答。
 
 ### 术语查询
 
-查看 **[Glossary.md](Glossary.md)** 了解专业术语。
+查看 **[Glossary.md](tier_01_foundations/03_glossary.md)** 了解专业术语。
 
 ### 问题反馈
 

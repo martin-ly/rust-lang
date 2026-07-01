@@ -189,7 +189,7 @@
 **Day 5**: 巩固练习
 
 - 完成5-10个示例
-- 阅读 [FAQ.md](FAQ.md)
+- 阅读 [FAQ.md](tier_01_foundations/04_faq.md)
 
 ---
 

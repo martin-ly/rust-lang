@@ -5,7 +5,7 @@
 >
 > **文档定位**: 本文档是C05线程模块的主入口，提供模块概览和快速导航
 > **先修知识**: [C04 泛型](../../c04_generic/docs/README.md)
-> **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](FAQ.md) | [术语表](Glossary.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](tier_01_foundations/04_faq.md) | [术语表](tier_01_foundations/03_glossary.md)
 
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.89+ (推荐 1.93.0+)
@@ -86,8 +86,8 @@ cargo bench -p c05_threads
 
 ### 4. 参考资料 (Reference)
 
-- **[FAQ.md](FAQ.md)** - 常见问题解答
-- **[Glossary.md](Glossary.md)** - 并发术语表
+- **[FAQ.md](tier_01_foundations/04_faq.md)** - 常见问题解答
+- **[Glossary.md](tier_01_foundations/03_glossary.md)** - 并发术语表
 - **[rust_189_features_analysis.md](rust_189_features_analysis.md)** - Rust 1.89特性分析（历史版本，文件已归档）
 
 ---
@@ -175,8 +175,8 @@ Rust 的编译器确保：
 
 ### 常见问题
 
-- **Send vs Sync**: 查看 [FAQ Q1](FAQ.md#q1-send-和-sync-到底有什么区别我总是搞混)
-- **何时用Mutex**: 查看 [FAQ Q2](FAQ.md#q2-既然-mutex-这么好用为什么-rust-还推崇消息传递)
+- **Send vs Sync**: 查看 [](tier_01_foundations/04_faq.mdFAQ Q1)
+- **何时用Mutex**: 查看 [](tier_01_foundations/04_faq.mdFAQ Q2)
 - **性能优化**: 查看 [advanced_concurrency_optimization](advanced_concurrency_optimization.md)
 
 ---

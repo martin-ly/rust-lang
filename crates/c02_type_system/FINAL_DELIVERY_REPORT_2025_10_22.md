@@ -382,8 +382,8 @@ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $ma
 ### 快速开始
 
 - 🚀 **[概述](docs/OVERVIEW.md)** - 快速了解
-- 📖 **[FAQ](docs/FAQ.md)** - 常见问题
-- 📚 **[术语表](docs/Glossary.md)** - 核心术语
+- 📖 **[FAQ](docs/tier_01_foundations/04_faq.md)** - 常见问题
+- 📚 **[术语表](docs/tier_01_foundations/03_glossary.md)** - 核心术语
 - 💻 **[示例集合](docs/RUST_190_EXAMPLES_COLLECTION.md)** - 800+ 行代码
 
 ### 核心文档
@@ -494,8 +494,8 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match
 1. 阅读 README.md 了解项目
 2. 从 docs/02_core/ 开始学习基础概念
 3. 练习 examples/ 中的示例代码
-4. 遇到问题查阅 docs/FAQ.md
-5. 查询术语参考 docs/Glossary.md
+4. 遇到问题查阅 docs/tier_01_foundations/04_faq.md
+5. 查询术语参考 docs/tier_01_foundations/03_glossary.md
 ```
 
 **中级开发者**:

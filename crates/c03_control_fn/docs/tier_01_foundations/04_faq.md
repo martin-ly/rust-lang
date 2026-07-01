@@ -2,7 +2,7 @@
 
 > **文档定位**: 控制流与函数实践中的常见问题快速解答
 > **使用方式**: 遇到问题时快速查找解决方案和最佳实践
-> **相关文档**: [主索引](00_MASTER_INDEX.md) | [README](../README.md) | [Glossary](Glossary.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [README](../README.md) | [Glossary](tier_01_foundations/03_glossary.md)
 
 ## 📊 目录
 
@@ -431,7 +431,7 @@ fn apply<F: Fn(i32) -> i32>(f: F, x: i32) -> i32 {
 
 - [主索引](00_MASTER_INDEX.md) - 完整文档导航
 - [README](../README.md) - 项目概述
-- [Glossary](Glossary.md) - 核心术语表
+- [Glossary](tier_01_foundations/03_glossary.md) - 核心术语表
 - [指南层](../tier_02_guides/README.md) - 基础学习路径
 - [高级主题](../tier_04_advanced/README.md) - 进阶内容
 - [参考资料](../tier_03_references/README.md) - 技术参考

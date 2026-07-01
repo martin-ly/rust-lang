@@ -126,6 +126,7 @@ cargo run --example websocket_demo
 # 运行DNS解析示例
 cargo run --example dns_lookup
 ```
+
 ### 配套资源
 
 - **实践指南**: [../guides/](../guides) - 详细的使用指南
@@ -156,10 +157,8 @@ cargo run --example dns_lookup
 
 遇到问题时：
 
-1. **查看FAQ**: [../references/FAQ.md](../references/FAQ.md)
-2. **查看术语表**: [../references/Glossary.md](../references/Glossary.md)
-3. **查看实践指南**: [../guides/](../guides)
-4. **提交Issue**: GitHub Issues
+1. **查看实践指南**: [../guides/](../guides)
+2. **提交Issue**: GitHub Issues
 
 ---
 

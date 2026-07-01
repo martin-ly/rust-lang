@@ -4,7 +4,6 @@
 > **使用方式**: 作为学习起点，根据需求选择合适的文档和代码模块
 > **适用版本**: Rust 1.94.0+
 **最后更新**: 2026-03-13
-**相关文档**: [README](README.md) | [FAQ](references/FAQ.md) | [Glossary](references/Glossary.md)
 
 📄 **一页纸总结**: [ONE_PAGE_SUMMARY](ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
 
@@ -224,8 +223,6 @@
 - [DOCUMENTATION_STANDARDS.md](references/DOCUMENTATION_STANDARDS.md) - 文档标准
 - [DOCUMENTATION_STYLE_GUIDE.md](references/DOCUMENTATION_STYLE_GUIDE.md) - 文档风格指南
 - [STYLE.md](references/STYLE.md) - 代码和文档风格
-- [Glossary.md](references/Glossary.md) - 术语表
-- [FAQ.md](references/FAQ.md) - 常见问题解答
 
 ### 🎓 [tutorials/](tutorials/README.md) - 教程文档
 
@@ -397,11 +394,9 @@
 
 ### 问题解决顺序
 
-1. **查看FAQ**: [references/FAQ.md](references/FAQ.md)
-2. **查看术语表**: [references/Glossary.md](references/Glossary.md)
-3. **查看示例**: `examples/` 目录
-4. **运行测试**: `cargo test -p c10_networks`
-5. **提交Issue**: GitHub Issues
+1. **查看示例**: `examples/` 目录
+2. **运行测试**: `cargo test -p c10_networks`
+3. **提交Issue**: GitHub Issues
 
 ### 社区支持
 

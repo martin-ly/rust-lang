@@ -49,6 +49,7 @@
 2. 搜索算法 (线性、二分)
 3. 时间复杂度分析
 ```
+
 **第2阶段: 数据结构 (2周)**:
 
 ```text
@@ -56,6 +57,7 @@
 2. 树结构 (二叉树、BST)
 3. 图基础 (BFS、DFS)
 ```
+
 **第3阶段: 进阶算法 (2周)**:
 
 ```text
@@ -63,6 +65,7 @@
 2. 贪心算法
 3. 回溯算法
 ```
+
 **实践建议**:
 
 - ✅ 每天写代码 (1-2小时)
@@ -97,6 +100,7 @@ trait Sortable {
     fn sort(&mut self);
 }
 ```
+
 **推荐学习**:
 
 - 《Rust程序设计语言》前10章
@@ -134,6 +138,7 @@ v.sort();
 // 自定义排序
 v.sort_by(|a, b| a.cmp(b));
 ```
+
 ---
 
 ### Q4: 什么时候用BFS，什么时候用DFS？
@@ -167,6 +172,7 @@ fn bfs(start: i32, graph: &HashMap<i32, Vec<i32>>) {
     }
 }
 ```
+
 **使用DFS**:
 
 - ✅ 遍历所有路径
@@ -186,6 +192,7 @@ fn dfs(node: i32, graph: &HashMap<i32, Vec<i32>>, visited: &mut HashSet<i32>) {
     }
 }
 ```
+
 ---
 
 ## 性能优化
@@ -214,6 +221,7 @@ fn has_duplicate_fast(arr: &[i32]) -> bool {
     arr.iter().any(|&x| !seen.insert(x))
 }
 ```
+
 **2. 数据结构选择**:
 
 ```rust
@@ -225,6 +233,7 @@ v.contains(&3);
 let set: HashSet<_> = v.into_iter().collect();
 set.contains(&3);
 ```
+
 **3. 并行化**:
 
 ```rust
@@ -236,6 +245,7 @@ let sum: i32 = v.iter().sum();
 // 并行
 let sum: i32 = v.par_iter().sum();
 ```
+
 ---
 
 ### Q6: 如何进行性能基准测试？
@@ -254,11 +264,13 @@ fn fibonacci_bench(c: &mut Criterion) {
 criterion_group!(benches, fibonacci_bench);
 criterion_main!(benches);
 ```
+
 **运行基准**:
 
 ```bash
 cargo bench
 ```
+
 **参考**: [算法性能参考](../tier_03_references/04_algorithm_performance_reference.md)
 
 ---
@@ -288,6 +300,7 @@ async fn async_sort<T: Ord + Send + 'static>(
     }).await.unwrap()
 }
 ```
+
 **适用场景**:
 
 - ✅ I/O密集型操作
@@ -307,6 +320,7 @@ fn process(arr: &[i32]) -> i32 {
     arr.iter().sum()  // 只读访问
 }
 ```
+
 **2. 可变引用**:
 
 ```rust
@@ -314,6 +328,7 @@ fn sort(arr: &mut [i32]) {
     arr.sort();  // 修改原数据
 }
 ```
+
 **3. 转移所有权**:
 
 ```rust
@@ -322,6 +337,7 @@ fn consume(arr: Vec<i32>) -> Vec<i32> {
     arr.into_iter().map(|x| x * 2).collect()
 }
 ```
+
 **4. 克隆数据**:
 
 ```rust
@@ -331,6 +347,7 @@ fn clone_and_process(arr: &[i32]) -> Vec<i32> {
     v
 }
 ```
+
 ---
 
 ## 数据结构
@@ -367,6 +384,7 @@ pq.push(3); pq.push(1); pq.push(4);
 let mut queue = VecDeque::new();
 queue.push_back(1);
 ```
+
 ---
 
 ## 学习资源
@@ -397,7 +415,7 @@ queue.push_back(1);
 
 ## 📚 更多问题
 
-**完整FAQ**: 详见 [完整FAQ](../FAQ.md) (20+问题)
+**完整FAQ**: 详见 [完整FAQ](tier_01_foundations/04_faq.md) (20+问题)
 
 ---
 

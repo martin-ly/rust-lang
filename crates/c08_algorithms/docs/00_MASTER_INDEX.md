@@ -297,11 +297,11 @@ Week 4: 实战项目
 
 ### 常见问题
 
-查看 [FAQ.md](FAQ.md) 获取常见问题的解答。
+查看 [FAQ.md](tier_01_foundations/04_faq.md) 获取常见问题的解答。
 
 ### 术语查询
 
-查看 [Glossary.md](Glossary.md) 了解专业术语。
+查看 [Glossary.md](tier_01_foundations/03_glossary.md) 了解专业术语。
 
 ### 问题反馈
 

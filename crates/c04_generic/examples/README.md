@@ -336,8 +336,8 @@ impl Builder<Initialized> {
 - [模块主页](../README.md) - 完整学习指南
 - [文档中心](../docs/README.md) - 详细文档导航
 - [主索引](../docs/00_MASTER_INDEX.md) - 文档完整索引
-- [术语表](../docs/Glossary.md) - 核心术语
-- [FAQ](../docs/FAQ.md) - 常见问题
+- [术语表](../docs/tier_01_foundations/03_glossary.md) - 核心术语
+- [FAQ](../docs/tier_01_foundations/04_faq.md) - 常见问题
 
 ### 理论文档
 

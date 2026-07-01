@@ -77,8 +77,8 @@ let query = sql!("SELECT * FROM users WHERE id = ?", user_id);
 | :--- | :--- | :--- |
 | [00_MASTER_INDEX.md](00_MASTER_INDEX.md) | 主索引导航 | ⭐ |
 | [ONE_PAGE_SUMMARY.md](ONE_PAGE_SUMMARY.md) | 一页纸总结 | ⭐⭐ |
-| [Glossary.md](Glossary.md) | 术语表 | ⭐ |
-| [FAQ.md](FAQ.md) | 常见问题 | ⭐⭐ |
+| [Glossary.md](tier_01_foundations/03_glossary.md) | 术语表 | ⭐ |
+| [FAQ.md](tier_01_foundations/04_faq.md) | 常见问题 | ⭐⭐ |
 
 ### Rust 版本特性文档
 

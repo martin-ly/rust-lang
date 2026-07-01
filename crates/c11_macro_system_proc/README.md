@@ -18,8 +18,8 @@
 **从这里开始学习** ⭐:
 
 - 🗺️ [完整索引](docs/00_MASTER_INDEX.md)
-- 📖 [术语表](docs/Glossary.md)
-- ❓ [常见问题](docs/FAQ.md)
+- 📖 [术语表](docs/tier_01_foundations/03_glossary.md)
+- ❓ [常见问题](docs/tier_01_foundations/04_faq.md)
 
 **文档层级结构**:
 
@@ -343,8 +343,8 @@ trace_macros!(true);
 ### 本模块文档
 
 - [主索引](docs/00_MASTER_INDEX.md) - 完整学习导航
-- [FAQ](docs/FAQ.md) - 常见问题解答
-- [术语表](docs/Glossary.md) - 核心概念定义
+- [FAQ](docs/tier_01_foundations/04_faq.md) - 常见问题解答
+- [术语表](docs/tier_01_foundations/03_glossary.md) - 核心概念定义
 
 ### 实用工具
 

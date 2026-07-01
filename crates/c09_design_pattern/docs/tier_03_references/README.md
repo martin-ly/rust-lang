@@ -26,8 +26,8 @@
 | 资源                                                                              | 说明                                 |
 | :--- | :--- |
 | [00_MASTER_INDEX.md](../00_MASTER_INDEX.md)                                       | 完整索引                             |
-| [FAQ.md](../FAQ.md)                                                               | 常见问题（完整版）                   |
-| [Glossary.md](../Glossary.md)                                                     | 术语表（完整版）                     |
+| [FAQ.md](tier_01_foundations/04_faq.md)                                                               | 常见问题（完整版）                   |
+| [Glossary.md](tier_01_foundations/03_glossary.md)                                                     | 术语表（完整版）                     |
 | [Tier 1 基础层](../tier_01_foundations/README.md)                                          | 快速入门和基础参考                   |
 | [Tier 1 术语表](../tier_01_foundations/03_glossary.md)                              | 核心术语快速参考                     |
 | [Tier 1 常见问题](../tier_01_foundations/04_faq.md)                          | 新手常见问题解答                     |
@@ -54,6 +54,7 @@
 ---
 
 **返回**: [Tier 2](../tier_02_guides/README.md) | **下一步**: [Tier 4](../tier_04_advanced/README.md)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

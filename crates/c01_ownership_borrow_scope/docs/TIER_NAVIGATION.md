@@ -247,8 +247,8 @@ Week 2+: 根据需要学习 Tier 4
 
 ### 快速参考
 
-- 📚 [术语表](Glossary.md) - 核心术语定义
-- ❓ [FAQ](FAQ.md) - 常见问题解答
+- 📚 [术语表](tier_01_foundations/03_glossary.md) - 核心术语定义
+- ❓ [FAQ](tier_01_foundations/04_faq.md) - 常见问题解答
 - 🚀 [快速开始](QUICK_START_GUIDE.md) - 快速入门指南
 
 ### 项目信息
@@ -266,7 +266,7 @@ Week 2+: 根据需要学习 Tier 4
 
 1. **我是完全新手**: 从 [Tier 1](tier_01_foundations/README.md) 开始
 2. **我学过一些 Rust**: 浏览 Tier 1，从 [Tier 2](tier_02_guides/README.md) 深入学习
-3. **我想解决具体问题**: 查看 [FAQ](FAQ.md) 或 [术语表](Glossary.md)
+3. **我想解决具体问题**: 查看 [FAQ](tier_01_foundations/04_faq.md) 或 [术语表](tier_01_foundations/03_glossary.md)
 4. **我对理论感兴趣**: 直接跳到 [Tier 4](tier_04_advanced/README.md)
 
 ### 如何高效学习
@@ -288,7 +288,7 @@ Week 2+: 根据需要学习 Tier 4
 如果遇到问题：
 
 1. 先查看对应 Tier 的 README
-2. 查阅 [FAQ](FAQ.md) 和 [术语表](Glossary.md)
+2. 查阅 [FAQ](tier_01_foundations/04_faq.md) 和 [术语表](tier_01_foundations/03_glossary.md)
 3. 查看 [可视化资源](VISUALIZATION_INDEX.md)
 4. 提交 Issue 或联系维护者
 

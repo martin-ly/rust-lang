@@ -166,9 +166,9 @@
    - 更新文档体系章节
    - 添加文档导航链接
    - 更新学习路径
-3. **docs/FAQ.md** - 常见问题
+3. **docs/tier_01_foundations/04_faq.md** - 常见问题
    - 更新文档链接到新路径
-4. **docs/Glossary.md** - 术语表
+4. **docs/tier_01_foundations/03_glossary.md** - 术语表
    - 更新文档链接到新路径
 
 ---
@@ -315,8 +315,8 @@ c08_algorithms/
 
 ### 辅助文档
 
-- [docs/FAQ.md](docs/FAQ.md) - 常见问题
-- [docs/Glossary.md](docs/Glossary.md) - 术语表
+- [docs/tier_01_foundations/04_faq.md](docs/tier_01_foundations/04_faq.md) - 常见问题
+- [docs/tier_01_foundations/03_glossary.md](docs/tier_01_foundations/03_glossary.md) - 术语表
 - [reports/README.md](reports/README.md) - 报告归档
 
 ---

@@ -134,8 +134,8 @@
 
 #### 学习辅助
 
-- 📖 **[Glossary.md](Glossary.md)** - 并发术语表
-- 📖 **[FAQ.md](FAQ.md)** - 常见问题解答
+- 📖 **[Glossary.md](tier_01_foundations/03_glossary.md)** - 并发术语表
+- 📖 **[FAQ.md](tier_01_foundations/04_faq.md)** - 常见问题解答
 
 #### 版本特性
 
@@ -281,14 +281,14 @@
 **我想了解...**:
 
 - 并发vs并行 → [04_parallelism_and_beyond](04_parallelism_and_beyond.md)
-- Send/Sync → [FAQ](FAQ.md#q1-send-和-sync-到底有什么区别我总是搞混)
-- `Arc<Mutex<T>>` → [FAQ](FAQ.md#q3-arcmutext-看起来很笨重它到底是怎么工作的)
+- Send/Sync → [](tier_01_foundations/04_faq.mdFAQ)
+- `Arc<Mutex<T>>` → [](tier_01_foundations/04_faq.mdFAQ)
 
 **我遇到问题...**:
 
-- 常见问题 → [FAQ](FAQ.md)
-- 术语不懂 → [Glossary](Glossary.md)
-- 死锁问题 → [Glossary](Glossary.md#deadlock-死锁)
+- 常见问题 → [FAQ](tier_01_foundations/04_faq.md)
+- 术语不懂 → [Glossary](tier_01_foundations/03_glossary.md)
+- 死锁问题 → [](tier_01_foundations/03_glossary.mdGlossary)
 
 ---
 
@@ -384,8 +384,8 @@
 
 - **学习指导**: 从 [README](README.md) 开始
 - **快速查找**: 使用本索引查找
-- **术语查询**: 查看 [Glossary](Glossary.md)
-- **常见问题**: 查看 [FAQ](FAQ.md)
+- **术语查询**: 查看 [Glossary](tier_01_foundations/03_glossary.md)
+- **常见问题**: 查看 [FAQ](tier_01_foundations/04_faq.md)
 
 ---
 

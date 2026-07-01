@@ -289,7 +289,7 @@ fn bad_example(x) { x + 1 }  // 类型不明确，缺少说明
 
 - **一致性**: 使用统一的技术术语
 - **中英对照**: 首次出现时提供中英文对照
-- **术语表**: 新术语添加到 [Glossary.md](docs/Glossary.md)
+- **术语表**: 新术语添加到 [Glossary.md](docs/tier_01_foundations/03_glossary.md)
 
 **示例**:
 

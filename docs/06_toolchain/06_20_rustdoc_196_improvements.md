@@ -6,6 +6,7 @@
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
+> **权威来源入口**: [`concept/06_ecosystem/77_rustdoc_196_changes.md`](../../concept/06_ecosystem/77_rustdoc_196_changes.md) — 项目 `concept/` 层面对 Rustdoc 1.96 变更的系统性覆盖；本文档专注于渲染细节与弃用注释示例。
 
 ---
 

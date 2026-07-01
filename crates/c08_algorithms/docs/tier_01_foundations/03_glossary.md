@@ -34,7 +34,6 @@
     - [并行 (Parallel)](#并行-parallel)
     - [异步 (Async)](#异步-async)
   - [📚 完整术语表](#-完整术语表)
-  - [**适用版本**: Rust 1.92.0+](#适用版本-rust-1920)
 
 ## 📋 术语索引
 
@@ -67,6 +66,7 @@ fn gcd(mut a: u64, mut b: u64) -> u64 {
     a
 }
 ```
+
 ---
 
 ## 复杂度 (Complexity)
@@ -160,6 +160,7 @@ fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
     // ... 合并
 }
 ```
+
 ### 动态规划 (Dynamic Programming)
 
 **定义**: 将问题分解为子问题，存储子问题结果避免重复计算。
@@ -176,6 +177,7 @@ fn fib_dp(n: usize) -> u64 {
     dp[n]
 }
 ```
+
 ### 贪心算法 (Greedy Algorithm)
 
 **定义**: 每步选择当前最优解。
@@ -217,6 +219,7 @@ let sum: i32 = vec![1, 2, 3]
     .map(|x| x * 2)
     .sum();
 ```
+
 ### 所有权 (Ownership)
 
 算法实现需考虑所有权转移和借用。
@@ -228,6 +231,7 @@ use rayon::prelude::*;
 
 let sum: i32 = vec.par_iter().sum();
 ```
+
 ### 异步 (Async)
 
 ```rust
@@ -239,11 +243,12 @@ async fn sort_async<T: Ord>(mut v: Vec<T>) -> Vec<T> {
     }).await.unwrap()
 }
 ```
+
 ---
 
 ## 📚 完整术语表
 
-**更多术语**: 详见 [完整术语表](../Glossary.md) (100+术语)
+**更多术语**: 详见 [完整术语表](tier_01_foundations/03_glossary.md) (100+术语)
 
 ---
 
@@ -254,6 +259,7 @@ async fn sort_async<T: Ord>(mut v: Vec<T>) -> Vec<T> {
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-22
 **适用版本**: Rust 1.92.0+
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -10,8 +10,6 @@
 | :--- | :--- |
 | [QUICK_START.md](../tutorials/QUICK_START.md) | 快速入门 |
 | [00_MASTER_INDEX.md](../00_MASTER_INDEX.md)   | 完整索引 |
-| [FAQ.md](../references/FAQ.md)                | 常见问题 |
-| [Glossary.md](../references/Glossary.md)      | 术语表   |
 
 ---
 

@@ -159,7 +159,7 @@ graph TB
 | [14_ferrocene_preview.md](35_ferrocene_preview.md) | Ferrocene 预研 | Rust 安全关键认证工具链、ISO 26262 / DO-178C | ✅ v1.0 | L6 Toolchain, L7 Future | L6 安全关键工具链 |
 | [15_gen_blocks_preview.md](22_gen_blocks_preview.md) | Gen Blocks 预研 | 泛化生成器、惰性迭代、异步流 | ✅ v1.0 | L3 Async, L2 Trait | L3 控制流泛化 |
 | [16_cranelift_backend_preview.md](38_cranelift_backend_preview.md) | Cranelift 后端预研 | 快速调试编译、LLVM 替代后端 | ✅ v1.0 | L6 Toolchain | L6 编译工具链扩展 |
-| [17_rust_specification_preview.md](17_rust_specification_preview.md) | Rust 语言规范预研 | 形式化规范演进、Ferrocene 先行探索 | ✅ v1.0 | L4 Formal, L7 Future | L4-L7 规范桥梁 |
+| [17_rust_specification_preview.md](41_rust_specification_preview.md) | Rust 语言规范预研 | 形式化规范演进、Ferrocene 先行探索 | ✅ v1.0 | L4 Formal, L7 Future | L4-L7 规范桥梁 |
 | [18_async_drop_preview.md](18_async_drop_preview.md) | Async Drop 预研 | 异步资源销毁、[Async Drop Initiative](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/async_drop.html)、Pin 交互、workaround 模式 | ⚠️ nightly | L3 Async, L3 Pin | 异步生态完善 |
 | [26_specialization_preview.md](26_specialization_preview.md) | Specialization 预研 | Trait 实现特化、重叠 impl、min_specialization | ⚠️ nightly | L2 Trait, L2 Generics | 泛型表达能力扩展 |
 | [04_effects_system.md](04_effects_system.md) | 效果系统预研 | Effect 类型论、Rust 现有 effect 映射、跨语言对比、演进路线 | ✅ v1.0 | L2 Trait, L3 Async, L4 Type Theory | L2-L3 效果统一化 |
@@ -168,13 +168,13 @@ graph TB
 
 ### 补充文件索引
 
-- [Stable ABI Preview](11_stable_abi_preview.md)
-- [Inline Const Pattern Preview](12_inline_const_pattern_preview.md)
-- [`must_not_suspend` Lint Preview](13_must_not_suspend_preview.md)
+- [Stable ABI Preview](30_stable_abi_preview.md)
+- [Inline Const Pattern Preview](32_inline_const_pattern_preview.md)
+- [`must_not_suspend` Lint Preview](34_must_not_suspend_preview.md)
 - [Lifetime Capture in `impl Trait` Preview](14_lifetime_capture_preview.md)
 - [RPITIT Preview](37_rpitit_preview.md)
 - [TAIT Preview](16_type_alias_impl_trait_preview.md)
-- [Arbitrary Self Types 预览：自定义方法接收器](17_arbitrary_self_types_preview.md)
+- [Arbitrary Self Types 预览：自定义方法接收器](39_arbitrary_self_types_preview.md)
 - [Const Trait Preview](17_const_trait_preview.md)
 - [Field Projections 预览：安全的字段级投影](42_field_projections_preview.md)
 - [Rust 2024 Edition (1.85.0+ stable)](../../knowledge/06_ecosystem/02_edition_2024.md)
@@ -182,13 +182,13 @@ graph TB
 - [Rust 在 AI 与机器学习中的新兴角色](21_rust_in_ai.md)
 - [Edition 2024 完全指南：新特性与迁移策略](44_edition_guide.md)
 - [Gen Blocks Preview](22_gen_blocks_preview.md)
-- [`std::autodiff`：Rust 官方自动微分前沿追踪](22_std_autodiff_preview.md)
+- [`std::autodiff`：Rust 官方自动微分前沿追踪](45_std_autodiff_preview.md)
 - [Rust Edition 机制与迁移指南](23_rust_edition_guide.md)
 - [Rust 2027 Edition 及未来路线图](24_roadmap.md)
-- [WASM Target Evolution Preview](24_wasm_target_evolution.md)
-- [cargo-semver-checks 预览：从社区工具到 Cargo 官方集成](24_cargo_semver_checks_preview.md)
-- [AArch64 SVE / SME 预览：可伸缩向量扩展](25_aarch64_sve_sme_preview.md)
-- [Rust in Space Preview](26_rust_in_space.md)
+- [WASM Target Evolution Preview](47_wasm_target_evolution.md)
+- [cargo-semver-checks 预览：从社区工具到 Cargo 官方集成](46_cargo_semver_checks_preview.md)
+- [AArch64 SVE / SME 预览：可伸缩向量扩展](48_aarch64_sve_sme_preview.md)
+- [Rust in Space Preview](49_rust_in_space.md)
 - [编译期执行与常量求值](27_compile_time_execution.md)
 - [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](28_rust_for_webassembly.md)
 - [eBPF / Aya / Rex 的 Rust 映射](29_ebpf_rust.md)

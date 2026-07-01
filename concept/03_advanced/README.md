@@ -193,8 +193,8 @@ graph TB
 
 ### 补充文件索引
 
-- [Async/Await 高级主题](02_async_advanced.md)
-- [异步（Async）模式：从 Future 到生产级并发](02_async_patterns.md)
+- [Async/Await 高级主题](25_async_advanced.md)
+- [异步（Async）模式：从 Future 到生产级并发](26_async_patterns.md)
 - [Async Closures（异步闭包）](24_async_closures.md)
 - [FFI 高级主题：跨语言边界的安全与性能](09_ffi_advanced.md)
 - [并发 模式：从消息 传递到锁自由的数据结构](10_concurrency_patterns.md)

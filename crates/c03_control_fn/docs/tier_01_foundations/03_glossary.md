@@ -2,7 +2,7 @@
 
 > **文档定位**: 控制流与函数核心术语快速参考
 > **使用方式**: 通过术语索引快速查找定义，理解核心概念
-> **相关文档**: [主索引](00_MASTER_INDEX.md) | [README](../README.md) | [FAQ](FAQ.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [README](../README.md) | [FAQ](tier_01_foundations/04_faq.md)
 
 ## 📊 目录
 
@@ -534,7 +534,7 @@ let result = 'block: {
 ## 📚 延伸阅读
 
 - [主索引](00_MASTER_INDEX.md) - 完整文档导航
-- [FAQ](FAQ.md) - 常见问题解答
+- [FAQ](tier_01_foundations/04_faq.md) - 常见问题解答
 - [README](../README.md) - 项目概述
 - [基础层](README.md) - 深入学习
 - [指南层](../tier_02_guides/README.md) - 基础知识

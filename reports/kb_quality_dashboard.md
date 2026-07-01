@@ -1,38 +1,38 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-01T23:05:38.607761+00:00
-> 扫描文件数: 326
+> 生成时间: 2026-07-01T23:22:26.324138+00:00
+> 扫描文件数: 327
 
 ## 全局指标
 
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
-| 总文件数 | 326 | 27 | ✅ |
-| 总定理链 (⟹) | 1141 | ≥270 | ✅ |
-| 总反命题 | 596 | ≥40 | ✅ |
-| 总 Mermaid 图 | 547 | ≥50 | ✅ |
-| 编译验证代码块 | 3392 | ≥150 | ✅ |
-| 定理矩阵总行 | 15360 | — | — |
+| 总文件数 | 327 | 27 | ✅ |
+| 总定理链 (⟹) | 1132 | ≥270 | ✅ |
+| 总反命题 | 594 | ≥40 | ✅ |
+| 总 Mermaid 图 | 544 | ≥50 | ✅ |
+| 编译验证代码块 | 3403 | ≥150 | ✅ |
+| 定理矩阵总行 | 15331 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 162 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
-| 前置概念覆盖率 | 274/276 | 100% | ⚠️ |
-| 后置概念覆盖率 | 274/276 | 100% | ⚠️ |
-| 双标签覆盖率 | 125/276 | >=95% | ⚠️ |
+| 前置概念覆盖率 | 275/277 | 100% | ⚠️ |
+| 后置概念覆盖率 | 275/277 | 100% | ⚠️ |
+| 双标签覆盖率 | 126/277 | >=95% | ⚠️ |
 | 非法标签组合 | 0 | 0 | ✅ |
 
 ## 按层级分布
 
 | 层级 | 文件数 | 平均 ⟹/文件 | 平均过渡段/文件 | 认知路径 | ⟸/文件 | 模板化 | 前置覆盖 | 后置覆盖 | 双标签 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| L0 | 50 | 1.7 | 4.2 | 35/50 (70%) | 0.0 | 0 | 14/50 | 13/50 | 37/50 |
+| L0 | 50 | 1.6 | 4.0 | 34/50 (68%) | 0.0 | 0 | 12/50 | 11/50 | 35/50 |
 | L1 | 35 | 3.1 | 4.9 | 24/35 (68%) | 1.3 | 0 | 35/35 | 35/35 | 14/35 |
 | L2 | 30 | 3.6 | 4.5 | 21/30 (70%) | 2.0 | 0 | 30/30 | 30/30 | 7/30 |
 | L3 | 27 | 4.7 | 4.3 | 22/27 (81%) | 2.1 | 0 | 26/27 | 26/27 | 22/27 |
 | L4 | 35 | 3.0 | 3.3 | 23/35 (65%) | 0.0 | 0 | 35/35 | 35/35 | 10/35 |
 | L5 | 19 | 3.4 | 6.1 | 17/19 (89%) | 0.0 | 0 | 19/19 | 19/19 | 5/19 |
 | L6 | 77 | 4.6 | 8.3 | 60/77 (77%) | 0.0 | 0 | 77/77 | 77/77 | 19/77 |
-| L7 | 53 | 3.6 | 5.9 | 41/53 (77%) | 0.0 | 0 | 52/53 | 52/53 | 48/53 |
+| L7 | 54 | 3.6 | 5.8 | 41/54 (75%) | 0.0 | 0 | 53/54 | 53/54 | 49/54 |
 
 ## 风险文件
 
@@ -223,6 +223,7 @@
 | concept\07_future\borrow_sanitizer.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | concept\07_future\rust_1_95_stabilized.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | concept\07_future\rust_1_96_stabilized.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+| concept\07_future\rust_1_97_stabilized.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | concept\07_future\rust_1_98_preview.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 
 ## 文件详细统计
@@ -230,10 +231,10 @@
 | 文件 | 层级 | 行数 | ⟹ | ⟸ | 模板 | 反命题 | Mermaid | 代码块 | 过渡段 | 认知路径 | 前置 | 后置 | 受众 | 分级 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | concept\00_meta\03_bloom_taxonomy.md | L0 | 178 | 1 | 0 | 0 | 1 | 0 | 1 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
-| concept\00_meta\05_cross_reference_matrix.md | L0 | 76 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
+| concept\00_meta\05_cross_reference_matrix.md | L0 | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | concept\00_meta\08_concept_audit_guide.md | L0 | 80 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 专家 | 综述级 |
 | concept\00_meta\asp_marking_guide.md | L0 | 522 | 1 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ✅ | ✅ | 专家 | 综述级 |
-| concept\00_meta\audit_checklist.md | L0 | 386 | 1 | 0 | 0 | 2 | 1 | 0 | 6 | ✅ | ❌ | ❌ | 专家 | 综述级 |
+| concept\00_meta\audit_checklist.md | L0 | 437 | 1 | 0 | 0 | 2 | 1 | 0 | 6 | ✅ | ❌ | ❌ | 专家 | 综述级 |
 | concept\00_meta\authority_source_map.md | L0 | 188 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
 | concept\00_meta\bilingual_template.md | L0 | 164 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | ❌ | ✅ | ✅ | 初学者 | 进阶 | 研究者 | None |
 | concept\00_meta\boundary_extension_tree.md | L0 | 350 | 1 | 0 | 0 | 1 | 3 | 1 | 6 | ✅ | ❌ | ❌ | 专家 | 综述级 |
@@ -241,7 +242,7 @@
 | concept\00_meta\cognitive_dimension_matrix.md | L0 | 393 | 1 | 0 | 0 | 1 | 2 | 0 | 6 | ✅ | ❌ | ❌ | 研究者 | 综述级 |
 | concept\00_meta\competency_graph.md | L0 | 407 | 1 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
 | concept\00_meta\comprehensive_rust_mapping.md | L0 | 231 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 初学者 → 进阶 | 元层 |
-| concept\00_meta\concept_consistency_audit_checklist.md | L0 | 58 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 贡献者 | None |
+| concept\00_meta\concept_consistency_audit_checklist.md | L0 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | 专家级 |
 | concept\00_meta\concept_definition_decision_forest.md | L0 | 1117 | 3 | 0 | 0 | 1 | 10 | 0 | 6 | ✅ | ❌ | ❌ | 专家 | 综述级 |
 | concept\00_meta\concept_index.md | L0 | 784 | 4 | 0 | 0 | 2 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
 | concept\00_meta\cpp_rust_engineering_roadmap.md | L0 | 140 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | None |
@@ -251,7 +252,7 @@
 | concept\00_meta\foundations_gap_closure_index.md | L0 | 135 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | None |
 | concept\00_meta\grading_system.md | L0 | 142 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 初学者 | 综述级 |
 | concept\00_meta\inter_layer_map.md | L0 | 626 | 12 | 0 | 0 | 1 | 2 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
-| concept\00_meta\inter_layer_topology.md | L0 | 401 | 8 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
+| concept\00_meta\inter_layer_topology.md | L0 | 13 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ | ❌ | ❌ | None | 专家级 |
 | concept\00_meta\intra_layer_model_map.md | L0 | 335 | 11 | 0 | 0 | 1 | 5 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
 | concept\00_meta\kg_ontology_v2.md | L0 | 319 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | None |
 | concept\00_meta\kg_tlo_alignment.md | L0 | 238 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
@@ -278,7 +279,7 @@
 | concept\00_meta\terminology_glossary.md | L0 | 463 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 初学者 | 综述级 |
 | concept\00_meta\theorem_inference_forest.md | L0 | 510 | 3 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ❌ | ❌ | 研究者 | 综述级 |
 | concept\00_meta\todos.md | L0 | 324 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 专家 | 综述级 |
-| concept\00_meta\topic_authority_alignment_map.md | L0 | 442 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
+| concept\00_meta\topic_authority_alignment_map.md | L0 | 12 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | concept\01_foundation\00_start.md | L1 | 115 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 初学者 | None |
 | concept\01_foundation\01_ownership.md | L1 | 1751 | 12 | 2 | 0 | 3 | 7 | 43 | 16 | ✅ | ✅ | ✅ | 初学者 | None |
 | concept\01_foundation\02_borrowing.md | L1 | 1878 | 4 | 2 | 0 | 3 | 6 | 49 | 20 | ✅ | ✅ | ✅ | 初学者 | None |
@@ -501,7 +502,7 @@
 | concept\06_ecosystem\74_formal_verification_tools.md | L6 | 944 | 6 | 0 | 0 | 3 | 0 | 12 | 12 | ✅ | ✅ | ✅ | 进阶 | None |
 | concept\06_ecosystem\75_industrial_case_studies.md | L6 | 355 | 6 | 0 | 0 | 1 | 0 | 2 | 12 | ✅ | ✅ | ✅ | None | 专家级 |
 | concept\06_ecosystem\76_cargo_196_features.md | L6 | 230 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | ❌ | ✅ | ✅ | 进阶 / 工程 | 专家级 |
-| concept\06_ecosystem\77_rustdoc_196_changes.md | L6 | 220 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | ❌ | ✅ | ✅ | 进阶 / 工程 | None |
+| concept\06_ecosystem\77_rustdoc_196_changes.md | L6 | 221 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | ❌ | ✅ | ✅ | 进阶 / 工程 | None |
 | concept\07_future\01_ai_integration.md | L7 | 993 | 2 | 0 | 0 | 2 | 2 | 9 | 2 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | concept\07_future\02_formal_methods.md | L7 | 1663 | 9 | 0 | 0 | 1 | 9 | 9 | 3 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | concept\07_future\03_evolution.md | L7 | 2174 | 8 | 0 | 0 | 1 | 6 | 19 | 3 | ✅ | ✅ | ✅ | 专家 | 综述级 |
@@ -554,4 +555,5 @@
 | concept\07_future\rust_1_95_stabilized.md | L7 | 311 | 0 | 0 | 0 | 0 | 0 | 14 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
 | concept\07_future\rust_1_96_stabilized.md | L7 | 299 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
 | concept\07_future\rust_1_97_preview.md | L7 | 781 | 3 | 0 | 0 | 1 | 0 | 17 | 8 | ✅ | ✅ | ✅ | 专家 | 实验级 |
+| concept\07_future\rust_1_97_stabilized.md | L7 | 272 | 0 | 0 | 0 | 0 | 0 | 11 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
 | concept\07_future\rust_1_98_preview.md | L7 | 545 | 0 | 0 | 0 | 0 | 0 | 6 | 0 | ❌ | ✅ | ✅ | 专家 | 实验级 |

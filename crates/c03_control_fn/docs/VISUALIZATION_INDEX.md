@@ -344,8 +344,8 @@
 
 ### 参考资源
 
-- [FAQ](FAQ.md) - 常见问题
-- [Glossary](Glossary.md) - 术语表
+- [FAQ](tier_01_foundations/04_faq.md) - 常见问题
+- [Glossary](tier_01_foundations/03_glossary.md) - 术语表
 
 ## 💡 提示与技巧
 

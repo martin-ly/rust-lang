@@ -12,7 +12,7 @@
 > **文档定位**: Tier 3 技术参考
 > **最后更新**: 2025-12-25
 > **Rust版本**: 1.92.0+ (Edition 2024)
-> **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](FAQ.md) | [Glossary](Glossary.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](tier_01_foundations/04_faq.md) | [Glossary](tier_01_foundations/03_glossary.md)
 
 ## 📋 目录
 

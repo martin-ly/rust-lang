@@ -17,7 +17,7 @@
 
 > **文档定位**: C06异步编程模块主入口，提供快速开始指南、核心概念介绍和完整的学习资源导航
 > **先修知识**: [C01 所有权](../../c01_ownership_borrow_scope/docs/README.md) | [C05 线程](../../c05_threads/docs/README.md)
-> **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](FAQ.md) | [Glossary](Glossary.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](tier_01_foundations/04_faq.md) | [Glossary](tier_01_foundations/03_glossary.md)
 
 **最后更新**: 2026-02-12
 **适用版本**: Rust 1.75+ (推荐 1.93.0+)
@@ -307,8 +307,8 @@ while let Some(item) = stream.next().await {
 ### 本模块资源
 
 - 📋 **[主索引](00_MASTER_INDEX.md)** - 完整文档导航（必看）
-- ❓ **[FAQ](FAQ.md)** - 常见问题解答
-- 📚 **[Glossary](Glossary.md)** - 核心术语表
+- ❓ **[FAQ](tier_01_foundations/04_faq.md)** - 常见问题解答
+- 📚 **[Glossary](tier_01_foundations/03_glossary.md)** - 核心术语表
 - 📖 **[核心系列](core)** - 01-06系统学习
 - 📚 **[学习指南](tier_02_guides/README.md)** - 实践导向教程
 - 🚀 **[综合指南](comprehensive)** - 2025最新全面分析
@@ -424,7 +424,7 @@ async-trait = "0.1"
 
 - **如何选择运行时?** → [runtimes/01_comparison](runtimes/01_comparison_2025.md)
 - **Pin是什么?** → [core/03_pinning](core/03_pinning_and_unsafe_foundations.md)
-- **async vs 线程?** → [FAQ](FAQ.md)
+- **async vs 线程?** → [FAQ](tier_01_foundations/04_faq.md)
 - **常见陷阱?** → [patterns/02_patterns_and_pitfalls](patterns/02_patterns_and_pitfalls.md)
 - **性能优化?** → [performance/01_optimization](performance/01_optimization_guide.md)
 
@@ -443,8 +443,8 @@ async-trait = "0.1"
 1. **🚀 快速体验** → [01_异步编程快速入门](tier_02_guides/01_异步编程快速入门.md)
 2. **📚 系统学习** → [core/01_introduction_and_philosophy.md](core/01_introduction_and_philosophy.md)
 3. **🔍 查找文档** → [00_MASTER_INDEX.md](00_MASTER_INDEX.md) ⭐ 推荐先看
-4. **❓ 解决问题** → [FAQ.md](FAQ.md)
-5. **💡 查询术语** → [Glossary.md](Glossary.md)
+4. **❓ 解决问题** → [FAQ.md](tier_01_foundations/04_faq.md)
+5. **💡 查询术语** → [Glossary.md](tier_01_foundations/03_glossary.md)
 
 📋 **重要提示**: 文档已重组！请先查看 [00_MASTER_INDEX.md](00_MASTER_INDEX.md) 了解新结构
 

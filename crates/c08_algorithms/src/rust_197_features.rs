@@ -1,8 +1,10 @@
-//! Rust 1.97 特性代码示例
-//! **编译要求**: Rust 1.97.0+ stable
+//! Rust 1.97 稳定特性代码示例
+//! **状态**: Rust 1.97.0 stable（2026-07-09）
+//! **编译要求**: Rust 1.96.0+ 可编译（使用等效实现）；注释中标注的 `1.97+` 新 API 需要 Rust 1.97.0+
 //! **来源**: [releases.rs](https://releases.rs/) · [Rust Standard Library Tracking](https://github.com/rust-lang/rust/labels/T-libs-api)
 //!
-//! 本文件覆盖 Rust 1.97 稳定版引入的标准库新 API。
+//! 本文件覆盖 Rust 1.97.0 稳定版引入的标准库新 API。所有 `1.97+` 实际用法以注释形式保留，
+//! 当前可编译的代码使用等效实现。已进入 1.98 通道的特性单独标注并在后续迁移到 `rust_198_features.rs`。
 
 use std::collections::VecDeque;
 
@@ -14,7 +16,7 @@ use std::collections::VecDeque;
 ///
 /// 这些 API 避免了在查询前对零值进行特殊处理，因为 `NonZero` 类型本身已保证非零。
 ///
-/// ✅ 已在 nightly 2026-06-26（rustc 1.98.0）验证可用。
+/// 当前等效实现可在 Rust 1.96.0+ 编译；注释中为新 API 用法。
 pub fn demo_nonzero_bit_ops() {
     // 1.97+ 实际用法:
     // let n = NonZeroU32::new(0b10100).unwrap();
@@ -37,7 +39,7 @@ pub fn demo_nonzero_bit_ops() {
 ///
 /// 使得字符分类可在编译期常量/静态项中使用。
 ///
-/// ✅ 已在 nightly 2026-06-26（rustc 1.98.0）验证可用。
+/// 当前等效实现可在 Rust 1.96.0+ 编译；注释中为新 API 用法。
 pub fn demo_char_is_control_const() {
     // 1.97+ 实际用法:
     // const SPACE_CTRL: bool = ' '.is_control(); // false
@@ -51,7 +53,7 @@ pub fn demo_char_is_control_const() {
 }
 
 // ============================================================================
-// 1. VecDeque::truncate_front / retain_back
+// 1. VecDeque::truncate_front / retain_back（已推迟到 1.98）
 // ============================================================================
 
 /// `VecDeque::truncate_front(n)` — 截断前部，保留后部 `n` 个元素
@@ -106,7 +108,7 @@ pub fn demo_vecdeque_retain_back() {
 }
 
 // ============================================================================
-// 2. 浮点代数优化属性 (float_algebraic)
+// 2. 浮点代数优化属性 (float_algebraic) — 1.98 preview
 // ============================================================================
 
 /// `#[optimize(fast_math)]` / `float_algebraic` 允许编译器重组浮点运算
@@ -136,7 +138,7 @@ pub fn demo_float_algebraic() {
 }
 
 // ============================================================================
-// 3. RandomSource / DefaultRandomSource 抽象（等待 t-libs-api）
+// 3. RandomSource / DefaultRandomSource 抽象 — 1.98 preview
 // ============================================================================
 
 /// `RandomSource` trait 提供可插拔的随机数源抽象
@@ -157,7 +159,7 @@ pub fn demo_random_source_concept() {
 }
 
 // ============================================================================
-// 4. C-variadic function definitions（PFCP）
+// 4. C-variadic function definitions — 1.98 preview
 // ============================================================================
 
 /// C 可变参数函数定义稳定化
@@ -175,7 +177,7 @@ pub extern "C" fn demo_c_variadic_definition(_fmt: *const u8) {
 }
 
 // ============================================================================
-// 5. box_vec_non_null（PFCP 中）
+// 5. box_vec_non_null — 1.98 preview
 // ============================================================================
 
 /// `Box::into_non_null` / `Vec::into_non_null` 提供非空指针转换
@@ -207,7 +209,7 @@ pub fn demo_box_vec_non_null() {
 }
 
 // ============================================================================
-// 5b. Box::as_ptr / Box::as_mut_ptr（1.98 已确认）
+// 5b. Box::as_ptr / Box::as_mut_ptr — 1.98 preview
 // ============================================================================
 
 /// `Box::as_ptr` / `Box::as_mut_ptr` — 不物化引用的原始指针访问
