@@ -12,7 +12,7 @@
 > **双维定位**: C×Eva — 评价 Rust 在不同平台约束下的工程实践
 > **定位**: 系统对比 Android AOSP、Chromium、Bare Metal 三个典型场景中 Rust 的集成方式、构建系统、互操作模式与常见陷阱。
 > **前置概念**: [Cross Compilation](17_cross_compilation.md) · [Embedded Systems](22_embedded_systems.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md) · [安全边界](../05_comparative/04_safety_boundaries.md)
-> **后置概念**: [Industrial Case Studies](48_industrial_case_studies.md) · [OS Kernel](39_os_kernel.md)
+> **后置概念**: [Industrial Case Studies](75_industrial_case_studies.md) · [OS Kernel](39_os_kernel.md)
 > **来源**:
 >
 > [Android Rust](https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html) ·
@@ -96,6 +96,7 @@ rust_binary {
     ],
 }
 ```
+
 关键点：
 
 - `rust_binary` / `rust_library` / `rust_proc_macro` / `rust_test` 等模块（Module）类型
@@ -114,6 +115,7 @@ pub trait IMyService: Interface {
     fn add(&self, a: i32, b: i32) -> binder::Result<i32>;
 }
 ```
+
 > **边界**：Rust AIDL 绑定目前覆盖常用类型，但复杂 Parcelable / 文件描述符传递需要额外注意生命周期（Lifetimes）与所有权（Ownership）。
 
 ### 2.4 C / C++ / Java 互操作
@@ -148,6 +150,7 @@ rust_static_library("my_rust_parser") {
   deps = [ "//third_party/rust/cxx/v1:cxx" ]
 }
 ```
+
 `cxx` crate 是 Chromium Rust↔C++ 互操作的核心：
 
 ```rust
@@ -162,6 +165,7 @@ mod ffi {
     }
 }
 ```
+
 > **认知要点**：`cxx` 在编译期检查类型兼容性，避免手动 FFI 中常见的 ABI 错误。它是 Chromium 将 Rust 集成到 C++ 代码库的首选方案。
 
 ### 3.3 引入第三方 crate
@@ -194,6 +198,7 @@ fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
 ```
+
 - `#![no_std]`：禁用 `std`，仅保留 `core`
 - `#![no_main]`：不提供默认入口，由链接脚本或启动代码接管
 - `alloc`：若需要堆分配，需显式引入并设置全局分配器
@@ -209,6 +214,7 @@ fn panic(_info: &PanicInfo) -> ! {
           └── Peripheral Access Crate (PAC) // 寄存器级访问
               └── SVF/包厂商提供的 SVD
 ```
+
 | 层级 | 示例 crate | 作用 |
 |:---|:---|:---|
 | PAC | `stm32f4xx-pac` | 直接映射寄存器 |
@@ -231,6 +237,7 @@ unsafe fn uart_putc(c: u8) {
     write_volatile(UART_DR, c as u32);
 }
 ```
+
 > **安全要点**：MMIO 访问必须使用 `volatile` 读写，防止编译器优化掉硬件状态检查。
 
 ---
@@ -248,6 +255,7 @@ unsafe fn uart_putc(c: u8) {
 └── 否，无 OS 或 RTOS
     └── 学习路径：no_std → PAC/HAL → embedded-hal → 链接脚本
 ```
+
 ---
 
 ## 六、常见陷阱
@@ -277,4 +285,4 @@ unsafe fn uart_putc(c: u8) {
 
 ---
 
-> **过渡**: 掌握平台集成后，可进一步阅读 [Industrial Case Studies](48_industrial_case_studies.md) 中的 Google Pixel 基带 Rust 集成、FSE 2026 AOSP 实证分析等案例，建立从理论到大规模工程实践的桥梁。
+> **过渡**: 掌握平台集成后，可进一步阅读 [Industrial Case Studies](75_industrial_case_studies.md) 中的 Google Pixel 基带 Rust 集成、FSE 2026 AOSP 实证分析等案例，建立从理论到大规模工程实践的桥梁。

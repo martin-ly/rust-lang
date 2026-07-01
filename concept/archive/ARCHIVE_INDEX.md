@@ -61,13 +61,13 @@
 | `04_formal/07_separation_logic.md` | `04_formal_07_separation_logic_archived.md` | ~105 | `04_formal/11_separation_logic.md` | 2026-05-25 → 2026-06-08 |
 | `04_formal/09_operational_semantics.md` | `04_formal_09_operational_semantics_archived.md` | ~105 | `04_formal/17_operational_semantics.md` | 2026-05-25 → 2026-06-08 |
 | `05_comparative/16_rust_vs_ruby.md` | `05_comparative_16_rust_vs_ruby_archived.md` | ~100 | `05_comparative/08_rust_vs_ruby.md` | 2026-06-08 |
-| `06_ecosystem/33_idioms_spectrum.md` | `06_ecosystem_33_idioms_spectrum_archived.md` | ~108 | `06_ecosystem/03_idioms_spectrum.md` | 2026-06-08 |
-| `06_ecosystem/34_formal_ecosystem_tower.md` | `06_ecosystem_34_formal_ecosystem_tower_archived.md` | ~108 | `06_ecosystem/05_formal_ecosystem_tower.md` | 2026-06-08 |
+| `06_ecosystem/33_idioms_spectrum.md` | `06_ecosystem_33_idioms_spectrum_archived.md` | ~108 | `06_ecosystem/34_idioms_spectrum.md` | 2026-06-08 |
+| `06_ecosystem/34_formal_ecosystem_tower.md` | `06_ecosystem_34_formal_ecosystem_tower_archived.md` | ~108 | `06_ecosystem/44_formal_ecosystem_tower.md` | 2026-06-08 |
 | `03_advanced/02_async_programming.md` | `03_advanced_02_async_programming_archived.md` | ~30 | `03_advanced/02_async.md` + `02_async_patterns.md` | 2026-06-08 |
 | `03_advanced/03_unsafe_rust.md` | `03_advanced_03_unsafe_rust_archived.md` | ~45 | `03_advanced/03_unsafe.md` | 2026-06-08 |
 | `03_advanced/05_macros.md` | `03_advanced_05_macros_archived.md` | ~45 | `03_advanced/04_macros.md` + `07_proc_macro.md` | 2026-06-08 |
 | `03_advanced/08_zero_cost_abstractions.md` | `03_advanced_08_zero_cost_abstractions_archived.md` | ~45 | `01_foundation/06_zero_cost_abstractions.md` | 2026-06-08 |
-| `03_advanced/13_async_patterns.md` | `03_advanced_13_async_patterns_archived.md` | ~45 | `03_advanced/02_async_patterns.md` | 2026-06-08 |
+| `03_advanced/13_async_patterns.md` | `03_advanced_13_async_patterns_archived.md` | ~45 | `03_advanced/26_async_patterns.md` | 2026-06-08 |
 | `01_foundation/03_lifetimes_original.md` | `01_foundation_03_lifetimes_original.md` | ~2,300 | `01_foundation/03_lifetimes.md`（精简重构版） | 2026-05-30 |
 | `01_foundation/11_numeric_types_deprecated.md` | `01_foundation_11_numeric_types_deprecated.md` | ~400 | `01_foundation/11_numeric_types.md` | 2026-05-30 |
 | `03_advanced/02_async_original.md` | `03_advanced_02_async_original.md` | ~3,600 | `03_advanced/02_async.md`（精简重构版） | 2026-05-30 |
@@ -102,7 +102,7 @@
 
 - `concept/README.md` 中 "详见 PLAN.md" → 指向 `archive/PLAN_concept_knowledge_system_v2.md`
 - `concept/00_meta/inter_layer_topology.md` 中 PLAN.md 链接 → 指向 `archive/PLAN_concept_knowledge_system_v2.md`
-- `concept/06_ecosystem/05_formal_ecosystem_tower.md` 变更日志中的 stray `$entry` 字符已清除
+- `concept/06_ecosystem/44_formal_ecosystem_tower.md` 变更日志中的 stray `$entry` 字符已清除
 
 ### 不需要修复的引用
 

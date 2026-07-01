@@ -20,7 +20,7 @@
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 WASI 能力安全模型
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Unsafe](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/03_unsafe.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
-> **后置概念**: [Application Domains](04_application_domains.md) · [Formal Ecosystem Tower](05_formal_ecosystem_tower.md)
+> **后置概念**: [Application Domains](04_application_domains.md) · [Formal Ecosystem Tower](44_formal_ecosystem_tower.md)
 > **主要来源**: [WASI Preview 2 Docs] · [WebAssembly Component Model Spec] · [wit-bindgen Docs] · [WASMtime Docs] · [Rust WASM Working Group] · [Wikipedia: WebAssembly](https://en.wikipedia.org/wiki/WebAssembly)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -353,7 +353,7 @@ impl GuestFile for File {
 | 所有权模型 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | 能力安全的形式化根基 |
 | Unsafe / FFI | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | Wasm 与宿主边界 |
 | 泛型（Generics）与 Trait | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | WIT 接口的 Rust 映射 |
-| 形式化生态塔 | [`./05_formal_ecosystem_tower.md`](05_formal_ecosystem_tower.md) | Wasm 在 L0-L4 中的位置 |
+| 形式化生态塔 | [`./05_formal_ecosystem_tower.md`](44_formal_ecosystem_tower.md) | Wasm 在 L0-L4 中的位置 |
 | 应用领域 | [`./04_application_domains.md`](04_application_domains.md) | Wasm 的工程落地场景 |
 
 > **[来源: WASI Preview 2 Docs; WebAssembly Component Model Spec; wit-bindgen Docs; WASMtime Docs]** WASI 分析基于 Bytecode Alliance 的官方规范。✅

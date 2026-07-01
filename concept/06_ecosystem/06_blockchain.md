@@ -18,7 +18,7 @@
 > [Linear Logic](../04_formal/01_linear_logic.md)
 > [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
 > **后置概念**:
-> [Formal Ecosystem Tower](05_formal_ecosystem_tower.md) ·
+> [Formal Ecosystem Tower](44_formal_ecosystem_tower.md) ·
 > [Application Domains](04_application_domains.md)
 > **主要来源**: [Solana Docs] · [Polkadot Substrate Docs] · [Near Protocol Docs] · [Kani Verification Blog] · [Rust in Blockchain Report] · [Wikipedia: Blockchain](https://en.wikipedia.org/wiki/Blockchain) · [Wikipedia: Smart contract](https://en.wikipedia.org/wiki/Smart_contract)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链

@@ -8,7 +8,7 @@
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana / C×Eva
 > **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [Variable Model](../01_foundation/20_variable_model.md)
-> **后置概念**: [Pattern Semantic Space Index](pattern_semantic_space_index.md) · [C++ ABI Object Model](../05_comparative/02_cpp_abi_object_model.md)
+> **后置概念**: [Pattern Semantic Space Index](pattern_semantic_space_index.md) · [C++ ABI Object Model](../05_comparative/18_cpp_abi_object_model.md)
 > **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/) · [Brown University CRP Phrasebook](https://cel.cs.brown.edu/crp/) · [Rust Foundation Interop Initiative](https://github.com/rustfoundation/interop-initiative)
 ---
 
@@ -67,8 +67,8 @@
 
 | C++ 概念 | Rust 对应 | 文件 |
 |:---|:---|:---|
-| ABI / 对象布局 | `repr(C)` / 默认 ABI | [C++ ABI Object Model](../05_comparative/02_cpp_abi_object_model.md) |
-| vtable / 虚函数 | `dyn Trait` 胖指针 | [C++ ABI Object Model](../05_comparative/02_cpp_abi_object_model.md) |
+| ABI / 对象布局 | `repr(C)` / 默认 ABI | [C++ ABI Object Model](../05_comparative/18_cpp_abi_object_model.md) |
+| vtable / 虚函数 | `dyn Trait` 胖指针 | [C++ ABI Object Model](../05_comparative/18_cpp_abi_object_model.md) |
 | RTTI / `dynamic_cast` | `Any` / `TypeId` | [RTTI](../02_intermediate/25_rtti_and_dynamic_typing.md) |
 | `friend` | 模块可见性 | [Friend vs Module Privacy](../02_intermediate/29_friend_vs_module_privacy.md) |
 | FFI / `extern "C"` | `extern "C"` / `unsafe` | [Rust FFI](../03_advanced/05_rust_ffi.md) |
@@ -97,7 +97,7 @@ RTTI / Friend / Preprocessor（逐个主题扫尾）
 
 | 你来自 C++ 的哪个领域 | 起点 | 延伸阅读 |
 |:---|:---|:---|
-| 底层系统 / 嵌入式 | [C++ ABI Object Model](../05_comparative/02_cpp_abi_object_model.md) | [Rust FFI](../03_advanced/05_rust_ffi.md) |
+| 底层系统 / 嵌入式 | [C++ ABI Object Model](../05_comparative/18_cpp_abi_object_model.md) | [Rust FFI](../03_advanced/05_rust_ffi.md) |
 | 游戏 / 高性能计算 | [Variable Model](../01_foundation/20_variable_model.md) | [Move 语义](../05_comparative/01_rust_vs_cpp.md) |
 | 企业后端 | [Exception Safety](../02_intermediate/27_exception_safety_rust_cpp.md) | [Error Handling](../02_intermediate/04_error_handling.md) |
 | 编译器 / 元编程 | [Preprocessor vs Macros](../02_intermediate/26_c_preprocessor_vs_rust_macros.md) | [Macros](../03_advanced/04_macros.md) |
@@ -108,7 +108,7 @@ RTTI / Friend / Preprocessor（逐个主题扫尾）
 
 本路线图属于 **Phase B（C/C++ 工程层对比）** 的导航层。审计报告 [SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md](../../reports/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md) 指出的 Phase B 缺口包括：
 
-- ABI 与对象模型 ✅ [C++ ABI Object Model](../05_comparative/02_cpp_abi_object_model.md)
+- ABI 与对象模型 ✅ [C++ ABI Object Model](../05_comparative/18_cpp_abi_object_model.md)
 - Move 语义系统对比 ✅ [Rust vs C++ §7.3](../05_comparative/01_rust_vs_cpp.md)
 - 异常安全深度 ✅ [Exception Safety](../02_intermediate/27_exception_safety_rust_cpp.md)
 - SFINAE / 模板元编程 ✅ [Traits §5.8](../02_intermediate/01_traits.md)

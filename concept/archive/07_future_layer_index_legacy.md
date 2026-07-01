@@ -50,9 +50,9 @@
 | [`07_future/11_const_trait_impl_preview.md`](07_future/11_const_trait_impl_preview.md) | Const Trait Impl | 常量上下文 Trait 泛化、~const 限定 | ✅ v1.0 |
 | [`07_future/12_return_type_notation_preview.md`](07_future/12_return_type_notation_preview.md) | Return Type Notation | use<..> 精确捕获、生命周期（Lifetimes）控制 | ✅ v1.0 |
 | [`07_future/13_unsafe_fields_preview.md`](07_future/13_unsafe_fields_preview.md) | Unsafe Fields | 字段级 unsafe 标记、安全边界细化 | ✅ v1.0 |
-| [`07_future/14_ferrocene_preview.md`](07_future/14_ferrocene_preview.md) | Ferrocene | Rust 安全关键认证、ISO 26262 | ✅ v1.0 |
-| [`07_future/15_gen_blocks_preview.md`](07_future/15_gen_blocks_preview.md) | Gen Blocks | 泛化生成器、惰性迭代、异步（Async）流 | ✅ v1.0 |
-| [`07_future/16_cranelift_backend_preview.md`](07_future/16_cranelift_backend_preview.md) | Cranelift 后端 | 快速调试编译、LLVM 替代 | ✅ v1.0 |
+| [`07_future/35_ferrocene_preview.md`](07_future/35_ferrocene_preview.md) | Ferrocene | Rust 安全关键认证、ISO 26262 | ✅ v1.0 |
+| [`07_future/22_gen_blocks_preview.md`](07_future/22_gen_blocks_preview.md) | Gen Blocks | 泛化生成器、惰性迭代、异步（Async）流 | ✅ v1.0 |
+| [`07_future/38_cranelift_backend_preview.md`](07_future/38_cranelift_backend_preview.md) | Cranelift 后端 | 快速调试编译、LLVM 替代 | ✅ v1.0 |
 | [`07_future/17_rust_specification_preview.md`](07_future/17_rust_specification_preview.md) | Rust 语言规范 | 形式化规范演进、分层需求 | ✅ v1.0 |
 | [`07_future/18_async_drop_preview.md`](07_future/18_async_drop_preview.md) | Async Drop | 异步资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs//3308-offset_of.html)、Pin 交互 | ⚠️ nightly |
 | [`07_future/26_specialization_preview.md`](07_future/26_specialization_preview.md) | Specialization | Trait 实现特化、重叠 impl、min_specialization | ⚠️ nightly |

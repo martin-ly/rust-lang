@@ -16,7 +16,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Rust ABI 稳定性问题
 > **前置依赖**: [FFI](../03_advanced/05_rust_ffi.md) · [Unsafe](../03_advanced/03_unsafe.md)
-> **后置延伸**: [Rust for Linux](19_rust_for_linux.md)
+> **后置延伸**: [Rust for Linux](43_rust_for_linux.md)
 > **来源**: [Rust Reference — ABI](https://doc.rust-lang.org/reference/items/external-blocks.html) · [RFC 2945](https://rust-lang.github.io/rfcs//2945-c-unwind-abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >

@@ -58,6 +58,7 @@ mindmap
       平台集成[AOSP / Chromium / Bare Metal]
       形式化塔[Formal Ecosystem Tower]
 ```
+
 > **认知功能**: 建立 L6 全景认知框架，按"工具链→设计模式→核心库→应用主题"四层递进组织工程知识。建议作为学习入口，快速定位目标领域后再深入各文件。关键洞察：每个分支都是 L1-L5 理论的可执行映射，而非独立知识集合。[来源: 💡 原创分析]
 > **认知路径**: 本 mindmap 展示 L6 层的**工程化落地**。工具链将 L4 类型论转化为编译器实践，设计模式将 L1 所有权（Ownership）规则模式化，核心库谱系是生态的"基础设施"，应用主题展示 Rust 在特定领域的工程形态。L6 是知识体系的"出口"——将理论转化为可维护、可扩展的代码库。
 
@@ -114,6 +115,7 @@ graph TB
     style TOOL fill:#bbf,stroke:#333
     style PAT fill:#9f9,stroke:#333
 ```
+
 > **认知功能**: 可视化 L1-L5 → L6 → L7 的完整知识流，实线表示强工程依赖，虚线表示弱反馈关联。用于理解各文件如何承接上层理论并输出工程价值。关键洞察：L6 是双向枢纽——既将理论转化为工程能力，也向 L7 输出结构化模板驱动演进。[来源: 💡 原创分析]
 
 ### 1.1 概念间语义链接
@@ -135,7 +137,7 @@ graph TB
 | [02_patterns.md](02_patterns.md) | 设计模式 | Typestate、Builder、Newtype、RAII、Zero-cost | ✅ v1.0 | L1 Ownership、L2 Trait、L5 对比 | 可维护代码结构 |
 | [03_core_crates.md](03_core_crates.md) | 核心库谱系 | serde、tokio、axum、clap、tracing、sqlx 等 40+ crate | ✅ v1.0 | L1-L5 全部概念 | 工程选型决策 |
 | [04_application_domains.md](04_application_domains.md) | 应用主题 | Web、CLI、嵌入式、游戏、区块链、数据工程、系统、GUI | ✅ v1.0 | L1-L5 全部概念 + 核心 crate | 领域工程落地 |
-| [05_formal_ecosystem_tower.md](05_formal_ecosystem_tower.md) | 形式化生态塔 | 核心 crate 的形式化根基/可组合性/可观测性三维评估；L0-L4 形式化分层 | ✅ v1.0 | L4 类型论、L3 Async/Unsafe | 形式化选型决策 |
+| [05_formal_ecosystem_tower.md](44_formal_ecosystem_tower.md) | 形式化生态塔 | 核心 crate 的形式化根基/可组合性/可观测性三维评估；L0-L4 形式化分层 | ✅ v1.0 | L4 类型论、L3 Async/Unsafe | 形式化选型决策 |
 | [06_blockchain.md](06_blockchain.md) | 区块链合约安全 | Solana/Substrate/Near、合约安全形式化、Kani 验证、无重入/溢出 | ✅ v1.0 | L1 Ownership、L3 Unsafe、L4 RustBelt | 链上安全保证 |
 | [07_game_ecs.md](07_game_ecs.md) | 游戏 ECS 架构 | Bevy/Fyrox、ECS 与所有权协同、DOD、并发渲染 | ✅ v1.0 | L1 Ownership、L3 Concurrency | 游戏引擎选型 |
 | [08_wasi.md](08_wasi.md) | WASI 与 Wasm | Component Model、wit-bindgen、能力安全、`wasm32-wasip1` 或 `wasm32-wasip2` | ✅ v1.0 | L1 Ownership、L3 FFI | 跨平台沙箱部署 |
@@ -165,7 +167,7 @@ graph TB
 
 ### 补充文件索引
 
-- [Rust 惯用法谱系全景（Idioms Spectrum）](03_idioms_spectrum.md)
+- [Rust 惯用法谱系全景（Idioms Spectrum）](34_idioms_spectrum.md)
 - [Rust 系统设计原则与国际权威对齐](05_system_design_principles.md)
 - [Cargo Script：单文件 Rust 程序](09_cargo_script.md)
 - [Public/Private Dependencies：可见性控制的工程化](10_public_private_deps.md)
@@ -185,10 +187,10 @@ graph TB
 - [测验：Rust 工具链（嵌入式互动试点）](57_quiz_toolchain.md)
 - [Machine Learning Ecosystem（机器学习生态）](46_machine_learning_ecosystem.md)
 - [Rust 编译器基础设施深度解析](47_compiler_infrastructure.md)
-- [Formal Verification Tools（形式化验证工具生态）](47_formal_verification_tools.md)
+- [Formal Verification Tools（形式化验证工具生态）](74_formal_verification_tools.md)
 - [Data Engineering（数据工程）](48_data_engineering.md)
 - [Rust 平台集成：AOSP、Chromium 与 Bare Metal](58_platform_rust_integration.md)
-- [Rust 工业级案例研究](48_industrial_case_studies.md)
+- [Rust 工业级案例研究](75_industrial_case_studies.md)
 - [Game Engine Internals（游戏引擎内部原理）](49_game_engine_internals.md)
 - [Distributed Consensus（分布式共识）](50_distributed_consensus.md)
 - [Quantum Computing in Rust（量子计算与 Rust）](51_quantum_computing_rust.md)
@@ -234,6 +236,7 @@ graph TB
 "怎么保证 unsafe              "FFI 代码怎么            "Safety Contract       "形式化契约          "Miri +              "审计覆盖
  代码安全？"                 测试？"                  + Miri 检测"           注释"                模糊测试"            完整性"
 ```
+
 ---
 
 ## 五、跨层出口

@@ -179,7 +179,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 | Task | Time | Verification |
 |:---|:---:|:---|
 | Read [concept/03_advanced/02_async.md](../03_advanced/02_async.md) | 45m | Explains `Future`, `.await`, executor |
-| Read [concept/03_advanced/02_async_patterns.md](../03_advanced/02_async_patterns.md) §1–2 | 30m | Uses `tokio::select!` for timeouts |
+| Read [concept/03_advanced/26_async_patterns.md](../03_advanced/26_async_patterns.md) §1–2 | 30m | Uses `tokio::select!` for timeouts |
 | Practice: Async HTTP client | 30m | Fetches 3 URLs concurrently |
 | Take [L3 Async Quiz](../03_advanced/21_quiz_concurrency_async.md) §3–4 | 15m | Score ≥ 2/3 |
 

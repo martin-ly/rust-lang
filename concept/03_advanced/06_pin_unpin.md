@@ -13,7 +13,7 @@
 > **双维定位**: C×Ana — 分析 Pin 不动性对自引用（Reference）的必要性
 > **定位**: 深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。
 > **前置概念**: [Async](02_async.md) · [Ownership](../01_foundation/01_ownership.md) · [Generics](../02_intermediate/02_generics.md)
-> **后置概念**: [Unsafe](03_unsafe.md) · [Gen Blocks](../07_future/15_gen_blocks_preview.md)
+> **后置概念**: [Unsafe](03_unsafe.md) · [Gen Blocks](../07_future/22_gen_blocks_preview.md)
 
 ---
 
@@ -92,6 +92,7 @@ s.ptr_to_data = s.data.as_ptr();  // 自引用
 let s2 = s;  // ❌ 移动后 ptr_to_data 指向旧地址！
 // s2.ptr_to_data 现在悬空
 ```
+
 > **核心问题**: Rust 默认允许移动值，但自引用结构体（Struct）移动后，内部指针变成**悬空指针**（dangling pointer）。这在 C++ 中也是常见问题（move 后自引用失效）。
 > [来源: [Rustonomicon — Pinning](https://doc.rust-lang.org/std/pin/index.html)]
 
@@ -116,6 +117,7 @@ graph TD
         G["Pin<&mut T>"] -->|"保证内存地址稳定"| H["自引用有效"]
     end
 ```
+
 > **认知功能**: 此图展示 Pin 的**核心契约**——通过类型系统（Type System）承诺值不会被移动，从而使自引用在安全前提下成为可能。
 > [来源: [RFC 2592 — Pin](https://github.com/rust-lang/rfcs/pull/2592)]
 > **使用建议**: 绝大多数 Rust 代码不需要直接操作 Pin。Pin 主要在 async/await、生成器和特定 unsafe 代码中使用。
@@ -150,6 +152,7 @@ Unpin trait 的语义:
   ├── 手动实现的自引用结构体
   └── PhantomPinned（显式标记 !Unpin）
 ```
+
 > **Unpin 洞察**: Unpin 是 Rust 的**默认安全网**——大多数类型自动 Unpin，只有在真正需要 Pin 保证的类型（如 Future）才不实现 Unpin。这避免了 Pin 污染普通代码。
 > [来源: [std::marker::Unpin](https://doc.rust-lang.org/std/marker/trait.Unpin.html)]
 
@@ -186,6 +189,7 @@ impl<P: Deref> Pin<P> {
     pub unsafe fn new_unchecked(pointer: P) -> Pin<P> { ... }
 }
 ```
+
 > **API 设计**: Pin 的 API 区分了**Unpin**和**!Unpin**类型——Unpin 类型操作安全且无需 unsafe；!Unpin 类型需要 unsafe 创建，但创建后的操作是安全的。
 > [来源: [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
 
@@ -226,6 +230,7 @@ impl SelfReferential {
     }
 }
 ```
+
 > **构建模式**: 自引用结构体（Struct）的安全构建需要**两步初始化**——先在堆上分配（Box），然后 Pin，最后初始化自引用字段。`pin-project` crate 简化了这一过程。
 > [来源: [Rustonomicon — Pinning](https://doc.rust-lang.org/std/pin/index.html)]
 
@@ -257,6 +262,7 @@ async/await 与 Pin 的关系:
       _pin: PhantomPinned,
   }
 ```
+
 > **async 洞察**: Pin 是 async/await 的**底层基石**——没有 Pin，异步状态机就无法安全地持有跨 await 点的引用。Pin 使 Rust 的 async 实现既安全又零成本。
 > [来源: [Async Working Group — Pin](https://rust-lang.github.io/async-fundamentals-initiative/)]
 
@@ -298,6 +304,7 @@ async/await 与 Pin 的关系:
   futures::pin_mut!(future);
   // 宏在栈上创建 Pin<&mut T>，生命周期受限
 ```
+
 > **最佳实践**: 绝大多数场景使用 `Box::pin` 或 `pin_mut!` 宏（Macro）；手写 unsafe Pin 代码只在实现自定义 Future/Generator 时需要。
 > [来源: [pin-project Documentation](https://docs.rs/pin-project/latest/pin_project/)]
 
@@ -318,6 +325,7 @@ graph TD
     style TRUE fill:#c8e6c9
     style ALT fill:#fff3e0
 ```
+
 > **认知功能**: 此决策树判断是否使用 Pin。核心判断标准是**是否真的需要自引用且不需要移动**。
 > **使用建议**: 优先避免自引用设计；必须自引用时用 Pin；需要移动时重新设计（如使用索引替代指针）。
 > **关键洞察**: Pin 是**最后手段**而非首选方案。大多数"需要自引用"的场景可以通过重新设计消除自引用需求。
@@ -353,6 +361,7 @@ graph TD
 └── async 和 gen 都是"挂起/恢复型效果"，共享自引用状态机 + Pin 机制
     [参见: Effect System 中的 Effect × Pin 交叉分析](../../07_future/04_effects_system.md#64-effect--pin效果与自引用类型的交叉)
 ```
+
 > **边界要点**: Pin 的边界主要与**内部可变性**和**Drop**交互相关。这些边界反映了 Pin 契约的复杂性——它不仅是一个类型包装器，更是一个**内存地址稳定性的语义保证**。
 
 ---
@@ -399,6 +408,7 @@ graph TD
 
   ✅ 使用 pin-project 处理结构体字段投影
 ```
+
 > **陷阱总结**: Pin 的大多数陷阱源于**对 Unpin/!Unpin 的误解**和**不安全的投影操作**。理解 Pin 的语义契约是避免这些陷阱的关键。
 > [来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/index.html)]
 
@@ -425,6 +435,7 @@ fn pin_new_requires_unpin() {
     let pinned = Pin::new(&mut x);
 }
 ```
+
 > **修正**: 对 `!Unpin` 类型使用 `Box::pin` 或 `unsafe { Pin::new_unchecked(&mut x) }`。
 
 ```rust,ignore
@@ -438,6 +449,7 @@ fn pin_project_misuse() {
     let r: &mut String = pinned.get_mut();
 }
 ```
+
 > **修正**: `Pin<&mut T>` 只允许在 `T: Unpin` 时获取 `&mut T`。对 `!Unpin` 类型，只能通过 `unsafe { pinned.as_mut().get_unchecked_mut() }` 访问，且必须遵守 Pin 契约（不移动值）。
 
 ```rust,compile_fail
@@ -451,6 +463,7 @@ fn pin_field_access<T>(pinned: Pin<&Wrapper<T>>) -> &T {
     &pinned.0
 }
 ```
+
 > **修正**: 结构体字段投影需要 `unsafe` 或 `pin-project` crate。直接访问 `pinned.0` 会绕过 Pin 的地址稳定性保证。
 
 ### 4.4 边界测试：`Pin` 固定栈值后离开作用域（编译错误）
@@ -470,6 +483,7 @@ fn pin_heap() -> Pin<Box<i32>> {
     Box::pin(42) // ✅ Pin<Box<T>> 拥有堆内存
 }
 ```
+
 > **修正**: `Pin<&mut T>` 是引用，必须保证目标内存的存活。固定栈值后返回 `Pin<&mut T>` 会导致悬垂引用。正确做法是将值固定到堆上（`Box::pin`）或使用 `std::pin::pin!` 宏（Rust 1.68+）在局部作用域内固定。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 4.5 边界测试：手动实现 `Unpin` 破坏自引用保证（unsafe 逻辑错误）
@@ -504,6 +518,7 @@ fn main() {
     // s.ptr 现在悬垂！运行时 UB
 }
 ```
+
 > **修正**: 为包含自引用的类型手动实现 `Unpin` 是极其危险的。`Unpin` 是一个 "auto trait"，表示"移动是安全的"。手动实现 `Unpin` 等于告诉编译器"此类型即使被移动也是安全的"——如果类型实际包含自引用，移动后指针将悬垂，导致未定义行为。应始终让编译器自动推导 `Unpin`。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ---
@@ -528,7 +543,7 @@ fn main() {
 - [Async](02_async.md) — 异步（Async）编程（Pin 的核心用例）
 - [Unsafe](03_unsafe.md) — unsafe Rust
 - [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）模型
-- [Gen Blocks](../07_future/15_gen_blocks_preview.md) — 生成器（也是 !Unpin）
+- [Gen Blocks](../07_future/22_gen_blocks_preview.md) — 生成器（也是 !Unpin）
 
 ---
 
@@ -590,6 +605,7 @@ fn main() {
     let s2 = s; // move
 }
 ```
+
 > **修正**:
 > 自引用结构（self-referential struct）是 Rust 的**硬问题**：
 > `ptr` 指向 `data` 的地址，若结构体移动（`let s2 = s`），`data` 的地址改变，`ptr` 成为悬垂指针。
@@ -623,6 +639,7 @@ fn main() {
     assert_unpin::<SelfRef>();
 }
 ```
+
 > **修正**: **`Unpin`** 是**auto trait**：1) 编译器自动为大多数类型实现 `Unpin`；2) 包含 `PhantomPinned` 或 `!Unpin` 字段的类型自动 `!Unpin`；3) 不能为 `!Unpin` 类型手动实现 `Unpin`（不安全）。`Pin<P<T>>` 的行为：1) `T: Unpin` — `Pin` 允许 `get_mut()`（数据可安全移动）；2) `T: !Unpin` — `Pin` 禁止 `get_mut()`（数据不可移动）。自引用结构：1) 使用 `PhantomPinned` 标记 `!Unpin`；2) 通过 `Pin<&mut Self>` 访问；3) `unsafe` 创建 `Pin`（需保证数据不移动）。这与 C++ 的 `std::pin`（无原生支持，需手动管理）或 Swift 的引用类型（始终堆分配，无 move 问题）不同——Rust 的 `Pin` 是零成本抽象（Zero-Cost Abstraction），通过类型系统（Type System）保证。[来源: [Pin API](https://doc.rust-lang.org/std/pin/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/std/pin/index.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
@@ -707,6 +724,7 @@ struct SelfRef {
     ptr: *const String, // 指向 data
 }
 ```
+
 如果 `SelfRef` 被 move，`data` 的地址改变，但 `ptr` 仍指向旧地址 → **悬垂指针**。
 
 `Pin` 通过禁止移动（对 `!Unpin` 类型）来解决这个问题。
@@ -724,6 +742,7 @@ struct Test {
     ptr: *const String,
 }
 ```
+
 - A. 是，因为 `String` 实现了 `Unpin`
 - B. 否，因为包含原始指针（Raw Pointer） `*const String`
 - C. 是，但仅当 `ptr` 为 `null` 时
@@ -749,6 +768,7 @@ struct ReallySelfRef {
     _pin: PhantomPinned, // 使类型 !Unpin
 }
 ```
+
 或使用 nightly 的 `impl !Unpin for Test {}`（需要 `negative_impls` feature）。
 </details>
 
@@ -770,6 +790,7 @@ fn main() {
     let pinned = Pin::new(&mut value);
 }
 ```
+
 - A. 能编译，`Pin::new` 可以固定任何值
 - B. 编译错误，`NoMove` 是 `!Unpin`，不能用 `Pin::new`
 - C. 编译错误，`PhantomPinned` 不能在栈上创建
@@ -787,6 +808,7 @@ impl<'a, T: Unpin> Pin<&'a mut T> {
     pub fn new(pointer: &'a mut T) -> Pin<&'a mut T>;
 }
 ```
+
 **关键约束**: `Pin::new` 要求 `T: Unpin`。
 
 `NoMove` 包含 `PhantomPinned`，而 `PhantomPinned` 是 `!Unpin`，因此 `NoMove` 也是 `!Unpin`。
@@ -796,6 +818,7 @@ impl<'a, T: Unpin> Pin<&'a mut T> {
 ```rust,ignore
 let pinned = Box::pin(NoMove { _marker: std::marker::PhantomPinned });
 ```
+
 或使用 `unsafe` 的 `Pin::new_unchecked`（需要保证值不会被移动）。
 </details>
 
@@ -808,6 +831,7 @@ let pinned = Box::pin(NoMove { _marker: std::marker::PhantomPinned });
 ```rust,ignore
 fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 ```
+
 - A. 为了提高性能，避免额外的间接层
 - B. 因为 async 状态机可能包含自引用字段，必须保证不被移动
 - C. 为了与 `Box<dyn Future>` 兼容
@@ -828,6 +852,7 @@ async fn example() {
     println!("{}", ref_to_local);
 }
 ```
+
 编译后的状态机结构类似：
 
 ```rust
@@ -837,6 +862,7 @@ struct ExampleFuture {
     state: u8,
 }
 ```
+
 如果状态机被 move（例如从一个线程传递到另一个线程），`local` 的地址改变，但 `ref_to_local` 仍指向旧地址 → **UB**。
 
 `Pin<&mut Self>` 保证：

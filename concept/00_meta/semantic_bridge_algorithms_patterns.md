@@ -10,7 +10,7 @@
 > **前置概念**: [Algorithms](../06_ecosystem/29_algorithms_competitive_programming.md) ·
 > [Patterns](../06_ecosystem/02_patterns.md) ·
 > [Workflow Patterns](../../archive/rust-ownership-decidability/16-program-semantics/workflow-patterns)
-> **后置概念**: [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) ·
+> **后置概念**: [Pattern Composition Algebra](../06_ecosystem/73_pattern_composition_algebra.md) ·
 > [Parallel Distributed Spectrum](../03_advanced/19_parallel_distributed_pattern_spectrum.md)
 > **主要来源**: [arXiv 2605.07788 — Multilingual Shared Semantic Space] ·
 > [Wikipedia: Algorithm](https://en.wikipedia.org/wiki/Algorithm) ·

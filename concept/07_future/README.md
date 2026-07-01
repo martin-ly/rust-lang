@@ -156,9 +156,9 @@ graph TB
 | [11_const_trait_impl_preview.md](11_const_trait_impl_preview.md) | Const Trait Impl 预研 | 常量上下文 Trait 泛化、~const 效果限定 | ✅ v1.0 | L2 Trait, L1 Type System | L2 Trait 编译期扩展 |
 | [12_return_type_notation_preview.md](12_return_type_notation_preview.md) | Return Type Notation 预研 | use<..> 精确捕获、生命周期（Lifetimes）显式控制 | ✅ v1.0 | L2 Trait, L3 Async | L3 Async API 稳定性 |
 | [13_unsafe_fields_preview.md](13_unsafe_fields_preview.md) | Unsafe Fields 预研 | 字段级 unsafe 标记、安全边界细化 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 粒度细化 |
-| [14_ferrocene_preview.md](14_ferrocene_preview.md) | Ferrocene 预研 | Rust 安全关键认证工具链、ISO 26262 / DO-178C | ✅ v1.0 | L6 Toolchain, L7 Future | L6 安全关键工具链 |
-| [15_gen_blocks_preview.md](15_gen_blocks_preview.md) | Gen Blocks 预研 | 泛化生成器、惰性迭代、异步流 | ✅ v1.0 | L3 Async, L2 Trait | L3 控制流泛化 |
-| [16_cranelift_backend_preview.md](16_cranelift_backend_preview.md) | Cranelift 后端预研 | 快速调试编译、LLVM 替代后端 | ✅ v1.0 | L6 Toolchain | L6 编译工具链扩展 |
+| [14_ferrocene_preview.md](35_ferrocene_preview.md) | Ferrocene 预研 | Rust 安全关键认证工具链、ISO 26262 / DO-178C | ✅ v1.0 | L6 Toolchain, L7 Future | L6 安全关键工具链 |
+| [15_gen_blocks_preview.md](22_gen_blocks_preview.md) | Gen Blocks 预研 | 泛化生成器、惰性迭代、异步流 | ✅ v1.0 | L3 Async, L2 Trait | L3 控制流泛化 |
+| [16_cranelift_backend_preview.md](38_cranelift_backend_preview.md) | Cranelift 后端预研 | 快速调试编译、LLVM 替代后端 | ✅ v1.0 | L6 Toolchain | L6 编译工具链扩展 |
 | [17_rust_specification_preview.md](17_rust_specification_preview.md) | Rust 语言规范预研 | 形式化规范演进、Ferrocene 先行探索 | ✅ v1.0 | L4 Formal, L7 Future | L4-L7 规范桥梁 |
 | [18_async_drop_preview.md](18_async_drop_preview.md) | Async Drop 预研 | 异步资源销毁、[Async Drop Initiative](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/async_drop.html)、Pin 交互、workaround 模式 | ⚠️ nightly | L3 Async, L3 Pin | 异步生态完善 |
 | [26_specialization_preview.md](26_specialization_preview.md) | Specialization 预研 | Trait 实现特化、重叠 impl、min_specialization | ⚠️ nightly | L2 Trait, L2 Generics | 泛型表达能力扩展 |
@@ -172,15 +172,15 @@ graph TB
 - [Inline Const Pattern Preview](12_inline_const_pattern_preview.md)
 - [`must_not_suspend` Lint Preview](13_must_not_suspend_preview.md)
 - [Lifetime Capture in `impl Trait` Preview](14_lifetime_capture_preview.md)
-- [RPITIT Preview](15_rpitit_preview.md)
+- [RPITIT Preview](37_rpitit_preview.md)
 - [TAIT Preview](16_type_alias_impl_trait_preview.md)
 - [Arbitrary Self Types 预览：自定义方法接收器](17_arbitrary_self_types_preview.md)
 - [Const Trait Preview](17_const_trait_preview.md)
-- [Field Projections 预览：安全的字段级投影](18_field_projections_preview.md)
+- [Field Projections 预览：安全的字段级投影](42_field_projections_preview.md)
 - [Rust 2024 Edition (1.85.0+ stable)](../../knowledge/06_ecosystem/02_edition_2024.md)
-- [Rust for Linux ：操作系统内核中的内存安全（Memory Safety）](19_rust_for_linux.md)
+- [Rust for Linux ：操作系统内核中的内存安全（Memory Safety）](43_rust_for_linux.md)
 - [Rust 在 AI 与机器学习中的新兴角色](21_rust_in_ai.md)
-- [Edition 2024 完全指南：新特性与迁移策略](22_edition_guide.md)
+- [Edition 2024 完全指南：新特性与迁移策略](44_edition_guide.md)
 - [Gen Blocks Preview](22_gen_blocks_preview.md)
 - [`std::autodiff`：Rust 官方自动微分前沿追踪](22_std_autodiff_preview.md)
 - [Rust Edition 机制与迁移指南](23_rust_edition_guide.md)

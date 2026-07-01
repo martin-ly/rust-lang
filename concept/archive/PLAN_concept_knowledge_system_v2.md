@@ -216,7 +216,7 @@
 |:---|:---|:---|:---:|:---:|
 | P7-T1 | 可判定性谱系全景 | `00_meta/decidability_spectrum.md` | 🔴 | ✅ |
 | P7-T2 | 多视角表达力深化 | `00_meta/expressiveness_multiview.md` | 🔴 | ✅ |
-| P7-T5 | 惯用法谱系全景 | `06_ecosystem/03_idioms_spectrum.md` | 🔴 | ✅ |
+| P7-T5 | 惯用法谱系全景 | `06_ecosystem/34_idioms_spectrum.md` | 🔴 | ✅ |
 | P7-T6 | 执行模型同构性矩阵 | `05_comparative/05_execution_model_isomorphism.md` | 🔴 | ✅ |
 | P7-T9 | 系统设计原则与国际权威对齐 | `06_ecosystem/05_system_design_principles.md` | 🔴 | ✅ |
 | P7-T10 | 跨层依赖与蕴含拓扑图 | `00_meta/inter_layer_topology.md` | 🔴 | ✅ |
@@ -466,9 +466,9 @@
 - 新增 `07_future/11_const_trait_impl_preview.md`（~306 行，10 来源，2 Mermaid 图表）
 - 新增 `07_future/12_return_type_notation_preview.md`（~304 行，10 来源，2 Mermaid 图表）
 - 新增 `07_future/13_unsafe_fields_preview.md`（~332 行，10 来源，3 Mermaid 图表）
-- 新增 `07_future/14_ferrocene_preview.md`（~307 行，10 来源，3 Mermaid 图表）
-- 新增 `07_future/15_gen_blocks_preview.md`（~349 行，10 来源，3 Mermaid 图表）
-- 新增 `07_future/16_cranelift_backend_preview.md`（~303 行，10 来源，3 Mermaid 图表）
+- 新增 `07_future/35_ferrocene_preview.md`（~307 行，10 来源，3 Mermaid 图表）
+- 新增 `07_future/22_gen_blocks_preview.md`（~349 行，10 来源，3 Mermaid 图表）
+- 新增 `07_future/38_cranelift_backend_preview.md`（~303 行，10 来源，3 Mermaid 图表）
 - 新增 `07_future/17_rust_specification_preview.md`（~345 行，10 来源，3 Mermaid 图表）
 - 新增 `03_advanced/05_rust_ffi.md`（~399 行，10 来源，3 Mermaid 图表）
 - 新增 `06_ecosystem/11_webassembly.md`（~342 行，10 来源，3 Mermaid 图表）
@@ -500,7 +500,7 @@
 | P17-T41 | 新增 `06_ecosystem/21_game_development.md` | Bevy、WGPU、ECS、Rapier | ✅ |
 | P17-T42 | 新增 `06_ecosystem/22_embedded_systems.md` | no_std、PAC、HAL、RTIC | ✅ |
 | P17-T43 | 新增 `07_future/27_compile_time_execution.md` | const fn、const 泛型（Generics）、类型状态机 | ✅ |
-| P17-T44 | 新增 `01_foundation/10_error_handling_basics.md` | Result、Option、? 运算符、错误组合 | ✅ |
+| P17-T44 | 新增 `01_foundation/32_error_handling_basics.md` | Result、Option、? 运算符、错误组合 | ✅ |
 | P17-T45 | 新增 `05_comparative/12_rust_vs_scala.md` | HKT、模式匹配（Pattern Matching）、Actor、隐式 vs Trait | ✅ |
 | P17-T46 | 新增 `04_formal/13_formal_methods.md` | Kani、Creusot、Miri、形式化验证 | ✅ |
 | P17-T47 | 新增 `06_ecosystem/24_cloud_native.md` | Axum、Actix、Firecracker、Vector | ✅ |
@@ -510,7 +510,7 @@
 
 **关键成果**:
 
-- 新增 `01_foundation/10_error_handling_basics.md`（~340 行，10+ 来源，2 Mermaid 图表）
+- 新增 `01_foundation/32_error_handling_basics.md`（~340 行，10+ 来源，2 Mermaid 图表）
 - 新增 `05_comparative/12_rust_vs_scala.md`（~350 行，10+ 来源，2 Mermaid 图表）
 - 新增 `04_formal/13_formal_methods.md`（~320 行，10+ 来源，2 Mermaid 图表）
 - 新增 `06_ecosystem/24_cloud_native.md`（~340 行，10+ 来源，2 Mermaid 图表）
@@ -566,7 +566,7 @@
 | 任务ID | 任务内容 | 交付物 | 状态 |
 |:---|:---|:---|:---:|
 | P18-T1 | 来源标注率整体提升（~15%→≥20%） | 核心文件批量补充 Wikipedia/TRPL/RFC 来源 | 🔄 |
-| P18-T2 | 新增 L1 概念文件填补缺口 | `01_foundation/10_error_handling_basics.md` ✅ | 🔄 |
+| P18-T2 | 新增 L1 概念文件填补缺口 | `01_foundation/32_error_handling_basics.md` ✅ | 🔄 |
 | P18-T3 | 新增 L3/L4 高级主题 | `03_advanced/14_custom_allocators.md` ✅, `15_zero_copy_parsing.md` ✅, `16_lock_free.md` ✅, `17_type_erasure.md` ✅, `04_formal/13_formal_methods.md` ✅, `14_lambda_calculus.md` ✅, `15_category_theory.md` (重复已归档) | ✅ |
 | P18-T4 | 新增 L5 对比分析 | `05_comparative/12_rust_vs_scala.md` ✅, `13_rust_vs_csharp.md` ✅, `14_rust_vs_elixir.md` ✅ | ✅ |
 | P18-T5 | 新增 L6 生态扩展 | `06_ecosystem/21_game_development.md` ✅, `22_embedded_systems.md` ✅, `23_database_access.md` ✅, `24_cloud_native.md` ✅, `25_cli_development.md` ✅, `26_game_development.md` ✅, `27_web_frameworks.md` ✅ | ✅ |

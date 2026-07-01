@@ -42,7 +42,7 @@
 | [`06_ecosystem/02_patterns.md`](06_ecosystem/02_patterns.md) | 设计模式 | Typestate、Builder、RAII、Newtype、Zero-cost | ✅ v1.0 |
 | [`06_ecosystem/03_core_crates.md`](06_ecosystem/03_core_crates.md) | 核心库谱系 | serde、tokio、axum、clap、tracing、sqlx 等 40+ crate | ✅ v1.0 |
 | [`06_ecosystem/04_application_domains.md`](06_ecosystem/04_application_domains.md) | 应用主题 | Web、CLI、嵌入式、游戏、区块链、数据工程、系统、GUI | ✅ v1.0 |
-| [`06_ecosystem/05_formal_ecosystem_tower.md`](06_ecosystem/05_formal_ecosystem_tower.md) | 形式化生态塔 | 核心 crate 的形式化根基/可组合性/可观测性三维评估 | ✅ v1.0 |
+| [`06_ecosystem/44_formal_ecosystem_tower.md`](06_ecosystem/44_formal_ecosystem_tower.md) | 形式化生态塔 | 核心 crate 的形式化根基/可组合性/可观测性三维评估 | ✅ v1.0 |
 | [`06_ecosystem/11_webassembly.md`](06_ecosystem/11_webassembly.md) | WebAssembly | Rust 的 Wasm 编译模型、组件模型、应用场景 | ✅ v1.0 |
 | [`06_ecosystem/13_logging_observability.md`](06_ecosystem/13_logging_observability.md) | 日志与可观测性 | tracing、log、metrics、OpenTelemetry、分布式追踪 | ✅ v1.0 |
 | [`06_ecosystem/14_documentation.md`](06_ecosystem/14_documentation.md) | 文档生态 | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ v1.0 |

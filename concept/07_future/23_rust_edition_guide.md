@@ -1,7 +1,7 @@
 # Rust Edition 机制与迁移指南
 
-> **注意**: 本主题内容已整合到 `concept/07_future/22_edition_guide.md`。
-> 请以 [concept/07_future/22_edition_guide.md](22_edition_guide.md) 为权威来源。
+> **注意**: 本主题内容已整合到 `concept/07_future/44_edition_guide.md`。
+> 请以 [concept/07_future/44_edition_guide.md](44_edition_guide.md) 为权威来源。
 
 ---
 

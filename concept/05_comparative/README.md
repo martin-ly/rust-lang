@@ -39,6 +39,7 @@ mindmap
       并发模型[并发模型对比矩阵]
       设计哲学[设计哲学谱系]
 ```
+
 > **认知功能**: 此 mindmap 是 L5 层的**放射式综合入口**。
 > 三个分支对应三种对比视角：Rust vs C++（系统编程的两种本体论）、Rust vs Go（后端开发的两种并发哲学）、范式矩阵（多语言设计空间中的定位）。
 > 读者从其他语言转来 Rust 时，可先定位自己熟悉的语言分支，再逐层深入对比细节。
@@ -93,6 +94,7 @@ graph TB
     style GO fill:#bbf,stroke:#333
     style PM fill:#9f9,stroke:#333
 ```
+
 > **认知功能**: 此图是 L5 层的**跨层知识转化拓扑**。它展示了 L1-L4 的「概念知识」如何通过 L5 的「对比分析」转化为 L6-L7 的「工程决策」。
 > 三种颜色编码三种对比维度：Rust vs C++（形式系统 vs 机制工程）、Rust vs Go（确定性 vs 工程性）、范式矩阵（多语言定位）。
 > 关键认知：L5 不是「学新内容」，而是「用旧知识做新决策」——读者应将 L1-L4 的每个概念映射到图中的对比节点，形成技术选型的形式化论据。
@@ -123,6 +125,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
     │ 类型论                │ 设计哲学谱系          │ 语言设计参考
     │ RustBelt              │                      │
 ```
+
 ---
 
 ## 二、文件索引与关系
@@ -135,7 +138,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 | [06_rust_vs_java.md](06_rust_vs_java.md) | Rust vs Java | 所有权 vs GC、并发模型、运行时（Runtime）架构、场景矩阵 | ✅ v1.0 | L1 Ownership, L3 Concurrency | JVM 迁移、企业系统选型 |
 | [07_rust_vs_python.md](07_rust_vs_python.md) | Rust vs Python | 静态 vs 动态类型、所有权 vs GC、 fearless vs GIL、元编程 | ✅ v1.0 | L1 Ownership, L1 Type System | 性能瓶颈、混合架构选型 |
 | [08_rust_vs_javascript.md](08_rust_vs_javascript.md) | Rust vs JavaScript | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ v1.0 | L1 Ownership, L3 Async | Web 性能、WASM 集成 |
-| [02_cpp_abi_object_model.md](02_cpp_abi_object_model.md) | C++ ABI 与对象模型 | ABI 稳定性、对象布局、vtable、repr(C)、Move ABI、RTTI | ✅ v1.0 | L1 Ownership, L3 Unsafe, L3 FFI | C++ 迁移、FFI |
+| [02_cpp_abi_object_model.md](18_cpp_abi_object_model.md) | C++ ABI 与对象模型 | ABI 稳定性、对象布局、vtable、repr(C)、Move ABI、RTTI | ✅ v1.0 | L1 Ownership, L3 Unsafe, L3 FFI | C++ 迁移、FFI |
 
 ---
 
@@ -205,6 +208,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 "Rust 在语言                 "教学选什么              "类型系统谱系          "λ 演算家族        "特性完备性          "特化/缺失
  谱系中的位置？"              语言入门？"              与设计哲学"            分类"               对比"               权衡分析"
 ```
+
 ---
 
 ## 六、跨层出口

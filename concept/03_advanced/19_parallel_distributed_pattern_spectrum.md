@@ -14,7 +14,7 @@
 > [Lock-free](16_lock_free.md) ·
 > [Distributed Systems](../06_ecosystem/18_distributed_systems.md)
 > **后置概念**:
-> [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) ·
+> [Pattern Composition Algebra](../06_ecosystem/73_pattern_composition_algebra.md) ·
 > [System Design Principles](../06_ecosystem/05_system_design_principles.md)
 > **主要来源**:
 > [Herlihy & Shavit — The Art of Multiprocessor Programming] ·
@@ -120,6 +120,7 @@ L4: 广域网/边缘
 ├── 联邦学习（Federated Learning）
 └── 区块链共识（PoW / PoS / BFT）
 ```
+
 ### 2.2 统一分析框架
 
 所有并行/分布式模式都可以通过四个维度分析：
@@ -150,6 +151,7 @@ pool.spawn(|| {
     println!("Task executed on worker thread");
 });
 ```
+
 **核心设计**: 避免线程创建/销毁的开销，复用固定数量的工作线程。
 
 **与进程池的对比**:
@@ -189,6 +191,7 @@ fn parallel_sum_v2(data: &[i32]) -> i32 {
     data.par_iter().sum()
 }
 ```
+
 **与算法层的联系**: Fork-Join 是**分治算法**的并行实现。见 [语义桥 — 分治 ↔ Composite ↔ Parallel Split](../00_meta/semantic_bridge_algorithms_patterns.md)。
 
 ### 3.3 无锁数据结构
@@ -203,6 +206,7 @@ let queue = ArrayQueue::new(100);
 queue.push(42).unwrap();
 let value = queue.pop();
 ```
+
 **锁 vs 无锁的决策树**:
 
 ```text
@@ -212,6 +216,7 @@ let value = queue.pop();
 ├── 需要阻塞等待？ → Mutex + Condvar
 └── 需要等待-free 保证？ → Wait-free（ hardest to implement）
 ```
+
 ---
 
 ## 四、L2 单机消息传递模式
@@ -244,6 +249,7 @@ impl Handler<Increment> for Counter {
     }
 }
 ```
+
 **Actor 模型的核心原则**:
 
 1. **封装**: Actor 的状态不共享，只能通过消息访问
@@ -279,6 +285,7 @@ for received in rx { // 接收消息
     println!("Got: {}", received);
 }
 ```
+
 **CSP 的核心原则**:
 
 1. **不要通过共享内存通信；通过通信共享内存**
@@ -314,6 +321,7 @@ while let Some(value) = rx.recv().await {
     process(value).await;
 }
 ```
+
 **背压的必要性**: 无背压的系统在快生产者 + 慢消费者场景下会导致内存耗尽。
 
 ---
@@ -337,6 +345,7 @@ enum NodeState {
 // 4. Leader Completeness: 已提交的条目存在于所有未来 Leader 的日志中
 // 5. State Machine Safety: 若节点应用了某索引的日志，则所有节点应用的该索引内容相同
 ```
+
 **CAP 定理与 Raft 的定位**:
 
 Raft 是 **CP 系统**（Consistency + Partition tolerance，牺牲 Availability）：
@@ -357,6 +366,7 @@ Gossip 传播模型:
     - Anti-entropy: 全量同步，修复不一致
     - Rumor-mongering: 增量传播，新信息像谣言一样扩散
 ```
+
 **与 Raft 的对比**:
 
 | 维度 | Raft | Gossip |
@@ -387,6 +397,7 @@ counter_b.increment("node_b", 3);
 counter_a.merge(&counter_b);
 assert_eq!(counter_a.value(), 8); // 5 + 3
 ```
+
 **CRDT 的数学基础**:
 
 ```text
@@ -397,6 +408,7 @@ CRDT 必须满足:
 
 ∴ CRDT 的合并操作构成一个**联结半格（Join Semilattice）**
 ```
+
 > **定理** [Tier 2]: 若两个 CRDT 副本独立演化后合并，其结果等价于它们所有更新按某种顺序顺序应用的结果。
 >
 > **来源**: [Shapiro et al., 2011] ✅
@@ -419,6 +431,7 @@ CRDT 必须满足:
   ├── 分布式共享内存（DSM）                           ├── 广域网的 REST/gRPC
   └── "分布式系统就是网络延迟足够高的并行系统"         └── "并行系统就是网络延迟足够低的分布式系统"
 ```
+
 ### 6.2 一致性谱系
 
 ```text
@@ -437,6 +450,7 @@ Rust 生态映射:
   - 因果一致: Vector Clock, Lamport Clock
   - 最终一致: Gossip, CRDT
 ```
+
 ---
 
 ## 七、Rust 生态的并发/分布式工具谱系
@@ -485,6 +499,7 @@ impl Handler<Message> for BadActor {
     }
 }
 ```
+
 > **修正**: Actor 的状态应完全封装，不共享。
 
 ### 8.2 边界测试：`!Send` 类型跨线程（编译错误）
@@ -502,6 +517,7 @@ fn main() {
     });
 }
 ```
+
 > **修正**: 使用 `Arc<T>`（原子引用（Reference）计数）替代 `Rc<T>`，即可安全跨线程共享。
 
 ```rust
@@ -515,6 +531,7 @@ fn main() {
     });
 }
 ```
+
 ### 8.3 边界测试：Raft 在网络分区下的行为
 
 ```text
@@ -533,6 +550,7 @@ fn main() {
   - Leader 向 [A,B] 复制缺失的日志条目
   - 所有节点最终达成一致
 ```
+
 ### 8.3 边界测试：CRDT 的合并顺序独立性
 
 ```rust,ignore
@@ -554,6 +572,7 @@ fn crdt_commutativity() {
     assert_eq!(ab.value(), ba.value()); // ✅ 交换律保证
 }
 ```
+
 ---
 
 ## 九、知识来源关系
@@ -622,6 +641,7 @@ fn parallel_arc() {
     );
 }
 ```
+
 > **修正**: `rayon::join` 将两个闭包（Closures）并行执行（若可用），闭包必须满足 `'static` 或从环境中转移所有权（Ownership）。引用（Reference）栈数据的闭包不能安全传递给 `join`。`rayon` 的并行迭代器（Iterator）（`par_iter()`）通过数据分割避免此问题——每个子闭包处理数据切片（Slice），而非共享引用。来源: [Rayon Documentation]
 
 ### 10.2 边界测试：分布式 Actor 的消息类型未实现 `Serialize`（编译错误）
@@ -650,6 +670,7 @@ struct MessageFixed {
     data: String,
 }
 ```
+
 > **修正**:
 > 分布式系统中的消息传递要求类型可序列化（`Serialize`/`Deserialize`）。
 > Rust 的类型系统（Type System）通过 trait bound 在编译期强制这一约束——未实现 `Serialize` 的类型不能作为网络消息。
@@ -670,6 +691,7 @@ fn main() {
     println!("{}", sum);
 }
 ```
+
 > **修正**:
 > `rayon` 是 Rust 的数据并行库，基于 **work-stealing** 线程池自动并行化迭代器（Iterator）。
 > 但**任务粒度**是关键：
@@ -701,6 +723,7 @@ fn main() {
     println!("{}", sum);
 }
 ```
+
 > **修正**:
 > **`rayon`** 的**并行迭代器（Iterator）**：
 >
@@ -732,6 +755,7 @@ fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
 
 fn main() {}
 ```
+
 > **修正**: **生命周期（Lifetimes）标注**：1) `&'a str` 表示引用（Reference）至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
 
 ## 逆向推理链（Backward Reasoning）

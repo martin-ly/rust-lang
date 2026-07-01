@@ -20,7 +20,7 @@
 > **后置延伸**: [操作系统内核](39_os_kernel.md) ·
 > [性能优化](15_performance_optimization.md) ·
 > [机器学习生态](46_machine_learning_ecosystem.md) ·
-> [形式化验证工具](47_formal_verification_tools.md)
+> [形式化验证工具](74_formal_verification_tools.md)
 >
 > **来源**: [rclrs](https://docs.rs/rclrs/) · [ROS2 Rust](https://github.com/ros2-rust/ros2_rust)
 > **前置概念**: N/A
@@ -128,6 +128,7 @@
 数据流: 感知 → 规划 → 控制 → 执行
 反馈环: 执行 → 传感器 → 感知（闭环控制）
 ```
+
 > **来源**: [ROS2 Design](https://design.ros2.org/) · [Robotics Software Engineering — Springer](https://link.springer.com/book/10.1007/978-3-030-66474-7)
 
 ### 1.2 实时约束与确定性
@@ -152,6 +153,7 @@
   · Rust 的优势: 无 GC 暂停、无未定义行为、栈分配可预测
   · Rust 的挑战: Vec 重分配、锁竞争、缓存未命中
 ```
+
 > **来源**: [PREEMPT_RT Wiki](https://wiki.linuxfoundation.org/realtime/start) · [Real-Time Systems — Jane Liu](https://www.pearson.com/en-us/subject-catalog/p/real-time-systems/P200000005792)
 
 ### 1.3 ROS2 架构
@@ -183,6 +185,7 @@ ROS2 通信原语:
   · 动作 (Action): 异步目标-反馈-结果，可抢占的长任务
   · 参数 (Parameter): 节点配置，支持动态重配置
 ```
+
 **DDS QoS 策略**对实时性至关重要：
 
 | **QoS 策略** | **作用** | **实时场景配置** |
@@ -240,6 +243,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 **rclrs 的关键设计决策**：
 
 ```text
@@ -260,6 +264,7 @@ rclrs 架构约束:
   │ 生态成熟度      │ 生产级           │ 实验 → beta      │
   └─────────────────┴──────────────────┴──────────────────┘
 ```
+
 > **来源**: [rclrs Documentation](https://docs.rs/rclrs/latest/rclrs/) · [ros2-rust Examples](https://github.com/ros2-rust/examples)
 
 ### 3.2 ros2_rust 社区与 safe_drive
@@ -284,6 +289,7 @@ fn main() -> Result<(), DynError> {
     loop { selector.wait()?; } // 非阻塞轮询，可集成自定义调度
 }
 ```
+
 **safe_drive 的线程模型**：
 
 ```text
@@ -303,6 +309,7 @@ safe_drive 执行器:
   │ ros2_rust   │ 元项目      │ 生成工具、消息绑定、构建系统         │
   └─────────────┴─────────────┴─────────────────────────────────────┘
 ```
+
 > **来源**: [safe_drive Documentation](https://tier4.github.io/safe_drive/) · [Autoware Rust 集成](https://autoware.org/) · [r2r Crate](https://docs.rs/r2r/latest/r2r/)
 
 ### 3.3 DDS 绑定
@@ -335,6 +342,7 @@ fn dds_direct() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 > **来源**: [cyclonedds-rs GitHub](https://github.com/eclipse-cyclonedds/cyclonedds-rust) · [dust_dds GitHub](https://github.com/s2e-systems/dust-dds) · [Fast DDS Documentation](https://fast-dds.docs.eprosima.com/)
 
 ---
@@ -368,6 +376,7 @@ ROS2 执行器类型对比:
   · 支持抢占: 高优先级回调中断低优先级
   · 需配合 PREEMPT_RT 和优先级继承协议
 ```
+
 ```rust,ignore
 // rclrs 自定义执行器调度（概念性）
 use rclrs::{Executor, ExecutorOptions, CallbackPriority};
@@ -387,6 +396,7 @@ fn configure_realtime_executor() -> Executor {
     exec
 }
 ```
+
 > **来源**: [ROS2 Real-Time Working Group [已失效]]<!-- 原链接: https://ros-real-time.github.io/ --> · [Static Executor — Bosch](https://github.com/ros2/examples/tree/master/rclcpp/executors)
 
 ### 4.2 优先级继承与 PREEMPT_RT
@@ -414,6 +424,7 @@ Rust 实现:
   · 需使用实时 POSIX mutex (PTHREAD_PRIO_INHERIT)
   · 通过 libc 绑定或 rt-mutex crate 实现
 ```
+
 ```rust,ignore
 // 实时 POSIX Mutex 绑定（概念性 FFI）
 use libc::{pthread_mutex_t, pthread_mutexattr_t, PTHREAD_PRIO_INHERIT};
@@ -437,6 +448,7 @@ impl Drop for RtMutex {
     fn drop(&mut self) { unsafe { libc::pthread_mutex_destroy(&mut self.inner); } }
 }
 ```
+
 > **来源**: [PREEMPT_RT Patch](https://wiki.linuxfoundation.org/realtime/start) · [POSIX Real-Time Extensions](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap02.html#tag_02_01_06) · [Rust libc](https://docs.rs/libc/latest/libc/)
 
 ### 4.3 no_std + RTOS 集成
@@ -486,6 +498,7 @@ mod app {
     }
 }
 ```
+
 > **来源**: [RTIC Book](https://rtic.rs/2/book/en/) · [Tock OS](https://www.tockos.org/) · [Hubris Documentation](https://hubris.oxide.computer/) · [Rust Embedded WG](https://github.com/rust-embedded/wg)
 
 ---
@@ -524,6 +537,7 @@ fn lidar_to_base_link(scan: &LaserScan, lidar_pose: &Isometry3<f64>) -> Vec<Vect
         .collect()
 }
 ```
+
 **nshare** 提供与外部张量库（如 `ndarray`、`nalgebra`、`image`）的零拷贝互操作，支持大规模点云的协方差计算和矩阵运算，无需复制底层数据缓冲区。
 
 > **来源**: [nalgebra User Guide](https://www.nalgebra.org/) · [nshare GitHub](https://github.com/rust-cv/nshare) · [ndarray Documentation](https://docs.rs/ndarray/latest/ndarray/)
@@ -552,6 +566,7 @@ fn solve_ik(chain: &Chain<f64>, target: &Isometry3<f64>) -> Result<Vec<f64>, Err
     Ok(positions)
 }
 ```
+
 **OpenRR 模块（Module）结构**：
 
 ```text
@@ -563,6 +578,7 @@ openrr 生态:
   · arci: 机器人控制接口抽象（类似 ROS Control）
   · arci-ros: ROS/ROS2 后端实现
 ```
+
 > **来源**: [openrr Documentation](https://openrr.github.io/) · [k Crate (Kinematics)](https://docs.rs/k/latest/k/)
 
 ### 5.3 导航栈
@@ -598,6 +614,7 @@ fn plan_path(map: &GridMap, start: (usize, usize), goal: (usize, usize))
     astar(&start, |n| map.neighbors(n), |&(x, y)| x.abs_diff(goal.0) + y.abs_diff(goal.1), |&n| n == goal)
 }
 ```
+
 > **来源**: [pathfinding Crate](https://docs.rs/pathfinding/latest/pathfinding/) · [Nav2 Behavior Trees](https://navigation.ros.org/behavior_trees/index.html) · [SLAM 算法综述 — Cadena et al. 2016](https://doi.org/10.1109/TRO.2016.2624754)
 
 ---
@@ -624,6 +641,7 @@ impl PidController {
     }
 }
 ```
+
 **MPC（模型预测控制）**在 Rust 中的实现策略：
 
 ```text
@@ -635,6 +653,7 @@ MPC 求解流程:
 3. Rust 实现: osqp/clarabel 在线求解；显式 MPC 离线查表 O(1)；
    自定义梯度下降利用 nalgebra 矩阵运算
 ```
+
 ```rust,ignore
 // LQR 状态反馈控制器（nalgebra）
 use nalgebra::SMatrix;
@@ -652,6 +671,7 @@ fn control_law<const N: usize, const M: usize>(
     k: &SMatrix<f64, M, N>, x: &SMatrix<f64, N, 1>,
 ) -> SMatrix<f64, M, 1> { -k * x }
 ```
+
 > **来源**: [Modern Control Engineering — Ogata](https://www.pearson.com/en-us/subject-catalog/p/modern-control-engineering/P200000005828) · [osqp Crate](https://docs.rs/osqp/latest/osqp/) · [nalgebra Matrix Decompositions](https://www.nalgebra.org/decompositions-and-lapack/)
 
 ### 6.2 状态空间与优化
@@ -681,6 +701,7 @@ impl<const N: usize, const M: usize> KalmanFilter<N, M> {
     }
 }
 ```
+
 **优化求解器生态**：
 
 | **求解器** | **类型** | **Rust 绑定** | **适用场景** |
@@ -733,6 +754,7 @@ impl<const N: usize, const M: usize> KalmanFilter<N, M> {
            但**应用层控制逻辑**可以完全用 safe Rust 编写，且能获得
            比 C/C++ 更强的时序和并发保证。
 ```
+
 > **来源**: [ROS2 Rust WG Roadmap](https://github.com/ros2-rust/ros2_rust) · [RTIC Safety Guarantees](https://rtic.rs/2/book/en/) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
 ### 7.2 边界极限
@@ -774,6 +796,7 @@ unsafe fn deserialize_without_schema(bytes: &[u8]) -> PointCloud2 {
 // 3. DDS 层启用 XTypes TypeObject 校验
 // 4. safe_drive 编译期类型绑定彻底消除此类错误
 ```
+
 > **来源**: [ROS2 XTypes [已失效]]<!-- 原链接: https://design.ros2.org/articles/rosidl.html --> · [DDS Security](https://www.omg.org/spec/DDS-SECURITY/) · [Rustonomicon — Transmute](https://doc.rust-lang.org/nomicon/transmutes.html)
 
 ### 8.2 边界测试：ROS2 回调阻塞执行器（实时性违反）
@@ -808,6 +831,7 @@ impl RealtimeNode {
 // 3. 使用 PREEMPT_RT + SCHED_FIFO 策略
 // 4. 控制回调禁用分配（pre-allocated buffers）
 ```
+
 > **来源**: [ROS2 Real-Time WG Best Practices [已失效]]<!-- 原链接: https://ros-real-time.github.io/ --> · [Linux Real-Time Scheduling](https://man7.org/linux/man-pages/man7/sched.7.html) · [Lock-Free Programming](https://doc.rust-lang.org/nomicon/atomics.html)
 
 ### 8.3 边界测试：多线程 ROS2 节点共享可变状态（数据竞争）
@@ -839,6 +863,7 @@ impl GoodNode {
     }
 }
 ```
+
 > **来源**: [Rust Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) · [RefCell Documentation](https://doc.rust-lang.org/std/cell/struct.RefCell.html) · [ROS2 Multi-Threaded Executor](https://docs.ros.org/en/humble/Concepts/Intermediate/About-Executors.html)
 
 ---
@@ -880,7 +905,7 @@ impl GoodNode {
 - [内存管理](../02_intermediate/03_memory_management.md) — 分配器、生命周期（Lifetimes）、RAII
 - [类型系统（Type System）](../01_foundation/04_type_system.md) — 泛型（Generics）、trait、类型状态
 - [机器学习生态](46_machine_learning_ecosystem.md) — 感知算法、神经网络推理
-- [形式化验证工具](47_formal_verification_tools.md) — 模型检查、定理证明、Kani
+- [形式化验证工具](74_formal_verification_tools.md) — 模型检查、定理证明、Kani
 - [分布式共识](50_distributed_consensus.md) — 多机器人协同、一致性（Coherence）
 
 > **过渡**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

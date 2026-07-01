@@ -12,7 +12,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Eva
-> **前置依赖**: [形式化验证](05_verification_toolchain.md) · [形式化验证工具生态](../06_ecosystem/47_formal_verification_tools.md)
+> **前置依赖**: [形式化验证](05_verification_toolchain.md) · [形式化验证工具生态](../06_ecosystem/74_formal_verification_tools.md)
 > **后置延伸**: [Safety Tags](33_safety_tags_in_formal.md) · [BorrowSanitizer](34_borrow_sanitizer_in_formal.md)
 >
 > **来源**: [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://verus-lang.github.io/verus/guide/) · [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082) · [Unsafe Rust](../03_advanced/03_unsafe.md)
@@ -54,6 +54,7 @@ fn binary_search(v: &Vec<i32>, x: i32) -> (r: usize)
     // ...
 }
 ```
+
 关键元素：
 
 - `spec fn`：纯函数规格，用于表达数学性质。
@@ -94,6 +95,7 @@ AutoVerus 论文提出五个核心原则：
 │ 多候选输出      │    │ 常量传播、数组长度│   │ 迭代修复        │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
+
 ### 3.3 评估结果
 
 - 在 **Verus-Bench**（150 个非平凡证明任务）上，AutoVerus 成功率 **>90%**。
@@ -164,7 +166,7 @@ B
 ## 相关概念
 
 - [形式化验证](05_verification_toolchain.md)
-- [形式化验证工具生态](../06_ecosystem/47_formal_verification_tools.md)
+- [形式化验证工具生态](../06_ecosystem/74_formal_verification_tools.md)
 - [Safety Tags](33_safety_tags_in_formal.md)
 - [BorrowSanitizer](34_borrow_sanitizer_in_formal.md)
 - [Rust 1.98+ 预览](../07_future/rust_1_98_preview.md)

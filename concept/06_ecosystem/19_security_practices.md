@@ -16,7 +16,7 @@
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估安全实践和审计策略
 > **定位**: 系统讲解 Rust **安全编程实践**——从输入验证、加密使用、到审计和供应链安全，揭示如何在 Rust 的内存安全（Memory Safety）基础上构建全面的安全防御体系。
-> **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Type System](../01_foundation/04_type_system.md) · [Error Handling](../02_intermediate/15_error_handling_deep_dive.md)
+> **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Type System](../01_foundation/04_type_system.md) · [Error Handling](../02_intermediate/16_error_handling_deep_dive.md)
 > **后置概念**: [Blockchain](06_blockchain.md) · [Formal Methods](../04_formal/04_rustbelt.md)
 >
 > **来源**: [Rust Secure Code WG](https://github.com/rust-secure-code/wg) · [Cargo — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)

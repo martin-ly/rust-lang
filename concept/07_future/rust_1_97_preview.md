@@ -139,7 +139,7 @@ impl MyFuture {
 
 **Project Goals 2026 关联**: 被列为 "Better pin ergonomics" 子目标，属于异步 Rust 生态系统成熟度的关键路径。
 
-**深度文档**: [18_field_projections_preview.md](18_field_projections_preview.md)（字段级安全投影）
+**深度文档**: [18_field_projections_preview.md](42_field_projections_preview.md)（字段级安全投影）
 
 ---
 
@@ -239,7 +239,7 @@ RUSTFLAGS="-Zthreads=8" cargo build
 cargo +nightly build -Zcodegen-backend=cranelift
 ```
 
-**深度文档**: [16_cranelift_backend_preview.md](16_cranelift_backend_preview.md)
+**深度文档**: [16_cranelift_backend_preview.md](38_cranelift_backend_preview.md)
 
 ---
 

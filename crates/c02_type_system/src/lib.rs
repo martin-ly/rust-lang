@@ -48,6 +48,7 @@ pub mod r#unsafe;
 pub mod archive;
 
 // 导出 Rust 1.94 特性模块
+pub mod rust_168_features;
 pub mod rust_193_features;
 pub mod rust_194_features;
 

@@ -54,7 +54,7 @@
 - `concept/01_foundation/07_control_flow.md` — 控制流：表达式导向的流程控制
 - `concept/01_foundation/08_collections.md` — 集合类型：Rust 标准库的数据结构谱系
 - `concept/01_foundation/09_strings_and_text.md` — 字符串与文本：Rust 的 Unicode 处理与格式化系统
-- `concept/01_foundation/10_error_handling_basics.md` — Rust 错误处理基础
+- `concept/01_foundation/32_error_handling_basics.md` — Rust 错误处理基础
 - `concept/01_foundation/10_numerics.md` — 数值类型与运算：从整数到浮点的完整图景
 - `concept/01_foundation/11_modules_and_paths.md` — 模块系统与路径：Rust 的代码组织哲学
 - `concept/01_foundation/12_attributes_and_macros.md` — 属性与声明宏：编译期元编程基础
@@ -69,7 +69,7 @@
 - `concept/01_foundation/21_effects_and_purity.md` — 副作用与纯度：从引用透明到 Rust 的所有权效果
 - `concept/01_foundation/22_data_abstraction_spectrum.md` — 数据抽象谱系：从 C struct 到 Rust enum + trait
 - `concept/01_foundation/23_move_semantics.md` — Move 语义：C++ 与 Rust 的资源转移模型
-- `concept/01_foundation/23_quiz_ownership_borrowing.md` — 测验：所有权、借用与生命周期（试点）
+- `concept/01_foundation/33_quiz_ownership_borrowing.md` — 测验：所有权、借用与生命周期（试点）
 - `concept/01_foundation/24_quiz_type_system.md` — 测验：类型系统（试点扩展）
 - … 共 35 篇
 
@@ -89,7 +89,7 @@
 - `concept/02_intermediate/12_smart_pointers.md` — 智能指针：堆内存管理与共享语义
 - `concept/02_intermediate/13_dsl_and_embedding.md` — DSL 与嵌入 式设计：Rust 中的领域特定语言
 - `concept/02_intermediate/14_newtype_and_wrapper.md` — Newtype 与包装器模式：类型安全的零成本抽象
-- `concept/02_intermediate/15_error_handling_deep_dive.md` — 错误处理深入：从 Result 到自定义错误生态
+- `concept/02_intermediate/16_error_handling_deep_dive.md` — 错误处理深入：从 Result 到自定义错误生态
 - `concept/02_intermediate/15_iterator_patterns.md` — Rust 迭代器模式
 - `concept/02_intermediate/17_macro_patterns.md` — 宏模式：编译期代码生成的工程实践
 - `concept/02_intermediate/18_lifetimes_advanced.md` — 生命周期高级主题：从 HRTB 到自引用类型
@@ -112,7 +112,7 @@
 - `concept/03_advanced/01_concurrency.md` — Concurrency（并发模型）
 - `concept/03_advanced/02_async.md` — Async/Await（异步编程）
 - `concept/03_advanced/02_async_advanced.md` — Async/Await 高级主题
-- `concept/03_advanced/02_async_patterns.md` — 异步模式：从 Future 到生产级并发
+- `concept/03_advanced/26_async_patterns.md` — 异步模式：从 Future 到生产级并发
 - `concept/03_advanced/03_unsafe.md` — Unsafe Rust 安全编程
 - `concept/03_advanced/04_macros.md` — Macros（宏系统）
 - `concept/03_advanced/05_rust_ffi.md` — Rust FFI：与外部代码的安全边界
@@ -173,7 +173,7 @@
 ### L05（19 篇）
 
 - `concept/05_comparative/01_rust_vs_cpp.md` — Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>
-- `concept/05_comparative/02_cpp_abi_object_model.md` — Rust vs C++：ABI、对象模型与内存布局
+- `concept/05_comparative/18_cpp_abi_object_model.md` — Rust vs C++：ABI、对象模型与内存布局
 - `concept/05_comparative/02_rust_vs_go.md` — Rust vs Go：线性所有权 vs CSP 过程逻辑
 - `concept/05_comparative/03_paradigm_matrix.md` — Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）
 - `concept/05_comparative/04_safety_boundaries.md` — Rust 安全保证的边界条件全景（Safety Boundary Panorama）
@@ -197,9 +197,9 @@
 - `concept/06_ecosystem/01_toolchain.md` — Toolchain（工具链与 Cargo）
 - `concept/06_ecosystem/02_patterns.md` — Design Patterns（设计模式）
 - `concept/06_ecosystem/03_core_crates.md` — Core Crates（核心开源库谱系）
-- `concept/06_ecosystem/03_idioms_spectrum.md` — Rust 惯用法谱系全景（Idioms Spectrum）
+- `concept/06_ecosystem/34_idioms_spectrum.md` — Rust 惯用法谱系全景（Idioms Spectrum）
 - `concept/06_ecosystem/04_application_domains.md` — Application Domains（软件工程应用主题）
-- `concept/06_ecosystem/05_formal_ecosystem_tower.md` — Formal Ecosystem Tower（Rust 生态形式化分层塔）
+- `concept/06_ecosystem/44_formal_ecosystem_tower.md` — Formal Ecosystem Tower（Rust 生态形式化分层塔）
 - `concept/06_ecosystem/05_system_design_principles.md` — Rust 系统设计原则与国际权威对齐
 - `concept/06_ecosystem/06_blockchain.md` — Blockchain & Smart Contract Security（区块链与智能合约安全）
 - `concept/06_ecosystem/07_game_ecs.md` — Game Development & ECS Architecture（游戏开发与 ECS 架构）
@@ -220,7 +220,7 @@
 - `concept/06_ecosystem/22_embedded_systems.md` — Rust 嵌入式系统开发
 - `concept/06_ecosystem/23_database_access.md` — Rust 数据库访问生态
 - `concept/06_ecosystem/24_cloud_native.md` — Rust 云原生生态
-- `concept/06_ecosystem/25_cargo_security_cves.md` — Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223
+- `concept/06_ecosystem/72_cargo_security_cves.md` — Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223
 - `concept/06_ecosystem/25_cli_development.md` — Rust CLI 开发生态
 - `concept/06_ecosystem/26_game_development.md` — Rust 游戏开发
 - `concept/06_ecosystem/27_web_frameworks.md` — Rust Web 框架对比与选型
@@ -243,21 +243,21 @@
 - `concept/07_future/12_return_type_notation_preview.md` — Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界
 - `concept/07_future/13_must_not_suspend_preview.md` — `must_not_suspend` Lint Preview
 - `concept/07_future/13_unsafe_fields_preview.md` — Unsafe Fields 预研：字段级安全边界的精确标注
-- `concept/07_future/14_ferrocene_preview.md` — Ferrocene 预研：Rust 的安全关键认证之路
+- `concept/07_future/35_ferrocene_preview.md` — Ferrocene 预研：Rust 的安全关键认证之路
 - `concept/07_future/14_lifetime_capture_preview.md` — Lifetime Capture in `impl Trait` Preview
-- `concept/07_future/15_gen_blocks_preview.md` — Gen Blocks 预研：超越异步的泛化生成器
+- `concept/07_future/22_gen_blocks_preview.md` — Gen Blocks 预研：超越异步的泛化生成器
 - `concept/07_future/15_pin_ergonomics_preview.md` — Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`
-- `concept/07_future/15_rpitit_preview.md` — 特质中返回位置 impl Trait（RPITIT）预览
-- `concept/07_future/16_cranelift_backend_preview.md` — Cranelift 后端预研：Rust 编译器的快速调试编译
+- `concept/07_future/37_rpitit_preview.md` — 特质中返回位置 impl Trait（RPITIT）预览
+- `concept/07_future/38_cranelift_backend_preview.md` — Cranelift 后端预研：Rust 编译器的快速调试编译
 - `concept/07_future/16_type_alias_impl_trait_preview.md` — TAIT Preview
 - `concept/07_future/17_arbitrary_self_types_preview.md` — Arbitrary Self Types 预览：自定义方法接收器
 - `concept/07_future/17_const_trait_preview.md` — Const Trait 实现预览
 - `concept/07_future/17_ergonomic_ref_counting_preview.md` — Ergonomic Ref-Counting 预研：人机工学引用计数
 - `concept/07_future/17_rust_specification_preview.md` — Rust 语言规范预研：从参考文档到形式化规范
 - `concept/07_future/18_async_drop_preview.md` — Async Drop：异步资源的优雅销毁
-- `concept/07_future/18_field_projections_preview.md` — Field Projections 预览：安全的字段级投影
+- `concept/07_future/42_field_projections_preview.md` — Field Projections 预览：安全的字段级投影
 - `concept/07_future/19_rust_edition_preview.md` — Rust 2024 Edition (1.85.0+ stable)
-- `concept/07_future/19_rust_for_linux.md` — Rust for Linux ：操作系统内核中的内存安全
+- `concept/07_future/43_rust_for_linux.md` — Rust for Linux ：操作系统内核中的内存安全
 - … 共 53 篇
 
 ### L0_meta（3 篇）

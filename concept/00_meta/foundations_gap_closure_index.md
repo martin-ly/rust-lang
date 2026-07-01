@@ -39,7 +39,7 @@
 
 | 审计任务 | 优先级 | 状态 | 文件 |
 |:---|:---:|:---:|:---|
-| ABI 与对象模型 | P0 | ✅ 完成 | [C++ ABI Object Model](../05_comparative/02_cpp_abi_object_model.md) |
+| ABI 与对象模型 | P0 | ✅ 完成 | [C++ ABI Object Model](../05_comparative/18_cpp_abi_object_model.md) |
 | Move 语义系统对比 | P0 | ✅ 完成 | [Rust vs C++ §7.3](../05_comparative/01_rust_vs_cpp.md) |
 | 异常安全深度 | P0 | ✅ 完成 | [Exception Safety](../02_intermediate/27_exception_safety_rust_cpp.md) |
 | SFINAE / 模板元编程 | P1 | ✅ 完成 | [Traits §5.8](../02_intermediate/01_traits.md) |
@@ -61,7 +61,7 @@
 
 | 审计任务 | 优先级 | 状态 | 文件 |
 |:---|:---:|:---:|:---|
-| 模式组合代数 | P0 | ✅ 完成 | [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) |
+| 模式组合代数 | P0 | ✅ 完成 | [Pattern Composition Algebra](../06_ecosystem/73_pattern_composition_algebra.md) |
 | 算法-模式语义桥 | P0 | ✅ 完成 | [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md) |
 | 统一模式索引 | P1 | ✅ 新增 | [Pattern Semantic Space Index](pattern_semantic_space_index.md) |
 | 并发/分布式模式谱系 | P2 | ✅ 已存在 | [Parallel Distributed Pattern Spectrum](../03_advanced/19_parallel_distributed_pattern_spectrum.md) |

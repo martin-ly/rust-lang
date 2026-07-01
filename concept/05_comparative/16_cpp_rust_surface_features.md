@@ -8,7 +8,7 @@
 > **A/S/P 标记**: C+A — Comparison + Application
 > **双维定位**: C×Ana
 > **前置概念**: [Rust vs C++](01_rust_vs_cpp.md) · [Variable Model](../01_foundation/20_variable_model.md) · [RTTI](../02_intermediate/25_rtti_and_dynamic_typing.md) · [所有权形式化](../04_formal/03_ownership_formal.md)
-> **后置概念**: [C++ ABI Object Model](02_cpp_abi_object_model.md) · [Traits](../02_intermediate/01_traits.md)
+> **后置概念**: [C++ ABI Object Model](18_cpp_abi_object_model.md) · [Traits](../02_intermediate/01_traits.md)
 > **主要来源**: [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html) · [TRPL Ch 5 — Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) · [TRPL Ch 19 — Advanced Features](https://doc.rust-lang.org/book/ch19-00-advanced-features.html) · [Rust Reference — Operators and Overloading](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementations) · [Rust Reference — std::ops](https://doc.rust-lang.org/std/ops/index.html) · [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) · [cppreference — Constructors](https://en.cppreference.com/w/cpp/language/constructor) · [cppreference — typeid](https://en.cppreference.com/w/cpp/language/typeid) · [cppreference — dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) · [cppreference — Friend](https://en.cppreference.com/w/cpp/language/friend)
 ---
 
@@ -36,6 +36,7 @@ struct Point {
 
 Point p{3, 4}; // 列表初始化
 ```
+
 C++ 提供多种初始化语法（`()`、`{}`、`=`、默认初始化、值初始化），并允许：
 
 - 多个构造函数重载
@@ -60,6 +61,7 @@ impl Point {
 let p = Point::new(3, 4);
 let q = Point { x: 1, ..p }; // 结构体更新语法
 ```
+
 - 字段默认不可外部访问，除非标记为 `pub`。
 - 创建对象使用结构体字面量或关联函数（通常是 `new`）。
 - 不存在隐式转换，因此不需要 `explicit`。
@@ -119,6 +121,7 @@ public:
     friend class Auditor; // Auditor 可访问私有成员
 };
 ```
+
 `friend` 破坏了类的封装边界，允许指定类或函数访问私有成员。
 
 ### 5.2 Rust 模块可见性
@@ -135,6 +138,7 @@ mod wallet {
     }
 }
 ```
+
 - `pub`：完全公开
 - `pub(crate)`：crate 内可见
 - `pub(super)`：父模块可见

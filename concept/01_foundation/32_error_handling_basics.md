@@ -110,6 +110,7 @@ Result<T, E>:
   ├── ? 传播错误
   └── unwrap 快速原型
 ```
+
 ```rust
 fn divide(a: f64, b: f64) -> Result<f64, String> {
     if b == 0.0 {
@@ -126,6 +127,7 @@ fn main() {
     }
 }
 ```
+
 > **认知功能**: **Result 将错误从"隐藏的副作用"转变为"显式的类型"**——编译器强制处理所有错误路径。
 > [来源: [TRPL Ch. 9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
 
@@ -168,6 +170,7 @@ Option<T>:
   opt.ok_or("not found")        // None → Err
   opt.ok_or_else(|| make_err()) // 惰性版本
 ```
+
 ```rust
 fn maybe_sqrt(x: f64) -> Option<f64> {
     if x >= 0.0 {
@@ -184,6 +187,7 @@ fn main() {
     println!("{}", value);
 }
 ```
+
 > **Option 洞察**: **Option 消除了 null 指针问题**——编译器确保你处理"值不存在"的情况。
 > [来源: [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html)]
 
@@ -228,6 +232,7 @@ fn main() {
   ? 自动调用 From::from 转换错误类型
   └── 需要实现 From<E> for 目标错误类型
 ```
+
 ```rust
 fn parse_add_one(s: &str) -> Result<i32, std::num::ParseIntError> {
     let n: i32 = s.parse()?;
@@ -241,6 +246,7 @@ fn main() {
     }
 }
 ```
+
 > **? 洞察**: **? 运算符是 Rust 错误处理的"语法糖"**——保持显式性的同时减少样板代码。
 > [来源: [Rust Reference — Question Mark](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)]
 
@@ -291,6 +297,7 @@ From trait:
       Ok(())
   }
 ```
+
 > **From 洞察**: **From trait 实现了错误的"自动上转"**——具体错误隐式转为通用错误类型。
 > [来源: [std::convert::From](https://doc.rust-lang.org/std/convert/trait.From.html)]
 
@@ -338,6 +345,7 @@ Result/Option 组合:
   ├── or_else(f): 错误恢复
   └── map_err(f): 转换错误
 ```
+
 > **组合洞察**: **map 和 and_then 是函数式错误处理的核心**——声明式组合避免嵌套 match。
 > [来源: [Rust By Example — Result](https://doc.rust-lang.org/rust-by-example/error/result.html)]
 
@@ -375,6 +383,7 @@ Result/Option 组合:
       .map(|s| s.parse())
       .collect::<Result<_, _>>()?; // 任一错误即返回
 ```
+
 > **模式洞察**: **组合模式让错误处理成为数据流的一部分**——而非控制流的例外。
 > [来源: [Rust API Guidelines — Error Handling](https://rust-lang.github.io/api-guidelines//dependability.html)]
 
@@ -418,6 +427,7 @@ panic!:
   │ 使用场景        │ 预期错误        │ 程序 bug        │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **panic 洞察**: **panic 是"程序有 bug"的信号**——不应被用于预期错误场景。
 > [来源: [TRPL — Panic](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)]
 
@@ -455,6 +465,7 @@ unwrap / expect:
   ├── 使用 Result 返回错误给调用者
   └── unwrap_or / unwrap_or_default 更安全
 ```
+
 > **unwrap 洞察**: **unwrap 是"我知道这不会失败"的断言**——如果错了，程序 panic 告诉你。
 > [来源: [Rust API Guidelines — unwrap](https://rust-lang.github.io/api-guidelines//documentation.html#function-docs-include-error-panic-and-safety-considerations-c-failure)]
 
@@ -478,6 +489,7 @@ graph TD
     style RESULT fill:#c8e6c9
     style PANIC fill:#c8e6c9
 ```
+
 > **认知功能**: **可恢复错误用 Result，程序 bug 用 panic**——区分是关键设计决策。
 
 ---
@@ -510,6 +522,7 @@ graph TD
 ├── panic 跨越 FFI 边界是 UB
 └── 缓解: 使用 Result 包装 FFI 调用
 ```
+
 > **边界要点**: 错误处理的边界与**类型设计**、**? 限制**、**性能**、**并发**和**FFI**相关。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
@@ -564,6 +577,7 @@ graph TD
   ✅ 使用 flatten 或提前处理
      let x = function_returning_result().flatten()?;
 ```
+
 > **陷阱总结**: 错误处理的陷阱主要与**unwrap**、**忽略错误**、**类型匹配**、**闭包（Closures）**和**嵌套**相关。
 > [来源: [Rust By Example — Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)]
 
@@ -633,6 +647,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**: `unwrap()` 是"快速失败"策略，仅在确定值为 `Ok` 时使用。生产代码应使用 `match`、`if let` 或 `?` 运算符传播错误。`unwrap()` 在测试代码和原型开发中常见，但不应出现在健壮的生产代码中。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
 
 ### 12.2 边界测试：`?` 在返回 `()` 的函数中使用（编译错误）
@@ -656,6 +671,7 @@ fn main_fixed() -> Result<(), String> {
     Ok(())
 }
 ```
+
 > **修正**:
 > `?` 运算符只能在返回 `Result`、`Option` 或实现 `Try` trait 的类型的函数中使用。
 > 它会将错误值自动转换为函数返回类型（通过 `From` trait）。
@@ -675,6 +691,7 @@ fn main() {
     // Result 的 `?` 返回 Err，但外层是 Option，类型不匹配
 }
 ```
+
 > **修正**:
 > `?` 运算符在 `Result` 上下文中传播 `Err`，在 `Option` 上下文中传播 `None`，二者不能自动转换。
 > `Result<T, E>` → `Option<T>` 丢失错误信息，`Option<T>` → `Result<T, E>` 需要构造错误值。
@@ -701,6 +718,7 @@ fn main() {
     });
 }
 ```
+
 > **修正**:
 >
 > `catch_unwind` 捕获 panic 并恢复执行，但要求闭包（Closures）实现 `UnwindSafe`——保证 panic 不会破坏共享状态。
@@ -724,6 +742,7 @@ fn main() {
     println!("{}", val);
 }
 ```
+
 > **修正**:
 >
 > `Result::unwrap_unchecked` 和 `Option::unwrap_unchecked` 是 `unsafe` 方法：调用者必须保证值是 `Ok`/`Some`，否则是 UB。
@@ -748,6 +767,7 @@ fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
 
 fn main() {}
 ```
+
 > **修正**:
 > **生命周期（Lifetimes）标注**：
 >
@@ -814,6 +834,7 @@ fn read_file(path: &str) -> Result<String, std::io::Error> {
     Ok(content)
 }
 ```
+
 - A. 能，`?` 自动将 `std::io::Error` 转换为返回类型中的错误
 - B. 不能，`?` 只能用于返回 `Option` 的函数
 - C. 不能，`read_to_string` 返回的是 `Result`，但类型不匹配
@@ -844,6 +865,7 @@ fn main() {
     }
 }
 ```
+
 - A. `number: 42`
 - B. `error: ...`
 - C. 编译错误
@@ -871,6 +893,7 @@ let port = config.get("PORT").unwrap();
 // 选项 B
 let port = config.get("PORT").expect("PORT must be set in config");
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -900,6 +923,7 @@ fn may_fail() -> Result<i32, String> {
     Ok(y)
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -912,6 +936,7 @@ fn may_fail() -> Result<i32, String> {
 ```rust,ignore
 let y = x.map_err(|e| e.to_string())?;
 ```
+
 修复方案 2（使用统一的错误类型，如 `anyhow::Error`）：
 
 ```rust
@@ -920,6 +945,7 @@ fn may_fail() -> Result<i32, anyhow::Error> {
     Ok(y)
 }
 ```
+
 </details>
 
 ---

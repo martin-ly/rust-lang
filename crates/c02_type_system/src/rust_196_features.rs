@@ -1,103 +1,26 @@
-//! # Rust 1.96 特性跟踪模块（含历史特性复习）
-//! # Rust 1.96 feature module （feature ）
+//! # Rust 1.96 特性跟踪模块
+//! # Rust 1.96 feature module
+//!
+//! 本模块只收录 Rust 1.96.0（2026-05-28 stable）引入的类型系统相关特性。
+//! 历史特性复习已按正确版本归属迁移到对应 crate（如 `rust_168_features`）。
+//!
+//! ## 包含的 Rust 1.96.0 新特性
 //! - `assert_matches!` / `debug_assert_matches!` — 模式匹配断言宏 ⭐
 //! - `expr` metavariable 传递给 `cfg` ⭐
-//! - Never typein tuple in强制conversion ⭐
-//!
-//! 以及历史特性复习（非 1.96 新增，但与本模块教学相关）：
-//!
-//! and feature （ 1.96 ，but and this module ）：
+//! - Never type 在 tuple 表达式中的强制转换（coercion）⭐
+//! - `core::range` 模块补齐 — `Range` / `RangeFrom` / `RangeToInclusive` ⭐
+//! - `NonZero` 范围迭代 ⭐
 //!
 //! # 版本信息
-//! # Version Information
-//! # this
 //! - 稳定日期: 2026-05-28
-//! - date : 2026-05-28
-//! - 稳定date: 2026-05-28
-//! - stabledate: 2026-05-28
-//! - date: 2026-05-28
+//! - Stable date: 2026-05-28
 //! # Rust 1.96.0 类型系统新特性
 //! # Rust 1.96.0 type system feature
 
 use std::assert_matches;
 
 // ============================================================================
-// 1. `impl From<bool> for {f32, f64}` — 布尔到浮点转换 (1.68.0 stable)
-// ============================================================================
-
-/// # 布尔到浮点转换 (`From<bool> for f32/f64`)
-/// # to point conversion (`From<bool> for f32/f64`)
-/// # 布尔to浮pointconversion (`From<bool> for f32/f64`)
-/// Allowswill `bool` 直接conversionas `0.0` (false) or `1.0` (true)。
-/// ## 类型系统意义
-/// ## type system
-/// - `bool` 已实现 `From<bool> for {integer}` (1.68.0 stable)
-/// - `bool` 已Implementation of `From<bool> for {integer}` (1.68.0 stable)
-/// - 1.96 补全了对浮点类型的对称转换
-/// - 1.96 to point type to conversion
-/// ## 应用场景
-/// ## application scenario
-/// - 机器学习特征向量构建 (0.0/1.0 特征)
-/// - machine learning (0.0/1.0 )
-/// - 概率计算中的指示函数
-/// - in function
-/// - 传感器数据处理 (布尔状态 → 浮点信号)
-/// - (state → point )
-pub struct BoolToFloatConversionExamples;
-
-impl BoolToFloatConversionExamples {
-    /// 将布尔数组转换为 f64 特征向量
-    /// will conversion as f64
-    pub fn bool_vector_to_features(flags: &[bool]) -> Vec<f64> {
-        flags.iter().map(|&b| f64::from(b)).collect()
-    }
-
-    /// 条件概率指示函数: P(A) ≈ mean(indicator_A)
-    /// condition function : P(A) ≈ mean(indicator_A)
-    pub fn indicator(probability: f64, condition: bool) -> f64 {
-        if condition {
-            probability
-        } else {
-            f64::from(false)
-        }
-    }
-
-    /// 传感器布尔状态转换为模拟信号强度
-    /// state conversion as
-    pub fn sensor_status_to_signal(active: bool, base_strength: f64) -> f64 {
-        f64::from(active) * base_strength
-    }
-}
-
-// ============================================================================
-// 2. `VecDeque::new` 的 const 上下文支持 (1.68.0 stable)
-// ============================================================================
-
-use std::collections::VecDeque;
-
-/// 允许在编译期初始化双端队列常量。
-/// in constant 。
-/// ## 类型系统意义
-/// ## type system
-/// 使得更多数据结构可以在编译期构造，减少运行时初始化开销。
-/// data structure can in ，runtime overhead 。
-/// ## 限制
-/// ## Limitations
-/// ##
-pub struct ConstVecDequeExamples;
-
-impl ConstVecDequeExamples {
-    pub const EMPTY_QUEUE: VecDeque<i32> = VecDeque::new();
-
-    pub fn build_static_config() -> VecDeque<&'static str> {
-        // 注意: 在 stable Rust 中，const VecDeque 只能初始化，
-        // 修改需要结合 LazyLock 或运行时初始化
-        VecDeque::new()
-    }
-}
-
-// ============================================================================
-// Never 类型 (`!`) 深度专题 (Rust 1.96+ stable, Edition 2024)
+// 1. Never 类型 (`!`) 深度专题 (Rust 1.96+ stable, Edition 2024)
 // ============================================================================
 
 // ✅ **状态**: `!` 类型的核心功能在 Rust 1.96+ stable / Edition 2024 中已可用：
@@ -369,7 +292,7 @@ pub fn get_never_type_info() -> String {
 }
 
 // ============================================================================
-// 4. `core::range` 模块补齐 — `Range` / `RangeFrom` / `RangeToInclusive` (1.96.0 stable)
+// 2. `core::range` 模块补齐 — `Range` / `RangeFrom` / `RangeToInclusive` (1.96.0 stable)
 // ============================================================================
 
 /// # `core::range` 模块（Rust 1.96.0 stable）
@@ -435,7 +358,7 @@ pub fn core_range_demo() {
 }
 
 // ============================================================================
-// 5. `NonZero` 范围迭代 (1.96 stable)
+// 3. `NonZero` 范围迭代 (1.96 stable)
 // ============================================================================
 
 /// ```
@@ -472,7 +395,7 @@ pub fn nonzero_range_demo() {
 }
 
 // ============================================================================
-// 6. `assert_matches!` / `debug_assert_matches!` (1.96.0 stable)
+// 4. `assert_matches!` / `debug_assert_matches!` (1.96.0 stable)
 // ============================================================================
 
 /// # 模式断言宏

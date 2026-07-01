@@ -112,7 +112,7 @@ Week 2: 并发与工程化（20h）
 |:---|:---|:---:|:---:|:---|
 | 阅读 | [concept/01_foundation/04_type_system.md](../01_foundation/04_type_system.md) | 1.5h | **必修** | 区分 `struct` / `enum` / `tuple` |
 | 阅读 | [concept/02_intermediate/01_traits.md](../02_intermediate/01_traits.md) | 1.5h | **必修** | 能为自己定义的 `struct` 实现 `Debug` 和 `Display` |
-| 阅读 | [concept/01_foundation/05_error_handling.md](../01_foundation/10_error_handling_basics.md) | 1h | **必修** | 掌握 `Result` / `Option` / `?` 运算符 |
+| 阅读 | [concept/01_foundation/05_error_handling.md](../01_foundation/32_error_handling_basics.md) | 1h | **必修** | 掌握 `Result` / `Option` / `?` 运算符 |
 | 练习 | 重构猜数字游戏：添加输入验证、优雅错误处理 | 1.5h | **必修** | 输入非数字时不 panic |
 | 阅读 | [concept/02_intermediate/02_generics.md](../02_intermediate/02_generics.md) | 0.5h | **必修** | 理解泛型函数的基本写法 |
 

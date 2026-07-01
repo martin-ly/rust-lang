@@ -110,6 +110,7 @@ Future 的本质:
   ├── 与同步代码相同的性能
   └── 只需执行器提供调度
 ```
+
 > **认知功能**: **Future 是"可暂停的函数"**——编译器将 async/await 转换为状态机，使代码看起来像同步但执行是异步的。
 > [来源: [Async Rust Book — Future](https://rust-lang.github.io/async-book//02_execution/02_future.html)]
 
@@ -155,6 +156,7 @@ fn poll_future(future: Pin<&mut dyn Future<Output = ()>>) {
 // Box::pin: 将 Future Pin 到堆上
 let future = Box::pin(async { /* ... */ });
 ```
+
 > **Pin 洞察**: **Pin 是 Rust async 的基石**——它解决了状态机自引用（Reference）问题，使编译器生成的状态机可以安全地跨越 await 点。
 > [来源: [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
 
@@ -193,6 +195,7 @@ Waker: 异步通知机制
   5. IO 就绪 → Waker 唤醒 → 重新调度
   6. Future 完成 → 输出结果
 ```
+
 > **Waker 洞察**: **Waker 是"按需唤醒"的优化**——没有它，执行器需要不断轮询所有任务（忙等待）。
 > [来源: [tokio.rs — Runtime](https://tokio.rs/tokio/tutorial)]
 
@@ -268,6 +271,7 @@ async fn process_stream() {
     }
 }
 ```
+
 > **并发洞察**: **tokio::join! 和 tokio::select! 是异步并发的核心原语**——它们对应同步并发中的 join 和 select 系统调用。
 > [来源: [tokio::select!](https://docs.rs/tokio/latest/tokio/macro.select.html)]
 
@@ -299,6 +303,7 @@ async fn fixed() {
     }
 }
 ```
+
 > **修正**:
 > `Stream` 和 `Future` 是 Rust 异步生态中的两个核心 trait。
 > `Future` 代表**单次**异步计算，`Stream` 代表**多次**异步值序列。
@@ -336,6 +341,7 @@ async fn fixed() {
     }
 }
 ```
+
 > **修正**:
 > 取消安全（cancellation safety）指 async 操作在 future 被取消后仍保持正确状态。
 > `tokio::sync::mpsc::Receiver::recv` 是取消安全的——若 future 在 `await` 时被丢弃，消息保留在 channel 中。
@@ -396,6 +402,7 @@ async fn auto_cancel() {
     scopeguard::ScopeGuard::into_inner(guard);
 }
 ```
+
 > **取消洞察**: **Rust 的取消通过 Drop 传播**——当 Future 被 drop，所有已获取的资源自动清理，无需显式取消回调。
 > [来源: [Async Cancellation](https://rust-lang.github.io/async-book/)]
 
@@ -461,6 +468,7 @@ async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
     }
 }
 ```
+
 > **背压洞察**: **有界通道是异步背压的核心机制**——它使系统在生产者和消费者之间自动平衡负载。
 > [来源: [tokio::sync::mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)]
 
@@ -501,6 +509,7 @@ async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
   → 异步迭代
   → stream.next().await
 ```
+
 > **模式矩阵**: Rust 异步的**核心模式可以归纳为 6 类**——覆盖从简单并发到复杂流处理的大部分场景。
 > [来源: [Async Patterns](https://rust-lang.github.io/async-book/)]
 
@@ -524,6 +533,7 @@ graph TD
     style ASYNC2 fill:#c8e6c9
     style SYNC fill:#c8e6c9
 ```
+
 > **认知功能**: **async 适合 IO 密集型，CPU 密集型需要 spawn_blocking 或 rayon**——混合使用是关键。
 > [来源: [Async Rust Book — CPU Bound](https://rust-lang.github.io/async-book/)]
 
@@ -563,6 +573,7 @@ graph TD
 ├── 库选择受运行时约束
 └── 缓解: Tokio 是事实标准
 ```
+
 > **边界要点**: 异步的边界主要与**递归**、**调用栈**、**取消安全**、**调试**和**生态**相关。
 > [来源: [Async Rust Book — Workarounds](https://rust-lang.github.io/async-book/)]
 
@@ -614,6 +625,7 @@ graph TD
   ✅ let (tx, rx) = mpsc::channel(100);
      // 有界通道提供背压
 ```
+
 > **陷阱总结**: 异步陷阱主要与**阻塞**、**await 遗漏**、**取消安全**、**Send 约束**和**背压**相关。
 > [来源: [Common Async Mistakes](https://rust-lang.github.io/async-book/)]
 
@@ -694,6 +706,7 @@ async fn receiver() {
     }
 }
 ```
+
 > **修正**: 取消安全性（cancellation safety）指 future 在被 `select!` 或 `AbortHandle` 取消后，不处于部分完成的不一致状态。`tokio::sync::mpsc::Receiver::recv` 是取消安全的——若被取消，消息仍在通道中，下次 `recv` 可获取。但许多操作不是取消安全的：1) `tokio::io::AsyncReadExt::read`（部分读取后取消，已读数据丢失）；2) 自定义 future 在 `poll` 中修改状态后返回 `Pending`。安全模式：使用 `tokio::select!` 的 `biased` 模式控制优先级，或将非取消安全操作包装为原子事务。这与 Go 的 `select`（goroutine 不会取消，只是阻塞）或 JavaScript 的 `Promise.race`（Promise 不可取消，只是忽略结果）不同——Rust 的 `select!` 实际取消未完成的分支，要求开发者考虑取消语义。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 
 ### 10.4 边界测试：`tokio::spawn` 的 `Send` 约束与 `Rc`（编译错误）
@@ -711,6 +724,7 @@ async fn work() {
     handle.await.unwrap();
 }
 ```
+
 > **修正**: `tokio::spawn` 将 future 发送到线程池执行，要求 future 是 `Send + 'static`。`Rc<T>` 不是 `Send`（引用（Reference）计数非原子），因此不能出现在 spawn 的闭包（Closures）中。解决方案：1) 使用 `Arc<T>`（原子引用计数，`Send + Sync`）；2) 在单线程执行器（`tokio::runtime::Builder::new_current_thread()`）中使用 `task::spawn_local`（不要求 `Send`）；3) 使用 `tokio::sync::Mutex` 而非 `std::sync::Mutex`（异步友好的锁）。这与 Go 的 goroutine（任何变量都可共享，通过 channel 同步）或 JavaScript 的 Worker（通过 `postMessage` 传递结构化克隆数据）不同——Rust 在编译期阻止非线程安全数据跨线程，即使通过异步抽象。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)]
 
 ### 10.5 边界测试：`Stream` 的 `fuse` 与 `select_next_some` 的交互（运行时 panic）
@@ -728,6 +742,7 @@ async fn demo() {
     }
 }
 ```
+
 > **修正**: `StreamExt::select_next_some` 是 `future` crate 的便利方法：在 `Some(x)` 时返回 `x`，在 `None` 时 panic（设计为与 `select!` 配合使用）。`fuse()` 在底层流返回 `None` 后使后续 `poll` 始终返回 `None`。`select_next_some` 遇到 `None` panic，因此应与 `Fuse` 流配合时谨慎——`fuse` 不消除 `None`，只是重复它。正确使用：1) `while let Some(x) = stream.next().await`（标准循环）；2) `select!` 中配合 `Fuse` 和 `complete` 分支；3) 避免 `select_next_some` 在可能独立使用的地方。这与 `Option::unwrap`（同样 panic on None）或 `Iterator::next().unwrap()`（同样风险）类似——`select_next_some` 是"我确定还有元素"的断言。[来源: [futures Crate](https://docs.rs/futures/)] · [来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.3 边界测试：`Stream` 的背压与缓冲区溢出（运行时内存增长）
@@ -746,6 +761,7 @@ async fn process() {
 
 fn main() {}
 ```
+
 > **修正**: `Stream::buffer_unordered(n)` 允许最多 `n` 个 future 同时执行，但**不限制总输入速率**。若生产者（`stream::iter`）速度快于消费者（`for_each`），中间结果在缓冲区累积，内存无限增长。**背压**（backpressure）解决：1) 使用有界 channel（`tokio::sync::mpsc::channel(cap)`）限制未处理项数；2) `Stream::ready_chunks(n)` 批量处理；3) 自定义 `Stream` 实现，在 `poll_next` 中返回 `Pending` 直到资源可用。Tokio 的 `Stream` 生态：`tokio_stream::wrappers` 将各种类型转为 Stream，`tokio::time::interval` 生成定时 Stream。这与 Reactive Streams（Java 的 `Flow` API，显式背压协议）或 Node.js 的 stream（自动背压 via `pause`/`resume`）不同——Rust 的 Stream 背压需显式设计。[来源: [futures-rs Documentation](https://docs.rs/futures/)] · [来源: [Tokio Streams](https://docs.rs/tokio-stream/)]
 
 ### 10.4 边界测试：async fn 在 trait 中的生命周期推断与实现约束（编译错误）
@@ -767,6 +783,7 @@ impl AsyncTrait for MyStruct {
 
 fn main() {}
 ```
+
 > **修正**:
 > **`async fn` in trait**（稳定于 1.75）：
 >
@@ -888,6 +905,7 @@ async fn example() {
     // 只有一个分支会被执行，先完成的那个
 }
 ```
+
 **与 `join!` 的区别**：
 
 | 宏（Macro） | 行为 | 使用场景 |
@@ -921,6 +939,7 @@ async fn consumer(mut rx: mpsc::Receiver<i32>) {
     }
 }
 ```
+
 - A. 代码正确，tokio channel 会自动处理流量控制
 - B. 生产者远快于消费者，应使用**有界 channel**实现 backpressure
 - C. 应使用 `unbounded_channel` 替代 `channel` 避免阻塞
@@ -939,6 +958,7 @@ async fn consumer(mut rx: mpsc::Receiver<i32>) {
 // 当前代码：tx.send(i).await 在 channel 满时会阻塞
 // 但如果 channel 容量是 100_000，内存中可能堆积 100_000 条消息
 ```
+
 **修复方案 — Backpressure**：
 
 ```rust,ignore
@@ -948,6 +968,7 @@ let (tx, rx) = mpsc::channel::<i32>(100);  // 仅缓冲100条
 // 当 channel 满时，tx.send().await 会阻塞生产者
 // 生产者自然减速，与消费者同步 — 这就是 backpressure
 ```
+
 **Backpressure 模式的核心**：
 
 | 组件 | 无 Backpressure | 有 Backpressure |
@@ -994,6 +1015,7 @@ impl Actor {
     }
 }
 ```
+
 - A. 任何线程都可以直接调用 `actor.handle(cmd)`
 - B. 只有 Actor 自己的 `run` 循环调用 `handle`，保证单线程串行执行
 - C. Tokio 运行时自动调度 `handle` 到可用线程
@@ -1022,6 +1044,7 @@ let (resp_tx, resp_rx) = tokio::sync::oneshot::channel();
 tx.send(Command::GetCount(resp_tx)).await?;
 let count = resp_rx.await?;
 ```
+
 **为什么不用 `Mutex<Actor>`**：
 
 | 方案 | 优点 | 缺点 |
@@ -1058,6 +1081,7 @@ async fn write_with_timeout(file: &mut File, data: &[u8]) -> std::io::Result<()>
     }
 }
 ```
+
 - A. 没有问题，`write_all` 是取消安全的
 - B. 超时发生时，`write_all` 可能只写了一部分数据，导致文件处于不一致状态
 - C. 应使用 `file.write(data).await?` 替代 `write_all`
@@ -1079,6 +1103,7 @@ async fn write_with_timeout(file: &mut File, data: &[u8]) -> std::io::Result<()>
 // 3. select! 取消 write_all，返回 Timeout 错误
 // 4. 文件现在包含 512 字节的半写数据 — 数据损坏！
 ```
+
 **修复方案**：
 
 ```rust
@@ -1094,6 +1119,7 @@ async fn write_with_timeout(file: &mut File, data: &[u8]) -> std::io::Result<()>
     }
 }
 ```
+
 **`timeout` vs `select!` 的本质区别**：
 
 | 方式 | 取消行为 | 安全性 |

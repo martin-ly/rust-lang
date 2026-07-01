@@ -28,7 +28,7 @@
 
 ## 📑 目录
 
-- [Rust for Linux ：操作系统内核中的内存安全（Memory Safety）](19_rust_for_linux.md)
+- [Rust for Linux ：操作系统内核中的内存安全（Memory Safety）](43_rust_for_linux.md)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 为什么内核需要 Rust](#11-为什么内核需要-rust)

@@ -143,5 +143,5 @@ B
 
 - [BorrowSanitizer](34_borrow_sanitizer_in_formal.md)
 - [Unsafe Rust](../03_advanced/03_unsafe.md)
-- [形式化验证工具生态](../06_ecosystem/47_formal_verification_tools.md)
+- [形式化验证工具生态](../06_ecosystem/74_formal_verification_tools.md)
 - [Rust 1.98+ 预览](../07_future/rust_1_98_preview.md)

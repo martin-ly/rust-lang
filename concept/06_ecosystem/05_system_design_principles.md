@@ -465,7 +465,7 @@ graph TD
 - [L3 异步](../03_advanced/02_async.md) —— async/await 与 Tower 组合
 - [L4 RustBelt](../04_formal/04_rustbelt.md) —— Iris 逻辑与安全证明
 - [L5 Rust vs Go](../05_comparative/02_rust_vs_go.md) —— 并发模型哲学对比
-- [L6 惯用法谱系](03_idioms_spectrum.md) —— 架构级惯用法
+- [L6 惯用法谱系](34_idioms_spectrum.md) —— 架构级惯用法
 - [L6 设计模式](02_patterns.md) —— Error Kernel / 洋葱中间件
 - [L0 可判定性谱系](../00_meta/decidability_spectrum.md) —— 系统设计的判定性边界
 - [L0 表达力多视角](../00_meta/expressiveness_multiview.md) —— 安全语义视角

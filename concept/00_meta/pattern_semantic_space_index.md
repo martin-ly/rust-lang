@@ -8,7 +8,7 @@
 > **A/S/P 标记**: S+A — Structure + Application
 > **双维定位**: C×Ana / C×Eva
 > **前置概念**: [Patterns](../06_ecosystem/02_patterns.md) · [Type System](../01_foundation/04_type_system.md)
-> **后置概念**: [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) · [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)
+> **后置概念**: [Pattern Composition Algebra](../06_ecosystem/73_pattern_composition_algebra.md) · [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)
 > **主要来源**: [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) · [POSA](https://en.wikipedia.org/wiki/Pattern-Oriented_Software_Architecture) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 ---
 
@@ -47,7 +47,7 @@
 | **L1-L2 基础** | [Patterns](../06_ecosystem/02_patterns.md) | 单个模式的动机、结构、Rust 实现 |
 | **L3 进阶** | [Concurrency Patterns](../03_advanced/10_concurrency_patterns.md) · [Type Erasure](../03_advanced/17_type_erasure.md) | 模式与所有权、生命周期、类型系统的交互 |
 | **L4-L5 架构** | [Architecture Patterns](../06_ecosystem/35_architecture_patterns.md) · [Microservice Patterns](../06_ecosystem/31_microservice_patterns.md) | 模式在系统架构中的组合与权衡 |
-| **L6 生态系统** | [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) | 模式之间的代数关系、冲突检测、组合选择 |
+| **L6 生态系统** | [Pattern Composition Algebra](../06_ecosystem/73_pattern_composition_algebra.md) | 模式之间的代数关系、冲突检测、组合选择 |
 
 ### 2.3 认知目标维度
 
@@ -55,7 +55,7 @@
 |:---|:---|:---|
 | **理解（Understand）** | [Patterns](../06_ecosystem/02_patterns.md) | 解释 Strategy 与 Template Method 的区别 |
 | **分析（Analyze）** | [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md) | 分析为什么某个算法适合用 Strategy 表达 |
-| **评价（Evaluate）** | [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) | 判断 Observer + Factory + Typestate 是否适合当前问题 |
+| **评价（Evaluate）** | [Pattern Composition Algebra](../06_ecosystem/73_pattern_composition_algebra.md) | 判断 Observer + Factory + Typestate 是否适合当前问题 |
 | **创造（Create）** | [System Composability](../06_ecosystem/30_system_composability.md) | 设计一个新的模式组合以解决领域问题 |
 
 ---
@@ -89,7 +89,7 @@ Pattern Composition Algebra (L6)
 
 ## 四、组合代数主文件说明
 
-[Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) 是模式语义空间的核心枢纽文件，它定义了：
+[Pattern Composition Algebra](../06_ecosystem/73_pattern_composition_algebra.md) 是模式语义空间的核心枢纽文件，它定义了：
 
 - **四种组合原语**：`⊗`（并行）、`∘`（串行）、`⊕`（选择）、`→`（精炼）
 - **模式冲突矩阵**：哪些模式在结构上互斥或需要小心组合
@@ -125,7 +125,7 @@ Pattern Composition Algebra (L6)
 - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 - [GoF — Design Patterns: Elements of Reusable Object-Oriented Software]
 - [POSA — Pattern-Oriented Software Architecture]
-- [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md)
+- [Pattern Composition Algebra](../06_ecosystem/73_pattern_composition_algebra.md)
 - [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)
 
 ---

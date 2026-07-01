@@ -9,7 +9,7 @@
 > **Summary**: Error Handling. Guide to 04 Error Handling.
 > **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[错误处理（Error Handling）](../01_foundation/10_error_handling_basics.md)
+> 本主题在 knowledge 中有系统化的知识索引：[错误处理（Error Handling）](../01_foundation/32_error_handling_basics.md)
 > **受众**: [进阶]
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: **A+S** — Application + Structure

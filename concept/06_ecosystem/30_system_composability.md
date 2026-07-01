@@ -567,7 +567,7 @@ async fn good() {
 
 - [L3: Async](../03_advanced/02_async.md) —— 异步数据流管道的根基
 - [L3: Iterator](../02_intermediate/15_iterator_patterns.md) —— 同步管道-过滤器的核心机制
-- [L6: Tower 形式化生态塔](05_formal_ecosystem_tower.md) —— Tower 在形式化分层中的位置
+- [L6: Tower 形式化生态塔](44_formal_ecosystem_tower.md) —— Tower 在形式化分层中的位置
 - [L4: Type Theory](../04_formal/02_type_theory.md) —— 幺半群与范畴论的数学基础
 - [L6: Core Crates](03_core_crates.md) —— 可组合生态的 crate 谱系
 

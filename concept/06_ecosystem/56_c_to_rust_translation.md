@@ -17,7 +17,7 @@
 > **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) ·
 > [Unsafe Rust](../03_advanced/03_unsafe.md) ·
 > [FFI](../03_advanced/09_ffi_advanced.md)
-> **后置概念**: [Formal Verification Tools](47_formal_verification_tools.md) ·
+> **后置概念**: [Formal Verification Tools](74_formal_verification_tools.md) ·
 > [Compiler Internals](45_compiler_internals.md)
 > **Bloom 层级**: 分析 → 评价
 >
@@ -106,6 +106,7 @@
 ```text
 Verified Lifting = 形式化方法 + 程序分析 + 大语言模型（LLM）
 ```
+
 | 组件 | 功能 | 创新点 |
 |:---|:---|:---|
 | **组合式提升** | 将 C 函数逐函数翻译为 Rust | 模块化验证，避免全局分析爆炸 |
@@ -137,6 +138,7 @@ Scylla 不支持的 C 模式:
   ❌ 复杂别名（如链表、图结构）
   ❌ union 和位域
 ```
+
 > **关键洞察**: Scylla 证明了"在受限子集上，C→safe Rust 是可行的"。它的价值不在于处理所有 C 代码，而在于定义了**"可安全翻译的 C 子集"**的边界——这是 TRACTOR 等工业项目的重要参考。[来源: [OOPSLA 2026 — Fromherz & Protzenko, "Scylla: Translating an Applicative Subset of C to Safe Rust"](https://arxiv.org/abs/2412.15042)]
 
 ### 3.2 &inator（PLDI 2026）
@@ -154,6 +156,7 @@ Scylla 不支持的 C 模式:
 ```text
 C AST → 指针关系图 → SMT 约束（Z3）→ 最优 Rust 类型分配 → 接口重写
 ```
+
 > **关键洞察**: &inator 的核心贡献是证明了"接口翻译"比"全程序翻译"更容易验证——因为接口的行为由类型签名决定，而类型签名可以被形式化地比较（C 的函数类型 vs Rust 的函数类型）。这为"渐进式迁移"提供了理论基础：先翻译接口（安全边界），再逐步重写实现。[来源: [PLDI 2026 — Chen et al., "Correct, Precise C-to-Rust Interface Translation"](https://arxiv.org/abs/2604.17261)]
 
 ### 3.3 His2Trans（2026）
@@ -336,6 +339,7 @@ fn main() {
         .expect("Couldn't write bindings!");
 }
 ```
+
 ```rust
 // src/lib.rs — 使用生成的绑定
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
@@ -346,6 +350,7 @@ pub fn call_c_function() {
     }
 }
 ```
+
 > **Cargo.toml 依赖**: `bindgen = "0.71"`
 
 ---

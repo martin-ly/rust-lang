@@ -10,7 +10,7 @@
 > **双维定位**: C×Ana — 分析跨平台内联汇编（Inline Assembly）的语义差异与安全边界
 > **定位**: 深入分析 Rust `asm!` 宏（Macro）的语法、约束系统、寄存器管理，以及 x86_64、aarch64、RISC-V、s390x 四大平台的差异，重点覆盖 Rust 1.96 为 s390x 引入的向量寄存器支持。
 > **前置概念**: [Unsafe Rust](03_unsafe.md) · [FFI](05_rust_ffi.md) · [Platform Support](../06_ecosystem/17_cross_compilation.md) · [Unsafe Rust 模式](../03_advanced/12_unsafe_rust_patterns.md) · [Generics](../02_intermediate/02_generics.md)
-> **后置概念**: [Rust for Linux](../07_future/19_rust_for_linux.md) · [Kernel Development](../07_future/19_rust_for_linux.md)
+> **后置概念**: [Rust for Linux](../07_future/43_rust_for_linux.md) · [Kernel Development](../07_future/43_rust_for_linux.md)
 
 ---
 
@@ -88,6 +88,7 @@ unsafe {
 }
 assert_eq!(x, 15);
 ```
+
 **模板语法**：
 
 - `{0}`、`{1}` ... 按位置引用（Reference）操作数
@@ -129,6 +130,7 @@ unsafe fn vector_add(a: &[i32; 4], b: &[i32; 4]) -> [i32; 4] {
     result
 }
 ```
+
 ### 1.4 Clobber 与 Options
 
 **Clobber**: 显式声明汇编代码修改了哪些未列出的寄存器：
@@ -142,6 +144,7 @@ unsafe {
     );
 }
 ```
+
 **Options**: 控制编译器对内联汇编的处理方式：
 
 | Option | 含义 |
@@ -173,6 +176,7 @@ unsafe fn read_tsc() -> u64 {
     ((high as u64) << 32) | (low as u64)
 }
 ```
+
 **特点**: AT&T 语法默认（`att_syntax`），Intel 语法可用（`intel_syntax`）；丰富的寄存器约束（`xmm_reg`、`ymm_reg`、`zmm_reg`）。
 
 ### 2.2 aarch64
@@ -189,6 +193,7 @@ unsafe fn get_cpu_id() -> u64 {
     mpidr
 }
 ```
+
 **特点**: 统一寄存器文件（31 个 64-bit 通用寄存器）；向量寄存器约束为 `vreg` / `vreg_low16`；系统寄存器访问通过 `mrs`/`msr`。
 
 ### 2.3 RISC-V
@@ -205,6 +210,7 @@ unsafe fn read_cycle() -> u64 {
     cycle
 }
 ```
+
 **特点**: 模块（Module）化 ISA 扩展；标准寄存器约束为 `reg`；浮点寄存器为 `freg`；向量扩展 (RVV) 的约束仍在 nightly 演进中。
 
 ### 2.4 s390x (IBM Z / LinuxONE)
@@ -221,6 +227,7 @@ unsafe fn read_tod_clock() -> u64 {
     tod
 }
 ```
+
 **特点**: 大端架构 (big-endian)；16 个 64-bit 通用寄存器 (GPR)；16 个 64-bit 浮点寄存器 (FPR)；**Rust 1.96+ 新增 32 个 128-bit 向量寄存器 (VR) 支持**。
 
 ---
@@ -263,6 +270,7 @@ unsafe fn vector_add_i32(a: &[i32; 4], b: &[i32; 4]) -> [i32; 4] {
     result
 }
 ```
+
 > **注意**: `vreg` 约束要求目标启用 `vector` target feature。在编译时需使用 `-C target-feature=+vector` 或确认目标 CPU 支持（z13+）。
 
 ### 3.3 代码示例
@@ -307,6 +315,7 @@ mod s390x_vector_demo {
     }
 }
 ```
+
 ### 3.4 与 x86_64 SIMD 的对比
 
 ```rust,ignore
@@ -328,6 +337,7 @@ unsafe fn sse2_xor(a: &[u32; 4], b: &[u32; 4]) -> [u32; 4] {
     result
 }
 ```
+
 **关键差异**：
 
 - s390x 使用内存加载/存储指令（`vl`/`vst`），x86_64 SSE 可直接操作内存
@@ -397,6 +407,7 @@ unsafe {
     );
 }
 ```
+
 ---
 
 ## 五、来源与延伸阅读
@@ -437,6 +448,7 @@ mod tests {
     }
 }
 ```
+
 ---
 
 ## 嵌入式测验
@@ -466,6 +478,7 @@ unsafe {
     );
 }
 ```
+
 **语法要求**：
 
 | 要求 | 说明 |
@@ -496,6 +509,7 @@ unsafe {
     let tsc = ((hi as u64) << 32) | (lo as u64);
 }
 ```
+
 > **注意**: 从 Rust 1.59 开始，`asm!` 是稳定功能（无需 nightly）。之前需要使用 `llvm_asm!`（已废弃）。
 </details>
 
@@ -515,6 +529,7 @@ unsafe {
     );
 }
 ```
+
 - A. `lateout` 表示输出值会在汇编代码**之后**才写入，允许编译器复用输入寄存器
 - B. `lateout` 和 `out` 没有区别，可以互换
 - C. `lateout` 表示寄存器在汇编代码**之前**被读取
@@ -553,6 +568,7 @@ unsafe {
 // asm!("add {x}, {y}", x = out(reg) _, y = in(reg) 2);
 // ❌ x 在汇编前未初始化，add 读取的是垃圾值！
 ```
+
 **寄存器复用优化**：
 
 ```rust,ignore
@@ -568,6 +584,7 @@ unsafe {
     );
 }
 ```
+
 > **选择指南**: 如果汇编代码**不会读取**输出寄存器的旧值 → 用 `out`。如果汇编代码**会读取**旧值 → 用 `inout` 或 `inlateout`。
 </details>
 
@@ -588,6 +605,7 @@ unsafe fn atomic_inc(ptr: *mut u64) -> u64 {
     result
 }
 ```
+
 - A. `"inc qword ptr [{0}]"` — 直接递增内存
 - B. `"lock inc qword ptr [{ptr}]"` — 加 `lock` 前缀的原子递增
 - C. `"xadd [{ptr}], {result}"` — 交换并相加
@@ -612,6 +630,7 @@ unsafe fn atomic_fetch_add(ptr: *mut u64, value: u64) -> u64 {
     old  // 返回旧值
 }
 ```
+
 **关键指令解析**：
 
 | 指令 | 作用 | 原子性 |
@@ -630,6 +649,7 @@ unsafe fn atomic_fetch_add(ptr: *mut u64, value: u64) -> u64 {
 ; 有 lock：CPU 锁定内存总线，确保读-修改-写不可中断
 lock xadd qword ptr [rdi], rax
 ```
+
 **与 `AtomicUsize::fetch_add` 的对比**：
 
 ```rust,ignore
@@ -639,6 +659,7 @@ std::sync::atomic::AtomicUsize::fetch_add(1, Ordering::SeqCst);
 // 底层在 x86_64 上就是：
 // lock xadd [ptr], 1
 ```
+
 > **生产环境**: 永远优先使用 `std::sync::atomic`，不要手写汇编。内联汇编只在 `no_std` + 特殊指令（如 RDTSC、CPUID）时才需要。
 </details>
 
@@ -659,6 +680,7 @@ unsafe {
 }
 assert_eq!(x, 1);
 ```
+
 - A. 没有区别，`options(nomem)` 只是优化提示
 - B. 不加 `nomem`：编译器假设汇编可能访问内存，不会在汇编前后重排内存操作。加 `nomem`：编译器可能将 `x = 1` 重排到汇编之前！
 - C. 必须加 `nomem`，否则编译器会生成错误的代码
@@ -683,6 +705,7 @@ unsafe {
     );
 }
 ```
+
 **不加 `nomem` 时**：
 
 ```rust,ignore
@@ -692,6 +715,7 @@ unsafe {
     x = 1;  // 不会重排到 syscall 之前
 }
 ```
+
 **加 `nomem` 后的危险**：
 
 ```rust,ignore
@@ -711,6 +735,7 @@ unsafe {
 // asm!()      // FLAG = 1（但 DATA 可能还是 0！）
 // DATA = 42   // 被重排到汇编之后
 ```
+
 **正确的内存屏障使用**：
 
 ```rust,ignore
@@ -723,6 +748,7 @@ unsafe {
     FLAG = true;  // sfence 保证 DATA=42 在 FLAG=true 之前可见
 }
 ```
+
 | option | 含义 | 不加时的默认 |
 |:---|:---|:---|
 | `pure` | 无副作用 + 确定性 | 可能有副作用 |

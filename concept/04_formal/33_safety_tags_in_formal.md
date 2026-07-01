@@ -12,8 +12,8 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Eva
-> **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [形式化验证](05_verification_toolchain.md) · [Miri](../06_ecosystem/47_formal_verification_tools.md)
-> **后置延伸**: [BorrowSanitizer](34_borrow_sanitizer_in_formal.md) · [AutoVerus](24_autoverus.md) · [Rust for Linux 案例](../07_future/19_rust_for_linux.md)
+> **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [形式化验证](05_verification_toolchain.md) · [Miri](../06_ecosystem/74_formal_verification_tools.md)
+> **后置延伸**: [BorrowSanitizer](34_borrow_sanitizer_in_formal.md) · [AutoVerus](24_autoverus.md) · [Rust for Linux 案例](../07_future/43_rust_for_linux.md)
 >
 > **来源**: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [Safety Tags 研究仓库](https://github.com/safer-rust/safety-tags) · [safety-tool slides](https://os-checker.github.io/slides/safety-tags) · [Rust for Linux Safety Standard](https://rust-for-linux.com/)
 > **前置概念**: N/A
@@ -150,7 +150,7 @@ B
 ## 相关概念
 
 - [Unsafe Rust](../03_advanced/03_unsafe.md)
-- [形式化验证工具生态](../06_ecosystem/47_formal_verification_tools.md)
+- [形式化验证工具生态](../06_ecosystem/74_formal_verification_tools.md)
 - [BorrowSanitizer](34_borrow_sanitizer_in_formal.md)
 - [AutoVerus](24_autoverus.md)
 - [Rust 1.98+ 预览](../07_future/rust_1_98_preview.md)

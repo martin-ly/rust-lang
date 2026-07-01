@@ -393,7 +393,7 @@ Rust 性能分析工具链:
 - [Traits](../02_intermediate/01_traits.md) — Trait 系统与动态分发
 - [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) — 与 C++ 的性能对比
 - [Toolchain](../06_ecosystem/01_toolchain.md) — 编译工具链
-- [Cranelift Backend](../07_future/16_cranelift_backend_preview.md) — 快速编译后端
+- [Cranelift Backend](../07_future/38_cranelift_backend_preview.md) — 快速编译后端
 
 ---
 

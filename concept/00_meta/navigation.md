@@ -126,9 +126,9 @@
 | [01_toolchain](../06_ecosystem/01_toolchain.md) | Cargo、Clippy、Miri、交叉编译 | 9 |
 | [02_patterns](../06_ecosystem/02_patterns.md) | Typestate、Builder、RAII、Newtype | 5 |
 | [03_core_crates](../06_ecosystem/03_core_crates.md) | Tokio、Serde、SQLx、Axum 生态基石 | 6 |
-| [03_idioms_spectrum](../06_ecosystem/03_idioms_spectrum.md) | L0-L6 七层惯用法 + 反惯用法判定树 | 5 |
+| [03_idioms_spectrum](../06_ecosystem/34_idioms_spectrum.md) | L0-L6 七层惯用法 + 反惯用法判定树 | 5 |
 | [04_application_domains](../06_ecosystem/04_application_domains.md) | Web、系统、嵌入式、区块链应用场景 | 6 |
-| [05_formal_ecosystem_tower](../06_ecosystem/05_formal_ecosystem_tower.md) | 形式化分层塔：Tokio→Tower→Axum→Kani | 2 |
+| [05_formal_ecosystem_tower](../06_ecosystem/44_formal_ecosystem_tower.md) | 形式化分层塔：Tokio→Tower→Axum→Kani | 2 |
 | [05_system_design_principles](../06_ecosystem/05_system_design_principles.md) | 七项原则 + 国际权威对齐 | 6 |
 | [06_blockchain](../06_ecosystem/06_blockchain.md) | Solana/Polkadot、Move vs Rust、Kani 验证 | 3 |
 | [07_game_ecs](../06_ecosystem/07_game_ecs.md) | ECS 架构、Bevy、Archetype | 7 |

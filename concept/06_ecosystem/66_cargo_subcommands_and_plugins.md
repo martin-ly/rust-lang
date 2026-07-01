@@ -13,7 +13,7 @@
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“如何扩展 Cargo”讲清楚：从自定义子命令约定到常用插件选型，覆盖 Cargo 的工具集成接口。
 > **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-> **后置概念**: [Cargo Security CVEs](25_cargo_security_cves.md) · [DevOps and CI/CD](28_devops_and_ci_cd.md)
+> **后置概念**: [Cargo Security CVEs](72_cargo_security_cves.md) · [DevOps and CI/CD](28_devops_and_ci_cd.md)
 
 ---
 
@@ -67,6 +67,7 @@ Cargo 通过以下机制与第三方工具集成：
 cargo hello
 # 等价于执行 cargo-hello hello [args...]
 ```
+
 Cargo 调用时会传入：
 
 - 第一个参数：子命令可执行文件本身路径；
@@ -81,6 +82,7 @@ cargo install cargo-hello
 
 # 安装后通常位于 ~/.cargo/bin
 ```
+
 ### 别名
 
 在 `.cargo/config.toml` 中定义别名：
@@ -91,6 +93,7 @@ b = "build"
 t = "test"
 fmt-check = "fmt -- --check"
 ```
+
 ---
 
 ## 三、`cargo metadata` 与 JSON 消息
@@ -100,6 +103,7 @@ fmt-check = "fmt -- --check"
 ```bash
 cargo metadata --format-version 1 --no-deps
 ```
+
 输出包括：
 
 - package 名称、版本、路径；
@@ -115,6 +119,7 @@ Rust 生态中常用 `cargo_metadata` crate 解析该输出。
 ```bash
 cargo build --message-format=json
 ```
+
 JSON 消息类型：
 
 | `reason` | 说明 |
@@ -163,6 +168,7 @@ fn main() {
     // 使用 cargo metadata 获取信息...
 }
 ```
+
 ---
 
 ## 嵌入式测验

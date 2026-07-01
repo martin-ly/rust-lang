@@ -258,4 +258,32 @@ mod tests {
         assert!(info.contains("assert_matches!"));
         assert!(info.contains("core::range"));
     }
+
+    /// Rust 1.96: s390x 向量寄存器（`vreg`）内联汇编示例
+    /// 仅在 target_arch = "s390x" 且启用 vector feature 时编译与运行。
+    #[test]
+    #[cfg(all(target_arch = "s390x", target_feature = "vector"))]
+    fn test_s390x_vector_inline_asm() {
+        use std::arch::asm;
+
+        let a: [u32; 4] = [1, 2, 3, 4];
+        let b: [u32; 4] = [10, 20, 30, 40];
+        let mut result: [u32; 4] = [0; 4];
+
+        unsafe {
+            asm!(
+                "vl %v0, 0({a})\n\t"
+                "vl %v1, 0({b})\n\t"
+                "vx %v2, %v0, %v1\n\t"
+                "vst %v2, 0({res})",
+                a = in(reg) a.as_ptr(),
+                b = in(reg) b.as_ptr(),
+                res = in(reg) result.as_mut_ptr(),
+                out("v0") _, out("v1") _, out("v2") _,
+                options(nostack),
+            );
+        }
+
+        assert_eq!(result, [11, 22, 33, 44]);
+    }
 }

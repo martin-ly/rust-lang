@@ -203,7 +203,7 @@
 |:---|:---|:---|:---|:---|
 | **HRTB (Higher-Ranked Trait Bounds)** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L2 Trait、L4 类型论 | 评价 | ← 生命周期 + 泛型 ≡ ∀<'a> |
 | **HM Type Inference** | [L4: 类型论](../04_formal/02_type_theory.md) | L1 类型系统、L2 泛型 | 分析 | → 类型自动推导 |
-| **hax** | [L6: 形式化验证](../06_ecosystem/47_formal_verification_tools.md) | L4 形式化、L6 密码学 | 分析 | ← Rust → F*/Rocq 翻译 → 验证 |
+| **hax** | [L6: 形式化验证](../06_ecosystem/74_formal_verification_tools.md) | L4 形式化、L6 密码学 | 分析 | ← Rust → F*/Rocq 翻译 → 验证 |
 | **HIR (High-level IR)** | [L4: Name Resolution and HIR](../04_formal/35_name_resolution_and_hir.md) | L4 rustc、L4 Type System | 分析 | ← AST → Type Checking → MIR
 
 ### I
@@ -218,8 +218,8 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **Kani (Verifier)** | [L6: 形式化验证](../06_ecosystem/47_formal_verification_tools.md) | L7 形式化方法 | 应用 | ← 模型检测 → unsafe 验证 |
-| **Kani verify-std** | [L6: 形式化验证](../06_ecosystem/47_formal_verification_tools.md) | L6 Kani、L1 标准库 | 分析 | ← 标准库验证 → 生态可信度
+| **Kani (Verifier)** | [L6: 形式化验证](../06_ecosystem/74_formal_verification_tools.md) | L7 形式化方法 | 应用 | ← 模型检测 → unsafe 验证 |
+| **Kani verify-std** | [L6: 形式化验证](../06_ecosystem/74_formal_verification_tools.md) | L6 Kani、L1 标准库 | 分析 | ← 标准库验证 → 生态可信度
 
 ### L
 
@@ -611,7 +611,7 @@
 
 | 概念 | 文件 | Bloom | 层级 | 效率 |
 |:---|:---|:---:|:---|:---:|
-| 七层惯用法谱系 | `06_ecosystem/03_idioms_spectrum.md` | 应用→分析 | L0-L6 | 零成本 |
+| 七层惯用法谱系 | `06_ecosystem/34_idioms_spectrum.md` | 应用→分析 | L0-L6 | 零成本 |
 | Typestate 模式 | 同上 | 应用 | L1 类型级 | 零成本 |
 | Tower Service 组合 | 同上 | 分析 | L6 架构级 | 低开销 |
 | ECS Archetype | 同上 | 分析 | L6 架构级 | 零成本 |

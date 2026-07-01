@@ -15,7 +15,7 @@
 > **双维定位**: P×Cre — 设计类型安全的 REST/GraphQL/gRPC API
 > **前置依赖**: [Async/Await](../03_advanced/02_async.md) ·
 > [Trait](../02_intermediate/01_traits.md) ·
-> [错误处理（Error Handling）](../01_foundation/10_error_handling_basics.md) ·
+> [错误处理（Error Handling）](../01_foundation/32_error_handling_basics.md) ·
 > [架构设计模式](35_architecture_patterns.md)
 > **后置延伸**: [微服务架构模式](31_microservice_patterns.md) ·
 > [事件驱动架构](32_event_driven_architecture.md) ·
@@ -1202,7 +1202,7 @@ struct UserV2 {
 - [安全实践](19_security_practices.md) — 防御性编程、密码学
 - [Async/Await](../03_advanced/02_async.md) — 异步编程基础
 - [Trait](../02_intermediate/01_traits.md) — 接口设计、类型抽象
-- [错误处理](../01_foundation/10_error_handling_basics.md) — Result、? 运算符
+- [错误处理](../01_foundation/32_error_handling_basics.md) — Result、? 运算符
 - [云原生](24_cloud_native.md) — Kubernetes、容器化、可观测性
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
