@@ -459,7 +459,9 @@ Rust 的表征空间不是静态的。
 
 ### 3.5.1 Const Trait 与 Generic Const Items：编译期表达力的扩展
 
-> **[RFC 3762 · Const Trait](https://github.com/rust-lang/rfcs/pull/3762)** · **[rust#113521 · Generic Const Items]** Const Trait 允许 Trait 方法在 `const` 上下文中调用；Generic Const Items 允许常量接受泛型参数。两者共同扩展了 Rust 的**编译期计算表征空间**。✅
+> **[RFC 3762 · Const Trait](https://github.com/rust-lang/rfcs/pull/3762)** ·
+> **[rust#113521 · Generic Const Items]**
+> Const Trait 允许 Trait 方法在 `const` 上下文中调用；Generic Const Items 允许常量接受泛型参数。两者共同扩展了 Rust 的**编译期计算表征空间**。✅
 
 **当前限制与扩展**：
 

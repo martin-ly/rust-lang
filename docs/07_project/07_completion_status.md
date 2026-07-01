@@ -57,7 +57,7 @@
 | c08_algorithms | 15 | `algorithm_decision_trees`, `AlgorithmSkeletons` | 444 | ✅ | 🟢 |
 | c09_design_pattern | 5 | `rust_idioms`, `functional_patterns` | 189 | ✅ | 🟢 |
 | c10_networks | 8 | `zero_copy_networking` | 151 | ✅ | 🟢 |
-| c11_macro_system | 5 | `compile_time_metaprogramming` | 80 | ✅ | 🟢 |
+| c11_macro_system_proc | 5 | `compile_time_metaprogramming` | 80 | ✅ | 🟢 |
 | c12_wasm | 5 | `component_model`, `wasm_performance` | 153 | ✅ | 🟢 |
 | c13_embedded | 10 | `rtic_framework` | 54 | ✅ | 🟢 |
 | common | 4 | `arena`, `traits`, `types`, `utils` | 26 | ✅ | 🟢 |

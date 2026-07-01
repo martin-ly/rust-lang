@@ -93,7 +93,7 @@
 
 | 特性 | 概念文档 | Crate 代码 | 练习 | 测试 | 状态 |
 |:---|:---|:---:|:---:|:---:|:---:|
-| L1 `expr` → `cfg` | `concept/03_advanced/04_macros.md` | `c11_macro_system` | ❌ | ✅ | 🟢 完成 |
+| L1 `expr` → `cfg` | `concept/03_advanced/04_macros.md` | `c11_macro_system_proc` | ❌ | ✅ | 🟢 完成 |
 | L2 Never type coercion | `concept/01_foundation/05_never_type.md` | `c02_type_system` | ❌ | ✅ | 🟢 完成 |
 | L3 `ManuallyDrop` 模式 | `concept/02_intermediate/03_memory_management.md` | `c02_type_system` | ✅ | ✅ | 🟢 完成 |
 | L4 s390x inline asm | `docs/06_toolchain/06_19_rust_1_96_features.md` (提及) | ❌ | ❌ | — | 🟡 概念文档 |
@@ -216,7 +216,7 @@
 | `c08_algorithms` | `rust_196_features.rs` | RangeInclusive、RangeToInclusive |
 | `c09_design_pattern` | `rust_196_features.rs` | LazyLock From、assert_matches!、ManuallyDrop 模式 |
 | `c10_networks` | `rust_196_features.rs` | core::range、assert_matches!、LazyLock From |
-| `c11_macro_system` | `rust_196_features.rs` | expr → cfg、assert_matches!、core::range、ManuallyDrop |
+| `c11_macro_system_proc` | `rust_196_features.rs` | expr → cfg、assert_matches!、core::range、ManuallyDrop |
 | `c11_macro_system_proc` | `rust_196_features.rs` | assert_matches!、LazyLock From、Never type coercion |
 | `c12_wasm` | `rust_196_features.rs` | WASM --allow-undefined 移除、core::range、assert_matches!、LazyLock From |
 | `c13_embedded` | `rust_196_features.rs` | core::range (no_std)、ManuallyDrop (no_std)、assert_matches! (no_std) |

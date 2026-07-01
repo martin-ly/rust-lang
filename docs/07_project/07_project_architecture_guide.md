@@ -195,7 +195,7 @@ fn main() {
         "c08_algorithms",
         "c09_design_pattern",
         "c10_networks",
-        "c11_macro_system",
+        "c11_macro_system_proc",
         "c12_wasm",
     ];
 
@@ -209,6 +209,7 @@ fn main() {
     validator.report();
 }
 ```
+
 ### 模块依赖关系分析器 {#模块依赖关系分析器}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -356,6 +357,7 @@ fn main() {
     }
 }
 ```
+
 ### 测试覆盖率报告生成器 {#测试覆盖率报告生成器}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -456,6 +458,7 @@ fn main() {
     println!("{}", reporter.generate_report());
 }
 ```
+
 ---
 
 ## 形式化链接 {#形式化链接}
@@ -517,7 +520,7 @@ rust-lang/
 │   ├── c08_algorithms/
 │   ├── c09_design_pattern/
 │   ├── c10_networks/
-│   ├── c11_macro_system/
+│   ├── c11_macro_system_proc/
 │   └── c12_wasm/
 ├── docs/                # 项目文档
 │   ├── quick_reference/  # 快速参考卡片
@@ -526,6 +529,7 @@ rust-lang/
 ├── scripts/            # 工具脚本
 └── tests/              # 集成测试
 ```
+
 ---
 
 ## 📦 模块设计 {#模块设计}
@@ -599,6 +603,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
                                      │                  │                 │                  ├──> C11 (宏)
                                      │                  │                 │                  └──> C12 (WASM)
 ```
+
 ### 依赖原则 {#依赖原则}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -714,6 +719,7 @@ anyhow = "1.0"
 tracing = "0.1"
 tracing-subscriber = "0.3"
 ```
+
 ## 📊 性能考虑 {#性能考虑}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -728,6 +734,7 @@ opt-level = 3
 lto = true
 codegen-units = 1
 ```
+
 ### 2. 运行时优化 {#2-运行时优化}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

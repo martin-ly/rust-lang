@@ -48,7 +48,7 @@
 | Reference 章节 | 项目文档 | 状态 | 备注 |
 |----------------|----------|------|------|
 | [Lexical Elements](https://doc.rust-lang.org/reference/tokens.html) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | 🔄 | 基础词法在类型基础中提及 |
-| [Macros](https://doc.rust-lang.org/reference/macros.html) | [crates/c11_macro_system/](../../crates/c11_macro_system/README.md) | 🔄 | 声明宏/过程宏有 crate 示例 |
+| [Macros](https://doc.rust-lang.org/reference/macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | 🔄 | 声明宏/过程宏有 crate 示例 |
 | [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | crate、module、source file 规则 |
 
 ---

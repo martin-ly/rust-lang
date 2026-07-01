@@ -85,7 +85,7 @@ graph TB
         subgraph "应用层 Tier 4"
             C09["📦 c09_design_pattern<br/>设计模式"]
             C10["📦 c10_networks<br/>网络编程"]
-            C11["📦 c11_macro_system<br/>宏系统"]
+            C11["📦 c11_macro_system_proc<br/>宏系统"]
             C12["📦 c12_wasm<br/>WebAssembly"]
         end
 
@@ -122,6 +122,7 @@ graph TB
     C11 --> COMMON
     C12 --> COMMON
 ```
+
 ---
 
 ## Crate 关系图 {#crate-关系图}
@@ -166,6 +167,7 @@ flowchart LR
     C01 --> SERDE
     C06 --> TRACING
 ```
+
 ### Crate 特性矩阵 {#crate-特性矩阵}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -182,7 +184,7 @@ flowchart LR
 | c08_algorithms | 算法、数据结构 | rayon, petgraph | bench | 40+ |
 | c09_design_pattern | 设计模式 | tokio, rayon | obs-tracing | 20+ |
 | c10_networks | 网络协议、WebSocket | tokio, tonic, rustls | tls, sniff | 25+ |
-| c11_macro_system | 宏规则、过程宏 | syn, quote | serde_support | 10+ |
+| c11_macro_system_proc | 宏规则、过程宏 | syn, quote | serde_support | 10+ |
 | c12_wasm | WebAssembly、WASI | wasm-bindgen, js-sys | ecosystem | 8+ |
 
 ---
@@ -278,6 +280,7 @@ graph TB
     C10_Lib --> C10_WS
     C10_Lib --> C10_GRPC
 ```
+
 ---
 
 ## 数据流图 {#数据流图}
@@ -320,6 +323,7 @@ flowchart LR
     F --> J
     G --> K
 ```
+
 ### 运行时数据流（以异步模块为例） {#运行时数据流以异步模块为例}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -342,6 +346,7 @@ sequenceDiagram
     Task->>Res: 处理结果
     Res-->>Main: 返回最终结果
 ```
+
 ---
 
 ## 架构决策记录 {#架构决策记录}

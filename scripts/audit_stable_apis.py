@@ -30,7 +30,7 @@ KNOWN_APIS: Dict[str, List[Tuple[str, str, str]]] = {
         ("AtomicPtr::try_update", "core::sync::atomic", "c05_threads"),
         ("AtomicBool::update", "core::sync::atomic", "c05_threads"),
         ("AtomicBool::try_update", "core::sync::atomic", "c05_threads"),
-        ("cfg_select!", "core::macros", "c11_macro_system"),
+        ("cfg_select!", "core::macros", "c11_macro_system_proc"),
         ("core::range::RangeInclusive", "core::range", "c02_type_system"),
         ("core::range::RangeInclusiveIter", "core::range", "c02_type_system"),
         ("core::hint::cold_path", "core::hint", "c05_threads"),
@@ -61,7 +61,7 @@ KNOWN_APIS: Dict[str, List[Tuple[str, str, str]]] = {
         ("From<T> for LazyLock", "std::sync", "c02_type_system"),
         ("From<T> for AssertUnwindSafe", "std::panic", "c02_type_system"),
         ("ManuallyDrop const pattern", "core::mem", "c02_type_system"),
-        ("expr metavariable to cfg", "macro", "c11_macro_system"),
+        ("expr metavariable to cfg", "macro", "c11_macro_system_proc"),
     ],
 }
 

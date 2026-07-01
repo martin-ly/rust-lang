@@ -75,7 +75,7 @@
 | Scope / Borrowing / Lifetimes | 作用域、借用、生命周期 | L2-L4 | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) §2-§3 | [RBE Scope](https://doc.rust-lang.org/rust-by-example/scope.html) |
 | Generics / Traits | 泛型与 Trait | L3-L4 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | [RBE Generics](https://doc.rust-lang.org/rust-by-example/generics.html) |
 | Threads / Channels / Async | 并发与异步示例 | L3-L5 | [crates/c05_threads/README.md](../../crates/c05_threads/README.md)、[crates/c06_async/README.md](../../crates/c06_async/README.md) | [RBE Std misc](https://doc.rust-lang.org/rust-by-example/std_misc.html) |
-| Unsafe / FFI / Macros | unsafe、FFI、宏 | L4-L6 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md)、[crates/c11_macro_system/README.md](../../crates/c11_macro_system/README.md) | [RBE Unsafe](https://doc.rust-lang.org/rust-by-example/unsafe.html) |
+| Unsafe / FFI / Macros | unsafe、FFI、宏 | L4-L6 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md)、[crates/c11_macro_system_proc/README.md](../../crates/c11_macro_system_proc/README.md) | [RBE Unsafe](https://doc.rust-lang.org/rust-by-example/unsafe.html) |
 
 ### Rustlings {#rustlings}
 

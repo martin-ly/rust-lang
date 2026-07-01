@@ -45,10 +45,10 @@
 
 | 权威来源 | 类型 | 项目文档 | 覆盖内容 | 状态 |
 |----------|------|----------|----------|------|
-| [The Rust Reference – Macros](https://doc.rust-lang.org/reference/macros.html) | 语言规范 | [crates/c11_macro_system/](../../crates/c11_macro_system/README.md) | `macro_rules!`、卫生性、fragment specifiers、proc-macro | ✅ 已完成 |
+| [The Rust Reference – Macros](https://doc.rust-lang.org/reference/macros.html) | 语言规范 | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | `macro_rules!`、卫生性、fragment specifiers、proc-macro | ✅ 已完成 |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 高级/unsafe 指南 | [10_rustonomicon_alignment.md](10_rustonomicon_alignment.md) | 宏展开与 unsafe 边界、生命周期与类型布局 | ✅ 已完成 |
-| [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/) | 社区教材 | [crates/c11_macro_system/](../../crates/c11_macro_system/README.md) | 声明宏模式、递归、卫生性、调试技巧 | ✅ 已完成 |
-| [proc-macro-workshop](https://github.com/dtolnay/proc-macro-workshop) | 实战练习 | [crates/c11_macro_system/](../../crates/c11_macro_system/README.md) | 派生宏、属性宏、函数宏、TokenStream 解析 | ✅ 已完成 |
+| [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/) | 社区教材 | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | 声明宏模式、递归、卫生性、调试技巧 | ✅ 已完成 |
+| [proc-macro-workshop](https://github.com/dtolnay/proc-macro-workshop) | 实战练习 | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | 派生宏、属性宏、函数宏、TokenStream 解析 | ✅ 已完成 |
 
 ---
 
@@ -93,7 +93,7 @@
 
 | 项目文档 | 生态覆盖 | 权威来源 |
 |----------|----------|----------|
-| [crates/c11_macro_system/README.md](../../crates/c11_macro_system/README.md) | 声明宏、过程宏、DSL、调试与性能 | Rust Reference、The Little Book of Rust Macros、proc-macro-workshop |
+| [crates/c11_macro_system_proc/README.md](../../crates/c11_macro_system_proc/README.md) | 声明宏、过程宏、DSL、调试与性能 | Rust Reference、The Little Book of Rust Macros、proc-macro-workshop |
 | [crates/c12_wasm/README.md](../../crates/c12_wasm/README.md) | wasm-bindgen、wasm-pack、WASI、浏览器/Node 集成 | wasm-bindgen、wasm-pack、The Rust and WebAssembly Book |
 | [crates/c13_embedded/README.md](../../crates/c13_embedded/README.md) | `no_std`、HAL、RTIC、Embassy、FFI、probe-rs、defmt | Embedded Rust Book、embedded-hal、RTIC、Embassy、Ferrous Systems Training |
 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §6 | FFI 内存协议、裸指针、跨语言所有权 | Rustonomicon FFI、Unsafe Code Guidelines FFI |
@@ -122,7 +122,7 @@
 - [Unsafe Code Guidelines 对齐](10_unsafe_code_guidelines_alignment.md)
 - [Rustonomicon 对齐](10_rustonomicon_alignment.md)
 - [异步生态权威来源对齐](10_async_ecosystem_alignment.md)
-- [C11 宏系统 crate](../../crates/c11_macro_system/README.md)
+- [C11 宏系统 crate](../../crates/c11_macro_system_proc/README.md)
 - [C12 WASM crate](../../crates/c12_wasm/README.md)
 - [C13 嵌入式 crate](../../crates/c13_embedded/README.md)
 - [Unsafe 与 FFI 反例](formal_methods/60_unsafe_counterexamples.md)

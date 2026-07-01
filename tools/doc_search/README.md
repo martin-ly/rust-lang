@@ -25,6 +25,7 @@ cargo run -- build-index
 # 执行搜索
 cargo run -- search "所有权"
 ```
+
 ## 功能特性
 
 - 🔍 全文搜索所有 Markdown 文档

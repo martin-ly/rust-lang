@@ -788,7 +788,7 @@ pub mod expr_metavariable_to_cfg {
     mod tests {
         #[test]
         fn test_cfg_expr_feature_documented() {
-            // 该特性为宏元编程能力扩展，完整实现见 c11_macro_system
+            // 该特性为宏元编程能力扩展，完整实现见 c11_macro_system_proc
             assert_eq!(2 + 2, 4);
         }
     }

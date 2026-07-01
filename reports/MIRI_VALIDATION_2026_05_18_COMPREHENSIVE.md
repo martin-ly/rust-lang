@@ -92,7 +92,7 @@
 - **修复**: 所有 tokio 测试添加 `#[cfg_attr(miri, ignore)]`
 - **状态**: 清洁
 
-### ✅ c11_macro_system — 通过
+### ✅ c11_macro_system_proc — 通过
 
 - **结果**: 97 passed, 0 failed, 0 ignored
 - **状态**: 清洁

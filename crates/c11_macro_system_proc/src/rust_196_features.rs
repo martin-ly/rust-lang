@@ -1,255 +1,342 @@
-//! Rust 1.96 特性模块 —— 过程宏场景
-//! Rust 1.96 feature module —— scenario
-//! - `assert_matches!` 用于过程宏诊断测试
-//! - `assert_matches!`
-//! - `never type` 元组 coercion 用于错误路径
+//! Rust 1.96 特性模块 —— 宏系统场景
+//! Rust 1.96 feature module —— system scenario
+//! Rust 1.96 featuremodule —— 宏systemscenario
+//! - `expr` metavariable 传递给 `cfg`
+//! - `assert_matches!` 用于宏展开结果测试
+//! - `assert_matches!` result
+//! - `core::range` 用于 token span 范围表示
 
-#![allow(clippy::incompatible_msrv, dead_code, unreachable_code)]
+#![allow(clippy::incompatible_msrv)]
 
 use std::assert_matches;
-use std::sync::LazyLock;
+use std::mem::ManuallyDrop;
 
 // ============================================================================
-// Rust 1.96.0: assert_matches! 用于过程宏诊断测试
+// Rust 1.96: expr metavariable to cfg（保留并维护）
 // ============================================================================
 
-/// 过程宏诊断结果的枚举表示
+/// 不能用于 `#[cfg(...)]` 属性参数。1.96 放宽了这一限制，
+/// cannot `#[cfg(...)]` attribute parameter 。1.96 ，
+/// 允许通过宏参数动态生成条件编译属性。
+/// allow parameter condition attribute 。
+/// parameter condition attribute 。
+macro_rules! cfg_conditional {
+    ($cond:expr, $item:item) => {
+        #[cfg($cond)]
+        $item
+    };
+}
+
+// 使用宏生成平台相关的辅助函数
+cfg_conditional!(
+    target_os = "windows",
+    fn _platform_id() -> &'static str {
+        "windows"
+    }
+);
+cfg_conditional!(
+    not(target_os = "windows"),
+    fn _platform_id() -> &'static str {
+        "unix-like"
+    }
+);
+
+/// 条件编译宏的实用包装
+/// condition
+pub struct ExprMetavariableToCfgExamples;
+
+impl ExprMetavariableToCfgExamples {
+    /// 返回当前平台标识（通过条件编译宏生成）
+    /// when before platform （condition ）
+    pub fn platform_hint() -> &'static str {
+        _platform_id()
+    }
+
+    /// 演示：使用宏根据 cfg 条件选择不同的实现
+    /// demonstration ：according to cfg condition
+    pub fn cfg_select_hint() -> &'static str {
+        _platform_id()
+    }
+}
+
+// ============================================================================
+// Rust 1.96.0: assert_matches! 用于宏展开结果测试
+// ============================================================================
+
+/// 宏展开结果的枚举表示
 /// result enum represent
+/// 宏展开resultenumrepresent
 #[derive(Debug, Clone, PartialEq)]
-pub enum ProcMacroDiagnostic {
-    /// 解析成功
-    ParseOk,
-    /// 语法错误
-    /// syntax
-    SyntaxError {
-        /// 错误描述
-        /// describe
-        /// 错误describe
-        description: &'static str,
-        /// 错误位置
-        /// position
-        /// 错误position
-        offset: usize,
+pub enum ExpansionResult {
+    /// 展开成功
+    Success {
+        /// 令牌数量
+        /// token count
+        tokens: usize,
+        /// span 数量
+        /// span quantity
+        span_count: usize,
     },
-    /// 不支持的语法结构
-    /// syntax structure
-    /// structure
-    Unsupported {
-        /// 结构名称
-        /// structure
-        construct: &'static str,
+    /// 展开出错
+    Error {
+        /// 错误信息
+        /// error message
+        message: &'static str,
+        /// 所在行号
+        /// in row number
+        /// in
+        line: u32,
     },
-    /// 编译通过，无诊断信息
-    /// ，
-    Clean,
+    /// 空展开
+    /// empty expansion
+    Empty,
 }
 
-/// 过程宏诊断断言工具
-/// tool
-pub struct ProcMacroDiagnosticAssertions;
+/// 宏展开结果断言工具
+/// result tool
+pub struct MacroExpansionAssertions;
 
-impl ProcMacroDiagnosticAssertions {
-    /// 断言诊断为解析成功
+impl MacroExpansionAssertions {
+    /// 检查宏展开是否成功
+    pub fn assert_success(result: &ExpansionResult) {
+        assert_matches!(result, ExpansionResult::Success { .. });
+    }
+
+    /// 检查宏展开错误信息
+    /// error message
+    pub fn assert_error_with_message(result: &ExpansionResult, expected: &str) {
+        assert_matches!(
+            result,
+            ExpansionResult::Error { message, .. } if *message == expected
+        );
+    }
+
+    /// 检查宏展开是否为空
     /// as
-    pub fn assert_parse_ok(diag: &ProcMacroDiagnostic) {
-        assert_matches!(diag, ProcMacroDiagnostic::ParseOk);
-    }
-
-    /// 断言诊断为指定类型的语法错误
-    /// as type syntax
-    /// as type
-    pub fn assert_syntax_error_at(diag: &ProcMacroDiagnostic, expected_offset: usize) {
-        assert_matches!(
-            diag,
-            ProcMacroDiagnostic::SyntaxError { offset, .. } if *offset == expected_offset
-        );
-    }
-
-    /// 断言诊断为不支持的结构
-    /// as structure
-    /// 断言诊断as不Supportsstructure
-    pub fn assert_unsupported(diag: &ProcMacroDiagnostic, name: &str) {
-        assert_matches!(
-            diag,
-            ProcMacroDiagnostic::Unsupported { construct } if *construct == name
-        );
-    }
-
-    /// 断言诊断完全干净
-    pub fn assert_clean(diag: &ProcMacroDiagnostic) {
-        assert_matches!(diag, ProcMacroDiagnostic::Clean);
+    pub fn assert_empty(result: &ExpansionResult) {
+        assert_matches!(result, ExpansionResult::Empty);
     }
 }
 
 // ============================================================================
-// Rust 1.96: From<T> for LazyLock 用于过程宏元数据缓存
+// Rust 1.96.0: core::range 用于 token span 范围
 // ============================================================================
 
-pub struct MacroMetadataCache {
-    /// 支持的属性列表（立即初始化，无需闭包）
-    /// attribute （，）
-    supported_attrs: LazyLock<Vec<&'static str>>,
-    /// 版本信息（立即初始化）
-    /// this （）
-    version_info: LazyLock<String>,
+/// 令牌跨度范围
+/// token span range
+pub struct TokenSpanRange {
+    /// 左闭右开范围
+    /// scope
+    pub range: core::range::Range<usize>,
+    /// 闭区间范围
+    /// interval scope
+    /// 闭intervalrange
+    pub range_inclusive: core::range::RangeInclusive<usize>,
 }
 
-impl MacroMetadataCache {
-    /// 创建新的元数据缓存
-    /// data cache
-    pub fn new() -> Self {
+impl TokenSpanRange {
+    /// 创建新的令牌跨度范围
+    /// create new token span range
+    pub fn new(start: usize, end: usize) -> Self {
         Self {
-            supported_attrs: LazyLock::from(vec!["derive", "inline", "test", "cfg", "allow"]),
-            version_info: LazyLock::from("1.96.0".to_string()),
+            range: core::range::Range { start, end },
+            range_inclusive: core::range::RangeInclusive { start, last: end },
         }
     }
 
-    /// 检查是否支持指定属性
-    /// attribute
-    pub fn is_attr_supported(&self, attr: &str) -> bool {
-        self.supported_attrs.contains(&attr)
+    /// 检查位置是否在范围内
+    /// position in scope inside
+    pub fn contains(&self, pos: usize) -> bool {
+        self.range.start <= pos && pos < self.range.end
     }
 
-    /// 获取版本信息
-    /// this
-    pub fn version(&self) -> &str {
-        &self.version_info
+    /// 获取范围长度
+    /// scope
+    pub fn len(&self) -> usize {
+        self.range.end - self.range.start
     }
 
-    /// 获取支持属性数量
-    /// attribute quantity
-    pub fn attr_count(&self) -> usize {
-        self.supported_attrs.len()
-    }
-}
-
-impl Default for MacroMetadataCache {
-    fn default() -> Self {
-        Self::new()
+    /// 是否为空范围
+    /// as scope
+    pub fn is_empty(&self) -> bool {
+        self.range.start == self.range.end
     }
 }
 
 // ============================================================================
-// Rust 1.96: never type 元组 coercion 用于错误路径
+// Rust 1.96: ManuallyDrop 用于宏卫生标记类型
 // ============================================================================
 
-/// 模拟过程宏展开中的错误结果元组
-/// in result
-/// in错误路径on，`panic!()` Return `!` type，可自动 coercing as
-/// 元组中的任意类型，从而统一返回类型。
-/// in type ，thereby type 。
-pub fn error_tuple_with_never() -> (usize, &'static str, u32) {
-    if false {
-        // 正常路径永远不会执行，但类型检查通过
-        return (0, "ok", 0);
-    }
-    // panic!() 返回 !，在元组上下文中自动 coercion 为 (usize, &'static str, u32)
-    (0, panic!("proc macro expansion failed"), 0)
+/// 宏卫生标记类型
+/// macro hygiene marker type
+pub struct HygieneMarker<T> {
+    inner: ManuallyDrop<T>,
 }
 
-/// 另一个错误路径示例：使用 unreachable!()
-/// example ： unreachable!()
-/// 另一个错误路径Example of：Use unreachable!()
-pub fn unreachable_tuple_with_never() -> (bool, u64) {
-    if false {
-        return (true, 42);
+impl<T> HygieneMarker<T> {
+    /// 创建新的卫生标记
+    /// mark
+    pub fn new(value: T) -> Self {
+        Self {
+            inner: ManuallyDrop::new(value),
+        }
     }
-    // unreachable!() 返回 !， coercion 为 (bool, u64)
-    (false, unreachable!("invalid proc macro state"))
+
+    /// 获取内部值的引用
+    /// inside reference
+    pub fn get(&self) -> &T {
+        &self.inner
+    }
+
+    /// 获取内部值（消费 self，不调用 drop）
+    /// inside （ self， drop）
+    pub fn into_inner(self) -> T {
+        ManuallyDrop::into_inner(self.inner)
+    }
 }
 
-/// 演示函数
-/// demonstration function
+// ============================================================================
+// 演示函数
+// ============================================================================
+
+/// 演示 Rust 1.96 新特性
+/// demonstration Rust 1.96 feature
+/// Demonstration of Rust 1.96 新feature
 pub fn demonstrate_rust_196_features() {
-    println!("\n=== Rust 1.96 过程宏特性演示 ===");
+    println!("\n=== Rust 1.96 宏系统特性演示 ===");
 
-    // LazyLock::from for metadata cache
-    let cache = MacroMetadataCache::new();
-    println!("Version: {}", cache.version());
-    println!("Supported attrs: {}", cache.attr_count());
+    // core::range for token spans
+    let span = TokenSpanRange::new(10, 25);
+    println!(
+        "Token span: {}..{} (len={})",
+        span.range.start,
+        span.range.end,
+        span.len()
+    );
 
-    // assert_matches! for diagnostic testing
-    let diag = ProcMacroDiagnostic::Clean;
-    ProcMacroDiagnosticAssertions::assert_clean(&diag);
+    // assert_matches!
+    let result = ExpansionResult::Success {
+        tokens: 42,
+        span_count: 5,
+    };
+    MacroExpansionAssertions::assert_success(&result);
+
+    // ManuallyDrop hygiene marker
+    let marker = HygieneMarker::new("macro_ident");
+    println!("Hygiene marker: {}", marker.get());
+}
+
+/// 获取特性信息
+/// feature
+pub fn get_rust_196_macro_info() -> String {
+    "Rust 1.96.0 宏系统特性:\n- expr metavariable to cfg\n- assert_matches! for macro expansion \
+     testing\n- core::range for token span ranges\n- ManuallyDrop for macro hygiene markers"
+        .to_string()
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
+    // Rust 1.96: expr metavariable to cfg（保留测试）
+    #[test]
+    fn test_expr_metavariable_to_cfg_compiles() {
+        let hint = ExprMetavariableToCfgExamples::platform_hint();
+        assert!(!hint.is_empty());
+        assert!(hint == "windows" || hint == "unix-like");
+    }
+
+    #[test]
+    fn test_cfg_conditional_macro() {
+        let result = ExprMetavariableToCfgExamples::cfg_select_hint();
+        assert!(!result.is_empty());
+    }
+
     // assert_matches! 测试
     #[test]
-    fn test_assert_parse_ok() {
-        let diag = ProcMacroDiagnostic::ParseOk;
-        ProcMacroDiagnosticAssertions::assert_parse_ok(&diag);
+    fn test_assert_success() {
+        let result = ExpansionResult::Success {
+            tokens: 10,
+            span_count: 2,
+        };
+        MacroExpansionAssertions::assert_success(&result);
     }
 
     #[test]
     #[should_panic]
-    fn test_assert_parse_ok_fails_on_error() {
-        let diag = ProcMacroDiagnostic::SyntaxError {
-            description: "missing semicolon",
-            offset: 10,
+    fn test_assert_success_panics_on_error() {
+        let result = ExpansionResult::Error {
+            message: "fail",
+            line: 1,
         };
-        ProcMacroDiagnosticAssertions::assert_parse_ok(&diag);
+        MacroExpansionAssertions::assert_success(&result);
     }
 
     #[test]
-    fn test_assert_syntax_error_at() {
-        let diag = ProcMacroDiagnostic::SyntaxError {
-            description: "unexpected token",
-            offset: 42,
+    fn test_assert_error_with_message() {
+        let result = ExpansionResult::Error {
+            message: "expected",
+            line: 5,
         };
-        ProcMacroDiagnosticAssertions::assert_syntax_error_at(&diag, 42);
+        MacroExpansionAssertions::assert_error_with_message(&result, "expected");
     }
 
     #[test]
-    fn test_assert_unsupported() {
-        let diag = ProcMacroDiagnostic::Unsupported {
-            construct: "async_trait",
-        };
-        ProcMacroDiagnosticAssertions::assert_unsupported(&diag, "async_trait");
+    fn test_assert_empty() {
+        let result = ExpansionResult::Empty;
+        MacroExpansionAssertions::assert_empty(&result);
+    }
+
+    // core::range 测试
+    #[test]
+    fn test_token_span_range_contains() {
+        let span = TokenSpanRange::new(10, 20);
+        assert!(span.contains(10));
+        assert!(span.contains(15));
+        assert!(!span.contains(20));
+        assert!(!span.contains(25));
     }
 
     #[test]
-    fn test_assert_clean() {
-        let diag = ProcMacroDiagnostic::Clean;
-        ProcMacroDiagnosticAssertions::assert_clean(&diag);
-    }
-
-    // LazyLock::from 测试
-    #[test]
-    fn test_metadata_cache_attrs() {
-        let cache = MacroMetadataCache::new();
-        assert!(cache.is_attr_supported("derive"));
-        assert!(cache.is_attr_supported("test"));
-        assert!(!cache.is_attr_supported("unknown"));
+    fn test_token_span_range_len() {
+        let span = TokenSpanRange::new(5, 15);
+        assert_eq!(span.len(), 10);
+        assert!(!span.is_empty());
     }
 
     #[test]
-    fn test_metadata_cache_version() {
-        let cache = MacroMetadataCache::new();
-        assert_eq!(cache.version(), "1.96.0");
+    fn test_token_span_range_empty() {
+        let span = TokenSpanRange::new(5, 5);
+        assert_eq!(span.len(), 0);
+        assert!(span.is_empty());
     }
 
     #[test]
-    fn test_metadata_cache_attr_count() {
-        let cache = MacroMetadataCache::new();
-        assert_eq!(cache.attr_count(), 5);
+    fn test_range_inclusive_fields() {
+        let ri = core::range::RangeInclusive { start: 1, last: 5 };
+        assert_eq!(ri.start, 1);
+        assert_eq!(ri.last, 5);
     }
 
-    // never type 元组 coercion 测试
-    // 注意：这些函数在 panic/unreachable 路径上永远不会正常返回，
-    // 但类型检查证明 coercion 是有效的。
+    // ManuallyDrop 测试
     #[test]
-    #[should_panic(expected = "proc macro expansion failed")]
-    fn test_error_tuple_with_never() {
-        error_tuple_with_never();
+    fn test_hygiene_marker_new_and_get() {
+        let marker = HygieneMarker::new(42);
+        assert_eq!(*marker.get(), 42);
     }
 
     #[test]
-    #[should_panic(expected = "invalid proc macro state")]
-    fn test_unreachable_tuple_with_never() {
-        unreachable_tuple_with_never();
+    fn test_hygiene_marker_into_inner() {
+        let marker = HygieneMarker::new(vec![1, 2, 3]);
+        let inner = marker.into_inner();
+        assert_eq!(inner, vec![1, 2, 3]);
+    }
+
+    #[test]
+    fn test_get_rust_196_macro_info() {
+        let info = get_rust_196_macro_info();
+        assert!(!info.is_empty());
+        assert!(info.contains("assert_matches!"));
+        assert!(info.contains("core::range"));
     }
 }

@@ -125,6 +125,7 @@
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
+
 ### 文档层次结构 {#文档层次结构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -170,6 +171,7 @@ docs/
     ├── 07_knowledge_structure_framework.md ←→ research_notes/*/ (知识结构)
     └── 07_project_architecture_guide.md ←→ crates/*/ (架构映射)
 ```
+
 ---
 
 ## 🔄 核心模块交叉引用 {#核心模块交叉引用}
@@ -195,6 +197,7 @@ ownership_cheatsheet → ownership_model ↔ borrow_checker_proof ↔ lifetime_f
      ↓                      ↓                    ↓                      ↓
 UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 ```
+
 ### C02 - 类型系统 {#c02---类型系统}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -301,7 +304,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c11_macro_system/README.md` | ←→ macros_cheatsheet |
+| **主索引** | `crates/c11_macro_system_proc/README.md` | ←→ macros_cheatsheet |
 | **速查卡** | macros_cheatsheet.md | → [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/05_macro_system_usage_guide.md) → [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
 | **指南** | [05_macro_system_usage_guide.md](../05_guides/05_macro_system_usage_guide.md) | ← macros_cheatsheet |
 
@@ -407,6 +410,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
+
 ---
 
 ## 📖 速查卡交叉引用 {#速查卡交叉引用}
@@ -483,6 +487,7 @@ crates/c01_ownership_borrow_scope/docs/
     ↓
 05_guides/10_best_practices.md
 ```
+
 #### 开发者路径 {#开发者路径}
 
 ```text
@@ -496,6 +501,7 @@ research_notes/formal_methods/ (深入形式化)
     ↓
 crates/*/examples/ (代码示例)
 ```
+
 #### 研究者路径 {#研究者路径}
 
 ```text
@@ -511,6 +517,7 @@ research_notes/10_core_theorems_full_proofs.md
     ↓
 04_thinking/04_proof_graph_network.md
 ```
+
 #### 维护者路径 {#维护者路径}
 
 ```text
@@ -524,6 +531,7 @@ research_notes/10_cross_reference_index.md
     ↓
 07_project/07_task_index.md
 ```
+
 ### 按主题导航 {#按主题导航}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -535,6 +543,7 @@ ownership_cheatsheet → ownership_model → borrow_checker_proof → lifetime_f
        ↓                      ↓                    ↓                      ↓
 UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 ```
+
 #### 并发编程主题 {#并发编程主题}
 
 ```text
@@ -546,6 +555,7 @@ send_sync_formalization ←────→ async_state_machine
        ↓
 THREADS_CONCURRENCY_USAGE_GUIDE / ASYNC_PROGRAMMING_USAGE_GUIDE
 ```
+
 #### 类型系统主题 {#类型系统主题}
 
 ```text
@@ -557,6 +567,7 @@ variance_theory ←──────→ advanced_types
     ↓
 ADVANCED_TOPICS_DEEP_DIVE
 ```
+
 #### 设计模式主题 {#设计模式主题}
 
 ```text
@@ -570,6 +581,7 @@ DESIGN_PATTERNS_USAGE_GUIDE
     ↓
 CROSS_MODULE_INTEGRATION_EXAMPLES
 ```
+
 ### 快速查找路径 {#快速查找路径}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -647,6 +659,7 @@ graph TB
     style CROSS fill:#f9f,stroke:#333,stroke-width:4px
     style MASTER fill:#bbf,stroke:#333,stroke-width:4px
 ```
+
 ### 横向关联 {#横向关联}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -696,6 +709,7 @@ graph TB
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
+
 ---
 
 ## ✅ 双向链接验证 {#双向链接验证}
@@ -759,6 +773,7 @@ struct LinkValidator {
     }
 }
 ```
+
 ---
 
 ## 最佳实践 {#最佳实践}
@@ -775,11 +790,13 @@ struct LinkValidator {
 [类型系统速查卡](../02_reference/quick_reference/02_type_system.md)
 [所有权模型形式化](../research_notes/formal_methods/10_ownership_model.md)
 ```
+
 **❌ 错误**:
 
 ```markdown
 [类型系统速查卡](../02_reference/quick_reference/02_type_system.md)
 ```
+
 ### 2. 提供描述性链接文本 {#2-提供描述性链接文本}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -789,11 +806,13 @@ struct LinkValidator {
 ```markdown
 查看 [类型系统速查卡](../02_reference/quick_reference/02_type_system.md) 了解类型系统
 ```
+
 **❌ 错误**:
 
 ```markdown
 点击 [这里](../02_reference/quick_reference/02_type_system.md)
 ```
+
 ### 3. 维护链接完整性 {#3-维护链接完整性}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

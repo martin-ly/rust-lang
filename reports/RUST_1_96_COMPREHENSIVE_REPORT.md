@@ -28,7 +28,7 @@
 
 | 特性 | 说明 | 项目覆盖 |
 |:---|:---|:---:|
-| `expr` metavariable → `cfg` | 宏中 `expr` 类型参数可传递给 `#[cfg(...)]` | ✅ `c11_macro_system` |
+| `expr` metavariable → `cfg` | 宏中 `expr` 类型参数可传递给 `#[cfg(...)]` | ✅ `c11_macro_system_proc` |
 | Never type tuple coercion | `!` 在 tuple 表达式中始终自动 coercion | ✅ `c02_type_system` |
 | `ManuallyDrop` 常量模式 | 修复 1.94 回归，允许 `ManuallyDrop` 常量作为 match 模式 | ✅ `c02_type_system` |
 | s390x vector registers inline asm | s390x 架构内联汇编支持向量寄存器 | ⚠️ 概念文档 |
@@ -80,7 +80,7 @@
 | `NonZero` 迭代 | `c02_type_system/src/rust_196_features.rs` | ✅ | 完成 |
 | `From<T>` for cell types | `c02_type_system/src/rust_196_features.rs` | ✅ | 完成 |
 | `ManuallyDrop` 模式 | `c02_type_system/src/rust_196_features.rs` | ✅ | 完成 |
-| `expr` → `cfg` | `c11_macro_system/src/rust_196_features.rs` | ✅ | **新增** |
+| `expr` → `cfg` | `c11_macro_system_proc/src/rust_196_features.rs` | ✅ | **新增** |
 | Never type coercion | `c02_type_system/src/rust_196_features.rs` | ✅ | **新增** |
 
 ### 3.2 版本号修正记录
@@ -227,7 +227,7 @@
 | `cargo test -p c06_async` | 151 passed |
 | `cargo test -p c07_process` | 123 passed |
 | `cargo test -p c10_networks` | 179 passed |
-| `cargo test -p c11_macro_system` | 97 passed |
+| `cargo test -p c11_macro_system_proc` | 97 passed |
 | `cargo test -p c12_wasm` | 177 passed |
 | `cargo test -p c13_embedded` | 75 passed |
 | `cargo test -p exercises` | 207 passed |

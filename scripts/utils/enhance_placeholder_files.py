@@ -56,7 +56,7 @@ def enhance_rust_194_overview(filepath):
             'features': ['异步网络', '生成器', '性能优化', '网络模式'],
             'examples': '异步网络编程'
         },
-        'c11_macro_system': {
+        'c11_macro_system_proc': {
             'features': ['过程宏', '生成器集成', '新语法支持', '宏模式'],
             'examples': '宏与生成器结合'
         },

@@ -1,34 +1,65 @@
-# C11 Macro System Proc — 单页总结
+# C11 宏系统 - 一页纸总结
 
-> 本文档用一页纸总结 `c11_macro_system_proc` 的核心概念、重点 API 和学习路径。
-
----
-
-## 1. 一句话定义
-
-`c11_macro_system_proc` 是 Rust procedural macro examples for c11_macro_system learning module。
-
-## 2. 核心知识点
-
-- **知识点 1**: 待补充
-- **知识点 2**: 待补充
-- **知识点 3**: 待补充
-
-## 3. 重点 API / 模式
-
-| 名称 | 作用 |
-|---|---|
-| `todo!()` | 待补充 |
-
-## 4. 常见误区
-
-- 误区 1：待补充
-
-## 5. 下一步学习
-
-- [00_MASTER_INDEX.md](00_MASTER_INDEX.md)
-- 返回 [README.md](README.md)
+> **用途**: 快速回顾核心概念、常见坑、学习路径
+> **完整文档**: [00_MASTER_INDEX](00_MASTER_INDEX.md)
 
 ---
 
-*本文件由 `scripts/templates/crate_docs/ONE_PAGE_SUMMARY.md` 模板生成。*
+## 核心概念（4 条）
+
+| 概念 | 说明 |
+| :--- | :--- |
+| **声明宏** | `macro_rules!`；模式匹配；卫生性 |
+| **过程宏** | Derive、属性、函数宏；`proc-macro` crate |
+| **片段类型** | `expr`、`ident`、`ty`、`path` 等；匹配与展开 |
+| **递归宏** | 逐步展开；`$($rest)*` 重复 |
+
+---
+
+## 常见坑与解决
+
+| 坑 | 解决 |
+| :--- | :--- |
+| 宏展开顺序 | 宏在编译时展开；注意作用域 |
+| 片段类型不匹配 | 用 `tt` 兜底；或拆成多规则 |
+| 过程宏编译慢 | 独立 crate；增量编译 |
+| 卫生性意外 | 用 `$crate` 引用；避免标识符冲突 |
+
+---
+
+## 宏速选
+
+| 场景 | 选型 |
+| :--- | :--- |
+| 简单重复代码 | 声明宏 `macro_rules!` |
+| 自动实现 trait | `#[derive(Trait)]` 过程宏 |
+| 属性注解 | 属性过程宏 `#[attr]` |
+| 函数式语法扩展 | 函数过程宏 `macro!()` |
+| 复杂 DSL | 过程宏 + 声明宏组合 |
+
+---
+
+## 学习路径
+
+1. **入门** (1–2 周): 声明宏基础 → 片段类型 → 递归宏
+2. **进阶** (2–3 周): Derive 宏 → 属性宏 → 函数宏
+3. **高级** (持续): 复杂 DSL、与 C09 框架性模式结合
+
+---
+
+## 速查与练习
+
+- **速查卡**: [macros_cheatsheet](../../../docs/02_reference/quick_reference/macros_cheatsheet.md)
+- **RBE 练习**: [Macros](https://doc.rust-lang.org/rust-by-example/macros.html)
+- **Rustlings**: [21_macros](https://github.com/rust-lang/rustlings/tree/main/exercises/21_macros)
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

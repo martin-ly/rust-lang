@@ -1,0 +1,19 @@
+[package]
+name = "c11_macro_system_proc_macros"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.96.0"
+authors = ["Rust Learning Community"]
+description = "Procedural macro examples for the c11_macro_system_proc learning module"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rust-lang/rust-lang-learning"
+
+[lib]
+proc-macro = true
+name = "c11_macro_system_proc_macros"
+path = "src/lib.rs"
+
+[dependencies]
+proc-macro2 = { workspace = true }
+quote = { workspace = true }
+syn = { workspace = true, features = ["full"] }

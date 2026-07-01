@@ -61,7 +61,7 @@
   - 去除中英混杂、机器翻译痕迹
   - 统一为中文说明
 - [x] 检查并修复其他 crate 顶层 README 的版本号一致性
-  - c05_threads、c07_process、c08_algorithms、c09_design_pattern、c10_networks、c11_macro_system 的顶层 README 头部 `Rust版本` 已统一为 `1.96.0+`
+  - c05_threads、c07_process、c08_algorithms、c09_design_pattern、c10_networks、c11_macro_system_proc 的顶层 README 头部 `Rust版本` 已统一为 `1.96.0+`
 - [x] 提交变更（c14/c11 修改已合入 commit `592a26951`）
 
 ---

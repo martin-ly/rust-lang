@@ -93,7 +93,7 @@
 
 | Rust By Example 章节 | 项目文档/示例 | 状态 | 备注 |
 |----------------------|---------------|------|------|
-| [Macros](https://doc.rust-lang.org/rust-by-example/macros.html) | [crates/c11_macro_system/](../../crates/c11_macro_system/README.md) | ✅ | 声明宏 |
+| [Macros](https://doc.rust-lang.org/rust-by-example/macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | ✅ | 声明宏 |
 | [Procedural Macros](https://doc.rust-lang.org/rust-by-example/macros/procedural.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | ✅ | 过程宏 |
 
 ---

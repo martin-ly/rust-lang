@@ -29,7 +29,7 @@
 | c08_algorithms | ✅ | 452 passed, 0 failed, 16 ignored | 并行/大数据测试已排除 |
 | c09_design_pattern | ✅ | 194 passed, 0 failed, 9 ignored | `test_shared_state_safety` Miri 下忽略（多线程） |
 | c10_networks | ✅ | 160 passed, 0 failed, 19 ignored | |
-| c11_macro_system | ✅ | 97 passed, 0 failed, 0 ignored | |
+| c11_macro_system_proc | ✅ | 97 passed, 0 failed, 0 ignored | |
 | c11_macro_system_proc | ⚠️ | Miri 不支持 | cargo test 通过：7 doctests passed（Miri 不支持 proc-macro crate） |
 | c12_wasm | ⚠️ | Miri 不支持 | cargo test 通过：177 passed（Miri 不支持 web-sys FFI 绑定） |
 | c13_embedded | ✅ | 70 passed, 0 failed, 5 ignored | |

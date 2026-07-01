@@ -55,7 +55,7 @@
 | c08_algorithms | 452 passed, 0 failed, 16 ignored | 并行/大数据测试已排除 |
 | c09_design_pattern | 194 passed, 0 failed, 9 ignored | rayon 并行模块已排除 |
 | c10_networks | 160 passed, 0 failed, 19 ignored | ✅ |
-| c11_macro_system | 97 passed, 0 failed, 0 ignored | ✅ |
+| c11_macro_system_proc | 97 passed, 0 failed, 0 ignored | ✅ |
 | c13_embedded | 70 passed, 0 failed, 5 ignored | ✅ |
 | common | 41 passed, 0 failed, 0 ignored | ✅ |
 | c05_threads | ⚠️ 超时 | Windows Miri 多线程已知限制 |

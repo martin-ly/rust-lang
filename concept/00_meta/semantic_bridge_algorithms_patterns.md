@@ -444,7 +444,13 @@ fn main() {
 
 #### 范畴论语境
 
-惰性求值可以被建模为 **Thunk 函子** `T(A) = () → A` 上的 `let` 共享：第一次 `force` 将 thunk 替换为其值，后续 `force` 直接返回该值。Memoization 则把这一局部共享扩展为**全局 DAG 节点缓存**。从范畴论角度看，二者都是把 `eval : DAG → Value` 提升为 `eval_memo : DAG → Value`，使得同态节点共享同一个值对象；DP 的填表顺序则是 DAG 拓扑排序的一种具体实现。[来源: [Wikipedia — Lazy Evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation)] · [来源: [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition)]
+惰性求值可以被建模为 **Thunk 函子** `T(A) = () → A` 上的 `let` 共享：第一次 `force` 将 thunk 替换为其值，后续 `force` 直接返回该值。
+Memoization 则把这一局部共享扩展为**全局 DAG 节点缓存**。
+从范畴论角度看，二者都是把 `eval : DAG → Value` 提升为 `eval_memo : DAG → Value`，使得同态节点共享同一个值对象；
+DP 的填表顺序则是 DAG 拓扑排序的一种具体实现。
+
+[来源: [Wikipedia — Lazy Evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation)] ·
+[来源: [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition)]
 
 > **关联章节**: [Iterator Patterns](../02_intermediate/15_iterator_patterns.md) · [Closures](../01_foundation/15_closure_basics.md) · [Algorithms](../06_ecosystem/29_algorithms_competitive_programming.md)
 
@@ -579,7 +585,12 @@ fn main() {
 
 #### 范畴论语境
 
-图的 DFS 可以看作 **余代数（coalgebra）** 上的遍历：设 `P(X)` 为幂集函子，则邻接表可表示为 `next : V → P(V)`。DFS Iterator 是从该余代数出发构造的**轨迹（trace）**，即反复应用 `next` 并记录访问历史的序列。Visitor 则是定义在该轨迹上的代数操作：对每一个访问到的节点应用一个函数。Iterator 的惰性本质把图这一余代数结构展开为**最终的 `Option<(A, S)` 煤gebra**，其中 `S` 是迭代器状态。因此，图遍历 ↔ Visitor ↔ Iterator 的同构可以概括为：**从图的余代数到线性轨迹的展开，再对轨迹施加代数操作**。[来源: [Category Theory for Programmers — Coalgebras](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
+图的 DFS 可以看作 **余代数（coalgebra）** 上的遍历：设 `P(X)` 为幂集函子，则邻接表可表示为 `next : V → P(V)`。
+DFS Iterator 是从该余代数出发构造的**轨迹（trace）**，即反复应用 `next` 并记录访问历史的序列。
+Visitor 则是定义在该轨迹上的代数操作：对每一个访问到的节点应用一个函数。
+Iterator 的惰性本质把图这一余代数结构展开为**最终的 `Option<(A, S)` 煤gebra**，其中 `S` 是迭代器状态。
+因此，图遍历 ↔ Visitor ↔ Iterator 的同构可以概括为：**从图的余代数到线性轨迹的展开，再对轨迹施加代数操作**。
+[来源: [Category Theory for Programmers — Coalgebras](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
 
 > **关联章节**: [Visitor](../06_ecosystem/02_patterns.md) · [Iterator Patterns](../02_intermediate/15_iterator_patterns.md) · [Control Flow](../01_foundation/07_control_flow.md)
 

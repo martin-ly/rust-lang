@@ -134,7 +134,7 @@
 ### B3 结构债务清理收尾（2026-06-28）
 
 - **Crates 顶层文档注释清理**：
-  - 清理 `c03_control_fn`、`c04_generic`、`c06_async`、`c07_process`、`c08_algorithms`、`c09_design_pattern`、`c10_networks`、`c11_macro_system`、`c12_wasm` 共 9 个 crate 的 `src/lib.rs` 中英文混杂/机器翻译文档注释，统一为中文说明。
+  - 清理 `c03_control_fn`、`c04_generic`、`c06_async`、`c07_process`、`c08_algorithms`、`c09_design_pattern`、`c10_networks`、`c11_macro_system_proc`、`c12_wasm` 共 9 个 crate 的 `src/lib.rs` 中英文混杂/机器翻译文档注释，统一为中文说明。
 - **Boilerplate 文档模板化与批量生成**：
   - 新增 `scripts/templates/crate_docs/` 7 个模板文件（README / ONE_PAGE_SUMMARY / 00_MASTER_INDEX / FAQ / Glossary / PENDING_ITEMS / MIND_MAP）。
   - 新增 `scripts/generate_crate_docs_boilerplate.py` 生成脚本（默认 dry-run，支持 `--yes`）。
@@ -1271,7 +1271,7 @@
 
 ### 🔧 验证
 
-- `cargo check --workspace`: **通过**（c11_macro_system 36 warnings 为既有）
+- `cargo check --workspace`: **通过**（c11_macro_system_proc 36 warnings 为既有）
 - `cargo clippy --workspace`: **通过**
 - `kb_auditor.py`: 死链 **0** / 258 文件，定理链 1,305，代码块 2,606
 - `version_fact_check.py`: 版本错误 **0** / 285 文件
@@ -1429,9 +1429,9 @@
 
 - **c06_async**: 删除 `actix-web`、`once_cell`（仅 doc comment 引用，无实际代码使用）
 - **c09_design_pattern**: 删除 `serde`、`serde_json`（无代码使用）
-- **c11_macro_system**: 删除 `serde`、`serde_json`、`tokio`（仅 doc comment 引用，无实际代码使用）
+- **c11_macro_system_proc**: 删除 `serde`、`serde_json`、`tokio`（仅 doc comment 引用，无实际代码使用）
 - **c12_wasm**: 删除 `serde`、`serde_json`、`tokio`（无代码使用，WASM 运行时不需要 tokio）
-- **c11_macro_system**: 删除 `serde`、`serde_json`、`tokio`
+- **c11_macro_system_proc**: 删除 `serde`、`serde_json`、`tokio`
 - **c12_wasm**: 删除 `serde`、`serde_json`、`tokio`
 - **cargo-machete 配置**: 为 `c05_threads`、`c07_process`、`c10_networks`、`c08_algorithms-fuzz`、`embassy-demo` 添加忽略配置，消除平台/bin/fuzz/嵌入式误报
 - **结果**: `cargo machete` 零未使用依赖报告
@@ -1447,7 +1447,7 @@
 - **c09_design_pattern**: 移除 `manual_range_contains`、`redundant_pattern_matching`、`needless_borrow`（3 处代码修复）
 - **c10_networks**: 移除 `needless_borrows_for_generic_args`
 - **c05_threads**: 移除 `needless_borrows_for_generic_args`、`overly_complex_bool_expr`、`redundant_closure`（1 处代码修复）
-- **c11_macro_system**: `vec_init_then_push` 从全局 allow 移至 `declarative_macros.rs` 局部模块
+- **c11_macro_system_proc**: `vec_init_then_push` 从全局 allow 移至 `declarative_macros.rs` 局部模块
 - **统计**: 从 ~60 个 allow 降至 31 个，清理约 30 个冗余 allow
 - **结果**: `cargo clippy --all-targets` **零警告**
 - **验证**: `cargo build` / `cargo test` / `cargo clippy` 全部通过
@@ -1521,7 +1521,7 @@
 ### 🛠️ 编译修复：BOM 字符清理
 
 - **问题**: `cargo check` 报错 `unknown start of token: \u{feff}`，15 个 `.rs` 文件包含 UTF-8 BOM
-- **修复**: 批量移除 `crates/common/src/lib.rs`、`c02_type_system`、`c07_process`、`c10_networks`、`c11_macro_system`、`c12_wasm`、`c13_embedded` 共 15 个文件中的 BOM
+- **修复**: 批量移除 `crates/common/src/lib.rs`、`c02_type_system`、`c07_process`、`c10_networks`、`c11_macro_system_proc`、`c12_wasm`、`c13_embedded` 共 15 个文件中的 BOM
 - **验证**: `cargo check` / `clippy` (0 警告) / `test` / `doc` (0 警告) / `deny` / `build --release` 全工作区通过 — 回归验证完成
 - **干净构建**: `cargo clean` + `cargo check` 22s 通过 (清理 26.2GiB / 124,623 文件)
 - **示例代码**: `cargo check --workspace --examples` 19s 通过
@@ -1589,7 +1589,7 @@
 - 为 13 个缺失 `keywords` 和 `categories` 的 crate 补全 crates.io 元数据：
   - `c01_ownership_borrow_scope`, `c02_type_system`, `c03_control_fn`, `c04_generic`
   - `c05_threads`, `c06_async`, `c08_algorithms`, `c09_design_pattern`
-  - `c10_networks`, `c11_macro_system`, `c12_wasm`, `common`
+  - `c10_networks`, `c11_macro_system_proc`, `c12_wasm`, `common`
 - **全覆盖验证**: 15/15 crates 均具备 `keywords` 和 `categories`
 - **编译验证**: `cargo check --workspace --lib` 0.47s 通过
 
@@ -1635,7 +1635,7 @@
 
 - **`crates/c11_macro_system_proc/src/lib.rs`**: 修复 `debug_print` 属性宏保留函数签名；实现 `conditional` 条件编译宏；实现 `serializable` 结构体序列化宏
 - **`crates/c11_macro_system_proc/examples/proc_macro_comprehensive_demo.rs`** (152 行): 6 个宏全覆盖演示
-- **`crates/c11_macro_system/tests/proc_macro_integration_tests.rs`** (140 行): 8 项集成测试 (Builder, AutoClone, debug_print, timed, serializable, conditional)
+- **`crates/c11_macro_system_proc/tests/proc_macro_integration_tests.rs`** (140 行): 8 项集成测试 (Builder, AutoClone, debug_print, timed, serializable, conditional)
 
 ### ⚡ Lock-free / Unsafe 验证 Demo (Phase 5.2)
 

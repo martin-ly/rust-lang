@@ -144,6 +144,7 @@ timeline
             : --remap-path-scope
             : JSON target specs 去稳定化
 ```
+
 ### 2.2 即将发布的关键特性（1.96.0 / 1.97.0 Nightly）
 
 | 特性 | 预计版本 | 状态 | 项目影响度 |
@@ -183,7 +184,7 @@ timeline
 | c08_algorithms | 算法 | 较完善 | 1.95 ✅ |
 | c09_design_pattern | 设计模式 | 部分 | 1.95 ✅ |
 | c10_networks | 网络编程 | 部分 | 1.95 ✅ |
-| c11_macro_system | 宏系统 | 较完善 | 1.95 ✅ |
+| c11_macro_system_proc | 宏系统 | 较完善 | 1.95 ✅ |
 | c12_wasm | WebAssembly | 薄弱 | 1.95 ✅ |
 | c13_embedded | 嵌入式 | 部分 | 1.95 ✅ |
 | common | 共享工具 | 完善 | 1.95 ✅ |
@@ -218,7 +219,7 @@ timeline
 | 特性 | 影响 Crate | 补充状态 | 备注 |
 |------|-----------|---------|------|
 | `if let` guards on match arms | c03_control_fn | ✅ 已补充 | 含完整示例和测试 |
-| `cfg_select!` 宏 | c11_macro_system, c03_control_fn, c05_threads, c06_async, c08_algorithms | ✅ 已补充 | 多 crate 覆盖 |
+| `cfg_select!` 宏 | c11_macro_system_proc, c03_control_fn, c05_threads, c06_async, c08_algorithms | ✅ 已补充 | 多 crate 覆盖 |
 | `core::range` / `RangeInclusive` | c02_type_system, c08_algorithms | ✅ 已补充 | 含算法应用 |
 | `Atomic*::update` / `try_update` | c05_threads, c08_algorithms | ✅ 已补充 | 并发算法示例 |
 | `core::hint::cold_path` | c05_threads, c08_algorithms | ✅ 已补充 | 性能优化场景 |
@@ -294,6 +295,7 @@ graph TD
     E --> E3[Stack Protector<br/>1.97+]
     E --> E4[JSON Target Specs 重新设计<br/>1.97+]
 ```
+
 ### 5.2 趋势论证矩阵
 
 | 趋势 | 证据链 | 置信度 | 对本项目影响 |
@@ -337,6 +339,7 @@ graph TD
     Q8 --> A2[创建 rust_197_preview.rs<br/>标注 nightly feature gate<br/>添加免责声明]
     Q7 --> A3[加入趋势跟踪列表<br/>监控 RFC 进展]
 ```
+
 ### 6.2 Crate 内容更新优先级矩阵
 
 ```mermaid
@@ -363,6 +366,7 @@ quadrantChart
     "c12_wasm: 场景扩展": [0.5, 0.55]
     "c09_design_pattern: 新设计模式": [0.5, 0.5]
 ```
+
 ### 6.3 概念演化推理树：Async Closures
 
 ```mermaid
@@ -391,6 +395,7 @@ graph TD
     AC4 --> AC4c[与 `Fn() -> impl Future` 的互操作需要适配]
     AC4 --> AC4d[发送性约束: `AsyncFn() -> impl Future + Send` 表达复杂]
 ```
+
 ### 6.4 场景决策树：条件编译工具选择
 
 ```mermaid
@@ -408,6 +413,7 @@ graph TD
     Q4 -->|是| A2
     Q4 -->|否| A3
 ```
+
 ---
 
 ## 7. Wikipedia 概念对齐与属性关系
@@ -468,6 +474,7 @@ timeline
          : 对应: Scripting language, Generator, Linear logic
          : 项目状态: 🔴 完全缺失或跟踪中
 ```
+
 ---
 
 ## 8. 后续补充/修复/完善计划
@@ -509,6 +516,7 @@ gantt
     derive(CoercePointee) 跟踪     :f2, 2026-06-15, 5d
     并行前端编译指南               :f3, 2026-06-10, 5d
 ```
+
 ### 8.2 任务清单（可执行级）
 
 #### 已完成 ✅

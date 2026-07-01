@@ -17,7 +17,7 @@
 - ✅ `crates/c03_control_fn/examples/unsafe_patterns_demo.rs` — NonNull、addr_of_mut!、ManuallyDrop、unsafe trait、MaybeUninit 全部通过编译和 Miri
 - ✅ `crates/c11_macro_system_proc/examples/proc_macro_comprehensive_demo.rs` — 编译期宏，运行时通过
 - ✅ `crates/c05_threads/tests/loom_lockfree_tests.rs` — Loom 模型检测测试，编译通过
-- ✅ `crates/c11_macro_system/tests/proc_macro_integration_tests.rs` — 8 项集成测试全部通过
+- ✅ `crates/c11_macro_system_proc/tests/proc_macro_integration_tests.rs` — 8 项集成测试全部通过
 
 ## 结论
 

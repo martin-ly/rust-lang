@@ -28,7 +28,7 @@
 | 1.1 | **Unsafe Rust 练习模块实现** | 将 `exercises/src/unsafe_rust/mod.rs`（当前仅 11 行 TODO）实现为完整的 5 道练习题：原始指针操作、FFI 边界安全、MaybeUninit 模式、UnsafeCell 内部可变性、Miri 验证 | The Rustonomicon、Miri 官方文档、PLDI 2025 Tree Borrows |
 | 1.2 | **AI/ML 生态实战 crate** | 新建 `examples/ai_ml_ecosystem_demo.rs` 或扩展 `c08_algorithms`，实际调用 `candle-core`/`candle-nn` 完成：文本分类推理、图像识别（ONNX）、简单神经网络训练 | Hugging Face Candle 官方示例、Burn Book、tch-rs 文档 |
 | 1.3 | **数据库交互 Hands-On 示例** | 新建 `examples/database_ecosystem_demo.rs`，使用 `sqlx` + `sea-orm` + `redis` 完成：连接池管理、迁移、CRUD、事务、缓存模式 | SeaORM 官方文档、SQLx 文档 |
-| 1.4 | **过程宏真实 crate 拆分** | 将 `c11_macro_system` 中的过程宏从 `pub mod` 模拟改为真正的独立 `proc-macro = true` crate，展示跨 crate 开发、TokenStream 调试、`syn` + `quote` + `darling` 组合 | The Little Book of Rust Macros、syn/quote 官方文档 |
+| 1.4 | **过程宏真实 crate 拆分** | 将 `c11_macro_system_proc` 中的过程宏从 `pub mod` 模拟改为真正的独立 `proc-macro = true` crate，展示跨 crate 开发、TokenStream 调试、`syn` + `quote` + `darling` 组合 | The Little Book of Rust Macros、syn/quote 官方文档 |
 | 1.5 | **Lock-free 数据结构补全** | 补全 `c05_threads/src/lockfree/` 下的 5 个空壳模块（queue、stack、hazard_pointers、memory_management、priority_queue），引用 Crossbeam 实现 | Crossbeam 源码、1024cores.net |
 
 ### Phase 2：Rust 1.95+ 特性全面跟踪与更新（预计 2-3 周）

@@ -23,22 +23,26 @@
 ```bash
 cargo test --workspace
 ```
+
 ### 特定 Crate 测试
 
 ```bash
 cargo test -p c01_ownership_borrow_scope
 cargo test -p c06_async
 ```
+
 ### 特定测试
 
 ```bash
 cargo test test_name -p c01_ownership_borrow_scope
 ```
+
 ### 忽略慢的测试
 
 ```bash
 cargo test --workspace -- --skip slow
 ```
+
 ---
 
 ## 单元测试
@@ -69,6 +73,7 @@ mod tests {
     }
 }
 ```
+
 ---
 
 ## 集成测试
@@ -78,6 +83,7 @@ mod tests {
 ```bash
 cargo test -p integration_tests
 ```
+
 ### 测试结构
 
 ```rust
@@ -90,6 +96,7 @@ fn test_cross_crate() {
     // 测试多个 crate 协作
 }
 ```
+
 ---
 
 ## 基准测试
@@ -103,6 +110,7 @@ cargo bench --workspace
 # 特定 crate
 cargo bench -p c08_algorithms
 ```
+
 ### 基准测试示例
 
 ```rust
@@ -123,6 +131,7 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
+
 ---
 
 ## 异步测试
@@ -146,6 +155,7 @@ async fn test_timeout() {
     assert!(result.is_ok());
 }
 ```
+
 ---
 
 ## 文档测试
@@ -162,12 +172,14 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ```
+
 ### 运行文档测试
 
 ```bash
 cargo test --doc
 cargo test --doc -p c01_ownership_borrow_scope
 ```
+
 ---
 
 ## Miri 测试
@@ -179,6 +191,7 @@ Miri 用于检测未定义行为和内存安全问题。
 ```bash
 rustup component add miri
 ```
+
 ### 运行 Miri
 
 ```bash
@@ -191,6 +204,7 @@ cargo miri test -p c01_ownership_borrow_scope
 # 运行程序
 cargo miri run -p c01_ownership_borrow_scope
 ```
+
 ---
 
 ## 测试覆盖率
@@ -207,6 +221,7 @@ cargo tarpaulin --workspace
 # HTML 报告
 cargo tarpaulin --workspace --out Html
 ```
+
 ### 查看报告
 
 打开 `tarpaulin-report.html` 查看详细覆盖率。
@@ -249,16 +264,19 @@ cargo tarpaulin --workspace --out Html
 ```bash
 cargo test -- --nocapture
 ```
+
 ### 只运行失败的测试
 
 ```bash
 cargo test -- --failed
 ```
+
 ### 输出到文件
 
 ```bash
 cargo test 2>&1 | tee test-output.log
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

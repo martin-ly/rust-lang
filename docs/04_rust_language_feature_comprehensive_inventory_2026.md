@@ -105,7 +105,7 @@
     - [10.3 前沿缺口：io\_uring 深度实践 {#103-前沿缺口io\_uring-深度实践}](#103-前沿缺口io_uring-深度实践-103-前沿缺口io_uring-深度实践)
     - [10.4 前沿缺口：QUIC/HTTP3 完整实现 {#104-前沿缺口quichttp3-完整实现}](#104-前沿缺口quichttp3-完整实现-104-前沿缺口quichttp3-完整实现)
     - [10.5 权威来源对齐 {#105-权威来源对齐}](#105-权威来源对齐-105-权威来源对齐)
-  - [11. 宏系统 (c11\_macro\_system) {#11-宏系统-c11\_macro\_system}](#11-宏系统-c11_macro_system-11-宏系统-c11_macro_system)
+  - [11. 宏系统 (c11\_macro\_system\_proc) {#11-宏系统-c11\_macro\_system\_proc}](#11-宏系统-c11_macro_system_proc-11-宏系统-c11_macro_system_proc)
     - [11.1 特性树图 {#111-特性树图}](#111-特性树图-111-特性树图)
     - [11.2 核心概念完备性检查 {#112-核心概念完备性检查}](#112-核心概念完备性检查-112-核心概念完备性检查)
     - [11.3 1.95+ 新增特性深度梳理：cfg\_select {#113-195-新增特性深度梳理cfg\_select}](#113-195-新增特性深度梳理cfg_select-113-195-新增特性深度梳理cfg_select)
@@ -169,6 +169,7 @@ A = Rust 生态前沿知识集合
 B = 本项目现有知识集合
     = { crates/c01-c13 } ∪ { docs/ } ∪ { knowledge/ } ∪ { content/ }
 ```
+
 **认知视角的完备性模型**：
 
 ```text
@@ -178,6 +179,7 @@ B = 本项目现有知识集合
         + 反例警示(What not)
         + 演化脉络(Why now)
 ```
+
 每个特性必须覆盖：学习特性、示例案例、反例边界、特性树图、权威对齐。
 
 ### 00.2 缺失项热力图 (A \ B) {#002-缺失项热力图-a-b}
@@ -196,7 +198,7 @@ B = 本项目现有知识集合
 | 特性 | 认知维度 | 归属 Crate | 状态 |
 |------|---------|-----------|------|
 | `if let` guards on match arms | 控制流/模式匹配 | c03_control_fn | ✅ 已覆盖（437行模块+知识库文档） |
-| `cfg_select!` 宏 | 元编程/条件编译 | c11_macro_system | ✅ 已覆盖（303行模块+知识库文档） |
+| `cfg_select!` 宏 | 元编程/条件编译 | c11_macro_system_proc | ✅ 已覆盖（303行模块+知识库文档） |
 | `core::range` / `RangeInclusive` | 类型系统/迭代器 | c02_type_system | ✅ 已覆盖（619行模块+知识库文档） |
 | `Atomic*::update` / `try_update` | 并发/原子操作 | c05_threads | ✅ 已覆盖（469行模块） |
 | `core::hint::cold_path` | 性能/分支预测 | c05_threads | ✅ 已覆盖（已集成） |
@@ -292,6 +294,7 @@ graph TD
     Q8 --> A2[创建 rust_197_preview.rs<br/>标注 nightly feature gate<br/>添加免责声明]
     Q7 --> A3[加入趋势跟踪列表<br/>监控 RFC 进展]
 ```
+
 ---
 
 ## 01. 所有权与内存安全 (c01_ownership_borrow_scope) {#01-所有权与内存安全-c01_ownership_borrow_scope}
@@ -333,6 +336,7 @@ graph TD
     M --> M5[MaybeUninit 数组互转 1.95 ⭐]
     M --> M6["Cell<[T; N]> AsRef 1.95 ⭐"]
 ```
+
 ### 01.2 核心概念完备性检查 {#012-核心概念完备性检查}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -382,6 +386,7 @@ fn demo_cell_as_ref() {
     assert_eq!(cell_slice.len(), 4);
 }
 ```
+
 **When/Where**: 在需要逐元素初始化数组后再整体转换的场景，如零拷贝解析、并发缓冲区预分配。
 
 **What not (反例)**:
@@ -408,6 +413,7 @@ fn anti_pattern() {
     let _ = arr;
 }
 ```
+
 **权威对齐**:
 
 - 稳定版本: **1.95.0** (2026-04-16)
@@ -436,6 +442,7 @@ static COUNTER: AtomicU32 = AtomicU32::new(0);
 use std::cell::UnsafeCell;
 static COUNTER_CELL: UnsafeCell<u32> = UnsafeCell::new(0);
 ```
+
 **权威对齐**:
 
 - 稳定版本: **Rust 2024 Edition** (1.85.0)
@@ -493,6 +500,7 @@ graph TD
     TS --> TS3[core::range / RangeInclusive 1.95 ⭐]
     TS --> TS4[repr128 1.89]
 ```
+
 ### 02.2 核心概念完备性检查 {#022-核心概念完备性检查}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -545,6 +553,7 @@ fn range_contains_benchmark() {
     assert!(r.contains(&200));  // 包含端点
 }
 ```
+
 **When/Where**: 区间算法、离散数学运算、日期范围处理、编译器优化友好的范围表达。
 
 **What not (反例)**:
@@ -567,6 +576,7 @@ fn empty_range() {
     assert_eq!(r.into_iter().count(), 0);
 }
 ```
+
 **权威对齐**:
 
 - 稳定版本: **1.95.0** (2026-04-16)
@@ -601,6 +611,7 @@ fn decode_protocol_flag(raw: u8) -> Result<bool, &'static str> {
     raw.try_into().map_err(|_| "invalid boolean encoding")
 }
 ```
+
 **What not (反例)**:
 
 ```rust
@@ -615,6 +626,7 @@ fn anti_pattern() {
     assert!(bad.is_err());  // ✅ 正确行为：拒绝非 0/1 值
 }
 ```
+
 **权威对齐**:
 
 - 稳定版本: **1.95.0** (2026-04-16)
@@ -665,6 +677,7 @@ graph TD
     PM --> PM3[Destructuring]
     PM --> PM4[Guards 1.95 ⭐]
 ```
+
 ### 03.2 核心概念完备性检查 {#032-核心概念完备性检查}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -742,6 +755,7 @@ fn handle_state(state: ConnectionState) -> &'static str {
     }
 }
 ```
+
 **When/Where**: 深层嵌套数据结构的分支处理、异步结果级联判断、状态机转换中的条件解构。
 
 **What not (反例)**:
@@ -775,6 +789,7 @@ fn old_way(msg: Message) -> String {
 //     Some(v) if v > 0 => ...  // 这是普通 guard，不是 if let guard
 // }
 ```
+
 **权威对齐**:
 
 - 稳定版本: **1.95.0** (2026-04-16)
@@ -809,6 +824,7 @@ fn if_let_guards_example(opt: Option<Option<i32>>) -> i32 {
     }
 }
 ```
+
 ### 03.5 权威来源对齐 {#035-权威来源对齐}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -857,6 +873,7 @@ graph TD
     AO --> AO4[derive_smart_pointer 预研]
     AO --> AO5[supertrait_item_shadowing 预研]
 ```
+
 ### 04.2 核心概念完备性检查 {#042-核心概念完备性检查}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -912,6 +929,7 @@ fn process<T: Clone, U>(data: T, _config: U) -> impl Clone + use<T> {
     // 注意：返回类型只捕获 T，不捕获 U
 }
 ```
+
 **When/Where**: 库 API 设计中精确控制返回类型的生命周期约束、减少不必要的生命周期耦合、提升 API 稳定性。
 
 **What not (反例)**:
@@ -932,6 +950,7 @@ fn missing_lifetime<'a>(x: &'a str) -> impl Iterator<Item = char> + use<> {
     x.chars()  // 编译错误：返回类型包含 'a 但未在 use<> 中声明
 }
 ```
+
 **权威对齐**:
 
 - 稳定版本: **1.82.0** (2024 Edition)
@@ -960,6 +979,7 @@ graph LR
     style E fill:#90EE90
     style F fill:#FFB6C1
 ```
+
 **颜色说明**: 🟢 已稳定 | 🟣 nightly/FCP
 
 ### 04.5 AFIDT 预研（async fn in dyn trait） {#045-afidt-预研async-fn-in-dyn-trait}
@@ -993,6 +1013,7 @@ fn create_source() -> Box<dyn DataSource> {
 // ❌ 当前限制（nightly）：不能直接在 dyn 中使用关联类型
 // ❌ Send bound 仍需 RTN 解决
 ```
+
 **权威对齐**:
 
 - 状态: **Nightly 实验中** (`#![feature(async_fn_in_dyn_trait)]`)
@@ -1050,6 +1071,7 @@ graph TD
     P --> P2[JoinHandle]
     P --> P3[cold_path 1.95 ⭐]
 ```
+
 ### 05.2 核心概念完备性检查 {#052-核心概念完备性检查}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -1119,6 +1141,7 @@ fn toggle_flag(flag: &AtomicBool) -> bool {
     flag.update(|f| !f, Ordering::SeqCst)
 }
 ```
+
 **When/Where**: 无锁计数器、状态机转换、并发配置更新、CAS 循环的所有场景。
 
 **What not (反例)**:
@@ -1142,6 +1165,7 @@ fn misunderstanding(counter: &AtomicUsize) {
 // ❌ 错误：update 不是 wait-free 的，底层仍然是 CAS 循环
 // 对于极高竞争场景，仍可能需要考虑自旋退避或带 back-off 的 CAS
 ```
+
 **权威对齐**:
 
 - 稳定版本: **1.95.0** (2026-04-16)
@@ -1188,6 +1212,7 @@ fn optimistic_update<T>(ptr: &AtomicPtr<T>, new: Box<T>) -> Option<Box<T>> {
     }
 }
 ```
+
 **When/Where**: 错误处理分支、panic 路径、罕见边界条件、并发竞争失败路径。
 
 **What not (反例)**:
@@ -1214,6 +1239,7 @@ fn wrong_usage(x: bool) {
     // cold_path() 不返回！它只是 ()
 }
 ```
+
 **权威对齐**:
 
 - 稳定版本: **1.95.0** (2026-04-16)
@@ -1275,6 +1301,7 @@ graph TD
     S --> S3["pin! macro"]
     S --> S4[Gen blocks 预研]
 ```
+
 ### 06.2 核心概念完备性检查 {#062-核心概念完备性检查}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -1307,6 +1334,7 @@ Future trait (1.36)
               → RTN: Return Type Notation (1.97+ RFC)
                 → Gen blocks / AsyncIterator (nightly)
 ```
+
 ### 06.4 Async Closures 稳定特性梳理 {#064-async-closures-稳定特性梳理}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -1331,6 +1359,7 @@ let old_closure = |s: String| async move {
 // };
 // 优势：s 被借用而非 move，生命周期推断更精确
 ```
+
 **AsyncFn trait family** (1.85.0 stable, Rust 2024 prelude):
 
 ```rust
@@ -1360,6 +1389,7 @@ where
 //     resp
 // }
 ```
+
 **What not (反例)**:
 
 ```rust
@@ -1375,6 +1405,7 @@ where
 // }
 // takes_async_fn(old_style);  // 可能不直接兼容
 ```
+
 **权威对齐**:
 
 - 状态: **Stable since Rust 1.85.0**
@@ -1409,6 +1440,7 @@ where
     // tokio::spawn(async move { source.fetch().await });
 }
 ```
+
 **权威对齐**:
 
 - 状态: **Nightly** (`#![feature(return_type_notation)]`)
@@ -1438,6 +1470,7 @@ async fn migrated() {
     let _ = fs::read_to_string("file.txt").await;
 }
 ```
+
 **处理建议**:
 
 1. 所有 `c06_async/src/async_std/` 示例添加 `#[deprecated]` 风格注释
@@ -1497,6 +1530,7 @@ graph TD
     EB --> EB2[XDP]
     EB --> EB3[tracepoint / kprobe]
 ```
+
 ### 07.2 核心概念完备性检查 {#072-核心概念完备性检查}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -1532,6 +1566,7 @@ How:    kernel crate + no_std + unsafe FFI + 内核 ABI
 When:   设备驱动、文件系统、网络协议栈
 Not:    不是用户态程序！没有 std，没有 libc，只有 core/alloc
 ```
+
 **关键概念**:
 
 - `no_std` + `no_main` 内核模块
@@ -1564,6 +1599,7 @@ How:    aya crate + BPF map + verifier-friendly Rust subset
 When:   XDP 网络过滤、tracepoint 追踪、BPF 性能计数器
 Not:    不是所有 Rust 代码都能编译为 eBPF！需要 verifier-safe 子集
 ```
+
 **权威对齐**:
 
 - 项目: [aya-rs/aya](https://github.com/aya-rs/aya)
@@ -1611,6 +1647,7 @@ graph TD
     A --> A2[Searching]
     A --> A3[Graph algorithms]
 ```
+
 ### 08.2 核心概念完备性检查 {#082-核心概念完备性检查}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -1655,6 +1692,7 @@ fn window_ranges(total: i32, window_size: i32) -> impl Iterator<Item = RangeIncl
     (0..=total - window_size).map(move |i| RangeInclusive::new(i, i + window_size - 1))
 }
 ```
+
 **权威对齐**:
 
 - 稳定版本: **1.95.0**
@@ -1702,6 +1740,7 @@ graph TD
     R --> R2[Async Patterns]
     R --> R3[2024 Edition 模式更新]
 ```
+
 ### 09.2 核心概念完备性检查 {#092-核心概念完备性检查}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -1733,6 +1772,7 @@ unsafe fn new_style(ptr: *mut u8) {
     unsafe { *ptr = 0; }  // ✅ 显式 unsafe 块
 }
 ```
+
 **影响**: 所有涉及 `unsafe fn` 的设计模式（FFI wrapper、原始指针封装）都需要更新示例。
 
 ### 09.4 权威来源对齐 {#094-权威来源对齐}
@@ -1786,6 +1826,7 @@ graph TD
     LP --> LP2[DHT]
     LP --> LP3[PubSub]
 ```
+
 ### 10.2 核心概念完备性检查 {#102-核心概念完备性检查}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -1821,6 +1862,7 @@ How:    提交队列 SQ + 完成队列 CQ + io_uring_enter syscall
 When:   高吞吐网络服务、高频文件 I/O、数据库内核
 Not:    不是跨平台的！仅限 Linux 5.1+
 ```
+
 **Rust 生态**:
 
 - `io-uring` crate (tokio-rs): 底层安全封装
@@ -1851,7 +1893,7 @@ Not:    不是跨平台的！仅限 Linux 5.1+
 
 ---
 
-## 11. 宏系统 (c11_macro_system) {#11-宏系统-c11_macro_system}
+## 11. 宏系统 (c11_macro_system_proc) {#11-宏系统-c11_macro_system_proc}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -1880,6 +1922,7 @@ graph TD
     C --> C3["cfg_select! 1.95 ⭐"]
     C --> C4["concat! / include!"]
 ```
+
 ### 11.2 核心概念完备性检查 {#112-核心概念完备性检查}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -1945,6 +1988,7 @@ fn feature_enabled() -> bool {
     }
 }
 ```
+
 **When/Where**: 跨平台代码、条件特性编译、嵌入式目标选择、替代 `cfg-if` crate。
 
 **What not (反例)**:
@@ -1964,6 +2008,7 @@ fn bad_runtime(x: bool) {
 // ❌ 旧 cfg-if crate 的迁移注意：cfg_select! 是 core 宏，无需外部依赖
 // 可以移除 Cargo.toml 中的 cfg-if = "1.0"
 ```
+
 **权威对齐**:
 
 - 稳定版本: **1.95.0** (2026-04-16)
@@ -2013,6 +2058,7 @@ graph TD
     W --> W3[wasm32-wasip2 预研]
     W --> W4[Component Model]
 ```
+
 ### 12.2 核心概念完备性检查 {#122-核心概念完备性检查}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -2038,6 +2084,7 @@ graph TD
 新: rustup target add wasm32-wasip1   # 1.84+
     rustup target add wasm32-wasip2   # 组件模型 (实验性)
 ```
+
 **项目修复点**:
 
 1. `c12_wasm/Cargo.toml`: 更新 target 配置
@@ -2088,6 +2135,7 @@ graph TD
     U --> U2[as_ref_unchecked 1.95 ⭐]
     U --> U3[register blocks]
 ```
+
 ### 13.2 核心概念完备性检查 {#132-核心概念完备性检查}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -2150,6 +2198,7 @@ fn comparison() {
     }
 }
 ```
+
 **When/Where**: 嵌入式 MMIO、性能关键路径（已知指针来自有效来源）、裸机操作系统内核。
 
 **What not (反例)**:
@@ -2181,6 +2230,7 @@ fn safe_way(raw: *const u8) -> Option<&u8> {
     unsafe { raw.as_ref() }  // 检查 null，返回 Option
 }
 ```
+
 **权威对齐**:
 
 - 稳定版本: **1.95.0** (2026-04-16)
@@ -2207,6 +2257,7 @@ How:    Embassy executor + HAL + async interrupt handlers
 When:   传感器读取、无线通信、低功耗状态机
 Not:    不是通用 OS！没有堆分配器也能运行 (stack-based futures)
 ```
+
 **权威对齐**:
 
 - 项目: [embassy.dev](https://embassy.dev/)
@@ -2252,6 +2303,7 @@ docs/01_core/
 ├── 06_error_handling_foundations.md       # [新增] 错误处理基础
 └── 07_rust_2024_edition_changes.md        # [新增] 2024 Edition 核心变更
 ```
+
 **内容质量标准**:
 
 - 每个文档必须包含：概念定义 → 示例代码 → 反例边界 → 与权威来源对齐
@@ -2330,7 +2382,7 @@ docs/01_core/
 | 任务ID | 任务描述 | 归属 | 状态 |
 |--------|---------|------|------|
 | T2.1 | `if let` guards 完整示例集 | c03_control_fn | ✅ 已存在（437行+测试） |
-| T2.2 | `cfg_select!` 宏专项模块 | c11_macro_system | ✅ 已存在（303行+测试），知识库已补充 |
+| T2.2 | `cfg_select!` 宏专项模块 | c11_macro_system_proc | ✅ 已存在（303行+测试），知识库已补充 |
 | T2.3 | `core::range` / `RangeInclusive` | c02_type_system, c08_algorithms | ✅ 已存在（619行+测试），知识库已补充 |
 | T2.4 | `Atomic*::update` / `try_update` | c05_threads | ✅ 已存在（469行+测试） |
 | T2.5 | `core::hint::cold_path` | c05_threads, c08_algorithms | ✅ 已存在（已集成+测试） |
@@ -2537,6 +2589,7 @@ graph TD
     Q8 --> A2[创建 rust_197_preview.rs<br/>标注 nightly feature gate<br/>添加免责声明]
     Q7 --> A3[加入趋势跟踪列表<br/>监控 RFC 进展]
 ```
+
 ---
 
 ## 附录 D：认知完备性检查表 {#附录-d认知完备性检查表}

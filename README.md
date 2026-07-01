@@ -28,6 +28,7 @@ L5 对比 ──→ 多语言范式对比、安全边界分析
 L6 生态 ──→ 工具链、设计模式、核心 crate、应用领域
 L7 未来 ──→ AI 集成、形式化方法、语言演进
 ```
+
 ---
 
 ## 🌍 国际学习者入口
@@ -92,6 +93,7 @@ python scripts/build_search_index.py
 cargo build --workspace
 cargo test --workspace
 ```
+
 ### 工具链说明
 
 - 默认工具链为 **stable 1.96.0**（`rust-toolchain.toml` 使用 `stable` 通道）。
@@ -103,6 +105,7 @@ cargo test --workspace
   cargo +nightly clippy --workspace --tests --all-features -- -D warnings
   cargo +nightly test --workspace --all-features
   ```
+
 ---
 
 ## 核心文件导航
@@ -208,7 +211,6 @@ rust-lang/
 │   ├── c08_algorithms/
 │   ├── c09_design_pattern/
 │   ├── c10_networks/
-│   ├── c11_macro_system/
 │   ├── c11_macro_system_proc/
 │   ├── c12_wasm/
 │   ├── c13_embedded/
@@ -224,6 +226,7 @@ rust-lang/
 ├── CHANGELOG.md                # 变更日志
 └── README.md                   # 本文件
 ```
+
 ---
 
 ## 自动化 CI

@@ -160,7 +160,7 @@
 | c08_algorithms | Yes | Yes | Yes | Yes |
 | c09_design_pattern | Yes | Yes | Yes | Yes |
 | c10_networks | Yes | Yes | Yes | Yes |
-| c11_macro_system | Yes | Yes | Yes | Yes |
+| c11_macro_system_proc | Yes | Yes | Yes | Yes |
 | c11_macro_system_proc | Yes | Yes | Yes | Yes |
 | c12_wasm | Yes (archive) | Yes | Yes | Yes |
 | c13_embedded | Yes | Yes | Yes | Yes |

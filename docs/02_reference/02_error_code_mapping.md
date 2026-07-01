@@ -182,6 +182,7 @@ fn main() {
     println!("{}", s);  // Error: E0382 - value borrowed here after move
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -217,6 +218,7 @@ fn main() {
     println!("{} 的长度是 {}", s, len);  // ✅ s 仍然可用
 }
 ```
+
 **相关概念**:
 
 - [所有权规则](../../crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_navigation.md)
@@ -257,6 +259,7 @@ fn main() {
     println!("{:?}", p);  // Error: E0383 - borrow of partially moved value
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -296,6 +299,7 @@ fn main() {
     // println!("{:?}", p);  // ❌ 不能使用整个 p
 }
 ```
+
 **相关概念**:
 
 - [部分移动](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/01_ownership_rules_reference.md)
@@ -325,6 +329,7 @@ fn main() {
     println!("{} {}", r1, r2);
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -370,6 +375,7 @@ fn process(s: String) -> String {
     s + " processed"
 }
 ```
+
 **相关概念**:
 
 - [可变借用规则](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_borrow_checker_in_depth.md)
@@ -405,6 +411,7 @@ fn main() {
     println!("{} {}", r1, r2);
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -447,6 +454,7 @@ fn main() {
     println!("原长度: {}, 新字符串: {}", len, r);
 }
 ```
+
 **相关概念**:
 
 - [借用规则](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_borrow_checker_in_depth.md)
@@ -473,6 +481,7 @@ fn main() {
     println!("{}", s);  // Error: E0503
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -500,6 +509,7 @@ fn main() {
     println!("{}", s);  // ✅
 }
 ```
+
 **相关概念**: [所有权转移](../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/01_ownership_quick_start.md)
 
 ---
@@ -524,6 +534,7 @@ fn main() {
     println!("{}", r);
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -545,6 +556,7 @@ fn main() {
     let s2 = s.clone();  // ✅ 克隆而非移动
 }
 ```
+
 ---
 
 ### E0506 - 在借用时赋值 {#e0506---在借用时赋值}
@@ -565,6 +577,7 @@ fn main() {
     println!("{}", r);
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -578,6 +591,7 @@ fn main() {
     println!("{}", s);
 }
 ```
+
 ---
 
 ### E0507 - 从借用内容中移出 {#e0507---从借用内容中移出}
@@ -597,6 +611,7 @@ fn main() {
     let s2 = *r;  // Error: E0507 - cannot move out of `*r` which is behind a shared reference
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -627,6 +642,7 @@ fn main() {
     println!("{} {}", x, y);
 }
 ```
+
 ---
 
 ### E0508 - 从数组/元组中移出 {#e0508---从数组元组中移出}
@@ -646,6 +662,7 @@ fn main() {
     let first = r[0];  // Error: E0508
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -665,6 +682,7 @@ fn main() {
     println!("{} {:?}", first, arr);
 }
 ```
+
 ---
 
 ## 类型系统错误 (E02xx-E03xx) {#类型系统错误-e02xx-e03xx}
@@ -690,6 +708,7 @@ fn main() {
     print_it(42);
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -723,6 +742,7 @@ fn main() {
     print_it("hello");  // ✅ &str 实现了 Display
 }
 ```
+
 **相关概念**:
 
 - [Trait Bound](../../crates/c04_generic/docs/tier_02_guides/02_trait_system.md)
@@ -746,6 +766,7 @@ fn main() {
     v.push(42);
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -768,6 +789,7 @@ fn main() {
     v.push(42i32);  // ✅ 从 push 的值推断
 }
 ```
+
 ---
 
 ### E0283 - 类型标注不足 {#e0283---类型标注不足}
@@ -785,6 +807,7 @@ fn main() {
     let s = "hello".into();  // Error: E0283 - type annotations needed
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -798,6 +821,7 @@ fn main() {
     let s = String::from("hello");  // ✅
 }
 ```
+
 ---
 
 ### E0308 - 类型不匹配 {#e0308---类型不匹配}
@@ -815,6 +839,7 @@ fn main() {
     let x: i32 = "hello";  // Error: E0308 - expected i32, found &str
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -840,6 +865,7 @@ fn main() {
     let y: f64 = x as f64;  // ✅ 使用 as 进行数值类型转换
 }
 ```
+
 **相关概念**: [类型转换](../../crates/c02_type_system/docs/tier_03_references/01_type_conversions_reference.md)
 
 ---
@@ -857,6 +883,7 @@ fn add(a: i32, b: i32) -> i32 {
     "not a number"  // Error: E0308
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -869,6 +896,7 @@ fn add_result(a: i32, b: i32) -> Result<i32, String> {
     Ok(a + b)
 }
 ```
+
 ---
 
 ## 生命周期错误 (E05xx-E06xx) {#生命周期错误-e05xx-e06xx}
@@ -890,6 +918,7 @@ fn longest(x: &str, y: &str) -> &str {  // Error: E0106
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -915,6 +944,7 @@ fn main() {
     println!("最长的是 {}", result);
 }
 ```
+
 **相关概念**:
 
 - [生命周期标注](../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/03_lifetimes_practice.md)
@@ -942,6 +972,7 @@ fn main() {
     let w: Wrapper = Wrapper { x: "a", y: "b" };  // Error: E0107
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -956,6 +987,7 @@ fn main() {
     let w = Wrapper { x: "a", y: "b" };  // ✅
 }
 ```
+
 ---
 
 ### E0597 - 生命周期不足 {#e0597---生命周期不足}
@@ -978,6 +1010,7 @@ fn main() {
     println!("{}", r);  // r 引用已释放的内存
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -1013,6 +1046,7 @@ fn main() {
     println!("{}", r);
 }
 ```
+
 **相关概念**:
 
 - [悬垂引用](../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/03_lifetimes_practice.md)
@@ -1044,6 +1078,7 @@ fn make_container(s: &str) -> Container {
     Container { value: s }  // Error: E0310
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1065,6 +1100,7 @@ fn make_container_owned(s: &str) -> ContainerOwned {
     ContainerOwned { value: s.to_string() }
 }
 ```
+
 ---
 
 ### E0495 - 生命周期不匹配 {#e0495---生命周期不匹配}
@@ -1082,6 +1118,7 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
     if x.len() > y.len() { x } else { y }  // Error: E0495
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -1100,6 +1137,7 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> Either<'a, 'b> {
     if x.len() > y.len() { Either::First(x) } else { Either::Second(y) }
 }
 ```
+
 ---
 
 ## 所有权错误 {#所有权错误}
@@ -1122,6 +1160,7 @@ fn main() {
     println!("{}", x);  // Error: E0381
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1130,6 +1169,7 @@ fn main() {
     println!("{}", x);
 }
 ```
+
 ---
 
 ### E0384 - 对不可变变量赋值 {#e0384---对不可变变量赋值}
@@ -1148,6 +1188,7 @@ fn main() {
     x = 6;  // Error: E0384
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1157,6 +1198,7 @@ fn main() {
     println!("{}", x);
 }
 ```
+
 **相关概念**: [可变性](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/01_ownership_rules_reference.md)
 
 ---
@@ -1192,6 +1234,7 @@ fn main() {
     }
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -1212,6 +1255,7 @@ fn main() {
     }
 }
 ```
+
 **相关概念**:
 
 - [模式匹配](../../crates/c03_control_fn/docs/tier_02_guides/04_pattern_matching_guide.md)
@@ -1234,6 +1278,7 @@ fn main() {
     let Some(x) = None;  // Error: E0005
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1257,6 +1302,7 @@ fn main() {
     println!("{}", x);
 }
 ```
+
 ---
 
 ### E0297 - 模式绑定不匹配 {#e0297---模式绑定不匹配}
@@ -1276,6 +1322,7 @@ fn bar(Some(x): Option<i32>) {  // Error: E0297
     println!("{}", x);
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1285,6 +1332,7 @@ fn bar(opt: Option<i32>) {
     }
 }
 ```
+
 ---
 
 ## 宏系统错误 {#宏系统错误}
@@ -1312,6 +1360,7 @@ impl Foo {
     fn do_something(&self) {}
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1332,6 +1381,7 @@ impl Foo {
     }
 }
 ```
+
 ---
 
 ### E0425 - 未找到函数/变量 {#e0425---未找到函数变量}
@@ -1349,6 +1399,7 @@ fn main() {
     println!("{}", unknown_var);  // Error: E0425
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1357,6 +1408,7 @@ fn main() {
     println!("{}", unknown_var);
 }
 ```
+
 ---
 
 ### E0554 - 未知特性 {#e0554---未知特性}
@@ -1374,6 +1426,7 @@ fn main() {
 
 fn main() {}
 ```
+
 **解决方案**:
 
 ```rust
@@ -1385,6 +1438,7 @@ fn main() {
 // 方案 2: 切换到 nightly (如确实需要)
 // rustup default nightly
 ```
+
 ---
 
 ## 模块系统错误 {#模块系统错误}
@@ -1406,6 +1460,7 @@ use non_existent::Module;  // Error: E0432
 
 fn main() {}
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -1420,6 +1475,7 @@ use serde::Serialize;  // ✅ 添加依赖后
 
 fn main() {}
 ```
+
 ---
 
 ### E0433 - 未找到 crate {#e0433---未找到-crate}
@@ -1437,6 +1493,7 @@ use serde::Serialize;  // Error: E0433 - 未在 Cargo.toml 中添加 serde
 
 fn main() {}
 ```
+
 **解决方案**:
 
 ```toml
@@ -1444,6 +1501,7 @@ fn main() {}
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
 ```
+
 ```rust,ignore
 use serde::Serialize;  // ✅
 
@@ -1452,6 +1510,7 @@ struct Point { x: i32, y: i32 }
 
 fn main() {}
 ```
+
 ---
 
 ### E0463 - 找不到 crate {#e0463---找不到-crate}
@@ -1474,6 +1533,7 @@ cargo update
 
 # 方案 3: 检查 Cargo.toml 中的依赖声明 {#方案-3-检查-cargotoml-中的依赖声明}
 ```
+
 ---
 
 ### E0603 - 私有模块 {#e0603---私有模块}
@@ -1495,6 +1555,7 @@ mod internal {
 // 在其他地方
 use crate::internal;  // Error: E0603
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -1510,6 +1571,7 @@ mod internal {
 
 pub use internal::secret;  // ✅ 重新导出
 ```
+
 ---
 
 ## 变量与可变性错误 {#变量与可变性错误}
@@ -1532,6 +1594,7 @@ fn main() {
     s.push_str(" world");  // Error: E0596
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1541,6 +1604,7 @@ fn main() {
     println!("{}", s);
 }
 ```
+
 ---
 
 ### E0599 - 未找到方法 {#e0599---未找到方法}
@@ -1559,6 +1623,7 @@ fn main() {
     x.push(5);  // Error: E0599 - i32 没有 push 方法
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1568,6 +1633,7 @@ fn main() {
     println!("{:?}", v);
 }
 ```
+
 ---
 
 ### E0609 - 未找到字段 {#e0609---未找到字段}
@@ -1588,6 +1654,7 @@ fn main() {
     println!("{}", p.z);  // Error: E0609
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1598,6 +1665,7 @@ fn main() {
     println!("{}", p.x);  // ✅ 使用正确字段名
 }
 ```
+
 ---
 
 ### E0614 - 类型不能进行此操作 {#e0614---类型不能进行此操作}
@@ -1616,6 +1684,7 @@ fn main() {
     let y = *x;  // Error: E0614 - i32 不能解引用
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1625,6 +1694,7 @@ fn main() {
     println!("{}", y);
 }
 ```
+
 ---
 
 ### E0616 - 私有字段 {#e0616---私有字段}
@@ -1648,6 +1718,7 @@ fn main() {
     let f = inner::Foo { secret: 42 };  // Error: E0616
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1672,6 +1743,7 @@ fn main() {
     println!("{}", f.secret());    // ✅ 使用访问器方法
 }
 ```
+
 ---
 
 ## Trait 与泛型错误 {#trait-与泛型错误}
@@ -1703,6 +1775,7 @@ impl Bar for Foo {  // Error: E0201
     fn baz(&self) {}
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1718,6 +1791,7 @@ impl Bar for Foo {
     }
 }
 ```
+
 ---
 
 ### E0323 - 错误的方法签名 {#e0323---错误的方法签名}
@@ -1743,6 +1817,7 @@ impl Greet for Person {
     }
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1758,6 +1833,7 @@ impl Greet for Person {
     }
 }
 ```
+
 ---
 
 ### E0392 - 参数未使用 {#e0392---参数未使用}
@@ -1775,6 +1851,7 @@ struct Wrapper<T> {  // Error: E0392
     value: i32,
 }
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -1796,6 +1873,7 @@ struct Wrapper<T> {
     _phantom: PhantomData<T>,  // ✅ 标记使用 T
 }
 ```
+
 ---
 
 ### E0275 - Trait 解析无限递归 {#e0275---trait-解析无限递归}
@@ -1816,6 +1894,7 @@ struct Wrapper<T> {
 trait Foo {}
 trait Bar: Foo {}  // ✅ 单向约束
 ```
+
 ---
 
 ## 并发与异步错误 {#并发与异步错误}
@@ -1838,6 +1917,7 @@ fn make_closure() -> Box<dyn Fn() -> i32> {
     Box::new(|| x)  // Error: E0373
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1862,6 +1942,7 @@ fn make_closure_static() -> impl Fn() -> i32 {
     move || x  // ✅ 复制而非移动
 }
 ```
+
 **相关概念**:
 
 - [闭包](../../crates/c03_control_fn/docs/tier_03_references/04_closures_reference.md)
@@ -1890,6 +1971,7 @@ fn main() {
     });
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1903,6 +1985,7 @@ fn main() {
     }).join().unwrap();
 }
 ```
+
 **相关概念**:
 
 - [Send/Sync](../../crates/c05_threads/docs/tier_01_foundations/03_glossary.md)
@@ -1931,6 +2014,7 @@ async fn bad_async() {
 
 async fn some_async() {}
 ```
+
 **解决方案**:
 
 ```rust
@@ -1956,6 +2040,7 @@ async fn good_async2() {
 
 async fn some_async() {}
 ```
+
 **相关概念**:
 
 - [异步借用](../../crates/c06_async/docs/tier_02_guides/04_async_design_patterns_practice.md)
@@ -1978,6 +2063,7 @@ async fn fib(n: u32) -> u32 {  // Error: E0733
     if n <= 1 { n } else { fib(n - 1).await + fib(n - 2).await }
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -1990,6 +2076,7 @@ fn fib(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
     })
 }
 ```
+
 **相关概念**: [递归异步](../../crates/c09_design_pattern/docs/ASYNC_RECURSION_ANALYSIS.md)
 
 ---
@@ -2012,6 +2099,7 @@ fn fib(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 use std::io;
 use std::fmt::Write as io;  // Error: E0252
 ```
+
 **解决方案**:
 
 ```rust
@@ -2024,6 +2112,7 @@ fn main() {
     println!("{}", s);
 }
 ```
+
 ---
 
 ### E0301 - 可变与不可变模式 {#e0301---可变与不可变模式}
@@ -2048,6 +2137,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ### E0446 - 私有类型在公共接口 {#e0446---私有类型在公共接口}
@@ -2072,6 +2162,7 @@ mod inner {
     }
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -2086,6 +2177,7 @@ mod inner {
     }
 }
 ```
+
 ---
 
 ### E0515 - 返回局部变量的引用 {#e0515---返回局部变量的引用}
@@ -2104,6 +2196,7 @@ fn bad() -> &str {
     &s  // Error: E0515
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -2123,6 +2216,7 @@ fn good_lifetime<'a>(input: &'a str) -> &'a str {
     input
 }
 ```
+
 ---
 
 ### E0521 - 借用数据逃逸 {#e0521---借用数据逃逸}
@@ -2141,6 +2235,7 @@ fn get_ref() -> &'static str {
     &s  // Error: E0521
 }
 ```
+
 **解决方案**: 同 E0515
 
 ---
@@ -2162,6 +2257,7 @@ fn main() {
     // 使用不稳定特性，例如 gen blocks
 }
 ```
+
 ---
 
 ### E0689 - 整数类型后缀 {#e0689---整数类型后缀}
@@ -2179,6 +2275,7 @@ fn main() {
     let x = 42.to_string();  // Error: E0689 - 42 是什么类型？
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -2189,6 +2286,7 @@ fn main() {
     let s = x.to_string();  // ✅ 变量有明确类型
 }
 ```
+
 ---
 
 ## 警告 (W开头) {#警告-w开头}
@@ -2211,6 +2309,7 @@ fn main() {
     println!("Hello");
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -2225,6 +2324,7 @@ fn main() {
     let _ = x;  // ✅ 或者允许警告
 }
 ```
+
 ---
 
 ### W0002 - 未使用的导入 {#w0002---未使用的导入}
@@ -2244,6 +2344,7 @@ fn main() {
     println!("Hello");
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -2254,6 +2355,7 @@ fn main() {
     map.insert("key", "value");
 }
 ```
+
 ---
 
 ### W0003 - 不可达代码 {#w0003---不可达代码}
@@ -2272,6 +2374,7 @@ fn main() {
     println!("Hello");  // Warning: unreachable statement
 }
 ```
+
 ---
 
 ### W0004 - 未使用的 mut {#w0004---未使用的-mut}
@@ -2290,6 +2393,7 @@ fn main() {
     println!("{}", x);
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -2298,6 +2402,7 @@ fn main() {
     println!("{}", x);
 }
 ```
+
 ---
 
 ### W0005 - 死代码 {#w0005---死代码}
@@ -2317,6 +2422,7 @@ fn unused_function() {  // Warning: dead_code
 
 fn main() {}
 ```
+
 **解决方案**:
 
 ```rust
@@ -2331,6 +2437,7 @@ pub fn public_function() {  // ✅ 公共函数不会被警告
 
 fn main() {}
 ```
+
 ---
 
 ### W0006 - 未处理的 Result {#w0006---未处理的-result}
@@ -2350,6 +2457,7 @@ fn main() {
     File::open("file.txt");  // Warning: unused Result
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -2369,6 +2477,7 @@ fn main() {
     let _ = File::open("file.txt");
 }
 ```
+
 ---
 
 ## 错误码快速修复索引表 {#错误码快速修复索引表}
@@ -2418,7 +2527,7 @@ fn main() {
 | 生命周期 | `crates/c01_ownership_borrow_scope/docs/tier_02_guides/03_lifetimes_practice.md` | 生命周期实践 |
 | 并发编程 | `crates/c05_threads/docs/` | 线程与并发 |
 | 异步编程 | `crates/c06_async/docs/` | async/await |
-| 宏系统 | `crates/c11_macro_system/docs/` | 宏编程指南 |
+| 宏系统 | `crates/c11_macro_system_proc/docs/` | 宏编程指南 |
 
 ### 速查卡 {#速查卡}
 >
@@ -2529,6 +2638,7 @@ graph TD
     G --> G1[E0282 类型推断失败]
     G --> G2[E0207 泛型约束不满足]
 ```
+
 ---
 
 ## 决策树：编译错误诊断流程 {#决策树编译错误诊断流程}
@@ -2546,6 +2656,7 @@ graph TD
     Q4 -->|是| A4[检查生命周期标注]
     Q4 -->|否| A5[查看 rustc --explain 输出]
 ```
+
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

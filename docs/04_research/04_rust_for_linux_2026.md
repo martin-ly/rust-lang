@@ -57,6 +57,7 @@
 2025-12  Linux 6.16: Android Binder Rust 重写进入主线
 2026-01  Linux 6.17: Asahi GPU 驱动稳定，NVMe Rust 子系统成熟
 ```
+
 **关键转折点**：2025 年底，Linux 内核维护者正式宣布 Rust 的实验阶段结束。这意味着：
 
 - Rust 代码与 C 代码享有同等的内核入口资格
@@ -124,6 +125,7 @@ make menuconfig
 # 编译 {#编译}
 make LLVM=1 -j$(nproc)
 ```
+
 **关键约束**：
 
 - 必须使用内核绑定的 Rust 版本（通常不是最新 stable）
@@ -167,6 +169,7 @@ impl Drop for HelloRust {
     }
 }
 ```
+
 **与用户态 Rust 的关键差异**：
 
 | 用户态 Rust | 内核态 Rust |
@@ -203,6 +206,7 @@ pr_err!("error occurred: {:?}", e);
 // 静态初始化
 static MY_DATA: Mutex<u32> = Mutex::new(0);
 ```
+
 ### 4.2 内存管理 {#42-内存管理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -221,6 +225,7 @@ buf.try_push(42)?;
 // 内核 Box
 let data = Box::try_new(MyStruct { ... }, GFP_KERNEL)?;
 ```
+
 ### 4.3 同步原语 {#43-同步原语}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -246,6 +251,7 @@ static IRQ_DATA: SpinLock<u32> = SpinLock::new(0);
 // Arc（引用计数）
 let shared = Arc::try_new(data, GFP_KERNEL)?;
 ```
+
 ---
 
 ## 五、生产案例研究 {#五生产案例研究}
@@ -279,6 +285,7 @@ fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
     }
 }
 ```
+
 ### 5.2 Asahi GPU 驱动（Apple Silicon） {#52-asahi-gpu-驱动apple-silicon}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -328,6 +335,7 @@ fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
 # 内核自带 bindgen 配置 {#内核自带-bindgen-配置}
 make rust/bindings
 ```
+
 生成的 Rust 绑定示例：
 
 ```rust,ignore
@@ -339,6 +347,7 @@ pub struct file_operations {
     // ...
 }
 ```
+
 ### 6.2 调用约定与 ABI {#62-调用约定与-abi}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -360,6 +369,7 @@ pub extern "C" fn rust_helper_process_data(data: *mut c_void, len: usize) -> c_i
     }
 }
 ```
+
 ---
 
 ## 七、安全关键系统关联 {#七安全关键系统关联}
@@ -372,7 +382,7 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 |--------------|-------------------|
 | `knowledge/04_expert/safety_critical/` | DO-178C / IEC 61508 对内核驱动的安全要求 |
 | `crates/c13_embedded/` | 裸机/RTOS 到 Linux 内核驱动的迁移路径 |
-| `crates/c11_macro_system/` | 内核宏与 `module!` 声明宏的对比 |
+| `crates/c11_macro_system_proc/` | 内核宏与 `module!` 声明宏的对比 |
 | `docs/04_research/formal_verification/` | RustBelt 语义对内核 unsafe 代码的形式化验证 |
 
 **Ferrocene 关联**：

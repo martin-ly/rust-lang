@@ -4,14 +4,28 @@ version = "0.1.0"
 edition = "2024"
 rust-version = "1.96.0"
 authors = ["Rust Learning Community"]
-description = "Rust procedural macro examples for c11_macro_system learning module"
+keywords = ["macros", "metaprogramming", "dsl"]
+categories = ["development-tools::testing"]
+description = "Rust macro system learning module (unified declarative and procedural macros)"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/rust-lang-learning"
 
-[lib]
-proc-macro = true
-
 [dependencies]
+common = { workspace = true, features = ["serde", "error-trait", "async"] }
+thiserror = { workspace = true }
 proc-macro2 = { workspace = true }
 quote = { workspace = true }
-syn = { workspace = true, features = ["full"] }
+syn = { workspace = true }
+c11_macro_system_proc_macros = { path = "./c11_macro_system_proc_macros" }
+
+[dev-dependencies]
+criterion = { workspace = true }
+c11_macro_system_proc_macros = { path = "./c11_macro_system_proc_macros" }
+
+[lib]
+name = "c11_macro_system_proc"
+path = "src/lib.rs"
+
+[[bench]]
+name = "performance_benchmarks"
+harness = false

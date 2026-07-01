@@ -14,7 +14,7 @@ CRATES = [
     "c02_type_system", "c03_control_flow", "c03_control_fn",
     "c04_generic", "c05_threads", "c06_async",
     "c07_process", "c08_algorithms", "c09_design_pattern",
-    "c10_networks", "c11_macro_system", "c12_wasm"
+    "c10_networks", "c11_macro_system_proc", "c12_wasm"
 ]
 
 def check_crate(crate_name):

@@ -118,7 +118,7 @@ Rust 新版本发布
 | c08_algorithms | - | - | ✅ | ✅ | - | ✅ | ✅ | ✅ |
 | c09_design_pattern | ✅ | ✅ | ✅ | ✅ | - | ✅ | ✅ | ✅ |
 | c10_networks | - | - | ✅ | ✅ | - | ✅ | ✅ | ✅ |
-| c11_macro_system | - | - | ✅ | ✅ | - | ✅ | ✅ | ✅ |
+| c11_macro_system_proc | - | - | ✅ | ✅ | - | ✅ | ✅ | ✅ |
 | c12_wasm | - | - | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ---

@@ -92,6 +92,7 @@
                          | wasm  |
                          +-------+
 ```
+
 ---
 
 ## 依赖矩阵 {#依赖矩阵}
@@ -110,7 +111,7 @@
 | c08_algorithms | c04_generic, common | rayon, petgraph |
 | c09_design_pattern | c04_generic | tokio, rayon |
 | c10_networks | c06_async, c07_process | tokio, tonic, rustls |
-| c11_macro_system | c04_generic | syn, quote |
+| c11_macro_system_proc | c04_generic | syn, quote |
 | c12_wasm | c06_async | wasm-bindgen, js-sys |
 | common | - | serde, thiserror (可选) |
 

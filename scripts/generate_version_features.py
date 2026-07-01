@@ -19,7 +19,7 @@ CRATES = [
     "c08_algorithms",
     "c09_design_pattern",
     "c10_networks",
-    "c11_macro_system",
+    "c11_macro_system_proc",
     "c12_wasm",
     "c13_embedded",
 ]
@@ -583,7 +583,7 @@ def select_features(crate_name: str, version: int) -> list:
         "c08_algorithms": ["explicit_inferred_const", "open_ranges_parsing"],
         "c09_design_pattern": ["trait_upcasting", "let_chains"],
         "c10_networks": ["lld_default", "cargo_multi_publish"],
-        "c11_macro_system": ["use_in_traits", "explicit_inferred_const"],
+        "c11_macro_system_proc": ["use_in_traits", "explicit_inferred_const"],
         "c12_wasm": ["target_feature_safe", "lld_default"],
         "c13_embedded": ["naked_functions", "repr128", "c_variadic"],
     }

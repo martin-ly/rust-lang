@@ -23,8 +23,7 @@
 | c08_algorithms | 算法与数据结构 | [README](c08_algorithms/README.md) |
 | c09_design_pattern | 设计模式 | [README](c09_design_pattern/README.md) |
 | c10_networks | 网络编程 | [README](c10_networks/README.md) |
-| c11_macro_system | 宏系统 | [README](c11_macro_system/README.md) |
-| c11_macro_system_proc | 过程宏系统 | [README](c11_macro_system_proc/README.md) |
+| c11_macro_system_proc | 宏系统（声明宏与过程宏） | [README](c11_macro_system_proc/README.md) |
 | c12_wasm | WASM 开发 | [README](c12_wasm/README.md) |
 | c13_embedded | 嵌入式系统 | [README](c13_embedded/README.md) |
 | c14_semantic_web | 语义 Web / 知识图谱 | [README](c14_semantic_web/README.md) |

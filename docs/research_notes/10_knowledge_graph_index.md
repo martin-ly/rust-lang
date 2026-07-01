@@ -467,7 +467,7 @@
 | 并发 | `crates/c05_threads` | [crates/c05_threads/README.md](../../crates/c05_threads/README.md) |
 | 设计模式 | `crates/c09_design_pattern` | [crates/c09_design_pattern/README.md](../../crates/c09_design_pattern/README.md) |
 | 模块系统 | 单文件 Cargo script | [examples/module_system_patterns.rs](../../examples/module_system_patterns.rs) |
-| 宏系统 | `crates/c11_macro_system` | [crates/c11_macro_system/examples/](../../crates/c11_macro_system/examples/) |
+| 宏系统 | `crates/c11_macro_system_proc` | [crates/c11_macro_system_proc/examples/](../../crates/c11_macro_system_proc/examples/) |
 | FFI / Embedded / WASM | `crates/c12_wasm` / `crates/c13_embedded` | [crates/c12_wasm/examples/](../../crates/c12_wasm/examples/) / [crates/c13_embedded/examples/](../../crates/c13_embedded/examples/) |
 | 异步/并发示例 | `crates/c06_async` / `crates/c05_threads` | [crates/c06_async/examples/](../../crates/c06_async/examples/) / [crates/c05_threads/examples/](../../crates/c05_threads/examples/) |
 | Fallback / Degrade 示例 | `crates/c06_async` | [crates/c06_async/examples/fallback_degrade_pattern.rs](../../crates/c06_async/examples/fallback_degrade_pattern.rs) |

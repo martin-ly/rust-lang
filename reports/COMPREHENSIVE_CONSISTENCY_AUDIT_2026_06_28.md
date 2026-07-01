@@ -25,7 +25,7 @@
 |---|---------|------|--------|
 | 1.1 | `docs/` 与 `reports/`、`.kimi/` 命名风格极不统一 | `docs/` 中 kebab-case、number_prefix、snake_case、中文文件名、含空格/混合文件名并存；`reports/`、`.kimi/` 几乎全为 `UPPERCASE_DATE` 混合风格 | P2 |
 | 1.2 | `concept/` 内部编号冲突严重 | `concept/01_foundation/`：`00_start.md` 与 `00_pl_prerequisites.md`；`03_lifetimes.md` 与 `03_lifetimes_advanced.md`；`02_intermediate/15_error_handling_deep_dive.md` 与 `15_iterator_patterns.md` 等同数字前缀冲突 | P2 |
-| 1.3 | Crate 编号重复/混淆 | `crates/c11_macro_system/` 与 `crates/c11_macro_system_proc/` 共用 C11 编号 | P2 |
+| 1.3 | Crate 编号重复/混淆 | `crates/c11_macro_system/` 与 `crates/c11_macro_system_proc/` 已合并为统一的 `crates/c11_macro_system_proc/` | ✅ |
 | 1.4 | `archive/` 与活跃内容边界模糊 | 最近 30 天内 archive 仍有大量文件被修改；`docs/archive/2026_03_reorganization/`、`docs/archive/c_class_audit_2026_06_08/` 等为近期目录 | P2 |
 | 1.5 | `book/` 与 `concept/` 内容重复 | `book.toml:5`：`src = "concept"`，说明 book 是构建输出，但目录结构与 `concept/` 并列存在 | P2 |
 

@@ -52,7 +52,7 @@
 | `RandomSource` / `DefaultRandomSource` | 等待 t-libs-api | `c02_type_system` | 随机数源抽象 |
 | `box_vec_non_null` | PFCP | `c02_type_system` | 智能指针 API |
 | `int_format_into` | 等待 t-libs-api | `c02_type_system` | 格式化性能优化 |
-| `proc_macro_value` | 等待 review | `c11_macro_system` | 过程宏进阶 |
+| `proc_macro_value` | 等待 review | `c11_macro_system_proc` | 过程宏进阶 |
 | C-variadic function definitions | PFCP | `c13_embedded`, `c07_process` | FFI 深度指南 |
 | `core::range::{legacy, RangeFull, RangeTo}` | FCP 完成 | `c02_type_system` | Range 体系完整性 |
 | Cargo `-m` shorthand for `--manifest-path` | 1.97 已确认 | 全局 | CLI 速查更新 |
