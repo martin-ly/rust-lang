@@ -51,6 +51,7 @@
 ```text
 源代码 → AST → HIR → Type Checking / Inference → Trait Solving → Borrow Check → MIR → Codegen
 ```
+
 类型检查在 HIR 之后执行，负责：
 
 - 为每个表达式确定类型；
@@ -78,6 +79,7 @@ let x = 1;
 // 类型检查初期 x 的类型可能是 TyKind::Infer(IntVar(?I))
 // 随后通过约束统一为 i32
 ```
+
 > [来源: Rustc Dev Guide — The ty module](https://rustc-dev-guide.rust-lang.org/ty.html)
 
 ---
@@ -97,6 +99,7 @@ let x = 1;
 // rustc 内部近似示意
 let typeck_results = tcx.typeck(item_def_id);
 ```
+
 ### 3.2 `InferCtxt`
 
 `InferCtxt<'tcx>`（Inference Context）是类型推断（Type Inference）的工作区：
@@ -104,6 +107,7 @@ let typeck_results = tcx.typeck(item_def_id);
 ```rust,ignore
 let infcx = tcx.infer_ctxt().build();
 ```
+
 它维护着所有 inference variables 和待求解的约束。
 
 ---
@@ -127,6 +131,7 @@ let mut x = vec![]; // x: Vec<?T>
 x.push("hello");    // ?T = &str
 // 最终 x: Vec<&str>
 ```
+
 > [来源: Rustc Dev Guide — Inference variables](https://rustc-dev-guide.rust-lang.org/type-inference.html#inference-variables)
 
 ---
@@ -138,6 +143,7 @@ x.push("hello");    // ?T = &str
 ```rust,ignore
 infcx.at(...).eq(t, u);
 ```
+
 强制 `t` 和 `u` 必须完全相同。成功返回 `InferOk`，可能附带需要进一步满足的 trait obligations。
 
 ### 5.2 子类型约束
@@ -145,6 +151,7 @@ infcx.at(...).eq(t, u);
 ```rust,ignore
 infcx.at(...).sub(t, u); // t <: u
 ```
+
 Rust 的子类型关系主要体现在生命周期上，例如 `&'static str <: &'a str`。
 
 对于普通类型，子类型通常可转化为相等约束；涉及未绑定变量时，会生成 `Subtype(?T, ?U)` obligation 延后处理。
@@ -160,6 +167,7 @@ Rust 的子类型关系主要体现在生命周期上，例如 `&'static str <: 
 ```text
 'a: 'b   （即 'b <= 'a）
 ```
+
 例如赋值 `let y: &'a i32 = x;`，若 `x: &'b i32`，则生成约束 `'b: 'a`。
 
 ### 6.2 求解时机
@@ -186,6 +194,7 @@ if success {
     infcx.rollback_to(snapshot);
 }
 ```
+
 这在 trait solver 尝试多个候选时非常有用——可以临时假设某个候选成立，失败时无损回滚。
 
 > **关键洞察**: Snapshot 让 rustc 能够在复杂的类型/约束空间中安全地回溯。

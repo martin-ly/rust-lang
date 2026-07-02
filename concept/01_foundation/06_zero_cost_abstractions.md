@@ -94,6 +94,7 @@
   │ Python      │ 所有抽象          │ 大（解释执行）    │
   └─────────────┴──────────────────┴──────────────────┘
 ```
+
 > **核心洞察**: 零成本抽象不是"不花时间"，而是"不花运行时（Runtime）时间"——所有优化在编译期完成，运行时执行的是已优化机器码。
 > [来源: [Bjarne Stroustrup — Foundations of C++](https://www.stroustrup.com/ETAPS-corrected-draft.pdf)]
 
@@ -123,6 +124,7 @@ graph LR
         H["Object max(Object a, Object b)"] -->|"装箱/拆箱"| I["运行时类型检查"]
     end
 ```
+
 > **认知功能**: 此图对比 Rust **单态化（Monomorphization）**与 Java **类型擦除**的实现差异——Rust 为每个类型生成专门代码，Java 使用通用代码加运行时类型处理。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 泛型代码无需担心性能——单态化（Monomorphization）保证与手写特化代码等效。但注意二进制大小可能增加（每个特化一份代码）。
@@ -154,6 +156,7 @@ for x in 0..100 {
 // LLVM 可能将上述循环向量化（SIMD）
 // 生成的机器码与手写 SIMD 循环等效
 ```
+
 > **迭代器（Iterator）零成本**: Rust 的迭代器适配器（`.map`、`.filter`、`.fold`）通过**内联**和**循环融合**（loop fusion）在编译期消除抽象开销。
 > 最终代码与手写循环等效，甚至更好（因为 LLVM 可以进行跨函数优化）。
 > [来源: [TRPL — Iterator Performance](https://doc.rust-lang.org/book/ch13-04-performance.html)]
@@ -195,6 +198,7 @@ Rust 编译优化管道:
   ├── 循环融合: 合并多个迭代器操作为单循环
   └── SIMD 向量化: 自动并行处理数据
 ```
+
 > **优化要点**:
 > Rust 依赖 LLVM 的后端优化。
 > `--release` 模式启用 `-C opt-level=3`，对迭代器（Iterator）和泛型代码尤为重要。
@@ -228,6 +232,7 @@ Trait 对象: Rust 中"非零成本"的抽象
   - 需要减少二进制大小（避免单态化膨胀）
   - 递归类型（如链表节点）
 ```
+
 > **Trade-off**: `dyn Trait` 是 Rust 中**显式的运行时抽象**——它有已知且可衡量的开销（间接调用），但提供灵活性。与 C++ 的虚函数、Java 的接口调用类似。
 > [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)]
 
@@ -255,6 +260,7 @@ impl<'a> FnMut(&i32) -> i32 for __Closure_1<'a> {
 // map 的循环体内联闭包的 call_mut
 // 最终等效于手写循环
 ```
+
 > **闭包（Closures）零成本**: 闭包的环境捕获通过**结构体（Struct）字段**实现，方法调用通过**trait 方法**实现。编译器内联后，闭包调用完全消除，等效于手写循环。
 > [来源: [Rust Reference — Closures](https://doc.rust-lang.org/reference/types/closure.html)]
 
@@ -298,6 +304,7 @@ graph TD
     style FALSE1 fill:#ffebee
     style FALSE2 fill:#ffebee
 ```
+
 > **认知功能**: 此决策树判断 Rust 抽象是否有运行时成本。核心判断标准是**是否使用动态分发或运行时管理机制**。
 > **使用建议**: 性能关键路径使用泛型 + 迭代器；需要运行时灵活性时接受 dyn Trait 的成本；避免在热路径使用 Rc/Arc/Mutex。
 > **关键洞察**: Rust 的**设计哲学**是"零成本抽象优先，运行时成本显式"。有成本的抽象（dyn Trait、Rc）在类型系统（Type System）中明确标记，不会意外引入。
@@ -333,6 +340,7 @@ graph TD
 ├── 边界检查和 panic 分支可能阻碍某些优化
 └── 关键路径需通过 bench 验证
 ```
+
 > **边界要点**: 零成本抽象是**目标而非保证**——编译器尽力消除开销，但复杂场景下可能需要人工辅助（如 `#[inline]`、`unsafe` 块、或手写汇编）。
 
 ---
@@ -369,6 +377,7 @@ Rust 性能分析工具链:
   4. cachegrind 分析缓存行为
   5. 对 unsafe 代码使用 Miri 验证正确性
 ```
+
 > **测量要点**: Rust 的"零成本"需要通过**实际测量**验证，而非假设。不同 LLVM 版本、目标平台、代码模式都可能影响优化效果。
 > [来源: [Rust Performance Book — Profiling](https://nnethercote.github.io/perf-book/profiling.html)]
 
@@ -435,6 +444,7 @@ fn dyn_id(x: &dyn std::any::Any) -> &dyn std::any::Any {
     x // 动态分发，无单态化
 }
 ```
+
 > **修正**: 零成本抽象的核心是"你不需要的就不付代价"，但"你需要的一定要付代价"。
 > 泛型单态化是 Rust 实现零成本多态的方式——每个具体类型生成独立代码，消除运行时分发。
 > 代价是二进制体积增大。在嵌入式或受限环境中，需权衡泛型与动态分发。
@@ -462,6 +472,7 @@ fn main() {
     println!("{} {}", a, b);
 }
 ```
+
 > **修正**: `#[inline]`、`#[inline(always)]` 和 `#[inline(never)]` 是编译器提示而非强制指令。
 > 编译器根据优化级别、函数大小、调用频率等因素决定是否内联。
 > `inline(always)` 在递归函数或过大函数上可能被编译器拒绝。
@@ -483,6 +494,7 @@ enum ListFixed<T> {
     Nil,
 }
 ```
+
 > **修正**:
 > Rust 要求所有类型在编译期具有确定大小。
 > 递归类型直接包含自身会导致无限递归的大小计算。
@@ -507,6 +519,7 @@ fn fixed() {
     let obj: Box<dyn Drawable> = /* ... */; // ✅ 指针大小固定
 }
 ```
+
 > **修正**:
 > `dyn Trait` 是动态大小类型（DST），编译器无法在编译期确定其大小（不同实现类型大小不同）。
 > DST 不能直接作为变量类型，必须放在指针后面：`Box<dyn Trait>`、`&dyn Trait`。
@@ -531,6 +544,7 @@ fn main() {
     // 若 T 有 100 种实例，二进制体积增加 100 倍
 }
 ```
+
 > **修正**:
 > 零成本抽象的核心机制是**单态化**（monomorphization）：为每个使用的具体类型生成独立的机器码。
 > 这消除了运行时虚函数调用开销，但导致**代码膨胀**（code bloat）。
@@ -563,6 +577,7 @@ fn main() {
     // tokio::pin!(f);
 }
 ```
+
 ```rust,compile_fail
 // ❌ 编译错误: 借用后移动值
 // 这是自引用问题的核心: 如果值被移动，其内部的引用将悬垂
@@ -574,6 +589,7 @@ fn main() {
     println!("{}", r);    // 如果允许移动，r 将悬垂
 }
 ```
+
 > **修正**:
 > `async fn` 编译为状态机，状态机可能**自引用（Reference）**（某个状态包含指向其他状态的引用）。
 > 自引用（Reference）的值不能被移动（移动后引用悬垂），因此必须 `Pin` 在内存中。
@@ -604,6 +620,7 @@ fn main() {
     assert_eq!(p1, p2); // 相同地址！
 }
 ```
+
 > **修正**:
 > 零大小类型（ZST，如 `()`、`PhantomData<T>`、空 struct）占 0 字节。
 > 其数组也占 0 字节，所有元素的地址相同。
@@ -626,6 +643,7 @@ fn main() {
     println!("{}", s);
 }
 ```
+
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
 
 ## 实践
@@ -684,6 +702,7 @@ fn main() {
     largest(1.0f64, 2.0f64);
 }
 ```
+
 - A. 3 个
 - B. 2 个
 - C. 1 个
@@ -720,6 +739,7 @@ for x in 0..100 {
     }
 }
 ```
+
 - A. 迭代器版本一定有额外开销
 - B. 在 release 模式下，编译器通常能内联并生成等效代码
 - C. 循环版本总是更快
@@ -771,6 +791,7 @@ Rust 的迭代器是**零成本抽象**的典范：
 let x = 10i32;
 let f = || x + 1;
 ```
+
 - A. 0 字节（完全内联）
 - B. 4 字节（一个 i32）
 - C. 8 字节（函数指针 + 环境）

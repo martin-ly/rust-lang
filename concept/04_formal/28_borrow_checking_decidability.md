@@ -32,6 +32,7 @@ NLL 的数据流分析与 Polonius 的 Datalog 视角如何统一？
         ↓
 这些抽象如何落到 rustc 的 rustc_borrowck / Polonius crate？
 ```
+
 1. **判定目标**：拒绝可变/共享冲突、悬垂引用（Reference）、数据竞争。
 2. **演进主线**：词法作用域 → NLL（基于使用点） → Polonius（基于约束传播），可接受程序集合单调扩大。
 3. **形式化直觉**：生命周期（Lifetimes） `'a` 是 CFG 上的路径集合；约束可满足 ↔ 引用（Reference）使用点位于被引用值存活区域内。
@@ -70,6 +71,7 @@ flowchart LR
     style NLL fill:#dfd
     style Polonius fill:#ddf
 ```
+
 ### 2.1 词法作用域（Lexical Scopes）
 
 借用生命周期（Lifetimes）绑定到词法块边界，线性扫描 $O(n)$，但过度保守。
@@ -82,6 +84,7 @@ fn lexical_problem() {
     data.push(4);        // ✅ NLL 之后可编译
 }
 ```
+
 ### 2.2 NLL（Non-Lexical Lifetimes）
 
 生命周期由“创建点 → 最后一次使用点”定义，基于 MIR 与 CFG 数据流分析。
@@ -94,6 +97,7 @@ fn nll_allows() {
     drop(s);             // ✅ NLL：s 可被 move
 }
 ```
+
 ### 2.3 Polonius
 
 以 Datalog 风格将借用检查表达为约束传播，可处理 NLL 拒绝的部分安全模式（条件借用、循环内精确分析）。`-Zpolonius` 在 nightly 可用，被视为未来默认路线。
@@ -103,6 +107,7 @@ fn polonius_friendly(flag: bool, data: &mut [i32]) -> &mut i32 {
     if flag { &mut data[0] } else { &mut data[1] }
 }
 ```
+
 ---
 
 ## 三、形式化模型（Teaching Analogies）
@@ -115,6 +120,7 @@ fn polonius_friendly(flag: bool, data: &mut [i32]) -> &mut i32 {
 区域变量 : ρ, ρ₁, ρ₂ ∈ Region
 区域约束 : C ::= ρ₁ ⊆ ρ₂  |  ρ = ρ₂  |  ρ: liveness(p)  |  C₁ ∧ C₂
 ```
+
 $$
 \rho_1 \subseteq \rho_2 \iff \forall \pi \in \rho_1.\ \pi \in \rho_2
 $$
@@ -179,6 +185,7 @@ $$
 顶点 V = {所有区域} ∪ {'static'}
 边   E = {(ρᵢ, ρⱼ) | ρᵢ ⊆ ρⱼ ∈ C}
 ```
+
 约束可满足 ⟺ 图中不存在非 `'static` 的矛盾环。
 
 ```rust,ignore
@@ -188,6 +195,7 @@ fn solve_region_constraints(cs: &[Constraint]) -> Result<Solution, RegionError> 
     check_contradictory_cycles(&transitive_closure(&g))
 }
 ```
+
 > **复杂度直觉**：传递闭包（Closures） $O(n^3)$，矩阵乘法可优化至 $O(n^\omega)$，$\omega < 2.373$。
 
 ---
@@ -226,6 +234,7 @@ error(P, B) :-
     borrow_kind(B, mut),
     paths_overlap(Path, borrow_path(B)).
 ```
+
 ### 5.2 与 NLL 的关系
 
 ```mermaid
@@ -238,6 +247,7 @@ flowchart TB
     end
     NLL_Phase -.->|扩展| Polonius_Phase
 ```
+
 > **核心洞察**：NLL 的区域活跃性与借用冲突检测可统一编码为 Polonius 事实；Polonius 约束传播更细粒度，能识别 NLL 误判的安全程序。
 
 ---
@@ -290,6 +300,7 @@ flowchart TB
                               ↑
                               └── 区域约束、借用状态、数据流结果在此统一求解
 ```
+
 > **实践提示**：通过 `RUSTFLAGS=-Zpolonius cargo +nightly build` 体验 Polonius；阅读源码可从 `rustc_borrowck::do_mir_borrowck` 入手。
 
 ---
@@ -307,6 +318,7 @@ fn nll_example() {
     println!("{:?}", data);
 }
 ```
+
 ### 8.2 可变借用的独占性
 
 ```rust
@@ -321,6 +333,7 @@ fn mut_exclusive() {
     println!("{}", r2);
 }
 ```
+
 ### 8.3 共享与可变不能共存
 
 ```rust
@@ -332,6 +345,7 @@ fn shared_vs_mut() {
     println!("{:?}", v);
 }
 ```
+
 ### 8.4 两阶段借用
 
 ```rust
@@ -341,6 +355,7 @@ fn two_phase_borrow() {
     println!("{:?}", v);
 }
 ```
+
 ---
 
 ## 九、要点回顾

@@ -143,7 +143,6 @@ fn main() {}
 `gen` 块提供了更灵活、更直观的迭代器定义方式，与适配器互补。复杂逻辑用 `gen` 块，简单转换用适配器链。
 </details>
 
-
 ---
 
 <!-- Merged from 15_gen_blocks_preview.md -->

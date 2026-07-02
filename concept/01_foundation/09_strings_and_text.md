@@ -103,6 +103,7 @@ Rust 的两种字符串类型:
   &str → String: to_string() 或 to_owned()（分配）
   String → 其他: into_bytes()、char [来源: [Rust char](https://doc.rust-lang.org/std/primitive.char.html)]s()、lines() 等
 ```
+
 > **认知功能**: String/str 的关系是 Rust **所有权模型**的典型应用——String 拥有数据，str 借用（Borrowing）数据，两者通过 Deref 无缝协作。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: 这种设计避免了 C++ 中 `std::string` 和 `const char*` 的混淆，以及 Java 中 `String` 和 `StringBuilder` 的性能陷阱。
@@ -141,6 +142,7 @@ Rust 强制 UTF-8 的设计决策:
   │ C/C++           │ 无（字节序列）  │ 字节索引        │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **UTF-8 洞察**: Rust 的 UTF-8 强制是**有争议但一致**的设计——它排除了许多编码相关的 bug，但要求程序员理解 Unicode 的复杂性。
 > [来源: [Unicode Standard](https://www.unicode.org/standard/standard.html)]
 
@@ -182,6 +184,7 @@ impl fmt::Display for Point {
 let p = Point { x: 1, y: 2 };
 println!("{}", p);  // 输出: (1, 2)
 ```
+
 > **格式化洞察**: Rust 的 `format!` 是**类型安全**的——它在编译期检查参数数量和类型，消除了 C `printf` 的整类运行时（Runtime）错误。
 > [来源: [std::fmt](https://doc.rust-lang.org/std/fmt/index.html)]
 
@@ -223,6 +226,7 @@ if let Some(substr) = s.get(0..5) {
     println!("{}", substr);  // 不 panic，返回 Option
 }
 ```
+
 > **索引洞察**: Rust **禁止字符串整数索引**是为了防止 Unicode 边界错误——这是一个**故意的不便**，换取安全性。
 > [来源: [Rust String Methods](https://doc.rust-lang.org/std/string/struct.String.html)]
 
@@ -261,6 +265,7 @@ p.push("dir");
 p.push("file.txt");
 // p == "/tmp/dir/file.txt"
 ```
+
 > **OS 字符串洞察**: `OsString` 的存在反映了**现实世界的复杂性**——文件系统路径不一定是有效的 UTF-8，Rust 选择显式处理这种不确定性（通过 `Option` 和 `Cow`）。
 > [来源: [std::ffi::OsString](https://doc.rust-lang.org/std/ffi/struct.OsString.html)]
 
@@ -303,6 +308,7 @@ unsafe {
 // │ OsStr    │ 借用        │ 平台相关    │ 否          │
 // └──────────┴─────────────┴─────────────┴─────────────┘
 ```
+
 > **C 字符串洞察**: `CString`/`CStr` 是 Rust **FFI 安全**的关键——它们保证 NUL 终止且不包含内部 NUL，避免了 C 字符串的常见陷阱。
 > [来源: [std::ffi::CString](https://doc.rust-lang.org/std/ffi/struct.CString.html)]
 
@@ -341,6 +347,7 @@ FFI C 接口:
   → OsString / String
   → 取决于是否需要处理非 UTF-8
 ```
+
 > **选型原则**: 默认使用 `String`/`&str`，只在需要与非 UTF-8 数据交互时使用 `OsString`/`CString`。
 > [来源: [Rust API Guidelines — Strings](https://rust-lang.github.io/api-guidelines//naming.html)]
 
@@ -361,6 +368,7 @@ graph TD
     style BORROW fill:#c8e6c9
     style MUTATE fill:#c8e6c9
 ```
+
 > **认知功能**: 此决策树展示字符串类型的**核心选择**。原则很简单：**只读用 &str，需要修改用 String**。
 > [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//flexibility.html#c-str)]
 
@@ -400,6 +408,7 @@ graph TD
 ├── 需要第三方 crate（如 lasso）
 └── 编译器内部有符号表（sym）的实现
 ```
+
 > **边界要点**: 字符串处理的边界主要与**Unicode 复杂性**、**正则性能**、**格式化开销**、**序列化**和**内存优化**相关。
 > [来源: [Rust Performance Book — Strings](https://nnethercote.github.io/perf-book/print.html#string)]
 
@@ -444,6 +453,7 @@ graph TD
   ✅ let s = format!("{:?}", &data);
      // 借用而非 move
 ```
+
 > **陷阱总结**: 字符串处理的陷阱主要与**性能假设**、**编码转换**、**NUL 处理**、**API 设计**和**所有权（Ownership）**相关。
 > [来源: [Rust Compiler Error E0277](https://doc.rust-lang.org/error_codes/E0277.html)]
 
@@ -518,6 +528,7 @@ fn get_static() -> &'static str {
     "hello" // ✅ 字符串字面量是 'static
 }
 ```
+
 > **修正**:
 > `String` 拥有堆分配的 UTF-8 字节数组，`&str` 是对其内部数据的借用（Borrowing）。
 > 返回 `&str` 意味着返回一个引用（Reference），但被引用的 `String` 在函数返回时释放。
@@ -546,6 +557,7 @@ fn fixed() {
     println!("{:?}", byte);
 }
 ```
+
 > **修正**: Rust 禁止 `String`/`str` 的整数索引，因为 UTF-8 是多字节编码，第 N 个"字符"不一定是第 N 个字节。`"你好"[0]` 可能返回 UTF-8 首字节而非完整字符。这与 Python/Java 的透明 Unicode 处理不同——Rust 强制开发者显式选择字节级或字符级访问，避免隐式截断多字节字符。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.3 边界测试：`str::split` 与模式类型的不匹配（编译错误）
@@ -563,6 +575,7 @@ fn main() {
     // Vec<char> 未实现 Pattern trait
 }
 ```
+
 > **修正**:
 > `str::split` 接受实现 `Pattern` trait 的参数：`char`、`&str`、`&[char]`、`FnMut(char) -> bool`。`Vec<char>` 未实现 `Pattern`，因此不能作为 `split` 参数。
 > Rust 的 `Pattern` trait 是稳定的内部 trait（`std::str::pattern::Pattern`），不对外公开实现，因此不能为自定义类型实现 `Pattern`。
@@ -587,6 +600,7 @@ fn main() {
     println!("{}", s1);
 }
 ```
+
 > **修正**:
 >
 > `String + &str` 的实现消耗左边的 `String`（取得所有权），追加右边的 `&str`，返回新的 `String`。
@@ -608,6 +622,7 @@ fn main() {
     // let c = s.chars().nth(0).unwrap();
 }
 ```
+
 > **修正**:
 > Rust 的 `String`/`str` **不支持整数索引**，因为 UTF-8 是变长编码：ASCII 字符占 1 字节，中文占 3 字节，`s[0]` 的语义不明确（是第 0 个字节还是第 0 个 Unicode 标量值？）。
 > 访问方式：
@@ -632,6 +647,7 @@ fn main() {
     println!("{}", s);
 }
 ```
+
 > **修正**:
 > `String::from_utf8` 将 `Vec<u8>` 转为 `String`，要求严格 UTF-8。
 > 无效序列时：
@@ -695,6 +711,7 @@ fn main() {
     greet("Bob");
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -719,6 +736,7 @@ fn main() {
     println!("{}", s[0]);
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -734,6 +752,7 @@ println!("{}", s.chars().next().unwrap());  // '你'
 // 或获取字节（但通常不是你想要的）：
 println!("{}", s.as_bytes()[0]);  // 228 — "你" 的第一个 UTF-8 字节
 ```
+
 </details>
 
 ---
@@ -750,6 +769,7 @@ fn main() {
     println!("{}", r);
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -767,6 +787,7 @@ let mut s = String::from("hello");
 }
 s.push_str(" world");  // 现在可以可变借用
 ```
+
 </details>
 
 ---
@@ -783,6 +804,7 @@ fn main() {
     println!("{}", s);
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -806,6 +828,7 @@ fn main() {
     println!("{}", slice);
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -816,5 +839,6 @@ fn main() {
 ```text
 thread 'main' panicked at 'byte index 10 is out of bounds of `hello`'
 ```
+
 字符串切片（String Slice）使用字节索引而非字符索引。对于 ASCII 字符串，两者相同；对于多字节 UTF-8 字符，需要特别小心。
 </details>

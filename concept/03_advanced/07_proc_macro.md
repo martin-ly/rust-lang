@@ -106,6 +106,7 @@
   │ 开发复杂度      │ 低                  │ 高（需 syn/quote）  │
   └─────────────────┴─────────────────────┴─────────────────────┘
 ```
+
 > **认知功能**: 此对比揭示两种宏系统的**设计权衡**——macro_rules! 简单但受限，过程宏（Procedural Macro）强大但复杂。选择取决于元编程任务的复杂度。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch20-05-macros.html)]
 > **关键洞察**: 过程宏（Macro）不是 macro_rules! 的替代品，而是**互补工具**——简单代码生成用 macro_rules!，复杂逻辑（如 derive）用过程宏。
@@ -141,6 +142,7 @@ graph TD
     ATTR -->|"修改/包装被标注项"| OUT2["代码变换"]
     FUNC -->|"像函数调用的宏"| OUT3["TokenStream → TokenStream"]
 ```
+
 > **认知功能**: 此图展示三种过程宏的**应用场景**。Derive 宏为类型自动生成 Trait 实现；Attribute 宏修改被标注的项；Function-like 宏在调用点展开。
 > **使用建议**: 80% 的过程宏需求是 Derive 宏（Macro）；Attribute 宏用于框架级的代码变换；Function-like 宏用于 DSL。
 > **关键洞察**: 三种宏的**编译期执行模型相同**——都是 `TokenStream → TokenStream` 的函数，区别在于调用语法和输入内容的结构。
@@ -185,6 +187,7 @@ graph TD
      │  编译器: 将返回的 TokenStream 合并到 AST    │
      └─────────────────────────────────────────────┘
 ```
+
 > **执行模型**: 过程宏在**编译期**作为**编译器的插件**执行——它们是普通的 Rust 函数，但运行在编译器的上下文中，操作 TokenStream 而非值。
 > [来源: [rustc-dev-guide — Macros](https://rustc-dev-guide.rust-lang.org/macro-expansion.html)]
 
@@ -225,6 +228,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 // - TokenTree = Group(括号包裹) | Ident(标识符) | Punct(标点) | Literal(字面量)
 // - 不解析语义，只操作语法树
 ```
+
 > **TokenStream**: 过程宏的输入/输出都是 `TokenStream`——它是**语法树**而非字符串。这保证了宏生成的代码总是语法合法的（但不一定语义合法）。
 > [来源: [std::proc_macro::TokenStream](https://doc.rust-lang.org/proc_macro/struct.TokenStream.html)]
 
@@ -272,6 +276,7 @@ pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
 // - 支持插值（#name）
 // - 自动处理 hygiene（Span 保留）
 ```
+
 > **syn + quote**: `syn` 和 `quote` 是过程宏开发的**事实标准**——syn 负责解析，quote 负责生成。没有它们，手动操作 TokenStream 极其繁琐。
 > [来源: [syn Documentation](https://docs.rs/syn/latest/syn/)] · [来源: [quote Documentation](https://docs.rs/quote/latest/quote/)]
 
@@ -311,6 +316,7 @@ pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
   ├── 使用 Span::call_site() → 在调用点解析标识符
   └── 使用 Span::mixed_site() → 混合 hygiene（Edition 2021+）
 ```
+
 > **卫生性洞察**: Rust 的**卫生宏**是语言设计的重要特性——它避免了 C 预处理器常见的命名冲突问题，使宏可以安全地在任意上下文中使用。
 > [来源: [Rust Reference — Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)]
 
@@ -356,6 +362,7 @@ pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
   struct Record { id: u32, name: String }
   // 生成自定义格式的序列化/反序列化代码
 ```
+
 > **模式总结**: 过程宏的**核心价值**是消除 boilerplate——将重复的、模式化的代码生成委托给编译器，同时保持类型安全。
 > [来源: [serde_derive Source](https://github.com/serde-rs/serde/tree/master/serde_derive)]
 
@@ -379,6 +386,7 @@ graph TD
     style MACRO fill:#c8e6c9
     style MANUAL fill:#fff3e0
 ```
+
 > **认知功能**: 此决策树判断是否应使用过程宏。核心原则是：**优先使用语言原生特性（泛型（Generics）、Trait），过程宏是最后手段**。
 > **使用建议**: 80% 的"重复代码"可以用泛型（Generics）解决；只有当模式跨越类型边界且无法抽象为 Trait 时，才考虑过程宏。
 > **关键洞察**: 过程宏增加了**编译时间**和**调试复杂度**——只在 boilerplate 显著影响可维护性时使用。
@@ -419,6 +427,7 @@ graph TD
 ├── 深度递归的宏可能导致编译错误
 └── 可通过 #![recursion_limit = "256"] 增加
 ```
+
 > **边界要点**: 过程宏的边界主要与**信息可用性**（无类型信息）、**编译性能**、**错误信息质量**和**工具链支持**相关。这些边界决定了过程宏的适用场景。
 > [来源: [rustc-dev-guide — Proc Macros](https://rustc-dev-guide.rust-lang.org/macro-expansion.html)]
 
@@ -465,6 +474,7 @@ graph TD
 
   ✅ 将复杂逻辑移到运行时库，宏只做简单的代码生成
 ```
+
 > **陷阱总结**: 过程宏的陷阱主要与**标识符处理**、**泛型（Generics）支持**、**卫生性**和**错误处理（Error Handling）**相关。遵循最佳实践可使宏更健壮、更易维护。
 > [来源: [proc-macro-workshop](https://github.com/dtolnay/proc-macro-workshop)]
 
@@ -481,6 +491,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**: 过程宏必须在独立的 `proc-macro = true` 的 crate 中定义，不能在普通函数内或同一个 crate 中使用。
 
 ```rust,compile_fail
@@ -493,6 +504,7 @@ pub fn derive_macro(input: TokenStream, extra: TokenStream) -> TokenStream {
     input
 }
 ```
+
 > **修正**: `#[proc_macro_derive]` 函数必须恰好接受一个 `TokenStream` 参数。`#[proc_macro]` 接受一个，`#[proc_macro_attribute]` 接受两个（item 和 attributes）。
 
 ```rust,compile_fail
@@ -503,6 +515,7 @@ pub fn my_macro(input: String) -> String {
     input
 }
 ```
+
 > **修正**: 过程宏必须使用 `proc_macro::TokenStream`（或 `proc_macro2::TokenStream`）作为输入和输出类型，不能使用 `String` 或其他类型。
 
 ---
@@ -580,6 +593,7 @@ pub fn my_debug(input: TokenStream) -> TokenStream {
     expanded.into()
 }
 ```
+
 > **修正**: 过程宏的错误定位是开发体验的关键挑战。`quote!` 生成的代码默认使用 `Span::call_site()`，错误信息指向宏调用处。
 > 改善方法：
 >
@@ -616,6 +630,7 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
 // ❌ 编译错误: 宏生成的 impl MyTrait 使用绝对路径，
 // 但调用者可能重定义了 MyTrait
 ```
+
 > **修正**: 过程宏的**hygiene**（卫生）保证宏生成的标识符不会与调用者的标识符冲突。
 > `quote!` 中的 `MyTrait` 在宏定义 crate 中解析，使用绝对路径（`::my_crate::MyTrait`）可确保正确性。
 > 但边缘情况：
@@ -644,6 +659,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
     quote! {}.into()
 }
 ```
+
 > **修正**:
 > **过程宏（Procedural Macro）**的 crate 类型限制：
 >
@@ -677,6 +693,7 @@ fn main() {
     println!("{:?}", r);
 }
 ```
+
 > **修正**: **借用（Borrowing）规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
 
 ## 参考来源
@@ -772,6 +789,7 @@ let expanded = quote! {
 // 4. 返回 TokenStream
 proc_macro::TokenStream::from(expanded)
 ```
+
 `syn` 让解析输入更简单，`quote!` 让生成代码更直观。
 </details>
 

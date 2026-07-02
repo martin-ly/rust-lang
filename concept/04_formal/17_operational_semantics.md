@@ -122,6 +122,7 @@
   ├── a-mir-formality 正在开发形式化规范
   └── 工业界主要依赖测试和 Miri
 ```
+
 > **认知功能**: 操作语义是**程序行为的"数学蓝图"**——它将直觉的执行过程转化为严格的规则，使编译器优化和程序验证有坚实的理论基础。
 > [来源: [Winskel 1993 — Formal Semantics](https://mitpress.mit.edu/9780262731034)]
 
@@ -165,6 +166,7 @@
   │ Rust 应用       │ RustBelt/Iris   │ 类型安全性证明  │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **语义洞察**: 小步语义是**并发和运行时（Runtime）分析**的基础——它允许在任意步骤插入检查点，这是 RustBelt 验证 unsafe 代码的关键。
 > [来源: [Pierce 2002 — TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 
@@ -197,6 +199,7 @@
   ├── 区分可约式和值
   └── 是证明合流性（confluence）的关键工具
 ```
+
 > **上下文洞察**: 求值上下文是**结构归纳**的核心——它使我们可以对程序结构进行归纳证明，而非枚举（Enum）所有可能的程序。
 > [来源: [Felleisen & Hieb — The Revised Report on the Syntactic Theories of Sequential Control and State](https://doi.org/10.1017/S0956796800001368)]
 
@@ -235,6 +238,7 @@
 
   这些规则构成了"抽象机器"的规范
 ```
+
 > **规则洞察**: 操作语义规则是**公理化的执行模型**——每条规则对应一个可能的计算步骤，所有规则的闭包（Closures）定义了程序的完整行为。
 > [来源: [Plotkin 1981 — A Structural Approach to Operational Semantics](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf)]
 
@@ -268,6 +272,7 @@
   ├── 借用: 只读/独占访问约束
   └── 生命周期: 区域约束系统
 ```
+
 > **环境-存储洞察**: 环境-存储分离是**命令式语言**的标准建模方式——环境处理词法作用域，存储处理运行时状态。
 > [来源: [TAPL Ch13 — References](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 
@@ -309,6 +314,7 @@ Rust 操作语义的独特挑战:
   ├── 定义哪些内存访问是合法的
   └── 用于 Miri 动态检测 UB
 ```
+
 > **Rust 特殊性**: Rust 的操作语义必须同时处理**值语义**（所有权（Ownership）转移）和**引用（Reference）语义**（借用（Borrowing）约束）——这比传统命令式语言复杂得多。
 > [来源: [Stacked Borrows Paper](https://doi.org/10.1145/3371106)] · [来源: [Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)]
 
@@ -344,6 +350,7 @@ Rust 操作语义的独特挑战:
   ├── 预测编译器行为
   └── 调试复杂的生命周期问题
 ```
+
 > **应用洞察**: 操作语义不仅是**理论研究工具**——它直接支撑了 Rust 的验证工具链（Miri、RustBelt）和教学材料。
 > [来源: [a-mir-formality](https://github.com/rust-lang/a-mir-formality)]
 
@@ -367,6 +374,7 @@ graph TD
     style PARTIAL fill:#fff3e0
     style NO fill:#ffcdd2
 ```
+
 > **认知功能**: 此决策树展示操作语义**形式化 Rust 的边界**。safe Rust 可以完全形式化，但 unsafe 代码超出了标准语义的范围。
 > [来源: [RustBelt — Unsafe Boundaries](https://plv.mpi-sws.org/rustbelt/)]
 
@@ -406,6 +414,7 @@ graph TD
 ├── 证明类型安全需要连接两者
 └── Rust 的类型安全证明仍在进行中
 ```
+
 > **边界要点**: 操作语义形式化 Rust 的边界主要与**UB**、**并发复杂性**、**标准库规模**、**优化验证**和**类型一致性（Coherence）**相关。
 > [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)]
 
@@ -450,6 +459,7 @@ graph TD
   ✅ 形式化 + 测试 + 模糊测试 + Miri
      // 多维度验证才是工程实践
 ```
+
 > **陷阱总结**: 操作语义的陷阱主要与**语义 vs 实现**、**小步 vs 大步**、**Rust 特殊性**、**语法 vs 语义**和**形式化局限性**相关。
 > [来源: [Rust Formal Methods Community](https://rust-formal-methods.github.io/)]
 
@@ -475,6 +485,7 @@ fn main() {
     println!("{}", y);
 }
 ```
+
 ### 编译验证示例
 
 ```rust
@@ -494,6 +505,7 @@ fn main() {
     }
 }
 ```
+
 ```rust
 fn eval(ctx: &str, val: i32) -> String {
     format!("{}[{}]", ctx, val)
@@ -503,6 +515,7 @@ fn main() {
     println!("{}", eval("1 + ", 2));
 }
 ```
+
 ```rust
 fn main() {
     let mut state = 0;
@@ -511,6 +524,7 @@ fn main() {
     println!("{}", state);
 }
 ```
+
 ## 相关概念文件
 
 - [Type Theory](02_type_theory.md) — 类型论基础
@@ -768,6 +782,7 @@ fn fixed() {
     println!("{}", x);
 }
 ```
+
 > **修正**: Rust 的操作语义基于**小步归约**（small-step reduction）和**内存模型**（Tree Borrows / Stacked Borrows）。关键规则：同一时间只能有一个活跃的可变引用（Mutable Reference），或任意数量的共享引用。违反此规则是未定义行为（UB）。Miri 通过追踪每个引用的"借用标签"（borrow tag）在运行时检测违规。这与 C 的未定义行为（依赖编译器实现）不同——Rust 的 UB 有明确的形式化定义，可通过工具验证。[来源: [Rust Operational Semantics](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.2 边界测试：panic 的栈展开语义（运行时行为）
@@ -792,6 +807,7 @@ fn main() {
     println!("{:?}", v); // [1, 2, 3, -1]
 }
 ```
+
 > **修正**: Rust 的 panic 机制使用**栈展开**（stack unwinding）调用每个栈帧中值的 `Drop::drop`。这与 C++ 的异常处理类似，但 Rust 的 panic 设计为"不可恢复错误"——不应在常规控制流中使用。`Drop` 的实现必须是 panic-safe（不 panic），否则会导致**双重 panic**（double panic）→ `abort`。形式化语义中，panic 对应于计算的 abrupt termination，栈展开对应于资源释放的补偿动作（compensating action）。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：形式化规则违反导致的编译错误（编译错误）
@@ -804,6 +820,7 @@ fn main() {
     println!("{} {}", r1, r2);
 }
 ```
+
 > **修正**: 这是 Rust 借用检查器的核心规则在操作语义层面的体现：同一时间，对同一内存位置，要么存在任意数量的不可变引用（Immutable Reference） `&T`（读访问），要么存在一个可变引用 `&mut T`（写访问），二者互斥。形式化上，这一规则对应于线性逻辑中的**资源分裂**（resource splitting）：所有权（Ownership） `own(x)` 可分裂为两个只读能力 `read(x)` ∧ `read(x)`，或一个读写能力 `write(x)`，但不能同时分裂为 `read(x)` ∧ `write(x)`。编译器在生成 MIR（Mid-level IR）时，通过**借用检查**（borrow check）验证引用生命周期的不相交性。此规则是 Rust"零成本抽象（Zero-Cost Abstraction）"的基石：无需运行时锁即可保证内存安全。[来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/associated-items.html)] · [来源: [Stacked Borrows Paper](https://doi.org/10.1145/3371106)]
 
 ### 10.4 边界测试：悬垂引用的形式化禁止（编译错误）
@@ -819,6 +836,7 @@ fn main() {
     println!("{}", r);
 }
 ```
+
 > **修正**: 在形式化语义中，局部变量 `x` 的生命周期 `ℓ_x` 受限于函数作用域。当函数返回时，`x` 的存储被释放，生命周期结束。返回 `&x` 意味着返回的引用生命周期 `ℓ_r` 必须满足 `ℓ_r ⊆ ℓ_x`，但函数返回后 `ℓ_x` 已结束，因此 `ℓ_r` 无法有效。编译器通过**生命周期推断**发现这一矛盾：返回类型的隐式生命周期参数 `'a` 无法与任何输入参数匹配（因为 `x` 是局部变量），因此无法构造有效的生命周期约束。这与 C/C++ 的悬垂指针（编译器通常不报错）形成鲜明对比——Rust 将"使用已释放内存"这一运行时错误转化为编译期类型错误。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)]
 
 ### 10.5 边界测试：形式化语义中的非确定性选择（运行时行为差异）
@@ -835,6 +853,7 @@ fn main() {
     // *r2 = 2;
 }
 ```
+
 > **修正**: Rust 的形式化语义（如 RustBelt、Stacked Borrows、Tree Borrows）定义了程序的"合法"与"非法"行为。但编译器实现是演进的：旧版编译器可能接受某些形式化上非法的程序（保守性不足），新版编译器可能拒绝（更精确的分析）。这导致**语义与实现的不一致**：形式化语义说"这是 UB"，但旧编译器"它能编译"。Rust 的策略：逐步收紧编译器，使实现趋近形式化语义。NLL、Polonius、MIR  borrow checker 都是这一进程的体现。这与 C/C++ 的 "实现定义行为"（compiler-specific）不同——Rust 的目标是"形式化语义定义行为，编译器实现语义"。但完全对齐是长期过程，期间存在过渡状态。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)]
 
 ### 10.6 边界测试：堆叠借用（Stacked Borrows）与原始指针的别名（运行时 UB）
@@ -853,6 +872,7 @@ fn main() {
     println!("{}", x);
 }
 ```
+
 > **修正**: Stacked Borrows 是 Rust 的实验性内存模型，由 Miri 实现验证。它规定：通过引用创建的裸指针继承了引用的借用标签，同一内存位置的两个可变引用（Mutable Reference）（即使是通过 `as` 转换的裸指针）不能同时活跃。上述代码中，`r1` 和 `r2` 都从 `&mut x` 创建，Stacked Borrows 认为它们属于同一"借用栈"，不能同时使用。Tree Borrows 模型对此更宽松——允许不重叠区域的独立访问。Rust 规范尚未最终确定使用哪种模型，但当前 Miri 默认使用 Stacked Borrows。开发者应避免此类代码，除非确知底层内存模型。这与 C 的指针别名（完全合法，无检查）或 LLVM 的 `noalias`（优化假设，非语言语义）不同——Rust 正在发展精确的内存模型定义。来源: [Stacked Borrows Paper] · 来源: [Tree Borrows]
 
 ### 10.7 边界测试：求值顺序与副作用的交互（运行时 UB）
@@ -865,6 +885,7 @@ fn main() {
     // Rust 中元组元素的求值顺序是左到右，但函数参数顺序未保证
 }
 ```
+
 > **修正**: Rust 明确指定了大多数表达式的**求值顺序**：元组/数组元素左到右、`let` 绑定右到左（先求值右侧）、函数参数左到右（但注意：这是 2024 Edition 的变更，旧 Edition 未指定）。但某些边缘情况：1) `a + b` 中 `a` 和 `b` 的求值顺序；2) 方法调用的 receiver 和参数顺序；3) 闭包（Closures）参数捕获顺序。依赖求值顺序的代码是脆弱的——不同编译器版本或优化级别可能改变行为。安全模式：将副作用分离到独立语句，不依赖复合表达式中的求值顺序。这与 C/C++ 的"大多数求值顺序未指定"（UB 来源之一）或 Java 的"左到右求值"（明确指定）不同——Rust 趋向于更明确的求值顺序，但仍在演进中。来源: [Rust Reference — Evaluation Order] · 来源: [Rust Edition 2024]
 
 ### 10.3 边界测试：求值顺序与副作用的确定性（编译错误）
@@ -880,6 +901,7 @@ fn main() {
     println!("{} {}", r, s);
 }
 ```
+
 > **修正**: Rust 的操作语义明确定义了**求值顺序**和**别名规则**。safe Rust 中，`&mut T` 和 `&T` 不能同时指向同一数据（编译期保证）。但在 `unsafe` 块中，可以通过裸指针创建别名：`*const T` 和 `*mut T` 同时指向同一地址是**合法**的，但解引用时若存在 `&mut` 活跃则 UB。Stacked Borrows / Tree Borrows 模型定义了**精确规则**：1) 创建 `&mut` 会"弹出"（pop）所有重叠的共享引用；2) 通过 `&mut` 创建 `*mut` 保留 `&mut` 的权限；3) 从 `*mut` 重新创建 `&` 或 `&mut` 需满足无活跃冲突借用。这与 C 的"无别名假设"（strict aliasing rule，编译器假设 `int*` 和 `float*` 不别名）或 LLVM 的 `noalias` 元数据类似——Rust 的别名规则更严格，但允许通过 unsafe 显式控制。[来源: [Rust Reference — Evaluation Order](https://doc.rust-lang.org/reference/expressions.html#evaluation-order)] · [来源: [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]
 
 ### 10.2 边界测试：match 分支返回类型不一致
@@ -895,6 +917,7 @@ fn main() {
     println!("{}", v);
 }
 ```
+
 > **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。
 
 ## 嵌入式测验（Embedded Quiz）

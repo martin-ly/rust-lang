@@ -131,6 +131,7 @@ Rust 是表达式导向语言（Expression-Oriented Language）:
   ├── 代码更简洁，更接近函数式风格
   └── 编译器能进行更精确的类型检查
 ```
+
 > **认知功能**: 表达式导向是 Rust 的**核心设计哲学**——几乎所有控制结构都是表达式，可以嵌套、可以赋值、可以作为返回值。
 > **关键洞察**: 这使得 Rust 在没有三元运算符的情况下，仍然能写出比 C 更简洁的条件表达式。
 > [来源: [Rust Reference — Expressions vs Statements](https://doc.rust-lang.org/reference/statements-and-expressions.html)]
@@ -181,6 +182,7 @@ match result {
     Err(e) => println!("error: {}", e),
 }
 ```
+
 > **match 洞察**: Rust 的 `match` 要求**穷尽性**（exhaustiveness）——编译器检查所有可能的模式都被覆盖。这消除了 C `switch` 的**遗漏 case** bug。
 > [来源: [Rust Reference — Match Expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html)]
 
@@ -228,6 +230,7 @@ if let Some(x) = opt1 && let Some(y) = opt2 && x > y {
     println!("{} > {}", x, y);
 }
 ```
+
 > **if let/while let 洞察**: 这些语法是 `match` 的**语法糖**——它们在只关心一个模式时减少 boilerplate。`let else` 进一步简化了**提前返回**模式。
 > [来源: [RFC 160 — if let](https://github.com/rust-lang/rfcs/pull/160)] · [来源: [RFC 3137 — let else](https://github.com/rust-lang/rfcs/pull/3137)]
 
@@ -271,6 +274,7 @@ for i in 0..10 { ... }  // 范围迭代
 // for 不返回值，但可以用其他方式收集结果
 let sum: i32 = (0..10).map(|x| x * 2).sum();
 ```
+
 > **loop 洞察**: `loop` 作为**表达式**是 Rust 的独特设计——它使**重试逻辑**、**状态机循环**等模式能简洁地返回值。
 > [来源: [Rust Reference — Loop Expressions](https://doc.rust-lang.org/reference/expressions/loop-expr.html)]
 
@@ -311,6 +315,7 @@ let result = 'retry: loop {
     }
 };
 ```
+
 > **标签洞察**: 循环标签解决了**嵌套循环控制**的问题——不需要 goto，也不需要额外的标志变量。
 > [来源: [Rust Reference — Labeled Loops](https://doc.rust-lang.org/reference/expressions/loop-expr.html#loop-labels)]
 
@@ -356,6 +361,7 @@ let x = if condition {
     "hello" // &str → 编译错误！
 };
 ```
+
 > **块表达式洞察**: Rust 的**尾部值规则**是表达式导向的基础——任何块 `{}` 都可以是一个值，只要最后一个表达式没有分号。
 > [来源: [Rust Reference — Block Expressions](https://doc.rust-lang.org/reference/expressions/block-expr.html)]
 
@@ -411,6 +417,7 @@ let x = if condition {
       _ => "large",
   }
 ```
+
 > **模式总结**: Rust 的控制流模式强调**穷尽性**和**表达式导向**——编译器帮助你处理所有情况，同时控制流可以自然地产生值。
 > [来源: [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html)]
 
@@ -433,6 +440,7 @@ graph TD
     style IFLET fill:#c8e6c9
     style IF fill:#c8e6c9
 ```
+
 > **认知功能**: 此决策树帮助选择正确的控制流结构。核心原则是：**枚举（Enum）处理用 match，单模式解包用 if let，简单布尔条件用 if**。
 > [来源: [Rust Clippy — Match Patterns](https://rust-lang.github.io/rust-clippy//master/index.html)]
 
@@ -470,6 +478,7 @@ graph TD
 ├── 解构大型结构体时模式冗长
 └── 解决方案: 使用 @ 绑定或部分匹配
 ```
+
 > **边界要点**: 控制流的边界主要与**穷尽性要求**、**类型一致性（Coherence）**、**异步（Async）交互**和**const 限制**相关。
 > [来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)]
 
@@ -534,6 +543,7 @@ graph TD
 
   ✅ 确保 let else 的 else 块发散（return/panic/break）
 ```
+
 > **陷阱总结**: 控制流的陷阱主要与**类型一致性（Coherence）**、**穷尽性**、**尾部值规则**和**作用域**相关。
 > [来源: [Rust Compiler Error E0308](https://doc.rust-lang.org/error_codes/E0308.html)]
 
@@ -602,6 +612,7 @@ fn fixed() -> i32 {
 
 fn some_condition() -> bool { false }
 ```
+
 > **修正**: `loop` 表达式可以返回值（通过 `break expr;`），但所有 `break` 分支必须返回相同类型。编译器通过控制流分析推断 `loop` 的类型。
 > 若存在不一致的 `break` 类型，编译器报错。这类似于 `match` 的所有分支必须返回相同类型。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -629,6 +640,7 @@ fn fixed() {
     println!("outer: {:?}", x); // ✅ x 仍有效
 }
 ```
+
 > **修正**: `if let` 和 `while let` 通过模式匹配解构值。
 > 若模式不使用 `ref` 或 `ref mut`，则发生所有权（Ownership）移动（对非 `Copy` 类型）。
 > 使用 `ref` 绑定创建引用（Reference）而非获取所有权（Ownership），允许在匹配后继续使用原值。
@@ -650,6 +662,7 @@ fn maybe_return() -> i32 {
 
 fn some_condition() -> bool { true }
 ```
+
 > **修正**: `loop` 是 Rust 中唯一可返回值的循环结构：`break expr` 返回 `expr` 作为 `loop` 的值。
 > 编译器要求：
 >
@@ -670,6 +683,7 @@ fn main() {
     // main 默认返回 ()
 }
 ```
+
 > **修正**:
 > `?` 运算符只能在返回 `Result` 或 `Option` 的函数中使用。
 > `main` 函数可返回 `Result<(), E>`（`E: Debug`），Rust 在返回 `Err` 时打印错误并设置非零退出码。
@@ -693,6 +707,7 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 > **修正**:
 > `loop` 是 Rust 中唯一可返回值的循环：`break expr` 将 `expr` 作为 `loop` 表达式的值。
 > 编译器要求：
@@ -724,6 +739,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**:
 > `match` 的**模式守卫**（pattern guard，`if` 条件）在绑定后执行，但守卫中的借用（Borrowing）可能与后续臂冲突。
 > `ref` 关键字创建引用绑定（`&T` 而非 `T`），避免 move。`ref mut` 创建可变引用（Mutable Reference）绑定。
@@ -789,6 +805,7 @@ fn main() {
     println!("{}", x);
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -803,6 +820,7 @@ let x = if true { 5.0 } else { 6.0 };  // 统一为 f64
 // 或
 let x: f64 = if true { 5.0 } else { 6.0 };
 ```
+
 </details>
 
 ---
@@ -820,6 +838,7 @@ fn main() {
     }
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -839,6 +858,7 @@ match x {
 }
 // 或: _ => println!("other"),
 ```
+
 </details>
 
 ---
@@ -859,6 +879,7 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -890,6 +911,7 @@ if let Some(v) = x {
     println!("{}", v);
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -904,6 +926,7 @@ if let Some(v) = x && v > 0 {
     println!("positive: {}", v);
 }
 ```
+
 </details>
 
 ---
@@ -930,6 +953,7 @@ fn main() {
     println!("after outer, count={}", count);
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -939,6 +963,7 @@ fn main() {
 after inner
 after outer, count=3
 ```
+
 执行流程：
 
 1. `count = 1`：`break 'inner` 不触发，继续
@@ -983,6 +1008,7 @@ after outer, count=3
                       │ S1 │    │ S2 │              │ S  │───────┘
                       └────┘    └────┘              └────┘
 ```
+
 #### 与 Rust 的对应
 
 Rust 的核心控制流——`if`/`match`/`loop`/`while`/`for`——正是结构化程序定理的工程实现：
@@ -1014,6 +1040,7 @@ fn main() {
     println!("gcd(48, 18) = {}", gcd(48, 18));
 }
 ```
+
 > **关键洞察**：Böhm–Jacopini 定理不是说 `goto` 没有用处，而是说**它不是表达能力的必需品**。Rust 的设计师据此剔除了 `goto`，同时通过 `break 'label` 和 `?` 保留了两类最常见的受控跳转需求。
 > **关联章节**: [Error Handling Basics](32_error_handling_basics.md) · [Async Control Flow](../03_advanced/02_async.md)
 
@@ -1037,6 +1064,7 @@ fn main() {
           ▼
         最终结果
 ```
+
 **`call/cc`**（call-with-current-continuation，Scheme 等语言提供）捕获当前 continuation 并作为普通函数暴露给调用者。调用该函数会抛弃当前调用栈，回到捕获点继续执行。
 
 ```scheme
@@ -1045,6 +1073,7 @@ fn main() {
       (k 42)        ; 立即回到 call/cc 调用点，返回 42
       0)))          ; 正常返回 0
 ```
+
 **CPS 变换（Continuation-Passing Style）** 是一种程序变换：把每个函数扩展一个额外参数 `k`，函数不再直接返回结果，而是把结果传递给 `k`。经过 CPS 变换后，所有函数调用都变成**尾调用（tail call）**，控制流完全显式化。
 
 直接风格：
@@ -1052,11 +1081,13 @@ fn main() {
 ```text
 f(x) = E[f(g(y))]
 ```
+
 CPS 风格：
 
 ```text
 f(x, k) = g(y, λr. k(E[r]))
 ```
+
 **Delimited Continuation（有界续延）** 是对全栈 continuation 的裁剪，只捕获到某个"控制分隔符"为止的剩余计算。典型算子为 `reset`（设定边界）与 `shift`（捕获到边界的 continuation）。它与 `async/await` 中的挂起边界非常相似。
 
 ```text
@@ -1068,6 +1099,7 @@ reset {              // 边界
   ...                // 这段代码被 k 捕获
 }
 ```
+
 #### Rust 关联
 
 Rust **没有** `call/cc`，原因与所有权模型密切相关：`call/cc` 会捕获整个调用栈的延续，可能与线性资源（如已获取的锁、已打开的文件）产生不可预测的生命周期（Lifetimes）交互，破坏 Rust 的借用（Borrowing）规则。
@@ -1089,6 +1121,7 @@ stateDiagram-v2
     State1 --> State0: pending (continuation saved)
     State2 --> State1: pending (continuation saved)
 ```
+
 #### 代码示例
 
 以下展示直接风格与 CPS 风格的阶乘对比，并展示 `?` 如何作为一种隐式 continuation：
@@ -1129,6 +1162,7 @@ fn main() {
     println!("checked: {:?}", sum_checked(3, -1));
 }
 ```
+
 #### Delimited Continuation 与 `async` 的类比
 
 ```text
@@ -1144,6 +1178,7 @@ delimited (reset/shift): 只捕获到指定边界内的计算
 async/await:  每个 await 点把当前 Future 的"剩余代码"作为状态机续延
               Future::poll 的边界就是一次 poll 调用
 ```
+
 > **关键洞察**：CPS 把隐式的"返回"变成显式的函数调用，使控制流成为可编程对象；Rust 通过 `Future` 和 `?` 在保留所有权安全的前提下，提供了两种受限但工程上更可控的 continuation 形式。
 > **关联章节**: [Async](../03_advanced/02_async.md) · [Closures](15_closure_basics.md) · [Error Handling](32_error_handling_basics.md)
 
@@ -1173,6 +1208,7 @@ graph TD
     style Entry fill:#e3f2fd
     style Exit fill:#fff3e0
 ```
+
 对应支配树：
 
 ```mermaid
@@ -1183,6 +1219,7 @@ graph TD
 
     style Root fill:#e3f2fd
 ```
+
 #### 与编译器优化的关系
 
 CFG 与支配树是许多编译器优化的基础数据结构：
@@ -1290,6 +1327,7 @@ fn main() {
     }
 }
 ```
+
 **输出解释**：`BB0`（入口）支配所有块；`BB1` 与 `BB2` 只被 `BB0` 和自身支配。支配树中 `BB0` 是 `BB1`、`BB2` 的父节点。
 
 > **关键洞察**：Rust 编译器内部把你的 `if`/`match`/`loop` 都转化为 MIR 的基本块与边。理解 CFG 与支配树，有助于阅读编译器错误信息（如 borrow checker 报错中的"use of possibly-uninitialized variable"）并优化性能敏感代码。
@@ -1324,6 +1362,7 @@ fn main() {
    └──►┘       │
        preserve
 ```
+
 #### 部分正确性与完全正确性
 
 - **部分正确性（Partial Correctness）**：只要程序终止，结果就满足规范。Hoare 逻辑中的 `while` 规则本身只保证部分正确性。
@@ -1369,6 +1408,7 @@ fn main() {
     println!("{:?}", binary_search(&arr, 4));
 }
 ```
+
 #### 代码示例 2：带不变量的简单累加
 
 ```rust
@@ -1392,6 +1432,7 @@ fn main() {
     println!("sum_to(10) = {}", sum_to(10));
 }
 ```
+
 > **关键洞察**：循环不变量是连接"代码如何运行"与"代码为何正确"的桥梁。Rust 的穷尽性 `match` 与强类型系统进一步减少了需要显式维护的不变量数量。
 > **关联章节**: [Assert & Matches](../02_intermediate/05_assert_matches.md) · [Range Types](../02_intermediate/06_range_types.md)
 
@@ -1431,6 +1472,7 @@ err_buf:
     return -1;
 }
 ```
+
 上述代码中，`goto` 的错误路径需要人工保证 `free(buf)` 被调用。一旦分支增多，维护成本指数上升。这正是 Rust 通过 RAII + `?` 想要避免的问题。
 
 #### C++ `co_await`：协程的恢复式控制流
@@ -1443,6 +1485,7 @@ task<int> fetch_and_double() {
     co_return x * 2;            // 恢复后从这里继续
 }
 ```
+
 `co_await` 与 Rust 的 `await` 本质相同：都是**delimited continuation** 的工程实现——把当前函数剩余代码打包成一个可在未来恢复的状态。区别在于 Rust 的 `Future` 是零成本、手动 poll 驱动的；C++ 的协程框架更依赖编译器生成的状态机与 promise 类型。
 
 #### Rust `break 'label` 与 `?`：结构化跳转的两种受限形式
@@ -1471,6 +1514,7 @@ fn read_config(path: &str) -> Result<String, std::io::Error> {
     Ok(content.trim().to_string())
 }
 ```
+
 #### 四种机制的跳转范围对比 Mermaid 图
 
 ```mermaid
@@ -1491,6 +1535,7 @@ graph LR
         G["当前函数内部"] -->|错误路径| H["调用者"]
     end
 ```
+
 #### 对比表
 
 | 特性 | `goto`（C/汇编） | `break 'label`（Rust） | `?`（Rust） | `co_await`（C++20 / Rust `await`） |
@@ -1521,6 +1566,7 @@ goto 的错误清理模式
   │ async/await │ 处理"先挂起、后恢复"的 delimited continuation
   └─────────────┘
 ```
+
 > **关键洞察**：`break 'label`、`?` 与 `async/await` 都是 Rust 在结构化程序定理框架内提供的受限"跳转"机制——分别处理循环嵌套、错误路径与异步挂起；二者都不会破坏资源的安全释放，也不会像 `goto` 那样导致不可达代码或生命周期（Lifetimes）混乱。C++ 的 `co_await` 则在另一套类型系统约束下解决了同一类问题。
 > **关联章节**: [Error Handling Basics](32_error_handling_basics.md) · [Async Control Flow](../03_advanced/02_async.md) · [Panic and Abort](13_panic_and_abort.md)
 

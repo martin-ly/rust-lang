@@ -106,6 +106,7 @@ graph TD
     HM -->|"无序"| HS
     BM -->|"有序"| BS
 ```
+
 > **认知功能**: 此图展示 Rust 标准库集合的**分类谱系**。每种集合类型针对特定的访问模式和排序需求设计。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 > **使用建议**: 默认使用 Vec 和 HashMap；需要排序时使用 BTreeMap；需要双端操作时使用 VecDeque。
@@ -141,6 +142,7 @@ Vec<T> 的设计:
   ├── slice 是"胖指针"（ptr + len）
   └── Vec 拥有内存，slice 只是借用视图
 ```
+
 > **Vec 洞察**: Vec 是 Rust 的**默认顺序容器**——它与 slice 的紧密集成（Deref to [T]）使其成为标准库中最通用的集合类型。
 > [来源: [std::vec::Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)]
 
@@ -176,6 +178,7 @@ BTreeMap<K, V>:
 │ 内存开销        │ 较高            │ 较低            │
 └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **Map 洞察**: HashMap 是**默认选择**——除非需要排序或范围查询，否则它的 O(1) 操作更优。BTreeMap 的内存局部性更好，在某些场景下实际性能可能超越 HashMap。
 > [来源: [std::collections::HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)] · [来源: [std::collections::BTreeMap](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)]
 
@@ -210,6 +213,7 @@ vec.reserve(100);
 // into_boxed_slice: 转换为精确容量的 Box<[T]>
 let boxed: Box<[i32]> = vec.into_boxed_slice();
 ```
+
 > **容量管理**: 预分配（`with_capacity`）是性能优化的**基础技巧**——避免多次重新分配的开销。
 > [来源: [Vec Methods](https://doc.rust-lang.org/std/vec/struct.Vec.html)]
 
@@ -239,6 +243,7 @@ map.entry("key").and_modify(|v| *v += 1).or_insert(0);
 // or_insert: 总是构造值（即使不需要）
 // or_insert_with: 惰性构造
 ```
+
 > **Entry API 洞察**: Entry API 是 HashMap 的**杀手级特性**——它将"检查-插入-修改"的复合操作优化为单次哈希查找。
 > [来源: [HashMap::entry](https://doc.rust-lang.org/std/collections/hash_map/enum.Entry.html)]
 
@@ -266,6 +271,7 @@ map.insert("b", 2);
 map.retain(|k, v| *v > 1);
 // map == {"b": 2}
 ```
+
 > **Drain/Retain 洞察**: `drain` 和 `retain` 提供了**高效的条件移除**——避免手动迭代和移除的复杂度。
 > [来源: [Vec::retain](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.retain)]
 
@@ -289,6 +295,7 @@ let (squares, cubes, tesseracts): (Vec<i32>, VecDeque<i32>, LinkedList<i32>) =
 assert_eq!(squares, vec![0, 1, 4, 9, 16, 25, 36, 49, 64, 81]);
 assert_eq!(cubes.into_iter().next(), Some(0));
 ```
+
 与 `unzip()` 的对比：
 
 | 特性 | `unzip()` | `collect()` to tuple |
@@ -340,6 +347,7 @@ assert_eq!(cubes.into_iter().next(), Some(0));
   → O(1) 插入/删除（但缓存不友好）
   → 注意: 实际中 Vec 往往更快
 ```
+
 > **选型原则**: 默认使用 Vec/HashMap，只有在测量证实需要其他集合时才切换。
 > [来源: [Rust Collections Performance](https://doc.rust-lang.org/std/collections/index.html#sequences)]
 
@@ -365,6 +373,7 @@ graph TD
     style HASH fill:#c8e6c9
     style BTREE2 fill:#c8e6c9
 ```
+
 > **认知功能**: 此决策树展示 Map 类型的**选型逻辑**。核心判断是**是否需要排序**和**键类型实现了哪些 Trait**。
 > [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
@@ -404,6 +413,7 @@ graph TD
 ├── BTreeMap 结构变化后，部分引用可能失效
 └── Rust 借用检查器防止了 C++ 式的 use-after-free
 ```
+
 > **边界要点**: 集合类型的边界主要与**哈希质量**、**B-Tree 参数**、**内存连续性**、**分配器**和**迭代器失效**相关。
 > [来源: [Rustonomicon — Collections](https://doc.rust-lang.org/nomicon/)]
 
@@ -453,6 +463,7 @@ graph TD
 
   ✅ 只在真正需要 O(1) 中间插入/删除时使用 LinkedList
 ```
+
 > **陷阱总结**: 集合类型的陷阱主要与**迭代修改**、**Trait 实现**、**删除模式**、**容量管理**和**性能假设**相关。
 > [来源: [Rust Performance Book — Collections](https://nnethercote.github.io/perf-book/print.html#reusing-collections)]
 
@@ -534,6 +545,7 @@ struct PointFixed {
     y: i32,
 }
 ```
+
 > **修正**: `HashMap` 的键必须实现 `Hash` 和 `Eq`（以及 `PartialEq`）。
 > `Hash` 用于计算哈希值，`Eq` 保证相等性判断的等价关系（自反、对称、传递）。
 > 浮点数（`f32`/`f64`）未实现 `Eq`（因 NaN != NaN），不能作为 `HashMap` 键。
@@ -559,6 +571,7 @@ fn fixed() {
     println!("sum={}, count={}", sum, count);
 }
 ```
+
 > **修正**: `into_iter()` 消耗集合所有权，迭代器只能遍历一次。
 > 如需多次遍历，使用 `iter()`（共享引用（Reference））或 `iter_mut()`（可变引用）。
 > 这体现了 Rust 所有权系统与迭代器模式的紧密结合——编译器通过所有权追踪防止"迭代器失效"和"重复消费"。
@@ -574,6 +587,7 @@ fn main() {
     // 范围 2..10 超出 vec 长度 5
 }
 ```
+
 > **修正**: `Vec::drain(range)` 移除指定范围内的元素并返回迭代器。
 > 范围必须满足 `start <= end <= len`，否则 panic。
 > `drain` 是高效的批量移除（O(end - start))，因为只需移动尾部元素填充空洞。
@@ -607,6 +621,7 @@ fn main() {
     // let map: HashMap<i32, String, FnvBuildHasher> = HashMap::default();
 }
 ```
+
 > **修正**: `HashMap` 的第三个泛型（Generics）参数是哈希器构建器（`S: BuildHasher`），默认 `RandomState`（使用 SipHash 1-3，防 HashDoS）。
 > 自定义哈希器（如 `fnv::FnvHasher` 用于小键高性能、`ahash::AHasher` 用于通用高性能）需实现 `BuildHasher` 和 `Hasher` trait。
 > `BuildHasherDefault<H>` 要求 `H: Default + Hasher`，是标准库提供的便捷包装。
@@ -631,6 +646,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**:
 > `Vec::drain(range)` 返回一个迭代器，它**可变借用（Mutable Borrow）**原 `Vec`（`&mut self`）。
 > 在 `drain` 迭代器存活期间，不能对原 `Vec` 进行任何操作（读、写、push、pop）。
@@ -651,6 +667,7 @@ fn main() {
     println!("{:?}", r);
 }
 ```
+
 > **修正**: **借用（Borrowing）规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
 
 ## 实践
@@ -707,6 +724,7 @@ fn main() {
     println!("len={}, cap={}", v.len(), v.capacity());
 }
 ```
+
 - A. `len=2, cap=2`
 - B. `len=2, cap=10`
 - C. `len=10, cap=10`
@@ -736,6 +754,7 @@ fn main() {
     println!("{:?}", value);
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -750,6 +769,7 @@ let value = map.get("key").unwrap().clone();
 map.insert("other".to_string(), vec![4, 5, 6]);
 println!("{:?}", value);
 ```
+
 </details>
 
 ---
@@ -766,6 +786,7 @@ fn main() {
     }
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -781,6 +802,7 @@ fn main() {
 let to_add: Vec<_> = v.iter().copied().collect();
 v.extend(to_add);
 ```
+
 </details>
 
 ---
@@ -818,6 +840,7 @@ fn main() {
     println!("v={:?}, drained={:?}", v, drained);
 }
 ```
+
 - A. `v=[1, 2, 3, 4, 5], drained=[]`
 - B. `v=[1, 5], drained=[2, 3, 4]`
 - C. `v=[1, 5], drained=[2, 3, 4, 5]`

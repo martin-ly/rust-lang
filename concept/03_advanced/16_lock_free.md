@@ -109,6 +109,7 @@
   │ 性能             │ 一般            │ 高              │ 极高            │
   └─────────────────┴─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **认知功能**: **无锁算法保证系统级进展，无等待保证线程级进展**——选择取决于实时性需求。
 > [来源: [Wikipedia — Non-blocking Algorithm](https://en.wikipedia.org/wiki/Non-blocking_algorithm)]
 
@@ -153,6 +154,7 @@ ABA 问题:
   let guard = &epoch::pin();
   let head = atomic_head.load(Ordering::Acquire, guard);
 ```
+
 > **ABA 洞察**: **ABA 问题是无锁编程的核心挑战**——Rust 的 crossbeam-epoch 提供了类型安全的解决方案。
 > [来源: [Crossbeam Epoch](https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/)]
 
@@ -191,6 +193,7 @@ ABA 问题:
   ├── CAS 循环: AcqRel
   └── 多生产者多消费者: SeqCst（谨慎）
 ```
+
 > **内存序洞察**: **内存序选择是无锁编程的核心技能**——正确性优先，仅在证明安全时使用弱序。
 > [来源: [std::sync::atomic::Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]
 
@@ -246,6 +249,7 @@ Treiber Stack:
 
   注意: 此实现未处理 ABA 和内存回收
 ```
+
 > **Treiber 洞察**: **Treiber Stack 是无锁算法的入门**——简单展示 CAS 模式，但生产需处理 ABA。
 > [来源: [Treiber Stack Paper](https://dominoweb.draco.res.ibm.com/reports/rc19889.pdf)]
 
@@ -283,6 +287,7 @@ Michael-Scott Queue:
   queue.push(2);
   assert_eq!(queue.pop(), Some(1));
 ```
+
 > **MS 队列洞察**: **Michael-Scott Queue 是无锁队列的事实标准**——crossbeam 提供了生产级实现。
 > [来源: [Michael & Scott — Simple, Fast, and Practical Non-Blocking Queue](https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf)]
 
@@ -316,6 +321,7 @@ Hazard Pointer:
   ├── Epoch: 批量回收，偶尔停顿
   └── 选择取决于读/写比例
 ```
+
 > **Hazard Pointer 洞察**: **Hazard Pointer 是 ABA 问题的另一种解决方案**——读路径有开销但回收即时。
 > [来源: [Hazard Pointers Paper](https://www.cs.otago.ac.nz/cosc440/readings/hazard-pointers.pdf)]
 
@@ -351,6 +357,7 @@ crossbeam 生态:
   ├── 用于 Rayon 并行
   └── Chase-Lev 算法
 ```
+
 > **crossbeam 洞察**: **crossbeam 是 Rust 无锁编程的基石**——提供了从底层 epoch 到高层队列的完整工具链。
 > [来源: [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/)]
 
@@ -383,6 +390,7 @@ lockfree crate:
   queue.push(2);
   assert_eq!(queue.pop(), Some(1));
 ```
+
 > **lockfree 洞察**: **lockfree crate 提供了高层的无锁数据结构**——适合需要快速集成的场景。
 > [来源: [lockfree](https://docs.rs/lockfree/latest/lockfree/)]
 
@@ -406,6 +414,7 @@ graph TD
     style LOCK fill:#c8e6c9
     style LOCKFREE fill:#c8e6c9
 ```
+
 > **认知功能**: **无锁只在高竞争场景显著优于锁**——低竞争时锁的实现更简单、缓存更友好。
 > [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
@@ -439,6 +448,7 @@ graph TD
 ├── 缓存行 bouncing 可能更差
 └── 缓解: 性能测试，不要假设
 ```
+
 > **边界要点**: 无锁编程的边界与**内存回收**、**调试**、**内存序**、**平台差异**和**性能**相关。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
@@ -493,6 +503,7 @@ graph TD
   ✅ 使用 Atomic 或 Mutex
      let x = AtomicUsize::new(0);
 ```
+
 > **陷阱总结**: 无锁编程的陷阱主要与**内存序**、**ABA**、**内存泄漏**、**自旋**和**数据竞争**相关。
 
 ### 编译错误示例
@@ -508,6 +519,7 @@ fn lockfree_data_race() {
     *r = 1;
 }
 ```
+
 > **修正**: 原子类型（`AtomicUsize` 等）实现内部可变性，必须通过 `.store()`、`.load()` 等原子方法访问，不能通过 `&mut` 直接赋值。
 
 ```rust,ignore
@@ -522,6 +534,7 @@ fn atomic_ptr_send() {
     });
 }
 ```
+
 > **修正**: `AtomicPtr<T>` 的 `Send`/`Sync` 依赖于 `T` 的 `Send`/`Sync`。若指针指向非 Send 数据，即使原子操作（Atomic Operations）本身安全，指针内容也可能不安全。
 
 ```rust,ignore
@@ -536,6 +549,7 @@ fn compare_exchange_weak_loop() {
     }
 }
 ```
+
 > **修正**: `compare_exchange_weak` 可能因 spurious failure 失败，即使在期望值正确时。循环中通常需要 `hint::spin_loop()` 或 `thread::yield_now()` 避免忙等。
 
 ---
@@ -561,6 +575,7 @@ fn main() {
     println!("{}", counter.load(Ordering::Relaxed));
 }
 ```
+
 ```rust
 use std::sync::atomic::AtomicBool;
 
@@ -570,6 +585,7 @@ fn main() {
     println!("{}", flag.load(std::sync::atomic::Ordering::Relaxed));
 }
 ```
+
 ### 编译验证示例
 
 ```rust
@@ -581,6 +597,7 @@ fn main() {
     println!("{}", counter.load(Ordering::Relaxed));
 }
 ```
+
 ```rust
 use std::sync::atomic::{AtomicBool, Ordering};
 
@@ -590,6 +607,7 @@ fn main() {
     assert!(flag.load(Ordering::Acquire));
 }
 ```
+
 ## 相关概念文件
 
 - [Concurrency](01_concurrency.md) — 并发
@@ -654,6 +672,7 @@ fn read() -> Option<i32> {
     }
 }
 ```
+
 > **修正**:
 > `Release`/`Acquire` 内存序建立**happens-before 关系**：`Release` store 之前的所有写入对匹配的 `Acquire` load 可见。
 > 上述代码中，`node.value = 42` 在 `HEAD.store(Release)` 之前，因此 `HEAD.load(Acquire)` 后 `(*node).value` 必为 42。
@@ -705,6 +724,7 @@ fn main() {
     // ❌ 运行时 UB: ABA 问题 + 缺少内存屏障 + 可能的 use-after-free
 }
 ```
+
 > **修正**: 上述代码展示了一个**有缺陷的无锁栈**：1) `compare_and_swap` 已废弃（应使用 `compare_exchange`）；2) `Relaxed` + `Release` 顺序不足（需 `Acquire` 保证可见性）；3) **ABA 问题**：节点 A 被 pop，节点 B 被 push 到同一地址，然后 CAS 误认为 A 仍存在。正确实现：1) 使用 `compare_exchange` + `Acquire`/`Release`；2) 使用 hazard pointers 或 epoch-based reclamation（`crossbeam-epoch`）防止 use-after-free；3) 标签指针（tagged pointer）解决 ABA。无锁数据结构是 Rust unsafe 代码的最难领域之一——编译器不验证线性化（linearizability）或内存安全（Memory Safety）。这与 C++ 的 `std::atomic`（类似 API，但 Rust 的 ownership 使 ABA 更复杂）或 Java 的 `AtomicReference`（JVM 管理内存，无 ABA 的 use-after-free）不同——Rust 的无锁代码需手动管理内存生命周期（Lifetimes）。[来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)] · [来源: [crossbeam-epoch](https://docs.rs/crossbeam-epoch/)]
 
 ### 10.5 边界测试：返回局部变量的悬垂引用
@@ -718,6 +738,7 @@ fn get_ref() -> &i32 {
 
 fn main() {}
 ```
+
 > **修正**: **悬垂引用**是 Rust borrow checker 的核心防护：1) 局部变量在函数结束时 drop；2) 返回其引用 → 引用指向已释放内存；3) 解决：返回所有权（Ownership）（`i32` 而非 `&i32`）或使用 `Box::leak` 获取 `'static` 引用（Reference）。
 
 ## 参考来源
@@ -794,6 +815,7 @@ fn main() {}
 ```rust,ignore
 let result = atomic.compare_exchange(current, new, Ordering::Acquire, Ordering::Relaxed);
 ```
+
 - A. `Ok` 表示交换成功，`Err` 表示交换失败且返回当前值
 - B. `Ok` 表示交换失败，`Err` 表示交换成功
 - C. `Ok` 和 `Err` 都表示交换成功，只是内存序不同
@@ -821,6 +843,7 @@ match atomic.compare_exchange(expected, new, success_order, failure_order) {
     }
 }
 ```
+
 **CAS 循环模式（Lock-Free 核心）**：
 
 ```rust,ignore
@@ -836,6 +859,7 @@ fn cas_loop(atomic: &AtomicUsize, f: impl Fn(usize) -> usize) {
     }
 }
 ```
+
 **为什么叫 "Compare-And-Swap"**：
 
 1. **Compare**: 比较当前值与期望值
@@ -885,6 +909,7 @@ impl<T> LockFreeStack<T> {
     }
 }
 ```
+
 - A. 没有内存泄漏，代码完全正确
 - B. **ABA 问题**: ① 和 ② 之间，head 可能被 pop→push→pop 回到相同地址，但内容已变
 - C. 存在 use-after-free，因为 `ptr::read` 后 node 未释放
@@ -912,6 +937,7 @@ impl<T> LockFreeStack<T> {
   → 成功！但 head 现在是 Node(99)，不是 Node(1)！
   → next = Node(2)，但 Node(99).next 可能是任何东西！
 ```
+
 **ABA 的危害**：
 
 | 场景 | 结果 |
@@ -940,6 +966,7 @@ struct LockFreeStack<T> {
     head: Atomic<Node<T>>,
 }
 ```
+
 > **现实检查**: 手写 Lock-Free 代码极易出错。生产环境优先使用成熟库：`crossbeam`（Rust 标准方案）、`lockfree`（纯 Rust）、`conc`（并发集合）。
 </details>
 
@@ -1006,6 +1033,7 @@ impl<T> Stack<T> {
     }
 }
 ```
+
 - A. 代码正确，没有缺失
 - B. `pop` 后需要使用 `guard.defer_destroy(head)` 延迟释放内存
 - C. 缺少 `Send` / `Sync` 实现
@@ -1028,6 +1056,7 @@ Ok(_) => {
     return Some(unsafe { ptr::read(&head.deref().data) });
 }
 ```
+
 **EBR 的三阶段**：
 
 ```
@@ -1042,6 +1071,7 @@ Epoch 2: 所有线程推进 epoch
          确认没有线程在 Epoch 0/1 读取过 node_2
          安全回收 node_2
 ```
+
 **完整修复后的 `pop`**：
 
 ```rust,ignore
@@ -1071,6 +1101,7 @@ fn pop(&self) -> Option<T> {
     }
 }
 ```
+
 **为什么 `defer_destroy` 安全**：
 
 | 机制 | 说明 |
@@ -1120,6 +1151,7 @@ fn pop(&self) -> Option<T> {
 // 2. 定期强制推进 epoch（即使有线程 pinned）
 // 3. 使用自适应 epoch 间隔
 ```
+
 **Hazard Pointer 的实现要点**：
 
 ```rust,ignore
@@ -1138,6 +1170,7 @@ hp[0].store(null_mut(), Ordering::SeqCst);
 
 // 回收线程扫描所有 HP 数组，只释放不在任何 HP 中的内存
 ```
+
 **Rust 生态选择指南**：
 
 | 场景 | 推荐方案 |

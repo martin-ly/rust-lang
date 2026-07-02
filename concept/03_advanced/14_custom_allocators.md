@@ -108,6 +108,7 @@ GlobalAlloc:
   ├── realloc 保持原有数据不变
   └── 线程安全由实现保证
 ```
+
 > **认知功能**: **GlobalAlloc 是 Rust 与操作系统内存管理的桥梁**——通过标准化接口允许替换底层分配策略。
 > [来源: [std::alloc::GlobalAlloc](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)]
 
@@ -134,6 +135,7 @@ GlobalAlloc:
   ├── 实时系统的确定性需求
   └── 缓解: 预分配、内存池
 ```
+
 > **性能洞察**: **分配器选择直接影响应用延迟分布**——jemalloc 适合通用场景，mimalloc 适合小对象高频分配。
 > [来源: [Microsoft mimalloc](https://github.com/microsoft/mimalloc)]
 
@@ -168,6 +170,7 @@ Bump Allocation:
   ├── 解析器（解析树构建）
   └── Web 渲染（DOM 节点）
 ```
+
 > **实践洞察**: **Bump 分配器是 Rust 编译器的核心优化**——rustc 使用类似机制分配 AST/HIR/MIR 节点。
 > [来源: [bumpalo crate](https://docs.rs/bumpalo/latest/bumpalo/)]
 
@@ -201,6 +204,7 @@ Bump Allocation:
   #[global_allocator]
   static ALLOC: jemallocator::Jemalloc = jemallocator::Jemalloc;
 ```
+
 > **分配器洞察**: **Rust 的默认分配器选择是平台相关的工程决策**——Linux 通常为 glibc malloc，Windows 为 mimalloc。
 > [来源: [jemalloc](http://jemalloc.net/)] · [来源: [mimalloc](https://github.com/microsoft/mimalloc)]
 
@@ -232,6 +236,7 @@ Arena 分配器模式:
   let b = arena.alloc(Node { val: 2, children: vec![] });
   // arena 内所有对象同生命周期
 ```
+
 > **Arena 洞察**: **Arena 分配器是 Rust 零成本抽象（Zero-Cost Abstraction）的典范**——无运行时（Runtime）开销，纯编译期内存管理策略。
 > [来源: [typed-arena](https://docs.rs/typed-arena/latest/typed_arena/)]
 
@@ -269,6 +274,7 @@ Arena 分配器模式:
       data: [u8; 64],
   }
 ```
+
 > **布局洞察**: **内存对齐是缓存性能的关键**——缓存行通常为 64 字节，跨行访问可能触发两次缓存加载。
 > [来源: [std::alloc::Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html)]
 
@@ -302,6 +308,7 @@ Arena 分配器模式:
   ├── packed 结构体的引用创建 → UB
   └── 需使用 ptr::read_unaligned / write_unaligned
 ```
+
 > **对齐安全**: **Rust 的类型系统（Type System）保证大部分对齐安全**——unsafe 代码中需手动维护 Layout 约束。
 > [来源: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)]
 
@@ -327,6 +334,7 @@ graph TD
     style ARENA fill:#c8e6c9
     style DEFAULT fill:#fff3e0
 ```
+
 > **认知功能**: **分配器选择取决于分配模式**——没有 universally best 的分配器。
 > [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
@@ -355,6 +363,7 @@ graph TD
 ├── AddressSanitizer 集成可能受限
 └── 缓解: 保持 alloc/dealloc 追踪日志
 ```
+
 > **边界要点**: 自定义分配器的边界与**unsafe 风险**、**生态兼容性**、**平台差异**和**调试复杂度**相关。
 > [来源: [Rustonomicon — Allocators](https://doc.rust-lang.org/nomicon/)]
 
@@ -400,6 +409,7 @@ graph TD
   ✅ 只在最终 binary crate 中定义
      // 或在 Cargo.toml 中选择特性
 ```
+
 > **陷阱总结**: 自定义分配器的陷阱主要与**Layout 一致性（Coherence）**、**ZST 处理**、**对齐假设**、**生命周期（Lifetimes）**和**全局唯一性**相关。
 > [来源: [Rust Reference — Global Allocators](https://doc.rust-lang.org/std/alloc/index.html)]
 
@@ -438,12 +448,14 @@ unsafe impl GlobalAlloc for MyAllocator {
 #[global_allocator]
 static ALLOCATOR: MyAllocator = MyAllocator;
 ```
+
 ```rust
 fn main() {
     let v = vec![1, 2, 3];
     println!("capacity: {}", v.capacity());
 }
 ```
+
 ### 编译验证示例
 
 ```rust
@@ -459,6 +471,7 @@ fn main() {
     println!("combined size={}", combined.size());
 }
 ```
+
 ```rust
 #[repr(C)]
 struct Point {
@@ -471,6 +484,7 @@ fn main() {
     println!("size_of Point = {}", std::mem::size_of_val(&p));
 }
 ```
+
 ## 相关概念文件
 
 - [Memory Management](../02_intermediate/03_memory_management.md) — 内存管理基础
@@ -521,6 +535,7 @@ fn main() {
     unsafe { dealloc(ptr, layout); } // ✅ 使用相同布局
 }
 ```
+
 > **修正**: Rust 的全局分配器 API 要求 `alloc` 和 `dealloc` 使用**完全相同的布局**（大小和对齐）。使用错误布局释放内存是未定义行为，可能导致分配器元数据损坏、双重释放或内存泄漏。这与 C 的 `malloc`/`free`（只需配对）不同——Rust 的分配器可能使用大小类（size class）优化，`Layout` 信息对正确释放至关重要。自定义分配器实现必须严格遵守此契约。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.2 边界测试：`Vec` 自定义分配器的泛型参数（编译错误）
@@ -552,6 +567,7 @@ fn fixed() {
     // let _v = Vec::new_in(MyAlloc); // nightly 支持
 }
 ```
+
 > **修正**: Rust 的自定义分配器 API（`Allocator` trait）截至 1.95+ 仍为**不稳定特性**（`#![feature(allocator_api)]`）。`Vec<T, A>`、`Box<T, A>` 等类型的第二个泛型（Generics）参数只在 nightly 可用。稳定 Rust 中，自定义分配通常通过全局分配器替换（`#[global_allocator]`）实现，而非为单个集合指定分配器。这与 C++ 的 `std::allocator`（稳定且广泛使用）形成对比——Rust 的分配器设计更强调全局优化和安全性，牺牲了部分灵活性。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
 
 ### 10.3 边界测试：全局分配器的 `#[global_allocator]` 重复定义（编译错误）
@@ -567,6 +583,7 @@ static A: System = System;
 
 fn main() {}
 ```
+
 > **修正**:
 > `#[global_allocator]` 属性将静态变量注册为进程的全局堆分配器。
 > 整个依赖树中只能有一个全局分配器——若两个 crate 都定义，链接器报告重复符号错误。
@@ -600,6 +617,7 @@ unsafe impl GlobalAlloc for MyAlloc {
     }
 }
 ```
+
 > **修正**:
 > 自定义分配器必须严格遵守 `Layout` 契约：`alloc` 返回的指针必须按 `layout.align()` 对齐，`dealloc` 的 `layout` 必须与 `alloc` 时完全相同（大小和对齐）。
 > 违反这些契约是未定义行为：不对齐的指针导致 SIMD/原子指令失败，错误的 layout 导致分配器元数据损坏。
@@ -625,6 +643,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**:
 > `dealloc` 要求传入与 `alloc` 时**完全相同的 `Layout`**（大小和对齐）。
 > 大小不匹配导致分配器元数据损坏，对齐不匹配可能导致未对齐释放（某些分配器要求对齐一致）。
@@ -663,6 +682,7 @@ static B: System = System;
 
 fn main() {}
 ```
+
 > **修正**:
 > `#[global_allocator]` 将整个程序的**默认堆分配器**替换为自定义实现。
 > 限制：
@@ -692,6 +712,7 @@ fn main() {
     unsafe { dealloc(ptr, wrong_layout); }
 }
 ```
+
 > **修正**:
 > **`alloc`/`dealloc`** 的 **Layout 契约**：
 >
@@ -724,6 +745,7 @@ fn duplicate() {}
 
 fn main() {}
 ```
+
 > **修正**: **名称唯一性**：1) 同一作用域内不能有两个同名函数；2) trait 方法可同名（通过 trait 区分）；3) 重载（overloading）不支持（除 trait 外）。
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

@@ -132,6 +132,7 @@
   12:01:05                      12:01:12                        12:01:08
   (用户点击)                    (服务器处理)                     (Kafka 接收)
 ```
+
 **时间域偏斜（Time Domain Skew）**: `skew = processing_time - event_time`。
 偏斜由网络延迟、队列积压、处理耗时引起。
 流系统的核心挑战之一就是在存在偏斜的情况下仍能对事件时间做出正确推断。[来源: [Akidau et al. — The Dataflow Model, VLDB 2015](https://www.vldb.org/pvldb/vol8/p1792-Akidau.pdf)]
@@ -180,6 +181,7 @@ Session  [0,3)     [6,9)          [14,18)
            │█████│     │█████│          │███████│
            (gap>2关闭)  (gap>2关闭)       (gap>2关闭)
 ```
+
 ### 3.2 窗口与乱序数据
 
 窗口计算的复杂性来自**乱序（out-of-order）数据**：事件可能按任意处理时间顺序到达，但其事件时间分布是固定的。
@@ -193,6 +195,7 @@ Session  [0,3)     [6,9)          [14,18)
 └────────────────────────────────────────────────────────►
                          事件时间
 ```
+
 > **关键洞察**: 若使用处理时间窗口，事件B（t=12:02）会被分配到错误的窗口；若使用事件时间窗口，需要机制处理"窗口已触发但迟到数据到达"的情况。
 > 这正是 Watermark 的语义动机。[来源: Akidau et al.] ✅
 
@@ -219,6 +222,7 @@ Session  [0,3)     [6,9)          [14,18)
               Watermark 可能推进到 12:04
               （假设最大观察偏斜为2分钟）
 ```
+
 ### 4.2 Watermark 的两种失败模式
 
 Akidau 等人指出 Watermark 存在两种系统性失败：
@@ -267,6 +271,7 @@ Discarding:           [10] ── [15] ── [5]      (下游需累加)
 Accumulating:         [10] ── [25] ── [30]     (下游直接替换)
 Accumulating+Retracting: [10] ── [-10,25] ── [-25,30] (下游需 retract)
 ```
+
 > **关键洞察**: Retraction 是流 SQL（如 Materialize）实现正确增量视图维护的核心机制。
 > 没有 retraction，流系统无法表达"之前输出的结果现在发现是错误的，需要撤回"。
 > 这正是批处理系统不需要而流处理系统必须面对的语义复杂性。
@@ -304,6 +309,7 @@ Source ──[B1]──► Map ──[B1]──► KeyBy ──[B1]──► Sin
   ▼              ▼              ▼              ▼
 Checkpoint-1 完成（一致性全局快照）
 ```
+
 ### 6.3 Barrier 对齐 vs 非对齐
 
 | 模式 | 机制 | 延迟 | 内存 | 适用场景 |
@@ -355,6 +361,7 @@ Producer (1000 events/s) ──► Consumer (100 events/s)
                               无背压: 队列无限增长 → OOM
                               有背压: 生产者降速到 100 events/s
 ```
+
 ### 8.2 背压实现机制
 
 | 机制 | 原理 | 代表系统 |
@@ -376,6 +383,7 @@ let (tx, mut rx) = tokio::sync::mpsc::channel::<i32>(100); // 有界缓冲
 // 不会阻塞线程，也不会无限增长内存
 tx.send(42).await?;
 ```
+
 > **关键洞察**: Rust 的 `async/await` + 有界 channel = 零成本背压。
 > 与 Java（需额外背压库）或 Go（channel 有界但无类型安全保证）相比，Rust 在编译期就保证了背压通道的正确性（Send/Sync + 类型安全 + 无数据竞争）。
 > [来源: 💡 原创分析] · [Tokio Documentation](https://tokio.rs/) ✅
@@ -396,6 +404,7 @@ Collection<T> = Stream of (data: T, time: Timestamp, diff: isize)
 - diff = -1 表示删除（retraction）
 - diff = +k 表示批量插入 k 个副本
 ```
+
 ### 9.2 增量运算符的语义
 
 DD 的所有运算符都是**增量化的**：输入的变更（diff）传播到输出，只重新计算受影响的部分。
@@ -425,6 +434,7 @@ Timely Dataflow（TD）是 DD 的底层执行引擎，核心创新是**时间戳
 2. 嵌套递归（图算法、Datalog）
 3. 确定性执行（相同输入产生相同输出）
 ```
+
 > **关键洞察**:
 > Timely Dataflow 的时间戳机制与 Rust 的生命周期（Lifetimes）系统有深层同构：两者都追踪"资源（数据/引用（Reference））何时可被安全释放"。
 > TD 的 `epoch` 类似于所有权的 drop 时刻，而 `iteration` 类似于借用（Borrowing）链的嵌套深度。
@@ -463,6 +473,7 @@ GROUP BY region;
 
 -- 结果自动增量更新，无需重新计算
 ```
+
 > **关键洞察**:
 > Materialize 的核心创新是将"物化视图维护"从批处理（定时刷新）转化为流处理（增量更新）。
 > 其正确性保证来自 Differential Dataflow 的严格串行化（strict serializability）——每个更新都对应一个逻辑时间戳，查询结果始终是某时间戳下的全局一致快照。
@@ -510,6 +521,7 @@ GROUP BY region;
 //     // 没有 .with_allowed_lateness() 和 .with_watermark()
 //     // 窗口永远不会触发，状态无限累积
 ```
+
 > **修正**: 必须配置 Watermark 策略和允许迟到时间，否则无界状态将导致内存泄漏。
 
 ### 12.2 边界测试：共享状态管理器的并发访问（编译错误）
@@ -534,6 +546,7 @@ impl StatefulOperator {
 // ❌ 在分布式流系统中，这种共享状态无法正确 Checkpoint
 // 每个算子实例的状态必须是独立的，或通过 key 分区（KeyedState）
 ```
+
 > **修正**: 使用 Flink 的 KeyedState 或 Rust 的 `dashmap`（分片锁），确保每个 key 的状态独立且可序列化。
 
 ### 12.3 边界测试：Exactly-Once 的 Sink 陷阱
@@ -548,6 +561,7 @@ impl StatefulOperator {
 //     .map(|event| http_post("https://api.example.com", event))
 //     // 没有事务包装，Checkpoint 失败后重放会重复 POST
 ```
+
 > **修正**: Sink 必须是幂等的（idempotent，如 UPSERT）或事务性的（transactional，如 Kafka Transactions）。
 
 ### 12.3 边界测试：背压与死锁
@@ -574,6 +588,7 @@ async fn main() {
     });
 }
 ```
+
 > **修正**: 避免循环背压依赖，或使用无界 channel（但会牺牲内存安全（Memory Safety）保证）。
 
 ---
@@ -635,6 +650,7 @@ async fn fixed_stream() {
     println!("{:?}", data); // ✅ data 仍可用
 }
 ```
+
 > **修正**:
 > `stream::iter(data)` 消耗 `data` 的所有权，将其转换为流。
 > 若需在流消费后继续使用原数据，必须传递引用（Reference）（`stream::iter(&data)`）。
@@ -667,6 +683,7 @@ async fn consumer_fixed(mut rx: mpsc::Receiver<i32>) {
     }
 }
 ```
+
 > **修正**: Rust 的 channel（`mpsc::channel<T>`）在类型层面保证发送和接收的类型一致性（Coherence）。编译器拒绝类型不匹配的 channel 连接，将运行时（Runtime）类型错误提前到编译期。这与 Go 的 `chan interface{}` 或 Erlang 的动态消息类型形成对比——Rust 的流处理是类型安全的，但要求在设计时明确消息类型。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.3 边界测试：Stream 的 `fuse` 与重复 poll 后的行为（逻辑错误）
@@ -688,6 +705,7 @@ fn main() {
     // 正确: 使用 .fuse() 确保 Stream 在 None 后保持返回 None
 }
 ```
+
 > **修正**: `Stream` trait 的 `poll_next` 在返回 `None` 后，再次 poll 的行为**未定义**（取决于实现）。
 > `Fuse` adapter（`.fuse()`）保证：返回 `None` 后，所有后续 poll 也返回 `None`。
 > 这与 `Iterator` 的行为不同：`Iterator::next()` 返回 `None` 后再次调用是明确定义的（继续返回 `None`）。
