@@ -23,7 +23,7 @@
 > **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
 
 ---
-> **来源**: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL — Advanced Traits](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) ·
 > [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs//0195-associated-items.html) ·
 > [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) ·

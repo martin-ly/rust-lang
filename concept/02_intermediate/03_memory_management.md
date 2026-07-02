@@ -15,7 +15,7 @@
 > **后置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) ·
 > [Concurrency](../03_advanced/01_concurrency.md) ·
 > [Async](../03_advanced/02_async.md)
-> **主要来源**: [TRPL: Ch4.1-4.3](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> **主要来源**: [TRPL: Ch4.1-4.3](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL: Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·
 > [Rust Reference: Memory Model](https://doc.rust-lang.org/reference/) ·
 > [Wikipedia: Memory management](https://en.wikipedia.org/wiki/Memory_management)
