@@ -28,7 +28,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 RUST_SAFETY_CRITICAL_ECOSYSTEM/
 ├── 01_mind_maps/                    # 思维导图 - 宏观视角
 │   └── 10_rust_ecosystem_mind_map.md   # 生态系统全景图
@@ -360,6 +360,7 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/
 ---
 
 **开始使用**: 建议从 [思维导图](01_mind_maps/10_rust_ecosystem_mind_map.md) 开始，了解Rust安全关键生态系统的全貌
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -385,15 +386,9 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**

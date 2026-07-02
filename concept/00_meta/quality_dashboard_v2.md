@@ -265,7 +265,7 @@ graph LR
 
 ---
 
-> **相关文件**: [导航中心](navigation.md) · [审计清单](audit_checklist.md) · [概念索引](concept_index.md) · [质量基线](../../reports/QUALITY_BASELINE_v2_0.md)
+> **相关文件**: [导航中心](navigation.md) · [审计清单](audit_checklist.md) · [概念索引](concept_index.md) · [质量基线](../../archive/reports/2026_07/QUALITY_BASELINE_v2_0.md)
 
 ## 认知路径
 

@@ -106,7 +106,7 @@ RTTI / Friend / Preprocessor（逐个主题扫尾）
 
 ## 四、与 Phase B 计划的衔接
 
-本路线图属于 **Phase B（C/C++ 工程层对比）** 的导航层。审计报告 [SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md](../../reports/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md) 指出的 Phase B 缺口包括：
+本路线图属于 **Phase B（C/C++ 工程层对比）** 的导航层。审计报告 [SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md](../../archive/reports/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md) 指出的 Phase B 缺口包括：
 
 - ABI 与对象模型 ✅ [C++ ABI Object Model](../05_comparative/18_cpp_abi_object_model.md)
 - Move 语义系统对比 ✅ [Rust vs C++ §7.3](../05_comparative/01_rust_vs_cpp.md)

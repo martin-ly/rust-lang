@@ -217,10 +217,10 @@ L5: paradigm_matrix（Rust 在设计空间中的位置）
 
 ## 四、质量报告
 
-- [质量基线报告 v1.9](../../reports/QUALITY_BASELINE_v1_9.md)
-- [概念审计报告](../../reports/concept_audit_report.md)
-- [概念一致性报告](../../reports/concept_consistency_report.md)
-- [代码块编译报告](../../reports/code_block_compile_report.md)
+- [质量基线报告 v1.9](../../archive/reports/2026_07/QUALITY_BASELINE_v1_9.md)
+- [概念审计报告](../../archive/reports/2026_07/concept_audit_report.md)
+- [概念一致性报告](../../archive/reports/2026_07/concept_consistency_report.md)
+- [代码块编译报告](../../archive/reports/2026_07/code_block_compile_report.md)
 
 ---
 
