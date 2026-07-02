@@ -65,6 +65,7 @@ rustup component add miri
 # 初始化 Miri {#初始化-miri}
 cargo miri setup
 ```
+
 ## 运行 Miri 测试 {#运行-miri-测试}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -82,6 +83,7 @@ cargo miri setup
 # Windows {#windows}
 scripts\run-miri.bat
 ```
+
 ### 手动运行 {#手动运行}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -101,6 +103,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 # 禁用隔离（允许文件系统/网络访问） {#禁用隔离允许文件系统网络访问}
 MIRIFLAGS="-Zmiri-disable-isolation" cargo miri test
 ```
+
 ## Tree Borrows vs Stacked Borrows {#tree-borrows-vs-stacked-borrows}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -133,6 +136,7 @@ Miri 支持两种别名模型来检查内存访问的有效性：
 # 启用 Tree Borrows {#启用-tree-borrows}
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ```
+
 ### 关键区别示例 {#关键区别示例}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -147,6 +151,7 @@ let z = &mut *y;     // 重新借用
 *z = 1;              // 通过子借用写入
 *y = 2;              // 通过父借用写入（Tree Borrows: OK, Stacked Borrows: UB）
 ```
+
 在 Tree Borrows 中，重新借用创建的是**父子关系**，使用父引用是允许的。而在 Stacked Borrows 中，这会破坏借用栈。
 
 ## 配置 Miri {#配置-miri}
@@ -169,6 +174,7 @@ runner = "miri"
 [env.miri]
 MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = false }
 ```
+
 ### Miri 环境变量 {#miri-环境变量}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -199,6 +205,7 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 # 控制地址空间布局随机化 {#控制地址空间布局随机化}
 -Zmiri-disable-address-space-layout-randomization
 ```
+
 ## 常见错误类型 {#常见错误类型}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -217,6 +224,7 @@ unsafe {
     let _ = *ptr; // 错误: use-after-free!
 }
 ```
+
 > ⚠️ **注意**: 以下 `static mut` 示例仅用于展示 Miri 检测数据竞争的能力。
 > `static mut` 在 Rust 2024 Edition 中引用已被禁止。实际代码应使用 `AtomicI32` 或 `Mutex`。
 
@@ -237,6 +245,7 @@ unsafe {
     COUNTER += 1; // 数据竞争!
 }
 ```
+
 ### 越界访问 {#越界访问}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -248,6 +257,7 @@ unsafe {
     let _ = *ptr.offset(10); // 越界访问!
 }
 ```
+
 ### 未初始化内存 {#未初始化内存}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -256,6 +266,7 @@ unsafe {
 let x: i32;
 let _ = x; // 错误: 使用未初始化的值
 ```
+
 ## Miri 测试结构 {#miri-测试结构}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -273,6 +284,7 @@ crates/
 ├── c03_control_fn/src/miri_tests.rs
 └── ...
 ```
+
 ### 测试模块声明 {#测试模块声明}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -283,6 +295,7 @@ crates/
 #[cfg(test)]
 pub mod miri_tests;
 ```
+
 ### 测试组织 {#测试组织}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -329,6 +342,7 @@ fn test_use_after_free() {
     }
 }
 ```
+
 ### 标记 Miri 专用测试 {#标记-miri-专用测试}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -348,6 +362,7 @@ mod non_miri_tests {
     // 这些测试在 Miri 之外运行
 }
 ```
+
 ## 最佳实践 {#最佳实践}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**

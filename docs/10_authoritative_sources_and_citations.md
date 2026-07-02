@@ -86,6 +86,7 @@ fn has_abba(s: &str) -> bool {
         .any(|[a1, b1, b2, a2]| (a1 != b1) && (a1 == a2) && (b1 == b2))
 }
 ```
+
 #### 2. LazyCell/LazyLock API稳定化 {#2-lazycelllazylock-api稳定化}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -279,6 +280,7 @@ Cargo：
   doi={10.1145/3735592}
 }
 ```
+
 ---
 
 ## 大型项目迁移案例 {#大型项目迁移案例}
@@ -318,6 +320,7 @@ Cargo：
 ```
 [作者]. [标题]. In [会议] [年份]. DOI:[doi]
 ```
+
 ### 官方文档引用 {#官方文档引用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -325,6 +328,7 @@ Cargo：
 ```
 [文档名称]. [URL]. [访问日期]
 ```
+
 ### 博客文章引用 {#博客文章引用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -332,6 +336,7 @@ Cargo：
 ```
 [作者]. [标题]. [博客名称], [日期]. [URL]
 ```
+
 ---
 
 ## 验证清单 {#验证清单}

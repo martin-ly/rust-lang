@@ -47,6 +47,7 @@ docker build -t rust-lang:latest .
 # 运行容器 {#运行容器}
 docker run -d -p 8080:8080 --name rust-lang rust-lang:latest
 ```
+
 ### 使用 Docker Compose {#使用-docker-compose}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -58,6 +59,7 @@ docker-compose up -d
 # 查看状态 {#查看状态}
 docker-compose ps
 ```
+
 更多详情参见 [06_docker_guide.md](06_docker_guide.md)
 
 ## Kubernetes 部署 {#kubernetes-部署}
@@ -80,22 +82,26 @@ docker-compose ps
    ```bash
    kubectl apply -f k8s/configmap.yaml
    ```
+
 2. **部署应用**
 
    ```bash
    kubectl apply -f k8s/deployment.yaml
    ```
+
 3. **创建 Service**
 
    ```bash
    kubectl apply -f k8s/service.yaml
    ```
+
 4. **验证部署**
 
    ```bash
    kubectl get pods -l app=rust-lang
    kubectl get svc rust-lang-service
    ```
+
 ### 扩展副本 {#扩展副本}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -103,6 +109,7 @@ docker-compose ps
 ```bash
 kubectl scale deployment rust-lang-deployment --replicas=5
 ```
+
 ### 更新镜像 {#更新镜像}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -110,6 +117,7 @@ kubectl scale deployment rust-lang-deployment --replicas=5
 ```bash
 kubectl set image deployment/rust-lang-deployment rust-lang=rust-lang:v2.0
 ```
+
 ### 查看日志 {#查看日志}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -117,6 +125,7 @@ kubectl set image deployment/rust-lang-deployment rust-lang=rust-lang:v2.0
 ```bash
 kubectl logs -f deployment/rust-lang-deployment
 ```
+
 ## Nix 部署 {#nix-部署}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -128,6 +137,7 @@ kubectl logs -f deployment/rust-lang-deployment
 ```bash
 nix build
 ```
+
 ### 运行 Nix 开发 Shell {#运行-nix-开发-shell}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -135,6 +145,7 @@ nix build
 ```bash
 nix develop
 ```
+
 更多详情参见 [01_nix_setup.md](01_nix_setup.md)
 
 ## 环境配置 {#环境配置}

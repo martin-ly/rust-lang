@@ -55,6 +55,7 @@
 ```bash
 cargo install sccache --locked
 ```
+
 ### 方式 2: 使用包管理器 {#方式-2-使用包管理器}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -64,11 +65,13 @@ cargo install sccache --locked
 ```powershell
 winget install sccache
 ```
+
 **macOS (Homebrew):**
 
 ```bash
 brew install sccache
 ```
+
 **Linux:**
 
 ```bash
@@ -80,6 +83,7 @@ sudo pacman -S sccache
 
 # 其他发行版使用 cargo 安装 {#其他发行版使用-cargo-安装}
 ```
+
 ### 方式 3: GitHub Releases {#方式-3-github-releases}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -94,6 +98,7 @@ sudo pacman -S sccache
 ```bash
 sccache --version
 ```
+
 ## 配置 {#配置}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -114,6 +119,7 @@ SCCACHE_DIR = "D:\\_cache\\sccache"  # Windows
 # SCCACHE_DIR = "${HOME}/.cache/sccache"  # Linux/macOS {#sccache_dir-homecachesccache-linuxmacos}
 SCCACHE_GHA_ENABLED = "true"
 ```
+
 ### 2. 环境变量 (可选) {#2-环境变量-可选}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -127,6 +133,7 @@ $env:SCCACHE_DIR = "D:\_cache\sccache"
 export SCCACHE_CACHE_SIZE="50G"
 export SCCACHE_DIR="$HOME/.cache/sccache"
 ```
+
 ## 使用方法 {#使用方法}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -138,6 +145,7 @@ cargo build
 cargo test
 cargo check
 ```
+
 ## 监控缓存状态 {#监控缓存状态}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -153,6 +161,7 @@ sccache --show-stats
 # Cache misses                          130 (13.3%) {#cache-misses-130-133}
 # Cache timeouts                          0 {#cache-timeouts-0}
 ```
+
 ## 清理缓存 {#清理缓存}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -166,6 +175,7 @@ rm -rf $SCCACHE_DIR  # Linux/macOS
 # 自动清理 (达到 SCCACHE_CACHE_SIZE 时自动清理) {#自动清理-达到-sccache_cache_size-时自动清理}
 # 无需手动操作 {#无需手动操作}
 ```
+
 ## CI/CD 配置 {#cicd-配置}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -182,6 +192,7 @@ GitHub Actions 已配置 (`.github/workflows/ci.yml`):
     path: ~/.cache/sccache
     key: ${{ runner.os }}-sccache-${{ hashFiles('**/Cargo.lock') }}
 ```
+
 ## 性能基准 {#性能基准}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -209,6 +220,7 @@ echo $RUSTC_WRAPPER      # Linux/macOS
 
 # 应该输出: sccache {#应该输出-sccache}
 ```
+
 ### 缓存目录权限问题 {#缓存目录权限问题}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -221,6 +233,7 @@ mkdir D:\_cache\sccache -Force
 mkdir -p ~/.cache/sccache
 chmod 755 ~/.cache/sccache
 ```
+
 ### 清理并重启 {#清理并重启}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -229,6 +242,7 @@ chmod 755 ~/.cache/sccache
 sccache --stop-server
 sccache --start-server
 ```
+
 ## 参考 {#参考}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

@@ -50,6 +50,7 @@
 ```bash
 docker build -t rust-lang .
 ```
+
 ### 运行容器 {#运行容器}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -57,6 +58,7 @@ docker build -t rust-lang .
 ```bash
 docker run -it --rm rust-lang
 ```
+
 ### 使用 Docker Compose {#使用-docker-compose}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -71,6 +73,7 @@ docker-compose up -d
 # 停止服务 {#停止服务}
 docker-compose down
 ```
+
 ## 多阶段构建 {#多阶段构建}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -91,6 +94,7 @@ Dockerfile 使用多阶段构建优化镜像大小:
 ```bash
 docker-compose up rust-lang
 ```
+
 ### 开发环境（热重载） {#开发环境热重载}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -98,6 +102,7 @@ docker-compose up rust-lang
 ```bash
 docker-compose --profile dev up rust-lang-dev
 ```
+
 开发模式使用 `cargo-watch` 监视文件变化并自动重新编译。
 
 ## 卷挂载 {#卷挂载}
@@ -135,6 +140,7 @@ docker-compose down -v
 # 重新构建 {#重新构建}
 docker-compose build --no-cache
 ```
+
 ## 故障排除 {#故障排除}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -149,6 +155,7 @@ docker-compose build --no-cache
 # Linux/macOS {#linuxmacos}
 sudo chown -R $(id -u):$(id -g) .
 ```
+
 ### 编译缓慢 {#编译缓慢}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**

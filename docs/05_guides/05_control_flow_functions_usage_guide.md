@@ -247,7 +247,7 @@ fn async_control_flow() {
 | 技术 | 说明 | 模块 |
 |------|------|------|
 | 尾递归优化 | 使用循环替代深度递归 | `control_flow_patterns/` |
-| 短路求值 | `&&` / `||` 的懒加载特性 | `control_struct/` |
+| 短路求值 | `&&` / `\|\|` 的懒加载特性 | `control_struct/` |
 | 闭包内联 | `FnOnce` 避免重复调用开销 | `closure/` |
 | 模式匹配优化 | 编译器生成跳转表 | `pattern_matching/` |
 

@@ -44,7 +44,6 @@
     - [array\_windows 在参数解析中的应用 {#array\_windows-在参数解析中的应用}](#array_windows-在参数解析中的应用-array_windows-在参数解析中的应用)
     - [ControlFlow 在验证管道中的应用 {#controlflow-在验证管道中的应用}](#controlflow-在验证管道中的应用-controlflow-在验证管道中的应用)
     - [LazyLock 在配置管理中的应用 {#lazylock-在配置管理中的应用}](#lazylock-在配置管理中的应用-lazylock-在配置管理中的应用)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念 {#相关概念}](#相关概念-相关概念)
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
@@ -496,6 +495,7 @@ pub fn get_config() -> Option<&'static CliConfig> {
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

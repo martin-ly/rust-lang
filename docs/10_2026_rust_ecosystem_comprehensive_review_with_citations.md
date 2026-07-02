@@ -69,6 +69,7 @@
 ║  总体权威度: ██████████████████████████████████  100%             ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
+
 ---
 
 ## 1. 工具链现状（权威版本） {#1-工具链现状权威版本}
@@ -109,6 +110,7 @@ s.as_bytes().array_windows().any(|[a1, b1, b2, a2]| ...)
 // 对比windows - 需要运行时边界检查
 s.as_bytes().windows(4).any(|w| ...)
 ```
+
 #### LazyCell/LazyLock API稳定化 {#lazycelllazylock-api稳定化}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -157,6 +159,7 @@ Neven Villani, Johannes Hostert, Derek Dreyer, and Ralf Jung.
 Proc. ACM Program. Lang. 9, PLDI, Article 188 (June 2025), 24 pages.
 DOI: 10.1145/3735592
 ```
+
 **荣誉**: PLDI 2025 **Distinguished Paper Award** [^5] [^20]
 
 > "Tree Borrows takes a different approach to defining when aliasing is allowed. Instead of tracking stack-based permissions, it tracks permissions in a tree structure."
@@ -180,6 +183,7 @@ Oli Scherer, and Qian Wang.
 In POPL 2026.
 DOI: 10.1145/3704904
 ```
+
 ### 2.3 Tree Borrows核心优势 {#23-tree-borrows核心优势}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -479,6 +483,7 @@ DOI: 10.1145/3704904
 国际权威对齐度: 100%
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
 ---
 
 ## 6. 结论 {#6-结论}

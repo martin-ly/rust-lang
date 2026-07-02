@@ -64,6 +64,7 @@ runner = "miri"
 [env.miri]
 MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = false }
 ```
+
 ### 2. Miri 测试文件 {#2-miri-测试文件}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -96,6 +97,7 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 #[cfg(test)]
 pub mod miri_tests;
 ```
+
 ### 4. 运行脚本 {#4-运行脚本}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -106,12 +108,14 @@ pub mod miri_tests;
 #!/bin/bash
 # 自动安装 Miri，设置环境变量，运行所有测试 {#自动安装-miri设置环境变量运行所有测试}
 ```
+
 **文件**: `scripts/run-miri.bat` (Windows)
 
 ```batch
 @echo off
 # Windows 版本的 Miri 测试脚本 {#windows-版本的-miri-测试脚本}
 ```
+
 ### 5. 文档 {#5-文档}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -159,6 +163,7 @@ let z = &mut *y;  // 重新借用
 *z = 1;
 *y = 2;  // Tree Borrows: OK, Stacked Borrows: UB
 ```
+
 **项目默认使用 Tree Borrows 模型**。
 
 ## 如何使用 {#如何使用}
@@ -177,6 +182,7 @@ scripts\run-miri.bat         # Windows
 # 或手动运行 {#或手动运行}
 cargo miri test --workspace -- miri_tests
 ```
+
 ### 运行特定 crate 的测试 {#运行特定-crate-的测试}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -184,6 +190,7 @@ cargo miri test --workspace -- miri_tests
 ```bash
 cargo miri test -p c01_ownership_borrow_scope -- miri_tests
 ```
+
 ### 使用特定 Miri 选项 {#使用特定-miri-选项}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -191,6 +198,7 @@ cargo miri test -p c01_ownership_borrow_scope -- miri_tests
 ```bash
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ```
+
 ## 测试结构 {#测试结构}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
