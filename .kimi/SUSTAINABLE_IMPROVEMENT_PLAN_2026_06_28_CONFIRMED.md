@@ -2,7 +2,7 @@
 
 > **用户确认日期**: 2026-06-28
 > **来源**: `.kimi/SUSTAINABLE_IMPROVEMENT_PLAN_2026_06_28.md`
-> **审计报告**: `reports/COMPREHENSIVE_CONSISTENCY_AUDIT_2026_06_28.md`
+> **审计报告**: `archive/reports/2026_07/COMPREHENSIVE_CONSISTENCY_AUDIT_2026_06_28.md`
 
 ---
 
