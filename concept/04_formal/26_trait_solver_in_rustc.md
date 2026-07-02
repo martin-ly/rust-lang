@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Rustc Dev Guide — Trait Solving](https://rustc-dev-guide.rust-lang.org/traits/resolution.html) · · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Hindley — The Principal Type-Scheme of an Object in Combinatory Logic](https://doi.org/10.2307/2270762) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: [Rustc Dev Guide — Trait Solving](https://rustc-dev-guide.rust-lang.org/traits/resolution.html) · · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Hindley — The Principal Type-Scheme of an Object in Combinatory Logic](https://doi.org/10.2307/2270762) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Rustc Dev Guide — Next-gen trait solving](https://rustc-dev-guide.rust-lang.org/solve/the-solver.html) ·
 > [Rustc Dev Guide — Trait Specialization](https://rustc-dev-guide.rust-lang.org/traits/specialization.html) ·
 > [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)

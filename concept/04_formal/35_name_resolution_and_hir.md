@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Rustc Dev Guide — Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html) · · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: [Rustc Dev Guide — Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html) · · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Rustc Dev Guide — The HIR](https://rustc-dev-guide.rust-lang.org/hir.html) ·
 > [Rustc Dev Guide — Lowering AST to HIR](https://rustc-dev-guide.rust-lang.org/hir/lowering.html) ·
 > [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html)
