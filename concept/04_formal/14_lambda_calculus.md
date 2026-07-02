@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [专家级]
+> **内容分级**: [专家级]
 
 # Lambda 演算与 Rust 计算模型
 >
@@ -101,6 +99,7 @@ Lambda 演算语法:
   λx.λy.x     → |x| move |y| x
   (λx.x) y    → (|x| x)(y)
 ```
+
 > **认知功能**: **Lambda 演算是所有函数式编程的数学基础**——Rust 的闭包就是 Lambda 抽象的实现。
 > [来源: [Wikipedia — Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus)]
 
@@ -139,6 +138,7 @@ Lambda 演算语法:
   │ 副作用          │ 无              │ 有（IO、可变状态）│
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **类型洞察**: **Rust 的类型系统（Type System）扩展了简单类型 Lambda 演算**——增加了泛型（Generics）、生命周期（Lifetimes）和效果系统。
 > [来源: [Types and Programming Languages (Pierce)](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 
@@ -178,6 +178,7 @@ Rust 闭包:
   λx.e  →  |x| e           (Fn)
   λx.e  →  move |x| e      (FnOnce，若捕获值）
 ```
+
 > **闭包洞察**: **Rust 闭包通过捕获语义区分三种调用方式**——这是 Lambda 演算在系统编程中的安全扩展。
 > [来源: [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
@@ -214,6 +215,7 @@ Church 编码:
   ├── 数据即函数
   └── 函数式编程的理论基础
 ```
+
 > **Church 洞察**: **Church 编码展示了函数的强大表达能力**——所有数据类型都可以用函数表示。
 > [来源: [Wikipedia — Church Encoding](https://en.wikipedia.org/wiki/Church_encoding)]
 
@@ -254,6 +256,7 @@ Y 组合子:
   ├── 需要递归类型或 trait object
   └── 实践中不使用
 ```
+
 > **Y 洞察**: **Y 组合子是理论宝石，但在 Rust 中不实用**——类型系统阻止无类型自引用（Reference）。
 > [来源: [Wikipedia — Fixed-Point Combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator)]
 
@@ -276,6 +279,7 @@ graph TD
     style LAMBDA fill:#c8e6c9
     style EXTENDED fill:#fff3e0
 ```
+
 > **认知功能**: **纯计算可用 Lambda 描述，但系统编程需要更丰富的模型**——所有权（Ownership）、并发等超出 Lambda 范畴。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
@@ -310,6 +314,7 @@ graph TD
 ├── Rust 类型推导复杂
 └── 需要 HM + 扩展
 ```
+
 > **边界要点**: Lambda 演算与 Rust 的边界与**副作用**、**递归类型**、**内存管理**、**性能**和**类型推导**相关。
 > [来源: [TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 
@@ -364,6 +369,7 @@ graph TD
   ✅ 使用函数或 Y 组合子变体
      fn factorial(n: u64) -> u64 { ... }
 ```
+
 > **陷阱总结**: Lambda 演算在 Rust 中的陷阱主要与**闭包类型**、**生命周期（Lifetimes）**、**FnOnce**、**柯里化**和**递归**相关。
 > [来源: [Rust Reference — Closures](https://doc.rust-lang.org/reference/types/closure.html)]
 
@@ -390,6 +396,7 @@ fn main() {
     println!("{}", apply(double, 5)); // 10
 }
 ```
+
 ### 编译验证示例
 >
 
@@ -402,6 +409,7 @@ fn main() {
     assert_eq!(add(2, 3), 5);
 }
 ```
+
 ```rust
 fn main() {
     let mut counter = 0;
@@ -410,6 +418,7 @@ fn main() {
     assert_eq!(inc(), 2);
 }
 ```
+
 ```rust
 fn apply<F>(f: F, x: i32) -> i32
 where
@@ -423,6 +432,7 @@ fn main() {
     assert_eq!(result, 10);
 }
 ```
+
 ## 相关概念文件
 
 - [Type Theory](02_type_theory.md) — 类型论
@@ -480,6 +490,7 @@ fn factorial(n: u64) -> u64 {
     if n == 0 { 1 } else { n * factorial(n - 1) }
 }
 ```
+
 > **修正**: 无类型 lambda 演算通过 **Y 组合子** 实现递归，但 Y 组合子需要自应用（`x x`），在简单类型 lambda 演算中不可类型化。Rust 的类型系统拒绝无限递归类型（`T = T → T`），因此无法直接表达 Y 组合子。Rust 通过显式函数递归（`fn` 定义）替代，编译器检查终止性（不保证，但优化尾递归）。这与 Haskell 的惰性求值和递归类型（`newtype Fix f = Fix (f (Fix f))`）不同——Rust 的严格求值和有限类型使 Y 组合子不实用。[来源: [Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus)]
 
 ### 10.2 边界测试：高阶函数的类型推断（编译错误）
@@ -510,6 +521,7 @@ fn fixed() {
     println!("{}", h(5)); // (5 * 2) + 1 = 11
 }
 ```
+
 > **修正**: 高阶函数（HOF）在 lambda 演算中是核心构造。Rust 的闭包类型推断对高阶函数支持有限——多参数闭包的类型推断需要显式标注或使用泛型（Generics）函数。`impl Fn(A) -> C` 返回类型（RPIT）在 Rust 1.75+ 中支持，但闭包本身的类型是匿名的，不能显式写出。这与 Haskell 的自动类型推断（Hindley-Milner）形成对比——Rust 的推断更保守，要求关键位置显式标注，以换取更清晰的错误信息。来源: [The Rust Programming Language]
 
 ### 10.3 边界测试：Y 组合子在 Rust 中的实现（编译错误）
@@ -525,6 +537,7 @@ where
     f(y_combinator(f))
 }
 ```
+
 > **修正**: Y 组合子是 λ 演算中的不动点组合子，允许递归函数的定义而不显式自引用（Reference）。Y 组合子需要**无限类型**（`T = T -> T`），Rust 的类型系统拒绝无限大小类型。间接实现：1) 使用 `Box` 打破循环（`Fn(Box<dyn Fn()>) -> Box<dyn Fn()>`）；2) 使用 trait object 延迟类型解析；3) 使用 `std::recursion`（不存在，需手动实现）。Rust 不支持 general recursion 的显式组合子，因为递归通过函数名直接自引用实现——这是设计的简化，而非限制。这与 Haskell 的 `fix`（`Data.Function.fix`，利用惰性求值实现 Y 组合子）或 Scheme 的 `letrec`（显式递归绑定）不同——Rust 的递归是直接的，无组合子抽象，但编译器可优化尾递归（虽不保证）。来源: [Fixed-Point Combinator] · 来源: [The Rust Programming Language]
 
 ### 10.4 边界测试：λ 演算中的变量捕获与闭包（编译错误）
@@ -541,6 +554,7 @@ fn main() {
     println!("{}", add5(10)); // 15
 }
 ```
+
 > **修正**: Rust 的闭包实现**词法作用域**（lexical scoping）：捕获定义时环境中的变量，而非调用时的环境。这与 λ 演算的词法绑定一致（`λx.λy.x+y` 中 `x` 绑定到外层参数），与动态作用域（Lisp 早期版本、Bash 变量）不同。`move` 关键字改变捕获方式（按值而非按引用），但不改变作用域规则——仍绑定到定义时的值。Rust 的闭包类型（`Fn`、`FnMut`、`FnOnce`）根据捕获方式自动推断，是 λ 演算在系统编程语言中的实现。与 C++ 的 lambda（同样词法作用域，捕获列表 `[=]`/`[&]` 显式控制）或 JavaScript 的闭包（词法作用域，但 `this` 动态绑定）类似——Rust 的闭包设计兼顾了函数式编程的表达力和系统编程的性能。[来源: [Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
 ### 10.3 边界测试：Y 组合子在 Rust 中的不可表达性（编译错误）
@@ -560,6 +574,7 @@ where
 
 fn main() {}
 ```
+
 > **修正**: Y 组合子（Y Combinator）是**无类型 λ 演算**中实现递归的固定点组合子：`Y f = f (Y f)`。它在有类型系统中**不可直接表达**，因为自应用 `x x` 要求 `x` 同时是函数和其参数的类型，导致类型 `X = X -> X`，这在简单类型系统中无解（不是 well-founded 类型）。Rust 中实现递归：1) `fn` 的显式递归（`fn factorial(n: u64) -> u64`）；2) `fix` 组合子使用 trait object（`Box<dyn Fn(Box<dyn Any>) -> Box<dyn Any>>`）；3) 高阶 trait（HRTB + 关联类型）。这与 Haskell 的 `fix`（`fix f = let x = f x in x`，惰性求值允许无限展开）或 Scheme 的 `letrec`（语言原生支持递归绑定）不同——Rust 的严格求值和类型系统排除了无类型的 Y 组合子，但显式递归更安全和高效。[来源: [Y Combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator)] · [来源: [Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus)]
 
 ## 嵌入式测验（Embedded Quiz）
@@ -601,6 +616,7 @@ let x = 5;
 let f = |y| x + y;  // 闭包 A
 let g = move |y| x + y;  // 闭包 B
 ```
+
 - A. A-值捕获（by value），B-引用捕获（by reference）
 - B. A-引用捕获（借用（Borrowing）环境），B-值捕获（移动环境）
 - C. 两者都是值捕获
@@ -679,6 +695,7 @@ fn factorial(n: u64) -> u64 {
     if n == 0 { 1 } else { n * factorial(n - 1) }
 }
 ```
+
 这是语言层面的 fixpoint，无需 Y 组合子。
 </details>
 

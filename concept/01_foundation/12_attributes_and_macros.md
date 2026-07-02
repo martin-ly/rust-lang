@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **本节关键术语**: 属性 (Attribute) · 宏 (Macro) · 声明宏 (Declarative Macro) · 过程宏 (Procedural Macro) · derive — [完整对照表](../00_meta/terminology_glossary.md)
@@ -108,6 +106,7 @@ Rust 属性分类:
   ├── 元组: #[derive(Debug, Clone)]
   └── 嵌套: #[cfg(all(target_os = "linux", target_arch = "x86_64"))]
 ```
+
 > **认知功能**: Rust 的**属性系统是编译器的通用扩展点**——它允许在不修改语法的情况下影响编译行为。
 > [来源: [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html)]
 
@@ -158,6 +157,7 @@ let v = vec_custom![1, 2, 3,];
 // ├── 语法树操作: 操作 token，非文本替换
 // └── 卫生性: 避免变量名冲突
 ```
+
 > **宏洞察**: `macro_rules!` 是 Rust **声明式元编程**的基础工具——它比 C 预处理器**更安全**（语法树级操作）且**更强大**（模式匹配）。
 > [来源: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)]
 
@@ -208,6 +208,7 @@ macro_rules! swap {
 // ├── 外部变量不会被宏意外捕获
 // └── 每个宏调用有独立的变量命名空间
 ```
+
 > **卫生性洞察**: **卫生宏**是 Rust 宏相比 C 预处理器的**核心安全特性**——它消除了宏展开中的命名冲突类错误。
 > [来源: [Wikipedia — Hygienic Macro](https://en.wikipedia.org/wiki/Hygienic_macro)]
 
@@ -282,6 +283,7 @@ macro_rules! sum {
 let s = sum!(1, 2, 3, 4);  // 10
 let empty = sum!();         // 0
 ```
+
 > **模式洞察**: Rust 宏的**片段类型**（`expr`, `ty`, `pat` 等）使宏操作在**语法树层面**而非文本层面，这是安全性的关键。
 > [来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)]
 
@@ -330,6 +332,7 @@ macro_rules! build_vec {
     };
 }
 ```
+
 > **递归洞察**: 宏递归是**编译期计算**的强大工具——它使 Rust 宏具备图灵完备性。
 > [来源: [TLBORM — Counting](https://veykril.github.io/tlborm/print.html#counting)]
 
@@ -375,6 +378,7 @@ macro_rules! build_vec {
   ├── #[non_exhaustive]: 外部 crate 不能穷举匹配
   └── #[track_caller]: panic 显示调用者位置
 ```
+
 > **属性洞察**: Rust 的**属性系统是零成本抽象（Zero-Cost Abstraction）的语法糖**——所有属性在编译期处理，无运行时（Runtime）开销。
 > [来源: [Rust Reference — Built-in Attributes](https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index)]
 
@@ -405,6 +409,7 @@ macro_rules! build_vec {
   → cfg 属性控制代码包含
   → 跨平台/特性条件代码
 ```
+
 > **模式矩阵**: 宏和属性是 Rust **"不重复自己"（DRY）**原则的核心工具——在编译期消除重复，无运行时（Runtime）成本。
 > [来源: [Rust Macros — Patterns](https://doc.rust-lang.org/reference/macros.html)]
 
@@ -428,6 +433,7 @@ graph TD
     style GENERIC fill:#fff3e0
     style MACRO2 fill:#c8e6c9
 ```
+
 > **认知功能**: **泛型（Generics）优先于宏**——当类型系统（Type System）可以表达时，优先使用泛型（更好的错误信息、IDE 支持）。宏用于类型系统无法表达的场景。
 > [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html)]
 
@@ -467,6 +473,7 @@ graph TD
 ├── 宏的 hygiene 可能意外限制使用
 └── 缓解: 使用 $crate 引用当前 crate
 ```
+
 > **边界要点**: 宏的边界主要与**调试**、**IDE 支持**、**编译时间**、**错误信息**和**可见性**相关。
 > [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 
@@ -523,6 +530,7 @@ graph TD
   ✅ 复杂场景使用过程宏（proc_macro）
      // 可以操作完整语法树
 ```
+
 > **陷阱总结**: 宏的陷阱主要与**表达式上下文**、**多次求值**、**优先级**、**卫生性**和**宏类型选择**相关。
 > [来源: [The Little Book of Rust Macros — Pitfalls](https://veykril.github.io/tlborm/)]
 
@@ -604,6 +612,7 @@ struct PointFixed {
     y: f64,
 }
 ```
+
 > **修正**: `#[derive(Eq)]` 要求所有字段实现 `Eq`（等价关系），`#[derive(Ord)]` 要求所有字段实现 `Ord`（全序关系）。`f32`/`f64` 因 IEEE 754 NaN 语义（NaN != NaN，且 NaN 不可比较）未实现 `Eq` 和 `Ord`，只实现 `PartialEq` 和 `PartialOrd`。包含浮点数的结构体（Struct）只能 derive 后者。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 12.2 边界测试：宏递归展开溢出（编译错误）
@@ -628,6 +637,7 @@ fn fixed() {
     println!("{}", n);
 }
 ```
+
 > **修正**: Rust 宏（Macro）（`macro_rules!`）通过递归展开实现循环/迭代逻辑。编译器设置递归深度上限（默认 128），超过则报错。宏设计必须确保递归有终止分支（base case）。这与函数递归类似，但宏在编译期展开，其递归深度受编译器限制而非运行时（Runtime）栈限制。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：过程宏的 hygiene 与标识符捕获（编译错误）
@@ -650,6 +660,7 @@ fn fixed() {
 // // 但调用者重定义了 `std` 模块
 // mod std { /* ... */ }
 ```
+
 > **修正**: Rust 的宏 hygiene 保证宏生成的标识符不会与调用者的标识符意外冲突。`Span::mixed_site()` 和 `Span::call_site()` 控制 hygiene 级别：`mixed_site` 宏生成的标识符在宏定义处解析（防止调用者覆盖），`call_site` 在调用处解析（允许调用者覆盖）。`derive` 宏通常使用绝对路径（`::std::fmt::Debug`），因为标准库路径是稳定的。但边缘情况：`no_std` 环境中 `std` 不可用，应使用 `::core::fmt::Debug`。`proc-macro2` 和 `quote` crate 提供 `$crate` 等价的 `::my_crate` 路径处理。这与 C 的宏（无 hygiene，纯文本替换，极易冲突）或 Scheme 的 hygienic macro（类似 Rust，但基于语法对象）不同——Rust 的 hygiene 是编译期强制的，覆盖了标识符、生命周期（Lifetimes）、操作符重载。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
 
 ### 10.4 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）
@@ -668,6 +679,7 @@ fn main() {
     platform_specific();
 }
 ```
+
 > **修正**: `cfg` 条件编译根据编译目标选择代码。若所有 `cfg` 条件都不满足，函数不存在，调用点编译错误。安全模式：添加无条件的默认实现或 `_` 通配：`#[cfg(not(any(target_os = "linux", target_os = "windows")))] fn platform_specific() { panic!("unsupported") }`。`cfg` 的求值在编译期：条件为假时，代码完全被剔除（不解析、不类型检查）。这与 C 的 `#ifdef`（预处理器，条件为假时仍需语法正确）或 Java 的无条件编译（运行时（Runtime） `if` 检查）不同——Rust 的 `cfg` 允许平台特定的代码使用该平台独有的 API（如 Linux 的 `epoll`、Windows 的 `IOCP`），无需在所有平台上可编译。但这也意味着跨平台代码需仔细设计 `cfg` 覆盖，防止遗漏平台。[来源: [The Rust Programming Language](https://doc.rust-lang.org/cargo/reference/config.html)] · [来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)]
 
 ### 10.3 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）
@@ -687,6 +699,7 @@ fn main() {
     // 但若三个 cfg 全部不成立（不可能但逻辑上），编译错误: unresolved function
 }
 ```
+
 > **修正**: `#[cfg]` 是**条件编译**：根据编译目标（OS、架构、特性）选择性地包含代码。上述代码在 Linux、Windows 和其他平台各有一个实现，编译时**恰好一个**生效。风险：1) 所有 `cfg` 条件互斥但不穷尽 → 某些平台无实现；2) `cfg` 与 `cfg_attr` 混用导致属性不一致；3) `cfg` 测试用 `cfg!(...)` 宏（Macro）（编译期布尔值）与 `#[cfg(...)]` 属性（条件编译）混淆。这与 C 的 `#ifdef`（预处理器文本替换）不同——Rust 的 `cfg` 是编译器的语义分析阶段，能进行更精确的条件检查。[来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)]
 
 ### 10.7 边界测试：match 分支返回类型不一致
@@ -702,6 +715,7 @@ fn main() {
     println!("{}", v);
 }
 ```
+
 > **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。
 
 ## 实践
@@ -789,6 +803,7 @@ fn main() {
     print_x!();
 }
 ```
+
 - A. 能编译，输出 "outer"
 - B. 编译错误：宏不能访问外部变量
 - C. 能编译，但输出空字符串
@@ -826,6 +841,7 @@ my_macro!(1, 2, 3);     // ②
 my_macro!(1, 2, 3,);    // ③
 my_macro!();            // ④
 ```
+
 - A. ①、②、③
 - B. ②、③、④
 - C. ①、②、③、④
@@ -864,6 +880,7 @@ struct Point {
     y: f64,
 }
 ```
+
 - A. `f64` 未实现 `Clone`，需要手动实现
 - B. `f64` 未实现 `Eq` 和 `Ord`，因为 NaN 不满足全序关系
 - C. `derive` 不能用于包含浮点数的结构体（Struct）
@@ -887,6 +904,7 @@ struct Point {
     y: f64,
 }
 ```
+
 **深层原因**: `PartialEq` 允许不可比较的值（如 NaN），`Eq` 要求所有值都可比较且满足等价关系。浮点数在数学上不满足这一要求。
 </details>
 

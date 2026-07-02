@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 >
 > **本节关键术语**: Cargo CVE · 第三方 Registry · URL 规范化 · Tarball Symlink · Source Replacement · `cargo audit` — [完整对照表](../00_meta/terminology_glossary.md)
 >

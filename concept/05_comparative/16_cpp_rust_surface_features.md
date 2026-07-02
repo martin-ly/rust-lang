@@ -1,3 +1,5 @@
+> **内容分级**: [研究级]
+>
 # C++ vs Rust：构造、运算符、RTTI、友元
 >
 > **EN**: C++ vs Rust: Construction, Operators, RTTI, and Friends

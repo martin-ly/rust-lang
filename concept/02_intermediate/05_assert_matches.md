@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: assert_matches! · 模式匹配（Pattern Matching）断言 (Pattern Match Assertion) · debug_assert_matches! · 测试断言 (Test Assertion) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # `assert_matches!`：模式匹配断言的形式化语义
@@ -89,6 +87,7 @@ let is_some_forty_two = match x {
 let is_some_forty_two = matches!(x, Some(42));
 assert!(is_some_forty_two);
 ```
+
 > **形式化语义**: `matches!(e, p)` ≡ `match e { p => true, _ => false }`
 >
 > 即 `matches!` 是模式匹配的**布尔投影**（boolean projection），将 `match` 的代数结果 `{true, false}` 显式提取为 `bool` 类型。
@@ -101,6 +100,7 @@ let x = Some(42);
 assert!(matches!(x, Some(n) if n > 10)); // ✅ 通过
 assert!(matches!(x, Some(n) if n > 100)); // ❌ 失败
 ```
+
 > **关键洞察**: `matches!` 不改变模式匹配的语义，仅改变**返回类型**——从 `()`（控制流）到 `bool`（表达式值）。这是 Rust 宏（Macro）系统的典型应用：语法糖不改变语义，仅改变语法形式。
 > [来源: 💡 原创分析]
 
@@ -124,6 +124,7 @@ assert_matches!(result, Ok(n) if n == 42);
 let nested: Result<Option<i32>, &str> = Ok(Some(42));
 assert_matches!(nested, Ok(Some(n)) if n > 0);
 ```
+
 > **语义核心**: `assert_matches!(e, p)` 执行以下操作：
 >
 > 1. 计算表达式 `e`
@@ -150,6 +151,7 @@ assert!(matches!(result, Ok(n) if n > 10));
 assert_matches!(result, Ok(n) if n > 10);
 // 失败时信息: 显示实际值和期望模式，更易于调试
 ```
+
 > **关键差异**: `assert_matches!` 在匹配成功时**保留绑定**，允许在断言通过后继续使用模式绑定的变量。这是 `assert!(matches!(...))` 无法实现的——后者在 `matches!` 返回后绑定已丢失。
 
 ---
@@ -166,6 +168,7 @@ use std::assert_matches::debug_assert_matches;
 let config = Some(true);
 debug_assert_matches!(config, Some(true));
 ```
+
 > ⚠️ **重要**: `assert_matches!` 和 `debug_assert_matches!`**未加入标准 prelude**。这是因为它们与流行的第三方 crate（如 `assert_matches` crate）存在命名冲突。使用时需显式导入：
 >
 > ```rust
@@ -205,6 +208,7 @@ graph LR
         J["assert_matches!(e, p)"] -->|e ~ p| K[panic if no match<br/>+ bind variables]
     end
 ```
+
 > **认知功能**: 此图展示 Rust 断言宏（Macro）的**家族关系**和**语义演进**。`assert_matches!` 填补了"模式匹配断言"的空白，使断言系统从"值相等"扩展到"结构匹配"。
 > [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
 > **使用建议**: 在测试枚举（Enum）类型时，优先选择 `assert_matches!` 而非 `assert_eq!`——前者验证结构形状，后者仅验证相等性。
@@ -245,6 +249,7 @@ if let Message::Coord { x, y } = msg {
     assert!((y - 2.5).abs() < f64::EPSILON);
 }
 ```
+
 > **形式化规则**: `assert_matches!(e, p)` 进行模式匹配断言，绑定不可导出宏外部。
 >
 > - 设 `p` 中的绑定变量集合为 `Vars(p)`
@@ -277,6 +282,7 @@ fn parse_config() {
     }
 }
 ```
+
 > **最佳实践**: 在测试中，使用 `assert_matches!` 验证**结构形状**（是否为 `Ok`），然后使用 `assert_eq!` 验证**具体值**。分层断言使测试失败信息更精确。
 
 ---
@@ -302,6 +308,7 @@ fn state_machine_transition() {
     assert_matches!(state, State::Processing { id, progress } if *id > 0 && *progress <= 1.0);
 }
 ```
+
 ---
 
 ### 3.3 与 `if let` 的互补关系
@@ -320,6 +327,7 @@ flowchart TD
     style AssertMatches fill:#c8e6c9
     style AssertMatches2 fill:#c8e6c9
 ```
+
 > **认知功能**: 此决策树帮助开发者在 `if let` 和 `assert_matches!` 之间选择。核心判断标准是"失败是否应导致 panic"。
 > **使用建议**: 生产代码中的可选处理用 `if let`；测试和不变量检查用 `assert_matches!`。
 > **关键洞察**: `assert_matches!` 本质上是 **"panic-if-no-match + if-let"** 的语法糖，将两个操作压缩为单一表达式。
@@ -350,6 +358,7 @@ graph TD
     style FALSE1 fill:#ffebee
     style ALT fill:#fff3e0
 ```
+
 > **认知功能**: 此决策树帮助测试编写者在 `assert_matches!`、`assert_eq!` 和 `if let` 之间选择最合适的工具。
 > **使用建议**: 对简单标量相等检查，使用 `assert_eq!` 更简洁；对结构匹配和绑定提取，使用 `assert_matches!`。
 > **关键洞察**: 工具选择的本质是**信息粒度**的权衡——`assert_eq!` 验证值，`assert_matches!` 验证形状 + 提取成分。
@@ -379,6 +388,7 @@ assert_matches!(x, Point { x: 1, .. }); // ✅ .. 正常工作
 let x = 42;
 // assert_matches!(x, n); // ⚠️ 不可反驳模式，编译器可能警告
 ```
+
 > **边界要点**: `assert_matches!` 支持所有标准模式语法（嵌套、或模式、`..`、守卫条件），但**不可反驳模式**（irrefutable patterns）会触发编译器警告——因为断言在此情况下永不为假。
 
 ---
@@ -404,6 +414,7 @@ fn main() {
     }
 }
 ```
+
 ### 编译验证示例
 
 ```rust
@@ -416,6 +427,7 @@ fn main() {
     assert!(matches!(y, Ok(_)));
 }
 ```
+
 ```rust
 fn main() {
     let msg = "hello";
@@ -423,6 +435,7 @@ fn main() {
     assert!(matches!(msg, "world" | "hello"));
 }
 ```
+
 ## 相关概念文件
 
 - [Type System](../01_foundation/04_type_system.md) — 模式匹配的形式化根基
@@ -475,6 +488,7 @@ fn main() {
     assert_matches!(result, Ok(_)); // 错误: 找不到宏 assert_matches!
 }
 ```
+
 ```rust
 // ✅ 正确: 导入后使用
 use std::assert_matches;
@@ -484,6 +498,7 @@ fn main() {
     assert_matches!(result, Ok(_)); // ✅ 匹配 Ok 变体
 }
 ```
+
 > **修正**: `assert_matches!`（Rust 长期 unstable，于 1.96.0 stable）专门用于测试枚举变体匹配。
 > 它不同于 `assert_eq!`——后者要求值实现 `PartialEq`，而 `assert_matches!` 使用模式匹配，不要求 `PartialEq`。
 > 在 `assert_matches!` 稳定前，使用 `matches!` 宏或 `if let` 进行测试断言。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
@@ -510,6 +525,7 @@ fn fixed() {
     }
 }
 ```
+
 > **修正**: 在 Rust 模式匹配的 `|`（或模式）中，所有分支必须绑定**相同的变量名和类型**。若一个分支绑定 `x: i32`，另一个分支绑定 `x: Option<i32>`，编译器报错。这是 Rust 模式匹配（Pattern Matching）"穷尽性检查"的一部分——确保每个绑定在所有分支中具有一致性（Coherence）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）
@@ -523,6 +539,7 @@ fn test_nested_match() {
     // 如需在断言后使用 x，应改用 if let
 }
 ```
+
 > **修正**: `assert_matches!`（Rust 1.96.0 stable）检查值是否匹配给定模式，但**模式中的绑定**（`x`）在宏外部不可见。
 > `assert_matches!(result, Ok(Some(x)))` 中 `x` 只在宏内部有效，测试代码不能后续使用 `x`。
 > 若需提取绑定值，使用 `if let`：`if let Ok(Some(x)) = result { assert!(x > 0); } else { panic!("match failed"); }`。
@@ -542,6 +559,7 @@ fn main() {
     // Vec<&str> 未实现 Display
 }
 ```
+
 > **修正**:
 > `assert!`、`assert_eq!`、`assert_ne!` 的自定义消息参数必须实现 `std::fmt::Display` trait。
 > `Vec<&str>` 未实现 `Display`，因此不能直接作为消息。
@@ -567,6 +585,7 @@ fn main() {
     println!("{}", s);
 }
 ```
+
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用（Reference） `&s`。
 
 ## 嵌入式测验（Embedded Quiz）

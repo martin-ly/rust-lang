@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Name Resolution · AST · HIR · THIR · Namespace · Rib · `DefId` · `HirId` · `rustc_resolve` — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Rustc 名称解析与 HIR

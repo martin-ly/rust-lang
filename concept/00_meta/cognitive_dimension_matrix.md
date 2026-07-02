@@ -7,6 +7,7 @@
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **关联文件**: [学习指南 `learning_guide.md`](learning_guide.md) · [能力图谱 `competency_graph.md`](competency_graph.md)
 ---
 
 # Rust 知识体系双维认知矩阵（Krathwohl × Bloom）

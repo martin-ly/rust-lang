@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 >
 > **本节关键术语**: 新类型模式 (Newtype Pattern) · 包装类型 (Wrapper Type) · 类型安全 (Type Safety) · 零成本抽象（Zero-Cost Abstraction） · Deref — [完整对照表](../00_meta/terminology_glossary.md)
 >
@@ -108,6 +106,7 @@ impl std::ops::Add for Meters {
     }
 }
 ```
+
 > **认知功能**: Newtype 是 Rust **类型系统（Type System）的轻量级扩展**——它不增加运行时（Runtime）开销（单字段结构体（Struct）与内部类型完全相同的大小），但提供了编译期的语义区分。
 > [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 > **关键洞察**: Newtype 是**零成本抽象（Zero-Cost Abstraction）**的典范——编译后 `Meters(f64)` 与 `f64` 的机器表示完全相同。
@@ -145,6 +144,7 @@ impl std::ops::Add for Meters {
   ├── 编译期单位检查
   └── 运行时零开销
 ```
+
 > **单位洞察**: Newtype 将**维度分析**从物理学的纸笔计算提升为**编译期类型检查**——单位错误在编译期被发现。
 > [来源: [uom crate](https://docs.rs/uom/latest/uom/)]
 
@@ -181,6 +181,7 @@ let b = SecondsNewtype(10.0);
 │ 使用场景        │ 简化复杂类型    │ 语义区分        │
 └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **区别洞察**: 类型别名是**语法简化**（如 `type Result<T> = std::result::Result<T, MyError>`），Newtype 是**语义强化**（如 `struct UserId(u64)`）。
 > [来源: [Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html)]
 
@@ -223,6 +224,7 @@ impl Users {
     // 不暴露 push/remove 等可能破坏不变性的方法
 }
 ```
+
 > **Deref 洞察**: `Deref` 是**双刃剑**——它简化了 Newtype 的使用，但过度使用会削弱 Newtype 的语义保护。
 > [来源: [std::ops::Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html)]
 
@@ -252,6 +254,7 @@ impl SerializableError {
 // - 为不能修改的第三方 Trait 添加类型支持
 // - 这是 "Newtype 模式" 在 TRPL 中的主要介绍场景
 ```
+
 > **孤儿规则洞察**: Newtype 是 Rust **孤儿规则（Orphan Rule）**的**标准解法**——当需要为外部类型实现外部 Trait 时，创建一个包装器类型。
 > [来源: [TRPL — Newtype Pattern](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types)]
 
@@ -287,6 +290,7 @@ Rust 中的包装器类型:
   ├── PhantomData [来源: [std::marker::PhantomData](https://doc.rust-lang.org/std/marker/struct.PhantomData.html)]<T> // 标记类型关系
   └── UnsafeCell<T>  // 内部可变性的核心
 ```
+
 > **谱系洞察**: Rust 的**整个类型系统（Type System）**建立在**组合包装器**的基础上——每个包装器添加一种"能力"或"约束"，通过类型组合表达复杂语义。
 > [来源: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html)]
 
@@ -327,6 +331,7 @@ Rust 中的包装器类型:
   → 无运行时开销
   → 完全优化掉
 ```
+
 > **模式矩阵**: Newtype 是 Rust **类型驱动设计**的基础工具——它使"让非法状态不可表示"的设计哲学在编译期得以实现。
 > [source: [Parse Don't Validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)]
 
@@ -350,6 +355,7 @@ graph TD
     style BALANCE fill:#fff3e0
     style NEWTYPE fill:#c8e6c9
 ```
+
 > **认知功能**: Newtype 的**核心判断**是"是否需要语义区分"。频繁计算的数值类型（如循环计数器）通常不需要 Newtype。
 > [source: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//type-safety.html#c-newtype)]
 
@@ -389,6 +395,7 @@ graph TD
 ├── 需要实现 Display 改善输出
 └── 缓解: #[derive(Display)] 或手动实现
 ```
+
 > **边界要点**: Newtype 的边界主要与**运算符重载样板**、**泛型（Generics）互操作**、**FFI**、**序列化**和**调试体验**相关。
 > [source: [Rust API Guidelines — Transparency](https://rust-lang.github.io/api-guidelines//type-safety.html#c-transparent)]
 
@@ -436,6 +443,7 @@ graph TD
   ✅ 根据语义选择 Clone/Copy
      // 唯一标识符通常只 Clone，不 Copy
 ```
+
 > **陷阱总结**: Newtype 的陷阱主要与**Deref 滥用**、**FFI ABI**、**验证缺失**和**Clone/Copy 语义**相关。
 > [source: [Rust Reference — repr(transparent)](https://doc.rust-lang.org/reference/type-layout.html#the-transparent-representation)]
 
@@ -453,6 +461,7 @@ graph TD
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines//type-safety.html#c-newtype) | ✅ 一级 | 官方指南 |
@@ -531,6 +540,7 @@ impl Add for Meters {
     }
 }
 ```
+
 > **修正**: Newtype 模式（`struct Wrapper(T)`）创建全新的类型，**不继承**原类型的任何 trait 实现。这是 Newtype 的核心特征——类型隔离。如需使用原类型的操作，必须手动实现（或使用 `derive_more` crate 委托）。这与 C++ 的 `typedef` 或 `using`（类型别名）完全不同——Rust 的 Newtype 是强类型抽象，编译器将 `Meters` 和 `u32` 视为完全不同的类型。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：PhantomData 的协变/逆变误用（编译错误 / 运行时 UB）
@@ -557,6 +567,7 @@ struct InvariantContainer<T> {
     _marker: PhantomData<*const T>, // ✅ *const T 使 T 不变（invariant）
 }
 ```
+
 > **修正**: `PhantomData<T>` 不仅标记类型参数的使用，还影响类型的**变异性**（variance）。`PhantomData<&'a T>` 使类型对 `'a` 协变，`PhantomData<&'a mut T>` 使类型对 `'a` 逆变，`PhantomData<*const T>` 使类型对 `T` 不变。错误选择变异性可能导致生命周期（Lifetimes）绕过——将短生命周期值通过类型转换赋给期望长生命周期的上下文，产生悬垂引用（Reference）。这是 Rust 高级类型系统（Type System）的微妙之处，也是 unsafe 代码审查的重点。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：newtype 的 derive 限制（编译错误）
@@ -573,6 +584,7 @@ fn main() {
     // 不能: m + s（即使 Meters 和 Seconds 都包装 u32）
 }
 ```
+
 > **修正**: newtype 模式（`struct Meters(u32)`）创建新类型，不自动继承底层类型的 trait 实现。需要手动实现 `Add`、`Display`、`From` 等 trait，或使用 `derive_more` crate 减少样板。这是 newtype 的代价：类型安全（防止 `Meters` + `Seconds` 的语义错误）需要显式实现操作。若需要完全继承底层类型的行为，使用类型别名（`type Meters = u32`）——但类型别名不创建新类型，无 newtype 的安全保护。Rust 的 orphan rule 也限制 newtype 的 trait 实现：不能为外部类型实现外部 trait（`impl Add for Meters` 中 `Meters` 是本地类型，合法；但 `impl Add for u32` 非法）。这与 Haskell 的 `newtype`（自动派生底层类型的 typeclass 实例，通过 `GeneralizedNewtypeDeriving`）或 Scala 的 value class（类似 newtype，有性能优化）不同——Rust 更保守，要求显式实现。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ### 10.4 边界测试：`Deref` 滥用导致的隐式转换陷阱（编译错误/逻辑错误）
@@ -600,6 +612,7 @@ fn main() {
     let s: String = w.clone(); // 克隆的是 String，不是 Wrapper
 }
 ```
+
 > **修正**: `Deref` 强制转换是 Rust 的"便捷特性"：`&Wrapper` 可自动转为 `&String`（若 `Wrapper: Deref<Target=String>`），再转为 `&str`（若 `String: Deref<Target=str>`）。但过度使用 `Deref` 创建"隐式接口"——`Wrapper` 似乎拥有 `String` 的所有方法，但实际上只转发引用（Reference）操作。修改操作（`push_str`、`clear`）需要 `DerefMut`，构造需要 `From`/`Into`。API 设计建议：只为智能指针（Smart Pointer）类型（`Box`、`Rc`、`Arc` 的自定义版本）实现 `Deref`，不为领域类型（`Meters`、`Username`）实现——领域类型应显式定义方法，避免隐式行为带来的困惑。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//predictability.html)]
 
 ### 10.5 边界测试：newtype 的 `Deref` 过度使用导致的方法名冲突（编译错误/逻辑错误）
@@ -623,6 +636,7 @@ fn main() {
     let _ = u.clone(); // 返回 String，不是 Username!
 }
 ```
+
 > **修正**: `Deref` 强制转换使 newtype 获得内部类型的所有方法，但**返回类型**仍是内部类型。`u.clone()` 返回 `String` 而非 `Username`，因为 `clone` 的签名在 `String` 中定义，返回 `Self`（`String`）。若需要 `Username::clone()` 返回 `Username`，必须手动 `impl Clone for Username`。这是 `Deref` 委托的局限：它转发方法调用，但不改变方法签名。这与 C# 的 `implicit operator`（类似转换，但同样不改变返回类型）或 Scala 的 `implicit class`（扩展方法，不继承方法）类似——newtype 模式要求显式实现所需 trait，不能仅依赖 `Deref`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//predictability.html)]
 
 ### 10.4 边界测试：newtype 与 `Deref` 的方法解析冲突（编译错误/设计反模式）
@@ -648,6 +662,7 @@ fn main() {
     println!("{}", m.saturating_add(50)); // u32 的方法，通过 Deref
 }
 ```
+
 > **修正**: newtype 模式（`struct Meters(u32)`）创建语义不同的类型，但 `Deref` 自动解引用（Reference）使 newtype 像底层类型一样行为。这导致**方法解析困惑**：`m.saturating_add(50)` 调用 `u32::saturating_add`，而非 `Meters` 的方法（若存在）。设计原则：newtype 用于**类型安全**（防止混淆 Meters 和 Seconds），但 `Deref` 削弱了这一优势。替代方案：1) 不显式实现 `Deref`，只提供必要方法；2) 使用 `From`/`Into` 显式转换；3) 使用 `as_ref()` / `into_inner()` 访问内部值。这与 Haskell 的 `newtype`（无运行时（Runtime）开销，无 Deref 等价物，需显式解包）或 Ada 的派生类型（类似 newtype，无隐式转换）相同——Rust 的 newtype 最纯粹的形式是不实现 `Deref`，完全通过显式 API 交互。[来源: [Newtype Pattern](https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ## 嵌入式测验（Embedded Quiz）

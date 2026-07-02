@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 >
 > **本节关键术语**:
 >
@@ -61,6 +59,7 @@ struct Point {
 // 抽象层级: 内存地址 + 偏移量
 // 无行为封装、无访问控制、无类型安全保证
 ```
+
 **特征**:
 
 - 抽象单位 = 内存布局
@@ -82,6 +81,7 @@ public:
 };
 // 抽象层级: 数据 + 行为 + 访问控制
 ```
+
 **特征**:
 
 - 抽象单位 = 类（数据 + 方法）
@@ -104,6 +104,7 @@ class Circle implements Drawable {
 }
 // 抽象层级: 接口定义契约，类实现契约
 ```
+
 **特征**:
 
 - 抽象单位 = 接口（纯行为契约）+ 类（实现）
@@ -133,6 +134,7 @@ area (Circle _ r) = pi * r * r
 area (Rectangle (Point x1 y1) (Point x2 y2)) = abs (x2 - x1) * abs (y2 - y1)
 area (Triangle a b c) = ...
 ```
+
 **特征**:
 
 - 抽象单位 = 代数数据类型（ADT）
@@ -177,6 +179,7 @@ impl Drawable for Shape {
     }
 }
 ```
+
 **Rust 的独特设计**:
 
 | 维度 | C++ class | Java interface+class | Haskell ADT | Rust enum+trait |
@@ -220,6 +223,7 @@ fn process_file(f: File) { /* ... */ } // f 获得所有权
 fn read_file(f: &File) -> Vec<u8> { /* ... */ }
 // read_file(&file); // ✅ file 仍可用
 ```
+
 **演进谱系图**:
 
 ```text
@@ -235,6 +239,7 @@ Rust enum+trait     → 代数类型 + 行为契约 + 外部实现
   ↓
 Rust + Ownership    → 代数类型 + 行为契约 + 资源安全保证
 ```
+
 ---
 
 ## 三、关键对比：C++ 继承 vs Rust trait
@@ -253,6 +258,7 @@ class ColoredPoint : public Point {
     Color color;
 };
 ```
+
 ```rust,ignore
 // Rust: 为已有 Point 添加新行为，无需修改 Point
 trait Colored {
@@ -263,6 +269,7 @@ impl Colored for Point {
     fn color(&self) -> Color { Color::Black }
 }
 ```
+
 ### 3.2 多继承与 Trait 组合
 
 C++ 的多继承：
@@ -275,6 +282,7 @@ class Circle : public Drawable, public Serializable {
     // 需要处理菱形继承、虚基类、多个 vptr
 };
 ```
+
 Rust 的 trait 组合：
 
 ```rust
@@ -293,6 +301,7 @@ fn process<T: Drawable + Serializable>(item: T) {
     item.serialize();
 }
 ```
+
 **对比**:
 
 | 维度 | C++ 多重继承 | Rust trait |
@@ -329,6 +338,7 @@ match user {
 // 便捷操作: unwrap 显式声明"此处不会为 None"
 let user = find_user(42).unwrap(); // panic if None — 调用者的显式选择
 ```
+
 ### 4.2 错误处理：Result<T, E> 替代异常
 
 ```rust,ignore
@@ -347,6 +357,7 @@ let content = match read_file("config.txt") {
     Err(e) => return Err(e.into()),
 };
 ```
+
 > **关键洞察**: `Option<T>` 和 `Result<T, E>` 是**和类型**的工程应用——它们将"可能存在"和"可能失败"的语义编码在类型中，编译器强制处理所有分支。这与 C++ `std::optional` / `std::expected` 的"可选使用"哲学不同——Rust 的设计是"强制显式"。[来源: 💡 原创分析]
 
 ---
@@ -370,6 +381,7 @@ std::visit([](auto&& arg) {
     // 如果遗漏某个类型的处理，编译器不报错！
 }, value);
 ```
+
 ```rust
 // Rust: enum 的 match 强制穷尽
 enum Value {
@@ -387,6 +399,7 @@ match value {
     // 若遗漏任何变体，编译错误！
 }
 ```
+
 ### 5.2 边界测试：为外部类型实现 trait（Orphan Rule）
 
 ```rust,compile_fail
@@ -409,6 +422,7 @@ impl std::fmt::Display for MyVec {
     }
 }
 ```
+
 > **边界洞察**: Orphan Rule 是 Rust 保证 trait 实现唯一性（coherence）的核心机制。它限制了"为外部类型实现外部 trait"，防止不同 crate 产生冲突实现。这与 C++ 的 ADL（Argument Dependent Lookup）和模板特化规则有本质不同。来源: [RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html) ✅
 
 ---
@@ -476,6 +490,7 @@ fn fixed() {
     // 不存储数据，只携带类型信息
 }
 ```
+
 > **修正**:
 > 零大小类型（ZST，如 `()`、`PhantomData<T>`、空结构体（Struct））不占用内存，其引用（Reference）可能指向同一虚拟地址。
 > 依赖 ZST 指针唯一性（如哈希表键）是未定义行为。ZST 的正确用途是类型级标记（phantom type）、编译期常量、状态机状态标签——利用类型系统（Type System）传递信息，无运行时（Runtime）开销。
@@ -506,6 +521,7 @@ fn fixed() {
     }
 }
 ```
+
 > **修正**:
 > 枚举（Enum）变体的字段默认不可变。即使枚举实例是 `mut`，通过模式匹配（Pattern Matching）获取的可变引用（Mutable Reference）仍需显式 `ref mut`。
 > 枚举（Enum）的内存布局由编译器优化（discriminant 可能内联、 niche optimization），应用代码不应假设枚举的具体内存表示（除非 `#[repr(C)]` 或 `#[repr(u8)]` 显式标记）。
@@ -524,6 +540,7 @@ fn main() {
     unsafe { Box::from_raw(ptr); }
 }
 ```
+
 > **修正**:
 > 零大小类型（ZST，如 `()`、`PhantomData<T>`、空 struct）的大小为 0，不占用内存。
 > `Box<ZST>` 的 `into_raw` 返回的指针不指向有效堆内存——它是悬垂指针（dangling pointer），但对 ZST 解引用（Reference）是安全的（不读取任何字节）。
@@ -547,6 +564,7 @@ fn main() {
     // unsafe { ManuallyDrop::drop(&mut v); }
 }
 ```
+
 > **修正**:
 > `ManuallyDrop<T>` 包装类型，阻止编译器自动调用 `Drop::drop`。
 > 使用场景：
@@ -576,6 +594,7 @@ fn main() {
     println!("{}", v.capacity()); // 可能为 usize::MAX 或 0
 }
 ```
+
 > **修正**:
 > `()`（单元类型）是零大小类型（ZST），`size_of::<()>() == 0`。`Vec<()>` 的每个元素不占用字节，因此 `vec![(); N]` 不分配堆内存（或分配 0 字节），但 `len()` 报告 `N`。
 > 这是合法的 Rust，但可能导致意外：
@@ -602,6 +621,7 @@ fn main() {
     println!("{}", p.age);
 }
 ```
+
 > **修正**:
 >
 > Rust 的**部分移动**（partial move）允许从 struct 中移动单个字段，但移动后原变量**部分失效**。

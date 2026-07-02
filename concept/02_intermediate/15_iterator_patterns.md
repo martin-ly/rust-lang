@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: 迭代器模式 (Iterator Pattern) · 适配器 (Adapter) · 消费者 (Consumer) · 惰性求值 (Lazy Evaluation) · 自定义迭代器 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Rust 迭代器模式
@@ -110,6 +108,7 @@ Iterator Trait:
   ├── 组合优于继承
   └── 类型安全
 ```
+
 ```rust,ignore
 // Iterator trait 的核心定义
 
@@ -141,6 +140,7 @@ pub trait Iterator {
 // └── 默认方法基于 next 实现
 //     └── 只需实现 next 即可获得全部功能
 ```
+
 > **认知功能**: **Iterator trait 是 Rust 零成本抽象（Zero-Cost Abstraction）的核心体现**——丰富的适配器方法在编译期内联展开，不产生运行时（Runtime）开销。
 > [来源: [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)]
 
@@ -181,6 +181,7 @@ pub trait Iterator {
   └─────────────────┴─────────────────┴─────────────────┘
 > [来源: [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-00-functional-features.html)]
 ```
+
 > **认知功能**: **适配器链让数据转换声明式且可组合**——每个适配器只做一件事，组合起来完成复杂转换。
 > [来源: [Rust Iterator Cheat Sheet](https://doc.rust-lang.org/std/iter/index.html)]
 
@@ -216,6 +217,7 @@ pub trait Iterator {
   │ 中间 Vec        │ 多次分配        │ 较差            │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 ```rust
 // 迭代器的惰性计算
 
@@ -249,6 +251,7 @@ let result: Vec<i32> = vec![1, 2, 3, 4, 5]
 // ├── 流式处理
 // └── 适合大数据集
 ```
+
 > **认知功能**: **惰性求值让迭代器链既高效又可读**——没有中间分配，编译器优化为单一循环。
 > [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)] · [来源: [TRPL — Iterator Performance](https://doc.rust-lang.org/book/ch13-04-performance.html)]
 
@@ -288,6 +291,7 @@ let result: Vec<i32> = vec![1, 2, 3, 4, 5]
   ├── 多个适配器组合为单一计算链
   └── 消费者触发实际计算
 ```
+
 > **消费者洞察**: **适配器-消费者分离**是函数式编程的核心模式——Rust 通过类型系统（Type System）在编译期保证这种分离的正确性。
 > [来源: [std::iter — Adapters](https://doc.rust-lang.org/std/iter/index.html#adapters)]
 
@@ -317,6 +321,7 @@ map-filter-collect:
 
   // long_names: ["ALICE", "CHARLIE", "DAVE"]
 ```
+
 > **认知功能**: **map-filter-collect 是 Rust 迭代器的经典模式**——声明式数据处理。
 
 ---
@@ -347,6 +352,7 @@ fold 与归约:
   ├── reduce: 元素类型与结果类型相同
   └── sum/product: 数值专用快捷方式
 ```
+
 > **认知功能**: **fold 是迭代器的通用归约操作**——任何累积计算都可以用 fold 表达。
 > [来源: [std::iter::Iterator::fold](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.fold)]
 
@@ -376,6 +382,7 @@ zip: 并行迭代多个序列
   ├── zip_longest: 用 Option 填充
   └── enumerate: zip with 0..n
 ```
+
 > **认知功能**: **zip 让并行迭代多个序列变得简单**——无需手动管理索引。
 > [来源: [std::iter::Iterator::zip](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.zip)]
 
@@ -431,6 +438,7 @@ for x in &v { /* x 是 &i32 */ }
 for x in &mut v { /* x 是 &mut i32 */ }
 // v 仍可用，但被可变借用
 ```
+
 > **IntoIterator 洞察**: `for` 循环是**语法糖**，背后使用 `IntoIterator`——这统一了数组、向量、哈希表等所有集合的遍历方式。
 > [来源: [RFC 0235 — IntoIterator](https://rust-lang.github.io/rfcs//0235-collections-conventions.html)]
 
@@ -472,6 +480,7 @@ for x in &mut v { /* x 是 &mut i32 */ }
   → 处理嵌套结构
   → matrix.iter().flat_map(|row| row.iter()).sum()
 ```
+
 > **模式矩阵**: Rust 迭代器的**丰富方法集**覆盖了 90% 的数据处理需求——函数式风格的代码更简洁且通常更快。
 > [来源: [itertools crate](https://docs.rs/itertools/latest/itertools/)]
 
@@ -512,6 +521,7 @@ for x in &mut v { /* x 是 &mut i32 */ }
   ├── 类型安全
   └── 零成本抽象
 ```
+
 ```rust
 // 自定义迭代器: Fibonacci 序列
 
@@ -559,6 +569,7 @@ where I::Item: Clone
     }
 }
 ```
+
 > **认知功能**: **自定义迭代器让任何序列类型都能享受标准库适配器链**。
 > [来源: [TRPL — Implementing Iterator](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Rust By Example — Iterators](https://doc.rust-lang.org/rust-by-example/trait/iter.html)]
 
@@ -584,6 +595,7 @@ where I::Item: Clone
   ├── 用 iter_mut() 原地修改
   └── 避免 collect() 除非需要中间结果
 ```
+
 ```text
 编译器对迭代器的优化:
 
@@ -619,6 +631,7 @@ where I::Item: Clone
   ├── 需要手动 SIMD
   └── 某些边界情况下编译器不优化
 ```
+
 > **性能洞察**: **迭代器适配器链与手写循环性能相同**——编译器会内联整个链，实际机器码与手写 C 循环逐指令等价。
 > [来源: [Iterator Performance](https://doc.rust-lang.org/book/ch13-04-performance.html)]
 
@@ -639,6 +652,7 @@ where I::Item: Clone
 
   边界: 适配器链在简单数据转换时最优，复杂控制流用 for 循环
 ```
+
 ```mermaid
 graph TD
     ROOT["命题: 所有循环都应使用迭代器"]
@@ -652,6 +666,7 @@ graph TD
     style SAME fill:#c8e6c9
     style ITER fill:#c8e6c9
 ```
+
 ```text
 边界 1: 编译时间
 ├── 复杂迭代器链增加编译时间
@@ -683,6 +698,7 @@ graph TD
 ├── Stream 的 API 与 Iterator 类似但不同
 └── 缓解: futures::stream::Stream
 ```
+
 > **认知功能**: **适配器链和 for 循环各有适用场景**——简单转换用链，复杂控制用循环。迭代器的边界主要与编译时间、错误信息、递归限制、特殊算法和异步（Async）相关。
 > [来源: [Rust Style Guide](https://doc.rust-lang.org/nightly/style-guide/)] · [来源: [async-iter RFC](https://rust-lang.github.io/rfcs//2996-async-iterator.html)]
 
@@ -759,6 +775,7 @@ graph TD
   ✅ 对大数据使用 iter()（借用）
      // 或 Box/ Arc 避免复制
 ```
+
 > **陷阱总结**: 迭代器的陷阱主要与**多次消费**、**外部状态**、**不必要 collect**、**Option 处理**、**collect 遗忘**、**修改集合**、**所有权（Ownership）选择**、**链长度**和**内存优化**相关。
 > [来源: [Common Rust Iterator Mistakes](https://users.rust-lang.org/t/iterator-mistakes/)]
 
@@ -786,6 +803,7 @@ fn main() {
     println!("{}", sum); // 24
 }
 ```
+
 ```rust
 fn main() {
     let a = vec![1, 2, 3];
@@ -794,6 +812,7 @@ fn main() {
     println!("{}", sum); // 21
 }
 ```
+
 ## 相关概念文件
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
@@ -854,6 +873,7 @@ fn fixed() {
     let collected2 = vec![1, 2, 3].into_iter().collect::<Vec<i32>>();
 }
 ```
+
 > **修正**: `collect()` 是 Rust 中最常见的类型推断（Type Inference）失败点之一。它返回 `FromIterator` trait 的实现类型，编译器无法从空上下文推断具体集合类型。turbofish 语法 `::<Type>` 允许在方法链中指定类型参数，避免引入中间变量。这是 Rust 类型系统（Type System）的"显式优于隐式"原则在迭代器 API 中的体现。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.2 边界测试：迭代器适配器的惰性求值陷阱（逻辑错误）
@@ -880,6 +900,7 @@ fn fixed() {
     }); // ✅ 立即求值
 }
 ```
+
 > **修正**: Rust 的迭代器适配器（`map`、`filter`、`take` 等）是**惰性**的——它们返回新的迭代器，不立即执行。这类似于 Haskell 的 lazy list 或 Python 的 generator，但 Rust 的惰性是"零成本"的：适配器链在编译期展开为状态机，通过 `next()` 逐个消费。忘记最终消费（如只创建 `map` 而不 `collect`）是常见错误，clippy 会警告 `must_use` 的迭代器结果。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-00-functional-features.html)]
 
 ### 10.3 边界测试：`Iterator::zip` 的长度不一致（逻辑错误）
@@ -898,6 +919,7 @@ fn main() {
     println!("{:?}", map); // {"a": 1, "b": 2} — c 被静默忽略!
 }
 ```
+
 > **修正**: `Iterator::zip` 在任一输入迭代器返回 `None` 时结束，不检查长度是否相等。长度不匹配时，较长迭代器的剩余元素被静默丢弃——这是常见的逻辑错误源。检测方法：1) 先比较长度 `assert_eq!(keys.len(), values.len())`；2) 使用 `keys.iter().zip(values.iter().chain(std::iter::repeat(&0)))` 填充缺失值；3) 使用 `itertools::zip_eq`（panic 若长度不等）。这与 Python 的 `zip`（同样静默截断，`zip_longest` 填充）或 Haskell 的 `zip`（同样截断）行为相同。Rust 的标准库不提供 `zip_eq`，但 `itertools` crate 补充了此类便利功能。编译期无法检查迭代器长度（某些迭代器是无限的或动态的），因此这是运行时（Runtime）检查的领域。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [itertools Documentation](https://docs.rs/itertools/)]
 
 ### 10.4 边界测试：消耗型适配器与双重迭代（编译错误）
@@ -915,6 +937,7 @@ fn main() {
     // let v2: Vec<_> = iter.collect(); // iter 已消耗
 }
 ```
+
 > **修正**: 迭代器是**一次性**的——`collect`、`fold`、`for_each` 等消耗型方法获取迭代器所有权（Ownership），调用后迭代器失效。这与 C++ 的 `std::istream_iterator`（同样一次性）或 Java 的 `Iterator`（同样 `hasNext`/`next` 消耗）类似。Rust 的所有权系统显式追踪迭代器的消耗：调用 `into_iter()` 转移 `Vec` 所有权到迭代器，`collect` 转移迭代器所有权到 `Vec`。若需多次遍历，应 `clone` 底层集合（`data.clone().into_iter()`），或使用非消耗型迭代（`data.iter()` 借用（Borrowing））。`Iterator` trait 的 `by_ref()` 方法可借出迭代器引用（Reference），允许部分消耗后继续使用——高级但有用。来源: [The Rust Programming Language] · 来源: [Rust Standard Library]
 
 ### 10.5 边界测试：`flat_map` 与嵌套迭代器的所有权（编译错误）
@@ -936,6 +959,7 @@ fn fixed() {
     println!("{:?}", data);  // ✅ data 仍可用
 }
 ```
+
 > **修正**: `flat_map` 将嵌套迭代器扁平化为单层迭代器，但所有权规则仍然适用。若外层使用 `into_iter()`（消耗），内层也必须使用 `into_iter()`（消耗子集合），导致所有数据被转移。若需保留原数据，外层使用 `iter()`，内层使用 `iter()` + `cloned()`（复制元素）。`flat_map` 的签名 `FnMut(Self::Item) -> impl Iterator` 要求返回的迭代器与 `self` 的生命周期（Lifetimes）一致，增加了嵌套借用（Borrowing）时的复杂性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.6 边界测试：`Iterator::fold` 的初始值类型不匹配（编译错误）
@@ -948,6 +972,7 @@ fn main() {
     // 初始值 0 是 i32，但期望 String
 }
 ```
+
 > **修正**: `Iterator::fold` 的签名：`fn fold<B, F>(self, init: B, f: F) -> B`，其中 `B` 是累加器类型，`F: FnMut(B, Self::Item) -> B`。编译器从初始值 `init` 推断 `B`，上述代码中 `0` 推断 `B = i32`，但注解 `let sum: String` 要求 `B = String`，类型冲突。正确写法：`nums.iter().fold(String::new(), |mut acc, x| { acc.push_str(&x.to_string()); acc })`。`fold` 是 Rust 迭代器的通用归约操作，类型安全但需确保初始值、闭包（Closures）参数、闭包返回类型一致。这与 Haskell 的 `foldl`（同样类型严格）或 JavaScript 的 `Array.prototype.reduce`（动态类型，无此检查）不同——Rust 的 `fold` 在编译期验证类型一致性（Coherence）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
 
 ### 10.7 边界测试：`Iterator::fuse` 后的重复消费（逻辑错误）
@@ -960,6 +985,7 @@ fn main() {
     println!("{:?} {:?}", v1, v2); // [1,2,3] []
 }
 ```
+
 > **修正**: `Iterator::fuse` 在底层迭代器返回 `None` 后，后续 `next()` 始终返回 `None`。这在 `select!` 循环中防止对已完成的 future 重复 poll。但 `fuse` 不改变"迭代器是一次性的"本质：`collect` 消耗迭代器，`v2` 为空因为 `v1` 已消耗所有元素。`fuse` 不是"重置"迭代器（Iterator）——没有方法可重置已消耗的迭代器（除非重新创建）。这与 Python 的 `iter()`（同样一次性）或 C++ 的 `std::istream_iterator`（同样一次性）相同——迭代器的单次消费是通用设计。`fuse` 仅保证完成后的行为安全，不允许多次遍历。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
 
 ---
@@ -988,6 +1014,7 @@ fn fixed() {
     println!("{:?}", result); // [3, 4]
 }
 ```
+
 > **修正**: `skip_while` 和 `take_while` 是状态ful 的迭代器适配器——它们根据谓词的结果改变内部状态，一旦条件改变就永远改变。`skip_while(|x| x < 3)` 在遇到第一个 ≥ 3 的元素后停止跳过，后续元素无论大小都会被产出。这与 `filter` 不同——`filter` 对每个元素独立应用谓词。混淆两者是常见错误，尤其是在处理有序/无序数据时。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 12.2 边界测试：`cycle` 与无限迭代器（运行时死循环）
@@ -1003,6 +1030,7 @@ fn main() {
     println!("{}", sum); // 1+2+3+1+2+3+1+2+3+1 = 19
 }
 ```
+
 > **修正**: `cycle()` 将有限迭代器变为无限迭代器，重复循环原序列。若在 `cycle()` 后调用 `sum()`、`collect()` 或 `for_each()` 而不限制数量，将导致无限循环。这与 Python 的 `itertools.cycle` 行为相同。Rust 的 `cycle` 要求底层迭代器实现 `Clone`（因为要重复消费），编译器在类型层面验证此约束。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 12.3 边界测试：`enumerate` 与索引类型（逻辑错误）
@@ -1027,6 +1055,7 @@ fn fixed() {
     }
 }
 ```
+
 > **修正**: `Iterator::enumerate` 返回 `(usize, Item)`，索引始终是 `usize`。在需要其他整数类型（如 `i32`、`u8`）的上下文中，必须显式转换。Rust 禁止隐式整数转换，即使是缩小范围（`usize` → `u8`）也需要 `as` 关键字。这消除了 C 中常见的整数截断 bug，但增加了显式转换的代码量。`enumerate` 的索引从 0 开始，不受迭代器跳过元素的影响（如 `skip(5).enumerate()` 的索引仍从 0 开始，而非 5）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 12.4 边界测试：`partition` 与所有权分割（编译错误）
@@ -1048,6 +1077,7 @@ fn fixed() {
     println!("short={:?} long={:?}", short, long);
 }
 ```
+
 > **修正**: `partition` 将迭代器元素分为两个集合，要求迭代器是 `IntoIterator`（消耗型）。对于非 `Copy` 类型（如 `String`），`partition` 会 move 所有元素，原集合不可用。若需保留原数据，必须先 `clone` 或使用 `iter()` + `cloned()` + `partition`。这体现了 Rust 所有权系统的严格性——数据不能同时存在于原位置和多个新位置，除非显式复制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 12.5 边界测试：`ChunksExact` 的剩余元素处理（逻辑错误）
@@ -1064,6 +1094,7 @@ fn main() {
     // println!("remaining: {:?}", remainder);
 }
 ```
+
 > **修正**: `chunks_exact(n)` 返回大小严格为 `n` 的块，可能剩余少于 `n` 的元素。迭代 `ChunksExact` 后，需调用 `remainder()` 获取剩余元素——遗漏是常见 bug。替代方法：`chunks(n)` 返回大小至多为 `n` 的块（最后块可能更小），无需单独处理剩余。选择取决于场景：1) 需要固定大小块（如 SIMD 处理）→ `chunks_exact` + `remainder`；2) 可接受变长块 → `chunks`。这与 Python 的 `iterools.grouper`（填充或截断）或 NumPy 的 `array_split`（自动处理剩余）类似——Rust 提供两种语义，让开发者根据需求选择。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.slice.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-00-functional-features.html)]
 
 ### 12.6 边界测试：const fn 中的非编译期操作
@@ -1077,6 +1108,7 @@ const fn foo(x: i32) -> i32 {
 
 fn main() {}
 ```
+
 > **修正**: **Const fn**：1) 函数体必须是编译期可计算的；2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
 
 ---

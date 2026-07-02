@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [专家级]
+> **内容分级**: [专家级]
 
 # RustBelt & Verification Toolchain（RustBelt 与验证工具链）
 >

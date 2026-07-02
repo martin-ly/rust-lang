@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Query System · `TyCtxt` · Dep Graph · Red-Green Algorithm · Incremental Compilation · Salsa · `rustc_middle` — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Rustc 查询系统与增量编译
@@ -91,6 +89,7 @@ TyCtxt<'tcx>
 │   └── In-Memory Cache
 └── Dep Graph
 ```
+
 > **定理**: 在 `rustc` 内部，几乎所有编译信息都可以通过 `tcx.query_name(key)` 获取。
 > **证明**: `TyCtxt` 为每个查询生成了对应的方法，编译器代码通过 `tcx.typeck(def_id)`、`tcx.optimized_mir(def_id)` 等方式按需调用。
 
@@ -127,6 +126,7 @@ graph LR
     D --> E[optimized_mir]
     E --> F[codegen]
 ```
+
 ### 3.2 Red-Green 算法
 
 增量编译的核心算法：
@@ -145,6 +145,7 @@ graph TD
         C2 --> D2[optimized_mir: red]
     end
 ```
+
 > **关键洞察**: Red-Green 不是“按文件”增量，而是**按查询结果**增量。即使一个文件被修改，只要它不影响某个查询的输入，该查询的结果仍可复用。
 >
 > [来源: Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation.html)
@@ -170,6 +171,7 @@ CARGO_INCREMENTAL=1 cargo build
 # 查看 rustc 内部增量统计（verbose，需要 nightly）
 RUSTFLAGS="-Z incremental-info" cargo +nightly build
 ```
+
 在 `examples/incremental_practice/` 目录下执行：
 
 ```bash
@@ -188,6 +190,7 @@ sed -i 's/Hello, {name}!/Hi, {name}!/' src/lib.rs
 # (Get-Content src/lib.rs) -replace 'Hello, {name}!','Hi, {name}!' | Set-Content src/lib.rs
 CARGO_INCREMENTAL=1 RUSTFLAGS="-Z incremental-info" cargo +nightly build
 ```
+
 > **提示**: `-Z incremental-info` 在不同 nightly 版本中的输出格式会变化：旧版显示 `reusing X out of Y modules` 汇总行，新版（1.98+）改为 `DepGraph Statistics` 与 `session directory: N files hard-linked`。二者语义相同——都说明“多少中间产物被复用”。
 
 ### 4.2 典型输出解读
@@ -202,6 +205,7 @@ incremental: DepGraph Statistics
 ...
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.23s
 ```
+
 - 没有 `session directory` 复用行，说明这是首次建立缓存。
 - `Total Node Count` / `Total Edge Count` 给出本次编译 dep-graph 的规模。
 
@@ -210,6 +214,7 @@ incremental: DepGraph Statistics
 ```text
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
 ```
+
 - 没有 `Compiling` 行，耗时骤降至毫秒级，说明 dep-graph 中所有节点都是 green，全部复用。
 
 #### 修改 `greet::hello` 后
@@ -223,6 +228,7 @@ incremental: DepGraph Statistics
 ...
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.42s
 ```
+
 - `session directory: 29 files hard-linked` 表示大量中间产物从上次缓存硬链接复用；
 - `Total Node Count` 微增（新增/修改的 HIR/MIR 节点），但整体编译时间远低于冷编译；
 - 如果只修改 `greet` 而 `math` 不变，`math` 模块（Module）相关的查询节点仍保持 green。
@@ -234,6 +240,7 @@ incremental: reusing 28 out of 30 modules
 incremental: 1245 nodes in dep-graph; 23 marked dirty
 incremental: process 23 dirty nodes
 ```
+
 - **reusing modules**: 多少 codegen unit 未改变；
 - **dirty nodes**: 需要重新计算的 `DepNode` 数量；
 - 脏节点越少，增量编译越快。
@@ -278,6 +285,7 @@ incremental: process 23 dirty nodes
 // 示例：在 CI 中关闭增量编译
 std::env::set_var("CARGO_INCREMENTAL", "0");
 ```
+
 ---
 
 ## 六、与 Salsa 的关系

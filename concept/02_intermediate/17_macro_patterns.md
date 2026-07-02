@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: 宏模式 (Macro Pattern) · 声明宏 (Declarative Macro) · macro_rules! · 卫生宏 (Hygienic Macro) · 重复模式 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 宏模式：编译期代码生成的工程实践
@@ -107,6 +105,7 @@
   │ 跨 crate        │ ✅ 原生支持     │ ⚠️ 需导出    │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **认知功能**: 宏的**核心价值**是"编译期编程"——它扩展了语言的表达能力，同时保持零运行时（Runtime）成本。
 > [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html)]
 
@@ -142,6 +141,7 @@
   ├── 需要分析类型结构 → 过程宏
   └── 快速开发内部工具 → macro_rules!
 ```
+
 > **宏类型洞察**: **声明宏（Declarative Macro）**适合快速代码生成，**过程宏（Procedural Macro）**适合深度 AST 转换——两者是互补工具。
 > [来源: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)]
 
@@ -181,6 +181,7 @@
   // 即使外部 crate 重定义了 internal_function
   // 宏仍指向正确的符号
 ```
+
 > **卫生性洞察**: 卫生宏是 Rust **比 C 预处理器安全的关键**——但这也意味着宏设计需要**显式传递依赖**。
 > [来源: [The Little Book of Rust Macros — Hygiene](https://veykril.github.io/tlborm/)]
 
@@ -247,6 +248,7 @@ define_enum_with_display! {
 
 // Status::Active.to_string() == "Active"
 ```
+
 > **DRY 洞察**: 宏的**批量 Trait 实现**是大型项目中减少样板代码的标准技术——尤其适用于 Newtype 和枚举（Enum）。
 > [来源: [Rust Patterns — Macros](https://rust-unofficial.github.io/patterns/)]
 
@@ -302,6 +304,7 @@ macro_rules! log {
     };
 }
 ```
+
 > **条件编译洞察**: `cfg` + 宏的组合使**平台/特性适配**可以优雅地封装，避免散落的 #[cfg] 污染代码。
 > [来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)]
 
@@ -359,6 +362,7 @@ const fn const_max(a: usize, b: usize) -> usize {
 
 const SIZE: usize = const_max(10, 20);
 ```
+
 > **编译期洞察**: Rust 的 **const fn** 和 **const generics** 正在替代许多宏的使用场景——当类型系统（Type System）足够表达时，优先使用类型系统。
 > [来源: [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html)]
 
@@ -397,6 +401,7 @@ Builder 生成:
   → const_assert! 或 static_assertions crate
   → const_assert!(SIZE > 0)
 ```
+
 > **模式矩阵**: 宏的**选择逻辑**是：简单模式匹配（Pattern Matching）用 `macro_rules!`，复杂 AST 操作用 `proc_macro`，能用类型系统（Type System）解决的不用宏。
 
 ---
@@ -419,6 +424,7 @@ graph TD
     style PROC fill:#c8e6c9
     style MACRO fill:#c8e6c9
 ```
+
 > **认知功能**: **泛型（Generics） > 宏（Macro）**——当类型系统（Type System）可以表达时，优先使用泛型（更好的错误信息、IDE 支持、编译速度）。
 > [来源: [Rust Style Guide](https://doc.rust-lang.org/nightly/style-guide/)]
 
@@ -458,6 +464,7 @@ graph TD
 ├── 错误处理更复杂
 └── 但能力更强大
 ```
+
 > **边界要点**: 宏的边界主要与**编译时间**、**错误信息**、**调试**、**文档**和**复杂度**相关。
 > [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 
@@ -517,6 +524,7 @@ graph TD
   ✅ 确保递归有终止条件
      // 提供基础情况
 ```
+
 > **陷阱总结**: 宏的陷阱主要与**多次求值**、**优先级**、**逗号处理**、**标识符拼接**和**递归**相关。
 > [来源: [The Little Book of Rust Macros — Pitfalls](https://veykril.github.io/tlborm/)]
 
@@ -600,6 +608,7 @@ macro_rules! ordered {
     ($e:expr) => { println!("expr: {}", $e) };
 }
 ```
+
 > **修正**: `macro_rules!` 采用**顺序贪婪匹配**——从上到下尝试每个分支，第一个成功匹配的分支被展开。更通用的模式（如 `$e:expr`）若排在前面，会阻止后面更具体的模式（如 `$i:ident`）被匹配。这与正则表达式的贪婪匹配类似，但宏的匹配是结构化的（基于 token tree）。设计宏时必须将最具体的模式放在前面，通用模式放在后面。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：宏中的 hygiene 与变量捕获（编译错误）
@@ -628,6 +637,7 @@ fn fixed() {
     println!("{}", x); // ✅ x 在宏外部定义
 }
 ```
+
 > **修正**: Rust 的宏系统具有**卫生性**（hygiene）——宏内部定义的标识符不会与外部作用域冲突。`let x = 42;` 在宏内部定义的 `x` 只在宏展开后的代码块内可见，外部无法访问。这与 C 的宏（文本替换，无卫生性）形成鲜明对比。 hygiene 通过给宏生成的标识符附加唯一上下文标记实现，确保宏不会意外污染调用者的命名空间。若需从宏返回值，应使用表达式（`42`）而非绑定语句（`let x = 42`）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：`tt` muncher 的 token 消耗（编译错误）
@@ -645,6 +655,7 @@ fn main() {
     println!("{}", n);
 }
 ```
+
 > **修正**: `tt` muncher 是 Rust 声明宏（Declarative Macro）的高级技巧：递归地消耗 token tree（`tt`），每次处理一个或一对 token。模式的精确性至关重要：`($odd:tt $($a:tt $b:tt)*)` 要求奇数个 token（1 + 2*n），偶数个 token 时无匹配 arm。`tt` muncher 的复杂性：1) token 边界（`1 + 2` 是 3 个 tt 还是 5 个？）；2) 递归深度限制；3) 模式优先级（第一个匹配的 arm 被使用）。这是 Rust 宏系统的"暗艺术"——强大但难以调试。现代替代：过程宏（Procedural Macro）（`proc_macro`）提供完整的 token 解析能力，更易维护。这与 Lisp 的宏（同样基于 S-expression 的递归处理）或 C 的预处理器（无递归，纯文本替换）不同——Rust 的 `tt` muncher 在声明宏的有限表达能力中实现了过程宏的部分功能。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 
 ### 10.4 边界测试：宏生成的 `unsafe` 块边界（编译错误）
@@ -668,6 +679,7 @@ fn main() {
     println!("{}", x);
 }
 ```
+
 > **修正**: 宏生成的 `unsafe` 块的可见性取决于宏设计。`unsafe_op!` 在展开代码中创建 `unsafe` 块，因此调用者不需要额外的 `unsafe`——这**隐藏了 unsafe 边界**，是危险的做法。Rust 社区的最佳实践：unsafe 操作应在调用点可见，即 `unsafe { unsafe_op!(...) }`，让代码审查者一眼看到 unsafe。`std` 中的某些宏（如 `vec!`）内部使用 unsafe，但经过了严格审计。自定义宏应避免隐藏 unsafe，或使用 `unsafe` 关键字要求调用者显式标记。这与 C 的宏（常隐藏 `*` 解引用（Reference）、指针运算等 unsafe 操作）或 C++ 的模板（unsafe 在模板内部，调用点不可见）不同——Rust 的 unsafe 块是语法层面的，宏展开后仍保留，可通过源码映射追踪。来源: [The Rust Programming Language] · 来源: [Rustonomicon]
 
 ### 10.2 边界测试：宏递归深度限制（编译错误）
@@ -682,6 +694,7 @@ fn main() {
     deep!();
 }
 ```
+
 > **修正**: Rust 宏的**递归展开**有默认限制（128 层），防止无限递归导致编译器栈溢出。`deep!() => deep!()` 是直接递归，立即触发限制。合法递归需有**终止条件**：`deep!(0) => {}`，`deep!($n:expr) => { deep!($n - 1) }`。宏递归用于：1) 重复模式生成（`vec![1, 2, 3]`）；2) 编译期元编程（计数、类型列表遍历）；3) 代码生成（结构体（Struct）字段访问器）。`#![recursion_limit = "256"]` 可提高限制，但过度递归增加编译时间。这与 C 的宏（无递归限制，可能无限展开）或 Scheme 的 hygienic macro（尾递归优化，理论上无限）不同——Rust 的宏递归限制是编译期的安全阀。[来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
 
 ### 10.4 边界测试：宏中的 `tt` 与 `expr` 的匹配差异（编译错误）
@@ -703,6 +716,7 @@ fn main() {
     println!("{}", x);
 }
 ```
+
 > **修正**: `macro_rules!` 的**片段分类器**（fragment specifiers）：1) `expr` — 匹配完整表达式（不含顶层逗号）；2) `tt` — 匹配 token tree（任何括号对的内容，最灵活）；3) `stmt` — 匹配语句；4) `pat` — 匹配模式；5) `ty` — 匹配类型。`expr` 的限制：不能匹配 `foo(1, 2)`（逗号被视为宏参数分隔符），需用 `tt` 或嵌套宏。复杂宏设计：1) 内部宏（`macro_rules! internal { ... }`）处理递归；2) `tt` 作为通用匹配器，再进一步解析；3) 过程宏（`proc_macro`）替代 `macro_rules!` 处理复杂语法。这与 C 的宏（无分类器，纯文本替换，逗号无特殊含义）或 Scheme 的宏（语法对象，结构化匹配）不同——Rust 的 `macro_rules!` 在灵活性和类型安全之间取得平衡。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)]
 
 ## 嵌入式测验（Embedded Quiz）

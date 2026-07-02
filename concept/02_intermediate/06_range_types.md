@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 >
 > **本节关键术语**: 范围类型 (Range Type) · core::range · std::ops::Range · 区间运算 · 迭代器范围 (Range Iterator) — [完整对照表](../00_meta/terminology_glossary.md)
 >
@@ -77,6 +75,7 @@
 ```text
 [0, 10) = { x ∈ ℝ | 0 ≤ x < 10 }
 ```
+
 区间本身不包含状态，只有边界值。任何操作（交集、并集、包含判断）都是纯函数。
 
 > **核心问题**: Rust 的 `std::ops::Range` 是否应该体现这种**纯值语义**？
@@ -99,6 +98,7 @@ for i in r {
 // ❌ r 在此处不可用（已消费）
 // println!("{:?}", r); // error: use of moved value: `r`
 ```
+
 > **关键特性**:
 >
 > - `Range` 实现 `Iterator`，因此迭代会**消费**范围
@@ -126,6 +126,7 @@ assert_eq!(v1, vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 let v2: Vec<i32> = r.into_iter().collect(); // ✅ 再次迭代 — r 仍可用
 assert_eq!(v2, vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 ```
+
 > **关键差异**:
 >
 > | 特性 | `std::ops::Range` | `core::range::Range` |
@@ -155,6 +156,7 @@ graph LR
         D -->|保持不变| H[可复用范围]
     end
 ```
+
 > **认知功能**: 此图展示 `Range` 语义从**直接迭代器**到**可迭代值**的关键架构变化。旧模型中范围与迭代器状态耦合；新模型通过 `IntoIterator` 解耦，范围作为**工厂**生成迭代器。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 在需要多次遍历同一范围的场景中，优先使用 `core::range::Range`；在需要保存迭代进度（如 `break` 后恢复）的场景中，使用显式迭代器。
@@ -179,6 +181,7 @@ let r2 = r; // r 被移动
 // let r2 = r; // ✅ r 被复制，两者都可用
 // println!("{:?}", r); // ✅ 编译通过
 ```
+
 > **形式化规则**:
 >
 > - 设 `T` 为范围元素类型
@@ -209,6 +212,7 @@ for i in r { /* r 被消费 */ }
 // for i in r { /* r 被复制 */ }
 // r 仍可用 ✅
 ```
+
 > **定理**: `core::range::Range` 的 `Copy` 实现保证 `for` 循环不会消费范围值。
 > **证明**: `for` 循环脱糖调用 `IntoIterator::into_iter(self)`。若 `Range: Copy`，则 `self` 被按位复制传入，`into_iter` 接收的是副本，原值保留。
 
@@ -231,6 +235,7 @@ for i in r:  # ✅ 再次迭代
 # range 不可变
 # r.start = 5  # ❌ AttributeError
 ```
+
 > **对比**: Python 的 `range` 是纯值（不可变），支持多次迭代。Rust 新 `core::range::Range` 向 Python 的语义靠拢。
 > [来源: [Python Docs — range](https://docs.python.org/3/library/stdtypes.html#range)]
 
@@ -247,6 +252,7 @@ auto r = std::views::iota(0, 10);
 // r 是惰性范围（lazy range），不存储状态
 // 每次迭代都重新计算
 ```
+
 > **对比**: C++20 的 `std::ranges` 采用**惰性求值**（lazy evaluation），范围本身不存储迭代状态。Rust 的 `core::range::Range` 采用**eagerly 构造** + `IntoIterator` 解耦，两者都实现了"范围作为纯值"的语义，但实现路径不同。
 > [来源: [cppreference — std::ranges](https://en.cppreference.com/w/cpp/ranges)]
 
@@ -269,6 +275,7 @@ let sum1: i32 = r.into_iter().sum();
 let sum2: i32 = r.into_iter().sum(); // ✅ r 仍可用
 assert_eq!(sum1, sum2);
 ```
+
 > **关键洞察**: Rust 的新范围设计融合了 Python 的"不可变纯值"语义和 C++ 的"解耦迭代"架构，同时保持 Rust 的零成本抽象（Zero-Cost Abstraction）原则。
 
 ---
@@ -294,6 +301,7 @@ graph TD
     style FALSE1 fill:#ffebee
     style ALT fill:#fff3e0
 ```
+
 > **认知功能**: 此决策树帮助开发者在 `std::ops::Range` 和 `core::range::Range` 之间选择。核心判断标准是"是否需要保存迭代进度"。
 > **使用建议**: 新代码优先使用 `core::range::Range`（若 1.96.0+ 可用）；需要保存进度的场景（如 `break` 后恢复）保留 `std::ops::Range`。
 > **关键洞察**: `core::range::Range` 不是 `std::ops::Range` 的替代，而是**语义分层**——前者是"纯值"，后者是"有状态迭代器"。
@@ -315,6 +323,7 @@ let max = i32::MAX..i32::MAX;
 let rev = 10..0;
 // rev.into_iter() 产生空序列（标准行为）
 ```
+
 > **边界要点**: `core::range::Range` 保持半开区间 `[start, end)` 语义，逆序和空范围都产生空迭代序列。这与 `std::ops::Range` 的行为一致，确保向后兼容。
 > [来源: [Rust Reference — Range Expressions](https://doc.rust-lang.org/reference/expressions/range-expr.html)]
 
@@ -395,6 +404,7 @@ fn fixed() {
     }
 }
 ```
+
 > **修正**: Rust 的范围语法 `a..b`、`a..=b` 有两种用法：作为表达式（创建 `Range` 类型）和作为模式（在 `match` 中匹配）。作为表达式时，它表示一个迭代器或范围对象；作为模式时，它表示值范围匹配。不能在普通表达式位置使用模式语法。`contains` 方法是检查值是否在范围内的标准方式。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：`Range` 与 `RangeInclusive` 的类型不匹配（编译错误）
@@ -422,6 +432,7 @@ where
     }
 }
 ```
+
 > **修正**:
 > `Range`（`a..b`，半开区间）、`RangeInclusive`（`a..=b`，闭区间）、`RangeFrom`（`a..`）、`RangeTo`（`..b`）是**不同的类型**。
 > **1.97+ 前瞻**: `core::range::RangeFull` 和 `core::range::RangeTo` 将作为 `core::ops::RangeFull` / `RangeTo` 的 re-export 进入 `core::range` 模块（Module），同时 `core::range::legacy::*` 将成为旧范围类型的新家。这意味着未来版本将完成新旧 Range 体系的统一。当前（1.96）`core::range` 仅包含 `Range`、`RangeFrom`、`RangeInclusive` 及其迭代器。 [来源: [releases.rs — PR #156840](https://releases.rs/)]
@@ -442,6 +453,7 @@ fn main() {
     for i in r2 { print!("{}", i); }
 }
 ```
+
 > **修正**:
 > `Range<T>`（半开区间 `start..end`）实现了 `Copy`（若 `T: Copy`），但 `RangeInclusive<T>`（闭区间 `start..=end`）没有。
 > 原因是 `RangeInclusive` 需要追踪是否已迭代到 `end`（一个布尔标志 `is_empty: Option<bool>`），使其大小和语义不适合按位复制。
@@ -471,6 +483,7 @@ fn main() {
     // let v: Vec<_> = range.take(10).collect(); // ✅ take 限制
 }
 ```
+
 > **修正**:
 > `Iterator::size_hint` 返回 `(usize, Option<usize>)`——长度的下界和上界。
 > 无限范围 `0..` 的 `size_hint` 返回 `(usize::MAX, None)`，表示"至少 usize::MAX 个元素，可能无限"。
@@ -496,6 +509,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**:
 > Rust 的 `match` 要求**穷尽**（exhaustive）——覆盖所有可能的值。
 > 范围模式 `a..=b` 只覆盖闭区间，不覆盖区间外的值。
@@ -516,6 +530,7 @@ fn main() {
     println!("{:?}", r);
 }
 ```
+
 > **修正**: **借用（Borrowing）规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
 
 ## 嵌入式测验（Embedded Quiz）

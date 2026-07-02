@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [专家级]
+> **内容分级**: [专家级]
 
 # 类型推断：Hindley-Milner 算法与 Rust 的工业实现
 >
@@ -101,6 +99,7 @@
   ├── 某些边界情况需要显式标注
   └── 编译时间增加
 ```
+
 > **认知功能**: 类型推断是**人机分工**的优化——程序员关注逻辑，编译器处理类型细节。但需要在**简洁性**和**可读性**之间平衡。
 > [来源: [Wikipedia — Type Inference](https://en.wikipedia.org/wiki/Type_inference)]
 
@@ -135,6 +134,7 @@ HM 算法的核心思想:
   ├── 全局推断: 整个表达式的类型一次性推断
   └── 限制: 不支持子类型、不支持泛型约束
 ```
+
 > **HM 洞察**: HM 是类型推断的**理论基础**——它证明了在简单类型 λ 演算 + let 多态的框架下，类型推断是**可判定且高效**的。
 > [来源: [Milner 1978 — A Theory of Type Polymorphism](https://doi.org/10.1016/0022-0000(78)90014-4)]
 
@@ -168,6 +168,7 @@ graph TD
     HMBase -->|"基础"| Interaction
     RustExt -->|"扩展"| Interaction
 ```
+
 > **认知功能**: 此图展示 Rust 类型推断的**层次结构**——基于 HM 基础，扩展了 Trait、生命周期（Lifetimes）、关联类型等工业级特性。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **关键洞察**: Rust 的类型推断不是纯 HM——它结合了**约束求解**（类型统一）和**Trait 解析**（目标导向搜索）。
@@ -201,6 +202,7 @@ fn fixed() {
     let collected2 = v.iter().collect::<Vec<_>>();
 }
 ```
+
 > **修正**: Rust 的类型推断基于 Hindley-Milner 算法扩展，但方法链中的某些位置需要显式类型标注。`collect()` 是最常见的例子——它可返回 `Vec<T>`、`HashSet<T>`、`Result<Vec<T>, E>` 等多种类型，编译器无法从上下文推断时必须显式标注。`::<>`（turbofish）语法允许在方法调用处指定类型参数，避免引入额外变量绑定。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：闭包参数类型推断的歧义（编译错误）
@@ -220,6 +222,7 @@ fn fixed() {
     println!("{}", result);
 }
 ```
+
 > **修正**: 闭包（Closures）参数的类型推断依赖首次使用处的上下文。若闭包定义后立即调用（如 `let f = |x| x + 1; f(5)`），编译器从 `5` 推断 `x: i32`。但若闭包作为参数传递或存储在变量中，可能需要显式标注参数类型（`|x: i32| x + 1`）。这与 C++14 的泛型（Generics） lambda（`auto x`）不同——Rust 的闭包类型推断更严格，要求在首次使用时有足够信息。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -243,6 +246,7 @@ fn fixed() {
   // 1. unify(T, i32) → T = i32
   // 2. 检查 i32: Debug → 满足
 ```
+
 > **统一洞察**: 统一是类型推断的**核心算法**——它将"类型相等"的概念扩展为"类型兼容"，通过替换类型变量实现。
 > [来源: [Rust Compiler — Type Checking](https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html)]
 
@@ -275,6 +279,7 @@ let v = Vec::<i32>::new();  // 显式
 let v = Vec::new();         // 推断（从后续使用推断）
 v.push(42);  // 推断 Vec<i32>
 ```
+
 > **泛型推断**: Rust 的泛型推断是**双向的**——可以从参数推断，也可以从使用点推断（如 `v.push(42)` 推断 `Vec<i32>`）。
 > [来源: [Rust Reference — Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html)]
 
@@ -303,6 +308,7 @@ v.push(42);  // 推断 Vec<i32>
   ├── 多个输入引用时，编译器无法知道输出的依赖关系
   └── 返回引用时必须显式标注（除非 Elision 规则适用）
 ```
+
 > **生命周期推断洞察**: Rust 的生命周期推断是**两层结构**——签名层的 Elision 简化常见模式，函数体内的推断处理复杂借用（Borrowing）关系。
 > [来源: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)]
 
@@ -348,6 +354,7 @@ Rust 对 HM 的关键扩展:
   │ 扩展性          │ 有限            │ 高度可扩展      │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **差异洞察**: Rust 的类型推断从 HM 的**理论优雅**走向了**工业实用**——牺牲完备性和最优复杂度，换取表达力和可扩展性。
 > [来源: [Rust Compiler — Trait Resolution](https://rustc-dev-guide.rust-lang.org/traits/resolution.html)]
 
@@ -371,6 +378,7 @@ graph TD
     style EXPLICIT2 fill:#c8e6c9
     style INFER fill:#c8e6c9
 ```
+
 > **认知功能**: 此决策树展示类型推断的**最佳实践**。核心原则是：**公共 API 显式标注，私有代码允许推断**。
 > **关键洞察**: 显式类型是**文档**——在公共接口上，类型标注比推断更有价值。
 > [来源: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html)]
@@ -411,6 +419,7 @@ graph TD
 ├── 错误信息指向展开后的代码
 └── 使用 cargo expand 调试宏展开后的类型
 ```
+
 > **边界要点**: Rust 类型推断的边界主要与**循环依赖**、**闭包捕获**、**数字类型**、**关联类型**和**宏（Macro）交互**相关。
 > [来源: [Rust Compiler — Type Inference](https://rustc-dev-guide.rust-lang.org/type-inference.html)]
 
@@ -457,6 +466,7 @@ graph TD
   ✅ fn get_ref(data: &[i32]) -> &i32 { &data[0] }
      // 显式标注生命周期（Elision 适用时自动处理）
 ```
+
 > **陷阱总结**: 类型推断的陷阱主要与**可读性**、**数字类型**、**闭包捕获**、**泛型方法**和**生命周期**相关。
 > [来源: [Rust Compiler Error E0282](https://doc.rust-lang.org/error_codes/E0282.html)]
 
@@ -523,6 +533,7 @@ fn main() {
     println!("{}", closure(5));
 }
 ```
+
 > **修正**: Rust 的闭包参数类型推断依赖**使用点上下文**：闭包在何处被调用，参数类型从调用处推断。若闭包定义后未被调用（或调用点无足够类型信息），编译器无法推断参数类型。这与 C++ 的 lambda（参数类型必须显式或使用 `auto`）或 JavaScript 的箭头函数（动态类型，无推断问题）不同——Rust 的闭包类型推断是双向的：函数签名可从闭包推断，闭包参数可从调用推断，但若两端都未知，推断失败。`map`、`filter` 等迭代器（Iterator）适配器提供足够的上下文（`Iterator::Item` 类型），因此迭代器闭包通常无需显式标注。独立闭包（未立即使用）需要类型注解。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html)]
 
 ### 10.4 边界测试：关联类型的投影歧义（编译错误）
@@ -542,6 +553,7 @@ fn main() {
     // process(vec) // Vec 实现 Container? 不明确
 }
 ```
+
 > **修正**: 关联类型（associated types）是 trait 的一部分：`Container::Item` 由具体实现决定。但调用泛型函数 `process` 时，编译器必须知道 `C` 的具体类型才能解析 `C::Item`。若 `C` 无法从参数推断（如上述代码中 `process` 无参数或参数类型不明确），编译错误。解决方案：1) 显式指定类型参数 `process::<Vec<i32>>(vec)`；2) 使用 `impl Trait` 返回类型替代关联类型；3) 确保参数类型提供足够上下文。这与 Haskell 的 type families（`Container a -> Item a`，类型推断类似）或 C++ 的 `typename`（`typename C::Item`，需要显式 `typename` 关键字）类似——Rust 的关联类型推断在复杂场景下需要显式标注。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust Reference — Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html)]
 
 ### 10.3 边界测试：闭包捕获与类型推断的交互（编译错误）
@@ -557,6 +569,7 @@ fn main() {
     closure(); // 第二次调用: 但编译器可能推断为 FnOnce
 }
 ```
+
 > **修正**:
 > Rust 闭包的**trait 自动实现**：
 >
@@ -578,6 +591,7 @@ fn main() {
     println!("{:?}", v);
 }
 ```
+
 > **修正**: Rust 的 **Hindley-Milner 类型推断（Type Inference）** 变体：
 >
 > 1) 局部变量类型通常可推断；
@@ -602,6 +616,7 @@ fn main() {
     let x: i32 = "hello";
 }
 ```
+
 > **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
 
 ## 嵌入式测验（Embedded Quiz）

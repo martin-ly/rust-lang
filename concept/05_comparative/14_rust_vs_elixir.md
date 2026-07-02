@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust vs Elixir 对比分析
@@ -111,6 +109,7 @@
            {:error, :config_read_failed}
   end
 ```
+
 ```rust
 fn safe_divide(a: i32, b: i32) -> Result<i32, &'static str> {
     if b == 0 {
@@ -130,6 +129,7 @@ fn main() {
     }
 }
 ```
+
 > **认知功能**: **Rust 和 Elixir 对错误的根本态度不同**——Rust 在编译期预防，Elixir 在运行时恢复。
 > [来源: [Elixir Error Handling](https://elixir-lang.org/getting-started/try-catch-and-rescue.html)]
 
@@ -165,6 +165,7 @@ fn main() {
   └─────────────────┴─────────────────┴─────────────────┘
 > [来源: [Elixir Official]]
 ```
+
 > **并发洞察**: **Elixir 的轻量进程和消息传递适合超高并发场景**——Rust 则在共享状态并发上提供编译期安全。
 > [来源: [Erlang Processes](https://www.erlang.org/doc/reference_manual/processes.html)]
 
@@ -210,6 +211,7 @@ BEAM (Erlang VM) 并发:
     end
   end
 ```
+
 > **BEAM 洞察**: **Elixir 的 Actor 模型是共享无状态并发的典范**——每个进程独立，通过消息传递协作。
 > [来源: [Elixir GenServer](https://hexdocs.pm/elixir/GenServer.html)]
 
@@ -268,6 +270,7 @@ Rust 并发模型:
       }
   }
 ```
+
 > **Rust 并发洞察**: **Rust 通过所有权（Ownership）和类型系统实现并发安全（Concurrency Safety）**——无数据竞争的编译期保证。
 > [来源: [TRPL — Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)]
 
@@ -314,6 +317,7 @@ Rust 并发模型:
       ...
   end
 ```
+
 > **类型洞察**: **Rust 在编译期捕获错误，Elixir 在运行时灵活处理**——各有优劣。
 > [来源: [Elixir Typespecs](https://hexdocs.pm/elixir/typespecs.html)]
 
@@ -360,6 +364,7 @@ Rust 并发模型:
   ├── Elixir 函数多子句是主要匹配方式
   └── Elixir = 是匹配而非赋值
 ```
+
 ```rust
 enum Message {
     Text(String),
@@ -388,6 +393,7 @@ fn main() {
     }
 }
 ```
+
 > **模式匹配（Pattern Matching）洞察**: **Elixir 将模式匹配融入语言核心**——函数定义、变量绑定、控制流全部基于匹配。
 > [来源: [Elixir Pattern Matching](https://elixir-lang.org/getting-started/pattern-matching.html)]
 
@@ -425,6 +431,7 @@ fn main() {
   │ 容器化          │ 优秀            │ 良好            │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **部署洞察**: **Rust 的零运行时适合静态部署，Elixir 的热更新适合长运行服务**。
 > [来源: [Elixir Deployment Guide](https://mix.hexdocs.pm/Mix.Tasks.Release.html)]
 
@@ -467,6 +474,7 @@ Rust ↔ Elixir 互操作:
       def add(_a, _b), do: :erlang.nif_error(:nif_not_loaded)
   end
 ```
+
 > **互操作洞察**: **Rustler 是 Rust 和 Elixir 协作的桥梁**——Rust 负责性能，Elixir 负责并发和容错。
 > [来源: [Rustler](https://github.com/rusterlium/rustler)]
 
@@ -493,6 +501,7 @@ graph TD
     style RUST fill:#c8e6c9
     style ELIXIR fill:#c8e6c9
 ```
+
 > **选择洞察**: **极致性能 + 编译期安全选 Rust，超高并发 + 热更新选 Elixir**。
 > [来源: [Rust Official](https://www.rust-lang.org/)]
 
@@ -523,6 +532,7 @@ graph TD
   ├── Elixir 做并发和容错编排
   └── Rustler 桥接
 ```
+
 > **场景洞察**: **两种语言互补**——Rust 提供性能和类型安全，Elixir 提供并发和容错。
 > [来源: [Elixir Use Cases](https://elixir-lang.org/cases.html)]
 
@@ -568,6 +578,7 @@ graph TD
   ✅ 使用容器编排实现滚动更新
      // Kubernetes 等
 ```
+
 > **陷阱总结**: Rust 与 Elixir 的陷阱主要与**错误处理（Error Handling）哲学**、**并发模型**、**类型系统（Type System）**和**运行时差异**相关。
 > [来源: [Rustler NIF Safety](https://www.erlang.org/doc/tutorial/nif.html)]
 
@@ -644,6 +655,7 @@ fn fixed() {
     let v = Value::Str(String::from("hello")); // shadowing
 }
 ```
+
 > **Elixir 对比**: Elixir 是动态类型——变量是值的标签，`x = 42; x =
 
 ## 十、边界测试：Rust 与 Elixir 的编译错误对比
@@ -668,6 +680,7 @@ fn fixed() {
     let v = Value::Str(String::from("hello"));
 }
 ```
+
 > **Elixir 对比**: Elixir 是动态类型，变量可以重新绑定为任何类型。Rust 的变量类型在编译期固定，不能重新赋值为不同类型。Rust 的 `enum` 是表达"多种可能类型"的方式，调用者必须通过 `match` 处理每个变体。这与 Elixir 的 pattern matching 类似，但 Rust 在编译期验证穷尽性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Elixir 的进程邮箱与 Rust 的 channel（编译错误）
@@ -696,6 +709,7 @@ fn fixed() {
     });
 }
 ```
+
 > **Elixir 对比**: Elixir 的进程（Actor 模型）通过邮箱（mailbox）接收消息，每个进程有独立邮箱，无共享状态。Rust 的 `mpsc::channel` 是多生产者单消费者——多个发送者，一个接收者。若需广播，使用 `tokio::sync::broadcast` 或 `crossbeam::channel`。Elixir 的进程隔离在虚拟机（BEAM）层面实现，Rust 的 channel 在类型系统层面保证线程安全。两者都消除了数据竞争，但实现层级不同。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.5 边界测试：Elixir 的进程隔离与 Rust 的共享内存并发（编译错误）
@@ -718,6 +732,7 @@ fn main() {
     println!("{:?}", data);
 }
 ```
+
 > **修正**: Elixir/Erlang 的 **Actor 模型** 中，进程完全隔离——不共享内存，所有通信通过异步（Async）消息传递。Rust 支持 Actor 模型（`actix`），但默认是**共享内存并发**：线程共享地址空间，通过锁/原子同步。Elixir 的优势：1) 无数据竞争（无共享内存）；2) 容错（进程崩溃不影响其他进程，supervisor 重启）；3) 热代码升级。Rust 的优势：1) 性能（无消息序列化开销）；2) 细粒度控制（可选择共享或无共享）；3) 类型安全（编译期防止数据竞争）。从 Elixir 迁移到 Rust 时，需注意：1) 不再有进程隔离的保护；2) 共享状态需 `Mutex`/`RwLock`；3) 错误处理从"let it crash"变为显式 `Result` 传播。这与 Go 的 goroutine + channel（可选择共享或通信）类似——Rust 提供两种并发模型，但共享内存是默认和最高效的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)] · [来源: [Elixir Processes](https://elixir-lang.org/getting-started/processes.html)]
 
 ## 嵌入式测验（Embedded Quiz）

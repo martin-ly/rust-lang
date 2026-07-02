@@ -1,14 +1,11 @@
 # 三轨内容相似度检测报告
 
-- **扫描文件数**: 919
+- **扫描文件数**: 964
 - **相似度阈值**: 0.6
-- **潜在重复对**: 4
+- **潜在重复对**: 1
 
 | 相似度 | 文件1 | 文件2 | 标题1 | 标题2 |
 |:---|:---|:---|:---|:---|
-| 0.60 | `concept\06_ecosystem\77_rustdoc_196_changes.md` | `docs\06_toolchain\06_20_rustdoc_196_improvements.md` | Rustdoc 1.96 变更 | Rustdoc 1.96 改进深度解析 {#rustdoc- |
-| 0.60 | `concept\07_future\rust_1_95_stabilized.md` | `docs\06_toolchain\06_21_rust_1_97_features.md` | Rust 1.95.0 稳定特性 | Rust 1.97.0 稳定特性 {#rust-1970-稳 |
-| 0.60 | `concept\07_future\rust_1_96_stabilized.md` | `docs\06_toolchain\06_21_rust_1_97_features.md` | Rust 1.96.0 稳定特性 | Rust 1.97.0 稳定特性 {#rust-1970-稳 |
 | 0.60 | `concept\07_future\rust_1_97_preview.md` | `docs\02_reference\quick_reference\02_rust_197_features_cheatsheet.md` | Rust 1.97 前沿特性预览 | Rust 1.97 特性速查表 {#rust-197-特性速 |
 
 ## 建议

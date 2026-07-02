@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [初学者]
+> **内容分级**: [初学者]
 
 # Rust 起步指南
 
@@ -28,12 +26,14 @@ irm https://rustup.rs | iex
 # macOS / Linux
 curl --proto '=https' --tlsv1.2 -sSf https://rustup.rs | sh
 ```
+
 验证安装：
 
 ```bash
 rustc --version   # 应输出 1.96.0 或更高
 cargo --version
 ```
+
 ---
 
 ## 第一个程序：Hello World
@@ -43,6 +43,7 @@ cargo new hello
 cd hello
 cargo run
 ```
+
 `cargo new` 生成的项目结构：
 
 ```text
@@ -51,6 +52,7 @@ hello/
 └── src/
     └── main.rs     # 程序入口
 ```
+
 ---
 
 ## Cargo 基本操作

@@ -1,99 +1,92 @@
 //! Rust 1.97 稳定特性 —— WASM 目标演示
 //! Rust 1.97 stabilized features —— WASM target demonstration
 //!
-//! 本文件使用 **Rust 1.96.0 等价实现** 演示 Rust 1.97 稳定 API 的语义。
+//! 本文件使用 **Rust 1.96.0 等价实现** 演示 Rust 1.97.0 稳定 API 的语义。
 //! 实际 Rust 1.97 调用以注释形式保留，便于 toolchain 升级到 1.97 后直接替换。
 //!
-//! This module demonstrates Rust 1.97 stabilized APIs using equivalent
+//! This module demonstrates Rust 1.97.0 stabilized APIs using equivalent
 //! implementations that compile on Rust 1.96.0. The actual Rust 1.97 call
 //! sites are kept in comments for easy migration once the toolchain is upgraded.
 
 #![allow(clippy::incompatible_msrv)]
 
+use std::collections::hash_map::DefaultHasher;
+use std::hash::BuildHasherDefault;
 use std::num::NonZeroU32;
 
 /// # Rust 1.97 WASM 相关特性演示
 /// # Rust 1.97 WASM feature demonstration
 ///
-/// 涵盖的稳定 API（按 Rust 1.97 官方列表）：
-/// - `u32::midpoint` / `u32::isqrt` — 无溢出整数运算，适合 WASM32 无浮点场景
-/// - `<*const T>::addr` / `with_addr` — Strict Provenance 地址操作
-/// - `Option::as_slice` — 零成本切片视图
-/// - `NonZeroU32` 科学计数法格式化
+/// 涵盖的稳定 API（按 Rust 1.97.0 官方列表）：
+/// - `NonZero` 位操作：`count_ones`, `leading_zeros`, `trailing_zeros`, `bitand`, `bitor`, `bitxor`
+/// - `char::is_control()` const 稳定化
+/// - `Box::as_ptr`
+/// - `Option::as_slice` / `as_mut_slice`
+/// - `const size_of_val` / `align_of_val`
+/// - `cfg(target_has_atomic_equal_alignment = "ptr")`
+/// - `BuildHasherDefault::new` const 稳定
 pub struct Rust197WasmFeatures;
 
 impl Rust197WasmFeatures {
-    /// 在 32 位 WASM 目标上，`(low + high) / 2` 可能溢出，
-    /// Rust 1.97 `midpoint` 使用位运算避免此问题。
+    /// `NonZeroU32` 位查询与位运算。
     ///
-    /// In 32-bit WASM, `(low + high) / 2` can overflow. Rust 1.97's
-    /// `midpoint` avoids this via bit arithmetic.
-    pub fn wasm_safe_midpoint(low: u32, high: u32) -> u32 {
-        // Rust 1.97: low.midpoint(high)
-        (low & high) + ((low ^ high) >> 1)
+    /// Rust 1.97 在 `NonZeroU*` / `NonZeroI*` 上稳定了位模式查询方法，
+    /// 便于在 WASM 等目标上直接操作非零整数的位表示。
+    pub fn nonzero_bit_ops(n: NonZeroU32) -> (u32, u32, u32, u32, u32, u32) {
+        // 1.97+: n.count_ones(), n.leading_zeros(), n.trailing_zeros()
+        let ones = n.get().count_ones();
+        let leading = n.get().leading_zeros();
+        let trailing = n.get().trailing_zeros();
+
+        let mask = NonZeroU32::new(0b1010).unwrap();
+        // 1.97+: n & mask, n | mask, n ^ mask 直接返回 NonZeroU32
+        let and = n.get() & mask.get();
+        let or = n.get() | mask.get();
+        let xor = n.get() ^ mask.get();
+        (ones, leading, trailing, and, or, xor)
     }
 
-    /// 使用纯整数算法计算平方根（WASM 无浮点依赖）。
-    /// Rust 1.97 提供 `u32::isqrt`。
-    ///
-    /// Computes integer square root without floating-point instructions.
-    /// Rust 1.97 provides `u32::isqrt`.
-    pub fn wasm_integer_sqrt(n: u32) -> u32 {
-        // Rust 1.97: n.isqrt()
-        if n < 2 {
-            return n;
-        }
-        let mut x = n;
-        let mut y = (x + 1) / 2;
-        while y < x {
-            x = y;
-            y = (x + n / x) / 2;
-        }
-        x
+    /// `char::is_control()` 在 Rust 1.97 中变为 `const fn`，
+    /// 使得字符分类可在编译期常量/静态项中使用。
+    pub fn char_is_control(c: char) -> bool {
+        // 1.97+: c.is_control() 可直接在 const 上下文调用
+        matches!(c, '\u{0}'..='\u{1F}' | '\u{7F}'..='\u{9F}')
     }
 
-    /// 获取指针在线性内存中的地址偏移量。
-    /// Rust 1.97 `<*const T>::addr()` 安全地获取此值。
-    ///
-    /// Returns the linear-memory address offset of a pointer.
-    /// Rust 1.97's `<*const T>::addr()` provides the same result safely.
-    pub fn wasm_memory_addr<T>(ptr: *const T) -> usize {
-        // Rust 1.97: ptr.addr()
-        ptr as usize
+    /// 获取 `Box<T>` 中堆分配对象的裸指针。
+    pub fn box_as_ptr<T>(b: &Box<T>) -> *const T {
+        // 1.97+: Box::as_ptr(b)
+        &**b as *const T
     }
 
-    /// 使用新地址构造指针，保留原指针的 provenance。
-    /// Rust 1.97 提供 `<*const T>::with_addr`。
-    ///
-    /// Constructs a pointer with a new address while preserving the original
-    /// provenance. Rust 1.97 provides `<*const T>::with_addr`.
-    pub fn wasm_memory_with_addr<T>(ptr: *const T, new_addr: usize) -> *const T {
-        // Rust 1.97: ptr.with_addr(new_addr)
-        let _ = ptr; // keep provenance relation explicit in the comment above
-        new_addr as *const T
-    }
-
-    /// 通过切片视图避免额外的分支和内存分配。
-    /// Rust 1.97 提供 `Option::as_slice` / `Option::as_mut_slice`。
-    ///
-    /// Converts an `Option<T>` into a `&[T]` view without extra branches or
-    /// allocations. Rust 1.97 provides `Option::as_slice`.
-    pub fn option_as_slice_for_wasm<T>(opt: &Option<T>) -> &[T] {
-        // Rust 1.97: opt.as_slice()
+    /// 将 `Option<T>` 转为只读切片视图。
+    pub fn option_as_slice<T>(opt: &Option<T>) -> &[T] {
+        // 1.97+: opt.as_slice()
         match opt {
             Some(x) => std::slice::from_ref(x),
             None => &[],
         }
     }
 
-    /// 将非零整数格式化为科学计数法。
-    /// Rust 1.97 以前需通过 `.get()` 拿到原始整数再格式化。
-    ///
-    /// Formats a non-zero integer in scientific notation. Before Rust 1.97,
-    /// format via the underlying value using `.get()`.
-    pub fn format_nonzero_for_wasm(n: NonZeroU32) -> String {
-        // Rust 1.97+: format!("{:e}", n)
-        format!("{:e}", n.get())
+    /// 编译期计算值的大小与对齐（1.96 兼容版，仅支持 `Sized` 类型）。
+    pub const fn const_size_and_align_of_val<T: Sized>(_: &T) -> (usize, usize) {
+        // 1.97+: (std::mem::size_of_val(value), std::mem::align_of_val(value))
+        (std::mem::size_of::<T>(), std::mem::align_of::<T>())
+    }
+
+    /// 构造默认哈希器（1.97 后可在 const 上下文调用）。
+    pub const fn build_hasher_default_new() -> BuildHasherDefault<DefaultHasher> {
+        // 1.97+: const HASHER: BuildHasherDefault<DefaultHasher> = BuildHasherDefault::new();
+        BuildHasherDefault::new()
+    }
+
+    /// 演示 `cfg(target_has_atomic_equal_alignment = "ptr")` 的使用位置。
+    #[cfg(all())]
+    pub fn atomic_equal_alignment_note() -> &'static str {
+        // 1.97+:
+        // #[cfg(target_has_atomic_equal_alignment = "ptr")]
+        // fn wasm_atomic_optimized() { /* 指针大小原子与 usize 对齐相同的平台 */ }
+        "cfg(target_has_atomic_equal_alignment = \"ptr\") requires Rust 1.97+"
     }
 }
 
@@ -102,49 +95,50 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_wasm_safe_midpoint() {
-        assert_eq!(Rust197WasmFeatures::wasm_safe_midpoint(0, 100), 50);
-        assert_eq!(
-            Rust197WasmFeatures::wasm_safe_midpoint(u32::MAX - 1, u32::MAX),
-            u32::MAX - 1
-        );
+    fn test_nonzero_bit_ops() {
+        let n = NonZeroU32::new(0b10100).unwrap();
+        let (ones, leading, trailing, and, or, xor) = Rust197WasmFeatures::nonzero_bit_ops(n);
+        assert_eq!(ones, 2);
+        assert_eq!(trailing, 2);
+        assert_eq!(and, 0b10100 & 0b1010);
+        assert_eq!(or, 0b10100 | 0b1010);
+        assert_eq!(xor, 0b10100 ^ 0b1010);
+        assert!(leading > 0);
     }
 
     #[test]
-    fn test_wasm_integer_sqrt() {
-        assert_eq!(Rust197WasmFeatures::wasm_integer_sqrt(16), 4);
-        assert_eq!(Rust197WasmFeatures::wasm_integer_sqrt(15), 3);
-        assert_eq!(Rust197WasmFeatures::wasm_integer_sqrt(0), 0);
-        assert_eq!(Rust197WasmFeatures::wasm_integer_sqrt(1), 1);
+    fn test_char_is_control() {
+        assert!(!Rust197WasmFeatures::char_is_control(' '));
+        assert!(Rust197WasmFeatures::char_is_control('\0'));
+        assert!(Rust197WasmFeatures::char_is_control('\n'));
     }
 
     #[test]
-    fn test_wasm_memory_addr() {
-        let x = 42u32;
-        let addr = Rust197WasmFeatures::wasm_memory_addr(&x);
-        assert_eq!(addr, &x as *const u32 as usize);
+    fn test_box_as_ptr() {
+        let b = Box::new(42);
+        let p = Rust197WasmFeatures::box_as_ptr(&b);
+        assert_eq!(unsafe { *p }, 42);
     }
 
     #[test]
-    fn test_wasm_memory_with_addr() {
-        let x = 42u32;
-        let ptr = &x as *const u32;
-        let new_ptr = Rust197WasmFeatures::wasm_memory_with_addr(ptr, ptr as usize + 4);
-        assert_eq!(new_ptr as usize, ptr as usize + 4);
-    }
-
-    #[test]
-    fn test_option_as_slice_for_wasm() {
+    fn test_option_as_slice() {
         let opt = Some(42);
-        assert_eq!(Rust197WasmFeatures::option_as_slice_for_wasm(&opt), &[42]);
-
+        assert_eq!(Rust197WasmFeatures::option_as_slice(&opt), &[42]);
         let none: Option<i32> = None;
-        assert!(Rust197WasmFeatures::option_as_slice_for_wasm(&none).is_empty());
+        assert!(Rust197WasmFeatures::option_as_slice(&none).is_empty());
     }
 
     #[test]
-    fn test_format_nonzero_for_wasm() {
-        let n = NonZeroU32::new(1000).unwrap();
-        assert_eq!(Rust197WasmFeatures::format_nonzero_for_wasm(n), "1e3");
+    fn test_const_size_and_align_of_val() {
+        const BUF: [u8; 10] = [0; 10];
+        const SIZE_ALIGN: (usize, usize) =
+            Rust197WasmFeatures::const_size_and_align_of_val(&BUF);
+        assert_eq!(SIZE_ALIGN.0, 10);
+        assert_eq!(SIZE_ALIGN.1, 1);
+    }
+
+    #[test]
+    fn test_build_hasher_default_new() {
+        let _ = Rust197WasmFeatures::build_hasher_default_new();
     }
 }

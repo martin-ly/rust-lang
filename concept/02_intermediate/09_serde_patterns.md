@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: 序列化 (Serialization) · 反序列化 (Deserialization) · serde · Serialize · Deserialize · 自定义反序列化 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Serde 序列化模式：Rust 的类型驱动数据转换
@@ -92,6 +90,7 @@ Serde 的核心抽象:
   ├── 序列化代码与手写等效
   └── 无运行时反射开销
 ```
+
 > **设计洞察**: Serde 的**数据模型**是通用抽象层——任何 Rust 类型都可以映射到 Serde 数据模型，任何数据格式都可以从 Serde 数据模型读写。这种解耦使新格式支持只需实现 Serializer/Deserializer。
 > [来源: [Serde Documentation](https://serde.rs/data-model.html)]
 
@@ -121,6 +120,7 @@ graph LR
     C --> G
     C --> I
 ```
+
 > **认知功能**: 此图展示 Serde 的**三层架构**——Rust 类型 ↔ Serde 数据模型 ↔ 具体格式。
 > [来源: [Serde Docs]]
 > **使用建议**: 绝大多数场景使用 `#[derive(Serialize, Deserialize)]`；仅在需要自定义行为时手动实现 Trait。
@@ -158,6 +158,7 @@ Serde 支持的格式生态:
   ├── 所有格式共享相同的 Serialize/Deserialize Trait
   └── 切换格式只需更改 Serializer/Deserializer
 ```
+
 > **格式解耦价值**: 业务逻辑与数据格式**完全解耦**——今天用 JSON，明天切换为二进制，只需改一行代码（`serde_json::to_string` → `bincode::serialize`）。
 > [来源: [Serde Ecosystem](https://serde.rs/#data-formats)]
 
@@ -227,6 +228,7 @@ impl Deserialize for User {
     }
 }
 ```
+
 > **展开要点**: Derive 宏（Macro）生成的是**手写的 Trait 实现的机械版本**。编译器内联后，序列化代码与手写实现等效——零运行时（Runtime）开销。
 > [来源: [Serde Book — Derive](https://serde.rs/derive.html)]
 
@@ -287,6 +289,7 @@ impl<'de> Deserialize<'de> for PhoneNumber {
     }
 }
 ```
+
 > **自定义场景**: 当需要**验证**（反序列化时检查格式）、**转换**（如将枚举（Enum）序列化为字符串）或**隐藏**（不序列化某些字段）时使用自定义实现。
 > [来源: [Serde Book — Custom Serialization](https://serde.rs/custom-serialization.html)]
 
@@ -317,6 +320,7 @@ Visitor 模式的核心作用:
   ├── 类型不匹配时自动报告
   └── 缺失字段自动检测
 ```
+
 > **Visitor 洞察**: Visitor 模式将**数据解析**（Deserializer 负责）与**对象构建**（Visitor 负责）分离，使两者可以独立演化和组合。
 > [source: [Serde Book — Visitor](https://serde.rs/impl-deserializer.html)]
 
@@ -376,6 +380,7 @@ Visitor 模式的核心作用:
 
   let resp: Response<User> = serde_json::from_str(json)?;
 ```
+
 > **最佳实践**: 优先使用 derive + 属性满足需求；只在复杂验证/转换场景手写 Trait 实现。
 > [来源: [Serde Attributes](https://serde.rs/attributes.html)]
 
@@ -400,6 +405,7 @@ graph TD
     style TRUE2 fill:#c8e6c9
     style ALT1 fill:#fff3e0
 ```
+
 > **认知功能**: 此决策树评估是否使用 Serde。核心判断标准是**性能需求**和**格式灵活性需求**。
 > **使用建议**: 绝大多数场景使用 Serde；仅在极致性能（如网络协议栈、零拷贝解析器）或特殊二进制格式时考虑手写。
 > **关键洞察**: Serde 的**真正价值**不是序列化本身，而是**类型系统（Type System）与数据格式的桥梁**——编译期保证类型安全，运行时处理任意格式。
@@ -432,6 +438,7 @@ graph TD
 ├── 但许多格式 crate 需要 std
 ├── 嵌入式场景需选择支持 no_std 的格式（如 postcard）
 ```
+
 > **边界要点**: Serde 的边界主要与**编译时间**和**动态类型**相关——它是静态类型系统（Type System）的最佳搭档，但在高度动态的场景中灵活性受限。
 > [source: [Serde Limitations](https://serde.rs/)]
 
@@ -478,6 +485,7 @@ graph TD
   ✅ 使用流式解析（serde_json::StreamDeserializer）
      或分块读取
 ```
+
 > **陷阱总结**: Serde 的错误大多源于**数据模型不匹配**（JSON 结构与 Rust 结构不对应）或**性能假设**（大文件、高频序列化）。
 > [来源: [Serde Common Issues](https://serde.rs/help.html)]
 
@@ -489,6 +497,7 @@ graph TD
 | 来源 | 可信度 | 说明 |
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 |:---|:---:|:---|
 | [Serde Documentation](https://serde.rs/) | ✅ 一级 | 官方网站 |
@@ -570,6 +579,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**:
 > Serde 的 `Deserialize` derive 默认要求所有字段存在。
 > 缺失字段会导致反序列化错误（`Err`）。
@@ -613,6 +623,7 @@ struct InnerFixed {
     inner_id: String, // ✅ 无冲突
 }
 ```
+
 > **修正**:
 > `#[serde(flatten)]` 将嵌套结构体（Struct）的字段展开到父结构体级别。
 > 若嵌套结构体（Struct）与父结构体有同名字段，Serde 的反序列化逻辑会产生歧义——它尝试按顺序匹配字段，可能导致类型不匹配或数据错位。
@@ -638,6 +649,7 @@ fn main() {
     println!("{}:{}", cfg.host, cfg.port);
 }
 ```
+
 > **修正**:
 > `#[serde(deny_unknown_fields)]` 在反序列化时检查输入中是否包含 struct 未定义的字段。
 > 若存在未知字段，返回 `Err`（`unknown field \`extra\`, expected \`host\` or \`port\``）。
@@ -667,6 +679,7 @@ fn main() {
     // msg 实际是 Message::Text("42")，不是 Number(42)
 }
 ```
+
 > **修正**:
 > `#[serde(untagged)]` 使枚举在序列化时不包含变体标签（如 `{"Text":"hello"}` → `"hello"`），反序列化时按声明顺序尝试每个变体，第一个成功的被选中。
 > 这引入**顺序敏感性**：`Text(String)` 在 `Number(i32)` 之前，因此 `"42"` 被解析为 `Text` 而非 `Number`。
@@ -702,6 +715,7 @@ fn main() {
     assert!(restored.timeout.is_none());
 }
 ```
+
 > **修正**:
 > `skip_serializing_if` 在条件满足时省略字段，反序列化时缺失字段使用默认值（`Option::None`）。
 > 这导致**信息丢失**：无法区分"显式设置 None"和"未提供该字段"。
@@ -734,6 +748,7 @@ fn main() {
     println!("{}", config.name);
 }
 ```
+
 > **修正**: serde 的**字段可见性**不影响反序列化：私有字段同样需要匹配。
 > 控制反序列化行为：
 >
@@ -768,6 +783,7 @@ fn main() {
     // let msg: Message = serde_json::from_str(bad_json).unwrap();
 }
 ```
+
 > **修正**:
 > serde 的**枚举表示**策略：
 >

@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 >
 > **本节关键术语**: Miri · 未定义行为（UB） · Stacked Borrows · Tree Borrows · 别名规则（Aliasing Rules） · MIR 解释器 — [完整对照表](../00_meta/terminology_glossary.md)
 >

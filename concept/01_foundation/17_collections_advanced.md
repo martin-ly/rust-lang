@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: 集合 (Collection) · 迭代器 (Iterator) · Vec · HashMap · BTreeMap · 自定义集合 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析
@@ -105,6 +103,7 @@ BTreeMap 核心特征:
 
   BTreeSet<T> = BTreeMap<T, ()>  // 值单元化
 ```
+
 > **认知功能**: BTreeMap 的核心优势在于**有序性**——当需要按顺序遍历键或执行范围查询时，BTreeMap 是 HashMap 无法替代的选择。
 > [来源: [std::collections::BTreeMap](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)]
 > **关键洞察**: Rust 的 BTreeMap 每个内部节点存储 6-11 个元素（B=6），在内存局部性和树高度之间取得平衡。相比 HashMap，BTreeMap 的迭代器（Iterator）提供稳定的按序遍历保证。
@@ -138,6 +137,7 @@ VecDeque 核心特征:
       ├── BFS 队列
       └── 任务调度队列
 ```
+
 > **认知功能**: VecDeque 解决了 Vec 的**前端插入性能问题**——Vec 的 insert(0) 是 O(n)，而 VecDeque 的 push_front 是 O(1)。
 > [来源: [std::collections::VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html)]
 > **关键洞察**: VecDeque 的环形缓冲区通过模运算实现逻辑循环，当 head == tail 时缓冲区为空；当 (tail + 1) % cap == head 时缓冲区满（使用空槽区分满/空）。
@@ -173,6 +173,7 @@ BinaryHeap 核心特征:
   注意: Rust 的 BinaryHeap 是最大堆
         如需最小堆，可包装 Reverse<T> 或自定义 Ord
 ```
+
 > **认知功能**: BinaryHeap 在**仅需访问极值**的场景下比 BTreeMap 更高效——虽然两者都是 O(log n) 插入，但 BinaryHeap 常数因子更小，且无需存储键的比较结构。
 > [来源: [std::collections::BinaryHeap](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html)]
 > **关键洞察**: BinaryHeap 不支持高效的中途删除或更新——如果需要 decrease-key 操作，应使用具有额外索引结构的堆（如 `priority-queue` crate）。
@@ -219,6 +220,7 @@ Rust HashMap 的 Hasher 生态:
   // 或
   let map: HashMap<K, V, ahash::RandomState> = HashMap::default();
 ```
+
 > **认知功能**: 默认 SipHash 的**安全性溢价**在内部表、编译器数据结构等可信输入场景下是不必要的——此时切换到 FxHash 可获得 2-4 倍性能提升。
 > [来源: [rustc-hash crate](https://github.com/rust-lang/rustc-hash)] · [来源: [ahash crate](https://docs.rs/ahash/latest/ahash/)]
 > **关键洞察**: `hashbrown` crate（Rust 标准库 HashMap 的实现基础）默认使用 `ahash`，它在随机种子和性能之间取得了良好平衡，已成为社区事实标准。
@@ -256,6 +258,7 @@ BTreeMap 节点结构（B=6，即 6-11 键/节点）:
       ├── BTreeMap: 有序，范围查询，树高 ~log_6(n)
       └── HashMap:  无序，O(1) 均摊查找，连续数组存储
 ```
+
 > **内存洞察**: BTreeMap 的**叶子链表**优化使得顺序遍历无需回溯父节点——直接从最左叶子开始，沿 next 指针遍历即可。
 > [来源: [std::collections::BTreeMap — Implementation Notes](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)]
 
@@ -295,6 +298,7 @@ VecDeque<T> 内存布局:
   ├── make_contiguous(): 重新排列为单一连续切片
   └── reserve(): 确保容量，可能触发重新分配
 ```
+
 > **内存洞察**: VecDeque 的**双端增长**通过模运算实现逻辑循环，避免了 Vec 前端插入时的 O(n) 数据搬移。当缓冲区满时，VecDeque 分配更大的缓冲区并将元素重新排列为连续布局。
 > [来源: [std::collections::VecDeque — Implementation](https://doc.rust-lang.org/std/collections/struct.VecDeque.html)]
 
@@ -327,6 +331,7 @@ BinaryHeap<T> 数组表示（最大堆）:
      80 与 children(0)=[50, 90] 比较: 90 最大，交换
      80 与 children(2)=[60, 70] 比较: 80 最大，停止
 ```
+
 > **内存洞察**: BinaryHeap 的**完全二叉树**性质保证了数组表示无浪费——n 个元素的堆恰好使用 n 个数组槽位。由于是完全树，堆高度严格为 floor(log2(n))。
 > [来源: [Wikipedia — Binary Heap](https://en.wikipedia.org/wiki/Binary_heap)]
 
@@ -354,6 +359,7 @@ Hasher 性能基准对比（64-bit key，单线程）:
   ├── 编译器/内部表 → fxhash / rustc-hash
   └── 大文件/校验和 → xxHash / seahash
 ```
+
 > **性能洞察**: FxHash 在**小键（< 16 字节）**场景下表现尤为出色，这正是编译器符号表和 AST 节点映射的典型工作负载。对于大键或需要随机种子的场景，ahash 是更好的默认选择。
 > [来源: [Rust Performance Book — Hashing](https://nnethercote.github.io/perf-book/hashing.html)]
 
@@ -391,6 +397,7 @@ Hasher 性能基准对比（64-bit key，单线程）:
   └─────────────────────┴───────────┴───────────┘
   * BinaryHeap 不支持直接更新/删除非极值元素
 ```
+
 > **选型原则**: 默认使用 **Vec** 和 **HashMap**；需要**双端操作**时用 **VecDeque**；需要**有序性**时用 **BTreeMap**；仅需**极值访问**时用 **BinaryHeap**。
 > [来源: [TRPL — Collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 
@@ -429,6 +436,7 @@ graph TD
     style V fill:#7cb342,color:#fff
     style LL fill:#f5a623,color:#fff
 ```
+
 > **认知功能**: 此决策树从"是否需要按键访问"这一根本问题出发，引导至最优集合选择。每个分支对应一个不可替代的特征需求。
 > **使用建议**: 从顶部开始，依次回答每个问题。默认分支（否）通常指向更通用的解决方案。
 
@@ -470,6 +478,7 @@ graph LR
         BH1 --> BH2 --> BH3
     end
 ```
+
 > **认知功能**: 此图揭示四种集合的**内存分配模式**差异——VecDeque、HashMap、BinaryHeap 都是单一连续分配（缓存友好），而 BTreeMap 是多节点分散分配（范围查询能力强）。
 > [来源: [hashbrown implementation](https://github.com/rust-lang/hashbrown)] · [来源: [std::collections internals](https://doc.rust-lang.org/std/collections/index.html)]
 > **关键洞察**: 缓存友好性不是唯一指标——BTreeMap 的非连续布局换来的有序性，在范围查询场景下能弥补缓存劣势。
@@ -509,6 +518,7 @@ graph LR
   ├── 反例: ahash 在多数场景下接近 fxhash 速度且更安全
   └── 结论: ❌ 错误 — 安全性与速度需权衡
 ```
+
 > **层次一致性（Coherence）**: 反命题分析建立在对数据结构**边界条件**的精确理解上——没有 universally optimal 的集合，只有特定约束下的最优解。
 
 ---
@@ -540,6 +550,7 @@ graph LR
   └── 当已知全部元素时，优先使用 BinaryHeap::from(vec)
   > [来源: [Wikipedia — Binary Heap — Building](https://en.wikipedia.org/wiki/Binary_heap)]
 ```
+
 ---
 
 ## 六、常见陷阱
@@ -572,6 +583,7 @@ graph LR
   ├── 修复: 设计算法避免连续依赖，或使用 Vec
   └── 认知: make_contiguous 是 O(n) 重排操作
 ```
+
 ---
 
 ## 七、来源与延伸阅读
@@ -606,6 +618,7 @@ fn main() {
     println!("{:?}", map);
 }
 ```
+
 ### 编译验证示例
 
 ```rust
@@ -620,6 +633,7 @@ fn main() {
     assert_eq!(keys, vec![1, 2, 3]);
 }
 ```
+
 ```rust
 use std::collections::VecDeque;
 
@@ -631,6 +645,7 @@ fn main() {
     assert_eq!(deque.pop_back(), Some(2));
 }
 ```
+
 ```rust
 use std::collections::BinaryHeap;
 
@@ -643,6 +658,7 @@ fn main() {
     assert_eq!(heap.pop(), Some(2));
 }
 ```
+
 ## 相关概念文件
 
 - [Type System](04_type_system.md) — 类型系统（Type System）基础
@@ -704,6 +720,7 @@ struct PointFixed {
     y: i32,
 }
 ```
+
 > **修正**: `BTreeMap` 基于 B-Tree 实现，要求键具有全序关系（`Ord` trait）。与 `HashMap`（要求 `Hash + Eq`）不同，`BTreeMap` 使用比较而非哈希。`Ord` 要求满足反对称、传递和完全性（任何两个元素可比较）。自定义类型需手动实现 `Ord` 或 derive（derive 按字段顺序字典序比较）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 12.2 边界测试：`VecDeque` 容量与索引的环绕（逻辑错误）
@@ -736,6 +753,7 @@ fn fixed() {
     }
 }
 ```
+
 > **修正**: `VecDeque` 使用环形缓冲区（circular buffer）实现 O(1) 双端操作。其内部存储可能"环绕"——逻辑首元素不一定在物理索引 0 处。直接索引 `deque[i]` 访问的是物理位置，而非逻辑第 i 个元素。应使用 `iter()`、`pop_front()`/`pop_back()` 等 API 保证逻辑顺序。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.3 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）
@@ -754,6 +772,7 @@ fn main() {
     println!("{:?}", value);
 }
 ```
+
 > **修正**: `HashMap::entry` 需要 `&mut self`，因为 `or_insert` 可能修改 map（插入新键）。若同时持有 `get` 返回的 `&V`，则存在 `&mut self` 与 `&V` 的借用（Borrowing）冲突——即使 `entry` 的键与 `get` 的键不同，编译器也无法证明不重叠。解决方案：1) 先 `clone` 需要的值，再调用 `entry`；2) 使用 `HashMap::get_mut` 获取 `&mut V`，直接修改；3) 用 `if let Some(v) = map.get_mut("key")` 替代 `entry` API。这与 Java 的 `Map::compute`（无借用检查，可并发修改）或 C++ 的 `std::unordered_map`（迭代器（Iterator）失效规则）不同——Rust 的借用检查在编译期阻止"读的同时写"，即使逻辑上安全。来源: [The Rust Programming Language] · 来源: [Rust Standard Library]
 
 ### 10.4 边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错误）
@@ -773,6 +792,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**:
 >
 > `BTreeMap::range` 返回不可变迭代器（Iterator），因为遍历过程中修改树结构会破坏迭代器状态（节点指针悬垂）。
@@ -813,6 +833,7 @@ fn main() {
     // assert!(set.contains(&BadHash { x: 1 }));
 }
 ```
+
 > **修正**:
 >
 > `Hash` trait 的实现必须满足**一致性（Coherence）**：若 `a == b`，则 `hash(a) == hash(b)`，且同一对象的哈希值在对象不变时应恒定。
@@ -841,6 +862,7 @@ fn main() {
     println!("{:?}", values);
 }
 ```
+
 > **修正**:
 > `HashMap::entry` 返回 `Entry` enum，它**可变借用（Mutable Borrow）**整个 map（`&mut self`）。
 > 在 `entry` 调用期间，不能有任何对 map 的其他借用（无论是可变还是不可变）。
@@ -872,6 +894,7 @@ fn main() {
     println!("{:?}", map);
 }
 ```
+
 > **修正**:
 > `BTreeMap` 基于**排序键**维护平衡二叉搜索树。键的排序位置决定树结构，若键被修改，排序不变性破坏，树操作可能产生错误结果或 panic。
 > Rust 的 API 设计禁止键修改：`keys()` 返回不可变引用（Mutable Reference），`values_mut()` 只返回值的可变引用。

@@ -1,3 +1,5 @@
+> **受众**: [研究者]
+>
 # Rust 编译器内部原理
 
 > **内容重叠提示**: 本文与 [`knowledge/04_expert/01_compiler_internals.md`](../../knowledge/04_expert/01_compiler_internals.md) 内容高度重叠。`knowledge/` 版本提供专项深入；`concept/` 版本为项目权威主轨。

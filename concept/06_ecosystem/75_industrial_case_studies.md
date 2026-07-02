@@ -1,3 +1,5 @@
+> **受众**: [研究者]
+>
 # Rust 工业应用案例研究
 
 > **EN**: Industrial Rust Adoption Case Studies

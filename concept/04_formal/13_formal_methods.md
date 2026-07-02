@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [专家级]
+> **内容分级**: [专家级]
 
 # 形式化方法在 Rust 中的应用
 >
@@ -106,6 +104,7 @@
   ├── 形式化验证工具链丰富
   └── 从"安全"到"正确"的自然延伸
 ```
+
 > **认知功能**: **Rust 的类型系统（Type System）已经将验证提升到编译期**——形式化方法是向更高层次的延伸。
 > [来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]
 
@@ -146,6 +145,7 @@
   ├── 动态不变式
   └── debug_assert!
 ```
+
 > **方法洞察**: **不同验证方法适用于不同场景**——模型检查自动化高，演绎验证能力更强。
 > [来源: [Formal Methods in Software Engineering](https://www.amazon.com/Formal-Methods-Software-Engineering-Introduction/dp/981156881X)]
 
@@ -189,6 +189,7 @@ Kani:
   ├── 递归有限深度
   └── 大型代码需模块化
 ```
+
 > **Kani 洞察**: **Kani 是 Rust 形式化验证的入门工具**——无需规范，自动发现错误。
 > [来源: [Kani Documentation](https://model-checking.github.io/kani/)]
 
@@ -232,6 +233,7 @@ Creusot:
   ├── 学习曲线陡
   └── 复杂代码证明困难
 ```
+
 > **Creusot 洞察**: **Creusot 是 Rust 演绎验证的标杆**——Pearlite 规范语言与 Rust 语法无缝集成。
 > [来源: [Creusot](https://github.com/creusot-rs/creusot)]
 
@@ -268,6 +270,7 @@ Miri:
   ├── 并发随机调度
   └── 大型程序慢
 ```
+
 > **Miri 洞察**: **Miri 是 Rust unsafe 代码的"试金石"**——在运行前发现潜在的未定义行为。
 > [来源: [Miri](https://github.com/rust-lang/miri)]
 
@@ -307,6 +310,7 @@ Miri:
   ├── 并发原语
   └── 内存分配器
 ```
+
 > **安全洞察**: **形式化验证将 unsafe 代码从"信任"转变为"证明"**——数学保证替代人工审查。
 > [来源: [Rust Formal Verification](https://alastairreid.github.io/rust-verification-tools/)]
 
@@ -357,6 +361,7 @@ Miri:
       });
   }
 ```
+
 > **并发洞察**: **并发验证是形式化方法最具价值的应用**——发现人类难以察觉的竞争条件。
 > [来源: [loom](https://docs.rs/loom/latest/loom/)]
 
@@ -379,6 +384,7 @@ graph TD
     style VERIFY fill:#c8e6c9
     style TEST fill:#fff3e0
 ```
+
 > **认知功能**: **关键安全代码需要形式化验证，一般代码测试足够**——成本效益分析决定验证深度。
 > [来源: [Rust Verification Tools](https://alastairreid.github.io/rust-verification-tools/)]
 
@@ -412,6 +418,7 @@ graph TD
 ├── 工具使用复杂
 └── 缓解: 培训、文档、社区支持
 ```
+
 > **边界要点**: 形式化方法的边界与**状态空间**、**规范**、**工具**、**性能**和**学习**相关。
 > [来源: [Formal Methods in Rust](https://arxiv.org/abs/2305.02275)]
 
@@ -455,6 +462,7 @@ graph TD
   ✅ 区分验证代码和生产代码
      // 使用条件编译
 ```
+
 > **陷阱总结**: 形式化验证的陷阱主要与**信任过度**、**规范质量**、**工具限制**、**时机**和**性能**相关。
 > [来源: [Rust Verification Tools Survey](https://arxiv.org/abs/2305.02275)]
 
@@ -481,6 +489,7 @@ fn main() {
     println!("verified: {}", x);
 }
 ```
+
 ## 相关概念文件
 
 - [Verification Toolchain](05_verification_toolchain.md) — 验证工具链
@@ -525,6 +534,7 @@ fn fixed() {
     }
 }
 ```
+
 > **修正**:
 > 形式化验证工具（Kani、Miri、Prusti）的目标是证明 Rust 代码的安全性。
 > 对于 safe Rust，编译器已保证无 UB；对于 unsafe Rust，形式化工具验证 unsafe 块的前置条件是否满足。
@@ -552,6 +562,7 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 > **修正**:
 > 形式化方法中的 **Hoare 逻辑** 使用 `{P} C {Q}` 三元组描述程序正确性——前置条件 `P` 下执行命令 `C`，结果满足后置条件 `Q`。
 > 循环需要 **循环不变量**（loop invariant）——在每次迭代前后保持为真的断言。
@@ -576,6 +587,7 @@ fn main() {
     let _ = double(5);
 }
 ```
+
 > **修正**:
 > Rust 的契约（contracts）生态（`contracts` crate、实验性的内置契约）提供运行时（Runtime）前置/后置条件检查。
 > 与形式化验证（编译期证明）不同，运行时契约有性能开销，且只在实际执行路径上检查（不保证所有路径）。
@@ -602,6 +614,7 @@ fn verify_loop() {
     assert!(sum == 499500);
 }
 ```
+
 > **修正**:
 >
 > Kani（模型检查器）通过**有界模型检查**（bounded model checking）验证 Rust 代码：将循环展开为固定次数的迭代，检查所有路径。
@@ -630,6 +643,7 @@ fn verify_loop_unbounded() {
     assert!(sum == 4950);
 }
 ```
+
 > **修正**: 模型检查器（Kani、CBMC）通过展开循环验证程序。`#[kani::unwind(10)]` 限制循环展开次数，若实际迭代超过 10 次，验证失败（"unwinding assertion"）。无界循环（`while` 依赖外部输入）在模型检查中本质不可判定——需提取循环不变量（`sum == i * (i - 1) / 2`）或用归纳法证明。形式化验证的**可扩展性**是核心挑战：1) 状态空间随变量和路径指数增长；2) 复杂数据结构（链表、图）的验证需抽象（用长度代替具体元素）；3) 并发程序的验证需考虑所有交错（interleaving）。这与数学证明（可处理无限，但需人类智慧）或测试（有限覆盖，但可扩展）形成能力光谱——形式化验证在关键代码（密码学、安全模块（Module））中提供最高保证，但成本高昂。[来源: [Kani Documentation](https://model-checking.github.io/kani/)] · [来源: [Bounded Model Checking](https://en.wikipedia.org/wiki/Model_checking#Bounded_model_checking)]
 
 ### 10.8 边界测试：不可变借用与可变借用的冲突
@@ -643,6 +657,7 @@ fn main() {
     println!("{:?}", r);
 }
 ```
+
 > **修正**: **借用（Borrowing）规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
 
 ## 嵌入式测验（Embedded Quiz）

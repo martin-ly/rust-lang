@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Compiletest · UI Test · Package Test · Tidy · Crater · rustc-perf · Miri · `distcheck` — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # rustc 编译器测试体系
@@ -60,6 +58,7 @@ rustc 测试体系
 ├── 生态系统测试（Crater）
 └── 性能测试（rustc-perf）
 ```
+
 > [来源: Rustc Dev Guide — Testing the compiler](https://rustc-dev-guide.rust-lang.org/tests/intro.html)
 
 ---
@@ -84,6 +83,7 @@ rustc 测试体系
 ./x test tests/ui
 ./x test tests/mir-opt --bless
 ```
+
 > **关键洞察**: UI 测试是 rustc 测试中最具特色的部分，它把“错误信息应该长什么样”也纳入了回归保护。
 >
 > [来源: Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html)
@@ -99,6 +99,7 @@ rustc 测试体系
 ./x test library/core
 ./x test compiler/rustc_data_structures
 ```
+
 - 标准库严重依赖文档测试；
 - 编译器 crate 通常禁用文档测试；
 - 测试文件单独放在 `tests/` 子模块（Module），避免修改测试时重编译整个 crate。
@@ -120,12 +121,14 @@ Tidy 是 Rust 仓库的自定义检查工具，负责：
 ./x test tidy
 ./x test tidy --bless
 ```
+
 ### rustfmt
 
 ```bash
 ./x fmt
 ./x fmt --check
 ```
+
 ---
 
 ## 五、工具测试与 Book 文档测试
@@ -139,6 +142,7 @@ Tidy 是 Rust 仓库的自定义检查工具，负责：
 ./x test src/tools/clippy
 ./x test src/tools/miri --test-args padding
 ```
+
 ### Book 文档测试
 
 官方书籍（TRPL、Rustc Dev Guide 等）中的代码示例通过 `rustdoc --test` 验证：
@@ -146,6 +150,7 @@ Tidy 是 Rust 仓库的自定义检查工具，负责：
 ```bash
 ./x test src/doc/book
 ```
+
 ### Linkchecker
 
 检查所有文档链接是否有效：
@@ -153,6 +158,7 @@ Tidy 是 Rust 仓库的自定义检查工具，负责：
 ```bash
 ./x test linkchecker
 ```
+
 ### distcheck
 
 验证源码分发 tarball 能完整解压、构建并通过测试：
@@ -160,6 +166,7 @@ Tidy 是 Rust 仓库的自定义检查工具，负责：
 ```bash
 ./x test distcheck
 ```
+
 ---
 
 ## 六、生态系统测试：Crater
@@ -174,6 +181,7 @@ Crater 是 Rust 项目的生态回归测试基础设施：
 # 典型使用方式（需要 Crater 服务权限）
 crater run start=master end=pr-branch
 ```
+
 > [来源: Rustc Dev Guide — Ecosystem testing](https://rustc-dev-guide.rust-lang.org/tests/intro.html#ecosystem-testing)
 
 ---

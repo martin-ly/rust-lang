@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [专家级]
+> **内容分级**: [专家级]
 
 # 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)
 >
@@ -109,6 +107,7 @@ DO-178C 软件生命周期:
   软件质量保证 (Software Quality Assurance)
   合格审定联络 (Certification Liaison)
 ```
+
 > **认知功能**: DO-178C 的核心洞察是**验证强度必须与失效影响成正比**——A 级软件的验证深度远高于 D 级软件。Rust 的所有权系统可以在编译期消除一整类内存安全（Memory Safety）错误，相当于为所有等级提供了"零成本"的额外验证层。
 > [来源: [DO-178C Introductory Course - RTCA](https://www.rtca.org/)]
 
@@ -171,6 +170,7 @@ DO-178C 目标类别与 Rust 映射:
   ├── 数据耦合分析 → 借用检查器 + Send/Sync 分析
   └── 控制耦合分析 → CFG 分析 + Kani 状态空间探索
 ```
+
 > **认知功能**: Rust 的类型系统（Type System）和所有权模型在编译期自动满足了 DO-178C 中大量与"数据耦合"、"内存安全（Memory Safety）"相关的验证目标——这是传统 C/C++ 航空软件需要额外工具（如 Polyspace、Astrée）才能实现的。
 > [来源: [DO-178C Section 6.0](https://www.rtca.org/)]
 
@@ -200,6 +200,7 @@ DO-333 形式化方法 → Rust 工具映射:
   ├── Prusti     → Viper 框架 + 分离逻辑
   └── TrustInSoft Analyzer → C 抽象解释 (FFI 边界)
 ```
+
 ### 3.1 定理证明 (Theorem Proving)
 >
 >
@@ -226,6 +227,7 @@ Rust 定理证明工具对比:
           forall|k: int| 0 <= k < r ==> v[k] < x,
   { ... }
 ```
+
 ```text
   Creusot:
   ├── 基础: Why3 平台 + Rust MIR
@@ -248,6 +250,7 @@ Rust 定理证明工具对比:
   ├── 自动化: 低
   └── 局限: 研究原型，工具链不成熟
 ```
+
 > **定理证明洞察**: 定理证明工具链提供最强的验证保证，但成本最高。在航空 A/B 级软件中，定理证明通常用于验证最核心的安全算法（如飞行控制律、故障检测逻辑）。
 > [来源: [DO-333 FM.6.1 - Theorem Proving Objectives](https://www.rtca.org/)]
 
@@ -277,6 +280,7 @@ Rust 模型检查工具对比:
       assert_eq!(result.rotate_right(n), x);
   }
 ```
+
 ```text
   Miri:
   ├── 基础: MIR (Mid-level IR) 解释器
@@ -292,6 +296,7 @@ Rust 模型检查工具对比:
   ├── 规格: loom::model(|| { ... })
   └── 局限: 状态空间随线程数指数增长
 ```
+
 > **模型检查洞察**: Kani 和 Miri 是 Rust 形式化验证生态中**最实用**的入口工具——无需规格标注即可自动发现错误，非常适合 DO-178C 中"基于需求的测试"和"结构覆盖分析"的补充验证。
 > [来源: [Kani Documentation](https://model-checking.github.io/kani/)]
 
@@ -318,6 +323,7 @@ Rust 抽象解释工具:
       a + b
   }
 ```
+
 ```text
   编译器常量传播/优化:
   ├── rustc 的 MIR 常量传播
@@ -331,6 +337,7 @@ Rust 抽象解释工具:
   ├── 能力: 运行时错误消除证明
   └── 局限: 不直接分析 Rust 代码
 ```
+
 > **抽象解释洞察**: Prusti 的注解风格与 DO-333 的"规格即文档"理念高度契合。虽然工具成熟度不及 Kani，但其分离逻辑基础与 Rust 所有权模型在理论上有天然的同构性。
 > [来源: [Viper Project](https://www.pm.inf.ethz.ch/research/viper.html)]
 
@@ -396,6 +403,7 @@ Rockwell Collins 双通道架构:
   ├── 模型检查验证状态机无死锁
   └── 抽象解释验证数值范围安全
 ```
+
 **原系统技术栈**: AAMP7 处理器、Ada/SPARK、PVS 定理证明器。
 
 ### 5.2 适配 Rust 的形式化验证方案
@@ -442,6 +450,7 @@ Rust 适配方案:
   │ 合格编译器      │ Ferrocene ( rustc 鉴定版 )   │
   └─────────────────┴─────────────────────────────┘
 ```
+
 > **适配洞察**: Rust 的所有权系统提供了 Ada/SPARK 中指针安全规则（Access Type Rules）的现代化替代，而 Verus 的规格语言比 SPARK 的 Anna 注解更接近 Rust 原生语法，降低了形式化验证的学习成本。
 > [来源: [SPARK Pro - AdaCore](https://www.adacore.com/about-spark)]
 
@@ -485,6 +494,7 @@ DO-178C 要求验证过程必须证明：源代码中验证通过的属性在目
 
   关键问题: 如何证明 P(src) → P(obj) ?
 ```
+
 ### 6.2 Ferrocene 的合格编译论证
 >
 >
@@ -522,6 +532,7 @@ Ferrocene 合格编译器策略:
   │ 鉴定状态        │ 已用于航空认证      │ 进行中 (core/alloc)│
   └─────────────────┴────────────────────┴────────────────────┘
 ```
+
 > **Property Preservation 洞察**: Ferrocene 目前采用的策略是**过程合规 + 降级使用**——在 LLVM 后端尚未完全形式化的情况下，通过限制优化级别、增加测试覆盖和独立验证来弥补。这与传统 C 编译器（如 GCC/Clang）的鉴定策略类似，但 Rust 的前端（借用检查器 + MIR）提供了更强的语义保证基础。
 > [来源: [Ferrocene - Qualification Strategy](https://ferrocene.dev/)]
 
@@ -572,6 +583,7 @@ Rust 工具鉴定路径:
   ├── Prusti: 学术项目，维护不稳定
   └── 鉴定路径: 当前不推荐用于认证项目
 ```
+
 > **工具鉴定洞察**: 当前 Rust 形式化验证生态中，**唯一具有明确鉴定路径的是 Ferrocene 编译器**。其他验证工具（Kani、Verus、Miri）虽然技术上成熟，但缺乏 DO-330 要求的完整过程文档和独立验证。对于航空认证项目，当前可行的策略是：使用 Ferrocene 编译器 + 传统测试/评审（满足 DO-178C），形式化工具作为补充证据（DO-333 FM）。
 > [来源: [DO-330 Tool Qualification Guidance](https://www.rtca.org/)]
 
@@ -609,6 +621,7 @@ Ferrocene 认证分层:
   ├── 环境变量、命令行参数 (env)
   └── 原因: 依赖于操作系统接口，行为平台相关
 ```
+
 **航空航天开发影响**:
 
 ```text
@@ -630,6 +643,7 @@ Ferrocene 认证分层:
   ├── async/await 未认证 → 同步模型优先
   └── panic_handler 需自定义 → 避免 unwind
 ```
+
 > **Ferrocene 洞察**: Ferrocene 的 `core` 认证是 Rust 进入航空领域的**关键里程碑**——它意味着 Rust 的最小安全子集已经过独立机构的审查，其内存安全（Memory Safety）保证可被认证机构接受。这对于替代传统 C/C++ 航空嵌入式代码具有战略意义。
 > [来源: [Ferrocene - Certification Scope](https://ferrocene.dev/)]
 
@@ -671,6 +685,7 @@ Rust 的隐式形式化验证层:
   │ 形式化基础          │ 弱 (C 语义复杂)      │ 强 (RustBelt 证明)  │
   └─────────────────────┴─────────────────────┴─────────────────────┘
 ```
+
 **安全关键软件的成本效益**:
 
 ```text
@@ -691,6 +706,7 @@ Rust 的隐式形式化验证层:
 
   净效益: 验证阶段成本降低，但需前期投资培训
 ```
+
 > **Rust 优势洞察**: Rust 的所有权系统本质上是一个**全自动的、编译期运行的轻量级形式化验证器**。它验证的属性（内存安全、无数据竞争）恰好是航空航天软件中最难通过传统测试穷尽的属性。这意味着 Rust 程序进入形式化验证阶段时，已经排除了大量底层错误，使验证资源可以集中在功能正确性上。
 > [来源: [RustBelt - POPL 2018](https://doi.org/10.1145/3158154)]
 
@@ -725,6 +741,7 @@ Trait 系统的形式化缺口:
   ├── 优先使用具体类型 + 有限的泛型抽象
   └── 等待 RefinedRust 等项目的 Trait 形式化进展
 ```
+
 ### 10.2 Unsafe Rust 缺口
 >
 >
@@ -750,6 +767,7 @@ Unsafe Rust 的形式化缺口:
   ├── 对 unsafe 代码使用 Kani 符号执行探索边界条件
   └── 建立 unsafe 代码评审清单（类比 MISRA C 的 Rule 1.1）
 ```
+
 ### 10.3 缺少 CompCert 级认证编译器
 >
 >
@@ -780,6 +798,7 @@ Unsafe Rust 的形式化缺口:
   ├── 社区推动 Rust 编译器的数学正确性证明
   └── Safety-Critical Rust Consortium (2024-03 成立) 协调工业需求与 Rust Project 合作
 ```
+
 > **边界总结**: Rust 航空形式化验证的三大缺口——**Trait 系统**、**Unsafe 代码**和**认证编译器**——反映了从"理论安全"到"认证安全"的实践鸿沟。当前策略应是：在 safe Rust 子集内最大化利用编译器保证，对 unsafe 和复杂泛型（Generics）代码采用保守策略并辅以人工评审和传统测试。
 > [来源: [Rust Verification Roadmap](https://alastairreid.github.io/rust-verification-tools/)]
 
@@ -837,6 +856,7 @@ graph TD
     style F2 fill:#fff3e0
     style F3 fill:#ffcdd2
 ```
+
 ## 相关概念文件
 >
 >
@@ -904,6 +924,7 @@ fn fixed() {
     } // r2 在此释放
 }
 ```
+
 > **修正**: 航空航天软件标准（DO-178C、MISRA C）严格限制指针别名、动态内存分配和未定义行为。Rust 的所有权系统**在编译期自动强制执行** MISRA C 的核心规则：无数据竞争、无悬垂指针、无 use-after-free。这消除了大量需要手动审查和工具检查的代码模式。Rust 的 `unsafe` 块对应于 DO-178C 中的"需要额外验证的代码"，但 Rust 要求 unsafe 代码被 safe API 封装，形成清晰的安全边界。[来源: [DO-178C](https://en.wikipedia.org/wiki/DO-178C)] · [来源: [MISRA C](https://www.misra.org.uk/)]
 
 ### 10.2 边界测试：确定性执行与 `const fn`（编译错误）
@@ -926,6 +947,7 @@ fn main() {
     println!("{}", RESULT);
 }
 ```
+
 > **修正**: 航空航天系统要求**确定性执行**——相同输入总是产生相同输出，无未定义行为，无外部状态依赖。`const fn` 限制函数只能执行编译期可求值的操作（算术、控制流、调用其他 const fn），禁止 I/O、堆分配、可变静态变量。这与 SPARK/Ada 的 pure function 或 C 的 `constexpr` 类似，但 Rust 的 `const fn` 与类型系统集成更紧密——const 值可用于类型参数（数组大小、常量泛型（Generics））。形式化验证中，const fn 对应于"全函数"（total function）——对所有输入都终止并返回结果。来源: [Rust Reference]
 
 ### 10.3 边界测试：SPARK 模式的 Rust 近似与 `no_panic`（编译错误）
@@ -942,6 +964,7 @@ fn main() {
     println!("{}", safe_divide(10, 0));
 }
 ```
+
 > **修正**: SPARK（Ada 的子集，用于形式化验证）通过语言子集和工具（GNATprove）保证无运行时（Runtime）错误。Rust 中，`no_panic` crate 通过链接时检查验证函数不 panic，但前提是代码本身不使用可能 panic 的操作。`a / b` 在 `b = 0` 时 panic，因此 `no_panic` 构建会失败。安全替代：1) `a.checked_div(b).unwrap_or(0)`（返回 `Option`）；2) 前置条件检查 `assert!(b != 0)`（但 assert 在 `no_panic` 下也失败）；3) 使用 `wrapping_div`（不 panic，但结果可能无意义）。航空软件的 Rust 应用（如 Ferrocene 项目）正在探索将 Rust 子集用于 DO-178C 认证，但完整的形式化验证工具链（如 SPARK 的 GNATprove）尚未成熟。[来源: [no_panic Crate](https://docs.rs/no-panic/)] · [来源: [DO-178C Standard](https://www.rtca.org/product/do-178c/)]
 
 ### 10.4 边界测试：MC/DC 覆盖率与短路逻辑（逻辑错误）
@@ -962,6 +985,7 @@ fn test_mcdc() {
     // 缺少 b 独立变化的测试（b=F 时 a=T, c=F → a&&b=F, F||c=F）
 }
 ```
+
 > **修正**: MC/DC（Modified Condition/Decision Coverage）要求证明每个条件的独立影响。短路逻辑（`&&`、`||`）使某些条件在特定路径上不求值，增加了 MC/DC 的测试用例数量。`a && b || c` 需要 4 个测试用例满足 MC/DC（比无短路的 3 个多），因为 `b` 的独立影响需要 `a = true` 才能暴露。Rust 的 `&&` 和 `||` 是短路的（与 C/Java 相同），这与 VHDL 的 `and`/`or`（无短路，所有操作数都求值）不同。形式化验证中，短路逻辑增加了路径复杂度，但也提供了优化机会（提前终止）。DO-178C 的 MC/DC 要求对安全关键软件是强制性的，Rust 的短路语义必须被测试充分覆盖。[来源: [DO-178C Standard](https://www.rtca.org/product/do-178c/)] · [来源: [MC/DC Analysis](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)]
 
 ### 10.3 边界测试：形式化验证与 DO-178C 的代码覆盖冲突（验证盲区）
@@ -980,6 +1004,7 @@ fn verify_decision_table(a: bool, b: bool, c: bool) -> bool {
 
 fn main() {}
 ```
+
 > **修正**: DO-178C（航空软件认证）要求 **MC/DC**（Modified Condition/Decision Coverage）：每个条件必须独立影响决策结果。`a && (b || c)` 需要 5 个测试用例满足 MC/DC。Kani 等模型检查器验证**所有可能输入**（有界），自然满足 MC/DC，但工具链认证是障碍：1) 形式化工具本身需通过 DO-330（工具鉴定）；2) 生成的证据需被认证机构接受；3) Rust 缺乏 DO-178C 的 A 级认证历史。Ferrocene 项目：提供经过认证的 Rust 工具链，支持 DO-178C、ISO 26262（汽车）、IEC 61508（工业）。这与 Ada/SPARK（长期用于航空，有完整认证历史）或 C（广泛认证但需大量测试）不同——Rust 的形式化验证生态正在成熟，但工业认证仍需时间积累。[来源: [DO-178C](https://en.wikipedia.org/wiki/DO-178C)] · [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)] · [来源: [MC/DC](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)]
 
 ## 嵌入式测验（Embedded Quiz）

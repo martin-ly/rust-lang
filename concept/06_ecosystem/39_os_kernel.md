@@ -1,3 +1,5 @@
+> **受众**: [研究者]
+>
 # Rust 操作系统内核开发
 
 > **EN**: Rust for Operating System Kernel Development

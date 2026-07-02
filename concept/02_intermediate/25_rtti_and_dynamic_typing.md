@@ -1,3 +1,5 @@
+> **内容分级**: [参考级]
+>
 # RTTI 与动态类型识别：从 C++ 到 Rust
 >
 > **EN**: RTTI and Dynamic Type Identification

@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 
 # 所有权清单自测：Brown University Ownership Inventory
 
@@ -73,6 +71,7 @@ fn main() {
     println!("{out}");
 }
 ```
+
 **Q1**: 这段代码能否编译？
 
 <details>
@@ -100,6 +99,7 @@ fn main() {
     println!("{:?}", s);
 }
 ```
+
 **Q1**: 这段代码能否编译？
 
 <details>
@@ -136,6 +136,7 @@ fn main() {
     println!("{result}");
 }
 ```
+
 **Q1**: 这段代码能否编译？
 
 <details>

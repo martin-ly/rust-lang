@@ -1,3 +1,5 @@
+> **内容分级**: [参考级]
+>
 # 友元 vs 模块可见性：C++ 的 `friend` 与 Rust 的隐私边界
 >
 > **EN**: Friend vs Module Privacy

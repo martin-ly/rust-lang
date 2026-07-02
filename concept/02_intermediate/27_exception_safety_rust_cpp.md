@@ -1,3 +1,5 @@
+> **内容分级**: [参考级]
+>
 # 异常安全：C++ 与 Rust 的错误处理哲学
 >
 > **EN**: Exception Safety: C++ vs Rust

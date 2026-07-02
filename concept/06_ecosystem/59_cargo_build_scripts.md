@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Build Script · `build.rs` · `OUT_DIR` · `rerun-if-changed` · `links` · Native Dependency · `build-dependencies` — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Cargo Build Scripts（`build.rs`）
@@ -86,6 +84,7 @@ graph LR
     D --> E[编译主 crate]
     E --> F[链接原生库]
 ```
+
 ### 2.1 默认执行条件
 
 Cargo 默认在以下情况重新运行 `build.rs`：
@@ -103,6 +102,7 @@ fn main() {
     println!("cargo:rerun-if-changed=src/hello.proto");
 }
 ```
+
 这样，只有当 `src/hello.proto` 改变时，Cargo 才会重新运行 `build.rs`。
 
 ---
@@ -118,12 +118,14 @@ fn main() {
     println!("cargo:rustc-cfg=feature=\"custom_alloc\"");
 }
 ```
+
 主 crate 中可用：
 
 ```rust
 #[cfg(feature = "custom_alloc")]
 mod alloc;
 ```
+
 ### 3.2 设置环境变量
 
 ```rust
@@ -131,11 +133,13 @@ fn main() {
     println!("cargo:rustc-env=BUILD_TIMESTAMP=2026-06-21T10:52:42Z");
 }
 ```
+
 主 crate 中：
 
 ```rust
 const BUILD_TIMESTAMP: &str = env!("BUILD_TIMESTAMP");
 ```
+
 ### 3.3 添加链接搜索路径与库
 
 ```rust
@@ -144,6 +148,7 @@ fn main() {
     println!("cargo:rustc-link-lib=static=mylib");
 }
 ```
+
 > [来源: Cargo Book — Build Script Outputs](https://doc.rust-lang.org/cargo/reference/build-scripts.html#outputs-of-the-build-script)
 
 ---
@@ -160,6 +165,7 @@ name = "my-crate"
 version = "0.1.0"
 links = "mylib"
 ```
+
 这有两个作用：
 
 1. 防止同一依赖图中两个 crate 同时链接同名的原生库（Cargo 会报错）；
@@ -179,6 +185,7 @@ links = "mylib"
 [build-dependencies]
 cc = "1.2"
 ```
+
 `build.rs`:
 
 ```rust,ignore
@@ -190,11 +197,13 @@ fn main() {
     println!("cargo:rerun-if-changed=src/mylib.c");
 }
 ```
+
 `src/mylib.c`:
 
 ```c
 int mylib_add(int a, int b) { return a + b; }
 ```
+
 `src/lib.rs`:
 
 ```rust,ignore
@@ -206,6 +215,7 @@ pub fn add(a: i32, b: i32) -> i32 {
     unsafe { mylib_add(a, b) }
 }
 ```
+
 > **注意**: `cc` crate 会自动处理 `cargo:rustc-link-lib` 等输出。
 
 ---
@@ -230,11 +240,13 @@ fn main() {
     println!("cargo:rerun-if-changed=build.rs");
 }
 ```
+
 主 crate 中通过 `include!` 引入：
 
 ```rust
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 ```
+
 ### 5.2 探测目标平台特性
 
 ```rust
@@ -248,6 +260,7 @@ fn main() {
     }
 }
 ```
+
 ### 5.3 避免常见陷阱
 
 | 反模式 | 问题 | 推荐做法 |
@@ -278,6 +291,7 @@ graph TD
     style OK1 fill:#c8e6c9
     style OK2 fill:#c8e6c9
 ```
+
 ### 6.2 边界极限
 
 - `build.rs` 运行在**构建主机**，不能假设目标平台文件系统布局。
@@ -307,6 +321,7 @@ examples/build_script_practice/
 └── src/
     └── lib.rs
 ```
+
 ### 7.2 `Cargo.toml`
 
 ```toml
@@ -325,6 +340,7 @@ serde_json = "1.0"
 # 本示例为独立包，避免与根 workspace 冲突。
 [workspace]
 ```
+
 ### 7.3 `build.rs`
 
 ```rust
@@ -360,6 +376,7 @@ fn main() {
     cc::Build::new().file("native/math.c").compile("mymath");
 }
 ```
+
 ### 7.4 `native/math.c`
 
 ```c
@@ -367,6 +384,7 @@ int mylib_add(int a, int b) {
     return a + b;
 }
 ```
+
 ### 7.5 `src/lib.rs`
 
 ```rust
@@ -383,6 +401,7 @@ pub fn add_via_c(a: i32, b: i32) -> i32 {
     unsafe { mylib_add(a, b) }
 }
 ```
+
 ### 7.6 运行与验证
 
 ```bash
@@ -390,6 +409,7 @@ cd examples/build_script_practice
 cargo build
 cargo test
 ```
+
 预期结果：
 
 - `cargo build` 成功编译 C 文件并生成 `build_info.rs`；
@@ -426,6 +446,7 @@ cargo test
 ```rust
 println!("cargo:rerun-if-changed=src/config.json");
 ```
+
 </details>
 
 ---

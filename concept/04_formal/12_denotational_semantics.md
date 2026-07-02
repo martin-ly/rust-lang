@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [专家级]
+> **内容分级**: [专家级]
 
 # 指称语义与领域理论
 >
@@ -105,6 +103,7 @@
   [[x + y]] = plus([[x]], [[y]])
   [[if b then x else y]] = cond([[b]], [[x]], [[y]])
 ```
+
 > **认知功能**: **指称语义回答"程序计算什么"而非"如何计算"**——通过数学抽象揭示程序的本质含义。
 > [来源: [Winskel — Semantics of PL](https://www.cl.cam.ac.uk/~gw104/dens.pdf)]
 
@@ -133,6 +132,7 @@
   ├── Option<T>: ⊥ ⊑ None ⊑ Some(d)
   └── 函数类型: 逐点序 f ⊑ g iff ∀x, f(x) ⊑ g(x)
 ```
+
 > **CPO 洞察**: **CPO 为递归和并发提供了数学基础**——递归函数的语义通过最小不动点定义。
 > [来源: [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)]
 
@@ -162,6 +162,7 @@ Kleene 不动点定理:
   ├── 类型检查保证终止性（如果可能）
   └── 发散程序映射到 ⊥
 ```
+
 > **不动点洞察**: **Kleene 不动点定理是递归的数学基础**——所有递归定义都可以通过最小不动点赋予语义。
 > [来源: [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/files/298/handbook.pdf)]
 
@@ -193,6 +194,7 @@ fn call_diverges() -> i32 {
     diverges() // ✅ ! → i32 是合法的强制转换
 }
 ```
+
 > **修正**:
 > 在指称语义中，类型 `T` 的指称是一个数学域（domain），包含所有可能的值。
 > `!`（never type）的指称是**底部元素** `⊥`，表示非终止或 panic。
@@ -220,6 +222,7 @@ fn main() {
     // Result 表示预期内的错误，应被调用者处理
 }
 ```
+
 > **修正**:
 > 在指称语义中，`panic!` 和 `Result::Err` 有完全不同的指称。
 > `panic!` 的指称是 `⊥`（底部）——表示计算失败，栈展开释放资源，通常不应恢复。
@@ -248,6 +251,7 @@ Rust 类型的指称:
   ├── 闭包: 环境与代码的配对
   └── 高阶函数: 函数空间的函数
 ```
+
 > **类型洞察**: **Rust 的代数数据类型直接对应域论构造**——乘积、和、函数空间都是标准域论操作。
 > [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]
 
@@ -275,6 +279,7 @@ Rust 类型的指称:
   ├── 栈: Var → Loc（变量到位置）
   └── 所有权: 堆的分离分解
 ```
+
 > **所有权（Ownership）洞察**: **Rust 的所有权在指称语义中表现为资源分离**——线性逻辑和分离逻辑提供了精确的数学框架。
 > [来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]
 
@@ -306,6 +311,7 @@ Rust 类型的指称:
   ├── 约束收集: 程序点产生区域约束
   └── 约束求解: 最小区域分配
 ```
+
 > **生命周期（Lifetimes）洞察**: **生命周期是编译期的区域推断系统**——指称语义中表现为时间区间的集合包含关系。
 > [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)]
 
@@ -331,6 +337,7 @@ graph TD
     style OP fill:#c8e6c9
     style BOTH fill:#fff3e0
 ```
+
 > **认知功能**: **指称语义和操作语义各有优势**——等价证明用指称，实现分析用操作。
 > [来源: [Winskel — Semantics](https://www.cl.cam.ac.uk/~gw104/dens.pdf)]
 
@@ -365,6 +372,7 @@ graph TD
 ├── 需要超结构（Hyperdoctrine）
 └── 缓解: 范畴语义、立方类型论
 ```
+
 > **边界要点**: 指称语义的边界与**非终止性**、**并发**、**状态**、**unsafe** 和**高阶类型**相关。
 > [来源: [PL Foundations](https://softwarefoundations.cis.upenn.edu/)]
 
@@ -401,6 +409,7 @@ graph TD
   ✅ 选择合适的抽象级别
      // 简单程序用简单模型
 ```
+
 > **陷阱总结**: 指称语义的陷阱主要与**语法/语义混淆**、**⊥ 处理**、**语义层级**和**抽象过度**相关。
 > [来源: [Semantics Course Notes](https://www.cl.cam.ac.uk/teaching/2021/Semantics/)]
 
@@ -427,6 +436,7 @@ fn main() {
     println!("{}", add5(3)); // 8
 }
 ```
+
 ```rust
 fn main() {
     let compose = |f: fn(i32) -> i32, g: fn(i32) -> i32| {
@@ -438,6 +448,7 @@ fn main() {
     println!("{}", h(5)); // 11
 }
 ```
+
 ## 相关概念文件
 
 - [Type Theory](02_type_theory.md) — 类型论
@@ -476,6 +487,7 @@ fn main() {
     println!("{}", x); // ! 未实现 Display
 }
 ```
+
 > **修正**:
 >
 > 在指称语义中，**底**（bottom，⊥）表示非终止或错误的计算。
@@ -499,6 +511,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**:
 >
 > 指称语义为 safe Rust 提供了精确的数学模型，但 `unsafe` 代码打破了这一模型。Safe Rust 的语义保证：没有数据竞争、没有悬垂指针、没有类型混淆。
@@ -526,6 +539,7 @@ fn main() {
     // 有限的递归结构可以，但无限类型（如 Stream）需用 trait object 或延迟计算
 }
 ```
+
 > **修正**:
 > 指称语义（Denotational Semantics）使用**域论**（domain theory）处理递归：递归类型 `μX.F(X)` 定义为 `F` 的最小不动点，包含有限和无限值（惰性求值）。
 > Rust 是**严格求值**语言，不支持直接表达无限值（如 Haskell 的无限列表 `[1..]`）。

@@ -1,15 +1,19 @@
 //! Rust 1.97 稳定特性 —— 所有权、借用与作用域
 //!
-//! 本模块演示 Rust 1.97 中稳定化的所有权/指针相关 API。
-//! 由于当前工具链为 Rust 1.96，实际代码使用等价的 1.96 兼容实现；
+//! 本模块演示 Rust 1.97.0 中稳定化的所有权/指针相关 API。
+//! 由于当前工具链为 Rust 1.96.0，实际代码使用等价的 1.96 兼容实现；
 //! 对应的 1.97 原生 API 调用以注释形式保留。
 #![allow(clippy::incompatible_msrv)]
 
+use std::rc::Rc;
+use std::sync::Arc;
+
 /// Rust 1.97 所有权/借用特性演示
 ///
-/// 涉及特性：/// - `Option::as_slice` / `Option::as_mut_slice`
+/// 涉及特性：
+/// - `Option::as_slice` / `Option::as_mut_slice`
 /// - `Box::as_ptr`
-/// - `pointer::byte_add` / `pointer::wrapping_byte_add`
+/// - `From<&mut [T]>` for `Box<[T]>`, `Rc<[T]>`, `Arc<[T]>`
 /// - `const size_of_val` / `const align_of_val`
 pub struct Rust197OwnershipFeatures;
 
@@ -40,19 +44,22 @@ impl Rust197OwnershipFeatures {
         &**b as *const T
     }
 
-    /// 按字节偏移裸指针
-    ///
-    /// # Safety
-    /// 调用者必须确保偏移后的指针仍在有效分配范围内。
-    pub unsafe fn byte_add<T>(ptr: *const T, offset: usize) -> *const T {
-        // 1.97+: ptr.byte_add(offset)
-        (ptr as *const u8).add(offset) as *const T
+    /// 将可变切片转换为 `Box<[T]>`
+    pub fn box_from_mut_slice<T: Clone>(slice: &mut [T]) -> Box<[T]> {
+        // 1.97+: Box::from(slice) 因为 From<&mut [T]> for Box<[T]> 在 1.97 稳定化
+        slice.to_vec().into_boxed_slice()
     }
 
-    /// 按字节进行环绕偏移（不检查有效性）
-    pub fn wrapping_byte_add<T>(ptr: *const T, offset: usize) -> *const T {
-        // 1.97+: ptr.wrapping_byte_add(offset)
-        (ptr as *const u8).wrapping_add(offset) as *const T
+    /// 将可变切片转换为 `Rc<[T]>`
+    pub fn rc_from_mut_slice<T: Clone>(slice: &mut [T]) -> Rc<[T]> {
+        // 1.97+: Rc::from(slice) 因为 From<&mut [T]> for Rc<[T]> 在 1.97 稳定化
+        slice.to_vec().into()
+    }
+
+    /// 将可变切片转换为 `Arc<[T]>`
+    pub fn arc_from_mut_slice<T: Clone>(slice: &mut [T]) -> Arc<[T]> {
+        // 1.97+: Arc::from(slice) 因为 From<&mut [T]> for Arc<[T]> 在 1.97 稳定化
+        slice.to_vec().into()
     }
 
     /// 编译期计算值的大小（1.96 兼容版，仅支持 `Sized` 类型）
@@ -100,19 +107,24 @@ mod tests {
     }
 
     #[test]
-    fn test_byte_add() {
-        let arr = [1u8, 2, 3, 4];
-        let ptr = arr.as_ptr();
-        let offset = unsafe { Rust197OwnershipFeatures::byte_add(ptr, 2) };
-        assert_eq!(offset as usize, ptr as usize + 2);
+    fn test_box_from_mut_slice() {
+        let mut slice = [1, 2, 3];
+        let boxed = Rust197OwnershipFeatures::box_from_mut_slice(&mut slice);
+        assert_eq!(&*boxed, &[1, 2, 3]);
     }
 
     #[test]
-    fn test_wrapping_byte_add() {
-        let arr = [0u8; 4];
-        let ptr = arr.as_ptr();
-        let wrapped = Rust197OwnershipFeatures::wrapping_byte_add(ptr, 1);
-        assert_eq!(wrapped as usize, ptr as usize + 1);
+    fn test_rc_from_mut_slice() {
+        let mut slice = [1, 2, 3];
+        let rc = Rust197OwnershipFeatures::rc_from_mut_slice(&mut slice);
+        assert_eq!(&*rc, &[1, 2, 3]);
+    }
+
+    #[test]
+    fn test_arc_from_mut_slice() {
+        let mut slice = [1, 2, 3];
+        let arc = Rust197OwnershipFeatures::arc_from_mut_slice(&mut slice);
+        assert_eq!(&*arc, &[1, 2, 3]);
     }
 
     #[test]

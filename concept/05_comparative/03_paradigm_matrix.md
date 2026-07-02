@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 
 # Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）

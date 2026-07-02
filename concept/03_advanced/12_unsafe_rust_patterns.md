@@ -1,4 +1,7 @@
 > **内容分级**: [专家级]
+> **受众**: [专家]
+> **前置概念**: [Unsafe Rust](03_unsafe.md)
+> **后置概念**: [Unsafe Rust 安全编程](03_unsafe.md)
 
 # Unsafe Rust 模式：安全抽象的核心技术
 

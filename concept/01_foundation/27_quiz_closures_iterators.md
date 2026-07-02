@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 
 # 测验：闭包与迭代器（L1 试点扩展）
 >
@@ -42,6 +40,7 @@ fn main() {
     println!("{}", add(2.5, 3.5));
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -56,6 +55,7 @@ let add = |a, b| a + b;
 // 第一次调用 add(2, 3) 推断：add: |i32, i32| -> i32
 // 第二次调用 add(2.5, 3.5) 期望 |f64, f64| -> f64，不匹配！
 ```
+
 **修复方案**——使用泛型（Generics）函数：
 
 ```rust
@@ -63,12 +63,14 @@ fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
     a + b
 }
 ```
+
 或定义多个闭包（Closures）：
 
 ```rust
 let add_i32 = |a: i32, b: i32| a + b;
 let add_f64 = |a: f64, b: f64| a + b;
 ```
+
 **闭包（Closures）的匿名结构**：
 
 Rust 闭包（Closures）编译后实际上是匿名结构体（Struct）：
@@ -79,6 +81,7 @@ Rust 闭包（Closures）编译后实际上是匿名结构体（Struct）：
 struct Closure { /* 捕获的环境 */ }
 impl Fn(i32) -> i32 for Closure { ... }
 ```
+
 **知识点**：闭包（Closures）不是函数指针，而是实现了 `Fn`/`FnMut`/`FnOnce` trait 的匿名类型。每个闭包都有唯一的、不可命名的类型。[→ 闭包详解](15_closure_basics.md)
 
 </details>
@@ -101,6 +104,7 @@ fn main() {
     println!("{}", count);
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -111,6 +115,7 @@ fn main() {
 2
 2
 ```
+
 **解析**：闭包 `inc` 捕获了 `count` 的**可变引用（Mutable Reference）**（`&mut count`），因此可以修改它。
 
 **捕获方式推断**：
@@ -149,6 +154,7 @@ fn main() {
     println!("{}", add5(10));
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -163,6 +169,7 @@ fn make_adder(x: i32) -> impl Fn(i32) -> i32 {
     |y| x + y  // ❌ 编译错误：x 的生命周期不够长
 }
 ```
+
 不加 `move` 时，闭包捕获 `x` 的引用（Reference）。但 `x` 是函数参数，在 `make_adder` 返回后失效，闭包将持有悬垂引用。
 
 **加了 `move`**：
@@ -172,6 +179,7 @@ move |y| x + y
 // x 被复制（i32 实现 Copy）或移动到闭包中
 // 闭包拥有 x 的副本，与外部 x 无关
 ```
+
 **使用场景**：
 
 - 闭包需要比捕获变量存活更久（如 `thread::spawn`、`tokio::spawn`）
@@ -199,6 +207,7 @@ fn main() {
     println!("Result: {:?}", result);
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -212,6 +221,7 @@ mapping 4
 mapping 5
 Result: [2, 4, 6, 8, 10]
 ```
+
 **解析**：`.collect()` 是**消费者（consumer）**，它驱动迭代器（Iterator）链执行。
 
 **惰性求值（Lazy Evaluation）**：
@@ -225,6 +235,7 @@ iter.collect();     // 驱动整个链
 iter.sum::<i32>();  // 驱动整个链
 iter.for_each(|x| ...); // 驱动整个链
 ```
+
 **适配器（Adapters）vs 消费者（Consumers）**：
 
 | 类型 | 示例 | 行为 |
@@ -238,6 +249,7 @@ iter.for_each(|x| ...); // 驱动整个链
 // 等价于：一次遍历，无中间 Vec
 let sum: i32 = v.iter().map(|x| x * 2).filter(|x| x > 4).sum();
 ```
+
 **知识点**：迭代器的惰性求值是 Rust 零成本抽象（Zero-Cost Abstraction）的核心。整个适配器链在编译期被内联为单一循环。[→ 迭代器详解](../02_intermediate/15_iterator_patterns.md)
 
 </details>
@@ -270,6 +282,7 @@ fn main() {
     }
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -291,6 +304,7 @@ impl IntoIterator for Counter {
     }
 }
 ```
+
 **或更简单**：为 `Counter` 的引用（Reference）实现 `IntoIterator`：
 
 ```rust,ignore
@@ -301,6 +315,7 @@ fn main() {
     }
 }
 ```
+
 实际上，`Iterator` 自动实现 `IntoIterator`（`into_iter` 返回自身），但 `for` 循环会消耗迭代器。上面的代码应该能编译...让我修正。
 
 **实际上**：实现了 `Iterator` 的类型自动获得 `IntoIterator` 实现，所以上面的代码应该能编译。让我重新检查...
@@ -314,6 +329,7 @@ impl<I: Iterator> IntoIterator for I {
     fn into_iter(self) -> I { self }
 }
 ```
+
 所以原始代码**应该能编译**。让我修正题目为一个更好的案例。
 
 **更好的题目**——为什么这段代码只能迭代一次：
@@ -323,6 +339,7 @@ let counter = Counter { count: 0 };
 for val in counter { println!("{}", val); }
 for val in counter { println!("{}", val); } // ❌ 编译错误：counter 已被移动
 ```
+
 **知识点**：`Iterator` 是 Rust 中最强大的 trait 之一。只需实现 `next()` 方法，自动获得 `map`、`filter`、`collect` 等数十种适配器和消费者。[→ 迭代器详解](../02_intermediate/15_iterator_patterns.md)
 
 </details>
@@ -343,6 +360,7 @@ fn main() {
     println!("{:?}", result);
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -356,6 +374,7 @@ fn main() {
     .map(|x| x * x)            // [4, 16, 36]
     .collect()                 // Vec![4, 16, 36]
 ```
+
 **注意执行顺序**：迭代器链是**惰性**且**元素级**的——不是先全部 filter 再全部 map，而是对每个元素依次执行 filter → map：
 
 ```
@@ -365,6 +384,7 @@ fn main() {
 4: filter(4) = true → map(4) = 16, 输出
 ...
 ```
+
 **常用适配器速查**：
 
 | 适配器 | 作用 | 示例 |
@@ -394,6 +414,7 @@ fn main() {
     println!("sum = {}, product = {}", sum, product);
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -411,6 +432,7 @@ v.iter().fold(0, |acc, x| acc + x)
 // acc=6, x=4 → 10
 // acc=10, x=5 → 15
 ```
+
 **`fold` vs `reduce`**：
 
 | 方法 | 初始值 | 空迭代器行为 |
@@ -423,6 +445,7 @@ let empty: Vec<i32> = vec![];
 empty.iter().fold(0, |a, b| a + b);     // 返回 0
 empty.iter().reduce(|a, b| a + b);       // 返回 None
 ```
+
 **其他归约方法**：
 
 ```rust,ignore
@@ -432,6 +455,7 @@ v.iter().count();    // 元素个数
 v.iter().any(|x| x > 3);   // 是否有元素满足条件
 v.iter().all(|x| x > 0);   // 是否所有元素满足条件
 ```
+
 **知识点**：`fold` 是最通用的归约操作，其他归约方法（`sum`、`product`、`count`）都是其特化版本。[→ 迭代器详解](../02_intermediate/15_iterator_patterns.md)
 
 </details>
@@ -450,6 +474,7 @@ fn main() {
     println!("{:?} {:?}", found, pos);
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -470,11 +495,13 @@ v.iter().find(|&&x| x > 3)
 // find 传递 &&i32（对引用的引用）
 // 因此需要 &&x 来解引用两次
 ```
+
 **更简洁的写法**（使用 `copied()` 或 `cloned()`）：
 
 ```rust,ignore
 let found = v.iter().copied().find(|&x| x > 3); // Some(4)
 ```
+
 **相关方法**：
 
 ```rust,ignore
@@ -483,6 +510,7 @@ v.iter().position(|&x| x > 3);     // Some(3)
 v.iter().rposition(|&x| x > 3);    // Some(4)，从右查找
 v.iter().find_map(|&x| if x > 3 { Some(x * 2) } else { None }); // Some(8)
 ```
+
 **知识点**：`find` 和 `position` 都是短路操作——找到第一个匹配元素后立即返回，不遍历剩余元素。[→ 迭代器详解](../02_intermediate/15_iterator_patterns.md)
 
 </details>
@@ -504,6 +532,7 @@ fn main() {
     println!("{:?}", result);
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -518,6 +547,7 @@ let threshold = 3;
 // 闭包 |x| *x > threshold 捕获 &threshold
 // 闭包 |x| x * 2 不捕获任何环境变量
 ```
+
 **关键点**：`into_iter()` 消耗 `nums`，因此 `x` 是 `i32`（值），不是 `&i32`。所以 `*x > threshold` 中的 `*x` 是必需的。
 
 **若使用 `iter()`**：
@@ -527,6 +557,7 @@ nums.iter()                          // &i32
     .filter(|&&x| x > threshold)     // 需要 &&x
     .map(|&x| x * 2)                 // 需要 &x
 ```
+
 **选择指南**：
 
 | 方法 | 元素类型 | 是否消耗集合 |
@@ -555,6 +586,7 @@ fn main() {
     println!("{:?}", result);
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -578,6 +610,7 @@ fn main() {
     println!("{:?}", result); // [3, 4, 5]
 }
 ```
+
 **注意**：修复后闭包参数从 `&i32` 改为 `i32`，因此需要使用 `into_iter()` 或调整闭包签名。
 
 **更通用的修复**——使用引用 + 显式生命周期（Lifetimes）：
@@ -588,6 +621,7 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
     move |x: &i32| x >= &*min
 }
 ```
+
 **知识点**：返回闭包时几乎总是需要 `move`，否则闭包捕获的局部变量引用会在函数返回后悬垂。[→ 闭包详解](15_closure_basics.md)
 
 </details>

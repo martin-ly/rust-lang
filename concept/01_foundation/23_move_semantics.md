@@ -1,3 +1,5 @@
+> **内容分级**: [综述级]
+>
 # Move 语义：C++ 与 Rust 的资源转移模型
 >
 > **EN**: Move Semantics
@@ -48,6 +50,7 @@ std::string s2 = std::move(s1); // s1 变为 xvalue（将亡值）
 // s2 调用移动构造函数，接管 s1 的内部缓冲区
 // s1 仍处于"有效但未指定状态"
 ```
+
 C++11 引入的 move 语义：
 
 - `std::move(x)` 实际上只是把 `x` 转换为右值引用（Reference） `T&&`。
@@ -74,6 +77,7 @@ auto s2 = std::move(s);
 // s 仍然可以调用 .empty()、.clear() 等不依赖具体值的函数
 // 但不能依赖 s 的内容
 ```
+
 C++ 不禁止访问 moved-from 对象，只是其值未指定。
 
 ---
@@ -90,6 +94,7 @@ fn main() {
     println!("{}", s2);   // ✅
 }
 ```
+
 Rust 的 move（Rust Reference: [Moved and Copied Types](https://doc.rust-lang.org/reference/expressions.html#moved-and-copied-types)）：
 
 - 对于未实现 `Copy` 的类型，赋值 = 所有权转移。
@@ -114,6 +119,7 @@ fn main() {
     println!("{} {}", s1, s2);
 }
 ```
+
 - `Copy`：隐式按位复制，原变量仍可用。
 - `Clone`：显式复制，可能涉及深拷贝。
 - 默认 move：对于非 `Copy` 类型，转移所有权。
@@ -144,6 +150,7 @@ std::string make_string() {
     return std::string("hello"); // RVO 可能省略拷贝
 }
 ```
+
 C++ 的 RVO 是编译器优化，直到 C++17 的 guaranteed copy elision 之前都不是强制的（cppreference: [Copy elision](https://en.cppreference.com/w/cpp/language/copy_elision)）。
 
 ### 5.2 Rust 的保证省略
@@ -155,6 +162,7 @@ fn make_string() -> String {
     String::from("hello") // 直接构造在调用者的栈空间
 }
 ```
+
 Rust 保证：返回局部值不会发生深拷贝，只是所有权转移。
 
 ---
@@ -179,6 +187,7 @@ struct Buffer {
     data: Vec<u8>, // Vec 已实现 Drop/Clone，Buffer 自动获得
 }
 ```
+
 ---
 
 ## 七、形式化视角
@@ -188,6 +197,7 @@ C++ move 可以形式化为：
 ```text
 move: T → T' × T_invalid
 ```
+
 即 move 后产生一个有效的新对象和一个"仍然存在但状态未指定"的源对象。
 
 Rust move 可以形式化为：
@@ -195,6 +205,7 @@ Rust move 可以形式化为：
 ```text
 move: T@src → T@dst
 ```
+
 即资源从 `src` 的变量名重新绑定到 `dst`，`src` 从环境中移除。
 
 > **关键洞察**：C++ 的 move 是"复制 + 使源对象进入特殊状态"；Rust 的 move 是"重新绑定资源标识符"。Rust 的模型更简单，因为它不需要 moved-from 状态的概念。

@@ -41,8 +41,8 @@ impl Rust197ControlFlowFeatures {
     }
 
     /// 构造默认哈希器
-    pub fn build_hasher_default_new(
-    ) -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
+    pub fn build_hasher_default_new()
+    -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
         // 1.97+: const fn BuildHasherDefault::new()
         std::hash::BuildHasherDefault::new()
     }
@@ -94,8 +94,15 @@ mod tests {
 
     #[test]
     fn test_fn_addr_eq() {
-        fn a() {}
-        fn b() {}
+        // 使用 #[inline(never)] 与不同体，避免编译器将两个空函数合并为同一地址。
+        #[inline(never)]
+        fn a() {
+            std::hint::black_box(1);
+        }
+        #[inline(never)]
+        fn b() {
+            std::hint::black_box(2);
+        }
         assert!(Rust197ControlFlowFeatures::fn_addr_eq(a, a));
         assert!(!Rust197ControlFlowFeatures::fn_addr_eq(a, b));
     }

@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [专家级]
+> **内容分级**: [专家级]
 
 # Verification Toolchain Selection Guide（验证工具链选择指南）
 >

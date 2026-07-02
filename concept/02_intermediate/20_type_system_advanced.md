@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**:
 >
 > 高级类型系统 (Advanced Type System) · 类型推断 (Type Inference) ·
@@ -116,6 +114,7 @@ trait Foo {
     type Bar: Iterator<Item = i32>;
 }
 ```
+
 > **impl Trait 洞察**: **impl Trait 是 Rust "零成本抽象（Zero-Cost Abstraction）"的关键**——它隐藏实现细节而不引入运行时（Runtime）开销。
 > [来源: [RFC 1522 — Conservative impl Trait](https://rust-lang.github.io/rfcs//1522-conservative-impl-trait.html)]
 > **Rust 2024 edition 补充**: 返回位置 `impl Trait` 的生命周期（Lifetimes）捕获规则发生变化。
@@ -193,6 +192,7 @@ impl<T, const R: usize, const C: usize> Matrix<T, R, C> {
     }
 }
 ```
+
 > **Const Generics 洞察**: **Const generics 使数组大小成为类型系统的一部分**——编译期验证矩阵维度匹配。
 > [来源: [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
 
@@ -227,6 +227,7 @@ Rust 的类型推断机制:
   let iter = v.iter();     // std::slice::Iter<i32>
   let sum: i32 = iter.sum(); // 类型从 sum 的目标类型推断
 ```
+
 > **推断洞察**: Rust 的**类型推断（Type Inference）是"辅助"而非"全自动"**——它减少噪声，但关键边界保持显式。
 > [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html)]
 
@@ -272,6 +273,7 @@ trait Parser {
 // ├── 不能用于 struct 字段
 // └── 不能用于 trait bound 组合
 ```
+
 > **参数洞察**: **impl Trait 参数是泛型（Generics）的语法糖**——它更简洁，但牺牲了显式命名类型参数的能力。
 > [来源: [Rust Reference — impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)]
 
@@ -333,6 +335,7 @@ impl<T: Copy, const N: usize> Stack<T, N> {
     }
 }
 ```
+
 > **实战洞察**: **Const generics 将运行时（Runtime）的维度检查提升为编译期类型检查**——矩阵乘法维度不匹配成为编译错误。
 > [来源: [Const Generics MVP](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
 
@@ -380,6 +383,7 @@ trait AddOne {
 impl AddOne for std::marker::U0 { type Result = std::marker::U1; }
 // ... 编译期类型级加法（typenum crate）
 ```
+
 > **别名洞察**: **类型别名和类型族是管理复杂性的工具**——它们使代码更可读，同时保持类型安全。
 > [来源: [Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html)]
 
@@ -415,6 +419,7 @@ impl AddOne for std::marker::U0 { type Result = std::marker::U1; }
   → Add<B>: Output = Sum
   → 编译期算术
 ```
+
 > **模式矩阵**: Rust 的类型系统**在表达力和复杂性之间取得平衡**——不像 Haskell 那样完全类型级编程，但足够处理大多数工程需求。
 > [来源: [typenum crate](https://docs.rs/typenum/latest/typenum/)]
 
@@ -438,6 +443,7 @@ graph TD
     style NAMED fill:#c8e6c9
     style IMPL fill:#c8e6c9
 ```
+
 > **认知功能**: **impl Trait 是默认选择，但递归和需要命名类型的场景需要显式类型**。
 > [来源: [Rust API Guidelines — impl Trait](https://rust-lang.github.io/api-guidelines//future-proofing.html)]
 
@@ -477,6 +483,7 @@ graph TD
 ├── 需要手动单态化
 └── 缓解: C API 使用具体类型
 ```
+
 > **边界要点**: 高级类型系统的边界主要与**递归限制**、**常量表达式**、**推断失败**、**编译时间**和**FFI**相关。
 > [来源: [Rust Compiler — Monomorphization](https://rustc-dev-guide.rust-lang.org/backend/monomorph.html)]
 
@@ -523,6 +530,7 @@ graph TD
      // struct UserId(u64);
      // struct OrderId(u64);
 ```
+
 > **陷阱总结**: 高级类型系统的陷阱主要与**impl Trait 语义**、**const generics 限制**、**签名复杂度**、**推断**和**类型别名**相关。
 > [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]
 
@@ -557,6 +565,7 @@ T b = *a;   // 解引用（operator* 一元）
 T c = a * b; // 乘法（operator* 二元）
 // 编译器通过上下文区分，但重载时可能产生歧义
 ```
+
 ```rust,ignore
 // Rust: Deref 和 Mul 是两个不同的 trait
 let a = Box::new(5);
@@ -564,6 +573,7 @@ let b = *a; // Deref::deref 然后解引用
 let c = a * 2; // 编译错误: Box<i32> 没有实现 Mul
 // 必须显式: (*a) * 2
 ```
+
 #### C++ 的隐式类型转换 vs Rust 的显式 Trait
 
 ```cpp
@@ -578,6 +588,7 @@ MyInt a = 5;     // ✅ 隐式: int → MyInt
 int b = a;       // ✅ 隐式: MyInt → int
 MyInt c = a + 3; // ⚠️ 隐式转换链: MyInt → int → 加 → int → MyInt
 ```
+
 ```rust
 // Rust: 所有转换必须显式通过 trait
 struct MyInt(i32);
@@ -594,6 +605,7 @@ let a: MyInt = 5.into();        // ✅ 显式: i32 → MyInt
 let b: i32 = a.into();          // ✅ 显式: MyInt → i32
 // let c: MyInt = a + MyInt(3); // ❌ MyInt 未实现 Add
 ```
+
 > **Rust 1.96.0 新增 `From` 实现**：
 >
 > ```rust
@@ -637,6 +649,7 @@ trait MyTrait {
     // trait 中需要具体类型或关联类型
 }
 ```
+
 > **修正**: trait 定义中不能使用 `impl Trait` 作为返回类型。应使用关联类型（`type Output: Iterator<Item = i32>;`）或泛型参数。
 
 ```rust,compile_fail
@@ -652,6 +665,7 @@ fn main() {
     let _ = array_size::<4>(a); // 大小不匹配
 }
 ```
+
 > **修正**: `const` 泛型参数必须与数组/类型的大小精确匹配。编译器在编译期验证 const 泛型约束。
 
 ```rust,compile_fail
@@ -666,6 +680,7 @@ fn infinite_size() {
     let _ = InfList::Cons(1, InfList::Nil);
 }
 ```
+
 > **修正**: 递归类型必须包含间接层（`Box<T>`、`Rc<T>`、`Arc<T>`），使编译器能计算固定大小。
 
 ### 4.4 边界测试：高阶 trait bound（HRTB）误用（编译错误）
@@ -692,6 +707,7 @@ where
     println!("{}", r); // ✅ 生命周期一致
 }
 ```
+
 > **修正**: 高阶 trait bound（HRTB，`for<'a>`）要求闭包（Closures）实现对所有可能生命周期 `'a` 有效。当闭包签名涉及引用时，必须显式使用 HRTB 来正确关联输入和输出的生命周期，否则编译器无法推断返回引用的来源。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.5 边界测试：关联类型与泛型参数冲突（编译错误）
@@ -719,6 +735,7 @@ impl Container for BadWrapper {
     // fn get(&self) -> String { ... } // 错误: 返回类型与 Item 不匹配
 }
 ```
+
 > **修正**: 关联类型（associated type）在 trait 实现中只能指定一次，且必须与实际方法签名一致。试图在同一实现中为关联类型指定多个不同具体类型，或方法返回类型与关联类型不匹配，都会导致编译错误。关联类型的单态化（Monomorphization）约束保证了类型一致性（Coherence）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
@@ -792,6 +809,7 @@ fn spawn_task() {
 
 fn main() {}
 ```
+
 > **修正**:
 > `impl Trait` 的**自动 trait 捕获**：返回类型不自动实现 `Send`、`Sync`、`Unpin` 等 auto trait，即使底层类型实现了。
 > Rust 1.75+ 的 `impl Trait` 生命周期捕获规则变更：返回类型可能捕获更少的生命周期。
@@ -826,6 +844,7 @@ impl Container for MyContainer {
 
 fn main() {}
 ```
+
 > **修正**:
 >
 > Rust 的**关联类型默认值**：
@@ -854,6 +873,7 @@ fn duplicate() {}
 
 fn main() {}
 ```
+
 > **修正**: **名称唯一性**：
 >
 > 1) 同一作用域内不能有两个同名函数；

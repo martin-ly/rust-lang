@@ -35,11 +35,16 @@ EXCLUDE_FILES = {
     "LSIP_Unified_Model_Panorama.md", "PostgreSQL_LSIP_Unified_Model.md",
 }
 EXCLUDE_PREFIXES = ("sandbox",)
+EXCLUDE_DIRS = {"archive", "deprecated", "sources"}
 
 def find_md_files() -> list[Path]:
     """查找核心 markdown 文件，排除非知识体系文件"""
     files = []
     for root, _, names in os.walk(CONCEPT_DIR):
+        rel = Path(root).relative_to(CONCEPT_DIR)
+        # 跳过归档/废弃/来源目录
+        if any(part in EXCLUDE_DIRS for part in rel.parts):
+            continue
         for name in names:
             if not name.endswith(".md"):
                 continue
@@ -48,7 +53,6 @@ def find_md_files() -> list[Path]:
             if any(name.startswith(p) for p in EXCLUDE_PREFIXES):
                 continue
             # 只包含 00_meta/ 和 0X_*/ 目录下的文件
-            rel = Path(root).relative_to(CONCEPT_DIR)
             if not (str(rel).startswith("00_meta") or str(rel).startswith("0") and len(str(rel)) >= 2 and str(rel)[1].isdigit()):
                 continue
             files.append(Path(root) / name)
@@ -57,14 +61,32 @@ def find_md_files() -> list[Path]:
 
 
 def detect_layer(filepath: Path) -> str:
-    """从路径检测层级 L0-L7"""
+    """从路径检测层级 L0-L7。
+
+    以 concept/ 下的第一层目录名为准：
+    - 00_meta -> L0
+    - 01_foundation -> L1
+    - 02_intermediate -> L2
+    - 03_advanced -> L3
+    - 04_formal -> L4
+    - 05_comparative -> L5
+    - 06_ecosystem -> L6
+    - 07_future -> L7
+    """
     parts = filepath.parts
+    layer_dirs = {
+        "00_meta": "L0",
+        "01_foundation": "L1",
+        "02_intermediate": "L2",
+        "03_advanced": "L3",
+        "04_formal": "L4",
+        "05_comparative": "L5",
+        "06_ecosystem": "L6",
+        "07_future": "L7",
+    }
     for p in parts:
-        if p.startswith("0") and len(p) >= 2 and p[1].isdigit():
-            # 排除 00.md 等顶层文件
-            if p in ("00", "01", "02", "03", "04", "05", "06", "07"):
-                continue
-            return f"L{p[1]}"
+        if p in layer_dirs:
+            return layer_dirs[p]
     return "L?"
 
 

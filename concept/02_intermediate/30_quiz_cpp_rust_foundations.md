@@ -1,3 +1,5 @@
+> **内容分级**: [参考级]
+>
 # 测验：C/C++ → Rust 基础知识对比
 >
 > **EN**: Quiz: C/C++ to Rust Foundations

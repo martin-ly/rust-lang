@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 >
 > **本节关键术语**: Kani · 有界模型检查（Bounded Model Checking） · CBMC · Harness · 函数合约（Function Contracts） · 循环合约（Loop Contracts） · Autoharness — [完整对照表](../00_meta/terminology_glossary.md)
 >

@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: 闭包 (Closure) · 捕获 (Capture) · Fn · FnMut · FnOnce · 环境 (Environment) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 闭包基础：捕获环境与匿名函数
@@ -100,6 +98,7 @@ let process = |x: i32| -> i32 {
 // ├── 可变借用: &mut T（如果需要修改）
 // └── 移动: T（使用 move 关键字）
 ```
+
 > **认知功能**: Rust 闭包是**匿名函数 + 环境捕获**——编译器自动推断捕获方式，遵循所有权（Ownership）规则。
 > [来源: [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
@@ -155,6 +154,7 @@ let closure_fn_once = move || {
 // 实现 Fn 自动实现 FnMut 和 FnOnce
 // 实现 FnMut 自动实现 FnOnce
 ```
+
 > **Trait 洞察**: **Fn/FnMut/FnOnce 是 Rust 闭包的核心类型系统（Type System）**——它们精确描述了闭包对环境的访问方式。
 > [来源: [std::ops::Fn](https://doc.rust-lang.org/std/ops/trait.Fn.html)]
 
@@ -195,6 +195,7 @@ let x = 5;
 let c = move || x;  // x 被 copy（不是 move）
 println!("{}", x);  // ✅ i32 是 Copy
 ```
+
 > **所有权洞察**: 闭包的**捕获方式由编译器自动推断**——但开发者可以通过 `move` 关键字强制移动捕获。
 > [来源: [Rust Reference — Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html)]
 
@@ -245,6 +246,7 @@ fn dynamic_closure(f: Box<dyn Fn(i32) -> i32>) -> i32 {
     f(42)
 }
 ```
+
 > **高阶洞察**: Rust 的**高阶函数**与闭包结合，提供了与函数式语言相当的表达能力，同时保持类型安全。
 > [来源: [Rust By Example — Closures](https://doc.rust-lang.org/rust-by-example/fn/closures.html)]
 
@@ -285,6 +287,7 @@ take_closure(c2);  // ✅ 都满足 Fn()
 let f: fn(i32) -> i32 = |x| x + 1;
 // 仅当闭包不捕获环境时
 ```
+
 > **推断洞察**: 每个闭包是**唯一的匿名类型**——这是 Rust 实现零成本抽象（Zero-Cost Abstraction）的**关键设计**。
 > [来源: [RFC 1558 — Closure to Fn Coercion](https://rust-lang.github.io/rfcs//1558-closure-to-fn-coercion.html)]
 
@@ -330,6 +333,7 @@ let c = move || s;  // s 被 move
 let s = String::from("hello");
 let c = move || &s;  // ❌ 编译错误！s 被 move，无法返回引用
 ```
+
 > **move 洞察**: `move` 是**控制闭包所有权的显式工具**——它在需要延长数据生命周期（Lifetimes）或跨线程/异步（Async）边界时使用。
 > [来源: [TRPL — Move Closures](https://doc.rust-lang.org/book/ch13-01-closures.html#moving-captured-values-out-of-the-closure-and-the-fn-traits)]
 
@@ -367,6 +371,7 @@ async 块:
   → Fn(&T, &T) -> Ordering
   → items.sort_by(|a, b| a.cmp(b))
 ```
+
 > **模式矩阵**: 闭包是 Rust **函数式编程风格的核心**——它们与迭代器（Iterator）、异步（Async）和并发深度集成。
 > [来源: [Rust Patterns — Closures](https://rust-unofficial.github.io/patterns/)]
 
@@ -390,6 +395,7 @@ graph TD
     style FN_PTR fill:#c8e6c9
     style EITHER fill:#fff3e0
 ```
+
 > **认知功能**: **不捕获环境时使用 fn 指针或普通函数**——它们更简单且有明确类型。
 > [来源: [Rust API Guidelines — Functions](https://rust-lang.github.io/api-guidelines//naming.html)]
 
@@ -429,6 +435,7 @@ graph TD
 ├── 某些 IDE 对闭包支持有限
 └── 缓解: 为重要闭包提供命名包装
 ```
+
 > **边界要点**: 闭包的边界主要与**大小**、**递归**、**动态分发**、**生命周期（Lifetimes）**和**调试**相关。
 > [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
 
@@ -475,6 +482,7 @@ graph TD
   ✅ 使用 Rc/Arc 共享数据
      // 或 Box< dyn Fn() > 减少复制
 ```
+
 > **陷阱总结**: 闭包的陷阱主要与**Fn trait 选择**、**move 遗漏**、**返回引用（Reference）**、**多次调用**和**性能**相关。
 > [来源: [Common Closure Mistakes](https://doc.rust-lang.org/rust-by-example/fn/closures.html)]
 
@@ -547,6 +555,7 @@ fn make_closure_fixed() -> impl Fn() -> i32 {
     f
 }
 ```
+
 > **修正**: 默认闭包以引用（Reference）捕获环境变量。若闭包的生命周期（Lifetimes）超过被捕获变量的生命周期（如返回闭包），必须使用 `move` 关键字转移所有权。
 > `move` 闭包将环境变量复制/移动到闭包自身中，脱离原作用域。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
@@ -578,6 +587,7 @@ where
     f(); // ✅ FnOnce 只能调用一次
 }
 ```
+
 > **修正**: 闭包根据捕获方式分为三类：`Fn`（共享借用（Borrowing））、`FnMut`（可变借用）、`FnOnce`（所有权消耗）。
 > 接受闭包的函数必须声明正确的 trait bound。
 > 若闭包消耗捕获变量（如 `drop`），则只能实现 `FnOnce`，不能传递给要求 `Fn` 或 `FnMut` 的函数。
@@ -603,6 +613,7 @@ fn main() {
     // println!("{}", s);
 }
 ```
+
 > **修正**: `move` 关键字强制闭包**按值捕获**所有环境变量。对 `Copy` 类型（`i32`、`bool`、`&T`），按值捕获即复制，原变量仍可用。
 > 对非 `Copy` 类型（`String`、`Vec<T>`），按值捕获即移动，原变量失效。
 > 这是 Rust 所有权系统的统一规则，但初学者常困惑：`move` 不总是"移动"，而是"按值捕获"。
@@ -634,6 +645,7 @@ fn main() {
     // f = make_adder(10); // impl Trait 在赋值位置不可用
 }
 ```
+
 > **修正**: Rust 中每个闭包表达式有**唯一的匿名类型**，即使捕获环境和签名完全相同。
 > `impl Fn(i32) -> i32` 在返回类型中隐藏具体类型，但在变量类型中不可用（`let x: impl Trait` 非法）。
 > 若需存储多个相同签名的闭包，使用 `Box<dyn Fn(i32) -> i32>`（动态分发）或函数指针 `fn(i32) -> i32`（仅适用于无捕获闭包）。
@@ -655,6 +667,7 @@ fn main() {
     let s2 = s;
 }
 ```
+
 > **修正**: 闭包的**捕获模式**由编译器根据使用方式自动推断：
 >
 > 1) 只读使用 → `&T`（`Fn`）；
@@ -699,6 +712,7 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 > **修正**:
 > 闭包的 trait 自动实现：
 >
@@ -764,6 +778,7 @@ fn main() {
     println!("{}", count);
 }
 ```
+
 - A. 能，输出 `1`
 - B. 能，输出 `0`
 - C. 不能，闭包不能修改外部变量
@@ -792,6 +807,7 @@ fn main() {
     println!("{}", s);
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -806,6 +822,7 @@ let f = || println!("{}", s);  // 默认按引用捕获
 f();
 println!("{}", s);  // OK
 ```
+
 </details>
 
 ---
@@ -818,6 +835,7 @@ println!("{}", s);  // OK
 let s = String::from("hi");
 let f = || drop(s);
 ```
+
 - A. `Fn`, `FnMut`, `FnOnce`
 - B. 仅 `FnOnce`
 - C. 仅 `Fn` 和 `FnMut`
@@ -849,6 +867,7 @@ fn make_closure() -> impl Fn() -> i32 {
     || x
 }
 ```
+
 <details>
 <summary>✅ 答案</summary>
 
@@ -864,4 +883,5 @@ fn make_closure() -> impl Fn() -> i32 {
     move || x  // x 被 copy（i32 实现 Copy）
 }
 ```
+
 </details>

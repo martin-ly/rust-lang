@@ -1,3 +1,5 @@
+> **受众**: [研究者]
+>
 # Rust 量子计算生态
 
 > **EN**: Rust in Quantum Computing Ecosystems

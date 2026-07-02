@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Bootstrap · `x.py` · `x` · Stage0 · Stage1 · Stage2 · `bootstrap.toml` · `cfg(bootstrap)` · `RUSTC_BOOTSTRAP` — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # rustc 自举（Bootstrap）
@@ -75,6 +73,7 @@ Stage 2 compiler: 复制 stage1 artifacts 得到（发布版）
     ↓
 Stage 3: 可选，验证 stage2 输出与 stage1 一致
 ```
+
 | Stage | 说明 | 用途 |
 |:---|:---|:---|
 | **Stage 0** | 从 rustup 下载的 beta 编译器 | 启动自举 |
@@ -102,6 +101,7 @@ cp config.example.toml bootstrap.toml
 # 运行 UI 测试
 ./x test tests/ui
 ```
+
 `bootstrap.toml` 常用配置：
 
 ```toml
@@ -112,6 +112,7 @@ download-ci-llvm = true
 # 启用 debug 断言，开发时常开
 debug-assertions = true
 ```
+
 ---
 
 ## 四、常用命令
@@ -140,6 +141,7 @@ fn old_impl() { ... }
 #[cfg(not(bootstrap))]
 fn new_impl() { ... }
 ```
+
 ### `RUSTC_BOOTSTRAP`
 
 环境变量 `RUSTC_BOOTSTRAP=1` 允许在非 nightly 编译器上使用 `#![feature(...)]`：

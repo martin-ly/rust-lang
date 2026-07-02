@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [专家级]
+> **内容分级**: [专家级]
 
 # Unsafe Rust 安全编程
 >
@@ -103,11 +101,6 @@
       - [命题: "unsafe 代码可以安全地封装"](#命题-unsafe-代码可以安全地封装)
       - [命题: "Miri 可以检测所有 UB"](#命题-miri-可以检测所有-ub)
       - [边界极限测试代码](#边界极限测试代码)
-  - [九、Rustonomicon 实现深度](#九rustonomicon-实现深度)
-    - [9.1 实现 `Vec<T>` 的核心 unsafe 技术](#91-实现-vect-的核心-unsafe-技术)
-    - [9.2 实现 `Arc<T>`：原子引用计数](#92-实现-arct-原子引用计数)
-    - [9.3 实现 `Mutex<T>`：互斥与 poisoning](#93-实现-mutext-互斥与-poisoning)
-    - [9.4 Drop-Check（dropck）与 `#[may_dangle]`](#94-drop-checkdropck与-may_dangle)
   - [十、知识来源关系（Provenance）](#十知识来源关系provenance)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
     - [补充章节：FFI 与 repr 属性完整规范](#补充章节ffi-与-repr-属性完整规范)
@@ -204,6 +197,14 @@
     - [测验 2：unsafe fn 与 unsafe 块的区别（理解层）](#测验-2unsafe-fn-与-unsafe-块的区别理解层)
     - [测验 3：裸指针安全解引用（应用层）](#测验-3裸指针安全解引用应用层)
     - [测验 4：unsafe impl 的契约（分析层）](#测验-4unsafe-impl-的契约分析层)
+  - [九、Rustonomicon 实现深度](#九rustonomicon-实现深度)
+    - [9.1 实现 `Vec<T>` 的核心 unsafe 技术](#91-实现-vect-的核心-unsafe-技术)
+    - [9.2 实现 `Arc<T>`：原子引用计数](#92-实现-arct原子引用计数)
+    - [9.3 实现 `Mutex<T>`：互斥与 poisoning](#93-实现-mutext互斥与-poisoning)
+    - [9.4 Drop-Check（dropck）与 `#[may_dangle]`](#94-drop-checkdropck与-may_dangle)
+      - [9.4.1 基本问题](#941-基本问题)
+      - [9.4.2 `#[may_dangle]`](#942-may_dangle)
+      - [9.4.3 `PhantomData<T>` 与 dropck](#943-phantomdatat-与-dropck)
   - [自 docs/05\_guides/05\_unsafe\_rust\_guide.md 合并的补充内容](#自-docs05_guides05_unsafe_rust_guidemd-合并的补充内容)
     - [🔗 推荐学习路径](#-推荐学习路径)
     - [📖 Rustonomicon 逐章对标表](#-rustonomicon-逐章对标表)

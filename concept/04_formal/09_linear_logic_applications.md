@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [专家级]
+> **内容分级**: [专家级]
 
 # 线性逻辑在 Rust 中的工程应用
 >
@@ -97,6 +95,7 @@
   ├── 仿射: 资源可以使用零次或一次（Rust 的实际模型）
   └── 通过 Drop 允许"使用零次"
 ```
+
 > **认知功能**: Rust 的所有权（Ownership）是**仿射类型系统（Type System）**的工程实现——它放宽了线性逻辑的"必须恰好使用一次"为"最多使用一次"，通过 Drop 实现资源的自动释放。
 > [来源: [Girard — Linear Logic](https://girard.perso.math.cnrs.fr/linear.pdf)]
 
@@ -136,6 +135,7 @@ let (n, fd) = fd.read(&mut buf)?;  // 必须重新获取 fd
 fd.close();  // fd 被消费
 // fd.read(...);  // ❌ 编译错误！fd 已被消费
 ```
+
 > **资源洞察**: 将**资源建模为线性类型**确保资源生命周期（Lifetimes）在类型层面被追踪——不可能使用已关闭的文件描述符。
 > [来源: [RustBelt — Ownership as Types](https://plv.mpi-sws.org/rustbelt/popl18/)]
 
@@ -174,6 +174,7 @@ Session Types: 将通信协议编码为类型
   ├── 不可能在错误的状态执行操作
   └── 通信双方类型互补（对偶性）
 ```
+
 > **Session Types 洞察**: Session Types 将**通信协议的正确性**从运行时（Runtime）测试转化为**编译期类型检查**——协议违规成为类型错误。
 > [来源: [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsub/linearsub.ps)]
 
@@ -218,6 +219,7 @@ let l = Linear::new(vec![1, 2, 3]);
 let v = l.into_inner();  // 必须显式消费
 // l 之后不可用
 ```
+
 > **所有权洞察**: Rust 的**所有权是仿射类型**的实践——它平衡了安全性和实用性，通过 `Drop` 允许隐式释放，通过 `Copy` 允许复制。
 > [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
@@ -255,6 +257,7 @@ impl Drop for DatabaseConnection {
 // ├── 但可以通过类型状态模式实现严格线性
 // └── 权衡: 安全性 vs 开发体验
 ```
+
 > **Drop 洞察**: `Drop` 是 Rust **从线性到仿射的关键设计决策**——它使资源管理更实用，但也意味着某些线性属性（如必须显式关闭）需要额外的类型技巧来强制。
 > [来源: [std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)]
 
@@ -315,6 +318,7 @@ let committed = txn.commit();
 // ├── 不可能在错误状态执行操作
 // └── 状态转换是类型转换
 ```
+
 > **类型状态洞察**: **类型状态模式**是线性逻辑在 Rust 中的**最直接工程应用**——它将状态机从运行时检查转化为编译期类型约束。
 > [来源: [Rust Patterns — Typestate](https://rust-unofficial.github.io/patterns/)]
 
@@ -349,6 +353,7 @@ let committed = txn.commit();
   ├── 权限凭证
   └── 会话密钥
 ```
+
 > **应用矩阵**: 线性逻辑的**核心工程价值**是"让非法状态不可表示"——通过类型系统消除运行时状态错误。
 > [来源: [Session Types in Rust](https://munksgaard.me/papers/laumann-munksgaard-larsen.pdf)]
 
@@ -372,6 +377,7 @@ graph TD
     style LINEAR fill:#c8e6c9
     style STANDARD fill:#fff3e0
 ```
+
 > **认知功能**: **线性类型是一个谱系**——从严格线性（必须显式使用）到仿射（可自动丢弃）到标准所有权，根据场景选择。
 > [来源: [Linear Logic — Variations](https://en.wikipedia.org/wiki/Linear_logic)]
 
@@ -411,6 +417,7 @@ graph TD
 ├── 不适合探索性编程
 └── 缓解: 先原型，再形式化
 ```
+
 > **边界要点**: 线性类型工程的边界主要与**复杂性**、**生态集成**、**错误信息**、**设计成本**相关。
 > [来源: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html)]
 
@@ -455,6 +462,7 @@ graph TD
   ✅ 类型名为 Idle, Connected, Authenticated
      // 自文档化
 ```
+
 > **陷阱总结**: 线性类型工程的陷阱主要与**过度设计**、**PhantomData**、**Clone/Copy**、**容器选择**和**命名**相关。
 > [来源: [Rust Reference — PhantomData](https://doc.rust-lang.org/std/marker/struct.PhantomData.html)]
 
@@ -544,6 +552,7 @@ fn consume_clone(l: LinearClone) {
     println!("{}", l.value);
 }
 ```
+
 > **修正**: 线性逻辑要求资源**恰好使用一次**。Rust 的所有权系统是一种**仿射类型系统**（affine）——资源最多使用一次，但允许通过 `Drop` 隐式丢弃。这与纯线性逻辑（不允许丢弃）不同，更符合系统编程需求。`#[derive(Clone)]` 显式 opt-in 复制语义，避免隐式复制导致的性能问题。这与 C++ 的拷贝构造函数（默认复制）形成鲜明对比——Rust 的默认是 move，复制需显式。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：`Vec` 的线性所有权与索引（运行时 panic）
@@ -561,6 +570,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**: `Vec` 的索引操作 `v[i]` 在越界时 panic，体现了 Rust"快速失败"的哲学。从线性逻辑视角，`Vec` 是一个资源容器，其元素是子资源。越界访问试图获取不存在的子资源，是资源使用错误。`get()` 返回 `Option<&T>`，将可能的失败显式编码到类型中，调用者必须处理 `None` 情况。这是 Rust 将运行时错误转为编译期类型安全边界的典型模式。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.3 边界测试：线性资源的隐式复制（编译错误）
@@ -581,6 +591,7 @@ fn main() {
     use_file(file);
 }
 ```
+
 > **修正**: 线性逻辑在 Rust 中的体现：未实现 `Copy` 的类型在传递时**移动**（move）所有权（Ownership）。`FileHandle` 没有 `Copy` derive，因此 `use_file(file)` 将 `file` 的所有权转移给函数参数，之后 `file` 不可用。这是 Rust 资源管理的核心：文件句柄、网络连接、锁守卫等必须唯一拥有，防止双重关闭或数据竞争。若需多次使用，应实现 `Clone`（显式复制）或使用引用（Reference）（`&FileHandle`）。这与 C 的文件描述符（可复制 `int`，易双重 `close`）或 Java 的 `Closeable`（引用共享，依赖 GC 和 try-with-resources）不同——Rust 在编译期强制资源的一次性使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Linear Logic in Computer Science](https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-inference.pdf)]
 
 ### 10.4 边界测试：`Copy` 与 `Drop` 的互斥性（编译错误）
@@ -600,6 +611,7 @@ impl Clone for Resource {
     fn clone(&self) -> Self { *self }
 }
 ```
+
 > **修正**: Rust 禁止同时为类型实现 `Copy` 和 `Drop`。原因：`Copy` 语义允许按位复制（`let b = a;` 后 `a` 仍可用），若 `Resource` 有 `Drop`，复制后两个副本都需要析构——但按位复制意味着共享同一底层资源（如文件描述符），双重析构会导致重复释放。这是线性逻辑**资源唯一性**的编译期强制：有析构逻辑的类型必须是线性的（move-only），不能是复制的。这与 C++ 的拷贝构造函数（可复制，需手动实现深拷贝或引用计数）或 Swift 的 `struct`（总是可复制，但 `class` 是引用）不同——Rust 的类型系统将"可复制的值"和"需析构的资源"在 trait 层面分离。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Rust Reference — Special Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html)]
 
 ### 10.5 边界测试：`Vec::drain` 与线性资源的消耗（编译错误）
@@ -625,6 +637,7 @@ fn main() {
     let _drained: Vec<_> = v.drain(0..5).collect(); // 若越界 panic
 }
 ```
+
 > **修正**: `Vec::drain(range)` 移除指定范围内的元素并返回迭代器（Iterator）——这是**批量消耗**线性资源的操作。每个被 drain 的元素在迭代器被消费时逐个 drop（若未 `collect` 到新的 `Vec`），或在 `collect` 时转移所有权。`drain` 的边界检查：范围必须在 `0..=len` 内，否则 panic。这与线性逻辑中的**批量资源释放**对应：一次性转移多个资源的所有权，而非逐个 `pop`。Rust 的 `drain` 是高效的（O(end - start)，只移动尾部元素），但要求范围有效。这与 C++ 的 `vector::erase(first, last)`（同样批量移除，迭代器失效）或 Haskell 的列表操作（无突变，无 drain 概念）不同——Rust 的 `drain` 是所有权系统下的批量资源管理工具。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
 
 ### 10.3 边界测试：线性类型与 `Drop` 的资源泄漏边界（编译错误/逻辑问题）
@@ -646,6 +659,7 @@ fn main() {
     // ❌ 逻辑问题: 文件描述符泄漏（但 Rust 允许，forget 是 safe）
 }
 ```
+
 > **修正**: Rust 的 `std::mem::forget` 是**safe 函数**：它阻止值的 `drop` 被调用，但不触发 UB。这是 Rust "**leak safety**" 哲学的一部分：标准库不保证防泄漏，但泄漏不应导致内存不安全。`forget` 的合法用途：1) 将值的所有权转移给外部系统（如 FFI 的 C 代码负责释放）；2) 手动管理内存生命周期（Lifetimes）；3) 创建循环引用（Reference）（`Rc` 的 leak）。资源泄漏的风险：文件描述符耗尽、内存泄漏、锁未释放（导致死锁）。缓解：`ManuallyDrop<T>` 是更安全的替代——显式控制 drop 时机，不调用则编译器警告。这与 C++ 的 `std::unique_ptr::release`（放弃所有权，责任转移）或 Java 的 finalize（已废弃，不可靠）不同——Rust 的 `forget` 是显式的、有文档的安全操作。来源: [Rust Standard Library] · 来源: [The Rustonomicon]
 
 ## 嵌入式测验（Embedded Quiz）

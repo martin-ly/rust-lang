@@ -13,6 +13,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **关联文件**: [能力图谱 `competency_graph.md`](competency_graph.md) · [双维认知矩阵 `cognitive_dimension_matrix.md`](cognitive_dimension_matrix.md)
 ---
 
 ## 📑 目录

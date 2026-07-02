@@ -1,3 +1,5 @@
+> **内容分级**: [综述级]
+>
 # 测验：通用 PL 基座
 >
 > **EN**: Quiz: General PL Foundations

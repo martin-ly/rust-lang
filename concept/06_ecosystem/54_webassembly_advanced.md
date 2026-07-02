@@ -1,3 +1,5 @@
+> **受众**: [研究者]
+>
 # Rust WebAssembly 高级开发
 
 > **EN**: Advanced WebAssembly Development with Rust
@@ -65,6 +67,7 @@
 > - v1.0 (2026-05-26): 初始创建——覆盖 WASM 权威定义、执行模型、Rust 工具链、组件模型、WASI Preview 2、性能边界、安全沙箱、反命题树与边界测试
 > **前置概念**: N/A
 > **后置概念**: N/A
+>
 ---
 
 ## 一、权威定义
@@ -81,6 +84,7 @@ Wasm 演进路径:
   组件模型 (2023+): WIT 接口定义 + 跨语言组合 → 软件组件级抽象
   WASI Preview 2 (2024): 能力安全系统接口 → 服务端/边缘原生运行
 ```
+
 > **关键洞察**: Wasm 遵循 **"最小可行核心 + 渐进式扩展"** 哲学。MVP 即保证安全与可移植，后续提案在不破坏向后兼容的前提下逐步释放性能与表达能力。这与 Java 字节码"一开始就设计完整虚拟机"的策略形成鲜明对比。
 > [来源: [WebAssembly Design Principles](https://webassembly.org/docs/portability/)]
 
@@ -96,6 +100,7 @@ Wasm 演进路径:
 ├── 函数签名 + 内存引用    ├── 记录/变体/结果/资源
 ├── 仅同构模块            └── 跨语言 (Rust ↔ Go ↔ Python)
 ```
+
 > **设计洞察**: 组件模型类似于 **COM、gRPC 或 D-Bus**，但建立在 Wasm 沙箱之上。WIT 接口定义替代了 C 头文件或 Protocol Buffers，而 Wasm 运行时替代了操作系统进程边界。这是软件组合从"平台特定"走向"universally portable"的关键一步。
 > [来源: [Component Model Overview](https://component-model.bytecodealliance.org/design/why-component-model.html)]
 
@@ -111,6 +116,7 @@ WASI 演进:
   Preview 2 (2024): 组件模型 + WIT 接口 — 能力安全 + 虚拟文件系统 + 网络 socket
   Preview 3 (未来): 异步 I/O + 图形 GUI + 设备访问标准化
 ```
+
 > **来源**: [WASI Preview 2 Docs](https://wasi.dev) · [WASI Evolution](https://github.com/WebAssembly/WASI/blob/main/docs/wasi-tutorial.md)
 
 ---
@@ -131,6 +137,7 @@ pub fn process_image_data(data: &[u8], width: u32, height: u32) -> Vec<u8> {
     output
 }
 ```
+
 > **执行模型约束**: 单线程（Web Workers 是独立实例）、无直接 DOM 访问（须通过 JS 胶水）、事件循环共享（`wasm-bindgen-futures` 桥接 `Future` 到 JS `Promise`）。
 > [来源: [wasm-bindgen Futures](https://rustwasm.github.io/docs/wasm-bindgen/reference/js-promises-and-rust-futures.html)]
 
@@ -166,6 +173,7 @@ pub fn process_image_data(data: &[u8], width: u32, height: u32) -> Vec<u8> {
   3. 能力严格受限: 仅出站 HTTP/HTTPS（需配置），文件系统只读或临时写入
   4. 冷启动敏感: 二进制体积直接影响启动延迟
 ```
+
 > **性能对比**: Docker 容器冷启动 100ms~数秒 vs Wasm 模块 0.1ms~5ms。
 > [来源: [Cloudflare Blog — Wasm on Workers](https://blog.cloudflare.com/webassembly-on-cloudflare-workers/)]
 
@@ -197,6 +205,7 @@ impl Counter {
     pub fn value(&self) -> i32 { self.value }
 }
 ```
+
 > **wasm-bindgen 机制**: (1) 字符串编解码 UTF-8↔UTF-16；(2) 对象句柄表防止 GC 提前回收；(3) Rust `panic!` → JS `Error`；(4) `wasm_bindgen_futures::spawn_local` 桥接 `Future` 到 JS 事件循环。
 > [来源: [wasm-bindgen Architecture](https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/index.html)]
 
@@ -212,6 +221,7 @@ wasm-pack build              # 编译 + 绑定生成 + 优化
 wasm-pack test --headless    # 浏览器内自动化测试
 wasm-pack publish            # 发布到 npm registry
 ```
+
 ```text
 wasm-pack 构建流水线:
   Rust 源代码 → cargo build --target wasm32-unknown-unknown
@@ -219,6 +229,7 @@ wasm-pack 构建流水线:
     → wasm-opt (Binaryen) 优化字节码（死代码消除/常量折叠/函数内联）
     → package.json + .d.ts 类型定义生成
 ```
+
 > **来源**: [wasm-pack Build](https://rustwasm.github.io/docs/wasm-pack/commands/build.html)
 
 ---
@@ -231,6 +242,7 @@ wasm-pack 构建流水线:
 trunk serve               # 开发服务器（自动重载）
 trunk build --release     # 生产构建（自动 wasm-opt）
 ```
+
 > **关键洞察**: `trunk` 代表 Rust 前端生态的 **"去 JS 化"** 趋势——构建工具本身也是 Rust 编写，避免了 Node.js/npm 的依赖地狱。与 `wasm-pack` 侧重库发布不同，`trunk` 侧重应用打包（SPA 架构）。
 > [来源: [Trunk README](https://github.com/thedodd/trunk)]
 
@@ -244,6 +256,7 @@ trunk build --release     # 生产构建（自动 wasm-opt）
 cargo component new --reactor my-component
 cargo component build     # 自动生成绑定 + 编译为 Wasm 组件
 ```
+
 ```wit
 // wit/calculator.wit
 package example:calculator@0.1.0;
@@ -253,6 +266,7 @@ interface operations {
 }
 world calculator { export operations; }
 ```
+
 ```rust,ignore
 mod bindings;
 use bindings::exports::example::calculator::operations::*;
@@ -264,6 +278,7 @@ impl Guest for Component {
 }
 bindings::export!(Component with_types_in bindings);
 ```
+
 > **来源**: [cargo-component Documentation](https://github.com/bytecodealliance/cargo-component/blob/main/README.md)
 
 ---
@@ -290,6 +305,7 @@ interface type-examples {
     }
 }
 ```
+
 > **类型提升规则**: WIT 的类型系统（Type System）是多种编程语言类型系统的 **"最大公约数"**。Rust `Result<T, E>` ↔ WIT `result<T, E>`（精确对应）；Go `(T, error)` ↔ WIT `result<T, string>`（自动转换）；Python 异常 ↔ WIT `result<T, E>`（异常捕获包装）。
 > [来源: [Component Model Types](https://component-model.bytecodealliance.org/design/wit.html)]
 
@@ -307,6 +323,7 @@ World W = (Imports, Exports)
 组合规则: 若 Exports_A ⊇ Imports_B（接口兼容），则 A 和 B 可组合
 组合后 World C = (Imports_A, Exports_B)
 ```
+
 ```wit
 package example:app@0.2.0;
 
@@ -319,6 +336,7 @@ world app-world {
     export run: func() -> result<string, string>;
 }
 ```
+
 > **关键洞察**: World 的设计将**依赖注入（DI）**提升到了操作系统级别。传统微服务通过环境变量获取依赖地址；WASI 组件通过 World 的 Imports 在链接时显式注入能力，使依赖关系可静态验证、可组合、可替换。
 > [来源: [Component Model Composition](https://component-model.bytecodealliance.org/design/components.html)]
 
@@ -335,6 +353,7 @@ world app-world {
   运行时组合: wasmtime compose app-component.wasm math-component.wasm
     → composed-app.wasm (自包含，无外部依赖)
 ```
+
 > **来源**: [wit-bindgen Language Support](https://github.com/bytecodealliance/wit-bindgen#language-support)
 
 ---
@@ -357,6 +376,7 @@ let mut wasi = WasiCtxBuilder::new()
 let mut store = Store::new(&engine, wasi);
 // Guest 只能访问 /data 挂载点，无法访问 /etc/passwd 或上级目录
 ```
+
 **WASI 能力模型与 Rust 所有权（Ownership）模型的同构性**:
 
 | 概念 | WASI 能力模型 | Rust 所有权（Ownership）模型 |
@@ -384,6 +404,7 @@ WASI Preview 2 能力粒度:
   随机数: get-random 需要 crypto-random 能力
   无默认能力: 不授予 = 不存在
 ```
+
 ```rust,ignore
 // Rust 的 wasi crate: 标准库 API 底层映射到 WASI 调用
 use std::fs::File;
@@ -394,6 +415,7 @@ fn main() {
     file.write_all(b"Hello from WASI").unwrap();
 }
 ```
+
 > **来源**: [Rust `wasm32-wasip1` 或 `wasm32-wasip2` Target](https://doc.rust-lang.org/rustc/platform-support/wasm32-wasip1.html)
 
 ---
@@ -415,6 +437,7 @@ let module = Module::from_file(&engine, "guest.wasm")?;
 let mut store = Store::new(&engine, HostState::default());
 let instance = linker.instantiate(&mut store, &module)?;
 ```
+
 > **来源**: [Wasmtime Rust API](https://docs.wasmtime.dev/lang-rust.html)
 
 ---
@@ -432,6 +455,7 @@ let instance = linker.instantiate(&mut store, &module)?;
   高成本:    String — UTF-8↔UTF-16 转换 + 堆分配
   极高成本:  JS Object → 句柄表 → Wasm → JS 回调 — GC 屏障检查
 ```
+
 ```rust,ignore
 // ✅ 优化：批量处理减少边界穿越
 #[wasm_bindgen]
@@ -447,6 +471,7 @@ pub fn process_single_pixel(r: u8, g: u8, b: u8, a: u8) -> [u8; 4] {
     [r, g, b, a]  // 每像素一次 FFI 调用，开销占主导
 }
 ```
+
 > **优化策略**: (1) 批量 API 一次处理大量数据；(2) 预分配 `SharedArrayBuffer` 避免重复分配；(3) 将算法完全放入 Wasm，仅在输入/输出时穿越边界。
 > [来源: [Wasm Performance Guide](https://webassembly.org/docs/portability/)]
 
@@ -470,12 +495,14 @@ pub fn rgba_to_grayscale_simd(rgba: &[u8], gray: &mut [u8]) {
     }
 }
 ```
+
 ```text
 批量内存操作 (Bulk Memory):
   memory.copy / memory.fill / memory.init
   性能影响: 字符串/缓冲区操作 10-100x 提升（相比逐字节循环）
   Rust 标准库自动使用: Vec::copy_from_slice, slice::fill 等
 ```
+
 > **来源**: [Rust std::arch::wasm32](https://doc.rust-lang.org/core/arch/wasm32/index.html)
 
 ---
@@ -490,6 +517,7 @@ pub fn rgba_to_grayscale_simd(rgba: &[u8], gray: &mut [u8]) {
   后处理: wasm-opt (-Oz 体积优先, --dce 死代码消除), wasm-snip, twiggy 体积分析
   运行时: gzip/brotli 压缩(减少 60-80%), WebAssembly.instantiateStreaming(), 按需加载
 ```
+
 > **来源**: [wasm-opt Documentation](https://github.com/WebAssembly/binaryen/blob/main/src/tools/wasm-opt.cpp) · [twiggy README](https://github.com/rustwasm/twiggy)
 
 ---
@@ -542,6 +570,7 @@ pub fn hash_data(input: &[u8]) -> [u8; 32] {
     *hasher.finalize().as_bytes()
 }
 ```
+
 > **来源**: [Rust `wasm32-wasip1` 或 `wasm32-wasip2` Target Docs](https://doc.rust-lang.org/rustc/platform-support/wasm32-wasip1.html)
 
 ---
@@ -585,6 +614,7 @@ pub fn hash_data(input: &[u8]) -> [u8; 32] {
 └── 根结论: ❌ WASM 的计算性能接近原生，但边界交互和启动有明确开销。
            工程上应将计算密集型逻辑完整放入 Wasm，减少宿主交互频率。
 ```
+
 > **来源**: [WebAssembly Use Cases](https://webassembly.org/docs/use-cases/) · [Docker Wasm Guide](https://docs.docker.com/desktop/wasm/) · [Wasm vs Native Benchmarks](https://00f.net/2023/01/04/webassembly-benchmark-2023/)
 
 ---
@@ -618,6 +648,7 @@ pub fn apply_config(config: Config) -> String {
 //   2. 使用 JsValue + serde-wasm-bindgen 手动序列化
 //   3. 将 String 替换为 &str，Vec<f64> 替换为 &[f64] 在函数参数中
 ```
+
 > **修正**: `wasm-bindgen` 的自动类型映射有严格限制。包含 `String`、`Vec<T>` 的自定义结构体（Struct）不能直接作为函数参数或返回值——因为 JS 和 Rust 的内存布局不兼容（JS GC 堆 vs Wasm 线性内存）。安全做法：使用 `#[wasm_bindgen]` 标记的简单位段结构体，或通过 `serde-wasm-bindgen` 显式序列化为 `JsValue`。这反映了 FFI 边界的根本约束：**不同运行时之间不存在安全的直接指针共享**。
 > [来源: [wasm-bindgen Types](https://rustwasm.github.io/docs/wasm-bindgen/reference/types.html)] · [来源: [wasm-bindgen Exported Types](https://rustwasm.github.io/docs/wasm-bindgen/reference/types/exported-rust-types.html)]
 
@@ -652,6 +683,7 @@ pub fn recursive_call(n: i32) -> i32 {
 //   2. 限制递归深度，或改写为迭代算法
 //   3. 使用 wasm-bindgen-futures 将递归转为异步 Future 链
 ```
+
 > **修正**: JS 引擎和 Wasm 运行时共享**同一块栈空间**（通常 1MB 左右）。JS → Wasm → JS → Wasm 的同步递归调用会在同一线程栈上累积帧，没有独立的栈切换机制。异步（Async）调用（Promise/Future）将调用帧卸载到堆上，是避免此类栈溢出的标准模式。
 > [来源: [V8 Stack Size](https://v8.dev/blog)] · [来源: [wasm-bindgen Callbacks](https://rustwasm.github.io/docs/wasm-bindgen/reference/receiving-js-closures-in-rust.html)]
 
@@ -681,6 +713,7 @@ fn main() {
 //   2. 服务端/边缘场景: 切换到 `wasm32-wasip1` 或 `wasm32-wasip2` 目标
 //   3. 纯计算场景: 将文件内容作为 &[u8] 参数传入 Wasm
 ```
+
 > **修正**: `wasm32-unknown-unknown` 明确表示"无供应商、无操作系统"。Rust 标准库在此目标下仅提供 `core` 和可选的 `alloc`——`std::fs`、`std::net`、`std::thread` 等模块被编译器明确排除。这是 Rust 目标平台抽象的强大之处：**不支持的 API 在编译期即被拒绝**。相比之下，C/C++ 编译到 Wasm 时，I/O 调用可能静默链接到 Emscripten 虚拟文件系统或产生未定义符号。
 > [来源: [Rust Platform Support — wasm32](https://doc.rust-lang.org/nightly/rustc/platform-support.html)] · [来源: [Rust and WebAssembly Book](https://rustwasm.github.io/book/)]
 

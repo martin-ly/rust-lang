@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [专家级]
+> **内容分级**: [专家级]
 
 # 分离逻辑：Rust 所有权的形式化根基
 >
@@ -97,6 +95,7 @@
   ├── 其他部分不受影响（框架规则）
   └── 支持局部推理和组合
 ```
+
 > **认知功能**: **分离逻辑将"资源独占"从编程直觉提升为数学公理**——它是 Rust 所有权系统的形式化先驱。
 > [来源: [Reynolds — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf)]
 
@@ -137,6 +136,7 @@
   │ ∃x. P               │ 存在类型 / 匿名引用         │
   └─────────────────────┴─────────────────────────────┘
 ```
+
 > **分离洞察**: **分离合取 (*) 是分离逻辑的核心创新**——它精确编码了"资源不重叠"的概念，与 Rust 的独占所有权直接对应。
 > [来源: [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
 
@@ -177,6 +177,7 @@
   process(&mut v);
   // s 完全不受影响（编译期保证）
 ```
+
 > **框架洞察**: **框架规则是"局部推理"的数学基础**——它使验证可以模块（Module）化，与 Rust 的所有权隔离完美对应。
 > [来源: [O'Hearn — Resources, Concurrency and Local Reasoning](https://www.cs.ucl.ac.uk/staff/p.ohearn/papers/localreasoning.pdf)]
 
@@ -219,6 +220,7 @@
   ├── 分离逻辑的 -* 对应线性逻辑的 ⊸
   └── 分离逻辑是直觉主义线性逻辑的变体
 ```
+
 > **断言洞察**: **分离蕴含（-*）是 Rust mutable borrow 的形式化对应**——"如果你有独占访问，你可以修改"。
 > [来源: [Iris Lecture Notes](https://iris-project.org/tutorial-pdfs/iris-lecture-notes.pdf)]
 
@@ -262,6 +264,7 @@ Rust 所有权 → 分离逻辑:
   ├── 验证生命周期约束
   └── 保证无数据竞争
 ```
+
 > **映射洞察**: **Rust 的 borrow checker 是分离逻辑的"自动版本"**——编译器自动证明程序满足分离逻辑约束。
 > [来源: [RustBelt — Logical Relations](https://plv.mpi-sws.org/rustbelt/popl18/)]
 
@@ -301,6 +304,7 @@ Iris: 更高阶并发分离逻辑框架
   ├── RustBelt: Rust 特定扩展
   └── Aneris: 分布式系统扩展
 ```
+
 > **Iris 洞察**: **Iris 将分离逻辑扩展到并发和更高阶场景**——它是验证 Rust unsafe 代码的数学基础。
 > [来源: [Iris Project](https://iris-project.org/)]
 
@@ -336,6 +340,7 @@ Unsafe 代码审计:
   → Rc/Arc 的引用计数验证
   → 共享所有权的正确性
 ```
+
 > **模式矩阵**: **分离逻辑是连接 Rust 工程实践和形式化验证的桥梁**——它为所有权系统提供了严格的数学语义。
 > [来源: [RustBelt — Methodology](https://plv.mpi-sws.org/rustbelt/popl18/)]
 
@@ -359,6 +364,7 @@ graph TD
     style FORMAL fill:#c8e6c9
     style TESTING fill:#fff3e0
 ```
+
 > **认知功能**: **Safe Rust 已由编译器验证**，形式化验证主要针对 **unsafe 代码和安全关键组件**。
 > [来源: [Rust Verification Tools](https://alastairreid.github.io/rust-verification-tools/)]
 
@@ -398,6 +404,7 @@ graph TD
 ├── 硬件 bug 可能破坏软件保证
 └── 缓解: 硬件验证 + 容错设计
 ```
+
 > **边界要点**: 形式化验证的边界主要与**复杂度**、**工具可用性**、**语义鸿沟**、**并发**和**硬件差距**相关。
 > [来源: [The Limitations of Formal Verification](https://www.hillelwayne.com/post/why-dont-people-use-formal-methods/)]
 
@@ -441,6 +448,7 @@ graph TD
   ✅ 逐步细化模型
      // 从核心属性开始
 ```
+
 > **陷阱总结**: 形式化验证的陷阱主要与**逻辑混淆**、**框架规则假设**、**过度形式化**、**工具限制**和**抽象精度**相关。
 > [来源: [Formal Verification Pitfalls](https://www.hillelwayne.com/post/why-dont-people-use-formal-methods/)]
 
@@ -466,6 +474,7 @@ fn main() {
     println!("{}", x);
 }
 ```
+
 ## 相关概念文件
 
 - [Linear Logic](01_linear_logic.md) — 线性逻辑
@@ -525,6 +534,7 @@ fn fixed() {
     println!("{:?}", data); // [10, 2, 20, 4]
 }
 ```
+
 > **修正**:
 > 分离逻辑的核心是 **frame rule**：若 `P` 描述某部分内存的状态，则可在保持 `P` 不变的情况下，对内存的其他部分进行推理。
 > `split_at_mut` 将数组分割为两个不重叠的可变切片（Slice），编译器验证分割点不会导致重叠借用（Borrowing）。
@@ -548,6 +558,7 @@ fn fixed() {
     println!("{}", r);
 }
 ```
+
 > **修正**:
 > `Box::leak` 将堆内存转换为 `&'static` 引用（Reference），放弃释放义务。
 > 在分离逻辑中，`Box<T>` 对应于 `own(τ, ℓ)`（对 ℓ 的独占所有权），`Box::leak` 将 `own(τ, ℓ)` 转换为 `shr(static, ℓ)`（静态共享权限）。
@@ -572,6 +583,7 @@ fn main() {
     swap(&mut x, &mut y); // ✅ 不重叠
 }
 ```
+
 > **修正**:
 > 分离逻辑（Separation Logic）的**帧规则**（Frame Rule）：若 `{P} C {Q}` 成立，则对任意不相交的断言 `R`，`{P * R} C {Q * R}` 也成立。
 > 在 Rust 中，这意味着操作一部分内存时，不影响其他不重叠的内存。
@@ -598,6 +610,7 @@ fn main() {
     });
 }
 ```
+
 > **修正**:
 > `GhostCell`（基于 GhostCell paper）是 Rust 中**零运行时（Runtime）成本**的内部可变性抽象，使用分离逻辑建模：
 > 每个 `GhostCell` 关联一个编译期品牌（brand，由 `GhostToken` 代表），同一品牌的所有 cell 共享一个可变借用（Mutable Borrow） token。
@@ -627,6 +640,7 @@ fn main() {
     // 只能分裂为 shr(x, i32) * shr(x, i32)
 }
 ```
+
 > **修正**:
 > RustBelt 使用分离逻辑建模 Rust 的所有权系统：`own(x, T)` 表示独占所有权（对应 `&mut T`），`shr(x, T)` 表示共享读取权（对应 `&T`）。
 > 关键规则：
@@ -650,6 +664,7 @@ fn main() {
     *r2 = 20;
 }
 ```
+
 > **修正**:
 > 分离逻辑（Separation Logic）的核心公理：
 >
@@ -711,6 +726,7 @@ let mut x = 5;
 let y = 3;
 x += 1; // 编译器只需验证 x 的可变性，y 是"帧外"资源
 ```
+
 函数契约也是如此：`fn foo(v: &mut Vec<i32>)` 的验证只需考虑 `v`，其他变量自动由帧规则保护。
 </details>
 
@@ -725,6 +741,7 @@ let mut v = vec![1, 2, 3];
 let first = &mut v[0];
 *first = 10;
 ```
+
 - A. 分离逻辑的"合并"（* 的消除）
 - B. 分离逻辑的"拆分"（* 的引入）
 - C. 分离逻辑的"框架规则"应用
@@ -787,6 +804,7 @@ let first = &mut v[0];
 ```rust
 let s: &'static str = Box::leak(String::from("hello").into_boxed_str());
 ```
+
 分离逻辑视角：
 
 - 之前：`own(String, ℓ)` —— 独占所有权，可 drop

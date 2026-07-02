@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: rustc_driver · rustc_interface · `run_compiler` · Callbacks · `rustc_private` · Stable MIR · `rustc_public` · Compiler Session — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # rustc Driver、Interface 与 Stable MIR
@@ -92,6 +90,7 @@ fn main() {
     );
 }
 ```
+
 `Callbacks` trait 的关键钩子：
 
 | 钩子 | 触发时机 |
@@ -120,6 +119,7 @@ interface::run_compiler(config, |compiler| {
     });
 });
 ```
+
 适合 `rustc_driver` 不够灵活的场景，例如 rustdoc 需要拿到分析结果但不生成二进制。
 
 > **警告**: 这些内部 API 永远不稳定，升级 Rust 版本时可能需要同步修改。
@@ -135,6 +135,7 @@ interface::run_compiler(config, |compiler| {
 ```bash
 rustup component add rustc-dev llvm-tools
 ```
+
 | 组件 | 作用 |
 |:---|:---|
 | `rustc-dev` | 提供 rustc 内部库（如 `rustc_driver`、`rustc_interface`） |

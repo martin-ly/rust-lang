@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: 编码 (Encoding) · UTF-8 · OsString · CString · 字符串操作 · 字符 (char) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 字符串与编码：Rust 的文本处理类型系统
@@ -101,6 +99,7 @@ Rust 字符串类型的所有权谱系:
   ├── 存储: 二进制只读段
   └── 生命周期: 'static
 ```
+
 ```rust
 // 所有权转换示例 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)
 fn main() {
@@ -112,6 +111,7 @@ fn main() {
     // 注意: s1 被 move 了！
 }
 ```
+
 > **认知功能**: String/&str 的**所有权设计**是 Rust 所有权系统的教科书案例——String 拥有数据，&str 借用（Borrowing）数据，通过 Deref 实现无缝协作，避免了 C++ 中 std::string/const char* 的混乱。
 > [来源: [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html)]
 > **关键洞察**: &str 的普适性使其成为 Rust API 设计的首选参数类型——接受 &str 意味着调用者可以传入 String、&str 或任何能 Deref 到 str 的类型。
@@ -150,6 +150,7 @@ Rust 强制 UTF-8 的设计决策:
   │ GB2312      │ ✅ 1 字节   │ ⚠️ 中文 2B  │ ⚠️ 部分     │
   └─────────────┴─────────────┴─────────────┴─────────────┘
 ```
+
 > **认知功能**: UTF-8 选择的**核心权衡**——牺牲了 O(1) 字符索引（实际上 Unicode 的 combining characters 使"字符"概念本身复杂），换取了与现有生态（Web、文件系统、C 库）的无缝兼容。
 > [来源: [UTF-8 RFC 3629](https://tools.ietf.org/html/rfc3629)]
 
@@ -193,6 +194,7 @@ Rust 的字符串类型全景:
   │ Vec<u8>     │ from_utf8()?│ OsString::  │ new()?      │
   └─────────────┴─────────────┴─────────────┴─────────────┘
 ```
+
 > **认知功能**: Rust 的**多字符串类型设计**反映了对不同"字符串契约"的精确建模——str 保证 UTF-8，OsStr 不保证但支持平台原生编码，CStr 保证 NUL 终止。每次转换都是潜在的失败点，强制开发者显式处理编码不匹配。
 > [来源: [std::ffi::OsString](https://doc.rust-lang.org/std/ffi/struct.OsString.html)]
 
@@ -233,6 +235,7 @@ Rust 的字符串类型全景:
   │ lines()     │ &str        │ 行分割                      │
   └─────────────┴─────────────┴─────────────────────────────┘
 ```
+
 ```rust
 // 安全字符串处理示例 [来源: Rust Standard Library]
 fn safe_slice(s: &str, start: usize, end: usize) -> Option<&str> {
@@ -245,6 +248,7 @@ fn char_at(s: &str, n: usize) -> Option<char> {
     s.chars().nth(n)
 }
 ```
+
 > **认知功能**: 字符串切片（String Slice）的**边界安全设计**——Rust 选择让越界切片 panic（或通过 get 返回 Option），而非像某些语言那样静默产生无效 UTF-8，这是对"数据完整性"优先于"操作便利性"的价值选择。
 > [来源: [std::str — Slicing](https://doc.rust-lang.org/std/primitive.str.html#slicing)]
 
@@ -278,6 +282,7 @@ Unicode 文本分割的三个层次:
   s.chars().count()         // 1 或 2
   s.graphemes(true).count() // 始终 1（用户感知）
 ```
+
 ```mermaid
 graph TD
     A[原始字节序列] --> B{UTF-8 解码}
@@ -290,6 +295,7 @@ graph TD
     F --> I[光标移动]
     F --> J[字符串长度统计]
 ```
+
 > **认知功能**: Grapheme Cluster 的**三层抽象**揭示了"什么是字符"这一看似简单的问题在 Unicode 世界中的复杂性——Rust 的 char 是"标量值"，不等于"用户看到的字符"，真正的文本处理需要更高层抽象。
 > [来源: [Unicode Standard — Text Segmentation](https://www.unicode.org/reports/tr29/)]
 
@@ -328,6 +334,7 @@ Unicode Normalization（规范化）:
   ├── 搜索: 查询和索引使用同一 NF
   └── 密码哈希: 输入必须先规范化
 ```
+
 > **认知功能**: Unicode Normalization 的**必要性**——在不规范化的世界里，"看起来相同的字符串"在字节层面可能完全不同，这会导致安全漏洞（如绕过用户名验证）和数据不一致。
 > [来源: [Unicode Standard — Normalization](https://www.unicode.org/reports/tr15/)]
 
@@ -393,6 +400,7 @@ Unicode Normalization（规范化）:
       └── ✅ 正确表述: "chars().count() 是 Unicode 标量值数量，不等于视觉字符数"
 > [来源: [Unicode Standard — Text Segmentation](https://www.unicode.org/reports/tr29/)]
 ```
+
 > **认知功能**: 反命题分析揭示了字符串操作的**常见认知偏差**——开发者直觉中的"字符"与 Rust/Unicode 技术定义之间的鸿沟，这正是 grapheme 和 normalization 库存在的理由。
 > [来源: [Wikipedia — Unicode](https://en.wikipedia.org/wiki/Unicode)]
 
@@ -422,6 +430,7 @@ Unicode Normalization（规范化）:
   ├── const str::len() 可用，但 const grapheme 处理不可用
   └── 极限: 编译期文本处理受 const eval 能力限制
 ```
+
 > **认知功能**: 边界极限指明了标准字符串类型的**适用疆域**——在性能极致、平台抽象、编译期计算等场景下，需要借助外部 crate 或 unsafe 代码突破标准库的约束。
 > [来源: [Rust Reference — str](https://doc.rust-lang.org/reference/types/textual.html)]
 
@@ -474,6 +483,7 @@ Unicode Normalization（规范化）:
      // CString::new(bytes).map_err(...)?
 > [来源: [std::ffi::CString::new](https://doc.rust-lang.org/std/ffi/struct.CString.html#method.new)]
 ```
+
 > **陷阱总结**: 字符串处理的陷阱集中在**索引语义**、**编码假设**、**性能模式**、**规范化**和**FFI 边界**五个方面——每个都源于 Unicode 的复杂性与 Rust 类型安全设计之间的张力。
 > [来源: [TRPL — Common Collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 
@@ -530,6 +540,7 @@ classDiagram
     CString --|> CStr : Deref
     String ..> str : as_str()
 ```
+
 ## 相关概念文件
 
 - [Ownership](01_ownership.md) — 所有权系统基础
@@ -557,6 +568,7 @@ fn main() {
     println!("chars: {}", s.chars().count());
 }
 ```
+
 ---
 
 ## 权威来源索引
@@ -590,6 +602,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**:
 > `std::str::from_utf8` 验证字节序列是否为有效 UTF-8，返回 `Result<&str, Utf8Error>`。
 > 这与 `from_utf8_unchecked`（unsafe，假设输入有效）形成对比。
@@ -621,6 +634,7 @@ fn fixed() {
     let os_string = os_str.to_os_string();
 }
 ```
+
 > **修正**:
 >
 > `OsStr`/`OsString` 是平台相关的字符串类型，用于文件路径、环境变量等系统接口。
@@ -641,6 +655,7 @@ fn main() {
     // OsString 可能包含非 UTF-8 字节（Windows 的 WTF-8）
 }
 ```
+
 > **修正**:
 > `String` 要求严格 UTF-8，而 `OsString` 是平台相关的字符串类型：
 > Unix 上是任意字节序列（非 NUL），Windows 上是 WTF-8（兼容 UTF-8 的扩展，允许未配对的代理项）。
@@ -661,6 +676,7 @@ fn main() {
     println!("{}", bad);
 }
 ```
+
 > **修正**:
 >
 > Rust 的字符串切片（Slice） `&s[begin..end]` 按字节索引，但要求 `begin` 和 `end` 都落在 UTF-8 字符边界处。
@@ -684,6 +700,7 @@ fn main() {
     println!("{}", s);
 }
 ```
+
 > **修正**:
 > `String::from_utf8_unchecked` 是 `unsafe` 方法：它假设输入字节是有效的 UTF-8，不做任何验证。
 > 无效 UTF-8 导致 UB：Rust 的 `String` 类型 invariant 要求内容始终为有效 UTF-8，违反此 invariant 可能导致后续操作（索引、切片（Slice）、正则匹配）产生任意结果。
@@ -709,6 +726,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**:
 > `OsStr`/`OsString` 是平台相关的字符串类型，可能包含非 UTF-8 序列（Windows 的 WTF-8、Unix 的字节序列）。
 > `str`/`String` 要求严格 UTF-8。两者不能直接比较或转换：`OsStr` → `str` 需 `to_str()`（返回 `Option<&str>`，可能失败）；

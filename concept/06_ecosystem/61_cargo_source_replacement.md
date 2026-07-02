@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Source Replacement · `[source]` · `replace-with` · Vendoring · `cargo vendor` · Local Registry · Directory Source · Offline Mode — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Cargo Source Replacement 与 Vendoring
@@ -70,6 +68,7 @@ replace-with = 'my-mirror'
 [source.my-mirror]
 registry = "sparse+https://mirrors.example.com/crates.io-index/"
 ```
+
 核心键：
 
 | 键 | 含义 |
@@ -96,6 +95,7 @@ replace-with = 'company-mirror'
 [source.company-mirror]
 registry = "sparse+https://crates.company.com/index/"
 ```
+
 - 索引格式必须符合 [registry index 规范](https://doc.rust-lang.org/cargo/reference/registry-index.html)；
 - 镜像必须包含原 source 中所有被依赖的 crate；
 - 发布到 crates.io 的命令需要 `--registry crates.io` 来避免歧义。
@@ -115,6 +115,7 @@ replace-with = 'local-registry'
 [source.local-registry]
 local-registry = "/path/to/local/registry"
 ```
+
 通常用 [`cargo-local-registry`](https://crates.io/crates/cargo-local-registry) 维护。
 
 ### 4.2 Directory Source
@@ -128,6 +129,7 @@ replace-with = 'vendored'
 [source.vendored]
 directory = "vendor"
 ```
+
 每个 crate 一个目录，Cargo 会校验 `.cargo-checksum.json` 防止意外修改。
 
 ---
@@ -141,6 +143,7 @@ cargo vendor
 # 生成可直接使用的 config.toml 片段
 cargo vendor > .cargo/config.toml
 ```
+
 执行后项目结构示例：
 
 ```text
@@ -153,6 +156,7 @@ my-project/
     ├── tokio/
     └── ...
 ```
+
 `.cargo/config.toml` 会自动包含 `directory = "vendor"` 的 source replacement。
 
 > **注意**: 提交 `vendor/` 到仓库会显著增大体积，但能保证完全离线构建。
@@ -170,6 +174,7 @@ Git source 用于替换基于 git 的依赖：
 git = "https://github.com/my-mirror/rust"
 # branch = "master"
 ```
+
 > **边界**: Git source replacement 不能替换 registry source，只能替换 git 依赖本身。
 
 ---
@@ -180,6 +185,7 @@ git = "https://github.com/my-mirror/rust"
 # 只使用本地缓存，禁止网络请求
 cargo build --offline
 ```
+
 - 依赖必须已经在 `CARGO_HOME` 缓存中；
 - 常与 `cargo vendor` 或 CI 缓存配合使用；
 - 如果缓存缺失，离线构建会失败。
@@ -199,6 +205,7 @@ cargo build --offline
 [patch.crates-io]
 serde = { path = "../serde-fix" }
 ```
+
 > **反模式**: 用 source replacement 来“给依赖打补丁”会违反 Cargo 的等价性假设，应使用 `[patch]`。
 >
 > [来源: Cargo Book — Overriding Dependencies](https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html)

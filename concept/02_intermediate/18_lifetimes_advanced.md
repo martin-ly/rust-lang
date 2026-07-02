@@ -1,6 +1,4 @@
-> **内容分级**:
->
-> [综述级]
+> **内容分级**: [综述级]
 > **本节关键术语**: 高级生命周期 (Advanced Lifetimes) · HRTB · 生命周期省略（Lifetime Elision）规则 (Elision) · 子类型 (Subtyping) · 变型 (Variance) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 生命周期高级主题：从 HRTB 到自引用类型
@@ -100,6 +98,7 @@ HRTB (Higher-Ranked Trait Bounds):
   ├── 某些 trait 方法需要灵活的生命周期
   └── 否则泛型函数无法接受闭包
 ```
+
 > **认知功能**: HRTB 是 Rust **泛型（Generics）与借用（Borrowing）结合**的关键机制——它使闭包（Closures）和回调可以接受任意生命周期的引用。
 > [来源: [RFC 0387 — HRTB](https://rust-lang.github.io/rfcs//0387-higher-ranked-trait-bounds.html)]
 
@@ -140,6 +139,7 @@ HRTB (Higher-Ranked Trait Bounds):
   }
   // 返回的生命周期必须 <= 两个输入的最小值
 ```
+
 > **省略洞察**: 生命周期省略（Lifetime Elision）**不是可选特性**——它是使 Rust 代码可读的关键设计，覆盖了 90% 的常见模式。
 > [来源: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)]
 
@@ -184,6 +184,7 @@ HRTB (Higher-Ranked Trait Bounds):
   ├── 不变阻止危险的生命周期缩短
   └── 理解变型有助于解决生命周期错误
 ```
+
 > **变型洞察**: **变型**是 Rust 类型系统（Type System）的**隐藏齿轮**——它解释了为什么某些生命周期转换合法而另一些不合法。
 > [来源: [The Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html)]
 
@@ -247,6 +248,7 @@ where F: for<'a> Fn(&'a str)
     f(&s);  // 可以接受任意生命周期
 }
 ```
+
 > **HRTB 洞察**: HRTB 的**核心应用场景**是**闭包和回调**——它使泛型（Generics）代码可以灵活地接受临时引用。
 > [来源: [Rust Reference — HRTB](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds)]
 
@@ -305,6 +307,7 @@ impl SelfReferential {
 // ├── .await 点可能持有局部变量引用
 // └── async fn 返回 Pin<Box<dyn Future>>
 ```
+
 > **Pin 洞察**: `Pin` 是 Rust **自引用类型的解决方案**——它为 async/await、生成器等高级特性提供了内存安全（Memory Safety）保证。
 > [来源: [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
 
@@ -353,6 +356,7 @@ fn closure_lifetimes() {
 // ├── 需要多次调用 + 可变 → FnMut
 // └── 只需要一次/消耗数据 → FnOnce
 ```
+
 > **闭包洞察**: 闭包的**三种 Fn trait**对应三种借用（Borrowing）模式——它们是 Rust **所有权（Ownership）系统**在闭包上的自然延伸。
 > [来源: [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
@@ -387,6 +391,7 @@ fn closure_lifetimes() {
   → 'static Future
   → async fn 自动处理
 ```
+
 > **模式矩阵**: 生命周期是 Rust **最陡峭的学习曲线**——但一旦掌握，它成为编译期保证的强大工具。
 > [来源: [Rust Lifetime Visualization](https://rustc-dev-guide.rust-lang.org/borrow_check/region_inference.html)]
 
@@ -410,6 +415,7 @@ graph TD
     style EXPLICIT fill:#c8e6c9
     style ELIDE2 fill:#c8e6c9
 ```
+
 > **认知功能**: **生命周期省略（Lifetime Elision）**覆盖大多数场景——只在编译器无法推断或需要明确文档时显式标注。
 > [来源: [Rust API Guidelines — Lifetimes](https://rust-lang.github.io/api-guidelines//flexibility.html#c-seeker)]
 
@@ -449,6 +455,7 @@ graph TD
 ├── Fn trait 选择可能令人困惑
 └── 缓解: 显式使用 move，理解三种 Fn
 ```
+
 > **边界要点**: 生命周期高级主题的边界主要与**传染性**、**自引用**、**复杂度**、**NLL 局限**和**闭包交互**相关。
 > [来源: [Rust Compiler — Polonius](https://rust-lang.github.io/compiler-team/working-groups/polonius/)]
 
@@ -494,6 +501,7 @@ graph TD
   ✅ let c = move || println!("{}", s);
      // s 被 move 进闭包
 ```
+
 > **陷阱总结**: 生命周期陷阱主要与**返回局部引用**、**标注不足**、**结构体（Struct）存储引用**、**HRTB**和**闭包捕获**相关。
 > [来源: [Common Lifetime Mistakes](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html)]
 
@@ -583,6 +591,7 @@ impl SelfRefFixed {
     }
 }
 ```
+
 > **修正**:
 > 自引用结构体（Struct）（字段引用同一结构体的其他字段）在 Rust 的生命周期系统中无法表达，因为结构体的生命周期参数只能引用外部数据。
 > 解决方案是使用裸指针（无生命周期约束）+ `Pin`（防止移动）+ `PhantomPinned`（标记为 !Unpin）。
@@ -615,6 +624,7 @@ where
     f(&x);
 }
 ```
+
 > **修正**:
 > 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。
 > 当闭包作为参数传递时，默认的生命周期推断可能过于具体（绑定到特定作用域），
@@ -639,6 +649,7 @@ fn main() {
     // callback();
 }
 ```
+
 > **修正**:
 > `impl Fn() + 'a` 表示闭包本身的生命周期为 `'a`——闭包捕获的引用不能超越 `'a`。
 > `make_callback(&s)` 返回的闭包与 `s` 同生命周期，因此 `s` 释放后闭包失效。
@@ -656,6 +667,7 @@ fn make_ref<'a>(s: &'a str) -> impl Iterator<Item = &'a char> + 'a {
     // ❌ 编译错误: Vec 在函数内创建，iter() 返回的引用生命周期不够长
 }
 ```
+
 > **修正**:
 > `impl Trait` 返回类型可捕获输入参数的生命周期（`+ 'a`），但不能延长局部变量的生命周期。
 > 上述代码中，`Vec<char>` 在函数内创建，`iter()` 返回的 `&char` 与 `Vec` 同生命周期——函数返回后 `Vec` 被释放，引用悬垂。
@@ -685,6 +697,7 @@ fn use_processor(p: &dyn Processor<'static>) {
 
 fn main() {}
 ```
+
 > **修正**:
 >
 > Trait object `dyn Trait<'a>` 将生命周期参数**固化**为具体值。
@@ -718,6 +731,7 @@ fn main() {}
 let s: &'static str = "hello";
 let r: &'a str = s;
 ```
+
 - A. 不合法，生命周期不能缩短
 - B. 合法，引用对生命周期是协变的
 - C. 仅当 `T` 实现 `Copy` 时合法
@@ -754,6 +768,7 @@ where
     f(&s2);
 }
 ```
+
 - A. 允许闭包返回 `'static` 引用（Reference）
 - B. 允许闭包接受任意生命周期的引用，不限定 `'static`
 - C. 限制闭包只能接受局部变量引用
@@ -805,6 +820,7 @@ where
 {
 }
 ```
+
 - A. `T` 必须实现 `Trait` 且为 `'static` 类型
 - B. `T` 必须实现 `Trait` 且所有引用都活至少 `'static`
 - C. `T` 必须是 `static` 变量
@@ -832,6 +848,7 @@ where
 ```rust,ignore
 fn longest(x: &str, y: &str) -> &str
 ```
+
 - A. 能，应用省略规则
 - B. 不能，多个输入引用时输出引用的生命周期不明确
 - C. 能，编译器选择较长的生命周期
@@ -852,6 +869,7 @@ fn longest(x: &str, y: &str) -> &str
 ```rust,ignore
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ```
+
 </details>
 
 ---
