@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 > **代码状态**: ✅ 含可编译示例
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -20,7 +22,15 @@
 > [机器学习生态](46_machine_learning_ecosystem.md) ·
 > [形式化验证工具](74_formal_verification_tools.md)
 >
-> **来源**: [rclrs](https://docs.rs/rclrs/) · [ROS2 Rust](https://github.com/ros2-rust/ros2_rust) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**:
+>
+> [rclrs](https://docs.rs/rclrs/) ·
+> [ROS2 Rust](https://github.com/ros2-rust/ros2_rust) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+>
 > **前置概念**: N/A
 ---
 
