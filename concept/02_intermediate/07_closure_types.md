@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html) ·
+> **来源**: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html) · · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > [TRPL Ch13 — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html) ·
 > [Rustonomicon — Functions & Closures](https://doc.rust-lang.org/nomicon/hrtb.html) ·
 > [RFC 1558 — Closures](https://github.com/rust-lang/rfcs/pull/1558)

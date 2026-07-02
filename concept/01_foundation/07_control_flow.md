@@ -16,7 +16,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Expressions](https://doc.rust-lang.org/reference/expressions.html) ·
+> **来源**: [Rust Reference — Expressions](https://doc.rust-lang.org/reference/expressions.html) · · [Peyton Jones — The Implementation of Functional Programming Languages](https://www.microsoft.com/en-us/research/publication/the-implementation-of-functional-programming-languages/) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
 > [TRPL Ch3 — Control Flow](https://doc.rust-lang.org/book/ch03-05-control-flow.html) ·
 > [TRPL Ch6 — Match](https://doc.rust-lang.org/book/ch06-02-match.html) ·
 > [Rust Reference — Loop Expressions](https://doc.rust-lang.org/reference/expressions/loop-expr.html) ·

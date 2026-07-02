@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [DO-178C - Software Considerations in Airborne Systems](https://www.rtca.org/) ·
+> **来源**: [DO-178C - Software Considerations in Airborne Systems](https://www.rtca.org/) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > [DO-333 - Formal Methods Supplement](https://www.rtca.org/) ·
 > [DO-330 - Software Tool Qualification](https://www.rtca.org/) ·
 > [Ferrocene - Qualified Rust Compiler](https://ferrocene.dev/) ·

@@ -20,7 +20,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) ·
+> **来源**: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) · · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
 > [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) ·
 > [std::num](https://doc.rust-lang.org/std/num/) ·
 > [RFC 0560 — Integer Overflow](https://github.com/rust-lang/rfcs/blob/master/text/0560-integer-overflow.md) ·

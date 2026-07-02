@@ -20,7 +20,7 @@
 > **后置概念**: N/A
 ---
 
-> **来源**:
+> **来源**: · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > [The Rust Programming Language — Ch15 Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·
 > [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html)
 >
@@ -50,6 +50,7 @@ fn main() {
     println!("{}", b);
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -90,6 +91,7 @@ fn main() {
     let list = List::Cons(1, List::Cons(2, List::Nil));
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -111,6 +113,7 @@ fn main() {
     let list = List::Cons(1, Box::new(List::Cons(2, Box::new(List::Nil))));
 }
 ```
+
 **为什么 `Box` 能解决这个问题**：
 
 - `Box<List>` 的大小是固定的（一个指针大小）
@@ -147,6 +150,7 @@ fn main() {
     println!("{}", Rc::strong_count(&data));
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -156,6 +160,7 @@ fn main() {
 3 3 3
 3
 ```
+
 **解析**：
 
 | 特性 | `Rc<T>` | `Arc<T>` |
@@ -181,6 +186,7 @@ std::thread::spawn(move || {
     println!("{}", *data); // 编译错误！
 });
 ```
+
 **知识点**：`Rc` 是单线程共享所有权（Ownership）的标准工具。任何需要跨线程共享的场景都必须使用 `Arc`。[→ 内存管理详解](03_memory_management.md)
 
 </details>
@@ -204,6 +210,7 @@ fn main() {
     println!("{}", data.borrow());
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -224,6 +231,7 @@ fn main() {
 data.borrow()     // 获取不可变借用（运行时检查）
 data.borrow_mut() // 获取可变借用（运行时检查）
 ```
+
 **运行时（Runtime） panic 条件**（与编译期借用（Borrowing）检查器相同规则）：
 
 ```rust,ignore
@@ -231,6 +239,7 @@ let ref_cell = RefCell::new(0);
 let b1 = ref_cell.borrow();
 let b2 = ref_cell.borrow_mut(); // ❌ 运行时 panic！
 ```
+
 **对比**：
 
 | 组合 | 线程安全 | 可变性 | 检查时机 |
@@ -258,6 +267,7 @@ fn main() {
     println!("{}", c.get());
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -283,12 +293,14 @@ let x = c.get(); // x = 5（复制）
 c.set(10);       // 修改 Cell 内部
 let y = c.get(); // y = 10（复制）
 ```
+
 **`Cell` 的限制**：
 
 ```rust,ignore
 let cell = Cell::new(vec![1, 2, 3]);
 // ❌ Vec 不实现 Copy，不能用 Cell
 ```
+
 **选择指南**：
 
 | 场景 | 推荐 |
@@ -315,6 +327,7 @@ fn main() {
     println!("{}", *m.lock().unwrap());
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -328,6 +341,7 @@ fn main() {
 let mut num = m.lock().unwrap(); // 获取锁 #1
 *m.lock().unwrap();              // 尝试获取锁 #2 —— 死锁！
 ```
+
 大多数 `Mutex` 实现（包括 Rust 标准库）是**非递归的**——同一线程不能多次获取同一锁。
 
 **修复方案**——缩小锁的作用域：
@@ -344,6 +358,7 @@ fn main() {
     println!("{}", *m.lock().unwrap()); // ✅ 重新获取锁
 }
 ```
+
 **更优雅的修复**——使用 drop 显式释放：
 
 ```rust,ignore
@@ -352,6 +367,7 @@ let mut num = m.lock().unwrap();
 drop(num); // 显式释放锁
 println!("{}", *m.lock().unwrap());
 ```
+
 **知识点**：Rust 的 `MutexGuard`（`m.lock()` 的返回值）在离开作用域时自动释放锁。利用这个 RAII 特性管理锁生命周期（Lifetimes）是避免死锁的关键。[→ 并发模式详解](../03_advanced/10_concurrency_patterns.md)
 
 </details>
@@ -382,6 +398,7 @@ fn main() {
     println!("Outer scope");
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -393,6 +410,7 @@ Dropping b
 Outer scope
 Dropping a
 ```
+
 **解析**：`Drop` trait 在值离开作用域时自动调用，遵循 **LIFO（后进先出）**顺序。
 
 **执行流程**：
@@ -439,6 +457,7 @@ fn main() {
     // println!("{:?}", s); // 若取消注释会怎样？
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -456,6 +475,7 @@ fn main() {
 ```rust,ignore
 s.drop(); // ❌ 编译错误！
 ```
+
 原因：`drop` 方法在 trait 中被调用时，值可能在部分销毁状态。编译器禁止显式调用以确保安全。
 
 **`std::mem::drop` 的实现**：
@@ -464,12 +484,14 @@ s.drop(); // ❌ 编译错误！
 pub fn drop<T>(_x: T) {}
 // 获取所有权但不使用，函数结束时值被 drop
 ```
+
 **取消注释后的结果**：
 
 ```rust,ignore
 std::mem::drop(s);
 println!("{:?}", s); // ❌ 编译错误：use of moved value: s
 ```
+
 **知识点**：`std::mem::drop` 是提前释放值的标准方式。理解它与 `Drop::drop` 的区别是掌握 Rust 资源管理的关键。[→ 内存管理详解](03_memory_management.md)
 
 </details>
@@ -503,6 +525,7 @@ fn main() {
         Rc::weak_count(&leaf));
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -511,6 +534,7 @@ fn main() {
 ```
 leaf strong = 1, weak = 0
 ```
+
 **解析**：`Weak<T>` 是**弱引用**，不增加强引用计数。
 
 **为什么需要 `Weak`**：
@@ -525,6 +549,7 @@ struct BadNode {
     children: Vec<Rc<BadNode>>,     // 强引用
 }
 ```
+
 形成 `parent <-> child` 的循环强引用，引用计数永远不会降为 0，内存泄漏。
 
 **`Weak` 解决循环引用**：
@@ -541,6 +566,7 @@ let weak = Rc::downgrade(&rc);    // Rc → Weak
 let maybe_rc = weak.upgrade();    // Weak → Option<Rc>
 // 若原 Rc 已被 drop，upgrade() 返回 None
 ```
+
 **知识点**：`Weak` 是 Rust 中处理图结构、树结构中循环引用的标准工具。与垃圾回收语言不同，Rust 要求显式管理这些关系。[→ 内存管理详解](03_memory_management.md)
 
 </details>
@@ -570,6 +596,7 @@ fn main() {
     hello(&m);
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -584,6 +611,7 @@ hello(&m);
 // &MyBox<String> 自动强制转换为 &String（调用 deref）
 // &String 再自动强制转换为 &str（String 也实现 Deref<Target=str>）
 ```
+
 **等价展开**：
 
 ```rust,ignore
@@ -592,6 +620,7 @@ hello(&(*m)[..]);
 // 2. (*m)[..] → &str（字符串切片）
 // 3. &(*m)[..] → &str
 ```
+
 **规则**：
 
 - `&T` 若 `T: Deref<Target=U>`，可自动转为 `&U`

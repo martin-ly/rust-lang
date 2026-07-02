@@ -15,7 +15,7 @@
 > **后置概念**: [Borrowing](02_borrowing.md)
 ---
 
-> **来源**: · [自测题库](../00_meta/self_assessment.md)
+> **来源**: · [自测题库](../00_meta/self_assessment.md) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Rust Reference — Functions and Borrowing](https://doc.rust-lang.org/reference/items/functions.html)
 > [The Rust Programming Language — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) ·
 > [The Rust Programming Language — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) ·
 > [The Rust Programming Language — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)

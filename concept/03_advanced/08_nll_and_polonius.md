@@ -12,7 +12,7 @@
 > **前置概念**: [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Unsafe](03_unsafe.md) · [Formal Methods](../04_formal/04_rustbelt.md)
 >
-> **来源**: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs//2094-nll.html) · [Polonius](https://github.com/rust-lang/polonius) · [Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html)
+> **来源**: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs//2094-nll.html) · [Polonius](https://github.com/rust-lang/polonius) · [Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 ---
 
 > **来源**: [NLL RFC](https://rust-lang.github.io/rfcs//2094-nll.html) ·

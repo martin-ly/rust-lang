@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [RFC 3550 — New Range Types](https://github.com/rust-lang/rfcs/pull/3550) ·
+> **来源**: [RFC 3550 — New Range Types](https://github.com/rust-lang/rfcs/pull/3550) · · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
 > [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) ·
 > [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/) ·
 > [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html) ·

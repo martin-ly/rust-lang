@@ -14,11 +14,13 @@
 
 ---
 
-> **来源**: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) ·
+> **来源**: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) · · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)
 > [RFC 2873 — Inline Assembly](https://rust-lang.github.io/rfcs//2873-inline-asm.html) ·
 > [Rust By Example — Inline Assembly](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html) ·
 > [s390x Vector Support PR](https://github.com/rust-lang/rust/pull/150551) ·
-> [LLVM SystemZ Backend](https://llvm.org/docs/CompilerWriterInfo.html)
+> [LLVM SystemZ Backend](https://llvm.org/docs/CompilerWriterInfo.html) ·
+> [Intel 64 and IA-32 Architectures Software Developer Manuals](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html) ·
+> [ARM Architecture Reference Manual](https://developer.arm.com/documentation/ddi0487/latest/)
 > **前置依赖**: [Unsafe Rust](03_unsafe.md)
 > **对应 Crate**: [`c03_control_fn`](../../crates/c03_control_fn) (底层控制流)
 

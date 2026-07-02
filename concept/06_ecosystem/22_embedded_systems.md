@@ -693,7 +693,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [IEEE 802.1 — Time-Sensitive Networking](https://www.ieee802.org/1/pages/tsn.html) · [Cortex-M Devices Generic User Guide](https://developer.arm.com/documentation/dui0552/latest/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 11]
 

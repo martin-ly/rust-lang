@@ -17,7 +17,7 @@
 
 ---
 
-> **来源**:
+> **来源**: · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) ·
 > [Rust Atomics and Locks](https://marabos.nl/atomics/) ·
 > [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) ·

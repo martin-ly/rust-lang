@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) ·
+> **来源**: [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) · · [Peyton Jones — The Implementation of Functional Programming Languages](https://www.microsoft.com/en-us/research/publication/the-implementation-of-functional-programming-languages/) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
 > [Rust Reference — Iterators](https://doc.rust-lang.org/std/iter/trait.Iterator.html) ·
 > [Rust Iterator Cheat Sheet](https://doc.rust-lang.org/std/iter/index.html) ·
 > [RFC 0235 — IntoIterator](https://rust-lang.github.io/rfcs//0235-collections-conventions.html) ·

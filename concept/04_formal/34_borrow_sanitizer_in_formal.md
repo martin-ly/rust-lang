@@ -13,7 +13,7 @@
 > **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Miri](31_miri.md) · [所有权（Ownership）形式化](03_ownership_formal.md) · Tree Borrows
 > **后置延伸**: [Safety Tags](33_safety_tags_in_formal.md) · [AutoVerus](24_autoverus.md)
 >
-> **来源**: [BorrowSanitizer 项目主页](https://borrowsanitizer.com/) · [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html)
+> **来源**: [BorrowSanitizer 项目主页](https://borrowsanitizer.com/) · [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [LLVM — Alias Analysis](https://llvm.org/docs/AliasAnalysis.html) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---

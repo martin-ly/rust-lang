@@ -11,7 +11,7 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Error Handling](04_error_handling.md) · [Error Handling Basics](../01_foundation/32_error_handling_basics.md) · [Ownership](../01_foundation/01_ownership.md)
 > **后置概念**: [Error Handling Deep Dive](16_error_handling_deep_dive.md) · [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-> **主要来源**:
+> **主要来源**: · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Rust Reference — Runtime and Unwinding](https://doc.rust-lang.org/reference/runtime.html)
 >
 > [Brown University CRP — Exceptions](https://cel.cs.brown.edu/crp/idioms/exceptions.html) ·
 > [Google Comprehensive Rust — C++ Exception](https://google.github.io/comprehensive-rust/android/interoperability/cpp/cpp-exception.html) ·

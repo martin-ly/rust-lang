@@ -14,6 +14,7 @@
 ## 核心索引文件
 
 - [全局概念索引](concept_index.md) — 按字母顺序索引所有概念
+- [知识体系拓扑图谱集](knowledge_topology/README.md) — 概念定义、属性关系、场景决策树、层间/层内映射、权威来源对齐
 - [交叉引用矩阵](05_cross_reference_matrix.md) — 概念间依赖关系
 - [权威来源映射表](authority_source_map.md) — 概念与权威来源对照
 - [语义桥：算法、设计模式与工作流模式的统一谱系](semantic_bridge_algorithms_patterns.md) — 算法 ↔ 模式语义关联

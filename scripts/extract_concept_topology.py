@@ -131,6 +131,25 @@ def extract_links(text: str) -> list[dict[str, str]]:
     return links
 
 
+def extract_block_after_marker(content: str, marker: str) -> str:
+    """Extract all quoted lines after a marker like **主要来源**: until a non-quoted line."""
+    out = ""
+    marker_re = re.compile(r">\s*\*\*" + re.escape(marker) + r"\*\*[:：]")
+    lines = content.splitlines(keepends=True)
+    i = 0
+    while i < len(lines):
+        if marker_re.search(lines[i]):
+            # Include this line and subsequent quoted lines
+            out += lines[i]
+            i += 1
+            while i < len(lines) and re.match(r"\s*>", lines[i]):
+                out += lines[i]
+                i += 1
+            continue
+        i += 1
+    return out
+
+
 def extract_sources(content: str) -> list[dict[str, str]]:
     sources: list[dict[str, str]] = []
     # Pattern 1: > [来源: [Name](url)]
@@ -138,20 +157,11 @@ def extract_sources(content: str) -> list[dict[str, str]]:
         name = m.group(1) or m.group(3) or ""
         url = m.group(2) or ""
         sources.append({"name": name.strip(), "url": url.strip()})
-    # Pattern 2: > **来源**: [Name](url) · [Name](url)
-    for m in re.finditer(r"\*\*来源\*\*[:：]\s*(.+?)(?:\n|$)", content):
-        line = m.group(1)
-        for link in extract_links(line):
-            sources.append({"name": link["title"], "url": link["href"]})
-    # Pattern 3: > **主要来源**: [Name](url)
-    for m in re.finditer(r"\*\*主要来源\*\*[:：]\s*(.+?)(?:\n|$)", content):
-        line = m.group(1)
-        for link in extract_links(line):
-            sources.append({"name": link["title"], "url": link["href"]})
-    # Pattern 4: > **权威来源**: ...
-    for m in re.finditer(r"\*\*权威来源\*\*[:：]\s*(.+?)(?:\n|$)", content):
-        line = m.group(1)
-        for link in extract_links(line):
+
+    # Patterns 2-4: multi-line source blocks (来源 / 主要来源 / 权威来源)
+    for marker in ["来源", "主要来源", "权威来源"]:
+        block = extract_block_after_marker(content, marker)
+        for link in extract_links(block):
             sources.append({"name": link["title"], "url": link["href"]})
 
     # Deduplicate by url
@@ -257,6 +267,14 @@ def classify_source_tier(source: dict[str, str]) -> str:
         return "L1_cargo"
     if "doc.rust-lang.org/std" in url:
         return "L1_std"
+    if "doc.rust-lang.org/nightly/nightly-rustc" in url:
+        return "L1_std"
+    if "rustc-dev-guide.rust-lang.org" in url:
+        return "L1_specification"
+    if "rust-lang.github.io" in url and "rfcs" not in url:
+        return "L1_github"
+    if "www.rust-lang.org" in combined or "foundation.rust-lang.org" in combined:
+        return "L1_blog"
     if any(x in combined for x in ["unicode.org", "iso.org", "ieee.org", "ietf.org", "itanium-cxx-abi"]):
         return "L5_standard"
     if any(x in combined for x in ["popl", "pldi", "ecoops", "oopsla", "icfp", "arxiv.org", "mpi-sws.org/rustbelt"]):

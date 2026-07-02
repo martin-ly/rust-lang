@@ -11,7 +11,7 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Macros](../03_advanced/04_macros.md) · [Generics](02_generics.md) · [Traits](01_traits.md)
 > **后置概念**: [Proc Macro](../03_advanced/07_proc_macro.md) · [DSL and Embedding](13_dsl_and_embedding.md)
-> **主要来源**:
+> **主要来源**: · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
 >
 > [TRPL Ch 19.5 — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
 > [Rust Reference — macro_rules!](https://doc.rust-lang.org/reference/macros-by-example.html) ·

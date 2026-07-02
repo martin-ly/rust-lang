@@ -13,7 +13,7 @@
 > **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [形式化验证](05_verification_toolchain.md) · [Miri](../06_ecosystem/74_formal_verification_tools.md)
 > **后置延伸**: [BorrowSanitizer](34_borrow_sanitizer_in_formal.md) · [AutoVerus](24_autoverus.md) · [Rust for Linux 案例](../07_future/43_rust_for_linux.md)
 >
-> **来源**: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [Safety Tags 研究仓库](https://github.com/safer-rust/safety-tags) · [safety-tool slides](https://os-checker.github.io/slides/safety-tags) · [Rust for Linux Safety Standard](https://rust-for-linux.com/)
+> **来源**: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [Safety Tags 研究仓库](https://github.com/safer-rust/safety-tags) · [safety-tool slides](https://os-checker.github.io/slides/safety-tags) · [Rust for Linux Safety Standard](https://rust-for-linux.com/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [LLVM — Alias Analysis](https://llvm.org/docs/AliasAnalysis.html) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---

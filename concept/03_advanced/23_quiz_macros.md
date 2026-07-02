@@ -14,7 +14,7 @@
 > **后置概念**: N/A
 ---
 
-> **来源**: · [宏系统](04_macros.md)
+> **来源**: · [宏系统](04_macros.md) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > [The Rust Programming Language — Ch19.5 Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
 > [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/) ·
 > [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)

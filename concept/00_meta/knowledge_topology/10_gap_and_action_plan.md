@@ -12,8 +12,8 @@
 
 | 缺口类型 | 数量 | 说明 |
 |:---|:---:|:---|
-| 无权威来源标注 | 11 | 概念文件未引用任何外部权威来源 |
-| 来源标注薄弱（≤2） | 51 | 概念文件仅引用 1–2 个来源 |
+| 无权威来源标注 | 0 | 概念文件未引用任何外部权威来源 |
+| 来源标注薄弱（≤2） | 0 | 概念文件仅引用 1–2 个来源 |
 | 无定理链 | 148 | 概念文件缺少定理链 |
 | 无 A/S/P 标记 | 188 | 概念文件缺少 A/S/P 维度标记 |
 | 无知识表征章节 | 254 | 概念文件无决策树/矩阵/示例等表征 |
@@ -24,36 +24,6 @@
 
 | 概念 | 层级 | 当前来源数 | 建议行动 |
 |:---|:---:|:---:|:---|
-| [测验：所有权、借用与生命周期](../../01_foundation/33_quiz_ownership_borrowing.md) | L1 基础概念层 | 2 | 补充 Rust Reference / TRPL / 学术来源 |
-| [编程语言理论基础](../../01_foundation/34_pl_prerequisites.md) | L1 基础概念层 | 2 | 补充 Rust Reference / TRPL / 学术来源 |
-| [Rust 关键字](../../01_foundation/36_keywords.md) | L1 基础概念层 | 2 | 补充 Rust Reference / TRPL / 学术来源 |
-| [Rust 运算符与符号](../../01_foundation/37_operators_and_symbols.md) | L1 基础概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [Crate 与源文件](../../01_foundation/38_crates_and_source_files.md) | L1 基础概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [项](../../01_foundation/39_items.md) | L1 基础概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [模式匹配](../../01_foundation/40_patterns.md) | L1 基础概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [语句与表达式](../../01_foundation/41_statements_and_expressions.md) | L1 基础概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [Rust API 命名约定](../../02_intermediate/22_api_naming_conventions.md) | L2 进阶概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [可派生 Trait](../../02_intermediate/31_derive_traits.md) | L2 进阶概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [是否需要进入 L4 形式化层？](../../03_advanced/00_before_formal.md) | L3 高级概念层 | 2 | 补充 Rust Reference / TRPL / 学术来源 |
-| [内联汇编 (Inline Assembly)](../../03_advanced/13_inline_assembly.md) | L3 高级概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [Linkage](../../03_advanced/27_linkage.md) | L3 高级概念层 | 2 | 补充 Rust Reference / TRPL / 学术来源 |
-| [条件编译](../../03_advanced/28_conditional_compilation.md) | L3 高级概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [Rust 内存模型](../../03_advanced/29_memory_model.md) | L3 高级概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [Rust 运行时](../../03_advanced/30_rust_runtime.md) | L3 高级概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [Panic 机制](../../03_advanced/31_panic.md) | L3 高级概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [内存分配与生命周期](../../03_advanced/32_memory_allocation_and_lifetime.md) | L3 高级概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [变量](../../03_advanced/33_variables.md) | L3 高级概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [可见性与隐私](../../03_advanced/34_visibility_and_privacy.md) | L3 高级概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [常量求值](../../04_formal/39_constant_evaluation.md) | L4 形式化理论层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [特殊类型与 Trait](../../04_formal/41_special_types_and_traits.md) | L4 形式化理论层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [类型布局](../../04_formal/42_type_layout.md) | L4 形式化理论层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [析构函数与 Drop Scope](../../04_formal/43_destructors.md) | L4 形式化理论层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [符号约定](../../04_formal/44_notation.md) | L4 形式化理论层 | 2 | 补充 Rust Reference / TRPL / 学术来源 |
-| [词法结构](../../04_formal/45_lexical_structure.md) | L4 形式化理论层 | 2 | 补充 Rust Reference / TRPL / 学术来源 |
-| [条目参考](../../04_formal/46_items_reference.md) | L4 形式化理论层 | 2 | 补充 Rust Reference / TRPL / 学术来源 |
-| [属性](../../04_formal/47_attributes.md) | L4 形式化理论层 | 2 | 补充 Rust Reference / TRPL / 学术来源 |
-| [语句与表达式参考](../../04_formal/48_statements_and_expressions_reference.md) | L4 形式化理论层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [模式参考](../../04_formal/49_patterns_reference.md) | L4 形式化理论层 | 2 | 补充 Rust Reference / TRPL / 学术来源 |
 
 ### P1：增强知识表征
 

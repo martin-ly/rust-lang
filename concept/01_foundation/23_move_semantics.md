@@ -11,7 +11,7 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Ownership](01_ownership.md) · [Variable Model](20_variable_model.md) · [Borrowing](02_borrowing.md) · [学习指南](../00_meta/learning_guide.md)
 > **后置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [Construction](../02_intermediate/28_construction_and_initialization.md)
-> **主要来源**:
+> **主要来源**: · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003)
 >
 > [TRPL Ch 4 — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) ·
 > [TRPL Ch 10 — Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) ·

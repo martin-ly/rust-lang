@@ -13,7 +13,7 @@
 
 ---
 
-> **来源**: [std::collections](https://doc.rust-lang.org/std/collections/index.html) ·
+> **来源**: [std::collections](https://doc.rust-lang.org/std/collections/index.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/)
 > [TRPL Ch8 — Collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html) ·
 > [Rust Performance Book](https://nnethercote.github.io/perf-book/print.html#reusing-collections) ·
 > [Wikipedia — B-tree](https://en.wikipedia.org/wiki/B-tree) ·

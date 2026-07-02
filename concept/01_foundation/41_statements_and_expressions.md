@@ -11,6 +11,8 @@
 > **前置依赖**: [Control Flow](07_control_flow.md) · [Variables and Bindings](20_variable_model.md) · [Patterns](40_patterns.md)
 > **后置概念**: [Closures](15_closure_basics.md) · [Error Handling](../02_intermediate/04_error_handling.md) · [Async/Await](../03_advanced/02_async.md)
 > **定理链**: Expression → Evaluation Order → Statement Sequencing
+> **主要来源**: [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [MIT 6.824 — Distributed Systems](https://pdos.csail.mit.edu/6.824/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL — Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html)
+
 >
 > **来源**: [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html)
 

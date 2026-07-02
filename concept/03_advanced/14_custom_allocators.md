@@ -12,7 +12,7 @@
 
 ---
 
-> **来源**: [std::alloc::GlobalAlloc](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html) · [Reference — Allocator API](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)
+> **来源**: [std::alloc::GlobalAlloc](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html) · [Reference — Allocator API](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [Rust Reference — Allocation](https://doc.rust-lang.org/std/alloc/index.html) ·
 > [RFC 1398 — Global Allocators](https://rust-lang.github.io/rfcs//1398-kinds-of-allocators.html) ·

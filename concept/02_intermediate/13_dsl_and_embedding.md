@@ -13,7 +13,7 @@
 
 ---
 
-> **来源**:
+> **来源**: · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
 >
 > [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
 > [nom Parser Combinators](https://docs.rs/nom/latest/nom/) ·
@@ -96,6 +96,7 @@ DSL 的两种形态:
   │ 嵌入解释器      │ 外部            │ Lua/Rhai 嵌入   │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **认知功能**: DSL 的**核心权衡**是**表达能力 vs 工具链支持**——内嵌 DSL 免费获得 Rust 的类型检查和 IDE 支持，外部 DSL 需要自建工具链。
 > [来源: [Fowler — Domain-Specific Languages](https://martinfowler.com/books/dsl.html)]
 
@@ -134,6 +135,7 @@ let app = Router::new()
 // - 编译期优化（如 SQL 预编译）
 // - IDE 支持（如果宏生成良好）
 ```
+
 > **宏 DSL 洞察**: Rust 的**过程宏（Procedural Macro）**使 DSL 可以在编译期进行**任意复杂的验证和转换**——这是其他语言难以实现的能力。
 > [来源: [yew — html! macro](https://yew.rs/docs/concepts/html)]
 
@@ -177,6 +179,7 @@ impl RequestBuilder<Ready> {
 // RequestBuilder<Incomplete> 不能调用 body()
 // 编译器在类型层面强制执行构建顺序
 ```
+
 > **Builder DSL 洞察**: **Typestate 模式**将运行时（Runtime）检查转化为编译期类型检查——这是 Rust 类型系统（Type System）的强大应用。
 > [来源: [Rust API Guidelines — Builders](https://rust-lang.github.io/api-guidelines//type-safety.html#builders-enable-construction-of-complex-values-c-builder)]
 
@@ -224,6 +227,7 @@ fn expression(input: &str) -> IResult<&str, Expr> {
 // │ lalrpop      │ 是          │ 高          │ 良好        │
 // └──────────────┴─────────────┴─────────────┴─────────────┘
 ```
+
 > **Parser Combinator 洞察**: nom 等库将**解析器作为一等值**——解析器可以组合、映射、选择，与函数式编程的抽象能力结合。
 > [来源: [nom Documentation](https://docs.rs/nom/latest/nom/)]
 
@@ -271,6 +275,7 @@ let query = Query::new("SELECT * FROM users WHERE id = ?")
 // - 参数类型与列类型兼容（数据库检查）
 // - 无字符串拼接导致的注入风险
 ```
+
 > **类型安全洞察**: Rust 的**强类型系统（Type System）**使 DSL 可以在编译期排除大量错误——从 SQL 注入到格式字符串漏洞。
 > [source: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html)]
 
@@ -312,6 +317,7 @@ const fn validate_email_prefix(s: &str) -> bool {
     // 复杂验证仍需运行时
 }
 ```
+
 > **编译期验证洞察**: Rust 的**宏（Macro） + const fn** 提供了有限的编译期计算能力——对于复杂验证，通常采用"**解析，不验证**"（parse, don't validate）策略，使用强类型替代运行时（Runtime）检查。
 > [source: [Parse Don't Validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)]
 
@@ -357,6 +363,7 @@ SQL 查询:
   → Typestate
   → 手动实现或 state_machine_future
 ```
+
 > **模式矩阵**: Rust 的 DSL 生态充分利用了**宏系统 [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)]**和**类型系统（Type System）**——两者结合使 DSL 既表达力强又类型安全。
 > [source: [Awesome Rust — DSL](https://github.com/rust-unofficial/awesome-rust)]
 
@@ -380,6 +387,7 @@ graph TD
     style DSL fill:#c8e6c9
     style SIMPLE fill:#c8e6c9
 ```
+
 > **认知功能**: 此决策树展示 DSL 的**适用边界**。核心原则是：**需要编译期验证时用 Rust DSL，需要通用可编辑性时用标准格式**。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > [source: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
@@ -420,6 +428,7 @@ graph TD
 ├── 与标准 Rust 的交互可能不直观
 └── 缓解: 遵循 Rust 惯例、提供良好文档
 ```
+
 > **边界要点**: DSL 的边界主要与**编译时间**、**错误信息**、**IDE 支持**、**语法限制**和**学习曲线**相关。
 > [source: [Rust Proc Macro Workshop](https://github.com/dtolnay/proc-macro-workshop)]
 
@@ -462,6 +471,7 @@ graph TD
   ✅ 使用语义化版本控制
      // 提供迁移指南
 ```
+
 > **陷阱总结**: DSL 的陷阱主要与**过度工程**、**错误信息**、**语法冲突**、**性能假设**和**版本兼容**相关。
 > [source: [Rust Macro Best Practices](https://doc.rust-lang.org/reference/macros.html)]
 
@@ -474,6 +484,7 @@ graph TD
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) | ✅ 一级 | 宏系统入门 |
@@ -566,6 +577,7 @@ fn fixed() {
     println!("{}", product.name);
 }
 ```
+
 > **修正**: 构建器模式（Builder Pattern）通过消耗 `self` 的方法链实现不可变构建。每次调用 `.name()` 返回新的 `Builder`（或消耗后返回自身），原实例被 move。忘记链式调用会导致"use of moved value"错误。这与 Java 的构建器（可变对象，方法返回 `this`）不同——Rust 的消耗式构建器在类型层面保证每个字段只设置一次，防止部分初始化的对象被构建。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：状态机 DSL 的非法状态转换（编译错误）
@@ -606,6 +618,7 @@ fn fixed() {
     let m = m.stop();  // Running → Stopped ✅
 }
 ```
+
 > **修正**: 类型状态模式（Typestate Pattern）将状态机的状态编码为类型参数，非法的状态转换在编译期被拒绝。`Machine<Idle>` 有 `start()` 方法，`Machine<Running>` 有 `stop()` 方法，但 `Machine<Running>` 没有 `start()` 方法——从 Running 再次 start 是非法的。这是 Rust 类型系统（Type System）的强大应用：将运行时状态机验证转为编译期类型检查，消除整类状态转换错误。这与 Erlang 的 gen_fsm 或 C 的枚举（Enum）+switch 实现形成对比——Rust 在编译期保证状态转换的合法性。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：宏递归深度限制（编译错误）
@@ -625,6 +638,7 @@ fn main() {
     println!("{}", x);
 }
 ```
+
 > **修正**: Rust 的过程宏（Procedural Macro）和声明宏（Declarative Macro）都有**递归深度限制**（默认 64 层），防止宏展开导致编译器栈溢出或无限循环。复杂 DSL（如 `vec![1, 2, ..., 1000]`）的宏实现需考虑此限制：`vec!` 使用内置语法支持（非纯宏递归），因此无此限制。自定义宏的应对：1) 使用迭代而非递归（`$()*` 重复而非递归调用）；2) 增加递归限制 `#![recursion_limit = "256"]`；3) 将工作转移到运行时（宏生成循环代码而非展开所有元素）。这与 C 的预处理器（无递归限制，但宏展开深度有限）或 Lisp 的宏（Turing 完全，无限制，但可能无限展开）不同——Rust 的宏系统是"半图灵完全"的：有限递归但可表达大多数模式。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 
 ### 10.4 边界测试：DSL 的类型安全与运行时错误（运行时 panic）
@@ -641,6 +655,7 @@ fn main() {
     println!("{}", id);
 }
 ```
+
 > **修正**: 内部 DSL（如 `sql!` 宏（Macro））的安全性取决于宏的实现。宏可在编译期解析 SQL 语法并验证参数类型，但若参数化不当（字符串拼接而非绑定变量），仍可能产生 SQL 注入。Rust 的 `sqlx` crate 在编译期检查查询和参数，使用 prepared statement 防止注入。但纯宏 DSL（无编译期数据库连接）无法验证参数安全性。这与 Ruby 的 `ActiveRecord`（运行时参数化，安全但有开销）或 C 的字符串拼接 SQL（完全不安全）不同——Rust 的宏 DSL 有潜力在编译期消除注入，但需要正确实现。安全原则：**永不将用户输入直接嵌入到生成的代码/查询中**，无论使用什么抽象层。[来源: [sqlx Documentation](https://docs.rs/sqlx/)] · [来源: [OWASP SQL Injection](https://owasp.org/www-community/attacks/SQL_Injection)]
 
 ### 10.3 边界测试：DSL 宏的优先级与歧义解析（编译错误）
@@ -659,6 +674,7 @@ fn main() {
     let y = expr!(let x = 1);
 }
 ```
+
 > **修正**: Rust 宏的**片段分类器**（fragment specifier）决定匹配规则：`expr` 只匹配表达式（不含 `let` 绑定），`stmt` 匹配语句（含 `let`），`block` 匹配 `{ ... }`。`expr!(let x = 1)` 失败是因为 `let x = 1` 是语句而非表达式。宏 DSL 设计时需注意：1) 分类器选择（`expr` vs `stmt` vs `tt`）；2) 优先级（`$e:expr + $f:expr` 会贪婪匹配左侧）；3) 歧义（`$($x:expr),*` 与 `$($x:expr),+` 的逗号处理）。这与 Lisp 的宏（代码即数据，无分类器限制）或 C 的宏（纯文本替换，无语法概念）不同——Rust 的宏在语法树层面操作，分类器提供类型安全但限制了表达能力。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 
 ### 10.4 边界测试：DSL 宏的优先级与运算符结合性（编译错误）
@@ -678,6 +694,7 @@ fn main() {
     println!("{}", query);
 }
 ```
+
 > **修正**: `macro_rules!` 的**规则顺序**：从上到下依次尝试匹配，第一个匹配的规则被使用。长模式（含 WHERE）应放在短模式之前，否则短模式提前匹配导致错误。`macro_rules!` 的限制：1) 无优先级/结合性控制（不像 yacc/bison）；2) 无左递归（规则不能自引用（Reference）左部）；3) 模式是 token 树（`tt`），不是完整表达式。复杂 DSL 建议：1) 过程宏（Procedural Macro）（`proc_macro`）解析完整语法；2) `syn` crate 解析 Rust 表达式；3) 外部 DSL parser（`nom`、`pest`）。这与 Lisp 的宏（代码即数据，无模式匹配（Pattern Matching）限制）或 Template Haskell（编译期元编程，类型安全）不同——Rust 的 `macro_rules!` 是受限但高效的文本替换机制。来源: [The Little Book of Rust Macros] · 来源: [Rust Reference — Macros]
 
 ## 嵌入式测验（Embedded Quiz）

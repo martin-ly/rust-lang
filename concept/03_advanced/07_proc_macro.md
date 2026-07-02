@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html) ·
+> **来源**: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html) · · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F)
 > [TRPL Ch19 — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
 > [proc-macro2 crate](https://docs.rs/proc-macro2/latest/proc_macro2/) ·
 > [syn crate](https://docs.rs/syn/latest/syn/) ·

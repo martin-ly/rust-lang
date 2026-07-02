@@ -11,6 +11,8 @@
 > **前置依赖**: [Modules and Paths](11_modules_and_paths.md) · [Crates and Source Files](38_crates_and_source_files.md)
 > **后置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [Linkage](../03_advanced/27_linkage.md)
 > **定理链**: Crate → Module → Item → Scope
+> **主要来源**: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
+
 >
 > **来源**: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html)
 

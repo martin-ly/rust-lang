@@ -20,7 +20,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html) ·
+> **来源**: [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html) · · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
 > [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
 > [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) ·
 > [RFC 1584 — Macros 2.0](https://rust-lang.github.io/rfcs//1584-macros.html) ·

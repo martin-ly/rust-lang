@@ -12,7 +12,7 @@
 > **后置概念**: [Lexical Structure](45_lexical_structure.md)
 > **定理链**: Syntax → Production Rule → Rust Grammar
 >
-> **来源**: [Rust Reference — Notation](https://doc.rust-lang.org/reference/notation.html)
+> **来源**: [Rust Reference — Notation](https://doc.rust-lang.org/reference/notation.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
 
@@ -88,5 +88,5 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference — Notation](https://doc.rust-lang.org/reference/notation.html) · [Unicode Standard — Identifier and Pattern Syntax](https://unicode.org/reports/tr31/)
+> **权威来源**: [Rust Reference — Notation](https://doc.rust-lang.org/reference/notation.html) · [Unicode Standard — Identifier and Pattern Syntax](https://unicode.org/reports/tr31/) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 > **内容分级**: [研究级]

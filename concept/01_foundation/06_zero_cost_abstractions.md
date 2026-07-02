@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [TRPL Ch13 — Closures](https://doc.rust-lang.org/book/ch13-04-performance.html) ·
+> **来源**: [TRPL Ch13 — Closures](https://doc.rust-lang.org/book/ch13-04-performance.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) ·
 > [Bjarne Stroustrup — Foundations of C++](https://www.stroustrup.com/ETAPS-corrected-draft.pdf) ·
 > [Rust Performance Book](https://nnethercote.github.io/perf-book/)

@@ -22,7 +22,7 @@
 > **双维定位**: P×Ana — 分析 WASM 目标的演进方向
 > **前置依赖**: [WASI](../06_ecosystem/08_wasi.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)
 > **后置延伸**: [Rust for WebAssembly](28_rust_for_webassembly.md)
-> **来源**: [WebAssembly Spec](https://webassembly.github.io/spec/) · [WASI Preview 2](https://github.com/WebAssembly/WASI/blob/main/specifications/wasi-0.2.4/Overview.md)
+> **来源**: [Rust Compiler Repository](https://github.com/rust-lang/rust) · [WebAssembly Spec](https://webassembly.github.io/spec/) · [WASI Preview 2](https://github.com/WebAssembly/WASI/blob/main/specifications/wasi-0.2.4/Overview.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 

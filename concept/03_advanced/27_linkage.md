@@ -12,6 +12,8 @@
 > **前置依赖**: [FFI Advanced](09_ffi_advanced.md) · [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) · [Smart Pointers](../02_intermediate/12_smart_pointers.md) · [Terminology Glossary](../00_meta/terminology_glossary.md)
 > **后置概念**: [Unsafe Rust](03_unsafe.md) · [Preludes](../01_foundation/35_preludes.md) · [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **定理链**: N/A — 编译器行为/平台相关文档
+> **主要来源**: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+
 >
 > **来源**: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html) · [Rust Reference — crate_type](https://doc.rust-lang.org/reference/linkage.html)
 

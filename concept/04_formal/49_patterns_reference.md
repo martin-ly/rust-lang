@@ -12,7 +12,7 @@
 > **后置概念**: [Destructors](43_destructors.md) · [Match Expressions](48_statements_and_expressions_reference.md)
 > **定理链**: Value → Pattern Match → Binding → Destructuring
 >
-> **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)
+> **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
 
@@ -74,5 +74,5 @@ match x {
 
 ---
 
-> **权威来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [Rust Reference — Match Expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html)
+> **权威来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [Rust Reference — Match Expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 > **内容分级**: [研究级]

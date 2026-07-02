@@ -15,7 +15,7 @@
 > **后置概念**: [Async/Await](../03_advanced/02_async.md)
 ---
 
-> **来源**:
+> **来源**: · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > [The Rust Programming Language — Ch10 Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) ·
 > [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) ·
 > [Rust Reference — Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html)
@@ -54,6 +54,7 @@ fn main() {
     println!("{}", article.summarize());
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -70,6 +71,7 @@ impl Summary for Article {
     }
 }
 ```
+
 **Rust trait 设计的核心原则**：
 
 - Trait 定义行为契约，impl 提供具体实现
@@ -109,6 +111,7 @@ fn main() {
     println!("{}", tweet.summarize());
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -118,6 +121,7 @@ fn main() {
 (Read more...)
 Tweet content
 ```
+
 **解析**：
 
 - `Article` 的 `impl Summary for Article {}` 为空实现，使用 trait 定义的**默认实现**
@@ -157,6 +161,7 @@ fn main() {
     render(Circle);
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -179,6 +184,7 @@ where
     T: Drawable + Clone + Send,
 {}
 ```
+
 **where 子句的优势**：约束与函数签名分离，可读性更好，支持更复杂的约束组合。
 
 **知识点**：trait bound 是 Rust 泛型（Generics）的"类型类约束"，编译器通过它进行单态化（Monomorphization）生成具体代码。[→ 泛型详解](02_generics.md)
@@ -200,6 +206,7 @@ fn main() {
     println!("{:?} {:?} {:?} {:?}", a, b, c, d);
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -218,6 +225,7 @@ enum Result<T, E> {
     Err(E),
 }
 ```
+
 **单态化（Monomorphization）**：
 
 编译期为每个具体类型生成独立代码：
@@ -226,6 +234,7 @@ enum Result<T, E> {
 Option<i32>    // 编译期生成一个版本
 Option<&str>   // 编译期生成另一个版本
 ```
+
 对比 C++ 模板：Rust 泛型在类型检查阶段就验证约束，错误信息更清晰。
 
 **知识点**：泛型通过单态化（Monomorphization）实现零成本抽象（Zero-Cost Abstraction）——运行时（Runtime）没有类型擦除或虚函数调用的开销。→ 泛型详解
@@ -263,6 +272,7 @@ fn main() {
     println!("{:?}", c.next());
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -321,6 +331,7 @@ fn main() {
     draw_all(&[&c, &s]);
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -330,6 +341,7 @@ fn main() {
 Circle
 Square
 ```
+
 **解析**：`&dyn Drawable` 是**trait 对象**，使用**动态分发（dynamic dispatch）**。
 
 | 特性 | `impl Trait` / 泛型（Generics） | `dyn Trait` |
@@ -364,6 +376,7 @@ fn main() {
     print_length(String::from("world"));
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -385,6 +398,7 @@ fn main() {
     print_length(String::from("world")); // String → as_ref() 返回 &str
 }
 ```
+
 实际上这段代码**可以编译**（原代码有误，String 确实实现了 AsRef<str>）。让我修正题目为更有教育意义的版本：
 
 **修正后的教育题目**：`?Sized` 的作用
@@ -394,6 +408,7 @@ fn print_it<T: Sized>(t: T) {
     println!("{}", std::mem::size_of::<T>());
 }
 ```
+
 所有泛型参数默认有 `T: Sized` 约束。要接受 trait 对象或切片（Slice），需使用 `?Sized`：
 
 ```rust
@@ -401,6 +416,7 @@ fn print_it<T: ?Sized>(t: &T) {
     println!("{}", std::mem::size_of_val(t));
 }
 ```
+
 **知识点**：`?Sized` 是 Rust 中少有的 "opt-out" 约束，用于处理编译期大小未知的类型（DST）。[→ 泛型详解](02_generics.md)
 
 </details>
@@ -439,6 +455,7 @@ fn main() {
     println!("{}", random_animal(1).name());
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -459,6 +476,7 @@ fn random_animal(n: i32) -> Box<dyn Animal> {
     }
 }
 ```
+
 **`impl Trait` 的适用场景**：
 
 | 场景 | 适用 | 不适用 |
@@ -501,6 +519,7 @@ fn main() {
     println!("p2 distance = {}", p2.distance_from_origin());
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
@@ -510,6 +529,7 @@ fn main() {
 p1.x = 5
 p2 distance = 5
 ```
+
 **解析**：
 
 1. `impl<T> Point<T>`：为**所有** `Point<T>` 实现方法（泛型实现）
@@ -531,6 +551,7 @@ impl Point<f32> {
     // 只有 Point<f32> 可用
 }
 ```
+
 **知识点**：Rust 允许为泛型结构体（Struct）的特定实例类型提供额外方法，这是零成本抽象（Zero-Cost Abstraction）的典型案例。[→ 泛型详解](02_generics.md)
 
 </details>
@@ -552,6 +573,7 @@ fn main() {
     println!("{} {} {}", a.data, b.data, c.data);
 }
 ```
+
 <details>
 <summary>💡 点击展开答案与解析</summary>
 

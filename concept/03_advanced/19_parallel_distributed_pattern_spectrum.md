@@ -16,7 +16,7 @@
 > **后置概念**:
 > [Pattern Composition Algebra](../06_ecosystem/73_pattern_composition_algebra.md) ·
 > [System Design Principles](../06_ecosystem/05_system_design_principles.md)
-> **主要来源**:
+> **主要来源**: · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711)
 > [Herlihy & Shavit — The Art of Multiprocessor Programming] ·
 > [Lynch — Distributed Algorithms] · [Tanenbaum — Distributed Systems] ·
 > [Amazon Science — Must Framework] ·

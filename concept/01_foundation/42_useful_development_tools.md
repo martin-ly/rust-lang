@@ -12,7 +12,7 @@
 > **后置概念**: [Testing Basics](16_testing_basics.md) · [Documentation](../06_ecosystem/14_documentation.md) · [DevOps and CI/CD](../06_ecosystem/28_devops_and_ci_cd.md)
 > **定理链**: Source Code → Formatter → Linter → Tester → Documenter
 >
-> **来源**: [The Rust Programming Language — Appendix D: Useful Development Tools](https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html)
+> **来源**: [The Rust Programming Language — Appendix D: Useful Development Tools](https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
 

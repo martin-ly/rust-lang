@@ -17,7 +17,7 @@
 
 ---
 
-> **来源**: [Miri 官方 README](https://github.com/rust-lang/miri) ·
+> **来源**: [Miri 官方 README](https://github.com/rust-lang/miri) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > [Rustonomicon — Undefined Behavior](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) ·
 > [Tree Borrows Paper](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) ·
 > [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)

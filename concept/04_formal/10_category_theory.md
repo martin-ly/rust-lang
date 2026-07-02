@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) ·
+> **来源**: [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) · · [Milewski — Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) · [Awodey — Category Theory](https://doi.org/10.1093/acprof:oso/9780198568612.001.0001) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [Wikipedia — Monad (functional programming)](https://en.wikipedia.org/wiki/Monad_(functional_programming)) ·
 > [Rust RFC — Monad](https://github.com/rust-lang/rfcs/issues/1815) ·
 > [Haskell Wiki — Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) ·

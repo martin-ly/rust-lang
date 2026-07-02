@@ -12,6 +12,8 @@
 > **前置依赖**: [Traits](../01_foundation/04_type_system.md) · [Structs and Enums](../01_foundation/05_reference_semantics.md) · [Terminology Glossary](../00_meta/terminology_glossary.md)
 > **后置概念**: [Advanced Traits](19_advanced_traits.md) · [Proc Macros](../03_advanced/07_proc_macro.md)
 > **定理链**: N/A — 参考级文档
+> **主要来源**: [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html) · [TRPL — Appendix C](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+
 >
 > **来源**: [TRPL — Appendix C: Derivable Traits](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)
 

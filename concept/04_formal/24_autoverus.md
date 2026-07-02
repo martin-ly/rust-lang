@@ -13,7 +13,7 @@
 > **前置依赖**: [形式化验证](05_verification_toolchain.md) · [形式化验证工具生态](../06_ecosystem/74_formal_verification_tools.md)
 > **后置延伸**: [Safety Tags](33_safety_tags_in_formal.md) · [BorrowSanitizer](34_borrow_sanitizer_in_formal.md)
 >
-> **来源**: [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://verus-lang.github.io/verus/guide/) · [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082) · [Unsafe Rust](../03_advanced/03_unsafe.md)
+> **来源**: [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://verus-lang.github.io/verus/guide/) · [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---

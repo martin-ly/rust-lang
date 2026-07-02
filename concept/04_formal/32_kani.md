@@ -17,7 +17,7 @@
 
 ---
 
-> **来源**: [Kani 官方文档](https://model-checking.github.io/kani/) ·
+> **来源**: [Kani 官方文档](https://model-checking.github.io/kani/) · · [Kani — Rust Verification Model Checker](https://github.com/model-checking/kani) · [Clarke et al. — Behavioral Model Checking](https://doi.org/10.1145/876638.876643) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html)
 > [Kani GitHub](https://github.com/model-checking/kani) ·
 > [CBMC](https://github.com/diffblue/cbmc) ·
 > [Kani 教程](https://model-checking.github.io/kani/tutorial-first-steps.html)

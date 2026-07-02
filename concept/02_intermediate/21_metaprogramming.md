@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
+> **来源**: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) ·
 > [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) ·
 > [syn crate](https://docs.rs/syn/latest/syn/) ·

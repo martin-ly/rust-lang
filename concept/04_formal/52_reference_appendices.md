@@ -12,7 +12,7 @@
 > **后置概念**: [Statements and Expressions Reference](48_statements_and_expressions_reference.md) · [Patterns Reference](49_patterns_reference.md)
 > **定理链**: Grammar → Lexicon → Syntax Index → Test Summary
 >
-> **来源**: [Rust Reference — Appendices](https://doc.rust-lang.org/reference/appendices.html)
+> **来源**: [Rust Reference — Appendices](https://doc.rust-lang.org/reference/appendices.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
 
@@ -78,5 +78,5 @@ Rust 受到多种语言影响：
 
 ---
 
-> **权威来源**: [Rust Reference — Appendices](https://doc.rust-lang.org/reference/appendices.html) · [Rust Reference — Grammar Summary](https://doc.rust-lang.org/reference/grammar.html)
+> **权威来源**: [Rust Reference — Appendices](https://doc.rust-lang.org/reference/appendices.html) · [Rust Reference — Grammar Summary](https://doc.rust-lang.org/reference/grammar.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 > **内容分级**: [研究级]

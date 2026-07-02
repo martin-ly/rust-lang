@@ -8,7 +8,7 @@
 >
 > **特性状态**: ✅ **Stable since Rust 1.85.0**（2025-02-20）
 > **所属 Edition**: Rust 2024 / 2021（语法可用，但 `AsyncFn*` 在 prelude 中的暴露随 2024 edition 默认生效）
-> **权威来源**:
+> **权威来源**: · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F)
 >
 > - [RFC 3668 — Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html)
 > - [Rust Reference — Closure expressions / Async closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures)

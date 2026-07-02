@@ -17,7 +17,7 @@
 > [Traits](01_traits.md)
 > **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) ·
 > [Async](../03_advanced/02_async.md)
-> **主要来源**: [TRPL: Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
+> **主要来源**: [TRPL: Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [Rust Reference: Errors](https://doc.rust-lang.org/reference/) ·
 > [Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling) ·
 > [RFC 243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)

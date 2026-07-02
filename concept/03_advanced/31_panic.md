@@ -11,6 +11,8 @@
 > **前置依赖**: [Panic and Abort](../01_foundation/13_panic_and_abort.md) · [Unsafe Rust](03_unsafe.md) · [The Rust Runtime](30_rust_runtime.md)
 > **后置概念**: [Error Handling](../02_intermediate/04_error_handling.md) · [FFI Advanced](09_ffi_advanced.md) · [Behavior Considered Undefined](../04_formal/37_behavior_considered_undefined.md)
 > **定理链**: Panic → Handler → Strategy → Unwind → UB Boundary
+> **主要来源**: [Rust Reference — Panic](https://doc.rust-lang.org/reference/panic.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Panic](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)
+
 >
 > **来源**: [Rust Reference — Panic](https://doc.rust-lang.org/reference/panic.html)
 

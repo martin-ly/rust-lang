@@ -39,6 +39,16 @@
 | [Rust 知识体系知识图谱本体规范 v2.0](../../00_meta/kg_ontology_v2.md) | L0 元信息层 | 研究者 | — | — | 元（Meta） | N/A — 描述性/综述性/导航性文档 |
 | [Rust 知识体系顶层本体（TLO）对齐](../../00_meta/kg_tlo_alignment.md) | L0 元信息层 | 知识工程师、形式化方法研究者、本体论实践者 > **状态**: 教学/工程对齐草案，非形式化公理化 > **主要来源**: [Rust Reference | — | — | — | — |
 | [Rust 知识体系全局思维导图](../../00_meta/knowledge_mindmap.md) | L0 元信息层 | 进阶 | 综述级 | — | 记忆 → 理解 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [概念定义图谱](../../00_meta/knowledge_topology/01_concept_definition_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [属性关系图谱](../../00_meta/knowledge_topology/02_attribute_relationship_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [场景决策树图谱](../../00_meta/knowledge_topology/03_scenario_decision_tree_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [示例与反例图谱](../../00_meta/knowledge_topology/04_example_counterexample_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [逻辑推理图谱](../../00_meta/knowledge_topology/05_logical_reasoning_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [层间映射图谱](../../00_meta/knowledge_topology/06_inter_layer_mapping_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [层内映射图谱](../../00_meta/knowledge_topology/07_intra_layer_mapping_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [概念-权威来源对齐图谱](../../00_meta/knowledge_topology/08_concept_source_alignment_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [推理判定树图谱](../../00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [缺口与行动计划](../../00_meta/knowledge_topology/10_gap_and_action_plan.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
 | [Rust 知识体系学习指南](../../00_meta/learning_guide.md) | L0 元信息层 | 初学者 | 综述级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [MVP 学习路径：从零到多线程 CLI](../../00_meta/learning_mvp_path.md) | L0 元信息层 | 初学者 | 综述级 | — | 记忆 → 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Rust Minimum Viable Learning Path (MVP Path)](../../00_meta/learning_mvp_path_en.md) | L0 元信息层 | — | — | — | — | — |
@@ -391,7 +401,7 @@
 
 | A/S/P | 数量 |
 |:---|:---:|
-| 未标注 | 234 |
+| 未标注 | 244 |
 | S | 81 |
 | P | 35 |
 | A | 13 |
@@ -407,12 +417,12 @@
 | 参考级 | 21 |
 | 研究级 | 21 |
 | 未标注 | 12 |
+| 元层 | 11 |
 | >
 
 > [综述级 | 2 |
 | >
 > [元层 | 1 |
-| 元层 | 1 |
 | 研究者级 | 1 |
 | 初学者 | 1 |
 | 中级 | 1 |
@@ -424,7 +434,7 @@
 | 分析 | 120 |
 | 理解 | 102 |
 | 应用 | 77 |
-| 未标注 | 29 |
+| 未标注 | 39 |
 | 评价 | 14 |
 | 记忆 | 13 |
 | 元（Meta） | 10 |

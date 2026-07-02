@@ -11,6 +11,8 @@
 > **前置依赖**: [Modules and Paths](../01_foundation/11_modules_and_paths.md) · [Names, Scopes and Resolution](../04_formal/40_names_and_resolution.md)
 > **后置概念**: [API Naming Conventions](../02_intermediate/22_api_naming_conventions.md) · [Cargo SemVer Checks](../07_future/46_cargo_semver_checks_preview.md) · [Safety Boundaries](../05_comparative/04_safety_boundaries.md)
 > **定理链**: Module Hierarchy → Visibility Rule → Public API Surface
+> **主要来源**: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) · [TRPL — Modules](https://doc.rust-lang.org/book/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+
 >
 > **来源**: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
 

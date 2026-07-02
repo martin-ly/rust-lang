@@ -11,7 +11,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [验证工具链](05_verification_toolchain.md)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [验证工具链](05_verification_toolchain.md) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > **后置概念**: N/A
 ---
 

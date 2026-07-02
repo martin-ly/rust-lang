@@ -12,7 +12,7 @@
 > **后置概念**: [Names and Resolution](40_names_and_resolution.md) · [Items Reference](46_items_reference.md) · [Keywords](../01_foundation/36_keywords.md)
 > **定理链**: Source Bytes → Unicode → Tokens → AST
 >
-> **来源**: [Rust Reference — Lexical Structure](https://doc.rust-lang.org/reference/lexical-structure.html)
+> **来源**: [Rust Reference — Lexical Structure](https://doc.rust-lang.org/reference/lexical-structure.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
 
@@ -88,5 +88,5 @@ Rust token 主要包括：
 
 ---
 
-> **权威来源**: [Rust Reference — Lexical Structure](https://doc.rust-lang.org/reference/lexical-structure.html) · [Rust Reference — Keywords](https://doc.rust-lang.org/reference/keywords.html)
+> **权威来源**: [Rust Reference — Lexical Structure](https://doc.rust-lang.org/reference/lexical-structure.html) · [Rust Reference — Keywords](https://doc.rust-lang.org/reference/keywords.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 > **内容分级**: [研究级]

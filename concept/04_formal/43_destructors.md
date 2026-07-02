@@ -11,6 +11,8 @@
 > **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Variables](../03_advanced/33_variables.md) · [Special Types and Traits](41_special_types_and_traits.md)
 > **后置概念**: [Panic](../03_advanced/31_panic.md) · [Memory Model](../03_advanced/29_memory_model.md) · [Behavior Considered Undefined](37_behavior_considered_undefined.md)
 > **定理链**: Scope → Drop Order → Temporary Lifetime Extension
+> **主要来源**: [Rust Reference — Destructors](https://doc.rust-lang.org/reference/destructors.html) · [Tofte & Talpin — Region-Based Memory Management](https://doi.org/10.1016/0890-5401(94)00052-3) · [Wadler — Linear Types Can Change the World!](https://doi.org/10.1007/978-1-4471-3227-7_5) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+
 >
 > **来源**: [Rust Reference — Destructors](https://doc.rust-lang.org/reference/destructors.html)
 

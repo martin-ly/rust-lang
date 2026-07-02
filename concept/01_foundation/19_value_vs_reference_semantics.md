@@ -11,7 +11,7 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Ownership](01_ownership.md) · [Variable Model](20_variable_model.md) · [学习指南](../00_meta/learning_guide.md)
 > **后置概念**: [Move Semantics](23_move_semantics.md) · [Borrowing](02_borrowing.md)
-> **主要来源**:
+> **主要来源**: · [Rust Reference — Pointer Types](https://doc.rust-lang.org/reference/types/pointer.html)
 >
 > [Pierce — TAPL, §13](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism](https://doi.org/10.1145/6041.6042) ·

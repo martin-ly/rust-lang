@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: F×Eva — 评估现代验证工具的适用性与局限
 > **前置概念**: [Verification Toolchain](05_verification_toolchain.md) · [Hoare 逻辑](15_hoare_logic.md) · [RustBelt](04_rustbelt.md)
-> **主要来源**: [AutoVerus arXiv 2025] · [Kani 0.65 Release] · [ESBMC Rust] · [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [TrustInSoft]
+> **主要来源**: [AutoVerus arXiv 2025] · [Kani 0.65 Release] · [ESBMC Rust] · [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [TrustInSoft] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---

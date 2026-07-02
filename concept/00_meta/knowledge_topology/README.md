@@ -15,7 +15,7 @@
 
 | 文件 | 主题 | 覆盖范围 |
 |:---|:---|:---|
-| [01_concept_definition_atlas.md](01_concept_definition_atlas.md) | 概念定义图谱 | 全部 372 个核心概念的中英名称、层级、定义、同义/反义 |
+| [01_concept_definition_atlas.md](01_concept_definition_atlas.md) | 概念定义图谱 | 全部 382 个核心概念的中英名称、层级、定义、同义/反义 |
 | [02_attribute_relationship_atlas.md](02_attribute_relationship_atlas.md) | 属性关系图谱 | 概念属性矩阵与属性间约束 |
 | [03_scenario_decision_tree_atlas.md](03_scenario_decision_tree_atlas.md) | 场景决策树图谱 | 开发场景 → 决策 → Rust 概念/工具 |
 | [04_example_counterexample_atlas.md](04_example_counterexample_atlas.md) | 示例与反例图谱 | 按概念组织的示例、反例、边界示例 |

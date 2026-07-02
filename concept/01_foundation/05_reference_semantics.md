@@ -17,7 +17,7 @@
 
 ---
 
-> **来源**:
+> **来源**: · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/)
 > [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html) ·
 > [Rust Reference — Method Call Expressions](https://doc.rust-lang.org/reference/expressions/method-call-expr.html#automatic-referencing) ·
 > [TRPL Ch15 — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·

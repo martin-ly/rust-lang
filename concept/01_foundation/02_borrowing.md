@@ -30,7 +30,7 @@
 > [Slices](04_type_system.md) ·
 > [Interior Mutability](../02_intermediate/03_memory_management.md)
 >
-> **主要来源**:
+> **主要来源**: · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
 > [TRPL 3rd Ed: Ch4.2](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) ·
 > [Brown University Interactive Book: Ch4.2](https://rust-book.cs.brown.edu/ch04-02-references-and-borrowing.html) ·

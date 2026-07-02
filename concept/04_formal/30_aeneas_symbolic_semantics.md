@@ -12,7 +12,7 @@
 > **双维定位**: C×Eva — 评价符号化语义对借用（Borrowing）检查声音性证明的假设边界
 > **前置依赖**: [L4 所有权（Ownership）形式化](03_ownership_formal.md) · L4 RustBelt · L4 分离逻辑 · L3 Unsafe
 > **后置延伸**: [L6 形式化验证工具](../06_ecosystem/74_formal_verification_tools.md) · [L7 形式化方法](../07_future/02_formal_methods.md)
-> **来源**:
+> **来源**: · [Rust Reference — Functions and Borrowing](https://doc.rust-lang.org/reference/items/functions.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 >
 > [POPL 2024 — Sound Borrow-Checking for Rust via Symbolic Semantics](https://doi.org/10.1145/3571192) ·
 > [Aeneas 项目](https://github.com/AeneasVerif/aeneas) ·

@@ -14,7 +14,7 @@
 > **双维定位**: P×Eva — 评判 unsafe 契约的充分性
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Memory Management](../02_intermediate/03_memory_management.md) · [Concurrency](01_concurrency.md)
 > **后置概念**: [FFI] · [Embedded] · [Custom Allocators]
-> **主要来源**:
+> **主要来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > [TRPL: Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) ·
 > [Rust Reference: Unsafe Rust](https://doc.rust-lang.org/reference/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·

@@ -12,6 +12,8 @@
 > **前置依赖**: [Keywords](36_keywords.md) · [Type System](04_type_system.md) · [Terminology Glossary](../00_meta/terminology_glossary.md)
 > **后置概念**: [Traits](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md) · [Macros](../03_advanced/04_macros.md)
 > **定理链**: N/A — 参考级文档
+> **主要来源**: [Rust Reference — Tokens](https://doc.rust-lang.org/reference/tokens.html) · [TRPL — Appendix B](https://doc.rust-lang.org/book/appendix-02-operators.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
+
 >
 > **来源**: [TRPL — Appendix B: Operators and Symbols](https://doc.rust-lang.org/book/appendix-02-operators.html)
 

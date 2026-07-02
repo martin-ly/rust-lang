@@ -13,7 +13,7 @@
 
 ---
 
-> **来源**: [std::string::String](https://doc.rust-lang.org/std/string/struct.String.html) ·
+> **来源**: [std::string::String](https://doc.rust-lang.org/std/string/struct.String.html) · · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > [std::str](https://doc.rust-lang.org/std/str/index.html) ·
 > [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html) ·
 > [Unicode Standard](https://www.unicode.org/standard/standard.html) ·
@@ -551,7 +551,7 @@ classDiagram
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html), [Rust Standard Library](https://doc.rust-lang.org/std/) · [Unicode Standard](https://unicode.org/versions/latest/) · [Unicode TR31 — Identifier and Pattern Syntax](https://unicode.org/reports/tr31/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
