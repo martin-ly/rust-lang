@@ -32,9 +32,7 @@ impl Rust197ThreadFeatures {
 
     /// 演示 `cfg(target_has_atomic_equal_alignment = "ptr")` 的使用位置
     ///
-    /// Rust 1.97 新增该 cfg；在 1.96 上无对应条件，因此使用 `#[cfg(all())]` 占位，
-    /// 实际逻辑在注释中说明。
-    #[cfg(all())]
+    /// Rust 1.97 新增该 cfg；在 1.96 上无对应条件，实际逻辑在注释中说明。
     pub fn optimized_ptr_atomic() -> &'static str {
         // 1.97+:
         // #[cfg(target_has_atomic_equal_alignment = "ptr")]
@@ -48,11 +46,10 @@ impl Rust197ThreadFeatures {
     /// 优化 FFI 和序列化互操作。该函数展示在 1.96 上获取同样的字节表示。
     pub fn nonzero_option_bytes(opt: Option<NonZeroU32>) -> [u8; 4] {
         // 1.97+: 编译器内部表示直接使用 -1 作为 None 的 niche
-        let bits = match opt {
+        match opt {
             Some(nz) => nz.get().to_le_bytes(),
             None => (-1i32).to_le_bytes(),
-        };
-        bits
+        }
     }
 
     /// 获取原子引用（等效实现）

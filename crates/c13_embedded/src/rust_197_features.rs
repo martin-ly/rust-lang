@@ -64,7 +64,7 @@ impl Rust197EmbeddedFeatures {
             return NonZeroU32::new(n.max(1)).unwrap();
         }
         let mut x = n;
-        let mut y = (x + 1) / 2;
+        let mut y = x.div_ceil(2);
         while y < x {
             x = y;
             y = (x + n / x) / 2;
@@ -79,9 +79,9 @@ impl Rust197EmbeddedFeatures {
     }
 
     /// 获取 `Box<T>` 中堆分配对象的裸指针。
-    pub fn box_as_ptr<T>(b: &Box<T>) -> *const T {
+    pub fn box_as_ptr<T>(b: &T) -> *const T {
         // 1.97+: Box::as_ptr(b)
-        &**b as *const T
+        b as *const T
     }
 
     /// 将 `Option<T>` 转为只读切片视图。
@@ -106,7 +106,6 @@ impl Rust197EmbeddedFeatures {
     }
 
     /// 演示 `cfg(target_has_atomic_equal_alignment = "ptr")` 的使用位置。
-    #[cfg(all())]
     pub fn atomic_equal_alignment_note() -> &'static str {
         // 1.97+:
         // #[cfg(target_has_atomic_equal_alignment = "ptr")]
@@ -160,7 +159,7 @@ mod tests {
     #[test]
     fn test_box_as_ptr() {
         let b = Box::new(42);
-        let p = Rust197EmbeddedFeatures::box_as_ptr(&b);
+        let p = Rust197EmbeddedFeatures::box_as_ptr(&*b);
         assert_eq!(unsafe { *p }, 42);
     }
 

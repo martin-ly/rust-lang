@@ -9,6 +9,7 @@
 use std::future::Future;
 use std::sync::atomic::AtomicUsize;
 use std::task::{Context, Poll, Waker};
+use thiserror::Error;
 
 /// # Rust 1.97 异步特性演示
 /// # Rust 1.97 async feature demonstration
@@ -41,7 +42,7 @@ impl Rust197AsyncFeatures {
     ///
     /// Rust 1.97 的 `must_use` lint 会将 `Result<T, E>` 视为与 `T` 等效，因此
     /// 忽略该返回值会触发警告。在 1.96 中代码仍可编译，只是不会触发该 lint。
-    pub fn must_use_result() -> Result<MustUseToken, ()> {
+    pub fn must_use_result() -> Result<MustUseToken, MustUseError> {
         Ok(MustUseToken)
     }
 
@@ -59,6 +60,11 @@ impl Rust197AsyncFeatures {
 #[derive(Debug, PartialEq, Eq)]
 #[must_use]
 pub struct MustUseToken;
+
+/// `must_use_result` 使用的自定义错误类型，避免 `Result<T, ()>`。
+#[derive(Error, Debug, Clone, Copy, PartialEq, Eq)]
+#[error("must_use token construction failed")]
+pub struct MustUseError;
 
 #[cfg(test)]
 mod tests {

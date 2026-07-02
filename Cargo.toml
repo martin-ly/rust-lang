@@ -810,6 +810,12 @@ manual_is_power_of_two = "warn"
 unnecessary_min_or_max = "warn"
 single_match_else = "allow"
 needless_lifetimes = "warn"
+# 2026-07-01: rust_197_features.rs 清理后固化的 lint 策略
+borrowed_box = "deny"
+let_and_return = "deny"
+manual_div_ceil = "deny"
+non_minimal_cfg = "deny"
+result_unit_err = "deny"
 type_complexity = "allow"
 too_many_arguments = "allow"
 # 异步相关

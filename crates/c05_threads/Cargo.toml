@@ -66,5 +66,9 @@ harness = false
 name = "false_sharing_bench"
 harness = false
 
+[lints.clippy]
+let_and_return = "deny"
+non_minimal_cfg = "deny"
+
 [package.metadata.cargo-machete]
 ignored = ["libc", "windows"]

@@ -60,7 +60,7 @@ impl Rust197CommonFeatures {
             val
         } else {
             let mut x = val;
-            let mut y = (x + 1) / 2;
+            let mut y = x.div_ceil(2);
             while y < x {
                 x = y;
                 y = (x + val / x) / 2;

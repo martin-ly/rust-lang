@@ -20,6 +20,9 @@ unsafe_code = "allow"
 missing_docs = "allow"
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(polonius)', 'cfg(kani)'] }
 
+[lints.clippy]
+borrowed_box = "deny"
+
 [dev-dependencies]
 criterion = { workspace = true }
 

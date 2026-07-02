@@ -91,3 +91,6 @@ required-features = ["metrics-prometheus"]
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)'] }
+
+[lints.clippy]
+result_unit_err = "deny"

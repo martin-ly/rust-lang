@@ -54,9 +54,9 @@ impl Rust197WasmFeatures {
     }
 
     /// 获取 `Box<T>` 中堆分配对象的裸指针。
-    pub fn box_as_ptr<T>(b: &Box<T>) -> *const T {
+    pub fn box_as_ptr<T>(b: &T) -> *const T {
         // 1.97+: Box::as_ptr(b)
-        &**b as *const T
+        b as *const T
     }
 
     /// 将 `Option<T>` 转为只读切片视图。
@@ -81,7 +81,6 @@ impl Rust197WasmFeatures {
     }
 
     /// 演示 `cfg(target_has_atomic_equal_alignment = "ptr")` 的使用位置。
-    #[cfg(all())]
     pub fn atomic_equal_alignment_note() -> &'static str {
         // 1.97+:
         // #[cfg(target_has_atomic_equal_alignment = "ptr")]
@@ -116,7 +115,7 @@ mod tests {
     #[test]
     fn test_box_as_ptr() {
         let b = Box::new(42);
-        let p = Rust197WasmFeatures::box_as_ptr(&b);
+        let p = Rust197WasmFeatures::box_as_ptr(&*b);
         assert_eq!(unsafe { *p }, 42);
     }
 
@@ -131,8 +130,7 @@ mod tests {
     #[test]
     fn test_const_size_and_align_of_val() {
         const BUF: [u8; 10] = [0; 10];
-        const SIZE_ALIGN: (usize, usize) =
-            Rust197WasmFeatures::const_size_and_align_of_val(&BUF);
+        const SIZE_ALIGN: (usize, usize) = Rust197WasmFeatures::const_size_and_align_of_val(&BUF);
         assert_eq!(SIZE_ALIGN.0, 10);
         assert_eq!(SIZE_ALIGN.1, 1);
     }

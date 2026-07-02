@@ -39,9 +39,9 @@ impl Rust197OwnershipFeatures {
     }
 
     /// 获取 `Box<T>` 中堆分配对象的裸指针
-    pub fn box_as_ptr<T>(b: &Box<T>) -> *const T {
+    pub fn box_as_ptr<T>(b: &T) -> *const T {
         // 1.97+: Box::as_ptr(b)
-        &**b as *const T
+        b as *const T
     }
 
     /// 将可变切片转换为 `Box<[T]>`
@@ -102,7 +102,7 @@ mod tests {
     #[test]
     fn test_box_as_ptr() {
         let b = Box::new(42);
-        let p = Rust197OwnershipFeatures::box_as_ptr(&b);
+        let p = Rust197OwnershipFeatures::box_as_ptr(&*b);
         assert_eq!(unsafe { *p }, 42);
     }
 

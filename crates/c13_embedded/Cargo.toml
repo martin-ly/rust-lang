@@ -53,3 +53,8 @@ unsafe_code = "allow"
 missing_docs = "allow"
 # 声明 nightly 预览模块使用的自定义 cfg，避免 unexpected_cfgs 警告
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)'] }
+
+[lints.clippy]
+borrowed_box = "deny"
+manual_div_ceil = "deny"
+non_minimal_cfg = "deny"
