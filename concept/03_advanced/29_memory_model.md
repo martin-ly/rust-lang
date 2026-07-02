@@ -11,7 +11,7 @@
 > **前置依赖**: [Unsafe Rust](03_unsafe.md) · [Ownership](../01_foundation/01_ownership.md) · [Behavior Considered Undefined](../04_formal/37_behavior_considered_undefined.md)
 > **后置概念**: [Atomics and Memory Ordering](11_atomics_and_memory_ordering.md) · [Inline Assembly](13_inline_assembly.md) · [Tree Borrows](../04_formal/36_tree_borrows_deep_dive.md)
 > **定理链**: Byte Model → Provenance → UB Boundary
-> **主要来源**: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **主要来源**: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 >
 > **来源**: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html)

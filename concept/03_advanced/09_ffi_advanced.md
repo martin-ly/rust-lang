@@ -13,7 +13,7 @@
 
 ---
 
-> **来源**: [Rust Nomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) · · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> **来源**: [Rust Nomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) · · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference — FFI](https://doc.rust-lang.org/reference/items/external-blocks.html) ·
 > [bindgen Guide](https://rust-lang.github.io/rust-bindgen/) ·
 > [cbindgen](https://github.com/mozilla/cbindgen) ·

@@ -11,7 +11,7 @@
 > **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Memory Model](29_memory_model.md) · [Variables](33_variables.md)
 > **后置概念**: [Smart Pointers](../02_intermediate/12_smart_pointers.md) · [Custom Allocators](14_custom_allocators.md) · [The Rust Runtime](30_rust_runtime.md)
 > **定理链**: Allocation → Box Lifetime → Heap Stability
-> **主要来源**: [Rust Reference — Memory Allocation and Lifetime](https://doc.rust-lang.org/reference/memory-allocation-and-lifetime.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
+> **主要来源**: [Rust Reference — Memory Allocation and Lifetime](https://doc.rust-lang.org/reference/memory-allocation-and-lifetime.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 >
 > **来源**: [Rust Reference — Memory Allocation and Lifetime](https://doc.rust-lang.org/reference/memory-allocation-and-lifetime.html)

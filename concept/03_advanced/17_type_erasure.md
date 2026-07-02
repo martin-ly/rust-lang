@@ -17,7 +17,7 @@
 
 ---
 
-> **来源**: [TRPL — Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html) · [Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F)
+> **来源**: [TRPL — Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html) · [Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) ·
 > [Wikipedia — Type Erasure](https://en.wikipedia.org/wiki/Type_erasure) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
