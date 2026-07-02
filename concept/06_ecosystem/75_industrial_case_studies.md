@@ -9,7 +9,7 @@
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-> **来源**: [Rust in Production](https://www.rust-lang.org/) · [Rust Foundation](https://foundation.rust-lang.org/)
+> **来源**: [Rust in Production](https://www.rust-lang.org/) · [Rust Foundation](https://foundation.rust-lang.org/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ## 一、案例总览矩阵
 

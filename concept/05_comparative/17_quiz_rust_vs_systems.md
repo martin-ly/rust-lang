@@ -11,7 +11,7 @@
 > **后置概念**: N/A
 ---
 
-> **来源**: · [Rust vs C++](01_rust_vs_cpp.md)
+> **来源**: · [Rust vs C++](01_rust_vs_cpp.md) · [Rust Reference](https://doc.rust-lang.org/reference/)
 > [Rust vs C++ — Rust Book](https://doc.rust-lang.org/nomicon/) ·
 > [Rust vs Go — Official Comparisons](https://go.dev/doc/) ·
 > [The C Programming Language — K&R]

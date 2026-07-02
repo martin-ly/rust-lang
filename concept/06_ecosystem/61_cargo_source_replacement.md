@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo — Source Replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html)
+> **来源**: [Cargo — Source Replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Cargo Book — Overriding Dependencies](https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html) ·
 > [Cargo Book — cargo vendor](https://doc.rust-lang.org/cargo/commands/cargo-vendor.html) ·
 > [Cargo Book — Build Cache](https://doc.rust-lang.org/cargo/reference/build-cache.html)

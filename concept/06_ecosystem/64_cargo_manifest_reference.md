@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo — Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html)
+> **来源**: [Cargo — Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) ·
 > [Cargo Book — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)
 

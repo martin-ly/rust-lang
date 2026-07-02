@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo Book — The Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) ·
+> **来源**: [Cargo Book — The Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Cargo Book — Cargo Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html) ·
 > [Cargo Book — Rust Version](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field) ·
 > [Cargo Book — Package ID Specifications](https://doc.rust-lang.org/cargo/reference/pkgid-spec.html)

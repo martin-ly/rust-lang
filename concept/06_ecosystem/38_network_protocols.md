@@ -15,7 +15,7 @@
 > **前置概念**: [Async/Await](../03_advanced/02_async.md) · [Ownership](../01_foundation/01_ownership.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Stream Processing Ecosystem](36_stream_processing_ecosystem.md) · [Distributed Systems](18_distributed_systems.md)
 >
-> **来源**: [tokio](https://docs.rs/tokio/) · [quinn](https://docs.rs/quinn/) · [rustls](https://docs.rs/rustls/)
+> **来源**: [tokio](https://docs.rs/tokio/) · [quinn](https://docs.rs/quinn/) · [rustls](https://docs.rs/rustls/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 ---
 
 > **来源**: [RFC 9000 — QUIC](https://www.rfc-editor.org/rfc/rfc9000.html) ·

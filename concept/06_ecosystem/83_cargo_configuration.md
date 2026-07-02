@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo Book — Configuration](https://doc.rust-lang.org/cargo/reference/config.html) ·
+> **来源**: [Cargo Book — Configuration](https://doc.rust-lang.org/cargo/reference/config.html) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Cargo Book — Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html) ·
 > [Cargo Book — Registry Authentication](https://doc.rust-lang.org/cargo/reference/registry-authentication.html)
 

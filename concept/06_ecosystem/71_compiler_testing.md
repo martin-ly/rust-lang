@@ -12,7 +12,7 @@
 > **定位**: 把“rustc 如何保证每次修改不破坏生态”讲清楚，覆盖从单元测试到全生态系统回归的多层测试策略。
 > **前置概念**: [安全边界](../05_comparative/04_safety_boundaries.md)
 > **后置概念**: [Compiler Infrastructure](47_compiler_infrastructure.md)
-> **来源**: [Rustc Dev Guide — Testing](https://rustc-dev-guide.rust-lang.org/tests/intro.html)
+> **来源**: [Rustc Dev Guide — Testing](https://rustc-dev-guide.rust-lang.org/tests/intro.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---
 

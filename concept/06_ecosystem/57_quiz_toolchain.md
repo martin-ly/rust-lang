@@ -12,7 +12,7 @@
 > **后置概念**: N/A
 ---
 
-> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [rustup](https://rust-lang.github.io/rustup/) · [工具链](01_toolchain.md)
+> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [rustup](https://rust-lang.github.io/rustup/) · [工具链](01_toolchain.md) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Clippy Documentation](https://doc.rust-lang.org/clippy/) ·
 > [Miri Documentation](https://github.com/rust-lang/miri) ·
 > [Rustfmt Documentation](https://github.com/rust-lang/rustfmt)

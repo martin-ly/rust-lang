@@ -20,7 +20,7 @@
 
 ---
 
-> **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [Embedded Rust Working Group](https://github.com/rust-embedded/wg)
+> **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [Embedded Rust Working Group](https://github.com/rust-embedded/wg) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [The Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [Rust Embedded Working Group](https://github.com/rust-embedded/wg) ·
 > [Wikipedia — Embedded System](https://en.wikipedia.org/wiki/Embedded_system) ·

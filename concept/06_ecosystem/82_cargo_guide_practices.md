@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo Book — Dependencies](https://doc.rust-lang.org/cargo/guide/dependencies.html) ·
+> **来源**: [Cargo Book — Dependencies](https://doc.rust-lang.org/cargo/guide/dependencies.html) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Cargo Book — Tests](https://doc.rust-lang.org/cargo/guide/tests.html) ·
 > [Cargo Book — Continuous Integration](https://doc.rust-lang.org/cargo/guide/continuous-integration.html) ·
 > [Cargo Book — Build Performance](https://doc.rust-lang.org/cargo/guide/build-cache.html)

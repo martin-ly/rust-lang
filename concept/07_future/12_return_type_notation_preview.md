@@ -23,7 +23,7 @@
 >
 ---
 
-> **来源**:
+> **来源**: · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [RFC 3654 — Return Type Notation](https://rust-lang.github.io/rfcs/3654-return-type-notation.html) ·
 > [Tracking Issue #109417](https://github.com/rust-lang/rust/issues/109417) ·
 > [Rust Project Goals 2026 — Prepare TAIT + RTN for stabilization](https://rust-lang.github.io/rust-project-goals/2026/rtn.html) ·

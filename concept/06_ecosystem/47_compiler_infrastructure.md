@@ -16,7 +16,7 @@ Compiler Internals. Core Rust concept covering mechanism analysis, parallel prog
 
 ---
 
-> **来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [rustc_driver](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_driver/)
+> **来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [rustc_driver](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_driver/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)

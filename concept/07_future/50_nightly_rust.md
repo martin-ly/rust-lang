@@ -12,7 +12,7 @@
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Editions](44_edition_guide.md)
 > **后置概念**: [Rust Version Tracking](05_rust_version_tracking.md) · [Rust 1.97 Stabilized](rust_1_97_stabilized.md)
 > **定理链**: N/A — 流程/生态文档
-> **主要来源**: [TRPL — Appendix G](https://doc.rust-lang.org/book/appendix-06-nightly-rust.html) · [Rust Forge — Release Process](https://forge.rust-lang.org/release/release-process.html)
+> **主要来源**: [TRPL — Appendix G](https://doc.rust-lang.org/book/appendix-06-nightly-rust.html) · [Rust Forge — Release Process](https://forge.rust-lang.org/release/release-process.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 
 >
 > **来源**: [TRPL — Appendix G: How Rust is Made and “Nightly Rust”](https://doc.rust-lang.org/book/appendix-07-nightly-rust.html) · [Rust Release Channels](https://doc.rust-lang.org/book/appendix-07-nightly-rust.html#choo-choo-release-channels-and-riding-the-trains)

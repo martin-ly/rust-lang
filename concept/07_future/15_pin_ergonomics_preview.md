@@ -21,7 +21,7 @@
 > **后置概念**:
 > [Version Tracking](05_rust_version_tracking.md) ·
 > [Async Drop](18_async_drop_preview.md)
-> **来源**:
+> **来源**: · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [RFC #3709 — Pinned Places](https://github.com/rust-lang/rfcs/issues/3709) ·
 > [Rust Project Goals 2026 — Pin Ergonomics](https://rust-lang.github.io/rust-project-goals/2026/pin-ergonomics.html) ·
 > [withoutboats — Pin and Suffering](https://without.boats/blog/) ·

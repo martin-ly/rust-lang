@@ -16,7 +16,7 @@
 
 ---
 
-> **来源**: [Rust 1.97.0 Release Notes](https://releases.rs/docs/1.97.0/) ·
+> **来源**: [Rust 1.97.0 Release Notes](https://releases.rs/docs/1.97.0/) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
 > [releases.rs — 1.97.0](https://releases.rs/docs/1.97.0/)
 

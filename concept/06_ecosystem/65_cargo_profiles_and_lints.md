@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo — Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) · [Cargo — Lints](https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-table)
+> **来源**: [Cargo — Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) · [Cargo — Lints](https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-table) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Cargo Book — Lints](https://doc.rust-lang.org/cargo/reference/lints.html) ·
 > [The Cargo Book](https://doc.rust-lang.org/cargo/)`](<https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section>)
 

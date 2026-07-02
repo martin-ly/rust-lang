@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo — Registry Authentication](https://doc.rust-lang.org/cargo/reference/registry-authentication.html) · [Cargo — Configuration](https://doc.rust-lang.org/cargo/reference/config.html)
+> **来源**: [Cargo — Registry Authentication](https://doc.rust-lang.org/cargo/reference/registry-authentication.html) · [Cargo — Configuration](https://doc.rust-lang.org/cargo/reference/config.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Cargo Book — Cargo Home](https://doc.rust-lang.org/cargo/guide/cargo-home.html) ·
 > [Cargo Book — Build Cache](https://doc.rust-lang.org/cargo/reference/build-cache.html) ·
 > [Cargo Book — Config — Credentials](https://doc.rust-lang.org/cargo/reference/config.html#credentials)

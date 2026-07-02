@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo — Registries](https://doc.rust-lang.org/cargo/reference/registries.html)
+> **来源**: [Cargo — Registries](https://doc.rust-lang.org/cargo/reference/registries.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Cargo Book — Cargo Registries](https://doc.rust-lang.org/cargo/reference/registries.html) ·
 > [Cargo Book — Alternative Registries](https://doc.rust-lang.org/cargo/reference/registries.html#using-an-alternate-registry) ·
 > [Cargo Book — config.toml — Registries](https://doc.rust-lang.org/cargo/reference/config.html#registries)

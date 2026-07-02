@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo — Dependency Resolution](https://doc.rust-lang.org/cargo/reference/resolver.html)
+> **来源**: [Cargo — Dependency Resolution](https://doc.rust-lang.org/cargo/reference/resolver.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) ·
 > [Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html) ·
 > [Cargo Book — Resolver (Specifying Dependencies)](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) ·

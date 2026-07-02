@@ -9,7 +9,7 @@
 > **最后更新**: 2026-07-01
 > **状态**: ✅ 已对齐 Rust 1.95.0 stable
 >
-> **权威来源**:
+> **权威来源**: · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 >
 > - [Announcing Rust 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)
 > - [releases.rs — 1.95.0](https://releases.rs/docs/1.95.0/)

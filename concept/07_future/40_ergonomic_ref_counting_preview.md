@@ -16,7 +16,7 @@
 
 ---
 
-> **来源**: · [核心 Crate](../06_ecosystem/03_core_crates.md)
+> **来源**: · [核心 Crate](../06_ecosystem/03_core_crates.md) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Rust Project Goals — Ergonomic RC](https://rust-lang.github.io/rust-project-goals/2026/ergonomic-rc.html) ·
 > [rust-project-goals#107](https://github.com/rust-lang/rust-project-goals/issues/107) ·
 > [Rust Internals Forum](https://internals.rust-lang.org/)

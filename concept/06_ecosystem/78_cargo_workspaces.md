@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) ·
+> **来源**: [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Cargo Book — The Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) ·
 > [Cargo Book — Resolver versions](https://doc.rust-lang.org/cargo/reference/resolver.html#resolver-versions)
 

@@ -21,7 +21,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**:
+> **来源**: · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 >
 > [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
 > [AutoDiff Tracking Issue](https://github.com/rust-lang/rust/issues/124509) ·

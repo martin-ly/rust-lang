@@ -2,7 +2,7 @@
 
 > **内容分级**: [专家级]
 
-> **来源**: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html) · [Cargo Book — Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html)
+> **来源**: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html) · [Cargo Book — Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 >
 > **代码状态**: [综述级 — 待补充可编译示例]

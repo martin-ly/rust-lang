@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo Book — Getting Started](https://doc.rust-lang.org/cargo/getting-started/index.html) ·
+> **来源**: [Cargo Book — Getting Started](https://doc.rust-lang.org/cargo/getting-started/index.html) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > [Cargo Book — First Steps with Cargo](https://doc.rust-lang.org/cargo/getting-started/first-steps.html) ·
 > [Cargo Book — Why Cargo Exists](https://doc.rust-lang.org/cargo/why-cargo-exists.html)
 

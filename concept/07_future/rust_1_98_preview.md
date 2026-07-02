@@ -13,7 +13,7 @@
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **状态**: 特性集高度不确定，稳定时间和具体内容以官方发布为准
 >
-> **权威来源**:
+> **权威来源**: · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 >
 > - [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 > - [Project Goals — Beyond the `&`](https://rust-lang.github.io/rust-project-goals/2026/pin-ergonomics.html)
