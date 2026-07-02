@@ -1,7 +1,7 @@
 # 名称、作用域与解析（Names, Scopes and Resolution）
 
 > **EN**: Names, Scopes and Resolution
-> **Summary**: Rust 名称系统的权威概述：实体、声明、作用域、命名空间、路径、名称解析与可见性规则。
+> **Summary**: Rust 名称系统的权威概述：实体、声明、作用域、命名空间、路径、名称解析与可见性规则。 Authoritative overview of the Rust name system: entities, declarations, scopes, namespaces, paths, name resolution, and visibility.
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]

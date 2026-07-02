@@ -2,9 +2,11 @@
 
 # Rust 知识体系跨层依赖与蕴含拓扑图
 
+> **Summary**: Redirect stub for the cross-layer dependency and implication topology; authoritative content is in inter_layer_map.md.
 > **EN**: Cross-layer Dependency and Implication Topology
 > **状态**: 已合并
 > **说明**: 本文件内容与 [`inter_layer_map.md`](inter_layer_map.md) 高度重叠。为消除重复、统一权威来源，本文件已作为重定向页保留，全部内容请在 [`inter_layer_map.md`](inter_layer_map.md) 中查阅。
+> **来源**: [inter_layer_map.md](inter_layer_map.md)
 > **前往权威文件**: [Rust 知识体系跨层依赖与蕴含图 — inter_layer_map.md](inter_layer_map.md)
 
 ---

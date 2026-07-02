@@ -1,7 +1,7 @@
 # 语句与表达式（Statements and Expressions）
 
 > **EN**: Statements and Expressions
-> **Summary**: Rust 作为表达式语言的核心特征：表达式嵌套、求值顺序，以及语句如何封装和显式排序表达式求值。
+> **Summary**: Rust 作为表达式语言的核心特征：表达式嵌套、求值顺序，以及语句如何封装和显式排序表达式求值。 Core characteristics of Rust as an expression language: nested expressions, evaluation order, and how statements sequence expression evaluation.
 >
 > **受众**: [初学者]
 > **内容分级**: [综述级]

@@ -3,7 +3,7 @@
 # Rust 关键字（Keywords）
 
 > **EN**: Keywords
-> **Summary**: Rust 中保留给当前或未来语言使用的关键字列表，以及 raw identifier（原始标识符）用法。
+> **Summary**: Rust 中保留给当前或未来语言使用的关键字列表，以及 raw identifier（原始标识符）用法。 List of keywords reserved for current or future use in Rust, plus raw identifier usage.
 >
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 理解

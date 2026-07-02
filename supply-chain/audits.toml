@@ -2,10 +2,10 @@
 #
 # 此文件记录团队成员对 crate 版本的审计结果。
 # 格式:
-#   [[audits.crate-name]]
-#   who = "auditor-name"
-#   criteria = "safe-to-deploy"
+#   [audits.crate-name]
 #   version = "1.0.0"
+#   criteria = "safe-to-deploy"
 #   notes = "Audit notes..."
 #
-# 初始状态：空，等待 cargo vet 运行后填充
+# 初始状态：空表，等待 cargo vet 运行后填充
+[audits]

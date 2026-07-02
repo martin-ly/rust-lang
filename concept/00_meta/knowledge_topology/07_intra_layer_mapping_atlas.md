@@ -1,7 +1,7 @@
 # 层内映射图谱（Intra-Layer Mapping Atlas）
 
 > **EN**: Intra-Layer Mapping Atlas
-> **Summary**: 每层内部核心模型/概念间的等价、蕴含、依赖、互斥关系，基于同层前置/后置引用。
+> **Summary**: 每层内部核心模型/概念间的等价、蕴含、依赖、互斥关系，基于同层前置/后置引用。 Equivalence, implication, dependency, and mutual-exclusion relationships inside each layer based on same-layer references.
 > **受众**: [研究者]
 > **内容分级**: [元层]
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)

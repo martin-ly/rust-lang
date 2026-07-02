@@ -4,7 +4,7 @@
 > **本节关键术语**: cargo build · cargo test · cargo check · cargo run · cargo add · cargo publish — [完整对照表](../00_meta/terminology_glossary.md)
 >
 > **EN**: Cargo Commands Reference
-> **Summary**: Cargo 子命令分类速查：通用命令、构建命令、manifest 命令、package 命令、发布命令、报告命令及其最常用的选项。
+> **Summary**: Cargo 子命令分类速查：通用命令、构建命令、manifest 命令、package 命令、发布命令、报告命令及其最常用的选项。 Classified quick reference of Cargo subcommands: general, build, manifest, package, publish, and report commands.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **P** — Practice

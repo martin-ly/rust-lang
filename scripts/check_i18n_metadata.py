@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent / "concept"
 EN_RE = re.compile(r'^>\s*\*\*EN\*\*:\s*(.*)$', re.MULTILINE)
 SUMMARY_RE = re.compile(r'^>\s*\*\*Summary\*\*:\s*(.*)$', re.MULTILINE)
-SOURCE_RE = re.compile(r'^>\s*\*\*来源\*\*:\s*(.*)$', re.MULTILINE)
+SOURCE_RE = re.compile(r'^>\s*\*\*(?:主要来源|权威来源|来源|来源链接)\*\*:\s*(.*)$', re.MULTILINE)
 
 placeholder_en = {"(Chinese)", "Core Rust concept.", "", "(待补充)", "(TBD)"}
 placeholder_summary = {"Core Rust concept.", "(待补充)", "(TBD)", ""}

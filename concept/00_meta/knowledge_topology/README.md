@@ -1,7 +1,7 @@
 # 知识体系拓扑图谱集（Knowledge Topology Atlas）
 
 > **EN**: Knowledge Topology Atlas
-> **Summary**: Rust 知识体系的全局拓扑视图：概念定义、属性关系、场景决策树、示例反例、逻辑推理、层间/层内映射、权威来源对齐。
+> **Summary**: Rust 知识体系的全局拓扑视图：概念定义、属性关系、场景决策树、示例反例、逻辑推理、层间/层内映射、权威来源对齐。 Global topological view of the Rust knowledge system: concept definitions, attribute relations, scenario decision trees, examples/counterexamples, logical reasoning, inter/intra-layer mappings, and source alignment.
 >
 > **受众**: [研究者]
 > **内容分级**: [元层]

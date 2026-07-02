@@ -1,5 +1,7 @@
 # 主题-权威来源对齐图谱 (Topic-Authority Alignment Map)
 
+> **Summary**: Index stub mapping topics to authoritative sources; redirect to concept_index.md, navigation.md, and authority_source_map.md.
+> **EN**: Topic-Authority Alignment Map
 > **生成时间**: 2026-07-02
 > **工具**: `scripts/topic_authority_aligner.py`
 > **状态**: 已转为索引 stub
@@ -8,4 +10,6 @@
 >
 > - **全局概念索引**: [`concept_index.md`](concept_index.md)
 > - **统一入口**: [`navigation.md`](navigation.md)
+> **来源**: [authority_source_map.md](authority_source_map.md) · [concept_index.md](concept_index.md) · [navigation.md](navigation.md)
+>
 > - **权威来源映射**: [`authority_source_map.md`](authority_source_map.md)

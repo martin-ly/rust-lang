@@ -1,7 +1,7 @@
 # 名字参考（Names Reference）
 
 > **EN**: Names Reference
-> **Summary**: Rust 名字系统的规范：命名空间、作用域、prelude、路径、名字解析规则，以及可见性如何与命名空间交互。
+> **Summary**: Rust 名字系统的规范：命名空间、作用域、prelude、路径、名字解析规则，以及可见性如何与命名空间交互。 Normative description of Rust names: namespaces, scopes, prelude, paths, resolution rules, and visibility interaction.
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]

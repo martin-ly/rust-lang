@@ -1,5 +1,7 @@
 # Rust Edition 机制与迁移指南
 
+> **Summary**: Redirect stub for Rust Edition mechanism and migration guide; authoritative content is in 44_edition_guide.md.
+> **EN**: Rust Edition Mechanism and Migration Guide
 > **受众**: [研究者]
 > **内容分级**: [研究级]
 > **前置概念**: [Rust Edition Guide](44_edition_guide.md)

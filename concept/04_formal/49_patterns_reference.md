@@ -1,7 +1,7 @@
 # 模式参考（Patterns Reference）
 
 > **EN**: Patterns Reference
-> **Summary**: Rust 模式系统的规范：模式位置、可反驳/不可反驳模式、各种模式形式（字面量、标识符、通配符、范围、引用、结构体、元组、数组、or、guard 等）及其绑定规则。
+> **Summary**: Rust 模式系统的规范：模式位置、可反驳/不可反驳模式、各种模式形式（字面量、标识符、通配符、范围、引用、结构体、元组、数组、or、guard 等）及其绑定规则。 Normative description of Rust patterns: pattern positions, refutable/irrefutable patterns, all pattern forms, and binding rules.
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]

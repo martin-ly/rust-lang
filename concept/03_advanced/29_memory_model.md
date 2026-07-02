@@ -1,7 +1,7 @@
 # Rust 内存模型（Memory Model）
 
 > **EN**: Memory Model
-> **Summary**: Rust 内存模型的核心概念：抽象字节、初始化字节、未初始化字节与 provenance，及其对未定义行为的影响。
+> **Summary**: Rust 内存模型的核心概念：抽象字节、初始化字节、未初始化字节与 provenance，及其对未定义行为的影响。 Core concepts of the Rust memory model: abstract bytes, initialized/uninitialized bytes, and provenance, and their impact on undefined behavior.
 >
 > **受众**: [专家]
 > **内容分级**: [专家级]

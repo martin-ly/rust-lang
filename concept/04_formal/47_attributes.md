@@ -1,7 +1,7 @@
 # 属性（Attributes）
 
 > **EN**: Attributes
-> **Summary**: Rust 属性系统：内置属性分类（测试、derive、诊断、代码生成、限制、类型系统、调试器）及其在 item、表达式、语句上的应用规则。
+> **Summary**: Rust 属性系统：内置属性分类（测试、derive、诊断、代码生成、限制、类型系统、调试器）及其在 item、表达式、语句上的应用规则。 Rust attribute system: built-in attribute categories and application rules on items, expressions, and statements.
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]

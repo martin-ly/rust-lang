@@ -1,7 +1,7 @@
 # 常用开发工具（Useful Development Tools）
 
 > **EN**: Useful Development Tools
-> **Summary**: Rust 生态中常用的官方与社区开发工具：rustfmt、clippy、rustdoc、cargo、rust-analyzer，以及它们在开发流程中的定位。
+> **Summary**: Rust 生态中常用的官方与社区开发工具：rustfmt、clippy、rustdoc、cargo、rust-analyzer，以及它们在开发流程中的定位。 Official and community development tools in the Rust ecosystem: rustfmt, clippy, rustdoc, cargo, and rust-analyzer.
 >
 > **受众**: [初学者]
 > **内容分级**: [参考级]

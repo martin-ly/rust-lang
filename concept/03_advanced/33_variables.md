@@ -1,7 +1,7 @@
 # 变量（Variables）
 
 > **EN**: Variables
-> **Summary**: Rust 变量的规范定义：函数参数、匿名临时值、命名局部变量；栈分配、可变性、初始化规则。
+> **Summary**: Rust 变量的规范定义：函数参数、匿名临时值、命名局部变量；栈分配、可变性、初始化规则。 Normative definition of Rust variables: function parameters, anonymous temporaries, named locals; stack allocation, mutability, and initialization rules.
 >
 > **受众**: [专家]
 > **内容分级**: [专家级]

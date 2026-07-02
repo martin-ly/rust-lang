@@ -1,7 +1,7 @@
 # 概念-权威来源对齐图谱（Concept-Source Alignment Atlas）
 
 > **EN**: Concept-Source Alignment Atlas
-> **Summary**: 每个核心概念与国际化权威来源的对齐：Rust Reference、TRPL、RFCs、学术、课程、工业、标准。
+> **Summary**: 每个核心概念与国际化权威来源的对齐：Rust Reference、TRPL、RFCs、学术、课程、工业、标准。 Alignment of each core concept with international authoritative sources: Rust Reference, TRPL, RFCs, academia, courses, industry, and standards.
 > **受众**: [研究者]
 > **内容分级**: [元层]
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)

@@ -5,6 +5,7 @@
 
 # Unsafe Rust 模式：安全抽象的核心技术
 
+> **Summary**: Redirect stub for Unsafe Rust patterns; authoritative content is in 03_unsafe.md.
 > **EN**: Unsafe Rust
 > **状态**: 已重定向
 > **说明**: 本文件内容与 [`concept/03_advanced/03_unsafe.md`](03_unsafe.md) 高度重叠。为消除重复、统一权威来源，本文件已作为重定向页保留，全部内容请在 `concept/` 权威文件中查阅。

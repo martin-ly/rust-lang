@@ -3,7 +3,7 @@
 # 未定义行为清单（Behavior Considered Undefined）
 
 > **EN**: Behavior Considered Undefined
-> **Summary**: Rust Reference 明确列出的未定义行为（UB）清单，覆盖数据竞争、指针别名、无效值、运行时假设等核心安全契约边界。
+> **Summary**: Rust Reference 明确列出的未定义行为（UB）清单，覆盖数据竞争、指针别名、无效值、运行时假设等核心安全契约边界。 Rust Reference list of undefined behaviors, covering data races, pointer aliasing, invalid values, and runtime assumptions.
 >
 > **受众**: [专家]
 > **Bloom 层级**: 理解 → 分析

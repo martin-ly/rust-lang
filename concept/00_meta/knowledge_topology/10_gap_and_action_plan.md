@@ -1,7 +1,7 @@
 # 缺口与行动计划（Gap and Action Plan）
 
 > **EN**: Gap and Action Plan
-> **Summary**: 基于拓扑抽取结果识别的当前缺口：来源覆盖、表征完整性、层间/层内映射、定义一致性。
+> **Summary**: 基于拓扑抽取结果识别的当前缺口：来源覆盖、表征完整性、层间/层内映射、定义一致性。 Current gaps identified from topology extraction: source coverage, representation completeness, inter/intra-layer mappings, and definition consistency.
 > **受众**: [研究者]
 > **内容分级**: [元层]
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
