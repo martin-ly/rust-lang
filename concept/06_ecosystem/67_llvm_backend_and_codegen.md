@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Rustc Dev Guide — Backend](https://rustc-dev-guide.rust-lang.org/backend/codegen.html) · [LLVM Documentation](https://llvm.org/docs/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rustc Dev Guide — Backend](https://rustc-dev-guide.rust-lang.org/backend/codegen.html) · [LLVM Documentation](https://llvm.org/docs/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rustc Dev Guide — The MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html) ·
 > [Rustc Dev Guide — Backend Agnostic Codegen](https://rustc-dev-guide.rust-lang.org/backend/backend-agnostic.html) ·
 > [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html)

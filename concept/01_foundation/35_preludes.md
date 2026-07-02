@@ -12,7 +12,7 @@
 > **前置依赖**: [Modules and Paths](11_modules_and_paths.md) · [Attributes and Macros](12_attributes_and_macros.md) · [Terminology Glossary](../00_meta/terminology_glossary.md)
 > **后置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Linkage](../03_advanced/27_linkage.md)
 > **定理链**: N/A — 语言规范/综述性文档
-> **主要来源**: [Rust Reference — Preludes](https://doc.rust-lang.org/reference/names/preludes.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html)
+> **主要来源**: [Rust Reference — Preludes](https://doc.rust-lang.org/reference/names/preludes.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 >
 > **来源**: [Rust Reference — Preludes](https://doc.rust-lang.org/reference/names/preludes.html) · [Rust Reference — `no_std`](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute) · [Rust Reference — `no_implicit_prelude`](https://doc.rust-lang.org/reference/names/preludes.html#the-no_implicit_prelude-attribute)

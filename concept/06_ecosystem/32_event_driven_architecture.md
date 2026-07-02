@@ -19,7 +19,7 @@
 > **后置概念**: [分布式系统](18_distributed_systems.md) ·
 > [云原生](24_cloud_native.md)
 >
-> **来源**: [tokio](https://docs.rs/tokio/) · [lapin](https://docs.rs/lapin/) · [rdkafka](https://docs.rs/rdkafka/)
+> **来源**: [tokio](https://docs.rs/tokio/) · [lapin](https://docs.rs/lapin/) · [rdkafka](https://docs.rs/rdkafka/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [Tokio](https://tokio.rs/) ·

@@ -11,7 +11,7 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Type Erasure](../03_advanced/17_type_erasure.md) · [Type System](../01_foundation/04_type_system.md) · [Generics](02_generics.md)
 > **后置概念**: [Error Handling Deep Dive](16_error_handling_deep_dive.md) · [Advanced Traits](19_advanced_traits.md)
-> **主要来源**: · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)
+> **主要来源**: · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
 > [TRPL Ch 17 — OOP Features of Rust](https://doc.rust-lang.org/book/ch17-02-trait-objects.html) ·
 > [Rust std::any](https://doc.rust-lang.org/std/any/index.html) ·

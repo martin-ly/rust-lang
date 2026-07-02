@@ -18,7 +18,7 @@
 > [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
 > **后置概念**:
 > [Ownership Formalization](03_ownership_formal.md) · [RustBelt](04_rustbelt.md)
-> **主要来源**:
+> **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Wikipedia: Type theory](https://en.wikipedia.org/wiki/Type_theory) ·
 > [Pierce 2002, *Types and Programming Languages*](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [Cardelli 1996, *Type Systems* (ACM Computing Surveys)](https://dl.acm.org/doi/10.1145/6041.6042)

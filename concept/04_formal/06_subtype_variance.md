@@ -16,7 +16,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html) ·
+> **来源**: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html) ·
 > [Wikipedia — Covariance and Contravariance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)) ·
 > [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)

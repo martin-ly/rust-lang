@@ -24,7 +24,7 @@
 
 ---
 
-> **来源**: [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) · · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [MIT 6.824 — Distributed Systems](https://pdos.csail.mit.edu/6.824/)
+> **来源**: [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) · · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [MIT 6.824 — Distributed Systems](https://pdos.csail.mit.edu/6.824/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes/testing.html) ·
 > [cargo test](https://doc.rust-lang.org/cargo/commands/cargo-test.html) ·
 > [Rust By Example — Testing](https://doc.rust-lang.org/rust-by-example/testing.html) ·

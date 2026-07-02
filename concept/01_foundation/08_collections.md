@@ -24,7 +24,7 @@
 
 ---
 
-> **来源**: [std::collections](https://doc.rust-lang.org/std/collections/index.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: [std::collections](https://doc.rust-lang.org/std/collections/index.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL Ch8 — Collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html) ·
 > [Rust Algorithm Book](https://doc.rust-lang.org/std/collections/) ·
 > [Wikipedia — Hash Table](https://en.wikipedia.org/wiki/Hash_table) ·

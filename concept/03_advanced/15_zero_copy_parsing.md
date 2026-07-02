@@ -17,7 +17,7 @@
 
 ---
 
-> **来源**: [std::io](https://doc.rust-lang.org/std/io/) · [Rust By Example — File I/O](https://doc.rust-lang.org/rust-by-example/std_misc/file.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> **来源**: [std::io](https://doc.rust-lang.org/std/io/) · [Rust By Example — File I/O](https://doc.rust-lang.org/rust-by-example/std_misc/file.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html) ·
 > [Wikipedia — Zero-copy](https://en.wikipedia.org/wiki/Zero-copy)

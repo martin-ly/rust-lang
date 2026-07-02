@@ -14,7 +14,7 @@
 > **前置依赖**: [ECS 架构](07_game_ecs.md) · [游戏开发](21_game_development.md) · [并发编程](../03_advanced/01_concurrency.md) · [Async/Await](../03_advanced/02_async.md)
 > **后置延伸**: [性能优化](15_performance_optimization.md) · [嵌入式系统](22_embedded_systems.md) · [内存管理](../02_intermediate/03_memory_management.md)
 >
-> **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://docs.rs/wgpu/)
+> **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://docs.rs/wgpu/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 ---
 

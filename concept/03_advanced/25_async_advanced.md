@@ -9,7 +9,7 @@
 > **前置依赖**: [Async/Await 基础](02_async.md)
 > **定理链编号**: T-053 Waker 活性 ⟹ T-054 Stream 安全性
 >
-> **来源**: [Async Book](https://rust-lang.github.io/async-book/) · [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> **来源**: [Async Book](https://rust-lang.github.io/async-book/) · [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 ---
 

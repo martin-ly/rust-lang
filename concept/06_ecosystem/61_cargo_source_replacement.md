@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo — Source Replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Cargo — Source Replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Cargo Book — Overriding Dependencies](https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html) ·
 > [Cargo Book — cargo vendor](https://doc.rust-lang.org/cargo/commands/cargo-vendor.html) ·
 > [Cargo Book — Build Cache](https://doc.rust-lang.org/cargo/reference/build-cache.html)

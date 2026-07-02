@@ -14,7 +14,7 @@
 >
 > **EN**: Effect System
 > **Summary**: Effect System. Core Rust concept covering practical applications, type system mechanics.
-> **来源**: [Rust Project Goals 2025H1 — const traits](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html) · [Keyword Generics Initiative](https://github.com/rust-lang/keyword-generics-initiative) · [a-mir-formality](https://github.com/rust-lang/a-mir-formality)
+> **来源**: [Rust Project Goals 2025H1 — const traits](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html) · [Keyword Generics Initiative](https://github.com/rust-lang/keyword-generics-initiative) · [a-mir-formality](https://github.com/rust-lang/a-mir-formality) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

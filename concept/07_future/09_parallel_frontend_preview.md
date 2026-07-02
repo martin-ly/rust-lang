@@ -22,7 +22,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [Rust Compiler Team — Parallel Frontend](https://github.com/rust-lang/compiler-team/issues/) ·
+> **来源**: [Rust Compiler Team — Parallel Frontend](https://github.com/rust-lang/compiler-team/issues/) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Internals — Parallel Compilation](https://internals.rust-lang.org/) ·
 > [Rust Project Goals 2026 — Parallel Frontend](https://rust-lang.github.io/rust-project-goals/2026/parallel-front-end.html) ·
 > [Cargo Parallel Compilation](https://doc.rust-lang.org/cargo/reference/profiles.html)

@@ -16,7 +16,7 @@
 
 ---
 
-> **来源**:
+> **来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [rustdoc Documentation](https://doc.rust-lang.org/rustdoc/) ·
 > [RFC 1574 — API Documentation](https://github.com/rust-lang/rfcs/pull/1574) ·
 > [mdBook Guide](https://rust-lang.github.io/mdBook/) ·

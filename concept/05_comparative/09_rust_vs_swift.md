@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Swift Documentation](https://www.swift.org/documentation/) ·
 > [Swift Ownership Manifesto](https://github.com/apple/swift/blob/main/docs/OwnershipManifesto.md) ·
 > [Wikipedia — Swift (programming language)](https://en.wikipedia.org/wiki/Swift_(programming_language)) ·

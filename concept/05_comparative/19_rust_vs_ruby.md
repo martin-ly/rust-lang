@@ -13,7 +13,7 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Ruby Documentation](https://www.ruby-lang.org/en/documentation/) ·
 > [Matz's Keynote — RubyConf](https://rubyconf.org/) ·
 > [Speed of Rust vs Ruby](https://benchmarksgame-team.pages.debian.net/benchmarksgame/) ·

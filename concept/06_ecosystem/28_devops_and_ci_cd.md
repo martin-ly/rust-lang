@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [GitHub Actions Docs](https://docs.github.com/en/actions) · [Cargo Book](https://doc.rust-lang.org/cargo/)
+> **来源**: [GitHub Actions Docs](https://docs.github.com/en/actions) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) ·
 > [cargo-release](https://github.com/crate-ci/cargo-release) ·
 > [Docker — Best Practices](https://docs.docker.com/build/building/multi-stage/) ·

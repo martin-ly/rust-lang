@@ -26,7 +26,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [Rust and WebAssembly Book](https://rustwasm.github.io/book/) · [TRPL — Advanced Features](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)
+> **来源**: [Rust and WebAssembly Book](https://rustwasm.github.io/book/) · [TRPL — Advanced Features](https://doc.rust-lang.org/book/ch19-00-advanced-features.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/) ·
 > [wasm-pack Book](https://rustwasm.github.io/docs/wasm-pack/) ·
 > [Yew Framework](https://yew.rs/) ·

@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [Elixir Official](https://elixir-lang.org/) · [Erlang/OTP](https://www.erlang.org/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Wikipedia — Erlang](https://en.wikipedia.org/wiki/Erlang_(programming_language))
+> **来源**: [Elixir Official](https://elixir-lang.org/) · [Erlang/OTP](https://www.erlang.org/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Wikipedia — Erlang](https://en.wikipedia.org/wiki/Erlang_(programming_language)) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 

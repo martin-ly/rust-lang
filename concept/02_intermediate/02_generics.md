@@ -21,7 +21,7 @@
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) · [Traits](01_traits.md)
 > **后置概念**: [Advanced Lifetimes](../01_foundation/03_lifetimes.md) · [GATs](../03_advanced/02_async.md) · [Const Generics [来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)]]
-> **主要来源**: · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **主要来源**: [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) ·
 > [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html) ·
 > [Wikipedia: Generic programming](https://en.wikipedia.org/wiki/Generic_programming) ·

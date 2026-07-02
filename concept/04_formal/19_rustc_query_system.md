@@ -13,7 +13,7 @@
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Type Inference](08_type_inference.md) · [NLL and Polonius](../03_advanced/08_nll_and_polonius.md)
 > **后置概念**: [Compiler Internals](../06_ecosystem/45_compiler_internals.md) · [Compiler Infrastructure](../06_ecosystem/47_compiler_infrastructure.md)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html) ·

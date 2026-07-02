@@ -13,7 +13,7 @@
 
 ---
 
-> **来源**: [Python Documentation](https://docs.python.org/3/) ·
+> **来源**: [Python Documentation](https://docs.python.org/3/) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [PEP 484 — Type Hints](https://peps.python.org/pep-0484/) ·
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·

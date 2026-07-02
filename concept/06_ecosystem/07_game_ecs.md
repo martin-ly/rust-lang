@@ -23,7 +23,7 @@
 >
 > [Application Domains](04_application_domains.md) ·
 > [Formal Ecosystem Tower](44_formal_ecosystem_tower.md)
-> **主要来源**:
+> **主要来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > [Bevy Book] · [Bevy ECS Docs] · [Fyrox Docs] · [wgpu Documentation] ·
 > [Wikipedia: Entity component system](https://en.wikipedia.org/wiki/Entity_component_system) · [Data-Oriented Design Book] · [Niko Matsakis — Rayon Blog]

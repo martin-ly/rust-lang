@@ -6,7 +6,7 @@
 >
 > **EN**: System Composability
 > **Summary**: System Composability: Rust ecosystem tools, crates, and engineering practices.
-> **来源**: [tokio](https://docs.rs/tokio/) · [tower](https://docs.rs/tower/) · [rayon](https://docs.rs/rayon/)
+> **来源**: [tokio](https://docs.rs/tokio/) · [tower](https://docs.rs/tower/) · [rayon](https://docs.rs/rayon/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **受众**: [进阶]
 > **层级**: L6 生态工程

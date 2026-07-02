@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html) · · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> **来源**: [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html) · · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference — Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html) ·
 > [std::ops::Fn](https://doc.rust-lang.org/std/ops/trait.Fn.html) ·
 > [RFC 1558 — Closures](https://rust-lang.github.io/rfcs//1558-closure-to-fn-coercion.html) ·

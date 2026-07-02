@@ -15,7 +15,7 @@
 > **前置概念**: [Stream Processing Semantics](../03_advanced/20_stream_processing_semantics.md) · [Async/Await](../03_advanced/02_async.md) · [Concurrency](../03_advanced/01_concurrency.md)
 > **后置概念**: [Distributed Systems](18_distributed_systems.md) · [Distributed Systems](18_distributed_systems.md)
 >
-> **来源**: [tokio-stream](https://docs.rs/tokio-stream/) · [futures](https://docs.rs/futures/) · [fluvio](https://docs.rs/fluvio/) · [TRPL — Async and Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [tokio-stream](https://docs.rs/tokio-stream/) · [futures](https://docs.rs/futures/) · [fluvio](https://docs.rs/fluvio/) · [TRPL — Async and Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [Timely Dataflow GitHub](https://github.com/TimelyDataflow/timely-dataflow) ·

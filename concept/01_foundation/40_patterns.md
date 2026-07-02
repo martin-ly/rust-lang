@@ -11,7 +11,7 @@
 > **前置依赖**: [Type System](04_type_system.md) · [Control Flow](07_control_flow.md) · [Enums and Variants](04_type_system.md)
 > **后置概念**: [Match Expressions](41_statements_and_expressions.md) · [Destructuring](../02_intermediate/02_generics.md) · [Refutability Analysis](../02_intermediate/20_type_system_advanced.md)
 > **定理链**: Pattern → Refutability → Exhaustiveness
-> **主要来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html)
+> **主要来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 >
 > **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)

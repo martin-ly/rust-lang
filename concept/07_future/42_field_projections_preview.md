@@ -4,7 +4,7 @@
 >
 > **EN**: Field Projections Preview
 > **Summary**: Preview of safe field projections and pinned field access for self-referential types.
-> **来源**: [std::pin — Pinning](https://doc.rust-lang.org/std/pin/index.html) · [Rust Reference — Field Access](https://doc.rust-lang.org/reference/expressions.html#field-access-expressions)
+> **来源**: [std::pin — Pinning](https://doc.rust-lang.org/std/pin/index.html) · [Rust Reference — Field Access](https://doc.rust-lang.org/reference/expressions.html#field-access-expressions) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`

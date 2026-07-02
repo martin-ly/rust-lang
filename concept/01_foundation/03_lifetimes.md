@@ -24,7 +24,7 @@
 > [Async/Await](../03_advanced/02_async.md) ·
 > [Pin](../03_advanced/02_async.md)
 >
-> **主要来源**: · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003)
+> **主要来源**: · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > [TRPL: Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) ·
 > [Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management) ·

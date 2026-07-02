@@ -17,7 +17,7 @@
 > **后置延伸**: [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) ·
 > [流处理生态](36_stream_processing_ecosystem.md)
 >
-> **来源**: [futures](https://docs.rs/futures/) · [tokio](https://docs.rs/tokio/) · [rxrust](https://docs.rs/rxrust/)
+> **来源**: [futures](https://docs.rs/futures/) · [tokio](https://docs.rs/tokio/) · [rxrust](https://docs.rs/rxrust/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 ---
 

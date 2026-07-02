@@ -16,7 +16,7 @@
 > **跨层映射**: L4↔L1 形式化 ↔ 直觉 双射 | L4→L3 Unsafe 边界 ↔ 公理扩展
 > **定理链编号**: T-100 借用（Borrowing）检查可判定性 → T-101 所有权类型 soundness → T-102 内存安全（Memory Safety）完备性
 > **ROD 迁移备注**: 本文档是所有权形式化的主入口。关于借用检查的**可判定性**与**复杂度**，详见 [Borrow Checking Decidability](28_borrow_checking_decidability.md)；关于 Aeneas 符号化语义对借用规则的自动化证明，详见 [Aeneas Symbolic Semantics](30_aeneas_symbolic_semantics.md)。
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ## 零、认知路径（Cognitive Path）
 

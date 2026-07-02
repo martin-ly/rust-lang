@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **P** — Procedure（策略决策）
 > **双维定位**: P×Eva — 评估形式化验证的工业 ROI
 > **前置概念**: [RustBelt](../04_formal/04_rustbelt.md) · [Ownership Formalization](../04_formal/03_ownership_formal.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
-> **主要来源**: [AWS Kani] · [Microsoft Verus] · [TLA+](https://lamport.azurewebsites.net/tla/tla.html) · [P Language] · [POPL](https://www.sigplan.org/Conferences/POPL/) / PLDI 2024-2026 · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page) · [O'Hearn 2007 — Separation Logic]
+> **主要来源**: [AWS Kani] · [Microsoft Verus] · [TLA+](https://lamport.azurewebsites.net/tla/tla.html) · [P Language] · [POPL](https://www.sigplan.org/Conferences/POPL/) / PLDI 2024-2026 · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page) · [O'Hearn 2007 — Separation Logic] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 ---

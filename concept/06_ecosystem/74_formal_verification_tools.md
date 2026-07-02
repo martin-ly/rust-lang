@@ -13,7 +13,7 @@
 > **前置依赖**: [类型系统（Type System）](../01_foundation/04_type_system.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · 形式化验证 · [生命周期（Lifetimes）](../01_foundation/03_lifetimes.md)
 > **后置延伸**: [编译器内部原理](45_compiler_internals.md) · [安全与密码学](43_security_cryptography.md) · [嵌入式系统](22_embedded_systems.md)
 >
-> **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://verus-lang.github.io/verus/guide/)
+> **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://verus-lang.github.io/verus/guide/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 ---
 

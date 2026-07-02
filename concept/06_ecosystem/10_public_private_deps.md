@@ -2,7 +2,7 @@
 
 > **EN**: Public and Private Dependencies in Cargo
 > **Summary**: Controlling dependency visibility with `public = true`/`false` to prevent API leakage.
-> **来源**: [Cargo Book — Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html)
+> **来源**: [Cargo Book — Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ## 代码示例：Public/Private Dependencies 配置
 

@@ -23,7 +23,7 @@
 > **层级**: L1 基础概念
 > **前置概念**: [Stack vs Heap](04_type_system.md) · [Scope and Drop](04_type_system.md)
 > **后置概念**: [Borrowing](02_borrowing.md) · [Lifetimes](03_lifetimes.md) · [Smart Pointers](../02_intermediate/03_memory_management.md)
-> **主要来源**:
+> **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > [TRPL 3rd Ed: Ch4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) ·
 > [Brown University Interactive Book: Ch4](https://rust-book.cs.brown.edu/ch04-00-understanding-ownership.html) ·

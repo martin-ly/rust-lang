@@ -12,7 +12,7 @@
 > **双维定位**: P×Eva — 评估验证工具的 ROI 和适用性
 > **前置概念**: [RustBelt](04_rustbelt.md) · [Ownership Formalization](03_ownership_formal.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)
-> **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot](https://creusot.rs/) · [Miri Book](https://github.com/rust-lang/miri) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [a-mir-formality]
+> **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot](https://creusot.rs/) · [Miri Book](https://github.com/rust-lang/miri) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [a-mir-formality] · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **Bloom 层级**: 评价 → 应用
 > **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **[来源: SOSP 2024 Verus]** · **[来源: PLDI 2024 RefinedRust]** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ✅
 >

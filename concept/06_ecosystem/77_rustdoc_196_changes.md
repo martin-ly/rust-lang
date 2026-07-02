@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) ·
 > [Cargo Book — Configuration](https://doc.rust-lang.org/cargo/reference/config.html) ·
 > [RFC 3271 — Rustdoc links](https://rust-lang.github.io/rfcs/3271-rustdoc-links.html)

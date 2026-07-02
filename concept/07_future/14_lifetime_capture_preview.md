@@ -16,7 +16,7 @@
 > **双维定位**: C×Ana — 分析 impl Trait 的生命周期（Lifetimes）捕获规则
 > **前置依赖**: [Lifetime](../01_foundation/03_lifetimes.md) · [Trait](../02_intermediate/01_traits.md)
 > **后置延伸**: [RPITIT](37_rpitit_preview.md)
-> **来源**: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 

@@ -12,7 +12,7 @@
 > **后置概念**: N/A
 ---
 
-> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [rustup](https://rust-lang.github.io/rustup/) · [工具链](01_toolchain.md) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [rustup](https://rust-lang.github.io/rustup/) · [工具链](01_toolchain.md) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Clippy Documentation](https://doc.rust-lang.org/clippy/) ·
 > [Miri Documentation](https://github.com/rust-lang/miri) ·
 > [Rustfmt Documentation](https://github.com/rust-lang/rustfmt)

@@ -12,7 +12,7 @@
 > **双维定位**: C×Eva — 评价并发模型的设计差异
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Memory Management](../02_intermediate/03_memory_management.md)
 > **后置概念**: [Paradigm Matrix](03_paradigm_matrix.md)
-> **主要来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Effective Go] · [Wikipedia: Communicating sequential processes](https://en.wikipedia.org/wiki/Communicating_sequential_processes) · [Wikipedia: Go](https://en.wikipedia.org/wiki/Go)
+> **主要来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Effective Go] · [Wikipedia: Communicating sequential processes](https://en.wikipedia.org/wiki/Communicating_sequential_processes) · [Wikipedia: Go](https://en.wikipedia.org/wiki/Go) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 ---

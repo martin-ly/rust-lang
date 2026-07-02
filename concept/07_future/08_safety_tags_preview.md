@@ -22,7 +22,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [Rust RFC: Safety Tags](https://github.com/rust-lang/rfcs/pull/) ·
+> **来源**: [Rust RFC: Safety Tags](https://github.com/rust-lang/rfcs/pull/) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
 > [Rust Internals — Safety Annotations](https://internals.rust-lang.org/) ·
 > [Rust for Linux](https://rust-for-linux.com/) ·

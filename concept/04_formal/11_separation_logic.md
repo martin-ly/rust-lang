@@ -12,7 +12,7 @@
 > **前置概念**: [Linear Logic](01_linear_logic.md) · [Ownership Formalization](03_ownership_formal.md) · [RustBelt](04_rustbelt.md)
 > **后置概念**: [Verification Toolchain](05_verification_toolchain.md) · [Type Theory](02_type_theory.md)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**:

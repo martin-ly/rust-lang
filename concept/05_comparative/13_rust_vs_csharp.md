@@ -23,7 +23,7 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [C# Documentation](https://docs.microsoft.com/en-us/dotnet/csharp/) · [Wikipedia — C Sharp](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) · [.NET Blog](https://devblogs.microsoft.com/dotnet/) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [C# Documentation](https://docs.microsoft.com/en-us/dotnet/csharp/) · [Wikipedia — C Sharp](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) · [.NET Blog](https://devblogs.microsoft.com/dotnet/) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language)) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
 ## 📑 目录

@@ -14,7 +14,7 @@
 > **后置概念**: [WebAssembly](11_webassembly.md) · [Rust Version Tracking](../07_future/05_rust_version_tracking.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [log crate](https://docs.rs/log/) · [tracing](https://docs.rs/tracing/) · [std::fmt](https://doc.rust-lang.org/std/fmt/)
+> **来源**: [log crate](https://docs.rs/log/) · [tracing](https://docs.rs/tracing/) · [std::fmt](https://doc.rust-lang.org/std/fmt/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [tracing Documentation](https://docs.rs/tracing/latest/tracing/) ·

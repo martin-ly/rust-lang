@@ -16,7 +16,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Panics](https://doc.rust-lang.org/reference/runtime.html#panics) · · [Goodenough — Structured Exception Handling](https://doi.org/10.1145/512760.512764) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: [Rust Reference — Panics](https://doc.rust-lang.org/reference/runtime.html#panics) · · [Goodenough — Structured Exception Handling](https://doi.org/10.1145/512760.512764) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL — Unrecoverable Errors](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html) ·
 > [std::panic](https://doc.rust-lang.org/std/panic/index.html) ·
 > [RFC 2361 — catch_panic](https://rust-lang.github.io/rfcs//2361-dbg-macro.html) ·

@@ -24,7 +24,7 @@
 
 ---
 
-> **来源**: [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) · [Rust Blog](https://blog.rust-lang.org/) · [Rust Roadmap](https://www.rust-lang.org/)
+> **来源**: [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) · [Rust Blog](https://blog.rust-lang.org/) · [Rust Roadmap](https://www.rust-lang.org/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) ·
 > [RFC 3086 — Portable SIMD](https://github.com/rust-lang/rfcs/pull/3086) ·
 > [RFC 1398 — Global Allocators](https://github.com/rust-lang/rfcs/pull/1398) ·

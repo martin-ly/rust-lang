@@ -12,7 +12,7 @@
 > **前置概念**: [Type Theory](02_type_theory.md) · [Operational Semantics](17_operational_semantics.md) · [Linear Logic](01_linear_logic.md)
 > **后置概念**: [Category Theory](10_category_theory.md) · [RustBelt](04_rustbelt.md)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**:

@@ -20,7 +20,7 @@
 > **双维定位**: C×Und — 理解变量在编程语言中的通用语义
 > **前置概念**: [Ownership](01_ownership.md) · [Type System](04_type_system.md)
 > **后置概念**: [Borrowing](02_borrowing.md) · [Memory Management](../02_intermediate/03_memory_management.md) · [Evaluation Strategies](../04_formal/18_evaluation_strategies.md)
-> **主要来源**:
+> **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 [Pierce — TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 [Harper — PFPL](https://www.cs.cmu.edu/~rwh/pfpl/) ·

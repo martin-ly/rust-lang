@@ -24,7 +24,7 @@
 
 ---
 
-> **来源**:
+> **来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Criterion.rs Book](https://bheisler.github.io/criterion.rs/book/) ·
 > [Rust Performance Book](https://nnethercote.github.io/perf-book/) ·
 > [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) ·

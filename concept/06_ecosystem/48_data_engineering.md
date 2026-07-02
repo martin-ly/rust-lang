@@ -14,7 +14,7 @@
 > **前置依赖**: [类型系统（Type System）](../01_foundation/04_type_system.md) · [泛型（Generics）](../02_intermediate/02_generics.md) · Async/Await · Machine Learning Ecosystem
 > **后置延伸**: [流处理生态](36_stream_processing_ecosystem.md) · [云原生](24_cloud_native.md) · [性能优化](15_performance_optimization.md)
 >
-> **来源**: [polars](https://docs.rs/polars/) · [arrow-rs](https://docs.rs/arrow/) · [datafusion](https://docs.rs/datafusion/)
+> **来源**: [polars](https://docs.rs/polars/) · [arrow-rs](https://docs.rs/arrow/) · [datafusion](https://docs.rs/datafusion/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 ---
 

@@ -12,7 +12,7 @@
 > **前置依赖**: [Toolchain](01_toolchain.md) · [Cargo Subcommands and Plugins](66_cargo_subcommands_and_plugins.md)
 > **后置概念**: [Cargo Profiles and Lints](65_cargo_profiles_and_lints.md) · [Testing Basics](../01_foundation/16_testing_basics.md) · [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **定理链**: N/A — 工具/实践文档
-> **主要来源**: [TRPL — Appendix D](https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html) · [rust-analyzer](https://rust-analyzer.github.io/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **主要来源**: [TRPL — Appendix D](https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html) · [rust-analyzer](https://rust-analyzer.github.io/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 >
 > **来源**: [TRPL — Appendix D: Useful Development Tools](https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html) · [rustfmt](https://github.com/rust-lang/rustfmt) · [Clippy](https://doc.rust-lang.org/clippy/) · [rust-analyzer](https://rust-analyzer.github.io/)

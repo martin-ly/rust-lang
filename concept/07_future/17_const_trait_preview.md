@@ -17,7 +17,7 @@
 > **双维定位**: C×Eva — 评价 const trait 的设计权衡
 > **前置依赖**: [Trait](../02_intermediate/01_traits.md) · [Const Generics](../02_intermediate/02_generics.md)
 > **后置延伸**: [Const Trait Impl](11_const_trait_impl_preview.md)
-> **来源**: [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 2632](https://github.com/rust-lang/rust/issues/67792) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 2632](https://github.com/rust-lang/rust/issues/67792) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 

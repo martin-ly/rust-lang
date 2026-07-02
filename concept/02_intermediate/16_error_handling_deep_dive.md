@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Errors](https://doc.rust-lang.org/std/result/enum.Result.html) · · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> **来源**: [Rust Reference — Errors](https://doc.rust-lang.org/std/result/enum.Result.html) · · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
 > [thiserror crate](https://docs.rs/thiserror/latest/thiserror/) ·
 > [anyhow crate](https://docs.rs/anyhow/latest/anyhow/) ·

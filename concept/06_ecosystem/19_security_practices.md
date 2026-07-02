@@ -17,7 +17,7 @@
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Type System](../01_foundation/04_type_system.md) · [Error Handling](../02_intermediate/16_error_handling_deep_dive.md)
 > **后置概念**: [Blockchain](06_blockchain.md) · [Formal Methods](../04_formal/04_rustbelt.md)
 >
-> **来源**: [Rust Secure Code WG](https://github.com/rust-secure-code/wg) · [Cargo — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **来源**: [Rust Secure Code WG](https://github.com/rust-secure-code/wg) · [Cargo — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [Rust Secure Code Guidelines](https://anssi-fr.github.io/rust-guide/) ·

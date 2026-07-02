@@ -21,7 +21,7 @@
 > [Ownership Formalization](03_ownership_formal.md) ·
 > [Control Flow](../01_foundation/07_control_flow.md)
 >
-> **主要来源**:
+> **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > [Pierce — TAPL, §5-§11](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [Harper — PFPL, Part III](https://www.cs.cmu.edu/~rwh/pfpl/) ·

@@ -9,7 +9,7 @@
 >
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-> **来源**: [embedded-graphics](https://docs.rs/embedded-graphics/) · [lvgl-rs](https://docs.rs/lvgl/)
+> **来源**: [embedded-graphics](https://docs.rs/embedded-graphics/) · [lvgl-rs](https://docs.rs/lvgl/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ## 📑 目录
 

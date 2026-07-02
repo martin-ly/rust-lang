@@ -11,7 +11,7 @@
 > **双维定位**: C×Ana — 分析多语言类型系统（Type System）谱系
 > **前置概念**: [Rust vs C++](01_rust_vs_cpp.md) · [Rust vs Go](02_rust_vs_go.md) · [Type Theory](../04_formal/02_type_theory.md)
 > **后置概念**: [Future Evolution](../07_future/03_evolution.md)
-> **主要来源**: [Wikipedia: Comparison of programming languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages) · [Wikipedia: Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) · [Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system) · [PL Papers]
+> **主要来源**: [Wikipedia: Comparison of programming languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages) · [Wikipedia: Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) · [Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system) · [PL Papers] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 ---

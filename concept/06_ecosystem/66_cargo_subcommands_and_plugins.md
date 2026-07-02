@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo — External Tools](https://doc.rust-lang.org/cargo/reference/external-tools.html) · [Cargo — Commands](https://doc.rust-lang.org/cargo/commands/cargo.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Cargo — External Tools](https://doc.rust-lang.org/cargo/reference/external-tools.html) · [Cargo — Commands](https://doc.rust-lang.org/cargo/commands/cargo.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Cargo Book — cargo metadata](https://doc.rust-lang.org/cargo/commands/cargo-metadata.html) ·
 > [Cargo Book — Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html)
 

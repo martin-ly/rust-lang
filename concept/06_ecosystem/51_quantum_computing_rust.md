@@ -8,7 +8,7 @@
 > **代码状态**: [综述级 — 待补充代码]
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) · [std API Docs](https://doc.rust-lang.org/std/)
+> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) · [std API Docs](https://doc.rust-lang.org/std/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 
 ## 📑 目录
 

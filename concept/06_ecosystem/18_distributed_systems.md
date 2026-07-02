@@ -17,7 +17,7 @@
 > **后置概念**: [WebAssembly](11_webassembly.md) ·
 > [Observability](13_logging_observability.md)
 >
-> **来源**: [tokio](https://docs.rs/tokio/) · [tower](https://docs.rs/tower/) · [tonic](https://docs.rs/tonic/)
+> **来源**: [tokio](https://docs.rs/tokio/) · [tower](https://docs.rs/tower/) · [tonic](https://docs.rs/tonic/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [tonic [来源: [tonic](https://docs.rs/tonic/latest/tonic/)] crate](<https://docs.rs/tonic/latest/tonic/>) ·

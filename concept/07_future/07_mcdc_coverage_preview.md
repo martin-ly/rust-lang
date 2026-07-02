@@ -21,7 +21,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [DO-178C [来源: [FAA DO-178C](https://www.faa.gov/aircraft/air_cert/design_approvals/air_software/)] / ED-12C](<https://www.rtca.org/product/do-178c/>) ·
 > [ISO 26262](https://www.iso.org/standard/68383.html) ·
 > [Rust Tracking Issue #124656](https://github.com/rust-lang/rust/issues/124656) ·

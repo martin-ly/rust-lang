@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Cargo Book — The Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) ·
 > [Cargo Book — Resolver versions](https://doc.rust-lang.org/cargo/reference/resolver.html#resolver-versions)
 

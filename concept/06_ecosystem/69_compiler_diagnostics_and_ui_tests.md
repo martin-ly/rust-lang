@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Rustc Dev Guide — Diagnostics](https://rustc-dev-guide.rust-lang.org/diagnostics.html) · [compiletest](https://rustc-dev-guide.rust-lang.org/tests/compiletest.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rustc Dev Guide — Diagnostics](https://rustc-dev-guide.rust-lang.org/diagnostics.html) · [compiletest](https://rustc-dev-guide.rust-lang.org/tests/compiletest.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html) ·
 > [Rustc Dev Guide — Compiletest](https://rustc-dev-guide.rust-lang.org/tests/intro.html) ·
 > [Rust Reference — Lint Levels](https://doc.rust-lang.org/reference/attributes/diagnostics.html#lint-check-attributes)

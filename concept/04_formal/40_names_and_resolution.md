@@ -11,7 +11,7 @@
 > **前置依赖**: [Modules and Paths](../01_foundation/11_modules_and_paths.md) · [Attributes and Macros](../01_foundation/12_attributes_and_macros.md)
 > **后置概念**: [Name Resolution and HIR](35_name_resolution_and_hir.md) · [Linkage](../03_advanced/27_linkage.md) · [Visibility and Privacy](../05_comparative/04_safety_boundaries.md)
 > **定理链**: Entity → Declaration → Scope → Namespace → Path → Resolution
-> **主要来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **主要来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 >
 > **来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Rust Reference — Namespaces](https://doc.rust-lang.org/reference/namespaces.html) · [Rust Reference — Scopes](https://doc.rust-lang.org/reference/scopes.html) · [Rust Reference — Paths](https://doc.rust-lang.org/reference/paths.html) · [Rust Reference — Name Resolution](https://doc.rust-lang.org/reference/name-resolution.html) · [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)

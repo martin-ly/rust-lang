@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> **来源**: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) ·
 > [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) ·
 > [syn crate](https://docs.rs/syn/latest/syn/) ·

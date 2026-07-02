@@ -15,7 +15,6 @@
 > **功能**: 将概念知识转化为**工程能力**
 > **规范文件**: [`06_ecosystem/README.md`](06_ecosystem/README.md)
 > **[来源: The Rust Programming Language (TRPL)]** · **[来源: Cargo Book - doc.rust-lang.org/cargo]** · **[来源: crates.io]** · **[来源: Rust RFCs]**
-
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---

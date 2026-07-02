@@ -16,7 +16,7 @@
 > [FFI](../03_advanced/05_rust_ffi.md)
 > **后置概念**: [Memory Management](../02_intermediate/03_memory_management.md) ·
 > [Pin/Unpin](../03_advanced/06_pin_unpin.md)
-> **主要来源**: [Rust Foundation Interop Initiative] ·
+> **主要来源**: [Rust Foundation Interop Initiative] · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [Itanium C++ ABI Spec] ·
 > [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html) ·
 > [System V AMD64 ABI] ·

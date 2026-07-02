@@ -17,7 +17,7 @@
 > **双维定位**: F×App — 应用 gen 块构建迭代器（Iterator）
 > **前置依赖**: [Iterator](../02_intermediate/15_iterator_patterns.md) · [Async](../03_advanced/02_async.md)
 > **后置延伸**: [Async Gen](22_gen_blocks_preview.md)
-> **来源**: [RFC 3513 — Gen Blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html) · [Tracking Issue #117078](https://github.com/rust-lang/rust/issues/117078)
+> **来源**: [RFC 3513 — Gen Blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html) · [Tracking Issue #117078](https://github.com/rust-lang/rust/issues/117078) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)

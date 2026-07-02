@@ -22,7 +22,7 @@
 
 ---
 
-> **来源**:
+> **来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [ECMAScript Specification](https://tc39.es/ecma262/) ·
 > [MDN — JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) ·
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·

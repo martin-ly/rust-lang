@@ -12,7 +12,7 @@
 > **定位**: 把“Rust 编译器如何用 Rust 写、又用 Rust 编译自己”这一自举过程讲清楚，帮助理解 rustc 开发工作流。
 > **前置概念**: [安全边界](../05_comparative/04_safety_boundaries.md)
 > **后置概念**: [Compiler Testing](71_compiler_testing.md)（待补）
-> **来源**: [Rustc Dev Guide — Bootstrapping](https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rustc Dev Guide — Bootstrapping](https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ---
 

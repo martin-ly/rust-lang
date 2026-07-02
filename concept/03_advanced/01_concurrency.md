@@ -31,7 +31,7 @@
 > **unsafe 语义对齐**: 当本文件提及 `unsafe impl Send/Sync` 时，遵循核心语义——`unsafe` 不是关闭检查器，而是将全局线程
 > [来源: [std::thread](https://doc.rust-lang.org/std/thread/index.html)]安全假设的证明责任转移给程序员
 > 来源: [Rustonomicon — Send and Sync / 2025](https://doc.rust-lang.org/nomicon/)
-> **主要来源**: [TRPL: Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch16-00-concurrency.html) ·
+> **主要来源**: [TRPL: Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch16-00-concurrency.html) · · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference: Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html) ·
 > [Wikipedia: Data race](https://en.wikipedia.org/wiki/Data_race) ·
 > [Stanford CS340R]

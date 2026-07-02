@@ -19,7 +19,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [WebAssembly Specification](https://webassembly.github.io/spec/) ·
+> **来源**: [WebAssembly Specification](https://webassembly.github.io/spec/) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Wasm Book](https://rustwasm.github.io/book/) ·
 > [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/) ·
 > [Bytecode Alliance](https://bytecodealliance.org/) ·

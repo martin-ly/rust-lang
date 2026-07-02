@@ -23,7 +23,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**:
+> **来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [RFC 2008 — `non_exhaustive`](https://github.com/rust-lang/rfcs/pull/2008) ·
 > [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html) ·
 > [RFC 3518 — Sealed Traits](https://github.com/rust-lang/rfcs/pull/3518) ·

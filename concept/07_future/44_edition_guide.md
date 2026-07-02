@@ -18,7 +18,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**:
+> **来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) ·
 > [Rust Blog — Edition 2024](https://blog.rust-lang.org/) ·
 > [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs//3501-edition-2024.html) ·

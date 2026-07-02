@@ -34,7 +34,7 @@
 > **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
 
 ---
-> **来源**:
+> **来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [RFC 1210 — Specialization](https://github.com/rust-lang/rfcs/pull/1210) ·
 > [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844) ·
 > [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/) ·

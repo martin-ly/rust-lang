@@ -92,6 +92,7 @@
 - 层内模型映射见 [../intra_layer_model_map.md](../intra_layer_model_map.md)
 - 形式化本体规范见 [../kg_ontology_v2.md](../kg_ontology_v2.md)
 
+
 ---
 
 > **内容分级**: [元层]

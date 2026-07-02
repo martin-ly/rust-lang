@@ -12,7 +12,7 @@
 > **定位**: 把“如何把 rustc 当库用”讲清楚：driver 的回调机制、interface 的低级 API、以及面向外部工具的 Stable MIR（rustc_public）愿景。
 > **前置概念**: [安全边界](../05_comparative/04_safety_boundaries.md)
 > **后置概念**: [Compiler Infrastructure](47_compiler_infrastructure.md) · [Compiler Diagnostics and UI Tests](69_compiler_diagnostics_and_ui_tests.md)（待补）
-> **来源**: [Rustc Dev Guide — rustc_driver](https://rustc-dev-guide.rust-lang.org/rustc-driver/intro.html) · [Stable MIR](https://github.com/rust-lang/project-stable-mir) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rustc Dev Guide — rustc_driver](https://rustc-dev-guide.rust-lang.org/rustc-driver/intro.html) · [Stable MIR](https://github.com/rust-lang/project-stable-mir) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ---
 

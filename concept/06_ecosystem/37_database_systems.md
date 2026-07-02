@@ -16,7 +16,7 @@
 > **前置概念**: [Stream Processing Ecosystem](36_stream_processing_ecosystem.md) · [Ownership](../01_foundation/01_ownership.md) · [Concurrency](../03_advanced/01_concurrency.md)
 > **后置概念**: [Distributed Systems](18_distributed_systems.md) · [Formal Methods](../04_formal/05_verification_toolchain.md)
 >
-> **来源**: [Diesel](https://docs.rs/diesel/) · [SQLx](https://docs.rs/sqlx/) · [TiKV](https://tikv.org/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Diesel](https://docs.rs/diesel/) · [SQLx](https://docs.rs/sqlx/) · [TiKV](https://tikv.org/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [TiKV GitHub](https://github.com/tikv/tikv) ·

@@ -16,7 +16,7 @@
 > **双维定位**: C×Ana — 分析数据抽象机制的演进谱系
 > **前置概念**: [Type System](04_type_system.md) · [Variable Model](20_variable_model.md) · [Ownership](01_ownership.md)
 > **后置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Erasure](../03_advanced/17_type_erasure.md)
-> **主要来源**:
+> **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
 > [Pierce — TAPL, §18-§24](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism](https://doi.org/10.1145/6041.6042) ·

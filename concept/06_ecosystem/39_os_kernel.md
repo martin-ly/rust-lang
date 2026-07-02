@@ -7,7 +7,7 @@
 > **内容分级**: [专家级]
 > **代码状态**: [综述级 — 待补充代码]
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-> **来源**: [Rust for Linux](https://rust-for-linux.com/) · [Redox OS](https://www.redox-os.org/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust for Linux](https://rust-for-linux.com/) · [Redox OS](https://www.redox-os.org/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ## 一、Rust for Linux：内核中的 Rust 代码
 

@@ -12,7 +12,7 @@
 > **后置概念**: [Nightly Rust](../07_future/50_nightly_rust.md) · [Rust 1.96 Stabilized](../07_future/rust_1_96_stabilized.md) · [Rust 1.97 Preview](../07_future/rust_1_97_preview.md)
 > **定理链**: Nightly → Beta → Stable → Release Channel
 >
-> **来源**: [The Rust Programming Language — Appendix G: How Rust is Made and Nightly Rust](https://doc.rust-lang.org/book/appendix-06-nightly-rust.html) · [Rust Async Working Group — Async Foundations](https://rust-lang.github.io/async-fundamentals-initiative/) · [without.boats — Futures and Async](https://without.boats/blog/) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [MIT 6.824 — Distributed Systems](https://pdos.csail.mit.edu/6.824/) · [Rust Reference — Editions](https://doc.rust-lang.org/reference/editions.html)
+> **来源**: [The Rust Programming Language — Appendix G: How Rust is Made and Nightly Rust](https://doc.rust-lang.org/book/appendix-06-nightly-rust.html) · [Rust Async Working Group — Async Foundations](https://rust-lang.github.io/async-fundamentals-initiative/) · [without.boats — Futures and Async](https://without.boats/blog/) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [MIT 6.824 — Distributed Systems](https://pdos.csail.mit.edu/6.824/) · [Rust Reference — Editions](https://doc.rust-lang.org/reference/editions.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
 

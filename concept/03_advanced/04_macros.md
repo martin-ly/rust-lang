@@ -4,7 +4,7 @@
 >
 > **EN**: Macros
 > **Summary**: Macros. Guide to 04 Macros.
-> **来源**: · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> **来源**: · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Unicode UAX #31 — Identifier and Pattern Syntax](https://www.unicode.org/reports/tr31/)
 >
 > [TRPL — Ch19.5 Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
 > [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) ·

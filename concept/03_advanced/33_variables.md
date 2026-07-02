@@ -11,7 +11,7 @@
 > **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Move Semantics](../01_foundation/23_move_semantics.md) · [Memory Model](29_memory_model.md)
 > **后置概念**: [Memory Allocation and Lifetime](32_memory_allocation_and_lifetime.md) · [Destructors](../04_formal/43_destructors.md) · [Unsafe Rust](03_unsafe.md)
 > **定理链**: Variable → Initialization → Drop Scope
-> **主要来源**: [Rust Reference — Variables](https://doc.rust-lang.org/reference/variables.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Variables](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html)
+> **主要来源**: [Rust Reference — Variables](https://doc.rust-lang.org/reference/variables.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Variables](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 >
 > **来源**: [Rust Reference — Variables](https://doc.rust-lang.org/reference/variables.html)

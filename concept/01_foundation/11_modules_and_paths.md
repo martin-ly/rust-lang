@@ -22,7 +22,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/)
+> **来源**: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [TRPL — Packages, Crates, Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) ·
 > [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) ·
 > [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines//naming.html) ·

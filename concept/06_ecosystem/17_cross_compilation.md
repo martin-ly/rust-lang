@@ -16,7 +16,7 @@
 
 ---
 
-> **来源**: [rustup Cross-compilation](https://rust-lang.github.io/rustup//cross-compilation.html) · [Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · [Cargo — Configuration](https://doc.rust-lang.org/cargo/reference/config.html)
+> **来源**: [rustup Cross-compilation](https://rust-lang.github.io/rustup//cross-compilation.html) · [Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · [Cargo — Configuration](https://doc.rust-lang.org/cargo/reference/config.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Cargo Book — Targets](https://doc.rust-lang.org/cargo/reference/config.html#target) ·
 > [RFC 0131 — Target Specification](https://github.com/rust-lang/rfcs/pull/131) ·
 > [The rustc Book — Targets](https://doc.rust-lang.org/rustc/targets/index.html) ·

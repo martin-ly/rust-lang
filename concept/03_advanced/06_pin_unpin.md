@@ -17,7 +17,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/index.html) · · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711)
+> **来源**: [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/index.html) · · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html) ·
 > [Rustonomicon — Pin](https://doc.rust-lang.org/std/pin/index.html) ·
 > [RFC 2349 — Pin](https://github.com/rust-lang/rfcs/pull/2349) ·

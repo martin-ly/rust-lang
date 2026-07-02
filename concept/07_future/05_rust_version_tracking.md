@@ -689,7 +689,7 @@ timeline
 | `NonZero` 位操作 API 稳定化 | `NonZeroU*::highest_one` / `lowest_one` / `bit_width` 稳定，便于非零整数的位模式查询 |
 | `char::is_control()` const 稳定化 | `char::is_control` 可在 `const` 上下文调用，编译期字符分类能力扩展 |
 
-> **来源**: [releases.rs — 1.97.0 beta](https://releases.rs/docs/1.97.0/) · 可信度: ✅
+> **来源**: [releases.rs — 1.97.0 beta](https://releases.rs/docs/1.97.0/) · 可信度: ✅ · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 **已合并并将进入 1.98 stable 的 PR（2026-06-11 至 06-16）**:
 

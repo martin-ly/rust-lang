@@ -19,7 +19,7 @@
 > [Reactive Programming](40_reactive_programming.md) ·
 > [分布式系统](18_distributed_systems.md)
 >
-> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **前置概念**: N/A
 ---
 

@@ -13,7 +13,7 @@
 > **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [形式化验证](../04_formal/05_verification_toolchain.md)
 > **后置延伸**: [BorrowSanitizer](20_borrowsanitizer_preview.md) · [AutoVerus/Verus](33_autoverus_preview.md)
 >
-> **来源**: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [RFC 3842 Rendered](https://github.com/rust-lang/rfcs/blob/master/text/3842-safety-tags.md) · [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [safety-tool slides](https://os-checker.github.io/slides/safety-tags) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [RFC 3842 Rendered](https://github.com/rust-lang/rfcs/blob/master/text/3842-safety-tags.md) · [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [safety-tool slides](https://os-checker.github.io/slides/safety-tags) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---

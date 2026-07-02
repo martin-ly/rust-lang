@@ -19,7 +19,6 @@
 > **功能**: 预测演进方向，反向驱动 L1-L6 的更新
 > **规范文件**: [`07_future/README.md`](07_future/README.md)
 > **[来源: Rust RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Blog - blog.rust-lang.org]** · **[来源: Wikipedia - Artificial Intelligence]** · **[来源: Formal Methods Industry Reports 2026]**
-
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---

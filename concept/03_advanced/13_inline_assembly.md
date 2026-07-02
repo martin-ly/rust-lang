@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) · · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)
+> **来源**: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) · · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [RFC 2873 — Inline Assembly](https://rust-lang.github.io/rfcs//2873-inline-asm.html) ·
 > [Rust By Example — Inline Assembly](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html) ·
 > [s390x Vector Support PR](https://github.com/rust-lang/rust/pull/150551) ·

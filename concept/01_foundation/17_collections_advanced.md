@@ -13,7 +13,7 @@
 
 ---
 
-> **来源**: [std::collections](https://doc.rust-lang.org/std/collections/index.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/)
+> **来源**: [std::collections](https://doc.rust-lang.org/std/collections/index.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [TRPL Ch8 — Collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html) ·
 > [Rust Performance Book](https://nnethercote.github.io/perf-book/print.html#reusing-collections) ·
 > [Wikipedia — B-tree](https://en.wikipedia.org/wiki/B-tree) ·

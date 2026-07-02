@@ -4,7 +4,7 @@
 > **内容分级**: [研究级]
 > **前置概念**: [Rust Edition Guide](44_edition_guide.md)
 > **后置概念**: [Rust Edition Guide](44_edition_guide.md)
-> **主要来源**: [Rust Edition Guide](44_edition_guide.md) · [TRPL — Appendix E](https://doc.rust-lang.org/book/appendix-05-editions.html) · [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs/2052-epochs.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **主要来源**: [Rust Edition Guide](44_edition_guide.md) · [TRPL — Appendix E](https://doc.rust-lang.org/book/appendix-05-editions.html) · [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs/2052-epochs.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 > **注意**: 本主题内容已整合到 `concept/07_future/44_edition_guide.md`。
 > 请以 [concept/07_future/44_edition_guide.md](44_edition_guide.md) 为权威来源。

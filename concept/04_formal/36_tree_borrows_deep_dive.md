@@ -13,7 +13,7 @@
 > **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [所有权（Ownership）形式化](03_ownership_formal.md) · [Miri](31_miri.md)
 > **后置延伸**: [BorrowSanitizer](34_borrow_sanitizer_in_formal.md)
 >
-> **来源**: [Tree Borrows 论文 (PLDI 2023)](https://pldi23.sigplan.org/) · [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/mod.rs) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Tree Borrows 论文 (PLDI 2023)](https://pldi23.sigplan.org/) · [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/mod.rs) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **内容重叠提示**: 本文与 [`docs/content/academic/10_tree_borrows_guide.md`](../../docs/content/academic/10_tree_borrows_guide.md) 内容高度重叠。`docs/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
 > **内容重叠提示**: 本文与 [`knowledge/04_expert/miri/01_tree_borrows.md`](../../knowledge/04_expert/miri/01_tree_borrows.md) 内容高度重叠。`knowledge/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
 > **前置概念**: N/A

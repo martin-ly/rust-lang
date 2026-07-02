@@ -20,7 +20,7 @@
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **状态**: 部分特性已 MCP 通过，实现中；稳定版发布前特性集可能调整
 >
-> **权威来源**: · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > - [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 > - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)

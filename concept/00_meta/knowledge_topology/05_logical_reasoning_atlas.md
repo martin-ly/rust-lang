@@ -19,6 +19,7 @@
 - 并发安全推理链：Send/Sync → Mutex → Atomic → Memory Ordering
 - 形式化对应：Rust 概念 ↔ 线性逻辑 / 分离逻辑 / 类型论
 
+
 ---
 
 > **内容分级**: [元层]

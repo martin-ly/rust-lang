@@ -35,7 +35,7 @@
 > [Generics](../02_intermediate/02_generics.md) ·
 > [Error Handling](../02_intermediate/04_error_handling.md)
 > **后置概念**: [Pin/Unpin] · [Streams]
-> **主要来源**:
+> **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL 3rd Ed: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Brown University Interactive Book: Ch17](https://rust-book.cs.brown.edu/ch17-00-async-await.html) ·
 > [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) ·
 > [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) · [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)

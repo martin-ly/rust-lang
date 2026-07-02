@@ -13,7 +13,7 @@
 > **定位**: 解释 Rust 类型推断（Type Inference）为什么从 HM 的 $O(n^3)$ 跃迁到 PSPACE-完全，以及这一理论结论如何在 rustc 的约束求解器中得到工程化实现。
 > **前置依赖**: [Type Theory](02_type_theory.md) · [Type Inference](08_type_inference.md) · [Trait Solver in rustc](26_trait_solver_in_rustc.md)
 > **后置延伸**: [Type Checking and Inference in rustc](27_type_checking_and_inference.md) · [Subtype Variance](06_subtype_variance.md)
-> **来源**: · [类型推断](08_type_inference.md) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Hindley — The Principal Type-Scheme of an Object in Combinatory Logic](https://doi.org/10.2307/2270762) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: · [类型推断](08_type_inference.md) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Hindley — The Principal Type-Scheme of an Object in Combinatory Logic](https://doi.org/10.2307/2270762) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > Rehman et al. (2023) — Rust type inference complexity ·
 > [Vytiniotis et al. 2011 — OutsideIn(X): Modular Type Inference with Local Assumptions](https://doi.org/10.1017/S0956796811000098) ·

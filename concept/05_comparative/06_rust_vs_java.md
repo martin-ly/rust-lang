@@ -13,7 +13,7 @@
 
 ---
 
-> **来源**: [The Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html) ·
+> **来源**: [The Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [JVM Specification](https://docs.oracle.com/javase/specs/jvms/se21/html/index.html) ·
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
 > [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) ·

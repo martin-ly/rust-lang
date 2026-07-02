@@ -12,7 +12,7 @@
 > **前置依赖**: [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) · [Modules and Paths](../01_foundation/11_modules_and_paths.md) · [Error Handling](../02_intermediate/04_error_handling.md)
 > **后置概念**: [FFI Advanced](09_ffi_advanced.md) · [Linkage](27_linkage.md) · [Cargo Profiles and Lints](../06_ecosystem/65_cargo_profiles_and_lints.md)
 > **定理链**: N/A — 语言规范/平台相关文档
-> **主要来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> **主要来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 >
 > **来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)

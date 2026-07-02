@@ -12,7 +12,7 @@
 > **前置依赖**: [Identifiers and Names](20_variable_model.md) · [Terminology Glossary](../00_meta/terminology_glossary.md)
 > **后置概念**: [Attributes and Macros](12_attributes_and_macros.md) · [Modules and Paths](11_modules_and_paths.md)
 > **定理链**: N/A — 参考级文档
-> **主要来源**: [Rust Reference — Keywords](https://doc.rust-lang.org/reference/keywords.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Unicode UAX #31 — Identifier and Pattern Syntax](https://www.unicode.org/reports/tr31/)
+> **主要来源**: [Rust Reference — Keywords](https://doc.rust-lang.org/reference/keywords.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Unicode UAX #31 — Identifier and Pattern Syntax](https://www.unicode.org/reports/tr31/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 >
 > **来源**: [TRPL — Appendix A: Keywords](https://doc.rust-lang.org/book/appendix-01-keywords.html) · [Rust Reference — Keywords](https://doc.rust-lang.org/reference/keywords.html)

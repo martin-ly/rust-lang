@@ -17,7 +17,7 @@
 
 ---
 
-> **来源**: [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [CVE-2026-5222 Advisory](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/) ·
 > [CVE-2026-5223 Advisory](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/) ·
 > [Fedora 43 Rust 1.96.0 Update](https://linuxsecurity.com/advisories/fedora/fedora-43-rust-2026-d7436d12ae) ·

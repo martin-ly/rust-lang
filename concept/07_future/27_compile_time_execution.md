@@ -16,7 +16,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)
+> **来源**: [Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) ·
 > [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html) ·
 > [Wikipedia — Compile Time](https://en.wikipedia.org/wiki/Compile_time) ·

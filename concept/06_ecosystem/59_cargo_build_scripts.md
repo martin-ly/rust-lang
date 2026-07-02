@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo — Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Cargo — Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Cargo Book — Build Script Examples](https://doc.rust-lang.org/cargo/reference/build-script-examples.html) ·
 > [Cargo Book — Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html) ·
 > [The `links` Manifest Key](https://doc.rust-lang.org/cargo/reference/build-scripts.html#the-links-manifest-key)

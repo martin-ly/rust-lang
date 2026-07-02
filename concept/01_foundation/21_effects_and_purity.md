@@ -17,7 +17,7 @@
 > **双维定位**: C×Und — 理解副作用在编程语言中的本质与 Rust 的控制机制
 > **前置概念**: [Variable Model](20_variable_model.md) · [Evaluation Strategies](../04_formal/18_evaluation_strategies.md) · [Ownership](01_ownership.md)
 > **后置概念**: [Borrowing](02_borrowing.md) · [Effects System](../07_future/04_effects_system.md) · [Async](../03_advanced/02_async.md)
-> **主要来源**:
+> **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > [Haskell Wiki — Referential Transparency](https://wiki.haskell.org/Referential_transparency) ·
 > [Pierce — TAPL, §13](https://www.cis.upenn.edu/~bcpierce/tapl/) ·

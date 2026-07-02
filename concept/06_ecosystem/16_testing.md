@@ -25,7 +25,7 @@
 
 ---
 
-> **来源**: [Rust Test Organization](https://doc.rust-lang.org/book/ch11-03-test-organization.html) ·
+> **来源**: [Rust Test Organization](https://doc.rust-lang.org/book/ch11-03-test-organization.html) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [mockall crate](https://docs.rs/mockall/latest/mockall/) ·
 > [proptest crate](https://docs.rs/proptest/latest/proptest/) ·
 > [cargo-fuzz](https://github.com/rust-fuzz/cargo-fuzz) ·

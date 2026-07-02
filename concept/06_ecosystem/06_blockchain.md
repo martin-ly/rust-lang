@@ -20,7 +20,7 @@
 > **后置概念**:
 > [Formal Ecosystem Tower](44_formal_ecosystem_tower.md) ·
 > [Application Domains](04_application_domains.md)
-> **主要来源**: [Solana Docs] · [Polkadot Substrate Docs] · [Near Protocol Docs] · [Kani Verification Blog] · [Rust in Blockchain Report] · [Wikipedia: Blockchain](https://en.wikipedia.org/wiki/Blockchain) · [Wikipedia: Smart contract](https://en.wikipedia.org/wiki/Smart_contract)
+> **主要来源**: [Solana Docs] · [Polkadot Substrate Docs] · [Near Protocol Docs] · [Kani Verification Blog] · [Rust in Blockchain Report] · [Wikipedia: Blockchain](https://en.wikipedia.org/wiki/Blockchain) · [Wikipedia: Smart contract](https://en.wikipedia.org/wiki/Smart_contract) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

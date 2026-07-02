@@ -10,7 +10,7 @@
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-> **来源**: [polars](https://docs.rs/polars/) · [ndarray](https://docs.rs/ndarray/) · [plotters](https://docs.rs/plotters/)
+> **来源**: [polars](https://docs.rs/polars/) · [ndarray](https://docs.rs/ndarray/) · [plotters](https://docs.rs/plotters/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ## 📑 目录
 
