@@ -436,7 +436,8 @@ num_cpus = "1.17.0"
 libc = "0.2.186"
 # rand: 随机数生成库，提供高质量的随机数生成
 # 2026-03-28: 升级到 0.10.x (重大版本更新)
-rand = "0.10.1"
+# 2026-07-03: cargo update 0.10.1 -> 0.10.2
+rand = "0.10.2"
 # chacha20: ChaCha20 流密码 / rand 0.10.x 的随机数生成后端
 # 注意: rand 0.10.x 已改用 chacha20 直接作为 ChaCha20 后端，不再依赖 rand_chacha。
 #       cargo update 2026-06-24: chacha20 0.10.0 -> 0.10.1
