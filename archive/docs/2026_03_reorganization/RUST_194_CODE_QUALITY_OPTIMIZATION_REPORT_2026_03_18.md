@@ -258,7 +258,7 @@ pub async fn analyze_string(s: &str) -> UnicodeComposition {
 
 ### 2. 单线程缓存简化
 
-#### c05_threads 优化前
+#### 2.1 c05_threads 优化前
 
 ```rust,ignore
 pub fn get(&mut self) -> &T {
@@ -269,7 +269,7 @@ pub fn get(&mut self) -> &T {
 }
 ```
 
-#### 优化后
+#### 2.2 优化后
 
 ```rust,ignore
 pub fn get(&mut self) -> &T {
@@ -279,7 +279,7 @@ pub fn get(&mut self) -> &T {
 
 ### 3. 全局配置只读访问改进
 
-#### c09_design_pattern 优化前
+#### 3.1 c09_design_pattern 优化前
 
 ```rust,ignore
 pub fn get_config_readonly() -> Option<&'static GlobalConfig> {
@@ -287,7 +287,7 @@ pub fn get_config_readonly() -> Option<&'static GlobalConfig> {
 }
 ```
 
-#### 优化后
+#### 3.2 优化后
 
 ```rust,ignore
 pub fn with_config_readonly<F, R>(f: F) -> R

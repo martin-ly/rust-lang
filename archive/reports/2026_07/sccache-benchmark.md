@@ -22,6 +22,7 @@ SCCACHE_CACHE_SIZE = "50G"
 SCCACHE_DIR = "D:\\_cache\\sccache"
 SCCACHE_GHA_ENABLED = "true"
 ```
+
 ### CI/CD 配置 (.github/workflows/ci.yml)
 
 - ✓ sccache-action@v0.0.4 已配置
@@ -57,6 +58,7 @@ sccache --stop-server
 # 删除缓存目录 (Windows): D:\_cache\sccache
 # 删除缓存目录 (Linux/macOS): ~/.cache/sccache
 ```
+
 ### 监控命令
 
 ```bash
@@ -66,6 +68,7 @@ sccache --show-stats
 # 重置统计
 sccache --zero-stats
 ```
+
 ## 故障排除
 
 ### 检查 sccache 是否生效
@@ -77,6 +80,7 @@ sccache --version
 # 构建后查看统计，应该看到非零的 "Compile requests"
 sccache --show-stats
 ```
+
 ### 缓存未命中的常见原因
 
 1. **环境变量未设置**: 检查 `RUSTC_WRAPPER=sccache`

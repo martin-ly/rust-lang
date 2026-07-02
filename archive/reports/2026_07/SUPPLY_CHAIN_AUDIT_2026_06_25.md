@@ -11,6 +11,7 @@
 ```bash
 cargo audit
 ```
+
 - **退出码**: 0
 - **安全漏洞**: 0
 - **允许警告**: 0（已清理 `atomic-polyfill`；剩余 3 个 unmaintained 警告已通过 `.cargo/audit.toml` 显式忽略并记录 rationale）

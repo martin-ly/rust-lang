@@ -27,6 +27,7 @@ sea-orm = { version = "2.0.0-rc.41", features = [
     "runtime-tokio-rustls",
 ], default-features = false }
 ```
+
 使用 crate:
 
 - `crates/c06_async`（示例/开发依赖）

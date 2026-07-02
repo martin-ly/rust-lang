@@ -93,6 +93,7 @@ cargo outdated --workspace
 cargo audit -p hickory-proto
 cargo audit -p rsa
 ```
+
 ---
 
 > **结论**: 当前无 Critical/High 级别漏洞。Medium 级别漏洞（rsa）实际代码路径不可达。建议持续跟踪 hickory-proto 修复进展，并在 libp2p 升级后同步更新。

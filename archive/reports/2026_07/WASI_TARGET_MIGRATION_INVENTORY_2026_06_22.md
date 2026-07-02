@@ -33,6 +33,7 @@ targets = [
     "wasm32-wasip1",
 ]
 ```
+
 ### 2. 代码与示例
 
 - `crates/c12_wasm/` 示例已使用 `wasm32-wasip1` / `wasm32-wasip2`：
@@ -60,6 +61,7 @@ targets = [
 > **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 ```
+
 这是全局批量治理脚本 (`scripts/maintenance/bulk_active_ecosystem_update.py`) 生成的提示，**不应删除**，因为它明确告知读者旧目标状态。
 
 ### 5. 历史/归档与 Roadmap 文件
@@ -88,6 +90,7 @@ grep -R --include='*.toml' --include='*.yml' --include='*.yaml' 'wasm32-wasi' . 
 # Cargo.lock / 依赖中是否包含旧目标相关包
 grep -i 'wasm32-wasi' Cargo.lock  # 应无命中
 ```
+
 ---
 
 ## 结论与下一步

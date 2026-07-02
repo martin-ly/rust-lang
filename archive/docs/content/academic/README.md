@@ -39,7 +39,6 @@
     - [学术论文 {#学术论文}](#学术论文-学术论文)
     - [形式化工具 {#形式化工具}](#形式化工具-形式化工具)
     - [在线课程 {#在线课程}](#在线课程-在线课程)
-  - [**状态**: 🔄 持续整合学术前沿](#状态--持续整合学术前沿)
   - [相关概念 {#相关概念}](#相关概念-相关概念)
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
@@ -482,6 +481,7 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08
 **状态**: 🔄 持续整合学术前沿
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

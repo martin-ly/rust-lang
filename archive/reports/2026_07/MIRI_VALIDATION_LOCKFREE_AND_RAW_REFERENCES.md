@@ -58,12 +58,14 @@
 // Before (Rust 2021): 先创建 &HazardPointer 中间引用，再 cast
 .register(hp as *const HazardPointer as *mut HazardPointer);
 ```
+
 重构为 Rust 1.95 的 `&raw const`：
 
 ```rust
 // After (Rust 1.95): 直接创建原始指针，无中间引用
 .register(&raw const *hp as *mut HazardPointer);
 ```
+
 ### 2.2 Miri 验证结论
 
 - **hazard_pointers 全部 3 个测试**在 Miri 下通过 ✅

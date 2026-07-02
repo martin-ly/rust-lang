@@ -45,7 +45,6 @@
   - [第五部分：总结](#第五部分总结)
     - [核心建议](#核心建议)
     - [成功标准](#成功标准)
-  - [**下次评价时间**: 2026-04-18](#下次评价时间-2026-04-18)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -469,6 +468,7 @@ M3                     ███                     (P2)
 
 **评价完成时间**: 2026-03-18
 **下次评价时间**: 2026-04-18
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -495,17 +495,10 @@ M3                     ███                     (P2)
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**

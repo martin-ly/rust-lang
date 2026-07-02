@@ -30,7 +30,6 @@
     - [中期（本月）](#中期本月)
     - [长期](#长期)
   - [验证清单](#验证清单)
-  - [**状态**: ✅ **Docs目录整理完成**](#状态--docs目录整理完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -201,6 +200,7 @@ docs/
 **整理完成时间**: 2026-03-18
 **整理者**: Rust学习项目团队
 **状态**: ✅ **Docs目录整理完成**
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -227,17 +227,10 @@ docs/
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**

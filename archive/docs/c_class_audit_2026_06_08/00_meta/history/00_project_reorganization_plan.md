@@ -33,7 +33,6 @@
     - [文件数量对比](#文件数量对比)
     - [导航体验](#导航体验)
   - [风险评估](#风险评估)
-  - [**验证**: 完成后全面检查](#验证-完成后全面检查)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -283,6 +282,7 @@ rust-lang/
 **批准**: 待确认
 **执行**: 预计2-3小时
 **验证**: 完成后全面检查
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -305,17 +305,10 @@ rust-lang/
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
