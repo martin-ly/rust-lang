@@ -179,10 +179,10 @@ rustc --version
 rustc --version --verbose
 
 # 输出示例 (Rust 1.96.1): {#输出示例-rust-1960}
-# rustc 1.96.0 (2026-05-28) {#rustc-1960-2026-05-28}
+# rustc 1.96.1 (2026-07-02) {#rustc-1961-2026-07-02}
 # binary: rustc {#binary-rustc}
 # commit-hash: abc123... {#commit-hash-abc123}
-# commit-date: 2026-05-28 {#commit-date-2026-05-28}
+# commit-date: 2026-07-02 {#commit-date-2026-07-02}
 # host: x86_64-unknown-linux-gnu {#host-x86_64-unknown-linux-gnu}
 # release: 1.96.1 {#release-1960}
 # LLVM version: 21.0.0  (minimum external LLVM for building rustc from source is 21) {#llvm-version-2100-minimum-external-llvm-for-building-rustc-from-source-is-21}

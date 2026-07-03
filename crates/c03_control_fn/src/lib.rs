@@ -16,7 +16,7 @@
 //! ## 版本信息
 //!
 //! - **当前版本**: 与 workspace 一致
-//! - **目标 Rust 版本**: 1.95.0+
+//! - **目标 Rust 版本**: 1.96.1+
 //! - **Edition**: 2024
 
 // [来源: Rust Reference / TRPL]
@@ -110,7 +110,7 @@ pub use basic_syntax::*;
 
 // 版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
-pub const RUST_VERSION: &str = "1.95.0";
+pub const RUST_VERSION: &str = "1.96.1";
 
 /// 项目元信息。
 pub struct ProjectInfo;

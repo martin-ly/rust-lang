@@ -1,5 +1,6 @@
-//! Rust 1.96 特性模块 —— 宏系统场景
-//! Rust 1.96 feature module —— system scenario
+//! Rust 1.96/1.96.1 特性模块 —— 宏系统场景
+//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! Rust 1.96/1.96.1 feature module —— system scenario
 //! Rust 1.96 featuremodule —— 宏systemscenario
 //! - `expr` metavariable 传递给 `cfg`
 //! - `assert_matches!` 用于宏展开结果测试
@@ -60,7 +61,7 @@ impl ExprMetavariableToCfgExamples {
 }
 
 // ============================================================================
-// Rust 1.96.0: assert_matches! 用于宏展开结果测试
+// Rust 1.96.0/1.96.1: assert_matches! 用于宏展开结果测试
 // ============================================================================
 
 /// 宏展开结果的枚举表示
@@ -119,7 +120,7 @@ impl MacroExpansionAssertions {
 }
 
 // ============================================================================
-// Rust 1.96.0: core::range 用于 token span 范围
+// Rust 1.96.0/1.96.1: core::range 用于 token span 范围
 // ============================================================================
 
 /// 令牌跨度范围
@@ -229,7 +230,7 @@ pub fn demonstrate_rust_196_features() {
 /// 获取特性信息
 /// feature
 pub fn get_rust_196_macro_info() -> String {
-    "Rust 1.96.0 宏系统特性:\n- expr metavariable to cfg\n- assert_matches! for macro expansion \
+    "Rust 1.96.0/1.96.1 宏系统特性:\n- expr metavariable to cfg\n- assert_matches! for macro expansion \
      testing\n- core::range for token span ranges\n- ManuallyDrop for macro hygiene markers"
         .to_string()
 }

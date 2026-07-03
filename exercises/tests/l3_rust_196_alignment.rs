@@ -1,6 +1,6 @@
-//! L3 Rust 1.96.0 稳定特性对齐测验
+//! L3 Rust 1.96.0/1.96.1 稳定特性对齐测验
 //!
-//! 覆盖 Rust 1.96.0（2026-05-28 stable）引入的关键语言/库特性：
+//! 覆盖 Rust 1.96.0/1.96.1（2026-05-28 stable，当前 patch 1.96.1）引入的关键语言/库特性：
 //! - `assert_matches!` / `debug_assert_matches!`
 //! - `core::range` Copy 类型
 //! - `NonZero` 整数范围迭代
@@ -18,7 +18,7 @@ use std::sync::LazyLock;
 use std::{assert_matches, debug_assert_matches};
 
 /// 测验1: `assert_matches!` 稳定化
-/// Rust 1.96.0 将 `assert_matches!` / `debug_assert_matches!` 加入标准库（非 prelude）。
+/// Rust 1.96.0/1.96.1 将 `assert_matches!` / `debug_assert_matches!` 加入标准库（非 prelude）。
 #[test]
 fn test_assert_matches_stable() {
     let result: Result<i32, &str> = Ok(42);
@@ -51,7 +51,7 @@ fn test_core_range_copy() {
 }
 
 /// 测验4: `NonZero` 整数范围迭代
-/// Rust 1.96.0 支持对 `NonZero` 整数进行范围迭代。
+/// Rust 1.96.0/1.96.1 支持对 `NonZero` 整数进行范围迭代。
 #[test]
 fn test_nonzero_range_iteration() {
     let start = NonZeroU32::new(1).unwrap();
@@ -73,7 +73,7 @@ fn test_assert_unwind_safe_from() {
 }
 
 /// 测验6: `From<T> for LazyCell<T, F>`
-/// 1.96.0 起可直接从值创建 `LazyCell`（当闭包类型兼容时）。
+/// 1.96.0/1.96.1 起可直接从值创建 `LazyCell`（当闭包类型兼容时）。
 #[test]
 fn test_lazy_cell_from_value() {
     // `LazyCell<T, fn() -> T>` 可从 `T` 通过 `From` 创建
@@ -92,7 +92,7 @@ fn test_lazy_lock_from_value() {
 }
 
 /// 测验8: s390x vector registers inline assembly 概念
-/// Rust 1.96.0 支持在 s390x 目标的 inline assembly 中使用 vector registers。
+/// Rust 1.96.0/1.96.1 支持在 s390x 目标的 inline assembly 中使用 vector registers。
 /// 本测验不实际运行 s390x 汇编，而是验证目标三元组与寄存器名称知识。
 #[test]
 fn test_s390x_vector_asm_concept() {
@@ -107,7 +107,7 @@ fn test_s390x_vector_asm_concept() {
 }
 
 /// 测验9: Cargo CVE-2026-5222 / 5223 概念
-/// Rust 1.96.0 修复了两个影响第三方 registry 的 Cargo 安全漏洞。
+/// Rust 1.96.0/1.96.1 修复了两个影响第三方 registry 的 Cargo 安全漏洞。
 #[test]
 fn test_cargo_cve_2026_concept() {
     // CVE-2026-5223: 恶意 crate tarball 可通过 symlink 提取到缓存目录上级

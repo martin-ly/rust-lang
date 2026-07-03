@@ -1,4 +1,4 @@
-//! Rust 1.94 引入的网络编程特性（1.96+ 稳定可用）
+//! Rust 1.94 引入的网络编程特性（1.96.1+ 稳定可用）
 //! Rust 1.94 network programming features (stable in 1.96+) module
 //! - array_windows - 切片数组窗口迭代器（用于协议解析）
 //! - array_windows - array （）

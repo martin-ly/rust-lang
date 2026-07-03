@@ -5,7 +5,7 @@
 //!
 //! ## 特性
 //!
-//! - **Rust 1.95.0+ 特性对齐**：使用 Edition 2024 与最新标准库 API
+//! - **Rust 1.96.1+ 特性对齐**：使用 Edition 2024 与最新标准库 API
 //! - **多实现方式**：同步、并行、异步（gen blocks，nightly-only）
 //! - **主题化组织**：按算法主题与 LeetCode 分类双维度组织
 //! - **形式化验证**：含 Kani 验证示例与循环不变量说明
@@ -132,7 +132,7 @@ pub mod leetcode;
 pub const VERSION: &str = "0.3.0";
 
 /// 本 crate 目标对齐的 Rust 版本。
-pub const RUST_VERSION: &str = "1.95.0";
+pub const RUST_VERSION: &str = "1.96.1";
 
 /// 返回算法库版本号。
 ///

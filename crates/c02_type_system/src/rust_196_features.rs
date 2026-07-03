@@ -1,10 +1,11 @@
 //! # Rust 1.96 特性跟踪模块
+//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
 //! # Rust 1.96 feature module
 //!
-//! 本模块只收录 Rust 1.96.0（2026-05-28 stable）引入的类型系统相关特性。
+//! 本模块只收录 Rust 1.96.0/1.96.1（2026-05-28 stable，当前 patch 1.96.1）引入的类型系统相关特性。
 //! 历史特性复习已按正确版本归属迁移到对应 crate（如 `rust_168_features`）。
 //!
-//! ## 包含的 Rust 1.96.0 新特性
+//! ## 包含的 Rust 1.96.0/1.96.1 新特性
 //! - `assert_matches!` / `debug_assert_matches!` — 模式匹配断言宏 ⭐
 //! - `expr` metavariable 传递给 `cfg` ⭐
 //! - Never type 在 tuple 表达式中的强制转换（coercion）⭐
@@ -14,8 +15,8 @@
 //! # 版本信息
 //! - 稳定日期: 2026-05-28
 //! - Stable date: 2026-05-28
-//! # Rust 1.96.0 类型系统新特性
-//! # Rust 1.96.0 type system feature
+//! # Rust 1.96.0/1.96.1 类型系统新特性
+//! # Rust 1.96.0/1.96.1 type system feature
 
 use std::assert_matches;
 
@@ -422,7 +423,7 @@ pub fn nonzero_range_demo() {
 ///
 /// **来源**: [Rust Standard Library: assert_matches]
 pub fn assert_matches_demo() {
-    // assert_matches! 在 Rust 1.96.0+ 稳定
+    // assert_matches! 在 Rust 1.96.1+ 稳定
     let result: Result<i32, &str> = Ok(42);
     assert_matches!(result, Ok(n) if n > 0);
 }

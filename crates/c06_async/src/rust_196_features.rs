@@ -1,8 +1,9 @@
 //! # Rust 1.96.0 稳定特性演示模块（异步编程）
-//! # Rust 1.96.0 feature demonstration module （async ）
+//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! # Rust 1.96.0/1.96.1 feature demonstration module （async ）
 //!
-//! 本模块展示 Rust 1.96.0 在异步编程中的关键新 API：
-//! This module demonstrates Rust 1.96.0 asynckeynew API
+//! 本模块展示 Rust 1.96.0/1.96.1 在异步编程中的关键新 API：
+//! This module demonstrates Rust 1.96.0/1.96.1 asynckeynew API
 //! - `core::range::Range` — `Copy` 语义，适用于异步任务分批范围
 //! - `core::range::Range` — `Copy` ，async task scope
 //! - `std::assert_matches!` / `debug_assert_matches!` — 异步 Result/Option 模式断言

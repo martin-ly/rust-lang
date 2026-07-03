@@ -1,4 +1,5 @@
 //! Rust 1.96 特性模块 —— 过程宏场景
+//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
 //! Rust 1.96 feature module —— scenario
 //! - `assert_matches!` 用于过程宏诊断测试
 //! - `assert_matches!`
@@ -100,7 +101,7 @@ impl MacroMetadataCache {
     pub fn new() -> Self {
         Self {
             supported_attrs: LazyLock::from(vec!["derive", "inline", "test", "cfg", "allow"]),
-            version_info: LazyLock::from("1.96.0".to_string()),
+            version_info: LazyLock::from("1.96.1".to_string()),
         }
     }
 
@@ -229,7 +230,7 @@ mod tests {
     #[test]
     fn test_metadata_cache_version() {
         let cache = MacroMetadataCache::new();
-        assert_eq!(cache.version(), "1.96.0");
+        assert_eq!(cache.version(), "1.96.1");
     }
 
     #[test]

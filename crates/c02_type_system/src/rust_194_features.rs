@@ -1,4 +1,4 @@
-//! # Rust 1.94 引入的类型系统特性（1.96+ 稳定可用） / Rust 1.94.0 Type System Features Implementation Module
+//! # Rust 1.94 引入的类型系统特性（1.96.1+ 稳定可用） / Rust 1.94.0 Type System Features Implementation Module
 //! - 增强type inference / Enhanced Type Inference
 //! - enhancetype inference / Enhanced Type Inference
 //! - Edition 2024 类型系统集成 / Edition 2024 Type System Integration

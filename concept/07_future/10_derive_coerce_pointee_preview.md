@@ -21,7 +21,13 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [Rust RFC — Derive CoercePointee](https://github.com/rust-lang/rfcs/pull/3621) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+>
+> [Rust RFC — Derive CoercePointee](https://github.com/rust-lang/rfcs/pull/3621) ·
+> · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+>
 > [Rust Reference — Coercion](https://doc.rust-lang.org/reference/type-coercions.html) ·
 > [The Rustonomicon — Coercions](https://doc.rust-lang.org/nomicon/coercions.html) ·
 > [Tracking Issue #123430](https://github.com/rust-lang/rust/issues/123430)

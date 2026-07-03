@@ -1,4 +1,4 @@
-//! # Rust 1.94 引入的泛型编程特性（1.96+ 稳定可用） / Rust 1.94.0 Generic Programming Features Implementation Module
+//! # Rust 1.94 引入的泛型编程特性（1.96.1+ 稳定可用） / Rust 1.94.0 Generic Programming Features Implementation Module
 //! - 改进generictype inference / Improved Generic Type Inference
 //! - improvegenerictype inference / Improved Generic Type Inference
 //! - 更灵活associated type / More Flexible Associated Types

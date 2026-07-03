@@ -4,8 +4,8 @@
 //! - `assert_matches!` — WASM 状态机测试断言
 //! # 版本信息
 //! # this
-//! - Rust 版本: 1.96.0+ stable
-//! - Rust 版this: 1.96.0+ stable
+//! - Rust 版本: 1.96.0/1.96.1+ stable
+//! - Rust 版this: 1.96.0/1.96.1+ stable
 //! - 稳定日期: 2026-05-28
 //! - date : 2026-05-28
 //! - 稳定date: 2026-05-28

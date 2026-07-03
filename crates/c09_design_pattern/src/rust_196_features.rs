@@ -1,8 +1,9 @@
 //! # Rust 1.96.0 特性 — 设计模式
-//! # Rust 1.96.0 features design pattern
+//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! # Rust 1.96.0/1.96.1 features design pattern
 //!
-//! Rust 1.96.0 为设计模式实现带来的核心稳定特性：
-//! Rust 1.96.0 as design core feature ：
+//! Rust 1.96.0/1.96.1 为设计模式实现带来的核心稳定特性：
+//! Rust 1.96.0/1.96.1 as design core feature ：
 //!
 //! - **`LazyLock::from(value)`**: 单例模式中的惰性初始化构造
 //! - **`LazyLock::from(value)`**: singleton in

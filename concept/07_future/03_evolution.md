@@ -11,7 +11,12 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价语言演进方向的技术路线
 > **前置概念**: 全部前置层级
-> **主要来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **主要来源**:
+>
+> · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+>
 > [Rust RFCs](https://rust-lang.github.io/rfcs/) ·
 > [Rust Blog](https://blog.rust-lang.org/) ·
 > [Edition Guide](https://doc.rust-lang.org/edition-guide/) ·

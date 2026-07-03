@@ -74,8 +74,8 @@ source $HOME/.cargo/env  # Linux/macOS
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
-rustc --version   # 应显示: rustc 1.95.0 (xxxxxx)
-cargo --version   # 应显示: cargo 1.95.0
+rustc --version   # 应显示: rustc 1.96.1 (xxxxxx)
+cargo --version   # 应显示: cargo 1.96.1
 rustup --version  # 应显示: rustup 1.x.x
 ```
 

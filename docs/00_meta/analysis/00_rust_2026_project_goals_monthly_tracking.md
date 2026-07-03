@@ -8,7 +8,7 @@
 > **文档类型**: 元分析 (Meta-Analysis)
 > **创建日期**: 2026-05-08
 > **最后更新**: 2026-05-08
-> **Rust 版本**: Stable 1.95.0 | Beta 1.96.1 | Nightly 1.97.0
+> **Rust 版本**: Stable 1.96.1 | Beta 1.97.0 | Nightly 1.98.0
 > **跟踪周期**: 2026-05 → 2026-12（月度迭代）
 > **方法论**: 基于官方 [rust-project-goals](https://rust-lang.github.io/rust-project-goals/2026/) 的逐项映射与覆盖度量化
 

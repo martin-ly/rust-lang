@@ -1,8 +1,9 @@
 //! # Rust 1.96.0 特性 — 进程管理与系统编程模块
-//! # Rust 1.96.0 features processmanagementsystem module
+//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! # Rust 1.96.0/1.96.1 features processmanagementsystem module
 //!
-//! 本模块展示 Rust 1.96.0 中与进程管理、系统编程、懒加载相关的稳定特性：
-//! This module demonstrates Rust 1.96.0 processmanagementsystemfeatures
+//! 本模块展示 Rust 1.96.0/1.96.1 中与进程管理、系统编程、懒加载相关的稳定特性：
+//! This module demonstrates Rust 1.96.0/1.96.1 processmanagementsystemfeatures
 //! - `From<T> for LazyCell<T, F>` / `LazyLock<T, F>` — 值直接构造懒加载容器
 //! - `From<T> for LazyCell<T, F>` / `LazyLock<T, F>` value container
 //! - `core::range::Range` — 进程 ID 范围、资源限制范围的可复用迭代
@@ -10,7 +11,7 @@
 //!
 //! # 版本信息
 //! # Version Info
-//! - Rust 版本: 1.96.0+ stable
+//! - Rust 版本: 1.96.0/1.96.1+ stable
 //! - date : 2026-05-28
 //! - Edition: 2024
 

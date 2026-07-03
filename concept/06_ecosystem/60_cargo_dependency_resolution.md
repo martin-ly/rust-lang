@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: Dependency Resolution · SemVer · Lockfile · Features Unification · Resolver Version · `rust-version` · `cargo tree` · Yanked — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Cargo 依赖解析
@@ -15,7 +17,14 @@
 
 ---
 
-> **来源**: [Cargo — Dependency Resolution](https://doc.rust-lang.org/cargo/reference/resolver.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+>
+> [Cargo — Dependency Resolution](https://doc.rust-lang.org/cargo/reference/resolver.html) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+>
 > [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) ·
 > [Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html) ·
 > [Cargo Book — Resolver (Specifying Dependencies)](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) ·

@@ -1,7 +1,8 @@
 //! # Rust 1.96.0 稳定特性演示模块
-//! # Rust 1.96.0 feature demonstration module
-//! # Rust 1.96.0 稳定featuredemonstration module
-//! # Rust 1.96.0 stablefeaturedemonstration module
+//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! # Rust 1.96.0/1.96.1 feature demonstration module
+//! # Rust 1.96.0/1.96.1 稳定featuredemonstration module
+//! # Rust 1.96.0/1.96.1 stablefeaturedemonstration module
 //! - `std::assert_matches!` — 模式匹配断言，用于线程 `Result` 测试
 //! - `std::assert_matches!` — ，thread `Result`
 //! - `std::assert_matches!` — 模式匹配断言，Used forthread `Result` Test for

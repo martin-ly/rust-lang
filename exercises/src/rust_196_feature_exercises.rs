@@ -1,8 +1,8 @@
 #![forbid(unsafe_code)]
 
-//! # Rust 1.96.0+ 特性练习
+//! # Rust 1.96.1+ 特性练习
 //!
-//! 本模块提供 Rust 1.96.0 稳定特性的 hands-on 练习。
+//! 本模块提供 Rust 1.96.0/1.96.1 稳定特性（当前 patch 1.96.1）的 hands-on 练习。
 //! 每道练习题包含：题目描述、起始代码（stub）、参考实现、测试用例。
 
 use std::assert_matches;
