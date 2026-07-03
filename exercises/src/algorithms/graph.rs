@@ -233,23 +233,14 @@ mod tests {
 
     #[test]
     fn test_dijkstra_unreachable() {
-        let graph = vec![
-            vec![Edge::new(1, 1)],
-            vec![],
-            vec![],
-        ];
+        let graph = vec![vec![Edge::new(1, 1)], vec![], vec![]];
         let dist = dijkstra(&graph, 0);
         assert_eq!(dist, vec![Some(0), Some(1), None]);
     }
 
     #[test]
     fn test_topological_sort_basic() {
-        let graph = vec![
-            vec![1, 2],
-            vec![3],
-            vec![3],
-            vec![],
-        ];
+        let graph = vec![vec![1, 2], vec![3], vec![3], vec![]];
         let order = topological_sort(&graph).unwrap();
         assert_eq!(order[0], 0);
         assert_eq!(order[3], 3);
@@ -257,11 +248,7 @@ mod tests {
 
     #[test]
     fn test_topological_sort_cycle() {
-        let graph = vec![
-            vec![1],
-            vec![2],
-            vec![0],
-        ];
+        let graph = vec![vec![1], vec![2], vec![0]];
         assert!(topological_sort(&graph).is_none());
     }
 
