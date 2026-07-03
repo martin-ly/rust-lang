@@ -18,6 +18,40 @@
 > **来源**: [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [SF — Software Foundations](https://softwarefoundations.cis.upenn.edu/) · [CS 242 Stanford](https://stanford-cs242.github.io/f19/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 > **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
 
+## 目录
+
+- [通用程序语言理论基础：Rust 的 PL 基座](#通用程序语言理论基础rust-的-pl-基座)
+  - [目录](#目录)
+  - [一、为什么需要 PL 基座](#一为什么需要-pl-基座)
+  - [二、求值策略（Evaluation Strategy）](#二求值策略evaluation-strategy)
+    - [2.1 三种基本策略](#21-三种基本策略)
+    - [2.2 Rust 的 CBV 与 Move 语义](#22-rust-的-cbv-与-move-语义)
+    - [2.3 为什么 Rust 不是 CBN/CBNeed](#23-为什么-rust-不是-cbncbneed)
+  - [三、副作用模型（Effect System）](#三副作用模型effect-system)
+    - [3.1 什么是副作用](#31-什么是副作用)
+    - [3.2 Rust 的副作用控制](#32-rust-的副作用控制)
+    - [3.3 与 Haskell IO Monad 的对比](#33-与-haskell-io-monad-的对比)
+  - [四、Continuation 与 CPS](#四continuation-与-cps)
+    - [4.1 什么是 Continuation](#41-什么是-continuation)
+    - [4.2 async/await 是 CPS 的语法糖](#42-asyncawait-是-cps-的语法糖)
+    - [4.3 Pin 与 Continuation 的安全性](#43-pin-与-continuation-的安全性)
+  - [五、结构化程序定理与 Rust 控制流](#五结构化程序定理与-rust-控制流)
+    - [5.1 结构化程序定理](#51-结构化程序定理)
+    - [5.2 Rust 的类型驱动控制流](#52-rust-的类型驱动控制流)
+  - [六、变量模型：环境 vs 存储](#六变量模型环境-vs-存储)
+    - [6.1 两个概念](#61-两个概念)
+    - [6.2 Rust 的所有权作为存储约束](#62-rust-的所有权作为存储约束)
+  - [七、来源与参考](#七来源与参考)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Lambda 演算（Lambda Calculus）为什么被称为"编程语言的汇编语言"？（理解层）](#测验-1lambda-演算lambda-calculus为什么被称为编程语言的汇编语言理解层)
+    - [测验 2：什么是"柯里化"（Currying）？Rust 的闭包支持柯里化吗？（理解层）](#测验-2什么是柯里化curryingrust-的闭包支持柯里化吗理解层)
+    - [测验 3：系统 F（System F）是什么？Rust 的泛型与它有什么关系？（理解层）](#测验-3系统-fsystem-f是什么rust-的泛型与它有什么关系理解层)
+    - [测验 4：什么是"停机问题"（Halting Problem）？它对程序验证有什么实际影响？（理解层）](#测验-4什么是停机问题halting-problem它对程序验证有什么实际影响理解层)
+    - [测验 5：类型论中的"依赖类型"（Dependent Types）是什么？Rust 目前支持依赖类型吗？（理解层）](#测验-5类型论中的依赖类型dependent-types是什么rust-目前支持依赖类型吗理解层)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
+
 ## 一、为什么需要 PL 基座
 
 Rust 的独特性（所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes））常被描述为"工程创新"，但它们深植于**数十年的 PL 理论研究**。理解这些根基，才能：

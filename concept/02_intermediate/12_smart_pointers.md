@@ -620,12 +620,6 @@ fn fixed() {
 >
 >
 
----
-
----
-
----
-
 ### 10.3 边界测试：`Pin<&mut Self>` 在 trait 方法中的约束（编译错误）
 
 ```rust,ignore
