@@ -4,7 +4,7 @@
 > **Summary**: 延迟初始化 Lazy Initialization.
 > **相关概念**: [内部可变性](../../concept/02_intermediate/08_interior_mutability.md)
 > **Bloom 层级**: 理解
-> **版本**: Rust 1.96.0+ (accessors), `LazyCell`/`LazyLock` 类型稳定于 1.80
+> **版本**: Rust 1.96.1+ (accessors), `LazyCell`/`LazyLock` 类型稳定于 1.80
 > **特性**: `LazyCell`, `LazyLock`, `get`, `get_mut`, `force_mut`
 > **权威来源**: [Rust RFC](https://rust-lang.github.io/rfcs/2788-standard-lazy-types.html), [PLDI 2025 Tree Borrows](https://pldi25.sigplan.org/)
 >
@@ -911,7 +911,7 @@ fn reload_config() {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（RFC 2788、Rust Reference、std::cell 文档） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0 (accessors) / 1.80.0 (types)
+**对应 Rust 版本**: 1.96.1 (accessors) / 1.80.0 (types)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

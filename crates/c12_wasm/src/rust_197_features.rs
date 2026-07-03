@@ -1,12 +1,12 @@
-//! Rust 1.97 稳定特性 —— WASM 目标演示
-//! Rust 1.97 stabilized features —— WASM target demonstration
+//! Rust 1.97 Nightly 前瞻/候选特性 —— WASM 目标演示
+//! Rust 1.97 nightly preview candidate features —— WASM target demonstration
 //!
-//! 本文件使用 **Rust 1.96.0 等价实现** 演示 Rust 1.97.0 稳定 API 的语义。
+//! 本文件使用 **Rust 1.96.1 等价实现** 演示 Rust 1.97.0 稳定 API 的语义。
 //! 实际 Rust 1.97 调用以 `#[cfg(nightly)]` 分支保留，可通过
 //! `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 //!
-//! This module demonstrates Rust 1.97.0 stabilized APIs using equivalent
-//! implementations that compile on Rust 1.96.0. The actual Rust 1.97 call
+//! This module demonstrates Rust 1.97.0 candidate APIs using equivalent
+//! implementations that compile on Rust 1.96.1. The actual Rust 1.97 call
 //! sites are kept in `#[cfg(nightly)]` branches for easy migration once the
 //! toolchain is upgraded.
 

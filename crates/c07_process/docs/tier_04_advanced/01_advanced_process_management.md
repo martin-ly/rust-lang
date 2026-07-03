@@ -2,7 +2,7 @@
 
 > **文档类型**: 高级主题
 > **难度**: ⭐⭐⭐⭐
-> **适用版本**: Rust 1.92.0+
+> **适用版本**: Rust 1.96.1+
 > **前置知识**: [性能优化参考](../tier_03_references/05_performance_optimization_reference.md)
 
 ---
@@ -47,7 +47,7 @@
     - [案例: 生产级进程管理系统](#案例-生产级进程管理系统)
   - [8. 最佳实践](#8-最佳实践)
   - [总结](#总结)
-  - [**适用版本**: Rust 1.92.0+](#适用版本-rust-1920)
+  - [**适用版本**: Rust 1.96.1+](#适用版本-rust-1920)
 
 ---
 
@@ -60,7 +60,7 @@
 - **定义**: Rust 1.92.0 高级进程管理，包括进程池架构设计、进程调度策略、进程生命周期管理、进程监控与诊断、进程间协调、容错与恢复、实战案例、最佳实践等
 - **类型**: 高级主题文档
 - **范畴**: 进程管理、系统编程
-- **版本**: Rust 1.92.0+ (Edition 2024)
+- **版本**: Rust 1.96.1+ (Edition 2024)
 - **相关概念**: 进程池、进程调度、生命周期管理、进程监控、进程间协调、容错
 
 ### 属性特征
@@ -1590,7 +1590,7 @@ impl Drop for ProcessGuard {
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-22
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+
+**适用版本**: Rust 1.96.1+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1598,6 +1598,6 @@ impl Drop for ProcessGuard {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

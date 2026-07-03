@@ -322,8 +322,8 @@ fn verify_vec_push_safety() {
 ---
 
 > **权威来源**: [Kani 官方文档](https://model-checking.github.io/kani/) · [Kani GitHub](https://github.com/model-checking/kani) · [CBMC](https://github.com/diffblue/cbmc)
-> **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Kani 0.66+ / Rust 1.96.0
+> **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Kani 0.66+ / Rust 1.96.1
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-06-26

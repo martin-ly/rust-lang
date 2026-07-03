@@ -6,7 +6,7 @@
 > **相关文档**: [Rust 编译 WASM](02_compiling_rust_to_wasm.md) | [性能优化指南](04_performance_optimization_guide.md)
 
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 **Rust 1.92.0 特性**: 本文档已集成 Rust 1.92.0 FFI 互操作特性
 
 ---
@@ -42,7 +42,7 @@
   - [🔗 Rust 1.92.0 FFI 互操作 ⭐ NEW](#-rust-1920-ffi-互操作--new)
     - [使用联合体原始引用进行安全的 FFI 互操作](#使用联合体原始引用进行安全的-ffi-互操作)
   - [📚 相关资源](#-相关资源)
-  - [**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
+  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
 
 ---
 
@@ -402,7 +402,7 @@ let mut_raw_ref = union.get_integer_mut_raw();
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -410,6 +410,6 @@ let mut_raw_ref = union.get_integer_mut_raw();
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

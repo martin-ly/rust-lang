@@ -15,7 +15,7 @@
 > **EN**: Cognitive Dimension Matrix
 > **Summary**: Cognitive Dimension Matrix. Core Rust concept.
 > **受众**: [研究者]
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **Bloom 层级**: 元（Meta）
 > **定位**: 本文件建立 **Krathwohl 知识维度**（事实性 / 概念性 / 程序性 / 元认知）与 **Bloom 认知过程维度**（记忆 → 理解 → 应用 → 分析 → 评价 → 创造）的双维交叉矩阵，为 `concept/` 下每个概念文件提供超越单一 Bloom 标签的多维认知定位。
 > **对齐来源**: [Bloom 修订版 2001] · [Krathwohl 知识维度 2002] · [Microsoft RustTraining] · [编程教育 A/S/P 标记 arxiv 2604.06331v1]

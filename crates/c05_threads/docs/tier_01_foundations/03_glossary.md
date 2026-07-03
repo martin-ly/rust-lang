@@ -5,7 +5,7 @@
 > **相关文档**: [项目概览](01_project_overview.md) | [主索引导航](02_navigation.md) | [常见问题](04_faq.md)
 
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+ (Edition 2024)
+**适用版本**: Rust 1.96.1+ (Edition 2024)
 **文档类型**: 📚 参考手册
 **术语数量**: 60+ 个
 
@@ -1255,7 +1255,7 @@ cvar.notify_all();
 **Rust 中的线程**:
 
 - `std::thread::spawn`: 创建线程
-- `thread::scope`: 作用域线程 (Rust 1.92.0+)
+- `thread::scope`: 作用域线程 (Rust 1.96.1+)
 - `JoinHandle`: 线程句柄
 
 **示例**:
@@ -1388,6 +1388,6 @@ S-Z: [Send](#send-trait) |
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

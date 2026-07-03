@@ -4,7 +4,7 @@
 > **Summary**: 安装 Rust Installation.
 > **相关概念**: [工具链](../../concept/06_ecosystem/01_toolchain.md)
 > **Bloom 层级**: 理解
-> **版本**: Rust 1.96.0+
+> **版本**: Rust 1.96.1+
 > **预计时间**: 15-30 分钟
 > **权威来源**: [Rust 官方安装指南](https://www.rust-lang.org/tools/install), [rustup 文档](https://rust-lang.github.io/rustup/), [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-01-installation.html)
 >
@@ -247,7 +247,7 @@ rustup default stable  # 切回稳定版
 ---
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

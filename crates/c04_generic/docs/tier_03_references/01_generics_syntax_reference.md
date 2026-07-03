@@ -41,7 +41,7 @@
 
 **文档类型**: Tier 3 完整参考
 **最后更新**: 2025-12-11
-**Rust 版本**: 1.92.0+
+**Rust 版本**: 1.96.1+
 **参考类型**: 🔍 语法速查
 
 ---
@@ -55,7 +55,7 @@
 - **定义**: 泛型类型参数、函数、结构体、枚举等完整语法参考
 - **类型**: 语法参考文档
 - **范畴**: 泛型编程、语言语法
-- **版本**: Rust 1.92.0+
+- **版本**: Rust 1.96.1+
 - **相关概念**: 泛型语法、类型参数、Trait Bound、const 泛型、BNF 语法
 
 ### 属性特征
@@ -450,7 +450,7 @@ fn create_array<const N: usize>() -> [i32; N] {
 ### 6.2 const 泛型约束
 
 ```rust
-// const 泛型表达式 (Rust 1.92.0+)
+// const 泛型表达式 (Rust 1.96.1+)
 struct Matrix<T, const ROWS: usize, const COLS: usize>
 where
     [(); ROWS * COLS]:,
@@ -661,7 +661,7 @@ impl<T: Clone + Display> Container<T> {
 - 创建日期: 2025-10-22
 - 作者: Rust-Lang Project
 - 许可: MIT OR Apache-2.0
-- Rust 版本: 1.92.0+
+- Rust 版本: 1.96.1+
 
 ---
 
@@ -670,6 +670,6 @@ impl<T: Clone + Display> Container<T> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

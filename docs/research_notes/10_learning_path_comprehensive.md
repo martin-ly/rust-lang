@@ -4,7 +4,7 @@
 > **Summary**: Rust形式化方法学习路径 Learning Path Comprehensive.
 > **概念族**: 学习资源
 > **内容分级**: [归档级]
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 >
 > **分级**: [B]
@@ -448,7 +448,7 @@ println!("{}", x);
 
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **适用版本**: Rust 1.96.0+
+> **适用版本**: Rust 1.96.1+
 
 详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
@@ -460,7 +460,7 @@ println!("{}", x);
 
 >
 > **[来源: [crates.io](https://crates.io/)]**
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -507,7 +507,7 @@ println!("{}", x);
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

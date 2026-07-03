@@ -1,5 +1,5 @@
 [toolchain]
-# MSRV: stable 1.96.0（当前 latest stable 已对应 1.96.0）
+# MSRV: stable 1.96.1（当前 latest stable 已对应 1.96.1）
 # 使用 "stable" 通道而非精确版本号，避免 rustup 镜像在版本发布初期
 # 尚未同步 1.96.0 安装包导致的 404。
 # nightly-only 预览模块仍通过各 crate 的 build.rs 自动检测 nightly 并设置

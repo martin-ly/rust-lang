@@ -9,7 +9,7 @@
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
-> **Feature gate**: `#![feature(field_projections)]`（Rust 1.96.0+ nightly）
+> **Feature gate**: `#![feature(field_projections)]`（Rust 1.96.1+ nightly）
 > **Tracking Issue**: [rust-lang/rust#145383](https://github.com/rust-lang/rust/issues/145383)
 > **预计稳定**: 待定（需等待 RFC / MCP 完成）
 >

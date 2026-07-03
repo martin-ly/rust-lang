@@ -2,7 +2,7 @@
 name = "incremental_practice"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.96.0"
+rust-version = "1.96.1"
 description = "最小可运行示例：观测 rustc 增量编译的 dep-graph 与 Red-Green 复用"
 license = "MIT OR Apache-2.0"
 

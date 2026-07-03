@@ -6,7 +6,7 @@
 > **框架结构**: ✅ **4-Tier 架构**
 > **文档总数**: **36+ 篇**
 > **质量评分**: **95/100**
-> **Rust版本**: 1.96.0+ (Edition 2024)
+> **Rust版本**: 1.96.1+ (Edition 2024)
 
 **Rust 1.93 兼容性**: [兼容性注意事项](../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 **思维表征**: [决策图网](../../docs/04_thinking/DECISION_GRAPH_NETWORK.md) | [证明图网](../../docs/04_thinking/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../docs/04_thinking/THINKING_REPRESENTATION_METHODS.md)
@@ -37,7 +37,7 @@
 > **前置知识**: C02类型系统、C03控制流、C04泛型编程
 
 **模块状态**: ✅ Rust 1.93.0 特性更新完成
-**Rust版本**: 1.93.0+ | 📊 完成度: **100% 完成** ✅
+**Rust版本**: 1.96.1+ | 📊 完成度: **100% 完成** ✅
 **最后更新**: 2025-12-11 | 🔄 维护模式: Rust 1.93.0 特性更新完成
 
 ---
@@ -439,6 +439,6 @@ macro_rules! count {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

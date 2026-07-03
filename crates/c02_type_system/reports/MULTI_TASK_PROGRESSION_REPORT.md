@@ -452,6 +452,7 @@ cargo run --example rust_190_type_system_validator_demo
 # 运行性能优化演示
 cargo run --example rust_190_performance_optimization_demo
 ```
+
 ### 运行测试
 
 ```bash
@@ -466,12 +467,14 @@ cargo test advanced_error_handling
 cargo test type_system_validator
 cargo test performance_optimization
 ```
+
 ### 运行基准测试
 
 ```bash
 # 运行性能基准测试
 cargo bench
 ```
+
 ## 🔮 未来展望
 
 ### 技术发展方向
@@ -510,6 +513,6 @@ cargo bench
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

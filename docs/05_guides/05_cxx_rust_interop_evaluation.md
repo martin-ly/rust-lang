@@ -3,12 +3,12 @@
 > **EN**: Cxx Rust Interop Evaluation
 > **Summary**: C++ ↔ Rust 互操作评估 Cxx Rust Interop Evaluation. (stub/archive redirect)
 >
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 > **创建日期**: 2026-05-08
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: 📝 评估草案
 > **相关目标**: Rust 2026 Project Goal — C++ ↔ Rust Interoperability
 >
@@ -332,7 +332,7 @@ C++ ↔ Rust 互操作是 Rust 2026 的核心目标之一。当前社区以 `cxx
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

@@ -7,7 +7,7 @@
 > 本主题在 concept 中有深度的概念分析：[Web 框架](../../../concept/06_ecosystem/27_web_frameworks.md)
 > **Bloom 层级**: 理解
 > **版本**: Axum 0.8.x
-> **Rust 版本**: 1.96.0+
+> **Rust 版本**: 1.96.1+
 > **难度**: 中级到高级
 > **预计阅读时间**: 45分钟
 > **权威来源**: [Axum 官方文档](https://docs.rs/axum/latest/axum/), [Tower 文档](https://docs.rs/tower/latest/tower/), [Hyper 文档](https://docs.rs/hyper/latest/hyper/)

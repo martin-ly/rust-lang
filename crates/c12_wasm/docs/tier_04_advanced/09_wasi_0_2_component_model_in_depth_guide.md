@@ -82,7 +82,7 @@
 - **定义**: Rust 1.92.0 WASI 0.2 组件模型深度指南，包括 WASI 0.2 核心概念（组件、接口、资源、WIT 类型系统）、组件模型（架构概览、组件组合、生命周期管理）、WIT（Wasm Interface Types）语法完整指南、实战示例、迁移指南、最佳实践等
 - **类型**: 高级主题文档
 - **范畴**: WASM、WASI、组件模型
-- **版本**: Rust 1.92.0+ / Edition 2024, WASI 0.2 (Preview 2)
+- **版本**: Rust 1.96.1+ / Edition 2024, WASI 0.2 (Preview 2)
 - **相关概念**: WASI 0.2、组件模型、WIT、组件、接口、资源
 
 ### 属性特征
@@ -1125,6 +1125,6 @@ _WASI 0.2 组件模型代表了 WebAssembly 生态系统的重大飞跃，掌握
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

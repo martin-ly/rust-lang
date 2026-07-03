@@ -2,7 +2,7 @@
 name = "c16_gui"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.96.0"
+rust-version = "1.96.1"
 license = "MIT OR Apache-2.0"
 authors = ["Rust 学习项目团队"]
 description = "GUI / 跨平台 UI 生态实战示例 crate（Tauri / Dioxus / Leptos / egui / iced）"

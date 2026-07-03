@@ -1,6 +1,6 @@
 ﻿# Tier 2: Future 与 Executor 机制
 
-> **文档版本**: Rust 1.92.0+ | **更新日期**: 2025-12-11
+> **文档版本**: Rust 1.96.1+ | **更新日期**: 2025-12-11
 > **文档层级**: Tier 2 - 实践指南 | **预计阅读**: 25-30 分钟
 > **难度**: ⭐⭐⭐ (中级)
 
@@ -45,7 +45,7 @@
     - [相关文档](#相关文档)
     - [外部资源](#外部资源)
   - [📝 总结](#-总结)
-  - [**最后更新**: 2025-12-11 | **Rust 版本**: 1.92.0+](#最后更新-2025-12-11--rust-版本-1920)
+  - [**最后更新**: 2025-12-11 | **Rust 版本**: 1.96.1+](#最后更新-2025-12-11--rust-版本-1920)
 
 ---
 
@@ -942,7 +942,7 @@ impl Future for MyFuture {
 ---
 
 **文档维护**: C06 Async Team | **质量评分**: 95/100
-**最后更新**: 2025-12-11 | **Rust 版本**: 1.92.0+
+**最后更新**: 2025-12-11 | **Rust 版本**: 1.96.1+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -950,6 +950,6 @@ impl Future for MyFuture {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

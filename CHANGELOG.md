@@ -1,10 +1,17 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-29（P0 Rust 1.97 发布前准备 + 工具链稳定化收尾 + Stable MSRV 1.96.0 迁移完成）
+> **最后更新**: 2026-07-04（Rust 1.96.1 MSRV/文档对齐 + 修正 1.97/1.98 稳定性表述）
 
 ---
 
-## [3.1.0] - 2026-07-09 — Rust 1.97.0 稳定支持
+## [3.1.1] - 2026-07-04 — Rust 1.96.1 全面版本对齐
+
+- **MSRV 提升**: `Cargo.toml`、全部 workspace crate `Cargo.toml`、`.clippy.toml`、`rust-toolchain.toml` 注释、CI workflow 主矩阵统一从 `1.96.0` 更新为 `1.96.1`。
+- **文档基线刷新**: `README.md`、`CONTRIBUTING.md`、`development.md`、各 crate `README.md`/`docs/`/`reports/`、顶层 `docs/`/`knowledge/`/`guides/` 中大量 `1.96.0+` / `MSRV 1.96.0` 基线标注统一更新为 `1.96.1+` / `MSRV 1.96.1`。
+- **1.97/1.98 稳定性表述修正**: 当前（2026-07-04）Rust 1.97.0 尚未 stable、1.98.0 仍为 nightly。所有 `rust_197_features.rs` 模块文档、`exercises/tests/l3_rust_197_alignment.rs`、`concept/07_future/rust_1_97_stabilized.md`、`concept/07_future/rust_1_97_preview.md`、`docs/06_toolchain/06_21_rust_1_97_features.md` 中“已稳定/stable”描述恢复为“beta / nightly 候选/前瞻”。
+- **验证**: `cargo check --workspace`、`cargo test --workspace`、`cargo clippy --workspace`、`cargo vet` 均通过。
+
+## [3.1.0] - 2026-07-09 — Rust 1.97.0 稳定支持（计划发布）
 
 ### P1 权威事实修正与 Rust 1.96 覆盖缺口回填（2026-06-26）
 
@@ -49,10 +56,10 @@
 ### P0 工具链稳定化收尾（2026-06-29）
 
 - **默认工具链恢复 stable**：
-  - `rust-toolchain.toml` 改为 `channel = "stable"`（当前 latest stable 已对应 1.96.0；精确 `1.96.0` 包在部分镜像仍有 404，故使用 stable 通道）。
-  - `Cargo.toml` 与全部 workspace crate 的 `rust-version` 保持 `1.96.0`。
+  - `rust-toolchain.toml` 改为 `channel = "stable"`（当前 latest stable 已对应 1.96.1；精确版本由 rustup stable 通道解析）。
+  - `Cargo.toml` 与全部 workspace crate 的 `rust-version` 保持 `1.96.1`。
 - **CI 恢复 stable + nightly 双矩阵**：
-  - `.github/workflows/ci.yml`、`.github/workflows/pr_checks.yml`、`.github/workflows/ci_optimized.yml` 主矩阵切回 `dtolnay/rust-toolchain@1.96.0`/`@stable`。
+  - `.github/workflows/ci.yml`、`.github/workflows/pr_checks.yml`、`.github/workflows/ci_optimized.yml` 主矩阵切回 `dtolnay/rust-toolchain@1.96.1`/`@stable`。
   - 全局 `RUSTFLAGS` 不再包含 `--cfg nightly`；stable 主矩阵仅保留 `--cfg tokio_unstable`。
   - `ci.yml` 的 `nightly-preview` job、`ci_optimized.yml` 的 Miri 任务保留 `@nightly` 与 `--cfg nightly`，用于前瞻性验证。
 - **nightly 预览模块自动检测**：
@@ -186,7 +193,7 @@
   - `VecDeque::retain_back`：当前 nightly 方法不存在，保留等效实现。
   - `Box::into_non_null` / `Vec::into_non_null`：当前 nightly 方法不存在，保留等效实现。
 - **工具链策略**
-  - workspace 默认工具链已迁移至 stable MSRV `1.96.0`；nightly 仅用于可选 `--features nightly` 预览模块与 `nightly-preview` CI job。
+  - workspace 默认工具链已迁移至 stable MSRV `1.96.1`；nightly 仅用于可选 `--features nightly` 预览模块与 `nightly-preview` CI job。
   - 1.97.0 已稳定的 API 在 stable 上同样可用，代码中保留 fallback 并在发布日按 Release Notes 激活真实调用。
 
 ### P2 深度内容冲刺：rustc / Cargo / Kani / TRPL-Brown 对齐（2026-06-26）

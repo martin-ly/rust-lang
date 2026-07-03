@@ -14,8 +14,8 @@
 > **更新内容**: 添加数据竞争完整定义 (Def 1.6)；添加同步原语定义 (Def 1.7)
 >
 > - 补充 Tree Borrows / RustSEM / RustBelt / Oxide 别名模型与操作语义
-> **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 > **六篇并表**: README §formal_methods 六篇并表 第 2 行（借用）
 
 ---
@@ -2282,7 +2282,7 @@ Polonius；[FLS Ch. 15.4 Borrowing](https://spec.ferrocene.dev/ownership-and-dec
 
 >
 > **[来源: [crates.io](https://crates.io/)]**
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -2334,7 +2334,7 @@ Polonius；[FLS Ch. 15.4 Borrowing](https://spec.ferrocene.dev/ownership-and-dec
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

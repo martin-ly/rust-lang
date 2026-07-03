@@ -81,7 +81,7 @@
 **模块**: C06 Async
 **创建日期**: 2025-12-11
 **最后更新**: 2026-05-08
-**Rust 版本**: 1.96.0+ (Edition 2024)
+**Rust 版本**: 1.96.1+ (Edition 2024)
 **状态**: ✅ 已完成
 
 > **AFIDT 状态提示（2026-06-26）**：`async fn in dyn trait`（AFIDT）仍为 nightly 实验特性，暂无稳定时间表。生产代码中 `dyn Trait` 的异步方法请继续使用 `async-trait`；AFIT（`async fn in trait`）已在 Rust 1.75+ stable，可用于泛型/`impl Trait` 场景。
@@ -343,7 +343,7 @@ async fn main() {
 ### 6. Async Closures {#6-async-closures}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-> **Rust 版本**: 1.96.0+ Stable
+> **Rust 版本**: 1.96.1+ Stable
 > **相关文档**: [Async Closures 深度指南](../../crates/c06_async/docs/async_closures_guide.md)
 
 Rust 1.85 稳定了 async closures，引入了 `AsyncFn`、`AsyncFnMut`、`AsyncFnOnce` trait family，
@@ -1690,7 +1690,7 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 ## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-> **适用版本**: Rust 1.96.0+
+> **适用版本**: Rust 1.96.1+
 
 ### ControlFlow 在异步编程中的应用 {#controlflow-在异步编程中的应用}
 
@@ -1844,7 +1844,7 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

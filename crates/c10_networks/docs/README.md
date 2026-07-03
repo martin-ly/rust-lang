@@ -3,12 +3,12 @@
 > **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
 > 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
 >
-> 适用范围：Rust 1.93.0+，Tokio 1.35+。文档风格遵循 [`STYLE.md`](STYLE.md)。
+> 适用范围：Rust 1.96.1+，Tokio 1.35+。文档风格遵循 [`STYLE.md`](STYLE.md)。
 
 **Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 **思维表征**: [决策图网](../../../docs/04_thinking/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/04_thinking/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/04_thinking/THINKING_REPRESENTATION_METHODS.md)
 
-[![Rust](https://img.shields.io/badge/rust-1.93.0+-orange.svg)](https://www.rust-lang.org/)
+[![Rust](https://img.shields.io/badge/rust-1.96.1+-orange.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
 [![Crates.io](https://img.shields.io/crates/v/c10_networks.svg)](https://crates.io/crates/c10_networks)
 
@@ -443,6 +443,6 @@ _维护者: C10 Networks 开发团队_
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

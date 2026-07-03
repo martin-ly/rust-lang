@@ -147,7 +147,7 @@ let result: Result<i32, &str> = Ok(42);
 assert!(matches!(result, Ok(n) if n > 10));
 // 失败时信息: "assertion failed: matches!(result, Ok(n) if n > 10)"
 
-// 方式 B: assert_matches!（Rust 1.96.0+）
+// 方式 B: assert_matches!（Rust 1.96.1+）
 assert_matches!(result, Ok(n) if n > 10);
 // 失败时信息: 显示实际值和期望模式，更易于调试
 ```
@@ -446,12 +446,12 @@ fn main() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-00-patterns.html)
-> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0 (Edition 2024)
+> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1 (Edition 2024)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-06-19
-**状态**: ✅ 已对齐 Rust 1.96.0 稳定版发布内容
+**状态**: ✅ 已对齐 Rust 1.96.1 稳定版发布内容
 
 ---
 
@@ -499,7 +499,7 @@ fn main() {
 }
 ```
 
-> **修正**: `assert_matches!`（Rust 长期 unstable，于 1.96.0 stable）专门用于测试枚举变体匹配。
+> **修正**: `assert_matches!`（Rust 长期 unstable，于 1.96.0 stable，当前 patch 1.96.1）专门用于测试枚举变体匹配。
 > 它不同于 `assert_eq!`——后者要求值实现 `PartialEq`，而 `assert_matches!` 使用模式匹配，不要求 `PartialEq`。
 > 在 `assert_matches!` 稳定前，使用 `matches!` 宏或 `if let` 进行测试断言。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
@@ -540,7 +540,7 @@ fn test_nested_match() {
 }
 ```
 
-> **修正**: `assert_matches!`（Rust 1.96.0 stable）检查值是否匹配给定模式，但**模式中的绑定**（`x`）在宏外部不可见。
+> **修正**: `assert_matches!`（Rust 1.96.0 stable，当前 patch 1.96.1）检查值是否匹配给定模式，但**模式中的绑定**（`x`）在宏外部不可见。
 > `assert_matches!(result, Ok(Some(x)))` 中 `x` 只在宏内部有效，测试代码不能后续使用 `x`。
 > 若需提取绑定值，使用 `if let`：`if let Ok(Some(x)) = result { assert!(x > 0); } else { panic!("match failed"); }`。
 > `assert_matches!` 的优势是简洁和良好的失败消息（打印不匹配的值），劣势是绑定不可导出。

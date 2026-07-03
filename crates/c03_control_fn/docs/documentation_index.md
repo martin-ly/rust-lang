@@ -141,11 +141,11 @@ docs/
 
 | 文档                                                | 难度     | 核心内容         | Rust 版本 |
 | :--- | :--- | :--- | :--- |
-| [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md) | ⭐⭐⭐⭐ | 高级模式匹配     | 1.92.0+   |
-| [闭包深入](tier_04_advanced/02_closures_in_depth.md)         | ⭐⭐⭐⭐ | 闭包特征系统     | 1.92.0+   |
-| [函数式编程](tier_04_advanced/03_functional_programming.md)     | ⭐⭐⭐   | 函数式编程技巧   | 1.92.0+   |
-| [错误处理进阶](tier_04_advanced/04_advanced_error_handling.md) | ⭐⭐⭐⭐ | 错误处理高级应用 | 1.92.0+   |
-| [性能优化](tier_04_advanced/05_性能优化.md)         | ⭐⭐⭐⭐ | 性能优化技巧     | 1.92.0+   |
+| [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md) | ⭐⭐⭐⭐ | 高级模式匹配     | 1.96.1+   |
+| [闭包深入](tier_04_advanced/02_closures_in_depth.md)         | ⭐⭐⭐⭐ | 闭包特征系统     | 1.96.1+   |
+| [函数式编程](tier_04_advanced/03_functional_programming.md)     | ⭐⭐⭐   | 函数式编程技巧   | 1.96.1+   |
+| [错误处理进阶](tier_04_advanced/04_advanced_error_handling.md) | ⭐⭐⭐⭐ | 错误处理高级应用 | 1.96.1+   |
+| [性能优化](tier_04_advanced/05_性能优化.md)         | ⭐⭐⭐⭐ | 性能优化技巧     | 1.96.1+   |
 
 **何时阅读**：
 
@@ -300,7 +300,7 @@ cargo bench
 
 _最后更新：2025年12月_
 _文档版本：v3.0_
-_Rust 版本：1.92.0+_
+_Rust 版本：1.96.1+_
 _总文档数：30+_
 
 ---
@@ -310,6 +310,6 @@ _总文档数：30+_
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

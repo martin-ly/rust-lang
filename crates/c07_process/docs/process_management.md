@@ -2,7 +2,7 @@
 
 > **文档定位**: Tier 2 实践指南
 > **最后更新**: 2025-12-25
-> **Rust版本**: 1.92.0+ (Edition 2024)
+> **Rust版本**: 1.96.1+ (Edition 2024)
 > **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](tier_01_foundations/04_faq.md) | [Glossary](tier_01_foundations/03_glossary.md)
 
 本文档详细介绍 Rust 中的进程管理，包括进程创建、子进程管理、进程间通信等核心概念。
@@ -760,6 +760,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

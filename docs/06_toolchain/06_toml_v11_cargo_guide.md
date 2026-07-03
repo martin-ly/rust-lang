@@ -9,7 +9,7 @@
 > **内容分级**: [专家级]
 > **文档状态**: 活跃维护
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.96.0+ (TOML v1.1 支持)
+> **Rust 版本**: 1.96.1+ (TOML v1.1 支持)
 > **Edition**: 2024
 
 ---
@@ -181,13 +181,13 @@ path = "../my-lib"
 
 ```toml
 # Cargo.toml {#cargotoml}
-# 适用于：Rust 1.96.0+, TOML v1.1 {#适用于rust-1960-toml-v11}
+# 适用于：Rust 1.96.1+, TOML v1.1 {#适用于rust-1960-toml-v11}
 
 [package]
 name = "advanced-networking"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.96.0"
+rust-version = "1.96.1"
 
 [dependencies]
 # 多行内联表 + 尾部逗号 — 依赖配置更清晰 {#多行内联表-尾部逗号-依赖配置更清晰}
@@ -303,7 +303,7 @@ flowchart LR
 # 在 Cargo.toml 中声明 MSRV，间接提示 TOML 兼容性 {#在-cargotoml-中声明-msrv间接提示-toml-兼容性}
 [package]
 name = "my-lib"
-rust-version = "1.96.0"  # ← 1.96+：使用 TOML v1.1 语法
+rust-version = "1.96.1"  # ← 1.96+：使用 TOML v1.1 语法
 ```
 
 ---
@@ -474,7 +474,7 @@ flowchart TD
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

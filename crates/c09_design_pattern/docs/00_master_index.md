@@ -3,7 +3,7 @@
 > **文档定位**: 设计模式学习路径总导航，快速定位所有学习资源
 > **使用方式**: 作为学习起点，根据需求选择合适的文档和代码模块
 > **相关文档**: [README](README.md) | [FAQ](tier_01_foundations/04_faq.md) | [Glossary](tier_01_foundations/03_glossary.md)
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.1+
 > **最后更新**: 2026-03-13
 
 ## 📚 官方资源映射
@@ -36,7 +36,7 @@
     - [第四部分：领域专题](#第四部分领域专题)
       - [8. 领域特定模式](#8-领域特定模式)
     - [第五部分：Rust 特性集成](#第五部分rust-特性集成)
-      - [9. Rust 1.92.0+ 特性（自 Rust 1.90 引入）](#9-rust-1920-特性自-rust-190-引入)
+      - [9. Rust 1.96.1+ 特性（自 Rust 1.90 引入）](#9-rust-1920-特性自-rust-190-引入)
   - [📖 实践示例](#-实践示例)
     - [可运行示例 (examples/)](#可运行示例-examples)
     - [性能基准测试 (benches/)](#性能基准测试-benches)
@@ -68,7 +68,7 @@
     - [社区支持](#社区支持)
 
 **最后更新**: 2025-12-25
-**适用版本**: Rust 1.92.0+ (Edition 2024)
+**适用版本**: Rust 1.96.1+ (Edition 2024)
 **文档类型**: 📚 导航索引
 
 ---
@@ -150,7 +150,7 @@
 
 | 模块                 | 源码位置                                                                                                  | 说明                                   |
 | :--- | :--- | :--- || **异步模式**         | [`src/concurrency/asynchronous/`](../src/concurrency/asynchronous)                                       | Future/async/await                     |
-| **原生 async trait** | [`src/concurrency/asynchronous/native_async_trait/`](../src/concurrency/asynchronous/native_async_trait) | Rust 1.92.0+ 特性（自 Rust 1.90 引入） |
+| **原生 async trait** | [`src/concurrency/asynchronous/native_async_trait/`](../src/concurrency/asynchronous/native_async_trait) | Rust 1.96.1+ 特性（自 Rust 1.90 引入） |
 | **消息传递**         | [`src/concurrency/message_passing/`](../src/concurrency/message_passing)                                 | Channel 通信                           |
 | **生产者-消费者**    | [`src/concurrency/producer_consumer/`](../src/concurrency/producer_consumer)                             | 队列模式                               |
 | **读写者**           | [`src/concurrency/reader_writer/`](../src/concurrency/reader_writer)                                     | RwLock 模式                            |
@@ -193,7 +193,7 @@
 
 ### 第五部分：Rust 特性集成
 
-#### 9. Rust 1.92.0+ 特性（自 Rust 1.90 引入）
+#### 9. Rust 1.96.1+ 特性（自 Rust 1.90 引入）
 
 | 特性              | 源码位置                                                  | 说明                      |
 | :--- | :--- | :--- || **RPITIT**        | [`src/rust_190_features.rs`](../src/rust_190_features.rs) | Trait 方法返回 impl Trait |
@@ -434,7 +434,7 @@ cargo bench -p c09_design_pattern
 **文档维护**: Rust 学习社区
 **更新频率**: 跟随项目进度持续更新
 **文档版本**: v1.0
-**Rust 版本**: 1.92.0+ (Edition 2024)
+**Rust 版本**: 1.96.1+ (Edition 2024)
 
 ---
 
@@ -443,6 +443,6 @@ cargo bench -p c09_design_pattern
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

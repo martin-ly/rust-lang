@@ -12,7 +12,7 @@
   "metadata": {
     "version": "2.0",
     "generated": "2026-06-27",
-    "rust_version": "1.96.0+",
+    "rust_version": "1.96.1+",
     "source": "concept/00_meta/kg_ontology_v2.md",
     "previous_version": "concept/00_meta/kg_data.json",
     "alignment": "RDF 1.2 / RDF-star / SKOS / JSON-LD 1.1 / SHACL"
@@ -838,7 +838,7 @@
       "ex:object": "ex:TypeSystem",
       "ex:source": "TRPL Ch. 3-4",
       "ex:confidence": 1.0,
-      "ex:version": "1.96.0",
+      "ex:version": "1.96.1",
       "ex:reviewed": true,
       "dcterms:created": "2026-06-27",
       "prov:wasDerivedFrom": "https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html"
@@ -851,7 +851,7 @@
       "ex:object": "ex:Ownership",
       "ex:source": "TRPL Ch. 4",
       "ex:confidence": 1.0,
-      "ex:version": "1.96.0",
+      "ex:version": "1.96.1",
       "ex:reviewed": true
     },
     {
@@ -862,7 +862,7 @@
       "ex:object": "ex:Borrowing",
       "ex:source": "TRPL Ch. 10",
       "ex:confidence": 1.0,
-      "ex:version": "1.96.0",
+      "ex:version": "1.96.1",
       "ex:reviewed": true
     },
     {
@@ -873,7 +873,7 @@
       "ex:object": "ex:AffineLogic",
       "ex:source": "concept/04_formal/01_linear_logic.md",
       "ex:confidence": 0.95,
-      "ex:version": "1.96.0",
+      "ex:version": "1.96.1",
       "ex:reviewed": true
     },
     {
@@ -884,7 +884,7 @@
       "ex:object": "ex:SeparationLogic",
       "ex:source": "concept/04_formal/11_separation_logic.md",
       "ex:confidence": 0.95,
-      "ex:version": "1.96.0",
+      "ex:version": "1.96.1",
       "ex:reviewed": true
     },
     {
@@ -895,7 +895,7 @@
       "ex:object": "ex:RegionTypes",
       "ex:source": "concept/04_formal/03_ownership_formal.md",
       "ex:confidence": 0.95,
-      "ex:version": "1.96.0",
+      "ex:version": "1.96.1",
       "ex:reviewed": true
     },
     {
@@ -906,7 +906,7 @@
       "ex:object": "ex:SystemF",
       "ex:source": "concept/04_formal/02_type_theory.md",
       "ex:confidence": 0.9,
-      "ex:version": "1.96.0",
+      "ex:version": "1.96.1",
       "ex:reviewed": true
     },
     {
@@ -917,7 +917,7 @@
       "ex:object": "ex:Borrowing",
       "ex:source": "TRPL Ch. 4",
       "ex:confidence": 1.0,
-      "ex:version": "1.96.0",
+      "ex:version": "1.96.1",
       "ex:reviewed": true
     },
     {
@@ -928,7 +928,7 @@
       "ex:object": "ex:Trait",
       "ex:source": "Rust Reference — Orphan Rules",
       "ex:confidence": 1.0,
-      "ex:version": "1.96.0",
+      "ex:version": "1.96.1",
       "ex:reviewed": true
     },
     {
@@ -939,7 +939,7 @@
       "ex:object": "ex:Generics",
       "ex:source": "TRPL Ch. 17",
       "ex:confidence": 1.0,
-      "ex:version": "1.96.0",
+      "ex:version": "1.96.1",
       "ex:reviewed": true
     }
   ],

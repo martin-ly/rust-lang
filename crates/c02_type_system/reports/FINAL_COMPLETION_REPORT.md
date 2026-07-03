@@ -157,12 +157,14 @@
 cargo run --example rust_190_features_demo
 cargo run --example rust_190_comprehensive_demo
 ```
+
 ### 高级特性演示
 
 ```bash
 cargo run --example rust_190_advanced_features_demo
 cargo run --example rust_190_wasm_demo
 ```
+
 ### 专业模块演示
 
 ```bash
@@ -174,6 +176,7 @@ cargo run --example rust_190_concurrent_async_advanced_demo
 cargo run --example rust_190_memory_safety_advanced_demo
 cargo run --example rust_190_advanced_macros_demo
 ```
+
 ## 项目价值
 
 ### 教育价值
@@ -213,6 +216,6 @@ cargo run --example rust_190_advanced_macros_demo
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

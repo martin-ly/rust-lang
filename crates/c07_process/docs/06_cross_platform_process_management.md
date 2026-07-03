@@ -2,7 +2,7 @@
 
 > **文档定位**: Tier 4 高级主题
 > **最后更新**: 2025-12-25
-> **Rust版本**: 1.92.0+ (Edition 2024)
+> **Rust版本**: 1.96.1+ (Edition 2024)
 > **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](tier_01_foundations/04_faq.md) | [Glossary](tier_01_foundations/03_glossary.md)
 
 ## 📋 目录
@@ -48,7 +48,7 @@
 - **定义**: Rust 1.92.0 跨平台进程管理，包括平台差异概述、Windows 特定功能、Unix/Linux 特定功能、macOS 特定功能、跨平台兼容性处理、最佳实践等
 - **类型**: 高级主题文档
 - **范畴**: 进程管理、跨平台开发
-- **版本**: Rust 1.92.0+ (Edition 2024)
+- **版本**: Rust 1.96.1+ (Edition 2024)
 - **相关概念**: 跨平台、平台特定 API、条件编译、Windows、Linux、macOS、Unix
 
 ### 属性特征
@@ -1501,6 +1501,6 @@ impl CrossPlatformErrorHandler {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

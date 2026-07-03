@@ -1,7 +1,7 @@
-# Rust 1.97 特性速查表 {#rust-197-特性速查表}
+# Rust 1.97 特性速查表（beta / nightly 候选） {#rust-197-特性速查表}
 
-> **EN**: Rust 197 Features Cheatsheet
-> **Summary**: Rust 1.97 特性速查表 Rust 197 Features Cheatsheet. (stub/archive redirect)
+> **EN**: Rust 197 Features Cheatsheet (Beta / Nightly Candidate)
+> **Summary**: Rust 1.97 特性速查表（beta / nightly 候选）。当前最新稳定版为 1.96.1，1.97 尚未 stable。
 > **权威来源**: 本文对应权威来源为 [`concept/07_future/rust_1_97_preview.md`](../../../../concept/07_future/rust_1_97_preview.md)。
 > 本文与权威来源内容高度重叠；`concept/` 版本为项目权威主轨，本文保留作为快速参考。
 > **分级**: [A]
@@ -9,8 +9,8 @@
 > **版本**: Rust 1.97
 > **更新日期**: 2026-06-09
 > **适用版本**: stable (预计 2026-07-XX 发布)
-> **MSRV 注意**: 本项目当前 MSRV 为 1.96.0。1.97 API 使用 `#![allow(clippy::incompatible_msrv)]` 标注，
-> 需要 nightly 1.98.0 编译器或 1.97+ stable 编译器才能实际使用。
+> **MSRV 注意**: 本项目当前 MSRV 为 1.96.1。1.97 API 使用 `#![allow(clippy::incompatible_msrv)]` 标注，
+> 当前需要 nightly 1.98.0 编译器才能实际使用；待 1.97 进入 stable 后可改用 stable 编译器。
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [实验级]

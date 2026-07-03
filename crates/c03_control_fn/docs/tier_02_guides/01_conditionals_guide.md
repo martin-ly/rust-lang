@@ -30,7 +30,7 @@
     - [2.6 完整性检查](#26-完整性检查)
   - [3. if let 表达式](#3-if-let-表达式)
     - [3.1 基本用法](#31-基本用法)
-    - [3.2 链式 if let (Rust 1.92.0+)](#32-链式-if-let-rust-1920)
+    - [3.2 链式 if let (Rust 1.96.1+)](#32-链式-if-let-rust-1920)
     - [3.3 if let 与 else](#33-if-let-与-else)
   - [4. let else 语句 (Rust 1.65+)](#4-let-else-语句-rust-165)
     - [4.1 基本语法](#41-基本语法)
@@ -81,7 +81,7 @@
 - **定义**: 系统化学习 Rust 条件语句的实践指南，包括 if、match、if let 等
 - **类型**: 实践指南文档
 - **范畴**: 控制流、模式匹配
-- **版本**: Rust 1.0+ (基础), Rust 1.65+ (let else), Rust 1.92.0+ (链式 if let)
+- **版本**: Rust 1.0+ (基础), Rust 1.65+ (let else), Rust 1.96.1+ (链式 if let)
 - **相关概念**: 条件语句、模式匹配、控制流、表达式
 
 **条件语句 (Conditional Statements)**:
@@ -720,7 +720,7 @@ fn main() {
 }
 ```
 
-### 3.2 链式 if let (Rust 1.92.0+)
+### 3.2 链式 if let (Rust 1.96.1+)
 
 Rust 1.92.0 引入了链式 if let：
 
@@ -735,7 +735,7 @@ fn main() {
         }
     }
 
-    // Rust 1.92.0+: 链式 if let
+    // Rust 1.96.1+: 链式 if let
     if let Some(v) = value && v > 5 {
         println!("大于5");
     }
@@ -1704,6 +1704,6 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -3,7 +3,7 @@
 > **EN**: Paradigm Transition Matrix
 > **Summary**: Paradigm Transition Matrix. Core Rust concept.
 >
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

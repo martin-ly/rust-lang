@@ -11,7 +11,7 @@
 > **Summary**: Rust 语言特性全量梳理与对称差分析 2026 Rust Language Feature Comprehensive Inventory 2026. (stub/archive redirect)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
-> **版本**: Rust 1.96.0+ (Edition 2024)
+> **版本**: Rust 1.96.1+ (Edition 2024)
 > **梳理日期**: 2026-05-08
 > **修订日期**: 2026-05-08
 > **方法**: 认知视角下的知识完备性检查 + 集合论对称差分析
@@ -166,7 +166,7 @@
 A Δ B = (A \ B) ∪ (B \ A)
 
 A = Rust 生态前沿知识集合
-    = { Rust 1.95.0 stable } ∪ { Rust 1.96.0 stable (2026-05-28) } ∪ { 权威国际化来源 }
+    = { Rust 1.95.0 stable } ∪ { Rust 1.96 stable (1.96.0 于 2026-05-28 首次发布，当前 patch 1.96.1) } ∪ { 权威国际化来源 }
 
 B = 本项目现有知识集合
     = { crates/c01-c13 } ∪ { docs/ } ∪ { knowledge/ } ∪ { content/ }
@@ -2615,8 +2615,8 @@ graph TD
 
 *文档版本: v1.0-draft*
 *生成日期: 2026-05-08*
-*对应 Rust 版本: 1.96.0 (stable) / 1.97.0 (beta) / 1.98.0 (nightly)*
-*项目 MSRV: 1.96.0+ (Edition 2024)*
+*对应 Rust 版本: 1.96.1 (stable) / 1.97.0 (beta) / 1.98.0 (nightly)*
+*项目 MSRV: 1.96.1+ (Edition 2024)*
 
 ---
 
@@ -2625,7 +2625,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

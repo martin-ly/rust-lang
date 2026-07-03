@@ -3,7 +3,7 @@
 > **EN**: Concept Document Standard Template
 > **Summary**: 概念文档标准模板 Concept Document Standard Template.
 >
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2 (理解)
 > **适用范围**: knowledge/ 目录下所有核心概念文档
@@ -376,7 +376,7 @@ fn broken() {}
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.0+
+**对应 Rust 版本**: 1.96.1+
 **最后更新**: 2026-05-09
 
 ---
@@ -386,7 +386,7 @@ fn broken() {}
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

@@ -4,7 +4,7 @@
 > [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)
 >
 > **分级**: [A]
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Edition Guide、RFC 2289 来源标注 [来源: Authority Source Sprint Batch 8]
 
@@ -235,7 +235,7 @@ where
 ---
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

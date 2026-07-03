@@ -499,7 +499,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 11]
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -748,7 +748,7 @@ fn main() {}
 
 > **修正**: **名称唯一性**：1) 同一作用域内不能有两个同名函数；2) trait 方法可同名（通过 trait 区分）；3) 重载（overloading）不支持（除 trait 外）。
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）
 

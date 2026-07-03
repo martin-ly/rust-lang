@@ -80,7 +80,7 @@
 - **定义**: Rust 1.92.0 WasmEdge 容器技术深度集成，包括 Docker 集成、Kubernetes 深度集成、containerd 集成、容器编排最佳实践、生产环境部署、监控与可观测性、安全与隔离等
 - **类型**: 高级主题文档
 - **范畴**: WASM、容器技术
-- **版本**: Rust 1.92.0+ / Edition 2024, WasmEdge 0.13+, Docker 24.0+, Kubernetes 1.28+
+- **版本**: Rust 1.96.1+ / Edition 2024, WasmEdge 0.13+, Docker 24.0+, Kubernetes 1.28+
 - **相关概念**: Docker、Kubernetes、containerd、容器编排、云原生
 
 ### 属性特征
@@ -1550,6 +1550,6 @@ spec:
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

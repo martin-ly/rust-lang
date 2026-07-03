@@ -303,7 +303,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助开发者在 `std::ops::Range` 和 `core::range::Range` 之间选择。核心判断标准是"是否需要保存迭代进度"。
-> **使用建议**: 新代码优先使用 `core::range::Range`（若 1.96.0+ 可用）；需要保存进度的场景（如 `break` 后恢复）保留 `std::ops::Range`。
+> **使用建议**: 新代码优先使用 `core::range::Range`（若 1.96.1+ 可用）；需要保存进度的场景（如 `break` 后恢复）保留 `std::ops::Range`。
 > **关键洞察**: `core::range::Range` 不是 `std::ops::Range` 的替代，而是**语义分层**——前者是"纯值"，后者是"有状态迭代器"。
 
 ---
@@ -350,12 +350,12 @@ let rev = 10..0;
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [RFC 3550](https://github.com/rust-lang/rfcs/pull/3550), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
-> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0 (Edition 2024)
+> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1 (Edition 2024)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-06-19
-**状态**: ✅ 已对齐 Rust 1.96.0 稳定版发布内容
+**状态**: ✅ 已对齐 Rust 1.96.1 稳定版发布内容
 
 ---
 

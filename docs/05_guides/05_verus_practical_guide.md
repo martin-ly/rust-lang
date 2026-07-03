@@ -2,7 +2,7 @@
 
 > **EN**: Verus Practical Guide
 > **Summary**: Verus 实战指南 —— 在 Rust 中写证明 Verus Practical Guide.
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **分级**: [A]
 > **Bloom 层级**: L4-L5 (形式化验证入门 → 演绎推理实践)
 > **对应 Rust 版本**: 1.80.0+ (nightly recommended)

@@ -390,7 +390,7 @@
 | [Rust 的发布流程与 Nightly Rust](../../07_future/50_nightly_rust.md) | L7 前沿趋势层 | 初学者 | 研究级 | P | 理解 | N/A — 流程/生态文档 |
 | [BorrowSanitizer：动态别名规则验证工具](../../07_future/borrow_sanitizer.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/工具链文档 |
 | [Rust 1.95.0 稳定特性](../../07_future/rust_1_95_stabilized.md) | L7 前沿趋势层 | 进阶 | 参考级 | — | — | — |
-| [Rust 1.96.0 稳定特性](../../07_future/rust_1_96_stabilized.md) | L7 前沿趋势层 | 进阶 | 参考级 | — | — | — |
+| [Rust 1.96 稳定特性](../../07_future/rust_1_96_stabilized.md) | L7 前沿趋势层 | 进阶 | 参考级 | — | — | — |
 | [Rust 1.97 前沿特性预览（已归档）](../../07_future/rust_1_97_preview.md) | L7 前沿趋势层 | 专家 | 归档级 | — | — | N/A — 重定向 stub，权威内容见 `rust_1_97_stabilized.md` |
 | [Rust 1.97.0 稳定特性](../../07_future/rust_1_97_stabilized.md) | L7 前沿趋势层 | 进阶 | 参考级 | — | — | — |
 | [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |

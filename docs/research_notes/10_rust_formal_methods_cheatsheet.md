@@ -10,7 +10,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-24
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 
@@ -600,7 +600,7 @@ Coq → Iris → RustBelt → 工具开发
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 >
 > **[来源: [crates.io](https://crates.io/)]**
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -644,7 +644,7 @@ Coq → Iris → RustBelt → 工具开发
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

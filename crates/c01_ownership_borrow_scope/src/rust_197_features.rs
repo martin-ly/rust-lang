@@ -1,7 +1,7 @@
-//! Rust 1.97 稳定特性 —— 所有权、借用与作用域
+//! Rust 1.97 Nightly 前瞻/候选特性 —— 所有权、借用与作用域
 //!
-//! 本模块演示 Rust 1.97.0 中稳定化的所有权/指针相关 API。
-//! 由于当前工具链为 Rust 1.96.0，实际代码使用等价的 1.96 兼容实现；
+//! 本模块演示 Rust 1.97.0 候选/nightly 中的所有权/指针相关 API。
+//! 由于当前工具链为 Rust 1.96.1，实际代码使用等价的 1.96.1 兼容实现；
 //! 对应的 1.97 原生 API 调用以 `#[cfg(nightly)]` 分支保留，可通过
 //! `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 #![allow(clippy::incompatible_msrv)]

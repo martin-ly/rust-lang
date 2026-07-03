@@ -6,7 +6,7 @@
 > - [数据库系统](../../../../concept/06_ecosystem/37_database_systems.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
 >
@@ -25,7 +25,7 @@
 > **分级**: [B]
 > **Bloom 层级**: L3-L5 (应用/分析/评价)
 > **知识领域**: 日期时间处理、时区计算、格式化解析、Duration 语义
-> **对应 Rust 版本**: 1.96.0+ (chrono 0.4.45+)
+> **对应 Rust 版本**: 1.96.1+ (chrono 0.4.45+)
 
 ---
 
@@ -273,7 +273,7 @@ let d = NaiveDate::parse_from_str("2026-6-9", "%Y-%m-%d");
 > **权威来源**: [chrono docs.rs](https://docs.rs/chrono/latest/chrono/) · [Rust Standard Library – std::time](https://doc.rust-lang.org/std/time/) · [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **最后更新**: 2026-06-29
 > **状态**: ✅ 已完成
 

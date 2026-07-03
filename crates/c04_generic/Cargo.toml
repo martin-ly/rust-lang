@@ -2,7 +2,7 @@
 name = "c04_generic"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.96.0"
+rust-version = "1.96.1"
 authors = ["Rust Learning Community"]
 keywords = ["generics", "traits", "type-system", "monomorphization"]
 categories = ["no-std", "development-tools::testing"]

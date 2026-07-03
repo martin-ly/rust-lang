@@ -1,10 +1,10 @@
 # Rust 分层概念知识体系 v3.0
 
-> **Rust版本**: 1.96.0 stable (2026-05-28)
+> **Rust版本**: 1.96.1 stable (2026-07-04)
 > **Edition**: 2024
 > **状态**: v3.0 正式发布 | 302 concept 文件（共 336） | 2,908 Markdown | 1,524 Rust 源文件 | Bloom 双标签覆盖率 99.6% | Phase 1-5 完成 | 活跃锚点 0 | 代码块编译通过率 100.0% | 概念国际化元数据覆盖率 EN/Summary/来源 100% | 2026-06-21
 
-[![Rust](https://img.shields.io/badge/rust-1.96.0+-blue.svg)](https://www.rust-lang.org)
+[![Rust](https://img.shields.io/badge/rust-1.96.1+-blue.svg)](https://www.rust-lang.org)
 [![Edition](https://img.shields.io/badge/edition-2024-purple.svg)](https://doc.rust-lang.org/edition-guide/rust-2024/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![KB Quality](https://img.shields.io/badge/kb_quality-23_risk_files-yellow.svg)](reports/kb_quality_dashboard.md)
@@ -96,7 +96,7 @@ cargo test --workspace
 
 ### 工具链说明
 
-- 默认工具链为 **stable 1.96.0**（`rust-toolchain.toml` 使用 `stable` 通道）。
+- 默认工具链为 **stable 1.96.1**（`rust-toolchain.toml` 使用 `stable` 通道）。
 - `crates/c02_type_system`、`c04_generic`、`c06_async`、`c08_algorithms`、`c13_embedded`、`exercises` 中的 nightly-only 预览模块通过各 crate 的 `build.rs` 自动检测 nightly 并启用；stable 默认构建不会编译这些不稳定特性。
 - 如需本地验证 nightly 预览模块：
 
@@ -261,6 +261,6 @@ rust-lang/
 > **权威来源对齐变更日志**: 2026-06-21 全面更新 README 数据，对齐实际项目规模（288 活跃 concept / 共 322、17 workspace members、2,890 文档）
 
 **文档版本**: 3.0
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 门面数据全面对齐 2026-06-21

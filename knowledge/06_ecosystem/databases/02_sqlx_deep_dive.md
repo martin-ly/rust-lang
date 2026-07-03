@@ -4,7 +4,7 @@
 > **Summary**: SQLx 深度解析 Sqlx Deep Dive.
 > **Bloom 层级**: 理解
 > **版本**: SQLx 0.8.6+
-> **Rust 版本**: 1.96.0+
+> **Rust 版本**: 1.96.1+
 > **难度**: 中级到高级
 > **关键词**: 异步、编译时检查、类型安全
 > **权威来源**: [SQLx 官方文档](https://docs.rs/sqlx/latest/sqlx/), [SQLx GitHub](https://github.com/launchbadge/sqlx)

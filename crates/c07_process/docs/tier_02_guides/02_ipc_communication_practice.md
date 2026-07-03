@@ -3,7 +3,7 @@
 > **文档类型**: 实践指南
 > **难度**: ⭐⭐⭐ 中级
 > **预计时间**: 3小时
-> **适用版本**: Rust 1.92.0+
+> **适用版本**: Rust 1.96.1+
 
 ---
 
@@ -64,7 +64,7 @@
     - [10.1 输入验证](#101-输入验证)
     - [10.2 权限控制](#102-权限控制)
   - [下一步](#下一步)
-  - [**适用版本**: Rust 1.92.0+](#适用版本-rust-1920)
+  - [**适用版本**: Rust 1.96.1+](#适用版本-rust-1920)
 
 ---
 
@@ -1816,7 +1816,7 @@ fn check_peer_uid(stream: &UnixStream) -> Result<u32, Box<dyn std::error::Error>
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-22
-**适用版本**: Rust 1.92.0+
+**适用版本**: Rust 1.96.1+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1824,6 +1824,6 @@ fn check_peer_uid(stream: &UnixStream) -> Result<u32, Box<dyn std::error::Error>
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

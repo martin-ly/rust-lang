@@ -3,7 +3,7 @@
 > **EN**: Rust Formal Verification
 > **Summary**: Rust 形式化验证学术导读 Rust Formal Verification. (stub/archive redirect)
 >
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
 > **最后更新日期**: 2026-05-08
@@ -488,7 +488,7 @@ impl<T> Vec<T> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.2
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 权威来源对齐完成 (Batch 9)
 

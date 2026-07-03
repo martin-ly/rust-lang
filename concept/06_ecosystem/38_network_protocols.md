@@ -222,7 +222,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 > **权威来源**: [RFC 9000](https://www.rfc-editor.org/rfc/rfc9000.html) · [RFC 9114](https://www.rfc-editor.org/rfc/rfc9114.html) · [quinn Documentation](https://docs.rs/quinn/) · [aya-rs Documentation](https://aya-rs.dev/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 工业系统深度对齐
 

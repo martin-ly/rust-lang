@@ -70,7 +70,7 @@
 - **定义**: Rust 异步运行时深度对比，包括 Glommio、Tokio、Smol、async-std [已归档]
 - **类型**: 对比分析文档
 - **范畴**: 异步编程、运行时对比
-- **版本**: Rust 1.92.0+, 2025
+- **版本**: Rust 1.96.1+, 2025
 - **相关概念**: 异步运行时、Glommio、Tokio、Smol、async-std [已归档]、性能对比
 
 ### 属性特征
@@ -777,6 +777,6 @@ async fn main() {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

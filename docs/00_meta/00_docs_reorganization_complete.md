@@ -2,7 +2,7 @@
 
 > **EN**: Docs Reorganization Complete
 > **Summary**: Docs目录重组完成报告 Docs Reorganization Complete. (stub/archive redirect)
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2 (理解)
 > **重组日期**: 2026-03-18
@@ -136,7 +136,7 @@ docs/
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

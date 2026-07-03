@@ -43,7 +43,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Install Rust via rustup | 15m | `rustc --version` shows ≥ 1.96.0 |
+| Install Rust via rustup | 15m | `rustc --version` shows ≥ 1.96.1 |
 | Configure IDE (rust-analyzer) | 15m | Auto-completion works for `Vec::` |
 | Read `concept/01_foundation/00_hello_world.md` | 30m | Can explain `fn main()`, `println!` |
 | Write a temperature converter | 30m | `cargo run` produces correct output |
@@ -262,6 +262,6 @@ After completing this path, you should be able to:
 
 ---
 
-> **Version**: Rust 1.96.0+ (Edition 2024)
+> **Version**: Rust 1.96.1+ (Edition 2024)
 > **Last Updated**: 2026-06-09
 > **Maintainer**: Rust Learning Community

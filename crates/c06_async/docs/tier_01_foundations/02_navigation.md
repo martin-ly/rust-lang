@@ -10,7 +10,7 @@
 
 # C06 Async 主索引导航
 
-> **文档版本**: Rust 1.92.0+ | **更新日期**: 2025-12-11
+> **文档版本**: Rust 1.96.1+ | **更新日期**: 2025-12-11
 > **文档层级**: Tier 1 - 基础概念 | **文档类型**: 📋 导航索引
 
 ---
@@ -162,7 +162,7 @@
 ### 核心参考
 
 | 文档                                                                    | 说明                  | 难度       | 推荐度     |
-| :--- | :--- | :--- | :--- || [01\_异步语言特性参考.md](../tier_03_references/01_async_language_features_reference.md) | Rust 1.92.0+ 完整特性 | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ |
+| :--- | :--- | :--- | :--- || [01\_异步语言特性参考.md](../tier_03_references/01_async_language_features_reference.md) | Rust 1.96.1+ 完整特性 | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ |
 | [02_tokio_complete_api_reference.md](../tier_03_references/02_tokio_complete_api_reference.md)  | Tokio 深度 API 文档   | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   |
 | [03\_异步生态系统参考.md](../tier_03_references/03_async_ecosystem_reference.md) | 生态全景和库选择      | ⭐⭐⭐     | ⭐⭐⭐⭐   |
 | [04_pin_and_unsafe_reference.md](../tier_03_references/04_pin_and_unsafe_reference.md)    | Pin/Unpin 深度解析    | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   |
@@ -407,7 +407,7 @@
 ---
 
 **文档维护**: C06 Async Team | **质量评分**: 95/100
-**最后更新**: 2025-12-11 | **Rust 版本**: 1.92.0+
+**最后更新**: 2025-12-11 | **Rust 版本**: 1.96.1+
 
 ---
 
@@ -416,6 +416,6 @@
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

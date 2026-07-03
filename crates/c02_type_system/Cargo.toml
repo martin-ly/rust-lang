@@ -2,7 +2,7 @@
 name = "c02_type_system"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.96.0"
+rust-version = "1.96.1"
 authors = ["Rust Learning Community"]
 keywords = ["type-system", "generics", "traits", "pattern-matching"]
 categories = ["no-std", "development-tools::testing"]

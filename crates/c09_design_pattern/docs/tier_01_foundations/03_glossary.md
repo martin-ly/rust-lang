@@ -6,7 +6,7 @@
 > **相关文档**: [项目概览](01_project_overview.md) | [主索引导航](02_navigation.md) | [常见问题](04_faq.md) | [完整术语表](tier_01_foundations/03_glossary.md)
 
 **最后更新**: 2025-12-25
-**适用版本**: Rust 1.92.0+ (Edition 2024)
+**适用版本**: Rust 1.96.1+ (Edition 2024)
 **文档类型**: 📚 基础参考
 
 ---
@@ -98,7 +98,7 @@
 
 **单例模式 (Singleton)**: 确保一个类只有一个实例，并提供全局访问点。
 
-**Rust 实现**: `OnceLock`, `LazyLock` (Rust 1.92.0+)
+**Rust 实现**: `OnceLock`, `LazyLock` (Rust 1.96.1+)
 
 ```rust
 use std::sync::OnceLock;
@@ -222,7 +222,7 @@ fn get_instance() -> &'static Config {
 
 #### OnceLock
 
-**定义**: Rust 1.92.0+ 标准库提供的线程安全的单次初始化类型（自 Rust 1.90 引入）。
+**定义**: Rust 1.96.1+ 标准库提供的线程安全的单次初始化类型（自 Rust 1.90 引入）。
 
 **用途**: 全局单例、延迟初始化
 
@@ -359,7 +359,7 @@ pub trait Future {
 **文档维护**: Documentation Team
 **创建日期**: 2025-12-25
 **最后更新**: 2025-12-25
-**适用版本**: Rust 1.92.0+
+**适用版本**: Rust 1.96.1+
 **文档状态**: ✅ 活跃维护
 ---
 
@@ -368,6 +368,6 @@ pub trait Future {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -207,7 +207,7 @@ impl SpiDevice<u8> for MySpi {
 ---
 
 **文档版本**: 1.0
-**对应版本**: embedded-hal 1.0.0 / Embassy 0.5.x / Rust 1.96.0+
+**对应版本**: embedded-hal 1.0.0 / Embassy 0.5.x / Rust 1.96.1+
 **最后更新**: 2026-06-01
 **状态**: ✅ 概念文档创建完成
 

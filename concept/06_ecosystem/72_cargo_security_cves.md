@@ -160,7 +160,7 @@ CVE-2026-5223 (Medium)
 └── 影响: 仅第三方 registry 用户（crates.io 本就不允许 symlink）
 
 共同建议
-├── 升级到 Rust 1.96.0+
+├── 升级到 Rust 1.96.1+
 ├── 审计 .cargo/registry/src 中是否存在异常符号链接
 ├── 对私有 registry 启用上传校验，拒绝符号链接
 └── 使用 cargo-audit 监控依赖中的已知 CVE
@@ -175,10 +175,10 @@ CVE-2026-5223 (Medium)
 ### 2.1 立即升级工具链
 
 ```bash
-# 推荐做法：升级到 Rust 1.96.0 或更高版本
+# 推荐做法：升级到 Rust 1.96.1 或更高版本
 rustup update stable
-rustc --version  # >= 1.96.0
-cargo --version  # >= 1.96.0
+rustc --version  # >= 1.96.1
+cargo --version  # >= 1.96.1
 ```
 
 > 两个 CVE 的受影响版本都是 **Rust 1.96.0 之前的 Cargo**（CVE-2026-5222 具体为 1.68 到 1.96 之间）。升级是最直接、最有效的缓解措施。
@@ -303,7 +303,7 @@ graph TD
     Q2 -->|否| NOT
     Q2 -->|是| Q3{"是否能完全控制 registry 服务端并禁用 symlink / 隔离 URL？"}
     Q3 -->|是| MIT["⚠️ 可部分缓解，但升级仍是最优解"]
-    Q3 -->|否| TRUE["✅ 必须升级 Rust 1.96.0+"]
+    Q3 -->|否| TRUE["✅ 必须升级 Rust 1.96.1+"]
 
     style TRUE fill:#c8e6c9
     style NOT fill:#ffebee
@@ -358,13 +358,13 @@ graph TD
 
 > ❌ 错误做法：在私有 registry 服务端拒绝符号链接，但客户端仍使用 Rust < 1.96.0。
 >
-> ✅ 正确做法：服务端限制 + 客户端升级到 1.96.0+。服务端限制只能防御上传阶段，无法防御已存在的历史恶意 tarball 被旧 Cargo 解压。
+> ✅ 正确做法：服务端限制 + 客户端升级到 1.96.1+。服务端限制只能防御上传阶段，无法防御已存在的历史恶意 tarball 被旧 Cargo 解压。
 
 ### 10.3 常见错误：把 `.git` 后缀当作同一 registry
 
 > ❌ 错误做法：对 sparse registry，手动配置 `https://example.com/index` 与 `https://example.com/index.git` 共享同一 token。
 >
-> ✅ 正确做法：升级到 Rust 1.96.0+，让 Cargo 只对 git 协议 registry 做 `.git` 规范化；对 sparse registry 应把它们视为不同端点。
+> ✅ 正确做法：升级到 Rust 1.96.1+，让 Cargo 只对 git 协议 registry 做 `.git` 规范化；对 sparse registry 应把它们视为不同端点。
 
 ---
 
@@ -377,7 +377,7 @@ graph TD
 <details>
 <summary>✅ 答案与解析</summary>
 
-不会。官方公告明确指出 crates.io 用户不受这两个 CVE 影响：crates.io 禁止符号链接（免疫 CVE-2026-5223），其架构也不满足 CVE-2026-5222 的攻击前提。但升级 Rust 1.96.0+ 仍是推荐做法。
+不会。官方公告明确指出 crates.io 用户不受这两个 CVE 影响：crates.io 禁止符号链接（免疫 CVE-2026-5223），其架构也不满足 CVE-2026-5222 的攻击前提。但升级 Rust 1.96.1+ 仍是推荐做法。
 </details>
 
 ---
@@ -425,7 +425,7 @@ Cargo 会**拒绝解压任何包含符号链接的 crate tarball**，无论 tarb
 <details>
 <summary>✅ 答案与解析</summary>
 
-1. 所有开发者与 CI 升级到 Rust 1.96.0+。
+1. 所有开发者与 CI 升级到 Rust 1.96.1+。
 2. 在 registry 服务端拒绝上传包含符号链接的 tarball，并启用 checksum / 签名校验。
 3. 使用 `cargo vendor` 或 source replacement 锁定依赖源码，并在 CI 中做 diff 校验。
 4. 运行 `cargo audit` 监控已知 CVE。
@@ -456,7 +456,7 @@ Cargo 会**拒绝解压任何包含符号链接的 crate tarball**，无论 tarb
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---:|
 | 第三方 registry 允许 symlink ⟹ CVE-2026-5223 风险 | 旧 Cargo 会越界解压 | 必须升级并审计 tarball | 高 |
-| sparse registry URL 被不规范归一化 ⟹ CVE-2026-5222 风险 | `.git` 后缀被错误剥离 | 升级到 1.96.0+，并隔离不同 registry 凭证 | 高 |
+| sparse registry URL 被不规范归一化 ⟹ CVE-2026-5222 风险 | `.git` 后缀被错误剥离 | 升级到 1.96.1+，并隔离不同 registry 凭证 | 高 |
 | crates.io 禁止 symlink / 不满足域名前提 ⟹ 免疫 | 官方公告明确 | 仅使用 crates.io 的开发者无直接暴露 | 高 |
 | CI 集成 cargo-audit + vendor ⟹ 可持续监控 | 已知 CVE 数据库更新 | 能及时响应未来供应链漏洞 | 高 |
 

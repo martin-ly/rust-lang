@@ -3,7 +3,7 @@
 > **EN**: Quick Reference
 > **Summary**: Quick Reference. Core Rust concept.
 >
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: 记忆 → 应用
 > **定位**：面试前/编码时的快速查阅手册。每个核心概念"一页纸"——定义 + 代码 + 错误码 + 关联概念。
@@ -756,7 +756,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 > [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

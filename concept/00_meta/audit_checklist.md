@@ -3,7 +3,7 @@
 > **EN**: Audit Checklist
 > **Summary**: Audit Checklist. Core Rust concept.
 > **受众**: [专家]
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **Bloom 层级**: 应用
 > **定位**: 本文件定义 `concept/` 知识体系的**质量门禁**，用于定期审计概念文件的一致性、完备性和关系清晰度。
 > **使用方法**: 每轮内容更新后，逐条检查并标记状态。
@@ -332,7 +332,7 @@ python scripts/cross_concept_diff.py
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 审计清单同步完成（Phase 12 后续）
 

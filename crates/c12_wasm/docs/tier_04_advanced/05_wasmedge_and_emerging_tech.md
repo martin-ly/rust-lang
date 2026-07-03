@@ -6,7 +6,7 @@
 > **相关文档**: [WASI 深入](01_wasi_in_depth.md) | [生产级部署](03_production_deployment.md)
 
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2, WasmEdge 0.13+
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2, WasmEdge 0.13+
 
 ---
 
@@ -66,7 +66,7 @@
 - **定义**: Rust 1.92.0 WasmEdge 与新技术深入，包括 WasmEdge 深度解析、WASI-NN AI 推理支持、WASI-Crypto 密码学支持、Component Model 组件化架构、多线程 WASM、运行时性能对比、WasmEdge 源码分析、云原生应用场景、实战项目示例等
 - **类型**: 高级主题文档
 - **范畴**: WASM、运行时技术
-- **版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2, WasmEdge 0.13+
+- **版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2, WasmEdge 0.13+
 - **相关概念**: WasmEdge、WASI-NN、WASI-Crypto、Component Model、多线程 WASM、云原生
 
 ### 属性特征
@@ -805,7 +805,7 @@ fn process_data(data: &str) -> String {
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2, WasmEdge 0.13+
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2, WasmEdge 0.13+
 
 ---
 
@@ -814,6 +814,6 @@ fn process_data(data: &str) -> String {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

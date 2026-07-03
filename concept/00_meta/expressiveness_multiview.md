@@ -708,7 +708,7 @@ graph TD
 > [Milner *The Polyadic π-Calculus*](https://doi.org/10.1007/BFb0030902) ·
 > [Honda *Session Types*](https://doi.org/10.1016/0304-3975(92)00075-8) ·
 > [Reynolds *Separation Logic*](https://doi.org/10.1016/S1571-0661(04)80968-1)
-> **Rust 版本**: 1.96.0 stable (Edition 2024)
+> **Rust 版本**: 1.96.1 stable (Edition 2024)
 > **文档版本**: 1.0
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 表达力多视角深化 v1.0

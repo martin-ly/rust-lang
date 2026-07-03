@@ -1,4 +1,4 @@
-// Rust 1.97.0 API 可用性探测程序
+// Rust 1.97.0 候选 API 可用性探测程序
 // 用法（在任意 Rust 环境下）:
 //   rustc --edition 2024 scripts/probe_rust_197_apis.rs -o /tmp/probe_197 && /tmp/probe_197
 // 本程序通过调用 rustc 编译临时片段来探测 API，主程序始终退出码 0，
@@ -43,7 +43,7 @@ fn probe(name: &str, code: &str) -> bool {
 }
 
 fn main() {
-    println!("Probing Rust 1.97.0 APIs...\n");
+    println!("Probing Rust 1.97.0 candidate APIs...\n");
 
     let mut results = Vec::new();
 
@@ -222,7 +222,7 @@ fn main() {
     let total = results.len();
 
     println!(
-        "\nProbe complete: {}/{} expected Rust 1.97.0 APIs available on this toolchain.",
+        "\nProbe complete: {}/{} expected Rust 1.97.0 candidate APIs available on this toolchain.",
         available, total
     );
 }

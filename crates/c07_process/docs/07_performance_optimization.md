@@ -2,7 +2,7 @@
 
 > **文档定位**: Tier 4 高级主题
 > **最后更新**: 2025-12-25
-> **Rust版本**: 1.92.0+ (Edition 2024)
+> **Rust版本**: 1.96.1+ (Edition 2024)
 > **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](tier_01_foundations/04_faq.md) | [Glossary](tier_01_foundations/03_glossary.md)
 
 ## 📋 目录
@@ -44,7 +44,7 @@
 - **定义**: Rust 进程管理的性能优化技术，包括内存管理、CPU 优化、I/O 优化、并发优化和性能监控
 - **类型**: 性能优化文档
 - **范畴**: 进程管理、性能优化
-- **版本**: Rust 1.92.0+
+- **版本**: Rust 1.96.1+
 - **相关概念**: 性能优化、内存管理、CPU 优化、I/O 优化、并发优化、性能监控
 
 ### 属性特征
@@ -1900,6 +1900,6 @@ impl Default for TrendDirection {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

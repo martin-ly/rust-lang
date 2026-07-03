@@ -2,7 +2,7 @@
 
 > **文档定位**: Tier 4 高级主题
 > **最后更新**: 2025-12-11
-> **Rust版本**: 1.92.0+ (Edition 2024)（兼容 Rust 1.90+ 特性）
+> **Rust版本**: 1.96.1+ (Edition 2024)（兼容 Rust 1.90+ 特性）
 
 ## 📋 目录
 
@@ -48,7 +48,7 @@
 - **定义**: Rust 1.92.0 架构模式演进，包括分层架构、微服务架构、事件驱动架构、CQRS & Event Sourcing、Hexagonal Architecture、架构演进路径等
 - **类型**: 高级主题文档
 - **范畴**: 设计模式、系统架构
-- **版本**: Rust 1.92.0+ (Edition 2024)
+- **版本**: Rust 1.96.1+ (Edition 2024)
 - **相关概念**: 分层架构、微服务、事件驱动、CQRS、Event Sourcing、Hexagonal Architecture、Clean Architecture
 
 ### 属性特征
@@ -947,6 +947,6 @@ pub mod infrastructure {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -10,7 +10,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-26
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 结构迁回完成，权威国际化来源对齐升级完成
 > **用途**: 统一说明 research_notes 实际结构、归档约定、入口与索引关系，便于维护与查找
 
@@ -44,7 +44,7 @@
 
 1. **结构透明**：实际目录与文件清单与 README/INDEX 一致
 2. **归档清晰**：已归档项（Aeneas、coq-of-rust、coq_skeleton）入口统一指向 archive
-3. **版本统一**：全目录元数据默认 Rust 1.96.0+ (Edition 2024)
+3. **版本统一**：全目录元数据默认 Rust 1.96.1+ (Edition 2024)
 4. **单入口**：首次使用从 [00_ORGANIZATION_AND_NAVIGATION](10_00_organization_and_navigation.md) 或 [README](README.md) 进入
 
 ---
@@ -193,7 +193,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 - [x] `docs/research_notes` 下无未说明的空目录
 - [x] README/INDEX 中关于子目录的链接已指向 `docs/research_notes` 下实际路径
 - [x] README/INDEX/本文件状态已更新为 ✅ 权威国际化来源对齐升级完成
-- [x] 全目录元数据版本统一为 Rust 1.96.0+ (Edition 2024)
+- [x] 全目录元数据版本统一为 Rust 1.96.1+ (Edition 2024)
 - [x] 每篇迁回/新建笔记补充至少 2-3 个权威国际化来源标注
 - [x] 自动化检查脚本可检测空目录、元数据版本、来源标注
 
@@ -208,7 +208,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 >
 > **[来源: [crates.io](https://crates.io/)]**
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -258,7 +258,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.3
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-06-29
 **状态**: ✅ 结构迁回完成，权威国际化来源对齐升级完成
 

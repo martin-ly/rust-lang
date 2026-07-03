@@ -2,7 +2,7 @@
 
 > **文档类型**: 高级主题
 > **难度**: ⭐⭐⭐⭐⭐
-> **适用版本**: Rust 1.92.0+
+> **适用版本**: Rust 1.96.1+
 > **前置知识**: [性能优化参考](../tier_03_references/05_performance_optimization_reference.md)
 
 ---
@@ -59,7 +59,7 @@
   - [12. 优化清单](#12-优化清单)
     - [12.1 性能优化检查表](#121-性能优化检查表)
     - [12.2 性能审查流程](#122-性能审查流程)
-  - [**适用版本**: Rust 1.92.0+](#适用版本-rust-1920)
+  - [**适用版本**: Rust 1.96.1+](#适用版本-rust-1920)
 
 ---
 
@@ -72,7 +72,7 @@
 - **定义**: Rust 1.92.0 性能工程实践，包括性能分析方法论、性能剖析工具、热点分析、性能调优策略、零拷贝技术、生产环境优化、实战案例、最佳实践、高级性能模式、实时性能监控、性能调试技巧等
 - **类型**: 高级主题文档
 - **范畴**: 进程管理、性能优化
-- **版本**: Rust 1.92.0+ (Edition 2024)
+- **版本**: Rust 1.96.1+ (Edition 2024)
 - **相关概念**: 性能分析、性能剖析、热点分析、性能调优、零拷贝、性能监控
 
 ### 属性特征
@@ -1685,7 +1685,7 @@ pub struct ReviewReport {
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-22
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+
+**适用版本**: Rust 1.96.1+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1693,6 +1693,6 @@ pub struct ReviewReport {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

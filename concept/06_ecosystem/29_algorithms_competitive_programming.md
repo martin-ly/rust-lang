@@ -806,7 +806,7 @@ temp.extend_from_slice(&nums[..]);
 > **权威来源对齐变更日志**: 2026-05-22 新增算法与竞赛编程概念文件，覆盖 CLRS、LeetCode、Codeforces、VeriContest、Kani 等权威来源 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 初始版本完成
 

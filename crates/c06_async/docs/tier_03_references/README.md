@@ -18,7 +18,7 @@ Tier 3 提供深度技术参考，包括语言特性、API 文档、生态系统
 
 | #   | 文档 | 说明  | 难度  | 推荐度 | 状态    |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 01  | [异步语言特性参考](01_async_language_features_reference.md) | Rust 1.93.0+ 完整特性 | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ | ✅ 完成 |
+| 01  | [异步语言特性参考](01_async_language_features_reference.md) | Rust 1.96.1+ 完整特性 | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ | ✅ 完成 |
 | 02  | [Tokio完整API参考](02_tokio_complete_api_reference.md) | Tokio 1.x 深度API     | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐ | ✅ 完成 |
 | 03  | [异步生态系统参考](03_async_ecosystem_reference.md) | 生态全景与库选择      | ⭐⭐⭐     | ⭐⭐⭐⭐   | ✅ 完成 |
 | 04  | [Pin与Unsafe参考](04_pin_and_unsafe_reference.md)   | Pin机制深度解析       | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | ✅ 完成 |
@@ -202,7 +202,7 @@ Tier 3 提供深度技术参考，包括语言特性、API 文档、生态系统
 ---
 
 **目录维护**: C06 Async Team | **质量评分**: 95/100
-**最后更新**: 2025-12-11 | **Rust 版本**: 1.93.0+
+**最后更新**: 2025-12-11 | **Rust 版本**: 1.96.1+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -210,6 +210,6 @@ Tier 3 提供深度技术参考，包括语言特性、API 文档、生态系统
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -2,7 +2,7 @@
 >
 > **EN**: Concept Definition Decision Forest
 > **Summary**: Concept Definition Decision Forest. Core Rust concept.
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **受众**: [专家]
 > **Bloom 层级**: 元（Meta）
 > **定位**: 本文件为 L1-L4 核心概念建立从**定义**出发的完整判定链：**前提假设 → 推理规则 → 判定条件 → 边界 → 失效模式**。与 `theorem_inference_forest.md`（从 L4 公理出发的定理链）形成互补：后者回答「安全保证从哪来」，本文件回答「编译器/开发者如何逐步判定代码是否合法」。

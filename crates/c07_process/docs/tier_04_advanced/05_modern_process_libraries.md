@@ -2,7 +2,7 @@
 
 > **文档类型**: 高级主题
 > **难度**: ⭐⭐⭐⭐
-> **适用版本**: Rust 1.92.0+
+> **适用版本**: Rust 1.96.1+
 > **前置知识**: [异步进程管理](../tier_02_guides/03_async_process_management.md)
 
 ---
@@ -68,7 +68,7 @@
 - **定义**: Rust 1.92.0 现代进程库，包括 Tokio 进程管理、第三方库概览、库对比分析、库选择指南、实战案例、最佳实践、高级库集成模式、性能优化实战、生产环境部署等
 - **类型**: 高级主题文档
 - **范畴**: 进程管理、库生态
-- **版本**: Rust 1.92.0+ (Edition 2024)
+- **版本**: Rust 1.96.1+ (Edition 2024)
 - **相关概念**: Tokio、daemonize、nix、sysinfo、procfs、duct、users、caps
 
 ### 属性特征
@@ -1612,7 +1612,7 @@ impl ProcessMetrics {
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-22
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+
+**适用版本**: Rust 1.96.1+
 
 ---
 
@@ -1621,6 +1621,6 @@ impl ProcessMetrics {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

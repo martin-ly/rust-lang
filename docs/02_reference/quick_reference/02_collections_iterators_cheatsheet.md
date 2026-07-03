@@ -90,7 +90,7 @@
 > **快速参考** | [完整文档](../../../crates/c03_control_fn/docs/tier_03_references/02_iterators_reference.md) | [代码示例](../../../crates/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -1419,7 +1419,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 
 **最后更新**: 2026-05-08
 **维护者**: 文档团队
-**状态**: ✅ **Rust 1.96.0 更新完成**
+**状态**: ✅ **Rust 1.96.1 更新完成**
 
 🎯 **掌握集合与迭代器，高效处理数据！**
 ---
@@ -1429,7 +1429,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

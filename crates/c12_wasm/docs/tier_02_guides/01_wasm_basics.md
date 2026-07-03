@@ -6,7 +6,7 @@
 > **相关文档**: [项目概览](../tier_01_foundations/01_project_overview.md) | [主索引导航](../tier_01_foundations/02_navigation.md)
 
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 
 ---
 
@@ -44,7 +44,7 @@
     - [示例 4: 结构体和方法](#示例-4-结构体和方法)
     - [示例 5: 完整的 WAT 文本格式示例](#示例-5-完整的-wat-文本格式示例)
   - [📚 相关资源](#-相关资源)
-  - [**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
+  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
 
 ---
 
@@ -57,7 +57,7 @@
 - **定义**: WebAssembly 核心概念和实践的基础指南
 - **类型**: 基础指南文档
 - **范畴**: WebAssembly、系统编程
-- **版本**: Rust 1.92.0+, WASM 2.0, WASI 0.2
+- **版本**: Rust 1.96.1+, WASM 2.0, WASI 0.2
 - **相关概念**: WebAssembly、WASI、线性内存、模块结构
 
 **WebAssembly (WASM)**:
@@ -588,7 +588,7 @@ wasmtime example.wasm --invoke fib 10   # 输出: 89
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -596,6 +596,6 @@ wasmtime example.wasm --invoke fib 10   # 输出: 89
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

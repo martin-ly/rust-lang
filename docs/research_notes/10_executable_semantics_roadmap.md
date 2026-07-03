@@ -9,7 +9,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 与 K-Framework、PLT Redex 等可执行语义工具的对接可能性与路线图
 > **参考**: [RustSEM (K-Framework, 2024)](https://link.springer.com/article/10.1007/s10703-024-00460-3)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](10_international_formal_verification_index.md)
@@ -173,7 +173,7 @@
 
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.96.0+
+> **适用版本**: Rust 1.96.1+
 
 详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
@@ -185,7 +185,7 @@
 
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -231,7 +231,7 @@
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

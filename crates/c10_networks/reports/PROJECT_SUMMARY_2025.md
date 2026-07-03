@@ -364,7 +364,7 @@ criterion = { version = "0.5", features = ["html_reports"] }
 
 **报告生成时间**: 2025年1月
 **项目版本**: v0.1.0
-**Rust 版本**: 1.89+
+**Rust 版本**: 1.96.1+
 **维护状态**: 活跃开发中
 ---
 
@@ -373,6 +373,6 @@ criterion = { version = "0.5", features = ["html_reports"] }
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

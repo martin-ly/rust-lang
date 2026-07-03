@@ -6,7 +6,7 @@
 > - [响应式编程](../../../../concept/06_ecosystem/40_reactive_programming.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
 >
@@ -30,7 +30,7 @@
 >
 > **知识领域**: 跨平台 GUI、Web 组件、桌面应用、响应式 UI、即时模式 GUI、Elm 架构
 >
-> **对应 Rust 版本**: 1.96.0+ (Tauri 2.11 / Dioxus 0.7 / Leptos 0.8 / egui 0.34 / iced 0.14)
+> **对应 Rust 版本**: 1.96.1+ (Tauri 2.11 / Dioxus 0.7 / Leptos 0.8 / egui 0.34 / iced 0.14)
 
 ---
 
@@ -365,7 +365,7 @@ let window = web_sys::window().unwrap();
 > [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **最后更新**: 2026-06-29
 > **状态**: ✅ 已完成
 

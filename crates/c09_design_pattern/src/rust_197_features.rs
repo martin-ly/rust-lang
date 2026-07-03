@@ -1,8 +1,8 @@
-//! Rust 1.97 稳定特性 —— 设计模式
+//! Rust 1.97 Nightly 前瞻/候选特性 —— 设计模式
 //! Rust 1.97.0 stabilized features —— design patterns
 //!
 //! 本文件展示与设计模式（Null Object、Value Object、Factory）相关的 Rust 1.97.0 稳定特性。
-//! 当前工具链为 Rust 1.96.0，1.97 原生调用以 `#[cfg(nightly)]` 分支保留，可通过
+//! 当前工具链为 Rust 1.96.1，1.97 原生调用以 `#[cfg(nightly)]` 分支保留，可通过
 //! `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 //! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。
 #![allow(clippy::incompatible_msrv)]

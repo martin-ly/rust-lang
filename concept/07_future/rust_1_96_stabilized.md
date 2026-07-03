@@ -1,14 +1,14 @@
-# Rust 1.96.0 稳定特性
+# Rust 1.96 稳定特性（当前 patch 1.96.1）
 
-> **EN**: Rust 1.96.0 Stabilized Features
-> **EN**: Rust 1.96.0 Stabilized Features
-> **Summary**: Rust 1.96.0（2026-05-28 stable）引入的关键语言与库特性：Copy-compatible range 类型、assert_matches! 宏（Macro）、NonZero 范围迭代、AssertUnwindSafe / LazyCell / LazyLock 的 From 实现、s390x vector assembly 以及 Cargo 安全修复。
+> **EN**: Rust 1.96 Stabilized Features (current patch 1.96.1)
+> **EN**: Rust 1.96 Stabilized Features (current patch 1.96.1)
+> **Summary**: Rust 1.96.0 于 2026-05-28 首次稳定，当前最新 patch 为 1.96.1。本文档覆盖 1.96 列车引入的关键语言与库特性：Copy-compatible range 类型、assert_matches! 宏（Macro）、NonZero 范围迭代、AssertUnwindSafe / LazyCell / LazyLock 的 From 实现、s390x vector assembly 以及 Cargo 安全修复。
 >
 > **受众**: [进阶] / [专家]
 > **内容分级**: [参考级]
-> **对应 Rust 版本**: **1.96.0 stable**
+> **对应 Rust 版本**: **1.96.1 stable**
 > **最后更新**: 2026-06-26
-> **状态**: ✅ 已对齐 Rust 1.96.0 stable
+> **状态**: ✅ 已对齐 Rust 1.96.1 stable
 >
 > **权威来源**: · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
@@ -26,7 +26,7 @@
 >
 > **后置概念**:
 >
-> [Rust 1.97.0 稳定特性](rust_1_97_stabilized.md) ·
+> [Rust 1.97.0 前沿特性预览](rust_1_97_preview.md) ·
 > [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md) ·
 > [Toolchain](../06_ecosystem/01_toolchain.md) ·
 > [Testing](../06_ecosystem/16_testing.md)

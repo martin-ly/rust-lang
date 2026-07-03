@@ -30,7 +30,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://rustup.rs | sh
 验证安装：
 
 ```bash
-rustc --version   # 应输出 1.96.0 或更高
+rustc --version   # 应输出 1.96.1 或更高
 cargo --version
 ```
 

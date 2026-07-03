@@ -9,7 +9,7 @@
 > **定位**: 本文件从**系统架构设计**视角梳理 Rust 的核心设计原则，并与国际权威内容（形式化方法、分布式系统理论、安全工程、容错计算）建立对齐关系。
 > **原则**: 不做"系统设计教程"，聚焦"Rust 的类型系统（Type System）和所有权（Ownership）模型如何为系统设计提供形式化基础，以及这些基础与国际权威理论的对应关系"。
 > **对齐来源**: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [SE L4] · [NIST Zero Trust] · [AWS TLA+] · [Erlang OTP] · [CAP Theorem] · [CALM Theorem]
-> **基准版本**: Rust 1.96.0 stable (Edition 2024)
+> **基准版本**: Rust 1.96.1 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -526,7 +526,7 @@ graph LR
 > [Lamport Paxos](https://doi.org/10.1145/3335772.3335939) ·
 > [Wadler Propositions as Sessions](https://doi.org/10.1145/2364527.2364568)
 >
-> **Rust 版本**: 1.96.0 stable (Edition 2024)
+> **Rust 版本**: 1.96.1 stable (Edition 2024)
 > **文档版本**: 1.1
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 系统设计原则与国际权威对齐 v1.1 — 新增知识流动图

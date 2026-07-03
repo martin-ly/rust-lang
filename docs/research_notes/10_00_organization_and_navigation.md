@@ -10,7 +10,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 > **用途**: 统一组织架构说明、按目标导航、三大支柱映射；解决「文档多、入口杂、难定位」问题
 > **原则**: 单入口、按目标、支柱映射、层次清晰
@@ -30,7 +30,7 @@
   - [五、常见困惑与解答 {#五常见困惑与解答}](#五常见困惑与解答-五常见困惑与解答)
   - [六、权威来源与版本约定 {#六权威来源与版本约定}](#六权威来源与版本约定-六权威来源与版本约定)
   - [七、与顶层 docs 的衔接 {#七与顶层-docs-的衔接}](#七与顶层-docs-的衔接-七与顶层-docs-的衔接)
-  - [🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}](#-rust-1960--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明)
+  - [🆕 Rust 1.96.1+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}](#-rust-1960--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明)
     - [升级要点 {#升级要点}](#升级要点-升级要点)
       - [权威来源对齐 {#权威来源对齐}](#权威来源对齐-权威来源对齐)
       - [形式化来源对照 {#形式化来源对照}](#形式化来源对照-形式化来源对照)
@@ -169,7 +169,7 @@ research_notes/
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-本目录文档已与 **Rust 1.96.0+ (Edition 2024)** 对齐，引用以下权威来源时统一采用下列版本说明：
+本目录文档已与 **Rust 1.96.1+ (Edition 2024)** 对齐，引用以下权威来源时统一采用下列版本说明：
 
 | 来源 | 版本约定 | 用途 |
 | :--- | :--- | :--- |
@@ -177,7 +177,7 @@ research_notes/
 | **Rust 发布说明** | [Rust Blog](https://blog.rust-lang.org/) | 官方特性公告 |
 | **Rust Edition Guide** | [Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) | 版本差异与迁移 |
 | **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/) | 形式化规范引用（以 Ferrocene 官方发布基线为准） |
-| **本项目** | **Rust 1.96.0+ (Edition 2024)** | 所有 research_notes 元信息与示例默认版本 |
+| **本项目** | **Rust 1.96.1+ (Edition 2024)** | 所有 research_notes 元信息与示例默认版本 |
 
 新文档引用 FLS 或 releases 时可直接引用本小节；详见 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) § 权威来源对齐。
 
@@ -200,12 +200,12 @@ research_notes/
 
 ---
 
-## 🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}
+## 🆕 Rust 1.96.1+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}
 >
 > **来源**: [Rust Edition Guide - Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
 ### 升级要点 {#升级要点}
@@ -237,14 +237,14 @@ research_notes/
 
 #### 版本与生态更新 {#版本与生态更新}
 
-- 所有概念、示例与最佳实践统一对齐 **Rust 1.96.0+ (Edition 2024)**。
+- 所有概念、示例与最佳实践统一对齐 **Rust 1.96.1+ (Edition 2024)**。
 - 生态引用已更新：async-std → Tokio / smol；wasm32-wasi → wasm32-wasip1 / wasm32-wasip2（详见 [10_application_trees.md](10_application_trees.md)）。
 - 后续版本跟踪请参见 [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) 与 [Rust Reference](https://doc.rust-lang.org/reference/)。
 
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-06-29 (Rust 1.96.0+ / Edition 2024 权威国际化升级)
+**最后更新**: 2026-06-29 (Rust 1.96.1+ / Edition 2024 权威国际化升级)
 
 ---
 
@@ -253,7 +253,7 @@ research_notes/
 > **权威来源对齐变更日志**: 2026-06-29 完成 Batch 9：将泛化 Rust Official Docs 替换为具体章节/API/模块链接，并补充 P1 形式化来源对照 [来源: Authority Source Sprint Batch 9]
 
 **文档版本**: 1.2
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-06-29
 **状态**: ✅ 已完成权威国际化来源对齐升级
 

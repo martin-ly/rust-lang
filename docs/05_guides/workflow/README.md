@@ -2,7 +2,7 @@
 
 > **EN**: Workflow Index
 > **Summary**: 工作流与形式化模型 Workflow Index.
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **最后更新**: 2026-06-09
 >
 > **受众**: [专家] / [研究者]

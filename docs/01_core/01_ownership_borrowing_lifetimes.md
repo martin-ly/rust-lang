@@ -2,7 +2,7 @@
 >
 > [The Rust Programming Language](https://doc.rust-lang.org/book/),
 > **分级**: [A]
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html),
 > [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html),
 > [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
@@ -14,7 +14,7 @@
 > **EN**: Ownership Borrowing Lifetimes
 > **Summary**: 所有权、借用与生命周期 Ownership Borrowing Lifetimes.
 > **Bloom 层级**: L1-L2 (记忆/理解)
-> **Rust 版本**: 1.96.0+
+> **Rust 版本**: 1.96.1+
 > **难度**: 初级 → 中级
 > **预计学习时间**: 4-6 小时
 
@@ -385,7 +385,7 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
 ---
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

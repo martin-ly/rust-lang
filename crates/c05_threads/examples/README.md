@@ -2,7 +2,7 @@
 
 > **创建日期**: 2025-10-20
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 100% 完成
 > **概念说明**: 本示例集展示 Rust 线程编程的各种技术，包括作用域线程、消息传递、共享状态、无锁数据结构和高级同步原语。
 
@@ -296,7 +296,7 @@ for handle in handles {
 println!("Result: {}", *counter.lock().unwrap());
 ```
 
-### 作用域线程 (Rust 1.93.0+)
+### 作用域线程 (Rust 1.96.1+)
 
 ```rust
 use std::thread;
@@ -402,6 +402,6 @@ opt-level = 3
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -32,7 +32,7 @@ Rust 1.96.0 引入了 `core::range` 模块 [来源: Rust 1.96.0 Release Notes / 
 |------|--------|---------|------|
 | `std::ops::Range` | `a..b` | 半开 `[a, b)` | `core::ops` |
 | `std::ops::RangeInclusive` | `a..=b` | 闭区间 `[a, b]` | `core::ops` |
-| **`core::range::RangeInclusive`** (1.96.0+) | `RangeInclusive::new(a, b)` | 闭区间 `[a, b]` | `core::range` |
+| **`core::range::RangeInclusive`** (1.96.1+) | `RangeInclusive::new(a, b)` | 闭区间 `[a, b]` | `core::range` |
 
 > ⚠️ **注意**: `core::range::RangeInclusive` 目前**不是** `std::ops::RangeInclusive` 的替代，两者共存。
 
@@ -213,7 +213,7 @@ std::ops::Range                     std::ops::RangeInclusive
   迭代: a, a+1, ..., b-1               迭代: a, a+1, ..., b
   空区间: a >= b                       空区间: a > b（但 a..=a 含一个元素）
 
-core::range::RangeInclusive (1.96.0+):
+core::range::RangeInclusive (1.96.1+):
   与 std::ops::RangeInclusive 语义相同
   位于 core::range 模块，为未来的 range 统一提供命名空间
 ```
@@ -270,7 +270,7 @@ core::range::RangeInclusive (1.96.0+):
 ---
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

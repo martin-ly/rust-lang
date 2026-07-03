@@ -6,7 +6,7 @@
 > **前置知识**: [泛型编程指南](03_generics_programming_guide.md)
 > **预计学习时间**: 6-8 小时
 > **最后更新**: 2025-12-11
-> **Rust版本**: 1.92.0+
+> **Rust版本**: 1.96.1+
 > **注意**: 本文档是实践导向，系统理论请参考 [Trait系统指南](04_trait_system_guide.md)
 
 ---
@@ -628,7 +628,7 @@ impl Display for MyVec {
 ---
 
 **最后更新**: 2025-12-11
-**Rust版本**: 1.92.0+
+**Rust版本**: 1.96.1+
 **文档版本**: v1.0
 **相关文档**: [Trait系统指南](04_trait_system_guide.md) - 更深入的理论内容
 
@@ -639,6 +639,6 @@ impl Display for MyVec {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

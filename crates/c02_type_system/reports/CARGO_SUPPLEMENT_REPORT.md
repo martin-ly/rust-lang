@@ -191,6 +191,7 @@ crates/c02_type_system/
 ├── CARGO_PACKAGE_MANAGEMENT_GUIDE.md       ⭐ 新建（专门指南）
 └── CARGO_SUPPLEMENT_REPORT.md              ⭐ 新建（本报告）
 ```
+
 ---
 
 ## 🔗 文档导航
@@ -234,6 +235,7 @@ rust-version = "1.90"
 tokio = { version = "1.48", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
 ```
+
 ### 2. 工作空间配置
 
 ```toml
@@ -244,6 +246,7 @@ resolver = "3"
 [workspace.dependencies]
 tokio = { version = "1.48", features = ["full"] }
 ```
+
 ### 3. 性能优化配置
 
 ```toml
@@ -253,6 +256,7 @@ lto = "fat"
 codegen-units = 1
 strip = true
 ```
+
 ### 4. 常用命令
 
 ```bash
@@ -268,6 +272,7 @@ cargo audit
 # 依赖树
 cargo tree --duplicates
 ```
+
 ---
 
 ## ✅ 验证清单
@@ -333,6 +338,6 @@ cargo tree --duplicates
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

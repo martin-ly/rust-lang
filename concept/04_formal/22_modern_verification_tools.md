@@ -451,7 +451,7 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 
 > **权威来源**: [AutoVerus arXiv 2025] · [Kani 0.65 Release Notes](https://model-checking.github.io/kani/) · [ESBMC GitHub](https://github.com/esbmc/esbmc) · [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [TrustInSoft](https://trust-in-soft.com/)
 > **文档版本**: 1.1
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **最后更新**: 2026-06-26
 > **权威来源对齐变更日志**: 2026-06-26 新增 Kani 独立概念页 `./32_kani.md` 交叉链接 [来源: P2 Deep Content Sprint]
 > **状态**: ✅ 现代验证工具生态补全

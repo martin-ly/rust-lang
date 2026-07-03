@@ -5,7 +5,7 @@
 > **分级**: [B]
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **概念说明**: Rust 工具链生态系统由编译器（rustc）、包管理器（Cargo）、文档生成器（rustdoc）和质量工具（Clippy、rustfmt、MIRI）组成。这些工具协同工作，提供从代码编写、编译、测试到部署的完整开发体验。
 > 内容已整合至： [06_toolchain/](../../06_toolchain/README.md)
@@ -82,7 +82,7 @@ authors = ["Name <email@example.com>"]
 license = "MIT OR Apache-2.0"
 description = "A brief description"
 repository = "https://github.com/user/repo"
-rust-version = "1.96.0"
+rust-version = "1.96.1"
 
 [dependencies]
 # 依赖版本规范 {#依赖版本规范}
@@ -355,7 +355,7 @@ mindmap
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

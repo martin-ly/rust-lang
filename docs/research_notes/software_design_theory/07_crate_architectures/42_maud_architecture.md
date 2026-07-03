@@ -5,7 +5,7 @@
 > - [Web 框架生态](../../../../concept/06_ecosystem/27_web_frameworks.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
 >
@@ -29,7 +29,7 @@
 >
 > **知识领域**: 模板引擎、HTML DSL、过程宏、编译期代码生成、Web 框架集成
 >
-> **对应 Rust 版本**: 1.96.0+ (maud 0.27.0+)
+> **对应 Rust 版本**: 1.96.1+ (maud 0.27.0+)
 
 ---
 
@@ -227,7 +227,7 @@ async fn hello() -> impl axum::response::IntoResponse {
 > **权威来源**: [maud docs.rs](https://docs.rs/maud/latest/maud/) · [maud crates.io](https://crates.io/crates/maud) · [maud book](https://maud.lambda.xyz/) · [maud GitHub](https://github.com/lambda-fairy/maud)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **最后更新**: 2026-06-29
 > **状态**: ✅ 已完成
 

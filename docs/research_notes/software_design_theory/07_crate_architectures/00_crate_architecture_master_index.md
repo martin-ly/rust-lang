@@ -6,7 +6,7 @@
 > 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 >
 > - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
@@ -627,7 +627,7 @@ graph TD
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [crates.io](https://crates.io/) · [docs.rs](https://docs.rs/)
 >
 > **文档版本**: 1.1
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **最后更新**: 2026-07-01
 > **状态**: ✅ 已统一 canonical 来源（Tokio / Axum / SQLx 已重定向，其余文件已添加 canonical 说明）
 

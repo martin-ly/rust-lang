@@ -45,7 +45,7 @@
 
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 全面梳理 Rust 中「安全且编译期可判定」的机制，每项含概念定义、属性关系、解释论证、形式证明引用、反例；与 [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md) 双向链接
 > **上位**: [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](10_hierarchical_mapping_and_summary.md)
@@ -296,7 +296,7 @@
 
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -343,7 +343,7 @@
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

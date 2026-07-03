@@ -1,6 +1,6 @@
-//! Rust 1.97 特性练习
-//! **编译要求**: Rust 1.96.0+ stable（使用等效实现）
-//! **说明**: 本文件使用等效实现模拟 1.97 特性，待 1.97 稳定后将替换为实际 API 调用。
+//! Rust 1.97 Nightly 前瞻/候选特性练习
+//! **编译要求**: Rust 1.96.1+ stable（使用等效实现）
+//! **说明**: 本文件使用等效实现模拟 1.97 特性（当前为 nightly 候选），待 1.97 稳定后将替换为实际 API 调用。
 
 use std::collections::VecDeque;
 
@@ -20,7 +20,7 @@ impl VecDequeTruncateFrontExercises {
     /// 给定一个 VecDeque 和整数 `n`，截断前部使长度变为 `n`，
     /// 保留后部的 `n` 个元素。
     pub fn exercise_01_truncate_front(deque: &mut VecDeque<i32>, n: usize) {
-        // 当前等效实现（1.97 稳定后将直接使用 deque.truncate_front(n)）
+        // 当前等效实现（1.97 稳定后/候选 API 可用后将直接使用 deque.truncate_front(n)）
         while deque.len() > n {
             deque.pop_front();
         }
@@ -36,7 +36,7 @@ impl VecDequeTruncateFrontExercises {
         window_size: usize,
     ) {
         window.push_back(new_value);
-        // 1.97+: window.truncate_front(window_size);
+        // 1.97+ nightly/候选: window.truncate_front(window_size);
         while window.len() > window_size {
             window.pop_front();
         }

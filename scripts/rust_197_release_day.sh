@@ -43,7 +43,7 @@ echo "--- 阶段 1: 工具链策略确认 ---"
 
 echo "说明: workspace 中多处使用 nightly feature gates（gen_blocks、never_type、"
 echo "      core_intrinsics 等），无法整体切换到 ${RUST_VERSION} stable。"
-echo "      保持 rust-toolchain.toml 为 nightly，仅在 nightly 上激活 1.97 稳定 API。"
+echo "      保持 rust-toolchain.toml 为 nightly，仅在 nightly 上激活 1.97 候选 API（发布日确认稳定后切换表述）。"
 
 if grep -q '^channel = "nightly"' rust-toolchain.toml; then
     echo "✅ rust-toolchain.toml 已保持为 nightly"
@@ -75,7 +75,7 @@ echo ""
 echo "--- 阶段 3: 1.97 API 可用性探测 ---"
 
 if [[ -f scripts/probe_rust_197_apis.rs ]]; then
-    echo "运行独立探测程序（在 nightly 上编译并执行，1.97 stable API 在 nightly 上同样可用）..."
+    echo "运行独立探测程序（在 nightly 上编译并执行，1.97 候选 API 在 nightly 上可用）..."
     rustc --edition 2024 scripts/probe_rust_197_apis.rs -o /tmp/probe_197 || true
     if [[ -x /tmp/probe_197 ]]; then
         /tmp/probe_197 || true

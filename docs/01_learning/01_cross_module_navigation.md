@@ -3,7 +3,7 @@
 > **EN**: Cross Module Navigation
 > **Summary**: 跨模块学习导航图 Cross Module Navigation.
 >
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **分级**: [A]
 > **Bloom 层级**: L1-L2 (记忆/理解)
 > Rust 系统化学习项目 - 模块关联指南
@@ -225,7 +225,7 @@ C01 → C04 → C11 → docs/research_notes/
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

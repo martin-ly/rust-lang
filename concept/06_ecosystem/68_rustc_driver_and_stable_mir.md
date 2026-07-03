@@ -243,6 +243,6 @@ rustdoc 需要拿到类型检查结果来生成文档，但不需要生成二进
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.0 / rustc_driver / Stable MIR 项目目标
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Rustc Dev Guide driver/interface 文档

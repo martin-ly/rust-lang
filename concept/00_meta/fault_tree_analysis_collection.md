@@ -3,7 +3,7 @@
 > **EN**: Fault Tree Analysis Collection
 > **Summary**: Fault Tree Analysis Collection. Core Rust concept.
 >
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **受众**: [专家]
 > **Bloom 层级**: 元（Meta）
 > **定位**:

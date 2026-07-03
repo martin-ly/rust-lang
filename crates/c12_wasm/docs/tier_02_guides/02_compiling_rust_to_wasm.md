@@ -6,7 +6,7 @@
 > **相关文档**: [项目概览](../tier_01_foundations/01_project_overview.md) | [WASM 基础指南](01_wasm_basics.md)
 
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 **Rust 1.92.0 特性**: 本文档已集成 Rust 1.92.0 编译优化特性
 
 ---
@@ -51,7 +51,7 @@
   - [🚀 Rust 1.92.0 编译优化 ⭐ NEW](#-rust-1920-编译优化--new)
     - [使用 Rust 1.92.0 特性优化编译](#使用-rust-1920-特性优化编译)
   - [📚 相关资源](#-相关资源)
-  - [**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
+  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
 
 ---
 
@@ -64,7 +64,7 @@
 - **定义**: Rust 编译到 WebAssembly 的完整流程和实践指南
 - **类型**: 编译指南文档
 - **范畴**: WebAssembly、编译工具链
-- **版本**: Rust 1.92.0+, wasm-pack, wasm-bindgen
+- **版本**: Rust 1.96.1+, wasm-pack, wasm-bindgen
 - **相关概念**: 编译工具链、wasm-pack、wasm-bindgen、优化选项
 
 ### 属性特征
@@ -757,7 +757,7 @@ let allocator = WasmAllocatorConfig::new(
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -765,6 +765,6 @@ let allocator = WasmAllocatorConfig::new(
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

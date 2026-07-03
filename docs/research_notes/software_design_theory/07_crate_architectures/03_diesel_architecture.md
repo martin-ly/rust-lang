@@ -13,7 +13,7 @@
 > **Summary**: Diesel crate 架构解构 Diesel Architecture.
 > **概念族**: 软件设计 / Crate 架构
 > **内容分级**: [归档级]
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 >
 > **分级**: [B]
@@ -1020,7 +1020,7 @@ let row: (i64, String) = sqlx::query_as("SELECT id, name FROM users WHERE id = $
 
 > **文档元信息**
 >
-> - 对应 Rust 版本: 1.96.0+ (Edition 2024)
+> - 对应 Rust 版本: 1.96.1+ (Edition 2024)
 > - Diesel 版本: 2.2.x
 > - 最后更新: 2026-05-22
 > - 状态: ✅ 初版完成

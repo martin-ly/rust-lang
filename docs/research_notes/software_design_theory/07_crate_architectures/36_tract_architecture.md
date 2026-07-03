@@ -5,7 +5,7 @@
 > - [机器学习生态](../../../../concept/06_ecosystem/46_machine_learning_ecosystem.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
 >
@@ -29,7 +29,7 @@
 >
 > **知识领域**: 纯 Rust 推理引擎、ONNX/TensorFlow Lite、模型优化、端侧部署
 >
-> **对应 Rust 版本**: 1.96.0+ (tract-onnx 0.23.1+)
+> **对应 Rust 版本**: 1.96.1+ (tract-onnx 0.23.1+)
 
 ---
 

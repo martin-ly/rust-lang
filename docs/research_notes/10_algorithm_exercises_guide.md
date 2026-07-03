@@ -8,7 +8,7 @@
 > **Bloom 层级**: L2-L4 (理解 / 应用 / 分析)
 > **创建日期**: 2026-06-29
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **层级**: L2-L4
 > **概念族**: 学习资源 / 算法练习
@@ -47,7 +47,7 @@
 
 本文档定位 `exercises/src/algorithms/` 算法专项练习的入口说明，配套代码位于 [`exercises/src/algorithms/`](../../exercises/src/algorithms/) 目录。
 练习采用"函数骨架 + 参考实现 + 单元测试"的形式，覆盖排序、搜索、图论、动态规划与经典数据结构五大主题，
-帮助学习者在 Rust 1.96.0+ 环境中掌握算法实现与所有权、借用、泛型等 Rust 特性的结合。
+帮助学习者在 Rust 1.96.1+ 环境中掌握算法实现与所有权、借用、泛型等 Rust 特性的结合。
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 

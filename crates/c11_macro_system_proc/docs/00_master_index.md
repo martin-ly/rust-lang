@@ -2,7 +2,7 @@
 
 > **学习导航**: C11宏系统模块的完整学习路径和资源导航
 > **最后更新**: 2026-03-13
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.1+
 
 📄 **一页纸总结**: [ONE_PAGE_SUMMARY](ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
 
@@ -470,6 +470,6 @@ cargo run --example 01_macro_rules_basics
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -10,7 +10,7 @@
 
 # C06 Async 项目概览
 
-> **文档版本**: Rust 1.92.0+ | **更新日期**: 2025-12-11
+> **文档版本**: Rust 1.96.1+ | **更新日期**: 2025-12-11
 > **文档层级**: Tier 1 - 基础概念 | **难度**: ⭐⭐
 
 ---
@@ -26,7 +26,7 @@
     - [思维导图](#思维导图)
   - [🎯 项目使命](#-项目使命)
   - [✨ 核心特性](#-核心特性)
-    - [1. 语言特性 (Rust 1.92.0+)](#1-语言特性-rust-1920)
+    - [1. 语言特性 (Rust 1.96.1+)](#1-语言特性-rust-1920)
     - [2. 运行时生态](#2-运行时生态)
       - [Tokio](#tokio)
       - [Smol](#smol)
@@ -175,7 +175,7 @@
 
 ## ✨ 核心特性
 
-### 1. 语言特性 (Rust 1.92.0+)
+### 1. 语言特性 (Rust 1.96.1+)
 
 - ✅ **async/await 语法**: 异步函数和异步代码块
 - ✅ **Future Trait**: 异步计算的核心抽象
@@ -270,7 +270,7 @@ C06 Async 采用 **4-Tier 文档架构**，从基础到高级循序渐进：
 **受众**: 中高级开发者
 
 | 文档                                                                    | 说明              | 难度       |
-| :--- | :--- | :--- || [01\_异步语言特性参考.md](../tier_03_references/01_async_language_features_reference.md) | Rust 1.92.0+ 特性 | ⭐⭐⭐     |
+| :--- | :--- | :--- || [01\_异步语言特性参考.md](../tier_03_references/01_async_language_features_reference.md) | Rust 1.96.1+ 特性 | ⭐⭐⭐     |
 | [02_tokio_complete_api_reference.md](../tier_03_references/02_tokio_complete_api_reference.md)  | Tokio 深度参考    | ⭐⭐⭐⭐   |
 | [03\_异步生态系统参考.md](../tier_03_references/03_async_ecosystem_reference.md) | 生态全景          | ⭐⭐⭐     |
 | [04_pin_and_unsafe_reference.md](../tier_03_references/04_pin_and_unsafe_reference.md)    | 内存安全机制      | ⭐⭐⭐⭐⭐ |
@@ -600,7 +600,7 @@ async fn main() {
 ---
 
 **文档维护**: C06 Async Team | **质量评分**: 95/100
-**最后更新**: 2025-12-11 | **Rust 版本**: 1.92.0+
+**最后更新**: 2025-12-11 | **Rust 版本**: 1.96.1+
 
 ---
 
@@ -609,6 +609,6 @@ async fn main() {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -3,7 +3,7 @@
 > **EN**: Libp2p Guide
 > **Summary**: libp2p 指南 Libp2p Guide.
 >
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **分级**: [A]
 > **层级**: L6 生态工具 / L3 高级网络
 > **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Network Programming](../../crates/c10_networks)
@@ -304,7 +304,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 > **权威来源**: [libp2p Specification](https://specs.libp2p.io/), [rust-libp2p](https://github.com/libp2p/rust-libp2p), [libp2p Documentation](https://docs.libp2p.io/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 初版完成
 

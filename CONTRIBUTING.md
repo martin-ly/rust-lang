@@ -53,7 +53,7 @@ scripts/    维护脚本（kb_auditor.py、version_fact_check.py 等）
 ### 3. 环境准备
 
 ```bash
-# Rust 工具链（MSRV 1.96.0）
+# Rust 工具链（MSRV 1.96.1）
 rustup update stable
 
 # 可选：安装验证工具
@@ -170,7 +170,7 @@ mdbook build
 
 ### 常态化维护（每月/每季度）
 
-1. **版本事实准确性**: Rust 1.96.0 特性覆盖完整，1.97 Preview 跟踪及时 → **每 6 周随版本发布更新**
+1. **版本事实准确性**: Rust 1.96.1 特性覆盖完整，1.97 Preview 跟踪及时 → **每 6 周随版本更新**
 2. **死链清零**: `kb_auditor.py` 死链保持 0 → **每月运行一次**
 3. **编译通过**: `cargo check --workspace` 零错误 → **每次提交前必做**
 4. **依赖安全**: `cargo audit` 0 高危 → **每季度运行一次**

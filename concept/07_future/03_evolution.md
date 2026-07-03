@@ -1089,7 +1089,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.3
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-06-06
 **状态**: ✅ 权威来源对齐完成 (Batch 9)
 
@@ -1397,7 +1397,7 @@ fn fixed() {
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ### 6.8 维护者基金的哲学：什么是维护？（2026-01-12）
 

@@ -1,8 +1,8 @@
 #![cfg(nightly)]
 
-//! L3 Rust 1.97.0 稳定特性对齐测验
+//! L3 Rust 1.97.0 Nightly 前瞻/候选特性对齐测验
 //!
-//! 覆盖 Rust 1.97.0（预计 2026-07-09 stable）引入的关键语言/库特性：
+//! 覆盖 Rust 1.97.0 nightly 候选特性（预计 2026-07-09 stable）：
 //! - `NonZero<T>::highest_one` / `lowest_one` / `bit_width`
 //! - `char::is_control()` const 稳定化
 //! - `NonZeroU32::midpoint` / `isqrt`

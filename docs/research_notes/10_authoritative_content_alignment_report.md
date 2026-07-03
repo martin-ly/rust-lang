@@ -4,7 +4,7 @@
 > **Summary**: 权威内容对齐全面检查报告 Authoritative Content Alignment Report.
 > **概念族**: 权威来源对齐
 > **内容分级**: [归档级]
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 >
 > **分级**: [B]
@@ -282,10 +282,10 @@
 
 | 文档 | 声明版本 | 实际状态 | 需更新 |
 | :--- | :--- | :--- | :--- |
-| 10_ownership_model.md | 1.96.0+ | ✅ | 无 |
-| 10_type_system_foundations.md | 1.96.0+ | ✅ | 无 |
-| 10_borrow_checker_proof.md | 1.96.0+ | ⚠️ | 更新至1.94 |
-| 10_lifetime_formalization.md | 1.96.0+ | ⚠️ | 更新至1.94 |
+| 10_ownership_model.md | 1.96.1+ | ✅ | 无 |
+| 10_type_system_foundations.md | 1.96.1+ | ✅ | 无 |
+| 10_borrow_checker_proof.md | 1.96.1+ | ⚠️ | 更新至1.94 |
+| 10_lifetime_formalization.md | 1.96.1+ | ⚠️ | 更新至1.94 |
 
 ---
 
@@ -336,7 +336,7 @@
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -383,7 +383,7 @@
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

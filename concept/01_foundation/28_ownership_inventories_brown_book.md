@@ -6,7 +6,7 @@
 > **Summary**: Brown University Ownership Inventory: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **内容分级**: [综述级]
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档
 >
 > **来源**: [Brown University Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) · [学习指南](../00_meta/learning_guide.md) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)

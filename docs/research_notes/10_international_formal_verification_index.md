@@ -45,7 +45,7 @@
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-06-29
 > **更新内容**: 补充 Verus / Kani / Prusti / Creusot / Miri 工具链映射
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 > **用途**: 系统对标国际权威 Rust 形式化证明模型，明确本项目 PROOF_INDEX 与最新成果的对应关系与差距
 > **维护**: 季度更新，Rust 新版本发布时补充
@@ -259,7 +259,7 @@
 | 2026-02-14 | 初版创建 |
 | 2026-02-14 | 补充 coq_skeleton 与 RustBelt 对应 |
 | 2026-02-14 | T-BR1/T-TY3 Coq 骨架创建；Tree Borrows PLDI 2025 补充 |
-| 2026-06-29 | 补充 Verus/Kani/Prusti/Creusot/Miri 工具链映射；升级到 Rust 1.96.0+ |
+| 2026-06-29 | 补充 Verus/Kani/Prusti/Creusot/Miri 工具链映射；升级到 Rust 1.96.1+ |
 
 ---
 
@@ -270,7 +270,7 @@
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -314,7 +314,7 @@
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

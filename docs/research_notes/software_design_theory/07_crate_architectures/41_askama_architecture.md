@@ -5,7 +5,7 @@
 > - [Web 框架生态](../../../../concept/06_ecosystem/27_web_frameworks.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
 >
@@ -29,7 +29,7 @@
 >
 > **知识领域**: 模板引擎、HTML 渲染、类型安全、编译期代码生成
 >
-> **对应 Rust 版本**: 1.96.0+ (askama 0.16.0+)
+> **对应 Rust 版本**: 1.96.1+ (askama 0.16.0+)
 
 ---
 
@@ -214,7 +214,7 @@ async fn page() -> impl IntoResponse {
 > **权威来源**: [askama docs.rs](https://docs.rs/askama/latest/askama/) · [askama crates.io](https://crates.io/crates/askama) · [askama book](https://djc.github.io/askama/) · [askama GitHub](https://github.com/djc/askama)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **最后更新**: 2026-06-29
 > **状态**: ✅ 已完成
 

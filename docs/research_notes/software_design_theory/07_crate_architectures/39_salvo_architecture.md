@@ -5,7 +5,7 @@
 > - [Web 框架生态](../../../../concept/06_ecosystem/27_web_frameworks.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
 >
@@ -29,7 +29,7 @@
 >
 > **知识领域**: Web 框架、HTTP 服务、路由组合、中间件、异步 IO
 >
-> **对应 Rust 版本**: 1.96.0+ (salvo 0.93.0+)
+> **对应 Rust 版本**: 1.96.1+ (salvo 0.93.0+)
 
 ---
 
@@ -222,7 +222,7 @@ let router = Router::new().hoop(logger).get(hello);
 > **权威来源**: [Salvo 官方文档](https://salvo.rs/) · [salvo docs.rs](https://docs.rs/salvo/latest/salvo/) · [salvo GitHub](https://github.com/salvo-rs/salvo) · [Hyper 文档](https://docs.rs/hyper/latest/hyper/) · [Tokio 文档](https://docs.rs/tokio/latest/tokio/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **最后更新**: 2026-06-29
 > **状态**: ✅ 已完成
 

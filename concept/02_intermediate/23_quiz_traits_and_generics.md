@@ -10,7 +10,7 @@
 > **错误信息**：`no method named summarize f
 > **受众**: [进阶]
 > **内容分级**: [综述级]
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 > **后置概念**: [Async/Await](../03_advanced/02_async.md)
 ---

@@ -2,7 +2,7 @@
 
 > **EN**: Master Index
 > **Summary**: 项目总索引 Master Index.
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **最后更新**: 2026-06-09
 
 本项目是一个系统化的 Rust 学习资源库，覆盖从基础到形式化验证的完整知识谱系。

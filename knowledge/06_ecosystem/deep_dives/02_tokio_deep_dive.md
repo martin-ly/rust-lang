@@ -15,7 +15,7 @@
 > **相关概念**: [Tokio](../../../concept/03_advanced/02_async.md)
 > **Bloom 层级**: 理解
 > **版本**: Tokio 1.49.0+
-> **Rust 版本**: 1.96.0+
+> **Rust 版本**: 1.96.1+
 > **难度**: 高级
 > **关键词**: 异步运行时、任务调度、I/O驱动
 > **权威来源**: [Tokio 官方文档](https://docs.rs/tokio/latest/tokio/), [Tokio 教程](https://tokio.rs/tokio/tutorial), [Rust Async Book](https://rust-lang.github.io/async-book/), [RFC 2394: async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
@@ -697,7 +697,7 @@ async fn main() {
 ---
 
 **文档版本**: 2.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

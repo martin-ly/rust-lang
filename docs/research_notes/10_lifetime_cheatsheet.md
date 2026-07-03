@@ -11,7 +11,7 @@
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [NLL RFC](https://rust-lang.github.io/rfcs/2094-nll.html)
 > **创建日期**: 2026-02-10
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 > **一页纸速查** - 生命周期语法、规则、常见模式
 

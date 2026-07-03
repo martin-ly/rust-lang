@@ -1,8 +1,8 @@
 #![cfg(nightly)]
 
-//! L3 Rust 1.98.0 稳定特性对齐测验
+//! L3 Rust 1.98.0 Nightly 前瞻特性对齐测验
 //!
-//! 覆盖 Rust 1.98.0（预计 2026-09-04 stable）引入的关键标准库 API：
+//! 覆盖 Rust 1.98.0 nightly 前瞻特性（预计 2026-09-04 stable）：
 //! - 整数平方根：`i32::isqrt` / `u32::isqrt` / `NonZeroU32::isqrt`
 //! - Strict provenance 指针 API：`ptr::with_exposed_provenance` / `without_provenance` / `dangling`
 //! - IPv6 地址分类：`Ipv6Addr::is_unique_local` / `is_unicast_link_local`

@@ -702,7 +702,7 @@ let b: Array<i32, 4> = Array { data: [1, 2, 3, 4] };
 > **关键洞察**: Const Generics 不是"依赖类型的弱化版"，而是**工程上的精确裁剪**——它保留了依赖类型在系统编程中最有用的子集（数组长度、缓冲区大小、维度参数），同时避免了完整依赖类型带来的编译期不可判定性问题。
 > **来源**: [Wikipedia: Dependent type](https://en.wikipedia.org/wiki/Dependent_type) · [RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Idris 文档: Dependent Types]
 
-### 10.1b Const Generics 的形式化演进（1.89+）
+### 10.1b Const Generics 的形式化演进（1.96.1+）
 
 > **来源: Rust 1.89 Release Notes; [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)** Rust 1.89 稳定了 `_` 推断 const generics 参数，使常量参数获得与类型参数同等的 HM 推断能力。
 
@@ -950,7 +950,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

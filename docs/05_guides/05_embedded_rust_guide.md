@@ -9,7 +9,7 @@
 > **内容分级**: [专家级]
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -487,7 +487,7 @@ fn update_data(value: u32) {
 ## Rust 1.95+ 在嵌入式开发中的应用 {#rust-195-在嵌入式开发中的应用}
 >
 > **[来源: [crates.io](https://crates.io/)]**
-> **适用版本**: Rust 1.96.0+
+> **适用版本**: Rust 1.96.1+
 
 ### array_windows 在传感器数据处理中的应用 {#array_windows-在传感器数据处理中的应用}
 
@@ -620,7 +620,7 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

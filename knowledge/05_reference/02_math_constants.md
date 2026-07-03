@@ -6,7 +6,7 @@
 > **Bloom 层级**: 理解
 > **📌 简介**: Rust 标准库 `std::f64::consts` 和 `std::f32::consts` 提供了一组常用的数学常量。Rust 1.96 新增 `EULER_GAMMA`、`GOLDEN_RATIO` 及其共轭，补充了数值计算和科学计算场景的基础工具。
 >
-> **Rust 版本**: 1.96.0+
+> **Rust 版本**: 1.96.1+
 > **权威来源**: [std::f64::consts](https://doc.rust-lang.org/std/f64/consts/index.html)
 >
 > **受众**: [初学者] / [进阶]
@@ -302,7 +302,7 @@ let good = x * f32::consts::PI;
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（std::f64::consts 文档、Rust 1.96 Release Notes） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 2.1
-**对应 Rust 版本**: 1.96.0+
+**对应 Rust 版本**: 1.96.1+
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

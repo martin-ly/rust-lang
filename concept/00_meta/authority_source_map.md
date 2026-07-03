@@ -7,7 +7,7 @@
 > | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 >
 > | **Ownership** | TRPL Ch4 · Reference § Ownership Types | Ralf Jung *"RustBelt: Securing the Foundations of the Rust Programming Language"* (POPL 2018) · Clarke *"Ownership Types
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **版本**: v1.1
@@ -127,7 +127,7 @@ dtolnay:               https://dtolnay.github.io/
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

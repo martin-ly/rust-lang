@@ -73,7 +73,7 @@
 
 ### 🆕 Rust 版本特性
 
-#### Rust 1.93.0+ 特性文档 🌟（兼容 Rust 1.90+ 特性）
+#### Rust 1.96.1+ 特性文档 🌟（兼容 Rust 1.90+ 特性）
 
 - [📖 Rust 1.92.0 所有权和借用系统全面指南](RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md) - 最全面的 Rust 1.92.0 入门指南（自 Rust 1.90 引入） ⭐⭐⭐ | [历史版本](RUST_190_COMPREHENSIVE_MINDMAP.md)
   - 难度: 初级到中级 | 阅读时长: 80 分钟
@@ -149,7 +149,7 @@
 5. **跨语言对比** → [多维矩阵 - 跨语言对比](MULTIDIMENSIONAL_MATRIX.md#跨语言对比)
 6. **形式化验证** → [内存安全保证](tier_03_references/08_memory_safety_reference.md)
 7. **编译器实现** → [所有权理论](tier_04_advanced/06_type_system_theory.md#51-编译器实现)
-8. **Rust 1.93.0+ 特性**（自 Rust 1.90 引入，持续更新） → [Rust 1.92.0 全面指南](RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md)（历史文档） | [历史版本](RUST_190_COMPREHENSIVE_MINDMAP.md)
+8. **Rust 1.96.1+ 特性**（自 Rust 1.90 引入，持续更新） → [Rust 1.92.0 全面指南](RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md)（历史文档） | [历史版本](RUST_190_COMPREHENSIVE_MINDMAP.md)
 
 ### 📚 历史文档路径（已整合）
 
@@ -272,7 +272,7 @@ cargo audit
 
 _最后更新：2026-01-26_
 _文档版本：v1.0_
-_Rust 版本：1.93.0+_
+_Rust 版本：1.96.1+_
 
 ---
 
@@ -281,6 +281,6 @@ _Rust 版本：1.93.0+_
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

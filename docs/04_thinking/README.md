@@ -2,7 +2,7 @@
 
 > **EN**: Thinking Index
 > **Summary**: 思考记录与方法论 Thinking Index.
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **最后更新**: 2026-06-09
 
 本目录收录项目开发过程中的思考记录、方法论探索和概念表示研究。

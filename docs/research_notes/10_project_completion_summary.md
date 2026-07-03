@@ -11,7 +11,7 @@
 > **完成日期**: 2026-02-28
 > **项目**: Rust Formal Methods Research Notes
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **最终状态**: ✅ 已完成权威国际化来源对齐升级
 
 ---
@@ -42,7 +42,7 @@
     - [完整导航 {#完整导航}](#完整导航-完整导航)
   - [后续维护 {#后续维护}](#后续维护-后续维护)
   - [致谢 {#致谢}](#致谢-致谢)
-  - [🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}](#-rust-1960--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明)
+  - [🆕 Rust 1.96.1+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}](#-rust-1960--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明)
     - [升级要点 {#升级要点}](#升级要点-升级要点)
       - [权威来源对齐 {#权威来源对齐}](#权威来源对齐-权威来源对齐)
       - [形式化来源对照 {#形式化来源对照}](#形式化来源对照-形式化来源对照)
@@ -330,13 +330,13 @@
 
 ---
 
-## 🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}
+## 🆕 Rust 1.96.1+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}
 
 >
 > **来源**: [Rust Edition Guide - Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
 ### 升级要点 {#升级要点}
@@ -368,7 +368,7 @@
 
 #### 版本与生态更新 {#版本与生态更新}
 
-- 所有概念、示例与最佳实践统一对齐 **Rust 1.96.0+ (Edition 2024)**。
+- 所有概念、示例与最佳实践统一对齐 **Rust 1.96.1+ (Edition 2024)**。
 - 生态引用已更新：async-std → Tokio / smol；wasm32-wasi → wasm32-wasip1 / wasm32-wasip2（详见 [10_application_trees.md](10_application_trees.md)）。
 - 后续版本跟踪请参见 [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) 与 [Rust Reference](https://doc.rust-lang.org/reference/)。
 
@@ -376,7 +376,7 @@
 
 **维护者**: Rust 学习项目团队
 
-**最后更新**: 2026-06-29 (Rust 1.96.0+ / Edition 2024 权威国际化升级)
+**最后更新**: 2026-06-29 (Rust 1.96.1+ / Edition 2024 权威国际化升级)
 
 ---
 
@@ -386,7 +386,7 @@
 
 **文档版本**: 1.2
 
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 **最后更新**: 2026-06-29
 

@@ -10,7 +10,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ **docs/research_notes 六层两网一库知识体系 100% 骨架与核心内容覆盖完成**（阶段 0-3 完成；阶段 4 行号级锚点作为持续增强项）
 >
 > **说明**:
@@ -642,7 +642,7 @@
    - 状态: ✅ 新建完成
 9. **[10_formalization_ecology_mindmap.md](formal_modules/10_formalization_ecology_mindmap.md)** - Rust 形式化生态思维导图
    - 验证工具、证明助手、形式化语义、研究项目概览
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 
 ---
 
@@ -691,23 +691,23 @@
 
 1. **[10_performance_benchmarks.md](experiments/10_performance_benchmarks.md)** - 性能基准测试
    - 研究目标: 通过基准测试评估不同实现的性能特征
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
    - 关键词: 性能测试、基准测试、Criterion.rs
 2. **[10_memory_analysis.md](experiments/10_memory_analysis.md)** - 内存分析
    - 研究目标: 分析内存使用模式，识别内存优化机会
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
    - 关键词: 内存分析、内存优化、内存泄漏
 3. **[10_compiler_optimizations.md](experiments/10_compiler_optimizations.md)** - 编译器优化
    - 研究目标: 评估编译器优化效果，了解如何编写编译器友好的代码
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
    - 关键词: 编译器优化、内联、循环优化
 4. **[10_concurrency_performance.md](experiments/10_concurrency_performance.md)** - 并发性能研究
    - 研究目标: 评估不同并发模型的性能特征
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
    - 关键词: 并发性能、同步原语、性能优化
 5. **[10_macro_expansion_performance.md](experiments/10_macro_expansion_performance.md)** - 宏展开性能分析
    - 研究目标: 分析宏展开性能，识别性能瓶颈
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
    - 关键词: 宏展开、编译时间、性能分析
 
 ---
@@ -722,39 +722,39 @@
 
 1. **[software_design_theory/README.md](software_design_theory/README.md)** - 软件设计理论体系
    - 研究目标: 设计模式形式化、23/43 模型、执行模型、组合工程有效性
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
    - 关键词: 设计模式、安全边界、执行模型、组合工程
 2. **[01_design_patterns_formal](software_design_theory/01_design_patterns_formal/README.md)** - 设计模式形式分析
    - GoF 23 种模式形式化（创建型、结构型、行为型）
    - 与 ownership、borrow、trait 衔接
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 3. **[02_workflow](software_design_theory/02_workflow/README.md)** - 异步/并发工作流模式
    - async/await 工作流、任务编排、`select!`/`join!`、取消安全
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 4. **[02_workflow_safe_complete_models](software_design_theory/02_workflow_safe_complete_models/README.md)** - 23 安全 vs 43 完全模型
    - 安全设计模型索引、语义边界
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 5. **[03_execution_models](software_design_theory/03_execution_models/README.md)** - 执行模型形式化
    - 同步、异步、并发、并行、分布式
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 6. **[04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md)** - 组合软件工程有效性
    - 定理 CE-T1、CE-T2、CE-T3
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 7. **[05_boundary_system](software_design_theory/05_boundary_system/README.md)** - 边界体系统一分析
    - safe/unsafe 边界、FFI 边界、三维边界分析
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 8. **[05_distributed](software_design_theory/05_distributed/README.md)** - 分布式模式
    - actor、gRPC/流式、消息传递、网络服务组合
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 9. **[06_rust_idioms](software_design_theory/06_rust_idioms.md)** - Rust 惯用模式
    - RAII、Newtype、类型状态；与 GoF 衔接
-   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+   - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 10. **[07_anti_patterns](software_design_theory/07_anti_patterns.md)** - 反模式与边界
     - 13 反例索引、反模式分类、规避策略
-    - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+    - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 11. **[07_crate_architectures](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md)** - 主流 crate 架构分析
     - serde、tower、tokio、axum、bevy、wgpu 等 crate 架构深度分析
-    - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+    - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 
 ### 综合研究 {#综合研究}
 
@@ -922,7 +922,7 @@
 
 ## 🆕 Rust 1.94 更新 {#rust-194-更新}
 
-> **适用版本**: Rust 1.96.0+
+> **适用版本**: Rust 1.96.1+
 
 详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
@@ -932,7 +932,7 @@
 
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -974,7 +974,7 @@
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.3
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-06-29
 **状态**: ✅ 权威国际化来源对齐升级完成
 

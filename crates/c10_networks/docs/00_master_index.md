@@ -2,7 +2,7 @@
 
 > **文档定位**: 网络编程学习路径总导航，快速定位所有网络相关资源
 > **使用方式**: 作为学习起点，根据需求选择合适的文档和代码模块
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.1+
 **最后更新**: 2026-03-13
 
 📄 **一页纸总结**: [ONE_PAGE_SUMMARY](ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
@@ -54,10 +54,10 @@
   - [📞 获取帮助](#-获取帮助)
     - [问题解决顺序](#问题解决顺序)
     - [社区支持](#社区支持)
-  - [**Rust 版本**: 1.92.0+, Tokio 1.35+](#rust-版本-1920-tokio-135)
+  - [**Rust 版本**: 1.96.1+, Tokio 1.35+](#rust-版本-1920-tokio-135)
 
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+, Tokio 1.35+
+**适用版本**: Rust 1.96.1+, Tokio 1.35+
 **文档类型**: 📚 导航索引
 
 ---
@@ -409,7 +409,7 @@
 **文档维护**: C10 Networks 开发团队
 **更新频率**: 跟随项目进度持续更新
 **文档版本**: v2.0
-**Rust 版本**: 1.92.0+, Tokio 1.35+
+**Rust 版本**: 1.96.1+, Tokio 1.35+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -417,6 +417,6 @@
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

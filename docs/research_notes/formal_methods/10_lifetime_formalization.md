@@ -15,8 +15,8 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-06-29
 > **更新内容**: 新建形式化方法视角生命周期文档；补充 Tree Borrows / RustSEM / RustBelt / Oxide 国际成果映射
-> **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 > **视角**: 形式化方法视角 — 聚焦生命周期在形式化证明、定理、公理中的角色，以及 Tree Borrows / RustSEM / RustBelt / Oxide 等国际成果映射。
 > **对应视角**: [类型理论视角](../type_theory/10_lifetime_formalization.md) 关注生命周期与类型推导、子类型、泛型、型变的交互。
 > **六篇并表**: README §formal_methods 六篇并表 第 3 行（生命周期）

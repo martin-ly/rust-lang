@@ -12,7 +12,7 @@
 
 > **文档定位**: Rust 1.92.0 异步编程的完整知识体系（兼容 Rust 1.90+ 特性）
 > **创建日期**: 2025-10-20
-> **适用版本**: Rust 1.92.0+ | Edition 2024
+> **适用版本**: Rust 1.96.1+ | Edition 2024
 > **文档类型**: 理论知识图谱 + 概念关系 + 可视化
 
 ---
@@ -144,7 +144,7 @@ graph LR
 | Future   | 依赖 | Poll + Waker       | 核心机制     |
 | Runtime  | 包含 | Executor + Reactor | 架构         |
 | Tokio    | 实现 | Runtime Trait      | 具体实现     |
-| JoinSet  | 提供 | 结构化并发         | Rust 1.92.0+ |
+| JoinSet  | 提供 | 结构化并发         | Rust 1.96.1+ |
 
 ---
 
@@ -236,6 +236,6 @@ _本知识图谱整合 C06 异步编程完整知识体系！_
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

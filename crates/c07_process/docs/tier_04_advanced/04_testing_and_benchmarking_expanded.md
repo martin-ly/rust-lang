@@ -2,7 +2,7 @@
 
 > **文档类型**: 高级主题
 > **难度**: ⭐⭐⭐⭐
-> **适用版本**: Rust 1.92.0+
+> **适用版本**: Rust 1.96.1+
 > **前置知识**: [性能工程实践](03_performance_engineering_practice.md)
 
 ---
@@ -854,7 +854,7 @@ assert!(condition);
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-22
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+
+**适用版本**: Rust 1.96.1+
 
 ---
 
@@ -863,6 +863,6 @@ assert!(condition);
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

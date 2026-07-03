@@ -11,7 +11,7 @@
 **模块**: C05 Threads
 **创建日期**: 2025-12-11
 **最后更新**: 2026-05-08
-**Rust 版本**: 1.96.0+ (Edition 2024)
+**Rust 版本**: 1.96.1+ (Edition 2024)
 **状态**: ✅ 已完成
 
 ---
@@ -25,7 +25,7 @@
   - [📋 概述 {#概述}](#-概述-概述)
   - [🚀 快速开始 {#快速开始}](#-快速开始-快速开始)
     - [基本线程创建 {#基本线程创建}](#基本线程创建-基本线程创建)
-    - [作用域线程（Rust 1.89+） {#作用域线程rust-189}](#作用域线程rust-189-作用域线程rust-189)
+    - [作用域线程（Rust 1.96.1+） {#作用域线程rust-189}](#作用域线程rust-189-作用域线程rust-189)
   - [📊 核心功能 {#核心功能}](#-核心功能-核心功能)
     - [1. 线程管理 {#1-线程管理}](#1-线程管理-1-线程管理)
       - [线程池 {#线程池}](#线程池-线程池)
@@ -111,7 +111,7 @@ let handle = thread::spawn(|| {
 handle.join().unwrap();
 ```
 
-### 作用域线程（Rust 1.89+） {#作用域线程rust-189}
+### 作用域线程（Rust 1.96.1+） {#作用域线程rust-189}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -1323,7 +1323,7 @@ let counter = Arc::new(Mutex::new(0));
 ## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-> **适用版本**: Rust 1.96.0+
+> **适用版本**: Rust 1.96.1+
 
 ### LazyLock 深度应用（Rust 1.95+ 增强） {#lazylock-深度应用rust-195-增强}
 
@@ -1617,7 +1617,7 @@ fn parallel_dynamic_windows(data: &[f64], size: usize) -> Vec<f64> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

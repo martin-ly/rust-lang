@@ -1,6 +1,6 @@
 # C08 Algorithms - 主索引
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.1+
 > **最后更新**: 2026-03-13
 
 📄 **一页纸总结**: [ONE_PAGE_SUMMARY](ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
@@ -337,6 +337,6 @@ Week 4: 实战项目
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

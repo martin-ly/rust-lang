@@ -1,13 +1,13 @@
-# Rust 1.97.0 稳定特性 {#rust-1970-稳定特性}
+# Rust 1.97.0 特性预览（beta / nightly 候选） {#rust-1970-特性预览}
 
-> **EN**: 21 Rust 1 97 Features
-> **Summary**: Rust 1.97.0 稳定特性 21 Rust 1 97 Features. (stub/archive redirect)
-> **Rust 版本**: 1.97.0 stable（2026-07-09）
+> **EN**: Rust 1.97.0 Preview Features (Beta / Nightly Candidate)
+> **Summary**: Rust 1.97.0 尚未 stable（当前最新稳定版为 1.96.1），本页为预览入口 stub，指向 `concept/07_future/rust_1_97_preview.md`。
+> **Rust 版本**: 1.97.0 beta / nightly 候选（预计 2026-07-09 stable）
 
 **本文内容已迁移**。项目权威来源为:
 
-- [`concept/07_future/rust_1_97_stabilized.md`](../../concept/07_future/rust_1_97_stabilized.md) — Rust 1.97.0 稳定特性的系统性覆盖（single source of truth）
+- [`concept/07_future/rust_1_97_preview.md`](../../concept/07_future/rust_1_97_preview.md) — Rust 1.97.0 前沿特性预览（beta / nightly 候选，single source of truth）
+- [`concept/07_future/rust_1_97_stabilized.md`](../../concept/07_future/rust_1_97_stabilized.md) — 待 1.97.0 正式发布后填充的稳定特性占位页
 - [`concept/07_future/rust_1_98_preview.md`](../../concept/07_future/rust_1_98_preview.md) — Rust 1.98+ 前沿特性预览
-- [`concept/07_future/rust_1_97_preview.md`](../../concept/07_future/rust_1_97_preview.md) — 已归档的 1.97 预览页（重定向 stub）
 
 代码示例参见 [`crates/c08_algorithms/src/rust_197_features.rs`](../../crates/c08_algorithms/src/rust_197_features.rs) 及各 crate 的 `rust_197_features.rs`。

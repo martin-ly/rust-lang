@@ -20,7 +20,7 @@
 > **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](tier_01_foundations/04_faq.md) | [Glossary](tier_01_foundations/03_glossary.md)
 
 **最后更新**: 2026-02-12
-**适用版本**: Rust 1.75+ (推荐 1.93.0+)
+**适用版本**: Rust 1.75+ (推荐 1.96.1+)
 
 **Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 **思维表征**: [决策图网](../../../docs/04_thinking/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/04_thinking/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/04_thinking/THINKING_REPRESENTATION_METHODS.md)
@@ -462,6 +462,6 @@ async-trait = "0.1"
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

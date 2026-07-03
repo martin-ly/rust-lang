@@ -1,8 +1,8 @@
 # Rust 学习项目版本索引
 
-> **当前活跃版本**: Rust 1.96.0
-> **发布日期**: 2026-05-28
-> **最后更新**: 2026-06-01
+> **当前活跃版本**: Rust 1.96.1
+> **发布日期**: 2026-07-04
+> **最后更新**: 2026-07-04
 > **状态**: ✅ 100% 完成
 
 ---
@@ -45,7 +45,7 @@ crates/
 | Rust 1.94 | 2026-03-05 | 已归档 | `*/src/archive/rust_194_features.rs` |
 | Rust 1.95 | 2026-04-16 | 已归档 | `*/src/archive/rust_195_features.rs` |
 | **Rust 1.96** | **2026-05-28** | **活跃** | `*/src/rust_196_features.rs` |
-| 权威来源 | [releases.rs](https://releases.rs/docs/1.96.0/) | - | - |
+| 权威来源 | [releases.rs](https://releases.rs/docs/1.96.1/) | - | - |
 
 ---
 
@@ -141,6 +141,6 @@ Rust 新版本发布
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

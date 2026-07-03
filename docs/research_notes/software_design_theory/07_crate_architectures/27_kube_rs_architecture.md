@@ -11,7 +11,7 @@
 > 本文档涉及的 Kubernetes 生态以 `kube-rs` crate 为主。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 >
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
 >
@@ -35,7 +35,7 @@
 >
 > **知识领域**: 云原生、Kubernetes、分布式系统、控制器模式、异步 IO
 >
-> **对应 Rust 版本**: 1.96.0+ (kube-rs 0.98+)
+> **对应 Rust 版本**: 1.96.1+ (kube-rs 0.98+)
 
 ---
 

@@ -2,7 +2,7 @@
 name = "c13_embedded"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.96.0"
+rust-version = "1.96.1"
 authors = ["Rust Learning Community"]
 description = "Rust bare-metal embedded systems learning module"
 license = "MIT OR Apache-2.0"

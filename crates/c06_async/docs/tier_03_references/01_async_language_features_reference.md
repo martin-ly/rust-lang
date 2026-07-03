@@ -1,6 +1,6 @@
 ﻿# Tier 3: 异步语言特性参考
 
-> **文档版本**: Rust 1.92.0+ | **更新日期**: 2025-12-11
+> **文档版本**: Rust 1.96.1+ | **更新日期**: 2025-12-11
 > **文档层级**: Tier 3 - 技术参考 | **文档类型**: 📘 语言规范
 
 ---
@@ -46,7 +46,7 @@
     - [9.2 使用 impl Trait](#92-使用-impl-trait)
   - [📚 延伸阅读](#-延伸阅读)
   - [📝 总结](#-总结)
-  - [**最后更新**: 2025-12-11 | **Rust 版本**: 1.92.0+](#最后更新-2025-12-11--rust-版本-1920)
+  - [**最后更新**: 2025-12-11 | **Rust 版本**: 1.96.1+](#最后更新-2025-12-11--rust-版本-1920)
 
 ## 📐 知识结构
 
@@ -116,7 +116,7 @@
 
 ## 🎯 文档说明
 
-本文档提供 Rust 1.92.0+ 异步语言特性的完整技术参考。
+本文档提供 Rust 1.96.1+ 异步语言特性的完整技术参考。
 
 **覆盖内容**: async/await 语法、Future trait、Pin、异步闭包、impl Trait、async fn in traits
 
@@ -496,7 +496,7 @@ fn get_future_boxed() -> Box<dyn Future<Output = i32>> {
 ---
 
 **文档维护**: C06 Async Team | **质量评分**: 95/100
-**最后更新**: 2025-12-11 | **Rust 版本**: 1.92.0+
+**最后更新**: 2025-12-11 | **Rust 版本**: 1.96.1+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -504,6 +504,6 @@ fn get_future_boxed() -> Box<dyn Future<Output = i32>> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

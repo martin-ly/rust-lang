@@ -5,7 +5,7 @@
 > **相关文档**: [02_thread_synchronization](02_thread_synchronization.md) | [FAQ](tier_01_foundations/04_faq.md) | [主索引](00_MASTER_INDEX.md) | [知识图谱](KNOWLEDGE_GRAPH.md)
 
 **最后更新**: 2025-10-19
-**适用版本**: Rust 1.92.0+ (充分利用最新特性)
+**适用版本**: Rust 1.96.1+ (充分利用最新特性)
 **难度等级**: ⭐⭐
 **文档类型**: ⚙️ 实践指南
 **增强内容**: ✅ 知识图谱 | ✅ 多维矩阵对比 | ✅ Rust 1.92.0 示例
@@ -926,6 +926,6 @@ println!("线程耗时: {:?}", duration);
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

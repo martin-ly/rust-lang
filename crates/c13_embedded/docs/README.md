@@ -34,6 +34,6 @@ cargo run -p c13_embedded --bin embedded_demo
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-06-28
 **状态**: ✅ 基础文档补齐

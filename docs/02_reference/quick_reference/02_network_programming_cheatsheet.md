@@ -63,7 +63,7 @@
 > **快速参考** | [完整文档](../../../crates/c10_networks/docs/README.md) | [代码示例](../../../crates/c10_networks/examples/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -611,7 +611,7 @@ async fn proxy_server() -> io::Result<()> {
 ---
 
 **最后更新**: 2026-05-08
-**Rust 版本**: 1.96.0+ (Edition 2024)
+**Rust 版本**: 1.96.1+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档
 
 ---
@@ -619,7 +619,7 @@ async fn proxy_server() -> io::Result<()> {
 ## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-> **适用版本**: Rust 1.96.0+
+> **适用版本**: Rust 1.96.1+
 
 ### 核心特性速查 {#核心特性速查}
 >
@@ -667,7 +667,7 @@ let gamma = f64::consts::EULER_GAMMA;
 ## Rust 1.95+ 在网络编程中的深度应用 {#rust-195-在网络编程中的深度应用}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.96.0+ | **实际场景**: 网络编程开发
+> **适用版本**: Rust 1.96.1+ | **实际场景**: 网络编程开发
 
 ### ControlFlow 在请求处理管道中的应用 {#controlflow-在请求处理管道中的应用}
 >
@@ -729,7 +729,7 @@ pub fn get_connection() -> Option<Connection> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

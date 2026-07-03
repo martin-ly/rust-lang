@@ -4,7 +4,7 @@
 > **Summary**: Upgraded KG ontology aligned with RDF 1.2, RDF-star, SKOS multilingual labels, and SHACL validation.
 >
 > **受众**: [研究者]
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **Bloom 层级**: 元（Meta）
 > **定位**: 本文件是 `kg_ontology.md`（已归档为 `archive/kg_ontology_v1_archived.md`）的 v2 升级版，在保留原有教学关系本体的基础上，显式对齐 W3C RDF 1.2、RDF-star、SKOS、JSON-LD 1.1 与 SHACL 数据形状标准，使项目知识图谱从"规范文档"进化为"可验证、可查询、可多语言消费"的 Linked Data。
 > **对齐来源**: [W3C RDF 1.2 Concepts] · [W3C RDF-star] · [W3C SKOS Reference] · [W3C JSON-LD 1.1] · [W3C SHACL] · [ISO 704:2022] · [ISO/IEC 21838-1:2021]
@@ -124,7 +124,7 @@ ex:equivalentTo a owl:ObjectProperty ;
 << ex:Ownership ex:dependsOn ex:TypeSystem >>
     ex:source "TRPL Ch. 3" ;
     ex:confidence "1.0"^^xsd:float ;
-    ex:version "1.96.0" ;
+    ex:version "1.96.1" ;
     ex:reviewed true ;
     dcterms:created "2026-06-27"^^xsd:date ;
     prov:wasDerivedFrom <https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html> .
@@ -213,7 +213,7 @@ ex:AffineLogic a ex:Theory ;
 << ex:Ownership ex:dependsOn ex:TypeSystem >>
     ex:source "TRPL Ch. 3-4" ;
     ex:confidence "1.0"^^xsd:float ;
-    ex:version "1.96.0" ;
+    ex:version "1.96.1" ;
     ex:reviewed true ;
     dcterms:created "2026-06-27"^^xsd:date ;
     prov:wasDerivedFrom <https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html> .
@@ -221,7 +221,7 @@ ex:AffineLogic a ex:Theory ;
 << ex:Ownership ex:equivalentTo ex:AffineLogic >>
     ex:source "concept/04_formal/01_linear_logic.md" ;
     ex:confidence "0.95"^^xsd:float ;
-    ex:version "1.96.0" ;
+    ex:version "1.96.1" ;
     ex:reviewed true .
 ```
 
@@ -260,7 +260,7 @@ ex:AffineLogic a ex:Theory ;
     "@annotation": {
       "ex:source": "TRPL Ch. 3-4",
       "ex:confidence": { "@value": "1.0", "@type": "xsd:float" },
-      "ex:version": "1.96.0",
+      "ex:version": "1.96.1",
       "ex:reviewed": true,
       "dcterms:created": { "@value": "2026-06-27", "@type": "xsd:date" },
       "prov:wasDerivedFrom": "https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html"
@@ -271,7 +271,7 @@ ex:AffineLogic a ex:Theory ;
     "@annotation": {
       "ex:source": "concept/04_formal/01_linear_logic.md",
       "ex:confidence": { "@value": "0.95", "@type": "xsd:float" },
-      "ex:version": "1.96.0",
+      "ex:version": "1.96.1",
       "ex:reviewed": true
     }
   }

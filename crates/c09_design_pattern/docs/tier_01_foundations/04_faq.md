@@ -6,7 +6,7 @@
 > **相关文档**: [项目概览](01_project_overview.md) | [主索引导航](02_navigation.md) | [术语表](03_glossary.md) | [完整FAQ](tier_01_foundations/04_faq.md)
 
 **最后更新**: 2025-12-25
-**适用版本**: Rust 1.92.0+ (Edition 2024)
+**适用版本**: Rust 1.96.1+ (Edition 2024)
 **文档类型**: 📚 问题解答
 
 ---
@@ -180,7 +180,7 @@
 
 #### Q4: Rust 中如何实现线程安全的单例模式？
 
-**A**: 使用 `OnceLock` (Rust 1.92.0+):
+**A**: 使用 `OnceLock` (Rust 1.96.1+):
 
 **推荐实现**:
 
@@ -433,7 +433,7 @@ trait Observer {
 **文档维护**: Documentation Team
 **创建日期**: 2025-12-25
 **最后更新**: 2025-12-25
-**适用版本**: Rust 1.92.0+
+**适用版本**: Rust 1.96.1+
 **文档状态**: ✅ 活跃维护
 ---
 
@@ -442,6 +442,6 @@ trait Observer {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

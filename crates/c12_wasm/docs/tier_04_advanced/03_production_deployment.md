@@ -6,7 +6,7 @@
 > **相关文档**: [性能分析与优化](02_performance_analysis_and_optimization.md) | [WASI 深入](01_wasi_in_depth.md)
 
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 
 ---
 
@@ -45,7 +45,7 @@
 - **定义**: Rust 1.92.0 WASM 生产环境部署和监控指南，包括部署方案、监控和调试、安全考虑等
 - **类型**: 高级层文档
 - **范畴**: WASM、部署实践
-- **版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+- **版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 - **相关概念**: 部署方案、CDN、NPM、Docker、监控、安全
 
 ### 属性特征
@@ -202,7 +202,7 @@ const MAX_MEMORY: usize = 100 * 1024 * 1024; // 100MB
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 
 ---
 
@@ -211,6 +211,6 @@ const MAX_MEMORY: usize = 100 * 1024 * 1024; // 100MB
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

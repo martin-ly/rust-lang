@@ -9,7 +9,7 @@
 > **分级**: [C]
 > **Bloom 层级**: L4-L5
 > **生成日期**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [docs/research_notes/](../../docs/research_notes/)
 > **扫描范围**: docs/research_notes/**/*.md

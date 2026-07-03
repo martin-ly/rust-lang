@@ -6,7 +6,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [10_trait_system_formalization.md](../../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)
 
@@ -294,7 +294,7 @@ fn heterogeneous_collection() {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

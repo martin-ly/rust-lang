@@ -2,7 +2,7 @@
 
 > **文档类型**: 高级主题
 > **难度**: ⭐⭐⭐⭐⭐
-> **适用版本**: Rust 1.92.0+
+> **适用版本**: Rust 1.96.1+
 > **前置知识**: [跨平台实践](../tier_02_guides/04_cross_platform_practice.md)
 
 ---
@@ -49,7 +49,7 @@
   - [10. 安全测试](#10-安全测试)
     - [10.1 安全测试套件](#101-安全测试套件)
     - [10.2 渗透测试清单](#102-渗透测试清单)
-  - [**适用版本**: Rust 1.92.0+](#适用版本-rust-1920)
+  - [**适用版本**: Rust 1.96.1+](#适用版本-rust-1920)
 
 ---
 
@@ -62,7 +62,7 @@
 - **定义**: Rust 1.92.0 安全与沙箱技术，包括进程隔离技术、资源限制、容器化技术、安全机制、沙箱实现、最佳实践、容器安全、威胁模型、安全配置模板、安全测试等
 - **类型**: 高级主题文档
 - **范畴**: 进程管理、安全
-- **版本**: Rust 1.92.0+ (Edition 2024)
+- **版本**: Rust 1.96.1+ (Edition 2024)
 - **相关概念**: 进程隔离、资源限制、容器化、安全机制、沙箱、威胁模型
 
 ### 属性特征
@@ -1615,7 +1615,7 @@ mod security_tests {
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-22
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+
+**适用版本**: Rust 1.96.1+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1623,6 +1623,6 @@ mod security_tests {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

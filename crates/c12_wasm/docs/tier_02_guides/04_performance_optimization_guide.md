@@ -6,7 +6,7 @@
 > **相关文档**: [JavaScript 互操作](03_javascript_interop.md) | [性能分析与优化](../tier_04_advanced/02_performance_analysis_and_optimization.md)
 
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 **Rust 1.92.0 特性**: 本文档已集成 Rust 1.92.0 性能优化特性
 
 ---
@@ -43,7 +43,7 @@
     - [分析工具](#分析工具)
     - [性能分析](#性能分析)
   - [📚 相关资源](#-相关资源)
-  - [**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
+  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
 
 ---
 
@@ -56,7 +56,7 @@
 - **定义**: WASM 性能优化的技术和最佳实践指南
 - **类型**: 性能优化指南文档
 - **范畴**: WebAssembly、性能工程
-- **版本**: Rust 1.92.0+, WASM 2.0
+- **版本**: Rust 1.96.1+, WASM 2.0
 - **相关概念**: 性能优化、二进制大小、运行时性能、内存优化
 
 ### 属性特征
@@ -366,7 +366,7 @@ wasm-opt --print-function-sizes module.wasm
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -374,6 +374,6 @@ wasm-opt --print-function-sizes module.wasm
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

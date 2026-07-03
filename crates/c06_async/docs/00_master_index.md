@@ -10,7 +10,7 @@
 # C06 异步编程 - 主索引
 
 > **文档定位**: 本文档是C06异步编程模块的完整导航系统，提供清晰的文档分类和学习路径。
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.1+
 > **最后更新**: 2026-03-13
 
 ## 📚 官方资源映射
@@ -102,7 +102,7 @@
 **特点**: 生态分析，版本特性
 
 - **01_ecosystem_analysis_2025.md** - 2025生态全景 ⭐⭐⭐⭐⭐
-- **02_language_features_192.md** - Rust 1.92.0+特性
+- **02_language_features_192.md** - Rust 1.96.1+特性
 - **03_formal_methods.md** - 形式化方法
 
 **查看详情**: [ecosystem/README.md](ecosystem/README.md)
@@ -383,6 +383,6 @@
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

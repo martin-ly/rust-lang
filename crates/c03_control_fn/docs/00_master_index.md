@@ -5,7 +5,7 @@
 > **相关文档**: [README](../README.md) | [FAQ](FAQ.md) | [Glossary](Glossary.md)
 
 **最后更新**: 2026-03-13
-**适用版本**: Rust 1.94.0+
+**适用版本**: Rust 1.96.1+
 **文档类型**: 📚 导航索引
 **English**: [00_MASTER_INDEX.en.md](00_MASTER_INDEX.en.md)
 
@@ -131,11 +131,11 @@
 
 | 文档                                                  | 说明           | Rust版本 |
 | :--- | :--- | :--- |
-| [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md) | match 深度使用 | 1.92.0+  |
-| [闭包深入](tier_04_advanced/02_closures_in_depth.md)         | 闭包深入       | 1.92.0+  |
-| [函数式编程](tier_04_advanced/03_functional_programming.md)     | 函数式编程     | 1.92.0+  |
-| [错误处理进阶](tier_04_advanced/04_advanced_error_handling.md) | 错误处理进阶   | 1.92.0+  |
-| [性能优化](tier_04_advanced/05_性能优化.md)         | 性能优化       | 1.92.0+  |
+| [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md) | match 深度使用 | 1.96.1+  |
+| [闭包深入](tier_04_advanced/02_closures_in_depth.md)         | 闭包深入       | 1.96.1+  |
+| [函数式编程](tier_04_advanced/03_functional_programming.md)     | 函数式编程     | 1.96.1+  |
+| [错误处理进阶](tier_04_advanced/04_advanced_error_handling.md) | 错误处理进阶   | 1.96.1+  |
+| [性能优化](tier_04_advanced/05_性能优化.md)         | 性能优化       | 1.96.1+  |
 
 ### 第四部分：实践应用
 
@@ -338,7 +338,7 @@ cargo test --test control_flow_tests
 **文档维护**: Rust 学习社区
 **更新频率**: 跟随项目进度持续更新
 **文档版本**: v1.0
-**Rust 版本**: 1.92.0+
+**Rust 版本**: 1.96.1+
 
 ---
 
@@ -347,6 +347,6 @@ cargo test --test control_flow_tests
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

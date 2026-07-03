@@ -9,7 +9,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
 > **对齐说明**: 本文档已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
 >
@@ -77,7 +77,7 @@
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
 > **分类**: 创建型
 > **安全边界**: 纯 Safe 或 需 unsafe
@@ -330,7 +330,7 @@ fn get_instance() -> Arc<Mutex<i32>> {
 >
 > **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
 
-以下示例已在 **Rust 1.96.0+ (Edition 2024)** 语义下校验，使用 `std::sync::OnceLock、std::sync::LazyLock` 等现代惯用法。
+以下示例已在 **Rust 1.96.1+ (Edition 2024)** 语义下校验，使用 `std::sync::OnceLock、std::sync::LazyLock` 等现代惯用法。
 
 ```rust
 use std::sync::{LazyLock, Mutex};
@@ -731,7 +731,7 @@ graph LR
 
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -783,7 +783,7 @@ graph LR
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

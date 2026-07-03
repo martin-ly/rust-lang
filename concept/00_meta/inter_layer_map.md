@@ -5,7 +5,7 @@
 >
 > **受众**: [进阶]
 >
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **Bloom 层级**: 分析
 > **定位**：本文件是 `concept/` 知识体系的全局关系骨架，显式定义 L0-L7 各层之间的**逻辑蕴含关系**、**形式化映射**、**反事实依赖**和**反向反馈**。
 > **方法论对齐**: Semantic Link Network (Zhuge 2010) · Bloom's Revised Taxonomy · KB Completeness & Consistency (Torchiano et al. 2018)
@@ -565,7 +565,7 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

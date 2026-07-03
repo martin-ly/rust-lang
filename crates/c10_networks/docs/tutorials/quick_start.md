@@ -1,6 +1,6 @@
 ﻿# C10 Networks 快速开始指南
 
-> 适用范围：Rust 1.92.0+，Tokio 1.35+。文档风格遵循 [`STYLE.md`](STYLE.md)。
+> 适用范围：Rust 1.96.1+，Tokio 1.35+。文档风格遵循 [`STYLE.md`](STYLE.md)。
 
 ## 📊 目录
 
@@ -85,7 +85,7 @@ cargo run --example dns_lookup -- example.com
 
 ### 系统要求
 
-- **Rust**: 1.92.0+ (推荐使用最新稳定版)
+- **Rust**: 1.96.1+ (推荐使用最新稳定版)
 - **操作系统**: Windows 10+, macOS 10.15+, Ubuntu 18.04+
 - **内存**: 至少 4GB RAM
 - **网络**: 互联网连接（用于下载依赖和测试）
@@ -636,7 +636,7 @@ open tarpaulin-report.html
 
 ### Q: 如何解决编译错误？
 
-A: 确保使用Rust 1.92.0+版本，并运行 `cargo update` 更新依赖。
+A: 确保使用Rust 1.96.1+版本，并运行 `cargo update` 更新依赖。
 
 ### Q: 网络请求超时怎么办？
 
@@ -675,6 +675,6 @@ _维护者: C10 Networks 开发团队_
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

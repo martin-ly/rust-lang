@@ -6,7 +6,7 @@
 > **相关文档**: [生产级部署](03_production_deployment.md) | [性能分析与优化](02_performance_analysis_and_optimization.md)
 
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 
 ---
 
@@ -63,7 +63,7 @@
 - **定义**: Rust 1.92.0 WASI（WebAssembly System Interface）深入指南，包括 WASI 基础、本地操作系统运行 WASM、文件系统、网络接口、时间接口等
 - **类型**: 高级层文档
 - **范畴**: WASM、系统接口
-- **版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+- **版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 - **相关概念**: WASI、WASM、系统接口、文件系统、网络接口、时间接口
 
 ### 属性特征
@@ -538,7 +538,7 @@ services:
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
 
 ---
 
@@ -547,6 +547,6 @@ services:
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

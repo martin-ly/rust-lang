@@ -5,7 +5,7 @@
 >
 > Crate: `common`
 > **版本**: 0.1.0
-> **Rust 版本**: 1.96.0+
+> **Rust 版本**: 1.96.1+
 > **状态**: 🚧 文档建设中
 >
 > 本目录存放 `common` 的学习参考文档。主要入口为 [00_MASTER_INDEX.md](00_MASTER_INDEX.md)。

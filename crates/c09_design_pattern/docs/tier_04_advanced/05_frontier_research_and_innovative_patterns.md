@@ -2,7 +2,7 @@
 
 > **文档定位**: Tier 4 高级主题
 > **最后更新**: 2025-12-11
-> **Rust版本**: 1.92.0+ (Edition 2024)
+> **Rust版本**: 1.96.1+ (Edition 2024)
 
 ## 📋 目录
 
@@ -21,7 +21,7 @@
   - [4.2 线性类型增强 (Linear Types)](#42-线性类型增强-linear-types)
     - [4.2.1 线性类型模拟](#421-线性类型模拟)
     - [4.2.2 线性会话类型 (Linear Session Types)](#422-线性会话类型-linear-session-types)
-    - [4.2.3 Rust 1.92.0+ 线性类型实践](#423-rust-1920-线性类型实践)
+    - [4.2.3 Rust 1.96.1+ 线性类型实践](#423-rust-1920-线性类型实践)
   - [5. Capability-based 设计](#5-capability-based-设计)
     - [5.1 能力令牌 (Capability Tokens)](#51-能力令牌-capability-tokens)
     - [5.2 能力传递和撤销](#52-能力传递和撤销)
@@ -528,7 +528,7 @@ pub fn linear_session_example() {
 ```
 ---
 
-### 4.2.3 Rust 1.92.0+ 线性类型实践
+### 4.2.3 Rust 1.96.1+ 线性类型实践
 
 ```rust
 /// 使用 Drop 检查器模拟线性约束
@@ -963,6 +963,6 @@ pub fn quantum_pattern_example() {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

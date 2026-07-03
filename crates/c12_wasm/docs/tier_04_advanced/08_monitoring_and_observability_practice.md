@@ -75,7 +75,7 @@
 - **定义**: Rust 1.92.0 监控与可观测性实践，包括可观测性三大支柱（Metrics、Logs、Traces）、Prometheus 监控、Grafana 可视化、日志聚合（Loki）、分布式追踪（Jaeger）、告警配置、最佳实践等
 - **类型**: 高级主题文档
 - **范畴**: WASM、监控、可观测性
-- **版本**: Rust 1.92.0+ / Edition 2024, Prometheus, Grafana, Loki, Jaeger
+- **版本**: Rust 1.96.1+ / Edition 2024, Prometheus, Grafana, Loki, Jaeger
 - **相关概念**: 监控、可观测性、Prometheus、Grafana、Loki、Jaeger、告警
 
 ### 属性特征
@@ -837,6 +837,6 @@ slos:
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

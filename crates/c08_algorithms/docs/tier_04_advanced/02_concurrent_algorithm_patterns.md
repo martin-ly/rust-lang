@@ -58,7 +58,7 @@
 - **定义**: Rust 1.92.0 并发算法模式，包括并发计算模型、无锁数据结构、并发算法设计、同步原语、并发算法分析、实践案例等
 - **类型**: 高级主题文档
 - **范畴**: 算法、并发编程
-- **版本**: Rust 1.92.0+ (Edition 2024)
+- **版本**: Rust 1.96.1+ (Edition 2024)
 - **相关概念**: Actor 模型、CSP、Reactor 模式、无锁数据结构、数据并行、任务并行、流水线并行
 
 ### 属性特征
@@ -1262,6 +1262,6 @@ pub fn concurrent_word_count(texts: Vec<String>) -> DashMap<String, usize> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

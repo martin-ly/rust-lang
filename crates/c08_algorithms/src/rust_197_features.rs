@@ -1,10 +1,10 @@
-//! Rust 1.97 稳定特性代码示例
-//! **状态**: Rust 1.97.0 stable（2026-07-09）
-//! **编译要求**: Rust 1.96.0+ 可编译（使用等效实现）；`#[cfg(nightly)]` 分支调用 1.97+ 新 API，
+//! Rust 1.97 Nightly 前瞻/候选特性代码示例
+//! **状态**: Rust 1.97.0 nightly candidate（2026-07-09）
+//! **编译要求**: Rust 1.96.1+ 可编译（使用等效实现）；`#[cfg(nightly)]` 分支调用 1.97+ 新 API，
 //! 可通过 `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 //! **来源**: [releases.rs](https://releases.rs/) · [Rust Standard Library Tracking](https://github.com/rust-lang/rust/labels/T-libs-api)
 //!
-//! 本文件覆盖 Rust 1.97.0 稳定版引入的标准库新 API。已进入 1.98 通道的特性单独标注并在
+//! 本文件覆盖 Rust 1.97.0 候选/nightly 标准库新 API。已进入 1.98 通道的特性单独标注并在
 //! 后续迁移到 `rust_198_features.rs`。
 #![allow(unexpected_cfgs)]
 #![allow(clippy::incompatible_msrv)]
@@ -15,14 +15,14 @@ use std::collections::VecDeque;
 use std::num::NonZeroU32;
 
 // ============================================================================
-// 0. NonZero 位操作 API (Rust 1.97 稳定)
+// 0. NonZero 位操作 API (Rust 1.97 候选/nightly)
 // ============================================================================
 
 /// `NonZero` 整数新增位查询方法：`highest_one` / `lowest_one` / `bit_width`
 ///
 /// 这些 API 避免了在查询前对零值进行特殊处理，因为 `NonZero` 类型本身已保证非零。
 ///
-/// 当前等效实现可在 Rust 1.96.0+ 编译；`#[cfg(nightly)]` 分支调用 1.97 原生 API。
+/// 当前等效实现可在 Rust 1.96.1+ 编译；`#[cfg(nightly)]` 分支调用 1.97 原生 API。
 #[cfg(nightly)]
 pub fn demo_nonzero_bit_ops() {
     let n = NonZeroU32::new(0b10100).unwrap();
@@ -48,7 +48,7 @@ pub fn demo_nonzero_bit_ops() {
 ///
 /// 使得字符分类可在编译期常量/静态项中使用。
 ///
-/// 当前等效实现可在 Rust 1.96.0+ 编译；`#[cfg(nightly)]` 分支调用 1.97 原生 API。
+/// 当前等效实现可在 Rust 1.96.1+ 编译；`#[cfg(nightly)]` 分支调用 1.97 原生 API。
 #[cfg(nightly)]
 pub fn demo_char_is_control_const() {
     const SPACE_CTRL: bool = ' '.is_control(); // false
@@ -215,12 +215,12 @@ pub fn demo_box_vec_non_null() {
 }
 
 // ============================================================================
-// 5b. Box::as_ptr / Box::as_mut_ptr — Rust 1.97 稳定
+// 5b. Box::as_ptr / Box::as_mut_ptr — Rust 1.97 候选/nightly
 // ============================================================================
 
 /// `Box::as_ptr` / `Box::as_mut_ptr` — 不物化引用的原始指针访问
 ///
-/// Rust 1.97 稳定：`Box::as_ptr` / `Box::as_mut_ptr`。
+/// Rust 1.97 候选/nightly：`Box::as_ptr` / `Box::as_mut_ptr`。
 /// 关键保证: 该方法不会 materialize 对底层内存的引用，因此在 aliasing model 中
 /// 与 `Box::leak` / `Box::as_ref` 不同，可与其它 raw pointer 操作安全交错。
 #[cfg(nightly)]

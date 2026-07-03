@@ -3,7 +3,7 @@
 > **EN**: Learning Mvp Path
 > **Summary**: Learning Mvp Path. Core Rust concept.
 > ```text Week 1: 基础能力构建（20h） ├─ Day 1-2: Hello World + 基础语法      [4h] ├─ Day 3-4: ownership与borrowing                [6h] ├─ Day 5-6: types系统与错误处理          [6h] └─ Day 7:   第一个 CLI 工具（无concurrency）    [4h] Week 2: concurrency与工程化（20h） ├─ Day 8-9:  集合与迭代器               [4h] ├─ Day 10-11: 多线程与concurrency              [6h] ├─ Day 12-13: async基础```
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 应用
 > **定位**: 本项目的**最小可行学习路径**（Minimum Viable Path）。无论背景如何，完成本路径即可独立编写带并发/异步的 Rust CLI 工具。
@@ -293,7 +293,7 @@ cargo test --test l3_ecosystem_alignment
 | | **精通** (5-8 周) | Week 2 Day 12-14 + 扩展路径 | 异步 + 综合项目 + 深入方向 |
 | [Rust Learning Path (官方)](https://www.rust-lang.org/learn) | 入门 → 进阶 | Week 1 → Week 2 | 官方路径更侧重语言本身，本路径增加工程实践 |
 | [Rust by Example](https://doc.rust-lang.org/rust-by-example/) | 主题式学习 | Day 1-6 阅读材料 | 可作为概念文件的代码示例补充 |
-| [TRPL 3rd Ed](https://doc.rust-lang.org/book/title-page.html) | 官方教程 | 全路径 | Rust 1.96.0+ / Edition 2024 基准；Ch 17 为完整异步编程入门 |
+| [TRPL 3rd Ed](https://doc.rust-lang.org/book/title-page.html) | 官方教程 | 全路径 | Rust 1.96.1+ / Edition 2024 基准；Ch 17 为完整异步编程入门 |
 | [Brown University Interactive Book](https://rust-book.cs.brown.edu/) | 交互式教程 | Day 3-4 / Day 10-11 | Aquascope 所有权可视化 + 嵌入式测验；OOPSLA 2023/2024 研究支撑；本地映射见 [`28_ownership_inventories_brown_book.md`](../01_foundation/28_ownership_inventories_brown_book.md) |
 | [Google Comprehensive Rust](https://google.github.io/comprehensive-rust/) | 工业级课程 | Week 1 Day 1-6 + 扩展专题 | Google Android 团队维护；4 天基础 + Android/Chromium/Bare Metal/Concurrency/Idiomatic/Unsafe 专题；本地映射见 [`GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md`](../../archive/reports/2026_07/GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md) |
 
@@ -305,7 +305,7 @@ cargo test --test l3_ecosystem_alignment
 ---
 
 > **文档版本**: 1.3
-> **对应 Rust 版本**: 1.96.0 (Edition 2024)
+> **对应 Rust 版本**: 1.96.1 (Edition 2024)
 > **最后更新**: 2026-06-22
 > **状态**: ✅ 已区分必修/选修 · 已标注 L3 测验入口 · 已新增生态对齐测验
 

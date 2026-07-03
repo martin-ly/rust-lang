@@ -6,7 +6,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **概念说明**: 测试是软件质量保障的核心环节，Rust 提供内建的测试框架支持单元测试、集成测试和文档测试。形式化测试通过属性测试（Property-based Testing）和模型检查验证代码正确性。
 > 内容已整合至： [02_testing_cheatsheet.md](../../../02_reference/quick_reference/02_testing_cheatsheet.md)
@@ -272,7 +272,7 @@ mod concurrency_tests {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

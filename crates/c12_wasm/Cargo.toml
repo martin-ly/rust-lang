@@ -2,7 +2,7 @@
 name = "c12_wasm"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.96.0"
+rust-version = "1.96.1"
 authors = ["Rust Learning Community"]
 keywords = ["wasm", "webassembly", "browser"]
 categories = ["wasm", "web-programming"]

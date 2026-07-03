@@ -10,7 +10,7 @@
 > **定理链编号**: T-020 → T-030 → 工程模式库
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 >
 > **研究笔记写作最佳实践** → [research_notes/10_best_practices.md](../../archive/research_notes_2026_06_25/10_best_practices.md)
@@ -1326,7 +1326,7 @@ println!("运行时长: {:?}", stopped.duration());
 ## Rust 1.95+ 最佳实践（深度指南） {#rust-195-最佳实践深度指南}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.96.0+
+> **适用版本**: Rust 1.96.1+
 
 ---
 
@@ -2123,7 +2123,7 @@ fn process_with_control_flow(data: &[i64]) -> ControlFlow<Error, Vec<i64>> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

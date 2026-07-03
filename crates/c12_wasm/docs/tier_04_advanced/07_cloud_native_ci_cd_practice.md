@@ -71,7 +71,7 @@
 - **定义**: Rust 1.92.0 云原生 CI/CD 实践，包括 CI/CD 架构设计、GitHub Actions 完整流程、GitLab CI 配置、构建优化、测试策略、部署策略、监控和回滚、最佳实践等
 - **类型**: 高级主题文档
 - **范畴**: WASM、CI/CD
-- **版本**: Rust 1.92.0+ / Edition 2024, GitHub Actions, GitLab CI, Jenkins
+- **版本**: Rust 1.96.1+ / Edition 2024, GitHub Actions, GitLab CI, Jenkins
 - **相关概念**: CI/CD、GitHub Actions、GitLab CI、构建优化、部署策略、监控
 
 ### 属性特征
@@ -889,6 +889,6 @@ feature/*    develop       main/tags
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

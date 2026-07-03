@@ -2,7 +2,7 @@
 >
 > **EN**: Algorithms–Patterns Semantic Bridge
 > **Summary**: A semantic bridge linking algorithmic thinking to design patterns in Rust.
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **受众**: [专家]
 > **层级**: L0 元信息 — 跨域语义关联
 > **A/S/P 标记**: **S** — Structure

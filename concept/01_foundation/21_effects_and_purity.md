@@ -645,7 +645,7 @@ fn main() {
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/) ·
 > [Rust RFCs](https://rust-lang.github.io/rfcs/)
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 权威来源对照
 

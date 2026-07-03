@@ -9,8 +9,8 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 > **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/` 迁回，正在按 [Rust Design Patterns – Idioms](https://rust-unofficial.github.io/patterns/idioms/index.html)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) 等权威来源升级。
 >
 > **权威来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
@@ -70,8 +70,8 @@
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 
 ---
 
@@ -664,7 +664,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -711,7 +711,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

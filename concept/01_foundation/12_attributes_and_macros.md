@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 >
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **本节关键术语**: 属性 (Attribute) · 宏 (Macro) · 声明宏 (Declarative Macro) · 过程宏 (Procedural Macro) · derive — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 属性与声明宏：编译期元编程基础
@@ -563,7 +563,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
