@@ -39,8 +39,10 @@
 
   // rust-analyzer 配置
   "rust-analyzer.check.command": "clippy",
-  "rust-analyzer.check.features": "all",
-  "rust-analyzer.cargo.features": "all",
+  // 使用 default features：all-features 会在 Windows 上触发 rdkafka-sys 原生构建失败，
+  // 导致 rust-analyzer 无法刷新诊断；CI/手动仍可用 --all-features 在支持环境中检查。
+  "rust-analyzer.check.features": "default",
+  "rust-analyzer.cargo.features": "default",
   "rust-analyzer.rustfmt.extraArgs": ["+nightly"],
 
   // 文件保存配置

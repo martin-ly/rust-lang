@@ -10,6 +10,8 @@
 //! struct 模式拒绝元组索引简写）均为编译器/lint 行为变更，没有可直接切换的 runtime API，
 //! 因此不采用 `#[cfg(nightly)]` 分支，保留垫片并更新注释。
 #![allow(clippy::incompatible_msrv)]
+#![allow(unexpected_cfgs)]
+#![allow(clippy::borrowed_box)]
 
 /// # Rust 1.97 宏系统特性演示
 /// # Rust 1.97 macro-system feature demonstration
@@ -69,7 +71,11 @@ mod tests {
 
     #[test]
     fn test_tuple_index_shorthand() {
-        assert!(Rust197MacroFeatures::has_tuple_index_shorthand(&["name", "0"]));
-        assert!(!Rust197MacroFeatures::has_tuple_index_shorthand(&["name", "age"]));
+        assert!(Rust197MacroFeatures::has_tuple_index_shorthand(&[
+            "name", "0"
+        ]));
+        assert!(!Rust197MacroFeatures::has_tuple_index_shorthand(&[
+            "name", "age"
+        ]));
     }
 }

@@ -5,6 +5,7 @@
 //! 分支保留，可通过 `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 #![allow(clippy::incompatible_msrv)]
 #![allow(unexpected_cfgs)]
+#![allow(clippy::borrowed_box)]
 
 use std::hash::BuildHasher;
 

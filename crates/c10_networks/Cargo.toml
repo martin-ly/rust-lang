@@ -119,8 +119,9 @@ criterion = { workspace = true }
 anyhow = { workspace = true }
 axum = { workspace = true }
 ring = { workspace = true }
-mongodb = "3.0"
-lapin = "2.5"
+# 2026-07-04: cargo update 后同步到当前解析版本
+mongodb = "3.7.0"
+lapin = "2.5.5"
 
 aes-gcm = "0.10"
 sha2 = { workspace = true }

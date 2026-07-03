@@ -12,6 +12,7 @@
 
 #![allow(clippy::incompatible_msrv)]
 #![allow(unexpected_cfgs)]
+#![allow(clippy::borrowed_box)]
 
 use std::collections::hash_map::DefaultHasher;
 use std::hash::BuildHasherDefault;

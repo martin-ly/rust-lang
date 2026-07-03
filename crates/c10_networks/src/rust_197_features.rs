@@ -10,6 +10,8 @@
 //! `cfg_target_has_atomic_equal_alignment`）均为行为或 cfg 条件变更，
 //! 没有可直接切换的 runtime API，因此不采用 `#[cfg(nightly)]` 分支，保留垫片并更新注释。
 #![allow(clippy::incompatible_msrv)]
+#![allow(unexpected_cfgs)]
+#![allow(clippy::borrowed_box)]
 
 use std::io;
 use std::sync::atomic::AtomicUsize;

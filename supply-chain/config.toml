@@ -5089,7 +5089,7 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.mongocrypt-sys]]
-version = "0.1.5+1.15.1"
+version = "0.1.6+1.18.2"
 criteria = "safe-to-deploy"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
@@ -5491,7 +5491,7 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.num-bigint]]
-version = "0.4.6"
+version = "0.4.7"
 criteria = "safe-to-deploy"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
@@ -6871,7 +6871,7 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.rapidhash]]
-version = "4.4.2"
+version = "4.5.0"
 criteria = "safe-to-deploy"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"

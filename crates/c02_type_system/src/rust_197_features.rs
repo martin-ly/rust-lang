@@ -5,6 +5,7 @@
 //! 分支保留，可通过 `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 #![allow(clippy::incompatible_msrv)]
 #![allow(unexpected_cfgs)]
+#![allow(clippy::borrowed_box)]
 
 use std::num::NonZeroU32;
 
@@ -90,14 +91,14 @@ impl Rust197Features {
 
     /// 构造默认哈希器
     #[cfg(nightly)]
-    pub const fn build_hasher_default_new(
-    ) -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
+    pub const fn build_hasher_default_new()
+    -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
         std::hash::BuildHasherDefault::new()
     }
 
     #[cfg(not(nightly))]
-    pub fn build_hasher_default_new(
-    ) -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
+    pub fn build_hasher_default_new()
+    -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
         std::hash::BuildHasherDefault::new()
     }
 

@@ -10,6 +10,8 @@
 //! struct 模式拒绝元组索引简写）均为编译器/lint 行为变更，没有可直接切换的 runtime API，
 //! 因此不采用 `#[cfg(nightly)]` 分支，保留垫片并更新注释。
 #![allow(clippy::incompatible_msrv, dead_code)]
+#![allow(unexpected_cfgs)]
+#![allow(clippy::borrowed_box)]
 
 /// # Rust 1.97 过程宏辅助特性
 /// # Rust 1.97 procedural-macro helper features

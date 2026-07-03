@@ -11,6 +11,7 @@
 
 #![allow(clippy::incompatible_msrv)]
 #![allow(unexpected_cfgs)]
+#![allow(clippy::borrowed_box)]
 
 use std::collections::hash_map::DefaultHasher;
 use std::hash::BuildHasherDefault;
@@ -36,7 +37,10 @@ impl Rust197EmbeddedFeatures {
     /// 在嵌入式 no_std 环境中常用于静态断言缓冲区尺寸。
     #[cfg(nightly)]
     pub const fn const_size_and_align_of_val<T: Sized>(value: &T) -> (usize, usize) {
-        (core::mem::size_of_val(value), core::mem::align_of_val(value))
+        (
+            core::mem::size_of_val(value),
+            core::mem::align_of_val(value),
+        )
     }
 
     #[cfg(not(nightly))]

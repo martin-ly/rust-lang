@@ -7,6 +7,7 @@
 //! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。
 #![allow(clippy::incompatible_msrv)]
 #![allow(unexpected_cfgs)]
+#![allow(clippy::borrowed_box)]
 
 use std::io;
 
@@ -64,8 +65,12 @@ mod tests {
 
     #[test]
     fn test_function_pointers_equal() {
-        assert!(Rust197ProcessFeatures::function_pointers_equal(add_one, add_one));
-        assert!(!Rust197ProcessFeatures::function_pointers_equal(add_one, add_two));
+        assert!(Rust197ProcessFeatures::function_pointers_equal(
+            add_one, add_one
+        ));
+        assert!(!Rust197ProcessFeatures::function_pointers_equal(
+            add_one, add_two
+        ));
     }
 
     #[test]

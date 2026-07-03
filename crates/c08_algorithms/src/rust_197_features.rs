@@ -8,6 +8,7 @@
 //! 后续迁移到 `rust_198_features.rs`。
 #![allow(unexpected_cfgs)]
 #![allow(clippy::incompatible_msrv)]
+#![allow(clippy::borrowed_box)]
 
 use std::collections::VecDeque;
 #[cfg(nightly)]

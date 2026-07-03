@@ -7,6 +7,7 @@
 //! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。
 #![allow(clippy::incompatible_msrv)]
 #![allow(unexpected_cfgs)]
+#![allow(clippy::borrowed_box)]
 
 use std::collections::hash_map::DefaultHasher;
 use std::hash::BuildHasherDefault;
