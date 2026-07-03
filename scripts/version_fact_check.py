@@ -307,6 +307,11 @@ def main() -> int:
         action="store_true",
         help="输出修正建议",
     )
+    parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="将 warning 也视为失败（退出码非 0）",
+    )
     args = parser.parse_args()
 
     report = Report()
@@ -331,6 +336,8 @@ def main() -> int:
     else:
         print_text_report(report)
 
+    if args.strict and report.findings:
+        return 1
     return 1 if report.errors() else 0
 
 

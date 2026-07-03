@@ -34,6 +34,23 @@ jobs:
       - name: Check formatting
         run: cargo fmt --all -- --check
 
+  # 版本对齐检查：防止文档/注释中的 Rust 版本号与 MSRV 漂移
+  version_alignment:
+    name: Version Alignment Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@1.96.1
+
+      - name: Check version facts
+        run: python scripts/version_fact_check.py --strict --json
+
+      - name: Check project version baseline
+        run: python scripts/rust_version_tracker.py
+
   # Clippy 检查
   clippy:
     name: Clippy Linting
