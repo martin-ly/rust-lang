@@ -5,7 +5,7 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： 10_memory_analysis.md (研究笔记)
@@ -34,6 +34,7 @@ mindmap
       内存复用
       性能优化
 ```
+
 ## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -69,6 +70,7 @@ fn heap_allocation() {
     let s = String::from("hello"); // String：可变字符串
 }  // 自动调用 drop，释放堆内存
 ```
+
 ### 智能指针 {#智能指针}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -106,6 +108,7 @@ fn refcell_demo() {
     cell.borrow_mut().push(4);  // 运行时检查
 }
 ```
+
 ### 零成本抽象 {#零成本抽象}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -124,6 +127,7 @@ fn zero_cost_iter() {
     // 等效于手写的优化循环
 }
 ```
+
 ### 自定义智能指针与 Drop  trait {#自定义智能指针与-drop-trait}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -167,6 +171,7 @@ fn custom_smart_pointer_demo() {
     // tracked 离开作用域时自动调用 drop
 }
 ```
+
 ### 内存池与对象复用 {#内存池与对象复用}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -211,6 +216,7 @@ fn object_pool_demo() {
     pool.release(buf); // 归还到池中复用
 }
 ```
+
 ---
 
 ## 使用场景 {#使用场景}
@@ -276,7 +282,7 @@ fn object_pool_demo() {
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

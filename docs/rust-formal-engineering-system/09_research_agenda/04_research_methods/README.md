@@ -4,7 +4,7 @@
 > **Summary**: 研究方法 Research Methods Index. (stub/archive redirect)
 > **分级**: [B]
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **概念说明**: 研究方法是指在 Rust 形式化工程中进行系统探索的科学方法论，包括问题定义、形式化建模、定理陈述与证明、验证工具应用等步骤。形式化方法通过数学手段验证程序的正确性，确保代码行为符合规范。
@@ -39,6 +39,7 @@
     ↓
 代码实现与验证
 ```
+
 ### 研究笔记结构 {#研究笔记结构}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -76,6 +77,7 @@
 - 未解决的疑问
 - 进一步研究方向
 ```
+
 ### 证明验证工具 {#证明验证工具}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -103,6 +105,7 @@ fn double(x: i32) -> i32 {
     x * 2
 }
 ```
+
 ### 研究方法论示例 {#研究方法论示例}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -163,6 +166,7 @@ mod verification_tests {
     }
 }
 ```
+
 ### 类型系统研究示例 {#类型系统研究示例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -189,6 +193,7 @@ fn verify<'long: 'short>(long: &'long str, short: &'short str) {
     // let l: &'long str = short;  // Error: 'short 不 <: 'long
 }
 ```
+
 ### 所有权研究示例 {#所有权研究示例}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -233,6 +238,7 @@ fn borrowing_rules() {
     // let r4 = &data;  // Error: cannot borrow while mutable borrow active
 }
 ```
+
 ### 形式化规范写作 {#形式化规范写作}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -289,6 +295,7 @@ mod property_tests {
     }
 }
 ```
+
 ---
 
 ## 形式化方法 {#形式化方法}
@@ -328,7 +335,7 @@ mod property_tests {
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

@@ -4,7 +4,7 @@
 > **Summary**: 编译器理论 Compiler Index. (stub/archive redirect)
 > **分级**: [B]
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **概念说明**: Rust 编译器（rustc）将源代码转换为机器码，经过词法分析、语法分析、语义分析、类型检查、借用检查、MIR 优化和 LLVM 代码生成等阶段。理解编译器理论有助于优化代码性能和诊断编译错误。
@@ -34,6 +34,7 @@
 // 7. 代码生成：MIR → LLVM IR
 // 8. LLVM 优化和代码生成
 ```
+
 ### 编译器属性 {#编译器属性}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -71,6 +72,7 @@ extern "C" {
     fn c_function();
 }
 ```
+
 ### 编译器标志 {#编译器标志}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -94,6 +96,7 @@ rustc -C codegen-units=1  # 单代码生成单元（最大优化）
 rustc -C target-cpu=native  # 针对本机 CPU
 rustc -C target-cpu=haswell # 针对特定 CPU
 ```
+
 ### 条件编译示例 {#条件编译示例}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -124,6 +127,7 @@ pub fn advanced_feature() {
 // 编译时断言
 const _: () = assert!(std::mem::size_of::<usize>() == 8, "64-bit only");
 ```
+
 ### 过程宏示例 {#过程宏示例}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -158,6 +162,7 @@ pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
     item
 }
 ```
+
 ### 编译期计算 {#编译期计算}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -183,6 +188,7 @@ impl<T, const N: usize> Array<T, N> {
     }
 }
 ```
+
 ---
 
 ## 形式化方法 {#形式化方法}
@@ -217,7 +223,7 @@ impl<T, const N: usize> Array<T, N> {
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

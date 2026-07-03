@@ -5,7 +5,7 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： 10_lifetime_formalization.md
@@ -69,6 +69,7 @@ fn constrained_lifetime<'a, 'b: 'a>(
     short
 }
 ```
+
 ### 生命周期省略规则（Lifetime Elision） {#生命周期省略规则lifetime-elision}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -97,6 +98,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 ### 生命周期边界与类型 {#生命周期边界与类型}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -128,6 +130,7 @@ fn trait_object_lifetime() {
     let obj: Box<dyn std::fmt::Display + '_> = Box::new(&s);
 }
 ```
+
 ### 高级生命周期模式 {#高级生命周期模式}
 
 ```rust,ignore
@@ -171,6 +174,7 @@ fn self_referential_demo() {
     // 现在 s 不能安全地移动，因为 ptr 指向 data
 }
 ```
+
 ### 生命周期的子类型关系 {#生命周期的子类型关系}
 
 ```rust
@@ -211,6 +215,7 @@ fn invariance(x: &mut &'static str) {
     // 不能传入 &mut &'short str
 }
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -219,7 +224,7 @@ fn invariance(x: &mut &'static str) {
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

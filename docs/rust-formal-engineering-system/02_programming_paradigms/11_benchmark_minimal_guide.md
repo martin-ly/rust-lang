@@ -4,7 +4,7 @@
 > **Summary**: 基准测试最小指南 Benchmark Minimal Guide. (stub/archive redirect)
 > **分级**: [B]
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [10_performance_benchmarks.md](../../../archive/research_notes_2026_06_25/experiments/10_performance_benchmarks.md)
@@ -54,6 +54,7 @@ fn fibonacci(n: u64) -> u64 {
     }
 }
 ```
+
 ### 使用 Criterion 进行可靠基准测试 {#使用-criterion-进行可靠基准测试}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -93,6 +94,7 @@ fn fibonacci_benchmark(c: &mut Criterion) {
 criterion_group!(benches, fibonacci_benchmark);
 criterion_main!(benches);
 ```
+
 ### 防止编译器优化（black_box） {#防止编译器优化black_box}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -122,6 +124,7 @@ pub fn custom_black_box<T>(dummy: T) -> T {
     }
 }
 ```
+
 ### 参数化基准测试 {#参数化基准测试}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -152,6 +155,7 @@ fn bench_various_sizes(c: &mut Criterion) {
     group.finish();
 }
 ```
+
 ### 比较不同实现 {#比较不同实现}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -203,6 +207,7 @@ fn bench_comparison(c: &mut Criterion) {
     group.finish();
 }
 ```
+
 ### 异步基准测试 {#异步基准测试}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -232,6 +237,7 @@ fn bench_async(c: &mut Criterion) {
     });
 }
 ```
+
 ### 吞吐量测量 {#吞吐量测量}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -259,6 +265,7 @@ fn bench_with_throughput(c: &mut Criterion) {
     group.finish();
 }
 ```
+
 ---
 
 ## 基准测试最佳实践 {#基准测试最佳实践}
@@ -297,6 +304,7 @@ fn expensive_operation() -> Vec<u32> {
     (0..10000).map(|x| x * x).collect()
 }
 ```
+
 ### 预热与稳定 {#预热与稳定}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -324,6 +332,7 @@ fn cache_sensitive_operation() -> Vec<f64> {
     vec![1.0; 1000].iter().map(|x| x.sqrt()).collect()
 }
 ```
+
 ### 基准测试隔离 {#基准测试隔离}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -349,6 +358,7 @@ fn bench2(c: &mut Criterion) {
     });
 }
 ```
+
 ---
 
 ## 性能分析工具集成 {#性能分析工具集成}
@@ -369,75 +379,6 @@ $ cargo bench -- --profile-time 10
 $ perf record -g target/release/deps/my_benchmark-xxx --bench
 $ perf report
 ```
-## 📑 目录 {#目录}
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-- 基准测试最小指南
-  - [形式化链接](#形式化链接)
-  - [基准测试核心概念](#基准测试核心概念)
-    - [为什么需要基准测试](#为什么需要基准测试)
-    - [使用 Criterion 进行可靠基准测试](#使用-criterion-进行可靠基准测试)
-    - [防止编译器优化（black\_box）](#防止编译器优化black_box)
-    - [参数化基准测试](#参数化基准测试)
-    - [比较不同实现](#比较不同实现)
-    - [异步基准测试](#异步基准测试)
-    - [吞吐量测量](#吞吐量测量)
-  - [基准测试最佳实践](#基准测试最佳实践)
-    - [统计显著性](#统计显著性)
-    - [预热与稳定](#预热与稳定)
-    - [基准测试隔离](#基准测试隔离)
-  - [性能分析工具集成](#性能分析工具集成)
-    - [使用 perf 分析](#使用-perf-分析)
-  - [📑 目录](#目录)
-    - [使用 cargo-flamegraph](#使用-cargo-flamegraph)
-    - [内存分配分析](#内存分配分析)
-  - [常见陷阱与避免方法](#常见陷阱与避免方法)
-  - [快速开始模板](#快速开始模板)
-  - [相关研究笔记](#相关研究笔记)
-    - [实验分析](#实验分析)
-    - [工具链](#工具链)
-  - [相关 crates](#相关-crates)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引-1)
-  - [权威来源索引](#权威来源索引-1)
-
-### 使用 cargo-flamegraph {#使用-cargo-flamegraph}
-
-> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
-
-```bash
-# 安装 {#安装}
-$ cargo install flamegraph
-
-# 生成火焰图 {#生成火焰图}
-$ cargo flamegraph --bench my_benchmark
-```
-### 内存分配分析 {#内存分配分析}
-
-> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
-
-```rust,ignore
-// 使用 dhat 进行堆分析
-// Cargo.toml:
-// [dev-dependencies]
-// dhat = "0.3"
-
-#[global_allocator]
-static ALLOC: dhat::Alloc = dhat::Alloc;
-
-fn profile_memory() {
-    let _profiler = dhat::Profiler::new_heap();
-
-    // 测试代码
-    let data: Vec<Vec<u8>> = (0..1000)
-        .map(|i| vec![0; i * 100])
-        .collect();
-
-    drop(data);
-}
-```
----
 
 ## 常见陷阱与避免方法 {#常见陷阱与避免方法}
 >
@@ -502,6 +443,7 @@ fn good_bench3(c: &mut Criterion) {
     });
 }
 ```
+
 ---
 
 ## 快速开始模板 {#快速开始模板}
@@ -538,6 +480,7 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
+
 ---
 
 ## 相关研究笔记 {#相关研究笔记}
@@ -582,7 +525,7 @@ criterion_main!(benches);
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

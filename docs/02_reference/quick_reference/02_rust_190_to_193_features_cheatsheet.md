@@ -184,7 +184,7 @@ pub unsafe fn cpuid() {
 
 ## 迁移检查清单 {#迁移检查清单}
 
-- [ ] 确认 Rust 版本 ≥ 1.96.0（本速查表为历史归档，特性已在 1.96.0 中稳定可用）
+- [ ] 确认 Rust 版本 ≥ 1.96.1（本速查表为历史归档，特性已在 1.96.1 中稳定可用）
 - [ ] 检查 `dangling_pointers_from_locals` lint 警告
 - [ ] 检查 never type 相关 lint（`never_type_fallback_flowing_into_unsafe`）
 - [ ] 评估 `Box::new_zeroed` 等 API 替换机会

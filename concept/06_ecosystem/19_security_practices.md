@@ -594,7 +594,7 @@ graph TD
 
 **攻击链**：攻击者将 `https://example.com/index.git` 配置为需要认证下载的 Cargo sparse registry，下载指向记录凭证的服务器；然后发布恶意 crate `foo` 依赖该 registry 下的 `bar`；受害者下载 `foo` 时，Cargo 误认为两个 registry 共享同一凭证，把 Cargo token 发送给恶意服务器。
 
-**修复**：Rust 1.96.0 仅对 **git 协议** 的 registry URL 剥离 `.git` 后缀；sparse 索引不再进行此规范化。
+**修复**：Rust 1.96.1 仅对 **git 协议** 的 registry URL 剥离 `.git` 后缀；sparse 索引不再进行此规范化。
 
 **影响版本**：Rust 1.68（sparse registry 稳定）至 1.95 的所有 Cargo 版本。
 

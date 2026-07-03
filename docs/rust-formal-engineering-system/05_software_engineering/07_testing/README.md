@@ -5,7 +5,7 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **概念说明**: 测试是软件质量保障的核心环节，Rust 提供内建的测试框架支持单元测试、集成测试和文档测试。形式化测试通过属性测试（Property-based Testing）和模型检查验证代码正确性。
@@ -82,6 +82,7 @@ fn some_operation() -> Result<i32, String> {
     Ok(42)
 }
 ```
+
 ### 集成测试 {#集成测试}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -97,6 +98,7 @@ fn test_add_integration() {
     assert_eq!(add(2, 3), 5);
 }
 ```
+
 ### 文档测试 {#文档测试}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -115,6 +117,7 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ```
+
 ### 属性测试 {#属性测试}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -147,6 +150,7 @@ fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ```
+
 ### 模拟与 Mock {#模拟与-mock}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -174,6 +178,7 @@ mod mock_tests {
     }
 }
 ```
+
 ### 形式化验证测试 {#形式化验证测试}
 
 ```rust
@@ -210,6 +215,7 @@ mod contract_tests {
     }
 }
 ```
+
 ### 并发测试 {#并发测试}
 
 ```rust
@@ -240,6 +246,7 @@ mod concurrency_tests {
     }
 }
 ```
+
 ---
 
 ## 形式化方法 {#形式化方法}
@@ -273,7 +280,7 @@ mod concurrency_tests {
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

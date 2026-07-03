@@ -44,7 +44,7 @@
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** ✅
 
-`assert_matches!` 是 Rust 社区期待已久的模式断言宏，终于随 **1.96.0** 稳定。它允许在测试和调试中直接对 `Result`、`Option`、枚举变体进行**模式匹配断言**，无需繁琐的 `if let` 或 `match` 展开。
+`assert_matches!` 是 Rust 社区期待已久的模式断言宏，终于随 **1.96.1** 稳定。它允许在测试和调试中直接对 `Result`、`Option`、枚举变体进行**模式匹配断言**，无需繁琐的 `if let` 或 `match` 展开。
 
 ---
 

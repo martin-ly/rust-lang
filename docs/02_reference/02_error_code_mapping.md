@@ -2253,7 +2253,7 @@ fn get_ref() -> &'static str {
 **解决方案**:
 
 ```rust
-#![feature(gen_blocks)]  // 需要 nightly（截至 Rust 1.96.0 仍 unstable）
+#![feature(gen_blocks)]  // 需要 nightly（截至 Rust 1.96.1 仍 unstable）
 
 fn main() {
     // 使用不稳定特性，例如 gen blocks

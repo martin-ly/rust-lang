@@ -179,6 +179,9 @@ def scan_file(path: Path, report: Report, fix_suggestions: bool = False) -> None
                 groups = match.groups()
                 if len(groups) >= group_idx:
                     claimed = f"1.{groups[group_idx - 1]}"
+                    # 如果当前行已显式包含实际稳定版本号，视为免责声明/上下文说明，跳过误报
+                    if expected_version in line:
+                        continue
                     if normalize_version(claimed) != normalize_version(expected_version):
                         # 判断严重程度：相差越大越严重
                         claimed_minor = int(groups[group_idx - 1])

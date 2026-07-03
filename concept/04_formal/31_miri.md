@@ -264,7 +264,7 @@ graph TD
 ---
 
 > **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/), [The Rustonomicon](https://doc.rust-lang.org/nomicon/), [Miri](https://github.com/rust-lang/miri)
-> **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Rust 1.96.0 / Miri nightly
+> **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Rust 1.96.1 / Miri nightly
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

@@ -5,7 +5,7 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [c05_threads/](../../../../crates/c05_threads/README.md)、[c06_async/](../../../../crates/c06_async/README.md)
@@ -97,6 +97,7 @@ fn demo() {
     actor.stop();
 }
 ```
+
 ### 异步 Actor {#异步-actor}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -164,6 +165,7 @@ impl AsyncProcessor {
     }
 }
 ```
+
 ### Actor 监督与容错 {#actor-监督与容错}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -248,6 +250,7 @@ impl Supervisor {
     }
 }
 ```
+
 ### 路由与负载均衡 {#路由与负载均衡}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -318,6 +321,7 @@ impl<M: Clone + Send + 'static> BroadcastRouter<M> {
     }
 }
 ```
+
 ### 请求-响应模式 {#请求-响应模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -404,6 +408,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
     }
 }
 ```
+
 ---
 
 ## 使用场景 {#使用场景}
@@ -468,7 +473,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

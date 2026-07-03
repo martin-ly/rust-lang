@@ -5,7 +5,7 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [c05_threads/](../../../../crates/c05_threads/README.md)
@@ -67,6 +67,7 @@ fn channel_communication() {
     }
 }
 ```
+
 ### 共享状态并发 {#共享状态并发}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -137,6 +138,7 @@ fn atomic_demo() {
     println!("Result: {}", counter.load(Ordering::Relaxed));  // 10
 }
 ```
+
 ### 线程同步原语 {#线程同步原语}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -190,6 +192,7 @@ fn condvar_demo() {
     println!("Main thread awakened");
 }
 ```
+
 ### Scoped 线程（无需 'static 生命周期） {#scoped-线程无需-static-生命周期}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -244,6 +247,7 @@ where
     results
 }
 ```
+
 ### 线程局部存储 {#线程局部存储}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -280,6 +284,7 @@ fn thread_local_demo() {
     });
 }
 ```
+
 ---
 
 ## 使用场景 {#使用场景}
@@ -353,7 +358,7 @@ fn thread_local_demo() {
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

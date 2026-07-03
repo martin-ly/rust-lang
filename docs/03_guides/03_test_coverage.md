@@ -164,7 +164,7 @@ coverage:
     - uses: actions/checkout@v4
     - uses: dtolnay/rust-toolchain@stable
       with:
-        toolchain: "1.96.0"
+        toolchain: "1.96.1"
         components: llvm-tools-preview
     - name: Install cargo-tarpaulin
       run: cargo install cargo-tarpaulin --locked

@@ -1,12 +1,12 @@
-# `core::range` 模块与 `RangeInclusive`（Rust 1.96.0）
+# `core::range` 模块与 `RangeInclusive`（Rust 1.96.1）
 
-> **EN**: Rust 1.96.0
-> **Summary**: core::range 模块与 RangeInclusive Rust 1.96.0.
+> **EN**: Rust 1.96.1
+> **Summary**: core::range 模块与 RangeInclusive Rust 1.96.1.
 > **📎 交叉引用**
 >
 > 本主题在 concept 中有深度的概念分析：[类型系统](../../../concept/01_foundation/04_type_system.md)
 > **Bloom 层级**: 理解
-> **稳定版本**: Rust 1.96.0 (2026-04-16)
+> **稳定版本**: Rust 1.96.1 (2026-04-16)
 > **Edition**: 2024
 > **RFC**: [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html)
 > **权威来源**: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/), [RFC 3550: Rangeful](https://rust-lang.github.io/rfcs/3550-new-range.html), [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html)

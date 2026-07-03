@@ -10,7 +10,7 @@
 > **适用版本**: stable
 > **版本勘误说明**:
 >
-> - `if let guards` 是 Rust **1.95.0** 稳定特性，本表标题包含 1.96.0 仅为文档归类便利。
+> - `if let guards` 是 Rust **1.95.0** 稳定特性，本表标题包含 1.96.1 仅为文档归类便利。
 > - `isqrt`、`get_disjoint_mut`、`Vec::pop_if` 等 API 在更早版本（如 1.84–1.88）已稳定，不属于 1.95/1.96 新特性。
 > - `PinCoerceUnsized` 是 **nightly-only** 实验性特性，当前 stable 不支持。
 > - `gen` blocks 是 **nightly-only** 实验性特性，当前 stable 不支持。

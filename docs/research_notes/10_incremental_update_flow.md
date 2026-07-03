@@ -56,7 +56,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- **Rust 新版本发布**（如 1.96.0、1.95.0）
+- **Rust 新版本发布**（如 1.96.1、1.95.0）
 - **权威来源**：releases.rs、Rust Blog
 - **建议周期**：每季度或每 Rust 稳定版发布后
 

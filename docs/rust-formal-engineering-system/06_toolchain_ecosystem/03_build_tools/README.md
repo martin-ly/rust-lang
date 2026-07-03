@@ -4,7 +4,7 @@
 > **Summary**: 构建工具理论 Build Tools Index. (stub/archive redirect)
 > **分级**: [B]
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **概念说明**: 构建工具负责将源代码转换为可执行程序，包括编译、链接、打包等步骤。Rust 通过 build.rs 构建脚本支持自定义构建逻辑，用于代码生成、外部库链接和条件编译配置。
@@ -43,6 +43,7 @@ fn main() {
     println!("cargo:rustc-link-search=native=/usr/local/lib");
 }
 ```
+
 ### 平台特定构建 {#平台特定构建}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -70,6 +71,7 @@ fn main() {
     }
 }
 ```
+
 ### 代码生成构建脚本 {#代码生成构建脚本}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -99,6 +101,7 @@ pub const FEATURES: &[&str] = &["std", "alloc"];
 // 在 src/lib.rs 中使用
 // include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 ```
+
 ### 常用构建工具 {#常用构建工具}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -131,6 +134,7 @@ cargo chef cook --release
 cargo install wasm-pack
 wasm-pack build --target web
 ```
+
 ### Makefile.toml (cargo-make) {#makefiletoml-cargo-make}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -164,6 +168,7 @@ dependencies = ["test"]
 [tasks.ci-flow]
 dependencies = ["format", "lint", "test", "build"]
 ```
+
 ### Justfile 示例 {#justfile-示例}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -205,6 +210,7 @@ clean:
 release: check
     @echo "Ready for release!"
 ```
+
 ### 交叉编译配置 {#交叉编译配置}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -225,6 +231,7 @@ runner = "wasm-bindgen-test-runner"
 [build]
 target = "x86_64-unknown-linux-musl"  # 静态链接
 ```
+
 ### 条件编译完整示例 {#条件编译完整示例}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -260,6 +267,7 @@ mod sync_impl {
     }
 }
 ```
+
 ---
 
 ## 形式化方法 {#形式化方法}
@@ -301,7 +309,7 @@ mod sync_impl {
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

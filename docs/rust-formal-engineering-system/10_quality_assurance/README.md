@@ -5,7 +5,7 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **概念说明**: 质量保障（Quality Assurance）是通过系统化的测试、分析和验证活动确保软件满足需求的过程。Rust 的质量保障结合编译时检查（类型系统、借用检查）、运行时测试（单元测试、集成测试、基准测试）和形式化验证（模型检查、定理证明）来提供多层次的质量保证。
@@ -157,6 +157,7 @@ fuzz_target!(|data: &[u8]| {
     }
 });
 ```
+
 ### MIRI 检测示例 {#miri-检测示例}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -200,6 +201,7 @@ mod miri_tests {
     }
 }
 ```
+
 ### 基准测试示例 {#基准测试示例}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -225,6 +227,7 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
+
 ### 代码覆盖率示例 {#代码覆盖率示例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -243,6 +246,7 @@ cargo llvm-cov --html
 # CI 中的覆盖率检查 {#ci-中的覆盖率检查}
 cargo tarpaulin --fail-under 80  # 覆盖率必须 >= 80%
 ```
+
 ### 形式化验证示例 {#形式化验证示例}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -285,6 +289,7 @@ mod contracts {
     }
 }
 ```
+
 ---
 
 ## 🔗 与 research_notes 衔接 {#与-research_notes-衔接}
@@ -345,6 +350,7 @@ mindmap
       测试检查
       覆盖率检查
 ```
+
 ## 与核心文档的关联 {#与核心文档的关联}
 
 | 本文档 | 核心文档 | 关系 |
@@ -363,7 +369,7 @@ mindmap
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

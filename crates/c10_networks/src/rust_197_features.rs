@@ -1,7 +1,7 @@
 //! Rust 1.97 Nightly 前瞻/候选特性 —— 网络编程
 //! Rust 1.97.0 stabilized features —— network programming
 //!
-//! 本文件展示与网络编程相关的 Rust 1.97.0 稳定特性。
+//! 本文件展示与网络编程相关的 Rust 1.97.0 Nightly 前瞻/候选特性。
 //! 当前工具链为 Rust 1.96.1，所有 1.97 新行为均保留在注释中；
 //! 可执行代码使用语义等价的 1.96.1 兼容实现。
 //! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。

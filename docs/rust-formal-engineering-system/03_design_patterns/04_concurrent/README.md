@@ -5,7 +5,7 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [c09_design_pattern/docs/](../../../../crates/c09_design_pattern/docs/README.md)
@@ -72,6 +72,7 @@ fn lock_free_demo() {
     assert_eq!(counter.get(), 10000);
 }
 ```
+
 ### 线程池模式 {#线程池模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -172,6 +173,7 @@ fn thread_pool_demo() {
     // pool 在 drop 时会优雅关闭
 }
 ```
+
 ### 读写锁模式 {#读写锁模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -245,6 +247,7 @@ impl<K: std::hash::Hash + Eq + Clone, V: Clone> Cache<K, V> {
     }
 }
 ```
+
 ### 生产者-消费者模式 {#生产者-消费者模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -317,6 +320,7 @@ fn backpressure_producer_consumer() {
     println!("Total processed: {}", processed.load(Ordering::Relaxed));
 }
 ```
+
 ### 扇出-扇入模式 {#扇出-扇入模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -369,6 +373,7 @@ fn fan_out_fan_in() {
     println!("Processed {} items", results.len());
 }
 ```
+
 ### 信号量模式 {#信号量模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -426,6 +431,7 @@ async fn weighted_semaphore() {
     large_task.await.unwrap();
 }
 ```
+
 ---
 
 ## 使用场景 {#使用场景}
@@ -498,7 +504,7 @@ async fn weighted_semaphore() {
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

@@ -1333,7 +1333,7 @@ pub fn x86_64_optimized() -> i32 {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 > **最新版本**: Rust 1.96.1+ (2026-05-28)
 
-本文档基于 Rust 1.96.0，涵盖 1.93–1.96 关键特性。历史版本请参见：
+本文档基于 Rust 1.96.1，涵盖 1.93–1.96 关键特性。历史版本请参见：
 
 - [Rust 1.96 稳定特性全景](06_19_rust_1_96_features.md)
 - [Rust 历史版本文档索引](../README.md)

@@ -39,7 +39,7 @@
 
 | 版本范围 | 官方链接 | 项目文档 |
 |----------|----------|----------|
-| Rust 1.96 | <https://blog.rust-lang.org/2025/12/04/Rust-1.96.0.html> | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) |
+| Rust 1.96 | <https://blog.rust-lang.org/2025/12/04/Rust-1.96.1.html> | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) |
 | Rust 1.85 (Rust 2024) | <https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html> | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) |
 | Rust 1.81 | <https://blog.rust-lang.org/2024/09/05/Rust-1.81.0.html> | [60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) §11 (move closure) |
 | Rust 1.80 | <https://blog.rust-lang.org/2024/07/25/Rust-1.80.0.html> | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §2 |

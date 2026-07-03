@@ -240,7 +240,7 @@ rustdoc 需要拿到类型检查结果来生成文档，但不需要生成二进
 ---
 
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/)
-> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.0 / rustc_driver / Stable MIR 项目目标
+> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 / rustc_driver / Stable MIR 项目目标
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

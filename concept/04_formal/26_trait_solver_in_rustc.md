@@ -262,7 +262,7 @@ Obligation 是需要被证明的 trait reference，例如 `i32: Clone` 或 `T: D
 ---
 
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/), [Rust Standard Library](https://doc.rust-lang.org/std/) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
-> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.0 trait solver 文档
+> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 trait solver 文档
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

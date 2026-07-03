@@ -10,7 +10,7 @@
 > **A/S/P 标记**: **P** — Process
 > **双维定位**: P×Eco — 语言发布流程与生态演进
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Editions](44_edition_guide.md)
-> **后置概念**: [Rust Version Tracking](05_rust_version_tracking.md) · [Rust 1.97 Stabilized](rust_1_97_stabilized.md)
+> **后置概念**: [Rust Version Tracking](05_rust_version_tracking.md) · [Rust 1.97 Preview (Beta)]((rust_1_97_preview.md)
 > **定理链**: N/A — 流程/生态文档
 > **主要来源**: [TRPL — Appendix G](https://doc.rust-lang.org/book/appendix-06-nightly-rust.html) · [Rust Forge — Release Process](https://forge.rust-lang.org/release/release-process.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
@@ -124,4 +124,4 @@ Rust 的重大变更通过 **RFC（Request for Comments）** 流程决策：
 | [Toolchain](../06_ecosystem/01_toolchain.md) | rustup 管理不同通道的工具链 |
 | [Editions](44_edition_guide.md) | Edition 是 Rust 每 2-3 年发布的重大语法/库更新 |
 | [Rust Version Tracking](05_rust_version_tracking.md) | 跟踪各版本稳定特性 |
-| [Rust 1.97 Stabilized](rust_1_97_stabilized.md) | Stable 通道具体特性示例 |
+| [Rust 1.97 Preview (Beta)]((rust_1_97_preview.md) | Stable 通道具体特性示例 |

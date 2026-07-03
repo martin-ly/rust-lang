@@ -5,7 +5,7 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至研究笔记，请参见：
@@ -53,6 +53,7 @@ fn synchronous_example() {
     println!("Result: {}", final_result);
 }
 ```
+
 ### 异步编程 {#异步编程}
 
 ```rust,ignore
@@ -78,6 +79,7 @@ async fn async_operation2() -> String {
     "Operation 2 complete".to_string()
 }
 ```
+
 ### 并发编程 {#并发编程}
 
 ```rust
@@ -96,6 +98,7 @@ fn concurrent_example() {
     println!("{}", message);
 }
 ```
+
 ---
 
 ## 与核心文档的关联 {#与核心文档的关联}
@@ -113,7 +116,7 @@ fn concurrent_example() {
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

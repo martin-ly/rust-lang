@@ -303,7 +303,7 @@ v2 配套 SHACL shapes 定义在 `concept/00_meta/kg_shapes.ttl`，可验证：
 2. 每个 `ex:Concept` 必须有 `ex:layer`（L0-L7）和 `ex:bloom`。
 3. 关系类型必须是 `ex:dependsOn`、`ex:entails`、`ex:mutexWith`、`ex:refines`、`ex:equivalentTo`、`ex:counterExample`、`ex:instanceOf`、`ex:appliesTo` 之一。
 4. `ex:confidence` 必须在 [0,1] 范围内。
-5. `ex:version` 必须匹配 Rust 版本号格式（如 `1.96.0`）。
+5. `ex:version` 必须匹配 Rust 版本号格式（如 `1.96.1`）。
 
 **运行方式**（待 `crates/c13_semantic_web/` 落地后）：
 

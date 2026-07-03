@@ -1,7 +1,7 @@
 //! Rust 1.97 Nightly 前瞻/候选特性 —— WASM 目标演示
 //! Rust 1.97 nightly preview candidate features —— WASM target demonstration
 //!
-//! 本文件使用 **Rust 1.96.1 等价实现** 演示 Rust 1.97.0 稳定 API 的语义。
+//! 本文件使用 **Rust 1.96.1 等价实现** 演示 Rust 1.97.0 候选 API 的语义。
 //! 实际 Rust 1.97 调用以 `#[cfg(nightly)]` 分支保留，可通过
 //! `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 //!

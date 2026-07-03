@@ -5,7 +5,7 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [10_trait_system_formalization.md](../../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)
@@ -55,6 +55,7 @@ fn process<T: Drawable + Clone + Send>(item: &T) {
     drop(copy);
 }
 ```
+
 ## 关联类型 {#关联类型}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -81,6 +82,7 @@ impl Iterator for Counter {
 // 泛型：外部选择类型（Vec<T> 用户可以选 T）
 // 关联类型：实现者选择类型（Iterator::Item 由实现决定）
 ```
+
 ## Trait 对象与动态分发 {#trait-对象与动态分发}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -110,6 +112,7 @@ fn demo() {
     ];
 }
 ```
+
 ## 更多代码示例 {#更多代码示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -158,6 +161,7 @@ where
     }
 }
 ```
+
 ### 高级 Trait 模式 {#高级-trait-模式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -223,6 +227,7 @@ impl Distance for Kilometers {
     fn as_meters(&self) -> u32 { self.0 * 1000 }
 }
 ```
+
 ### Trait 对象与对象安全 {#trait-对象与对象安全}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -273,6 +278,7 @@ fn heterogeneous_collection() {
     }
 }
 ```
+
 ---
 
 ## 相关研究笔记 {#相关研究笔记}
@@ -295,7 +301,7 @@ fn heterogeneous_collection() {
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

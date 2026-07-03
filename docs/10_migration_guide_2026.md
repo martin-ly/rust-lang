@@ -53,9 +53,9 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 更新Rust到1.96.0 {#更新rust到1960}
+# 更新Rust到1.96.1 {#更新rust到1960}
 rustup update stable
-rustup default 1.96.0
+rustup default 1.96.1
 
 # 安装/更新工具 {#安装更新工具}
 rustup component add rustfmt clippy rust-analyzer
@@ -157,7 +157,7 @@ redundant_guards = "warn"
 - uses: actions/checkout@v4
 - uses: dtolnay/rust-toolchain@stable
   with:
-    toolchain: "1.96.0"
+    toolchain: "1.96.1"
     components: rustfmt, clippy
 ```
 
@@ -173,7 +173,7 @@ redundant_guards = "warn"
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-Rust 1.95.0/1.96 引入了多项重要特性，包括 `if let guards` (1.95.0)、Range 类型改进和元组 coercion。本章节指导您从 1.94.0 平滑迁移到 1.96.0。
+Rust 1.95.0/1.96 引入了多项重要特性，包括 `if let guards` (1.95.0)、Range 类型改进和元组 coercion。本章节指导您从 1.94.0 平滑迁移到 1.96.1。
 
 > ⚠️ 迁移提示: `isqrt` (≥1.84)、`HashMap::get_disjoint_mut` (≥1.83)、`Vec::pop_if` (≥1.83) 等 API 在更早版本已稳定，无需等待 1.96。
 
@@ -193,7 +193,7 @@ rustup toolchain install 1.94.0 --name backup-194
 rustup update stable
 
 # 验证版本 {#验证版本}
-rustc --version  # 应显示 1.96.0 或更高
+rustc --version  # 应显示 1.96.1 或更高
 ```
 
 #### 步骤 2: 依赖更新 {#步骤-2-依赖更新}
@@ -325,7 +325,7 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: "1.96.0"  # 更新到 1.96
+          toolchain: "1.96.1"  # 更新到 1.96
           components: rustfmt, clippy
 
       - name: Cache dependencies

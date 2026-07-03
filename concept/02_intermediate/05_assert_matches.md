@@ -499,7 +499,7 @@ fn main() {
 }
 ```
 
-> **修正**: `assert_matches!`（Rust 长期 unstable，于 1.96.0 stable，当前 patch 1.96.1）专门用于测试枚举变体匹配。
+> **修正**: `assert_matches!`（Rust 长期 unstable，于 1.96.1 stable，当前 patch 1.96.1）专门用于测试枚举变体匹配。
 > 它不同于 `assert_eq!`——后者要求值实现 `PartialEq`，而 `assert_matches!` 使用模式匹配，不要求 `PartialEq`。
 > 在 `assert_matches!` 稳定前，使用 `matches!` 宏或 `if let` 进行测试断言。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
@@ -540,7 +540,7 @@ fn test_nested_match() {
 }
 ```
 
-> **修正**: `assert_matches!`（Rust 1.96.0 stable，当前 patch 1.96.1）检查值是否匹配给定模式，但**模式中的绑定**（`x`）在宏外部不可见。
+> **修正**: `assert_matches!`（Rust 1.96.1 stable，当前 patch 1.96.1）检查值是否匹配给定模式，但**模式中的绑定**（`x`）在宏外部不可见。
 > `assert_matches!(result, Ok(Some(x)))` 中 `x` 只在宏内部有效，测试代码不能后续使用 `x`。
 > 若需提取绑定值，使用 `if let`：`if let Ok(Some(x)) = result { assert!(x > 0); } else { panic!("match failed"); }`。
 > `assert_matches!` 的优势是简洁和良好的失败消息（打印不匹配的值），劣势是绑定不可导出。
