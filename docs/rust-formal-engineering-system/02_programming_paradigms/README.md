@@ -1,5 +1,7 @@
 # 编程范式 {#编程范式}
 
+> **EN**: Programming Paradigms Index
+> **Summary**: 编程范式 Programming Paradigms Index. (stub/archive redirect)
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20

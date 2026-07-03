@@ -334,9 +334,9 @@ Tier 2-3 复习 → Tier 4 深入研究
 
 ### 本模块资源
 
-- 📖 [完整文档索引](../00_MASTER_INDEX.md)
-- 📊 [可视化资源](../VISUALIZATION_INDEX.md)
-- 🧪 [代码示例集](../RUST_190_EXAMPLES_COLLECTION.md)
+- 📖 [完整文档索引](../00_master_index.md)
+- 📊 [可视化资源](../visualization_index.md)
+- 🧪 [代码示例集](../rust_190_examples_collection.md)
 - 📚 [学习指南](../COMPREHENSIVE_LEARNING_GUIDE.md)
 
 ### 其他模块

@@ -1,5 +1,7 @@
 # Prototype 形式化分析 {#prototype-形式化分析}
 
+> **EN**: Prototype
+> **Summary**: Prototype 形式化分析 Prototype.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -245,7 +247,6 @@ struct Config {
 
 }
 
-
 // 使用
 
 let a = Config { host: "localhost".into(), port: 8080 };
@@ -267,7 +268,6 @@ struct Node {
     children: Vec<Node>,
 
 }
-
 
 let tree = Node { value: 1, children: vec![] };
 
@@ -298,7 +298,6 @@ struct Shape {
 
 }
 
-
 impl Shape {
 
     fn new(x: f64, y: f64, color: &str) -> Self {
@@ -314,7 +313,6 @@ impl Shape {
     }
 
 }
-
 
 fn main() {
 

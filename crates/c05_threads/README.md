@@ -635,7 +635,7 @@ cargo test rust_192_features
 
 ### 项目文档
 
-- **[项目最佳实践指南](../../docs/05_guides/BEST_PRACTICES.md)** - 代码质量、性能优化、测试指南
+- **[项目最佳实践指南](../../docs/05_guides/best_practices.md)** - 代码质量、性能优化、测试指南
 - **[性能调优指南](../../docs/PERFORMANCE_TUNING_GUIDE.md)** - 完整的性能调优指南
 - **[故障排查指南](../../docs/05_guides/TROUBLESHOOTING_GUIDE.md)** - 常见问题排查和解决方案
 

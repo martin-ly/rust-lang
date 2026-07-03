@@ -1044,8 +1044,8 @@ for x in [1, 2, 3, 4, 5].iter() {
 
 - 📖 [快速开始指南](1.2_quick_start_guide.md) - 实践这些概念
 - ❓ [常见问题解答](1.4_常见问题解答.md) - 常见困惑
-- 🗺️ [主索引](../00_MASTER_INDEX.md) - 完整文档导航
-- 📊 [可视化资源](../VISUALIZATION_INDEX.md) - 可视化学习
+- 🗺️ [主索引](../00_master_index.md) - 完整文档导航
+- 📊 [可视化资源](../visualization_index.md) - 可视化学习
 
 ### 深入学习
 

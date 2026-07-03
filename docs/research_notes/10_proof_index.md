@@ -1,4 +1,7 @@
 # 📚 形式化证明文档索引 {#形式化证明文档索引}
+
+> **EN**: Proof Index
+> **Summary**: 📚 形式化证明文档索引 Proof Index. (stub/archive redirect)
 >
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]

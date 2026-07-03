@@ -1,3 +1,7 @@
+# Inline Assembly
+
+> **EN**: Inline Assembly
+> **Summary**: Rust 内联汇编边界测试与约束说明 Rust inline assembly boundary tests and constraint notes.
 > **Bloom 层级**: 应用 → 分析
 
 ### 边界测试：内联汇编的输入输出约束错误（编译错误/运行时 UB）

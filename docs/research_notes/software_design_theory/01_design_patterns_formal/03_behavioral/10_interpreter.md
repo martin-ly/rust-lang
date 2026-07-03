@@ -1,5 +1,7 @@
 # Interpreter 形式化分析 {#interpreter-形式化分析}
 
+> **EN**: Interpreter
+> **Summary**: Interpreter 形式化分析 Interpreter.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -238,7 +240,6 @@ enum Expr {
 
 }
 
-
 impl Expr {
 
     fn eval(&self) -> i32 {
@@ -256,7 +257,6 @@ impl Expr {
     }
 
 }
-
 
 // 1 + 2 * 3
 
@@ -291,7 +291,6 @@ assert_eq!(e.eval(), 7);
 ```rust
 use std::collections::HashMap;
 
-
 enum Expr {
 
     Num(i64),
@@ -303,7 +302,6 @@ enum Expr {
     Sub(Box<Expr>, Box<Expr>),
 
 }
-
 
 impl Expr {
 
@@ -324,7 +322,6 @@ impl Expr {
     }
 
 }
-
 
 fn main() {
 
@@ -526,7 +523,6 @@ pub enum QueryExpr {
 
 }
 
-
 impl QueryExpr {
 
     pub fn eval(&self, ctx: &std::collections::HashMap<String, i64>) -> Option<bool> {
@@ -562,7 +558,6 @@ impl QueryExpr {
     }
 
 }
-
 
 fn eval_num(e: &QueryExpr, ctx: &std::collections::HashMap<String, i64>) -> Option<i64> {
 

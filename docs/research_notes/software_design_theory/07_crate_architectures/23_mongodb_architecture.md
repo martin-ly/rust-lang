@@ -23,6 +23,8 @@
 
 # mongodb-rust-driver Crate 架构解构 {#mongodb-rust-driver-crate-架构解构}
 
+> **EN**: Mongodb Architecture
+> **Summary**: mongodb-rust-driver Crate 架构解构 Mongodb Architecture.
 >
 > **最后更新**: 2026-06-29
 > **内容分级**: [归档级]

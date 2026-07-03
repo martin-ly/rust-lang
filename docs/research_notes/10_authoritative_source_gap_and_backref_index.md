@@ -1,5 +1,7 @@
 # 权威来源缺口与反向追溯索引 {#权威来源缺口与反向追溯索引}
 
+> **EN**: Authoritative Source Gap And Backref Index
+> **Summary**: 权威来源缺口与反向追溯索引 Authoritative Source Gap And Backref Index.
 > **概念族**: 权威来源对齐 / 缺口分析 / 反向追溯
 >
 > **内容分级**: [核心级]

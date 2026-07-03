@@ -46,7 +46,7 @@
   - 跨平台设计模式 | Unix/Windows特定API对比
   - 技术选型决策树 | IPC机制/同步原语选择指南
   - 3级学习路径(1-7周) | 问题诊断树
-- **💻 [Rust 1.93.0 实战示例集](docs/RUST_192_EXAMPLES_COLLECTION.md)** ⭐ NEW!
+- **💻 [Rust 1.93.0 实战示例集](docs/rust_192_examples_collection.md)** ⭐ NEW!
   - 900+行可运行代码 | 异步进程/IPC/信号处理
   - Rust 1.93.0特性 | async trait/超时控制/优雅关闭
   - 2个综合项目 | 多进程任务执行器+进程监控系统
@@ -307,7 +307,7 @@ cargo run --bin group_control_demo
 ### 核心文档
 
 - **[README.md](docs/README.md)** - 文档总览和快速导航
-- **[OVERVIEW.md](docs/OVERVIEW.md)** - 模块概览和架构说明
+- **[OVERVIEW.md](docs/overview.md)** - 模块概览和架构说明
 - **[process_management.md](docs/process_management.md)** - 进程管理基础指南
 
 ### 高级主题

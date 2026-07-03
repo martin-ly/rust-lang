@@ -1,5 +1,7 @@
 # Rust 1.96.0 稳定特性综述 {#rust-1960-稳定特性综述}
 
+> **EN**: 22 Rust 1 96 Features
+> **Summary**: Rust 1.96.0 稳定特性综述 22 Rust 1 96 Features.
 > **注意**: 本主题内容已整合到 `concept/07_future/rust_1_96_stabilized.md`。
 > 请以 [concept/07_future/rust_1_96_stabilized.md](../../concept/07_future/rust_1_96_stabilized.md) 为权威来源。
 

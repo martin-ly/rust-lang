@@ -1,4 +1,7 @@
 # 研究笔记完整索引 {#研究笔记完整索引}
+
+> **EN**: Research Notes Index
+> **Summary**: 研究笔记完整索引 Research Notes Index. (stub/archive redirect)
 >
 > **概念族**: 元/导航/索引
 > **内容分级**: [归档级]

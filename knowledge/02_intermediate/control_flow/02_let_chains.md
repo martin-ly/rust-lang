@@ -1,5 +1,7 @@
 # Rust 2024 Edition `let chains` 深度专题
 
+> **EN**: Let Chains
+> **Summary**: Rust 2024 Edition let chains 深度专题 Let Chains.
 > **相关文档**: 请参阅 [docs/rust-ownership-decidability/16-program-semantics/rust-194-features/05-edition-2024-semantics.md](../../06_ecosystem/02_edition_2024.md)
 > **相关文档**: 请参阅 [docs/05_guides/06_rust_2024_edition_migration_guide.md](../../06_ecosystem/02_edition_2024.md)
 > **深度**: [综述级]

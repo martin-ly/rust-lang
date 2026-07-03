@@ -1,5 +1,7 @@
 # 宏展开性能研究 {#宏展开性能研究}
 
+> **EN**: Macro Expansion Performance
+> **Summary**: 宏展开性能研究 Macro Expansion Performance.
 > **概念族**: 实验研究
 > **内容分级**: [归档级]
 >
@@ -279,7 +281,6 @@ macro_rules! simple_macro {
 
 }
 
-
 // 复杂宏
 
 macro_rules! complex_macro {
@@ -304,7 +305,6 @@ macro_rules! complex_macro {
 
 }
 
-
 // 性能测试
 
 fn benchmark_simple_macro() {
@@ -320,7 +320,6 @@ fn benchmark_simple_macro() {
     println!("简单宏时间: {:?}", start.elapsed());
 
 }
-
 
 fn benchmark_complex_macro() {
 
@@ -344,7 +343,6 @@ fn benchmark_complex_macro() {
 ```rust,ignore
 use proc_macro::TokenStream;
 
-
 // 简单的派生宏
 
 #[proc_macro_derive(SimpleDerive)]
@@ -356,7 +354,6 @@ pub fn simple_derive(input: TokenStream) -> TokenStream {
     input
 
 }
-
 
 // 复杂的派生宏
 
@@ -384,11 +381,9 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 // cargo expand
 
-
 // 使用 time 命令测量编译时间
 
 // time cargo build --release
-
 
 // 使用 cargo-bench 测量宏展开时间
 

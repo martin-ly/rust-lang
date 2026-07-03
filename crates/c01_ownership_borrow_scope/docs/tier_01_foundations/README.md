@@ -84,10 +84,10 @@ graph LR
 
 ## 📚 相关资源
 
-- **上层导航**: [主索引](../00_MASTER_INDEX.md)
+- **上层导航**: [主索引](../00_master_index.md)
 - **下一层级**: [Tier 2: 核心概念层](../tier_02_guides/README.md)
 - **代码示例**: [examples/](../../examples/README.md)
-- **可视化资源**: [可视化文档索引](../VISUALIZATION_INDEX.md)
+- **可视化资源**: [可视化文档索引](../visualization_index.md)
 
 ## 💡 学习建议
 
@@ -112,7 +112,7 @@ graph LR
 
 1. 先查看 [FAQ](1.4_常见问题解答.md)
 2. 查阅 [术语表](1.3_核心概念术语表.md)
-3. 查看 [可视化文档](../VISUALIZATION_INDEX.md)
+3. 查看 [可视化文档](../visualization_index.md)
 4. 提交 Issue 或联系维护者
 
 ---

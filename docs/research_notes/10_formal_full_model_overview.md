@@ -1,5 +1,7 @@
 # Rust 形式化全模型：统一形式系统入口 {#rust-形式化全模型统一形式系统入口}
 
+> **EN**: Formal Full Model Overview
+> **Summary**: Rust 形式化全模型 Formal Full Model Overview.
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 >

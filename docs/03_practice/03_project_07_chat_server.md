@@ -1,4 +1,7 @@
 # 实践项目 07: 聊天服务器 {#实践项目-07-聊天服务器}
+
+> **EN**: Project 07 Chat Server
+> **Summary**: 实践项目 07 Project 07 Chat Server.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

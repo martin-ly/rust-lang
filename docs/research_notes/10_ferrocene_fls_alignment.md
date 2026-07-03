@@ -1,5 +1,7 @@
 # Ferrocene Language Specification 对齐矩阵 {#ferrocene-language-specification-对齐矩阵}
 
+> **EN**: Ferrocene Fls Alignment
+> **Summary**: Ferrocene Language Specification 对齐矩阵 Ferrocene Fls Alignment.
 > **概念族**: 权威来源对齐 / Ferrocene FLS
 > **内容分级**: [核心级]
 > **层级**: L0-L4

@@ -1,5 +1,7 @@
 # 类型系统构造能力 {#类型系统构造能力}
 
+> **EN**: Construction Capability
+> **Summary**: 类型系统构造能力 Construction Capability. (stub/archive redirect)
 > **概念族**: 类型系统 / 表达能力
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 > **内容分级**: [归档级]

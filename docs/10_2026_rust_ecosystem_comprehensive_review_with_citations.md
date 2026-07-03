@@ -1,5 +1,7 @@
 # 2026年Rust生态系统全面梳理（含26处国际权威引用） {#2026年rust生态系统全面梳理含26处国际权威引用}
 
+> **EN**: 2026 Rust Ecosystem Comprehensive Review With Citations
+> **Summary**: 2026年Rust生态系统全面梳理 含26处国际权威引用 2026 Rust Ecosystem Comprehensive Review With Citations.
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
 > **文档版本**: 4.0（100%国际权威对齐完成版）

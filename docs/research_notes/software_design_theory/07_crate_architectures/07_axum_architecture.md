@@ -5,6 +5,8 @@
 
 # Axum Crate 架构解构 {#axum-crate-架构解构}
 
+> **EN**: Axum Architecture
+> **Summary**: Axum Crate 架构解构 Axum Architecture. (stub/archive redirect)
 > 本文内容已迁移至 [Axum 深度解析](../../../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md)。
 >
 > 相关概念参考：

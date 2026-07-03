@@ -1,5 +1,7 @@
 # 📦 Rust 模块系统速查卡 {#rust-模块系统速查卡}
 
+> **EN**: Modules Cheatsheet
+> **Summary**: 📦 Rust 模块系统速查卡 Modules Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **快速参考**
 > | [Cargo/包索引（已归档）](../../../archive/cargo_package_management_from_c02/00_INDEX.md)

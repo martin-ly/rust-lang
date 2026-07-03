@@ -1,4 +1,7 @@
 # 跨模块实战项目指南 {#跨模块实战项目指南}
+
+> **EN**: Cross Module Practical Projects 2025 10 25
+> **Summary**: 跨模块实战项目指南 Cross Module Practical Projects 2025 10 25.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

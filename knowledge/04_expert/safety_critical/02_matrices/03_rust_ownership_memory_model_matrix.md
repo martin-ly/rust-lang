@@ -1,5 +1,7 @@
 # Rust所有权与内存模型矩阵
 
+> **EN**: Rust Ownership Memory Model Matrix
+> **Summary**: Rust所有权与内存模型矩阵 Rust Ownership Memory Model Matrix. (stub/archive redirect)
 > **Bloom 层级**: 理解
 >
 > **受众**: [初学者] / [进阶]

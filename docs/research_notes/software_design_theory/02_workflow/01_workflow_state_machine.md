@@ -1,5 +1,7 @@
 # 工作流状态机模式形式化定义 {#工作流状态机模式形式化定义}
 
+> **EN**: Workflow State Machine
+> **Summary**: 工作流状态机模式形式化定义 Workflow State Machine. (stub/archive redirect)
 > **概念族**: 软件设计 / 工作流模式 / 状态机
 > **内容分级**: [归档级]
 > **分级**: [B]

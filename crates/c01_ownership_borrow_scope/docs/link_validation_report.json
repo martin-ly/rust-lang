@@ -424,14 +424,14 @@
                         {
                             "SourceFile":  "06_rust_features\\README.md",
                             "LinkText":  "FAQ 文档",
-                            "LinkPath":  "../06_references/FAQ.md",
-                            "ResolvedPath":  "06_references\\FAQ.md"
+                            "LinkPath":  "../06_references/faq.md",
+                            "ResolvedPath":  "06_references\\faq.md"
                         },
                         {
                             "SourceFile":  "06_rust_features\\README.md",
                             "LinkText":  "术语表",
-                            "LinkPath":  "../06_references/Glossary.md",
-                            "ResolvedPath":  "06_references\\Glossary.md"
+                            "LinkPath":  "../06_references/glossary.md",
+                            "ResolvedPath":  "06_references\\glossary.md"
                         },
                         {
                             "SourceFile":  "tier1_foundation\\1.1_项目概览.md",

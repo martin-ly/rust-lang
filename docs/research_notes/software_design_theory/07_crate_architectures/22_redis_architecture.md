@@ -26,6 +26,8 @@
 
 # redis-rs Crate 架构解构 {#redis-rs-crate-架构解构}
 
+> **EN**: Redis Architecture
+> **Summary**: redis-rs Crate 架构解构 Redis Architecture. (stub/archive redirect)
 >
 > **最后更新**: 2026-06-29
 > **内容分级**: [归档级]

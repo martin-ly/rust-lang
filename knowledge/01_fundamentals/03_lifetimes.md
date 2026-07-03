@@ -1,5 +1,7 @@
 # Rust 生命周期 (Lifetimes)
 
+> **EN**: Lifetimes
+> **Summary**: Rust 生命周期 Lifetimes. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/01_foundation/03_lifetimes.md](../../concept/01_foundation/03_lifetimes.md)。
 > **历史版本存档**: [archive/knowledge/01_fundamentals/03_lifetimes.md](../../archive/knowledge/01_fundamentals/03_lifetimes.md)
 >

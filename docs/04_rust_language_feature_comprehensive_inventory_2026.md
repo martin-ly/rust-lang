@@ -7,6 +7,8 @@
 
 # Rust 语言特性全量梳理与对称差分析 2026 {#rust-语言特性全量梳理与对称差分析-2026}
 
+> **EN**: Rust Language Feature Comprehensive Inventory 2026
+> **Summary**: Rust 语言特性全量梳理与对称差分析 2026 Rust Language Feature Comprehensive Inventory 2026. (stub/archive redirect)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
 > **版本**: Rust 1.96.0+ (Edition 2024)

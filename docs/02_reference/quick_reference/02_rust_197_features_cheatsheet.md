@@ -1,5 +1,7 @@
 # Rust 1.97 特性速查表 {#rust-197-特性速查表}
 
+> **EN**: Rust 197 Features Cheatsheet
+> **Summary**: Rust 1.97 特性速查表 Rust 197 Features Cheatsheet. (stub/archive redirect)
 > **权威来源**: 本文对应权威来源为 [`concept/07_future/rust_1_97_preview.md`](../../../../concept/07_future/rust_1_97_preview.md)。
 > 本文与权威来源内容高度重叠；`concept/` 版本为项目权威主轨，本文保留作为快速参考。
 > **分级**: [A]

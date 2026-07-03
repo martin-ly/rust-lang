@@ -1,5 +1,7 @@
 # 模块系统代码实践模式 {#模块系统代码实践模式}
 
+> **EN**: Module Patterns And Refactoring
+> **Summary**: 模块系统代码实践模式 Module Patterns And Refactoring.
 > **内容分级**: [核心级]
 > **层级**: L5 (代码实践)
 > **Bloom 层级**: L5-L6 (分析/评价/创造)

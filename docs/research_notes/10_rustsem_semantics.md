@@ -1,5 +1,7 @@
 # RustSEM 操作语义 {#rustsem-操作语义}
 
+> **EN**: Rustsem Semantics
+> **Summary**: RustSEM 操作语义 Rustsem Semantics.
 > **概念族**: 国际化形式化对齐
 > **内容分级**: [归档级]
 >
@@ -112,7 +114,6 @@ RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
 
   | match e { pi → ei }  模式匹配
 
-
 值 v ::=
 
   | n                    整数
@@ -126,7 +127,6 @@ RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
   | &p                   引用
 
   | box v                堆分配值
-
 
 类型 τ ::=
 
@@ -149,7 +149,6 @@ RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
 
 ```text
 程序状态 S ::= (H, Σ, θ, P)
-
 
 H: 堆 (Heap)      地址 → 值
 
@@ -449,7 +448,6 @@ x : τ ∈ Γ
 
 Γ ⊢ *e : τ    (T-Deref-Shr)
 
-
 Γ ⊢ e : &mut τ
 
 ─────────────────
@@ -590,7 +588,6 @@ H, atomic_write(a, v) → H[a := v], ()    (Atomic-Write)
 ────────────────
 
 safe_to_send(τ)    (Send)
-
 
 Γ ⊢ τ : Sync
 

@@ -1,5 +1,7 @@
 # `cfg_select!` 宏完全指南 {#cfg_select-宏完全指南}
 
+> **EN**: Cfg Select Macro Guide
+> **Summary**: cfg_select! 宏完全指南 Cfg Select Macro Guide.
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/应用)
 > **稳定版本**: Rust 1.95.0

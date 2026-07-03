@@ -1,5 +1,7 @@
 # Abstract Factory 形式化分析 {#abstract-factory-形式化分析}
 
+> **EN**: Abstract Factory
+> **Summary**: Abstract Factory 形式化分析 Abstract Factory.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -244,21 +246,17 @@ trait Button { fn render(&self); }
 
 trait Dialog { fn render(&self); }
 
-
 struct WinDialog;
 
 impl Dialog for WinDialog { fn render(&self) { println!("WinDialog"); } }
-
 
 struct WinButton;
 
 impl Button for WinButton { fn render(&self) { println!("WinButton"); } }
 
-
 struct MacButton;
 
 impl Button for MacButton { fn render(&self) { println!("MacButton"); } }}
-
 
 trait GuiFactory {
 
@@ -271,7 +269,6 @@ trait GuiFactory {
     fn create_dialog(&self) -> Self::D;
 
 }
-
 
 struct WinFactory;
 
@@ -304,16 +301,13 @@ trait Button { fn render(&self); }
 
 trait Dialog { fn render(&self); }
 
-
 struct WinButton; impl Button for WinButton { fn render(&self) { println!("WinButton"); } }
 
 struct WinDialog; impl Dialog for WinDialog { fn render(&self) { println!("WinDialog"); } }
 
-
 struct MacButton; impl Button for MacButton { fn render(&self) { println!("MacButton"); } }
 
 struct MacDialog; impl Dialog for MacDialog { fn render(&self) { println!("MacDialog"); } }
-
 
 // 关联类型族保证产品族一致性
 
@@ -329,7 +323,6 @@ trait GuiFactory {
 
 }
 
-
 struct WinFactory;
 
 impl GuiFactory for WinFactory {
@@ -344,13 +337,11 @@ impl GuiFactory for WinFactory {
 
 }
 
-
 fn build_ui<F: GuiFactory>(_factory: &F) -> (F::B, F::D) {
 
     (_factory.create_button(), _factory.create_dialog())
 
 }
-
 
 fn main() {
 

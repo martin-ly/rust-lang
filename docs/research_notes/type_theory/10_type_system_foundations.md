@@ -1,5 +1,7 @@
 # 类型系统基础 {#类型系统基础}
 
+> **EN**: Type System Foundations
+> **Summary**: 类型系统基础 Type System Foundations. (stub/archive redirect)
 > **概念族**: 类型系统 / 基础
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 > **内容分级**: [归档级]
@@ -284,7 +286,6 @@ fn implication<A, B>(f: impl Fn(A) -> B, a: A) -> B {
 
 }
 
-
 // 2. 合取 (A ∧ B): 积类型 (元组)
 
 fn conjunction<A, B>(a: A, b: B) -> (A, B) {
@@ -293,20 +294,17 @@ fn conjunction<A, B>(a: A, b: B) -> (A, B) {
 
 }
 
-
 fn and_elim_left<A, B>(pair: (A, B)) -> A {
 
     pair.0  // 从 A ∧ B 推导 A
 
 }
 
-
 fn and_elim_right<A, B>(pair: (A, B)) -> B {
 
     pair.1  // 从 A ∧ B 推导 B
 
 }
-
 
 // 3. 析取 (A ∨ B): 和类型 (枚举)
 
@@ -318,13 +316,11 @@ enum Disjunction<A, B> {
 
 }
 
-
 fn or_intro_left<A, B>(a: A) -> Disjunction<A, B> {
 
     Disjunction::Left(a)  // 从 A 构造 A ∨ B
 
 }
-
 
 fn or_elim<A, B, C>(
 
@@ -346,7 +342,6 @@ fn or_elim<A, B, C>(
 
 }
 
-
 // 4. 真 (True): 单位类型
 
 fn truth() -> () {
@@ -354,7 +349,6 @@ fn truth() -> () {
     ()  // 总是可构造的证明
 
 }
-
 
 // 5. 假 (False): 空类型 (Never type)
 
@@ -364,7 +358,6 @@ fn false_elim<T>(never: !) -> T {
 
 }
 
-
 // 6. 全称量词 (∀): 泛型
 
 fn universal<T>(x: T) -> T {
@@ -372,7 +365,6 @@ fn universal<T>(x: T) -> T {
     x  // 对所有类型 T 成立的证明
 
 }
-
 
 // 7. 存在量词 (∃): 存在类型 (trait object)
 
@@ -383,7 +375,6 @@ trait Existential {
     fn get(&self) -> &Self::Output;
 
 }
-
 
 fn existential() -> Box<dyn Existential<Output = i32>> {
 
@@ -415,7 +406,6 @@ fn existential() -> Box<dyn Existential<Output = i32>> {
 
 // 即存在 f: A -> B 和 g: B -> A 使得 f ∘ g = id 且 g ∘ f = id
 
-
 struct Iso<A, B> {
 
     to: Box<dyn Fn(A) -> B>,
@@ -423,7 +413,6 @@ struct Iso<A, B> {
     from: Box<dyn Fn(B) -> A>,
 
 }
-
 
 impl<A, B> Iso<A, B> {
 
@@ -444,7 +433,6 @@ impl<A, B> Iso<A, B> {
     }
 
 }
-
 
 // 示例: (A, B) 与 (B, A) 同构
 
@@ -468,14 +456,11 @@ fn swap_iso<A, B>() -> Iso<(A, B), (B, A)> {
 
 // 表示 "A 是不可证明的" 或 "A 导致矛盾"
 
-
 type Not<A> = Box<dyn Fn(A) -> !>;
-
 
 // 双重否定消除不成立（直觉主义逻辑）
 
 // 不能从 ¬¬A 推出 A
-
 
 // 但可以从 A 推出 ¬¬A
 
@@ -484,7 +469,6 @@ fn double_negation_intro<A>(a: A) -> impl Fn(Not<A>) -> ! {
     move |not_a: Not<A>| not_a(a)
 
 }
-
 
 // 矛盾推出任何命题 (ex falso quodlibet)
 
@@ -502,11 +486,9 @@ fn absurd<A>(never: !) -> A {
 
 // 在 Rust 中近似于泛型: fn<T>(x: T) -> P<T>
 
-
 // ∃x:A. P(x) 对应于依赖和类型 (存在类型)
 
 // 在 Rust 中可以用 trait object 或存在类型表示
-
 
 // 全称量词示例: 对所有类型 T，存在 identity 函数
 
@@ -515,7 +497,6 @@ trait Identity {
     fn identity(&self) -> Self;
 
 }
-
 
 impl<T> Identity for T where T: Clone {
 
@@ -526,7 +507,6 @@ impl<T> Identity for T where T: Clone {
     }
 
 }
-
 
 // 存在类型示例: 存在某个实现了 Display 的类型
 
@@ -546,7 +526,6 @@ fn displayable(value: impl std::fmt::Display) -> Box<dyn std::fmt::Display> {
 
 // 对应于归纳定义的数据类型
 
-
 enum Nat {
 
     Zero,
@@ -554,7 +533,6 @@ enum Nat {
     Succ(Box<Nat>),
 
 }
-
 
 impl Nat {
 
@@ -570,7 +548,6 @@ impl Nat {
 
     }
 
-
     fn to_usize(&self) -> usize {
 
         match self {
@@ -582,7 +559,6 @@ impl Nat {
         }
 
     }
-
 
     // 加法: Nat 归纳的证明
 
@@ -620,11 +596,9 @@ impl Nat {
 
 Vec<T, n: Nat>  // 长度为 n 的 T 类型向量
 
-
 // 安全的 head 函数：只能对非空向量调用
 
 head: Vec<T, S n> -> T  // 输入必须至少有一个元素 (S n = n+1)
-
 
 // 安全的数组索引：索引在范围内
 
@@ -638,7 +612,6 @@ index: Vec<T, n> -> (i: Nat) -> (p: i < n) -> T
 
 // 这是 Rust 对依赖类型的有限支持
 
-
 // 固定大小的数组类型 [T; N] 就是依赖类型的一个例子
 
 fn array_len<T, const N: usize>(_arr: &[T; N]) -> usize {
@@ -647,11 +620,9 @@ fn array_len<T, const N: usize>(_arr: &[T; N]) -> usize {
 
 }
 
-
 // 使用 const 泛型的矩阵类型
 
 type Matrix<T, const ROWS: usize, const COLS: usize> = [[T; COLS]; ROWS];
-
 
 // 矩阵乘法：类型确保维度匹配
 
@@ -693,7 +664,6 @@ where
 
 }
 
-
 // 编译时维度检查
 
 fn test_matrix() {
@@ -702,9 +672,7 @@ fn test_matrix() {
 
     let b: Matrix<i32, 3, 2> = [[1, 2], [3, 4], [5, 6]];
 
-
     let c: Matrix<i32, 2, 2> = matrix_multiply(&a, &b);
-
 
     // 以下会导致编译错误：
 
@@ -730,11 +698,9 @@ const fn factorial(n: usize) -> usize {
 
 }
 
-
 // 类型依赖于编译时计算的值
 
 type Fact5 = [u8; factorial(5)];  // [u8; 120]
-
 
 // 2. 类型级编程
 
@@ -745,7 +711,6 @@ struct FixedString<const N: usize> {
     len: usize,
 
 }
-
 
 impl<const N: usize> FixedString<N> {
 
@@ -769,7 +734,6 @@ impl<const N: usize> FixedString<N> {
 
 }
 
-
 // 3. 泛型关联类型与 const 泛型结合
 
 trait ArrayExt<const N: usize> {
@@ -779,7 +743,6 @@ trait ArrayExt<const N: usize> {
     fn len(&self) -> usize;
 
 }
-
 
 impl<T, const N: usize> ArrayExt<N> for [T; N] {
 
@@ -806,7 +769,6 @@ impl<T, const N: usize> ArrayExt<N> for [T; N] {
 
 // 例如，以下依赖类型功能尚未支持:
 
-
 // 伪代码: 索引在范围内的证明
 
 // fn safe_get<T, const N: usize>(arr: &[T; N], idx: usize) -> Option<&T>
@@ -815,11 +777,9 @@ impl<T, const N: usize> ArrayExt<N> for [T; N] {
 
 //     idx < N,  // 无法表达此约束
 
-
 // 变通方案: 使用类型状态模式
 
 struct Index<const N: usize>(usize);
-
 
 impl<const N: usize> Index<N> {
 
@@ -828,7 +788,6 @@ impl<const N: usize> Index<N> {
         if i < N { Some(Self(i)) } else { None }
 
     }
-
 
     fn get<'a, T>(&self, arr: &'a [T; N]) -> &'a T {
 
@@ -2062,7 +2021,6 @@ W(Γ, x) =
 
   else fail
 
-
 W(Γ, λx.e) =
 
   let β be a new type variable
@@ -2070,7 +2028,6 @@ W(Γ, λx.e) =
   let (S₁, τ₁) = W(Γ ∪ {x:β}, e)
 
   return (S₁, S₁(β) → τ₁)
-
 
 W(Γ, e₁ e₂) =
 
@@ -2083,7 +2040,6 @@ W(Γ, e₁ e₂) =
   let S₃ = unify(S₂(τ₁), τ₂ → β)
 
   return (S₃ ∘ S₂ ∘ S₁, S₃(β))
-
 
 W(Γ, let x = e₁ in e₂) =
 
@@ -2125,7 +2081,6 @@ $$S = [\alpha_1 := \tau_1, ..., \alpha_n := \tau_n]$$
 ```text
 unify(τ, τ) = []
 
-
 unify(α, τ) =
 
   if α = τ then []
@@ -2134,9 +2089,7 @@ unify(α, τ) =
 
   else [α := τ]
 
-
 unify(τ, α) = unify(α, τ)
-
 
 unify(τ₁ → τ₂, τ₃ → τ₄) =
 
@@ -2146,11 +2099,9 @@ unify(τ₁ → τ₂, τ₃ → τ₄) =
 
   return S₂ ∘ S₁
 
-
 unify(C(τ₁,...,τₙ), C(τ₁',...,τₙ')) =
 
   unify each pair recursively
-
 
 unify(τ₁, τ₂) = fail (if constructors differ)
 ```
@@ -2178,7 +2129,6 @@ C(Γ, x : τ) =
 
   else fail
 
-
 C(Γ, λx.e : τ) =
 
   let α, β be new type variables
@@ -2186,7 +2136,6 @@ C(Γ, λx.e : τ) =
   let C₁ = C(Γ ∪ {x:α}, e : β)
 
   return C₁ ∪ {τ = α → β}
-
 
 C(Γ, e₁ e₂ : τ) =
 
@@ -2197,7 +2146,6 @@ C(Γ, e₁ e₂ : τ) =
   let C₂ = C(Γ, e₂ : α)
 
   return C₁ ∪ C₂
-
 
 C(Γ, let x = e₁ in e₂ : τ) =
 
@@ -2219,9 +2167,7 @@ C(Γ, let x = e₁ in e₂ : τ) =
 ```text
 solve({}) = []
 
-
 solve({τ = τ} ∪ C) = solve(C)
-
 
 solve({α = τ} ∪ C) =
 
@@ -2235,14 +2181,11 @@ solve({α = τ} ∪ C) =
 
        return S' ∘ S
 
-
 solve({τ = α} ∪ C) = solve({α = τ} ∪ C)
-
 
 solve({τ₁ → τ₂ = τ₃ → τ₄} ∪ C) =
 
   solve({τ₁ = τ₃, τ₂ = τ₄} ∪ C)
-
 
 solve({C(τ₁,...) = C'(τ₁',...)} ∪ C) =
 
@@ -2406,7 +2349,6 @@ fn add(x: i32, y: i32) -> i32 {
     x + y
 
 }
-
 
 fn main() {
 
@@ -2595,7 +2537,6 @@ fn lambda_poly() {
 
     let f = |x| x;  // 推导为具体的类型，不是多态
 
-
     let a: i32 = f(5);
 
     // let b: String = f("hello".to_string());  // 错误!
@@ -2613,7 +2554,6 @@ let id = λx. x in        // id : ∀α. α → α (多态)
   let a = id 5 in        // α = Int
 
     let b = id "hello"   // α = String，可以！
-
 
 (λid. id 5 (id "hello")) (λx. x)  // 错误! id 不是多态
 ```
@@ -2634,7 +2574,6 @@ let id = λx. x in        // id : ∀α. α → α (多态)
 
 ```rust
 use std::ptr;
-
 
 unsafe fn bad_deref() {
 
@@ -2667,13 +2606,11 @@ fn safe_operations() {
 
     // arr[5];  // 编译错误! 索引越界检查
 
-
     let opt: Option<i32> = None;
 
     // opt.unwrap();  // 运行时 panic，但不是未定义行为
 
 }
-
 
 // unsafe 代码可以打破这些保证
 
@@ -2718,7 +2655,6 @@ fn complex_failure<T, U, V>(
 
 }
 
-
 fn use_complex() {
 
     // 提供不兼容的类型
@@ -2728,7 +2664,6 @@ fn use_complex() {
     let g: fn(String) -> bool = |s| s.is_empty();
 
     let h: fn(bool) -> f64 = |b| if b { 1.0 } else { 0.0 };  // 错误!
-
 
     // h 返回 f64，但期望返回 T (i32)
 
@@ -2807,7 +2742,6 @@ trait MyTrait {}
 
 impl MyTrait for String {}  // 可以: 当前 crate 的 trait
 
-
 // impl std::fmt::Display for Vec<i32> {}  // 错误!
 
 // 既不是当前 crate 的 trait，也不是当前 crate 的类型
@@ -2822,7 +2756,6 @@ trait Same<T> {
 
 }
 
-
 // 第一个实现
 
 impl<T> Same<T> for T {
@@ -2834,7 +2767,6 @@ impl<T> Same<T> for T {
     }
 
 }
-
 
 // 第二个实现 - 冲突!
 
@@ -2885,7 +2817,6 @@ impl<T> Same<T> for T {
 
 ```text
 类型系统安全性证明树
-
 
   规则 1–3: 类型规则（变量、函数应用、函数抽象）
 
@@ -2980,7 +2911,6 @@ fn add(x: i32, y: i32) -> i32 {
 
 }
 
-
 fn main() {
 
     let result = add(10, 20);  // 类型推导: i32
@@ -3005,7 +2935,6 @@ fn generic_function<T>(value: T) -> T {
     value
 
 }
-
 
 fn use_generic() {
 
@@ -3033,13 +2962,11 @@ trait Display {
 
 }
 
-
 fn print_value<T: Display>(value: T) {
 
     value.display();
 
 }
-
 
 struct Point {
 
@@ -3048,7 +2975,6 @@ struct Point {
     y: i32,
 
 }
-
 
 impl Display for Point {
 
@@ -3059,7 +2985,6 @@ impl Display for Point {
     }
 
 }
-
 
 fn use_constraint() {
 
@@ -3091,13 +3016,11 @@ fn type_inference_example() {
 
     let z = "hello";  // 推导为 &str
 
-
     // 显式类型标注
 
     let a: u32 = 5;
 
     let b: f32 = 3.14;
-
 
     // 类型推断（从上下文推断）
 
@@ -3127,11 +3050,9 @@ fn type_safety_example() {
 
     let y: f64 = 3.14;
 
-
     // 类型安全：不能将 f64 赋值给 i32
 
     // let z: i32 = y;  // 错误：类型不匹配
-
 
     // 类型转换：显式转换
 
@@ -3158,7 +3079,6 @@ fn generic_inference<T>(x: T) -> T {
     x
 
 }
-
 
 fn main() {
 
@@ -3192,7 +3112,6 @@ fn main() {
 
 // }
 
-
 // 正确：类型匹配
 
 fn type_correct_example() {
@@ -3225,13 +3144,11 @@ fn type_inference_example() {
 
     let z = "hello";  // 推导为 &str
 
-
     // 显式类型标注
 
     let a: u32 = 5;
 
     let b: f32 = 3.14;
-
 
     // 类型推断（从上下文推断）
 
@@ -3256,7 +3173,6 @@ fn identity<T>(x: T) -> T {
     x
 
 }
-
 
 fn main() {
 
@@ -3613,7 +3529,6 @@ $$
 ```rust,ignore
 use std::ops::ControlFlow;
 
-
 // 1.94 新特性
 
 fn find_negative(items: &[i32]) -> Option<i32> {
@@ -3632,13 +3547,11 @@ fn find_negative(items: &[i32]) -> Option<i32> {
 
     });
 
-
     // 使用 ok() 转换为 Option
 
     result.ok().map(|_| 0)  // 或根据实际需求处理
 
 }
-
 
 // 更简洁的用法
 
@@ -3651,7 +3564,6 @@ fn process_with_ok(items: &[i32]) -> Option<i32> {
         else { ControlFlow::Continue(()) }
 
     }).ok()?;  // 使用 ok() 配合 ? 操作符
-
 
     Some(0)
 
@@ -3723,11 +3635,9 @@ $$(..=\text{end}).\text{contains}(x) \iff x \leq \text{end}$$
 ```rust,ignore
 use std::ops::RangeToInclusive;
 
-
 // 1.94 新类型
 
 let range: RangeToInclusive<i32> = ..=10;
-
 
 // 模式匹配
 
@@ -3737,7 +3647,6 @@ match range {
 
 }
 
-
 // 使用 contains
 
 assert!(range.contains(&5));   // 5 <= 10
@@ -3745,7 +3654,6 @@ assert!(range.contains(&5));   // 5 <= 10
 assert!(range.contains(&10));  // 10 <= 10
 
 assert!(!range.contains(&11)); // 11 > 10
-
 
 // 迭代（当 T 为整数时）
 
@@ -3817,13 +3725,11 @@ $$
 ```rust,ignore
 use std::fmt::Write;
 
-
 // 1.94 高性能格式化
 
 fn format_numbers(numbers: &[i32]) -> String {
 
     let mut buf = String::with_capacity(numbers.len() * 8);
-
 
     for n in numbers {
 
@@ -3835,13 +3741,11 @@ fn format_numbers(numbers: &[i32]) -> String {
 
     }
 
-
     buf.pop(); // 移除最后的逗号
 
     buf
 
 }
-
 
 // 对比：传统方式
 

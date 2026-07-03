@@ -25,9 +25,9 @@
 
 - [01_形式化算法理论](01_formal_algorithm_theory.md) - 算法分类与形式化体系 ⭐⭐⭐⭐⭐
 - [02_并发算法模式](02_concurrent_algorithm_patterns.md) - Actor/Reactor/CSP ⭐⭐⭐⭐⭐
-- [ACTOR_REACTOR_PATTERNS](../../../c09_design_pattern/docs/ACTOR_REACTOR_PATTERNS.md) - c09 设计模式专题 ⭐⭐⭐⭐⭐
-- [ASYNC_SYNC_EQUIVALENCE_THEORY](../../../c09_design_pattern/docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md) - c09 异步同步等价 ⭐⭐⭐⭐⭐
-- [ASYNC_RECURSION_ANALYSIS](../../../c09_design_pattern/docs/ASYNC_RECURSION_ANALYSIS.md) - c09 异步递归 ⭐⭐⭐⭐
+- [ACTOR_REACTOR_PATTERNS](../../../c09_design_pattern/docs/actor_reactor_patterns.md) - c09 设计模式专题 ⭐⭐⭐⭐⭐
+- [ASYNC_SYNC_EQUIVALENCE_THEORY](../../../c09_design_pattern/docs/async_sync_equivalence_theory.md) - c09 异步同步等价 ⭐⭐⭐⭐⭐
+- [ASYNC_RECURSION_ANALYSIS](../../../c09_design_pattern/docs/async_recursion_analysis.md) - c09 异步递归 ⭐⭐⭐⭐
 
 ---
 
@@ -57,8 +57,8 @@
 
 **补充资源**:
 
-- [KNOWLEDGE_GRAPH](../KNOWLEDGE_GRAPH.md) - 算法知识图谱
-- [MULTIDIMENSIONAL_MATRIX_COMPARISON](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md) - 多维矩阵对比
+- [KNOWLEDGE_GRAPH](../knowledge_graph.md) - 算法知识图谱
+- [MULTIDIMENSIONAL_MATRIX_COMPARISON](../multidimensional_matrix_comparison.md) - 多维矩阵对比
 
 ---
 

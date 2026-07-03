@@ -5,7 +5,7 @@
 > **项目状态**: ✅ 框架完成，内容持续补充
 > **相关文档**: [README](../../README.md) | [项目概览](01_project_overview.md) | [术语表](03_glossary.md) | [FAQ](04_faq.md)
 
-📄 **一页纸总结**: [ONE_PAGE_SUMMARY](../../ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
+📄 **一页纸总结**: [ONE_PAGE_SUMMARY](../../one_page_summary.md) - 核心概念、常见坑、速选表、学习路径
 
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.92.0+ / Edition 2024

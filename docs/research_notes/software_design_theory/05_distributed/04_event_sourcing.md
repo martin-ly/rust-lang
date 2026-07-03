@@ -1,5 +1,7 @@
 # Event Sourcing 模式形式化定义 {#event-sourcing-模式形式化定义}
 
+> **EN**: Event Sourcing
+> **Summary**: Event Sourcing 模式形式化定义 Event Sourcing. (stub/archive redirect)
 > **概念族**: 软件设计 / 分布式模式
 > **内容分级**: [归档级]
 >
@@ -190,7 +192,6 @@ pub trait Event: Serialize + DeserializeOwned + Clone {
 
 }
 
-
 // 聚合根
 
 pub trait Aggregate: Default {
@@ -201,13 +202,11 @@ pub trait Aggregate: Default {
 
     type Error;
 
-
     fn apply(&mut self, event: &Self::Event);
 
     fn handle(&self, cmd: Self::Command) -> Result<Vec<Self::Event>, Self::Error>;
 
 }
-
 
 // 事件存储
 
@@ -221,7 +220,6 @@ pub trait EventStore<E: Event> {
 
 }
 
-
 // 仓储模式
 
 pub struct EventSourcedRepository<A: Aggregate> {
@@ -229,7 +227,6 @@ pub struct EventSourcedRepository<A: Aggregate> {
     store: Box<dyn EventStore<A::Event>>,
 
 }
-
 
 impl<A: Aggregate> EventSourcedRepository<A> {
 
@@ -252,7 +249,6 @@ impl<A: Aggregate> EventSourcedRepository<A> {
         Ok(aggregate)
 
     }
-
 
     pub async fn save(&self, aggregate: &A, events: Vec<A::Event>)
 

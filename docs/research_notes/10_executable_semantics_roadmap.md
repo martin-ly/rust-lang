@@ -1,5 +1,7 @@
 # 可执行语义路线图 {#可执行语义路线图}
 
+> **EN**: Executable Semantics Roadmap
+> **Summary**: 可执行语义路线图 Executable Semantics Roadmap.
 > **概念族**: 形式化方法 / 语义
 > **内容分级**: [归档级]
 >

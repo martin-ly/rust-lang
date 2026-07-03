@@ -1,5 +1,7 @@
 # Template Method 形式化分析 {#template-method-形式化分析}
 
+> **EN**: Template Method
+> **Summary**: Template Method 形式化分析 Template Method.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -252,7 +254,6 @@ trait Algorithm {
 
 }
 
-
 struct ImplA;
 
 impl Algorithm for ImplA {
@@ -263,7 +264,6 @@ impl Algorithm for ImplA {
 
 }
 
-
 struct ImplB;
 
 impl Algorithm for ImplB {
@@ -273,7 +273,6 @@ impl Algorithm for ImplB {
     fn step2(&self) -> String { "B2".into() }
 
 }
-
 
 let a = ImplA;
 
@@ -318,7 +317,6 @@ trait DataMiner {
 
 }
 
-
 struct PdfMiner;
 
 impl DataMiner for PdfMiner {
@@ -326,7 +324,6 @@ impl DataMiner for PdfMiner {
     fn open(&self, path: &str) -> String { format!("pdf:{path}") }
 
 }
-
 
 fn main() {
 
@@ -494,9 +491,7 @@ trait DataImport {
 
 }
 
-
 struct Record { id: u64, name: String }
-
 
 struct CsvImport;
 

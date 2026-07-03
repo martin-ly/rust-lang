@@ -1,12 +1,17 @@
 //! Rust 1.97 稳定特性代码示例
 //! **状态**: Rust 1.97.0 stable（2026-07-09）
-//! **编译要求**: Rust 1.96.0+ 可编译（使用等效实现）；注释中标注的 `1.97+` 新 API 需要 Rust 1.97.0+
+//! **编译要求**: Rust 1.96.0+ 可编译（使用等效实现）；`#[cfg(nightly)]` 分支调用 1.97+ 新 API，
+//! 可通过 `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 //! **来源**: [releases.rs](https://releases.rs/) · [Rust Standard Library Tracking](https://github.com/rust-lang/rust/labels/T-libs-api)
 //!
-//! 本文件覆盖 Rust 1.97.0 稳定版引入的标准库新 API。所有 `1.97+` 实际用法以注释形式保留，
-//! 当前可编译的代码使用等效实现。已进入 1.98 通道的特性单独标注并在后续迁移到 `rust_198_features.rs`。
+//! 本文件覆盖 Rust 1.97.0 稳定版引入的标准库新 API。已进入 1.98 通道的特性单独标注并在
+//! 后续迁移到 `rust_198_features.rs`。
+#![allow(unexpected_cfgs)]
+#![allow(clippy::incompatible_msrv)]
 
 use std::collections::VecDeque;
+#[cfg(nightly)]
+use std::num::NonZeroU32;
 
 // ============================================================================
 // 0. NonZero 位操作 API (Rust 1.97 稳定)
@@ -16,14 +21,17 @@ use std::collections::VecDeque;
 ///
 /// 这些 API 避免了在查询前对零值进行特殊处理，因为 `NonZero` 类型本身已保证非零。
 ///
-/// 当前等效实现可在 Rust 1.96.0+ 编译；注释中为新 API 用法。
+/// 当前等效实现可在 Rust 1.96.0+ 编译；`#[cfg(nightly)]` 分支调用 1.97 原生 API。
+#[cfg(nightly)]
 pub fn demo_nonzero_bit_ops() {
-    // 1.97+ 实际用法:
-    // let n = NonZeroU32::new(0b10100).unwrap();
-    // assert_eq!(n.highest_one(), 4);          // 最高 set bit 的索引
-    // assert_eq!(n.lowest_one(), 2);           // 最低 set bit 的索引
-    // assert_eq!(n.bit_width(), NonZeroU32::new(5).unwrap()); // 表示 self 所需的最少位数
+    let n = NonZeroU32::new(0b10100).unwrap();
+    assert_eq!(n.highest_one(), 4); // 最高 set bit 的索引
+    assert_eq!(n.lowest_one(), 2); // 最低 set bit 的索引
+    assert_eq!(n.bit_width().get(), 5); // 表示 self 所需的最少位数
+}
 
+#[cfg(not(nightly))]
+pub fn demo_nonzero_bit_ops() {
     // 当前等效实现 (Rust 1.96):
     let n: u32 = 0b10100;
     assert_eq!(u32::BITS - 1 - n.leading_zeros(), 4);
@@ -39,12 +47,17 @@ pub fn demo_nonzero_bit_ops() {
 ///
 /// 使得字符分类可在编译期常量/静态项中使用。
 ///
-/// 当前等效实现可在 Rust 1.96.0+ 编译；注释中为新 API 用法。
+/// 当前等效实现可在 Rust 1.96.0+ 编译；`#[cfg(nightly)]` 分支调用 1.97 原生 API。
+#[cfg(nightly)]
 pub fn demo_char_is_control_const() {
-    // 1.97+ 实际用法:
-    // const SPACE_CTRL: bool = ' '.is_control(); // false
-    // const NUL_CTRL: bool = '\0'.is_control();  // true
+    const SPACE_CTRL: bool = ' '.is_control(); // false
+    const NUL_CTRL: bool = '\0'.is_control(); // true
+    assert!(!SPACE_CTRL);
+    assert!(NUL_CTRL);
+}
 
+#[cfg(not(nightly))]
+pub fn demo_char_is_control_const() {
     // 当前等效实现 (Rust 1.96):
     let space_ctrl: bool = ' '.is_control();
     let nul_ctrl: bool = '\0'.is_control();
@@ -61,17 +74,11 @@ pub fn demo_char_is_control_const() {
 /// 与 `truncate(n)`（保留前部 `n` 个，截断后部）互补，实现双端队列的对称操作。
 ///
 /// ⚠️ 状态更新 (2026-06-28)：当前 nightly 仍需要 `#![feature(vec_deque_truncate_front)]`，
-/// 发布日需再次核对 1.97.0 Release Notes。
-///
-/// ```text
-/// 原始: [1, 2, 3, 4, 5]
-/// truncate(2)       → [1, 2]      (保留前 2)
-/// truncate_front(2) → [4, 5]      (保留后 2)
-/// ```
+/// 已确定推迟至 1.98+；本函数保留等效实现，无 native 1.97 API 可切换。
 pub fn demo_vecdeque_truncate_front() {
     let mut deque: VecDeque<i32> = [1, 2, 3, 4, 5].into_iter().collect();
 
-    // 1.97+: 截断前部，保留后部 2 个元素
+    // 1.98+:
     // deque.truncate_front(2);
     // assert_eq!(deque.make_contiguous(), &[4, 5]);
 
@@ -87,13 +94,11 @@ pub fn demo_vecdeque_truncate_front() {
 /// 与 `retain`（从头部开始）互补，在某些场景下能更早终止遍历。
 ///
 /// ⚠️ 状态更新 (2026-06-09): PR #151973 "Stabilize retain_back from truncate_front"
-/// 的 FCP 已完成，但 nightly 1.98.0 验证中 `retain_back` 方法尚不存在
-///（feature gate `vec_deque_retain_back` 亦不存在）。可能从该 PR 中
-/// 被移除或推迟至 1.98+。下方等效实现仍具教学价值。
+/// 的 FCP 已完成，但已确定错过 1.97 cutoff，推迟至 1.98+。下方等效实现仍具教学价值。
 pub fn demo_vecdeque_retain_back() {
     let mut deque: VecDeque<i32> = [1, 2, 3, 4, 5].into_iter().collect();
 
-    // 1.97+: 从尾部保留偶数（结果: [2, 4]，从头部视角）
+    // 1.98+:
     // deque.retain_back(|x| x % 2 == 0);
     // assert_eq!(deque.make_contiguous(), &[2, 4]);
 
@@ -155,7 +160,7 @@ pub fn demo_random_source_concept() {
     // let mut rng = DefaultRandomSource::new();
     // shuffle(&mut data, &mut rng);
 
-    println!("RandomSource / DefaultRandomSource: 等待 1.97+ 稳定化");
+    println!("RandomSource / DefaultRandomSource: 等待 1.98+ 稳定化");
 }
 
 // ============================================================================
@@ -164,7 +169,7 @@ pub fn demo_random_source_concept() {
 
 /// C 可变参数函数定义稳定化
 ///
-/// 1.97 状态: PFCP (PR #155942)
+/// 1.98 状态: PFCP (PR #155942)
 /// 用途: 不再需要通过 `extern "C"` 声明 + 手写 C wrapper 来定义可变参数函数。
 /// 典型场景: 内核 printk、嵌入式日志、FFI 回调。
 #[allow(dead_code)]
@@ -173,7 +178,7 @@ pub extern "C" fn demo_c_variadic_definition(_fmt: *const u8) {
     // pub unsafe extern "C" fn my_printf(fmt: *const u8, args: ...) { ... }
 
     // 当前限制: C variadic 定义仍需要 nightly feature `c_variadic`
-    println!("C-variadic fn definitions: 等待 1.97+ 稳定化，当前需 `#![feature(c_variadic)]`");
+    println!("C-variadic fn definitions: 等待 1.98+ 稳定化，当前需 `#![feature(c_variadic)]`");
 }
 
 // ============================================================================
@@ -187,7 +192,7 @@ pub extern "C" fn demo_c_variadic_definition(_fmt: *const u8) {
 /// 设计目标: 允许 `Box<T>` 和 `Vec<T>` 直接转换为 `NonNull<T>`，避免空指针检查开销。
 #[allow(dead_code)]
 pub fn demo_box_vec_non_null() {
-    // 概念性伪代码 (1.97+ 稳定后):
+    // 概念性伪代码 (1.98+ 稳定后):
     // use std::ptr::NonNull;
     // let boxed = Box::new(42);
     // let ptr: NonNull<i32> = Box::into_non_null(boxed);
@@ -209,23 +214,26 @@ pub fn demo_box_vec_non_null() {
 }
 
 // ============================================================================
-// 5b. Box::as_ptr / Box::as_mut_ptr — 1.98 preview
+// 5b. Box::as_ptr / Box::as_mut_ptr — Rust 1.97 稳定
 // ============================================================================
 
 /// `Box::as_ptr` / `Box::as_mut_ptr` — 不物化引用的原始指针访问
 ///
-/// 1.98 状态: 已合并至 master (PR #157876)。此前为 nightly-only `box_as_ptr`。
-/// ✅ 已在 nightly 2026-06-26（rustc 1.98.0）验证可用；发布日需核对 1.97.0 Release Notes。
+/// Rust 1.97 稳定：`Box::as_ptr` / `Box::as_mut_ptr`。
 /// 关键保证: 该方法不会 materialize 对底层内存的引用，因此在 aliasing model 中
 /// 与 `Box::leak` / `Box::as_ref` 不同，可与其它 raw pointer 操作安全交错。
-#[allow(dead_code)]
+#[cfg(nightly)]
 pub fn demo_box_as_ptr() {
-    // 1.98+ 实际用法:
-    // let mut boxed = Box::new(42);
-    // let ptr: *mut i32 = boxed.as_mut_ptr();
-    // unsafe { *ptr = 100; }
-    // assert_eq!(*boxed, 100);
+    let mut boxed = Box::new(42);
+    let ptr: *mut i32 = Box::as_mut_ptr(&mut boxed);
+    unsafe {
+        *ptr = 100;
+    }
+    assert_eq!(*boxed, 100);
+}
 
+#[cfg(not(nightly))]
+pub fn demo_box_as_ptr() {
     // 当前等效实现 (Rust 1.96): 使用 Box::into_raw 会转移所有权，需要恢复
     let mut boxed = Box::new(42);
     let ptr = Box::into_raw(boxed);
@@ -243,11 +251,10 @@ pub fn demo_box_as_ptr() {
 /// 整数格式化到现有缓冲区，避免堆分配
 ///
 /// 1.98 状态: 已合并至 master (PR #152544)。
-/// ✅ 已在 nightly 2026-06-26（rustc 1.98.0）验证可用；发布日需核对 1.97.0 Release Notes。
 /// 设计目标: `write!(buf, "{}", x)` 的零分配替代方案，用于 `no_std` 和嵌入式场景。
 #[allow(dead_code)]
 pub fn demo_int_format_into() {
-    // 概念性伪代码 (1.97+ 稳定后):
+    // 概念性伪代码 (1.98+ 稳定后):
     // let mut buf = [0u8; 20];
     // let n = 12345i32;
     // let written = n.format_into(&mut buf);
@@ -319,7 +326,7 @@ pub fn demo_core_range_completion() {
 
 /// `proc_macro_value` 允许过程宏在编译期产生值（而不仅是 token 流）
 ///
-/// 1.97 状态: 等待 review (PR #152092)
+/// 1.98 状态: 等待 review (PR #152092)
 /// 用途: 为 `const` 泛型和编译期计算提供更强大的元编程能力。
 #[allow(dead_code)]
 pub fn demo_proc_macro_value_concept() {
@@ -329,7 +336,7 @@ pub fn demo_proc_macro_value_concept() {
     //
     // const CONFIG: MyConfig = MyConfig::const_value(); // 由宏在编译期生成
 
-    println!("proc_macro_value: 等待 1.97+ 稳定化");
+    println!("proc_macro_value: 等待 1.98+ 稳定化");
 }
 
 #[cfg(test)]
@@ -385,7 +392,7 @@ mod tests {
 /// Nightly 预览测试 — 使用 `cargo test -- --ignored` 运行
 ///
 /// 这些测试需要 nightly toolchain 和对应的 feature gate。
-/// 在 1.97 稳定后，将取消注释的代码移入主测试模块并删除等效实现。
+/// 在 1.98 稳定后，将取消注释的代码移入主测试模块并删除等效实现。
 #[cfg(test)]
 #[cfg(nightly)]
 mod nightly_tests {

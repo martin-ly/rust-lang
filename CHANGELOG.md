@@ -150,7 +150,7 @@
   - 清理并扩展 `crates/c08_algorithms/src/rust_198_features.rs`，新增 10 个 1.98 API demo。
   - 新增 `.kimi/RUST_198_TRACKING_2026_06_28.md` 跟踪文档。
 - **F 轨道 — 内部链接治理收尾**：
-  - 修复 docs 下 7 个损坏内部链接，`docs/LINK_CHECK_REPORT.md` 损坏数从 19 降至 0。
+  - 修复 docs 下 7 个损坏内部链接，`docs/link_check_report.md` 损坏数从 19 降至 0。
 - **G 轨道 — i18n 双语标注基线**：
   - 增强 `scripts/add_bilingual_annotations.py`，新增 `--report` Markdown 报告输出。
   - 生成 `reports/I18N_BILINGUAL_BASELINE_2026_06_28.md`：扫描 `concept/` 321 文件，39 种未覆盖术语。
@@ -161,7 +161,7 @@
 - **J 轨道 — Rust 1.98.0 代码示例扩展**：
   - 在 `crates/c08_algorithms/src/rust_198_features.rs` 新增 `NonZero::from_str_radix`、`Box::as_ptr/as_mut_ptr`、`int::format_into` 3 个 demo。
 - **K 轨道 — TRPL 第三版对照刷新**：
-  - 更新 `docs/TRPL_3RD_ED_DIFF.md` 日期与 Ch 18 映射。
+  - 更新 `docs/trpl_3rd_ed_diff.md` 日期与 Ch 18 映射。
 - **L 轨道 — Rust 1.97.0 迁移文档预填充**：
   - 将 `docs/06_toolchain/06_21_rust_1_97_features.md` 从模板升级为预迁移草稿，含 6 个已确认 1.97.0 API 的代码示例与发布日核对清单。
 - **D 轨道增强**：
@@ -317,8 +317,8 @@
 ### 权威来源事实修正补充（2026-06-24）
 
 - 修正 `knowledge/06_ecosystem/02_edition_2024.md`：mermaid 与底部元数据 `rust-version` / 对应 Rust 版本统一为 **1.85.0+**；模块 8 官方来源指向 Rust 1.85 稳定公告。
-- 修正 `crates/c06_async/docs/ASYNC_CLOSURES_GUIDE.md`：`AsyncFn` traits 及 `async_call` 等方法自 **1.85.0 stable** 起可用；底部对应 Rust 版本改为 1.85.0+。
-- 修正 `crates/c06_async/docs/tier_04_advanced/ASYNC_CLOSURES_GUIDE.md`：决策树中 `async || {}` 标注为 **1.85.0+ stable** 而非 nightly。
+- 修正 `crates/c06_async/docs/async_closures_guide.md`：`AsyncFn` traits 及 `async_call` 等方法自 **1.85.0 stable** 起可用；底部对应 Rust 版本改为 1.85.0+。
+- 修正 `crates/c06_async/docs/tier_04_advanced/async_closures_guide.md`：决策树中 `async || {}` 标注为 **1.85.0+ stable** 而非 nightly。
 - 修正 `knowledge/06_ecosystem/emerging/01_async_closures.md`：`Box<dyn AsyncFn(...)>` 示例改为 `compile_fail` 以准确反映其非 dyn-compatible；AFIDT 说明改为“仍需 async-trait 宏或 nightly AFIDT”。
 
 ### 内容去重推进（2026-06-24）
@@ -1000,7 +1000,7 @@
 - **A类问题**: 3 → 1（-67%），剩余 1 个为历史声明（1.85.0 Edition 起始版本），属合理保留
 - **B类问题**: 27 → 23（-15%），修复核心目录中真正损坏的链接
 - **损坏链接修复**:
-  - `docs/02_reference/ALIGNMENT_GUIDE.md`: `07_rust_release_tracking_checklist.md` → `00_rust_version_alignment_checklist.md`
+  - `docs/02_reference/alignment_guide.md`: `07_rust_release_tracking_checklist.md` → `00_rust_version_alignment_checklist.md`
   - `docs/00_meta/history/00_2026_reorganization.md`: 移除不存在的 `00_project_reorganization_plan.md` 链接
   - `docs/00_meta/`: 三个模板文件中移除不存在的 `00_template_matrix.md` 链接
   - `docs/content/academic/README.md`: `10_tree_borrows_authoritative_guide.md` → `10_tree_borrows_guide.md`
@@ -1557,7 +1557,7 @@
 - **`.gitignore`**: 修复 `Cargo.lock` 规则——根目录跟踪，子目录 `**/Cargo.lock` 忽略
 - **`.gitignore`**: 新增 `__pycache__/`、`temp/`、`*.log` 忽略规则
 - **Git 清理**: 从版本控制中移除已跟踪的 `archive/temp/` (10 文件) 和 `scripts/__pycache__/` (1 文件)
-- **`DEVELOPMENT.md`**: 更新系统要求 Rust 1.96.0 → 1.95.0（与项目实际一致）
+- **`development.md`**: 更新系统要求 Rust 1.96.0 → 1.95.0（与项目实际一致）
 - **代码格式化**: 本轮修改的 13 个 `.rs` 文件全部 `rustfmt --edition 2024` 格式化
 - **`.gitignore`**: 修复 `Cargo.lock` 规则——根目录跟踪，子目录 `**/Cargo.lock` 忽略
 - **`.gitignore`**: 新增 `__pycache__/`、`temp/`、`*.log` 忽略规则
@@ -1697,7 +1697,7 @@
 ### 🔒 供应链安全（Phase 1）
 
 - **`deny.toml`**: 新增 cargo-deny 策略文件，管理漏洞响应、许可证白名单、crate 来源限制
-- **`SECURITY_RESPONSE.md`**: 建立供应链安全响应流程（P0-P4 分级、24h/72h/1w SLA）
+- **`security_response.md`**: 建立供应链安全响应流程（P0-P4 分级、24h/72h/1w SLA）
 - **依赖修复**:
   - `bincode` 2.0.1 (unmaintained, RUSTSEC-2025-0141) → `postcard` 1.1.3
   - `rustls-pemfile` 2.2.0 (unmaintained, RUSTSEC-2025-0134) → `rustls-pki-types::pem::PemObject`

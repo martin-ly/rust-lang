@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-为 docs/LINK_CHECK_REPORT.md 中剩余的“锚点不存在”问题，在对应位置插入 HTML 锚点。
+为 docs/link_check_report.md 中剩余的“锚点不存在”问题，在对应位置插入 HTML 锚点。
 适用于链接指向的文本不是 Markdown 标题（如元数据行、列表项、加粗说明）的情况。
 """
 import re

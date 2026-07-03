@@ -1,5 +1,7 @@
 # 工具链生态权威来源对齐矩阵 {#工具链生态权威来源对齐矩阵}
 
+> **EN**: Toolchain Ecosystem Alignment
+> **Summary**: 工具链生态权威来源对齐矩阵 Toolchain Ecosystem Alignment.
 > **概念族**: 权威来源对齐 / 工具链生态
 > **内容分级**: [核心级]
 > **层级**: L0-L4

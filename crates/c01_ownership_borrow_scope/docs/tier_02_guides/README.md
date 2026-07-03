@@ -207,21 +207,21 @@ graph TD
 **文档资源**:
 
 - 📖 [Tier 1: 基础文档层](../tier_01_foundations/README.md) - 快速回顾基础
-- 📊 [可视化资源](../VISUALIZATION_INDEX.md) - 图形化理解概念
-- 📚 [主索引](../00_MASTER_INDEX.md) - 所有文档导航
+- 📊 [可视化资源](../visualization_index.md) - 图形化理解概念
+- 📚 [主索引](../00_master_index.md) - 所有文档导航
 
 **代码资源**:
 
 - 💻 **所有权示例** → [所有权系统基础](01_ownership_quick_start.md) (15+ 示例)
 - 📦 **借用示例** → [借用系统详解](02_borrowing_practice_guide.md) (20+ 示例)
 - ⏰ **生命周期示例** → [生命周期注解](03_lifetimes_practice.md) (18+ 示例)
-- 🧪 **综合示例集** → [Rust 1.90 实战示例](../RUST_190_EXAMPLES_COLLECTION.md) (138+ 示例)
+- 🧪 **综合示例集** → [Rust 1.90 实战示例](../rust_190_examples_collection.md) (138+ 示例)
 
 **可视化资源**:
 
-- 📈 [知识图谱](../KNOWLEDGE_GRAPH.md) - 概念关系
-- 🧠 [思维导图](../MIND_MAP.md) - 学习路径
-- 🔗 [概念关系网络](../CONCEPT_RELATIONSHIP_NETWORK.md) - 深度分析
+- 📈 [知识图谱](../knowledge_graph.md) - 概念关系
+- 🧠 [思维导图](../mind_map.md) - 学习路径
+- 🔗 [概念关系网络](../concept_relationship_network.md) - 深度分析
 
 ## 💡 实践项目建议
 
@@ -280,8 +280,8 @@ graph TD
 
 ### 导航
 
-- 🗺️ [主索引](../00_MASTER_INDEX.md)
-- 📊 [可视化索引](../VISUALIZATION_INDEX.md)
+- 🗺️ [主索引](../00_master_index.md)
+- 📊 [可视化索引](../visualization_index.md)
 - 📖 [完整学习指南](../COMPREHENSIVE_LEARNING_GUIDE.md)
 
 ## 🎉 开始学习

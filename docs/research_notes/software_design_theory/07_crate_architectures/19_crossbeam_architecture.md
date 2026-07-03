@@ -10,6 +10,8 @@
 
 # Crossbeam Crate 架构解构 {#crossbeam-crate-架构解构}
 
+> **EN**: Crossbeam Architecture
+> **Summary**: Crossbeam Crate 架构解构 Crossbeam Architecture.
 >
 > **最后更新**: 2026-06-09
 > **概念族**: 软件设计 / Crate 架构
@@ -48,13 +50,11 @@ use crossbeam::channel::{bounded, select};
 
 use crossbeam::queue::ArrayQueue;
 
-
 // 1. 无锁通道
 
 let (tx, rx) = bounded(100);
 
 tx.send(42).unwrap();
-
 
 // 2. select! 多路复用
 
@@ -65,7 +65,6 @@ select! {
     default => println!("无消息"),
 
 }
-
 
 // 3. 无锁队列
 
@@ -105,7 +104,6 @@ graph TB
 
     end
 
-
     subgraph Core["Crossbeam-Core: Epoch 系统"]
 
         EPOCH[Global Epoch<br/>AtomicUsize]
@@ -118,7 +116,6 @@ graph TB
 
     end
 
-
     subgraph Memory["内存管理层"]
 
         DEF[Deferred Destruction<br/>延迟销毁队列]
@@ -126,7 +123,6 @@ graph TB
         FREE[Safe Free<br/>当所有线程通过 Epoch 后]
 
     end
-
 
     CH --> EPOCH
 
@@ -166,7 +162,6 @@ stateDiagram-v2
 
     Inactive --> Active: pin()
 
-
     note right of Active
 
         线程持有 LocalEpoch
@@ -176,7 +171,6 @@ stateDiagram-v2
         阻止 Global Epoch 推进超过当前值
 
     end note
-
 
     note right of Inactive
 
@@ -222,7 +216,6 @@ pub fn pin() -> Guard {
 
 }
 
-
 impl Drop for Guard {
 
     fn drop(&mut self) {
@@ -232,7 +225,6 @@ impl Drop for Guard {
     }
 
 }
-
 
 // Guard 不提供 Deref，但提供对共享数据的访问代理
 
@@ -265,7 +257,6 @@ Crossbeam 对 `std::sync::atomic` 进行了高层抽象，将**内存排序 (mem
 ```rust,ignore
 use crossbeam::atomic::AtomicCell;
 
-
 // AtomicCell<T> 要求 T: Copy，保证原子操作的安全性
 
 let cell = AtomicCell::new(42);
@@ -285,7 +276,6 @@ pub struct ArrayQueue<T> {
     buffer: [Slot<T>],   // 每个 Slot 的 stamp 协调读写
 
 }
-
 
 struct Slot<T> {
 
@@ -362,7 +352,6 @@ pub fn push(&self, value: T) -> Result<(), T> {
 
         let stamp = self.buffer[index].stamp.load(Ordering::Acquire);
 
-
         if stamp == tail {
 
             // 线性化点：CAS 成功 → push 操作原子完成
@@ -419,7 +408,6 @@ graph LR
 
     S3 --> S4[...]
 
-
     style S1 fill:#f9f,stroke:#333
 
     style S2 fill:#f9f,stroke:#333
@@ -471,7 +459,6 @@ graph BT
 
     end
 
-
     subgraph Crossbeam["Crossbeam"]
 
         EPOCH[crossbeam-epoch]
@@ -483,7 +470,6 @@ graph BT
         Q[crossbeam-queue]
 
     end
-
 
     TOKIO --> DQ
 

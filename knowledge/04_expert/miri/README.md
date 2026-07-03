@@ -1,5 +1,7 @@
 # Miri 内存模型
 
+> **EN**: Miri Index
+> **Summary**: Miri 内存模型 Miri Index. (stub/archive redirect)
 > **Bloom 层级**: 理解
 > **Rust 内存安全检查与别名模型**
 >

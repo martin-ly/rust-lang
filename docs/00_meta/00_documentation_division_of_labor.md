@@ -1,5 +1,7 @@
 # 项目文档体系分工协议 {#项目文档体系分工协议}
 
+> **EN**: Documentation Division Of Labor
+> **Summary**: 项目文档体系分工协议 Documentation Division Of Labor. (stub/archive redirect)
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2 (理解)

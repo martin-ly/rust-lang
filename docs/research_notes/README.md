@@ -1,4 +1,7 @@
 # 🔬 Rust 研究笔记 {#rust-研究笔记}
+
+> **EN**: Research Notes Index
+> **Summary**: 🔬 Rust 研究笔记 Research Notes Index. (stub/archive redirect)
 >
 > **概念族**: 元/导航/索引
 > **内容分级**: [归档级]

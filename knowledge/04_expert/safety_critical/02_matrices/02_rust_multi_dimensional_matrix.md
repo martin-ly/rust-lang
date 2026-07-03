@@ -9,6 +9,8 @@
 >
 # Rust生态系统多维概念矩阵对比
 
+> **EN**: Rust Multi Dimensional Matrix
+> **Summary**: Rust生态系统多维概念矩阵对比 Rust Multi Dimensional Matrix.
 > **Bloom 层级**: 理解
 
 ## 矩阵1: 编程语言安全特性对比矩阵

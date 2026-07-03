@@ -16,6 +16,8 @@
 
 # Rust 工业级 Crate 架构解构总索引 {#rust-工业级-crate-架构解构总索引}
 
+> **EN**: Crate Architecture Master Index
+> **Summary**: Rust 工业级 Crate 架构解构总索引 Crate Architecture Master Index. (stub/archive redirect)
 > **内容分级**: [归档级]
 >
 > **分级**: [B]

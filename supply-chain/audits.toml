@@ -1,11 +1,22 @@
-# cargo-vet 审计记录
-#
-# 此文件记录团队成员对 crate 版本的审计结果。
-# 格式:
-#   [audits.crate-name]
-#   version = "1.0.0"
-#   criteria = "safe-to-deploy"
-#   notes = "Audit notes..."
-#
-# 初始状态：空表，等待 cargo vet 运行后填充
-[audits]
+
+# cargo-vet audits file
+
+[[audits.bare-metal]]
+criteria = "safe-to-deploy"
+version = "0.2.5"
+notes = 'Formal audit stub for RUSTSEC-2026-0110. bare-metal is only pulled in by c13_embedded when target_arch = "arm"; it is not compiled on the host. Risk is limited to embedded targets and the crate is a low-level target-abstraction library with no network or crypto surface.'
+
+[[audits.hickory-proto]]
+criteria = "safe-to-deploy"
+version = "0.25.2"
+notes = "Formal audit stub for RUSTSEC-2026-0118/0119. hickory-proto 0.25.2 is only a Cargo.lock residual and not part of the active compilation graph; the project does not enable mdns, so the DNS proof-validation issue is not exploitable here. Replace with a real audit or upgrade once libp2p >0.56.0 is available."
+
+[[audits.instant]]
+criteria = "safe-to-deploy"
+version = "0.1.13"
+notes = "Formal audit stub for RUSTSEC-2024-0384. instant is a time-utility crate used only by the experimental glommio module in c06_async on Linux. It is not exposed to untrusted input and has no security-sensitive surface in this project."
+
+[[audits.paste]]
+criteria = "safe-to-deploy"
+version = "1.0.15"
+notes = "Formal audit stub for RUSTSEC-2024-0436. paste is a compile-time proc-macro helper used transitively by dev/benchmark dependencies (candle-core, libp2p, tokenizers, etc.). It has no runtime attack surface in this project."

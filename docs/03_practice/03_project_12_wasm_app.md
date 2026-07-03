@@ -1,4 +1,7 @@
 # 实践项目 12: WebAssembly应用 {#实践项目-12-webassembly应用}
+
+> **EN**: Project 12 Wasm App
+> **Summary**: 实践项目 12 Project 12 Wasm App.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

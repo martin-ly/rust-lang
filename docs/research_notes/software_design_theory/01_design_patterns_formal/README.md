@@ -1,5 +1,7 @@
 # 设计模式形式分析框架 {#设计模式形式分析框架}
 
+> **EN**: Design Patterns Formal Index
+> **Summary**: 设计模式形式分析框架 Design Patterns Formal Index. (stub/archive redirect)
 > **概念族**: 软件设计 / 设计模式
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 > **内容分级**: [归档级]

@@ -1,5 +1,7 @@
 # 行为型模式形式化 {#行为型模式形式化}
 
+> **EN**: Behavioral Index
+> **Summary**: 行为型模式形式化 Behavioral Index.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >

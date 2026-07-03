@@ -155,11 +155,11 @@
 
 ## 🌟 2025-10-20 核心增强更新
 
-- **📊 [知识图谱与概念关系](docs/KNOWLEDGE_GRAPH.md)** - 设计模式完整体系
-- **📐 [多维矩阵对比分析](docs/MULTIDIMENSIONAL_MATRIX_COMPARISON.md)** - GoF/并发模式全面对比
-- **🗺️ [Rust 1.93.0 设计模式改进与思维导图](docs/RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md)** ⭐ NEW!
+- **📊 [知识图谱与概念关系](docs/knowledge_graph.md)** - 设计模式完整体系
+- **📐 [多维矩阵对比分析](docs/multidimensional_matrix_comparison.md)** - GoF/并发模式全面对比
+- **🗺️ [Rust 1.93.0 设计模式改进与思维导图](docs/rust_192_design_pattern_improvements.md)** ⭐ NEW!
   - GoF模式/并发模式/Rust特有模式 | 3级学习路径(1-6周)
-- **💻 [Rust 实战示例集](docs/RUST_190_EXAMPLES_COLLECTION.md)** ⭐ NEW!
+- **💻 [Rust 实战示例集](docs/rust_190_examples_collection.md)** ⭐ NEW!
   - 800+行代码 | Builder/Factory/Strategy/Observer/Actor/Type State
 
 **完整度**: 📊 知识图谱 + 📐 多维矩阵 + 🗺️ 思维导图 + 💻 实战示例 = **100%** ✨
@@ -282,10 +282,10 @@
 #### 本模块形式化文档
 
 | 文档                                                                             | 主题                   | 核心内容                                       |
-| :--- | :--- | :--- || [`docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md`](docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md) | **异步vs同步等价性**   | CPS变换、Monad语义、控制流分析、性能对比       |
-| [`docs/ACTOR_REACTOR_PATTERNS.md`](docs/ACTOR_REACTOR_PATTERNS.md)               | **Actor与Reactor模式** | 消息传递、事件驱动、调度机制、形式化证明       |
-| [`docs/CSP_VS_ASYNC_ANALYSIS.md`](docs/CSP_VS_ASYNC_ANALYSIS.md)                 | **CSP vs Rust Async**  | Golang对比、Channel语义、调度模型、性能分析    |
-| [`docs/ASYNC_RECURSION_ANALYSIS.md`](docs/ASYNC_RECURSION_ANALYSIS.md)           | **异步递归**           | Box::pin原理、尾递归优化、性能分析、形式化证明 |
+| :--- | :--- | :--- || [`docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md`](docs/async_sync_equivalence_theory.md) | **异步vs同步等价性**   | CPS变换、Monad语义、控制流分析、性能对比       |
+| [`docs/ACTOR_REACTOR_PATTERNS.md`](docs/actor_reactor_patterns.md)               | **Actor与Reactor模式** | 消息传递、事件驱动、调度机制、形式化证明       |
+| [`docs/CSP_VS_ASYNC_ANALYSIS.md`](docs/csp_vs_async_analysis.md)                 | **CSP vs Rust Async**  | Golang对比、Channel语义、调度模型、性能分析    |
+| [`docs/ASYNC_RECURSION_ANALYSIS.md`](docs/async_recursion_analysis.md)           | **异步递归**           | Box::pin原理、尾递归优化、性能分析、形式化证明 |
 
 #### 🔬 形式化工程系统理论
 

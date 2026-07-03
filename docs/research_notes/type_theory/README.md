@@ -6,6 +6,8 @@
 
 # 🔬 类型理论研究 {#类型理论研究}
 
+> **EN**: Type Theory Index
+> **Summary**: 🔬 类型理论研究 Type Theory Index. (stub/archive redirect)
 > **内容分级**: [归档级]
 >
 > **分级**: [B]

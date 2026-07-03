@@ -99,7 +99,7 @@
 
 - **理论基础** → [`tier_04_advanced/`](../tier_04_advanced/README.md)
 - **知识图谱** → [`docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX`](../../../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)
-- **Rust 版本特性** → [`RUST_192_GENERIC_IMPROVEMENTS`](../RUST_192_GENERIC_IMPROVEMENTS.md)
+- **Rust 版本特性** → [`RUST_192_GENERIC_IMPROVEMENTS`](../rust_192_generic_improvements.md)
 - **可视化思维导图** → [`docs/04_thinking/MIND_MAP_COLLECTION`](../../../../docs/04_thinking/MIND_MAP_COLLECTION.md)
 
 ---
@@ -697,7 +697,7 @@ Month 6+: 持续精进
 
 **补充资源**:
 
-- [`RUST_192_GENERIC_IMPROVEMENTS`](../RUST_192_GENERIC_IMPROVEMENTS.md)
+- [`RUST_192_GENERIC_IMPROVEMENTS`](../rust_192_generic_improvements.md)
 - [`tier_02_guides/05_实战模式指南`](../tier_02_guides/05_practical_patterns.md) - GAT 示例
 
 **学习顺序**:
@@ -867,7 +867,7 @@ Month 6+: 持续精进
 
 ### 重组计划
 
-- [`C04_RESTRUCTURING_PLAN_2025_10_22.md`](../C04_RESTRUCTURING_PLAN_2025_10_22.md) - 本次重组的详细计划
+- [`C04_RESTRUCTURING_PLAN_2025_10_22.md`](../c04_restructuring_plan_2025_10_22.md) - 本次重组的详细计划
 
 ### 框架完成报告
 
@@ -900,7 +900,7 @@ Month 6+: 持续精进
 | **对比矩阵** | [`tier_03_references/`](../tier_03_references/README.md)           |
 | **代码示例** | [`tier_02_guides/05_实战模式指南`](../tier_02_guides/05_practical_patterns.md)       |
 | **类型理论** | [`tier_04_advanced/`](../tier_04_advanced/README.md)     |
-| **Rust特性** | [`RUST_192_GENERIC_IMPROVEMENTS`](../RUST_192_GENERIC_IMPROVEMENTS.md)           |
+| **Rust特性** | [`RUST_192_GENERIC_IMPROVEMENTS`](../rust_192_generic_improvements.md)           |
 
 ---
 

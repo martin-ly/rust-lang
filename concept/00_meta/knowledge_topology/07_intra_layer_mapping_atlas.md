@@ -304,9 +304,9 @@
 | [Rust 的发布流程与 Nightly Rust](../../07_future/50_nightly_rust.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/05_rust_version_tracking.md) |
 | [Rust 的发布流程与 Nightly Rust](../../07_future/50_nightly_rust.md) | ⟹ | [Rust 1.97.0 稳定特性](../../07_future/rust_1_97_stabilized.md) |
 | [BorrowSanitizer：动态别名规则验证工具](../../07_future/borrow_sanitizer.md) | ⟹ | [Formal Methods Industrialization](../../07_future/02_formal_methods.md) |
-| [Rust 1.97 前沿特性预览](../../07_future/rust_1_97_preview.md) | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) |
 | [Rust 1.97.0 稳定特性](../../07_future/rust_1_97_stabilized.md) | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) |
-| [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) | ⟹ | [Rust 1.97 前沿特性预览](../../07_future/rust_1_97_preview.md) |
+| [Rust 1.97.0 稳定特性](../../07_future/rust_1_97_stabilized.md) | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) |
+| [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) | ⟹ | [Rust 1.97.0 稳定特性](../../07_future/rust_1_97_stabilized.md) |
 
 ---
 

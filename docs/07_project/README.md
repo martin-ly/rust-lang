@@ -1,5 +1,7 @@
 # 项目管理与状态追踪 {#项目管理与状态追踪}
 
+> **EN**: Project Index
+> **Summary**: 项目管理与状态追踪 Project Index.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
 

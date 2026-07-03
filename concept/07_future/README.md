@@ -193,7 +193,7 @@ graph TB
 - [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](28_rust_for_webassembly.md)
 - [eBPF / Aya / Rex 的 Rust 映射](29_ebpf_rust.md)
 - [Rust 1.96 稳定特性](rust_1_96_stabilized.md)
-- [Rust 1.97 前沿特性预览](rust_1_97_preview.md)
+- [Rust 1.97 稳定特性](rust_1_97_stabilized.md)
 
 ## 三、前沿方向与下层关联
 

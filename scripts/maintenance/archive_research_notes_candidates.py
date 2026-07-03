@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-将 docs/research_notes/ 中评估为"归档候选"的文件移动到 archive/research_notes_2026_06_25/。
+归档迁移脚本：将 docs/research_notes/ 中评估为"归档候选"的文件移动到 archive/research_notes_2026_06_25/。
 
 归档标准（满足任一即可）：
 1. 属于黑名单类别（模板、进度/完成/证书/统计、过时版本更新、已重定向计划文件）。

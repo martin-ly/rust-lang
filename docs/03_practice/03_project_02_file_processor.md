@@ -1,4 +1,7 @@
 # 实践项目 02: 文件处理器 {#实践项目-02-文件处理器}
+
+> **EN**: Project 02 File Processor
+> **Summary**: 实践项目 02 Project 02 File Processor.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

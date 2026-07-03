@@ -9,6 +9,8 @@
 >
 # Rust安全保证公理定理推理决策树
 
+> **EN**: Rust Axiomatic Reasoning Trees
+> **Summary**: Rust安全保证公理定理推理决策树 Rust Axiomatic Reasoning Trees. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 推理树1: 内存安全性公理系统

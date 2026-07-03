@@ -1,5 +1,7 @@
 # Rust形式化方法面试题集锦 {#rust形式化方法面试题集锦}
 
+> **EN**: Interview Questions Collection
+> **Summary**: Rust形式化方法面试题集锦 Interview Questions Collection.
 > **概念族**: 学习资源
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -150,7 +152,6 @@ println!("{}", x);
 // 方案1: clone
 
 let y = x.clone();
-
 
 // 方案2: 借用
 
@@ -396,7 +397,6 @@ struct Arc<T> {
 
 }
 
-
 struct ArcInner<T> {
 
     count: AtomicUsize,
@@ -614,7 +614,6 @@ struct MySlice {
 
 }
 
-
 // 使用胖指针
 
 let ptr: *const MySlice;  // 包含长度信息
@@ -715,7 +714,6 @@ let ptr: *const MySlice;  // 包含长度信息
 ```rust,ignore
 async fn foo() { bar().await; }
 
-
 // 转换为：
 
 enum FooFuture {
@@ -782,7 +780,6 @@ let guard = mutex.lock().unwrap();
 
 some_async().await;
 
-
 // ✅ 安全
 
 {
@@ -794,7 +791,6 @@ some_async().await;
 }  // 释放
 
 some_async().await;
-
 
 // 或使用tokio::sync::Mutex
 
@@ -850,7 +846,6 @@ struct Runtime {
     task_queue: VecDeque<Task>,
 
 }
-
 
 impl Runtime {
 
@@ -1068,7 +1063,6 @@ use std::collections::HashMap;
 
 use std::sync::Mutex;
 
-
 struct LruCache<K, V> {
 
     map: Mutex<HashMap<K, Node<V>>>,
@@ -1076,7 +1070,6 @@ struct LruCache<K, V> {
     capacity: usize,
 
 }
-
 
 // 使用Mutex保护HashMap
 
@@ -1107,7 +1100,6 @@ struct Saga {
     compensations: Vec<Compensation>,
 
 }
-
 
 impl Saga {
 
@@ -1165,7 +1157,6 @@ struct ConnectionPool {
 
 }
 
-
 impl ConnectionPool {
 
     async fn get(&self) -> Connection {
@@ -1177,7 +1168,6 @@ impl ConnectionPool {
         // 超过max_size则等待
 
     }
-
 
     async fn put(&self, conn: Connection) {
 
@@ -1209,11 +1199,9 @@ struct MyFuture {
 
 }
 
-
 impl Future for MyFuture {
 
     type Output = i32;
-
 
     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 
@@ -1274,7 +1262,6 @@ impl Future for MyFuture {
 
 trait Event {}
 
-
 // 聚合
 
 trait Aggregate {
@@ -1284,7 +1271,6 @@ trait Aggregate {
     fn handle(&self, command: Command) -> Vec<Box<dyn Event>>;
 
 }
-
 
 // 事件存储
 

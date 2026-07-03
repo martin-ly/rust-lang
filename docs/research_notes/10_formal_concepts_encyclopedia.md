@@ -1,5 +1,7 @@
 # Rust形式化概念百科 {#rust形式化概念百科}
 
+> **EN**: Formal Concepts Encyclopedia
+> **Summary**: Rust形式化概念百科 Formal Concepts Encyclopedia.
 > **概念族**: 综合研究
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -302,7 +304,6 @@ trait Eq {
     fn eq(&self, other: &Self) -> bool;
 
 }
-
 
 impl Eq for MyType {
 
@@ -618,7 +619,6 @@ let r;
 use std::rc::Rc;
 
 use std::thread;
-
 
 let data = Rc::new(5);
 

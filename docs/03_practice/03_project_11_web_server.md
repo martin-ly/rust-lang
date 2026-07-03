@@ -1,4 +1,7 @@
 # 实践项目 11: HTTP Web服务器 {#实践项目-11-http-web服务器}
+
+> **EN**: Project 11 Web Server
+> **Summary**: 实践项目 11 Project 11 Web Server.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

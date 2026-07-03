@@ -17,6 +17,8 @@
 
 # azure-sdk-rust 架构解构 {#azure-sdk-rust-架构解构}
 
+> **EN**: Azure Sdk Architecture
+> **Summary**: azure-sdk-rust 架构解构 Azure Sdk Architecture.
 > **最后更新**: 2026-06-29
 >
 > **内容分级**: [归档级]

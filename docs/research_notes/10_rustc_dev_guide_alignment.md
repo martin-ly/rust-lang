@@ -1,5 +1,7 @@
 # rustc-dev-guide 对齐矩阵 {#rustc-dev-guide-对齐矩阵}
 
+> **EN**: Rustc Dev Guide Alignment
+> **Summary**: rustc-dev-guide 对齐矩阵 Rustc Dev Guide Alignment.
 > **概念族**: 权威来源对齐 / rustc-dev-guide
 > **内容分级**: [核心级]
 > **层级**: L0-L4

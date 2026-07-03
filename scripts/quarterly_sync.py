@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-季度同步与 Rust 版本对齐检查清单生成器
+归档迁移脚本：季度同步与 Rust 版本对齐检查清单生成器
 
 读取 docs/00_meta/00_quarterly_sync_checklist.md 和
      docs/00_meta/00_rust_version_alignment_checklist.md 作为模板，

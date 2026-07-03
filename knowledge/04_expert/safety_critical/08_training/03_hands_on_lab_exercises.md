@@ -11,6 +11,8 @@
 >
 # 动手实验练习
 
+> **EN**: Hands On Lab Exercises
+> **Summary**: 动手实验练习 Hands On Lab Exercises. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 概述

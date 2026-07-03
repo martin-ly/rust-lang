@@ -1,4 +1,7 @@
 # libp2p 指南 {#libp2p-指南}
+
+> **EN**: Libp2p Guide
+> **Summary**: libp2p 指南 Libp2p Guide.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

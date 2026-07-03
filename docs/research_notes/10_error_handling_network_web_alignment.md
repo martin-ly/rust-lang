@@ -1,5 +1,7 @@
 # 错误处理与网络/Web 生态权威来源对齐矩阵 {#错误处理与网络web-生态权威来源对齐矩阵}
 
+> **EN**: Error Handling Network Web Alignment
+> **Summary**: 错误处理与网络/Web 生态权威来源对齐矩阵 Error Handling Network Web Alignment.
 > **概念族**: 权威来源对齐 / 错误处理 / 网络 / Web
 > **内容分级**: [核心级]
 > **层级**: L0-L5

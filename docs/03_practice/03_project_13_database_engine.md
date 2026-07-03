@@ -1,4 +1,7 @@
 # 实践项目 13: 简易数据库引擎 {#实践项目-13-简易数据库引擎}
+
+> **EN**: Project 13 Database Engine
+> **Summary**: 实践项目 13 Project 13 Database Engine.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

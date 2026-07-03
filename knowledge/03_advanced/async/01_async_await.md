@@ -1,5 +1,7 @@
 # async/await 异步编程
 
+> **EN**: Async Await
+> **Summary**: async/await 异步编程 Async Await. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/03_advanced/02_async.md](../../../concept/03_advanced/02_async.md)。
 > **历史版本存档**: [archive/knowledge/03_advanced/async/01_async_await.md](../../../archive/knowledge/03_advanced/async/01_async_await.md)
 >

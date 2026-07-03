@@ -1,5 +1,7 @@
 # Unsafe Rust - 不安全 Rust
 
+> **EN**: Unsafe Rust
+> **Summary**: Unsafe Rust - 不安全 Rust Unsafe Rust. (stub/archive redirect)
 > **深度**: [综述级]
 > **状态**: 已重定向
 > **说明**: 本文件内容与 `concept/03_advanced/03_unsafe.md` 高度重叠。为消除重复、统一权威来源，本文件已作为重定向页保留，全部内容请在 `concept/` 权威文件中查阅。

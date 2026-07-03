@@ -3,6 +3,8 @@
 
 # Rust 安全与非安全全面论证与分析 {#rust-安全与非安全全面论证与分析}
 
+> **EN**: Safe Unsafe Comprehensive Analysis
+> **Summary**: Rust 安全与非安全全面论证与分析 Safe Unsafe Comprehensive Analysis. (stub/archive redirect)
 > **内容分级**: [归档级]
 >
 > **分级**: [B]

@@ -1,5 +1,7 @@
 # 国际化翻译版本差异检测与对齐指南 {#国际化翻译版本差异检测与对齐指南}
 
+> **EN**: I18n Translation Gap Analysis
+> **Summary**: 国际化翻译版本差异检测与对齐指南 I18n Translation Gap Analysis.
 > **概念族**: 权威来源对齐 / 国际化 / i18n
 > **内容分级**: [核心级]
 > **层级**: L0-L1

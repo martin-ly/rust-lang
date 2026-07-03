@@ -10,6 +10,8 @@
 
 # Tower crate 架构解构 {#tower-crate-架构解构}
 
+> **EN**: Tower Architecture
+> **Summary**: Tower crate 架构解构 Tower Architecture.
 > **概念族**: 软件设计 / Crate 架构
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -54,11 +56,9 @@ pub trait Service<Request> {
 
     type Future: Future<Output = Result<Self::Response, Self::Error>>;
 
-
     /// 背压探测：服务是否准备好接受新请求？
 
     fn poll_ready(&mut self, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>>;
-
 
     /// 处理请求：消费服务的一个处理槽位
 
@@ -138,7 +138,6 @@ graph LR
 
     S["Service<br/>call: Request → Future<Response>"] -->|范畴论映射| K["Kleisli Arrow<br/>Request → M Response"]
 
-
     style S fill:#e3f2fd
 
     style K fill:#fff3e0
@@ -189,11 +188,9 @@ use tower::layer::util::Identity;
 
 use tower::Layer;
 
-
 // 单位元：Identity 不改变服务
 
 let service = Identity.layer(core_service);
-
 
 // 结合律：以下两种方式语义等价
 
@@ -234,7 +231,6 @@ graph LR
 
     C --> Resp["Response/Error"]
 
-
     style T fill:#e1f5fe
 
     style Re fill:#e1f5fe
@@ -254,7 +250,6 @@ use tower::retry::RetryLayer;
 use tower::limit::RateLimitLayer;
 
 use tower::trace::TraceLayer;
-
 
 let service = ServiceBuilder::new()
 
@@ -293,7 +288,6 @@ sequenceDiagram
 
     participant Core
 
-
     Client->>Timeout: poll_ready()
 
     Timeout->>Retry: poll_ready()
@@ -309,7 +303,6 @@ sequenceDiagram
     Retry-->>Timeout: Ready
 
     Timeout-->>Client: Ready
-
 
     Client->>Timeout: call(req)
 
@@ -402,7 +395,6 @@ let stack = ServiceBuilder::new()
 
     .service(core);
 
-
 // stack 的实际类型近似：
 
 // Timeout<Retry<Core>>
@@ -430,7 +422,6 @@ Tower 的中间件经常需要生成自引用的 `Future`（如超时 Future 需
 
 ```rust,ignore
 use pin_project::pin_project;
-
 
 #[pin_project]
 
@@ -519,7 +510,6 @@ use tower::limit::RateLimitLayer;
 
 use tower::retry::{RetryLayer, Policy};
 
-
 // ============================================================
 
 // 1. 定义请求/响应类型
@@ -536,7 +526,6 @@ struct HttpRequest {
 
 }
 
-
 #[derive(Debug)]
 
 struct HttpResponse {
@@ -546,7 +535,6 @@ struct HttpResponse {
     body: Vec<u8>,
 
 }
-
 
 // ============================================================
 
@@ -558,7 +546,6 @@ struct HttpResponse {
 
 struct CoreHandler;
 
-
 impl Service<HttpRequest> for CoreHandler {
 
     type Response = HttpResponse;
@@ -567,13 +554,11 @@ impl Service<HttpRequest> for CoreHandler {
 
     type Future = Pin<Box<dyn Future<Output = Result<Self::Response, Self::Error>> + Send>>;
 
-
     fn poll_ready(&mut self, _cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
 
         Poll::Ready(Ok(()))
 
     }
-
 
     fn call(&mut self, req: HttpRequest) -> Self::Future {
 
@@ -595,7 +580,6 @@ impl Service<HttpRequest> for CoreHandler {
 
 }
 
-
 // ============================================================
 
 // 3. 自定义重试策略
@@ -606,11 +590,9 @@ impl Service<HttpRequest> for CoreHandler {
 
 struct Retry3Times;
 
-
 impl<E> Policy<HttpRequest, HttpResponse, E> for Retry3Times {
 
     type Future = std::future::Ready<Self>;
-
 
     fn retry(
 
@@ -634,7 +616,6 @@ impl<E> Policy<HttpRequest, HttpResponse, E> for Retry3Times {
 
     }
 
-
     fn clone_request(&self, req: &HttpRequest) -> Option<HttpRequest> {
 
         Some(HttpRequest {
@@ -648,7 +629,6 @@ impl<E> Policy<HttpRequest, HttpResponse, E> for Retry3Times {
     }
 
 }
-
 
 // ============================================================
 
@@ -676,13 +656,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         .service(CoreHandler);
 
-
     // service 的类型：
 
     // Timeout<Retry<RateLimit<CoreHandler>>>
 
     // 编译期完全展开，零运行时开销
-
 
     let mut svc = service;
 
@@ -694,11 +672,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     };
 
-
     let resp = svc.call(req).await?;
 
     println!("Response: {:?}", resp);
-
 
     Ok(())
 
@@ -725,11 +701,9 @@ graph BT
 
     D --> E[操作系统<br/>epoll / kqueue / IOCP]
 
-
     B --> F[Tower 中间件生态<br/>timeout / retry / limit / trace]
 
     F --> G[自定义业务中间件]
-
 
     style A fill:#e8f5e9
 

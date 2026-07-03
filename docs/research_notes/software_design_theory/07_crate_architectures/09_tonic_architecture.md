@@ -10,6 +10,8 @@
 
 # Tonic crate 架构解构 {#tonic-crate-架构解构}
 
+> **EN**: Tonic Architecture
+> **Summary**: Tonic crate 架构解构 Tonic Architecture.
 > **概念族**: 软件设计 / Crate 架构
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -57,7 +59,6 @@ graph TB
 
     end
 
-
     subgraph TransportLayer["Transport 层"]
 
         HP["Hyper HTTP/2"]
@@ -67,7 +68,6 @@ graph TB
         H2["h2 crate: HTTP/2 帧管理"]
 
     end
-
 
     subgraph ServiceLayer["Service 层"]
 
@@ -80,7 +80,6 @@ graph TB
         REQ["Request&lt;T&gt; / Response&lt;T&gt;"]
 
     end
-
 
     PB --> TB
 
@@ -101,7 +100,6 @@ graph TB
     STR --> TransportLayer
 
     REQ --> TransportLayer
-
 
     style ProtoLayer fill:#fff3e0
 
@@ -160,9 +158,7 @@ pub trait Greeter: Send + Sync + 'static {
 
     ) -> Result<Response<HelloResponse>, Status>;
 
-
     type SayHelloStreamStream: Stream<Item = Result<HelloResponse, Status>> + Send + 'static;
-
 
     async fn say_hello_stream(
 
@@ -207,7 +203,6 @@ where
 
     type Future = GrpcFuture<S::Future>;
 
-
     fn call(&mut self, req: http::Request<ReqBody>) -> Self::Future {
 
         // 1. 解析 HTTP/2 路径为方法名
@@ -241,7 +236,6 @@ pub struct Streaming<T> {
 
 }
 
-
 impl<T> Streaming<T> {
 
     pub async fn message(&mut self) -> Result<Option<T>, Status> {
@@ -268,7 +262,6 @@ async fn client_streaming(
 
 ) -> Result<Response<UploadSummary>, Status> { }
 
-
 // 服务端：发送服务端流
 
 async fn server_streaming(
@@ -278,7 +271,6 @@ async fn server_streaming(
     request:Request<Query>,
 
 ) -> Result<Response<BoxStream<Result<Record, Status>>>, Status> { }
-
 
 // 服务端：双向流
 
@@ -344,9 +336,7 @@ use myapp::greeter_client::GreeterClient;
 
 use myapp::HelloRequest;
 
-
 let mut client = GreeterClient::connect("http://[::1]:50051").await?;
-
 
 let response = client
 
@@ -357,7 +347,6 @@ let response = client
     }))
 
     .await?;
-
 
 println!("RESPONSE={:?}", response.into_inner().message);
 ```
@@ -387,18 +376,15 @@ fn auth_interceptor(req: Request<()>) -> Result<Request<()>, Status> {
 
         .ok_or_else(|| Status::unauthenticated("missing token"))?;
 
-
     if !validate_token(token) {
 
         return Err(Status::permission_denied("invalid token"));
 
     }
 
-
     Ok(req)
 
 }
-
 
 let svc = GreeterServer::new(greeter)
 
@@ -437,16 +423,13 @@ graph LR
 
 use tower::{Layer, Service};
 
-
 #[derive(Clone)]
 
 struct AsyncAuthLayer;
 
-
 impl<S> Layer<S> for AsyncAuthLayer {
 
     type Service = AsyncAuthService<S>;
-
 
     fn layer(&self, inner: S) -> Self::Service {
 
@@ -455,7 +438,6 @@ impl<S> Layer<S> for AsyncAuthLayer {
     }
 
 }
-
 
 // AsyncAuthService 实现 Service<Request>，内部可执行 .await
 ```
@@ -493,7 +475,6 @@ impl Chat for MyChatService {
 
     type ChatStreamStream = Pin<Box<dyn Stream<Item = Result<Message, Status>> + Send>>;
 
-
     async fn chat_stream(
 
         &self,
@@ -505,7 +486,6 @@ impl Chat for MyChatService {
         let mut inbound = request.into_inner();
 
         let (tx, rx) = tokio::sync::mpsc::channel(128);
-
 
         tokio::spawn(async move {
 
@@ -520,7 +500,6 @@ impl Chat for MyChatService {
             }
 
         });
-
 
         let outbound = ReceiverStream::new(rx);
 
@@ -637,7 +616,6 @@ message Config {
   int32 timeout_ms = 2;  // 新字段复用旧编号！
 
 }
-
 
 // ✅ 安全：显式预留已删除字段
 

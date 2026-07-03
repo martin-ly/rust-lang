@@ -500,7 +500,7 @@ where
 ## 相关文档
 
 - [Rust 1.94 发布说明](../../../docs/06_toolchain/16_rust_1.94_release_notes.md)
-- [C04 泛型主索引](../00_MASTER_INDEX.md)
+- [C04 泛型主索引](../00_master_index.md)
 - [RPITIT 详解](../tier_03_references/rpitit_guide.md)
 
 ---

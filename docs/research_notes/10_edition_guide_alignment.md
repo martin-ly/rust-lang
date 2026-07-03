@@ -1,5 +1,7 @@
 # Rust Edition Guide 对齐矩阵 {#rust-edition-guide-对齐矩阵}
 
+> **EN**: Edition Guide Alignment
+> **Summary**: Rust Edition Guide 对齐矩阵 Edition Guide Alignment. (stub/archive redirect)
 > **概念族**: 权威来源对齐 / Edition Guide
 > **权威来源**: Rust Edition 机制与迁移策略的权威解释见 [`concept/07_future/22_edition_guide.md`](../../concept/07_future/22_edition_guide.md)。本文仅作为官方 Edition Guide 与项目知识图谱的对齐矩阵保留。
 > **内容分级**: [核心级]

@@ -1,5 +1,7 @@
 # API 使用指南 {#api-使用指南}
 
+> **EN**: API Guide
+> **Summary**: API 使用指南 API Guide.
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
 > **最后更新**: 2026-04-10

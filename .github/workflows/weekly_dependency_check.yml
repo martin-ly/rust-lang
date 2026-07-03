@@ -55,7 +55,7 @@ jobs:
       - name: Run weekly dependency check
         id: check
         run: |
-          bash scripts/cargo-update-check.sh --weekly --format markdown
+          bash scripts/cargo_update_check.sh --weekly --format markdown
           
           # 查找生成的 markdown 报告
           REPORT_FILE=$(ls -t target/cargo-update-weekly-*.md 2>/dev/null | head -1)

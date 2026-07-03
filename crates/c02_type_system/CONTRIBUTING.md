@@ -85,7 +85,7 @@
 
 ### 贡献前须知
 
-1. **阅读文档**: 先浏览 [README.md](README.md) 和 [00_MASTER_INDEX.md](docs/00_MASTER_INDEX.md)
+1. **阅读文档**: 先浏览 [README.md](README.md) 和 [00_MASTER_INDEX.md](docs/00_master_index.md)
 2. **了解结构**: 熟悉项目的文档体系和代码组织
 3. **遵循规范**: 确保您的贡献符合我们的标准
 4. **开放沟通**: 有任何问题随时在 Issues 中提出

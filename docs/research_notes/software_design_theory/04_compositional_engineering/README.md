@@ -1,5 +1,7 @@
 # 组合软件工程有效性形式论证 {#组合软件工程有效性形式论证}
 
+> **EN**: Compositional Engineering Index
+> **Summary**: 组合软件工程有效性形式论证 Compositional Engineering Index. (stub/archive redirect)
 > **概念族**: 软件设计 / 组合工程
 > **内容分级**: [归档级]
 >
@@ -101,7 +103,6 @@
 ```rust
 trait Product { fn name(&self) -> &str; }
 
-
 struct Config { host: String, port: u16 }
 
 struct ConfigBuilder { host: Option<String>, port: Option<u16> }
@@ -127,7 +128,6 @@ impl ConfigBuilder {
     }
 
 }
-
 
 trait ConfigFactory {
 
@@ -163,13 +163,11 @@ impl ConfigFactory for DefaultFactory {
 
 pub struct OrderDto { pub id: u64, pub amount: u64 }
 
-
 // Domain Model
 
 pub struct Order { id: u64, amount: u64 }
 
 impl From<OrderDto> for Order { fn from(d: OrderDto) -> Self { Self { id: d.id, amount: d.amount } } }
-
 
 // Repository
 
@@ -180,7 +178,6 @@ trait OrderRepository {
     fn find(&self, id: u64) -> Option<Order>;
 
 }
-
 
 // Service Layer：编排
 
@@ -412,7 +409,6 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 └── 组合层级：L1 单模块 / L2 多模块 / L3 多 crate / L4 跨进程
 
-
 联合判定示例：
 
 ├── 等价 + L1/L2 → cargo check 即可；如 Factory、Builder、Repository
@@ -543,13 +539,11 @@ flowchart TB
 
 ═══════════════════════════════════════════════════════════════
 
-
 粒度层次
 
   模块 ──→ crate ──→ 进程 ──→ 网络
 
   L1        L2       L3       L4
-
 
 L1 单模块（单 mod）
 
@@ -559,7 +553,6 @@ L1 单模块（单 mod）
 
 └── 模式：Domain Model、Value Object、Specification、Registry、Identity Map、Lazy Load、Plugin
 
-
 L2 多模块（同 crate 内多 mod）
 
 ├── 验证：cargo check、依赖图 DAG
@@ -567,7 +560,6 @@ L2 多模块（同 crate 内多 mod）
 ├── 定理：CE-MAT-T1 静态判定
 
 └── 模式：Repository、Service Layer、Unit of Work、Data Mapper、MVC、Front Controller、Table Data Gateway、Active Record
-
 
 L3 多 crate（Cargo 依赖）
 
@@ -577,7 +569,6 @@ L3 多 crate（Cargo 依赖）
 
 └── 模式：DTO、Gateway（跨 crate）、Remote Facade
 
-
 L4 跨进程/跨网络（分布式、微服务）
 
 ├── 验证：契约/集成测试/Miri/模糊测试
@@ -585,7 +576,6 @@ L4 跨进程/跨网络（分布式、微服务）
 ├── 定理：CE-MAT-T1 需运行时验证
 
 └── 模式：DTO、Gateway、Remote Facade、Optimistic Offline Lock、Event Sourcing
-
 
 架构模式→成熟度层级（与 02_complete_43_catalog 20 扩展模式对应）
 ```

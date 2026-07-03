@@ -2,10 +2,11 @@
 //! Rust 1.97.0 stabilized features —— process and FFI
 //!
 //! 本文件展示与进程管理、FFI 和系统编程相关的 Rust 1.97.0 稳定特性。
-//! 当前工具链为 Rust 1.96.0，所有 1.97 新 API 调用均保留在注释中；
+//! 当前工具链为 Rust 1.96.0，所有 1.97 新 API 调用均保留在 `#[cfg(nightly)]` 分支；
 //! 可执行代码使用语义等价的 1.96 兼容实现。
 //! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。
 #![allow(clippy::incompatible_msrv)]
+#![allow(unexpected_cfgs)]
 
 use std::io;
 
@@ -14,7 +15,7 @@ use std::io;
 ///
 /// 涉及特性：
 /// - `std::ptr::fn_addr_eq`（Rust 1.97+）：可移植的函数指针地址比较
-/// - Windows `WSAESHUTDOWN` 正确映射为 `io::ErrorKind::BrokenPipe`（Rust 1.97+）
+/// - Windows `WSAESHUTDOWN` 正确映射为 `io::ErrorKind::BrokenPipe`（Rust 1.97+，行为变更，无 API）
 pub struct Rust197ProcessFeatures;
 
 impl Rust197ProcessFeatures {
@@ -23,9 +24,14 @@ impl Rust197ProcessFeatures {
     /// Rust 1.97 使用 `std::ptr::fn_addr_eq(f1, f2)` 处理 provenance 问题；
     /// 在 1.96 中可转换为裸指针 `*const ()` 后比较。
     #[allow(clippy::fn_to_numeric_cast_any)]
+    #[cfg(nightly)]
     pub fn function_pointers_equal<A, R>(f1: fn(A) -> R, f2: fn(A) -> R) -> bool {
-        // Rust 1.97:
-        // std::ptr::fn_addr_eq(f1, f2)
+        std::ptr::fn_addr_eq(f1, f2)
+    }
+
+    #[allow(clippy::fn_to_numeric_cast_any)]
+    #[cfg(not(nightly))]
+    pub fn function_pointers_equal<A, R>(f1: fn(A) -> R, f2: fn(A) -> R) -> bool {
         std::ptr::eq(f1 as *const (), f2 as *const ())
     }
 

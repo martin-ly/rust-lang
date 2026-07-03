@@ -1,5 +1,7 @@
 # Trait 系统形式化 {#trait-系统形式化}
 
+> **EN**: Trait System Formalization
+> **Summary**: Trait 系统形式化 Trait System Formalization. (stub/archive redirect)
 > **概念族**: 类型系统 / Trait
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 > **内容分级**: [归档级]
@@ -668,7 +670,6 @@ GAT 约束 $A[P] : B[P]$ 在 [advanced_types](10_advanced_types.md) AT-L1 衔接
 ```text
 Trait 系统安全性证明树
 
-
   定义: Trait 定义、Trait 对象、泛型 Trait
 
   定义: Resolve 解析算法
@@ -828,7 +829,6 @@ trait Display {
 
 }
 
-
 struct Point {
 
     x: i32,
@@ -836,7 +836,6 @@ struct Point {
     y: i32,
 
 }
-
 
 impl Display for Point {
 
@@ -847,7 +846,6 @@ impl Display for Point {
     }
 
 }
-
 
 fn main() {
 
@@ -875,13 +873,11 @@ trait Draw {
 
 }
 
-
 struct Circle {
 
     radius: f64,
 
 }
-
 
 struct Rectangle {
 
@@ -890,7 +886,6 @@ struct Rectangle {
     height: f64,
 
 }
-
 
 impl Draw for Circle {
 
@@ -902,7 +897,6 @@ impl Draw for Circle {
 
 }
 
-
 impl Draw for Rectangle {
 
     fn draw(&self) {
@@ -913,13 +907,11 @@ impl Draw for Rectangle {
 
 }
 
-
 fn draw_shape(shape: &dyn Draw) {
 
     shape.draw();
 
 }
-
 
 fn main() {
 
@@ -954,13 +946,11 @@ trait Container<T> {
 
 }
 
-
 struct VecContainer<T> {
 
     items: Vec<T>,
 
 }
-
 
 impl<T: PartialEq> Container<T> for VecContainer<T> {
 
@@ -969,7 +959,6 @@ impl<T: PartialEq> Container<T> for VecContainer<T> {
         self.items.contains(item)
 
     }
-
 
     fn add(&mut self, item: T) {
 
@@ -995,11 +984,9 @@ trait Iterator {
 
     type Item;  // 关联类型
 
-
     fn next(&mut self) -> Option<Self::Item>;
 
 }
-
 
 struct Counter {
 
@@ -1007,11 +994,9 @@ struct Counter {
 
 }
 
-
 impl Iterator for Counter {
 
     type Item = u32;  // 指定关联类型
-
 
     fn next(&mut self) -> Option<Self::Item> {
 
@@ -1041,13 +1026,11 @@ trait Draw {
 
 }
 
-
 struct Circle {
 
     radius: f64,
 
 }
-
 
 impl Draw for Circle {
 
@@ -1059,7 +1042,6 @@ impl Draw for Circle {
 
 }
 
-
 struct Rectangle {
 
     width: f64,
@@ -1067,7 +1049,6 @@ struct Rectangle {
     height: f64,
 
 }
-
 
 impl Draw for Rectangle {
 
@@ -1079,7 +1060,6 @@ impl Draw for Rectangle {
 
 }
 
-
 fn draw_shapes(shapes: &[Box<dyn Draw>]) {
 
     for shape in shapes {
@@ -1089,7 +1069,6 @@ fn draw_shapes(shapes: &[Box<dyn Draw>]) {
     }
 
 }
-
 
 fn use_trait_objects() {
 
@@ -1121,7 +1100,6 @@ trait Add<Rhs = Self> {
 
 }
 
-
 impl Add for i32 {
 
     type Output = i32;
@@ -1133,7 +1111,6 @@ impl Add for i32 {
     }
 
 }
-
 
 fn main() {
 
@@ -1168,13 +1145,11 @@ trait Clone {
 
 }
 
-
 trait Debug {
 
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result;
 
 }
-
 
 // 使用 Trait 约束
 
@@ -1183,7 +1158,6 @@ fn duplicate<T: Clone>(item: T) -> (T, T) {
     (item.clone(), item.clone())
 
 }
-
 
 // 多个 Trait 约束
 
@@ -1194,7 +1168,6 @@ fn print_and_clone<T: Clone + Debug>(item: T) -> T {
     item.clone()
 
 }
-
 
 // 使用 where 子句
 
@@ -1213,7 +1186,6 @@ where
     x.clone()
 
 }
-
 
 // Trait 约束的泛型函数
 
@@ -1234,7 +1206,6 @@ fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
     largest
 
 }
-
 
 fn main() {
 
@@ -1270,9 +1241,7 @@ trait Processor {
 
 }
 
-
 struct TextProcessor;
-
 
 impl Processor for TextProcessor {
 
@@ -1284,7 +1253,6 @@ impl Processor for TextProcessor {
 
 }
 
-
 // Trait 对象与生命周期参数
 
 fn process_with_lifetime<'a>(processor: &'a dyn Processor, data: &'a str) -> String {
@@ -1293,7 +1261,6 @@ fn process_with_lifetime<'a>(processor: &'a dyn Processor, data: &'a str) -> Str
 
 }
 
-
 // 返回 Trait 对象
 
 fn get_processor() -> Box<dyn Processor> {
@@ -1301,7 +1268,6 @@ fn get_processor() -> Box<dyn Processor> {
     Box::new(TextProcessor)
 
 }
-
 
 fn main() {
 
@@ -1325,7 +1291,6 @@ trait Summary {
 
     fn new() -> Self;
 
-
     // 默认实现
 
     fn summarize(&self) -> String {
@@ -1334,13 +1299,11 @@ trait Summary {
 
     }
 
-
     // 必须实现的方法
 
     fn title(&self) -> String;
 
 }
-
 
 struct Article {
 
@@ -1349,7 +1312,6 @@ struct Article {
     content: String,
 
 }
-
 
 impl Summary for Article {
 
@@ -1365,13 +1327,11 @@ impl Summary for Article {
 
     }
 
-
     fn title(&self) -> String {
 
         self.title.clone()
 
     }
-
 
     // 覆盖默认实现
 
@@ -1383,7 +1343,6 @@ impl Summary for Article {
 
 }
 
-
 fn main() {
 
     let article = Article {
@@ -1393,7 +1352,6 @@ fn main() {
         content: String::from("Rust 是一种系统编程语言..."),
 
     };
-
 
     println!("{}", article.summarize());
 
@@ -1413,20 +1371,17 @@ trait Animal {
 
 }
 
-
 struct Dog {
 
     name: String,
 
 }
 
-
 struct Cat {
 
     name: String,
 
 }
-
 
 impl Animal for Dog {
 
@@ -1436,7 +1391,6 @@ impl Animal for Dog {
 
     }
 
-
     fn speak(&self) {
 
         println!("{} 说: 汪汪!", self.name);
@@ -1444,7 +1398,6 @@ impl Animal for Dog {
     }
 
 }
-
 
 impl Animal for Cat {
 
@@ -1454,7 +1407,6 @@ impl Animal for Cat {
 
     }
 
-
     fn speak(&self) {
 
         println!("{} 说: 喵喵!", self.name);
@@ -1462,7 +1414,6 @@ impl Animal for Cat {
     }
 
 }
-
 
 fn main() {
 
@@ -1477,7 +1428,6 @@ fn main() {
         Box::new(Dog { name: String::from("小黑") }),
 
     ];
-
 
     for animal in animals {
 
@@ -1723,7 +1673,6 @@ T : Deref
 
 Γ ⊢ *x : T::Target
 
-
 Γ ⊢ x : T
 
 T : Deref<Target = U>
@@ -1846,7 +1795,6 @@ fn box_deref() {
 
     assert_eq!(*x, 5);  // 解引用Box<i32>得到i32
 
-
     // 形式化: Box<i32> : Deref<Target = i32>
 
     // *x 等价于 *(x.deref())
@@ -1861,11 +1809,9 @@ fn box_deref() {
 ```rust,ignore
 struct MyBox<T>(T);
 
-
 impl<T> Deref for MyBox<T> {
 
     type Target = T;
-
 
     fn deref(&self) -> &T {
 
@@ -1875,16 +1821,13 @@ impl<T> Deref for MyBox<T> {
 
 }
 
-
 fn custom_smart_pointer() {
 
     let my_box = MyBox(String::from("hello"));
 
-
     // Deref强制转换: &MyBox<String> → &String → &str
 
     let slice: &str = &my_box[..];
-
 
     assert_eq!(slice, "hello");
 
@@ -1901,7 +1844,6 @@ fn hello(name: &str) {
     println!("Hello, {}!", name);
 
 }
-
 
 fn deref_coercion_in_args() {
 
@@ -1933,7 +1875,6 @@ impl<T> DerefMut for MyBox<T> {
     }
 
 }
-
 
 fn deref_mut_example() {
 

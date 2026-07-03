@@ -1,4 +1,7 @@
 # Kani 实战指南 —— Rust 的 bounded model checker {#kani-实战指南-rust-的-bounded-model-checker}
+
+> **EN**: Kani Practical Guide
+> **Summary**: Kani 实战指南 —— Rust 的 bounded model checker Kani Practical Guide. (stub/archive redirect)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

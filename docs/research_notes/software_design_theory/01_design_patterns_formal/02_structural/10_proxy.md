@@ -1,5 +1,7 @@
 # Proxy 形式化分析 {#proxy-形式化分析}
 
+> **EN**: Proxy
+> **Summary**: Proxy 形式化分析 Proxy.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -267,7 +269,6 @@ trait Subject {
 
 }
 
-
 struct RealSubject;
 
 impl Subject for RealSubject {
@@ -276,16 +277,13 @@ impl Subject for RealSubject {
 
 }
 
-
 use std::sync::OnceLock;
-
 
 struct LazyProxy {
 
     inner: OnceLock<RealSubject>,
 
 }
-
 
 impl LazyProxy {
 
@@ -297,7 +295,6 @@ impl LazyProxy {
 
 }
 
-
 impl Subject for LazyProxy {
 
     fn request(&self) -> String {
@@ -307,7 +304,6 @@ impl Subject for LazyProxy {
     }
 
 }
-
 
 // 使用：首次调用时初始化
 
@@ -334,7 +330,6 @@ trait Image {
 
 }
 
-
 struct RealImage { filename: String }
 
 impl RealImage {
@@ -354,7 +349,6 @@ impl Image for RealImage {
     fn display(&self) { println!("Displaying {}", self.filename); }
 
 }
-
 
 struct ProxyImage {
 
@@ -381,7 +375,6 @@ impl Image for ProxyImage {
     }
 
 }
-
 
 fn main() {
 

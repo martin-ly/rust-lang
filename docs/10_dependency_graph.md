@@ -1,5 +1,7 @@
 # 依赖关系图 {#依赖关系图}
 
+> **EN**: Dependency Graph
+> **Summary**: 依赖关系图 Dependency Graph.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)

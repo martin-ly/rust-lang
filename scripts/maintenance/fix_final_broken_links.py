@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-最终清理：对 docs/LINK_CHECK_REPORT.md 中剩余的无法自动修复的损坏链接，
+最终清理：对 docs/link_check_report.md 中剩余的无法自动修复的损坏链接，
 按已知重定向表改写；无明确目标的则移除 Markdown 链接语法（保留文本）。
 """
 import re

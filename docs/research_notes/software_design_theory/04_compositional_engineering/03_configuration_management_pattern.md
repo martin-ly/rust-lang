@@ -1,5 +1,7 @@
 # 配置管理模式（Configuration Management Pattern） {#配置管理模式configuration-management-pattern}
 
+> **EN**: Configuration Management Pattern
+> **Summary**: 配置管理模式 Configuration Management Pattern.
 > **概念族**: 软件设计 / 组合工程 / 配置管理
 >
 > **内容分级**: [核心级]

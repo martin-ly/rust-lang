@@ -864,7 +864,7 @@ fn example_sparse_table() {
 ## 📚 相关文档
 
 - **[02\_数据结构参考](02_data_structures_reference.md)** - 数据结构详细API
-- **[03_Rust190特性参考](03_rust_190_features_reference.md)** - Rust 1.90+ 特性参考；算法新特性见 [RUST_192_ALGORITHMS_IMPROVEMENTS](../RUST_192_ALGORITHMS_IMPROVEMENTS.md)
+- **[03_Rust190特性参考](03_rust_190_features_reference.md)** - Rust 1.90+ 特性参考；算法新特性见 [RUST_192_ALGORITHMS_IMPROVEMENTS](../rust_192_algorithms_improvements.md)
 - **[04\_算法性能参考](04_algorithm_performance_reference.md)** - 性能基准测试数据
 - **[05\_标准库算法参考](05_standard_library_algorithms_reference.md)** - 标准库算法对比
 

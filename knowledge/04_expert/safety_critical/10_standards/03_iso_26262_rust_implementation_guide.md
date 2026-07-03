@@ -4,6 +4,8 @@
 >
 # ISO 26262 Rust实施指南
 
+> **EN**: Iso 26262 Rust Implementation Guide
+> **Summary**: ISO 26262 Rust实施指南 Iso 26262 Rust Implementation Guide. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 概述

@@ -1,5 +1,7 @@
 # 网络编程快速参考卡片 {#网络编程快速参考卡片}
 
+> **EN**: Network Programming Cheatsheet
+> **Summary**: 网络编程快速参考卡片 Network Programming Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >

@@ -2,10 +2,11 @@
 //! Rust 1.97.0 stabilized features —— design patterns
 //!
 //! 本文件展示与设计模式（Null Object、Value Object、Factory）相关的 Rust 1.97.0 稳定特性。
-//! 当前工具链为 Rust 1.96.0，所有 1.97 新 API 调用均保留在注释中；
-//! 可执行代码使用语义等价的 1.96 兼容实现。
+//! 当前工具链为 Rust 1.96.0，1.97 原生调用以 `#[cfg(nightly)]` 分支保留，可通过
+//! `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 //! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。
 #![allow(clippy::incompatible_msrv)]
+#![allow(unexpected_cfgs)]
 
 use std::collections::hash_map::DefaultHasher;
 use std::hash::BuildHasherDefault;
@@ -23,8 +24,12 @@ pub struct Rust197DesignPatternFeatures;
 
 impl Rust197DesignPatternFeatures {
     /// 将 `Option<T>` 视为切片：`Some(x)` -> `[x]`，`None` -> `[]`。
-    ///
-    /// Rust 1.97: `opt.as_slice()`
+    #[cfg(nightly)]
+    pub fn option_as_slice<T>(opt: &Option<T>) -> &[T] {
+        opt.as_slice()
+    }
+
+    #[cfg(not(nightly))]
     pub fn option_as_slice<T>(opt: &Option<T>) -> &[T] {
         match opt {
             Some(x) => std::slice::from_ref(x),
@@ -33,8 +38,12 @@ impl Rust197DesignPatternFeatures {
     }
 
     /// 将 `Option<T>` 视为可变切片：`Some(x)` -> `[x]`，`None` -> `[]`。
-    ///
-    /// Rust 1.97: `opt.as_mut_slice()`
+    #[cfg(nightly)]
+    pub fn option_as_mut_slice<T>(opt: &mut Option<T>) -> &mut [T] {
+        opt.as_mut_slice()
+    }
+
+    #[cfg(not(nightly))]
     pub fn option_as_mut_slice<T>(opt: &mut Option<T>) -> &mut [T] {
         match opt {
             Some(x) => std::slice::from_mut(x),
@@ -43,39 +52,59 @@ impl Rust197DesignPatternFeatures {
     }
 
     /// 返回 `NonZeroU32` 最高设置位的位索引。
-    ///
-    /// Rust 1.97: `n.highest_one()`
+    #[cfg(nightly)]
+    pub fn nonzero_highest_one(n: NonZeroU32) -> u32 {
+        n.highest_one()
+    }
+
+    #[cfg(not(nightly))]
     pub fn nonzero_highest_one(n: NonZeroU32) -> u32 {
         let v = n.get();
         u32::BITS - 1 - v.leading_zeros()
     }
 
     /// 返回 `NonZeroU32` 最低设置位的位索引。
-    ///
-    /// Rust 1.97: `n.lowest_one()`
+    #[cfg(nightly)]
+    pub fn nonzero_lowest_one(n: NonZeroU32) -> u32 {
+        n.lowest_one()
+    }
+
+    #[cfg(not(nightly))]
     pub fn nonzero_lowest_one(n: NonZeroU32) -> u32 {
         n.get().trailing_zeros()
     }
 
     /// 返回表示 `NonZeroU32` 所需的最少位数。
-    ///
-    /// Rust 1.97: `n.bit_width()`
-    pub fn nonzero_bit_width(n: NonZeroU32) -> u32 {
-        let v = n.get();
-        u32::BITS - v.leading_zeros()
+    #[cfg(nightly)]
+    pub fn nonzero_bit_width(n: NonZeroU32) -> NonZeroU32 {
+        n.bit_width()
+    }
+
+    #[cfg(not(nightly))]
+    pub fn nonzero_bit_width(n: NonZeroU32) -> NonZeroU32 {
+        // `n` 非零，因此 `u32::BITS - leading_zeros >= 1`，unwrap 安全。
+        NonZeroU32::new(u32::BITS - n.get().leading_zeros()).unwrap()
     }
 
     /// 计算两个 `NonZeroU32` 的中点，结果仍为非零。
-    ///
-    /// Rust 1.97: `a.midpoint(b)`
+    #[cfg(nightly)]
+    pub fn nonzero_midpoint(a: NonZeroU32, b: NonZeroU32) -> NonZeroU32 {
+        a.midpoint(b)
+    }
+
+    #[cfg(not(nightly))]
     pub fn nonzero_midpoint(a: NonZeroU32, b: NonZeroU32) -> NonZeroU32 {
         let mid = a.get().midpoint(b.get());
         NonZeroU32::new(mid).expect("midpoint of two positive non-zero values is non-zero")
     }
 
     /// 计算 `NonZeroU32` 的整数平方根，结果仍为非零。
-    ///
-    /// Rust 1.97: `n.isqrt()`
+    #[cfg(nightly)]
+    pub fn nonzero_isqrt(n: NonZeroU32) -> NonZeroU32 {
+        n.isqrt()
+    }
+
+    #[cfg(not(nightly))]
     pub fn nonzero_isqrt(n: NonZeroU32) -> NonZeroU32 {
         let r = n.get().isqrt();
         NonZeroU32::new(r).expect("isqrt of a positive integer is non-zero")
@@ -86,6 +115,12 @@ impl Rust197DesignPatternFeatures {
     /// Rust 1.97 起 `BuildHasherDefault::new` 是 `const fn`，可写为：
     /// `pub const HASHER: BuildHasherDefault<DefaultHasher> = BuildHasherDefault::new();`
     /// 在 1.96 中只能在运行期调用。
+    #[cfg(nightly)]
+    pub const fn default_hasher() -> BuildHasherDefault<DefaultHasher> {
+        BuildHasherDefault::new()
+    }
+
+    #[cfg(not(nightly))]
     pub fn default_hasher() -> BuildHasherDefault<DefaultHasher> {
         BuildHasherDefault::new()
     }
@@ -120,14 +155,17 @@ mod tests {
         let n = NonZeroU32::new(0b00010100).unwrap(); // 20
         assert_eq!(Rust197DesignPatternFeatures::nonzero_highest_one(n), 4);
         assert_eq!(Rust197DesignPatternFeatures::nonzero_lowest_one(n), 2);
-        assert_eq!(Rust197DesignPatternFeatures::nonzero_bit_width(n), 5);
+        assert_eq!(Rust197DesignPatternFeatures::nonzero_bit_width(n).get(), 5);
     }
 
     #[test]
     fn test_nonzero_midpoint() {
         let a = NonZeroU32::new(10).unwrap();
         let b = NonZeroU32::new(20).unwrap();
-        assert_eq!(Rust197DesignPatternFeatures::nonzero_midpoint(a, b).get(), 15);
+        assert_eq!(
+            Rust197DesignPatternFeatures::nonzero_midpoint(a, b).get(),
+            15
+        );
     }
 
     #[test]

@@ -1,5 +1,7 @@
 # 01 - Rust 基础
 
+> **EN**: Fundamentals Index
+> **Summary**: 01 - Rust 基础 Fundamentals Index.
 > **Bloom 层级**: 理解
 > **Rust 语言的核心基础：所有权、借用、生命周期、迭代器**
 >

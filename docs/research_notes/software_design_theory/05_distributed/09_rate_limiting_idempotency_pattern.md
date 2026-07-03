@@ -1,5 +1,7 @@
 # 限流与幂等模式形式化定义 {#限流与幂等模式形式化定义}
 
+> **EN**: Rate Limiting Idempotency Pattern
+> **Summary**: 限流与幂等模式形式化定义 Rate Limiting Idempotency Pattern.
 > **概念族**: 软件设计 / 分布式模式 / 限流与幂等
 >
 > **内容分级**: [归档级]

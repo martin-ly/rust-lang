@@ -1,5 +1,7 @@
 # 执行模型形式化框架 {#执行模型形式化框架}
 
+> **EN**: Execution Models Index
+> **Summary**: 执行模型形式化框架 Execution Models Index. (stub/archive redirect)
 > **概念族**: 软件设计 / 执行模型
 > **内容分级**: [归档级]
 > **创建日期**: 2026-02-12
@@ -321,7 +323,6 @@ fn main() {
 
     }
 
-
     let data = vec![-1, 2, -3, 4, 5];
 
     let out = FilterPositive.process(&data);
@@ -346,9 +347,7 @@ fn main() {
 
     use std::thread;
 
-
     let (tx, rx) = mpsc::channel::<i32>();
-
 
     let tx2 = tx.clone();
 
@@ -361,7 +360,6 @@ fn main() {
         }
 
     });
-
 
     let mut results = vec![];
 
@@ -389,7 +387,6 @@ fn main() {
 
     use rayon::prelude::*;
 
-
     trait FilterStrategy: Sync {
 
         fn keep(&self, x: i32) -> bool;
@@ -403,7 +400,6 @@ fn main() {
         fn keep(&self, x: i32) -> bool { x > 0 }
 
     }
-
 
     let data: Vec<i32> = (-100..100).collect();
 

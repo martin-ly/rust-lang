@@ -1,4 +1,7 @@
 # 概念文档标准模板（Concept Document Standard Template） {#概念文档标准模板concept-document-standard-template}
+
+> **EN**: Concept Document Standard Template
+> **Summary**: 概念文档标准模板 Concept Document Standard Template.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

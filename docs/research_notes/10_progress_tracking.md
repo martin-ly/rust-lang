@@ -1,5 +1,7 @@
 # 研究进展跟踪 {#研究进展跟踪}
 
+> **EN**: Progress Tracking
+> **Summary**: 研究进展跟踪 Progress Tracking.
 > **概念族**: 进度 / 统计 / 完成度
 > **内容分级**: [归档级]
 >

@@ -1,5 +1,7 @@
 # 性能调优完整指南 {#性能调优完整指南}
 
+> **EN**: Performance Tuning Guide
+> **Summary**: 性能调优完整指南 Performance Tuning Guide.
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 >

@@ -1,5 +1,7 @@
 # API设计指南
 
+> **EN**: API Design Guidelines
+> **Summary**: API设计指南 API Design Guidelines.
 > **相关概念**: [位置](../../../../concept/01_foundation/13_panic_and_abort.md)
 > **Bloom 层级**: 理解
 >

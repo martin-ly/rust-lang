@@ -130,7 +130,7 @@ cargo run --example dns_lookup
 ### 配套资源
 
 - **实践指南**: [../guides/](../guides) - 详细的使用指南
-- **API参考**: [../references/API_DOCUMENTATION.md](../references/API_DOCUMENTATION.md)
+- **API参考**: [../references/api_documentation.md](../references/api_documentation.md)
 - **理论基础**: [../theory/](../theory) - 深入理解原理
 
 ## 🧪 练习项目建议

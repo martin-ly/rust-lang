@@ -1,5 +1,7 @@
 # 补偿链模式形式化定义 {#补偿链模式形式化定义}
 
+> **EN**: Compensation Chain
+> **Summary**: 补偿链模式形式化定义 Compensation Chain. (stub/archive redirect)
 > **概念族**: 软件设计 / 工作流模式 / 补偿 / Saga
 > **内容分级**: [归档级]
 > **分级**: [B]

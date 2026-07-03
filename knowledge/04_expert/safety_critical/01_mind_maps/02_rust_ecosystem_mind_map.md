@@ -11,6 +11,8 @@
 
 # Rust生态系统思维导图
 
+> **EN**: Rust Ecosystem Mind Map
+> **Summary**: Rust生态系统思维导图 Rust Ecosystem Mind Map. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ```text

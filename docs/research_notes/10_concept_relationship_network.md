@@ -1,4 +1,7 @@
 # Rust 概念关联网络 {#rust-概念关联网络}
+
+> **EN**: Concept Relationship Network
+> **Summary**: Rust 概念关联网络 Concept Relationship Network.
 >
 > **概念族**: 概念框架
 > **内容分级**: [归档级]

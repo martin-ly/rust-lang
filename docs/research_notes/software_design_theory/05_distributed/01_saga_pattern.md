@@ -1,5 +1,7 @@
 # Saga 模式形式化定义 {#saga-模式形式化定义}
 
+> **EN**: Saga Pattern
+> **Summary**: Saga 模式形式化定义 Saga Pattern. (stub/archive redirect)
 > **概念族**: 软件设计 / 分布式模式
 > **内容分级**: [归档级]
 >
@@ -199,13 +201,11 @@ pub trait SagaStep {
 
     type Error;
 
-
     async fn execute(&self, state: &mut Self::State) -> Result<(), Self::Error>;
 
     async fn compensate(&self, state: &mut Self::State) -> Result<(), Self::Error>;
 
 }
-
 
 pub struct SagaExecutor<S, E> {
 
@@ -214,7 +214,6 @@ pub struct SagaExecutor<S, E> {
     executed: Vec<usize>, // 记录已执行的步骤索引
 
 }
-
 
 impl<S, E> SagaExecutor<S, E> {
 
@@ -243,7 +242,6 @@ impl<S, E> SagaExecutor<S, E> {
         Ok(())
 
     }
-
 
     async fn compensate_all(&self, state: &mut S) -> Result<(), E> {
 

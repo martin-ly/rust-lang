@@ -1,5 +1,7 @@
 # Macros 宏系统
 
+> **EN**: Macros Index
+> **Summary**: Macros 宏系统 Macros Index.
 > **📎 交叉引用**
 >
 > 本主题在 concept 中有深度的概念分析：[属性与宏](../../../concept/01_foundation/12_attributes_and_macros.md)

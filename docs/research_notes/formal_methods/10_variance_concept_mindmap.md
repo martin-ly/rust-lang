@@ -6,6 +6,8 @@
 
 # 型变概念族谱 {#型变概念族谱}
 
+> **EN**: Variance Concept Mindmap
+> **Summary**: 型变概念族谱 Variance Concept Mindmap.
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -146,7 +148,6 @@ let s: &'static str = "hello";
 
 let r: &'a str = s;  // OK，协变
 
-
 // Box<&'static str> <: Box<&'a str>
 
 let b1: Box<&'static str> = Box::new("hello");
@@ -188,7 +189,6 @@ T <: U  →  C<U> <: C<T>
 // 接受 &'a str 的函数可以传给接受 &'static str 的位置
 
 fn handler(_: &'static str) {}
-
 
 // &'a str <: &'static str (因为'a可能更短)
 
@@ -306,7 +306,6 @@ struct Wrapper<T>(T);
 
 // Wrapper<T> 对T的型变与T的使用位置有关
 
-
 struct Contravariant<T>(fn(T));
 
 // Contravariant<T> 对T是逆变的
@@ -326,7 +325,6 @@ struct Contravariant<T>(fn(T));
 ```rust
 // 'static <: 'a (static更长，是任何'a的子类型)
 
-
 fn example<'a>(s: &'a str) {
 
     let static_str: &'static str = "hello";
@@ -336,7 +334,6 @@ fn example<'a>(s: &'a str) {
     takes_str(static_str);  // OK，协变
 
 }
-
 
 fn takes_str<'a>(s: &'a str) {}
 ```
@@ -350,16 +347,13 @@ fn takes_str<'a>(s: &'a str) {}
 
 fn process_box(b: Box<&'a str>) { }
 
-
 let b: Box<&'static str> = Box::new("hello");
 
 process_box(b);  // OK，协变转换
 
-
 // 但&mut不行：
 
 fn process_mut(r: &mut &'a str) { }
-
 
 let mut r: &mut &'static str = &mut "hello";
 
@@ -383,7 +377,6 @@ where
 
 }
 
-
 // 可以接受更具体的参数
 
 set_handler(|s: &'static str| { });  // OK
@@ -406,7 +399,6 @@ set_handler(|s: &'static str| { });  // OK
 let mut r1: &mut &'static str = &mut "hello";
 
 let r2: &mut &'a str = r1;  // 假设这是合法的
-
 
 // 那么可以：
 

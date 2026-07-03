@@ -2,18 +2,22 @@
 //! Rust 1.97.0 stabilized features —— macro system
 //!
 //! 本文件展示与宏系统、编译期元编程相关的 Rust 1.97.0 稳定特性。
-//! 当前工具链为 Rust 1.96.0，所有 1.97 新 API/行为均保留在注释中；
+//! 当前工具链为 Rust 1.96.0，所有 1.97 新行为均保留在注释中；
 //! 可执行代码使用语义等价的 1.96 兼容实现。
 //! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。
+//!
+//! 注：本文件涉及的 1.97 变更（空 `export_name` 报错、`linker-messages` 默认 warn、
+//! struct 模式拒绝元组索引简写）均为编译器/lint 行为变更，没有可直接切换的 runtime API，
+//! 因此不采用 `#[cfg(nightly)]` 分支，保留垫片并更新注释。
 #![allow(clippy::incompatible_msrv)]
 
 /// # Rust 1.97 宏系统特性演示
 /// # Rust 1.97 macro-system feature demonstration
 ///
 /// 涉及特性：
-/// - 空 `export_name` 在 Rust 1.97 中被明确拒绝
-/// - `linker-messages` lint 在 Rust 1.97 恢复默认 warn
-/// - Rust 1.97 在 struct 模式中拒绝元组索引简写
+/// - 空 `export_name` 在 Rust 1.97 中被明确拒绝（编译器行为变更，无 API）
+/// - `linker-messages` lint 在 Rust 1.97 恢复默认 warn（lint 变更，无 API）
+/// - Rust 1.97 在 struct 模式中拒绝元组索引简写（语法变更，无 API）
 pub struct Rust197MacroFeatures;
 
 impl Rust197MacroFeatures {

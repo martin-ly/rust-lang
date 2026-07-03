@@ -1,5 +1,7 @@
 # 组合软件工程有效性定理与证明 {#组合软件工程有效性定理与证明}
 
+> **EN**: Effectiveness Proofs
+> **Summary**: 组合软件工程有效性定理与证明 Effectiveness Proofs. (stub/archive redirect)
 > **概念族**: 软件设计 / 组合工程
 > **内容分级**: [归档级]
 >
@@ -200,7 +202,6 @@ impl A {
 
 }
 
-
 // crate::module_b
 
 pub struct B { pub a: A }
@@ -212,7 +213,6 @@ impl B {
     pub fn run(&self) -> i32 { self.a.get() }
 
 }
-
 
 // 组合：main 使用 A 和 B
 
@@ -324,7 +324,6 @@ fn main() {
 
 pub struct PlaceOrderDto { pub items: Vec<ItemDto> }
 
-
 // 层 2：Domain + Service（业务逻辑）
 
 pub struct Order { id: u64, items: Vec<OrderItem> }
@@ -335,13 +334,11 @@ impl Order {
 
 }
 
-
 pub trait OrderRepository {
 
     fn save(&mut self, o: &Order) -> Result<(), String>;
 
 }
-
 
 pub struct OrderService<R: OrderRepository> { repo: R }
 
@@ -358,7 +355,6 @@ impl<R: OrderRepository> OrderService<R> {
     }
 
 }
-
 
 // 层 3：Controller（表示层，组合 Service）
 

@@ -1,5 +1,7 @@
 # Actor 模型理论 {#actor-模型理论}
 
+> **EN**: Actor Model Index
+> **Summary**: Actor 模型理论 Actor Model Index. (stub/archive redirect)
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20

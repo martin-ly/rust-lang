@@ -1,5 +1,7 @@
 # Rust Reference 对齐矩阵 {#rust-reference-对齐矩阵}
 
+> **EN**: Rust Reference Alignment
+> **Summary**: Rust Reference 对齐矩阵 Rust Reference Alignment.
 > **概念族**: 权威来源对齐 / Rust Reference
 > **内容分级**: [核心级]
 > **层级**: L0-L4

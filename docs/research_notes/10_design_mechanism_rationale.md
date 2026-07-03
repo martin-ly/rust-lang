@@ -1,5 +1,7 @@
 # Rust 设计机制论证：理由与完整论证 {#rust-设计机制论证理由与完整论证}
 
+> **EN**: Design Mechanism Rationale
+> **Summary**: Rust 设计机制论证 Design Mechanism Rationale.
 > **概念族**: 形式化方法 / 设计机制
 > **内容分级**: [归档级]
 >
@@ -178,7 +180,6 @@ $$T : \text{Unpin} \Leftrightarrow \text{StackPin}(T)\ \text{safe}$$
 
 ```text
 Pin 使用场景决策树
-
 
 需要固定 T？
 

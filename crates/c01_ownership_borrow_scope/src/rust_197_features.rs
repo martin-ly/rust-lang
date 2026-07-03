@@ -2,8 +2,10 @@
 //!
 //! 本模块演示 Rust 1.97.0 中稳定化的所有权/指针相关 API。
 //! 由于当前工具链为 Rust 1.96.0，实际代码使用等价的 1.96 兼容实现；
-//! 对应的 1.97 原生 API 调用以注释形式保留。
+//! 对应的 1.97 原生 API 调用以 `#[cfg(nightly)]` 分支保留，可通过
+//! `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 #![allow(clippy::incompatible_msrv)]
+#![allow(unexpected_cfgs)]
 
 use std::rc::Rc;
 use std::sync::Arc;
@@ -21,8 +23,13 @@ impl Rust197OwnershipFeatures {
     /// 将 `Option<T>` 转为只读切片视图
     ///
     /// `Some(x)` → `&[x]`，`None` → `&[]`
+    #[cfg(nightly)]
     pub fn option_as_slice<T>(opt: &Option<T>) -> &[T] {
-        // 1.97+: opt.as_slice()
+        opt.as_slice()
+    }
+
+    #[cfg(not(nightly))]
+    pub fn option_as_slice<T>(opt: &Option<T>) -> &[T] {
         match opt {
             Some(x) => std::slice::from_ref(x),
             None => &[],
@@ -30,8 +37,13 @@ impl Rust197OwnershipFeatures {
     }
 
     /// 将 `Option<T>` 转为可变切片视图
+    #[cfg(nightly)]
     pub fn option_as_mut_slice<T>(opt: &mut Option<T>) -> &mut [T] {
-        // 1.97+: opt.as_mut_slice()
+        opt.as_mut_slice()
+    }
+
+    #[cfg(not(nightly))]
+    pub fn option_as_mut_slice<T>(opt: &mut Option<T>) -> &mut [T] {
         match opt {
             Some(x) => std::slice::from_mut(x),
             None => &mut [],
@@ -39,38 +51,70 @@ impl Rust197OwnershipFeatures {
     }
 
     /// 获取 `Box<T>` 中堆分配对象的裸指针
-    pub fn box_as_ptr<T>(b: &T) -> *const T {
-        // 1.97+: Box::as_ptr(b)
-        b as *const T
+    #[allow(clippy::borrowed_box)]
+    #[cfg(nightly)]
+    pub fn box_as_ptr<T>(b: &Box<T>) -> *const T {
+        Box::as_ptr(b)
+    }
+
+    #[allow(clippy::borrowed_box)]
+    #[cfg(not(nightly))]
+    pub fn box_as_ptr<T>(b: &Box<T>) -> *const T {
+        b.as_ref() as *const T
     }
 
     /// 将可变切片转换为 `Box<[T]>`
+    #[cfg(nightly)]
     pub fn box_from_mut_slice<T: Clone>(slice: &mut [T]) -> Box<[T]> {
-        // 1.97+: Box::from(slice) 因为 From<&mut [T]> for Box<[T]> 在 1.97 稳定化
+        Box::from(slice)
+    }
+
+    #[cfg(not(nightly))]
+    pub fn box_from_mut_slice<T: Clone>(slice: &mut [T]) -> Box<[T]> {
         slice.to_vec().into_boxed_slice()
     }
 
     /// 将可变切片转换为 `Rc<[T]>`
+    #[cfg(nightly)]
     pub fn rc_from_mut_slice<T: Clone>(slice: &mut [T]) -> Rc<[T]> {
-        // 1.97+: Rc::from(slice) 因为 From<&mut [T]> for Rc<[T]> 在 1.97 稳定化
+        Rc::from(slice)
+    }
+
+    #[cfg(not(nightly))]
+    pub fn rc_from_mut_slice<T: Clone>(slice: &mut [T]) -> Rc<[T]> {
         slice.to_vec().into()
     }
 
     /// 将可变切片转换为 `Arc<[T]>`
+    #[cfg(nightly)]
     pub fn arc_from_mut_slice<T: Clone>(slice: &mut [T]) -> Arc<[T]> {
-        // 1.97+: Arc::from(slice) 因为 From<&mut [T]> for Arc<[T]> 在 1.97 稳定化
+        Arc::from(slice)
+    }
+
+    #[cfg(not(nightly))]
+    pub fn arc_from_mut_slice<T: Clone>(slice: &mut [T]) -> Arc<[T]> {
         slice.to_vec().into()
     }
 
     /// 编译期计算值的大小（1.96 兼容版，仅支持 `Sized` 类型）
+    #[cfg(nightly)]
+    pub const fn const_size_of_val<T: Sized>(value: &T) -> usize {
+        std::mem::size_of_val(value)
+    }
+
+    #[cfg(not(nightly))]
     pub const fn const_size_of_val<T: Sized>(_: &T) -> usize {
-        // 1.97+: std::mem::size_of_val(value)
         std::mem::size_of::<T>()
     }
 
     /// 编译期计算值的对齐（1.96 兼容版，仅支持 `Sized` 类型）
+    #[cfg(nightly)]
+    pub const fn const_align_of_val<T: Sized>(value: &T) -> usize {
+        std::mem::align_of_val(value)
+    }
+
+    #[cfg(not(nightly))]
     pub const fn const_align_of_val<T: Sized>(_: &T) -> usize {
-        // 1.97+: std::mem::align_of_val(value)
         std::mem::align_of::<T>()
     }
 }
@@ -102,7 +146,7 @@ mod tests {
     #[test]
     fn test_box_as_ptr() {
         let b = Box::new(42);
-        let p = Rust197OwnershipFeatures::box_as_ptr(&*b);
+        let p = Rust197OwnershipFeatures::box_as_ptr(&b);
         assert_eq!(unsafe { *p }, 42);
     }
 

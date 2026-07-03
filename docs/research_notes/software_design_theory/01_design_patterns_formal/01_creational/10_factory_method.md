@@ -1,5 +1,7 @@
 # Factory Method 形式化分析 {#factory-method-形式化分析}
 
+> **EN**: Factory Method
+> **Summary**: Factory Method 形式化分析 Factory Method.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -233,7 +235,6 @@ trait Product {
 
 }
 
-
 struct ConcreteProductA;
 
 impl Product for ConcreteProductA {
@@ -241,7 +242,6 @@ impl Product for ConcreteProductA {
     fn operation(&self) -> String { "Product A".to_string() }
 
 }
-
 
 struct ConcreteProductB;
 
@@ -251,11 +251,9 @@ impl Product for ConcreteProductB {
 
 }
 
-
 #[derive(Clone, Copy)]
 
 enum ProductType { A, B }
-
 
 // 工厂方法：C → T，C 为 ProductType（或 Creator），T 为 dyn Product
 
@@ -270,7 +268,6 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
     }
 
 }
-
 
 // 使用
 
@@ -297,7 +294,6 @@ trait Product {
 
 }
 
-
 struct ConcreteProductA;
 
 impl Product for ConcreteProductA {
@@ -306,7 +302,6 @@ impl Product for ConcreteProductA {
 
 }
 
-
 struct ConcreteProductB;
 
 impl Product for ConcreteProductB {
@@ -314,7 +309,6 @@ impl Product for ConcreteProductB {
     fn operation(&self) -> String { "Product B".into() }
 
 }
-
 
 trait Creator {
 
@@ -332,7 +326,6 @@ trait Creator {
 
 }
 
-
 struct CreatorA;
 
 impl Creator for CreatorA {
@@ -342,7 +335,6 @@ impl Creator for CreatorA {
     fn factory_method(&self) -> ConcreteProductA { ConcreteProductA }
 
 }
-
 
 fn main() {
 

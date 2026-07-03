@@ -1,5 +1,7 @@
 # 🔷 Rust 泛型编程速查卡 {#rust-泛型编程速查卡}
 
+> **EN**: Generics Cheatsheet
+> **Summary**: 🔷 Rust 泛型编程速查卡 Generics Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >

@@ -1,5 +1,7 @@
 # 形式化论证完成报告 {#形式化论证完成报告}
 
+> **EN**: Formal Argumentation Completion Report
+> **Summary**: 形式化论证完成报告 Formal Argumentation Completion Report.
 > **概念族**: 论证体系
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -232,13 +234,11 @@ Week 1: 逻辑基础
 
   └── 练习：命题逻辑推导
 
-
 Week 2: 操作语义
 
   ├── 10_operational_semantics.md §1-2
 
   └── 练习：λ演算归约
-
 
 Week 3: 霍尔逻辑
 
@@ -259,13 +259,11 @@ Week 4-5: 分离逻辑
 
   └── 练习：所有权推理
 
-
 Week 6-7: 证明技术
 
   ├── 10_proof_strategies.md
 
   └── 练习：归纳证明
-
 
 Week 8: 方法比较
 
@@ -284,13 +282,11 @@ Week 9-10: 高级主题
 
   └── 10_operational_semantics.md §3-4
 
-
 Week 11-12: 案例研究
 
   ├── 10_case_studies.md
 
   └── 实际Rust代码验证
-
 
 Week 13-14: 工具实践
 

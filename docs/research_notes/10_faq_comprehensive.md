@@ -1,5 +1,7 @@
 # Rust形式化方法 FAQ 汇总 {#rust形式化方法-faq-汇总}
 
+> **EN**: Faq Comprehensive
+> **Summary**: Rust形式化方法 FAQ 汇总 Faq Comprehensive.
 > **概念族**: 方法论 / 工具 / 指南
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -136,7 +138,6 @@ let y = x;                      // 所有权转移到y
 
 // println!("{}", x);           // 错误！x已无效
 
-
 // Copy示例
 
 let x = 5;                      // i32实现Copy
@@ -164,7 +165,6 @@ fn print_length(s: &String) {  // 借用，不获取所有权
     println!("{}", s.len());
 
 } // s在这里归还，但原变量仍然有效
-
 
 fn main() {
 
@@ -227,7 +227,6 @@ fn dangling() -> &String {
 
 }
 
-
 // ✅ 正确做法
 
 fn not_dangling() -> String {
@@ -273,7 +272,6 @@ use std::sync::Arc;
 
 use std::thread;
 
-
 let data = Arc::new(5);
 
 thread::spawn(move || {
@@ -301,13 +299,11 @@ use std::cell::RefCell;
 
 use std::sync::Mutex;
 
-
 // RefCell - 单线程
 
 let cell = RefCell::new(5);
 
 *cell.borrow_mut() = 10;  // 运行时检查
-
 
 // Mutex - 多线程
 
@@ -357,7 +353,6 @@ let mutex = Mutex::new(5);
 
 let b = Box::new(5);
 
-
 // Rc: 单线程共享
 
 use std::rc::Rc;
@@ -365,7 +360,6 @@ use std::rc::Rc;
 let rc = Rc::new(5);
 
 let rc2 = Rc::clone(&rc);  // 引用计数+1
-
 
 // Arc: 多线程共享
 
@@ -394,7 +388,6 @@ let arc2 = Arc::clone(&arc);
 
 i32, f64, bool, char, (i32, i32), [i32; 4]
 
-
 // 非Copy类型
 
 String, Vec<T>, Box<T>, Rc<T>
@@ -415,7 +408,6 @@ String, Vec<T>, Box<T>, Rc<T>
 let s: &str = "hello";
 
 let s2 = s.to_owned();  // String
-
 
 let v = vec![1, 2, 3];
 
@@ -440,7 +432,6 @@ let r1 = &x;
 let r2 = &mut x;  // 错误！r1还在用
 
 println!("{}", r1);
-
 
 // ✅ 修复
 
@@ -471,7 +462,6 @@ let r2 = &mut x;  // OK
 ```rust
 use std::mem;
 
-
 let mut x = 5;
 
 let mut y = 10;
@@ -481,7 +471,6 @@ mem::swap(&mut x, &mut y);
 assert_eq!(x, 10);
 
 assert_eq!(y, 5);
-
 
 let mut s = String::from("hello");
 
@@ -537,7 +526,6 @@ assert_eq!(s, "world");
 
 i32, f64, [i32; 5], String
 
-
 // 非Sized类型（DST）
 
 str, [i32], dyn Trait
@@ -567,7 +555,6 @@ fn bar<T: ?Sized>(x: &T) {}  // 允许DST
 
 fn foo(x: impl Trait) {}
 
-
 // 动态分发，有虚表查找
 
 fn bar(x: &dyn Trait) {}
@@ -586,11 +573,9 @@ fn bar(x: &dyn Trait) {}
 
 Box<&'static str> <: Box<&'a str>
 
-
 // 逆变: T <: U → fn(U) <: fn(T)
 
 fn(&'a str) <: fn(&'static str)
-
 
 // 不变: &mut T
 
@@ -633,7 +618,6 @@ trait Iterator {
     fn next(&mut self) -> Option<Self::Item>;
 
 }
-
 
 impl Iterator for Vec<i32> {
 
@@ -687,7 +671,6 @@ const fn add(a: i32, b: i32) -> i32 {
 
 }
 
-
 const X: i32 = add(1, 2);  // 编译时常量
 ```
 
@@ -713,13 +696,11 @@ trait Trait {
 
 }
 
-
 impl<T> Trait for T {
 
     default fn method(&self) { ... }
 
 }
-
 
 // 特定类型的特化
 
@@ -742,7 +723,6 @@ impl Trait for i32 {
 
 ```rust
 use std::mem::size_of;
-
 
 assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 
@@ -776,7 +756,6 @@ assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 
 fn foo<'a>(x: &'a str) -> &'a str { x }
 
-
 // 省略后
 
 fn foo(x: &str) -> &str { x }  // 规则2
@@ -798,7 +777,6 @@ struct Container<'a, T: 'a> {
     data: &'a T,
 
 }
-
 
 // 多重约束
 
@@ -828,7 +806,6 @@ let s: &'static str = "hello";
 
 take_str(s);  // 可以传给需要&'a str的函数
 
-
 fn take_str<'a>(s: &'a str) {}
 ```
 
@@ -850,7 +827,6 @@ fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
 
 }
-
 
 // ✅ 正确 - 显式标注
 
@@ -905,7 +881,6 @@ struct Person<'a> {
 
 }
 
-
 fn main() {
 
     let name = String::from("Alice");
@@ -930,7 +905,6 @@ fn main() {
 ```rust
 use std::pin::Pin;
 
-
 struct SelfReferential {
 
     data: String,
@@ -938,7 +912,6 @@ struct SelfReferential {
     ptr_to_data: *const String,  // 指向data
 
 }
-
 
 // 使用Pin防止移动
 
@@ -966,7 +939,6 @@ async fn foo(x: &str) {  // 等价于 fn foo<'a>(x: &'a str) -> impl Future<Outp
 
 }
 
-
 fn main() {
 
     let s = String::from("hello");
@@ -988,7 +960,6 @@ fn main() {
 
 ```rust
 use std::marker::PhantomData;
-
 
 struct Slice<'a, T: 'a> {
 
@@ -1053,7 +1024,6 @@ use std::rc::Rc;
 let data: Rc<i32> = Rc::new(5);
 
 // thread::spawn(move || { *data });  // 错误！
-
 
 // Arc是Send+Sync（如果T:Sync）
 
@@ -1143,7 +1113,6 @@ async fn foo() {
 
 }
 
-
 // 大致转换为：
 
 enum FooFuture {
@@ -1170,7 +1139,6 @@ enum FooFuture {
 ```rust,ignore
 use std::pin::Pin;
 
-
 async fn self_referential() {
 
     let s = String::from("hello");
@@ -1180,7 +1148,6 @@ async fn self_referential() {
     // 如果s被移动，ptr就悬垂了
 
     some_async().await;  // 可能被移动！
-
 
     // Pin防止移动
 
@@ -1206,7 +1173,6 @@ thread::spawn(|| {
     // 独立线程执行
 
 });
-
 
 // 异步任务
 
@@ -1234,7 +1200,6 @@ tokio::spawn(async {
 // 自动Unpin
 
 i32, String, Vec<T>
-
 
 // 非Unpin（自引用）
 
@@ -1276,7 +1241,6 @@ let guard = mutex.lock().unwrap();
 
 some_async().await;  // 可能死锁
 
-
 // ✅ 安全
 
 {
@@ -1288,7 +1252,6 @@ some_async().await;  // 可能死锁
 }  // 释放锁
 
 some_async().await;  // OK
-
 
 // 或使用tokio::sync::Mutex
 

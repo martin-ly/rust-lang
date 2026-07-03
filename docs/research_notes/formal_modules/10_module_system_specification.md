@@ -1,5 +1,7 @@
 # Rust 模块系统规范 {#rust-模块系统规范}
 
+> **EN**: Module System Specification
+> **Summary**: Rust 模块系统规范 Module System Specification.
 > **概念族**: 形式化模块
 > **内容分级**: [归档级]
 >
@@ -136,7 +138,6 @@ pub mod outer {
 
     }
 
-
     pub(crate) fn crate_visible_fn() {}
 
     pub(super) fn parent_visible_fn() {}
@@ -159,7 +160,6 @@ pub mod a {
 
     }
 
-
     pub fn call_restricted() {
 
         crate::a::b::restricted_fn(); // OK：a 是限定路径
@@ -167,7 +167,6 @@ pub mod a {
     }
 
 }
-
 
 pub mod c {
 
@@ -190,7 +189,6 @@ mod internal {
     pub struct InnerStruct;
 
 }
-
 
 pub use internal::InnerStruct as PublicStruct; // 对外暴露
 ```

@@ -1,5 +1,7 @@
 # L3机器可检查证明实施指南 {#l3机器可检查证明实施指南}
 
+> **EN**: L3 Machine Proof Guide
+> **Summary**: L3机器可检查证明实施指南 L3 Machine Proof Guide. (stub/archive redirect)
 > **概念族**: 形式化方法
 > **内容分级**: 归档级
 > **分级**: [B]
@@ -111,7 +113,6 @@
 ```bash
 # 使用OPAM安装Coq {#使用opam安装coq}
 
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 opam init
@@ -120,7 +121,6 @@ eval $(opam env)
 
 opam install coq.8.18.0
 
-
 # 安装Iris {#安装iris}
 
 opam repo add coq-released https://coq.inria.fr/opam/released
@@ -128,7 +128,6 @@ opam repo add coq-released https://coq.inria.fr/opam/released
 opam update
 
 opam install coq-iris
-
 
 # 验证安装 {#验证安装}
 
@@ -163,18 +162,15 @@ From iris.bi Require Import bi.
 
 From iris.proofmode Require Import tactics.
 
-
 (* 定义值类型 *)
 
 Parameter Value : Type.
 
 Parameter Value_eq_dec : EqDecision Value.
 
-
 (* 定义变量类型 *)
 
 Definition Var := nat.
-
 
 (* 所有权状态 *)
 
@@ -186,11 +182,9 @@ Inductive OwnStatus :=
 
   | Dropped : OwnStatus.
 
-
 (* 状态: 变量到(值×所有权状态)的映射 *)
 
 Definition State := gmap Var (Value * OwnStatus).
-
 
 (* 所有权唯一性谓词 *)
 
@@ -226,7 +220,6 @@ Inductive step : State -> State -> Prop :=
 
       step σ (<[x := (v, Moved)]> (<[y := (v, Owned)]> σ))
 
-
   (* 复制(Copy类型): x复制到y *)
 
   | StepCopy : forall σ x y v,
@@ -237,7 +230,6 @@ Inductive step : State -> State -> Prop :=
 
       step σ (<[y := (v, Owned)]> σ)
 
-
   (* Drop: 作用域结束 *)
 
   | StepDrop : forall σ x v,
@@ -245,7 +237,6 @@ Inductive step : State -> State -> Prop :=
       σ !! x = Some (v, Owned) ->
 
       step σ (<[x := (v, Dropped)]> σ).
-
 
 (* 可达状态 *)
 
@@ -285,7 +276,6 @@ Proof.
 
   induction Hreach as [σ Hinit | σ1 σ2 Hreach IH Hstep].
 
-
   - (* 基础情况: 初始状态 *)
 
     unfold ownership_unique.
@@ -294,16 +284,13 @@ Proof.
 
     apply (Hinit v x1 H1 x2 H2).
 
-
   - (* 归纳步骤: 状态转移保持唯一性 *)
 
     unfold ownership_unique in *.
 
     intros v x1 x2 H1 H2.
 
-
     inversion Hstep; subst; clear Hstep.
-
 
     + (* 移动步骤 *)
 
@@ -311,11 +298,9 @@ Proof.
 
       admit.
 
-
     + (* 复制步骤 *)
 
       admit.
-
 
     + (* Drop步骤 *)
 
@@ -346,16 +331,13 @@ From iris.heap_lang Require Import lang.
 
 From iris.algebra Require Import excl auth gmap.
 
-
 (* 内存位置 *)
 
 Definition Loc := nat.
 
-
 (* 访问类型 *)
 
 Inductive Access := Read | Write.
-
 
 (* 数据竞争定义 *)
 
@@ -366,7 +348,6 @@ Definition data_race (a1 a2 : (nat * Loc * Access)) : Prop :=
   let (_, l2, ac2) := a2 in
 
   l1 = l2 /\ (ac1 = Write \/ ac2 = Write).
-
 
 (* 数据竞争自由 *)
 
@@ -398,13 +379,11 @@ Proof.
 
   intros Hcheck accesses Htrace.
 
-
   (* 反证: 假设存在数据竞争 *)
 
   unfold data_race_free.
 
   intros i j a1 a2 Hi Hj Hneq Hrace.
-
 
   (* 从借用检查规则推导矛盾 *)
 
@@ -415,7 +394,6 @@ Proof.
   unfold data_race in Hrace.
 
   destruct Hrace as [Heql Hwrite].
-
 
   (* 使用资源代数中的排他性推导矛盾 *)
 
@@ -439,7 +417,6 @@ Admitted.
 ```coq
 From iris.heap_lang Require Import lang.
 
-
 (* 类型 *)
 
 Inductive ty :=
@@ -454,11 +431,9 @@ Inductive ty :=
 
   | TFn : ty -> ty -> ty.
 
-
 (* 类型环境 *)
 
 Definition ctx := gmap string ty.
-
 
 (* 类型判断: Gamma |- e : tau *)
 
@@ -521,31 +496,25 @@ Proof.
 
   induction Hty.
 
-
   - (* 整数 *)
 
     left. by apply is_val_lit.
-
 
   - (* 布尔 *)
 
     left. by apply is_val_lit.
 
-
   - (* 变量 *)
 
     admit.
-
 
   - (* 加法 *)
 
     admit.
 
-
   - (* Lambda *)
 
     left. by apply is_val_lam.
-
 
   - (* 应用 *)
 
@@ -573,11 +542,9 @@ git clone https://github.com/AeneasVerif/aeneas.git
 
 cd aeneas
 
-
 # 设置Charon {#设置charon}
 
 make setup-charon
-
 
 # 构建 {#构建}
 
@@ -602,11 +569,9 @@ fn incr(x: u32) -> u32 {
 
 EOF
 
-
 # 生成LLBC {#生成llbc}
 
 charon cargo --preset=aeneas
-
 
 # 翻译成Lean {#翻译成lean}
 
@@ -644,7 +609,6 @@ make
 grep -r "Admitted" *.v | wc -l
 
 # 目标: 0 {#目标-0}
-
 
 # 检查Qed数量 {#检查qed数量}
 

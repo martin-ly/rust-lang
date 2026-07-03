@@ -10,6 +10,8 @@
 
 # 进程管理快速参考卡片 {#进程管理快速参考卡片}
 
+> **EN**: Process Management Cheatsheet
+> **Summary**: 进程管理快速参考卡片 Process Management Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >

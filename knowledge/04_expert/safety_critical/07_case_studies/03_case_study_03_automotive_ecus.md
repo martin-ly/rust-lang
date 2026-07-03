@@ -8,6 +8,8 @@
 >
 # 案例研究3: 汽车ECU Rust应用
 
+> **EN**: Case Study 03 Automotive Ecus
+> **Summary**: 案例研究3 Case Study 03 Automotive Ecus.
 > **Bloom 层级**: 理解
 
 ## 概述

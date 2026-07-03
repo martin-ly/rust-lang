@@ -1,5 +1,7 @@
 # Rust Formal Full Model — English Summary {#rust-formal-full-model-english-summary}
 
+> **EN**: Rust Formal Full Model — English Summary
+> **Summary**: Rust Formal Full Model — English Summary Rust Formal Full Model — English Summary.
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 >

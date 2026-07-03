@@ -719,7 +719,7 @@ let v2 = v1;              // Move：只转移所有权，不复制数据
 
 - 📚 **进入 Tier 2**: [核心概念层](../tier_02_guides/README.md)
 - 💻 **实践练习**: [代码示例](../../examples/README.md)
-- 📊 **可视化学习**: [可视化资源](../VISUALIZATION_INDEX.md)
+- 📊 **可视化学习**: [可视化资源](../visualization_index.md)
 
 ### 遇到问题
 
@@ -740,7 +740,7 @@ let v2 = v1;              // Move：只转移所有权，不复制数据
 - 🚀 [快速开始指南](1.2_quick_start_guide.md)
 - 📖 [核心概念术语表](1.3_核心概念术语表.md)
 - 🗺️ [Tier 1 导航](README.md)
-- 📊 [主索引](../00_MASTER_INDEX.md)
+- 📊 [主索引](../00_master_index.md)
 
 ---
 

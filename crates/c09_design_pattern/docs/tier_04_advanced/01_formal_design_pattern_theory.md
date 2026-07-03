@@ -1080,7 +1080,7 @@ impl<S: Strategy, O: Observer> StrategyObserver<S, O> {
 ## 📚 相关资源
 
 - **Tier 3**: [技术参考](../tier_03_references/README.md)
-- **现有理论**: [ASYNC_SYNC_EQUIVALENCE_THEORY.md](../ASYNC_SYNC_EQUIVALENCE_THEORY.md)
+- **现有理论**: [ASYNC_SYNC_EQUIVALENCE_THEORY.md](../async_sync_equivalence_theory.md)
 - **Kani 文档**: [Kani Rust Verifier](https://model-checking.github.io/kani/)
 
 ---

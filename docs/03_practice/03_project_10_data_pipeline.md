@@ -1,4 +1,7 @@
 # 实践项目 10: 数据处理管道 {#实践项目-10-数据处理管道}
+
+> **EN**: Project 10 Data Pipeline
+> **Summary**: 实践项目 10 Project 10 Data Pipeline.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

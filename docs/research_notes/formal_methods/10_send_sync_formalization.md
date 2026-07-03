@@ -1,5 +1,7 @@
 # Send/Sync 形式化 {#sendsync-形式化}
 
+> **EN**: Send Sync Formalization
+> **Summary**: Send/Sync 形式化 Send Sync Formalization. (stub/archive redirect)
 > **概念族**: 并发安全 / Send/Sync
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 > **内容分级**: [归档级]

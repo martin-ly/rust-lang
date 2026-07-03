@@ -11,6 +11,8 @@
 >
 # 功能安全认证备考指南
 
+> **EN**: Certification Prep Guide
+> **Summary**: 功能安全认证备考指南 Certification Prep Guide. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 概述

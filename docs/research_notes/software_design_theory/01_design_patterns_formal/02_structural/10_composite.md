@@ -1,5 +1,7 @@
 # Composite 形式化分析 {#composite-形式化分析}
 
+> **EN**: Composite
+> **Summary**: Composite 形式化分析 Composite.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -291,7 +293,6 @@ enum Node {
 
 }
 
-
 impl Node {
 
     fn sum(&self) -> i32 {
@@ -307,7 +308,6 @@ impl Node {
     }
 
 }
-
 
 // 构建：Vec 拥有子节点，递归
 
@@ -342,7 +342,6 @@ trait Component {
 
 }
 
-
 struct Leaf { value: u32 }
 
 impl Component for Leaf {
@@ -350,7 +349,6 @@ impl Component for Leaf {
     fn operation(&self) -> u32 { self.value }
 
 }
-
 
 struct Composite {
 
@@ -367,7 +365,6 @@ impl Component for Composite {
     }
 
 }
-
 
 fn main() {
 
@@ -563,7 +560,6 @@ enum FsNode {
 
 }
 
-
 impl FsNode {
 
     fn size(&self) -> u64 {
@@ -579,7 +575,6 @@ impl FsNode {
     }
 
 }
-
 
 // 构建：docs/ 含 readme.txt、src/main.rs
 

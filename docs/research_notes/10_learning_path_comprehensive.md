@@ -1,5 +1,7 @@
 # Rust形式化方法学习路径 {#rust形式化方法学习路径}
 
+> **EN**: Learning Path Comprehensive
+> **Summary**: Rust形式化方法学习路径 Learning Path Comprehensive.
 > **概念族**: 学习资源
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

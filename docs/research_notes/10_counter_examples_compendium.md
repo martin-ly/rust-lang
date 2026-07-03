@@ -1,5 +1,7 @@
 # 反例汇编 (Counter-Examples Compendium) {#反例汇编-counter-examples-compendium}
 
+> **EN**: Counter-Examples Compendium
+> **Summary**: 反例汇编 Counter-Examples Compendium.
 > **概念族**: 反例库
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -135,13 +137,11 @@ let y = x.clone();
 
 println!("{}", x);  // OK
 
-
 // 方案2: 借用
 
 let y = &x;
 
 println!("{}", x);  // OK
-
 
 // 方案3: 直接使用y
 
@@ -179,7 +179,6 @@ struct Person {
 
 }
 
-
 fn main() {
 
     let p = Person {
@@ -189,7 +188,6 @@ fn main() {
         age: 30,
 
     };
-
 
     let name = p.name;   // 移动了name字段
 
@@ -233,11 +231,9 @@ error[E0382]: borrow of partially moved value: `p`
 
 let name = &p.name;
 
-
 // 方案2: 使用clone
 
 let name = p.name.clone();
-
 
 // 方案3: 解构整个结构体
 
@@ -316,7 +312,6 @@ error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immuta
 } // r1在这里结束
 
 let r2 = &mut x;  // OK
-
 
 // 方案2: 只使用可变借用
 
@@ -397,7 +392,6 @@ let r1 = &mut x;
 
 drop(r1);  // 显式结束借用
 
-
 let r2 = &mut x;
 
 *r2 = 20;
@@ -459,7 +453,6 @@ fn not_dangling() -> String {
     s  // 转移所有权
 
 }
-
 
 // 方案2: 传入引用
 
@@ -567,11 +560,9 @@ use std::rc::Rc;
 
 use std::thread;
 
-
 fn main() {
 
     let data = Rc::new(5);
-
 
     thread::spawn(move || {
 
@@ -611,7 +602,6 @@ error[E0277]: `Rc<i32>` cannot be sent between threads safely
 ```rust,ignore
 use std::sync::Arc;
 
-
 let data = Arc::new(5);
 
 thread::spawn(move || {
@@ -642,11 +632,9 @@ use std::cell::RefCell;
 
 use std::thread;
 
-
 fn main() {
 
     let data = RefCell::new(5);
-
 
     thread::spawn(move || {
 
@@ -686,7 +674,6 @@ error[E0277]: `RefCell<i32>` cannot be sent between threads safely
 ```rust,ignore
 use std::sync::Mutex;
 
-
 let data = Mutex::new(5);
 
 thread::spawn(move || {
@@ -716,9 +703,7 @@ async fn bad() {
 
     let guard = mutex.lock().unwrap();
 
-
     some_async_fn().await;  // 危险!
-
 
     // 使用 guard
 
@@ -738,11 +723,9 @@ async fn bad() {
 ```rust,ignore
 use tokio::sync::Mutex;  // 异步版本的Mutex
 
-
 async fn good() {
 
     let mutex = Mutex::new(0);
-
 
     {
 
@@ -751,7 +734,6 @@ async fn good() {
         // 使用 guard
 
     }  // 锁在这里释放
-
 
     some_async_fn().await;  // OK
 
@@ -773,7 +755,6 @@ async fn good() {
 
 ```rust,ignore
 static mut INSTANCE: Option<Singleton> = None;
-
 
 fn get_instance() -> &'static Singleton {
 
@@ -803,9 +784,7 @@ fn get_instance() -> &'static Singleton {
 ```rust,ignore
 use std::sync::OnceLock;
 
-
 static INSTANCE: OnceLock<Singleton> = OnceLock::new();
-
 
 fn get_instance() -> &'static Singleton {
 

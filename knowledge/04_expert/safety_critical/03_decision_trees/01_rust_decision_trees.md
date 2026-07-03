@@ -9,6 +9,8 @@
 >
 # Rust应用决策树图集
 
+> **EN**: Rust Decision Trees
+> **Summary**: Rust应用决策树图集 Rust Decision Trees.
 > **Bloom 层级**: 理解
 
 ## 决策树1: 安全关键项目语言选择决策树

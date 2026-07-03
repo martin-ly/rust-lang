@@ -22,9 +22,9 @@
 
 | 资源 | 内容  |
 | :--- | :--- |
-| [RUST_190_EXAMPLES_COLLECTION.md](../RUST_190_EXAMPLES_COLLECTION.md) | 基础示例 |
-| [RUST_190_EXAMPLES_PART2.md](../RUST_190_EXAMPLES_PART2.md) | HTTP/WebSocket/DNS |
-| [RUST_190_EXAMPLES_PART3_ADVANCED_PROTOCOLS.md](../RUST_190_EXAMPLES_PART3_ADVANCED_PROTOCOLS.md) | gRPC/MQTT/QUIC |
+| [RUST_190_EXAMPLES_COLLECTION.md](../rust_190_examples_collection.md) | 基础示例 |
+| [RUST_190_EXAMPLES_PART2.md](../rust_190_examples_part2.md) | HTTP/WebSocket/DNS |
+| [RUST_190_EXAMPLES_PART3_ADVANCED_PROTOCOLS.md](../rust_190_examples_part3_advanced_protocols.md) | gRPC/MQTT/QUIC |
 
 ---
 

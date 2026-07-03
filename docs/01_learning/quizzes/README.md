@@ -1,5 +1,7 @@
 # 主题测验 {#主题测验}
 
+> **EN**: Quizzes Index
+> **Summary**: 主题测验 Quizzes Index.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
 >

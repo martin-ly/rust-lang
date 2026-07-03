@@ -8,6 +8,8 @@
 >
 # 案例研究1: Ferrocene认证工具链
 
+> **EN**: Case Study 01 Ferrocene Certification
+> **Summary**: 案例研究1 Case Study 01 Ferrocene Certification. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 概述

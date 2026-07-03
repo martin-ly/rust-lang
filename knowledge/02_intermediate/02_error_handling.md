@@ -1,5 +1,7 @@
 # 错误处理 (Error Handling)
 
+> **EN**: Error Handling
+> **Summary**: 错误处理 Error Handling. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/02_intermediate/04_error_handling.md](../../concept/02_intermediate/04_error_handling.md)。
 > **历史版本存档**: [archive/knowledge/02_intermediate/02_error_handling.md](../../archive/knowledge/02_intermediate/02_error_handling.md)
 >

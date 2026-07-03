@@ -1,5 +1,7 @@
 # Rust 知识索引
 
+> **EN**: Knowledge Index
+> **Summary**: Rust 知识索引 Knowledge Index. (stub/archive redirect)
 > **Bloom 层级**: 理解
 > 按主题快速查找所有知识文档
 >

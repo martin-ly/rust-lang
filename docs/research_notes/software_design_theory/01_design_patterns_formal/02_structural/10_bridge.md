@@ -1,5 +1,7 @@
 # Bridge 形式化分析 {#bridge-形式化分析}
 
+> **EN**: Bridge
+> **Summary**: Bridge 形式化分析 Bridge.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -256,7 +258,6 @@ trait Renderer {
 
 }
 
-
 struct VectorRenderer;
 
 impl Renderer for VectorRenderer {
@@ -268,7 +269,6 @@ impl Renderer for VectorRenderer {
     }
 
 }
-
 
 struct RasterRenderer;
 
@@ -282,7 +282,6 @@ impl Renderer for RasterRenderer {
 
 }
 
-
 struct Circle<R: Renderer> {
 
     radius: f32,
@@ -290,7 +289,6 @@ struct Circle<R: Renderer> {
     renderer: R,
 
 }
-
 
 impl<R: Renderer> Circle<R> {
 
@@ -307,7 +305,6 @@ impl<R: Renderer> Circle<R> {
     }
 
 }
-
 
 // 使用：抽象（Circle）与实现（Renderer）独立
 
@@ -336,7 +333,6 @@ trait Renderer {
 
 }
 
-
 struct SvgRenderer;
 
 impl Renderer for SvgRenderer {
@@ -349,18 +345,15 @@ impl Renderer for SvgRenderer {
 
 }
 
-
 // 抽象层
 
 struct Circle { renderer: Box<dyn Renderer>, x: f64, y: f64, r: f64 }
-
 
 impl Circle {
 
     fn draw(&self) { self.renderer.render_circle(self.x, self.y, self.r); }
 
 }
-
 
 fn main() {
 

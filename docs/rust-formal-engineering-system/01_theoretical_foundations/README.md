@@ -1,5 +1,7 @@
 # 理论基础 {#理论基础}
 
+> **EN**: Theoretical Foundations Index
+> **Summary**: 理论基础 Theoretical Foundations Index. (stub/archive redirect)
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20

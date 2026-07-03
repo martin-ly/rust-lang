@@ -1,5 +1,7 @@
 # RFC 实现状态追踪表 {#rfc-实现状态追踪表}
 
+> **EN**: Rfc Tracking Status
+> **Summary**: RFC 实现状态追踪表 Rfc Tracking Status.
 > **概念族**: 权威来源对齐 / RFC / 版本跟踪
 > **内容分级**: [核心级]
 > **层级**: L0-L7

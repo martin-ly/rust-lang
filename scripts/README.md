@@ -2,8 +2,8 @@
 
 > **项目**: Rust 系统化学习项目
 > **维护者**: Rust 学习项目团队
-> **最后更新**: 2026-06-29
-> **状态**: 清理中（Phase 3 C4），内容去重检测已集成
+> **最后更新**: 2026-07-04
+> **状态**: 清理中（Phase 3 C4），文件名规范化与 archive/ 边界已确认
 
 ---
 
@@ -13,7 +13,7 @@
 scripts/
 ├── README.md                          # 本文件
 │
-├── archive/                           # 归档脚本（按年份分类）
+├── archive/                           # 归档脚本（按年份分类，只读）
 │   └── 2026/
 │       ├── dead_link_audit/           # 5 月死链审计调试系列（一次性）
 │       ├── link_fix_iterations/       # 历史链接修复战役脚本
@@ -29,15 +29,17 @@ scripts/
 ├── templates/                         # 文档模板
 └── i18n/                              # 国际化/双语标注工具
 ```
+
 ---
 
 ## 活跃脚本速查
 
-以下列出根目录下 **94** 个活跃脚本中的核心工具。完整清单可运行：
+以下列出根目录下核心活跃脚本。完整清单可运行：
 
 ```bash
 ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 ```
+
 ### 🔍 审计与检查
 
 | 脚本 | 功能 |
@@ -105,6 +107,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 |------|------|
 | `archive_deprecated_content.py` | 归档过时内容 |
 | `batch_archive_c_class.py` | 批量归档 C 类文档 |
+| `bulk_rename.py` | 批量重命名仓库路径为 snake_case 并更新内部引用 |
 | `cleanup_mechanical_citations.py` | 清理机械引用 |
 | `cleanup_title_embedded_citations.py` | 清理标题内嵌引用 |
 | `fix_code_blocks.py` | 代码块标记修复 |
@@ -117,10 +120,10 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 
 | 脚本 | 功能 |
 |------|------|
-| `cargo-build-optimized.sh` / `.ps1` | 优化编译 |
-| `cargo-update-check.sh` / `.ps1` | 依赖更新检查 |
-| `run-miri.sh` / `.bat` | Miri 测试 |
-| `exercise-check.sh` / `.ps1` | 练习题评测 |
+| `cargo_build_optimized.sh` / `.ps1` | 优化编译 |
+| `cargo_update_check.sh` / `.ps1` | 依赖更新检查 |
+| `run_miri.sh` / `.bat` | Miri 测试 |
+| `exercise_check.sh` / `.ps1` | 练习题评测 |
 | `code_block_compiler.py` | 代码块编译验证 |
 | `verify_compile_fail_v3.py` | `compile_fail` 代码块验证 |
 
@@ -139,6 +142,53 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `rust_197_release_day.sh` | Rust 1.97.0 发布日执行脚本 |
 | `rust_197_upstream_monitor.sh` | 上游发布动态监控 |
 | `batch_version_refresh.py` | 批量版本号刷新 |
+
+---
+
+## 命名检查与批量重命名
+
+### `lint_filenames.py`
+
+检查新增/变更的文件名是否符合 `snake_case` / `number_prefix_snake_case` 规范。
+
+```bash
+# 默认：检查相对于 origin/main 的变更文件（PR/提交前使用）
+python scripts/lint_filenames.py
+
+# 检查所有已跟踪文件（治理审计使用）
+python scripts/lint_filenames.py --all
+
+# 对全部历史文件也返回非零退出码
+python scripts/lint_filenames.py --all --strict
+
+# 排除指定前缀
+python scripts/lint_filenames.py --all --exclude archive/ --exclude reports/
+```
+
+### `bulk_rename.py`
+
+将仓库路径批量重命名为 snake_case，并自动更新 tracked 文本文件中的内部引用。
+
+```bash
+# 单文件
+python scripts/bulk_rename.py docs/LINK_CHECK_REPORT.md docs/link_check_report.md
+
+# 多文件成对传入
+python scripts/bulk_rename.py \
+  scripts/cargo-build-optimized.sh scripts/cargo_build_optimized.sh \
+  scripts/run-miri.sh scripts/run_miri.sh
+
+# 配合计划文件批量执行
+python scripts/bulk_rename.py $(awk '{print $1, $2}' target/tmp/rename_plan.txt)
+```
+
+**注意事项**：
+
+1. 优先使用 `git mv`；对未跟踪文件退回到 `mv`。
+2. 在大小写不敏感的文件系统（如 Windows）上，纯大小写重命名后会通过 `git checkout -- <new>` 重新物化文件，避免引用更新阶段找不到新路径。
+3. 更新内部引用时默认跳过 `archive/`、`.kimi/`、`.venv/`、`target/`，保证只读/例外区域不被改写。
+4. 仅扫描以下扩展名的文本文件：`.md`、`.json`、`.toml`、`.yaml`、`.yml`、`.py`、`.rs`、`.sh`、`.js`、`.hbs`。
+5. 运行前建议先通过 `python scripts/lint_filenames.py --all` 生成清单并核对重命名计划。
 
 ---
 
@@ -161,12 +211,13 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 - `add_cross_references.py` — 批量添加 concept ↔ knowledge 交叉引用
 - `cleanup_unused_aliases.py` — 清理未使用的别名
 - `fix_final_broken_links.py` — 死链修复（维护版）
+- `migrate_archive.py` — 归档迁移脚本：将旧目录移入 `archive/`
 
 ### `utils/`
 
 通用辅助工具，例如：
 
-- `enhance_placeholder_files.py` — 增强占位文件内容
+- `enhance_placeholder_files.py` — 归档迁移脚本：增强占位文件或将 PENDING_ITEMS 归档到 `docs/archive/small_files/`
 
 ### `i18n/`
 
@@ -182,7 +233,7 @@ docs/ crate 文档样板模板。
 
 ## 归档说明
 
-`archive/2026/` 目录存放以下类型的历史脚本：
+`scripts/archive/2026/` 目录存放以下类型的历史脚本：
 
 1. **迭代旧版本**：如 `fix_dead_links.py` / `v2` → `v3`（保留 v3，归档 v1/v2）
 2. **一次性调试脚本**：如 `_debug_docs_links*.py`、`_analyze_*.py` 系列
@@ -194,12 +245,29 @@ docs/ crate 文档样板模板。
 
 ---
 
+## `archive/` 只读边界
+
+1. **任何脚本不得向 `archive/` 写入新的活跃内容**。`archive/` 仅用于存放历史/归档资料，写入操作只能通过显式的**归档迁移脚本**完成。
+2. 已标注为归档迁移脚本的工具包括：
+   - `scripts/archive_file.py`
+   - `scripts/archive_deprecated_content.py`
+   - `scripts/maintenance/archive_research_notes_candidates.py`
+   - `scripts/maintenance/migrate_archive.py`
+   - `scripts/maintenance/fix_archive_c_class_links.py`
+   - `scripts/quarterly_sync.py`
+   - `scripts/roded_governance.py`
+   - `scripts/utils/enhance_placeholder_files.py`
+3. `bulk_rename.py` 在更新内部引用时会跳过 `archive/`、`.kimi/`、`.venv/`、`target/`，避免误改只读区域。
+4. 如果发现普通脚本向 `archive/` 写入非归档内容，应改为写入 `tmp/` 或作为 bug 报告。
+
+---
+
 ## 使用规范
 
 ### 添加新脚本
 
 1. **命名规范**：
-   - 使用 `snake_case` 或 `kebab-case`
+   - 使用 `snake_case`（脚本/源码文件名）
    - 名称应清晰描述功能
    - 添加适当的文件扩展名
 2. **文档要求**：
@@ -220,11 +288,30 @@ docs/ crate 文档样板模板。
 
 ---
 
+## 已知例外
+
+以下文件/目录因历史原因、平台约定或特殊用途保留原名称，不强制改为 snake_case：
+
+| 类别 | 例外项 | 原因 |
+|------|--------|------|
+| 根级特殊文件 | `AGENTS.md`、`Cargo.lock`、`Cargo.toml`、`README.md`、`SUMMARY.md` | Agent/构建/mdbook 约定 |
+| 配置目录 | `.cargo/`、`.github/`、`.vscode/` | 工具/平台约定目录 |
+| GitHub 模板 | `.github/ISSUE_TEMPLATE/` | GitHub  issue 模板目录名 |
+| 日期风格报告 | `reports/`、各 `crates/*/reports/` | NAMING_CONVENTION 过渡期日期风格例外 |
+| 归档目录 | `archive/`、各 `*/archive/`（如 `concept/archive/`、`crates/*/src/archive/`） | 只读历史归档 |
+| Agent 工作区 | `.kimi/` 及其 `archive/` | Agent 会话与日期风格例外 |
+| 虚拟环境 | `tools/kg_rag/.venv/` | 第三方依赖，不应提交 |
+| 构建产物 | `target/`、`book/` | 生成目录 |
+| 目录名 | `docs/rust-formal-engineering-system/`、`examples/resolver_v3_practice/{edge-bin,legacy-lib,modern-app}/`、`crates/c13_embedded/real-hardware-demos/`、`crates/c13_embedded/real-hardware-demos/{embassy-demo,rtic-demo}/` | 历史目录/示例项目目录，本次仅重命名文件 |
+| 容器文件 | `crates/c06_async/deployment/docker/Dockerfile` | Dockerfile 标准命名 |
+
+---
+
 [返回项目主页](../README.md)
 
 ---
 
-> **文档版本**: 2.1
+> **文档版本**: 2.2
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-> **最后更新**: 2026-06-28
-> **状态**: 清理中（已归档重复脚本版本）
+> **最后更新**: 2026-07-04
+> **状态**: 清理中（文件名规范化已完成，archive/ 边界已确认）

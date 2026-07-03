@@ -1,5 +1,7 @@
 # CLI 应用开发指南 {#cli-应用开发指南}
 
+> **EN**: CLI Applications Guide
+> **Summary**: CLI 应用开发指南 CLI Applications Guide.
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 > **创建日期**: 2026-02-13

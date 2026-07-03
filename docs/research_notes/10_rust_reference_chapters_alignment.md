@@ -1,5 +1,7 @@
 # Rust Reference 分章节深度对齐 {#rust-reference-分章节深度对齐}
 
+> **EN**: Rust Reference Chapters Alignment
+> **Summary**: Rust Reference 分章节深度对齐 Rust Reference Chapters Alignment.
 > **概念族**: 权威来源对齐 / Rust Reference
 > **内容分级**: [核心级]
 > **层级**: L0-L4

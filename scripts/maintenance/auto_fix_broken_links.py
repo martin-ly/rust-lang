@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-根据 docs/LINK_CHECK_REPORT.md 自动修复 docs/ 目录下的损坏链接。
+根据 docs/link_check_report.md 自动修复 docs/ 目录下的损坏链接。
 
 修复策略：
 1. 锚点不存在（同文件 / 跨文件）：通过链接文本匹配 Markdown 标题，重新计算 GitHub 风格锚点。

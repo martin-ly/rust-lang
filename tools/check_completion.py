@@ -75,7 +75,7 @@ def main():
         "LEARNING_CHECKLIST.md",
         "FAQ.md",
         "content/CONTENT_CRATES_MAPPING.md",
-        "crates/MODULE_CROSS_REFERENCE.md",
+        "crates/module_cross_reference.md",
     ]
     
     for file in key_files:

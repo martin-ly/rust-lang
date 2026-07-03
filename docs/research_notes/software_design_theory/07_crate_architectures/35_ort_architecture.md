@@ -17,6 +17,8 @@
 
 # ort Crate 架构解构 {#ort-crate-架构解构}
 
+> **EN**: Ort Architecture
+> **Summary**: ort Crate 架构解构 Ort Architecture.
 > **最后更新**: 2026-06-29
 >
 > **内容分级**: [归档级]

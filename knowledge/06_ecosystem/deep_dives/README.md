@@ -1,5 +1,7 @@
 # Deep Dives 深度解析
 
+> **EN**: Deep Dives Index
+> **Summary**: Deep Dives 深度解析 Deep Dives Index.
 > **Bloom 层级**: 理解
 > **Rust 生态核心框架的深度技术解析**
 >

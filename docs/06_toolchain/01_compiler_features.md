@@ -1,5 +1,7 @@
 # Rust 编译器特性与优化 {#rust-编译器特性与优化}
 
+> **EN**: Compiler Features
+> **Summary**: Rust 编译器特性与优化 Compiler Features. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
 >

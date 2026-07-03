@@ -12,6 +12,8 @@
 
 # 分布式系统概念族谱 {#分布式系统概念族谱}
 
+> **EN**: Distributed Concept Mindmap
+> **Summary**: 分布式系统概念族谱 Distributed Concept Mindmap. (stub/archive redirect)
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -223,7 +225,6 @@ enum ConsistencyLevel {
 
 }
 
-
 struct DistributedSystem {
 
     consistency: ConsistencyLevel,
@@ -259,7 +260,6 @@ struct ConsistentHash {
     replicas: usize, // 虚拟节点数
 
 }
-
 
 impl ConsistentHash {
 
@@ -300,7 +300,6 @@ graph LR
 
     B --> E[glommio]
 
-
     C --> C1[通用场景]
 
     C --> C2[高并发网络]
@@ -340,7 +339,6 @@ use std::sync::atomic::{AtomicU32, Ordering};
 
 use std::time::{Duration, Instant};
 
-
 struct CircuitBreaker {
 
     failure_count: AtomicU32,
@@ -352,7 +350,6 @@ struct CircuitBreaker {
     last_failure: std::sync::Mutex<Option<Instant>>,
 
 }
-
 
 enum CircuitState {
 
@@ -372,7 +369,6 @@ enum CircuitState {
 ```rust,ignore
 use std::sync::atomic::{AtomicU64, Ordering};
 
-
 struct RateLimiter {
 
     tokens: AtomicU64,
@@ -384,7 +380,6 @@ struct RateLimiter {
     last_refill: std::sync::Mutex<Instant>,
 
 }
-
 
 impl RateLimiter {
 

@@ -1,5 +1,7 @@
 # 研究笔记写作指南 {#研究笔记写作指南}
 
+> **EN**: Writing Guide
+> **Summary**: 研究笔记写作指南 Writing Guide.
 > **概念族**: 方法论 / 工具 / 指南
 > **内容分级**: [归档级]
 >
@@ -115,14 +117,11 @@
 
 > **[来源: Rust Official Docs]**
 
-
 本研究的目的是形式化定义 Rust 的所有权模型，并证明其内存安全性。
-
 
 ### 核心问题 {#核心问题-3}
 
 > **[来源: Rust Official Docs]**
-
 
 1. **所有权转移的形式化**: 如何用形式化方法描述所有权的转移？
 
@@ -130,11 +129,9 @@
 
 3. **内存安全证明**: 如何证明所有权系统保证内存安全？
 
-
 ### 预期成果 {#预期成果-3}
 
 > **[来源: Rust Official Docs]**
-
 
 - 所有权模型的形式化定义
 
@@ -247,15 +244,11 @@
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-
 本研究的目的是形式化定义 Rust 的所有权模型，包括所有权转移、借用规则和生命周期约束。
-
 
 ### 核心问题 {#核心问题-3}
 
-
 > **[来源: POPL - Programming Languages Research]**
-
 
 1. **所有权转移的形式化**: 如何用形式化方法描述所有权的转移？
 
@@ -263,12 +256,9 @@
 
 3. **生命周期约束的形式化**: 如何形式化生命周期约束？
 
-
 ### 预期成果 {#预期成果-3}
 
-
 > **[来源: PLDI - Programming Language Design]**
-
 
 - 所有权模型的形式化定义
 
@@ -308,30 +298,21 @@
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-
 ### 相关概念 {#相关概念}
-
 
 > **[来源: IEEE - Programming Language Standards]**
 
-
 **所有权 (Ownership)**: Rust 的核心概念，每个值都有一个所有者。当所有者离开作用域时，值被释放。
-
 
 **借用 (Borrowing)**: 允许临时访问值而不获取所有权。
 
-
 **生命周期 (Lifetime)**: 引用有效的时间范围。
-
 
 ### 理论背景 {#理论背景}
 
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-
 **线性类型系统 (Linear Type System)**: 用于建模所有权转移的类型系统。在线性类型系统中，每个值只能使用一次。
-
 
 **分离逻辑 (Separation Logic)**: 用于表达借用规则的逻辑系统。分离逻辑可以表达内存的分离和共享。
 ```
@@ -363,21 +344,15 @@
 ````markdown
     ## 🔬 形式化定义
 
-
     ### 1. 所有权转移
-
 
     **定义 1.1 (所有权转移)**: 所有权从变量 `x` 转移到变量 `y`，记为 `x → y`。
 
-
     **形式化表示**:
-
 
     $$\text{move}(x, y) : \Omega(x) = \text{Owned} \rightarrow \Omega(x) = \text{Moved} \land \Omega(y) = \text{Owned}$$
 
-
     **语义**: 当执行 `move(x, y)` 时，`x` 的所有权转移到 `y`，`x` 不再可用。
-
 
     **示例**:
     ```rust
@@ -416,7 +391,6 @@
 
 ````markdown
     ## 💻 代码示例
-
 
     ### 示例 1: 所有权转移
     ```rust
@@ -465,12 +439,9 @@
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-
 ### 学术论文 {#学术论文}
 
-
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
-
 
 1. **RustBelt: Logical Foundations for the Future of Safe Systems Programming**
 
@@ -482,23 +453,17 @@
 
    - 链接: 论文链接
 
-
 ### 官方文档 {#官方文档}
 
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 
 - [Rust Book - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 
 - [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
 
-
 ### 相关代码 {#相关代码}
 
-
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 
 - [所有权实现](../../crates/c01_ownership_borrow_scope/README.md)
 
@@ -556,9 +521,7 @@
 ````markdown
     **形式化表示**:
 
-
     $$\frac{\Gamma, x : \tau_1 \vdash e : \tau_2}{\Gamma \vdash \lambda x : \tau_1. e : \tau_1 \to \tau_2}$$
-
 
     **行内公式**: 类型环境 $\Gamma$ 包含变量 $x$ 的类型 $\tau_1$。
     ```
@@ -617,11 +580,9 @@
 ```markdown
 ---
 
-
 ## 📊 目录 {#目录-1}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 
 - 文档标题
 
@@ -631,9 +592,7 @@
 
   - 边界
 
-
 ---
-
 
 ## 形式化定义 {#形式化定义}
 
@@ -779,14 +738,11 @@
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-
 本研究的目的是形式化定义 Rust 的所有权模型，并证明其内存安全性。
-
 
 ### 核心问题 {#核心问题-3}
 
 > **[来源: [crates.io](https://crates.io/)]**
-
 
 1. **所有权转移的形式化**: 如何用形式化方法描述所有权的转移？
 
@@ -794,11 +750,9 @@
 
 3. **内存安全证明**: 如何证明所有权系统保证内存安全？
 
-
 ### 预期成果 {#预期成果-3}
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 
 - 所有权模型的形式化定义
 
@@ -814,24 +768,19 @@
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-
 研究 Rust 的所有权。
-
 
 ### 核心问题 {#核心问题-3}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-
 - 所有权是什么？
 
 - 如何形式化？
 
-
 ### 预期成果 {#预期成果-3}
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 
 - 一些定义
 
@@ -848,18 +797,13 @@
 ````markdown
     ### 1. 所有权转移
 
-
     **定义 1.1 (所有权转移)**: 所有权从变量 `x` 转移到变量 `y`，记为 `x → y`。
-
 
     **形式化表示**:
 
-
     $$\text{move}(x, y) : \Omega(x) = \text{Owned} \rightarrow \Omega(x) = \text{Moved} \land \Omega(y) = \text{Owned}$$
 
-
     **语义**: 当执行 `move(x, y)` 时，`x` 的所有权转移到 `y`，`x` 不再可用。
-
 
     **示例**:
     ```rust
@@ -875,9 +819,7 @@
 ```markdown
     ### 1. 所有权转移
 
-
     所有权可以转移。
-
 
     形式化表示: move(x, y)
 ```

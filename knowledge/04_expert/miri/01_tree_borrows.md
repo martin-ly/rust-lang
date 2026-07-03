@@ -1,5 +1,7 @@
 # Miri Tree Borrows 深度解析
 
+> **EN**: Tree Borrows
+> **Summary**: Miri Tree Borrows 深度解析 Tree Borrows.
 > **注意**: 本主题内容已整合到 `concept/04_formal/36_tree_borrows_deep_dive.md`。
 > 请以 [concept/04_formal/36_tree_borrows_deep_dive.md](../../../concept/04_formal/36_tree_borrows_deep_dive.md) 为权威来源。
 

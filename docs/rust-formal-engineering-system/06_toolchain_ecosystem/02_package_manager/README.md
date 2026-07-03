@@ -1,5 +1,7 @@
-﻿# 包管理器理论
+# 包管理器理论
 
+> **EN**: Package Manager Index
+> **Summary**: 包管理器理论 Package Manager Index. (stub/archive redirect)
 > **分级**: [B]
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）

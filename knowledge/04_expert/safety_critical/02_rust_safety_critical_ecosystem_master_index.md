@@ -9,6 +9,8 @@
 >
 # Rust安全关键生态系统文档集 - 主索引
 
+> **EN**: Rust Safety Critical Ecosystem Master Index
+> **Summary**: Rust安全关键生态系统文档集 - 主索引 Rust Safety Critical Ecosystem Master Index.
 > **相关文档**: 请参阅 [docs/rust-formal-engineering-system/00_master_index.md](../../../docs/rust-formal-engineering-system/00_master_index.md)
 > **Bloom 层级**: 理解
 

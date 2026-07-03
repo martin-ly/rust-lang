@@ -255,7 +255,7 @@ main (production)
 
 ### 完整配置文件
 
-详见：[`deployment/ci/github-actions.yml`](../../deployment/ci/github-actions.yml)
+详见：[`deployment/ci/github-actions.yml`](../../deployment/ci/github_actions.yml)
 
 ### 关键步骤解析
 

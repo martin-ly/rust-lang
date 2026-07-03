@@ -11,6 +11,8 @@
 
 # Pin 和自引用类型形式化 {#pin-和自引用类型形式化}
 
+> **EN**: Pin Self Referential
+> **Summary**: Pin 和自引用类型形式化 Pin Self Referential. (stub/archive redirect)
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -441,7 +443,6 @@ $$
 ```text
 Pin 安全性证明树
 
-
   定义 1.1–1.3: Pin 类型、不变性、Pin 保证
 
   定义 2.1–2.2: 自引用类型、自引用约束
@@ -512,25 +513,21 @@ Pin 安全性证明树
 ```rust
 use std::pin::Pin;
 
-
 struct MyStruct {
 
     data: i32,
 
 }
 
-
 // MyStruct 实现了 Unpin，可以安全移动
 
 impl Unpin for MyStruct {}
-
 
 fn main() {
 
     let mut x = MyStruct { data: 42 };
 
     let pinned = Pin::new(&mut x);
-
 
     // 即使被 Pin，也可以移动（因为实现了 Unpin）
 
@@ -553,7 +550,6 @@ use std::pin::Pin;
 
 use std::marker::PhantomPinned;
 
-
 struct SelfReferential {
 
     data: String,
@@ -563,7 +559,6 @@ struct SelfReferential {
     _pin: PhantomPinned,
 
 }
-
 
 impl SelfReferential {
 
@@ -579,16 +574,13 @@ impl SelfReferential {
 
         });
 
-
         let self_ptr: *const String = &boxed.data;
 
         boxed.self_ref = Some(self_ptr);
 
-
         boxed
 
     }
-
 
     fn get_data(&self) -> &String {
 
@@ -616,18 +608,15 @@ use std::future::Future;
 
 use std::task::{Context, Poll};
 
-
 struct MyFuture {
 
     value: Option<i32>,
 
 }
 
-
 impl Future for MyFuture {
 
     type Output = i32;
-
 
     fn poll(mut self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
 
@@ -648,7 +637,6 @@ impl Future for MyFuture {
     }
 
 }
-
 
 async fn use_future() {
 
@@ -678,7 +666,6 @@ use std::pin::Pin;
 
 use std::marker::PhantomPinned;
 
-
 struct SelfReferential {
 
     data: String,
@@ -688,7 +675,6 @@ struct SelfReferential {
     _pin: PhantomPinned,  // 标记为 !Unpin
 
 }
-
 
 impl SelfReferential {
 
@@ -704,7 +690,6 @@ impl SelfReferential {
 
         });
 
-
         let self_ptr: *const String = &boxed.data;
 
         unsafe {
@@ -715,11 +700,9 @@ impl SelfReferential {
 
         }
 
-
         boxed
 
     }
-
 
     fn get_data(&self) -> &str {
 
@@ -732,7 +715,6 @@ impl SelfReferential {
     }
 
 }
-
 
 fn use_self_referential() {
 
@@ -756,20 +738,17 @@ fn use_self_referential() {
 ```rust
 use std::pin::Pin;
 
-
 struct Wrapper {
 
     inner: Inner,
 
 }
 
-
 struct Inner {
 
     value: i32,
 
 }
-
 
 impl Wrapper {
 
@@ -799,18 +778,15 @@ use std::future::Future;
 
 use std::task::{Context, Poll};
 
-
 struct MyFuture {
 
     state: i32,
 
 }
 
-
 impl Future for MyFuture {
 
     type Output = i32;
-
 
     fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
 
@@ -819,7 +795,6 @@ impl Future for MyFuture {
     }
 
 }
-
 
 async fn use_future() {
 

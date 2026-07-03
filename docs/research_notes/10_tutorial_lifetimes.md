@@ -1,5 +1,7 @@
 # 教程：理解生命周期 {#教程理解生命周期}
 
+> **EN**: Tutorial Lifetimes
+> **Summary**: 教程 Tutorial Lifetimes.
 > **概念族**: 教程
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -127,7 +129,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 }
 
-
 // 'a 是一个生命周期参数
 
 // 表示x、y和返回值都有相同的生命周期
@@ -143,7 +144,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ```rust,ignore
 fn first_word(s: &str) -> &str { ... }
-
 
 // 编译器自动添加：
 
@@ -172,7 +172,6 @@ fn first_word(s: &str) -> &str { ... }
 ```rust
 let s: &'static str = "hello";
 
-
 // 'static 表示整个程序运行期间有效
 
 // 字符串字面量是'static
@@ -189,11 +188,9 @@ let s: &'static str = "hello";
 
 // 因为 'static 比任何 'a 都长
 
-
 let s: &'static str = "hello";
 
 take_str(s);  // 可以传给需要 &'a str 的函数
-
 
 fn take_str<'a>(s: &'a str) {}
 ```
@@ -211,7 +208,6 @@ struct Person<'a> {
     name: &'a str,  // name必须活得比Person长
 
 }
-
 
 fn main() {
 

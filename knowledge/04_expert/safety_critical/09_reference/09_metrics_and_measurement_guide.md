@@ -1,5 +1,7 @@
 # 度量与测量指南
 
+> **EN**: Metrics And Measurement Guide
+> **Summary**: 度量与测量指南 Metrics And Measurement Guide.
 > **Bloom 层级**: 理解
 >
 > **受众**: [初学者] / [进阶]

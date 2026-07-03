@@ -1,4 +1,7 @@
 # 项目重组完成报告 {#项目重组完成报告}
+
+> **EN**: Reorganization Complete
+> **Summary**: 项目重组完成报告 Reorganization Complete. (stub/archive redirect)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

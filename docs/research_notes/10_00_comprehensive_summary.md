@@ -1,4 +1,7 @@
 # Rust 研究笔记：完整总结综合 {#rust-研究笔记完整总结综合}
+
+> **EN**: 00 Comprehensive Summary
+> **Summary**: Rust 研究笔记 00 Comprehensive Summary. (stub/archive redirect)
 >
 > **概念族**: 元/导航/索引
 > **内容分级**: [归档级]

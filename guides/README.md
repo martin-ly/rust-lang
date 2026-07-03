@@ -16,10 +16,10 @@
 | **快速开始** | [docs/README.md](../docs/README.md) | 文档主索引 |
 | **学习检查清单** | [LEARNING_CHECKLIST.md](../LEARNING_CHECKLIST.md) | 进度追踪、间隔重复、自测题 |
 | **交互式练习** | [exercises/README.md](../exercises/README.md) | Rustlings、Playground 对接 |
-| **Rustlings 模块映射** | [exercises/RUSTLINGS_MAPPING.md](../exercises/RUSTLINGS_MAPPING.md) | C01–C12 与 Rustlings 习题对应 |
+| **Rustlings 模块映射** | [exercises/rustlings_mapping.md](../exercises/rustlings_mapping.md) | C01–C12 与 Rustlings 习题对应 |
 | **错误码映射** | [docs/02_reference/ERROR_CODE_MAPPING.md](../docs/02_reference/ERROR_CODE_MAPPING.md) | 编译器错误码 → 文档 |
-| **QUICK_START** | [crates/c01_ownership_borrow_scope/docs/QUICK_START_GUIDE.md](../crates/c01_ownership_borrow_scope/docs/QUICK_START_GUIDE.md) | 所有权模块快速入门 |
-| **异步编程快速开始** | [crates/c06_async/QUICK_START_GUIDE_2025.md](../crates/c06_async/QUICK_START_GUIDE_2025.md) | C06 异步快速入门 |
+| **QUICK_START** | [crates/c01_ownership_borrow_scope/docs/quick_start_guide.md](../crates/c01_ownership_borrow_scope/docs/quick_start_guide.md) | 所有权模块快速入门 |
+| **异步编程快速开始** | [crates/c06_async/quick_start_guide_2025.md](../crates/c06_async/quick_start_guide_2025.md) | C06 异步快速入门 |
 
 ### 使用指南（位于 docs/）
 
@@ -55,7 +55,7 @@
 | **编译器内部机制** | [docs/06_toolchain/](../docs/06_toolchain/README.md) | 编译器特性、Cargo、rustdoc；[rustc Book](https://doc.rust-lang.org/rustc/) |
 | **认知科学学习** | [LEARNING_CHECKLIST.md](../LEARNING_CHECKLIST.md) | 间隔重复、自测题；[Brown 交互版](https://rust-book.cs.brown.edu/) |
 | **大学课程对标** | [docs/01_learning/OFFICIAL_RESOURCES_MAPPING.md](../docs/01_learning/OFFICIAL_RESOURCES_MAPPING.md) | 官方资源映射、模块对标 |
-| **交互式学习平台** | [exercises/README.md](../exercises/README.md)、[RUSTLINGS_MAPPING.md](../exercises/RUSTLINGS_MAPPING.md) | Rustlings、Playground、习题映射 |
+| **交互式学习平台** | [exercises/README.md](../exercises/README.md)、[RUSTLINGS_MAPPING.md](../exercises/rustlings_mapping.md) | Rustlings、Playground、习题映射 |
 | **全局理论框架** | [docs/07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md](../docs/07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) | 知识结构、思维表征 |
 | **实践项目路线图** | [docs/01_learning/LEARNING_PATH_PLANNING.md](../docs/01_learning/LEARNING_PATH_PLANNING.md)、[CROSS_MODULE_INTEGRATION_EXAMPLES.md](../docs/05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md) | 学习路径、跨模块集成示例 |
 
@@ -72,7 +72,7 @@
 | Cargo Book | <https://doc.rust-lang.org/cargo/> | [cargo_cheatsheet](../docs/02_reference/quick_reference/cargo_cheatsheet.md) |
 | Command Line Book | <https://rust-cli.github.io/book/> | [CLI_APPLICATIONS_GUIDE](../docs/05_guides/CLI_APPLICATIONS_GUIDE.md) |
 | Embedded Book | <https://doc.rust-lang.org/embedded-book/> | [EMBEDDED_RUST_GUIDE](../docs/05_guides/EMBEDDED_RUST_GUIDE.md) |
-| Rustlings | <https://github.com/rust-lang/rustlings> | [RUSTLINGS_MAPPING](../exercises/RUSTLINGS_MAPPING.md) |
+| Rustlings | <https://github.com/rust-lang/rustlings> | [RUSTLINGS_MAPPING](../exercises/rustlings_mapping.md) |
 | Brown 交互版 | <https://rust-book.cs.brown.edu/> | 测验、可视化、高亮 |
 | Compiler Error Index | <https://doc.rust-lang.org/error-index.html> | [ERROR_CODE_MAPPING](../docs/02_reference/ERROR_CODE_MAPPING.md) |
 

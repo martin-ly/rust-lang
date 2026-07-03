@@ -1,4 +1,7 @@
 # QUIC / HTTP/3 指南 {#quic-http3-指南}
+
+> **EN**: QUIC
+> **Summary**: HTTP/3 指南 QUIC.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

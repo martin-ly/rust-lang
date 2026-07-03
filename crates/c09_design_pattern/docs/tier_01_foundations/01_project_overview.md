@@ -604,7 +604,7 @@ fn main() {
 
 **推荐文档**:
 
-- [KNOWLEDGE_GRAPH](../KNOWLEDGE_GRAPH.md)、[MULTIDIMENSIONAL_MATRIX](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md) - 形式化理论
+- [KNOWLEDGE_GRAPH](../knowledge_graph.md)、[MULTIDIMENSIONAL_MATRIX](../multidimensional_matrix_comparison.md) - 形式化理论
 - [Tier 4](../tier_04_advanced/README.md) - 高级主题
 
 ---
@@ -654,9 +654,9 @@ fn main() {
 - [主索引导航](02_navigation.md)
 - [术语表](03_glossary.md)
 - [FAQ](04_faq.md)
-- [知识图谱](../KNOWLEDGE_GRAPH.md)
-- [思维导图](../RUST_190_COMPREHENSIVE_MINDMAP.md)
-- [实战示例集](../RUST_190_EXAMPLES_COLLECTION.md)
+- [知识图谱](../knowledge_graph.md)
+- [思维导图](../rust_190_comprehensive_mindmap.md)
+- [实战示例集](../rust_190_examples_collection.md)
 
 ### 外部资源
 

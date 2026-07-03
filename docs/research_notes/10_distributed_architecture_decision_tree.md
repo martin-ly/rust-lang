@@ -1,5 +1,7 @@
 # 分布式架构决策树 {#分布式架构决策树}
 
+> **EN**: Distributed Architecture Decision Tree
+> **Summary**: 分布式架构决策树 Distributed Architecture Decision Tree.
 > **概念族**: 软件设计 / 分布式系统
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

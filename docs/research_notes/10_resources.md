@@ -1,5 +1,7 @@
 # 研究资源汇总 {#研究资源汇总}
 
+> **EN**: Resources
+> **Summary**: 研究资源汇总 Resources. (stub/archive redirect)
 > **概念族**: 参考资源
 > **内容分级**: [归档级]
 >

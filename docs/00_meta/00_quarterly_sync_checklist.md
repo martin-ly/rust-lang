@@ -1,4 +1,7 @@
 # 📅 每季度权威来源同步检查表 {#每季度权威来源同步检查表}
+
+> **EN**: Quarterly Sync Checklist
+> **Summary**: 📅 每季度权威来源同步检查表 Quarterly Sync Checklist. (stub/archive redirect)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

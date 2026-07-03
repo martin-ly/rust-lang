@@ -1,5 +1,7 @@
 # 宏系统使用指南 {#宏系统使用指南}
 
+> **EN**: Macro System Usage Guide
+> **Summary**: 宏系统使用指南 Macro System Usage Guide. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 >

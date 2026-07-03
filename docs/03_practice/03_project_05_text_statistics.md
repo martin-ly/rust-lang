@@ -1,4 +1,7 @@
 # 实践项目 05: 文本统计工具 {#实践项目-05-文本统计工具}
+
+> **EN**: Project 05 Text Statistics
+> **Summary**: 实践项目 05 Project 05 Text Statistics.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

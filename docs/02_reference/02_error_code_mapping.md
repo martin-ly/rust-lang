@@ -1,5 +1,7 @@
 # Rust 编译器错误码映射文档 {#rust-编译器错误码映射文档}
 
+> **EN**: Error Code Mapping
+> **Summary**: Rust 编译器错误码映射文档 Error Code Mapping.
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 >
@@ -2077,7 +2079,7 @@ fn fib(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 }
 ```
 
-**相关概念**: [递归异步](../../crates/c09_design_pattern/docs/ASYNC_RECURSION_ANALYSIS.md)
+**相关概念**: [递归异步](../../crates/c09_design_pattern/docs/async_recursion_analysis.md)
 
 ---
 

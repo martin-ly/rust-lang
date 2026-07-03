@@ -1,5 +1,7 @@
 # 最终验证检查清单 {#最终验证检查清单}
 
+> **EN**: Final Verification Checklist
+> **Summary**: 最终验证检查清单 Final Verification Checklist.
 > **概念族**: 进度 / 统计 / 完成度
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

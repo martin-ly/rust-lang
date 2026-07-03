@@ -1,5 +1,7 @@
 # 算法选择决策树速查卡 {#算法选择决策树速查卡}
 
+> **EN**: Algorithm Decision Cheatsheet
+> **Summary**: 算法选择决策树速查卡 Algorithm Decision Cheatsheet.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)

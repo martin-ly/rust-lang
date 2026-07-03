@@ -1,5 +1,7 @@
 # 00 - 开始学习 Rust
 
+> **EN**: Start Index
+> **Summary**: 00 - 开始学习 Rust Start Index.
 > **Bloom 层级**: 理解
 > **从这里开始你的 Rust 之旅**
 >

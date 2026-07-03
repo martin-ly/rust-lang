@@ -11,6 +11,8 @@
 
 # 所有权、借用与生命周期：三位一体的内存安全 {#所有权借用与生命周期三位一体的内存安全}
 
+> **EN**: Ownership Borrowing Lifetimes
+> **Summary**: 所有权、借用与生命周期 Ownership Borrowing Lifetimes.
 > **Bloom 层级**: L1-L2 (记忆/理解)
 > **Rust 版本**: 1.96.0+
 > **难度**: 初级 → 中级

@@ -1,5 +1,7 @@
 # Rustdoc 高级功能与文档生成 {#rustdoc-高级功能与文档生成}
 
+> **EN**: Rustdoc Advanced
+> **Summary**: Rustdoc 高级功能与文档生成 Rustdoc Advanced.
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
 > **创建日期**: 2026-02-15

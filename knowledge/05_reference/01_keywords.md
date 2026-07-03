@@ -1,5 +1,7 @@
 # Rust 关键字参考手册
 
+> **EN**: Keywords
+> **Summary**: Rust 关键字参考手册 Keywords.
 > **Bloom 层级**: 理解
 > **版本**: Rust Edition 2024
 > **适用范围**: 所有 Rust 开发者

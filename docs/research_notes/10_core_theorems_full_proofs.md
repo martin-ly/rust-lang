@@ -1,5 +1,7 @@
 # 核心定理完整证明（L2 级） {#核心定理完整证明l2-级}
 
+> **EN**: Core Theorems Full Proofs
+> **Summary**: 核心定理完整证明 L2 级 Core Theorems Full Proofs.
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 > **分级**: [B]

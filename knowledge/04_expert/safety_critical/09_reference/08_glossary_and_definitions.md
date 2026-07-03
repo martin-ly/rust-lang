@@ -9,6 +9,8 @@
 >
 # Rust安全关键系统 - 术语表与定义
 
+> **EN**: Glossary And Definitions
+> **Summary**: Rust安全关键系统 - 术语表与定义 Glossary And Definitions.
 > **Bloom 层级**: 理解
 
 ## A

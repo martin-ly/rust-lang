@@ -1,5 +1,7 @@
 # Rust 版本跟踪
 
+> **EN**: Version Tracking
+> **Summary**: Rust 版本跟踪 Version Tracking.
 > **Bloom 层级**: 理解
 > 自动跟踪 Rust 版本更新和知识库同步状态
 

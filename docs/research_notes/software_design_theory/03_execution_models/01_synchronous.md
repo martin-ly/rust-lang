@@ -1,5 +1,7 @@
 # 同步执行模型形式化 {#同步执行模型形式化}
 
+> **EN**: Synchronous
+> **Summary**: 同步执行模型形式化 Synchronous. (stub/archive redirect)
 > **概念族**: 软件设计 / 执行模型
 > **内容分级**: [归档级]
 >
@@ -115,7 +117,6 @@ fn main() {
     println!("{}", z);
 
 }
-
 
 fn compute(n: i32) -> i32 {
 

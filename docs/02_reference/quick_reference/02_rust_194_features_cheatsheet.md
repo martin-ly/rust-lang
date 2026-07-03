@@ -1,5 +1,7 @@
 # Rust 1.94 引入特性速查卡（1.96+ 稳定可用）/ Rust 1.94 Features Cheatsheet (Stable in 1.96+) {#rust-194-引入特性速查卡196-稳定可用-rust-194-features-cheatsheet-stable-in-196}
 
+> **EN**: Rust 1.94 Features Cheatsheet Stable in 1.96+
+> **Summary**: Rust 1.94 引入特性速查卡 1.96+ 稳定可用 / Rust 1.94 Features Cheatsheet Stable in 1.96+.
 > **分级**: [A]
 > **引入版本**: 1.94.0 | **稳定版本**: 1.96.0+ (项目 MSRV)
 > **最后更新**: 2026-05-08

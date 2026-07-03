@@ -1,5 +1,7 @@
 # 设计模式权威来源对齐矩阵 {#设计模式权威来源对齐矩阵}
 
+> **EN**: Design Patterns Authoritative Alignment
+> **Summary**: 设计模式权威来源对齐矩阵 Design Patterns Authoritative Alignment.
 > **概念族**: 权威来源对齐 / 设计模式
 > **内容分级**: [核心级]
 > **层级**: L0-L5

@@ -1,5 +1,7 @@
 # 反模式与边界 {#反模式与边界}
 
+> **EN**: Anti Patterns
+> **Summary**: 反模式与边界 Anti Patterns. (stub/archive redirect)
 > **概念族**: 软件设计 / 反模式
 > **内容分级**: [归档级]
 >
@@ -154,7 +156,6 @@ println!("{}", s);  // 编译错误：value used after move
 use std::rc::Rc;
 
 use std::cell::RefCell;
-
 
 struct Node {
 

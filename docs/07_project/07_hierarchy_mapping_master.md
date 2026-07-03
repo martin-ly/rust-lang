@@ -1,5 +1,7 @@
 # 知识体系全局层次映射总表 {#知识体系全局层次映射总表}
 
+> **EN**: Hierarchy Mapping Master
+> **Summary**: 知识体系全局层次映射总表 Hierarchy Mapping Master. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L4-L5 (分析/评价)
 > **定位**: 三轨道（concept/ / knowledge/ / docs/）核心文件的层次关系、定理链、跨层映射的单一事实来源

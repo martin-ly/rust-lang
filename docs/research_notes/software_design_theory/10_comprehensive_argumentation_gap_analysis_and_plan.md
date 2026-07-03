@@ -1,4 +1,7 @@
 # 设计模式、分布式模式、工作流模式全面论证缺口分析与推进计划 {#设计模式分布式模式工作流模式全面论证缺口分析与推进计划}
+
+> **EN**: Comprehensive Argumentation Gap Analysis And Plan
+> **Summary**: 设计模式、分布式模式、工作流模式全面论证缺口分析与推进计划 Comprehensive Argumentation Gap Analysis And Plan.
 >
 > **概念族**: 软件设计理论
 > **内容分级**: [归档级]

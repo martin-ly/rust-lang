@@ -1,5 +1,7 @@
 # 项目架构指南 {#项目架构指南}
 
+> **EN**: Project Architecture Guide
+> **Summary**: 项目架构指南 Project Architecture Guide. (stub/archive redirect)
 > **分级**: [A]
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-05-08

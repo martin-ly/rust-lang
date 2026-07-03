@@ -1,5 +1,7 @@
 # Rust 2024 Edition Async Closures 完整指南
 
+> **EN**: Async Closures 2024
+> **Summary**: Rust 2024 Edition Async Closures 完整指南 Async Closures 2024. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/03_advanced/24_async_closures.md](../../../concept/03_advanced/24_async_closures.md)。
 > **历史版本存档**: [archive/knowledge/03_advanced/async/01_async_closures_2024.md](../../../archive/knowledge/03_advanced/async/01_async_closures_2024.md)
 >

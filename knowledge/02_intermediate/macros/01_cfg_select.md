@@ -1,4 +1,7 @@
 # `cfg_select!` 宏（Rust 1.95.0）
+
+> **EN**: Rust 1.95.0
+> **Summary**: cfg_select! 宏 Rust 1.95.0.
 >
 > **相关概念**: [Select](../../../concept/03_advanced/02_async.md)
 > **Bloom 层级**: 理解

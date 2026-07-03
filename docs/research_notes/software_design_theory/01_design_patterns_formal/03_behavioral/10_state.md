@@ -1,5 +1,7 @@
 # State 形式化分析 {#state-形式化分析}
 
+> **EN**: State
+> **Summary**: State 形式化分析 State.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -234,9 +236,7 @@ State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。
 ```rust
 enum State { A, B, C }
 
-
 struct Context { state: State }
-
 
 impl Context {
 
@@ -256,7 +256,6 @@ impl Context {
 
 }
 
-
 // 类型状态（零成本）
 
 struct Config<State> { data: i32, _marker: std::marker::PhantomData<State> }
@@ -265,7 +264,6 @@ struct Locked;
 
 struct Unlocked;
 
-
 impl Config<Locked> {
 
     fn new() -> Self { Self { data: 0, _marker: std::marker::PhantomData } }
@@ -273,7 +271,6 @@ impl Config<Locked> {
     fn unlock(self) -> Config<Unlocked> { Config { data: self.data, _marker: std::marker::PhantomData } }
 
 }
-
 
 impl Config<Unlocked> {
 
@@ -300,7 +297,6 @@ trait State {
 
 }
 
-
 struct Draft;
 
 impl State for Draft {
@@ -314,7 +310,6 @@ impl State for Draft {
     }
 
 }
-
 
 struct Moderation;
 
@@ -330,7 +325,6 @@ impl State for Moderation {
 
 }
 
-
 struct Published;
 
 impl State for Published {
@@ -338,7 +332,6 @@ impl State for Published {
     fn handle(self: Box<Self>) -> Box<dyn State> { self }
 
 }
-
 
 struct Post { state: Box<dyn State> }
 
@@ -349,7 +342,6 @@ impl Post {
     fn request_review(&mut self) { self.state = self.state.handle(); }
 
 }
-
 
 fn main() {
 
@@ -500,9 +492,7 @@ enum + match / 类型状态
 
 enum OrderState { Pending, Paid, Shipped, Completed }
 
-
 struct Order { id: u64, state: OrderState }
-
 
 impl Order {
 

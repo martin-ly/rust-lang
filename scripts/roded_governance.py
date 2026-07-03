@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ROD (rust-ownership-decidability) 目录批量治理脚本
+归档迁移脚本：ROD (rust-ownership-decidability) 目录批量治理脚本
 
 策略：
 - 扫描 docs/rust-ownership-decidability/ 中的所有 .md 文件

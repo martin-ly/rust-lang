@@ -1,5 +1,7 @@
 # Emerging 前沿特性
 
+> **EN**: Emerging Index
+> **Summary**: Emerging 前沿特性 Emerging Index.
 > **Bloom 层级**: 理解
 > **Rust 不稳定特性和未来方向**
 >

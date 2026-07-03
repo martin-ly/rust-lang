@@ -1,5 +1,7 @@
 # 形式化工具验证指南 {#形式化工具验证指南}
 
+> **EN**: Formal Verification Guide
+> **Summary**: 形式化工具验证指南 Formal Verification Guide. (stub/archive redirect)
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 >
@@ -129,13 +131,11 @@
 
 opam install coq
 
-
 # 或使用包管理器 {#或使用包管理器}
 
 # Ubuntu/Debian {#ubuntudebian}
 
 sudo apt-get install coq
-
 
 # macOS {#macos}
 
@@ -154,7 +154,6 @@ Inductive OwnershipState : Type :=
   | Moved
 
   | Borrowed.
-
 
 (* 定义所有权规则 *)
 
@@ -198,14 +197,11 @@ imports Main
 
 begin
 
-
 datatype ownership_state = Owned | Moved | Borrowed
-
 
 definition move_rule :: "ownership_state ⇒ ownership_state"
 
 where "move_rule s = (case s of Owned ⇒ Moved | _ ⇒ s)"
-
 
 end
 ```
@@ -296,7 +292,6 @@ formal_verification/
 
 Require Import Coq.Arith.Arith.
 
-
 (* 定义所有权状态 *)
 
 Inductive OwnershipState : Type :=
@@ -306,7 +301,6 @@ Inductive OwnershipState : Type :=
   | Moved
 
   | Borrowed.
-
 
 (* 定义所有权转移 *)
 
@@ -319,7 +313,6 @@ Definition transfer_ownership (s: OwnershipState) : OwnershipState :=
   | _ => s
 
   end.
-
 
 (* 验证所有权唯一性 *)
 
@@ -359,7 +352,6 @@ Qed.
 
 Require Import ownership_model.
 
-
 (* 定义借用类型 *)
 
 Inductive BorrowType : Type :=
@@ -367,7 +359,6 @@ Inductive BorrowType : Type :=
   | Immutable
 
   | Mutable.
-
 
 (* 定义借用规则 *)
 
@@ -386,7 +377,6 @@ Definition borrow_rule (s: OwnershipState) (bt: BorrowType) : Prop :=
   | Moved, _ => False
 
   end.
-
 
 (* 验证数据竞争自由 *)
 
@@ -428,18 +418,15 @@ Qed.
 
 Require Import Coq.Arith.Arith.
 
-
 (* 定义生命周期 *)
 
 Definition Lifetime := nat.
-
 
 (* 定义引用有效性 *)
 
 Definition reference_valid (l: Lifetime) (scope: Lifetime) : Prop :=
 
   l <= scope.
-
 
 (* 验证引用有效性 *)
 
@@ -475,7 +462,6 @@ Qed.
 
 Require Import Coq.Lists.List.
 
-
 (* 定义类型 *)
 
 Inductive Type_ : Type :=
@@ -486,7 +472,6 @@ Inductive Type_ : Type :=
 
   | Function (arg ret: Type_).
 
-
 (* 定义类型推导 *)
 
 Inductive TypeCheck : list (nat * Type_) -> nat -> Type_ -> Prop :=
@@ -496,7 +481,6 @@ Inductive TypeCheck : list (nat * Type_) -> nat -> Type_ -> Prop :=
   | TC_Fun : forall env n arg ret,
 
       TypeCheck env n (Function arg ret).
-
 
 (* 验证类型安全 *)
 
@@ -530,13 +514,11 @@ Admitted.
 
 Require Import Coq.Arith.Arith.
 
-
 (* 定义 Future 状态 *)
 
 Inductive FutureState : Type :=
 
   | Pending | Ready | Waiting | Polling.
-
 
 (* 定义有效状态转换 *)
 
@@ -553,7 +535,6 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
   | _ , _ => False
 
   end.
-
 
 (* 定理 6.1 状态一致性、6.2 并发安全、6.3 进度保证 *)
 ```
@@ -574,7 +555,6 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ```coq
 (* pin_self_referential.v *)
-
 
 (* 定义 Unpin / !Unpin、Pin 不变式：被 Pin 值的位置稳定性 *)
 

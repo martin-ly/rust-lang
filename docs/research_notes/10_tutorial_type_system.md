@@ -1,5 +1,7 @@
 # 教程：类型系统 {#教程类型系统}
 
+> **EN**: Tutorial Type System
+> **Summary**: 教程 Tutorial Type System.
 > **概念族**: 教程
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -116,18 +118,15 @@ let bin = 0b1010;       // 二进制
 
 let oct = 0o77;         // 八进制
 
-
 // 浮点数
 
 let f: f64 = 3.14;      // 64位浮点
 
 let g: f32 = 2.5;       // 32位浮点
 
-
 // 布尔
 
 let b: bool = true;
-
 
 // 字符
 
@@ -149,7 +148,6 @@ let (x, y, z) = tup;           // 解构
 
 let first = tup.0;              // 索引访问
 
-
 // 数组
 
 let arr: [i32; 5] = [1, 2, 3, 4, 5];
@@ -157,7 +155,6 @@ let arr: [i32; 5] = [1, 2, 3, 4, 5];
 let first = arr[0];
 
 let zeros = [0; 5];             // [0, 0, 0, 0, 0]
-
 
 // 切片
 
@@ -192,7 +189,6 @@ struct User {
 
 }
 
-
 let user = User {
 
     email: String::from("a@b.com"),
@@ -205,13 +201,11 @@ let user = User {
 
 };
 
-
 // 元组结构体
 
 struct Point(i32, i32, i32);
 
 let origin = Point(0, 0, 0);
-
 
 // 单元结构体
 
@@ -241,7 +235,6 @@ enum Message {
 
 }
 
-
 // Option枚举 (标准库)
 
 enum Option<T> {
@@ -251,7 +244,6 @@ enum Option<T> {
     None,
 
 }
-
 
 // Result枚举 (标准库)
 
@@ -276,7 +268,6 @@ let msg1 = Message::Quit;
 let msg2 = Message::Move { x: 10, y: 20 };
 
 let msg3 = Message::Write(String::from("hello"));
-
 
 // 使用match处理
 
@@ -318,7 +309,6 @@ enum Coin {
     Quarter(String),  // 关联数据
 
 }
-
 
 fn value_in_cents(coin: Coin) -> u8 {
 
@@ -366,7 +356,6 @@ match some_option {
 
 }
 
-
 // 简化版
 
 if let Some(value) = some_option {
@@ -382,7 +371,6 @@ if let Some(value) = some_option {
 
 ```rust
 let num = Some(4);
-
 
 match num {
 
@@ -406,9 +394,7 @@ enum Message {
 
 }
 
-
 let msg = Message::Hello { id: 5 };
-
 
 match msg {
 
@@ -445,11 +431,9 @@ fn swap<T>(a: T, b: T) -> (T, T) {
 
 }
 
-
 let (x, y) = swap(1, 2);        // T = i32
 
 let (a, b) = swap("hi", "bye"); // T = &str
-
 
 // 多个类型参数
 
@@ -473,11 +457,9 @@ struct Point<T> {
 
 }
 
-
 let integer = Point { x: 5, y: 10 };
 
 let float = Point { x: 1.0, y: 4.0 };
-
 
 // 多类型参数
 
@@ -488,7 +470,6 @@ struct Point2<T, U> {
     y: U,
 
 }
-
 
 let mixed = Point2 { x: 5, y: 4.0 };
 ```
@@ -507,7 +488,6 @@ enum Option<T> {
     None,
 
 }
-
 
 // 使用
 
@@ -536,7 +516,6 @@ pub trait Summary {
 
     fn summarize(&self) -> String;
 
-
     // 默认实现
 
     fn summarize_author(&self) -> String {
@@ -546,7 +525,6 @@ pub trait Summary {
     }
 
 }
-
 
 // 为类型实现trait
 
@@ -561,7 +539,6 @@ pub struct NewsArticle {
     pub content: String,
 
 }
-
 
 impl Summary for NewsArticle {
 
@@ -587,7 +564,6 @@ pub fn notify(item: &impl Summary) {
 
 }
 
-
 // Trait Bound语法 (等效)
 
 pub fn notify<T: Summary>(item: &T) {
@@ -595,7 +571,6 @@ pub fn notify<T: Summary>(item: &T) {
     println!("Breaking news! {}", item.summarize());
 
 }
-
 
 // 多个trait bound
 
@@ -631,18 +606,15 @@ pub trait Iterator {
 
     type Item;  // 关联类型
 
-
     fn next(&mut self) -> Option<Self::Item>;
 
 }
-
 
 // 实现
 
 impl Iterator for Counter {
 
     type Item = u32;
-
 
     fn next(&mut self) -> Option<Self::Item> {
 
@@ -669,7 +641,6 @@ let guess: u32 = "42".parse().expect("Not a number!");
 
 // 必须标注，因为parse可能返回多种类型
 
-
 // 编译器能推导的情况
 
 let v = vec![1, 2, 3];  // Vec<i32>
@@ -684,19 +655,15 @@ let s = "hello";        // &str
 ```rust
 type Kilometers = i32;
 
-
 let x: i32 = 5;
 
 let y: Kilometers = 5;
 
-
 assert_eq!(x, y);  // 类型别名只是别名，不是新类型
-
 
 // 复杂类型简化
 
 type Thunk = Box<dyn Fn() + Send + 'static>;
-
 
 fn takes_long_type(f: Thunk) { }
 ```
@@ -711,7 +678,6 @@ fn bar() -> ! {  // !表示never type
     panic!();
 
 }
-
 
 // 用于控制流
 
@@ -740,11 +706,9 @@ let guess: u32 = match guess.trim().parse() {
 
 fn generic<T: Sized>(t: T) { }
 
-
 // ?Sized允许动态大小类型
 
 fn generic<T: ?Sized>(t: &T) { }  // T可以是str或[DST]
-
 
 // 常见DST: str, [T], dyn Trait
 
@@ -764,13 +728,11 @@ fn add_one(x: i32) -> i32 {
 
 }
 
-
 // 函数指针类型
 
 let f: fn(i32) -> i32 = add_one;
 
 let f = add_one;  // 类型推导
-
 
 // 与闭包不同
 
@@ -792,13 +754,11 @@ let a: i32 = 10;
 
 let b: i64 = a as i64;
 
-
 // From/Into trait
 
 let s = String::from("hello");  // From<&str>
 
 let s: String = "hello".into(); // Into<String>
-
 
 // TryFrom/TryInto (可能失败)
 
@@ -1016,7 +976,6 @@ let r = &mut x;
 // T: Send - 可安全跨线程转移
 
 // T: Sync - 可安全跨线程共享
-
 
 let data = Arc::new(5);
 

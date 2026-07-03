@@ -109,7 +109,7 @@
 - [1.0 项目概览](01_project_overview.md)
 - [1.2 术语表](03_glossary.md)
 - [现有: 综合指南](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md)
-- [现有: 实战示例](../RUST_190_EXAMPLES_COLLECTION.md) (800+行)
+- [现有: 实战示例](../rust_190_examples_collection.md) (800+行)
 
 **推荐模式** (从易到难):
 
@@ -139,9 +139,9 @@
 **关键文档**:
 
 - Tier 2: 所有实践指南 (现有文档)
-- [知识图谱](../KNOWLEDGE_GRAPH.md)
-- [多维矩阵对比](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md)
-- [思维导图](../RUST_190_COMPREHENSIVE_MINDMAP.md)
+- [知识图谱](../knowledge_graph.md)
+- [多维矩阵对比](../multidimensional_matrix_comparison.md)
+- [思维导图](../rust_190_comprehensive_mindmap.md)
 
 **推荐顺序**:
 
@@ -168,10 +168,10 @@
 **关键文档**:
 
 - [Tier 4: 高级主题](../tier_04_advanced/README.md)
-- [Actor/Reactor模式分析](../ACTOR_REACTOR_PATTERNS.md)
-- [CSP vs Async分析](../CSP_VS_ASYNC_ANALYSIS.md)
-- [异步等价理论](../ASYNC_SYNC_EQUIVALENCE_THEORY.md)
-- [异步递归分析](../ASYNC_RECURSION_ANALYSIS.md)
+- [Actor/Reactor模式分析](../actor_reactor_patterns.md)
+- [CSP vs Async分析](../csp_vs_async_analysis.md)
+- [异步等价理论](../async_sync_equivalence_theory.md)
+- [异步递归分析](../async_recursion_analysis.md)
 
 **研究重点**:
 
@@ -200,13 +200,13 @@ static INSTANCE: OnceLock<Config> = OnceLock::new();
 
 - **用途**: 对象创建抽象
 - **Rust实现**: Trait + 泛型
-- **文档**: [实战示例](../RUST_190_EXAMPLES_COLLECTION.md)
+- **文档**: [实战示例](../rust_190_examples_collection.md)
 
 **建造者模式 - Builder**:
 
 - **用途**: 复杂对象构建
 - **Rust实现**: Typestate 模式
-- **文档**: [实战示例](../RUST_190_EXAMPLES_COLLECTION.md)
+- **文档**: [实战示例](../rust_190_examples_collection.md)
 
 **原型模式 - Prototype**:
 
@@ -274,13 +274,13 @@ static INSTANCE: OnceLock<Config> = OnceLock::new();
 
 - **用途**: 事件驱动
 - **Rust实现**: GATs, 回调
-- **文档**: [实战示例](../RUST_190_EXAMPLES_COLLECTION.md)
+- **文档**: [实战示例](../rust_190_examples_collection.md)
 
 **策略模式 - Strategy**:
 
 - **用途**: 算法切换
 - **Rust实现**: Trait对象 / 泛型
-- **文档**: [实战示例](../RUST_190_EXAMPLES_COLLECTION.md)
+- **文档**: [实战示例](../rust_190_examples_collection.md)
 
 **命令模式 - Command**:
 
@@ -344,13 +344,13 @@ static INSTANCE: OnceLock<Config> = OnceLock::new();
 
 - **用途**: 并发状态管理
 - **Rust实现**: `tokio::mpsc`, `actix`
-- **文档**: [Actor/Reactor分析](../ACTOR_REACTOR_PATTERNS.md)
+- **文档**: [Actor/Reactor分析](../actor_reactor_patterns.md)
 
 **CSP 模式** (Communicating Sequential Processes):
 
 - **用途**: 通道通信
 - **Rust实现**: `std::sync::mpsc`, `crossbeam`
-- **文档**: [CSP vs Async](../CSP_VS_ASYNC_ANALYSIS.md)
+- **文档**: [CSP vs Async](../csp_vs_async_analysis.md)
 
 **工作窃取 - Work Stealing**:
 
@@ -396,13 +396,13 @@ static INSTANCE: OnceLock<Config> = OnceLock::new();
 
 - **用途**: 零成本异步抽象
 - **Rust实现**: `std::future::Future`
-- **文档**: [异步等价理论](../ASYNC_SYNC_EQUIVALENCE_THEORY.md)
+- **文档**: [异步等价理论](../async_sync_equivalence_theory.md)
 
 **Reactor 模式**:
 
 - **用途**: 事件驱动I/O
 - **Rust实现**: `tokio`, `smol`
-- **文档**: [Actor/Reactor分析](../ACTOR_REACTOR_PATTERNS.md)
+- **文档**: [Actor/Reactor分析](../actor_reactor_patterns.md)
 
 **异步生成器 - Async Generator**:
 
@@ -420,7 +420,7 @@ static INSTANCE: OnceLock<Config> = OnceLock::new();
 
 - **用途**: 递归异步调用
 - **Rust实现**: `Box::pin` + `async-recursion`
-- **文档**: [异步递归分析](../ASYNC_RECURSION_ANALYSIS.md)
+- **文档**: [异步递归分析](../async_recursion_analysis.md)
 
 **取消模式 - Cancellation**:
 
@@ -591,18 +591,18 @@ static INSTANCE: OnceLock<Config> = OnceLock::new();
 
 | 目录/文档                                                                           | 内容              | 行数估计 |
 | :--- | :--- | :--- || [COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) | 综合设计模式指南  | ~3000    |
-| [RUST_190_EXAMPLES_COLLECTION.md](../RUST_190_EXAMPLES_COLLECTION.md)               | 800+行实战代码    | 800+     |
-| [RUST_190_COMPREHENSIVE_MINDMAP.md](../RUST_190_COMPREHENSIVE_MINDMAP.md)           | 完整思维导图      | ~1500    |
-| [KNOWLEDGE_GRAPH.md](../KNOWLEDGE_GRAPH.md)                                         | 知识图谱          | ~2000    |
-| [MULTIDIMENSIONAL_MATRIX_COMPARISON.md](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md)   | 多维对比          | ~2000    |
+| [RUST_190_EXAMPLES_COLLECTION.md](../rust_190_examples_collection.md)               | 800+行实战代码    | 800+     |
+| [RUST_190_COMPREHENSIVE_MINDMAP.md](../rust_190_comprehensive_mindmap.md)           | 完整思维导图      | ~1500    |
+| [KNOWLEDGE_GRAPH.md](../knowledge_graph.md)                                         | 知识图谱          | ~2000    |
+| [MULTIDIMENSIONAL_MATRIX_COMPARISON.md](../multidimensional_matrix_comparison.md)   | 多维对比          | ~2000    |
 | - MULTI_DIMENSIONAL_COMPARISON_MATRIX.md                                            | 多维矩阵对比      | ~2000    |
 | - MINDMAP_VISUALIZATION.md                                                          | 思维导图可视化    | ~1000    |
-| [ACTOR_REACTOR_PATTERNS.md](../ACTOR_REACTOR_PATTERNS.md)                           | Actor/Reactor深入 | ~2000    |
-| [CSP_VS_ASYNC_ANALYSIS.md](../CSP_VS_ASYNC_ANALYSIS.md)                             | CSP vs Async对比  | ~1500    |
-| [ASYNC_SYNC_EQUIVALENCE_THEORY.md](../ASYNC_SYNC_EQUIVALENCE_THEORY.md)             | 异步等价理论      | ~2000    |
-| [ASYNC_RECURSION_ANALYSIS.md](../ASYNC_RECURSION_ANALYSIS.md)                       | 异步递归分析      | ~1500    |
-| [KNOWLEDGE_GRAPH.md](../KNOWLEDGE_GRAPH.md)                                         | 设计模式关系图谱  | ~1000    |
-| [MIND_MAP.md](../MIND_MAP.md)                                                       | 思维导图          | ~800     |
+| [ACTOR_REACTOR_PATTERNS.md](../actor_reactor_patterns.md)                           | Actor/Reactor深入 | ~2000    |
+| [CSP_VS_ASYNC_ANALYSIS.md](../csp_vs_async_analysis.md)                             | CSP vs Async对比  | ~1500    |
+| [ASYNC_SYNC_EQUIVALENCE_THEORY.md](../async_sync_equivalence_theory.md)             | 异步等价理论      | ~2000    |
+| [ASYNC_RECURSION_ANALYSIS.md](../async_recursion_analysis.md)                       | 异步递归分析      | ~1500    |
+| [KNOWLEDGE_GRAPH.md](../knowledge_graph.md)                                         | 设计模式关系图谱  | ~1000    |
+| [MIND_MAP.md](../mind_map.md)                                                       | 思维导图          | ~800     |
 | [tier_02_guides/README.md](../tier_02_guides/README.md)                             | Tier 2 导航       | 现有     |
 | [tier_03_references/README.md](../tier_03_references/README.md)                     | Tier 3 导航       | 现有     |
 | [tier_04_advanced/README.md](../tier_04_advanced/README.md)                         | Tier 4 导航       | 现有     |
@@ -615,7 +615,7 @@ static INSTANCE: OnceLock<Config> = OnceLock::new();
 
 **800+行实战代码集合**:
 
-- [RUST_190_EXAMPLES_COLLECTION.md](../RUST_190_EXAMPLES_COLLECTION.md)
+- [RUST_190_EXAMPLES_COLLECTION.md](../rust_190_examples_collection.md)
 
 **包含模式**:
 
@@ -630,7 +630,7 @@ static INSTANCE: OnceLock<Config> = OnceLock::new();
 
 ```bash
 # 查看示例文档
-cat crates/c09_design_pattern/docs/RUST_190_EXAMPLES_COLLECTION.md
+cat crates/c09_design_pattern/docs/rust_190_examples_collection.md
 
 # 运行测试
 cargo test --package c09_design_pattern
@@ -666,7 +666,7 @@ Day 6-7: 完整项目
 
 - [项目概览](01_project_overview.md)
 - [综合指南](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md)
-- [实战示例](../RUST_190_EXAMPLES_COLLECTION.md)
+- [实战示例](../rust_190_examples_collection.md)
 
 ---
 
@@ -692,9 +692,9 @@ Day 6-7: 完整项目
 
 **推荐文档**:
 
-- [知识图谱](../KNOWLEDGE_GRAPH.md)
-- [多维对比](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md)
-- [思维导图](../RUST_190_COMPREHENSIVE_MINDMAP.md)
+- [知识图谱](../knowledge_graph.md)
+- [多维对比](../multidimensional_matrix_comparison.md)
+- [思维导图](../rust_190_comprehensive_mindmap.md)
 
 ---
 
@@ -720,9 +720,9 @@ Day 6-7: 完整项目
 
 **推荐文档**:
 
-- [KNOWLEDGE_GRAPH](../KNOWLEDGE_GRAPH.md)、[MULTIDIMENSIONAL_MATRIX](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md) 全部文档
-- [Actor/Reactor分析](../ACTOR_REACTOR_PATTERNS.md)
-- [异步等价理论](../ASYNC_SYNC_EQUIVALENCE_THEORY.md)
+- [KNOWLEDGE_GRAPH](../knowledge_graph.md)、[MULTIDIMENSIONAL_MATRIX](../multidimensional_matrix_comparison.md) 全部文档
+- [Actor/Reactor分析](../actor_reactor_patterns.md)
+- [异步等价理论](../async_sync_equivalence_theory.md)
 
 ---
 
@@ -735,7 +735,7 @@ Day 6-7: 完整项目
 1. 阅读 [项目概览](01_project_overview.md)
 2. 浏览 [术语表](03_glossary.md)
 3. 学习 [综合指南](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md)
-4. 实践 [代码示例](../RUST_190_EXAMPLES_COLLECTION.md)
+4. 实践 [代码示例](../rust_190_examples_collection.md)
 
 **推荐顺序**: 单例 → 建造者 → 工厂 → 策略 → 观察者
 
@@ -752,8 +752,8 @@ Day 6-7: 完整项目
 
 **相关文档**:
 
-- [多维对比](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md)
-- [Actor/Reactor](../ACTOR_REACTOR_PATTERNS.md)
+- [多维对比](../multidimensional_matrix_comparison.md)
+- [Actor/Reactor](../actor_reactor_patterns.md)
 
 ---
 
@@ -768,9 +768,9 @@ Day 6-7: 完整项目
 
 **推荐文档**:
 
-- [异步等价理论](../ASYNC_SYNC_EQUIVALENCE_THEORY.md)
-- [CSP vs Async](../CSP_VS_ASYNC_ANALYSIS.md)
-- [异步递归分析](../ASYNC_RECURSION_ANALYSIS.md)
+- [异步等价理论](../async_sync_equivalence_theory.md)
+- [CSP vs Async](../csp_vs_async_analysis.md)
+- [异步递归分析](../async_recursion_analysis.md)
 
 ---
 
@@ -780,13 +780,13 @@ Day 6-7: 完整项目
 
 | 问题         | 推荐模式            | 文档                                                  |
 | :--- | :--- | :--- || 全局配置     | Singleton           | [FAQ](04_faq.md)                               |
-| 复杂对象构建 | Builder (Typestate) | [实战示例](../RUST_190_EXAMPLES_COLLECTION.md)        |
+| 复杂对象构建 | Builder (Typestate) | [实战示例](../rust_190_examples_collection.md)        |
 | 接口不兼容   | Adapter             | [综合指南](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) |
 | 动态功能扩展 | Decorator           | [综合指南](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) |
-| 算法切换     | Strategy            | [实战示例](../RUST_190_EXAMPLES_COLLECTION.md)        |
-| 事件通知     | Observer            | [实战示例](../RUST_190_EXAMPLES_COLLECTION.md)        |
-| 并发状态     | Actor               | [Actor分析](../ACTOR_REACTOR_PATTERNS.md)             |
-| 异步I/O      | Reactor             | [Actor分析](../ACTOR_REACTOR_PATTERNS.md)             |
+| 算法切换     | Strategy            | [实战示例](../rust_190_examples_collection.md)        |
+| 事件通知     | Observer            | [实战示例](../rust_190_examples_collection.md)        |
+| 并发状态     | Actor               | [Actor分析](../actor_reactor_patterns.md)             |
+| 异步I/O      | Reactor             | [Actor分析](../actor_reactor_patterns.md)             |
 
 ---
 
@@ -803,16 +803,16 @@ Day 6-7: 完整项目
 **核心资源**:
 
 - [综合指南](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md)
-- [实战示例集](../RUST_190_EXAMPLES_COLLECTION.md) (800+行)
-- [思维导图](../RUST_190_COMPREHENSIVE_MINDMAP.md)
-- [知识图谱](../KNOWLEDGE_GRAPH.md)
+- [实战示例集](../rust_190_examples_collection.md) (800+行)
+- [思维导图](../rust_190_comprehensive_mindmap.md)
+- [知识图谱](../knowledge_graph.md)
 
 **深度理论**:
 
 - [形式化理论体系](../tier_04_advanced/README.md)
-- [Actor/Reactor模式](../ACTOR_REACTOR_PATTERNS.md)
-- [CSP vs Async](../CSP_VS_ASYNC_ANALYSIS.md)
-- [异步等价理论](../ASYNC_SYNC_EQUIVALENCE_THEORY.md)
+- [Actor/Reactor模式](../actor_reactor_patterns.md)
+- [CSP vs Async](../csp_vs_async_analysis.md)
+- [异步等价理论](../async_sync_equivalence_theory.md)
 
 ---
 
@@ -864,14 +864,14 @@ Rust版本:      1.90+ / Edition 2024
 
 1. 查阅 [FAQ](04_faq.md)
 2. 查看 [术语表](03_glossary.md)
-3. 参考 [实战示例](../RUST_190_EXAMPLES_COLLECTION.md)
+3. 参考 [实战示例](../rust_190_examples_collection.md)
 4. 阅读 [综合指南](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md)
 
 **深入学习**:
 
-- 研究 [知识图谱](../KNOWLEDGE_GRAPH.md)
-- 查看 [思维导图](../RUST_190_COMPREHENSIVE_MINDMAP.md)
-- 分析 [多维对比](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md)
+- 研究 [知识图谱](../knowledge_graph.md)
+- 查看 [思维导图](../rust_190_comprehensive_mindmap.md)
+- 分析 [多维对比](../multidimensional_matrix_comparison.md)
 
 **反馈建议**:
 

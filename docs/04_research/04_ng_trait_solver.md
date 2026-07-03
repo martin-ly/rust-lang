@@ -1,4 +1,7 @@
 # Next-gen Trait Solver 跟踪报告 {#next-gen-trait-solver-跟踪报告}
+
+> **EN**: Ng Trait Solver
+> **Summary**: Next-gen Trait Solver 跟踪报告 Ng Trait Solver. (stub/archive redirect)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

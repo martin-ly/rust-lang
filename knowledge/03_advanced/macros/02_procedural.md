@@ -1,5 +1,7 @@
 # 过程宏 (Procedural Macros)
 
+> **EN**: Procedural Macros
+> **Summary**: 过程宏 Procedural Macros. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/03_advanced/07_proc_macro.md](../../../concept/03_advanced/07_proc_macro.md)。
 > **历史版本存档**: [archive/knowledge/03_advanced/macros/02_procedural.md](../../../archive/knowledge/03_advanced/macros/02_procedural.md)
 >

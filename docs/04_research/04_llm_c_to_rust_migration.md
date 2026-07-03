@@ -1,4 +1,7 @@
 # LLM 辅助 C to Rust 迁移工具评估报告 {#llm-辅助-c-to-rust-迁移工具评估报告}
+
+> **EN**: Llm C To Rust Migration
+> **Summary**: LLM 辅助 C to Rust 迁移工具评估报告 Llm C To Rust Migration. (stub/archive redirect)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

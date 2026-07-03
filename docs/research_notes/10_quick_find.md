@@ -1,5 +1,7 @@
 # 研究笔记快速查找 {#研究笔记快速查找}
 
+> **EN**: Quick Find
+> **Summary**: 研究笔记快速查找 Quick Find. (stub/archive redirect)
 > **概念族**: 综合研究
 > **内容分级**: [归档级]
 >

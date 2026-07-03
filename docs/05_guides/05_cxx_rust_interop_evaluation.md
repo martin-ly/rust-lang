@@ -1,4 +1,7 @@
 # C++ ↔ Rust 互操作评估 {#c-rust-互操作评估}
+
+> **EN**: Cxx Rust Interop Evaluation
+> **Summary**: C++ ↔ Rust 互操作评估 Cxx Rust Interop Evaluation. (stub/archive redirect)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

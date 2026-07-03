@@ -1,5 +1,7 @@
-﻿# Rust 工具链文档
+# Rust 工具链文档
 
+> **EN**: Toolchain Index
+> **Summary**: Rust 工具链文档 Toolchain Index. (stub/archive redirect)
 > **分级**: [A]
 ← [返回主索引](../README.md)
 

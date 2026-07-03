@@ -6,6 +6,8 @@
 
 # 型变理论 {#型变理论}
 
+> **EN**: Variance Theory
+> **Summary**: 型变理论 Variance Theory. (stub/archive redirect)
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -358,18 +360,13 @@ $$\text{Inv}[F] \Leftrightarrow \forall S, T. (S <: T \land S \neq T) \Rightarro
 ```rust,ignore
 // 假设 &mut T 协变，则 &mut &'static str <: &mut &'a str
 
-
 fn evil(mut r: &mut &'a str) {
-
 
     let short: &str = "short";
 
-
     *r = &short;  // 将短生命周期引用写入期望长生命周期的槽位
 
-
 }
-
 
 // r 离开后，若有 &'static str 被篡改为 &short，则形成悬垂引用
 ```
@@ -402,54 +399,37 @@ fn evil(mut r: &mut &'a str) {
 ```text
 型变安全性证明树
 
-
   A1: 子类型自反性 T <: T
-
 
   A2: 子类型传递性 S <: T ∧ T <: U ⇒ S <: U
 
-
   A3: 子类型语义：子类型可替换父类型
 
-
   │
-
 
   ├─ Def 1.1 协变 ──────────────────┐
 
-
   │   Cov[F] ⇔ S<:T ⇒ F[S]<:F[T]   │
-
 
   │                                 ├─→ T1 协变安全性
 
-
   ├─ Def 2.1 逆变 ──────────────────┤     F[S] 可安全替换 F[T]
-
 
   │   Contra[F] ⇔ S<:T ⇒ F[T]<:F[S] │
 
-
   │                                 ├─→ T2 逆变安全性
-
 
   ├─ Def 3.1 不变 ──────────────────┤     F[T] 可安全替换 F[S]
 
-
   │   Inv[F] ⇔ ...                  │
-
 
   │                                 └─→ T3 不变安全性
 
-
   │                                      F[S] 与 F[T] 不可替换
-
 
   │
 
-
   └─ 函数类型语义 ──────────────────────→ T4 函数类型型变
-
 
       参数逆变、返回值协变
 ```
@@ -491,18 +471,13 @@ fn evil(mut r: &mut &'a str) {
 ```rust,ignore
 fn covariant_example() {
 
-
     let long: &'static str = "hello";
-
 
     let short: &'a str = long;  // 协变：'static : 'a
 
-
     let box_long: Box<&'static str> = Box::new("hello");
 
-
     let box_short: Box<&'a str> = box_long;  // 协变
-
 
 }
 ```
@@ -520,33 +495,23 @@ fn covariant_example() {
 ```rust
 fn contravariant_example() {
 
-
     fn takes_str(s: &str) {
-
 
         println!("{}", s);
 
-
     }
-
 
     fn takes_static(s: &'static str) {
 
-
         println!("{}", s);
-
 
     }
 
-
     // 逆变：函数参数位置
-
 
     let f1: fn(&str) = takes_str;
 
-
     let f2: fn(&'static str) = f1;  // 逆变：&str <: &'static str
-
 
 }
 ```
@@ -563,21 +528,15 @@ fn contravariant_example() {
 ```rust
 fn invariant_example() {
 
-
     let mut x: &mut i32 = &mut 42;
-
 
     // let y: &mut &'static i32 = x;  // 错误：&mut T 是不变的
 
-
     use std::cell::Cell;
-
 
     let cell: Cell<&'static str> = Cell::new("hello");
 
-
     // let cell2: Cell<&'a str> = cell;  // 错误：Cell<T> 是不变的
-
 
 }
 ```
@@ -595,51 +554,35 @@ fn invariant_example() {
 ```rust,ignore
 use std::marker::PhantomData;
 
-
 struct CovariantWrapper<T> {
-
 
     data: PhantomData<T>,
 
-
 }
-
 
 struct InvariantWrapper<T> {
 
-
     data: T,
-
 
 }
 
-
 fn phantom_example() {
-
 
     let cov: CovariantWrapper<&'static str> = CovariantWrapper {
 
-
         data: PhantomData,
 
-
     };
-
 
     let cov2: CovariantWrapper<&'a str> = cov;  // 协变：PhantomData 是协变的
 
-
     let inv: InvariantWrapper<&'static str> = InvariantWrapper {
-
 
         data: "hello",
 
-
     };
 
-
     // let inv2: InvariantWrapper<&'a str> = inv;  // 错误：不变
-
 
 }
 ```
@@ -656,33 +599,23 @@ fn phantom_example() {
 ```rust
 fn function_pointer_variance() {
 
-
     // 函数参数是逆变的
-
 
     fn takes_fn(f: fn(&'static str)) {
 
-
         f("hello");
 
-
     }
-
 
     fn short_lifetime(s: &str) {
 
-
         println!("{}", s);
-
 
     }
 
-
     // 可以将接受更长生命周期的函数传递给接受更短生命周期的函数
 
-
     takes_fn(short_lifetime);
-
 
 }
 ```
@@ -700,27 +633,19 @@ fn function_pointer_variance() {
 ```rust
 fn variance_memory_safety() {
 
-
     // 协变示例：&'long T 可以安全地当作 &'short T 使用
-
 
     let long_lived = String::from("long");
 
-
     let short_lived: &str = &long_lived;  // 协变：安全
-
 
     // 不变示例：&mut T 必须是不变的
 
-
     let mut data = String::from("data");
-
 
     let r1: &mut String = &mut data;
 
-
     // let r2: &mut str = r1;  // 错误：&mut T 是不变的
-
 
 }
 ```
@@ -738,60 +663,41 @@ fn variance_memory_safety() {
 ```rust
 // 协变在迭代器中的应用
 
-
 fn use_covariant_iterator() {
-
 
     let vec: Vec<&'static str> = vec!["hello", "world"];
 
-
     // Vec 是协变的，可以传递给需要更短生命周期的函数
-
 
     let iter: Vec<&str> = vec;
 
-
 }
-
 
 // 逆变在回调函数中的应用
 
-
 fn use_contravariant_callback() {
-
 
     fn process<F>(callback: F)
 
-
     where
-
 
         F: Fn(&'static str),
 
-
     {
-
 
         callback("static string");
 
-
     }
-
 
     fn my_callback(s: &str) {
 
-
         println!("{}", s);
-
 
     }
 
-
     // 逆变：可以传递接受更长生命周期的回调
 
-
     process(my_callback);
-
 
 }
 ```

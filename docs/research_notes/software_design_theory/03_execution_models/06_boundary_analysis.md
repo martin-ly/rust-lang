@@ -1,5 +1,7 @@
 # 执行模型边界分析 {#执行模型边界分析}
 
+> **EN**: Boundary Analysis
+> **Summary**: 执行模型边界分析 Boundary Analysis. (stub/archive redirect)
 > **概念族**: 软件设计 / 执行模型
 > **内容分级**: [归档级]
 >

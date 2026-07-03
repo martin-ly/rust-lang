@@ -12,6 +12,8 @@
 
 # 异步运行时选型决策树 {#异步运行时选型决策树}
 
+> **EN**: Async Runtime Decision Tree
+> **Summary**: 异步运行时选型决策树 Async Runtime Decision Tree. (stub/archive redirect)
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -218,7 +220,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let listener = tokio::net::TcpListener::bind("127.0.0.1:8080").await?;
 
-
     loop {
 
         let (socket, _) = listener.accept().await?;
@@ -230,7 +231,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
 }
-
 
 async fn handle_connection(mut socket: tokio::net::TcpStream) {
 
@@ -262,7 +262,6 @@ async fn main() {
         heavy_computation()
 
     }).await.unwrap();
-
 
     // IO操作使用async
 

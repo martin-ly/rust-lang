@@ -1,4 +1,7 @@
 # 形式化内容总索引 {#形式化内容总索引}
+
+> **EN**: Formal Content Master Index
+> **Summary**: 形式化内容总索引 Formal Content Master Index. (stub/archive redirect)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

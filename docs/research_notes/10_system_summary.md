@@ -1,4 +1,7 @@
 # 研究笔记系统总结 {#研究笔记系统总结}
+
+> **EN**: System Summary
+> **Summary**: 研究笔记系统总结 System Summary. (stub/archive redirect)
 >
 > **概念族**: 综合研究
 > **内容分级**: [归档级]

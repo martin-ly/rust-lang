@@ -256,10 +256,10 @@
 
 ### 6. 思维表征方式 (多维学习)
 
-- **思维导图**: [WASM 思维导图集合](../WASM_MIND_MAPS.md) - 可视化知识结构
-- **多维概念矩阵**: [WASM 多维概念对比矩阵](../WASM_CONCEPT_MATRIX.md) - 技术方案对比
-- **决策树图**: [WASM 决策树图](../WASM_DECISION_TREE.md) - 技术选型决策支持
-- **证明树图**: [WASM 证明树图](../WASM_PROOF_TREE.md) - 形式化证明结构
+- **思维导图**: [WASM 思维导图集合](../wasm_mind_maps.md) - 可视化知识结构
+- **多维概念矩阵**: [WASM 多维概念对比矩阵](../wasm_concept_matrix.md) - 技术方案对比
+- **决策树图**: [WASM 决策树图](../wasm_decision_tree.md) - 技术选型决策支持
+- **证明树图**: [WASM 证明树图](../wasm_proof_tree.md) - 形式化证明结构
 
 ---
 

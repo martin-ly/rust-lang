@@ -9,6 +9,8 @@
 
 # Rust 标准库全面分析与论证文档 {#rust-标准库全面分析与论证文档}
 
+> **EN**: Standard Library Comprehensive Analysis 2025 12 25
+> **Summary**: Rust 标准库全面分析与论证文档 Standard Library Comprehensive Analysis 2025 12 25. (stub/archive redirect)
 > **Bloom 层级**: L2 (理解)
 
 **创建日期**: 2025-12-25

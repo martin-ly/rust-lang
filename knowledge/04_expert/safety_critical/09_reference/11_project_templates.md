@@ -1,5 +1,7 @@
 # 项目模板
 
+> **EN**: Project Templates
+> **Summary**: 项目模板 Project Templates.
 > **Bloom 层级**: 理解
 >
 > **受众**: [初学者] / [进阶]

@@ -1,4 +1,7 @@
 # 实践项目 04: 密码生成器 {#实践项目-04-密码生成器}
+
+> **EN**: Project 04 Password Generator
+> **Summary**: 实践项目 04 Project 04 Password Generator.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

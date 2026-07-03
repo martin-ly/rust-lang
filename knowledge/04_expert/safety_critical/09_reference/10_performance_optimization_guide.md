@@ -11,6 +11,8 @@
 >
 # 性能优化指南
 
+> **EN**: Performance Optimization Guide
+> **Summary**: 性能优化指南 Performance Optimization Guide. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 概述

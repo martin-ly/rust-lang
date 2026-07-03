@@ -1,5 +1,7 @@
 # 算法与数据结构快速参考卡片 {#算法与数据结构快速参考卡片}
 
+> **EN**: Algorithms Cheatsheet
+> **Summary**: 算法与数据结构快速参考卡片 Algorithms Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >

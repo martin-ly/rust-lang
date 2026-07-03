@@ -364,7 +364,7 @@ Week 3-4: 深入工程实践
 ### 项目文档
 
 - 📄 [C12 WASM 主文档](../README.md)
-- 📄 [快速开始指南](../../QUICK_START.md)
+- 📄 [快速开始指南](../../quick_start.md)
 - 📄 [API 参考](../tier_03_references/01_api_reference.md)
 - 📄 [最佳实践](../tier_03_references/03_best_practices.md)
 

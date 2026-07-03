@@ -1,5 +1,7 @@
 # 模块系统与安全抽象边界 {#模块系统与安全抽象边界}
 
+> **EN**: Module Safety Abstraction
+> **Summary**: 模块系统与安全抽象边界 Module Safety Abstraction.
 > **概念族**: 形式化模块
 > **内容分级**: [归档级]
 >
@@ -130,7 +132,6 @@ pub struct SafeHandle {
 
 }
 
-
 impl SafeHandle {
 
     pub fn new() -> Self {
@@ -145,7 +146,6 @@ impl SafeHandle {
 
     }
 
-
     pub fn get(&self) -> u8 {
 
         // unsafe 实现，但公开接口是 safe
@@ -154,7 +154,6 @@ impl SafeHandle {
 
     }
 
-
     pub fn set(&mut self, value: u8) {
 
         unsafe { *self.ptr = value; }
@@ -162,7 +161,6 @@ impl SafeHandle {
     }
 
 }
-
 
 impl Drop for SafeHandle {
 
@@ -180,13 +178,11 @@ impl Drop for SafeHandle {
 ```rust
 use std::cell::UnsafeCell;
 
-
 pub struct MyCell<T> {
 
     value: UnsafeCell<T>, // 私有
 
 }
-
 
 impl<T: Copy> MyCell<T> {
 
@@ -196,13 +192,11 @@ impl<T: Copy> MyCell<T> {
 
     }
 
-
     pub fn get(&self) -> T {
 
         unsafe { *self.value.get() }
 
     }
-
 
     pub fn set(&self, value: T) {
 
@@ -222,13 +216,11 @@ mod inner {
 
     pub struct MyType;
 
-
     // 在私有/受控位置实现 unsafe trait
 
     unsafe impl Sync for MyType {}
 
 }
-
 
 pub use inner::MyType;
 ```

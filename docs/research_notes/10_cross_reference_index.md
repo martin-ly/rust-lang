@@ -1,4 +1,7 @@
 # 🔗 跨文档映射网络 - 核心索引 {#跨文档映射网络---核心索引}
+
+> **EN**: Cross Reference Index
+> **Summary**: 🔗 跨文档映射网络 - 核心索引 Cross Reference Index. (stub/archive redirect)
 >
 > **概念族**: 元/导航/索引
 > **内容分级**: [归档级]

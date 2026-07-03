@@ -1,4 +1,7 @@
 # 🏥 项目健康度仪表盘 {#项目健康度仪表盘}
+
+> **EN**: Project Health Dashboard
+> **Summary**: 🏥 项目健康度仪表盘 Project Health Dashboard.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

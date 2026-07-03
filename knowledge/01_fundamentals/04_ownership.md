@@ -1,5 +1,7 @@
 # Rust 所有权系统 (Ownership System)
 
+> **EN**: Ownership System
+> **Summary**: Rust 所有权系统 Ownership System. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/01_foundation/01_ownership.md](../../concept/01_foundation/01_ownership.md)。
 > **历史版本存档**: [archive/knowledge/01_fundamentals/04_ownership.md](../../archive/knowledge/01_fundamentals/04_ownership.md)
 >

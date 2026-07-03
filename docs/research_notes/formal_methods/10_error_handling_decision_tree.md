@@ -1,5 +1,7 @@
 # Rust 错误处理决策树 {#rust-错误处理决策树}
 
+> **EN**: Error Handling Decision Tree
+> **Summary**: Rust 错误处理决策树 Error Handling Decision Tree. (stub/archive redirect)
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级（已迁回并持续推进）
 > **概念族**: 错误处理 / 决策树
@@ -195,7 +197,6 @@
 ```text
 传播范围决策流程:
 
-
 ┌──────────────────────────────────────────────────────────────┐
 
 │  错误发生在哪个边界？                                          │
@@ -346,13 +347,11 @@ fn should_retry(error: &Error) -> RetryDecision {
 
         ErrorKind::TimedOut => RetryDecision::RetryWithBackoff,
 
-
         // 配置错误 → 不重试
 
         ErrorKind::InvalidInput |
 
         ErrorKind::NotFound => RetryDecision::FailFast,
-
 
         // 服务器错误 → 可能重试
 
@@ -554,13 +553,11 @@ let result = option.ok_or(Error::NotFound)?;
 
 let result = option.ok_or_else(|| Error::compute())?;
 
-
 // Result → Option
 
 let option = result.ok();           // 丢弃错误
 
 let option = result.err();          // 仅保留错误
-
 
 // Result → panic (显式选择)
 
@@ -597,7 +594,6 @@ let value = result.unwrap();        // 仅用于原型/测试
 │   • #[source] 错误链                                           │
 
 └────────────────────────────────────────────────────────────────┘
-
 
 ┌────────────────────────────────────────────────────────────────┐
 
@@ -646,7 +642,6 @@ let value = result.unwrap();        // 仅用于原型/测试
 
 use thiserror::Error;
 
-
 #[derive(Error, Debug)]
 
 pub enum DataError {
@@ -655,11 +650,9 @@ pub enum DataError {
 
     Io(#[from] std::io::Error),
 
-
     #[error("parse error: {0}")]
 
     Parse(String),
-
 
     #[error("not found: {0}")]
 
@@ -667,18 +660,15 @@ pub enum DataError {
 
 }
 
-
 pub fn load_data(path: &str) -> Result<Data, DataError> {
 
     // 返回具体的 DataError
 
 }
 
-
 // 应用代码 (main.rs)
 
 use anyhow::{Context, Result};
-
 
 fn main() -> Result<()> {
 
@@ -687,7 +677,6 @@ fn main() -> Result<()> {
         .context("failed to load application config")?;
 
     // 转换为 anyhow::Error，添加上下文
-
 
     Ok(())
 
@@ -795,7 +784,6 @@ use thiserror::Error;
 
 use serde::Serialize;
 
-
 // 错误码设计
 
 #[derive(Error, Debug, Clone, Copy, PartialEq, Eq, Serialize)]
@@ -808,18 +796,15 @@ pub enum ErrorCode {
 
     NotFound = 404,
 
-
     #[error("invalid_input")]
 
     InvalidInput = 400,
-
 
     #[error("internal_error")]
 
     InternalError = 500,
 
 }
-
 
 // 结构化错误
 
@@ -841,7 +826,6 @@ pub struct ApiError {
 
 }
 
-
 // 分层模块错误
 
 #[derive(Error, Debug)]
@@ -852,16 +836,13 @@ pub enum AppError {
 
     Config(#[from] config::ConfigError),
 
-
     #[error("database error: {0}")]
 
     Database(#[from] db::DbError),
 
-
     #[error("external service error: {0}")]
 
     External(#[from] external::ServiceError),
-
 
     #[error("internal error: {0}")]
 
@@ -878,7 +859,6 @@ pub enum AppError {
 
 ```text
 错误链结构:
-
 
 ┌────────────────────────────────────────────────────────────────┐
 
@@ -914,33 +894,27 @@ pub enum AppError {
 ```rust,ignore
 use anyhow::{Context, Result};
 
-
 fn process_user(user_id: Uuid) -> Result<()> {
 
     let user = db::find_user(user_id)
 
         .with_context(|| format!("failed to find user {}", user_id))?;
 
-
     let config = fs::read_to_string(&user.config_path)
 
         .with_context(|| format!("failed to read config at {}", user.config_path))?;
-
 
     let settings: Settings = serde_yaml::from_str(&config)
 
         .context("failed to parse config as YAML")?;
 
-
     apply_settings(user_id, settings)
 
         .context("failed to apply settings")?;
 
-
     Ok(())
 
 }
-
 
 // 输出:
 
@@ -966,7 +940,6 @@ fn process_user(user_id: Uuid) -> Result<()> {
 ```rust,ignore
 use thiserror::Error;
 
-
 #[derive(Error, Debug)]
 
 pub enum ConfigError {
@@ -983,7 +956,6 @@ pub enum ConfigError {
 
     },
 
-
     #[error("failed to parse config: {message}")]
 
     Parse {
@@ -998,7 +970,6 @@ pub enum ConfigError {
 
 }
 
-
 // 使用
 
 fn load_config(path: &str) -> Result<Config, ConfigError> {
@@ -1012,7 +983,6 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
             source: e,
 
         })?;
-
 
     serde_yaml::from_str(&content)
 
@@ -1053,13 +1023,11 @@ pub enum DomainError {
 
     Validation(String),
 
-
     #[error("business rule violated: {0}")]
 
     BusinessRule(String),
 
 }
-
 
 // 应用层错误
 
@@ -1071,13 +1039,11 @@ pub enum ApplicationError {
 
     Domain(#[from] DomainError),
 
-
     #[error("infrastructure error: {0}")]
 
     Infrastructure(#[source] InfrastructureError),
 
 }
-
 
 // 接口层错误
 
@@ -1093,18 +1059,15 @@ pub enum ApiError {
 
     BadRequest { message: String },
 
-
     #[error("not_found")]
 
     NotFound { resource: String },
-
 
     #[error("internal_error")]
 
     InternalError { request_id: Uuid },
 
 }
-
 
 // 错误转换
 
@@ -1143,7 +1106,6 @@ pub trait HttpStatusCode {
     fn status_code(&self) -> StatusCode;
 
 }
-
 
 impl HttpStatusCode for ApiError {
 
@@ -1187,7 +1149,6 @@ pub struct ErrorBuilder {
 
 }
 
-
 impl ErrorBuilder {
 
     pub fn new(code: ErrorCode) -> Self {
@@ -1206,7 +1167,6 @@ impl ErrorBuilder {
 
     }
 
-
     pub fn message(mut self, msg: impl Into<String>) -> Self {
 
         self.message = Some(msg.into());
@@ -1214,7 +1174,6 @@ impl ErrorBuilder {
         self
 
     }
-
 
     pub fn source(mut self, err: impl Into<Box<dyn std::error::Error + Send + Sync>>) -> Self {
 
@@ -1224,7 +1183,6 @@ impl ErrorBuilder {
 
     }
 
-
     pub fn context(mut self, key: &str, value: impl Into<String>) -> Self {
 
         self.context.insert(key.to_string(), value.into());
@@ -1232,7 +1190,6 @@ impl ErrorBuilder {
         self
 
     }
-
 
     pub fn build(self) -> AppError {
 
@@ -1251,7 +1208,6 @@ impl ErrorBuilder {
     }
 
 }
-
 
 // 使用
 
@@ -1279,7 +1235,6 @@ let err = ErrorBuilder::new(ErrorCode::NotFound)
 ```rust,ignore
 use std::io;
 
-
 #[derive(Error, Debug)]
 
 pub enum AppError {
@@ -1288,18 +1243,15 @@ pub enum AppError {
 
     Io(#[from] io::Error),
 
-
     #[error("parse error: {0}")]
 
     Parse(#[from] serde_json::Error),
-
 
     #[error("database error: {0}")]
 
     Database(#[from] sqlx::Error),
 
 }
-
 
 // 现在 ? 会自动转换
 
@@ -1334,7 +1286,6 @@ fn parse_port(s: &str) -> Result<u16, AppError> {
         })
 
 }
-
 
 // 或者使用 anyhow 添加上下文
 
@@ -1374,7 +1325,6 @@ fn load_users() -> Result<Vec<User>> {
 ```rust,ignore
 use tracing::{error, warn, info, instrument};
 
-
 #[instrument(skip(db), fields(user_id = %user_id))]
 
 async fn authenticate_user(
@@ -1388,7 +1338,6 @@ async fn authenticate_user(
 ) -> Result<User, AuthError> {
 
     info!("attempting authentication");
-
 
     let user = db.find_user(user_id)
 
@@ -1408,7 +1357,6 @@ async fn authenticate_user(
 
         })?;
 
-
     if !verify_token(&user, token) {
 
         warn!(
@@ -1422,7 +1370,6 @@ async fn authenticate_user(
         return Err(AuthError::InvalidToken);
 
     }
-
 
     info!("authentication successful");
 
@@ -1440,7 +1387,6 @@ pub fn format_error_report(err: &anyhow::Error) -> String {
 
     let mut report = String::new();
 
-
     // 用户友好的顶层消息
 
     report.push_str("操作失败: ");
@@ -1449,13 +1395,11 @@ pub fn format_error_report(err: &anyhow::Error) -> String {
 
     report.push('\n');
 
-
     // 建议的解决步骤
 
     report.push_str("\n建议:\n");
 
     report.push_str(&suggest_fixes(err));
-
 
     // 技术细节（用于调试）
 
@@ -1467,7 +1411,6 @@ pub fn format_error_report(err: &anyhow::Error) -> String {
 
     }
 
-
     // 回溯（如果有）
 
     if let Some(backtrace) = err.backtrace() {
@@ -1478,11 +1421,9 @@ pub fn format_error_report(err: &anyhow::Error) -> String {
 
     }
 
-
     report
 
 }
-
 
 fn suggest_fixes(err: &anyhow::Error) -> String {
 
@@ -1510,13 +1451,11 @@ fn suggest_fixes(err: &anyhow::Error) -> String {
 ```rust,ignore
 use metrics::{counter, gauge, histogram};
 
-
 pub fn report_error(err: &AppError) {
 
     // 按错误类型计数
 
     counter!("app.errors.total", 1, "type" => error_type_name(err));
-
 
     // 按错误码计数
 
@@ -1525,7 +1464,6 @@ pub fn report_error(err: &AppError) {
         counter!("app.errors.by_code", 1, "code" => code.to_string());
 
     }
-
 
     // 严重错误告警
 
@@ -1557,7 +1495,6 @@ mod tests {
 
     use super::*;
 
-
     #[test]
 
     fn test_error_conversion() {
@@ -1570,16 +1507,13 @@ mod tests {
 
         );
 
-
         let app_err: AppError = io_err.into();
-
 
         assert!(matches!(app_err, AppError::Io(_)));
 
         assert!(app_err.to_string().contains("file not found"));
 
     }
-
 
     #[test]
 
@@ -1591,11 +1525,9 @@ mod tests {
 
         }.into();
 
-
         // 可以 downcast 回具体类型
 
         assert!(err.downcast_ref::<ConfigError>().is_some());
-
 
         // 检查具体变体
 
@@ -1622,7 +1554,6 @@ fn test_error_propagation() {
     // 使用 assert_matches! (需要 nightly) 或自定义宏
 
     let result = load_config("nonexistent.json");
-
 
     match result {
 
@@ -1674,20 +1605,17 @@ async fn test_retry_logic() {
 
     ).await;
 
-
     assert!(result.is_ok());
 
     assert_eq!(attempts, 3);
 
 }
 
-
 #[tokio::test]
 
 async fn test_circuit_breaker() {
 
     let mut cb = CircuitBreaker::new(3, Duration::from_secs(60));
-
 
     // 触发断路器
 
@@ -1697,11 +1625,9 @@ async fn test_circuit_breaker() {
 
     }
 
-
     // 断路器应打开
 
     assert!(cb.is_open());
-
 
     // 后续请求应快速失败
 
@@ -1730,7 +1656,6 @@ let config = fs::read_to_string("config.json").unwrap();
 
 let port = config.parse::<u16>().unwrap();
 
-
 // ✅ 正确: 使用 ? 传播错误
 
 let config = fs::read_to_string("config.json")
@@ -1740,7 +1665,6 @@ let config = fs::read_to_string("config.json")
 let port = config.parse::<u16>()
 
     .context("invalid port number")?;
-
 
 // ✅ 仅在以下情况使用 unwrap:
 
@@ -1766,7 +1690,6 @@ fn do_something() -> Result<(), String> {
 
 }
 
-
 // ❌ 错误: 调用者无法匹配具体错误
 
 match do_something() {
@@ -1776,7 +1699,6 @@ match do_something() {
     _ => ...,
 
 }
-
 
 // ✅ 正确: 使用结构化错误类型
 
@@ -1793,7 +1715,6 @@ enum MyError {
     InvalidInput(String),
 
 }
-
 
 match do_something() {
 
@@ -1825,7 +1746,6 @@ fn process_file(path: &str) -> Result<Data, io::Error> {
 
 }
 
-
 // ✅ 正确: 使用合适的错误类型
 
 fn process_file(path: &str) -> Result<Data, AppError> {
@@ -1837,7 +1757,6 @@ fn process_file(path: &str) -> Result<Data, AppError> {
     Ok(data)
 
 }
-
 
 // ✅ 或者使用 anyhow 保留所有错误
 
@@ -1871,7 +1790,6 @@ fn find_user(id: Uuid) -> Option<User> {
 
 }
 
-
 // ✅ 正确: Result 表示操作可能失败
 
 fn find_user(id: Uuid) -> Result<Option<User>, DbError> {
@@ -1883,7 +1801,6 @@ fn find_user(id: Uuid) -> Result<Option<User>, DbError> {
     // Err(e) = 数据库错误
 
 }
-
 
 // ✅ 或者使用自定义错误明确语义
 
@@ -1901,7 +1818,6 @@ enum FindUserError {
 
 }
 
-
 fn find_user(id: Uuid) -> Result<User, FindUserError> {
 
     // ...
@@ -1918,7 +1834,6 @@ fn find_user(id: Uuid) -> Result<User, FindUserError> {
 
 let _ = file.write_all(data);
 
-
 // ❌ 错误: 空 match 分支
 
 match write_file(path, data) {
@@ -1929,7 +1844,6 @@ match write_file(path, data) {
 
 }
 
-
 // ✅ 正确: 至少记录错误
 
 if let Err(e) = file.write_all(data) {
@@ -1938,7 +1852,6 @@ if let Err(e) = file.write_all(data) {
 
 }
 
-
 // ✅ 正确: 使用 let_else 语法
 
 let Ok(result) = operation() else {
@@ -1946,7 +1859,6 @@ let Ok(result) = operation() else {
     return Err(error.into());
 
 };
-
 
 // ✅ 正确: 如果确实应该忽略，明确注释
 
@@ -1984,7 +1896,6 @@ enum DatabaseError {
 
 }
 
-
 // ✅ 正确: 结构化错误信息
 
 #[derive(Error, Debug)]
@@ -1995,11 +1906,9 @@ enum DatabaseError {
 
     ConnectionTimeout { duration: u64 },
 
-
     #[error("connection failed: {backend}")]
 
     ConnectionFailed { backend: BackendType },
-
 
     #[error("query failed: {message}")]
 
@@ -2025,7 +1934,6 @@ enum BadError {
 
 }
 
-
 // ❌ 这会导致编译错误
 
 async fn bad_function() -> Result<(), BadError> {
@@ -2037,7 +1945,6 @@ async fn bad_function() -> Result<(), BadError> {
     }).await.unwrap()
 
 }
-
 
 // ✅ 正确: 使用 Arc 或 Box
 
@@ -2071,7 +1978,6 @@ fn parse_hot(input: &[u8]) -> Result<Item, String> {
 
 }
 
-
 // ✅ 正确: 使用静态错误或延迟格式化
 
 #[derive(Error, Debug)]
@@ -2087,7 +1993,6 @@ enum ParseError {
     InvalidByte { pos: usize, byte: u8 },
 
 }
-
 
 // 或使用 thiserror 的 lazy format
 
@@ -2116,7 +2021,6 @@ enum LazyError {
 ```rust,ignore
 //! 完整的多层错误处理示例
 
-
 use std::collections::HashMap;
 
 use thiserror::Error;
@@ -2127,14 +2031,11 @@ use serde::{Serialize, Deserialize};
 
 use uuid::Uuid;
 
-
 // ==================== 领域层 (Domain Layer) ====================
-
 
 pub mod domain {
 
     use super::*;
-
 
     #[derive(Error, Debug, Clone, PartialEq)]
 
@@ -2144,18 +2045,15 @@ pub mod domain {
 
         Required { field: String },
 
-
         #[error("field '{field}' must be at least {min} characters")]
 
         TooShort { field: String, min: usize },
-
 
         #[error("invalid email format: {email}")]
 
         InvalidEmail { email: String },
 
     }
-
 
     #[derive(Error, Debug, Clone, PartialEq)]
 
@@ -2165,11 +2063,9 @@ pub mod domain {
 
         DuplicateUser { email: String },
 
-
         #[error("insufficient balance: required {required}, available {available}")]
 
         InsufficientBalance { required: f64, available: f64 },
-
 
         #[error("operation not permitted for user status: {status}")]
 
@@ -2177,9 +2073,7 @@ pub mod domain {
 
     }
 
-
     pub type DomainResult<T> = Result<T, DomainError>;
-
 
     #[derive(Error, Debug, Clone, PartialEq)]
 
@@ -2189,7 +2083,6 @@ pub mod domain {
 
         Validation(#[from] ValidationError),
 
-
         #[error("business rule violated: {0}")]
 
         Business(#[from] BusinessError),
@@ -2198,16 +2091,13 @@ pub mod domain {
 
 }
 
-
 // ==================== 应用层 (Application Layer) ====================
-
 
 pub mod application {
 
     use super::*;
 
     use super::domain::*;
-
 
     #[derive(Error, Debug)]
 
@@ -2217,18 +2107,15 @@ pub mod application {
 
         Database(String),
 
-
         #[error("cache error: {0}")]
 
         Cache(String),
-
 
         #[error("external service error: {code} - {message}")]
 
         ExternalService { code: u16, message: String },
 
     }
-
 
     #[derive(Error, Debug)]
 
@@ -2238,16 +2125,13 @@ pub mod application {
 
         Domain(#[from] DomainError),
 
-
         #[error(transparent)]
 
         Infrastructure(#[from] InfrastructureError),
 
-
         #[error("concurrent modification detected")]
 
         ConcurrentModification,
-
 
         #[error("operation timeout after {0:?}")]
 
@@ -2255,14 +2139,11 @@ pub mod application {
 
     }
 
-
     pub type AppResult<T> = Result<T, ApplicationError>;
 
 }
 
-
 // ==================== 接口层 (Interface Layer) ====================
-
 
 pub mod interface {
 
@@ -2271,7 +2152,6 @@ pub mod interface {
     use super::application::*;
 
     use super::domain::*;
-
 
     #[derive(Debug, Serialize, Deserialize)]
 
@@ -2297,7 +2177,6 @@ pub mod interface {
 
     }
 
-
     #[derive(Debug, Serialize)]
 
     pub struct ApiErrorResponse {
@@ -2318,7 +2197,6 @@ pub mod interface {
 
     }
 
-
     #[derive(Error, Debug)]
 
     #[error("API error: {response:?}")]
@@ -2328,7 +2206,6 @@ pub mod interface {
         response: ApiErrorResponse,
 
     }
-
 
     impl ApiError {
 
@@ -2440,7 +2317,6 @@ pub mod interface {
 
             };
 
-
             Self {
 
                 response: ApiErrorResponse {
@@ -2461,7 +2337,6 @@ pub mod interface {
 
         }
 
-
         pub fn into_response(self) -> ApiErrorResponse {
 
             self.response
@@ -2472,16 +2347,13 @@ pub mod interface {
 
 }
 
-
 // ==================== 使用示例 ====================
-
 
 use domain::*;
 
 use application::*;
 
 use interface::*;
-
 
 fn validate_user_input(email: &str, name: &str) -> DomainResult<()> {
 
@@ -2495,7 +2367,6 @@ fn validate_user_input(email: &str, name: &str) -> DomainResult<()> {
 
     }
 
-
     if !email.contains('@') {
 
         return Err(ValidationError::InvalidEmail {
@@ -2505,7 +2376,6 @@ fn validate_user_input(email: &str, name: &str) -> DomainResult<()> {
         }.into());
 
     }
-
 
     if name.len() < 2 {
 
@@ -2519,16 +2389,13 @@ fn validate_user_input(email: &str, name: &str) -> DomainResult<()> {
 
     }
 
-
     Ok(())
 
 }
 
-
 fn create_user(email: String, name: String) -> AppResult<User> {
 
     validate_user_input(&email, &name)?;
-
 
     // 模拟检查重复用户
 
@@ -2537,7 +2404,6 @@ fn create_user(email: String, name: String) -> AppResult<User> {
         return Err(BusinessError::DuplicateUser { email }.into());
 
     }
-
 
     // 模拟数据库操作
 
@@ -2551,11 +2417,9 @@ fn create_user(email: String, name: String) -> AppResult<User> {
 
     }
 
-
     Ok(User { email, name })
 
 }
-
 
 #[derive(Debug)]
 
@@ -2567,13 +2431,11 @@ struct User {
 
 }
 
-
 // HTTP 处理函数
 
 fn handle_create_user(email: String, name: String) -> Result<ApiErrorResponse, ApiErrorResponse> {
 
     let request_id = Uuid::new_v4();
-
 
     match create_user(email, name) {
 
@@ -2599,7 +2461,6 @@ fn handle_create_user(email: String, name: String) -> Result<ApiErrorResponse, A
 
 }
 
-
 fn main() {
 
     // 成功场景
@@ -2614,7 +2475,6 @@ fn main() {
 
     }
 
-
     // 验证错误
 
     println!("\n=== Test 2: Invalid email ===");
@@ -2627,7 +2487,6 @@ fn main() {
 
     }
 
-
     // 业务错误
 
     println!("\n=== Test 3: Duplicate user ===");
@@ -2639,7 +2498,6 @@ fn main() {
         Err(e) => println!("Error: {:?}", e),
 
     }
-
 
     // 基础设施错误
 
@@ -2663,7 +2521,6 @@ fn main() {
 ```rust,ignore
 //! 生产级错误处理：重试、断路器、超时
 
-
 use std::future::Future;
 
 use std::pin::Pin;
@@ -2678,9 +2535,7 @@ use tokio::time::sleep;
 
 use thiserror::Error;
 
-
 // ==================== 错误定义 ====================
-
 
 #[derive(Error, Debug, Clone)]
 
@@ -2690,13 +2545,11 @@ pub enum RetryError<E> {
 
     MaxRetriesExceeded { attempts: u32, last_error: E },
 
-
     #[error("non-retryable error: {0}")]
 
     NonRetryable(E),
 
 }
-
 
 #[derive(Error, Debug, Clone)]
 
@@ -2706,16 +2559,13 @@ pub enum CircuitBreakerError {
 
     Open,
 
-
     #[error("half-open state rejected request")]
 
     HalfOpenRejected,
 
 }
 
-
 // ==================== 重试策略 ====================
-
 
 #[derive(Debug, Clone, Copy)]
 
@@ -2730,7 +2580,6 @@ pub struct RetryPolicy {
     pub backoff_multiplier: f64,
 
 }
-
 
 impl Default for RetryPolicy {
 
@@ -2752,7 +2601,6 @@ impl Default for RetryPolicy {
 
 }
 
-
 impl RetryPolicy {
 
     pub fn exponential_backoff(&self, attempt: u32) -> Duration {
@@ -2767,7 +2615,6 @@ impl RetryPolicy {
 
     }
 
-
     pub fn with_jitter(&self, delay: Duration) -> Duration {
 
         use rand::Rng;
@@ -2780,9 +2627,7 @@ impl RetryPolicy {
 
 }
 
-
 // ==================== 可重试错误 trait ====================
-
 
 pub trait Retryable {
 
@@ -2790,9 +2635,7 @@ pub trait Retryable {
 
 }
 
-
 // ==================== 重试实现 ====================
-
 
 pub async fn retry<F, Fut, T, E>(
 
@@ -2814,7 +2657,6 @@ where
 
     let mut last_error = None;
 
-
     for attempt in 0..policy.max_attempts {
 
         match operation().await {
@@ -2829,9 +2671,7 @@ where
 
                 }
 
-
                 last_error = Some(err);
-
 
                 if attempt < policy.max_attempts - 1 {
 
@@ -2859,7 +2699,6 @@ where
 
     }
 
-
     Err(RetryError::MaxRetriesExceeded {
 
         attempts: policy.max_attempts,
@@ -2870,9 +2709,7 @@ where
 
 }
 
-
 // ==================== 断路器 ====================
-
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 
@@ -2885,7 +2722,6 @@ pub enum CircuitState {
     HalfOpen,    // 尝试恢复
 
 }
-
 
 #[derive(Debug)]
 
@@ -2901,7 +2737,6 @@ struct CircuitBreakerInner {
 
 }
 
-
 pub struct CircuitBreaker {
 
     inner: Arc<RwLock<CircuitBreakerInner>>,
@@ -2913,7 +2748,6 @@ pub struct CircuitBreaker {
     timeout: Duration,
 
 }
-
 
 impl CircuitBreaker {
 
@@ -2942,7 +2776,6 @@ impl CircuitBreaker {
         }
 
     }
-
 
     pub async fn call<F, Fut, T, E>(&self, operation: F) -> Result<T, CircuitBreakerError>
 
@@ -3014,11 +2847,9 @@ impl CircuitBreaker {
 
         }
 
-
         // 执行操作
 
         let result = operation().await;
-
 
         // 更新状态
 
@@ -3070,7 +2901,6 @@ impl CircuitBreaker {
 
                 inner.last_failure_time = Some(Instant::now());
 
-
                 if inner.failure_count >= self.failure_threshold {
 
                     inner.state = CircuitState::Open;
@@ -3093,13 +2923,11 @@ impl CircuitBreaker {
 
     }
 
-
     pub async fn state(&self) -> CircuitState {
 
         self.inner.read().await.state
 
     }
-
 
     pub async fn is_open(&self) -> bool {
 
@@ -3109,9 +2937,7 @@ impl CircuitBreaker {
 
 }
 
-
 // ==================== 超时包装 ====================
-
 
 pub async fn with_timeout<F, Fut, T>(
 
@@ -3133,9 +2959,7 @@ where
 
 }
 
-
 // ==================== 组合使用 ====================
-
 
 pub struct ResilientClient {
 
@@ -3146,7 +2970,6 @@ pub struct ResilientClient {
     timeout: Duration,
 
 }
-
 
 impl ResilientClient {
 
@@ -3163,7 +2986,6 @@ impl ResilientClient {
         }
 
     }
-
 
     pub async fn call<F, Fut, T, E>(&self, operation: F) -> Result<T, ClientError<E>>
 
@@ -3185,11 +3007,9 @@ impl ResilientClient {
 
         }
 
-
         // 2. 执行带重试的操作
 
         let result = retry(operation.clone(), self.retry_policy.clone()).await;
-
 
         match result {
 
@@ -3225,7 +3045,6 @@ impl ResilientClient {
 
 }
 
-
 #[derive(Error, Debug)]
 
 pub enum ClientError<E> {
@@ -3234,16 +3053,13 @@ pub enum ClientError<E> {
 
     CircuitBreakerOpen,
 
-
     #[error("max retries exceeded after {attempts} attempts")]
 
     MaxRetriesExceeded { attempts: u32 },
 
-
     #[error("non-retryable error: {0:?}")]
 
     NonRetryable(E),
-
 
     #[error("timeout")]
 
@@ -3251,16 +3067,13 @@ pub enum ClientError<E> {
 
 }
 
-
 // ==================== 测试 ====================
-
 
 #[cfg(test)]
 
 mod tests {
 
     use super::*;
-
 
     #[derive(Debug, Clone)]
 
@@ -3269,7 +3082,6 @@ mod tests {
         retryable: bool,
 
     }
-
 
     impl Retryable for TestError {
 
@@ -3281,7 +3093,6 @@ mod tests {
 
     }
 
-
     impl std::fmt::Display for TestError {
 
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -3292,16 +3103,13 @@ mod tests {
 
     }
 
-
     impl std::error::Error for TestError {}
-
 
     #[tokio::test]
 
     async fn test_retry_success_on_second_attempt() {
 
         let mut attempts = 0;
-
 
         let result = retry(
 
@@ -3329,13 +3137,11 @@ mod tests {
 
         ).await;
 
-
         assert!(result.is_ok());
 
         assert_eq!(attempts, 2);
 
     }
-
 
     #[tokio::test]
 
@@ -3353,18 +3159,15 @@ mod tests {
 
         ).await;
 
-
         assert!(matches!(result, Err(RetryError::NonRetryable(_))));
 
     }
-
 
     #[tokio::test]
 
     async fn test_circuit_breaker_opens_after_failures() {
 
         let cb = CircuitBreaker::new(3, Duration::from_secs(60));
-
 
         // 触发 3 次失败
 
@@ -3378,11 +3181,9 @@ mod tests {
 
         }
 
-
         // 断路器应该打开
 
         assert!(cb.is_open().await);
-
 
         // 后续请求应快速失败
 
@@ -3402,19 +3203,15 @@ mod tests {
 ```rust,ignore
 //! anyhow 和 thiserror 的最佳实践组合
 
-
 // ==================== 库代码 (使用 thiserror) ====================
-
 
 use thiserror::Error;
 
 use std::path::PathBuf;
 
-
 pub mod core {
 
     use super::*;
-
 
     #[derive(Error, Debug)]
 
@@ -3426,28 +3223,23 @@ pub mod core {
 
         NotFound { path: PathBuf },
 
-
         #[error("invalid configuration format: {message}")]
 
         InvalidFormat { message: String },
-
 
         #[error("missing required field: {field}")]
 
         MissingField { field: String },
 
-
         #[error("io error while reading config: {0}")]
 
         Io(#[from] std::io::Error),
-
 
         #[error("parse error: {0}")]
 
         Parse(#[from] serde_json::Error),
 
     }
-
 
     #[derive(Error, Debug)]
 
@@ -3459,23 +3251,19 @@ pub mod core {
 
         ConnectionRefused { address: String },
 
-
         #[error("connection timed out after {duration:?}")]
 
         Timeout { duration: std::time::Duration },
 
-
         #[error("dns resolution failed for {hostname}")]
 
         DnsFailed { hostname: String },
-
 
         #[error("tls handshake failed: {reason}")]
 
         TlsFailed { reason: String },
 
     }
-
 
     impl Retryable for NetworkError {
 
@@ -3495,7 +3283,6 @@ pub mod core {
 
     }
 
-
     #[derive(Error, Debug)]
 
     #[non_exhaustive]
@@ -3506,11 +3293,9 @@ pub mod core {
 
         Config(#[from] ConfigError),
 
-
         #[error("network error: {0}")]
 
         Network(#[from] NetworkError),
-
 
         #[error("internal error: {message}")]
 
@@ -3518,16 +3303,13 @@ pub mod core {
 
     }
 
-
     pub type CoreResult<T> = Result<T, CoreError>;
-
 
     pub trait Retryable {
 
         fn is_retryable(&self) -> bool;
 
     }
-
 
     impl Retryable for CoreError {
 
@@ -3543,13 +3325,11 @@ pub mod core {
 
     }
 
-
     // 库函数返回结构化错误
 
     pub fn load_config(path: &str) -> CoreResult<Config> {
 
         use std::fs;
-
 
         let content = fs::read_to_string(path)
 
@@ -3567,7 +3347,6 @@ pub mod core {
 
             })?;
 
-
         let config: Config = serde_json::from_str(&content)
 
             .map_err(|e| ConfigError::InvalidFormat {
@@ -3576,14 +3355,11 @@ pub mod core {
 
             })?;
 
-
         config.validate()?;
-
 
         Ok(config)
 
     }
-
 
     #[derive(Debug, serde::Deserialize)]
 
@@ -3594,7 +3370,6 @@ pub mod core {
         pub database: DatabaseConfig,
 
     }
-
 
     impl Config {
 
@@ -3616,7 +3391,6 @@ pub mod core {
 
     }
 
-
     #[derive(Debug, serde::Deserialize)]
 
     pub struct ServerConfig {
@@ -3626,7 +3400,6 @@ pub mod core {
         pub port: u16,
 
     }
-
 
     #[derive(Debug, serde::Deserialize)]
 
@@ -3640,14 +3413,11 @@ pub mod core {
 
 }
 
-
 // ==================== 应用代码 (使用 anyhow) ====================
-
 
 use anyhow::{Context, Result as AnyhowResult, bail, ensure};
 
 use core::*;
-
 
 fn main() -> AnyhowResult<()> {
 
@@ -3655,13 +3425,11 @@ fn main() -> AnyhowResult<()> {
 
     tracing_subscriber::fmt::init();
 
-
     // 加载配置
 
     let config = core::load_config("config.json")
 
         .context("failed to load application configuration")?;
-
 
     tracing::info!(
 
@@ -3673,13 +3441,11 @@ fn main() -> AnyhowResult<()> {
 
     );
 
-
     // 初始化应用
 
     let app = Application::new(config)
 
         .context("failed to initialize application")?;
-
 
     // 运行应用
 
@@ -3687,18 +3453,15 @@ fn main() -> AnyhowResult<()> {
 
         .context("application runtime error")?;
 
-
     Ok(())
 
 }
-
 
 struct Application {
 
     config: Config,
 
 }
-
 
 impl Application {
 
@@ -3712,19 +3475,15 @@ impl Application {
 
         );
 
-
         Ok(Self { config })
 
     }
-
 
     fn run(&self) -> AnyhowResult<()> {
 
         tracing::info!("starting application");
 
-
         // 业务逻辑...
-
 
         Ok(())
 
@@ -3732,12 +3491,9 @@ impl Application {
 
 }
 
-
 // ==================== 错误处理中间件模式 ====================
 
-
 use std::fmt;
-
 
 /// 为 anyhow::Error 添加结构化上下文
 
@@ -3748,7 +3504,6 @@ pub trait ErrorContext {
     fn with_help_url(self, url: impl Into<String>) -> Self;
 
 }
-
 
 impl ErrorContext for anyhow::Error {
 
@@ -3762,7 +3517,6 @@ impl ErrorContext for anyhow::Error {
 
     }
 
-
     fn with_help_url(self, url: impl Into<String>) -> Self {
 
         self.context(format!("Help: {}", url.into()))
@@ -3771,20 +3525,17 @@ impl ErrorContext for anyhow::Error {
 
 }
 
-
 /// 格式化错误报告给用户
 
 pub fn format_user_facing_error(err: &anyhow::Error) -> String {
 
     let mut output = String::new();
 
-
     output.push_str("Error: ");
 
     output.push_str(&err.to_string());
 
     output.push('\n');
-
 
     // 收集上下文链
 
@@ -3802,18 +3553,15 @@ pub fn format_user_facing_error(err: &anyhow::Error) -> String {
 
     }
 
-
     output
 
 }
-
 
 /// 格式化错误报告给开发者
 
 pub fn format_debug_error(err: &anyhow::Error) -> String {
 
     let mut output = format_user_facing_error(err);
-
 
     if let Some(backtrace) = err.backtrace() {
 
@@ -3823,21 +3571,17 @@ pub fn format_debug_error(err: &anyhow::Error) -> String {
 
     }
 
-
     output
 
 }
 
-
 // ==================== 具体使用示例 ====================
-
 
 #[cfg(test)]
 
 mod examples {
 
     use super::*;
-
 
     /// 示例 1: 简单错误传播
 
@@ -3847,18 +3591,15 @@ mod examples {
 
             .context("failed to read data file")?;
 
-
         let parsed: serde_json::Value = serde_json::from_str(&data)
 
             .context("failed to parse JSON data")?;
-
 
         println!("{:?}", parsed);
 
         Ok(())
 
     }
-
 
     /// 示例 2: 选择性处理特定错误
 
@@ -3896,18 +3637,15 @@ mod examples {
 
     }
 
-
     /// 示例 3: 批量操作收集错误
 
     fn example_collect_errors(paths: &[&str]) -> AnyhowResult<Vec<Config>> {
 
         use anyhow::anyhow;
 
-
         let mut configs = Vec::new();
 
         let mut errors = Vec::new();
-
 
         for path in paths {
 
@@ -3921,7 +3659,6 @@ mod examples {
 
         }
 
-
         if !errors.is_empty() {
 
             let error_details: Vec<_> = errors
@@ -3931,7 +3668,6 @@ mod examples {
                 .map(|(p, e)| format!("  - {}: {}", p, e))
 
                 .collect();
-
 
             bail!(
 
@@ -3945,18 +3681,15 @@ mod examples {
 
         }
 
-
         Ok(configs)
 
     }
-
 
     /// 示例 4: 错误转换和适配
 
     fn example_error_adaptation() -> AnyhowResult<()> {
 
         let result: Result<(), core::CoreError> = core::load_config("test.json").map(|_| ());
-
 
         // 转换为 anyhow 并添加上下文
 
@@ -3983,7 +3716,6 @@ mod examples {
                 }
 
             })?;
-
 
         Ok(())
 

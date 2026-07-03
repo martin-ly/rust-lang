@@ -369,7 +369,7 @@ def main():
     report_lines.append(f"**总计 {len(source_file_counts)} 个文件包含损坏链接**")
     
     # 写入报告文件
-    report_path = Path('e:/_src/rust-lang/docs/LINK_CHECK_REPORT.md')
+    report_path = Path('e:/_src/rust-lang/docs/link_check_report.md')
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(report_lines))
     

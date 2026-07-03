@@ -12,6 +12,8 @@
 
 # Rust 核心概念 (Core Concepts) {#rust-核心概念-core-concepts}
 
+> **EN**: Core Concepts
+> **Summary**: Rust 核心概念 Core Concepts.
 > **Bloom 层级**: L1-L2 (记忆/理解)
 > **Rust 版本**: 1.96.0+
 > **Edition**: 2024

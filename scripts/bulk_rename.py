@@ -51,12 +51,19 @@ def is_tracked(path: Path) -> bool:
     return result.returncode == 0
 
 
+def ensure_on_disk(path: Path) -> None:
+    """Materialize a case-only rename on case-insensitive filesystems."""
+    if not path.exists():
+        run_git(["checkout", "--", str(path)])
+
+
 def rename_file(old: Path, new: Path) -> None:
     if not old.exists():
         raise FileNotFoundError(old)
     new.parent.mkdir(parents=True, exist_ok=True)
     if is_tracked(old):
         run_git(["mv", str(old), str(new)])
+        ensure_on_disk(new)
     else:
         old.rename(new)
 
@@ -70,8 +77,19 @@ def escape_literal(s: str) -> str:
     return re.escape(s)
 
 
+def should_skip_reference_update(path: Path) -> bool:
+    rel = path.relative_to(ROOT).as_posix()
+    # Read-only / exception / generated areas should not have their references rewritten.
+    return (
+        rel.startswith("archive/")
+        or rel.startswith(".kimi/")
+        or "/.venv/" in rel
+        or rel.startswith("target/")
+    )
+
+
 def update_references(renames: list[tuple[Path, Path]]) -> None:
-    files = iter_tracked_files()
+    files = [f for f in iter_tracked_files() if not should_skip_reference_update(f)]
     # Build replacement specs once.
     specs: list[tuple[re.Pattern[str], str]] = []
     for old, new in renames:
@@ -103,7 +121,8 @@ def update_references(renames: list[tuple[Path, Path]]) -> None:
             continue
         try:
             text = f.read_text(encoding="utf-8")
-        except UnicodeDecodeError:
+        except (UnicodeDecodeError, PermissionError, OSError) as exc:
+            print(f"Warning: skipping reference update for {f}: {exc}")
             continue
         new_text = text
         for pat, repl in specs:

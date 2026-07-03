@@ -1,4 +1,7 @@
 # 实践项目 03: 表达式计算器 {#实践项目-03-表达式计算器}
+
+> **EN**: Project 03 Calculator
+> **Summary**: 实践项目 03 Project 03 Calculator.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

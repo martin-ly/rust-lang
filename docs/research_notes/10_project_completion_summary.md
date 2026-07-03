@@ -1,5 +1,7 @@
 # 项目完成总结 {#项目完成总结}
 
+> **EN**: Project Completion Summary
+> **Summary**: 项目完成总结 Project Completion Summary.
 > **概念族**: 进度 / 统计 / 完成度
 > **内容分级**: [归档级]
 > **状态**: ✅ 已完成权威国际化来源对齐升级

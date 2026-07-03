@@ -10,6 +10,8 @@
 >
 # Rust安全关键系统采用策略与ROI分析
 
+> **EN**: Adoption Strategy And Roi Analysis
+> **Summary**: Rust安全关键系统采用策略与ROI分析 Adoption Strategy And Roi Analysis. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 执行摘要

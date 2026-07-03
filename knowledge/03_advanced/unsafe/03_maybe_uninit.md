@@ -1,5 +1,7 @@
 # MaybeUninit
 
+> **EN**: MaybeUninit
+> **Summary**: MaybeUninit MaybeUninit.
 > **Bloom 层级**: 理解
 > **📌 简介**: `MaybeUninit<T>` 是 Rust 中处理未初始化内存的核心原语
 > [来源: Rustonomicon — Uninitialized Memory / 2025; RFC 1892 — MaybeUninit / 2017; 核心设计决策: `mem::uninitialized()` 因无法正确建模未初始化内存而被弃用，`MaybeUninit<T>` 提供类型安全的未初始化内存抽象; Unsafe Code Guidelines — Validity Invariant / 2025]。

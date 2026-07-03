@@ -1,5 +1,7 @@
 # 异步生态权威来源对齐矩阵 {#异步生态权威来源对齐矩阵}
 
+> **EN**: Async Ecosystem Alignment
+> **Summary**: 异步生态权威来源对齐矩阵 Async Ecosystem Alignment.
 > **概念族**: 权威来源对齐 / 异步生态
 > **内容分级**: [核心级]
 > **层级**: L0-L5

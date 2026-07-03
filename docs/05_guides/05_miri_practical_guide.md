@@ -1,4 +1,7 @@
 # Miri 实战指南：Rust 未定义行为检测工具 {#miri-实战指南rust-未定义行为检测工具}
+
+> **EN**: Miri Practical Guide
+> **Summary**: Miri 实战指南 Miri Practical Guide.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

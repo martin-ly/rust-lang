@@ -1,5 +1,7 @@
 # Rust安全关键系统应用 - 综合意见与建议
 
+> **EN**: Comprehensive Recommendations And Opinions
+> **Summary**: Rust安全关键系统应用 - 综合意见与建议 Comprehensive Recommendations And Opinions. (stub/archive redirect)
 > **Bloom 层级**: 理解
 >
 > **受众**: [初学者] / [进阶]

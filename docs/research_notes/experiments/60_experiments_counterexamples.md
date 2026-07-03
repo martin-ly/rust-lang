@@ -1,5 +1,7 @@
 # 实验与性能研究反例边界 {#实验与性能研究反例边界}
 
+> **EN**: Experiments Counterexamples
+> **Summary**: 实验与性能研究反例边界 Experiments Counterexamples.
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
 > **Bloom 层级**: L5-L6 (分析/评价)

@@ -1,4 +1,7 @@
 # 跨模块学习导航图 {#跨模块学习导航图}
+
+> **EN**: Cross Module Navigation
+> **Summary**: 跨模块学习导航图 Cross Module Navigation.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

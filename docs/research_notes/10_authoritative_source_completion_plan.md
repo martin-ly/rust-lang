@@ -1,5 +1,7 @@
 # 权威来源自动补全计划 {#权威来源自动补全计划}
 
+> **EN**: Authoritative Source Completion Plan
+> **Summary**: 权威来源自动补全计划 Authoritative Source Completion Plan.
 > **概念族**: 权威来源对齐 / 补全计划
 > **内容分级**: [核心级]
 > **层级**: L0-L7

@@ -1,5 +1,7 @@
 # Core Theorems — English Summary {#core-theorems-english-summary}
 
+> **EN**: Core Theorems — English Summary
+> **Summary**: Core Theorems — English Summary Core Theorems — English Summary.
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 >

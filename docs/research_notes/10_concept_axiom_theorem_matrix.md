@@ -1,5 +1,7 @@
 # 概念-公理-定理五维矩阵 {#概念-公理-定理五维矩阵}
 
+> **EN**: Concept Axiom Theorem Matrix
+> **Summary**: 概念-公理-定理五维矩阵 Concept Axiom Theorem Matrix.
 > **概念族**: 概念框架
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

@@ -1,5 +1,7 @@
 # Rust 标准库速查表
 
+> **EN**: Std Library Cheatsheet
+> **Summary**: Rust 标准库速查表 Std Library Cheatsheet.
 > **Bloom 层级**: 理解
 > 本文档为 Rust 标准库常用模块、Trait 和宏的快速参考指南，适合日常开发查阅。
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/),

@@ -1,5 +1,7 @@
 # 性能优化
 
+> **EN**: Performance Optimization
+> **Summary**: 性能优化 Performance Optimization. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/06_ecosystem/15_performance_optimization.md](../../concept/06_ecosystem/15_performance_optimization.md)。
 > **历史版本存档**: [archive/knowledge/03_advanced/05_performance_optimization.md](../../archive/knowledge/03_advanced/05_performance_optimization.md)
 >

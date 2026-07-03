@@ -1,5 +1,7 @@
 # 论证缺口与设计理由综合索引 {#论证缺口与设计理由综合索引}
 
+> **EN**: Argumentation Gap Index
+> **Summary**: 论证缺口与设计理由综合索引 Argumentation Gap Index. (stub/archive redirect)
 > **概念族**: 论证体系
 > **内容分级**: [归档级]
 >

@@ -1,4 +1,7 @@
 # 研究路线图 {#研究路线图}
+
+> **EN**: Research Roadmap
+> **Summary**: 研究路线图 Research Roadmap.
 >
 > **概念族**: 方法论 / 工具 / 指南
 > **内容分级**: [归档级]

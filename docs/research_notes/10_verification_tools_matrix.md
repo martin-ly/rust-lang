@@ -1,5 +1,7 @@
 # 验证工具对比矩阵 {#验证工具对比矩阵}
 
+> **EN**: Verification Tools Matrix
+> **Summary**: 验证工具对比矩阵 Verification Tools Matrix.
 > **概念族**: 安全 / 验证
 > **内容分级**: [归档级]
 >
@@ -141,7 +143,6 @@ fn check_vector_push() {
 
 use prusti_contracts::*;
 
-
 #[ensures(result > a && result > b)]
 
 fn max(a: i32, b: i32) -> i32 {
@@ -149,7 +150,6 @@ fn max(a: i32, b: i32) -> i32 {
     if a > b { a } else { b }
 
 }
-
 
 #[requires(!arr.is_empty())]
 
@@ -186,13 +186,11 @@ graph TD
 
     A --> E[并发安全]
 
-
     B --> B1[Miri]
 
     B --> B2[Kani]
 
     B --> B3[Prusti]
-
 
     C --> C1[编译器]
 
@@ -200,13 +198,11 @@ graph TD
 
     C --> C3[Creusot]
 
-
     D --> D1[Kani]
 
     D --> D2[Prusti]
 
     D --> D3[测试]
-
 
     E --> E1[Miri]
 
@@ -282,7 +278,6 @@ graph TD
 
 name: Formal Verification
 
-
 jobs:
 
   miri:
@@ -296,7 +291,6 @@ jobs:
       - run: rustup component add miri
 
       - run: cargo miri test
-
 
   kani:
 

@@ -25,18 +25,18 @@
 
 | 资源                                                                              | 说明                                 |
 | :--- | :--- |
-| [00_MASTER_INDEX.md](../00_MASTER_INDEX.md)                                       | 完整索引                             |
+| [00_MASTER_INDEX.md](../00_master_index.md)                                       | 完整索引                             |
 | [FAQ.md](tier_01_foundations/04_faq.md)                                                               | 常见问题（完整版）                   |
 | [Glossary.md](tier_01_foundations/03_glossary.md)                                                     | 术语表（完整版）                     |
 | [Tier 1 基础层](../tier_01_foundations/README.md)                                          | 快速入门和基础参考                   |
 | [Tier 1 术语表](../tier_01_foundations/03_glossary.md)                              | 核心术语快速参考                     |
 | [Tier 1 常见问题](../tier_01_foundations/04_faq.md)                          | 新手常见问题解答                     |
-| [OVERVIEW.md](../OVERVIEW.md)                                                     | 概览                                 |
-| [KNOWLEDGE_GRAPH.md](../KNOWLEDGE_GRAPH.md)                                       | 知识图谱                             |
-| [MIND_MAP.md](../MIND_MAP.md)                                                     | 思维导图                             |
-| [RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md](../RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md)         | Rust 1.93.0导图（自 Rust 1.90 引入） |
-| [RUST_190_COMPREHENSIVE_MINDMAP.md](../RUST_190_COMPREHENSIVE_MINDMAP.md)         | Rust 1.90导图（历史版本）            |
-| [MULTIDIMENSIONAL_MATRIX_COMPARISON.md](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md) | 多维对比                             |
+| [OVERVIEW.md](../overview.md)                                                     | 概览                                 |
+| [KNOWLEDGE_GRAPH.md](../knowledge_graph.md)                                       | 知识图谱                             |
+| [MIND_MAP.md](../mind_map.md)                                                     | 思维导图                             |
+| [RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md](../rust_192_design_pattern_improvements.md)         | Rust 1.93.0导图（自 Rust 1.90 引入） |
+| [RUST_190_COMPREHENSIVE_MINDMAP.md](../rust_190_comprehensive_mindmap.md)         | Rust 1.90导图（历史版本）            |
+| [MULTIDIMENSIONAL_MATRIX_COMPARISON.md](../multidimensional_matrix_comparison.md) | 多维对比                             |
 
 ---
 

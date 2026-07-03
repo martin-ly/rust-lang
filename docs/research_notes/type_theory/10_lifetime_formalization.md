@@ -6,6 +6,8 @@
 
 # 生命周期形式化（类型理论视角） {#生命周期形式化类型理论视角}
 
+> **EN**: Lifetime Formalization
+> **Summary**: 生命周期形式化 类型理论视角 Lifetime Formalization.
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -262,7 +264,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 }
 
-
 fn main() {
 
     let string1 = String::from("long string");
@@ -329,7 +330,6 @@ struct ImportantExcerpt<'a> {
 
 }
 
-
 impl<'a> ImportantExcerpt<'a> {
 
     fn level(&self) -> i32 {
@@ -337,7 +337,6 @@ impl<'a> ImportantExcerpt<'a> {
         3
 
     }
-
 
     fn announce_and_return_part(&self, announcement: &str) -> &'a str {
 

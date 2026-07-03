@@ -1,5 +1,7 @@
 # 分布式执行模型形式化 {#分布式执行模型形式化}
 
+> **EN**: Distributed
+> **Summary**: 分布式执行模型形式化 Distributed. (stub/archive redirect)
 > **概念族**: 软件设计 / 执行模型
 > **内容分级**: [归档级]
 >
@@ -110,9 +112,7 @@ pub mod pb {
 
 }
 
-
 use pb::my_service_client::MyServiceClient;
-
 
 #[tokio::main]
 
@@ -138,7 +138,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```rust,ignore
 use actix::prelude::*;
 
-
 struct MyActor;
 
 impl Actor for MyActor {
@@ -147,7 +146,6 @@ impl Actor for MyActor {
 
 }
 
-
 struct MyMessage(String);
 
 impl Message for MyMessage {
@@ -155,7 +153,6 @@ impl Message for MyMessage {
     type Result = String;
 
 }
-
 
 impl Handler<MyMessage> for MyActor {
 
@@ -254,7 +251,6 @@ impl Handler<MyMessage> for MyActor {
 #[derive(serde::Serialize, serde::Deserialize)]
 
 struct Request { id: u64, data: String }
-
 
 let bytes = serde_json::to_vec(&req)?;
 

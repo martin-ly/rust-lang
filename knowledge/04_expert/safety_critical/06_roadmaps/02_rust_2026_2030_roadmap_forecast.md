@@ -11,6 +11,8 @@
 >
 # Rust 2026-2030 前瞻性路线图预测
 
+> **EN**: Rust 2026 2030 Roadmap Forecast
+> **Summary**: Rust 2026-2030 前瞻性路线图预测 Rust 2026 2030 Roadmap Forecast. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 执行摘要

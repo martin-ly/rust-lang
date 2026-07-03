@@ -1,5 +1,7 @@
 # Rust 思维表征方式文档 / Thinking Representation Methods Documentation {#rust-思维表征方式文档-thinking-representation-methods-documentation}
 
+> **EN**: Thinking Representation Methods Documentation
+> **Summary**: Rust 思维表征方式文档 Thinking Representation Methods Documentation. (stub/archive redirect)
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
 
@@ -596,7 +598,7 @@ mindmap
 | 模块 | 思维导图/知识图谱 | 路径 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | C02 | 类型系统多维矩阵 | crates/c02_type_system/docs/ |
-| C03 | 控制流 MIND_MAP | crates/c03_control_fn/docs/MIND_MAP.md |
+| C03 | 控制流 MIND_MAP | crates/c03_control_fn/docs/mind_map.md |
 | C04 | 泛型概念关系 | crates/c04_generic/docs/ |
 | C05 | 并发模型对比 | crates/c05_threads/docs/ |
 | C06 | 异步编程决策树 | crates/c06_async/docs/ |
@@ -605,7 +607,7 @@ mindmap
 | C09 | 设计模式矩阵 | crates/c09_design_pattern/docs/ |
 | C10 | 网络协议矩阵 | docs/04_multi_dimensional_concept_matrix.md |
 | C11 | 宏系统层级 | crates/c11_macro_system_proc/docs/ |
-| C12 | WASM 思维导图 | crates/c12_wasm/docs/WASM_MIND_MAPS.md |
+| C12 | WASM 思维导图 | crates/c12_wasm/docs/wasm_mind_maps.md |
 
 ### 1.12 学习路径思维导图 {#112-学习路径思维导图}
 

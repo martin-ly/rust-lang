@@ -652,7 +652,7 @@ fn benchmark_comparison() {
 ## 相关文档
 
 - [Rust 1.94 发布说明](../../../docs/06_toolchain/16_rust_1.94_release_notes.md)
-- [C03 控制流主索引](../00_MASTER_INDEX.md)
+- [C03 控制流主索引](../00_master_index.md)
 - [生成器 RFC](https://rust-lang.github.io/rfcs/2996-generator-capture-mutable.html)
 - [ControlFlow 文档](https://doc.rust-lang.org/std/ops/enum.ControlFlow.html)
 

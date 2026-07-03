@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""为占位符文件添加实质内容或归档"""
+"""归档迁移脚本：为占位符文件添加实质内容或将 PENDING_ITEMS 归档到 docs/archive/small_files/"""
 
 import os
 import shutil
@@ -170,7 +170,7 @@ pub fn advanced_example<T>(value: T) -> T {{
 ## 相关文档
 
 - [Rust 1.94 发布说明](../../../docs/06_toolchain/16_rust_1.94_release_notes.md)
-- [{crate_name} 主索引](../00_MASTER_INDEX.md)
+- [{crate_name} 主索引](../00_master_index.md)
 - [Edition 2024 指南](../../../docs/05_guides/RUST_194_MIGRATION_GUIDE.md)
 
 ---

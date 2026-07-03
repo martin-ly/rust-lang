@@ -19,7 +19,7 @@ if $gateway; then
   (cargo run --example async_api_gateway_2025 &) 
 fi
 
-docker compose -f ../deployment/docker-compose.observability.yml up -d
+docker compose -f ../deployment/docker_compose_observability.yml up -d
 sleep 2
 echo "Prometheus: http://localhost:9090"
 echo "Grafana:    http://localhost:3000 (admin/admin)"

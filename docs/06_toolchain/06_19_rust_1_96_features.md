@@ -1,5 +1,7 @@
 # Rust 1.96 稳定特性全景
 
+> **EN**: 19 Rust 1 96 Features
+> **Summary**: Rust 1.96 稳定特性全景 19 Rust 1 96 Features. (stub/archive redirect)
 > **注意**: Rust 1.96 稳定特性的权威来源已整合到 `concept/07_future/rust_1_96_stabilized.md`。
 > 请以 [concept/07_future/rust_1_96_stabilized.md](../../concept/07_future/rust_1_96_stabilized.md) 为权威来源。
 >

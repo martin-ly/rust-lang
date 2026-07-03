@@ -1,5 +1,7 @@
 # 分布式模式特性矩阵 {#分布式模式特性矩阵}
 
+> **EN**: Distributed Pattern Matrix
+> **Summary**: 分布式模式特性矩阵 Distributed Pattern Matrix.
 > **概念族**: 软件设计 / 分布式系统
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -194,7 +196,6 @@
 
 └── Timeout (资源控制)
 
-
 中间层
 
 ├── Circuit Breaker (故障隔离)
@@ -203,7 +204,6 @@
 
 └── Bulkhead (资源隔离)
 
-
 事务层
 
 ├── Saga (长事务)
@@ -211,7 +211,6 @@
 ├── TCC (柔性事务)
 
 └── 2PC (强一致)
-
 
 数据层
 

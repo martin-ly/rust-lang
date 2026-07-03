@@ -1,5 +1,7 @@
 # Decorator 形式化分析 {#decorator-形式化分析}
 
+> **EN**: Decorator
+> **Summary**: Decorator 形式化分析 Decorator.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -259,7 +261,6 @@ trait Coffee {
 
 }
 
-
 struct PlainCoffee;
 
 impl Coffee for PlainCoffee {
@@ -270,13 +271,11 @@ impl Coffee for PlainCoffee {
 
 }
 
-
 struct MilkDecorator<C: Coffee> {
 
     inner: C,
 
 }
-
 
 impl<C: Coffee> Coffee for MilkDecorator<C> {
 
@@ -293,7 +292,6 @@ impl<C: Coffee> Coffee for MilkDecorator<C> {
     }
 
 }
-
 
 // 使用：叠加装饰
 
@@ -322,7 +320,6 @@ trait Coffee {
 
 }
 
-
 struct SimpleCoffee;
 
 impl Coffee for SimpleCoffee {
@@ -333,7 +330,6 @@ impl Coffee for SimpleCoffee {
 
 }
 
-
 struct MilkDecorator<C: Coffee> { component: C }
 
 impl<C: Coffee> Coffee for MilkDecorator<C> {
@@ -343,7 +339,6 @@ impl<C: Coffee> Coffee for MilkDecorator<C> {
     fn description(&self) -> String { format!("{}, milk", self.component.description()) }
 
 }
-
 
 fn main() {
 
@@ -521,7 +516,6 @@ trait HttpClient {
 
 }
 
-
 struct ReqwestClient;
 
 impl HttpClient for ReqwestClient {
@@ -533,7 +527,6 @@ impl HttpClient for ReqwestClient {
     }
 
 }
-
 
 struct LogDecorator<C: HttpClient> { inner: C }
 
@@ -548,7 +541,6 @@ impl<C: HttpClient> HttpClient for LogDecorator<C> {
     }
 
 }
-
 
 struct RetryDecorator<C: HttpClient> { inner: C, max_retries: u32 }
 
@@ -575,7 +567,6 @@ impl<C: HttpClient> HttpClient for RetryDecorator<C> {
     }
 
 }
-
 
 // 使用：LogDecorator { inner: RetryDecorator { inner: ReqwestClient, max_retries: 2 } }
 ```

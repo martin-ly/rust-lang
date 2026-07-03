@@ -1,4 +1,7 @@
 # 实践项目 15: 分布式KV存储 {#实践项目-15-分布式kv存储}
+
+> **EN**: Project 15 Distributed System
+> **Summary**: 实践项目 15 Project 15 Distributed System.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

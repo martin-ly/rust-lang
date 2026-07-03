@@ -1,5 +1,7 @@
 # 100% 完成度验证报告 {#100-完成度验证报告}
 
+> **EN**: 100 Percent Completion Verification
+> **Summary**: 100% 完成度验证报告 100 Percent Completion Verification.
 > **概念族**: 进度 / 统计 / 完成度
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

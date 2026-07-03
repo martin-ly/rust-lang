@@ -1,5 +1,7 @@
 # Adapter 形式化分析 {#adapter-形式化分析}
 
+> **EN**: Adapter
+> **Summary**: Adapter 形式化分析 Adapter.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -269,7 +271,6 @@ impl LegacyLogger {
 
 }
 
-
 // 目标接口
 
 trait Logger {
@@ -278,11 +279,9 @@ trait Logger {
 
 }
 
-
 // 适配器
 
 struct Adapter { inner: LegacyLogger }
-
 
 impl Logger for Adapter {
 
@@ -293,7 +292,6 @@ impl Logger for Adapter {
     }
 
 }
-
 
 // 使用
 
@@ -322,7 +320,6 @@ trait Target {
 
 }
 
-
 // 被适配者（第三方库，不可修改）
 
 struct Adaptee;
@@ -336,7 +333,6 @@ impl Adaptee {
     }
 
 }
-
 
 // 对象适配器
 
@@ -352,13 +348,11 @@ impl Target for Adapter {
 
 }
 
-
 fn client_code<T: Target>(t: &T) {
 
     println!("{}", t.request());
 
 }
-
 
 fn main() {
 
@@ -539,7 +533,6 @@ trait HttpClient {
 
 }
 
-
 // 被适配者（假设外部 crate）
 
 struct ReqwestClient;
@@ -556,11 +549,9 @@ impl ReqwestClient {
 
 }
 
-
 // 适配器
 
 struct ReqwestAdapter { inner: ReqwestClient }
-
 
 impl HttpClient for ReqwestAdapter {
 
@@ -571,7 +562,6 @@ impl HttpClient for ReqwestAdapter {
     }
 
 }
-
 
 // 客户端仅依赖 HttpClient trait
 

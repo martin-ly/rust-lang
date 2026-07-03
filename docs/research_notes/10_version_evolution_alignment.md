@@ -1,5 +1,7 @@
 # 版本演进权威来源对齐矩阵 {#版本演进权威来源对齐矩阵}
 
+> **EN**: Version Evolution Alignment
+> **Summary**: 版本演进权威来源对齐矩阵 Version Evolution Alignment.
 > **概念族**: 权威来源对齐 / 版本演进
 > **内容分级**: [核心级]
 > **层级**: L0-L5

@@ -338,8 +338,8 @@ graph TD
 或者：
 
 - 📖 查看完整的 [学习路线图](../COMPREHENSIVE_LEARNING_GUIDE.md)
-- 🗺️ 浏览 [主索引](../00_MASTER_INDEX.md)
-- 📊 查看 [可视化资源](../VISUALIZATION_INDEX.md)
+- 🗺️ 浏览 [主索引](../00_master_index.md)
+- 📊 查看 [可视化资源](../visualization_index.md)
 
 ---
 

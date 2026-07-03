@@ -1,5 +1,7 @@
 # 形式化验证工具实战对齐矩阵 {#形式化验证工具实战对齐矩阵}
 
+> **EN**: Verification Tools Practical Alignment
+> **Summary**: 形式化验证工具实战对齐矩阵 Verification Tools Practical Alignment.
 > **概念族**: 权威来源对齐 / 形式化验证工具
 > **内容分级**: [核心级]
 > **层级**: L3-L4

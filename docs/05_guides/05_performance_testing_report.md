@@ -1,5 +1,7 @@
 # 性能测试报告 {#性能测试报告}
 
+> **EN**: Performance Testing Report
+> **Summary**: 性能测试报告 Performance Testing Report.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
 >

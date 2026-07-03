@@ -1,5 +1,7 @@
 # 版本演进边界与迁移反例 {#版本演进边界与迁移反例}
 
+> **EN**: Version Evolution Counterexamples
+> **Summary**: 版本演进边界与迁移反例 Version Evolution Counterexamples.
 > **内容分级**: [核心级]
 > **层级**: L6-L7 (版本边界 / 演进)
 > **Bloom 层级**: L5-L6 (分析/评价)

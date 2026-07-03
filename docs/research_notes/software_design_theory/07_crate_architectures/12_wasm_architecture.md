@@ -10,6 +10,8 @@
 
 # WebAssembly 互操作架构 {#webassembly-互操作架构}
 
+> **EN**: Wasm Architecture
+> **Summary**: WebAssembly 互操作架构 Wasm Architecture.
 > **内容分级**: [归档级]
 >
 > **分级**: [B]

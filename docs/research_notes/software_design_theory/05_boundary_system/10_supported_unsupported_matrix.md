@@ -1,5 +1,7 @@
 # 支持 vs 不支持边界矩阵 {#支持-vs-不支持边界矩阵}
 
+> **EN**: Supported Unsupported Matrix
+> **Summary**: 支持 vs 不支持边界矩阵 Supported Unsupported Matrix. (stub/archive redirect)
 > **概念族**: 软件设计 / 边界系统
 > **内容分级**: [归档级]
 > **创建日期**: 2026-02-12

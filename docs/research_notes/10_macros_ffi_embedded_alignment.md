@@ -1,5 +1,7 @@
 # 宏系统、FFI 与嵌入式生态权威来源对齐矩阵 {#宏系统ffi-与嵌入式生态权威来源对齐矩阵}
 
+> **EN**: Macros FFI Embedded Alignment
+> **Summary**: 宏系统、FFI 与嵌入式生态权威来源对齐矩阵 Macros FFI Embedded Alignment.
 > **概念族**: 权威来源对齐 / 宏 / FFI / 嵌入式
 > **内容分级**: [核心级]
 > **层级**: L0-L5

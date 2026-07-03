@@ -1,4 +1,7 @@
 # 研究方法论 {#研究方法论}
+
+> **EN**: Research Methodology
+> **Summary**: 研究方法论 Research Methodology.
 >
 > **概念族**: 方法论 / 工具 / 指南
 > **内容分级**: [归档级]

@@ -3,7 +3,7 @@
 > **文档类型**: 高级主题
 > **难度**: ⭐⭐⭐⭐⭐
 > **适用版本**: Rust 1.92.0+
-> **对齐知识综合**: [docs/02_reference/ALIGNMENT_GUIDE.md](../../../../docs/02_reference/ALIGNMENT_GUIDE.md)
+> **对齐知识综合**: [docs/02_reference/alignment_guide.md](../../../../docs/02_reference/alignment_guide.md)
 
 ---
 
@@ -103,7 +103,7 @@ let v = vec![ZeroSized; 1000]; // 无内存开销
 - [Tier 4: 03\_所有权性能优化](03_ownership_performance_optimization.md)
 - [09\_性能优化参考](../tier_03_references/09_performance_optimization_reference.md) - 数据对齐和填充、缓存友好设计
 - [08\_内存安全参考](../tier_03_references/08_memory_safety_reference.md) - 对齐和大小、FFI
-- [ALIGNMENT_GUIDE](../../../../docs/02_reference/ALIGNMENT_GUIDE.md) - 对齐知识综合指南（内存/格式化/unsafe/缓存行）
+- [ALIGNMENT_GUIDE](../../../../docs/02_reference/alignment_guide.md) - 对齐知识综合指南（内存/格式化/unsafe/缓存行）
 - [type_system 速查卡](../../../../docs/02_reference/quick_reference/type_system.md) - 内存对齐小节
 - [c05 缓存行对齐](../../../c05_threads/docs/tier_04_advanced/02_systems_programming_optimization.md#51-缓存行对齐) - 并发场景
 

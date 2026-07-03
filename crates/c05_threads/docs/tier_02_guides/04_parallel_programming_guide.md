@@ -861,7 +861,7 @@ fn main() {
 ### 10.1 官方文档
 
 - [Rayon Documentation](https://docs.rs/rayon)
-- [Rayon Book](https://github.com/rayon-rs/rayon/blob/master/FAQ.md)
+- [Rayon Book](https://github.com/rayon-rs/rayon/blob/master/faq.md)
 
 ### 10.2 推荐阅读
 

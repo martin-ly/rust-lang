@@ -39,7 +39,7 @@
 | 概念 | 相关文档 | 相关 Crate |
 |------|----------|------------|
 | 借用检查 | [CROSS_MODULE_NAVIGATION.md](../docs/CROSS_MODULE_NAVIGATION.md) | c01_ownership_borrow_scope |
-| 智能指针 | [docs/05_guides/BEST_PRACTICES.md](../docs/05_guides/BEST_PRACTICES.md) | c04_generic |
+| 智能指针 | [docs/05_guides/best_practices.md](../docs/05_guides/best_practices.md) | c04_generic |
 | 生命周期 | [docs/04_thinking/](../docs/04_thinking) | c02_type_system |
 
 ---

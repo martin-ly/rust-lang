@@ -1,4 +1,7 @@
 # Miri 使用指南：检测 Rust 未定义行为（UB） {#miri-使用指南检测-rust-未定义行为ub}
+
+> **EN**: UB
+> **Summary**: Miri 使用指南：检测 Rust 未定义行为 UB.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

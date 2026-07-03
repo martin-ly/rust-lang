@@ -1,5 +1,7 @@
 # Linux Foundation Certified Rust Programmer (LFRS) 认证映射 {#linux-foundation-certified-rust-programmer-lfrs-认证映射}
 
+> **EN**: Linux Foundation Certified Rust Programmer LFRS
+> **Summary**: 认证映射 Linux Foundation Certified Rust Programmer LFRS.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
 > **Bloom 层级**: L1-L2 (记忆/理解)
@@ -317,7 +319,7 @@
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - 每道练习题都包含完整测试用例
-- `scripts/exercise-check.ps1` / `.sh` 提供自动化测试运行
+- `scripts/exercise_check.ps1` / `.sh` 提供自动化测试运行
 
 ---
 
@@ -438,7 +440,7 @@
 1. 完成 `exercises/rustlings_style/` 中的 10 道编译修复题
 2. 按考点顺序完成 `exercises/src/` 下的 30 道练习题
 3. 对照本映射文档查漏补缺
-4. 运行 `scripts/exercise-check.ps1` 验证掌握度
+4. 运行 `scripts/exercise_check.ps1` 验证掌握度
 
 ---
 
@@ -461,7 +463,7 @@
 - [01_google_rust_mapping.md](01_google_rust_mapping.md) - Google Comprehensive Rust 映射
 - [05_pragmatic_guidelines_checklist.md](../05_guides/05_pragmatic_guidelines_checklist.md) - 代码审查清单
 - [exercises/README.md](../../exercises/README.md) - 练习题总入口
-- [RUSTLINGS_MAPPING.md](../../exercises/RUSTLINGS_MAPPING.md) - Rustlings 习题映射
+- [RUSTLINGS_MAPPING.md](../../exercises/rustlings_mapping.md) - Rustlings 习题映射
 
 ---
 

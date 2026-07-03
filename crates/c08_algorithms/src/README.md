@@ -332,7 +332,7 @@ use c08_algorithms::data_structure::stack::Stack;
 
 - [主 README](../README.md) - 项目概览
 - [示例程序](../examples/README.md) - 使用示例
-- [文档索引](../docs/00_MASTER_INDEX.md) - 完整文档导航
+- [文档索引](../docs/00_master_index.md) - 完整文档导航
 
 ## 🔧 开发规范
 

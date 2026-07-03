@@ -1,5 +1,7 @@
 # Cranelift 后端实用指南 {#cranelift-后端实用指南}
 
+> **EN**: Cranelift Backend Guide
+> **Summary**: Cranelift 后端实用指南 Cranelift Backend Guide.
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
 > **创建日期**: 2026-05-08

@@ -1,5 +1,7 @@
 # Mediator 形式化分析 {#mediator-形式化分析}
 
+> **EN**: Mediator
+> **Summary**: Mediator 形式化分析 Mediator.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -243,7 +245,6 @@ struct Mediator {
 
 }
 
-
 impl Mediator {
 
     fn broadcast(&self, msg: &str) {
@@ -257,7 +258,6 @@ impl Mediator {
     }
 
 }
-
 
 // 同事通过 Mediator 通信
 
@@ -288,11 +288,9 @@ m.broadcast("hello");
 ```rust
 use std::sync::mpsc;
 
-
 #[derive(Debug, Clone)]
 
 enum Event { Clicked, Changed(String) }
-
 
 struct Mediator {
 
@@ -310,7 +308,6 @@ impl Mediator {
 
 }
 
-
 struct Component { name: String, mediator: Mediator }
 
 impl Component {
@@ -318,7 +315,6 @@ impl Component {
     fn click(&self) { self.mediator.notify(&self.name, Event::Clicked); }
 
 }
-
 
 fn main() {
 
@@ -479,16 +475,13 @@ use std::sync::mpsc;
 
 use std::thread;
 
-
 struct ChatMessage { from: String, content: String }
-
 
 struct ChatMediator {
 
     tx: mpsc::Sender<ChatMessage>,
 
 }
-
 
 impl ChatMediator {
 
@@ -499,7 +492,6 @@ impl ChatMediator {
     }
 
 }
-
 
 fn run_room(rx: mpsc::Receiver<ChatMessage>) {
 

@@ -1,5 +1,7 @@
 # Rust 特性精简模板 {#rust-特性精简模板}
 
+> **EN**: Feature Template
+> **Summary**: Rust 特性精简模板 Feature Template.
 > **概念族**: 版本特性
 > **内容分级**: [归档级]
 >

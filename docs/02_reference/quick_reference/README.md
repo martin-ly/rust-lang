@@ -1,5 +1,7 @@
 # Rust 快速参考指南 {#rust-快速参考指南}
 
+> **EN**: Quick Reference Index
+> **Summary**: Rust 快速参考指南 Quick Reference Index. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 > **创建日期**: 2025-12-11
@@ -582,7 +584,7 @@
 | **并发编程**  | 线程与并发 → 异步编程 → 智能指针  |
 | **组织代码**  | 模块系统 → Cargo → 类型系统  |
 | **调试问题**  | 错误处理 → 测试 → 类型系统  |
-| **性能优化**  | 智能指针 → 集合与迭代器 → 测试（性能测试）→ [ALIGNMENT_GUIDE](../ALIGNMENT_GUIDE.md)（内存/缓存行对齐） |
+| **性能优化**  | 智能指针 → 集合与迭代器 → 测试（性能测试）→ [ALIGNMENT_GUIDE](../alignment_guide.md)（内存/缓存行对齐） |
 | **发布项目**  | Cargo → 测试 → 模块系统  |
 
 ---
@@ -627,7 +629,7 @@
 
 **参考指南**:
 
-- [ALIGNMENT_GUIDE](../ALIGNMENT_GUIDE.md) - 对齐知识综合（内存/格式化/unsafe/缓存行/权威来源）
+- [ALIGNMENT_GUIDE](../alignment_guide.md) - 对齐知识综合（内存/格式化/unsafe/缓存行/权威来源）
 
 **核心模块文档**:
 

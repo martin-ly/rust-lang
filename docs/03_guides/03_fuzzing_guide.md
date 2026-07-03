@@ -1,4 +1,7 @@
 # cargo-fuzz 模糊测试入门指南 {#cargo-fuzz-模糊测试入门指南}
+
+> **EN**: Fuzzing Guide
+> **Summary**: cargo-fuzz 模糊测试入门指南 Fuzzing Guide.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

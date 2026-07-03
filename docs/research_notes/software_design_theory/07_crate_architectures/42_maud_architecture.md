@@ -17,6 +17,8 @@
 
 # Maud Crate 架构解构 {#maud-crate-架构解构}
 
+> **EN**: Maud Architecture
+> **Summary**: Maud Crate 架构解构 Maud Architecture.
 > **最后更新**: 2026-06-29
 >
 > **内容分级**: [归档级]

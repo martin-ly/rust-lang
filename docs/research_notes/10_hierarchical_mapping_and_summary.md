@@ -1,5 +1,7 @@
 # research_notes 层次化梳理与映射总结 {#research_notes-层次化梳理与映射总结}
 
+> **EN**: Hierarchical Mapping And Summary
+> **Summary**: research_notes 层次化梳理与映射总结 Hierarchical Mapping And Summary.
 > **概念族**: 元/导航/索引
 > **内容分级**: [归档级]
 >

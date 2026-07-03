@@ -1,5 +1,7 @@
 # 闭包速查卡 (Closures Cheatsheet) {#闭包速查卡-closures-cheatsheet}
 
+> **EN**: Closures Cheatsheet
+> **Summary**: 闭包速查卡 Closures Cheatsheet.
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 > **最后更新**: 2026-05-08

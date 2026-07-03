@@ -17,6 +17,8 @@
 
 # Salvo Crate 架构解构 {#salvo-crate-架构解构}
 
+> **EN**: Salvo Architecture
+> **Summary**: Salvo Crate 架构解构 Salvo Architecture.
 > **最后更新**: 2026-06-29
 >
 > **内容分级**: [归档级]

@@ -1,5 +1,7 @@
 # 权威来源对齐网络总索引 {#权威来源对齐网络总索引}
 
+> **EN**: Authoritative Source Alignment Network
+> **Summary**: 权威来源对齐网络总索引 Authoritative Source Alignment Network.
 > **概念族**: 权威来源对齐 / 索引
 > **内容分级**: [核心级]
 > **层级**: L0-L1

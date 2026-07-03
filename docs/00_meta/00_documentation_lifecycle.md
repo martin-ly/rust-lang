@@ -1,5 +1,7 @@
 # 文档生命周期管理制度 {#文档生命周期管理制度}
 
+> **EN**: Documentation Lifecycle
+> **Summary**: 文档生命周期管理制度 Documentation Lifecycle. (stub/archive redirect)
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2 (理解)

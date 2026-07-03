@@ -12,6 +12,8 @@
 
 # 并发性能研究 {#并发性能研究}
 
+> **EN**: Concurrency Performance
+> **Summary**: 并发性能研究 Concurrency Performance. (stub/archive redirect)
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -323,18 +325,15 @@ use std::thread;
 
 use std::time::Instant;
 
-
 const ITERATIONS: usize = 1_000_000;
 
 const THREADS: usize = 4;
-
 
 fn mutex_benchmark() -> u128 {
 
     let data = Arc::new(Mutex::new(0));
 
     let start = Instant::now();
-
 
     let handles: Vec<_> = (0..THREADS)
 
@@ -358,25 +357,21 @@ fn mutex_benchmark() -> u128 {
 
         .collect();
 
-
     for handle in handles {
 
         handle.join().unwrap();
 
     }
 
-
     start.elapsed().as_millis()
 
 }
-
 
 fn rwlock_benchmark() -> u128 {
 
     let data = Arc::new(RwLock::new(0));
 
     let start = Instant::now();
-
 
     let handles: Vec<_> = (0..THREADS)
 
@@ -400,25 +395,21 @@ fn rwlock_benchmark() -> u128 {
 
         .collect();
 
-
     for handle in handles {
 
         handle.join().unwrap();
 
     }
 
-
     start.elapsed().as_millis()
 
 }
-
 
 fn main() {
 
     let mutex_time = mutex_benchmark();
 
     let rwlock_time = rwlock_benchmark();
-
 
     println!("Mutex 时间: {} ms", mutex_time);
 
@@ -438,16 +429,13 @@ use std::thread;
 
 use std::time::Instant;
 
-
 const MESSAGES: usize = 1_000_000;
-
 
 fn channel_benchmark() -> u128 {
 
     let (tx, rx) = mpsc::channel();
 
     let start = Instant::now();
-
 
     let sender = thread::spawn(move || {
 
@@ -458,7 +446,6 @@ fn channel_benchmark() -> u128 {
         }
 
     });
-
 
     let receiver = thread::spawn(move || {
 
@@ -478,16 +465,13 @@ fn channel_benchmark() -> u128 {
 
     });
 
-
     sender.join().unwrap();
 
     receiver.join().unwrap();
 
-
     start.elapsed().as_millis()
 
 }
-
 
 #[tokio::main]
 
@@ -496,7 +480,6 @@ async fn tokio_unbounded_channel_benchmark() {
     let (tx, mut rx) = tokio::sync::mpsc::unbounded_channel();
 
     let start = tokio::time::Instant::now();
-
 
     let sender = tokio::spawn(async move {
 
@@ -507,7 +490,6 @@ async fn tokio_unbounded_channel_benchmark() {
         }
 
     });
-
 
     let receiver = tokio::spawn(async move {
 
@@ -527,11 +509,9 @@ async fn tokio_unbounded_channel_benchmark() {
 
     });
 
-
     sender.await.unwrap();
 
     receiver.await.unwrap();
-
 
     let duration = start.elapsed();
 
@@ -549,16 +529,13 @@ use tokio::time::Instant;
 
 use std::time::Duration;
 
-
 const TASKS: usize = 10_000;
-
 
 #[tokio::main]
 
 async fn async_task_benchmark() {
 
     let start = Instant::now();
-
 
     let handles: Vec<_> = (0..TASKS)
 
@@ -576,13 +553,11 @@ async fn async_task_benchmark() {
 
         .collect();
 
-
     for handle in handles {
 
         handle.await.unwrap();
 
     }
-
 
     let duration = start.elapsed();
 

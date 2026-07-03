@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-修复 docs/archive/c_class_audit_2026_06_08/ 内文件因归档导致的相对链接损坏。
+归档迁移脚本：修复 docs/archive/c_class_audit_2026_06_08/ 内文件因归档导致的相对链接损坏。
 策略：按文件原始位置（去掉 archive/c_class_audit_2026_06_08/ 后）解析相对链接，
 若目标存在，则重写到从当前归档位置到该目标的相对路径。
 """

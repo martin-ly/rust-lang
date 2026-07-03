@@ -1,4 +1,7 @@
 # 2026年3月项目重组记录 {#2026年3月项目重组记录}
+
+> **EN**: 2026 Reorganization
+> **Summary**: 2026年3月项目重组记录 2026 Reorganization. (stub/archive redirect)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [C]

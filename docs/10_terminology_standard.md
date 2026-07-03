@@ -7,6 +7,8 @@
 
 # Rust 术语标准化文档 {#rust-术语标准化文档}
 
+> **EN**: Terminology Standard
+> **Summary**: Rust 术语标准化文档 Terminology Standard. (stub/archive redirect)
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)

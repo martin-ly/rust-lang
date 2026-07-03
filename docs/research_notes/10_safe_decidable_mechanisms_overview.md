@@ -1,5 +1,7 @@
 # 安全可判定机制总览 {#安全可判定机制总览}
 
+> **EN**: Safe Decidable Mechanisms Overview
+> **Summary**: 安全可判定机制总览 Safe Decidable Mechanisms Overview.
 > **概念族**: 形式化方法 / 安全可判定机制
 > **内容分级**: [归档级]
 >

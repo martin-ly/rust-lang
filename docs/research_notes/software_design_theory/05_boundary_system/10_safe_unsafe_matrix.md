@@ -1,5 +1,7 @@
 # 安全 vs 非安全边界矩阵 {#安全-vs-非安全边界矩阵}
 
+> **EN**: Safe Unsafe Matrix
+> **Summary**: 安全 vs 非安全边界矩阵 Safe Unsafe Matrix. (stub/archive redirect)
 > **概念族**: 软件设计 / 边界系统
 > **内容分级**: [归档级]
 >
@@ -357,11 +359,9 @@
 ```rust
 use std::sync::OnceLock;
 
-
 struct Config { db_url: String, port: u16 }
 
 static CONFIG: OnceLock<Config> = OnceLock::new();
-
 
 fn config() -> &'static Config {
 
@@ -402,7 +402,6 @@ let (tx, rx) = mpsc::channel::<Event>();
 
 ```rust,ignore
 pub trait PaymentGateway { fn charge(&self, amount: u64) -> Result<(), String>; }
-
 
 struct FFIPaymentGateway { /* 持有 *mut c_void 等 */ }
 

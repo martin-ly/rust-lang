@@ -1,5 +1,7 @@
 # 学术论文与形式化工具对齐索引 {#学术论文与形式化工具对齐索引}
 
+> **EN**: Academic Papers Alignment
+> **Summary**: 学术论文与形式化工具对齐索引 Academic Papers Alignment.
 > **概念族**: 权威来源对齐 / 学术资源
 > **内容分级**: [核心级]
 > **层级**: L0-L6

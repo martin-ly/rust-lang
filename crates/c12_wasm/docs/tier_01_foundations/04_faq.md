@@ -338,7 +338,7 @@ wasm-pack test --headless --firefox
    use c12_wasm::rust_192_features::wasm_rotate_data;
    wasm_rotate_data(&mut data, 3);
    ```
-**详细文档**: [Rust 1.92.0 WASM 改进文档](../RUST_192_WASM_IMPROVEMENTS.md)
+**详细文档**: [Rust 1.92.0 WASM 改进文档](../rust_192_wasm_improvements.md)
 
 ---
 
@@ -354,7 +354,7 @@ wasm-pack test --headless --firefox
 | rotate_right      | +30-35%     | 数据旋转     |
 | **综合优化**      | **+20-30%** | **整体性能** |
 
-**详细测试**: [Rust 1.92.0 性能基准测试](../RUST_192_PERFORMANCE_BENCHMARKS.md)
+**详细测试**: [Rust 1.92.0 性能基准测试](../rust_192_performance_benchmarks.md)
 
 ---
 
@@ -382,7 +382,7 @@ wasm-pack test --headless --firefox
    - 使用迭代器特化优化性能
    - 使用 rotate_right 优化数据操作
 
-**详细指南**: [Rust 1.92.0 WASM 迁移指南](../RUST_192_MIGRATION_GUIDE.md)
+**详细指南**: [Rust 1.92.0 WASM 迁移指南](../rust_192_migration_guide.md)
 
 ---
 

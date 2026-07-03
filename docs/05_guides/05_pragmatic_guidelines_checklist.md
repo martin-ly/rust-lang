@@ -1,4 +1,7 @@
 # Microsoft Pragmatic Rust Guidelines 代码审查清单 {#microsoft-pragmatic-rust-guidelines-代码审查清单}
+
+> **EN**: Pragmatic Guidelines Checklist
+> **Summary**: Microsoft Pragmatic Rust Guidelines 代码审查清单 Pragmatic Guidelines Checklist.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

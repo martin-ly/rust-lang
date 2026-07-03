@@ -1,5 +1,7 @@
 # 线程与并发使用指南 {#线程与并发使用指南}
 
+> **EN**: Threads Concurrency Usage Guide
+> **Summary**: 线程与并发使用指南 Threads Concurrency Usage Guide. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 >

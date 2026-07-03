@@ -12,6 +12,8 @@
 
 # 教程：并发模型 {#教程并发模型}
 
+> **EN**: Tutorial Concurrency Models
+> **Summary**: 教程 Tutorial Concurrency Models. (stub/archive redirect)
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -111,7 +113,6 @@ Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 
 └─────────────────────────────────────>
 
-
 并行: 任务同时执行 (多核)
 
 ┌─────────────────────────────────────>
@@ -134,11 +135,9 @@ Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 
 pub unsafe auto trait Send {}
 
-
 // Sync: 可安全跨线程共享引用
 
 pub unsafe auto trait Sync {}
-
 
 // 规则: T: Sync 当且仅当 &T: Send
 ```
@@ -168,7 +167,6 @@ use std::thread;
 
 use std::time::Duration;
 
-
 // 基本线程
 
 let handle = thread::spawn(|| {
@@ -182,7 +180,6 @@ let handle = thread::spawn(|| {
     }
 
 });
-
 
 // 等待线程完成
 
@@ -200,11 +197,9 @@ use std::sync::mpsc;
 
 use std::thread;
 
-
 // 多生产者单消费者通道
 
 let (tx, rx) = mpsc::channel();
-
 
 thread::spawn(move || {
 
@@ -215,7 +210,6 @@ thread::spawn(move || {
     // val 已被移动，不可用
 
 });
-
 
 let received = rx.recv().unwrap();
 
@@ -233,11 +227,9 @@ use std::sync::{Arc, Mutex};
 
 use std::thread;
 
-
 let counter = Arc::new(Mutex::new(0));
 
 let mut handles = vec![];
-
 
 for _ in 0..10 {
 
@@ -255,13 +247,11 @@ for _ in 0..10 {
 
 }
 
-
 for handle in handles {
 
     handle.join().unwrap();
 
 }
-
 
 println!("Result: {}", *counter.lock().unwrap()); // 10
 ```
@@ -287,16 +277,13 @@ println!("Result: {}", *counter.lock().unwrap()); // 10
 ```rust
 use std::sync::RwLock;
 
-
 let data = RwLock::new(5);
-
 
 // 多个读锁可以共存
 
 let r1 = data.read().unwrap();
 
 let r2 = data.read().unwrap();
-
 
 // 写锁独占
 
@@ -318,24 +305,19 @@ let r2 = data.read().unwrap();
 ```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
-
 let counter = AtomicUsize::new(0);
-
 
 // 读
 
 counter.load(Ordering::Relaxed);
 
-
 // 写
 
 counter.store(42, Ordering::Relaxed);
 
-
 // 原子加
 
 counter.fetch_add(1, Ordering::SeqCst);
-
 
 // CAS
 
@@ -366,11 +348,9 @@ use std::pin::Pin;
 
 use std::task::{Context, Poll};
 
-
 // Future是惰性的
 
 let f = async { 42 };  // 尚未执行
-
 
 // 需要executor来运行
 
@@ -391,7 +371,6 @@ async fn fetch_data(url: &str) -> Result<String, Error> {
     Ok(data)
 
 }
-
 
 // 并发执行
 
@@ -437,11 +416,9 @@ async fn fetch_multiple() -> Result<(), Error> {
 ```rust,ignore
 use rayon::prelude::*;
 
-
 // 数据并行
 
 let sum: i32 = (0..100).into_par_iter().sum();
-
 
 // 任务并行
 
@@ -463,9 +440,7 @@ use crossbeam::channel;
 
 use std::thread;
 
-
 let (s, r) = channel::bounded(100);
-
 
 // 生产者
 
@@ -478,7 +453,6 @@ thread::spawn(move || {
     }
 
 });
-
 
 // 消费者
 
@@ -500,13 +474,11 @@ thread::spawn(move || {
 ```rust,ignore
 use actix::prelude::*;
 
-
 struct MyActor {
 
     count: usize,
 
 }
-
 
 impl Actor for MyActor {
 
@@ -514,9 +486,7 @@ impl Actor for MyActor {
 
 }
 
-
 struct MyMessage;
-
 
 impl Message for MyMessage {
 
@@ -524,11 +494,9 @@ impl Message for MyMessage {
 
 }
 
-
 impl Handler<MyMessage> for MyActor {
 
     type Result = usize;
-
 
     fn handle(&mut self, _msg: MyMessage, _ctx: &mut Context<Self>) -> Self::Result {
 
@@ -574,7 +542,6 @@ async fn bad() {
 
 }
 
-
 // ✅ 使用tokio::sync::Mutex
 
 async fn good() {
@@ -585,7 +552,6 @@ async fn good() {
 
 }
 
-
 // ❌ 在async块中使用阻塞IO
 
 async fn bad2() {
@@ -593,7 +559,6 @@ async fn bad2() {
     std::fs::read_to_string("file").unwrap();  // 阻塞!
 
 }
-
 
 // ✅ 使用异步IO
 
@@ -622,7 +587,6 @@ async fn good2() {
 ```rust,ignore
 use std::thread;
 
-
 let handle = thread::spawn(|| {
 
     // CPU密集型计算
@@ -630,7 +594,6 @@ let handle = thread::spawn(|| {
     heavy_computation()
 
 });
-
 
 let result = handle.join().unwrap();
 ```
@@ -658,7 +621,6 @@ let result = handle.join().unwrap();
 async fn main() {
 
     let listener = tokio::net::TcpListener::bind("127.0.0.1:8080").await.unwrap();
-
 
     loop {
 
@@ -689,7 +651,6 @@ async fn main() {
 
 ```rust,ignore
 use rayon::prelude::*;
-
 
 let sum: i32 = (0..1_000_000)
 
@@ -722,9 +683,7 @@ let sum: i32 = (0..1_000_000)
 
 use actix::prelude::*;
 
-
 struct MyActor;
-
 
 impl Actor for MyActor {
 
@@ -732,11 +691,9 @@ impl Actor for MyActor {
 
 }
 
-
 impl Handler<Message> for MyActor {
 
     type Result = ();
-
 
     fn handle(&mut self, msg: Message, _ctx: &mut Context<Self>) {
 

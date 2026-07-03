@@ -13,6 +13,8 @@
 
 # 异步状态机形式化 {#异步状态机形式化}
 
+> **EN**: Async State Machine
+> **Summary**: 异步状态机形式化 Async State Machine. (stub/archive redirect)
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -702,18 +704,15 @@ use std::pin::Pin;
 
 use std::task::{Context, Poll};
 
-
 struct SimpleFuture {
 
     value: Option<i32>,
 
 }
 
-
 impl Future for SimpleFuture {
 
     type Output = i32;
-
 
     fn poll(mut self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
 
@@ -754,7 +753,6 @@ async fn async_function() -> i32 {
     42
 
 }
-
 
 # [tokio::main] {#tokiomain}
 
@@ -811,7 +809,6 @@ use std::pin::Pin;
 
 use std::task::{Context, Poll};
 
-
 enum FutureState {
 
     Pending,
@@ -820,7 +817,6 @@ enum FutureState {
 
 }
 
-
 struct SimpleFuture {
 
     state: FutureState,
@@ -828,7 +824,6 @@ struct SimpleFuture {
     value: Option<i32>,
 
 }
-
 
 impl SimpleFuture {
 
@@ -844,7 +839,6 @@ impl SimpleFuture {
 
     }
 
-
     fn complete(&mut self, value: i32) {
 
         self.state = FutureState::Ready;
@@ -855,11 +849,9 @@ impl SimpleFuture {
 
 }
 
-
 impl Future for SimpleFuture {
 
     type Output = i32;
-
 
     fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
 
@@ -893,7 +885,6 @@ use std::task::{Context, Poll, Waker};
 
 use std::sync::{Arc, Mutex};
 
-
 struct AsyncCounter {
 
     count: Arc<Mutex<u32>>,
@@ -903,7 +894,6 @@ struct AsyncCounter {
     waker: Option<Waker>,
 
 }
-
 
 impl AsyncCounter {
 
@@ -921,13 +911,11 @@ impl AsyncCounter {
 
     }
 
-
     fn increment(&self) {
 
         let mut count = self.count.lock().unwrap();
 
         *count += 1;
-
 
         if *count >= self.target {
 
@@ -943,16 +931,13 @@ impl AsyncCounter {
 
 }
 
-
 impl Future for AsyncCounter {
 
     type Output = u32;
 
-
     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 
         let count = *self.count.lock().unwrap();
-
 
         if count >= self.target {
 
@@ -986,7 +971,6 @@ use std::sync::Arc;
 
 use tokio::sync::Mutex;
 
-
 // 并发安全的 Future
 
 struct ConcurrentSafeFuture {
@@ -994,7 +978,6 @@ struct ConcurrentSafeFuture {
     data: Arc<Mutex<Option<i32>>>,
 
 }
-
 
 impl ConcurrentSafeFuture {
 
@@ -1008,7 +991,6 @@ impl ConcurrentSafeFuture {
 
     }
 
-
     async fn set_value(&self, value: i32) {
 
         let mut data = self.data.lock().await;
@@ -1019,11 +1001,9 @@ impl ConcurrentSafeFuture {
 
 }
 
-
 impl Future for ConcurrentSafeFuture {
 
     type Output = i32;
-
 
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 
@@ -1057,7 +1037,6 @@ async fn example_async() -> i32 {
 
 }
 
-
 // 编译器生成的等效状态机
 
 enum ExampleAsyncState {
@@ -1072,11 +1051,9 @@ enum ExampleAsyncState {
 
 }
 
-
 impl Future for ExampleAsyncState {
 
     type Output = i32;
-
 
     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 
@@ -1159,7 +1136,6 @@ use std::future::Future;
 
 use tokio::time::{sleep, Duration};
 
-
 async fn concurrent_futures() {
 
     // 使用 join! 并发执行多个 Future
@@ -1174,11 +1150,9 @@ async fn concurrent_futures() {
 
     );
 
-
     println!("结果: {}, {}, {}", result1, result2, result3);
 
 }
-
 
 // 使用 select! 选择第一个完成的 Future
 
@@ -1202,23 +1176,19 @@ async fn select_example() {
 
 }
 
-
 // 使用 FuturesUnordered 管理多个 Future
 
 use futures::stream::{FuturesUnordered, StreamExt};
 
-
 async fn futures_unordered_example() {
 
     let mut futures = FuturesUnordered::new();
-
 
     futures.push(async_function());
 
     futures.push(another_async());
 
     futures.push(third_async());
-
 
     while let Some(result) = futures.next().await {
 
@@ -1250,13 +1220,11 @@ use std::sync::{Arc, Mutex};
 
 use std::time::Duration;
 
-
 struct TimerFuture {
 
     shared_state: Arc<Mutex<SharedState>>,
 
 }
-
 
 struct SharedState {
 
@@ -1266,16 +1234,13 @@ struct SharedState {
 
 }
 
-
 impl Future for TimerFuture {
 
     type Output = ();
 
-
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 
         let mut shared_state = self.shared_state.lock().unwrap();
-
 
         if shared_state.completed {
 
@@ -1295,7 +1260,6 @@ impl Future for TimerFuture {
 
 }
 
-
 impl TimerFuture {
 
     fn new(duration: Duration) -> Self {
@@ -1307,7 +1271,6 @@ impl TimerFuture {
             waker: None,
 
         }));
-
 
         let state_clone = shared_state.clone();
 
@@ -1326,7 +1289,6 @@ impl TimerFuture {
             }
 
         });
-
 
         TimerFuture { shared_state }
 
@@ -1546,7 +1508,6 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 
 ```text
 异步状态机安全性证明树
-
 
   定义 4.1–4.3: Future 状态、async 块状态机
 

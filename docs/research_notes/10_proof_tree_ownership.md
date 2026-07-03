@@ -1,5 +1,7 @@
 # 所有权证明树 (Proof Tree: Ownership) {#所有权证明树-proof-tree-ownership}
 
+> **EN**: Proof Tree: Ownership
+> **Summary**: 所有权证明树 Proof Tree: Ownership.
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -175,7 +177,6 @@ Given: owner(r, t₁) = A
 
 Prove: A 在 t₂ > t₁ 时不能访问 r
 
-
 Proof:
 
 1. 根据 Def OW2: move 转移所有权
@@ -197,7 +198,6 @@ Given: owner(r, t) = A
        &r (immutable borrow)
 
 Prove: owner(r, t') = A
-
 
 Proof:
 
@@ -224,7 +224,6 @@ fn ownership_uniqueness_theorem() {
 
     // owner(r) = 当前作用域
 
-
     // Case 2: 转移
 
     let s = r;  // move
@@ -233,7 +232,6 @@ fn ownership_uniqueness_theorem() {
 
     // println!("{:?}", r); // ERROR: use of moved value
 
-
     // Case 3: 借用
 
     let t = &s;  // borrow
@@ -241,7 +239,6 @@ fn ownership_uniqueness_theorem() {
     // owner(s) 不变
 
     assert_eq!(s.len(), 3);  // OK: s 仍有效
-
 
 } // Case 4: 释放 - s 在这里 drop
 ```

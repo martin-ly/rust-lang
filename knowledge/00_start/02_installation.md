@@ -1,5 +1,7 @@
 # 安装 Rust
 
+> **EN**: Installation
+> **Summary**: 安装 Rust Installation.
 > **相关概念**: [工具链](../../concept/06_ecosystem/01_toolchain.md)
 > **Bloom 层级**: 理解
 > **版本**: Rust 1.96.0+

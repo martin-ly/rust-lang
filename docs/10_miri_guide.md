@@ -1,5 +1,7 @@
 # Miri 使用指南 {#miri-使用指南}
 
+> **EN**: Miri Guide
+> **Summary**: Miri 使用指南 Miri Guide.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
@@ -78,10 +80,10 @@ cargo miri setup
 
 ```bash
 # Linux/macOS {#linuxmacos}
-./scripts/run-miri.sh
+./scripts/run_miri.sh
 
 # Windows {#windows}
-scripts\run-miri.bat
+scripts\run_miri.bat
 ```
 
 ### 手动运行 {#手动运行}

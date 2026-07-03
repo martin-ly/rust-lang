@@ -1,5 +1,7 @@
 # 分布式模式特性矩阵 {#分布式模式特性矩阵}
 
+> **EN**: Distributed Patterns Matrix
+> **Summary**: 分布式模式特性矩阵 Distributed Patterns Matrix.
 > **概念族**: 软件设计 / 分布式系统
 > **内容分级**: [归档级]
 >
@@ -73,7 +75,6 @@ enum SagaAction {
 
 }
 
-
 struct SagaCoordinator {
 
     actions: Vec<SagaAction>,
@@ -82,13 +83,11 @@ struct SagaCoordinator {
 
 }
 
-
 impl SagaCoordinator {
 
     async fn execute(&mut self) -> Result<(), SagaError> {
 
         let mut completed = Vec::new();
-
 
         for action in &self.actions {
 
@@ -128,7 +127,6 @@ struct OrderCommandHandler {
 
 }
 
-
 impl OrderCommandHandler {
 
     async fn create_order(&self, cmd: CreateOrder) -> Result<UUID, Error> {
@@ -141,7 +139,6 @@ impl OrderCommandHandler {
 
 }
 
-
 // 查询端
 
 struct OrderQueryHandler {
@@ -149,7 +146,6 @@ struct OrderQueryHandler {
     read_model: ReadModel,
 
 }
-
 
 impl OrderQueryHandler {
 

@@ -1,5 +1,7 @@
 # Standard Library 对齐索引 {#standard-library-对齐索引}
 
+> **EN**: Std Library Alignment
+> **Summary**: Standard Library 对齐索引 Std Library Alignment.
 > **概念族**: 权威来源对齐 / Standard Library
 > **内容分级**: [核心级]
 > **层级**: L0-L5

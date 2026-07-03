@@ -1,5 +1,7 @@
 # 概念对比表汇编 {#概念对比表汇编}
 
+> **EN**: Concept Comparison Tables
+> **Summary**: 概念对比表汇编 Concept Comparison Tables.
 > **概念族**: 概念框架
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

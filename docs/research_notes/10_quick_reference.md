@@ -1,5 +1,7 @@
 # 研究笔记快速参考 {#研究笔记快速参考}
 
+> **EN**: Quick Reference
+> **Summary**: 研究笔记快速参考 Quick Reference. (stub/archive redirect)
 > **概念族**: 综合研究
 > **内容分级**: [归档级]
 >

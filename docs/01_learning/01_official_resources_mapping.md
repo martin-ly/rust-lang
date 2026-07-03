@@ -1,5 +1,7 @@
 # 官方资源映射 {#官方资源映射}
 
+> **EN**: Official Resources Mapping
+> **Summary**: 官方资源映射 Official Resources Mapping.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
 >

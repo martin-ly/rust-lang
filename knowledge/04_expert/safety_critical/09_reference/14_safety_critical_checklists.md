@@ -9,6 +9,8 @@
 >
 # 安全关键Rust开发检查表
 
+> **EN**: Safety Critical Checklists
+> **Summary**: 安全关键Rust开发检查表 Safety Critical Checklists.
 > **Bloom 层级**: 理解
 
 ## 概述

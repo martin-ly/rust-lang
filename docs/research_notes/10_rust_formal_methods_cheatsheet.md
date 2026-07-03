@@ -1,4 +1,7 @@
 # Rust形式化方法速查卡 {#rust形式化方法速查卡}
+
+> **EN**: Rust Formal Methods Cheatsheet
+> **Summary**: Rust形式化方法速查卡 Rust Formal Methods Cheatsheet.
 >
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]

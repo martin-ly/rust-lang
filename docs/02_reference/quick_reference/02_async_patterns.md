@@ -10,6 +10,8 @@
 
 # ⚡ Rust 异步编程速查卡 {#rust-异步编程速查卡}
 
+> **EN**: Async Patterns
+> **Summary**: ⚡ Rust 异步编程速查卡 Async Patterns. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >

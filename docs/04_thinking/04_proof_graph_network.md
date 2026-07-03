@@ -1,5 +1,7 @@
 # Rust 证明图网 / Proof Graph Network {#rust-证明图网-proof-graph-network}
 
+> **EN**: Proof Graph Network
+> **Summary**: Rust 证明图网 Proof Graph Network. (stub/archive redirect)
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
 > **创建日期**: 2025-12-11

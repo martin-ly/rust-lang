@@ -1,5 +1,7 @@
 # 超时模式形式化定义 {#超时模式形式化定义}
 
+> **EN**: Timeout Pattern
+> **Summary**: 超时模式形式化定义 Timeout Pattern. (stub/archive redirect)
 > **概念族**: 软件设计 / 分布式模式
 > **内容分级**: [归档级]
 >
@@ -186,7 +188,6 @@ Timeout → system_continues
 ```rust,ignore
 use tokio::time::{timeout, Duration};
 
-
 pub struct TimeoutConfig {
 
     pub connect: Duration,
@@ -197,9 +198,7 @@ pub struct TimeoutConfig {
 
 }
 
-
 pub struct TimeoutLayer;
-
 
 impl TimeoutLayer {
 
@@ -230,7 +229,6 @@ impl TimeoutLayer {
         }
 
     }
-
 
     /// 分层超时：连接超时 + 请求超时
 
@@ -264,7 +262,6 @@ impl TimeoutLayer {
 
         };
 
-
         // 第二步：请求超时
 
         match timeout(config.request, request_fn(conn)).await {
@@ -280,7 +277,6 @@ impl TimeoutLayer {
     }
 
 }
-
 
 #[derive(Debug)]
 
@@ -298,7 +294,6 @@ pub enum TimeoutError {
 
 }
 
-
 // HTTP 客户端使用示例
 
 pub struct TimeoutHttpClient {
@@ -308,7 +303,6 @@ pub struct TimeoutHttpClient {
     config: TimeoutConfig,
 
 }
-
 
 impl TimeoutHttpClient {
 

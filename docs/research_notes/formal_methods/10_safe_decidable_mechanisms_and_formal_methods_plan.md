@@ -1,5 +1,7 @@
 # formal_methods 意见与建议、安全可判定机制梳理与可持续推进计划 {#formal_methods-意见与建议安全可判定机制梳理与可持续推进计划}
 
+> **EN**: Safe Decidable Mechanisms And Formal Methods Plan
+> **Summary**: formal_methods 意见与建议、安全可判定机制梳理与可持续推进计划 Safe Decidable Mechanisms And Formal Methods Plan. (stub/archive redirect)
 > **概念族**: 形式化方法 / 安全可判定机制
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链节点持续推进。
 > **内容分级**: [归档级]

@@ -1,4 +1,7 @@
 # 实践项目 01: 命令行工具 {#实践项目-01-命令行工具}
+
+> **EN**: Project 01 CLI Tool
+> **Summary**: 实践项目 01 Project 01 CLI Tool.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

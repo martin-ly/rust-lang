@@ -8,6 +8,8 @@
 >
 # 案例研究2: NASA核心飞行系统(cFS) Rust集成
 
+> **EN**: cFS
+> **Summary**: 案例研究2: NASA核心飞行系统 Rust集成 cFS.
 > **Bloom 层级**: 理解
 
 ## 概述

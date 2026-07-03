@@ -1,5 +1,7 @@
 # formal_methods 完备性检查表 {#formal_methods-完备性检查表}
 
+> **EN**: Formal Methods Completeness Checklist
+> **Summary**: formal_methods 完备性检查表 Formal Methods Completeness Checklist. (stub/archive redirect)
 > **概念族**: 形式化方法 / 完备性检查
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链节点持续推进。
 > **内容分级**: [归档级]

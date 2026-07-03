@@ -1,5 +1,7 @@
 # 模块结构到 HIR / MIR 的映射 {#模块结构到-hir-mir-的映射}
 
+> **EN**: Module Hir MIR Mapping
+> **Summary**: 模块结构到 HIR / MIR 的映射 Module Hir MIR Mapping.
 > **概念族**: 形式化模块
 > **内容分级**: [归档级]
 >
@@ -138,7 +140,6 @@ pub mod network {
 
     pub struct Config;
 
-
     pub mod tcp {
 
         pub fn connect() {}
@@ -146,7 +147,6 @@ pub mod network {
     }
 
 }
-
 
 fn private_helper() {}
 ```

@@ -1,5 +1,7 @@
 # 权威来源对齐缺口分析 {#权威来源对齐缺口分析}
 
+> **EN**: Authoritative Alignment Gap Analysis
+> **Summary**: 权威来源对齐缺口分析 Authoritative Alignment Gap Analysis.
 > **概念族**: 权威来源对齐 / 缺口分析
 > **内容分级**: [核心级]
 > **层级**: L0-L7

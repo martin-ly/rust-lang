@@ -1,5 +1,7 @@
-﻿# 构建工具理论
+# 构建工具理论
 
+> **EN**: Build Tools Index
+> **Summary**: 构建工具理论 Build Tools Index. (stub/archive redirect)
 > **分级**: [B]
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）

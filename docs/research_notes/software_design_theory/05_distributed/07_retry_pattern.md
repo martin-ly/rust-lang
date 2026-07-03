@@ -1,5 +1,7 @@
 # 重试模式形式化定义 {#重试模式形式化定义}
 
+> **EN**: Retry Pattern
+> **Summary**: 重试模式形式化定义 Retry Pattern. (stub/archive redirect)
 > **概念族**: 软件设计 / 分布式模式
 > **内容分级**: [归档级]
 >
@@ -201,7 +203,6 @@ use std::time::Duration;
 
 use rand::Rng;
 
-
 #[derive(Clone)]
 
 pub enum BackoffStrategy {
@@ -213,7 +214,6 @@ pub enum BackoffStrategy {
     Exponential { initial: Duration, multiplier: f64, max: Duration },
 
 }
-
 
 #[derive(Clone)]
 
@@ -229,7 +229,6 @@ pub enum Jitter {
 
 }
 
-
 pub struct RetryPolicy {
 
     pub max_attempts: u32,
@@ -239,7 +238,6 @@ pub struct RetryPolicy {
     pub jitter: Jitter,
 
 }
-
 
 impl RetryPolicy {
 
@@ -266,7 +264,6 @@ impl RetryPolicy {
             }
 
         };
-
 
         // 应用抖动
 
@@ -316,11 +313,9 @@ impl RetryPolicy {
 
 }
 
-
 // 重试执行器
 
 pub struct RetryExecutor;
-
 
 impl RetryExecutor {
 
@@ -343,7 +338,6 @@ impl RetryExecutor {
     {
 
         let mut last_delay = None;
-
 
         for attempt in 0..policy.max_attempts {
 
@@ -371,13 +365,11 @@ impl RetryExecutor {
 
         }
 
-
         unreachable!()
 
     }
 
 }
-
 
 #[derive(Debug)]
 
@@ -388,7 +380,6 @@ pub enum RetryError<E> {
     Exhausted,
 
 }
-
 
 // 使用示例
 
@@ -411,7 +402,6 @@ pub async fn fetch_with_retry(url: &str) -> Result<String, RetryError<reqwest::E
         jitter: Jitter::Equal,
 
     };
-
 
     let client = reqwest::Client::new();
 

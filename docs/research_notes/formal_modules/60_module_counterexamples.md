@@ -1,5 +1,7 @@
 # 模块系统反例与边界案例 {#模块系统反例与边界案例}
 
+> **EN**: Module Counterexamples
+> **Summary**: 模块系统反例与边界案例 Module Counterexamples.
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
 > **Bloom 层级**: L5-L6 (分析/评价)

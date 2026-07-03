@@ -1,5 +1,7 @@
 # Rust 1.95.0 特性与 API 速查表 {#rust-1950-特性与-api-速查表}
 
+> **EN**: Rust 195 Features Cheatsheet
+> **Summary**: Rust 1.95.0 特性与 API 速查表 Rust 195 Features Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 > **稳定版本**: Rust 1.95.0 (2026-04-16)

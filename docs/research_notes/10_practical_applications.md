@@ -1,4 +1,7 @@
 # 实际应用案例研究 {#实际应用案例研究}
+
+> **EN**: Practical Applications
+> **Summary**: 实际应用案例研究 Practical Applications.
 >
 > **概念族**: 实际应用
 > **内容分级**: [归档级]

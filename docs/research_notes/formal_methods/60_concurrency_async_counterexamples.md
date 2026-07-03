@@ -1,5 +1,7 @@
 # 并发与异步反例边界 {#并发与异步反例边界}
 
+> **EN**: Concurrency Async Counterexamples
+> **Summary**: 并发与异步反例边界 Concurrency Async Counterexamples.
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
 > **Bloom 层级**: L5-L6 (分析/评价)

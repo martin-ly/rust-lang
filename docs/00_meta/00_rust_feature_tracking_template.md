@@ -1,5 +1,7 @@
 # Rust 特性跟踪看板模板 {#rust-特性跟踪看板模板}
 
+> **EN**: Rust Feature Tracking Template
+> **Summary**: Rust 特性跟踪看板模板 Rust Feature Tracking Template.
 > **分级**: [B]
 > **Bloom 层级**: L2 (理解)
 > **用途**: 每月更新 Rust 稳定版/Nightly 特性矩阵

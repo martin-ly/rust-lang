@@ -1,5 +1,7 @@
 # 项目维护指南 {#项目维护指南}
 
+> **EN**: Project Maintenance Guide
+> **Summary**: 项目维护指南 Project Maintenance Guide. (stub/archive redirect)
 > **概念族**: 方法论 / 工具 / 指南
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -115,7 +117,6 @@
 
 <topic>_formalization.md
 
-
 # 思维表征 {#思维表征-1}
 
 <topic>_MINDMAP.md
@@ -124,16 +125,13 @@
 
 <topic>_DECISION_TREE.md
 
-
 # 教程 {#教程-1}
 
 TUTORIAL_<topic>.md
 
-
 # 速查表 {#速查表}
 
 <topic>_CHEATSHEET.md
-
 
 # 索引 {#索引}
 
@@ -149,7 +147,6 @@ TUTORIAL_<topic>.md
 ```markdown
 # 标题 {#标题}
 
-
 > **创建日期**: YYYY-MM-DD
 
 > **最后更新**: YYYY-MM-DD
@@ -157,7 +154,6 @@ TUTORIAL_<topic>.md
 > **状态**: ✅ 已完成 / 🔄 更新中 / ⏳ 待开始
 
 > **版本**: Rust X.XX.X+ (Edition 2024)
-
 
 ---
 ```
@@ -246,7 +242,6 @@ TUTORIAL_<topic>.md
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-
 - [ ] 检查新特性对形式化定义的影响
 
 - [ ] 更新相关文档中的版本引用
@@ -274,9 +269,7 @@ TUTORIAL_<topic>.md
 
 # 质量检查脚本 {#质量检查脚本}
 
-
 echo "=== 运行质量检查 ==="
-
 
 # 检查链接有效性 {#检查链接有效性}
 
@@ -284,13 +277,11 @@ echo "检查链接..."
 
 find docs/research_notes -name "*.md" -exec markdown-link-check {} \;
 
-
 # 检查格式规范 {#检查格式规范}
 
 echo "检查格式..."
 
 markdownlint docs/research_notes/**/*.md
-
 
 # 统计信息 {#统计信息}
 
@@ -299,7 +290,6 @@ echo "生成统计..."
 find docs/research_notes -name "*.md" | wc -l
 
 du -sh docs/research_notes
-
 
 echo "=== 检查完成 ==="
 ```
@@ -313,9 +303,7 @@ echo "=== 检查完成 ==="
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-
 ### 形式化文档 {#形式化文档}
-
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -329,9 +317,7 @@ echo "=== 检查完成 ==="
 
 - [ ] 与权威来源对齐
 
-
 ### 思维表征 {#思维表征-1}
-
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -343,9 +329,7 @@ echo "=== 检查完成 ==="
 
 - [ ] 交叉引用正确
 
-
 ### 教程 {#教程-1}
-
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -386,7 +370,6 @@ echo "=== 检查完成 ==="
    ```text
    docs: 更新 <文档名>
 
-
    - 更新内容说明
 
    - 修复问题说明
@@ -425,7 +408,6 @@ echo "=== 检查完成 ==="
 ```text
 主版本.次版本.修订号
 
-
 主版本：重大结构调整
 
 次版本：新增主题/章节
@@ -442,7 +424,6 @@ echo "=== 检查完成 ==="
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-
 ### [1.1.0] - 2026-03-15 {#110---2026-03-15}
 
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -452,7 +433,6 @@ echo "=== 检查完成 ==="
 - 更新：Rust 1.96.0 特性对齐
 
 - 修复：生命周期示例错误
-
 
 ### [1.0.0] - 2026-02-28 {#100---2026-02-28}
 

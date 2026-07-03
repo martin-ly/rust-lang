@@ -1,5 +1,7 @@
 # 权威内容对齐状态报告 {#权威内容对齐状态报告}
 
+> **EN**: Authoritative Alignment Status
+> **Summary**: 权威内容对齐状态报告 Authoritative Alignment Status.
 > **概念族**: 权威来源对齐
 > **内容分级**: [归档级]
 >

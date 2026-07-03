@@ -1,5 +1,7 @@
 # Hello, World
 
+> **EN**: Hello, World
+> **Summary**: Hello, World Hello, World.
 > **相关概念**: [控制流](../../concept/01_foundation/07_control_flow.md)
 > **Bloom 层级**: 理解
 > **你的第一个 Rust 程序**

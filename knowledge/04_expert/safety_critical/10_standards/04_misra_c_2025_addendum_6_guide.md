@@ -1,5 +1,7 @@
 # MISRA C:2025 Addendum 6 - Rust应用指南
 
+> **EN**: MISRA C
+> **Summary**: 2025 Addendum 6 - Rust应用指南 MISRA C.
 > **Bloom 层级**: 理解
 >
 > **受众**: [初学者] / [进阶]

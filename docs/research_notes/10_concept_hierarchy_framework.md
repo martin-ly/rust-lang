@@ -1,4 +1,7 @@
 # Rust 概念层次体系框架 {#rust-概念层次体系框架}
+
+> **EN**: Concept Hierarchy Framework
+> **Summary**: Rust 概念层次体系框架 Concept Hierarchy Framework.
 >
 > **概念族**: 概念框架
 > **内容分级**: [归档级]

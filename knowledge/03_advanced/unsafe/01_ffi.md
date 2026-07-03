@@ -1,5 +1,7 @@
 # FFI (Foreign Function Interface)
 
+> **EN**: FFI Foreign Function Interface
+> **Summary**: FFI (Foreign Function Interface) FFI Foreign Function Interface. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/03_advanced/05_rust_ffi.md](../../../concept/03_advanced/05_rust_ffi.md)。
 > **历史版本存档**: [archive/knowledge/03_advanced/unsafe/01_ffi.md](../../../archive/knowledge/03_advanced/unsafe/01_ffi.md)
 >

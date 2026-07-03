@@ -1,5 +1,7 @@
 # Coq of Rust 集成计划（已归档） {#coq-of-rust-集成计划已归档}
 
+> **EN**: Coq Of Rust Integration Plan
+> **Summary**: Coq of Rust 集成计划 已归档 Coq Of Rust Integration Plan. (stub/archive redirect)
 > **概念族**: 形式化方法 / 证明助手
 > **内容分级**: [归档级]
 > **状态**: ✅ 已完成权威国际化来源对齐升级

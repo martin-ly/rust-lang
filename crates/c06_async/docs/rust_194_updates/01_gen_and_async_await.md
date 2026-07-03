@@ -616,7 +616,7 @@ mod benchmarks {
 ## 相关文档
 
 - [Rust 1.94 发布说明](../../../docs/06_toolchain/16_rust_1.94_release_notes.md)
-- [C06 异步主索引](../00_MASTER_INDEX.md)
+- [C06 异步主索引](../00_master_index.md)
 - [生成器 RFC](https://rust-lang.github.io/rfcs/2996-generator-capture-mutable.html)
 - [async/await 指南](../tier_02_guides/01_async_await_guide.md)
 

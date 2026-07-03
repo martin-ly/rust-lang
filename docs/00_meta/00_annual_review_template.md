@@ -1,5 +1,7 @@
 # 📊 年度全面评估模板 {#年度全面评估模板}
 
+> **EN**: Annual Review Template
+> **Summary**: 📊 年度全面评估模板 Annual Review Template. (stub/archive redirect)
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2 (理解)

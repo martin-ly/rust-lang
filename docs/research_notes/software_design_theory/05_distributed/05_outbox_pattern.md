@@ -1,5 +1,7 @@
 # Outbox 模式形式化定义 {#outbox-模式形式化定义}
 
+> **EN**: Outbox Pattern
+> **Summary**: Outbox 模式形式化定义 Outbox Pattern. (stub/archive redirect)
 > **概念族**: 软件设计 / 分布式模式
 > **内容分级**: [归档级]
 >
@@ -85,7 +87,6 @@ Transaction := (db_ops, outbox_ops)
     db_ops: T_db 的更新操作
 
     outbox_ops: T_outbox 的插入操作
-
 
     atomic(db_ops ∧ outbox_ops)
 ```
@@ -210,7 +211,6 @@ pub struct OutboxMessage {
 
 }
 
-
 // 事务性消息发布器
 
 pub struct TransactionalMessagePublisher<'a> {
@@ -218,7 +218,6 @@ pub struct TransactionalMessagePublisher<'a> {
     db_tx: &'a mut sqlx::Transaction<'static, sqlx::Postgres>,
 
 }
-
 
 impl<'a> TransactionalMessagePublisher<'a> {
 
@@ -237,7 +236,6 @@ impl<'a> TransactionalMessagePublisher<'a> {
         let id = Uuid::new_v4();
 
         let payload_json = serde_json::to_value(payload).unwrap();
-
 
         sqlx::query(
 
@@ -263,13 +261,11 @@ impl<'a> TransactionalMessagePublisher<'a> {
 
         .await?;
 
-
         Ok(id)
 
     }
 
 }
-
 
 // 中继进程
 
@@ -282,7 +278,6 @@ pub struct OutboxRelay<M: MessageBroker> {
     poll_interval: Duration,
 
 }
-
 
 impl<M: MessageBroker> OutboxRelay<M> {
 
@@ -314,7 +309,6 @@ impl<M: MessageBroker> OutboxRelay<M> {
 
     }
 
-
     async fn process_outbox(&self) -> Result<usize, Box<dyn std::error::Error>> {
 
         let messages = sqlx::query_as::<_, OutboxMessage>(
@@ -339,13 +333,11 @@ impl<M: MessageBroker> OutboxRelay<M> {
 
         .await?;
 
-
         for msg in &messages {
 
             // 发布到消息队列
 
             self.broker.publish(&msg.message_type, &msg.payload).await?;
-
 
             // 标记为已发布
 
@@ -358,7 +350,6 @@ impl<M: MessageBroker> OutboxRelay<M> {
                 .await?;
 
         }
-
 
         Ok(messages.len())
 

@@ -1,5 +1,7 @@
 # Type-Driven Correctness：类型驱动的正确性
 
+> **EN**: Type-Driven Correctness
+> **Summary**: 类型驱动的正确性 Type-Driven Correctness.
 > **相关概念**: [类型系统](../../concept/02_intermediate/20_type_system_advanced.md)
 > **Bloom 层级**: 理解
 > **最后更新日期**: 2026-05-19

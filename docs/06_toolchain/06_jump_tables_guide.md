@@ -1,5 +1,7 @@
 # `-C jump-tables=bool` 编译器优化指南 {#c-jump-tablesbool-编译器优化指南}
 
+> **EN**: Jump Tables Guide
+> **Summary**: -C jump-tables=bool 编译器优化指南 Jump Tables Guide.
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 > **稳定版本**: Rust 1.93.0（原 `-Zno-jump-tables`），1.96.0+ 持续可用

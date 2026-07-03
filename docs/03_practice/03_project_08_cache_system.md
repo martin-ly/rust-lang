@@ -1,4 +1,7 @@
 # 实践项目 08: 内存缓存系统 {#实践项目-08-内存缓存系统}
+
+> **EN**: Project 08 Cache System
+> **Summary**: 实践项目 08 Project 08 Cache System.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

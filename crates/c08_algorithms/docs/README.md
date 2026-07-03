@@ -149,7 +149,7 @@
 1. 异步编程
    ├─ tier_02_guides/05_并行与异步算法.md
    ├─ tier_04_advanced/02_concurrent_algorithm_patterns.md
-   └─ ../../c09_design_pattern/docs/ACTOR_REACTOR_PATTERNS.md
+   └─ ../../c09_design_pattern/docs/actor_reactor_patterns.md
 
 2. 性能优化
    ├─ tier_02_guides/04_performance_optimization_practice.md

@@ -1,4 +1,7 @@
 # Next-generation Trait Solver 深度研究 {#next-generation-trait-solver-深度研究}
+
+> **EN**: Next Generation Trait Solver
+> **Summary**: Next-generation Trait Solver 深度研究 Next Generation Trait Solver. (stub/archive redirect)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

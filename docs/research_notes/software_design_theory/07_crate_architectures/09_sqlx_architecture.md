@@ -5,6 +5,8 @@
 
 # SQLx Crate 架构解构 {#sqlx-crate-架构解构}
 
+> **EN**: Sqlx Architecture
+> **Summary**: SQLx Crate 架构解构 Sqlx Architecture. (stub/archive redirect)
 > 本文内容已迁移至 [SQLx 深度解析](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md)。
 >
 > 相关概念参考：

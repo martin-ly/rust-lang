@@ -1,5 +1,7 @@
 # 并行前端编译指南 {#并行前端编译指南}
 
+> **EN**: Parallel Frontend
+> **Summary**: 并行前端编译指南 Parallel Frontend.
 > **分级**: [A]
 > **层次定位**: L6-L7 生态-前沿 / 编译器优化
 > **前置依赖**: [docs 编译器特性](01_compiler_features.md) · [concept L2 泛型](../../concept/02_intermediate/02_generics.md)

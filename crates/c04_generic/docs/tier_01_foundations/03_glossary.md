@@ -1346,7 +1346,7 @@ trait AsyncService {
 
 **相关术语**: [Impl Trait](#impl-trait-impl-trait-), [GAT](#gat-generic-associated-types-泛型关联类型-), [Associated Type](#associated-type-关联类型-)
 
-**参考文档**: [`RUST_192_GENERIC_IMPROVEMENTS.md`](../RUST_192_GENERIC_IMPROVEMENTS.md)
+**参考文档**: [`RUST_192_GENERIC_IMPROVEMENTS.md`](../rust_192_generic_improvements.md)
 
 ---
 

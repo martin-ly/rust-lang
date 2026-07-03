@@ -1,5 +1,7 @@
 # 高级数据结构指南：Treap（树堆）与 Skip List（跳表） {#高级数据结构指南treap树堆与-skip-list跳表}
 
+> **EN**: Advanced Data Structures Guide
+> **Summary**: 高级数据结构指南：Treap 树堆 与 Skip List 跳表 Advanced Data Structures Guide.
 > **概念族**: 算法 / 高级数据结构
 >
 > **层级**: L3-L5

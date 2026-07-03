@@ -1,5 +1,7 @@
 # Generic Const Expressions (泛型常量表达式)
 
+> **EN**: Generic Const Expressions
+> **Summary**: 泛型常量表达式 Generic Const Expressions.
 > **相关概念**: [常量](../../../concept/01_foundation/04_type_system.md)
 > **Bloom 层级**: 理解
 > **特性**: `generic_const_exprs`

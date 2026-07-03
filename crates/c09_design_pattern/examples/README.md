@@ -380,13 +380,13 @@ impl Actor {
 
 - [模块主页](../README.md) - 完整学习指南
 - [文档中心](../docs/README.md) - 详细文档导航
-- [主索引](../docs/00_MASTER_INDEX.md) - 文档完整索引
+- [主索引](../docs/00_master_index.md) - 文档完整索引
 
 ### 理论文档
 
 - [综合设计模式指南](../docs/COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md)
-- [异步与同步等价理论](../docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md)
-- [Actor 与 Reactor 模式](../docs/ACTOR_REACTOR_PATTERNS.md)
+- [异步与同步等价理论](../docs/async_sync_equivalence_theory.md)
+- [Actor 与 Reactor 模式](../docs/actor_reactor_patterns.md)
 - [设计模式概念族谱](../../../docs/research_notes/DESIGN_PATTERN_CONCEPT_MINDMAP.md)
 
 ### 外部资源

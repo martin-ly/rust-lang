@@ -1,5 +1,7 @@
 # Research Notes: 形式化方法主索引 {#research-notes-形式化方法主索引}
 
+> **EN**: Research Notes
+> **Summary**: 形式化方法主索引 Research Notes. (stub/archive redirect)
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 >

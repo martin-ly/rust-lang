@@ -343,7 +343,7 @@ where
 ## 相关文档
 
 - [Rust 1.94 所有权更新](01_edition_2024_ownership.md)
-- [C01 主索引](../00_MASTER_INDEX.md)
+- [C01 主索引](../00_master_index.md)
 - [Rust 1.94 迁移指南](../../../docs/05_guides/RUST_194_MIGRATION_GUIDE.md)
 
 ---

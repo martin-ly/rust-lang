@@ -416,13 +416,13 @@ trait Observer {
 
 - [完整FAQ](tier_01_foundations/04_faq.md) - 所有问题详细解答
 - [综合指南](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 完整模式指南
-- [实战示例集](../RUST_190_EXAMPLES_COLLECTION.md) - 800+行代码示例
+- [实战示例集](../rust_190_examples_collection.md) - 800+行代码示例
 
 **深度理论**:
 
 - [形式化理论体系](../tier_04_advanced/README.md) - 高级主题
-- [Actor/Reactor模式](../ACTOR_REACTOR_PATTERNS.md) - 并发模式深入
-- [CSP vs Async](../CSP_VS_ASYNC_ANALYSIS.md) - 并发模型对比
+- [Actor/Reactor模式](../actor_reactor_patterns.md) - 并发模式深入
+- [CSP vs Async](../csp_vs_async_analysis.md) - 并发模型对比
 
 ---
 

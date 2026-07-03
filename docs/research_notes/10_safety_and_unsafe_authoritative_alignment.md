@@ -1,5 +1,7 @@
 # 安全与 unsafe 权威来源对齐矩阵 {#安全与-unsafe-权威来源对齐矩阵}
 
+> **EN**: Safety And Unsafe Authoritative Alignment
+> **Summary**: 安全与 unsafe 权威来源对齐矩阵 Safety And Unsafe Authoritative Alignment.
 > **概念族**: 权威来源对齐 / 安全 / unsafe
 > **内容分级**: [核心级]
 > **层级**: L0-L6

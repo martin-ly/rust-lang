@@ -6,6 +6,8 @@
 
 # 生命周期形式化（形式化方法视角） {#生命周期形式化形式化方法视角}
 
+> **EN**: Lifetime Formalization
+> **Summary**: 生命周期形式化 形式化方法视角 Lifetime Formalization.
 > **内容分级**: [归档级]
 >
 > **分级**: [B]

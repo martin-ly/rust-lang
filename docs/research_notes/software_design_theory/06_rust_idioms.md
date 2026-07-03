@@ -1,5 +1,7 @@
 # Rust 惯用模式与设计理论衔接 {#rust-惯用模式与设计理论衔接}
 
+> **EN**: Rust Idioms
+> **Summary**: Rust 惯用模式与设计理论衔接 Rust Idioms. (stub/archive redirect)
 > **概念族**: 软件设计 / 惯用法
 > **内容分级**: [归档级]
 >
@@ -138,7 +140,6 @@ use std::fs::File;
 
 use std::io::{BufRead, BufReader};
 
-
 fn read_lines(path: &str) -> Result<Vec<String>, std::io::Error> {
 
     let f = File::open(path)?;           // 获取资源
@@ -156,7 +157,6 @@ fn read_lines(path: &str) -> Result<Vec<String>, std::io::Error> {
 // RAII：MutexGuard 自动释放锁
 
 use std::sync::Mutex;
-
 
 let m = Mutex::new(0);
 
@@ -231,11 +231,9 @@ let m = Mutex::new(0);
 
 pub struct UserId(pub u64);
 
-
 #[derive(Clone, PartialEq, Eq)]
 
 pub struct OrderId(pub u64);
-
 
 fn process_order(user: UserId, order: OrderId) {
 
@@ -248,7 +246,6 @@ fn process_order(user: UserId, order: OrderId) {
 #[repr(transparent)]
 
 pub struct Meter(f64);
-
 
 impl Meter {
 
@@ -402,7 +399,6 @@ enum AppError {
 
 }
 
-
 impl From<std::io::Error> for AppError {
 
     fn from(e: std::io::Error) -> Self { AppError::Io(e) }
@@ -415,7 +411,6 @@ impl From<std::num::ParseIntError> for AppError {
 
 }
 
-
 fn read_config(path: &str) -> Result<u32, AppError> {
 
     let s = std::fs::read_to_string(path)?;           // Io → AppError
@@ -425,7 +420,6 @@ fn read_config(path: &str) -> Result<u32, AppError> {
     Ok(n)
 
 }
-
 
 fn load_or_default(path: &str) -> Result<u32, AppError> {
 
@@ -488,7 +482,6 @@ fn parse_port(env: &str) -> Option<u16> {
 
 }
 
-
 fn parse_config() -> Result<(String, u16), String> {
 
     let host = std::env::var("HOST").unwrap_or_else(|_| "localhost".into());
@@ -498,7 +491,6 @@ fn parse_config() -> Result<(String, u16), String> {
     Ok((host, port))
 
 }
-
 
 // 链式 Optional：仅当所有 Some 时继续
 
@@ -583,7 +575,6 @@ impl ConfigBuilder {
 ```rust,ignore
 use std::borrow::Cow;
 
-
 fn process_string(s: &str) -> Cow<str> {
 
     if s.contains("bad") {
@@ -598,7 +589,6 @@ fn process_string(s: &str) -> Cow<str> {
 
 }
 
-
 fn prefix_if_needed(s: Cow<str>) -> Cow<str> {
 
     if s.starts_with("prefix:") {
@@ -612,7 +602,6 @@ fn prefix_if_needed(s: Cow<str>) -> Cow<str> {
     }
 
 }
-
 
 // 配置：默认值引用，覆盖时 owned
 

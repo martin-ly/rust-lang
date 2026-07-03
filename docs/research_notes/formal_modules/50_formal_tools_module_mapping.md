@@ -1,5 +1,7 @@
 # 形式化工具中的模块与私有性映射 {#形式化工具中的模块与私有性映射}
 
+> **EN**: Formal Tools Module Mapping
+> **Summary**: 形式化工具中的模块与私有性映射 Formal Tools Module Mapping.
 > **概念族**: 形式化模块
 > **内容分级**: [归档级]
 >
@@ -150,7 +152,6 @@ pub struct BoundedCounter {
 
 }
 
-
 impl BoundedCounter {
 
     pub fn new() -> Self {
@@ -158,7 +159,6 @@ impl BoundedCounter {
         BoundedCounter { value: 0 }
 
     }
-
 
     pub fn increment(&mut self) -> bool {
 
@@ -175,7 +175,6 @@ impl BoundedCounter {
         }
 
     }
-
 
     pub fn get(&self) -> u32 {
 
@@ -197,7 +196,6 @@ Module BoundedCounter.
 
   Definition t := { value : u32 }.
 
-
   Definition new : M t := ...
 
   Definition increment (self : mut_ref t) : M bool := ...
@@ -215,7 +213,6 @@ End BoundedCounter.
   BoundedCounter::new()
 
 { c. c ↦ BoundedCounter(0) * BoundedCounter_inv(c, 0) }
-
 
 { c ↦ BoundedCounter(n) * n < 100 }
 

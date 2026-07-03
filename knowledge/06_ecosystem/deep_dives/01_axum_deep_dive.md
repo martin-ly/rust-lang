@@ -1,5 +1,7 @@
 # Axum 深度解析
 
+> **EN**: Axum Deep Dive
+> **Summary**: Axum 深度解析 Axum Deep Dive. (stub/archive redirect)
 > **📎 交叉引用**
 >
 > 本主题在 concept 中有深度的概念分析：[Web 框架](../../../concept/06_ecosystem/27_web_frameworks.md)

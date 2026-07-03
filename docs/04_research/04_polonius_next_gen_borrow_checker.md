@@ -1,4 +1,7 @@
 # Polonius：下一代 Borrow Checker 深度解析 {#polonius下一代-borrow-checker-深度解析}
+
+> **EN**: Polonius
+> **Summary**: 下一代 Borrow Checker 深度解析 Polonius. (stub/archive redirect)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

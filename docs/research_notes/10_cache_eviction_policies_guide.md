@@ -1,5 +1,7 @@
 # 缓存淘汰策略指南（LRU / LFU / ARC / CLOCK / W-TinyLFU） {#缓存淘汰策略指南lru-lfu-arc-clock-w-tinylfu}
 
+> **EN**: LRU / LFU / ARC / CLOCK / W-TinyLFU
+> **Summary**: 缓存淘汰策略指南 LRU / LFU / ARC / CLOCK / W-TinyLFU.
 > **概念族**: 算法 / 缓存策略
 >
 > **层级**: L3-L5

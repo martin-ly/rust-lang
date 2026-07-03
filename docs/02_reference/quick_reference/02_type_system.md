@@ -1,5 +1,7 @@
 # 🔷 Rust 类型系统速查卡 {#rust-类型系统速查卡}
 
+> **EN**: Type System
+> **Summary**: 🔷 Rust 类型系统速查卡 Type System. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >
@@ -721,7 +723,7 @@ assert_eq!(align_of::<Example>(), 8);
 struct CacheAligned { data: [u8; 64]; }
 ```
 
-**详见**: [ALIGNMENT_GUIDE](../ALIGNMENT_GUIDE.md)、[c01 内存布局优化](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/04_memory_layout_optimization.md)
+**详见**: [ALIGNMENT_GUIDE](../alignment_guide.md)、[c01 内存布局优化](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/04_memory_layout_optimization.md)
 
 ---
 

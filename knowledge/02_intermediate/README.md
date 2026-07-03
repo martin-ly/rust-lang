@@ -1,5 +1,7 @@
 # 02 - 进阶 Rust
 
+> **EN**: Intermediate Index
+> **Summary**: 02 - 进阶 Rust Intermediate Index.
 > **📎 交叉引用**
 >
 > 本主题在 concept 中有深度的概念分析：[闭包](../../concept/01_foundation/15_closure_basics.md)

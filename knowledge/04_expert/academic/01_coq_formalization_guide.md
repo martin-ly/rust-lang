@@ -1,5 +1,7 @@
 # Coq 形式化验证指南
 
+> **EN**: Coq Formalization Guide
+> **Summary**: Coq 形式化验证指南 Coq Formalization Guide. (stub/archive redirect)
 > **Bloom 层级**: 理解
 > **工具**: Coq Proof Assistant
 > **用途**: Rust 语义形式化验证

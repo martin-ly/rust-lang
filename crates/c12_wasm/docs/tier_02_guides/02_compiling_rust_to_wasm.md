@@ -738,7 +738,7 @@ let allocator = WasmAllocatorConfig::new(
 - 计算优化: +10%
 - 综合性能: +20-30%
 
-**相关文档**: [Rust 1.92.0 WASM 改进文档](../RUST_192_WASM_IMPROVEMENTS.md)
+**相关文档**: [Rust 1.92.0 WASM 改进文档](../rust_192_wasm_improvements.md)
 
 ---
 

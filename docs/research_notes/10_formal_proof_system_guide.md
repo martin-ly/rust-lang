@@ -1,5 +1,7 @@
 # 形式化证明系统指南 {#形式化证明系统指南}
 
+> **EN**: Formal Proof System Guide
+> **Summary**: 形式化证明系统指南 Formal Proof System Guide.
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 >
@@ -389,18 +391,15 @@ From iris.algebra Require Import base gmap.
 
 From iris.proofmode Require Import tactics.
 
-
 Parameter Value : Type.
 
 Parameter Value_eq_dec : EqDecision Value.
 
 Definition Var := nat.
 
-
 Inductive OwnStatus := Owned | Moved | Dropped.
 
 Definition State := gmap Var (Value * OwnStatus).
-
 
 Definition ownership_unique (σ : State) : Prop :=
 
@@ -411,7 +410,6 @@ Definition ownership_unique (σ : State) : Prop :=
     σ !! x2 = Some (v, Owned) ->
 
     x1 = x2.
-
 
 Inductive step : State -> State -> Prop :=
 
@@ -436,7 +434,6 @@ Inductive step : State -> State -> Prop :=
       σ !! x = Some (v, Owned) ->
 
       step σ (<[x := (v, Dropped)]> σ).
-
 
 Theorem T_OW2_move_preserves_uniqueness σ σ' :
 

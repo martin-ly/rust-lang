@@ -1,5 +1,7 @@
 # 无锁数据结构指南 {#无锁数据结构指南}
 
+> **EN**: Lock Free Data Structures Guide
+> **Summary**: 无锁数据结构指南 Lock Free Data Structures Guide.
 > **内容分级**: [核心级]
 >
 > **分级**: [A]

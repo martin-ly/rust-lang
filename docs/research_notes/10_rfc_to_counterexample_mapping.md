@@ -1,5 +1,7 @@
 # RFC 到反例自动化映射索引 {#rfc-到反例自动化映射索引}
 
+> **EN**: Rfc To Counterexample Mapping
+> **Summary**: RFC 到反例自动化映射索引 Rfc To Counterexample Mapping.
 > **概念族**: 权威来源对齐 / RFC / 反例
 > **内容分级**: [核心级]
 > **层级**: L0-L5

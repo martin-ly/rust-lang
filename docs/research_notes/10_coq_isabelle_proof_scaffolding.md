@@ -1,5 +1,7 @@
 # Coq/Isabelle 证明脚手架 {#coqisabelle-证明脚手架}
 
+> **EN**: Coq Isabelle Proof Scaffolding
+> **Summary**: Coq/Isabelle 证明脚手架 Coq Isabelle Proof Scaffolding. (stub/archive redirect)
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -66,7 +68,6 @@ Inductive Ownership :=
 
   | Moved: Ownership.
 
-
 (* 所有权转移 *)
 
 Inductive transfer_ownership (v: variable) (o: Ownership) : Prop :=
@@ -120,7 +121,6 @@ theory Rust_Type_System
 
 begin
 
-
 (* 类型定义 *)
 
 datatype 'a rust_type =
@@ -131,7 +131,6 @@ datatype 'a rust_type =
 
   Mutable 'a
 
-
 (* 子类型关系 *)
 
 fun subtype :: "'a rust_type => 'a rust_type => bool" where
@@ -139,7 +138,6 @@ fun subtype :: "'a rust_type => 'a rust_type => bool" where
   "subtype (Shared T) (Owned T) = True" |
 
   "subtype _ _ = False"
-
 
 end
 ```

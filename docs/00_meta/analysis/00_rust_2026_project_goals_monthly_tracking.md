@@ -1,5 +1,7 @@
 # Rust 2026 Project Goals — 月度跟踪报告 {#rust-2026-project-goals-月度跟踪报告}
 
+> **EN**: Rust 2026 Project Goals Monthly Tracking
+> **Summary**: Rust 2026 Project Goals — 月度跟踪报告 Rust 2026 Project Goals Monthly Tracking. (stub/archive redirect)
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2 (理解)

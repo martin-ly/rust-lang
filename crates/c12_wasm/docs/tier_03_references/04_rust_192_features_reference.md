@@ -3,7 +3,7 @@
 > **文档类型**: Tier 3 - 技术参考层
 > **文档定位**: Rust 1.92.0 特性在 WASM 中的快速参考
 > **项目状态**: ✅ 完整完成
-> **相关文档**: [API 参考](01_api_reference.md) | [最佳实践](03_best_practices.md) | [Rust 1.92.0 WASM 改进文档](../RUST_192_WASM_IMPROVEMENTS.md)
+> **相关文档**: [API 参考](01_api_reference.md) | [最佳实践](03_best_practices.md) | [Rust 1.92.0 WASM 改进文档](../rust_192_wasm_improvements.md)
 
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
@@ -250,10 +250,10 @@ impl WasmDebugInfo {
 
 ## 📚 相关文档
 
-- [Rust 1.92.0 WASM 改进文档](../RUST_192_WASM_IMPROVEMENTS.md) - 详细说明
-- [Rust 1.92.0 WASM 快速参考](../RUST_192_QUICK_REFERENCE.md) - 快速查找
-- [WASM 决策树图](../WASM_DECISION_TREE.md) - 技术选型
-- [WASM 多维概念对比矩阵](../WASM_CONCEPT_MATRIX.md) - 方案对比
+- [Rust 1.92.0 WASM 改进文档](../rust_192_wasm_improvements.md) - 详细说明
+- [Rust 1.92.0 WASM 快速参考](../rust_192_quick_reference.md) - 快速查找
+- [WASM 决策树图](../wasm_decision_tree.md) - 技术选型
+- [WASM 多维概念对比矩阵](../wasm_concept_matrix.md) - 方案对比
 - [示例代码](../../examples/rust_192_features_demo.rs) - 完整示例
 - [源代码实现](../../src/rust_192_features.rs) - 实现细节
 

@@ -1,5 +1,7 @@
 # Command 形式化分析 {#command-形式化分析}
 
+> **EN**: Command
+> **Summary**: Command 形式化分析 Command.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -223,7 +225,6 @@ let result = cmd();
 
 assert_eq!(result, 43);
 
-
 // 方式二：Trait 命令
 
 trait Command {
@@ -231,7 +232,6 @@ trait Command {
     fn execute(&self);
 
 }
-
 
 struct PrintCommand(pub String);
 
@@ -245,7 +245,6 @@ impl Command for PrintCommand {
 
 }
 
-
 // 存储命令队列
 
 let mut queue: Vec<Box<dyn Command>> = vec![];
@@ -258,7 +257,6 @@ for cmd in &queue {
 
 }
 
-
 // 撤销/重做
 
 trait ReversibleCommand {
@@ -268,7 +266,6 @@ trait ReversibleCommand {
     fn undo(&mut self);
 
 }
-
 
 struct IncrementCommand { value: i32, prev: Option<i32> }
 
@@ -317,7 +314,6 @@ trait Command {
 
 }
 
-
 struct AddText { text: String, receiver: std::rc::Rc<std::cell::RefCell<String>> }
 
 impl Command for AddText {
@@ -336,7 +332,6 @@ impl Command for AddText {
 
 }
 
-
 struct Invoker { history: Vec<Box<dyn Command>> }
 
 impl Invoker {
@@ -344,7 +339,6 @@ impl Invoker {
     fn run(&mut self, cmd: Box<dyn Command>) { cmd.execute(); self.history.push(cmd); }
 
 }
-
 
 fn main() {
 
@@ -533,7 +527,6 @@ trait EditorCommand {
 
 }
 
-
 struct InsertCommand { pos: usize, ch: char }
 
 impl EditorCommand for InsertCommand {
@@ -551,7 +544,6 @@ impl EditorCommand for InsertCommand {
     }
 
 }
-
 
 struct DeleteCommand { pos: usize, removed: Option<char> }
 
@@ -578,7 +570,6 @@ impl EditorCommand for DeleteCommand {
     }
 
 }
-
 
 struct Editor {
 

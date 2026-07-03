@@ -1,4 +1,7 @@
 # Rust安全关键系统快速参考卡片
+
+> **EN**: Quick Reference Card
+> **Summary**: Rust安全关键系统快速参考卡片 Quick Reference Card.
 >
 > **相关概念**: [引用](../../../../concept/01_foundation/05_reference_semantics.md)
 >

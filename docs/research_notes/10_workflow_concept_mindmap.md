@@ -1,5 +1,7 @@
 # 工作流引擎概念族谱 {#工作流引擎概念族谱}
 
+> **EN**: Workflow Concept Mindmap
+> **Summary**: 工作流引擎概念族谱 Workflow Concept Mindmap.
 > **概念族**: 思维表征 / 可视化
 > **内容分级**: [归档级]
 >
@@ -209,7 +211,6 @@ mindmap
 
 use state_machine_procmacro::fsm;
 
-
 fsm! {
 
     enum OrderWorkflow {
@@ -267,13 +268,11 @@ trait SagaActivity {
 
     type Error;
 
-
     async fn execute(&self, input: Self::Input) -> Result<Self::Output, Self::Error>;
 
     async fn compensate(&self, output: Self::Output) -> Result<(), Self::Error>;
 
 }
-
 
 struct SagaOrchestrator {
 
@@ -282,7 +281,6 @@ struct SagaOrchestrator {
     executed: Vec<Box<dyn Any>>, // 记录执行结果用于补偿
 
 }
-
 
 impl SagaOrchestrator {
 
@@ -309,7 +307,6 @@ impl SagaOrchestrator {
         Ok(())
 
     }
-
 
     async fn compensate(&mut self) {
 
@@ -352,7 +349,6 @@ use tokio::time::{sleep, Duration};
 
 use tokio::sync::mpsc;
 
-
 struct WorkflowEngine {
 
     task_queue: mpsc::Receiver<Task>,
@@ -360,7 +356,6 @@ struct WorkflowEngine {
     state_store: sled::Db,
 
 }
-
 
 impl WorkflowEngine {
 
@@ -396,7 +391,6 @@ impl WorkflowEngine {
 ```rust,ignore
 use futures::future::join_all;
 
-
 async fn parallel_branch(activities: Vec<Activity>) -> Vec<Result<Output, Error>> {
 
     let handles: Vec<_> = activities
@@ -406,7 +400,6 @@ async fn parallel_branch(activities: Vec<Activity>) -> Vec<Result<Output, Error>
         .map(|act| tokio::spawn(async move { act.execute().await }))
 
         .collect();
-
 
     join_all(handles).await
 
@@ -427,13 +420,11 @@ async fn parallel_branch(activities: Vec<Activity>) -> Vec<Result<Output, Error>
 ```rust,ignore
 use tokio::time::{sleep_until, Instant};
 
-
 struct TimerActivity {
 
     deadline: Instant,
 
 }
-
 
 impl TimerActivity {
 
@@ -456,7 +447,6 @@ impl TimerActivity {
 ```rust,ignore
 use tokio::sync::broadcast;
 
-
 struct EventDrivenWorkflow {
 
     event_bus: broadcast::Sender<WorkflowEvent>,
@@ -465,13 +455,11 @@ struct EventDrivenWorkflow {
 
 }
 
-
 impl EventDrivenWorkflow {
 
     async fn run(mut self) {
 
         let mut rx = self.event_bus.subscribe();
-
 
         loop {
 

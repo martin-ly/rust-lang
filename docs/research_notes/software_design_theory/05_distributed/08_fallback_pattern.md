@@ -1,5 +1,7 @@
 # Fallback / Degrade 韧性模式 {#fallback-degrade-韧性模式}
 
+> **EN**: Fallback
+> **Summary**: Degrade 韧性模式 Fallback.
 > **概念族**: 软件设计 / 分布式模式 / Fallback
 >
 > **层级**: L4-L6

@@ -17,6 +17,8 @@
 
 # metrics Crate 架构解构 {#metrics-crate-架构解构}
 
+> **EN**: Metrics Architecture
+> **Summary**: metrics Crate 架构解构 Metrics Architecture.
 > **最后更新**: 2026-06-29
 >
 > **内容分级**: [归档级]

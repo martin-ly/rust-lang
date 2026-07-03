@@ -1,5 +1,7 @@
 # 算法专项练习指南 {#算法专项练习指南}
 
+> **EN**: Algorithm Exercises Guide
+> **Summary**: 算法专项练习指南 Algorithm Exercises Guide.
 > **内容分级**: [核心级]
 >
 > **分级**: [A]

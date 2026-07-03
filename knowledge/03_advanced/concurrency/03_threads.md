@@ -1,5 +1,7 @@
 # Rust 线程与并发安全模型
 
+> **EN**: Threads
+> **Summary**: Rust 线程与并发安全模型 Threads. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/03_advanced/01_concurrency.md](../../../concept/03_advanced/01_concurrency.md)。
 > **历史版本存档**: [archive/knowledge/03_advanced/concurrency/03_threads.md](../../../archive/knowledge/03_advanced/concurrency/03_threads.md)
 >

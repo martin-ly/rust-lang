@@ -1,4 +1,7 @@
 # 工作流引擎模式形式化定义 {#工作流引擎模式形式化定义}
+
+> **EN**: Workflow Index
+> **Summary**: 工作流引擎模式形式化定义 Workflow Index. (stub/archive redirect)
 >
 > **概念族**: 软件设计 / 工作流模式
 > **内容分级**: [归档级]

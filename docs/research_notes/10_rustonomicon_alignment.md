@@ -1,5 +1,7 @@
 # Rustonomicon 对齐矩阵 {#rustonomicon-对齐矩阵}
 
+> **EN**: Rustonomicon Alignment
+> **Summary**: Rustonomicon 对齐矩阵 Rustonomicon Alignment.
 > **概念族**: 权威来源对齐 / Rustonomicon
 > **内容分级**: [核心级]
 > **层级**: L0-L6

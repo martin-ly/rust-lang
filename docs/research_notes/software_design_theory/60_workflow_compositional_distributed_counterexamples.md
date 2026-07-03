@@ -1,5 +1,7 @@
 # 工作流、组合工程与分布式反例边界 {#工作流组合工程与分布式反例边界}
 
+> **EN**: Workflow Compositional Distributed Counterexamples
+> **Summary**: 工作流、组合工程与分布式反例边界 Workflow Compositional Distributed Counterexamples.
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
 > **Bloom 层级**: L5-L6 (分析/评价)

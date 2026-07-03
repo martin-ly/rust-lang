@@ -1,5 +1,7 @@
 # 社区参与与贡献指南
 
+> **EN**: Community And Contributing
+> **Summary**: 社区参与与贡献指南 Community And Contributing.
 > **Bloom 层级**: 理解
 >
 > **受众**: [初学者] / [进阶]

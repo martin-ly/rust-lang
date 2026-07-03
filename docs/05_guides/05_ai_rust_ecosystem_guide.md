@@ -1,5 +1,7 @@
 # AI + Rust 生态指南 {#ai-rust-生态指南}
 
+> **EN**: Ai Rust Ecosystem Guide
+> **Summary**: AI + Rust 生态指南 Ai Rust Ecosystem Guide. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 >
@@ -78,7 +80,7 @@
 | **提示词模板** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) | 概念解释、代码审查、错误修复 |
 | **RAG 与项目结合** | 同上 | 速查卡、00_MASTER_INDEX、决策树纳入检索 |
 | **错误码上下文** | [ERROR_CODE_MAPPING](../02_reference/02_error_code_mapping.md) | 编译错误 → 文档映射 |
-| **练习推荐** | [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) | 模块 ↔ 习题对应 |
+| **练习推荐** | [RUSTLINGS_MAPPING](../../exercises/rustlings_mapping.md) | 模块 ↔ 习题对应 |
 
 ---
 
@@ -137,7 +139,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. 使用 [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) 的提示词模板
-2. 结合 [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) 让 AI 推荐习题
+2. 结合 [RUSTLINGS_MAPPING](../../exercises/rustlings_mapping.md) 让 AI 推荐习题
 3. 遇到错误时附带 [ERROR_CODE_MAPPING](../02_reference/02_error_code_mapping.md)
 
 ### 路径 B：Rust 构建 AI（先 Rust 后 AI） {#路径-brust-构建-ai先-rust-后-ai}
@@ -514,7 +516,7 @@ type Result<T> = std::result::Result<T, AIError>;
 使用 AI 工具快速理解 Rust 复杂概念：
 
 - 将所有权错误信息粘贴给 AI，获取详细解释
-- 让 AI 根据 [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) 推荐练习
+- 让 AI 根据 [RUSTLINGS_MAPPING](../../exercises/rustlings_mapping.md) 推荐练习
 - 使用 AI 审查代码并提供改进建议
 
 ### 场景2: 本地 LLM 推理服务 {#场景2-本地-llm-推理服务}
@@ -562,7 +564,7 @@ type Result<T> = std::result::Result<T, AIError>;
 | :--- | :--- |
 | **相关指南** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) |
 | :--- | :--- |
-| **参考文档** | [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) |
+| **参考文档** | [RUSTLINGS_MAPPING](../../exercises/rustlings_mapping.md) |
 | :--- | :--- |
 
 ---

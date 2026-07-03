@@ -1,5 +1,7 @@
 # 类型系统反例边界 {#类型系统反例边界}
 
+> **EN**: Type System Counterexamples
+> **Summary**: 类型系统反例边界 Type System Counterexamples.
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
 > **Bloom 层级**: L5-L6 (分析/评价)

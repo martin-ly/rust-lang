@@ -1,5 +1,7 @@
 # Cargo Book 对齐矩阵 {#cargo-book-对齐矩阵}
 
+> **EN**: Cargo Book Alignment
+> **Summary**: Cargo Book 对齐矩阵 Cargo Book Alignment.
 > **概念族**: 权威来源对齐 / Cargo Book
 > **内容分级**: [核心级]
 > **层级**: L0-L5

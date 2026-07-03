@@ -17,6 +17,8 @@
 
 # tract Crate 架构解构 {#tract-crate-架构解构}
 
+> **EN**: Tract Architecture
+> **Summary**: tract Crate 架构解构 Tract Architecture.
 > **最后更新**: 2026-06-29
 >
 > **内容分级**: [归档级]

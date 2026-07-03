@@ -1,5 +1,7 @@
 # Concurrency 并发编程
 
+> **EN**: Concurrency Index
+> **Summary**: Concurrency 并发编程 Concurrency Index. (stub/archive redirect)
 > **📎 交叉引用**
 >
 > 本主题在 concept 中有深度的概念分析：[并发](../../../concept/03_advanced/01_concurrency.md)

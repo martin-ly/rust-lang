@@ -1,5 +1,7 @@
 # Aeneas 集成计划 {#aeneas-集成计划}
 
+> **EN**: Aeneas Integration Plan
+> **Summary**: Aeneas 集成计划 Aeneas Integration Plan. (stub/archive redirect)
 > **概念族**: 国际化形式化对齐
 > **内容分级**: [归档级]
 >
@@ -243,7 +245,6 @@ Aeneas 集成架构
 ```rust
 /// Aeneas 验证注释示例
 
-
 /// @requires: n >= 0
 
 /// @ensures: result == n * (n + 1) / 2
@@ -261,7 +262,6 @@ fn sum_to_n(n: u32) -> u32 {
     }
 
 }
-
 
 /// @invariant: i <= n
 
@@ -307,7 +307,6 @@ Phase 1: 基础设施 (Week 1-2)
 
 └── 基础文档编写
 
-
 Phase 2: 核心示例 (Week 3-4)
 
 ├── 所有权示例验证
@@ -316,7 +315,6 @@ Phase 2: 核心示例 (Week 3-4)
 
 └── 基础数据结构验证
 
-
 Phase 3: 进阶验证 (Week 5-6)
 
 ├── 算法正确性验证
@@ -324,7 +322,6 @@ Phase 3: 进阶验证 (Week 5-6)
 ├── 复杂数据结构
 
 └── 模式集成
-
 
 Phase 4: 文档完善 (Week 7-8)
 
@@ -370,7 +367,6 @@ fn add_values(x: Box<i32>, y: Box<i32>) -> i32 {
 
 }
 
-
 /// 验证借用规则
 
 /// @requires: valid_reference(v)
@@ -399,7 +395,6 @@ struct Node<T> {
     next: Option<Box<Node<T>>>,
 
 }
-
 
 /// @requires: list is valid
 
@@ -441,7 +436,6 @@ fn binary_search(arr: &[i32], target: i32) -> bool {
         return false;
 
     }
-
 
     let mid = arr.len() / 2;
 

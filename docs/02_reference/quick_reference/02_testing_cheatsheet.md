@@ -1,5 +1,7 @@
 # 🧪 Rust 测试速查卡 {#rust-测试速查卡}
 
+> **EN**: Testing Cheatsheet
+> **Summary**: 🧪 Rust 测试速查卡 Testing Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **快速参考** | [完整文档](../../rust-formal-engineering-system/05_software_engineering/07_testing/README.md) | [代码示例](../../../crates/README.md)
 > **创建日期**: 2026-01-27
@@ -1731,7 +1733,7 @@ fn broken_test() {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [完整测试文档](../../rust-formal-engineering-system/05_software_engineering/07_testing/README.md)
-- [WASM 测试策略](../../../crates/c12_wasm/docs/wasm_engineering/Testing_Strategies.md)
+- [WASM 测试策略](../../../crates/c12_wasm/docs/wasm_engineering/testing_strategies.md)
 - [测试研究笔记](../../research_notes/README.md)
 - [形式化方法研究](../../../archive/research_notes_2026_06_25/formal_methods/README.md)
 

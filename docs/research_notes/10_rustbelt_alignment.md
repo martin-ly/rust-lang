@@ -1,5 +1,7 @@
 # RustBelt 逐章对标 {#rustbelt-逐章对标}
 
+> **EN**: Rustbelt Alignment
+> **Summary**: RustBelt 逐章对标 Rustbelt Alignment. (stub/archive redirect)
 > **概念族**: 国际化形式化对齐
 > **内容分级**: [归档级]
 >

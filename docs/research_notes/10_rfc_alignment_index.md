@@ -1,5 +1,7 @@
 # Rust RFC 对齐索引 {#rust-rfc-对齐索引}
 
+> **EN**: Rfc Alignment Index
+> **Summary**: Rust RFC 对齐索引 Rfc Alignment Index.
 > **概念族**: 权威来源对齐 / RFC
 > **内容分级**: [核心级]
 > **层级**: L0-L7

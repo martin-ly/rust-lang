@@ -9,6 +9,8 @@
 
 # Clap crate 架构解构 {#clap-crate-架构解构}
 
+> **EN**: Clap Architecture
+> **Summary**: Clap crate 架构解构 Clap Architecture.
 > **概念族**: 软件设计 / Crate 架构
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -50,7 +52,6 @@ graph TB
 
     end
 
-
     subgraph MacroExpansion["宏展开层"]
 
         ME[proc_macro 生成<br/>impl Parser for Args]
@@ -58,7 +59,6 @@ graph TB
         ME2["quote! 生成<br/>Command::new ... .arg ..."]
 
     end
-
 
     subgraph CoreRepresentation["核心表示层"]
 
@@ -72,7 +72,6 @@ graph TB
 
     end
 
-
     subgraph Runtime["运行时"]
 
         P[Parser 状态机]
@@ -82,7 +81,6 @@ graph TB
         V[验证器]
 
     end
-
 
     D -->|derive macro 展开| ME
 
@@ -104,7 +102,6 @@ graph TB
 
     M --> V
 
-
     style UserFacing fill:#e3f2fd
 
     style MacroExpansion fill:#f3e5f5
@@ -121,7 +118,6 @@ graph TB
 
 ```rust,ignore
 use clap::{Command, Arg, ArgAction};
-
 
 let cmd = Command::new("myapp")
 
@@ -157,7 +153,6 @@ let cmd = Command::new("myapp")
 
     .arg(Arg::new("input").required(true).index(1));
 
-
 let matches = cmd.get_matches();
 
 let config: &String = matches.get_one::<String>("config").unwrap();
@@ -175,7 +170,6 @@ use clap::Parser;
 
 use std::path::PathBuf;
 
-
 #[derive(Parser)]
 
 #[command(name = "myapp", version = "1.0.0")]
@@ -186,16 +180,13 @@ struct Cli {
 
     config: PathBuf,
 
-
     #[arg(short, long, action = clap::ArgAction::Count)]
 
     verbose: u8,
 
-
     input: PathBuf,
 
 }
-
 
 fn main() {
 
@@ -233,7 +224,6 @@ impl clap::IntoApp for Cli {
     }
 
 }
-
 
 #[automatically_derived]
 
@@ -285,7 +275,6 @@ graph LR
 
     E --> F[编译器继续编译<br/>生成的 TokenStream]
 
-
     style A fill:#e3f2fd
 
     style B fill:#f3e5f5
@@ -307,13 +296,11 @@ use syn::DeriveInput;
 
 use quote::quote;
 
-
 #[proc_macro_derive(Parser, attributes(command, arg))]
 
 pub fn derive_parser(input: TokenStream) -> TokenStream {
 
     let input: DeriveInput = syn::parse(input).unwrap();
-
 
     let gen = match &input.data {
 
@@ -325,11 +312,9 @@ pub fn derive_parser(input: TokenStream) -> TokenStream {
 
     };
 
-
     gen.into()
 
 }
-
 
 // derive_for_struct 内部：
 
@@ -348,7 +333,6 @@ pub fn derive_parser(input: TokenStream) -> TokenStream {
 ```rust,ignore
 use clap::Parser;
 
-
 #[derive(Parser)]
 
 struct Args {
@@ -365,20 +349,17 @@ struct Args {
 
     input: String,
 
-
     // 显式属性覆盖默认推断
 
     #[arg(short = 'o', long)]
 
     output: Option<String>,
 
-
     // 限制值范围（编译期嵌入 value_parser）
 
     #[arg(value_parser = clap::value_parser!(u8).range(1..=100))]
 
     concurrency: u8,
-
 
     // 互斥参数组：--json 与 --yaml 不能同时出现
 
@@ -416,7 +397,6 @@ use std::num::NonZeroU32;
 
 use clap::Parser;
 
-
 // 任何实现 FromStr 的类型都可以直接作为参数类型
 
 #[derive(Parser)]
@@ -434,7 +414,6 @@ struct TypedArgs {
     size: usize,                         // 自定义解析器
 
 }
-
 
 fn parse_size(s: &str) -> Result<usize, String> {
 
@@ -465,7 +444,6 @@ fn parse_size(s: &str) -> Result<usize, String> {
 ```rust,ignore
 use clap::{ArgMatches, ValueEnum};
 
-
 // get_one::<T> 编译期确定返回类型，无需运行时类型检查
 
 fn process_matches(m: &ArgMatches) {
@@ -476,7 +454,6 @@ fn process_matches(m: &ArgMatches) {
 
 }
 
-
 // 自定义枚举参数：#[derive(ValueEnum)] 自动生成变体映射
 
 #[derive(Clone, Copy, Debug, ValueEnum)]
@@ -486,7 +463,6 @@ enum LogLevel {
     Error, Warn, Info, Debug, Trace,
 
 }
-
 
 #[derive(Parser)]
 
@@ -509,7 +485,6 @@ struct LoggingArgs {
 ```rust,ignore
 use clap::Parser;
 
-
 #[derive(Parser)]
 
 struct ValidatedArgs {
@@ -519,7 +494,6 @@ struct ValidatedArgs {
     #[arg(long, required_if_eq("mode", "custom"))]
 
     template: Option<String>,
-
 
     // 互斥参数
 
@@ -531,7 +505,6 @@ struct ValidatedArgs {
 
     interactive: bool,
 
-
     // 依赖参数
 
     #[arg(long, requires = "password")]
@@ -541,7 +514,6 @@ struct ValidatedArgs {
     #[arg(long)]
 
     password: Option<String>,
-
 
     #[arg(long, value_parser = ["simple", "custom"])]
 
@@ -585,7 +557,6 @@ graph TB
 
     end
 
-
     subgraph RustTypes["Rust 类型映射"]
 
         E[enum Commands] --> F[Add<br/>struct]
@@ -596,9 +567,7 @@ graph TB
 
     end
 
-
     CLI -.->|一一对应| RustTypes
-
 
     style CLI fill:#e3f2fd
 
@@ -615,7 +584,6 @@ use clap::{Parser, Subcommand};
 
 use std::path::PathBuf;
 
-
 #[derive(Parser)]
 
 #[command(name = "myapp")]
@@ -627,7 +595,6 @@ struct Cli {
     command: Commands,
 
 }
-
 
 #[derive(Subcommand)]
 
@@ -669,7 +636,6 @@ enum Commands {
 
 }
 
-
 fn main() {
 
     let cli = Cli::parse();
@@ -697,7 +663,6 @@ fn main() {
 ```rust,ignore
 use clap::{Parser, Subcommand};
 
-
 #[derive(Parser)]
 
 struct Cli {
@@ -712,7 +677,6 @@ struct Cli {
 
 }
 
-
 #[derive(Subcommand)]
 
 enum Commands {
@@ -723,16 +687,13 @@ enum Commands {
 
 }
 
-
 #[derive(Subcommand)]
 
 enum DbCommands { Migrate { version: Option<String> }, Reset, Status }
 
-
 #[derive(Subcommand)]
 
 enum CacheCommands { Clear, Warm { key: String } }
-
 
 // CLI 映射：
 
@@ -761,7 +722,6 @@ Clap 将 CLI 验证分为两个层次：**解析时验证**（parse-time validat
 ```rust,ignore
 use clap::Parser;
 
-
 #[derive(Parser)]
 
 struct ValidatedCli {
@@ -770,11 +730,9 @@ struct ValidatedCli {
 
     input: std::path::PathBuf,
 
-
     #[arg(short, long, value_parser = clap::value_parser!(u16).range(1024..))]
 
     port: u16,
-
 
     // 互斥参数组
 
@@ -785,7 +743,6 @@ struct ValidatedCli {
     #[arg(long, group = "output")]
 
     csv: bool,
-
 
     // 条件必填与允许值
 
@@ -808,7 +765,6 @@ struct ValidatedCli {
 ```rust,ignore
 use clap::Parser;
 
-
 #[derive(Parser)]
 
 #[command(arg_required_else_help = true)]
@@ -821,11 +777,9 @@ struct DeployArgs {
 
 }
 
-
 #[derive(Clone, Copy, Debug, clap::ValueEnum)]
 
 enum Environment { Dev, Staging, Production }
-
 
 // Clap 自动生成错误输出：
 
@@ -862,7 +816,6 @@ enum Environment { Dev, Staging, Production }
 ```rust,ignore
 use clap::Parser;
 
-
 #[derive(Parser)]
 
 struct Args {
@@ -872,7 +825,6 @@ struct Args {
     threshold: f64,
 
 }
-
 
 fn main() {
 

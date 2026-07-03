@@ -1,5 +1,7 @@
 # 🦀 所有权系统速查卡 {#所有权系统速查卡}
 
+> **EN**: Ownership Cheatsheet
+> **Summary**: 🦀 所有权系统速查卡 Ownership Cheatsheet.
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >

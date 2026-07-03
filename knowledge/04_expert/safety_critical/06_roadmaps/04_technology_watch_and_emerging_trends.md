@@ -9,6 +9,8 @@
 >
 # 技术观察与新兴趋势
 
+> **EN**: Technology Watch And Emerging Trends
+> **Summary**: 技术观察与新兴趋势 Technology Watch And Emerging Trends.
 > **Bloom 层级**: 理解
 
 ## 概述

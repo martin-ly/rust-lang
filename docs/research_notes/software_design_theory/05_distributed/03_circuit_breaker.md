@@ -1,5 +1,7 @@
 # Circuit Breaker 模式形式化定义 {#circuit-breaker-模式形式化定义}
 
+> **EN**: Circuit Breaker
+> **Summary**: Circuit Breaker 模式形式化定义 Circuit Breaker. (stub/archive redirect)
 > **概念族**: 软件设计 / 分布式模式
 > **内容分级**: [归档级]
 >
@@ -193,7 +195,6 @@ use std::sync::atomic::{AtomicU32, Ordering};
 
 use std::time::{Duration, Instant};
 
-
 pub enum CircuitState {
 
     Closed,     // 正常
@@ -203,7 +204,6 @@ pub enum CircuitState {
     HalfOpen,   // 半开试探
 
 }
-
 
 pub struct CircuitBreaker {
 
@@ -218,7 +218,6 @@ pub struct CircuitBreaker {
     last_failure: std::sync::Mutex<Option<Instant>>,
 
 }
-
 
 impl CircuitBreaker {
 
@@ -272,7 +271,6 @@ impl CircuitBreaker {
 
         }
 
-
         // 执行请求
 
         match f() {
@@ -297,7 +295,6 @@ impl CircuitBreaker {
 
     }
 
-
     fn on_success(&self) {
 
         self.failure_count.store(0, Ordering::SeqCst);
@@ -308,13 +305,11 @@ impl CircuitBreaker {
 
     }
 
-
     fn on_failure(&self) {
 
         let count = self.failure_count.fetch_add(1, Ordering::SeqCst) + 1;
 
         *self.last_failure.lock().unwrap() = Some(Instant::now());
-
 
         if count >= self.threshold {
 

@@ -11,6 +11,8 @@
 >
 # 评估与认证体系
 
+> **EN**: Assessment And Certification
+> **Summary**: 评估与认证体系 Assessment And Certification. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 概述

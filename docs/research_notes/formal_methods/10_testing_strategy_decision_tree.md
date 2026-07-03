@@ -1,5 +1,7 @@
 # Rust 测试策略决策树 {#rust-测试策略决策树}
 
+> **EN**: Testing Strategy Decision Tree
+> **Summary**: Rust 测试策略决策树 Testing Strategy Decision Tree. (stub/archive redirect)
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级（已迁回并持续推进）
 > **概念族**: 测试 / 策略决策
@@ -142,7 +144,6 @@
 
     └─► 使用 #[cfg(test)] 模块组织
 
-
 📁 文件位置: src/*.rs 内的 #[cfg(test)] 模块
 
 🎯 覆盖率目标: >80%
@@ -157,7 +158,6 @@
 
 pub struct Calculator;
 
-
 impl Calculator {
 
     pub fn add(a: i32, b: i32) -> i32 {
@@ -165,7 +165,6 @@ impl Calculator {
         a.saturating_add(b)
 
     }
-
 
     pub fn divide(a: f64, b: f64) -> Result<f64, String> {
 
@@ -183,13 +182,11 @@ impl Calculator {
 
 }
 
-
 #[cfg(test)]
 
 mod tests {
 
     use super::*;
-
 
     // 基础功能测试
 
@@ -203,7 +200,6 @@ mod tests {
 
     }
 
-
     // 边界条件测试
 
     #[test]
@@ -215,7 +211,6 @@ mod tests {
         assert_eq!(calc.add(i32::MAX, 1), i32::MAX); // saturating_add 行为
 
     }
-
 
     // 错误处理测试
 
@@ -232,7 +227,6 @@ mod tests {
         assert_eq!(result.unwrap_err(), "除数不能为零");
 
     }
-
 
     // 参数化测试模式
 
@@ -251,7 +245,6 @@ mod tests {
             (i32::MIN, 0, i32::MIN),
 
         ];
-
 
         let calc = Calculator;
 
@@ -301,7 +294,6 @@ mod tests {
 
     └─► HTTP 客户端、消息队列等
 
-
 📁 文件位置: tests/*.rs
 
 🎯 覆盖率目标: 关键路径 100%
@@ -318,13 +310,11 @@ use my_app::{AppConfig, Database, UserService};
 
 use std::sync::Arc;
 
-
 // 共享测试基础设施
 
 mod common;
 
 use common::setup_test_db;
-
 
 #[tokio::test]
 
@@ -336,7 +326,6 @@ async fn test_user_registration_flow() {
 
     let user_service = UserService::new(Arc::new(db));
 
-
     // Act: 执行被测操作
 
     let result = user_service
@@ -344,7 +333,6 @@ async fn test_user_registration_flow() {
         .register_user("alice@example.com", "password123")
 
         .await;
-
 
     // Assert: 验证结果
 
@@ -356,7 +344,6 @@ async fn test_user_registration_flow() {
 
     assert!(user.id > 0);
 
-
     // 验证数据库状态
 
     let stored_user = user_service.find_by_email("alice@example.com").await;
@@ -364,7 +351,6 @@ async fn test_user_registration_flow() {
     assert!(stored_user.is_some());
 
 }
-
 
 #[tokio::test]
 
@@ -374,7 +360,6 @@ async fn test_duplicate_email_registration() {
 
     let user_service = UserService::new(Arc::new(db));
 
-
     // 第一次注册
 
     let _ = user_service
@@ -382,7 +367,6 @@ async fn test_duplicate_email_registration() {
         .register_user("bob@example.com", "password123")
 
         .await;
-
 
     // 重复注册应失败
 
@@ -392,13 +376,11 @@ async fn test_duplicate_email_registration() {
 
         .await;
 
-
     assert!(result.is_err());
 
     assert!(result.unwrap_err().to_string().contains("已存在"));
 
 }
-
 
 // tests/common/mod.rs
 
@@ -408,7 +390,6 @@ pub async fn setup_test_db() -> Database {
 
     use uuid::Uuid;
 
-
     // 使用唯一的测试数据库名称
 
     let test_db_name = format!("test_db_{}", Uuid::new_v4());
@@ -416,7 +397,6 @@ pub async fn setup_test_db() -> Database {
     let database_url = env::var("DATABASE_URL")
 
         .unwrap_or_else(|_| "postgres://localhost/test".to_string());
-
 
     let config = AppConfig {
 
@@ -426,11 +406,9 @@ pub async fn setup_test_db() -> Database {
 
     };
 
-
     let db = Database::connect(&config.database_url).await.unwrap();
 
     db.run_migrations().await.unwrap();
-
 
     db
 
@@ -472,7 +450,6 @@ pub async fn setup_test_db() -> Database {
 
     └─► CI 中自动运行
 
-
 📁 文件位置: src/lib.rs 或模块文件的文档注释中
 
 🎯 覆盖率目标: 所有公共 API
@@ -506,7 +483,6 @@ pub async fn setup_test_db() -> Database {
 //! assert!(validator.is_valid_email("user@example.com"));
 
 //! ```
-
 
 /// 验证器结构体，用于数据格式验证。
 
@@ -558,7 +534,6 @@ pub async fn setup_test_db() -> Database {
 
 pub struct Validator;
 
-
 impl Validator {
 
     /// 创建新的验证器实例。
@@ -584,7 +559,6 @@ impl Validator {
         Self
 
     }
-
 
     /// 验证邮箱地址格式。
 
@@ -646,7 +620,6 @@ impl Validator {
 
 }
 
-
 // Cargo.toml 配置以启用文档测试
 
 // [lib]
@@ -689,7 +662,6 @@ impl Validator {
 
     └─► 结合 valgrind 或 dhat
 
-
 📁 文件位置: benches/*.rs
 
 🎯 目标: 关键路径性能可量化
@@ -706,11 +678,9 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion, Benchmark
 
 use my_algorithm::{bubble_sort, quick_sort, merge_sort};
 
-
 fn sorting_benchmark(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("sorting_algorithms");
-
 
     // 不同数据规模的测试
 
@@ -719,7 +689,6 @@ fn sorting_benchmark(c: &mut Criterion) {
         // 生成随机数据
 
         let data: Vec<i32> = (0..*size).rev().collect();
-
 
         group.bench_with_input(
 
@@ -735,7 +704,6 @@ fn sorting_benchmark(c: &mut Criterion) {
 
         );
 
-
         group.bench_with_input(
 
             BenchmarkId::new("quick_sort", size),
@@ -749,7 +717,6 @@ fn sorting_benchmark(c: &mut Criterion) {
             }
 
         );
-
 
         group.bench_with_input(
 
@@ -767,18 +734,15 @@ fn sorting_benchmark(c: &mut Criterion) {
 
     }
 
-
     group.finish();
 
 }
-
 
 // 异步基准测试
 
 fn async_benchmark(c: &mut Criterion) {
 
     let rt = tokio::runtime::Runtime::new().unwrap();
-
 
     c.bench_function("async_database_query", |b| {
 
@@ -794,7 +758,6 @@ fn async_benchmark(c: &mut Criterion) {
 
 }
 
-
 criterion_group!(benches, sorting_benchmark, async_benchmark);
 
 criterion_main!(benches);
@@ -808,7 +771,6 @@ criterion_main!(benches);
 name = "sorting_benchmark"
 
 harness = false
-
 
 [dev-dependencies]
 
@@ -850,7 +812,6 @@ criterion = { version = "0.5", features = ["async_tokio"] }
 
     └─► 随机数据注入
 
-
 📁 文件位置: fuzz/fuzz_targets/*.rs
 
 🎯 目标: 发现 panic 或崩溃
@@ -865,11 +826,9 @@ criterion = { version = "0.5", features = ["async_tokio"] }
 
 #![no_main]
 
-
 use libfuzzer_sys::fuzz_target;
 
 use my_parser::JsonParser;
-
 
 fuzz_target!(|data: &[u8]| {
 
@@ -885,16 +844,13 @@ fuzz_target!(|data: &[u8]| {
 
 });
 
-
 // fuzz/fuzz_targets/http_parser.rs
 
 #![no_main]
 
-
 use libfuzzer_sys::fuzz_target;
 
 use my_http::RequestParser;
-
 
 fuzz_target!(|data: &[u8]| {
 
@@ -912,21 +868,17 @@ fuzz_target!(|data: &[u8]| {
 
 cargo install cargo-fuzz
 
-
 # 初始化模糊测试项目 {#初始化模糊测试项目}
 
 cargo fuzz init
-
 
 # 运行模糊测试（默认无限运行） {#运行模糊测试默认无限运行}
 
 cargo fuzz run parser
 
-
 # 带超时运行 {#带超时运行}
 
 cargo fuzz run parser -- -max_total_time=300
-
 
 # 复现特定崩溃 {#复现特定崩溃}
 
@@ -968,7 +920,6 @@ cargo fuzz run parser crash-abc123
 
     └─► 模型驱动验证
 
-
 📁 文件位置: 集成在单元测试或独立测试文件
 
 🎯 目标: 发现边缘案例
@@ -983,7 +934,6 @@ cargo fuzz run parser crash-abc123
 
 use proptest::prelude::*;
 
-
 // 测试加法交换律
 
 proptest! {
@@ -995,7 +945,6 @@ proptest! {
         prop_assert_eq!(a + b, b + a);
 
     }
-
 
     #[test]
 
@@ -1015,7 +964,6 @@ proptest! {
 
 }
 
-
 // 自定义策略
 
 fn user_strategy() -> impl Strategy<Value = User> {
@@ -1026,11 +974,9 @@ fn user_strategy() -> impl Strategy<Value = User> {
 
 }
 
-
 // 状态机属性测试
 
 use proptest::state_machine::{ReferenceStateMachine, StateMachineTest};
-
 
 #[derive(Clone, Debug)]
 
@@ -1039,7 +985,6 @@ struct MyStateMachine {
     items: Vec<u32>,
 
 }
-
 
 enum Transition {
 
@@ -1051,20 +996,17 @@ enum Transition {
 
 }
 
-
 impl ReferenceStateMachine for MyStateMachine {
 
     type State = Self;
 
     type Transition = Transition;
 
-
     fn init_state() -> BoxedStrategy<Self::State> {
 
         Just(Self { items: vec![] }).boxed()
 
     }
-
 
     fn transitions(_state: &Self::State) -> BoxedStrategy<Self::Transition> {
 
@@ -1081,7 +1023,6 @@ impl ReferenceStateMachine for MyStateMachine {
         .boxed()
 
     }
-
 
     fn apply(state: &Self::State, transition: &Self::Transition) -> Self::State {
 
@@ -1149,7 +1090,6 @@ async fn test_async_function() {
 
 }
 
-
 // 使用 tokio::test 宏配置
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 4)]
@@ -1162,7 +1102,6 @@ async fn test_concurrent_operations() {
 
         .collect();
 
-
     for handle in handles {
 
         assert!(handle.await.is_ok());
@@ -1170,7 +1109,6 @@ async fn test_concurrent_operations() {
     }
 
 }
-
 
 // 超时控制
 
@@ -1186,11 +1124,9 @@ async fn test_with_timeout() {
 
     ).await;
 
-
     assert!(result.is_ok(), "操作超时");
 
 }
-
 
 // 模拟时间推进
 
@@ -1199,7 +1135,6 @@ async fn test_with_timeout() {
 async fn test_timer_behavior() {
 
     tokio::time::pause();
-
 
     let start = tokio::time::Instant::now();
 
@@ -1211,11 +1146,9 @@ async fn test_timer_behavior() {
 
     );
 
-
     // 手动推进时间
 
     tokio::time::advance(Duration::from_secs(30)).await;
-
 
     assert!(timeout.await.is_ok());
 
@@ -1233,7 +1166,6 @@ use mockall::{mock, predicate::*};
 
 use mockall_double::double;
 
-
 // 定义 trait
 
 #[cfg_attr(test, mockall::automock)]
@@ -1248,7 +1180,6 @@ pub trait Database {
 
 }
 
-
 // 使用模拟的测试
 
 #[cfg(test)]
@@ -1257,13 +1188,11 @@ mod tests {
 
     use super::*;
 
-
     #[test]
 
     fn test_user_service_with_mock() {
 
         let mut mock_db = MockDatabase::new();
-
 
         // 设置预期行为
 
@@ -1277,7 +1206,6 @@ mod tests {
 
             .returning(|_| Some(User { id: 42, name: "Alice".to_string() }));
 
-
         mock_db
 
             .expect_save_user()
@@ -1288,7 +1216,6 @@ mod tests {
 
             .returning(|_| Ok(()));
 
-
         let service = UserService::new(mock_db);
 
         let user = service.find_user(42).unwrap();
@@ -1296,7 +1223,6 @@ mod tests {
         assert_eq!(user.name, "Alice");
 
     }
-
 
     // 异步模拟
 
@@ -1306,7 +1232,6 @@ mod tests {
 
         let mut mock_db = MockDatabase::new();
 
-
         mock_db
 
             .expect_async_query()
@@ -1315,13 +1240,11 @@ mod tests {
 
             .returning(|_| vec![]);
 
-
         let result = mock_db.async_query("SELECT * FROM users").await;
 
         assert!(result.is_empty());
 
     }
-
 
     // 序列模拟
 
@@ -1331,7 +1254,6 @@ mod tests {
 
         let mut mock_db = MockDatabase::new();
 
-
         mock_db
 
             .expect_get_user()
@@ -1339,7 +1261,6 @@ mod tests {
             .times(3)
 
             .returning(|id| Some(User { id, name: format!("User{}", id) }));
-
 
         // 连续调用返回不同值
 
@@ -1353,13 +1274,11 @@ mod tests {
 
 }
 
-
 // 条件编译使用模拟
 
 #[double]
 
 use crate::db::Database;
-
 
 pub struct UserService {
 
@@ -1377,7 +1296,6 @@ use insta::{assert_snapshot, with_settings};
 
 use serde::Serialize;
 
-
 #[derive(Serialize)]
 
 struct ApiResponse {
@@ -1389,7 +1307,6 @@ struct ApiResponse {
     page: usize,
 
 }
-
 
 #[test]
 
@@ -1411,13 +1328,11 @@ fn test_api_response_format() {
 
     };
 
-
     // 自动创建和管理快照文件
 
     assert_snapshot!(serde_json::to_string_pretty(&response).unwrap());
 
 }
-
 
 // 带设置值的快照
 
@@ -1445,7 +1360,6 @@ fn test_with_filters() {
 
 }
 
-
 // 内联快照
 
 #[test]
@@ -1457,7 +1371,6 @@ fn test_inline_snapshot() {
     insta::assert_snapshot!(result, @"预期输出内容");
 
 }
-
 
 //  glob 快照测试
 
@@ -1485,16 +1398,13 @@ fn test_all_fixtures() {
 
 cargo test
 
-
 # 审查和接受快照变更 {#审查和接受快照变更}
 
 cargo insta review
 
-
 # 接受所有快照 {#接受所有快照}
 
 cargo insta accept
-
 
 # 拒绝变更 {#拒绝变更}
 
@@ -1510,7 +1420,6 @@ use criterion::{Criterion, BenchmarkGroup, measurement::WallTime};
 
 use criterion::async_executor::FuturesExecutor;
 
-
 fn configure_benchmark(group: &mut BenchmarkGroup<WallTime>) {
 
     group
@@ -1523,13 +1432,11 @@ fn configure_benchmark(group: &mut BenchmarkGroup<WallTime>) {
 
 }
 
-
 fn bench_database_operations(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("db_operations");
 
     configure_benchmark(&mut group);
-
 
     group.bench_function("insert", |b| {
 
@@ -1538,7 +1445,6 @@ fn bench_database_operations(c: &mut Criterion) {
         b.iter(|| db.insert(generate_random_user()));
 
     });
-
 
     group.bench_function("query_by_id", |b| {
 
@@ -1556,16 +1462,13 @@ fn bench_database_operations(c: &mut Criterion) {
 
     });
 
-
     group.finish();
 
 }
 
-
 // 自定义测量器
 
 use criterion::measurement::Measurement;
-
 
 fn bench_with_custom_measurement(c: &mut Criterion) {
 
@@ -1588,7 +1491,6 @@ fn bench_with_custom_measurement(c: &mut Criterion) {
     );
 
 }
-
 
 criterion_group!(benches, bench_database_operations);
 
@@ -1682,18 +1584,15 @@ my_project/
 
 impl = "Llvm"
 
-
 [report]
 
 output = ["Html", "Xml", "Stdout"]
-
 
 [run]
 
 exclude-files = ["tests/*", "benches/*", "examples/*"]
 
 exclude = ["integration_tests"]
-
 
 [target]
 
@@ -1705,9 +1604,7 @@ timeout = "300s"
 
 name: Coverage
 
-
 on: [push, pull_request]
-
 
 jobs:
 
@@ -1719,16 +1616,13 @@ jobs:
 
       - uses: actions/checkout@v4
 
-
       - name: Install tarpaulin
 
         run: cargo install cargo-tarpaulin
 
-
       - name: Generate coverage
 
         run: cargo tarpaulin --out Xml --out Html
-
 
       - name: Upload to Codecov
 
@@ -1750,7 +1644,6 @@ jobs:
 
 name: Test Suite
 
-
 on:
 
   push:
@@ -1761,13 +1654,11 @@ on:
 
     branches: [main]
 
-
 env:
 
   CARGO_TERM_COLOR: always
 
   RUST_BACKTRACE: 1
-
 
 jobs:
 
@@ -1785,21 +1676,17 @@ jobs:
 
       - uses: Swatinem/rust-cache@v2
 
-
       - name: Format check
 
         run: cargo fmt --check
-
 
       - name: Clippy lint
 
         run: cargo clippy --all-targets --all-features -- -D warnings
 
-
       - name: Unit tests
 
         run: cargo test --lib -- --test-threads=$(nproc)
-
 
   # 完整测试套件 - PR 时运行
 
@@ -1827,21 +1714,17 @@ jobs:
 
       - uses: Swatinem/rust-cache@v2
 
-
       - name: Run all tests
 
         run: cargo test --all-features
-
 
       - name: Documentation tests
 
         run: cargo test --doc
 
-
       - name: Build documentation
 
         run: cargo doc --no-deps
-
 
   # 性能回归测试 - 定期运行
 
@@ -1862,7 +1745,6 @@ jobs:
           branchName: ${{ github.base_ref }}
 
           token: ${{ secrets.GITHUB_TOKEN }}
-
 
   # 安全审计
 
@@ -1890,18 +1772,15 @@ jobs:
 
 use criterion::{criterion_group, criterion_main, Criterion};
 
-
 fn critical_path_benchmark(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("critical_path");
-
 
     // 设置严格的性能阈值
 
     group.significance_level(0.05)
 
          .sample_size(500);
-
 
     group.bench_function("parse_large_file", |b| {
 
@@ -1910,7 +1789,6 @@ fn critical_path_benchmark(c: &mut Criterion) {
         b.iter(|| parser::parse(&data));
 
     });
-
 
     // 对比基线性能
 
@@ -1928,11 +1806,9 @@ fn critical_path_benchmark(c: &mut Criterion) {
 
     });
 
-
     group.finish();
 
 }
-
 
 criterion_group! {
 
@@ -2021,7 +1897,6 @@ fn test_<被测功能>_<场景>_<预期结果>() {
 
 }
 
-
 // 模块组织
 
 #[cfg(test)]
@@ -2047,7 +1922,6 @@ mod tests {
 use once_cell::sync::Lazy;
 
 use std::collections::HashMap;
-
 
 // 静态测试数据
 
@@ -2079,11 +1953,9 @@ pub static VALID_USERS: Lazy<Vec<User>> = Lazy::new(|| {
 
 });
 
-
 // 工厂函数
 
 pub struct UserFactory;
-
 
 impl UserFactory {
 
@@ -2101,7 +1973,6 @@ impl UserFactory {
 
     }
 
-
     pub fn user() -> User {
 
         User {
@@ -2115,7 +1986,6 @@ impl UserFactory {
         }
 
     }
-
 
     pub fn with_email(email: &str) -> User {
 
@@ -2133,7 +2003,6 @@ impl UserFactory {
 
 }
 
-
 // 使用 fake crate 生成数据
 
 use fake::{Fake, Faker};
@@ -2141,7 +2010,6 @@ use fake::{Fake, Faker};
 use fake::faker::internet::en::SafeEmail;
 
 use fake::faker::name::en::Name;
-
 
 pub fn generate_test_users(count: usize) -> Vec<User> {
 
@@ -2179,7 +2047,6 @@ async fn basic_async_test() {
 
 }
 
-
 // 模式 2: 并发测试
 
 #[tokio::test]
@@ -2192,13 +2059,11 @@ async fn concurrent_test() {
 
         .collect();
 
-
     let results = futures::future::join_all(handles).await;
 
     assert!(results.iter().all(|r| r.is_ok()));
 
 }
-
 
 // 模式 3: 超时控制
 
@@ -2214,11 +2079,9 @@ async fn test_with_timeout() {
 
     ).await;
 
-
     assert!(result.is_ok(), "操作超时");
 
 }
-
 
 // 模式 4: 模拟时间
 
@@ -2228,7 +2091,6 @@ async fn test_time_based_logic() {
 
     tokio::time::pause();
 
-
     let start = Instant::now();
 
     let handle = tokio::spawn(async {
@@ -2237,21 +2099,17 @@ async fn test_time_based_logic() {
 
     });
 
-
     tokio::time::advance(Duration::from_secs(30)).await;
 
     assert!(!handle.is_finished());
-
 
     tokio::time::advance(Duration::from_secs(30)).await;
 
     assert!(handle.is_finished());
 
-
     assert_eq!(start.elapsed(), Duration::from_secs(60));
 
 }
-
 
 // 模式 5: 共享状态管理
 
@@ -2259,13 +2117,11 @@ use std::sync::Arc;
 
 use tokio::sync::RwLock;
 
-
 #[tokio::test]
 
 async fn test_shared_state() {
 
     let state = Arc::new(RwLock::new(Vec::new()));
-
 
     let mut handles = vec![];
 
@@ -2283,13 +2139,11 @@ async fn test_shared_state() {
 
     }
 
-
     for handle in handles {
 
         handle.await.unwrap();
 
     }
-
 
     let final_state = state.read().await;
 
@@ -2373,7 +2227,6 @@ async fn test_shared_state() {
 
 pub struct Parser;
 
-
 // 测试文档模块
 
 #[cfg(test)]
@@ -2449,7 +2302,6 @@ mod test_documentation {
 
       └─► 不变量验证 ─────► 属性测试 ──► proptest
 
-
 继续深入：异步代码？
 
       │
@@ -2460,7 +2312,6 @@ mod test_documentation {
 
       └─► 否 ──► 标准测试
 
-
 继续深入：外部依赖？
 
       │
@@ -2470,7 +2321,6 @@ mod test_documentation {
       │
 
       └─► 否 ──► 直接测试
-
 
 继续深入：复杂输出？
 
@@ -2499,41 +2349,33 @@ mod test_documentation {
 
 cargo test
 
-
 # 仅运行单元测试 {#仅运行单元测试}
 
 cargo test --lib
-
 
 # 仅运行集成测试 {#仅运行集成测试}
 
 cargo test --test integration_test_name
 
-
 # 运行特定测试 {#运行特定测试}
 
 cargo test test_name_pattern
-
 
 # 文档测试 {#文档测试}
 
 cargo test --doc
 
-
 # 基准测试 {#基准测试-1}
 
 cargo bench
-
 
 # 覆盖率 {#覆盖率}
 
 cargo tarpaulin
 
-
 # 模糊测试 {#模糊测试}
 
 cargo fuzz run target_name
-
 
 # 性能分析 {#性能分析}
 
@@ -2574,26 +2416,21 @@ tokio-test = "0.4"
 
 assert_matches = "1.5"
 
-
 # 模拟 {#模拟}
 
 mockall = "0.12"
-
 
 # 快照测试 {#快照测试}
 
 insta = { version = "1.34", features = ["yaml", "json"] }
 
-
 # 属性测试 {#属性测试}
 
 proptest = "1.4"
 
-
 # 测试数据 {#测试数据}
 
 fake = { version = "2.9", features = ["derive"] }
-
 
 # CLI 测试 {#cli-测试}
 
@@ -2601,16 +2438,13 @@ assert_cmd = "2.0"
 
 predicates = "3.0"
 
-
 # 基准测试 {#基准测试-1}
 
 criterion = { version = "0.5", features = ["async_tokio", "html_reports"] }
 
-
 # 并发测试控制 {#并发测试控制}
 
 serial_test = "3.0"
-
 
 [profile.test]
 
@@ -2620,7 +2454,6 @@ debug = true
 
 lto = false
 
-
 [profile.bench]
 
 opt-level = 3
@@ -2628,7 +2461,6 @@ opt-level = 3
 debug = false
 
 lto = true
-
 
 [[bench]]
 
@@ -2644,16 +2476,13 @@ harness = false
 ```rust
 // .cargo/config.toml 或 tests/config.rs
 
-
 #[cfg(test)]
 
 pub mod test_config {
 
     use std::sync::Once;
 
-
     static INIT: Once = Once::new();
-
 
     pub fn setup() {
 
@@ -2669,11 +2498,9 @@ pub mod test_config {
 
                 .try_init();
 
-
             // 设置测试环境变量
 
             std::env::set_var("TEST_MODE", "true");
-
 
             // 初始化资源
 

@@ -17,6 +17,8 @@
 
 # ntex Crate 架构解构 {#ntex-crate-架构解构}
 
+> **EN**: Ntex Architecture
+> **Summary**: ntex Crate 架构解构 Ntex Architecture.
 > **最后更新**: 2026-06-29
 >
 > **内容分级**: [归档级]

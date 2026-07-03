@@ -1,5 +1,7 @@
 # 权威内容对齐全面检查报告 {#权威内容对齐全面检查报告}
 
+> **EN**: Authoritative Content Alignment Report
+> **Summary**: 权威内容对齐全面检查报告 Authoritative Content Alignment Report.
 > **概念族**: 权威来源对齐
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

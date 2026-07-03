@@ -1,5 +1,7 @@
 # 插件架构模式（Plugin Architecture） {#插件架构模式plugin-architecture}
 
+> **EN**: Plugin Architecture
+> **Summary**: 插件架构模式 Plugin Architecture.
 > **概念族**: 软件设计 / 组合工程 / 插件架构
 >
 > **内容分级**: [归档级]

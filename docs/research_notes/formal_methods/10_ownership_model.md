@@ -6,6 +6,8 @@
 
 # 所有权模型形式化 {#所有权模型形式化}
 
+> **EN**: Ownership Model
+> **Summary**: 所有权模型形式化 Ownership Model.
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -523,9 +525,7 @@ Iris 是一个**高阶并发分离逻辑 (Higher-Order Concurrent Separation Log
 ```
 M := OwnState × Val
 
-
 OwnState := {Owned, Borrowed_Imm(q), Borrowed_Mut, Moved}
-
 
   where q ∈ (0,1] is fractional permission
 ```
@@ -578,27 +578,19 @@ $$
 ```coq
 (* Iris 中的所有权断言示例 *)
 
-
 (* s : String 的所有权 *)
-
 
 own s "hello"  (* s ↦_1 "hello" *)
 
-
 (* 不可变借用 *)
-
 
 &imm s q  (* s ↦_q "hello", q ∈ (0,1) *)
 
-
 (* 可变借用 *)
-
 
 &mut s  (* ex(s, "hello") 独占 *)
 
-
 (* 所有权转移 *)
-
 
 move s s'  (* s ↦_0 ⊥ * s' ↦_1 "hello" *)
 ```
@@ -781,21 +773,15 @@ move s s'  (* s ↦_0 ⊥ * s' ↦_1 "hello" *)
 ```rust
 // Rust 代码
 
-
 fn example() {
-
 
     let mut x = 5;
 
-
     let r = &mut x;  // 创建可变借用
-
 
     *r = 10;         // 通过借用修改
 
-
     // r 结束，x = 10
-
 
 }
 ```
@@ -803,21 +789,15 @@ fn example() {
 ```coq
 (* Aeneas 翻译到 Coq (示意) *)
 
-
 Definition example : unit :=
-
 
   let x0 := 5 in                    (* 初始值 *)
 
-
   let (x1, r) := make_mut_borrow x0 in  (* 创建可变借用 *)
-
 
   let r' := update r 10 in          (* 更新值 *)
 
-
   let x2 := finalize_borrow r' in   (* 借用结束，获取最终值 *)
-
 
   tt.
 ```
@@ -904,15 +884,11 @@ Aeneas 使用**预言变量 (Prophecy Variables)** 处理可变借用：
 ```rust
 // Rust
 
-
 let mut x = 5;
-
 
 let r = &mut x;  // r 从 x 生成
 
-
 *r = 10;
-
 
 // x = 10 预言实现
 ```
@@ -920,15 +896,11 @@ let r = &mut x;  // r 从 x 生成
 ```coq
 (* Aeneas Coq *)
 
-
 let x0 := 5 in
-
 
 let (x1, r, π) := mk_mut_borrow x0 in  (* π 是预言变量 *)
 
-
 let r' := write r 10 in
-
 
 let x2 := finalize_borrow r' π in      (* x2 = π = 10 *)
 ```
@@ -944,36 +916,25 @@ let x2 := finalize_borrow r' π in      (* x2 = π = 10 *)
 ```rust
 fn complex_borrow_chain() {
 
-
     let mut data = vec![1, 2, 3];
-
 
     // 第一层借用
 
-
     let r1 = &mut data;
-
 
     // 第二层借用（从 r1 重新借用）
 
-
     let r2 = &mut r1[0];
-
 
     // borrow_generated_from 链:
 
-
     // borrow_generated_from(r1, data)
-
 
     // borrow_generated_from(r2, r1)
 
-
     // => borrow_generated_from(r2, data) （传递性）
 
-
     *r2 = 100;
-
 
 }  // 借用链结束，顺序释放
 ```
@@ -983,21 +944,15 @@ fn complex_borrow_chain() {
 ```coq
 let data0 := vec_new [1; 2; 3] in
 
-
 let (data1, r1, π1) := mk_mut_borrow data0 in
-
 
 let (r1_elem, r2, π2) := mk_mut_borrow_index r1 0 in
 
-
 let r2' := write r2 100 in
-
 
 let r1' := finalize_index_borrow r2' π2 in
 
-
 let data2 := finalize_borrow r1' π1 in
-
 
 data2  (* [100; 2; 3] *)
 ```
@@ -1183,9 +1138,7 @@ RustBelt 的**资源代数**可形式化为：
 ```
 M := OwnState × Val
 
-
 OwnState := {Owned, Borrowed_Imm(q), Borrowed_Mut, Moved}
-
 
   where q ∈ (0,1] 为分数权限
 ```
@@ -1758,12 +1711,9 @@ $$
 ```text
 Γ ⊢ r : Ref<T>
 
-
 Γ ⊢ f : T → Option<U>
 
-
 ─────────────────────────────── (REF-TM1)
-
 
 Γ ⊢ RefCell::try_map(r, f) : Result<Ref<U>, Ref<T>>
 ```
@@ -1801,81 +1751,55 @@ $$
 ```rust,ignore
 use std::cell::{RefCell, Ref};
 
-
 fn demonstrate_try_map() {
-
 
     let cell = RefCell::new(Some(42));
 
-
     // 使用 try_map 安全地映射内部值
-
 
     let result: Result<Ref<i32>, Ref<Option<i32>>> =
 
-
         RefCell::try_map(cell.borrow(), |opt| opt.as_ref());
-
 
     match result {
 
-
         Ok(ref_i32) => println!("Got value: {}", *ref_i32),
-
 
         Err(_) => println!("Mapping failed"),
 
-
     }
-
 
     // 对比：传统的 unwrap 方式
 
-
     // let value = cell.borrow().unwrap(); // 可能 panic
 
-
 }
-
 
 // 更实际的用例：嵌套数据结构
 
-
 struct Config {
-
 
     settings: RefCell<Option<Settings>>,
 
-
 }
-
 
 struct Settings {
 
-
     timeout: u64,
-
 
 }
 
-
 impl Config {
-
 
     fn get_timeout(&self) -> Option<Ref<u64>> {
 
-
         RefCell::try_map(self.settings.borrow(), |s| {
-
 
             s.as_ref().map(|s| &s.timeout)
 
-
         }).ok()
 
-
     }
-
 
 }
 ```
@@ -2193,27 +2117,19 @@ $$\text{move}^*(x, y) \land \text{move}^*(y, z) \rightarrow \text{move}^*(x, z)$
 ```rust
 fn transitive_ownership() {
 
-
     let s1 = String::from("hello");  // s1 拥有值
-
 
     let s2 = s1;                      // move(s1, s2)
 
-
     let s3 = s2;                      // move(s2, s3)
-
 
     // 隐式地，s1 -> s2 -> s3，s3 最终拥有值
 
-
     println!("{}", s3);              // 正确
-
 
     // println!("{}", s1);           // 错误：s1 已移动
 
-
     // println!("{}", s2);           // 错误：s2 已移动
-
 
 }
 ```
@@ -2266,33 +2182,23 @@ fn transitive_ownership() {
 ```rust
 fn copy_vs_move() {
 
-
     // Copy 类型 (i32)
-
 
     let x: i32 = 42;
 
-
     let y = x;           // 复制
-
 
     println!("x = {}, y = {}", x, y);  // 两者都可用
 
-
     // Move 类型 (String)
-
 
     let s1 = String::from("hello");
 
-
     let s2 = s1;         // 移动
-
 
     // println!("{}", s1); // 错误：s1 已移动
 
-
     println!("{}", s2);  // 正确
-
 
 }
 ```
@@ -2439,18 +2345,13 @@ $$\text{Program} \in \text{Safe Rust} \rightarrow \text{SpatialSafe} \land \text
 ```rust,ignore
 fn use_after_move() {
 
-
     let s1 = String::from("hello");
-
 
     let s2 = s1;  // 所有权从 s1 移动到 s2
 
-
     // 错误：尝试使用已移动的值
 
-
     println!("{}", s1);  // 编译错误: value used here after move
-
 
 }
 ```
@@ -2472,21 +2373,15 @@ fn use_after_move() {
 ```rust,ignore
 fn double_mutable_borrow() {
 
-
     let mut v = vec![1, 2, 3];
-
 
     let r1 = &mut v;
 
-
     let r2 = &mut v;  // 错误：无法第二次可变借用
-
 
     r1.push(4);
 
-
     r2.push(5);
-
 
 }
 ```
@@ -2512,12 +2407,9 @@ fn double_mutable_borrow() {
 ```rust,ignore
 fn dangling_reference() -> &'static String {
 
-
     let s = String::from("temporary");
 
-
     &s  // 错误：返回局部变量的引用
-
 
 }  // s 在这里被释放，引用悬垂
 ```
@@ -2545,21 +2437,15 @@ fn dangling_reference() -> &'static String {
 ```rust,ignore
 fn mixed_borrow_violation() {
 
-
     let mut data = vec![1, 2, 3];
-
 
     let ref1 = &data;        // 不可变借用
 
-
     let ref2 = &mut data;    // 错误：无法创建可变借用
-
 
     println!("{:?}", ref1);  // ref1 仍在使用
 
-
     ref2.push(4);
-
 
 }
 ```
@@ -2581,45 +2467,31 @@ fn mixed_borrow_violation() {
 ```rust,ignore
 struct Person {
 
-
     name: String,
-
 
     age: u32,
 
-
 }
-
 
 fn partial_move() {
 
-
     let person = Person {
-
 
         name: String::from("Alice"),
 
-
         age: 30,
-
 
     };
 
-
     let name = person.name;  // 部分移动
-
 
     // 错误：person 部分移动，不能整体使用
 
-
     println!("{:?}", person);  // 编译错误
-
 
     // 但可以访问未移动的字段
 
-
     println!("{}", person.age);  // 正确
-
 
 }
 ```
@@ -2641,21 +2513,15 @@ fn partial_move() {
 ```rust,ignore
 fn iterator_invalidation() {
 
-
     let mut vec = vec![1, 2, 3];
-
 
     for item in &vec {
 
-
         // 错误：在迭代时修改集合
-
 
         vec.push(*item);  // 编译错误！
 
-
     }
-
 
 }
 ```
@@ -2683,42 +2549,29 @@ fn iterator_invalidation() {
 ```rust
 // 不安全的自引用结构（使用 Pin 前的模式）
 
-
 struct SelfReferential {
-
 
     data: String,
 
-
     // pointer: *const u8,  // 指向 data 内部
-
 
 }
 
-
 // 若允许移动，pointer 将悬垂
-
 
 fn self_referential_move() {
 
-
     let mut sr = SelfReferential {
-
 
         data: String::from("hello"),
 
-
     };
-
 
     // sr.pointer = sr.data.as_ptr();  // 指向 data
 
-
     let moved = sr;  // 移动后，data 新位置，但 pointer 仍指向旧位置
 
-
     // 解引用 pointer 将导致 UB！
-
 
 }
 ```
@@ -2748,27 +2601,19 @@ fn self_referential_move() {
 ```rust,ignore
 use std::thread;
 
-
 fn data_race() {
-
 
     let mut data = vec![1, 2, 3];
 
-
     // 错误：无法跨线程共享可变引用
-
 
     thread::spawn(|| {
 
-
         data.push(4);  // 编译错误：闭包需要 `static 生命周期
-
 
     });
 
-
     data.push(5);  // 主线程也在修改
-
 
 }
 ```
@@ -2778,30 +2623,21 @@ fn data_race() {
 ```rust
 use std::sync::{Arc, Mutex};
 
-
 use std::thread;
-
 
 fn safe_concurrent_access() {
 
-
     let data = Arc::new(Mutex::new(vec![1, 2, 3]));
-
 
     let data_clone = Arc::clone(&data);
 
-
     thread::spawn(move || {
-
 
         data_clone.lock().unwrap().push(4);
 
-
     });
 
-
     data.lock().unwrap().push(5);
-
 
 }
 ```
@@ -2844,99 +2680,67 @@ fn safe_concurrent_access() {
 ```text
 所有权内存安全证明树
 
-
   规则 1: 所有权唯一性
-
 
   规则 2: 移动语义
 
-
   规则 3: 作用域结束
-
 
   规则 4: 复制语义
 
-
   规则 5-8: 借用规则
 
-
   │
-
 
   ├─ 规则 1 + 规则 2 归纳 ────────→ 定理 6: 所有权唯一性
 
-
   │   └─ 引理 6.1: 所有权转移传递性
 
-
   │
-
 
   ├─ 定理 6 + 规则 3 ────────────→ 定理 7: 内存安全框架
 
-
   │   ├─ 引理 5.1: 无空指针
-
 
   │   ├─ 引理 5.2: 无悬垂指针（反证）
 
-
   │   ├─ 引理 5.3: 无数据竞争
-
 
   │   ├─ 引理 5.4: 无 use-after-free
 
-
   │   └─ 推论 6.3: Safe Rust 内存安全保证
-
 
   │       ├─ 空间安全
 
-
   │       ├─ 时间安全
-
 
   │       ├─ 类型安全
 
-
   │       └─ 数据竞争自由
 
-
   │
-
 
   ├─ 规则 2 ─────────────────────→ 定理 8: 所有权转移语义
 
-
   │   └─ 引理 6.2: Copy vs Move 行为差异
 
-
   │
-
 
   ├─ 规则 5-8 ───────────────────→ 引理 6.4: 借用代数性质
 
-
   │   ├─ 幂等性
-
 
   │   ├─ 互斥性
 
-
   │   └─ 传递性
-
 
   │
 
-
   └─ 分离逻辑对应 ───────────────→ 定理 5-Iris
-
 
       ├─ Frame Rule ↔ 规则 7
 
-
       ├─ Magic Wand ↔ 所有权恢复
-
 
       └─ 资源代数 ↔ 所有权状态
 ```
@@ -2948,102 +2752,69 @@ fn safe_concurrent_access() {
 ```
                     ┌─────────────┐
 
-
                     │  规则 1-8   │
-
 
                     │ Def 1.1-1.5 │
 
-
                     └──────┬──────┘
 
-
                            │
-
 
            ┌───────────────┼───────────────┐
 
-
            │               │               │
-
 
            ▼               ▼               ▼
 
-
     ┌────────────┐  ┌────────────┐  ┌────────────┐
-
 
     │   引理     │  │   引理     │  │   引理     │
 
-
     │  5.1-5.4   │  │   6.1      │  │   6.2      │
-
 
     │ 内存安全   │  │ 传递性     │  │ Copy/Move  │
 
-
     └──────┬─────┘  └──────┬─────┘  └──────┬─────┘
-
 
            │               │               │
 
-
            └───────────────┼───────────────┘
-
 
                            │
 
-
                            ▼
 
-
                     ┌─────────────┐
-
 
                     │   定理 5    │
 
-
                     │  内存安全   │
-
 
                     │ (结构归纳)  │
 
-
                     └──────┬──────┘
-
 
                            │
 
-
                            ▼
-
 
                     ┌─────────────┐
 
-
                     │   定理 6    │
-
 
                     │ 所有权唯一性│
 
-
                     └──────┬──────┘
-
 
                            │
 
-
                            ▼
-
 
               ┌────────────────────────┐
 
-
               │       推论 6.3         │
 
-
               │ Safe Rust 子集安全保证 │
-
 
               └────────────────────────┘
 ```
@@ -3185,18 +2956,13 @@ Safe Rust 子集的四重安全保证：
 ```rust
 fn main() {
 
-
     let s1 = String::from("hello");  // s1 拥有字符串
-
 
     let s2 = s1;                      // 所有权转移到 s2
 
-
     // println!("{}", s1);           // 错误：s1 不再拥有值
 
-
     println!("{}", s2);              // 正确：s2 拥有值
-
 
 } // s2 离开作用域，值被丢弃
 ```
@@ -3214,27 +2980,19 @@ fn main() {
 ```rust
 fn main() {
 
-
     let s = String::from("hello");
-
 
     let len = calculate_length(&s);  // 借用 s
 
-
     println!("{}", s);               // 正确：s 仍然拥有值
-
 
     println!("长度: {}", len);
 
-
 }
-
 
 fn calculate_length(s: &String) -> usize {
 
-
     s.len()
-
 
 } // 借用结束，s 的所有权未转移
 ```
@@ -3251,15 +3009,11 @@ fn calculate_length(s: &String) -> usize {
 ```rust
 fn main() {
 
-
     let x = 42;        // x 拥有整数
-
 
     let y = x;         // 复制：x 和 y 都拥有值
 
-
     println!("{} {}", x, y);  // 正确：两者都可用
-
 
 } // x 和 y 都离开作用域，但整数是基本类型，不需要释放
 ```
@@ -3277,27 +3031,19 @@ fn main() {
 ```rust,ignore
 fn scope_example() {
 
-
     let s = String::from("hello");
-
 
     {
 
-
         let r = &s;  // 借用开始
-
 
         println!("{}", r);
 
-
     }  // 借用结束，r 离开作用域
-
 
     let r2 = &mut s;  // 现在可以可变借用
 
-
     r2.push_str(" world");
-
 
 }
 ```
@@ -3315,51 +3061,35 @@ fn scope_example() {
 ```rust
 struct Person {
 
-
     name: String,
-
 
     age: u32,
 
-
 }
-
 
 fn complex_ownership() {
 
-
     let person = Person {
-
 
         name: String::from("Alice"),
 
-
         age: 30,
-
 
     };
 
-
     // 移动 name 字段
-
 
     let name = person.name;  // person.name 的所有权转移
 
-
     // println!("{}", person.name);  // 错误：person.name 已被移动
-
 
     // person.age 仍然可用（实现了 Copy）
 
-
     println!("{}", person.age);
-
 
     // person 的其他字段仍然可用
 
-
     // 但 person 本身部分移动，不能整体使用
-
 
 }
 ```
@@ -3377,27 +3107,19 @@ fn complex_ownership() {
 ```rust
 fn take_and_return(s: String) -> String {
 
-
     println!("{}", s);
-
 
     s  // 返回所有权
 
-
 }
-
 
 fn ownership_with_functions() {
 
-
     let s1 = String::from("hello");
-
 
     let s2 = take_and_return(s1);  // s1 的所有权转移到函数，然后返回给 s2
 
-
     println!("{}", s2);
-
 
 }
 ```
@@ -3411,21 +3133,15 @@ fn ownership_with_functions() {
 ```rust
 fn main() {
 
-
     {
-
 
         let s = String::from("hello");  // s 拥有字符串
 
-
         println!("{}", s);
-
 
     } // s 离开作用域，字符串被释放
 
-
     // println!("{}", s);  // 错误：s 不再存在
-
 
 }
 ```
@@ -3543,24 +3259,17 @@ fn main() {
 ```rust
 fn take_ownership(s: String) {
 
-
     println!("{}", s);
-
 
 } // s 离开作用域，值被丢弃
 
-
 fn ownership_with_parameters() {
-
 
     let s = String::from("hello");
 
-
     take_ownership(s);  // s 的所有权转移到函数
 
-
     // println!("{}", s);  // 错误：s 不再拥有值
-
 
 }
 ```
@@ -3576,63 +3285,43 @@ fn ownership_with_parameters() {
 ```rust
 struct Point {
 
-
     x: i32,
-
 
     y: i32,
 
-
 }
-
 
 struct Line {
 
-
     start: Point,
-
 
     end: Point,
 
-
 }
-
 
 fn complex_ownership() {
 
-
     let line = Line {
-
 
         start: Point { x: 0, y: 0 },
 
-
         end: Point { x: 10, y: 10 },
-
 
     };
 
-
     // 移动 start 字段
-
 
     let start = line.start;  // line.start 的所有权转移
 
-
     // println!("{:?}", line.start);  // 错误：line.start 已被移动
-
 
     // line.end 仍然可用
 
-
     println!("{}", line.end.x);
-
 
     // 但 line 本身不能整体使用（部分移动）
 
-
     // let end = line.end;  // 可以，但 line 不能再使用
-
 
 }
 ```
@@ -3648,21 +3337,15 @@ fn complex_ownership() {
 ```rust
 fn error_example() {
 
-
     let s1 = String::from("hello");
-
 
     let s2 = s1;  // 所有权转移
 
-
     // 错误：s1 已被移动，不能再使用
-
 
     // println!("{}", s1);  // 编译错误：value used after move
 
-
     println!("{}", s2);  // 正确：s2 拥有值
-
 
 }
 ```
@@ -3678,33 +3361,23 @@ fn error_example() {
 ```rust
 fn ownership_and_borrowing() {
 
-
     let mut s = String::from("hello");
-
 
     // 不可变借用
 
-
     let r1 = &s;
-
 
     let r2 = &s;  // 可以多个不可变借用
 
-
     println!("{} {}", r1, r2);
-
 
     // 借用结束后，可以可变借用
 
-
     let r3 = &mut s;
-
 
     r3.push_str(" world");
 
-
     println!("{}", r3);
-
 
 }
 ```

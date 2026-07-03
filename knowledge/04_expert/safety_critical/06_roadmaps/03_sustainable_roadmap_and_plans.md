@@ -11,6 +11,8 @@
 >
 # Rust安全关键系统 - 可持续推进路线图与计划
 
+> **EN**: Sustainable Roadmap And Plans
+> **Summary**: Rust安全关键系统 - 可持续推进路线图与计划 Sustainable Roadmap And Plans. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 一、总体战略路线图 (2026-2028)

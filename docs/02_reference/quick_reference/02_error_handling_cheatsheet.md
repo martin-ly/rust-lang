@@ -1,5 +1,7 @@
 # ⚠️ Rust 错误处理速查卡 {#rust-错误处理速查卡}
 
+> **EN**: Error Handling Cheatsheet
+> **Summary**: ⚠️ Rust 错误处理速查卡 Error Handling Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >

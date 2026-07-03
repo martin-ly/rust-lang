@@ -296,7 +296,7 @@ cargo run --example string_algorithms_demo
 ## 📚 相关文档
 
 - [主 README](../README.md) - 项目概览
-- [文档索引](../docs/00_MASTER_INDEX.md) - 完整文档导航
+- [文档索引](../docs/00_master_index.md) - 完整文档导航
 - [快速入门指南](../docs/tier_02_guides/01_algorithms_quick_start.md) - 学习指南
 
 ## 🔧 开发说明

@@ -669,7 +669,7 @@ trait Container {
 }
 ```
 
-📂 查看: [`RUST_192_GENERIC_IMPROVEMENTS`](../RUST_192_GENERIC_IMPROVEMENTS.md)
+📂 查看: [`RUST_192_GENERIC_IMPROVEMENTS`](../rust_192_generic_improvements.md)
 
 ---
 

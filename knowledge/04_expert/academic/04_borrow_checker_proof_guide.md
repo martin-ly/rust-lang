@@ -1,5 +1,7 @@
 # 借用检查器证明导读 / Borrow Checker Proof Guide
 
+> **EN**: Borrow Checker Proof Guide
+> **Summary**: 借用检查器证明导读 Borrow Checker Proof Guide. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/04_formal/28_borrow_checking_decidability.md](../../../concept/04_formal/28_borrow_checking_decidability.md)。
 > **历史版本存档**: [archive/knowledge/04_expert/academic/04_borrow_checker_proof_guide.md](../../../archive/knowledge/04_expert/academic/04_borrow_checker_proof_guide.md)
 >

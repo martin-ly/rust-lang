@@ -1,5 +1,7 @@
 # 结构型模式形式化 {#结构型模式形式化}
 
+> **EN**: Structural Index
+> **Summary**: 结构型模式形式化 Structural Index.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >

@@ -314,7 +314,7 @@
   - [BorrowSanitizer：动态别名规则验证工具](07_future/borrow_sanitizer.md)
   - [Rust 1.96 稳定特性](07_future/rust_1_96_stabilized.md)
   - [Rust 1.97 稳定特性](07_future/rust_1_97_stabilized.md)
-  - [Rust 1.97 前沿特性预览](07_future/rust_1_97_preview.md)
+  - [Rust 1.97 前沿特性预览（已归档）](07_future/rust_1_97_preview.md)
   - [Rust 1.98+ 前沿特性预览](07_future/rust_1_98_preview.md)
   - [Safety Tags（安全标签）预览](07_future/31_safety_tags_preview.md)
   - [AutoVerus / Verus 预览](07_future/33_autoverus_preview.md)

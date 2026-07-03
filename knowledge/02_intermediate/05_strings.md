@@ -1,5 +1,7 @@
 # Rust 字符串处理 (String Handling)
 
+> **EN**: String Handling
+> **Summary**: Rust 字符串处理 String Handling. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/01_foundation/09_strings_and_text.md](../../concept/01_foundation/09_strings_and_text.md)。
 > **历史版本存档**: [archive/knowledge/02_intermediate/05_strings.md](../../archive/knowledge/02_intermediate/05_strings.md)
 >

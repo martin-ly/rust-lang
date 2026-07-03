@@ -1,5 +1,7 @@
 # Rust 核心特性完整链：定义→示例→论证→证明 {#rust-核心特性完整链定义示例论证证明}
 
+> **EN**: Core Features Full Chain
+> **Summary**: Rust 核心特性完整链 Core Features Full Chain.
 > **概念族**: 综合研究
 > **内容分级**: [归档级]
 >

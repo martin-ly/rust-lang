@@ -1,5 +1,7 @@
 # Async Book 对齐矩阵 {#async-book-对齐矩阵}
 
+> **EN**: Async Book Alignment
+> **Summary**: Async Book 对齐矩阵 Async Book Alignment.
 > **概念族**: 权威来源对齐 / Async Book
 > **内容分级**: [核心级]
 > **层级**: L0-L6

@@ -1,5 +1,7 @@
 # Iterator 形式化分析 {#iterator-形式化分析}
 
+> **EN**: Iterator
+> **Summary**: Iterator 形式化分析 Iterator.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -235,7 +237,6 @@ Iterator 为纯 Safe；`Iterator` trait 标准库定义，`for` 糖语法，无 
 ```rust,ignore
 struct Counter { count: u32 }
 
-
 impl Iterator for Counter {
 
     type Item = u32;
@@ -259,7 +260,6 @@ impl Iterator for Counter {
     }
 
 }
-
 
 // 使用
 
@@ -305,7 +305,6 @@ impl Iterator for Countdown {
     }
 
 }
-
 
 fn main() {
 

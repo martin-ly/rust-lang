@@ -1,5 +1,7 @@
 # 06 - 生态系统与工具
 
+> **EN**: Ecosystem Index
+> **Summary**: 06 - 生态系统与工具 Ecosystem Index. (stub/archive redirect)
 > **Bloom 层级**: 理解
 > **Rust 生态系统的核心工具、框架和新特性**
 >

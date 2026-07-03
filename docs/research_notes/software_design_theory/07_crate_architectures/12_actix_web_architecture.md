@@ -9,6 +9,8 @@
 
 # Actix-web Crate 架构解构 {#actix-web-crate-架构解构}
 
+> **EN**: Actix Web Architecture
+> **Summary**: Actix-web Crate 架构解构 Actix Web Architecture.
 >
 > **最后更新**: 2026-06-09
 > **概念族**: 软件设计 / Crate 架构
@@ -93,7 +95,6 @@ flowchart TD
 
     end
 
-
     subgraph ActorSystem["Actix Actor 系统"]
 
         Master["Master Actor<br/>协调 Worker"]
@@ -106,7 +107,6 @@ flowchart TD
 
     end
 
-
     subgraph AppLayer["应用层"]
 
         Router["Router<br/>路径匹配"]
@@ -118,7 +118,6 @@ flowchart TD
         Handler["Handler<br/>用户函数"]
 
     end
-
 
     TCP -->|accept| Master
 
@@ -142,7 +141,6 @@ flowchart TD
 
     Worker1 -->|encode| TCP
 
-
     style ActorSystem fill:#e1f5fe
 
     style AppLayer fill:#fff3e0
@@ -160,13 +158,11 @@ flowchart TD
 ```rust,ignore
 use actix_web::{web, App, HttpServer, Responder, HttpResponse};
 
-
 async fn greet(name: web::Path<String>) -> impl Responder {
 
     format!("Hello, {}!", name)
 
 }
-
 
 #[actix_web::main]
 
@@ -214,16 +210,13 @@ pub trait Actor {
 
     type Context: ActorContext;
 
-
     /// Actor 启动时调用
 
     fn started(&mut self, ctx: &mut Self::Context) {}
 
-
     /// Actor 停止时调用
 
     fn stopped(&mut self, ctx: &mut Self::Context) {}
-
 
     // ... 其他生命周期钩子
 
@@ -248,13 +241,11 @@ pub trait Actor {
 ```rust,ignore
 use actix::prelude::*;
 
-
 struct MyActor {
 
     count: usize,
 
 }
-
 
 impl Actor for MyActor {
 
@@ -276,7 +267,6 @@ Actor 通过为具体消息类型实现 `Handler<M>` 来定义其行为：
 pub trait Handler<M: Message> {
 
     type Result: MessageResponse<Self, M>;
-
 
     fn handle(&mut self, msg: M, ctx: &mut Self::Context) -> Self::Result;
 
@@ -306,7 +296,6 @@ sequenceDiagram
     participant Worker as Worker Actor
 
     participant Router as Router + Handler
-
 
     Client->>Listener: HTTP Request
 
@@ -360,7 +349,6 @@ pub trait FromRequest: Sized {
 
     type Future: Future<Output = Result<Self, Self::Error>>;
 
-
     fn from_request(req: &HttpRequest, payload: &mut Payload) -> Self::Future;
 
 }
@@ -392,16 +380,13 @@ use actix_web::{FromRequest, HttpRequest, dev::Payload, Error};
 
 use futures_util::future::{ready, Ready};
 
-
 struct ApiKey(String);
-
 
 impl FromRequest for ApiKey {
 
     type Error = Error;
 
     type Future = Ready<Result<Self, Self::Error>>;
-
 
     fn from_request(req: &HttpRequest, _: &mut Payload) -> Self::Future {
 
@@ -415,7 +400,6 @@ impl FromRequest for ApiKey {
 
             .map(|s| ApiKey(s.to_string()));
 
-
         match key {
 
             Some(k) => ready(Ok(k)),
@@ -427,7 +411,6 @@ impl FromRequest for ApiKey {
     }
 
 }
-
 
 // 在 Handler 中使用
 
@@ -459,7 +442,6 @@ pub trait Transform<S> {
 
     type Service: Service;
 
-
     fn new_transform(&self, service: S) -> Self::Future;
 
 }
@@ -487,11 +469,9 @@ use futures_util::future::LocalBoxFuture;
 
 use std::future::{ready, Ready};
 
-
 // 日志中间件示例
 
 pub struct LoggingMiddleware;
-
 
 impl<S> Transform<S, ServiceRequest> for LoggingMiddleware
 
@@ -513,7 +493,6 @@ where
 
     type Future = Ready<Result<Self::Transform, Self::InitError>>;
 
-
     fn new_transform(&self, service: S) -> Self::Future {
 
         ready(Ok(LoggingMiddlewareService { service }))
@@ -522,13 +501,11 @@ where
 
 }
 
-
 pub struct LoggingMiddlewareService<S> {
 
     service: S,
 
 }
-
 
 impl<S> Service<ServiceRequest> for LoggingMiddlewareService<S>
 
@@ -546,7 +523,6 @@ where
 
     type Future = LocalBoxFuture<'static, Result<Self::Response, Self::Error>>;
 
-
     fn call(&self, req: ServiceRequest) -> Self::Future {
 
         let method = req.method().clone();
@@ -555,9 +531,7 @@ where
 
         let start = std::time::Instant::now();
 
-
         let fut = self.service.call(req);
-
 
         Box::pin(async move {
 
@@ -666,11 +640,9 @@ let server = HttpServer::new(app_factory)
 
     .run();
 
-
 // 接收终止信号
 
 let handle = server.handle();
-
 
 tokio::select! {
 

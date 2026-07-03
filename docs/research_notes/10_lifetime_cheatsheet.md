@@ -1,4 +1,7 @@
 # 生命周期速查卡 {#生命周期速查卡}
+
+> **EN**: Lifetime Cheatsheet
+> **Summary**: 生命周期速查卡 Lifetime Cheatsheet.
 >
 > **概念族**: 速查卡
 > **内容分级**: [归档级]

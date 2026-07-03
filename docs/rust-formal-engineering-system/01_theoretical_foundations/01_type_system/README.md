@@ -1,5 +1,7 @@
 # 类型系统理论 {#类型系统理论}
 
+> **EN**: Type System Index
+> **Summary**: 类型系统理论 Type System Index. (stub/archive redirect)
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20

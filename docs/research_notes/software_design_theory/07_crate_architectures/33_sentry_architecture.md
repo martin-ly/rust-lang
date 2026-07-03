@@ -17,6 +17,8 @@
 
 # sentry Crate 架构解构 {#sentry-crate-架构解构}
 
+> **EN**: Sentry Architecture
+> **Summary**: sentry Crate 架构解构 Sentry Architecture.
 > **最后更新**: 2026-06-29
 >
 > **内容分级**: [归档级]

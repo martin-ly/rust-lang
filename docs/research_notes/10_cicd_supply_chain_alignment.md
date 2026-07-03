@@ -1,5 +1,7 @@
 # CI/CD 与供应链安全权威来源对齐矩阵 {#cicd-与供应链安全权威来源对齐矩阵}
 
+> **EN**: Cicd Supply Chain Alignment
+> **Summary**: CI/CD 与供应链安全权威来源对齐矩阵 Cicd Supply Chain Alignment.
 > **概念族**: 权威来源对齐 / CI/CD / 供应链安全
 > **内容分级**: [核心级]
 > **层级**: L0-L4

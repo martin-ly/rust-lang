@@ -1,5 +1,7 @@
 # 所有权系统概念族谱 {#所有权系统概念族谱}
 
+> **EN**: Ownership Concept Mindmap
+> **Summary**: 所有权系统概念族谱 Ownership Concept Mindmap.
 > **概念族**: 思维表征 / 可视化
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

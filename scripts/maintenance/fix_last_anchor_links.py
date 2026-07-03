@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""移除 docs/LINK_CHECK_REPORT.md 中最后剩余的无法修复的锚点链接的 Markdown 语法。"""
+"""移除 docs/link_check_report.md 中最后剩余的无法修复的锚点链接的 Markdown 语法。"""
 import re
 from pathlib import Path
 

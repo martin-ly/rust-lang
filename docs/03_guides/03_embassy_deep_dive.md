@@ -1,4 +1,7 @@
 # Embassy 异步嵌入式框架深度指南 {#embassy-异步嵌入式框架深度指南}
+
+> **EN**: Embassy Deep Dive
+> **Summary**: Embassy 异步嵌入式框架深度指南 Embassy Deep Dive.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >

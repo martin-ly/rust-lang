@@ -1,4 +1,7 @@
 # 实践项目 09: 日志分析器 {#实践项目-09-日志分析器}
+
+> **EN**: Project 09 Log Parser
+> **Summary**: 实践项目 09 Project 09 Log Parser.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

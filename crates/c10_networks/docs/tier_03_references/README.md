@@ -52,8 +52,8 @@
 
 **8篇现有参考**:
 
-- [API_DOCUMENTATION.md](../references/API_DOCUMENTATION.md)
-- [BEST_PRACTICES.md](../references/BEST_PRACTICES.md)
+- [API_DOCUMENTATION.md](../references/api_documentation.md)
+- [BEST_PRACTICES.md](../references/best_practices.md)
 - [DOCUMENTATION_STANDARDS.md](../references/DOCUMENTATION_STANDARDS.md)
 - [STYLE.md](../references/STYLE.md)
 - [DOCUMENTATION_STYLE_GUIDE.md](../references/DOCUMENTATION_STYLE_GUIDE.md)
@@ -64,8 +64,8 @@
 ## 🗺️ 思维导图与图谱
 
 | 资源                                                                            | 说明         |
-| :--- | :--- || [RUST_190_COMPREHENSIVE_MINDMAP.md](../RUST_190_COMPREHENSIVE_MINDMAP.md)       | 综合思维导图 |
-| [COMPREHENSIVE_DOCUMENTATION_INDEX.md](../COMPREHENSIVE_DOCUMENTATION_INDEX.md) | 文档总索引   |
+| :--- | :--- || [RUST_190_COMPREHENSIVE_MINDMAP.md](../rust_190_comprehensive_mindmap.md)       | 综合思维导图 |
+| [COMPREHENSIVE_DOCUMENTATION_INDEX.md](../comprehensive_documentation_index.md) | 文档总索引   |
 
 ---
 

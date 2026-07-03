@@ -1,5 +1,7 @@
 # docs/research_notes 系统化层次化梳理完成报告 {#docsresearch_notes-系统化层次化梳理完成报告}
 
+> **EN**: Research Notes Systematization Completion Report
+> **Summary**: docs/research_notes 系统化层次化梳理完成报告 Research Notes Systematization Completion Report. (stub/archive redirect)
 > **概念族**: 进度 / 统计 / 完成度
 > **内容分级**: [核心级]
 > **层级**: L0-L7 综合

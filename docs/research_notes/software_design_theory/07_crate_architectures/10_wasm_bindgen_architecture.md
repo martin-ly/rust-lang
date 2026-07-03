@@ -10,6 +10,8 @@
 
 # wasm-bindgen crate 架构解构 {#wasm-bindgen-crate-架构解构}
 
+> **EN**: Wasm Bindgen Architecture
+> **Summary**: wasm-bindgen crate 架构解构 Wasm Bindgen Architecture.
 > **概念族**: 软件设计 / Crate 架构
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -55,7 +57,6 @@ graph TB
 
     end
 
-
     subgraph JSSide["JavaScript 侧"]
 
         WB["wasm-bindgen-cli<br/>--target web / bundler / nodejs"]
@@ -66,7 +67,6 @@ graph TB
 
     end
 
-
     subgraph Runtime["运行时"]
 
         WASM["WASM 模块实例"]
@@ -76,7 +76,6 @@ graph TB
         HANDLE["JS 对象句柄表<br/>heap / stack"]
 
     end
-
 
     RS --> WM
 
@@ -99,7 +98,6 @@ graph TB
     JS --> HANDLE
 
     HANDLE --> MEM
-
 
     style RustSide fill:#fce4ec
 
@@ -242,7 +240,6 @@ pub struct Closure<T: ?Sized> {
 
 }
 
-
 impl<T: ?Sized> Closure<T> {
 
     pub fn new<F>(fn_mut: F) -> Closure<F>
@@ -256,7 +253,6 @@ impl<T: ?Sized> Closure<T> {
         // 将 Rust 闭包包装为 JS Function
 
     }
-
 
     pub fn as_ref(&self) -> &JsValue {
 
@@ -280,13 +276,11 @@ use wasm_bindgen::closure::Closure;
 
 use web_sys::{console, window};
 
-
 let closure = Closure::wrap(Box::new(move |event: web_sys::MouseEvent| {
 
     console::log_1(&format!("clicked at {}, {}", event.client_x(), event.client_y()).into());
 
 }) as Box<dyn FnMut(_)>);
-
 
 window()
 
@@ -295,7 +289,6 @@ window()
     .add_event_listener_with_callback("click", closure.as_ref().unchecked_ref())
 
     .unwrap();
-
 
 // 必须 forget，否则 Closure 被 drop 后 JS 仍持有无效函数指针
 
@@ -331,7 +324,6 @@ graph TB
 
     end
 
-
     subgraph WASMMem["WASM 线性内存"]
 
         STACK["栈区"]
@@ -342,7 +334,6 @@ graph TB
 
     end
 
-
     subgraph RustHeap["Rust 侧（通过句柄间接访问）"]
 
         R1["RustObjA"]
@@ -351,7 +342,6 @@ graph TB
 
     end
 
-
     OBJ1 -->|view| WASMMem
 
     OBJ2 -->|decode| WASMMem
@@ -359,7 +349,6 @@ graph TB
     HANDLE1 --> R1
 
     HANDLE2 --> R2
-
 
     style JSHeap fill:#e3f2fd
 
@@ -386,7 +375,6 @@ pub fn takes_str(s: &str) {
 
 }
 
-
 #[wasm_bindgen]
 
 pub fn takes_string(s: String) {
@@ -394,7 +382,6 @@ pub fn takes_string(s: String) {
     // String 拥有：JS 字符串被拷贝到 Rust 堆，Rust 负责释放
 
 }
-
 
 #[wasm_bindgen]
 
@@ -405,7 +392,6 @@ pub fn returns_str() -> &'static str {
     "hello"
 
 }
-
 
 #[wasm_bindgen]
 
@@ -444,7 +430,6 @@ use js_sys::Uint8Array;
 
 use wasm_bindgen::prelude::*;
 
-
 #[wasm_bindgen]
 
 pub fn process_bytes(data: &[u8]) -> Vec<u8> {
@@ -456,7 +441,6 @@ pub fn process_bytes(data: &[u8]) -> Vec<u8> {
     data.iter().map(|b| b.wrapping_add(1)).collect()
 
 }
-
 
 #[wasm_bindgen]
 
@@ -472,7 +456,6 @@ JS 侧使用生成的代码：
 ```javascript
 import { memory, process_bytes } from './pkg';
 
-
 const data = new Uint8Array([1, 2, 3, 4]);
 
 // 将数据写入 WASM 内存，获得指针
@@ -482,7 +465,6 @@ const ptr = wasm.alloc(data.length);
 const wasmArray = new Uint8Array(memory.buffer, ptr, data.length);
 
 wasmArray.set(data);
-
 
 const resultPtr = process_bytes(ptr, data.length);
 
@@ -523,7 +505,6 @@ pub async fn fetch_data(url: String) -> Result<JsValue, JsValue> {
 
     ).await?;
 
-
     let resp: web_sys::Response = resp_value.dyn_into()?;
 
     let json = wasm_bindgen_futures::JsFuture::from(
@@ -531,7 +512,6 @@ pub async fn fetch_data(url: String) -> Result<JsValue, JsValue> {
         resp.json()?
 
     ).await?;
-
 
     Ok(json)
 
@@ -585,7 +565,6 @@ use web_sys::{Document, Element, HtmlCanvasElement, Window};
 
 use wasm_bindgen::prelude::*;
 
-
 #[wasm_bindgen]
 
 pub fn setup_canvas() -> Result<(), JsValue> {
@@ -602,7 +581,6 @@ pub fn setup_canvas() -> Result<(), JsValue> {
 
         .dyn_into::<HtmlCanvasElement>()?;
 
-
     let context = canvas
 
         .get_context("2d")?
@@ -611,11 +589,9 @@ pub fn setup_canvas() -> Result<(), JsValue> {
 
         .dyn_into::<web_sys::CanvasRenderingContext2d>()?;
 
-
     context.set_fill_style(&"#ff0000".into());
 
     context.fill_rect(10.0, 10.0, 100.0, 100.0);
-
 
     Ok(())
 
@@ -631,7 +607,6 @@ pub fn setup_canvas() -> Result<(), JsValue> {
 // 安全的运行时类型检查（对应 JS instanceof）
 
 let canvas: HtmlCanvasElement = element.dyn_into()?;
-
 
 // 不安全的零开销转换（仅在已知类型时使用）
 
@@ -679,7 +654,6 @@ extern "C" {
     #[wasm_bindgen(js_name = __wbindgen_malloc)]
 
     fn malloc(size: usize) -> *mut u8;
-
 
     #[wasm_bindgen(js_name = __wbindgen_realloc)]
 
@@ -761,7 +735,6 @@ pub fn set_callback() {
     closure.forget();  // 内存泄漏！
 
 }
-
 
 // ✅ 正确：将闭包存储在 JS 侧可管理的位置
 

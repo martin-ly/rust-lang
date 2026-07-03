@@ -1,5 +1,7 @@
 # Rust By Example 对齐矩阵 {#rust-by-example-对齐矩阵}
 
+> **EN**: Rust By Example Alignment
+> **Summary**: Rust By Example 对齐矩阵 Rust By Example Alignment.
 > **概念族**: 权威来源对齐 / Rust By Example
 > **内容分级**: [核心级]
 > **层级**: L0-L5

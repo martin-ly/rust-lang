@@ -1,4 +1,7 @@
 # FFI集成指南 - 安全关键系统
+
+> **EN**: FFI Integration Guide
+> **Summary**: FFI集成指南 - 安全关键系统 FFI Integration Guide.
 >
 > **相关概念**: [FFI](../../../../concept/03_advanced/09_ffi_advanced.md)
 >

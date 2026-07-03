@@ -1,4 +1,2 @@
-# cargo-vet 导入锁
-#
-# 此文件记录从外部来源（如 Mozilla 的审计数据库）导入的审计结果。
-# 由 cargo vet 自动生成和更新，请勿手动编辑。
+
+# cargo-vet imports lock

@@ -1,5 +1,7 @@
 # 类型系统使用指南 {#类型系统使用指南}
 
+> **EN**: Type System Usage Guide
+> **Summary**: 类型系统使用指南 Type System Usage Guide.
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 >

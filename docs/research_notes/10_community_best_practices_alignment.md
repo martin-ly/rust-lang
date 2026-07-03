@@ -1,5 +1,7 @@
 # 社区最佳实践对齐矩阵 {#社区最佳实践对齐矩阵}
 
+> **EN**: Community Best Practices Alignment
+> **Summary**: 社区最佳实践对齐矩阵 Community Best Practices Alignment.
 > **概念族**: 权威来源对齐 / 社区最佳实践
 > **内容分级**: [核心级]
 > **层级**: L0-L5

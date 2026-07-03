@@ -1,4 +1,7 @@
 # docs/research_notes 权威国际化对齐缺口矩阵 {#docsresearch_notes-权威国际化对齐缺口矩阵}
+
+> **EN**: Authoritative Alignment Gap Matrix
+> **Summary**: docs/research_notes 权威国际化对齐缺口矩阵 Authoritative Alignment Gap Matrix.
 >
 > **概念族**: 权威来源对齐
 > **内容分级**: [核心级]

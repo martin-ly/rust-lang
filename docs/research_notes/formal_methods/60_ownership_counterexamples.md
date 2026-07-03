@@ -1,5 +1,7 @@
 # 所有权与借用反例边界 {#所有权与借用反例边界}
 
+> **EN**: Ownership Counterexamples
+> **Summary**: 所有权与借用反例边界 Ownership Counterexamples.
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
 > **Bloom 层级**: L5-L6 (分析/评价)

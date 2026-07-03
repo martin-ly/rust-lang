@@ -1,5 +1,7 @@
 # Memento 形式化分析 {#memento-形式化分析}
 
+> **EN**: Memento
+> **Summary**: Memento 形式化分析 Memento.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -229,13 +231,11 @@ struct Memento {
 
 }
 
-
 struct Originator {
 
     state: String,
 
 }
-
 
 impl Originator {
 
@@ -264,7 +264,6 @@ impl Originator {
     }
 
 }
-
 
 // 使用
 
@@ -295,7 +294,6 @@ assert_eq!(o.state, "A");
 
 struct EditorState { text: String, cursor: usize }
 
-
 struct Editor { text: String, cursor: usize }
 
 impl Editor {
@@ -317,7 +315,6 @@ impl Editor {
     fn type_(&mut self, s: &str) { self.text.push_str(s); self.cursor = self.text.len(); }
 
 }
-
 
 fn main() {
 

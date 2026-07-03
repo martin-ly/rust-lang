@@ -1,5 +1,7 @@
 # 快速入门指南 {#快速入门指南}
 
+> **EN**: Getting Started
+> **Summary**: 快速入门指南 Getting Started.
 > **概念族**: 方法论 / 工具 / 指南
 > **内容分级**: [归档级]
 >

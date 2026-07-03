@@ -2,8 +2,10 @@
 //!
 //! 本模块演示 Rust 1.97.0 中稳定化的并发/原子相关 API。
 //! 由于当前工具链为 Rust 1.96.0，实际代码使用等价的 1.96 兼容实现；
-//! 对应的 1.97 原生 API 调用以注释形式保留。
+//! 对应的 1.97 原生 API 调用以 `#[cfg(nightly)]` 分支保留，可通过
+//! `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 #![allow(clippy::incompatible_msrv)]
+#![allow(unexpected_cfgs)]
 
 use std::collections::hash_map::DefaultHasher;
 use std::hash::BuildHasherDefault;
@@ -13,10 +15,10 @@ use std::sync::atomic::AtomicU32;
 /// Rust 1.97 线程/并发特性演示
 ///
 /// 涉及特性：
-/// - `cfg(target_has_atomic_equal_alignment = "ptr")`
+/// - `cfg(target_has_atomic_equal_alignment = "ptr")`（cfg 条件，无运行时 API）
 /// - `BuildHasherDefault::new` const 稳定
-/// - `Option<NonZero*>` niche 编码偏好 `-1`（影响跨线程 FFI 数据布局）
-/// - `must_use` lint 向 `Result<T, E>` / `ControlFlow<B, C>` 内部类型传播
+/// - `Option<NonZero*>` niche 编码偏好 `-1`（编译器内部表示变更，无 API）
+/// - `must_use` lint 向 `Result<T, E>` / `ControlFlow<B, C>` 内部类型传播（lint 变更，无 API）
 pub struct Rust197ThreadFeatures;
 
 #[must_use]
@@ -25,8 +27,13 @@ pub struct ImportantToken(pub u32);
 
 impl Rust197ThreadFeatures {
     /// 构造默认哈希器（1.97 后可在 const 上下文调用）
+    #[cfg(nightly)]
     pub const fn build_hasher_default_new() -> BuildHasherDefault<DefaultHasher> {
-        // 1.97+: const HASHER: BuildHasherDefault<DefaultHasher> = BuildHasherDefault::new();
+        BuildHasherDefault::new()
+    }
+
+    #[cfg(not(nightly))]
+    pub const fn build_hasher_default_new() -> BuildHasherDefault<DefaultHasher> {
         BuildHasherDefault::new()
     }
 

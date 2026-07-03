@@ -1,5 +1,7 @@
 # 工作流：23 安全 vs 43 完全模型 {#工作流23-安全-vs-43-完全模型}
 
+> **EN**: Workflow Safe Complete Models Index
+> **Summary**: 工作流 Workflow Safe Complete Models Index. (stub/archive redirect)
 > **概念族**: 软件设计 / 工作流模式
 > **内容分级**: [归档级]
 >

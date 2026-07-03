@@ -1,5 +1,7 @@
 # Rust安全关键系统 - 工具配置指南
 
+> **EN**: Tools Configuration Guide
+> **Summary**: Rust安全关键系统 - 工具配置指南 Tools Configuration Guide.
 > **Bloom 层级**: 理解
 >
 > **受众**: [初学者] / [进阶]

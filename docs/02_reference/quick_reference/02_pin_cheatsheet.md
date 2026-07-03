@@ -1,4 +1,7 @@
 # Pin 与自引用结构速查卡 {#pin-与自引用结构速查卡}
+
+> **EN**: Pin Cheatsheet
+> **Summary**: Pin 与自引用结构速查卡 Pin Cheatsheet.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >

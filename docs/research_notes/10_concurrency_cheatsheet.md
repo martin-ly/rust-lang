@@ -1,4 +1,7 @@
 # 并发速查卡 {#并发速查卡}
+
+> **EN**: Concurrency Cheatsheet
+> **Summary**: 并发速查卡 Concurrency Cheatsheet.
 >
 > **概念族**: 速查卡
 > **内容分级**: [归档级]

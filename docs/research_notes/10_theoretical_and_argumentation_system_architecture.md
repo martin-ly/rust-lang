@@ -1,5 +1,7 @@
 # Rust 形式化研究：理论体系与论证体系结构 {#rust-形式化研究理论体系与论证体系结构}
 
+> **EN**: Theoretical And Argumentation System Architecture
+> **Summary**: Rust 形式化研究 Theoretical And Argumentation System Architecture. (stub/archive redirect)
 > **概念族**: 论证体系
 > **内容分级**: [归档级]
 >
@@ -169,7 +171,6 @@
 ```text
 理论基础依赖图（自底向上）
 
-
 [公理/规则层] ────────────────────────────────────────────────────────┐
 
   所有权规则 1–3                                                       │
@@ -320,7 +321,6 @@
 ```text
 论证流向（自上而下、自底而上）
 
-
 概念定义 ──→ 属性关系 ──→ 解释论证 ──→ 形式化证明 ──→ 思维表征
 
     │            │            │            │            │
@@ -334,7 +334,6 @@
     │            └── 公理、引理、定理、推论
 
     └── Def、Axiom、定义链
-
 
 一致性要求：
 
@@ -568,7 +567,6 @@
 
 // 对应：理论体系四层架构（基础公理层 → 语义模型层 → 性质定理层 → 应用边界层）
 
-
 enum TheoryLayer {
 
     Axioms,      // 基础公理层
@@ -581,7 +579,6 @@ enum TheoryLayer {
 
 }
 
-
 struct TheoryElement {
 
     layer: TheoryLayer,
@@ -591,7 +588,6 @@ struct TheoryElement {
     dependencies: Vec<String>,
 
 }
-
 
 // 验证理论层次结构
 
@@ -659,7 +655,6 @@ fn verify_theory_hierarchy(elements: &[TheoryElement]) -> bool {
 
 }
 
-
 fn main() {
 
     let elements = vec![
@@ -696,7 +691,6 @@ fn main() {
 
     ];
 
-
     assert!(verify_theory_hierarchy(&elements));
 
     println!("理论层次结构验证通过");
@@ -713,9 +707,7 @@ fn main() {
 
 // 对应：§3 安全与非安全边界
 
-
 use std::mem::MaybeUninit;
-
 
 // 安全 API：内部使用 unsafe，对外暴露安全接口
 
@@ -724,7 +716,6 @@ struct SafeBuffer {
     data: Vec<u8>,
 
 }
-
 
 impl SafeBuffer {
 
@@ -739,7 +730,6 @@ impl SafeBuffer {
         }
 
     }
-
 
     // 安全写入方法
 
@@ -757,7 +747,6 @@ impl SafeBuffer {
 
     }
 
-
     // 安全读取方法
 
     fn read(&self, offset: usize) -> Result<u8, &'static str> {
@@ -768,18 +757,15 @@ impl SafeBuffer {
 
 }
 
-
 // 验证安全抽象的不变式
 
 fn verify_safe_abstraction_invariant() {
 
     let mut buffer = SafeBuffer::new(1024);
 
-
     // 不变式 1: len ≤ capacity
 
     assert!(buffer.data.len() <= buffer.data.capacity());
-
 
     // 不变式 2: 越界访问返回错误而非 UB
 
@@ -787,11 +773,9 @@ fn verify_safe_abstraction_invariant() {
 
     assert!(buffer.read(1024).is_err());
 
-
     println!("安全抽象不变式验证通过");
 
 }
-
 
 fn main() {
 
@@ -811,7 +795,6 @@ Require Import Coq.Lists.List.
 
 Require Import Coq.Classes.RelationClasses.
 
-
 (* 理论层定义 *)
 
 Inductive TheoryLayer : Type :=
@@ -824,7 +807,6 @@ Inductive TheoryLayer : Type :=
 
   | ApplicationLayer : TheoryLayer.
 
-
 (* 理论元素 *)
 
 Record TheoryElement := {
@@ -836,7 +818,6 @@ Record TheoryElement := {
   dependencies : list string;
 
 }.
-
 
 (* 依赖关系有效性 *)
 
@@ -855,7 +836,6 @@ Definition valid_dependency (elem: TheoryElement)
       dep_elem.(name) = dep_name /\
 
       layer_precedence dep_elem.(layer) elem.(layer).
-
 
 (* 层之间的优先关系 *)
 
@@ -880,7 +860,6 @@ Inductive layer_precedence : TheoryLayer -> TheoryLayer -> Prop :=
       layer_precedence l2 l3 ->
 
       layer_precedence l1 l3.
-
 
 (* 定理：理论体系的一致性 *)
 

@@ -10,6 +10,8 @@
 >
 # 案例研究06: 自动驾驶感知系统
 
+> **EN**: Case Study 06 Autonomous Driving
+> **Summary**: 案例研究06 Case Study 06 Autonomous Driving. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 概述

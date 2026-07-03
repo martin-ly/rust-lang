@@ -1,5 +1,7 @@
 # Unsafe 与 FFI 反例边界 {#unsafe-与-ffi-反例边界}
 
+> **EN**: Unsafe Counterexamples
+> **Summary**: Unsafe 与 FFI 反例边界 Unsafe Counterexamples.
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
 > **Bloom 层级**: L5-L6 (分析/评价)

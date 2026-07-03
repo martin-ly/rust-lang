@@ -1,5 +1,7 @@
 # 内存分析研究 {#内存分析研究}
 
+> **EN**: Memory Analysis
+> **Summary**: 内存分析研究 Memory Analysis.
 > **概念族**: 实验研究
 > **内容分级**: [归档级]
 >
@@ -311,14 +313,11 @@ use std::alloc::{GlobalAlloc, Layout, System};
 
 use std::sync::atomic::{AtomicUsize, Ordering};
 
-
 struct TrackingAllocator;
-
 
 static ALLOCATED: AtomicUsize = AtomicUsize::new(0);
 
 static DEALLOCATED: AtomicUsize = AtomicUsize::new(0);
-
 
 unsafe impl GlobalAlloc for TrackingAllocator {
 
@@ -336,7 +335,6 @@ unsafe impl GlobalAlloc for TrackingAllocator {
 
     }
 
-
     unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
 
         System.dealloc(ptr, layout);
@@ -347,11 +345,9 @@ unsafe impl GlobalAlloc for TrackingAllocator {
 
 }
 
-
 #[global_allocator]
 
 static GLOBAL: TrackingAllocator = TrackingAllocator;
-
 
 fn analyze_memory_usage() {
 
@@ -360,7 +356,6 @@ fn analyze_memory_usage() {
     let deallocated = DEALLOCATED.load(Ordering::Relaxed);
 
     let current = allocated.saturating_sub(deallocated);
-
 
     println!("已分配: {} 字节", allocated);
 
@@ -382,7 +377,6 @@ fn analyze_vec_growth() {
 
     let mut capacities = Vec::new();
 
-
     for i in 0..100 {
 
         vec.push(i);
@@ -391,9 +385,7 @@ fn analyze_vec_growth() {
 
     }
 
-
     println!("容量变化: {:?}", capacities);
-
 
     // 分析增长模式
 
@@ -421,7 +413,6 @@ use std::rc::Rc;
 
 use std::cell::RefCell;
 
-
 // 循环引用示例（可能导致内存泄漏）
 
 struct Node {
@@ -433,7 +424,6 @@ struct Node {
     parent: Option<Rc<RefCell<Node>>>,
 
 }
-
 
 impl Node {
 
@@ -451,7 +441,6 @@ impl Node {
 
     }
 
-
     fn add_child(parent: &Rc<RefCell<Node>>, child: &Rc<RefCell<Node>>) {
 
         parent.borrow_mut().children.push(Rc::clone(child));
@@ -462,11 +451,9 @@ impl Node {
 
 }
 
-
 // 使用 Weak 打破循环引用
 
 use std::rc::Weak;
-
 
 struct SafeNode {
 
@@ -477,7 +464,6 @@ struct SafeNode {
     parent: Option<Weak<RefCell<SafeNode>>>,
 
 }
-
 
 impl SafeNode {
 
@@ -494,7 +480,6 @@ impl SafeNode {
         }))
 
     }
-
 
     fn add_child(parent: &Rc<RefCell<SafeNode>>, child: &Rc<RefCell<SafeNode>>) {
 
@@ -514,7 +499,6 @@ impl SafeNode {
 ```rust
 use std::mem;
 
-
 struct Example {
 
     a: u8,
@@ -525,20 +509,18 @@ struct Example {
 
 }
 
-
 fn analyze_memory_layout() {
 
     println!("Example 大小: {} 字节", mem::size_of::<Example>());
 
     println!("对齐: {} 字节", mem::align_of::<Example>());
 
-
     // 使用 #[repr(C)] 控制内存布局
 
 }
 ```
 
-**分析要点**：`size_of`/`align_of` 与 [ALIGNMENT_GUIDE](../../02_reference/ALIGNMENT_GUIDE.md) 对齐知识衔接；`#[repr(C)]` 用于 FFI 与布局控制。
+**分析要点**：`size_of`/`align_of` 与 [ALIGNMENT_GUIDE](../../02_reference/alignment_guide.md) 对齐知识衔接；`#[repr(C)]` 用于 FFI 与布局控制。
 
 ---
 

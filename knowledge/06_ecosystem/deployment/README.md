@@ -1,5 +1,7 @@
 # Deployment 部署
 
+> **EN**: Deployment Index
+> **Summary**: Deployment 部署 Deployment Index.
 > **Bloom 层级**: 理解
 > **Rust 应用部署与运维**
 >

@@ -9,6 +9,8 @@
 >
 # Rust安全关键生态系统文档集
 
+> **EN**: Safety Critical Index
+> **Summary**: Rust安全关键生态系统文档集 Safety Critical Index.
 > **Bloom 层级**: 理解
 
 ## 概述

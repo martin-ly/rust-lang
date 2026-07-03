@@ -1,4 +1,7 @@
 # 权威内容对齐指南 {#权威内容对齐指南}
+
+> **EN**: Authoritative Alignment Guide
+> **Summary**: 权威内容对齐指南 Authoritative Alignment Guide. (stub/archive redirect)
 >
 > **概念族**: 权威来源对齐
 > **内容分级**: [归档级]

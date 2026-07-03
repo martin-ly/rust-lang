@@ -1,4 +1,7 @@
 # Rust for Linux：2026 年全景与工程实践 {#rust-for-linux2026-年全景与工程实践}
+
+> **EN**: Rust for Linux
+> **Summary**: 2026 年全景与工程实践 Rust for Linux.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

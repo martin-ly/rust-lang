@@ -1,4 +1,10 @@
 # Cargo Audit 配置文件
+#
+# 自 2026-07-04 起，cargo-vet 已成为本项目主要的供应链治理工具。
+# supply-chain/config.toml 与 supply-chain/audits.toml 共同覆盖所有 registry 依赖；
+# 本文件保留的 6 条 RUSTSEC 忽略仅作为历史记录，相关 crate/版本已由 cargo-vet
+# 通过 [exemptions] 或 [[audits]] 条目覆盖/管理。
+#
 # 本文件记录已知且暂时无法修复的安全警告和废弃依赖
 # 每个忽略项都必须包含明确的影响评估和理由（见下方注释）
 
@@ -10,6 +16,7 @@ ignore = [
     # - 影响范围: 仅影响 MySQL 后端的 RSA 密钥操作
     # - 实际状态: 本项目不再编译 rsa crate（sqlx-mysql 依赖已被移除）
     # - 上游状态: RustCrypto/RSA 修复工作进行中，无稳定补丁版本（截至 2026-05-29）
+    # [已由 cargo-vet 覆盖/管理] rsa 已从 Cargo.lock 移除，不再进入依赖树
     "RUSTSEC-2023-0071",
 
     # RUSTSEC-2026-0118: hickory-proto - NSEC3 closest-encloser proof validation unbounded loop
@@ -18,10 +25,12 @@ ignore = [
     # - 影响范围: 仅影响 libp2p-mdns 子 crate（本项目未启用 mdns feature）
     # - 实际状态: hickory-proto 0.25.2 仅存在于 Cargo.lock 残留中，不在编译依赖树
     # - 上游状态: libp2p 0.56.0 已是最新版，等待 libp2p >0.56.0 升级内部依赖
+    # [已由 cargo-vet 覆盖/管理] hickory-proto 0.25.2 已在 supply-chain/audits.toml 中登记审计 stub
     "RUSTSEC-2026-0118",
 
     # RUSTSEC-2026-0119: hickory-proto - 相关 DNS 漏洞
     # 影响评估: LOW（同上，hickory-proto 0.25.2 不在实际编译依赖树中）
+    # [已由 cargo-vet 覆盖/管理] hickory-proto 0.25.2 已在 supply-chain/audits.toml 中登记审计 stub
     "RUSTSEC-2026-0119",
 
     # RUSTSEC-2026-0110: bare-metal 已弃用
@@ -30,6 +39,7 @@ ignore = [
     # - 影响范围: 仅 c13_embedded 在 target_arch = "arm" 时依赖 cortex-m 0.7.7
     # - 实际状态: cortex-m 0.7.7 是 crates.io 最新稳定版；cortex-m 0.8 尚未发布
     # - 上游状态: 等待 rust-embedded/cortex-m 发布 0.8
+    # [已由 cargo-vet 覆盖/管理] bare-metal 0.2.5 已在 supply-chain/audits.toml 中登记审计 stub
     "RUSTSEC-2026-0110",
 
     # RUSTSEC-2024-0384: `instant` 不再维护
@@ -38,6 +48,7 @@ ignore = [
     # - 影响范围: c06_async 的 glommio 0.9.0 -> futures-lite 1.13.0 -> fastrand 1.9.0
     # - 实际状态: glommio 0.9.0 是 crates.io 最新版；移除 glommio 将损失 io_uring 教学内容
     # - 上游状态: 等待 glommio 升级至 futures-lite 2.x
+    # [已由 cargo-vet 覆盖/管理] instant 0.1.13 已在 supply-chain/audits.toml 中登记审计 stub
     "RUSTSEC-2024-0384",
 
     # RUSTSEC-2024-0436: paste 不再维护
@@ -46,6 +57,7 @@ ignore = [
     # - 影响范围: candle-core 0.10.2 / libp2p 0.56.0 -> tokenizers/pulp/netlink-packet-core/macro_rules_attribute/gemm-*
     # - 实际状态: candle-core 0.10.2 与 libp2p 0.56.0 均为当前最新稳定版
     # - 上游状态: 等待 huggingface/candle 与 libp2p/rust-libp2p 迁移出 paste
+    # [已由 cargo-vet 覆盖/管理] paste 1.0.15 已在 supply-chain/audits.toml 中登记审计 stub
     "RUSTSEC-2024-0436",
 ]
 

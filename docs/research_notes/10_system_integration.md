@@ -1,5 +1,7 @@
 # 系统集成指南 {#系统集成指南}
 
+> **EN**: System Integration
+> **Summary**: 系统集成指南 System Integration.
 > **概念族**: 综合研究
 > **内容分级**: [归档级]
 >

@@ -1,5 +1,7 @@
 # 工作流引擎能力矩阵 {#工作流引擎能力矩阵}
 
+> **EN**: Workflow Engine Matrix
+> **Summary**: 工作流引擎能力矩阵 Workflow Engine Matrix.
 > **概念族**: 软件设计 / 工作流模式
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

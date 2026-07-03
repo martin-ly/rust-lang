@@ -1,5 +1,7 @@
 # 🔀 Rust 线程与并发速查卡 {#rust-线程与并发速查卡}
 
+> **EN**: Threads Concurrency Cheatsheet
+> **Summary**: 🔀 Rust 线程与并发速查卡 Threads Concurrency Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >

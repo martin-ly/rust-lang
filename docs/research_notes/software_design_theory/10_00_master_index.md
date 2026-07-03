@@ -1,5 +1,7 @@
 # 软件设计理论体系：主索引 {#软件设计理论体系主索引}
 
+> **EN**: 00 Master Index
+> **Summary**: 软件设计理论体系 00 Master Index. (stub/archive redirect)
 > **概念族**: 软件设计理论
 > **内容分级**: [归档级]
 >

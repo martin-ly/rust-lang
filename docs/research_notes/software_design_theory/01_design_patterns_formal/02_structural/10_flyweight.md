@@ -1,5 +1,7 @@
 # Flyweight 形式化分析 {#flyweight-形式化分析}
 
+> **EN**: Flyweight
+> **Summary**: Flyweight 形式化分析 Flyweight.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -240,13 +242,11 @@ use std::collections::HashMap;
 
 use std::sync::Arc;
 
-
 struct FlyweightFactory {
 
     cache: HashMap<String, Arc<str>>,
 
 }
-
 
 impl FlyweightFactory {
 
@@ -273,7 +273,6 @@ impl FlyweightFactory {
     }
 
 }
-
 
 // 使用：相同 key 共享
 
@@ -302,11 +301,9 @@ use std::collections::HashMap;
 
 use std::sync::{Arc, RwLock};
 
-
 #[derive(Clone, Debug)]
 
 struct TreeType { name: String, color: String }
-
 
 struct TreeFactory { types: RwLock<HashMap<String, Arc<TreeType>>> }
 
@@ -338,9 +335,7 @@ impl TreeFactory {
 
 }
 
-
 struct Tree { x: i32, y: i32, kind: Arc<TreeType> }
-
 
 fn main() {
 
@@ -523,7 +518,6 @@ use std::collections::HashMap;
 
 use std::sync::{Arc, RwLock};
 
-
 #[derive(Clone, Hash, Eq, PartialEq)]
 
 struct GlyphKey {
@@ -536,7 +530,6 @@ struct GlyphKey {
 
 }
 
-
 struct GlyphData {
 
     width: u32,
@@ -547,13 +540,11 @@ struct GlyphData {
 
 }
 
-
 struct GlyphCache {
 
     cache: RwLock<HashMap<GlyphKey, Arc<GlyphData>>>,
 
 }
-
 
 impl GlyphCache {
 
@@ -584,7 +575,6 @@ impl GlyphCache {
     }
 
 }
-
 
 // 外置可变状态
 

@@ -1,5 +1,7 @@
 # 设计模式边界矩阵汇总 {#设计模式边界矩阵汇总}
 
+> **EN**: Boundary Matrix
+> **Summary**: 设计模式边界矩阵汇总 Boundary Matrix. (stub/archive redirect)
 > **概念族**: 软件设计 / 设计模式 / 边界矩阵
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链节点持续推进。
 > **内容分级**: [归档级]
@@ -308,7 +310,6 @@ flowchart TB
 
 ═══════════════════════════════════════════════════════════════
 
-
 创建型
 
 ├── Factory Method   → trait 工厂方法        → BMP-T1 等价
@@ -320,7 +321,6 @@ flowchart TB
 ├── Prototype        → Clone trait          → BMP-T1 等价
 
 └── Singleton        → OnceLock / static mut → BMP-L1 近似
-
 
 结构型
 
@@ -337,7 +337,6 @@ flowchart TB
 ├── Flyweight        → Arc 共享             → BMP-T1 等价
 
 └── Proxy            → 委托/延迟             → BMP-T1 等价
-
 
 行为型
 
@@ -362,7 +361,6 @@ flowchart TB
 ├── Template Method  → trait 默认方法       → BMP-L1 近似
 
 └── Visitor          → match/trait         → BMP-L1 近似
-
 
 定理说明：BMP-T1 边界唯一；BMP-L1 近似表达（见 expressive_inexpressive_matrix）
 ```

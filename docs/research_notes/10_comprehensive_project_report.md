@@ -1,5 +1,7 @@
 # 综合项目报告 {#综合项目报告}
 
+> **EN**: Comprehensive Project Report
+> **Summary**: 综合项目报告 Comprehensive Project Report.
 > **概念族**: 综合研究
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -124,7 +126,6 @@ Level 1: 概述与导航
 
 └── 10_user_guide.md
 
-
 Level 2: 核心形式化
 
 ├── formal_methods/ (6篇)
@@ -132,7 +133,6 @@ Level 2: 核心形式化
 ├── type_theory/ (5篇)
 
 └── 10_proof_index.md
-
 
 Level 3: 设计理论
 
@@ -148,7 +148,6 @@ Level 3: 设计理论
 
 │   └── 05_boundary_system/ (3篇)
 
-
 Level 4: 思维表征
 
 ├── *_MINDMAP.md (15个)
@@ -158,7 +157,6 @@ Level 4: 思维表征
 ├── *_DECISION_TREE.md (10个)
 
 └── PROOF_TREES_*.md (10个)
-
 
 Level 5: 实用资源
 

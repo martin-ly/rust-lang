@@ -1,5 +1,7 @@
 # 扩展指南 {#扩展指南}
 
+> **EN**: Guides Index
+> **Summary**: 扩展指南 Guides Index.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
 >

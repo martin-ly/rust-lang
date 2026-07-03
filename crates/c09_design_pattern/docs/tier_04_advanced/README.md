@@ -24,10 +24,10 @@
 
 | 文档  | 主题 | 难度 |
 | :--- | :--- | :--- |
-| [ASYNC_SYNC_EQUIVALENCE_THEORY.md](../ASYNC_SYNC_EQUIVALENCE_THEORY.md) | 异步vs同步等价性 | ⭐⭐⭐⭐⭐ |
-| [ACTOR_REACTOR_PATTERNS.md](../ACTOR_REACTOR_PATTERNS.md)               | Actor与Reactor   | ⭐⭐⭐⭐⭐ |
-| [CSP_VS_ASYNC_ANALYSIS.md](../CSP_VS_ASYNC_ANALYSIS.md)                 | CSP vs Async     | ⭐⭐⭐⭐⭐ |
-| [ASYNC_RECURSION_ANALYSIS.md](../ASYNC_RECURSION_ANALYSIS.md)           | 异步递归         | ⭐⭐⭐⭐   |
+| [ASYNC_SYNC_EQUIVALENCE_THEORY.md](../async_sync_equivalence_theory.md) | 异步vs同步等价性 | ⭐⭐⭐⭐⭐ |
+| [ACTOR_REACTOR_PATTERNS.md](../actor_reactor_patterns.md)               | Actor与Reactor   | ⭐⭐⭐⭐⭐ |
+| [CSP_VS_ASYNC_ANALYSIS.md](../csp_vs_async_analysis.md)                 | CSP vs Async     | ⭐⭐⭐⭐⭐ |
+| [ASYNC_RECURSION_ANALYSIS.md](../async_recursion_analysis.md)           | 异步递归         | ⭐⭐⭐⭐   |
 
 ---
 
@@ -35,9 +35,9 @@
 
 **思维表征资源**:
 
-- [KNOWLEDGE_GRAPH.md](../KNOWLEDGE_GRAPH.md)
-- [MULTIDIMENSIONAL_MATRIX_COMPARISON.md](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md)
-- [MIND_MAP.md](../MIND_MAP.md)
+- [KNOWLEDGE_GRAPH.md](../knowledge_graph.md)
+- [MULTIDIMENSIONAL_MATRIX_COMPARISON.md](../multidimensional_matrix_comparison.md)
+- [MIND_MAP.md](../mind_map.md)
 
 ---
 

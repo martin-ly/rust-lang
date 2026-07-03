@@ -1,4 +1,7 @@
 # 国际 Rust 形式化验证成果对标索引 {#国际-rust-形式化验证成果对标索引}
+
+> **EN**: International Formal Verification Index
+> **Summary**: 国际 Rust 形式化验证成果对标索引 International Formal Verification Index. (stub/archive redirect)
 >
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]

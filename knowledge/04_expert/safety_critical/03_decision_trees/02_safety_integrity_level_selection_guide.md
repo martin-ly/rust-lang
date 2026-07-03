@@ -10,6 +10,8 @@
 >
 # 安全完整性等级选择指南
 
+> **EN**: Safety Integrity Level Selection Guide
+> **Summary**: 安全完整性等级选择指南 Safety Integrity Level Selection Guide. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 概述

@@ -1,5 +1,7 @@
 # Unsafe Rust
 
+> **EN**: Unsafe Rust
+> **Summary**: Unsafe Rust Unsafe Rust.
 > **📎 交叉引用**
 >
 > 本主题在 concept 中有深度的概念分析：[Unsafe Rust](../../../concept/03_advanced/03_unsafe.md)

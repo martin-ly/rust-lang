@@ -1,5 +1,7 @@
 # Sea-ORM 深度解析
 
+> **EN**: Sea ORM Deep Dive
+> **Summary**: Sea-ORM 深度解析 Sea ORM Deep Dive.
 > **Bloom 层级**: 理解
 > **版本**: Sea-ORM 1.x（crates.io 最新 stable 为 `1.1.20`；2.0 处于 release-candidate 阶段，本 workspace 使用 `2.0.0-rc.41`，等待上游 2.0.0 stable）
 > **Rust 版本**: 1.96.0+

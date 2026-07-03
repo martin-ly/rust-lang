@@ -1,5 +1,7 @@
 # Rust安全关键系统培训计划
 
+> **EN**: Rust Safety Critical Training Program
+> **Summary**: Rust安全关键系统培训计划 Rust Safety Critical Training Program.
 > **Bloom 层级**: 理解
 >
 > **受众**: [初学者] / [进阶]

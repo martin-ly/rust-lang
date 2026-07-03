@@ -12,6 +12,8 @@
 
 # Rust 软件设计理论体系 {#rust-软件设计理论体系}
 
+> **EN**: Software Design Theory Index
+> **Summary**: Rust 软件设计理论体系 Software Design Theory Index. (stub/archive redirect)
 > **内容分级**: [归档级]
 >
 > **分级**: [B]

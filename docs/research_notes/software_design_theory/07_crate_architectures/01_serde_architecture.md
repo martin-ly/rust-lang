@@ -9,6 +9,8 @@
 
 # Serde crate 架构解构 {#serde-crate-架构解构}
 
+> **EN**: Serde Architecture
+> **Summary**: Serde crate 架构解构 Serde Architecture.
 > **概念族**: 软件设计 / Crate 架构
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -52,7 +54,6 @@ graph TB
 
     end
 
-
     subgraph CoreTraits["Serde 核心 Trait"]
 
         S[Serialize]
@@ -66,7 +67,6 @@ graph TB
         V[Visitor]
 
     end
-
 
     subgraph FormatSide["格式实现侧"]
 
@@ -82,7 +82,6 @@ graph TB
 
     end
 
-
     D1 -->|impl Serialize| S
 
     D2 -->|impl Deserialize| De
@@ -95,7 +94,6 @@ graph TB
 
     V -->|extract values| De
 
-
     SeT --> F1
 
     SeT --> F2
@@ -105,7 +103,6 @@ graph TB
     DeT --> F4
 
     DeT --> F5
-
 
     style CoreTraits fill:#e1f5fe
 
@@ -194,7 +191,6 @@ pub trait Serializer {
 
     // ... 更多关联类型
 
-
     fn serialize_bool(self, v: bool) -> Result<Self::Ok, Self::Error>;
 
     fn serialize_i32(self, v: i32) -> Result<Self::Ok, Self::Error>;
@@ -226,21 +222,17 @@ pub trait Deserializer<'de>: Sized {
 
     type Error: Error;
 
-
     fn deserialize_any<V>(self, visitor: V) -> Result<V::Value, Self::Error>
 
     where V: Visitor<'de>;
-
 
     fn deserialize_bool<V>(self, visitor: V) -> Result<V::Value, Self::Error>
 
     where V: Visitor<'de>;
 
-
     fn deserialize_seq<V>(self, visitor: V) -> Result<V::Value, Self::Error>
 
     where V: Visitor<'de>;
-
 
     fn deserialize_struct<V>(
 
@@ -279,24 +271,19 @@ pub trait Visitor<'de>: Sized {
 
     type Value;
 
-
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result;
-
 
     fn visit_bool<E>(self, v: bool) -> Result<Self::Value, E>
 
     where E: Error;
 
-
     fn visit_str<E>(self, v: &str) -> Result<Self::Value, E>
 
     where E: Error;
 
-
     fn visit_seq<A>(self, seq: A) -> Result<Self::Value, A::Error>
 
     where A: SeqAccess<'de>;
-
 
     fn visit_map<A>(self, map: A) -> Result<Self::Value, A::Error>
 
@@ -362,7 +349,6 @@ impl<'a> serde::Serializer for &'a mut Serializer {
 
 }
 
-
 // bincode 的 bytes 处理：直接写入
 
 impl<'a, O: Options> serde::Serializer for &'a mut Serializer<O> {
@@ -398,7 +384,6 @@ Serde 的 `'de` 生命周期设计使得反序列化可以从输入缓冲区直�
 ```rust,ignore
 use serde::Deserialize;
 
-
 #[derive(Deserialize)]
 
 struct BorrowedData<'a> {
@@ -408,7 +393,6 @@ struct BorrowedData<'a> {
     payload: &'a [u8],    // 从字节流借用（需配合 serde_bytes）
 
 }
-
 
 let json = r#"{"name":"Alice","payload":[1,2,3]}"#;
 
@@ -426,7 +410,6 @@ let data: BorrowedData = serde_json::from_str(json)?;
 use std::borrow::Cow;
 
 use serde::Deserialize;
-
 
 #[derive(Deserialize)]
 
@@ -448,7 +431,6 @@ struct FlexibleData<'a> {
 
 ```rust,ignore
 use serde_bytes::ByteBuf;
-
 
 #[derive(Deserialize)]
 
@@ -496,7 +478,6 @@ sequenceDiagram
     participant Gen as quote! 代码生成
 
     participant Out as 生成的 impl
-
 
     Compiler->>PM: TokenStream (struct 定义)
 
@@ -672,7 +653,6 @@ struct PacketHeader {
 
 }
 
-
 // ✅ 应使用：bytemuck + #[repr(C)]
 
 #[repr(C, packed)]
@@ -702,7 +682,6 @@ let c_struct = MyStruct { a: 1, b: 2 };
 
 let json = serde_json::to_string(&c_struct)?;
 
-
 // ✅ 正确：直接传递指针，C 端按声明的结构解析
 
 #[repr(C)]
@@ -729,7 +708,6 @@ Serde 的默认 API 是**全内存模型**：`serde_json::from_str` 需要完整
 use serde_json::StreamDeserializer;
 
 use serde::Deserialize;
-
 
 let data = b"[1, 2, 3, 4, 5, ...]"; // 超大数组
 

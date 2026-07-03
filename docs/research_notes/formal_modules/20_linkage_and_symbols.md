@@ -1,5 +1,7 @@
 # Linkage 与符号机制 {#linkage-与符号机制}
 
+> **EN**: Linkage And Symbols
+> **Summary**: Linkage 与符号机制 Linkage And Symbols.
 > **概念族**: 形式化模块
 > **内容分级**: [归档级]
 >
@@ -151,7 +153,6 @@ crate-type = ["cdylib"]
 // Cargo.toml 依赖名为 old_name，但在代码中希望使用 new_name
 
 extern crate old_name as new_name;
-
 
 pub use new_name::SomeType;
 ```

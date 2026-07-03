@@ -1,5 +1,7 @@
 # 模块知识结构补充指南 {#模块知识结构补充指南}
 
+> **EN**: Module Knowledge Structure Guide
+> **Summary**: 模块知识结构补充指南 Module Knowledge Structure Guide. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L4-L5 (分析/评价)
 

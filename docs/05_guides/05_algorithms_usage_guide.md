@@ -1,4 +1,7 @@
 # 算法使用指南 {#算法使用指南}
+
+> **EN**: Algorithms Usage Guide
+> **Summary**: 算法使用指南 Algorithms Usage Guide.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >

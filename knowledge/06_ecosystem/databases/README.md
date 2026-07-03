@@ -1,5 +1,7 @@
 # Databases 数据库
 
+> **EN**: Databases Index
+> **Summary**: Databases 数据库 Databases Index.
 > **📎 交叉引用**
 >
 > 本主题在 concept 中有深度的概念分析：[数据库](../../../concept/06_ecosystem/23_database_systems.md)

@@ -1,4 +1,7 @@
 # 决策树/推理树标准模板 {#决策树推理树标准模板}
+
+> **EN**: Template Decision Tree
+> **Summary**: 决策树/推理树标准模板 Template Decision Tree.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

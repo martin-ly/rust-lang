@@ -1,5 +1,7 @@
 # 异步执行模型形式化 {#异步执行模型形式化}
 
+> **EN**: Async
+> **Summary**: 异步执行模型形式化 Async. (stub/archive redirect)
 > **概念族**: 软件设计 / 执行模型
 > **内容分级**: [归档级]
 >
@@ -121,13 +123,11 @@ use std::pin::Pin;
 
 use std::task::{Context, Poll};
 
-
 async fn fetch() -> String {
 
     "data".to_string()
 
 }
-
 
 async fn main_async() {
 
@@ -136,7 +136,6 @@ async fn main_async() {
     println!("{}", x);
 
 }
-
 
 // 需要运行时（如 tokio）执行
 
@@ -152,7 +151,6 @@ use std::pin::Pin;
 
 use std::marker::PhantomPinned;
 
-
 struct SelfReferential {
 
     data: String,
@@ -162,7 +160,6 @@ struct SelfReferential {
     _pin: PhantomPinned,
 
 }
-
 
 impl SelfReferential {
 
@@ -314,7 +311,6 @@ use futures::stream::Stream;
 ```rust,ignore
 use tokio::task;
 
-
 async fn parent() -> Result<(), Error> {
 
     let h1 = task::spawn(child_one());
@@ -354,7 +350,6 @@ async fn fetch_and_parse() -> Result<Data, Error> {
     parse(raw).map_err(Into::into)
 
 }
-
 
 // 取消：drop 会取消未完成的 Future
 

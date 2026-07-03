@@ -246,7 +246,7 @@ fn get_instance() -> &'static Config {
 
 **Rust 实现**: `tokio::mpsc`, `actix`
 
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [Actor/Reactor分析](../ACTOR_REACTOR_PATTERNS.md)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [Actor/Reactor分析](../actor_reactor_patterns.md)
 
 ---
 
@@ -262,7 +262,7 @@ fn get_instance() -> &'static Config {
 
 **Rust 中**: Tokio 运行时基于 Reactor 模式
 
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [Actor/Reactor分析](../ACTOR_REACTOR_PATTERNS.md)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [Actor/Reactor分析](../actor_reactor_patterns.md)
 
 ---
 
@@ -278,7 +278,7 @@ fn get_instance() -> &'static Config {
 
 **Rust 实现**: `std::sync::mpsc`, `crossbeam`
 
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [CSP vs Async](../CSP_VS_ASYNC_ANALYSIS.md)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [CSP vs Async](../csp_vs_async_analysis.md)
 
 ---
 
@@ -307,7 +307,7 @@ pub trait Future {
 
 **工作原理**: 编译器将 async 函数转换为状态机
 
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [异步等价理论](../ASYNC_SYNC_EQUIVALENCE_THEORY.md)
+**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [异步等价理论](../async_sync_equivalence_theory.md)
 
 ---
 
@@ -347,8 +347,8 @@ pub trait Future {
 **深度理论**:
 
 - [形式化理论体系](../tier_04_advanced/README.md) - 高级主题
-- [Actor/Reactor模式](../ACTOR_REACTOR_PATTERNS.md) - 并发模式深入
-- [CSP vs Async](../CSP_VS_ASYNC_ANALYSIS.md) - 并发模型对比
+- [Actor/Reactor模式](../actor_reactor_patterns.md) - 并发模式深入
+- [CSP vs Async](../csp_vs_async_analysis.md) - 并发模型对比
 
 ---
 

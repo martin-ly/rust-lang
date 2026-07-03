@@ -1,4 +1,7 @@
 # 🔄 PDCA 循环模板 {#pdca-循环模板}
+
+> **EN**: Pdca Template
+> **Summary**: 🔄 PDCA 循环模板 Pdca Template. (stub/archive redirect)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

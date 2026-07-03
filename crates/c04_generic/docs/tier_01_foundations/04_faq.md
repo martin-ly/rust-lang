@@ -791,7 +791,7 @@ trait GenericContainer {
 - GAT 语法比普通关联类型复杂
 - 需要显式指定 where 子句
 
-**参考文档**: [`tier_03_references/04_associated_types_reference.md`](../tier_03_references/04_associated_types_reference.md), [`RUST_192_GENERIC_IMPROVEMENTS.md`](../../RUST_192_GENERIC_IMPROVEMENTS.md) 🆕
+**参考文档**: [`tier_03_references/04_associated_types_reference.md`](../tier_03_references/04_associated_types_reference.md), [`RUST_192_GENERIC_IMPROVEMENTS.md`](../../rust_192_generic_improvements.md) 🆕
 
 ---
 

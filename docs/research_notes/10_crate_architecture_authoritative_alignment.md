@@ -1,5 +1,7 @@
 # Crate 架构权威来源对齐矩阵 {#crate-架构权威来源对齐矩阵}
 
+> **EN**: Crate Architecture Authoritative Alignment
+> **Summary**: Crate 架构权威来源对齐矩阵 Crate Architecture Authoritative Alignment.
 > **概念族**: 权威来源对齐 / Crate 架构
 > **内容分级**: [核心级]
 > **层级**: L0-L5

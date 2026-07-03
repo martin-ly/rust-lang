@@ -1,5 +1,7 @@
 # 智能指针 (Smart Pointers)
 
+> **EN**: Smart Pointers
+> **Summary**: 智能指针 Smart Pointers. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/02_intermediate/12_smart_pointers.md](../../concept/02_intermediate/12_smart_pointers.md)。
 > **历史版本存档**: [archive/knowledge/02_intermediate/04_smart_pointers.md](../../archive/knowledge/02_intermediate/04_smart_pointers.md)
 >

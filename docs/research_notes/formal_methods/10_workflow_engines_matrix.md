@@ -1,5 +1,7 @@
 # 工作流引擎能力矩阵 {#工作流引擎能力矩阵}
 
+> **EN**: Workflow Engines Matrix
+> **Summary**: 工作流引擎能力矩阵 Workflow Engines Matrix. (stub/archive redirect)
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级（已迁回并持续推进）
 > **层级**: L4-L5
@@ -133,7 +135,6 @@
 ```text
 低复杂度 ────────────────────────────────────> 高复杂度
 
-
 自研状态机 < tokio::fsm < Conductor < Cadence < Temporal < Camunda
 
    1周         2周          1月       1-2月       2-3月       3-6月
@@ -188,7 +189,6 @@
 ```rust,ignore
 use temporal_sdk::{ActivityOptions, WorkflowContext, workflow};
 
-
 #[workflow]
 
 async fn order_workflow(ctx: &mut WorkflowContext, order_id: String) -> Result<Order, Error> {
@@ -205,7 +205,6 @@ async fn order_workflow(ctx: &mut WorkflowContext, order_id: String) -> Result<O
 
     ).await?;
 
-
     if inventory.available {
 
         ctx.activity("process_payment", ActivityOptions::default(), order_id).await?;
@@ -214,11 +213,9 @@ async fn order_workflow(ctx: &mut WorkflowContext, order_id: String) -> Result<O
 
     }
 
-
     Ok(Order::completed(order_id))
 
 }
-
 
 // 补偿处理
 
@@ -242,7 +239,6 @@ async fn compensate_payment(ctx: &mut WorkflowContext, order_id: String) {
 
 use std::collections::HashMap;
 
-
 pub trait State: Send + Sync {
 
     fn name(&self) -> &'static str;
@@ -255,7 +251,6 @@ pub trait State: Send + Sync {
 
 }
 
-
 pub struct Workflow<S: State> {
 
     current: S,
@@ -266,16 +261,13 @@ pub struct Workflow<S: State> {
 
 }
 
-
 impl<S: State> Workflow<S> {
 
     pub fn handle_event(&mut self, event: Event) -> Result<(), WorkflowError> {
 
         let old_state = self.current.name();
 
-
         self.current.on_exit(&mut self.context);
-
 
         match self.current.on_event(event, &mut self.context) {
 
@@ -371,7 +363,6 @@ impl<S: State> Workflow<S> {
 
 ```text
 入门 ────────────────────────────────────────> 精通
-
 
 1. 理解状态机模式
 

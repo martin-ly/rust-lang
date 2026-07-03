@@ -1,5 +1,7 @@
 # 权威来源行号锚点索引 {#权威来源行号锚点索引}
 
+> **EN**: Authoritative Source Line Anchors
+> **Summary**: 权威来源行号锚点索引 Authoritative Source Line Anchors.
 > **概念族**: 权威来源对齐 / 行号锚点
 > **内容分级**: [核心级]
 > **层级**: L0-L7

@@ -1,5 +1,7 @@
 # 与 ownership/borrow/trait 的衔接 {#与-ownershipborrowtrait-的衔接}
 
+> **EN**: Integration Theory
+> **Summary**: 与 ownership/borrow/trait 的衔接 Integration Theory. (stub/archive redirect)
 > **概念族**: 软件设计 / 组合工程
 > **内容分级**: [归档级]
 >
@@ -193,7 +195,6 @@
 ```rust,ignore
 use tower::{Service, ServiceExt};
 
-
 async fn handle<S>(mut svc: S, req: Request) -> Result<Response, S::Error>
 
 where
@@ -245,7 +246,6 @@ struct QuickSort;
 
 impl SortStrategy for QuickSort { fn sort(&self, v: &mut [i32]) { /* ... */ } }
 
-
 struct SorterBuilder<S: SortStrategy> { strategy: S }
 
 impl<S: SortStrategy> SorterBuilder<S> {
@@ -255,7 +255,6 @@ impl<S: SortStrategy> SorterBuilder<S> {
     fn sort(&self, v: &mut [i32]) { self.strategy.sort(v); }
 
 }
-
 
 // Composite + Visitor：树遍历
 
@@ -292,7 +291,6 @@ fn visit<V: Visitor>(v: &mut V, node: &Node) {
 
 struct OrderDto { id: u64, amount: u64 }
 
-
 // Repository
 
 trait OrderRepo {
@@ -300,7 +298,6 @@ trait OrderRepo {
     fn save(&self, dto: OrderDto) -> Result<(), String>;
 
 }
-
 
 // Builder
 
@@ -320,7 +317,6 @@ impl OrderBuilder {
 
 }
 
-
 // Factory：选择不同 Builder 变体
 
 enum OrderType { Standard, Premium }
@@ -336,7 +332,6 @@ fn create_builder(t: OrderType) -> OrderBuilder {
     }
 
 }
-
 
 // 组合调用：Factory → Builder → Repository
 
@@ -430,16 +425,13 @@ impl OrderBuilder {
 
 }
 
-
 // Factory：创建 Builder 或预配置订单
 
 trait OrderFactory { fn create_builder(&self) -> OrderBuilder; }
 
-
 // Repository：持久化
 
 trait OrderRepo { fn save(&mut self, o: Order) -> Result<u64, String>; }
-
 
 // 组合：Factory.create_builder().add_item(...).build()? → repo.save(order)?
 ```
@@ -453,9 +445,7 @@ trait OrderRepo { fn save(&mut self, o: Order) -> Result<u64, String>; }
 ```rust
 use std::sync::mpsc;
 
-
 trait Service { fn call(&self) -> i32; }
-
 
 struct Logging<S: Service>(S);
 
@@ -475,7 +465,6 @@ impl<S: Service> Service for Logging<S> {
 
 }
 
-
 trait Algo { fn run(&self) -> i32; }
 
 struct AlgoA;
@@ -486,7 +475,6 @@ struct AlgoB;
 
 impl Algo for AlgoB { fn run(&self) -> i32 { 2 } }
 
-
 struct ServiceWithStrategy<A: Algo> { algo: A }
 
 impl<A: Algo> Service for ServiceWithStrategy<A> {
@@ -494,7 +482,6 @@ impl<A: Algo> Service for ServiceWithStrategy<A> {
     fn call(&self) -> i32 { self.algo.run() }
 
 }
-
 
 // Observer：call 完成后发送事件
 
@@ -507,7 +494,6 @@ fn run_with_observer<S: Service>(s: &S, tx: &mpsc::Sender<i32>) -> i32 {
     r
 
 }
-
 
 // 组合：Logging(ServiceWithStrategy(AlgoB)) + Observer
 
@@ -529,7 +515,6 @@ fn run_with_observer<S: Service>(s: &S, tx: &mpsc::Sender<i32>) -> i32 {
 ```rust
 enum Node { Leaf(i32), Branch(Vec<Node>) }
 
-
 trait Visitor {
 
     fn visit_leaf(&mut self, n: &i32);
@@ -537,7 +522,6 @@ trait Visitor {
     fn visit_branch(&mut self, children: &[Node]);
 
 }
-
 
 struct SumVisitor { sum: i32 }
 
@@ -552,7 +536,6 @@ impl Visitor for SumVisitor {
     }
 
 }
-
 
 impl Node {
 
@@ -594,7 +577,6 @@ impl Node {
 
 }
 
-
 // 使用：let t = Node::Branch(vec![Node::Leaf(1), Node::Leaf(2)]);
 
 // let mut v = SumVisitor { sum: 0 }; t.accept(&mut v); assert_eq!(v.sum, 3);
@@ -623,13 +605,11 @@ fn handle_chain(handlers: &[Box<dyn Handler>], req: &Request) -> Response {
 
 }
 
-
 trait Handler {
 
     fn try_handle(&self, req: &Request) -> Option<Response>;
 
 }
-
 
 struct AuthHandler;
 
@@ -643,7 +623,6 @@ impl Handler for AuthHandler {
 
 }
 
-
 struct CommandHandler<C: Command> { cmd: C }
 
 impl<C: Command> Handler for CommandHandler<C> {
@@ -656,9 +635,7 @@ impl<C: Command> Handler for CommandHandler<C> {
 
 }
 
-
 trait Command { fn execute(&self, req: &Request) -> Response; }
-
 
 // 组合：handlers = [Auth, RateLimit, CommandHandler(PlaceOrderCmd)]
 

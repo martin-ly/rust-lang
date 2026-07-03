@@ -1,5 +1,7 @@
 # 知识图谱索引 {#知识图谱索引}
 
+> **EN**: Knowledge Graph Index
+> **Summary**: 知识图谱索引 Knowledge Graph Index.
 > **内容分级**: [核心级]
 >
 > **分级**: [A]

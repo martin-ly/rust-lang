@@ -1,5 +1,7 @@
 # Rust形式化生态思维导图 {#rust形式化生态思维导图}
 
+> **EN**: Formalization Ecology Mindmap
+> **Summary**: Rust形式化生态思维导图 Formalization Ecology Mindmap.
 > **概念族**: 形式化模块
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

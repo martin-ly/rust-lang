@@ -2,8 +2,12 @@
 //! Rust 1.97.0 stabilized features —— async programming
 //!
 //! 本文件展示与异步编程相关的 Rust 1.97.0 稳定特性。当前工具链为 Rust 1.96.0，
-//! 因此所有 1.97 新 API/行为均保留在注释中；可执行代码使用语义等价的 1.96 兼容实现。
+//! 因此所有 1.97 新行为均保留在注释中；可执行代码使用语义等价的 1.96 兼容实现。
 //! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。
+//!
+//! 注：本文件涉及的 1.97 变更（`pin!` 阻止隐式解引用强制、`must_use` lint 扩展、
+//! `cfg_target_has_atomic_equal_alignment`）均为编译器行为或 cfg 条件变更，
+//! 没有可直接切换的 runtime API，因此不采用 `#[cfg(nightly)]` 分支，保留垫片并更新注释。
 #![allow(clippy::incompatible_msrv)]
 
 use std::future::Future;
@@ -15,9 +19,9 @@ use thiserror::Error;
 /// # Rust 1.97 async feature demonstration
 ///
 /// 涉及特性：
-/// - `pin!` 宏阻止隐式解引用强制（Rust 1.97+）
-/// - `must_use` lint 扩展到 `Result<must_use_type, E>`（Rust 1.97+）
-/// - `cfg_target_has_atomic_equal_alignment`（Rust 1.97+）
+/// - `pin!` 宏阻止隐式解引用强制（Rust 1.97+；宏行为变更，无分支 API）
+/// - `must_use` lint 扩展到 `Result<must_use_type, E>`（Rust 1.97+；lint 变更，无 API）
+/// - `cfg_target_has_atomic_equal_alignment`（Rust 1.97+；cfg 条件，无运行时 API）
 pub struct Rust197AsyncFeatures;
 
 impl Rust197AsyncFeatures {

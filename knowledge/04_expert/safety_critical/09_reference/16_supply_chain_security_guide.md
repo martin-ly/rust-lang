@@ -1,5 +1,7 @@
 # 供应链安全指南
 
+> **EN**: Supply Chain Security Guide
+> **Summary**: 供应链安全指南 Supply Chain Security Guide.
 > **Bloom 层级**: 理解
 >
 > **受众**: [初学者] / [进阶]

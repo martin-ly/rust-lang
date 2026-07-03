@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Archive migration helper.
+归档迁移脚本：Archive migration helper.
 
 Moves legacy dirs into archive/ and rewrites Markdown links that pointed to them.
 Moves:

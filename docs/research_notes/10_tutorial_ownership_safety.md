@@ -1,5 +1,7 @@
 # 教程：所有权与内存安全 {#教程所有权与内存安全}
 
+> **EN**: Tutorial Ownership Safety
+> **Summary**: 教程 Tutorial Ownership Safety.
 > **概念族**: 教程
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -152,7 +154,6 @@ fn main() {
 
     // println!("{}", s);            // 错误! s不再有效
 
-
     let x = 5;                       // x是基本类型
 
     makes_copy(x);                   // 复制值
@@ -161,13 +162,11 @@ fn main() {
 
 }
 
-
 fn takes_ownership(s: String) {
 
     println!("{}", s);
 
 } // s在这里drop，内存释放
-
 
 fn makes_copy(i: i32) {
 
@@ -204,14 +203,11 @@ fn makes_copy(i: i32) {
 
     let s = String::from("hello"); // s进入作用域
 
-
     // 使用s
 
     println!("{}", s);
 
-
 } // s离开作用域，内存自动释放
-
 
 // println!("{}", s); // 错误! s已失效
 ```
@@ -236,7 +232,6 @@ fn makes_copy(i: i32) {
 │ cap: 5   │         └──────────────┘
 
 └──────────┘
-
 
 s离开作用域时:
 
@@ -265,7 +260,6 @@ let s1 = String::from("hello");
 
 let s2 = s1;  // s1的所有权移动到s2
 
-
 // println!("{}", s1); // 错误! s1已失效
 
 println!("{}", s2);    // OK
@@ -292,7 +286,6 @@ let s2 = s1;                    // 浅拷贝: 两个指针指向同一内存
 // s1和s2都离开作用域
 
 // 双重释放! 未定义行为!
-
 
 // Rust的解决方案: 移动
 
@@ -323,7 +316,6 @@ let y = x;        // 复制值
 
 println!("{}", x); // OK! x仍然有效
 
-
 // 同样适用于:
 
 // - 所有整数类型(u32, i64等)
@@ -352,13 +344,11 @@ struct Point {
 
 }
 
-
 let p1 = Point { x: 1, y: 2 };
 
 let p2 = p1;           // 复制
 
 println!("{}", p1.x);  // OK!
-
 
 // 注意: 包含非Copy类型的结构体不能实现Copy
 
@@ -395,7 +385,6 @@ fn calculate_length(s: String) -> (String, usize) {
 
 }
 
-
 let s1 = String::from("hello");
 
 let (s2, len) = calculate_length(s1);  // 繁琐!
@@ -409,7 +398,6 @@ fn calculate_length(s: &String) -> usize {
     s.len()  // 借用，不获取所有权
 
 }
-
 
 let s1 = String::from("hello");
 
@@ -431,13 +419,11 @@ let r2 = &s;
 
 println!("{} {}", r1, r2);  // OK
 
-
 // 规则2: 只能有一个可变借用
 
 let r1 = &mut s;
 
 // let r2 = &mut s;  // 错误! 不能同时有两个可变借用
-
 
 // 规则3: 不能同时有可变和不可变借用
 
@@ -455,7 +441,6 @@ println!("{}", r1);  // r1最后使用在这里
 ```rust
 let mut s = String::from("hello");
 
-
 {
 
     let r1 = &mut s;
@@ -463,7 +448,6 @@ let mut s = String::from("hello");
     r1.push_str(" world");
 
 } // r1在这里结束
-
 
 // 现在可以创建新的借用
 
@@ -492,7 +476,6 @@ fn dangle() -> &String {  // 错误! 返回悬垂引用
 
 }     // 返回的引用指向无效内存!
 
-
 // 编译错误:
 
 // error[E0106]: 缺少生命周期说明符
@@ -512,7 +495,6 @@ fn no_dangle() -> String {
     s  // 转移所有权
 
 }
-
 
 // 方案2: 返回切片(如果输入是引用)
 
@@ -539,13 +521,11 @@ fn first_word(s: &str) -> &str {
 
 let s = String::from("hello world");
 
-
 // &str: 字符串切片(借用)
 
 let hello = &s[0..5];    // "hello"
 
 let world = &s[6..11];   // "world"
-
 
 // 内存布局
 
@@ -588,7 +568,6 @@ fn process(data: Vec<u8>) -> Vec<u8> {
 
 }
 
-
 let data = vec![1, 2, 3];
 
 let processed = process(data);  // 转移所有权
@@ -615,7 +594,6 @@ fn analyze(data: &[u8]) -> Analysis {
 
 }
 
-
 let data = vec![1, 2, 3];
 
 let a1 = analyze(&data);  // 借用
@@ -639,7 +617,6 @@ fn normalize(data: &mut Vec<f64>) {
     }
 
 }
-
 
 let mut data = vec![1.0, 2.0, 3.0];
 
@@ -771,7 +748,6 @@ free(ptr);
 
 printf("%s", ptr);  // 悬垂指针！
 
-
 // 双重释放
 
 char* ptr2 = malloc(100);
@@ -779,7 +755,6 @@ char* ptr2 = malloc(100);
 free(ptr2);
 
 free(ptr2);  // 双重释放！
-
 
 // 内存泄漏
 
@@ -877,7 +852,6 @@ let s1 = String::from("hello");
 
 let s2 = s1;  // 所有权转移到s2
 
-
 // println!("{}", s1);  // 编译错误！s1已无效
 
 println!("{}", s2);     // OK，s2是现在的所有者
@@ -912,7 +886,6 @@ Move(s1, s2, v) 后:
 
 }  // s在这里自动释放，且只释放一次
 
-
 // 不可能再次释放s，因为s已经不存在了
 ```
 
@@ -933,7 +906,6 @@ Move(s1, s2, v) 后:
 ```rust
 let mut data = vec![1, 2, 3];
 
-
 // 可以同时有多个读者
 
 let r1 = &data;
@@ -942,11 +914,9 @@ let r2 = &data;
 
 println!("{} {}", r1[0], r2[0]);
 
-
 // 但不能同时有写者
 
 // let w = &mut data;  // 错误！r1, r2还在用
-
 
 // 写者独占
 
@@ -1031,7 +1001,6 @@ fn process(s: String) {
 
 } // s在这里释放
 
-
 fn main() {
 
     let s = String::from("hello");
@@ -1057,7 +1026,6 @@ fn create() -> String {
 
 }
 
-
 fn main() {
 
     let s = create();  // 获得所有权
@@ -1080,7 +1048,6 @@ fn print_length(s: &String) {
     println!("{}", s.len());
 
 } // 借用结束，但不释放
-
 
 fn main() {
 

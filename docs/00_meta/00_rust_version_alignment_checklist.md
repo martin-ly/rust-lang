@@ -1,4 +1,7 @@
 # 🦀 Rust 版本对齐检查表 {#rust-版本对齐检查表}
+
+> **EN**: Rust Version Alignment Checklist
+> **Summary**: 🦀 Rust 版本对齐检查表 Rust Version Alignment Checklist. (stub/archive redirect)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

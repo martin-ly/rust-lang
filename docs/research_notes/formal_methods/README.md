@@ -1,5 +1,7 @@
 # 🔬 形式化方法研究 {#形式化方法研究}
 
+> **EN**: Formal Methods Index
+> **Summary**: 🔬 形式化方法研究 Formal Methods Index. (stub/archive redirect)
 > **概念族**: 形式化方法总览
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 > **内容分级**: [归档级]

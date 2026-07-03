@@ -1,5 +1,7 @@
 # 可视化文档索引 {#可视化文档索引-1}
 
+> **EN**: Visualization Index
+> **Summary**: 可视化文档索引 Visualization Index. (stub/archive redirect)
 > **概念族**: 思维表征 / 可视化
 > **内容分级**: [归档级]
 >
@@ -238,11 +240,9 @@
 
 [████████████████░░] 87.5% → [████████████████████] 100%
 
-
 中优先级任务:
 
 [███░░░░░░░░░░░░░░░] 16.7% → [████████████████░░░░] 80%
-
 
 低优先级任务:
 
@@ -296,7 +296,6 @@ graph TB
 
     end
 
-
     subgraph "核心定理"
 
         T1["T-OW2 所有权唯一性"]
@@ -306,7 +305,6 @@ graph TB
         T3["T-TY3 类型安全"]
 
     end
-
 
     subgraph "应用保证"
 
@@ -318,20 +316,17 @@ graph TB
 
     end
 
-
     A1 --> T1
 
     A2 --> T2
 
     A3 --> T2
 
-
     T1 --> G1
 
     T2 --> G2
 
     T3 --> G3
-
 
     style A1 fill:#f9f
 
@@ -400,7 +395,6 @@ graph TB
 
 use std::collections::HashMap;
 
-
 fn visualize_performance_data(data: &[(String, f64)]) {
 
     let max_val = data.iter()
@@ -408,7 +402,6 @@ fn visualize_performance_data(data: &[(String, f64)]) {
         .map(|(_, v)| *v)
 
         .fold(0.0, f64::max);
-
 
     for (name, value) in data {
 
@@ -421,7 +414,6 @@ fn visualize_performance_data(data: &[(String, f64)]) {
     }
 
 }
-
 
 fn main() {
 
@@ -436,7 +428,6 @@ fn main() {
         ("HashMap::insert".to_string(), 28.3),
 
     ];
-
 
     visualize_performance_data(&perf_data);
 

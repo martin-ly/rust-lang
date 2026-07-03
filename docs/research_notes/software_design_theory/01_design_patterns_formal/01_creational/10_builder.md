@@ -1,5 +1,7 @@
 # Builder 形式化分析 {#builder-形式化分析}
 
+> **EN**: Builder
+> **Summary**: Builder 形式化分析 Builder.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -277,7 +279,6 @@ struct Config {
 
 }
 
-
 struct ConfigBuilder {
 
     host: Option<String>,
@@ -288,7 +289,6 @@ struct ConfigBuilder {
 
 }
 
-
 impl ConfigBuilder {
 
     fn new() -> Self {
@@ -296,7 +296,6 @@ impl ConfigBuilder {
         Self { host: None, port: None, timeout: None }
 
     }
-
 
     fn host(mut self, host: String) -> Self {
 
@@ -306,7 +305,6 @@ impl ConfigBuilder {
 
     }
 
-
     fn port(mut self, port: u16) -> Self {
 
         self.port = Some(port);
@@ -314,7 +312,6 @@ impl ConfigBuilder {
         self
 
     }
-
 
     fn build(self) -> Result<Config, String> {
 
@@ -331,7 +328,6 @@ impl ConfigBuilder {
     }
 
 }
-
 
 // 使用：链式调用，build 消费 self
 
@@ -364,7 +360,6 @@ fn main() -> Result<(), String> {
 ```rust
 use std::marker::PhantomData;
 
-
 struct Config {
 
     host: String,
@@ -375,7 +370,6 @@ struct Config {
 
 }
 
-
 // 类型状态 Builder：编译期强制顺序
 
 struct Empty;
@@ -383,7 +377,6 @@ struct Empty;
 struct HostSet;
 
 struct Complete;
-
 
 struct ConfigBuilder<State> {
 
@@ -396,7 +389,6 @@ struct ConfigBuilder<State> {
     _state: PhantomData<State>,
 
 }
-
 
 impl ConfigBuilder<Empty> {
 
@@ -418,7 +410,6 @@ impl ConfigBuilder<Empty> {
 
 }
 
-
 impl ConfigBuilder<HostSet> {
 
     fn port(self, port: u16) -> ConfigBuilder<Complete> {
@@ -432,7 +423,6 @@ impl ConfigBuilder<HostSet> {
     }
 
 }
-
 
 impl ConfigBuilder<Complete> {
 
@@ -451,7 +441,6 @@ impl ConfigBuilder<Complete> {
     }
 
 }
-
 
 fn main() {
 
@@ -632,7 +621,6 @@ ownership_model T2
 ```rust,no_run
 struct HttpRequest { url: String, headers: Vec<(String, String)>, body: Option<String> }
 
-
 struct HttpRequestBuilder {
 
     url: Option<String>,
@@ -642,7 +630,6 @@ struct HttpRequestBuilder {
     body: Option<String>,
 
 }
-
 
 impl HttpRequestBuilder {
 
@@ -691,7 +678,6 @@ impl HttpRequestBuilder {
     }
 
 }
-
 
 // 使用：链式构建，缺必填则 Err
 

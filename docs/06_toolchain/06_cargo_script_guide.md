@@ -1,5 +1,7 @@
 # Cargo Script / Frontmatter 指南 {#cargo-script-frontmatter-指南}
 
+> **EN**: Cargo Script
+> **Summary**: Frontmatter 指南 Cargo Script.
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
 > **状态**: Frontmatter 仍在 nightly 中稳定化进程中，尚未进入 stable。当前可用方式：`cargo +nightly -Zscript`。

@@ -1,5 +1,7 @@
 # Rust安全关键系统 - 常见问题与故障排除
 
+> **EN**: Faq And Troubleshooting
+> **Summary**: Rust安全关键系统 - 常见问题与故障排除 Faq And Troubleshooting.
 > **Bloom 层级**: 理解
 >
 > **受众**: [初学者] / [进阶]

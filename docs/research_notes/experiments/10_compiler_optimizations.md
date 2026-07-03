@@ -1,5 +1,7 @@
 # 编译器优化研究 {#编译器优化研究}
 
+> **EN**: Compiler Optimizations
+> **Summary**: 编译器优化研究 Compiler Optimizations.
 > **概念族**: 实验研究
 > **内容分级**: [归档级]
 >
@@ -266,7 +268,6 @@ fn add(a: i32, b: i32) -> i32 {
 
 }
 
-
 #[inline(never)]
 
 fn multiply(a: i32, b: i32) -> i32 {
@@ -274,7 +275,6 @@ fn multiply(a: i32, b: i32) -> i32 {
     a * b
 
 }
-
 
 fn test_inlining() {
 
@@ -365,11 +365,9 @@ fn compute_sum(n: u32) -> u64 {
 
 }
 
-
 // 基准测试
 
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-
 
 fn bench_compute_sum(c: &mut Criterion) {
 
@@ -380,7 +378,6 @@ fn bench_compute_sum(c: &mut Criterion) {
     });
 
 }
-
 
 criterion_group!(benches, bench_compute_sum);
 
@@ -400,7 +397,6 @@ fn add(a: i32, b: i32) -> i32 {
 
 }
 
-
 // 使用内联提示
 
 #[inline]
@@ -410,7 +406,6 @@ fn add_inline(a: i32, b: i32) -> i32 {
     a + b
 
 }
-
 
 // 强制内联
 
@@ -422,16 +417,13 @@ fn add_always_inline(a: i32, b: i32) -> i32 {
 
 }
 
-
 // 基准测试
 
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
-
 fn bench_add(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("add");
-
 
     group.bench_function("no_inline", |b| {
 
@@ -439,13 +431,11 @@ fn bench_add(c: &mut Criterion) {
 
     });
 
-
     group.bench_function("inline", |b| {
 
         b.iter(|| add_inline(black_box(10), black_box(20)))
 
     });
-
 
     group.bench_function("always_inline", |b| {
 
@@ -453,11 +443,9 @@ fn bench_add(c: &mut Criterion) {
 
     });
 
-
     group.finish();
 
 }
-
 
 criterion_group!(benches, bench_add);
 
@@ -485,7 +473,6 @@ fn sum_array_unoptimized(arr: &[i32]) -> i32 {
 
 }
 
-
 // 优化的循环（使用迭代器）
 
 fn sum_array_optimized(arr: &[i32]) -> i32 {
@@ -493,7 +480,6 @@ fn sum_array_optimized(arr: &[i32]) -> i32 {
     arr.iter().sum()
 
 }
-
 
 // 手动的循环展开
 
@@ -505,20 +491,17 @@ fn sum_array_unrolled(arr: &[i32]) -> i32 {
 
     let remainder = chunks.remainder();
 
-
     for chunk in chunks {
 
         sum += chunk[0] + chunk[1] + chunk[2] + chunk[3];
 
     }
 
-
     for &val in remainder {
 
         sum += val;
 
     }
-
 
     sum
 
@@ -540,13 +523,11 @@ fn dead_code_example() {
 
     let _unused = x + y;  // 可能被消除
 
-
     if false {
 
         println!("这段代码永远不会执行");  // 会被消除
 
     }
-
 
     #[allow(dead_code)]
 

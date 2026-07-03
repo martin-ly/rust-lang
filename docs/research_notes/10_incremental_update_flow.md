@@ -1,5 +1,7 @@
 # Rust 版本增量更新流程 {#rust-版本增量更新流程}
 
+> **EN**: Incremental Update Flow
+> **Summary**: Rust 版本增量更新流程 Incremental Update Flow.
 > **概念族**: 运维 / 更新日志
 > **内容分级**: [归档级]
 >
@@ -158,13 +160,11 @@
 
 // 形式化问题：类型推断算法的正确性
 
-
 fn lub_coercion_example() {
 
     // 1.93 前：某些函数项类型推断不正确
 
     // 1.93 后：LUB (Least Upper Bound) 计算修正
-
 
     let f = if true {
 
@@ -175,7 +175,6 @@ fn lub_coercion_example() {
         |x: i32| (x * 2) as i64  // fn(i32) -> i64
 
     };
-
 
     // 研究任务：
 
@@ -199,9 +198,7 @@ fn lub_coercion_example() {
 
 // 形式化问题：新实现是否保持语义等价
 
-
 use std::mem::MaybeUninit;
-
 
 fn performance_improvement_example() {
 
@@ -210,7 +207,6 @@ fn performance_improvement_example() {
     let mut buffer: [MaybeUninit<u8>; 1024] =
 
         unsafe { MaybeUninit::uninit().assume_init() };
-
 
     // 新 API：write_copy_of_slice
 
@@ -225,7 +221,6 @@ fn performance_improvement_example() {
         );
 
     }
-
 
     // 研究任务：
 
@@ -249,9 +244,7 @@ fn performance_improvement_example() {
 
 // 形式化问题：新 API 的类型安全保证
 
-
 use std::num::NonZeroU32;
-
 
 fn api_stabilization_example() {
 
@@ -259,13 +252,11 @@ fn api_stabilization_example() {
 
     // 假设新增了 NonZeroU32::div_ceil
 
-
     let a = NonZeroU32::new(10).unwrap();
 
     let b = NonZeroU32::new(3).unwrap();
 
     let result = a.get().div_ceil(b.get());  // 4
-
 
     // 研究任务：
 

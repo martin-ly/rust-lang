@@ -1,4 +1,7 @@
 # 研究笔记最佳实践 {#研究笔记最佳实践}
+
+> **EN**: Best Practices
+> **Summary**: 研究笔记最佳实践 Best Practices. (stub/archive redirect)
 >
 > **概念族**: 综合研究
 > **内容分级**: [归档级]

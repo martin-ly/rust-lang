@@ -23,7 +23,14 @@
 > [Generics](../02_intermediate/02_generics.md) ·
 > [Algebraic Data Types](../02_intermediate/01_traits.md)
 >
-> **主要来源**: · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**:
+>
+> · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> · [System F](https://en.wikipedia.org/wiki/System_F)
+> · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/)
+> · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > [TRPL: Ch3](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) ·
 > [TRPL: Ch6](https://doc.rust-lang.org/book/ch06-00-enums.html) ·

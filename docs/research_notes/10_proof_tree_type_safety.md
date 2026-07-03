@@ -1,5 +1,7 @@
 # 类型安全证明树 (Proof Tree: Type Safety) {#类型安全证明树-proof-tree-type-safety}
 
+> **EN**: Proof Tree: Type Safety
+> **Summary**: 类型安全证明树 Proof Tree: Type Safety.
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -170,7 +172,6 @@ Prove:
 
   Γ ⊢ e[v/x] : T₂
 
-
 Proof (结构归纳):
 
 - Base: e = x
@@ -179,13 +180,11 @@ Proof (结构归纳):
 
   ⊢ v : T₁ = T₂[x/T₁] ✓
 
-
 - Base: e = y ≠ x
 
   e[v/x] = y
 
   类型不变 ✓
-
 
 - Inductive: e = e₁ e₂
 
@@ -213,7 +212,6 @@ Prove:
 
   ⊢ eⱼ[绑定] : T'
 
-
 Proof:
 
 1. 模式 pⱼ 从 T 中提取绑定
@@ -239,18 +237,15 @@ fn type_safety_theorem() {
 
     let x = 5 + 3;  // → 8
 
-
     // Preservation: 求值后类型保持
 
     let y: i32 = if x > 0 { 1 } else { 0 };  // 始终 i32
-
 
     // 替换保持类型
 
     let f = |x: i32| -> i32 { x + 1 };
 
     let result = f(5);  // 类型: i32
-
 
     // 模式匹配保持类型
 
@@ -281,13 +276,11 @@ fn type_safety_theorem() {
 
         Γ ⊢ x : T
 
-
 [ABS]   Γ, x: T₁ ⊢ e : T₂
 
         ─────────────────
 
         Γ ⊢ λx: T₁.e : T₁ → T₂
-
 
 [APP]   Γ ⊢ e₁ : T₁ → T₂    Γ ⊢ e₂ : T₁
 
@@ -295,13 +288,11 @@ fn type_safety_theorem() {
 
         Γ ⊢ e₁ e₂ : T₂
 
-
 [REF]   Γ ⊢ e : T
 
         ──────────────
 
         Γ ⊢ &e : &T
-
 
 [MUT]   Γ ⊢ e : T
 

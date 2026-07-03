@@ -175,7 +175,7 @@ let are_equal = wasm_optimized_array_eq(&vec1, &vec2);
 - 迭代器比较: +15-25% 性能提升
 - 数据旋转: +30-35% 性能提升（使用 `rotate_right`）
 
-**相关文档**: [Rust 1.92.0 WASM 改进文档](../RUST_192_WASM_IMPROVEMENTS.md)
+**相关文档**: [Rust 1.92.0 WASM 改进文档](../rust_192_wasm_improvements.md)
 
 ### 减少内存分配
 
@@ -294,7 +294,7 @@ let mut pool: WasmObjectPool<String> = WasmObjectPool::new(10);
 - MaybeUninit 优化: +5% 内存管理性能
 - 对象池优化: 减少 30-50% 内存分配次数
 
-**相关文档**: [Rust 1.92.0 WASM 改进文档](../RUST_192_WASM_IMPROVEMENTS.md)
+**相关文档**: [Rust 1.92.0 WASM 改进文档](../rust_192_wasm_improvements.md)
 
 ---
 

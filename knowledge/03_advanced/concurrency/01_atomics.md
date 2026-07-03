@@ -1,5 +1,7 @@
 # Rust 原子操作 (Atomic Operations)
 
+> **EN**: Atomic Operations
+> **Summary**: Rust 原子操作 Atomic Operations. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/03_advanced/11_atomics_and_memory_ordering.md](../../../concept/03_advanced/11_atomics_and_memory_ordering.md)。
 > **历史版本存档**: [archive/knowledge/03_advanced/concurrency/01_atomics.md](../../../archive/knowledge/03_advanced/concurrency/01_atomics.md)
 >

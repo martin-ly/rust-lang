@@ -10,6 +10,8 @@
 >
 # DO-178C Rust合规路径
 
+> **EN**: Do 178c Rust Compliance Pathway
+> **Summary**: DO-178C Rust合规路径 Do 178c Rust Compliance Pathway. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 概述

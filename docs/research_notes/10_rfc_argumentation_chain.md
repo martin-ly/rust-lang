@@ -1,5 +1,7 @@
 # RFC 深度论证链索引 {#rfc-深度论证链索引}
 
+> **EN**: Rfc Argumentation Chain
+> **Summary**: RFC 深度论证链索引 Rfc Argumentation Chain.
 > **概念族**: 权威来源对齐 / RFC / 论证链
 > **内容分级**: [核心级]
 > **层级**: L0-L3

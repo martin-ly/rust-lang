@@ -1,5 +1,7 @@
 # Trait 系统
 
+> **EN**: Traits
+> **Summary**: Trait 系统 Traits. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/02_intermediate/01_traits.md](../../concept/02_intermediate/01_traits.md)。
 > **历史版本存档**: [archive/knowledge/02_intermediate/06_traits.md](../../archive/knowledge/02_intermediate/06_traits.md)
 >

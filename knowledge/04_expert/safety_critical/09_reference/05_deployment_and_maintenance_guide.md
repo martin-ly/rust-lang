@@ -9,6 +9,8 @@
 >
 # 部署与维护指南
 
+> **EN**: Deployment And Maintenance Guide
+> **Summary**: 部署与维护指南 Deployment And Maintenance Guide.
 > **Bloom 层级**: 理解
 
 ## 概述

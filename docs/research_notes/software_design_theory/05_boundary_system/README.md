@@ -1,5 +1,7 @@
 # 边界体系统一分析 {#边界体系统一分析}
 
+> **EN**: Boundary System Index
+> **Summary**: 边界体系统一分析 Boundary System Index. (stub/archive redirect)
 > **概念族**: 软件设计 / 边界系统
 > **内容分级**: [归档级]
 >

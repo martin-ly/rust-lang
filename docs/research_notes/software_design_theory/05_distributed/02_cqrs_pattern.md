@@ -1,5 +1,7 @@
 # CQRS 模式形式化定义 {#cqrs-模式形式化定义}
 
+> **EN**: Cqrs Pattern
+> **Summary**: CQRS 模式形式化定义 Cqrs Pattern. (stub/archive redirect)
 > **概念族**: 软件设计 / 分布式模式
 > **内容分级**: [归档级]
 >
@@ -194,7 +196,6 @@ pub struct CommandHandler<S, E> {
 
 }
 
-
 impl<S, E> CommandHandler<S, E> {
 
     pub async fn handle<C>(&mut self, cmd: C) -> Result<Vec<E>, CommandError>
@@ -217,7 +218,6 @@ impl<S, E> CommandHandler<S, E> {
 
 }
 
-
 // 查询端
 
 pub struct QueryHandler<S> {
@@ -225,7 +225,6 @@ pub struct QueryHandler<S> {
     read_model: Arc<RwLock<S>>,
 
 }
-
 
 impl<S> QueryHandler<S> {
 
@@ -245,7 +244,6 @@ impl<S> QueryHandler<S> {
 
 }
 
-
 // 投影同步器
 
 pub struct ProjectionSync<E, S> {
@@ -255,7 +253,6 @@ pub struct ProjectionSync<E, S> {
     read_model: Arc<RwLock<S>>,
 
 }
-
 
 impl<E, S> ProjectionSync<E, S> {
 

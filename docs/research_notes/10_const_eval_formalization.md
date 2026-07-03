@@ -1,5 +1,7 @@
 # 常量求值形式化 {#常量求值形式化}
 
+> **EN**: Const Eval Formalization
+> **Summary**: 常量求值形式化 Const Eval Formalization.
 > **概念族**: 综合研究
 > **内容分级**: [归档级]
 > **状态**: ✅ 已完成权威国际化来源对齐升级
@@ -76,7 +78,6 @@ Rust 的常量求值在编译期执行，允许在类型系统和常量定义中
 ```text
 Eval_const: Expr × Env → Value + Error
 
-
 Eval_const(e, env) =
 
   若 e 是纯表达式 → 求值结果
@@ -106,21 +107,17 @@ const fn allowed() {
 
     let x = 1 + 2;
 
-
     // ✅ 控制流
 
     if x > 0 { }
-
 
     // ✅ 匹配
 
     match x { _ => () }
 
-
     // ✅ 循环
 
     loop { break; }
-
 
     // ✅ 调用其他 const fn
 
@@ -142,16 +139,13 @@ const fn forbidden() {
 
     // let x = Box::new(42);
 
-
     // ❌ 可变静态变量
 
     // unsafe { STATIC_VAR = 42; }
 
-
     // ❌ 非 const fn 调用
 
     // non_const_fn();
-
 
     // ❌ 类型转换到裸指针（某些情况）
 
@@ -205,7 +199,6 @@ const fn forbidden() {
 ```text
 编译期求值流程:
 
-
 Rust 源码
 
     ↓
@@ -239,7 +232,6 @@ MIR (中级中间表示)
 
 ```rust,ignore
 #![feature(const_eval_select)]
-
 
 const fn with_const_eval_select<T>(x: T) -> T {
 

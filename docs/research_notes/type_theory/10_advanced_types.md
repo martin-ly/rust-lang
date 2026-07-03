@@ -1,5 +1,7 @@
 # 高级类型特性 {#高级类型特性}
 
+> **EN**: Advanced Types
+> **Summary**: 高级类型特性 Advanced Types. (stub/archive redirect)
 > **概念族**: 类型系统 / 高级类型
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 > **内容分级**: [归档级]
@@ -463,7 +465,6 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 ```text
 高级类型安全性证明树
 
-
   定义: Def 1.1–1.3 (GAT)、Def 2.1–2.3 (const)、Def 3.1–3.2 (受限依赖)
 
   Axiom: AT1 (GAT 推导)、AT2 (const 编译时常量)
@@ -532,11 +533,9 @@ trait Iterator {
 
     type Item<'a> where Self: 'a;
 
-
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 
 }
-
 
 struct MyIterator {
 
@@ -546,11 +545,9 @@ struct MyIterator {
 
 }
 
-
 impl Iterator for MyIterator {
 
     type Item<'a> = &'a i32 where Self: 'a;
-
 
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>> {
 
@@ -590,7 +587,6 @@ struct Array<T, const N: usize> {
 
 }
 
-
 impl<T, const N: usize> Array<T, N> {
 
     fn new() -> Self {
@@ -603,7 +599,6 @@ impl<T, const N: usize> Array<T, N> {
 
     }
 
-
     fn len(&self) -> usize {
 
         N
@@ -611,7 +606,6 @@ impl<T, const N: usize> Array<T, N> {
     }
 
 }
-
 
 fn main() {
 
@@ -639,16 +633,13 @@ trait Family {
 
 }
 
-
 struct VecFamily;
-
 
 impl Family for VecFamily {
 
     type Member<T> = Vec<T>;
 
 }
-
 
 fn use_family() {
 
@@ -674,13 +665,11 @@ fn process_array<const N: usize>(arr: [i32; N]) -> i32 {
 
 }
 
-
 fn use_const_generic() {
 
     let arr1 = [1, 2, 3];
 
     let arr2 = [1, 2, 3, 4, 5];
-
 
     let sum1 = process_array(arr1);  // N = 3
 
@@ -704,11 +693,9 @@ trait Iterator {
 
     type Item<'a> where Self: 'a;  // GAT with lifetime
 
-
     fn next(&mut self) -> Option<Self::Item<'_>>;
 
 }
-
 
 struct SliceIter<'a, T> {
 
@@ -718,11 +705,9 @@ struct SliceIter<'a, T> {
 
 }
 
-
 impl<'a, T> Iterator for SliceIter<'a, T> {
 
     type Item<'b> = &'b T where 'a: 'b;
-
 
     fn next(&mut self) -> Option<Self::Item<'_>> {
 
@@ -760,7 +745,6 @@ trait Functor {
 
     type Map<U>;  // GAT: 类型级函数
 
-
     fn map<U, F>(self, f: F) -> Self::Map<U>
 
     where
@@ -769,18 +753,15 @@ trait Functor {
 
 }
 
-
 struct OptionFunctor<T> {
 
     value: Option<T>,
 
 }
 
-
 impl<T> Functor for OptionFunctor<T> {
 
     type Map<U> = OptionFunctor<U>;
-
 
     fn map<U, F>(self, f: F) -> Self::Map<U>
 
@@ -818,7 +799,6 @@ struct Matrix<T, const ROWS: usize, const COLS: usize> {
 
 }
 
-
 impl<T, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
 
     fn new() -> Self
@@ -836,7 +816,6 @@ impl<T, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
         }
 
     }
-
 
     fn transpose(self) -> Matrix<T, COLS, ROWS> {
 
@@ -857,7 +836,6 @@ impl<T, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
     }
 
 }
-
 
 fn use_matrix() {
 
@@ -887,11 +865,9 @@ trait AsyncIterator {
 
         Self: 'a;
 
-
     async fn next(&mut self) -> Option<Self::Item<'_>>;
 
 }
-
 
 struct AsyncRange {
 
@@ -903,11 +879,9 @@ struct AsyncRange {
 
 }
 
-
 impl AsyncIterator for AsyncRange {
 
     type Item<'a> = u32 where Self: 'a;
-
 
     async fn next(&mut self) -> Option<Self::Item<'_>> {
 
@@ -951,16 +925,13 @@ trait Family {
 
 }
 
-
 struct VecFamily;
-
 
 impl Family for VecFamily {
 
     type Member<T> = Vec<T>;
 
 }
-
 
 fn use_family<F: Family>() -> F::Member<i32> {
 
@@ -1125,16 +1096,13 @@ trait Container {
 
 }
 
-
 struct MyContainer;
-
 
 impl Container for MyContainer {
 
     type Item<T> = MaybeUninit<T>;
 
 }
-
 
 // ✅ 1.93: 使用新的 MaybeUninit API
 

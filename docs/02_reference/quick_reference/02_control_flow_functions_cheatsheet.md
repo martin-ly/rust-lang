@@ -1,5 +1,7 @@
 # 🔄 Rust 控制流与函数速查卡 {#rust-控制流与函数速查卡}
 
+> **EN**: Control Flow Functions Cheatsheet
+> **Summary**: 🔄 Rust 控制流与函数速查卡 Control Flow Functions Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >

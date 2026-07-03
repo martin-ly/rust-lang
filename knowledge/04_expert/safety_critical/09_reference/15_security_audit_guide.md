@@ -1,5 +1,7 @@
 # 安全审计指南
 
+> **EN**: Security Audit Guide
+> **Summary**: 安全审计指南 Security Audit Guide.
 > **Bloom 层级**: 理解
 >
 > **受众**: [初学者] / [进阶]

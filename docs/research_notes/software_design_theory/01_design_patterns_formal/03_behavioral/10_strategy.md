@@ -1,5 +1,7 @@
 # Strategy 形式化分析 {#strategy-形式化分析}
 
+> **EN**: Strategy
+> **Summary**: Strategy 形式化分析 Strategy.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -237,7 +239,6 @@ trait Strategy {
 
 }
 
-
 struct SumStrategy;
 
 impl Strategy for SumStrategy {
@@ -245,7 +246,6 @@ impl Strategy for SumStrategy {
     fn execute(&self, data: &[i32]) -> i32 { data.iter().sum() }
 
 }
-
 
 struct MaxStrategy;
 
@@ -255,7 +255,6 @@ impl Strategy for MaxStrategy {
 
 }
 
-
 struct Context<S: Strategy> {
 
     strategy: S,
@@ -264,7 +263,6 @@ struct Context<S: Strategy> {
 
 }
 
-
 impl<S: Strategy> Context<S> {
 
     fn new(strategy: S, data: Vec<i32>) -> Self { Self { strategy, data } }
@@ -272,7 +270,6 @@ impl<S: Strategy> Context<S> {
     fn run(&self) -> i32 { self.strategy.execute(&self.data) }
 
 }
-
 
 // 编译期多态
 
@@ -297,7 +294,6 @@ trait PaymentStrategy {
 
 }
 
-
 struct CreditCard;
 
 impl PaymentStrategy for CreditCard {
@@ -305,7 +301,6 @@ impl PaymentStrategy for CreditCard {
     fn pay(&self, amount: f64) { println!("Credit card: ${}", amount); }
 
 }
-
 
 struct PayPal;
 
@@ -315,7 +310,6 @@ impl PaymentStrategy for PayPal {
 
 }
 
-
 struct ShoppingCart<'a> { strategy: &'a dyn PaymentStrategy }
 
 impl<'a> ShoppingCart<'a> {
@@ -323,7 +317,6 @@ impl<'a> ShoppingCart<'a> {
     fn checkout(&self, amount: f64) { self.strategy.pay(amount); }
 
 }
-
 
 fn main() {
 
@@ -482,7 +475,6 @@ trait CompressStrategy {
 
 }
 
-
 struct GzipStrategy;
 
 impl CompressStrategy for GzipStrategy {
@@ -490,7 +482,6 @@ impl CompressStrategy for GzipStrategy {
     fn compress(&self, data: &[u8]) -> Vec<u8> { data.to_vec() }
 
 }
-
 
 struct ZstdStrategy;
 
@@ -500,13 +491,11 @@ impl CompressStrategy for ZstdStrategy {
 
 }
 
-
 struct Exporter<S: CompressStrategy> {
 
     strategy: S,
 
 }
-
 
 impl<S: CompressStrategy> Exporter<S> {
 

@@ -5,6 +5,8 @@
 
 # Tokio Crate 架构解构 {#tokio-crate-架构解构}
 
+> **EN**: Tokio Architecture
+> **Summary**: Tokio Crate 架构解构 Tokio Architecture. (stub/archive redirect)
 > 本文内容已迁移至 [Tokio 深度解析](../../../../knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md)。
 >
 > 相关概念参考：

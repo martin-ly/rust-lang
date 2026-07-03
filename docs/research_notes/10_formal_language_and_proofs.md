@@ -1,5 +1,7 @@
 # 形式语言与形式证明 {#形式语言与形式证明}
 
+> **EN**: Formal Language And Proofs
+> **Summary**: 形式语言与形式证明 Formal Language And Proofs. (stub/archive redirect)
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 >

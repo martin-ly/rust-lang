@@ -1,5 +1,7 @@
 # Rust 知识中心
 
+> **EN**: Index
+> **Summary**: Rust 知识中心 Index.
 > **Bloom 层级**: 理解
 > > **Rust 版本**: 1.95.0 (Edition 2024)
 > **更新策略**: 跟随官方稳定版，每版本更新

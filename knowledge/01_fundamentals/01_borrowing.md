@@ -1,5 +1,7 @@
 # Rust 借用与引用 (Borrowing and References)
 
+> **EN**: Borrowing and References
+> **Summary**: Rust 借用与引用 Borrowing and References. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/01_foundation/02_borrowing.md](../../concept/01_foundation/02_borrowing.md)。
 > **历史版本存档**: [archive/knowledge/01_fundamentals/01_borrowing.md](../../archive/knowledge/01_fundamentals/01_borrowing.md)
 >

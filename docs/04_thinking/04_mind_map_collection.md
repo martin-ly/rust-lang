@@ -1,5 +1,7 @@
 # Rust 思维导图集合 {#rust-思维导图集合}
 
+> **EN**: Mind Map Collection
+> **Summary**: Rust 思维导图集合 Mind Map Collection. (stub/archive redirect)
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
 > **创建日期**: 2025-12-11

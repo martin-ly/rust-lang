@@ -18,6 +18,8 @@
 
 # vector Crate 架构解构 {#vector-crate-架构解构}
 
+> **EN**: Vector Architecture
+> **Summary**: vector Crate 架构解构 Vector Architecture.
 > **最后更新**: 2026-06-29
 >
 > **内容分级**: [归档级]

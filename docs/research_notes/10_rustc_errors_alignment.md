@@ -1,5 +1,7 @@
 # Rustc 错误码与反例边界对齐索引 {#rustc-错误码与反例边界对齐索引}
 
+> **EN**: Rustc Errors Alignment
+> **Summary**: Rustc 错误码与反例边界对齐索引 Rustc Errors Alignment.
 > **概念族**: 权威来源对齐 / rustc 错误码
 > **内容分级**: [核心级]
 > **层级**: L6

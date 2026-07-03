@@ -1,8 +1,10 @@
 //! Rust 1.97 稳定特性 —— 控制流与函数
 //!
 //! 本模块演示 Rust 1.97 中稳定化的控制流/函数相关 API。
-//! 实际代码使用等价的 Rust 1.96 兼容实现；1.97 原生调用以注释保留。
+//! 实际代码使用等价的 Rust 1.96 兼容实现；1.97 原生调用以 `#[cfg(nightly)]`
+//! 分支保留，可通过 `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 #![allow(clippy::incompatible_msrv)]
+#![allow(unexpected_cfgs)]
 
 use std::hash::BuildHasher;
 
@@ -15,7 +17,7 @@ pub struct ImportantToken;
 ///
 /// 涉及特性：
 /// - `must_use` lint 扩展：`Result<#[must_use] T, E>` / `ControlFlow<B, C>`
-///   也会触发未使用警告
+///   也会触发未使用警告（编译器行为变更，无对应运行时 API）
 /// - `BuildHasherDefault::new` const 稳定
 /// - `ptr::fn_addr_eq`
 pub struct Rust197ControlFlowFeatures;
@@ -41,9 +43,15 @@ impl Rust197ControlFlowFeatures {
     }
 
     /// 构造默认哈希器
+    #[cfg(nightly)]
+    pub const fn build_hasher_default_new()
+    -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
+        std::hash::BuildHasherDefault::new()
+    }
+
+    #[cfg(not(nightly))]
     pub fn build_hasher_default_new()
     -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
-        // 1.97+: const fn BuildHasherDefault::new()
         std::hash::BuildHasherDefault::new()
     }
 
@@ -56,8 +64,13 @@ impl Rust197ControlFlowFeatures {
     }
 
     /// 可移植的函数指针地址比较
+    #[cfg(nightly)]
     pub fn fn_addr_eq(f: fn(), g: fn()) -> bool {
-        // 1.97+: std::ptr::fn_addr_eq(f, g)
+        std::ptr::fn_addr_eq(f, g)
+    }
+
+    #[cfg(not(nightly))]
+    pub fn fn_addr_eq(f: fn(), g: fn()) -> bool {
         f as usize == g as usize
     }
 }

@@ -1,5 +1,7 @@
 # 学习路径与导航 {#学习路径与导航}
 
+> **EN**: Learning Index
+> **Summary**: 学习路径与导航 Learning Index.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
 >

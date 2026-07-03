@@ -1,5 +1,7 @@
 # 性能优化与测试质量权威来源对齐矩阵 {#性能优化与测试质量权威来源对齐矩阵}
 
+> **EN**: Performance And Testing Alignment
+> **Summary**: 性能优化与测试质量权威来源对齐矩阵 Performance And Testing Alignment.
 > **概念族**: 权威来源对齐 / 性能 / 测试
 > **内容分级**: [核心级]
 > **层级**: L0-L5

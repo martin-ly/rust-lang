@@ -8,6 +8,8 @@
 
 # Ratatui Crate 架构解构 {#ratatui-crate-架构解构}
 
+> **EN**: Ratatui Architecture
+> **Summary**: Ratatui Crate 架构解构 Ratatui Architecture.
 >
 > **最后更新**: 2026-06-09
 > **概念族**: 软件设计 / Crate 架构
@@ -50,7 +52,6 @@ use ratatui::{
 
 };
 
-
 fn ui(frame: &mut Frame) {
 
     let block = Block::default().title("Ratatui").borders(Borders::ALL);
@@ -60,7 +61,6 @@ fn ui(frame: &mut Frame) {
     frame.render_widget(paragraph, frame.area());
 
 }
-
 
 fn main() -> std::io::Result<()> {
 
@@ -102,7 +102,6 @@ graph LR
 
     end
 
-
     subgraph App["应用层"]
 
         STATE[App State<br/>用户定义]
@@ -110,7 +109,6 @@ graph LR
         UPDATE["update(state, event)"]
 
     end
-
 
     subgraph Ratatui["Ratatui 核心"]
 
@@ -126,7 +124,6 @@ graph LR
 
     end
 
-
     subgraph Backend["Backend 层"]
 
         DRAW[draw_batch<br/>终端转义序列]
@@ -134,7 +131,6 @@ graph LR
         FLUSH[stdout.flush]
 
     end
-
 
     CROSST --> EVENT
 
@@ -175,7 +171,6 @@ pub struct Buffer {
     content: Vec<Cell>,   // 扁平化的二维网格
 
 }
-
 
 pub struct Cell {
 
@@ -221,7 +216,6 @@ pub trait Widget {
 
 }
 
-
 // 实现示例：Block（边框容器）
 
 impl Widget for Block<'_> {
@@ -261,13 +255,11 @@ pub trait StatefulWidget {
 
 }
 
-
 // 使用示例
 
 let mut list_state = ListState::default();
 
 list_state.select(Some(2));
-
 
 let list = List::new(items).block(Block::default().title("Menu"));
 
@@ -307,7 +299,6 @@ let layout = Layout::default()
     ])
 
     .split(frame.area());
-
 
 // layout[0], layout[1], layout[2], layout[3] 是互不重叠的 Rect
 ```
@@ -349,18 +340,15 @@ impl Terminal {
 
         f(&mut frame);
 
-
         // 2. 计算当前 Buffer 与上一帧 Buffer 的差异
 
         let diff = self.current_buffer.diff(&self.last_buffer);
-
 
         // 3. 仅输出差异区域的终端转义序列
 
         self.backend.draw(diff.into_iter())?;
 
         self.backend.flush()?;
-
 
         // 4. 交换 buffer
 
@@ -403,7 +391,6 @@ pub trait Backend {
     fn draw<'a, I>(&mut self, content: I) -> io::Result<()>
 
     where I: Iterator<Item = (u16, u16, &'a Cell)>;
-
 
     fn hide_cursor(&mut self) -> io::Result<()>;
 
@@ -451,7 +438,6 @@ fn test_ui_renders_correctly() {
 
     let mut terminal = Terminal::new(backend).unwrap();
 
-
     terminal.draw(|f| {
 
         let block = Block::default().title("Test").borders(Borders::ALL);
@@ -459,7 +445,6 @@ fn test_ui_renders_correctly() {
         f.render_widget(block, f.area());
 
     }).unwrap();
-
 
     let expected = Buffer::with_lines(vec![
 
@@ -502,7 +487,6 @@ Ratatui 本身不提供事件循环，但与 Tokio / `crossterm` 的异步事件
 use tokio::time::{interval, Duration};
 
 use crossterm::event::{Event, KeyCode};
-
 
 loop {
 

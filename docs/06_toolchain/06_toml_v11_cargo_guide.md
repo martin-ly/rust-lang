@@ -1,5 +1,7 @@
 # Cargo 与 TOML v1.1 新特性指南 {#cargo-与-toml-v11-新特性指南}
 
+> **EN**: TOML V11 Cargo Guide
+> **Summary**: Cargo 与 TOML v1.1 新特性指南 TOML V11 Cargo Guide.
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
 >

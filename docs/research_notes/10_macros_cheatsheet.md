@@ -1,4 +1,7 @@
 # 宏速查卡 {#宏速查卡}
+
+> **EN**: Macros Cheatsheet
+> **Summary**: 宏速查卡 Macros Cheatsheet. (stub/archive redirect)
 >
 > **概念族**: 速查卡
 > **内容分级**: [归档级]

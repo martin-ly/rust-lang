@@ -98,8 +98,8 @@
   - 异步流性能基准测试 (`async_stream_benchmarks`)
   - 异步任务管理器 (`async_task_manager`)
   - 异步缓存系统 (`async_cache_system`)
-- 📚 **新增文档**: [Rust 1.93.0 异步改进文档](docs/RUST_192_ASYNC_IMPROVEMENTS.md) ⭐ NEW!
-- 📚 **历史文档**: [Rust 1.91 异步改进文档](docs/RUST_191_ASYNC_IMPROVEMENTS.md) (历史参考，已更新至 1.92.0)
+- 📚 **新增文档**: [Rust 1.93.0 异步改进文档](docs/rust_192_async_improvements.md) ⭐ NEW!
+- 📚 **历史文档**: [Rust 1.91 异步改进文档](docs/rust_191_async_improvements.md) (历史参考，已更新至 1.92.0)
 - 💻 **新增示例**: [Rust 1.93.0 特性演示示例](examples/rust_192_features_demo.rs) ⭐ NEW!
 - 💻 **历史示例**: [Rust 1.91 特性演示示例](examples/rust_191_features_demo.rs) (历史参考，已更新至 1.92.0)
 - 🧪 **新增测试**: [Rust 1.93.0 综合测试套件](tests/rust_192_comprehensive_tests.rs) ⭐ NEW!
@@ -786,7 +786,7 @@ cargo run --example ultimate_async_theory_practice_2025
 - 启动：
 
   ```bash
-  docker compose -f deployment/docker-compose.observability.yml up -d
+  docker compose -f deployment/docker_compose_observability.yml up -d
   # Prometheus: http://localhost:9090  Grafana: http://localhost:3000 (admin/admin)
   ```
 
@@ -982,7 +982,7 @@ kubectl get pods -n rust-async-190
 
 ### 项目文档
 
-- **[项目最佳实践指南](../../docs/05_guides/BEST_PRACTICES.md)** - 代码质量、性能优化、测试指南
+- **[项目最佳实践指南](../../docs/05_guides/best_practices.md)** - 代码质量、性能优化、测试指南
 - **[性能调优指南](../../docs/PERFORMANCE_TUNING_GUIDE.md)** - 完整的性能调优指南
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解

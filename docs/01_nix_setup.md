@@ -1,4 +1,7 @@
 # Nix 设置指南 {#nix-设置指南}
+
+> **EN**: Nix Setup
+> **Summary**: Nix 设置指南 Nix Setup.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]

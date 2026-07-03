@@ -1,5 +1,7 @@
 # 43 种完全模型索引 {#43-种完全模型索引}
 
+> **EN**: Complete 43 Catalog
+> **Summary**: 43 种完全模型索引 Complete 43 Catalog. (stub/archive redirect)
 > **概念族**: 软件设计 / 工作流模式
 > **内容分级**: [归档级]
 >
@@ -174,11 +176,9 @@
 
 pub struct OrderItem { pub id: u64, pub amount: u64 }
 
-
 #[derive(PartialEq)]
 
 pub enum OrderStatus { Draft, Submitted, Shipped }
-
 
 pub struct Order {
 
@@ -189,7 +189,6 @@ pub struct Order {
     status: OrderStatus,
 
 }
-
 
 impl Order {
 
@@ -233,7 +232,6 @@ trait Repository<T> {
 
 }
 
-
 pub struct UnitOfWork<T> {
 
     new_entities: Vec<T>,
@@ -241,7 +239,6 @@ pub struct UnitOfWork<T> {
     dirty_entities: Vec<T>,
 
 }
-
 
 impl<T> UnitOfWork<T> {
 
@@ -275,7 +272,6 @@ impl<T> UnitOfWork<T> {
 
 struct UserEntity { id: u64, name: String, email: String }
 
-
 // 假设 DbRow 为数据库行抽象
 
 impl From<(u64, String, String)> for UserEntity {
@@ -306,7 +302,6 @@ impl From<UserEntity> for (u64, String, String) {
 
 pub enum Currency { USD, EUR }
 
-
 #[derive(Clone, PartialEq, Eq)]
 
 pub struct Money {
@@ -316,7 +311,6 @@ pub struct Money {
     currency: Currency,
 
 }
-
 
 impl Money {
 
@@ -346,11 +340,9 @@ use std::collections::HashMap;
 
 use std::any::{TypeId, Any};
 
-
 type ServiceMap = HashMap<TypeId, Box<dyn Any + Send>>;
 
 static REGISTRY: OnceLock<Mutex<ServiceMap>> = OnceLock::new();
-
 
 fn register<T: Send + 'static>(service: T) {
 
@@ -376,13 +368,11 @@ use std::collections::HashMap;
 
 use std::sync::Arc;
 
-
 pub struct IdentityMap<T> {
 
     map: HashMap<u64, Arc<T>>,
 
 }
-
 
 impl<T> IdentityMap<T> {
 
@@ -405,7 +395,6 @@ pub struct OrderService {
     repo: Box<dyn Repository<Order>>,
 
 }
-
 
 impl OrderService {
 
@@ -436,7 +425,6 @@ trait Repository<T> {
     fn save(&mut self, entity: T) -> Result<(), String>;
 
 }
-
 
 struct UserRepository { /* 内部持 Connection 等 */ }
 
@@ -478,7 +466,6 @@ pub struct UserDto {
 
 enum Event { Created { id: u64 }, Updated { name: String } }
 
-
 struct Aggregate { id: u64, name: String }
 
 impl Aggregate {
@@ -517,7 +504,6 @@ trait Specification<T> {
 
 }
 
-
 struct AndSpec<A, B>(A, B);
 
 impl<T, A: Specification<T>, B: Specification<T>> Specification<T> for AndSpec<A, B> {
@@ -545,7 +531,6 @@ pub struct UserGateway {
     // 内部持 Connection 等；实际项目用 sqlx/diesel；Connection 为 trait 抽象
 
 }
-
 
 impl UserGateway {
 
@@ -580,7 +565,6 @@ pub struct User {
     pub version: u64,  // 乐观锁版本
 
 }
-
 
 trait Connection {
 
@@ -633,7 +617,6 @@ pub trait PaymentGateway: Send + Sync {
     fn charge(&self, amount: u64, token: &str) -> Result<ChargeId, String>;
 
 }
-
 
 pub struct StripeGateway { /* 持有 HTTP 客户端 */ }
 
@@ -705,7 +688,6 @@ pub struct Router {
 
 }
 
-
 impl Router {
 
     pub fn route(&self, path: &str) -> String {
@@ -744,7 +726,6 @@ pub struct OrderBatchRequest {
 
 }
 
-
 #[derive(serde::Serialize, serde::Deserialize)]
 
 pub struct OrderBatchResponse {
@@ -752,7 +733,6 @@ pub struct OrderBatchResponse {
     pub orders: Vec<OrderDto>,
 
 }
-
 
 pub async fn handle_order_batch(req: OrderBatchRequest) -> OrderBatchResponse {
 
@@ -774,7 +754,6 @@ pub async fn handle_order_batch(req: OrderBatchRequest) -> OrderBatchResponse {
 ```rust
 use std::sync::OnceLock;
 
-
 // 延迟加载：首次访问时加载
 
 pub struct LazyResource {
@@ -782,7 +761,6 @@ pub struct LazyResource {
     loaded: OnceLock<String>,
 
 }
-
 
 impl LazyResource {
 
@@ -794,9 +772,7 @@ impl LazyResource {
 
 }
 
-
 fn expensive_load() -> String { "data".to_string() }
-
 
 // 或 Option + 闭包：load_on_first_access
 
@@ -834,13 +810,11 @@ pub trait Storage: Send + Sync {
 
 }
 
-
 pub struct App {
 
     storage: Box<dyn Storage>,
 
 }
-
 
 impl App {
 
@@ -874,7 +848,6 @@ pub struct Entity {
     pub version: u64,
 
 }
-
 
 pub fn update_optimistic(
 

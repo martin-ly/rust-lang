@@ -1,5 +1,7 @@
 # 分布式系统设计模式形式化定义 {#分布式系统设计模式形式化定义}
 
+> **EN**: Distributed Index
+> **Summary**: 分布式系统设计模式形式化定义 Distributed Index. (stub/archive redirect)
 > **概念族**: 软件设计 / 分布式模式
 > **内容分级**: [归档级]
 >

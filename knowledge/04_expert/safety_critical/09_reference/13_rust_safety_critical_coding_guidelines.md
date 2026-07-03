@@ -11,6 +11,8 @@
 >
 # Rust安全关键编码规范
 
+> **EN**: Rust Safety Critical Coding Guidelines
+> **Summary**: Rust安全关键编码规范 Rust Safety Critical Coding Guidelines. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 概述

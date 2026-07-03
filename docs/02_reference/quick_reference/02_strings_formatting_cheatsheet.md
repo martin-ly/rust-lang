@@ -1,5 +1,7 @@
 # 📝 Rust 字符串与格式化速查卡 {#rust-字符串与格式化速查卡}
 
+> **EN**: Strings Formatting Cheatsheet
+> **Summary**: 📝 Rust 字符串与格式化速查卡 Strings Formatting Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >
@@ -455,7 +457,7 @@ writeln!(s, "Line 2").unwrap();
 ### 对齐和填充 {#对齐和填充}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
-> **扩展**: 内存对齐见 [ALIGNMENT_GUIDE](../ALIGNMENT_GUIDE.md)；此处为**格式化**对齐（文本排版）。
+> **扩展**: 内存对齐见 [ALIGNMENT_GUIDE](../alignment_guide.md)；此处为**格式化**对齐（文本排版）。
 
 ```rust
 let value = 42;

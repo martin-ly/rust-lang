@@ -1,5 +1,7 @@
 # 学习路径规划文档 {#学习路径规划文档}
 
+> **EN**: Learning Path Planning
+> **Summary**: 学习路径规划文档 Learning Path Planning. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L1-L2 (记忆/理解)
 >

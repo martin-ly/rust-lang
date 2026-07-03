@@ -11,6 +11,8 @@
 >
 # 教育与培训路线图
 
+> **EN**: Education And Training Roadmap
+> **Summary**: 教育与培训路线图 Education And Training Roadmap. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 概述

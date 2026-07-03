@@ -1,5 +1,7 @@
 # 研究笔记系统维护指南 {#研究笔记系统维护指南}
 
+> **EN**: Maintenance Guide
+> **Summary**: 研究笔记系统维护指南 Maintenance Guide.
 > **概念族**: 方法论 / 工具 / 指南
 > **内容分级**: [归档级]
 >
@@ -450,7 +452,6 @@ cargo check --examples
 # 统计文档数量 {#统计文档数量}
 
 find docs/research_notes -name "*.md" | wc -l
-
 
 # 统计代码行数 {#统计代码行数}
 

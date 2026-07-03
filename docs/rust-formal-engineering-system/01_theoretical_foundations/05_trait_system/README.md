@@ -1,5 +1,7 @@
 # Trait 系统理论 {#trait-系统理论}
 
+> **EN**: Trait System Index
+> **Summary**: Trait 系统理论 Trait System Index. (stub/archive redirect)
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20

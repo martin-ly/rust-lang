@@ -1,5 +1,7 @@
 # 定理与证明策略汇编 {#定理与证明策略汇编}
 
+> **EN**: Theorems And Proof Strategies
+> **Summary**: 定理与证明策略汇编 Theorems And Proof Strategies.
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 >
@@ -148,7 +150,6 @@ pre: owns(x, v)
 
 post: owns(y, v) ∧ ¬valid(x)
 
-
 分析:
 
 - x失去所有权，变为Moved状态
@@ -167,7 +168,6 @@ pre: owns(x, v)
 
 post: owns(x, v) ∧ owns(y, v')
 
-
 注意: Copy创建的是新值v'，不是共享v
 
 因此不涉及唯一性违反
@@ -179,7 +179,6 @@ post: owns(x, v) ∧ owns(y, v')
 pre: owns(x, v)
 
 post: v被释放，x变为Dropped
-
 
 分析: v不再存在，唯一性自然保持
 ```
@@ -354,16 +353,13 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ```
 对类型推导进行结构归纳:
 
-
 情况 1: e是值 (整数、布尔、函数)
 
   → 直接满足
 
-
 情况 2: e是变量
 
   → 假设上下文已定义
-
 
 情况 3: e = e₁ + e₂
 
@@ -372,7 +368,6 @@ BorrowCheck(P) = OK → DataRaceFree(P)
   → e₁和e₂都可以求值
 
   → 因此e可以求值
-
 
 情况 4: e = (λx.e₁) e₂
 
@@ -393,18 +388,15 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ```
 对求值规则进行案例分析:
 
-
 情况 1: β归约 (λx.e₁) v₂ → [v₂/x]e₁
 
   → 使用替换引理
 
   → 替换保持类型
 
-
 情况 2: 算术求值 n₁ + n₂ → n₃
 
   → 结果仍是整数
-
 
 情况 3: 条件求值 if true e₂ e₃ → e₂
 

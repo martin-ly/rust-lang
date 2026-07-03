@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **本节关键术语**: 错误处理 (Error Handling) · Result · Option · 传播运算符 (? ) · 模式匹配（Pattern Matching）错误 (Match on Result) — [完整对照表](../00_meta/terminology_glossary.md)
@@ -22,7 +24,16 @@
 
 ---
 
-> **来源**: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [std::result::Result](https://doc.rust-lang.org/std/result/enum.Result.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+>
+> [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
+> [std::result::Result](https://doc.rust-lang.org/std/result/enum.Result.html) ·
+> [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [System F](https://en.wikipedia.org/wiki/System_F) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust By Example](https://doc.rust-lang.org/rust-by-example/error.html) ·
 > [std::result](https://doc.rust-lang.org/std/result/index.html) ·
 > [std::option](https://doc.rust-lang.org/std/option/index.html) ·

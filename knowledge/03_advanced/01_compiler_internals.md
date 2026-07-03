@@ -1,3 +1,7 @@
+# Compiler Internals
+
+> **EN**: Compiler Internals
+> **Summary**: Rust 编译器内部原理与 MIR 优化边界测试 Rust compiler internals and MIR optimization boundary tests.
 > **Bloom 层级**: 分析 → 评价
 
 ### 边界测试：MIR 优化与 unsafe 代码的语义保留（运行时 UB）

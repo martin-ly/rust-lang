@@ -1,4 +1,7 @@
 # The Rustonomicon 内容对齐 {#the-rustonomicon-内容对齐}
+
+> **EN**: Rustnomicon Alignment
+> **Summary**: The Rustonomicon 内容对齐 Rustnomicon Alignment.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

@@ -1,5 +1,7 @@
 # Cargo 基础
 
+> **EN**: Cargo Basics
+> **Summary**: Cargo 基础 Cargo Basics.
 > **Bloom 层级**: 理解
 > **📌 简介**: Cargo 是 Rust 的官方构建系统和包管理器，负责项目创建、依赖解析、编译、测试和发布。掌握 Cargo 是高效 Rust 开发的基石——它不仅管理代码，还管理整个项目生命周期。
 >

@@ -1,5 +1,7 @@
 # Chain of Responsibility 形式化分析 {#chain-of-responsibility-形式化分析}
 
+> **EN**: Chain Of Responsibility
+> **Summary**: Chain of Responsibility 形式化分析 Chain Of Responsibility.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -248,7 +250,6 @@ Chain 为纯 Safe；`Option<Box<Handler>>` 链式委托，无 `unsafe`。
 ```rust
 type Request = String;
 
-
 struct Handler {
 
     can_handle: fn(&Request) -> bool,
@@ -256,7 +257,6 @@ struct Handler {
     next: Option<Box<Handler>>,
 
 }
-
 
 impl Handler {
 
@@ -281,7 +281,6 @@ impl Handler {
     }
 
 }
-
 
 // 构建链：h1 -> h2 -> None
 
@@ -324,7 +323,6 @@ trait Handler {
 
 }
 
-
 struct ConcreteHandler { name: String, next: Option<Box<dyn Handler>> }
 
 impl Handler for ConcreteHandler {
@@ -344,7 +342,6 @@ impl Handler for ConcreteHandler {
     fn set_next(&mut self, next: Box<dyn Handler>) { self.next = Some(next); }
 
 }
-
 
 fn main() {
 
@@ -523,13 +520,11 @@ borrow_checker_proof
 ```rust
 type Request = (String, Vec<String>);  // (path, headers)
 
-
 struct LogHandler { next: Option<Box<AuthHandler>> }
 
 struct AuthHandler { next: Option<Box<EndHandler>> }
 
 struct EndHandler;
-
 
 impl LogHandler {
 
@@ -542,7 +537,6 @@ impl LogHandler {
     }
 
 }
-
 
 impl AuthHandler {
 
@@ -562,7 +556,6 @@ impl AuthHandler {
 
 }
 
-
 impl EndHandler {
 
     fn handle(&self, _req: &Request) -> Option<String> {
@@ -572,7 +565,6 @@ impl EndHandler {
     }
 
 }
-
 
 // 链：Log → Auth → End；请求沿链传递
 

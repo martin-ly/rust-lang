@@ -22,6 +22,8 @@
 
 # mio Crate 架构解构 {#mio-crate-架构解构}
 
+> **EN**: Mio Architecture
+> **Summary**: mio Crate 架构解构 Mio Architecture. (stub/archive redirect)
 >
 > **最后更新**: 2026-06-09
 > **内容分级**: [归档级]
@@ -59,18 +61,15 @@ use mio::{Events, Interest, Poll, Token};
 
 use mio::net::TcpListener;
 
-
 let mut poll = Poll::new()?;
 
 let mut listener = TcpListener::bind("127.0.0.1:8080".parse()?)?;
-
 
 // 注册对可读事件的兴趣
 
 poll.registry()
 
     .register(&mut listener, Token(0), Interest::READABLE)?;
-
 
 let mut events = Events::with_capacity(1024);
 
@@ -120,7 +119,6 @@ graph TB
 
     end
 
-
     subgraph Mio["mio 核心层"]
 
         POLL[Poll::poll]
@@ -133,7 +131,6 @@ graph TB
 
     end
 
-
     subgraph OS["操作系统内核"]
 
         EP[epoll / kqueue / IOCP]
@@ -141,7 +138,6 @@ graph TB
         SOCK[socket / fd / handle]
 
     end
-
 
     FUT --> |"注册兴趣"| REG
 
@@ -205,7 +201,6 @@ mio 的统一策略：
 
 pub struct Token(pub usize);
 
-
 // 使用示例：将 Token 映射到运行时对象
 
 struct Server {
@@ -215,7 +210,6 @@ struct Server {
     clients: HashMap<Token, TcpStream>, // Token(1..N)
 
 }
-
 
 impl Server {
 
@@ -256,7 +250,6 @@ impl Server {
 
 pub struct Interest(u8);
 
-
 impl Interest {
 
     pub const READABLE: Interest = Interest(0b001);
@@ -267,7 +260,6 @@ impl Interest {
 
     pub const LIO: Interest = Interest(0b1000);     // 平台特定
 
-
     /// 编译期组合：可读 OR 可写
 
     pub const fn add(self, other: Interest) -> Interest {
@@ -277,7 +269,6 @@ impl Interest {
     }
 
 }
-
 
 // 使用
 
@@ -352,13 +343,11 @@ sequenceDiagram
 
     participant T2 as Worker Thread
 
-
     T1->>Waker: Poll::poll(events, timeout)
 
     Waker->>OS: epoll_wait / kevent / GetQueuedCompletionStatus
 
     OS-->>Waker: 阻塞等待...
-
 
     T2->>T2: 完成工作（如 DNS 解析）
 
@@ -402,7 +391,6 @@ struct IoWaker {
     parker: crossbeam::Parker,   // 线程阻塞/唤醒
 
 }
-
 
 impl std::task::Wake for IoWaker {
 
@@ -448,13 +436,11 @@ unsafe {
 
     libc::epoll_ctl(epfd, EPOLL_CTL_ADD, listener_fd, &mut ev);
 
-
     let mut events: [libc::epoll_event; 1024] = std::mem::zeroed();
 
     let n = libc::epoll_wait(epfd, events.as_mut_ptr(), 1024, -1);
 
 }
-
 
 // ===== 使用 mio =====
 
@@ -497,13 +483,11 @@ graph BT
 
     end
 
-
     subgraph Runtime["运行时层"]
 
         TOKIO[Tokio Runtime]
 
     end
-
 
     subgraph IO["IO 抽象层"]
 
@@ -513,13 +497,11 @@ graph BT
 
     end
 
-
     subgraph Kernel["内核层"]
 
         EPOLL[epoll / kqueue / IOCP]
 
     end
-
 
     AXUM --> TOKIO
 

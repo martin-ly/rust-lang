@@ -18,6 +18,8 @@
 
 # chrono Crate 架构解构 {#chrono-crate-架构解构}
 
+> **EN**: Chrono Architecture
+> **Summary**: chrono Crate 架构解构 Chrono Architecture.
 > **最后更新**: 2026-06-29
 > **内容分级**: [归档级]
 > **分级**: [B]

@@ -1,4 +1,7 @@
 # research_notes 全面梳理 {#research_notes-全面梳理}
+
+> **EN**: Research Notes Organization
+> **Summary**: research_notes 全面梳理 Research Notes Organization. (stub/archive redirect)
 >
 > **概念族**: 元/导航/索引
 > **内容分级**: [归档级]

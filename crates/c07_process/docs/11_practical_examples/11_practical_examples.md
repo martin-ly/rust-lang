@@ -41,7 +41,7 @@ cargo run --bin process_pool_demo
 ```
 ---
 
-**相关**: [README](../README.md) | [00_MASTER_INDEX](../00_MASTER_INDEX.md)
+**相关**: [README](../README.md) | [00_MASTER_INDEX](../00_master_index.md)
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

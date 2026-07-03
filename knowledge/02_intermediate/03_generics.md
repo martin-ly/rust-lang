@@ -1,5 +1,7 @@
 # 泛型 (Generics)
 
+> **EN**: Generics
+> **Summary**: 泛型 Generics. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/02_intermediate/02_generics.md](../../concept/02_intermediate/02_generics.md)。
 > **历史版本存档**: [archive/knowledge/02_intermediate/03_generics.md](../../archive/knowledge/02_intermediate/03_generics.md)
 >

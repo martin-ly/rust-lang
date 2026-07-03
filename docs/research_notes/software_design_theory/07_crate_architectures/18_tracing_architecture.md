@@ -8,6 +8,8 @@
 
 # Tracing Crate 架构解构 {#tracing-crate-架构解构}
 
+> **EN**: Tracing Architecture
+> **Summary**: Tracing Crate 架构解构 Tracing Architecture.
 >
 > **最后更新**: 2026-06-09
 > **概念族**: 软件设计 / Crate 架构
@@ -42,7 +44,6 @@ Tracing 的四大设计支柱：
 
 ```rust,ignore
 use tracing::{info, info_span, Instrument};
-
 
 async fn process_request(req: Request) -> Response {
 
@@ -94,7 +95,6 @@ graph TB
 
     end
 
-
     subgraph Dispatcher["分发器层 (Dispatch)"]
 
         DISPATCH[Dispatch::get_default]
@@ -104,7 +104,6 @@ graph TB
         META[Metadata 静态化]
 
     end
-
 
     subgraph Consumer["消费者层 (Subscriber + Layer)"]
 
@@ -119,7 +118,6 @@ graph TB
         L4[prometheus::Layer<br/>指标聚合]
 
     end
-
 
     SPAN --> DISPATCH
 
@@ -159,7 +157,6 @@ stateDiagram-v2
 
     Closed --> [*]
 
-
     note right of Constructed
 
         仅分配 ID，
@@ -168,7 +165,6 @@ stateDiagram-v2
 
     end note
 
-
     note right of Entered
 
         成为当前线程的
@@ -176,7 +172,6 @@ stateDiagram-v2
         "current span"
 
     end note
-
 
     note right of Closed
 
@@ -209,7 +204,6 @@ pub trait Value: 'static {
     fn record(&self, key: &Field, visitor: &mut dyn Visit);
 
 }
-
 
 // 为常见类型实现
 
@@ -282,7 +276,6 @@ use tracing_subscriber::fmt;
 
 use tracing_opentelemetry::OpenTelemetryLayer;
 
-
 let subscriber = tracing_subscriber::registry()
 
     .with(fmt::Layer::default())                    // 控制台输出
@@ -290,7 +283,6 @@ let subscriber = tracing_subscriber::registry()
     .with(OpenTelemetryLayer::new(tracer))          // OTLP 导出
 
     .with(tracing_subscriber::filter::LevelFilter::INFO); // 级别过滤
-
 
 subscriber.init();
 ```
@@ -434,7 +426,6 @@ pub struct Span {
 
 }
 
-
 struct Inner {
 
     id: Id,
@@ -474,7 +465,6 @@ sequenceDiagram
 
     participant Exp as OTLP Exporter
 
-
     App->>Tracing: info_span!("http_request")
 
     Tracing->>OpTel: on_new_span
@@ -485,13 +475,11 @@ sequenceDiagram
 
     OpTel-->>Tracing: 关联 OTel Span ID
 
-
     App->>Tracing: info!("processing")
 
     Tracing->>OpTel: on_event
 
     OpTel->>OTel: span.add_event("processing")
-
 
     App->>Tracing: Span::close
 

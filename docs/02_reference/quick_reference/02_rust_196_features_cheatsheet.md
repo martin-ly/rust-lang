@@ -1,5 +1,7 @@
 # Rust 1.96 特性速查表 {#rust-196-特性速查表}
 
+> **EN**: Rust 196 Features Cheatsheet
+> **Summary**: Rust 1.96 特性速查表 Rust 196 Features Cheatsheet.
 > **内容重叠提示**: 本文与 [`concept/07_future/rust_1_96_stabilized.md`](../../../../concept/07_future/rust_1_96_stabilized.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为快速参考。
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)

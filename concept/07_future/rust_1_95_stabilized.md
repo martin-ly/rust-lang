@@ -26,7 +26,7 @@
 > **后置概念**:
 >
 > [Rust 1.96.0 稳定特性](rust_1_96_stabilized.md) ·
-> [Rust 1.97 前沿特性预览](rust_1_97_preview.md) ·
+> [Rust 1.97.0 稳定特性](rust_1_97_stabilized.md) ·
 > [Toolchain](../06_ecosystem/01_toolchain.md) ·
 > [Security Practices](../06_ecosystem/19_security_practices.md)
 >

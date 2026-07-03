@@ -9,6 +9,8 @@
 >
 # 综合语言对比矩阵
 
+> **EN**: Comprehensive Language Comparison Matrix
+> **Summary**: 综合语言对比矩阵 Comprehensive Language Comparison Matrix.
 > **Bloom 层级**: 理解
 
 ## 概述

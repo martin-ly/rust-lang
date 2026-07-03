@@ -1,5 +1,7 @@
 # 充分表达 vs 非充分表达边界矩阵 {#充分表达-vs-非充分表达边界矩阵}
 
+> **EN**: Expressive Inexpressive Matrix
+> **Summary**: 充分表达 vs 非充分表达边界矩阵 Expressive Inexpressive Matrix. (stub/archive redirect)
 > **概念族**: 软件设计 / 边界系统
 > **内容分级**: [归档级]
 >
@@ -314,11 +316,9 @@ struct MergeSort; impl SortStrategy for MergeSort { ... }
 
 trait Target { fn request(&self) -> String; }
 
-
 // 被适配者
 
 struct Adaptee { data: String }
-
 
 // 适配器：包装 Adaptee，实现 Target
 
@@ -352,7 +352,6 @@ enum Node {
     Composite(Vec<Box<Node>>),
 
 }
-
 
 impl Node {
 

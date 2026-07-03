@@ -117,12 +117,12 @@
 **代码示例**:
 
 - 💻 **所有权示例** → [所有权系统基础](01_ownership_quick_start.md) (包含 15+ 完整示例和测试)
-- 🧪 **综合示例集** → [Rust 1.92.0 实战示例](../RUST_192_EXAMPLES_COLLECTION.md) (138+ 综合示例)（自 Rust 1.90 引入）| [历史版本](../RUST_190_EXAMPLES_COLLECTION.md)
+- 🧪 **综合示例集** → [Rust 1.92.0 实战示例](../rust_192_examples_collection.md) (138+ 综合示例)（自 Rust 1.90 引入）| [历史版本](../rust_190_examples_collection.md)
 
 **可视化资源**:
 
-- 📊 [知识图谱](../KNOWLEDGE_GRAPH.md) - 查看所有权相关概念
-- 🧠 [思维导图](../MIND_MAP.md) - 所有权学习路径
+- 📊 [知识图谱](../knowledge_graph.md) - 查看所有权相关概念
+- 🧠 [思维导图](../mind_map.md) - 所有权学习路径
 
 ## 💡 快速参考
 
@@ -170,7 +170,7 @@ let y = x;  // x 仍然有效
 
 ### 其他层级
 
-- 🎯 [Tier 1: 快速开始](../tier_01_foundations/1.2_quick_start_guide.md) - 快速回顾
+- 🎯 [Tier 1: 快速开始](../tier_01_foundations/1_2_quick_start_guide.md) - 快速回顾
 - 🎨 [Tier 3: 高级所有权](../tier_03_references/06_advanced_ownership_patterns_reference.md) - 高级模式
 - 🔬 [Tier 4: 类型系统理论](../tier_04_advanced/06_type_system_theory.md) - 理论基础
 

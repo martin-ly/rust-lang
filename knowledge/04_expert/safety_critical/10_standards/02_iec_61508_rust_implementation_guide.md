@@ -4,6 +4,8 @@
 >
 # IEC 61508 Rust实施指南
 
+> **EN**: Iec 61508 Rust Implementation Guide
+> **Summary**: IEC 61508 Rust实施指南 Iec 61508 Rust Implementation Guide. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 概述

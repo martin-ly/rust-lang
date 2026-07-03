@@ -1,5 +1,7 @@
 # [研究主题名称] {#研究主题名称}
 
+> **EN**: Template
+> **Summary**: [研究主题名称] Template. (stub/archive redirect)
 > **内容分级**: [归档级]
 >
 > **分级**: [B]

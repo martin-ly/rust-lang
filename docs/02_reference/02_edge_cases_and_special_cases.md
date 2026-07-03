@@ -11,6 +11,8 @@
 
 # Rust 边界条件与特例示例 {#rust-边界条件与特例示例}
 
+> **EN**: Edge Cases And Special Cases
+> **Summary**: Rust 边界条件与特例示例 Edge Cases And Special Cases. (stub/archive redirect)
 > **Bloom 层级**: L2 (理解)
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-05-08

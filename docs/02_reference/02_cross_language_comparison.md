@@ -1,5 +1,7 @@
 # Rust 与 C++/Go/Python 跨语言对比 {#rust-与-cgopython-跨语言对比}
 
+> **EN**: Cross Language Comparison
+> **Summary**: Rust 与 C++/Go/Python 跨语言对比 Cross Language Comparison. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 > **创建日期**: 2026-02-12

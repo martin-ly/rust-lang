@@ -10,6 +10,8 @@
 
 # 学术研究全景
 
+> **EN**: Academic Research Landscape
+> **Summary**: 学术研究全景 Academic Research Landscape. (stub/archive redirect)
 > **Bloom 层级**: 理解
 
 ## 概述

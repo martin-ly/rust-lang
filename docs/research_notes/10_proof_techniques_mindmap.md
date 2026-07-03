@@ -1,5 +1,7 @@
 # 证明技术概念族谱 {#证明技术概念族谱}
 
+> **EN**: Proof Techniques Mindmap
+> **Summary**: 证明技术概念族谱 Proof Techniques Mindmap.
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 >
@@ -208,7 +210,6 @@ mod proofs {
 
     }
 
-
     // 归纳：若 xs 长度为 n，则 x::xs 长度为 n+1
 
     #[test]
@@ -241,7 +242,6 @@ fn separation_logic_example() {
 
     let y = Box::new(43); // 另一独立资源
 
-
     // 可以同时持有，因为它们分离
 
     assert_eq!(*x + *y, 85);
@@ -268,20 +268,17 @@ enum State {
 
 }
 
-
 trait Bisimulation {
 
     // 两个状态是否观察等价
 
     fn is_bisimilar(&self, other: &Self) -> bool;
 
-
     // 转移关系
 
     fn transitions(&self) -> Vec<(Action, Self)>;
 
 }
-
 
 struct Action(String);
 ```
@@ -300,7 +297,6 @@ struct Action(String);
 ```
 {P} C {Q}
 
-
 P: 前置条件
 
 C: 命令/程序
@@ -311,7 +307,6 @@ Q: 后置条件
 ```rust
 // Hoare 逻辑在 Rust 中的体现（通过类型系统）
 
-
 // 前置条件: T: Default
 
 // 后置条件: 返回初始化值
@@ -321,7 +316,6 @@ fn create_default<T: Default>() -> T {
     T::default()
 
 }
-
 
 // 前置条件: slice 非空
 
@@ -368,7 +362,6 @@ graph LR
     B -->|函数契约| E[Prusti]
 
     B -->|数学证明| F[Creusot]
-
 
     C --> C1[UB检测]
 

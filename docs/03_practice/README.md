@@ -1,5 +1,7 @@
 # 实践项目 {#实践项目}
 
+> **EN**: Practice Index
+> **Summary**: 实践项目 Practice Index.
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
 > **目标**: 通过实际项目学习Rust

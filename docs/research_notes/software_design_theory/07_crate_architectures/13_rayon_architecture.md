@@ -10,6 +10,8 @@
 
 # Rayon Crate 架构解构 {#rayon-crate-架构解构}
 
+> **EN**: Rayon Architecture
+> **Summary**: Rayon Crate 架构解构 Rayon Architecture.
 >
 > **最后更新**: 2026-06-09
 > **概念族**: 软件设计 / Crate 架构
@@ -68,13 +70,11 @@ pub trait ParallelIterator: Sized + Send {
 
     type Item: Send;
 
-
     fn drive_unindexed<C>(self, consumer: C) -> C::Result
 
     where
 
         C: UnindexedConsumer<Self::Item>;
-
 
     // 并行特化方法
 
@@ -86,20 +86,17 @@ pub trait ParallelIterator: Sized + Send {
 
         R: Send;
 
-
     fn filter<P>(self, predicate: P) -> Filter<Self, P>
 
     where
 
         P: Fn(&Self::Item) -> bool + Sync + Send;
 
-
     fn collect<C>(self) -> C
 
     where
 
         C: FromParallelIterator<Self::Item>;
-
 
     // ... fold, reduce, sum, min_by 等
 
@@ -120,7 +117,6 @@ pub trait ParallelIterator: Sized + Send {
 ```rust,ignore
 use rayon::prelude::*;
 
-
 // 顺序版本
 
 let sum: u64 = (0..1_000_000)
@@ -128,7 +124,6 @@ let sum: u64 = (0..1_000_000)
     .map(|x| x * x)
 
     .sum();
-
 
 // 并行版本 —— 仅添加 .into_par_iter()
 
@@ -152,7 +147,6 @@ Rayon 的 `ParallelIterator` 支持几乎所有标准库迭代器方法：`map`�
 
 ```rust,ignore
 use rayon::join;
-
 
 fn fibonacci(n: u32) -> u32 {
 
@@ -224,11 +218,9 @@ flowchart TD
 
         end
 
-
         Injector["全局注入器<br/>FIFO"]
 
     end
-
 
     TaskA["任务 A<br/>split -> A1, A2"]
 
@@ -236,13 +228,11 @@ flowchart TD
 
     TaskC["任务 C"]
 
-
     Injector -->|push| TaskA
 
     TaskA -->|A1 push_bottom| Deque1
 
     TaskA -->|A2 push_bottom| Deque1
-
 
     Deque1 -->|pop_bottom| Thread1
 
@@ -251,7 +241,6 @@ flowchart TD
     Deque3 -->|steal_top| Deque1
 
     DequeN -->|steal_top| Deque2
-
 
     style Injector fill:#ffccbc
 
@@ -308,7 +297,6 @@ let nums: Vec<i32> = vec![1, 2, 3];
 
 let sum: i32 = nums.par_iter().sum();
 
-
 // 编译失败：Rc 不是 Send
 
 use std::rc::Rc;
@@ -351,7 +339,6 @@ pub trait ParallelIterator: Sized + Send {
 ```rust,ignore
 let mut nums = vec![1, 2, 3, 4, 5];
 
-
 // 并行修改每个元素
 
 nums.par_iter_mut().for_each(|x| {
@@ -380,19 +367,15 @@ Rayon 通过扩展 trait（`ParallelSlice`、`ParallelSliceMut`、`ParallelItera
 ```rust,ignore
 use rayon::prelude::*;
 
-
 let mut data: Vec<u64> = (0..10_000_000).collect();
-
 
 // 并行迭代
 
 let sum = data.par_iter().sum::<u64>();
 
-
 // 并行排序 (基于并行归并排序)
 
 data.par_sort();  // 或 par_sort_unstable() 以提升速度
-
 
 // 并行映射-收集
 
@@ -461,11 +444,9 @@ fn parallel_sum(nums: &[u32]) -> u32 {
 ```rust,ignore
 use rayon::scope;
 
-
 fn process_data(data: &[u64]) -> Vec<u64> {
 
     let mut results = vec![0u64; data.len()];
-
 
     scope(|s| {
 
@@ -487,7 +468,6 @@ fn process_data(data: &[u64]) -> Vec<u64> {
 
     });
 
-
     results
 
 }
@@ -505,7 +485,6 @@ fn process_data(data: &[u64]) -> Vec<u64> {
 ```rust,ignore
 use rayon::ThreadPoolBuilder;
 
-
 let pool = ThreadPoolBuilder::new()
 
     .num_threads(4)                    // 限制线程数
@@ -517,7 +496,6 @@ let pool = ThreadPoolBuilder::new()
     .build()
 
     .unwrap();
-
 
 // 在自定义池中执行
 

@@ -1,5 +1,7 @@
 # 学习路径与面试题权威来源对齐矩阵 {#学习路径与面试题权威来源对齐矩阵}
 
+> **EN**: Learning And Interview Alignment
+> **Summary**: 学习路径与面试题权威来源对齐矩阵 Learning And Interview Alignment.
 > **概念族**: 权威来源对齐 / 学习路径 / 面试评估
 > **内容分级**: [核心级]
 > **层级**: L0-L5

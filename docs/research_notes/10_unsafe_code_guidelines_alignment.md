@@ -1,5 +1,7 @@
 # Unsafe Code Guidelines 对齐矩阵 {#unsafe-code-guidelines-对齐矩阵}
 
+> **EN**: Unsafe Code Guidelines Alignment
+> **Summary**: Unsafe Code Guidelines 对齐矩阵 Unsafe Code Guidelines Alignment.
 > **概念族**: 权威来源对齐 / Unsafe Code Guidelines
 > **内容分级**: [核心级]
 > **层级**: L0-L6

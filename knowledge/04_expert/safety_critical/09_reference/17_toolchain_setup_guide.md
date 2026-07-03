@@ -1,5 +1,7 @@
 # 安全关键Rust工具链配置指南
 
+> **EN**: Toolchain Setup Guide
+> **Summary**: 安全关键Rust工具链配置指南 Toolchain Setup Guide.
 > **Bloom 层级**: 理解
 >
 > **受众**: [初学者] / [进阶]

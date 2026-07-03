@@ -1,4 +1,7 @@
 # research_notes 组织架构与导航 {#research_notes-组织架构与导航}
+
+> **EN**: 00 Organization And Navigation
+> **Summary**: research_notes 组织架构与导航 00 Organization And Navigation. (stub/archive redirect)
 >
 > **概念族**: 元/导航/索引
 > **内容分级**: [归档级]

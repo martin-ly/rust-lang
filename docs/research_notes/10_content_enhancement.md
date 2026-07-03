@@ -1,5 +1,7 @@
 # 研究笔记内容完善指南 {#研究笔记内容完善指南}
 
+> **EN**: Content Enhancement
+> **Summary**: 研究笔记内容完善指南 Content Enhancement.
 > **概念族**: 方法论 / 工具 / 指南
 > **内容分级**: [归档级]
 >
@@ -100,7 +102,6 @@
 
 └── 执行模型 01–05：典型场景、调用栈图、与 async/并发对比、可运行示例
 
-
 第二阶段（L2→L3）✅
 
 ├── 实验研究：与形式化定理衔接表、可重复性
@@ -108,7 +109,6 @@
 ├── 03_semantic_boundary_map：需求→模式快速查找表 20+ 场景
 
 └── 04_compositional_engineering：组合决策树、组合反例
-
 
 第三阶段（L3→L4）✅
 
@@ -296,15 +296,11 @@
 ```markdown
 ### 相关概念 {#相关概念}
 
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 
 **所有权 (Ownership)**: Rust 的核心概念，每个值都有一个所有者。当所有者离开作用域时，值被释放。
 
-
 **移动语义 (Move Semantics)**: 当值从一个变量移动到另一个变量时，原变量不再拥有该值。
-
 
 **借用 (Borrowing)**: 允许临时访问值而不获取所有权。借用可以是不可变的（`&T`）或可变的（`&mut T`）。
 ```
@@ -324,15 +320,11 @@
 ```markdown
 ### 理论背景 {#理论背景}
 
-
 > **[来源: ACM - Systems Programming Languages]**
-
 
 **线性类型系统 (Linear Type System)**: 用于建模所有权转移的类型系统。在线性类型系统中，每个值只能使用一次，这与 Rust 的所有权系统非常相似。
 
-
 **分离逻辑 (Separation Logic)**: 用于表达借用规则的逻辑系统。分离逻辑可以表达内存的分离和共享，这与 Rust 的借用规则对应。
-
 
 **区域类型 (Region Types)**: 用于形式化生命周期的类型系统。区域类型可以表示引用的有效作用域。
 ```
@@ -369,21 +361,15 @@
 ````markdown
 ### 1. 所有权转移 {#1-所有权转移}
 
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 
 **定义 1.1 (所有权转移)**: 所有权从变量 `x` 转移到变量 `y`，记为 `x → y`。
 
-
 **形式化表示**:
-
 
 $$\text{move}(x, y) : \Omega(x) = \text{Owned} \rightarrow \Omega(x) = \text{Moved} \land \Omega(y) = \text{Owned}$$
 
-
 **语义**: 当执行 `move(x, y)` 时，`x` 的所有权转移到 `y`，`x` 不再可用。
-
 
 **示例**:
 ```rust
@@ -465,7 +451,6 @@ fn take_ownership(s: String) {
     println!("{}", s);
 
 } // s 离开作用域，值被丢弃
-
 
 fn main() {
 
@@ -571,7 +556,6 @@ error[E0382]: borrow of moved value: `s1`
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-
 1. **RustBelt: Logical Foundations for the Future of Safe Systems Programming**
 
    - 作者: Ralf Jung, et al.
@@ -585,7 +569,6 @@ error[E0382]: borrow of moved value: `s1`
    - 链接: 论文链接
 
    - 相关章节: 第 3 章 - 所有权系统形式化
-
 
 2. **The RustBelt Project: Formalizing Rust's Type System**
 
@@ -616,13 +599,11 @@ error[E0382]: borrow of moved value: `s1`
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-
 - [Rust Book - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 
   - 章节: 第 4 章 - 理解所有权
 
   - 相关内容: 所有权规则、移动语义、作用域
-
 
 - [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
 
@@ -649,13 +630,11 @@ error[E0382]: borrow of moved value: `s1`
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-
 - [所有权实现](../../crates/c01_ownership_borrow_scope/README.md)
 
   - 关键文件: `ownership.rs` - 所有权规则实现
 
   - 关键文件: `borrow_checker.rs` - 借用检查器实现
-
 
 - [所有权文档](../../crates/c01_ownership_borrow_scope/README.md)
 

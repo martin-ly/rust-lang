@@ -1,5 +1,7 @@
 # 长事务模式形式化定义 {#长事务模式形式化定义}
 
+> **EN**: Long Running Transaction
+> **Summary**: 长事务模式形式化定义 Long Running Transaction. (stub/archive redirect)
 > **概念族**: 软件设计 / 工作流模式 / 长事务 / Saga
 > **内容分级**: [归档级]
 > **分级**: [B]

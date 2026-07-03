@@ -72,12 +72,12 @@ cargo test -p exercises ownership_borrowing::ex01_borrow_checker_fix
 
 ```bash
 # PowerShell (Windows)
-.\scripts\exercise-check.ps1
-.\scripts\exercise-check.ps1 -Topic concurrency
+.\scripts\exercise_check.ps1
+.\scripts\exercise_check.ps1 -Topic concurrency
 
 # Bash (Linux/macOS/Git Bash)
-./scripts/exercise-check.sh
-./scripts/exercise-check.sh --topic concurrency
+./scripts/exercise_check.sh
+./scripts/exercise_check.sh --topic concurrency
 ```
 ---
 
@@ -199,7 +199,7 @@ cargo test     # 验证修复
 1. 打开 `docs/01_learning/LFRS_CERTIFICATION_MAPPING.md`
 2. 按 10 大考点顺序完成对应练习
 3. 确保每个考点的测试全部通过
-4. 使用 `scripts/exercise-check.ps1` 生成最终报告
+4. 使用 `scripts/exercise_check.ps1` 生成最终报告
 
 ---
 

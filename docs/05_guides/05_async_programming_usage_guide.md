@@ -1,5 +1,7 @@
 # 异步编程使用指南 {#异步编程使用指南}
 
+> **EN**: Async Programming Usage Guide
+> **Summary**: 异步编程使用指南 Async Programming Usage Guide. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 >
@@ -342,7 +344,7 @@ async fn main() {
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 > **Rust 版本**: 1.96.0+ Stable
-> **相关文档**: [Async Closures 深度指南](../../crates/c06_async/docs/ASYNC_CLOSURES_GUIDE.md)
+> **相关文档**: [Async Closures 深度指南](../../crates/c06_async/docs/async_closures_guide.md)
 
 Rust 1.85 稳定了 async closures，引入了 `AsyncFn`、`AsyncFnMut`、`AsyncFnOnce` trait family，
 解决了旧范式 `|| async move { ... }` 的三大痛点：强制 move、Send bound 表达困难、类型系统不统一。

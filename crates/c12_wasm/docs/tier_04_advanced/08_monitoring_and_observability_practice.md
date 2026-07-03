@@ -377,7 +377,7 @@ kube_horizontalpodautoscaler_spec_max_replicas
 
 ### 仪表板配置
 
-详见：[`deployment/monitoring/grafana-dashboard.json`](../../deployment/monitoring/grafana-dashboard.json)
+详见：[`deployment/monitoring/grafana-dashboard.json`](../../deployment/monitoring/grafana_dashboard.json)
 
 ### 核心面板
 
@@ -414,7 +414,7 @@ kube_horizontalpodautoscaler_spec_max_replicas
 
 ### 告警规则
 
-详见：[`deployment/monitoring/alerts/wasm-alerts.yml`](../../deployment/monitoring/alerts/wasm-alerts.yml)
+详见：[`deployment/monitoring/alerts/wasm-alerts.yml`](../../deployment/monitoring/alerts/wasm_alerts.yml)
 
 ---
 

@@ -1,4 +1,7 @@
 # 研究工具使用指南 {#研究工具使用指南}
+
+> **EN**: Tools Guide
+> **Summary**: 研究工具使用指南 Tools Guide. (stub/archive redirect)
 >
 > **概念族**: 方法论 / 工具 / 指南
 > **内容分级**: [归档级]

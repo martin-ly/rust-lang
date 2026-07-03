@@ -1,5 +1,7 @@
 # 集合类型 (Collections)
 
+> **EN**: Collections
+> **Summary**: 集合类型 Collections. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/01_foundation/08_collections.md](../../concept/01_foundation/08_collections.md)。
 > **历史版本存档**: [archive/knowledge/02_intermediate/01_collections.md](../../archive/knowledge/02_intermediate/01_collections.md)
 >

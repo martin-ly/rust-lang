@@ -2,7 +2,7 @@
 
 > **文档类型**: Tier 3 - 技术参考层
 > **文档定位**: Rust 1.93.0 特性在 WASM 中的快速参考
-> **相关文档**: [Rust 1.93 WASM 改进](../RUST_193_WASM_IMPROVEMENTS.md) | [API 参考](01_api_reference.md)
+> **相关文档**: [Rust 1.93 WASM 改进](../rust_193_wasm_improvements.md) | [API 参考](01_api_reference.md)
 
 **最后更新**: 2026-02-12
 **适用版本**: Rust 1.93.0+ / Edition 2024, WASM 2.0 + WASI 0.2

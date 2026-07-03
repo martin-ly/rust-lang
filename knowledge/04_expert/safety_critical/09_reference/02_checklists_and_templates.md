@@ -1,5 +1,7 @@
 # Rust安全关键系统 - 检查清单与模板
 
+> **EN**: Checklists And Templates
+> **Summary**: Rust安全关键系统 - 检查清单与模板 Checklists And Templates.
 > **Bloom 层级**: 理解
 >
 > **受众**: [进阶] / [专家]

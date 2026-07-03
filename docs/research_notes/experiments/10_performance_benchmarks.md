@@ -12,6 +12,8 @@
 
 # 性能基准测试研究 {#性能基准测试研究}
 
+> **EN**: Performance Benchmarks
+> **Summary**: 性能基准测试研究 Performance Benchmarks. (stub/archive redirect)
 > **内容分级**: [归档级]
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -539,7 +541,6 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion, Benchmark
 
 use std::time::Duration;
 
-
 // 栈分配基准测试
 
 fn stack_allocation_benchmark(c: &mut Criterion) {
@@ -547,7 +548,6 @@ fn stack_allocation_benchmark(c: &mut Criterion) {
     let mut group = c.benchmark_group("allocation_stack");
 
     group.measurement_time(Duration::from_secs(10));
-
 
     for size in [1, 10, 100, 1000, 10000].iter() {
 
@@ -577,7 +577,6 @@ fn stack_allocation_benchmark(c: &mut Criterion) {
 
 }
 
-
 // 堆分配基准测试
 
 fn heap_allocation_benchmark(c: &mut Criterion) {
@@ -585,7 +584,6 @@ fn heap_allocation_benchmark(c: &mut Criterion) {
     let mut group = c.benchmark_group("allocation_heap");
 
     group.measurement_time(Duration::from_secs(10));
-
 
     for size in [1, 10, 100, 1000, 10000].iter() {
 
@@ -615,13 +613,11 @@ fn heap_allocation_benchmark(c: &mut Criterion) {
 
 }
 
-
 // 预分配 vs 动态分配
 
 fn prealloc_vs_dynamic_benchmark(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("prealloc_vs_dynamic");
-
 
     // 预分配
 
@@ -645,7 +641,6 @@ fn prealloc_vs_dynamic_benchmark(c: &mut Criterion) {
 
     });
 
-
     // 动态分配
 
     group.bench_function("dynamic", |b| {
@@ -666,11 +661,9 @@ fn prealloc_vs_dynamic_benchmark(c: &mut Criterion) {
 
     });
 
-
     group.finish();
 
 }
-
 
 criterion_group!(
 
@@ -698,13 +691,11 @@ use std::sync::{Arc, Mutex, RwLock};
 
 use std::thread;
 
-
 // Mutex vs RwLock 性能测试
 
 fn mutex_vs_rwlock_benchmark(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("sync_primitives");
-
 
     // Mutex 测试
 
@@ -722,7 +713,6 @@ fn mutex_vs_rwlock_benchmark(c: &mut Criterion) {
 
     });
 
-
     // RwLock 读测试
 
     group.bench_function("rwlock_read", |b| {
@@ -738,7 +728,6 @@ fn mutex_vs_rwlock_benchmark(c: &mut Criterion) {
         })
 
     });
-
 
     // RwLock 写测试
 
@@ -758,18 +747,15 @@ fn mutex_vs_rwlock_benchmark(c: &mut Criterion) {
 
     });
 
-
     group.finish();
 
 }
-
 
 // 并发吞吐量测试
 
 fn concurrent_throughput_benchmark(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("concurrent_throughput");
-
 
     for threads in [1, 2, 4, 8].iter() {
 
@@ -786,7 +772,6 @@ fn concurrent_throughput_benchmark(c: &mut Criterion) {
                     let data = Arc::new(Mutex::new(0u64));
 
                     let mut handles = vec![];
-
 
                     for _ in 0..num_threads {
 
@@ -808,13 +793,11 @@ fn concurrent_throughput_benchmark(c: &mut Criterion) {
 
                     }
 
-
                     for handle in handles {
 
                         handle.join().unwrap();
 
                     }
-
 
                     black_box(*data.lock().unwrap());
 
@@ -826,11 +809,9 @@ fn concurrent_throughput_benchmark(c: &mut Criterion) {
 
     }
 
-
     group.finish();
 
 }
-
 
 criterion_group!(
 
@@ -854,7 +835,6 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 use serde::{Deserialize, Serialize};
 
-
 #[derive(Serialize, Deserialize, Clone)]
 
 struct TestData {
@@ -868,7 +848,6 @@ struct TestData {
     metadata: std::collections::HashMap<String, String>,
 
 }
-
 
 fn create_test_data(size: usize) -> TestData {
 
@@ -890,18 +869,15 @@ fn create_test_data(size: usize) -> TestData {
 
 }
 
-
 // JSON 序列化测试
 
 fn json_serialize_benchmark(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("serialization_json");
 
-
     for size in [10, 100, 1000, 10000].iter() {
 
         let data = create_test_data(*size);
-
 
         group.bench_with_input(
 
@@ -922,7 +898,6 @@ fn json_serialize_benchmark(c: &mut Criterion) {
             },
 
         );
-
 
         let json_str = serde_json::to_string(&data).unwrap();
 
@@ -948,11 +923,9 @@ fn json_serialize_benchmark(c: &mut Criterion) {
 
     }
 
-
     group.finish();
 
 }
-
 
 // Bincode 序列化测试
 
@@ -960,11 +933,9 @@ fn bincode_serialize_benchmark(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("serialization_bincode");
 
-
     for size in [10, 100, 1000, 10000].iter() {
 
         let data = create_test_data(*size);
-
 
         group.bench_with_input(
 
@@ -985,7 +956,6 @@ fn bincode_serialize_benchmark(c: &mut Criterion) {
             },
 
         );
-
 
         let encoded = bincode::serialize(&data).unwrap();
 
@@ -1011,11 +981,9 @@ fn bincode_serialize_benchmark(c: &mut Criterion) {
 
     }
 
-
     group.finish();
 
 }
-
 
 criterion_group!(
 
@@ -1047,20 +1015,17 @@ serde_json = "1.0"
 
 bincode = "1.3"
 
-
 [[bench]]
 
 name = "allocation"
 
 harness = false
 
-
 [[bench]]
 
 name = "concurrency"
 
 harness = false
-
 
 [[bench]]
 
@@ -1084,11 +1049,9 @@ use std::fs;
 
 use std::path::Path;
 
-
 fn main() {
 
     let output_dir = "benchmark_results";
-
 
     // 创建输出目录
 
@@ -1097,7 +1060,6 @@ fn main() {
         fs::create_dir(output_dir).unwrap();
 
     }
-
 
     // 运行基准测试
 
@@ -1109,7 +1071,6 @@ fn main() {
 
         .expect("Failed to run benchmark");
 
-
     // 保存结果
 
     fs::write(
@@ -1119,7 +1080,6 @@ fn main() {
         String::from_utf8_lossy(&output.stdout),
 
     ).unwrap();
-
 
     println!("Benchmark results saved to {}", output_dir);
 
@@ -1141,7 +1101,6 @@ use std::path::Path;
 
 use std::collections::HashMap;
 
-
 struct BenchmarkResult {
 
     name: String,
@@ -1156,7 +1115,6 @@ struct BenchmarkResult {
 
 }
 
-
 fn parse_criterion_output(content: &str) -> Vec<BenchmarkResult> {
 
     let mut results = Vec::new();
@@ -1169,11 +1127,9 @@ fn parse_criterion_output(content: &str) -> Vec<BenchmarkResult> {
 
 }
 
-
 fn analyze_results(results: &[BenchmarkResult]) {
 
     println!("=== 性能基准测试结果分析 ===\n");
-
 
     // 按测试组分类
 
@@ -1190,7 +1146,6 @@ fn analyze_results(results: &[BenchmarkResult]) {
             .push(result);
 
     }
-
 
     // 分析每个组
 
@@ -1214,7 +1169,6 @@ fn analyze_results(results: &[BenchmarkResult]) {
 
     }
 
-
     // 识别性能瓶颈
 
     println!("## 性能瓶颈识别");
@@ -1222,7 +1176,6 @@ fn analyze_results(results: &[BenchmarkResult]) {
     let mut sorted_results: Vec<_> = results.iter().collect();
 
     sorted_results.sort_by(|a, b| b.mean.partial_cmp(&a.mean).unwrap());
-
 
     println!("最慢的5个测试：");
 
@@ -1236,7 +1189,6 @@ fn analyze_results(results: &[BenchmarkResult]) {
 
 }
 
-
 fn generate_report(results: &[BenchmarkResult]) -> String {
 
     let mut report = String::from("# 性能基准测试报告\n\n");
@@ -1248,7 +1200,6 @@ fn generate_report(results: &[BenchmarkResult]) -> String {
     report.push_str(&format!("平均执行时间: {:.2} ns\n\n",
 
         results.iter().map(|r| r.mean).sum::<f64>() / results.len() as f64));
-
 
     report.push_str("## 详细结果\n\n");
 
@@ -1266,16 +1217,13 @@ fn generate_report(results: &[BenchmarkResult]) -> String {
 
     }
 
-
     report
 
 }
 
-
 fn main() {
 
     let results_dir = "benchmark_results";
-
 
     if !Path::new(results_dir).exists() {
 
@@ -1284,7 +1232,6 @@ fn main() {
         return;
 
     }
-
 
     // 读取所有结果文件
 
@@ -1308,18 +1255,15 @@ fn main() {
 
     }
 
-
     // 分析结果
 
     analyze_results(&all_results);
-
 
     // 生成报告
 
     let report = generate_report(&all_results);
 
     fs::write("benchmark_report.md", report).unwrap();
-
 
     println!("报告已生成: benchmark_report.md");
 
@@ -1340,7 +1284,6 @@ fn main() {
 ```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
-
 fn fibonacci(n: u64) -> u64 {
 
     match n {
@@ -1355,13 +1298,11 @@ fn fibonacci(n: u64) -> u64 {
 
 }
 
-
 fn bench_fib(c: &mut Criterion) {
 
     c.bench_function("fib 20", |b| b.iter(|| fibonacci(black_box(20))));
 
 }
-
 
 criterion_group!(benches, bench_fib);
 
@@ -1374,7 +1315,6 @@ criterion_main!(benches);
 
 ```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-
 
 fn stack_allocation(c: &mut Criterion) {
 
@@ -1392,7 +1332,6 @@ fn stack_allocation(c: &mut Criterion) {
 
 }
 
-
 fn heap_allocation(c: &mut Criterion) {
 
     c.bench_function("heap allocation", |b| {
@@ -1408,7 +1347,6 @@ fn heap_allocation(c: &mut Criterion) {
     });
 
 }
-
 
 criterion_group!(benches, stack_allocation, heap_allocation);
 
@@ -1426,7 +1364,6 @@ use std::sync::{Arc, Mutex};
 
 use std::thread;
 
-
 fn concurrent_increment(c: &mut Criterion) {
 
     c.bench_function("concurrent increment", |b| {
@@ -1436,7 +1373,6 @@ fn concurrent_increment(c: &mut Criterion) {
             let data = Arc::new(Mutex::new(0));
 
             let mut handles = vec![];
-
 
             for _ in 0..4 {
 
@@ -1458,13 +1394,11 @@ fn concurrent_increment(c: &mut Criterion) {
 
             }
 
-
             for handle in handles {
 
                 handle.join().unwrap();
 
             }
-
 
             black_box(*data.lock().unwrap())
 
@@ -1473,7 +1407,6 @@ fn concurrent_increment(c: &mut Criterion) {
     });
 
 }
-
 
 criterion_group!(benches, concurrent_increment);
 
@@ -1492,7 +1425,6 @@ criterion_main!(benches);
 ```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
-
 fn stack_allocation(c: &mut Criterion) {
 
     c.bench_function("stack_alloc_1000", |b| {
@@ -1509,7 +1441,6 @@ fn stack_allocation(c: &mut Criterion) {
 
 }
 
-
 fn heap_allocation(c: &mut Criterion) {
 
     c.bench_function("heap_alloc_1000", |b| {
@@ -1525,7 +1456,6 @@ fn heap_allocation(c: &mut Criterion) {
     });
 
 }
-
 
 fn preallocated_vec(c: &mut Criterion) {
 
@@ -1547,7 +1477,6 @@ fn preallocated_vec(c: &mut Criterion) {
 
 }
 
-
 criterion_group!(benches, stack_allocation, heap_allocation, preallocated_vec);
 
 criterion_main!(benches);
@@ -1563,7 +1492,6 @@ use std::sync::{Arc, Mutex, RwLock};
 use std::thread;
 
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-
 
 fn mutex_contention(c: &mut Criterion) {
 
@@ -1606,7 +1534,6 @@ fn mutex_contention(c: &mut Criterion) {
     });
 
 }
-
 
 fn rwlock_read_heavy(c: &mut Criterion) {
 
@@ -1658,7 +1585,6 @@ fn rwlock_read_heavy(c: &mut Criterion) {
 
             handles.push(handle);
 
-
             for handle in handles {
 
                 handle.join().unwrap();
@@ -1670,7 +1596,6 @@ fn rwlock_read_heavy(c: &mut Criterion) {
     });
 
 }
-
 
 criterion_group!(concurrency_benches, mutex_contention, rwlock_read_heavy);
 
@@ -1686,7 +1611,6 @@ use serde::{Deserialize, Serialize};
 
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
-
 #[derive(Serialize, Deserialize, Debug, Clone)]
 
 struct TestData {
@@ -1700,7 +1624,6 @@ struct TestData {
     metadata: std::collections::HashMap<String, String>,
 
 }
-
 
 fn create_test_data() -> TestData {
 
@@ -1722,7 +1645,6 @@ fn create_test_data() -> TestData {
 
 }
 
-
 fn json_serialize(c: &mut Criterion) {
 
     let data = create_test_data();
@@ -1740,7 +1662,6 @@ fn json_serialize(c: &mut Criterion) {
     });
 
 }
-
 
 fn json_deserialize(c: &mut Criterion) {
 
@@ -1762,7 +1683,6 @@ fn json_deserialize(c: &mut Criterion) {
 
 }
 
-
 fn bincode_serialize(c: &mut Criterion) {
 
     let data = create_test_data();
@@ -1780,7 +1700,6 @@ fn bincode_serialize(c: &mut Criterion) {
     });
 
 }
-
 
 fn bincode_deserialize(c: &mut Criterion) {
 
@@ -1801,7 +1720,6 @@ fn bincode_deserialize(c: &mut Criterion) {
     });
 
 }
-
 
 criterion_group!(
 

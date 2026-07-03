@@ -1,5 +1,7 @@
 # 借用证明树 (Proof Tree: Borrowing) {#借用证明树-proof-tree-borrowing}
 
+> **EN**: Proof Tree: Borrowing
+> **Summary**: 借用证明树 Proof Tree: Borrowing.
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -133,7 +135,6 @@ T-BR1: 借用安全性
 ```
 Goal: 不可变借用期间数据不被修改
 
-
 Proof:
 
 1. 假设存在 &r (immutable borrow)
@@ -154,7 +155,6 @@ Proof:
 ```
 Goal: 可变借用提供独占访问
 
-
 Proof:
 
 1. 假设存在 &mut r
@@ -174,7 +174,6 @@ Proof:
 
 ```
 Goal: 引用永远不会悬垂
-
 
 Proof:
 
@@ -201,7 +200,6 @@ fn borrowing_safety_theorem() {
 
     let mut data = vec![1, 2, 3];
 
-
     // Rule 1: 多个不可变借用
 
     let r1 = &data;
@@ -210,7 +208,6 @@ fn borrowing_safety_theorem() {
 
     println!("{} {}", r1[0], r2[0]);  // OK
 
-
     // Rule 2: 可变借用独占
 
     let r3 = &mut data;
@@ -218,7 +215,6 @@ fn borrowing_safety_theorem() {
     r3.push(4);  // OK
 
     // let r4 = &data; // ERROR: cannot borrow as immutable
-
 
     // Rule 3: 生命周期检查
 

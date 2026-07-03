@@ -1,5 +1,7 @@
 # 组合的形式化定义 {#组合的形式化定义}
 
+> **EN**: Formal Composition
+> **Summary**: 组合的形式化定义 Formal Composition. (stub/archive redirect)
 > **概念族**: 软件设计 / 组合工程
 > **内容分级**: [归档级]
 >
@@ -154,7 +156,6 @@ mod b {
 
 }
 
-
 // 组合：main 使用 a 和 b
 
 fn main() {
@@ -186,7 +187,6 @@ use tower::limit::RateLimitLayer;
 
 use tower::timeout::TimeoutLayer;
 
-
 let svc = ServiceBuilder::new()
 
     .layer(TimeoutLayer::new(Duration::from_secs(5)))
@@ -216,7 +216,6 @@ trait Product { fn id(&self) -> u64; }
 
 trait ProductFactory { fn create(&self) -> Box<dyn Product>; }
 
-
 struct Order { id: u64 }
 
 impl Order {
@@ -224,7 +223,6 @@ impl Order {
     fn from_product(p: Box<dyn Product>) -> Self { Self { id: p.id() } }
 
 }
-
 
 struct OrderService<R: Repository<Order>, F: ProductFactory> {
 
@@ -291,9 +289,7 @@ struct Unconfigured;
 
 struct Configured { host: String, port: u16 }
 
-
 struct Client<State> { state: State }
-
 
 impl Client<Unconfigured> {
 
@@ -306,7 +302,6 @@ impl Client<Unconfigured> {
     }
 
 }
-
 
 impl Client<Configured> {
 
@@ -355,7 +350,6 @@ fn run_strategy<S: SortStrategy>(s: S, v: &mut [i32]) {
 
 pub trait Service { fn do_work(&self) -> i32; }
 
-
 // crate_b 依赖 crate_a，实现 Service
 
 use crate_a::Service;
@@ -367,7 +361,6 @@ impl Service for MyService {
     fn do_work(&self) -> i32 { 42 }
 
 }
-
 
 // crate_c 依赖 a、b，使用组合
 

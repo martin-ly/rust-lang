@@ -1,5 +1,7 @@
 # 充分表达 vs 非充分表达论证 {#充分表达-vs-非充分表达论证}
 
+> **EN**: Expressiveness Boundary
+> **Summary**: 充分表达 vs 非充分表达论证 Expressiveness Boundary. (stub/archive redirect)
 > **概念族**: 软件设计 / 工作流模式
 > **内容分级**: [归档级]
 >
@@ -299,7 +301,6 @@ trait Product { fn name(&self) -> &str; }
 
 impl Product for String { fn name(&self) -> &str { self } }
 
-
 trait Creator {
 
     fn create(&self) -> Box<dyn Product>;
@@ -366,7 +367,6 @@ use std::sync::OnceLock;
 
 static INSTANCE: OnceLock<Config> = OnceLock::new();
 
-
 fn config() -> &'static Config {
 
     INSTANCE.get_or_init(|| Config::default())
@@ -395,7 +395,6 @@ let (tx, rx) = mpsc::channel();
 ```rust
 enum Expr { Lit(i32), Add(Box<Expr>, Box<Expr>) }
 
-
 fn interpret(e: &Expr) -> i32 {
 
     match e {
@@ -417,7 +416,6 @@ fn interpret(e: &Expr) -> i32 {
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
 
 struct State { data: String }
-
 
 struct Originator { state: State }
 

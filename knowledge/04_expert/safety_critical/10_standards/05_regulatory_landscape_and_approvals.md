@@ -4,6 +4,8 @@
 >
 # 监管环境与认证审批
 
+> **EN**: Regulatory Landscape And Approvals
+> **Summary**: 监管环境与认证审批 Regulatory Landscape And Approvals.
 > **Bloom 层级**: 理解
 
 ## 概述

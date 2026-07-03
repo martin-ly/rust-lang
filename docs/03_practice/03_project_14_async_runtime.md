@@ -1,4 +1,7 @@
 # 实践项目 14: 异步运行时原型 {#实践项目-14-异步运行时原型}
+
+> **EN**: Project 14 Async Runtime
+> **Summary**: 实践项目 14 Project 14 Async Runtime.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

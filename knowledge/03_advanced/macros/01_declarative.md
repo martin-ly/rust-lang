@@ -1,5 +1,7 @@
 # 声明式宏 (Declarative Macros)
 
+> **EN**: Declarative Macros
+> **Summary**: 声明式宏 Declarative Macros. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/03_advanced/04_macros.md](../../../concept/03_advanced/04_macros.md)。
 > **历史版本存档**: [archive/knowledge/03_advanced/macros/01_declarative.md](../../../archive/knowledge/03_advanced/macros/01_declarative.md)
 >

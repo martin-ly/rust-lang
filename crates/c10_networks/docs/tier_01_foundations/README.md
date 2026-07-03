@@ -8,8 +8,8 @@
 
 | 资源  | 说明     |
 | :--- | :--- |
-| [QUICK_START.md](../tutorials/QUICK_START.md) | 快速入门 |
-| [00_MASTER_INDEX.md](../00_MASTER_INDEX.md)   | 完整索引 |
+| [QUICK_START.md](../tutorials/quick_start.md) | 快速入门 |
+| [00_MASTER_INDEX.md](../00_master_index.md)   | 完整索引 |
 
 ---
 

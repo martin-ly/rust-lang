@@ -17,6 +17,8 @@
 
 # aws-sdk-rust 架构解构 {#aws-sdk-rust-架构解构}
 
+> **EN**: Aws Sdk Architecture
+> **Summary**: aws-sdk-rust 架构解构 Aws Sdk Architecture.
 > **最后更新**: 2026-06-29
 >
 > **内容分级**: [归档级]

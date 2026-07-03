@@ -1,5 +1,7 @@
 # 设计模式反例边界 {#设计模式反例边界}
 
+> **EN**: Design Patterns Counterexamples
+> **Summary**: 设计模式反例边界 Design Patterns Counterexamples.
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
 > **Bloom 层级**: L5-L6 (分析/评价)

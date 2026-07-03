@@ -1,4 +1,7 @@
 # Safety-Critical Rust 官方路线对齐（2026） {#safety-critical-rust-官方路线对齐2026}
+
+> **EN**: Safety Critical Alignment 2026
+> **Summary**: Safety-Critical Rust 官方路线对齐 2026 Safety Critical Alignment 2026. (stub/archive redirect)
 >
 > **分级**: [B]
 >

@@ -23,6 +23,8 @@
 
 # kube-rs Crate 架构解构 {#kube-rs-crate-架构解构}
 
+> **EN**: Kube Rs Architecture
+> **Summary**: kube-rs Crate 架构解构 Kube Rs Architecture.
 > **最后更新**: 2026-06-29
 >
 > **内容分级**: [归档级]

@@ -1,5 +1,7 @@
 # 📦 Rust 集合与迭代器速查卡 {#rust-集合与迭代器速查卡}
 
+> **EN**: Collections Iterators Cheatsheet
+> **Summary**: 📦 Rust 集合与迭代器速查卡 Collections Iterators Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >

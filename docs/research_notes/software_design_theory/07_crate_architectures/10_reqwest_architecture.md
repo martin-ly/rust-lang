@@ -22,6 +22,8 @@
 
 # Reqwest Crate 架构解构 {#reqwest-crate-架构解构}
 
+> **EN**: Reqwest Architecture
+> **Summary**: Reqwest Crate 架构解构 Reqwest Architecture. (stub/archive redirect)
 >
 > **最后更新**: 2026-06-09
 > **内容分级**: [归档级]
@@ -54,7 +56,6 @@ let body = reqwest::get("https://api.github.com/users/rust-lang")
     .text()
 
     .await?;
-
 
 // 带自定义配置的 POST 请求
 
@@ -117,7 +118,6 @@ graph LR
 use reqwest::{Client, ClientBuilder, Proxy};
 
 use std::time::Duration;
-
 
 let client = ClientBuilder::new()
 
@@ -199,7 +199,6 @@ let request = client
 ```rust,ignore
 let resp = client.get("https://api.example.com/data").send().await?;
 
-
 // 状态码检查
 
 if !resp.status().is_success() {
@@ -208,7 +207,6 @@ if !resp.status().is_success() {
 
 }
 
-
 // 读取响应头
 
 let content_type = resp.headers()
@@ -216,7 +214,6 @@ let content_type = resp.headers()
     .get("content-type")
 
     .and_then(|v| v.to_str().ok());
-
 
 // 多种体解析方式
 
@@ -254,11 +251,9 @@ use reqwest_middleware::{Middleware, Next, Result};
 
 use tracing::{info, error};
 
-
 // 自定义日志中间件
 
 struct LoggingMiddleware;
-
 
 #[async_trait::async_trait]
 
@@ -282,13 +277,11 @@ impl Middleware for LoggingMiddleware {
 
         info!("→ {} {}", method, url);
 
-
         let start = std::time::Instant::now();
 
         let result = next.run(req, extensions).await;
 
         let elapsed = start.elapsed();
-
 
         match &result {
 
@@ -297,7 +290,6 @@ impl Middleware for LoggingMiddleware {
             Err(e) => error!("✗ {} {} failed: {}", method, url, e),
 
         }
-
 
         result
 
@@ -320,9 +312,7 @@ use reqwest_retry::{RetryTransientMiddleware, policies::ExponentialBackoff};
 
 use reqwest_tracing::TracingMiddleware;
 
-
 let retry_policy = ExponentialBackoff::builder().build_with_max_retries(3);
-
 
 let client: ClientWithMiddleware = MiddlewareClientBuilder::new(
 
@@ -388,7 +378,6 @@ async fn main() -> Result<(), reqwest::Error> {
 
     let client = reqwest::Client::new();
 
-
     // 并发发起多个请求
 
     let fetches = vec![
@@ -401,9 +390,7 @@ async fn main() -> Result<(), reqwest::Error> {
 
     ];
 
-
     let results = futures::future::join_all(fetches).await;
-
 
     for result in results {
 
@@ -416,7 +403,6 @@ async fn main() -> Result<(), reqwest::Error> {
         }
 
     }
-
 
     Ok(())
 
@@ -433,11 +419,9 @@ async fn main() -> Result<(), reqwest::Error> {
 ```rust,ignore
 use reqwest::blocking::{Client, Response};
 
-
 fn main() -> Result<(), reqwest::Error> {
 
     let client = Client::new();
-
 
     // 同步阻塞调用
 
@@ -447,11 +431,9 @@ fn main() -> Result<(), reqwest::Error> {
 
         .send()?;
 
-
     let data: ApiResponse = resp.json()?;
 
     println!("{:#?}", data);
-
 
     Ok(())
 
@@ -468,7 +450,6 @@ sequenceDiagram
     participant Runtime as 内部 Tokio Runtime
 
     participant Hyper as Hyper 异步栈
-
 
     User->>Blocking: client.get(url).send()
 
@@ -575,7 +556,6 @@ Reqwest 与 `serde` 生态深度集成，提供类型安全的请求体序列化
 ```rust,ignore
 use serde::{Serialize, Deserialize};
 
-
 #[derive(Serialize)]
 
 struct CreateUserRequest {
@@ -587,7 +567,6 @@ struct CreateUserRequest {
     age: Option<u8>,
 
 }
-
 
 #[derive(Deserialize, Debug)]
 
@@ -601,7 +580,6 @@ struct UserResponse {
 
 }
 
-
 let new_user = CreateUserRequest {
 
     username: "alice".into(),
@@ -611,7 +589,6 @@ let new_user = CreateUserRequest {
     age: Some(30),
 
 };
-
 
 // 请求体自动序列化为 JSON，并设置 Content-Type: application/json
 
@@ -650,7 +627,6 @@ let resp = client
 
     .await?;
 
-
 // multipart/form-data（文件上传）
 
 let file_content = tokio::fs::read("avatar.png").await?;
@@ -664,7 +640,6 @@ let form = reqwest::multipart::Form::new()
         .file_name("avatar.png")
 
         .mime_str("image/png")?);
-
 
 let resp = client
 

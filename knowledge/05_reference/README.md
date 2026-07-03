@@ -1,5 +1,7 @@
 # 05 - 参考文档
 
+> **EN**: Reference Index
+> **Summary**: 05 - 参考文档 Reference Index.
 > **Bloom 层级**: 理解
 > **快速查阅和参考资料**
 >

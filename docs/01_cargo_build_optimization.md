@@ -1,5 +1,7 @@
 # Cargo 编译速度优化指南 {#cargo-编译速度优化指南}
 
+> **EN**: Cargo Build Optimization
+> **Summary**: Cargo 编译速度优化指南 Cargo Build Optimization.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
@@ -48,14 +50,14 @@
 **Windows (PowerShell):**
 
 ```powershell
-./scripts/cargo-build-optimized.ps1 install-tools
+./scripts/cargo_build_optimized.ps1 install-tools
 ```
 
 **Linux/macOS:**
 
 ```bash
-./scripts/cargo-build-optimized.sh install-tools
-chmod +x ./scripts/cargo-build-optimized.sh
+./scripts/cargo_build_optimized.sh install-tools
+chmod +x ./scripts/cargo_build_optimized.sh
 ```
 
 ### 2. 使用优化脚本编译 {#2-使用优化脚本编译}
@@ -66,16 +68,16 @@ chmod +x ./scripts/cargo-build-optimized.sh
 
 ```powershell
 # 快速检查（最快） {#快速检查最快}
-./scripts/cargo-build-optimized.ps1 check
+./scripts/cargo_build_optimized.ps1 check
 
 # 开发构建 {#开发构建}
-./scripts/cargo-build-optimized.ps1 build dev
+./scripts/cargo_build_optimized.ps1 build dev
 
 # 运行测试 {#运行测试}
-./scripts/cargo-build-optimized.ps1 test
+./scripts/cargo_build_optimized.ps1 test
 
 # 查看统计 {#查看统计}
-./scripts/cargo-build-optimized.ps1 stats
+./scripts/cargo_build_optimized.ps1 stats
 ```
 
 ## ⚙️ 环境变量配置 {#环境变量配置}
@@ -219,7 +221,7 @@ cargo build --timings
 cat .cargo-build-times
 
 # 使用脚本查看统计 {#使用脚本查看统计}
-./scripts/cargo-build-optimized.ps1 stats
+./scripts/cargo_build_optimized.ps1 stats
 ```
 
 ### sccache 统计 {#sccache-统计}
@@ -238,7 +240,7 @@ sccache --show-stats
 
 ```powershell
 # 清理所有缓存 {#清理所有缓存}
-./scripts/cargo-build-optimized.ps1 clean-cache
+./scripts/cargo_build_optimized.ps1 clean-cache
 
 # 或者手动清理 {#或者手动清理}
 cargo clean

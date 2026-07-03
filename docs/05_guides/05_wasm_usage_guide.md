@@ -1,5 +1,7 @@
 # WASM 使用指南 {#wasm-使用指南}
 
+> **EN**: Wasm Usage Guide
+> **Summary**: WASM 使用指南 Wasm Usage Guide. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 >

@@ -1,5 +1,7 @@
 # Visitor 形式化分析 {#visitor-形式化分析}
 
+> **EN**: Visitor
+> **Summary**: Visitor 形式化分析 Visitor.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >
@@ -223,7 +225,6 @@ enum Expr {
 
 }
 
-
 trait Visitor {
 
     fn visit_int(&mut self, n: i32);
@@ -231,7 +232,6 @@ trait Visitor {
     fn visit_add(&mut self, a: &Expr, b: &Expr);
 
 }
-
 
 fn visit<V: Visitor>(v: &mut V, e: &Expr) {
 
@@ -252,7 +252,6 @@ fn visit<V: Visitor>(v: &mut V, e: &Expr) {
     }
 
 }
-
 
 struct PrintVisitor;
 
@@ -283,13 +282,11 @@ trait Visitor {
 
 }
 
-
 trait Shape {
 
     fn accept(&self, v: &mut dyn Visitor);
 
 }
-
 
 struct Circle { radius: f64 }
 
@@ -299,7 +296,6 @@ impl Shape for Circle {
 
 }
 
-
 struct Square { side: f64 }
 
 impl Shape for Square {
@@ -307,7 +303,6 @@ impl Shape for Square {
     fn accept(&self, v: &mut dyn Visitor) { v.visit_square(self); }
 
 }
-
 
 struct AreaVisitor { total: f64 }
 
@@ -318,7 +313,6 @@ impl Visitor for AreaVisitor {
     fn visit_square(&mut self, s: &Square) { self.total += s.side * s.side; }
 
 }
-
 
 fn main() {
 
@@ -418,7 +412,6 @@ type_system
 ```rust
 enum Expr { Int(i32), Add(Box<Expr>, Box<Expr>) }
 
-
 trait ExprVisitor<T> {
 
     fn visit_int(&mut self, n: i32) -> T;
@@ -426,7 +419,6 @@ trait ExprVisitor<T> {
     fn visit_add(&mut self, a: &Expr, b: &Expr, la: T, lb: T) -> T;
 
 }
-
 
 fn visit<V: ExprVisitor<String>>(v: &mut V, e: &Expr) -> String {
 
@@ -448,7 +440,6 @@ fn visit<V: ExprVisitor<String>>(v: &mut V, e: &Expr) -> String {
 
 }
 
-
 struct PrettyPrint;
 
 impl ExprVisitor<String> for PrettyPrint {
@@ -462,7 +453,6 @@ impl ExprVisitor<String> for PrettyPrint {
     }
 
 }
-
 
 // 输出："(1 + 2)"
 ```

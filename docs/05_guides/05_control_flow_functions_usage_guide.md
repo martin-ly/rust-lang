@@ -1,5 +1,7 @@
 # 控制流与函数使用指南 {#控制流与函数使用指南}
 
+> **EN**: Control Flow Functions Usage Guide
+> **Summary**: 控制流与函数使用指南 Control Flow Functions Usage Guide.
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 >

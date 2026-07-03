@@ -1,5 +1,7 @@
 # 思考记录与方法论 {#思考记录与方法论}
 
+> **EN**: Thinking Index
+> **Summary**: 思考记录与方法论 Thinking Index.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
 

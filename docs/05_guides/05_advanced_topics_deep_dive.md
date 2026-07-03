@@ -1,5 +1,7 @@
 # 🔬 高级主题深度指南 {#高级主题深度指南}
 
+> **EN**: Advanced Topics Deep Dive
+> **Summary**: 🔬 高级主题深度指南 Advanced Topics Deep Dive. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 > **创建日期**: 2026-02-15

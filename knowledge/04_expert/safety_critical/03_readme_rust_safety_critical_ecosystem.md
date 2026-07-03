@@ -9,6 +9,8 @@
 >
 # Rust安全关键系统生态系统 - 完整文档集
 
+> **EN**: Readme Rust Safety Critical Ecosystem
+> **Summary**: Rust安全关键系统生态系统 - 完整文档集 Readme Rust Safety Critical Ecosystem.
 > **Bloom 层级**: 理解
 
 ## 🎉 100% 全面完成

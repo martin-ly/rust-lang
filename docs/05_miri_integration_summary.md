@@ -1,5 +1,7 @@
 # Miri 集成总结报告 {#miri-集成总结报告}
 
+> **EN**: Miri Integration Summary
+> **Summary**: Miri 集成总结报告 Miri Integration Summary.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
@@ -102,14 +104,14 @@ pub mod miri_tests;
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-**文件**: `scripts/run-miri.sh` (Linux/macOS)
+**文件**: `scripts/run_miri.sh` (Linux/macOS)
 
 ```bash
 #!/bin/bash
 # 自动安装 Miri，设置环境变量，运行所有测试 {#自动安装-miri设置环境变量运行所有测试}
 ```
 
-**文件**: `scripts/run-miri.bat` (Windows)
+**文件**: `scripts/run_miri.bat` (Windows)
 
 ```batch
 @echo off
@@ -176,8 +178,8 @@ let z = &mut *y;  // 重新借用
 
 ```bash
 # 使用脚本 {#使用脚本}
-./scripts/run-miri.sh        # Linux/macOS
-scripts\run-miri.bat         # Windows
+./scripts/run_miri.sh        # Linux/macOS
+scripts\run_miri.bat         # Windows
 
 # 或手动运行 {#或手动运行}
 cargo miri test --workspace -- miri_tests
@@ -255,8 +257,8 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 - `crates/c09_design_pattern/src/miri_tests.rs`
 - `crates/c10_networks/src/miri_tests.rs`
 - `crates/c12_wasm/src/miri_tests.rs`
-- `scripts/run-miri.sh`
-- `scripts/run-miri.bat`
+- `scripts/run_miri.sh`
+- `scripts/run_miri.bat`
 - `docs/03_miri_guide.md`
 - `docs/05_miri_integration_summary.md`
 - `miri_test_example.rs`

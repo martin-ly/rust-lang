@@ -1,5 +1,7 @@
 # 创建型模式形式化 {#创建型模式形式化}
 
+> **EN**: Creational Index
+> **Summary**: 创建型模式形式化 Creational Index.
 > **概念族**: 软件设计 / 设计模式
 > **内容分级**: [归档级]
 >

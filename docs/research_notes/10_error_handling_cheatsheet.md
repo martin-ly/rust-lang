@@ -1,4 +1,7 @@
 # 错误处理速查卡 {#错误处理速查卡}
+
+> **EN**: Error Handling Cheatsheet
+> **Summary**: 错误处理速查卡 Error Handling Cheatsheet.
 >
 > **概念族**: 速查卡
 > **内容分级**: [归档级]

@@ -1,4 +1,7 @@
 # 实践项目 06: 并发下载器 {#实践项目-06-并发下载器}
+
+> **EN**: Project 06 Concurrent Downloader
+> **Summary**: 实践项目 06 Project 06 Concurrent Downloader.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]

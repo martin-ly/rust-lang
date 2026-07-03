@@ -1,5 +1,7 @@
 # 研究笔记系统更新日志 {#研究笔记系统更新日志}
 
+> **EN**: Changelog
+> **Summary**: 研究笔记系统更新日志 Changelog. (stub/archive redirect)
 > **概念族**: 运维 / 更新日志
 > **内容分级**: [归档级]
 >

@@ -1,5 +1,7 @@
 # 权威来源对齐 100% 完成路线图 {#权威来源对齐-100-完成路线图}
 
+> **EN**: Authoritative Source 100 Percent Roadmap
+> **Summary**: 权威来源对齐 100% 完成路线图 Authoritative Source 100 Percent Roadmap.
 > **概念族**: 权威来源对齐 / 100% 路线图
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **内容分级**: [核心级]

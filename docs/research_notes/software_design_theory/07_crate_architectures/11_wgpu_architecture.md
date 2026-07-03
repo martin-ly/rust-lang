@@ -10,6 +10,8 @@
 
 # Wgpu Crate 架构解构 {#wgpu-crate-架构解构}
 
+> **EN**: Wgpu Architecture
+> **Summary**: Wgpu Crate 架构解构 Wgpu Architecture.
 >
 > **最后更新**: 2026-06-09
 > **概念族**: 软件设计 / Crate 架构
@@ -157,7 +159,6 @@ let adapter = instance
 
     .expect("未找到合适的 GPU 适配器");
 
-
 // 查询 GPU 能力
 
 let info = adapter.get_info();
@@ -289,7 +290,6 @@ let bind_group_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDe
 
 });
 
-
 // 2. 创建具体的绑定组
 
 let bind_group = device.create_bind_group(&wgpu::BindGroupDescriptor {
@@ -350,7 +350,6 @@ struct VertexInput {
 
 };
 
-
 struct VertexOutput {
 
     @builtin(position) clip_position: vec4<f32>,
@@ -358,7 +357,6 @@ struct VertexOutput {
     @location(0) tex_coord: vec2<f32>,
 
 };
-
 
 @vertex
 
@@ -374,16 +372,13 @@ fn vs_main(in: VertexInput) -> VertexOutput {
 
 }
 
-
 @group(0) @binding(1)
 
 var t_diffuse: texture_2d<f32>;
 
-
 @group(0) @binding(2)
 
 var s_diffuse: sampler;
-
 
 @fragment
 
@@ -428,7 +423,6 @@ let vertex_buffer = device.create_buffer(&wgpu::BufferDescriptor {
     mapped_at_creation: false,
 
 });
-
 
 // 显式从 CPU 内存上传数据至 GPU
 
@@ -493,7 +487,6 @@ sequenceDiagram
 
     participant GPU as GPU 硬件
 
-
     CPU->>CE: begin_render_pass()
 
     CPU->>CE: set_pipeline / bind_group / draw
@@ -511,7 +504,6 @@ let mut encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor 
     label: Some("render_encoder"),
 
 });
-
 
 // 渲染通道 —— Wgpu 自动处理 color attachment 的 layout 转换
 
@@ -541,7 +533,6 @@ let mut encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor 
 
     });
 
-
     render_pass.set_pipeline(&render_pipeline);
 
     render_pass.set_bind_group(0, &bind_group, &[]);
@@ -551,7 +542,6 @@ let mut encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor 
     render_pass.draw(0..3, 0..1);
 
 }  // render_pass drop 后通道结束
-
 
 // 提交命令 —— 所有同步由 Wgpu 运行时推导
 
@@ -583,7 +573,6 @@ let mut config = surface.get_default_config(&adapter, width, height).unwrap();
 
 surface.configure(&device, &config);
 
-
 // 2. 每帧渲染循环
 
 fn render(&mut self) -> Result<(), wgpu::SurfaceError> {
@@ -594,20 +583,15 @@ fn render(&mut self) -> Result<(), wgpu::SurfaceError> {
 
     let view = output.texture.create_view(&wgpu::TextureViewDescriptor::default());
 
-
     let mut encoder = self.device.create_command_encoder(&...);
-
 
     // 记录渲染命令...
 
-
     self.queue.submit(std::iter::once(encoder.finish()));
-
 
     // 呈现至屏幕（异步）
 
     output.present();
-
 
     Ok(())
 
@@ -631,7 +615,6 @@ let (device, queue) = pollster::block_on(async {
     adapter.request_device(&desc, None).await
 
 }).expect("设备创建失败");
-
 
 // Web 平台：必须在 async 上下文中运行
 
@@ -842,7 +825,6 @@ let compute_pipeline = device.create_compute_pipeline(&wgpu::ComputePipelineDesc
     ..Default::default()
 
 });
-
 
 let mut compute_pass = encoder.begin_compute_pass(&Default::default());
 
