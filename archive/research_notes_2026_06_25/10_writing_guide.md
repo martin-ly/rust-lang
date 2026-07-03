@@ -1,65 +1,69 @@
-# 研究笔记写作指南
+# 研究笔记写作指南 {#研究笔记写作指南}
 
+> **EN**: Writing Guide
+> **Summary**: 研究笔记写作指南 Writing Guide.
+> **概念族**: 方法论 / 工具 / 指南
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ **Rust 1.93.1+ 更新完成**
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
+
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [研究笔记写作指南](#研究笔记写作指南)
-  - [📑 目录](#-目录)
-  - [🎯 指南概述 {#-指南概述}](#-指南概述--指南概述)
-  - [📝 写作前准备 {#-写作前准备}](#-写作前准备--写作前准备)
-    - [1. 明确研究目标](#1-明确研究目标)
-    - [2. 收集参考资料](#2-收集参考资料)
-    - [3. 规划内容结构](#3-规划内容结构)
-  - [✍️ 写作技巧 {#️-写作技巧}](#️-写作技巧-️-写作技巧)
-    - [1. 研究目标部分](#1-研究目标部分)
-    - [2. 理论基础部分](#2-理论基础部分)
-    - [3. 形式化定义部分](#3-形式化定义部分)
-    - [4. 代码示例部分](#4-代码示例部分)
-    - [5. 参考文献部分](#5-参考文献部分)
-  - [📐 格式规范 {#-格式规范}](#-格式规范--格式规范)
-    - [1. Markdown 格式](#1-markdown-格式)
-    - [2. 数学公式](#2-数学公式)
-    - [4. 链接和引用](#4-链接和引用)
-    - [5. 目录（TOC）门禁](#5-目录toc门禁)
-    - [6. 概念定义-属性关系-解释论证 层次化（核心研究笔记）](#6-概念定义-属性关系-解释论证-层次化核心研究笔记)
-  - [🔍 内容组织 {#-内容组织}](#-内容组织--内容组织)
-    - [1. 逻辑结构](#1-逻辑结构)
-    - [2. 章节划分](#2-章节划分)
-    - [3. 交叉引用](#3-交叉引用)
-  - [✅ 质量检查 {#-质量检查}](#-质量检查--质量检查)
-    - [1. 内容检查](#1-内容检查)
-    - [2. 格式检查](#2-格式检查)
-    - [3. 链接检查](#3-链接检查)
-  - [💡 写作示例 {#-写作示例}](#-写作示例--写作示例)
-    - [示例 1: 研究目标](#示例-1-研究目标)
-    - [示例 2: 形式化定义](#示例-2-形式化定义)
-    - [示例 3: 代码示例](#示例-3-代码示例)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-    - [核心文档](#核心文档)
-    - [贡献和质量](#贡献和质量)
-    - [工具和资源](#工具和资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [权威来源索引](#权威来源索引)
 
-## 🎯 指南概述 {#-指南概述}
+- [研究笔记写作指南 {#研究笔记写作指南}](#研究笔记写作指南-研究笔记写作指南)
+  - [📑 目录 {#目录}](#-目录-目录)
+  - [🎯 指南概述 {#指南概述}](#-指南概述-指南概述)
+  - [📝 写作前准备 {#写作前准备}](#-写作前准备-写作前准备)
+    - [1. 明确研究目标 {#1-明确研究目标}](#1-明确研究目标-1-明确研究目标)
+    - [2. 收集参考资料 {#2-收集参考资料}](#2-收集参考资料-2-收集参考资料)
+    - [3. 规划内容结构 {#3-规划内容结构}](#3-规划内容结构-3-规划内容结构)
+  - [✍️ 写作技巧 {#写作技巧}](#️-写作技巧-写作技巧)
+    - [1. 研究目标部分 {#1-研究目标部分}](#1-研究目标部分-1-研究目标部分)
+    - [2. 理论基础部分 {#2-理论基础部分}](#2-理论基础部分-2-理论基础部分)
+    - [3. 形式化定义部分 {#3-形式化定义部分}](#3-形式化定义部分-3-形式化定义部分)
+    - [4. 代码示例部分 {#4-代码示例部分}](#4-代码示例部分-4-代码示例部分)
+    - [5. 参考文献部分 {#5-参考文献部分}](#5-参考文献部分-5-参考文献部分)
+  - [📐 格式规范 {#格式规范}](#-格式规范-格式规范)
+    - [1. Markdown 格式 {#1-markdown-格式}](#1-markdown-格式-1-markdown-格式)
+    - [2. 数学公式 {#2-数学公式}](#2-数学公式-2-数学公式)
+    - [4. 链接和引用 {#4-链接和引用}](#4-链接和引用-4-链接和引用)
+    - [5. 目录（TOC）门禁 {#5-目录toc门禁}](#5-目录toc门禁-5-目录toc门禁)
+    - [6. 概念定义-属性关系-解释论证 层次化（核心研究笔记） {#6-概念定义-属性关系-解释论证-层次化核心研究笔记}](#6-概念定义-属性关系-解释论证-层次化核心研究笔记-6-概念定义-属性关系-解释论证-层次化核心研究笔记)
+  - [🔍 内容组织 {#内容组织}](#-内容组织-内容组织)
+    - [1. 逻辑结构 {#1-逻辑结构}](#1-逻辑结构-1-逻辑结构)
+    - [2. 章节划分 {#2-章节划分}](#2-章节划分-2-章节划分)
+    - [3. 交叉引用 {#3-交叉引用}](#3-交叉引用-3-交叉引用)
+  - [✅ 质量检查 {#质量检查}](#-质量检查-质量检查)
+    - [1. 内容检查 {#1-内容检查}](#1-内容检查-1-内容检查)
+    - [2. 格式检查 {#2-格式检查}](#2-格式检查-2-格式检查)
+    - [3. 链接检查 {#3-链接检查}](#3-链接检查-3-链接检查)
+  - [💡 写作示例 {#写作示例}](#-写作示例-写作示例)
+    - [示例 1: 研究目标 {#示例-1-研究目标}](#示例-1-研究目标-示例-1-研究目标)
+    - [示例 2: 形式化定义 {#示例-2-形式化定义}](#示例-2-形式化定义-示例-2-形式化定义)
+    - [示例 3: 代码示例 {#示例-3-代码示例}](#示例-3-代码示例-示例-3-代码示例)
+  - [🔗 相关资源 {#相关资源}](#-相关资源-相关资源)
+    - [核心文档 {#核心文档}](#核心文档-核心文档)
+    - [贡献和质量 {#贡献和质量}](#贡献和质量-贡献和质量)
+    - [工具和资源 {#工具和资源}](#工具和资源-工具和资源)
+  - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
+      - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
+      - [代码示例更新 {#代码示例更新}](#代码示例更新-代码示例更新)
+      - [相关文档 {#相关文档}](#相关文档-相关文档)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
+
+## 🎯 指南概述 {#指南概述}
+
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -81,11 +85,12 @@
 
 ---
 
-## 📝 写作前准备 {#-写作前准备}
+## 📝 写作前准备 {#写作前准备}
+
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 明确研究目标
+### 1. 明确研究目标 {#1-明确研究目标}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -108,27 +113,34 @@
 **示例**:
 
 ```markdown
-## 🎯 研究目标
+## 🎯 研究目标 {#研究目标-3}
+
 > **[来源: Rust Official Docs]**
 
 本研究的目的是形式化定义 Rust 的所有权模型，并证明其内存安全性。
 
-### 核心问题
+### 核心问题 {#核心问题-3}
+
 > **[来源: Rust Official Docs]**
 
 1. **所有权转移的形式化**: 如何用形式化方法描述所有权的转移？
+
 2. **借用规则的逻辑表达**: 如何用逻辑语言表达借用规则？
+
 3. **内存安全证明**: 如何证明所有权系统保证内存安全？
 
-### 预期成果
+### 预期成果 {#预期成果-3}
+
 > **[来源: Rust Official Docs]**
 
 - 所有权模型的形式化定义
+
 - 借用规则的逻辑表达
+
 - 内存安全的形式化证明
 ```
 
-### 2. 收集参考资料
+### 2. 收集参考资料 {#2-收集参考资料}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -156,7 +168,7 @@
 - 记录每个参考资料的用途
 - 标注重要章节和段落
 
-### 3. 规划内容结构
+### 3. 规划内容结构 {#3-规划内容结构}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -196,11 +208,12 @@
 
 ---
 
-## ✍️ 写作技巧 {#️-写作技巧}
+## ✍️ 写作技巧 {#写作技巧}
+
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 研究目标部分
+### 1. 研究目标部分 {#1-研究目标部分}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -227,30 +240,36 @@
 **正确示例**:
 
 ```markdown
-## 🎯 研究目标
+## 🎯 研究目标 {#研究目标-3}
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本研究的目的是形式化定义 Rust 的所有权模型，包括所有权转移、借用规则和生命周期约束。
 
-### 核心问题
+### 核心问题 {#核心问题-3}
 
 > **[来源: POPL - Programming Languages Research]**
 
 1. **所有权转移的形式化**: 如何用形式化方法描述所有权的转移？
+
 2. **借用规则的逻辑表达**: 如何用逻辑语言表达借用规则？
+
 3. **生命周期约束的形式化**: 如何形式化生命周期约束？
 
-### 预期成果
+### 预期成果 {#预期成果-3}
 
 > **[来源: PLDI - Programming Language Design]**
 
 - 所有权模型的形式化定义
+
 - 借用规则的逻辑表达
+
 - 生命周期约束的形式化
+
 - 相关性质的证明
 ```
 
-### 2. 理论基础部分
+### 2. 理论基础部分 {#2-理论基础部分}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -275,10 +294,11 @@
 **正确示例**:
 
 ```markdown
-## 📚 理论基础
+## 📚 理论基础 {#理论基础}
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 相关概念
+### 相关概念 {#相关概念}
 
 > **[来源: IEEE - Programming Language Standards]**
 
@@ -288,7 +308,7 @@
 
 **生命周期 (Lifetime)**: 引用有效的时间范围。
 
-### 理论背景
+### 理论背景 {#理论背景}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -297,7 +317,7 @@
 **分离逻辑 (Separation Logic)**: 用于表达借用规则的逻辑系统。分离逻辑可以表达内存的分离和共享。
 ```
 
-### 3. 形式化定义部分
+### 3. 形式化定义部分 {#3-形式化定义部分}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -335,15 +355,17 @@
     **语义**: 当执行 `move(x, y)` 时，`x` 的所有权转移到 `y`，`x` 不再可用。
 
     **示例**:
-
     ```rust
     let s1 = String::from("hello");
+
     let s2 = s1;  // 所有权转移: s1 → s2
+
     // s1 不再可用
+
     ```
 ````
 
-### 4. 代码示例部分
+### 4. 代码示例部分 {#4-代码示例部分}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -371,20 +393,24 @@
     ## 💻 代码示例
 
     ### 示例 1: 所有权转移
-
     ```rust
     fn main() {
-        let s1 = String::from("hello");  // s1 拥有字符串
-        let s2 = s1;                      // 所有权转移到 s2
-        // println!("{}", s1);           // 错误：s1 不再拥有值
-        println!("{}", s2);              // 正确：s2 拥有值
-    } // s2 离开作用域，值被丢弃
-    ```
 
+        let s1 = String::from("hello");  // s1 拥有字符串
+
+        let s2 = s1;                      // 所有权转移到 s2
+
+        // println!("{}", s1);           // 错误：s1 不再拥有值
+
+        println!("{}", s2);              // 正确：s2 拥有值
+
+    } // s2 离开作用域，值被丢弃
+
+    ```
     **说明**: 当 `s1` 的所有权转移到 `s2` 后，`s1` 不再可用。这是 Rust 所有权系统的基本规则。
 ````
 
-### 5. 参考文献部分
+### 5. 参考文献部分 {#5-参考文献部分}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -409,41 +435,49 @@
 **正确示例**:
 
 ```markdown
-## 📖 参考文献
+## 📖 参考文献 {#参考文献}
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 学术论文
+### 学术论文 {#学术论文}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 1. **RustBelt: Logical Foundations for the Future of Safe Systems Programming**
+
    - 作者: Ralf Jung, et al.
+
    - 年份: 2018
+
    - 摘要: 为 Rust 的所有权和借用系统提供形式化基础
+
    - 链接: 论文链接
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - [Rust Book - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+
 - [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
 
-### 相关代码
+### 相关代码 {#相关代码}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [所有权实现](../../crates/c01_ownership_borrow_scope/README.md)
+
 - [所有权文档](../../crates/c01_ownership_borrow_scope/docs/README.md)
 ```
 
 ---
 
-## 📐 格式规范 {#-格式规范}
+## 📐 格式规范 {#格式规范}
+
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 1. Markdown 格式
+### 1. Markdown 格式 {#1-markdown-格式}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -472,7 +506,7 @@
 - 使用 `*斜体*` 表示强调
 - 使用 `` `代码` `` 表示代码或术语
 
-### 2. 数学公式
+### 2. 数学公式 {#2-数学公式}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -491,7 +525,6 @@
 
     **行内公式**: 类型环境 $\Gamma$ 包含变量 $x$ 的类型 $\tau_1$。
     ```
-
     ### 3. 代码块
 
     **格式要求**:
@@ -505,12 +538,15 @@
     ```markdown
     ```rust
     fn main() {
+
         println!("Hello, world!");
+
     }
+
     ```
 ````
 
-### 4. 链接和引用
+### 4. 链接和引用 {#4-链接和引用}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -524,10 +560,11 @@
 
 ```markdown
 - [所有权模型形式化](formal_methods/10_ownership_model.md)
+
 - [研究路线图](10_research_roadmap.md)
 ```
 
-### 5. 目录（TOC）门禁
+### 5. 目录（TOC）门禁 {#5-目录toc门禁}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -543,22 +580,28 @@
 ```markdown
 ---
 
-## 📊 目录
+## 📊 目录 {#目录-1}
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - 文档标题
+
   - [形式化定义](#形式化定义)
+
   - Rust 实现
+
   - 边界
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
+
 > **[来源: [crates.io](https://crates.io/)]**
+
 ...
 ```
 
-### 6. 概念定义-属性关系-解释论证 层次化（核心研究笔记）
+### 6. 概念定义-属性关系-解释论证 层次化（核心研究笔记） {#6-概念定义-属性关系-解释论证-层次化核心研究笔记}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -576,11 +619,12 @@
 
 ---
 
-## 🔍 内容组织 {#-内容组织}
+## 🔍 内容组织 {#内容组织}
+
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 1. 逻辑结构
+### 1. 逻辑结构 {#1-逻辑结构}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -599,7 +643,7 @@
 5. 参考文献（支持材料）
 6. 研究进展（当前状态）
 
-### 2. 章节划分
+### 2. 章节划分 {#2-章节划分}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -615,7 +659,7 @@
 - 子章节使用三级标题
 - 详细内容使用四级标题
 
-### 3. 交叉引用
+### 3. 交叉引用 {#3-交叉引用}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -633,11 +677,12 @@
 
 ---
 
-## ✅ 质量检查 {#-质量检查}
+## ✅ 质量检查 {#质量检查}
+
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 1. 内容检查
+### 1. 内容检查 {#1-内容检查}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -649,7 +694,8 @@
 - [ ] 代码示例可运行
 - [ ] 参考文献充分
 
-### 2. 格式检查
+### 2. 格式检查 {#2-格式检查}
+
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -661,7 +707,8 @@
 - [ ] 链接全部有效
 - [ ] 标题层级正确
 
-### 3. 链接检查
+### 3. 链接检查 {#3-链接检查}
+
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -674,59 +721,74 @@
 
 ---
 
-## 💡 写作示例 {#-写作示例}
+## 💡 写作示例 {#写作示例}
+
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 示例 1: 研究目标
+### 示例 1: 研究目标 {#示例-1-研究目标}
+
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **好的示例**:
 
 ```markdown
-## 🎯 研究目标
+## 🎯 研究目标 {#研究目标-3}
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本研究的目的是形式化定义 Rust 的所有权模型，并证明其内存安全性。
 
-### 核心问题
+### 核心问题 {#核心问题-3}
+
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **所有权转移的形式化**: 如何用形式化方法描述所有权的转移？
+
 2. **借用规则的逻辑表达**: 如何用逻辑语言表达借用规则？
+
 3. **内存安全证明**: 如何证明所有权系统保证内存安全？
 
-### 预期成果
+### 预期成果 {#预期成果-3}
+
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - 所有权模型的形式化定义
+
 - 借用规则的逻辑表达
+
 - 内存安全的形式化证明
 ```
 
 **不好的示例**:
 
 ```markdown
-## 🎯 研究目标
+## 🎯 研究目标 {#研究目标-3}
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 研究 Rust 的所有权。
 
-### 核心问题
+### 核心问题 {#核心问题-3}
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 所有权是什么？
+
 - 如何形式化？
 
-### 预期成果
+### 预期成果 {#预期成果-3}
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 一些定义
+
 - 一些证明
 ```
 
-### 示例 2: 形式化定义
+### 示例 2: 形式化定义 {#示例-2-形式化定义}
+
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -744,10 +806,11 @@
     **语义**: 当执行 `move(x, y)` 时，`x` 的所有权转移到 `y`，`x` 不再可用。
 
     **示例**:
-
     ```rust
     let s1 = String::from("hello");
+
     let s2 = s1;  // 所有权转移: s1 → s2
+
     ```
 ````
 
@@ -761,7 +824,8 @@
     形式化表示: move(x, y)
 ```
 
-### 示例 3: 代码示例
+### 示例 3: 代码示例 {#示例-3-代码示例}
+
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -769,16 +833,20 @@
 
 ````markdown
     ### 示例 1: 所有权转移
-
     ```rust
     fn main() {
-        let s1 = String::from("hello");  // s1 拥有字符串
-        let s2 = s1;                      // 所有权转移到 s2
-        // println!("{}", s1);           // 错误：s1 不再拥有值
-        println!("{}", s2);              // 正确：s2 拥有值
-    } // s2 离开作用域，值被丢弃
-    ```
 
+        let s1 = String::from("hello");  // s1 拥有字符串
+
+        let s2 = s1;                      // 所有权转移到 s2
+
+        // println!("{}", s1);           // 错误：s1 不再拥有值
+
+        println!("{}", s2);              // 正确：s2 拥有值
+
+    } // s2 离开作用域，值被丢弃
+
+    ```
     **说明**: 当 `s1` 的所有权转移到 `s2` 后，`s1` 不再可用。这是 Rust 所有权系统的基本规则。
 ````
 
@@ -786,21 +854,25 @@
 
 ````markdown
     ### 示例 1: 所有权转移
-
     ```rust
     let s1 = String::from("hello");
+
     let s2 = s1;
+
     println!("{}", s2);
+
     ```
 ````
 
 ---
 
-## 🔗 相关资源 {#-相关资源}
+## 🔗 相关资源 {#相关资源}
+
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 核心文档
+### 核心文档 {#核心文档}
+
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -809,7 +881,8 @@
 - [最佳实践](10_best_practices.md)
 - [质量检查清单](10_quality_checklist.md)
 
-### 贡献和质量
+### 贡献和质量 {#贡献和质量}
+
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -817,7 +890,8 @@
 - [研究笔记示例](10_example.md)
 - [快速参考](10_quick_reference.md)
 
-### 工具和资源
+### 工具和资源 {#工具和资源}
+
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -827,25 +901,28 @@
 ---
 
 **维护者**: Rust Research Writing Team
+
 **最后更新**: 2026-01-26
+
 **状态**: ✅ **Rust 1.93.1+ 更新完成**
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
+
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
+
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -854,7 +931,7 @@
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -862,7 +939,7 @@
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -871,7 +948,9 @@
 ---
 
 **维护者**: Rust 学习项目团队
+
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -879,28 +958,24 @@
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+
 **最后更新**: 2026-05-19
+
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

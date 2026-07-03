@@ -11,6 +11,7 @@
 >
 > **前置依赖**: [Rust 1.96 稳定特性](rust_1_96_stabilized.md) · [Rust 1.97 前沿特性预览](rust_1_97_preview.md)
 > **后置概念**: [Rust 1.98 前沿特性预览](rust_1_98_preview.md)
+> **来源**: [Rust 1.97.0 Release Notes](https://releases.rs/docs/1.97.0/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ---
 

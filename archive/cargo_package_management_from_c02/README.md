@@ -96,7 +96,7 @@ graph TD
 ### 4. 时效性 ⏰
 
 - **Rust 1.93.0**: 基于最新稳定版本
-- **持续更新**: 跟踪 Rust 版本更新
+- **历史版本**: Rust 1.93.0（归档快照，不再跟踪新版本）
 - **社区反馈**: 根据使用反馈改进
 
 ---
@@ -346,10 +346,10 @@ my-project/                 # Package
 ---
 
 **文档系列**: Cargo 包管理体系
-**维护状态**: 🟢 活跃开发中
-**反馈渠道**: Issues / Pull Requests
+**维护状态**: 📦 已归档（只读历史参考，不再维护）
+**反馈渠道**: 无（归档内容不接受新 Issue/PR）
 
-_让我们一起构建最全面的 Cargo 学习资源！_ 🦀📦✨
+_本文档为历史归档，仅供查阅。_ 🦀📦
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -302,11 +302,11 @@
 | [Edition 2024 完全指南：新特性与迁移策略](../../07_future/44_edition_guide.md) | ⟹ | [Language Evolution](../../07_future/03_evolution.md) |
 | [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/48_aarch64_sve_sme_preview.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/43_rust_for_linux.md) |
 | [Rust 的发布流程与 Nightly Rust](../../07_future/50_nightly_rust.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/05_rust_version_tracking.md) |
-| [Rust 的发布流程与 Nightly Rust](../../07_future/50_nightly_rust.md) | ⟹ | [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/rust_1_97_preview.md |
+| [Rust 的发布流程与 Nightly Rust](../../07_future/50_nightly_rust.md) | ⟹ | [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/rust_1_97_preview.md) |
 | [BorrowSanitizer：动态别名规则验证工具](../../07_future/borrow_sanitizer.md) | ⟹ | [Formal Methods Industrialization](../../07_future/02_formal_methods.md) |
-| [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/rust_1_97_preview.md | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) |
-| [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/rust_1_97_preview.md | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) |
-| [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) | ⟹ | [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/rust_1_97_preview.md |
+| [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/rust_1_97_preview.md) | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) |
+| [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/rust_1_97_preview.md) | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) |
+| [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) | ⟹ | [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/rust_1_97_preview.md) |
 
 ---
 

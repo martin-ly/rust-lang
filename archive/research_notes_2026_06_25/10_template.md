@@ -1,71 +1,78 @@
-# [研究主题名称]
+# [研究主题名称] {#研究主题名称}
 
+> **EN**: Template
+> **Summary**: [研究主题名称] Template. (stub/archive redirect)
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [\[研究主题名称\]](#研究主题名称)
-  - [📑 目录](#-目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
-    - [核心问题](#核心问题)
-    - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
-    - [相关概念](#相关概念)
-    - [理论背景](#理论背景)
-  - [🔬 形式化定义 / 实验设计 {#-形式化定义--实验设计}](#-形式化定义--实验设计--形式化定义--实验设计)
-    - [1. 定义/设计要点一](#1-定义设计要点一)
-    - [2. 定义/设计要点二](#2-定义设计要点二)
-    - [3. 定义/设计要点三](#3-定义设计要点三)
-  - [⚠️ 反例（如适用） {#️-反例如适用}](#️-反例如适用-️-反例如适用)
-  - [🌳 公理-定理证明树 {#-公理-定理证明树}](#-公理-定理证明树--公理-定理证明树)
-  - [✅ 证明目标 / 实验目标 {#-证明目标--实验目标}](#-证明目标--实验目标--证明目标--实验目标)
-    - [待证明的性质 / 待测试的场景](#待证明的性质--待测试的场景)
-    - [证明方法 / 测试方法](#证明方法--测试方法)
-  - [💻 代码示例 {#-代码示例}](#-代码示例--代码示例)
-    - [示例 1: 基础示例](#示例-1-基础示例)
-    - [示例 2: 进阶示例](#示例-2-进阶示例)
-    - [示例 3: 研究场景示例](#示例-3-研究场景示例)
-    - [示例 4: Coq 形式化示例](#示例-4-coq-形式化示例)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
-    - [学术论文](#学术论文)
-    - [官方文档](#官方文档)
-    - [相关代码](#相关代码)
-    - [工具资源](#工具资源)
-  - [🔗 形式化链接 {#-形式化链接}](#-形式化链接--形式化链接)
-    - [前置依赖](#前置依赖)
-    - [后续引用](#后续引用)
-    - [相关研究笔记](#相关研究笔记)
-    - [Coq 证明骨架](#coq-证明骨架)
-  - [🔄 研究进展 {#-研究进展}](#-研究进展--研究进展)
-    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
-    - [进行中 🔄 {#进行中-}](#进行中--进行中-)
-    - [计划中 📋 {#计划中-}](#计划中--计划中-)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [权威来源索引](#权威来源索引)
+- [\[研究主题名称\] {#研究主题名称}](#研究主题名称-研究主题名称)
+  - [📑 目录 {#目录}](#-目录-目录)
+  - [🎯 研究目标 {#研究目标}](#-研究目标-研究目标)
+    - [核心问题 {#核心问题}](#核心问题-核心问题)
+    - [预期成果 {#预期成果}](#预期成果-预期成果)
+  - [📚 理论基础 {#理论基础}](#-理论基础-理论基础)
+    - [相关概念 {#相关概念}](#相关概念-相关概念)
+    - [理论背景 {#理论背景}](#理论背景-理论背景)
+  - [🔬 形式化定义 / 实验设计 {#形式化定义-实验设计}](#-形式化定义--实验设计-形式化定义-实验设计)
+    - [1. 定义/设计要点一 {#1-定义设计要点一}](#1-定义设计要点一-1-定义设计要点一)
+    - [2. 定义/设计要点二 {#2-定义设计要点二}](#2-定义设计要点二-2-定义设计要点二)
+    - [3. 定义/设计要点三 {#3-定义设计要点三}](#3-定义设计要点三-3-定义设计要点三)
+  - [⚠️ 反例（如适用） {#反例如适用}](#️-反例如适用-反例如适用)
+  - [🌳 公理-定理证明树 {#公理-定理证明树}](#-公理-定理证明树-公理-定理证明树)
+  - [✅ 证明目标 / 实验目标 {#证明目标-实验目标}](#-证明目标--实验目标-证明目标-实验目标)
+    - [待证明的性质 / 待测试的场景 {#待证明的性质-待测试的场景}](#待证明的性质--待测试的场景-待证明的性质-待测试的场景)
+    - [证明方法 / 测试方法 {#证明方法-测试方法}](#证明方法--测试方法-证明方法-测试方法)
+  - [💻 代码示例 {#代码示例}](#-代码示例-代码示例)
+    - [示例 1: 基础示例 {#示例-1-基础示例}](#示例-1-基础示例-示例-1-基础示例)
+    - [示例 2: 进阶示例 {#示例-2-进阶示例}](#示例-2-进阶示例-示例-2-进阶示例)
+    - [示例 3: 研究场景示例 {#示例-3-研究场景示例}](#示例-3-研究场景示例-示例-3-研究场景示例)
+    - [示例 4: Coq 形式化示例 {#示例-4-coq-形式化示例}](#示例-4-coq-形式化示例-示例-4-coq-形式化示例)
+  - [📖 参考文献 {#参考文献}](#-参考文献-参考文献)
+    - [学术论文 {#学术论文}](#学术论文-学术论文)
+    - [官方文档 {#官方文档}](#官方文档-官方文档)
+    - [相关代码 {#相关代码}](#相关代码-相关代码)
+    - [工具资源 {#工具资源}](#工具资源-工具资源)
+  - [🔗 形式化链接 {#形式化链接}](#-形式化链接-形式化链接)
+    - [前置依赖 {#前置依赖}](#前置依赖-前置依赖)
+    - [后续引用 {#后续引用}](#后续引用-后续引用)
+    - [相关研究笔记 {#相关研究笔记}](#相关研究笔记-相关研究笔记)
+    - [Coq 证明骨架 {#coq-证明骨架}](#coq-证明骨架-coq-证明骨架)
+  - [🔄 研究进展 {#研究进展}](#-研究进展-研究进展)
+    - [已完成 ✅ {#已完成}](#已完成--已完成)
+    - [进行中 🔄 {#进行中}](#进行中--进行中)
+    - [计划中 📋 {#计划中}](#计划中--计划中)
+  - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
+      - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
+      - [代码示例更新 {#代码示例更新}](#代码示例更新-代码示例更新)
+      - [相关文档 {#相关文档}](#相关文档-相关文档)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 > **创建日期**: YYYY-MM-DD
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024) ✅
+> **Rust 版本**: 1.96.1+ (Edition 2024) ✅
 > **状态**: ✅ 已完成
+> **层级**: Lx-Ly（L0 权威来源 / L1 元概念 / L2 核心概念族 / L3 具体概念 / L4 实现机制 / L5 代码实践 / L6 反例边界 / L7 版本）
+> **概念族**: [概念族名称，如 所有权/借用 / 类型系统 / 并发安全 / 异步 / 模块 / 软件设计 / 实验研究 / 版本特性]
+> **前置概念**: [前置依赖文档链接]
+> **后置概念**: [后续引用文档链接]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ---
 
-## 🎯 研究目标 {#-研究目标}
+## 🎯 研究目标 {#研究目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究的目的是 [研究目的描述]。
 
-### 核心问题
+### 核心问题 {#核心问题}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -75,7 +82,7 @@
 2. **[问题二]**: [问题描述]
 3. **[问题三]**: [问题描述]
 
-### 预期成果
+### 预期成果 {#预期成果}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -87,11 +94,11 @@
 
 ---
 
-## 📚 理论基础 {#-理论基础}
+## 📚 理论基础 {#理论基础}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 相关概念
+### 相关概念 {#相关概念}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -99,7 +106,7 @@
 
 **[概念名称]**: [概念定义和说明]
 
-### 理论背景
+### 理论背景 {#理论背景}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -109,11 +116,11 @@
 
 ---
 
-## 🔬 形式化定义 / 实验设计 {#-形式化定义--实验设计}
+## 🔬 形式化定义 / 实验设计 {#形式化定义-实验设计}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 定义/设计要点一
+### 1. 定义/设计要点一 {#1-定义设计要点一}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -135,7 +142,7 @@ fn example_definition() {
 }
 ```
 
-### 2. 定义/设计要点二
+### 2. 定义/设计要点二 {#2-定义设计要点二}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -157,7 +164,7 @@ fn example_two() {
 }
 ```
 
-### 3. 定义/设计要点三
+### 3. 定义/设计要点三 {#3-定义设计要点三}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -167,7 +174,7 @@ fn example_two() {
 
 ---
 
-## ⚠️ 反例（如适用） {#️-反例如适用}
+## ⚠️ 反例（如适用） {#反例如适用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -177,7 +184,7 @@ fn example_two() {
 
 ---
 
-## 🌳 公理-定理证明树 {#-公理-定理证明树}
+## 🌳 公理-定理证明树 {#公理-定理证明树}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -197,11 +204,11 @@ fn example_two() {
 
 ---
 
-## ✅ 证明目标 / 实验目标 {#-证明目标--实验目标}
+## ✅ 证明目标 / 实验目标 {#证明目标-实验目标}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 待证明的性质 / 待测试的场景
+### 待证明的性质 / 待测试的场景 {#待证明的性质-待测试的场景}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -209,7 +216,7 @@ fn example_two() {
 2. **[性质/场景二]**: [描述]
 3. **[性质/场景三]**: [描述]
 
-### 证明方法 / 测试方法
+### 证明方法 / 测试方法 {#证明方法-测试方法}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -219,11 +226,11 @@ fn example_two() {
 
 ---
 
-## 💻 代码示例 {#-代码示例}
+## 💻 代码示例 {#代码示例}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 示例 1: 基础示例
+### 示例 1: 基础示例 {#示例-1-基础示例}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -242,7 +249,7 @@ fn main() {
 
 **说明**: [示例说明和要点]
 
-### 示例 2: 进阶示例
+### 示例 2: 进阶示例 {#示例-2-进阶示例}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -262,7 +269,7 @@ fn main() {
 
 **说明**: [示例说明和要点]
 
-### 示例 3: 研究场景示例
+### 示例 3: 研究场景示例 {#示例-3-研究场景示例}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -288,7 +295,7 @@ fn main() {
 
 **说明**: [研究场景说明和形式化目标]
 
-### 示例 4: Coq 形式化示例
+### 示例 4: Coq 形式化示例 {#示例-4-coq-形式化示例}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -324,11 +331,11 @@ Qed.
 
 ---
 
-## 📖 参考文献 {#-参考文献}
+## 📖 参考文献 {#参考文献}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 学术论文
+### 学术论文 {#学术论文}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -336,13 +343,12 @@ Qed.
    - 作者: [作者姓名]
    - 年份: [年份]
    - 摘要: [摘要或链接]
-
 2. **RustBelt: Securing the Foundations of the Rust Programming Language**
    - 作者: Ralf Jung, Jacques-Henri Jourdan, Robbert Krebbers, Derek Dreyer
    - 年份: 2017
    - 链接: <https://plv.mpi-sws.org/rustbelt/>
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -350,14 +356,14 @@ Qed.
 - Rust Book
 - Rust API Guidelines
 
-### 相关代码
+### 相关代码 {#相关代码}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 - 相关代码位置: `../../crates/<crate_name>/src/`
 - 示例代码位置: `../../crates/<crate_name>/examples/`
 
-### 工具资源
+### 工具资源 {#工具资源}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -369,11 +375,11 @@ Qed.
 
 ---
 
-## 🔗 形式化链接 {#-形式化链接}
+## 🔗 形式化链接 {#形式化链接}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 前置依赖
+### 前置依赖 {#前置依赖}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -384,7 +390,7 @@ Qed.
 | 所有权规则 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | 内存安全基础 |
 | 借用规则 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | 数据竞争自由 |
 
-### 后续引用
+### 后续引用 {#后续引用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -394,7 +400,7 @@ Qed.
 | [后续文档2] | [链接] | [说明] |
 | CORE_THEOREMS_FULL_PROOFS | [10_core_theorems_full_proofs.md](10_core_theorems_full_proofs.md) | 完整定理证明 |
 
-### 相关研究笔记
+### 相关研究笔记 {#相关研究笔记}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -411,37 +417,37 @@ Qed.
 | 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) |
 | 实验研究 | 内存分析 | [experiments/10_memory_analysis.md](experiments/10_memory_analysis.md) |
 
-### Coq 证明骨架
+### Coq 证明骨架 {#coq-证明骨架}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 定理 | Coq 文件 | 说明 |
 | :--- | :--- | :--- |
-| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 所有权唯一性 |
-| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 数据竞争自由 |
-| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../deprecated/coq_skeleton/TYPE_SAFETY.v) | 类型安全 |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 所有权唯一性 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../../archive/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 数据竞争自由 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../../archive/deprecated/coq_skeleton/TYPE_SAFETY.v) | 类型安全 |
 
 ---
 
-## 🔄 研究进展 {#-研究进展}
+## 🔄 研究进展 {#研究进展}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 已完成 ✅ {#已完成-}
+### 已完成 ✅ {#已完成}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [x] [已完成的任务]
 - [x] [已完成的任务]
 
-### 进行中 🔄 {#进行中-}
+### 进行中 🔄 {#进行中}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] [进行中的任务]
 - [ ] [进行中的任务]
 
-### 计划中 📋 {#计划中-}
+### 计划中 📋 {#计划中}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -456,19 +462,19 @@ Qed.
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -477,7 +483,7 @@ Qed.
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -485,7 +491,7 @@ Qed.
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -498,13 +504,13 @@ Qed.
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

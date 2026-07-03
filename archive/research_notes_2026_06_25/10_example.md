@@ -1,72 +1,77 @@
-# 研究笔记示例
+# 研究笔记示例 {#研究笔记示例}
 
+> **EN**: Example
+> **Summary**: 研究笔记示例 Example.
+> **概念族**: 综合研究
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 📑 目录
+## 📑 目录 {#目录}
+
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [研究笔记示例](#研究笔记示例)
-  - [📑 目录](#-目录)
-  - [📋 说明 {#-说明}](#-说明--说明)
-  - [📝 完整示例 {#-完整示例}](#-完整示例--完整示例)
-  - [所有权模型形式化（示例）](#所有权模型形式化示例)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
-    - [核心问题](#核心问题)
-    - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
-    - [相关概念](#相关概念)
-    - [理论背景](#理论背景)
-  - [🔬 形式化定义 {#-形式化定义}](#-形式化定义--形式化定义)
-    - [1. 所有权转移](#1-所有权转移)
-    - [2. 借用规则](#2-借用规则)
-    - [3. 生命周期约束](#3-生命周期约束)
-  - [✅ 证明目标 {#-证明目标}](#-证明目标--证明目标)
-    - [待证明的性质](#待证明的性质)
-    - [证明方法](#证明方法)
-  - [💻 代码示例 {#-代码示例}](#-代码示例--代码示例)
-    - [示例 1: 所有权转移](#示例-1-所有权转移)
-    - [示例 2: 不可变借用](#示例-2-不可变借用)
-    - [示例 3: 可变借用](#示例-3-可变借用)
-    - [示例 4: 生命周期约束](#示例-4-生命周期约束)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
-    - [学术论文](#学术论文)
-    - [官方文档](#官方文档)
-    - [相关代码](#相关代码)
-    - [工具资源](#工具资源)
-  - [🔄 研究进展 {#-研究进展}](#-研究进展--研究进展)
-    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
-    - [进行中 🔄 {#进行中-}](#进行中--进行中-)
-    - [计划中 📋 {#计划中-}](#计划中--计划中-)
-  - [💡 编写提示 {#-编写提示}](#-编写提示--编写提示)
-    - [1. 研究目标](#1-研究目标)
-    - [2. 理论基础](#2-理论基础)
-    - [3. 形式化定义](#3-形式化定义)
-    - [4. 代码示例](#4-代码示例)
-    - [5. 参考文献](#5-参考文献)
-    - [6. 研究进展](#6-研究进展)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-    - [核心文档](#核心文档)
-    - [研究笔记](#研究笔记)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [权威来源索引](#权威来源索引)
+
+- [研究笔记示例 {#研究笔记示例}](#研究笔记示例-研究笔记示例)
+  - [📑 目录 {#目录}](#-目录-目录)
+  - [📋 说明 {#说明}](#-说明-说明)
+  - [📝 完整示例 {#完整示例}](#-完整示例-完整示例)
+  - [所有权模型形式化（示例） {#所有权模型形式化示例}](#所有权模型形式化示例-所有权模型形式化示例)
+  - [🎯 研究目标 {#研究目标}](#-研究目标-研究目标)
+    - [核心问题 {#核心问题}](#核心问题-核心问题)
+    - [预期成果 {#预期成果}](#预期成果-预期成果)
+  - [📚 理论基础 {#理论基础}](#-理论基础-理论基础)
+    - [相关概念 {#相关概念}](#相关概念-相关概念)
+    - [理论背景 {#理论背景}](#理论背景-理论背景)
+  - [🔬 形式化定义 {#形式化定义}](#-形式化定义-形式化定义)
+    - [1. 所有权转移 {#1-所有权转移}](#1-所有权转移-1-所有权转移)
+    - [2. 借用规则 {#2-借用规则}](#2-借用规则-2-借用规则)
+    - [3. 生命周期约束 {#3-生命周期约束}](#3-生命周期约束-3-生命周期约束)
+  - [✅ 证明目标 {#证明目标}](#-证明目标-证明目标)
+    - [待证明的性质 {#待证明的性质}](#待证明的性质-待证明的性质)
+    - [证明方法 {#证明方法}](#证明方法-证明方法)
+  - [💻 代码示例 {#代码示例}](#-代码示例-代码示例)
+    - [示例 1: 所有权转移 {#示例-1-所有权转移}](#示例-1-所有权转移-示例-1-所有权转移)
+    - [示例 2: 不可变借用 {#示例-2-不可变借用}](#示例-2-不可变借用-示例-2-不可变借用)
+    - [示例 3: 可变借用 {#示例-3-可变借用}](#示例-3-可变借用-示例-3-可变借用)
+    - [示例 4: 生命周期约束 {#示例-4-生命周期约束}](#示例-4-生命周期约束-示例-4-生命周期约束)
+  - [📖 参考文献 {#参考文献}](#-参考文献-参考文献)
+    - [学术论文 {#学术论文}](#学术论文-学术论文)
+    - [官方文档 {#官方文档}](#官方文档-官方文档)
+    - [相关代码 {#相关代码}](#相关代码-相关代码)
+    - [工具资源 {#工具资源}](#工具资源-工具资源)
+  - [🔄 研究进展 {#研究进展}](#-研究进展-研究进展)
+    - [已完成 ✅ {#已完成}](#已完成--已完成)
+    - [进行中 🔄 {#进行中}](#进行中--进行中)
+    - [计划中 📋 {#计划中}](#计划中--计划中)
+  - [💡 编写提示 {#编写提示}](#-编写提示-编写提示)
+    - [1. 研究目标 {#1-研究目标}](#1-研究目标-1-研究目标)
+    - [2. 理论基础 {#2-理论基础}](#2-理论基础-2-理论基础)
+    - [3. 形式化定义 {#3-形式化定义}](#3-形式化定义-3-形式化定义)
+    - [4. 代码示例 {#4-代码示例}](#4-代码示例-4-代码示例)
+    - [5. 参考文献 {#5-参考文献}](#5-参考文献-5-参考文献)
+    - [6. 研究进展 {#6-研究进展}](#6-研究进展-6-研究进展)
+  - [🔗 相关资源 {#相关资源}](#-相关资源-相关资源)
+    - [核心文档 {#核心文档}](#核心文档-核心文档)
+    - [研究笔记 {#研究笔记}](#研究笔记-研究笔记)
+  - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
+      - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
+      - [代码示例更新 {#代码示例更新}](#代码示例更新-代码示例更新)
+      - [相关文档 {#相关文档}](#相关文档-相关文档)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成（示例文档）
 
 ---
 
-## 📋 说明 {#-说明}
+## 📋 说明 {#说明}
+
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -78,7 +83,8 @@
 
 ---
 
-## 📝 完整示例 {#-完整示例}
+## 📝 完整示例 {#完整示例}
+
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -86,25 +92,26 @@
 
 ---
 
-## 所有权模型形式化（示例）
+## 所有权模型形式化（示例） {#所有权模型形式化示例}
+
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
 > **说明**：以下为示例内容，展示研究笔记的完整格式（含进行中、计划中状态示例）
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024) ✅
+> **Rust 版本**: 1.96.1+ (Edition 2024) ✅
 > **状态**: 🔄 进行中（示例格式）
 
 ---
 
-## 🎯 研究目标 {#-研究目标}
+## 🎯 研究目标 {#研究目标}
+
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究的目的是形式化定义 Rust 的所有权模型，包括所有权转移、借用规则和生命周期约束。
 
-### 核心问题
+### 核心问题 {#核心问题}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -114,7 +121,7 @@
 2. **借用规则的逻辑表达**: 如何用逻辑语言表达借用规则？
 3. **生命周期约束的形式化**: 如何形式化生命周期约束？
 
-### 预期成果
+### 预期成果 {#预期成果}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -127,11 +134,12 @@
 
 ---
 
-## 📚 理论基础 {#-理论基础}
+## 📚 理论基础 {#理论基础}
+
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 相关概念
+### 相关概念 {#相关概念}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -143,7 +151,7 @@
 
 **生命周期 (Lifetime)**: 引用有效的时间范围。
 
-### 理论背景
+### 理论背景 {#理论背景}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -157,11 +165,12 @@
 
 ---
 
-## 🔬 形式化定义 {#-形式化定义}
+## 🔬 形式化定义 {#形式化定义}
+
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 所有权转移
+### 1. 所有权转移 {#1-所有权转移}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -175,7 +184,7 @@ move(x, y) : x → y
 
 **语义**: 当执行 `move(x, y)` 时，`x` 的所有权转移到 `y`，`x` 不再可用。
 
-### 2. 借用规则
+### 2. 借用规则 {#2-借用规则}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -199,7 +208,7 @@ borrow_mutable(x) : &mut x
 
 **规则**: 同一时间只能有一个可变借用，且不能有其他借用。
 
-### 3. 生命周期约束
+### 3. 生命周期约束 {#3-生命周期约束}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -215,11 +224,12 @@ lifetime('a) : 'a
 
 ---
 
-## ✅ 证明目标 {#-证明目标}
+## ✅ 证明目标 {#证明目标}
+
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 待证明的性质
+### 待证明的性质 {#待证明的性质}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -227,7 +237,7 @@ lifetime('a) : 'a
 2. **无数据竞争**: 借用规则防止数据竞争
 3. **生命周期安全**: 生命周期约束防止悬垂引用
 
-### 证明方法
+### 证明方法 {#证明方法}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -237,67 +247,90 @@ lifetime('a) : 'a
 
 ---
 
-## 💻 代码示例 {#-代码示例}
+## 💻 代码示例 {#代码示例}
+
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 示例 1: 所有权转移
+### 示例 1: 所有权转移 {#示例-1-所有权转移}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 fn main() {
+
     let s = String::from("hello");
+
     let t = s;  // 所有权转移
+
     // s 在这里不再可用
+
     println!("{}", t);
+
 }
 ```
 
 **说明**: 变量 `s` 的所有权转移到 `t`，`s` 不再可用。
 
-### 示例 2: 不可变借用
+### 示例 2: 不可变借用 {#示例-2-不可变借用}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 fn main() {
+
     let s = String::from("hello");
+
     let r1 = &s;  // 不可变借用
+
     let r2 = &s;  // 另一个不可变借用
+
     println!("{}, {}", r1, r2);
+
 }
 ```
 
 **说明**: 可以有多个不可变借用。
 
-### 示例 3: 可变借用
+### 示例 3: 可变借用 {#示例-3-可变借用}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 fn main() {
+
     let mut s = String::from("hello");
+
     let r = &mut s;  // 可变借用
+
     r.push_str(" world");
+
     // 不能有其他借用
+
     println!("{}", r);
+
 }
 ```
 
 **说明**: 只能有一个可变借用。
 
-### 示例 4: 生命周期约束
+### 示例 4: 生命周期约束 {#示例-4-生命周期约束}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+
     if x.len() > y.len() {
+
         x
+
     } else {
+
         y
+
     }
+
 }
 ```
 
@@ -305,11 +338,12 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
-## 📖 参考文献 {#-参考文献}
+## 📖 参考文献 {#参考文献}
+
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 学术论文
+### 学术论文 {#学术论文}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -318,28 +352,28 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
    - 年份: 2018
    - 摘要: 使用分离逻辑形式化验证 Rust 的类型系统
    - 链接: <https://plv.mpi-sws.org/rustbelt/>
-
 2. **Stacked Borrows: An Aliasing Model for Rust**
    - 作者: Ralf Jung, et al.
    - 年份: 2019
    - 摘要: Rust 借用检查器的形式化模型
    - 链接: <https://plv.mpi-sws.org/rustbelt/stacked-borrows/>
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [The Rust Programming Language - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 - [The Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
 
-### 相关代码
+### 相关代码 {#相关代码}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 - [RustBelt 项目](https://github.com/rust-lang/rustbelt)
 - [所有权系统实现](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)
 
-### 工具资源
+### 工具资源 {#工具资源}
+
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -348,11 +382,13 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
-## 🔄 研究进展 {#-研究进展}
+## 🔄 研究进展 {#研究进展}
+
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 已完成 ✅ {#已完成-}
+### 已完成 ✅ {#已完成}
+
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -361,7 +397,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - [x] 生命周期约束的基本形式化
 - [x] 代码示例收集
 
-### 进行中 🔄 {#进行中-}
+### 进行中 🔄 {#进行中}
+
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -370,7 +407,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - [ ] 生命周期安全性质的证明
 - [ ] 形式化定义的完善
 
-### 计划中 📋 {#计划中-}
+### 计划中 📋 {#计划中}
+
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -382,16 +420,20 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ---
 
 **维护者**: Rust Research Community
+
 **最后更新**: 2026-01-26
+
 **状态**: 🔄 **进行中**
 
 ---
 
-## 💡 编写提示 {#-编写提示}
+## 💡 编写提示 {#编写提示}
+
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 1. 研究目标
+### 1. 研究目标 {#1-研究目标}
+
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -399,7 +441,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - ✅ 列出核心问题
 - ✅ 定义预期成果
 
-### 2. 理论基础
+### 2. 理论基础 {#2-理论基础}
+
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -407,7 +450,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - ✅ 提供理论背景
 - ✅ 引用相关文献
 
-### 3. 形式化定义
+### 3. 形式化定义 {#3-形式化定义}
+
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -415,7 +459,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - ✅ 提供形式化表示
 - ✅ 解释语义含义
 
-### 4. 代码示例
+### 4. 代码示例 {#4-代码示例}
+
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -423,7 +468,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - ✅ 添加清晰的注释
 - ✅ 说明关键概念
 
-### 5. 参考文献
+### 5. 参考文献 {#5-参考文献}
+
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -431,7 +477,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - ✅ 链接官方文档
 - ✅ 提供工具资源
 
-### 6. 研究进展
+### 6. 研究进展 {#6-研究进展}
+
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -441,11 +488,13 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
-## 🔗 相关资源 {#-相关资源}
+## 🔗 相关资源 {#相关资源}
+
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 核心文档
+### 核心文档 {#核心文档}
+
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -453,7 +502,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - [最佳实践](10_best_practices.md) - 研究笔记最佳实践
 - [质量检查清单](10_quality_checklist.md) - 质量检查标准
 
-### 研究笔记
+### 研究笔记 {#研究笔记}
+
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -463,25 +513,28 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ---
 
 **维护团队**: Rust Research Community
+
 **最后更新**: 2026-01-26
+
 **状态**: ✅ **已完成（示例文档）**
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
+
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.1+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
+
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -490,7 +543,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -498,7 +551,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -507,7 +560,9 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ---
 
 **维护者**: Rust 学习项目团队
+
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -515,13 +570,16 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+
 **最后更新**: 2026-05-19
+
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

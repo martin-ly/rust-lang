@@ -96,7 +96,7 @@ fn not_windows() {}
 | `target_has_atomic = "8"` | 目标支持 8 位原子操作 |
 | `target_has_atomic = "ptr"` | 目标支持指针宽度原子操作 |
 
-> Rust 1.97 新增 `target_has_atomic_equal_alignment = "ptr"`，详见 [Rust 1.97 Preview (Beta)]((../07_future/rust_1_97_preview.md)。
+> Rust 1.97 新增 `target_has_atomic_equal_alignment = "ptr"`，详见 [Rust 1.97 Preview (Beta)](../07_future/rust_1_97_preview.md)。
 
 ---
 
