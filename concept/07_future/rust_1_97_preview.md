@@ -20,7 +20,6 @@
 > **来源**: [Rust 1.97.0 Release Notes](https://releases.rs/docs/1.97.0/) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
 > [releases.rs — 1.97.0](https://releases.rs/docs/1.97.0/)
-
 > **Nightly 探测结果（2026-07-01）**: 在最新 nightly 上运行 [`scripts/probe_rust_197_apis.rs`](../../scripts/probe_rust_197_apis.rs)，12 项候选 API 中 **9 项已可用**：`NonZero` 位操作、`char::is_control() const`、`NonZeroU32::midpoint`/`isqrt`、`ptr::fn_addr_eq`、`const size_of_val`/`align_of_val`、`BuildHasherDefault::new const`、`Box::as_ptr`、`int::format_into`。
 > 尚未可用/仍需 feature gate 的 3 项：`VecDeque::truncate_front`、`VecDeque::retain_back`、`Vec::into_non_null`，大概率推迟至 **Rust 1.98.0**。发布日前请再次运行探测程序确认。
 

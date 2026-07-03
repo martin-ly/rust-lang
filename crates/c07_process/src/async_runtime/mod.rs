@@ -1,5 +1,7 @@
 use crate::error::{ProcessError, ProcessResult};
-use crate::types::{ProcessConfig, ProcessInfo, ResourceLimits};
+#[cfg(feature = "async")]
+use crate::types::ResourceLimits;
+use crate::types::{ProcessConfig, ProcessInfo};
 use std::time::SystemTime;
 
 // 增强的异步功能
@@ -705,6 +707,10 @@ impl AsyncProcessPool {
         }
     }
 }
+
+#[cfg(not(feature = "async"))]
+#[allow(dead_code)]
+pub struct AsyncTask;
 
 #[cfg(not(feature = "async"))]
 #[allow(dead_code)]

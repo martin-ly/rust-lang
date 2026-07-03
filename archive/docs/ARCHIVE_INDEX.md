@@ -10,12 +10,18 @@
 > **[来源: Rust Official Docs]**
 
 ```text
-docs/archive/
-├── deprecated_20260318/     # 2026年3月18日归档的过时内容
-├── deprecated/              # Coq 形式化骨架（评估中）
-├── temp/                    # 临时文件
-├── rust-ownership-chinese/  # 中文所有权文档（已整合）
-└── reports/                 # 历史报告
+archive/docs/
+├── 06_toolchain/                # 历史工具链文档
+├── 2026_03_reorganization/      # 2026 年 3 月重组历史文档
+├── 2026_05_historical_docs/     # 2026 年 5 月历史文档
+├── c_class_audit_2026_06_08/    # 2026-06-08 C 类审计产物
+├── content/                     # 原 content/ 专题历史文档
+├── deprecated/                  # Coq/Aeneas 形式化计划（已废弃）
+├── duplicate_content_2026_06_08/# 重复内容审计备份
+├── reports/                     # 历史报告
+├── rust-ownership-chinese/      # 中文所有权资料（已整合）
+├── temp/                        # 临时文件
+└── version_reports/             # Rust 版本验证报告
 ```
 
 ## 归档清单
@@ -65,7 +71,7 @@ docs/archive/
 | 扩展主题：async-await形式语义补充.md | 中文扩展内容 | 已整合 |
 | ... | ... | ... |
 
-**说明**: 中文所有权文档已完成整合到 `docs/rust-ownership-decidability/` 目录。
+**说明**: 中文所有权文档已完成整合；原 `docs/rust-ownership-decidability/` 整体迁移至 `archive/rust-ownership-decidability/`。
 
 ## 如何恢复归档文档
 

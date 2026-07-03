@@ -210,7 +210,7 @@ docs/
 ├── 04_safety/          # 安全优化 (6文档, 4,539行)
 ├── 05_practice/        # 实践应用 (4文档, 3,913行)
 ├── 06_rust_features/   # Rust特性 (7文档, 1,987行)
-├── 07_cargo_package_management/  # 已迁移至 archive/cargo_package_management_from_c02/
+├── 07_cargo_package_management/  # 已迁移至 ../../../archive/cargo_package_management_from_c02/
 ├── knowledge_system/   # 知识体系 (28文档, 19,300行)
 └── theory_enhanced/    # 理论增强 (5文档, 2,631行)
 ```

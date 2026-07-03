@@ -37,7 +37,7 @@
 
 | 指南 | 路径 | 说明 |
 | :--- | :--- | :--- |
-| **AI 辅助编程指南** | 已归档至 `archive/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md` | 提示词模板、RAG、工作流、1.95+ 特性 |
+| **AI 辅助编程指南** | 已归档至 [`../archive/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md`](../archive/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) | 提示词模板、RAG、工作流、1.95+ 特性 |
 | **AI+Rust 生态指南** | [docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md](../docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md) | Burn/Candle/LLM、用 Rust 构建 AI |
 
 ### 专题指南

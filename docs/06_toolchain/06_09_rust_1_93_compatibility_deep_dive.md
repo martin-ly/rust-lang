@@ -2,6 +2,7 @@
 
 > **EN**: 09 Rust 1 93 Compatibility Deep Dive
 > **Summary**: Rust 1.93 兼容性深度解析 09 Rust 1 93 Compatibility Deep Dive. (stub/archive redirect)
+> **状态**: 历史内容已迁移，仅作路径保留
 > **归档说明**: 本文档为 Rust 1.93 历史版本材料，已迁移到 `archive/docs/06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md`。
 > 最新 Rust 版本特性请参阅 [concept/07_future/rust_1_96_stabilized.md](../../concept/07_future/rust_1_96_stabilized.md)。
 > 历史版本存档：[archive/docs/06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md](../../archive/docs/06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)

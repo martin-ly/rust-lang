@@ -2,6 +2,7 @@
 
 > **EN**: 20 Rustdoc 196 Improvements
 > **Summary**: Rustdoc 1.96 改进深度解析 20 Rustdoc 196 Improvements. (stub/archive redirect)
+> **状态**: 历史内容已迁移，仅作路径保留
 > **版本状态声明**: 本文档覆盖 **Rust 1.96.0 (2026-05-28)** 稳定版 rustdoc 改进。
 
 **本文内容已迁移**。项目权威来源为:

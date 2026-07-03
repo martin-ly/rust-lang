@@ -11,3 +11,5 @@
 - [`concept/07_future/rust_1_98_preview.md`](../../concept/07_future/rust_1_98_preview.md) — Rust 1.98+ 前沿特性预览
 
 代码示例参见 [`crates/c08_algorithms/src/rust_197_features.rs`](../../crates/c08_algorithms/src/rust_197_features.rs) 及各 crate 的 `rust_197_features.rs`。
+
+> **Nightly 探测（2026-07-01）**: 12 项候选 API 中 9 项已可在 nightly 使用，3 项（`VecDeque::truncate_front`、`VecDeque::retain_back`、`Vec::into_non_null`）尚未可用，可能推迟至 1.98.0。详见 `concept/07_future/rust_1_97_preview.md`。

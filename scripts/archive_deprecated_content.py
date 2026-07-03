@@ -50,14 +50,15 @@ DEPRECATED_PATTERNS = [
     ("docs/**/rust_1.7[0-9]_*.md", "Rust 1.90+版本已可用"),
     
     # 需要更新的内容
-    ("docs/archive/deprecated/*", "已在deprecated目录，无需处理"),
+    ("archive/docs/deprecated/*", "已在 archive/docs/deprecated 目录，无需处理"),
 ]
 
 # 需要保留但不维护的内容
 PRESERVE_PATTERNS = [
-    "docs/archive/**",
+    "archive/**",
     "examples/archive/**",
     "crates/*/archive/**",
+    "archive/deprecated/**",
 ]
 
 

@@ -13,7 +13,13 @@
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **状态**: 特性集高度不确定，稳定时间和具体内容以官方发布为准
 >
-> **权威来源**: · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **权威来源**:
+>
+> · [Rust Reference](https://doc.rust-lang.org/reference/)
+> · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > - [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 > - [Project Goals — Beyond the `&`](https://rust-lang.github.io/rust-project-goals/2026/pin-ergonomics.html)
@@ -27,8 +33,16 @@
 > **前置概念**: N/A
 ---
 
-> **后置概念**: [Rust 1.97 前沿特性预览](rust_1_97_preview.md) · [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
-> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [Toolchain](../06_ecosystem/01_toolchain.md)
+> **后置概念**:
+>
+> [Rust 1.97 前沿特性预览](rust_1_97_preview.md)
+> · [Rust Specification](https://www.rust-lang.org/)
+> · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
+>
+> **前置依赖**:
+>
+> [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+> · [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ---
 

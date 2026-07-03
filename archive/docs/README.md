@@ -2,7 +2,7 @@
 
 > **分级**: [C]
 > **创建日期**: 2025-11-15
-> **最后更新**: 2026-02-28
+> **最后更新**: 2026-07-04（刷新目录结构，反映 2026-06-28 迁移后的实际布局）
 > **Rust 版本**: 1.95.0+ (Edition 2024)
 > **对齐日期**: 2026-05-12
 > **状态**: ✅ 已归档
@@ -19,15 +19,20 @@
 > **[来源: Rust Official Docs]**
 
 ```text
-docs/archive/
+archive/docs/
 ├── README.md                    # 本说明文件
-├── root_completion_reports/     # 根目录完成度/状态类报告（2026-01-27 全面归档）⭐
-├── legacy_root_archive/         # 原根目录 archive/ 迁入（2026-01-27 全面归档）⭐ NEW
-├── spell_check/                 # 拼写检查相关文件
-├── status/                      # 项目状态报告
-├── updates/                     # 更新报告
-├── reports/                     # 各种总结和报告
-└── temp/                        # 临时文件和个人文件
+├── ARCHIVE_INDEX.md             # 归档索引
+├── 06_toolchain/                # 历史工具链文档（如 Rust 1.93 系列）
+├── 2026_03_reorganization/      # 2026 年 3 月重组相关历史文档
+├── 2026_05_historical_docs/     # 2026 年 5 月历史文档
+├── c_class_audit_2026_06_08/    # 2026-06-08 C 类审计产物
+├── content/                     # 原 content/ 专题历史文档
+├── deprecated/                  # Coq/Aeneas 形式化计划（已废弃）
+├── duplicate_content_2026_06_08/# 重复内容审计备份
+├── reports/                     # 历史报告
+├── rust-ownership-chinese/      # 中文所有权资料（已整合）
+├── temp/                        # 临时/个人文件
+└── version_reports/             # Rust 版本验证报告
 ```
 
 ---

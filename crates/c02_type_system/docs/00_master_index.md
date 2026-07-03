@@ -70,7 +70,7 @@
 
 ## 📦 Cargo 包管理专题
 
-> 注：该专题文档已迁移至项目级 `archive/cargo_package_management_from_c02/`，
+> 注：该专题文档已迁移至项目级 [`../../../archive/cargo_package_management_from_c02/`](../../../archive/cargo_package_management_from_c02/)，
 > 因为它与 `c02_type_system` 的学习主线无关。
 
 ---
