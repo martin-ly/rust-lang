@@ -9,7 +9,7 @@
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
 > **前置依赖**: [Modules and Paths](../../01_foundation/07_modules_and_items/11_modules_and_paths.md) · [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md)
-> **后置概念**: [Name Resolution and HIR](35_name_resolution_and_hir.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md) · [Visibility and Privacy](../../05_comparative/04_safety_boundaries.md)
+> **后置概念**: [Name Resolution and HIR](35_name_resolution_and_hir.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md) · [Visibility and Privacy](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md)
 > **定理链**: Entity → Declaration → Scope → Namespace → Path → Resolution
 > **主要来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 

@@ -3,7 +3,7 @@
 > **EN**: Cargo 194 Features
 > **Summary**: Cargo 1.94 特性分析 Cargo 194 Features. (stub/archive redirect)
 > **归档说明**: 本文档为 Cargo 1.94 历史版本研究笔记，已迁移到 `archive/research_notes/10_cargo_194_features.md`。
-> 最新 Cargo / 工具链特性请参阅 [concept/06_ecosystem/01_toolchain.md](../../concept/06_ecosystem/01_toolchain.md)。
+> 最新 Cargo / 工具链特性请参阅 [concept/06_ecosystem/01_toolchain.md](../../concept/06_ecosystem/00_toolchain/01_toolchain.md)。
 > 历史版本存档：[archive/research_notes/10_cargo_194_features.md](../research_notes/10_cargo_194_features.md)
 
 ---

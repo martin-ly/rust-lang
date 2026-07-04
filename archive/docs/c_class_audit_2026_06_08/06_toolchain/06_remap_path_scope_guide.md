@@ -193,5 +193,5 @@ RUN cargo build --release
 ### 相关文档
 
 - [Rust 1.95 特性速查表](../../../../docs/02_reference/quick_reference/02_rust_195_features_cheatsheet.md)
-- [Rust 版本跟踪](../../../../concept/07_future/05_rust_version_tracking.md)
+- [Rust 版本跟踪](../../../../concept/07_future/00_version_tracking/05_rust_version_tracking.md)
 - [Rust 1.96 稳定特性全景](../../../../docs/06_toolchain/06_19_rust_1_96_features.md)

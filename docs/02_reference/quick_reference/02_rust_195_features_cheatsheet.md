@@ -5,7 +5,7 @@
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 > **稳定版本**: Rust 1.95.0 (2026-04-16)
-> **权威来源**: [Rust Blog](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | [releases.rs](https://releases.rs/docs/1.95.0/) | [concept/07_future/rust_1_95_stabilized.md](../../../concept/07_future/rust_1_95_stabilized.md)
+> **权威来源**: [Rust Blog](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | [releases.rs](https://releases.rs/docs/1.95.0/) | [concept/07_future/rust_1_95_stabilized.md](../../../concept/07_future/00_version_tracking/rust_1_95_stabilized.md)
 >
 > **受众**: [进阶] / [专家]
 > **内容分级**: [专家级]

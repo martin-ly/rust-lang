@@ -473,7 +473,7 @@ flowchart TD
 
 - [NLL 与 Polonius (concept)](../../concept/03_advanced/02_unsafe/08_nll_and_polonius.md) — 概念层 NLL → Polonius 演进分析，含三代借用检查器对比表
 - [Polonius 跟踪报告](04_polonius_tracking.md) — 本目录内的 Polonius 状态跟踪与技术细节
-- [Rust 版本跟踪 (concept)](../../concept/07_future/05_rust_version_tracking.md) — Project Goals 2026 全局状态与 nightly 特性跟踪
+- [Rust 版本跟踪 (concept)](../../concept/07_future/00_version_tracking/05_rust_version_tracking.md) — Project Goals 2026 全局状态与 nightly 特性跟踪
 
 ---
 

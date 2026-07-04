@@ -2,7 +2,7 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [CLI 开发](../../../../concept/06_ecosystem/25_cli_development.md)
+> - [CLI 开发](../../../../concept/06_ecosystem/05_systems_and_embedded/25_cli_development.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 
@@ -528,7 +528,7 @@ loop {
 - [Clap CLI 解析架构](04_clap_architecture.md)
 - [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 - [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
-- [事件驱动与系统可组合性](../../../../concept/06_ecosystem/30_system_composability.md)
+- [事件驱动与系统可组合性](../../../../concept/06_ecosystem/03_design_patterns/30_system_composability.md)
 
 ---
 

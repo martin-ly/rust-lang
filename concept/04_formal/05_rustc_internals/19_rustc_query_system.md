@@ -11,7 +11,7 @@
 > **双维定位**: F×Inf — 编译器基础设施与形式化方法
 > **定位**: 将 `rustc` 从“顺序 pass 流水线”还原为“按需查询 + 缓存”的真实架构，理解增量编译的底层机制。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Type Inference](../00_type_theory/08_type_inference.md) · [NLL and Polonius](../../03_advanced/02_unsafe/08_nll_and_polonius.md)
-> **后置概念**: [Compiler Internals](../../06_ecosystem/45_compiler_internals.md) · [Compiler Infrastructure](../../06_ecosystem/47_compiler_infrastructure.md)
+> **后置概念**: [Compiler Internals](../../06_ecosystem/00_toolchain/45_compiler_internals.md) · [Compiler Infrastructure](../../06_ecosystem/00_toolchain/47_compiler_infrastructure.md)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---

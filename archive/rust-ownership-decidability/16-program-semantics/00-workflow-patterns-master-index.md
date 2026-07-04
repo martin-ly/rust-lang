@@ -477,7 +477,7 @@ Petri 网是工作流模式最经典的形式化基础。van der Aalst 等人的
 
 | 文件路径 | 内容说明 | 与本索引的关系 |
 |:---|:---|:---|
-| [`../../concept/06_ecosystem/18_distributed_systems.md`](../../../concept/06_ecosystem/18_distributed_systems.md) | 分布式系统概念 | WCP 模式在分布式工作流引擎（如 Temporal、Cadence）中的扩展；WCP3 Synchronization 的分布式变体 |
+| [`../../concept/06_ecosystem/18_distributed_systems.md`](../../../concept/06_ecosystem/04_web_and_networking/18_distributed_systems.md) | 分布式系统概念 | WCP 模式在分布式工作流引擎（如 Temporal、Cadence）中的扩展；WCP3 Synchronization 的分布式变体 |
 | [`../../concept/02_intermediate/01_traits.md`](../../../concept/02_intermediate/00_traits/01_traits.md) | Trait 系统深度解析 | WCP 状态机实现依赖的 `State` trait、`Transition` trait 设计模式；WCP17 交错路由的状态机编码 |
 | [`../../concept/03_advanced/03_unsafe.md`](../../../concept/03_advanced/02_unsafe/03_unsafe.md) | Unsafe Rust 深度指南 | WCP10 Arbitrary Cycles 等需 `unsafe` 模式的实现细节与安全边界；`Pin` 与自引用结构 |
 | [`../../concept/03_advanced/02_async.md`](../../../concept/03_advanced/01_async/02_async.md) | 异步编程模型 | `tokio::select!`、`FuturesUnordered`、`JoinSet` 等核心抽象的语义详解；WCP16 Deferred Choice 的 async 实现 |

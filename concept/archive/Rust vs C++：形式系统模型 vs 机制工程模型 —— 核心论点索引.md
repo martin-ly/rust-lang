@@ -6,7 +6,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **归档声明**: 本文件前部为 **Rust 形式系统 vs 机制工程核心论点索引**。
 > 原对话式长文（1798 行）已折叠至文件尾部 `§[原始长文归档]`。
-> 结构化规范版本请查阅 [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md)
+> 结构化规范版本请查阅 [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > （L5 对比分析层，含 Wikipedia 定义、定理矩阵、反命题树、跨文件链接）。
 >
 > **状态**: v1.1（2026-05-13 重构索引）
@@ -225,14 +225,14 @@
 
 | 原始章节 | 内容摘要 | 推荐用途 | 对应规范文件位置 |
 |:---|:---|:---|:---|
-| 核心命题 | 两种编程本体论对比 | 哲学层面理解 Rust 设计 | [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) §1 |
-| 思维导图 | 设计哲学层级展开 | 快速建立认知框架 | [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) §2 |
-| 多维矩阵 | 12 维度对比 | 精确参考 | [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) §3 |
-| 决策树 | 技术选型判断 | 工程决策 | [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) §4 |
-| 历史必然性 | CS → SE 两种路径 | 历史语境 | [`05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) |
-| 编译模型 | 证明检查 vs 代码生成 | 编译器行为 | [`04_formal/02_type_theory.md`](../04_formal/00_type_theory/02_type_theory.md) / [`06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md) |
+| 核心命题 | 两种编程本体论对比 | 哲学层面理解 Rust 设计 | [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_systems_languages/01_rust_vs_cpp.md) §1 |
+| 思维导图 | 设计哲学层级展开 | 快速建立认知框架 | [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_systems_languages/01_rust_vs_cpp.md) §2 |
+| 多维矩阵 | 12 维度对比 | 精确参考 | [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_systems_languages/01_rust_vs_cpp.md) §3 |
+| 决策树 | 技术选型判断 | 工程决策 | [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_systems_languages/01_rust_vs_cpp.md) §4 |
+| 历史必然性 | CS → SE 两种路径 | 历史语境 | [`05_comparative/03_paradigm_matrix.md`](../05_comparative/00_paradigms/03_paradigm_matrix.md) |
+| 编译模型 | 证明检查 vs 代码生成 | 编译器行为 | [`04_formal/02_type_theory.md`](../04_formal/00_type_theory/02_type_theory.md) / [`06_ecosystem/01_toolchain.md`](../06_ecosystem/00_toolchain/01_toolchain.md) |
 | 形式化边界 | Pin、FFI、循环引用（Reference） | 能力边界 | `03_advanced/02_unsafe/03_unsafe.md` / `02_intermediate/02_memory_management/03_memory_management.md` |
-| 五层扩展 | L0-L5 形式化层级 | 架构设计 | [`07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) |
+| 五层扩展 | L0-L5 形式化层级 | 架构设计 | [`07_future/02_formal_methods.md`](../07_future/04_research_and_experimental/02_formal_methods.md) |
 | 秩序与语义 | 欧氏几何模式论证 | 深层设计哲学 | [`00_meta/semantic_space.md`](../00_meta/00_framework/semantic_space.md) |
 
 ---
@@ -309,8 +309,8 @@
 <details>
 <summary>📦 原始对话式长文归档（点击展开原 1798 行长文）</summary>
 
-> **归档声明**: 本文件为原始对话式长文，内容已结构化重组至 [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md)（L5 对比分析层，符合 `concept/` 知识体系规范）。此处保留为原始参考归档，不再主动维护新内容。
-> **对应规范文件**: [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) —— 包含 Wikipedia 权威定义、认知路径、定理一致性（Coherence）矩阵、反命题决策树及完整跨文件链接。
+> **归档声明**: 本文件为原始对话式长文，内容已结构化重组至 [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_systems_languages/01_rust_vs_cpp.md)（L5 对比分析层，符合 `concept/` 知识体系规范）。此处保留为原始参考归档，不再主动维护新内容。
+> **对应规范文件**: [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_systems_languages/01_rust_vs_cpp.md) —— 包含 Wikipedia 权威定义、认知路径、定理一致性（Coherence）矩阵、反命题决策树及完整跨文件链接。
 
 ---
 

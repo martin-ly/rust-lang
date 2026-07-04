@@ -9,7 +9,7 @@
 >
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统讲解 **Hoare 逻辑（霍尔逻辑）**——从前置条件、后置条件、循环不变量的经典形式化，到最弱前置条件演算，揭示 Hoare 逻辑如何为 Rust 的 unsafe 代码契约、内部不变量和形式化验证工具提供理论基础。
-> **前置概念**: [Ownership Formalization](../01_ownership_logic/03_ownership_formal.md) · [Verification Toolchain](../04_model_checking/05_verification_toolchain.md)
+> **前置概念**: [Ownership Formalization](../01_ownership_logic/03_ownership_formal.md) · [Verification Toolchain](../04_model_checking/05_verification_toolchain.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 > **后置概念**: [Separation Logic](../02_separation_logic/11_separation_logic.md) · [RustBelt](../02_separation_logic/04_rustbelt.md)
 
 ---

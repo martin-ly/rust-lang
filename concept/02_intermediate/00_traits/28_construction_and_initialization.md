@@ -10,7 +10,7 @@
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana
 > **前置概念**: [Variable Model](../../01_foundation/03_values_and_references/20_variable_model.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
-> **后置概念**: [Rust vs C++](../../05_comparative/01_rust_vs_cpp.md) · [C++ Surface Features](../../05_comparative/16_cpp_rust_surface_features.md)
+> **后置概念**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [C++ Surface Features](../../05_comparative/00_paradigms/16_cpp_rust_surface_features.md)
 > **主要来源**: · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > [TRPL Ch 5 — Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) ·

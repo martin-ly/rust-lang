@@ -111,11 +111,11 @@
 
 | 文件 | 核心内容 | 关键图表 |
 |:---|:---|:---|
-| [01_rust_vs_cpp](../../05_comparative/01_rust_vs_cpp.md) | 所有权 vs 智能指针、编译期 vs 运行时、形式系统 vs 机制工程 | 13 |
-| [02_rust_vs_go](../../05_comparative/02_rust_vs_go.md) | 所有权并发 vs CSP、确定性 vs 工程性 | 6 |
-| [03_paradigm_matrix](../../05_comparative/03_paradigm_matrix.md) | 多语言类型系统谱系、内存模型对比 | 8 |
-| [04_safety_boundaries](../../05_comparative/04_safety_boundaries.md) | 安全保证边界、反事实推理、失效条件 | 7 |
-| [05_execution_model_isomorphism](../../05_comparative/05_execution_model_isomorphism.md) | 七类执行模型矩阵、Rust↔Go 对比 | 5 |
+| [01_rust_vs_cpp](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | 所有权 vs 智能指针、编译期 vs 运行时、形式系统 vs 机制工程 | 13 |
+| [02_rust_vs_go](../../05_comparative/01_systems_languages/02_rust_vs_go.md) | 所有权并发 vs CSP、确定性 vs 工程性 | 6 |
+| [03_paradigm_matrix](../../05_comparative/00_paradigms/03_paradigm_matrix.md) | 多语言类型系统谱系、内存模型对比 | 8 |
+| [04_safety_boundaries](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md) | 安全保证边界、反事实推理、失效条件 | 7 |
+| [05_execution_model_isomorphism](../../05_comparative/00_paradigms/05_execution_model_isomorphism.md) | 七类执行模型矩阵、Rust↔Go 对比 | 5 |
 
 > **综合功能**: L5 将 L1-L4 的知识转化为工程决策能力——为技术选型提供形式化论据。
 
@@ -123,18 +123,18 @@
 
 | 文件 | 核心内容 | 关键图表 |
 |:---|:---|:---|
-| [01_toolchain](../../06_ecosystem/01_toolchain.md) | Cargo、Clippy、Miri、交叉编译 | 9 |
-| [02_patterns](../../06_ecosystem/02_patterns.md) | Typestate、Builder、RAII、Newtype | 5 |
-| [03_core_crates](../../06_ecosystem/03_core_crates.md) | Tokio、Serde、SQLx、Axum 生态基石 | 6 |
-| [03_idioms_spectrum](../../06_ecosystem/34_idioms_spectrum.md) | L0-L6 七层惯用法 + 反惯用法判定树 | 5 |
-| [04_application_domains](../../06_ecosystem/04_application_domains.md) | Web、系统、嵌入式、区块链应用场景 | 6 |
-| [05_formal_ecosystem_tower](../../06_ecosystem/44_formal_ecosystem_tower.md) | 形式化分层塔：Tokio→Tower→Axum→Kani | 2 |
-| [05_system_design_principles](../../06_ecosystem/05_system_design_principles.md) | 七项原则 + 国际权威对齐 | 6 |
-| [06_blockchain](../../06_ecosystem/06_blockchain.md) | Solana/Polkadot、Move vs Rust、Kani 验证 | 3 |
-| [07_game_ecs](../../06_ecosystem/07_game_ecs.md) | ECS 架构、Bevy、Archetype | 7 |
-| [08_wasi](../../06_ecosystem/08_wasi.md) | WASI 四层架构、能力安全、wit-bindgen | 2 |
-| [09_cargo_script](../../06_ecosystem/09_cargo_script.md) | Cargo script 执行流程、决策树 | 2 |
-| [10_public_private_deps](../../06_ecosystem/10_public_private_deps.md) | 依赖泄漏/隔离、[RFC 3516](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html)、决策流程 | 2 |
+| [01_toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) | Cargo、Clippy、Miri、交叉编译 | 9 |
+| [02_patterns](../../06_ecosystem/03_design_patterns/02_patterns.md) | Typestate、Builder、RAII、Newtype | 5 |
+| [03_core_crates](../../06_ecosystem/02_core_crates/03_core_crates.md) | Tokio、Serde、SQLx、Axum 生态基石 | 6 |
+| [03_idioms_spectrum](../../06_ecosystem/03_design_patterns/34_idioms_spectrum.md) | L0-L6 七层惯用法 + 反惯用法判定树 | 5 |
+| [04_application_domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) | Web、系统、嵌入式、区块链应用场景 | 6 |
+| [05_formal_ecosystem_tower](../../06_ecosystem/08_formal_verification/44_formal_ecosystem_tower.md) | 形式化分层塔：Tokio→Tower→Axum→Kani | 2 |
+| [05_system_design_principles](../../06_ecosystem/03_design_patterns/05_system_design_principles.md) | 七项原则 + 国际权威对齐 | 6 |
+| [06_blockchain](../../06_ecosystem/11_domain_applications/06_blockchain.md) | Solana/Polkadot、Move vs Rust、Kani 验证 | 3 |
+| [07_game_ecs](../../06_ecosystem/11_domain_applications/07_game_ecs.md) | ECS 架构、Bevy、Archetype | 7 |
+| [08_wasi](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) | WASI 四层架构、能力安全、wit-bindgen | 2 |
+| [09_cargo_script](../../06_ecosystem/01_cargo/09_cargo_script.md) | Cargo script 执行流程、决策树 | 2 |
+| [10_public_private_deps](../../06_ecosystem/01_cargo/10_public_private_deps.md) | 依赖泄漏/隔离、[RFC 3516](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html)、决策流程 | 2 |
 
 > **出口层**: L6 是知识体系的"工程化落地"——将理论转化为可维护、可扩展的代码库。
 
@@ -142,11 +142,11 @@
 
 | 文件 | 核心内容 | 关键图表 |
 |:---|:---|:---|
-| [01_ai_integration](../../07_future/01_ai_integration.md) | AI 生成-验证闭环、确定性容器、三层闭环 | 6 |
-| [02_formal_methods](../../07_future/02_formal_methods.md) | Creusot/Verus/Kani 工业化、TLA+ | 9 |
-| [03_evolution](../../07_future/03_evolution.md) | RFC 流程、Edition 机制、2015→2024 完整变更 | 6 |
-| [04_effects_system](../../07_future/04_effects_system.md) | Effect System 概念预研、AsyncFn、跨语言对比 | 4 |
-| [05_rust_version_tracking](../../07_future/05_rust_version_tracking.md) | 1.79→1.97+ 形式模型演进跟踪 | 3 |
+| [01_ai_integration](../../07_future/04_research_and_experimental/01_ai_integration.md) | AI 生成-验证闭环、确定性容器、三层闭环 | 6 |
+| [02_formal_methods](../../07_future/04_research_and_experimental/02_formal_methods.md) | Creusot/Verus/Kani 工业化、TLA+ | 9 |
+| [03_evolution](../../07_future/04_research_and_experimental/03_evolution.md) | RFC 流程、Edition 机制、2015→2024 完整变更 | 6 |
+| [04_effects_system](../../07_future/03_preview_features/04_effects_system.md) | Effect System 概念预研、AsyncFn、跨语言对比 | 4 |
+| [05_rust_version_tracking](../../07_future/00_version_tracking/05_rust_version_tracking.md) | 1.79→1.97+ 形式模型演进跟踪 | 3 |
 
 > **反向驱动**: L7 的独特特征是"反馈"——AI 需求约束 Unsafe 精确性，形式化工具化推动 L4 扩展，语言演进扩展 L2 泛型系统。
 

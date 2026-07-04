@@ -12,7 +12,7 @@
 > [Type System](../../01_foundation/02_type_system/04_type_system.md) ·
 > [Generics](../../02_intermediate/01_generics/02_generics.md)
 > **后置概念**:
-> [Performance](../../06_ecosystem/15_performance_optimization.md) ·
+> [Performance](../../06_ecosystem/10_performance/15_performance_optimization.md) ·
 > [Object Safety](../../02_intermediate/00_traits/01_traits.md)
 
 ---
@@ -567,7 +567,7 @@ graph TD
 
 - [Trait](../../02_intermediate/00_traits/01_traits.md) — Trait
 - [Generics](../../02_intermediate/01_generics/02_generics.md) — 泛型（Generics）
-- [Performance](../../06_ecosystem/15_performance_optimization.md) — 性能优化
+- [Performance](../../06_ecosystem/10_performance/15_performance_optimization.md) — 性能优化
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 
 ---

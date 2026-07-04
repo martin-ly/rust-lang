@@ -951,8 +951,8 @@ fn main() {
 | **并发** | [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md) | `Send`/`Sync` + AXM = 无数据竞争 |
 | **Pin 与自引用** | [`../03_advanced/01_async/02_async.md`](../../03_advanced/01_async/02_async.md) §8.5 | 自引用结构的借用检查器边界 |
 | **Unsafe Rust** | [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md) | `UnsafeCell`、裸指针突破借用规则 |
-| **C++ 对比** | [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_rust_vs_cpp.md) | `const T&`/`T&` vs `&T`/`&mut T` |
-| **Rust 版本特性演进** | [`../07_future/05_rust_version_tracking.md`](../../07_future/05_rust_version_tracking.md) | `let_chains`、模式匹配（Pattern Matching）扩展 |
+| **C++ 对比** | [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | `const T&`/`T&` vs `&T`/`&mut T` |
+| **Rust 版本特性演进** | [`../07_future/05_rust_version_tracking.md`](../../07_future/00_version_tracking/05_rust_version_tracking.md) | `let_chains`、模式匹配（Pattern Matching）扩展 |
 | **异步（Async）编程** | [`../03_advanced/01_async/02_async.md`](../../03_advanced/01_async/02_async.md) | `AsyncFn` 与借用检查 |
 
 > **过渡**: 相关概念链接构建了知识网络的全局视图，而待补充与演进方向则标记了本文件尚未覆盖的前沿主题与改进路径。

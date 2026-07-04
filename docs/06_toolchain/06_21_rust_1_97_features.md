@@ -6,9 +6,9 @@
 
 **本文内容已迁移**。项目权威来源为:
 
-- [`concept/07_future/rust_1_97_preview.md`](../../concept/07_future/rust_1_97_preview.md) — Rust 1.97.0 前沿特性预览（beta / nightly 候选，single source of truth）
-- [`concept/07_future/rust_1_97_stabilized.md`](../../concept/07_future/rust_1_97_stabilized.md) — 待 1.97.0 正式发布后填充的稳定特性占位页
-- [`concept/07_future/rust_1_98_preview.md`](../../concept/07_future/rust_1_98_preview.md) — Rust 1.98+ 前沿特性预览
+- [`concept/07_future/rust_1_97_preview.md`](../../concept/07_future/00_version_tracking/rust_1_97_preview.md) — Rust 1.97.0 前沿特性预览（beta / nightly 候选，single source of truth）
+- [`concept/07_future/rust_1_97_stabilized.md`](../../concept/07_future/00_version_tracking/rust_1_97_stabilized.md) — 待 1.97.0 正式发布后填充的稳定特性占位页
+- [`concept/07_future/rust_1_98_preview.md`](../../concept/07_future/00_version_tracking/rust_1_98_preview.md) — Rust 1.98+ 前沿特性预览
 
 代码示例参见 [`crates/c08_algorithms/src/rust_197_features.rs`](../../crates/c08_algorithms/src/rust_197_features.rs) 及各 crate 的 `rust_197_features.rs`。
 

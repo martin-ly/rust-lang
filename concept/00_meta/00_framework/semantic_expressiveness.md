@@ -283,7 +283,7 @@ Rust 的常量求值器（const evaluator）是 MIR 解释器的一个子集，*
 |:---|:---|:---|
 | `const fn` 语义 | [](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | §3 所有权规则 |
 | `const` generics | [](../../02_intermediate/01_generics/02_generics.md) | §5.7 Const Generics |
-| `inline const` | [](../../07_future/05_rust_version_tracking.md) | §2.2 inline const blocks |
+| `inline const` | [](../../07_future/00_version_tracking/05_rust_version_tracking.md) | §2.2 inline const blocks |
 | 常量求值形式化 | [](../../04_formal/00_type_theory/02_type_theory.md) | §10.1b Const Generics 形式化演进 |
 | `~const Trait` | [](../../02_intermediate/00_traits/01_traits.md) | §4.4 Const Trait / `~const` |
 
@@ -672,7 +672,7 @@ unsafe impl Sync for MyType {}   // MyType 可跨线程共享引用（&MyType: S
 | `Send`/`Sync` 语义 | [](../../03_advanced/00_concurrency/01_concurrency.md) | §2 Send/Sync |
 | `Mutex`/`Arc` 形式化 | [](../../04_formal/02_separation_logic/04_rustbelt.md) | §3 CSL |
 | 原子操作 / `Ordering` | [](../../03_advanced/00_concurrency/01_concurrency.md) | §3.2 原子操作 |
-| `rayon` 数据并行 | [](../../06_ecosystem/03_core_crates.md) | §4 rayon |
+| `rayon` 数据并行 | [](../../06_ecosystem/02_core_crates/03_core_crates.md) | §4 rayon |
 | `tokio` 异步运行时 | [](../../03_advanced/01_async/02_async.md) | §3 调度模型 |
 | 并发安全定理 | [](../../04_formal/02_separation_logic/04_rustbelt.md) | §2.1 定理矩阵 T1 |
 
@@ -763,7 +763,7 @@ Rust 的宏系统分为两层：
 | 宏系统 | [](../../03_advanced/03_proc_macros/04_macros.md) | 全文 |
 | FFI | [](../../03_advanced/02_unsafe/03_unsafe.md) | §4 FFI |
 | 参数性 | [](../../04_formal/00_type_theory/02_type_theory.md) | §5.1 参数性 |
-| 零成本抽象 | [](../../05_comparative/01_rust_vs_cpp.md) | §8 零成本抽象 |
+| 零成本抽象 | [](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | §8 零成本抽象 |
 
 ---
 
@@ -858,7 +858,7 @@ RustBelt 证明范围:
 | Miri 检测边界 | [](../../03_advanced/02_unsafe/03_unsafe.md) | §7.2 Miri |
 | RustBelt 安全定理 | [](../../04_formal/02_separation_logic/04_rustbelt.md) | §2.1 定理矩阵 |
 | 验证工具链 | [](../../04_formal/04_model_checking/05_verification_toolchain.md) | 全文 |
-| 安全边界对比 | [](../../05_comparative/04_safety_boundaries.md) | §2.3 定理矩阵 |
+| 安全边界对比 | [](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md) | §2.3 定理矩阵 |
 
 ---
 
@@ -990,9 +990,9 @@ Rust 的任何语义扩展必须满足以下约束（由语言设计哲学决定
 | D7 安全边界 | [](../../03_advanced/02_unsafe/03_unsafe.md) | 全文 | `==>` unsafe 是安全边界定义 |
 | D7 安全边界 | [](../../04_formal/02_separation_logic/04_rustbelt.md) | §2 定理矩阵 | `==>` RustBelt 证明安全边界 |
 | D7 安全边界 | [](../../04_formal/04_model_checking/05_verification_toolchain.md) | 全文 | `==>` 工具链扩展安全边界 |
-| 跨维度对比 | [](../../05_comparative/01_rust_vs_cpp.md) | 全文 | `==>` 对比分析支撑 |
-| 演进趋势 | [](../../07_future/03_evolution.md) | 全文 | `==>` 语言演进方向 |
-| 演进趋势 | [](../../07_future/04_effects_system.md) | 全文 | `==>` Effects 系统扩展控制流 |
+| 跨维度对比 | [](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | 全文 | `==>` 对比分析支撑 |
+| 演进趋势 | [](../../07_future/04_research_and_experimental/03_evolution.md) | 全文 | `==>` 语言演进方向 |
+| 演进趋势 | [](../../07_future/03_preview_features/04_effects_system.md) | 全文 | `==>` Effects 系统扩展控制流 |
 
 ---
 
@@ -1052,7 +1052,7 @@ mindmap
 
 ## 相关概念文件
 
-- [Rust vs C++ 对比](../../05_comparative/01_rust_vs_cpp.md) — 四语言对比矩阵详情
+- [Rust vs C++ 对比](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) — 四语言对比矩阵详情
 - [L4 形式化验证](../../04_formal/02_separation_logic/04_rustbelt.md) — RustBelt 与 Oxide 语义
 - [知识体系方法论](methodology.md) — 思维表征规范与决策树模板
 

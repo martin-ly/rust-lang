@@ -39,11 +39,11 @@
 
 | 审计任务 | 优先级 | 状态 | 文件 |
 |:---|:---:|:---:|:---|
-| ABI 与对象模型 | P0 | ✅ 完成 | [C++ ABI Object Model](../../05_comparative/18_cpp_abi_object_model.md) |
-| Move 语义系统对比 | P0 | ✅ 完成 | [Rust vs C++ §7.3](../../05_comparative/01_rust_vs_cpp.md) |
+| ABI 与对象模型 | P0 | ✅ 完成 | [C++ ABI Object Model](../../05_comparative/01_systems_languages/18_cpp_abi_object_model.md) |
+| Move 语义系统对比 | P0 | ✅ 完成 | [Rust vs C++ §7.3](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) |
 | 异常安全深度 | P0 | ✅ 完成 | [Exception Safety](../../02_intermediate/03_error_handling/27_exception_safety_rust_cpp.md) |
 | SFINAE / 模板元编程 | P1 | ✅ 完成 | [Traits §5.8](../../02_intermediate/00_traits/01_traits.md) |
-| 构造/初始化/运算符/RTTI/友元 | P1 | ✅ 完成 | [Surface Features](../../05_comparative/16_cpp_rust_surface_features.md) + 专门文件 |
+| 构造/初始化/运算符/RTTI/友元 | P1 | ✅ 完成 | [Surface Features](../../05_comparative/00_paradigms/16_cpp_rust_surface_features.md) + 专门文件 |
 | 预处理器 vs 宏 | P2 | ✅ 完成 | [Preprocessor vs Macros](../../02_intermediate/06_macros_and_metaprogramming/26_c_preprocessor_vs_rust_macros.md) |
 | 统一路线图 | — | ✅ 新增 | [C/C++ Engineering Roadmap](../00_framework/cpp_rust_engineering_roadmap.md) |
 
@@ -61,7 +61,7 @@
 
 | 审计任务 | 优先级 | 状态 | 文件 |
 |:---|:---:|:---:|:---|
-| 模式组合代数 | P0 | ✅ 完成 | [Pattern Composition Algebra](../../06_ecosystem/73_pattern_composition_algebra.md) |
+| 模式组合代数 | P0 | ✅ 完成 | [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md) |
 | 算法-模式语义桥 | P0 | ✅ 完成 | [Algorithm-Pattern Semantic Bridge](../00_framework/semantic_bridge_algorithms_patterns.md) |
 | 统一模式索引 | P1 | ✅ 新增 | [Pattern Semantic Space Index](../00_framework/pattern_semantic_space_index.md) |
 | 并发/分布式模式谱系 | P2 | ✅ 已存在 | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md) |
@@ -82,7 +82,7 @@
 | [Exception Safety](../../02_intermediate/03_error_handling/27_exception_safety_rust_cpp.md) | 02_intermediate | 异常安全深度对比 |
 | [Construction and Initialization](../../02_intermediate/00_traits/28_construction_and_initialization.md) | 02_intermediate | 构造与初始化对比 |
 | [Friend vs Module Privacy](../../02_intermediate/05_modules_and_visibility/29_friend_vs_module_privacy.md) | 02_intermediate | 友元 vs 模块可见性 |
-| [C++ Rust Surface Features](../../05_comparative/16_cpp_rust_surface_features.md) | 05_comparative | 构造/运算符/RTTI/友元综合速查 |
+| [C++ Rust Surface Features](../../05_comparative/00_paradigms/16_cpp_rust_surface_features.md) | 05_comparative | 构造/运算符/RTTI/友元综合速查 |
 
 ---
 

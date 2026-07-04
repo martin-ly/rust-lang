@@ -1095,7 +1095,7 @@ Java ⊂ Rust（系统编程能力）
 | **等价表达（异常→Result）** | [`04_error_handling.md`](../../02_intermediate/03_error_handling/04_error_handling.md) | §1-§4 | 元分析 → `?` 运算符 + 错误类型 |
 | **等价表达（虚函数→dyn）** | [`04_type_system.md`](../../01_foundation/02_type_system/04_type_system.md) §4 | dyn Trait + enum | 元分析 → 类型系统实现 |
 | **并发安全** | [`01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md) | §1-§7 | 元分析 → Send/Sync + happens-before |
-| **跨语言对比** | [`01_rust_vs_cpp.md`](../../05_comparative/01_rust_vs_cpp.md) | §1-§6 | 元分析 → 本体论差异 |
+| **跨语言对比** | [`01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | §1-§6 | 元分析 → 本体论差异 |
 | **依赖类型边界** | [`02_type_theory.md`](../../04_formal/00_type_theory/02_type_theory.md) | §1-§3 | 元分析 → HM 类型系统扩展 |
 
 ---

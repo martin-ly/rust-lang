@@ -14,8 +14,8 @@
 > [Concurrency](../00_concurrency/01_concurrency.md) ·
 > [Async/Await](../01_async/02_async.md) ·
 > [Evaluation Strategies](../../04_formal/03_operational_semantics/18_evaluation_strategies.md)
-> **后置概念**: [Stream Processing Ecosystem](../../06_ecosystem/36_stream_processing_ecosystem.md) ·
-> [Distributed Systems](../../06_ecosystem/18_distributed_systems.md)
+> **后置概念**: [Stream Processing Ecosystem](../../06_ecosystem/06_data_and_distributed/36_stream_processing_ecosystem.md) ·
+> [Distributed Systems](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md)
 >
 > **来源**: [Async Book — Streams](https://rust-lang.github.io/async-book//05_streams/01_chapter.html) · [futures::stream](https://docs.rs/futures/) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003)
 ---

@@ -9,7 +9,7 @@
 > **Bloom 层级**: 理解 → 应用
 > **定位**: 系统讲解 Rust 的**数值类型**——从整数、浮点到 wrapping/saturating 运算，分析类型安全如何防止数值错误。
 > **前置概念**: [Type System](../01_foundation/02_type_system/04_type_system.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
-> **后置概念**: [Generics](../02_intermediate/01_generics/02_generics.md) · [Performance](../06_ecosystem/15_performance_optimization.md)
+> **后置概念**: [Generics](../02_intermediate/01_generics/02_generics.md) · [Performance](../06_ecosystem/10_performance/15_performance_optimization.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -424,7 +424,7 @@ fn main() {
 
 - [Type System](../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Generics](../02_intermediate/01_generics/02_generics.md) — 泛型（Generics）
-- [Performance](../06_ecosystem/15_performance_optimization.md) — 性能优化
+- [Performance](../06_ecosystem/10_performance/15_performance_optimization.md) — 性能优化
 - [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) — 错误处理（Error Handling）
 
 ---

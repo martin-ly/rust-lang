@@ -3,7 +3,7 @@
 > **EN**: Troubleshooting And Debugging Guide
 > **Summary**: 故障排除与调试指南 Troubleshooting And Debugging Guide. (stub/archive redirect)
 >
-> **相关概念**: [调试](../../../../concept/06_ecosystem/01_toolchain.md)
+> **相关概念**: [调试](../../../../concept/06_ecosystem/00_toolchain/01_toolchain.md)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]

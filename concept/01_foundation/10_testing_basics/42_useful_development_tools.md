@@ -8,8 +8,8 @@
 > **Bloom 层级**: 记忆 → 理解
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
-> **前置依赖**: [Toolchain](../../06_ecosystem/01_toolchain.md) · [Cargo Getting Started](../../06_ecosystem/80_cargo_getting_started.md)
-> **后置概念**: [Testing Basics](16_testing_basics.md) · [Documentation](../../06_ecosystem/14_documentation.md) · [DevOps and CI/CD](../../06_ecosystem/28_devops_and_ci_cd.md)
+> **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Cargo Getting Started](../../06_ecosystem/01_cargo/80_cargo_getting_started.md)
+> **后置概念**: [Testing Basics](16_testing_basics.md) · [Documentation](../../06_ecosystem/09_testing_and_quality/14_documentation.md) · [DevOps and CI/CD](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md)
 > **定理链**: Source Code → Formatter → Linter → Tester → Documenter
 >
 > **来源**: [The Rust Programming Language — Appendix D: Useful Development Tools](https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)

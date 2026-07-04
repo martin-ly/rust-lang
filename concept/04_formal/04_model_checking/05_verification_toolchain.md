@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: P×Eva — 评估验证工具的 ROI 和适用性
 > **前置概念**: [RustBelt](../02_separation_logic/04_rustbelt.md) · [Ownership Formalization](../01_ownership_logic/03_ownership_formal.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
-> **后置概念**: [Formal Methods](../../07_future/02_formal_methods.md)
+> **后置概念**: [Formal Methods](../../07_future/04_research_and_experimental/02_formal_methods.md)
 > **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot](https://creusot.rs/) · [Miri Book](https://github.com/rust-lang/miri) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [a-mir-formality] · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **Bloom 层级**: 评价 → 应用
 > **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **[来源: SOSP 2024 Verus]** · **[来源: PLDI 2024 RefinedRust]** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ✅
@@ -721,8 +721,8 @@ flowchart TD
 | 线性逻辑 | [`./01_linear_logic.md`](../01_ownership_logic/01_linear_logic.md) | 分离逻辑的理论基础 |
 | 类型论 | [`./02_type_theory.md`](../00_type_theory/02_type_theory.md) | a-mir-formality 的理论基础 |
 | Unsafe 边界 | [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md) | 验证对象的定义 |
-| 形式化方法工业化 | [`../07_future/02_formal_methods.md`](../../07_future/02_formal_methods.md) | L7 演进趋势 |
-| Rust 版本跟踪 | [`../07_future/05_rust_version_tracking.md`](../../07_future/05_rust_version_tracking.md) | 工具链对新语言特性的支持状态 |
+| 形式化方法工业化 | [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | L7 演进趋势 |
+| Rust 版本跟踪 | [`../07_future/05_rust_version_tracking.md`](../../07_future/00_version_tracking/05_rust_version_tracking.md) | 工具链对新语言特性的支持状态 |
 
 ---
 

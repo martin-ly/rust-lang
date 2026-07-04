@@ -9,7 +9,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入分析 Rust **模块系统**（module system）的设计——从文件系统映射、可见性规则（pub/use/super/self）、到 crate 边界与 workspace 组织，揭示 Rust 模块系统与 C++/Java/Python 的本质差异。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)
-> **后置概念**: [Macros](../../03_advanced/03_proc_macros/04_macros.md) · [Cargo Toolchain](../../06_ecosystem/01_toolchain.md)
+> **后置概念**: [Macros](../../03_advanced/03_proc_macros/04_macros.md) · [Cargo Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
 
 ---
 
@@ -431,7 +431,7 @@ fn main() {
 
 ## 相关概念文件
 
-- [Cargo Toolchain](../../06_ecosystem/01_toolchain.md) — Cargo 与 Workspace
+- [Cargo Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) — Cargo 与 Workspace
 - Macros — 宏（Macro）与模块交互
 - [Traits](../00_traits/01_traits.md) — Trait 的可见性设计
 

@@ -12,7 +12,7 @@
 > **双维定位**: C×Kno — 将 Google 的 Comprehensive Rust 课程映射到本知识体系
 > **定位**: 本文件建立 **Comprehensive Rust**（Google 开发的免费 Rust 课程）与本知识体系中 `concept/` 文件的双向映射，帮助学习者将课程章节定位到深层概念文档。
 > **前置概念**: [Learning Guide](../04_navigation/learning_guide.md) · [Bloom Taxonomy](03_bloom_taxonomy.md)
-> **后置概念**: [Application Domains](../../06_ecosystem/04_application_domains.md)
+> **后置概念**: [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md)
 > **内容重叠提示**: 本文与 [`docs/01_learning/01_google_rust_mapping.md`](../../../docs/01_learning/01_google_rust_mapping.md) 内容高度重叠。`docs/` 版本提供学习映射；`concept/` 版本为项目权威主轨。
 
 ---
@@ -100,7 +100,7 @@ Day 4: Android 与高级主题 (4 小时)
 | Comprehensive Rust 章节 | 本知识体系对应文件 | 对应章节 | 补充深度 |
 |:---|:---|:---|:---|
 | **Welcome** | [`00_meta/learning_guide.md`](../04_navigation/learning_guide.md) | 〇、学习路径选择全景 | 本体系提供更细粒度的背景适配 |
-| **Hello, World** | [`06_ecosystem/01_toolchain.md`](../../06_ecosystem/01_toolchain.md) | §1.1 安装与配置 | 补充 `rustup` 原理和交叉编译 |
+| **Hello, World** | [`06_ecosystem/01_toolchain.md`](../../06_ecosystem/00_toolchain/01_toolchain.md) | §1.1 安装与配置 | 补充 `rustup` 原理和交叉编译 |
 | **Variables** | [`01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | §2.1 变量绑定 | 补充移动语义的前置形式化 |
 | **Scalar Types** | [`01_foundation/02_type_system/04_type_system.md`](../../01_foundation/02_type_system/04_type_system.md) | §2.1 标量类型 | 补充类型推导与类型别名 |
 | **Compound Types** | [`01_foundation/02_type_system/04_type_system.md`](../../01_foundation/02_type_system/04_type_system.md) | §2.2 复合类型 | 补充元组 fanout 模式 (Rust 1.85+) |
@@ -133,7 +133,7 @@ Day 4: Android 与高级主题 (4 小时)
 
 | Comprehensive Rust 章节 | 本知识体系对应文件 | 对应章节 | 补充深度 |
 |:---|:---|:---|:---|
-| **Android Build System** | [`06_ecosystem/17_cross_compilation.md`](../../06_ecosystem/17_cross_compilation.md) | §3 Android NDK | 补充 AOSP 集成 |
+| **Android Build System** | [`06_ecosystem/17_cross_compilation.md`](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md) | §3 Android NDK | 补充 AOSP 集成 |
 | **AIDL & FFI** | [`03_advanced/04_ffi/05_rust_ffi.md`](../../03_advanced/04_ffi/05_rust_ffi.md) | §2 C 互操作 | 补充 JNI/NDK 绑定 |
 | **Async Rust** | [`03_advanced/01_async/02_async.md`](../../03_advanced/01_async/02_async.md) | §1–3 全部 | 补充 `async fn` 状态机 |
 | **Macros & Testing** | [`02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md`](../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md) | §1–2 全部 | 补充声明宏 hygiene |
@@ -183,7 +183,7 @@ Comprehensive Rust 与本知识体系的互补关系:
 
 - [Learning Guide](../04_navigation/learning_guide.md) — 本知识体系学习指南
 - [Bloom Taxonomy](03_bloom_taxonomy.md) — 认知层级框架
-- [Application Domains](../../06_ecosystem/04_application_domains.md) — Rust 应用领域分析
+- [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) — Rust 应用领域分析
 
 ---
 

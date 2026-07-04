@@ -132,7 +132,7 @@ Week 2: 并发与工程化（20h）
 |:---|:---|:---:|:---:|:---|
 | 项目 | 文件内容搜索器 `rsgrep`：递归搜索目录中的文本 | 2h | **必修** | `cargo run -- "pattern" ./dir` 能输出匹配行 |
 | 扩展 | 添加 `--ignore-case`、`-n` 行号、`-r` 递归选项 | 1.5h | **必修** | 所有 flag 正常工作 |
-| 阅读 | [concept/06_ecosystem/01_toolchain.md](../../06_ecosystem/01_toolchain.md)（Cargo 部分） | 0.5h | **必修** | 理解 `Cargo.toml` 基本结构 |
+| 阅读 | [concept/06_ecosystem/01_toolchain.md](../../06_ecosystem/00_toolchain/01_toolchain.md)（Cargo 部分） | 0.5h | **必修** | 理解 `Cargo.toml` 基本结构 |
 
 **产出**: `rsgrep` 项目 — 可发布的 CLI 工具雏形
 
@@ -275,10 +275,10 @@ cargo test --test l3_ecosystem_alignment
 | 方向 | 下一步文件 | 预估时间 |
 |:---|:---|:---:|
 | 系统编程 | [concept/03_advanced/02_unsafe/03_unsafe.md](../../03_advanced/02_unsafe/03_unsafe.md) | +20h |
-| Web 后端 | [concept/06_ecosystem/03_web_frameworks.md](../../06_ecosystem/04_application_domains.md) | +20h |
-| 嵌入式 | [concept/06_ecosystem/05_embedded.md](../../06_ecosystem/22_embedded_systems.md) | +30h |
+| Web 后端 | [concept/06_ecosystem/03_web_frameworks.md](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) | +20h |
+| 嵌入式 | [concept/06_ecosystem/05_embedded.md](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) | +30h |
 | 形式化验证 | [concept/04_formal/03_ownership_formal.md](../../04_formal/01_ownership_logic/03_ownership_formal.md) | +40h |
-| 性能优化 | [concept/03_advanced/04_optimization.md](../../06_ecosystem/15_performance_optimization.md) | +15h |
+| 性能优化 | [concept/03_advanced/04_optimization.md](../../06_ecosystem/10_performance/15_performance_optimization.md) | +15h |
 
 ---
 

@@ -20,7 +20,7 @@
 > **双维定位**: P×App — 实施测试策略和验证方法
 > **定位**: 系统讲解 Rust **测试机制**——从单元测试、集成测试到文档测试和基准测试，揭示 Rust 如何内置测试文化并支持多种测试层级。
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Modules](../07_modules_and_items/11_modules_and_paths.md) · [Error Handling](../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md)
-> **后置概念**: [Testing Strategies](../../06_ecosystem/16_testing.md) · [Security Practices](../../06_ecosystem/19_security_practices.md)
+> **后置概念**: [Testing Strategies](../../06_ecosystem/09_testing_and_quality/16_testing.md) · [Security Practices](../../06_ecosystem/07_security_and_cryptography/19_security_practices.md)
 
 ---
 
@@ -552,8 +552,8 @@ graph TD
 
 - [Modules](../07_modules_and_items/11_modules_and_paths.md) — 模块（Module）系统
 - [Error Handling](../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md) — 错误处理（Error Handling）
-- [Testing Strategies](../../06_ecosystem/16_testing.md) — 测试策略
-- [Security Practices](../../06_ecosystem/19_security_practices.md) — 安全实践
+- [Testing Strategies](../../06_ecosystem/09_testing_and_quality/16_testing.md) — 测试策略
+- [Security Practices](../../06_ecosystem/07_security_and_cryptography/19_security_practices.md) — 安全实践
 
 ---
 

@@ -133,72 +133,72 @@ graph TB
 
 | 文件 | 概念 | 核心内容 | 状态 | 依赖的 L1-L5 | 工程输出 |
 |:---|:---|:---|:---|:---|:---|
-| [01_toolchain.md](01_toolchain.md) | 工具链 | Cargo、SemVer、Clippy、交叉编译、Miri | ✅ v1.0 | L4 类型论(编译器)、L3 Unsafe(Miri) | 可复现构建、质量门禁 |
-| [02_patterns.md](02_patterns.md) | 设计模式 | Typestate、Builder、Newtype、RAII、Zero-cost | ✅ v1.0 | L1 Ownership、L2 Trait、L5 对比 | 可维护代码结构 |
-| [03_core_crates.md](03_core_crates.md) | 核心库谱系 | serde、tokio、axum、clap、tracing、sqlx 等 40+ crate | ✅ v1.0 | L1-L5 全部概念 | 工程选型决策 |
-| [04_application_domains.md](04_application_domains.md) | 应用主题 | Web、CLI、嵌入式、游戏、区块链、数据工程、系统、GUI | ✅ v1.0 | L1-L5 全部概念 + 核心 crate | 领域工程落地 |
-| [05_formal_ecosystem_tower.md](44_formal_ecosystem_tower.md) | 形式化生态塔 | 核心 crate 的形式化根基/可组合性/可观测性三维评估；L0-L4 形式化分层 | ✅ v1.0 | L4 类型论、L3 Async/Unsafe | 形式化选型决策 |
-| [06_blockchain.md](06_blockchain.md) | 区块链合约安全 | Solana/Substrate/Near、合约安全形式化、Kani 验证、无重入/溢出 | ✅ v1.0 | L1 Ownership、L3 Unsafe、L4 RustBelt | 链上安全保证 |
-| [07_game_ecs.md](07_game_ecs.md) | 游戏 ECS 架构 | Bevy/Fyrox、ECS 与所有权协同、DOD、并发渲染 | ✅ v1.0 | L1 Ownership、L3 Concurrency | 游戏引擎选型 |
-| [08_wasi.md](08_wasi.md) | WASI 与 Wasm | Component Model、wit-bindgen、能力安全、`wasm32-wasip1` 或 `wasm32-wasip2` | ✅ v1.0 | L1 Ownership、L3 FFI | 跨平台沙箱部署 |
-| [11_webassembly.md](11_webassembly.md) | WebAssembly | Rust 的 Wasm 编译模型、组件模型、应用场景 | ✅ v1.0 | L1 Type System, L3 FFI | 跨平台部署 |
-| [13_logging_observability.md](13_logging_observability.md) | 日志与可观测性 | tracing、log、metrics、OpenTelemetry、分布式追踪 | ✅ v1.0 | L3 Async, L2 Error | 监控与诊断 |
-| [14_documentation.md](14_documentation.md) | 文档生态 | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ v1.0 | L3 Macros, L2 Module | 知识传播 |
-| [15_performance_optimization.md](15_performance_optimization.md) | 性能优化 | Criterion、flamegraph、缓存优化、SIMD、PGO | ✅ v1.0 | L1 Zero Cost, L1 Ownership | Concurrency, Async |
-| [16_testing.md](16_testing.md) | 测试生态 | 单元/集成/文档测试、mockall、proptest、cargo-fuzz | ✅ v1.0 | L2 Error, L3 Macros | Formal Methods, Miri |
-| [17_cross_compilation.md](17_cross_compilation.md) | 交叉编译 | 多目标平台、条件编译、no_std、嵌入式、Tier 系统 | ✅ v1.0 | L1 Type System, L3 Unsafe | WASI, WebAssembly |
-| [18_distributed_systems.md](18_distributed_systems.md) | 分布式系统 | gRPC、Raft、Actor、服务发现、微服务 | ✅ v1.0 | L3 Async, L4 Network | Observability, Wasm |
-| [31_microservice_patterns.md](31_microservice_patterns.md) | 微服务架构模式 | 服务发现、熔断、Saga、API Gateway、配置中心 | ✅ v1.0 | L3 Async, L4 Network | CQRS, 事件驱动 |
-| [32_event_driven_architecture.md](32_event_driven_architecture.md) | 事件驱动架构 | 发布-订阅、消息队列、Reactive Streams、幂等处理 | ✅ v1.0 | L3 Async, L2 Trait | CQRS, 分布式系统 |
-| [33_cqrs_event_sourcing.md](33_cqrs_event_sourcing.md) | CQRS & 事件溯源 | 命令查询分离、事件溯源、Saga 编排、Outbox 模式 | ✅ v1.0 | L3 Async, L2 Trait | 微服务, 事件驱动 |
-| [40_reactive_programming.md](40_reactive_programming.md) | 响应式编程与 FRP | Reactive Streams、背压、FRP Signal/Event、数据流编程 | ✅ v1.0 | L3 Async, L2 Trait | 事件驱动, 流处理 |
-| [35_architecture_patterns.md](35_architecture_patterns.md) | 架构设计模式 | 分层/六边形/洋葱/整洁架构、Serverless/FaaS | ✅ v1.0 | L2 Trait, L1 Lifetime | 微服务, CQRS |
-| [41_workflow_theory.md](41_workflow_theory.md) | 工作流理论与形式化 | WfMC、Petri 网、π 演算、CTL/LTL、Rust async 同构 | ✅ v1.0 | L3 Async, L4 Formal | 分布式系统, 事件溯源 |
-| [42_api_design_patterns.md](42_api_design_patterns.md) | API 设计模式 | REST/GraphQL/gRPC、OpenAPI、版本化、API 网关 | ✅ v1.0 | L3 Async, L2 Trait | 微服务, 事件驱动 |
-| [43_security_cryptography.md](43_security_cryptography.md) | 安全与密码学 | AES-GCM/ChaCha20、Ed25519、Argon2、ring/rustls、后量子 | ✅ v1.0 | L3 Unsafe, L2 Trait | 区块链, 网络协议 |
-| [45_compiler_internals.md](45_compiler_internals.md) | 编译器内部原理 | rustc 管线、HIR/MIR、类型系统（Type System）、NLL/Polonius、LLVM | ✅ v1.0 | L3 Unsafe, L4 Formal | 类型系统, 宏（Macro）系统 |
+| [01_toolchain.md](00_toolchain/01_toolchain.md) | 工具链 | Cargo、SemVer、Clippy、交叉编译、Miri | ✅ v1.0 | L4 类型论(编译器)、L3 Unsafe(Miri) | 可复现构建、质量门禁 |
+| [02_patterns.md](03_design_patterns/02_patterns.md) | 设计模式 | Typestate、Builder、Newtype、RAII、Zero-cost | ✅ v1.0 | L1 Ownership、L2 Trait、L5 对比 | 可维护代码结构 |
+| [03_core_crates.md](02_core_crates/03_core_crates.md) | 核心库谱系 | serde、tokio、axum、clap、tracing、sqlx 等 40+ crate | ✅ v1.0 | L1-L5 全部概念 | 工程选型决策 |
+| [04_application_domains.md](06_data_and_distributed/04_application_domains.md) | 应用主题 | Web、CLI、嵌入式、游戏、区块链、数据工程、系统、GUI | ✅ v1.0 | L1-L5 全部概念 + 核心 crate | 领域工程落地 |
+| [05_formal_ecosystem_tower.md](08_formal_verification/44_formal_ecosystem_tower.md) | 形式化生态塔 | 核心 crate 的形式化根基/可组合性/可观测性三维评估；L0-L4 形式化分层 | ✅ v1.0 | L4 类型论、L3 Async/Unsafe | 形式化选型决策 |
+| [06_blockchain.md](11_domain_applications/06_blockchain.md) | 区块链合约安全 | Solana/Substrate/Near、合约安全形式化、Kani 验证、无重入/溢出 | ✅ v1.0 | L1 Ownership、L3 Unsafe、L4 RustBelt | 链上安全保证 |
+| [07_game_ecs.md](11_domain_applications/07_game_ecs.md) | 游戏 ECS 架构 | Bevy/Fyrox、ECS 与所有权协同、DOD、并发渲染 | ✅ v1.0 | L1 Ownership、L3 Concurrency | 游戏引擎选型 |
+| [08_wasi.md](05_systems_and_embedded/08_wasi.md) | WASI 与 Wasm | Component Model、wit-bindgen、能力安全、`wasm32-wasip1` 或 `wasm32-wasip2` | ✅ v1.0 | L1 Ownership、L3 FFI | 跨平台沙箱部署 |
+| [11_webassembly.md](11_domain_applications/11_webassembly.md) | WebAssembly | Rust 的 Wasm 编译模型、组件模型、应用场景 | ✅ v1.0 | L1 Type System, L3 FFI | 跨平台部署 |
+| [13_logging_observability.md](00_toolchain/13_logging_observability.md) | 日志与可观测性 | tracing、log、metrics、OpenTelemetry、分布式追踪 | ✅ v1.0 | L3 Async, L2 Error | 监控与诊断 |
+| [14_documentation.md](09_testing_and_quality/14_documentation.md) | 文档生态 | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ v1.0 | L3 Macros, L2 Module | 知识传播 |
+| [15_performance_optimization.md](10_performance/15_performance_optimization.md) | 性能优化 | Criterion、flamegraph、缓存优化、SIMD、PGO | ✅ v1.0 | L1 Zero Cost, L1 Ownership | Concurrency, Async |
+| [16_testing.md](09_testing_and_quality/16_testing.md) | 测试生态 | 单元/集成/文档测试、mockall、proptest、cargo-fuzz | ✅ v1.0 | L2 Error, L3 Macros | Formal Methods, Miri |
+| [17_cross_compilation.md](05_systems_and_embedded/17_cross_compilation.md) | 交叉编译 | 多目标平台、条件编译、no_std、嵌入式、Tier 系统 | ✅ v1.0 | L1 Type System, L3 Unsafe | WASI, WebAssembly |
+| [18_distributed_systems.md](04_web_and_networking/18_distributed_systems.md) | 分布式系统 | gRPC、Raft、Actor、服务发现、微服务 | ✅ v1.0 | L3 Async, L4 Network | Observability, Wasm |
+| [31_microservice_patterns.md](03_design_patterns/31_microservice_patterns.md) | 微服务架构模式 | 服务发现、熔断、Saga、API Gateway、配置中心 | ✅ v1.0 | L3 Async, L4 Network | CQRS, 事件驱动 |
+| [32_event_driven_architecture.md](03_design_patterns/32_event_driven_architecture.md) | 事件驱动架构 | 发布-订阅、消息队列、Reactive Streams、幂等处理 | ✅ v1.0 | L3 Async, L2 Trait | CQRS, 分布式系统 |
+| [33_cqrs_event_sourcing.md](03_design_patterns/33_cqrs_event_sourcing.md) | CQRS & 事件溯源 | 命令查询分离、事件溯源、Saga 编排、Outbox 模式 | ✅ v1.0 | L3 Async, L2 Trait | 微服务, 事件驱动 |
+| [40_reactive_programming.md](04_web_and_networking/40_reactive_programming.md) | 响应式编程与 FRP | Reactive Streams、背压、FRP Signal/Event、数据流编程 | ✅ v1.0 | L3 Async, L2 Trait | 事件驱动, 流处理 |
+| [35_architecture_patterns.md](03_design_patterns/35_architecture_patterns.md) | 架构设计模式 | 分层/六边形/洋葱/整洁架构、Serverless/FaaS | ✅ v1.0 | L2 Trait, L1 Lifetime | 微服务, CQRS |
+| [41_workflow_theory.md](03_design_patterns/41_workflow_theory.md) | 工作流理论与形式化 | WfMC、Petri 网、π 演算、CTL/LTL、Rust async 同构 | ✅ v1.0 | L3 Async, L4 Formal | 分布式系统, 事件溯源 |
+| [42_api_design_patterns.md](03_design_patterns/42_api_design_patterns.md) | API 设计模式 | REST/GraphQL/gRPC、OpenAPI、版本化、API 网关 | ✅ v1.0 | L3 Async, L2 Trait | 微服务, 事件驱动 |
+| [43_security_cryptography.md](07_security_and_cryptography/43_security_cryptography.md) | 安全与密码学 | AES-GCM/ChaCha20、Ed25519、Argon2、ring/rustls、后量子 | ✅ v1.0 | L3 Unsafe, L2 Trait | 区块链, 网络协议 |
+| [45_compiler_internals.md](00_toolchain/45_compiler_internals.md) | 编译器内部原理 | rustc 管线、HIR/MIR、类型系统（Type System）、NLL/Polonius、LLVM | ✅ v1.0 | L3 Unsafe, L4 Formal | 类型系统, 宏（Macro）系统 |
 | 35_pattern_composition_algebra.md | 模式组合代数 | 设计模式的形式化组合、冲突检测、Rust 所有权（Ownership）约束 | ✅ v1.0 | L2 Trait, L3 Concurrency | Software Architecture |
-| [36_stream_processing_ecosystem.md](36_stream_processing_ecosystem.md) | 流处理生态 | timely/differential dataflow、Materialize、RisingWave、Fluvio | ✅ v1.0 | L3 Stream Processing | Distributed Systems |
-| [37_database_systems.md](37_database_systems.md) | 数据库系统 | TiKV/Percolator、Materialize、Meilisearch、SurrealDB | ✅ v1.0 | L3 Concurrency | Stream Processing |
-| [38_network_protocols.md](38_network_protocols.md) | 网络协议 | QUIC/HTTP-3、quinn、h3、eBPF/aya | ✅ v1.0 | L3 Async | OS Kernel |
-| [39_os_kernel.md](39_os_kernel.md) | 操作系统 | Rust for Linux、Theseus、Redox、eBPF | ✅ v1.0 | L3 Unsafe | Network Protocols |
+| [36_stream_processing_ecosystem.md](06_data_and_distributed/36_stream_processing_ecosystem.md) | 流处理生态 | timely/differential dataflow、Materialize、RisingWave、Fluvio | ✅ v1.0 | L3 Stream Processing | Distributed Systems |
+| [37_database_systems.md](06_data_and_distributed/37_database_systems.md) | 数据库系统 | TiKV/Percolator、Materialize、Meilisearch、SurrealDB | ✅ v1.0 | L3 Concurrency | Stream Processing |
+| [38_network_protocols.md](04_web_and_networking/38_network_protocols.md) | 网络协议 | QUIC/HTTP-3、quinn、h3、eBPF/aya | ✅ v1.0 | L3 Async | OS Kernel |
+| [39_os_kernel.md](05_systems_and_embedded/39_os_kernel.md) | 操作系统 | Rust for Linux、Theseus、Redox、eBPF | ✅ v1.0 | L3 Unsafe | Network Protocols |
 
 ---
 
 ### 补充文件索引
 
-- [Rust 惯用法谱系全景（Idioms Spectrum）](34_idioms_spectrum.md)
-- [Rust 系统设计原则与国际权威对齐](05_system_design_principles.md)
-- [Cargo Script：单文件 Rust 程序](09_cargo_script.md)
-- [Public/Private Dependencies：可见性控制的工程化](10_public_private_deps.md)
-- [Rust 测试策略：从单元测试到属性验证](12_testing_strategies.md)
-- [安全 实践：Rust 代码的防御性编程](19_security_practices.md)
-- [许可证与合规：Rust 项目的法律工程](20_licensing_and_compliance.md)
-- [Rust 游戏开发生态](21_game_development.md)
-- [Rust 嵌入式系统开发](22_embedded_systems.md)
-- [Rust 数据库访问生态](23_database_access.md)
-- [Rust 云原生生态](24_cloud_native.md)
-- [Rust CLI 开发生态](25_cli_development.md)
-- [Rust 游戏开发](26_game_development.md)
-- [Rust Web 框架对比与选型](27_web_frameworks.md)
-- [DevOps 与 CI/CD：Rust 的持续交付工程实践](28_devops_and_ci_cd.md)
-- [算法与竞赛编程 (Algorithms & Competitive Programming)](29_algorithms_competitive_programming.md)
-- [系统可组合性 (System Composability)](30_system_composability.md)
-- [测验：Rust 工具链（嵌入式互动试点）](57_quiz_toolchain.md)
-- [Machine Learning Ecosystem（机器学习生态）](46_machine_learning_ecosystem.md)
-- [Rust 编译器基础设施深度解析](47_compiler_infrastructure.md)
-- [Formal Verification Tools（形式化验证工具生态）](74_formal_verification_tools.md)
-- [Data Engineering（数据工程）](48_data_engineering.md)
-- [Rust 平台集成：AOSP、Chromium 与 Bare Metal](58_platform_rust_integration.md)
-- [Rust 工业级案例研究](75_industrial_case_studies.md)
-- [Game Engine Internals（游戏引擎内部原理）](49_game_engine_internals.md)
-- [Distributed Consensus（分布式共识）](50_distributed_consensus.md)
-- [Quantum Computing in Rust（量子计算与 Rust）](51_quantum_computing_rust.md)
-- [Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态）](52_robotics.md)
-- [Rust 嵌入式图形系统开发](53_embedded_graphics.md)
-- [Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust）](54_webassembly_advanced.md)
-- [Rust for Data Science（Rust 数据科学）](55_rust_for_data_science.md)
-- [C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）](56_c_to_rust_translation.md)
+- [Rust 惯用法谱系全景（Idioms Spectrum）](03_design_patterns/34_idioms_spectrum.md)
+- [Rust 系统设计原则与国际权威对齐](03_design_patterns/05_system_design_principles.md)
+- [Cargo Script：单文件 Rust 程序](01_cargo/09_cargo_script.md)
+- [Public/Private Dependencies：可见性控制的工程化](01_cargo/10_public_private_deps.md)
+- [Rust 测试策略：从单元测试到属性验证](09_testing_and_quality/12_testing_strategies.md)
+- [安全 实践：Rust 代码的防御性编程](07_security_and_cryptography/19_security_practices.md)
+- [许可证与合规：Rust 项目的法律工程](11_domain_applications/20_licensing_and_compliance.md)
+- [Rust 游戏开发生态](11_domain_applications/21_game_development.md)
+- [Rust 嵌入式系统开发](05_systems_and_embedded/22_embedded_systems.md)
+- [Rust 数据库访问生态](06_data_and_distributed/23_database_access.md)
+- [Rust 云原生生态](04_web_and_networking/24_cloud_native.md)
+- [Rust CLI 开发生态](05_systems_and_embedded/25_cli_development.md)
+- [Rust 游戏开发](11_domain_applications/26_game_development.md)
+- [Rust Web 框架对比与选型](04_web_and_networking/27_web_frameworks.md)
+- [DevOps 与 CI/CD：Rust 的持续交付工程实践](00_toolchain/28_devops_and_ci_cd.md)
+- [算法与竞赛编程 (Algorithms & Competitive Programming)](11_domain_applications/29_algorithms_competitive_programming.md)
+- [系统可组合性 (System Composability)](03_design_patterns/30_system_composability.md)
+- [测验：Rust 工具链（嵌入式互动试点）](00_toolchain/57_quiz_toolchain.md)
+- [Machine Learning Ecosystem（机器学习生态）](11_domain_applications/46_machine_learning_ecosystem.md)
+- [Rust 编译器基础设施深度解析](00_toolchain/47_compiler_infrastructure.md)
+- [Formal Verification Tools（形式化验证工具生态）](08_formal_verification/74_formal_verification_tools.md)
+- [Data Engineering（数据工程）](06_data_and_distributed/48_data_engineering.md)
+- [Rust 平台集成：AOSP、Chromium 与 Bare Metal](00_toolchain/58_platform_rust_integration.md)
+- [Rust 工业级案例研究](11_domain_applications/75_industrial_case_studies.md)
+- [Game Engine Internals（游戏引擎内部原理）](11_domain_applications/49_game_engine_internals.md)
+- [Distributed Consensus（分布式共识）](06_data_and_distributed/50_distributed_consensus.md)
+- [Quantum Computing in Rust（量子计算与 Rust）](11_domain_applications/51_quantum_computing_rust.md)
+- [Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态）](05_systems_and_embedded/52_robotics.md)
+- [Rust 嵌入式图形系统开发](05_systems_and_embedded/53_embedded_graphics.md)
+- [Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust）](11_domain_applications/54_webassembly_advanced.md)
+- [Rust for Data Science（Rust 数据科学）](06_data_and_distributed/55_rust_for_data_science.md)
+- [C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）](05_systems_and_embedded/56_c_to_rust_translation.md)
 
 ## 三、L1-L5 → L6 的工程映射
 

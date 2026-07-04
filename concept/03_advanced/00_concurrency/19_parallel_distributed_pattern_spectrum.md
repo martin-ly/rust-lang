@@ -13,10 +13,10 @@
 > [Async](../01_async/02_async.md) ·
 > [Lock-free](16_lock_free.md) ·
 > [Traits](../../02_intermediate/00_traits/01_traits.md) ·
-> [Distributed Systems](../../06_ecosystem/18_distributed_systems.md)
+> [Distributed Systems](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md)
 > **后置概念**:
-> [Pattern Composition Algebra](../../06_ecosystem/73_pattern_composition_algebra.md) ·
-> [System Design Principles](../../06_ecosystem/05_system_design_principles.md)
+> [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md) ·
+> [System Design Principles](../../06_ecosystem/03_design_patterns/05_system_design_principles.md)
 > **主要来源**: · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Herlihy & Shavit — The Art of Multiprocessor Programming] ·
 > [Lynch — Distributed Algorithms] · [Tanenbaum — Distributed Systems] ·

@@ -10,7 +10,7 @@
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Type — 类型系统（Type System）与形式化方法
 > **定位**: 把“这个类型是否实现了某 trait”这一核心问题，还原为候选装配、筛选、确认与约束求解的完整算法。
-> **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Type Inference](../00_type_theory/08_type_inference.md) · [Name Resolution and HIR](35_name_resolution_and_hir.md)
+> **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Type Inference](../00_type_theory/08_type_inference.md) · [Name Resolution and HIR](35_name_resolution_and_hir.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 > **后置概念**: [Rustc Query System](19_rustc_query_system.md) · [Ownership Formal](../01_ownership_logic/03_ownership_formal.md)
 
 ---

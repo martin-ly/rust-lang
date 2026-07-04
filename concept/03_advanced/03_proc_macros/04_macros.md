@@ -2103,8 +2103,8 @@ mod internal {
 |:---|:---|:---|
 | Trait 系统 | [](../../02_intermediate/00_traits/01_traits.md) | Derive 宏目标 |
 | 类型系统（Type System） | [](../../01_foundation/02_type_system/04_type_system.md) | 宏与类型交互 |
-| 形式化方法 | [](../../07_future/02_formal_methods.md) | 宏安全验证 |
-| 语言演进 | [](../../07_future/03_evolution.md) | 宏系统演进 |
+| 形式化方法 | [](../../07_future/04_research_and_experimental/02_formal_methods.md) | 宏安全验证 |
+| 语言演进 | [](../../07_future/04_research_and_experimental/03_evolution.md) | 宏系统演进 |
 | 编译期计算 | [](03_const_generics.md) | const fn 替代宏的趋势 |
 
 ---

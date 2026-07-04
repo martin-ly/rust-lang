@@ -2,7 +2,7 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [机器学习生态](../../../../concept/06_ecosystem/46_machine_learning_ecosystem.md)
+> - [机器学习生态](../../../../concept/06_ecosystem/11_domain_applications/46_machine_learning_ecosystem.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.96.1+ (Edition 2024)
@@ -188,7 +188,7 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 - [ort ONNX Runtime Rust 架构](35_ort_architecture.md) — 与 `tract` 的 FFI vs 纯 Rust 对比
 - [candle / AI/ML 生态示例](../../../../crates/c08_algorithms/examples/ai_ml_ecosystem_demo.rs) — Rust ML 张量基础
 - [嵌入式与 FFI 模式](../../../../concept/04_formal/04_model_checking/05_verification_toolchain.md)
-- [设计模式：策略模式](../../../../concept/06_ecosystem/02_patterns.md)
+- [设计模式：策略模式](../../../../concept/06_ecosystem/03_design_patterns/02_patterns.md)
 
 ---
 

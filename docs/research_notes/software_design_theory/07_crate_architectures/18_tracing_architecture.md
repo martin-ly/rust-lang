@@ -2,7 +2,7 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [日志与可观测性](../../../../concept/06_ecosystem/13_logging_observability.md)
+> - [日志与可观测性](../../../../concept/06_ecosystem/00_toolchain/13_logging_observability.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 
@@ -524,7 +524,7 @@ sequenceDiagram
 - [Axum Web 框架架构](07_axum_architecture.md)
 - [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 - [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
-- [系统可组合性设计模式](../../../../concept/06_ecosystem/30_system_composability.md)
+- [系统可组合性设计模式](../../../../concept/06_ecosystem/03_design_patterns/30_system_composability.md)
 
 ---
 

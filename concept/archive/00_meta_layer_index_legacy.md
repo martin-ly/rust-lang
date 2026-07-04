@@ -6,7 +6,7 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **归档声明**: 本文件前部为 Rust 概念知识体系 **L0 元信息层索引**。原 PostgreSQL 18+ 形式化分析内容已折叠至文件尾部 `§[PostgreSQL 18+ 形式化分析归档]`。
-> 与 Rust 相关的跨系统对比内容已提取至 [`05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) §10。
+> 与 Rust 相关的跨系统对比内容已提取至 [`05_comparative/04_safety_boundaries.md`](../05_comparative/03_domain_comparisons/04_safety_boundaries.md) §10。
 >
 > **状态**: v1.1（2026-05-13 重构索引）
 >
@@ -64,9 +64,9 @@ L0 元规则
 | 读者类型 | 推荐起点 | 路径 |
 |:---|:---|:---|
 | **Rust 初学者** | [`01_foundation/README.md`](../01_foundation/README.md) | L1 → L2 → L3 |
-| **系统工程师** | [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | L5 → L6 → L3 |
+| **系统工程师** | [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | L5 → L6 → L3 |
 | **形式化研究者** | [`04_formal/README.md`](../04_formal/README.md) | L4 → L1 → L7 |
-| **语言设计者** | [`07_future/03_evolution.md`](../07_future/03_evolution.md) | L7 → L4 → L5 |
+| **语言设计者** | [`07_future/03_evolution.md`](../07_future/04_research_and_experimental/03_evolution.md) | L7 → L4 → L5 |
 | **技术选型者** | [`05_comparative/README.md`](../05_comparative/README.md) | L5 → L6 → L7 |
 
 ---

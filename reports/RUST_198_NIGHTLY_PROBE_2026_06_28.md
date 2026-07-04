@@ -2,7 +2,7 @@
 
 > **EN**: Rust 1.98 Nightly API Probe Report (2026-06-28)
 > **Summary**: 使用 `rustc 1.98.0-nightly (2026-06-26)` 对 17 项候选 API 进行无 feature gate 编译探测的结果汇总。
-> **来源**: [concept/07_future/rust_1_98_preview.md](../concept/07_future/rust_1_98_preview.md) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
+> **来源**: [concept/07_future/rust_1_98_preview.md](../concept/07_future/00_version_tracking/rust_1_98_preview.md) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 
 ---
 

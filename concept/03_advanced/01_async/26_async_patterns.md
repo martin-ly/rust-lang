@@ -10,7 +10,7 @@
 > **双维定位**: C×Ana — 分析异步（Async）模式的状态机变换
 > **定位**: 深入分析 Rust **异步编程的高级模式**——从 Future 状态机、Pin 保证到并发执行和取消传播，揭示 Rust async/await 如何在零运行时（Runtime）开销下实现高效并发。
 > **前置概念**: [Async](02_async.md) · [Pin](06_pin_unpin.md) · [Concurrency](../00_concurrency/01_concurrency.md)
-> **后置概念**: [Distributed Systems](../../06_ecosystem/18_distributed_systems.md) · [Tokio](https://tokio.rs/)
+> **后置概念**: [Distributed Systems](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) · [Tokio](https://tokio.rs/)
 
 ---
 
@@ -651,7 +651,7 @@ graph TD
 - [Async](02_async.md) — 异步基础
 - [Pin](06_pin_unpin.md) — Pin 与 Unpin
 - [Concurrency](../00_concurrency/01_concurrency.md) — 并发基础
-- [Distributed Systems](../../06_ecosystem/18_distributed_systems.md) — 分布式系统
+- [Distributed Systems](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) — 分布式系统
 
 ---
 

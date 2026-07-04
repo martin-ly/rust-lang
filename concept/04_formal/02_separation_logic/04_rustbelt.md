@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价安全性定理的假设边界
 > **前置依赖**: [L4 所有权（Ownership）形式化](../01_ownership_logic/03_ownership_formal.md) · L4 类型论 · L4 线性逻辑
-> **后置延伸**: [L7 形式化方法](../../07_future/02_formal_methods.md) · [L6 验证工具](../../06_ecosystem/01_toolchain.md)
+> **后置延伸**: [L7 形式化方法](../../07_future/04_research_and_experimental/02_formal_methods.md) · [L6 验证工具](../../06_ecosystem/00_toolchain/01_toolchain.md)
 > **跨层映射**: L4→L7 机械证明 → 自动化验证 | L4→L6 逻辑规则 → 工具实现
 > **定理链编号**: T-110 Iris 逻辑可靠性 → T-111 高阶幽灵状态 → T-112 类型系统（Type System） soundness
 > **层级**: L4 形式化理论
@@ -21,7 +21,7 @@
 > [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) ·
 > [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)
 > [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
-> **后置概念**: [Formal Methods](../../07_future/02_formal_methods.md)
+> **后置概念**: [Formal Methods](../../07_future/04_research_and_experimental/02_formal_methods.md)
 > **主要来源**: [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Iris Project](https://iris-project.org/) · [Creusot](https://creusot.rs/) · [Verus](https://github.com/verus-lang/verus/guide/) · [Kani: AWS] · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
@@ -186,7 +186,7 @@ C2 (未覆盖范围) 是负面边界
 > - **L3 Unsafe**: [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md) §3 "Unsafe 抽象边界" ↔ C1 边界层。unsafe 代码的安全契约需在 Iris 中手动建模，RustBelt 提供方法论但不自动化验证 [来源: [Wikipedia — Type Theory](https://en.wikipedia.org/wiki/Type_theory)]
 > - **L3 并发**: [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md) §2 "Send/Sync 语义" ↔ T1（无数据竞争）。CSL 是并发安全（Concurrency Safety）的逻辑根基，Mutex/Arc 的形式化规约见 §3
 > **Send/Sync 形式化语义**: `T: Send` ⇔ 类型 T 可安全跨线程转移所有权（值 move 无数据竞争）。`T: Sync` ⇔ `&T: Send`，即 T 的共享引用（Reference）可安全跨线程共享。
-> - **L7 形式化方法**: [`../07_future/02_formal_methods.md`](../../07_future/02_formal_methods.md) §4 "验证工具链演进" ↔ §8 工具链映射。从 Miri（动态）到 Kani（模型检测）到 Coq/Iris（定理证明）构成完整光谱
+> - **L7 形式化方法**: [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) §4 "验证工具链演进" ↔ §8 工具链映射。从 Miri（动态）到 Kani（模型检测）到 Coq/Iris（定理证明）构成完整光谱
 
 ---
 
@@ -1090,8 +1090,8 @@ graph TD
 | 线性逻辑 | [`./01_linear_logic.md`](../01_ownership_logic/01_linear_logic.md) | 理论基础 |
 | 类型论 | [`./02_type_theory.md`](../00_type_theory/02_type_theory.md) | 类型规则 |
 | 所有权形式化 | [`./03_ownership_formal.md`](../01_ownership_logic/03_ownership_formal.md) | 操作语义 |
-| 形式化方法 | [`../07_future/02_formal_methods.md`](../../07_future/02_formal_methods.md) | 工具化 · L7 形式化方法映射 |
-| 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../../05_comparative/04_safety_boundaries.md) | 验证范围 |
+| 形式化方法 | [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | 工具化 · L7 形式化方法映射 |
+| 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md) | 验证范围 |
 
 ---
 

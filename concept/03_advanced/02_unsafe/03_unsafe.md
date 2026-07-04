@@ -1523,7 +1523,7 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
 > **[来源: LLVM Sanitizers Docs]** ASan 使用影子内存（shadow memory）检测堆/栈/全局变量的越界访问，运行时开销约 2x，是 C/C++/Rust FFI 项目的首选工具。 ✅ 已验证
 > **[来源: Valgrind Documentation]** Valgrind 的 memcheck 通过 JIT 重编译检测未初始化读取和内存泄漏，无需重编译目标程序，但运行速度极慢（10x~50x）。 ✅ 已验证
 > **[来源: TSan Documentation]** TSan 使用 happens-before 向量时钟检测数据竞争，对 Rust 的 `std::sync` 原子操作（Atomic Operations）和锁结构均有效，但要求所有代码都经过插桩。 ✅ 已验证
-> **跨层映射**: `L3::Miri` ↔ [`L6::工具链`](../../06_ecosystem/01_toolchain.md) CI 集成 · [`L4::形式化`](../../04_formal/02_separation_logic/04_rustbelt.md) 操作语义动态验证
+> **跨层映射**: `L3::Miri` ↔ [`L6::工具链`](../../06_ecosystem/00_toolchain/01_toolchain.md) CI 集成 · [`L4::形式化`](../../04_formal/02_separation_logic/04_rustbelt.md) 操作语义动态验证
 
 ---
 
@@ -2371,7 +2371,7 @@ where
 > **定理**：`MaybeUninit<T>` 是 C `malloc` + 手动初始化模式的**类型安全升级版**——它将"未初始化内存"从隐式的 `void*` 状态提升为显式的 `MaybeUninit<T>` 类型，使编译器能够验证类型一致性，使 Miri 能够动态验证初始化完整性，使程序员能够通过 `unsafe { assume_init() }` 的显式边界承担证明责任。💡 原创分析
 > **跨层映射**: `L3::MaybeUninit` ↔ [`L1::所有权`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 初始化要求 ·
 > [`L2::内存管理`](../../02_intermediate/02_memory_management/03_memory_management.md) RAII ·
-> [`L5::对比`](../../05_comparative/01_rust_vs_cpp.md) Rust vs C/C++ 内存模型
+> [`L5::对比`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) Rust vs C/C++ 内存模型
 
 ---
 
@@ -2588,8 +2588,8 @@ fn main() {
 | 借用（Borrowing）规则 | [](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | unsafe 突破 |
 | 内存管理 | [](../../02_intermediate/02_memory_management/03_memory_management.md) | 裸指针 |
 | 形式化验证 | [](../../04_formal/02_separation_logic/04_rustbelt.md) | unsafe 证明边界 |
-| 安全边界 | [](../../05_comparative/04_safety_boundaries.md) | 全局边界汇总 |
-| Rust 版本特性演进 | [](../../07_future/05_rust_version_tracking.md) | `unsafe_op_in_unsafe_fn`、`naked_functions`、`unsafe extern` |
+| 安全边界 | [](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md) | 全局边界汇总 |
+| Rust 版本特性演进 | [](../../07_future/00_version_tracking/05_rust_version_tracking.md) | `unsafe_op_in_unsafe_fn`、`naked_functions`、`unsafe extern` |
 | 异步（Async）与 Unsafe | [](../01_async/02_async.md) | `AsyncFn` 与 unsafe 边界的交互 |
 
 > **过渡: L3 → L1**
@@ -2597,7 +2597,7 @@ fn main() {
 > 安全基础见 [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)（借用规则）与 [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)（所有权转移）。
 > **过渡: L3 → L6**
 > `cbindgen`、`cxx`、`diplomat` 等工具将 FFI 的 unsafe 边界自动化，而 `Miri` 和 `Kani` 则在 CI 中持续验证 unsafe 代码的正确性。unsafe 不是 "放弃安全"，而是 "将安全的责任从编译器转移到工具和流程"。
-> 工具化实践见 [`../06_ecosystem/01_toolchain.md`](../../06_ecosystem/01_toolchain.md)（工具链安全审计）与 [`../07_future/02_formal_methods.md`](../../07_future/02_formal_methods.md)（形式化验证工具）。
+> 工具化实践见 [`../06_ecosystem/01_toolchain.md`](../../06_ecosystem/00_toolchain/01_toolchain.md)（工具链安全审计）与 [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化验证工具）。
 ---
 
 ---

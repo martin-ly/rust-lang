@@ -2,7 +2,7 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [日志与可观测性](../../../../concept/06_ecosystem/13_logging_observability.md)
+> - [日志与可观测性](../../../../concept/06_ecosystem/00_toolchain/13_logging_observability.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.96.1+ (Edition 2024)

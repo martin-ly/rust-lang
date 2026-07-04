@@ -18,7 +18,7 @@
 > **双维定位**: F×App — 模块（Module）系统和路径的语法应用
 > **定位**: 系统讲解 Rust **模块（Module）系统**——从 `mod`、`use`、`pub` 的语法到文件系统映射、工作空间组织，揭示 Rust 如何通过模块系统实现代码封装、可见性控制和大型项目组织。
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/04_type_system.md)
-> **后置概念**: [Crate Ecosystem](../../06_ecosystem/03_core_crates.md) · [Workspace](../../06_ecosystem/01_toolchain.md)
+> **后置概念**: [Crate Ecosystem](../../06_ecosystem/02_core_crates/03_core_crates.md) · [Workspace](../../06_ecosystem/00_toolchain/01_toolchain.md)
 
 ---
 
@@ -492,8 +492,8 @@ graph TD
 
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）系统
 - [Type System](../02_type_system/04_type_system.md) — 类型系统（Type System）
-- [Crate Ecosystem](../../06_ecosystem/03_core_crates.md) — 核心 crate
-- [Toolchain](../../06_ecosystem/01_toolchain.md) — 工具链
+- [Crate Ecosystem](../../06_ecosystem/02_core_crates/03_core_crates.md) — 核心 crate
+- [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) — 工具链
 
 ---
 

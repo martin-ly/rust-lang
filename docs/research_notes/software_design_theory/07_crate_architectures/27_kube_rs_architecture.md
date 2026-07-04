@@ -2,8 +2,8 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [云原生](../../../../concept/06_ecosystem/24_cloud_native.md)
-> - [微服务模式](../../../../concept/06_ecosystem/31_microservice_patterns.md)
+> - [云原生](../../../../concept/06_ecosystem/04_web_and_networking/24_cloud_native.md)
+> - [微服务模式](../../../../concept/06_ecosystem/03_design_patterns/31_microservice_patterns.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **⚠️ 历史文档提示**：

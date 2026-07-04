@@ -12,7 +12,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入分析 Rust 中 **Newtype 模式**和**包装器类型**的设计——如何通过单字段元组结构体（Struct）创建语义上不同的类型，实现编译期单位检查、API 封装和安全边界，同时保持零运行时（Runtime）开销。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Trait](../00_traits/01_traits.md) · [Generics](../01_generics/02_generics.md)
-> **后置概念**: [Typestate](../../06_ecosystem/02_patterns.md) · [Smart Pointers](../02_memory_management/12_smart_pointers.md)
+> **后置概念**: [Typestate](../../06_ecosystem/03_design_patterns/02_patterns.md) · [Smart Pointers](../02_memory_management/12_smart_pointers.md)
 
 ---
 
@@ -477,7 +477,7 @@ graph TD
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Trait](../00_traits/01_traits.md) — Trait 系统
 - [Generics](../01_generics/02_generics.md) — 泛型系统
-- [Patterns](../../06_ecosystem/02_patterns.md) — 设计模式
+- [Patterns](../../06_ecosystem/03_design_patterns/02_patterns.md) — 设计模式
 
 ---
 

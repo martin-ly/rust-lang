@@ -235,165 +235,165 @@
 | [类型系统参考](../../04_formal/00_type_theory/50_type_system_reference.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Type → Kind → Size/Align → Lifetime → Trait Bounds |
 | [名字参考](../../04_formal/05_rustc_internals/51_names_reference.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Source File → Module Tree → Namespace → Scope → Name Resolution |
 | [Rust Reference 附录](../../04_formal/05_rustc_internals/52_reference_appendices.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Grammar → Lexicon → Syntax Index → Test Summary |
-| [Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>](../../05_comparative/01_rust_vs_cpp.md) | L5 对比分析层 | 进阶 | 专家级 | — | 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust vs Go：线性所有权 vs CSP 过程逻辑](../../05_comparative/02_rust_vs_go.md) | L5 对比分析层 | 进阶 | 综述级 | — | 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Paradigm Matrix: Multi-Language Formal Comparison](../../05_comparative/03_paradigm_matrix.md) | L5 对比分析层 | 进阶 | 综述级 | S | 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 安全保证的边界条件全景](../../05_comparative/04_safety_boundaries.md) | L5 对比分析层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行](../../05_comparative/05_execution_model_isomorphism.md) | L5 对比分析层 | 进阶 | 专家级 | — | 分析 → 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust vs Java：系统编程与托管运行时的范式对比](../../05_comparative/06_rust_vs_java.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust vs Python：系统编程与动态脚本的对照分析](../../05_comparative/07_rust_vs_python.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust vs JavaScript：系统编程与脚本执行的范式差异](../../05_comparative/08_rust_vs_javascript.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust vs Swift：现代系统语言的两种路径](../../05_comparative/09_rust_vs_swift.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust vs Zig：现代系统语言的两种哲学](../../05_comparative/10_rust_vs_zig.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust vs Kotlin：静态安全的两种路径](../../05_comparative/11_rust_vs_kotlin.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust vs Scala：类型系统的两种哲学](../../05_comparative/12_rust_vs_scala.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust vs C#：托管与原生之路](../../05_comparative/13_rust_vs_csharp.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust vs Elixir 对比分析](../../05_comparative/14_rust_vs_elixir.md) | L5 对比分析层 | 进阶 | 综述级 | — | 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](../../05_comparative/15_rust_vs_typescript.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [C++ vs Rust：构造、运算符、RTTI、友元](../../05_comparative/16_cpp_rust_surface_features.md) | L5 对比分析层 | 进阶 | 研究级 | — | 分析 → 评价 | — |
-| [测验：Rust vs 系统编程语言](../../05_comparative/17_quiz_rust_vs_systems.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
-| [Rust vs C++：ABI、对象模型与内存布局](../../05_comparative/18_cpp_abi_object_model.md) | L5 对比分析层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust vs Ruby：性能与表达力的两极](../../05_comparative/19_rust_vs_ruby.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Toolchain](../../06_ecosystem/01_toolchain.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Design Patterns](../../06_ecosystem/02_patterns.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Core Crates](../../06_ecosystem/03_core_crates.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Application Domains](../../06_ecosystem/04_application_domains.md) | L6 生态工程层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 系统设计原则与国际权威对齐](../../06_ecosystem/05_system_design_principles.md) | L6 生态工程层 | 进阶 | 专家级 | — | 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Blockchain & Smart Contract Security](../../06_ecosystem/06_blockchain.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Game Development & ECS Architecture](../../06_ecosystem/07_game_ecs.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [WASI & WebAssembly Component Model](../../06_ecosystem/08_wasi.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Cargo Script 脚本化 Rust](../../06_ecosystem/09_cargo_script.md) | L6 生态工程层 | 进阶 | 综述级 | A | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Cargo 公共与私有依赖](../../06_ecosystem/10_public_private_deps.md) | L6 生态工程层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_webassembly.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 测试策略：从单元测试到属性验证](../../06_ecosystem/12_testing_strategies.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [日志与可观测性：Rust 服务端监控生态](../../06_ecosystem/13_logging_observability.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [文档生态：rustdoc、文档测试与 API 文档规范](../../06_ecosystem/14_documentation.md) | L6 生态工程层 | 进阶 | 综述级 | A | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [性能优化：Rust 代码的测量与调优](../../06_ecosystem/15_performance_optimization.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [测试生态：单元测试、集成测试与验证策略](../../06_ecosystem/16_testing.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/17_cross_compilation.md) | L6 生态工程层 | 进阶 | 综述级 | A | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/18_distributed_systems.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [安全 实践：Rust 代码的防御性编程](../../06_ecosystem/19_security_practices.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [许可证与合规：Rust 项目的法律工程](../../06_ecosystem/20_licensing_and_compliance.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 游戏开发生态](../../06_ecosystem/21_game_development.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 嵌入式系统开发](../../06_ecosystem/22_embedded_systems.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 数据库访问生态](../../06_ecosystem/23_database_access.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 云原生生态](../../06_ecosystem/24_cloud_native.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust CLI 开发生态](../../06_ecosystem/25_cli_development.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 游戏开发](../../06_ecosystem/26_game_development.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust Web 框架对比与选型](../../06_ecosystem/27_web_frameworks.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/28_devops_and_ci_cd.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [算法与竞赛编程 (Algorithms & Competitive Programming)](../../06_ecosystem/29_algorithms_competitive_programming.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [系统可组合性 (System Composability)](../../06_ecosystem/30_system_composability.md) | L6 生态工程层 | 进阶 | 专家级 | — | 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [微服务架构模式 (Microservice Architecture Patterns)](../../06_ecosystem/31_microservice_patterns.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [事件驱动架构 (Event-Driven Architecture)](../../06_ecosystem/32_event_driven_architecture.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [CQRS & Event Sourcing](../../06_ecosystem/33_cqrs_event_sourcing.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 惯用法谱系全景](../../06_ecosystem/34_idioms_spectrum.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Architecture Patterns](../../06_ecosystem/35_architecture_patterns.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [流处理生态：Rust 实现与工业系统全景](../../06_ecosystem/36_stream_processing_ecosystem.md) | L6 生态工程层 | 进阶 | 专家级 | P | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [数据库系统：Rust 在存储引擎中的语义](../../06_ecosystem/37_database_systems.md) | L6 生态工程层 | 进阶 | 专家级 | P | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [网络协议：QUIC/HTTP-3 与 Rust 实现](../../06_ecosystem/38_network_protocols.md) | L6 生态工程层 | 进阶 | 综述级 | P | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 操作系统内核开发](../../06_ecosystem/39_os_kernel.md) | L6 生态工程层 | 研究者 | 专家级 | — | — | — |
-| [Reactive Programming & FRP](../../06_ecosystem/40_reactive_programming.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Workflow Theory & Formalization](../../06_ecosystem/41_workflow_theory.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [API Design Patterns](../../06_ecosystem/42_api_design_patterns.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Security & Cryptography](../../06_ecosystem/43_security_cryptography.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Formal Ecosystem Tower](../../06_ecosystem/44_formal_ecosystem_tower.md) | L6 生态工程层 | 进阶 | 专家级 | — | 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 编译器内部原理](../../06_ecosystem/45_compiler_internals.md) | L6 生态工程层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
-| [Machine Learning Ecosystem](../../06_ecosystem/46_machine_learning_ecosystem.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 编译器基础设施深度解析](../../06_ecosystem/47_compiler_infrastructure.md) | L6 生态工程层 | 专家 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Data Engineering](../../06_ecosystem/48_data_engineering.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Game Engine Internals](../../06_ecosystem/49_game_engine_internals.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Distributed Consensus](../../06_ecosystem/50_distributed_consensus.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 量子计算生态](../../06_ecosystem/51_quantum_computing_rust.md) | L6 生态工程层 | 研究者 | 实验级 | — | 分析 → 评价 | — |
-| [Robotics & ROS2 in Rust](../../06_ecosystem/52_robotics.md) | L6 生态工程层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 嵌入式图形开发](../../06_ecosystem/53_embedded_graphics.md) | L6 生态工程层 | 研究者 | 综述级 | — | — | — |
-| [Rust WebAssembly 高级开发](../../06_ecosystem/54_webassembly_advanced.md) | L6 生态工程层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
-| [Rust 数据科学与科学计算](../../06_ecosystem/55_rust_for_data_science.md) | L6 生态工程层 | 研究者 | 综述级 | — | 分析 → 评价 | — |
-| [C-to-Rust Translation Ecosystem](../../06_ecosystem/56_c_to_rust_translation.md) | L6 生态工程层 | 进阶 | 综述级 | P | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [测验：Rust 工具链](../../06_ecosystem/57_quiz_toolchain.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
-| [将 Rust 集成到现有平台](../../06_ecosystem/58_platform_rust_integration.md) | L6 生态工程层 | 专家 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Cargo Build Scripts](../../06_ecosystem/59_cargo_build_scripts.md) | L6 生态工程层 | 进阶 / 工程 | 综述级 | A | 理解 → 应用 | — |
-| [Cargo 依赖解析](../../06_ecosystem/60_cargo_dependency_resolution.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
-| [Cargo Source Replacement 与 Vendoring](../../06_ecosystem/61_cargo_source_replacement.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
-| [Cargo Registry 与包发布](../../06_ecosystem/62_cargo_registries_and_publishing.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
-| [Cargo 认证与构建缓存](../../06_ecosystem/63_cargo_authentication_and_cache.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
-| [Cargo Manifest 参考速查](../../06_ecosystem/64_cargo_manifest_reference.md) | L6 生态工程层 | 中级 → 高级 | 参考级 | P | 理解 → 应用 | — |
-| [Cargo Profiles 与 Lints](../../06_ecosystem/65_cargo_profiles_and_lints.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
-| [Cargo 子命令与插件生态](../../06_ecosystem/66_cargo_subcommands_and_plugins.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
-| [Rust 编译器的 LLVM 后端与代码生成](../../06_ecosystem/67_llvm_backend_and_codegen.md) | L6 生态工程层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
-| [rustc Driver、Interface 与 Stable MIR](../../06_ecosystem/68_rustc_driver_and_stable_mir.md) | L6 生态工程层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
-| [rustc 编译器诊断与 UI Tests](../../06_ecosystem/69_compiler_diagnostics_and_ui_tests.md) | L6 生态工程层 | 专家 / 研究者 | 综述级 | F | 理解 → 应用 | — |
-| [rustc 自举](../../06_ecosystem/70_rustc_bootstrap.md) | L6 生态工程层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
-| [rustc 编译器测试体系](../../06_ecosystem/71_compiler_testing.md) | L6 生态工程层 | 专家 / 研究者 | 综述级 | P | 理解 → 应用 | — |
-| [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/72_cargo_security_cves.md) | L6 生态工程层 | 进阶 / 工程 | 综述级 | S | 理解 → 应用 | — |
-| [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/73_pattern_composition_algebra.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Formal Verification Tools](../../06_ecosystem/74_formal_verification_tools.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 工业应用案例研究](../../06_ecosystem/75_industrial_case_studies.md) | L6 生态工程层 | 研究者 | 专家级 | — | — | — |
-| [Cargo 1.96 新特性与工具链变更](../../06_ecosystem/76_cargo_196_features.md) | L6 生态工程层 | 进阶 / 工程 | 专家级 | P | 理解 → 应用 | — |
-| [Rustdoc 1.96 变更](../../06_ecosystem/77_rustdoc_196_changes.md) | L6 生态工程层 | 进阶 / 工程 | 专家级 | P | 理解 → 应用 | — |
-| [Cargo Workspaces](../../06_ecosystem/78_cargo_workspaces.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
-| [Rust 常用开发工具](../../06_ecosystem/79_development_tools.md) | L6 生态工程层 | 初学者 | 研究级 | P | 记忆 → 应用 | N/A — 工具/实践文档 |
-| [Cargo 入门](../../06_ecosystem/80_cargo_getting_started.md) | L6 生态工程层 | 初学者 | 参考级 | P | 记忆 → 应用 | — |
-| [Cargo 工作流](../../06_ecosystem/81_cargo_workflow.md) | L6 生态工程层 | 进阶 | 参考级 | P | 理解 → 应用 | — |
-| [Cargo 指南实践](../../06_ecosystem/82_cargo_guide_practices.md) | L6 生态工程层 | 进阶 | 参考级 | P | 理解 → 应用 | — |
-| [Cargo 配置与环境变量](../../06_ecosystem/83_cargo_configuration.md) | L6 生态工程层 | 进阶 | 参考级 | P | 理解 → 应用 | — |
-| [Cargo 命令参考](../../06_ecosystem/84_cargo_commands_reference.md) | L6 生态工程层 | 进阶 | 参考级 | P | 理解 → 应用 | — |
-| [Cargo Manifest 目标与元数据](../../06_ecosystem/85_cargo_manifest_targets.md) | L6 生态工程层 | 进阶 | 参考级 | P | 理解 → 应用 | — |
-| [Cargo Registry 内部机制](../../06_ecosystem/86_cargo_registry_internals.md) | L6 生态工程层 | 专家 | 参考级 | P | 理解 → 分析 | — |
-| [AI × Rust：生成-验证闭环与确定性容器](../../07_future/01_ai_integration.md) | L7 前沿趋势层 | 专家 | 实验级 | P | 分析 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Formal Methods Industrialization](../../07_future/02_formal_methods.md) | L7 前沿趋势层 | 专家 | 实验级 | P | 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Language Evolution](../../07_future/03_evolution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Effects System: Concept Pre-study](../../07_future/04_effects_system.md) | L7 前沿趋势层 | 专家 | 综述级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 形式模型演进跟踪](../../07_future/05_rust_version_tracking.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](../../07_future/07_mcdc_coverage_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/08_safety_tags_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [并行 前端编译预研：Rust 编译器 的多核扩展](../../07_future/09_parallel_frontend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [派生 CoercePointee 预研：智能指针的自动类型强制](../../07_future/10_derive_coerce_pointee_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/11_const_trait_impl_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/12_return_type_notation_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/13_unsafe_fields_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Lifetime Capture in `impl Trait` Preview](../../07_future/14_lifetime_capture_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/15_pin_ergonomics_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | 分析 → 评价 | — |
-| [TAIT Preview](../../07_future/16_type_alias_impl_trait_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Const Trait 实现预览](../../07_future/17_const_trait_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Async Drop：异步资源的优雅销毁](../../07_future/18_async_drop_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 2024 Edition (1.85.0+ stable)](../../07_future/19_rust_edition_preview.md) | L7 前沿趋势层 | 进阶 | 研究级 | — | — | — |
-| [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/20_borrowsanitizer_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 在 AI 与机器学习中的新兴角色](../../07_future/21_rust_in_ai.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Generator Blocks（gen）预览](../../07_future/22_gen_blocks_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | A | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust Edition 机制与迁移指南](../../07_future/23_rust_edition_guide.md) | L7 前沿趋势层 | 研究者 | 研究级 | — | — | — |
-| [Rust 2027 Edition 及未来路线图](../../07_future/24_roadmap.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | L5 对比分析层 | 进阶 | 专家级 | — | 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust vs Go：线性所有权 vs CSP 过程逻辑](../../05_comparative/01_systems_languages/02_rust_vs_go.md) | L5 对比分析层 | 进阶 | 综述级 | — | 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Paradigm Matrix: Multi-Language Formal Comparison](../../05_comparative/00_paradigms/03_paradigm_matrix.md) | L5 对比分析层 | 进阶 | 综述级 | S | 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 安全保证的边界条件全景](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md) | L5 对比分析层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行](../../05_comparative/00_paradigms/05_execution_model_isomorphism.md) | L5 对比分析层 | 进阶 | 专家级 | — | 分析 → 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust vs Java：系统编程与托管运行时的范式对比](../../05_comparative/02_managed_languages/06_rust_vs_java.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust vs Python：系统编程与动态脚本的对照分析](../../05_comparative/02_managed_languages/07_rust_vs_python.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust vs JavaScript：系统编程与脚本执行的范式差异](../../05_comparative/02_managed_languages/08_rust_vs_javascript.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust vs Swift：现代系统语言的两种路径](../../05_comparative/01_systems_languages/09_rust_vs_swift.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust vs Zig：现代系统语言的两种哲学](../../05_comparative/01_systems_languages/10_rust_vs_zig.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust vs Kotlin：静态安全的两种路径](../../05_comparative/02_managed_languages/11_rust_vs_kotlin.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust vs Scala：类型系统的两种哲学](../../05_comparative/02_managed_languages/12_rust_vs_scala.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust vs C#：托管与原生之路](../../05_comparative/02_managed_languages/13_rust_vs_csharp.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust vs Elixir 对比分析](../../05_comparative/02_managed_languages/14_rust_vs_elixir.md) | L5 对比分析层 | 进阶 | 综述级 | — | 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](../../05_comparative/02_managed_languages/15_rust_vs_typescript.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [C++ vs Rust：构造、运算符、RTTI、友元](../../05_comparative/00_paradigms/16_cpp_rust_surface_features.md) | L5 对比分析层 | 进阶 | 研究级 | — | 分析 → 评价 | — |
+| [测验：Rust vs 系统编程语言](../../05_comparative/03_domain_comparisons/17_quiz_rust_vs_systems.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
+| [Rust vs C++：ABI、对象模型与内存布局](../../05_comparative/01_systems_languages/18_cpp_abi_object_model.md) | L5 对比分析层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust vs Ruby：性能与表达力的两极](../../05_comparative/01_systems_languages/19_rust_vs_ruby.md) | L5 对比分析层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Design Patterns](../../06_ecosystem/03_design_patterns/02_patterns.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Core Crates](../../06_ecosystem/02_core_crates/03_core_crates.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) | L6 生态工程层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 系统设计原则与国际权威对齐](../../06_ecosystem/03_design_patterns/05_system_design_principles.md) | L6 生态工程层 | 进阶 | 专家级 | — | 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Blockchain & Smart Contract Security](../../06_ecosystem/11_domain_applications/06_blockchain.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Game Development & ECS Architecture](../../06_ecosystem/11_domain_applications/07_game_ecs.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [WASI & WebAssembly Component Model](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Cargo Script 脚本化 Rust](../../06_ecosystem/01_cargo/09_cargo_script.md) | L6 生态工程层 | 进阶 | 综述级 | A | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Cargo 公共与私有依赖](../../06_ecosystem/01_cargo/10_public_private_deps.md) | L6 生态工程层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_domain_applications/11_webassembly.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 测试策略：从单元测试到属性验证](../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [日志与可观测性：Rust 服务端监控生态](../../06_ecosystem/00_toolchain/13_logging_observability.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [文档生态：rustdoc、文档测试与 API 文档规范](../../06_ecosystem/09_testing_and_quality/14_documentation.md) | L6 生态工程层 | 进阶 | 综述级 | A | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/15_performance_optimization.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [测试生态：单元测试、集成测试与验证策略](../../06_ecosystem/09_testing_and_quality/16_testing.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md) | L6 生态工程层 | 进阶 | 综述级 | A | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [安全 实践：Rust 代码的防御性编程](../../06_ecosystem/07_security_and_cryptography/19_security_practices.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [许可证与合规：Rust 项目的法律工程](../../06_ecosystem/11_domain_applications/20_licensing_and_compliance.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 游戏开发生态](../../06_ecosystem/11_domain_applications/21_game_development.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 嵌入式系统开发](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 数据库访问生态](../../06_ecosystem/06_data_and_distributed/23_database_access.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 云原生生态](../../06_ecosystem/04_web_and_networking/24_cloud_native.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust CLI 开发生态](../../06_ecosystem/05_systems_and_embedded/25_cli_development.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 游戏开发](../../06_ecosystem/11_domain_applications/26_game_development.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust Web 框架对比与选型](../../06_ecosystem/04_web_and_networking/27_web_frameworks.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [算法与竞赛编程 (Algorithms & Competitive Programming)](../../06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [系统可组合性 (System Composability)](../../06_ecosystem/03_design_patterns/30_system_composability.md) | L6 生态工程层 | 进阶 | 专家级 | — | 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [微服务架构模式 (Microservice Architecture Patterns)](../../06_ecosystem/03_design_patterns/31_microservice_patterns.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [事件驱动架构 (Event-Driven Architecture)](../../06_ecosystem/03_design_patterns/32_event_driven_architecture.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [CQRS & Event Sourcing](../../06_ecosystem/03_design_patterns/33_cqrs_event_sourcing.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 惯用法谱系全景](../../06_ecosystem/03_design_patterns/34_idioms_spectrum.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Architecture Patterns](../../06_ecosystem/03_design_patterns/35_architecture_patterns.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [流处理生态：Rust 实现与工业系统全景](../../06_ecosystem/06_data_and_distributed/36_stream_processing_ecosystem.md) | L6 生态工程层 | 进阶 | 专家级 | P | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [数据库系统：Rust 在存储引擎中的语义](../../06_ecosystem/06_data_and_distributed/37_database_systems.md) | L6 生态工程层 | 进阶 | 专家级 | P | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [网络协议：QUIC/HTTP-3 与 Rust 实现](../../06_ecosystem/04_web_and_networking/38_network_protocols.md) | L6 生态工程层 | 进阶 | 综述级 | P | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 操作系统内核开发](../../06_ecosystem/05_systems_and_embedded/39_os_kernel.md) | L6 生态工程层 | 研究者 | 专家级 | — | — | — |
+| [Reactive Programming & FRP](../../06_ecosystem/04_web_and_networking/40_reactive_programming.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Workflow Theory & Formalization](../../06_ecosystem/03_design_patterns/41_workflow_theory.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [API Design Patterns](../../06_ecosystem/03_design_patterns/42_api_design_patterns.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Security & Cryptography](../../06_ecosystem/07_security_and_cryptography/43_security_cryptography.md) | L6 生态工程层 | 进阶 | 专家级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Formal Ecosystem Tower](../../06_ecosystem/08_formal_verification/44_formal_ecosystem_tower.md) | L6 生态工程层 | 进阶 | 专家级 | — | 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 编译器内部原理](../../06_ecosystem/00_toolchain/45_compiler_internals.md) | L6 生态工程层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
+| [Machine Learning Ecosystem](../../06_ecosystem/11_domain_applications/46_machine_learning_ecosystem.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 编译器基础设施深度解析](../../06_ecosystem/00_toolchain/47_compiler_infrastructure.md) | L6 生态工程层 | 专家 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Data Engineering](../../06_ecosystem/06_data_and_distributed/48_data_engineering.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Game Engine Internals](../../06_ecosystem/11_domain_applications/49_game_engine_internals.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Distributed Consensus](../../06_ecosystem/06_data_and_distributed/50_distributed_consensus.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 量子计算生态](../../06_ecosystem/11_domain_applications/51_quantum_computing_rust.md) | L6 生态工程层 | 研究者 | 实验级 | — | 分析 → 评价 | — |
+| [Robotics & ROS2 in Rust](../../06_ecosystem/05_systems_and_embedded/52_robotics.md) | L6 生态工程层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 嵌入式图形开发](../../06_ecosystem/05_systems_and_embedded/53_embedded_graphics.md) | L6 生态工程层 | 研究者 | 综述级 | — | — | — |
+| [Rust WebAssembly 高级开发](../../06_ecosystem/11_domain_applications/54_webassembly_advanced.md) | L6 生态工程层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
+| [Rust 数据科学与科学计算](../../06_ecosystem/06_data_and_distributed/55_rust_for_data_science.md) | L6 生态工程层 | 研究者 | 综述级 | — | 分析 → 评价 | — |
+| [C-to-Rust Translation Ecosystem](../../06_ecosystem/05_systems_and_embedded/56_c_to_rust_translation.md) | L6 生态工程层 | 进阶 | 综述级 | P | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [测验：Rust 工具链](../../06_ecosystem/00_toolchain/57_quiz_toolchain.md) | L6 生态工程层 | 进阶 | 综述级 | — | 应用 → 分析 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
+| [将 Rust 集成到现有平台](../../06_ecosystem/00_toolchain/58_platform_rust_integration.md) | L6 生态工程层 | 专家 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Cargo Build Scripts](../../06_ecosystem/01_cargo/59_cargo_build_scripts.md) | L6 生态工程层 | 进阶 / 工程 | 综述级 | A | 理解 → 应用 | — |
+| [Cargo 依赖解析](../../06_ecosystem/01_cargo/60_cargo_dependency_resolution.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
+| [Cargo Source Replacement 与 Vendoring](../../06_ecosystem/01_cargo/61_cargo_source_replacement.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
+| [Cargo Registry 与包发布](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
+| [Cargo 认证与构建缓存](../../06_ecosystem/01_cargo/63_cargo_authentication_and_cache.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
+| [Cargo Manifest 参考速查](../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md) | L6 生态工程层 | 中级 → 高级 | 参考级 | P | 理解 → 应用 | — |
+| [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
+| [Cargo 子命令与插件生态](../../06_ecosystem/01_cargo/66_cargo_subcommands_and_plugins.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
+| [Rust 编译器的 LLVM 后端与代码生成](../../06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md) | L6 生态工程层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
+| [rustc Driver、Interface 与 Stable MIR](../../06_ecosystem/00_toolchain/68_rustc_driver_and_stable_mir.md) | L6 生态工程层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
+| [rustc 编译器诊断与 UI Tests](../../06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md) | L6 生态工程层 | 专家 / 研究者 | 综述级 | F | 理解 → 应用 | — |
+| [rustc 自举](../../06_ecosystem/00_toolchain/70_rustc_bootstrap.md) | L6 生态工程层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
+| [rustc 编译器测试体系](../../06_ecosystem/00_toolchain/71_compiler_testing.md) | L6 生态工程层 | 专家 / 研究者 | 综述级 | P | 理解 → 应用 | — |
+| [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/01_cargo/72_cargo_security_cves.md) | L6 生态工程层 | 进阶 / 工程 | 综述级 | S | 理解 → 应用 | — |
+| [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Formal Verification Tools](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md) | L6 生态工程层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 工业应用案例研究](../../06_ecosystem/11_domain_applications/75_industrial_case_studies.md) | L6 生态工程层 | 研究者 | 专家级 | — | — | — |
+| [Cargo 1.96 新特性与工具链变更](../../06_ecosystem/01_cargo/76_cargo_196_features.md) | L6 生态工程层 | 进阶 / 工程 | 专家级 | P | 理解 → 应用 | — |
+| [Rustdoc 1.96 变更](../../06_ecosystem/00_toolchain/77_rustdoc_196_changes.md) | L6 生态工程层 | 进阶 / 工程 | 专家级 | P | 理解 → 应用 | — |
+| [Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md) | L6 生态工程层 | 中级 → 高级 | 综述级 | P | 理解 → 应用 | — |
+| [Rust 常用开发工具](../../06_ecosystem/00_toolchain/79_development_tools.md) | L6 生态工程层 | 初学者 | 研究级 | P | 记忆 → 应用 | N/A — 工具/实践文档 |
+| [Cargo 入门](../../06_ecosystem/01_cargo/80_cargo_getting_started.md) | L6 生态工程层 | 初学者 | 参考级 | P | 记忆 → 应用 | — |
+| [Cargo 工作流](../../06_ecosystem/01_cargo/81_cargo_workflow.md) | L6 生态工程层 | 进阶 | 参考级 | P | 理解 → 应用 | — |
+| [Cargo 指南实践](../../06_ecosystem/01_cargo/82_cargo_guide_practices.md) | L6 生态工程层 | 进阶 | 参考级 | P | 理解 → 应用 | — |
+| [Cargo 配置与环境变量](../../06_ecosystem/01_cargo/83_cargo_configuration.md) | L6 生态工程层 | 进阶 | 参考级 | P | 理解 → 应用 | — |
+| [Cargo 命令参考](../../06_ecosystem/01_cargo/84_cargo_commands_reference.md) | L6 生态工程层 | 进阶 | 参考级 | P | 理解 → 应用 | — |
+| [Cargo Manifest 目标与元数据](../../06_ecosystem/01_cargo/85_cargo_manifest_targets.md) | L6 生态工程层 | 进阶 | 参考级 | P | 理解 → 应用 | — |
+| [Cargo Registry 内部机制](../../06_ecosystem/01_cargo/86_cargo_registry_internals.md) | L6 生态工程层 | 专家 | 参考级 | P | 理解 → 分析 | — |
+| [AI × Rust：生成-验证闭环与确定性容器](../../07_future/04_research_and_experimental/01_ai_integration.md) | L7 前沿趋势层 | 专家 | 实验级 | P | 分析 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | L7 前沿趋势层 | 专家 | 实验级 | P | 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Effects System: Concept Pre-study](../../07_future/03_preview_features/04_effects_system.md) | L7 前沿趋势层 | 专家 | 综述级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](../../07_future/03_preview_features/07_mcdc_coverage_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/08_safety_tags_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [并行 前端编译预研：Rust 编译器 的多核扩展](../../07_future/03_preview_features/09_parallel_frontend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [派生 CoercePointee 预研：智能指针的自动类型强制](../../07_future/03_preview_features/10_derive_coerce_pointee_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/03_preview_features/11_const_trait_impl_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/03_preview_features/12_return_type_notation_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/03_preview_features/13_unsafe_fields_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Lifetime Capture in `impl Trait` Preview](../../07_future/03_preview_features/14_lifetime_capture_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/03_preview_features/15_pin_ergonomics_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | 分析 → 评价 | — |
+| [TAIT Preview](../../07_future/03_preview_features/16_type_alias_impl_trait_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Const Trait 实现预览](../../07_future/03_preview_features/17_const_trait_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/18_async_drop_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 2024 Edition (1.85.0+ stable)](../../07_future/01_edition_roadmap/19_rust_edition_preview.md) | L7 前沿趋势层 | 进阶 | 研究级 | — | — | — |
+| [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/03_preview_features/20_borrowsanitizer_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 在 AI 与机器学习中的新兴角色](../../07_future/04_research_and_experimental/21_rust_in_ai.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Generator Blocks（gen）预览](../../07_future/03_preview_features/22_gen_blocks_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | A | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust Edition 机制与迁移指南](../../07_future/01_edition_roadmap/23_rust_edition_guide.md) | L7 前沿趋势层 | 研究者 | 研究级 | — | — | — |
+| [Rust 2027 Edition 及未来路线图](../../07_future/05_roadmaps/24_roadmap.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/25_open_enums_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Specialization：Trait 实现的精确化与重叠解析](../../07_future/26_specialization_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [编译期执行与常量求值](../../07_future/27_compile_time_execution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](../../07_future/28_rust_for_webassembly.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [eBPF / Aya / Rex 的 Rust 映射](../../07_future/29_ebpf_rust.md) | L7 前沿趋势层 | 专家 | 综述级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Stable ABI Preview](../../07_future/30_stable_abi_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 理解 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Safety Tags（安全标签）预览](../../07_future/31_safety_tags_preview.md) | L7 前沿趋势层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 语言设计提案跟踪 |
-| [Inline Const Pattern 预览](../../07_future/32_inline_const_pattern_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | A | 理解 → 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [AutoVerus / Verus 预览](../../07_future/33_autoverus_preview.md) | L7 前沿趋势层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 形式化验证工具/AI 辅助证明研究跟踪 |
-| [`must_not_suspend` Lint Preview](../../07_future/34_must_not_suspend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | P | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Ferrocene 预研：Rust 的安全关键认证之路](../../07_future/35_ferrocene_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [特质中返回位置 impl Trait（RPITIT）预览](../../07_future/37_rpitit_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/38_cranelift_backend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Arbitrary Self Types 预览：自定义方法接收器](../../07_future/39_arbitrary_self_types_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4 (分析) | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Ergonomic Ref-Counting 预研：人机工学引用计数](../../07_future/40_ergonomic_ref_counting_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 语言规范预研：从参考文档到形式化规范](../../07_future/41_rust_specification_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Field Projections 预览：安全的字段级投影](../../07_future/42_field_projections_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4 (分析) | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust for Linux ：操作系统内核中的内存安全](../../07_future/43_rust_for_linux.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Edition 2024 完全指南：新特性与迁移策略](../../07_future/44_edition_guide.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [`std::autodiff`：Rust 官方自动微分前沿追踪](../../07_future/45_std_autodiff_preview.md) | L7 前沿趋势层 | 研究者 | 实验级 | — | 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [cargo-semver-checks：从社区工具到 Cargo 官方集成](../../07_future/46_cargo_semver_checks_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | P | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [WASM Target Evolution Preview](../../07_future/47_wasm_target_evolution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 理解 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/48_aarch64_sve_sme_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust in Space Preview](../../07_future/49_rust_in_space.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 的发布流程与 Nightly Rust](../../07_future/50_nightly_rust.md) | L7 前沿趋势层 | 初学者 | 研究级 | P | 理解 | N/A — 流程/生态文档 |
-| [BorrowSanitizer：动态别名规则验证工具](../../07_future/borrow_sanitizer.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/工具链文档 |
-| [Rust 1.95.0 稳定特性](../../07_future/rust_1_95_stabilized.md) | L7 前沿趋势层 | 进阶 | 参考级 | — | — | — |
-| [Rust 1.96 稳定特性](../../07_future/rust_1_96_stabilized.md) | L7 前沿趋势层 | 进阶 | 参考级 | — | — | — |
-| [Rust 1.97 前沿特性预览（Beta）](../../07_future/rust_1_97_preview.md) | L7 前沿趋势层 | 进阶 | 参考级 | — | — | — |
-| [Rust 1.97.0 稳定特性占位](../../07_future/rust_1_97_stabilized.md) | L7 前沿趋势层 | 专家 | 占位级 | — | — | N/A — 待 1.97.0 stable 发布后填充；当前权威内容为 `rust_1_97_preview.md` |
-| [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Specialization：Trait 实现的精确化与重叠解析](../../07_future/03_preview_features/26_specialization_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [编译期执行与常量求值](../../07_future/03_preview_features/27_compile_time_execution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](../../07_future/04_research_and_experimental/28_rust_for_webassembly.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [eBPF / Aya / Rex 的 Rust 映射](../../07_future/04_research_and_experimental/29_ebpf_rust.md) | L7 前沿趋势层 | 专家 | 综述级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Stable ABI Preview](../../07_future/03_preview_features/30_stable_abi_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 理解 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Safety Tags（安全标签）预览](../../07_future/03_preview_features/31_safety_tags_preview.md) | L7 前沿趋势层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 语言设计提案跟踪 |
+| [Inline Const Pattern 预览](../../07_future/03_preview_features/32_inline_const_pattern_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | A | 理解 → 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [AutoVerus / Verus 预览](../../07_future/03_preview_features/33_autoverus_preview.md) | L7 前沿趋势层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 形式化验证工具/AI 辅助证明研究跟踪 |
+| [`must_not_suspend` Lint Preview](../../07_future/03_preview_features/34_must_not_suspend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | P | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Ferrocene 预研：Rust 的安全关键认证之路](../../07_future/03_preview_features/35_ferrocene_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [特质中返回位置 impl Trait（RPITIT）预览](../../07_future/03_preview_features/37_rpitit_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/03_preview_features/38_cranelift_backend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 应用 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Arbitrary Self Types 预览：自定义方法接收器](../../07_future/03_preview_features/39_arbitrary_self_types_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4 (分析) | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Ergonomic Ref-Counting 预研：人机工学引用计数](../../07_future/03_preview_features/40_ergonomic_ref_counting_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 语言规范预研：从参考文档到形式化规范](../../07_future/03_preview_features/41_rust_specification_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Field Projections 预览：安全的字段级投影](../../07_future/03_preview_features/42_field_projections_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4 (分析) | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/43_rust_for_linux.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Edition 2024 完全指南：新特性与迁移策略](../../07_future/01_edition_roadmap/44_edition_guide.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [`std::autodiff`：Rust 官方自动微分前沿追踪](../../07_future/03_preview_features/45_std_autodiff_preview.md) | L7 前沿趋势层 | 研究者 | 实验级 | — | 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [cargo-semver-checks：从社区工具到 Cargo 官方集成](../../07_future/03_preview_features/46_cargo_semver_checks_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | P | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [WASM Target Evolution Preview](../../07_future/03_preview_features/47_wasm_target_evolution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 理解 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/03_preview_features/48_aarch64_sve_sme_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust in Space Preview](../../07_future/03_preview_features/49_rust_in_space.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 的发布流程与 Nightly Rust](../../07_future/00_version_tracking/50_nightly_rust.md) | L7 前沿趋势层 | 初学者 | 研究级 | P | 理解 | N/A — 流程/生态文档 |
+| [BorrowSanitizer：动态别名规则验证工具](../../07_future/02_stabilized_features/borrow_sanitizer.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 分析 → 评价 | N/A — 描述性/综述性/工具链文档 |
+| [Rust 1.95.0 稳定特性](../../07_future/00_version_tracking/rust_1_95_stabilized.md) | L7 前沿趋势层 | 进阶 | 参考级 | — | — | — |
+| [Rust 1.96 稳定特性](../../07_future/00_version_tracking/rust_1_96_stabilized.md) | L7 前沿趋势层 | 进阶 | 参考级 | — | — | — |
+| [Rust 1.97 前沿特性预览（Beta）](../../07_future/00_version_tracking/rust_1_97_preview.md) | L7 前沿趋势层 | 进阶 | 参考级 | — | — | — |
+| [Rust 1.97.0 稳定特性占位](../../07_future/00_version_tracking/rust_1_97_stabilized.md) | L7 前沿趋势层 | 专家 | 占位级 | — | — | N/A — 待 1.97.0 stable 发布后填充；当前权威内容为 `rust_1_97_preview.md` |
+| [Rust 1.98+ 前沿特性预览](../../07_future/00_version_tracking/rust_1_98_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 
 ## 二、属性分布统计
 

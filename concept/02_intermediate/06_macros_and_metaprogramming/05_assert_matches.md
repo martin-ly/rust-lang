@@ -11,7 +11,7 @@
 > **双维定位**: F×App — 断言和模式匹配（Pattern Matching）语法应用
 > **定位**: 将 Rust 的**模式匹配（Pattern Matching）**能力从"表达式求值"扩展到"测试断言"的工程机制，实现编译期模式检查与运行时（Runtime）断言的统一。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Error Handling](../03_error_handling/04_error_handling.md)
-> **后置概念**: [Macros](../../03_advanced/03_proc_macros/04_macros.md) · [Version Tracking](../../07_future/05_rust_version_tracking.md)
+> **后置概念**: [Macros](../../03_advanced/03_proc_macros/04_macros.md) · [Version Tracking](../../07_future/00_version_tracking/05_rust_version_tracking.md)
 
 ---
 
@@ -441,7 +441,7 @@ fn main() {
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 模式匹配的形式化根基
 - [Error Handling](../03_error_handling/04_error_handling.md) — Result/Option 测试断言实践
 - [Macros](../../03_advanced/03_proc_macros/04_macros.md) — 宏（Macro）系统的语法糖机制
-- [Version Tracking](../../07_future/05_rust_version_tracking.md) — Rust 1.96 特性演进
+- [Version Tracking](../../07_future/00_version_tracking/05_rust_version_tracking.md) — Rust 1.96 特性演进
 
 ---
 

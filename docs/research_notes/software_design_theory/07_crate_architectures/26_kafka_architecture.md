@@ -2,7 +2,7 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [流处理生态](../../../../concept/06_ecosystem/36_stream_processing_ecosystem.md)
+> - [流处理生态](../../../../concept/06_ecosystem/06_data_and_distributed/36_stream_processing_ecosystem.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **⚠️ 历史文档提示**：

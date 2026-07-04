@@ -12,7 +12,7 @@
 
 ---
 
-> **[主轨引用]**: 教学视角参见 [concept/05_comparative/02_rust_vs_go.md](../../../concept/05_comparative/02_rust_vs_go.md)。本文档侧重工程视角（性能基准、代码示例对比）。
+> **[主轨引用]**: 教学视角参见 [concept/05_comparative/02_rust_vs_go.md](../../../concept/05_comparative/01_systems_languages/02_rust_vs_go.md)。本文档侧重工程视角（性能基准、代码示例对比）。
 
 ---
 

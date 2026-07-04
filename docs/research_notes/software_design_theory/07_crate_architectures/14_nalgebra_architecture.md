@@ -2,9 +2,9 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [算法与竞赛编程](../../../../concept/06_ecosystem/29_algorithms_competitive_programming.md)
-> - [Rust 数据科学](../../../../concept/06_ecosystem/55_rust_for_data_science.md)
-> - [性能优化](../../../../concept/06_ecosystem/15_performance_optimization.md)
+> - [算法与竞赛编程](../../../../concept/06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md)
+> - [Rust 数据科学](../../../../concept/06_ecosystem/06_data_and_distributed/55_rust_for_data_science.md)
+> - [性能优化](../../../../concept/06_ecosystem/10_performance/15_performance_optimization.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 

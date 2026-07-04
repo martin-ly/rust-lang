@@ -645,9 +645,9 @@ graph TD
 - [L3 异步](../../03_advanced/01_async/02_async.md) —— Future 状态机与执行模型
 - [L4 所有权形式化](../../04_formal/01_ownership_logic/03_ownership_formal.md) —— COR / Polonius Datalog
 - [L4 RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) —— Iris 逻辑与 Soundness 证明
-- [L5 Rust vs Go](../../05_comparative/02_rust_vs_go.md) —— 并发模型同构性
+- [L5 Rust vs Go](../../05_comparative/01_systems_languages/02_rust_vs_go.md) —— 并发模型同构性
 - [L0 语义表达力](semantic_expressiveness.md) —— 可判定性-表达力权衡的横向光谱
-- [L7 版本跟踪](../../07_future/05_rust_version_tracking.md) —— 1.95/1.96 新特性的判定性映射
+- [L7 版本跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) —— 1.95/1.96 新特性的判定性映射
 
 ## 十、可判定性论文精确引用与前沿映射
 

@@ -7,6 +7,6 @@
 
 **本文内容已迁移**。项目权威来源为:
 
-- [`concept/06_ecosystem/77_rustdoc_196_changes.md`](../../concept/06_ecosystem/77_rustdoc_196_changes.md) — Rustdoc 1.96 变更的系统性覆盖（single source of truth）
+- [`concept/06_ecosystem/77_rustdoc_196_changes.md`](../../concept/06_ecosystem/00_toolchain/77_rustdoc_196_changes.md) — Rustdoc 1.96 变更的系统性覆盖（single source of truth）
 
 如需渲染细节与弃用注释示例，请在上方 `concept/` 文档中查看完整内容。

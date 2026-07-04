@@ -12,7 +12,7 @@
 > **归档原因**: 与 `05_formal_ecosystem_tower.md` 内容高度重叠（>90%），且 `05` 版本为 SUMMARY.md 引用（Reference）主文件。
 > **状态**: 已归档（2026-05-30 重复文件清理）
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
-> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../07_future/05_roadmaps/24_roadmap.md)
 > **前置概念**: [Formal Verification](../04_formal/01_ownership_logic/03_ownership_formal.md)
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 

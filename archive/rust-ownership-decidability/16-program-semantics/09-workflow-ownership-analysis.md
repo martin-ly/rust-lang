@@ -767,7 +767,7 @@ async fn good_deferred_choice(rx: &mut tokio::sync::mpsc::Receiver<i32>) -> i32 
 - [并发编程模型](../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 - [异步编程模型](../../../concept/03_advanced/01_async/02_async.md)
 - [形式化操作语义](../../../concept/04_formal/03_operational_semantics/17_operational_semantics.md)
-- [系统可组合性设计模式](../../../concept/06_ecosystem/30_system_composability.md)
+- [系统可组合性设计模式](../../../concept/06_ecosystem/03_design_patterns/30_system_composability.md)
 
 ---
 

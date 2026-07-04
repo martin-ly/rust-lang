@@ -14,7 +14,8 @@
 >
 > [Lambda Calculus](../00_type_theory/14_lambda_calculus.md) ·
 > [Variable Model](../../01_foundation/03_values_and_references/20_variable_model.md) ·
-> [Type System](../../01_foundation/02_type_system/04_type_system.md)
+> [Type System](../../01_foundation/02_type_system/04_type_system.md) ·
+> [Async/Await](../../03_advanced/01_async/02_async.md)
 >
 > **后置概念**:
 >

@@ -21,7 +21,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析 Pin 与状态机的交互
 > **前置依赖**: [L2 泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md) · L1 生命周期（Lifetimes）
-> **后置延伸**: [L4 异步（Async）语义形式化](../../04_formal/01_ownership_logic/03_ownership_formal.md) · [L6 Tokio](../../06_ecosystem/03_core_crates.md) · [L7 效果系统](../../07_future/04_effects_system.md)
+> **后置延伸**: [L4 异步（Async）语义形式化](../../04_formal/01_ownership_logic/03_ownership_formal.md) · [L6 Tokio](../../06_ecosystem/02_core_crates/03_core_crates.md) · [L7 效果系统](../../07_future/03_preview_features/04_effects_system.md)
 > **跨层映射**: L3→L4 Future [来源: [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)] ↔  continuation monad | L3→L7 async effects → algebraic effects
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性（Coherence） → T-052 async/await 转换正确性
 > **层级**: L3 高级概念
@@ -2611,8 +2611,8 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | Traits | [](../../02_intermediate/00_traits/01_traits.md) | Future trait 定义 |
 | 并发 | [](../00_concurrency/01_concurrency.md) | 并行与并发对比 |
 | Unsafe | [](../02_unsafe/03_unsafe.md) | Pin 内部实现 |
-| 形式化方法 | [](../../07_future/02_formal_methods.md) | 异步协议验证 |
-| Rust 版本特性演进 | [](../../07_future/05_rust_version_tracking.md) | `AsyncFn`、`gen` blocks 等异步语义扩展 |
+| 形式化方法 | [](../../07_future/04_research_and_experimental/02_formal_methods.md) | 异步协议验证 |
+| Rust 版本特性演进 | [](../../07_future/00_version_tracking/05_rust_version_tracking.md) | `AsyncFn`、`gen` blocks 等异步语义扩展 |
 | 泛型（Generics）与类型系统（Type System） | [](../../02_intermediate/01_generics/02_generics.md) | `use<..>` precise capturing、GATs |
 | Unsafe 权限分离 | [](../02_unsafe/03_unsafe.md) | `unsafe_op_in_unsafe_fn` 的权限模型 |
 
@@ -2621,7 +2621,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 > 底层机制见 [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md)（Trait 定义）与 [`../02_intermediate/01_generics/02_generics.md`](../../02_intermediate/01_generics/02_generics.md)（泛型（Generics）单态化）。
 > **过渡: L3 → L5**
 > 异步编程不是 Rust 的发明——JavaScript 的 Promise、C# 的 async/await、Go 的 goroutine 都解决了类似问题。但 Rust 的 `Future` 是零成本的：编译后的状态机没有运行时调度器开销，这与 Go 的 goroutine（M:N 调度）形成鲜明对比。
-> 对比分析见 [`../05_comparative/02_rust_vs_go.md`](../../05_comparative/02_rust_vs_go.md)（并发模型对比）。
+> 对比分析见 [`../05_comparative/02_rust_vs_go.md`](../../05_comparative/01_systems_languages/02_rust_vs_go.md)（并发模型对比）。
 ---
 
 ---
@@ -2842,7 +2842,7 @@ impl Future for BadFuture {
 > **修正**: `Pin<&mut Self>` 的核心保证是 `Self` 在内存中不可移动。任何试图从 `Pin<&mut Self>` 中获取所有权（Ownership）或移动内部值的操作都违反 Pin 契约，导致编译错误。
 > **相关判定树**: [异步判定树](../../00_meta/00_framework/concept_definition_decision_forest.md#八异步判定树)
 > **相关 FTA**: [异步安全失效树](../../00_meta/00_framework/fault_tree_analysis_collection.md#五异步安全失效树)
-> **相关概念**: [流处理语义](../06_low_level_patterns/20_stream_processing_semantics.md) · [流处理生态](../../06_ecosystem/36_stream_processing_ecosystem.md)
+> **相关概念**: [流处理语义](../06_low_level_patterns/20_stream_processing_semantics.md) · [流处理生态](../../06_ecosystem/06_data_and_distributed/36_stream_processing_ecosystem.md)
 
 ### 10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）
 

@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 实施泛型（Generics）参数化设计
 > **前置依赖**: L1 类型系统（Type System） · [L2 Trait](../00_traits/01_traits.md)
-> **后置延伸**: [L3 Async](../../03_advanced/01_async/02_async.md) · [L4 类型论](../../04_formal/00_type_theory/02_type_theory.md) · [L7 效果系统](../../07_future/04_effects_system.md)
+> **后置延伸**: [L3 Async](../../03_advanced/01_async/02_async.md) · [L4 类型论](../../04_formal/00_type_theory/02_type_theory.md) · [L7 效果系统](../../07_future/03_preview_features/04_effects_system.md)
 > **跨层映射**: L2→L4 参数多态 ↔ System F | L2→L7 泛型（Generics）效果 → Effect System
 > **定理链编号**: T-030 参数多态保持 → T-031 单态化（Monomorphization） [来源: [Rust Reference — Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)]正确性 → T-032 约束满足可判定
 > **层级**: L2 进阶概念
@@ -2223,7 +2223,7 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 | 异步（Async）与 Future | [03_advanced/01_async/02_async.md](../../03_advanced/01_async/02_async.md) | 关联类型泛型（GATs）的典型应用 |
 | 并发与 Send/Sync | [03_advanced/00_concurrency/01_concurrency.md](../../03_advanced/00_concurrency/01_concurrency.md) | 泛型约束的线程安全应用 |
 | 形式化验证 | [04_formal/04_rustbelt.md](../../04_formal/02_separation_logic/04_rustbelt.md) | 泛型系统的逻辑基础 |
-| Rust 版本特性演进 | [07_future/05_rust_version_tracking.md](../../07_future/05_rust_version_tracking.md) | `use<..>` precise capturing 等类型系统扩展 |
+| Rust 版本特性演进 | [07_future/05_rust_version_tracking.md](../../07_future/00_version_tracking/05_rust_version_tracking.md) | `use<..>` precise capturing 等类型系统扩展 |
 | 异步与泛型 | [03_advanced/01_async/02_async.md](../../03_advanced/01_async/02_async.md) | `AsyncFn` trait 家族、GATs 在 async 中的应用 |
 
 ---

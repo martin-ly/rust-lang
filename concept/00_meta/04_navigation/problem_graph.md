@@ -450,7 +450,7 @@ graph TD
 
 ---
 
-> **相关文件**: [能力图谱](../00_framework/competency_graph.md) · [概念判定森林](../00_framework/concept_definition_decision_forest.md) · [表征空间](../00_framework/semantic_space.md) · [系统设计原则](../../06_ecosystem/05_system_design_principles.md)
+> **相关文件**: [能力图谱](../00_framework/competency_graph.md) · [概念判定森林](../00_framework/concept_definition_decision_forest.md) · [表征空间](../00_framework/semantic_space.md) · [系统设计原则](../../06_ecosystem/03_design_patterns/05_system_design_principles.md)
 
 ## 认知路径
 

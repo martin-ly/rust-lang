@@ -5,11 +5,11 @@
 > **分级**: [A]
 > **层次定位**: L6-L7 生态-前沿 / 编译器优化
 > **前置依赖**: [docs 编译器特性](01_compiler_features.md) · [concept L2 泛型](../../concept/02_intermediate/01_generics/02_generics.md)
-> **后置延伸**: [concept L7 语言演进](../../concept/07_future/03_evolution.md) · [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)
+> **后置延伸**: [concept L7 语言演进](../../concept/07_future/04_research_and_experimental/03_evolution.md) · [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)
 > **跨层映射**: L6→L7 性能驱动映射 | 工程→研究
 > **定理链编号**: T-030 单态化正确性 → 并行语义保持
 > **层级**: L6 生态工具
-> **前置概念**: [Cargo](../../concept/06_ecosystem/01_toolchain.md) · [Build Systems](../../07_future)
+> **前置概念**: [Cargo](../../concept/06_ecosystem/00_toolchain/01_toolchain.md) · [Build Systems](../../07_future)
 > **Bloom 层级**: 应用
 > **[来源: Rust Compiler Team]** · **[来源: rustc_parallel_frontend 跟踪 Issue]** ·
 > **[来源: Rust Compiler Development Guide]** · **[来源: Nicholas Nethercote - How to Speed Up the Rust Compiler]** ✅ ·

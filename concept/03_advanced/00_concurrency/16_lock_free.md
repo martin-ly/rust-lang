@@ -13,7 +13,7 @@
 > [Unsafe](../02_unsafe/03_unsafe.md)
 > **后置概念**:
 > [Concurrent Patterns](10_concurrency_patterns.md) ·
-> [Performance](../../06_ecosystem/15_performance_optimization.md)
+> [Performance](../../06_ecosystem/10_performance/15_performance_optimization.md)
 
 ---
 

@@ -79,11 +79,11 @@
 
 | 特性 | 文档 | 状态 |
 |------|------|------|
-| AFIDT (`async fn` in `dyn Trait`) | [concept/07_future/rust_1_97_preview.md](../concept/07_future/rust_1_97_preview.md) | 🧪 Nightly |
-| `VecDeque::truncate_front` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/rust_1_97_preview.md) | 🧪 Nightly |
-| `RefCell::try_map` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/rust_1_97_preview.md) | 🧪 Nightly |
-| `int_format_into` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/rust_1_97_preview.md) | 🧪 Nightly |
-| `cargo script` / frontmatter | [concept/07_future/rust_1_97_preview.md](../concept/07_future/rust_1_97_preview.md) | 🧪 完善中 |
+| AFIDT (`async fn` in `dyn Trait`) | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 Nightly |
+| `VecDeque::truncate_front` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 Nightly |
+| `RefCell::try_map` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 Nightly |
+| `int_format_into` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 Nightly |
+| `cargo script` / frontmatter | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 完善中 |
 
 ---
 

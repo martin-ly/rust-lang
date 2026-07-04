@@ -380,7 +380,7 @@ cargo +nightly build
 
 - [上级目录](../README.md)
 - [Cranelift 后端预研 (concept)](../../concept/07_future/16_cranelift_backend_preview.md) — 概念层 Cranelift 演进路线与使用场景分析
-- [Rust 版本跟踪 (concept)](../../concept/07_future/05_rust_version_tracking.md) — 编译器后端全局状态跟踪
+- [Rust 版本跟踪 (concept)](../../concept/07_future/00_version_tracking/05_rust_version_tracking.md) — 编译器后端全局状态跟踪
 
 ---
 

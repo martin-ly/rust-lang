@@ -16,7 +16,7 @@
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
-> **后置概念**: [Comparative Studies](../../05_comparative/01_rust_vs_cpp.md)
+> **后置概念**: [Comparative Studies](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **前置依赖**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)
 > **前置依赖**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)
 
@@ -410,7 +410,7 @@ RUSTFLAGS="-Zsanitizer=borrow" cargo run --target x86_64-unknown-linux-gnu
 **关键限制**: 仅检测运行时可达路径；静态分析覆盖不如 Miri 全面。
 
 > **与 Miri 的对比**: Miri 解释执行 MIR（100-1000x  slowdown），BSan 编译期插桩（2-5x slowdown）。BSan 适合 CI 集成，Miri 适合深度调试。
-> **深度文档**: [BorrowSanitizer 深度解析](../../07_future/borrow_sanitizer.md)
+> **深度文档**: [BorrowSanitizer 深度解析](../../07_future/02_stabilized_features/borrow_sanitizer.md)
 
 ---
 

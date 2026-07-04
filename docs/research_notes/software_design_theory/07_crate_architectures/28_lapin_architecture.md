@@ -2,8 +2,8 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [流处理生态](../../../../concept/06_ecosystem/36_stream_processing_ecosystem.md)
-> - [网络协议](../../../../concept/06_ecosystem/38_network_protocols.md)
+> - [流处理生态](../../../../concept/06_ecosystem/06_data_and_distributed/36_stream_processing_ecosystem.md)
+> - [网络协议](../../../../concept/06_ecosystem/04_web_and_networking/38_network_protocols.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.96.1+ (Edition 2024)

@@ -122,9 +122,9 @@
 | **ADT (Algebraic Data Type)** | [L1: 类型系统](../../01_foundation/02_type_system/04_type_system.md) | L2 Trait、L4 类型论 | 理解 | ← 类型系统基础 → 模式匹配 |
 | **Aerospace Certification & Formal Methods** | [L4: 航空航天认证](../../04_formal/04_model_checking/16_aerospace_certification_formal_methods.md) | L4 RustBelt、L4 形式化方法 | 分析 | ← RustBelt + 形式化方法 → 安全关键认证 |
 | **AFIT (Async Fn In Trait)** | [L3: 异步](../../03_advanced/01_async/02_async.md) | L2 Trait、L7 演进 | 分析 | ← Trait + async → RPITIT |
-| **Algorithms & Competitive Programming** | [L6: 算法与竞赛编程](../../06_ecosystem/29_algorithms_competitive_programming.md) | L1 所有权、L2 泛型、L3 并发 | 应用 | ← 所有权 + 泛型 → 算法验证 |
+| **Algorithms & Competitive Programming** | [L6: 算法与竞赛编程](../../06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md) | L1 所有权、L2 泛型、L3 并发 | 应用 | ← 所有权 + 泛型 → 算法验证 |
 | **Alias-XOR-Mutation (AXM)** | [L1: 借用](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | L3 并发、L4 分离逻辑 | 理解 | ← 所有权 → 并发安全 |
-| **Ariel OS** | [L6: 嵌入式系统](../../06_ecosystem/22_embedded_systems.md) | L3 Unsafe、L6 IoT | 分析 | ← Library OS → 安全 IoT
+| **Ariel OS** | [L6: 嵌入式系统](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) | L3 Unsafe、L6 IoT | 分析 | ← Library OS → 安全 IoT
 | **Arc** | [L2: 内存管理](../../02_intermediate/02_memory_management/03_memory_management.md) | L3 并发、L1 所有权 | 应用 | ← Rc + Send/Sync → 跨线程共享 |
 | **Async/Await** | [L3: 异步](../../03_advanced/01_async/02_async.md) | L2 泛型、L3 Pin、L4 形式化 | 分析 | ← Future + Pin → 运行时 |
 | **Atomic Memory Ordering** | [L3: 并发](../../03_advanced/00_concurrency/01_concurrency.md) | L1 借用、L4 内存模型 | 评价 | ← Send/Sync → 无锁数据结构 |
@@ -134,9 +134,9 @@
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
 | **Borrowing (&/&mut)** | [L1: 借用](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | L1 所有权、L3 并发、L4 分离逻辑 | 理解 | ← 所有权 → 生命周期 ≡ 分数权限 |
-| **Bootstrap (rustc)** | [L6: rustc Bootstrap](../../06_ecosystem/70_rustc_bootstrap.md) | L6 rustc、L6 基础设施 | 分析 | ← rustc_driver → Stage0/1/2
+| **Bootstrap (rustc)** | [L6: rustc Bootstrap](../../06_ecosystem/00_toolchain/70_rustc_bootstrap.md) | L6 rustc、L6 基础设施 | 分析 | ← rustc_driver → Stage0/1/2
 | **Box** | [L2: 内存管理](../../02_intermediate/02_memory_management/03_memory_management.md) | L1 所有权、L4 线性逻辑 | 应用 | ← 所有权 → 智能指针 |
-| **Builder Pattern** | [L6: 设计模式](../../06_ecosystem/02_patterns.md) | L2 Trait、L1 类型系统 | 应用 | ← 所有权 + 方法链 → API 设计 |
+| **Builder Pattern** | [L6: 设计模式](../../06_ecosystem/03_design_patterns/02_patterns.md) | L2 Trait、L1 类型系统 | 应用 | ← 所有权 + 方法链 → API 设计 |
 
 ### C 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / 学术论文
 
@@ -146,7 +146,7 @@
 | **Const Generics** | [L2: 泛型](../../02_intermediate/01_generics/02_generics.md) | L4 类型论、L7 演进 | 分析 | ← 泛型 → 类型级编程 |
 | **Copy Trait** | [L1: 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | L2 Trait、L4 线性逻辑 | 理解 | ⊘ Move ≡ 线性逻辑 weakening |
 | **Concurrency** | [L3: 并发](../../03_advanced/00_concurrency/01_concurrency.md) | L1 借用、L2 Send/Sync、L4 CSL | 分析 | ← 借用 + Send/Sync → 异步 |
-| **CSP (Communicating Sequential Processes)** | [L5: Rust vs Go](../../05_comparative/02_rust_vs_go.md) | L3 并发、L5 范式矩阵 | 评价 | ⊘ 所有权并发 |
+| **CSP (Communicating Sequential Processes)** | [L5: Rust vs Go](../../05_comparative/01_systems_languages/02_rust_vs_go.md) | L3 并发、L5 范式矩阵 | 评价 | ⊘ 所有权并发 |
 | **Career Landscape** | [L0: 职业市场](career_landscape.md) | L0 Bloom、L6 应用领域 | 知道 | ← 市场数据 → 职业决策 |
 | **Comprehensive Rust** | [L0: 课程映射](../00_framework/comprehensive_rust_mapping.md) | L0 学习指南、L1-L3 | 知道 | ← Google 课程 → 本体系映射
 
@@ -155,8 +155,8 @@
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
 | **Decision Tree (定理推理)** | [L0: 方法论](../00_framework/methodology.md) | 所有文件 | — | 规范所有推理链的呈现方式 |
-| **Compiler Diagnostics and UI Tests** | [L6: Compiler Diagnostics](../../06_ecosystem/69_compiler_diagnostics_and_ui_tests.md) | L4 rustc、L6 基础设施 | 分析 | ← rustc_driver → Lint / UI Test |
-| **Compiler Testing** | [L6: Compiler Testing](../../06_ecosystem/71_compiler_testing.md) | L4 rustc、L6 基础设施 | 应用 | ← UI Test → Crater / rustc-perf
+| **Compiler Diagnostics and UI Tests** | [L6: Compiler Diagnostics](../../06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md) | L4 rustc、L6 基础设施 | 分析 | ← rustc_driver → Lint / UI Test |
+| **Compiler Testing** | [L6: Compiler Testing](../../06_ecosystem/00_toolchain/71_compiler_testing.md) | L4 rustc、L6 基础设施 | 应用 | ← UI Test → Crater / rustc-perf
 | **Drop Trait** | [L1: 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | L2 Trait、L4 线性逻辑 | 理解 | ← 所有权 → RAII ≡ 资源消耗 |
 | **dyn Trait** | [L1: 类型系统](../../01_foundation/02_type_system/04_type_system.md) | L2 Trait、L4 类型论 | 分析 | ⊘ impl Trait → 动态分发 |
 
@@ -164,29 +164,29 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **eBPF Rust Mapping** | [L7: eBPF Rust 映射](../../07_future/29_ebpf_rust.md) | L3 Unsafe、L6 生态 | 分析 | ← Unsafe + FFI → 内核可编程 |
-| **Edition Mechanism** | [L7: 语言演进](../../07_future/03_evolution.md) | 所有层 | 评价 | ← RFC 流程 → 向后兼容演进 |
-| **Effect System (效果系统)** | [L7: Effects System](../../07_future/04_effects_system.md) | L2 泛型、L3 async/const/unsafe、L4 类型论 | 评价 | ← async/const/try → 统一效果语法；effects × substructural types × refinement types 三元愿景 |
+| **eBPF Rust Mapping** | [L7: eBPF Rust 映射](../../07_future/04_research_and_experimental/29_ebpf_rust.md) | L3 Unsafe、L6 生态 | 分析 | ← Unsafe + FFI → 内核可编程 |
+| **Edition Mechanism** | [L7: 语言演进](../../07_future/04_research_and_experimental/03_evolution.md) | 所有层 | 评价 | ← RFC 流程 → 向后兼容演进 |
+| **Effect System (效果系统)** | [L7: Effects System](../../07_future/03_preview_features/04_effects_system.md) | L2 泛型、L3 async/const/unsafe、L4 类型论 | 评价 | ← async/const/try → 统一效果语法；effects × substructural types × refinement types 三元愿景 |
 | **Elision Rules** | [L1: 生命周期](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | L2 泛型、L4 区域类型 | 应用 | ← 生命周期标注 → 简化书写 |
 | **enum (Sum Type)** | [L1: 类型系统](../../01_foundation/02_type_system/04_type_system.md) | L2 错误处理、L4 代数类型 | 理解 | ≡ 和类型 / 余积 (A + B) |
 | **Error Handling (Result/Option)** | [L2: 错误处理](../../02_intermediate/03_error_handling/04_error_handling.md) | L1 类型系统、L3 异步 | 应用 | ← Option/Result → ? 运算符 |
 | **Error Pedagogy** | [L0: 学习指南](learning_guide.md) | L0 Bloom、L1-L3 | 应用 | ← 编译错误 → 概念学习 |
-| **embedded-hal-async** | [L6: 嵌入式系统](../../06_ecosystem/22_embedded_systems.md) | L3 async、L6 Embassy | 应用 | ← 异步 trait → 嵌入式 I/O |
-| **Cargo Build Scripts** | [L6: Cargo Build Scripts](../../06_ecosystem/59_cargo_build_scripts.md) | L6 Toolchain、L6 Dependency Resolution | 应用 | ← Cargo 工作区 → 原生库链接 |
-| **Cargo Dependency Resolution** | [L6: Cargo Dependency Resolution](../../06_ecosystem/60_cargo_dependency_resolution.md) | L6 Cargo、L6 Registry | 应用 | ← SemVer → Lockfile / Resolver |
-| **Cargo Registries and Publishing** | [L6: Cargo Registries](../../06_ecosystem/62_cargo_registries_and_publishing.md) | L6 Cargo、L6 Security | 应用 | ← Dependency Resolution → crates.io |
-| **Cargo Source Replacement** | [L6: Cargo Source Replacement](../../06_ecosystem/61_cargo_source_replacement.md) | L6 Cargo、L6 Dependency Resolution | 应用 | ← Registry → Mirror / Vendor |
-| **Cargo Subcommands and Plugins** | [L6: Cargo Subcommands](../../06_ecosystem/66_cargo_subcommands_and_plugins.md) | L6 Cargo、L6 Toolchain | 应用 | ← Toolchain → Custom Tooling
-| **Cargo Authentication and Cache** | [L6: Cargo Auth & Cache](../../06_ecosystem/63_cargo_authentication_and_cache.md) | L6 Cargo、L6 Security | 应用 | ← Registry → Token / CARGO_HOME |
-| **Cargo Manifest Reference** | [L6: Cargo Manifest](../../06_ecosystem/64_cargo_manifest_reference.md) | L6 Cargo | 应用 | ← Toolchain → Profiles / Lints |
-| **Cargo Profiles and Lints** | [L6: Cargo Profiles](../../06_ecosystem/65_cargo_profiles_and_lints.md) | L6 Cargo | 应用 | ← Manifest → Build Tuning
+| **embedded-hal-async** | [L6: 嵌入式系统](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) | L3 async、L6 Embassy | 应用 | ← 异步 trait → 嵌入式 I/O |
+| **Cargo Build Scripts** | [L6: Cargo Build Scripts](../../06_ecosystem/01_cargo/59_cargo_build_scripts.md) | L6 Toolchain、L6 Dependency Resolution | 应用 | ← Cargo 工作区 → 原生库链接 |
+| **Cargo Dependency Resolution** | [L6: Cargo Dependency Resolution](../../06_ecosystem/01_cargo/60_cargo_dependency_resolution.md) | L6 Cargo、L6 Registry | 应用 | ← SemVer → Lockfile / Resolver |
+| **Cargo Registries and Publishing** | [L6: Cargo Registries](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md) | L6 Cargo、L6 Security | 应用 | ← Dependency Resolution → crates.io |
+| **Cargo Source Replacement** | [L6: Cargo Source Replacement](../../06_ecosystem/01_cargo/61_cargo_source_replacement.md) | L6 Cargo、L6 Dependency Resolution | 应用 | ← Registry → Mirror / Vendor |
+| **Cargo Subcommands and Plugins** | [L6: Cargo Subcommands](../../06_ecosystem/01_cargo/66_cargo_subcommands_and_plugins.md) | L6 Cargo、L6 Toolchain | 应用 | ← Toolchain → Custom Tooling
+| **Cargo Authentication and Cache** | [L6: Cargo Auth & Cache](../../06_ecosystem/01_cargo/63_cargo_authentication_and_cache.md) | L6 Cargo、L6 Security | 应用 | ← Registry → Token / CARGO_HOME |
+| **Cargo Manifest Reference** | [L6: Cargo Manifest](../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md) | L6 Cargo | 应用 | ← Toolchain → Profiles / Lints |
+| **Cargo Profiles and Lints** | [L6: Cargo Profiles](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) | L6 Cargo | 应用 | ← Manifest → Build Tuning
 
 ### F 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / 学术论文
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
 | **FFI (Foreign Function Interface)** | [L3: Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) | L1 所有权、L5 Rust vs C++ | 评价 | ← unsafe → 外部代码互操作 |
-| **Formal Methods (形式化方法)** | [L7: 形式化方法](../../07_future/02_formal_methods.md) | L4 RustBelt、L6 工具链 | 创造 | ← RustBelt → 工业验证 |
+| **Formal Methods (形式化方法)** | [L7: 形式化方法](../../07_future/04_research_and_experimental/02_formal_methods.md) | L4 RustBelt、L6 工具链 | 创造 | ← RustBelt → 工业验证 |
 | **Fractional Permissions** | [L4: RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) | L1 借用、L3 并发 | 评价 | ≡ 借用规则的形式化根基 |
 | **Future** | [L3: 异步](../../03_advanced/01_async/02_async.md) | L2 Trait、L3 Pin | 分析 | ← Trait + 状态机 → async/await |
 
@@ -204,7 +204,7 @@
 |:---|:---|:---|:---|:---|
 | **HRTB (Higher-Ranked Trait Bounds)** | [L1: 生命周期](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | L2 Trait、L4 类型论 | 评价 | ← 生命周期 + 泛型 ≡ ∀<'a> |
 | **HM Type Inference** | [L4: 类型论](../../04_formal/00_type_theory/02_type_theory.md) | L1 类型系统、L2 泛型 | 分析 | → 类型自动推导 |
-| **hax** | [L6: 形式化验证](../../06_ecosystem/74_formal_verification_tools.md) | L4 形式化、L6 密码学 | 分析 | ← Rust → F*/Rocq 翻译 → 验证 |
+| **hax** | [L6: 形式化验证](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md) | L4 形式化、L6 密码学 | 分析 | ← Rust → F*/Rocq 翻译 → 验证 |
 | **HIR (High-level IR)** | [L4: Name Resolution and HIR](../../04_formal/05_rustc_internals/35_name_resolution_and_hir.md) | L4 rustc、L4 Type System | 分析 | ← AST → Type Checking → MIR
 
 ### I
@@ -219,8 +219,8 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **Kani (Verifier)** | [L6: 形式化验证](../../06_ecosystem/74_formal_verification_tools.md) | L7 形式化方法 | 应用 | ← 模型检测 → unsafe 验证 |
-| **Kani verify-std** | [L6: 形式化验证](../../06_ecosystem/74_formal_verification_tools.md) | L6 Kani、L1 标准库 | 分析 | ← 标准库验证 → 生态可信度
+| **Kani (Verifier)** | [L6: 形式化验证](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md) | L7 形式化方法 | 应用 | ← 模型检测 → unsafe 验证 |
+| **Kani verify-std** | [L6: 形式化验证](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md) | L6 Kani、L1 标准库 | 分析 | ← 标准库验证 → 生态可信度
 
 ### L
 
@@ -229,7 +229,7 @@
 | **Lifetimes ('a)** | [L1: 生命周期](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | L2 泛型、L3 异步、L4 区域类型 | 理解 | ← 借用 → Send/Sync ≡ 区域约束 |
 | **Linear Logic** | [L4: 线性逻辑](../../04_formal/01_ownership_logic/01_linear_logic.md) | L1 所有权、L5 Rust vs C++ | 评价 | ≡ 所有权的形式化根基 |
 | **Liskov Substitution** | [L2: Trait](../../02_intermediate/00_traits/01_traits.md) | L4 子类型 | 理解 | → Trait 对象安全 |
-| **LLVM Backend and Codegen** | [L6: LLVM Backend](../../06_ecosystem/67_llvm_backend_and_codegen.md) | L4 rustc、L6 编译器基础设施 | 分析 | ← MIR → 目标文件 / LTO
+| **LLVM Backend and Codegen** | [L6: LLVM Backend](../../06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md) | L4 rustc、L6 编译器基础设施 | 分析 | ← MIR → 目标文件 / LTO
 
 ### M
 
@@ -247,7 +247,7 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **Newtype Pattern** | [L6: 设计模式](../../06_ecosystem/02_patterns.md) | L1 类型系统、L2 Trait | 应用 | ← 零大小类型 → 类型安全 |
+| **Newtype Pattern** | [L6: 设计模式](../../06_ecosystem/03_design_patterns/02_patterns.md) | L1 类型系统、L2 Trait | 应用 | ← 零大小类型 → 类型安全 |
 | **NLL (Non-Lexical Lifetimes)** | [L1: 生命周期](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | L4 区域类型 | 分析 | ← 词法作用域 → 控制流敏感 |
 | **Name Resolution** | [L4: Name Resolution and HIR](../../04_formal/05_rustc_internals/35_name_resolution_and_hir.md) | L1 模块、L3 宏、L4 rustc | 分析 | ← 命名空间 + Rib → HIR |
 
@@ -263,7 +263,7 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **Paradigm Matrix** | [L5: 范式矩阵](../../05_comparative/03_paradigm_matrix.md) | L1-L4 | 评价 | ← 所有基础概念 → 语言选型 |
+| **Paradigm Matrix** | [L5: 范式矩阵](../../05_comparative/00_paradigms/03_paradigm_matrix.md) | L1-L4 | 评价 | ← 所有基础概念 → 语言选型 |
 | **Pattern Matching** | [L1: 类型系统](../../01_foundation/02_type_system/04_type_system.md) | L2 错误处理 | 应用 | ← enum → 穷尽性检查 |
 | **Pin** | [L3: 异步](../../03_advanced/01_async/02_async.md) | L1 借用、L2 内存管理、L4 形式化 | 分析 | ← 自引用 → Future 安全 |
 | **Proc Macros** | [L3: 宏](../../03_advanced/03_proc_macros/04_macros.md) | L1 类型系统 | 分析 | ← 编译器插件 → 派生宏 |
@@ -280,7 +280,7 @@
 | **RPITIT (Return Position Impl Trait In Trait)** | [L3: 异步](../../03_advanced/01_async/02_async.md) | L2 Trait、L7 演进 | 评价 | ← AFIT → 关联返回类型 |
 | **RustBelt** | [L4: RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) | L3 Unsafe、L7 形式化方法 | 评价 | ← Iris → Rust 安全验证 |
 | **Rustc Query System** | [L4: Rustc Query System](../../04_formal/05_rustc_internals/19_rustc_query_system.md) | L4 rustc、L6 编译器基础设施 | 分析 | ← TyCtxt → 增量编译 / Dep Graph |
-| **Rustc Driver and Stable MIR** | [L6: rustc Driver](../../06_ecosystem/68_rustc_driver_and_stable_mir.md) | L4 rustc、L6 工具链 | 分析 | ← rustc_interface → 外部工具 / rustc_public |
+| **Rustc Driver and Stable MIR** | [L6: rustc Driver](../../06_ecosystem/00_toolchain/68_rustc_driver_and_stable_mir.md) | L4 rustc、L6 工具链 | 分析 | ← rustc_interface → 外部工具 / rustc_public |
 
 ### S
 
@@ -293,7 +293,7 @@
 | **struct (Product Type)** | [L1: 类型系统](../../01_foundation/02_type_system/04_type_system.md) | L4 代数类型 | 理解 | ≡ 积类型 / 记录 (A × B) |
 | **Subtyping / Variance** | [L1: 生命周期](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | L4 类型论 | 分析 | ← 生命周期 → 类型安全 |
 | **Supertrait** | [L2: Trait](../../02_intermediate/00_traits/01_traits.md) | L4 子类型 | 理解 | ← Trait 继承 → 组合约束 |
-| **System Composability** | [L6: 系统可组合性](../../06_ecosystem/30_system_composability.md) | L1 所有权、L2 Trait、L3 异步 | 评价 | ← Trait + 泛型 + 异步 → 架构组合 |
+| **System Composability** | [L6: 系统可组合性](../../06_ecosystem/03_design_patterns/30_system_composability.md) | L1 所有权、L2 Trait、L3 异步 | 评价 | ← Trait + 泛型 + 异步 → 架构组合 |
 
 ### T
 
@@ -302,17 +302,17 @@
 | **Trait** | [L2: Trait](../../02_intermediate/00_traits/01_traits.md) | L1 类型系统、L3 并发、L4 类型论 | 应用 | ← 类型系统 → 泛型约束 |
 | **Trait Bounds** | [L2: Trait](../../02_intermediate/00_traits/01_traits.md) | L2 泛型、L4 约束求解 | 应用 | ← Trait + 泛型 → where 子句 |
 | **Trait Objects (dyn)** | [L1: 类型系统](../../01_foundation/02_type_system/04_type_system.md) | L2 Trait、L4 存在类型 | 分析 | ⊘ 泛型 → 动态分发 |
-| **Typestate Pattern** | [L6: 设计模式](../../06_ecosystem/02_patterns.md) | L1 所有权、L2 泛型 | 分析 | ← 所有权 → 编译期状态机 |
-| **Core Crates** | [L6: 核心库谱系](../../06_ecosystem/03_core_crates.md) | L1-L5 全部 | 应用 | ← 概念 → 工程选型 |
-| **serde** | [L6: 核心库谱系](../../06_ecosystem/03_core_crates.md) | L2 Trait、L1 类型系统 | 应用 | ← derive → 序列化 |
-| **tokio** | [L6: 核心库谱系](../../06_ecosystem/03_core_crates.md) | L3 async、L1 Send/Sync | 应用 | ← 运行时 → 异步生态 |
-| **axum** | [L6: 核心库谱系](../../06_ecosystem/03_core_crates.md) | L2 Trait、L3 async | 应用 | ← Handler → Web 后端 |
-| **clap** | [L6: 核心库谱系](../../06_ecosystem/03_core_crates.md) | L2 Trait、L1 类型系统 | 应用 | ← Parser → CLI |
-| **Application Domains** | [L6: 应用主题](../../06_ecosystem/04_application_domains.md) | L1-L5、L6 Crates | 评价 | ← 概念+crate → 工程落地 |
-| **Web Backend** | [L6: 应用主题](../../06_ecosystem/04_application_domains.md) | L3 async、L2 Trait | 应用 | ← axum+tokio → 微服务 |
-| **Embedded Rust** | [L6: 应用主题](../../06_ecosystem/04_application_domains.md) | L3 unsafe、L1 no_std | 应用 | ← embassy → 裸机 |
-| **Blockchain** | [L6: 应用主题](../../06_ecosystem/04_application_domains.md) | L1 类型安全、L3 unsafe | 应用 | ← solana → 智能合约 |
-| **Game Engine** | [L6: 应用主题](../../06_ecosystem/04_application_domains.md) | L3 unsafe、L2 泛型 | 应用 | ← bevy → ECS |
+| **Typestate Pattern** | [L6: 设计模式](../../06_ecosystem/03_design_patterns/02_patterns.md) | L1 所有权、L2 泛型 | 分析 | ← 所有权 → 编译期状态机 |
+| **Core Crates** | [L6: 核心库谱系](../../06_ecosystem/02_core_crates/03_core_crates.md) | L1-L5 全部 | 应用 | ← 概念 → 工程选型 |
+| **serde** | [L6: 核心库谱系](../../06_ecosystem/02_core_crates/03_core_crates.md) | L2 Trait、L1 类型系统 | 应用 | ← derive → 序列化 |
+| **tokio** | [L6: 核心库谱系](../../06_ecosystem/02_core_crates/03_core_crates.md) | L3 async、L1 Send/Sync | 应用 | ← 运行时 → 异步生态 |
+| **axum** | [L6: 核心库谱系](../../06_ecosystem/02_core_crates/03_core_crates.md) | L2 Trait、L3 async | 应用 | ← Handler → Web 后端 |
+| **clap** | [L6: 核心库谱系](../../06_ecosystem/02_core_crates/03_core_crates.md) | L2 Trait、L1 类型系统 | 应用 | ← Parser → CLI |
+| **Application Domains** | [L6: 应用主题](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) | L1-L5、L6 Crates | 评价 | ← 概念+crate → 工程落地 |
+| **Web Backend** | [L6: 应用主题](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) | L3 async、L2 Trait | 应用 | ← axum+tokio → 微服务 |
+| **Embedded Rust** | [L6: 应用主题](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) | L3 unsafe、L1 no_std | 应用 | ← embassy → 裸机 |
+| **Blockchain** | [L6: 应用主题](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) | L1 类型安全、L3 unsafe | 应用 | ← solana → 智能合约 |
+| **Game Engine** | [L6: 应用主题](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) | L3 unsafe、L2 泛型 | 应用 | ← bevy → ECS |
 | **Trait Solver** | [L4: Trait Solver in rustc](../../04_formal/05_rustc_internals/26_trait_solver_in_rustc.md) | L2 Trait、L4 Type Inference | 分析 | ← Obligation → Selection / Fulfillment |
 | **Type Checking and Inference** | [L4: Type Checking](../../04_formal/00_type_theory/27_type_checking_and_inference.md) | L4 Trait Solver、L4 Name Resolution | 分析 | ← HIR → MIR / Borrow Check |
 | **Type System** | [L1: 类型系统](../../01_foundation/02_type_system/04_type_system.md) | 所有层 | 理解 | → 所有类型相关概念 |
@@ -335,13 +335,13 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **wasmcloud** | [L6: WebAssembly](../../06_ecosystem/11_webassembly.md) | L6 WASM、L3 async actors | 应用 | ← Wasm 组件 → 分布式 actor 编排 |
+| **wasmcloud** | [L6: WebAssembly](../../06_ecosystem/11_domain_applications/11_webassembly.md) | L6 WASM、L3 async actors | 应用 | ← Wasm 组件 → 分布式 actor 编排 |
 
 ### Z
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **Zero-cost Abstraction** | [L6: 设计模式](../../06_ecosystem/02_patterns.md) | L2 泛型、L5 对比 | 评价 | ← 单态化 → 运行时零开销 |
+| **Zero-cost Abstraction** | [L6: 设计模式](../../06_ecosystem/03_design_patterns/02_patterns.md) | L2 泛型、L5 对比 | 评价 | ← 单态化 → 运行时零开销 |
 | **Zero-cost Safety** | [L0: 语义空间](../00_framework/semantic_space.md) | L1-L4 | 评价 | ← 编译期检查 → 运行时零开销安全 |
 
 ---
@@ -375,7 +375,7 @@
 |:---|:---|:---|
 | [L3: Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) | Unsafe 的完整定义与安全契约 | ✅ 主定义 |
 | [L1: 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Unsafe 突破所有权 | ✅ 已标注边界条件 |
-| [L5: Rust vs C++](../../05_comparative/01_rust_vs_cpp.md) | Unsafe 在对比语境中的意义 | ✅ 已对齐 |
+| [L5: Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | Unsafe 在对比语境中的意义 | ✅ 已对齐 |
 | [L4: RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) | Unsafe 在形式化中的范围 | ✅ 一致: unsafe 在证明范围外 |
 
 ### 3.4 生命周期（出现在 4+ 个文件中）

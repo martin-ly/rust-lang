@@ -41,20 +41,20 @@
 
 | 文件 | 概念 | 核心内容 | 状态 |
 |:---|:---|:---|:---|
-| [`07_future/01_ai_integration.md`](../07_future/01_ai_integration.md) | AI × Rust | 生成-验证闭环、确定性容器、AI 语义安全网 | ✅ v1.0 |
-| [`07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 形式化方法工业化 | Code-Level + System-Level 验证、PObserve、CI 集成 | ✅ v1.0 |
-| [`07_future/03_evolution.md`](../07_future/03_evolution.md) | 语言演进 | Edition、RFC、Const 泛型（Generics）、GATs、Effects、特化 | ✅ v1.0 |
-| [`07_future/09_parallel_frontend_preview.md`](../07_future/09_parallel_frontend_preview.md) | 并行前端编译 | 查询系统并行化、编译器多核扩展 | ✅ v1.0 |
-| [`07_future/10_derive_coerce_pointee_preview.md`](../07_future/10_derive_coerce_pointee_preview.md) | 派生 CoercePointee | 智能指针（Smart Pointer）自动类型强制、零 unsafe | ✅ v1.0 |
-| [`07_future/11_const_trait_impl_preview.md`](../07_future/11_const_trait_impl_preview.md) | Const Trait Impl | 常量上下文 Trait 泛化、~const 限定 | ✅ v1.0 |
-| [`07_future/12_return_type_notation_preview.md`](../07_future/12_return_type_notation_preview.md) | Return Type Notation | use<..> 精确捕获、生命周期（Lifetimes）控制 | ✅ v1.0 |
-| [`07_future/13_unsafe_fields_preview.md`](../07_future/13_unsafe_fields_preview.md) | Unsafe Fields | 字段级 unsafe 标记、安全边界细化 | ✅ v1.0 |
-| [`07_future/35_ferrocene_preview.md`](../07_future/35_ferrocene_preview.md) | Ferrocene | Rust 安全关键认证、ISO 26262 | ✅ v1.0 |
-| [`07_future/22_gen_blocks_preview.md`](../07_future/22_gen_blocks_preview.md) | Gen Blocks | 泛化生成器、惰性迭代、异步（Async）流 | ✅ v1.0 |
-| [`07_future/38_cranelift_backend_preview.md`](../07_future/38_cranelift_backend_preview.md) | Cranelift 后端 | 快速调试编译、LLVM 替代 | ✅ v1.0 |
+| [`07_future/01_ai_integration.md`](../07_future/04_research_and_experimental/01_ai_integration.md) | AI × Rust | 生成-验证闭环、确定性容器、AI 语义安全网 | ✅ v1.0 |
+| [`07_future/02_formal_methods.md`](../07_future/04_research_and_experimental/02_formal_methods.md) | 形式化方法工业化 | Code-Level + System-Level 验证、PObserve、CI 集成 | ✅ v1.0 |
+| [`07_future/03_evolution.md`](../07_future/04_research_and_experimental/03_evolution.md) | 语言演进 | Edition、RFC、Const 泛型（Generics）、GATs、Effects、特化 | ✅ v1.0 |
+| [`07_future/09_parallel_frontend_preview.md`](../07_future/03_preview_features/09_parallel_frontend_preview.md) | 并行前端编译 | 查询系统并行化、编译器多核扩展 | ✅ v1.0 |
+| [`07_future/10_derive_coerce_pointee_preview.md`](../07_future/03_preview_features/10_derive_coerce_pointee_preview.md) | 派生 CoercePointee | 智能指针（Smart Pointer）自动类型强制、零 unsafe | ✅ v1.0 |
+| [`07_future/11_const_trait_impl_preview.md`](../07_future/03_preview_features/11_const_trait_impl_preview.md) | Const Trait Impl | 常量上下文 Trait 泛化、~const 限定 | ✅ v1.0 |
+| [`07_future/12_return_type_notation_preview.md`](../07_future/03_preview_features/12_return_type_notation_preview.md) | Return Type Notation | use<..> 精确捕获、生命周期（Lifetimes）控制 | ✅ v1.0 |
+| [`07_future/13_unsafe_fields_preview.md`](../07_future/03_preview_features/13_unsafe_fields_preview.md) | Unsafe Fields | 字段级 unsafe 标记、安全边界细化 | ✅ v1.0 |
+| [`07_future/35_ferrocene_preview.md`](../07_future/03_preview_features/35_ferrocene_preview.md) | Ferrocene | Rust 安全关键认证、ISO 26262 | ✅ v1.0 |
+| [`07_future/22_gen_blocks_preview.md`](../07_future/03_preview_features/22_gen_blocks_preview.md) | Gen Blocks | 泛化生成器、惰性迭代、异步（Async）流 | ✅ v1.0 |
+| [`07_future/38_cranelift_backend_preview.md`](../07_future/03_preview_features/38_cranelift_backend_preview.md) | Cranelift 后端 | 快速调试编译、LLVM 替代 | ✅ v1.0 |
 | [`07_future/17_rust_specification_preview.md`](07_future/17_rust_specification_preview.md) | Rust 语言规范 | 形式化规范演进、分层需求 | ✅ v1.0 |
-| [`07_future/18_async_drop_preview.md`](../07_future/18_async_drop_preview.md) | Async Drop | 异步资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs//3308-offset_of.html)、Pin 交互 | ⚠️ nightly |
-| [`07_future/26_specialization_preview.md`](../07_future/26_specialization_preview.md) | Specialization | Trait 实现特化、重叠 impl、min_specialization | ⚠️ nightly |
+| [`07_future/18_async_drop_preview.md`](../07_future/03_preview_features/18_async_drop_preview.md) | Async Drop | 异步资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs//3308-offset_of.html)、Pin 交互 | ⚠️ nightly |
+| [`07_future/26_specialization_preview.md`](../07_future/03_preview_features/26_specialization_preview.md) | Specialization | Trait 实现特化、重叠 impl、min_specialization | ⚠️ nightly |
 
 ---
 

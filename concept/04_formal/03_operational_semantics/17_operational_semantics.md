@@ -9,7 +9,7 @@
 >
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 介绍 **操作语义（Operational Semantics）**——通过形式化规则定义程序的执行步骤，分析小步语义（Small-Step）与大步语义（Big-Step）的对比，以及 Rust 的所有权（Ownership）、借用（Borrowing）和并发操作的形式化建模方法。
-> **前置概念**: [Type Theory](../00_type_theory/02_type_theory.md) · [Ownership Formal](../01_ownership_logic/03_ownership_formal.md) · [Linear Logic](../01_ownership_logic/01_linear_logic.md)
+> **前置概念**: [Type Theory](../00_type_theory/02_type_theory.md) · [Ownership Formal](../01_ownership_logic/03_ownership_formal.md) · [Linear Logic](../01_ownership_logic/01_linear_logic.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 > **后置概念**: [RustBelt](../02_separation_logic/04_rustbelt.md) · [Separation Logic](../02_separation_logic/11_separation_logic.md)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)

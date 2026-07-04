@@ -10,7 +10,7 @@
 > **A/S/P 标记**: **P** — Process / Platform
 > **双维定位**: P×Sys — 编译器输出与平台链接行为
 > **前置依赖**: [FFI Advanced](09_ffi_advanced.md) · [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) · [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
-> **后置概念**: [Unsafe Rust](../02_unsafe/03_unsafe.md) · [Preludes](../../01_foundation/07_modules_and_items/35_preludes.md) · [Rust vs C++](../../05_comparative/01_rust_vs_cpp.md)
+> **后置概念**: [Unsafe Rust](../02_unsafe/03_unsafe.md) · [Preludes](../../01_foundation/07_modules_and_items/35_preludes.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **定理链**: N/A — 编译器行为/平台相关文档
 > **主要来源**: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
 

@@ -2,7 +2,7 @@
 
 > **EN**: Performance Optimization
 > **Summary**: 性能优化 Performance Optimization. (stub/archive redirect)
-> **权威来源**: 本主题深度解释见 [concept/06_ecosystem/15_performance_optimization.md](../../concept/06_ecosystem/15_performance_optimization.md)。
+> **权威来源**: 本主题深度解释见 [concept/06_ecosystem/15_performance_optimization.md](../../concept/06_ecosystem/10_performance/15_performance_optimization.md)。
 > **历史版本存档**: [archive/knowledge/03_advanced/05_performance_optimization.md](../../archive/knowledge/03_advanced/05_performance_optimization.md)
 >
 > **定位**: 本文件为精简知识卡片，保留核心规则/概念与常见陷阱。详细解释、形式化语义与代码示例请查看权威来源。
@@ -32,4 +32,4 @@
 
 ---
 
-**详细内容已迁移**：请点击上方 [concept/06_ecosystem/15_performance_optimization.md](../../concept/06_ecosystem/15_performance_optimization.md) 查看最新权威解释。
+**详细内容已迁移**：请点击上方 [concept/06_ecosystem/15_performance_optimization.md](../../concept/06_ecosystem/10_performance/15_performance_optimization.md) 查看最新权威解释。

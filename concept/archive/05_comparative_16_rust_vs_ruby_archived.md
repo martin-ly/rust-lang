@@ -11,7 +11,7 @@
 > **归档原因**: 与 `08_rust_vs_ruby.md` 主体内容高度重叠（>95%），仅边界测试章节有差异（本文件包含 GIL、宏（Macro）卫生等额外边界测试）。主文件已覆盖核心对比内容。
 > **状态**: 已归档（2026-05-30 重复文件清理）
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
-> **后置概念**: [Ecosystem](../06_ecosystem/01_toolchain.md)
+> **后置概念**: [Ecosystem](../06_ecosystem/00_toolchain/01_toolchain.md)
 > **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 

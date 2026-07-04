@@ -710,7 +710,7 @@ graph TD
 
 ---
 
-> **相关文件**: [概念判定森林](concept_definition_decision_forest.md) · [边界扩展树](boundary_extension_tree.md) · [安全边界](../../05_comparative/04_safety_boundaries.md) · [Miri 验证](../../../archive/reports/2026_07/MIRI_VALIDATION_2026_05_27.md)
+> **相关文件**: [概念判定森林](concept_definition_decision_forest.md) · [边界扩展树](boundary_extension_tree.md) · [安全边界](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md) · [Miri 验证](../../../archive/reports/2026_07/MIRI_VALIDATION_2026_05_27.md)
 
 ## 认知路径
 

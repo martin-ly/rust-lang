@@ -419,7 +419,7 @@ flowchart TD
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
-- [Rust 版本跟踪 (concept)](../../concept/07_future/05_rust_version_tracking.md) — Next Solver 稳定化状态全局跟踪
+- [Rust 版本跟踪 (concept)](../../concept/07_future/00_version_tracking/05_rust_version_tracking.md) — Next Solver 稳定化状态全局跟踪
 - [Traits (concept)](../../concept/02_intermediate/00_traits/01_traits.md) — Trait 系统核心概念与 §12 Next Solver 前瞻
 - [泛型 (concept)](../../concept/02_intermediate/01_generics/02_generics.md) — 泛型系统与关联类型详解
 

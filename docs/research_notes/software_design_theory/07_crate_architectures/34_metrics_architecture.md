@@ -2,7 +2,7 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [日志与可观测性](../../../../concept/06_ecosystem/13_logging_observability.md)
+> - [日志与可观测性](../../../../concept/06_ecosystem/00_toolchain/13_logging_observability.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.96.1+ (Edition 2024)
@@ -184,7 +184,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 
 - [Tracing 可观测性架构](18_tracing_architecture.md) — 日志/追踪与指标互补
 - [Sentry 错误追踪架构](33_sentry_architecture.md) — 错误事件与指标组合
-- [日志与可观测性](../../../../concept/06_ecosystem/13_logging_observability.md)
+- [日志与可观测性](../../../../concept/06_ecosystem/00_toolchain/13_logging_observability.md)
 - [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
 
 ---

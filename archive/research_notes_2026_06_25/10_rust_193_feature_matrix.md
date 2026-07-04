@@ -4,7 +4,7 @@
 > **Summary**: Rust 1.93 特性矩阵 Rust 193 Feature Matrix. (stub/archive redirect)
 > **归档说明**: 本文档为 Rust 1.93 历史版本研究笔记，已迁移到 `archive/research_notes/10_rust_193_feature_matrix.md`。
 > 历史版本详细分析请参阅 [archive/docs/06_toolchain/06_07_rust_1_93_full_changelog.md](../docs/06_toolchain/06_07_rust_1_93_full_changelog.md)。
-> 最新 Rust 版本特性请参阅 [concept/07_future/rust_1_96_stabilized.md](../../concept/07_future/rust_1_96_stabilized.md)。
+> 最新 Rust 版本特性请参阅 [concept/07_future/rust_1_96_stabilized.md](../../concept/07_future/00_version_tracking/rust_1_96_stabilized.md)。
 
 ---
 

@@ -18,7 +18,7 @@
 > [L1 所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **后置延伸**: [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md) ·
 > [L4 类型论](../../04_formal/00_type_theory/02_type_theory.md) ·
-> [L6 设计模式](../../06_ecosystem/02_patterns.md)
+> [L6 设计模式](../../06_ecosystem/03_design_patterns/02_patterns.md)
 > **跨层映射**: L2→L4 Trait ↔ 类型类 (Type Class) | L2→L3 Send/Sync Trait
 > **定理链编号**: T-020 特质一致性（Coherence） → T-021 孤儿规则（Orphan Rule）完备性 → T-022 关联类型规范化
 > **层级**: L2 进阶概念

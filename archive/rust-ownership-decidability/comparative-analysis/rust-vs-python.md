@@ -3,7 +3,7 @@
 
 ---
 
-> **[主轨引用]**: 教学视角参见 [concept/05_comparative/07_rust_vs_python.md](../../../concept/05_comparative/07_rust_vs_python.md)。本文档侧重工程视角（性能基准、代码示例对比）。
+> **[主轨引用]**: 教学视角参见 [concept/05_comparative/07_rust_vs_python.md](../../../concept/05_comparative/02_managed_languages/07_rust_vs_python.md)。本文档侧重工程视角（性能基准、代码示例对比）。
 
 ---
 

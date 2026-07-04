@@ -33,7 +33,7 @@
 
 | TRPL 章节 | 主题 | 本项目对应 | 补充深度 |
 |:---|:---|:---|:---:|
-| Ch.7 模块系统 | `mod`、`use`、`pub`、crate | [`concept/06_ecosystem/01_toolchain.md`](../../../../../concept/06_ecosystem/01_toolchain.md) §Workspace | 📦 Cargo 高级特性 |
+| Ch.7 模块系统 | `mod`、`use`、`pub`、crate | [`concept/06_ecosystem/01_toolchain.md`](../../../../../concept/06_ecosystem/00_toolchain/01_toolchain.md) §Workspace | 📦 Cargo 高级特性 |
 | Ch.8 常用集合 | `Vec`、`HashMap`、`String` | [`concept/01_foundation/08_collections.md`](../../../../../concept/01_foundation/05_collections/08_collections.md) | 🔬 内存布局分析 |
 | Ch.9 错误处理 | `Result<T,E>`、`?`、`panic!` | [`concept/02_intermediate/04_error_handling.md`](../../../../../concept/02_intermediate/03_error_handling/04_error_handling.md) | 🔬 错误传播代数 |
 | Ch.10 泛型、Trait、生命周期 | `<T>`、`trait`、`'a` | [`concept/02_intermediate/02_generics.md`](../../../../../concept/02_intermediate/01_generics/02_generics.md) · [`concept/02_intermediate/01_traits.md`](../../../../../concept/02_intermediate/00_traits/01_traits.md) · [`concept/01_foundation/03_lifetimes.md`](../../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 🔬 单态化、GATs、HRTB |
@@ -45,7 +45,7 @@
 | Ch.11 测试 | `#[test]`、集成测试 | [`concept/02_intermediate/05_assert_matches.md`](../../../../../concept/02_intermediate/06_macros_and_metaprogramming/05_assert_matches.md) | 🔬 `assert_matches!` (1.96.0) |
 | Ch.12 I/O 项目 | 实用项目 | [`crates/c07_process/`](../../../../../crates/c07_process) | 📦 完整 crate |
 | Ch.13 闭包与迭代器 | `Fn`/`FnMut`/`FnOnce`、`Iterator` | [`concept/02_intermediate/`](../../../../../02_intermediate) | 🔬 迭代器组合子矩阵 |
-| Ch.14 Cargo | crates.io、Workspace | [`concept/06_ecosystem/01_toolchain.md`](../../../../../concept/06_ecosystem/01_toolchain.md) | 📦 17-member workspace |
+| Ch.14 Cargo | crates.io、Workspace | [`concept/06_ecosystem/01_toolchain.md`](../../../../../concept/06_ecosystem/00_toolchain/01_toolchain.md) | 📦 17-member workspace |
 | Ch.15 智能指针 | `Box`、`Rc`、`Arc`、`RefCell` | [`concept/02_intermediate/03_memory_management.md`](../../../../../concept/02_intermediate/02_memory_management/03_memory_management.md) | 🔬 内部可变性形式化 |
 | Ch.16 无畏并发 | 线程、`Send`/`Sync`、消息传递 | [`concept/03_advanced/01_concurrency.md`](../../../../../concept/03_advanced/00_concurrency/01_concurrency.md) | 🔬 分离逻辑、死锁分析 |
 

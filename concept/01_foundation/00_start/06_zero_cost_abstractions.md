@@ -14,7 +14,7 @@
 > **双维定位**: C×Eva — 评价零成本抽象（Zero-Cost Abstraction）的设计权衡
 > **定位**: 深入分析 Rust **零成本抽象（Zero-Cost Abstraction）**（Zero-Cost Abstractions）的设计哲学——探讨泛型（Generics）、迭代器（Iterator）、Trait 对象等高层抽象如何在编译期消除运行时（Runtime）开销，以及与 C++ "零开销原则" 的对比。
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
-> **后置概念**: [Rust vs C++](../../05_comparative/01_rust_vs_cpp.md) · [Toolchain](../../06_ecosystem/01_toolchain.md)
+> **后置概念**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
 
 ---
 
@@ -400,9 +400,9 @@ Rust 性能分析工具链:
 
 - [Generics](../../02_intermediate/01_generics/02_generics.md) — 泛型与单态化
 - [Traits](../../02_intermediate/00_traits/01_traits.md) — Trait 系统与动态分发
-- [Rust vs C++](../../05_comparative/01_rust_vs_cpp.md) — 与 C++ 的性能对比
-- [Toolchain](../../06_ecosystem/01_toolchain.md) — 编译工具链
-- [Cranelift Backend](../../07_future/38_cranelift_backend_preview.md) — 快速编译后端
+- [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) — 与 C++ 的性能对比
+- [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) — 编译工具链
+- [Cranelift Backend](../../07_future/03_preview_features/38_cranelift_backend_preview.md) — 快速编译后端
 
 ---
 

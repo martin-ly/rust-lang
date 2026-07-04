@@ -232,5 +232,5 @@ const _: () = {
 ### 相关文档 {#相关文档}
 
 - [Rust 1.93 特性速查表](../02_reference/quick_reference/02_rust_190_to_193_features_cheatsheet.md)
-- [Rust 版本跟踪](../../concept/07_future/05_rust_version_tracking.md)
+- [Rust 版本跟踪](../../concept/07_future/00_version_tracking/05_rust_version_tracking.md)
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)

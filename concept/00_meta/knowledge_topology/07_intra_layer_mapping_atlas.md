@@ -160,12 +160,12 @@
 
 | 源概念 | 关系 | 目标概念 |
 |:---|:---:|:---|
-| [Rust vs Go：线性所有权 vs CSP 过程逻辑](../../05_comparative/02_rust_vs_go.md) | ⟹ | [Paradigm Matrix: Multi-Language Formal Comparison](../../05_comparative/03_paradigm_matrix.md) |
-| [Rust vs Python：系统编程与动态脚本的对照分析](../../05_comparative/07_rust_vs_python.md) | ⟹ | [Rust vs Go：线性所有权 vs CSP 过程逻辑](../../05_comparative/02_rust_vs_go.md) |
-| [Rust vs Python：系统编程与动态脚本的对照分析](../../05_comparative/07_rust_vs_python.md) | ⟹ | [Rust vs Java：系统编程与托管运行时的范式对比](../../05_comparative/06_rust_vs_java.md) |
-| [Rust vs Scala：类型系统的两种哲学](../../05_comparative/12_rust_vs_scala.md) | ⟹ | [Paradigm Matrix: Multi-Language Formal Comparison](../../05_comparative/03_paradigm_matrix.md) |
-| [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](../../05_comparative/15_rust_vs_typescript.md) | ⟹ | [Rust vs JavaScript：系统编程与脚本执行的范式差异](../../05_comparative/08_rust_vs_javascript.md) |
-| [C++ vs Rust：构造、运算符、RTTI、友元](../../05_comparative/16_cpp_rust_surface_features.md) | ⟹ | [Rust vs C++：ABI、对象模型与内存布局](../../05_comparative/18_cpp_abi_object_model.md) |
+| [Rust vs Go：线性所有权 vs CSP 过程逻辑](../../05_comparative/01_systems_languages/02_rust_vs_go.md) | ⟹ | [Paradigm Matrix: Multi-Language Formal Comparison](../../05_comparative/00_paradigms/03_paradigm_matrix.md) |
+| [Rust vs Python：系统编程与动态脚本的对照分析](../../05_comparative/02_managed_languages/07_rust_vs_python.md) | ⟹ | [Rust vs Go：线性所有权 vs CSP 过程逻辑](../../05_comparative/01_systems_languages/02_rust_vs_go.md) |
+| [Rust vs Python：系统编程与动态脚本的对照分析](../../05_comparative/02_managed_languages/07_rust_vs_python.md) | ⟹ | [Rust vs Java：系统编程与托管运行时的范式对比](../../05_comparative/02_managed_languages/06_rust_vs_java.md) |
+| [Rust vs Scala：类型系统的两种哲学](../../05_comparative/02_managed_languages/12_rust_vs_scala.md) | ⟹ | [Paradigm Matrix: Multi-Language Formal Comparison](../../05_comparative/00_paradigms/03_paradigm_matrix.md) |
+| [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](../../05_comparative/02_managed_languages/15_rust_vs_typescript.md) | ⟹ | [Rust vs JavaScript：系统编程与脚本执行的范式差异](../../05_comparative/02_managed_languages/08_rust_vs_javascript.md) |
+| [C++ vs Rust：构造、运算符、RTTI、友元](../../05_comparative/00_paradigms/16_cpp_rust_surface_features.md) | ⟹ | [Rust vs C++：ABI、对象模型与内存布局](../../05_comparative/01_systems_languages/18_cpp_abi_object_model.md) |
 
 ## L6 生态工程层
 
@@ -173,98 +173,98 @@
 
 | 源概念 | 关系 | 目标概念 |
 |:---|:---:|:---|
-| [Core Crates](../../06_ecosystem/03_core_crates.md) | ⟹ | [Application Domains](../../06_ecosystem/04_application_domains.md) |
-| [Blockchain & Smart Contract Security](../../06_ecosystem/06_blockchain.md) | ⟹ | [Formal Ecosystem Tower](../../06_ecosystem/44_formal_ecosystem_tower.md) |
-| [WASI & WebAssembly Component Model](../../06_ecosystem/08_wasi.md) | ⟹ | [Application Domains](../../06_ecosystem/04_application_domains.md) |
-| [WASI & WebAssembly Component Model](../../06_ecosystem/08_wasi.md) | ⟹ | [Formal Ecosystem Tower](../../06_ecosystem/44_formal_ecosystem_tower.md) |
-| [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_webassembly.md) | ⟹ | [WASI & WebAssembly Component Model](../../06_ecosystem/08_wasi.md) |
-| [日志与可观测性：Rust 服务端监控生态](../../06_ecosystem/13_logging_observability.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_webassembly.md) |
-| [文档生态：rustdoc、文档测试与 API 文档规范](../../06_ecosystem/14_documentation.md) | ⟹ | [Toolchain](../../06_ecosystem/01_toolchain.md) |
-| [文档生态：rustdoc、文档测试与 API 文档规范](../../06_ecosystem/14_documentation.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_webassembly.md) |
-| [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/17_cross_compilation.md) | ⟹ | [WASI & WebAssembly Component Model](../../06_ecosystem/08_wasi.md) |
-| [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/17_cross_compilation.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_webassembly.md) |
-| [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/18_distributed_systems.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_webassembly.md) |
-| [安全 实践：Rust 代码的防御性编程](../../06_ecosystem/19_security_practices.md) | ⟹ | [Blockchain & Smart Contract Security](../../06_ecosystem/06_blockchain.md) |
-| [许可证与合规：Rust 项目的法律工程](../../06_ecosystem/20_licensing_and_compliance.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/17_cross_compilation.md) |
-| [许可证与合规：Rust 项目的法律工程](../../06_ecosystem/20_licensing_and_compliance.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/18_distributed_systems.md) |
-| [Rust 游戏开发生态](../../06_ecosystem/21_game_development.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_webassembly.md) |
-| [Rust 嵌入式系统开发](../../06_ecosystem/22_embedded_systems.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/17_cross_compilation.md) |
-| [Rust 数据库访问生态](../../06_ecosystem/23_database_access.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/15_performance_optimization.md) |
-| [Rust 数据库访问生态](../../06_ecosystem/23_database_access.md) | ⟹ | [Application Domains](../../06_ecosystem/04_application_domains.md) |
-| [Rust 云原生生态](../../06_ecosystem/24_cloud_native.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_webassembly.md) |
-| [Rust 云原生生态](../../06_ecosystem/24_cloud_native.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/18_distributed_systems.md) |
-| [Rust CLI 开发生态](../../06_ecosystem/25_cli_development.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/15_performance_optimization.md) |
-| [Rust CLI 开发生态](../../06_ecosystem/25_cli_development.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/17_cross_compilation.md) |
-| [Rust 游戏开发](../../06_ecosystem/26_game_development.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_webassembly.md) |
-| [Rust 游戏开发](../../06_ecosystem/26_game_development.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/15_performance_optimization.md) |
-| [Rust Web 框架对比与选型](../../06_ecosystem/27_web_frameworks.md) | ⟹ | [Rust 云原生生态](../../06_ecosystem/24_cloud_native.md) |
-| [Rust Web 框架对比与选型](../../06_ecosystem/27_web_frameworks.md) | ⟹ | [Design Patterns](../../06_ecosystem/02_patterns.md) |
-| [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/28_devops_and_ci_cd.md) | ⟹ | [Rust 云原生生态](../../06_ecosystem/24_cloud_native.md) |
-| [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/28_devops_and_ci_cd.md) | ⟹ | [安全 实践：Rust 代码的防御性编程](../../06_ecosystem/19_security_practices.md) |
-| [算法与竞赛编程 (Algorithms & Competitive Programming)](../../06_ecosystem/29_algorithms_competitive_programming.md) | ⟹ | [Formal Ecosystem Tower](../../06_ecosystem/44_formal_ecosystem_tower.md) |
-| [算法与竞赛编程 (Algorithms & Competitive Programming)](../../06_ecosystem/29_algorithms_competitive_programming.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/15_performance_optimization.md) |
-| [系统可组合性 (System Composability)](../../06_ecosystem/30_system_composability.md) | ⟹ | [Application Domains](../../06_ecosystem/04_application_domains.md) |
-| [微服务架构模式 (Microservice Architecture Patterns)](../../06_ecosystem/31_microservice_patterns.md) | ⟹ | [事件驱动架构 (Event-Driven Architecture)](../../06_ecosystem/32_event_driven_architecture.md) |
-| [微服务架构模式 (Microservice Architecture Patterns)](../../06_ecosystem/31_microservice_patterns.md) | ⟹ | [Rust 云原生生态](../../06_ecosystem/24_cloud_native.md) |
-| [事件驱动架构 (Event-Driven Architecture)](../../06_ecosystem/32_event_driven_architecture.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/18_distributed_systems.md) |
-| [流处理生态：Rust 实现与工业系统全景](../../06_ecosystem/36_stream_processing_ecosystem.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/18_distributed_systems.md) |
-| [数据库系统：Rust 在存储引擎中的语义](../../06_ecosystem/37_database_systems.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/18_distributed_systems.md) |
-| [网络协议：QUIC/HTTP-3 与 Rust 实现](../../06_ecosystem/38_network_protocols.md) | ⟹ | [流处理生态：Rust 实现与工业系统全景](../../06_ecosystem/36_stream_processing_ecosystem.md) |
-| [网络协议：QUIC/HTTP-3 与 Rust 实现](../../06_ecosystem/38_network_protocols.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/18_distributed_systems.md) |
-| [Formal Ecosystem Tower](../../06_ecosystem/44_formal_ecosystem_tower.md) | ⟹ | [Application Domains](../../06_ecosystem/04_application_domains.md) |
-| [Formal Ecosystem Tower](../../06_ecosystem/44_formal_ecosystem_tower.md) | ⟹ | [Toolchain](../../06_ecosystem/01_toolchain.md) |
-| [C-to-Rust Translation Ecosystem](../../06_ecosystem/56_c_to_rust_translation.md) | ⟹ | [Formal Verification Tools](../../06_ecosystem/74_formal_verification_tools.md) |
-| [将 Rust 集成到现有平台](../../06_ecosystem/58_platform_rust_integration.md) | ⟹ | [Rust 工业应用案例研究](../../06_ecosystem/75_industrial_case_studies.md) |
-| [将 Rust 集成到现有平台](../../06_ecosystem/58_platform_rust_integration.md) | ⟹ | [Rust 操作系统内核开发](../../06_ecosystem/39_os_kernel.md) |
-| [Cargo Build Scripts](../../06_ecosystem/59_cargo_build_scripts.md) | ⟹ | [Cargo Registry 与包发布](../../06_ecosystem/62_cargo_registries_and_publishing.md) |
-| [Cargo Build Scripts](../../06_ecosystem/59_cargo_build_scripts.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/28_devops_and_ci_cd.md) |
-| [Cargo 依赖解析](../../06_ecosystem/60_cargo_dependency_resolution.md) | ⟹ | [Cargo Build Scripts](../../06_ecosystem/59_cargo_build_scripts.md) |
-| [Cargo 依赖解析](../../06_ecosystem/60_cargo_dependency_resolution.md) | ⟹ | [Cargo Registry 与包发布](../../06_ecosystem/62_cargo_registries_and_publishing.md) |
-| [Cargo Source Replacement 与 Vendoring](../../06_ecosystem/61_cargo_source_replacement.md) | ⟹ | [Cargo 认证与构建缓存](../../06_ecosystem/63_cargo_authentication_and_cache.md) |
-| [Cargo Source Replacement 与 Vendoring](../../06_ecosystem/61_cargo_source_replacement.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/28_devops_and_ci_cd.md) |
-| [Cargo Registry 与包发布](../../06_ecosystem/62_cargo_registries_and_publishing.md) | ⟹ | [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/72_cargo_security_cves.md) |
-| [Cargo Registry 与包发布](../../06_ecosystem/62_cargo_registries_and_publishing.md) | ⟹ | [Toolchain](../../06_ecosystem/01_toolchain.md) |
-| [Cargo 认证与构建缓存](../../06_ecosystem/63_cargo_authentication_and_cache.md) | ⟹ | [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/72_cargo_security_cves.md) |
-| [Cargo 认证与构建缓存](../../06_ecosystem/63_cargo_authentication_and_cache.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/28_devops_and_ci_cd.md) |
-| [Cargo Manifest 参考速查](../../06_ecosystem/64_cargo_manifest_reference.md) | ⟹ | [Cargo Profiles 与 Lints](../../06_ecosystem/65_cargo_profiles_and_lints.md) |
-| [Cargo Manifest 参考速查](../../06_ecosystem/64_cargo_manifest_reference.md) | ⟹ | [Cargo Source Replacement 与 Vendoring](../../06_ecosystem/61_cargo_source_replacement.md) |
-| [Cargo Profiles 与 Lints](../../06_ecosystem/65_cargo_profiles_and_lints.md) | ⟹ | [Cargo 认证与构建缓存](../../06_ecosystem/63_cargo_authentication_and_cache.md) |
-| [Cargo Profiles 与 Lints](../../06_ecosystem/65_cargo_profiles_and_lints.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/28_devops_and_ci_cd.md) |
-| [Cargo 子命令与插件生态](../../06_ecosystem/66_cargo_subcommands_and_plugins.md) | ⟹ | [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/72_cargo_security_cves.md) |
-| [Cargo 子命令与插件生态](../../06_ecosystem/66_cargo_subcommands_and_plugins.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/28_devops_and_ci_cd.md) |
-| [Rust 编译器的 LLVM 后端与代码生成](../../06_ecosystem/67_llvm_backend_and_codegen.md) | ⟹ | [rustc Driver、Interface 与 Stable MIR](../../06_ecosystem/68_rustc_driver_and_stable_mir.md) |
-| [Rust 编译器的 LLVM 后端与代码生成](../../06_ecosystem/67_llvm_backend_and_codegen.md) | ⟹ | [Rust 编译器基础设施深度解析](../../06_ecosystem/47_compiler_infrastructure.md) |
-| [rustc Driver、Interface 与 Stable MIR](../../06_ecosystem/68_rustc_driver_and_stable_mir.md) | ⟹ | [Rust 编译器基础设施深度解析](../../06_ecosystem/47_compiler_infrastructure.md) |
-| [rustc Driver、Interface 与 Stable MIR](../../06_ecosystem/68_rustc_driver_and_stable_mir.md) | ⟹ | [rustc 编译器诊断与 UI Tests](../../06_ecosystem/69_compiler_diagnostics_and_ui_tests.md) |
-| [rustc 编译器诊断与 UI Tests](../../06_ecosystem/69_compiler_diagnostics_and_ui_tests.md) | ⟹ | [rustc 自举](../../06_ecosystem/70_rustc_bootstrap.md) |
-| [rustc 编译器诊断与 UI Tests](../../06_ecosystem/69_compiler_diagnostics_and_ui_tests.md) | ⟹ | [Rust 编译器基础设施深度解析](../../06_ecosystem/47_compiler_infrastructure.md) |
-| [rustc 自举](../../06_ecosystem/70_rustc_bootstrap.md) | ⟹ | [rustc 编译器测试体系](../../06_ecosystem/71_compiler_testing.md) |
-| [rustc 编译器测试体系](../../06_ecosystem/71_compiler_testing.md) | ⟹ | [Rust 编译器基础设施深度解析](../../06_ecosystem/47_compiler_infrastructure.md) |
-| [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/72_cargo_security_cves.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/17_cross_compilation.md) |
-| [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/72_cargo_security_cves.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/28_devops_and_ci_cd.md) |
-| [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/73_pattern_composition_algebra.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/18_distributed_systems.md) |
-| [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/73_pattern_composition_algebra.md) | ⟹ | [Rust 系统设计原则与国际权威对齐](../../06_ecosystem/05_system_design_principles.md) |
-| [Cargo Workspaces](../../06_ecosystem/78_cargo_workspaces.md) | ⟹ | [Cargo Profiles 与 Lints](../../06_ecosystem/65_cargo_profiles_and_lints.md) |
-| [Cargo Workspaces](../../06_ecosystem/78_cargo_workspaces.md) | ⟹ | [Cargo Registry 与包发布](../../06_ecosystem/62_cargo_registries_and_publishing.md) |
-| [Rust 常用开发工具](../../06_ecosystem/79_development_tools.md) | ⟹ | [Cargo Profiles 与 Lints](../../06_ecosystem/65_cargo_profiles_and_lints.md) |
-| [Cargo 入门](../../06_ecosystem/80_cargo_getting_started.md) | ⟹ | [Cargo 工作流](../../06_ecosystem/81_cargo_workflow.md) |
-| [Cargo 入门](../../06_ecosystem/80_cargo_getting_started.md) | ⟹ | [Cargo 依赖解析](../../06_ecosystem/60_cargo_dependency_resolution.md) |
-| [Cargo 入门](../../06_ecosystem/80_cargo_getting_started.md) | ⟹ | [Cargo Manifest 参考速查](../../06_ecosystem/64_cargo_manifest_reference.md) |
-| [Cargo 工作流](../../06_ecosystem/81_cargo_workflow.md) | ⟹ | [Cargo 指南实践](../../06_ecosystem/82_cargo_guide_practices.md) |
-| [Cargo 工作流](../../06_ecosystem/81_cargo_workflow.md) | ⟹ | [Cargo Workspaces](../../06_ecosystem/78_cargo_workspaces.md) |
-| [Cargo 工作流](../../06_ecosystem/81_cargo_workflow.md) | ⟹ | [Cargo 依赖解析](../../06_ecosystem/60_cargo_dependency_resolution.md) |
-| [Cargo 指南实践](../../06_ecosystem/82_cargo_guide_practices.md) | ⟹ | [Cargo 配置与环境变量](../../06_ecosystem/83_cargo_configuration.md) |
-| [Cargo 指南实践](../../06_ecosystem/82_cargo_guide_practices.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/28_devops_and_ci_cd.md) |
-| [Cargo 指南实践](../../06_ecosystem/82_cargo_guide_practices.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/15_performance_optimization.md) |
-| [Cargo 配置与环境变量](../../06_ecosystem/83_cargo_configuration.md) | ⟹ | [Cargo 命令参考](../../06_ecosystem/84_cargo_commands_reference.md) |
-| [Cargo 配置与环境变量](../../06_ecosystem/83_cargo_configuration.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/17_cross_compilation.md) |
-| [Cargo 命令参考](../../06_ecosystem/84_cargo_commands_reference.md) | ⟹ | [Cargo Manifest 目标与元数据](../../06_ecosystem/85_cargo_manifest_targets.md) |
-| [Cargo 命令参考](../../06_ecosystem/84_cargo_commands_reference.md) | ⟹ | [Cargo Registry 内部机制](../../06_ecosystem/86_cargo_registry_internals.md) |
-| [Cargo 命令参考](../../06_ecosystem/84_cargo_commands_reference.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/28_devops_and_ci_cd.md) |
-| [Cargo Manifest 目标与元数据](../../06_ecosystem/85_cargo_manifest_targets.md) | ⟹ | [Cargo 命令参考](../../06_ecosystem/84_cargo_commands_reference.md) |
-| [Cargo Manifest 目标与元数据](../../06_ecosystem/85_cargo_manifest_targets.md) | ⟹ | [Cargo Build Scripts](../../06_ecosystem/59_cargo_build_scripts.md) |
-| [Cargo Registry 内部机制](../../06_ecosystem/86_cargo_registry_internals.md) | ⟹ | [Cargo 命令参考](../../06_ecosystem/84_cargo_commands_reference.md) |
-| [Cargo Registry 内部机制](../../06_ecosystem/86_cargo_registry_internals.md) | ⟹ | [安全 实践：Rust 代码的防御性编程](../../06_ecosystem/19_security_practices.md) |
+| [Core Crates](../../06_ecosystem/02_core_crates/03_core_crates.md) | ⟹ | [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) |
+| [Blockchain & Smart Contract Security](../../06_ecosystem/11_domain_applications/06_blockchain.md) | ⟹ | [Formal Ecosystem Tower](../../06_ecosystem/08_formal_verification/44_formal_ecosystem_tower.md) |
+| [WASI & WebAssembly Component Model](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) | ⟹ | [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) |
+| [WASI & WebAssembly Component Model](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) | ⟹ | [Formal Ecosystem Tower](../../06_ecosystem/08_formal_verification/44_formal_ecosystem_tower.md) |
+| [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_domain_applications/11_webassembly.md) | ⟹ | [WASI & WebAssembly Component Model](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) |
+| [日志与可观测性：Rust 服务端监控生态](../../06_ecosystem/00_toolchain/13_logging_observability.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_domain_applications/11_webassembly.md) |
+| [文档生态：rustdoc、文档测试与 API 文档规范](../../06_ecosystem/09_testing_and_quality/14_documentation.md) | ⟹ | [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) |
+| [文档生态：rustdoc、文档测试与 API 文档规范](../../06_ecosystem/09_testing_and_quality/14_documentation.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_domain_applications/11_webassembly.md) |
+| [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md) | ⟹ | [WASI & WebAssembly Component Model](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) |
+| [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_domain_applications/11_webassembly.md) |
+| [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_domain_applications/11_webassembly.md) |
+| [安全 实践：Rust 代码的防御性编程](../../06_ecosystem/07_security_and_cryptography/19_security_practices.md) | ⟹ | [Blockchain & Smart Contract Security](../../06_ecosystem/11_domain_applications/06_blockchain.md) |
+| [许可证与合规：Rust 项目的法律工程](../../06_ecosystem/11_domain_applications/20_licensing_and_compliance.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md) |
+| [许可证与合规：Rust 项目的法律工程](../../06_ecosystem/11_domain_applications/20_licensing_and_compliance.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) |
+| [Rust 游戏开发生态](../../06_ecosystem/11_domain_applications/21_game_development.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_domain_applications/11_webassembly.md) |
+| [Rust 嵌入式系统开发](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md) |
+| [Rust 数据库访问生态](../../06_ecosystem/06_data_and_distributed/23_database_access.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/15_performance_optimization.md) |
+| [Rust 数据库访问生态](../../06_ecosystem/06_data_and_distributed/23_database_access.md) | ⟹ | [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) |
+| [Rust 云原生生态](../../06_ecosystem/04_web_and_networking/24_cloud_native.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_domain_applications/11_webassembly.md) |
+| [Rust 云原生生态](../../06_ecosystem/04_web_and_networking/24_cloud_native.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) |
+| [Rust CLI 开发生态](../../06_ecosystem/05_systems_and_embedded/25_cli_development.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/15_performance_optimization.md) |
+| [Rust CLI 开发生态](../../06_ecosystem/05_systems_and_embedded/25_cli_development.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md) |
+| [Rust 游戏开发](../../06_ecosystem/11_domain_applications/26_game_development.md) | ⟹ | [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_domain_applications/11_webassembly.md) |
+| [Rust 游戏开发](../../06_ecosystem/11_domain_applications/26_game_development.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/15_performance_optimization.md) |
+| [Rust Web 框架对比与选型](../../06_ecosystem/04_web_and_networking/27_web_frameworks.md) | ⟹ | [Rust 云原生生态](../../06_ecosystem/04_web_and_networking/24_cloud_native.md) |
+| [Rust Web 框架对比与选型](../../06_ecosystem/04_web_and_networking/27_web_frameworks.md) | ⟹ | [Design Patterns](../../06_ecosystem/03_design_patterns/02_patterns.md) |
+| [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) | ⟹ | [Rust 云原生生态](../../06_ecosystem/04_web_and_networking/24_cloud_native.md) |
+| [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) | ⟹ | [安全 实践：Rust 代码的防御性编程](../../06_ecosystem/07_security_and_cryptography/19_security_practices.md) |
+| [算法与竞赛编程 (Algorithms & Competitive Programming)](../../06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md) | ⟹ | [Formal Ecosystem Tower](../../06_ecosystem/08_formal_verification/44_formal_ecosystem_tower.md) |
+| [算法与竞赛编程 (Algorithms & Competitive Programming)](../../06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/15_performance_optimization.md) |
+| [系统可组合性 (System Composability)](../../06_ecosystem/03_design_patterns/30_system_composability.md) | ⟹ | [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) |
+| [微服务架构模式 (Microservice Architecture Patterns)](../../06_ecosystem/03_design_patterns/31_microservice_patterns.md) | ⟹ | [事件驱动架构 (Event-Driven Architecture)](../../06_ecosystem/03_design_patterns/32_event_driven_architecture.md) |
+| [微服务架构模式 (Microservice Architecture Patterns)](../../06_ecosystem/03_design_patterns/31_microservice_patterns.md) | ⟹ | [Rust 云原生生态](../../06_ecosystem/04_web_and_networking/24_cloud_native.md) |
+| [事件驱动架构 (Event-Driven Architecture)](../../06_ecosystem/03_design_patterns/32_event_driven_architecture.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) |
+| [流处理生态：Rust 实现与工业系统全景](../../06_ecosystem/06_data_and_distributed/36_stream_processing_ecosystem.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) |
+| [数据库系统：Rust 在存储引擎中的语义](../../06_ecosystem/06_data_and_distributed/37_database_systems.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) |
+| [网络协议：QUIC/HTTP-3 与 Rust 实现](../../06_ecosystem/04_web_and_networking/38_network_protocols.md) | ⟹ | [流处理生态：Rust 实现与工业系统全景](../../06_ecosystem/06_data_and_distributed/36_stream_processing_ecosystem.md) |
+| [网络协议：QUIC/HTTP-3 与 Rust 实现](../../06_ecosystem/04_web_and_networking/38_network_protocols.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) |
+| [Formal Ecosystem Tower](../../06_ecosystem/08_formal_verification/44_formal_ecosystem_tower.md) | ⟹ | [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) |
+| [Formal Ecosystem Tower](../../06_ecosystem/08_formal_verification/44_formal_ecosystem_tower.md) | ⟹ | [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) |
+| [C-to-Rust Translation Ecosystem](../../06_ecosystem/05_systems_and_embedded/56_c_to_rust_translation.md) | ⟹ | [Formal Verification Tools](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md) |
+| [将 Rust 集成到现有平台](../../06_ecosystem/00_toolchain/58_platform_rust_integration.md) | ⟹ | [Rust 工业应用案例研究](../../06_ecosystem/11_domain_applications/75_industrial_case_studies.md) |
+| [将 Rust 集成到现有平台](../../06_ecosystem/00_toolchain/58_platform_rust_integration.md) | ⟹ | [Rust 操作系统内核开发](../../06_ecosystem/05_systems_and_embedded/39_os_kernel.md) |
+| [Cargo Build Scripts](../../06_ecosystem/01_cargo/59_cargo_build_scripts.md) | ⟹ | [Cargo Registry 与包发布](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md) |
+| [Cargo Build Scripts](../../06_ecosystem/01_cargo/59_cargo_build_scripts.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) |
+| [Cargo 依赖解析](../../06_ecosystem/01_cargo/60_cargo_dependency_resolution.md) | ⟹ | [Cargo Build Scripts](../../06_ecosystem/01_cargo/59_cargo_build_scripts.md) |
+| [Cargo 依赖解析](../../06_ecosystem/01_cargo/60_cargo_dependency_resolution.md) | ⟹ | [Cargo Registry 与包发布](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md) |
+| [Cargo Source Replacement 与 Vendoring](../../06_ecosystem/01_cargo/61_cargo_source_replacement.md) | ⟹ | [Cargo 认证与构建缓存](../../06_ecosystem/01_cargo/63_cargo_authentication_and_cache.md) |
+| [Cargo Source Replacement 与 Vendoring](../../06_ecosystem/01_cargo/61_cargo_source_replacement.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) |
+| [Cargo Registry 与包发布](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md) | ⟹ | [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/01_cargo/72_cargo_security_cves.md) |
+| [Cargo Registry 与包发布](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md) | ⟹ | [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) |
+| [Cargo 认证与构建缓存](../../06_ecosystem/01_cargo/63_cargo_authentication_and_cache.md) | ⟹ | [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/01_cargo/72_cargo_security_cves.md) |
+| [Cargo 认证与构建缓存](../../06_ecosystem/01_cargo/63_cargo_authentication_and_cache.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) |
+| [Cargo Manifest 参考速查](../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md) | ⟹ | [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) |
+| [Cargo Manifest 参考速查](../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md) | ⟹ | [Cargo Source Replacement 与 Vendoring](../../06_ecosystem/01_cargo/61_cargo_source_replacement.md) |
+| [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) | ⟹ | [Cargo 认证与构建缓存](../../06_ecosystem/01_cargo/63_cargo_authentication_and_cache.md) |
+| [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) |
+| [Cargo 子命令与插件生态](../../06_ecosystem/01_cargo/66_cargo_subcommands_and_plugins.md) | ⟹ | [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/01_cargo/72_cargo_security_cves.md) |
+| [Cargo 子命令与插件生态](../../06_ecosystem/01_cargo/66_cargo_subcommands_and_plugins.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) |
+| [Rust 编译器的 LLVM 后端与代码生成](../../06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md) | ⟹ | [rustc Driver、Interface 与 Stable MIR](../../06_ecosystem/00_toolchain/68_rustc_driver_and_stable_mir.md) |
+| [Rust 编译器的 LLVM 后端与代码生成](../../06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md) | ⟹ | [Rust 编译器基础设施深度解析](../../06_ecosystem/00_toolchain/47_compiler_infrastructure.md) |
+| [rustc Driver、Interface 与 Stable MIR](../../06_ecosystem/00_toolchain/68_rustc_driver_and_stable_mir.md) | ⟹ | [Rust 编译器基础设施深度解析](../../06_ecosystem/00_toolchain/47_compiler_infrastructure.md) |
+| [rustc Driver、Interface 与 Stable MIR](../../06_ecosystem/00_toolchain/68_rustc_driver_and_stable_mir.md) | ⟹ | [rustc 编译器诊断与 UI Tests](../../06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md) |
+| [rustc 编译器诊断与 UI Tests](../../06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md) | ⟹ | [rustc 自举](../../06_ecosystem/00_toolchain/70_rustc_bootstrap.md) |
+| [rustc 编译器诊断与 UI Tests](../../06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md) | ⟹ | [Rust 编译器基础设施深度解析](../../06_ecosystem/00_toolchain/47_compiler_infrastructure.md) |
+| [rustc 自举](../../06_ecosystem/00_toolchain/70_rustc_bootstrap.md) | ⟹ | [rustc 编译器测试体系](../../06_ecosystem/00_toolchain/71_compiler_testing.md) |
+| [rustc 编译器测试体系](../../06_ecosystem/00_toolchain/71_compiler_testing.md) | ⟹ | [Rust 编译器基础设施深度解析](../../06_ecosystem/00_toolchain/47_compiler_infrastructure.md) |
+| [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/01_cargo/72_cargo_security_cves.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md) |
+| [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/01_cargo/72_cargo_security_cves.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) |
+| [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) |
+| [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md) | ⟹ | [Rust 系统设计原则与国际权威对齐](../../06_ecosystem/03_design_patterns/05_system_design_principles.md) |
+| [Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md) | ⟹ | [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) |
+| [Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md) | ⟹ | [Cargo Registry 与包发布](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md) |
+| [Rust 常用开发工具](../../06_ecosystem/00_toolchain/79_development_tools.md) | ⟹ | [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) |
+| [Cargo 入门](../../06_ecosystem/01_cargo/80_cargo_getting_started.md) | ⟹ | [Cargo 工作流](../../06_ecosystem/01_cargo/81_cargo_workflow.md) |
+| [Cargo 入门](../../06_ecosystem/01_cargo/80_cargo_getting_started.md) | ⟹ | [Cargo 依赖解析](../../06_ecosystem/01_cargo/60_cargo_dependency_resolution.md) |
+| [Cargo 入门](../../06_ecosystem/01_cargo/80_cargo_getting_started.md) | ⟹ | [Cargo Manifest 参考速查](../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md) |
+| [Cargo 工作流](../../06_ecosystem/01_cargo/81_cargo_workflow.md) | ⟹ | [Cargo 指南实践](../../06_ecosystem/01_cargo/82_cargo_guide_practices.md) |
+| [Cargo 工作流](../../06_ecosystem/01_cargo/81_cargo_workflow.md) | ⟹ | [Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md) |
+| [Cargo 工作流](../../06_ecosystem/01_cargo/81_cargo_workflow.md) | ⟹ | [Cargo 依赖解析](../../06_ecosystem/01_cargo/60_cargo_dependency_resolution.md) |
+| [Cargo 指南实践](../../06_ecosystem/01_cargo/82_cargo_guide_practices.md) | ⟹ | [Cargo 配置与环境变量](../../06_ecosystem/01_cargo/83_cargo_configuration.md) |
+| [Cargo 指南实践](../../06_ecosystem/01_cargo/82_cargo_guide_practices.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) |
+| [Cargo 指南实践](../../06_ecosystem/01_cargo/82_cargo_guide_practices.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/15_performance_optimization.md) |
+| [Cargo 配置与环境变量](../../06_ecosystem/01_cargo/83_cargo_configuration.md) | ⟹ | [Cargo 命令参考](../../06_ecosystem/01_cargo/84_cargo_commands_reference.md) |
+| [Cargo 配置与环境变量](../../06_ecosystem/01_cargo/83_cargo_configuration.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md) |
+| [Cargo 命令参考](../../06_ecosystem/01_cargo/84_cargo_commands_reference.md) | ⟹ | [Cargo Manifest 目标与元数据](../../06_ecosystem/01_cargo/85_cargo_manifest_targets.md) |
+| [Cargo 命令参考](../../06_ecosystem/01_cargo/84_cargo_commands_reference.md) | ⟹ | [Cargo Registry 内部机制](../../06_ecosystem/01_cargo/86_cargo_registry_internals.md) |
+| [Cargo 命令参考](../../06_ecosystem/01_cargo/84_cargo_commands_reference.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) |
+| [Cargo Manifest 目标与元数据](../../06_ecosystem/01_cargo/85_cargo_manifest_targets.md) | ⟹ | [Cargo 命令参考](../../06_ecosystem/01_cargo/84_cargo_commands_reference.md) |
+| [Cargo Manifest 目标与元数据](../../06_ecosystem/01_cargo/85_cargo_manifest_targets.md) | ⟹ | [Cargo Build Scripts](../../06_ecosystem/01_cargo/59_cargo_build_scripts.md) |
+| [Cargo Registry 内部机制](../../06_ecosystem/01_cargo/86_cargo_registry_internals.md) | ⟹ | [Cargo 命令参考](../../06_ecosystem/01_cargo/84_cargo_commands_reference.md) |
+| [Cargo Registry 内部机制](../../06_ecosystem/01_cargo/86_cargo_registry_internals.md) | ⟹ | [安全 实践：Rust 代码的防御性编程](../../06_ecosystem/07_security_and_cryptography/19_security_practices.md) |
 
 ## L7 前沿趋势层
 
@@ -272,41 +272,41 @@
 
 | 源概念 | 关系 | 目标概念 |
 |:---|:---:|:---|
-| [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](../../07_future/07_mcdc_coverage_preview.md) | ⟹ | [Formal Methods Industrialization](../../07_future/02_formal_methods.md) |
-| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/08_safety_tags_preview.md) | ⟹ | [Formal Methods Industrialization](../../07_future/02_formal_methods.md) |
-| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/08_safety_tags_preview.md) | ⟹ | [AI × Rust：生成-验证闭环与确定性容器](../../07_future/01_ai_integration.md) |
-| [并行 前端编译预研：Rust 编译器 的多核扩展](../../07_future/09_parallel_frontend_preview.md) | ⟹ | [Language Evolution](../../07_future/03_evolution.md) |
-| [派生 CoercePointee 预研：智能指针的自动类型强制](../../07_future/10_derive_coerce_pointee_preview.md) | ⟹ | [Language Evolution](../../07_future/03_evolution.md) |
-| [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/11_const_trait_impl_preview.md) | ⟹ | [Language Evolution](../../07_future/03_evolution.md) |
-| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/12_return_type_notation_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/05_rust_version_tracking.md) |
-| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/12_return_type_notation_preview.md) | ⟹ | [Async Drop：异步资源的优雅销毁](../../07_future/18_async_drop_preview.md) |
-| [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/13_unsafe_fields_preview.md) | ⟹ | [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/08_safety_tags_preview.md) |
-| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/15_pin_ergonomics_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/05_rust_version_tracking.md) |
-| [Async Drop：异步资源的优雅销毁](../../07_future/18_async_drop_preview.md) | ⟹ | [Generator Blocks（gen）预览](../../07_future/22_gen_blocks_preview.md) |
-| [Rust 2024 Edition (1.85.0+ stable)](../../07_future/19_rust_edition_preview.md) | ⟹ | [Edition 2024 完全指南：新特性与迁移策略](../../07_future/44_edition_guide.md) |
-| [Rust 2024 Edition (1.85.0+ stable)](../../07_future/19_rust_edition_preview.md) | ⟹ | [Rust Edition 机制与迁移指南](../../07_future/23_rust_edition_guide.md) |
-| [Rust 2024 Edition (1.85.0+ stable)](../../07_future/19_rust_edition_preview.md) | ⟹ | [Language Evolution](../../07_future/03_evolution.md) |
-| [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/20_borrowsanitizer_preview.md) | ⟹ | [Formal Methods Industrialization](../../07_future/02_formal_methods.md) |
-| [Rust 在 AI 与机器学习中的新兴角色](../../07_future/21_rust_in_ai.md) | ⟹ | [AI × Rust：生成-验证闭环与确定性容器](../../07_future/01_ai_integration.md) |
-| [Rust 在 AI 与机器学习中的新兴角色](../../07_future/21_rust_in_ai.md) | ⟹ | [Language Evolution](../../07_future/03_evolution.md) |
-| [Rust Edition 机制与迁移指南](../../07_future/23_rust_edition_guide.md) | ⟹ | [Edition 2024 完全指南：新特性与迁移策略](../../07_future/44_edition_guide.md) |
-| [Rust 2027 Edition 及未来路线图](../../07_future/24_roadmap.md) | ⟹ | [Formal Methods Industrialization](../../07_future/02_formal_methods.md) |
-| [Rust 2027 Edition 及未来路线图](../../07_future/24_roadmap.md) | ⟹ | [Rust 在 AI 与机器学习中的新兴角色](../../07_future/21_rust_in_ai.md) |
-| [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/25_open_enums_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/05_rust_version_tracking.md) |
-| [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](../../07_future/28_rust_for_webassembly.md) | ⟹ | [Formal Methods Industrialization](../../07_future/02_formal_methods.md) |
-| [Ferrocene 预研：Rust 的安全关键认证之路](../../07_future/35_ferrocene_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/05_rust_version_tracking.md) |
-| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/38_cranelift_backend_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/05_rust_version_tracking.md) |
-| [Ergonomic Ref-Counting 预研：人机工学引用计数](../../07_future/40_ergonomic_ref_counting_preview.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/43_rust_for_linux.md) |
-| [Rust 语言规范预研：从参考文档到形式化规范](../../07_future/41_rust_specification_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/05_rust_version_tracking.md) |
-| [Rust for Linux ：操作系统内核中的内存安全](../../07_future/43_rust_for_linux.md) | ⟹ | [Language Evolution](../../07_future/03_evolution.md) |
-| [Edition 2024 完全指南：新特性与迁移策略](../../07_future/44_edition_guide.md) | ⟹ | [Language Evolution](../../07_future/03_evolution.md) |
-| [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/48_aarch64_sve_sme_preview.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/43_rust_for_linux.md) |
-| [Rust 的发布流程与 Nightly Rust](../../07_future/50_nightly_rust.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/05_rust_version_tracking.md) |
-| [Rust 的发布流程与 Nightly Rust](../../07_future/50_nightly_rust.md) | ⟹ | [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/rust_1_97_preview.md) |
-| [BorrowSanitizer：动态别名规则验证工具](../../07_future/borrow_sanitizer.md) | ⟹ | [Formal Methods Industrialization](../../07_future/02_formal_methods.md) |
-| [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/rust_1_97_preview.md) | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) |
-| [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/rust_1_97_preview.md) | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) |
-| [Rust 1.98+ 前沿特性预览](../../07_future/rust_1_98_preview.md) | ⟹ | [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/rust_1_97_preview.md) |
+| [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](../../07_future/03_preview_features/07_mcdc_coverage_preview.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) |
+| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/08_safety_tags_preview.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) |
+| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/08_safety_tags_preview.md) | ⟹ | [AI × Rust：生成-验证闭环与确定性容器](../../07_future/04_research_and_experimental/01_ai_integration.md) |
+| [并行 前端编译预研：Rust 编译器 的多核扩展](../../07_future/03_preview_features/09_parallel_frontend_preview.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) |
+| [派生 CoercePointee 预研：智能指针的自动类型强制](../../07_future/03_preview_features/10_derive_coerce_pointee_preview.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) |
+| [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/03_preview_features/11_const_trait_impl_preview.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) |
+| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/03_preview_features/12_return_type_notation_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) |
+| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/03_preview_features/12_return_type_notation_preview.md) | ⟹ | [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/18_async_drop_preview.md) |
+| [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/03_preview_features/13_unsafe_fields_preview.md) | ⟹ | [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/08_safety_tags_preview.md) |
+| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/03_preview_features/15_pin_ergonomics_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) |
+| [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/18_async_drop_preview.md) | ⟹ | [Generator Blocks（gen）预览](../../07_future/03_preview_features/22_gen_blocks_preview.md) |
+| [Rust 2024 Edition (1.85.0+ stable)](../../07_future/01_edition_roadmap/19_rust_edition_preview.md) | ⟹ | [Edition 2024 完全指南：新特性与迁移策略](../../07_future/01_edition_roadmap/44_edition_guide.md) |
+| [Rust 2024 Edition (1.85.0+ stable)](../../07_future/01_edition_roadmap/19_rust_edition_preview.md) | ⟹ | [Rust Edition 机制与迁移指南](../../07_future/01_edition_roadmap/23_rust_edition_guide.md) |
+| [Rust 2024 Edition (1.85.0+ stable)](../../07_future/01_edition_roadmap/19_rust_edition_preview.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) |
+| [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/03_preview_features/20_borrowsanitizer_preview.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) |
+| [Rust 在 AI 与机器学习中的新兴角色](../../07_future/04_research_and_experimental/21_rust_in_ai.md) | ⟹ | [AI × Rust：生成-验证闭环与确定性容器](../../07_future/04_research_and_experimental/01_ai_integration.md) |
+| [Rust 在 AI 与机器学习中的新兴角色](../../07_future/04_research_and_experimental/21_rust_in_ai.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) |
+| [Rust Edition 机制与迁移指南](../../07_future/01_edition_roadmap/23_rust_edition_guide.md) | ⟹ | [Edition 2024 完全指南：新特性与迁移策略](../../07_future/01_edition_roadmap/44_edition_guide.md) |
+| [Rust 2027 Edition 及未来路线图](../../07_future/05_roadmaps/24_roadmap.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) |
+| [Rust 2027 Edition 及未来路线图](../../07_future/05_roadmaps/24_roadmap.md) | ⟹ | [Rust 在 AI 与机器学习中的新兴角色](../../07_future/04_research_and_experimental/21_rust_in_ai.md) |
+| [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/25_open_enums_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) |
+| [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](../../07_future/04_research_and_experimental/28_rust_for_webassembly.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) |
+| [Ferrocene 预研：Rust 的安全关键认证之路](../../07_future/03_preview_features/35_ferrocene_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) |
+| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/03_preview_features/38_cranelift_backend_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) |
+| [Ergonomic Ref-Counting 预研：人机工学引用计数](../../07_future/03_preview_features/40_ergonomic_ref_counting_preview.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/43_rust_for_linux.md) |
+| [Rust 语言规范预研：从参考文档到形式化规范](../../07_future/03_preview_features/41_rust_specification_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) |
+| [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/43_rust_for_linux.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) |
+| [Edition 2024 完全指南：新特性与迁移策略](../../07_future/01_edition_roadmap/44_edition_guide.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) |
+| [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/03_preview_features/48_aarch64_sve_sme_preview.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/43_rust_for_linux.md) |
+| [Rust 的发布流程与 Nightly Rust](../../07_future/00_version_tracking/50_nightly_rust.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) |
+| [Rust 的发布流程与 Nightly Rust](../../07_future/00_version_tracking/50_nightly_rust.md) | ⟹ | [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/00_version_tracking/rust_1_97_preview.md) |
+| [BorrowSanitizer：动态别名规则验证工具](../../07_future/02_stabilized_features/borrow_sanitizer.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) |
+| [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/00_version_tracking/rust_1_97_preview.md) | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/00_version_tracking/rust_1_98_preview.md) |
+| [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/00_version_tracking/rust_1_97_preview.md) | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/00_version_tracking/rust_1_98_preview.md) |
+| [Rust 1.98+ 前沿特性预览](../../07_future/00_version_tracking/rust_1_98_preview.md) | ⟹ | [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/00_version_tracking/rust_1_97_preview.md) |
 
 ---
 

@@ -534,8 +534,8 @@ c2rust transpile compile_commands.json
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
-- [AI 集成 (concept)](../../concept/07_future/01_ai_integration.md) — Rust × AI 生成-验证闭环与确定性容器
-- [Rust 在 AI 中的角色 (concept)](../../concept/07_future/21_rust_in_ai.md) — Rust ML/推理基础设施生态分析
+- [AI 集成 (concept)](../../concept/07_future/04_research_and_experimental/01_ai_integration.md) — Rust × AI 生成-验证闭环与确定性容器
+- [Rust 在 AI 中的角色 (concept)](../../concept/07_future/04_research_and_experimental/21_rust_in_ai.md) — Rust ML/推理基础设施生态分析
 - [形式化验证工具链 (concept)](../../concept/04_formal/04_model_checking/05_verification_toolchain.md) — 迁移后代码的验证工具链选型
 
 ---

@@ -3,7 +3,7 @@
 > **EN**: Compiler Internals
 > **Summary**: Rust 编译器内部原理 Compiler Internals.
 > **注意**: 本主题内容已整合到 `concept/06_ecosystem/45_compiler_internals.md`。
-> 请以 [concept/06_ecosystem/45_compiler_internals.md](../../concept/06_ecosystem/45_compiler_internals.md) 为权威来源。
+> 请以 [concept/06_ecosystem/45_compiler_internals.md](../../concept/06_ecosystem/00_toolchain/45_compiler_internals.md) 为权威来源。
 
 ---
 

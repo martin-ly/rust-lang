@@ -19,7 +19,7 @@
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/04_type_system.md) · [Control Flow](../04_control_flow/07_control_flow.md)
 > **后置概念**: [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) ·
 > [Panic](../../03_advanced/02_unsafe/03_unsafe.md) ·
-> [Logging](../../06_ecosystem/13_logging_observability.md)
+> [Logging](../../06_ecosystem/00_toolchain/13_logging_observability.md)
 
 ---
 
@@ -611,7 +611,7 @@ graph TD
 - [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) — 进阶错误处理
 - [Type System](../02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Trait](../../02_intermediate/00_traits/01_traits.md) — Trait
-- [Logging](../../06_ecosystem/13_logging_observability.md) — 日志
+- [Logging](../../06_ecosystem/00_toolchain/13_logging_observability.md) — 日志
 
 ---
 

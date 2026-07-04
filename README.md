@@ -152,18 +152,18 @@ cargo test --workspace
 
 | 层级 | 文件 | 核心内容 |
 |:---|:---|:---|
-| L5 | [`01_rust_vs_cpp.md`](concept/05_comparative/01_rust_vs_cpp.md) | RAII语义差异、性能对比 |
-| L5 | [`02_rust_vs_go.md`](concept/05_comparative/02_rust_vs_go.md) | 并发模型、错误处理、GC对比 |
-| L5 | [`03_paradigm_matrix.md`](concept/05_comparative/03_paradigm_matrix.md) | 多语言范式谱系 |
-| L5 | [`04_safety_boundaries.md`](concept/05_comparative/04_safety_boundaries.md) | unsafe边界、供应链安全 |
-| L6 | [`01_toolchain.md`](concept/06_ecosystem/01_toolchain.md) | Cargo、Workspace、Features |
-| L6 | [`02_patterns.md`](concept/06_ecosystem/02_patterns.md) | 类型状态、Builder、Newtype |
-| L6 | [`03_core_crates.md`](concept/06_ecosystem/03_core_crates.md) | serde/tokio/rayon等核心crate |
-| L6 | [`04_application_domains.md`](concept/06_ecosystem/04_application_domains.md) | WASM/嵌入式/CLI/游戏 |
-| L7 | [`01_ai_integration.md`](concept/07_future/01_ai_integration.md) | AI辅助编程、RL on编译错误 |
-| L7 | [`02_formal_methods.md`](concept/07_future/02_formal_methods.md) | Kani/Miri/CI集成 |
-| L7 | [`03_evolution.md`](concept/07_future/03_evolution.md) | Edition系统、Effects System |
-| L7 | [`rust_1_97_preview.md`](concept/07_future/rust_1_97_preview.md) | 1.97 前沿特性跟踪 |
+| L5 | [`01_rust_vs_cpp.md`](concept/05_comparative/01_systems_languages/01_rust_vs_cpp.md) | RAII语义差异、性能对比 |
+| L5 | [`02_rust_vs_go.md`](concept/05_comparative/01_systems_languages/02_rust_vs_go.md) | 并发模型、错误处理、GC对比 |
+| L5 | [`03_paradigm_matrix.md`](concept/05_comparative/00_paradigms/03_paradigm_matrix.md) | 多语言范式谱系 |
+| L5 | [`04_safety_boundaries.md`](concept/05_comparative/03_domain_comparisons/04_safety_boundaries.md) | unsafe边界、供应链安全 |
+| L6 | [`01_toolchain.md`](concept/06_ecosystem/00_toolchain/01_toolchain.md) | Cargo、Workspace、Features |
+| L6 | [`02_patterns.md`](concept/06_ecosystem/03_design_patterns/02_patterns.md) | 类型状态、Builder、Newtype |
+| L6 | [`03_core_crates.md`](concept/06_ecosystem/02_core_crates/03_core_crates.md) | serde/tokio/rayon等核心crate |
+| L6 | [`04_application_domains.md`](concept/06_ecosystem/06_data_and_distributed/04_application_domains.md) | WASM/嵌入式/CLI/游戏 |
+| L7 | [`01_ai_integration.md`](concept/07_future/04_research_and_experimental/01_ai_integration.md) | AI辅助编程、RL on编译错误 |
+| L7 | [`02_formal_methods.md`](concept/07_future/04_research_and_experimental/02_formal_methods.md) | Kani/Miri/CI集成 |
+| L7 | [`03_evolution.md`](concept/07_future/04_research_and_experimental/03_evolution.md) | Edition系统、Effects System |
+| L7 | [`rust_1_97_preview.md`](concept/07_future/00_version_tracking/rust_1_97_preview.md) | 1.97 前沿特性跟踪 |
 
 ---
 

@@ -285,7 +285,7 @@ graph TD
 - [定理推理森林](theorem_inference_forest.md)
 - [L3 Unsafe](../../03_advanced/02_unsafe/03_unsafe.md)
 - [L4 RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md)
-- [L6 WASI](../../06_ecosystem/08_wasi.md)
+- [L6 WASI](../../06_ecosystem/05_systems_and_embedded/08_wasi.md)
 
 ---
 

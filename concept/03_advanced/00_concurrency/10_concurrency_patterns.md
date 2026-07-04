@@ -11,7 +11,7 @@
 > **双维定位**: C×Ana — 分析并发模式的设计意图
 > **定位**: 深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权（Ownership）系统如何为并发安全（Concurrency Safety）提供编译期保证。
 > **前置概念**: [Concurrency](01_concurrency.md) · [Async](../01_async/02_async.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Closure Types](../../02_intermediate/04_types_and_conversions/07_closure_types.md)
-> **后置概念**: [Distributed Systems](../../06_ecosystem/18_distributed_systems.md) · [Lockfree](01_concurrency.md)
+> **后置概念**: [Distributed Systems](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) · [Lockfree](01_concurrency.md)
 
 ---
 
@@ -644,7 +644,7 @@ fn fixed() {
 
 - [Concurrency](01_concurrency.md) — 并发基础
 - [Async](../01_async/02_async.md) — 异步编程
-- [Distributed Systems](../../06_ecosystem/18_distributed_systems.md) — 分布式系统
+- [Distributed Systems](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) — 分布式系统
 
 ---
 

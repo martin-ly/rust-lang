@@ -14,7 +14,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入探讨 Rust 迭代器（Iterator）模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Generics](../01_generics/02_generics.md) · [Closures](../../01_foundation/00_start/15_closure_basics.md)
-> **后置概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Performance](../../06_ecosystem/15_performance_optimization.md)
+> **后置概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Performance](../../06_ecosystem/10_performance/15_performance_optimization.md)
 
 ---
 
@@ -822,7 +822,7 @@ fn main() {
 - [Zero Cost](../../01_foundation/00_start/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
 - [Async](../../03_advanced/01_async/02_async.md) — 异步（Async）编程
 - [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) — 并发
-- [Performance](../../06_ecosystem/15_performance_optimization.md) — 性能优化
+- [Performance](../../06_ecosystem/10_performance/15_performance_optimization.md) — 性能优化
 
 ---
 

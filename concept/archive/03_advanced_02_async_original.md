@@ -2717,8 +2717,8 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | Traits | [](../02_intermediate/00_traits/01_traits.md) | Future trait 定义 |
 | 并发 | [](../03_advanced/00_concurrency/01_concurrency.md) | 并行与并发对比 |
 | Unsafe | [](../03_advanced/02_unsafe/03_unsafe.md) | Pin 内部实现 |
-| 形式化方法 | [](../07_future/02_formal_methods.md) | 异步协议验证 |
-| Rust 版本特性演进 | [](../07_future/05_rust_version_tracking.md) | `AsyncFn`、`gen` blocks 等异步语义扩展 |
+| 形式化方法 | [](../07_future/04_research_and_experimental/02_formal_methods.md) | 异步协议验证 |
+| Rust 版本特性演进 | [](../07_future/00_version_tracking/05_rust_version_tracking.md) | `AsyncFn`、`gen` blocks 等异步语义扩展 |
 | 泛型（Generics）与类型系统 | [](../02_intermediate/01_generics/02_generics.md) | `use<..>` precise capturing、GATs |
 | Unsafe 权限分离 | [](../03_advanced/02_unsafe/03_unsafe.md) | `unsafe_op_in_unsafe_fn` 的权限模型 |
 
@@ -2731,7 +2731,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 >
 > 异步编程不是 Rust 的发明——JavaScript 的 Promise、C# 的 async/await、Go 的 goroutine 都解决了类似问题。但 Rust 的 `Future` 是零成本的：编译后的状态机没有运行时调度器开销，这与 Go 的 goroutine（M:N 调度）形成鲜明对比。
 >
-> 对比分析见 [`../05_comparative/02_rust_vs_go.md`](../05_comparative/02_rust_vs_go.md)（并发模型对比）。
+> 对比分析见 [`../05_comparative/02_rust_vs_go.md`](../05_comparative/01_systems_languages/02_rust_vs_go.md)（并发模型对比）。
 ---
 
 ---

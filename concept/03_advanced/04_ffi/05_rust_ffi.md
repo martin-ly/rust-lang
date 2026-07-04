@@ -11,7 +11,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。
 > **前置概念**: [Unsafe](../02_unsafe/03_unsafe.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md)
-> **后置概念**: [Application Domains](../../06_ecosystem/04_application_domains.md)
+> **后置概念**: [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md)
 
 ---
 
@@ -534,7 +534,7 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 - [Unsafe](../02_unsafe/03_unsafe.md) — unsafe Rust 与内存安全（Memory Safety）
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — Rust 类型系统基础
 - [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) — 内存管理模型
-- [Application Domains](../../06_ecosystem/04_application_domains.md) — 应用领域分析
+- [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) — 应用领域分析
 
 ---
 

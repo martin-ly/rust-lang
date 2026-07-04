@@ -10,8 +10,8 @@
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 Rust Edition 指南
 > **定位**: 深入探讨 Rust 的 **Edition 机制**——从 2015 到 2024，分析 Edition 如何实现语言演进而不破坏兼容性，以及迁移策略。
-> **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Macros](../03_advanced/03_proc_macros/04_macros.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
-> **后置概念**: [Evolution](../07_future/03_evolution.md) · [Version Tracking](../07_future/05_rust_version_tracking.md)
+> **前置概念**: [Toolchain](../06_ecosystem/00_toolchain/01_toolchain.md) · [Macros](../03_advanced/03_proc_macros/04_macros.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
+> **后置概念**: [Evolution](../07_future/04_research_and_experimental/03_evolution.md) · [Version Tracking](../07_future/00_version_tracking/05_rust_version_tracking.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -386,9 +386,9 @@ fn main() {
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-- [Toolchain](../06_ecosystem/01_toolchain.md) — 工具链
-- [Evolution](../07_future/03_evolution.md) — 语言演进
-- [Version Tracking](../07_future/05_rust_version_tracking.md) — 版本跟踪
+- [Toolchain](../06_ecosystem/00_toolchain/01_toolchain.md) — 工具链
+- [Evolution](../07_future/04_research_and_experimental/03_evolution.md) — 语言演进
+- [Version Tracking](../07_future/00_version_tracking/05_rust_version_tracking.md) — 版本跟踪
 - [Macros](../03_advanced/03_proc_macros/04_macros.md) — 宏（Macro）系统
 
 ---

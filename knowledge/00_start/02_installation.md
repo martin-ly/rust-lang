@@ -2,7 +2,7 @@
 
 > **EN**: Installation
 > **Summary**: 安装 Rust Installation.
-> **相关概念**: [工具链](../../concept/06_ecosystem/01_toolchain.md)
+> **相关概念**: [工具链](../../concept/06_ecosystem/00_toolchain/01_toolchain.md)
 > **Bloom 层级**: 理解
 > **版本**: Rust 1.96.1+
 > **预计时间**: 15-30 分钟

@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价并发设计的安全性
 > **前置依赖**: [L1 所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [L1 借用（Borrowing）](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md)
-> **后置延伸**: [L4 RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) · [L6 Tokio 生态](../../06_ecosystem/03_core_crates.md) · [L7 AI 并发](../../07_future/01_ai_integration.md)
+> **后置延伸**: [L4 RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) · [L6 Tokio 生态](../../06_ecosystem/02_core_crates/03_core_crates.md) · [L7 AI 并发](../../07_future/04_research_and_experimental/01_ai_integration.md)
 > **跨层映射**: L3→L4 Send/Sync ↔ 分离逻辑资源分片 | L3→L6 并发模式 → 工程实现
 > **定理链编号**: T-040 Send 类型安全 → T-041 Sync 数据竞争自由 → T-042 死锁不可判定但可检测
 > **层级**: L3 高级概念

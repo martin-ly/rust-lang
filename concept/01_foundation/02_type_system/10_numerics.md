@@ -537,7 +537,7 @@ graph TD
 - [Type System](04_type_system.md) — 类型系统（Type System）
 - [Zero Cost Abstractions](../00_start/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
 - [Collections](../05_collections/08_collections.md) — 集合类型
-- [Performance](../../06_ecosystem/15_performance_optimization.md) — 性能优化
+- [Performance](../../06_ecosystem/10_performance/15_performance_optimization.md) — 性能优化
 - [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) — 错误处理（Error Handling）
 
 ---

@@ -39,12 +39,12 @@
 
 | 文件 | 概念 | 核心内容 | 状态 |
 |:---|:---|:---|:---|
-| [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | Rust vs C++ | 形式系统模型 vs 机制工程模型、多维矩阵、决策树、AI 时代分析 | ✅ v1.0 |
-| [`05_comparative/02_rust_vs_go.md`](../05_comparative/02_rust_vs_go.md) | Rust vs Go | CSP vs 所有权（Ownership）并发、服务编排语义、确定性对比 | ✅ v1.0 |
-| [`05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) | 范式矩阵 | 多语言形式化对比、类型系统（Type System）谱系、设计哲学 | ✅ v1.0 |
-| [`05_comparative/06_rust_vs_java.md`](../05_comparative/06_rust_vs_java.md) | Rust vs Java | 所有权（Ownership） vs GC、并发模型、运行时（Runtime）架构、场景矩阵 | ✅ v1.0 |
+| [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | Rust vs C++ | 形式系统模型 vs 机制工程模型、多维矩阵、决策树、AI 时代分析 | ✅ v1.0 |
+| [`05_comparative/02_rust_vs_go.md`](../05_comparative/01_systems_languages/02_rust_vs_go.md) | Rust vs Go | CSP vs 所有权（Ownership）并发、服务编排语义、确定性对比 | ✅ v1.0 |
+| [`05_comparative/03_paradigm_matrix.md`](../05_comparative/00_paradigms/03_paradigm_matrix.md) | 范式矩阵 | 多语言形式化对比、类型系统（Type System）谱系、设计哲学 | ✅ v1.0 |
+| [`05_comparative/06_rust_vs_java.md`](../05_comparative/02_managed_languages/06_rust_vs_java.md) | Rust vs Java | 所有权（Ownership） vs GC、并发模型、运行时（Runtime）架构、场景矩阵 | ✅ v1.0 |
 | `05_comparative/07_rust_vs_python.md` | Rust vs Python | 静态 vs 动态类型、所有权（Ownership） vs GC、 fearless vs GIL、元编程 | ✅ v1.0 |
-| [`05_comparative/08_rust_vs_javascript.md`](../05_comparative/08_rust_vs_javascript.md) | Rust vs JavaScript | 编译 vs 解释、所有权（Ownership） vs GC、Future vs Promise、WASM | ✅ v1.0 |
+| [`05_comparative/08_rust_vs_javascript.md`](../05_comparative/02_managed_languages/08_rust_vs_javascript.md) | Rust vs JavaScript | 编译 vs 解释、所有权（Ownership） vs GC、Future vs Promise、WASM | ✅ v1.0 |
 
 ---
 

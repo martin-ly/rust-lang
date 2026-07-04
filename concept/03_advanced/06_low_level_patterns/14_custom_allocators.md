@@ -8,7 +8,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入探讨 Rust 的**自定义分配器**机制——从 `GlobalAlloc` Trait 到 `allocator_api` 不稳定特性，分析内存布局对齐、分配策略与性能优化。
 > **前置概念**: [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Unsafe Rust](../02_unsafe/03_unsafe.md)
-> **后置概念**: [Performance Optimization](../../06_ecosystem/15_performance_optimization.md) · [Embedded](../../06_ecosystem/04_application_domains.md)
+> **后置概念**: [Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md) · [Embedded](../../06_ecosystem/06_data_and_distributed/04_application_domains.md)
 
 ---
 
@@ -490,7 +490,7 @@ fn main() {
 - [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) — 内存管理基础
 - [Unsafe Rust](../02_unsafe/03_unsafe.md) — unsafe Rust 基础
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
-- [Performance Optimization](../../06_ecosystem/15_performance_optimization.md) — 性能优化
+- [Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md) — 性能优化
 
 ---
 

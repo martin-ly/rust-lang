@@ -13,7 +13,7 @@
 > **双维定位**: P×Eva — 评估原子操作（Atomic Operations）内存序的选型
 > **定位**: 深入分析 Rust **原子类型（Atomic）**和**内存排序（Memory Ordering [来源: [Atomic Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]）**——从基本的 load/store 到 compare-and-swap 和释放-获取语义，揭示无锁编程中硬件内存模型的精确控制。
 > **前置概念**: [Concurrency](01_concurrency.md) · [Unsafe](../02_unsafe/03_unsafe.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)
-> **后置概念**: [Lockfree Data Structures](https://en.wikipedia.org/wiki/Non-blocking_algorithm) · [Distributed Systems](../../06_ecosystem/18_distributed_systems.md)
+> **后置概念**: [Lockfree Data Structures](https://en.wikipedia.org/wiki/Non-blocking_algorithm) · [Distributed Systems](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md)
 
 ---
 
@@ -688,7 +688,7 @@ fn fixed() {
 - [Concurrency](01_concurrency.md) — 并发基础
 - [Unsafe](../02_unsafe/03_unsafe.md) — 不安全代码
 - [Concurrency Patterns](10_concurrency_patterns.md) — 并发模式
-- [Distributed Systems](../../06_ecosystem/18_distributed_systems.md) — 分布式系统
+- [Distributed Systems](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) — 分布式系统
 
 ---
 

@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价形式化模型的完备性
 > **前置依赖**: [L1 所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [L1 借用（Borrowing）](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · L4 线性逻辑
-> **后置延伸**: [L4 RustBelt](../02_separation_logic/04_rustbelt.md) · [L7 形式化方法](../../07_future/02_formal_methods.md) · [L3 Unsafe](../../03_advanced/02_unsafe/03_unsafe.md)
+> **后置延伸**: [L4 RustBelt](../02_separation_logic/04_rustbelt.md) · [L7 形式化方法](../../07_future/04_research_and_experimental/02_formal_methods.md) · [L3 Unsafe](../../03_advanced/02_unsafe/03_unsafe.md)
 > **跨层映射**: L4↔L1 形式化 ↔ 直觉 双射 | L4→L3 Unsafe 边界 ↔ 公理扩展
 > **定理链编号**: T-100 借用（Borrowing）检查可判定性 → T-101 所有权（Ownership）类型 soundness → T-102 内存安全（Memory Safety）完备性
 > **ROD 迁移备注**: 本文档是所有权（Ownership）形式化的主入口。关于借用（Borrowing）检查的**可判定性**与**复杂度**，详见 [Borrow Checking Decidability](28_borrow_checking_decidability.md)；关于 Aeneas 符号化语义对借用规则的自动化证明，详见 [Aeneas Symbolic Semantics](../03_operational_semantics/30_aeneas_symbolic_semantics.md)。
@@ -1158,7 +1158,7 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 > Tree Borrows 成为 Miri 默认意味着：**社区共识的 UB 定义已正式从 Stacked Borrows 的严格栈模型转向 Tree Borrows 的宽松树模型**。
 > 这一转变不会影响 RustBelt 的安全性证明，因为任何 TB 接受的程序必然满足 Iris 的权限约束（TB ⟹ Iris 权限模型），且 TB 比 SB 接受更多合法程序（SB ⟹ TB 接受集 ⊆ TB 接受集）。
 > **跨层映射更新**:
-> `L3::Miri` 默认模型变更 ↔ [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md) §5.6 Tree Borrows 演进 · [`../07_future/05_rust_version_tracking.md`](../../07_future/05_rust_version_tracking.md) §3 前沿特性跟踪
+> `L3::Miri` 默认模型变更 ↔ [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md) §5.6 Tree Borrows 演进 · [`../07_future/05_rust_version_tracking.md`](../../07_future/00_version_tracking/05_rust_version_tracking.md) §3 前沿特性跟踪
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/inter_layer_map.md) §4.2 "别名模型与 Miri 检测"
 > **过渡: L4 → L3**
 > 形式化的别名模型（SB/TB）和所有权逻辑（Oxide）是 Rust 编译器优化假设的理论根基，但程序员日常接触的只是 `&T`/`&mut T` 的语法糖。
@@ -1167,10 +1167,10 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 > **过渡: L4 → L5**
 > Rust 的所有权形式化是独特的——C++ 没有系统性的所有权逻辑，Go 依赖 GC 消除所有权问题，Haskell 用纯函数隔离副作用。
 > 理解这些差异需要在形式化层面比较 "语言如何表达资源的生命周期"。
-> 对比视角见 [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_rust_vs_cpp.md)（RAII 语义差异）与 [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/03_paradigm_matrix.md)（类型系统谱系）。
+> 对比视角见 [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)（RAII 语义差异）与 [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/03_paradigm_matrix.md)（类型系统谱系）。
 > **过渡: L4 → L7**
 > 当前的形式化工具（RustBelt、Kani、Miri）覆盖了 Rust 安全子集的大部分，但 Polonius 的 loan-based 语义、Tree Borrows 的别名模型、以及 Effects System 的类型效应都还在演进中。形式化不是终点，而是语言设计迭代的基础。
-> 演进方向见 [`../07_future/02_formal_methods.md`](../../07_future/02_formal_methods.md)（形式化方法工具链）与 [`../07_future/03_evolution.md`](../../07_future/03_evolution.md)（语言演进路线图）。
+> 演进方向见 [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化方法工具链）与 [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)（语言演进路线图）。
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

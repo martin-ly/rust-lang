@@ -474,7 +474,7 @@ Rust 的所有权系统本身可以看作一种轻量级的**分离逻辑（Sepa
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- **[`concept/06_ecosystem/18_distributed_systems.md`](../../../concept/06_ecosystem/18_distributed_systems.md)** — Actor 模型、分布式一致性协议与工作流引擎架构；WCP 在分布式场景下的扩展讨论。当工作流模式从单机扩展到分布式环境时，Actor 模型（如 `actix`、`tokio::sync::mpsc` 的 actor 风格使用）为 WCP12-WCP15 多实例模式提供了天然的分布式映射。
+- **[`concept/06_ecosystem/18_distributed_systems.md`](../../../concept/06_ecosystem/04_web_and_networking/18_distributed_systems.md)** — Actor 模型、分布式一致性协议与工作流引擎架构；WCP 在分布式场景下的扩展讨论。当工作流模式从单机扩展到分布式环境时，Actor 模型（如 `actix`、`tokio::sync::mpsc` 的 actor 风格使用）为 WCP12-WCP15 多实例模式提供了天然的分布式映射。
 
 - **[`concept/03_advanced/01_concurrency.md`](../../../concept/03_advanced/00_concurrency/01_concurrency.md)** — Rust 并发基础：`Send`/`Sync`、`Mutex`、`RwLock`、`Condvar`、内存模型；理解 WCP3/WCP7/WCP9 等同步模式的前提知识。该文档详细解释了为什么 Rust 的 `Sync` trait 是 WCP 共享状态实现的安全基石。
 

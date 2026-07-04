@@ -4,7 +4,7 @@
 >
 > - [gRPC 微服务指南](../../../../content/ecosystem/web_frameworks/grpc_microservices_guide.md)
 > - [网络编程](../../../../concept/03_advanced/06_low_level_patterns/18_network_programming.md)
-> - [网络协议](../../../../concept/06_ecosystem/38_network_protocols.md)
+> - [网络协议](../../../../concept/06_ecosystem/04_web_and_networking/38_network_protocols.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 

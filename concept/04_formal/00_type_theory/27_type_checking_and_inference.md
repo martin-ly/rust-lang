@@ -11,7 +11,7 @@
 > **双维定位**: F×Type — 类型系统（Type System）与形式化方法
 > **定位**: 把“编译器如何知道 `Vec<&str>` 并对未标注类型做推断”还原为约束生成、统一与区域求解的完整算法。
 > **前置概念**: [Name Resolution and HIR](../05_rustc_internals/35_name_resolution_and_hir.md) · [Trait Solver in rustc](../05_rustc_internals/26_trait_solver_in_rustc.md) · [Type Inference](08_type_inference.md)
-> **后置概念**: [NLL 与 Polonius](../../03_advanced/02_unsafe/08_nll_and_polonius.md) · [LLVM Backend and Codegen](../../06_ecosystem/67_llvm_backend_and_codegen.md)
+> **后置概念**: [NLL 与 Polonius](../../03_advanced/02_unsafe/08_nll_and_polonius.md) · [LLVM Backend and Codegen](../../06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md)
 
 ---
 

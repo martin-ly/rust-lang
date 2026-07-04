@@ -2,8 +2,8 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [CLI 开发](../../../../concept/06_ecosystem/25_cli_development.md)
-> - [核心 Crate 概览](../../../../concept/06_ecosystem/03_core_crates.md)
+> - [CLI 开发](../../../../concept/06_ecosystem/05_systems_and_embedded/25_cli_development.md)
+> - [核心 Crate 概览](../../../../concept/06_ecosystem/02_core_crates/03_core_crates.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 

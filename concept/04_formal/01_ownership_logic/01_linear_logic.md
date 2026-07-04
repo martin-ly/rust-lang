@@ -645,8 +645,8 @@ fn session_demo() {
 | 类型论 | [`./02_type_theory.md`](../00_type_theory/02_type_theory.md) | 形式化同层；TAPL 引用（Reference）交叉 |
 | 所有权形式化 | [`./03_ownership_formal.md`](03_ownership_formal.md) | 线性逻辑的扩展；RustBelt 细节 |
 | RustBelt | [`./04_rustbelt.md`](../02_separation_logic/04_rustbelt.md) | 验证实现；Iris 分离逻辑 |
-| Rust vs C++ | [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_rust_vs_cpp.md) | 对比映射；所有权语义差异 |
-| 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../../05_comparative/04_safety_boundaries.md) | 边界分析；unsafe 逃逸口 |
+| Rust vs C++ | [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | 对比映射；所有权语义差异 |
+| 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md) | 边界分析；unsafe 逃逸口 |
 
 > **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
@@ -905,7 +905,7 @@ Rust 所有权系统（仿射变体）:
 > 工程对应见 [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md)（unsafe 作为线性规则的逃逸门）与 [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md)（并发作为线性资源的交互）。
 > **过渡: L4 → L5**
 > 线性逻辑在不同语言中有不同实现：Rust 用所有权、Haskell 用 LinearTypes 扩展、ATS 用依赖类型 + 线性类型。比较这些实现能揭示 "线性逻辑是必要不充分条件"——线性类型保证内存安全（Memory Safety），但内存安全不需要完整的线性类型系统。
-> 对比视角见 [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/03_paradigm_matrix.md)（类型系统谱系）。
+> 对比视角见 [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/03_paradigm_matrix.md)（类型系统谱系）。
 
 ---
 

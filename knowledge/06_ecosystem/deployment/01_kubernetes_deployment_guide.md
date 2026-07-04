@@ -2,7 +2,7 @@
 
 > **EN**: Kubernetes Deployment Guide
 > **Summary**: Kubernetes 部署完整指南 Kubernetes Deployment Guide.
-> **相关概念**: [云原生](../../../concept/06_ecosystem/24_cloud_native.md)
+> **相关概念**: [云原生](../../../concept/06_ecosystem/04_web_and_networking/24_cloud_native.md)
 > **Bloom 层级**: 理解
 > **适用范围**: 生产环境
 > **Kubernetes 版本**: 1.28+

@@ -17,7 +17,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时（Runtime）下的 TCP/UDP 异步（Async） IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从"怎么写"到"为什么这样设计"的完整认知框架。
 > **前置概念**: [Async/Await](../01_async/02_async.md) · [Concurrency](../00_concurrency/01_concurrency.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
-> **后置概念**: [Web Frameworks](../../06_ecosystem/27_web_frameworks.md) · [Lock-free](../00_concurrency/16_lock_free.md)
+> **后置概念**: [Web Frameworks](../../06_ecosystem/04_web_and_networking/27_web_frameworks.md) · [Lock-free](../00_concurrency/16_lock_free.md)
 
 ---
 
@@ -739,7 +739,7 @@ graph LR
 
 - [Async/Await](../01_async/02_async.md) — 异步编程基础
 - [Concurrency](../00_concurrency/01_concurrency.md) — 并发模型与同步原语
-- [Web Frameworks](../../06_ecosystem/27_web_frameworks.md) — Web 框架选型
+- [Web Frameworks](../../06_ecosystem/04_web_and_networking/27_web_frameworks.md) — Web 框架选型
 - [Lock-free](../00_concurrency/16_lock_free.md) — 无锁并发数据结构
 - [Unsafe Rust](../02_unsafe/03_unsafe.md) — 底层内存操作
 - [Pin/Unpin](../01_async/06_pin_unpin.md) — 自引用（Reference）类型安全

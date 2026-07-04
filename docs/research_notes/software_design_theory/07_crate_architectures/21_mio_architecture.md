@@ -531,7 +531,7 @@ graph BT
 - [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 - [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
 - [网络编程](../../../../concept/03_advanced/06_low_level_patterns/18_network_programming.md)
-- [系统可组合性设计模式](../../../../concept/06_ecosystem/30_system_composability.md)
+- [系统可组合性设计模式](../../../../concept/06_ecosystem/03_design_patterns/30_system_composability.md)
 
 ---
 

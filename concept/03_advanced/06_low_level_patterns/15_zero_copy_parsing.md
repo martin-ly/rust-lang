@@ -12,8 +12,8 @@
 > [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
 > [Type System](../../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**:
-> [Performance Optimization](../../06_ecosystem/15_performance_optimization.md) ·
-> [Distributed Systems](../../06_ecosystem/18_distributed_systems.md)
+> [Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md) ·
+> [Distributed Systems](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md)
 
 ---
 
@@ -495,8 +495,8 @@ fn main() {
 
 - [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) — 内存管理基础
 - [Unsafe Rust](../02_unsafe/03_unsafe.md) — unsafe Rust
-- [Performance Optimization](../../06_ecosystem/15_performance_optimization.md) — 性能优化
-- [Distributed Systems](../../06_ecosystem/18_distributed_systems.md) — 网络协议
+- [Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md) — 性能优化
+- [Distributed Systems](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md) — 网络协议
 
 ---
 

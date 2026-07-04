@@ -200,7 +200,7 @@ pub unsafe fn cpuid() {
 - [Rust 1.93.0 Release [已失效]]<!-- 原链接: https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/ -->
 - [Rust 1.94 特性速查表](02_rust_194_features_cheatsheet.md)
 - [Rust 1.95 特性速查表](02_rust_195_features_cheatsheet.md)
-- [Rust 版本跟踪](../../../concept/07_future/05_rust_version_tracking.md)
+- [Rust 版本跟踪](../../../concept/07_future/00_version_tracking/05_rust_version_tracking.md)
 
 ---
 

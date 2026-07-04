@@ -10,11 +10,11 @@
 > **层次定位**: L4 形式化理论 / 公理语义子域 [来源: [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034)]
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价形式化规约的完备性
-> **前置依赖**: [Type Theory](../00_type_theory/02_type_theory.md) · [Ownership Formalization](../01_ownership_logic/03_ownership_formal.md) · [Operational Semantics](17_operational_semantics.md)
+> **前置依赖**: [Type Theory](../00_type_theory/02_type_theory.md) · [Ownership Formalization](../01_ownership_logic/03_ownership_formal.md) · [Operational Semantics](17_operational_semantics.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 > **后置延伸**: [RustBelt](../02_separation_logic/04_rustbelt.md) · [Separation Logic](../02_separation_logic/11_separation_logic.md) · [Verification Toolchain](../04_model_checking/05_verification_toolchain.md)
 > **跨层映射**: L4→L1 公理规约 ↔ 工程直觉 | L4→L3 Unsafe 边界 ↔ 公理失效区域
 > **定理链编号**: T-120 霍尔三元组可判定性 → T-121 wp 计算完备性 → T-122 所有权（Ownership）不变式可验证性
-> **后置概念**: [Comparative Studies](../../05_comparative/01_rust_vs_cpp.md)
+> **后置概念**: [Comparative Studies](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ## 📑 目录

@@ -4,7 +4,7 @@
 >
 > - [并发编程](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 > - [并发模式](../../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md)
-> - [性能优化](../../../../concept/06_ecosystem/15_performance_optimization.md)
+> - [性能优化](../../../../concept/06_ecosystem/10_performance/15_performance_optimization.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 

@@ -154,7 +154,7 @@ HttpRequestBuilder::new()
 ```
 
 **关联**: 消费型方法链 · 类型状态
-**深入**: [`02_patterns.md`](../../06_ecosystem/02_patterns.md)
+**深入**: [`02_patterns.md`](../../06_ecosystem/03_design_patterns/02_patterns.md)
 
 [来源: [Rust Reference — Structs](https://doc.rust-lang.org/reference/items/structs.html) · [TRPL — Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html)]
 
@@ -441,7 +441,7 @@ struct Kilometers(u32);
 ```
 
 **关联**: 类型安全 · 零大小类型 · 封装
-**深入**: [`02_patterns.md`](../../06_ecosystem/02_patterns.md)
+**深入**: [`02_patterns.md`](../../06_ecosystem/03_design_patterns/02_patterns.md)
 
 #### `no_std`
 
@@ -449,7 +449,7 @@ struct Kilometers(u32);
 **代码**: `#![no_std]`
 **常见错误**: `no_std` 环境下没有 `std::io`、`std::thread`；需使用 `alloc::vec::Vec`
 **关联**: 嵌入式 · 裸机 · libcore
-**深入**: [`04_application_domains.md`](../../06_ecosystem/04_application_domains.md)
+**深入**: [`04_application_domains.md`](../../06_ecosystem/06_data_and_distributed/04_application_domains.md)
 
 ### O
 
@@ -589,7 +589,7 @@ impl Door<Closed> { fn open(self) -> Door<Open> { ... } }
 ```
 
 **关联**: PhantomData · 泛型 · 编译期状态机
-**深入**: [`02_patterns.md`](../../06_ecosystem/02_patterns.md)
+**深入**: [`02_patterns.md`](../../06_ecosystem/03_design_patterns/02_patterns.md)
 
 ### U
 
@@ -668,7 +668,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 | **E0520** | requires `Sync` bound | 跨线程共享非 Sync 类型 | 使用 `Mutex`/`RwLock` 包装 | [01_concurrency](../../03_advanced/00_concurrency/01_concurrency.md) |
 | **E0596** | cannot borrow data in dereference of ... as mutable | 不可变上下文中需要可变引用 | 检查 `Deref` 返回的是否为 `&mut` | [02_borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
 | **E0603** | module is private | 访问私有模块 | 使用 `pub` 暴露或检查可见性 | [04_type_system](../../01_foundation/02_type_system/04_type_system.md) |
-| **E0658** | feature is unstable | 使用了不稳定特性 | 添加 `#![feature(...)]` 或使用稳定替代 | [03_evolution](../../07_future/03_evolution.md) |
+| **E0658** | feature is unstable | 使用了不稳定特性 | 添加 `#![feature(...)]` 或使用稳定替代 | [03_evolution](../../07_future/04_research_and_experimental/03_evolution.md) |
 | **E0716** | temporary value dropped while borrowed | 临时值的引用被延长 | 将临时值绑定到变量 | [03_lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
 
 [来源: [Rust Reference — Compiler Errors](https://doc.rust-lang.org/error_codes/) · [TRPL — Appendix: Error Codes](https://doc.rust-lang.org/book/appendix-02-operators.html)]

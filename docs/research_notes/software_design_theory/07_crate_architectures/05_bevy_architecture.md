@@ -2,9 +2,9 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [游戏 ECS](../../../../concept/06_ecosystem/07_game_ecs.md)
-> - [游戏开发](../../../../concept/06_ecosystem/21_game_development.md)
-> - [游戏引擎内部](../../../../concept/06_ecosystem/49_game_engine_internals.md)
+> - [游戏 ECS](../../../../concept/06_ecosystem/11_domain_applications/07_game_ecs.md)
+> - [游戏开发](../../../../concept/06_ecosystem/11_domain_applications/21_game_development.md)
+> - [游戏引擎内部](../../../../concept/06_ecosystem/11_domain_applications/49_game_engine_internals.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 

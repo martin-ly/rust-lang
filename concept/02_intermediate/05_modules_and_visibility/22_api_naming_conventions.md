@@ -12,7 +12,7 @@
 > **双维定位**: C×App — 将社区约定应用于实际 API 设计
 > **定位**: 系统整理 Rust 标准库与生态中反复出现的命名模式，帮助学习者写出“看起来就像 Rust”的 API。
 > **前置概念**: [Traits](../00_traits/01_traits.md) · [Generics](../01_generics/02_generics.md) · [Common Traits](../00_traits/01_traits.md)
-> **后置概念**: [Design Patterns](../../06_ecosystem/02_patterns.md) · [Type System Patterns](../04_types_and_conversions/20_type_system_advanced.md)
+> **后置概念**: [Design Patterns](../../06_ecosystem/03_design_patterns/02_patterns.md) · [Type System Patterns](../04_types_and_conversions/20_type_system_advanced.md)
 > **来源**: [Google Comprehensive Rust — Predictable API](https://google.github.io/comprehensive-rust/idiomatic/foundations-api-design/predictable-api.html) · [Unicode UAX #31 — Identifier and Pattern Syntax](https://www.unicode.org/reports/tr31/) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines//naming.html) ·
 > [RFC 430 / rust-lang/api-guidelines](https://rust-lang.github.io/api-guidelines/)
