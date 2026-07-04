@@ -211,6 +211,7 @@ Print this page and keep it at your desk!
 Last updated: 2026-03-18
 Version: 1.0
 ```
+
 ---
 
 ## 速查命令
@@ -244,6 +245,7 @@ cargo tarpaulin
 cargo fmt
 cargo doc --no-deps
 ```
+
 ### 依赖管理
 >
 > **[来源: Rust Official Docs]**
@@ -262,6 +264,7 @@ cargo license
 # 漏洞扫描
 cargo audit
 ```
+
 ### 嵌入式
 >
 > **[来源: Rust Official Docs]**
@@ -279,6 +282,7 @@ cargo flash --chip STM32F407VG
 # 调试
 cargo embed
 ```
+
 ---
 
 ## 关键资源链接

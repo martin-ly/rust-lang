@@ -376,7 +376,7 @@
   - `concept\00_meta\terminology_glossary.md`
   - `concept\04_formal\15_hoare_logic.md`
   - `docs\04_research\04_rust_formal_verification.md`
-- `https://verus-lang.github.io/verus/`
+- `https://github.com/verus-lang/verusverus/`
   - `concept\00_meta\terminology_glossary.md`
   - `concept\04_formal\04_rustbelt.md`
   - `concept\04_formal\05_verification_toolchain.md`
@@ -1255,7 +1255,7 @@
   - `docs\06_toolchain\06_20_rustdoc_196_improvements.md`
   - `docs\06_toolchain\rustdoc_196_improvements.md`
   - `knowledge\06_ecosystem\emerging\05_rust_1_96.md`
-- `https://verus-lang.github.io/verus/guide/`
+- `https://github.com/verus-lang/verusverus/guide/`
   - `concept\01_foundation\05_reference_semantics.md`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
   - `docs\05_guides\05_verus_practical_guide.md`
@@ -3694,7 +3694,7 @@
   - `concept\04_formal\03_ownership_formal.md`
 - `https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md`
   - `concept\04_formal\03_ownership_formal.md`
-- `https://creusot.github.io/creusot/`
+- `https://creusot.rs/`
   - `concept\04_formal\04_rustbelt.md`
   - `concept\04_formal\05_verification_toolchain.md`
 - `https://github.com/AeneasVerif/aeneas`
@@ -3721,7 +3721,7 @@
   - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
   - `knowledge\04_expert\academic\03_ownership_model_comprehensive.md`
   - `knowledge\04_expert\academic\README.md`
-- `https://rustlantis.github.io/`
+- `https://github.com/cbeuw/rustlantis`
   - `concept\04_formal\05_verification_toolchain.md`
 - `https://pl.ethz.ch/`
   - `concept\04_formal\05_verification_toolchain.md`
@@ -3751,7 +3751,7 @@
   - `concept\04_formal\10_category_theory.md`
 - `https://www.cs.ucl.ac.uk/staff/p.ohearn/papers/localreasoning.pdf`
   - `concept\04_formal\11_separation_logic.md`
-- `https://www.cl.cam.ac.uk/~gw104/Semantics.pdf`
+- `https://www.cl.cam.ac.uk/~gw104/dens.pdf`
   - `concept\04_formal\12_denotational_semantics.md`
 - `https://www.cl.cam.ac.uk/teaching/2021/Semantics/`
   - `concept\04_formal\12_denotational_semantics.md`
@@ -3873,7 +3873,7 @@
   - `concept\07_future\09_parallel_frontend_preview.md`
 - `https://doi.org/10.1145/360933.360975`
   - `concept\04_formal\20_axiomatic_semantics.md`
-- `https://creusot-rs.github.io/creusot/`
+- `https://creusot.rs/`
   - `concept\04_formal\20_axiomatic_semantics.md`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
   - `docs\archive\rust-ownership-chinese\guides\creusot-tutorial.md`
@@ -3923,7 +3923,7 @@
   - `concept\04_formal\30_aeneas_symbolic_semantics.md`
 - `https://doi.org/10.1145/3547627`
   - `concept\04_formal\30_aeneas_symbolic_semantics.md`
-- `https://model-checking.github.io/kani/tutorial-intro.html`
+- `https://model-checking.github.io/kani/tutorial-first-steps.html`
   - `concept\04_formal\32_kani.md`
 - `https://isocpp.org/`
   - `concept\05_comparative\01_rust_vs_cpp.md`
@@ -3969,7 +3969,7 @@
 - `https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/index.html`
   - `concept\05_comparative\08_rust_vs_javascript.md`
   - `concept\06_ecosystem\54_webassembly_advanced.md`
-- `https://rust-learning.github.io/`
+- `https://learning-rust.github.io/`
   - `concept\05_comparative\08_rust_vs_ruby.md`
 - `https://github.com/apple/swift/blob/main/docs/OwnershipManifesto.md`
   - `concept\05_comparative\09_rust_vs_swift.md`
@@ -4219,7 +4219,7 @@
   - `concept\06_ecosystem\18_distributed_systems.md`
 - `https://docs.rs/openraft/`
   - `concept\06_ecosystem\18_distributed_systems.md`
-- `https://rust-secure-code.github.io/`
+- `https://github.com/rust-secure-code/wg`
   - `concept\06_ecosystem\19_security_practices.md`
 - `https://anssi-fr.github.io/rust-guide/`
   - `concept\06_ecosystem\19_security_practices.md`
@@ -4717,7 +4717,7 @@
   - `concept\06_ecosystem\47_formal_verification_tools.md`
 - `https://github.com/model-checking/verify-rust-std`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
-- `https://www.cis.upenn.edu/~lee/09cis500/lectures/verification.pdf`
+- `https://www.cis.upenn.edu/~cis5000/`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
 - `https://github.com/rust-lang`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
@@ -4736,7 +4736,7 @@
   - `concept\06_ecosystem\47_formal_verification_tools.md`
   - `docs\archive\rust-ownership-chinese\guides\creusot-tutorial.md`
   - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
-- `https://creusot-rs.github.io/creusot/guide/pearlite.html`
+- `https://creusot.rs/guide/pearlite.html`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
 - `https://github.com/Z3Prover/z3`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
@@ -4752,11 +4752,11 @@
   - `concept\06_ecosystem\47_formal_verification_tools.md`
 - `https://github.com/AeneasVerif/charon`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
-- `https://model-checking.github.io/kani/tutorial-kani-rustc.html`
+- `https://model-checking.github.io/kani/usage.html`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
-- `https://verus-lang.github.io/verus/guide/compare.html`
+- `https://github.com/verus-lang/verusverus/guide/compare.html`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
-- `https://model-checking.github.io/kani/publications.html`
+- `https://github.com/model-checking/kani/tree/main/papers`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
 - `https://github.com/verus-lang/verus/blob/main/README.md`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
@@ -4767,7 +4767,7 @@
   - `concept\06_ecosystem\47_formal_verification_tools.md`
 - `https://model-checking.github.io/kani/tutorial-first-steps.html`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
-- `https://model-checking.github.io/kani/coverage-report.html`
+- `https://model-checking.github.io/kani/reference/experimental/coverage.html`
   - `concept\06_ecosystem\47_formal_verification_tools.md`
 - `https://docs.rs/polars/`
   - `concept\06_ecosystem\48_data_engineering.md`
@@ -4860,7 +4860,7 @@
   - `concept\06_ecosystem\50_distributed_consensus.md`
 - `https://arxiv.org/abs/1904.04098`
   - `concept\06_ecosystem\50_distributed_consensus.md`
-- `https://decentralizedthoughts.github.io/2019-12-20-hotsuff/`
+- `https://decentralizedthoughts.github.io/2019-06-23-what-is-the-difference-between/`
   - `concept\06_ecosystem\50_distributed_consensus.md`
 - `https://github.com/informalsystems/tendermint-rs`
   - `concept\06_ecosystem\50_distributed_consensus.md`
@@ -5232,7 +5232,7 @@
   - `concept\07_future\24_roadmap.md`
 - `https://github.com/rust-lang/crater/tree/master/docs`
   - `concept\07_future\02_formal_methods.md`
-- `https://model-checking.github.io/kani/ci.html`
+- `https://model-checking.github.io/kani/install-github-ci.html`
   - `concept\07_future\02_formal_methods.md`
 - `https://p-org.github.io/P/`
   - `concept\07_future\02_formal_methods.md`
@@ -5244,7 +5244,7 @@
   - `concept\07_future\02_formal_methods.md`
 - `https://marketplace.visualstudio.com/items?itemName=alygin.vscode-tlaplus`
   - `concept\07_future\02_formal_methods.md`
-- `https://verus-lang.github.io/`
+- `https://github.com/verus-lang/verus`
   - `concept\07_future\02_formal_methods.md`
 - `https://github.com/rust-lang/rfcs/pull/3936`
   - `concept\07_future\03_evolution.md`
@@ -6468,21 +6468,21 @@
   - `docs\05_guides\05_performance_tuning_guide.md`
   - `docs\archive\c_class_audit_2026_06_08\05_guides\05_performance_testing_report.md`
   - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
-- `https://verus-lang.github.io/verus/guide/install.html`
+- `https://github.com/verus-lang/verusverus/guide/install.html`
   - `docs\05_guides\05_verus_practical_guide.md`
-- `https://verus-lang.github.io/verus/guide/spec.html`
+- `https://github.com/verus-lang/verusverus/guide/spec.html`
   - `docs\05_guides\05_verus_practical_guide.md`
-- `https://verus-lang.github.io/verus/guide/loops.html`
+- `https://github.com/verus-lang/verusverus/guide/loops.html`
   - `docs\05_guides\05_verus_practical_guide.md`
-- `https://verus-lang.github.io/verus/guide/ghost.html`
+- `https://github.com/verus-lang/verusverus/guide/ghost.html`
   - `docs\05_guides\05_verus_practical_guide.md`
 - `https://dl.acm.org/doi/10.1145/3591285`
   - `docs\05_guides\05_verus_practical_guide.md`
-- `https://verus-lang.github.io/verus/guide/mut-ref.html`
+- `https://github.com/verus-lang/verusverus/guide/mut-ref.html`
   - `docs\05_guides\05_verus_practical_guide.md`
-- `https://verus-lang.github.io/verus/guide/concurrency.html`
+- `https://github.com/verus-lang/verusverus/guide/concurrency.html`
   - `docs\05_guides\05_verus_practical_guide.md`
-- `https://verus-lang.github.io/verus/guide/limitations.html`
+- `https://github.com/verus-lang/verusverus/guide/limitations.html`
   - `docs\05_guides\05_verus_practical_guide.md`
 - `https://github.com/verus-lang/verus/tree/main/source/rust_verify/example`
   - `docs\05_guides\05_verus_practical_guide.md`
@@ -6958,7 +6958,7 @@
   - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
 - `https://github.com/rust-lang/rfcs/pull/255`
   - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\trait-system.md`
-- `https://verus-lang.github.io/verus/vstd/`
+- `https://github.com/verus-lang/verusverus/vstd/`
   - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
 - `https://github.com/GillianPlatform/Gillian`
   - `docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md`
@@ -7751,7 +7751,7 @@
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://slint-ui.com/` → `https://slint.dev/`
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `https://slint-ui.com/docs/rust/slint/platform/trait.Platform.html` → `https://docs.slint.dev/latest/docs/rust/slint/platform/trait.Platform`
+- `https://docs.slint.dev/latest/docs/rust/slint/slint/platform/trait.Platform.html` → `https://docs.slint.dev/latest/docs/rust/slint/platform/trait.Platform`
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://docs.github.com/en/billing/managing-billing-for-github-actions` → `https://docs.github.com/en/billing/concepts/product-billing/github-actions`
   - `concept\07_future\02_formal_methods.md`
@@ -8318,19 +8318,19 @@
 - `[404] https://en.wikipedia.org/wiki/Ownership_types` — Not Found
   - `concept\00_meta\sources.md`
   - `concept\01_foundation\01_ownership.md`
-- `[404] https://www.stroustrup.com/ETAPS-corrected.pdf` — Not Found
+- `[404] https://www.stroustrup.com/ETAPS-corrected-draft.pdf` — Not Found
   - `concept\01_foundation\06_zero_cost_abstractions.md`
-- `[404] https://cel.cs.brown.edu/crp/idioms/rtti_dynamic_cast.html` — Not Found
+- `[404] https://cel.cs.brown.edu/crp/idioms/rtti.html` — Not Found
   - `concept\02_intermediate\25_rtti_and_dynamic_typing.md`
-- `[404] https://blog.google/technology/developers/comprehensive-rust/` — Not Found
+- `[404] https://google.github.io/comprehensive-rust/` — Not Found
   - `concept\00_meta\comprehensive_rust_mapping.md`
-- `[404] https://www.stroustrup.com/new_value-terminology.pdf` — Not Found
+- `[404] https://www.stroustrup.com/terminology.pdf` — Not Found
   - `concept\01_foundation\19_value_vs_reference_semantics.md`
 - `[403] https://web.mit.edu/rust-lang/` — Forbidden
   - `concept\00_meta\sources.md`
 - `[404] https://www.levels.fyi/t/rust-engineer/salaries/` — Not Found
   - `concept\00_meta\career_landscape.md`
-- `[404] https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html` — Not Found
+- `[404] https://cel.cs.brown.edu/crp/idioms/constructors/copy_and_move_constructors.html` — Not Found
   - `concept\01_foundation\23_move_semantics.md`
   - `concept\02_intermediate\28_construction_and_initialization.md`
 - `[404] https://www.stroustrup.com/FSM/0cost.pdf` — Not Found
@@ -8344,59 +8344,59 @@
   - `concept\04_formal\03_ownership_formal.md`
 - `[404] https://en.wikipedia.org/wiki/Phase_semantics` — Not Found
   - `concept\04_formal\01_linear_logic.md`
-- `[404] https://www.cs.bgu.ac.il/~hendlerd/papers/HP.pdf` — Not Found
+- `[404] https://www.cs.otago.ac.nz/cosc440/readings/hazard-pointers.pdf` — Not Found
   - `concept\03_advanced\16_lock_free.md`
-- `[404] https://www.jaist.ac.jp/~sgonda/paper/2020_scico.html` — Not Found
+- `[404] https://munksgaard.me/papers/laumann-munksgaard-larsen.pdf` — Not Found
   - `concept\04_formal\09_linear_logic_applications.md`
-- `[404] https://www.microsoft.com/en-us/research/publication/practical-type-inference-arbitrary-rank-types/` — Not Found
+- `[404] https://www.cambridge.org/core/journals/journal-of-functional-programming/article/practical-type-inference-for-arbitraryrank-types/5339FB9DAB968768874D4C20FA6F8CB6` — Not Found
   - `concept\04_formal\08_type_inference.md`
-- `[404] https://llvm.org/docs/SystemZ.html` — Not Found
+- `[404] https://llvm.org/docs/CompilerWriterInfo.html` — Not Found
   - `concept\03_advanced\13_inline_assembly.md`
 - `[404] https://marabos.nl/atomics/happens-before.html` — Not Found
   - `concept\03_advanced\11_atomics_and_memory_ordering.md`
 - `[404] https://en.wikipedia.org/wiki/Viper_(verification_infrastructure)` — Not Found
   - `concept\04_formal\05_verification_toolchain.md`
-- `[404] https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-linlogic.pdf` — Not Found
+- `[404] https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-inference.pdf` — Not Found
   - `concept\04_formal\09_linear_logic_applications.md`
-- `[404] https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps` — Not Found
+- `[404] https://www.cs.ox.ac.uk/files/298/handbook.pdf` — Not Found
   - `concept\04_formal\12_denotational_semantics.md`
-- `[404] https://homepages.inf.ed.ac.uk/wadler/papers/linearsubtypes/linearsubtypes.pdf` — Not Found
+- `[404] https://homepages.inf.ed.ac.uk/wadler/papers/linearsub/linearsub.ps` — Not Found
   - `concept\04_formal\09_linear_logic_applications.md`
-- `[404] https://www.hillelwayne.com/post/limitations-of-formal/` — Not Found
+- `[404] https://www.hillelwayne.com/post/why-dont-people-use-formal-methods/` — Not Found
   - `concept\04_formal\11_separation_logic.md`
 - `[404] https://marabos.nl/atomics/when-to-use.html` — Not Found
   - `concept\03_advanced\10_concurrency_patterns.md`
   - `concept\03_advanced\11_atomics_and_memory_ordering.md`
-- `[404] https://www.ralfj.de/blog/2023/01-31_tree-borrows.html` — Not Found
+- `[404] https://www.ralfj.de/blog/2023/06/02/tree-borrows.html` — Not Found
   - `concept\04_formal\17_operational_semantics.md`
   - `concept\07_future\17_rust_specification_preview.md`
   - `concept\07_future\20_borrowsanitizer_preview.md`
 - `[404] https://en.wikipedia.org/wiki/Trust_(social)` — Not Found
   - `concept\05_comparative\04_safety_boundaries.md`
-- `[404] https://www.ralfj.de/blog/2023/01/07/tree-borrows.html` — Not Found
+- `[404] https://www.ralfj.de/blog/2023/06/02/tree-borrows.html` — Not Found
   - `concept\04_formal\31_miri.md`
   - `docs\05_guides\05_miri_practical_guide.md`
 - `[404] https://v8.dev/blog/jit` — Not Found
   - `concept\05_comparative\08_rust_vs_javascript.md`
 - `[404] https://www.ben-morris.com/swift-vs-rust/` — Not Found
   - `concept\05_comparative\09_rust_vs_swift.md`
-- `[404] https://socket.dev/blog/trapdoor-supply-chain-attack` — Not Found
+- `[404] https://socket.dev/blog/trapdoor-crypto-stealer-npm-pypi-crates` — Not Found
   - `concept\05_comparative\04_safety_boundaries.md`
-- `[404] https://tenderlovemaking.com/tags/gc.html` — Not Found
+- `[404] https://tenderlovemaking.com/2009/12/18/writing-ruby-c-extensions-part-1/` — Not Found
   - `concept\05_comparative\08_rust_vs_ruby.md`
-- `[404] https://docs.scala-lang.org/scala3/book/types-intro.html` — Not Found
+- `[404] https://docs.scala-lang.org/scala3/book/types-introduction.html` — Not Found
   - `concept\05_comparative\12_rust_vs_scala.md`
-- `[404] https://docs.scala-lang.org/scala3/book/types-inference.html` — Not Found
+- `[404] https://docs.scala-lang.org/scala3/book/types-inferred.html` — Not Found
   - `concept\05_comparative\12_rust_vs_scala.md`
-- `[404] https://www.cs.nott.ac.uk/~pszgmh/psem.html` — Not Found
+- `[404] https://people.cs.nott.ac.uk/pszgmh/` — Not Found
   - `concept\04_formal\18_evaluation_strategies.md`
-- `[404] https://docs.scala-lang.org/topic/implicit-conversions.html` — Not Found
+- `[404] https://docs.scala-lang.org/scala3/reference/contextual/conversions.html` — Not Found
   - `concept\05_comparative\12_rust_vs_scala.md`
-- `[404] https://docs.scala-lang.org/scala3/book/interop.html` — Not Found
+- `[404] https://docs.scala-lang.org/scala3/book/interacting-with-java.html` — Not Found
   - `concept\05_comparative\12_rust_vs_scala.md`
-- `[404] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Type_coercion` — Not Found
+- `[404] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality#type_coercion` — Not Found
   - `concept\05_comparative\08_rust_vs_javascript.md`
-- `[404] https://www.cs.brown.edu/~mph/HerlihyShavit/` — Not Found
+- `[404] https://cs.brown.edu/courses/csci2951-s/` — Not Found
   - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
 - `[404] https://en.wikipedia.org/wiki/Design_pattern%3B_Wikipedia_%E2%80%94_RAII%3B_Wikipedia_%E2%80%94_Typestate_analysis` — Not Found
   - `concept\06_ecosystem\02_patterns.md`
@@ -8410,51 +8410,51 @@
   - `concept\06_ecosystem\54_webassembly_advanced.md`
 - `[ERR] https://arewe distributedyet.org/` — Tunnel connection failed: 400 Invalid header received from client
   - `concept\06_ecosystem\18_distributed_systems.md`
-- `[404] https://shopify.engineering/rust-at-shopify` — Not Found
+- `[404] https://shopify.engineering/shopify-rust-systems-programming` — Not Found
   - `concept\05_comparative\08_rust_vs_ruby.md`
-- `[404] https://rustsec.org/advisories/rss.xml` — Not Found
+- `[404] https://rustsec.org/feed.xml` — Not Found
   - `concept\06_ecosystem\19_security_practices.md`
-- `[404] https://www.linuxfoundation.org/press/press-release/sustaining-package-registries-working-group` — Not Found
+- `[404] https://openssf.org/blog/2026/05/06/open-infrastructure-is-not-free-part-ii-the-hidden-cost-of-running-package-registries/` — Not Found
   - `concept\06_ecosystem\19_security_practices.md`
 - `[404] https://en.wikipedia.org/wiki/Entity_component_system%3B_Richard_Fabian_%E2%80%94_Data_Oriented_Design%3B_Niko_Matsakis_Blog` — Not Found
   - `concept\06_ecosystem\07_game_ecs.md`
-- `[404] https://diesel.rs/guides/migrations.html` — Not Found
+- `[404] https://diesel.rs/guides/getting-started/` — Not Found
   - `concept\06_ecosystem\23_database_access.md`
-- `[404] https://hexdocs.pm/mix/Mix.Tasks.Deploy.html` —
+- `[404] https://mix.hexdocs.pm/Mix.Tasks.Release.html` —
   - `concept\05_comparative\14_rust_vs_elixir.md`
-- `[404] https://docs.aws.amazon.com/wellarchitected/latest/health-safety-pillar/welcome.html` — Not Found
+- `[404] https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html` — Not Found
   - `concept\06_ecosystem\24_cloud_native.md`
-- `[404] https://microservices.io/book/` — Not Found
+- `[404] https://microservices.io/book` — Not Found
   - `concept\06_ecosystem\31_microservice_patterns.md`
   - `concept\06_ecosystem\32_event_driven_architecture.md`
-- `[404] https://www.pingcap.com/blog/why-rust/` — Not Found
+- `[404] https://www.pingcap.com/blog/why-choose-rust-to-develop-tikv/` — Not Found
   - `concept\06_ecosystem\18_distributed_systems.md`
   - `concept\06_ecosystem\31_microservice_patterns.md`
 - `[429] https://jeffreypalermo.com/blog/the-onion-architecture-part-3/` — Too Many Requests
   - `concept\06_ecosystem\35_architecture_patterns.md`
-- `[404] https://aws.amazon.com/blogs/opensource/rust-microservices/` —
+- `[404] https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/microservices-on-aws.html` —
   - `concept\06_ecosystem\31_microservice_patterns.md`
-- `[404] https://www.ssi.gouv.fr/en/guide/rust-secure-development-guide/` — Not Found
+- `[404] https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-programming_rules_to_develop_secure_applications_with_rust-v1.0.pdf` — Not Found
   - `concept\06_ecosystem\19_security_practices.md`
 - `[404] https://martinfowler.com/bliki/OverEngineering.html` — Not Found
   - `concept\06_ecosystem\35_architecture_patterns.md`
 - `[404] https://www.rfc-editor.org/rfc/rfc9000.html` — Not Found
   - `concept\06_ecosystem\38_network_protocols.md`
-- `[404] https://www.rtca.org/product/do-178c-software-considerations-in-airborne-systems-and-equipment-certification` — Not Found
+- `[404] https://www.rtca.org/product/do-178c-electronic/` — Not Found
   - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
   - `concept\07_future\14_ferrocene_preview.md`
 - `[404] https://www.rfc-editor.org/rfc/rfc9114.html` — Not Found
   - `concept\06_ecosystem\38_network_protocols.md`
   - `docs\rust-ownership-decidability\case-studies\reqwest-formal-analysis.md`
-- `[404] https://www.cs.cmu.edu/~wing/publications/Milner92.pdf` — Not Found
+- `[404] https://era.ed.ac.uk/server/api/core/bitstreams/ca0f32e0-477d-4d99-a50b-3f45d30454a7/content` — Not Found
   - `concept\06_ecosystem\41_workflow_theory.md`
-- `[404] https://homepages.inf.ed.ac.uk/gdp/publications/Structural_Operational_Semantics.pdf` — Not Found
+- `[404] https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf` — Not Found
   - `concept\06_ecosystem\41_workflow_theory.md`
 - `[ERR] https://sqs` — [Errno 11001] getaddrinfo failed
   - `concept\06_ecosystem\35_architecture_patterns.md`
-- `[404] https://graphql.org/blog/2015/10/16/subscriptions/` — Not Found
+- `[404] https://graphql.org/blog/2015-10-16-subscriptions/` — Not Found
   - `concept\06_ecosystem\42_api_design_patterns.md`
-- `[404] https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-versioning` — Not Found
+- `[404] https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-versioning` — Not Found
   - `concept\06_ecosystem\42_api_design_patterns.md`
 - `[ERR] https://www.rust-lang.org/` — _ssl.c:999: The handshake operation timed out
   - `concept\05_comparative\07_rust_vs_python.md`
@@ -8486,41 +8486,41 @@
   - `concept\07_future\rust_1_97_preview.md`
   - `concept\07_future\rust_1_98_preview.md`
   - `docs\rust-ownership-decidability\archive\MASTER_INDEX.md`
-- `[404] https://datatracker.ietf.org/wg/cfrg/documents/` — Not Found
+- `[404] https://datatracker.ietf.org/rg/cfrg/about/` — Not Found
   - `concept\06_ecosystem\43_security_cryptography.md`
-- `[404] https://smallcultfollowing.com/babysteps/blog/2019/01/21/polonius-and-region-errors/` — Not Found
+- `[404] https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius-and-region-errors/` — Not Found
   - `concept\06_ecosystem\45_compiler_internals.md`
-- `[404] https://burn.dev/book/building-blocks/backend.html` — Not Found
+- `[404] https://burn.dev/books/burn/building-blocks/backend.html` — Not Found
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `[404] https://www.wfmc.org/standards/reference-model` — Not Found
+- `[404] https://wfmc.org/public-documents/` — Not Found
   - `concept\06_ecosystem\41_workflow_theory.md`
-- `[404] https://letsencrypt.org/docs/rustls/` — Not Found
+- `[404] https://letsencrypt.org/docs/client-options/` — Not Found
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `[404] https://pola.rs/posts/polars-pandas-xlsxwriter/` — Not Found
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `[404] https://burn.dev/blog/why-rust-for-deep-learning.html` — Not Found
+- `[404] https://burn.dev/blog/a-case-for-rust-in-deep-learning/` — Not Found
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
 - `[ERR] https://cybersecurity-news.com/hax-rust-verification/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `concept\06_ecosystem\47_formal_verification_tools.md`
-- `[404] https://goto.ucsd.edu/~rjhala/papers/liquid_types_pldi08.pdf` — Not Found
+- `[404] https://goto.ucsd.edu/~rjhala/liquid/liquid_types.pdf` — Not Found
   - `concept\06_ecosystem\47_formal_verification_tools.md`
-- `[404] https://docs.pola.rs/user-guide/concepts/data-structures/#dataframe` — Not Found
+- `[404] https://docs.pola.rs/user-guide/concepts/data-types-and-structures/` — Not Found
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `[404] https://www.hillelwayne.com/post/formally-verifying/` — Not Found
+- `[404] https://www.hillelwayne.com/post/theorem-prover-showdown/` — Not Found
   - `concept\06_ecosystem\47_formal_verification_tools.md`
-- `[404] https://burn.dev/book/building-blocks/tensor.html` — Not Found
+- `[404] https://burn.dev/books/burn/building-blocks/tensor.html` — Not Found
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `[404] https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers22.pdf` — Not found (filtered)
+- `[404] https://pm.inf.ethz.ch/publications/AstrauskasBilyFialaGrannanMathejaMuellerPoliSummers22.pdf` — Not found (filtered)
   - `concept\06_ecosystem\47_formal_verification_tools.md`
-- `[404] https://burn.dev/book/` — Not Found
+- `[404] https://burn.dev/books/burn/` — Not Found
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `[404] https://docs.pola.rs/user-guide/transformations/time-series/windows/` — Not Found
+- `[404] https://docs.pola.rs/user-guide/expressions/window-functions/` — Not Found
   - `concept\06_ecosystem\48_data_engineering.md`
 - `[ERR] https://nodejs.org/en/docs/guides/dont-block-the-event-loop` — _ssl.c:999: The handshake operation timed out
   - `concept\05_comparative\15_rust_vs_typescript.md`
-- `[404] https://www.onehouse.ai/blog/the-ultimate-guide-to-apache-parquet` — Not Found
+- `[404] https://www.onehouse.ai/blog/onehouse-analytics-engine-guide` — Not Found
   - `concept\06_ecosystem\48_data_engineering.md`
-- `[404] https://docs.getdbt.com/docs/build/about-sql-reference` — Not Found
+- `[404] https://docs.getdbt.com/sql-reference` — Not Found
   - `concept\06_ecosystem\48_data_engineering.md`
 - `[404] https://pola.rs/posts/rust-for-data/` — Not Found
   - `concept\06_ecosystem\48_data_engineering.md`
@@ -8528,9 +8528,9 @@
   - `concept\06_ecosystem\49_game_engine_internals.md`
 - `[404] https://parquet.apache.org/docs/file-format/config/` — Not Found
   - `concept\06_ecosystem\48_data_engineering.md`
-- `[404] https://arrow.apache.org/datafusion/user-guide/caching.html` — Not Found
+- `[404] https://datafusion.apache.org/user-guide/configs.html` — Not Found
   - `concept\06_ecosystem\48_data_engineering.md`
-- `[404] https://docs.unity3d.com/Manual/UnityArchitecture.html` — Not Found
+- `[404] https://docs.unity3d.com/2022.3/Documentation/Manual/unity-architecture.html` — Not Found
   - `concept\06_ecosystem\49_game_engine_internals.md`
 - `[404] https://parquet.apache.org/docs/file-format/schema-evolution/` — Not Found
   - `concept\06_ecosystem\48_data_engineering.md`
@@ -8538,7 +8538,7 @@
   - `concept\06_ecosystem\50_distributed_consensus.md`
 - `[403] https://www.khronos.org/registry/vulkan/specs/1.3/html/vkspec.html` — Forbidden
   - `concept\06_ecosystem\49_game_engine_internals.md`
-- `[404] https://www.crcpress.com/Game-Audio-Programming-Principles-and-Practices/DeMan-Larkin/p/book/9781138731499` — Not Found
+- `[404] https://api.pageplace.de/preview/DT0400.9781498746748_A28523397/preview-9781498746748_A28523397.pdf` — Not Found
   - `concept\06_ecosystem\49_game_engine_internals.md`
 - `[403] https://learning.quantum.ibm.com/` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
@@ -8546,15 +8546,15 @@
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `[403] https://qiskit.org/textbook/ch-states/single-qubit-gates.html` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[404] https://dept-info.labri.fr/~denise/Algorithmes/Consensus/` — Not Found
+- `[404] https://algodist.labri.fr/index.php/Main/GT` — Not Found
   - `concept\06_ecosystem\50_distributed_consensus.md`
 - `[403] https://qiskit.org/textbook/ch-gates/introduction.html` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `[403] https://qiskit.org/` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[404] https://www.microsoft.com/en-us/research/publication/paxos-made-live-an-engineering-perspective/` — Not Found
+- `[404] https://read.seas.harvard.edu/~kohler/class/08w-dsi/chandra07paxos.pdf` — Not Found
   - `concept\06_ecosystem\50_distributed_consensus.md`
-- `[404] https://www.wfmc.org/standards/terminology` — Not Found
+- `[404] https://wfmc.org/wp-content/uploads/2022/09/TC-1011_term_glossary_v3.pdf` — Not Found
   - `concept\06_ecosystem\41_workflow_theory.md`
 - `[403] https://www.nsa.gov/Press-Room/Fact-Sheets/Article/3215798/nsa-releases-cnsa-20/` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
@@ -8566,13 +8566,13 @@
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `[403] https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.70.1895` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[404] https://docs.cosmos.network/main/` — Not Found
+- `[404] https://docs.cosmos.network/` — Not Found
   - `concept\06_ecosystem\50_distributed_consensus.md`
-- `[404] https://docs.pennylane.ai/en/stable/introduction/gradients.html` — Not Found
+- `[404] https://docs.pennylane.ai/en/stable/introduction/interfaces.html` — Not Found
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `[ERR] https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows` — _ssl.c:999: The handshake operation timed out
   - `concept\06_ecosystem\28_devops_and_ci_cd.md`
-- `[404] https://docs.pennylane.ai/en/stable/code/api/pennylane.qaoa.html` — Not Found
+- `[404] https://docs.pennylane.ai/en/stable/code/api/pennylane.qaoa.cost.maxcut.html` — Not Found
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `[ERR] https://www.nalgebra.org/benchmarks/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `concept\06_ecosystem\52_robotics.md`
@@ -8580,7 +8580,7 @@
   - `concept\06_ecosystem\52_robotics.md`
 - `[ERR] https://navigation.ros.org/behavior_trees/index.html` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `concept\06_ecosystem\52_robotics.md`
-- `[404] https://osqp.org/docs/papers/` — Not Found
+- `[404] https://osqp.org/citing/` — Not Found
   - `concept\06_ecosystem\52_robotics.md`
 - `[404] https://design.ros2.org/articles/rosidl.html` — Not Found
   - `concept\06_ecosystem\52_robotics.md`
@@ -8591,7 +8591,7 @@
   - `concept\06_ecosystem\52_robotics.md`
 - `[ERR] https://www.focaltech-systems.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.focaltech-systems.com'. (_ssl.c:1016)
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://grobotronics.com/xpt2046-touch-screen-controller.html` — Not Found
+- `[404] https://grobotronics.com/images/datasheets/xpt2046-datasheet.pdf` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[ERR] https://www.displayfuture.com/Display/datasheet/controller/ST7789.pdf` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
   - `concept\06_ecosystem\53_embedded_graphics.md`
@@ -8605,7 +8605,7 @@
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[404] https://docs.lvgl.io/latest/en/html/porting/display.html` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://slint-ui.com/docs/embedded/` — Not Found
+- `[404] https://docs.slint.dev/latest/docs/slint/guide/platforms/embedded/` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[404] https://docs.lvgl.io/latest/en/html/overview/indev.html#gestures` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
@@ -8619,22 +8619,22 @@
   - `concept\06_ecosystem\54_webassembly_advanced.md`
 - `[404] https://v8.dev/blog/stackoverflow` — Not Found
   - `concept\06_ecosystem\54_webassembly_advanced.md`
-- `[404] https://pyo3.rs/v0.21.2/concurrency.html` — Not Found
+- `[404] https://pyo3.rs/main/parallelism` — Not Found
   - `concept\06_ecosystem\55_rust_for_data_science.md`
-- `[404] https://slint-ui.com/docs/rust/` — Not Found
+- `[404] https://docs.slint.dev/latest/docs/rust/slint/` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://component-model.bytecodealliance.org/design/types.html` — Not Found
+- `[404] https://component-model.bytecodealliance.org/design/wit.html` — Not Found
   - `concept\06_ecosystem\54_webassembly_advanced.md`
-- `[404] https://slint-ui.com/docs/architecture/` — Not Found
+- `[404] https://docs.slint.dev/latest/docs/cpp/` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://component-model.bytecodealliance.org/design/composition.html` — Not Found
+- `[404] https://component-model.bytecodealliance.org/design/components.html` — Not Found
   - `concept\06_ecosystem\54_webassembly_advanced.md`
-- `[404] https://aws.amazon.com/blogs/opensource/verify-rust-programs-using-kani/` —
+- `[404] https://model-checking.github.io/kani/` —
   - `concept\07_future\02_formal_methods.md`
 - `[ERR] https://c2rust.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)
   - `concept\06_ecosystem\56_c_to_rust_translation.md`
   - `docs\04_research\04_llm_c_to_rust_migration.md`
-- `[404] https://slint-ui.com/docs/rust/slint/theming.html` — Not Found
+- `[404] https://docs.slint.dev/latest/docs/rust/slint/slint/theming.html` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[404] https://en.wikipedia.org/wiki/Model_Checking` — Not Found
   - `concept\07_future\02_formal_methods.md`
@@ -8645,38 +8645,38 @@
   - `docs\rust-ownership-decidability\case-studies\shuttle-formal-analysis.md`
 - `[404] https://chromium.googlesource.com/chromium/src/+/main/docs/rust.md` — Not Found
   - `concept\06_ecosystem\58_platform_rust_integration.md`
-- `[404] https://rustfoundation.org/media/2025-annual-report/` — Not Found
+- `[404] https://rustfoundation.org/wp-content/uploads/2026/01/2025-Annual-Report.pdf` — Not Found
   - `concept\07_future\03_evolution.md`
-- `[404] https://www.microsoft.com/en-us/research/project/verus/` — Not Found
+- `[404] https://verus-lang.github.io/verus/guide/` — Not Found
   - `concept\07_future\02_formal_methods.md`
   - `docs\05_guides\05_verus_practical_guide.md`
   - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
-- `[404] https://www.datadoghq.com/blog/datadog-open-source-program/` — Not Found
+- `[404] https://www.datadoghq.com/blog/introducing-open-source-hub/` — Not Found
   - `concept\07_future\03_evolution.md`
 - `[403] https://docs.adacore.com/gnatcoverage-docs/html/gnatcoverage.html` — Forbidden
   - `concept\07_future\07_mcdc_coverage_preview.md`
 - `[ERR] https://spec.rust-lang.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `concept\07_future\17_rust_specification_preview.md`
-- `[404] https://rustfoundation.org/media/2026-2028-strategy/` — Not Found
+- `[404] https://rustfoundation.org/strategic-plan/` — Not Found
   - `concept\07_future\03_evolution.md`
 - `[403] https://www.linuxtoday.com/blog/linux-kernel-7-0-officially-released-this-is-whats-new/` — Forbidden
   - `concept\07_future\19_rust_for_linux.md`
-- `[404] https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software` — Not Found
+- `[404] https://www.faa.gov/aircraft/air_cert/design_approvals/air_software/` — Not Found
   - `concept\07_future\07_mcdc_coverage_preview.md`
-- `[404] https://without.boats/blog/pin-and-suffering/` — Not Found
+- `[404] https://without.boats/blog/pin/` — Not Found
   - `concept\07_future\15_pin_ergonomics_preview.md`
-- `[404] https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf` — Not found (filtered)
+- `[404] https://pm.inf.ethz.ch/publications/AstrauskasMuellerPoliSummers19.pdf` — Not found (filtered)
   - `concept\07_future\08_safety_tags_preview.md`
 - `[403] https://developer.arm.com/documentation/109246/latest` — Forbidden
   - `concept\07_future\25_aarch64_sve_sme_preview.md`
-- `[404] https://www.ralfj.de/blog/2023/01/31/tree-borrows.html` — Not Found
+- `[404] https://www.ralfj.de/blog/2023/06/02/tree-borrows.html` — Not Found
   - `concept\07_future\17_rust_specification_preview.md`
   - `concept\07_future\20_borrowsanitizer_preview.md`
 - `[403] https://developer.arm.com/documentation/100986/latest` — Forbidden
   - `concept\07_future\25_aarch64_sve_sme_preview.md`
 - `[403] https://developer.arm.com/documentation/102476/latest` — Forbidden
   - `concept\07_future\25_aarch64_sve_sme_preview.md`
-- `[404] https://www.infoworld.com/article/why-rust-for-machine-learning.html` — Not Found
+- `[404] https://www.infoworld.com/article/4078766/ai-and-machine-learning-outside-of-python.html` — Not Found
   - `concept\07_future\21_rust_in_ai.md`
 - `[ERR] https://docs.kernel.org/bpf/]。` — UnicodeEncodeError('ascii', 'HEAD /bpf/]。 HTTP/1.1', 11, 12, 'ordinal not in range(128)')
   - `concept\07_future\29_ebpf_rust.md`
@@ -8688,13 +8688,13 @@
   - `concept\07_future\21_rust_in_ai.md`
 - `[404] https://lwn.net/Articles/...` — Not Found
   - `concept\07_future\19_rust_for_linux.md`
-- `[404] https://wiki.haskell.org/Open_data_type` — Not Found
+- `[404] https://wiki.haskell.org/Extensible_datatypes` — Not Found
   - `concept\07_future\25_open_enums_preview.md`
 - `[404] https://smallcultfollowing.com/babysteps/blog/2024/01/05/two-interpretations-of-borrowing/` — Not Found
   - `knowledge\01_fundamentals\01_borrowing.md`
-- `[404] https://www.aboutamazon.com/news/aws/kiro` — Not Found
+- `[404] https://www.aboutamazon.com/news/aws/amazon-ai-frontier-agents-autonomous-kiro` — Not Found
   - `concept\07_future\archive\01_ai_integration_original.md`
-- `[404] https://www.nextplatform.com/2021/08/24/why-sve2-is-important-and-why-armv9-is-more-than-sve2/` — Not Found
+- `[404] https://www.nextplatform.com/2021/03/30/arms-v9-architecture-explains-why-nvidia-needs-to-buy-it/` — Not Found
   - `concept\07_future\25_aarch64_sve_sme_preview.md`
 - `[404] https://www.rust-lang.org/faq` — Not Found
   - `knowledge\00_start\04_rust_philosophy.md`

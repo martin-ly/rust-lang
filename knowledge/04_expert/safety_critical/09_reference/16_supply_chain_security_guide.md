@@ -44,6 +44,7 @@
 ├── 所有权转移
 └── 政治影响
 ```
+
 ### 1.2 Rust特定风险
 >
 > **[来源: Rust Official Docs]**
@@ -91,6 +92,7 @@ impl DependencyCriteria {
     }
 }
 ```
+
 ### 2.2 最小依赖原则
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -121,6 +123,7 @@ default = []
 std = []
 embedded = ["cortex-m"]
 ```
+
 ---
 
 ## 3. 安全构建流程
@@ -145,6 +148,7 @@ channel = "1.81.0"
 components = ["rust-src"]
 profile = "minimal"
 ```
+
 ### 3.2 构建环境锁定
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -166,6 +170,7 @@ RUN cargo build --release --locked
 # 验证构建产物
 RUN sha256sum target/release/my-binary > checksum.txt
 ```
+
 ---
 
 ## 4. 依赖验证
@@ -187,6 +192,7 @@ cargo tree --duplicate
 cargo fetch --locked
 find ~/.cargo/registry/cache -name "*.crate" -exec sha256sum {} \;
 ```
+
 ### 4.2 源码审查清单
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -215,6 +221,7 @@ find ~/.cargo/registry/cache -name "*.crate" -exec sha256sum {} \;
 □ 依赖树合理
 □ 许可证兼容
 ```
+
 ---
 
 ## 5. 私有Registry
@@ -240,6 +247,7 @@ my-company = { index = "https://git.company.com/my-registry-index" }
 # 发布到私有registry
 cargo publish --registry my-company
 ```
+
 ### 5.2 镜像配置
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -260,6 +268,7 @@ replace-with = 'ustc'
 [source.ustc]
 registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 ```
+
 ---
 
 ## 6. 安全更新管理
@@ -288,6 +297,7 @@ registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 ├── 测试改进
 └── 代码清理
 ```
+
 ### 6.2 自动化更新流程
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -323,6 +333,7 @@ jobs:
             Minor updates: ${{ steps.check.outputs.minor }}
           branch: dependency-updates
 ```
+
 ---
 
 ## 7. 事件响应
@@ -356,6 +367,7 @@ jobs:
         ├── 流程改进
         └── 文档更新
 ```
+
 ### 7.2 应急响应检查表
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -387,6 +399,7 @@ jobs:
 □ 工具升级
 □ 演练验证
 ```
+
 ---
 
 **文档版本**: 1.0

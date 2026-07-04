@@ -84,6 +84,7 @@ SIL 4系统要求:
                     │   (安全继电器)  │
                     └─────────────────┘
 ```
+
 ### 软件架构
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -538,6 +539,7 @@ pub mod types {
     }
 }
 ```
+
 ---
 
 ## 冗余与多样性
@@ -618,6 +620,7 @@ pub enum ComparisonResult {
     Disagree,
 }
 ```
+
 ---
 
 ## 验证与确认
@@ -680,6 +683,7 @@ mod verification {
     }
 }
 ```
+
 ### 测试覆盖
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**

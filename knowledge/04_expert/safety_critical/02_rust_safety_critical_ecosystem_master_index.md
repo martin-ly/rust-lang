@@ -218,6 +218,7 @@ CASE_STUDY_01_FERROCENE_CERTIFICATION.md
     ↓
 SAFETY_CRITICAL_CHECKLISTS.md
 ```
+
 ### 嵌入式开发者
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -238,6 +239,7 @@ FORMAL_VERIFICATION_PRACTICAL_GUIDE.md
     ↓
 TROUBLESHOOTING_AND_DEBUGGING_GUIDE.md
 ```
+
 ### 系统架构师
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -258,6 +260,7 @@ RUST_2026_2030_ROADMAP_FORECAST.md
     ↓
 ADOPTION_STRATEGY_AND_ROI_ANALYSIS.md
 ```
+
 ### 项目经理
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -278,6 +281,7 @@ ADOPTION_STRATEGY_AND_ROI_ANALYSIS.md
     ↓
 EDUCATION_AND_TRAINING_ROADMAP.md
 ```
+
 ### 质量/验证工程师
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -298,6 +302,7 @@ RUST_SAFETY_CRITICAL_CODING_GUIDELINES.md
     ↓
 TROUBLESHOOTING_AND_DEBUGGING_GUIDE.md
 ```
+
 ---
 
 ## 📊 按开发阶段使用
@@ -384,6 +389,7 @@ TROUBLESHOOTING_AND_DEBUGGING_GUIDE.md
 案例研究: 5个
 行业标准: 4个
 ```
+
 ---
 
 ## 🔄 版本信息

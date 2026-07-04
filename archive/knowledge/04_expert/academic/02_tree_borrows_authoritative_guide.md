@@ -944,4 +944,4 @@ fn use_abstractions() {
 | 来源 | 类型 | 说明 |
 |:---|:---|:---|
 | [Kani docs](https://model-checking.github.io/kani/) | 权威来源 | 模型检验器 |
-| [Verus docs](https://verus-lang.github.io/verus/) | 权威来源 | SMT 验证器 |
+| [Verus docs](https://github.com/verus-lang/verusverus/) | 权威来源 | SMT 验证器 |

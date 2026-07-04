@@ -91,7 +91,7 @@
 - [Aeneas: Symbolic Semantics for Rust](https://github.com/AeneasVerif/aeneas)
 - [Prusti: Deductive Verification for Rust](https://www.pm.inf.ethz.ch/research/prusti.html)
 - [Kani: Rust Model Checker](https://model-checking.github.io/kani/)
-- [Verus: Verified Rust for Low-Level Systems](https://verus-lang.github.io/verus/)
+- [Verus: Verified Rust for Low-Level Systems](https://github.com/verus-lang/verusverus/)
 - [Miri: Rust Interpreter for Undefined Behavior](https://github.com/rust-lang/miri)
 - [Tree Borrows / Stacked Borrows](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md)
 - [Ferrocene: Rust for Safety-Critical Systems](https://ferrocene.dev/)

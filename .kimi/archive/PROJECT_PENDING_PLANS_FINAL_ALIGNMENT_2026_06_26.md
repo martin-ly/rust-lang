@@ -65,7 +65,7 @@
 | 主题 | 关键未完成项 | 权威/参考来源 |
 |---|---|---|
 | **编译器/Cargo 深度内容** | rustc query system 实践、new trait solver 对比示例、Cargo resolver v3 / `public = true`、MIR/codegen/LLVM | [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/)、[Cargo Book](https://doc.rust-lang.org/cargo/)、[Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/) |
-| **形式化工具示例** | 扩展 Kani 函数/循环合约示例到 c03/c04；Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 概念页交叉引用 | [Kani docs](https://model-checking.github.io/kani/)、[Verus docs](https://verus-lang.github.io/verus/)、[Safety Tags RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
+| **形式化工具示例** | 扩展 Kani 函数/循环合约示例到 c03/c04；Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 概念页交叉引用 | [Kani docs](https://model-checking.github.io/kani/)、[Verus docs](https://github.com/verus-lang/verusverus/)、[Safety Tags RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
 | **生态迁移** | Sea-ORM 2.0 stable 迁移评估、AFIDT/dynosaur 跟踪、WASI 目标再次确认 | [SeaORM releases](https://github.com/SeaQL/sea-orm/releases)、[AFIDT tracking #133882](https://github.com/rust-lang/rust/issues/133882) |
 | **TRPL 3rd / Brown Book 对齐** | 建立逐章对照映射表、所有权文档引用 Brown 研究、`async.md` 标注 TRPL Ch17 | [TRPL 3rd Ed](https://nostarch.com/rust-programming-language-3e)、[Brown Rust Book](https://rust-book.cs.brown.edu/) |
 

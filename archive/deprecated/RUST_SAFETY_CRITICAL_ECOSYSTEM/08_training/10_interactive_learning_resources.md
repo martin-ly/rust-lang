@@ -82,7 +82,7 @@ Rust官方:
 
 安全特定:
 ├── Rust Secure Code Working Group
-│   └── https://rust-secure-code.github.io/
+│   └── https://github.com/rust-secure-code/wg
 │
 ├── Ferrous Systems Academy
 │   └── https://ferrous-systems.com/training/

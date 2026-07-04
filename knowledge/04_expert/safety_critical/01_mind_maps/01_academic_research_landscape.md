@@ -52,6 +52,7 @@ Tree Borrows (2023):
 ├── 更好的unsafe代码支持
 └── 形式化验证友好
 ```
+
 ### 1.2 学术论文推荐
 >
 > **[来源: Rust Official Docs]**
@@ -109,6 +110,7 @@ Aeneas (Inria):
 ├── 状态: 新兴工具
 └── 应用: 研究探索
 ```
+
 ### 2.2 关键研究成果
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -138,6 +140,7 @@ Aeneas (Inria):
 /// - rustc可能集成
 /// - 教育材料更新
 ```
+
 ---
 
 ## 3. 类型系统研究
@@ -170,6 +173,7 @@ Aeneas (Inria):
     ├── 状态: 实验性
     └── 目标: 底层安全
 ```
+
 ### 3.2 学术研究前沿
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -207,6 +211,7 @@ MIR优化:
 ├── GCC后端
 └── 自定义后端支持
 ```
+
 ### 4.2 形式化语义
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -227,6 +232,7 @@ Oxide (Penn):
 ├── 借用检查形式化
 └── 研究工具
 ```
+
 ---
 
 ## 5. 应用领域研究
@@ -259,6 +265,7 @@ Tock (斯坦福):
 ├── 组件安全
 └── 低功耗设备
 ```
+
 ### 5.2 嵌入式与实时
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -274,6 +281,7 @@ Rust on RTOS:
 ├── Zephyr集成
 └── 安全关键认证
 ```
+
 ---
 
 ## 6. 教育与课程
@@ -305,6 +313,7 @@ ETH Zurich:
 ├── Prusti工具
 └── 验证课程
 ```
+
 ### 6.2 在线资源
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -320,6 +329,7 @@ Rust Formal Methods Interest Group:
 ├── 研究讨论
 └── 协作平台
 ```
+
 ---
 
 ## 7. 未来研究方向
@@ -346,6 +356,7 @@ Tree Borrows集成:
 ├── 认证工具链
 └── 培训体系
 ```
+
 ### 7.2 中期目标 (2028-2030)
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -366,6 +377,7 @@ Tree Borrows集成:
 ├── 形式化验证
 └── 标准制定
 ```
+
 ---
 
 ## 8. 研究资助
@@ -393,6 +405,7 @@ ERC (欧洲):
 ├── Ferrous Systems
 └── AdaCore
 ```
+
 ---
 
 **文档版本**: 1.0

@@ -84,6 +84,7 @@ pub enum BufferError {
     Overflow,
 }
 ```
+
 #### 3.6 功能安全概念
 >
 > **[来源: Rust Official Docs]**
@@ -145,6 +146,7 @@ pub enum E2EResult {
     DataError,
 }
 ```
+
 ---
 
 ## ISO 26262-6: 软件级产品开发
@@ -172,6 +174,7 @@ ASIL等级: D
   - 单元测试(100%分支覆盖)
   - 形式化验证(Kani)
 ```
+
 ```rust
 /// ASIL D级除法保护
 ///
@@ -192,6 +195,7 @@ pub enum DivisionError {
     Underflow,
 }
 ```
+
 ### 6.6 软件架构设计
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -262,6 +266,7 @@ pub mod actuator_interface {
     }
 }
 ```
+
 **2. 错误处理架构**:
 
 ```rust,ignore
@@ -329,6 +334,7 @@ pub enum RecoveryAction {
     Continue,
 }
 ```
+
 ### 6.7 软件单元设计与实现
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -469,6 +475,7 @@ mod tests {
     }
 }
 ```
+
 ### 6.8 软件单元测试
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -561,6 +568,7 @@ mod asil_d_tests {
     }
 }
 ```
+
 ---
 
 ## 工具链鉴定
@@ -610,6 +618,7 @@ mod tool_qualification {
     }
 }
 ```
+
 ---
 
 ## 认证检查表

@@ -60,6 +60,7 @@
     │
     └── 运行时契约 ──► Prusti
 ```
+
 ---
 
 ## Miri实战
@@ -87,6 +88,7 @@ cargo miri test test_name
 # 检查二进制
 cargo miri run
 ```
+
 ### 环境变量配置
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -101,6 +103,7 @@ export MIRIFLAGS="-Zmiri-disable-isolation"
 # 检查数据竞争
 export MIRIFLAGS="-Zmiri-data-race-detector"
 ```
+
 ### 实际示例
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -137,6 +140,7 @@ fn use_after_free() {
 // error: Undefined Behavior: pointer to alloc1496 was dereferenced
 //        after this allocation had already been freed
 ```
+
 ### 在CI中集成Miri
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -163,6 +167,7 @@ jobs:
         env:
           MIRIFLAGS: -Zmiri-strict-provenance
 ```
+
 ---
 
 ## Kani模型检查
@@ -187,6 +192,7 @@ kani-setup
 # 验证安装
 kani --version
 ```
+
 ### 基本证明
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -214,6 +220,7 @@ fn verify_add() {
     assert_eq!(result, a + b);
 }
 ```
+
 ### 复杂验证示例
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -260,6 +267,7 @@ fn verify_binary_search() {
     }
 }
 ```
+
 ### 不安全代码验证
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -286,6 +294,7 @@ fn verify_safe_access() {
     }
 }
 ```
+
 ### Kani高级特性
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -322,6 +331,7 @@ fn verify_with_stub() {
     // ...
 }
 ```
+
 ---
 
 ## Verus定理证明
@@ -344,6 +354,7 @@ git clone https://github.com/verus-lang/verus.git
 cd verus/source
 cargo build --release
 ```
+
 ### 基本证明
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -384,6 +395,7 @@ verus! {
     }
 }
 ```
+
 ### 数据结构验证
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -438,6 +450,7 @@ verus! {
     }
 }
 ```
+
 ---
 
 ## 验证策略
@@ -475,6 +488,7 @@ Level 5: 定理证明 (Verus)
 ├── 复杂不变量
 └── 关键组件
 ```
+
 ### 验证投资回报率
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -580,6 +594,7 @@ fn verify_state_machine() {
     assert_eq!(sm.state, State::Error);
 }
 ```
+
 ### 案例2: 加密算法验证
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -615,6 +630,7 @@ fn verify_constant_time() {
     // 注意：由于哈希碰撞，不同输入也可能返回true（概率极低）
 }
 ```
+
 ---
 
 ## 最佳实践
@@ -633,6 +649,7 @@ fn verify_simple_property() {
     assert!(x == x);  // 恒真
 }
 ```
+
 ### 2. 逐步增加复杂度
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -648,6 +665,7 @@ fn verify_with_assumptions() {
     assert!(result < 200);
 }
 ```
+
 ### 3. 处理循环
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -667,6 +685,7 @@ fn verify_with_loop() {
     assert!(sum <= 45);  // 0+1+...+9 = 45
 }
 ```
+
 ### 4. 在CI中集成
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -695,6 +714,7 @@ jobs:
           rustup component add miri
           cargo miri test
 ```
+
 ---
 
 ## 故障排除
@@ -721,6 +741,7 @@ fn fast_proof() {
     // ...
 }
 ```
+
 ### Miri堆溢出
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -729,6 +750,7 @@ fn fast_proof() {
 # 增加Miri栈大小
 MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 ```
+
 ---
 
 **文档版本**: 1.0
@@ -797,4 +819,4 @@ MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 | 来源 | 类型 | 说明 |
 |:---|:---|:---|
 | [Kani docs](https://model-checking.github.io/kani/) | 权威来源 | 模型检验器 |
-| [Verus docs](https://verus-lang.github.io/verus/) | 权威来源 | SMT 验证器 |
+| [Verus docs](https://github.com/verus-lang/verusverus/) | 权威来源 | SMT 验证器 |

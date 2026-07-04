@@ -33,6 +33,7 @@
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
+
 ---
 
 ## Level 1: Rust基础 (2周)
@@ -68,6 +69,7 @@
       data.iter().sum()
   }
   ```
+
 #### 模块2: 借用与生命周期 (2天)
 >
 > **[来源: Rust Official Docs]**
@@ -96,6 +98,7 @@
       }
   }
   ```
+
 #### 模块3: 类型系统 (1天)
 
 - **理论** (2h)
@@ -188,6 +191,7 @@
       }
   }
   ```
+
 #### 模块9: 并发编程 (1天)
 
 - 线程管理
@@ -285,6 +289,7 @@
       assert!(result <= 200);
   }
   ```
+
 - **Miri**: UB检测
 - **Verus**: 定理证明
 
@@ -375,6 +380,7 @@ rustup component add clippy rustfmt llvm-tools-preview
 cargo install cargo-audit cargo-fuzz cargo-tarpaulin
 cargo install kani-verifier verus
 ```
+
 ### 参考书籍
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -411,6 +417,7 @@ cargo install kani-verifier verus
 ├── AdaCore培训认证
 └── 厂商提供
 ```
+
 ### 组织认证
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

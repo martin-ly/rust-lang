@@ -49,7 +49,7 @@
 | 主题 | 关键未完成项 | 权威/参考来源 |
 |---|---|---|
 | **编译器/Cargo 深度内容** | rustc query system、new trait solver、MIR/codegen/LLVM、Cargo resolver v3 / public-private deps / build scripts / registries、Cranelift / parallel frontend / build-std | [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/)、[Cargo Book](https://doc.rust-lang.org/cargo/)、[Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/) |
-| **形式化工具示例** | Kani 函数/循环合约可运行示例、Safety Tags / BorrowSanitizer / Tree Borrows / AutoVerus/Verus 概念页与代码示例交叉引用 | [Kani docs](https://model-checking.github.io/kani/)、[Verus docs](https://verus-lang.github.io/verus/)、[Tree Borrows paper](https://plv.mpi-sws.org/treerabs/)、[Safety Tags RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
+| **形式化工具示例** | Kani 函数/循环合约可运行示例、Safety Tags / BorrowSanitizer / Tree Borrows / AutoVerus/Verus 概念页与代码示例交叉引用 | [Kani docs](https://model-checking.github.io/kani/)、[Verus docs](https://github.com/verus-lang/verusverus/)、[Tree Borrows paper](https://plv.mpi-sws.org/treerabs/)、[Safety Tags RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
 | **生态迁移** | Sea-ORM 2.0 stable 迁移、`async_trait` → AFIDT/dynosaur 跟踪、WASI 目标确认 | [SeaORM releases](https://github.com/SeaQL/sea-orm/releases)、[AFIDT tracking](https://github.com/rust-lang/rust/issues/133882)、[WASI target update blog](https://blog.rust-lang.org/2024/04/09/updates-to-rusts-wasi-targets/) |
 | **TRPL 3rd / Brown Book 对齐** | 所有权/借用文档引用 Brown 研究、`async.md` 标注 TRPL Ch17、逐章对照审计 | [TRPL 3rd Ed (No Starch)](https://nostarch.com/rust-programming-language-3e)、[Brown Rust Book](https://rust-book.cs.brown.edu/) |
 

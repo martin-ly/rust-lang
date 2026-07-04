@@ -30,6 +30,7 @@ examples/   跨模块综合示例
 book/       mdBook 生成输出（无需手动编辑）
 scripts/    维护脚本（kb_auditor.py、version_fact_check.py 等）
 ```
+
 ### 2. 找到你的第一个任务
 
 | 如果你擅长... | 推荐任务 | 入口 | 难度 |
@@ -65,6 +66,7 @@ cargo install mdbook-toc      # 目录生成（当前禁用，见 book.toml）
 cargo check --workspace       # 应全部通过
 cargo test --workspace        # 应全部通过
 ```
+
 ---
 
 ## 贡献流程
@@ -81,6 +83,7 @@ cargo test --workspace        # 应全部通过
    python scripts/kb_auditor.py        # 确保死链为 0
    python scripts/version_fact_check.py # 确保版本错误为 0
    ```
+
 4. 提交 PR，描述修改内容和验证结果
 
 ### 大型变更（> 5 文件 或 新增章节）
@@ -107,6 +110,7 @@ cargo test --workspace        # 应全部通过
 
 ---
 ```
+
 ### L4 形式化文件特殊要求
 
 必须包含声明：
@@ -114,6 +118,7 @@ cargo test --workspace        # 应全部通过
 ```markdown
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](.)、[Kani](.)、[Coq](.)。
 ```
+
 ### 代码块规范
 
 - Rust 代码块使用 `` ```rust `` 或 `` ```rust,ignore ``（如需要 nightly 特性）
@@ -137,6 +142,7 @@ cargo test --workspace        # 应全部通过
   python scripts/i18n/check_concept_headers.py
   python scripts/i18n/check_terminology_consistency.py
   ```
+
 ---
 
 ## 验证清单（提交前必做）
@@ -162,6 +168,7 @@ python scripts/code_block_compiler.py
 # 6. 文档构建（如修改了 concept/ 中的 Mermaid 图表）
 mdbook build
 ```
+
 ---
 
 ## 当前维护重点

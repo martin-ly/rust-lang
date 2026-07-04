@@ -503,6 +503,7 @@
 □ 提交信息规范
 □ 自测完成
 ```
+
 ### 每周检查
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -515,6 +516,7 @@
 □ 代码审查完成
 □ 进度跟踪
 ```
+
 ### 发布前快速检查
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -529,6 +531,7 @@
 □ 覆盖率达标
 □ 文档完整
 ```
+
 ---
 
 ## 检查表使用指南

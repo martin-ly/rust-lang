@@ -48,6 +48,7 @@ MISRA C:2025 总规则数: 143
 
 结论: Rust语言设计消除了75%的MISRA C规则违反可能性
 ```
+
 ---
 
 ## 详细规则映射
@@ -259,6 +260,7 @@ MISRA C:2025 总规则数: 143
        "unsafe_code",  # 如需完全禁止unsafe
    ]
    ```
+
 3. **文档化例外**
    - 记录所有unsafe使用
    - 说明不变量
@@ -310,6 +312,7 @@ msrv = "1.70.0"
 cognitive-complexity-threshold = 15
 cyclomatic-complexity-threshold = 15
 ```
+
 ### 编译器标志
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -321,6 +324,7 @@ RUSTFLAGS="-D warnings -D unsafe-code" cargo build
 # 或允许unsafe但警告
 RUSTFLAGS="-D warnings -W unsafe-code" cargo build
 ```
+
 ---
 
 ## 认证文档模板
@@ -359,6 +363,7 @@ RUSTFLAGS="-D warnings -W unsafe-code" cargo build
 - clippy: [版本] - [鉴定文档]
 - miri: [版本] - [使用范围]
 ```
+
 ---
 
 ## 未来展望

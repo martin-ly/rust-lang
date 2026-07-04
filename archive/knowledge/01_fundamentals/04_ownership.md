@@ -670,7 +670,7 @@ fn double_string(mut s: String) -> String {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **Niko Matsakis**, ["Two interpretations of borrowing"](https://smallcultfollowing.com/babysteps/blog/2024/01/05/two-interpretations-of-borrowing/) —— 借用的两种语义解释（区域视角 vs 流视角）。
-- **Without Boats**, ["Pin and Suffering"](https://without.boats/blog/pin-and-suffering/) —— 自引用结构与所有权边界的深度分析。
+- **Without Boats**, ["Pin and Suffering"](https://without.boats/blog/pin/) —— 自引用结构与所有权边界的深度分析。
 - **Jon Gjengset**, [Crust of Rust: Lifetime Annotations](https://www.youtube.com/watch?v=rAl-9HwD858) —— 生命周期与所有权的可视化讲解。
 
 ### 跨语言对比（三级来源）

@@ -121,6 +121,7 @@ impl ConfigurationManagementPlan {
     }
 }
 ```
+
 ### A-2: 软件开发过程
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -181,6 +182,7 @@ impl FlightControlFunction {
     }
 }
 ```
+
 #### 软件设计数据
 
 ```rust,ignore
@@ -286,6 +288,7 @@ pub mod timing {
     }
 }
 ```
+
 #### 代码标准与实现
 
 ```rust,ignore
@@ -417,6 +420,7 @@ impl ControlOutput {
     }
 }
 ```
+
 ### A-3: 软件验证过程
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -505,6 +509,7 @@ mod tests {
     }
 }
 ```
+
 ### 覆盖率目标
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -595,6 +600,7 @@ pub enum TestResult {
     Fail(String),
 }
 ```
+
 ---
 
 ## 适航认证检查表

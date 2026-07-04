@@ -97,6 +97,7 @@ opam install coq-iris
 # 安装 stdpp (标准库扩展)
 opam install coq-stdpp
 ```
+
 ### 项目结构
 >
 > **[来源: Rust Official Docs]**
@@ -116,6 +117,7 @@ rust_formalization/
 │   └── type_safety.v
 └── _CoqProject
 ```
+
 ---
 
 ### 模块 3: 概念依赖图
@@ -144,6 +146,7 @@ graph TD
     style L fill:#bfb,stroke:#333,stroke-width:2px
     style M fill:#bbf,stroke:#333,stroke-width:2px
 ```
+
 #### 承上（前置知识回溯）
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
@@ -208,6 +211,7 @@ graph TD
 │  • Type Safety = Progress + Preservation │
 └─────────────────────────────────────────┘
 ```
+
 #### 1.3 形式化直觉
 
 > ⚠️ **标注**: 本节与 Programming Languages 的形式语义理论对齐。
@@ -224,6 +228,7 @@ Preservation: ⊢ e : T ∧ e ⟶ e'  →  ⊢ e' : T
 Type Safety: Progress ∧ Preservation
              （良类型的程序永远不会 stuck）
 ```
+
 Rust 的形式化在此基础上增加了**所有权**和**借用**的约束，使得"stuck"不仅包括类型错误，还包括内存错误（use-after-free、数据竞争等）。
 
 ---
@@ -290,6 +295,7 @@ Proof.
   intuition.
 Qed.
 ```
+
 ### 借用检查形式化
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -330,6 +336,7 @@ Proof.
   (* 证明：求值保持借用有效性 *)
 Admitted.
 ```
+
 ### 类型安全证明
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -414,6 +421,7 @@ Proof.
     contradiction.
 Qed.
 ```
+
 ---
 
 ## 🚀 高级主题
@@ -463,6 +471,7 @@ Proof.
   - iExact "HR".
 Qed.
 ```
+
 ### 并发验证
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -510,6 +519,7 @@ Proof.
   apply send_safe.
 Qed.
 ```
+
 ---
 
 ## 🗺️ 模块 7: 思维表征
@@ -546,6 +556,7 @@ Qed.
 关键洞察: 形式化验证不是替代测试，而是对核心安全属性的终极保证。
          实际项目中，测试覆盖 95% 场景，形式化验证覆盖最关键的 5%。
 ```
+
 ---
 
 ## 📚 模块 8: 国际化对齐

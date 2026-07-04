@@ -587,7 +587,7 @@ pub fn create_cyclic() -> Node { ... }
 ### 10.1 官方资源
 
 - [Creusot GitHub](https://github.com/creusot-rs/creusot)
-- [用户手册](https://creusot-rs.github.io/creusot/)
+- [用户手册](https://creusot.rs/)
 - [论文: Prophecy Logic](https://arxiv.org/abs/2306.08903)
 
 ### 10.2 相关工具

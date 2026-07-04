@@ -63,7 +63,7 @@
 ### 2.1 修复 `verusverus` 拼写错误链接
 
 - **涉及文件**: 9 个
-- **修复内容**: 将 `https://github.com/verus-lang/verusverus/guide/` 替换为 `https://verus-lang.github.io/verus/guide/`
+- **修复内容**: 将 `https://github.com/verus-lang/verusverus/guide/` 替换为 `https://github.com/verus-lang/verusverus/guide/`
 - **文件列表**:
   - `concept/00_meta/terminology_glossary.md`
   - `concept/01_foundation/05_reference_semantics.md`

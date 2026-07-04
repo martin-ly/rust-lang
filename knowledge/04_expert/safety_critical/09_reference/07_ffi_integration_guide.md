@@ -139,6 +139,7 @@ pub enum FfiError {
     ProcessingFailed(c_int),
 }
 ```
+
 ### 2. 类型转换安全
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -207,6 +208,7 @@ pub enum FfiError {
     UnknownStatus(c_int),
 }
 ```
+
 ### 3. 回调安全
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -287,6 +289,7 @@ pub enum EventType {
     Complete,
 }
 ```
+
 ---
 
 ## 安全关键FFI模式
@@ -363,6 +366,7 @@ impl<T> Drop for CVec<T> {
     }
 }
 ```
+
 ### 2. 并发FFI
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -431,6 +435,7 @@ impl Drop for NativeContextWrapper {
     }
 }
 ```
+
 ---
 
 ## 自动生成工具
@@ -476,6 +481,7 @@ fn main() {
         .expect("Couldn't write bindings!");
 }
 ```
+
 ### cbindgen配置
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -501,6 +507,7 @@ rename_types = "PascalCase"
 [struct]
 rename_types = "PascalCase"
 ```
+
 ---
 
 ## 验证与测试
@@ -551,6 +558,7 @@ mod tests {
     }
 }
 ```
+
 ---
 
 ## 最佳实践检查表

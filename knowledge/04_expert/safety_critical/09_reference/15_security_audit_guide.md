@@ -44,6 +44,7 @@
 ├── 漏洞扫描
 └── SBOM验证
 ```
+
 ### 1.2 审计生命周期
 >
 > **[来源: Rust Official Docs]**
@@ -61,6 +62,7 @@
 ├── 事件: 应急响应
 └── 年度: 全面审查
 ```
+
 ---
 
 ## 2. 静态代码审计
@@ -92,6 +94,7 @@ cargo audit --json
 cargo install cargo-bloat
 cargo bloat --release
 ```
+
 ### 2.2 unsafe代码审计
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -146,6 +149,7 @@ mod audit {
     }
 }
 ```
+
 ---
 
 ## 3. 依赖安全审计
@@ -217,6 +221,7 @@ allow-registry = [
     "https://github.com/rust-lang/crates.io-index",
 ]
 ```
+
 ### 3.3 SBOM生成与验证
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -232,6 +237,7 @@ cargo sbom --validate
 # 导入依赖图
 cargo tree --edges normal --prefix none | sort | uniq
 ```
+
 ---
 
 ## 4. 运行时安全监控
@@ -311,6 +317,7 @@ pub enum SecurityAction {
     Block,
 }
 ```
+
 ### 4.2 入侵检测
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -353,6 +360,7 @@ impl IntrusionDetector {
     }
 }
 ```
+
 ---
 
 ## 5. 审计报告模板
@@ -401,6 +409,7 @@ impl IntrusionDetector {
 2. 加强代码审查
 3. 增加自动化安全测试
 ```
+
 ### 5.2 详细审计清单
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -427,6 +436,7 @@ impl IntrusionDetector {
 □ 密钥管理审查
 □ 日志配置审查
 ```
+
 ---
 
 ## 6. 持续安全监控
@@ -479,6 +489,7 @@ jobs:
           name: sbom
           path: sbom.json
 ```
+
 ### 6.2 安全指标仪表板
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -504,6 +515,7 @@ impl SecurityMetrics {
     }
 }
 ```
+
 ---
 
 **文档版本**: 1.0

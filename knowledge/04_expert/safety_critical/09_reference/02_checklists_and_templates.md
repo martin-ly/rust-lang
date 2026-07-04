@@ -72,6 +72,7 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 _________________________________
 ```
+
 ---
 
 ### 模块安全等级检查清单
@@ -127,6 +128,7 @@ _________________________________
 
 备注: _________________________________
 ```
+
 ---
 
 ## 认证准备检查清单
@@ -203,6 +205,7 @@ _________________________________
 
 状态: [ ] 准备就绪  [ ] 需要改进
 ```
+
 ---
 
 ## 发布前检查清单
@@ -262,6 +265,7 @@ _________________________________
 发布版本: ___________
 发布日期: ___________
 ```
+
 ---
 
 ## 文档模板
@@ -362,6 +366,7 @@ _________________________________
 |------|------|----------|------|
 | 1.0 | ... | 初始版本 | ... |
 ```
+
 ### 设计文档模板
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -399,6 +404,7 @@ _________________________________
 ```rust,ignore
 pub fn function_name(arg: Type) -> Result<Output, Error>;
 ```
+
 #### 安全机制
 
 - 输入验证: ...
@@ -459,6 +465,7 @@ pub fn function_name(arg: Type) -> Result<Output, Error>;
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ...
+
 ```
 ### 测试报告模板
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -531,6 +538,7 @@ pub fn function_name(arg: Type) -> Result<Output, Error>;
 - 测试经理: ________
 - 日期: ________
 ```
+
 ---
 
 ## 工具配置模板
@@ -586,6 +594,7 @@ deny = [
     "unsafe_code",  # 可选：完全禁止unsafe
 ]
 ```
+
 ### CI配置 (.github/workflows/ci.yml)
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -637,6 +646,7 @@ jobs:
           cargo miri test
         if: ${{ hashFiles('**/unsafe**') != '' }}
 ```
+
 ### Cargo.toml模板
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -678,6 +688,7 @@ inherits = "release"
 strip = false
 debug = true
 ```
+
 ---
 
 ## 使用说明

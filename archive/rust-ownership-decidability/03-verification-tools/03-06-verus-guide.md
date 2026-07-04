@@ -991,8 +991,8 @@ proof fn good_recursion(n: nat) -> nat
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Verus GitHub](https://github.com/verus-lang/verus)
-- [Verus 教程](https://verus-lang.github.io/verus/guide/)
-- [Verus 标准库 (vstd)](https://verus-lang.github.io/verus/vstd/)
+- [Verus 教程](https://github.com/verus-lang/verusverus/guide/)
+- [Verus 标准库 (vstd)](https://github.com/verus-lang/verusverus/vstd/)
 - [Z3 SMT Solver](https://github.com/Z3Prover/z3)
 - [IronFleet 论文](https://www.microsoft.com/en-us/research/publication/ironfleet-proving-practical-distributed-systems-correct/)
 
@@ -1042,9 +1042,9 @@ proof fn good_recursion(n: nat) -> nat
 >
 > **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
 >
-> **[来源: [Verus Documentation](https://verus-lang.github.io/verus/)]**
+> **[来源: [Verus Documentation](https://github.com/verus-lang/verusverus/)]**
 >
-> **[来源: [Microsoft Verus Blog](https://www.microsoft.com/en-us/research/project/verus/)]**
+> **[来源: [Microsoft Verus Blog](https://verus-lang.github.io/verus/guide/)]**
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >

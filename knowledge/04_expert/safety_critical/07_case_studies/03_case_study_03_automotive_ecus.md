@@ -89,6 +89,7 @@
 ├── 转向系统控制 (ASIL D)
 └── 安全气囊控制 (ASIL D)
 ```
+
 ---
 
 ## 技术架构
@@ -137,6 +138,7 @@
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
+
 ---
 
 ## 关键技术方案
@@ -182,6 +184,7 @@ impl RteInterface {
     }
 }
 ```
+
 ### 2. 实时操作系统集成
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -225,6 +228,7 @@ let control_task = Task::new(
     }
 )?;
 ```
+
 ### 3. 通信协议栈
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -258,6 +262,7 @@ impl<C: Can> CanController<C> {
     }
 }
 ```
+
 #### SOME/IP (服务导向通信)
 
 ```rust,ignore
@@ -278,6 +283,7 @@ impl SomeIpService {
     }
 }
 ```
+
 ---
 
 ## 功能安全实施
@@ -310,6 +316,7 @@ impl SomeIpService {
 │                                             │
 └─────────────────────────────────────────────┘
 ```
+
 ### E2E保护
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -341,6 +348,7 @@ impl<T: Serialize> E2EProtected<T> {
     }
 }
 ```
+
 ### 安全监控
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -370,6 +378,7 @@ impl SafetyMonitor {
     }
 }
 ```
+
 ---
 
 ## 性能优化
@@ -402,6 +411,7 @@ pub struct CompactStruct {
     // 自动对齐优化
 }
 ```
+
 ### 执行时间优化
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -428,6 +438,7 @@ fn critical_calculation(x: u32) -> u32 {
     x.wrapping_mul(3).wrapping_add(1)
 }
 ```
+
 ---
 
 ## 当前挑战

@@ -65,6 +65,7 @@ fn process_data_index(data: &mut Vec<u32>) {
     data[1] += 1;
 }
 ```
+
 #### 错误 E0597: 悬垂引用
 >
 > **[来源: Rust Official Docs]**
@@ -97,6 +98,7 @@ impl<'a> Container<'a> {
     }
 }
 ```
+
 ### 1.2 泛型约束错误
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -135,6 +137,7 @@ fn find_max_ref<T: PartialOrd>(list: &[T]) -> &T {
     max
 }
 ```
+
 ### 1.3 no_std编译错误
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -163,6 +166,7 @@ fn use_static_vec() {
     let v: StaticVec<u32, 100> = StaticVec::new();
 }
 ```
+
 ---
 
 ## 2. 运行时问题诊断
@@ -216,6 +220,7 @@ pub fn safe_execute<T>(operation: impl FnOnce() -> T) -> Option<T> {
     }
 }
 ```
+
 ### 2.2 堆栈溢出检测
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -260,6 +265,7 @@ pub mod stack_monitor {
     }
 }
 ```
+
 ### 2.3 死锁检测
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -334,6 +340,7 @@ impl DeadlockDetector {
     }
 }
 ```
+
 ---
 
 ## 3. 工具链问题
@@ -371,6 +378,7 @@ MIRIFLAGS="-Zmiri-disable-isolation" cargo miri test --release
 # 解决: 增加栈大小
 MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 ```
+
 ### 3.2 Kani验证失败
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -401,6 +409,7 @@ fn verify_panic_case() {
     assert!(x < 50);  // 这应该失败
 }
 ```
+
 ### 3.3 Clippy配置问题
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -415,6 +424,7 @@ allow = [
     "clippy::module_name_repetitions",   # 命名规范允许
 ]
 ```
+
 ---
 
 ## 4. 性能问题
@@ -438,6 +448,7 @@ panic = "abort"      # 简化panic
 [dependencies]
 panic-halt = "0.2"
 ```
+
 ### 4.2 实时性能调优
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -466,6 +477,7 @@ pub fn cache_warmup<T>(data: &[T]) {
     }
 }
 ```
+
 ---
 
 ## 5. 认证相关问题
@@ -502,6 +514,7 @@ proptest! {
     }
 }
 ```
+
 ### 5.2 工具链鉴定问题
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -535,6 +548,7 @@ mod tool_qualification {
     }
 }
 ```
+
 ---
 
 ## 6. 调试技巧
@@ -570,6 +584,7 @@ pub fn log_safety_event(event: SafetyEvent) {
     }
 }
 ```
+
 ### 6.2 断言策略
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -617,6 +632,7 @@ trait Invariant {
     fn check_invariant(&self) -> bool;
 }
 ```
+
 ---
 
 ## 7. 常见问题速查

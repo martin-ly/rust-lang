@@ -127,6 +127,7 @@ fn main() -> ! {
 struct GpioHandle;
 struct Watchdog;
 ```
+
 ### 验证点
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -270,6 +271,7 @@ mod tests {
 // 2. 添加并发压力测试
 // 3. 实现Iterator trait
 ```
+
 ---
 
 ## 实验3: 状态机控制器 (中级)
@@ -414,6 +416,7 @@ pub enum ErrorCode {
 // 2. 实现日志记录
 // 3. 添加超时处理
 ```
+
 ---
 
 ## 实验4: 传感器驱动 (高级)
@@ -542,6 +545,7 @@ pub enum SensorError {
 // 2. 添加故障注入测试
 // 3. 实现看门狗监控
 ```
+
 ---
 
 ## 实验5: 安全通信协议 (专家)
@@ -664,6 +668,7 @@ pub enum CommError {
 // 2. 实现重传机制
 // 3. 添加认证
 ```
+
 ---
 
 ## 实验检查清单

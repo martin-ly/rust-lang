@@ -52,6 +52,7 @@
 ├── C3: 难以可控(<90%)
 └── C4: 不可控
 ```
+
 ### 1.2 ASIL等级确定矩阵
 >
 > **[来源: Rust Official Docs]**
@@ -71,6 +72,7 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 
 注: 可控性假设为C2(一般可控)
 ```
+
 ---
 
 ## 2. 等级决策树
@@ -102,6 +104,7 @@ S3  | ASIL| ASIL| ASIL| ASIL|
   │
   └── 确定ASIL等级
 ```
+
 ### 2.2 工业系统SIL选择
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -128,6 +131,7 @@ S3  | ASIL| ASIL| ASIL| ASIL|
           ├── 100-1000 ──► SIL 3
           └── 1000-10000 ──► SIL 4
 ```
+
 ### 2.3 航空系统DAL选择
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -150,6 +154,7 @@ S3  | ASIL| ASIL| ASIL| ASIL|
           ├── 独立系统 ──► 可降低一级
           └── 共因失效 ──► 保持原级
 ```
+
 ---
 
 ## 3. 等级分解策略
@@ -183,6 +188,7 @@ ASIL D分解选项:
 ├── 适用: 混合关键系统
 └── Rust实现: 分区内核 + 独立应用
 ```
+
 ### 3.2 SIL分解
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -232,6 +238,7 @@ impl OneOutOfTwo {
     }
 }
 ```
+
 ---
 
 ## 4. Rust实现建议
@@ -269,6 +276,7 @@ pub fn asil_a_function(input: Input) -> Result<Output, Error> {
 /// - 语句覆盖: 90%
 /// - 分支覆盖: 80%
 ```
+
 ### 4.2 ASIL B实现
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -300,6 +308,7 @@ pub fn asil_b_function(input: Input) -> Result<Output, Error> {
 /// - 语句覆盖: 100%
 /// - 分支覆盖: 90%
 ```
+
 ### 4.3 ASIL C实现
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -345,6 +354,7 @@ impl ValidatedValue {
 /// - 语句覆盖: 100%
 /// - 分支覆盖: 100%
 ```
+
 ### 4.4 ASIL D实现
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -411,6 +421,7 @@ impl AsilDProcessor {
 /// - FMEA完成
 /// - 共因失效分析
 ```
+
 ---
 
 ## 5. 降级与升级策略
@@ -434,6 +445,7 @@ impl AsilDProcessor {
 ├── ASIL B → QM
 └── 需要文档化论证
 ```
+
 ### 5.2 等级升级触发
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -446,6 +458,7 @@ impl AsilDProcessor {
 ├── 技术变更
 └── 监管要求变化
 ```
+
 ---
 
 ## 6. 检查清单

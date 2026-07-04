@@ -47,7 +47,7 @@
 - **Safety Tags**：RFC #3842 讨论中，研究原型提出 21 个基础标签。
   - 来源: [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) · [safer-rust/safety-tags](https://github.com/safer-rust/safety-tags)
 - **Verus / AutoVerus**：活跃开发中，用于系统级 Rust 代码的功能正确性验证。
-  - 来源: [Verus](https://verus-lang.github.io/verus/) · [AutoVerus paper](https://doi.org/10.1145/3763174)
+  - 来源: [Verus](https://github.com/verus-lang/verusverus/) · [AutoVerus paper](https://doi.org/10.1145/3763174)
 
 ### 数据库生态
 

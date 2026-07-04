@@ -86,6 +86,7 @@
 │  └──────────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────────┘
 ```
+
 ### 2.2 代码组织原则
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -114,6 +115,7 @@ src/
     ├── interrupt_handler/
     └── memory_manager/
 ```
+
 ### 2.3 关键技术决策
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -156,6 +158,7 @@ some-niche-crate = "0.5"  # 需要审计报告
 [patch.crates-io]
 # 使用私有注册替换高风险crate
 ```
+
 ---
 
 ## 三、标准合规建议
@@ -187,6 +190,7 @@ some-niche-crate = "0.5"  # 需要审计报告
 - 安全分析 (FMEA/FTA)
 - 工具鉴定 (Tool Qualification)
 ```
+
 #### 航空航天 (DO-178C)
 
 ```text
@@ -204,6 +208,7 @@ some-niche-crate = "0.5"  # 需要审计报告
 - 集成SPARK进行关键组件验证
 - 建立DO-178C模板和检查单
 ```
+
 ### 3.2 MISRA C:2025 Addendum 6 实施建议
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -281,6 +286,7 @@ Level 4: 认证实践 (2周)
 ├── 审计准备
 └── 模拟认证
 ```
+
 #### 外部认证
 
 | 认证 | 机构 | 时间 | 成本 | 优先级 |
@@ -337,6 +343,7 @@ Level 3 - 低风险 (监控)
 4. 供应商评估流程
 5. 内部fork准备
 ```
+
 ---
 
 ## 六、工具链建议
@@ -381,6 +388,7 @@ quality_gates:
   coverage: >80%
   audit: no_high_vulns
 ```
+
 ---
 
 ## 七、关键意见总结

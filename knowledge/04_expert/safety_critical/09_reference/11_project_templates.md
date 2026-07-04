@@ -52,6 +52,7 @@ embedded-safety-project/
 ├── build.rs
 └── memory.x
 ```
+
 ### 1.2 Cargo.toml模板
 >
 > **[来源: Rust Official Docs]**
@@ -129,6 +130,7 @@ lto = "fat"
 codegen-units = 1
 strip = false
 ```
+
 ### 1.3 rust-toolchain.toml
 >
 > **[来源: Rust Official Docs]**
@@ -147,6 +149,7 @@ targets = [
 ]
 profile = "minimal"
 ```
+
 ### 1.4 .cargo/config.toml
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -169,6 +172,7 @@ DEFMT_LOG = "info"
 [net]
 retry = 3
 ```
+
 ### 1.5 main.rs模板
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -226,6 +230,7 @@ fn main() -> ! {
     }
 }
 ```
+
 ### 1.6 lib.rs模板
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -252,6 +257,7 @@ pub enum SafetyError {
 /// 结果类型别名
 pub type Result<T> = core::result::Result<T, SafetyError>;
 ```
+
 ### 1.7 memory.x
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -272,6 +278,7 @@ MEMORY
 /* Stack top */
 _stack_top = ORIGIN(RAM) + LENGTH(RAM);
 ```
+
 ---
 
 ## 2. 应用程序模板
@@ -305,6 +312,7 @@ safety-application/
     └── workflows/
         └── ci.yml
 ```
+
 ### 2.2 Cargo.toml
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -356,6 +364,7 @@ kani-verifier = "0.40"
 name = "performance"
 harness = false
 ```
+
 ### 2.3 state_machine.rs
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -429,6 +438,7 @@ impl StateMachine<Running> {
     }
 }
 ```
+
 ### 2.4 CI/CD配置
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -518,6 +528,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
+
 ---
 
 ## 3. 快速启动命令
@@ -540,6 +551,7 @@ mkdir my-safety-project
 cd my-safety-project
 # 复制模板文件
 ```
+
 ### 3.2 初始化检查清单
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -570,6 +582,7 @@ echo "   2. Configure target platform in .cargo/config.toml"
 echo "   3. Run 'cargo build' to verify setup"
 echo "   4. Run 'cargo test' to run tests"
 ```
+
 ---
 
 **文档版本**: 1.0
