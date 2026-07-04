@@ -22,7 +22,7 @@
 > **Bloom 层级**: L3 (高级应用) / L4 (框架原理)
 > **目标读者**: 已掌握 Rust 异步编程与 Web 开发基础，希望深入理解 Actix-web 内部架构的开发者
 > [来源: Actix-web 官方文档](https://actix.rs/docs/)
-> [来源: Actix actor 框架文档](https://actix.rs/actix/)
+> [来源: Actix actor 框架文档](https://actix.rs/)
 > [来源: Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)
 
 ---
@@ -254,7 +254,7 @@ impl Actor for MyActor {
 }
 ```
 
-> [来源: Actix 文档 — Actors](https://actix.rs/actix/actix/trait.Actor.html)
+> [来源: Actix 文档 — Actors](https://actix.rs/actix/trait.Actor.html)
 
 ### 3.3 `Handler<M>` Trait {#33-handlerm-trait}
 
@@ -669,7 +669,7 @@ tokio::select! {
 | 来源 | 类型 | 引用位置 |
 |:---|:---|:---|
 | [Actix-web 官方文档](https://actix.rs/docs/) | 一级 | 全文 |
-| [Actix actor 框架文档](https://actix.rs/actix/) | 一级 | 第 3 节 |
+| [Actix actor 框架文档](https://actix.rs/) | 一级 | 第 3 节 |
 | [Actix-web API Reference](https://docs.rs/actix-web/latest/actix_web/) | 一级 | 第 4、5 节 |
 | [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) | 一级 | 第 3、5 节 |
 | [Axum 官方文档](https://docs.rs/axum/latest/axum/) | 二级 | 第 6 节 |

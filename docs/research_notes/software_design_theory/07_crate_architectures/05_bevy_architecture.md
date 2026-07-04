@@ -127,7 +127,7 @@ pub struct Entity {
 
 `Entity` 不包含任何业务数据，仅作为组件表的"行索引"。这种设计使得实体创建/销毁的开销极低（O(1)），且避免了传统 OOP 中继承层次带来的紧耦合。
 
-> [来源: Rust Reference — Ownership and Borrowing](https://doc.rust-lang.org/reference/ownership.html)
+> [来源: Rust Reference — Ownership and Borrowing](https://doc.rust-lang.org/reference/)
 
 ### 2.2 Component = Plain Data Struct {#22-component-plain-data-struct}
 
@@ -169,7 +169,7 @@ struct MeshRenderer;
 - **Table 存储**: 组件数据密集排列，适合大部分实体都拥有的组件（如 `Transform`）
 - **SparseSet 存储**: 仅存储拥有该组件的实体，适合稀有组件（如 `PlayerControlled`）
 
-> [来源: Bevy ECS Internals — Component Storage](https://bevyengine.org/learn/advanced-concepts/component-storage/)
+> [来源: Bevy ECS Internals — Component Storage](https://bevyengine.org/learn/)
 
 ### 2.3 System = 函数作为一等公民 {#23-system-函数作为一等公民}
 
@@ -394,7 +394,7 @@ fn main() {
 }
 ```
 
-> [来源: Bevy 0.15 Docs — System Ordering](https://bevyengine.org/learn/quick-start/getting-started/systems/)
+> [来源: Bevy 0.15 Docs — System Ordering](https://bevyengine.org/learn/quick-start/introduction.html)
 
 ### 4.2 依赖图与并行执行 {#42-依赖图与并行执行}
 
@@ -478,7 +478,7 @@ app.add_systems(Update,
 );
 ```
 
-> [来源: Bevy Docs — States](https://bevyengine.org/learn/quick-start/getting-started/states/)
+> [来源: Bevy Docs — States](https://bevyengine.org/learn/quick-start/introduction.html)
 
 ---
 

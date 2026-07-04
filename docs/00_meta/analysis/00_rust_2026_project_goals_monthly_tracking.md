@@ -384,7 +384,7 @@
 
 - [Rust 2026 Project Goals 主页](https://rust-lang.github.io/rust-project-goals/2026/)
 - [rust-project-goals GitHub 仓库](https://github.com/rust-lang/rust-project-goals)
-- [Rust 版本发布时间表](https://forge.rust-lang.org/js/index.html)
+- [Rust 版本发布时间表](https://forge.rust-lang.org/)
 - [Rust 领导委员会公告](https://foundation.rust-lang.org/)
 
 ### 7.2 本项目相关报告 {#72-本项目相关报告}

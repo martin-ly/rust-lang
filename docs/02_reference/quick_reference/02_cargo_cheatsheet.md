@@ -904,7 +904,7 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Cargo 官方文档](https://doc.rust-lang.org/cargo/)
-- [Cargo Book](https://doc.rust-lang.org/cargo/book/)
+- [Cargo Book](https://doc.rust-lang.org/cargo/)
 - [Cargo 参考手册](https://doc.rust-lang.org/cargo/reference/)
 
 ### 项目内部文档 {#项目内部文档}

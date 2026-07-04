@@ -273,7 +273,7 @@ graph TD
 > **生态状态提示**：本小节涉及 2026-05-28 发布的 Rust 1.96 中的 **breaking change**。
 
 Rust 1.96 起，所有 WebAssembly 目标在链接时**不再默认**向 `wasm-ld` 传递 `--allow-undefined`。此前，Rust 代码中未定义的 `extern "C"` 符号会被 wasm-ld 静默转换为 Wasm 模块的导入（通常来自 `"env"` 模块（Module））；现在，未定义符号将像原生平台一样产生**链接错误**。
-> [来源: [Rust 1.96 Release Notes — WebAssembly linker behavior](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)]
+> 来源: [Rust 1.96 Release Notes — WebAssembly linker behavior]
 
 **典型影响**（Rust 1.96 之前可编译，之后报错）：
 

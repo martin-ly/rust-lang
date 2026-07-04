@@ -40,9 +40,9 @@
 
 | RFC | 主题 | 项目文档 | 状态 |
 |-----|------|----------|------|
-| [RFC 1859](https://rust-lang.github.io/rfcs/1859-non-lexical-lifetimes.html) — Non-Lexical Lifetimes | 借用检查器改进 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ |
+| [RFC 1859](https://rust-lang.github.io/rfcs/2094-nll.html) — Non-Lexical Lifetimes | 借用检查器改进 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ |
 | [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) — NLL | 非词法生命周期 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ |
-| [RFC 0380](https://rust-lang.github.io/rfcs/0380-stabilize-no-std.html) — `no_std` | 无 std 环境 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | ✅ |
+| [RFC 0380](https://rust-lang.github.io/rfcs/1184-stabilize-no_std.html) — `no_std` | 无 std 环境 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | ✅ |
 | [RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html) — Specialization | Trait 特化 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 🔄 |
 
 ---
@@ -64,8 +64,8 @@
 | RFC | 主题 | 项目文档 | 状态 |
 |-----|------|----------|------|
 | [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) — async/await | 异步语法 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ |
-| [RFC 2418](https://rust-lang.github.io/rfcs/2418-remove-async-fn.html) / [RFC 3185](https://rust-lang.github.io/rfcs/3185-async-drop.html) — Async Drop | 异步析构 | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | ✅ |
-| [RFC 2645](https://rust-lang.github.io/rfcs/2645-transparent-unions-enums.html) | 不透明类型 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 🔄 |
+| [RFC 2418](https://rust-lang.github.io/rfcs/2394-async_await.html) / [RFC 3185](https://rust-lang.github.io/rfcs/3185-async-drop.html) — Async Drop | 异步析构 | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | ✅ |
+| [RFC 2645](https://rust-lang.github.io/rfcs/2645-transparent-enums.html) | 不透明类型 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 🔄 |
 
 ---
 

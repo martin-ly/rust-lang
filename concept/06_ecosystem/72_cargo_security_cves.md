@@ -17,13 +17,12 @@
 
 ---
 
-> **来源**: [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: Rust 1.96 Release Notes · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [CVE-2026-5222 Advisory](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/) ·
 > [CVE-2026-5223 Advisory](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/) ·
 > [Fedora 43 Rust 1.96.0 Update](https://linuxsecurity.com/advisories/fedora/fedora-43-rust-2026-d7436d12ae) ·
 > [Cargo Registries Reference](https://doc.rust-lang.org/cargo/reference/registries.html) ·
 > [Cargo Source Replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html)
-
 
 ---
 
@@ -32,7 +31,6 @@
 > **过渡**: 在建立 Cargo 安全公告 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
 
 > **过渡**: 最后，将 Cargo 安全公告 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
 
 ## 📑 目录
 
@@ -87,7 +85,7 @@ Rust 1.96.0 的公告明确指出：
 
 > **Users of crates.io are not affected by either vulnerability.**
 >
-> [来源: [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)]
+> 来源: [Rust 1.96 Release Notes]
 
 两个 CVE 都依赖于**第三方 registry** 的特定能力：
 
@@ -176,7 +174,7 @@ CVE-2026-5223 (Medium)
 └── 使用 cargo-audit 监控依赖中的已知 CVE
 ```
 
-> [来源: [Rust 1.96 Release Notes — Two Cargo advisories](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)]
+> 来源: [Rust 1.96 Release Notes — Two Cargo advisories]
 
 ---
 
@@ -259,7 +257,7 @@ experimental-feature = { git = "https://git.example.com/fork", registry = "my-co
 ```
 
 > [来源: [Cargo Reference — Registries](https://doc.rust-lang.org/cargo/reference/registries.html)] ·
-> [Rust 1.96 Release Notes — Dependency with both git and registry](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)]
+> Rust 1.96 Release Notes — Dependency with both git and registry]
 
 #### 示例 2：配置私有 registry 并使用 source replacement
 
@@ -336,7 +334,7 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | ✅ 一级 | 官方发布说明，含 CVE 摘要 |
+| Rust 1.96 Release Notes | ✅ 一级 | 官方发布说明，含 CVE 摘要 |
 | [CVE-2026-5222 Advisory](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/) | ✅ 一级 | URL 规范化认证漏洞详情 |
 | [CVE-2026-5223 Advisory](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/) | ✅ 一级 | tarball symlink 提取漏洞详情 |
 | [Fedora 43 Rust 1.96.0 Update](https://linuxsecurity.com/advisories/fedora/fedora-43-rust-2026-d7436d12ae) | ✅ 二级 | 发行版安全通告 |

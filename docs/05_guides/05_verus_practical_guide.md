@@ -42,7 +42,7 @@ flowchart LR
 | 证明辅助 | 全自动 | 大部分自动，需手动提供不变量 |
 
 > [来源: [Verus Guide](https://github.com/verus-lang/verusverus/guide/)]
-> [来源: [PLDI 2023 — Verus: Verifying Rust Programs using Linear Ghost Types](https://www.cs.utah.edu/pldi23/)]
+> [来源: [PLDI 2023 — Verus: Verifying Rust Programs using Linear Ghost Types](https://pldi23.sigplan.org/)]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---

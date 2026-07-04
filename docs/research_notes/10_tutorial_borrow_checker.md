@@ -1088,7 +1088,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 > **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
 >
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]**
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >

@@ -510,7 +510,7 @@ handle.abort();  // 显式取消
 > **来源: [Tokio Tutorial](https://tokio.rs/tokio/tutorial)**
 > **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
 > **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)**
-> **来源: [RFC 2592 - Pin](https://rust-lang.github.io/rfcs/2592-pin.html)**
+> **来源: [RFC 2592 - Pin](https://rust-lang.github.io/rfcs/2349-pin.html)**
 > **来源: [Rust Reference - Await Expressions](https://doc.rust-lang.org/reference/expressions/await-expr.html)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

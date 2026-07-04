@@ -19,7 +19,7 @@
 
 ## 目录 {#目录}
 
-- [Rust 1.97 特性速查表 {#rust-197-特性速查表}](#rust-197-特性速查表-rust-197-特性速查表)
+- [Rust 1.97 特性速查表（beta / nightly 候选） {#rust-197-特性速查表}](#rust-197-特性速查表beta--nightly-候选-rust-197-特性速查表)
   - [目录 {#目录}](#目录-目录)
   - [语言特性 {#语言特性}](#语言特性-语言特性)
     - [AsyncFn\* trait family 加入 prelude {#asyncfn-trait-family-加入-prelude}](#asyncfn-trait-family-加入-prelude-asyncfn-trait-family-加入-prelude)

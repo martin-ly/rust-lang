@@ -162,7 +162,7 @@
 ## 可见性边界与 unsafe 封装 {#可见性边界与-unsafe-封装}
 
 > **来源: [Rust Reference – Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)**
-> **来源: [Rust API Guidelines – Unsafe Code](https://rust-lang.github.io/api-guidelines/unsafe.html)**
+> **来源: [Rust API Guidelines – Unsafe Code](https://rust-lang.github.io/api-guidelines/safety.html)**
 
 | 可见性 | 作用 | unsafe 封装建议 |
 | :--- | :--- | :--- |
@@ -509,7 +509,7 @@ impl PaymentGateway for FFIPaymentGateway {
 > **来源: [Rust Reference – Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)**
 > **来源: [Rust Reference – Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)**
 > **来源: [Ferrocene Language Specification](https://spec.ferrocene.dev/)**
-> **来源: [Rust API Guidelines – Unsafe Code](https://rust-lang.github.io/api-guidelines/unsafe.html)**
+> **来源: [Rust API Guidelines – Unsafe Code](https://rust-lang.github.io/api-guidelines/safety.html)**
 > **来源: [RFC 2585 - Unsafe Guidelines](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

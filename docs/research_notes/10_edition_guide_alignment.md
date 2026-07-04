@@ -61,7 +61,7 @@
 
 | Edition Guide 章节 | 项目文档 | 状态 | 备注 |
 |--------------------|----------|------|------|
-| [Tail Expr Drop Order](https://doc.rust-lang.org/edition-guide/rust-2024/tail-expr-drop-order.html) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §1 | ✅ | drop 顺序变化 |
+| [Tail Expr Drop Order](https://doc.rust-lang.org/edition-guide/rust-2024/drop-order.html) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §1 | ✅ | drop 顺序变化 |
 | [unsafe_op_in_unsafe_fn](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §2 | ✅ | unsafe 块要求 |
 | [Match Ergonomics](https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §4 | ✅ | match 临时值作用域 |
 | [Gen Blocks](https://doc.rust-lang.org/edition-guide/rust-2024/gen-blocks.html) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §3 | ✅ | `gen` 关键字保留 |
@@ -82,7 +82,7 @@
 | L7 节点 | Edition Guide 锚点 | 项目反例/说明 |
 |---------|-------------------|---------------|
 | Edition 2018 `use` 绝对路径 | [Path Changes](https://doc.rust-lang.org/edition-guide/rust-2018/path-changes.html) | [formal_modules/60_module_counterexamples.md](formal_modules/60_module_counterexamples.md) §4 |
-| Edition 2024 drop order | [Tail Expr Drop Order](https://doc.rust-lang.org/edition-guide/rust-2024/tail-expr-drop-order.html) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §1 |
+| Edition 2024 drop order | [Tail Expr Drop Order](https://doc.rust-lang.org/edition-guide/rust-2024/drop-order.html) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §1 |
 | Edition 2024 unsafe lint | [unsafe_op_in_unsafe_fn](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §2 |
 
 ---

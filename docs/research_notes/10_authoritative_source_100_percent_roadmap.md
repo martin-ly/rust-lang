@@ -112,7 +112,7 @@
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Oxide](https://arxiv.org/abs/1903.00982)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
-- [Stacked Borrows](https://plv.mpi-sws.org/rustbos/)
+- [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/)
 
 ### 阶段 2：P2 社区来源冲刺 {#阶段-2p2-社区来源冲刺}
 

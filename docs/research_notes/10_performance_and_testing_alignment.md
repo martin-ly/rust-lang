@@ -65,7 +65,7 @@
 
 | Cargo 测试主题 | 项目文档 | 状态 | 备注 |
 |----------------|----------|------|------|
-| [Tests](https://doc.rust-lang.org/cargo/reference/targets.html#tests) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | 单元/集成测试目标 |
+| [Tests](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | 单元/集成测试目标 |
 | [Configuration](https://doc.rust-lang.org/cargo/reference/config.html) | [10_tools_guide.md](10_tools_guide.md) | ✅ | `.cargo/config.toml`、profile.test |
 | [Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) | [10_cargo_book_alignment.md](10_cargo_book_alignment.md) | ✅ | workspace 级测试运行 |
 | [Target features](https://doc.rust-lang.org/cargo/reference/features.html) | [10_cargo_book_alignment.md](10_cargo_book_alignment.md) §4 | ✅ | feature 与条件测试 |
@@ -132,8 +132,8 @@
 
 | 策略 | 权威来源 | 项目文档 | 状态 | 备注 |
 |------|----------|----------|------|------|
-| 单元测试 | [Cargo Book – Tests](https://doc.rust-lang.org/cargo/reference/targets.html#tests) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | 模块内 `#[cfg(test)]` |
-| 集成测试 | [Cargo Book – Integration Tests](https://doc.rust-lang.org/cargo/reference/targets.html#integration-tests) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | `tests/` 目录 |
+| 单元测试 | [Cargo Book – Tests](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | 模块内 `#[cfg(test)]` |
+| 集成测试 | [Cargo Book – Integration Tests](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#integration-tests) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | `tests/` 目录 |
 | Doctests | [rustdoc – Documentation tests](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html) | [docs/06_toolchain/03_rustdoc_advanced.md](../06_toolchain/03_rustdoc_advanced.md) | ✅ | 文档示例即测试 |
 | 测试覆盖率 | [tarpaulin](https://github.com/xd009642/tarpaulin) / [cargo-llvm-cov](https://github.com/taiki-e/cargo-llvm-cov) | [10_tools_guide.md](10_tools_guide.md) | ✅ | CI 覆盖率报告 |
 

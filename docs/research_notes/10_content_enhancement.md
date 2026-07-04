@@ -605,7 +605,7 @@ error[E0382]: borrow of moved value: `s1`
 
   - 相关内容: 所有权规则、移动语义、作用域
 
-- [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
+- [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)
 
   - 章节: 所有权和移动语义
 

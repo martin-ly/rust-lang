@@ -59,7 +59,7 @@ cargo fix --edition
 - [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 - [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs/3501-edition-2024.html)
 - [TRPL — Appendix: Rust Editions](https://doc.rust-lang.org/book/appendix-05-editions.html)
-- [Rust 1.85.0 Release Notes](https://releases.rs/1.85.0)
+- [Rust 1.85.0 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.85.0)
 
 ---
 

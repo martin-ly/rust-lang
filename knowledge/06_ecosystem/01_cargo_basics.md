@@ -566,7 +566,7 @@ tokio = { version = "1.0", features = ["full"] }
 - [Cargo.toml 格式规范](https://doc.rust-lang.org/cargo/reference/manifest.html) —— Manifest 文件精确语义
 - [Rust 工作空间指南](https://doc.rust-lang.org/cargo/reference/workspaces.html) —— Workspace 配置与管理
 - [SemVer Specification 2.0.0](https://semver.org/) —— 语义化版本控制的权威规范
-- [RFC 2121 — Cargo Workspaces](https://rust-lang.github.io/rfcs/2121-cargo-workspace.html) —— Workspace 功能的设计决策
+- [RFC 2121 — Cargo Workspaces](https://rust-lang.github.io/rfcs/2121-cargo-profile.html) —— Workspace 功能的设计决策
 
 ### 社区权威（二级来源）
 >
@@ -580,7 +580,7 @@ tokio = { version = "1.0", features = ["full"] }
 **文档版本**: 2.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
-> **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html), [RFC 2121: Private Dependencies](https://rust-lang.github.io/rfcs/2121-private-dependency.html)
+> **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html), [RFC 2121: Private Dependencies](https://rust-lang.github.io/rfcs/3516-private-dependency.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Cargo Book、Rust Reference、SemVer 2.0.0、RFC 2121） [来源: Authority Source Sprint Batch 8]
 

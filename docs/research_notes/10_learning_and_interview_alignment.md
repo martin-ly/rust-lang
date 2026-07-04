@@ -187,7 +187,7 @@
 | `unsafe` 块与安全抽象的关系？ | unsafe 边界 | L4-L5 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) | [Rustonomicon Safe Abstraction](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) |
 | `Box::leak` 有什么用途？ | 泄漏与 `'static` | L4-L5 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q14 | [std Box::leak](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.leak) |
 | `transmute` 的风险是什么？ | 类型布局与 UB | L5-L6 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §7 | [Rustonomicon Transmute](https://doc.rust-lang.org/nomicon/transmutes.html) |
-| FFI 调用时需要注意哪些内存协议？ | FFI 安全 | L5-L6 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §6 | [Rustonomicon FFI](https://doc.rust-lang.org/nomicon/ffi.html)、[Unsafe Code Guidelines FFI](https://rust-lang.github.io/unsafe-code-guidelines/layout/ffi.html) |
+| FFI 调用时需要注意哪些内存协议？ | FFI 安全 | L5-L6 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §6 | [Rustonomicon FFI](https://doc.rust-lang.org/nomicon/ffi.html)、[Unsafe Code Guidelines FFI](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html) |
 
 ### 设计模式与工程实践 {#设计模式与工程实践}
 

@@ -484,14 +484,14 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 - [std::sync::Condvar](https://doc.rust-lang.org/std/sync/struct.Condvar.html)
 - [std::thread](https://doc.rust-lang.org/std/thread/)
 - [std::thread::LocalKey](https://doc.rust-lang.org/std/thread/struct.LocalKey.html)
-- [AtomicUsize](https://doc.rust-lang.org/std/sync/atomic/struct.AtomicUsize.html)
+- [AtomicUsize](https://doc.rust-lang.org/std/sync/atomic/type.AtomicUsize.html)
 - [Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)
 
 #### Rust By Example / Cookbook / cheats.rs {#rust-by-example-cookbook-cheatsrs}
 
 - [RBE - Threads](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html)
 - [RBE - Channel](https://doc.rust-lang.org/rust-by-example/std_misc/channels.html)
-- [RBE - Atomics](https://doc.rust-lang.org/rust-by-example/std_misc/atomics.html)
+- [RBE - Atomics](https://doc.rust-lang.org/std/sync/atomic/)
 - [Rust Cookbook - Concurrency](https://rust-lang-nursery.github.io/rust-cookbook/concurrency.html)
 - [cheats.rs - Concurrency](https://cheats.rs/#concurrency)
 

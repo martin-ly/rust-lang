@@ -66,7 +66,7 @@
   - [🔗 相关资源 {#相关资源}](#-相关资源-相关资源)
     - [核心文档 {#核心文档}](#核心文档-核心文档)
     - [工具和资源 {#工具和资源}](#工具和资源-工具和资源)
-  - [🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960}](#-权威国际化内容升级-rust-1960-权威国际化内容升级-rust-1960)
+  - [🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960}](#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960)
     - [本次升级要点 {#本次升级要点}](#本次升级要点-本次升级要点)
   - [相关概念 {#相关概念}](#相关概念-相关概念)
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
@@ -790,7 +790,7 @@ git commit -m "添加所有权模型形式化研究笔记
 | Unsafe 能力边界 | [what-unsafe-does.html](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | `unsafe` 允许的五种额外操作 |
 | 行为 considered UB | [what-unsafe-does.html#behavior-considered-undefined](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | 语言层面的未定义行为清单 |
 | 生命周期省略 | [lifetime-elision.html](https://doc.rust-lang.org/nomicon/lifetime-elision.html) | 函数签名中的生命周期推断 |
-| 子类型与型变 | [subtyping-and-variance.html](https://doc.rust-lang.org/nomicon/subtyping-and-variance.html) | 协变/逆变/不变与内存安全 |
+| 子类型与型变 | [subtyping-and-variance.html](https://doc.rust-lang.org/nomicon/subtyping.html) | 协变/逆变/不变与内存安全 |
 | 发送与同步 | [send-and-sync.html](https://doc.rust-lang.org/nomicon/send-and-sync.html) | `Send`/`Sync` 的语义与手动实现 |
 | 未初始化内存 | [uninitialized.html](https://doc.rust-lang.org/nomicon/uninitialized.html) | `MaybeUninit` 与 unsafe 初始化 |
 

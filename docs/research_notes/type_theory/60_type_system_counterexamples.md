@@ -257,7 +257,7 @@ error[E0184]: the trait `Copy` may not be implemented for this type; the type im
 > **权威来源**:
 >
 > [Rust Reference – Type System](https://doc.rust-lang.org/reference/type-system.html) |
-> [Rust Reference – Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping-and-variance.html) |
+> [Rust Reference – Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html) |
 > [Rust Reference – Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) |
 > [Rust Reference – Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules) |
 > [The Rust Programming Language – Ch 10](https://doc.rust-lang.org/book/ch10-00-generics.html) |

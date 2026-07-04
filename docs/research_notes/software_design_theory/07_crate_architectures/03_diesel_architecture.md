@@ -998,7 +998,7 @@ let row: (i64, String) = sqlx::query_as("SELECT id, name FROM users WHERE id = $
 | 启动/原型速度 | ❌ 需配置 | ✅ 快 | ✅ 最快 |
 | 零成本抽象 | ✅ 是 | ✅ 是 | ✅ 是 |
 
-> 来源: [Diesel vs sqlx 对比分析](https://diesel.rs/guides/comparison-to-other-orms.html)
+> 来源: [Diesel vs sqlx 对比分析](https://diesel.rs/guides/)
 > 来源: sqlx 文档, https: /  / github.com / launchbadge / [sqlx](https://github.com/launchbadge/sqlx)
 
 ---

@@ -3876,7 +3876,7 @@ mod examples {
 > **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)**
 > **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
 > **来源: [Rust Reference - Result](https://doc.rust-lang.org/std/result/)**
-> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-try-trait.html)**
+> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/3058-try-trait-v2.html)**
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**

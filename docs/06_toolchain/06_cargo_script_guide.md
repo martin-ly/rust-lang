@@ -339,7 +339,7 @@ fn main() {
 
 - [Frontmatter Stabilization PR](https://github.com/rust-lang/rust/pull/148605)
 - [Cargo Script RFC](https://github.com/rust-lang/rfcs/pull/3502)
-- [Rust Project Goals 2026: Higher-level Rust](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
+- [Rust Project Goals 2026: Higher-level Rust](https://rust-lang.github.io/rust-project-goals/2026/)
 
 ---
 

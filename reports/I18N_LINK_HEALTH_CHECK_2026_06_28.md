@@ -2,13 +2,309 @@
 >
 > 检查日期: 2026-06-28
 > 扫描范围: concept, knowledge, docs
-> 外部链接总数: 4506
-> 手动检查（跳过）: 1637
-> 重定向链接: 244
-> 失效/异常链接: 716
+> 外部链接总数: 4424
+> 手动检查（跳过）: 2144
+> 重定向链接: 212
+> 失效/异常链接: 148
 
 ## 手动检查域名（跳过）
 
+- `https://en.wikipedia.org/wiki/Rust_(programming_language)`
+  - `concept\00_meta\sources.md`
+  - `concept\05_comparative\01_rust_vs_cpp.md`
+  - `concept\05_comparative\02_rust_vs_go.md`
+  - `concept\05_comparative\04_safety_boundaries.md`
+  - `concept\05_comparative\07_rust_vs_python.md`
+  - `concept\05_comparative\11_rust_vs_kotlin.md`
+  - `concept\05_comparative\12_rust_vs_scala.md`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+  - `concept\05_comparative\19_rust_vs_ruby.md`
+  - `concept\07_future\43_rust_for_linux.md`
+  - `concept\README.md`
+  - `docs\00_meta\00_annual_review_template.md`
+  - `docs\00_meta\00_content_reconstruction_plan_2026.md`
+  - `docs\00_meta\00_docs_reorganization_complete.md`
+  - `docs\00_meta\00_documentation_division_of_labor.md`
+  - `docs\00_meta\00_documentation_lifecycle.md`
+  - `docs\00_meta\00_improvement_plan_execution_complete.md`
+  - `docs\00_meta\00_pdca_template.md`
+  - `docs\00_meta\00_project_health_dashboard.md`
+  - `docs\00_meta\00_quarterly_sync_checklist.md`
+  - `docs\00_meta\00_reorganization_complete.md`
+  - `docs\00_meta\00_rust_feature_tracking_template.md`
+  - `docs\00_meta\00_rust_version_alignment_checklist.md`
+  - `docs\00_meta\00_template_concept_doc.md`
+  - `docs\00_meta\00_template_decision_tree.md`
+  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
+  - `docs\00_meta\history\00_2026_reorganization.md`
+  - `docs\01_core\README.md`
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+  - `docs\01_learning\01_cross_module_navigation.md`
+  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\01_learning\01_lfrs_certification_mapping.md`
+  - `docs\01_learning\01_mdbook_quiz_guide.md`
+  - `docs\02_reference\02_edge_cases_and_special_cases.md`
+  - `docs\02_reference\02_error_code_mapping.md`
+  - `docs\02_reference\02_rustnomicon_alignment.md`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+  - `docs\02_reference\alignment_guide.md`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithm_decision_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_closures_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_generics_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_network_programming_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_ownership_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_pin_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_196_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_testing_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+  - `docs\02_reference\quick_reference\README.md`
+  - `docs\03_guides\03_cxx_interop_guide.md`
+  - `docs\03_guides\03_fuzzing_guide.md`
+  - `docs\03_guides\03_libp2p_guide.md`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\03_guides\03_quic_http3_guide.md`
+  - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
+  - `docs\03_guides\03_rust_2024_edition_rpit_migration.md`
+  - `docs\03_guides\03_semver_checks.md`
+  - `docs\03_practice\03_cross_module_practical_projects_2025_10_25.md`
+  - `docs\03_practice\03_project_01_cli_tool.md`
+  - `docs\03_practice\03_project_02_file_processor.md`
+  - `docs\03_practice\03_project_03_calculator.md`
+  - `docs\03_practice\03_project_04_password_generator.md`
+  - `docs\03_practice\03_project_05_text_statistics.md`
+  - `docs\03_practice\03_project_07_chat_server.md`
+  - `docs\03_practice\03_project_08_cache_system.md`
+  - `docs\03_practice\03_project_09_log_parser.md`
+  - `docs\03_practice\03_project_10_data_pipeline.md`
+  - `docs\03_practice\03_project_12_wasm_app.md`
+  - `docs\03_practice\03_project_13_database_engine.md`
+  - `docs\03_practice\03_project_15_distributed_system.md`
+  - `docs\03_practice\README.md`
+  - `docs\04_research\04_cranelift_backend.md`
+  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
+  - `docs\04_research\04_polonius_tracking.md`
+  - `docs\04_research\04_rust_for_linux_2026.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+  - `docs\04_research\04_verusbelt_pldi_2026.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `docs\04_thinking\04_applications_analysis_view.md`
+  - `docs\04_thinking\04_decision_graph_network.md`
+  - `docs\04_thinking\04_mind_map_collection.md`
+  - `docs\04_thinking\04_proof_graph_network.md`
+  - `docs\04_thinking\04_thinking_representation_methods.md`
+  - `docs\05_guides\05_advanced_topics_deep_dive.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\05_guides\05_algorithms_usage_guide.md`
+  - `docs\05_guides\05_async_programming_usage_guide.md`
+  - `docs\05_guides\05_cli_applications_guide.md`
+  - `docs\05_guides\05_control_flow_functions_usage_guide.md`
+  - `docs\05_guides\05_cross_module_integration_examples.md`
+  - `docs\05_guides\05_cxx_rust_interop_evaluation.md`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+  - `docs\05_guides\05_formal_verification_integration_guide.md`
+  - `docs\05_guides\05_inline_assembly_guide.md`
+  - `docs\05_guides\05_macro_system_usage_guide.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\05_guides\05_pragmatic_guidelines_checklist.md`
+  - `docs\05_guides\05_testing_coverage_guide.md`
+  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
+  - `docs\05_guides\05_troubleshooting_guide.md`
+  - `docs\05_guides\05_wasm_usage_guide.md`
+  - `docs\05_guides\best_practices.md`
+  - `docs\05_guides\workflow\01_workflow_theory.md`
+  - `docs\05_miri_integration_summary.md`
+  - `docs\06_docker_guide.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+  - `docs\06_toolchain\README.md`
+  - `docs\07_project\07_completion_status.md`
+  - `docs\07_project\07_documentation_cross_reference_guide.md`
+  - `docs\07_project\07_extension_deepening_plan_2026.md`
+  - `docs\07_project\07_hierarchy_mapping_master.md`
+  - `docs\07_project\07_knowledge_structure_framework.md`
+  - `docs\07_project\07_module_knowledge_structure_guide.md`
+  - `docs\07_project\07_project_architecture_guide.md`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\10_api_guide.md`
+  - `docs\10_architecture.md`
+  - `docs\10_authoritative_sources_and_citations.md`
+  - `docs\10_dependency_graph.md`
+  - `docs\10_migration_guide_2026.md`
+  - `docs\10_miri_guide.md`
+  - `docs\10_sccache_setup.md`
+  - `docs\10_terminology_standard.md`
+  - `docs\research_notes\10_00_comprehensive_summary.md`
+  - `docs\research_notes\10_00_organization_and_navigation.md`
+  - `docs\research_notes\10_application_trees.md`
+  - `docs\research_notes\10_argumentation_chain_and_flow.md`
+  - `docs\research_notes\10_argumentation_gap_index.md`
+  - `docs\research_notes\10_authoritative_alignment_guide.md`
+  - `docs\research_notes\10_authoritative_alignment_status.md`
+  - `docs\research_notes\10_authoritative_content_alignment_report.md`
+  - `docs\research_notes\10_best_practices.md`
+  - `docs\research_notes\10_changelog.md`
+  - `docs\research_notes\10_classification.md`
+  - `docs\research_notes\10_code_doc_formal_mapping.md`
+  - `docs\research_notes\10_cognitive_argumentation_framework.md`
+  - `docs\research_notes\10_comprehensive_project_report.md`
+  - `docs\research_notes\10_comprehensive_systematic_overview.md`
+  - `docs\research_notes\10_comprehensive_systematic_review_and_100_percent_plan.md`
+  - `docs\research_notes\10_concept_axiom_theorem_matrix.md`
+  - `docs\research_notes\10_concept_comparison_tables.md`
+  - `docs\research_notes\10_concept_hierarchy_framework.md`
+  - `docs\research_notes\10_concept_relationship_network.md`
+  - `docs\research_notes\10_concurrency_cheatsheet.md`
+  - `docs\research_notes\10_const_eval_formalization.md`
+  - `docs\research_notes\10_content_enhancement.md`
+  - `docs\research_notes\10_core_theorems_en_summary.md`
+  - `docs\research_notes\10_core_theorems_full_proofs.md`
+  - `docs\research_notes\10_counter_examples_compendium.md`
+  - `docs\research_notes\10_cross_reference_index.md`
+  - `docs\research_notes\10_design_mechanism_rationale.md`
+  - `docs\research_notes\10_domain_analysis_framework.md`
+  - `docs\research_notes\10_executable_semantics_roadmap.md`
+  - `docs\research_notes\10_faq.md`
+  - `docs\research_notes\10_faq_comprehensive.md`
+  - `docs\research_notes\10_formal_concepts_encyclopedia.md`
+  - `docs\research_notes\10_formal_full_model_overview.md`
+  - `docs\research_notes\10_formal_language_and_proofs.md`
+  - `docs\research_notes\10_formal_methods_master_index.md`
+  - `docs\research_notes\10_formal_proof_critical_analysis_and_plan_2026_02.md`
+  - `docs\research_notes\10_glossary.md`
+  - `docs\research_notes\10_hierarchical_mapping_and_summary.md`
+  - `docs\research_notes\10_incremental_update_flow.md`
+  - `docs\research_notes\10_international_formal_verification_index.md`
+  - `docs\research_notes\10_interview_questions_collection.md`
+  - `docs\research_notes\10_l3_machine_proof_guide.md`
+  - `docs\research_notes\10_language_semantics_expressiveness.md`
+  - `docs\research_notes\10_learning_path_comprehensive.md`
+  - `docs\research_notes\10_practical_applications.md`
+  - `docs\research_notes\10_proof_index.md`
+  - `docs\research_notes\10_proof_techniques_mindmap.md`
+  - `docs\research_notes\10_proof_tree_ownership.md`
+  - `docs\research_notes\10_proof_tree_type_safety.md`
+  - `docs\research_notes\10_quick_find.md`
+  - `docs\research_notes\10_quick_reference.md`
+  - `docs\research_notes\10_readme_100_percent_completion.md`
+  - `docs\research_notes\10_research_methodology.md`
+  - `docs\research_notes\10_research_notes_organization.md`
+  - `docs\research_notes\10_research_roadmap.md`
+  - `docs\research_notes\10_resources.md`
+  - `docs\research_notes\10_rust_book_alignment.md`
+  - `docs\research_notes\10_rust_formal_methods_cheatsheet.md`
+  - `docs\research_notes\10_rustbelt_alignment.md`
+  - `docs\research_notes\10_rustsem_semantics.md`
+  - `docs\research_notes\10_safe_decidable_mechanisms_overview.md`
+  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
+  - `docs\research_notes\10_system_integration.md`
+  - `docs\research_notes\10_system_summary.md`
+  - `docs\research_notes\10_theorem_rust_example_mapping.md`
+  - `docs\research_notes\10_theorems_and_proof_strategies.md`
+  - `docs\research_notes\10_theoretical_and_argumentation_system_architecture.md`
+  - `docs\research_notes\10_tools_guide.md`
+  - `docs\research_notes\10_tutorial_borrow_checker.md`
+  - `docs\research_notes\10_tutorial_concurrency_models.md`
+  - `docs\research_notes\10_tutorial_lifetimes.md`
+  - `docs\research_notes\10_tutorial_ownership_safety.md`
+  - `docs\research_notes\10_tutorial_type_system.md`
+  - `docs\research_notes\10_unified_systematic_framework.md`
+  - `docs\research_notes\10_user_guide.md`
+  - `docs\research_notes\10_verification_tools_decision_tree.md`
+  - `docs\research_notes\10_visualization_index.md`
+  - `docs\research_notes\10_workflow_concept_mindmap.md`
+  - `docs\research_notes\10_workflow_engine_matrix.md`
+  - `docs\research_notes\README.md`
+  - `docs\research_notes\experiments\10_compiler_optimizations.md`
+  - `docs\research_notes\experiments\10_concurrency_performance.md`
+  - `docs\research_notes\experiments\10_macro_expansion_performance.md`
+  - `docs\research_notes\experiments\10_memory_analysis.md`
+  - `docs\research_notes\experiments\10_performance_benchmarks.md`
+  - `docs\research_notes\experiments\README.md`
+  - `docs\research_notes\formal_methods\10_async_state_machine.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
+  - `docs\research_notes\formal_methods\10_safe_decidable_mechanisms_and_formal_methods_plan.md`
+  - `docs\research_notes\formal_methods\10_send_sync_formalization.md`
+  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
+  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
+  - `docs\research_notes\formal_modules\10_formalization_ecology_mindmap.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md`
+  - `docs\research_notes\software_design_theory\02_workflow\README.md`
+  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
+  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\04_expressiveness_boundary.md`
+  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\README.md`
+  - `docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md`
+  - `docs\research_notes\software_design_theory\03_execution_models\05_distributed.md`
+  - `docs\research_notes\software_design_theory\03_execution_models\06_boundary_analysis.md`
+  - `docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md`
+  - `docs\research_notes\software_design_theory\04_compositional_engineering\README.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md`
+  - `docs\research_notes\software_design_theory\05_distributed\03_circuit_breaker.md`
+  - `docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md`
+  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
+  - `docs\research_notes\software_design_theory\05_distributed\README.md`
+  - `docs\research_notes\software_design_theory\06_rust_idioms.md`
+  - `docs\research_notes\software_design_theory\07_anti_patterns.md`
+  - `docs\research_notes\software_design_theory\10_00_master_index.md`
+  - `docs\research_notes\software_design_theory\10_comprehensive_argumentation_gap_analysis_and_plan.md`
+  - `docs\research_notes\type_theory\10_advanced_types.md`
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
+  - `docs\research_notes\type_theory\10_type_system_foundations.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `docs\research_notes\type_theory\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\02_async\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\09_actor_model\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\README.md`
+  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\README.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\10_quality_assurance\README.md`
+  - `docs\rust-formal-engineering-system\README.md`
+  - `docs\templates\10_versioned_doc_template.md`
 - `https://arxiv.org/abs/2602.00697`
   - `concept\00_meta\03_bloom_taxonomy.md`
 - `https://arxiv.org/html/2602.10527v2`
@@ -400,6 +696,8 @@
   - `concept\00_meta\cpp_rust_engineering_roadmap.md`
 - `https://dblp.org/db/conf/popl/index.html`
   - `concept\00_meta\decidability_spectrum.md`
+- `https://en.wikipedia.org/wiki/Theory_of_computation`
+  - `concept\00_meta\decidability_spectrum.md`
 - `https://github.com/rust-lang/rfcs/pull/911`
   - `concept\00_meta\decidability_spectrum.md`
 - `https://github.com/rust-lang/rfcs/pull/2000`
@@ -412,6 +710,8 @@
   - `concept\01_foundation\04_type_system.md`
   - `concept\02_intermediate\04_error_handling.md`
 - `https://doi.org/10.1007/BF00119822`
+  - `concept\00_meta\expressiveness_multiview.md`
+- `https://en.wikipedia.org/wiki/Semantics_(computer_science)`
   - `concept\00_meta\expressiveness_multiview.md`
 - `https://doi.org/10.1007/BF00398256`
   - `concept\00_meta\expressiveness_multiview.md`
@@ -572,8 +872,27 @@
   - `docs\research_notes\type_theory\README.md`
   - `docs\rust-formal-engineering-system\01_theoretical_foundations\01_type_system\README.md`
   - `knowledge\03_advanced\06_type_driven_correctness.md`
+- `https://en.wikipedia.org/wiki/Memory_safety`
+  - `concept\00_meta\inter_layer_map.md`
+  - `concept\00_meta\sources.md`
+  - `concept\02_intermediate\03_memory_management.md`
+  - `concept\03_advanced\03_unsafe.md`
+  - `concept\05_comparative\02_rust_vs_go.md`
+  - `concept\05_comparative\04_safety_boundaries.md`
+  - `concept\05_comparative\README.md`
 - `https://github.com/rust-lang/rfcs/pull/3417`
   - `concept\00_meta\inter_layer_map.md`
+- `https://en.wikipedia.org/wiki/Linear_temporal_logic`
+  - `concept\00_meta\inter_layer_map.md`
+- `https://en.wikipedia.org/wiki/Foreign_function_interface`
+  - `concept\00_meta\inter_layer_map.md`
+  - `concept\00_meta\sources.md`
+  - `concept\03_advanced\03_unsafe.md`
+  - `concept\03_advanced\09_ffi_advanced.md`
+  - `concept\05_comparative\04_safety_boundaries.md`
+- `https://en.wikipedia.org/wiki/Bloom%27s_taxonomy`
+  - `concept\00_meta\inter_layer_map.md`
+  - `concept\00_meta\self_assessment.md`
 - `https://www.iso.org/standard/71954.html`
   - `concept\00_meta\kg_tlo_alignment.md`
 - `https://www.iso.org/standard/74374.html`
@@ -586,6 +905,55 @@
   - `concept\00_meta\kg_tlo_alignment.md`
 - `https://www.w3.org/TR/prov-overview/`
   - `concept\00_meta\kg_tlo_alignment.md`
+- `https://en.wikipedia.org/wiki/Design_Patterns`
+  - `concept\00_meta\pattern_semantic_space_index.md`
+  - `concept\06_ecosystem\73_pattern_composition_algebra.md`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
+  - `docs\research_notes\10_design_patterns_authoritative_alignment.md`
+  - `docs\research_notes\10_distributed_pattern_matrix.md`
+  - `docs\research_notes\10_distributed_patterns_matrix.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\README.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\README.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\README.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\04_boundary_matrix.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\README.md`
+  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
+  - `docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md`
+  - `docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md`
+  - `docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md`
+  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
+  - `docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md`
+  - `docs\research_notes\software_design_theory\07_anti_patterns.md`
+  - `docs\research_notes\software_design_theory\10_00_master_index.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\README.md`
+- `https://en.wikipedia.org/wiki/Pattern-Oriented_Software_Architecture`
+  - `concept\00_meta\pattern_semantic_space_index.md`
+  - `concept\06_ecosystem\73_pattern_composition_algebra.md`
 - `https://rust-unofficial.github.io/patterns/`
   - `concept\00_meta\pattern_semantic_space_index.md`
   - `concept\01_foundation\15_closure_basics.md`
@@ -699,6 +1067,25 @@
   - `docs\research_notes\type_theory\10_type_system_foundations.md`
   - `knowledge\00_start\04_rust_philosophy.md`
   - `knowledge\03_advanced\06_type_driven_correctness.md`
+- `https://en.wikipedia.org/wiki/Comparison_of_programming_languages`
+  - `concept\00_meta\quick_reference.md`
+  - `concept\00_meta\semantic_space.md`
+  - `concept\05_comparative\03_paradigm_matrix.md`
+  - `concept\05_comparative\README.md`
+- `https://iris-project.org/tutorial.html]`
+  - `concept\00_meta\rustbelt_predicate_map.md`
+- `https://en.wikipedia.org/wiki/Parametric_polymorphism`
+  - `concept\00_meta\self_assessment.md`
+  - `concept\02_intermediate\02_generics.md`
+- `https://en.wikipedia.org/wiki/Copy-on-write`
+  - `concept\00_meta\self_assessment.md`
+  - `concept\02_intermediate\11_cow_and_borrowed.md`
+- `https://en.wikipedia.org/wiki/Algorithm`
+  - `concept\00_meta\semantic_bridge_algorithms_patterns.md`
+- `https://en.wikipedia.org/wiki/Software_design_pattern`
+  - `concept\00_meta\semantic_bridge_algorithms_patterns.md`
+- `https://en.wikipedia.org/wiki/Workflow_patterns`
+  - `concept\00_meta\semantic_bridge_algorithms_patterns.md`
 - `https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/`
   - `concept\00_meta\semantic_bridge_algorithms_patterns.md`
   - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
@@ -747,9 +1134,228 @@
   - `docs\03_guides\03_fuzzing_guide.md`
   - `docs\research_notes\10_safety_and_unsafe_authoritative_alignment.md`
   - `knowledge\04_expert\02_unsafe_audit.md`
+- `https://en.wikipedia.org/wiki/Main_Page`
+  - `concept\00_meta\semantic_space.md`
+  - `concept\01_foundation\02_borrowing.md`
+  - `concept\01_foundation\04_type_system.md`
+  - `concept\01_foundation\30_lifetimes_advanced.md`
+  - `concept\02_intermediate\02_generics.md`
+  - `concept\02_intermediate\03_memory_management.md`
+  - `concept\02_intermediate\04_error_handling.md`
+  - `concept\03_advanced\02_async.md`
+  - `concept\03_advanced\03_unsafe.md`
+  - `concept\03_advanced\04_macros.md`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\05_comparative\02_rust_vs_go.md`
+  - `concept\05_comparative\03_paradigm_matrix.md`
+  - `concept\05_comparative\04_safety_boundaries.md`
+  - `concept\06_ecosystem\01_toolchain.md`
+  - `concept\06_ecosystem\09_cargo_script.md`
+  - `concept\06_ecosystem\10_public_private_deps.md`
+  - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
+  - `concept\07_future\01_ai_integration.md`
+  - `concept\07_future\02_formal_methods.md`
+  - `concept\07_future\03_evolution.md`
+  - `concept\07_future\04_effects_system.md`
+- `https://en.wikipedia.org/wiki/Green_thread`
+  - `concept\00_meta\semantic_space.md`
+- `https://en.wikipedia.org/wiki/Exception_handling`
+  - `concept\00_meta\semantic_space.md`
+  - `concept\01_foundation\32_error_handling_basics.md`
+  - `concept\02_intermediate\04_error_handling.md`
 - `https://github.com/rust-lang/rfcs/pull/3762`
   - `concept\00_meta\semantic_space.md`
   - `concept\04_formal\02_type_theory.md`
+- `https://en.wikipedia.org/wiki/Observational_equivalence`
+  - `concept\00_meta\semantic_space.md`
+- `https://en.wikipedia.org/wiki/Linear_logic`
+  - `concept\00_meta\semantic_space.md`
+  - `concept\00_meta\sources.md`
+  - `concept\01_foundation\01_ownership.md`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\09_linear_logic_applications.md`
+  - `concept\05_comparative\01_rust_vs_cpp.md`
+- `https://en.wikipedia.org/wiki/Ownership_types`
+  - `concept\00_meta\sources.md`
+  - `concept\01_foundation\01_ownership.md`
+- `https://en.wikipedia.org/wiki/Affine_logic`
+  - `concept\00_meta\sources.md`
+  - `concept\01_foundation\01_ownership.md`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\03_ownership_formal.md`
+- `https://en.wikipedia.org/wiki/Region-based_memory_management`
+  - `concept\00_meta\sources.md`
+  - `concept\01_foundation\01_ownership.md`
+  - `concept\01_foundation\02_borrowing.md`
+  - `concept\01_foundation\03_lifetimes.md`
+  - `concept\01_foundation\30_lifetimes_advanced.md`
+  - `concept\02_intermediate\18_lifetimes_advanced.md`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\archive\01_foundation_03_lifetimes_original.md`
+  - `docs\01_core\README.md`
+- `https://en.wikipedia.org/wiki/Type_system`
+  - `concept\00_meta\sources.md`
+  - `concept\01_foundation\04_type_system.md`
+  - `concept\01_foundation\README.md`
+  - `concept\02_intermediate\20_type_system_advanced.md`
+  - `concept\05_comparative\01_rust_vs_cpp.md`
+  - `concept\05_comparative\03_paradigm_matrix.md`
+  - `concept\05_comparative\15_rust_vs_typescript.md`
+  - `concept\05_comparative\README.md`
+  - `concept\07_future\43_rust_for_linux.md`
+  - `docs\00_meta\00_improvement_plan_execution_complete.md`
+  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\01_learning\01_mdbook_quiz_guide.md`
+  - `docs\02_reference\02_cross_language_comparison.md`
+  - `docs\02_reference\02_error_code_mapping.md`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+  - `docs\02_reference\alignment_guide.md`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_generics_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_ownership_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+  - `docs\02_reference\quick_reference\README.md`
+  - `docs\03_guides\03_fuzzing_guide.md`
+  - `docs\03_guides\03_let_chains_guide.md`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\03_guides\03_quic_http3_guide.md`
+  - `docs\03_practice\03_project_01_cli_tool.md`
+  - `docs\04_research\04_cranelift_backend.md`
+  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_research\04_rust_for_linux_2026.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `docs\04_thinking\04_applications_analysis_view.md`
+  - `docs\04_thinking\04_decision_graph_network.md`
+  - `docs\04_thinking\04_mind_map_collection.md`
+  - `docs\04_thinking\04_proof_graph_network.md`
+  - `docs\04_thinking\04_thinking_representation_methods.md`
+  - `docs\05_guides\05_advanced_topics_deep_dive.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\05_guides\05_async_programming_usage_guide.md`
+  - `docs\05_guides\05_cli_applications_guide.md`
+  - `docs\05_guides\05_cross_module_integration_examples.md`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+  - `docs\05_guides\05_formal_verification_integration_guide.md`
+  - `docs\05_guides\05_inline_assembly_guide.md`
+  - `docs\05_guides\05_macro_system_usage_guide.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\05_guides\05_testing_coverage_guide.md`
+  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
+  - `docs\05_guides\05_type_system_usage_guide.md`
+  - `docs\05_guides\05_wasm_usage_guide.md`
+  - `docs\05_guides\best_practices.md`
+  - `docs\05_guides\workflow\01_workflow_theory.md`
+  - `docs\05_miri_integration_summary.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\07_project\07_extension_deepening_plan_2026.md`
+  - `docs\07_project\07_knowledge_structure_framework.md`
+  - `docs\07_project\07_module_knowledge_structure_guide.md`
+  - `docs\07_project\07_project_architecture_guide.md`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\10_authoritative_sources_and_citations.md`
+  - `docs\10_migration_guide_2026.md`
+  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
+  - `docs\research_notes\10_theorem_rust_example_mapping.md`
+  - `docs\research_notes\README.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `docs\research_notes\type_theory\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\01_type_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\02_async\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\09_actor_model\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\README.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\01_compiler\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
+  - `docs\rust-formal-engineering-system\09_research_agenda\04_research_methods\README.md`
+- `https://en.wikipedia.org/wiki/Polymorphism_(computer_science)`
+  - `concept\00_meta\sources.md`
+- `https://en.wikipedia.org/wiki/Futures_and_promises`
+  - `concept\00_meta\sources.md`
+  - `concept\03_advanced\02_async.md`
+  - `concept\03_advanced\25_async_advanced.md`
+  - `concept\03_advanced\26_async_patterns.md`
+- `https://en.wikipedia.org/wiki/Communicating_sequential_processes`
+  - `concept\00_meta\sources.md`
+  - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
+  - `concept\05_comparative\02_rust_vs_go.md`
+  - `concept\05_comparative\03_paradigm_matrix.md`
+- `https://en.wikipedia.org/wiki/Substructural_type_system`
+  - `concept\00_meta\sources.md`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\07_future\04_effects_system.md`
+- `https://en.wikipedia.org/wiki/Asynchronous_programming`
+  - `concept\00_meta\sources.md`
+  - `concept\03_advanced\02_async.md`
+- `https://en.wikipedia.org/wiki/Coroutine`
+  - `concept\00_meta\sources.md`
+  - `concept\03_advanced\02_async.md`
+  - `concept\03_advanced\25_async_advanced.md`
+  - `concept\archive\03_advanced_02_async_original.md`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+- `https://en.wikipedia.org/wiki/Undefined_behavior`
+  - `concept\00_meta\sources.md`
+  - `concept\03_advanced\03_unsafe.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\05_comparative\04_safety_boundaries.md`
+- `https://en.wikipedia.org/wiki/Macro_(computer_science)`
+  - `concept\00_meta\sources.md`
+  - `concept\03_advanced\04_macros.md`
+  - `docs\research_notes\10_macros_cheatsheet.md`
+  - `docs\research_notes\experiments\10_macro_expansion_performance.md`
+- `https://en.wikipedia.org/wiki/Metaprogramming`
+  - `concept\00_meta\sources.md`
+  - `concept\02_intermediate\21_metaprogramming.md`
+  - `concept\03_advanced\04_macros.md`
+  - `concept\03_advanced\README.md`
+- `https://en.wikipedia.org/wiki/Hazard_pointer`
+  - `concept\00_meta\sources.md`
+  - `concept\03_advanced\01_concurrency.md`
+- `https://en.wikipedia.org/wiki/Compare-and-swap`
+  - `concept\00_meta\sources.md`
+- `https://www.cs.cmu.edu/~aldrich/courses/17-363/`
+  - `concept\00_meta\sources.md`
+  - `concept\04_formal\02_type_theory.md`
+- `https://www.cs.cmu.edu/~aldrich/courses/17-350/`
+  - `concept\00_meta\sources.md`
 - `https://www.cis.upenn.edu/~cis1905/`
   - `concept\00_meta\sources.md`
 - `https://docs.rs/futures/latest/futures/stream/trait.Stream.html`
@@ -782,6 +1388,9 @@
   - `knowledge\03_advanced\concurrency\README.md`
 - `https://github.com/rust-lang/rust/issues/154909`
   - `concept\00_meta\terminology_glossary.md`
+- `https://www.youtube.com/watch?v=_8X69Kw0EhY`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\03_advanced\08_nll_and_polonius.md`
 - `https://github.com/rust-lang/rust/pull/157226`
   - `concept\00_meta\terminology_glossary.md`
   - `concept\03_advanced\03_unsafe.md`
@@ -802,6 +1411,10 @@
   - `concept\00_meta\terminology_glossary.md`
 - `https://github.com/rust-lang/rust/pull/150055`
   - `concept\00_meta\terminology_glossary.md`
+- `https://www.cs.cmu.edu/~jcr/seplogic.pdf`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\04_formal\11_separation_logic.md`
+  - `concept\04_formal\15_hoare_logic.md`
 - `https://doi.org/10.1145/363235.363259`
   - `concept\00_meta\terminology_glossary.md`
   - `concept\04_formal\20_axiomatic_semantics.md`
@@ -1336,10 +1949,93 @@
 - `https://en.cppreference.com/w/cpp/memory/unique_ptr`
   - `concept\01_foundation\01_ownership.md`
   - `docs\02_reference\02_cross_language_comparison.md`
+- `https://en.wikipedia.org/wiki/Smart_pointer`
+  - `concept\01_foundation\01_ownership.md`
+  - `concept\02_intermediate\03_memory_management.md`
+- `https://en.wikipedia.org/wiki/Reference_(computer_science)`
+  - `concept\01_foundation\02_borrowing.md`
+- `https://en.wikipedia.org/wiki/Pointer_aliasing`
+  - `concept\01_foundation\02_borrowing.md`
+- `https://en.wikipedia.org/wiki/Alias_analysis`
+  - `concept\01_foundation\02_borrowing.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `docs\01_core\README.md`
 - `https://github.com/rust-lang/rfcs/pull/2025`
   - `concept\01_foundation\02_borrowing.md`
+- `https://en.wikipedia.org/wiki/Copy_on_write`
+  - `concept\01_foundation\02_borrowing.md`
+- `https://en.wikipedia.org/wiki/Borrow_checker`
+  - `concept\01_foundation\02_borrowing.md`
+- `https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization`
+  - `concept\01_foundation\02_borrowing.md`
+  - `concept\02_intermediate\03_memory_management.md`
+  - `concept\05_comparative\01_rust_vs_cpp.md`
+  - `concept\06_ecosystem\02_patterns.md`
+  - `docs\01_core\README.md`
+- `https://en.wikipedia.org/wiki/Read-copy-update`
+  - `concept\01_foundation\02_borrowing.md`
+- `https://en.wikipedia.org/wiki/Lease_(computer_science)`
+  - `concept\01_foundation\02_borrowing.md`
+- `https://en.wikipedia.org/wiki/System_F`
+  - `concept\01_foundation\04_type_system.md`
+  - `concept\01_foundation\10_numerics.md`
+  - `concept\01_foundation\14_coercion_and_casting.md`
+  - `concept\01_foundation\31_never_type.md`
+  - `concept\01_foundation\32_error_handling_basics.md`
+  - `concept\01_foundation\37_operators_and_symbols.md`
+  - `concept\01_foundation\40_patterns.md`
+  - `concept\02_intermediate\02_generics.md`
+  - `concept\02_intermediate\05_assert_matches.md`
+  - `concept\02_intermediate\06_range_types.md`
+  - `concept\02_intermediate\14_newtype_and_wrapper.md`
+  - `concept\02_intermediate\16_error_handling_deep_dive.md`
+  - `concept\02_intermediate\21_metaprogramming.md`
+  - `concept\02_intermediate\22_api_naming_conventions.md`
+  - `concept\02_intermediate\25_rtti_and_dynamic_typing.md`
+  - `concept\02_intermediate\26_c_preprocessor_vs_rust_macros.md`
+  - `concept\02_intermediate\31_derive_traits.md`
+  - `concept\03_advanced\07_proc_macro.md`
+  - `concept\03_advanced\17_type_erasure.md`
+  - `concept\03_advanced\24_async_closures.md`
+- `https://en.wikipedia.org/wiki/Rust`
+  - `concept\01_foundation\04_type_system.md`
+  - `concept\02_intermediate\03_memory_management.md`
+  - `concept\03_advanced\01_concurrency.md`
+  - `concept\05_comparative\01_rust_vs_cpp.md`
+- `https://en.wikipedia.org/wiki/Null_pointer`
+  - `concept\01_foundation\04_type_system.md`
+- `https://en.wikipedia.org/wiki/Algebraic_data_type`
+  - `concept\01_foundation\04_type_system.md`
+- `https://en.wikipedia.org/wiki/Bottom_type`
+  - `concept\01_foundation\04_type_system.md`
+  - `concept\01_foundation\31_never_type.md`
+- `https://en.wikipedia.org/wiki/Unit_type`
+  - `concept\01_foundation\04_type_system.md`
+- `https://en.wikipedia.org/wiki/Dependent_type`
+  - `concept\01_foundation\04_type_system.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+- `https://en.wikipedia.org/wiki/Tagged_union`
+  - `concept\01_foundation\04_type_system.md`
+- `https://en.wikipedia.org/wiki/Nominal_type_system`
+  - `concept\01_foundation\04_type_system.md`
+- `https://en.wikipedia.org/wiki/Structural_type_system`
+  - `concept\01_foundation\04_type_system.md`
 - `https://github.com/rust-lang/rfcs/pull/2584`
   - `concept\01_foundation\04_type_system.md`
+- `https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system`
+  - `concept\01_foundation\04_type_system.md`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\08_type_inference.md`
+- `https://en.wikipedia.org/wiki/Pattern_matching`
+  - `concept\01_foundation\04_type_system.md`
+  - `docs\01_core\README.md`
+- `https://en.wikipedia.org/wiki/Trait_(computer_programming)`
+  - `concept\01_foundation\04_type_system.md`
+  - `concept\02_intermediate\01_traits.md`
 - `https://github.com/verus-lang/verus/guide/guide/`
   - `concept\01_foundation\05_reference_semantics.md`
   - `concept\06_ecosystem\74_formal_verification_tools.md`
@@ -1400,15 +2096,27 @@
   - `docs\research_notes\10_performance_and_testing_alignment.md`
   - `docs\research_notes\experiments\10_compiler_optimizations.md`
   - `docs\research_notes\experiments\10_performance_benchmarks.md`
+- `https://www.microsoft.com/en-us/research/publication/the-implementation-of-functional-programming-languages/`
+  - `concept\01_foundation\07_control_flow.md`
+  - `concept\02_intermediate\09_serde_patterns.md`
+  - `concept\02_intermediate\15_iterator_patterns.md`
 - `https://github.com/rust-lang/rfcs/pull/160`
   - `concept\01_foundation\07_control_flow.md`
 - `https://github.com/rust-lang/rfcs/pull/3137`
   - `concept\01_foundation\07_control_flow.md`
+- `https://en.wikipedia.org/wiki/Hash_table`
+  - `concept\01_foundation\08_collections.md`
+  - `concept\02_intermediate\03_memory_management.md`
+- `https://en.wikipedia.org/wiki/B-tree`
+  - `concept\01_foundation\08_collections.md`
+  - `concept\01_foundation\17_collections_advanced.md`
 - `https://nnethercote.github.io/perf-book/print.html#reusing-collections`
   - `concept\01_foundation\08_collections.md`
   - `concept\01_foundation\17_collections_advanced.md`
 - `https://docs.rs/fnv/`
   - `concept\01_foundation\08_collections.md`
+- `https://en.wikipedia.org/wiki/UTF-8`
+  - `concept\01_foundation\09_strings_and_text.md`
 - `https://github.com/rust-lang/rfcs/pull/504`
   - `concept\01_foundation\09_strings_and_text.md`
   - `concept\01_foundation\18_strings_and_encoding.md`
@@ -1416,6 +2124,10 @@
   - `concept\01_foundation\09_strings_and_text.md`
 - `https://github.com/rust-lang/rfcs/blob/master/text/0560-integer-overflow.md`
   - `concept\01_foundation\10_numerics.md`
+- `https://en.wikipedia.org/wiki/IEEE_754`
+  - `concept\01_foundation\10_numerics.md`
+  - `concept\07_future\27_compile_time_execution.md`
+  - `concept\archive\01_foundation_11_numeric_types_deprecated.md`
 - `https://doi.org/10.1145/41625.41632`
   - `concept\01_foundation\12_attributes_and_macros.md`
   - `concept\01_foundation\35_preludes.md`
@@ -1450,6 +2162,10 @@
   - `docs\research_notes\formal_methods\10_macro_system.md`
   - `knowledge\02_intermediate\macros\01_cfg_select.md`
   - `knowledge\03_advanced\macros\README.md`
+- `https://en.wikipedia.org/wiki/Hygienic_macro`
+  - `concept\01_foundation\12_attributes_and_macros.md`
+  - `concept\02_intermediate\21_metaprogramming.md`
+  - `concept\03_advanced\04_macros.md`
 - `https://veykril.github.io/tlborm/print.html#counting`
   - `concept\01_foundation\12_attributes_and_macros.md`
 - `https://danielkeep.github.io/tlborm/book/`
@@ -1459,10 +2175,16 @@
 - `https://doi.org/10.1145/512760.512764`
   - `concept\01_foundation\13_panic_and_abort.md`
   - `concept\01_foundation\25_quiz_error_handling.md`
+- `https://en.wikipedia.org/wiki/Crash-only_software`
+  - `concept\01_foundation\13_panic_and_abort.md`
 - `https://docs.rs/log/latest/log/`
   - `concept\01_foundation\13_panic_and_abort.md`
   - `concept\06_ecosystem\13_logging_observability.md`
   - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://en.wikipedia.org/wiki/Type_conversion`
+  - `concept\01_foundation\14_coercion_and_casting.md`
+- `https://en.wikipedia.org/wiki/Closure_(computer_programming)`
+  - `concept\01_foundation\15_closure_basics.md`
 - `https://dl.acm.org/doi/10.5555/2385452`
   - `concept\01_foundation\16_testing_basics.md`
   - `concept\01_foundation\41_statements_and_expressions.md`
@@ -1483,6 +2205,10 @@
   - `concept\03_advanced\21_quiz_concurrency_async.md`
   - `concept\03_advanced\25_async_advanced.md`
   - `concept\03_advanced\26_async_patterns.md`
+- `https://en.wikipedia.org/wiki/Unit_testing`
+  - `concept\01_foundation\16_testing_basics.md`
+- `https://en.wikipedia.org/wiki/Binary_heap`
+  - `concept\01_foundation\17_collections_advanced.md`
 - `https://github.com/rust-lang/hashbrown`
   - `concept\01_foundation\17_collections_advanced.md`
 - `https://github.com/rust-lang/rustc-hash`
@@ -1493,9 +2219,15 @@
   - `concept\01_foundation\17_collections_advanced.md`
 - `https://docs.rs/ahash/latest/ahash/`
   - `concept\01_foundation\17_collections_advanced.md`
+- `https://en.wikipedia.org/wiki/B_tree`
+  - `concept\01_foundation\17_collections_advanced.md`
+- `https://en.wikipedia.org/wiki/Binary_Heap`
+  - `concept\01_foundation\17_collections_advanced.md`
 - `https://nnethercote.github.io/perf-book/hashing.html`
   - `concept\01_foundation\17_collections_advanced.md`
 - `https://docs.rs/unicode-segmentation/latest/unicode_segmentation/`
+  - `concept\01_foundation\18_strings_and_encoding.md`
+- `https://en.wikipedia.org/wiki/Unicode`
   - `concept\01_foundation\18_strings_and_encoding.md`
 - `https://docs.rs/unicode-segmentation/latest/`
   - `concept\01_foundation\18_strings_and_encoding.md`
@@ -1509,6 +2241,8 @@
 - `https://en.cppreference.com/w/cpp/language/value_category`
   - `concept\01_foundation\19_value_vs_reference_semantics.md`
   - `concept\01_foundation\23_move_semantics.md`
+- `https://www.youtube.com/watch?v=U7xx6gyaiio`
+  - `concept\01_foundation\19_value_vs_reference_semantics.md`
 - `https://dl.acm.org/doi/10.1145/6041.6042`
   - `concept\01_foundation\19_value_vs_reference_semantics.md`
   - `concept\02_intermediate\02_generics.md`
@@ -1527,6 +2261,23 @@
   - `concept\01_foundation\23_move_semantics.md`
 - `https://doi.org/10.1145/3622841`
   - `concept\01_foundation\28_ownership_inventories_brown_book.md`
+- `https://en.wikipedia.org/wiki/Subtyping`
+  - `concept\01_foundation\30_lifetimes_advanced.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `docs\research_notes\type_theory\10_type_system_foundations.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+- `https://en.wikipedia.org/wiki/Escape_analysis`
+  - `concept\01_foundation\30_lifetimes_advanced.md`
+  - `concept\archive\01_foundation_03_lifetimes_original.md`
+- `https://en.wikipedia.org/wiki/Scope_(computer_science)`
+  - `concept\01_foundation\30_lifetimes_advanced.md`
+  - `concept\archive\01_foundation_03_lifetimes_original.md`
+- `https://en.wikipedia.org/wiki/Variable_shadowing`
+  - `concept\01_foundation\30_lifetimes_advanced.md`
+  - `concept\archive\01_foundation_03_lifetimes_original.md`
+- `https://en.wikipedia.org/wiki/Rust_(programming_language)#Non-lexical_lifetimes`
+  - `concept\01_foundation\30_lifetimes_advanced.md`
+  - `concept\archive\01_foundation_03_lifetimes_original.md`
 - `https://github.com/rust-lang/rust/issues/156512`
   - `concept\01_foundation\31_never_type.md`
 - `https://docs.rs/thiserror/latest/thiserror/`
@@ -1546,8 +2297,19 @@
   - `concept\01_foundation\42_useful_development_tools.md`
   - `docs\research_notes\10_toolchain_ecosystem_alignment.md`
   - `docs\research_notes\10_tools_guide.md`
+- `https://en.wikipedia.org/wiki/Ownership_(programming)`
+  - `concept\01_foundation\README.md`
+  - `docs\research_notes\10_tutorial_ownership_safety.md`
+- `https://en.wikipedia.org/wiki/Type_class`
+  - `concept\02_intermediate\01_traits.md`
+  - `concept\02_intermediate\19_advanced_traits.md`
+- `https://en.wikipedia.org/wiki/Ad_hoc_polymorphism`
+  - `concept\02_intermediate\01_traits.md`
 - `http://ropas.snu.ac.kr/~bruno/papers/TypeClasses.pdf`
   - `concept\02_intermediate\01_traits.md`
+- `https://en.wikipedia.org/wiki/Generic_programming`
+  - `concept\02_intermediate\02_generics.md`
+  - `concept\02_intermediate\README.md`
 - `https://dl.acm.org/doi/10.1145/75277.75305`
   - `concept\02_intermediate\02_generics.md`
 - `https://github.com/rust-lang/rust/issues/76560`
@@ -1595,8 +2357,29 @@
 - `https://github.com/rust-lang/rfcs/pull/3617`
   - `concept\02_intermediate\02_generics.md`
   - `concept\07_future\05_rust_version_tracking.md`
+- `https://en.wikipedia.org/wiki/Memory_management`
+  - `concept\02_intermediate\03_memory_management.md`
+  - `concept\03_advanced\14_custom_allocators.md`
+  - `concept\05_comparative\03_paradigm_matrix.md`
+- `https://en.wikipedia.org/wiki/Reference_counting`
+  - `concept\02_intermediate\03_memory_management.md`
+- `https://en.wikipedia.org/wiki/Dynamic_array`
+  - `concept\02_intermediate\03_memory_management.md`
 - `https://github.com/rust-lang/rfcs/pull/1974`
   - `concept\02_intermediate\03_memory_management.md`
+- `https://en.wikipedia.org/wiki/Memory_allocator`
+  - `concept\02_intermediate\03_memory_management.md`
+- `https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)`
+  - `concept\02_intermediate\03_memory_management.md`
+  - `concept\05_comparative\02_rust_vs_go.md`
+- `https://en.wikipedia.org/wiki/Stack-based_memory_allocation`
+  - `concept\02_intermediate\03_memory_management.md`
+- `https://en.wikipedia.org/wiki/Heap_(data_structure)`
+  - `concept\02_intermediate\03_memory_management.md`
+- `https://en.wikipedia.org/wiki/Pointer_(computer_programming)`
+  - `concept\02_intermediate\03_memory_management.md`
+  - `concept\03_advanced\03_unsafe.md`
+  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
 - `https://crates.io/`
   - `concept\02_intermediate\04_error_handling.md`
   - `concept\03_advanced\01_concurrency.md`
@@ -1890,6 +2673,8 @@
   - `knowledge\06_ecosystem\emerging\02_generic_const_exprs.md`
 - `https://github.com/rust-lang/rfcs/pull/1937`
   - `concept\02_intermediate\04_error_handling.md`
+- `https://en.wikipedia.org/wiki/Exit_status`
+  - `concept\02_intermediate\04_error_handling.md`
 - `https://github.com/rust-lang/rfcs/pull/2504`
   - `concept\02_intermediate\04_error_handling.md`
 - `https://rust-cli.github.io/book/`
@@ -1902,6 +2687,17 @@
 - `https://github.com/rust-lang/rfcs/pull/2091`
   - `concept\02_intermediate\04_error_handling.md`
 - `https://github.com/rust-lang/rfcs/pull/3058`
+  - `concept\02_intermediate\04_error_handling.md`
+- `https://en.wikipedia.org/wiki/Result_type`
+  - `concept\02_intermediate\04_error_handling.md`
+- `https://en.wikipedia.org/wiki/Option_type`
+  - `concept\02_intermediate\04_error_handling.md`
+- `https://en.wikipedia.org/wiki/Monad_(functional_programming)`
+  - `concept\02_intermediate\04_error_handling.md`
+  - `concept\04_formal\10_category_theory.md`
+  - `concept\06_ecosystem\73_pattern_composition_algebra.md`
+  - `concept\07_future\04_effects_system.md`
+- `https://en.wikipedia.org/wiki/Panic_(computing)`
   - `concept\02_intermediate\04_error_handling.md`
 - `https://github.com/rust-lang/rfcs/pull/2005`
   - `concept\02_intermediate\05_assert_matches.md`
@@ -2226,7 +3022,6 @@
   - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
   - `knowledge\04_expert\safety_critical\09_reference\07_ffi_integration_guide.md`
   - `knowledge\04_expert\safety_critical\09_reference\08_glossary_and_definitions.md`
-  - `knowledge\04_expert\safety_critical\09_reference\09_metrics_and_measurement_guide.md`
   - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
   - `knowledge\04_expert\safety_critical\09_reference\13_rust_safety_critical_coding_guidelines.md`
   - `knowledge\04_expert\safety_critical\09_reference\15_security_audit_guide.md`
@@ -2246,6 +3041,8 @@
   - `concept\02_intermediate\12_smart_pointers.md`
 - `https://docs.rs/nom/latest/nom/`
   - `concept\02_intermediate\13_dsl_and_embedding.md`
+- `https://en.wikipedia.org/wiki/Domain-specific_language`
+  - `concept\02_intermediate\13_dsl_and_embedding.md`
 - `https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/`
   - `concept\02_intermediate\13_dsl_and_embedding.md`
   - `concept\02_intermediate\14_newtype_and_wrapper.md`
@@ -2261,12 +3058,16 @@
   - `concept\03_advanced\07_proc_macro.md`
   - `docs\research_notes\10_macros_ffi_embedded_alignment.md`
   - `docs\research_notes\formal_methods\10_macro_system.md`
+- `https://en.wikipedia.org/wiki/Newtype`
+  - `concept\02_intermediate\14_newtype_and_wrapper.md`
 - `https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html`
   - `concept\02_intermediate\14_newtype_and_wrapper.md`
 - `https://docs.rs/uom/latest/uom/`
   - `concept\02_intermediate\14_newtype_and_wrapper.md`
 - `https://docs.rs/derive_more/latest/derive_more/`
   - `concept\02_intermediate\14_newtype_and_wrapper.md`
+- `https://en.wikipedia.org/wiki/Iterator_pattern`
+  - `concept\02_intermediate\15_iterator_patterns.md`
 - `https://docs.rs/itertools/latest/itertools/`
   - `concept\02_intermediate\15_iterator_patterns.md`
 - `https://users.rust-lang.org/t/iterator-mistakes/`
@@ -2274,6 +3075,8 @@
 - `https://github.com/rust-lang/project-error-handling`
   - `concept\02_intermediate\16_error_handling_deep_dive.md`
 - `https://docs.rs/serde_derive/latest/serde_derive/`
+  - `concept\02_intermediate\17_macro_patterns.md`
+- `https://en.wikipedia.org/wiki/Code_generation_(compiler)`
   - `concept\02_intermediate\17_macro_patterns.md`
 - `https://docs.rs/paste/latest/paste/`
   - `concept\02_intermediate\17_macro_patterns.md`
@@ -2333,6 +3136,8 @@
   - `concept\02_intermediate\29_friend_vs_module_privacy.md`
 - `https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-class`
   - `concept\02_intermediate\29_friend_vs_module_privacy.md`
+- `https://en.wikipedia.org/wiki/Trait-based_programming`
+  - `concept\02_intermediate\README.md`
 - `https://doi.org/10.1145/3735592`
   - `concept\03_advanced\00_before_formal.md`
   - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
@@ -2343,6 +3148,10 @@
   - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
   - `docs\research_notes\type_theory\10_lifetime_formalization.md`
   - `docs\research_notes\type_theory\10_variance_theory.md`
+- `https://en.wikipedia.org/wiki/Data_race`
+  - `concept\03_advanced\01_concurrency.md`
+- `https://en.wikipedia.org/wiki/Compare_and_swap`
+  - `concept\03_advanced\01_concurrency.md`
 - `https://docs.rs/`
   - `concept\03_advanced\01_concurrency.md`
   - `concept\07_future\archive\01_ai_integration_original.md`
@@ -2582,6 +3391,11 @@
   - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
   - `knowledge\05_reference\02_math_constants.md`
   - `knowledge\06_ecosystem\README.md`
+- `https://en.wikipedia.org/wiki/Actor_model`
+  - `concept\03_advanced\01_concurrency.md`
+- `https://en.wikipedia.org/wiki/Race_condition`
+  - `concept\03_advanced\01_concurrency.md`
+  - `concept\05_comparative\04_safety_boundaries.md`
 - `https://docs.rs/parking_lot/`
   - `concept\03_advanced\01_concurrency.md`
 - `https://docs.rs/crossbeam-channel/`
@@ -2590,6 +3404,25 @@
   - `concept\03_advanced\02_async.md`
   - `concept\03_advanced\06_pin_unpin.md`
   - `concept\03_advanced\25_async_advanced.md`
+- `https://en.wikipedia.org/wiki/Async/await`
+  - `concept\03_advanced\02_async.md`
+  - `concept\archive\03_advanced_02_async_original.md`
+- `https://en.wikipedia.org/wiki/Cooperative_multitasking`
+  - `concept\03_advanced\02_async.md`
+  - `concept\archive\03_advanced_02_async_original.md`
+- `https://en.wikipedia.org/wiki/Lazy_evaluation`
+  - `concept\03_advanced\02_async.md`
+  - `concept\03_advanced\25_async_advanced.md`
+- `https://en.wikipedia.org/wiki/Future_(programming)`
+  - `concept\03_advanced\02_async.md`
+  - `concept\archive\03_advanced_02_async_original.md`
+- `https://en.wikipedia.org/wiki/Event_loop`
+  - `concept\03_advanced\02_async.md`
+  - `concept\archive\03_advanced_02_async_original.md`
+- `https://en.wikipedia.org/wiki/Promise_(programming)`
+  - `concept\03_advanced\02_async.md`
+  - `concept\archive\03_advanced_02_async_original.md`
+  - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
 - `https://docs.rs/async-trait/latest/async_trait/`
   - `concept\03_advanced\02_async.md`
 - `https://docs.rs/loom`
@@ -2611,11 +3444,23 @@
   - `docs\research_notes\10_tools_guide.md`
   - `docs\research_notes\10_verification_tools_practical_alignment.md`
   - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `https://en.wikipedia.org/wiki/Type_punning`
+  - `concept\03_advanced\03_unsafe.md`
 - `https://github.com/rust-lang/rfcs/pull/1184`
+  - `concept\03_advanced\03_unsafe.md`
+- `https://en.wikipedia.org/wiki/Dangling_pointer`
+  - `concept\03_advanced\03_unsafe.md`
+- `https://en.wikipedia.org/wiki/Buffer_overflow`
   - `concept\03_advanced\03_unsafe.md`
 - `https://docs.rs/proc-macro-error2/latest/proc_macro_error2/`
   - `concept\03_advanced\04_macros.md`
 - `https://github.com/rust-lang/rfcs/pull/2564`
+  - `concept\03_advanced\04_macros.md`
+- `https://en.wikipedia.org/wiki/Abstract_syntax_tree`
+  - `concept\03_advanced\04_macros.md`
+- `https://en.wikipedia.org/wiki/Domain_specific_language`
+  - `concept\03_advanced\04_macros.md`
+- `https://en.wikipedia.org/wiki/Quasi-quotation`
   - `concept\03_advanced\04_macros.md`
 - `https://github.com/mozilla/cbindgen`
   - `concept\03_advanced\05_rust_ffi.md`
@@ -2642,6 +3487,8 @@
   - `concept\07_future\03_evolution.md`
   - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
   - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+- `https://en.wikipedia.org/wiki/Data-flow_analysis`
+  - `concept\03_advanced\08_nll_and_polonius.md`
 - `https://github.com/rust-lang/polonius/blob/master/README.md`
   - `concept\03_advanced\08_nll_and_polonius.md`
 - `https://github.com/rust-lang/rust/issues/43234`
@@ -2662,6 +3509,10 @@
   - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
 - `https://docs.rs/tokio/latest/tokio/sync/index.html`
   - `concept\03_advanced\10_concurrency_patterns.md`
+- `https://en.wikipedia.org/wiki/Non-blocking_algorithm`
+  - `concept\03_advanced\10_concurrency_patterns.md`
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
+  - `concept\03_advanced\16_lock_free.md`
 - `https://docs.rs/crossbeam/latest/crossbeam/channel/index.html`
   - `concept\03_advanced\10_concurrency_patterns.md`
 - `https://docs.rs/crossbeam/latest/crossbeam/epoch/index.html`
@@ -2672,6 +3523,9 @@
 - `https://en.cppreference.com/w/cpp/atomic/memory_order`
   - `concept\03_advanced\11_atomics_and_memory_ordering.md`
   - `concept\03_advanced\16_lock_free.md`
+- `https://en.wikipedia.org/wiki/Memory_ordering`
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
+  - `concept\05_comparative\04_safety_boundaries.md`
 - `https://domino.research.ibm.com/library/cyberdig.nsf/papers/58319A2ED2B17A64852570C30061D166/$File/r5116.pdf`
   - `concept\03_advanced\11_atomics_and_memory_ordering.md`
 - `https://docs.rs/crossbeam/latest/crossbeam/atomic/index.html`
@@ -2682,12 +3536,16 @@
   - `concept\06_ecosystem\16_testing.md`
 - `https://github.com/rust-lang/rust/pull/150551`
   - `concept\03_advanced\13_inline_assembly.md`
+- `https://developer.arm.com/documentation/ddi0487/latest/`
+  - `concept\03_advanced\13_inline_assembly.md`
 - `https://github.com/microsoft/mimalloc`
   - `concept\03_advanced\14_custom_allocators.md`
 - `https://docs.rs/bumpalo/latest/bumpalo/`
   - `concept\03_advanced\14_custom_allocators.md`
 - `https://docs.rs/typed-arena/latest/typed_arena/`
   - `concept\03_advanced\14_custom_allocators.md`
+- `https://en.wikipedia.org/wiki/Zero-copy`
+  - `concept\03_advanced\15_zero_copy_parsing.md`
 - `https://docs.rs/bytes/latest/bytes/`
   - `concept\03_advanced\15_zero_copy_parsing.md`
 - `https://docs.rs/bytes/latest/bytes/struct.Bytes.html`
@@ -2707,6 +3565,8 @@
   - `concept\03_advanced\16_lock_free.md`
 - `https://docs.rs/lockfree/latest/lockfree/`
   - `concept\03_advanced\16_lock_free.md`
+- `https://en.wikipedia.org/wiki/Type_erasure`
+  - `concept\03_advanced\17_type_erasure.md`
 - `https://docs.rs/tokio/`
   - `concept\03_advanced\18_network_programming.md`
   - `concept\03_advanced\20_stream_processing_semantics.md`
@@ -2761,6 +3621,153 @@
   - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
   - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
   - `knowledge\06_ecosystem\deep_dives\01_axum_deep_dive.md`
+- `https://en.wikipedia.org/wiki/Asynchronous_I/O`
+  - `concept\03_advanced\18_network_programming.md`
+  - `concept\03_advanced\README.md`
+  - `docs\00_meta\00_content_reconstruction_plan_2026.md`
+  - `docs\00_meta\00_documentation_division_of_labor.md`
+  - `docs\00_meta\00_documentation_lifecycle.md`
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\01_learning\01_mdbook_quiz_guide.md`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+  - `docs\02_reference\alignment_guide.md`
+  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_closures_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+  - `docs\02_reference\quick_reference\README.md`
+  - `docs\03_guides\03_io_uring_guide.md`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\03_practice\03_project_11_web_server.md`
+  - `docs\03_practice\03_project_14_async_runtime.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `docs\04_thinking\04_applications_analysis_view.md`
+  - `docs\04_thinking\04_decision_graph_network.md`
+  - `docs\04_thinking\04_thinking_representation_methods.md`
+  - `docs\05_guides\05_advanced_topics_deep_dive.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\05_guides\05_async_programming_usage_guide.md`
+  - `docs\05_guides\05_cli_applications_guide.md`
+  - `docs\05_guides\05_cross_module_integration_examples.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+  - `docs\05_guides\05_inline_assembly_guide.md`
+  - `docs\05_guides\05_macro_system_usage_guide.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
+  - `docs\05_guides\05_troubleshooting_guide.md`
+  - `docs\05_guides\05_wasm_usage_guide.md`
+  - `docs\05_guides\best_practices.md`
+  - `docs\05_guides\workflow\01_workflow_theory.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+  - `docs\06_toolchain\README.md`
+  - `docs\07_project\07_knowledge_structure_framework.md`
+  - `docs\07_project\07_module_knowledge_structure_guide.md`
+  - `docs\07_project\07_project_architecture_guide.md`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\10_authoritative_sources_and_citations.md`
+  - `docs\10_migration_guide_2026.md`
+  - `docs\research_notes\10_authoritative_alignment_guide.md`
+  - `docs\research_notes\10_best_practices.md`
+  - `docs\research_notes\10_changelog.md`
+  - `docs\research_notes\10_code_doc_formal_mapping.md`
+  - `docs\research_notes\10_cognitive_argumentation_framework.md`
+  - `docs\research_notes\10_comprehensive_project_report.md`
+  - `docs\research_notes\10_comprehensive_systematic_overview.md`
+  - `docs\research_notes\10_comprehensive_systematic_review_and_100_percent_plan.md`
+  - `docs\research_notes\10_concept_comparison_tables.md`
+  - `docs\research_notes\10_concept_hierarchy_framework.md`
+  - `docs\research_notes\10_concept_relationship_network.md`
+  - `docs\research_notes\10_design_mechanism_rationale.md`
+  - `docs\research_notes\10_faq.md`
+  - `docs\research_notes\10_faq_comprehensive.md`
+  - `docs\research_notes\10_formal_full_model_overview.md`
+  - `docs\research_notes\10_formal_language_and_proofs.md`
+  - `docs\research_notes\10_glossary.md`
+  - `docs\research_notes\10_incremental_update_flow.md`
+  - `docs\research_notes\10_international_formal_verification_index.md`
+  - `docs\research_notes\10_interview_questions_collection.md`
+  - `docs\research_notes\10_l3_machine_proof_guide.md`
+  - `docs\research_notes\10_language_semantics_expressiveness.md`
+  - `docs\research_notes\10_macros_cheatsheet.md`
+  - `docs\research_notes\10_practical_applications.md`
+  - `docs\research_notes\10_proof_index.md`
+  - `docs\research_notes\10_research_methodology.md`
+  - `docs\research_notes\10_research_roadmap.md`
+  - `docs\research_notes\10_resources.md`
+  - `docs\research_notes\10_rust_formal_methods_cheatsheet.md`
+  - `docs\research_notes\10_rustsem_semantics.md`
+  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
+  - `docs\research_notes\10_system_summary.md`
+  - `docs\research_notes\10_theorems_and_proof_strategies.md`
+  - `docs\research_notes\10_theoretical_and_argumentation_system_architecture.md`
+  - `docs\research_notes\10_tools_guide.md`
+  - `docs\research_notes\10_tutorial_borrow_checker.md`
+  - `docs\research_notes\10_tutorial_concurrency_models.md`
+  - `docs\research_notes\10_tutorial_lifetimes.md`
+  - `docs\research_notes\10_tutorial_ownership_safety.md`
+  - `docs\research_notes\10_tutorial_type_system.md`
+  - `docs\research_notes\10_verification_tools_matrix.md`
+  - `docs\research_notes\10_workflow_engine_matrix.md`
+  - `docs\research_notes\experiments\10_compiler_optimizations.md`
+  - `docs\research_notes\experiments\10_concurrency_performance.md`
+  - `docs\research_notes\experiments\10_memory_analysis.md`
+  - `docs\research_notes\experiments\10_performance_benchmarks.md`
+  - `docs\research_notes\experiments\README.md`
+  - `docs\research_notes\formal_methods\10_async_runtime_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_async_state_machine.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
+  - `docs\research_notes\formal_methods\10_send_sync_formalization.md`
+  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
+  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
+  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\README.md`
+  - `docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md`
+  - `docs\research_notes\software_design_theory\03_execution_models\05_distributed.md`
+  - `docs\research_notes\software_design_theory\03_execution_models\06_boundary_analysis.md`
+  - `docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\README.md`
+  - `docs\research_notes\software_design_theory\06_rust_idioms.md`
+  - `docs\research_notes\type_theory\10_advanced_types.md`
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `docs\research_notes\type_theory\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\02_async\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
 - `https://github.com/rust-lang/rfcs/pull/793`
   - `concept\03_advanced\18_network_programming.md`
 - `https://github.com/rust-lang/rfcs/pull/768`
@@ -2773,6 +3780,8 @@
   - `concept\06_ecosystem\03_core_crates.md`
   - `concept\06_ecosystem\30_system_composability.md`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type`
+  - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
 - `https://mitpress.mit.edu/books/distributed-algorithms`
   - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
 - `https://raft.github.io/raft.pdf`
@@ -2861,6 +3870,54 @@
   - `concept\04_formal\01_linear_logic.md`
 - `https://doi.org/10.1007/3-540-52377-7_30`
   - `concept\04_formal\01_linear_logic.md`
+- `https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\14_lambda_calculus.md`
+- `https://en.wikipedia.org/wiki/Linear_Logic`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\README.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `https://en.wikipedia.org/wiki/Type_theory`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\archive\01_foundation_11_numeric_types_deprecated.md`
+  - `knowledge\02_intermediate\type_system\01_core_range.md`
+  - `knowledge\03_advanced\06_type_driven_correctness.md`
+  - `knowledge\06_ecosystem\emerging\02_generic_const_exprs.md`
+- `https://iris-project.org/`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\04_formal\11_separation_logic.md`
+  - `concept\04_formal\15_hoare_logic.md`
+  - `concept\04_formal\README.md`
+  - `concept\06_ecosystem\74_formal_verification_tools.md`
+  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
+  - `docs\04_research\04_verusbelt_pldi_2026.md`
+  - `docs\research_notes\10_comprehensive_systematic_review_and_100_percent_plan.md`
+  - `docs\research_notes\10_formal_full_model_en_summary.md`
+  - `docs\research_notes\10_formal_proof_system_guide.md`
+  - `docs\research_notes\10_learning_path_comprehensive.md`
+  - `docs\research_notes\10_readme_100_percent_completion.md`
+  - `docs\research_notes\10_research_methodology.md`
+  - `docs\research_notes\10_theorems_and_proof_strategies.md`
+  - `docs\research_notes\formal_methods\10_formal_methods_completeness_checklist.md`
+  - `docs\research_notes\formal_methods\10_safe_decidable_mechanisms_and_formal_methods_plan.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
+  - `knowledge\04_expert\academic\README.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\01_formal_verification_practical_guide.md`
+- `https://en.wikipedia.org/wiki/Sequent_calculus`
+  - `concept\04_formal\01_linear_logic.md`
+- `https://en.wikipedia.org/wiki/Phase_semantics`
+  - `concept\04_formal\01_linear_logic.md`
 - `https://dl.acm.org/doi/10.1145/3290380`
   - `concept\04_formal\01_linear_logic.md`
   - `concept\04_formal\02_type_theory.md`
@@ -2870,15 +3927,53 @@
   - `concept\04_formal\02_type_theory.md`
   - `concept\04_formal\03_ownership_formal.md`
   - `docs\research_notes\10_academic_papers_alignment.md`
+- `https://en.wikipedia.org/wiki/Separation_logic`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\04_formal\11_separation_logic.md`
+  - `concept\04_formal\README.md`
+- `https://en.wikipedia.org/wiki/Proof_net`
+  - `concept\04_formal\01_linear_logic.md`
 - `https://arxiv.org/abs/2604.15290`
   - `concept\04_formal\01_linear_logic.md`
+- `https://en.wikipedia.org/wiki/Linear_type`
+  - `concept\04_formal\01_linear_logic.md`
+- `https://en.wikipedia.org/wiki/Jean-Yves_Girard`
+  - `concept\04_formal\01_linear_logic.md`
+- `https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+- `https://en.wikipedia.org/wiki/Higher-kinded_type`
+  - `concept\04_formal\02_type_theory.md`
+- `https://en.wikipedia.org/wiki/Generalized_algebraic_data_type`
+  - `concept\04_formal\02_type_theory.md`
+- `https://en.wikipedia.org/wiki/Kind_(type_theory)`
+  - `concept\04_formal\02_type_theory.md`
+- `https://en.wikipedia.org/wiki/Operational_semantics`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+- `https://en.wikipedia.org/wiki/Formal_methods`
+  - `concept\04_formal\03_ownership_formal.md`
 - `https://doi.org/10.1145/3656425`
   - `concept\04_formal\03_ownership_formal.md`
 - `https://doi.org/10.1145/3290343`
   - `concept\04_formal\03_ownership_formal.md`
+- `https://en.wikipedia.org/wiki/Fractional_permissions`
+  - `concept\04_formal\03_ownership_formal.md`
+- `https://en.wikipedia.org/wiki/Typestate_analysis`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\06_ecosystem\02_patterns.md`
 - `https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md`
   - `concept\04_formal\03_ownership_formal.md`
   - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
+- `https://iris-project.org/tutorial-pdfs/iris-lecture-notes.pdf`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\11_separation_logic.md`
+  - `concept\06_ecosystem\74_formal_verification_tools.md`
+  - `docs\04_research\04_rust_formal_verification.md`
 - `https://github.com/AeneasVerif/aeneas`
   - `concept\04_formal\04_rustbelt.md`
   - `concept\04_formal\05_verification_toolchain.md`
@@ -2899,9 +3994,56 @@
   - `docs\research_notes\formal_methods\10_ownership_model.md`
   - `docs\research_notes\formal_modules\50_formal_tools_module_mapping.md`
   - `knowledge\04_expert\academic\README.md`
+- `https://en.wikipedia.org/wiki/Formal_verification`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\13_formal_methods.md`
+  - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
+  - `concept\07_future\02_formal_methods.md`
+- `https://en.wikipedia.org/wiki/Model_checking`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\07_future\02_formal_methods.md`
+- `https://en.wikipedia.org/wiki/Interpreter_(computing)`
+  - `concept\04_formal\05_verification_toolchain.md`
+- `https://en.wikipedia.org/wiki/Symbolic_execution`
+  - `concept\04_formal\05_verification_toolchain.md`
+- `https://en.wikipedia.org/wiki/Hoare_logic`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\04_formal\13_formal_methods.md`
+  - `concept\04_formal\15_hoare_logic.md`
+  - `concept\07_future\02_formal_methods.md`
+  - `concept\07_future\08_safety_tags_preview.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
+- `https://en.wikipedia.org/wiki/Satisfiability_modulo_theories`
+  - `concept\04_formal\05_verification_toolchain.md`
+- `https://en.wikipedia.org/wiki/Predicate_transformer_semantics`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\04_formal\15_hoare_logic.md`
+- `https://en.wikipedia.org/wiki/Weakest_precondition`
+  - `concept\04_formal\05_verification_toolchain.md`
+- `https://en.wikipedia.org/wiki/Viper_(verification_infrastructure)`
+  - `concept\04_formal\05_verification_toolchain.md`
+- `https://en.wikipedia.org/wiki/Proof_assistant`
+  - `concept\04_formal\05_verification_toolchain.md`
+- `https://en.wikipedia.org/wiki/Automated_theorem_proving`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\07_future\02_formal_methods.md`
+- `https://en.wikipedia.org/wiki/Refinement_type`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\07_future\04_effects_system.md`
+- `https://en.wikipedia.org/wiki/Type_safety`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\05_comparative\04_safety_boundaries.md`
+  - `docs\01_core\README.md`
 - `https://github.com/cbeuw/rustlantis`
   - `concept\04_formal\05_verification_toolchain.md`
 - `https://pl.ethz.ch/`
+  - `concept\04_formal\05_verification_toolchain.md`
+- `https://en.wikipedia.org/wiki/Differential_testing`
   - `concept\04_formal\05_verification_toolchain.md`
 - `https://arxiv.org/abs/2503.23985`
   - `concept\04_formal\05_verification_toolchain.md`
@@ -2915,6 +4057,8 @@
   - `concept\04_formal\16_aerospace_certification_formal_methods.md`
   - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
   - `concept\07_future\02_formal_methods.md`
+- `https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)`
+  - `concept\04_formal\06_subtype_variance.md`
 - `https://doi.org/10.1093/comjnl/12.2.166`
   - `concept\04_formal\08_type_inference.md`
 - `https://doi.org/10.2307/2270762`
@@ -2927,13 +4071,27 @@
   - `concept\04_formal\29_type_inference_complexity.md`
 - `https://github.com/rust-lang/rfcs/pull/438`
   - `concept\04_formal\08_type_inference.md`
+- `https://en.wikipedia.org/wiki/Type_inference`
+  - `concept\04_formal\08_type_inference.md`
+- `https://en.wikipedia.org/wiki/Session_type`
+  - `concept\04_formal\09_linear_logic_applications.md`
+- `https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-inference.pdf`
+  - `concept\04_formal\09_linear_logic_applications.md`
 - `https://doi.org/10.1093/acprof:oso/9780198568612.001.0001`
   - `concept\04_formal\10_category_theory.md`
 - `https://github.com/rust-lang/rfcs/issues/1815`
   - `concept\04_formal\10_category_theory.md`
+- `https://en.wikipedia.org/wiki/Category_theory`
+  - `concept\04_formal\10_category_theory.md`
+  - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
+  - `concept\06_ecosystem\73_pattern_composition_algebra.md`
 - `https://www.cs.ucl.ac.uk/staff/p.ohearn/papers/localreasoning.pdf`
   - `concept\04_formal\11_separation_logic.md`
 - `https://www.cl.cam.ac.uk/~gw104/dens.pdf`
+  - `concept\04_formal\12_denotational_semantics.md`
+- `https://en.wikipedia.org/wiki/Denotational_semantics`
+  - `concept\04_formal\12_denotational_semantics.md`
+- `https://en.wikipedia.org/wiki/Domain_theory`
   - `concept\04_formal\12_denotational_semantics.md`
 - `https://www.cl.cam.ac.uk/teaching/2021/Semantics/`
   - `concept\04_formal\12_denotational_semantics.md`
@@ -2951,7 +4109,16 @@
   - `concept\04_formal\16_aerospace_certification_formal_methods.md`
 - `https://docs.rs/contracts/`
   - `concept\04_formal\13_formal_methods.md`
+- `https://en.wikipedia.org/wiki/Model_checking#Bounded_model_checking`
+  - `concept\04_formal\13_formal_methods.md`
+  - `concept\06_ecosystem\74_formal_verification_tools.md`
+- `https://en.wikipedia.org/wiki/Lambda_calculus`
+  - `concept\04_formal\14_lambda_calculus.md`
 - `https://doi.org/10.1016/C2009-0-14341-3`
+  - `concept\04_formal\14_lambda_calculus.md`
+- `https://en.wikipedia.org/wiki/Church_encoding`
+  - `concept\04_formal\14_lambda_calculus.md`
+- `https://en.wikipedia.org/wiki/Fixed-point_combinator`
   - `concept\04_formal\14_lambda_calculus.md`
 - `https://doi.org/10.1093/comjnl/12.4.576`
   - `concept\04_formal\15_hoare_logic.md`
@@ -2963,11 +4130,50 @@
   - `concept\04_formal\15_hoare_logic.md`
 - `https://arxiv.org/abs/1409.7643`
   - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+- `https://en.wikipedia.org/wiki/DO-178C`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+- `https://www.microsoft.com/en-us/research/publication/verus/`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
 - `https://doi.org/10.1007/978-3-031-15077-8_26`
   - `concept\04_formal\16_aerospace_certification_formal_methods.md`
 - `https://docs.rs/no-panic/`
   - `concept\04_formal\16_aerospace_certification_formal_methods.md`
   - `concept\07_future\08_safety_tags_preview.md`
+- `https://en.wikipedia.org/wiki/Modified_condition/decision_coverage`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `concept\07_future\07_mcdc_coverage_preview.md`
+- `https://ferrous-systems.com/ferrocene/`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
+  - `concept\07_future\41_rust_specification_preview.md`
+  - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\02_rust_ecosystem_mind_map.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\01_comprehensive_language_comparison_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\02_rust_multi_dimensional_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_rust_safety_critical_ecosystem_master_index.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\01_rust_decision_trees.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\02_safety_integrity_level_selection_guide.md`
+  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\02_rust_axiomatic_reasoning_trees.md`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\01_adoption_strategy_and_roi_analysis.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\01_education_and_training_roadmap.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\02_rust_2026_2030_roadmap_forecast.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\03_sustainable_roadmap_and_plans.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\04_technology_watch_and_emerging_trends.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+  - `knowledge\04_expert\safety_critical\08_training\01_assessment_and_certification.md`
+  - `knowledge\04_expert\safety_critical\08_training\02_certification_prep_guide.md`
+  - `knowledge\04_expert\safety_critical\08_training\03_hands_on_lab_exercises.md`
+  - `knowledge\04_expert\safety_critical\08_training\05_rust_safety_critical_training_program.md`
+  - `knowledge\04_expert\safety_critical\09_reference\04_comprehensive_international_alignment_completion_report.md`
+  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\13_rust_safety_critical_coding_guidelines.md`
+  - `knowledge\04_expert\safety_critical\09_reference\14_safety_critical_checklists.md`
+  - `knowledge\04_expert\safety_critical\10_standards\01_do_178c_rust_compliance_pathway.md`
+  - `knowledge\04_expert\safety_critical\10_standards\02_iec_61508_rust_implementation_guide.md`
+  - `knowledge\04_expert\safety_critical\README.md`
 - `https://doi.org/10.1145/263690.263803`
   - `concept\04_formal\17_operational_semantics.md`
 - `https://doi.org/10.1017/S0956796800001368`
@@ -3029,9 +4235,13 @@
   - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
 - `https://gillianplatform.github.io/`
   - `concept\04_formal\17_operational_semantics.md`
+- `https://www.cs.cmu.edu/~rwh/pfpl/`
+  - `concept\04_formal\18_evaluation_strategies.md`
 - `https://doi.org/10.1093/comjnl/27.2.115`
   - `concept\04_formal\18_evaluation_strategies.md`
 - `https://www.cl.cam.ac.uk/~na482/pdfs/`
+  - `concept\04_formal\18_evaluation_strategies.md`
+- `https://en.wikipedia.org/wiki/Evaluation_strategy`
   - `concept\04_formal\18_evaluation_strategies.md`
 - `https://salsa-rs.github.io/salsa/`
   - `concept\04_formal\19_rustc_query_system.md`
@@ -3086,19 +4296,54 @@
   - `concept\07_future\31_safety_tags_preview.md`
 - `https://github.com/rust-lang/rust-project-goals/issues/624`
   - `concept\04_formal\34_borrow_sanitizer_in_formal.md`
+- `https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools`
+  - `concept\04_formal\35_name_resolution_and_hir.md`
+  - `concept\04_formal\44_notation.md`
+  - `concept\04_formal\45_lexical_structure.md`
+  - `concept\04_formal\46_items_reference.md`
+  - `concept\04_formal\47_attributes.md`
+  - `concept\04_formal\48_statements_and_expressions_reference.md`
+  - `concept\04_formal\49_patterns_reference.md`
+  - `concept\04_formal\51_names_reference.md`
+  - `concept\04_formal\52_reference_appendices.md`
 - `https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/mod.rs`
   - `concept\04_formal\36_tree_borrows_deep_dive.md`
 - `https://itanium-cxx-abi.github.io/cxx-abi/`
   - `concept\04_formal\38_application_binary_interface.md`
   - `concept\04_formal\42_type_layout.md`
+- `https://developer.arm.com/documentation/ihi0042/latest/`
+  - `concept\04_formal\38_application_binary_interface.md`
+- `https://www.microsoft.com/en-us/research/publication/design-and-implementation-of-code-optimization/`
+  - `concept\04_formal\39_constant_evaluation.md`
 - `https://doi.org/10.1016/0890-5401(94)00052-3`
   - `concept\04_formal\43_destructors.md`
 - `https://doi.org/10.1007/978-1-4471-3227-7_5`
   - `concept\04_formal\43_destructors.md`
+- `https://en.wikipedia.org/wiki/C%2B%2B`
+  - `concept\05_comparative\01_rust_vs_cpp.md`
+- `https://en.wikipedia.org/wiki/Programming_language`
+  - `concept\05_comparative\01_rust_vs_cpp.md`
+  - `concept\07_future\03_evolution.md`
 - `https://isocpp.org/`
   - `concept\05_comparative\01_rust_vs_cpp.md`
   - `concept\06_ecosystem\02_patterns.md`
   - `concept\06_ecosystem\04_application_domains.md`
+- `https://en.wikipedia.org/wiki/Go`
+  - `concept\05_comparative\02_rust_vs_go.md`
+- `https://en.wikipedia.org/wiki/Go_(programming_language)`
+  - `concept\05_comparative\02_rust_vs_go.md`
+- `https://en.wikipedia.org/wiki/CSP`
+  - `concept\05_comparative\02_rust_vs_go.md`
+- `https://en.wikipedia.org/wiki/Interface_(computing)`
+  - `concept\05_comparative\02_rust_vs_go.md`
+- `https://en.wikipedia.org/wiki/Programming_paradigm`
+  - `concept\05_comparative\03_paradigm_matrix.md`
+- `https://en.wikipedia.org/wiki/Deadlock`
+  - `concept\05_comparative\04_safety_boundaries.md`
+- `https://en.wikipedia.org/wiki/Zero_trust_security_model`
+  - `concept\05_comparative\04_safety_boundaries.md`
+- `https://en.wikipedia.org/wiki/Trust_(social)`
+  - `concept\05_comparative\04_safety_boundaries.md`
 - `https://github.com/rust-lang/rfcs/pull/2945`
   - `concept\05_comparative\04_safety_boundaries.md`
 - `https://github.com/rust-secure-code/wg`
@@ -3116,6 +4361,12 @@
   - `concept\05_comparative\05_execution_model_isomorphism.md`
 - `https://doi.org/10.1145/324133.324234`
   - `concept\05_comparative\05_execution_model_isomorphism.md`
+- `https://en.wikipedia.org/wiki/Continuation-passing_style`
+  - `concept\05_comparative\05_execution_model_isomorphism.md`
+- `https://en.wikipedia.org/wiki/Java_(programming_language)`
+  - `concept\05_comparative\06_rust_vs_java.md`
+- `https://en.wikipedia.org/wiki/Python_(programming_language)`
+  - `concept\05_comparative\07_rust_vs_python.md`
 - `https://google.github.io/styleguide/pyguide.html`
   - `concept\05_comparative\07_rust_vs_python.md`
 - `https://webassembly.github.io/spec/`
@@ -3145,26 +4396,62 @@
   - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
 - `https://github.com/apple/swift/blob/main/docs/OwnershipManifesto.md`
   - `concept\05_comparative\09_rust_vs_swift.md`
+- `https://en.wikipedia.org/wiki/Swift_(programming_language)`
+  - `concept\05_comparative\09_rust_vs_swift.md`
+- `https://en.wikipedia.org/wiki/Zig_(programming_language)`
+  - `concept\05_comparative\10_rust_vs_zig.md`
 - `https://news.ycombinator.com/item?id=27608507`
   - `concept\05_comparative\10_rust_vs_zig.md`
+- `https://en.wikipedia.org/wiki/Kotlin_(programming_language)`
+  - `concept\05_comparative\11_rust_vs_kotlin.md`
+- `https://en.wikipedia.org/wiki/Scala_(programming_language)`
+  - `concept\05_comparative\12_rust_vs_scala.md`
+- `https://en.wikipedia.org/wiki/C_Sharp_(programming_language)`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
 - `https://github.com/dotnet/performance`
   - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://en.wikipedia.org/wiki/Erlang_(programming_language)`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
 - `https://github.com/rusterlium/rustler`
   - `concept\05_comparative\14_rust_vs_elixir.md`
+- `https://www.oreilly.com/library/view/designing-for-scalability/9781449361556/`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
 - `https://docs.rs/ts-rs/latest/ts_rs/`
+  - `concept\05_comparative\15_rust_vs_typescript.md`
+- `https://en.wikipedia.org/wiki/TypeScript`
   - `concept\05_comparative\15_rust_vs_typescript.md`
 - `https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals`
   - `concept\05_comparative\15_rust_vs_typescript.md`
 - `https://github.com/type-challenges/type-challenges`
   - `concept\05_comparative\15_rust_vs_typescript.md`
+- `https://en.wikipedia.org/wiki/Ruby_(programming_language)`
+  - `concept\05_comparative\19_rust_vs_ruby.md`
+- `https://en.wikipedia.org/wiki/Duck_typing`
+  - `concept\05_comparative\19_rust_vs_ruby.md`
 - `https://learning-rust.github.io/`
   - `concept\05_comparative\19_rust_vs_ruby.md`
+- `https://en.wikipedia.org/wiki/Compiler`
+  - `concept\06_ecosystem\01_toolchain.md`
+- `https://en.wikipedia.org/wiki/Linker`
+  - `concept\06_ecosystem\01_toolchain.md`
+- `https://en.wikipedia.org/wiki/Linker_(computing)`
+  - `concept\06_ecosystem\01_toolchain.md`
+- `https://en.wikipedia.org/wiki/Package_manager`
+  - `concept\06_ecosystem\01_toolchain.md`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\09_cargo_script.md`
 - `https://github.com/rust-lang/rustup/blob/main/CHANGELOG.md`
   - `concept\06_ecosystem\01_toolchain.md`
 - `https://github.com/pksunkara/cargo-workspaces`
   - `concept\06_ecosystem\01_toolchain.md`
 - `https://github.com/rust-lang/wg-cargo-std-aware`
   - `concept\06_ecosystem\01_toolchain.md`
+- `https://en.wikipedia.org/wiki/Design_pattern`
+  - `concept\06_ecosystem\02_patterns.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+- `https://en.wikipedia.org/`
+  - `concept\06_ecosystem\02_patterns.md`
+  - `concept\06_ecosystem\04_application_domains.md`
 - `https://lib.rs/`
   - `concept\06_ecosystem\02_patterns.md`
   - `concept\06_ecosystem\03_core_crates.md`
@@ -3179,13 +4466,30 @@
   - `docs\research_notes\10_crate_architecture_authoritative_alignment.md`
   - `docs\research_notes\10_design_patterns_authoritative_alignment.md`
   - `docs\research_notes\software_design_theory\07_anti_patterns.md`
+- `https://en.wikipedia.org/wiki/Spaghetti_code`
+  - `concept\06_ecosystem\02_patterns.md`
 - `https://dl.acm.org/doi/10.1145/1640089.1640095`
+  - `concept\06_ecosystem\02_patterns.md`
+- `https://en.wikipedia.org/wiki/RAII`
+  - `concept\06_ecosystem\02_patterns.md`
+- `https://en.wikipedia.org/wiki/Design_pattern%3B_Wikipedia_%E2%80%94_RAII%3B_Wikipedia_%E2%80%94_Typestate`
+  - `concept\06_ecosystem\02_patterns.md`
+- `https://en.wikipedia.org/wiki/Design_pattern%3B_Wikipedia_%E2%80%94_RAII%3B_Wikipedia_%E2%80%94_Typestate_analysis`
   - `concept\06_ecosystem\02_patterns.md`
 - `https://rust-unofficial.github.io/patterns/print.html#builder`
   - `concept\06_ecosystem\02_patterns.md`
 - `https://crates.io`
   - `concept\06_ecosystem\03_core_crates.md`
   - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
+- `https://en.wikipedia.org/wiki/Library_(computing)`
+  - `concept\06_ecosystem\03_core_crates.md`
+- `https://en.wikipedia.org/wiki/Software_framework`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
+- `https://en.wikipedia.org/wiki/Serialization`
+  - `concept\06_ecosystem\03_core_crates.md`
+- `https://en.wikipedia.org/wiki/Cryptography`
+  - `concept\06_ecosystem\03_core_crates.md`
 - `https://github.com/rust-secure-code/cargo-geiger`
   - `concept\06_ecosystem\03_core_crates.md`
   - `concept\06_ecosystem\19_security_practices.md`
@@ -3194,6 +4498,8 @@
 - `https://clap.rs/`
   - `concept\06_ecosystem\03_core_crates.md`
   - `docs\research_notes\software_design_theory\07_crate_architectures\04_clap_architecture.md`
+- `https://en.wikipedia.org/wiki/Library`
+  - `concept\06_ecosystem\03_core_crates.md`
 - `https://docs.rs/Tokio/`
   - `concept\06_ecosystem\03_core_crates.md`
   - `concept\06_ecosystem\24_cloud_native.md`
@@ -3203,6 +4509,30 @@
 - `https://docs.rs/anyhow/`
   - `concept\06_ecosystem\03_core_crates.md`
   - `docs\research_notes\10_error_handling_network_web_alignment.md`
+- `https://en.wikipedia.org/wiki/Software_engineering`
+  - `concept\06_ecosystem\04_application_domains.md`
+- `https://en.wikipedia.org/wiki/Systems_programming`
+  - `concept\06_ecosystem\04_application_domains.md`
+- `https://en.wikipedia.org/wiki/Web_framework`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\27_web_frameworks.md`
+- `https://en.wikipedia.org/wiki/Embedded_system`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\22_embedded_systems.md`
+- `https://en.wikipedia.org/wiki/Blockchain`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\06_blockchain.md`
+- `https://en.wikipedia.org/wiki/Game_engine`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\26_game_development.md`
+  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
+- `https://en.wikipedia.org/wiki/Command_line_interface`
+  - `concept\06_ecosystem\04_application_domains.md`
+- `https://en.wikipedia.org/wiki/Command-line_interface`
+  - `concept\06_ecosystem\04_application_domains.md`
+- `https://en.wikipedia.org/wiki/Machine_learning`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\07_future\21_rust_in_ai.md`
 - `https://docs.rs/crate/sqlx/latest/source/CHANGELOG.md`
   - `concept\06_ecosystem\04_application_domains.md`
 - `https://github.com/tokio-rs/tokio/releases`
@@ -3215,6 +4545,9 @@
   - `concept\06_ecosystem\04_application_domains.md`
 - `https://github.com/bevyengine/bevy/releases`
   - `concept\06_ecosystem\04_application_domains.md`
+- `https://www.rfc-editor.org/info/rfc9000`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\38_network_protocols.md`
 - `https://docs.rs/actix-web/`
   - `concept\06_ecosystem\04_application_domains.md`
   - `concept\06_ecosystem\27_web_frameworks.md`
@@ -3226,6 +4559,8 @@
   - `concept\06_ecosystem\05_system_design_principles.md`
 - `https://doi.org/10.1145/2364527.2364568`
   - `concept\06_ecosystem\05_system_design_principles.md`
+- `https://en.wikipedia.org/wiki/Smart_contract`
+  - `concept\06_ecosystem\06_blockchain.md`
 - `https://docs.rs/subtle/`
   - `concept\06_ecosystem\06_blockchain.md`
 - `https://rust-in-blockchain.github.io/`
@@ -3237,13 +4572,21 @@
   - `concept\06_ecosystem\19_security_practices.md`
 - `https://docs.rs/sha2/`
   - `concept\06_ecosystem\06_blockchain.md`
+- `https://en.wikipedia.org/wiki/Entity_component_system`
+  - `concept\06_ecosystem\07_game_ecs.md`
+  - `concept\06_ecosystem\21_game_development.md`
+- `https://en.wikipedia.org/wiki/Entity_component_system%3B_Richard_Fabian_%E2%80%94_Data_Oriented_Design%3B_Niko_Matsakis_Blog`
+  - `concept\06_ecosystem\07_game_ecs.md`
 - `https://docs.rs/bevy/`
   - `concept\06_ecosystem\07_game_ecs.md`
   - `concept\06_ecosystem\21_game_development.md`
-  - `concept\06_ecosystem\26_game_development.md`
 - `https://docs.rs/bevy_ecs/`
   - `concept\06_ecosystem\07_game_ecs.md`
   - `concept\06_ecosystem\26_game_development.md`
+- `https://en.wikipedia.org/wiki/WebAssembly`
+  - `concept\06_ecosystem\08_wasi.md`
+  - `concept\06_ecosystem\11_webassembly.md`
+  - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
 - `https://github.com/bytecodealliance/wit-bindgen`
   - `concept\06_ecosystem\08_wasi.md`
   - `concept\06_ecosystem\54_webassembly_advanced.md`
@@ -3263,12 +4606,22 @@
   - `concept\06_ecosystem\09_cargo_script.md`
 - `https://github.com/fornwall/rust-script`
   - `concept\06_ecosystem\09_cargo_script.md`
+- `https://en.wikipedia.org/wiki/Shebang_(Unix)`
+  - `concept\06_ecosystem\09_cargo_script.md`
+- `https://en.wikipedia.org/wiki/Scripting_language`
+  - `concept\06_ecosystem\09_cargo_script.md`
 - `https://github.com/rust-lang/rfcs/pull/3516`
   - `concept\06_ecosystem\10_public_private_deps.md`
   - `concept\07_future\24_roadmap.md`
 - `https://github.com/rust-lang/cargo/issues/9094`
   - `concept\06_ecosystem\10_public_private_deps.md`
 - `https://docs.rs/cargo-semver-checks`
+  - `concept\06_ecosystem\10_public_private_deps.md`
+- `https://en.wikipedia.org/wiki/Dependency_hell`
+  - `concept\06_ecosystem\10_public_private_deps.md`
+- `https://en.wikipedia.org/wiki/Semantic_versioning`
+  - `concept\06_ecosystem\10_public_private_deps.md`
+- `https://en.wikipedia.org/wiki/Dependency_hell#Diamond_dependency_problem`
   - `concept\06_ecosystem\10_public_private_deps.md`
 - `https://www.w3.org/wasm/`
   - `concept\06_ecosystem\11_webassembly.md`
@@ -3409,9 +4762,13 @@
 - `https://github.com/rust-lang-cn`
   - `concept\06_ecosystem\18_distributed_systems.md`
   - `docs\research_notes\10_i18n_source_alignment.md`
+- `https://www.youtube.com/watch?v=OuhmIS_N4SA`
+  - `concept\06_ecosystem\18_distributed_systems.md`
 - `https://docs.rs/openraft/`
   - `concept\06_ecosystem\18_distributed_systems.md`
 - `https://anssi-fr.github.io/rust-guide/`
+  - `concept\06_ecosystem\19_security_practices.md`
+- `https://en.wikipedia.org/wiki/Defense_in_depth_(computing)`
   - `concept\06_ecosystem\19_security_practices.md`
 - `https://docs.rs/ring/latest/ring/`
   - `concept\06_ecosystem\19_security_practices.md`
@@ -3437,6 +4794,8 @@
 - `https://github.com/EmbarkStudios/cargo-deny`
   - `concept\06_ecosystem\20_licensing_and_compliance.md`
   - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://en.wikipedia.org/wiki/Software_license`
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
 - `https://embarkstudios.github.io/cargo-deny/`
   - `concept\06_ecosystem\20_licensing_and_compliance.md`
   - `concept\06_ecosystem\28_devops_and_ci_cd.md`
@@ -3471,6 +4830,12 @@
   - `concept\07_future\49_rust_in_space.md`
   - `docs\03_guides\03_embassy_deep_dive.md`
   - `docs\03_guides\03_embedded_rust_guide.md`
+- `https://ferrous-systems.com/`
+  - `concept\06_ecosystem\22_embedded_systems.md`
+  - `concept\06_ecosystem\52_robotics.md`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://en.wikipedia.org/wiki/Random-access_memory`
+  - `concept\06_ecosystem\22_embedded_systems.md`
 - `https://docs.rs/svd2rust/latest/svd2rust/`
   - `concept\06_ecosystem\22_embedded_systems.md`
   - `docs\03_guides\03_embassy_deep_dive.md`
@@ -3487,6 +4852,10 @@
 - `https://docs.rs/embedded-hal/latest/`
   - `concept\06_ecosystem\22_embedded_systems.md`
   - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://developer.arm.com/documentation/dui0552/latest/`
+  - `concept\06_ecosystem\22_embedded_systems.md`
+- `https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping`
+  - `concept\06_ecosystem\23_database_access.md`
 - `https://docs.rs/diesel/`
   - `concept\06_ecosystem\23_database_access.md`
   - `concept\06_ecosystem\37_database_systems.md`
@@ -3530,6 +4899,8 @@
   - `concept\06_ecosystem\24_cloud_native.md`
   - `docs\research_notes\10_practical_applications.md`
 - `https://rust-cloud-native.github.io/`
+  - `concept\06_ecosystem\24_cloud_native.md`
+- `https://en.wikipedia.org/wiki/Cloud-native_computing`
   - `concept\06_ecosystem\24_cloud_native.md`
 - `https://github.com/cncf/toc/blob/main/DEFINITION.md`
   - `concept\06_ecosystem\24_cloud_native.md`
@@ -3615,9 +4986,13 @@
   - `concept\06_ecosystem\28_devops_and_ci_cd.md`
 - `https://github.com/dtolnay/rust-toolchain`
   - `concept\06_ecosystem\28_devops_and_ci_cd.md`
-- `https://github.com/rust-lang/rfcs/pull/3560`
+- `https://www.oreilly.com/library/view/continuous-delivery-reliable/9780321670250/`
   - `concept\06_ecosystem\28_devops_and_ci_cd.md`
 - `https://github.com/TheAlgorithms/Rust`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+- `https://en.wikipedia.org/wiki/Competitive_Programming`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+- `https://en.wikipedia.org/wiki/Competitive_programming`
   - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
 - `https://arxiv.org/abs/2026.05.08`
   - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
@@ -3635,6 +5010,10 @@
   - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
 - `https://leetcode.com/problemset/`
   - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+- `https://en.wikipedia.org/wiki/Systems_design`
+  - `concept\06_ecosystem\30_system_composability.md`
+- `https://en.wikipedia.org/wiki/Software_architecture`
+  - `concept\06_ecosystem\30_system_composability.md`
 - `https://docs.rs/failsafe/`
   - `concept\06_ecosystem\31_microservice_patterns.md`
 - `https://docs.rs/failsafe/latest/failsafe/`
@@ -3710,6 +5089,11 @@
   - `concept\06_ecosystem\38_network_protocols.md`
   - `concept\06_ecosystem\43_security_cryptography.md`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://www.rfc-editor.org/rfc/rfc9000.html`
+  - `concept\06_ecosystem\38_network_protocols.md`
+- `https://www.rfc-editor.org/rfc/rfc9114.html`
+  - `concept\06_ecosystem\38_network_protocols.md`
+  - `docs\research_notes\10_error_handling_network_web_alignment.md`
 - `https://docs.rs/h3/`
   - `concept\06_ecosystem\38_network_protocols.md`
   - `docs\research_notes\10_error_handling_network_web_alignment.md`
@@ -3796,13 +5180,30 @@
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://github.com/RustCrypto`
   - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://csrc.nist.gov/publications/detail/fips/197/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://csrc.nist.gov/publications/detail/fips/180/4/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://csrc.nist.gov/publications/detail/fips/186/5/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://docs.rs/rustls/latest/rustls/`
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://docs.rs/ed25519-dalek/latest/ed25519_dalek/`
   - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://csrc.nist.gov/projects/post-quantum-cryptography`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://csrc.nist.gov/publications/detail/sp/800-38d/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://docs.rs/aes-gcm/latest/aes_gcm/`
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://docs.rs/chacha20poly1305/latest/chacha20poly1305/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://www.rfc-editor.org/info/rfc8032`
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://docs.rs/x25519-dalek/latest/x25519_dalek/`
   - `concept\06_ecosystem\43_security_cryptography.md`
@@ -3811,6 +5212,8 @@
 - `https://docs.rs/blake3/latest/blake3/`
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://docs.rs/hmac/latest/hmac/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html`
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://docs.rs/argon2/latest/argon2/`
   - `concept\06_ecosystem\43_security_cryptography.md`
@@ -3823,6 +5226,17 @@
 - `https://docs.rs/curve25519-dalek/latest/curve25519_dalek/`
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://docs.rs/subtle/latest/subtle/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://csrc.nist.gov/pubs/fips/203/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://csrc.nist.gov/pubs/fips/204/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://csrc.nist.gov/pubs/fips/205/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html`
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/ir.md`
   - `concept\06_ecosystem\45_compiler_internals.md`
@@ -3885,14 +5299,15 @@
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
 - `https://github.com/torch2424/wasm-by-example`
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `https://matklad.github.io/2023/03/26/rust-myths-and-vegetables.html`
-  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
 - `https://github.com/huggingface/candle#performance`
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
 - `https://docs.rs/candle-core/latest/candle_core/struct.Tensor.html`
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
 - `https://arxiv.org/abs/2101.11080`
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\06_ecosystem\48_data_engineering.md`
 - `https://github.com/rust-lang/rfcs/pull/3873`
   - `concept\06_ecosystem\47_compiler_infrastructure.md`
 - `https://docs.rs/polars/`
@@ -3905,6 +5320,10 @@
 - `https://docs.rs/object_store/latest/object_store/`
   - `concept\06_ecosystem\48_data_engineering.md`
 - `https://github.com/apache/arrow-datafusion`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://www.oreilly.com/library/view/fundamentals-of-data/9781098108298/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://www.oreilly.com/radar/the-world-beyond-batch-streaming-101/`
   - `concept\06_ecosystem\48_data_engineering.md`
 - `https://rust-unofficial.github.io/patterns/patterns/creational/builder.html`
   - `concept\06_ecosystem\48_data_engineering.md`
@@ -3976,6 +5395,8 @@
   - `concept\06_ecosystem\50_distributed_consensus.md`
 - `https://dl.acm.org/doi/10.1145/3149.214121`
   - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://www.microsoft.com/en-us/research/publication/byzantine-generals-problem/`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
 - `https://dl.acm.org/doi/10.1145/357172.357176`
   - `concept\06_ecosystem\50_distributed_consensus.md`
 - `https://raft.github.io/`
@@ -3983,6 +5404,8 @@
 - `https://docs.rs/raft/latest/raft/`
   - `concept\06_ecosystem\50_distributed_consensus.md`
 - `https://github.com/etcd-io/raft`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://en.wikipedia.org/wiki/Byzantine_fault`
   - `concept\06_ecosystem\50_distributed_consensus.md`
 - `https://arxiv.org/abs/1807.04938`
   - `concept\06_ecosystem\50_distributed_consensus.md`
@@ -3994,6 +5417,22 @@
   - `concept\06_ecosystem\50_distributed_consensus.md`
 - `https://github.com/cosmos/cosmos-rust`
   - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://en.wikipedia.org/wiki/CAP_theorem`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://qiskit.org/textbook/ch-states/introduction.html`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://qiskit.org/textbook/`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://qiskit.org/textbook/ch-states/single-qubit-gates.html`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://en.wikipedia.org/wiki/Quantum_superposition`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://en.wikipedia.org/wiki/Bell_state`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://qiskit.org/textbook/ch-gates/introduction.html`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://en.wikipedia.org/wiki/Quantum_circuit`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `https://crates.io/crates/roqoqo`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `https://github.com/renmusxd/rustqip`
@@ -4017,6 +5456,8 @@
 - `https://docs.rs/qip/`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `https://arewequantumyet.github.io/`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://qiskit.org/`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `https://github.com/HQSquantumsimulations/qoqo-qiskit`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
@@ -4044,6 +5485,8 @@
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `https://arxiv.org/abs/1411.4028`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://qiskit.org/textbook/ch-applications/vqe-molecules.html`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `https://arxiv.org/abs/quant-ph/9508027`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `https://arxiv.org/abs/1801.00862`
@@ -4051,6 +5494,8 @@
 - `https://arxiv.org/abs/2302.14043`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `https://doi.org/10.1016/0375-9601(82)90084-6`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://en.wikipedia.org/wiki/Mathematical_formulation_of_quantum_mechanics`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `https://docs.rs/rclrs/`
   - `concept\06_ecosystem\52_robotics.md`
@@ -4135,10 +5580,9 @@
   - `concept\06_ecosystem\52_robotics.md`
 - `https://github.com/s2e-systems/dust-dds`
   - `concept\06_ecosystem\52_robotics.md`
-- `https://ros-real-time.github.io/`
+- `https://www.nalgebra.org/`
   - `concept\06_ecosystem\52_robotics.md`
-- `https://github.com/ros2/examples/tree/master/rclcpp/executors`
-  - `concept\06_ecosystem\52_robotics.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
 - `https://github.com/rust-cv/nshare`
   - `concept\06_ecosystem\52_robotics.md`
 - `https://docs.rs/ndarray/latest/ndarray/`
@@ -4155,6 +5599,8 @@
   - `concept\06_ecosystem\52_robotics.md`
 - `https://docs.rs/osqp/latest/osqp/`
   - `concept\06_ecosystem\52_robotics.md`
+- `https://www.nalgebra.org/decompositions-and-lapack/`
+  - `concept\06_ecosystem\52_robotics.md`
 - `https://oxfordcontrol.github.io/ClarabelDocs/`
   - `concept\06_ecosystem\52_robotics.md`
 - `https://docs.rs/pathfinding/`
@@ -4167,11 +5613,17 @@
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://docs.rs/embedded-graphics/latest/embedded_graphics/pixelcolor/index.html`
   - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://en.wikipedia.org/wiki/Refresh_rate`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://docs.rs/embedded-graphics/latest/embedded_graphics/`
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://github.com/embedded-graphics/embedded-graphics#supported-displays`
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://github.com/rust-embedded/awesome-embedded-rust#display`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://en.wikipedia.org/wiki/Electronic_paper`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://en.wikipedia.org/wiki/Screen_burn-in`
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://docs.rs/embedded-graphics/latest/embedded_graphics/draw_target/trait.DrawTarget.html`
   - `concept\06_ecosystem\53_embedded_graphics.md`
@@ -4191,6 +5643,12 @@
 - `https://github.com/emilk/egui/tree/master/crates/egui_demo_app`
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://github.com/emilk/egui/discussions/categories/embedded`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://en.wikipedia.org/wiki/Serial_Peripheral_Interface`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://en.wikipedia.org/wiki/I%C2%B2C`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://developer.arm.com/documentation/dai0298/a/`
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://docs.rs/cortex-m/latest/cortex_m/macro.singleton.html`
   - `concept\06_ecosystem\53_embedded_graphics.md`
@@ -4216,6 +5674,10 @@
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://docs.rs/ttf-parser/latest/`
   - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://developer.arm.com/documentation/den0013/d/Caches/Cache-coherency`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://developer.arm.com/documentation/100240/latest/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://docs.rs/cortex-m/latest/cortex_m/peripheral/struct.SCB.html`
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://github.com/stm32-rs/stm32f4xx-hal`
@@ -4240,6 +5702,8 @@
 - `https://github.com/bytecodealliance/cargo-component/blob/main/README.md`
   - `concept\06_ecosystem\54_webassembly_advanced.md`
 - `https://github.com/bytecodealliance/wit-bindgen#language-support`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://en.wikipedia.org/wiki/Capability-based_security`
   - `concept\06_ecosystem\54_webassembly_advanced.md`
 - `https://github.com/WebAssembly/wasi-filesystem`
   - `concept\06_ecosystem\54_webassembly_advanced.md`
@@ -4313,11 +5777,16 @@
   - `concept\06_ecosystem\56_c_to_rust_translation.md`
 - `https://arxiv.org/abs/2103.15450`
   - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html`
+  - `concept\06_ecosystem\58_platform_rust_integration.md`
+  - `concept\06_ecosystem\75_industrial_case_studies.md`
 - `https://google.github.io/comprehensive-rust/chromium.html`
   - `concept\06_ecosystem\58_platform_rust_integration.md`
 - `https://google.github.io/comprehensive-rust/bare-metal.html`
   - `concept\06_ecosystem\58_platform_rust_integration.md`
   - `docs\05_guides\05_embedded_rust_guide.md`
+- `https://security.googleblog.com/`
+  - `concept\06_ecosystem\58_platform_rust_integration.md`
 - `https://google.github.io/comprehensive-rust/android.html`
   - `concept\06_ecosystem\58_platform_rust_integration.md`
 - `https://github.com/rust-embedded/awesome-embedded-rust`
@@ -4335,6 +5804,8 @@
   - `docs\research_notes\formal_methods\10_async_state_machine.md`
 - `https://github.com/rust-lang/project-stable-mir`
   - `concept\06_ecosystem\68_rustc_driver_and_stable_mir.md`
+- `https://en.wikipedia.org/wiki/Functor`
+  - `concept\06_ecosystem\73_pattern_composition_algebra.md`
 - `https://github.com/liquid-rust/flux`
   - `concept\06_ecosystem\74_formal_verification_tools.md`
 - `https://github.com/hacspec/hax`
@@ -4344,6 +5815,8 @@
 - `https://www.cis.upenn.edu/~cis5000/`
   - `concept\06_ecosystem\74_formal_verification_tools.md`
 - `https://github.com/rust-lang`
+  - `concept\06_ecosystem\74_formal_verification_tools.md`
+- `https://www.microsoft.com/en-us/research/publication/verus-verifying-rust-programs-using-linear-ghost-types/`
   - `concept\06_ecosystem\74_formal_verification_tools.md`
 - `https://github.com/model-checking/kani/releases`
   - `concept\06_ecosystem\74_formal_verification_tools.md`
@@ -4386,6 +5859,8 @@
   - `docs\05_guides\05_kani_practical_guide.md`
 - `https://github.com/rust-lang/miri#miri-is-slow`
   - `concept\06_ecosystem\74_formal_verification_tools.md`
+- `https://en.wikipedia.org/wiki/Satisfiability_modulo_theories#Complexity`
+  - `concept\06_ecosystem\74_formal_verification_tools.md`
 - `https://model-checking.github.io/kani/reference/experimental/coverage.html`
   - `concept\06_ecosystem\74_formal_verification_tools.md`
 - `https://github.com/rustls/rustls`
@@ -4417,6 +5892,15 @@
   - `concept\07_future\47_wasm_target_evolution.md`
   - `concept\07_future\archive\01_ai_integration_original.md`
   - `concept\07_future\rust_1_98_preview.md`
+- `https://en.wikipedia.org/wiki/Artificial_intelligence`
+  - `concept\07_future\01_ai_integration.md`
+  - `concept\07_future\archive\01_ai_integration_original.md`
+- `https://en.wikipedia.org/wiki/Large_language_model`
+  - `concept\07_future\01_ai_integration.md`
+  - `concept\07_future\archive\01_ai_integration_original.md`
+- `https://en.wikipedia.org/wiki/Reinforcement_learning`
+  - `concept\07_future\01_ai_integration.md`
+  - `concept\07_future\archive\01_ai_integration_original.md`
 - `https://github.com/features/copilot`
   - `concept\07_future\01_ai_integration.md`
   - `concept\07_future\archive\01_ai_integration_original.md`
@@ -4437,10 +5921,23 @@
   - `concept\07_future\02_formal_methods.md`
 - `https://marketplace.visualstudio.com/items?itemName=alygin.vscode-tlaplus`
   - `concept\07_future\02_formal_methods.md`
+- `https://en.wikipedia.org/wiki/Model_Checking`
+  - `concept\07_future\02_formal_methods.md`
+  - `docs\research_notes\10_formal_concepts_encyclopedia.md`
+  - `docs\research_notes\10_formal_full_model_overview.md`
+  - `docs\research_notes\10_verification_tools_matrix.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\memory\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\01_compiler\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\02_package_manager\README.md`
+- `https://en.wikipedia.org/wiki/ATP`
+  - `concept\07_future\02_formal_methods.md`
 - `https://github.com/rust-lang/rfcs/pull/3936`
   - `concept\07_future\03_evolution.md`
 - `https://github.com/rust-lang/rfcs/pull/3962`
   - `concept\07_future\03_evolution.md`
+- `https://en.wikipedia.org/wiki/Software_release_life_cycle`
+  - `concept\07_future\03_evolution.md`
+  - `concept\07_future\44_edition_guide.md`
 - `https://github.com/rust-lang/rust/labels/C-tracking-issue`
   - `concept\07_future\03_evolution.md`
   - `docs\research_notes\10_rfc_to_counterexample_mapping.md`
@@ -4451,6 +5948,12 @@
   - `concept\07_future\03_evolution.md`
 - `https://koka-lang.github.io/`
   - `concept\07_future\04_effects_system.md`
+- `https://en.wikipedia.org/wiki/Effect_system`
+  - `concept\07_future\04_effects_system.md`
+- `https://en.wikipedia.org/wiki/Algebraic_effect`
+  - `concept\07_future\04_effects_system.md`
+- `https://en.wikipedia.org/wiki/Row_polymorphism`
+  - `concept\07_future\04_effects_system.md`
 - `https://github.com/rust-lang/rfcs/pull/2582`
   - `concept\07_future\05_rust_version_tracking.md`
 - `https://github.com/rust-lang/rfcs/pull/3484`
@@ -4458,6 +5961,8 @@
 - `https://github.com/rust-lang/rfcs/pull/2822`
   - `concept\07_future\05_rust_version_tracking.md`
 - `https://github.com/rust-lang/rust/issues/124656`
+  - `concept\07_future\07_mcdc_coverage_preview.md`
+- `https://en.wikipedia.org/wiki/Code_coverage`
   - `concept\07_future\07_mcdc_coverage_preview.md`
 - `https://github.com/mozilla/grcov`
   - `concept\07_future\07_mcdc_coverage_preview.md`
@@ -4477,6 +5982,8 @@
   - `concept\07_future\38_cranelift_backend_preview.md`
   - `concept\07_future\41_rust_specification_preview.md`
 - `https://github.com/rust-lang/rust/issues/`
+  - `concept\07_future\09_parallel_frontend_preview.md`
+- `https://en.wikipedia.org/wiki/Amdahl%27s_law`
   - `concept\07_future\09_parallel_frontend_preview.md`
 - `https://github.com/rust-lang/compiler-team/`
   - `concept\07_future\09_parallel_frontend_preview.md`
@@ -4516,6 +6023,9 @@
   - `concept\07_future\18_async_drop_preview.md`
 - `https://docs.rs/tokio/latest/tokio/runtime/struct.Runtime.html#method.shutdown_timeout`
   - `concept\07_future\18_async_drop_preview.md`
+- `https://github.com/rust-lang/rust/releases/tag/1.85.0`
+  - `concept\07_future\19_rust_edition_preview.md`
+  - `docs\research_notes\10_knowledge_graph_index.md`
 - `https://github.com/google/sanitizers/wiki/AddressSanitizer`
   - `concept\07_future\20_borrowsanitizer_preview.md`
 - `https://github.com/google/sanitizers/wiki`
@@ -4561,12 +6071,16 @@
   - `concept\07_future\25_open_enums_preview.md`
 - `https://github.com/rust-lang/rust/issues/156628`
   - `concept\07_future\25_open_enums_preview.md`
+- `https://en.wikipedia.org/wiki/Multiple_dispatch`
+  - `concept\07_future\26_specialization_preview.md`
 - `https://github.com/rust-lang/chalk`
   - `concept\07_future\26_specialization_preview.md`
   - `docs\research_notes\type_theory\10_advanced_types.md`
   - `docs\research_notes\type_theory\10_lifetime_formalization.md`
   - `docs\research_notes\type_theory\10_trait_system_formalization.md`
   - `docs\research_notes\type_theory\10_variance_theory.md`
+- `https://en.wikipedia.org/wiki/Compile_time`
+  - `concept\07_future\27_compile_time_execution.md`
 - `https://docs.rs/syn/`
   - `concept\07_future\27_compile_time_execution.md`
 - `https://docs.rs/wee_alloc/`
@@ -4583,10 +6097,41 @@
   - `concept\07_future\29_ebpf_rust.md`
 - `https://facebookmicrosites.github.io/bpf/blog/2020/02/19/bpf-portability-and-co-re.html`
   - `concept\07_future\29_ebpf_rust.md`
+- `https://en.wikipedia.org/wiki/EBPF`
+  - `concept\07_future\29_ebpf_rust.md`
 - `https://github.com/rust-lang/rfcs/blob/master/text/3842-safety-tags.md`
   - `concept\07_future\31_safety_tags_preview.md`
 - `https://github.com/rust-lang/rust/issues/83310`
   - `concept\07_future\34_must_not_suspend_preview.md`
+- `https://spec.ferrocene.dev/`
+  - `concept\07_future\35_ferrocene_preview.md`
+  - `concept\07_future\41_rust_specification_preview.md`
+  - `docs\04_research\04_safety_critical_alignment_2026.md`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\10_terminology_standard.md`
+  - `docs\research_notes\10_00_comprehensive_summary.md`
+  - `docs\research_notes\10_00_organization_and_navigation.md`
+  - `docs\research_notes\10_academic_papers_alignment.md`
+  - `docs\research_notes\10_application_trees.md`
+  - `docs\research_notes\10_authoritative_alignment_guide.md`
+  - `docs\research_notes\10_authoritative_source_alignment_network.md`
+  - `docs\research_notes\10_authoritative_source_gap_and_backref_index.md`
+  - `docs\research_notes\10_authoritative_source_version_tracking.md`
+  - `docs\research_notes\10_cross_reference_index.md`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+  - `docs\research_notes\10_formal_methods_master_index.md`
+  - `docs\research_notes\10_formal_proof_system_guide.md`
+  - `docs\research_notes\10_proof_index.md`
+  - `docs\research_notes\10_system_summary.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\research_notes\formal_modules\20_linkage_and_symbols.md`
+  - `docs\research_notes\formal_modules\README.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\10_expressive_inexpressive_matrix.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\README.md`
+- `https://ferrous-systems.com/blog/`
+  - `concept\07_future\35_ferrocene_preview.md`
 - `https://github.com/rustfoundation/safety-critical-rust-consortium/tree/main/subcommittee/coding-guidelines`
   - `concept\07_future\35_ferrocene_preview.md`
 - `https://github.com/rustfoundation/safety-critical-rust-consortium`
@@ -4615,6 +6160,8 @@
   - `concept\07_future\42_field_projections_preview.md`
 - `https://github.com/rust-lang/rust/pull/152730`
   - `concept\07_future\42_field_projections_preview.md`
+- `https://security.googleblog.com/2021/04/rust-in-linux-kernel.html`
+  - `concept\07_future\43_rust_for_linux.md`
 - `https://github.com/Rust-for-Linux/linux/tree/rust/samples/rust`
   - `concept\07_future\43_rust_for_linux.md`
 - `https://github.com/rust-lang/rust/issues/124509`
@@ -4636,12 +6183,38 @@
   - `concept\07_future\48_aarch64_sve_sme_preview.md`
 - `https://github.com/rust-lang/rust-project-goals/issues/270`
   - `concept\07_future\48_aarch64_sve_sme_preview.md`
+- `https://developer.arm.com/documentation/100986/latest`
+  - `concept\07_future\48_aarch64_sve_sme_preview.md`
+- `https://developer.arm.com/documentation/109246/latest`
+  - `concept\07_future\48_aarch64_sve_sme_preview.md`
 - `https://github.com/rust-lang/rust/issues/157110`
+  - `concept\07_future\48_aarch64_sve_sme_preview.md`
+- `https://developer.arm.com/documentation/102476/latest`
+  - `concept\07_future\48_aarch64_sve_sme_preview.md`
+- `https://developer.arm.com/documentation/109540/latest`
   - `concept\07_future\48_aarch64_sve_sme_preview.md`
 - `https://github.com/rust-lang/compiler-team/issues/958`
   - `concept\07_future\borrow_sanitizer.md`
 - `https://github.com/rust-lang/rust/issues/126567`
   - `concept\07_future\borrow_sanitizer.md`
+- `https://en.wikipedia.org/wiki/Artificial_Intelligence`
+  - `concept\07_future\README.md`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\03_guides\03_let_chains_guide.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_research\04_ng_trait_solver.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\research_notes\10_argumentation_chain_and_flow.md`
+  - `docs\research_notes\10_core_features_full_chain.md`
+  - `docs\research_notes\10_domain_analysis_framework.md`
+  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
 - `https://github.com/rust-lang/rust/issues/130494`
   - `concept\07_future\rust_1_98_preview.md`
 - `https://github.com/rust-lang/rust/pull/157029`
@@ -4658,6 +6231,10 @@
   - `concept\07_future\rust_1_98_preview.md`
 - `https://github.com/rust-lang/rust/pull/157734`
   - `concept\07_future\rust_1_98_preview.md`
+- `https://en.wikipedia.org/wiki/Integer_overflow`
+  - `concept\archive\01_foundation_11_numeric_types_deprecated.md`
+- `https://en.wikipedia.org/wiki/Software_versioning`
+  - `concept\archive\07_future_23_rust_edition_guide_deprecated.md`
 - `https://github.com/rust-lang/rfcs/pull/3382`
   - `concept\sources\rfc_index.md`
 - `https://github.com/rust-lang/rfcs/pull/1053`
@@ -4686,6 +6263,8 @@
   - `knowledge\04_expert\safety_critical\02_matrices\03_rust_ownership_memory_model_matrix.md`
   - `knowledge\06_ecosystem\deep_dives\01_axum_deep_dive.md`
   - `knowledge\README.md`
+- `https://en.wikipedia.org/wiki/Iterator`
+  - `knowledge\01_fundamentals\02_iterators.md`
 - `https://github.com/rust-lang/rust/pull/131038`
   - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
   - `knowledge\02_intermediate\macros\01_cfg_select.md`
@@ -4693,6 +6272,8 @@
   - `knowledge\03_advanced\01_compiler_internals.md`
 - `https://github.com/rust-lang/rust/issues/109737`
   - `knowledge\03_advanced\04_lazy_initialization.md`
+- `https://www.youtube.com/watch?v=QlM6HIXp5HQ`
+  - `knowledge\03_advanced\06_type_driven_correctness.md`
 - `https://dl.acm.org/doi/10.1145/949305.949332`
   - `knowledge\03_advanced\06_type_driven_correctness.md`
 - `https://doi.org/10.1145/949305.949332`
@@ -4715,6 +6296,8 @@
   - `knowledge\04_expert\02_unsafe_audit.md`
 - `https://github.com/rust-crate/cargo-geiger`
   - `knowledge\04_expert\02_unsafe_audit.md`
+- `https://iris-project.org/tutorial.html`
+  - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
 - `https://dblp.org/db/conf/pldi/index.html`
   - `docs\research_notes\10_formal_full_model_en_summary.md`
   - `docs\research_notes\formal_methods\10_formal_methods_completeness_checklist.md`
@@ -4757,6 +6340,14 @@
   - `knowledge\04_expert\safety_critical\09_reference\13_rust_safety_critical_coding_guidelines.md`
   - `knowledge\04_expert\safety_critical\09_reference\14_safety_critical_checklists.md`
   - `knowledge\04_expert\safety_critical\README.md`
+- `https://www.cs.cmu.edu/~janh/courses/411/`
+  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
+- `https://ferrous-systems.com`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\02_comprehensive_recommendations_and_opinions.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
+- `https://ferrous-systems.com/ferrocene`
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
 - `https://github.com/nasa/cFS`
   - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
 - `https://github.com/CubeSat`
@@ -4767,10 +6358,15 @@
   - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
 - `https://github.com/autosar-rs`
   - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
+- `https://en.wikipedia.org/wiki/Continuous_delivery`
+  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
+  - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
 - `https://users.rust-lang.org`
   - `knowledge\04_expert\safety_critical\09_reference\06_faq_and_troubleshooting.md`
 - `https://mozilla.github.io/cbindgen/`
   - `knowledge\04_expert\safety_critical\09_reference\07_ffi_integration_guide.md`
+- `https://en.wikipedia.org/wiki/Data-oriented_design`
+  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
 - `https://github.com/RustSec/rustsec`
   - `knowledge\04_expert\safety_critical\09_reference\15_security_audit_guide.md`
   - `knowledge\04_expert\safety_critical\09_reference\16_supply_chain_security_guide.md`
@@ -4781,6 +6377,9 @@
   - `knowledge\06_ecosystem\databases\01_sea_orm_deep_dive.md`
 - `https://github.com/SeaQL/sea-orm/tree/master/examples`
   - `knowledge\06_ecosystem\databases\01_sea_orm_deep_dive.md`
+- `https://en.wikipedia.org/wiki/Relational_database`
+  - `knowledge\06_ecosystem\databases\01_sea_orm_deep_dive.md`
+  - `knowledge\06_ecosystem\databases\02_sqlx_deep_dive.md`
 - `https://github.com/tokio-rs/axum/tree/main/examples/sqlx-postgres`
   - `knowledge\06_ecosystem\databases\01_sea_orm_deep_dive.md`
   - `knowledge\06_ecosystem\databases\02_sqlx_deep_dive.md`
@@ -4790,8 +6389,338 @@
   - `knowledge\06_ecosystem\databases\README.md`
 - `https://crates.io/categories/database`
   - `knowledge\06_ecosystem\databases\README.md`
+- `https://en.wikipedia.org/wiki/Memory_Safety`
+  - `docs\00_meta\00_annual_review_template.md`
+  - `docs\00_meta\00_improvement_plan_execution_complete.md`
+  - `docs\00_meta\00_template_concept_doc.md`
+  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\01_core\01_ownership_borrowing_lifetimes.md`
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\01_learning\01_mdbook_quiz_guide.md`
+  - `docs\02_reference\02_cross_language_comparison.md`
+  - `docs\02_reference\02_error_code_mapping.md`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_generics_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_ownership_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_testing_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+  - `docs\02_reference\quick_reference\README.md`
+  - `docs\03_guides\03_let_chains_guide.md`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\03_guides\03_test_coverage.md`
+  - `docs\03_practice\03_project_01_cli_tool.md`
+  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_research\04_rust_for_linux_2026.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+  - `docs\04_research\04_safety_critical_alignment_2026.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `docs\04_thinking\04_applications_analysis_view.md`
+  - `docs\04_thinking\04_decision_graph_network.md`
+  - `docs\04_thinking\04_mind_map_collection.md`
+  - `docs\04_thinking\04_proof_graph_network.md`
+  - `docs\04_thinking\04_thinking_representation_methods.md`
+  - `docs\05_guides\05_advanced_topics_deep_dive.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\05_guides\05_async_programming_usage_guide.md`
+  - `docs\05_guides\05_cli_applications_guide.md`
+  - `docs\05_guides\05_cross_module_integration_examples.md`
+  - `docs\05_guides\05_cxx_rust_interop_evaluation.md`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+  - `docs\05_guides\05_formal_verification_integration_guide.md`
+  - `docs\05_guides\05_inline_assembly_guide.md`
+  - `docs\05_guides\05_macro_system_usage_guide.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\05_guides\05_testing_coverage_guide.md`
+  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
+  - `docs\05_guides\05_wasm_usage_guide.md`
+  - `docs\05_guides\best_practices.md`
+  - `docs\05_guides\workflow\01_workflow_theory.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\06_toolchain\README.md`
+  - `docs\07_project\07_extension_deepening_plan_2026.md`
+  - `docs\07_project\07_knowledge_structure_framework.md`
+  - `docs\07_project\07_module_knowledge_structure_guide.md`
+  - `docs\07_project\07_project_architecture_guide.md`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\10_authoritative_sources_and_citations.md`
+  - `docs\10_migration_guide_2026.md`
+  - `docs\10_miri_guide.md`
+  - `docs\research_notes\10_authoritative_alignment_guide.md`
+  - `docs\research_notes\10_authoritative_alignment_status.md`
+  - `docs\research_notes\10_best_practices.md`
+  - `docs\research_notes\10_changelog.md`
+  - `docs\research_notes\10_code_doc_formal_mapping.md`
+  - `docs\research_notes\10_cognitive_argumentation_framework.md`
+  - `docs\research_notes\10_comprehensive_systematic_overview.md`
+  - `docs\research_notes\10_comprehensive_systematic_review_and_100_percent_plan.md`
+  - `docs\research_notes\10_concept_comparison_tables.md`
+  - `docs\research_notes\10_concept_relationship_network.md`
+  - `docs\research_notes\10_concurrency_cheatsheet.md`
+  - `docs\research_notes\10_content_enhancement.md`
+  - `docs\research_notes\10_core_theorems_full_proofs.md`
+  - `docs\research_notes\10_counter_examples_compendium.md`
+  - `docs\research_notes\10_design_mechanism_rationale.md`
+  - `docs\research_notes\10_distributed_concept_mindmap.md`
+  - `docs\research_notes\10_distributed_pattern_matrix.md`
+  - `docs\research_notes\10_domain_analysis_framework.md`
+  - `docs\research_notes\10_faq.md`
+  - `docs\research_notes\10_faq_comprehensive.md`
+  - `docs\research_notes\10_formal_concepts_encyclopedia.md`
+  - `docs\research_notes\10_formal_full_model_overview.md`
+  - `docs\research_notes\10_formal_language_and_proofs.md`
+  - `docs\research_notes\10_glossary.md`
+  - `docs\research_notes\10_incremental_update_flow.md`
+  - `docs\research_notes\10_interview_questions_collection.md`
+  - `docs\research_notes\10_language_semantics_expressiveness.md`
+  - `docs\research_notes\10_macros_cheatsheet.md`
+  - `docs\research_notes\10_ownership_concept_mindmap.md`
+  - `docs\research_notes\10_practical_applications.md`
+  - `docs\research_notes\10_proof_index.md`
+  - `docs\research_notes\10_proof_techniques_mindmap.md`
+  - `docs\research_notes\10_proof_tree_borrow.md`
+  - `docs\research_notes\10_proof_tree_ownership.md`
+  - `docs\research_notes\10_quick_find.md`
+  - `docs\research_notes\10_research_methodology.md`
+  - `docs\research_notes\10_research_roadmap.md`
+  - `docs\research_notes\10_resources.md`
+  - `docs\research_notes\10_rustsem_semantics.md`
+  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
+  - `docs\research_notes\10_theorem_rust_example_mapping.md`
+  - `docs\research_notes\10_theorems_and_proof_strategies.md`
+  - `docs\research_notes\10_theoretical_and_argumentation_system_architecture.md`
+  - `docs\research_notes\10_tools_guide.md`
+  - `docs\research_notes\10_tutorial_borrow_checker.md`
+  - `docs\research_notes\10_tutorial_concurrency_models.md`
+  - `docs\research_notes\10_tutorial_lifetimes.md`
+  - `docs\research_notes\10_tutorial_ownership_safety.md`
+  - `docs\research_notes\10_tutorial_type_system.md`
+  - `docs\research_notes\10_unified_systematic_framework.md`
+  - `docs\research_notes\README.md`
+  - `docs\research_notes\experiments\10_compiler_optimizations.md`
+  - `docs\research_notes\experiments\10_concurrency_performance.md`
+  - `docs\research_notes\experiments\10_memory_analysis.md`
+  - `docs\research_notes\experiments\10_performance_benchmarks.md`
+  - `docs\research_notes\experiments\README.md`
+  - `docs\research_notes\formal_methods\10_async_state_machine.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
+  - `docs\research_notes\formal_methods\10_send_sync_formalization.md`
+  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
+  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\04_boundary_matrix.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\README.md`
+  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
+  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\04_expressiveness_boundary.md`
+  - `docs\research_notes\software_design_theory\03_execution_models\02_async.md`
+  - `docs\research_notes\software_design_theory\03_execution_models\05_distributed.md`
+  - `docs\research_notes\software_design_theory\04_compositional_engineering\README.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\10_expressive_inexpressive_matrix.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md`
+  - `docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md`
+  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
+  - `docs\research_notes\software_design_theory\06_rust_idioms.md`
+  - `docs\research_notes\software_design_theory\07_anti_patterns.md`
+  - `docs\research_notes\software_design_theory\10_00_master_index.md`
+  - `docs\research_notes\type_theory\10_advanced_types.md`
+  - `docs\research_notes\type_theory\10_construction_capability.md`
+  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
+  - `docs\research_notes\type_theory\10_type_system_foundations.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\03_ownership_borrowing\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\memory\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\02_async\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\09_actor_model\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\README.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\01_compiler\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
+  - `docs\rust-formal-engineering-system\09_research_agenda\04_research_methods\README.md`
+- `https://en.wikipedia.org/wiki/Concurrency`
+  - `docs\00_meta\00_content_reconstruction_plan_2026.md`
+  - `docs\00_meta\00_documentation_lifecycle.md`
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\01_learning\01_mdbook_quiz_guide.md`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+  - `docs\02_reference\alignment_guide.md`
+  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_closures_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_ownership_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+  - `docs\02_reference\quick_reference\README.md`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\03_practice\03_project_06_concurrent_downloader.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `docs\04_thinking\04_applications_analysis_view.md`
+  - `docs\04_thinking\04_decision_graph_network.md`
+  - `docs\04_thinking\04_thinking_representation_methods.md`
+  - `docs\05_guides\05_advanced_topics_deep_dive.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\05_guides\05_async_programming_usage_guide.md`
+  - `docs\05_guides\05_cli_applications_guide.md`
+  - `docs\05_guides\05_cross_module_integration_examples.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+  - `docs\05_guides\05_inline_assembly_guide.md`
+  - `docs\05_guides\05_macro_system_usage_guide.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
+  - `docs\05_guides\05_troubleshooting_guide.md`
+  - `docs\05_guides\05_type_system_usage_guide.md`
+  - `docs\05_guides\05_wasm_usage_guide.md`
+  - `docs\05_guides\best_practices.md`
+  - `docs\05_guides\workflow\01_workflow_theory.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\07_project\07_knowledge_structure_framework.md`
+  - `docs\07_project\07_module_knowledge_structure_guide.md`
+  - `docs\07_project\07_project_architecture_guide.md`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\10_authoritative_sources_and_citations.md`
+  - `docs\10_migration_guide_2026.md`
+  - `docs\research_notes\10_authoritative_alignment_guide.md`
+  - `docs\research_notes\10_best_practices.md`
+  - `docs\research_notes\10_changelog.md`
+  - `docs\research_notes\10_code_doc_formal_mapping.md`
+  - `docs\research_notes\10_cognitive_argumentation_framework.md`
+  - `docs\research_notes\10_comprehensive_project_report.md`
+  - `docs\research_notes\10_comprehensive_systematic_overview.md`
+  - `docs\research_notes\10_comprehensive_systematic_review_and_100_percent_plan.md`
+  - `docs\research_notes\10_concept_comparison_tables.md`
+  - `docs\research_notes\10_concurrency_cheatsheet.md`
+  - `docs\research_notes\10_design_mechanism_rationale.md`
+  - `docs\research_notes\10_error_handling_cheatsheet.md`
+  - `docs\research_notes\10_faq_comprehensive.md`
+  - `docs\research_notes\10_formal_concepts_encyclopedia.md`
+  - `docs\research_notes\10_formal_full_model_overview.md`
+  - `docs\research_notes\10_formal_language_and_proofs.md`
+  - `docs\research_notes\10_incremental_update_flow.md`
+  - `docs\research_notes\10_interview_questions_collection.md`
+  - `docs\research_notes\10_l3_machine_proof_guide.md`
+  - `docs\research_notes\10_language_semantics_expressiveness.md`
+  - `docs\research_notes\10_macros_cheatsheet.md`
+  - `docs\research_notes\10_practical_applications.md`
+  - `docs\research_notes\10_proof_index.md`
+  - `docs\research_notes\10_research_roadmap.md`
+  - `docs\research_notes\10_rustsem_semantics.md`
+  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
+  - `docs\research_notes\10_system_summary.md`
+  - `docs\research_notes\10_theorem_rust_example_mapping.md`
+  - `docs\research_notes\10_theorems_and_proof_strategies.md`
+  - `docs\research_notes\10_theoretical_and_argumentation_system_architecture.md`
+  - `docs\research_notes\10_tools_guide.md`
+  - `docs\research_notes\10_tutorial_borrow_checker.md`
+  - `docs\research_notes\10_tutorial_concurrency_models.md`
+  - `docs\research_notes\10_tutorial_lifetimes.md`
+  - `docs\research_notes\10_tutorial_ownership_safety.md`
+  - `docs\research_notes\10_tutorial_type_system.md`
+  - `docs\research_notes\10_unified_systematic_framework.md`
+  - `docs\research_notes\10_verification_tools_matrix.md`
+  - `docs\research_notes\experiments\10_compiler_optimizations.md`
+  - `docs\research_notes\experiments\10_concurrency_performance.md`
+  - `docs\research_notes\experiments\10_memory_analysis.md`
+  - `docs\research_notes\experiments\10_performance_benchmarks.md`
+  - `docs\research_notes\experiments\README.md`
+  - `docs\research_notes\formal_methods\10_async_state_machine.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
+  - `docs\research_notes\formal_methods\10_send_sync_formalization.md`
+  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
+  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
+  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
+  - `docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md`
+  - `docs\research_notes\software_design_theory\03_execution_models\05_distributed.md`
+  - `docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\README.md`
+  - `docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md`
+  - `docs\research_notes\software_design_theory\06_rust_idioms.md`
+  - `docs\research_notes\software_design_theory\07_anti_patterns.md`
+  - `docs\research_notes\software_design_theory\10_00_master_index.md`
+  - `docs\research_notes\type_theory\10_advanced_types.md`
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\02_async\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
+  - `docs\rust-formal-engineering-system\10_quality_assurance\README.md`
 - `https://matklad.github.io/2021/09/04/fast-rust-builds.html`
   - `docs\01_cargo_build_optimization.md`
+- `https://en.wikipedia.org/wiki/Program_Optimization`
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\research_notes\experiments\10_compiler_optimizations.md`
+  - `docs\research_notes\experiments\10_concurrency_performance.md`
+  - `docs\research_notes\experiments\10_macro_expansion_performance.md`
+  - `docs\research_notes\experiments\10_performance_benchmarks.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
 - `https://dl.acm.org/`
   - `docs\00_meta\00_annual_review_template.md`
   - `docs\00_meta\00_content_reconstruction_plan_2026.md`
@@ -5131,6 +7060,15 @@
   - `docs\rust-formal-engineering-system\10_quality_assurance\README.md`
   - `docs\rust-formal-engineering-system\README.md`
   - `docs\templates\10_versioned_doc_template.md`
+- `https://en.wikipedia.org/wiki/Build_Automation`
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+- `https://en.wikipedia.org/wiki/Programming_Language_Features`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `https://en.wikipedia.org/wiki/Language_Evolution`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
 - `https://github.com/rust-lang/rust/pull/136562`
   - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
 - `https://github.com/rust-lang/rust/pull/136431`
@@ -5155,10 +7093,67 @@
   - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
 - `https://github.com/rust-lang/rust/blob/master/RELEASES.md`
   - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `https://en.wikipedia.org/wiki/Undefined_Behavior`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_miri_integration_summary.md`
+- `https://security.googleblog.com/2024/12/memory-safety-in-android.html`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+- `https://www.microsoft.com/en-us/security/blog/2025/01/28/rust-in-the-windows-kernel/`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
 - `https://arxiv.org/abs/2206.00986`
   - `docs\10_miri_guide.md`
 - `https://github.com/mozilla/sccache/releases`
   - `docs\10_sccache_setup.md`
+- `https://en.wikipedia.org/wiki/Compiler_Cache`
+  - `docs\10_sccache_setup.md`
+- `https://en.wikipedia.org/wiki/Formal_Methods`
+  - `docs\00_meta\00_formal_content_master_index.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+  - `docs\04_thinking\04_proof_graph_network.md`
+  - `docs\05_guides\05_formal_verification_integration_guide.md`
+  - `docs\research_notes\10_code_doc_formal_mapping.md`
+  - `docs\research_notes\10_core_theorems_full_proofs.md`
+  - `docs\research_notes\10_formal_concepts_encyclopedia.md`
+  - `docs\research_notes\10_formal_full_model_en_summary.md`
+  - `docs\research_notes\10_formal_full_model_overview.md`
+  - `docs\research_notes\10_formal_language_and_proofs.md`
+  - `docs\research_notes\10_formal_proof_system_guide.md`
+  - `docs\research_notes\10_international_formal_verification_index.md`
+  - `docs\research_notes\10_l3_machine_proof_guide.md`
+  - `docs\research_notes\10_proof_tree_borrow.md`
+  - `docs\research_notes\10_rust_formal_methods_cheatsheet.md`
+  - `docs\research_notes\10_theorems_and_proof_strategies.md`
+  - `docs\research_notes\10_verification_tools_matrix.md`
+  - `docs\research_notes\formal_methods\00_completeness_gaps.md`
+  - `docs\research_notes\formal_methods\10_async_runtime_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_formal_methods_completeness_checklist.md`
+  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
+  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
+  - `docs\research_notes\formal_methods\README.md`
+  - `docs\research_notes\formal_modules\10_formalization_ecology_mindmap.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\README.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\README.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\01_type_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_memory_safety\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\memory\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\01_synchronous\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\01_compiler\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\02_package_manager\README.md`
+  - `docs\rust-formal-engineering-system\09_research_agenda\04_research_methods\README.md`
+  - `docs\rust-formal-engineering-system\10_quality_assurance\README.md`
+  - `docs\rust-formal-engineering-system\README.md`
 - `https://github.com/awslabs/aws-sdk-rust/releases`
   - `docs\00_meta\00_quarterly_sync_checklist.md`
 - `https://github.com/rust-lang/rust/releases`
@@ -5166,6 +7161,21 @@
 - `https://github.com/rust-lang/rust-project-goals`
   - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
   - `docs\06_toolchain\06_cranelift_backend_guide.md`
+- `https://en.wikipedia.org/wiki/Resource_Management`
+  - `docs\01_core\01_ownership_borrowing_lifetimes.md`
+  - `docs\research_notes\10_tutorial_borrow_checker.md`
+- `https://en.wikipedia.org/wiki/Substructural_type_system#Linear_type`
+  - `docs\01_core\README.md`
+- `https://en.wikipedia.org/wiki/Zero-overhead_principle`
+  - `docs\01_core\README.md`
+- `https://en.wikipedia.org/wiki/Learning_Path`
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+- `https://en.wikipedia.org/wiki/Curriculum_Design`
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+- `https://en.wikipedia.org/wiki/Educational_Technology`
+  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
+- `https://en.wikipedia.org/wiki/Spiral_Curriculum`
+  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
 - `https://users.rust-lang.org/`
   - `docs\01_learning\01_learning_path_planning.md`
   - `docs\research_notes\10_resources.md`
@@ -5181,17 +7191,49 @@
   - `docs\03_guides\03_cxx_interop_guide.md`
 - `https://www.iso.org/standard/83626.html`
   - `docs\02_reference\02_cross_language_comparison.md`
+- `https://en.wikipedia.org/wiki/Compiler_Construction`
+  - `docs\02_reference\02_error_code_mapping.md`
+  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\06_toolchain\06_parallel_frontend.md`
+  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+  - `docs\research_notes\experiments\10_compiler_optimizations.md`
+  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
 - `https://github.com/rust-lang/rust/pull/135634`
   - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
 - `https://github.com/rust-lang/rust/pull/145628`
   - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
 - `https://github.com/rust-lang/rust/pull/145665`
   - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+- `https://en.wikipedia.org/wiki/Standard_Library`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
 - `https://docs.rs/llm`
   - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
   - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
 - `https://github.com/rust-ml/llm/tree/main/examples`
   - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+- `https://en.wikipedia.org/wiki/Machine_Learning`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\03_guides\03_let_chains_guide.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_research\04_ng_trait_solver.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\research_notes\10_argumentation_chain_and_flow.md`
+  - `docs\research_notes\10_core_features_full_chain.md`
+  - `docs\research_notes\10_domain_analysis_framework.md`
+  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
 - `https://docs.rs/tch/latest/tch/`
   - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
   - `docs\03_guides\03_let_chains_guide.md`
@@ -5211,8 +7253,49 @@
   - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
 - `https://github.com/rust-lang/rust/issues/108099`
   - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
+- `https://en.wikipedia.org/wiki/Future/Promise`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+- `https://en.wikipedia.org/wiki/Package_Manager`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+- `https://en.wikipedia.org/wiki/Iterator_Pattern`
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+- `https://en.wikipedia.org/wiki/Exception_Handling`
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\research_notes\10_error_handling_cheatsheet.md`
+  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
+- `https://en.wikipedia.org/wiki/Modular_Programming`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+- `https://en.wikipedia.org/wiki/Namespace`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+- `https://en.wikipedia.org/wiki/Software_Component`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+- `https://en.wikipedia.org/wiki/Network_Programming`
+  - `docs\02_reference\quick_reference\02_network_programming_cheatsheet.md`
+  - `docs\04_thinking\04_decision_graph_network.md`
+  - `docs\research_notes\10_concept_relationship_network.md`
 - `https://github.com/rust-lang/rust/releases/tag/1.97.0`
   - `docs\02_reference\quick_reference\02_rust_197_features_cheatsheet.md`
+- `https://en.wikipedia.org/wiki/String_(computer_science)`
+  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
+- `https://en.wikipedia.org/wiki/Software_Testing`
+  - `docs\02_reference\quick_reference\02_testing_cheatsheet.md`
+  - `docs\03_guides\03_test_coverage.md`
+  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
+- `https://en.wikipedia.org/wiki/Unit_Testing`
+  - `docs\02_reference\quick_reference\02_testing_cheatsheet.md`
+  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
+- `https://en.wikipedia.org/wiki/Thread_(computing)`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
+- `https://en.wikipedia.org/wiki/Type_Theory`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\research_notes\type_theory\10_construction_capability.md`
+  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
+  - `docs\research_notes\type_theory\10_type_system_foundations.md`
+- `https://en.wikipedia.org/wiki/Hindley_Milner_Type_System`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\research_notes\type_theory\10_type_system_foundations.md`
 - `https://rustwasm.github.io/wasm-bindgen/`
   - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
   - `docs\05_guides\05_wasm_usage_guide.md`
@@ -5249,13 +7332,28 @@
 - `https://rust-embedded.github.io/book/`
   - `docs\03_guides\03_embedded_rust_guide.md`
   - `docs\05_guides\05_embedded_rust_guide.md`
+- `https://en.wikipedia.org/wiki/Embedded_System`
+  - `docs\03_guides\03_embedded_rust_guide.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+- `https://en.wikipedia.org/wiki/Real_Time_Operating_System`
+  - `docs\03_guides\03_embedded_rust_guide.md`
+- `https://en.wikipedia.org/wiki/Microcontroller`
+  - `docs\03_guides\03_embedded_rust_guide.md`
+- `https://en.wikipedia.org/wiki/Fuzzing`
+  - `docs\03_guides\03_fuzzing_guide.md`
 - `https://google.github.io/oss-fuzz/`
   - `docs\03_guides\03_fuzzing_guide.md`
 - `https://github.com/tokio-rs/tokio-uring`
   - `docs\03_guides\03_io_uring_guide.md`
 - `https://docs.rs/io-uring/`
   - `docs\03_guides\03_io_uring_guide.md`
+- `https://en.wikipedia.org/wiki/io_uring`
+  - `docs\03_guides\03_io_uring_guide.md`
+- `https://en.wikipedia.org/wiki/Peer_to_Peer`
+  - `docs\03_guides\03_libp2p_guide.md`
 - `https://github.com/libp2p/rust-libp2p`
+  - `docs\03_guides\03_libp2p_guide.md`
+- `https://en.wikipedia.org/wiki/Distributed_Hash_Table`
   - `docs\03_guides\03_libp2p_guide.md`
 - `https://github.com/rust-lang/rfcs/pull/9000`
   - `docs\03_guides\03_quic_http3_guide.md`
@@ -5265,9 +7363,17 @@
   - `docs\03_guides\03_quic_http3_guide.md`
 - `https://github.com/rust-lang/rfcs/pull/2645`
   - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
+- `https://en.wikipedia.org/wiki/Semantic_Versioning`
+  - `docs\03_guides\03_semver_checks.md`
+- `https://en.wikipedia.org/wiki/Software_Versioning`
+  - `docs\03_guides\03_semver_checks.md`
 - `https://github.com/xd009642/tarpaulin`
   - `docs\03_guides\03_test_coverage.md`
   - `docs\research_notes\10_performance_and_testing_alignment.md`
+- `https://en.wikipedia.org/wiki/Code_Coverage`
+  - `docs\03_guides\03_test_coverage.md`
+- `https://en.wikipedia.org/wiki/Web_Framework`
+  - `docs\03_practice\03_project_11_web_server.md`
 - `https://github.com/bjorn3/rustc_codegen_cranelift`
   - `docs\04_research\04_cranelift_backend.md`
   - `docs\06_toolchain\06_cranelift_backend_guide.md`
@@ -5285,10 +7391,52 @@
   - `docs\04_research\04_rust_formal_verification.md`
 - `https://doi.org/10.1145/3418295`
   - `docs\04_research\04_rust_formal_verification.md`
+- `https://en.wikipedia.org/wiki/Mathematical_Proof`
+  - `docs\04_thinking\04_proof_graph_network.md`
 - `https://docs.rs/crate/tch`
   - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+- `https://en.wikipedia.org/wiki/Cooperative_Multitasking`
+  - `docs\05_guides\05_async_programming_usage_guide.md`
 - `https://github.com/rust-cli/book`
   - `docs\05_guides\05_cli_applications_guide.md`
+- `https://en.wikipedia.org/wiki/Command_Line_Interface`
+  - `docs\05_guides\05_cli_applications_guide.md`
+- `https://en.wikipedia.org/wiki/Software_Design_Pattern`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
+  - `docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md`
+  - `docs\research_notes\software_design_theory\10_00_master_index.md`
+- `https://en.wikipedia.org/wiki/Gang_of_Four`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+- `https://en.wikipedia.org/wiki/Anti_pattern`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+- `https://en.wikipedia.org/wiki/Design_Pattern`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+  - `docs\research_notes\10_design_mechanism_rationale.md`
+  - `docs\research_notes\10_distributed_pattern_matrix.md`
+  - `docs\research_notes\10_distributed_patterns_matrix.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\README.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\README.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\README.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\04_boundary_matrix.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\README.md`
+  - `docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md`
+  - `docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md`
+  - `docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md`
+  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
+  - `docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md`
+  - `docs\research_notes\software_design_theory\07_anti_patterns.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\README.md`
+- `https://en.wikipedia.org/wiki/Formal_Verification`
+  - `docs\05_guides\05_formal_verification_integration_guide.md`
+  - `docs\research_notes\10_verification_tools_decision_tree.md`
+  - `docs\research_notes\10_verification_tools_matrix.md`
 - `https://model-checking.github.io/kani/install-guide.html`
   - `docs\05_guides\05_kani_practical_guide.md`
 - `https://model-checking.github.io/kani/tutorial-proofs.html`
@@ -5332,6 +7480,19 @@
   - `docs\05_guides\05_verus_practical_guide.md`
 - `https://verus-lang.github.io/verus/guide/`
   - `docs\05_guides\05_verus_practical_guide.md`
+- `https://en.wikipedia.org/wiki/Software_Development_Best_Practices`
+  - `docs\05_guides\best_practices.md`
+- `https://en.wikipedia.org/wiki/Code_Review`
+  - `docs\05_guides\best_practices.md`
+  - `docs\research_notes\10_best_practices.md`
+- `https://en.wikipedia.org/wiki/Software_Quality`
+  - `docs\05_guides\best_practices.md`
+- `https://en.wikipedia.org/wiki/Workflow`
+  - `docs\05_guides\workflow\01_workflow_theory.md`
+- `https://en.wikipedia.org/wiki/Software_Development_Process`
+  - `docs\05_guides\workflow\01_workflow_theory.md`
+- `https://en.wikipedia.org/wiki/LLVM`
+  - `docs\06_toolchain\01_compiler_features.md`
 - `https://example.com`
   - `docs\06_toolchain\03_rustdoc_advanced.md`
 - `https://example.com/image.png`
@@ -5356,6 +7517,12 @@
   - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
 - `https://github.com/rust-lang/rust/pull/148605`
   - `docs\06_toolchain\06_cargo_script_guide.md`
+- `https://en.wikipedia.org/wiki/Branch_Table`
+  - `docs\06_toolchain\06_jump_tables_guide.md`
+- `https://en.wikipedia.org/wiki/Parallel_Computing`
+  - `docs\06_toolchain\06_parallel_frontend.md`
+- `https://en.wikipedia.org/wiki/Compiler_Optimization`
+  - `docs\06_toolchain\06_parallel_frontend.md`
 - `https://github.com/rust-lang/compiler-team`
   - `docs\06_toolchain\06_parallel_frontend.md`
 - `https://github.com/rust-lang/rust/issues/107374`
@@ -5364,6 +7531,11 @@
   - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
 - `https://docs.rs/toml_edit`
   - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+- `https://en.wikipedia.org/wiki/Knowledge_Organization`
+  - `docs\07_project\07_hierarchy_mapping_master.md`
+  - `docs\research_notes\10_authoritative_content_alignment_report.md`
+- `https://en.wikipedia.org/wiki/Taxonomy`
+  - `docs\07_project\07_hierarchy_mapping_master.md`
 - `https://aeneas-verification.github.io/`
   - `docs\research_notes\00_archive_link_audit_report.md`
   - `docs\research_notes\10_00_comprehensive_summary.md`
@@ -5492,6 +7664,10 @@
   - `docs\research_notes\10_advanced_data_structures_guide.md`
 - `https://dl.acm.org/doi/10.1145/138403.138440`
   - `docs\research_notes\10_advanced_data_structures_guide.md`
+- `https://en.wikipedia.org/wiki/Treap`
+  - `docs\research_notes\10_advanced_data_structures_guide.md`
+- `https://en.wikipedia.org/wiki/Skip_list`
+  - `docs\research_notes\10_advanced_data_structures_guide.md`
 - `https://crates.io/crates/skiplist`
   - `docs\research_notes\10_advanced_data_structures_guide.md`
 - `https://leetcode.com/`
@@ -5552,6 +7728,98 @@
   - `docs\research_notes\10_authoritative_source_gap_and_backref_index.md`
 - `https://stackoverflow.com/questions/tagged/rust`
   - `docs\research_notes\10_authoritative_alignment_guide.md`
+- `https://en.wikipedia.org/wiki/Type_System`
+  - `docs\research_notes\10_authoritative_alignment_guide.md`
+  - `docs\research_notes\10_authoritative_alignment_status.md`
+  - `docs\research_notes\10_best_practices.md`
+  - `docs\research_notes\10_changelog.md`
+  - `docs\research_notes\10_code_doc_formal_mapping.md`
+  - `docs\research_notes\10_comprehensive_project_report.md`
+  - `docs\research_notes\10_comprehensive_systematic_overview.md`
+  - `docs\research_notes\10_comprehensive_systematic_review_and_100_percent_plan.md`
+  - `docs\research_notes\10_concept_comparison_tables.md`
+  - `docs\research_notes\10_concept_relationship_network.md`
+  - `docs\research_notes\10_concurrency_cheatsheet.md`
+  - `docs\research_notes\10_const_eval_formalization.md`
+  - `docs\research_notes\10_content_enhancement.md`
+  - `docs\research_notes\10_core_theorems_full_proofs.md`
+  - `docs\research_notes\10_design_mechanism_rationale.md`
+  - `docs\research_notes\10_distributed_concept_mindmap.md`
+  - `docs\research_notes\10_distributed_pattern_matrix.md`
+  - `docs\research_notes\10_domain_analysis_framework.md`
+  - `docs\research_notes\10_error_handling_cheatsheet.md`
+  - `docs\research_notes\10_faq.md`
+  - `docs\research_notes\10_faq_comprehensive.md`
+  - `docs\research_notes\10_formal_concepts_encyclopedia.md`
+  - `docs\research_notes\10_formal_full_model_en_summary.md`
+  - `docs\research_notes\10_formal_full_model_overview.md`
+  - `docs\research_notes\10_formal_language_and_proofs.md`
+  - `docs\research_notes\10_glossary.md`
+  - `docs\research_notes\10_incremental_update_flow.md`
+  - `docs\research_notes\10_interview_questions_collection.md`
+  - `docs\research_notes\10_l3_machine_proof_guide.md`
+  - `docs\research_notes\10_language_semantics_expressiveness.md`
+  - `docs\research_notes\10_macros_cheatsheet.md`
+  - `docs\research_notes\10_practical_applications.md`
+  - `docs\research_notes\10_proof_index.md`
+  - `docs\research_notes\10_proof_techniques_mindmap.md`
+  - `docs\research_notes\10_proof_tree_ownership.md`
+  - `docs\research_notes\10_proof_tree_type_safety.md`
+  - `docs\research_notes\10_quick_find.md`
+  - `docs\research_notes\10_research_roadmap.md`
+  - `docs\research_notes\10_resources.md`
+  - `docs\research_notes\10_rustsem_semantics.md`
+  - `docs\research_notes\10_system_summary.md`
+  - `docs\research_notes\10_theorems_and_proof_strategies.md`
+  - `docs\research_notes\10_theoretical_and_argumentation_system_architecture.md`
+  - `docs\research_notes\10_tools_guide.md`
+  - `docs\research_notes\10_tutorial_borrow_checker.md`
+  - `docs\research_notes\10_tutorial_concurrency_models.md`
+  - `docs\research_notes\10_tutorial_lifetimes.md`
+  - `docs\research_notes\10_tutorial_ownership_safety.md`
+  - `docs\research_notes\10_tutorial_type_system.md`
+  - `docs\research_notes\10_unified_systematic_framework.md`
+  - `docs\research_notes\10_verification_tools_matrix.md`
+  - `docs\research_notes\10_visualization_index.md`
+  - `docs\research_notes\experiments\10_compiler_optimizations.md`
+  - `docs\research_notes\experiments\10_concurrency_performance.md`
+  - `docs\research_notes\experiments\10_memory_analysis.md`
+  - `docs\research_notes\experiments\10_performance_benchmarks.md`
+  - `docs\research_notes\experiments\README.md`
+  - `docs\research_notes\formal_methods\10_async_state_machine.md`
+  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
+  - `docs\research_notes\formal_methods\10_send_sync_formalization.md`
+  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\04_boundary_matrix.md`
+  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
+  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\04_expressiveness_boundary.md`
+  - `docs\research_notes\software_design_theory\03_execution_models\02_async.md`
+  - `docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md`
+  - `docs\research_notes\software_design_theory\03_execution_models\05_distributed.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\10_expressive_inexpressive_matrix.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md`
+  - `docs\research_notes\software_design_theory\05_boundary_system\README.md`
+  - `docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md`
+  - `docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md`
+  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
+  - `docs\research_notes\software_design_theory\06_rust_idioms.md`
+  - `docs\research_notes\software_design_theory\07_anti_patterns.md`
+  - `docs\research_notes\software_design_theory\10_00_master_index.md`
+  - `docs\research_notes\type_theory\10_advanced_types.md`
+  - `docs\research_notes\type_theory\10_construction_capability.md`
+  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
+  - `docs\research_notes\type_theory\10_type_system_foundations.md`
 - `https://doi.org/10.1007/s10703-024-00460-3`
   - `docs\research_notes\10_authoritative_alignment_guide.md`
   - `docs\research_notes\10_formal_methods_master_index.md`
@@ -5570,6 +7838,8 @@
   - `docs\research_notes\formal_methods\10_ownership_model.md`
 - `https://doi.org/10.1145/3586037`
   - `docs\research_notes\10_authoritative_alignment_guide.md`
+- `https://en.wikipedia.org/wiki/Information_Quality`
+  - `docs\research_notes\10_authoritative_content_alignment_report.md`
 - `https://github.com/rust-lang/book`
   - `docs\research_notes\10_authoritative_source_alignment_network.md`
   - `docs\research_notes\10_i18n_source_alignment.md`
@@ -5632,9 +7902,13 @@
   - `docs\research_notes\10_authoritative_source_line_anchors.md`
 - `https://github.com/rust-lang/rfcs/blob/master/text/3516-public-private-dependencies.md#L168`
   - `docs\research_notes\10_authoritative_source_line_anchors.md`
+- `https://en.wikipedia.org/wiki/Best_Practice`
+  - `docs\research_notes\10_best_practices.md`
 - `https://dl.acm.org/doi/10.1145/2674005.2674994`
   - `docs\research_notes\10_cache_eviction_policies_guide.md`
 - `https://github.com/ben-manes/caffeine`
+  - `docs\research_notes\10_cache_eviction_policies_guide.md`
+- `https://en.wikipedia.org/wiki/Cache_replacement_policies`
   - `docs\research_notes\10_cache_eviction_policies_guide.md`
 - `https://crates.io/crates/lru`
   - `docs\research_notes\10_cache_eviction_policies_guide.md`
@@ -5756,9 +8030,24 @@
   - `docs\research_notes\10_database_storage_cloud_alignment.md`
 - `https://github.com/envoyproxy/envoy`
   - `docs\research_notes\10_database_storage_cloud_alignment.md`
+- `https://en.wikipedia.org/wiki/Software_Design`
+  - `docs\research_notes\10_design_mechanism_rationale.md`
 - `https://rust-unofficial.github.io/patterns/patterns/behavioural/state.html`
   - `docs\research_notes\10_design_patterns_authoritative_alignment.md`
   - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md`
+- `https://en.wikipedia.org/wiki/Decision_Tree`
+  - `docs\research_notes\10_distributed_architecture_decision_tree.md`
+  - `docs\research_notes\10_verification_tools_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
+  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
+- `https://en.wikipedia.org/wiki/Mind_Map`
+  - `docs\research_notes\10_distributed_concept_mindmap.md`
+  - `docs\research_notes\10_proof_techniques_mindmap.md`
+  - `docs\research_notes\10_workflow_concept_mindmap.md`
+- `https://en.wikipedia.org/wiki/Concept_Map`
+  - `docs\research_notes\10_distributed_concept_mindmap.md`
+  - `docs\research_notes\10_proof_techniques_mindmap.md`
+  - `docs\research_notes\10_workflow_concept_mindmap.md`
 - `https://rust-lang-nursery.github.io/rust-cookbook/errors.html`
   - `docs\research_notes\10_error_handling_cheatsheet.md`
 - `https://github.com/dtolnay/anyhow`
@@ -5771,6 +8060,53 @@
   - `docs\research_notes\10_error_handling_network_web_alignment.md`
 - `https://docs.rs/tower-http/`
   - `docs\research_notes\10_error_handling_network_web_alignment.md`
+- `https://www.rfc-editor.org/rfc/rfc9112.html`
+  - `docs\research_notes\10_error_handling_network_web_alignment.md`
+- `https://www.rfc-editor.org/rfc/rfc9113.html`
+  - `docs\research_notes\10_error_handling_network_web_alignment.md`
+- `https://www.rfc-editor.org/rfc/rfc6455.html`
+  - `docs\research_notes\10_error_handling_network_web_alignment.md`
+- `https://en.wikipedia.org/wiki/FAQ`
+  - `docs\research_notes\10_faq_comprehensive.md`
+- `https://en.wikipedia.org/wiki/Knowledge_Base`
+  - `docs\research_notes\10_faq_comprehensive.md`
+- `https://spec.ferrocene.dev/lexical-elements.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/syntax.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/types.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/generics.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/traits.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/subtyping.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/ownership.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/borrowing.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/lifetimes.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/concurrency.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+  - `docs\research_notes\formal_methods\10_async_state_machine.md`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://spec.ferrocene.dev/unsafe-rust.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/ffi.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://spec.ferrocene.dev/items.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/modules-and-crates.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/linkage.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/notation.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
+- `https://spec.ferrocene.dev/glossary.html`
+  - `docs\research_notes\10_ferrocene_fls_alignment.md`
 - `https://doi.org/10.1007/978-3-030-45237-7_4`
   - `docs\research_notes\10_formal_methods_master_index.md`
   - `docs\research_notes\10_formal_proof_critical_analysis_and_plan_2026_02.md`
@@ -5778,6 +8114,9 @@
   - `docs\research_notes\10_formal_proof_critical_analysis_and_plan_2026_02.md`
 - `https://github.com/hopv/rust-horn`
   - `docs\research_notes\10_formal_proof_critical_analysis_and_plan_2026_02.md`
+- `https://course.rs/`
+  - `docs\research_notes\10_i18n_source_alignment.md`
+  - `docs\research_notes\10_learning_and_interview_alignment.md`
 - `https://rust-fr.github.io/`
   - `docs\research_notes\10_i18n_source_alignment.md`
 - `https://github.com/rust-lang/reference`
@@ -5794,9 +8133,19 @@
 - `https://github.com/viperproject/prusti`
   - `docs\research_notes\10_international_formal_verification_index.md`
   - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `https://github.com/rust-lang/rust/releases/tag/1.96.0`
+  - `docs\research_notes\10_knowledge_graph_index.md`
 - `https://docs.rs/crossbeam-epoch`
   - `docs\research_notes\10_knowledge_graph_index.md`
   - `docs\research_notes\10_lock_free_data_structures_guide.md`
+- `https://course.rs/basic/`
+  - `docs\research_notes\10_learning_and_interview_alignment.md`
+- `https://course.rs/basic/ownership.html`
+  - `docs\research_notes\10_learning_and_interview_alignment.md`
+- `https://course.rs/basic/trait.html`
+  - `docs\research_notes\10_learning_and_interview_alignment.md`
+- `https://course.rs/advance/`
+  - `docs\research_notes\10_learning_and_interview_alignment.md`
 - `https://rust-unofficial.github.io/patterns/patterns/behavioural/interior-mutability.html`
   - `docs\research_notes\10_learning_and_interview_alignment.md`
 - `https://veykril.github.io/tlborm/decl-macros/minutiae/fragment-specifiers.html`
@@ -5881,6 +8230,15 @@
   - `docs\research_notes\10_tools_guide.md`
 - `https://github.com/dtolnay/cargo-expand#usage`
   - `docs\research_notes\10_tools_guide.md`
+- `https://en.wikipedia.org/wiki/Software_Development_Tool`
+  - `docs\research_notes\10_tools_guide.md`
+- `https://en.wikipedia.org/wiki/Integrated_Development_Environment`
+  - `docs\research_notes\10_tools_guide.md`
+- `https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization`
+  - `docs\research_notes\10_tutorial_ownership_safety.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `https://en.wikipedia.org/wiki/Hindley_Milner`
+  - `docs\research_notes\10_tutorial_type_system.md`
 - `https://github.com/rust-lang/rust/issues/29661`
   - `docs\research_notes\10_version_evolution_alignment.md`
 - `https://github.com/rust-lang/rust/issues/35121`
@@ -5903,22 +8261,92 @@
   - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
   - `docs\research_notes\formal_methods\10_ownership_model.md`
   - `docs\research_notes\formal_methods\README.md`
+- `https://iris-project.org/pdfs/2025-pldi-treeborrows.pdf`
+  - `docs\research_notes\formal_methods\00_completeness_gaps.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://spec.ferrocene.dev/concurrency.html#asynchronous-computation`
+  - `docs\research_notes\formal_methods\10_async_state_machine.md`
+  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
+  - `docs\research_notes\formal_methods\README.md`
 - `https://github.com/async-rs/async-std`
   - `docs\research_notes\formal_methods\10_async_state_machine.md`
 - `https://github.com/tokio-rs/loom`
   - `docs\research_notes\formal_methods\10_async_state_machine.md`
 - `https://github.com/model-checking`
   - `docs\research_notes\formal_methods\10_async_state_machine.md`
+- `https://www.cs.cmu.edu/~15-799/`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `https://iris-project.org/pdfs/2025-pldi-tree-borrows.pdf`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
 - `https://github.com/rust-lang/rust/tree/master/compiler/rustc_borrowck`
   - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+- `https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://spec.ferrocene.dev/unsafety.html`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://en.wikipedia.org/wiki/Borrow_Checker`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+- `https://en.wikipedia.org/wiki/Error_Detection_and_Correction`
+  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
+- `https://en.wikipedia.org/wiki/Fault_Tolerance`
+  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
+  - `docs\research_notes\software_design_theory\05_distributed\03_circuit_breaker.md`
+- `https://en.wikipedia.org/wiki/Recovery_Block`
+  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
 - `https://github.com/rust-lang/rfcs/pull/0243`
   - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
+- `https://en.wikipedia.org/wiki/Ownership_Semantics`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `https://spec.ferrocene.dev/ownership-and-deconstruction.html`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://en.wikipedia.org/wiki/Ownership_Type`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `https://en.wikipedia.org/wiki/Substructural_Type_System`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `https://en.wikipedia.org/wiki/Alias_Analysis`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `https://spec.ferrocene.dev/concurrency.html#send-and-sync`
+  - `docs\research_notes\formal_methods\10_send_sync_formalization.md`
+  - `docs\research_notes\formal_methods\README.md`
 - `https://docs.rs/mockall`
   - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
 - `https://altsysrq.github.io/proptest-book/`
   - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
+- `https://en.wikipedia.org/wiki/Workflow_Engine`
+  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
+- `https://en.wikipedia.org/wiki/Business_Process_Management`
+  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
+- `https://spec.ferrocene.dev/patterns.html`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://spec.ferrocene.dev/patterns.html#refutability`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://spec.ferrocene.dev/patterns.html#pattern-matching`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://spec.ferrocene.dev/ownership-and-deconstruction.html#ownership`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://spec.ferrocene.dev/ownership-and-deconstruction.html#destruction`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://spec.ferrocene.dev/exceptions-and-errors.html`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://spec.ferrocene.dev/exceptions-and-errors.html#panic`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://spec.ferrocene.dev/exceptions-and-errors.html#abort`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://spec.ferrocene.dev/concurrency.html#atomics`
+  - `docs\research_notes\formal_methods\README.md`
+- `https://spec.ferrocene.dev/undefined-behavior.html`
+  - `docs\research_notes\formal_methods\README.md`
 - `https://github.com/AeneasVerif/aeneas/blob/main/PROGRESS.md`
   - `docs\research_notes\formal_modules\50_formal_tools_module_mapping.md`
+- `https://en.wikipedia.org/wiki/Software_Architecture`
+  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
+  - `docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md`
+  - `docs\research_notes\software_design_theory\10_00_master_index.md`
 - `https://github.com/ulid/spec`
   - `docs\research_notes\software_design_theory\60_workflow_compositional_distributed_counterexamples.md`
 - `https://rust-unofficial.github.io/patterns/patterns/creational/index.html`
@@ -5992,6 +8420,16 @@
   - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md`
 - `https://rust-unofficial.github.io/patterns/patterns/behavioural/visitor.html`
   - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md`
+- `https://en.wikipedia.org/wiki/Finite-state_machine`
+  - `docs\research_notes\software_design_theory\02_workflow\01_workflow_state_machine.md`
+- `https://en.wikipedia.org/wiki/Saga_Pattern`
+  - `docs\research_notes\software_design_theory\02_workflow\02_compensation_chain.md`
+  - `docs\research_notes\software_design_theory\02_workflow\03_long_running_transaction.md`
+  - `docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md`
+- `https://en.wikipedia.org/wiki/Long_Running_Transaction`
+  - `docs\research_notes\software_design_theory\02_workflow\02_compensation_chain.md`
+  - `docs\research_notes\software_design_theory\02_workflow\03_long_running_transaction.md`
+  - `docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md`
 - `https://docs.rs/futures/latest/futures/`
   - `docs\research_notes\software_design_theory\02_workflow\README.md`
 - `https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety`
@@ -6013,9 +8451,35 @@
   - `docs\research_notes\software_design_theory\04_compositional_engineering\03_configuration_management_pattern.md`
 - `https://docs.rs/libloading/latest/libloading/`
   - `docs\research_notes\software_design_theory\04_compositional_engineering\04_plugin_architecture_pattern.md`
+- `https://en.wikipedia.org/wiki/CQRS`
+  - `docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md`
+  - `docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md`
+- `https://en.wikipedia.org/wiki/Event_Sourcing`
+  - `docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md`
+  - `docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md`
+  - `docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md`
+- `https://en.wikipedia.org/wiki/Circuit_Breaker_Pattern`
+  - `docs\research_notes\software_design_theory\05_distributed\03_circuit_breaker.md`
+  - `docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md`
+- `https://en.wikipedia.org/wiki/Outbox_Pattern`
+  - `docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md`
+- `https://en.wikipedia.org/wiki/Timeout_(computing)`
+  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
+- `https://en.wikipedia.org/wiki/Distributed_Computing`
+  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
+- `https://en.wikipedia.org/wiki/Retry_Pattern`
+  - `docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md`
 - `https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html`
   - `docs\research_notes\software_design_theory\05_distributed\09_rate_limiting_idempotency_pattern.md`
 - `https://docs.rs/tokio/latest/tokio/time/index.html`
+  - `docs\research_notes\software_design_theory\05_distributed\09_rate_limiting_idempotency_pattern.md`
+- `https://en.wikipedia.org/wiki/Token_bucket`
+  - `docs\research_notes\software_design_theory\05_distributed\09_rate_limiting_idempotency_pattern.md`
+- `https://en.wikipedia.org/wiki/Leaky_bucket`
+  - `docs\research_notes\software_design_theory\05_distributed\09_rate_limiting_idempotency_pattern.md`
+- `https://en.wikipedia.org/wiki/Rate_limiting`
+  - `docs\research_notes\software_design_theory\05_distributed\09_rate_limiting_idempotency_pattern.md`
+- `https://www.rfc-editor.org/rfc/rfc9110.html`
   - `docs\research_notes\software_design_theory\05_distributed\09_rate_limiting_idempotency_pattern.md`
 - `https://docs.rs/serde/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
@@ -6023,6 +8487,10 @@
   - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
 - `https://docs.rs/bytemuck/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+- `https://en.wikipedia.org/wiki/Kleisli_category`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+- `https://en.wikipedia.org/wiki/Monoid`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
 - `https://github.com/tower-rs/tower`
   - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
 - `https://github.com/tower-rs/tower/tree/master/tower/examples`
@@ -6036,6 +8504,8 @@
 - `https://github.com/clap-rs/clap`
   - `docs\research_notes\software_design_theory\07_crate_architectures\04_clap_architecture.md`
 - `https://docs.rs/bevy/0.15.0/bevy/ecs/system/struct.Query.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `https://www.youtube.com/watch?v=rX0ItVEVjHc`
   - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
 - `https://github.com/bevyengine/bevy/blob/main/crates/bevy_ecs/src/archetype.rs`
   - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
@@ -6271,6 +8741,8 @@
   - `docs\research_notes\software_design_theory\07_crate_architectures\23_mongodb_architecture.md`
 - `https://docs.rs/mongodb/latest/mongodb/error/struct.Error.html`
   - `docs\research_notes\software_design_theory\07_crate_architectures\23_mongodb_architecture.md`
+- `https://www.oreilly.com/library/view/mongodb-the-definitive/9781491954461/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\23_mongodb_architecture.md`
 - `https://crates.io/crates/regex`
   - `docs\research_notes\software_design_theory\07_crate_architectures\24_regex_architecture.md`
 - `https://docs.rs/regex/latest/regex/`
@@ -6342,6 +8814,8 @@
   - `docs\research_notes\software_design_theory\07_crate_architectures\27_kube_rs_architecture.md`
   - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
   - `docs\research_notes\software_design_theory\07_crate_architectures\37_aws_sdk_architecture.md`
+- `https://www.microsoft.com/en-us/research/publication/kafka-a-distributed-messaging-system-for-log-processing/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\26_kafka_architecture.md`
 - `https://crates.io/crates/kube`
   - `docs\research_notes\software_design_theory\07_crate_architectures\27_kube_rs_architecture.md`
 - `https://docs.rs/kube/latest/kube/`
@@ -6364,11 +8838,33 @@
   - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
 - `https://github.com/amqp-rs/lapin/tree/main/examples`
   - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
+- `https://www.rabbitmq.com/tutorials/amqp-concepts`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
+- `https://www.rabbitmq.com/tutorials`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
+- `https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
+- `https://www.rabbitmq.com/docs/confirms`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
 - `https://docs.rs/lapin/latest/lapin/publisher_confirm/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
+- `https://www.rabbitmq.com/docs/consumers`
   - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
 - `https://docs.rs/lapin/latest/lapin/consumer/struct.Consumer.html`
   - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
+- `https://www.rabbitmq.com/docs/consumer-prefetch`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
+- `https://www.rabbitmq.com/docs/exchanges`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
+- `https://www.rabbitmq.com/docs/exchanges#exchange-types`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
+- `https://www.rabbitmq.com/docs/connections`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
 - `https://docs.rs/lapin/latest/lapin/struct.Connection.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
+- `https://www.rabbitmq.com/docs/production-checklist`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
+- `https://www.rabbitmq.com/docs`
   - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
 - `https://dl.acm.org/doi/10.1145/3093744.3093746`
   - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
@@ -6415,6 +8911,8 @@
 - `https://docs.rs/surrealdb/latest/surrealdb/opt/auth/index.html`
   - `docs\research_notes\software_design_theory\07_crate_architectures\31_surrealdb_architecture.md`
 - `https://docs.rs/surrealdb/latest/surrealdb/engine/local/index.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\31_surrealdb_architecture.md`
+- `https://www.oreilly.com/library/view/graph-databases/9781491935811/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\31_surrealdb_architecture.md`
 - `https://dl.acm.org/doi/10.1145/3296957.3190648`
   - `docs\research_notes\software_design_theory\07_crate_architectures\31_surrealdb_architecture.md`
@@ -6623,6 +9121,9 @@
   - `docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md`
 - `https://djc.github.io/askama/template_syntax.html#filters`
   - `docs\research_notes\software_design_theory\07_crate_architectures\41_askama_architecture.md`
+- `https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\41_askama_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md`
 - `https://crates.io/crates/maud`
   - `docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md`
 - `https://github.com/lambda-fairy/maud`
@@ -6631,46 +9132,66 @@
   - `docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md`
 - `https://docs.rs/maud/latest/maud/trait.Render.html`
   - `docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md`
+- `https://en.wikipedia.org/wiki/Type_Constructor`
+  - `docs\research_notes\type_theory\10_construction_capability.md`
+- `https://en.wikipedia.org/wiki/Variable_Scope`
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
+- `https://en.wikipedia.org/wiki/Type_Class`
+  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
 - `https://www.cl.cam.ac.uk/teaching/`
   - `docs\research_notes\type_theory\10_type_system_foundations.md`
+- `https://en.wikipedia.org/wiki/Lambda_Calculus`
+  - `docs\research_notes\type_theory\10_type_system_foundations.md`
+- `https://en.wikipedia.org/wiki/Polymorphism`
+  - `docs\research_notes\type_theory\10_type_system_foundations.md`
+- `https://en.wikipedia.org/wiki/Type_Inference`
+  - `docs\research_notes\type_theory\10_type_system_foundations.md`
+- `https://en.wikipedia.org/wiki/Dependent_Type`
+  - `docs\research_notes\type_theory\10_type_system_foundations.md`
+- `https://en.wikipedia.org/wiki/Covariance_and_Contravariance`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+- `https://en.wikipedia.org/wiki/Performance_Engineering`
+  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
+- `https://en.wikipedia.org/wiki/Software_Optimization`
+  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
+- `https://en.wikipedia.org/wiki/Formal_Grammar`
+  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
 
 ## 重定向链接
 
-- `https://www.jetbrains.com/lp/devecosystem-2025/` → `https://devecosystem-2025.jetbrains.com/`
-  - `concept\00_meta\career_landscape.md`
-- `https://www.rust-lang.org/learn` → `https://rust-lang.org/learn/`
-  - `concept\00_meta\03_bloom_taxonomy.md`
-- `https://www.roberthalf.com/salary-guide` → `https://www.roberthalf.com/us/en/insights/salary-guide?utm_medium=sales-support&utm_source=print-collateral&utm_campaign=v2_client_thought-leadership_salary-guide-2026_all`
-  - `concept\00_meta\career_landscape.md`
-- `https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/` → `https://www.vanderbilt.edu/advanced-institute/`
-  - `concept\00_meta\03_bloom_taxonomy.md`
 - `https://basic-formal-ontology.org/` → `https://bfo-ontology.github.io/`
   - `concept\00_meta\kg_tlo_alignment.md`
-- `https://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/plai-2007-04-26.pdf` → `https://cs.brown.edu/people/sk/Publications/Books/ProgLangs/2007-04-26/plai-2007-04-26.pdf`
-  - `concept\00_meta\pl_foundations_roadmap.md`
 - `https://www.rust-lang.org/tools/install` → `https://rust-lang.org/tools/install/`
   - `concept\01_foundation\00_start.md`
   - `knowledge\00_start\01_hello_world.md`
   - `knowledge\00_start\02_installation.md`
   - `knowledge\00_start\03_learning_roadmap.md`
   - `knowledge\00_start\README.md`
-- `https://www.microsoft.com/en-us/research/publication/the-implementation-of-functional-programming-languages/` → `https://www.microsoft.com/en-us/research/publication/the-implementation-of-functional-programming-languages-2/`
-  - `concept\01_foundation\07_control_flow.md`
+- `https://tools.ietf.org/html/rfc8259` → `https://datatracker.ietf.org/doc/html/rfc8259`
   - `concept\02_intermediate\09_serde_patterns.md`
-  - `concept\02_intermediate\15_iterator_patterns.md`
-- `https://standards.ieee.org/standard/754-2019.html` → `https://standards.ieee.org/ieee/754/6210/`
-  - `concept\01_foundation\05_reference_semantics.md`
+- `https://tools.ietf.org/html/rfc3629` → `https://datatracker.ietf.org/doc/html/rfc3629`
+  - `concept\01_foundation\18_strings_and_encoding.md`
 - `https://www.unicode.org/versions/latest/` → `http://www.unicode.org/versions/Unicode17.0.0/`
   - `concept\01_foundation\09_strings_and_text.md`
   - `concept\01_foundation\18_strings_and_encoding.md`
-- `https://tools.ietf.org/html/rfc3629` → `https://datatracker.ietf.org/doc/html/rfc3629`
-  - `concept\01_foundation\18_strings_and_encoding.md`
-- `https://unicode.org/versions/latest/` → `http://unicode.org/versions/Unicode17.0.0/`
-  - `concept\01_foundation\18_strings_and_encoding.md`
-- `https://tools.ietf.org/html/rfc8259` → `https://datatracker.ietf.org/doc/html/rfc8259`
-  - `concept\02_intermediate\09_serde_patterns.md`
-- `http://pages.cs.wisc.edu/~remzi/OSTEP/` → `https://pages.cs.wisc.edu/~remzi/OSTEP/`
-  - `concept\03_advanced\01_concurrency.md`
+- `https://www.jetbrains.com/lp/devecosystem-2025/` → `https://devecosystem-2025.jetbrains.com/`
+  - `concept\00_meta\career_landscape.md`
+- `https://www.roberthalf.com/salary-guide` → `https://www.roberthalf.com/us/en/insights/salary-guide?utm_medium=sales-support&utm_source=print-collateral&utm_campaign=v2_client_thought-leadership_salary-guide-2026_all`
+  - `concept\00_meta\career_landscape.md`
+- `http://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html` → `https://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html`
+  - `concept\04_formal\10_category_theory.md`
+- `https://www.rust-lang.org/learn` → `https://rust-lang.org/learn/`
+  - `concept\00_meta\03_bloom_taxonomy.md`
+  - `knowledge\00_start\04_rust_philosophy.md`
+- `https://www.ibm.com/docs/en/zos/2.5.0?topic=operations-vector-instructions` → `https://www.ibm.com/docs/en/zos/2.5.0`
+  - `concept\03_advanced\13_inline_assembly.md`
+- `https://tools.ietf.org/html/rfc768` → `https://datatracker.ietf.org/doc/html/rfc768`
+  - `concept\03_advanced\18_network_programming.md`
+- `https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/` → `https://www.vanderbilt.edu/advanced-institute/`
+  - `concept\00_meta\03_bloom_taxonomy.md`
+- `https://tools.ietf.org/html/rfc793` → `https://datatracker.ietf.org/doc/html/rfc793`
+  - `concept\03_advanced\18_network_programming.md`
 - `https://marabos.nl/atomics/` → `https://mara.nl/atomics/`
   - `concept\03_advanced\10_concurrency_patterns.md`
   - `concept\03_advanced\11_atomics_and_memory_ordering.md`
@@ -6680,14 +9201,52 @@
   - `docs\research_notes\10_knowledge_graph_index.md`
   - `docs\research_notes\10_lock_free_data_structures_guide.md`
   - `knowledge\03_advanced\04_lazy_initialization.md`
-- `https://www.ibm.com/docs/en/zos/2.5.0?topic=operations-vector-instructions` → `https://www.ibm.com/docs/en/zos/2.5.0`
-  - `concept\03_advanced\13_inline_assembly.md`
+- `http://pages.cs.wisc.edu/~remzi/OSTEP/` → `https://pages.cs.wisc.edu/~remzi/OSTEP/`
+  - `concept\03_advanced\01_concurrency.md`
+- `https://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/plai-2007-04-26.pdf` → `https://cs.brown.edu/people/sk/Publications/Books/ProgLangs/2007-04-26/plai-2007-04-26.pdf`
+  - `concept\00_meta\pl_foundations_roadmap.md`
 - `https://marabos.nl/atomics/memory-ordering.html` → `https://mara.nl/atomics/memory-ordering.html`
   - `concept\03_advanced\11_atomics_and_memory_ordering.md`
-- `https://tools.ietf.org/html/rfc768` → `https://datatracker.ietf.org/doc/html/rfc768`
-  - `concept\03_advanced\18_network_programming.md`
-- `https://tools.ietf.org/html/rfc793` → `https://datatracker.ietf.org/doc/html/rfc793`
-  - `concept\03_advanced\18_network_programming.md`
+- `https://www.rust-lang.org/` → `https://rust-lang.org/`
+  - `concept\05_comparative\07_rust_vs_python.md`
+  - `concept\05_comparative\09_rust_vs_swift.md`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
+  - `concept\05_comparative\19_rust_vs_ruby.md`
+  - `concept\06_ecosystem\02_patterns.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\75_industrial_case_studies.md`
+  - `concept\07_future\01_ai_integration.md`
+  - `concept\07_future\02_formal_methods.md`
+  - `concept\07_future\03_evolution.md`
+  - `concept\07_future\04_effects_system.md`
+  - `concept\07_future\14_lifetime_capture_preview.md`
+  - `concept\07_future\16_type_alias_impl_trait_preview.md`
+  - `concept\07_future\17_const_trait_preview.md`
+  - `concept\07_future\22_gen_blocks_preview.md`
+  - `concept\07_future\24_roadmap.md`
+  - `concept\07_future\29_ebpf_rust.md`
+  - `concept\07_future\30_stable_abi_preview.md`
+  - `concept\07_future\32_inline_const_pattern_preview.md`
+  - `concept\07_future\34_must_not_suspend_preview.md`
+  - `concept\07_future\37_rpitit_preview.md`
+  - `concept\07_future\39_arbitrary_self_types_preview.md`
+  - `concept\07_future\42_field_projections_preview.md`
+  - `concept\07_future\45_std_autodiff_preview.md`
+  - `concept\07_future\47_wasm_target_evolution.md`
+  - `concept\07_future\archive\01_ai_integration_original.md`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://pyo3.rs/` → `https://pyo3.rs/v0.29.0/`
+  - `concept\05_comparative\07_rust_vs_python.md`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://trust-in-soft.com/` → `https://www.trust-in-soft.com/`
+  - `concept\04_formal\22_modern_verification_tools.md`
+- `https://docs.oracle.com/javase/9/docs/api/java/lang/ref/Finalizer.html` → `https://docs.oracle.com/en/java/javase/26/`
+  - `concept\05_comparative\06_rust_vs_java.md`
+- `https://standards.ieee.org/standard/754-2019.html` → `https://standards.ieee.org/ieee/754/6210/`
+  - `concept\01_foundation\05_reference_semantics.md`
+- `https://mypy.readthedocs.io/` → `https://mypy.readthedocs.io/en/stable/`
+  - `concept\05_comparative\07_rust_vs_python.md`
 - `https://coq.inria.fr/` → `https://rocq-prover.org/`
   - `concept\04_formal\01_linear_logic.md`
   - `concept\04_formal\02_type_theory.md`
@@ -6721,127 +9280,54 @@
   - `docs\research_notes\10_readme_100_percent_completion.md`
   - `docs\research_notes\10_resources.md`
   - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
-- `http://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html` → `https://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html`
-  - `concept\04_formal\10_category_theory.md`
-- `https://www.microsoft.com/en-us/research/publication/verus/` → `https://www.microsoft.com/en-us/research/publication/verus-a-practical-foundation-for-systems-verification/`
-  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
-- `https://www.adacore.com/about-spark` → `https://www.adacore.com/languages/spark`
-  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
 - `https://www.rtca.org/product/do-178c/` → `https://www.rtca.org/products/do-178c-electronic/`
   - `concept\04_formal\16_aerospace_certification_formal_methods.md`
   - `concept\07_future\07_mcdc_coverage_preview.md`
-- `https://www.misra.org.uk/` → `https://misra.org.uk/`
-  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
-  - `knowledge\04_expert\safety_critical\README.md`
-- `https://trust-in-soft.com/` → `https://www.trust-in-soft.com/`
-  - `concept\04_formal\22_modern_verification_tools.md`
-- `https://docs.oracle.com/javase/9/docs/api/java/lang/ref/Finalizer.html` → `https://docs.oracle.com/en/java/javase/26/`
-  - `concept\05_comparative\06_rust_vs_java.md`
-- `https://mypy.readthedocs.io/` → `https://mypy.readthedocs.io/en/stable/`
-  - `concept\05_comparative\07_rust_vs_python.md`
-- `https://pyo3.rs/` → `https://pyo3.rs/v0.29.0/`
-  - `concept\05_comparative\07_rust_vs_python.md`
-  - `concept\06_ecosystem\03_core_crates.md`
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `https://www.rust-lang.org/` → `https://rust-lang.org/`
-  - `concept\05_comparative\07_rust_vs_python.md`
-  - `concept\05_comparative\09_rust_vs_swift.md`
-  - `concept\05_comparative\14_rust_vs_elixir.md`
-  - `concept\05_comparative\19_rust_vs_ruby.md`
-  - `concept\06_ecosystem\02_patterns.md`
-  - `concept\06_ecosystem\04_application_domains.md`
-  - `concept\06_ecosystem\75_industrial_case_studies.md`
-  - `concept\07_future\01_ai_integration.md`
-  - `concept\07_future\02_formal_methods.md`
-  - `concept\07_future\03_evolution.md`
-  - `concept\07_future\04_effects_system.md`
-  - `concept\07_future\14_lifetime_capture_preview.md`
-  - `concept\07_future\16_type_alias_impl_trait_preview.md`
-  - `concept\07_future\17_const_trait_preview.md`
-  - `concept\07_future\22_gen_blocks_preview.md`
-  - `concept\07_future\24_roadmap.md`
-  - `concept\07_future\29_ebpf_rust.md`
-  - `concept\07_future\30_stable_abi_preview.md`
-  - `concept\07_future\32_inline_const_pattern_preview.md`
-  - `concept\07_future\34_must_not_suspend_preview.md`
-  - `concept\07_future\37_rpitit_preview.md`
-  - `concept\07_future\39_arbitrary_self_types_preview.md`
-  - `concept\07_future\42_field_projections_preview.md`
-  - `concept\07_future\45_std_autodiff_preview.md`
-  - `concept\07_future\47_wasm_target_evolution.md`
-  - `concept\07_future\archive\01_ai_integration_original.md`
-  - `concept\07_future\rust_1_98_preview.md`
-- `https://ferrous-systems.com/ferrocene/` → `https://ferrocene.dev/en`
-  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
-  - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
-  - `concept\07_future\41_rust_specification_preview.md`
-  - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
-  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
-  - `knowledge\04_expert\safety_critical\01_mind_maps\02_rust_ecosystem_mind_map.md`
-  - `knowledge\04_expert\safety_critical\02_matrices\01_comprehensive_language_comparison_matrix.md`
-  - `knowledge\04_expert\safety_critical\02_matrices\02_rust_multi_dimensional_matrix.md`
-  - `knowledge\04_expert\safety_critical\02_rust_safety_critical_ecosystem_master_index.md`
-  - `knowledge\04_expert\safety_critical\03_decision_trees\01_rust_decision_trees.md`
-  - `knowledge\04_expert\safety_critical\03_decision_trees\02_safety_integrity_level_selection_guide.md`
-  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
-  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\02_rust_axiomatic_reasoning_trees.md`
-  - `knowledge\04_expert\safety_critical\05_strategic_guidance\01_adoption_strategy_and_roi_analysis.md`
-  - `knowledge\04_expert\safety_critical\06_roadmaps\01_education_and_training_roadmap.md`
-  - `knowledge\04_expert\safety_critical\06_roadmaps\02_rust_2026_2030_roadmap_forecast.md`
-  - `knowledge\04_expert\safety_critical\06_roadmaps\03_sustainable_roadmap_and_plans.md`
-  - `knowledge\04_expert\safety_critical\06_roadmaps\04_technology_watch_and_emerging_trends.md`
-  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
-  - `knowledge\04_expert\safety_critical\08_training\01_assessment_and_certification.md`
-  - `knowledge\04_expert\safety_critical\08_training\02_certification_prep_guide.md`
-  - `knowledge\04_expert\safety_critical\08_training\03_hands_on_lab_exercises.md`
-  - `knowledge\04_expert\safety_critical\08_training\05_rust_safety_critical_training_program.md`
-  - `knowledge\04_expert\safety_critical\09_reference\04_comprehensive_international_alignment_completion_report.md`
-  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
-  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
-  - `knowledge\04_expert\safety_critical\09_reference\13_rust_safety_critical_coding_guidelines.md`
-  - `knowledge\04_expert\safety_critical\09_reference\14_safety_critical_checklists.md`
-  - `knowledge\04_expert\safety_critical\10_standards\01_do_178c_rust_compliance_pathway.md`
-  - `knowledge\04_expert\safety_critical\10_standards\02_iec_61508_rust_implementation_guide.md`
-  - `knowledge\04_expert\safety_critical\README.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/` → `https://learn.microsoft.com/en-us/dotnet/csharp/`
+- `https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/` → `https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://unicode.org/versions/latest/` → `http://unicode.org/versions/Unicode17.0.0/`
+  - `concept\01_foundation\18_strings_and_encoding.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics`
   - `concept\05_comparative\13_rust_vs_csharp.md`
 - `https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics`
   - `concept\05_comparative\13_rust_vs_csharp.md`
 - `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/` → `https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/async-scenarios`
   - `concept\05_comparative\13_rust_vs_csharp.md`
 - `https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code` → `https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code`
   - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
 - `https://docs.microsoft.com/en-us/dotnet/core/tools/` → `https://learn.microsoft.com/en-us/dotnet/core/tools/`
   - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/` → `https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/`
   - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/` → `https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://doc.akka.io/docs/akka/current/typed/actors.html` → `https://doc.akka.io/libraries/akka-core/current/typed/actors.html`
-  - `concept\05_comparative\12_rust_vs_scala.md`
 - `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interop/` → `https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/interop/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/` → `https://learn.microsoft.com/en-us/dotnet/csharp/`
   - `concept\05_comparative\13_rust_vs_csharp.md`
 - `https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language#asyncmain` → `https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language`
   - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://www.erlang.org/doc/reference_manual/processes.html` → `https://www.erlang.org/doc/system/ref_man_processes.html`
-  - `concept\05_comparative\14_rust_vs_elixir.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/` → `https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
 - `https://hexdocs.pm/elixir/GenServer.html` → `https://elixir.hexdocs.pm/GenServer.html`
   - `concept\05_comparative\14_rust_vs_elixir.md`
+- `https://doc.akka.io/docs/akka/current/typed/actors.html` → `https://doc.akka.io/libraries/akka-core/current/typed/actors.html`
+  - `concept\05_comparative\12_rust_vs_scala.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/` → `https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
 - `https://hexdocs.pm/elixir/typespecs.html` → `https://elixir.hexdocs.pm/typespecs.html`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
+- `https://www.misra.org.uk/` → `https://misra.org.uk/`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `knowledge\04_expert\safety_critical\README.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/` → `https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://www.erlang.org/doc/reference_manual/processes.html` → `https://www.erlang.org/doc/system/ref_man_processes.html`
   - `concept\05_comparative\14_rust_vs_elixir.md`
 - `https://www.erlang.org/doc/tutorial/nif.html` → `https://www.erlang.org/doc/system/nif.html`
   - `concept\05_comparative\14_rust_vs_elixir.md`
+- `https://www.adacore.com/about-spark` → `https://www.adacore.com/languages/spark`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
 - `https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop` → `https://nodejs.org/learn/asynchronous-work/dont-block-the-event-loop`
   - `concept\05_comparative\15_rust_vs_typescript.md`
-- `https://www.rfc-editor.org/info/rfc9000` → `https://www.rfc-editor.org/info/rfc9000/`
-  - `concept\06_ecosystem\04_application_domains.md`
-  - `concept\06_ecosystem\38_network_protocols.md`
+- `https://www.consul.io/` → `https://developer.hashicorp.com/consul`
+  - `concept\06_ecosystem\18_distributed_systems.md`
 - `https://docs.substrate.io/build/` → `https://docs.polkadot.com/develop/`
   - `concept\06_ecosystem\06_blockchain.md`
 - `https://docs.substrate.io/` → `https://docs.polkadot.com/`
@@ -6852,11 +9338,38 @@
   - `concept\06_ecosystem\26_game_development.md`
   - `concept\06_ecosystem\49_game_engine_internals.md`
   - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
-- `https://polkadot.network/` → `https://polkadot.com/`
-  - `concept\06_ecosystem\11_webassembly.md`
 - `https://webassembly.org/docs/modules/#linear-memory` → `https://webassembly.github.io/spec/core/syntax/modules.html`
   - `concept\06_ecosystem\11_webassembly.md`
   - `concept\07_future\28_rust_for_webassembly.md`
+- `https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=rust` → `https://www.cve.org/CVERecord/SearchResults?query=rust`
+  - `concept\06_ecosystem\19_security_practices.md`
+  - `concept\07_future\43_rust_for_linux.md`
+- `https://www.rust-lang.org/policies/security` → `https://rust-lang.org/policies/security/`
+  - `concept\06_ecosystem\19_security_practices.md`
+  - `concept\07_future\05_rust_version_tracking.md`
+- `https://polkadot.network/` → `https://polkadot.com/`
+  - `concept\06_ecosystem\11_webassembly.md`
+- `https://bevyengine.org/learn/` → `https://bevy.org/learn/`
+  - `concept\06_ecosystem\21_game_development.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `https://bevyengine.org/` → `https://bevy.org/`
+  - `concept\06_ecosystem\21_game_development.md`
+  - `concept\06_ecosystem\26_game_development.md`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
+- `https://bevyengine.org/learn/book/introduction/` → `https://bevy.org/learn/book/introduction/`
+  - `concept\06_ecosystem\26_game_development.md`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
+- `https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions` → `https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
+- `https://www.rust-lang.org/policies/licenses` → `https://rust-lang.org/policies/licenses/`
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
+- `https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows` → `https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html` → `https://specifications.freedesktop.org/basedir/basedir-spec-latest.html`
+  - `concept\06_ecosystem\25_cli_development.md`
 - `https://foundation.rust-lang.org/` → `https://rustfoundation.org/`
   - `concept\05_comparative\README.md`
   - `concept\06_ecosystem\02_patterns.md`
@@ -6866,82 +9379,52 @@
   - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
   - `docs\04_research\04_rust_for_linux_2026.md`
   - `knowledge\04_expert\safety_critical\README.md`
-- `https://www.consul.io/` → `https://developer.hashicorp.com/consul`
-  - `concept\06_ecosystem\18_distributed_systems.md`
-- `https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=rust` → `https://www.cve.org/CVERecord/SearchResults?query=rust`
-  - `concept\06_ecosystem\19_security_practices.md`
-  - `concept\07_future\43_rust_for_linux.md`
-- `https://www.rust-lang.org/policies/security` → `https://rust-lang.org/policies/security/`
-  - `concept\06_ecosystem\19_security_practices.md`
-  - `concept\07_future\05_rust_version_tracking.md`
-- `https://www.rust-lang.org/policies/licenses` → `https://rust-lang.org/policies/licenses/`
-  - `concept\06_ecosystem\20_licensing_and_compliance.md`
-- `https://basarat.gitbook.io/typescript/` → `https://basarat.gitbook.io/typescript`
-  - `concept\05_comparative\15_rust_vs_typescript.md`
-- `https://bevyengine.org/` → `https://bevy.org/`
-  - `concept\06_ecosystem\21_game_development.md`
-  - `concept\06_ecosystem\26_game_development.md`
-  - `concept\06_ecosystem\49_game_engine_internals.md`
-  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
-- `https://bevyengine.org/learn/` → `https://bevy.org/learn/`
-  - `concept\06_ecosystem\21_game_development.md`
-- `https://bevyengine.org/learn/book/introduction/` → `https://bevy.org/learn/book/introduction/`
-  - `concept\06_ecosystem\26_game_development.md`
-  - `concept\06_ecosystem\49_game_engine_internals.md`
-  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
-- `https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html` → `https://specifications.freedesktop.org/basedir/basedir-spec-latest.html`
-  - `concept\06_ecosystem\25_cli_development.md`
-- `https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions` → `https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax`
-  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
-  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
-- `https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows` → `https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching`
-  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)` → `https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)`
+  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
+- `https://redis.io/docs/manual/pubsub/` → `https://redis.io/docs/latest/manual/pubsub/`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
 - `https://www.rtca.org/product/do-178c-electronic/` → `https://www.rtca.org/products/do-178c-electronic/`
   - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
   - `concept\07_future\35_ferrocene_preview.md`
-- `https://redis.io/docs/manual/pubsub/` → `https://redis.io/docs/latest/manual/pubsub/`
-  - `concept\06_ecosystem\32_event_driven_architecture.md`
-- `https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)` → `https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)`
-  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
 - `https://jeffreypalermo.com/blog/the-onion-architecture-part-1/` → `https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/`
-  - `concept\06_ecosystem\35_architecture_patterns.md`
-- `https://jeffreypalermo.com/blog/the-onion-architecture-part-3/` → `https://jeffreypalermo.com/2008/08/the-onion-architecture-part-3/`
   - `concept\06_ecosystem\35_architecture_patterns.md`
 - `https://docs.microsoft.com/en-us/azure/azure-functions/` → `https://learn.microsoft.com/en-us/azure/azure-functions/`
   - `concept\06_ecosystem\35_architecture_patterns.md`
+- `https://jeffreypalermo.com/blog/the-onion-architecture-part-3/` → `https://jeffreypalermo.com/2008/08/the-onion-architecture-part-3/`
+  - `concept\06_ecosystem\35_architecture_patterns.md`
 - `https://docs.risingwave.com/` → `https://docs.risingwave.com/get-started/intro`
   - `concept\06_ecosystem\36_stream_processing_ecosystem.md`
-- `https://tikv.org/docs/` → `https://tikv.org/docs/7.1/concepts/overview/`
-  - `concept\06_ecosystem\37_database_systems.md`
-  - `concept\06_ecosystem\50_distributed_consensus.md`
 - `https://www.meilisearch.com/docs` → `https://www.meilisearch.com/docs/getting_started/overview`
   - `concept\06_ecosystem\37_database_systems.md`
   - `docs\research_notes\software_design_theory\07_crate_architectures\30_meilisearch_architecture.md`
 - `https://docs.temporal.io/clusters` → `https://docs.temporal.io/temporal-service`
   - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://www.springer.com/gp/book/9783662498507` → `https://link.springer.com/book/10.1007/978-3-662-49851-4?error=cookies_not_supported&code=c1632451-df60-4b68-b753-0c434295ebd0`
+  - `concept\06_ecosystem\41_workflow_theory.md`
 - `https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/saga/saga` → `https://learn.microsoft.com/en-us/azure/architecture/patterns/saga`
-  - `concept\06_ecosystem\41_workflow_theory.md`
-- `https://www.wfmc.org/standards/xpdl` → `https://wfmc.org/wp-content/uploads/2022/09/xpdl.jpeg`
-  - `concept\06_ecosystem\41_workflow_theory.md`
-- `https://tools.ietf.org/html/rfc7231` → `https://datatracker.ietf.org/doc/html/rfc7231`
-  - `concept\06_ecosystem\42_api_design_patterns.md`
-- `https://www.springer.com/gp/book/9783662498507` → `https://link.springer.com/book/10.1007/978-3-662-49851-4?error=cookies_not_supported&code=40d28f82-193b-4bed-8fed-66f9b59feaee`
   - `concept\06_ecosystem\41_workflow_theory.md`
 - `https://tools.ietf.org/html/rfc7807` → `https://datatracker.ietf.org/doc/html/rfc7807`
   - `concept\06_ecosystem\42_api_design_patterns.md`
-- `https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design` → `https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design`
+- `https://tools.ietf.org/html/rfc7231` → `https://datatracker.ietf.org/doc/html/rfc7231`
   - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://tikv.org/docs/` → `https://tikv.org/docs/7.1/concepts/overview/`
+  - `concept\06_ecosystem\37_database_systems.md`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://www.wfmc.org/standards/xpdl` → `https://wfmc.org/wp-content/uploads/2022/09/xpdl.jpeg`
+  - `concept\06_ecosystem\41_workflow_theory.md`
 - `https://www.apollographql.com/docs/apollo-server/` → `https://www.apollographql.com/docs/apollo-server`
   - `concept\06_ecosystem\42_api_design_patterns.md`
-- `https://docs.microsoft.com/en-us/azure/architecture/microservices/design/gateway` → `https://learn.microsoft.com/en-us/azure/architecture/microservices/design/gateway`
-  - `concept\06_ecosystem\42_api_design_patterns.md`
-- `https://stripe.com/docs/api/versioning` → `https://docs.stripe.com/api/versioning`
-  - `concept\06_ecosystem\42_api_design_patterns.md`
-- `https://docs.konghq.com/` → `https://developer.konghq.com/`
+- `https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design` → `https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design`
   - `concept\06_ecosystem\42_api_design_patterns.md`
 - `https://tools.ietf.org/html/rfc7540` → `https://datatracker.ietf.org/doc/html/rfc7540`
   - `concept\06_ecosystem\42_api_design_patterns.md`
   - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.microsoft.com/en-us/azure/architecture/microservices/design/gateway` → `https://learn.microsoft.com/en-us/azure/architecture/microservices/design/gateway`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://docs.konghq.com/` → `https://developer.konghq.com/`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://stripe.com/docs/api/versioning` → `https://docs.stripe.com/api/versioning`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
 - `https://tools.ietf.org/html/rfc8446` → `https://datatracker.ietf.org/doc/html/rfc8446`
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://tools.ietf.org/html/rfc8439` → `https://datatracker.ietf.org/doc/html/rfc8439`
@@ -6950,143 +9433,110 @@
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://briansmith.org/rustdoc/ring/` → `https://docs.rs/ring/latest/ring/`
   - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://www.rfc-editor.org/info/rfc8032` → `https://www.rfc-editor.org/info/rfc8032/`
-  - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://tools.ietf.org/html/rfc8032` → `https://datatracker.ietf.org/doc/html/rfc8032`
-  - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://tools.ietf.org/html/rfc2104` → `https://datatracker.ietf.org/doc/html/rfc2104`
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://tools.ietf.org/html/rfc7748` → `https://datatracker.ietf.org/doc/html/rfc7748`
   - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://blake3.io/blake3.pdf` → `https://github.com/BLAKE3-team/BLAKE3/`
-  - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://tools.ietf.org/html/rfc5869` → `https://datatracker.ietf.org/doc/html/rfc5869`
+- `https://tools.ietf.org/html/rfc2104` → `https://datatracker.ietf.org/doc/html/rfc2104`
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://arrow.apache.org/datafusion/` → `https://datafusion.apache.org/`
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
   - `concept\06_ecosystem\48_data_engineering.md`
   - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://tools.ietf.org/html/rfc5869` → `https://datatracker.ietf.org/doc/html/rfc5869`
+  - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://pytorch.org/cppdocs/` → `https://docs.pytorch.org/cppdocs/`
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `https://arrow.apache.org/datafusion/user-guide/introduction.html` → `https://datafusion.apache.org/user-guide/introduction.html`
-  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-  - `concept\06_ecosystem\55_rust_for_data_science.md`
 - `https://pola.rs/benchmarks.html` → `https://pola.rs/benchmarks/`
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-  - `concept\06_ecosystem\48_data_engineering.md`
   - `concept\06_ecosystem\55_rust_for_data_science.md`
 - `https://arrow.apache.org/ballista/` → `https://datafusion.apache.org/ballista/`
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `https://www.confluent.io/learn/batch-vs-real-time-data-processing/` → `https://www.confluent.io/learn/batch-processing/`
-  - `concept\06_ecosystem\48_data_engineering.md`
 - `https://arrow.apache.org/datafusion/user-guide/sql/index.html` → `https://datafusion.apache.org/user-guide/sql/index.html`
   - `concept\06_ecosystem\48_data_engineering.md`
 - `https://arrow.apache.org/datafusion/user-guide/example-usage.html` → `https://datafusion.apache.org/user-guide/example-usage.html`
   - `concept\06_ecosystem\48_data_engineering.md`
+- `https://www.confluent.io/learn/batch-vs-real-time-data-processing/` → `https://www.confluent.io/learn/batch-processing/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://arrow.apache.org/datafusion/user-guide/introduction.html` → `https://datafusion.apache.org/user-guide/introduction.html`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
 - `https://docs.aws.amazon.com/whitepapers/latest/s3-optimizing-performance-best-practices/introduction.html` → `https://docs.aws.amazon.com/AmazonS3/latest/userguide/`
   - `concept\06_ecosystem\48_data_engineering.md`
 - `https://docs.delta.io/latest/index.html` → `https://docs.delta.io/index.html`
   - `concept\06_ecosystem\48_data_engineering.md`
 - `https://docs.delta.io/latest/delta-batch.html#schema-enforcement` → `https://docs.delta.io/delta-batch/`
   - `concept\06_ecosystem\48_data_engineering.md`
-- `https://docs.godotengine.org/` → `https://docs.godotengine.org/en/stable/`
-  - `concept\06_ecosystem\49_game_engine_internals.md`
 - `https://rapier.rs/docs/user_guides/rust/getting_started` → `https://rapier.rs:443/docs/user_guides/rust/getting_started/`
   - `concept\06_ecosystem\49_game_engine_internals.md`
 - `https://rapier.rs/docs/user_guides/rust/advanced_collision_detection#continuous-collision-detection` → `https://rapier.rs:443/docs/user_guides/rust/advanced_collision_detection/`
   - `concept\06_ecosystem\49_game_engine_internals.md`
 - `https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking` → `https://developer.valvesoftware.com/.within.website/?redir=https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking`
   - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://docs.godotengine.org/` → `https://docs.godotengine.org/en/stable/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://developers.eventstore.com/server/v24.10/` → `https://docs.kurrent.io/server/v24.10/`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
 - `https://rapier.rs/docs/user_guides/rust/common_mistakes#using-a-variable-timestep` → `https://rapier.rs:443/docs/user_guides/rust/common_mistakes/`
   - `concept\06_ecosystem\49_game_engine_internals.md`
 - `https://rapier.rs/docs/user_guides/rust/getting_started#benchmarks` → `https://rapier.rs:443/docs/user_guides/rust/getting_started/`
   - `concept\06_ecosystem\49_game_engine_internals.md`
-- `https://www.nature.com/articles/s41586-019-1666-5` → `https://www.nature.com/articles/s41586-019-1666-5?error=cookies_not_supported&code=4e8d36d5-0b18-4581-9953-32773de45b5a`
+- `https://www.nature.com/articles/s41586-019-1666-5` → `https://www.nature.com/articles/s41586-019-1666-5?error=cookies_not_supported&code=565d2f34-67cd-4719-8ee1-9a67b7107e6a`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `https://www.nature.com/articles/299802a0` → `https://www.nature.com/articles/299802a0?error=cookies_not_supported&code=11851f87-c096-4cb7-964a-7c94e1ace934`
+- `https://www.nature.com/articles/299802a0` → `https://www.nature.com/articles/299802a0?error=cookies_not_supported&code=05d7134d-2fa6-4f79-a97a-bd1265c0ac7b`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `https://www.pearson.com/en-us/subject-catalog/p/real-time-systems/P200000005792` → `https://www.pearson.com/en-us/search/All-results?aq=real%20time%20systems`
-  - `concept\06_ecosystem\52_robotics.md`
+- `https://www.st.com/resource/en/reference_manual/rm0090-stm32f405415-stm32f407417-stm32f427437-and-stm32f429439-advanced-armbased-32bit-mcus-stmicroelectronics.pdf` → `https://www.st.com/content/ccc/resource/technical/document/reference_manual/3d/6d/5a/66/b4/99/40/d4/DM00031020.pdf/files/DM00031020.pdf/jcr:content/translations/en.DM00031020.pdf`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://fast-dds.docs.eprosima.com/` → `https://fast-dds.docs.eprosima.com/en/latest/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://www.pearson.com/en-us/subject-catalog/p/real-time-systems/P200000005792` → `https://www.pearson.com/en-us/search/All-results?aq=real%20time%20systems`
   - `concept\06_ecosystem\52_robotics.md`
 - `https://www.pearson.com/en-us/subject-catalog/p/modern-control-engineering/P200000005828` → `https://www.pearson.com/en-us/search/All-results?aq=modern%20control%20engineering`
   - `concept\06_ecosystem\52_robotics.md`
-- `https://www.st.com/resource/en/reference_manual/rm0090-stm32f405415-stm32f407417-stm32f427437-and-stm32f429439-advanced-armbased-32bit-mcus-stmicroelectronics.pdf` → `https://www.st.com/content/ccc/resource/technical/document/reference_manual/3d/6d/5a/66/b4/99/40/d4/DM00031020.pdf/files/DM00031020.pdf/jcr:content/translations/en.DM00031020.pdf`
-  - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://www.eprosima.com/index.php/products-all/eprosima-fast-dds` → `https://www.eprosima.com/middleware/fast-dds`
   - `concept\06_ecosystem\52_robotics.md`
-- `https://docs.lvgl.io/8.3/porting/index.html` → `https://lvgl.io/docs/open/8.3/porting/`
-  - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://docs.lvgl.io/8.3/index.html` → `https://lvgl.io/docs/open/8.3/`
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://docs.slint.dev/latest/docs/rust/slint/platform/trait.Platform.html` → `https://docs.slint.dev/latest/docs/rust/slint/platform/trait.Platform`
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://docs.lvgl.io/master/intro/index.html` → `https://lvgl.io/docs/open/introduction`
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `https://www.st.com/resource/en/application_note/an4031-using-the-stm32f2-stm32f4-and-stm32f7-series-dma-controllers-stmicroelectronics.pdf` → `https://www.st.com/content/ccc/resource/technical/document/application_note/27/46/7c/ea/2d/91/40/a9/DM00046011.pdf/files/DM00046011.pdf/jcr:content/translations/en.DM00046011.pdf`
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `https://slint-ui.com/docs/slint/` → `https://docs.slint.dev/latest/docs/slint/`
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `https://docs.lvgl.io/8.3/overview/indev.html#gestures` → `https://lvgl.io/docs/open/8.3/overview/indev`
+- `https://www.st.com/` → `https://www.st.com/content/st_com/en.html`
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://docs.lvgl.io/8.3/overview/indev.html` → `https://lvgl.io/docs/open/8.3/overview/indev`
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `https://www.st.com/` → `https://www.st.com/content/st_com/en.html`
+- `https://www.st.com/resource/en/application_note/an4031-using-the-stm32f2-stm32f4-and-stm32f7-series-dma-controllers-stmicroelectronics.pdf` → `https://www.st.com/content/ccc/resource/technical/document/application_note/27/46/7c/ea/2d/91/40/a9/DM00046011.pdf/files/DM00046011.pdf/jcr:content/translations/en.DM00046011.pdf`
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `https://docs.lvgl.io/8.3/porting/display.html` → `https://lvgl.io/docs/open/8.3/porting/display`
+- `https://docs.lvgl.io/8.3/overview/indev.html#gestures` → `https://lvgl.io/docs/open/8.3/overview/indev`
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://slint-ui.com/` → `https://slint.dev/`
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `https://www.cypress.com/file/46266/download` → `https://sso.infineon.com/as/authorization.oauth2?scope=email+openid+profile+address+ifxScope&response_type=code&redirect_uri=https%3A%2F%2Fwww.infineon.com%2Fauth%2Fcallback&state=FpgGuEyP9xi4ziQnz131kIuia1q4FprvEK4xm_FwO6A%3AoriginURL%3D%2Fcontent%2Fdam%2Finfineon%2Frow%2Fpublic%2Fdocuments%2F10%2F42%2Finfineon-an89659-interfacing-spi-f-ram-with-psoc-4-applicationnotes-ja.pdf%26action%3Dlg_gd%26ui_locales%3Dnull&code_challenge_method=S256&nonce=IvPw0_u1ErXpbBUAys-zvxv-PcwCJPmNrvTwf8CIsUw&client_id=ifxWebUser&code_challenge=ijCuszMqY6KmQuo_3ot5BaXD0DtxHgGKXiUYUevbr0g&ui_locales=EN`
+- `https://www.cypress.com/file/46266/download` → `https://sso.infineon.com/as/authorization.oauth2?scope=email+openid+profile+address+ifxScope&response_type=code&redirect_uri=https%3A%2F%2Fwww.infineon.com%2Fauth%2Fcallback&state=2vb1JSRKswD4UtrF1cqiYQrHEeDKRjjIv-XW01iDV-w%3AoriginURL%3D%2Fcontent%2Fdam%2Finfineon%2Frow%2Fpublic%2Fdocuments%2F10%2F42%2Finfineon-an89659-interfacing-spi-f-ram-with-psoc-4-applicationnotes-ja.pdf%26action%3Dlg_gd%26ui_locales%3Dnull&code_challenge_method=S256&nonce=E-T9PaYeS64-zAfDkyHiHKMtzlykdhCLbRFy1-s0_Hk&client_id=ifxWebUser&code_challenge=Ix8moI6H8X0VewDlxYFpDWHNyKaa9DCoVX1Gec5cUZQ&ui_locales=EN`
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `https://docs.docker.com/desktop/wasm/` → `https://docs.docker.com/desktop/features/wasm/`
-  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://slint-ui.com/docs/slint/` → `https://docs.slint.dev/latest/docs/slint/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://creusot.rs/guide/pearlite.html` → `https://guide.creusot.rs/pearlite.html`
   - `concept\06_ecosystem\74_formal_verification_tools.md`
+- `https://docs.github.com/en/billing/managing-billing-for-github-actions` → `https://docs.github.com/en/billing/concepts/product-billing/github-actions`
+  - `concept\07_future\02_formal_methods.md`
+- `https://www.rust-lang.org/governance/wgs` → `https://rust-lang.org/governance/wgs/`
+  - `concept\07_future\08_safety_tags_preview.md`
+- `https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-31431` → `https://www.cve.org/CVERecord?id=CVE-2026-31431`
+  - `concept\07_future\05_rust_version_tracking.md`
 - `https://gitlab.mpi-sws.org/lgaeher/refinedrust` → `https://gitlab.mpi-sws.org/users/sign_in`
   - `concept\06_ecosystem\74_formal_verification_tools.md`
   - `docs\04_research\04_rust_formal_verification.md`
-- `https://docs.github.com/en/billing/managing-billing-for-github-actions` → `https://docs.github.com/en/billing/concepts/product-billing/github-actions`
-  - `concept\07_future\02_formal_methods.md`
 - `https://www.faa.gov/aircraft/air_cert/design_approvals/air_software/` → `https://www.faa.gov/aircraft/air_cert/design_approvals/air_software`
   - `concept\07_future\07_mcdc_coverage_preview.md`
-- `https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-31431` → `https://www.cve.org/CVERecord?id=CVE-2026-31431`
-  - `concept\07_future\05_rust_version_tracking.md`
-- `https://www.rust-lang.org/governance/wgs` → `https://rust-lang.org/governance/wgs/`
-  - `concept\07_future\08_safety_tags_preview.md`
 - `https://ocaml.org/manual/polyvariant.html` → `https://ocaml.org/manual/5.5/polyvariant.html`
   - `concept\07_future\25_open_enums_preview.md`
-- `https://ebpf.io/projects/#aya` → `https://ebpf.io/applications/`
-  - `concept\07_future\29_ebpf_rust.md`
-- `https://spec.ferrocene.dev/` → `https://rust-lang.github.io/fls/`
-  - `concept\07_future\35_ferrocene_preview.md`
-  - `concept\07_future\41_rust_specification_preview.md`
-  - `docs\04_research\04_safety_critical_alignment_2026.md`
-  - `docs\06_toolchain\03_rustdoc_advanced.md`
-  - `docs\10_terminology_standard.md`
-  - `docs\research_notes\10_00_comprehensive_summary.md`
-  - `docs\research_notes\10_00_organization_and_navigation.md`
-  - `docs\research_notes\10_academic_papers_alignment.md`
-  - `docs\research_notes\10_application_trees.md`
-  - `docs\research_notes\10_authoritative_alignment_guide.md`
-  - `docs\research_notes\10_authoritative_source_alignment_network.md`
-  - `docs\research_notes\10_authoritative_source_gap_and_backref_index.md`
-  - `docs\research_notes\10_authoritative_source_version_tracking.md`
-  - `docs\research_notes\10_cross_reference_index.md`
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-  - `docs\research_notes\10_formal_methods_master_index.md`
-  - `docs\research_notes\10_formal_proof_system_guide.md`
-  - `docs\research_notes\10_proof_index.md`
-  - `docs\research_notes\10_system_summary.md`
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-  - `docs\research_notes\formal_modules\20_linkage_and_symbols.md`
-  - `docs\research_notes\formal_modules\README.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\10_expressive_inexpressive_matrix.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\README.md`
 - `https://git.kernel.org/linus/8aebac82933f` → `https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=8aebac82933f`
   - `concept\07_future\43_rust_for_linux.md`
+- `https://ebpf.io/projects/#aya` → `https://ebpf.io/applications/`
+  - `concept\07_future\29_ebpf_rust.md`
+- `https://www.rtca.org/product/do-178c` → `https://www.rtca.org/products/do-178c-electronic/`
+  - `concept\07_future\35_ferrocene_preview.md`
 - `https://doc.rust-lang.org/` → `https://doc.rust-lang.org/stable/`
   - `concept\07_future\43_rust_for_linux.md`
   - `docs\00_meta\00_annual_review_template.md`
@@ -7455,44 +9905,57 @@
   - `knowledge\99_archive\02_version_tracking.md`
   - `knowledge\99_archive\03_case_studies.md`
   - `knowledge\99_archive\04_exercises.md`
-- `https://www.rtca.org/product/do-178c` → `https://www.rtca.org/products/do-178c-electronic/`
-  - `concept\07_future\35_ferrocene_preview.md`
 - `https://codeium.com` → `https://devin.ai/desktop`
   - `concept\07_future\archive\01_ai_integration_original.md`
 - `https://www.rust-lang.org` → `https://rust-lang.org/`
   - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
-- `https://marabos.nl/` → `https://mara.nl/`
-  - `knowledge\04_expert\02_unsafe_audit.md`
-- `https://coq.inria.fr/documentation` → `https://rocq-prover.org/docs`
-  - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
 - `https://rust-lang.org/governance` → `https://rust-lang.org/governance/`
   - `knowledge\04_expert\safety_critical\05_strategic_guidance\02_comprehensive_recommendations_and_opinions.md`
   - `knowledge\04_expert\safety_critical\09_reference\12_quick_reference_card.md`
-- `https://adacore.com` → `https://www.adacore.com/`
-  - `knowledge\04_expert\safety_critical\05_strategic_guidance\02_comprehensive_recommendations_and_opinions.md`
 - `https://www.easa.europa.eu/` → `https://www.easa.europa.eu/en`
   - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
-- `https://www.sae.org/standards/content/j3016_202104/` → `https://www.sae.org/standards/j3016_202104-taxonomy-definitions-terms-related-driving-automation-systems-road-motor-vehicles/`
-  - `knowledge\04_expert\safety_critical\07_case_studies\06_case_study_06_autonomous_driving.md`
-- `https://www.cenelec.eu/` → `https://www.cencenelec.eu/`
-  - `knowledge\04_expert\safety_critical\07_case_studies\05_case_study_05_railway_signaling.md`
+- `https://marabos.nl/` → `https://mara.nl/`
+  - `knowledge\04_expert\02_unsafe_audit.md`
+- `https://foundation.rust-lang.org/news/` → `https://rustfoundation.org/media/`
+  - `concept\07_future\24_roadmap.md`
+  - `concept\07_future\43_rust_for_linux.md`
+  - `docs\00_meta\00_quarterly_sync_checklist.md`
+  - `knowledge\00_start\04_rust_philosophy.md`
 - `https://kubernetes.io/docs/` → `https://kubernetes.io/docs/home/`
   - `docs\research_notes\10_database_storage_cloud_alignment.md`
   - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
+- `https://docs.docker.com/get-docker/` → `https://docs.docker.com/get-started/get-docker/`
+  - `docs\06_docker_guide.md`
+- `https://www.cenelec.eu/` → `https://www.cencenelec.eu/`
+  - `knowledge\04_expert\safety_critical\07_case_studies\05_case_study_05_railway_signaling.md`
 - `https://www.shuttle.rs/` → `https://www.shuttle.dev/`
   - `knowledge\06_ecosystem\deployment\README.md`
+- `https://cve.mitre.org/` → `https://www.cve.org/`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+- `https://adacore.com` → `https://www.adacore.com/`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\02_comprehensive_recommendations_and_opinions.md`
+- `https://coq.inria.fr/documentation` → `https://rocq-prover.org/docs`
+  - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
+- `https://www.infoworld.com/article/4141483/` → `https://www.infoworld.com/article/4141483`
+  - `docs\10_authoritative_sources_and_citations.md`
+- `https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-68260` → `https://www.cve.org/CVERecord?id=CVE-2025-68260`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
 - `https://nixos.org/download.html` → `https://nixos.org/download/`
   - `docs\01_nix_setup.md`
 - `https://cfs.gsfc.nasa.gov/` → `https://etd.gsfc.nasa.gov/capabilities/core-flight-system/`
   - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
-- `https://cve.mitre.org/` → `https://www.cve.org/`
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
 - `https://devclass.com/development/2025/12/15/rust-boosted-by-permanent-adoption-for-linux-kernel-code/` → `https://www.devclass.com/development/2025/12/15/rust-boosted-by-permanent-adoption-for-linux-kernel-code/`
   - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-- `https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-68260` → `https://www.cve.org/CVERecord?id=CVE-2025-68260`
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-- `https://www.infoworld.com/article/4141483/` → `https://www.infoworld.com/article/4141483`
-  - `docs\10_authoritative_sources_and_citations.md`
+- `https://www.linuxfoundation.org/certification` → `https://training.linuxfoundation.org/certification-catalog/`
+  - `docs\01_learning\01_lfrs_certification_mapping.md`
+- `https://webassembly.org/docs/semantics/` → `https://webassembly.github.io/spec/core/exec/index.html`
+  - `docs\02_reference\alignment_guide.md`
+- `https://docs.microsoft.com/en-us/azure/devops/pipelines/test/codecoverage-for-pullrequests` → `https://learn.microsoft.com/en-us/azure/devops/pipelines/test/review-code-coverage-results?view=azure-devops`
+  - `docs\03_guides\03_test_coverage.md`
+- `https://docs.codecov.com/docs` → `https://docs.codecov.com/docs/quick-start`
+  - `docs\03_guides\03_test_coverage.md`
+- `https://ieeexplore.ieee.org/` → `https://ieeexplore.ieee.org/Xplore/home.jsp`
+  - `docs\research_notes\10_academic_papers_alignment.md`
 - `https://coq.inria.fr/doc/` → `https://rocq-prover.org/docs`
   - `docs\00_meta\00_formal_content_master_index.md`
   - `docs\04_research\04_rust_formal_verification.md`
@@ -7534,22 +9997,9 @@
   - `docs\rust-formal-engineering-system\09_research_agenda\04_research_methods\README.md`
   - `docs\rust-formal-engineering-system\10_quality_assurance\README.md`
   - `docs\rust-formal-engineering-system\README.md`
-- `https://foundation.rust-lang.org/news/` → `https://rustfoundation.org/media/`
-  - `concept\07_future\24_roadmap.md`
-  - `concept\07_future\43_rust_for_linux.md`
-  - `docs\00_meta\00_quarterly_sync_checklist.md`
-  - `knowledge\00_start\04_rust_philosophy.md`
-- `https://webassembly.org/docs/semantics/` → `https://webassembly.github.io/spec/core/exec/index.html`
-  - `docs\02_reference\alignment_guide.md`
-- `https://blog.rust-lang.org/2026/01/22/Rust-1.93.0` → `https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/`
-  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
 - `https://defmt.ferrous-systems.com/filtering.html` → `https://defmt.ferrous-systems.com/filtering`
   - `docs\03_guides\03_embassy_deep_dive.md`
-- `https://docs.microsoft.com/en-us/azure/devops/pipelines/test/codecoverage-for-pullrequests` → `https://learn.microsoft.com/en-us/azure/devops/pipelines/test/review-code-coverage-results?view=azure-devops`
-  - `docs\03_guides\03_test_coverage.md`
-- `https://ieeexplore.ieee.org/` → `https://ieeexplore.ieee.org/Xplore/home.jsp`
-  - `docs\research_notes\10_academic_papers_alignment.md`
-- `https://link.springer.com/article/10.1007/s10703-024-00460-3` → `https://link.springer.com/article/10.1007/s10703-024-00460-3?error=cookies_not_supported&code=c32e8595-553d-4fda-8c01-875924c69952`
+- `https://link.springer.com/article/10.1007/s10703-024-00460-3` → `https://link.springer.com/article/10.1007/s10703-024-00460-3?error=cookies_not_supported&code=d5cc05b8-c8ee-47c7-a23e-63e6c704318b`
   - `docs\research_notes\00_archive_link_audit_report.md`
   - `docs\research_notes\10_academic_papers_alignment.md`
   - `docs\research_notes\10_async_book_alignment.md`
@@ -7605,1808 +10055,215 @@
   - `docs\research_notes\type_theory\10_type_system_foundations.md`
   - `docs\research_notes\type_theory\60_type_system_counterexamples.md`
   - `docs\research_notes\type_theory\README.md`
-- `https://link.springer.com/chapter/10.1007/978-3-031-17244-1_6` → `https://link.springer.com/chapter/10.1007/978-3-031-17244-1_6?error=cookies_not_supported&code=d5b556cf-9c9a-4a71-bc9c-355dff150486`
+- `https://link.springer.com/chapter/10.1007/978-3-031-17244-1_6` → `https://link.springer.com/chapter/10.1007/978-3-031-17244-1_6?error=cookies_not_supported&code=08711ad7-cc1a-4250-818c-bb12aa3922d7`
   - `docs\research_notes\10_academic_papers_alignment.md`
-- `https://link.springer.com/chapter/10.1007/978-3-031-06773-0_5` → `https://link.springer.com/chapter/10.1007/978-3-031-06773-0_5?error=cookies_not_supported&code=a9421cd9-1788-404c-8418-77b9d81d156a`
-  - `docs\research_notes\10_academic_papers_alignment.md`
-- `https://link.springer.com/` → `https://link.springer.com/?error=cookies_not_supported&code=f580111b-5e02-4baa-acc1-0b2638eb1fd4`
+- `https://link.springer.com/` → `https://link.springer.com/?error=cookies_not_supported&code=5bb275fa-2976-4b02-95fa-bf064441e003`
   - `docs\research_notes\10_academic_papers_alignment.md`
   - `docs\research_notes\software_design_theory\03_execution_models\05_distributed.md`
   - `docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md`
-- `https://www.pearson.com/en-us/subject-catalog/p/software-architecture-in-practice/P200000005792` → `https://www.pearson.com/en-us/search/All-results?aq=software%20architecture%20in%20practice`
-  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
-- `https://verus-lang.zulipchat.com/` → `https://verus-lang.zulipchat.com/login/`
-  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
-- `https://prusti.zulipchat.com/` → `https://prusti.zulipchat.com/login/`
-  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
-- `https://www.cs.indiana.edu/~sabahi/MIR.pdf` → `https://luddy.iu.edu/academics/units/computer-science.html`
-  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
+- `https://link.springer.com/chapter/10.1007/978-3-031-06773-0_5` → `https://link.springer.com/chapter/10.1007/978-3-031-06773-0_5?error=cookies_not_supported&code=92e63225-a63b-412d-bb25-1f7812a64f63`
+  - `docs\research_notes\10_academic_papers_alignment.md`
 - `https://www.rust-lang.org/tools` → `https://rust-lang.org/tools/`
   - `docs\research_notes\10_authoritative_source_alignment_network.md`
+- `https://www.pearson.com/en-us/subject-catalog/p/software-architecture-in-practice/P200000005792` → `https://www.pearson.com/en-us/search/All-results?aq=software%20architecture%20in%20practice`
+  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
 - `https://docs.github.com/en/actions/using-workflows/reusing-workflows` → `https://docs.github.com/en/actions/how-tos/reuse-automations/reuse-workflows`
   - `docs\research_notes\10_cicd_supply_chain_alignment.md`
 - `https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule` → `https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows`
   - `docs\research_notes\10_cicd_supply_chain_alignment.md`
+- `https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions` → `https://docs.github.com/en/actions/reference/security/secure-use`
+  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
+- `https://www.cs.indiana.edu/~sabahi/MIR.pdf` → `https://luddy.iu.edu/academics/units/computer-science.html`
+  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
+- `https://verus-lang.zulipchat.com/` → `https://verus-lang.zulipchat.com/login/`
+  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
 - `http://pages.cs.wisc.edu/~remzi/OSTEP/vm-beyondphys-policy.pdf` → `https://pages.cs.wisc.edu/~remzi/OSTEP/vm-beyondphys-policy.pdf`
   - `docs\research_notes\10_cache_eviction_policies_guide.md`
-- `https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions` → `https://docs.github.com/en/actions/reference/security/secure-use`
+- `https://prusti.zulipchat.com/` → `https://prusti.zulipchat.com/login/`
+  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
+- `https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds` → `https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations`
   - `docs\research_notes\10_cicd_supply_chain_alignment.md`
 - `https://docs.codecov.com/` → `https://docs.codecov.com/docs/quick-start`
   - `docs\research_notes\10_cicd_supply_chain_alignment.md`
-- `https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds` → `https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations`
-  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
-- `https://spec.ferrocene.dev/lexical-elements.html` → `https://rust-lang.github.io/fls/lexical-elements.html`
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-- `https://spec.ferrocene.dev/generics.html` → `https://rust-lang.github.io/fls/generics.html`
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-- `https://spec.ferrocene.dev/concurrency.html` → `https://rust-lang.github.io/fls/concurrency.html`
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-  - `docs\research_notes\formal_methods\10_async_state_machine.md`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/ffi.html` → `https://rust-lang.github.io/fls/ffi.html`
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/items.html` → `https://rust-lang.github.io/fls/items.html`
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-- `https://spec.ferrocene.dev/glossary.html` → `https://rust-lang.github.io/fls/glossary.html`
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
 - `https://rust-lang.de/` → `https://rust-lang.org/`
   - `docs\research_notes\10_i18n_source_alignment.md`
 - `https://exercism.org/tracks/rust/concepts` → `https://exercism.org/tracks/rust`
   - `docs\research_notes\10_learning_and_interview_alignment.md`
 - `https://perf.wiki.kernel.org/` → `https://perfwiki.github.io/`
   - `docs\research_notes\10_resources.md`
-- `https://spec.ferrocene.dev/concurrency.html#asynchronous-computation` → `https://rust-lang.github.io/fls/concurrency.html`
-  - `docs\research_notes\formal_methods\10_async_state_machine.md`
-  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
-  - `docs\research_notes\formal_methods\README.md`
 - `https://perf.wiki.kernel.org/index.php/Tutorial` → `https://perfwiki.github.io/`
   - `docs\research_notes\10_tools_guide.md`
-- `https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing` → `https://rust-lang.github.io/fls/ownership-and-deconstruction.html`
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/unsafety.html` → `https://rust-lang.github.io/fls/unsafety.html`
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-  - `docs\research_notes\formal_methods\README.md`
 - `https://blog.burntsushi.net/rust-error-handling/` → `https://burntsushi.net/rust-error-handling/`
   - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
-- `https://spec.ferrocene.dev/ownership-and-deconstruction.html` → `https://rust-lang.github.io/fls/ownership-and-deconstruction.html`
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/concurrency.html#send-and-sync` → `https://rust-lang.github.io/fls/concurrency.html`
-  - `docs\research_notes\formal_methods\10_send_sync_formalization.md`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/patterns.html#refutability` → `https://rust-lang.github.io/fls/patterns.html`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/patterns.html` → `https://rust-lang.github.io/fls/patterns.html`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/ownership-and-deconstruction.html#ownership` → `https://rust-lang.github.io/fls/ownership-and-deconstruction.html`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/ownership-and-deconstruction.html#destruction` → `https://rust-lang.github.io/fls/ownership-and-deconstruction.html`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/exceptions-and-errors.html` → `https://rust-lang.github.io/fls/exceptions-and-errors.html`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/patterns.html#pattern-matching` → `https://rust-lang.github.io/fls/patterns.html`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/exceptions-and-errors.html#abort` → `https://rust-lang.github.io/fls/exceptions-and-errors.html`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/exceptions-and-errors.html#panic` → `https://rust-lang.github.io/fls/exceptions-and-errors.html`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/undefined-behavior.html` → `https://rust-lang.github.io/fls/undefined-behavior.html`
-  - `docs\research_notes\formal_methods\README.md`
-- `https://spec.ferrocene.dev/concurrency.html#atomics` → `https://rust-lang.github.io/fls/concurrency.html`
-  - `docs\research_notes\formal_methods\README.md`
 - `https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs` → `https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs`
   - `docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md`
-- `https://docs.gitlab.com/ee/ci/yaml/` → `https://docs.gitlab.com/ci/yaml/`
-  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
 - `https://stripe.com/docs/api/idempotent_requests` → `https://docs.stripe.com/api/idempotent_requests`
   - `docs\research_notes\software_design_theory\05_distributed\09_rate_limiting_idempotency_pattern.md`
 - `https://redis.io/docs/manual/patterns/distributed-locks/` → `https://redis.io/docs/latest/manual/patterns/distributed-locks/`
   - `docs\research_notes\software_design_theory\05_distributed\09_rate_limiting_idempotency_pattern.md`
+- `https://bevyengine.org/learn/quick-start/getting-started/ecs/` → `https://bevy.org/learn/quick-start/getting-started/ecs/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
 - `https://redis.io/documentation` → `https://redis.io/docs/latest/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\00_crate_architecture_master_index.md`
   - `docs\research_notes\software_design_theory\07_crate_architectures\22_redis_architecture.md`
-- `https://bevyengine.org/learn/quick-start/getting-started/ecs/` → `https://bevy.org/learn/quick-start/getting-started/ecs/`
+- `https://bevyengine.org/news/bevy-0-6/` → `https://bevy.org/news/bevy-0-6/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
 - `https://bevyengine.org/learn/quick-start/getting-started/resources/` → `https://bevy.org/learn/quick-start/getting-started/resources/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
 - `https://tools.ietf.org/html/rfc7230` → `https://datatracker.ietf.org/doc/html/rfc7230`
   - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
-- `https://bevyengine.org/news/bevy-0-6/` → `https://bevy.org/news/bevy-0-6/`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
 - `https://tools.ietf.org/html/rfc7540#section-5.2` → `https://datatracker.ietf.org/doc/html/rfc7540`
   - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
-- `https://www.mongodb.com/developer/` → `https://www.mongodb.com/docs/`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\23_mongodb_architecture.md`
-- `http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html` → `https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\22_redis_architecture.md`
 - `https://kafka.apache.org/intro` → `https://kafka.apache.org/intro/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\26_kafka_architecture.md`
-- `https://redis.io/commands` → `https://redis.io/docs/latest/commands/`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\22_redis_architecture.md`
 - `https://redis.io/docs/data-types/streams/` → `https://redis.io/docs/latest/data-types/streams/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\22_redis_architecture.md`
-- `https://www.meilisearch.com/docs/learn/fine_tuning_results/filtering` → `https://www.meilisearch.com/docs/capabilities/filtering_sorting_faceting/overview`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\30_meilisearch_architecture.md`
-- `https://www.meilisearch.com/docs/reference/api/settings` → `https://www.meilisearch.com/docs/reference/api/settings/list-all-settings`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\30_meilisearch_architecture.md`
+- `https://www.mongodb.com/developer/` → `https://www.mongodb.com/docs/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\23_mongodb_architecture.md`
+- `https://redis.io/commands` → `https://redis.io/docs/latest/commands/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\22_redis_architecture.md`
 - `https://www.meilisearch.com/docs/learn/getting_started/customizing_relevancy` → `https://www.meilisearch.com/docs/capabilities/full_text_search/relevancy/relevancy`
   - `docs\research_notes\software_design_theory\07_crate_architectures\30_meilisearch_architecture.md`
-- `https://docs.surrealdb.com/docs/surrealql` → `https://surrealdb.com/platform/surrealdb`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\31_surrealdb_architecture.md`
+- `https://www.meilisearch.com/docs/learn/fine_tuning_results/filtering` → `https://www.meilisearch.com/docs/capabilities/filtering_sorting_faceting/overview`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\30_meilisearch_architecture.md`
 - `https://docs.surrealdb.com/` → `https://surrealdb.com/docs`
   - `docs\research_notes\software_design_theory\07_crate_architectures\31_surrealdb_architecture.md`
-- `https://sentry.io/` → `https://sentry.io/welcome/`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\33_sentry_architecture.md`
-- `https://docs.surrealdb.com/docs/deployment/best-practices` → `https://surrealdb.com/platform/surrealdb`
+- `https://docs.surrealdb.com/docs/surrealql` → `https://surrealdb.com/platform/surrealdb`
   - `docs\research_notes\software_design_theory\07_crate_architectures\31_surrealdb_architecture.md`
-- `https://docs.sentry.io/product/data-management-settings/` → `https://docs.sentry.io/concepts/data-management/`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\33_sentry_architecture.md`
 - `https://docs.sentry.io/platforms/rust/performance/` → `https://docs.sentry.io/platforms/rust/tracing/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\33_sentry_architecture.md`
-- `https://prometheus.io/docs/practices/` → `https://prometheus.io/docs/practices/naming/`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\34_metrics_architecture.md`
-- `https://blog.meilisearch.com/` → `https://www.meilisearch.com/blog`
+- `https://sentry.io/` → `https://sentry.io/welcome/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\33_sentry_architecture.md`
+- `https://www.meilisearch.com/docs/reference/api/settings` → `https://www.meilisearch.com/docs/reference/api/settings/list-all-settings`
   - `docs\research_notes\software_design_theory\07_crate_architectures\30_meilisearch_architecture.md`
-- `https://prometheus.io/docs/` → `https://prometheus.io/docs/introduction/overview/`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\34_metrics_architecture.md`
 - `https://docs.aws.amazon.com/sdk-for-rust/latest/dg/paginators.html` → `https://docs.aws.amazon.com/sdk-for-rust/latest/dg/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\37_aws_sdk_architecture.md`
+- `https://docs.sentry.io/product/data-management-settings/` → `https://docs.sentry.io/concepts/data-management/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\33_sentry_architecture.md`
+- `https://learn.microsoft.com/rest/api/azure/` → `https://learn.microsoft.com/en-us/rest/api/azure/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\38_azure_sdk_architecture.md`
+- `https://prometheus.io/docs/practices/` → `https://prometheus.io/docs/practices/naming/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\34_metrics_architecture.md`
 - `https://learn.microsoft.com/azure/developer/rust/` → `https://learn.microsoft.com/en-us/azure/developer/rust/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\38_azure_sdk_architecture.md`
 - `https://learn.microsoft.com/azure/` → `https://learn.microsoft.com/en-us/azure/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\38_azure_sdk_architecture.md`
-- `https://learn.microsoft.com/rest/api/azure/` → `https://learn.microsoft.com/en-us/rest/api/azure/`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\38_azure_sdk_architecture.md`
 - `https://jinja.palletsprojects.com/` → `https://jinja.palletsprojects.com/en/stable/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\41_askama_architecture.md`
+- `https://docs.surrealdb.com/docs/deployment/best-practices` → `https://surrealdb.com/platform/surrealdb`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\31_surrealdb_architecture.md`
+- `https://prometheus.io/docs/` → `https://prometheus.io/docs/introduction/overview/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\34_metrics_architecture.md`
+- `https://blog.meilisearch.com/` → `https://www.meilisearch.com/blog`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\30_meilisearch_architecture.md`
 
 ## 失效或异常链接
 
-- `[405] https://www.levels.fyi/t/rust-engineer/salaries/` — Not Allowed
-  - `concept\00_meta\career_landscape.md`
 - `[405] https://www.levels.fyi/` — Not Allowed
   - `concept\00_meta\career_landscape.md`
-- `[404] https://iris-project.org/tutorial.html]` — Not Found
-  - `concept\00_meta\rustbelt_predicate_map.md`
-- `[ERR] https://en.wikipedia.org/wiki/Rust_(programming_language)` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\05_comparative\01_rust_vs_cpp.md`
-  - `concept\05_comparative\02_rust_vs_go.md`
-  - `concept\05_comparative\04_safety_boundaries.md`
-  - `concept\05_comparative\07_rust_vs_python.md`
-  - `concept\05_comparative\11_rust_vs_kotlin.md`
-  - `concept\05_comparative\12_rust_vs_scala.md`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
-  - `concept\05_comparative\19_rust_vs_ruby.md`
-  - `concept\07_future\43_rust_for_linux.md`
-  - `concept\README.md`
-  - `docs\00_meta\00_annual_review_template.md`
-  - `docs\00_meta\00_content_reconstruction_plan_2026.md`
-  - `docs\00_meta\00_docs_reorganization_complete.md`
-  - `docs\00_meta\00_documentation_division_of_labor.md`
-  - `docs\00_meta\00_documentation_lifecycle.md`
-  - `docs\00_meta\00_improvement_plan_execution_complete.md`
-  - `docs\00_meta\00_pdca_template.md`
-  - `docs\00_meta\00_project_health_dashboard.md`
-  - `docs\00_meta\00_quarterly_sync_checklist.md`
-  - `docs\00_meta\00_reorganization_complete.md`
-  - `docs\00_meta\00_rust_feature_tracking_template.md`
-  - `docs\00_meta\00_rust_version_alignment_checklist.md`
-  - `docs\00_meta\00_template_concept_doc.md`
-  - `docs\00_meta\00_template_decision_tree.md`
-  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
-  - `docs\00_meta\history\00_2026_reorganization.md`
-  - `docs\01_core\README.md`
-  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
-  - `docs\01_learning\01_cross_module_navigation.md`
-  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
-  - `docs\01_learning\01_learning_path_planning.md`
-  - `docs\01_learning\01_lfrs_certification_mapping.md`
-  - `docs\01_learning\01_mdbook_quiz_guide.md`
-  - `docs\02_reference\02_edge_cases_and_special_cases.md`
-  - `docs\02_reference\02_error_code_mapping.md`
-  - `docs\02_reference\02_rustnomicon_alignment.md`
-  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
-  - `docs\02_reference\alignment_guide.md`
-  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_algorithm_decision_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
-  - `docs\02_reference\quick_reference\02_async_patterns.md`
-  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_closures_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_generics_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_network_programming_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_ownership_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_pin_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_rust_196_features_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_testing_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_type_system.md`
-  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
-  - `docs\02_reference\quick_reference\README.md`
-  - `docs\03_guides\03_cxx_interop_guide.md`
-  - `docs\03_guides\03_fuzzing_guide.md`
-  - `docs\03_guides\03_libp2p_guide.md`
-  - `docs\03_guides\03_miri_guide.md`
-  - `docs\03_guides\03_quic_http3_guide.md`
-  - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
-  - `docs\03_guides\03_rust_2024_edition_rpit_migration.md`
-  - `docs\03_guides\03_semver_checks.md`
-  - `docs\03_practice\03_cross_module_practical_projects_2025_10_25.md`
-  - `docs\03_practice\03_project_01_cli_tool.md`
-  - `docs\03_practice\03_project_02_file_processor.md`
-  - `docs\03_practice\03_project_03_calculator.md`
-  - `docs\03_practice\03_project_04_password_generator.md`
-  - `docs\03_practice\03_project_05_text_statistics.md`
-  - `docs\03_practice\03_project_07_chat_server.md`
-  - `docs\03_practice\03_project_08_cache_system.md`
-  - `docs\03_practice\03_project_09_log_parser.md`
-  - `docs\03_practice\03_project_10_data_pipeline.md`
-  - `docs\03_practice\03_project_12_wasm_app.md`
-  - `docs\03_practice\03_project_13_database_engine.md`
-  - `docs\03_practice\03_project_15_distributed_system.md`
-  - `docs\03_practice\README.md`
-  - `docs\04_research\04_cranelift_backend.md`
-  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
-  - `docs\04_research\04_llm_c_to_rust_migration.md`
-  - `docs\04_research\04_next_generation_trait_solver.md`
-  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
-  - `docs\04_research\04_polonius_tracking.md`
-  - `docs\04_research\04_rust_for_linux_2026.md`
-  - `docs\04_research\04_rust_formal_verification.md`
-  - `docs\04_research\04_verusbelt_pldi_2026.md`
-  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
-  - `docs\04_thinking\04_applications_analysis_view.md`
-  - `docs\04_thinking\04_decision_graph_network.md`
-  - `docs\04_thinking\04_mind_map_collection.md`
-  - `docs\04_thinking\04_proof_graph_network.md`
-  - `docs\04_thinking\04_thinking_representation_methods.md`
-  - `docs\05_guides\05_advanced_topics_deep_dive.md`
-  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
-  - `docs\05_guides\05_algorithms_usage_guide.md`
-  - `docs\05_guides\05_async_programming_usage_guide.md`
-  - `docs\05_guides\05_cli_applications_guide.md`
-  - `docs\05_guides\05_control_flow_functions_usage_guide.md`
-  - `docs\05_guides\05_cross_module_integration_examples.md`
-  - `docs\05_guides\05_cxx_rust_interop_evaluation.md`
-  - `docs\05_guides\05_design_patterns_usage_guide.md`
-  - `docs\05_guides\05_embedded_rust_guide.md`
-  - `docs\05_guides\05_formal_verification_integration_guide.md`
-  - `docs\05_guides\05_inline_assembly_guide.md`
-  - `docs\05_guides\05_macro_system_usage_guide.md`
-  - `docs\05_guides\05_miri_practical_guide.md`
-  - `docs\05_guides\05_performance_tuning_guide.md`
-  - `docs\05_guides\05_pragmatic_guidelines_checklist.md`
-  - `docs\05_guides\05_testing_coverage_guide.md`
-  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
-  - `docs\05_guides\05_troubleshooting_guide.md`
-  - `docs\05_guides\05_wasm_usage_guide.md`
-  - `docs\05_guides\best_practices.md`
-  - `docs\05_guides\workflow\01_workflow_theory.md`
-  - `docs\05_miri_integration_summary.md`
-  - `docs\06_docker_guide.md`
-  - `docs\06_toolchain\01_compiler_features.md`
-  - `docs\06_toolchain\06_cargo_script_guide.md`
-  - `docs\06_toolchain\06_cranelift_backend_guide.md`
-  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
-  - `docs\06_toolchain\README.md`
-  - `docs\07_project\07_completion_status.md`
-  - `docs\07_project\07_documentation_cross_reference_guide.md`
-  - `docs\07_project\07_extension_deepening_plan_2026.md`
-  - `docs\07_project\07_hierarchy_mapping_master.md`
-  - `docs\07_project\07_knowledge_structure_framework.md`
-  - `docs\07_project\07_module_knowledge_structure_guide.md`
-  - `docs\07_project\07_project_architecture_guide.md`
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-  - `docs\10_api_guide.md`
-  - `docs\10_architecture.md`
-  - `docs\10_authoritative_sources_and_citations.md`
-  - `docs\10_dependency_graph.md`
-  - `docs\10_migration_guide_2026.md`
-  - `docs\10_miri_guide.md`
-  - `docs\10_sccache_setup.md`
-  - `docs\10_terminology_standard.md`
-  - `docs\research_notes\10_00_comprehensive_summary.md`
-  - `docs\research_notes\10_00_organization_and_navigation.md`
-  - `docs\research_notes\10_application_trees.md`
-  - `docs\research_notes\10_argumentation_chain_and_flow.md`
-  - `docs\research_notes\10_argumentation_gap_index.md`
-  - `docs\research_notes\10_authoritative_alignment_guide.md`
-  - `docs\research_notes\10_authoritative_alignment_status.md`
-  - `docs\research_notes\10_authoritative_content_alignment_report.md`
-  - `docs\research_notes\10_best_practices.md`
-  - `docs\research_notes\10_changelog.md`
-  - `docs\research_notes\10_classification.md`
-  - `docs\research_notes\10_code_doc_formal_mapping.md`
-  - `docs\research_notes\10_cognitive_argumentation_framework.md`
-  - `docs\research_notes\10_comprehensive_project_report.md`
-  - `docs\research_notes\10_comprehensive_systematic_overview.md`
-  - `docs\research_notes\10_comprehensive_systematic_review_and_100_percent_plan.md`
-  - `docs\research_notes\10_concept_axiom_theorem_matrix.md`
-  - `docs\research_notes\10_concept_comparison_tables.md`
-  - `docs\research_notes\10_concept_hierarchy_framework.md`
-  - `docs\research_notes\10_concept_relationship_network.md`
-  - `docs\research_notes\10_concurrency_cheatsheet.md`
-  - `docs\research_notes\10_const_eval_formalization.md`
-  - `docs\research_notes\10_content_enhancement.md`
-  - `docs\research_notes\10_core_theorems_en_summary.md`
-  - `docs\research_notes\10_core_theorems_full_proofs.md`
-  - `docs\research_notes\10_counter_examples_compendium.md`
-  - `docs\research_notes\10_cross_reference_index.md`
-  - `docs\research_notes\10_design_mechanism_rationale.md`
-  - `docs\research_notes\10_domain_analysis_framework.md`
-  - `docs\research_notes\10_executable_semantics_roadmap.md`
-  - `docs\research_notes\10_faq.md`
-  - `docs\research_notes\10_faq_comprehensive.md`
-  - `docs\research_notes\10_formal_concepts_encyclopedia.md`
-  - `docs\research_notes\10_formal_full_model_overview.md`
-  - `docs\research_notes\10_formal_language_and_proofs.md`
-  - `docs\research_notes\10_formal_methods_master_index.md`
-  - `docs\research_notes\10_formal_proof_critical_analysis_and_plan_2026_02.md`
-  - `docs\research_notes\10_glossary.md`
-  - `docs\research_notes\10_hierarchical_mapping_and_summary.md`
-  - `docs\research_notes\10_incremental_update_flow.md`
-  - `docs\research_notes\10_international_formal_verification_index.md`
-  - `docs\research_notes\10_interview_questions_collection.md`
-  - `docs\research_notes\10_l3_machine_proof_guide.md`
-  - `docs\research_notes\10_language_semantics_expressiveness.md`
-  - `docs\research_notes\10_learning_path_comprehensive.md`
-  - `docs\research_notes\10_practical_applications.md`
-  - `docs\research_notes\10_proof_index.md`
-  - `docs\research_notes\10_proof_techniques_mindmap.md`
-  - `docs\research_notes\10_proof_tree_ownership.md`
-  - `docs\research_notes\10_proof_tree_type_safety.md`
-  - `docs\research_notes\10_quick_find.md`
-  - `docs\research_notes\10_quick_reference.md`
-  - `docs\research_notes\10_readme_100_percent_completion.md`
-  - `docs\research_notes\10_research_methodology.md`
-  - `docs\research_notes\10_research_notes_organization.md`
-  - `docs\research_notes\10_research_roadmap.md`
-  - `docs\research_notes\10_resources.md`
-  - `docs\research_notes\10_rust_book_alignment.md`
-  - `docs\research_notes\10_rust_formal_methods_cheatsheet.md`
-  - `docs\research_notes\10_rustbelt_alignment.md`
-  - `docs\research_notes\10_rustsem_semantics.md`
-  - `docs\research_notes\10_safe_decidable_mechanisms_overview.md`
-  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
-  - `docs\research_notes\10_system_integration.md`
-  - `docs\research_notes\10_system_summary.md`
-  - `docs\research_notes\10_theorem_rust_example_mapping.md`
-  - `docs\research_notes\10_theorems_and_proof_strategies.md`
-  - `docs\research_notes\10_theoretical_and_argumentation_system_architecture.md`
-  - `docs\research_notes\10_tools_guide.md`
-  - `docs\research_notes\10_tutorial_borrow_checker.md`
-  - `docs\research_notes\10_tutorial_concurrency_models.md`
-  - `docs\research_notes\10_tutorial_lifetimes.md`
-  - `docs\research_notes\10_tutorial_ownership_safety.md`
-  - `docs\research_notes\10_tutorial_type_system.md`
-  - `docs\research_notes\10_unified_systematic_framework.md`
-  - `docs\research_notes\10_user_guide.md`
-  - `docs\research_notes\10_verification_tools_decision_tree.md`
-  - `docs\research_notes\10_visualization_index.md`
-  - `docs\research_notes\10_workflow_concept_mindmap.md`
-  - `docs\research_notes\10_workflow_engine_matrix.md`
-  - `docs\research_notes\README.md`
-  - `docs\research_notes\experiments\10_compiler_optimizations.md`
-  - `docs\research_notes\experiments\10_concurrency_performance.md`
-  - `docs\research_notes\experiments\10_macro_expansion_performance.md`
-  - `docs\research_notes\experiments\10_memory_analysis.md`
-  - `docs\research_notes\experiments\10_performance_benchmarks.md`
-  - `docs\research_notes\experiments\README.md`
-  - `docs\research_notes\formal_methods\10_async_state_machine.md`
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
-  - `docs\research_notes\formal_methods\10_safe_decidable_mechanisms_and_formal_methods_plan.md`
-  - `docs\research_notes\formal_methods\10_send_sync_formalization.md`
-  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
-  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
-  - `docs\research_notes\formal_modules\10_formalization_ecology_mindmap.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md`
-  - `docs\research_notes\software_design_theory\02_workflow\README.md`
-  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
-  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\04_expressiveness_boundary.md`
-  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\README.md`
-  - `docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md`
-  - `docs\research_notes\software_design_theory\03_execution_models\05_distributed.md`
-  - `docs\research_notes\software_design_theory\03_execution_models\06_boundary_analysis.md`
-  - `docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md`
-  - `docs\research_notes\software_design_theory\04_compositional_engineering\README.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md`
-  - `docs\research_notes\software_design_theory\05_distributed\03_circuit_breaker.md`
-  - `docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md`
-  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
-  - `docs\research_notes\software_design_theory\05_distributed\README.md`
-  - `docs\research_notes\software_design_theory\06_rust_idioms.md`
-  - `docs\research_notes\software_design_theory\07_anti_patterns.md`
-  - `docs\research_notes\software_design_theory\10_00_master_index.md`
-  - `docs\research_notes\software_design_theory\10_comprehensive_argumentation_gap_analysis_and_plan.md`
-  - `docs\research_notes\type_theory\10_advanced_types.md`
-  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
-  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
-  - `docs\research_notes\type_theory\10_type_system_foundations.md`
-  - `docs\research_notes\type_theory\10_variance_theory.md`
-  - `docs\research_notes\type_theory\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\README.md`
-  - `docs\rust-formal-engineering-system\02_practical_applications\README.md`
-  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\02_async\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\09_actor_model\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\README.md`
-  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
-  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
-  - `docs\rust-formal-engineering-system\03_design_patterns\README.md`
-  - `docs\rust-formal-engineering-system\05_software_engineering\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
-  - `docs\rust-formal-engineering-system\10_quality_assurance\README.md`
-  - `docs\rust-formal-engineering-system\README.md`
-  - `docs\templates\10_versioned_doc_template.md`
-- `[ERR] https://en.wikipedia.org/wiki/Theory_of_computation` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\decidability_spectrum.md`
-- `[ERR] https://en.wikipedia.org/wiki/Semantics_(computer_science)` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\expressiveness_multiview.md`
-- `[ERR] https://en.wikipedia.org/wiki/Memory_safety` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\inter_layer_map.md`
-  - `concept\00_meta\sources.md`
-  - `concept\02_intermediate\03_memory_management.md`
-  - `concept\03_advanced\03_unsafe.md`
-  - `concept\05_comparative\02_rust_vs_go.md`
-  - `concept\05_comparative\04_safety_boundaries.md`
-  - `concept\05_comparative\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Linear_temporal_logic` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\inter_layer_map.md`
-- `[ERR] https://en.wikipedia.org/wiki/Foreign_function_interface` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\inter_layer_map.md`
-  - `concept\00_meta\sources.md`
-  - `concept\03_advanced\03_unsafe.md`
-  - `concept\03_advanced\09_ffi_advanced.md`
-  - `concept\05_comparative\04_safety_boundaries.md`
-- `[ERR] https://en.wikipedia.org/wiki/Bloom%27s_taxonomy` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\inter_layer_map.md`
-  - `concept\00_meta\self_assessment.md`
-- `[ERR] https://en.wikipedia.org/wiki/Design_Patterns` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\pattern_semantic_space_index.md`
-  - `concept\06_ecosystem\73_pattern_composition_algebra.md`
-  - `docs\05_guides\05_design_patterns_usage_guide.md`
-  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
-  - `docs\research_notes\10_design_patterns_authoritative_alignment.md`
-  - `docs\research_notes\10_distributed_pattern_matrix.md`
-  - `docs\research_notes\10_distributed_patterns_matrix.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\README.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\README.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\README.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\04_boundary_matrix.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\README.md`
-  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
-  - `docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md`
-  - `docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md`
-  - `docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md`
-  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
-  - `docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md`
-  - `docs\research_notes\software_design_theory\07_anti_patterns.md`
-  - `docs\research_notes\software_design_theory\10_00_master_index.md`
-  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
-  - `docs\rust-formal-engineering-system\03_design_patterns\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Pattern-Oriented_Software_Architecture` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\pattern_semantic_space_index.md`
-  - `concept\06_ecosystem\73_pattern_composition_algebra.md`
-- `[ERR] https://cs.cmu.edu/~rwh/pfpl/` — timed out
-  - `concept\00_meta\pl_foundations_roadmap.md`
-- `[ERR] https://en.wikipedia.org/wiki/Comparison_of_programming_languages` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\quick_reference.md`
-  - `concept\00_meta\semantic_space.md`
-  - `concept\05_comparative\03_paradigm_matrix.md`
-  - `concept\05_comparative\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Parametric_polymorphism` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\self_assessment.md`
-  - `concept\02_intermediate\02_generics.md`
-- `[ERR] https://en.wikipedia.org/wiki/Copy-on-write` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\self_assessment.md`
-  - `concept\02_intermediate\11_cow_and_borrowed.md`
-- `[ERR] https://en.wikipedia.org/wiki/Algorithm` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\semantic_bridge_algorithms_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_design_pattern` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\semantic_bridge_algorithms_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Workflow_patterns` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\semantic_bridge_algorithms_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Main_Page` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\semantic_space.md`
-  - `concept\01_foundation\02_borrowing.md`
-  - `concept\01_foundation\04_type_system.md`
-  - `concept\01_foundation\30_lifetimes_advanced.md`
-  - `concept\02_intermediate\02_generics.md`
-  - `concept\02_intermediate\03_memory_management.md`
-  - `concept\02_intermediate\04_error_handling.md`
-  - `concept\03_advanced\02_async.md`
-  - `concept\03_advanced\03_unsafe.md`
-  - `concept\03_advanced\04_macros.md`
-  - `concept\04_formal\01_linear_logic.md`
-  - `concept\04_formal\03_ownership_formal.md`
-  - `concept\04_formal\04_rustbelt.md`
-  - `concept\04_formal\05_verification_toolchain.md`
-  - `concept\05_comparative\02_rust_vs_go.md`
-  - `concept\05_comparative\03_paradigm_matrix.md`
-  - `concept\05_comparative\04_safety_boundaries.md`
-  - `concept\06_ecosystem\01_toolchain.md`
-  - `concept\06_ecosystem\09_cargo_script.md`
-  - `concept\06_ecosystem\10_public_private_deps.md`
-  - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
-  - `concept\07_future\01_ai_integration.md`
-  - `concept\07_future\02_formal_methods.md`
-  - `concept\07_future\03_evolution.md`
-  - `concept\07_future\04_effects_system.md`
-- `[ERR] https://en.wikipedia.org/wiki/Green_thread` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\semantic_space.md`
-- `[ERR] https://en.wikipedia.org/wiki/Exception_handling` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\semantic_space.md`
-  - `concept\01_foundation\32_error_handling_basics.md`
-  - `concept\02_intermediate\04_error_handling.md`
-- `[ERR] https://en.wikipedia.org/wiki/Observational_equivalence` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\semantic_space.md`
-- `[ERR] https://en.wikipedia.org/wiki/Linear_logic` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\semantic_space.md`
-  - `concept\00_meta\sources.md`
-  - `concept\01_foundation\01_ownership.md`
-  - `concept\04_formal\01_linear_logic.md`
-  - `concept\04_formal\02_type_theory.md`
-  - `concept\04_formal\03_ownership_formal.md`
-  - `concept\04_formal\09_linear_logic_applications.md`
-  - `concept\05_comparative\01_rust_vs_cpp.md`
-- `[ERR] https://en.wikipedia.org/wiki/Ownership_types` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\01_foundation\01_ownership.md`
-- `[ERR] https://en.wikipedia.org/wiki/Affine_logic` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\01_foundation\01_ownership.md`
-  - `concept\04_formal\01_linear_logic.md`
-  - `concept\04_formal\02_type_theory.md`
-  - `concept\04_formal\03_ownership_formal.md`
-- `[ERR] https://en.wikipedia.org/wiki/Region-based_memory_management` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\01_foundation\01_ownership.md`
-  - `concept\01_foundation\02_borrowing.md`
-  - `concept\01_foundation\03_lifetimes.md`
-  - `concept\01_foundation\30_lifetimes_advanced.md`
-  - `concept\02_intermediate\18_lifetimes_advanced.md`
-  - `concept\04_formal\01_linear_logic.md`
-  - `concept\04_formal\03_ownership_formal.md`
-  - `concept\archive\01_foundation_03_lifetimes_original.md`
-  - `docs\01_core\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Type_system` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\01_foundation\04_type_system.md`
-  - `concept\01_foundation\README.md`
-  - `concept\02_intermediate\20_type_system_advanced.md`
-  - `concept\05_comparative\01_rust_vs_cpp.md`
-  - `concept\05_comparative\03_paradigm_matrix.md`
-  - `concept\05_comparative\15_rust_vs_typescript.md`
-  - `concept\05_comparative\README.md`
-  - `concept\07_future\43_rust_for_linux.md`
-  - `docs\00_meta\00_improvement_plan_execution_complete.md`
-  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
-  - `docs\01_cargo_build_optimization.md`
-  - `docs\01_learning\01_learning_path_planning.md`
-  - `docs\01_learning\01_mdbook_quiz_guide.md`
-  - `docs\02_reference\02_cross_language_comparison.md`
-  - `docs\02_reference\02_error_code_mapping.md`
-  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
-  - `docs\02_reference\alignment_guide.md`
-  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
-  - `docs\02_reference\quick_reference\02_async_patterns.md`
-  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_generics_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_ownership_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_type_system.md`
-  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
-  - `docs\02_reference\quick_reference\README.md`
-  - `docs\03_guides\03_fuzzing_guide.md`
-  - `docs\03_guides\03_let_chains_guide.md`
-  - `docs\03_guides\03_miri_guide.md`
-  - `docs\03_guides\03_quic_http3_guide.md`
-  - `docs\03_practice\03_project_01_cli_tool.md`
-  - `docs\04_research\04_cranelift_backend.md`
-  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
-  - `docs\04_research\04_llm_c_to_rust_migration.md`
-  - `docs\04_research\04_next_generation_trait_solver.md`
-  - `docs\04_research\04_rust_for_linux_2026.md`
-  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
-  - `docs\04_thinking\04_applications_analysis_view.md`
-  - `docs\04_thinking\04_decision_graph_network.md`
-  - `docs\04_thinking\04_mind_map_collection.md`
-  - `docs\04_thinking\04_proof_graph_network.md`
-  - `docs\04_thinking\04_thinking_representation_methods.md`
-  - `docs\05_guides\05_advanced_topics_deep_dive.md`
-  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
-  - `docs\05_guides\05_async_programming_usage_guide.md`
-  - `docs\05_guides\05_cli_applications_guide.md`
-  - `docs\05_guides\05_cross_module_integration_examples.md`
-  - `docs\05_guides\05_design_patterns_usage_guide.md`
-  - `docs\05_guides\05_embedded_rust_guide.md`
-  - `docs\05_guides\05_formal_verification_integration_guide.md`
-  - `docs\05_guides\05_inline_assembly_guide.md`
-  - `docs\05_guides\05_macro_system_usage_guide.md`
-  - `docs\05_guides\05_miri_practical_guide.md`
-  - `docs\05_guides\05_performance_tuning_guide.md`
-  - `docs\05_guides\05_testing_coverage_guide.md`
-  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
-  - `docs\05_guides\05_type_system_usage_guide.md`
-  - `docs\05_guides\05_wasm_usage_guide.md`
-  - `docs\05_guides\best_practices.md`
-  - `docs\05_guides\workflow\01_workflow_theory.md`
-  - `docs\05_miri_integration_summary.md`
-  - `docs\06_toolchain\01_compiler_features.md`
-  - `docs\06_toolchain\06_cargo_script_guide.md`
-  - `docs\06_toolchain\06_cranelift_backend_guide.md`
-  - `docs\07_project\07_extension_deepening_plan_2026.md`
-  - `docs\07_project\07_knowledge_structure_framework.md`
-  - `docs\07_project\07_module_knowledge_structure_guide.md`
-  - `docs\07_project\07_project_architecture_guide.md`
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-  - `docs\10_authoritative_sources_and_citations.md`
-  - `docs\10_migration_guide_2026.md`
-  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
-  - `docs\research_notes\10_theorem_rust_example_mapping.md`
-  - `docs\research_notes\README.md`
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
-  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
-  - `docs\research_notes\type_theory\10_variance_theory.md`
-  - `docs\research_notes\type_theory\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\01_type_system\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\02_async\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\09_actor_model\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
-  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
-  - `docs\rust-formal-engineering-system\03_design_patterns\README.md`
-  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\01_compiler\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
-  - `docs\rust-formal-engineering-system\09_research_agenda\04_research_methods\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Polymorphism_(computer_science)` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
+- `[405] https://www.levels.fyi/t/rust-engineer/salaries/` — Not Allowed
+  - `concept\00_meta\career_landscape.md`
 - `[403] https://web.mit.edu/rust-lang/` — Forbidden
   - `concept\00_meta\sources.md`
-- `[ERR] https://en.wikipedia.org/wiki/Futures_and_promises` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\03_advanced\02_async.md`
-  - `concept\03_advanced\25_async_advanced.md`
-  - `concept\03_advanced\26_async_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Communicating_sequential_processes` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
-  - `concept\05_comparative\02_rust_vs_go.md`
-  - `concept\05_comparative\03_paradigm_matrix.md`
-- `[ERR] https://en.wikipedia.org/wiki/Substructural_type_system` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\04_formal\01_linear_logic.md`
-  - `concept\04_formal\03_ownership_formal.md`
-  - `concept\07_future\04_effects_system.md`
-- `[ERR] https://en.wikipedia.org/wiki/Coroutine` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\03_advanced\02_async.md`
-  - `concept\03_advanced\25_async_advanced.md`
-  - `concept\archive\03_advanced_02_async_original.md`
-  - `docs\02_reference\quick_reference\02_async_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Undefined_behavior` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\03_advanced\03_unsafe.md`
-  - `concept\04_formal\05_verification_toolchain.md`
-  - `concept\05_comparative\04_safety_boundaries.md`
-- `[ERR] https://en.wikipedia.org/wiki/Asynchronous_programming` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\03_advanced\02_async.md`
-- `[ERR] https://en.wikipedia.org/wiki/Macro_(computer_science)` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\03_advanced\04_macros.md`
-  - `docs\research_notes\10_macros_cheatsheet.md`
-  - `docs\research_notes\experiments\10_macro_expansion_performance.md`
-- `[ERR] https://en.wikipedia.org/wiki/Metaprogramming` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\02_intermediate\21_metaprogramming.md`
-  - `concept\03_advanced\04_macros.md`
-  - `concept\03_advanced\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Hazard_pointer` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-  - `concept\03_advanced\01_concurrency.md`
-- `[ERR] https://en.wikipedia.org/wiki/Compare-and-swap` — _ssl.c:999: The handshake operation timed out
-  - `concept\00_meta\sources.md`
-- `[ERR] https://www.cs.cmu.edu/~aldrich/courses/17-363/` — timed out
-  - `concept\00_meta\sources.md`
-  - `concept\04_formal\02_type_theory.md`
-- `[ERR] https://www.cs.cmu.edu/~aldrich/courses/17-350/` — timed out
-  - `concept\00_meta\sources.md`
-- `[404] https://www.stroustrup.com/FSM/0cost.pdf` — Not Found
-  - `concept\00_meta\terminology_glossary.md`
-- `[ERR] https://www.cs.cmu.edu/~jcr/seplogic.pdf` — timed out
-  - `concept\00_meta\terminology_glossary.md`
-  - `concept\04_formal\11_separation_logic.md`
-  - `concept\04_formal\15_hoare_logic.md`
-- `[ERR] https://en.wikipedia.org/wiki/Smart_pointer` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\01_ownership.md`
-  - `concept\02_intermediate\03_memory_management.md`
-- `[ERR] https://en.wikipedia.org/wiki/Reference_(computer_science)` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\02_borrowing.md`
-- `[ERR] https://en.wikipedia.org/wiki/Pointer_aliasing` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\02_borrowing.md`
-- `[ERR] https://en.wikipedia.org/wiki/Alias_analysis` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\02_borrowing.md`
-  - `concept\04_formal\03_ownership_formal.md`
-  - `docs\01_core\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Copy_on_write` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\02_borrowing.md`
-- `[ERR] https://en.wikipedia.org/wiki/Borrow_checker` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\02_borrowing.md`
-- `[ERR] https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\02_borrowing.md`
-  - `concept\02_intermediate\03_memory_management.md`
-  - `concept\05_comparative\01_rust_vs_cpp.md`
-  - `concept\06_ecosystem\02_patterns.md`
-  - `docs\01_core\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Read-copy-update` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\02_borrowing.md`
-- `[ERR] https://en.wikipedia.org/wiki/Lease_(computer_science)` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\02_borrowing.md`
-- `[ERR] https://en.wikipedia.org/wiki/System_F` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\04_type_system.md`
-  - `concept\01_foundation\10_numerics.md`
-  - `concept\01_foundation\14_coercion_and_casting.md`
-  - `concept\01_foundation\31_never_type.md`
-  - `concept\01_foundation\32_error_handling_basics.md`
-  - `concept\01_foundation\37_operators_and_symbols.md`
-  - `concept\01_foundation\40_patterns.md`
-  - `concept\02_intermediate\02_generics.md`
-  - `concept\02_intermediate\05_assert_matches.md`
-  - `concept\02_intermediate\06_range_types.md`
-  - `concept\02_intermediate\14_newtype_and_wrapper.md`
-  - `concept\02_intermediate\16_error_handling_deep_dive.md`
-  - `concept\02_intermediate\21_metaprogramming.md`
-  - `concept\02_intermediate\22_api_naming_conventions.md`
-  - `concept\02_intermediate\25_rtti_and_dynamic_typing.md`
-  - `concept\02_intermediate\26_c_preprocessor_vs_rust_macros.md`
-  - `concept\02_intermediate\31_derive_traits.md`
-  - `concept\03_advanced\07_proc_macro.md`
-  - `concept\03_advanced\17_type_erasure.md`
-  - `concept\03_advanced\24_async_closures.md`
-- `[ERR] https://en.wikipedia.org/wiki/Rust` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\04_type_system.md`
-  - `concept\02_intermediate\03_memory_management.md`
-  - `concept\03_advanced\01_concurrency.md`
-  - `concept\05_comparative\01_rust_vs_cpp.md`
-- `[ERR] https://en.wikipedia.org/wiki/Null_pointer` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\04_type_system.md`
-- `[ERR] https://en.wikipedia.org/wiki/Algebraic_data_type` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\04_type_system.md`
-- `[ERR] https://en.wikipedia.org/wiki/Bottom_type` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\04_type_system.md`
-  - `concept\01_foundation\31_never_type.md`
-- `[ERR] https://www.youtube.com/watch?v=_8X69Kw0EhY` — timed out
-  - `concept\00_meta\terminology_glossary.md`
-  - `concept\03_advanced\08_nll_and_polonius.md`
-- `[ERR] https://en.wikipedia.org/wiki/Unit_type` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\04_type_system.md`
-- `[ERR] https://en.wikipedia.org/wiki/Dependent_type` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\04_type_system.md`
-  - `concept\04_formal\02_type_theory.md`
-  - `concept\04_formal\05_verification_toolchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Tagged_union` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\04_type_system.md`
-- `[ERR] https://en.wikipedia.org/wiki/Nominal_type_system` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\04_type_system.md`
-- `[ERR] https://en.wikipedia.org/wiki/Structural_type_system` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\04_type_system.md`
-- `[ERR] https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\04_type_system.md`
-  - `concept\04_formal\01_linear_logic.md`
-  - `concept\04_formal\02_type_theory.md`
-  - `concept\04_formal\03_ownership_formal.md`
-  - `concept\04_formal\04_rustbelt.md`
-  - `concept\04_formal\08_type_inference.md`
-- `[ERR] https://en.wikipedia.org/wiki/Pattern_matching` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\04_type_system.md`
-  - `docs\01_core\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Trait_(computer_programming)` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\04_type_system.md`
-  - `concept\02_intermediate\01_traits.md`
-- `[ERR] https://www.stroustrup.com/` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\06_zero_cost_abstractions.md`
-- `[ERR] https://en.wikipedia.org/wiki/B-tree` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\08_collections.md`
-  - `concept\01_foundation\17_collections_advanced.md`
-- `[ERR] https://en.wikipedia.org/wiki/Hash_table` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\08_collections.md`
-  - `concept\02_intermediate\03_memory_management.md`
-- `[ERR] https://en.wikipedia.org/wiki/UTF-8` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\09_strings_and_text.md`
-- `[ERR] https://en.wikipedia.org/wiki/IEEE_754` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\10_numerics.md`
-  - `concept\07_future\27_compile_time_execution.md`
-  - `concept\archive\01_foundation_11_numeric_types_deprecated.md`
-- `[ERR] https://en.wikipedia.org/wiki/Hygienic_macro` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\12_attributes_and_macros.md`
-  - `concept\02_intermediate\21_metaprogramming.md`
-  - `concept\03_advanced\04_macros.md`
-- `[ERR] https://en.wikipedia.org/wiki/Crash-only_software` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\13_panic_and_abort.md`
-- `[ERR] https://en.wikipedia.org/wiki/Type_conversion` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\14_coercion_and_casting.md`
-- `[ERR] https://en.wikipedia.org/wiki/Closure_(computer_programming)` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\15_closure_basics.md`
-- `[ERR] https://en.wikipedia.org/wiki/Binary_heap` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\17_collections_advanced.md`
-- `[ERR] https://en.wikipedia.org/wiki/Unit_testing` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\16_testing_basics.md`
-- `[ERR] https://en.wikipedia.org/wiki/B_tree` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\17_collections_advanced.md`
-- `[ERR] https://en.wikipedia.org/wiki/Binary_Heap` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\17_collections_advanced.md`
-- `[ERR] https://en.wikipedia.org/wiki/Unicode` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\18_strings_and_encoding.md`
-- `[ERR] https://en.wikipedia.org/wiki/Subtyping` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\30_lifetimes_advanced.md`
-  - `concept\04_formal\02_type_theory.md`
-  - `docs\research_notes\type_theory\10_type_system_foundations.md`
-  - `docs\research_notes\type_theory\10_variance_theory.md`
-- `[ERR] https://en.wikipedia.org/wiki/Escape_analysis` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\30_lifetimes_advanced.md`
-  - `concept\archive\01_foundation_03_lifetimes_original.md`
-- `[ERR] https://en.wikipedia.org/wiki/Scope_(computer_science)` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\30_lifetimes_advanced.md`
-  - `concept\archive\01_foundation_03_lifetimes_original.md`
-- `[ERR] https://en.wikipedia.org/wiki/Variable_shadowing` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\30_lifetimes_advanced.md`
-  - `concept\archive\01_foundation_03_lifetimes_original.md`
-- `[ERR] https://en.wikipedia.org/wiki/Rust_(programming_language)#Non-lexical_lifetimes` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\30_lifetimes_advanced.md`
-  - `concept\archive\01_foundation_03_lifetimes_original.md`
-- `[ERR] https://en.wikipedia.org/wiki/Ownership_(programming)` — _ssl.c:999: The handshake operation timed out
-  - `concept\01_foundation\README.md`
-  - `docs\research_notes\10_tutorial_ownership_safety.md`
-- `[ERR] https://en.wikipedia.org/wiki/Type_class` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\01_traits.md`
-  - `concept\02_intermediate\19_advanced_traits.md`
-- `[ERR] https://en.wikipedia.org/wiki/Ad_hoc_polymorphism` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\01_traits.md`
-- `[ERR] https://en.wikipedia.org/wiki/Memory_allocator` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\03_memory_management.md`
-- `[ERR] https://en.wikipedia.org/wiki/Memory_management` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\03_memory_management.md`
-  - `concept\03_advanced\14_custom_allocators.md`
-  - `concept\05_comparative\03_paradigm_matrix.md`
-- `[ERR] https://en.wikipedia.org/wiki/Reference_counting` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\03_memory_management.md`
-- `[ERR] https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\03_memory_management.md`
-  - `concept\05_comparative\02_rust_vs_go.md`
-- `[ERR] https://en.wikipedia.org/wiki/Generic_programming` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\02_generics.md`
-  - `concept\02_intermediate\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Dynamic_array` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\03_memory_management.md`
-- `[ERR] https://en.wikipedia.org/wiki/Stack-based_memory_allocation` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\03_memory_management.md`
-- `[ERR] https://www.youtube.com/watch?v=U7xx6gyaiio` — timed out
-  - `concept\01_foundation\19_value_vs_reference_semantics.md`
-- `[ERR] https://en.wikipedia.org/wiki/Heap_(data_structure)` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\03_memory_management.md`
-- `[ERR] https://en.wikipedia.org/wiki/Exit_status` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\04_error_handling.md`
-- `[ERR] https://en.wikipedia.org/wiki/Pointer_(computer_programming)` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\03_memory_management.md`
-  - `concept\03_advanced\03_unsafe.md`
-  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
-- `[ERR] https://blog.cloudflare.com/pin-and-unpin-in-rust/` — [Errno 11001] getaddrinfo failed
-  - `concept\02_intermediate\18_lifetimes_advanced.md`
-- `[ERR] https://en.wikipedia.org/wiki/Result_type` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\04_error_handling.md`
-- `[ERR] https://en.wikipedia.org/wiki/Option_type` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\04_error_handling.md`
-- `[404] https://doc.rust-lang.org/reference/editions.html` — Not Found
-  - `concept\02_intermediate\32_editions.md`
-  - `concept\02_intermediate\33_rust_release_process.md`
-  - `docs\research_notes\10_rust_reference_alignment.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
-- `[404] https://forge.rust-lang.org/release/release-process.html` — Not Found
-  - `concept\02_intermediate\33_rust_release_process.md`
-  - `concept\07_future\50_nightly_rust.md`
-- `[404] https://doc.rust-lang.org/book/appendix-06-nightly-rust.html` — Not Found
-  - `concept\02_intermediate\33_rust_release_process.md`
-  - `concept\07_future\50_nightly_rust.md`
-- `[ERR] https://en.wikipedia.org/wiki/Monad_(functional_programming)` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\04_error_handling.md`
-  - `concept\04_formal\10_category_theory.md`
-  - `concept\06_ecosystem\73_pattern_composition_algebra.md`
-  - `concept\07_future\04_effects_system.md`
-- `[ERR] https://en.wikipedia.org/wiki/Panic_(computing)` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\04_error_handling.md`
-- `[ERR] https://en.wikipedia.org/wiki/Domain-specific_language` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\13_dsl_and_embedding.md`
-- `[ERR] https://en.wikipedia.org/wiki/Newtype` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\14_newtype_and_wrapper.md`
-- `[ERR] https://en.wikipedia.org/wiki/Iterator_pattern` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\15_iterator_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Code_generation_(compiler)` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\17_macro_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Trait-based_programming` — _ssl.c:999: The handshake operation timed out
-  - `concept\02_intermediate\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Compare_and_swap` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\01_concurrency.md`
-- `[ERR] https://en.wikipedia.org/wiki/Race_condition` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\01_concurrency.md`
-  - `concept\05_comparative\04_safety_boundaries.md`
-- `[ERR] https://en.wikipedia.org/wiki/Actor_model` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\01_concurrency.md`
-- `[ERR] https://en.wikipedia.org/wiki/Async/await` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\02_async.md`
-  - `concept\archive\03_advanced_02_async_original.md`
-- `[ERR] https://en.wikipedia.org/wiki/Data_race` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\01_concurrency.md`
-- `[ERR] https://en.wikipedia.org/wiki/Cooperative_multitasking` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\02_async.md`
-  - `concept\archive\03_advanced_02_async_original.md`
-- `[ERR] https://en.wikipedia.org/wiki/Lazy_evaluation` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\02_async.md`
-  - `concept\03_advanced\25_async_advanced.md`
-- `[ERR] https://en.wikipedia.org/wiki/Future_(programming)` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\02_async.md`
-  - `concept\archive\03_advanced_02_async_original.md`
-- `[ERR] https://en.wikipedia.org/wiki/Event_loop` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\02_async.md`
-  - `concept\archive\03_advanced_02_async_original.md`
 - `[ERR] https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
   - `concept\03_advanced\13_inline_assembly.md`
-- `[403] https://developer.arm.com/documentation/ddi0487/latest/` — Forbidden
-  - `concept\03_advanced\13_inline_assembly.md`
-- `[ERR] https://en.wikipedia.org/wiki/Promise_(programming)` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\02_async.md`
-  - `concept\archive\03_advanced_02_async_original.md`
-  - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
-- `[ERR] https://en.wikipedia.org/wiki/Type_punning` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\03_unsafe.md`
-- `[ERR] https://en.wikipedia.org/wiki/Dangling_pointer` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\03_unsafe.md`
-- `[ERR] https://en.wikipedia.org/wiki/Buffer_overflow` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\03_unsafe.md`
-- `[ERR] https://en.wikipedia.org/wiki/Domain_specific_language` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\04_macros.md`
-- `[ERR] https://en.wikipedia.org/wiki/Quasi-quotation` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\04_macros.md`
-- `[ERR] https://en.wikipedia.org/wiki/Abstract_syntax_tree` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\04_macros.md`
-- `[ERR] https://en.wikipedia.org/wiki/Non-blocking_algorithm` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\10_concurrency_patterns.md`
-  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
-  - `concept\03_advanced\16_lock_free.md`
-- `[ERR] https://en.wikipedia.org/wiki/Data-flow_analysis` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\08_nll_and_polonius.md`
-- `[ERR] https://en.wikipedia.org/wiki/Memory_ordering` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
-  - `concept\05_comparative\04_safety_boundaries.md`
-- `[ERR] https://en.wikipedia.org/wiki/Type_erasure` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\17_type_erasure.md`
-- `[ERR] https://en.wikipedia.org/wiki/Zero-copy` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\15_zero_copy_parsing.md`
-- `[ERR] https://en.wikipedia.org/wiki/Asynchronous_I/O` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\18_network_programming.md`
-  - `concept\03_advanced\README.md`
-  - `docs\00_meta\00_content_reconstruction_plan_2026.md`
-  - `docs\00_meta\00_documentation_division_of_labor.md`
-  - `docs\00_meta\00_documentation_lifecycle.md`
-  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
-  - `docs\01_learning\01_learning_path_planning.md`
-  - `docs\01_learning\01_mdbook_quiz_guide.md`
-  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
-  - `docs\02_reference\alignment_guide.md`
-  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_async_patterns.md`
-  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_closures_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_type_system.md`
-  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
-  - `docs\02_reference\quick_reference\README.md`
-  - `docs\03_guides\03_io_uring_guide.md`
-  - `docs\03_guides\03_miri_guide.md`
-  - `docs\03_practice\03_project_11_web_server.md`
-  - `docs\03_practice\03_project_14_async_runtime.md`
-  - `docs\04_research\04_llm_c_to_rust_migration.md`
-  - `docs\04_research\04_next_generation_trait_solver.md`
-  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
-  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
-  - `docs\04_thinking\04_applications_analysis_view.md`
-  - `docs\04_thinking\04_decision_graph_network.md`
-  - `docs\04_thinking\04_thinking_representation_methods.md`
-  - `docs\05_guides\05_advanced_topics_deep_dive.md`
-  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
-  - `docs\05_guides\05_async_programming_usage_guide.md`
-  - `docs\05_guides\05_cli_applications_guide.md`
-  - `docs\05_guides\05_cross_module_integration_examples.md`
-  - `docs\05_guides\05_embedded_rust_guide.md`
-  - `docs\05_guides\05_inline_assembly_guide.md`
-  - `docs\05_guides\05_macro_system_usage_guide.md`
-  - `docs\05_guides\05_miri_practical_guide.md`
-  - `docs\05_guides\05_performance_tuning_guide.md`
-  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
-  - `docs\05_guides\05_troubleshooting_guide.md`
-  - `docs\05_guides\05_wasm_usage_guide.md`
-  - `docs\05_guides\best_practices.md`
-  - `docs\05_guides\workflow\01_workflow_theory.md`
-  - `docs\06_toolchain\01_compiler_features.md`
-  - `docs\06_toolchain\06_cargo_script_guide.md`
-  - `docs\06_toolchain\06_cranelift_backend_guide.md`
-  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
-  - `docs\06_toolchain\README.md`
-  - `docs\07_project\07_knowledge_structure_framework.md`
-  - `docs\07_project\07_module_knowledge_structure_guide.md`
-  - `docs\07_project\07_project_architecture_guide.md`
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-  - `docs\10_authoritative_sources_and_citations.md`
-  - `docs\10_migration_guide_2026.md`
-  - `docs\research_notes\10_authoritative_alignment_guide.md`
-  - `docs\research_notes\10_best_practices.md`
-  - `docs\research_notes\10_changelog.md`
-  - `docs\research_notes\10_code_doc_formal_mapping.md`
-  - `docs\research_notes\10_cognitive_argumentation_framework.md`
-  - `docs\research_notes\10_comprehensive_project_report.md`
-  - `docs\research_notes\10_comprehensive_systematic_overview.md`
-  - `docs\research_notes\10_comprehensive_systematic_review_and_100_percent_plan.md`
-  - `docs\research_notes\10_concept_comparison_tables.md`
-  - `docs\research_notes\10_concept_hierarchy_framework.md`
-  - `docs\research_notes\10_concept_relationship_network.md`
-  - `docs\research_notes\10_design_mechanism_rationale.md`
-  - `docs\research_notes\10_faq.md`
-  - `docs\research_notes\10_faq_comprehensive.md`
-  - `docs\research_notes\10_formal_full_model_overview.md`
-  - `docs\research_notes\10_formal_language_and_proofs.md`
-  - `docs\research_notes\10_glossary.md`
-  - `docs\research_notes\10_incremental_update_flow.md`
-  - `docs\research_notes\10_international_formal_verification_index.md`
-  - `docs\research_notes\10_interview_questions_collection.md`
-  - `docs\research_notes\10_l3_machine_proof_guide.md`
-  - `docs\research_notes\10_language_semantics_expressiveness.md`
-  - `docs\research_notes\10_macros_cheatsheet.md`
-  - `docs\research_notes\10_practical_applications.md`
-  - `docs\research_notes\10_proof_index.md`
-  - `docs\research_notes\10_research_methodology.md`
-  - `docs\research_notes\10_research_roadmap.md`
-  - `docs\research_notes\10_resources.md`
-  - `docs\research_notes\10_rust_formal_methods_cheatsheet.md`
-  - `docs\research_notes\10_rustsem_semantics.md`
-  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
-  - `docs\research_notes\10_system_summary.md`
-  - `docs\research_notes\10_theorems_and_proof_strategies.md`
-  - `docs\research_notes\10_theoretical_and_argumentation_system_architecture.md`
-  - `docs\research_notes\10_tools_guide.md`
-  - `docs\research_notes\10_tutorial_borrow_checker.md`
-  - `docs\research_notes\10_tutorial_concurrency_models.md`
-  - `docs\research_notes\10_tutorial_lifetimes.md`
-  - `docs\research_notes\10_tutorial_ownership_safety.md`
-  - `docs\research_notes\10_tutorial_type_system.md`
-  - `docs\research_notes\10_verification_tools_matrix.md`
-  - `docs\research_notes\10_workflow_engine_matrix.md`
-  - `docs\research_notes\experiments\10_compiler_optimizations.md`
-  - `docs\research_notes\experiments\10_concurrency_performance.md`
-  - `docs\research_notes\experiments\10_memory_analysis.md`
-  - `docs\research_notes\experiments\10_performance_benchmarks.md`
-  - `docs\research_notes\experiments\README.md`
-  - `docs\research_notes\formal_methods\10_async_runtime_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_async_state_machine.md`
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
-  - `docs\research_notes\formal_methods\10_send_sync_formalization.md`
-  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
-  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
-  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\README.md`
-  - `docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md`
-  - `docs\research_notes\software_design_theory\03_execution_models\05_distributed.md`
-  - `docs\research_notes\software_design_theory\03_execution_models\06_boundary_analysis.md`
-  - `docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\README.md`
-  - `docs\research_notes\software_design_theory\06_rust_idioms.md`
-  - `docs\research_notes\type_theory\10_advanced_types.md`
-  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
-  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
-  - `docs\research_notes\type_theory\10_variance_theory.md`
-  - `docs\research_notes\type_theory\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
-  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\02_async\README.md`
-  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
-  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type` — _ssl.c:999: The handshake operation timed out
-  - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
-- `[ERR] https://en.wikipedia.org/wiki/Linear_Logic` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\01_linear_logic.md`
-  - `concept\04_formal\README.md`
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-- `[ERR] https://en.wikipedia.org/wiki/Type_theory` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\01_linear_logic.md`
-  - `concept\04_formal\02_type_theory.md`
-  - `concept\04_formal\03_ownership_formal.md`
-  - `concept\04_formal\04_rustbelt.md`
-  - `concept\archive\01_foundation_11_numeric_types_deprecated.md`
-  - `knowledge\02_intermediate\type_system\01_core_range.md`
-  - `knowledge\03_advanced\06_type_driven_correctness.md`
-  - `knowledge\06_ecosystem\emerging\02_generic_const_exprs.md`
-- `[ERR] https://en.wikipedia.org/wiki/Sequent_calculus` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\01_linear_logic.md`
-- `[ERR] https://en.wikipedia.org/wiki/Separation_logic` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\01_linear_logic.md`
-  - `concept\04_formal\02_type_theory.md`
-  - `concept\04_formal\03_ownership_formal.md`
-  - `concept\04_formal\04_rustbelt.md`
-  - `concept\04_formal\05_verification_toolchain.md`
-  - `concept\04_formal\11_separation_logic.md`
-  - `concept\04_formal\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\01_linear_logic.md`
-  - `concept\04_formal\02_type_theory.md`
-  - `concept\04_formal\04_rustbelt.md`
-  - `concept\04_formal\14_lambda_calculus.md`
-- `[ERR] https://en.wikipedia.org/wiki/Phase_semantics` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\01_linear_logic.md`
-- `[ERR] https://en.wikipedia.org/wiki/Proof_net` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\01_linear_logic.md`
-- `[ERR] https://en.wikipedia.org/wiki/Linear_type` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\01_linear_logic.md`
-- `[ERR] https://en.wikipedia.org/wiki/Jean-Yves_Girard` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\01_linear_logic.md`
-- `[ERR] https://en.wikipedia.org/wiki/Higher-kinded_type` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\02_type_theory.md`
-- `[ERR] https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\01_linear_logic.md`
-  - `concept\04_formal\02_type_theory.md`
-- `[ERR] https://en.wikipedia.org/wiki/Generalized_algebraic_data_type` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\02_type_theory.md`
-- `[ERR] https://en.wikipedia.org/wiki/Kind_(type_theory)` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\02_type_theory.md`
-- `[ERR] https://en.wikipedia.org/wiki/Operational_semantics` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\03_ownership_formal.md`
-  - `concept\04_formal\05_verification_toolchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Formal_methods` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\03_ownership_formal.md`
-- `[ERR] https://en.wikipedia.org/wiki/Formal_verification` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\04_rustbelt.md`
-  - `concept\04_formal\13_formal_methods.md`
-  - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
-  - `concept\07_future\02_formal_methods.md`
-- `[ERR] https://en.wikipedia.org/wiki/Model_checking` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\04_rustbelt.md`
-  - `concept\04_formal\05_verification_toolchain.md`
-  - `concept\07_future\02_formal_methods.md`
-- `[ERR] https://en.wikipedia.org/wiki/Typestate_analysis` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\03_ownership_formal.md`
-  - `concept\06_ecosystem\02_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Fractional_permissions` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\03_ownership_formal.md`
-- `[ERR] https://en.wikipedia.org/wiki/Interpreter_(computing)` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\05_verification_toolchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Symbolic_execution` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\05_verification_toolchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Hoare_logic` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\05_verification_toolchain.md`
-  - `concept\04_formal\13_formal_methods.md`
-  - `concept\04_formal\15_hoare_logic.md`
-  - `concept\07_future\02_formal_methods.md`
-  - `concept\07_future\08_safety_tags_preview.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
-- `[ERR] https://en.wikipedia.org/wiki/Satisfiability_modulo_theories` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\05_verification_toolchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Predicate_transformer_semantics` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\05_verification_toolchain.md`
-  - `concept\04_formal\15_hoare_logic.md`
-- `[ERR] https://en.wikipedia.org/wiki/Weakest_precondition` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\05_verification_toolchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Viper_(verification_infrastructure)` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\05_verification_toolchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Proof_assistant` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\05_verification_toolchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Automated_theorem_proving` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\05_verification_toolchain.md`
-  - `concept\07_future\02_formal_methods.md`
-- `[502] https://wiki.haskell.org/Functor` — Bad Gateway
-  - `concept\04_formal\10_category_theory.md`
-- `[ERR] https://en.wikipedia.org/wiki/Refinement_type` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\05_verification_toolchain.md`
-  - `concept\07_future\04_effects_system.md`
-- `[ERR] https://en.wikipedia.org/wiki/Type_safety` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\05_verification_toolchain.md`
-  - `concept\05_comparative\04_safety_boundaries.md`
-  - `docs\01_core\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Differential_testing` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\05_verification_toolchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\06_subtype_variance.md`
-- `[ERR] https://en.wikipedia.org/wiki/Type_inference` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\08_type_inference.md`
-- `[ERR] https://en.wikipedia.org/wiki/Session_type` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\09_linear_logic_applications.md`
-- `[ERR] https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-inference.pdf` — timed out
-  - `concept\04_formal\09_linear_logic_applications.md`
-- `[ERR] https://en.wikipedia.org/wiki/Category_theory` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\10_category_theory.md`
-  - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
-  - `concept\06_ecosystem\73_pattern_composition_algebra.md`
-- `[ERR] https://en.wikipedia.org/wiki/Lambda_calculus` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\14_lambda_calculus.md`
-- `[ERR] https://en.wikipedia.org/wiki/Church_encoding` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\14_lambda_calculus.md`
-- `[ERR] https://en.wikipedia.org/wiki/Denotational_semantics` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\12_denotational_semantics.md`
-- `[ERR] https://en.wikipedia.org/wiki/Domain_theory` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\12_denotational_semantics.md`
-- `[ERR] https://en.wikipedia.org/wiki/Model_checking#Bounded_model_checking` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\13_formal_methods.md`
-  - `concept\06_ecosystem\74_formal_verification_tools.md`
-- `[403] https://developer.arm.com/documentation/ihi0042/latest/` — Forbidden
-  - `concept\04_formal\38_application_binary_interface.md`
-- `[ERR] https://en.wikipedia.org/wiki/Fixed-point_combinator` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\14_lambda_calculus.md`
-- `[404] https://doc.rust-lang.org/reference/namespaces.html` — Not Found
-  - `concept\04_formal\40_names_and_resolution.md`
-- `[404] https://doc.rust-lang.org/reference/scopes.html` — Not Found
-  - `concept\04_formal\40_names_and_resolution.md`
-- `[404] https://doc.rust-lang.org/reference/name-resolution.html` — Not Found
-  - `concept\04_formal\40_names_and_resolution.md`
-- `[404] https://www.microsoft.com/en-us/research/publication/design-and-implementation-of-code-optimization/` — Not Found
-  - `concept\04_formal\39_constant_evaluation.md`
-- `[ERR] https://en.wikipedia.org/wiki/DO-178C` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
 - `[403] https://socket.dev/blog/trapdoor-crypto-stealer-npm-pypi-crates` — Forbidden
   - `concept\05_comparative\04_safety_boundaries.md`
-- `[ERR] https://en.wikipedia.org/wiki/Modified_condition/decision_coverage` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
-  - `concept\07_future\07_mcdc_coverage_preview.md`
-- `[ERR] https://www.cs.cmu.edu/~rwh/pfpl/` — timed out
-  - `concept\04_formal\18_evaluation_strategies.md`
-- `[ERR] https://en.wikipedia.org/wiki/Evaluation_strategy` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\18_evaluation_strategies.md`
-- `[ERR] https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools` — _ssl.c:999: The handshake operation timed out
-  - `concept\04_formal\35_name_resolution_and_hir.md`
-  - `concept\04_formal\44_notation.md`
-  - `concept\04_formal\45_lexical_structure.md`
-  - `concept\04_formal\46_items_reference.md`
-  - `concept\04_formal\47_attributes.md`
-  - `concept\04_formal\48_statements_and_expressions_reference.md`
-  - `concept\04_formal\49_patterns_reference.md`
-  - `concept\04_formal\51_names_reference.md`
-  - `concept\04_formal\52_reference_appendices.md`
-- `[ERR] https://en.wikipedia.org/wiki/Programming_language` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\01_rust_vs_cpp.md`
-  - `concept\07_future\03_evolution.md`
-- `[ERR] https://en.wikipedia.org/wiki/Go_(programming_language)` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\02_rust_vs_go.md`
-- `[ERR] https://en.wikipedia.org/wiki/Programming_paradigm` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\03_paradigm_matrix.md`
-- `[ERR] https://en.wikipedia.org/wiki/C%2B%2B` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\01_rust_vs_cpp.md`
-- `[ERR] https://en.wikipedia.org/wiki/Go` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\02_rust_vs_go.md`
-- `[ERR] https://en.wikipedia.org/wiki/CSP` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\02_rust_vs_go.md`
-- `[ERR] https://en.wikipedia.org/wiki/Interface_(computing)` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\02_rust_vs_go.md`
-- `[ERR] https://en.wikipedia.org/wiki/Deadlock` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\04_safety_boundaries.md`
-- `[ERR] https://en.wikipedia.org/wiki/Zero_trust_security_model` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\04_safety_boundaries.md`
-- `[ERR] https://en.wikipedia.org/wiki/Trust_(social)` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\04_safety_boundaries.md`
-- `[404] https://www.ben-morris.com/swift-vs-rust/` — Not Found
-  - `concept\05_comparative\09_rust_vs_swift.md`
-- `[ERR] https://en.wikipedia.org/wiki/Continuation-passing_style` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\05_execution_model_isomorphism.md`
-- `[ERR] https://en.wikipedia.org/wiki/Java_(programming_language)` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\06_rust_vs_java.md`
-- `[403] https://www.oreilly.com/library/view/designing-for-scalability/9781449361556/` — Forbidden
-  - `concept\05_comparative\14_rust_vs_elixir.md`
-- `[ERR] https://golang.org/doc/faq#nil_error` — timed out
-  - `concept\05_comparative\02_rust_vs_go.md`
-- `[ERR] https://en.wikipedia.org/wiki/Python_(programming_language)` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\07_rust_vs_python.md`
-- `[ERR] https://en.wikipedia.org/wiki/Swift_(programming_language)` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\09_rust_vs_swift.md`
-- `[ERR] https://en.wikipedia.org/wiki/Zig_(programming_language)` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\10_rust_vs_zig.md`
-- `[ERR] https://en.wikipedia.org/wiki/Kotlin_(programming_language)` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\11_rust_vs_kotlin.md`
-- `[ERR] https://en.wikipedia.org/wiki/Scala_(programming_language)` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\12_rust_vs_scala.md`
-- `[ERR] https://en.wikipedia.org/wiki/C_Sharp_(programming_language)` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\13_rust_vs_csharp.md`
-- `[ERR] https://en.wikipedia.org/wiki/Erlang_(programming_language)` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\14_rust_vs_elixir.md`
-- `[ERR] https://en.wikipedia.org/wiki/TypeScript` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\15_rust_vs_typescript.md`
-- `[ERR] https://en.wikipedia.org/wiki/Compiler` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\01_toolchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Ruby_(programming_language)` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\19_rust_vs_ruby.md`
-- `[ERR] https://en.wikipedia.org/wiki/Duck_typing` — _ssl.c:999: The handshake operation timed out
-  - `concept\05_comparative\19_rust_vs_ruby.md`
-- `[ERR] https://en.wikipedia.org/wiki/Linker` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\01_toolchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Linker_(computing)` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\01_toolchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Package_manager` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\01_toolchain.md`
-  - `concept\06_ecosystem\03_core_crates.md`
-  - `concept\06_ecosystem\09_cargo_script.md`
-- `[ERR] https://en.wikipedia.org/wiki/Design_pattern` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\02_patterns.md`
-  - `concept\06_ecosystem\04_application_domains.md`
-- `[ERR] https://en.wikipedia.org/` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\02_patterns.md`
-  - `concept\06_ecosystem\04_application_domains.md`
-- `[ERR] https://en.wikipedia.org/wiki/RAII` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\02_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Spaghetti_code` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\02_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Design_pattern%3B_Wikipedia_%E2%80%94_RAII%3B_Wikipedia_%E2%80%94_Typestate` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\02_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Design_pattern%3B_Wikipedia_%E2%80%94_RAII%3B_Wikipedia_%E2%80%94_Typestate_analysis` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\02_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Library_(computing)` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\03_core_crates.md`
-- `[ERR] https://en.wikipedia.org/wiki/Serialization` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\03_core_crates.md`
-- `[ERR] https://en.wikipedia.org/wiki/Cryptography` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\03_core_crates.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_framework` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\03_core_crates.md`
-  - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
 - `[405] https://www.helpnetsecurity.com/2026/04/13/google-pixel-rust-baseband-modem-security/` — Not Allowed
   - `concept\06_ecosystem\04_application_domains.md`
-- `[ERR] https://en.wikipedia.org/wiki/Library` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\03_core_crates.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_engineering` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\04_application_domains.md`
-- `[ERR] https://en.wikipedia.org/wiki/Web_framework` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\04_application_domains.md`
-  - `concept\06_ecosystem\27_web_frameworks.md`
-- `[ERR] https://en.wikipedia.org/wiki/Systems_programming` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\04_application_domains.md`
-- `[ERR] https://en.wikipedia.org/wiki/Embedded_system` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\04_application_domains.md`
-  - `concept\06_ecosystem\22_embedded_systems.md`
-- `[ERR] https://en.wikipedia.org/wiki/Blockchain` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\04_application_domains.md`
-  - `concept\06_ecosystem\06_blockchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Game_engine` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\04_application_domains.md`
-  - `concept\06_ecosystem\26_game_development.md`
-  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
-- `[ERR] https://en.wikipedia.org/wiki/Command-line_interface` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\04_application_domains.md`
-- `[ERR] https://en.wikipedia.org/wiki/Command_line_interface` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\04_application_domains.md`
-- `[ERR] https://en.wikipedia.org/wiki/Machine_learning` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\04_application_domains.md`
-  - `concept\07_future\21_rust_in_ai.md`
-- `[ERR] https://en.wikipedia.org/wiki/Smart_contract` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\06_blockchain.md`
-- `[ERR] https://en.wikipedia.org/wiki/Entity_component_system` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\07_game_ecs.md`
-  - `concept\06_ecosystem\21_game_development.md`
-- `[ERR] https://en.wikipedia.org/wiki/Entity_component_system%3B_Richard_Fabian_%E2%80%94_Data_Oriented_Design%3B_Niko_Matsakis_Blog` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\07_game_ecs.md`
-- `[ERR] https://en.wikipedia.org/wiki/WebAssembly` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\08_wasi.md`
-  - `concept\06_ecosystem\11_webassembly.md`
-  - `concept\06_ecosystem\44_formal_ecosystem_tower.md`
-- `[ERR] https://en.wikipedia.org/wiki/Semantic_versioning` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\10_public_private_deps.md`
-- `[ERR] https://en.wikipedia.org/wiki/Shebang_(Unix)` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\09_cargo_script.md`
-- `[ERR] https://en.wikipedia.org/wiki/Dependency_hell` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\10_public_private_deps.md`
 - `[403] https://socket.dev/` — Forbidden
   - `concept\06_ecosystem\19_security_practices.md`
-- `[ERR] https://en.wikipedia.org/wiki/Dependency_hell#Diamond_dependency_problem` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\10_public_private_deps.md`
-- `[ERR] https://en.wikipedia.org/wiki/Scripting_language` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\09_cargo_script.md`
-- `[ERR] https://en.wikipedia.org/wiki/Defense_in_depth_(computing)` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\19_security_practices.md`
-- `[403] https://developer.arm.com/documentation/dui0552/latest/` — Forbidden
-  - `concept\06_ecosystem\22_embedded_systems.md`
-- `[ERR] https://near.org/` — timed out
-  - `concept\06_ecosystem\11_webassembly.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_license` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\20_licensing_and_compliance.md`
-- `[ERR] https://docs.docker.com/build/building/multi-stage/` — [WinError 10054] 远程主机强迫关闭了一个现有的连接。
-  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
-- `[ERR] https://en.wikipedia.org/wiki/Random-access_memory` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\22_embedded_systems.md`
-- `[403] https://www.oreilly.com/library/view/continuous-delivery-reliable/9780321670250/` — Forbidden
-  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
-- `[ERR] https://www.youtube.com/watch?v=OuhmIS_N4SA` — timed out
-  - `concept\06_ecosystem\18_distributed_systems.md`
-- `[ERR] https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\23_database_access.md`
-- `[ERR] https://opensource.org/licenses` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\20_licensing_and_compliance.md`
-- `[404] https://solace.com/blog/event-driven-architecture-anti-patterns/` — Not Found
-  - `concept\06_ecosystem\32_event_driven_architecture.md`
-- `[ERR] https://en.wikipedia.org/wiki/Cloud-native_computing` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\24_cloud_native.md`
+- `[ERR] https://cs.cmu.edu/~rwh/pfpl/` — timed out
+  - `concept\00_meta\pl_foundations_roadmap.md`
 - `[ERR] https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf` — [WinError 10054] 远程主机强迫关闭了一个现有的连接。
   - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
-- `[ERR] https://rocket.rs/` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\27_web_frameworks.md`
-  - `docs\research_notes\10_error_handling_network_web_alignment.md`
-  - `docs\research_notes\10_practical_applications.md`
-- `[405] https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215` — Method Not Allowed
-  - `concept\06_ecosystem\35_architecture_patterns.md`
-- `[404] https://martinfowler.com/bliki/OverEngineering.html` — Not Found
-  - `concept\06_ecosystem\35_architecture_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Competitive_Programming` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
-- `[ERR] https://opensource.org/licenses/MIT` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\20_licensing_and_compliance.md`
-- `[ERR] https://en.wikipedia.org/wiki/Competitive_programming` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
-- `[404] https://www.rfc-editor.org/rfc/rfc9000.html` — Not Found
-  - `concept\06_ecosystem\38_network_protocols.md`
-- `[404] https://www.rfc-editor.org/rfc/rfc9114.html` — Not Found
-  - `concept\06_ecosystem\38_network_protocols.md`
-  - `docs\research_notes\10_error_handling_network_web_alignment.md`
 - `[ERR] https://sqs` — [Errno 11001] getaddrinfo failed
   - `concept\06_ecosystem\35_architecture_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Systems_design` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\30_system_composability.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_architecture` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\30_system_composability.md`
-- `[405] https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691` — Method Not Allowed
-  - `concept\06_ecosystem\41_workflow_theory.md`
 - `[404] https://www.springer.com/gp/book/9783540761942` — Not Found
   - `concept\06_ecosystem\41_workflow_theory.md`
+- `[ERR] https://owasp.org/www-community/attacks/Denial_of_Service` — _ssl.c:999: The handshake operation timed out
+  - `concept\06_ecosystem\27_web_frameworks.md`
 - `[ERR] https://developers.eventstore.com/` — _ssl.c:999: The handshake operation timed out
   - `concept\06_ecosystem\31_microservice_patterns.md`
-- `[ERR] https://docs.nats.io/` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\32_event_driven_architecture.md`
-- `[ERR] https://developers.eventstore.com/server/v24.10/` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\31_microservice_patterns.md`
-  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
-- `[ERR] https://csrc.nist.gov/publications/detail/sp/800-38d/final` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\43_security_cryptography.md`
-- `[ERR] https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\43_security_cryptography.md`
-- `[ERR] https://cloud.google.com/functions` — timed out
-  - `concept\06_ecosystem\35_architecture_patterns.md`
-- `[ERR] https://csrc.nist.gov/publications/detail/fips/186/5/final` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\43_security_cryptography.md`
-- `[ERR] https://developers.google.com/protocol-buffers` — timed out
-  - `concept\06_ecosystem\42_api_design_patterns.md`
-- `[ERR] https://csrc.nist.gov/pubs/fips/205/final` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\43_security_cryptography.md`
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[ERR] https://developers.google.com/protocol-buffers/docs/proto3` — timed out
-  - `concept\06_ecosystem\42_api_design_patterns.md`
-- `[404] https://pola.rs/posts/polars-pandas-xlsxwriter/` — Not Found
-  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `[ERR] https://csrc.nist.gov/publications/detail/fips/180/4/final` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\43_security_cryptography.md`
-- `[403] https://www.oreilly.com/library/view/fundamentals-of-data/9781098108298/` — Forbidden
-  - `concept\06_ecosystem\48_data_engineering.md`
-- `[403] https://www.oreilly.com/radar/the-world-beyond-batch-streaming-101/` — Forbidden
-  - `concept\06_ecosystem\48_data_engineering.md`
-- `[404] https://pola.rs/posts/rust-for-data/` — Not Found
-  - `concept\06_ecosystem\48_data_engineering.md`
-- `[ERR] https://csrc.nist.gov/projects/post-quantum-cryptography` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\43_security_cryptography.md`
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[404] https://parquet.apache.org/docs/file-format/config/` — Not Found
-  - `concept\06_ecosystem\48_data_engineering.md`
-- `[404] https://parquet.apache.org/docs/file-format/schema-evolution/` — Not Found
-  - `concept\06_ecosystem\48_data_engineering.md`
-- `[ERR] https://boringssl.googlesource.com/boringssl/` — timed out
-  - `concept\06_ecosystem\43_security_cryptography.md`
-- `[ERR] https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\43_security_cryptography.md`
+- `[ERR] https://golang.org/doc/faq#nil_error` — timed out
+  - `concept\05_comparative\02_rust_vs_go.md`
+- `[ERR] https://owasp.org/` — _ssl.c:999: The handshake operation timed out
+  - `concept\06_ecosystem\19_security_practices.md`
+- `[ERR] https://basarat.gitbook.io/typescript/` — _ssl.c:999: The handshake operation timed out
+  - `concept\05_comparative\15_rust_vs_typescript.md`
+- `[ERR] https://near.org/` — timed out
+  - `concept\06_ecosystem\11_webassembly.md`
+- `[ERR] https://owasp.org/www-project-top-ten/` — _ssl.c:999: The handshake operation timed out
+  - `concept\06_ecosystem\19_security_practices.md`
 - `[403] https://www.realtimerendering.com/` — Forbidden
   - `concept\06_ecosystem\49_game_engine_internals.md`
 - `[403] https://www.khronos.org/registry/vulkan/specs/1.3/html/vkspec.html` — Forbidden
   - `concept\06_ecosystem\49_game_engine_internals.md`
-- `[ERR] https://owasp.org/www-community/Application_Threat_Modeling` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\43_security_cryptography.md`
-- `[ERR] https://csrc.nist.gov/pubs/fips/203/final` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\43_security_cryptography.md`
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[ERR] https://pmg.csail.mit.edu/papers/osdi99.pdf` — [WinError 10061] 由于目标计算机积极拒绝，无法连接。
-  - `concept\06_ecosystem\50_distributed_consensus.md`
-- `[ERR] https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\43_security_cryptography.md`
+- `[ERR] https://opensource.org/licenses/MIT` — _ssl.c:999: The handshake operation timed out
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
+- `[ERR] https://rocket.rs/` — _ssl.c:999: The handshake operation timed out
+  - `concept\06_ecosystem\27_web_frameworks.md`
+  - `docs\research_notes\10_error_handling_network_web_alignment.md`
+  - `docs\research_notes\10_practical_applications.md`
 - `[403] https://learning.quantum.ibm.com/` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[ERR] https://www.onehouse.ai/blog/onehouse-analytics-engine-guide` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\48_data_engineering.md`
-- `[403] https://qiskit.org/textbook/ch-states/introduction.html` — Forbidden
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[403] https://qiskit.org/textbook/` — Forbidden
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[ERR] https://cloud.google.com/functions` — timed out
+  - `concept\06_ecosystem\35_architecture_patterns.md`
 - `[403] https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777` — Forbidden
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[403] https://qiskit.org/textbook/ch-states/single-qubit-gates.html` — Forbidden
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[403] https://qiskit.org/textbook/ch-gates/introduction.html` — Forbidden
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[ERR] https://huggingface.co/docs/safetensors/index` — timed out
-  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-  - `concept\07_future\21_rust_in_ai.md`
-- `[ERR] https://huggingface.co/docs/hub/index` — timed out
-  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `[403] https://qiskit.org/` — Forbidden
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[ERR] https://csrc.nist.gov/pubs/fips/204/final` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\43_security_cryptography.md`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `[403] https://www.nsa.gov/Press-Room/Fact-Sheets/Article/3215798/nsa-releases-cnsa-20/` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[ERR] https://www.gamedeveloper.com/programming/oop-is-dead-long-live-ecs` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\49_game_engine_internals.md`
-- `[ERR] https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\43_security_cryptography.md`
-- `[ERR] https://en.wikipedia.org/wiki/Byzantine_fault` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\50_distributed_consensus.md`
-- `[ERR] https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-  - `concept\06_ecosystem\48_data_engineering.md`
-- `[403] https://qiskit.org/textbook/ch-applications/vqe-molecules.html` — Forbidden
+- `[403] https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.70.1895` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[ERR] https://research.google/pubs/pub36632/` — timed out
-  - `concept\06_ecosystem\48_data_engineering.md`
-- `[ERR] https://en.wikipedia.org/wiki/CAP_theorem` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\50_distributed_consensus.md`
 - `[404] https://link.springer.com/book/10.1007/978-3-030-66474-7` — Not Found
   - `concept\06_ecosystem\52_robotics.md`
+- `[ERR] https://pmg.csail.mit.edu/papers/osdi99.pdf` — [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `[ERR] https://blake3.io/blake3.pdf` — TimeoutError('The read operation timed out')
+  - `concept\06_ecosystem\43_security_cryptography.md`
 - `[403] https://wiki.linuxfoundation.org/realtime/start` — Forbidden
   - `concept\06_ecosystem\52_robotics.md`
-- `[ERR] https://www.nalgebra.org/` — [Errno 11001] getaddrinfo failed
-  - `concept\06_ecosystem\52_robotics.md`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
 - `[ERR] https://navigation.ros.org/` — [Errno 11001] getaddrinfo failed
   - `concept\06_ecosystem\52_robotics.md`
 - `[ERR] https://navigation.ros.org/behavior_trees/index.html` — [Errno 11001] getaddrinfo failed
   - `concept\06_ecosystem\52_robotics.md`
-- `[ERR] https://www.nalgebra.org/decompositions-and-lapack/` — [Errno 11001] getaddrinfo failed
-  - `concept\06_ecosystem\52_robotics.md`
-- `[ERR] https://www.nalgebra.org/benchmarks/` — [Errno 11001] getaddrinfo failed
-  - `concept\06_ecosystem\52_robotics.md`
-- `[403] https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.70.1895` — Forbidden
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[404] https://design.ros2.org/articles/rosidl.html` — Not Found
-  - `concept\06_ecosystem\52_robotics.md`
-- `[ERR] https://en.wikipedia.org/wiki/Quantum_superposition` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[ERR] https://en.wikipedia.org/wiki/Bell_state` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[ERR] https://www.displayfuture.com/Display/datasheet/controller/ST7789.pdf` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
-  - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[ERR] https://www.focaltech-systems.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.focaltech-systems.com'. (_ssl.c:1016)
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[ERR] https://en.wikipedia.org/wiki/Quantum_circuit` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[ERR] https://www.displayfuture.com/Display/datasheet/controller/ST7789.pdf` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
+  - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[403] https://grobotronics.com/images/datasheets/xpt2046-datasheet.pdf` — Forbidden
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://docs.lvgl.io/8.3/overview/perf.html` — Not Found
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://docs.lvgl.io/8.3/porting/mem.html` — Not Found
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[403] https://developer.arm.com/documentation/dai0298/a/` — Forbidden
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[403] https://developer.arm.com/documentation/den0013/d/Caches/Cache-coherency` — Forbidden
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[403] https://developer.arm.com/documentation/100240/latest/` — Forbidden
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://docs.lvgl.io/8.3/overview/memory.html` — Not Found
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[403] https://trunkrs.dev/` — Forbidden
-  - `concept\06_ecosystem\54_webassembly_advanced.md`
-- `[ERR] https://en.wikipedia.org/wiki/Mathematical_formulation_of_quantum_mechanics` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[ERR] https://csrc.nist.gov/publications/detail/fips/197/final` — _ssl.c:999: The handshake operation timed out
+- `[ERR] https://owasp.org/www-community/Application_Threat_Modeling` — _ssl.c:999: The handshake operation timed out
   - `concept\06_ecosystem\43_security_cryptography.md`
+- `[ERR] https://docs.docker.com/desktop/wasm/` — [WinError 10054] 远程主机强迫关闭了一个现有的连接。
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `[ERR] https://developers.google.com/protocol-buffers` — timed out
+  - `concept\06_ecosystem\42_api_design_patterns.md`
 - `[ERR] https://c2rust.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)
   - `concept\06_ecosystem\56_c_to_rust_translation.md`
   - `docs\04_research\04_llm_c_to_rust_migration.md`
-- `[ERR] https://en.wikipedia.org/wiki/Refresh_rate` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[ERR] https://en.wikipedia.org/wiki/Electronic_paper` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[ERR] https://quantumai.google/cirq` — timed out
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[ERR] https://en.wikipedia.org/wiki/Screen_burn-in` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[ERR] https://en.wikipedia.org/wiki/I%C2%B2C` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[ERR] https://en.wikipedia.org/wiki/Serial_Peripheral_Interface` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://rust-lang.github.io/rfcs/3271-rustdoc-links.html` — Not Found
-  - `concept\06_ecosystem\77_rustdoc_196_changes.md`
-- `[ERR] https://en.wikipedia.org/wiki/Capability-based_security` — _ssl.c:999: The handshake operation timed out
+- `[403] https://trunkrs.dev/` — Forbidden
   - `concept\06_ecosystem\54_webassembly_advanced.md`
-- `[404] https://doc.rust-lang.org/cargo/why-cargo-exists.html` — Not Found
-  - `concept\06_ecosystem\80_cargo_getting_started.md`
-- `[ERR] https://www.darpa.mil/research/programs/translating-all-c-to-rust` — [Errno 11001] getaddrinfo failed
-  - `concept\06_ecosystem\56_c_to_rust_translation.md`
-- `[ERR] https://en.wikipedia.org/wiki/Functor` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\73_pattern_composition_algebra.md`
-- `[ERR] https://cybersecurity-news.com/hax-rust-verification/` — timed out
-  - `concept\06_ecosystem\74_formal_verification_tools.md`
-- `[ERR] https://en.wikipedia.org/wiki/Satisfiability_modulo_theories#Complexity` — _ssl.c:999: The handshake operation timed out
-  - `concept\06_ecosystem\74_formal_verification_tools.md`
-- `[ERR] https://en.wikipedia.org/wiki/Artificial_intelligence` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\01_ai_integration.md`
-  - `concept\07_future\archive\01_ai_integration_original.md`
-- `[ERR] https://en.wikipedia.org/wiki/Large_language_model` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\01_ai_integration.md`
-  - `concept\07_future\archive\01_ai_integration_original.md`
-- `[ERR] https://en.wikipedia.org/wiki/Reinforcement_learning` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\01_ai_integration.md`
-  - `concept\07_future\archive\01_ai_integration_original.md`
-- `[ERR] https://chromium.googlesource.com/chromium/src/+/main/docs/rust.md` — timed out
-  - `concept\06_ecosystem\58_platform_rust_integration.md`
-- `[ERR] https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html` — timed out
-  - `concept\06_ecosystem\58_platform_rust_integration.md`
-  - `concept\06_ecosystem\75_industrial_case_studies.md`
-- `[ERR] https://security.googleblog.com/` — timed out
-  - `concept\06_ecosystem\58_platform_rust_integration.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_release_life_cycle` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\03_evolution.md`
-  - `concept\07_future\44_edition_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Model_Checking` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\02_formal_methods.md`
-  - `docs\research_notes\10_formal_concepts_encyclopedia.md`
-  - `docs\research_notes\10_formal_full_model_overview.md`
-  - `docs\research_notes\10_verification_tools_matrix.md`
-  - `docs\rust-formal-engineering-system\02_practical_applications\memory\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\01_compiler\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\02_package_manager\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/ATP` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\02_formal_methods.md`
+- `[404] https://rust-lang.github.io/rfcs/3271-rustdoc-json.html` — Not Found
+  - `concept\06_ecosystem\77_rustdoc_196_changes.md`
+- `[ERR] https://developers.google.com/protocol-buffers/docs/proto3` — timed out
+  - `concept\06_ecosystem\42_api_design_patterns.md`
 - `[403] https://docs.adacore.com/gnatcoverage-docs/html/gnatcoverage.html` — Forbidden
   - `concept\07_future\07_mcdc_coverage_preview.md`
-- `[404] https://releases.rs/1.85.0` — Not Found
-  - `concept\07_future\19_rust_edition_preview.md`
-- `[404] https://www.pingcap.com/article/rust-in-ai/` — Not Found
-  - `concept\07_future\21_rust_in_ai.md`
 - `[ERR] https://docs.kernel.org/bpf/]。` — UnicodeEncodeError('ascii', 'HEAD /bpf/]。 HTTP/1.1', 11, 12, 'ordinal not in range(128)')
   - `concept\07_future\29_ebpf_rust.md`
 - `[ERR] https://spec.rust-lang.org/` — [Errno 11001] getaddrinfo failed
   - `concept\07_future\41_rust_specification_preview.md`
-- `[ERR] https://en.wikipedia.org/wiki/Row_polymorphism` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\04_effects_system.md`
-- `[ERR] https://en.wikipedia.org/wiki/Algebraic_effect` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\04_effects_system.md`
+- `[ERR] https://www.gamedeveloper.com/programming/oop-is-dead-long-live-ecs` — _ssl.c:999: The handshake operation timed out
+  - `concept\06_ecosystem\49_game_engine_internals.md`
 - `[403] https://www.linuxtoday.com/blog/linux-kernel-7-0-officially-released-this-is-whats-new/` — Forbidden
   - `concept\07_future\43_rust_for_linux.md`
-- `[404] https://lwn.net/Articles/...` — Not Found
-  - `concept\07_future\43_rust_for_linux.md`
-- `[ERR] https://en.wikipedia.org/wiki/Effect_system` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\04_effects_system.md`
-- `[403] https://developer.arm.com/documentation/100986/latest` — Forbidden
-  - `concept\07_future\48_aarch64_sve_sme_preview.md`
-- `[403] https://developer.arm.com/documentation/109246/latest` — Forbidden
-  - `concept\07_future\48_aarch64_sve_sme_preview.md`
-- `[403] https://developer.arm.com/documentation/102476/latest` — Forbidden
-  - `concept\07_future\48_aarch64_sve_sme_preview.md`
-- `[403] https://developer.arm.com/documentation/109540/latest` — Forbidden
-  - `concept\07_future\48_aarch64_sve_sme_preview.md`
-- `[ERR] https://en.wikipedia.org/wiki/Code_coverage` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\07_mcdc_coverage_preview.md`
-- `[ERR] https://en.wikipedia.org/wiki/Amdahl%27s_law` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\09_parallel_frontend_preview.md`
-- `[404] https://www.rust-lang.org/faq` — Not Found
-  - `knowledge\00_start\04_rust_philosophy.md`
-- `[404] https://doc.rust-lang.org/edition-guide/rust-2024/let-else.html` — Not Found
-  - `knowledge\02_intermediate\control_flow\02_let_chains.md`
-- `[ERR] https://en.wikipedia.org/wiki/Multiple_dispatch` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\26_specialization_preview.md`
-- `[404] https://doc.rust-lang.org/nightly/unstable-book/language-features/asm.html` — Not Found
-  - `knowledge\03_advanced\03_inline_asm.md`
-- `[404] https://without.boats/blog/implied-bounds-and-perfect-derive/` — Not Found
-  - `knowledge\03_advanced\06_type_driven_correctness.md`
-- `[ERR] https://en.wikipedia.org/wiki/Compile_time` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\27_compile_time_execution.md`
-- `[404] https://doc.rust-lang.org/nomicon/uninit.html` — Not Found
-  - `knowledge\03_advanced\unsafe\03_maybe_uninit.md`
 - `[ERR] https://rrsa.rs/` — [Errno 11001] getaddrinfo failed
   - `knowledge\04_expert\02_unsafe_audit.md`
-- `[ERR] https://en.wikipedia.org/wiki/EBPF` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\29_ebpf_rust.md`
-- `[404] https://iris-project.org/tutorial.html` — Not Found
-  - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
+- `[404] https://without.boats/blog/implied-bounds/` — Not Found
+  - `knowledge\03_advanced\06_type_driven_correctness.md`
+- `[ERR] https://boringssl.googlesource.com/boringssl/` — timed out
+  - `concept\06_ecosystem\43_security_cryptography.md`
 - `[ERR] https://rust-safety-critical.com/` — [Errno 11001] getaddrinfo failed
   - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
   - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
@@ -9448,451 +10305,48 @@
   - `knowledge\04_expert\safety_critical\10_standards\02_iec_61508_rust_implementation_guide.md`
   - `knowledge\04_expert\safety_critical\10_standards\03_iso_26262_rust_implementation_guide.md`
   - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
+- `[404] https://doc.rust-lang.org/nightly/unstable-book/language-features/asm.html` — Not Found
+  - `knowledge\03_advanced\03_inline_asm.md`
 - `[ERR] https://rust-safety-critical.org/` — [Errno 11001] getaddrinfo failed
   - `knowledge\04_expert\safety_critical\README.md`
-- `[404] https://plv.mpi-sws.org/rustbelt/tree-borrows/` — Not Found
-  - `docs\04_research\04_rust_formal_verification.md`
-  - `docs\research_notes\10_tutorial_borrow_checker.md`
-  - `knowledge\04_expert\safety_critical\02_matrices\03_rust_ownership_memory_model_matrix.md`
-- `[404] https://doc.rust-lang.org/nomicon/memory.html` — Not Found
-  - `knowledge\04_expert\safety_critical\02_matrices\03_rust_ownership_memory_model_matrix.md`
-- `[ERR] https://www.tuvsud.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1016)
-  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
-- `[ERR] https://en.wikipedia.org/wiki/Artificial_Intelligence` — _ssl.c:999: The handshake operation timed out
-  - `concept\07_future\README.md`
-  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
-  - `docs\03_guides\03_let_chains_guide.md`
-  - `docs\04_research\04_next_generation_trait_solver.md`
-  - `docs\04_research\04_ng_trait_solver.md`
-  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
-  - `docs\06_toolchain\01_compiler_features.md`
-  - `docs\06_toolchain\03_rustdoc_advanced.md`
-  - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
-  - `docs\06_toolchain\06_cranelift_backend_guide.md`
-  - `docs\research_notes\10_argumentation_chain_and_flow.md`
-  - `docs\research_notes\10_core_features_full_chain.md`
-  - `docs\research_notes\10_domain_analysis_framework.md`
-  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
+- `[ERR] https://huggingface.co/docs/safetensors/index` — timed out
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\07_future\21_rust_in_ai.md`
+- `[ERR] https://huggingface.co/docs/hub/index` — timed out
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `[ERR] https://www.autosar.org` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
+  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
 - `[ERR] https://www.autosar.org/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
   - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
-- `[ERR] https://en.wikipedia.org/wiki/Integer_overflow` — _ssl.c:999: The handshake operation timed out
-  - `concept\archive\01_foundation_11_numeric_types_deprecated.md`
-- `[404] https://www.fda.gov/` — Not Found
-  - `knowledge\04_expert\safety_critical\07_case_studies\04_case_study_04_medical_devices.md`
-  - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_versioning` — _ssl.c:999: The handshake operation timed out
-  - `concept\archive\07_future_23_rust_edition_guide_deprecated.md`
 - `[ERR] https://opensource.axo.dev/cargo-dist/` — [Errno 11001] getaddrinfo failed
   - `docs\research_notes\10_cicd_supply_chain_alignment.md`
   - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
   - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
-- `[ERR] https://www.autosar.org` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
-  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
-- `[404] https://www.rust-lang.org/governance/wgs/wg-security-response` — Not Found
+- `[404] https://www.fda.gov/` — Not Found
+  - `knowledge\04_expert\safety_critical\07_case_studies\04_case_study_04_medical_devices.md`
+  - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
+- `[ERR] https://www.tuvsud.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1016)
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+- `[404] https://www.rust-lang.org/governance/wgs/security-response` — Not Found
   - `knowledge\04_expert\safety_critical\09_reference\15_security_audit_guide.md`
   - `knowledge\04_expert\safety_critical\09_reference\16_supply_chain_security_guide.md`
-- `[404] https://rust-lang.github.io/rfcs/2121-cargo-workspace.html` — Not Found
-  - `knowledge\06_ecosystem\01_cargo_basics.md`
-- `[404] https://rust-lang.github.io/rfcs/2121-private-dependency.html` — Not Found
-  - `knowledge\06_ecosystem\01_cargo_basics.md`
-- `[ERR] https://en.wikipedia.org/wiki/Iterator` — _ssl.c:999: The handshake operation timed out
-  - `knowledge\01_fundamentals\02_iterators.md`
 - `[ERR] https://www.areweadyet.org/topics/database/` — [Errno 11001] getaddrinfo failed
   - `knowledge\06_ecosystem\databases\01_sea_orm_deep_dive.md`
   - `knowledge\06_ecosystem\databases\02_sqlx_deep_dive.md`
-- `[404] https://doc.rust-lang.org/nightly/unstable-book/language-features/const-eval.html` — Not Found
-  - `knowledge\06_ecosystem\emerging\02_generic_const_exprs.md`
-- `[ERR] https://security.googleblog.com/2021/04/rust-in-linux-kernel.html` — timed out
-  - `concept\07_future\43_rust_for_linux.md`
-- `[ERR] https://www.cs.cmu.edu/~janh/courses/411/` — timed out
-  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
-- `[404] https://rust-lang.github.io/rfcs/3560-static-mut-references.html` — Not Found
+- `[404] https://rust-lang.github.io/rfcs/3516-private-dependency.html` — Not Found
+  - `knowledge\06_ecosystem\01_cargo_basics.md`
+- `[404] https://rust-lang.github.io/rfcs/3560-alignment.html` — Not Found
   - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
-- `[ERR] https://docs.docker.com/get-docker/` — [WinError 10054] 远程主机强迫关闭了一个现有的连接。
-  - `docs\06_docker_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Continuous_delivery` — _ssl.c:999: The handshake operation timed out
-  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
-  - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
+- `[404] https://rust-lang.github.io/rfcs/2121-cargo-profile.html` — Not Found
+  - `knowledge\06_ecosystem\01_cargo_basics.md`
+- `[404] https://doc.rust-lang.org/nightly/unstable-book/language-features/const-fn.html` — Not Found
+  - `knowledge\06_ecosystem\emerging\02_generic_const_exprs.md`
 - `[403] https://www.phoronix.com/news/Rust-1.94-Released` — Forbidden
   - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-- `[ERR] https://en.wikipedia.org/wiki/Data-oriented_design` — _ssl.c:999: The handshake operation timed out
-  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Relational_database` — _ssl.c:999: The handshake operation timed out
-  - `knowledge\06_ecosystem\databases\01_sea_orm_deep_dive.md`
-  - `knowledge\06_ecosystem\databases\02_sqlx_deep_dive.md`
-- `[ERR] https://render.com/docs/rust` — timed out
-  - `knowledge\06_ecosystem\deployment\README.md`
-- `[ERR] https://www.youtube.com/watch?v=QlM6HIXp5HQ` — timed out
-  - `knowledge\03_advanced\06_type_driven_correctness.md`
-- `[ERR] https://ferrous-systems.com` — _ssl.c:999: The handshake operation timed out
-  - `knowledge\04_expert\safety_critical\05_strategic_guidance\02_comprehensive_recommendations_and_opinions.md`
-  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
-  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
-- `[404] https://aws.amazon.com/blogs/opensource/why-aws-loves-rust/` —
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-- `[ERR] https://en.wikipedia.org/wiki/Memory_Safety` — _ssl.c:999: The handshake operation timed out
-  - `docs\00_meta\00_annual_review_template.md`
-  - `docs\00_meta\00_improvement_plan_execution_complete.md`
-  - `docs\00_meta\00_template_concept_doc.md`
-  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
-  - `docs\01_cargo_build_optimization.md`
-  - `docs\01_core\01_ownership_borrowing_lifetimes.md`
-  - `docs\01_learning\01_learning_path_planning.md`
-  - `docs\01_learning\01_mdbook_quiz_guide.md`
-  - `docs\02_reference\02_cross_language_comparison.md`
-  - `docs\02_reference\02_error_code_mapping.md`
-  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
-  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
-  - `docs\02_reference\quick_reference\02_async_patterns.md`
-  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_generics_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_ownership_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_testing_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_type_system.md`
-  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
-  - `docs\02_reference\quick_reference\README.md`
-  - `docs\03_guides\03_let_chains_guide.md`
-  - `docs\03_guides\03_miri_guide.md`
-  - `docs\03_guides\03_test_coverage.md`
-  - `docs\03_practice\03_project_01_cli_tool.md`
-  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
-  - `docs\04_research\04_llm_c_to_rust_migration.md`
-  - `docs\04_research\04_next_generation_trait_solver.md`
-  - `docs\04_research\04_rust_for_linux_2026.md`
-  - `docs\04_research\04_rust_formal_verification.md`
-  - `docs\04_research\04_safety_critical_alignment_2026.md`
-  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
-  - `docs\04_thinking\04_applications_analysis_view.md`
-  - `docs\04_thinking\04_decision_graph_network.md`
-  - `docs\04_thinking\04_mind_map_collection.md`
-  - `docs\04_thinking\04_proof_graph_network.md`
-  - `docs\04_thinking\04_thinking_representation_methods.md`
-  - `docs\05_guides\05_advanced_topics_deep_dive.md`
-  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
-  - `docs\05_guides\05_async_programming_usage_guide.md`
-  - `docs\05_guides\05_cli_applications_guide.md`
-  - `docs\05_guides\05_cross_module_integration_examples.md`
-  - `docs\05_guides\05_cxx_rust_interop_evaluation.md`
-  - `docs\05_guides\05_design_patterns_usage_guide.md`
-  - `docs\05_guides\05_embedded_rust_guide.md`
-  - `docs\05_guides\05_formal_verification_integration_guide.md`
-  - `docs\05_guides\05_inline_assembly_guide.md`
-  - `docs\05_guides\05_macro_system_usage_guide.md`
-  - `docs\05_guides\05_miri_practical_guide.md`
-  - `docs\05_guides\05_performance_tuning_guide.md`
-  - `docs\05_guides\05_testing_coverage_guide.md`
-  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
-  - `docs\05_guides\05_wasm_usage_guide.md`
-  - `docs\05_guides\best_practices.md`
-  - `docs\05_guides\workflow\01_workflow_theory.md`
-  - `docs\06_toolchain\01_compiler_features.md`
-  - `docs\06_toolchain\06_cargo_script_guide.md`
-  - `docs\06_toolchain\06_cranelift_backend_guide.md`
-  - `docs\06_toolchain\README.md`
-  - `docs\07_project\07_extension_deepening_plan_2026.md`
-  - `docs\07_project\07_knowledge_structure_framework.md`
-  - `docs\07_project\07_module_knowledge_structure_guide.md`
-  - `docs\07_project\07_project_architecture_guide.md`
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-  - `docs\10_authoritative_sources_and_citations.md`
-  - `docs\10_migration_guide_2026.md`
-  - `docs\10_miri_guide.md`
-  - `docs\research_notes\10_authoritative_alignment_guide.md`
-  - `docs\research_notes\10_authoritative_alignment_status.md`
-  - `docs\research_notes\10_best_practices.md`
-  - `docs\research_notes\10_changelog.md`
-  - `docs\research_notes\10_code_doc_formal_mapping.md`
-  - `docs\research_notes\10_cognitive_argumentation_framework.md`
-  - `docs\research_notes\10_comprehensive_systematic_overview.md`
-  - `docs\research_notes\10_comprehensive_systematic_review_and_100_percent_plan.md`
-  - `docs\research_notes\10_concept_comparison_tables.md`
-  - `docs\research_notes\10_concept_relationship_network.md`
-  - `docs\research_notes\10_concurrency_cheatsheet.md`
-  - `docs\research_notes\10_content_enhancement.md`
-  - `docs\research_notes\10_core_theorems_full_proofs.md`
-  - `docs\research_notes\10_counter_examples_compendium.md`
-  - `docs\research_notes\10_design_mechanism_rationale.md`
-  - `docs\research_notes\10_distributed_concept_mindmap.md`
-  - `docs\research_notes\10_distributed_pattern_matrix.md`
-  - `docs\research_notes\10_domain_analysis_framework.md`
-  - `docs\research_notes\10_faq.md`
-  - `docs\research_notes\10_faq_comprehensive.md`
-  - `docs\research_notes\10_formal_concepts_encyclopedia.md`
-  - `docs\research_notes\10_formal_full_model_overview.md`
-  - `docs\research_notes\10_formal_language_and_proofs.md`
-  - `docs\research_notes\10_glossary.md`
-  - `docs\research_notes\10_incremental_update_flow.md`
-  - `docs\research_notes\10_interview_questions_collection.md`
-  - `docs\research_notes\10_language_semantics_expressiveness.md`
-  - `docs\research_notes\10_macros_cheatsheet.md`
-  - `docs\research_notes\10_ownership_concept_mindmap.md`
-  - `docs\research_notes\10_practical_applications.md`
-  - `docs\research_notes\10_proof_index.md`
-  - `docs\research_notes\10_proof_techniques_mindmap.md`
-  - `docs\research_notes\10_proof_tree_borrow.md`
-  - `docs\research_notes\10_proof_tree_ownership.md`
-  - `docs\research_notes\10_quick_find.md`
-  - `docs\research_notes\10_research_methodology.md`
-  - `docs\research_notes\10_research_roadmap.md`
-  - `docs\research_notes\10_resources.md`
-  - `docs\research_notes\10_rustsem_semantics.md`
-  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
-  - `docs\research_notes\10_theorem_rust_example_mapping.md`
-  - `docs\research_notes\10_theorems_and_proof_strategies.md`
-  - `docs\research_notes\10_theoretical_and_argumentation_system_architecture.md`
-  - `docs\research_notes\10_tools_guide.md`
-  - `docs\research_notes\10_tutorial_borrow_checker.md`
-  - `docs\research_notes\10_tutorial_concurrency_models.md`
-  - `docs\research_notes\10_tutorial_lifetimes.md`
-  - `docs\research_notes\10_tutorial_ownership_safety.md`
-  - `docs\research_notes\10_tutorial_type_system.md`
-  - `docs\research_notes\10_unified_systematic_framework.md`
-  - `docs\research_notes\README.md`
-  - `docs\research_notes\experiments\10_compiler_optimizations.md`
-  - `docs\research_notes\experiments\10_concurrency_performance.md`
-  - `docs\research_notes\experiments\10_memory_analysis.md`
-  - `docs\research_notes\experiments\10_performance_benchmarks.md`
-  - `docs\research_notes\experiments\README.md`
-  - `docs\research_notes\formal_methods\10_async_state_machine.md`
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
-  - `docs\research_notes\formal_methods\10_send_sync_formalization.md`
-  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
-  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\04_boundary_matrix.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\README.md`
-  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
-  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\04_expressiveness_boundary.md`
-  - `docs\research_notes\software_design_theory\03_execution_models\02_async.md`
-  - `docs\research_notes\software_design_theory\03_execution_models\05_distributed.md`
-  - `docs\research_notes\software_design_theory\04_compositional_engineering\README.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\10_expressive_inexpressive_matrix.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md`
-  - `docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md`
-  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
-  - `docs\research_notes\software_design_theory\06_rust_idioms.md`
-  - `docs\research_notes\software_design_theory\07_anti_patterns.md`
-  - `docs\research_notes\software_design_theory\10_00_master_index.md`
-  - `docs\research_notes\type_theory\10_advanced_types.md`
-  - `docs\research_notes\type_theory\10_construction_capability.md`
-  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
-  - `docs\research_notes\type_theory\10_type_system_foundations.md`
-  - `docs\research_notes\type_theory\10_variance_theory.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\03_ownership_borrowing\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
-  - `docs\rust-formal-engineering-system\02_practical_applications\memory\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\02_async\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\09_actor_model\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
-  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
-  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
-  - `docs\rust-formal-engineering-system\03_design_patterns\README.md`
-  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\01_compiler\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
-  - `docs\rust-formal-engineering-system\09_research_agenda\04_research_methods\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Concurrency` — _ssl.c:999: The handshake operation timed out
-  - `docs\00_meta\00_content_reconstruction_plan_2026.md`
-  - `docs\00_meta\00_documentation_lifecycle.md`
-  - `docs\01_cargo_build_optimization.md`
-  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
-  - `docs\01_learning\01_learning_path_planning.md`
-  - `docs\01_learning\01_mdbook_quiz_guide.md`
-  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
-  - `docs\02_reference\alignment_guide.md`
-  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_async_patterns.md`
-  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_closures_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_ownership_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
-  - `docs\02_reference\quick_reference\02_type_system.md`
-  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
-  - `docs\02_reference\quick_reference\README.md`
-  - `docs\03_guides\03_miri_guide.md`
-  - `docs\03_practice\03_project_06_concurrent_downloader.md`
-  - `docs\04_research\04_next_generation_trait_solver.md`
-  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
-  - `docs\04_thinking\04_applications_analysis_view.md`
-  - `docs\04_thinking\04_decision_graph_network.md`
-  - `docs\04_thinking\04_thinking_representation_methods.md`
-  - `docs\05_guides\05_advanced_topics_deep_dive.md`
-  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
-  - `docs\05_guides\05_async_programming_usage_guide.md`
-  - `docs\05_guides\05_cli_applications_guide.md`
-  - `docs\05_guides\05_cross_module_integration_examples.md`
-  - `docs\05_guides\05_embedded_rust_guide.md`
-  - `docs\05_guides\05_inline_assembly_guide.md`
-  - `docs\05_guides\05_macro_system_usage_guide.md`
-  - `docs\05_guides\05_miri_practical_guide.md`
-  - `docs\05_guides\05_performance_tuning_guide.md`
-  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
-  - `docs\05_guides\05_troubleshooting_guide.md`
-  - `docs\05_guides\05_type_system_usage_guide.md`
-  - `docs\05_guides\05_wasm_usage_guide.md`
-  - `docs\05_guides\best_practices.md`
-  - `docs\05_guides\workflow\01_workflow_theory.md`
-  - `docs\06_toolchain\01_compiler_features.md`
-  - `docs\06_toolchain\06_cranelift_backend_guide.md`
-  - `docs\07_project\07_knowledge_structure_framework.md`
-  - `docs\07_project\07_module_knowledge_structure_guide.md`
-  - `docs\07_project\07_project_architecture_guide.md`
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-  - `docs\10_authoritative_sources_and_citations.md`
-  - `docs\10_migration_guide_2026.md`
-  - `docs\research_notes\10_authoritative_alignment_guide.md`
-  - `docs\research_notes\10_best_practices.md`
-  - `docs\research_notes\10_changelog.md`
-  - `docs\research_notes\10_code_doc_formal_mapping.md`
-  - `docs\research_notes\10_cognitive_argumentation_framework.md`
-  - `docs\research_notes\10_comprehensive_project_report.md`
-  - `docs\research_notes\10_comprehensive_systematic_overview.md`
-  - `docs\research_notes\10_comprehensive_systematic_review_and_100_percent_plan.md`
-  - `docs\research_notes\10_concept_comparison_tables.md`
-  - `docs\research_notes\10_concurrency_cheatsheet.md`
-  - `docs\research_notes\10_design_mechanism_rationale.md`
-  - `docs\research_notes\10_error_handling_cheatsheet.md`
-  - `docs\research_notes\10_faq_comprehensive.md`
-  - `docs\research_notes\10_formal_concepts_encyclopedia.md`
-  - `docs\research_notes\10_formal_full_model_overview.md`
-  - `docs\research_notes\10_formal_language_and_proofs.md`
-  - `docs\research_notes\10_incremental_update_flow.md`
-  - `docs\research_notes\10_interview_questions_collection.md`
-  - `docs\research_notes\10_l3_machine_proof_guide.md`
-  - `docs\research_notes\10_language_semantics_expressiveness.md`
-  - `docs\research_notes\10_macros_cheatsheet.md`
-  - `docs\research_notes\10_practical_applications.md`
-  - `docs\research_notes\10_proof_index.md`
-  - `docs\research_notes\10_research_roadmap.md`
-  - `docs\research_notes\10_rustsem_semantics.md`
-  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
-  - `docs\research_notes\10_system_summary.md`
-  - `docs\research_notes\10_theorem_rust_example_mapping.md`
-  - `docs\research_notes\10_theorems_and_proof_strategies.md`
-  - `docs\research_notes\10_theoretical_and_argumentation_system_architecture.md`
-  - `docs\research_notes\10_tools_guide.md`
-  - `docs\research_notes\10_tutorial_borrow_checker.md`
-  - `docs\research_notes\10_tutorial_concurrency_models.md`
-  - `docs\research_notes\10_tutorial_lifetimes.md`
-  - `docs\research_notes\10_tutorial_ownership_safety.md`
-  - `docs\research_notes\10_tutorial_type_system.md`
-  - `docs\research_notes\10_unified_systematic_framework.md`
-  - `docs\research_notes\10_verification_tools_matrix.md`
-  - `docs\research_notes\experiments\10_compiler_optimizations.md`
-  - `docs\research_notes\experiments\10_concurrency_performance.md`
-  - `docs\research_notes\experiments\10_memory_analysis.md`
-  - `docs\research_notes\experiments\10_performance_benchmarks.md`
-  - `docs\research_notes\experiments\README.md`
-  - `docs\research_notes\formal_methods\10_async_state_machine.md`
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
-  - `docs\research_notes\formal_methods\10_send_sync_formalization.md`
-  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
-  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
-  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
-  - `docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md`
-  - `docs\research_notes\software_design_theory\03_execution_models\05_distributed.md`
-  - `docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\README.md`
-  - `docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md`
-  - `docs\research_notes\software_design_theory\06_rust_idioms.md`
-  - `docs\research_notes\software_design_theory\07_anti_patterns.md`
-  - `docs\research_notes\software_design_theory\10_00_master_index.md`
-  - `docs\research_notes\type_theory\10_advanced_types.md`
-  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
-  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
-  - `docs\research_notes\type_theory\10_variance_theory.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
-  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\02_async\README.md`
-  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
-  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
-  - `docs\rust-formal-engineering-system\10_quality_assurance\README.md`
-- `[404] https://www.microsoft.com/en-us/security/blog/2025/01/28/rust-in-the-windows-kernel/` — Not Found
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-- `[ERR] https://en.wikipedia.org/wiki/Build_Automation` — _ssl.c:999: The handshake operation timed out
-  - `docs\01_cargo_build_optimization.md`
-  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
-  - `docs\06_toolchain\06_cargo_script_guide.md`
-  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Program_Optimization` — _ssl.c:999: The handshake operation timed out
-  - `docs\01_cargo_build_optimization.md`
-  - `docs\05_guides\05_performance_tuning_guide.md`
-  - `docs\research_notes\experiments\10_compiler_optimizations.md`
-  - `docs\research_notes\experiments\10_concurrency_performance.md`
-  - `docs\research_notes\experiments\10_macro_expansion_performance.md`
-  - `docs\research_notes\experiments\10_performance_benchmarks.md`
-  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Programming_Language_Features` — _ssl.c:999: The handshake operation timed out
-  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
-- `[ERR] https://en.wikipedia.org/wiki/Language_Evolution` — _ssl.c:999: The handshake operation timed out
-  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
-- `[404] https://forge.rust-lang.org/js/index.html` — Not Found
-  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
-- `[404] https://doc.rust-lang.org/reference/ownership.html` — Not Found
-  - `docs\01_core\01_ownership_borrowing_lifetimes.md`
-  - `docs\06_toolchain\03_rustdoc_advanced.md`
-  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
-  - `docs\research_notes\10_content_enhancement.md`
-  - `docs\research_notes\10_proof_index.md`
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-  - `docs\research_notes\formal_methods\60_ownership_counterexamples.md`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
-- `[404] https://devblogs.microsoft.com/rust/` — Not Found
-  - `docs\00_meta\00_quarterly_sync_checklist.md`
-- `[ERR] https://en.wikipedia.org/wiki/Undefined_Behavior` — _ssl.c:999: The handshake operation timed out
-  - `docs\03_guides\03_miri_guide.md`
-  - `docs\05_guides\05_miri_practical_guide.md`
-  - `docs\05_miri_integration_summary.md`
-- `[ERR] https://hothardware.com/news/amd-confirms-zen6-avx512-fp16` — _ssl.c:999: The handshake operation timed out
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+- `[ERR] https://www.darpa.mil/research/programs/translating-all-c-to-rust` — [Errno 11001] getaddrinfo failed
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `[ERR] https://research.google/pubs/pub36632/` — timed out
+  - `concept\06_ecosystem\48_data_engineering.md`
 - `[404] https://rustcc.cn/` — Not Found
   - `docs\01_learning\01_learning_path_planning.md`
   - `docs\research_notes\10_async_book_alignment.md`
@@ -9914,817 +10368,173 @@
   - `docs\research_notes\software_design_theory\07_crate_architectures\41_askama_architecture.md`
   - `docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md`
   - `docs\research_notes\type_theory\README.md`
-- `[ERR] https://ferrous-systems.com/ferrocene` — _ssl.c:999: The handshake operation timed out
-  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
-- `[404] https://www.coursera.org/learn/programming-in-rust` — Not Found
+- `[404] https://www.coursera.org/browse/computer-science/programming-languages` — Not Found
   - `docs\01_learning\01_learning_path_planning.md`
   - `docs\05_guides\best_practices.md`
+- `[404] https://devblogs.microsoft.com/rust/` — Not Found
+  - `docs\00_meta\00_quarterly_sync_checklist.md`
 - `[404] https://www.ralfj.de/blog/2021/04/14/memory-safety.html` — Not Found
   - `docs\02_reference\02_cross_language_comparison.md`
-- `[ERR] https://en.wikipedia.org/wiki/Compiler_Cache` — _ssl.c:999: The handshake operation timed out
-  - `docs\10_sccache_setup.md`
-- `[404] https://www.linuxfoundation.org/certification/linux-foundation-certified-rust-programmer` — Not Found
-  - `docs\01_learning\01_lfrs_certification_mapping.md`
-- `[404] https://homepages.inf.ed.ac.uk/wadler/papers/free/theorems_for_free.pdf` — Not Found
-  - `docs\02_reference\02_cross_language_comparison.md`
-- `[ERR] https://en.wikipedia.org/wiki/Formal_Methods` — _ssl.c:999: The handshake operation timed out
-  - `docs\00_meta\00_formal_content_master_index.md`
-  - `docs\04_research\04_rust_formal_verification.md`
-  - `docs\04_thinking\04_proof_graph_network.md`
-  - `docs\05_guides\05_formal_verification_integration_guide.md`
-  - `docs\research_notes\10_code_doc_formal_mapping.md`
-  - `docs\research_notes\10_core_theorems_full_proofs.md`
-  - `docs\research_notes\10_formal_concepts_encyclopedia.md`
-  - `docs\research_notes\10_formal_full_model_en_summary.md`
-  - `docs\research_notes\10_formal_full_model_overview.md`
-  - `docs\research_notes\10_formal_language_and_proofs.md`
-  - `docs\research_notes\10_formal_proof_system_guide.md`
-  - `docs\research_notes\10_international_formal_verification_index.md`
-  - `docs\research_notes\10_l3_machine_proof_guide.md`
-  - `docs\research_notes\10_proof_tree_borrow.md`
-  - `docs\research_notes\10_rust_formal_methods_cheatsheet.md`
-  - `docs\research_notes\10_theorems_and_proof_strategies.md`
-  - `docs\research_notes\10_verification_tools_matrix.md`
-  - `docs\research_notes\formal_methods\00_completeness_gaps.md`
-  - `docs\research_notes\formal_methods\10_async_runtime_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_formal_methods_completeness_checklist.md`
-  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
-  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
-  - `docs\research_notes\formal_methods\README.md`
-  - `docs\research_notes\formal_modules\10_formalization_ecology_mindmap.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\README.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\README.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\01_type_system\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_memory_safety\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
-  - `docs\rust-formal-engineering-system\02_practical_applications\memory\README.md`
-  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\01_synchronous\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
-  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\01_compiler\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\02_package_manager\README.md`
-  - `docs\rust-formal-engineering-system\09_research_agenda\04_research_methods\README.md`
-  - `docs\rust-formal-engineering-system\10_quality_assurance\README.md`
-  - `docs\rust-formal-engineering-system\README.md`
-- `[404] https://blog.rust-lang.org/2024/12/19/Rust-1.92.0.html` — Not Found
-  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
-- `[ERR] https://en.wikipedia.org/wiki/Curriculum_Design` — _ssl.c:999: The handshake operation timed out
-  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
-- `[ERR] https://en.wikipedia.org/wiki/Resource_Management` — _ssl.c:999: The handshake operation timed out
-  - `docs\01_core\01_ownership_borrowing_lifetimes.md`
-  - `docs\research_notes\10_tutorial_borrow_checker.md`
-- `[ERR] https://en.wikipedia.org/wiki/Substructural_type_system#Linear_type` — _ssl.c:999: The handshake operation timed out
-  - `docs\01_core\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Zero-overhead_principle` — _ssl.c:999: The handshake operation timed out
-  - `docs\01_core\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Learning_Path` — _ssl.c:999: The handshake operation timed out
-  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
-- `[404] https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html` — Not Found
-  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
-- `[404] https://doc.rust-lang.org/reference/items/collections.html` — Not Found
-  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
-- `[404] https://doc.rust-lang.org/cargo/book/` — Not Found
-  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
-- `[ERR] https://en.wikipedia.org/wiki/Educational_Technology` — _ssl.c:999: The handshake operation timed out
-  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
-- `[ERR] https://en.wikipedia.org/wiki/Spiral_Curriculum` — _ssl.c:999: The handshake operation timed out
-  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
-- `[ERR] https://security.googleblog.com/2024/12/memory-safety-in-android.html` — timed out
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-- `[404] https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/` — Not Found
-  - `docs\02_reference\quick_reference\02_rust_190_to_193_features_cheatsheet.md`
-- `[404] https://doc.rust-lang.org/nightly/std/ops/trait.Iterator.html` — Not Found
-  - `docs\02_reference\quick_reference\02_rust_198_nightly_preview_cheatsheet.md`
-- `[ERR] https://nostarch.com/rust-programming-language-2nd-edition` — _ssl.c:999: The handshake operation timed out
-  - `docs\trpl_3rd_ed_diff.md`
-- `[ERR] https://opensource.googleblog.com/search/label/Rust` — timed out
-  - `docs\00_meta\00_quarterly_sync_checklist.md`
-- `[ERR] https://en.wikipedia.org/wiki/Standard_Library` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
-- `[ERR] https://en.wikipedia.org/wiki/Compiler_Construction` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\02_error_code_mapping.md`
-  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
-  - `docs\06_toolchain\01_compiler_features.md`
-  - `docs\06_toolchain\03_rustdoc_advanced.md`
-  - `docs\06_toolchain\06_cargo_script_guide.md`
-  - `docs\06_toolchain\06_cranelift_backend_guide.md`
-  - `docs\06_toolchain\06_parallel_frontend.md`
-  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
-  - `docs\research_notes\experiments\10_compiler_optimizations.md`
-  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Machine_Learning` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
-  - `docs\03_guides\03_let_chains_guide.md`
-  - `docs\04_research\04_next_generation_trait_solver.md`
-  - `docs\04_research\04_ng_trait_solver.md`
-  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
-  - `docs\06_toolchain\01_compiler_features.md`
-  - `docs\06_toolchain\03_rustdoc_advanced.md`
-  - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
-  - `docs\06_toolchain\06_cranelift_backend_guide.md`
-  - `docs\research_notes\10_argumentation_chain_and_flow.md`
-  - `docs\research_notes\10_core_features_full_chain.md`
-  - `docs\research_notes\10_domain_analysis_framework.md`
-  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
-  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Future/Promise` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_async_patterns.md`
-- `[ERR] https://en.wikipedia.org/wiki/Exception_Handling` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
-  - `docs\research_notes\10_error_handling_cheatsheet.md`
-  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
-- `[ERR] https://en.wikipedia.org/wiki/Package_Manager` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
-- `[ERR] https://en.wikipedia.org/wiki/Namespace` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
-- `[404] https://embassy.dev/book/dev/time.html` — Not Found
-  - `docs\03_guides\03_embassy_deep_dive.md`
-- `[404] https://embassy.dev/book/dev/runtime.html` — Not Found
-  - `docs\03_guides\03_embassy_deep_dive.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_Component` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
-- `[ERR] https://en.wikipedia.org/wiki/Iterator_Pattern` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
-- `[ERR] https://en.wikipedia.org/wiki/Modular_Programming` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
-- `[404] https://rtic.rs/book/` — Not Found
-  - `docs\03_guides\03_embedded_rust_guide.md`
-- `[404] https://blog.cloudflare.com/fuzzing-rust/` — Not Found
+- `[ERR] https://cybersecurity-news.com/hax-rust-verification/` — timed out
+  - `concept\06_ecosystem\74_formal_verification_tools.md`
+- `[ERR] https://blog.cloudflare.com/` — [Errno 11001] getaddrinfo failed
   - `docs\03_guides\03_fuzzing_guide.md`
-- `[404] https://blog.rust-lang.org/2026/05/14/Rust-1.95.0.html` — Not Found
-  - `docs\03_guides\03_let_chains_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Network_Programming` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_network_programming_cheatsheet.md`
-  - `docs\04_thinking\04_decision_graph_network.md`
-  - `docs\research_notes\10_concept_relationship_network.md`
 - `[ERR] https://specs.libp2p.io/` — [Errno 11001] getaddrinfo failed
   - `docs\03_guides\03_libp2p_guide.md`
-- `[404] https://doc.rust-lang.org/edition-guide/rust-2024/future-in-prelude.html` — Not Found
+- `[404] https://homepages.inf.ed.ac.uk/wadler/papers/free/theorems_for_free.pdf` — Not Found
+  - `docs\02_reference\02_cross_language_comparison.md`
+- `[404] https://doc.rust-lang.org/edition-guide/rust-2024/prelude-changes.html` — Not Found
   - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
-- `[404] https://foundation.rust-lang.org/security/` — Not Found
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_Testing` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_testing_cheatsheet.md`
-  - `docs\03_guides\03_test_coverage.md`
-  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
-  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
-- `[404] https://docs.codecov.com/docs/rust` — Not Found
-  - `docs\03_guides\03_test_coverage.md`
-- `[ERR] https://en.wikipedia.org/wiki/String_(computer_science)` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
-- `[ERR] https://en.wikipedia.org/wiki/Hindley_Milner_Type_System` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_type_system.md`
-  - `docs\research_notes\type_theory\10_type_system_foundations.md`
-- `[404] https://rust-lang.github.io/rfcs/2616-http.html` — Not Found
+- `[404] https://rust-lang.github.io/rfcs/2616-iterable.html` — Not Found
   - `docs\03_practice\03_project_11_web_server.md`
-- `[ERR] https://en.wikipedia.org/wiki/Unit_Testing` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_testing_cheatsheet.md`
-  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
-- `[ERR] https://en.wikipedia.org/wiki/Thread_(computing)` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
-  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Type_Theory` — _ssl.c:999: The handshake operation timed out
-  - `docs\02_reference\quick_reference\02_type_system.md`
-  - `docs\research_notes\type_theory\10_construction_capability.md`
-  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
-  - `docs\research_notes\type_theory\10_type_system_foundations.md`
+- `[404] https://doc.rust-lang.org/nightly/std/ops/trait.Iterator.html` — Not Found
+  - `docs\02_reference\quick_reference\02_rust_198_nightly_preview_cheatsheet.md`
+- `[ERR] https://cdn-shop.adafruit.com/datasheets/ILI9341.pdf` — _ssl.c:999: The handshake operation timed out
+  - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[404] https://blog.rust-lang.org/2017/06/27/Rust-1.18.html` — Not Found
   - `docs\04_research\04_next_generation_trait_solver.md`
 - `[404] https://rust-lang.github.io/compiler-team/minutes/design-meeting/2021-03-17-next-generation-trait-solver.html` — Not Found
   - `docs\04_research\04_next_generation_trait_solver.md`
-- `[404] https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius/` — Not Found
+- `[404] https://foundation.rust-lang.org/security/` — Not Found
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+- `[404] https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius.html` — Not Found
   - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
-- `[404] https://rust-lang.github.io/rust-project-goals/2026/flagships.html` — Not Found
-  - `docs\04_research\04_safety_critical_alignment_2026.md`
-  - `docs\06_toolchain\06_cargo_script_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Embedded_System` — _ssl.c:999: The handshake operation timed out
-  - `docs\03_guides\03_embedded_rust_guide.md`
-  - `docs\05_guides\05_embedded_rust_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Fuzzing` — _ssl.c:999: The handshake operation timed out
-  - `docs\03_guides\03_fuzzing_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Real_Time_Operating_System` — _ssl.c:999: The handshake operation timed out
-  - `docs\03_guides\03_embedded_rust_guide.md`
+- `[ERR] https://quantumai.google/cirq` — timed out
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `[404] https://ralfj.de/blog/2017/01/20/the-rustbelt-paper.html` — Not Found
   - `docs\04_research\04_rust_formal_verification.md`
-- `[ERR] https://en.wikipedia.org/wiki/Microcontroller` — _ssl.c:999: The handshake operation timed out
-  - `docs\03_guides\03_embedded_rust_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Peer_to_Peer` — _ssl.c:999: The handshake operation timed out
-  - `docs\03_guides\03_libp2p_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/io_uring` — _ssl.c:999: The handshake operation timed out
-  - `docs\03_guides\03_io_uring_guide.md`
-- `[404] https://docs.rust-embedded.org/faq.html` — Not Found
-  - `docs\05_guides\05_embedded_rust_guide.md`
-- `[404] https://doc.rust-lang.org/rustc/mir/index.html` — Not Found
-  - `docs\05_guides\05_kani_practical_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Distributed_Hash_Table` — _ssl.c:999: The handshake operation timed out
-  - `docs\03_guides\03_libp2p_guide.md`
-- `[404] https://www.cs.utah.edu/pldi23/` — Not Found
-  - `docs\05_guides\05_verus_practical_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_Versioning` — _ssl.c:999: The handshake operation timed out
-  - `docs\03_guides\03_semver_checks.md`
-- `[ERR] https://en.wikipedia.org/wiki/Semantic_Versioning` — _ssl.c:999: The handshake operation timed out
-  - `docs\03_guides\03_semver_checks.md`
-- `[ERR] https://en.wikipedia.org/wiki/Code_Coverage` — _ssl.c:999: The handshake operation timed out
-  - `docs\03_guides\03_test_coverage.md`
-- `[ERR] https://en.wikipedia.org/wiki/Web_Framework` — _ssl.c:999: The handshake operation timed out
-  - `docs\03_practice\03_project_11_web_server.md`
-- `[ERR] https://en.wikipedia.org/wiki/Mathematical_Proof` — _ssl.c:999: The handshake operation timed out
-  - `docs\04_thinking\04_proof_graph_network.md`
-- `[ERR] https://saw.galois.com/` — timed out
-  - `docs\04_research\04_llm_c_to_rust_migration.md`
-- `[ERR] https://en.wikipedia.org/wiki/Cooperative_Multitasking` — _ssl.c:999: The handshake operation timed out
-  - `docs\05_guides\05_async_programming_usage_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_Design_Pattern` — _ssl.c:999: The handshake operation timed out
-  - `docs\05_guides\05_design_patterns_usage_guide.md`
-  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
-  - `docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md`
-  - `docs\research_notes\software_design_theory\10_00_master_index.md`
-- `[ERR] https://en.wikipedia.org/wiki/Command_Line_Interface` — _ssl.c:999: The handshake operation timed out
-  - `docs\05_guides\05_cli_applications_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Anti_pattern` — _ssl.c:999: The handshake operation timed out
-  - `docs\05_guides\05_design_patterns_usage_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Design_Pattern` — _ssl.c:999: The handshake operation timed out
-  - `docs\05_guides\05_design_patterns_usage_guide.md`
-  - `docs\research_notes\10_design_mechanism_rationale.md`
-  - `docs\research_notes\10_distributed_pattern_matrix.md`
-  - `docs\research_notes\10_distributed_patterns_matrix.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\README.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\README.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\README.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\04_boundary_matrix.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\README.md`
-  - `docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md`
-  - `docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md`
-  - `docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md`
-  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
-  - `docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md`
-  - `docs\research_notes\software_design_theory\07_anti_patterns.md`
-  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
-  - `docs\rust-formal-engineering-system\03_design_patterns\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_Development_Best_Practices` — _ssl.c:999: The handshake operation timed out
-  - `docs\05_guides\best_practices.md`
-- `[ERR] https://en.wikipedia.org/wiki/Formal_Verification` — _ssl.c:999: The handshake operation timed out
-  - `docs\05_guides\05_formal_verification_integration_guide.md`
-  - `docs\research_notes\10_verification_tools_decision_tree.md`
-  - `docs\research_notes\10_verification_tools_matrix.md`
-- `[ERR] https://en.wikipedia.org/wiki/Gang_of_Four` — _ssl.c:999: The handshake operation timed out
-  - `docs\05_guides\05_design_patterns_usage_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Code_Review` — _ssl.c:999: The handshake operation timed out
-  - `docs\05_guides\best_practices.md`
-  - `docs\research_notes\10_best_practices.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_Quality` — _ssl.c:999: The handshake operation timed out
-  - `docs\05_guides\best_practices.md`
 - `[500] https://www.hackerrank.com/` — Internal Server Error
   - `docs\research_notes\10_algorithm_exercises_guide.md`
 - `[403] https://www.crackingthecodinginterview.com/` — Forbidden
   - `docs\research_notes\10_algorithm_exercises_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Workflow` — _ssl.c:999: The handshake operation timed out
-  - `docs\05_guides\workflow\01_workflow_theory.md`
-- `[404] https://rust-lang.github.io/async-book/04_pinning/01_chapter.html` — Not Found
-  - `docs\research_notes\10_async_book_alignment.md`
-  - `docs\research_notes\10_knowledge_graph_index.md`
-  - `docs\research_notes\10_learning_and_interview_alignment.md`
 - `[ERR] https://async.rs/` — [Errno 11001] getaddrinfo failed
   - `docs\research_notes\10_async_ecosystem_alignment.md`
-- `[404] https://rust-lang.github.io/async-book/03_async_await/04_shared_state.html` — Not Found
+- `[404] https://rust-lang.github.io/async-book/02_execution/03_async_lifetimes.html` — Not Found
   - `docs\research_notes\10_async_book_alignment.md`
 - `[404] https://rust-lang.github.io/rfcs/3516-gen-blocks.html` — Not Found
   - `docs\research_notes\10_async_ecosystem_alignment.md`
   - `docs\research_notes\10_version_evolution_alignment.md`
-- `[404] https://rust-lang.github.io/async-book/03_async_await/02_async_lifetimes.html` — Not Found
-  - `docs\research_notes\10_async_book_alignment.md`
-- `[404] https://doc.rust-lang.org/rustc/codegen-options.html` — Not Found
-  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
-- `[404] https://doc.rust-lang.org/reference/errors.html` — Not Found
-  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
-- `[404] https://doc.rust-lang.org/rust-by-example/std/net.html` — Not Found
-  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
 - `[ERR] https://aeneas-verif.org/` — [Errno 11001] getaddrinfo failed
   - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_Development_Process` — _ssl.c:999: The handshake operation timed out
-  - `docs\05_guides\workflow\01_workflow_theory.md`
-- `[ERR] https://en.wikipedia.org/wiki/LLVM` — _ssl.c:999: The handshake operation timed out
-  - `docs\06_toolchain\01_compiler_features.md`
 - `[404] https://software.imdea.org/~cflanagan/papers/rse.pdf` — Not Found
   - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
-- `[ERR] https://en.wikipedia.org/wiki/Branch_Table` — _ssl.c:999: The handshake operation timed out
-  - `docs\06_toolchain\06_jump_tables_guide.md`
-- `[404] https://plv.mpi-sws.org/rustbos/` — Not Found
-  - `docs\research_notes\10_authoritative_source_100_percent_roadmap.md`
-  - `docs\research_notes\10_authoritative_source_alignment_network.md`
-  - `docs\research_notes\10_authoritative_source_gap_and_backref_index.md`
-  - `docs\research_notes\10_safety_and_unsafe_authoritative_alignment.md`
-  - `docs\research_notes\formal_methods\60_ownership_counterexamples.md`
+- `[404] https://rust-lang.github.io/async-book/04_pinning/01_chapter.html` — Not Found
+  - `docs\research_notes\10_async_book_alignment.md`
+  - `docs\research_notes\10_knowledge_graph_index.md`
+  - `docs\research_notes\10_learning_and_interview_alignment.md`
+- `[404] https://doc.rust-lang.org/rust-by-example/std_misc/networking.html` — Not Found
+  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
 - `[404] https://rust-lang.github.io/rust-formal-methods/` — Not Found
   - `docs\research_notes\10_authoritative_source_alignment_network.md`
-- `[ERR] https://en.wikipedia.org/wiki/Parallel_Computing` — _ssl.c:999: The handshake operation timed out
-  - `docs\06_toolchain\06_parallel_frontend.md`
-- `[ERR] https://en.wikipedia.org/wiki/Compiler_Optimization` — _ssl.c:999: The handshake operation timed out
-  - `docs\06_toolchain\06_parallel_frontend.md`
-- `[404] https://doc.rust-lang.org/nomicon/subtyping-and-variance.html` — Not Found
-  - `docs\research_notes\10_best_practices.md`
-  - `docs\research_notes\10_practical_applications.md`
-  - `docs\research_notes\10_rustonomicon_alignment.md`
-- `[ERR] https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html` — timed out
-  - `docs\05_guides\05_kani_practical_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Knowledge_Organization` — _ssl.c:999: The handshake operation timed out
-  - `docs\07_project\07_hierarchy_mapping_master.md`
-  - `docs\research_notes\10_authoritative_content_alignment_report.md`
-- `[404] https://www.pm.inf.ethz.ch/publications/RusBos21.html` — Not Found
-  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
 - `[ERR] https://release-plz.ienalich.com/` — [Errno 11001] getaddrinfo failed
   - `docs\research_notes\10_cicd_supply_chain_alignment.md`
 - `[ERR] https://release-plz.ienalich.com/docs/github/` — [Errno 11001] getaddrinfo failed
   - `docs\research_notes\10_cicd_supply_chain_alignment.md`
 - `[ERR] https://opensource.axo.dev/cargo-dist/book/ci/github.html` — [Errno 11001] getaddrinfo failed
   - `docs\research_notes\10_cicd_supply_chain_alignment.md`
-- `[ERR] https://en.wikipedia.org/wiki/Taxonomy` — _ssl.c:999: The handshake operation timed out
-  - `docs\07_project\07_hierarchy_mapping_master.md`
-- `[ERR] https://en.wikipedia.org/wiki/Treap` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_advanced_data_structures_guide.md`
-- `[404] https://docs.sigstore.dev/signing/overview/` — Not Found
-  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
-- `[ERR] https://en.wikipedia.org/wiki/Skip_list` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_advanced_data_structures_guide.md`
-- `[404] https://doc.rust-lang.org/std/sync/atomic/struct.AtomicUsize.html` — Not Found
-  - `docs\research_notes\10_concurrency_cheatsheet.md`
-- `[404] https://doc.rust-lang.org/rust-by-example/std_misc/atomics.html` — Not Found
-  - `docs\research_notes\10_concurrency_cheatsheet.md`
+- `[ERR] https://render.com/docs/rust` — timed out
+  - `knowledge\06_ecosystem\deployment\README.md`
 - `[404] https://doc.rust-lang.org/nomicon/interior-mutability.html` — Not Found
   - `docs\research_notes\10_design_patterns_authoritative_alignment.md`
   - `docs\research_notes\formal_modules\40_module_safety_abstraction.md`
   - `docs\research_notes\software_design_theory\01_design_patterns_formal\60_design_patterns_counterexamples.md`
-- `[ERR] https://en.wikipedia.org/wiki/Type_System` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_authoritative_alignment_guide.md`
-  - `docs\research_notes\10_authoritative_alignment_status.md`
-  - `docs\research_notes\10_best_practices.md`
-  - `docs\research_notes\10_changelog.md`
-  - `docs\research_notes\10_code_doc_formal_mapping.md`
-  - `docs\research_notes\10_comprehensive_project_report.md`
-  - `docs\research_notes\10_comprehensive_systematic_overview.md`
-  - `docs\research_notes\10_comprehensive_systematic_review_and_100_percent_plan.md`
-  - `docs\research_notes\10_concept_comparison_tables.md`
-  - `docs\research_notes\10_concept_relationship_network.md`
-  - `docs\research_notes\10_concurrency_cheatsheet.md`
-  - `docs\research_notes\10_const_eval_formalization.md`
-  - `docs\research_notes\10_content_enhancement.md`
-  - `docs\research_notes\10_core_theorems_full_proofs.md`
-  - `docs\research_notes\10_design_mechanism_rationale.md`
-  - `docs\research_notes\10_distributed_concept_mindmap.md`
-  - `docs\research_notes\10_distributed_pattern_matrix.md`
-  - `docs\research_notes\10_domain_analysis_framework.md`
-  - `docs\research_notes\10_error_handling_cheatsheet.md`
-  - `docs\research_notes\10_faq.md`
-  - `docs\research_notes\10_faq_comprehensive.md`
-  - `docs\research_notes\10_formal_concepts_encyclopedia.md`
-  - `docs\research_notes\10_formal_full_model_en_summary.md`
-  - `docs\research_notes\10_formal_full_model_overview.md`
-  - `docs\research_notes\10_formal_language_and_proofs.md`
-  - `docs\research_notes\10_glossary.md`
-  - `docs\research_notes\10_incremental_update_flow.md`
-  - `docs\research_notes\10_interview_questions_collection.md`
-  - `docs\research_notes\10_l3_machine_proof_guide.md`
-  - `docs\research_notes\10_language_semantics_expressiveness.md`
-  - `docs\research_notes\10_macros_cheatsheet.md`
-  - `docs\research_notes\10_practical_applications.md`
-  - `docs\research_notes\10_proof_index.md`
-  - `docs\research_notes\10_proof_techniques_mindmap.md`
-  - `docs\research_notes\10_proof_tree_ownership.md`
-  - `docs\research_notes\10_proof_tree_type_safety.md`
-  - `docs\research_notes\10_quick_find.md`
-  - `docs\research_notes\10_research_roadmap.md`
-  - `docs\research_notes\10_resources.md`
-  - `docs\research_notes\10_rustsem_semantics.md`
-  - `docs\research_notes\10_system_summary.md`
-  - `docs\research_notes\10_theorems_and_proof_strategies.md`
-  - `docs\research_notes\10_theoretical_and_argumentation_system_architecture.md`
-  - `docs\research_notes\10_tools_guide.md`
-  - `docs\research_notes\10_tutorial_borrow_checker.md`
-  - `docs\research_notes\10_tutorial_concurrency_models.md`
-  - `docs\research_notes\10_tutorial_lifetimes.md`
-  - `docs\research_notes\10_tutorial_ownership_safety.md`
-  - `docs\research_notes\10_tutorial_type_system.md`
-  - `docs\research_notes\10_unified_systematic_framework.md`
-  - `docs\research_notes\10_verification_tools_matrix.md`
-  - `docs\research_notes\10_visualization_index.md`
-  - `docs\research_notes\experiments\10_compiler_optimizations.md`
-  - `docs\research_notes\experiments\10_concurrency_performance.md`
-  - `docs\research_notes\experiments\10_memory_analysis.md`
-  - `docs\research_notes\experiments\10_performance_benchmarks.md`
-  - `docs\research_notes\experiments\README.md`
-  - `docs\research_notes\formal_methods\10_async_state_machine.md`
-  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_pin_self_referential.md`
-  - `docs\research_notes\formal_methods\10_send_sync_formalization.md`
-  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\04_boundary_matrix.md`
-  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
-  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\04_expressiveness_boundary.md`
-  - `docs\research_notes\software_design_theory\03_execution_models\02_async.md`
-  - `docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md`
-  - `docs\research_notes\software_design_theory\03_execution_models\05_distributed.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\10_expressive_inexpressive_matrix.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md`
-  - `docs\research_notes\software_design_theory\05_boundary_system\README.md`
-  - `docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md`
-  - `docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md`
-  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
-  - `docs\research_notes\software_design_theory\06_rust_idioms.md`
-  - `docs\research_notes\software_design_theory\07_anti_patterns.md`
-  - `docs\research_notes\software_design_theory\10_00_master_index.md`
-  - `docs\research_notes\type_theory\10_advanced_types.md`
-  - `docs\research_notes\type_theory\10_construction_capability.md`
-  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
-  - `docs\research_notes\type_theory\10_type_system_foundations.md`
-- `[ERR] https://en.wikipedia.org/wiki/Information_Quality` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_authoritative_content_alignment_report.md`
-- `[404] https://doc.rust-lang.org/edition-guide/rust-2024/tail-expr-drop-order.html` — Not Found
+- `[404] https://doc.rust-lang.org/edition-guide/rust-2024/drop-order.html` — Not Found
   - `docs\research_notes\10_edition_guide_alignment.md`
   - `docs\research_notes\10_version_evolution_counterexamples.md`
-- `[404] https://doc.rust-lang.org/edition-guide/rust-2024/gen-blocks.html` — Not Found
-  - `docs\research_notes\10_edition_guide_alignment.md`
-- `[ERR] https://en.wikipedia.org/wiki/Best_Practice` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_best_practices.md`
-- `[ERR] https://en.wikipedia.org/wiki/Cache_replacement_policies` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_cache_eviction_policies_guide.md`
-- `[404] https://www.rfc-editor.org/rfc/rfc9112.html` — Not Found
-  - `docs\research_notes\10_error_handling_network_web_alignment.md`
-- `[404] https://www.rfc-editor.org/rfc/rfc9113.html` — Not Found
-  - `docs\research_notes\10_error_handling_network_web_alignment.md`
-- `[404] https://www.rfc-editor.org/rfc/rfc6455.html` — Not Found
-  - `docs\research_notes\10_error_handling_network_web_alignment.md`
-- `[404] https://spec.ferrocene.dev/syntax.html` — Not Found
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-- `[404] https://spec.ferrocene.dev/types.html` — Not Found
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-- `[404] https://spec.ferrocene.dev/subtyping.html` — Not Found
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-- `[404] https://spec.ferrocene.dev/traits.html` — Not Found
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-- `[404] https://spec.ferrocene.dev/ownership.html` — Not Found
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-- `[404] https://spec.ferrocene.dev/borrowing.html` — Not Found
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-- `[404] https://spec.ferrocene.dev/lifetimes.html` — Not Found
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-- `[404] https://spec.ferrocene.dev/unsafe-rust.html` — Not Found
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-- `[404] https://spec.ferrocene.dev/modules-and-crates.html` — Not Found
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-- `[404] https://spec.ferrocene.dev/linkage.html` — Not Found
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
-- `[404] https://spec.ferrocene.dev/notation.html` — Not Found
-  - `docs\research_notes\10_ferrocene_fls_alignment.md`
 - `[ERR] https://rust-es.org/` — [Errno 11001] getaddrinfo failed
   - `docs\research_notes\10_i18n_source_alignment.md`
-- `[404] https://releases.rs/1.96.0/` — Not Found
-  - `docs\research_notes\10_knowledge_graph_index.md`
-- `[404] https://course.rs/` — Not Found
-  - `docs\research_notes\10_i18n_source_alignment.md`
-  - `docs\research_notes\10_learning_and_interview_alignment.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_Design` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_design_mechanism_rationale.md`
-- `[404] https://releases.rs/1.95.0/` — Not Found
-  - `docs\research_notes\10_knowledge_graph_index.md`
-- `[ERR] https://en.wikipedia.org/wiki/Mind_Map` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_distributed_concept_mindmap.md`
-  - `docs\research_notes\10_proof_techniques_mindmap.md`
-  - `docs\research_notes\10_workflow_concept_mindmap.md`
-- `[ERR] https://en.wikipedia.org/wiki/Concept_Map` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_distributed_concept_mindmap.md`
-  - `docs\research_notes\10_proof_techniques_mindmap.md`
-  - `docs\research_notes\10_workflow_concept_mindmap.md`
-- `[404] https://course.rs/basic/` — Not Found
-  - `docs\research_notes\10_learning_and_interview_alignment.md`
-- `[404] https://course.rs/basic/ownership.html` — Not Found
-  - `docs\research_notes\10_learning_and_interview_alignment.md`
-- `[ERR] https://en.wikipedia.org/wiki/Decision_Tree` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_distributed_architecture_decision_tree.md`
-  - `docs\research_notes\10_verification_tools_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
-  - `docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md`
-- `[404] https://course.rs/basic/trait.html` — Not Found
+- `[ERR] https://chromium.googlesource.com/chromium/src/+/main/docs/rust.md` — timed out
+  - `concept\06_ecosystem\58_platform_rust_integration.md`
+- `[404] https://doc.rust-lang.org/edition-guide/rust-2024/gen-blocks.html` — Not Found
+  - `docs\research_notes\10_edition_guide_alignment.md`
+- `[404] https://doc.rust-lang.org/nomicon/pin.html` — Not Found
   - `docs\research_notes\10_learning_and_interview_alignment.md`
 - `[404] https://rust-lang.github.io/rfcs/1590-generic-associated-types.html` — Not Found
   - `docs\research_notes\10_learning_and_interview_alignment.md`
-- `[404] https://rust-lang.github.io/unsafe-code-guidelines/layout/ffi.html` — Not Found
-  - `docs\research_notes\10_learning_and_interview_alignment.md`
-- `[404] https://course.rs/advance/` — Not Found
-  - `docs\research_notes\10_learning_and_interview_alignment.md`
-- `[404] https://doc.rust-lang.org/nomicon/pin.html` — Not Found
-  - `docs\research_notes\10_learning_and_interview_alignment.md`
-- `[404] https://rustc-dev-guide.rust-lang.org/proc-macros.html` — Not Found
-  - `docs\research_notes\10_macros_cheatsheet.md`
-- `[404] https://rust-lang.github.io/unsafe-code-guidelines/reference/ffi.html` — Not Found
-  - `docs\research_notes\10_macros_ffi_embedded_alignment.md`
-  - `docs\research_notes\10_safety_and_unsafe_authoritative_alignment.md`
-  - `docs\research_notes\10_unsafe_code_guidelines_alignment.md`
-- `[404] https://doc.rust-lang.org/cargo/reference/targets.html#tests` — Not Found
-  - `docs\research_notes\10_performance_and_testing_alignment.md`
-- `[404] https://doc.rust-lang.org/cargo/reference/targets.html#integration-tests` — Not Found
-  - `docs\research_notes\10_performance_and_testing_alignment.md`
-- `[ERR] https://nexte.st/book/execution.html` — TimeoutError('The read operation timed out')
-  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
+- `[ERR] https://saw.galois.com/` — timed out
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
 - `[404] https://doc.rust-lang.org/nomicon/async-await.html` — Not Found
   - `docs\research_notes\10_practical_applications.md`
-- `[ERR] https://en.wikipedia.org/wiki/FAQ` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_faq_comprehensive.md`
-- `[404] https://doc.rust-lang.org/book/ch19-00-advanced-topics.html` — Not Found
-  - `docs\research_notes\10_research_methodology.md`
-- `[ERR] https://en.wikipedia.org/wiki/Knowledge_Base` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_faq_comprehensive.md`
-- `[404] https://rust-lang.github.io/rfcs/1859-non-lexical-lifetimes.html` — Not Found
-  - `docs\research_notes\10_rfc_alignment_index.md`
-- `[404] https://rust-lang.github.io/rfcs/0380-stabilize-no-std.html` — Not Found
-  - `docs\research_notes\10_rfc_alignment_index.md`
-- `[404] https://rust-lang.github.io/rfcs/2645-transparent-unions-enums.html` — Not Found
-  - `docs\research_notes\10_rfc_alignment_index.md`
-- `[404] https://rust-lang.github.io/rfcs/3101-reserved-prefix.html` — Not Found
+- `[404] https://rust-lang.github.io/rfcs/2645-transparent-enums.html` — Not Found
   - `docs\research_notes\10_rfc_alignment_index.md`
 - `[404] https://rust-lang.github.io/rfcs/3185-async-drop.html` — Not Found
   - `docs\research_notes\10_rfc_alignment_index.md`
-- `[404] https://rustc-dev-guide.rust-lang.org/modules.html` — Not Found
-  - `docs\research_notes\10_rustc_dev_guide_alignment.md`
 - `[404] https://rustc-dev-guide.rust-lang.org/backend/index.html` — Not Found
   - `docs\research_notes\10_rustc_dev_guide_alignment.md`
   - `docs\research_notes\10_tools_guide.md`
-- `[404] https://rustc-dev-guide.rust-lang.org/query/async_await.html` — Not Found
-  - `docs\research_notes\10_rustc_dev_guide_alignment.md`
-- `[404] https://rustc-dev-guide.rust-lang.org/traits/async-fn-in-trait.html` — Not Found
-  - `docs\research_notes\10_rustc_dev_guide_alignment.md`
-- `[404] https://rust-lang.github.io/rfcs/2418-remove-async-fn.html` — Not Found
+- `[404] https://rust-lang.github.io/rfcs/3101-reserved-prefix.html` — Not Found
   - `docs\research_notes\10_rfc_alignment_index.md`
-- `[ERR] https://www.ntia.gov/SBOM` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
-- `[404] https://doc.rust-lang.org/rust-by-example/macros/procedural.html` — Not Found
-  - `docs\research_notes\10_rust_by_example_alignment.md`
-- `[404] https://doc.rust-lang.org/rust-by-example/std_misc/async.html` — Not Found
-  - `docs\research_notes\10_rust_by_example_alignment.md`
-- `[404] https://doc.rust-lang.org/reference/subtyping-and-variance.html` — Not Found
-  - `docs\research_notes\10_rust_reference_alignment.md`
-  - `docs\research_notes\10_rust_reference_chapters_alignment.md`
-  - `docs\research_notes\type_theory\60_type_system_counterexamples.md`
-- `[404] https://rust-lang.github.io/unsafe-code-guidelines/reference/undefined-behavior.html#data-races` — Not Found
-  - `docs\research_notes\10_safety_and_unsafe_authoritative_alignment.md`
-  - `docs\research_notes\10_unsafe_code_guidelines_alignment.md`
-- `[404] https://rust-lang.github.io/unsafe-code-guidelines/reference/undefined-behavior.html` — Not Found
-  - `docs\research_notes\10_safety_and_unsafe_authoritative_alignment.md`
-  - `docs\research_notes\10_unsafe_code_guidelines_alignment.md`
-- `[404] https://rust-lang.github.io/unsafe-code-guidelines/reference/send-and-sync.html` — Not Found
-  - `docs\research_notes\10_safety_and_unsafe_authoritative_alignment.md`
-  - `docs\research_notes\10_unsafe_code_guidelines_alignment.md`
-- `[404] https://doc.rust-lang.org/reference/unsafe-op-in-unsafe-fn.html` — Not Found
-  - `docs\research_notes\10_safety_and_unsafe_authoritative_alignment.md`
-- `[404] https://rust-lang.github.io/unsafe-code-guidelines/reference/validity-invariants.html` — Not Found
-  - `docs\research_notes\10_safety_and_unsafe_authoritative_alignment.md`
-  - `docs\research_notes\10_unsafe_code_guidelines_alignment.md`
-- `[404] https://doc.rust-lang.org/cargo/reference/script.html` — Not Found
-  - `docs\research_notes\10_toolchain_ecosystem_alignment.md`
-- `[404] https://rust-lang.github.io/unsafe-code-guidelines/reference/references.html` — Not Found
-  - `docs\research_notes\10_unsafe_code_guidelines_alignment.md`
-- `[404] https://rust-lang.github.io/unsafe-code-guidelines/stacked_borrows.html` — Not Found
-  - `docs\research_notes\10_unsafe_code_guidelines_alignment.md`
-- `[404] https://rust-lang.github.io/unsafe-code-guidelines/tree_borrows.html` — Not Found
-  - `docs\research_notes\10_unsafe_code_guidelines_alignment.md`
-- `[404] https://rust-lang.github.io/unsafe-code-guidelines/reference/types/struct.html#self-referential-structs` — Not Found
+- `[404] https://rustc-dev-guide.rust-lang.org/query/index.html` — Not Found
+  - `docs\research_notes\10_rustc_dev_guide_alignment.md`
+- `[404] https://rustc-dev-guide.rust-lang.org/traits/index.html` — Not Found
+  - `docs\research_notes\10_rustc_dev_guide_alignment.md`
+- `[404] https://doc.rust-lang.org/nomicon/self-referential-structs.html` — Not Found
   - `docs\research_notes\10_unsafe_code_guidelines_alignment.md`
 - `[404] https://blog.rust-lang.org/2025/12/04/Rust-1.96.1.html` — Not Found
   - `docs\research_notes\10_version_evolution_alignment.md`
-- `[404] https://rust-lang.github.io/unsafe-code-guidelines/reference/what-is-ub.html` — Not Found
+- `[404] https://doc.rust-lang.org/nomicon/race-conditions.html` — Not Found
+  - `docs\research_notes\10_safety_and_unsafe_authoritative_alignment.md`
   - `docs\research_notes\10_unsafe_code_guidelines_alignment.md`
-- `[404] https://rust-lang.github.io/unsafe-code-guidelines/reference/types/union.html` — Not Found
+- `[ERR] https://docs.gitlab.com/ee/ci/yaml/` — _ssl.c:999: The handshake operation timed out
+  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
+- `[404] https://doc.rust-lang.org/nomicon/unions.html` — Not Found
   - `docs\research_notes\10_unsafe_code_guidelines_alignment.md`
-- `[404] https://tokio.rs/tokio/tutorial/performance` — Not Found
-  - `docs\research_notes\experiments\10_concurrency_performance.md`
-- `[404] https://doc.rust-lang.org/src/core/future.rs.html` — Not Found
+- `[404] https://doc.rust-lang.org/stable/src/core/future.rs.html` — Not Found
   - `docs\research_notes\formal_methods\10_async_state_machine.md`
-- `[404] https://iris-project.org/pdfs/2025-pldi-tree-borrows.pdf` — Not Found
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-- `[404] https://rust-lang.github.io/rfcs/2504-try-trait.html` — Not Found
-  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
-- `[ERR] https://docs.gitlab.com/ee/ci/` — _ssl.c:999: The handshake operation timed out
+- `[ERR] https://nexte.st/` — _ssl.c:999: The handshake operation timed out
   - `docs\research_notes\10_cicd_supply_chain_alignment.md`
-- `[403] https://cacm.acm.org/magazines/2021/4/251364-safe-systems-programming-in-rust/` — Forbidden
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-- `[ERR] https://docs.gitlab.com/ee/ci/examples/rust.html` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_Development_Tool` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_tools_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Integrated_Development_Environment` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_tools_guide.md`
-- `[ERR] https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_tutorial_ownership_safety.md`
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-- `[ERR] https://en.wikipedia.org/wiki/Hindley_Milner` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\10_tutorial_type_system.md`
-- `[404] https://blog.yoshuawuyts.com/pin-streams/` — Not Found
-  - `docs\research_notes\formal_methods\60_ownership_counterexamples.md`
-- `[ERR] https://www.cs.cmu.edu/~15-799/` — timed out
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-- `[ERR] https://prusti.org/` — timed out
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-- `[ERR] https://en.wikipedia.org/wiki/Borrow_Checker` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-- `[ERR] https://en.wikipedia.org/wiki/Error_Detection_and_Correction` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
-- `[ERR] https://en.wikipedia.org/wiki/Fault_Tolerance` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
-  - `docs\research_notes\software_design_theory\05_distributed\03_circuit_breaker.md`
-- `[404] https://rust-lang.github.io/api-guidelines/unsafe.html` — Not Found
+- `[404] https://rust-lang.github.io/api-guidelines/safety.html` — Not Found
   - `docs\research_notes\formal_modules\40_module_safety_abstraction.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
+  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
   - `docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md`
   - `docs\research_notes\software_design_theory\05_boundary_system\README.md`
-- `[404] https://rust-lang.github.io/api-guidelines/safety.html` — Not Found
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
-- `[404] https://doc.rust-lang.org/reference/lifetime-meaning.html` — Not Found
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md`
-  - `docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md`
-- `[ERR] https://www.reddit.com/r/rust/` — timed out
-  - `docs\research_notes\10_resources.md`
-- `[404] https://rust-lang.github.io/rfcs/2592-pin.html` — Not Found
-  - `docs\research_notes\software_design_theory\03_execution_models\02_async.md`
-- `[ERR] https://corej2eepatterns.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)
-  - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
 - `[404] https://rust-lang.github.io/api-guidelines/performance.html` — Not Found
   - `docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md`
-- `[ERR] https://en.wikipedia.org/wiki/Ownership_Semantics` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-- `[ERR] https://en.wikipedia.org/wiki/Recovery_Block` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\formal_methods\10_error_handling_decision_tree.md`
-- `[ERR] https://en.wikipedia.org/wiki/Ownership_Type` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-- `[ERR] https://en.wikipedia.org/wiki/Substructural_Type_System` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-- `[ERR] https://en.wikipedia.org/wiki/Alias_Analysis` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-- `[ERR] https://en.wikipedia.org/wiki/Workflow_Engine` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
-- `[ERR] https://en.wikipedia.org/wiki/Business_Process_Management` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\formal_methods\10_workflow_engines_matrix.md`
-- `[404] https://www.rfc-editor.org/rfc/rfc9110.html` — Not Found
-  - `docs\research_notes\software_design_theory\05_distributed\09_rate_limiting_idempotency_pattern.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_Architecture` — _ssl.c:999: The handshake operation timed out
+- `[ERR] https://corej2eepatterns.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)
   - `docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md`
-  - `docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md`
-  - `docs\research_notes\software_design_theory\10_00_master_index.md`
-- `[404] https://rkyv.org/performance.html` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
-- `[ERR] https://en.wikipedia.org/wiki/Finite-state_machine` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\02_workflow\01_workflow_state_machine.md`
-- `[ERR] https://en.wikipedia.org/wiki/Saga_Pattern` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\02_workflow\02_compensation_chain.md`
-  - `docs\research_notes\software_design_theory\02_workflow\03_long_running_transaction.md`
-  - `docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md`
-- `[ERR] https://en.wikipedia.org/wiki/Long_Running_Transaction` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\02_workflow\02_compensation_chain.md`
-  - `docs\research_notes\software_design_theory\02_workflow\03_long_running_transaction.md`
-  - `docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md`
-- `[ERR] https://en.wikipedia.org/wiki/CQRS` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md`
-  - `docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md`
-- `[404] https://diesel.rs/guides/comparison-to-other-orms.html` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
-- `[ERR] https://en.wikipedia.org/wiki/Event_Sourcing` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md`
-  - `docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md`
-  - `docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md`
-- `[ERR] https://en.wikipedia.org/wiki/Circuit_Breaker_Pattern` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\05_distributed\03_circuit_breaker.md`
-  - `docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md`
-- `[ERR] https://en.wikipedia.org/wiki/Outbox_Pattern` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md`
-- `[ERR] https://en.wikipedia.org/wiki/Timeout_(computing)` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
-- `[ERR] https://en.wikipedia.org/wiki/Distributed_Computing` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md`
-- `[404] https://bevyengine.org/learn/advanced-concepts/component-storage/` — Not Found
+- `[403] https://cacm.acm.org/magazines/2021/4/251364-safe-systems-programming-in-rust/` — Forbidden
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `[403] https://hothardware.com/news/amd-confirms-zen6-avx512-fp16` — Forbidden
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+- `[ERR] https://opensource.googleblog.com/search/label/Rust` — timed out
+  - `docs\00_meta\00_quarterly_sync_checklist.md`
+- `[ERR] https://nostarch.com/rust-programming-language-2nd-edition` — _ssl.c:999: The handshake operation timed out
+  - `docs\trpl_3rd_ed_diff.md`
+- `[404] https://bevyengine.org/learn/quick-start/introduction.html` — Not Found
   - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
-- `[ERR] https://en.wikipedia.org/wiki/Retry_Pattern` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md`
-- `[404] https://bevyengine.org/learn/quick-start/getting-started/systems/` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
-- `[404] https://bevyengine.org/learn/quick-start/getting-started/states/` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
-- `[404] https://actix.rs/actix/` — Not Found
+- `[404] https://actix.rs/actix/trait.Actor.html` — Not Found
   - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
-- `[404] https://actix.rs/actix/actix/trait.Actor.html` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
-- `[ERR] https://en.wikipedia.org/wiki/Token_bucket` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\05_distributed\09_rate_limiting_idempotency_pattern.md`
-- `[ERR] https://en.wikipedia.org/wiki/Leaky_bucket` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\05_distributed\09_rate_limiting_idempotency_pattern.md`
-- `[404] https://ratatui.rs/tutorials/hello-world/` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
-- `[404] https://ratatui.rs/concepts/testing/` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
-- `[ERR] https://en.wikipedia.org/wiki/Rate_limiting` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\05_distributed\09_rate_limiting_idempotency_pattern.md`
-- `[403] https://www.oreilly.com/library/view/mongodb-the-definitive/9781491954461/` — Forbidden
-  - `docs\research_notes\software_design_theory\07_crate_architectures\23_mongodb_architecture.md`
-- `[404] https://kube.rs/controllers/crds/` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\27_kube_rs_architecture.md`
 - `[403] https://queue.acm.org/detail.cfm?id=2898444` — Forbidden
   - `docs\research_notes\software_design_theory\07_crate_architectures\27_kube_rs_architecture.md`
-- `[404] https://www.microsoft.com/en-us/research/publication/kafka-a-distributed-messaging-system-for-log-processing/` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\26_kafka_architecture.md`
-- `[ERR] https://en.wikipedia.org/wiki/Kleisli_category` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
-- `[ERR] https://en.wikipedia.org/wiki/Monoid` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
-- `[404] https://dioxuslabs.com/learn/0.7/reference` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\29_gui_cross_platform_ui_architecture.md`
-- `[ERR] https://www.rabbitmq.com/docs/consumers` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
-- `[ERR] https://hal.inria.fr/file/index/docid/555588/filename/techreport.pdf` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\23_mongodb_architecture.md`
-- `[ERR] https://www.rabbitmq.com/docs/connections` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
-- `[403] https://www.oreilly.com/library/view/graph-databases/9781491935811/` — Forbidden
-  - `docs\research_notes\software_design_theory\07_crate_architectures\31_surrealdb_architecture.md`
-- `[ERR] https://www.youtube.com/watch?v=rX0ItVEVjHc` — timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `[ERR] https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html` — timed out
+  - `docs\05_guides\05_kani_practical_guide.md`
+- `[ERR] https://www.pm.inf.ethz.ch/publications/RusBos21.html` — TimeoutError('The read operation timed out')
+  - `docs\research_notes\10_authoritative_alignment_gap_matrix.md`
+- `[ERR] https://docs.gitlab.com/ee/ci/` — _ssl.c:999: The handshake operation timed out
+  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
 - `[500] https://surrealdb.com/blog` — Internal Server Error
   - `docs\research_notes\software_design_theory\07_crate_architectures\31_surrealdb_architecture.md`
-- `[ERR] https://web.dev/performance-wasm/` — timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
-- `[ERR] https://www.rabbitmq.com/docs/confirms` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
-- `[ERR] https://www.rabbitmq.com/docs/consumer-prefetch` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
-- `[ERR] https://www.rabbitmq.com/docs/exchanges#exchange-types` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
-- `[404] https://maud.lambda.xyz/frameworks.html` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md`
-- `[404] https://maud.lambda.xyz/syntax.html` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md`
-- `[ERR] https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/` — timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\27_kube_rs_architecture.md`
+- `[ERR] https://prusti.org/` — timed out
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+- `[404] https://nexte.st/book/` — Not Found
+  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
+- `[ERR] http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html` — TimeoutError('timed out')
+  - `docs\research_notes\software_design_theory\07_crate_architectures\22_redis_architecture.md`
 - `[404] https://inf.ethz.ch/courses` — Not Found
   - `docs\research_notes\type_theory\10_type_system_foundations.md`
-- `[ERR] https://www.rabbitmq.com/docs/exchanges` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
-- `[ERR] https://www.rabbitmq.com/tutorials/amqp-concepts` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
-- `[ERR] https://www.rabbitmq.com/tutorials` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md`
-- `[ERR] https://en.wikipedia.org/wiki/Type_Constructor` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\type_theory\10_construction_capability.md`
-- `[ERR] https://en.wikipedia.org/wiki/Type_Class` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\type_theory\10_trait_system_formalization.md`
-- `[ERR] https://en.wikipedia.org/wiki/Variable_Scope` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
-- `[ERR] https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\software_design_theory\07_crate_architectures\41_askama_architecture.md`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md`
-- `[ERR] https://en.wikipedia.org/wiki/Polymorphism` — _ssl.c:999: The handshake operation timed out
+- `[ERR] https://www.reddit.com/r/rust/` — timed out
+  - `docs\research_notes\10_resources.md`
+- `[ERR] https://www.ntia.gov/SBOM` — _ssl.c:999: The handshake operation timed out
+  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
+- `[ERR] https://docs.gitlab.com/ee/ci/examples/rust.html` — _ssl.c:999: The handshake operation timed out
+  - `docs\research_notes\10_cicd_supply_chain_alignment.md`
+- `[ERR] https://web.dev/performance-wasm/` — timed out
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `[ERR] https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/` — timed out
+  - `docs\research_notes\software_design_theory\07_crate_architectures\27_kube_rs_architecture.md`
+- `[ERR] https://www.epfl.ch/schools/ic/` — _ssl.c:999: The handshake operation timed out
   - `docs\research_notes\type_theory\10_type_system_foundations.md`
-- `[ERR] https://en.wikipedia.org/wiki/Type_Inference` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\type_theory\10_type_system_foundations.md`
-- `[ERR] https://en.wikipedia.org/wiki/Lambda_Calculus` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\type_theory\10_type_system_foundations.md`
-- `[ERR] https://en.wikipedia.org/wiki/Dependent_Type` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\type_theory\10_type_system_foundations.md`
-- `[ERR] https://en.wikipedia.org/wiki/Covariance_and_Contravariance` — _ssl.c:999: The handshake operation timed out
-  - `docs\research_notes\type_theory\10_variance_theory.md`
-- `[ERR] https://en.wikipedia.org/wiki/Software_Optimization` — _ssl.c:999: The handshake operation timed out
-  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Performance_Engineering` — _ssl.c:999: The handshake operation timed out
-  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
-- `[ERR] https://en.wikipedia.org/wiki/Formal_Grammar` — _ssl.c:999: The handshake operation timed out
-  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`

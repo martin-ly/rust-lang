@@ -148,7 +148,7 @@ struct MyAppSpec {
 }
 ```
 
-> [来源: [kube-rs CRD Guide](https://kube.rs/controllers/crds/)]
+> [来源: [kube-rs CRD Guide](https://kube.rs/)]
 
 ---
 

@@ -498,7 +498,7 @@ struct Point { x: i32, y: i32 }
 
 - [RFC 1566 - Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)
 - [rustc dev guide - Macro Expansion](https://rustc-dev-guide.rust-lang.org/macro-expansion.html)
-- [rustc dev guide - Procedural Macros](https://rustc-dev-guide.rust-lang.org/proc-macros.html)
+- [rustc dev guide - Procedural Macros](https://rustc-dev-guide.rust-lang.org/attributes.html)
 - [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
 - [The Little Book of Rust Macros - Syntax Extensions](https://veykril.github.io/tlborm/decl-macros/minutiae/fragment-specifiers.html)
 

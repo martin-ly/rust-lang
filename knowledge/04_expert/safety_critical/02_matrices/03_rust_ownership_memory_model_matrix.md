@@ -527,11 +527,11 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 >
 > **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
 >
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]**
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 >
-> **[来源: [Rust Memory Model](https://doc.rust-lang.org/nomicon/memory.html)]**
+> **[来源: [Rust Memory Model](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)]**
 >
 
 ---

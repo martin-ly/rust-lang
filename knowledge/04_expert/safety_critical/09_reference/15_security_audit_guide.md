@@ -570,7 +570,7 @@ impl SecurityMetrics {
 
 | 来源 | 类型 | 说明 |
 |:---|:---|:---|
-| [Rust Security Response WG](https://www.rust-lang.org/governance/wgs/wg-security-response) | 权威来源 | 安全响应工作组 |
+| [Rust Security Response WG](https://www.rust-lang.org/governance/wgs/security-response) | 权威来源 | 安全响应工作组 |
 | [Cargo Security](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) | 权威来源 | 依赖安全 |
 
 ### 8.2 学术来源

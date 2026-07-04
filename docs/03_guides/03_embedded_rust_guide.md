@@ -42,7 +42,7 @@
 > **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Ownership](../../concept/01_foundation/01_ownership.md) · [Unsafe](../../concept/03_advanced/03_unsafe.md)
 > **Bloom 层级**: 应用 → 评价
 > **来源: [Embassy Book](https://embassy.dev/book/)** ·
-> **来源: [RTIC Book](https://rtic.rs/book/)** · **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)** ·
+> **来源: [RTIC Book](https://rtic.rs/2/book/en/)** · **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)** ·
 > **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)** ·
 > **来源: [Wikipedia - Real-Time Operating System](https://en.wikipedia.org/wiki/Real_Time_Operating_System)** ·
 > **来源: [Rust Embedded Book - docs.rust-embedded.org](https://doc.rust-lang.org/stable/embedded-book/)** ✅

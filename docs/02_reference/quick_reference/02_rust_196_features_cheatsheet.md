@@ -24,7 +24,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [Rust 1.96 特性速查表 {#rust-196-特性速查表}](#rust-196-特性速查表-rust-196-特性速查表)
+- [Rust 1.96/1.96.1 特性速查表 {#rust-196-特性速查表}](#rust-1961961-特性速查表-rust-196-特性速查表)
   - [目录 {#目录}](#目录-目录)
   - [if let guards 语法 {#if-let-guards-语法}](#if-let-guards-语法-if-let-guards-语法)
     - [基本语法 {#基本语法}](#基本语法-基本语法)

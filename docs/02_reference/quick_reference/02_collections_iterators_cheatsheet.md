@@ -571,7 +571,7 @@ while let Some(item) = iter.next() {
 
 ### 范围类型（Rust 1.96+ stable） {#范围类型rust-196-stable}
 
-> **[来源: [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html)]**
+> **[来源: [Rust 1.96 Release Notes [已失效]]<!-- 原链接: https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html -->]**
 
 ```rust
 use core::range::{Range, RangeFrom, RangeToInclusive};
@@ -1387,7 +1387,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 
 - [Rust 集合文档](https://doc.rust-lang.org/std/collections/)
 - [Iterator trait 文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
-- [Rust Reference - Collections](https://doc.rust-lang.org/reference/items/collections.html)
+- [Rust Reference - Collections](https://doc.rust-lang.org/reference/types.html)
 
 ### 项目内部文档 {#项目内部文档}
 >

@@ -64,7 +64,7 @@
     - [实际项目 {#实际项目}](#实际项目-实际项目)
     - [相关文档 {#相关文档}](#相关文档-相关文档)
     - [工具资源 {#工具资源}](#工具资源-工具资源)
-  - [🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960}](#-权威国际化内容升级-rust-1960-权威国际化内容升级-rust-1960)
+  - [🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960}](#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960)
     - [本次升级要点 {#本次升级要点}](#本次升级要点-本次升级要点)
   - [相关概念 {#相关概念}](#相关概念-相关概念)
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
@@ -1120,7 +1120,7 @@ impl<T> Drop for SafeVec<T> {
 | 并发 / Send/Sync | [ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | [send-and-sync.html](https://doc.rust-lang.org/nomicon/send-and-sync.html) | 核心语言设计 |
 | Unsafe / 原始指针 | [ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | [what-unsafe-does.html](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [RFC 1966](https://rust-lang.github.io/rfcs/1966-unsafe-pointer-reform.html) |
 | impl Trait / 泛型 | [ch10](https://doc.rust-lang.org/book/ch10-02-traits.html) | — | [RFC 1522](https://rust-lang.github.io/rfcs/1522-conservative-impl-trait.html)、[RFC 1951](https://rust-lang.github.io/rfcs/1951-expand-impl-trait.html) |
-| 型变 | [ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | [subtyping-and-variance.html](https://doc.rust-lang.org/nomicon/subtyping-and-variance.html) | [RFC 738](https://rust-lang.github.io/rfcs/0738-variance.html) |
+| 型变 | [ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | [subtyping-and-variance.html](https://doc.rust-lang.org/nomicon/subtyping.html) | [RFC 738](https://rust-lang.github.io/rfcs/0738-variance.html) |
 | Error 处理 | [ch09](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | — | [RFC 1859](https://rust-lang.github.io/rfcs/1859-try-trait.html)（`Try` trait） |
 
 ---

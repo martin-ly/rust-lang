@@ -155,7 +155,7 @@ async fn hello() -> impl axum::response::IntoResponse {
 }
 ```
 
-> [来源: [maud framework support](https://maud.lambda.xyz/frameworks.html)]
+> [来源: [maud framework support](https://maud.lambda.xyz/)]
 
 ---
 
@@ -196,7 +196,7 @@ async fn hello() -> impl axum::response::IntoResponse {
 | 在宏中捕获过长生命周期 | 编译错误 | 确保借用数据在 `Markup` 使用前有效 |
 | 试图运行时动态选择模板 | 不可行 | Maud 模板在编译期固定，动态场景改用 Askama/Tera |
 
-> [来源: [maud syntax reference](https://maud.lambda.xyz/syntax.html)]
+> [来源: [maud syntax reference](https://maud.lambda.xyz/)]
 
 ---
 

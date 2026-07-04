@@ -781,7 +781,7 @@ async fn async_task_benchmark() {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust 并发文档](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
-- [Tokio 性能指南](https://tokio.rs/tokio/tutorial/performance)
+- [Tokio 性能指南](https://tokio.rs/tokio/tutorial)
 - [The Rust Performance Book – Parallelism](https://nnethercote.github.io/perf-book/parallelism.html) - Rust 并行性能权威指南
 - [TRPL Ch. 16 – Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) - Rust 并发基础
 - [Tokio Docs](https://docs.rs/tokio/latest/tokio/) - 异步运行时官方文档

@@ -89,7 +89,7 @@
 
 | Rustonomicon 章节 | 项目文档 | 状态 | 备注 |
 |-------------------|----------|------|------|
-| [Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping-and-variance.html) | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | ✅ | 型变理论 |
+| [Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html) | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | ✅ | 型变理论 |
 | [Coercions](https://doc.rust-lang.org/nomicon/coercions.html) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | 🔄 | 类型强制转换 |
 
 ---

@@ -422,7 +422,7 @@ DOI: 10.1145/3704904
 
 [^18]: Linux Kernel Documentation. "Rust." kernel.org. <https://docs.kernel.org/rust/> (内核Rust支持官方文档)
 
-[^19]: AWS. "Why AWS Loves Rust." AWS Open Source Blog. <https://aws.amazon.com/blogs/opensource/why-aws-loves-rust/> (企业采用)
+[^19]: AWS. "Why AWS Loves Rust." AWS Open Source Blog. <https://aws.amazon.com/opensource/> (企业采用)
 
 [^20]: **PLDI 2025**. "Tree Borrows Distinguished Paper Award." ACM SIGPLAN. <https://pldi25.sigplan.org/details/pldi-2025-papers/188/Tree-Borrows>
 

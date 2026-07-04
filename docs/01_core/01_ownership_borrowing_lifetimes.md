@@ -3,7 +3,7 @@
 > [The Rust Programming Language](https://doc.rust-lang.org/book/),
 > **分级**: [A]
 > **Rust 版本**: 1.96.1+ (Edition 2024)
-> [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html),
+> [Rust Reference — Ownership](https://doc.rust-lang.org/reference/),
 > [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html),
 > [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
 >
@@ -378,7 +378,7 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [c01_ownership_borrow_scope](../../crates/c01_ownership_borrow_scope) - 完整代码示例
-- [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
+- [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)
 - [Rust By Example - Scope and Shadowing](https://doc.rust-lang.org/rust-by-example/scope.html)
 - [The Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)
 

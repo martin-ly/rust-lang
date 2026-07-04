@@ -881,7 +881,7 @@ Rust 1.96.0 已按计划进入 stable 通道；1.96.1 为当前推荐的稳定 p
 
 > 📎 Rust 1.95 稳定特性的完整说明与示例已迁移至 [`concept/07_future/rust_1_95_stabilized.md`](rust_1_95_stabilized.md)。本节仅保留形式模型视角的极简回顾。
 
-**Rust 1.95.0（2026-04-16）** [来源: [Rust Blog](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)]：
+**Rust 1.95.0（2026-04-16）** 来源: [Rust Blog]：
 
 | **特性** | **说明** |
 | :--- | :--- |
@@ -894,7 +894,7 @@ Rust 1.96.0 已按计划进入 stable 通道；1.96.1 为当前推荐的稳定 p
 | `Atomic*::update` / `try_update` | 原子指针/整数/布尔更新辅助 |
 | JSON target specs | stable 上取消自定义 target spec 支持（已需 nightly） |
 
-**Rust 1.94.0（2026-03-05）** [来源: [Rust Blog](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/)]：
+**Rust 1.94.0（2026-03-05）** 来源: [Rust Blog]：
 
 | **特性** | **说明** |
 | :--- | :--- |
@@ -914,7 +914,7 @@ Rust 1.96.0 已按计划进入 stable 通道；1.96.1 为当前推荐的稳定 p
 - Cargo 降级 `curl-sys` 修复 FreeBSD 证书验证错误
 - 更新 `tar` 至 0.4.45，修复 **CVE-2026-33055 / CVE-2026-33056**（crates.io 用户不受影响）
 
-**Rust 1.93.0（2026-01-22）** [来源: [Rust Blog](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)]：
+**Rust 1.93.0（2026-01-22）** 来源: [Rust Blog]：
 
 | **特性** | **说明** |
 | :--- | :--- |
@@ -926,7 +926,7 @@ Rust 1.96.0 已按计划进入 stable 通道；1.96.1 为当前推荐的稳定 p
 | unchecked integer ops | `<iN/uN>::unchecked_{neg,shl,shr}` |
 | `VecDeque::pop_front_if` / `pop_back_if` | 条件弹出 |
 
-**Rust 1.93.1（2026-02-12）** [来源: [Rust Blog](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/)]：
+**Rust 1.93.1（2026-02-12）** 来源: [Rust Blog]：
 
 - 修复 keyword 恢复为 non-keyword identifier 导致的 ICE（尤其影响 rustfmt）
 - 修复 `clippy::panicking_unwrap` 对隐式解引字段访问的误报

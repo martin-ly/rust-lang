@@ -78,7 +78,7 @@
 | [Threads](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | [crates/c05_threads/](../../crates/c05_threads/README.md) | ✅ | 线程 |
 | [Channels](https://doc.rust-lang.org/rust-by-example/std_misc/channels.html) | [crates/c05_threads/](../../crates/c05_threads/README.md) | ✅ | mpsc |
 | [Arc](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §1 | ✅ | Arc<T> |
-| [Async](https://doc.rust-lang.org/rust-by-example/std_misc/async.html) | [crates/c06_async/](../../crates/c06_async/README.md) | ✅ | async/await |
+| [Async](https://doc.rust-lang.org/book/ch17-00-async-await.html) | [crates/c06_async/](../../crates/c06_async/README.md) | ✅ | async/await |
 
 ---
 
@@ -96,7 +96,7 @@
 | Rust By Example 章节 | 项目文档/示例 | 状态 | 备注 |
 |----------------------|---------------|------|------|
 | [Macros](https://doc.rust-lang.org/rust-by-example/macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | ✅ | 声明宏 |
-| [Procedural Macros](https://doc.rust-lang.org/rust-by-example/macros/procedural.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | ✅ | 过程宏 |
+| [Procedural Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | ✅ | 过程宏 |
 
 ---
 

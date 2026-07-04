@@ -51,7 +51,7 @@
 | rustc-dev-guide 章节 | 项目文档 | 状态 | 备注 |
 |----------------------|----------|------|------|
 | [Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | 模块系统与名称解析 |
-| [Modules and Source Files](https://rustc-dev-guide.rust-lang.org/modules.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | crate/module/path 规则 |
+| [Modules and Source Files](https://rustc-dev-guide.rust-lang.org/compiler-src.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | crate/module/path 规则 |
 
 ---
 
@@ -88,8 +88,8 @@
 
 | rustc-dev-guide 章节 | 项目文档 | 状态 | 备注 |
 |----------------------|----------|------|------|
-| [Async/Await Lowering](https://rustc-dev-guide.rust-lang.org/query/async_await.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ | async 状态机展开 |
-| [Generator / Async Fn in Traits](https://rustc-dev-guide.rust-lang.org/traits/async-fn-in-trait.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 🔄 | async trait 实现机制 |
+| [Async/Await Lowering](https://rustc-dev-guide.rust-lang.org/query/index.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ | async 状态机展开 |
+| [Generator / Async Fn in Traits](https://rustc-dev-guide.rust-lang.org/traits/index.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 🔄 | async trait 实现机制 |
 
 ---
 

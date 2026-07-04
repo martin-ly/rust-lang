@@ -71,7 +71,7 @@ T-BR1、[UNSAFE_RUST_GUIDE](../../concept/03_advanced/03_unsafe.md)（no_std、�
 | **Embedded Rust Book** | <https://doc.rust-lang.org/embedded-book/> | 官方嵌入式 Rust 教程 |
 | **Discovery Book** | <https://docs.rust-embedded.org/discovery/> | 零基础嵌入式入门 |
 | **Embedonomicon** | <https://docs.rust-embedded.org/embedonomicon/> | 嵌入式 Rust 底层细节 |
-| **Embedded FAQ** | <https://docs.rust-embedded.org/faq.html> | 常见问题 |
+| **Embedded FAQ** | <https://docs.rust-embedded.org/book/> | 常见问题 |
 | **Comprehensive Rust: Bare Metal** | <https://google.github.io/comprehensive-rust/bare-metal.html> | Google 裸机开发课程 |
 
 ---

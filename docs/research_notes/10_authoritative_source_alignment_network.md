@@ -100,7 +100,7 @@
 | [Aeneas](https://aeneas-verification.github.io/) | EPFL | 验证工具 | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) | 可验证的 Rust 子集 |
 | [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3) | 多机构 | 操作语义 | [10_rustsem_semantics.md](10_rustsem_semantics.md) | Rust 操作语义 |
 | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | ETH Zürich | 借用模型 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | 别名模型改进 |
-| [Stacked Borrows](https://plv.mpi-sws.org/rustbos/) | MPI-SWS | 借用模型 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | 原始别名规则 |
+| [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/) | MPI-SWS | 借用模型 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | 原始别名规则 |
 | [IEEE/ACM/arXiv/Springer Academic Resources](https://dl.acm.org/) | 多机构 | 学术论文/工具综述 | [10_academic_papers_alignment.md](10_academic_papers_alignment.md) | POPL/PLDI/OOPSLA/ICFP 顶级会议、TOPLAS/JFP/FMSD 期刊、ACM DL/IEEE Xplore/Springer/arXiv 出版商 |
 
 ---

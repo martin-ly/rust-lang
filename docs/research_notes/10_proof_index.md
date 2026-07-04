@@ -712,7 +712,7 @@
 
 | 本项目证明/概念 | Ferrocene FLS 章节 | Rust Reference 章节 | 说明 |
 | :--- | :--- | :--- | :--- |
-| 所有权唯一性 T-OW2 | Ch. 4.2 *Ownership* | [Ownership](https://doc.rust-lang.org/reference/ownership.html) | 唯一所有者规则 |
+| 所有权唯一性 T-OW2 | Ch. 4.2 *Ownership* | [Ownership](https://doc.rust-lang.org/reference/) | 唯一所有者规则 |
 | 借用规则 T-BR1/T-BR2 | Ch. 6 *Expressions* / Ch. 17 *Patterns* | [Borrowing](https://doc.rust-lang.org/reference/expressions.html#borrow-expressions) | `&` / `&mut` 语义 |
 | 生命周期 LF-T1–T3 | Ch. 7 *Generics* / Ch. 8 *Trait and lifetime bounds* | [Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) | `'a`、outlives、elision |
 | 类型安全 T-TY3 | Ch. 5 *Types* / Ch. 10 *Patterns* | [Types](https://doc.rust-lang.org/reference/types.html) | 类型规则、类型错误 |

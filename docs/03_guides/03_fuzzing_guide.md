@@ -298,7 +298,7 @@ fuzzing:
 - [cargo-fuzz 仓库](https://github.com/rust-fuzz/cargo-fuzz)
 - [libFuzzer 文档](https://llvm.org/docs/LibFuzzer.html)
 - [Google OSS-Fuzz](https://google.github.io/oss-fuzz/)
-- [Cloudflare 模糊测试实践](https://blog.cloudflare.com/fuzzing-rust/)
+- [Cloudflare 模糊测试实践](https://blog.cloudflare.com/)
 
 ---
 

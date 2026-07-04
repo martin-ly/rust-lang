@@ -11,7 +11,7 @@
 > **📚 难度级别**: ⭐⭐⭐⭐ 高级
 > **权威来源**:
 > [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html),
-> [Rustonomicon — Uninitialized Memory](https://doc.rust-lang.org/nomicon/uninit.html),
+> [Rustonomicon — Uninitialized Memory](https://doc.rust-lang.org/nomicon/what-unsafe-does.html),
 > [Unsafe Code Guidelines — Validity](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html#validity),
 > [RFC 1892: MaybeUninit](https://rust-lang.github.io/rfcs/1892-uninitialized-uninhabited.html)
 >
@@ -71,6 +71,7 @@ x.write(42);
 let value = unsafe { x.assume_init() };
 assert_eq!(value, 42);
 ```
+
 #### 1.2 与 `mem::uninitialized()` 的对比
 
 | 特性 | `mem::uninitialized()` (已废弃) | `MaybeUninit<T>` |
@@ -123,6 +124,7 @@ MaybeUninit<T>
     ├── ManuallyDrop (抑制 Drop)
     └── 手动 Drop 控制
 ```
+
 ### 模块 4: 机制解释
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -154,6 +156,7 @@ struct RawVec<T> {
 // RawVec 实际上使用 NonNull<T> 指向 MaybeUninit<T> 的内存
 // 这允许 Vec 分配容量但不初始化元素
 ```
+
 ### 模块 5: 正例集
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -190,6 +193,7 @@ fn main() {
     assert_eq!(squares, [0, 1, 4, 9, 16]);
 }
 ```
+
 #### 5.2 条件初始化（部分填充数组）
 
 ```rust
@@ -224,6 +228,7 @@ where
     (result, count)
 }
 ```
+
 #### 5.3 `MaybeUninit` 数组转换 (Rust 1.95+)
 
 ```rust,ignore
@@ -244,6 +249,7 @@ let arr_back: [MaybeUninit<i32>; 4] = uninit_array.into();
 // AsRef 获取视图
 let view: &[MaybeUninit<i32>] = uninit_array.as_ref();
 ```
+
 #### 5.4 与 `Box::new_uninit` 结合使用
 
 ```rust,ignore
@@ -263,6 +269,7 @@ let initialized_box: Box<[u8; 1024]> = unsafe {
     std::mem::transmute(uninit_box)
 };
 ```
+
 ### 模块 6: 反例集
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -277,6 +284,7 @@ let x: MaybeUninit<String> = MaybeUninit::uninit();
 let s: String = unsafe { x.assume_init() };
 // UB: String 内部指针是随机值，Drop 时会释放无效地址
 ```
+
 #### 6.2 使用 `mem::uninitialized()` (已废弃)
 
 ```rust,ignore
@@ -284,6 +292,7 @@ let s: String = unsafe { x.assume_init() };
 let x: String = unsafe { std::mem::uninitialized() };
 // 即使随后立即覆盖，也可能在 panic/unwind 时触发 UB
 ```
+
 #### 6.3 错误处理 Drop
 
 ```rust,ignore
@@ -299,6 +308,7 @@ arr[0].write("hello".to_string());
 let mut arr: [MaybeUninit<String>; 3] = unsafe { MaybeUninit::uninit().assume_init() };
 // ... 初始化部分元素后，手动管理生命周期
 ```
+
 ### 模块 7: 思维表征
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -322,6 +332,7 @@ MaybeUninit<T>
                   │
                   └─→ 仍需验证零值对 T 是否合法
 ```
+
 ### 模块 8: 国际化对齐
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -367,6 +378,7 @@ MIRIFLAGS="-Zmiri-disable-isolation" cargo +nightly miri test
 # 如果代码使用外部 FFI，可能需要
 MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-ignore-leaks" cargo +nightly miri run
 ```
+
 ---
 
 ## 🔗 参考资源
@@ -374,7 +386,7 @@ MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-ignore-leaks" cargo +nightly miri run
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [MaybeUninit 文档](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)
-- [Rustonomicon - Uninitialized Memory](https://doc.rust-lang.org/nomicon/uninit.html)
+- [Rustonomicon - Uninitialized Memory](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)
 - [Unsafe Rust Guidelines - Validity](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html#validity)
 
 ---
@@ -393,7 +405,7 @@ MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-ignore-leaks" cargo +nightly miri run
 ### 官方来源
 
 - [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html) [来源: Rust Standard Library / 2025]
-- [Rustonomicon — Uninitialized Memory](https://doc.rust-lang.org/nomicon/uninit.html) [来源: Rust Team / Rustonomicon 2025]
+- [Rustonomicon — Uninitialized Memory](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) [来源: Rust Team / Rustonomicon 2025]
 - [Unsafe Code Guidelines — Validity](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html#validity) [来源: Rust Unsafe Code Guidelines WG / 2025]
 - [RFC 1892: MaybeUninit](https://rust-lang.github.io/rfcs/1892-uninitialized-uninhabited.html) [来源: Rust Core Team / 2017]
 

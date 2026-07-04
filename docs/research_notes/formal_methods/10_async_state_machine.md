@@ -1584,7 +1584,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 - [Tokio 实现](https://github.com/tokio-rs/tokio)
 - [async-std [已归档] 实现](<https://github.com/async-rs/async-std> [已归档])
 - [Futures crate](https://github.com/rust-lang/futures-rs)
-- [标准库 Future 实现](https://doc.rust-lang.org/src/core/future.rs.html)
+- [标准库 Future 实现](https://doc.rust-lang.org/stable/src/core/future.rs.html)
 
 ### 工具资源 {#工具资源}
 

@@ -466,7 +466,7 @@ impl<T> Vec<T> {
 8. **Tree Borrows**. "Tree Borrows: A New Aliasing Model for Rust".
    <https://www.ralfj.de/blog/2023/06/02/tree-borrows.html>
 
-9. **Villani, W., Hostert, S., Dreyer, D., & Jung, R.** *"Tree Borrows: A Read-Optimized Aliasing Model for Rust"*. PLDI 2025 Distinguished Paper Award. <https://plv.mpi-sws.org/rustbelt/tree-borrows/>
+9. **Villani, W., Hostert, S., Dreyer, D., & Jung, R.** *"Tree Borrows: A Read-Optimized Aliasing Model for Rust"*. PLDI 2025 Distinguished Paper Award. <https://plv.mpi-sws.org/rustbelt/>
 10. **Miri POPL 2026** (Preprint). *"Miri: An Interpreter for Rust's Mid-level IR"*. 扩展 Miri 语义解释器以支持 Tree Borrows 和 128-bit 平台模拟。
 11. **KVerus** (arXiv 2026-05). *"Automated Proof Generation for Rust using Retrieval-Augmented Generation"*. 将自然语言规格自动转换为 Verus 证明义务。
 12. **AutoVerus** (OOPSLA 2025). *"Neuro-Symbolic Verification of Rust Programs"*. LLM 生成候选不变式 + SMT 验证的混合工作流。

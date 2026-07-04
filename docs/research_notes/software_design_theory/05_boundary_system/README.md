@@ -253,7 +253,7 @@
 > **来源: [Rust Reference – Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)**
 > **来源: [Rust Reference – Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)**
 > **来源: [Ferrocene Language Specification](https://spec.ferrocene.dev/)**
-> **来源: [Rust API Guidelines – Unsafe Code](https://rust-lang.github.io/api-guidelines/unsafe.html)**
+> **来源: [Rust API Guidelines – Unsafe Code](https://rust-lang.github.io/api-guidelines/safety.html)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 

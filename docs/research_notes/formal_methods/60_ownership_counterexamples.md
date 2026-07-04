@@ -255,7 +255,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 | 错误实现 Send/Sync | 并发不变量 | — (运行时 UB) | 不手动实现 / 使用同步原语 |
 | 生命周期参数不足 | 生命周期推断 | E0106 | 显式标注 / 返回 owned 类型 |
 
-> **权威来源**: [Rust Reference – Ownership](https://doc.rust-lang.org/reference/ownership.html) | [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) | [The Rust Programming Language – Ch 4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | [The Rust Programming Language – Ch 10](https://doc.rust-lang.org/book/ch10-00-generics.html) | [Rustonomicon – Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | [Pin and Suffering](https://blog.yoshuawuyts.com/pin-streams/)
+> **权威来源**: [Rust Reference – Ownership](https://doc.rust-lang.org/reference/) | [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) | [The Rust Programming Language – Ch 4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | [The Rust Programming Language – Ch 10](https://doc.rust-lang.org/book/ch10-00-generics.html) | [Rustonomicon – Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | [Pin and Suffering](https://blog.yoshuawuyts.com/)
 
 ## 相关概念 {#相关概念}
 
@@ -283,7 +283,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 本反例汇编参考以下 P1/P1.5/P2 权威来源：
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
-- [Stacked Borrows](https://plv.mpi-sws.org/rustbos/)
+- [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 
 ## 社区权威参考 {#社区权威参考}

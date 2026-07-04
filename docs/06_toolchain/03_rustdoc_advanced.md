@@ -1291,7 +1291,7 @@ pub fn x86_64_optimized() -> i32 {
 | 概念 | 形式化文档链接 |
 | :--- | :--- |
 | 类型系统 | [Rust Reference - Type System](https://doc.rust-lang.org/reference/type-system.html) |
-| 所有权 | [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html) |
+| 所有权 | [Rust Reference - Ownership](https://doc.rust-lang.org/reference/) |
 | 生命周期 | [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) |
 | Trait 系统 | [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html) |
 | 类型布局 | [Rust Reference - Type Layout](https://doc.rust-lang.org/reference/type-layout.html) |

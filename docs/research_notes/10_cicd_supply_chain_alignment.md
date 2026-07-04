@@ -121,7 +121,7 @@
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [nextest Book](https://nexte.st/) | [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) | 🔄 | 当前使用 `cargo test`；nextest 替换可提升速度与重试能力 |
-| [nextest profile / retries](https://nexte.st/book/execution.html) | — | ⏳ | flakiness 重试与分区运行 |
+| [nextest profile / retries](https://nexte.st/book/) | — | ⏳ | flakiness 重试与分区运行 |
 
 ### 3.4 cargo-llvm-cov {#34-cargo-llvm-cov}
 
@@ -208,7 +208,7 @@
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [GitHub Artifact Attestations](https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds) | — | ⏳ | `actions/attest-build-provenance` |
-| [Sigstore provenance](https://docs.sigstore.dev/signing/overview/) | — | ⏳ | 与 SLSA provenance 互补 |
+| [Sigstore provenance](https://docs.sigstore.dev/) | — | ⏳ | 与 SLSA provenance 互补 |
 | [SLSA Provenance](https://slsa.dev/spec/v1.0/provenance) | — | ⏳ | 构建来源、依赖、环境 |
 
 ---

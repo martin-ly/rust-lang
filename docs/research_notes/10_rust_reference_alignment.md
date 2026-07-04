@@ -63,7 +63,7 @@
 | [Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) | [type_theory/60_type_system_counterexamples.md](type_theory/60_type_system_counterexamples.md) §3 | ✅ | `dyn Trait` 大小不固定 |
 | [Generics](https://doc.rust-lang.org/reference/items/generics.html) | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | ✅ | 泛型参数、约束 |
 | [Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | ✅ | 生命周期参数、省略规则 |
-| [Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping-and-variance.html) | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | ✅ | 型变规则 |
+| [Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html) | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | ✅ | 型变规则 |
 | [Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | 🔄 | 可扩展专门章节 |
 
 ---
@@ -123,7 +123,7 @@
 
 | Reference 章节 | 项目文档 | 状态 | 备注 |
 |----------------|----------|------|------|
-| [Editions](https://doc.rust-lang.org/reference/editions.html) | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) | ✅ | Edition 差异映射 |
+| [Editions](https://doc.rust-lang.org/edition-guide/) | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) | ✅ | Edition 差异映射 |
 | [Unsafe Op in Unsafe Fn](https://doc.rust-lang.org/reference/items/functions.html#unsafe-functions) (2024) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §2 | ✅ | Edition 2024 lint 变化 |
 
 ---

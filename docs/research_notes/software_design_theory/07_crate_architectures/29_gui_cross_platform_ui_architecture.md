@@ -139,7 +139,7 @@ tauri::Builder::default()
 
 ### 3.2 Dioxus：React 风格组件 {#32-dioxusreact-风格组件}
 
-> **[来源: [Dioxus Reference](https://dioxuslabs.com/learn/0.7/reference)]**
+> **[来源: [Dioxus Reference](https://dioxuslabs.com/learn/0.7/)]**
 
 Dioxus 使用函数式组件与 `rsx!` 宏，状态通过 `use_signal` / `use_hook` 管理。
 

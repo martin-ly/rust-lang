@@ -276,7 +276,7 @@ A: 这是已知问题。尝试：
 
 - [cargo-tarpaulin 文档](https://github.com/xd009642/tarpaulin)
 - [cargo-llvm-cov 文档](https://github.com/taiki-e/cargo-llvm-cov)
-- [Codecov Rust 指南](https://docs.codecov.com/docs/rust)
+- [Codecov Rust 指南](https://docs.codecov.com/docs)
 - [Microsoft 测试覆盖率策略](https://docs.microsoft.com/en-us/azure/devops/pipelines/test/codecoverage-for-pullrequests)
 
 ---

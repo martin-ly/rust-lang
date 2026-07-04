@@ -75,7 +75,7 @@ fn main() -> std::io::Result<()> {
 }
 ```
 
-> [来源: Ratatui Tutorial — Hello World](https://ratatui.rs/tutorials/hello-world/)
+> [来源: Ratatui Tutorial — Hello World](https://ratatui.rs/tutorials/)
 
 ---
 
@@ -467,7 +467,7 @@ fn test_ui_renders_correctly() {
 - `assert_buffer` 比较完整的 `Buffer` 状态，而非字符串匹配
 - 可在 CI 环境中运行，无需真实终端
 
-> [来源: Ratatui Testing Docs](https://ratatui.rs/concepts/testing/)
+> [来源: Ratatui Testing Docs](https://ratatui.rs/)
 
 ---
 

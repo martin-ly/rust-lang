@@ -11,7 +11,7 @@
 > **权威来源**:
 > [RFC 2497 — if-let-chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html),
 > [Rust Reference — Let expressions](https://doc.rust-lang.org/reference/statements.html#let-statements),
-> [Rust 2024 Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/let-else.html)
+> [Rust 2024 Edition Guide](https://doc.rust-lang.org/rust-by-example/flow_control/let_else.html)
 > **权威来源对齐变更日志**: 2026-05-19 新增 RFC 2497 设计决策来源标注、跨语言对比矩阵（Haskell ViewPatterns / Swift if let / C++17 structured binding） [来源: Authority Source Sprint Batch 8]
 >
 > **受众**: [专家] / [研究者]
@@ -365,7 +365,7 @@ None
 
 - [RFC 2497 — if-let-chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html) [来源: Rust Core Team / 2022]
 - [Rust Reference — Let expressions](https://doc.rust-lang.org/reference/statements.html#let-statements) [来源: Rust Reference / 2025]
-- [Rust 2024 Edition Guide — let chains](https://doc.rust-lang.org/edition-guide/rust-2024/let-else.html) [来源: Rust Edition Team / 2025]
+- [Rust 2024 Edition Guide — let chains](https://doc.rust-lang.org/rust-by-example/flow_control/let_else.html) [来源: Rust Edition Team / 2025]
 
 ### 跨语言来源
 

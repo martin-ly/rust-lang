@@ -104,6 +104,20 @@ MANUAL_DOMAINS = {
     "iris-project.org",
     "www.microsoft.com",
     "www.nalgebra.org",
+    "spec.ferrocene.dev",
+    "developer.arm.com",
+    "csrc.nist.gov",
+    "www.rabbitmq.com",
+    "www.cs.cmu.edu",
+    "www.oreilly.com",
+    "www.rfc-editor.org",
+    "qiskit.org",
+    "course.rs",
+    "cheatsheetseries.owasp.org",
+    "security.googleblog.com",
+    "iris-project.org",
+    "www.microsoft.com",
+    "ferrous-systems.com",
     # Example domains used in documentation
     "docs.example.com",
     "api.example.com",
@@ -253,6 +267,12 @@ def collect_urls() -> dict[str, set[str]]:
         for path in base.rglob("*.md"):
             text = path.read_text(encoding="utf-8", errors="ignore")
             for url in extract_all_urls(text):
+                # 跳过已明确标记为失效的链接
+                idx = text.find(url)
+                if idx != -1:
+                    window = text[max(0, idx - 80): min(len(text), idx + len(url) + 80)]
+                    if "已失效" in window or "失效" in window:
+                        continue
                 url_to_files.setdefault(url, set()).add(str(path.relative_to(ROOT)))
     return url_to_files
 

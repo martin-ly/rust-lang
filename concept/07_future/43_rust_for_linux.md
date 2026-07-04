@@ -407,7 +407,7 @@ Rust for Linux 采用状态 (2024+):
 
 **[Linux 7.0 Release, 2026-04]** Linux 7.0 正式发布，其中一项显著变化是移除 Rust 支持的 experimental 状态，标志着 2025 年 Maintainers Summit 的共识在主线版本中落地。Linus Torvalds 在发布邮件中列举了多项架构与驱动改进，Rust 不再被标记为实验性即为其一。
 
-> **来源**: [LWN — The 7.0 kernel has been released](https://lwn.net/Articles/...) · [Linux Today — Linux Kernel 7.0 Officially Released](https://www.linuxtoday.com/blog/linux-kernel-7-0-officially-released-this-is-whats-new/) · 可信度: ⚠️ 二级来源转引
+> **来源**: [LWN — The 7.0 kernel has been released [已失效]]<!-- 原链接: https://lwn.net/Articles/... --> · [Linux Today — Linux Kernel 7.0 Officially Released](https://www.linuxtoday.com/blog/linux-kernel-7-0-officially-released-this-is-whats-new/) · 可信度: ⚠️ 二级来源转引
 
 ### 3.3 历史里程碑总览（自 `docs/04_research/04_rust_for_linux.md` 合并）
 

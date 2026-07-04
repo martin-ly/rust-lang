@@ -78,7 +78,7 @@ Embassy 是 Rust 嵌入式生态中**异步优先 (async-first)** 的 dominant f
 
 ## 2. 裸机 async executor 架构 {#2-裸机-async-executor-架构}
 
-> [来源: [Embassy Book - Executor](https://embassy.dev/book/dev/runtime.html)]
+> [来源: [Embassy Book - Executor](https://embassy.dev/book/)]
 
 Embassy 的核心创新是在**无操作系统**、**无堆分配器**（可选）的环境中实现了完整的 `async/await` 运行时。
 
@@ -160,7 +160,7 @@ fn TIM2() {
 4. 中断触发时，对应的 `Waker::wake()` 被调用
 5. 任务重新进入就绪队列
 
-> [来源: [Embassy Book - Time](https://embassy.dev/book/dev/time.html)]
+> [来源: [Embassy Book - Time](https://embassy.dev/book/)]
 
 ### 2.3 任务调度模型 {#23-任务调度模型}
 >

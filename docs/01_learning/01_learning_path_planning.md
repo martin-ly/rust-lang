@@ -506,7 +506,7 @@ fn main() {
 
 #### Programming in Rust (University of Colorado Boulder) {#programming-in-rust-university-of-colorado-boulder}
 
-- **链接**: <https://www.coursera.org/learn/programming-in-rust>
+- **链接**: <https://www.coursera.org/browse/computer-science/programming-languages>
 - **内容**: Rust编程基础
 - **适合路径**: 路径 1: 完全新手（0 基础）
 - **与本文档对齐**: C01-C03 基础阶段

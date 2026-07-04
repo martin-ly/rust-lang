@@ -708,7 +708,7 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
 ```
 
 > **陷阱总结**: 事件驱动的陷阱多与**分布式系统的时序、故障、规模**相关。Rust 的类型安全和内存安全（Memory Safety）消除了部分陷阱（如序列化竞态），但架构层面的反模式仍需经验规避。
-> [来源: [Anti-patterns in Event-Driven Architecture](https://solace.com/blog/event-driven-architecture-anti-patterns/)]
+> [来源: [Anti-patterns in Event-Driven Architecture](https://solace.com/blog/)]
 
 ---
 
@@ -755,18 +755,6 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
 ---
 
 ## 权威来源索引
-
->
->
->
->
->
-
----
-
----
-
----
 
 > **补充来源**
 

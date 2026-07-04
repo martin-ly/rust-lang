@@ -96,7 +96,7 @@
 |----------|----------|----------|
 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) | MPI-SWS | [10_rustbelt_alignment.md](10_rustbelt_alignment.md) |
 | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | ETH Zürich / Ralf Jung | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)、[10_rustsem_semantics.md](10_rustsem_semantics.md) |
-| [Stacked Borrows](https://plv.mpi-sws.org/rustbos/) | MPI-SWS | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) |
+| [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/) | MPI-SWS | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) |
 | [Oxide](https://arxiv.org/abs/1903.00982) | Aaron Weiss 等 | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md)、[type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) |
 | [Aeneas](https://arxiv.org/abs/2207.09467) | EPFL | [10_aeneas_integration_plan.md](10_aeneas_integration_plan.md)、[10_international_formal_verification_index.md](10_international_formal_verification_index.md) |
 | [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3) | 多机构 | [10_rustsem_semantics.md](10_rustsem_semantics.md) |

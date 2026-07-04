@@ -3195,7 +3195,7 @@ fn main() {
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - [Rust Book - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
-- [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
+- [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)
 - [Rust Reference - Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
 - Rustonomicon — unsafe、内存布局
 

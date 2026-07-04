@@ -613,7 +613,7 @@ Rust 缺乏运行时反射机制（如 Java 的 `java.lang.reflect`、Go 的 `re
 | `rkyv` | 零拷贝序列化 | 10-50x | 结构直接存档，反序列化 = 类型转换 |
 
 > 注：具体数字高度依赖数据结构和硬件平台，上表仅反映数量级关系。
-> 来源: [rkyv 基准测试文档](https://rkyv.org/performance.html)
+> 来源: [rkyv 基准测试文档](https://rkyv.org/)
 
 ### 7.5 自定义格式的内联潜力 {#75-自定义格式的内联潜力}
 

@@ -59,7 +59,7 @@
 | 权威来源 | 类型 | 项目文档 | 覆盖内容 | 状态 |
 |----------|------|----------|----------|------|
 | [Rustonomicon – FFI](https://doc.rust-lang.org/nomicon/ffi.html) | 高级/unsafe 指南 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §6 | `extern`、ABI、裸指针、所有权跨边界 | ✅ 已完成 |
-| [Unsafe Code Guidelines – FFI](https://rust-lang.github.io/unsafe-code-guidelines/reference/ffi.html) | unsafe 指南 | [10_unsafe_code_guidelines_alignment.md](10_unsafe_code_guidelines_alignment.md) | FFI 内存协议、Validity Invariants | ✅ 已完成 |
+| [Unsafe Code Guidelines – FFI](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html) | unsafe 指南 | [10_unsafe_code_guidelines_alignment.md](10_unsafe_code_guidelines_alignment.md) | FFI 内存协议、Validity Invariants | ✅ 已完成 |
 | [bindgen](https://rust-lang.github.io/rust-bindgen/) | 工具/crate | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | C/C++ 头文件自动生成 Rust 绑定 | ✅ 已完成 |
 | [cbindgen](https://github.com/mozilla/cbindgen) | 工具/crate | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | 由 Rust 生成 C/C++ 头文件 | ✅ 已完成 |
 | [cxx](https://cxx.rs/) | 跨语言互操作框架 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | Rust 与 C++ 安全互操作 | ✅ 已完成 |

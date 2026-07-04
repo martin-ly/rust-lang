@@ -70,7 +70,7 @@
 | Async Book 章节 | 项目文档 | 状态 | 备注 |
 |-----------------|----------|------|------|
 | [Async IO](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html) | [crates/c06_async/](../../crates/c06_async/README.md) | ✅ | 异步 IO 示例 |
-| [Shared State](https://rust-lang.github.io/async-book/03_async_await/04_shared_state.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §4 | ✅ | 异步中持同步锁 |
+| [Shared State](https://rust-lang.github.io/async-book/02_execution/01_chapter.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §4 | ✅ | 异步中持同步锁 |
 
 ---
 
@@ -79,7 +79,7 @@
 | Async Book 章节 | 项目文档 | 状态 | 备注 |
 |-----------------|----------|------|------|
 | [Under the Hood](https://rust-lang.github.io/async-book/02_execution/01_chapter.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ | async 状态机展开 |
-| [Async Lifetimes](https://rust-lang.github.io/async-book/03_async_await/02_async_lifetimes.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | ✅ | async 析构限制 |
+| [Async Lifetimes](https://rust-lang.github.io/async-book/02_execution/03_async_lifetimes.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | ✅ | async 析构限制 |
 
 ---
 
@@ -88,7 +88,7 @@
 | 误区 | 项目反例 | Async Book 来源 |
 |------|----------|-----------------|
 | 在 `Drop` 中调用 `.await` | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | [Async Drop](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) |
-| 同步锁跨越 await | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §4 | [Shared State](https://rust-lang.github.io/async-book/03_async_await/04_shared_state.html) |
+| 同步锁跨越 await | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §4 | [Shared State](https://rust-lang.github.io/async-book/02_execution/01_chapter.html) |
 | poll 不注册 waker | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §7 | [Waker](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html) |
 
 ---

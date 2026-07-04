@@ -12,10 +12,9 @@
 > **后置概念**: [Nightly Rust](../07_future/50_nightly_rust.md) · [Rust 1.96 Stabilized](../07_future/rust_1_96_stabilized.md) · [Rust 1.97.0 Preview (Beta)](../07_future/rust_1_97_preview.md)
 > **定理链**: Nightly → Beta → Stable → Release Channel
 >
-> **来源**: [The Rust Programming Language — Appendix G: How Rust is Made and Nightly Rust](https://doc.rust-lang.org/book/appendix-06-nightly-rust.html) · [Rust Async Working Group — Async Foundations](https://rust-lang.github.io/async-fundamentals-initiative/) · [without.boats — Futures and Async](https://without.boats/blog/) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [MIT 6.824 — Distributed Systems](https://pdos.csail.mit.edu/6.824/) · [Rust Reference — Editions](https://doc.rust-lang.org/reference/editions.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: [The Rust Programming Language — Appendix G: How Rust is Made and Nightly Rust](https://doc.rust-lang.org/book/appendix-07-nightly-rust.html) · [Rust Async Working Group — Async Foundations](https://rust-lang.github.io/async-fundamentals-initiative/) · [without.boats — Futures and Async](https://without.boats/blog/) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [MIT 6.824 — Distributed Systems](https://pdos.csail.mit.edu/6.824/) · [Rust Reference — Editions](https://doc.rust-lang.org/edition-guide/index.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
-
 
 ---
 
@@ -29,7 +28,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与Rust 发布流程（Rust Release Process的适用边界。
 5. **迁移应用**: 将 Rust 发布流程（Rust Release Process 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -39,7 +37,6 @@
 > **反命题 2**: "忽略 Rust 发布流程（Rust Release Process 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Rust 发布流程（Rust Release Process 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 Rust 发布流程（Rust Release Process 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rust 发布流程（Rust Release Process 具有语言特有的形态。
-
 
 ## 一、发布频道
 
@@ -91,5 +88,5 @@ rustup run nightly cargo build
 
 ---
 
-> **权威来源**: [TRPL — Appendix G](https://doc.rust-lang.org/book/appendix-06-nightly-rust.html) · [Rust Forge — Release Process](https://forge.rust-lang.org/release/release-process.html)
+> **权威来源**: [TRPL — Appendix G](https://doc.rust-lang.org/book/appendix-07-nightly-rust.html) · [Rust Forge — Release Process](https://forge.rust-lang.org/release/process.html)
 > **内容分级**: [参考级]

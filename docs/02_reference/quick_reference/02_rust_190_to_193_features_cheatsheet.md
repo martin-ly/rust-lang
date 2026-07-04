@@ -136,7 +136,7 @@ let zeroed: Box<u64> = Box::new_zeroed();
 
 ## Rust 1.93 (2026-01) {#rust-193-2026-01}
 
-> **[来源: [Rust Blog](https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/)]**
+> **[来源: [Rust Blog [已失效]]<!-- 原链接: https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/ -->]**
 
 ### musl 1.2.5 {#musl-125}
 
@@ -197,7 +197,7 @@ pub unsafe fn cpuid() {
 - [Rust 1.90.0 Release](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 - [Rust 1.91.0 Release](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)
 - [Rust 1.92.0 Release](https://blog.rust-lang.org/2025/12/11/Rust-1.92.0/)
-- [Rust 1.93.0 Release](https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/)
+- [Rust 1.93.0 Release [已失效]]<!-- 原链接: https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/ -->
 - [Rust 1.94 特性速查表](02_rust_194_features_cheatsheet.md)
 - [Rust 1.95 特性速查表](02_rust_195_features_cheatsheet.md)
 - [Rust 版本跟踪](../../../concept/07_future/05_rust_version_tracking.md)
