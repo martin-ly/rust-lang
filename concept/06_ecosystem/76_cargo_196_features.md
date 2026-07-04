@@ -20,7 +20,6 @@
 > [Cargo Book — Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) ·
 > [TOML v1.1 Specification](https://toml.io/en/v1.1.0)
 
-
 ---
 
 > **过渡**: 从 Cargo 1.96 新特性与工具链变更 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -29,7 +28,6 @@
 
 > **过渡**: 最后，将 Cargo 1.96 新特性与工具链变更 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
-
 ---
 
 > **定理 1** [Tier 2]: Cargo 1.96 新特性与工具链变更 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
@@ -37,7 +35,6 @@
 > **定理 2** [Tier 2]: 正确理解 Cargo 1.96 新特性与工具链变更 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
 >
 > **定理 3** [Tier 3]: 将 Cargo 1.96 新特性与工具链变更 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 
 ## 📑 目录
 
@@ -49,7 +46,7 @@
     - [2.2 数据来源](#22-数据来源)
     - [2.3 典型应用](#23-典型应用)
     - [2.4 当前限制](#24-当前限制)
-  - [三、`CARGO_BIN_EXE_<crate>` 运行时（Runtime）可用](#三cargo_bin_exe_crate-运行时可用)
+  - [三、`CARGO_BIN_EXE_<crate>` 运行时可用](#三cargo_bin_exe_crate-运行时可用)
     - [3.1 变更内容](#31-变更内容)
     - [3.2 使用示例](#32-使用示例)
     - [3.3 为什么重要](#33-为什么重要)
@@ -125,7 +122,7 @@ pubtime = "2026-05-20T12:34:56Z"
 
 ### 3.1 变更内容
 
-在 Rust 1.96 之前，`CARGO_BIN_EXE_<crate>` 环境变量仅在**编译时**通过 `env!()` 使用；运行时 `std::env::var` 无法读取到。
+在 Rust 1.96 之前，`CARGO_BIN_EXE_<crate>` 环境变量仅在**编译时**通过 `env!()` 使用；运行时（Runtime） `std::env::var` 无法读取到。
 
 Rust 1.96 将其扩展为**运行时也可用**，方便集成测试在运行时定位同 workspace 中的二进制产物。
 

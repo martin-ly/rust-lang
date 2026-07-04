@@ -159,7 +159,7 @@ graph LR
 
 > **认知功能**: 此图展示 `Range` 语义从**直接迭代器（Iterator）**到**可迭代值**的关键架构变化。旧模型中范围与迭代器状态耦合；新模型通过 `IntoIterator` 解耦，范围作为**工厂**生成迭代器。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
-> **使用建议**: 在需要多次遍历同一范围的场景中，优先使用 `core::range::Range`；在需要保存迭代进度（如 `break` 后恢复）的场景中，使用显式迭代器。
+> **使用建议**: 在需要多次遍历同一范围的场景中，优先使用 `core::range::Range`；在需要保存迭代进度（如 `break` 后恢复）的场景中，使用显式迭代器（Iterator）。
 > **关键洞察**: `IntoIterator` 分离了"可迭代性"和"迭代状态"，使范围回归数学区间的**纯值本质**。
 > [来源: 💡 原创分析]
 
@@ -616,7 +616,7 @@ fn main() {
 | Rust 范围类型语义：`std::ops::Range` → `core::range` 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 区间操作安全 ⟸ RangeInclusive 边界 ⟸ 迭代器协议
-> 切片索引正确 ⟸ Range 范围检查 ⟸ 借用（Borrowing）规则
+> 切片（Slice）索引正确 ⟸ Range 范围检查 ⟸ 借用（Borrowing）规则
 > **过渡**: 掌握 Rust 范围类型语义：`std::ops::Range` → `core::range` 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 Rust 范围类型语义：`std::ops::Range` → `core::range` 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: Rust 范围类型语义：`std::ops::Range` → `core::range` 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。

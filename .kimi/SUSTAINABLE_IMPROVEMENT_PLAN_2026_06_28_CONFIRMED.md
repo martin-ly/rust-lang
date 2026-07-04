@@ -59,6 +59,31 @@
 
 ---
 
+## 第三阶段进度（2026-07-04 推进完成）
+
+- [x] C1: 内容重叠检测覆盖 `concept/` / `knowledge/` / `docs/` 三轨，相似度阈值 0.6，未发现潜在重复文件。
+- [x] C2: `ownership`/`borrow`/`async`/`lifetime` 等核心主题在 `concept/` 中保持唯一权威来源；`knowledge/`/`docs/` 中仅保留交叉引用或专项深入。
+- [x] C3: 活跃目录下所有新增/变更文件均符合 `snake_case` 或 `number_prefix_snake_case` 命名规范；已知例外（`archive/`、`.kimi/` 日期风格、`reports/` 日期风格、构建产物、虚拟环境）已记录在案。
+- [x] C4: `scripts/README.md` 已重写，清理重复脚本版本并更新命名例外清单。
+
+## 第四阶段进度（2026-07-04 推进完成）
+
+- [x] I1: `concept/` 核心双语术语标注完成。60 组术语已自动标注，EN/Summary 覆盖率 100%；剩余 31 种术语多为代码块、链接文本、英文原生术语或非独立用法，已出具 `reports/I18N_COMPLETION_STATUS_2026_07_04.md` 作为基线。
+- [x] I2: `knowledge/`/`docs/` 核心文件 EN/Summary 字段已补齐，覆盖率 100%。
+- [x] I3: GitHub 仓库链接健康检查脚本升级并修复，当前 182 个仓库全部正常，0 个异常；通用外部链接检查因网络/数量原因仍需较长时间运行，已转入后台任务持续执行。
+- [x] I4: `cargo vet` 供应链审计已通过（873 fully audited，892 exempted）。
+- [x] I5: `scripts/rust_version_tracker.py` 确认项目已使用最新 stable 1.96.1。
+
+## 质量门禁验证（2026-07-04）
+
+- `cargo build --workspace` ✅
+- `cargo test --workspace` ✅
+- `cargo clippy --workspace --tests -- -D warnings` ✅
+- `python scripts/kb_auditor.py` ✅（382 文件，0 死链，0 跨层问题）
+- `python scripts/detect_content_overlap.py` ✅（0 对重复）
+- `python scripts/lint_filenames.py --all` ✅（仅已知例外）
+- `cargo vet` ✅
+
 *确认后生效，后续按阶段执行并更新进度。*
 
 ## 第二阶段进度（2026-06-28 推进）

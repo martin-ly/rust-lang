@@ -25,7 +25,7 @@
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、生命周期（Lifetimes）规则矩阵、形式化视角、NLL 分析、示例反例
 - v2.2 (2026-05-14): 完成 TODO 双项——§13 Lifetime Elision 完整形式化（三条规则 ∀/⇒ 形式化、正例+反例、Rust Reference 来源）；§14 `impl Trait` 与生命周期（Lifetimes）推断交互（RPIT 捕获、APIT 差异、`+'a` 显式约束、where 对比、来源标注）
-- v2.2 (2026-05-19): 补全权威来源标注——新增跨语言生命周期对比矩阵（C++ / Haskell / Go），补充 Polonius 与 Tree Borrows 来源，深化 NLL → Polonius 演进论证
+- v2.2 (2026-05-19): 补全权威来源标注——新增跨语言生命周期（Lifetimes）对比矩阵（C++ / Haskell / Go），补充 Polonius 与 Tree Borrows 来源，深化 NLL → Polonius 演进论证
 - v2.1 (2026-05-13): Phase BC 形式化深化——新增§1.3b Tofte-Talpin 区域推断算法的 Rust 适配（原始 ML 算法概述、三项关键适配、Rust 约束生成与求解两阶段算法、与 Polonius 演进关系）
 - v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡
 
@@ -47,10 +47,10 @@
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 生命周期标注矩阵](#21-生命周期标注矩阵)
     - [2.2 生命周期关系矩阵](#22-生命周期关系矩阵)
-    - [2.3 生命周期省略（Lifetime Elision）规则（Elision Rules）](#23-生命周期省略规则elision-rules)
+    - [2.3 生命周期省略规则（Elision Rules）](#23-生命周期省略规则elision-rules)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
-    - [4.1 引理：引用（Reference）不能比数据活得更久 ⟹ 悬垂指针在编译期被消除](#41-引理引用不能比数据活得更久--悬垂指针在编译期被消除)
+    - [4.1 引理：引用不能比数据活得更久 ⟹ 悬垂指针在编译期被消除](#41-引理引用不能比数据活得更久--悬垂指针在编译期被消除)
     - [4.2 引理：生命周期构成偏序集 ⟹ outlives 关系可传递](#42-引理生命周期构成偏序集--outlives-关系可传递)
     - [4.3 定理：函数签名中的生命周期省略规则 ⟹ Elision 的完备性](#43-定理函数签名中的生命周期省略规则--elision-的完备性)
     - [4.4 定理：NLL 流敏感安全 ⟹ 比词法作用域更精确的存活期](#44-定理nll-流敏感安全--比词法作用域更精确的存活期)
@@ -58,20 +58,20 @@
     - [4.6 推论：'static 生命周期 ⟹ 全局/泄漏数据的安全性](#46-推论static-生命周期--全局泄漏数据的安全性)
     - [4.7 推论：HRTB 全称量化 ⟹ 高阶回调的类型安全](#47-推论hrtb-全称量化--高阶回调的类型安全)
     - [4.8 推论：GATs + where Self: 'a ⟹ 自引用集合的表达能力](#48-推论gats--where-self-a--自引用集合的表达能力)
-    - [4.9 定理一致性（Coherence）矩阵](#49-定理一致性矩阵)
+    - [4.9 定理一致性矩阵](#49-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：显式生命周期标注](#51-正确示例显式生命周期标注)
-    - [5.2 正确示例：结构体（Struct）中的生命周期](#52-正确示例结构体中的生命周期)
+    - [5.2 正确示例：结构体中的生命周期](#52-正确示例结构体中的生命周期)
     - [5.3 反例：返回局部引用（E0106 / E0716）](#53-反例返回局部引用e0106--e0716)
     - [5.4 反例：生命周期不匹配（E0597）](#54-反例生命周期不匹配e0597)
-    - [5.5 边界示例：NLL 减少借用（Borrowing）冲突](#55-边界示例nll-减少借用冲突)
+    - [5.5 边界示例：NLL 减少借用冲突](#55-边界示例nll-减少借用冲突)
   - [六、反命题与边界分析（Inverse Propositions \& Boundary Analysis）](#六反命题与边界分析inverse-propositions--boundary-analysis)
     - [6.1 命题: "生命周期约束保证无悬垂指针"](#61-命题-生命周期约束保证无悬垂指针)
     - [6.2 命题: "生命周期标注总是必要的"](#62-命题-生命周期标注总是必要的)
     - [6.3 命题: "'static 意味着永远存活"](#63-命题-static-意味着永远存活)
   - [七、边界极限测试代码（Boundary Stress Tests）](#七边界极限测试代码boundary-stress-tests)
     - [7.1 边界：生命周期偏序的传递链](#71-边界生命周期偏序的传递链)
-    - [7.2 边界：HRTB 与闭包（Closures）生命周期的极限](#72-边界hrtb-与闭包生命周期的极限)
+    - [7.2 边界：HRTB 与闭包生命周期的极限](#72-边界hrtb-与闭包生命周期的极限)
     - [7.3 边界：'static 的构造与协变收窄](#73-边界static-的构造与协变收窄)
   - [八、认知路径（Cognitive Path）](#八认知路径cognitive-path)
     - [Step 1: 直觉困惑（Intuitive Confusion）](#step-1-直觉困惑intuitive-confusion)
@@ -298,7 +298,7 @@ Polonius 的改进:
 
 ---
 
-> **过渡**: 属性矩阵展示了生命周期规则的静态特征，接下来需要建立概念之间的关联网络——生命周期如何与借用、泛型（Generics）、异步（Async）等机制交织，形成完整的引用安全体系。
+> **过渡**: 属性矩阵展示了生命周期规则的静态特征，接下来需要建立概念之间的关联网络——生命周期如何与借用（Borrowing）、泛型（Generics）、异步（Async）等机制交织，形成完整的引用安全体系。
 
 ## 三、思维导图（Mind Map）
 >
@@ -519,7 +519,7 @@ graph BT
 
 > **一致性（Coherence）检查**: L1 ⟹ L2 ⟹ T1/T2/T3 ⟹ C1/C2/C3，形成**从基础约束到高阶抽象**的递进链。T2 在宽松方向扩展合法程序，T3 在严格方向保证替换安全。
 >
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统（Type System）一致性"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
 
 ---
 
@@ -687,7 +687,7 @@ graph TD
 
 | **层次** | **反例** | **性质** |
 |:---|:---|:---|
-| 编译期 | unsafe 裸指针、transmute | 显式绕过类型系统 |
+| 编译期 | unsafe 裸指针、transmute | 显式绕过类型系统（Type System） |
 | 运行时（Runtime） | 自引用结构未 Pin、Pin 后仍 unsafe 解引用 | 语义层违规 |
 | 语义 | Rc 循环引用 | 生命周期不表达所有权（Ownership）循环 |
 | 工程 | Box::leak 制造的 'static | 安全但不可回收，非悬垂 |
@@ -875,7 +875,7 @@ fn main() {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **过渡**: 模式在简单场景有效，但多引用交叉、泛型（Generics）、结构体持有引用等场景需要更精确的工具。
+> **过渡**: 模式在简单场景有效，但多引用交叉、泛型（Generics）、结构体（Struct）持有引用等场景需要更精确的工具。
 >
 > 引入**区域类型（Region Types）**的形式框架：每个引用 `&'a T` 是类型 `T` 在区域 `'a` 上的参数化。`'a: 'b` 表示区域包含关系。编译器的问题转化为**偏序集上的约束求解**——这正是 Tofte & Talpin (1994) 的区域推断理论在 Rust 中的映射。
 >
@@ -947,7 +947,7 @@ fn main() {
 | **检查时机** | 编译期 | 运行时（析构调用） | 编译期（LinearTypes）/ 运行时（ST monad） | 运行时 |
 | **悬垂引用防护** | ✅ 编译错误 (E0106/E0597) | ❌ 可能悬垂（UB） | ✅ 线性类型约束 / `ST` 封装 | ✅ GC 阻止 UAF |
 | **别名-可变分离** | ✅ `&T`/`&mut T` 编译期分离 | ❌ 程序员自律 | ⚠️ `IORef` 无编译期别名检查 | ❌ 无 |
-| **运行时开销** | 零 | 零（`unique_ptr`）/ 原子引用计数（`shared_ptr`） | 零（LinearTypes）/ 有（GC） | GC 停顿 |
+| **运行时（Runtime）开销** | 零 | 零（`unique_ptr`）/ 原子引用计数（`shared_ptr`） | 零（LinearTypes）/ 有（GC） | GC 停顿 |
 | **形式化基础** | 区域类型 (Tofte-Talpin) + 分离逻辑 (RustBelt) | 无统一形式化 | 范畴论 + 线性逻辑 | 无 |
 | **表达能力** | 高（HRTB、Variance、Elision） | 中 | 高（但 LinearTypes 为可选扩展） | 低 |
 
@@ -1415,7 +1415,7 @@ where
 }
 ```
 
-**反例：缺少显式约束的泛型返回**。
+**反例：缺少显式约束的泛型（Generics）返回**。
 
 ```rust,ignore
 use std::fmt::Display;

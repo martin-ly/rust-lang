@@ -47,7 +47,7 @@
     - [10.2 边界测试：Java 的 null 与 Rust 的 `Option`（编译错误）](#102-边界测试java-的-null-与-rust-的-option编译错误)
     - [10.3 边界测试：Java 的泛型（Generics）擦除与 Rust 的单态化（Monomorphization）（编译错误）](#103-边界测试java-的泛型擦除与-rust-的单态化编译错误)
     - [10.4 边界测试：Java 的 GC 与 Rust 的所有权（Ownership）的资源管理差异（编译错误）](#104-边界测试java-的-gc-与-rust-的所有权的资源管理差异编译错误)
-    - [10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译后差异）](#103-边界测试java-的泛型擦除与-rust-的单态化编译后差异)
+    - [10.3 边界测试：Java 的泛型（Generics）擦除与 Rust 的单态化（Monomorphization）（编译后差异）](#103-边界测试java-的泛型擦除与-rust-的单态化编译后差异)
     - [10.4 边界测试：Java 的 null 安全与 Rust 的 Option 编译期检查（编译错误）](#104-边界测试java-的-null-安全与-rust-的-option-编译期检查编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 和 Java 在内存管理上的最根本区别是什么？（理解层）](#测验-1rust-和-java-在内存管理上的最根本区别是什么理解层)
@@ -86,7 +86,7 @@ graph LR
     end
 ```
 
-> **认知功能**: 此图对比 Rust 与 Java 的**内存管理债务转移**——Rust 将复杂性前移到编译期，Java 将其后移到运行时。
+> **认知功能**: 此图对比 Rust 与 Java 的**内存管理债务转移**——Rust 将复杂性前移到编译期，Java 将其后移到运行时（Runtime）。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 延迟敏感场景（实时系统、高频交易、游戏引擎）选 Rust；快速迭代、延迟不敏感场景选 Java。
 > **关键洞察**: GC 的"开发者无负担"是一种**假象**——GC 调优（堆大小、GC 算法、暂停时间）在大型 Java 应用中同样复杂，只是复杂性从"写代码"转移到"运维调优"。
@@ -485,7 +485,7 @@ fn main() {
 }
 ```
 
-> **修正**: Java 的资源管理依赖**垃圾回收**（GC）：非内存资源（文件句柄、网络连接）通过 `try-finally` 或 `try-with-resources` 显式关闭，否则等待 GC 的**终结器**（finalizer，不确定时机）。Rust 的 `Drop` trait 提供**确定性析构**：资源在值离开作用域时立即释放，无 GC 延迟。但 Rust 的所有权移动改变析构时机：`let file2 = file;` 后，`file` 的所有权转移到 `file2`，`Drop` 在 `file2` 的作用域结束时调用。这与 C++ 的 RAII（同样确定性，但拷贝语义可能多次析构）或 Python 的 `with` 语句（确定性，但依赖开发者使用）不同——Rust 的所有权 + Drop 将资源管理与类型系统（Type System）绑定，无需显式关闭（大部分情况），也无 GC 不确定性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Java Finalization](https://docs.oracle.com/javase/9/docs/api/java/lang/ref/Finalizer.html)]
+> **修正**: Java 的资源管理依赖**垃圾回收**（GC）：非内存资源（文件句柄、网络连接）通过 `try-finally` 或 `try-with-resources` 显式关闭，否则等待 GC 的**终结器**（finalizer，不确定时机）。Rust 的 `Drop` trait 提供**确定性析构**：资源在值离开作用域时立即释放，无 GC 延迟。但 Rust 的所有权（Ownership）移动改变析构时机：`let file2 = file;` 后，`file` 的所有权转移到 `file2`，`Drop` 在 `file2` 的作用域结束时调用。这与 C++ 的 RAII（同样确定性，但拷贝语义可能多次析构）或 Python 的 `with` 语句（确定性，但依赖开发者使用）不同——Rust 的所有权 + Drop 将资源管理与类型系统（Type System）绑定，无需显式关闭（大部分情况），也无 GC 不确定性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Java Finalization](https://docs.oracle.com/javase/9/docs/api/java/lang/ref/Finalizer.html)]
 
 ### 10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译后差异）
 
@@ -559,7 +559,7 @@ Rust 单态化为每种具体类型生成独立代码，运行时无类型检查
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 使用 `Result<T, E>` 作为返回值显式传播错误，由类型系统强制处理。Java 的受检异常在方法签名中声明，可能破坏接口稳定性且增加模板代码。
+Rust 使用 `Result<T, E>` 作为返回值显式传播错误，由类型系统（Type System）强制处理。Java 的受检异常在方法签名中声明，可能破坏接口稳定性且增加模板代码。
 </details>
 
 ---

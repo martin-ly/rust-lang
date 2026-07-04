@@ -144,8 +144,8 @@ graph TD
 ```
 
 > **认知功能**: 此图展示三种过程宏（Procedural Macro）的**应用场景**。Derive 宏为类型自动生成 Trait 实现；Attribute 宏修改被标注的项；Function-like 宏在调用点展开。
-> **使用建议**: 80% 的过程宏需求是 Derive 宏（Macro）；Attribute 宏用于框架级的代码变换；Function-like 宏用于 DSL。
-> **关键洞察**: 三种宏的**编译期执行模型相同**——都是 `TokenStream → TokenStream` 的函数，区别在于调用语法和输入内容的结构。
+> **使用建议**: 80% 的过程宏（Procedural Macro）需求是 Derive 宏（Macro）；Attribute 宏用于框架级的代码变换；Function-like 宏用于 DSL。
+> **关键洞察**: 三种宏（Macro）的**编译期执行模型相同**——都是 `TokenStream → TokenStream` 的函数，区别在于调用语法和输入内容的结构。
 > [来源: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)]
 
 ---

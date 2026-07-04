@@ -214,7 +214,7 @@ match int_reference {
 
 ### Struct / tuple struct / tuple patterns
 
-用于解构结构体、元组结构体、元组。未使用 `..` 时，结构体模式必须指定所有字段。
+用于解构结构体（Struct）、元组结构体、元组。未使用 `..` 时，结构体模式必须指定所有字段。
 
 ### Slice patterns
 
@@ -243,7 +243,7 @@ match x {
 }
 ```
 
-`let` 绑定和函数/闭包参数中不允许使用 or-patterns。
+`let` 绑定和函数/闭包（Closures）参数中不允许使用 or-patterns。
 
 ---
 
@@ -258,7 +258,7 @@ Rust 编译器检查 `match` 表达式是否穷尽所有可能的值。不可穷
 | 概念 | 关系 |
 |:---|:---|
 | [Match Expressions](41_statements_and_expressions.md) | 模式在 `match` 中应用 |
-| [Enums and Variants](04_type_system.md) | 枚举变体是模式匹配的主要对象 |
+| [Enums and Variants](04_type_system.md) | 枚举（Enum）变体是模式匹配（Pattern Matching）的主要对象 |
 | [Destructuring](../02_intermediate/02_generics.md) | 模式解构与泛型（Generics）结合使用 |
 | [Control Flow](07_control_flow.md) | `if let`、`while let`、`for` 依赖模式 |
 | [Terminology Glossary](../00_meta/terminology_glossary.md) | 术语表（元层参考） |

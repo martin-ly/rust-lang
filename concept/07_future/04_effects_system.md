@@ -341,7 +341,7 @@ N 种效果 → 2^N 种组合          N 种效果 → 1 种泛型机制
 | **效果来源** | 用户可定义新效果 | 仅语言内置效果 |
 | **效果集合** | 无界（unbounded） | 有界（bounded） |
 | **代表语言** | Koka, Eff, Flix, OCaml 5 | Java（checked exceptions）, Rust（方向） |
-| **类型系统复杂度** | 高（需支持用户定义的效果签名） | 中（固定效果集，可硬编码规则） |
+| **类型系统（Type System）复杂度** | 高（需支持用户定义的效果签名） | 中（固定效果集，可硬编码规则） |
 | **编译器实现难度** | 高（效果签名解析、行多态子类型） | 中-低（效果为枚举（Enum）或标记集合） |
 | **表达能力** | 强（任意代数效果） | 受限（仅语言设计者预定义的效果） |
 | **向后兼容性** | 难（新效果可能改变现有代码含义） | 易（新效果作为语言版本升级） |
@@ -371,7 +371,7 @@ Rust 封闭效应系统的设计约束：
 
 | 开放系统的假设 | Rust 的现实约束 |
 | :--- | :--- |
-| 效果处理器可在运行时动态组合 | Rust 拒绝运行时开销（handler 栈、动态分派） |
+| 效果处理器可在运行时（Runtime）动态组合 | Rust 拒绝运行时开销（handler 栈、动态分派） |
 | 用户定义效果需编译器插件机制 | Rust 编译器架构不支持用户扩展类型系统核心 |
 | 行多态子类型需复杂类型推断（Type Inference） | Rust 已有生命周期（Lifetimes）推断，再加效果行推断会爆炸 |
 | 效果抽象边界模糊 | Rust 强调零成本抽象（Zero-Cost Abstraction），任何运行时成本都需显式 opt-in |
@@ -1170,7 +1170,7 @@ Q4: 与现有生态的兼容性？
 | **EF1** | `async` 效果追踪 | `async fn` 关键字 | 调用者必须 `await` 或 `spawn` | 阻塞调用在 async 上下文 | 执行器线程阻塞 |
 | **EF2** | `unsafe` 效果边界 | `unsafe fn` / `unsafe {}` | 调用者承担 safety proof 义务 | 调用者未验证 precondition | UB（未定义行为） |
 | **EF3** | `const` 效果限制 | `const fn` 关键字 | 仅编译期可求值操作 | 运行时依赖；堆分配 | 编译错误 |
-| **EF4** | `AsyncFn` 效果多态 | `AsyncFn` trait bound | 泛型代码接受 sync/async 闭包（Closures） | trait 系统表达能力不足 | 无法抽象异步回调 |
+| **EF4** | `AsyncFn` 效果多态 | `AsyncFn` trait bound | 泛型（Generics）代码接受 sync/async 闭包（Closures） | trait 系统表达能力不足 | 无法抽象异步回调 |
 | **EF5** | 统一 `effect` 关键字（未来） | 语法设计完成 + Edition 迁移 | 所有副作用显式追踪 | 向后兼容破坏；推断失败 | 生态迁移成本 |
 
 > **⟹ 推理链**:
@@ -1623,7 +1623,7 @@ trait Generator<R> {
 ```
 
 > **关键洞察**:
-> `async` 和 `gen` 都是**挂起/恢复型效果**（suspend/resume effects），它们共享同一个底层机制：自引用状态机 + Pin 保证。
+> `async` 和 `gen` 都是**挂起/恢复型效果**（suspend/resume effects），它们共享同一个底层机制：自引用（Reference）状态机 + Pin 保证。
 > 这是效果系统视角下的重要统一——两种看似不同的关键字（`async` vs `gen`）实际上是同一类效果的不同表面语法。
 > [来源: [Rust [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html) — Pin](https://rust-lang.github.io/rfcs//2349-pin.html)] ·
 > [来源: 💡 原创分析]

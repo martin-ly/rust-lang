@@ -25,14 +25,14 @@
 
 ## 📑 目录
 
-- [字符串与编码：Rust 的文本处理类型系统（Type System）](#字符串与编码rust-的文本处理类型系统)
+- [字符串与编码：Rust 的文本处理类型系统](#字符串与编码rust-的文本处理类型系统)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 String vs \&str：所有权（Ownership）谱系](#11-string-vs-str所有权谱系)
+    - [1.1 String vs \&str：所有权谱系](#11-string-vs-str所有权谱系)
     - [1.2 UTF-8：Rust 的编码选择](#12-utf-8rust-的编码选择)
     - [1.3 平台字符串：OsString 与 CString](#13-平台字符串osstring-与-cstring)
   - [二、技术细节](#二技术细节)
-    - [2.1 字符串切片（String Slice）与字符边界](#21-字符串切片与字符边界)
+    - [2.1 字符串切片与字符边界](#21-字符串切片与字符边界)
     - [2.2 Grapheme Clusters 与文本分割](#22-grapheme-clusters-与文本分割)
     - [2.3 Unicode Normalization](#23-unicode-normalization)
   - [三、选型决策矩阵](#三选型决策矩阵)
@@ -46,14 +46,14 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：字符串编码的编译错误](#十二边界测试字符串编码的编译错误)
-    - [12.1 边界测试：无效 UTF-8 的字节切片（Slice）转 `str`（运行时（Runtime） panic）](#121-边界测试无效-utf-8-的字节切片转-str运行时-panic)
+    - [12.1 边界测试：无效 UTF-8 的字节切片转 `str`（运行时 panic）](#121-边界测试无效-utf-8-的字节切片转-str运行时-panic)
     - [12.2 边界测试：`OsStr` 与 `str` 的跨平台差异（编译错误）](#122-边界测试osstr-与-str-的跨平台差异编译错误)
     - [10.3 边界测试：`String` 与 `OsString` 的编码差异（编译错误）](#103-边界测试string-与-osstring-的编码差异编译错误)
-    - [10.4 边界测试：字符串切片（String Slice）的字符边界（运行时（Runtime） panic）](#104-边界测试字符串切片的字符边界运行时-panic)
+    - [10.4 边界测试：字符串切片的字符边界（运行时 panic）](#104-边界测试字符串切片的字符边界运行时-panic)
     - [10.5 边界测试：`from_utf8_unchecked` 的无效 UTF-8（运行时 UB）](#105-边界测试from_utf8_unchecked-的无效-utf-8运行时-ub)
     - [10.3 边界测试：`OsStr` 与 `str` 的隐式转换边界（编译错误）](#103-边界测试osstr-与-str-的隐式转换边界编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`String` 与 `&str` 在所有权（Ownership）和可变性上的核心区别是什么？（理解层）](#测验-1string-与-str-在所有权和可变性上的核心区别是什么理解层)
+    - [测验 1：`String` 与 `&str` 在所有权和可变性上的核心区别是什么？（理解层）](#测验-1string-与-str-在所有权和可变性上的核心区别是什么理解层)
     - [测验 2：`String::from("hello")` 和 `"hello".to_string()` 功能是否相同？（理解层）](#测验-2stringfromhello-和-helloto_string-功能是否相同理解层)
     - [测验 3：`OsStr`/`OsString` 与 `str`/`String` 的主要区别是什么？为什么不能直接比较它们？（理解层）](#测验-3osstrosstring-与-strstring-的主要区别是什么为什么不能直接比较它们理解层)
     - [测验 4：`CString` 与 `String` 在用途上有什么不同？为什么 FFI 中常用 `CString`？（理解层）](#测验-4cstring-与-string-在用途上有什么不同为什么-ffi-中常用-cstring理解层)
@@ -112,7 +112,7 @@ fn main() {
 }
 ```
 
-> **认知功能**: String/&str 的**所有权设计**是 Rust 所有权系统的教科书案例——String 拥有数据，&str 借用（Borrowing）数据，通过 Deref 实现无缝协作，避免了 C++ 中 std::string/const char* 的混乱。
+> **认知功能**: String/&str 的**所有权（Ownership）设计**是 Rust 所有权系统的教科书案例——String 拥有数据，&str 借用（Borrowing）数据，通过 Deref 实现无缝协作，避免了 C++ 中 std::string/const char* 的混乱。
 > [来源: [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html)]
 > **关键洞察**: &str 的普适性使其成为 Rust API 设计的首选参数类型——接受 &str 意味着调用者可以传入 String、&str 或任何能 Deref 到 str 的类型。
 > [来源: [Rust API Guidelines — Strings](https://rust-lang.github.io/api-guidelines//naming.html)]
@@ -745,7 +745,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-`String` 拥有堆上分配的可变 UTF-8 缓冲区；`&str` 是借用（Borrowing）某处 UTF-8 数据的切片，不可变，不拥有数据。
+`String` 拥有堆上分配的可变 UTF-8 缓冲区；`&str` 是借用（Borrowing）某处 UTF-8 数据的切片（Slice），不可变，不拥有数据。
 </details>
 
 ---
@@ -814,7 +814,7 @@ fn main() {
 
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
-| 字符串与编码：Rust 的文本处理类型系统 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| 字符串与编码：Rust 的文本处理类型系统（Type System） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | 字符串与编码：Rust 的文本处理类型系统 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | 字符串与编码：Rust 的文本处理类型系统 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 

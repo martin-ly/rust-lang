@@ -18,7 +18,6 @@
 
 ---
 
-
 ---
 
 ## 认知路径
@@ -31,7 +30,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与类型布局（Type Layout）的适用边界。
 5. **迁移应用**: 将 类型布局（Type Layout） 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -41,7 +39,6 @@
 > **反命题 2**: "忽略 类型布局（Type Layout） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 类型布局（Type Layout） 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 类型布局（Type Layout） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 类型布局（Type Layout） 具有语言特有的形态。
-
 
 ## 一、什么是类型布局
 
@@ -74,7 +71,7 @@ Rust 允许通过属性控制类型的内存布局。
 使类型布局与 C 兼容，便于 FFI：
 
 - 结构体（Struct）字段按声明顺序排列。
-- 枚举 discriminant 类型默认为 `isize`，但可指定（如 `#[repr(C, u8)]`）。
+- 枚举（Enum） discriminant 类型默认为 `isize`，但可指定（如 `#[repr(C, u8)]`）。
 
 ```rust
 #[repr(C)]
@@ -86,7 +83,7 @@ struct Point {
 
 ### `#[repr(transparent)]`
 
-用于单字段结构体或枚举，要求其布局与内部字段完全相同。常用于 newtype 包装器。
+用于单字段结构体（Struct）或枚举，要求其布局与内部字段完全相同。常用于 newtype 包装器。
 
 ```rust
 #[repr(transparent)]

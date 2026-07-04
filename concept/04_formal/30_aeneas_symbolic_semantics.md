@@ -23,7 +23,6 @@
 
 > 本文内容来自已归档的 `docs/rust-ownership-decidability/formal-foundations/models/symbolic-borrow-checking.md`，经提炼后迁移。
 
-
 ---
 
 > **过渡**: 从 Aeneas Symbolic Semantics（Aene 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -32,7 +31,6 @@
 
 > **过渡**: 最后，将 Aeneas Symbolic Semantics（Aene 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
-
 ---
 
 > **定理 1** [Tier 2]: Aeneas Symbolic Semantics（Aene 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
@@ -40,7 +38,6 @@
 > **定理 2** [Tier 2]: 正确理解 Aeneas Symbolic Semantics（Aene 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
 >
 > **定理 3** [Tier 3]: 将 Aeneas Symbolic Semantics（Aene 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 
 ---
 
@@ -52,14 +49,14 @@
 
 > **反命题 3**: "其他语言对 Aeneas Symbolic Semantics（Aene 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Aeneas Symbolic Semantics（Aene 具有语言特有的形态。
 
-
 ## 📑 目录
 
 - [Aeneas Symbolic Semantics（Aeneas 符号化语义）](#aeneas-symbolic-semanticsaeneas-符号化语义)
+  - [反命题决策树](#反命题决策树)
   - [📑 目录](#-目录)
   - [一、问题与动机（Problem \& Motivation）](#一问题与动机problem--motivation)
   - [二、核心结构总览（Overview）](#二核心结构总览overview)
-  - [三、LLBC：显式借用（Borrowing）演算](#三llbc显式借用演算)
+  - [三、LLBC：显式借用演算](#三llbc显式借用演算)
     - [3.1 设计思想](#31-设计思想)
     - [3.2 核心构造](#32-核心构造)
     - [3.3 与 MIR 的关系](#33-与-mir-的关系)
@@ -92,7 +89,7 @@ Rust 借用（Borrowing）检查器在编译期拒绝大量内存不安全程序
 | 手动分离逻辑证明 | RustBelt / Iris | 严格、可机械检验 | 人工成本高，难以自动化 |
 | 类型系统（Type System）形式化 | 多种类型论模型 | 与编译器接近 | 规则复杂，难以处理优化和 unsafe 边界 |
 
-POPL 2024 论文 *Sound Borrow-Checking for Rust via Symbolic Semantics* 提出第三条路：**用符号化执行语义自动推理借用检查的声音性**，将 Rust/MIR 翻译成显式借用演算 LLBC，再通过 HLPL 桥接到底层指针语义，最终由 Aeneas 生成可证明的函数式等价物。
+POPL 2024 论文 *Sound Borrow-Checking for Rust via Symbolic Semantics* 提出第三条路：**用符号化执行语义自动推理借用（Borrowing）检查的声音性**，将 Rust/MIR 翻译成显式借用演算 LLBC，再通过 HLPL 桥接到底层指针语义，最终由 Aeneas 生成可证明的函数式等价物。
 
 核心洞察：把"隐式的借用生命周期（Lifetimes）"变成**显式的 loan/borrow 状态机**，用符号值替代具体值，路径约束记录分支条件，从而把声音性证明转化为可达性分析。
 

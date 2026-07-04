@@ -50,10 +50,10 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Edition Guide 的编译错误](#十边界测试edition-guide-的编译错误)
     - [10.1 边界测试：Edition 2024 的尾表达式模式变更（编译错误）](#101-边界测试edition-2024-的尾表达式模式变更编译错误)
-    - [10.2 边界测试：`gen` 关键字保留与宏（Macro）解析冲突（编译错误）](#102-边界测试gen-关键字保留与宏解析冲突编译错误)
+    - [10.2 边界测试：`gen` 关键字保留与宏解析冲突（编译错误）](#102-边界测试gen-关键字保留与宏解析冲突编译错误)
     - [10.6 边界测试：Edition 迁移后的 `cargo fix` 残留问题（编译错误）](#106-边界测试edition-迁移后的-cargo-fix-残留问题编译错误)
     - [10.7 边界测试：Edition 迁移的自动修复遗漏（编译中断/语义变更）](#107-边界测试edition-迁移的自动修复遗漏编译中断语义变更)
-    - [10.3 边界测试：Edition 迁移中的宏（Macro） hygiene 变更（编译错误）](#103-边界测试edition-迁移中的宏-hygiene-变更编译错误)
+    - [10.3 边界测试：Edition 迁移中的宏 hygiene 变更（编译错误）](#103-边界测试edition-迁移中的宏-hygiene-变更编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：什么是 Rust 的"Edition"？它与语义版本（SemVer）有什么关系？（理解层）](#测验-1什么是-rust-的edition它与语义版本semver有什么关系理解层)
@@ -579,7 +579,7 @@ fn main() {
 > 这与 Python 2→3 的 `print` 关键字变化（破坏性）或 JavaScript 的严格模式（`let`、`const` 保留）类似，但 Rust 的 Edition 机制更平滑：
 >
 > 旧代码继续编译（只要 Edition 不变），迁移工具自动处理大部分变更。
-> 宏系统尤其敏感：
+> 宏（Macro）系统尤其敏感：
 >
 > 宏名 `gen!` 在语法解析阶段就与关键字冲突，即使宏从未在 Edition 2024 代码中使用。
 > 这是保留关键字策略的代价：语言扩展需要"征用"标识符空间。
@@ -653,7 +653,7 @@ use inner::helper; // 可能在某些嵌套模块中失效
 >
 > 1) `gen` 关键字保留；
 > 2) `if let` 临时作用域缩短；
-> 3) `impl Trait` 生命周期捕获规则。
+> 3) `impl Trait` 生命周期（Lifetimes）捕获规则。
 > 这与 C++ 的"无 edition，每次标准全量迁移"或 Java 的"LTS 版本"不同——Rust 的 edition 提供可控的、可选的语言演进节奏，但迁移成本仍需管理。
 > [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] ·
 > [来源: [cargo fix](https://doc.rust-lang.org/cargo/commands/cargo-fix.html)]

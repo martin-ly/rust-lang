@@ -32,7 +32,7 @@
 - [Async Drop：异步资源的优雅销毁](#async-drop异步资源的优雅销毁)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 问题：同步 Drop 与异步（Async）资源的冲突](#11-问题同步-drop-与异步资源的冲突)
+    - [1.1 问题：同步 Drop 与异步资源的冲突](#11-问题同步-drop-与异步资源的冲突)
     - [1.2 AsyncDrop Trait 设计](#12-asyncdrop-trait-设计)
     - [1.3 与 Pin 的交互](#13-与-pin-的交互)
   - [二、技术细节](#二技术细节)
@@ -48,10 +48,10 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：async drop 的编译错误](#十边界测试async-drop-的编译错误)
-    - [10.1 边界测试：异步（Async）析构的 `.await` 位置约束（编译错误）](#101-边界测试异步析构的-await-位置约束编译错误)
-    - [10.2 边界测试：异步析构与 panic 的交互（运行时（Runtime） UB）](#102-边界测试异步析构与-panic-的交互运行时-ub)
+    - [10.1 边界测试：异步析构的 `.await` 位置约束（编译错误）](#101-边界测试异步析构的-await-位置约束编译错误)
+    - [10.2 边界测试：异步析构与 panic 的交互（运行时 UB）](#102-边界测试异步析构与-panic-的交互运行时-ub)
     - [10.3 边界测试：async drop 与 `std::mem::forget` 的交互（内存泄漏）](#103-边界测试async-drop-与-stdmemforget-的交互内存泄漏)
-    - [10.4 边界测试：async drop 在 panic 时的双重取消（运行时（Runtime） UB）](#104-边界测试async-drop-在-panic-时的双重取消运行时-ub)
+    - [10.4 边界测试：async drop 在 panic 时的双重取消（运行时 UB）](#104-边界测试async-drop-在-panic-时的双重取消运行时-ub)
     - [10.3 边界测试：async drop 与同步 Drop 的语义冲突（编译错误/设计问题）](#103-边界测试async-drop-与同步-drop-的语义冲突编译错误设计问题)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -268,7 +268,7 @@ impl<T: AsyncClose> Drop for CloseOnDrop<T> {
 └── 编译器需要生成包含 await 的 Err 清理代码
 ```
 
-> **实现洞察**: AsyncDrop 的**最大挑战**不是 trait 设计，而是**编译器和运行时的集成**——它需要在编译期生成正确的异步销毁代码，同时保证在所有边界条件下（panic、executor 关闭）都能安全执行。
+> **实现洞察**: AsyncDrop 的**最大挑战**不是 trait 设计，而是**编译器和运行时（Runtime）的集成**——它需要在编译期生成正确的异步销毁代码，同时保证在所有边界条件下（panic、executor 关闭）都能安全执行。
 > [来源: [Without Boats — Async Drop](https://without.boats/blog/let-futures-be-futures/)]
 
 ---

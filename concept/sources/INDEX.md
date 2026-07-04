@@ -92,7 +92,7 @@
 
 ## 二级来源：学术论文与形式化验证
 
-| 标识符 | 全称 | 类型 | 建议引用格式 |
+| 标识符 | 全称 | 类型 | 建议引用（Reference）格式 |
 | :--- | :--- | :--- | :--- |
 | `RB18` | RustBelt: Securing the Foundations of the Rust Programming Language (POPL 2018) | 论文 | `[来源: RB18 — §章节]` |
 | `Jung21` | Stacked Borrows: An Aliasing Model for Rust (POPL 2021) | 论文 | `[来源: Jung21]` |

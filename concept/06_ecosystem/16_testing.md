@@ -642,7 +642,7 @@ fn documented() {}
 >
 > 常见误用：
 >
-> 1) 将 `compile_fail` 用于运行时错误（应使用 `no_run` 或 `should_panic`）；
+> 1) 将 `compile_fail` 用于运行时（Runtime）错误（应使用 `no_run` 或 `should_panic`）；
 > 2) 将 `no_run` 用于纯计算示例（失去运行验证）；
 > 3) `compile_fail` 示例因编译器版本变化而意外通过（不稳定）。
 > doc test 是 Rust 的"可执行文档"特性：示例代码在 CI 中自动测试，保证文档与代码同步。

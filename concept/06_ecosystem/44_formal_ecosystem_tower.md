@@ -321,12 +321,12 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 
 | 层次 | 形式化对象 | 验证工具 | Rust 实现 |
 |:---|:---|:---|:---|
-| **Wasm 规范** | 操作语义 + 类型系统 | Isabelle/HOL (WasmCert) | `wasmparser` |
+| **Wasm 规范** | 操作语义 + 类型系统（Type System） | Isabelle/HOL (WasmCert) | `wasmparser` |
 | **编译器后端** | Cranelift IR 优化 | 手工审查 + 模糊测试 | `cranelift-codegen` |
 | **运行时** | 内存隔离 +  Capability | Rust 类型系统 + Miri | `wasmtime` |
 | **WASI** | 能力安全（Capability-based）| 规范审查 | `wasi-common` |
 
-**关键定理**：Wasmtime 的 Rust 实现通过**编译期类型系统**（而非运行时检查）保证 Wasm 模块的内存隔离。`unsafe` 代码仅用于 Wasm 线性内存的底层访问，且被 Miri 和模糊测试双重验证。
+**关键定理**：Wasmtime 的 Rust 实现通过**编译期类型系统**（而非运行时检查）保证 Wasm 模块（Module）的内存隔离。`unsafe` 代码仅用于 Wasm 线性内存的底层访问，且被 Miri 和模糊测试双重验证。
 
 > **来源**: [Wasmtime 文档] · [Bytecode Alliance] · [WasmCert: Isabelle Formalization] · [Wikipedia: WebAssembly](https://en.wikipedia.org/wiki/WebAssembly)
 
@@ -373,7 +373,7 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 
 | 编号 | 生态层级 | 工具代表 | 保证范围 | 失效条件 | 工业可用性 |
 |:---|:---|:---|:---|:---|:---|
-| **E0** | L0 编译器保证 | `rustc` | 类型安全 + 所有权安全（safe） | `unsafe` 绕过；编译器 bug | ⭐⭐⭐⭐⭐ 生产必需 |
+| **E0** | L0 编译器保证 | `rustc` | 类型安全 + 所有权（Ownership）安全（safe） | `unsafe` 绕过；编译器 bug | ⭐⭐⭐⭐⭐ 生产必需 |
 | **E1** | L1 Lint/静态分析 | `clippy`, `cargo-deny` | 风格 + 依赖安全 | 规则覆盖不全 | ⭐⭐⭐⭐⭐ CI 标配 |
 | **E2** | L2 动态检测 | `Miri`, `cargo-fuzz` | UB 检测 + 模糊测试 | FFI 不透明；路径覆盖不足 | ⭐⭐⭐⭐ 开发期 |
 | **E3** | L3 模型检测 | `Kani`, `Prusti` | 有界验证 + 分离逻辑 | 状态空间爆炸；规格负担 | ⭐⭐⭐ 安全关键 |

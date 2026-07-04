@@ -221,7 +221,7 @@ supply chain/版本兼容性/维护者疲劳
 | **功能域** | **核心 Crate** | **下载量级** | **L1-L5 概念依赖** | **unsafe 需求** | **成熟度** |
 |:---|:---|:---|:---|:---|:---|
 | **序列化** | serde | 5 亿+ | L1 类型系统（Type System） + L2 Trait (derive) | ❌ 纯 safe | ⭐⭐⭐⭐⭐ |
-| **异步运行时** | tokio | 3 亿+ | L3 async/await + L1 Send/Sync | ⚠️ 少量 unsafe | ⭐⭐⭐⭐⭐ |
+| **异步运行时（Runtime）** | tokio | 3 亿+ | L3 async/await + L1 Send/Sync | ⚠️ 少量 unsafe | ⭐⭐⭐⭐⭐ |
 | **Web 框架** | axum, actix-web | 1 亿+ | L2 Trait + L3 async + L1 所有权（Ownership） | ⚠️ 少量 unsafe | ⭐⭐⭐⭐⭐ |
 | **数据库 ORM/驱动** | sqlx, diesel, sea-orm | 5000 万+ | L2 泛型（Generics） + L3 async + L1 生命周期（Lifetimes） | ⚠️ FFI | ⭐⭐⭐⭐ |
 | **HTTP 客户端** | reqwest, hyper | 2 亿+ | L3 async + L2 Trait | ⚠️ 少量 unsafe | ⭐⭐⭐⭐⭐ |
@@ -352,7 +352,7 @@ graph TD
 
 | **Crate** | **类型** | **特点** | **L2-L3 概念** |
 |:---|:---|:---|:---|
-| **sqlx** | 查询构建器 | 编译期 SQL 检查、async、零 ORM 开销 | async + 泛型 + 宏（Macro） |
+| **sqlx** | 查询构建器 | 编译期 SQL 检查、async、零 ORM 开销 | async + 泛型（Generics） + 宏（Macro） |
 | **diesel** | ORM | 编译期查询验证、类型安全 schema、成熟 | 泛型 + Trait |
 | **sea-orm** | 异步 ORM |  inspired by ActiveRecord、GraphQL 友好 | async + 泛型 |
 | **tokio-postgres** | 底层驱动 | 纯 Rust、async、PostgreSQL 专用 | async + unsafe(极少) |
@@ -360,7 +360,7 @@ graph TD
 | **redis** | KV 驱动 | 多运行时支持、集群、哨兵 | async/同步 |
 | **surrealdb** | 多模型 | 嵌入式+分布式、SQL+GraphQL | async |
 
-**关键洞察**：sqlx 的 `query!` 宏在编译期连接数据库验证 SQL 语法和类型，是 Rust **宏系统 + 类型安全**理念在数据库领域的延伸。
+**关键洞察**：sqlx 的 `query!` 宏（Macro）在编译期连接数据库验证 SQL 语法和类型，是 Rust **宏系统 + 类型安全**理念在数据库领域的延伸。
 
 > **来源**: [sqlx README] · [diesel.rs] · 可信度: ✅
 
@@ -573,7 +573,7 @@ graph TD
 | **Crate** | **L1 基础** | **L2 进阶** | **L3 高级** | **L4 形式化** | **L5 对比** |
 |:---|:---|:---|:---|:---|:---|
 | **serde** | 类型系统 (ADT) | Trait (derive) | 过程宏（Procedural Macro） | — | C++ 无等价 |
-| **tokio** | 所有权 + Drop | — | async/await + Pin + Send/Sync | — | Go goroutine |
+| **tokio** | 所有权（Ownership） + Drop | — | async/await + Pin + Send/Sync | — | Go goroutine |
 | **axum** | — | Trait (Handler/FromRequest) | async + unsafe(极少) | — | Go net/http |
 | **sqlx** | 生命周期（Lifetimes） | 泛型 | 过程宏（Procedural Macro） + async | — | ORM 对比 |
 | **clap** | — | Trait (Parser/Args) | 过程宏（Procedural Macro） | — | Python argparse |
@@ -909,7 +909,7 @@ fn App() -> impl IntoView {
 | Crate | 用途 | 关键特性 |
 |:---|:---|:---|
 | **embedded-hal** | 硬件抽象层（HAL）trait | `InputPin`, `OutputPin`, `SPI`, `I2C`, `UART` |
-| **embassy** | 异步嵌入式运行时 | `async` 中断处理、`executor`、`time` |
+| **embassy** | 异步（Async）嵌入式运行时 | `async` 中断处理、`executor`、`time` |
 | **probe-rs** | 调试/烧录工具链 | `cargo flash`, `cargo embed`, RTT 日志 |
 | **defmt** | 结构化日志 | 编译期格式化、极低开销 |
 | **cortex-m-rt** | Cortex-M 运行时 | 启动代码、中断向量表 |

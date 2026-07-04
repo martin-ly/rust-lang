@@ -19,7 +19,6 @@
 
 ---
 
-
 ---
 
 ## 认知路径
@@ -32,7 +31,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与条件编译（Conditional Compilation）的适用边界。
 5. **迁移应用**: 将 条件编译（Conditional Compilation） 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 > **过渡**: 从 条件编译（Conditional Compilation） 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -41,7 +39,6 @@
 
 > **过渡**: 最后，将 条件编译（Conditional Compilation） 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
-
 ---
 
 > **定理 1** [Tier 2]: 条件编译（Conditional Compilation） 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
@@ -49,7 +46,6 @@
 > **定理 2** [Tier 2]: 正确理解 条件编译（Conditional Compilation） 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
 >
 > **定理 3** [Tier 3]: 将 条件编译（Conditional Compilation） 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 
 ---
 
@@ -61,13 +57,11 @@
 
 > **反命题 3**: "其他语言对 条件编译（Conditional Compilation） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 条件编译（Conditional Compilation） 具有语言特有的形态。
 
-
 ---
 
 > **反向推理 1**: 如果程序在 条件编译（Conditional Compilation） 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
 >
 > **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 条件编译（Conditional Compilation） 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
-
 
 ## 一、什么是条件编译
 
@@ -76,7 +70,7 @@
 - `cfg` 属性：`#[cfg(...)]`
 - `cfg_attr` 属性：`#[cfg_attr(..., attr)]`
 - `cfg!` 宏（Macro）：`cfg!(predicate)`
-- `cfg_select!` 宏：`cfg_select! { ... }`
+- `cfg_select!` 宏（Macro）：`cfg_select! { ... }`
 
 条件编译的判定依据是**配置谓词（configuration predicate）**，谓词求值为 `true` 或 `false`。
 
@@ -265,7 +259,7 @@ Cargo 中通过 `RUSTFLAGS` 或在 `.cargo/config.toml` 中设置。
 
 1. **优先使用 `target_family` 简写**：`#[cfg(unix)]` 比 `#[cfg(target_family = "unix")]` 更简洁。
 2. **避免 cfg 碎片化**：过多平台分支会降低可维护性，考虑使用 crate 如 `cfg-if` 或抽象平台无关 API。
-3. **`cfg!` 用于运行时选择**：当两个分支都需要编译时使用 `cfg!`；当某平台完全不需要编译某段代码时使用 `#[cfg]`。
+3. **`cfg!` 用于运行时（Runtime）选择**：当两个分支都需要编译时使用 `cfg!`；当某平台完全不需要编译某段代码时使用 `#[cfg]`。
 4. **测试不同目标**：使用 `cargo check --target` 验证条件编译代码。
 
 ---

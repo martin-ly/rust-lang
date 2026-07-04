@@ -193,7 +193,7 @@ impl<T, const R: usize, const C: usize> Matrix<T, R, C> {
 }
 ```
 
-> **Const Generics 洞察**: **Const generics 使数组大小成为类型系统的一部分**——编译期验证矩阵维度匹配。
+> **Const Generics 洞察**: **Const generics 使数组大小成为类型系统（Type System）的一部分**——编译期验证矩阵维度匹配。
 > [来源: [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
 
 ---
@@ -629,7 +629,7 @@ let b: i32 = a.into();          // ✅ 显式: MyInt → i32
 |:---|:---|:---|
 | **选择机制** | 最佳匹配（可能模棱两可） | 唯一 impl（Coherence 保证） |
 | **自定义优先级** | 通过参数类型精细控制 | 无（Orphan Rule 限制） |
-| **泛型运算符** | `template<typename T>` + `operator+` | `impl<T: Add> Add for Wrapper<T>` |
+| **泛型（Generics）运算符** | `template<typename T>` + `operator+` | `impl<T: Add> Add for Wrapper<T>` |
 | **二元运算符对称性** | 需定义 `operator+(T, U)` 和 `operator+(U, T)` | 只需 `impl Add<U> for T`（Add 默认覆盖反向） |
 | **编译错误信息** | 复杂（候选函数列表） | 简洁（缺失 trait impl） |
 
@@ -913,7 +913,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-表示某个 trait bound 对所有可能的生命周期都成立。典型用例是要求闭包（Closures）能处理任意生命周期的引用（Reference）：`F: for<'a> Fn(&'a str) -> &'a str`。
+表示某个 trait bound 对所有可能的生命周期（Lifetimes）都成立。典型用例是要求闭包（Closures）能处理任意生命周期的引用（Reference）：`F: for<'a> Fn(&'a str) -> &'a str`。
 </details>
 
 ---

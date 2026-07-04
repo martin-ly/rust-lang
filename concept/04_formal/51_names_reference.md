@@ -16,7 +16,6 @@
 
 ---
 
-
 ---
 
 ## 认知路径
@@ -29,7 +28,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与名字参考（Names Reference）的适用边界。
 5. **迁移应用**: 将 名字参考（Names Reference） 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -39,7 +37,6 @@
 > **反命题 2**: "忽略 名字参考（Names Reference） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 名字参考（Names Reference） 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 名字参考（Names Reference） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 名字参考（Names Reference） 具有语言特有的形态。
-
 
 ## 一、命名空间
 
@@ -83,7 +80,7 @@ Prelude 是自动导入的名字集合：
 |:---|:---|:---|
 | 相对路径 | `foo::bar` | 从当前模块（Module）开始 |
 | 绝对路径 | `::crate::foo::bar` | 从 crate 根开始 |
-| 自我路径 | `self::foo`, `super::bar` | 当前模块 / 父模块 |
+| 自我路径 | `self::foo`, `super::bar` | 当前模块（Module） / 父模块 |
 | `Self` 路径 | `Self::Assoc` | 当前实现类型 |
 | `crate` 路径 | `crate::foo` | 2018+ edition 的 crate 根 |
 

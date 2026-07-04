@@ -795,7 +795,7 @@ temp.extend_from_slice(&nums[..]);
 | [`crates/c08_algorithms/`](../crates/c08_algorithms) | 132+ LeetCode 问题的 Rust 实现，覆盖本文件全部模式 |
 | [`concept/04_formal/05_verification_toolchain.md`](../04_formal/05_verification_toolchain.md) | Kani / Verus / Creusot 形式验证工具链选型指南 |
 | [`concept/02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) | 泛型与 const generics 的理论基础 |
-| [`concept/01_foundation/06_zero_cost_abstractions.md`](../01_foundation/06_zero_cost_abstractions.md) | 零成本抽象原则的理论根基 |
+| [`concept/01_foundation/06_zero_cost_abstractions.md`](../01_foundation/06_zero_cost_abstractions.md) | 零成本抽象（Zero-Cost Abstraction）原则的理论根基 |
 | `concept/03_advanced/01_concurrency.md` | `rayon` 并行分治的并发安全（Concurrency Safety）原理 |
 | [`concept/06_ecosystem/15_performance_optimization.md`](15_performance_optimization.md) | Criterion / flamegraph 性能分析方法论 |
 
@@ -843,7 +843,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的默认线程栈大小（Linux 上 8MB）对竞赛编程中的深度递归可能不足。栈溢出在 Rust 中是 panic（可捕获）而非段错误（SIGSEGV），但这仍导致程序终止。解决方案：1) 将递归改写为迭代（显式栈 `Vec`）；2) 使用 `#![recursion_limit = "256"]` 增加宏（Macro）递归限制（不影响运行时递归）；3) 在 `main` 中使用 `std::thread::Builder::new().stack_size(64 * 1024 * 1024).spawn(...)` 增加栈大小。竞赛编程中，Rust 的栈溢出保护比 C++ 更友好（panic 信息明确），但迭代写法仍是最佳实践。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/thread/struct.Builder.html)]
+> **修正**: Rust 的默认线程栈大小（Linux 上 8MB）对竞赛编程中的深度递归可能不足。栈溢出在 Rust 中是 panic（可捕获）而非段错误（SIGSEGV），但这仍导致程序终止。解决方案：1) 将递归改写为迭代（显式栈 `Vec`）；2) 使用 `#![recursion_limit = "256"]` 增加宏（Macro）递归限制（不影响运行时（Runtime）递归）；3) 在 `main` 中使用 `std::thread::Builder::new().stack_size(64 * 1024 * 1024).spawn(...)` 增加栈大小。竞赛编程中，Rust 的栈溢出保护比 C++ 更友好（panic 信息明确），但迭代写法仍是最佳实践。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/thread/struct.Builder.html)]
 
 ### 10.2 边界测试：`Vec` 索引越界与 `get` 的安全替代（编译错误/运行时 panic）
 

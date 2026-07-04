@@ -5635,7 +5635,7 @@
       "sources": [
         {
           "source": "Ralf Jung, \"The Meaning of Memory Safety\", PLArch 2021",
-          "context": "内存安全的精确定义：程序不会出现「指向已释放内存的指针被解引用」或「对同一内存的非原子并发写」。 ✅"
+          "context": "内存安全的精确定义：程序不会出现「指向已释放内存的指针被解引用（Reference）」或「对同一内存的非原子并发写」。 ✅"
         },
         {
           "source": "COR: ETH Zurich, Technical Report",
@@ -6126,7 +6126,7 @@
         },
         {
           "source": "💡 原创分析",
-          "context": "\"panic 是编译期错误的运行时等价物\"——RefCell 用可恢复的运行时崩溃替代不可编译，保持内存安全不变。💡"
+          "context": "\"panic 是编译期错误的运行时等价物\"——RefCell 用可恢复的运行时崩溃替代不可编译，保持内存安全（Memory Safety）不变。💡"
         },
         {
           "source": "Rust 1.88 Release Notes",
@@ -6187,7 +6187,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.3 定理：函数签名中的生命周期省略规则 ⟹ Elision 的完备性](#43-定理函数签名中的生命周期省略规则--elision-的完备性)",
+          "text": "- [4.3 定理：函数签名中的生命周期省略（Lifetime Elision）规则 ⟹ Elision 的完备性](#43-定理函数签名中的生命周期省略规则--elision-的完备性)",
           "type": "paragraph"
         },
         {
@@ -6207,7 +6207,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.8 推论：GATs + where Self: 'a ⟹ 自引用集合的表达能力](#48-推论gats--where-self-a--自引用集合的表达能力)",
+          "text": "- [4.8 推论：GATs + where Self: 'a ⟹ 自引用（Reference）集合的表达能力](#48-推论gats--where-self-a--自引用集合的表达能力)",
           "type": "paragraph"
         },
         {
@@ -6658,7 +6658,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **一致性检查**: L1 ⟹ L2 ⟹ T1/T2/T3 ⟹ C1/C2/C3，形成**从代数结构到运行时安全**的递进链。T1 是连接 ADT 结构与程序正确性的枢纽定理。",
+          "text": "> **一致性（Coherence）检查**: L1 ⟹ L2 ⟹ T1/T2/T3 ⟹ C1/C2/C3，形成**从代数结构到运行时安全**的递进链。T1 是连接 ADT 结构与程序正确性的枢纽定理。",
           "type": "paragraph"
         }
       ],
@@ -7177,7 +7177,7 @@
       "layer": "L1",
       "title": "引用语义：自动解引用、Deref 强制与类型转换",
       "positioning": "深入分析 Rust 的**引用语义机制**——自动解引用（Auto-deref）、Deref 强制（Deref Coercion）、类型强制（Type Coercion）以及它们与借用（Borrowing）检查器的交互，澄清开发者常见的隐式转换困惑。",
-      "line_count": 1439,
+      "line_count": 1429,
       "theorem_chains": [
         {
           "text": "| 引用语义：自动解引用、Deref 强制与类型转换 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -8579,7 +8579,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 属性与声明宏：编译期元编程基础 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |",
+          "text": "| 属性与声明宏（Declarative Macro）：编译期元编程基础 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |",
           "type": "table_row"
         }
       ],
@@ -9487,7 +9487,7 @@
       "line_count": 830,
       "theorem_chains": [
         {
-          "text": "| 字符串与编码：Rust 的文本处理类型系统 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
+          "text": "| 字符串与编码：Rust 的文本处理类型系统（Type System） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
           "type": "table_row"
         },
         {
@@ -11279,7 +11279,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- **定理**: 生命周期省略规则 ⟹ 代码简洁性与正确性的平衡",
+          "text": "- **定理**: 生命周期省略（Lifetime Elision）规则 ⟹ 代码简洁性与正确性的平衡",
           "type": "paragraph"
         }
       ],
@@ -11654,7 +11654,7 @@
           "type": "table_row"
         },
         {
-          "text": "| Never Type (`!`)：底类型与穷尽性 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |",
+          "text": "| Never Type (`!`)：底类型与穷尽性 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |",
           "type": "table_row"
         },
         {
@@ -13536,7 +13536,7 @@
           "type": "table_row"
         },
         {
-          "text": "> 参数多态 ⟹ System F 类型规则 ⟹ 约束可满足性 ⟹ 单态化零成本 ⟹ 语义保持 ⟹ 泛型一致性，形成**从类型规则到代码生成到运行时保证**的完整推理链。",
+          "text": "> 参数多态 ⟹ System F 类型规则 ⟹ 约束可满足性 ⟹ 单态化零成本 ⟹ 语义保持 ⟹ 泛型一致性（Coherence），形成**从类型规则到代码生成到运行时保证**的完整推理链。",
           "type": "paragraph"
         },
         {
@@ -14105,7 +14105,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用（Reference）计数）](#42-定理rcarc--共享所有权安全引用计数)",
+          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权（Ownership）安全（引用（Reference）计数）](#42-定理rcarc--共享所有权安全引用计数)",
           "type": "paragraph"
         },
         {
@@ -14113,7 +14113,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.4 RAII + 所有权 ⟹ 确定性释放](#44-raii--所有权--确定性释放)",
+          "text": "- [4.4 RAII + 所有权（Ownership） ⟹ 确定性释放](#44-raii--所有权--确定性释放)",
           "type": "paragraph"
         },
         {
@@ -14559,7 +14559,7 @@
       "line_count": 2530,
       "theorem_chains": [
         {
-          "text": "- [4.1 引理：Result\\<T,E\\> ⟹ 和类型强制错误处理](#41-引理resultte--和类型强制错误处理)",
+          "text": "- [4.1 引理：Result\\<T,E\\> ⟹ 和类型强制错误处理（Error Handling）](#41-引理resultte--和类型强制错误处理)",
           "type": "paragraph"
         },
         {
@@ -15295,7 +15295,7 @@
           "type": "table_row"
         },
         {
-          "text": "| Rust 范围类型语义：`std::ops::Range` → `core::range` 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |",
+          "text": "| Rust 范围类型语义：`std::ops::Range` → `core::range` 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |",
           "type": "table_row"
         },
         {
@@ -16440,11 +16440,11 @@
           "type": "table_row"
         },
         {
-          "text": "| Newtype 与包装器模式：类型安全的零成本抽象（Zero-Cost Abstraction） 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |",
+          "text": "| Newtype 与包装器模式：类型安全的零成本抽象（Zero-Cost Abstraction） 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |",
           "type": "table_row"
         },
         {
-          "text": "| Newtype 与包装器模式：类型安全的零成本抽象 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |",
+          "text": "| Newtype 与包装器模式：类型安全的零成本抽象（Zero-Cost Abstraction） 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |",
           "type": "table_row"
         }
       ],
@@ -19154,11 +19154,11 @@
           "type": "table_row"
         },
         {
-          "text": "| T1 | 类型系统排他性 | `T: Send + Sync` + 借用检查通过 | ⟹ 编译期排除数据竞争 | Alias-XOR-Mutation + CSL | 所有并发代码 | `unsafe` 绕过检查、错误 `Ordering` | E0277/E0382 |",
+          "text": "| T1 | 类型系统排他性 | `T: Send + Sync` + 借用（Borrowing）检查通过 | ⟹ 编译期排除数据竞争 | Alias-XOR-Mutation + CSL | 所有并发代码 | `unsafe` 绕过检查、错误 `Ordering` | E0277/E0382 |",
           "type": "table_row"
         },
         {
-          "text": "| T2 | `Arc<T>` 共享所有权 | `T: Send + Sync` | ⟹ 引用计数共享的所有权语义 | 线性逻辑 ⊗ + RAII | L1, Channel | 循环引用导致内存泄漏 | — |",
+          "text": "| T2 | `Arc<T>` 共享所有权 | `T: Send + Sync` | ⟹ 引用（Reference）计数共享的所有权语义 | 线性逻辑 ⊗ + RAII | L1, Channel | 循环引用导致内存泄漏 | — |",
           "type": "table_row"
         },
         {
@@ -19174,7 +19174,7 @@
           "type": "table_row"
         },
         {
-          "text": "| C1 | Send 不满足 | `Rc<T>`, `*mut T` 解引用等跨线程传递 | ⟹ 编译错误 E0277 | Auto trait 推导 | — | 无（编译期强制） | E0277 |",
+          "text": "| C1 | Send 不满足 | `Rc<T>`, `*mut T` 解引用（Reference）等跨线程传递 | ⟹ 编译错误 E0277 | Auto trait 推导 | — | 无（编译期强制） | E0277 |",
           "type": "table_row"
         },
         {
@@ -19190,7 +19190,7 @@
           "type": "table_row"
         },
         {
-          "text": "> **[RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 一致性检查: `Send/Sync` 类型安全 ⟹ `Mutex`/`Channel` 运行时安全 ⟹ `Atomic` 无锁安全，形成**从编译期到运行时的**递进链。注意：死锁不在 Rust 安全保证范围内（属于活性性质，非安全性）。✅ 已验证",
+          "text": "> **[RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 一致性（Coherence）检查: `Send/Sync` 类型安全 ⟹ `Mutex`/`Channel` 运行时安全 ⟹ `Atomic` 无锁安全，形成**从编译期到运行时的**递进链。注意：死锁不在 Rust 安全保证范围内（属于活性性质，非安全性）。✅ 已验证",
           "type": "paragraph"
         }
       ],
@@ -19437,7 +19437,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **[Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)** 一致性检查: Pin 不动性 ⟹ Future 轮询安全 ⟹ async 状态机安全，形成**从内存到状态到控制流**的递进链。注意：async 的完整形式化仍是活跃研究领域。✅ 已验证",
+          "text": "> **[Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)** 一致性（Coherence）检查: Pin 不动性 ⟹ Future 轮询安全 ⟹ async 状态机安全，形成**从内存到状态到控制流**的递进链。注意：async 的完整形式化仍是活跃研究领域。✅ 已验证",
           "type": "paragraph"
         },
         {
@@ -20664,7 +20664,7 @@
           "type": "paragraph"
         },
         {
-          "text": "<!-- 层级一致性: L3 定理推导 — 带 ⟹ 推理链的一致性矩阵，将形式化命题与工程约束系统关联 -->",
+          "text": "<!-- 层级一致性（Coherence）: L3 定理推导 — 带 ⟹ 推理链的一致性矩阵，将形式化命题与工程约束系统关联 -->",
           "type": "paragraph"
         },
         {
@@ -21215,7 +21215,7 @@
           "type": "table_row"
         },
         {
-          "text": "| Rust FFI：与外部代码的安全边界 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |",
+          "text": "| Rust FFI：与外部代码的安全边界 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |",
           "type": "table_row"
         },
         {
@@ -23430,7 +23430,7 @@
       "line_count": 974,
       "theorem_chains": [
         {
-          "text": "| Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
+          "text": "| Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
           "type": "table_row"
         },
         {
@@ -26212,7 +26212,7 @@
           "type": "table_row"
         },
         {
-          "text": "| **T4**: 子类型 + Variance | T2 + 构造器 Variance ⟹ **容器替换安全** | `&'a T` 对 `'a` 协变，`fn(T)` 对 T 逆变 | 子类型关系通过容器正确传播 | 所有含引用（Reference）的泛型容器 | `Cell<T>` 协变假设（实际不变）; `*mut T` 协变误用（实际不变） |",
+          "text": "| **T4**: 子类型 + Variance | T2 + 构造器 Variance ⟹ **容器替换安全** | `&'a T` 对 `'a` 协变，`fn(T)` 对 T 逆变 | 子类型关系通过容器正确传播 | 所有含引用（Reference）的泛型（Generics）容器 | `Cell<T>` 协变假设（实际不变）; `*mut T` 协变误用（实际不变） |",
           "type": "table_row"
         },
         {
@@ -26228,7 +26228,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **链 A（类型安全链）**: L1 (λ→ 类型保持) ⟹ L2 (System F 参数多态) ⟹ T1 (进展+保持=类型安全) ⟹ C1 (递归类型安全) / L3 (所有权安全)",
+          "text": "> **链 A（类型安全链）**: L1 (λ→ 类型保持) ⟹ L2 (System F 参数多态) ⟹ T1 (进展+保持=类型安全) ⟹ C1 (递归类型安全) / L3 (所有权（Ownership）安全)",
           "type": "paragraph"
         },
         {
@@ -26707,7 +26707,7 @@
       "sources": [
         {
           "source": "💡 原创推断",
-          "context": "· **[参考: Oxide: The Essence of Rust]** Pin 的形式化语义在 RustBelt 框架中尚未有完整证明，但可以从操作语义和类型系统的交互中建立与**位置稳定性（location stability）**的对应。⚠️"
+          "context": "· **[参考: Oxide: The Essence of Rust]** Pin 的形式化语义在 RustBelt 框架中尚未有完整证明，但可以从操作语义和类型系统（Type System）的交互中建立与**位置稳定性（location stability）**的对应。⚠️"
         },
         {
           "source": "Kani Documentation: Proof harnesses; RefinedRust PLDI 2024",
@@ -27792,7 +27792,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 指称语义与领域理论 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |",
+          "text": "| 指称语义与领域理论 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |",
           "type": "table_row"
         },
         {
@@ -28147,7 +28147,7 @@
           "type": "table_row"
         },
         {
-          "text": "| Hoare 逻辑：程序验证的形式化基础与 Rust 契约 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |",
+          "text": "| Hoare 逻辑：程序验证的形式化基础与 Rust 契约 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |",
           "type": "table_row"
         },
         {
@@ -29312,7 +29312,7 @@
       "layer": "L4",
       "title": "AutoVerus / Verus 自动证明生态",
       "positioning": "",
-      "line_count": 185,
+      "line_count": 183,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -31543,11 +31543,11 @@
           "type": "table_row"
         },
         {
-          "text": "| \"所有权消除内存泄漏\" ⟹ | 编译期线性类型约束 | 单所有权路径无泄漏 | `Rc<RefCell<T>>` 循环引用；`Arc`跨线程循环 | 树结构、图结构 |",
+          "text": "| \"所有权（Ownership）消除内存泄漏\" ⟹ | 编译期线性类型约束 | 单所有权路径无泄漏 | `Rc<RefCell<T>>` 循环引用（Reference）；`Arc`跨线程循环 | 树结构、图结构 |",
           "type": "table_row"
         },
         {
-          "text": "| \"零成本抽象（Zero-Cost Abstraction）无运行时开销\" ⟹ | 单态化（monomorphization） | 生成等价于手写的机器码 | 编译时间显著增加；二进制体积膨胀（代码重复） | 泛型（Generics）算法、迭代器（Iterator）链 |",
+          "text": "| \"零成本抽象（Zero-Cost Abstraction）无运行时（Runtime）开销\" ⟹ | 单态化（monomorphization） | 生成等价于手写的机器码 | 编译时间显著增加；二进制体积膨胀（代码重复） | 泛型（Generics）算法、迭代器（Iterator）链 |",
           "type": "table_row"
         },
         {
@@ -31868,7 +31868,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **一致性验证**: 6 条推理链满足：特性（起点）⟹ 机制（中点）⟹ 保证（终点）。这是 L5 对比层与 L4 形式化层之间的桥梁。",
+          "text": "> **一致性（Coherence）验证**: 6 条推理链满足：特性（起点）⟹ 机制（中点）⟹ 保证（终点）。这是 L5 对比层与 L4 形式化层之间的桥梁。",
           "type": "paragraph"
         }
       ],
@@ -31988,7 +31988,7 @@
           "type": "table_row"
         },
         {
-          "text": "| **safe Rust 保证内存安全** | 所有权+借用+生命周期 ⟹ | 无UAF/无数据竞争 | 逻辑错误未覆盖 | 默认编程模式 |",
+          "text": "| **safe Rust 保证内存安全（Memory Safety）** | 所有权+借用+生命周期 ⟹ | 无UAF/无数据竞争 | 逻辑错误未覆盖 | 默认编程模式 |",
           "type": "table_row"
         },
         {
@@ -32698,7 +32698,7 @@
           "type": "table_row"
         },
         {
-          "text": "| Rust vs Zig：现代系统语言的两种哲学 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |",
+          "text": "| Rust vs Zig：现代系统语言的两种哲学 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |",
           "type": "table_row"
         },
         {
@@ -32916,7 +32916,7 @@
       "line_count": 766,
       "theorem_chains": [
         {
-          "text": "| Rust vs Scala：类型系统的两种哲学 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
+          "text": "| Rust vs Scala：类型系统（Type System）的两种哲学 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
           "type": "table_row"
         },
         {
@@ -34080,7 +34080,7 @@
           "type": "table_row"
         },
         {
-          "text": "| **Builder** | 复杂对象构造易错 | 分步初始化 ⟹ 消费型链式API | 所有权转移+方法链 | 边界：字段<3时过度工程 |",
+          "text": "| **Builder** | 复杂对象构造易错 | 分步初始化 ⟹ 消费型链式API | 所有权（Ownership）转移+方法链 | 边界：字段<3时过度工程 |",
           "type": "table_row"
         },
         {
@@ -34436,7 +34436,7 @@
           "type": "table_row"
         },
         {
-          "text": "> **⟹ 推理链**: C1-C5 的**安全保证都不超出 Rust 编译器的 safe 子集**——crate 的安全性本质上是 Rust 类型系统的组合应用。C6 是供应链层面的元保证，独立于单个 crate 的正确性。",
+          "text": "> **⟹ 推理链**: C1-C5 的**安全保证都不超出 Rust 编译器的 safe 子集**——crate 的安全性本质上是 Rust 类型系统（Type System）的组合应用。C6 是供应链层面的元保证，独立于单个 crate 的正确性。",
           "type": "paragraph"
         }
       ],
@@ -34630,7 +34630,7 @@
       "path": "concept\\06_ecosystem\\04_application_domains.md",
       "layer": "L6",
       "title": "Application Domains（软件工程应用主题）",
-      "positioning": "本章节从**形式模型视角**梳理各生态前沿方向，不展开使用教程，聚焦\"该领域与 Rust 所有权/类型系统的交互、安全边界、与 L1-L4 的映射\"。",
+      "positioning": "本章节从**形式模型视角**梳理各生态前沿方向，不展开使用教程，聚焦\"该领域与 Rust 所有权/类型系统（Type System）的交互、安全边界、与 L1-L4 的映射\"。",
       "line_count": 1526,
       "theorem_chains": [
         {
@@ -34638,7 +34638,7 @@
           "type": "paragraph"
         },
         {
-          "text": "| **Rust 擅长系统编程** | 所有权+零成本抽象（Zero-Cost Abstraction） ⟹ | 替代C/C++系统代码 | FFI（FFI）复杂度 | 操作系统/驱动/内核模块 |",
+          "text": "| **Rust 擅长系统编程** | 所有权+零成本抽象（Zero-Cost Abstraction） ⟹ | 替代C/C++系统代码 | FFI（FFI）复杂度 | 操作系统/驱动/内核模块（Module） |",
           "type": "table_row"
         },
         {
@@ -34992,7 +34992,7 @@
           "type": "table_row"
         },
         {
-          "text": "| **重入 (Reentrancy)** | 默认 call 传递控制流 + 可重入锁需手动实现 | `&mut self` 独占 ⟹ 编译期保证无并发写；运行时借用检查覆盖跨程序调用 | 线性逻辑：资源不可复制、不可丢弃 |",
+          "text": "| **重入 (Reentrancy)** | 默认 call 传递控制流 + 可重入锁需手动实现 | `&mut self` 独占 ⟹ 编译期保证无并发写；运行时借用（Borrowing）检查覆盖跨程序调用 | 线性逻辑：资源不可复制、不可丢弃 |",
           "type": "table_row"
         },
         {
@@ -35401,7 +35401,7 @@
       "line_count": 652,
       "theorem_chains": [
         {
-          "text": "> **⟹ 推理链**: W1（沙箱）+ W2（能力）构成**运行时隔离**，W3（WIT）+ W4（Rust）构成**编译期类型安全**，W5（组合）构成**架构级兼容性**。五层联合使 Component Model 成为目前最安全的软件组合模型之一。",
+          "text": "> **⟹ 推理链**: W1（沙箱）+ W2（能力）构成**运行时（Runtime）隔离**，W3（WIT）+ W4（Rust）构成**编译期类型安全**，W5（组合）构成**架构级兼容性**。五层联合使 Component Model 成为目前最安全的软件组合模型之一。",
           "type": "paragraph"
         },
         {
@@ -44259,7 +44259,7 @@
       "layer": "L6",
       "title": "Cargo 1.96 新特性与工具链变更",
       "positioning": "",
-      "line_count": 267,
+      "line_count": 264,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Cargo 1.96 新特性与工具链变更 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -44314,7 +44314,7 @@
       "layer": "L6",
       "title": "Rustdoc 1.96 变更",
       "positioning": "",
-      "line_count": 239,
+      "line_count": 236,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Rustdoc 1.96 变更 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -44724,7 +44724,7 @@
       "layer": "L7",
       "title": "AI × Rust：生成-验证闭环与确定性容器",
       "positioning": "Prophet 属于**监督学习**（学习历史补丁特征），而非 RL。但它是\"编译器/测试反馈驱动程序修复\"思想的早期工业级实践，为后续 RL 方法奠定了问题定义基础。[来源: MIT News, 2016]",
-      "line_count": 1012,
+      "line_count": 1009,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: AI × Rust 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -47135,7 +47135,7 @@
       "layer": "L7",
       "title": "Rust 在 AI 与机器学习中的新兴角色",
       "positioning": "分析 Rust 在**AI/ML 基础设施**中的新兴应用——从张量运算、推理引擎到 ML 管道编排，揭示 Rust 如何在高性能 AI 系统中提供内存安全（Memory Safety）和低延迟优势。",
-      "line_count": 777,
+      "line_count": 778,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust 在 AI 与机器学习中的新兴角色 定义 ⟹ 类型安全保证",
@@ -49357,7 +49357,7 @@
       "line_count": 1018,
       "theorem_chains": [
         {
-          "text": "- **定理**: Rust for Linux ：操作系统内核中的内存安全 定义 ⟹ 类型安全保证",
+          "text": "- **定理**: Rust for Linux ：操作系统内核中的内存安全（Memory Safety） 定义 ⟹ 类型安全保证",
           "type": "paragraph"
         },
         {
@@ -50002,7 +50002,7 @@
       "layer": "L7",
       "title": "BorrowSanitizer：动态别名规则验证工具",
       "positioning": "",
-      "line_count": 318,
+      "line_count": 315,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: BorrowSanitizer 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",

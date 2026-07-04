@@ -39,7 +39,7 @@
     - [2.3 zip 与并行迭代](#23-zip-与并行迭代)
     - [2.4 IntoIterator 与 for 循环](#24-intoiterator-与-for-循环)
     - [2.5 迭代器（Iterator）模式矩阵](#25-迭代器模式矩阵)
-  - [三、自定义迭代器](#三自定义迭代器)
+  - [三、自定义迭代器（Iterator）](#三自定义迭代器)
   - [四、性能权衡](#四性能权衡)
   - [五、反命题与边界分析](#五反命题与边界分析)
   - [六、常见陷阱](#六常见陷阱)
@@ -960,7 +960,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `flat_map` 将嵌套迭代器扁平化为单层迭代器，但所有权规则仍然适用。若外层使用 `into_iter()`（消耗），内层也必须使用 `into_iter()`（消耗子集合），导致所有数据被转移。若需保留原数据，外层使用 `iter()`，内层使用 `iter()` + `cloned()`（复制元素）。`flat_map` 的签名 `FnMut(Self::Item) -> impl Iterator` 要求返回的迭代器与 `self` 的生命周期（Lifetimes）一致，增加了嵌套借用（Borrowing）时的复杂性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `flat_map` 将嵌套迭代器扁平化为单层迭代器，但所有权（Ownership）规则仍然适用。若外层使用 `into_iter()`（消耗），内层也必须使用 `into_iter()`（消耗子集合），导致所有数据被转移。若需保留原数据，外层使用 `iter()`，内层使用 `iter()` + `cloned()`（复制元素）。`flat_map` 的签名 `FnMut(Self::Item) -> impl Iterator` 要求返回的迭代器与 `self` 的生命周期（Lifetimes）一致，增加了嵌套借用（Borrowing）时的复杂性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.6 边界测试：`Iterator::fold` 的初始值类型不匹配（编译错误）
 

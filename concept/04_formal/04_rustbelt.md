@@ -22,7 +22,7 @@
 > [Concurrency](../03_advanced/01_concurrency.md)
 > [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)
-> **主要来源**: [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Iris Project](https://iris-project.org/) · [Creusot](https://creusot.rs/) · [Verus](https://github.com/verus-lang/verusverus/guide/) · [Kani: AWS] · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**: [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Iris Project](https://iris-project.org/) · [Creusot](https://creusot.rs/) · [Verus](https://github.com/verus-lang/verus/guide/) · [Kani: AWS] · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
@@ -43,10 +43,10 @@
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
     - [1.2 RustBelt 与 Iris 核心定义](#12-rustbelt-与-iris-核心定义)
-  - [二、定理一致性（Coherence）矩阵（Theorem Consistency Matrix）](#二定理一致性矩阵theorem-consistency-matrix)
+  - [二、定理一致性矩阵（Theorem Consistency Matrix）](#二定理一致性矩阵theorem-consistency-matrix)
     - [2.1 矩阵总览（11 行）](#21-矩阵总览11-行)
     - [2.2 ⟹ 推理链](#22--推理链)
-    - [2.3 层次一致性（Coherence）标注（L1–L3 及扩展映射）](#23-层次一致性标注l1l3-及扩展映射)
+    - [2.3 层次一致性标注（L1–L3 及扩展映射）](#23-层次一致性标注l1l3-及扩展映射)
     - [2.4 RustBelt 定理推导链可视化](#24-rustbelt-定理推导链可视化)
   - [三、Concurrent Separation Logic（并发分离逻辑）](#三concurrent-separation-logic并发分离逻辑)
     - [3.1 CSL = 分离逻辑 + 资源不变量](#31-csl--分离逻辑--资源不变量)
@@ -73,7 +73,7 @@
   - [七之一、验证工具代码示例与 CI/CD 集成](#七之一验证工具代码示例与-cicd-集成)
     - [7.1 Prusti：`#[requires]` / `#[ensures]` 示例](#71-prustirequires--ensures-示例)
     - [7.2 Kani：`#[kani::proof]` 与并发验证](#72-kanikaniproof-与并发验证)
-    - [7.3 Verus：`proof fn` 与所有权（Ownership）推理](#73-verusproof-fn-与所有权推理)
+    - [7.3 Verus：`proof fn` 与所有权推理](#73-verusproof-fn-与所有权推理)
     - [7.4 Creusot：分离逻辑契约与预言（Prophecy）](#74-creusot分离逻辑契约与预言prophecy)
     - [7.5 CI/CD 集成方案](#75-cicd-集成方案)
   - [📑 目录](#-目录-1)
@@ -88,18 +88,18 @@
     - [7.6 RefinedRust：自动化分离逻辑推导](#76-refinedrust自动化分离逻辑推导)
     - [7.7 RustHornBelt：Horn 子句验证与 CHC 求解](#77-rusthornbelthorn-子句验证与-chc-求解)
     - [7.8 CSL 中 `RwLock` 与 `Condvar` 的 Iris 建模](#78-csl-中-rwlock-与-condvar-的-iris-建模)
-    - [7.9 `Vec` 重新分配：借用（Borrowing）与重分配的形式化处理](#79-vec-重新分配借用与重分配的形式化处理)
+    - [7.9 `Vec` 重新分配：借用与重分配的形式化处理](#79-vec-重新分配借用与重分配的形式化处理)
   - [十三、待补充与演进方向（TODOs）](#十三待补充与演进方向todos)
   - [十四、Wikipedia 概念对齐](#十四wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
-  - [十一、边界测试：所有权（Ownership）公理的编译错误](#十一边界测试所有权公理的编译错误)
+  - [十一、边界测试：所有权公理的编译错误](#十一边界测试所有权公理的编译错误)
     - [11.1 边界测试：违反唯一所有权（编译错误）](#111-边界测试违反唯一所有权编译错误)
     - [11.2 边界测试：Send/Sync 自动推导失败（编译错误）](#112-边界测试sendsync-自动推导失败编译错误)
     - [11.3 边界测试：drop 后使用（编译错误）](#113-边界测试drop-后使用编译错误)
-    - [11.4 边界测试：共享借用期间可变借用（Mutable Borrow）（编译错误）](#114-边界测试共享借用期间可变借用编译错误)
+    - [11.4 边界测试：共享借用期间可变借用（编译错误）](#114-边界测试共享借用期间可变借用编译错误)
     - [11.5 边界测试：形式化谓词与 `Cell<T>` 的冲突（编译错误）](#115-边界测试形式化谓词与-cellt-的冲突编译错误)
     - [11.6 边界测试：`mem::forget` 与所有权谓词泄漏（编译错误）](#116-边界测试memforget-与所有权谓词泄漏编译错误)
-    - [10.3 边界测试：unsafe 代码契约的形式化验证盲区（运行时（Runtime） UB）](#103-边界测试unsafe-代码契约的形式化验证盲区运行时-ub)
+    - [10.3 边界测试：unsafe 代码契约的形式化验证盲区（运行时 UB）](#103-边界测试unsafe-代码契约的形式化验证盲区运行时-ub)
 
 ## 一、权威定义（Definition）
 
@@ -386,7 +386,7 @@ Kani 并发验证的工作方式:
 ArcInvariant(rc, data, P) ≜  ∃n. rc ↦ n * (n > 0 → data ↦ v * P(v))
 ```
 
-该不变量断言：引用计数 `rc` 当前值为 `n`；若 `n > 0` 则堆数据 `data` 有效且满足 `P(v)`；当 `n` 递减至 `0` 时内存可被安全释放。
+该不变量断言：引用（Reference）计数 `rc` 当前值为 `n`；若 `n > 0` 则堆数据 `data` 有效且满足 `P(v)`；当 `n` 递减至 `0` 时内存可被安全释放。
 
 **clone 操作**:
 
@@ -616,7 +616,7 @@ CSL = 分离逻辑 + 资源不变量：
 <details>
 <summary>✅ 答案</summary>
 
-**B. "RustBelt 证明了所有 unsafe 代码都是内存安全的"** —— 这是错误的。
+**B. "RustBelt 证明了所有 unsafe 代码都是内存安全（Memory Safety）的"** —— 这是错误的。
 
 RustBelt **不**证明所有 unsafe 代码安全。它证明的是：
 
@@ -931,7 +931,7 @@ jobs:
     - [11.1 边界测试：违反唯一所有权（编译错误）](#111-边界测试违反唯一所有权编译错误)
     - [11.2 边界测试：Send/Sync 自动推导失败（编译错误）](#112-边界测试sendsync-自动推导失败编译错误)
     - [11.3 边界测试：drop 后使用（编译错误）](#113-边界测试drop-后使用编译错误)
-    - [11.4 边界测试：共享借用期间可变借用（Mutable Borrow）（编译错误）](#114-边界测试共享借用期间可变借用编译错误)
+    - [11.4 边界测试：共享借用期间可变借用（编译错误）](#114-边界测试共享借用期间可变借用编译错误)
     - [11.5 边界测试：形式化谓词与 `Cell<T>` 的冲突（编译错误）](#115-边界测试形式化谓词与-cellt-的冲突编译错误)
     - [11.6 边界测试：`mem::forget` 与所有权谓词泄漏（编译错误）](#116-边界测试memforget-与所有权谓词泄漏编译错误)
     - [10.3 边界测试：unsafe 代码契约的形式化验证盲区（运行时 UB）](#103-边界测试unsafe-代码契约的形式化验证盲区运行时-ub)
@@ -946,7 +946,7 @@ jobs:
 |:---|:---|:---|:---|:---|:---|
 | **Miri** | 解释执行 + SB/TB | UB 检测、未定义行为定位 | 全自动 | ⭐⭐⭐ 开发期必备 | Rust 编译器团队；crater 回归检测 |
 | **Kani** | 有界模型检测（CBMC） | bounded 验证、unsafe 路径全覆盖 | 半自动（proof harness） | ⭐⭐⭐⭐ 安全关键 | AWS 生产（Nitro Enclaves、Firecracker） |
-| **Prusti** | 分离逻辑 + Viper | 功能正确性、模块化验证 | 半自动（contracts） | ⭐⭐ 研究 | ETH Zurich · Viper 团队 |
+| **Prusti** | 分离逻辑 + Viper | 功能正确性、模块（Module）化验证 | 半自动（contracts） | ⭐⭐ 研究 | ETH Zurich · Viper 团队 |
 | **Creusot** | 函数式翻译 + Why3 + SMT | 功能正确性、代数数据类型 | 半自动（contracts） | ⭐⭐ 研究 | Inria · Why3 团队 |
 | **Verus** | 线性幽灵类型 + Z3 | 系统验证、并发协议、线性资源 | 半自动（specs） | ⭐⭐⭐⭐ 微软内部 | Microsoft Research |
 | **Aeneas** | 借用函数式翻译 | 安全属性、类型保持性 | 半自动（Coq/Lean 骨架） | ⭐⭐ 研究 | EPFL · Inria |
@@ -1099,7 +1099,7 @@ graph TD
 
 RefinedRust（PLDI 2024）是 RustBelt 的**自动化扩展**——它从 Rust 类型系统（Type System）自动推导 separation logic 规约，无需手动编写 Iris 证明：
 
-**核心思想**：Rust 的类型系统已经编码了大量所有权信息，RefinedRust 将其翻译为分离逻辑断言：
+**核心思想**：Rust 的类型系统（Type System）已经编码了大量所有权信息，RefinedRust 将其翻译为分离逻辑断言：
 
 ```text
 Rust 类型              RefinedRust 分离逻辑规约

@@ -13,7 +13,7 @@
 > **前置依赖**: [形式化验证](../04_formal/05_verification_toolchain.md) · [形式化验证工具生态](../06_ecosystem/74_formal_verification_tools.md)
 > **后置延伸**: [Safety Tags](31_safety_tags_preview.md) · [BorrowSanitizer](20_borrowsanitizer_preview.md)
 >
-> **来源**: [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://github.com/verus-lang/verusverus/guide/) · [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://github.com/verus-lang/verus/guide/) · [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---

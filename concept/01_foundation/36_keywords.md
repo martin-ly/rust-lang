@@ -19,7 +19,6 @@
 
 ---
 
-
 ---
 
 ## 认知路径
@@ -32,7 +31,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与Rust 关键字（Keywords）的适用边界。
 5. **迁移应用**: 将 Rust 关键字（Keywords） 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -42,7 +40,6 @@
 > **反命题 2**: "忽略 Rust 关键字（Keywords） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Rust 关键字（Keywords） 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 Rust 关键字（Keywords） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rust 关键字（Keywords） 具有语言特有的形态。
-
 
 ## 一、关键字概述
 
@@ -76,7 +73,7 @@
 | `let` | 绑定变量 |
 | `loop` | 无条件循环 |
 | `match` | 模式匹配（Pattern Matching） |
-| `mod` | 定义模块 |
+| `mod` | 定义模块（Module） |
 | `move` | 使闭包（Closures）获取所有捕获变量的所有权（Ownership） |
 | `mut` | 标注引用（Reference）、原始指针（Raw Pointer）或模式绑定的可变性 |
 | `pub` | 标注 struct 字段、`impl` 块或模块的公开可见性 |
@@ -84,7 +81,7 @@
 | `return` | 从函数返回 |
 | `Self` | 正在定义或实现的类型的别名 |
 | `self` | 方法接收者或当前模块 |
-| `static` | 全局变量或贯穿整个程序执行的生命周期 |
+| `static` | 全局变量或贯穿整个程序执行的生命周期（Lifetimes） |
 | `struct` | 定义结构体（Struct） |
 | `super` | 当前模块的父模块 |
 | `trait` | 定义 trait |
@@ -148,7 +145,7 @@ fn main() {
 
 1. **避免使用关键字作为标识符**，即使 raw identifier 允许。
 2. **跨 edition 依赖时留意保留关键字变化**：2015 → 2018 的 `try`、`async`、`await` 等。
-3. **宏生成代码中可能需要 raw identifier**：当宏接收用户输入并需要生成以关键字命名的字段/变量时。
+3. **宏（Macro）生成代码中可能需要 raw identifier**：当宏接收用户输入并需要生成以关键字命名的字段/变量时。
 
 ---
 

@@ -121,7 +121,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-允许编写更精确、更灵活的泛型（Generics） API，特别是涉及异步（Async）和闭包（Closures）时。减少了因生命周期推断保守性导致的不必要的 `Box` 分配。
+允许编写更精确、更灵活的泛型（Generics） API，特别是涉及异步（Async）和闭包（Closures）时。减少了因生命周期（Lifetimes）推断保守性导致的不必要的 `Box` 分配。
 </details>
 
 ---

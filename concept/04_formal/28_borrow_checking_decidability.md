@@ -17,7 +17,6 @@
 > **后置概念**: N/A
 ---
 
-
 ---
 
 > **过渡**: 从 Borrow Checking Decidability（借 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -26,7 +25,6 @@
 
 > **过渡**: 最后，将 Borrow Checking Decidability（借 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
-
 ---
 
 > **定理 1** [Tier 2]: Borrow Checking Decidability（借 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
@@ -34,7 +32,6 @@
 > **定理 2** [Tier 2]: 正确理解 Borrow Checking Decidability（借 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
 >
 > **定理 3** [Tier 3]: 将 Borrow Checking Decidability（借 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 
 ---
 
@@ -45,7 +42,6 @@
 > **反命题 2**: "忽略 Borrow Checking Decidability（借 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Borrow Checking Decidability（借 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 Borrow Checking Decidability（借 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Borrow Checking Decidability（借 具有语言特有的形态。
-
 
 ## 零、认知路径（Cognitive Path）
 
@@ -73,7 +69,7 @@ NLL 的数据流分析与 Polonius 的 Datalog 视角如何统一？
 
 ## 一、借用检查器判定什么（What Borrow Checking Decides）
 
-Rust 借用检查器在编译期回答一个**安全判定问题**：
+Rust 借用（Borrowing）检查器在编译期回答一个**安全判定问题**：
 
 > 给定 Safe Rust 程序，是否存在执行路径使得引用（Reference）在使用时指向已释放或非法改写的内存？
 
@@ -155,7 +151,7 @@ $$
 \rho_1 \subseteq \rho_2 \iff \forall \pi \in \rho_1.\ \pi \in \rho_2
 $$
 
-> **直觉**：`ρ_ref ⊆ ρ_own` 表示引用所有可能执行路径都在被引用值存活路径之内。
+> **直觉**：`ρ_ref ⊆ ρ_own` 表示引用（Reference）所有可能执行路径都在被引用值存活路径之内。
 
 ### 3.2 路径与借用状态（Paths & Borrow States）
 
@@ -397,7 +393,7 @@ fn two_phase_borrow() {
 | 形式化 | 区域 = CFG 路径集合；借用状态 = 路径上的有限格 |
 | NLL | 数据流分析 + 区域约束图求解 |
 | Polonius | 事实/规则/不动点的 Datalog 视角，扩展 NLL |
-| 可判定性 | 有限状态 + 单调闭包 → 必然终止 |
+| 可判定性 | 有限状态 + 单调闭包（Closures） → 必然终止 |
 | 复杂性 | P-完全：多项式时间，但难以高效并行 |
 | rustc 落地 | `rustc_borrowck` / `rustc_mir_dataflow` / Polonius crate |
 

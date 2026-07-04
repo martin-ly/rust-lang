@@ -75,7 +75,7 @@
 #### §2 安全 Rust 的语义封闭性
 
 - **封闭世界假设**：safe Rust 是一个封闭的形式系统
-  - 公理：所有权唯一性、借用（Borrowing）规则、生命周期（Lifetimes）约束
+  - 公理：所有权（Ownership）唯一性、借用（Borrowing）规则、生命周期（Lifetimes）约束
   - 推理规则：类型检查、借用（Borrowing）检查
   - 封闭性：safe 代码不能突破这些规则（除非通过 unsafe）
 - **逃逸舱口**：unsafe 作为封闭系统的"门"
@@ -98,9 +98,9 @@
 
 | 概念 | Rust 表达 | 痛点 | 替代方案 |
 |:---|:---|:---|:---|
-| GUI 开发 | 生命周期与回调冲突 | 自引用（Reference）、事件循环 | `Rc<RefCell>`、`Pin` |
+| GUI 开发 | 生命周期（Lifetimes）与回调冲突 | 自引用（Reference）、事件循环 | `Rc<RefCell>`、`Pin` |
 | 动态类型 | enum 模拟 | 样板代码 | `dyn Any`（有限）|
-| 运行时反射 | `Any::downcast` | 类型信息丢失 | 宏（Macro）生成代码 |
+| 运行时（Runtime）反射 | `Any::downcast` | 类型信息丢失 | 宏（Macro）生成代码 |
 | 复杂元编程 | 过程宏（Procedural Macro） | 调试困难、无类型信息 | `macro_rules!` + 约定 |
 | 快速原型 | 编译时间 + 学习曲线 | 迭代慢 | `cargo script` |
 
@@ -113,7 +113,7 @@
 | 隐式转换 | 类型安全、意外行为 | 显式 `From`/`Into` | 设计哲学 |
 | 异常控制流 | 隐藏控制流、非局部跳转 | `Result` + `?` | 设计哲学 |
 | GC 自动回收 | 运行时开销、非确定性 | 所有权 + `Rc`/`Arc` | 设计哲学 |
-| 运行时反射 | 编译期信息擦除 | 宏 + `Any` | 设计哲学 |
+| 运行时反射 | 编译期信息擦除 | 宏（Macro） + `Any` | 设计哲学 |
 | 可变长度数组 (VLA) | 栈安全、类型系统（Type System）简化 | `Vec<T>` | 设计哲学 |
 | 联合体自动析构 | 不知道哪个变体活跃 | `enum` + `match` | 设计哲学 |
 
@@ -163,7 +163,7 @@ Rust 的核心机制可以看作一个代数组合系统：
 **基础算子**：
 
 - `Own(T)`：所有权（线性资源）
-- `Borrow(T, mode)`：借用（共享/独占）
+- `Borrow(T, mode)`：借用（Borrowing）（共享/独占）
 - `Lifetime('a)`：生命周期约束
 - `Trait(T)`：行为抽象
 - `Generic<T>`：参数多态
@@ -189,7 +189,7 @@ Lifetime('a) × Lifetime('b) where 'a > 'b → ❌ 生命周期不足 E0597
 
 **组合爆炸与约束**：
 
-- 合法组合 ≈ 类型系统可判定的程序空间
+- 合法组合 ≈ 类型系统（Type System）可判定的程序空间
 - 非法组合 ≈ 类型系统排除的程序空间（UB 空间）
 - unsafe = 手动证明非法组合实际上是安全的
 

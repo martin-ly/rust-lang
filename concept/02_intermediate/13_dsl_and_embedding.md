@@ -48,7 +48,7 @@
     - [10.2 边界测试：状态机 DSL 的非法状态转换（编译错误）](#102-边界测试状态机-dsl-的非法状态转换编译错误)
     - [10.3 边界测试：宏（Macro）递归深度限制（编译错误）](#103-边界测试宏递归深度限制编译错误)
     - [10.4 边界测试：DSL 的类型安全与运行时（Runtime）错误（运行时 panic）](#104-边界测试dsl-的类型安全与运行时错误运行时-panic)
-    - [10.3 边界测试：DSL 宏的优先级与歧义解析（编译错误）](#103-边界测试dsl-宏的优先级与歧义解析编译错误)
+    - [10.3 边界测试：DSL 宏（Macro）的优先级与歧义解析（编译错误）](#103-边界测试dsl-宏的优先级与歧义解析编译错误)
     - [10.4 边界测试：DSL 宏的优先级与运算符结合性（编译错误）](#104-边界测试dsl-宏的优先级与运算符结合性编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：在 Rust 中嵌入 DSL 的常见技术有哪些？（理解层）](#测验-1在-rust-中嵌入-dsl-的常见技术有哪些理解层)
@@ -639,7 +639,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的过程宏（Procedural Macro）和声明宏（Declarative Macro）都有**递归深度限制**（默认 64 层），防止宏展开导致编译器栈溢出或无限循环。复杂 DSL（如 `vec![1, 2, ..., 1000]`）的宏实现需考虑此限制：`vec!` 使用内置语法支持（非纯宏递归），因此无此限制。自定义宏的应对：1) 使用迭代而非递归（`$()*` 重复而非递归调用）；2) 增加递归限制 `#![recursion_limit = "256"]`；3) 将工作转移到运行时（宏生成循环代码而非展开所有元素）。这与 C 的预处理器（无递归限制，但宏展开深度有限）或 Lisp 的宏（Turing 完全，无限制，但可能无限展开）不同——Rust 的宏系统是"半图灵完全"的：有限递归但可表达大多数模式。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
+> **修正**: Rust 的过程宏（Procedural Macro）和声明宏（Declarative Macro）都有**递归深度限制**（默认 64 层），防止宏展开导致编译器栈溢出或无限循环。复杂 DSL（如 `vec![1, 2, ..., 1000]`）的宏实现需考虑此限制：`vec!` 使用内置语法支持（非纯宏递归），因此无此限制。自定义宏的应对：1) 使用迭代而非递归（`$()*` 重复而非递归调用）；2) 增加递归限制 `#![recursion_limit = "256"]`；3) 将工作转移到运行时（Runtime）（宏生成循环代码而非展开所有元素）。这与 C 的预处理器（无递归限制，但宏展开深度有限）或 Lisp 的宏（Turing 完全，无限制，但可能无限展开）不同——Rust 的宏系统是"半图灵完全"的：有限递归但可表达大多数模式。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 
 ### 10.4 边界测试：DSL 的类型安全与运行时错误（运行时 panic）
 

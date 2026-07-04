@@ -87,6 +87,23 @@ MANUAL_DOMAINS = {
     "gitlab.redox-os.org",
     "news.ycombinator.com",
     "marketplace.visualstudio.com",
+    # 在当前网络环境下大量返回 4xx/连接错误的域（需浏览器/特殊网络）
+    "en.wikipedia.org",
+    "www.youtube.com",
+    "youtube.com",
+    "spec.ferrocene.dev",
+    "developer.arm.com",
+    "csrc.nist.gov",
+    "www.rabbitmq.com",
+    "www.cs.cmu.edu",
+    "www.oreilly.com",
+    "www.rfc-editor.org",
+    "qiskit.org",
+    "cheatsheetseries.owasp.org",
+    "security.googleblog.com",
+    "iris-project.org",
+    "www.microsoft.com",
+    "www.nalgebra.org",
     # Example domains used in documentation
     "docs.example.com",
     "api.example.com",
@@ -293,8 +310,9 @@ def main() -> int:
                 broken.append((url, files, result))
             elif result.get("redirect"):
                 redirects.append((url, files, result))
-            if checked % 100 == 0:
-                print(f"  已检查 {checked}/{len(to_check)}...")
+            if checked % 50 == 0:
+                save_cache(cache)
+                print(f"  已检查 {checked}/{len(to_check)}，缓存已保存...")
 
     save_cache(cache)
 

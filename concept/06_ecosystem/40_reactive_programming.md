@@ -38,7 +38,7 @@
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Reactive Manifesto：响应式系统的四大特质](#11-reactive-manifesto响应式系统的四大特质)
-    - [1.2 Reactive Streams：背压感知的异步（Async）数据流](#12-reactive-streams背压感知的异步数据流)
+    - [1.2 Reactive Streams：背压感知的异步数据流](#12-reactive-streams背压感知的异步数据流)
     - [1.3 FRP：函数式响应编程](#13-frp函数式响应编程)
   - [二、概念属性矩阵](#二概念属性矩阵)
     - [2.1 Reactive 编程模型对比矩阵](#21-reactive-编程模型对比矩阵)
@@ -64,9 +64,9 @@
     - [8.1 反命题树](#81-反命题树)
     - [8.2 边界极限](#82-边界极限)
   - [九、边界测试](#九边界测试)
-    - [9.1 边界测试：无背压导致内存溢出（运行时（Runtime）错误）](#91-边界测试无背压导致内存溢出运行时错误)
+    - [9.1 边界测试：无背压导致内存溢出（运行时错误）](#91-边界测试无背压导致内存溢出运行时错误)
     - [9.2 边界测试：跨线程 Stream 发送违反 Send（编译错误）](#92-边界测试跨线程-stream-发送违反-send编译错误)
-    - [9.3 边界测试：FRP 信号循环引用（Reference）导致死锁（运行时（Runtime）错误）](#93-边界测试frp-信号循环引用导致死锁运行时错误)
+    - [9.3 边界测试：FRP 信号循环引用导致死锁（运行时错误）](#93-边界测试frp-信号循环引用导致死锁运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -123,7 +123,7 @@ Reactive Manifesto 四特质（2014）:
 
 ### 1.2 Reactive Streams：背压感知的异步数据流
 
-> **[Reactive Streams Specification](https://www.reactive-streams.org/)** 定义了一组用于异步流处理的最小接口，核心目标是**标准化 JVM 平台上的背压机制**。
+> **[Reactive Streams Specification](https://www.reactive-streams.org/)** 定义了一组用于异步（Async）流处理的最小接口，核心目标是**标准化 JVM 平台上的背压机制**。
 > 规范包含四个接口：`Publisher<T>`、`Subscriber<T>`、`Subscription`、`Processor<T,R>`。
 
 ```text

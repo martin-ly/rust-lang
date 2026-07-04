@@ -19,7 +19,6 @@
 
 ---
 
-
 ---
 
 ## 认知路径
@@ -32,7 +31,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与Rust 运算符与符号（Operators and Symb的适用边界。
 5. **迁移应用**: 将 Rust 运算符与符号（Operators and Symb 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 > **过渡**: 从 Rust 运算符与符号（Operators and Symb 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -41,7 +39,6 @@
 
 > **过渡**: 最后，将 Rust 运算符与符号（Operators and Symb 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
-
 ---
 
 > **定理 1** [Tier 2]: Rust 运算符与符号（Operators and Symb 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
@@ -49,7 +46,6 @@
 > **定理 2** [Tier 2]: 正确理解 Rust 运算符与符号（Operators and Symb 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
 >
 > **定理 3** [Tier 3]: 将 Rust 运算符与符号（Operators and Symb 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 
 ---
 
@@ -61,13 +57,11 @@
 
 > **反命题 3**: "其他语言对 Rust 运算符与符号（Operators and Symb 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rust 运算符与符号（Operators and Symb 具有语言特有的形态。
 
-
 ---
 
 > **反向推理 1**: 如果程序在 Rust 运算符与符号（Operators and Symb 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
 >
 > **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 Rust 运算符与符号（Operators and Symb 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
-
 
 ## 一、运算符
 
@@ -172,7 +166,7 @@
 |:---|:---|
 | `path<...>` | 为泛型（Generics）类型指定参数，如 `Vec<u8>` |
 | `path::<...>` / `method::<...>` | 表达式中为泛型（Generics）指定参数（turbofish），如 `"42".parse::<i32>()` |
-| `fn ident<...> ...` | 定义泛型函数 |
+| `fn ident<...> ...` | 定义泛型（Generics）函数 |
 | `struct ident<...> ...` | 定义泛型结构体（Struct） |
 | `enum ident<...> ...` | 定义泛型枚举（Enum） |
 | `impl<...> ...` | 定义泛型实现 |
@@ -186,8 +180,8 @@
 | 符号 | 说明 |
 |:---|:---|
 | `T: U` | 泛型参数 `T` 必须实现 `U` |
-| `T: 'a` | `T` 必须 outlive 生命周期 `'a` |
-| `T: 'static` | `T` 不包含非 `'static` 的借用 |
+| `T: 'a` | `T` 必须 outlive 生命周期（Lifetimes） `'a` |
+| `T: 'static` | `T` 不包含非 `'static` 的借用（Borrowing） |
 | `'b: 'a` | 生命周期 `'b` 必须 outlive `'a` |
 | `T: ?Sized` | 允许 `T` 为动态大小类型 |
 | `'a + trait` / `trait + trait` | 复合约束 |
@@ -200,7 +194,7 @@
 |:---|:---|
 | `#[meta]` | 外部属性 |
 | `#![meta]` | 内部属性 |
-| `$ident` | 宏替换 |
+| `$ident` | 宏（Macro）替换 |
 | `$ident:kind` | 宏元变量 |
 | `$(...)...` | 宏重复 |
 | `ident!(...)` / `ident!{...}` / `ident![...]` | 宏调用 |

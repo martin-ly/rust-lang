@@ -28,15 +28,15 @@
 ## 📑 目录
 >
 
-- [Pin 与 Unpin：自引用（Reference）类型的不动性保证](#pin-与-unpin自引用类型的不动性保证)
+- [Pin 与 Unpin：自引用类型的不动性保证](#pin-与-unpin自引用类型的不动性保证)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 问题：自引用（Reference）类型的移动陷阱](#11-问题自引用类型的移动陷阱)
+    - [1.1 问题：自引用类型的移动陷阱](#11-问题自引用类型的移动陷阱)
     - [1.2 Pin 的设计：承诺不再移动](#12-pin-的设计承诺不再移动)
     - [1.3 Unpin：大多数类型的默认](#13-unpin大多数类型的默认)
   - [二、技术细节](#二技术细节)
     - [2.1 Pin API 的契约](#21-pin-api-的契约)
-    - [2.2 自引用结构体（Struct）的安全构建](#22-自引用结构体的安全构建)
+    - [2.2 自引用结构体的安全构建](#22-自引用结构体的安全构建)
     - [2.3 与 async/await 的关系](#23-与-asyncawait-的关系)
   - [三、使用模式](#三使用模式)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -531,7 +531,7 @@ fn main() {
 | [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html) | ✅ 一级 | Pin 入门指南 |
 | [Rustonomicon — Pinning](https://doc.rust-lang.org/std/pin/index.html) | ✅ 一级 | 深入 Pin 分析 |
 | [RFC 2349 — Pin](https://github.com/rust-lang/rfcs/pull/2349) | ✅ 一级 | Pin 设计 RFC |
-| [pin-project](https://docs.rs/pin-project/latest/pin_project/) | ✅ 一级 | 自引用结构体辅助 crate |
+| [pin-project](https://docs.rs/pin-project/latest/pin_project/) | ✅ 一级 | 自引用结构体（Struct）辅助 crate |
 | [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) | ✅ 一级 | 标准库 API |
 | [std::marker::Unpin](https://doc.rust-lang.org/std/marker/trait.Unpin.html) | ✅ 一级 | Unpin 标准库 API |
 | [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs//2394-async_await.html) | ✅ 一级 | async 状态机 RFC |

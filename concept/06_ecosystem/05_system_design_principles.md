@@ -33,11 +33,11 @@
   - [零、TL;DR —— 系统设计原则速查](#零tldr--系统设计原则速查)
   - [一、权威来源与设计原则分类学](#一权威来源与设计原则分类学)
   - [二、七项核心设计原则](#二七项核心设计原则)
-    - [2.1 内存安全（Memory Safety）：Capability-Based Security](#21-内存安全capability-based-security)
-    - [2.2 并发安全（Concurrency Safety）：Session Types 编译期编码](#22-并发安全session-types-编译期编码)
-    - [2.3 零成本抽象（Zero-Cost Abstraction）：Stroustrup 原则](#23-零成本抽象stroustrup-原则)
+    - [2.1 内存安全：Capability-Based Security](#21-内存安全capability-based-security)
+    - [2.2 并发安全：Session Types 编译期编码](#22-并发安全session-types-编译期编码)
+    - [2.3 零成本抽象：Stroustrup 原则](#23-零成本抽象stroustrup-原则)
     - [2.4 组件组合：范畴论态射复合](#24-组件组合范畴论态射复合)
-    - [2.5 分布式一致性（Coherence）：从所有权（Ownership）到共识的隐喻](#25-分布式一致性从所有权到共识的隐喻)
+    - [2.5 分布式一致性：从所有权到共识的隐喻](#25-分布式一致性从所有权到共识的隐喻)
     - [2.6 安全边界：Zero Trust + WASI 能力安全](#26-安全边界zero-trust--wasi-能力安全)
     - [2.7 容错设计：Error Kernel + Let It Crash](#27-容错设计error-kernel--let-it-crash)
   - [三、系统设计决策矩阵](#三系统设计决策矩阵)
@@ -49,7 +49,7 @@
     - [6.1 设计原则依赖图](#61-设计原则依赖图)
     - [6.2 系统架构决策树](#62-系统架构决策树)
   - [七、定理推理链](#七定理推理链)
-    - [定理一致性（Coherence）矩阵（系统设计专集）](#定理一致性矩阵系统设计专集)
+    - [定理一致性矩阵（系统设计专集）](#定理一致性矩阵系统设计专集)
   - [八、相关概念链接（L0-L7 映射）](#八相关概念链接l0-l7-映射)
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
@@ -58,15 +58,15 @@
   - [十、边界测试：系统设计原则的编译错误](#十边界测试系统设计原则的编译错误)
     - [10.1 边界测试：Send/Sync 违反导致跨线程共享状态（编译错误）](#101-边界测试sendsync-违反导致跨线程共享状态编译错误)
     - [10.2 边界测试：trait 对象的安全性约束（编译错误）](#102-边界测试trait-对象的安全性约束编译错误)
-    - [10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时（Runtime）开销）](#105-边界测试依赖注入与-trait-object-的性能权衡运行时开销)
+    - [10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时开销）](#105-边界测试依赖注入与-trait-object-的性能权衡运行时开销)
     - [10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）](#105-边界测试过度工程化的类型状态机编译复杂度爆炸)
-    - [10.3 边界测试：过度泛型（Generics）化导致的单态化（Monomorphization）膨胀（编译后体积爆炸）](#103-边界测试过度泛型化导致的单态化膨胀编译后体积爆炸)
+    - [10.3 边界测试：过度泛型化导致的单态化膨胀（编译后体积爆炸）](#103-边界测试过度泛型化导致的单态化膨胀编译后体积爆炸)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 中"零成本抽象（Zero-Cost Abstraction）"（Zero-Cost Abstractions）对系统架构设计意味着什么？（理解层）](#测验-1rust-中零成本抽象zero-cost-abstractions对系统架构设计意味着什么理解层)
+    - [测验 1：Rust 中"零成本抽象"（Zero-Cost Abstractions）对系统架构设计意味着什么？（理解层）](#测验-1rust-中零成本抽象zero-cost-abstractions对系统架构设计意味着什么理解层)
     - [测验 2：在 Rust 微服务架构中，为什么选择 `tokio` 而非多线程模型？（理解层）](#测验-2在-rust-微服务架构中为什么选择-tokio-而非多线程模型理解层)
-    - [测验 3：Rust 的 `trait` 系统在解耦模块（Module）时有什么优势？（理解层）](#测验-3rust-的-trait-系统在解耦模块时有什么优势理解层)
-    - [测验 4：什么是"错误即类型"（Errors as Values）？Rust 如何通过类型系统（Type System）实现它？（理解层）](#测验-4什么是错误即类型errors-as-valuesrust-如何通过类型系统实现它理解层)
+    - [测验 3：Rust 的 `trait` 系统在解耦模块时有什么优势？（理解层）](#测验-3rust-的-trait-系统在解耦模块时有什么优势理解层)
+    - [测验 4：什么是"错误即类型"（Errors as Values）？Rust 如何通过类型系统实现它？（理解层）](#测验-4什么是错误即类型errors-as-valuesrust-如何通过类型系统实现它理解层)
     - [测验 5：在设计高可用 Rust 系统时，`Arc<Mutex<T>>` 与消息传递（channel）各适合什么场景？（理解层）](#测验-5在设计高可用-rust-系统时arcmutext-与消息传递channel各适合什么场景理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -117,7 +117,7 @@ Rust 的所有权（Ownership）系统正是 Capability-Based Security 的现代
 
 | Capability 理论 | Rust 实现 |
 |:---|:---|
-| 不可伪造的 capability | 值的所有权（编译器保证不可复制，除非 `Copy`） |
+| 不可伪造的 capability | 值的所有权（Ownership）（编译器保证不可复制，除非 `Copy`） |
 | Capability 转移 | `move` 语义（所有权转移后原持有者失效） |
 | Capability 降级（只读） | `&T` 共享借用（Borrowing）（只读 capability） |
 | Capability 委托（可写） | `&mut T` 独占借用（Borrowing）（可写 capability） |
@@ -163,7 +163,7 @@ Rust 的零成本抽象（Zero-Cost Abstraction）机制：
 | `async/await` | 状态机变换 | 零（状态机在栈/内联内存） | 手写状态机 enum + poll |
 | `?` 错误传播 | `match` 展开 | 零 | 手写等效 match |
 
-> **定理 T-SD-001（零成本抽象保持）**: 在 `release` 模式下，Rust 的标准抽象（泛型（Generics）、Iterator、async/await、`?`）经 LLVM 优化后，生成的机器码与等价的手工编码在性能和内存占用上无统计显著差异。 来源: [Rust Reference §8; LLVM 优化管道文档](https://doc.rust-lang.org/reference/)
+> **定理 T-SD-001（零成本抽象（Zero-Cost Abstraction）保持）**: 在 `release` 模式下，Rust 的标准抽象（泛型（Generics）、Iterator、async/await、`?`）经 LLVM 优化后，生成的机器码与等价的手工编码在性能和内存占用上无统计显著差异。 来源: [Rust Reference §8; LLVM 优化管道文档](https://doc.rust-lang.org/reference/)
 
 ### 2.4 组件组合：范畴论态射复合
 
@@ -193,11 +193,11 @@ trait Service<Request> {
 >
 > **核心隐喻**: Rust 的所有权转移（move）在分布式系统中对应**状态的唯一主节点（single primary）**——任何时刻，数据的所有权只存在于一个节点，避免了分布式系统中的 split-brain 问题。
 
-| Rust 概念 | 分布式系统对应 | 一致性保证 |
+| Rust 概念 | 分布式系统对应 | 一致性（Coherence）保证 |
 |:---|:---|:---|
 | 所有权唯一性 | 单主复制（Single Primary Replication） | 强一致性 |
 | `&T` 共享借用（Borrowing） | 多主只读复制（Multi-Primary Read） | 最终一致性 |
-| `&mut T` 独占借用 | 独占写锁（Exclusive Write Lock） | 线性一致性 |
+| `&mut T` 独占借用（Borrowing） | 独占写锁（Exclusive Write Lock） | 线性一致性 |
 | `Arc<Mutex<T>>` | 分布式锁（如 etcd / ZooKeeper） | 顺序一致性 |
 | channel send | 两阶段提交（2PC）的 prepare 阶段 | 原子性 |
 
@@ -217,7 +217,7 @@ Rust 的安全边界层次与 Zero Trust 的映射：
 | 微分段 | Crate 边界 = 安全边界；模块（Module） = 微分段 |
 
 **WASI（WebAssembly System Interface）的能力安全**:
-WASI 采用 capability-based 设计——程序只能访问显式授予的资源（文件描述符、网络 socket）。Rust 的 `wasm32-wasip1` 或 `wasm32-wasip2` target 将 Rust 的所有权语义映射到 WASI 的 capability 模型，实现从源码到运行时的端到端安全。 [来源: WASI Specification; Bytecode Alliance]
+WASI 采用 capability-based 设计——程序只能访问显式授予的资源（文件描述符、网络 socket）。Rust 的 `wasm32-wasip1` 或 `wasm32-wasip2` target 将 Rust 的所有权语义映射到 WASI 的 capability 模型，实现从源码到运行时（Runtime）的端到端安全。 [来源: WASI Specification; Bytecode Alliance]
 
 ### 2.7 容错设计：Error Kernel + Let It Crash
 
@@ -560,7 +560,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Rc<T>`（引用（Reference）计数）不是 `Send`，因为其内部计数器非线程安全。跨线程共享数据必须使用 `Arc<T>`（原子引用计数），它使用原子操作（Atomic Operations）维护计数器。这是 Rust 类型系统对**线程安全**的形式化保证：`Send` 标记类型可安全转移到其他线程，`Sync` 标记类型可安全被多个线程共享。编译器通过 trait bound 检查在编译期阻止数据竞争——`thread::spawn` 要求闭包（Closures）是 `'static + Send`，`Rc<i32>` 不满足 `Send` 约束。这比 Java 的 `synchronized` 或 Go 的 `chan` 更根本：Rust 在类型层面消除数据竞争，而非运行时检测。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/marker/trait.Send.html)]
+> **修正**: `Rc<T>`（引用（Reference）计数）不是 `Send`，因为其内部计数器非线程安全。跨线程共享数据必须使用 `Arc<T>`（原子引用计数），它使用原子操作（Atomic Operations）维护计数器。这是 Rust 类型系统（Type System）对**线程安全**的形式化保证：`Send` 标记类型可安全转移到其他线程，`Sync` 标记类型可安全被多个线程共享。编译器通过 trait bound 检查在编译期阻止数据竞争——`thread::spawn` 要求闭包（Closures）是 `'static + Send`，`Rc<i32>` 不满足 `Send` 约束。这比 Java 的 `synchronized` 或 Go 的 `chan` 更根本：Rust 在类型层面消除数据竞争，而非运行时检测。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/marker/trait.Send.html)]
 
 ### 10.2 边界测试：trait 对象的安全性约束（编译错误）
 
@@ -581,7 +581,7 @@ impl Dispatcher {
 }
 ```
 
-> **修正**: Rust 的 trait 对象安全（object safety）要求：1) 方法不使用 `Self: Sized`；2) 方法不使用泛型类型参数；3) 关联函数（无 `self`）不能是对象安全的。违反这些规则的 trait 不能作为 `dyn Trait` 使用。这是 Rust 动态分发与静态分发的边界：静态单态化（monomorphization）允许泛型方法，但 trait 对象（vtable 动态分发）要求方法签名在编译期确定。与 Java 的接口（总是动态分发）或 C++ 的虚函数（无对象安全概念）不同，Rust 显式区分这两种机制，要求开发者根据场景选择。[来源: [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
+> **修正**: Rust 的 trait 对象安全（object safety）要求：1) 方法不使用 `Self: Sized`；2) 方法不使用泛型（Generics）类型参数；3) 关联函数（无 `self`）不能是对象安全的。违反这些规则的 trait 不能作为 `dyn Trait` 使用。这是 Rust 动态分发与静态分发的边界：静态单态化（monomorphization）允许泛型方法，但 trait 对象（vtable 动态分发）要求方法签名在编译期确定。与 Java 的接口（总是动态分发）或 C++ 的虚函数（无对象安全概念）不同，Rust 显式区分这两种机制，要求开发者根据场景选择。[来源: [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
 
 ### 10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时开销）
 

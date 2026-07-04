@@ -284,7 +284,7 @@ Kiro 深度解析 Rust 的所有权（Ownership）、生命周期（Lifetimes）
 - **生命周期（Lifetimes）边界推断**：结合显式生命周期标注与隐式省略规则，推断引用的有效性边界。对于跨异步（Async）边界的引用（如 `async fn` 中捕获的 `&mut`），Kiro 可标记超出 `Future` 作用域的非法引用风险。[来源: 原创分析; Rust Reference: Lifetime Elision]
 - **类型级安全推导**：对手动实现的 `Send`/`Sync` 进行类型级验证，检查其是否与底层数据结构的 ownership 语义一致。若 `unsafe impl Send` 未伴随 `SAFETY:` 注释，Kiro 将其视为 Critical 级别问题。[来源: Rustonomicon; 原创分析]
 
-> **交叉链接**：`unsafe` 块的契约规范见 [`../03_advanced/03_unsafe.md`](../../03_advanced/03_unsafe.md) · 生命周期省略（Lifetime Elision）规则见 [`../01_foundation/03_lifetimes.md`](../../01_foundation/03_lifetimes.md)。
+> **交叉链接**：`unsafe` 块的契约规范见 [`../03_advanced/03_unsafe.md`](../../03_advanced/03_unsafe.md) · 生命周期（Lifetimes）省略（Lifetime Elision）规则见 [`../01_foundation/03_lifetimes.md`](../../01_foundation/03_lifetimes.md)。
 
 **与 Copilot 的对比**：
 
@@ -292,7 +292,7 @@ Kiro 深度解析 Rust 的所有权（Ownership）、生命周期（Lifetimes）
 |:---|:---|:---|
 | **核心模式** | 生成式补全（Generation） | 审查式分析（Review） |
 | **介入时机** | 编码时（IDE 实时） | 提交前 / PR 阶段 |
-| **Rust 深度** | 语法 + 所有权标注生成 | 所有权语义推断 + 安全审计 |
+| **Rust 深度** | 语法 + 所有权（Ownership）标注生成 | 所有权语义推断 + 安全审计 |
 | **错误处理（Error Handling）** | 生成可能包含错误的代码 | 拦截并报告现有代码中的风险 |
 | **价值主张** | 提升编码速度 | 提升代码质量与安全合规 |
 
@@ -692,7 +692,7 @@ Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，
 | `suggested_replacement` | 动作空间剪枝 | 将候选修复从全 token 空间缩小到建议替换 |
 | `children[].message` (help) | 附加状态特征 | 编译器主动提供修复方向提示 |
 
-> **定理**：Rust 编译器诊断的**结构化密度**（每字节源码对应的诊断信息量）远高于 C++（文本诊断）或 Python（运行时堆栈），这使得 Rust 的 RL 状态表示更紧凑、奖励信号更密集。`rustc` 的确定性（相同输入总是产生相同诊断）进一步保证了 MDP 转移函数的稳定性。[来源: Rust Reference: JSON Diagnostic Format] · [rustc-dev-guide]
+> **定理**：Rust 编译器诊断的**结构化密度**（每字节源码对应的诊断信息量）远高于 C++（文本诊断）或 Python（运行时（Runtime）堆栈），这使得 Rust 的 RL 状态表示更紧凑、奖励信号更密集。`rustc` 的确定性（相同输入总是产生相同诊断）进一步保证了 MDP 转移函数的稳定性。[来源: Rust Reference: JSON Diagnostic Format] · [rustc-dev-guide]
 
 ### 6.5 与 LLM-based 修复的对比
 >
@@ -964,7 +964,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: AI 生成代码的主要风险在于**隐式假设**（如输入格式、内存布局）。Rust 的类型系统通过**显式契约**（如 `parse_safe` 的返回类型 `Option<Self>`）将这些假设转化为编译期可检查的约束。
+> **关键洞察**: AI 生成代码的主要风险在于**隐式假设**（如输入格式、内存布局）。Rust 的类型系统（Type System）通过**显式契约**（如 `parse_safe` 的返回类型 `Option<Self>`）将这些假设转化为编译期可检查的约束。
 
 ---
 
@@ -1158,7 +1158,7 @@ graph TD
 > **认知功能**: 警示AI生成Rust代码的潜在风险，打破"编译通过即安全"的迷思。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **功能定位**：明确类型系统只能捕获语法错误，无法拦截逻辑错误和unsafe（Unsafe）误用。
-> **使用建议**：对AI生成的unsafe块和复杂生命周期标注必须辅以Miri和人工审计。
+> **使用建议**：对AI生成的unsafe（Unsafe）块和复杂生命周期标注必须辅以Miri和人工审计。
 > **关键洞察**：编译器是必要非充分条件——形式化验证与人工审查构成最终安全网。[来源: 💡 原创分析]
 
 > **过渡: L7 → L2**

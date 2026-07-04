@@ -26,7 +26,6 @@
 
 > 本文内容来自已归档的 `docs/rust-ownership-decidability/04-decidability-analysis/04-01-type-inference.md`，经提炼后迁移。
 
-
 ---
 
 > **过渡**: 从 Type Inference Complexity（类型推断 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -35,7 +34,6 @@
 
 > **过渡**: 最后，将 Type Inference Complexity（类型推断 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
-
 ---
 
 > **定理 1** [Tier 2]: Type Inference Complexity（类型推断 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
@@ -43,7 +41,6 @@
 > **定理 2** [Tier 2]: 正确理解 Type Inference Complexity（类型推断 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
 >
 > **定理 3** [Tier 3]: 将 Type Inference Complexity（类型推断 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 
 ---
 
@@ -55,12 +52,12 @@
 
 > **反命题 3**: "其他语言对 Type Inference Complexity（类型推断 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Type Inference Complexity（类型推断 具有语言特有的形态。
 
-
 ## 📑 目录
 
 - [Type Inference Complexity（类型推断复杂度）](#type-inference-complexity类型推断复杂度)
+  - [反命题决策树](#反命题决策树)
   - [📑 目录](#-目录)
-  - [一、HM：类型推断（Type Inference）的黄金标准](#一hm类型推断的黄金标准)
+  - [一、HM：类型推断的黄金标准](#一hm类型推断的黄金标准)
   - [二、Rust 的四项复杂度放大器](#二rust-的四项复杂度放大器)
   - [三、约束生成与 Robinson 合一](#三约束生成与-robinson-合一)
     - [3.1 约束生成（Constraint Generation）](#31-约束生成constraint-generation)
@@ -346,7 +343,7 @@ fn main() {
 | 步骤 | 核心问题 | 能力产出 |
 |:---|:---|:---|
 | 1. HM 基线 | 为什么纯 HM 是 $O(n^3)$？ | 能解释主类型与完备性 |
-| 2. Rust 扩展 | trait、生命周期、关联类型如何改变约束？ | 能判断何时需要显式标注 |
+| 2. Rust 扩展 | trait、生命周期（Lifetimes）、关联类型如何改变约束？ | 能判断何时需要显式标注 |
 | 3. 约束求解 | 合一、泛化、trait 求解如何协作？ | 能阅读 rustc 类型错误信息 |
 | 4. 复杂度结论 | PSPACE 上界/下界如何建立？ | 能评估类型系统（Type System）设计的可判定性 |
 | 5. rustc 实现 | `typeck` / `InferCtxt` / `Ty` 如何映射？ | 能理解编译器内部调试输出 |

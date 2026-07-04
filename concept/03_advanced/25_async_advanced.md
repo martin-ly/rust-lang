@@ -26,15 +26,15 @@
     - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
     - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
     - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
-    - [8.13 Miri 动态验证：async 状态机的内存安全（Memory Safety）检测](#813-miri-动态验证async-状态机的内存安全检测)
+    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
       - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
       - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
       - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
       - [Miri 与 async 状态机的特殊关联](#miri-与-async-状态机的特殊关联)
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
-  - [十、边界测试：高级异步（Async）模式的编译错误](#十边界测试高级异步模式的编译错误)
-    - [10.1 边界测试：`select!` 宏（Macro）中分支完成后的变量使用（编译错误）](#101-边界测试select-宏中分支完成后的变量使用编译错误)
-    - [10.2 边界测试：`Stream::next()` 与所有权（Ownership）冲突（编译错误）](#102-边界测试streamnext-与所有权冲突编译错误)
+  - [十、边界测试：高级异步模式的编译错误](#十边界测试高级异步模式的编译错误)
+    - [10.1 边界测试：`select!` 宏中分支完成后的变量使用（编译错误）](#101-边界测试select-宏中分支完成后的变量使用编译错误)
+    - [10.2 边界测试：`Stream::next()` 与所有权冲突（编译错误）](#102-边界测试streamnext-与所有权冲突编译错误)
     - [10.5 边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）](#105-边界测试pin-与-unpin-的自动实现冲突编译错误)
     - [10.3 边界测试：类型不匹配的基础错误](#103-边界测试类型不匹配的基础错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -113,7 +113,7 @@ graph TD
 
 > **认知功能**: 活性调试路径图——当 Future 陷入永久 Pending 时，按此决策树定位故障根因。
 > 读者可逐层检查 Waker 注册、Reactor 唤醒调用、poll 返回值合法性三个环节。
-> 关键洞察：`poll → Pending → wake → poll` 的闭环是异步执行器活性（liveness）的根本保证，任一环节断裂即导致活锁或饥饿。
+> 关键洞察：`poll → Pending → wake → poll` 的闭环是异步（Async）执行器活性（liveness）的根本保证，任一环节断裂即导致活锁或饥饿。
 > [来源: 💡 原创分析]
 > [来源: [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/index.html)]
 >
@@ -663,7 +663,7 @@ async fn pipeline() {
 | 堆分配 | ❌ 无（通常栈分配） | ✅ 必须堆分配 |
 | 内联优化 | ✅ 编译器可内联 poll | ❌ 虚表跳转阻止内联 |
 | 类型擦除 | ❌ 具体类型暴露 | ✅ 运行时（Runtime）类型擦除 |
-| 适用场景 | 通用路径 | trait 对象、递归、运行时类型选择 |
+| 适用场景 | 通用路径 | trait 对象、递归、运行时（Runtime）类型选择 |
 
 > **来源**: [Rust Reference: Trait objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Tokio 博客: Pinning] · [Rust Performance Book: Dynamic dispatch]
 
@@ -1650,7 +1650,7 @@ fn traverse_dir(path: &Path) -> Pin<Box<dyn Future<Output = Vec<String>> + Send 
 }
 ```
 
-**或者使用 `async_recursion` 宏**（简化版）：
+**或者使用 `async_recursion` 宏（Macro）**（简化版）：
 
 ```rust,ignore
 use async_recursion::async_recursion;

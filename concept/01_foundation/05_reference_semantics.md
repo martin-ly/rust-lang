@@ -43,7 +43,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [七、多级引用（Reference）语义与部分重借用（Multi-level References \& Partial Reborrows）](#七多级引用语义与部分重借用multi-level-references--partial-reborrows)
-    - [7.1 多级引用类型](#71-多级引用类型)
+    - [7.1 多级引用（Reference）类型](#71-多级引用类型)
       - [7.1.1 共享引用的嵌套：`&T` → `&&T` → `&&&T`](#711-共享引用的嵌套t--t--t)
       - 7.1.2 可变引用（Mutable Reference）的嵌套：`&mut T`、`&mut &T`、`&mut &mut T`
       - [7.1.3 弱化的不可逆性](#713-弱化的不可逆性)
@@ -81,7 +81,7 @@
     - [10.2 边界测试：`&str` 与 `String` 的混用（编译错误）](#102-边界测试str-与-string-的混用编译错误)
     - [10.3 边界测试：`&mut` 的重新借用（Borrowing）与原始引用失效（编译错误）](#103-边界测试mut-的重新借用与原始引用失效编译错误)
     - 10.4 边界测试：内部可变性与 `&T` 的不可变性矛盾（编译错误/运行时（Runtime） UB）
-    - [10.4 边界测试：`&mut T` 的重新借用与显式解引用混用（编译错误）](#104-边界测试mut-t-的重新借用与显式解引用混用编译错误)
+    - [10.4 边界测试：`&mut T` 的重新借用（Borrowing）与显式解引用混用（编译错误）](#104-边界测试mut-t-的重新借用与显式解引用混用编译错误)
     - [10.2 边界测试：返回局部变量的悬垂引用](#102-边界测试返回局部变量的悬垂引用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`Deref` 强制转换（Deref Coercion）允许什么类型的自动转换？（理解层）](#测验-1deref-强制转换deref-coercion允许什么类型的自动转换理解层)
@@ -527,7 +527,7 @@ let r2 = &mut r1;      // r2: &mut &mut i32
 assert_eq!(x, 20);
 ```
 
-三级嵌套可变引用的结构：
+三级嵌套可变引用（Mutable Reference）的结构：
 
 ```text
 &mut &mut &mut T 的语义层次:
@@ -682,7 +682,7 @@ graph LR
 ### 7.3 返回可变引用的形式化语义
 
 > **Bloom 层级**: 分析
-> [来源: [Verus Project — After Blocks](https://github.com/verus-lang/verusverus/guide/guide/)]（二级来源）
+> [来源: [Verus Project — After Blocks](https://github.com/verus-lang/verus/guide/guide/)]（二级来源）
 
 #### 7.3.1 两次移动模型
 
@@ -799,7 +799,7 @@ let r2 = &mut r1;      // 树节点 B: Unique (指向 r1), 节点 A 变为 Reser
 
 树模型允许 `r2` 存在时 `r1` 暂时被"冻结"（从 Unique 降级为 Reserved），当 `r2` 释放后 `r1` 恢复 Unique 权限。这种"临时降级"在栈模型中难以表达，但在树模型中自然成为父子节点的权限转换。
 
-> **关键洞察**: Tree Borrows 使得 `&mut &mut T` 的行为更加可预测——内层引用可以在外层引用的生命周期内被"临时冻结"，而不会触发 UB（Undefined Behavior）。
+> **关键洞察**: Tree Borrows 使得 `&mut &mut T` 的行为更加可预测——内层引用可以在外层引用的生命周期（Lifetimes）内被"临时冻结"，而不会触发 UB（Undefined Behavior）。
 > [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]（一级来源）
 
 ---
@@ -1174,7 +1174,7 @@ let s: &mut &Secret = &mut &Secret(String::from("x"));
 | [RustBelt / Iris](https://plv.mpi-sws.org/rustbelt/) | ✅ 一级 | Rust 形式化验证框架 |
 | [Rust Internals — Partial Reborrows](https://internals.rust-lang.org/) | ⚠️ 二级 | 社区对部分重借用的讨论 |
 | [Rust Blog — Polonius Update](https://blog.rust-lang.org/inside-rust/2023/10/06/polonius-update.html) | ⚠️ 二级 | Polonius 借用检查器进展 |
-| [Verus Project](https://github.com/verus-lang/verusverus/guide/guide/) | ⚠️ 二级 | 形式化验证与 after<> 块 |
+| [Verus Project](https://github.com/verus-lang/verus/guide/guide/) | ⚠️ 二级 | 形式化验证与 after<> 块 |
 | [Miri — Tree Borrows](https://github.com/rust-lang/miri) | ⚠️ 二级 | Miri 对 Tree Borrows 的实现 |
 | [TRPL Ch4 — References](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) | ⚠️ 三级 | 引用的工程直觉 |
 | [Rustonomicon — Transmutes](https://doc.rust-lang.org/nomicon/transmutes.html) | ⚠️ 三级 | unsafe 中的引用转换 |
@@ -1187,16 +1187,6 @@ let s: &mut &Secret = &mut &Secret(String::from("x"));
 ---
 
 ## 权威来源索引
-
->
->
->
-
----
-
----
-
----
 
 > **补充来源**
 
@@ -1300,7 +1290,7 @@ fn main() {
 > 这是运行时（Runtime）借用检查：`borrow()` 增加共享计数，`borrow_mut()` 检查共享计数为 0，否则 panic。
 > 编译器无法静态验证 `RefCell` 的借用规则，因为 `RefCell` 的内部状态是动态的。
 > 这与编译期借用检查（`&mut T` 不能从 `&T` 获取）形成对比：内部可变性是"信任的逃脱 hatch"——编译器信任开发者通过运行时（Runtime）检查保证安全。
-> 代价：运行时开销（引用计数）和可能的 panic。
+> 代价：运行时（Runtime）开销（引用计数）和可能的 panic。
 > 这与 C++ 的 `mutable` 关键字（突破 const 约束，无运行时检查）或 Java 的 `final` 字段（引用不可变，但对象状态可变）不同——Rust 的内部可变性是显式、有检查的安全机制。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.RefCell.html)]
@@ -1428,7 +1418,7 @@ fn main() {}
 | 引用语义：自动解引用、Deref 强制与类型转换 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 内存安全（Memory Safety） ⟸ 引用有效性保证 ⟸ 所有权（Ownership）与借用规则
-> 别名分析正确 ⟸ &T 共享读 / &mut T 独占写 ⟸ 类型系统
+> 别名分析正确 ⟸ &T 共享读 / &mut T 独占写 ⟸ 类型系统（Type System）
 > **过渡**: 掌握 引用语义：自动解引用、Deref 强制与类型转换 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 引用语义：自动解引用、Deref 强制与类型转换 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: 引用语义：自动解引用、Deref 强制与类型转换 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。

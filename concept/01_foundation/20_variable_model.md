@@ -34,7 +34,6 @@
 
 > **Bloom 层级**: 理解 → 分析
 
-
 ---
 
 ## 认知路径
@@ -47,7 +46,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与变量模型的适用边界。
 5. **迁移应用**: 将 变量模型 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 > **过渡**: 从 变量模型 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -55,7 +53,6 @@
 > **过渡**: 在建立 变量模型 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
 
 > **过渡**: 最后，将 变量模型 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
 
 ---
 
@@ -65,13 +62,11 @@
 >
 > **定理 3** [Tier 3]: 将 变量模型 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
 
-
 ---
 
 > **反向推理 1**: 如果程序在 变量模型 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
 >
 > **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 变量模型 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
-
 
 ## 一、核心命题
 
@@ -229,7 +224,7 @@ auto y = std::move(x); // y 获得资源，x 变为"有效但未指定状态"
 | `y = x;` | 调用拷贝/移动赋值运算符 | 若 `Copy`: 位拷贝；若非 `Copy`: 编译错误（x 已移动） |
 | `&x` | 取地址（L-value → 指针） | 借用（Borrowing）（创建 `&T` 或 `&mut T`） |
 | `x` 使用后被丢弃 | 析构函数自动调用（RAII） | `drop` 自动调用（确定性析构） |
-| 空悬引用 | 运行时（Runtime）错误（UB） | 编译期错误（borrow checker） |
+| 空悬引用（Reference） | 运行时（Runtime）错误（UB） | 编译期错误（borrow checker） |
 
 ---
 
@@ -376,7 +371,7 @@ fn reference_vs_pointer() {
 | 维度 | C | C++ | Java | Python | Rust |
 |:---|:---|:---|:---|:---|:---|
 | **变量模型** | 存储模型 | 存储模型 + RAII | 引用模型（变量 = 对象引用） | 名字-值绑定 | 存储模型 + 线性所有权（Ownership） |
-| **赋值语义** | 存储更新 | 存储更新 / 移动构造 | 引用重绑定 | 名字重新绑定 | 存储更新（Copy）/ 所有权转移（Move） |
+| **赋值语义** | 存储更新 | 存储更新 / 移动构造 | 引用重绑定 | 名字重新绑定 | 存储更新（Copy）/ 所有权（Ownership）转移（Move） |
 | **别名管理** | 手动（指针） | 手动（指针/引用（Reference）） | 自动（GC） | 自动（GC） | 编译器静态检查 |
 | **空悬指针** | 运行时（Runtime） UB | 运行时 UB | 不可能（GC） | 不可能（GC） | 编译期错误 |
 | **内存泄漏** | 可能 | 可能（循环引用） | 可能（循环引用） | 可能（循环引用） | 可能（Rc 循环引用） |
@@ -495,7 +490,7 @@ fn main() {
 fn some_condition() -> bool { false }
 ```
 
-> **修正**: Rust 编译器通过**流敏感分析**（flow-sensitive analysis）追踪变量初始化状态：在 `println!` 处，编译器检查所有控制流路径上 `x` 是否已初始化。若存在未初始化路径，编译错误。这与 C 的未初始化变量使用（编译器警告但不阻止，运行时读取垃圾值）或 Java 的局部变量（编译器检查，与 Rust 类似）不同——Rust 的初始化分析更精确：1) 考虑条件分支；2) 考虑循环；3) 考虑 `match` 分支。`MaybeUninit<T>` 允许显式处理未初始化状态，但使用 `unsafe`。这与 Swift 的 `let`/`var`（必须初始化，与 Rust 类似）或 Go 的变量声明（零值初始化，无未初始化概念）不同——Rust 在默认情况下禁止未初始化使用，但允许显式控制（`MaybeUninit`）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html)] · [来源: [Rust Reference — Let Statements](https://doc.rust-lang.org/reference/statements-and-expressions.html#let-statements)]
+> **修正**: Rust 编译器通过**流敏感分析**（flow-sensitive analysis）追踪变量初始化状态：在 `println!` 处，编译器检查所有控制流路径上 `x` 是否已初始化。若存在未初始化路径，编译错误。这与 C 的未初始化变量使用（编译器警告但不阻止，运行时（Runtime）读取垃圾值）或 Java 的局部变量（编译器检查，与 Rust 类似）不同——Rust 的初始化分析更精确：1) 考虑条件分支；2) 考虑循环；3) 考虑 `match` 分支。`MaybeUninit<T>` 允许显式处理未初始化状态，但使用 `unsafe`。这与 Swift 的 `let`/`var`（必须初始化，与 Rust 类似）或 Go 的变量声明（零值初始化，无未初始化概念）不同——Rust 在默认情况下禁止未初始化使用，但允许显式控制（`MaybeUninit`）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html)] · [来源: [Rust Reference — Let Statements](https://doc.rust-lang.org/reference/statements-and-expressions.html#let-statements)]
 
 ### 10.5 边界测试：变量遮蔽与不可变重新绑定（编译错误）
 

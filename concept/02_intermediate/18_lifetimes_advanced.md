@@ -45,7 +45,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：高级生命周期（Lifetimes）的编译错误](#十边界测试高级生命周期的编译错误)
     - 10.1 边界测试：自引用（Reference）结构体（Struct）与 `Pin`（编译错误）
-    - [10.2 边界测试：生命周期边界中的 `for<'a>` HRTB（编译错误）](#102-边界测试生命周期边界中的-fora-hrtb编译错误)
+    - [10.2 边界测试：生命周期（Lifetimes）边界中的 `for<'a>` HRTB（编译错误）](#102-边界测试生命周期边界中的-fora-hrtb编译错误)
     - [10.5 边界测试：闭包（Closures）捕获引用（Reference）与 `Fn` trait 的生命周期约束（编译错误）](#105-边界测试闭包捕获引用与-fn-trait-的生命周期约束编译错误)
     - [10.6 边界测试：`impl Trait` 返回类型的生命周期捕获（编译错误）](#106-边界测试impl-trait-返回类型的生命周期捕获编译错误)
     - [10.3 边界测试：lifetime bounds 与 trait object 的交互（编译错误）](#103-边界测试lifetime-bounds-与-trait-object-的交互编译错误)
@@ -99,7 +99,7 @@ HRTB (Higher-Ranked Trait Bounds):
   └── 否则泛型函数无法接受闭包
 ```
 
-> **认知功能**: HRTB 是 Rust **泛型（Generics）与借用（Borrowing）结合**的关键机制——它使闭包（Closures）和回调可以接受任意生命周期的引用。
+> **认知功能**: HRTB 是 Rust **泛型（Generics）与借用（Borrowing）结合**的关键机制——它使闭包（Closures）和回调可以接受任意生命周期的引用（Reference）。
 > [来源: [RFC 0387 — HRTB](https://rust-lang.github.io/rfcs//0387-higher-ranked-trait-bounds.html)]
 
 ---
@@ -456,7 +456,7 @@ graph TD
 └── 缓解: 显式使用 move，理解三种 Fn
 ```
 
-> **边界要点**: 生命周期高级主题的边界主要与**传染性**、**自引用**、**复杂度**、**NLL 局限**和**闭包交互**相关。
+> **边界要点**: 生命周期高级主题的边界主要与**传染性**、**自引用**、**复杂度**、**NLL 局限**和**闭包（Closures）交互**相关。
 > [来源: [Rust Compiler — Polonius](https://rust-lang.github.io/compiler-team/working-groups/polonius/)]
 
 ---

@@ -26,7 +26,7 @@
 - [Rust vs Ruby：性能与表达力的两极](#rust-vs-ruby性能与表达力的两极)
   - [📑 目录](#-目录)
   - [一、核心对比](#一核心对比)
-    - [1.1 类型系统（Type System）对比](#11-类型系统对比)
+    - [1.1 类型系统对比](#11-类型系统对比)
     - [1.2 内存管理对比](#12-内存管理对比)
     - [1.3 元编程与 DSL](#13-元编程与-dsl)
   - [二、工程实践差异](#二工程实践差异)
@@ -44,12 +44,12 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 与 Ruby 的编译错误对比](#十边界测试rust-与-ruby-的编译错误对比)
     - [10.1 边界测试：Ruby 的 duck typing vs Rust 的 trait bound（编译错误）](#101-边界测试ruby-的-duck-typing-vs-rust-的-trait-bound编译错误)
-    - [10.2 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（Orphan Rule）（编译错误）](#102-边界测试ruby-的-open-classes-与-rust-的孤儿规则编译错误)
+    - [10.2 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）](#102-边界测试ruby-的-open-classes-与-rust-的孤儿规则编译错误)
     - [10.3 边界测试：Ruby 的 duck typing 与 Rust 的 trait bound（编译错误）](#103-边界测试ruby-的-duck-typing-与-rust-的-trait-bound编译错误)
-    - [10.4 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（Orphan Rule）（编译错误）](#104-边界测试ruby-的-open-classes-与-rust-的孤儿规则编译错误)
+    - [10.4 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）](#104-边界测试ruby-的-open-classes-与-rust-的孤儿规则编译错误)
     - [10.3 边界测试：Ruby 的开放类与 Rust 的孤儿规则冲突（编译错误）](#103-边界测试ruby-的开放类与-rust-的孤儿规则冲突编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Ruby 的"鸭子类型"与 Rust 的 trait 系统在运行时（Runtime）行为上有什么不同？（理解层）](#测验-1ruby-的鸭子类型与-rust-的-trait-系统在运行时行为上有什么不同理解层)
+    - [测验 1：Ruby 的"鸭子类型"与 Rust 的 trait 系统在运行时行为上有什么不同？（理解层）](#测验-1ruby-的鸭子类型与-rust-的-trait-系统在运行时行为上有什么不同理解层)
     - [测验 2：Ruby 的 GIL（全局解释器锁）与 Rust 的并发模型有什么根本区别？（理解层）](#测验-2ruby-的-gil全局解释器锁与-rust-的并发模型有什么根本区别理解层)
     - [测验 3：Ruby on Rails 的"约定优于配置"与 Rust 的显式哲学有什么对比？（理解层）](#测验-3ruby-on-rails-的约定优于配置与-rust-的显式哲学有什么对比理解层)
     - [测验 4：为什么 Ruby 适合快速原型，而 Rust 更适合长期维护的基础设施？（理解层）](#测验-4为什么-ruby-适合快速原型而-rust-更适合长期维护的基础设施理解层)
@@ -565,7 +565,7 @@ fn print_length_fixed<T: HasLength>(x: T) {
 }
 ```
 
-> **Ruby 对比**: Ruby 使用 duck typing——`x.len` 在运行时检查 `x` 是否有 `len` 方法，有则调用，无则抛出 `NoMethodError`。Rust 在编译期通过 trait bound 检查类型是否实现所需方法。Ruby 的灵活性允许更自由的元编程，但错误延迟到运行时；Rust 的严格性在编译期捕获错误，但要求预先定义接口。这与 Go 的隐式接口（structural typing）也不同——Rust 是 nominal typing，必须显式 `impl Trait for Type`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **Ruby 对比**: Ruby 使用 duck typing——`x.len` 在运行时（Runtime）检查 `x` 是否有 `len` 方法，有则调用，无则抛出 `NoMethodError`。Rust 在编译期通过 trait bound 检查类型是否实现所需方法。Ruby 的灵活性允许更自由的元编程，但错误延迟到运行时；Rust 的严格性在编译期捕获错误，但要求预先定义接口。这与 Go 的隐式接口（structural typing）也不同——Rust 是 nominal typing，必须显式 `impl Trait for Type`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）
 

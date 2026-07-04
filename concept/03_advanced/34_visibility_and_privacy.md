@@ -18,7 +18,6 @@
 
 ---
 
-
 ---
 
 ## 认知路径
@@ -31,7 +30,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与可见性与隐私（Visibility and Privacy）的适用边界。
 5. **迁移应用**: 将 可见性与隐私（Visibility and Privacy） 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -41,7 +39,6 @@
 > **反命题 2**: "忽略 可见性与隐私（Visibility and Privacy） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 可见性与隐私（Visibility and Privacy） 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 可见性与隐私（Visibility and Privacy） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 可见性与隐私（Visibility and Privacy） 具有语言特有的形态。
-
 
 ## 一、可见性的核心问题
 
@@ -75,7 +72,7 @@ pub enum State {               // 公开枚举，变体默认公开
 
 ### 1. Public item
 
-如果 item 是 public 的，那么只要从模块 `m` 可以访问该 item 的所有祖先模块，就可以从 `m` 外部访问它。也可以通过重导出（re-export）命名该 item。
+如果 item 是 public 的，那么只要从模块（Module） `m` 可以访问该 item 的所有祖先模块，就可以从 `m` 外部访问它。也可以通过重导出（re-export）命名该 item。
 
 ### 2. Private item
 

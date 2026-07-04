@@ -50,10 +50,10 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：`should_panic` 的预期消息匹配（运行时（Runtime）测试失败）](#103-边界测试should_panic-的预期消息匹配运行时测试失败)
-    - [10.4 边界测试：集成测试的模块（Module）可见性（编译错误）](#104-边界测试集成测试的模块可见性编译错误)
+    - [10.3 边界测试：`should_panic` 的预期消息匹配（运行时测试失败）](#103-边界测试should_panic-的预期消息匹配运行时测试失败)
+    - [10.4 边界测试：集成测试的模块可见性（编译错误）](#104-边界测试集成测试的模块可见性编译错误)
     - [10.5 边界测试：`#[should_panic]` 的预期消息匹配（测试失败）](#105-边界测试should_panic-的预期消息匹配测试失败)
-    - [10.6 边界测试：集成测试的模块（Module）可见性与 `pub` 要求（编译错误）](#106-边界测试集成测试的模块可见性与-pub-要求编译错误)
+    - [10.6 边界测试：集成测试的模块可见性与 `pub` 要求（编译错误）](#106-边界测试集成测试的模块可见性与-pub-要求编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：单元测试通常放在哪里？集成测试又应该放在项目的哪个目录？（理解层）](#测验-1单元测试通常放在哪里集成测试又应该放在项目的哪个目录理解层)
     - [测验 2：`assert_eq!(a, b)` 与 `assert!(a == b)` 在测试失败时的输出有什么区别？（理解层）](#测验-2assert_eqa-b-与-asserta--b-在测试失败时的输出有什么区别理解层)
@@ -550,7 +550,7 @@ graph TD
 
 ## 相关概念文件
 
-- [Modules](11_modules_and_paths.md) — 模块系统
+- [Modules](11_modules_and_paths.md) — 模块（Module）系统
 - [Error Handling](../02_intermediate/16_error_handling_deep_dive.md) — 错误处理（Error Handling）
 - [Testing Strategies](../06_ecosystem/16_testing.md) — 测试策略
 - [Security Practices](../06_ecosystem/19_security_practices.md) — 安全实践

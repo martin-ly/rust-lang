@@ -130,7 +130,7 @@ graph TD
 
 > **认知功能**: 提供设计模式的全景认知框架，帮助学习者建立"模式类型→具体问题→Rust实现"的三层检索路径。建议将其作为查阅具体模式前的导航图，快速定位问题所属的模式类别。
 > [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
-> **关键洞察**: Rust特有模式（Typestate、Zero-cost Abstraction）并非GoF分类的补丁，而是所有权类型系统的自然涌现。
+> **关键洞察**: Rust特有模式（Typestate、Zero-cost Abstraction）并非GoF分类的补丁，而是所有权（Ownership）类型系统（Type System）的自然涌现。
 > [来源: 💡 原创分析]
 
 ---
@@ -268,7 +268,7 @@ classDiagram
 ```
 
 > **认知功能**: 将Visitor模式的"双重分发"结构可视化，清晰呈现Expr（元素层次）与ExprVisitor（操作层次）的正交分离。建议在实现AST遍历或代码生成前对照此图验证接口设计。
-> **关键洞察**: enum变体替代继承层次，`accept`方法的泛型（Generics）参数将运行时双重分发压缩为编译期单分发，消除虚函数表膨胀。
+> **关键洞察**: enum变体替代继承层次，`accept`方法的泛型（Generics）参数将运行时（Runtime）双重分发压缩为编译期单分发，消除虚函数表膨胀。
 > **思维表征说明**: `classDiagram` 是设计模式的**标准 UML 表达**——`--|>` 表示继承/变体关系，`<|..` 表示 trait 实现，`..>` 表示依赖关系。Visitor 模式的核心结构在此图中一目了然：Expr 是被访问的元素层次（enum 变体），ExprVisitor 是操作接口，EvalVisitor / PrintVisitor 是具体操作实现。这与 `graph TD` 流程图（展示概念关系）形成互补——类图展示的是**代码结构中的类型关系**。 [来源: GoF Design Patterns; UML 2.5 Class Diagram Standard]
 
 **与其他语言对比**：
@@ -334,7 +334,7 @@ impl<S: PaymentStrategy> ShoppingCart<S> {
 
 **与其他语言对比**：
 
-- **C++**: 模板（静态）+ 虚函数（动态）；Rust 的泛型单态化（Monomorphization）与 C++ 模板实例化类似，但类型检查更严格。
+- **C++**: 模板（静态）+ 虚函数（动态）；Rust 的泛型（Generics）单态化（Monomorphization）与 C++ 模板实例化类似，但类型检查更严格。
 - **Java**: 接口 + 多态；无静态分发零成本特性，所有策略均为动态。
 - **Go**: 接口值隐式实现；Rust trait 需显式实现，静态分发默认内联。
 
@@ -559,7 +559,7 @@ impl TemperatureDisplay {
 
 > [来源: [Rust in Production](https://www.rust-lang.org/)]
 
-**关键洞察**：`Weak<T>` 不增加引用计数，当 Subject 被释放时，`upgrade()` 返回 `None`，Observer 自动失效。这避免了 `Rc`/`Arc` 循环引用导致的内存泄漏。来源: [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+**关键洞察**：`Weak<T>` 不增加引用（Reference）计数，当 Subject 被释放时，`upgrade()` 返回 `None`，Observer 自动失效。这避免了 `Rc`/`Arc` 循环引用导致的内存泄漏。来源: [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)** `Rc::downgrade` 产生 `Weak<T>`，允许引用而不拥有所有权，是打破循环引用的标准手段。✅
 
@@ -607,7 +607,7 @@ async fn async_observer_example() {
 
 > [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)] · [Rust CLI Book](https://rust-cli.github.io/book/)
 
-**关键洞察**：`broadcast` 通道解耦了生产者和消费者的生命周期——接收者可以独立存在，即使发送者已关闭，`recv()` 会返回错误而非悬垂引用。[来源: Tokio Documentation]
+**关键洞察**：`broadcast` 通道解耦了生产者和消费者的生命周期（Lifetimes）——接收者可以独立存在，即使发送者已关闭，`recv()` 会返回错误而非悬垂引用。[来源: Tokio Documentation]
 
 > **[来源: Tokio Docs — broadcast]** broadcast 通道实现 fan-out：每个订阅者接收事件的独立拷贝。✅
 
@@ -754,7 +754,7 @@ fn display_system(mut reader: EventReader<TemperatureChanged>) {
 | **模式** | **GATs 解决的核心问题** | **典型应用** |
 |:---|:---|:---|
 | Lending Iterator | 返回引用生命周期与迭代器本身绑定 | `windows()`, `array_chunks()` |
-| Type Families | 关联类型参数化 | 异步 trait、流式 API |
+| Type Families | 关联类型参数化 | 异步（Async） trait、流式 API |
 | Higher-Kinded Types 模拟 | 类型构造器的抽象 | 泛型集合接口 |
 
 ```rust
@@ -958,7 +958,7 @@ fn load(path: &str) -> Result<Config, Error> {
 
 > **Bloom 层级**: 应用 → 分析
 
-反模式是"看似正确、实则有害"的惯用做法。Rust 的类型系统与所有权模型在消除某些经典反模式（如悬空指针、数据竞争）的同时，也催生了特有的抽象陷阱——过度使用泛型、过早拆分模块、`Rc<RefCell<...>>` 迷宫等。以下从工程直觉到成本分析，建立反模式的识别框架。
+反模式是"看似正确、实则有害"的惯用做法。Rust 的类型系统与所有权模型在消除某些经典反模式（如悬空指针、数据竞争）的同时，也催生了特有的抽象陷阱——过度使用泛型、过早拆分模块（Module）、`Rc<RefCell<...>>` 迷宫等。以下从工程直觉到成本分析，建立反模式的识别框架。
 
 ---
 
@@ -1479,7 +1479,7 @@ fn main() {
 
 | 模式 | 场景 | 运行时开销 | 内存开销 | 编译期成本 | 适用规模 |
 |:---|:---|:---:|:---:|:---:|:---|
-| **单态化泛型** | 通用算法 | 零 | 代码膨胀 | 高 | 任意 |
+| **单态化（Monomorphization）泛型** | 通用算法 | 零 | 代码膨胀 | 高 | 任意 |
 | **Trait Object (`dyn`)** | 运行时多态 | vtable 间接调用 | 指针大小 | 低 | 类型未知时 |
 | **Type Erasure** | 隐藏具体类型 | 装箱 + vtable | 堆分配 | 中 | 跨 API 边界 |
 | **GATs Lending** | 自引用迭代器（Iterator） | 零 | 栈分配 | 中 |  borrow 复杂场景 |
@@ -1695,7 +1695,7 @@ fn main() {
 }
 ```
 
-> **修正**: Builder 模式的**链式调用**在 Rust 中需处理所有权：`fn name(mut self, ...)` 消耗 `self` 并返回新的 `Self`，旧的 `self` 不可用。修复：1) `fn name(&mut self, ...)` — 借用，支持链式但不返回 `Self`（需分开调用：`builder.name(...); builder.age(...);`）；2) `fn name(mut self, ...) -> Self` — 消耗式，但要求一次性链式调用：`Builder::new().name(...).age(...).build()`；3) `fn name(self, ...) -> Self` — 无 `mut`，在函数内重新绑定。Rust 的 builder 模式通常采用**消耗式**（`mut self`），因为构建完成后 builder 不再需要。这与 Java 的 builder（总是返回 `this`，无所有权问题）或 Python 的 builder（同样无所有权）不同——Rust 的 builder 需显式处理移动语义。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/print.html#builder)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **修正**: Builder 模式的**链式调用**在 Rust 中需处理所有权：`fn name(mut self, ...)` 消耗 `self` 并返回新的 `Self`，旧的 `self` 不可用。修复：1) `fn name(&mut self, ...)` — 借用（Borrowing），支持链式但不返回 `Self`（需分开调用：`builder.name(...); builder.age(...);`）；2) `fn name(mut self, ...) -> Self` — 消耗式，但要求一次性链式调用：`Builder::new().name(...).age(...).build()`；3) `fn name(self, ...) -> Self` — 无 `mut`，在函数内重新绑定。Rust 的 builder 模式通常采用**消耗式**（`mut self`），因为构建完成后 builder 不再需要。这与 Java 的 builder（总是返回 `this`，无所有权问题）或 Python 的 builder（同样无所有权）不同——Rust 的 builder 需显式处理移动语义。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/print.html#builder)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -1838,7 +1838,7 @@ Typestate 最适合：
 - 状态少、转换规则清晰
 - 非法转换可在编译期消除
 
-传统枚举状态机更适合：
+传统枚举（Enum）状态机更适合：
 
 - 状态多、转换复杂、依赖运行时输入
 - 需要运行时反序列化状态

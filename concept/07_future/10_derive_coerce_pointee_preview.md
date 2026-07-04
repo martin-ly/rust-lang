@@ -36,14 +36,14 @@
 
 ## 📑 目录
 
-- [派生 CoercePointee 预研：智能指针（Smart Pointer）的自动类型强制](#派生-coercepointee-预研智能指针的自动类型强制)
+- [派生 CoercePointee 预研：智能指针的自动类型强制](#派生-coercepointee-预研智能指针的自动类型强制)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 问题：自定义智能指针（Smart Pointer）的样板代码](#11-问题自定义智能指针的样板代码)
+    - [1.1 问题：自定义智能指针的样板代码](#11-问题自定义智能指针的样板代码)
     - [1.2 CoerceUnsized 与 DispatchFromDyn](#12-coerceunsized-与-dispatchfromdyn)
     - [1.3 `#[derive(CoercePointee)]` 方案](#13-derivecoercepointee-方案)
   - [二、技术细节](#二技术细节)
-    - [2.1 派生宏（Macro）的展开逻辑](#21-派生宏的展开逻辑)
+    - [2.1 派生宏的展开逻辑](#21-派生宏的展开逻辑)
     - [2.2 约束条件](#22-约束条件)
     - [2.3 与现有 Trait 的交互](#23-与现有-trait-的交互)
   - [三、安全分析](#三安全分析)
@@ -58,7 +58,7 @@
     - [10.1 边界测试：非 `#[repr(transparent)]` 类型的 CoercePointee（编译错误）](#101-边界测试非-reprtransparent-类型的-coercepointee编译错误)
     - [10.2 边界测试：多字段 struct 的 CoercePointee 尝试（编译错误）](#102-边界测试多字段-struct-的-coercepointee-尝试编译错误)
     - [10.3 边界测试：CoercePointee 与自定义 DST 的元数据（编译错误）](#103-边界测试coercepointee-与自定义-dst-的元数据编译错误)
-    - [10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期（Lifetimes）交互（编译错误）](#104-边界测试phantomdata-与-coercepointee-的生命周期交互编译错误)
+    - [10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期交互（编译错误）](#104-边界测试phantomdata-与-coercepointee-的生命周期交互编译错误)
     - [10.4 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）](#104-边界测试coercepointee-与智能指针的自动转换编译错误未来特性)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -136,7 +136,7 @@ graph TD
 > **认知功能**: 此图对比了当前手动实现与目标派生方案的**安全差异**——手动实现引入 unsafe 风险，而派生宏（Macro）由编译器生成已验证的代码。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 对于任何自定义智能指针，优先使用 `#[derive(CoercePointee)]`；仅在特殊布局需求时手动实现。
-> **关键洞察**: `CoerceUnsized` 和 `DispatchFromDyn` 的实现是**纯机械性**的——给定字段结构，实现是唯一确定的。这正是派生宏的理想应用场景。
+> **关键洞察**: `CoerceUnsized` 和 `DispatchFromDyn` 的实现是**纯机械性**的——给定字段结构，实现是唯一确定的。这正是派生宏（Macro）的理想应用场景。
 > [来源: [Rustonomicon — Coercions](https://doc.rust-lang.org/nomicon/coercions.html)]
 
 ---
@@ -469,7 +469,7 @@ fn main() {
 > `CoercePointee` 不仅涉及类型 coercion（`String` → `str`），还涉及**生命周期（Lifetimes） coercion**。
 > `Ref<'a, T>` 的 `'a` 是引用（Reference）的生命周期（Lifetimes），`T` 的变化（`String` → `str`）需保持生命周期约束。
 > `Ref<'short, String>` → `Ref<'long, str>` 要求 `'short: 'long`（短生命周期（Lifetimes）可 coerce 为长生命周期）。
-> 若生命周期不匹配，编译错误。这是 Rust 生命周期系统的常规行为，但 `CoercePointee` 增加了复杂度：coercion 现在同时涉及类型和生命周期两个维度。
+> 若生命周期（Lifetimes）不匹配，编译错误。这是 Rust 生命周期系统的常规行为，但 `CoercePointee` 增加了复杂度：coercion 现在同时涉及类型和生命周期两个维度。
 > 这与 `&'a String` → `&'a str` 的自动 coercion（Deref coercion）类似——`CoercePointee` 将这一能力扩展到自定义智能指针。
 > [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]

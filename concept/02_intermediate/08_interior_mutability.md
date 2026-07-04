@@ -125,7 +125,7 @@ graph TD
 > **认知功能**: 此图展示内部可变性的**类型谱系**——从最简单的 `Cell` 到复杂的 `RwLock`，以及对应的安全保证层级。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)]
 > **使用建议**: 优先使用最简单的类型满足需求：`Cell` > `RefCell` > `Mutex` > `RwLock`。
-> **关键洞察**: 内部可变性的选择是**安全-性能-灵活性**的权衡——越简单的类型（Cell）运行时开销越小，但功能越受限。
+> **关键洞察**: 内部可变性的选择是**安全-性能-灵活性**的权衡——越简单的类型（Cell）运行时（Runtime）开销越小，但功能越受限。
 > [来源: [std::cell Documentation](https://doc.rust-lang.org/std/cell/index.html)]
 
 ---
@@ -599,7 +599,7 @@ fn main() {
 ```
 
 > **修正**:
-> `RefCell` 提供**单线程内部可变性**：运行时检查借用规则。
+> `RefCell` 提供**单线程内部可变性**：运行时检查借用（Borrowing）规则。
 > `borrow()` 增加共享计数，`borrow_mut()` 检查共享计数为 0，否则 panic。
 > 同一 `RefCell` 上两次 `borrow_mut()`（即使同一线程）→ `already borrowed: BorrowMutError` panic。
 > 这是**运行时**错误，非编译错误——编译器无法静态验证 `RefCell` 的内部状态。
@@ -779,7 +779,7 @@ fn main() {
 这是 Rust 中实现**图结构**、**双向链表**等复杂数据结构的经典模式。但需注意：
 
 - 仅单线程（`Rc` 不是 `Send`）
-- 可能形成循环引用 → 配合 `Weak<T>` 使用
+- 可能形成循环引用（Reference） → 配合 `Weak<T>` 使用
 - 运行时 panic 风险 → 避免 `borrow_mut()` 嵌套
 
 </details>

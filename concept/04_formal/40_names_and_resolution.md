@@ -18,7 +18,6 @@
 
 ---
 
-
 ---
 
 ## 认知路径
@@ -31,7 +30,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与名称、作用域与解析（Names, Scopes and Re的适用边界。
 5. **迁移应用**: 将 名称、作用域与解析（Names, Scopes and Re 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -41,7 +39,6 @@
 > **反命题 2**: "忽略 名称、作用域与解析（Names, Scopes and Re 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 名称、作用域与解析（Names, Scopes and Re 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 名称、作用域与解析（Names, Scopes and Re 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 名称、作用域与解析（Names, Scopes and Re 具有语言特有的形态。
-
 
 ## 一、实体与声明
 
@@ -71,7 +68,7 @@
 - 值命名空间（value namespace）
 - 类型命名空间（type namespace）
 - 宏命名空间（macro namespace）
-- 生命周期命名空间（lifetime namespace）
+- 生命周期（Lifetimes）命名空间（lifetime namespace）
 
 例如，可以同时定义一个名为 `Foo` 的模块（Module）和一个名为 `Foo` 的函数，因为它们处于不同命名空间。
 
@@ -79,10 +76,10 @@
 
 ## 三、作用域（Scopes）
 
-作用域是源代码区域，在该区域内某个名称可以被引用。Rust 中的作用域包括：
+作用域是源代码区域，在该区域内某个名称可以被引用（Reference）。Rust 中的作用域包括：
 
 - 整个 crate
-- 模块体
+- 模块（Module）体
 - 块表达式
 - 函数/闭包（Closures）体
 - `match` 臂
@@ -140,4 +137,4 @@
 | [Preludes](../01_foundation/35_preludes.md) | prelude 注入隐式声明的名称 |
 | [Name Resolution and HIR](35_name_resolution_and_hir.md) | 编译器内部名称解析与 HIR 表示 |
 | [Linkage](../03_advanced/27_linkage.md) | 名称解析影响链接器可见符号 |
-| [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) | 宏展开可以引入新名称 |
+| [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) | 宏（Macro）展开可以引入新名称 |

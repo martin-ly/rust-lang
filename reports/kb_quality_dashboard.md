@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-04T11:47:51.012402+00:00
+> 生成时间: 2026-07-04T12:59:36.952859+00:00
 > 扫描文件数: 382
 
 ## 全局指标
@@ -109,7 +109,7 @@
 | concept\01_foundation\02_borrowing.md | L1 | 1944 | 4 | 2 | 0 | 3 | 6 | 49 | 20 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\03_lifetimes.md | L1 | 1435 | 19 | 2 | 0 | 3 | 5 | 40 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\04_type_system.md | L1 | 2844 | 18 | 2 | 0 | 3 | 12 | 54 | 16 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\05_reference_semantics.md | L1 | 1439 | 3 | 2 | 0 | 4 | 7 | 35 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\05_reference_semantics.md | L1 | 1429 | 3 | 2 | 0 | 4 | 7 | 35 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\06_zero_cost_abstractions.md | L1 | 835 | 3 | 2 | 0 | 3 | 2 | 14 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\07_control_flow.md | L1 | 1576 | 3 | 2 | 0 | 3 | 5 | 25 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\08_collections.md | L1 | 866 | 3 | 2 | 0 | 3 | 2 | 16 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
@@ -238,7 +238,7 @@
 | concept\04_formal\21_type_semantics.md | L4 | 896 | 3 | 0 | 0 | 3 | 0 | 18 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | concept\04_formal\22_modern_verification_tools.md | L4 | 514 | 3 | 0 | 0 | 1 | 0 | 8 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | concept\04_formal\23_programming_language_foundations.md | L4 | 424 | 3 | 0 | 0 | 1 | 0 | 10 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
-| concept\04_formal\24_autoverus.md | L4 | 185 | 1 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
+| concept\04_formal\24_autoverus.md | L4 | 183 | 1 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | concept\04_formal\25_quiz_formal_methods.md | L4 | 621 | 7 | 0 | 0 | 1 | 0 | 10 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | concept\04_formal\26_trait_solver_in_rustc.md | L4 | 314 | 7 | 0 | 0 | 1 | 1 | 5 | 6 | ✅ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
 | concept\04_formal\27_type_checking_and_inference.md | L4 | 313 | 7 | 0 | 0 | 1 | 0 | 7 | 6 | ✅ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
@@ -361,8 +361,8 @@
 | concept\06_ecosystem\73_pattern_composition_algebra.md | L6 | 726 | 6 | 0 | 0 | 3 | 0 | 15 | 12 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | concept\06_ecosystem\74_formal_verification_tools.md | L6 | 942 | 6 | 0 | 0 | 3 | 0 | 12 | 12 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | concept\06_ecosystem\75_industrial_case_studies.md | L6 | 357 | 6 | 0 | 0 | 1 | 0 | 2 | 12 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
-| concept\06_ecosystem\76_cargo_196_features.md | L6 | 267 | 3 | 0 | 0 | 0 | 0 | 1 | 6 | ❌ | ✅ | ✅ | 进阶 / 工程 | 专家级 |
-| concept\06_ecosystem\77_rustdoc_196_changes.md | L6 | 239 | 3 | 0 | 0 | 0 | 0 | 3 | 6 | ❌ | ✅ | ✅ | 进阶 / 工程 | 专家级 |
+| concept\06_ecosystem\76_cargo_196_features.md | L6 | 264 | 3 | 0 | 0 | 0 | 0 | 1 | 6 | ❌ | ✅ | ✅ | 进阶 / 工程 | 专家级 |
+| concept\06_ecosystem\77_rustdoc_196_changes.md | L6 | 236 | 3 | 0 | 0 | 0 | 0 | 3 | 6 | ❌ | ✅ | ✅ | 进阶 / 工程 | 专家级 |
 | concept\06_ecosystem\78_cargo_workspaces.md | L6 | 271 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
 | concept\06_ecosystem\79_development_tools.md | L6 | 192 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | ❌ | ✅ | ✅ | 初学者 | 研究级 |
 | concept\06_ecosystem\80_cargo_getting_started.md | L6 | 88 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 初学者 | 参考级 |
@@ -372,7 +372,7 @@
 | concept\06_ecosystem\84_cargo_commands_reference.md | L6 | 82 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
 | concept\06_ecosystem\85_cargo_manifest_targets.md | L6 | 100 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
 | concept\06_ecosystem\86_cargo_registry_internals.md | L6 | 97 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 参考级 |
-| concept\07_future\01_ai_integration.md | L7 | 1012 | 5 | 0 | 0 | 2 | 2 | 9 | 8 | ✅ | ✅ | ✅ | 专家 | 实验级 |
+| concept\07_future\01_ai_integration.md | L7 | 1009 | 5 | 0 | 0 | 2 | 2 | 9 | 8 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | concept\07_future\02_formal_methods.md | L7 | 1663 | 9 | 0 | 0 | 1 | 9 | 9 | 3 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | concept\07_future\03_evolution.md | L7 | 2179 | 8 | 0 | 0 | 1 | 6 | 19 | 3 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | concept\07_future\04_effects_system.md | L7 | 1768 | 6 | 0 | 0 | 1 | 4 | 26 | 12 | ✅ | ✅ | ✅ | 专家 | 综述级 |
@@ -391,7 +391,7 @@
 | concept\07_future\18_async_drop_preview.md | L7 | 758 | 6 | 0 | 0 | 3 | 2 | 6 | 8 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | concept\07_future\19_rust_edition_preview.md | L7 | 67 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 研究级 |
 | concept\07_future\20_borrowsanitizer_preview.md | L7 | 660 | 4 | 0 | 0 | 3 | 3 | 7 | 8 | ✅ | ✅ | ✅ | 专家 | 实验级 |
-| concept\07_future\21_rust_in_ai.md | L7 | 777 | 6 | 0 | 0 | 3 | 1 | 7 | 12 | ✅ | ✅ | ✅ | 专家 | 综述级 |
+| concept\07_future\21_rust_in_ai.md | L7 | 778 | 6 | 0 | 0 | 3 | 1 | 7 | 12 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | concept\07_future\22_gen_blocks_preview.md | L7 | 743 | 7 | 0 | 0 | 4 | 3 | 6 | 14 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | concept\07_future\23_rust_edition_guide.md | L7 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 研究者 | 研究级 |
 | concept\07_future\24_roadmap.md | L7 | 1067 | 6 | 0 | 0 | 3 | 2 | 17 | 8 | ✅ | ✅ | ✅ | 专家 | 综述级 |
@@ -420,7 +420,7 @@
 | concept\07_future\48_aarch64_sve_sme_preview.md | L7 | 271 | 3 | 0 | 0 | 0 | 0 | 3 | 6 | ❌ | ✅ | ✅ | 专家 | 实验级 |
 | concept\07_future\49_rust_in_space.md | L7 | 100 | 3 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | concept\07_future\50_nightly_rust.md | L7 | 128 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | ❌ | ✅ | ✅ | 初学者 | 研究级 |
-| concept\07_future\borrow_sanitizer.md | L7 | 318 | 3 | 0 | 0 | 1 | 1 | 1 | 6 | ❌ | ✅ | ✅ | 专家 | 实验级 |
+| concept\07_future\borrow_sanitizer.md | L7 | 315 | 3 | 0 | 0 | 1 | 1 | 1 | 6 | ❌ | ✅ | ✅ | 专家 | 实验级 |
 | concept\07_future\rust_1_95_stabilized.md | L7 | 330 | 3 | 0 | 0 | 0 | 0 | 14 | 6 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
 | concept\07_future\rust_1_96_stabilized.md | L7 | 318 | 3 | 0 | 0 | 0 | 0 | 5 | 6 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
 | concept\07_future\rust_1_97_preview.md | L7 | 296 | 3 | 0 | 0 | 0 | 0 | 11 | 6 | ❌ | ✅ | ✅ | 进阶 | 参考级 |

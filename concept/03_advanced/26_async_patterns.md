@@ -306,7 +306,7 @@ async fn fixed() {
 
 > **修正**:
 > `Stream` 和 `Future` 是 Rust 异步（Async）生态中的两个核心 trait。
-> `Future` 代表**单次**异步计算，`Stream` 代表**多次**异步值序列。
+> `Future` 代表**单次**异步（Async）计算，`Stream` 代表**多次**异步值序列。
 > `Stream` 不实现 `Future`，必须通过 `StreamExt::next()` 获取 `Future<Item = Option<T>>`。
 > 这与 JavaScript 的 `AsyncIterator`（`for await...of`）类似，但 Rust 的区分更严格——编译器拒绝将 Stream 直接 await。
 > [来源: [futures-rs Documentation](https://docs.rs/futures/)]

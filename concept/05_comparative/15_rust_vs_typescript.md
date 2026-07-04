@@ -34,7 +34,7 @@
     - [2.4 WASM 互操作](#24-wasm-互操作)
   - [三、选型决策矩阵](#三选型决策矩阵)
   - [四、思维导图（Mermaid）](#四思维导图mermaid)
-    - [4.1 类型系统哲学对比图](#41-类型系统哲学对比图)
+    - [4.1 类型系统（Type System）哲学对比图](#41-类型系统哲学对比图)
     - [4.2 工程选型决策树](#42-工程选型决策树)
   - [五、反命题与边界分析](#五反命题与边界分析)
     - [5.1 反命题树](#51-反命题树)
@@ -488,7 +488,7 @@ graph TB
     style Common fill:#f5a623,color:#fff
 ```
 
-> **认知功能**: 此图揭示 TypeScript 和 Rust 的**共同目标**（消除运行时类型错误）与**不同路径**（擦除 vs 证明、渐进 vs 穷尽）。
+> **认知功能**: 此图揭示 TypeScript 和 Rust 的**共同目标**（消除运行时（Runtime）类型错误）与**不同路径**（擦除 vs 证明、渐进 vs 穷尽）。
 > [来源: [TypeScript Design Goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals)] · [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **关键洞察**: TypeScript 的"渐进"允许**局部收益**（给 JS 加类型即可获益），Rust 的"穷尽"要求**全局一致**（整个程序需满足所有权（Ownership）规则）。
 > [来源: 💡 原创分析]

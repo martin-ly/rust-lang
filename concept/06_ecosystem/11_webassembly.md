@@ -28,7 +28,7 @@
 
 ## 📑 目录
 
-- [WebAssembly 生态：Rust 的浏览器外运行时（Runtime）](#webassembly-生态rust-的浏览器外运行时)
+- [WebAssembly 生态：Rust 的浏览器外运行时](#webassembly-生态rust-的浏览器外运行时)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 WebAssembly 的设计哲学](#11-webassembly-的设计哲学)
@@ -43,21 +43,21 @@
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
-  - [五、工具链与运行时（Runtime）](#五工具链与运行时)
+  - [五、工具链与运行时](#五工具链与运行时)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：WebAssembly 的编译错误](#十边界测试webassembly-的编译错误)
     - [10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）](#101-边界测试wasm32-目标的标准库限制编译错误)
     - [10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）](#102-边界测试wasm-bindgen-的类型映射编译错误)
-    - [10.3 边界测试：WASM 的线性内存与 Rust 引用（Reference）的不兼容性（编译错误）](#103-边界测试wasm-的线性内存与-rust-引用的不兼容性编译错误)
+    - [10.3 边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）](#103-边界测试wasm-的线性内存与-rust-引用的不兼容性编译错误)
     - [10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）](#104-边界测试wasm32-unknown-unknown-的-panic-处理编译错误运行时陷阱)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：WebAssembly（WASM）相比 JavaScript 在性能上的主要优势是什么？（理解层）](#测验-1webassemblywasm相比-javascript-在性能上的主要优势是什么理解层)
     - [测验 2：Rust 编译为 WASM 时，为什么需要 `wasm-bindgen`？（理解层）](#测验-2rust-编译为-wasm-时为什么需要-wasm-bindgen理解层)
     - [测验 3：`wasm-pack` 在 Rust/WASM 工作流中扮演什么角色？（理解层）](#测验-3wasm-pack-在-rustwasm-工作流中扮演什么角色理解层)
-    - [测验 4：WASM 的线性内存（Linear Memory）模型是什么意思？Rust 的所有权（Ownership）系统如何与之交互？（理解层）](#测验-4wasm-的线性内存linear-memory模型是什么意思rust-的所有权系统如何与之交互理解层)
+    - [测验 4：WASM 的线性内存（Linear Memory）模型是什么意思？Rust 的所有权系统如何与之交互？（理解层）](#测验-4wasm-的线性内存linear-memory模型是什么意思rust-的所有权系统如何与之交互理解层)
     - [测验 5：WASM 目前有哪些主要限制，使得它还不能完全替代原生应用？（理解层）](#测验-5wasm-目前有哪些主要限制使得它还不能完全替代原生应用理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -533,7 +533,7 @@ pub extern "C" fn process(data: *mut u8, len: usize) {
 }
 ```
 
-> **修正**: WASM 的线性内存（Linear Memory）是一个连续的 byte 数组，Rust 的引用（Reference）（`&T`、`&mut T`）要求**非空、对齐、有效**。从 host 传递的指针可能：1) 为 null；2) 未对齐；3) 越界。`slice::from_raw_parts_mut` 不验证这些条件，违反即 UB。安全封装：1) 验证 `data != null`；2) 验证 `data + len <= memory_size`；3) 使用 `wasm-bindgen` 生成的绑定（自动处理类型转换）。这与 C 的 WASM 模块（同样需验证指针）或 AssemblyScript（类型安全的 TypeScript 子集编译到 WASM）类似——WASM 的低级接口需要显式安全检查。`wasm-bindgen` 和 `wit-bindgen` 提供高层绑定生成，减少手动指针操作。[来源: [WASM Linear Memory](https://webassembly.org/docs/modules/#linear-memory)] · [来源: [wasm-bindgen Documentation](https://rustwasm.github.io/docs/wasm-bindgen/)]
+> **修正**: WASM 的线性内存（Linear Memory）是一个连续的 byte 数组，Rust 的引用（Reference）（`&T`、`&mut T`）要求**非空、对齐、有效**。从 host 传递的指针可能：1) 为 null；2) 未对齐；3) 越界。`slice::from_raw_parts_mut` 不验证这些条件，违反即 UB。安全封装：1) 验证 `data != null`；2) 验证 `data + len <= memory_size`；3) 使用 `wasm-bindgen` 生成的绑定（自动处理类型转换）。这与 C 的 WASM 模块（Module）（同样需验证指针）或 AssemblyScript（类型安全的 TypeScript 子集编译到 WASM）类似——WASM 的低级接口需要显式安全检查。`wasm-bindgen` 和 `wit-bindgen` 提供高层绑定生成，减少手动指针操作。[来源: [WASM Linear Memory](https://webassembly.org/docs/modules/#linear-memory)] · [来源: [wasm-bindgen Documentation](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ### 10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）
 

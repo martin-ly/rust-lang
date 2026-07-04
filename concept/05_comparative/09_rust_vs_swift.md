@@ -27,8 +27,8 @@
   - [📑 目录](#-目录)
   - [一、核心对比](#一核心对比)
     - [1.1 内存管理模型](#11-内存管理模型)
-    - [1.2 类型系统（Type System）与安全性](#12-类型系统与安全性)
-    - [1.3 所有权（Ownership）与借用（Borrowing）](#13-所有权与借用)
+    - [1.2 类型系统与安全性](#12-类型系统与安全性)
+    - [1.3 所有权与借用](#13-所有权与借用)
   - [二、工程实践差异](#二工程实践差异)
     - [2.1 平台与生态](#21-平台与生态)
     - [2.2 互操作与 FFI](#22-互操作与-ffi)
@@ -42,14 +42,14 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 与 Swift 的编译错误对比](#十边界测试rust-与-swift-的编译错误对比)
-    - [10.1 边界测试：Swift 的 ARC 与 Rust 的所有权（Ownership）（编译错误）](#101-边界测试swift-的-arc-与-rust-的所有权编译错误)
+    - [10.1 边界测试：Swift 的 ARC 与 Rust 的所有权（编译错误）](#101-边界测试swift-的-arc-与-rust-的所有权编译错误)
     - [10.2 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）](#102-边界测试swift-的-optional-链与-rust-的--运算符编译错误)
-    - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权的循环引用（Reference）差异（运行时（Runtime）内存泄漏）](#103-边界测试swift-的-arc-与-rust-的所有权的循环引用差异运行时内存泄漏)
+    - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权的循环引用差异（运行时内存泄漏）](#103-边界测试swift-的-arc-与-rust-的所有权的循环引用差异运行时内存泄漏)
     - [10.4 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）](#104-边界测试swift-的-optional-链与-rust-的--运算符编译错误)
-    - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权内存管理对比（运行时（Runtime）差异）](#103-边界测试swift-的-arc-与-rust-的所有权内存管理对比运行时差异)
+    - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权内存管理对比（运行时差异）](#103-边界测试swift-的-arc-与-rust-的所有权内存管理对比运行时差异)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 和 Swift 在设计目标上有什么根本不同？（理解层）](#测验-1rust-和-swift-在设计目标上有什么根本不同理解层)
-    - [测验 2：Swift 使用自动引用（Reference）计数（ARC），Rust 使用所有权系统。两者在内存管理上有什么本质区别？（理解层）](#测验-2swift-使用自动引用计数arcrust-使用所有权系统两者在内存管理上有什么本质区别理解层)
+    - [测验 2：Swift 使用自动引用计数（ARC），Rust 使用所有权系统。两者在内存管理上有什么本质区别？（理解层）](#测验-2swift-使用自动引用计数arcrust-使用所有权系统两者在内存管理上有什么本质区别理解层)
     - [测验 3：Swift 的 `Optional<T>` 与 Rust 的 `Option<T>` 在语义和使用上是否相同？（理解层）](#测验-3swift-的-optionalt-与-rust-的-optiont-在语义和使用上是否相同理解层)
     - [测验 4：Swift 的协议（Protocol）与 Rust 的 trait 有什么主要区别？（理解层）](#测验-4swift-的协议protocol与-rust-的-trait-有什么主要区别理解层)
     - [测验 5：在跨平台开发中，Rust 相比 Swift 有什么优势？（理解层）](#测验-5在跨平台开发中rust-相比-swift-有什么优势理解层)
@@ -337,7 +337,7 @@
   └── Rust 更适合实时系统
 ```
 
-> **性能洞察**: **Rust 通常比 Swift 快 5-20%**——主要差异来自 ARC 的原子操作（Atomic Operations）开销和 Swift 的运行时初始化。
+> **性能洞察**: **Rust 通常比 Swift 快 5-20%**——主要差异来自 ARC 的原子操作（Atomic Operations）开销和 Swift 的运行时（Runtime）初始化。
 > [来源: [Benchmarks Game](https://benchmarksgame-team.pages.debian.net/benchmarksgame/)]
 
 ---
@@ -659,7 +659,7 @@ Rust 目标是系统编程（操作系统、浏览器引擎、嵌入式），追
 
 ### 测验 2：Swift 使用自动引用计数（ARC），Rust 使用所有权系统。两者在内存管理上有什么本质区别？（理解层）
 
-**题目**: Swift 使用自动引用计数（ARC），Rust 使用所有权系统。两者在内存管理上有什么本质区别？
+**题目**: Swift 使用自动引用（Reference）计数（ARC），Rust 使用所有权系统。两者在内存管理上有什么本质区别？
 
 <details>
 <summary>✅ 答案与解析</summary>

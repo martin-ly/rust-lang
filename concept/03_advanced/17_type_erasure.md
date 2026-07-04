@@ -49,11 +49,11 @@
   - [十、边界测试：类型擦除的编译错误](#十边界测试类型擦除的编译错误)
     - [10.1 边界测试：`dyn Trait` 的大小未知（编译错误）](#101-边界测试dyn-trait-的大小未知编译错误)
     - [10.2 边界测试：trait object 的方法返回 `Self`（编译错误）](#102-边界测试trait-object-的方法返回-self编译错误)
-    - [10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（Lifetimes）（编译错误）](#103-边界测试any-的-downcast_ref-与生命周期编译错误)
+    - [10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（编译错误）](#103-边界测试any-的-downcast_ref-与生命周期编译错误)
     - [10.4 边界测试：vtable 与对象安全的隐性约束（编译错误）](#104-边界测试vtable-与对象安全的隐性约束编译错误)
     - [10.3 边界测试：`dyn Trait` 与 `Sized` 边界的冲突（编译错误）](#103-边界测试dyn-trait-与-sized-边界的冲突编译错误)
-    - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型（Generics）约束（编译错误）](#104-边界测试dyn-trait-的-sized-要求与泛型约束编译错误)
-    - [10.6 边界测试：所有权（Ownership）移动后的再次使用](#106-边界测试所有权移动后的再次使用)
+    - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型约束（编译错误）](#104-边界测试dyn-trait-的-sized-要求与泛型约束编译错误)
+    - [10.6 边界测试：所有权移动后的再次使用](#106-边界测试所有权移动后的再次使用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`dyn Trait` 的大小为什么在编译时未知？它如何被实际使用？（理解层）](#测验-1dyn-trait-的大小为什么在编译时未知它如何被实际使用理解层)
     - [测验 2：`&dyn Trait` 在内存中的布局是什么？（理解层）](#测验-2dyn-trait-在内存中的布局是什么理解层)
@@ -694,7 +694,7 @@ fn main() {
 }
 ```
 
-> **修正**: Trait 对象（`dyn Trait`）通过 vtable 实现动态分发，vtable 在编译期生成，包含所有方法的函数指针。泛型方法（`fn process<T>`）无法在 vtable 中表示，因为 `T` 的可能实例无限——编译器不能为所有类型生成函数指针。因此含泛型方法的 trait 不是**对象安全**的（object-safe），不能作为 `dyn Trait` 使用。这与 C++ 的虚函数（无泛型虚函数，模板方法不能是虚的）或 Java 的泛型接口（类型擦除，泛型信息在运行时（Runtime）不可用）不同——Rust 在编译期拒绝非对象安全的 trait 对象，防止运行时类型错误。替代方案：将泛型方法改为关联函数或非泛型方法，或使用静态分发（`impl Trait`）。[来源: [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
+> **修正**: Trait 对象（`dyn Trait`）通过 vtable 实现动态分发，vtable 在编译期生成，包含所有方法的函数指针。泛型（Generics）方法（`fn process<T>`）无法在 vtable 中表示，因为 `T` 的可能实例无限——编译器不能为所有类型生成函数指针。因此含泛型方法的 trait 不是**对象安全**的（object-safe），不能作为 `dyn Trait` 使用。这与 C++ 的虚函数（无泛型虚函数，模板方法不能是虚的）或 Java 的泛型接口（类型擦除，泛型信息在运行时（Runtime）不可用）不同——Rust 在编译期拒绝非对象安全的 trait 对象，防止运行时类型错误。替代方案：将泛型方法改为关联函数或非泛型方法，或使用静态分发（`impl Trait`）。[来源: [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
 
 ### 10.3 边界测试：`dyn Trait` 与 `Sized` 边界的冲突（编译错误）
 
@@ -807,7 +807,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-使用 `downcast_ref::<T>()` 或 `downcast::<T>()`，它们依赖 `TypeId` 在运行时检查类型是否匹配，失败返回 `None` 或 `Err`。
+使用 `downcast_ref::<T>()` 或 `downcast::<T>()`，它们依赖 `TypeId` 在运行时（Runtime）检查类型是否匹配，失败返回 `None` 或 `Err`。
 </details>
 
 ---

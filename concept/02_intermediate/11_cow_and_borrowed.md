@@ -43,7 +43,7 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Cow 与借用（Borrowing）的编译错误](#十边界测试cow-与借用的编译错误)
-    - [10.1 边界测试：`Cow` 的写时复制与借用冲突（编译错误）](#101-边界测试cow-的写时复制与借用冲突编译错误)
+    - [10.1 边界测试：`Cow` 的写时复制与借用（Borrowing）冲突（编译错误）](#101-边界测试cow-的写时复制与借用冲突编译错误)
     - [10.2 边界测试：`Borrow` trait 与 `AsRef` 的误用（编译错误）](#102-边界测试borrow-trait-与-asref-的误用编译错误)
     - [10.3 边界测试：`Cow` 的 `ToOwned` 约束（编译错误）](#103-边界测试cow-的-toowned-约束编译错误)
     - [10.4 边界测试：`Cow` 在 `match` 中的所有权（Ownership）转移（编译错误）](#104-边界测试cow-在-match-中的所有权转移编译错误)
@@ -618,7 +618,7 @@ fn main() {
 > **修正**:
 > `Cow` 是枚举（Enum）（`enum Cow<'a, B> { Borrowed(&'a B), Owned(<B as ToOwned>::Owned) }`），在 `match` 中按值解构时，`Cow` 被移动，`Owned` 变体的内部值被取出。
 > 若需保留 `Cow`，应使用 `match &cow`（匹配引用（Reference））或 `cow.as_ref()`（获取 `&B`）。
-> `Cow` 的灵活性伴随着所有权复杂性：有时需要 `Cow` 本身（传递），有时需要内部值（使用），有时需要引用（Reference）（检查）。
+> `Cow` 的灵活性伴随着所有权（Ownership）复杂性：有时需要 `Cow` 本身（传递），有时需要内部值（使用），有时需要引用（Reference）（检查）。
 > 这与 `Option` 和 `Result` 的所有权管理相同——枚举（Enum）的按值匹配消耗所有者。
 > `Cow` 提供 `into_owned()`（无论借用或拥有，都转为拥有）和 `to_mut()`（转为可变引用（Mutable Reference），必要时克隆）简化常见模式。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] ·
@@ -642,7 +642,7 @@ fn main() {
 > **修正**:
 > `Cow<'a, B>`（Clone-on-Write）是**写时克隆**的智能指针（Smart Pointer）：`Borrowed(&'a B)` 持有借用，`Owned(B::Owned)` 持有所有权。
 > `into_owned()` 将 `Borrowed` 克隆为 `Owned`（若已是 `Owned` 则直接移动）。
-> 关键：`Cow::Borrowed(&s)` 的生命周期受 `s` 限制，但 `into_owned()` 返回的 `String` 拥有独立数据，生命周期不再关联。
+> 关键：`Cow::Borrowed(&s)` 的生命周期（Lifetimes）受 `s` 限制，但 `into_owned()` 返回的 `String` 拥有独立数据，生命周期不再关联。
 > 上述代码在**当前 Rust 中实际可以编译**——`into_owned()` 返回所有权。
 > 真正的 `Cow` 陷阱：
 >

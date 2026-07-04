@@ -49,9 +49,9 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Cranelift 后端预览的编译错误](#十边界测试cranelift-后端预览的编译错误)
-    - [10.1 边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行时（Runtime）差异）](#101-边界测试cranelift-的调试构建与-llvm-的语义差异运行时差异)
-    - [10.2 边界测试：Cranelift 不支持的平台特定内联汇编（Inline Assembly）（编译错误）](#102-边界测试cranelift-不支持的平台特定内联汇编编译错误)
-    - [10.3 边界测试：Cranelift 的尾调用优化缺失（运行时（Runtime）栈溢出）](#103-边界测试cranelift-的尾调用优化缺失运行时栈溢出)
+    - [10.1 边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行时差异）](#101-边界测试cranelift-的调试构建与-llvm-的语义差异运行时差异)
+    - [10.2 边界测试：Cranelift 不支持的平台特定内联汇编（编译错误）](#102-边界测试cranelift-不支持的平台特定内联汇编编译错误)
+    - [10.3 边界测试：Cranelift 的尾调用优化缺失（运行时栈溢出）](#103-边界测试cranelift-的尾调用优化缺失运行时栈溢出)
     - [10.4 边界测试：Cranelift 的 SIMD 向量类型宽度限制（编译错误）](#104-边界测试cranelift-的-simd-向量类型宽度限制编译错误)
     - [10.6 边界测试：Cranelift 的 debug 信息生成与 GDB 兼容性（调试困难）](#106-边界测试cranelift-的-debug-信息生成与-gdb-兼容性调试困难)
     - [10.5 边界测试：Cranelift 的调试构建与发布构建行为差异（运行时性能/语义差异）](#105-边界测试cranelift-的调试构建与发布构建行为差异运行时性能语义差异)
@@ -574,7 +574,7 @@ fn main() {
 > 使用场景：`cranelift = true` 在 `.cargo/config.toml` 中设置，仅影响 dev profile。
 > 注意：
 >
-> 1) 某些 unsafe 代码依赖 LLVM 的特定行为（如内联汇编的精确语义），Cranelift 可能不同；
+> 1) 某些 unsafe 代码依赖 LLVM 的特定行为（如内联汇编（Inline Assembly）的精确语义），Cranelift 可能不同；
 > 2) `wasm32` target 的 Cranelift 支持（wasmtime 使用）比 native 更成熟。
 >
 > 这与 Go 的 gc 编译器（自研，简单快速）vs gccgo（GCC 后端，优化强）或 Java 的 C1（客户端编译器，快）vs C2（服务器编译器，优化强）的分层策略类似——Rust 的双后端策略提供开发/生产的最优组合。

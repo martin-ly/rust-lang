@@ -110,7 +110,7 @@
 | P6-T2 | Rust 新版本特性对齐（跟踪 Release Notes） | 每6周 | 维护者 |
 | P6-T3 | 思维表征完整性检查（每文件是否包含≥2种表征） | 每季度 | 维护者 |
 | P6-T4 | 知识来源关系更新（新增论文、课程、工具） | 每季度 | 维护者 |
-| P6-T5 | 关系一致性审计（运行 audit_checklist.md） | 每季度 | 维护者 |
+| P6-T5 | 关系一致性（Coherence）审计（运行 audit_checklist.md） | 每季度 | 维护者 |
 | P6-T6 | 交叉概念一致性 diff 检查 | 每月 | 自动化脚本 |
 | P6-T7 | 社区反馈整合与修订 | 按需 | 维护者 |
 
@@ -437,12 +437,12 @@
 | P17-T7 | 新增 `07_future/13_unsafe_fields_preview.md` | 字段级 unsafe 标记、安全边界细化 | ✅ |
 | P17-T8 | 补充 02_async / 02_generics 来源标注（后台 Agent） | +30 来源标注 | ⚠️ 02_generics ✅ / 02_async Agent 超时 |
 | P17-T9 | 质量基线报告同步 | 全部指标刷新 | ✅ |
-| P17-T10 | 新增 `03_advanced/06_pin_unpin.md` | Pin 不动性、自引用类型、PhantomPinned、async 状态机 | ✅ |
+| P17-T10 | 新增 `03_advanced/06_pin_unpin.md` | Pin 不动性、自引用（Reference）类型、PhantomPinned、async 状态机 | ✅ |
 | P17-T11 | 新增 `06_ecosystem/13_logging_observability.md` | tracing、log、metrics、OpenTelemetry、分布式追踪 | ✅ |
 | P17-T12 | 新增 `02_intermediate/10_module_system.md` | Crate/Module/Package、可见性、use 声明、Workspace | ✅ |
 | P17-T13 | 新增 `04_formal/07_separation_logic.md` | * 算子、帧规则、CSL、Iris、RustBelt 应用映射 | ✅ |
 | P17-T14 | 新增 `07_future/18_async_drop_preview.md` | 异步（Async）资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs//3308-offset_of.html)、Pin 交互、workaround 模式 | ✅ |
-| P17-T15 | 新增 `05_comparative/07_rust_vs_python.md` | 静态 vs 动态类型、所有权 vs GC、 fearless vs GIL | ✅ |
+| P17-T15 | 新增 `05_comparative/07_rust_vs_python.md` | 静态 vs 动态类型、所有权（Ownership） vs GC、 fearless vs GIL | ✅ |
 | P17-T16 | 新增 `03_advanced/07_proc_macro.md` | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ |
 | P17-T17 | 新增 `06_ecosystem/14_documentation.md` | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ |
 | P17-T18 | 新增 `02_intermediate/11_cow_and_borrowed.md` | Clone-on-Write、零拷贝、ToOwned、API 灵活性 | ✅ |
@@ -506,7 +506,7 @@
 | P17-T47 | 新增 `06_ecosystem/24_cloud_native.md` | Axum、Actix、Firecracker、Vector | ✅ |
 | P17-T48 | 死链接清零 | 全量扫描 1400+ 文件，0 死链接 | ✅ |
 | P17-T49 | 来源标注率批量提升 | 24→0 文件 <10%，全部达标 | ✅ |
-| P17-T50 | 一致性修复 | 生命周期规则描述完善，0 提示 | ✅ |
+| P17-T50 | 一致性修复 | 生命周期（Lifetimes）规则描述完善，0 提示 | ✅ |
 
 **关键成果**:
 

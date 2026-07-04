@@ -77,11 +77,11 @@
   - [Newtype 与包装器模式：类型安全的零成本抽象（Zero-Cost Abstraction）](02_intermediate/14_newtype_and_wrapper.md)
   - [错误处理（Error Handling）深入：从 Result 到自定义错误生态](02_intermediate/16_error_handling_deep_dive.md)
   - Rust 迭代器（Iterator）模式
-  - [迭代器（Iterator）模式：Rust 的惰性计算与零成本抽象](02_intermediate/16_iterator_patterns.md)
+  - [迭代器（Iterator）模式：Rust 的惰性计算与零成本抽象（Zero-Cost Abstraction）](02_intermediate/16_iterator_patterns.md)
   - 宏（Macro）模式：编译期代码生成的工程实践
-  - 生命周期（Lifetimes）高级主题：从 HRTB 到自引用类型
+  - 生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型
   - [高级 Trait 主题：从关联类型到特化](02_intermediate/19_advanced_traits.md)
-  - [高级类型系统：从关联类型到类型级编程](02_intermediate/20_type_system_advanced.md)
+  - [高级类型系统（Type System）：从关联类型到类型级编程](02_intermediate/20_type_system_advanced.md)
   - [元编程：Rust 的编译期代码生成与变换](02_intermediate/21_metaprogramming.md)
 
 - [L3 高级概念层索引（Advanced Layer Index）](03.md)
@@ -124,7 +124,7 @@
   - 类型推断（Type Inference）：Hindley-Milner 算法与 Rust 的工业实现
   - [线性逻辑在 Rust 中的工程应用](04_formal/09_linear_logic_applications.md)
   - [范畴论与 Rust：从函子到单子](04_formal/10_category_theory.md)
-  - [分离逻辑：Rust 所有权的形式化根基](04_formal/11_separation_logic.md)
+  - [分离逻辑：Rust 所有权（Ownership）的形式化根基](04_formal/11_separation_logic.md)
   - [指称语义与领域理论](04_formal/12_denotational_semantics.md)
   - [形式化方法在 Rust 中的应用](04_formal/13_formal_methods.md)
   - [Lambda 演算与 Rust 计算模型](04_formal/14_lambda_calculus.md)
@@ -188,7 +188,7 @@
   - [Embedded Graphics in Rust（嵌入式图形）](06_ecosystem/53_embedded_graphics.md)
   - [Advanced WebAssembly in Rust（高级 WebAssembly）](06_ecosystem/54_webassembly_advanced.md)
   - [Rust for Data Science（数据科学）](06_ecosystem/55_rust_for_data_science.md)
-  - [WebAssembly 生态：Rust 的浏览器外运行时](06_ecosystem/11_webassembly.md)
+  - [WebAssembly 生态：Rust 的浏览器外运行时（Runtime）](06_ecosystem/11_webassembly.md)
   - [Rust 测试策略：从单元测试到属性验证](06_ecosystem/12_testing_strategies.md)
   - [日志与可观测性：Rust 服务端监控生态](06_ecosystem/13_logging_observability.md)
   - [文档生态：rustdoc、文档测试与 API 文档规范](06_ecosystem/14_documentation.md)
@@ -237,7 +237,7 @@
   - [Unsafe Fields 预研：字段级安全边界的精确标注](07_future/13_unsafe_fields_preview.md)
   - [Ferrocene 预研：Rust 的安全关键认证之路](07_future/35_ferrocene_preview.md)
   - [Lifetime Capture in `impl Trait` Preview](07_future/14_lifetime_capture_preview.md)
-  - [Gen Blocks 预研：超越异步的泛化生成器](07_future/22_gen_blocks_preview.md)
+  - [Gen Blocks 预研：超越异步（Async）的泛化生成器](07_future/22_gen_blocks_preview.md)
   - [RPITIT Preview](07_future/37_rpitit_preview.md)
   - [Cranelift 后端预研：Rust 编译器的快速调试编译](07_future/38_cranelift_backend_preview.md)
   - [TAIT Preview](07_future/16_type_alias_impl_trait_preview.md)

@@ -437,7 +437,7 @@ async fn producer_fixed(tx: mpsc::Sender<i32>) {
 }
 ```
 
-> **修正**: 流处理系统的核心挑战之一是**背压**（backpressure）——当消费者速度慢于生产者时，如何防止内存溢出。Rust 的 `tokio::sync::mpsc::channel(n)` 是有界 channel，缓冲区满时 `send().await` 挂起，自然传播背压。`UnboundedSender` 无此保护，可能导致 OOM。这与 Flink 的显式背压机制或 Kafka 的拉取模型不同——Rust 的背压是"隐式的"，由 `await` 点的挂起自然产生，无需额外 API。这是所有权 + async/await + 有界 channel 的结合成果。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+> **修正**: 流处理系统的核心挑战之一是**背压**（backpressure）——当消费者速度慢于生产者时，如何防止内存溢出。Rust 的 `tokio::sync::mpsc::channel(n)` 是有界 channel，缓冲区满时 `send().await` 挂起，自然传播背压。`UnboundedSender` 无此保护，可能导致 OOM。这与 Flink 的显式背压机制或 Kafka 的拉取模型不同——Rust 的背压是"隐式的"，由 `await` 点的挂起自然产生，无需额外 API。这是所有权（Ownership） + async/await + 有界 channel 的结合成果。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.3 边界测试：背压（backpressure）与无界通道的内存爆炸（运行时 OOM）
 

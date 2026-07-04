@@ -13,7 +13,7 @@
 > **前置依赖**: [类型系统（Type System）](../01_foundation/04_type_system.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · 形式化验证 · [生命周期（Lifetimes）](../01_foundation/03_lifetimes.md)
 > **后置延伸**: [编译器内部原理](45_compiler_internals.md) · [安全与密码学](43_security_cryptography.md) · [嵌入式系统](22_embedded_systems.md)
 >
-> **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://github.com/verus-lang/verusverus/guide/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://github.com/verus-lang/verus/guide/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 ---
 
@@ -41,12 +41,12 @@
   - [三、模型检验工具](#三模型检验工具)
     - [3.1 Kani：基于 CBMC 的 Rust 验证器](#31-kani基于-cbmc-的-rust-验证器)
       - [Kani 0.66 新特性（2026-05 发布）](#kani-066-新特性2026-05-发布)
-    - [3.2 MIRI：运行时（Runtime） UB 检测器](#32-miri运行时-ub-检测器)
+    - [3.2 MIRI：运行时 UB 检测器](#32-miri运行时-ub-检测器)
   - [四、演绎验证工具](#四演绎验证工具)
     - [4.1 Prusti：Viper 分离逻辑验证器](#41-prustiviper-分离逻辑验证器)
     - [4.2 Creusot：Why3/WhyML 验证器](#42-creusotwhy3whyml-验证器)
     - [4.3 Verus：SMT-LIB 验证器](#43-verussmt-lib-验证器)
-  - [五、类型系统（Type System）扩展](#五类型系统扩展)
+  - [五、类型系统扩展](#五类型系统扩展)
     - [5.1 Flux：精化类型（Refinement Types）](#51-flux精化类型refinement-types)
     - [5.2 Aeneas：向函数式语言的转换](#52-aeneas向函数式语言的转换)
   - [六、验证工具对比与选型](#六验证工具对比与选型)
@@ -62,7 +62,7 @@
     - [8.2 边界极限](#82-边界极限)
   - [九、边界测试](#九边界测试)
     - [9.1 边界测试：Kani 数组越界未被 harness 覆盖（验证盲区）](#91-边界测试kani-数组越界未被-harness-覆盖验证盲区)
-    - [9.2 边界测试：MIRI 无法检测未执行的 unsafe 路径（运行时（Runtime）盲区）](#92-边界测试miri-无法检测未执行的-unsafe-路径运行时盲区)
+    - [9.2 边界测试：MIRI 无法检测未执行的 unsafe 路径（运行时盲区）](#92-边界测试miri-无法检测未执行的-unsafe-路径运行时盲区)
     - [9.3 边界测试：Prusti 前置条件过强导致合法调用被拒绝（假阴性）](#93-边界测试prusti-前置条件过强导致合法调用被拒绝假阴性)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
@@ -431,7 +431,7 @@ Rust 源码 → Creusot 前端 → WhyML → Why3 → SMT 求解器 (Alt-Ergo/Z3
 
 ### 4.3 Verus：SMT-LIB 验证器
 
-> **[Verus](https://github.com/verus-lang/verus)** 是 Microsoft Research 开发的 Rust 验证器，专注于**系统软件验证**。核心设计：将 Rust 代码和规格翻译为 **SMT-LIB**，由 Z3 求解器验证。特色支持：**可执行规格**（Executable Specifications）和**幽灵类型**（Ghost Types）。[来源: [Verus Documentation](https://github.com/verus-lang/verusverus/guide/)]
+> **[Verus](https://github.com/verus-lang/verus)** 是 Microsoft Research 开发的 Rust 验证器，专注于**系统软件验证**。核心设计：将 Rust 代码和规格翻译为 **SMT-LIB**，由 Z3 求解器验证。特色支持：**可执行规格**（Executable Specifications）和**幽灵类型**（Ghost Types）。[来源: [Verus Documentation](https://github.com/verus-lang/verus/guide/)]
 
 ```rust
 // Verus 验证示例
@@ -480,7 +480,7 @@ fn binary_search(v: &Vec<u64>, k: u64) -> (r: usize)
 | **所有权（Ownership）追踪** | 利用 Rust 的所有权系统简化验证条件生成 |
 | **线性类型** | 支持线性 ghost 状态，追踪资源使用 |
 
-> **来源**: [Verus Paper — OSDI 2023](https://www.microsoft.com/en-us/research/publication/verus-verifying-rust-programs-using-linear-ghost-types/) · [Verus Guide](https://github.com/verus-lang/verusverus/guide/guide/) · [Z3 SMT Solver](https://github.com/Z3Prover/z3)
+> **来源**: [Verus Paper — OSDI 2023](https://www.microsoft.com/en-us/research/publication/verus-verifying-rust-programs-using-linear-ghost-types/) · [Verus Guide](https://github.com/verus-lang/verus/guide/guide/) · [Z3 SMT Solver](https://github.com/Z3Prover/z3)
 
 ---
 
@@ -537,7 +537,7 @@ Flux 精化类型:    Vec<i32{v: v>0}>  →  编译期还保证所有元素 > 0
 
 ### 5.2 Aeneas：向函数式语言的转换
 
-> **[Aeneas](https://github.com/AeneasVerif/aeneas)** 是 Inria 和 Microsoft Research 合作开发的项目，将 Rust 代码翻译为**纯函数式语言**（Lean、Coq、F*），利用交互式定理证明器进行验证。核心方法：**基于区域的内存模型**（Region-based Memory Model）——将 Rust 的所有权系统显式建模为区域效应。[来源: [Aeneas Paper — ICFP 2022](https://hal.science/hal-04196909/document)]
+> **[Aeneas](https://github.com/AeneasVerif/aeneas)** 是 Inria 和 Microsoft Research 合作开发的项目，将 Rust 代码翻译为**纯函数式语言**（Lean、Coq、F*），利用交互式定理证明器进行验证。核心方法：**基于区域的内存模型**（Region-based Memory Model）——将 Rust 的所有权（Ownership）系统显式建模为区域效应。[来源: [Aeneas Paper — ICFP 2022](https://hal.science/hal-04196909/document)]
 
 ```text
 Aeneas 翻译流水线:
@@ -575,7 +575,7 @@ Rust MIR
 | **Unsafe 代码** | ✅ 支持 | ✅ 支持 | ❌ 不支持 | ❌ 不支持 | ⚠️ 有限 | ❌ 不支持 |
 | **CI 集成** | ✅ cargo kani | ✅ cargo miri | ⚠️ 复杂 | ⚠️ 复杂 | ✅ cargo verus | ⚠️ 实验性 |
 
-> **来源**: [Kani vs MIRI](https://model-checking.github.io/kani/usage.html) · [Verus vs Prusti](https://github.com/verus-lang/verusverus/guide/guide/compare.html)
+> **来源**: [Kani vs MIRI](https://model-checking.github.io/kani/usage.html) · [Verus vs Prusti](https://github.com/verus-lang/verus/guide/guide/compare.html)
 
 ### 6.2 选型决策树
 

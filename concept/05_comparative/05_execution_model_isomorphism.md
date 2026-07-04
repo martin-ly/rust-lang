@@ -208,7 +208,7 @@ handle.join().unwrap();
 
 > **同构性评价**:
 > Rust 1:1 线程与 Go goroutine 在**进程代数 CCS 层面**同构——两者都是独立的并发执行单元，可通过 channel / 共享内存通信。
-> 但在**资源模型**上不同构：Rust 线程是「重量级资源」（OS 可见），Go goroutine 是「轻量级对象」（运行时管理）。
+> 但在**资源模型**上不同构：Rust 线程是「重量级资源」（OS 可见），Go goroutine 是「轻量级对象」（运行时（Runtime）管理）。
 > [来源: rustvsgo.com; Go Runtime Scheduler 文档]
 
 ---
@@ -290,7 +290,7 @@ sequenceDiagram
     end
 ```
 
-> **认知功能**: 可视化 Future 的惰性执行与唤醒协议，揭示异步调度的核心机制。使用建议：确保在 `Pending` 路径中正确注册 Waker，避免在 `poll` 中执行阻塞操作。关键洞察：Rust 异步的本质不是"运行"而是"被询问是否就绪"——这与 goroutine 的立即调度形成根本语义差异。[来源: 💡 原创分析]
+> **认知功能**: 可视化 Future 的惰性执行与唤醒协议，揭示异步（Async）调度的核心机制。使用建议：确保在 `Pending` 路径中正确注册 Waker，避免在 `poll` 中执行阻塞操作。关键洞察：Rust 异步的本质不是"运行"而是"被询问是否就绪"——这与 goroutine 的立即调度形成根本语义差异。[来源: 💡 原创分析]
 
 ### 4.3 与 Go goroutine 的本质差异
 >
@@ -635,7 +635,7 @@ xychart-beta
 
 > 七维度：内存效率、启动速度、调度透明性、并行表达力、并发表达力、容错能力、生态一致性（Coherence）
 > **认知功能**: 多维量化对比不同语言/运行时的执行模型特征，将抽象权衡转化为可直观比较的形状。
-> 使用建议：用雷达图识别技术选型的核心 trade-off——Rust 强在内存效率与并行表达力，Go 强在调度透明性与生态一致性。
+> 使用建议：用雷达图识别技术选型的核心 trade-off——Rust 强在内存效率与并行表达力，Go 强在调度透明性与生态一致性（Coherence）。
 > 关键洞察：语言设计哲学直接决定雷达图轮廓——无 GC 带来内存效率优势，但也以启动速度和调度透明性为代价。
 > [来源: 💡 原创分析]
 
@@ -681,7 +681,7 @@ graph TD
 | T-EM-001 | async 与 goroutine 不同构 | 无栈协程 vs 有栈协程 | 语义不等价 | 续体理论 / 栈语义 | 忽略调度语义差异 | — |
 | T-EM-002 | Acquire-Release 同步 | Release store + Acquire load 读取到值 | happens-before 建立 | C11 内存模型 | `Relaxed` / 数据竞争 | — |
 | T-EM-003 | async/CPS/状态机 三重等价 | Well-typed async fn + Pin 契约 | 三种形式 poll 语义等价 | λ 演算 + 续体 | `unsafe` Pin 破坏 | — |
-| T-EM-004 | channel move 无竞争 | Safe Rust + mpsc | 发送后使用编译期拒绝 | 所有权唯一性 | `unsafe` 保留引用（Reference） | E0382 |
+| T-EM-004 | channel move 无竞争 | Safe Rust + mpsc | 发送后使用编译期拒绝 | 所有权（Ownership）唯一性 | `unsafe` 保留引用（Reference） | E0382 |
 | T-EM-005 | Actor 单线程安全 | Actor mailbox 串行处理 | 无需锁即可修改状态 | Actor 顺序语义 | `unsafe` / 多线程直接访问 | — |
 | T-EM-006 | Fork-Join 工作窃取有界 | rayon 调度器 | T_p ≤ T_1/P + T_∞ | Blelloch 工作度量 | 无限递归 / 非结构化并行 | — |
 

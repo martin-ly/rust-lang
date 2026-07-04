@@ -259,7 +259,7 @@ graph TD
 <details>
 <summary>✅ 答案与解析</summary>
 
-自引用类型（如异步状态机）需要 `Pin` 保证内存不移动，但 `Pin<&mut T>` 不能自由重新借用（Borrowing），导致大量模板代码和不直观的错误信息。
+自引用（Reference）类型（如异步（Async）状态机）需要 `Pin` 保证内存不移动，但 `Pin<&mut T>` 不能自由重新借用（Borrowing），导致大量模板代码和不直观的错误信息。
 </details>
 
 ---
@@ -283,7 +283,7 @@ graph TD
 <details>
 <summary>✅ 答案与解析</summary>
 
-`pin!` 宏在栈上创建 pinned 值，无需 `Box::pin` 的堆分配。简化了测试和局部异步代码中的 pinning 操作。
+`pin!` 宏（Macro）在栈上创建 pinned 值，无需 `Box::pin` 的堆分配。简化了测试和局部异步代码中的 pinning 操作。
 </details>
 
 ---

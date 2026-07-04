@@ -57,10 +57,10 @@
   - [十二、边界测试：高级集合的编译错误](#十二边界测试高级集合的编译错误)
     - [12.1 边界测试：`BTreeMap` 键未实现 `Ord`（编译错误）](#121-边界测试btreemap-键未实现-ord编译错误)
     - [12.2 边界测试：`VecDeque` 容量与索引的环绕（逻辑错误）](#122-边界测试vecdeque-容量与索引的环绕逻辑错误)
-    - [10.3 边界测试：`HashMap` 的 `Entry` API 与借用（Borrowing）冲突（编译错误）](#103-边界测试hashmap-的-entry-api-与借用冲突编译错误)
+    - [10.3 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#103-边界测试hashmap-的-entry-api-与借用冲突编译错误)
     - [10.4 边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错误）](#104-边界测试btreemap-的-range-查询与可变遍历编译错误)
-    - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（Coherence）（运行时（Runtime）逻辑错误）](#105-边界测试hashset-的自定义哈希与-hash-一致性运行时逻辑错误)
-    - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用（Borrowing）冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
+    - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（运行时逻辑错误）](#105-边界测试hashset-的自定义哈希与-hash-一致性运行时逻辑错误)
+    - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
     - [10.6 边界测试：`BTreeMap` 的键修改与排序不变性破坏（逻辑错误/UB）](#106-边界测试btreemap-的键修改与排序不变性破坏逻辑错误ub)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`BTreeMap` 与 `HashMap` 在键的遍历顺序上有什么本质区别？（理解层）](#测验-1btreemap-与-hashmap-在键的遍历顺序上有什么本质区别理解层)
@@ -865,7 +865,7 @@ fn main() {
 
 > **修正**:
 > `HashMap::entry` 返回 `Entry` enum，它**可变借用（Mutable Borrow）**整个 map（`&mut self`）。
-> 在 `entry` 调用期间，不能有任何对 map 的其他借用（无论是可变还是不可变）。
+> 在 `entry` 调用期间，不能有任何对 map 的其他借用（Borrowing）（无论是可变还是不可变）。
 > `Entry` API 的设计：`Occupied`（键存在）和 `Vacant`（键不存在），统一了插入和更新的语义。
 > 常见模式：`map.entry(key).and_modify(|v| v.push(4)).or_insert(vec![4])`。
 > 这与 C++ 的 `std::map::operator[]`（自动插入默认值，但返回引用（Reference）不解决借用冲突）或 Java 的 `Map.compute`（类似，但无编译期借用检查）不同——Rust 的 `Entry` API 在类型系统（Type System）层面保证操作的原子性（从调用者视角）。

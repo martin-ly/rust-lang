@@ -49,7 +49,7 @@
     - [2.2 Actix-web](#22-actix-web)
   - [三、基础设施](#三基础设施)
     - [3.1 服务网格](#31-服务网格)
-    - [3.2 容器运行时（Runtime）](#32-容器运行时)
+    - [3.2 容器运行时](#32-容器运行时)
     - [3.3 可观测性](#33-可观测性)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -60,8 +60,8 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：云原生开发的编译错误](#十边界测试云原生开发的编译错误)
-    - [10.1 边界测试：异步（Async）运行时（Runtime）混用（编译错误）](#101-边界测试异步运行时混用编译错误)
-    - [10.2 边界测试：配置结构的反序列化生命周期（Lifetimes）（编译错误）](#102-边界测试配置结构的反序列化生命周期编译错误)
+    - [10.1 边界测试：异步运行时混用（编译错误）](#101-边界测试异步运行时混用编译错误)
+    - [10.2 边界测试：配置结构的反序列化生命周期（编译错误）](#102-边界测试配置结构的反序列化生命周期编译错误)
     - [10.6 边界测试：Kubernetes 的优雅关闭与 `SIGTERM` 处理（运行时数据丢失）](#106-边界测试kubernetes-的优雅关闭与-sigterm-处理运行时数据丢失)
     - [10.5 边界测试：Kubernetes 探针配置不当导致的级联重启（运行时可用性下降）](#105-边界测试kubernetes-探针配置不当导致的级联重启运行时可用性下降)
     - [10.3 边界测试：Kubernetes 的 readiness 与 liveness 探针混淆（运行时可用性下降）](#103-边界测试kubernetes-的-readiness-与-liveness-探针混淆运行时可用性下降)
@@ -564,7 +564,7 @@ fn main() {
 > 1) 统一使用一个运行时；
 > 2) 使用 `async-compat` crate 适配；
 > 3) 仅混用计算型 future（无 I/O）。
-> 这与 Go 的单一运行时（goroutine + netpoller）不同——Rust 的异步生态允许多个运行时竞争，但要求开发者明确选择。
+> 这与 Go 的单一运行时（goroutine + netpoller）不同——Rust 的异步（Async）生态允许多个运行时竞争，但要求开发者明确选择。
 > [来源: [Tokio Documentation](https://docs.rs/tokio/)] ·
 > [来源: [Tokio Documentation](https://docs.rs/Tokio/)]
 
@@ -589,7 +589,7 @@ fn main() {
 > **修正**: `serde::Deserialize` 为带有生命周期（Lifetimes）参数的 struct 生成反序列化实现时，要求生命周期与反序列化器的数据源绑定。
 > 但 `serde_json::from_str` 返回的 `Config` 必须拥有独立生命周期（Lifetimes）——它无法持有对输入字符串的引用（Reference）（因为输入字符串可能在函数返回后被释放）。
 > 正确做法是使用 `String` 而非 `&str`，让 `Config` 拥有数据。
-> 这与 Go 的 `json.Unmarshal`（总是复制到目标结构）或 Python 的 `json.loads`（无生命周期概念）不同
+> 这与 Go 的 `json.Unmarshal`（总是复制到目标结构）或 Python 的 `json.loads`（无生命周期（Lifetimes）概念）不同
 > ——Rust 的生命周期系统强制区分"拥有"和"借用（Borrowing）"，在反序列化场景中通常要求"拥有"。
 > [来源: [Serde Documentation](https://serde.rs/)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]

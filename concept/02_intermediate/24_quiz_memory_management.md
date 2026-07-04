@@ -330,8 +330,8 @@ fn main() {
 | 适用类型 | `Copy` 类型 | 任意类型 |
 | 获取内部值 | `.get()`（复制值） | `.borrow()`（返回引用（Reference）） |
 | 修改 | `.set(new_val)` | `.borrow_mut()` |
-| 运行时检查 | 无（因为值被复制） | 有（借用（Borrowing）规则检查） |
-| 开销 | 最低 | 较低（引用计数） |
+| 运行时（Runtime）检查 | 无（因为值被复制） | 有（借用（Borrowing）规则检查） |
+| 开销 | 最低 | 较低（引用（Reference）计数） |
 
 **为什么 `Cell` 不需要运行时借用（Borrowing）检查**：
 

@@ -35,7 +35,7 @@
     - [1.2 并发模型](#12-并发模型)
     - [1.3 平台与生态](#13-平台与生态)
   - [二、语言特性差异](#二语言特性差异)
-    - [2.1 类型推断（Type Inference）与泛型（Generics）](#21-类型推断与泛型)
+    - [2.1 类型推断与泛型](#21-类型推断与泛型)
     - [2.2 扩展函数与 Trait](#22-扩展函数与-trait)
     - [2.3 协程与 async/await](#23-协程与-asyncawait)
   - [三、工程实践差异](#三工程实践差异)
@@ -52,7 +52,7 @@
   - [十、边界测试：Rust 与 Kotlin 的编译错误对比](#十边界测试rust-与-kotlin-的编译错误对比)
     - [10.1 边界测试：Kotlin 的可空类型与 Rust 的 Option（编译错误）](#101-边界测试kotlin-的可空类型与-rust-的-option编译错误)
     - [10.2 边界测试：Kotlin 的 data class 与 Rust 的 derive（编译错误）](#102-边界测试kotlin-的-data-class-与-rust-的-derive编译错误)
-    - [10.3 边界测试：Kotlin 的协程与 Rust 的 async 的调度模型差异（运行时（Runtime）死锁）](#103-边界测试kotlin-的协程与-rust-的-async-的调度模型差异运行时死锁)
+    - [10.3 边界测试：Kotlin 的协程与 Rust 的 async 的调度模型差异（运行时死锁）](#103-边界测试kotlin-的协程与-rust-的-async-的调度模型差异运行时死锁)
     - [10.4 边界测试：Kotlin 的 null safety 与 Rust 的 `Option` 的语法差异（编译错误）](#104-边界测试kotlin-的-null-safety-与-rust-的-option-的语法差异编译错误)
     - [10.3 边界测试：Kotlin 的 nullable 类型与 Rust 的 Option 显式处理（编译错误）](#103-边界测试kotlin-的-nullable-类型与-rust-的-option-显式处理编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -703,7 +703,7 @@ fn main() {
 }
 ```
 
-> **修正**: Kotlin 的 **null safety** 通过编译期检查和语法糖（`?.`、`?:`、`!!`）实现：`.?` 安全调用（null 时返回 null），`?:` Elvis 运算符（null 时返回默认值），`!!` 非空断言（null 时 NPE）。Rust 的 `Option<T>` 提供相同的安全保证，但语法更冗长：`map`（`?.` 的等价）、`unwrap_or`（`?:` 的等价）、`unwrap`（`!!` 的等价，panic 而非 NPE）。Kotlin 的语法更简洁，Rust 的方法链更灵活（可组合任意转换）。两者都消除了 null 指针异常——Kotlin 在 JVM 层面将 `T?` 映射为 `T` 或 `null`，Rust 在类型层面将 `Option<T>` 与 `T` 区分。这与 Swift 的 `Optional`（类似 Kotlin，有 `?.` 和 `??`）或 TypeScript 的 `strictNullChecks`（编译期检查，但运行时仍是 JavaScript 的 null）类似——现代语言都在消除 null 的危害，实现方式各异。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Kotlin Null Safety](https://kotlinlang.org/docs/null-safety.html)]
+> **修正**: Kotlin 的 **null safety** 通过编译期检查和语法糖（`?.`、`?:`、`!!`）实现：`.?` 安全调用（null 时返回 null），`?:` Elvis 运算符（null 时返回默认值），`!!` 非空断言（null 时 NPE）。Rust 的 `Option<T>` 提供相同的安全保证，但语法更冗长：`map`（`?.` 的等价）、`unwrap_or`（`?:` 的等价）、`unwrap`（`!!` 的等价，panic 而非 NPE）。Kotlin 的语法更简洁，Rust 的方法链更灵活（可组合任意转换）。两者都消除了 null 指针异常——Kotlin 在 JVM 层面将 `T?` 映射为 `T` 或 `null`，Rust 在类型层面将 `Option<T>` 与 `T` 区分。这与 Swift 的 `Optional`（类似 Kotlin，有 `?.` 和 `??`）或 TypeScript 的 `strictNullChecks`（编译期检查，但运行时（Runtime）仍是 JavaScript 的 null）类似——现代语言都在消除 null 的危害，实现方式各异。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Kotlin Null Safety](https://kotlinlang.org/docs/null-safety.html)]
 
 ### 10.3 边界测试：Kotlin 的 nullable 类型与 Rust 的 Option 显式处理（编译错误）
 

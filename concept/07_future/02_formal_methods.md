@@ -234,7 +234,7 @@ L5: Runtime-Level   → 轨迹比对/持续验证       🚧 PObserve/MongoDB Tr
 ### 2.1 L0：Rust 编译器（原生层）
 >
 
-Rust 编译器已通过 borrow checker 和类型系统（Type System）提供内存安全、线程安全和无数据竞争的保证。这是所有上层验证的基础平台。
+Rust 编译器已通过 borrow checker 和类型系统（Type System）提供内存安全（Memory Safety）、线程安全和无数据竞争的保证。这是所有上层验证的基础平台。
 
 ### 2.2 L1：Code-Level（代码级验证）
 >
@@ -278,14 +278,14 @@ Rust 编译器已通过 borrow checker 和类型系统（Type System）提供内
 - **在线监控**：实时检查轨迹是否违反时序逻辑属性
 - **工具**：PObserve、MongoDB Trace、Dtrace/BPF
 
-> **层次一致性（Coherence）标注**: L0 对应本文 §4「类型即证明」的编译期保证；L1-L2 对应 §5 工具链的代码级验证；L3-L5 对应 §8 分布式验证与运行时监控。L4 理论基础详见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)。
+> **层次一致性（Coherence）标注**: L0 对应本文 §4「类型即证明」的编译期保证；L1-L2 对应 §5 工具链的代码级验证；L3-L5 对应 §8 分布式验证与运行时（Runtime）监控。L4 理论基础详见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)。
 
 ---
 
 ## 三、从类型系统到定理证明的光谱
 >
 
-形式化验证并非单一技术，而是一个从「零成本编译期检查」到「高成本交互式证明」的连续光谱。Rust 的独特之处在于：它的类型系统已经占据了光谱最左端，为更重的验证工具提供了无需重复证明的坚实根基。
+形式化验证并非单一技术，而是一个从「零成本编译期检查」到「高成本交互式证明」的连续光谱。Rust 的独特之处在于：它的类型系统（Type System）已经占据了光谱最左端，为更重的验证工具提供了无需重复证明的坚实根基。
 
 ```text
 类型检查 ──→ 契约检查 ──→ 模型检测 ──→ 定理证明
@@ -434,7 +434,7 @@ fn add(a: i32, b: i32) -> i32 {
 | 无空指针解引用（Reference） | 算法终止性 |
 | 类型一致性（Coherence） | 并发协议活性（Liveness） |
 
-> **权威引用**: RustBelt（Jung et al., POPL 2018）在 Iris 框架中形式化了 Rust 的核心语义，证明了 safe 子集的内存安全和线程安全。Prusti 将 Viper 分离逻辑后端直接应用于 Rust 代码，实现了类型系统到逻辑命题的自动翻译。
+> **权威引用（Reference）**: RustBelt（Jung et al., POPL 2018）在 Iris 框架中形式化了 Rust 的核心语义，证明了 safe 子集的内存安全和线程安全。Prusti 将 Viper 分离逻辑后端直接应用于 Rust 代码，实现了类型系统到逻辑命题的自动翻译。
 
 ---
 
@@ -546,7 +546,7 @@ fn swap<T>(x: &mut T, y: &mut T) {
 
 **局限性**：目前仅支持 Rust 子集（无泛型（Generics） trait、无 async、无递归类型），处于研究原型阶段。
 
-> **层次一致性标注**: L1 Code-Level 验证工具（Kani、Creusot、Verus、Prusti、RefinedRust）直接作用于源代码；L3 Unsafe 边界验证详见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)；L4 理论基础（RustBelt/Iris）详见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)。
+> **层次一致性（Coherence）标注**: L1 Code-Level 验证工具（Kani、Creusot、Verus、Prusti、RefinedRust）直接作用于源代码；L3 Unsafe 边界验证详见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)；L4 理论基础（RustBelt/Iris）详见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)。
 
 ---
 
@@ -890,7 +890,7 @@ AWS 将 Kani 集成到多个核心项目的开发流程中：
 ### 7.2 Microsoft Verus
 >
 >
-> **来源**: [Microsoft Verus Blog](https://github.com/verus-lang/verusverus/guide/) · [IronRDP]
+> **来源**: [Microsoft Verus Blog](https://github.com/verus-lang/verus/guide/) · [IronRDP]
 
 Microsoft Research 的 Verus 项目致力于让系统软件验证更加实用：
 
@@ -1174,7 +1174,7 @@ THEOREM Spec => NoStarvation
 | `Acquire(t)` | `Mutex::lock()` 成功返回 | `lock()` 在锁空闲时立即获得所有权（Ownership） |
 | `AcquireBlocked(t)` | `Mutex::lock()` 阻塞等待 | 锁被持有时线程进入 OS 等待队列 |
 | `Release(t)` | `MutexGuard::drop()` | Guard 离开作用域自动释放锁 |
-| `owner` | `Mutex` 内部的所有权标记 | 追踪当前持有线程 |
+| `owner` | `Mutex` 内部的所有权（Ownership）标记 | 追踪当前持有线程 |
 | `guard_count` | `MutexGuard` 的生命周期（Lifetimes）计数 | 编译期通过类型系统保证 `guard_count \in {0, 1}`（标准 Mutex） |
 | `MutualExclusion` | `unsafe` 内的原子操作（Atomic Operations）/系统调用 | 底层 futex/`pthread_mutex` 提供 |
 | `NoStarvation` | 依赖 OS 调度策略 | Rust 标准库不保证公平性，但 TLC 可验证公平调度下的无饥饿 |
@@ -1476,7 +1476,7 @@ graph TD
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **F1** | `rustc` 类型检查 | 内存安全 + 线程安全（safe） | 纯 safe Rust | `unsafe` 块；FFI | ⭐⭐⭐⭐⭐ 所有项目 |
 | **F2** | `Miri` 动态检测 | UB 检测（别名/未初始化） | 可执行测试路径 | FFI 不透明；未覆盖路径 | ⭐⭐⭐⭐⭐ 含 unsafe 项目 |
-| **F3** | `Kani` 模型检测 | 有界属性验证 | `#[kani::proof]` harness | 状态空间爆炸 | ⭐⭐⭐⭐ 安全关键模块 |
+| **F3** | `Kani` 模型检测 | 有界属性验证 | `#[kani::proof]` harness | 状态空间爆炸 | ⭐⭐⭐⭐ 安全关键模块（Module） |
 | **F4** | `Verus` 演绎验证 | 功能正确性 + 并发协议 | spec/proof 标注 | 规格错误；Z3 超时 | ⭐⭐⭐ 系统软件 |
 | **F5** | `Creusot` 函数式验证 | 功能正确性 + 代数推理 | Why3/MLCFG 规约 | 证明负担重 | ⭐⭐ 安全关键算法 |
 | **F6** | `RustBelt/Coq` 定理证明 | 完整数学证明 | 专家级形式化背景 | 人月级成本 | ⭐⭐ 语言核心/论文 |

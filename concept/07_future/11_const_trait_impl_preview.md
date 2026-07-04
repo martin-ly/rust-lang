@@ -65,7 +65,7 @@
     - [10.1 边界测试：const 上下文中调用非 const 方法（编译错误）](#101-边界测试const-上下文中调用非-const-方法编译错误)
     - [10.2 边界测试：trait bound 的 const 兼容性（编译错误）](#102-边界测试trait-bound-的-const-兼容性编译错误)
     - [10.6 边界测试：`~const` bound 与默认实现的交互（编译错误）](#106-边界测试const-bound-与默认实现的交互编译错误)
-    - [10.5 边界测试：const trait 的默认实现与泛型（Generics）约束（编译错误）](#105-边界测试const-trait-的默认实现与泛型约束编译错误)
+    - [10.5 边界测试：const trait 的默认实现与泛型约束（编译错误）](#105-边界测试const-trait-的默认实现与泛型约束编译错误)
     - [10.3 边界测试：`~const` 边界的语法演进与兼容性（编译错误）](#103-边界测试const-边界的语法演进与兼容性编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -195,7 +195,7 @@ graph TD
 | 特性 | 当前状态 | 与 Const Trait 的关系 |
 |:---|:---:|:---|
 | `const fn` | ✅ stable | 基础载体，const trait 方法可在其中调用 |
-| `const generics` | ✅ stable | 值级泛型，与 const trait 互补（类型级 + 值级） |
+| `const generics` | ✅ stable | 值级泛型（Generics），与 const trait 互补（类型级 + 值级） |
 | `const eval_limit` | ✅ stable | CTFE 步骤限制，const trait 调用受相同限制 |
 | `inline_const` | ✅ stable | `const { }` 块，内部可使用 const trait 方法 |
 | `const_mut_refs` | ✅ stable | const 上下文中允许 `&mut`，支持 const trait 的突变方法 |
@@ -429,7 +429,7 @@ const fn process<T: Compute>(x: T) -> i32 {
 > `const trait impl` 引入 `~const Trait` bound（"maybe const"）：`fn process<T: ~const Compute>(x: T) -> i32` 表示 `T` 可以是 const 或非 const 实现，但仅在 const 上下文中要求 const。
 > 这是 Rust 类型系统（Type System）的复杂扩展：trait bound 现在需要考虑"const 性"（constness），形成类似 effect system 的维度。
 > 设计挑战：向后兼容性（现有代码无需修改）、默认行为（trait 默认非 const）、语法简洁性（`~const` 标记）。
-> 这与 C++ 的 `constexpr` 虚函数（C++23）方向类似，但 Rust 通过类型系统（Type System）而非关键字控制编译期/运行时分派。
+> 这与 C++ 的 `constexpr` 虚函数（C++23）方向类似，但 Rust 通过类型系统（Type System）而非关键字控制编译期/运行时（Runtime）分派。
 > [来源: [Rust RFC 2632](https://github.com/rust-lang/rust/issues/67792)] ·
 > [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
@@ -457,7 +457,7 @@ const fn sum<T: ~const Add>(a: T, b: T) -> T {
 > 1) 向后兼容性：现有代码无需修改；
 > 2) 默认行为：trait 默认非 const，需显式 `const trait` 声明；
 > 3) 语法简洁性：`~const` 标记是否足够清晰？`const trait impl` 的稳定化将使 Rust 的 const 泛型编程能力大幅提升：自定义类型的常量计算、编译期数据结构、零成本抽象（Zero-Cost Abstraction）的配置系统。
-> 这与 C++ 的 `constexpr` 虚函数（C++23，类似方向）或 D 的 CTFE（编译期完全可用）不同——Rust 选择通过类型系统控制编译期能力，而非全局关键字。
+> 这与 C++ 的 `constexpr` 虚函数（C++23，类似方向）或 D 的 CTFE（编译期完全可用）不同——Rust 选择通过类型系统（Type System）控制编译期能力，而非全局关键字。
 > [来源: [Rust RFC 2632](https://github.com/rust-lang/rust/issues/67792)] ·
 > [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 

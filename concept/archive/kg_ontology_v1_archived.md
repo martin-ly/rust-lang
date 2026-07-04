@@ -361,7 +361,7 @@ ex:Borrowing rdf:type ex:Concept ;
 | Kg Ontology 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-> **过渡**: Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
+> **过渡**: Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性（Coherence）。
 > **过渡**: 将 Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界
@@ -402,5 +402,5 @@ ex:Borrowing rdf:type ex:Concept ;
 <details>
 <summary>✅ 答案与解析</summary>
 
-不能。元数据层提供导航和评估框架，但不能替代对核心概念（所有权（Ownership）、类型系统、并发等）的深入理解与实践。
+不能。元数据层提供导航和评估框架，但不能替代对核心概念（所有权（Ownership）、类型系统（Type System）、并发等）的深入理解与实践。
 </details>

@@ -19,25 +19,21 @@
 
 ---
 
-
 ---
-
 
 ---
 
 > **过渡**: 从 Preludes（预导入模块（Module）） 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
 
-> **过渡**: 在建立 Preludes（预导入模块） 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+> **过渡**: 在建立 Preludes（预导入模块（Module）） 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
 
 > **过渡**: 最后，将 Preludes（预导入模块） 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
 
 ---
 
 > **反向推理 1**: 如果程序在 Preludes（预导入模块） 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
 >
 > **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 Preludes（预导入模块） 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
-
 
 ## 认知路径
 
@@ -49,7 +45,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与Preludes（预导入模块）的适用边界。
 5. **迁移应用**: 将 Preludes（预导入模块） 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -59,7 +54,6 @@
 > **反命题 2**: "忽略 Preludes（预导入模块） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Preludes（预导入模块） 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 Preludes（预导入模块） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Preludes（预导入模块） 具有语言特有的形态。
-
 
 ## 一、什么是 Prelude
 
@@ -114,7 +108,7 @@ use core::cell::RefCell;
 
 ### Edition 差异
 
-- **2015 Edition**：外部 prelude 中的 crate 不能通过 `use` 引用，通常需要显式 `extern crate`。
+- **2015 Edition**：外部 prelude 中的 crate 不能通过 `use` 引用（Reference），通常需要显式 `extern crate`。
 - **2018 Edition+**：`use foo::bar;` 可以直接引用外部 prelude 中的 crate，`extern crate` 被视为非惯用写法。
 
 > **注意**：`alloc`、`test` 等随 `rustc` 一起发布的 crate 不会自动进入外部 prelude（即使 2018+），需要显式 `extern crate alloc;`。
@@ -187,7 +181,7 @@ extern crate serde;
 
 ### Edition 差异
 
-- **2015 Edition**：`no_implicit_prelude` 不阻止 `macro_use` prelude，标准库导出的宏仍然可用。
+- **2015 Edition**：`no_implicit_prelude` 不阻止 `macro_use` prelude，标准库导出的宏（Macro）仍然可用。
 - **2018 Edition+**：`no_implicit_prelude` 也会移除 `macro_use` prelude。
 
 ```rust

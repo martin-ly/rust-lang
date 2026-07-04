@@ -319,7 +319,7 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 <details>
 <summary>✅ 答案与解析</summary>
 
-1) `derive` 宏（Macro）自动生成 trait 实现；2) 构建脚本（`build.rs`）生成绑定代码；3) 常量求值计算查找表；4) 过程宏从 schema 生成类型（如 `prost` 从 protobuf 生成 Rust 代码）。
+1) `derive` 宏（Macro）自动生成 trait 实现；2) 构建脚本（`build.rs`）生成绑定代码；3) 常量求值计算查找表；4) 过程宏（Procedural Macro）从 schema 生成类型（如 `prost` 从 protobuf 生成 Rust 代码）。
 
 </details>
 

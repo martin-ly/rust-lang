@@ -82,7 +82,7 @@ Rust 宏 hygiene:
   形式化: α-等价（alpha-equivalence）在宏展开中保持
 ```
 
-> **过渡说明**: 从"宏是什么"的抽象定义，到"宏有哪些类型"的具体属性对比，认知路径遵循从 L3 理论定义 → L2 概念分类 → L1 工程选择的降维逻辑。
+> **过渡说明**: 从"宏（Macro）是什么"的抽象定义，到"宏有哪些类型"的具体属性对比，认知路径遵循从 L3 理论定义 → L2 概念分类 → L1 工程选择的降维逻辑。
 
 ---
 
@@ -371,7 +371,7 @@ graph TD
 ### 5.4 反命题决策树三："过程宏总是类型安全的"
 
 > **命题来源**: 因过程宏（Procedural Macro）生成的是 Rust 代码，直觉上认为"生成的代码自然会通过类型检查"。
-> **形式化反驳**: 过程宏的输入是未类型化的 TokenStream，解析失败或逻辑错误会直接生成非法代码；类型安全是编译器**后续阶段**的保证，而非宏本身的保证。
+> **形式化反驳**: 过程宏（Procedural Macro）的输入是未类型化的 TokenStream，解析失败或逻辑错误会直接生成非法代码；类型安全是编译器**后续阶段**的保证，而非宏本身的保证。
 
 ```mermaid
 graph TD
@@ -517,7 +517,7 @@ graph TD
 | **C2** | 过程宏 panic ⟹ 编译错误而非运行时（Runtime）错误 | 安全边界 | L2 | 过程宏内部 `unwrap()` 未处理 | `syn::parse` 失败导致宏 panic |
 | **C3** | 宏内部变量隔离 ⟹ 外部作用域不受影响 | 作用域保证 | L1 | 使用 `macro_export` 跨 crate 时标签冲突 | `break 'label` 在宏内外的作用域边界 |
 
-> **[Kohlbecker et al. 1986 + Rust Reference]** 一致性说明: 卫生宏有严格理论支撑（Hygienic Macros for Scheme），但过程宏的生成正确性主要依赖编译器的二次类型检查。✅ 已验证
+> **[Kohlbecker et al. 1986 + Rust Reference]** 一致性（Coherence）说明: 卫生宏有严格理论支撑（Hygienic Macros for Scheme），但过程宏的生成正确性主要依赖编译器的二次类型检查。✅ 已验证
 > **[RFC 1566](https://rust-lang.github.io/rfcs/1566-proc-macros.html)** 过程宏（Derive/Attribute/Function-like）的生成代码必须返回合法 TokenStream，最终正确性由编译器后续阶段保证。✅ 已验证
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.3 "async 正确性"
 > **过渡说明**: 定理矩阵提供了"什么条件下什么保证成立"的静态知识，但工程能力的真正习得需要穿越"示例-反例-边界测试"的循环。下一章通过可运行的代码，将上述定理转化为肌肉记忆。
@@ -1897,7 +1897,7 @@ fn foo() {}
 
 | 能力 | 属性宏 | `macro_rules!` | 根本原因 |
 |:---|:---:|:---:|:---|
-| 解析完整函数签名（泛型、where、async） | ✅ | ❌ | 过程宏通过 `syn` 解析 `ItemFn.sig`；声明宏无类型化 AST 访问能力 |
+| 解析完整函数签名（泛型（Generics）、where、async） | ✅ | ❌ | 过程宏通过 `syn` 解析 `ItemFn.sig`；声明宏（Declarative Macro）无类型化 AST 访问能力 |
 | 遍历/修改函数体内部 AST 节点 | ✅ | ❌ | `syn::Fold` 或手动替换 `stmts`；声明宏只能做 token 模式匹配 |
 | 生成带 hygiene 的唯一标识符 | ✅ | ✅ | 二者均基于编译器 hygiene 机制，内部变量不污染外部 |
 | 在函数前后注入代码并保留签名 | ✅ | ⚠️ 极困难 | 声明宏可包裹表达式，但无法可靠包裹 item 并保留完整签名 |
@@ -1954,7 +1954,7 @@ macro_rules! trace_fn {
 |:---|:---|:---|
 | 作用域 | 宏一旦被 `macro_export`，在 crate 根可见 | 模块（Module）路径控制 |
 | 可见性 | 无法使用 `pub(crate)` 等修饰 | `pub` / `pub(crate)` / `pub(super)` |
-| 导入 | 必须通过 `#[macro_use]` 或 `use crate::mac!` | 与模块系统自然集成 |
+| 导入 | 必须通过 `#[macro_use]` 或 `use crate::mac!` | 与模块（Module）系统自然集成 |
 | 递归 | 递归深度受限（默认 128） | 更清晰的递归语义 |
 | 路径解析 | 宏内部路径基于调用处 | 基于定义处（hygiene 扩展） |
 

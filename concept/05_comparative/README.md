@@ -183,7 +183,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 | 维度 | Rust | C++ | Go | 形式化含义 |
 |:---|:---|:---|:---|:---|
 | 内存安全（Memory Safety）机制 | 所有权（Ownership） + 借用（Borrowing）检查 | 智能指针（Smart Pointer） + RAII（运行时） | GC（运行时） | 编译期证明 vs 运行时控制 vs 自动回收 |
-| 并发安全（Concurrency Safety） | Send/Sync（类型级） | 无（程序员负责） | channel（语言级） | 类型系统保证 vs 无保证 vs 消息传递 |
+| 并发安全（Concurrency Safety） | Send/Sync（类型级） | 无（程序员负责） | channel（语言级） | 类型系统（Type System）保证 vs 无保证 vs 消息传递 |
 | 类型系统（Type System） | 代数类型 + Trait | 模板 + 继承 | 结构类型 + 接口 | 和/积类型 vs 参数多态 vs 鸭子类型 |
 | 形式化基础 | 线性逻辑 + 分离逻辑 | 无统一基础 | CSP + π 演算 | 资源敏感 vs 无 vs 进程代数 |
 | 零成本抽象（Zero-Cost Abstraction） | 单态化（Monomorphization） | 模板实例化 | 无（接口有开销） | 参数多态的编译期消除 |

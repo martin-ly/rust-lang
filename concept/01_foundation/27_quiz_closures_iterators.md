@@ -29,7 +29,6 @@
 
 ---
 
-
 ---
 
 ## 认知路径
@@ -42,7 +41,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与测验的适用边界。
 5. **迁移应用**: 将 测验 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 > **过渡**: 从 测验 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -51,7 +49,6 @@
 
 > **过渡**: 最后，将 测验 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
-
 ---
 
 > **定理 1** [Tier 2]: 测验 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
@@ -59,7 +56,6 @@
 > **定理 2** [Tier 2]: 正确理解 测验 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
 >
 > **定理 3** [Tier 3]: 将 测验 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 
 ---
 
@@ -71,13 +67,11 @@
 
 > **反命题 3**: "其他语言对 测验 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 测验 具有语言特有的形态。
 
-
 ---
 
 > **反向推理 1**: 如果程序在 测验 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
 >
 > **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 测验 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
-
 
 ## 一、闭包基础
 
@@ -184,7 +178,7 @@ fn main() {
 | `FnMut` | `&mut self` | 捕获可变引用（Reference） |
 | `FnOnce` | `self` | 消耗捕获的值 |
 
-**层次关系**：`Fn` <: `FnMut` <: `FnOnce`（所有实现 `Fn` 的闭包也自动实现 `FnMut` 和 `FnOnce`）
+**层次关系**：`Fn` <: `FnMut` <: `FnOnce`（所有实现 `Fn` 的闭包（Closures）也自动实现 `FnMut` 和 `FnOnce`）
 
 **知识点**：Rust 编译器自动推断闭包的最小捕获方式。理解三种 `Fn` trait 是使用高阶函数（如 `map`、`filter`）的基础。[→ 闭包详解](15_closure_basics.md)
 
@@ -390,7 +384,7 @@ for val in counter { println!("{}", val); }
 for val in counter { println!("{}", val); } // ❌ 编译错误：counter 已被移动
 ```
 
-**知识点**：`Iterator` 是 Rust 中最强大的 trait 之一。只需实现 `next()` 方法，自动获得 `map`、`filter`、`collect` 等数十种适配器和消费者。[→ 迭代器详解](../02_intermediate/15_iterator_patterns.md)
+**知识点**：`Iterator` 是 Rust 中最强大的 trait 之一。只需实现 `next()` 方法，自动获得 `map`、`filter`、`collect` 等数十种适配器和消费者。[→ 迭代器（Iterator）详解](../02_intermediate/15_iterator_patterns.md)
 
 </details>
 
@@ -672,7 +666,7 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
 }
 ```
 
-**知识点**：返回闭包时几乎总是需要 `move`，否则闭包捕获的局部变量引用会在函数返回后悬垂。[→ 闭包详解](15_closure_basics.md)
+**知识点**：返回闭包时几乎总是需要 `move`，否则闭包捕获的局部变量引用（Reference）会在函数返回后悬垂。[→ 闭包详解](15_closure_basics.md)
 
 </details>
 

@@ -941,7 +941,7 @@ Tokio 版本是异步（Async）的，`bind` 本身通常不阻塞，但 `accept
 
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
-| Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 

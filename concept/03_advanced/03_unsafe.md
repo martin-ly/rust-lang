@@ -122,7 +122,7 @@
         - [`std::ptr::read<T>(src: *const T) -> T`](#stdptrreadtsrc-const-t---t)
           - [Rust 1.96 `valid for read/write` 语义变更详解](#rust-196-valid-for-readwrite-语义变更详解)
         - [`std::ptr::write<T>(dst: *mut T, src: T)`](#stdptrwritetdst-mut-t-src-t)
-        - [`*ptr` 解引用（`DerefMut`）](#ptr-解引用derefmut)
+        - [`*ptr` 解引用（Reference）（`DerefMut`）](#ptr-解引用derefmut)
       - [关键差异对比表格](#关键差异对比表格)
       - [典型使用场景](#典型使用场景)
         - [`ptr::read`： `Vec::pop` 内部实现与 `ManuallyDrop` 配合](#ptrread-vecpop-内部实现与-manuallydrop-配合)
@@ -181,7 +181,7 @@
     - [16.2 边界测试：将 \&T 转换为 \&mut T（编译错误）](#162-边界测试将-t-转换为-mut-t编译错误)
     - [16.3 边界测试：无效 UTF-8 的 str::from\_utf8\_unchecked（运行时（Runtime） UB）](#163-边界测试无效-utf-8-的-strfrom_utf8_unchecked运行时-ub)
     - [16.4 边界测试：通过 `&T` 获取 `&mut T`（编译错误）](#164-边界测试通过-t-获取-mut-t编译错误)
-    - [16.5 边界测试：裸指针算术越界（运行时 UB）](#165-边界测试裸指针算术越界运行时-ub)
+    - [16.5 边界测试：裸指针算术越界（运行时（Runtime） UB）](#165-边界测试裸指针算术越界运行时-ub)
     - [16.6 边界测试：`std::mem::transmute` 类型大小不匹配（编译错误）](#166-边界测试stdmemtransmute-类型大小不匹配编译错误)
     - [10.4 边界测试：`union` 的字段访问与活跃字段跟踪（运行时 UB）](#104-边界测试union-的字段访问与活跃字段跟踪运行时-ub)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -361,8 +361,8 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 
 ## 三、形式化理论根基（Formal Foundation）
 
-> 概念分类之后，需要从类型系统视角理解 unsafe 的本质。unsafe 不是"关闭编译器"，而是在封闭证明系统中引入新的公理，并由程序员人工保证其一致性（Coherence）。
-> **[Rustonomicon: The Safe/Unsafe Boundary](https://doc.rust-lang.org/nomicon/)** Safe Rust 是封闭的证明系统；unsafe 是显式引入新公理并人工保证一致性的扩展。类比：Safe Rust = 欧氏几何，Unsafe = 非欧几何。💡 原创分析
+> 概念分类之后，需要从类型系统（Type System）视角理解 unsafe 的本质。unsafe 不是"关闭编译器"，而是在封闭证明系统中引入新的公理，并由程序员人工保证其一致性（Coherence）。
+> **[Rustonomicon: The Safe/Unsafe Boundary](https://doc.rust-lang.org/nomicon/)** Safe Rust 是封闭的证明系统；unsafe 是显式引入新公理并人工保证一致性（Coherence）的扩展。类比：Safe Rust = 欧氏几何，Unsafe = 非欧几何。💡 原创分析
 > **来源: [Rustonomicon: The Safe/Unsafe Boundary](https://doc.rust-lang.org/nomicon/)** Unsafe 不是关闭检查器，而是引入人工验证的公理。
 
 ### 3.1 Unsafe 作为公理缺口
@@ -912,7 +912,7 @@ graph TD
       例: Vec, String, HashMap, Rc, Arc, Box 都有 unsafe 内部实现
 ```
 
-> **[Miri Documentation](https://github.com/rust-lang/miri)** Miri 是 Rust 的解释型 MIR 执行器，可动态检测悬垂指针、越界访问、未对齐访问、数据竞争（部分）和无效枚举值等 UB。✅ 已验证
+> **[Miri Documentation](https://github.com/rust-lang/miri)** Miri 是 Rust 的解释型 MIR 执行器，可动态检测悬垂指针、越界访问、未对齐访问、数据竞争（部分）和无效枚举（Enum）值等 UB。✅ 已验证
 > **[Miri Documentation: Limitations]** Miri 无法检测所有 UB（停机问题不可解），且不支持与硬件相关的行为（如内联汇编（Inline Assembly））。✅ 已验证
 
 ### 7.2 Miri 的验证边界
@@ -1505,7 +1505,7 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
 | **无效枚举值** | ✅ discriminant 检查 | ❌ 不检测 | ❌ 不检测 | ❌ 不检测 |
 | **FFI / 外部代码** | ❌ 不透明（stub 或 panic） | ✅ 可检测 C 代码 | ✅ 可检测 C/C++ 代码 | ✅ 可检测 C/C++ 代码 |
 | **运行时开销** | 极慢（100x~1000x） | 慢（10x~50x） | 中等（2x~3x） | 中等（5x~15x） |
-| **硬件相关行为** | ❌ 不支持（内联汇编、SIMD） | ✅ 支持 | ✅ 支持 | ✅ 支持 |
+| **硬件相关行为** | ❌ 不支持（内联汇编（Inline Assembly）、SIMD） | ✅ 支持 | ✅ 支持 | ✅ 支持 |
 | **Rust 语义精确度** | ✅ 精确到 MIR 语义 | ⚠️ 机器码级，可能漏掉 Rust 特定 UB | ⚠️ 机器码级 | ⚠️ 机器码级 |
 
 **工具选择决策树**：
@@ -1605,7 +1605,7 @@ unsafe { std::ptr::read(p.as_ptr()); }
 
 - **读取上下文**（`let x = *ptr`）：等价于从该位置 move 出一个值。若 `T` 非 `Copy`，原位置**逻辑上失效**（但编译器不追踪裸指针的失效状态）。
 - **写入上下文**（`*ptr = val`）：编译器会生成**先 drop 旧值、再写入新值**的代码序列。若目标位置未初始化，drop 旧值 = 读取未初始化内存 = **UB**。
-- **受借用（Borrowing）检查器保护的程度**：`unsafe` 块内的裸指针解引用**完全绕过**借用检查器。编译器不验证 `ptr` 的生命周期、对齐或有效性。
+- **受借用（Borrowing）检查器保护的程度**：`unsafe` 块内的裸指针解引用**完全绕过**借用检查器。编译器不验证 `ptr` 的生命周期（Lifetimes）、对齐或有效性。
 
 > **来源: [TRPL Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)** 裸指针解引用是 `unsafe` 的五大超能力之一，它关闭了编译器对生命周期和别名的自动追踪。✅ 已验证
 
@@ -1620,7 +1620,7 @@ unsafe { std::ptr::read(p.as_ptr()); }
 | **是否触发 `Drop`** | ❌ 否 | ❌ **否** | ❌ 否（仅读取） | ✅ **是**（先 drop 旧值） |
 | **是否转移所有权（Ownership）** | 否（复制后两位置同时"有效"） | 是（`src` move 入 `dst`） | 是（原位置失效） | 是（`val` move 入） |
 | **是否需要 `unsafe`** | ✅ 是（函数本身 unsafe） | ✅ 是（函数本身 unsafe） | ✅ 是（裸指针解引用） | ✅ 是（裸指针解引用） |
-| **是否受借用检查器保护** | ❌ 否 | ❌ 否 | ❌ 否 | ❌ 否 |
+| **是否受借用（Borrowing）检查器保护** | ❌ 否 | ❌ 否 | ❌ 否 | ❌ 否 |
 | **对未初始化内存的安全性** | ⚠️ 可读，但读取后原+新值不能双 drop | ✅ **安全**（唯一正确方式） | ⚠️ 读取 = UB | ❌ **UB**（drop 未初始化值） |
 | **对已初始化内存的安全性** | ⚠️ 复制后需避免 double-free | ⚠️ 旧值被覆盖 = 内存泄漏 | ✅ 安全 | ✅ 安全 |
 | **典型场景** | `Vec::pop`、手工 move | 未初始化内存初始化 | 简单访问（不推荐裸指针） | 赋值更新（不推荐裸指针） |
@@ -1874,7 +1874,7 @@ unsafe fn swap_via_replace<T>(a: *mut T, b: *mut T) {
 
 ---
 
-> **定理**：`ptr::read` + `ptr::write` 组合 ≠ `*ptr` 解引用。前者是**内存层面的按位操作**，后者是**所有权层面的语义操作**。在 unsafe 代码中混淆两者是 UAF、double-free 和内存泄漏的常见根源。
+> **定理**：`ptr::read` + `ptr::write` 组合 ≠ `*ptr` 解引用。前者是**内存层面的按位操作**，后者是**所有权（Ownership）层面的语义操作**。在 unsafe 代码中混淆两者是 UAF、double-free 和内存泄漏的常见根源。
 > **定理（安全性边界）**：`ptr::write` 是向未初始化内存写入的**唯一安全 primitive**；`*ptr = val` 是更新已初始化内存的**安全 primitive**（在 safe Rust 中）。二者不可互换。💡 原创分析
 > **跨层映射**: `L3::裸指针语义` ↔ [`L1::所有权`](../01_foundation/01_ownership.md) move 与 copy 语义 · [`L2::内存管理`](../02_intermediate/03_memory_management.md) drop 触发规则 · [`L4::形式化`](../04_formal/03_ownership_formal.md) Validity Invariant 与初始化要求
 
@@ -2986,7 +2986,7 @@ fn inspect(ring: &IoUring) {
 | 维度 | 当前（结构体（Struct）级） | 目标（字段级） |
 |:---|:---|:---|
 | **安全契约粒度** | 整个类型 | 单个字段 |
-| **API 设计** | 结构体构造函数必须 unsafe | 仅 unsafe 字段的 setter/getter 需 unsafe |
+| **API 设计** | 结构体（Struct）构造函数必须 unsafe | 仅 unsafe 字段的 setter/getter 需 unsafe |
 | **误用风险** | 高——用户被迫在更大范围内使用 unsafe | 低——unsafe 范围精确到字段访问 |
 | **编译器验证** | 无字段级追踪 | 需扩展借用检查器，追踪字段级 unsafe 状态 |
 

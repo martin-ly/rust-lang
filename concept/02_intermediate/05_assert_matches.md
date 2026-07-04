@@ -48,7 +48,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：assert\_matches 的编译错误](#十边界测试assert_matches-的编译错误)
     - [10.1 边界测试：`assert_matches!` 在非 Option/Result 上使用（编译错误）](#101-边界测试assert_matches-在非-optionresult-上使用编译错误)
-    - [10.2 边界测试：嵌套模式匹配中的绑定冲突（编译错误）](#102-边界测试嵌套模式匹配中的绑定冲突编译错误)
+    - [10.2 边界测试：嵌套模式匹配（Pattern Matching）中的绑定冲突（编译错误）](#102-边界测试嵌套模式匹配中的绑定冲突编译错误)
     - [10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）](#103-边界测试assert_matches-与嵌套模式的绑定编译错误)
     - [10.4 边界测试：自定义断言失败消息的类型约束（编译错误）](#104-边界测试自定义断言失败消息的类型约束编译错误)
     - [10.4 边界测试：所有权（Ownership）移动后的再次使用](#104-边界测试所有权移动后的再次使用)
@@ -440,7 +440,7 @@ fn main() {
 
 - [Type System](../01_foundation/04_type_system.md) — 模式匹配的形式化根基
 - [Error Handling](04_error_handling.md) — Result/Option 测试断言实践
-- [Macros](../03_advanced/04_macros.md) — 宏系统的语法糖机制
+- [Macros](../03_advanced/04_macros.md) — 宏（Macro）系统的语法糖机制
 - [Version Tracking](../07_future/05_rust_version_tracking.md) — Rust 1.96 特性演进
 
 ---
@@ -499,7 +499,7 @@ fn main() {
 }
 ```
 
-> **修正**: `assert_matches!`（Rust 长期 unstable，于 1.96.1 stable，当前 patch 1.96.1）专门用于测试枚举变体匹配。
+> **修正**: `assert_matches!`（Rust 长期 unstable，于 1.96.1 stable，当前 patch 1.96.1）专门用于测试枚举（Enum）变体匹配。
 > 它不同于 `assert_eq!`——后者要求值实现 `PartialEq`，而 `assert_matches!` 使用模式匹配，不要求 `PartialEq`。
 > 在 `assert_matches!` 稳定前，使用 `matches!` 宏或 `if let` 进行测试断言。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 

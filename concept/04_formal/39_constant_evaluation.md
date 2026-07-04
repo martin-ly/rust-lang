@@ -18,7 +18,6 @@
 
 ---
 
-
 ---
 
 ## 认知路径
@@ -31,7 +30,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与常量求值（Constant Evaluation）的适用边界。
 5. **迁移应用**: 将 常量求值（Constant Evaluation） 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -41,7 +39,6 @@
 > **反命题 2**: "忽略 常量求值（Constant Evaluation） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 常量求值（Constant Evaluation） 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 常量求值（Constant Evaluation） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 常量求值（Constant Evaluation） 具有语言特有的形态。
-
 
 ## 一、什么是常量求值
 
@@ -102,7 +99,7 @@
 1. 数组类型长度表达式
 2. 数组重复长度表达式
 3. `const`、`static`、枚举（Enum） discriminant 的初始化器
-4. const 泛型参数
+4. const 泛型（Generics）参数
 5. `const` 块
 
 对于数组长度、数组重复长度和 const 泛型参数，外部泛型参数的使用受到限制：表达式必须是单个 const 泛型参数，或者不引用（Reference）任何泛型参数。

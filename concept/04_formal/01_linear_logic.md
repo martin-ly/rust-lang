@@ -160,7 +160,7 @@ Rust 对应:
   // 结论: 此函数是 A ⊸ B 的证明 [来源] ✅
 ```
 
-> 此处为 L1/01_ownership.md §3.2 "函数参数 move" 的精确对应——函数参数按值传递时，调用者失去所有权（`A` 被消耗），被调用者获得构造 `B` 的资源，这正是 `A ⊸ B` 的编程语言实现。
+> 此处为 L1/01_ownership.md §3.2 "函数参数 move" 的精确对应——函数参数按值传递时，调用者失去所有权（Ownership）（`A` 被消耗），被调用者获得构造 `B` 的资源，这正是 `A ⊸ B` 的编程语言实现。
 
 ```text
 弱化（Weakening）在仿射逻辑中允许:
@@ -608,7 +608,7 @@ fn session_demo() {
 | **[Wikipedia: Affine logic](https://en.wikipedia.org/wiki/Affine_logic)** | 仿射逻辑定义；与线性逻辑的关系 | 权威定义；§1.1, §5.1 |
 | **[Wikipedia: Substructural type system](https://en.wikipedia.org/wiki/Substructural_type_system)** | 子结构类型系统总览 | 类型论定位；§2.3 |
 | **[RustBelt: POPL 2018](https://doi.org/10.1145/3158154)** | 线性逻辑 → Rust 所有权；Iris 分离逻辑 | 应用映射；§1.1, §5.3, §7.3 |
-| **[Tofte & Talpin 1994](https://en.wikipedia.org/wiki/Region-based_memory_management)** | 区域类型系统；堆分配的生命周期管理 | 生命周期形式化；§8 Step 5 |
+| **[Tofte & Talpin 1994](https://en.wikipedia.org/wiki/Region-based_memory_management)** | 区域类型系统（Type System）；堆分配的生命周期管理 | 生命周期形式化；§8 Step 5 |
 | **[Honda 1993: Session Types]** | 会话类型；通道通信的线性协议 | 并发验证；§6 T2, §7.2 |
 
 ---
@@ -778,7 +778,7 @@ h x = ...  -- m 是重数变量
 | **资源管理** | 所有权 + `Drop` 编译期检查 | GC + 线性类型约束 | RAII + 手动 `delete` / 智能指针（Smart Pointer） | GC（垃圾回收） |
 | **Copy 语义** | `Copy` trait 标记可复制类型 | `Dupable` 类型类（通过 `ω` 重数隐式支持） | 默认拷贝构造 / 移动构造 | 默认值拷贝 |
 | **生命周期** | 内置区域类型系统（`'a`） | 无内置生命周期；依赖 GC 或外部框架 | 无（指针可能悬垂） | 无（GC 决定） |
-| **借用模型** | `&T` / `&mut T` 编译期检查 | 无原生借用；线性值只能 move | `const T&` / `T&`（无编译期检查） | 指针 `*T`（无别名检查） |
+| **借用（Borrowing）模型** | `&T` / `&mut T` 编译期检查 | 无原生借用；线性值只能 move | `const T&` / `T&`（无编译期检查） | 指针 `*T`（无别名检查） |
 | **unsafe 支持** | 原生支持，可封装安全抽象 | 无 direct 对应（FFI 通过 C 调用） | 原生 `unsafe` 区域广泛存在 | 有限（`unsafe` 包） |
 | **生态状态** | 工业级，稳定 | 实验性，GHC 9.x+ 可用 | 工业级，标准化 | 工业级，稳定 |
 

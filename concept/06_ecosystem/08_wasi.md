@@ -163,7 +163,7 @@ let dir_cap = preopen_dir("/sandbox/data")?;
 | **资源标识** | 能力句柄（不可伪造） | 所有权（Ownership）变量（唯一） |
 | **资源转移** | 能力句柄 move 到 guest | 所有权（Ownership） move |
 | **资源共享** | 能力降级（只读/只写） | `&T` / `&mut T` |
-| **资源回收** | 句柄 drop → 能力失效 | 所有权离开作用域 → drop |
+| **资源回收** | 句柄 drop → 能力失效 | 所有权（Ownership）离开作用域 → drop |
 | **安全保证** | 无句柄 = 无访问权 | 无所有权 = 无访问权 |
 
 > **关键洞察**: WASI 的能力安全模型与 Rust 的所有权模型存在深层同构——二者都通过**资源唯一标识 + 显式转移**来消除隐式全局访问。这是 Rust 成为 Wasm 生态首选语言的深层原因。[来源: WASI Docs; Rust Ownership Model] ✅
@@ -342,7 +342,7 @@ impl GuestFile for File {
 | **W4** | Rust 编译期安全 | `wasm32-wasip1` 或 `wasm32-wasip2` 目标 | 生成的 Wasm 无 UAF/DF | `unsafe` Rust 代码 | 运行时（Runtime）崩溃 |
 | **W5** | 组件组合安全 | 世界定义完整 | 组合后接口兼容 | 版本不匹配；接口漂移 | 链接错误 / 运行时（Runtime）失败 |
 
-> **⟹ 推理链**: W1（沙箱）+ W2（能力）构成**运行时隔离**，W3（WIT）+ W4（Rust）构成**编译期类型安全**，W5（组合）构成**架构级兼容性**。五层联合使 Component Model 成为目前最安全的软件组合模型之一。
+> **⟹ 推理链**: W1（沙箱）+ W2（能力）构成**运行时（Runtime）隔离**，W3（WIT）+ W4（Rust）构成**编译期类型安全**，W5（组合）构成**架构级兼容性**。五层联合使 Component Model 成为目前最安全的软件组合模型之一。
 
 ---
 

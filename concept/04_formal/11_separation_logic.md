@@ -24,11 +24,11 @@
 
 ## 📑 目录
 
-- [分离逻辑：Rust 所有权（Ownership）的形式化根基](#分离逻辑rust-所有权的形式化根基)
+- [分离逻辑：Rust 所有权的形式化根基](#分离逻辑rust-所有权的形式化根基)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 从霍尔逻辑到分离逻辑](#11-从霍尔逻辑到分离逻辑)
-    - [1.2 分离合取与资源所有权（Ownership）](#12-分离合取与资源所有权)
+    - [1.2 分离合取与资源所有权](#12-分离合取与资源所有权)
     - [1.3 框架规则与局部推理](#13-框架规则与局部推理)
   - [二、技术细节](#二技术细节)
     - [2.1 分离逻辑的基本断言](#21-分离逻辑的基本断言)
@@ -44,11 +44,11 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：分离逻辑的编译错误](#十边界测试分离逻辑的编译错误)
     - [10.1 边界测试：独占资源的分割与重组（编译错误）](#101-边界测试独占资源的分割与重组编译错误)
-    - [10.2 边界测试：`Box::leak` 与资源永久转移（运行时（Runtime）行为）](#102-边界测试boxleak-与资源永久转移运行时行为)
+    - [10.2 边界测试：`Box::leak` 与资源永久转移（运行时行为）](#102-边界测试boxleak-与资源永久转移运行时行为)
     - [10.3 边界测试：分离逻辑中的帧规则违反（编译错误）](#103-边界测试分离逻辑中的帧规则违反编译错误)
     - [10.4 边界测试：GhostCell 的分离逻辑建模（编译错误）](#104-边界测试ghostcell-的分离逻辑建模编译错误)
     - [10.5 边界测试：RustBelt 的 `own` 与 `shr` 断言的编码（编译错误）](#105-边界测试rustbelt-的-own-与-shr-断言的编码编译错误)
-    - [10.3 边界测试：分离逻辑与 Rust 引用（Reference）的一致性（Coherence）（编译错误）](#103-边界测试分离逻辑与-rust-引用的一致性编译错误)
+    - [10.3 边界测试：分离逻辑与 Rust 引用的一致性（编译错误）](#103-边界测试分离逻辑与-rust-引用的一致性编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：分离合取 \*（理解层）](#测验-1分离合取-理解层)
     - [测验 2：帧规则（Frame Rule）（应用层）](#测验-2帧规则frame-rule应用层)
@@ -616,8 +616,8 @@ fn main() {
 > 每个 `GhostCell` 关联一个编译期品牌（brand，由 `GhostToken` 代表），同一品牌的所有 cell 共享一个可变借用（Mutable Borrow） token。
 > 这与 `RefCell`（运行时（Runtime）引用（Reference）计数）或 `Mutex`（运行时锁）不同——`GhostCell` 在编译期检查借用（Borrowing）规则，无运行时开销。
 > 代价：`GhostToken` 的生命周期（Lifetimes）约束要求所有相关操作在闭包（Closures）内完成，API  ergonomics 较差。
-> 分离逻辑视角：`GhostToken` 是权限（capability），`GhostCell` 是资源，借用规则对应于权限的独占转移。
-> 这是 Rust 类型系统（Type System）表达力的高级展示：将运行时检查迁移到编译期，同时保持零成本。
+> 分离逻辑视角：`GhostToken` 是权限（capability），`GhostCell` 是资源，借用（Borrowing）规则对应于权限的独占转移。
+> 这是 Rust 类型系统（Type System）表达力的高级展示：将运行时（Runtime）检查迁移到编译期，同时保持零成本。
 > [来源: [GhostCell Paper](https://plv.mpi-sws.org/rustbelt/ghostcell/)] ·
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
@@ -645,7 +645,7 @@ fn main() {
 > RustBelt 使用分离逻辑建模 Rust 的所有权系统：`own(x, T)` 表示独占所有权（对应 `&mut T`），`shr(x, T)` 表示共享读取权（对应 `&T`）。
 > 关键规则：
 >
-> 1) `own(x, T)` 可分裂为 `shr(x, T) * shr(x, T)`（多个只读引用）；
+> 1) `own(x, T)` 可分裂为 `shr(x, T) * shr(x, T)`（多个只读引用（Reference））；
 > 2) `own(x, T)` 不能分裂为 `own(x, T) * own(x, T)`（不能有两个可变引用（Mutable Reference））；
 > 3) `shr(x, T)` 不能写入。这些规则在 RustBelt 中以**高阶协议**（higher-order protocol）编码，通过 Iris 框架证明。
 > RustBelt 证明了：若 unsafe 代码满足其协议，则 safe Rust 代码不可能触发 UB。

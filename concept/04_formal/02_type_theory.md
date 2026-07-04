@@ -249,7 +249,7 @@ Preservation: 若 ⊢ e : τ 且 e → e'，则 ⊢ e' : τ                    [
 > **链 A（类型安全链）**: L1 (λ→ 类型保持) ⟹ L2 (System F 参数多态) ⟹ T1 (进展+保持=类型安全) ⟹ C1 (递归类型安全) / L3 (所有权（Ownership）安全)
 > **链 B（子类型链）**: T2 (子类型传递性) ⟹ T4 (Variance 传播) ⟹ Rust 生命周期替换与容器协变检查
 > **链 C（推断链）**: T5 (HM 推断完备性) ⟹ T3 (约束可满足性) ⟹ C2 (高阶类型归一化) / C3 (存在类型抽象)
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §3.1 "L1-L4 形式化映射" · §4.2 "类型系统一致性（Coherence）"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §3.1 "L1-L4 形式化映射" · §4.2 "类型系统（Type System）一致性（Coherence）"
 
 ---
 
@@ -283,7 +283,7 @@ graph TD
 
 > **认知功能**:
 > 此决策树将「类型安全」的边界逐层剥离，训练读者区分「类型错误」与「非类型错误」（非终止、资源耗尽、unsafe）。
-> 建议遇到 panic 时沿树回溯，判断问题是否属于类型系统管辖范围。关键洞察：Progress + Preservation 仅保证良类型程序「不卡住」，不保证终止性、资源充足或 FFI 安全。
+> 建议遇到 panic 时沿树回溯，判断问题是否属于类型系统（Type System）管辖范围。关键洞察：Progress + Preservation 仅保证良类型程序「不卡住」，不保证终止性、资源充足或 FFI 安全。
 > [来源: 💡 原创分析]
 
 **四层分析**:
@@ -359,7 +359,7 @@ graph TD
 
 > **认知功能**:
 > 此决策树将协变/逆变/不变理论转化为可操作的类型安全检查清单。
-> 建议在设计泛型容器或阅读标准库源码时，据此验证 Variance 标注是否与内部可变性一致。
+> 建议在设计泛型（Generics）容器或阅读标准库源码时，据此验证 Variance 标注是否与内部可变性一致。
 > 关键洞察：协变加可变写入等于类型污染（Java 数组的设计缺陷），而 `Cell<T>` 和 `&mut T` 的不变性正是 Rust 为此付出的安全成本。
 > [来源: 💡 原创分析]
 
@@ -369,7 +369,7 @@ graph TD
 |:---|:---|:---|
 | 协变 | 只读访问，无内部可变性 | Java 协变数组 + 写入 → `ArrayStoreException` |
 | 逆变 | 仅作为输入位置（函数参数） | 错误标注为协变 → 接受非法参数 |
-| 不变 | 涉及内部可变性或读写双向 | 强行协变/逆变替换 → 悬垂引用、类型混淆 |
+| 不变 | 涉及内部可变性或读写双向 | 强行协变/逆变替换 → 悬垂引用（Reference）、类型混淆 |
 | 混合（`fn(T) -> U`） | T 逆变且 U 协变 | T 协变或 U 逆变标注错误 → 调用链类型破坏 |
 
 ---
@@ -458,7 +458,7 @@ Rust 类型系统 = λ→ + System F + HM + λ<: + 线性类型 + 约束类型
 
 - **类比**: 类型系统像"建筑的抗震规范"——不限制设计创意，但确保在地震（错误输入）时不倒塌（UB）。
 - **反直觉点**: 很多人觉得类型是"束缚"，类型论证明它是"自动化推理引擎"——编译器替你证明了程序无类型错误。
-- **形式化过渡**: "类型匹配" → "合一算法" → "HM 推断" → "System F / Parametricity" → "线性类型/所有权"。
+- **形式化过渡**: "类型匹配" → "合一算法" → "HM 推断" → "System F / Parametricity" → "线性类型/所有权（Ownership）"。
 
 ---
 
@@ -471,13 +471,13 @@ Rust 类型系统 = λ→ + System F + HM + λ<: + 线性类型 + 约束类型
 | L1: λ→ 简单类型 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §4.5 T3 | **精确** | L1 的 T3 类型安全定理依赖 L4 的 λ→ 基础 |
 | T5: HM 推断完备性 | `../01_foundation/04_type_system.md` §4.4 T2 | **精确** | L1 T2（类型推断（Type Inference）完备性）是 T5 的工程实例 |
 | T1: 进展+保持=类型安全 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §4.5 T3 | **精确** | L1 T3 是 T1 在 Rust 中的受限形式 |
-| L3: 线性/所有权类型 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | **精确** | L1 所有权规则是 L3 线性类型的工程化 |
+| L3: 线性/所有权（Ownership）类型 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | **精确** | L1 所有权规则是 L3 线性类型的工程化 |
 
 ### 7.2 L4 → L2 下行映射
 
 | **L4 形式化概念** | **L2 进阶文件** | **映射精度** | **标注** |
 |:---|:---|:---|:---|
-| L2: System F 参数多态 | `../02_intermediate/02_generics.md` §4.1 | **精确** | L2 泛型形式化 = System F 的单态化（Monomorphization）实现 |
+| L2: System F 参数多态 | `../02_intermediate/02_generics.md` §4.1 | **精确** | L2 泛型（Generics）形式化 = System F 的单态化（Monomorphization）实现 |
 | T3: 约束可满足性 | [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) §4.4 | **精确** | L2 约束多态是 T3 的工程语法 |
 | C2: 高阶类型/GATs | [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) §2.3 | **精确** | L2 GATs 是 C2 的 Rust 语法 |
 | T2: 子类型传递性 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) §4.3 | **近似** | L2 Supertrait 传递依赖 T2 子类型理论 |
@@ -694,7 +694,7 @@ let b: Array<i32, 4> = Array { data: [1, 2, 3, 4] };
 | 维度 | 完整依赖类型（Idris/Coq） | Rust Const Generics |
 |:---|:---|:---|
 | **值的范围** | 任意项（包括递归函数结果） | 仅 `usize`、`bool`、`char` 等少量原始类型的常量表达式 |
-| **类型检查时机** | 编译期 + 运行期（依赖值可能运行时才知） | 仅编译期（常量求值器 `miri` 子集） |
+| **类型检查时机** | 编译期 + 运行期（依赖值可能运行时（Runtime）才知） | 仅编译期（常量求值器 `miri` 子集） |
 | **表达能力** | 可证明任意性质（对应 Curry-Howard 的完整对应） | 可表达数组长度、位掩码尺寸等工程场景 |
 | **类型相等判定** | 依赖项的归约（可能不可判定） | 常量表达式的编译期求值（可判定） |
 | **与unsafe关系** | 无 unsafe 概念（证明即程序） | 仍依赖 unsafe 进行底层优化 |
@@ -750,7 +750,7 @@ const fn sum<T: ~const Add>(a: T, b: T) -> T {  // T 必须支持 const Add
 }
 ```
 
-形式化上，`~const Trait` 将 trait 约束系统从**二值**（实现/未实现）扩展为**三值**（实现 + const 安全 / 实现但仅运行时 / 未实现），增加了约束求解的复杂度。
+形式化上，`~const Trait` 将 trait 约束系统从**二值**（实现/未实现）扩展为**三值**（实现 + const 安全 / 实现但仅运行时（Runtime） / 未实现），增加了约束求解的复杂度。
 
 **与 System Fω 的关联**:
 
@@ -817,7 +817,7 @@ impl<T> Option<T> { fn map<U>(self, f: impl FnOnce(T) -> U) -> Option<U> { ... }
 impl<T> Result<T, E> { fn map<U>(self, f: impl FnOnce(T) -> U) -> Result<U, E> { ... } }
 ```
 
-> **形式化视角**: HKT 需要 **System F_ω**（允许类型抽象的类型构造器）。Rust 的类型系统接近 System F_ω + 区域类型，但出于**单态化实现的复杂性**和**类型推断（Type Inference）的实用性**，HKT 尚未加入语言。GATs 提供了约 80% 的 HKT 表达能力，剩余 20%（高阶类型抽象）需通过宏（Macro）或显式实例化弥补。
+> **形式化视角**: HKT 需要 **System F_ω**（允许类型抽象的类型构造器）。Rust 的类型系统接近 System F_ω + 区域类型，但出于**单态化（Monomorphization）实现的复杂性**和**类型推断（Type Inference）的实用性**，HKT 尚未加入语言。GATs 提供了约 80% 的 HKT 表达能力，剩余 20%（高阶类型抽象）需通过宏（Macro）或显式实例化弥补。
 > **来源**: [Wikipedia: Higher-kinded type](https://en.wikipedia.org/wiki/Higher-kinded_type) · [TAPL Ch.29] · [Rust Internals: HKT Discussion] · [RFC 1598: GATs](https://github.com/rust-lang/rfcs/pull/1598)
 
 ### 10.3 线性逻辑与所有权类型的 Curry-Howard 对应
@@ -1132,7 +1132,7 @@ fn main() {
 >
 > Rust 不原生支持 GADT 是因为：
 >
-> 1) 类型推断更复杂（GADT 的 unification 是半可判定的）；
+> 1) 类型推断（Type Inference）更复杂（GADT 的 unification 是半可判定的）；
 > 2) 模式匹配（Pattern Matching） exhaustiveness 检查需考虑类型约束；
 > 3) 与当前类型系统的交互（lifetime、trait bound）尚未完全设计。
 >
@@ -1158,7 +1158,7 @@ fn main() {}
 > **HKT**（Higher-Kinded Types）允许类型构造器（如 `Vec`、`Option`）作为类型参数：`Functor<Vec>` 表示"Vec 是一个 Functor"。
 > Rust **不原生支持 HKT**，因为：
 >
-> 1) 类型系统复杂度（HKT 的类型推断是半可判定的）；
+> 1) 类型系统复杂度（HKT 的类型推断（Type Inference）是半可判定的）；
 > 2) 与当前 trait 系统的交互（关联类型、生命周期）；
 > 3) 工程优先级（GAT 已解决大部分用例）。
 >
@@ -1318,7 +1318,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - A. `'a` 是一个运行时变量，编译器在运行期检查生命周期
 - B. `'a` 是类型参数，与泛型参数 `T` 地位相同，但在编译期被擦除
 - C. `'a` 是一个特殊的注释，不影响代码生成
-- D. `'a` 是引用计数器的名称
+- D. `'a` 是引用（Reference）计数器的名称
 
 <details>
 <summary>✅ 答案与解析</summary>

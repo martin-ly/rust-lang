@@ -28,8 +28,8 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 表达式 vs 语句](#11-表达式-vs-语句)
-    - [1.2 match：穷尽性模式匹配（Pattern Matching）](#12-match穷尽性模式匹配)
-    - [1.3 if let / while let：简化的模式匹配（Pattern Matching）](#13-if-let--while-let简化的模式匹配)
+    - [1.2 match：穷尽性模式匹配](#12-match穷尽性模式匹配)
+    - [1.3 if let / while let：简化的模式匹配](#13-if-let--while-let简化的模式匹配)
   - [二、技术细节](#二技术细节)
     - [2.1 loop 与值返回](#21-loop-与值返回)
     - [2.2 标签与嵌套循环控制](#22-标签与嵌套循环控制)
@@ -45,9 +45,9 @@
   - [十二、边界测试：控制流的编译错误](#十二边界测试控制流的编译错误)
     - [12.1 边界测试：`loop` 返回值类型不匹配（编译错误）](#121-边界测试loop-返回值类型不匹配编译错误)
     - [12.2 边界测试：`if let` 与 `while let` 的变量遮蔽（编译错误）](#122-边界测试if-let-与-while-let-的变量遮蔽编译错误)
-    - [10.3 边界测试：`loop` 表达式的类型推断（Type Inference）（编译错误）](#103-边界测试loop-表达式的类型推断编译错误)
+    - [10.3 边界测试：`loop` 表达式的类型推断（编译错误）](#103-边界测试loop-表达式的类型推断编译错误)
     - [10.4 边界测试：`?` 运算符在 `main` 中的返回类型（编译错误）](#104-边界测试-运算符在-main-中的返回类型编译错误)
-    - [10.5 边界测试：`loop` 返回值与 `break` 的类型一致性（Coherence）（编译错误）](#105-边界测试loop-返回值与-break-的类型一致性编译错误)
+    - [10.5 边界测试：`loop` 返回值与 `break` 的类型一致性（编译错误）](#105-边界测试loop-返回值与-break-的类型一致性编译错误)
     - [10.6 边界测试：`match` 臂中的变量绑定与模式守卫（编译错误）](#106-边界测试match-臂中的变量绑定与模式守卫编译错误)
   - [实践](#实践)
   - [参考来源](#参考来源)
@@ -556,7 +556,7 @@ graph TD
 | [Rust Reference — Expressions](https://doc.rust-lang.org/reference/expressions.html) | ✅ 一级 | 官方表达式参考 |
 | [TRPL Ch3 — Control Flow](https://doc.rust-lang.org/book/ch03-05-control-flow.html) | ✅ 一级 | 控制流入门 |
 | [TRPL Ch6 — Match](https://doc.rust-lang.org/book/ch06-02-match.html) | ✅ 一级 | match 详解 |
-| [TRPL Ch18 — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) | ✅ 一级 | 模式匹配深入 |
+| [TRPL Ch18 — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) | ✅ 一级 | 模式匹配（Pattern Matching）深入 |
 | [RFC 160 — if let](https://github.com/rust-lang/rfcs/pull/160) | ✅ 一级 | if let RFC |
 | [RFC 3137 — let else](https://github.com/rust-lang/rfcs/pull/3137) | ✅ 一级 | let else RFC |
 
@@ -1102,7 +1102,7 @@ reset {              // 边界
 
 #### Rust 关联
 
-Rust **没有** `call/cc`，原因与所有权模型密切相关：`call/cc` 会捕获整个调用栈的延续，可能与线性资源（如已获取的锁、已打开的文件）产生不可预测的生命周期（Lifetimes）交互，破坏 Rust 的借用（Borrowing）规则。
+Rust **没有** `call/cc`，原因与所有权（Ownership）模型密切相关：`call/cc` 会捕获整个调用栈的延续，可能与线性资源（如已获取的锁、已打开的文件）产生不可预测的生命周期（Lifetimes）交互，破坏 Rust 的借用（Borrowing）规则。
 
 然而，Rust 中多处存在 continuation 的显式或隐式形式：
 
@@ -1567,7 +1567,7 @@ goto 的错误清理模式
   └─────────────┘
 ```
 
-> **关键洞察**：`break 'label`、`?` 与 `async/await` 都是 Rust 在结构化程序定理框架内提供的受限"跳转"机制——分别处理循环嵌套、错误路径与异步（Async）挂起；二者都不会破坏资源的安全释放，也不会像 `goto` 那样导致不可达代码或生命周期（Lifetimes）混乱。C++ 的 `co_await` 则在另一套类型系统约束下解决了同一类问题。
+> **关键洞察**：`break 'label`、`?` 与 `async/await` 都是 Rust 在结构化程序定理框架内提供的受限"跳转"机制——分别处理循环嵌套、错误路径与异步（Async）挂起；二者都不会破坏资源的安全释放，也不会像 `goto` 那样导致不可达代码或生命周期（Lifetimes）混乱。C++ 的 `co_await` 则在另一套类型系统（Type System）约束下解决了同一类问题。
 > **关联章节**: [Error Handling Basics](32_error_handling_basics.md) · [Async Control Flow](../03_advanced/02_async.md) · [Panic and Abort](13_panic_and_abort.md)
 
 ---

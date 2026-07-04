@@ -58,7 +58,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：BorrowSanitizer 预览的编译错误](#十边界测试borrowsanitizer-预览的编译错误)
     - [10.1 边界测试：BorrowSanitizer 的别名分析误报（编译错误/运行时（Runtime）检测）](#101-边界测试borrowsanitizer-的别名分析误报编译错误运行时检测)
-    - [10.2 边界测试：Sanitizer 与优化的交互（运行时检测丢失）](#102-边界测试sanitizer-与优化的交互运行时检测丢失)
+    - [10.2 边界测试：Sanitizer 与优化的交互（运行时（Runtime）检测丢失）](#102-边界测试sanitizer-与优化的交互运行时检测丢失)
     - [10.3 边界测试：BorrowSanitizer 与 FFI 的交互盲区（运行时漏报）](#103-边界测试borrowsanitizer-与-ffi-的交互盲区运行时漏报)
     - [10.6 边界测试：BorrowSanitizer 与 `unsafe` 块内的合法别名（运行时误报）](#106-边界测试borrowsanitizer-与-unsafe-块内的合法别名运行时误报)
     - [10.5 边界测试：BorrowSanitizer 与 Miri 的检测范围差异（UB 漏检）](#105-边界测试borrowsanitizer-与-miri-的检测范围差异ub-漏检)
@@ -218,7 +218,7 @@ Tree Borrows 核心规则（简化）:
    - Unique 允许单一读写，排斥其他访问
 ```
 
-> **形式化视角**: Tree Borrows 将 Rust 的借用检查从**线性栈**（Stacked Borrows）推广到**树形结构**，允许更灵活的借用模式。BorrowSanitizer 的 Shadow Stack 需要实现这一树形结构的运行时跟踪。
+> **形式化视角**: Tree Borrows 将 Rust 的借用（Borrowing）检查从**线性栈**（Stacked Borrows）推广到**树形结构**，允许更灵活的借用模式。BorrowSanitizer 的 Shadow Stack 需要实现这一树形结构的运行时跟踪。
 > [来源: [Tree Borrows Paper (POPL 2026)](https://perso.crans.org/vanille/treebor/)]
 
 ---

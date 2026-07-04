@@ -317,7 +317,7 @@ impl std::error::Error for ManualError {
   └─────────────────┴─────────────────┴─────────────────┘
 ```
 
-> **框架洞察**: Rust 错误处理生态的**二分法**——`thiserror` 用于需要精确错误类型的**库**，`anyhow` 用于快速开发的**应用**。
+> **框架洞察**: Rust 错误处理（Error Handling）生态的**二分法**——`thiserror` 用于需要精确错误类型的**库**，`anyhow` 用于快速开发的**应用**。
 > [来源: [anyhow crate](https://docs.rs/anyhow/latest/anyhow/)]
 
 ---

@@ -40,7 +40,7 @@
     - [2.3 宏（Macro）卫生性的形式化](#23-宏卫生性的形式化)
   - [三、元编程技术矩阵](#三元编程技术矩阵)
     - [3.1 元编程技术选型矩阵](#31-元编程技术选型矩阵)
-    - [3.2 宏与 const eval 的演进趋势](#32-宏与-const-eval-的演进趋势)
+    - [3.2 宏（Macro）与 const eval 的演进趋势](#32-宏与-const-eval-的演进趋势)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
@@ -60,7 +60,7 @@
     - [测验 2：声明宏（Declarative Macro）的"卫生性"（hygiene）意味着什么？（理解层）](#测验-2声明宏的卫生性hygiene意味着什么理解层)
     - [测验 3：`compile_error!("msg")` 宏的作用是什么？（理解层）](#测验-3compile_errormsg-宏的作用是什么理解层)
     - [测验 4：`concat!` 和 `stringify!` 宏分别做什么？（理解层）](#测验-4concat-和-stringify-宏分别做什么理解层)
-    - [测验 5：为什么过程宏必须放在独立的 crate 中，而不能与使用它的代码在同一 crate？（理解层）](#测验-5为什么过程宏必须放在独立的-crate-中而不能与使用它的代码在同一-crate理解层)
+    - [测验 5：为什么过程宏（Procedural Macro）必须放在独立的 crate 中，而不能与使用它的代码在同一 crate？（理解层）](#测验-5为什么过程宏必须放在独立的-crate-中而不能与使用它的代码在同一-crate理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -396,7 +396,7 @@ Rust 元编程的演进方向:
   └── 状态: 实验性，未稳定
 ```
 
-> **认知功能**: 元编程技术选型的**核心原则**——"能用 const fn 就不用宏，能用泛型就不用宏"——因为宏放弃了类型系统（Type System）的保护，而 const eval 在编译期计算的同时保持类型安全。
+> **认知功能**: 元编程技术选型的**核心原则**——"能用 const fn 就不用宏，能用泛型（Generics）就不用宏"——因为宏放弃了类型系统（Type System）的保护，而 const eval 在编译期计算的同时保持类型安全。
 > [来源: [Rust RFC — const fn 演进](https://github.com/rust-lang/rfcs/blob/master/text/0911-const-fn.md)]
 
 ---
@@ -726,14 +726,14 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-`macro_rules!` 基于模式匹配和代码模板替换，在编译早期展开。过程宏是外部 crate 中的 Rust 函数，接收 TokenStream 并输出 TokenStream，可操作更复杂的语法。
+`macro_rules!` 基于模式匹配（Pattern Matching）和代码模板替换，在编译早期展开。过程宏是外部 crate 中的 Rust 函数，接收 TokenStream 并输出 TokenStream，可操作更复杂的语法。
 </details>
 
 ---
 
 ### 测验 2：声明宏的"卫生性"（hygiene）意味着什么？（理解层）
 
-**题目**: 声明宏的"卫生性"（hygiene）意味着什么？
+**题目**: 声明宏（Declarative Macro）的"卫生性"（hygiene）意味着什么？
 
 <details>
 <summary>✅ 答案与解析</summary>

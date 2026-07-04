@@ -24,15 +24,15 @@
 - [Rust vs Elixir 对比分析](#rust-vs-elixir-对比分析)
   - [📑 目录](#-目录)
   - [一、设计哲学对比](#一设计哲学对比)
-    - [1.1 错误处理（Error Handling）哲学](#11-错误处理哲学)
+    - [1.1 错误处理哲学](#11-错误处理哲学)
     - [1.2 并发模型对比](#12-并发模型对比)
   - [二、并发模型](#二并发模型)
     - [2.1 BEAM 并发模型](#21-beam-并发模型)
     - [2.2 Rust 并发模型](#22-rust-并发模型)
-  - [三、类型系统（Type System）](#三类型系统)
+  - [三、类型系统](#三类型系统)
     - [3.1 静态 vs 动态](#31-静态-vs-动态)
-    - [3.2 模式匹配（Pattern Matching）](#32-模式匹配)
-  - [四、运行时（Runtime）与部署](#四运行时与部署)
+    - [3.2 模式匹配](#32-模式匹配)
+  - [四、运行时与部署](#四运行时与部署)
   - [五、互操作](#五互操作)
   - [六、反命题与适用场景](#六反命题与适用场景)
     - [6.1 反命题树](#61-反命题树)
@@ -318,7 +318,7 @@ Rust 并发模型:
   end
 ```
 
-> **类型洞察**: **Rust 在编译期捕获错误，Elixir 在运行时灵活处理**——各有优劣。
+> **类型洞察**: **Rust 在编译期捕获错误，Elixir 在运行时（Runtime）灵活处理**——各有优劣。
 > [来源: [Elixir Typespecs](https://hexdocs.pm/elixir/typespecs.html)]
 
 ---
@@ -710,7 +710,7 @@ fn fixed() {
 }
 ```
 
-> **Elixir 对比**: Elixir 的进程（Actor 模型）通过邮箱（mailbox）接收消息，每个进程有独立邮箱，无共享状态。Rust 的 `mpsc::channel` 是多生产者单消费者——多个发送者，一个接收者。若需广播，使用 `tokio::sync::broadcast` 或 `crossbeam::channel`。Elixir 的进程隔离在虚拟机（BEAM）层面实现，Rust 的 channel 在类型系统层面保证线程安全。两者都消除了数据竞争，但实现层级不同。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **Elixir 对比**: Elixir 的进程（Actor 模型）通过邮箱（mailbox）接收消息，每个进程有独立邮箱，无共享状态。Rust 的 `mpsc::channel` 是多生产者单消费者——多个发送者，一个接收者。若需广播，使用 `tokio::sync::broadcast` 或 `crossbeam::channel`。Elixir 的进程隔离在虚拟机（BEAM）层面实现，Rust 的 channel 在类型系统（Type System）层面保证线程安全。两者都消除了数据竞争，但实现层级不同。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.5 边界测试：Elixir 的进程隔离与 Rust 的共享内存并发（编译错误）
 

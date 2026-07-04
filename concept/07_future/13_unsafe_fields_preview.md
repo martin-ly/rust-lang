@@ -66,7 +66,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Unsafe Fields 预览的编译错误](#十边界测试unsafe-fields-预览的编译错误)
     - [10.1 边界测试：unsafe 字段的显式访问要求（编译错误）](#101-边界测试unsafe-字段的显式访问要求编译错误)
-    - [10.2 边界测试：unsafe 字段与 Drop 的交互（运行时（Runtime） UB）](#102-边界测试unsafe-字段与-drop-的交互运行时-ub)
+    - [10.2 边界测试：unsafe 字段与 Drop 的交互（运行时 UB）](#102-边界测试unsafe-字段与-drop-的交互运行时-ub)
     - [10.3 边界测试：unsafe 字段与 `#[repr(C)]` 的交互（编译错误）](#103-边界测试unsafe-字段与-reprc-的交互编译错误)
     - [10.4 边界测试：unsafe 字段与不变式的文档化（逻辑错误）](#104-边界测试unsafe-字段与不变式的文档化逻辑错误)
     - [补充定理链](#补充定理链)
@@ -459,7 +459,7 @@ impl Buffer {
 > 这比将整个类型标记为 unsafe（如 `std::mem::ManuallyDrop`）更细粒度：只有字段访问需要 `unsafe`，类型的构造和其他方法可以是安全的。
 > 使用场景：FFI 绑定中的原始句柄、自引用（Reference）结构中的内部指针、手动内存管理中的元数据。
 > 安全封装模式：`Buffer` 的公开 API 完全安全，内部使用 `unsafe` 字段实现；unsafe 字段的文档必须明确列出不变式（invariants）和前置条件。
-> 这与 C 的结构体（所有字段无限制访问）或 Rust 当前的 `pub`/`priv` 封装（不区分安全级别）不同——unsafe fields 将"需要人工审查的代码"在语法层面显式化。
+> 这与 C 的结构体（Struct）（所有字段无限制访问）或 Rust 当前的 `pub`/`priv` 封装（不区分安全级别）不同——unsafe fields 将"需要人工审查的代码"在语法层面显式化。
 > [来源: [Unsafe Fields Tracking Issue](https://github.com/rust-lang/rust/issues/132922)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
 ### 10.2 边界测试：unsafe 字段与 Drop 的交互（运行时 UB）

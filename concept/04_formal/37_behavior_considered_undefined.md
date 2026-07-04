@@ -19,7 +19,6 @@
 
 ---
 
-
 ---
 
 ## 认知路径
@@ -32,7 +31,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与未定义行为清单（Behavior Considered Un的适用边界。
 5. **迁移应用**: 将 未定义行为清单（Behavior Considered Un 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -42,7 +40,6 @@
 > **反命题 2**: "忽略 未定义行为清单（Behavior Considered Un 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 未定义行为清单（Behavior Considered Un 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 未定义行为清单（Behavior Considered Un 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 未定义行为清单（Behavior Considered Un 具有语言特有的形态。
-
 
 ## 一、核心原则
 
@@ -83,7 +80,7 @@
 - `const` 提升表达式可达的字节。
 - `static` / `const` 初始化器中生命周期（Lifetimes）被延长到 `'static` 的借用（Borrowing）可达的字节。
 - 不可变绑定或不可变 `static` 拥有的字节（`UnsafeCell<U>` 内部除外）。
-- 共享引用（以及通过 `Box`、复合类型字段传递的引用）可达的字节。
+- 共享引用（Reference）（以及通过 `Box`、复合类型字段传递的引用）可达的字节。
 
 ### 6. 调用编译器内建产生 UB
 
@@ -125,7 +122,7 @@
 
 - 当前大多数运行时（Runtime）假设未显式文档化。
 - unwind 相关假设参见 panic 文档。
-- 运行时期望 Rust 栈帧在局部变量析构完成前不会被释放；`longjmp` 等 C 函数可能违反该假设。
+- 运行时（Runtime）期望 Rust 栈帧在局部变量析构完成前不会被释放；`longjmp` 等 C 函数可能违反该假设。
 
 ---
 

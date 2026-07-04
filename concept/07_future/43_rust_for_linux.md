@@ -68,7 +68,7 @@
   - [自 docs/06\_toolchain/06\_rust\_for\_linux\_tooling\_guide.md 合并的补充内容](#自-docs06_toolchain06_rust_for_linux_tooling_guidemd-合并的补充内容)
     - [工具链需求](#工具链需求)
     - [内核编译目标](#内核编译目标)
-    - [内核模块编写基础](#内核模块编写基础)
+    - [内核模块（Module）编写基础](#内核模块编写基础)
       - [`#[no_std]` 与 `#[no_main]`](#no_std-与-no_main)
       - [`panic_handler`](#panic_handler)
       - [`alloc` 配置](#alloc-配置)
@@ -804,7 +804,7 @@ fn main() {}
 
 ### 补充定理链
 
-- **定理**: Rust for Linux ：操作系统内核中的内存安全 定义 ⟹ 类型安全保证
+- **定理**: Rust for Linux ：操作系统内核中的内存安全（Memory Safety） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 

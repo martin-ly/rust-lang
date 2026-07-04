@@ -187,7 +187,7 @@ graph TD
 | **维度** | **Rust 方案** | **对比语言** | **Rust 优势** |
 |:---|:---|:---|:---|
 | 并发模型 | async/await + work-stealing | Go goroutine / Java 线程池 | 编译期无数据竞争 |
-| 内存安全 | 所有权（Ownership）系统 | Go GC / Java GC | 无 GC 停顿、确定性内存 |
+| 内存安全（Memory Safety） | 所有权（Ownership）系统 | Go GC / Java GC | 无 GC 停顿、确定性内存 |
 | 性能 | 接近 C++ | Go 慢 2-5x | 零成本抽象（Zero-Cost Abstraction） |
 | 错误处理（Error Handling） | Result + ? 显式传播 | Go error / Java exception | 错误不可忽略 |
 | 部署 | 单静态二进制 | Go 类似 / Java JAR | 无运行时（Runtime）依赖 |
@@ -285,7 +285,7 @@ Rust 在嵌入式领域的独特价值：
 
 **战略意义**: Espressif 的正式背书消除了企业采用 Rust 嵌入式的最大障碍——**厂商支持不确定性**。此前 STM32/Nordic 的 HAL 均为社区维护，而 Espressif 的付费团队承诺长期维护，为其他芯片厂商树立了先例。这与 ARM 的 CMSIS、Nordic 的 SDK 策略形成对比：Espressif 选择直接支持 Rust 而非仅提供 C SDK + FFI 绑定。
 
-**关键洞察**：embassy 的 `async` 在 `no_std` 环境下的实现，证明了 Rust 的 async/await 不是运行时的专利——通过编译期状态机转换，裸机上也能获得协作式多任务，且无堆分配。
+**关键洞察**：embassy 的 `async` 在 `no_std` 环境下的实现，证明了 Rust 的 async/await 不是运行时（Runtime）的专利——通过编译期状态机转换，裸机上也能获得协作式多任务，且无堆分配。
 
 > **来源**: [Ferrous Systems — Embedded Rust] · [Embassy Book](https://embassy.dev/book/) · 可信度: ✅
 
@@ -629,7 +629,7 @@ fn move_player(
 | **应用领域** | **L1 基础** | **L2 进阶** | **L3 高级** | **L4 形式化** | **L5 对比** |
 |:---|:---|:---|:---|:---|:---|
 | **Web 后端** | 所有权（Ownership） + 生命周期（Lifetimes） | Trait (Handler) | async/await + Send/Sync | — | Go/Java 并发模型 |
-| **CLI** | 所有权 + Result | Trait (derive) | 过程宏（Procedural Macro） | — | Python Click |
+| **CLI** | 所有权（Ownership） + Result | Trait (derive) | 过程宏（Procedural Macro） | — | Python Click |
 | **嵌入式** | 裸指针 + no_std | — | unsafe + 中断安全 | — | C bare-metal |
 | **游戏** | 所有权 | 泛型 (ECS) | unsafe (GPU) | — | C++ Unreal |
 | **区块链** | 整数溢出检查 | — | unsafe (密码学) | — | Solidity/Go |
@@ -949,7 +949,7 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 | **极小的脚本（<100 行）** | 编译时间 > 运行时间；Cargo 项目结构过重 | Python/bash/Perl |
 | **与 GC 语言频繁互操作** | FFI 开销 + 所有权转换成本；心智负担高 | 纯 GC 语言或纯 Rust |
 | **需要频繁反射/动态分派** | Rust 反射能力弱（宏（Macro）编译期）；动态分发需 `dyn` | Go/Java/C# |
-| **GUI 快速开发** | 生态不成熟（相比 Qt/Electron）；异步 GUI 复杂 | Electron/Tauri (JS) / Qt (C++) |
+| **GUI 快速开发** | 生态不成熟（相比 Qt/Electron）；异步（Async） GUI 复杂 | Electron/Tauri (JS) / Qt (C++) |
 | **数据科学探索性编程** | 缺少 Jupyter 原生支持；迭代编译慢 | Python (Jupyter) / R |
 
 **真实失败案例**：
@@ -1070,7 +1070,7 @@ fn view(app: &App, frame: Frame) {
 
 | 断言 | 前提条件 | 结论 | 反例/边界条件 | 典型场景 |
 |:---|:---|:---|:---|:---|
-| **Rust 擅长系统编程** | 所有权+零成本抽象（Zero-Cost Abstraction） ⟹ | 替代C/C++系统代码 | FFI（FFI）复杂度 | 操作系统/驱动/内核模块 |
+| **Rust 擅长系统编程** | 所有权+零成本抽象（Zero-Cost Abstraction） ⟹ | 替代C/C++系统代码 | FFI（FFI）复杂度 | 操作系统/驱动/内核模块（Module） |
 | **Rust Web 后端性能优秀** | async零成本 ⟹ | 内存安全减少漏洞 | 生态数量vs Go/Java | 高并发API服务 |
 | **Rust 嵌入式安全** | no_std支持 ⟹ | 确定性内存 | 硬件抽象层覆盖 | IoT/实时系统 |
 | **Rust 区块链主流** | 内存安全防漏洞 ⟹ | 高性能共识 | 智能合约语言竞争 | Solana/Substrate |
@@ -1197,7 +1197,7 @@ graph TD
 
 **与 L1-L4 的映射**:
 
-- **L1 所有权**: `no_std` 下无 `std::alloc`，所有权模型退化为**静态分配 + 借用检查**。Embassy 的任务（`Task`）是静态分配的，其生命周期（Lifetimes）由编译期证明管理。
+- **L1 所有权**: `no_std` 下无 `std::alloc`，所有权模型退化为**静态分配 + 借用（Borrowing）检查**。Embassy 的任务（`Task`）是静态分配的，其生命周期（Lifetimes）由编译期证明管理。
 - **L3 Async**: `embassy::executor` 是 `Future` 状态机的手动轮询器，与 Tokio 的运行时对偶——Tokio 提供**运行时抽象**，Embassy 提供**编译期调度**。 [来源: [lib.rs](https://lib.rs/)]
 - **L4 形式化**: Embassy 的调度器是**确定性有限自动机（DFA）**——任务优先级、中断向量、DMA 完成回调构成状态转换函数，无非确定性调度（无抢占、无优先级反转）。
 
@@ -1209,7 +1209,7 @@ graph TD
 
 ### 11.2 Rust for Linux：内核安全抽象的形式化边界
 
-**形式化定位**: Rust for Linux 是 Rust 类型系统与 Linux 内核 C API 的**形式化边界工程**。其核心挑战：将内核的复杂不变量（锁规则、引用（Reference）计数、IRQ 上下文）编码为 Rust 的类型契约。
+**形式化定位**: Rust for Linux 是 Rust 类型系统（Type System）与 Linux 内核 C API 的**形式化边界工程**。其核心挑战：将内核的复杂不变量（锁规则、引用（Reference）计数、IRQ 上下文）编码为 Rust 的类型契约。
 
 **与 L1-L4 的映射**:
 
@@ -1265,7 +1265,7 @@ graph TD
 - **L3 并发**: QUIC 的**流隔离**（stream isolation）是 Rust `Send/Sync` 的理想场景——每个流独立拥有其数据，流间无共享状态。`quinn` 的 `SendStream` 和 `RecvStream` 分别实现 `Send` 和 `Sync`，编译期保证无跨流数据竞争。
 - **L4 形式化**: QUIC 的协议状态机（Idle → Handshake → Connected → Draining → Closed）可通过**会话类型（Session Types）**形式化。Rust 的 `enum` + `match` 是会话类型的工程近似，但缺少**线性通道**（linear channel）的显式表达。 [来源: [crates.io](https://crates.io/)]
 
-**安全边界**: QUIC 的**连接迁移**（connection migration）允许客户端在 IP 变化后保持连接——这在 Rust 中对应于**资源标识符的生命周期管理**。`quinn` 通过 `ConnectionId` 的类型化封装，确保迁移后的连接身份验证在编译期可验证。
+**安全边界**: QUIC 的**连接迁移**（connection migration）允许客户端在 IP 变化后保持连接——这在 Rust 中对应于**资源标识符的生命周期（Lifetimes）管理**。`quinn` 通过 `ConnectionId` 的类型化封装，确保迁移后的连接身份验证在编译期可验证。
 
 > **[来源: Quinn Docs]** QUIC 的有状态连接天然适合 Rust 的类型状态模式。
 
@@ -1401,7 +1401,7 @@ struct AppStateFixed {
 }
 ```
 
-> **修正**: Web 服务器通常使用线程池或异步运行时处理并发请求。应用状态必须在多个线程间共享。`Rc<T>` 使用非原子引用计数，不能跨线程；`Arc<T>` 使用原子操作（Atomic Operations），是 `Send + Sync`。Rust 编译器在编译期验证这些约束——试图将 `Rc` 状态传递给多线程框架是编译错误。这与 Node.js 的全局状态（单线程事件循环）或 Python 的 GIL（全局解释器锁）不同——Rust 的并发安全（Concurrency Safety）通过类型系统静态保证，无运行时检查开销。[来源: [Actix Documentation](https://docs.rs/actix-web/)]
+> **修正**: Web 服务器通常使用线程池或异步运行时处理并发请求。应用状态必须在多个线程间共享。`Rc<T>` 使用非原子引用（Reference）计数，不能跨线程；`Arc<T>` 使用原子操作（Atomic Operations），是 `Send + Sync`。Rust 编译器在编译期验证这些约束——试图将 `Rc` 状态传递给多线程框架是编译错误。这与 Node.js 的全局状态（单线程事件循环）或 Python 的 GIL（全局解释器锁）不同——Rust 的并发安全（Concurrency Safety）通过类型系统静态保证，无运行时检查开销。[来源: [Actix Documentation](https://docs.rs/actix-web/)]
 
 ### 10.2 边界测试：游戏引擎中的 ECS 组件查询（编译错误）
 

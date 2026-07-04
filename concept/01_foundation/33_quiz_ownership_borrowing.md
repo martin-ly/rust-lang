@@ -50,7 +50,6 @@
 
 ---
 
-
 ---
 
 ## 认知路径
@@ -63,7 +62,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与测验的适用边界。
 5. **迁移应用**: 将 测验 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 > **过渡**: 从 测验 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -72,7 +70,6 @@
 
 > **过渡**: 最后，将 测验 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
-
 ---
 
 > **定理 1** [Tier 2]: 测验 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
@@ -80,7 +77,6 @@
 > **定理 2** [Tier 2]: 正确理解 测验 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
 >
 > **定理 3** [Tier 3]: 将 测验 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 
 ---
 
@@ -92,13 +88,11 @@
 
 > **反命题 3**: "其他语言对 测验 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 测验 具有语言特有的形态。
 
-
 ---
 
 > **反向推理 1**: 如果程序在 测验 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
 >
 > **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 测验 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
-
 
 ## 一、所有权规则
 
@@ -336,7 +330,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 ```
 
-**语义**：返回的引用生命周期（Lifetimes）至少与 `x` 和 `y` 中**较短的那个**一样长。
+**语义**：返回的引用（Reference）生命周期（Lifetimes）至少与 `x` 和 `y` 中**较短的那个**一样长。
 
 **知识点**：生命周期（Lifetimes）标注不改变运行时（Runtime）代码，仅向编译器提供**借用（Borrowing）关系约束**。→ 生命周期语法
 
@@ -412,7 +406,7 @@ fn main() {
 
 **解析**：`&v[0]` 创建了对 `v` 内部元素的不可变引用（Mutable Reference）。`v.push(4)` 需要 `&mut v`。如果 `push` 导致 `Vec` 重新分配内存，`first` 将变成悬垂指针。
 
-**修改方案**——分离借用：
+**修改方案**——分离借用（Borrowing）：
 
 ```rust
 fn main() {
@@ -472,7 +466,7 @@ shared shared
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
-| 10/10 | 🏆 所有权系统已内化 | 直接进阶至 [L2 智能指针（Smart Pointer）](../02_intermediate/03_memory_management.md) |
+| 10/10 | 🏆 所有权（Ownership）系统已内化 | 直接进阶至 [L2 智能指针（Smart Pointer）](../02_intermediate/03_memory_management.md) |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [L1 练习](../../exercises/src/ownership_borrowing)，关注错题对应的概念文件 |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Ownership](01_ownership.md) · [Borrowing](02_borrowing.md) · [Lifetimes](03_lifetimes.md)，完成 rustlings 对应章节 |
 | 0–3/10 | 📚 建议重新开始 | 从 [Ownership](01_ownership.md) 逐节阅读，配合 [crates/c01_ownership_borrow_scope](../../crates/c01_ownership_borrow_scope) 可编译示例 |
@@ -509,7 +503,7 @@ shared shared
 
 ### 测验 1：本文件是 测验：所有权、借用与生命周期（试点） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 
-**题目**: 本文件是 测验：所有权（Ownership）、借用与生命周期（试点） 的专项测验集。这类测验文件的主要作用是什么？
+**题目**: 本文件是 测验：所有权（Ownership）、借用与生命周期（Lifetimes）（试点） 的专项测验集。这类测验文件的主要作用是什么？
 
 <details>
 <summary>✅ 答案与解析</summary>

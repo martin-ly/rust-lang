@@ -301,7 +301,7 @@ cargo check -W rust-2024-compatibility
 | **Trait** | Trait 方法参数禁止匿名（必须有参数名） | `fn foo(&self, u8)` → `fn foo(&self, _: u8)` | `cargo fix` |
 | **类型推断（Type Inference）** | 裸指针方法分派改进 | 对推断变量的原始指针（Raw Pointer）更精确 | 自动 |
 
-**关键洞察**：Rust 2018 的核心主题是**路径清晰化（Path Clarity）**。`extern crate` 的消除、`crate::` 统一根路径、`use` 的相对化，共同构成了 "1path" 理念——无论身处 crate 的哪个模块，`use` 路径与非 `use` 路径的解析规则一致。[来源: Rust Blog — Rust 1.31 and Rust 2018]
+**关键洞察**：Rust 2018 的核心主题是**路径清晰化（Path Clarity）**。`extern crate` 的消除、`crate::` 统一根路径、`use` 的相对化，共同构成了 "1path" 理念——无论身处 crate 的哪个模块（Module），`use` 路径与非 `use` 路径的解析规则一致。[来源: Rust Blog — Rust 1.31 and Rust 2018]
 
 #### 2.3.2 Rust 2018 → 2021（Rust 1.56，2021-10）
 
@@ -325,7 +325,7 @@ cargo check -W rust-2024-compatibility
 |:---|:---|:---|:---|
 | **关键字** | `gen` 成为保留关键字 | 为生成器（generator）语法预留 | `cargo fix` 自动重命名变量为 `r#gen` |
 | **关键字** | 预留 `#"foo"#` 和 `##` 语法 | 为守护字符串字面量预留 | 自动检查 |
-| **生命周期** | RPIT lifetime capture rules | `impl Trait` 默认捕获所有输入生命周期 | 自动（旧代码通常直接编译），反向需 `+ use<>` |
+| **生命周期（Lifetimes）** | RPIT lifetime capture rules | `impl Trait` 默认捕获所有输入生命周期 | 自动（旧代码通常直接编译），反向需 `+ use<>` |
 | **生命周期** | `use<..>` precise capturing 语法稳定 | 显式控制 `impl Trait` 捕获哪些生命周期 | 手动设计（新 API 推荐显式标注）|
 | **Unsafe** | `unsafe_op_in_unsafe_fn` 默认 warn → deny | `unsafe fn` 体内的 unsafe 操作需显式 `unsafe { }` | `cargo fix` 自动包裹 |
 | **Unsafe** | `extern` 块必须标记 `unsafe` | `extern "C" { }` → `unsafe extern "C" { }` | `cargo fix` 自动添加 |
@@ -337,7 +337,7 @@ cargo check -W rust-2024-compatibility
 | **临时值** | `if let` 临时值作用域变化 | `if let Some(x) = expr()` 中临时值作用域调整 | 自动，通常无感知 |
 | **临时值** | 尾部表达式临时值作用域变化 | 块尾部表达式的临时值生命周期延长 | 自动 |
 | **宏（Macro）** | `:expr` 片段指定符匹配 `const` 和 `_` | 宏更灵活 | 自动 |
-| **宏** | 缺失片段指定符成为硬错误 | `($x)` → `($x:tt)` 必须补全 | `cargo fix` |
+| **宏（Macro）** | 缺失片段指定符成为硬错误 | `($x)` → `($x:tt)` 必须补全 | `cargo fix` |
 | **宏** | `macro_rules!` 支持 `pub` / `pub(crate)` | 宏可见性可控 | 可选显式声明 |
 | **Prelude** | `Future`、`IntoFuture` 加入 prelude | async 生态更无缝 | 自动 |
 | **迭代器（Iterator）** | `Box<[T]>` 实现 `IntoIterator<Item = T>` | 盒装切片（Slice）可按值迭代 | 自动（方法解析隐藏旧行为）|
@@ -574,7 +574,7 @@ impl Clone for String { /* 专门实现，更高效*/ }
 
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [min_const_generics 稳定报告]
 
-Const 泛型允许类型参数包含常量值（而不仅仅是类型）：
+Const 泛型（Generics）允许类型参数包含常量值（而不仅仅是类型）：
 
 ```rust
 struct Array<T, const N: usize> {
@@ -855,7 +855,7 @@ components = ["rust-src", "rustc-dev", "llvm-tools"]
 
 | 演进方向 | 影响的概念层 | 关联文件 | 演进风险 |
 |:---|:---|:---|:---|
-| GATs 完整化 | L2 泛型 + Trait | `02_intermediate/02_generics.md`, `01_traits.md` | 类型系统复杂度 |
+| GATs 完整化 | L2 泛型 + Trait | `02_intermediate/02_generics.md`, `01_traits.md` | 类型系统（Type System）复杂度 |
 | Effects 系统 | L2 Trait + L3 Async | `02_intermediate/01_traits.md`, `03_advanced/02_async.md` | 学习曲线 |
 | 特化 (Specialization) | L2 Trait | `02_intermediate/01_traits.md` | Coherence 破坏 |
 | Const 泛型扩展 | L2 泛型 | `02_intermediate/02_generics.md` | 编译时间 |
@@ -1183,7 +1183,7 @@ impl LendingIterator for Vec<String> {
 
 > **修正**:
 > 泛型关联类型（GAT，Generic Associated Types）是 Rust 类型系统的重大扩展，允许关联类型带有自己的泛型参数（如 `type Item<'a>`）。
-> 这在 Rust 1.65（2022-11）稳定。GAT 之前， Lending Iterator（返回对集合内部元素的引用）无法安全表达——`Iterator::Item` 不能有生命周期参数。
+> 这在 Rust 1.65（2022-11）稳定。GAT 之前， Lending Iterator（返回对集合内部元素的引用（Reference））无法安全表达——`Iterator::Item` 不能有生命周期参数。
 > GAT 的引入是 Rust 从"足够好"向"表达能力接近 Haskell"演进的关键一步，使流式解析器、借用（Borrowing）迭代器（Iterator）等模式成为可能。
 > [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
 
@@ -1238,7 +1238,7 @@ fn fixed() {
 
 > **[来源: [Rust Blog — Project Goals Update: April 2026](https://blog.rust-lang.org/)]**
 > 2025H2 是 Rust Project Goals 机制的第一个完整半年周期。
-> 41 个目标中，旗舰目标集中在借用系统改进、编译速度、高阶抽象和类型系统解放四个方向。
+> 41 个目标中，旗舰目标集中在借用（Borrowing）系统改进、编译速度、高阶抽象和类型系统解放四个方向。
 > Cranelift backend 的未完成凸显了大型基础设施项目对持续资金支持的依赖——Trifecta Tech Foundation 的资金不足直接影响了生产就绪目标的达成。
 > [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
 
@@ -1250,7 +1250,7 @@ fn fixed() {
 
 | 子目标 | 状态 | 形式模型意义 |
 | :--- | :--- | :--- |
-| **Pin Ergonomics** | 实验阶段 | `Pin<&mut T>` 的自引用场景（如异步状态机）需要显式 `unsafe` 解包；新设计旨在用类型系统自动证明"不会移动"，消除手动 `unsafe` |
+| **Pin Ergonomics** | 实验阶段 | `Pin<&mut T>` 的自引用场景（如异步（Async）状态机）需要显式 `unsafe` 解包；新设计旨在用类型系统自动证明"不会移动"，消除手动 `unsafe` |
 | **Field Projections** | 语言实验获积极反馈 | 允许 `&mut self.field` 在更复杂的嵌套结构中自动重新借用，减少生命周期标注；本质是**别名分析的局部精确化**。lang team 对 Field Representing Types PR 的实验性合并反应积极，Tyler Mandry 创建了 Beyond References wiki 统筹所有相关提案（含 Alice Ryhl 的 In-place Initialization 新提案） |
 | **Reborrow Traits** | RFC 阶段 | 将重新借用规则从编译器硬编码提升为 trait 系统的一部分，使自定义智能指针（Smart Pointer）也能享受 `&mut` 的自动重借语义 |
 
@@ -1277,7 +1277,7 @@ fn fixed() {
 
 ### 6.3 旗舰三：Higher-level Rust（高阶 Rust）
 
-**核心命题**：降低高级抽象的门槛，使 `Arc`/`Rc` 克隆、闭包捕获等常见模式更自然。
+**核心命题**：降低高级抽象的门槛，使 `Arc`/`Rc` 克隆、闭包（Closures）捕获等常见模式更自然。
 
 | 子目标 | 状态 | 形式模型意义 |
 | :--- | :--- | :--- |
@@ -1524,7 +1524,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 ### 6.14 Rust Innovation Lab：孵化 Rust 生态的下一个项目（2026-03-30）
 
-**[Rust Foundation, 2026-03-30]** Rust Foundation 发布 [《What's Next for the Rust Innovation Lab?》](https://rustfoundation.org/media/whats-next-for-the-rust-innovation-lab/)，明确 RIL 的入选标准与孵化哲学。RIL 于 RustConf 2025 宣布成立，首个入驻项目是 **rustls**（内存安全 TLS 实现），2026 年 3 月董事会又批准 **Symposium** 项目加入。
+**[Rust Foundation, 2026-03-30]** Rust Foundation 发布 [《What's Next for the Rust Innovation Lab?》](https://rustfoundation.org/media/whats-next-for-the-rust-innovation-lab/)，明确 RIL 的入选标准与孵化哲学。RIL 于 RustConf 2025 宣布成立，首个入驻项目是 **rustls**（内存安全（Memory Safety） TLS 实现），2026 年 3 月董事会又批准 **Symposium** 项目加入。
 
 **RIL 的定位**：
 
@@ -1854,7 +1854,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 **工程与安全**：
 
-- `cargo-capslock`：已开发用于对 Rust 二进制执行静态与运行时能力分析
+- `cargo-capslock`：已开发用于对 Rust 二进制执行静态与运行时（Runtime）能力分析
 - crates.io Security Tab：漏洞呈现功能已接受、合并并上线；计划补充 CVSS 评分信息
 - crates.io 前端：从 EmberJS 迁移到 Svelte
 - C++ 互操作：2026 年行动计划聚焦“C++ 内存安全子集”与问题空间映射

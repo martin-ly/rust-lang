@@ -79,18 +79,18 @@
     - [12.2 惯用法效率-认知负荷象限图](#122-惯用法效率-认知负荷象限图)
     - [12.3 惯用法效率矩阵](#123-惯用法效率矩阵)
   - [十三、定理推理链](#十三定理推理链)
-    - [定理一致性（Coherence）矩阵（惯用法谱系专集）](#定理一致性矩阵惯用法谱系专集)
+    - [定理一致性矩阵（惯用法谱系专集）](#定理一致性矩阵惯用法谱系专集)
   - [十四、相关概念链接（L0-L7 映射）](#十四相关概念链接l0-l7-映射)
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
   - [十五、惯用法选择的认知路径](#十五惯用法选择的认知路径)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：惯用法谱系的编译错误](#十边界测试惯用法谱系的编译错误)
-    - [10.1 边界测试：`unwrap` 的滥用（运行时（Runtime） panic）](#101-边界测试unwrap-的滥用运行时-panic)
+    - [10.1 边界测试：`unwrap` 的滥用（运行时 panic）](#101-边界测试unwrap-的滥用运行时-panic)
     - [10.2 边界测试：`clone` 的隐式成本（逻辑错误）](#102-边界测试clone-的隐式成本逻辑错误)
     - [10.3 边界测试：Clippy 警告的编译错误等价（编译错误）](#103-边界测试clippy-警告的编译错误等价编译错误)
     - [10.4 边界测试：`String` 与 `&str` 的类型不匹配（编译错误）](#104-边界测试string-与-str-的类型不匹配编译错误)
-    - [10.5 边界测试：`Default::default()` 与类型推断（Type Inference）的歧义（编译错误）](#105-边界测试defaultdefault-与类型推断的歧义编译错误)
+    - [10.5 边界测试：`Default::default()` 与类型推断的歧义（编译错误）](#105-边界测试defaultdefault-与类型推断的歧义编译错误)
     - [10.7 边界测试：`std::mem::replace` 与 `take` 的惯用选择（逻辑错误）](#107-边界测试stdmemreplace-与-take-的惯用选择逻辑错误)
     - [10.3 边界测试：`Default` 派生与手动实现的语义差异（逻辑错误）](#103-边界测试default-派生与手动实现的语义差异逻辑错误)
     - [补充定理链](#补充定理链)
@@ -98,7 +98,7 @@
     - [测验 1：`Default` trait 的用途是什么？如何为自定义类型实现它？（理解层）](#测验-1default-trait-的用途是什么如何为自定义类型实现它理解层)
     - [测验 2：`AsRef` 与 `Borrow` trait 在语义上有什么区别？（理解层）](#测验-2asref-与-borrow-trait-在语义上有什么区别理解层)
     - [测验 3：什么是"早返回"（Early Return）模式？Rust 中通常如何实现？（理解层）](#测验-3什么是早返回early-return模式rust-中通常如何实现理解层)
-    - [测验 4：`todo!()` 和 `unimplemented!()` 宏（Macro）在开发中有什么用途？（理解层）](#测验-4todo-和-unimplemented-宏在开发中有什么用途理解层)
+    - [测验 4：`todo!()` 和 `unimplemented!()` 宏在开发中有什么用途？（理解层）](#测验-4todo-和-unimplemented-宏在开发中有什么用途理解层)
     - [测验 5：Rust 的 `must_use` 属性有什么作用？什么类型的返回值通常应该标记它？（理解层）](#测验-5rust-的-must_use-属性有什么作用什么类型的返回值通常应该标记它理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -446,7 +446,7 @@ struct MyBox<T> {
 ### 4.4
 
 > 来源: [Rust Reference §6.28](https://doc.rust-lang.org/reference/) Zero-Sized Types (ZST)
-> **惯用**: 利用零大小类型（如 `()`、`PhantomData<T>`、`!`）作为编译期标记，无运行时开销。
+> **惯用**: 利用零大小类型（如 `()`、`PhantomData<T>`、`!`）作为编译期标记，无运行时（Runtime）开销。
 
 ```rust,ignore
 // 惯用：ZST 作为能力标记（Capability）
@@ -1066,7 +1066,7 @@ quadrantChart
 | 编号 | 定理 | 前提 | 结论 | L4 公理依赖 | 失效条件 | 错误码映射 |
 |:---|:---|:---|:---|:---|:---|:---|
 | T-ID-001 | `?` 零成本 | Well-typed `Result`/`Option` | `?` 展开为等效 `match` | 控制流等价 | 在 `try`/`?` 在 closure 中使用（需 `try` blocks） | E0277 |
-| T-ID-002 | Newtype 零成本 | `#[repr(transparent)]` / 单字段元组 | 内存布局与内层类型等价 | 类型系统名义等价 | 多字段 / 非 `repr(transparent)` | — |
+| T-ID-002 | Newtype 零成本 | `#[repr(transparent)]` / 单字段元组 | 内存布局与内层类型等价 | 类型系统（Type System）名义等价 | 多字段 / 非 `repr(transparent)` | — |
 | T-ID-003 | Typestate 编译期安全 | PhantomData + 状态转换方法 | 非法状态不可表示 | 类型系统完备性 | `unsafe` / `mem::transmute` | E0599 |
 | T-ID-004 | Iterator 链零成本 | 消费链被 LLVM 内联优化 | 性能等价于手写循环 | LLVM 优化理论 | 动态分发 / 未内联 | — |
 | T-ID-005 | RAII 资源安全 | `Drop` 实现正确 | 资源在作用域结束时释放 | 所有权（Ownership） + Drop | `mem::forget` / `ManuallyDrop` | — |
@@ -1192,7 +1192,7 @@ fn fixed() {
 
 > **修正**:
 >
-> Rust 的所有权系统强制开发者思考数据克隆的成本。
+> Rust 的所有权（Ownership）系统强制开发者思考数据克隆的成本。
 > `Vec::clone()` 分配新内存并复制所有元素——O(n) 操作。
 > 在性能关键路径上，应使用引用（Reference）（`&T`）或迭代器（Iterator）（`iter()`）避免克隆。
 > 这与 C++ 的拷贝构造函数（隐式调用）或 Java 的对象引用（Reference）（总是共享）不同——Rust 的 `clone()` 是显式方法调用，提醒开发者注意成本。
@@ -1223,7 +1223,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `ref` 绑定模式在模式匹配（Pattern Matching）中创建引用，但在 `match s { ref t => ... }` 中，`s` 仍被按值匹配（转移所有权），而 `t` 是对被转移值的引用。这在逻辑上正确但语义令人困惑。惯用写法是 `match &s { t => ... }`——直接对引用进行匹配，清晰表达意图。Clippy lint `match_ref_pats` 建议将 `match x { ref y => ... }` 改写为 `match &x { y => ... }`。这是 Rust"显式优于隐式"原则的体现：让引用的创建位置一目了然。[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)] · [来源: [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html)]
+> **修正**: `ref` 绑定模式在模式匹配（Pattern Matching）中创建引用（Reference），但在 `match s { ref t => ... }` 中，`s` 仍被按值匹配（转移所有权），而 `t` 是对被转移值的引用。这在逻辑上正确但语义令人困惑。惯用写法是 `match &s { t => ... }`——直接对引用进行匹配，清晰表达意图。Clippy lint `match_ref_pats` 建议将 `match x { ref y => ... }` 改写为 `match &x { y => ... }`。这是 Rust"显式优于隐式"原则的体现：让引用的创建位置一目了然。[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)] · [来源: [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html)]
 
 ### 10.4 边界测试：`String` 与 `&str` 的类型不匹配（编译错误）
 
@@ -1262,7 +1262,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Default::default()` 是 Rust 中初始化值的惯用方法，但若上下文无法推断返回类型，编译错误。这与 `Vec::new()`（同样需要类型推断上下文）或 `Into::into()`（目标类型决定转换）类似。`Default` trait 的设计：提供类型的"零值"或"空值"，替代 C 的 `memset(&obj, 0, sizeof(obj))`（不安全，可能违反类型不变式）。`#[derive(Default)]` 为 struct 生成 `Default` 实现，所有字段也实现 `Default`。这与 C++ 的 `T()`（值初始化）或 Java 的 `new T()`（对象默认构造）不同——Rust 的 `Default` 是显式 trait，不隐式调用，类型安全。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/default/trait.Default.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **修正**: `Default::default()` 是 Rust 中初始化值的惯用方法，但若上下文无法推断返回类型，编译错误。这与 `Vec::new()`（同样需要类型推断（Type Inference）上下文）或 `Into::into()`（目标类型决定转换）类似。`Default` trait 的设计：提供类型的"零值"或"空值"，替代 C 的 `memset(&obj, 0, sizeof(obj))`（不安全，可能违反类型不变式）。`#[derive(Default)]` 为 struct 生成 `Default` 实现，所有字段也实现 `Default`。这与 C++ 的 `T()`（值初始化）或 Java 的 `new T()`（对象默认构造）不同——Rust 的 `Default` 是显式 trait，不隐式调用，类型安全。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/default/trait.Default.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.7 边界测试：`std::mem::replace` 与 `take` 的惯用选择（逻辑错误）
 

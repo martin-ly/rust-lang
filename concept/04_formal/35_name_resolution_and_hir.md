@@ -20,7 +20,6 @@
 > [Rustc Dev Guide — Lowering AST to HIR](https://rustc-dev-guide.rust-lang.org/hir/lowering.html) ·
 > [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html)
 
-
 ---
 
 ## 认知路径
@@ -33,7 +32,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与Rustc 名称解析与 HIR的适用边界。
 5. **迁移应用**: 将 Rustc 名称解析与 HIR 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 > **过渡**: 从 Rustc 名称解析与 HIR 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -41,7 +39,6 @@
 > **过渡**: 在建立 Rustc 名称解析与 HIR 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
 
 > **过渡**: 最后，将 Rustc 名称解析与 HIR 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
 
 ---
 
@@ -51,21 +48,21 @@
 >
 > **定理 3** [Tier 3]: 将 Rustc 名称解析与 HIR 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
 
-
 ## 📑 目录
 
 - [Rustc 名称解析与 HIR](#rustc-名称解析与-hir)
+  - [认知路径](#认知路径)
   - [📑 目录](#-目录)
   - [一、编译器前端概览](#一编译器前端概览)
   - [二、两阶段名称解析](#二两阶段名称解析)
-    - [2.1 第一阶段：宏（Macro）展开期间的早期解析](#21-第一阶段宏展开期间的早期解析)
+    - [2.1 第一阶段：宏展开期间的早期解析](#21-第一阶段宏展开期间的早期解析)
     - [2.2 第二阶段：完整解析（`rustc_resolve::late`）](#22-第二阶段完整解析rustc_resolvelate)
   - [三、命名空间与作用域 Rib](#三命名空间与作用域-rib)
     - [3.1 命名空间（Namespaces）](#31-命名空间namespaces)
     - [3.2 Rib（作用域抽象）](#32-rib作用域抽象)
   - [四、AST → HIR Lowering](#四ast--hir-lowering)
     - [4.1 典型解糖](#41-典型解糖)
-    - [4.2 生命周期（Lifetimes）省略](#42-生命周期省略)
+    - [4.2 生命周期省略](#42-生命周期省略)
   - [五、HIR 中的关键标识符](#五hir-中的关键标识符)
   - [六、如何观察 HIR](#六如何观察-hir)
   - [七、反命题与边界](#七反命题与边界)
@@ -75,7 +72,7 @@
     - [测验 1：`rustc` 的名称解析分为几个阶段？为什么需要分阶段？](#测验-1rustc-的名称解析分为几个阶段为什么需要分阶段)
     - [测验 2：类型名和变量名可以同名吗？为什么？](#测验-2类型名和变量名可以同名吗为什么)
     - [测验 3：HIR 和 AST 的主要区别是什么？](#测验-3hir-和-ast-的主要区别是什么)
-    - [测验 4：`DefId` 和 `HirId` 分别适合引用（Reference）什么粒度的实体？](#测验-4defid-和-hirid-分别适合引用什么粒度的实体)
+    - [测验 4：`DefId` 和 `HirId` 分别适合引用什么粒度的实体？](#测验-4defid-和-hirid-分别适合引用什么粒度的实体)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -108,7 +105,7 @@
 
 - 解析 `use` 导入和宏（Macro）名字；
 - 目的：知道要展开哪些宏（Macro）；
-- 宏展开与名称解析通过 `ResolverAstLoweringExt` trait 互相通信。
+- 宏（Macro）展开与名称解析通过 `ResolverAstLoweringExt` trait 互相通信。
 
 ### 2.2 第二阶段：完整解析（`rustc_resolve::late`）
 
@@ -198,7 +195,7 @@ Lowering 把 AST 转换为 HIR，主要做两件事：
 fn foo(x: &i32) -> &i32 { x }
 ```
 
-在 HIR 中，省略的生命周期被显式补充：
+在 HIR 中，省略的生命周期（Lifetimes）被显式补充：
 
 ```rust,ignore
 fn foo<'a>(x: &'a i32) -> &'a i32 { x }
@@ -213,7 +210,7 @@ HIR 使用多种 ID 来表示不同粒度的实体：
 | ID | 含义 | 稳定性 | 用途 |
 |:---|:---|:---|:---|
 | `DefId` | 跨 crate 定义标识 | 包含 `CrateNum` + `DefIndex` | 引用（Reference）外部 crate 的项 |
-| `LocalDefId` | 当前 crate 的定义标识 | 不含 `CrateNum` | 引用本地项，类型系统（Type System）更安全 |
+| `LocalDefId` | 当前 crate 的定义标识 | 不含 `CrateNum` | 引用（Reference）本地项，类型系统（Type System）更安全 |
 | `HirId` | HIR 节点标识 | `owner` + `local_id` | 可指向表达式等细粒度节点 |
 | `BodyId` | HIR Body 标识 | 包裹 `HirId` | 指向函数/闭包（Closures）/常量的可执行体 |
 

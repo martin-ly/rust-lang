@@ -271,7 +271,7 @@ def check_theorem_tier(file_path):
 <details>
 <summary>✅ 答案与解析</summary>
 
-记录和规范化所有概念文件的权威引用来源，确保知识的可追溯性和学术严谨性，便于读者深入查证。
+记录和规范化所有概念文件的权威引用（Reference）来源，确保知识的可追溯性和学术严谨性，便于读者深入查证。
 </details>
 
 ---

@@ -36,7 +36,7 @@
     - [1.3 Rc 与 Arc：引用（Reference）计数共享](#13-rc-与-arc引用计数共享)
   - [二、技术细节](#二技术细节)
     - [2.1 RefCell 与 Cell：内部可变性](#21-refcell-与-cell内部可变性)
-    - [2.2 智能指针的组合模式](#22-智能指针的组合模式)
+    - [2.2 智能指针（Smart Pointer）的组合模式](#22-智能指针的组合模式)
     - [2.3 性能特征对比](#23-性能特征对比)
   - [三、选型决策矩阵](#三选型决策矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -179,7 +179,7 @@ let weak = Rc::downgrade(&data);
 // 用于打破循环引用（如父子树结构）
 ```
 
-> **Rc/Arc 洞察**: `Rc::clone` 不是深拷贝——它只是增加引用计数。这与 Rust 的**显式性**哲学一致：看起来像 clone 的操作实际上是廉价的，但语法上明确表达了"共享"。
+> **Rc/Arc 洞察**: `Rc::clone` 不是深拷贝——它只是增加引用（Reference）计数。这与 Rust 的**显式性**哲学一致：看起来像 clone 的操作实际上是廉价的，但语法上明确表达了"共享"。
 > [来源: [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html)] · [来源: [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)]
 
 ---

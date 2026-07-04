@@ -29,8 +29,8 @@
   - [一、核心概念](#一核心概念)
     - [1.1 SQLx — 编译期检查](#11-sqlx--编译期检查)
     - [1.2 Diesel — 类型安全 ORM](#12-diesel--类型安全-orm)
-    - [1.3 SeaORM — 异步（Async） ORM](#13-seaorm--异步-orm)
-    - [1.4 Toasty — Tokio 团队的异步（Async） ORM](#14-toasty--tokio-团队的异步-orm)
+    - [1.3 SeaORM — 异步 ORM](#13-seaorm--异步-orm)
+    - [1.4 Toasty — Tokio 团队的异步 ORM](#14-toasty--tokio-团队的异步-orm)
   - [二、查询模式](#二查询模式)
     - [2.1 原始 SQL](#21-原始-sql)
     - [2.2 查询构建器](#22-查询构建器)
@@ -48,14 +48,14 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：数据库访问的编译错误](#十边界测试数据库访问的编译错误)
     - [10.1 边界测试：SQLx 的编译期查询验证（编译错误）](#101-边界测试sqlx-的编译期查询验证编译错误)
-    - [10.2 边界测试：连接池的生命周期（Lifetimes）管理（编译错误）](#102-边界测试连接池的生命周期管理编译错误)
-    - [10.6 边界测试：连接池的 `deadlock` 与异步等待（运行时（Runtime）死锁）](#106-边界测试连接池的-deadlock-与异步等待运行时死锁)
-    - [10.5 边界测试：连接池耗尽与异步等待超时（运行时（Runtime）超时/崩溃）](#105-边界测试连接池耗尽与异步等待超时运行时超时崩溃)
-    - [10.3 边界测试：连接池的 `deadpool` 与 async 生命周期（Lifetimes）（运行时超时/崩溃）](#103-边界测试连接池的-deadpool-与-async-生命周期运行时超时崩溃)
+    - [10.2 边界测试：连接池的生命周期管理（编译错误）](#102-边界测试连接池的生命周期管理编译错误)
+    - [10.6 边界测试：连接池的 `deadlock` 与异步等待（运行时死锁）](#106-边界测试连接池的-deadlock-与异步等待运行时死锁)
+    - [10.5 边界测试：连接池耗尽与异步等待超时（运行时超时/崩溃）](#105-边界测试连接池耗尽与异步等待超时运行时超时崩溃)
+    - [10.3 边界测试：连接池的 `deadpool` 与 async 生命周期（运行时超时/崩溃）](#103-边界测试连接池的-deadpool-与-async-生命周期运行时超时崩溃)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`sqlx` 与 `diesel` 在 Rust 数据库访问中各有什么特点？（理解层）](#测验-1sqlx-与-diesel-在-rust-数据库访问中各有什么特点理解层)
-    - [测验 2：`sqlx` 的 `query!` 宏（Macro）如何在编译期验证 SQL 语句？（理解层）](#测验-2sqlx-的-query-宏如何在编译期验证-sql-语句理解层)
+    - [测验 2：`sqlx` 的 `query!` 宏如何在编译期验证 SQL 语句？（理解层）](#测验-2sqlx-的-query-宏如何在编译期验证-sql-语句理解层)
     - [测验 3：Rust 的数据库连接池（如 `deadpool`、`bb8`）解决了什么问题？（理解层）](#测验-3rust-的数据库连接池如-deadpoolbb8解决了什么问题理解层)
     - [测验 4：ORM 的"N+1 查询问题"在 Rust 中如何缓解？（理解层）](#测验-4orm-的n1-查询问题在-rust-中如何缓解理解层)
     - [测验 5：为什么 Rust 的数据库驱动通常比 Node.js/Python 的驱动有更高的吞吐和更低的延迟？（理解层）](#测验-5为什么-rust-的数据库驱动通常比-nodejspython-的驱动有更高的吞吐和更低的延迟理解层)
@@ -708,7 +708,7 @@ async fn query(pool: &sqlx::PgPool) {
 // 若无超时配置，可能永远等待
 ```
 
-> **修正**: 数据库连接池（`sqlx`、`deadpool`、`bb8`）管理有限的数据库连接资源。**池耗尽**（pool exhaustion）是高并发系统的常见问题：1) 连接未正确释放（忘记 `drop` guard、长事务）；2) 池大小配置过小（`max_connections = 10` 对应 1000 QPS）；3) 慢查询占用连接过久。`sqlx` 的 `acquire_timeout` 配置获取连接的超时，防止无限等待。异步 Rust 的特殊风险：`await` 持有连接 guard 跨越 await 点 → 其他任务无法获取连接 → 死锁。安全模式：在最小作用域内使用连接，或在 `async` 块开始时获取，结束前释放。这与 Go 的 `sql.DB`（内置连接池，默认无上限）或 Java 的 HikariCP（类似配置）不同——Rust 的显式生命周期使连接泄漏更难发生，但 async/await 引入了新的持有模式。[来源: [sqlx Documentation](https://docs.rs/sqlx/)] · [来源: [PostgreSQL Connection Pooling](https://wiki.postgresql.org/wiki/PgBouncer)]
+> **修正**: 数据库连接池（`sqlx`、`deadpool`、`bb8`）管理有限的数据库连接资源。**池耗尽**（pool exhaustion）是高并发系统的常见问题：1) 连接未正确释放（忘记 `drop` guard、长事务）；2) 池大小配置过小（`max_connections = 10` 对应 1000 QPS）；3) 慢查询占用连接过久。`sqlx` 的 `acquire_timeout` 配置获取连接的超时，防止无限等待。异步 Rust 的特殊风险：`await` 持有连接 guard 跨越 await 点 → 其他任务无法获取连接 → 死锁。安全模式：在最小作用域内使用连接，或在 `async` 块开始时获取，结束前释放。这与 Go 的 `sql.DB`（内置连接池，默认无上限）或 Java 的 HikariCP（类似配置）不同——Rust 的显式生命周期（Lifetimes）使连接泄漏更难发生，但 async/await 引入了新的持有模式。[来源: [sqlx Documentation](https://docs.rs/sqlx/)] · [来源: [PostgreSQL Connection Pooling](https://wiki.postgresql.org/wiki/PgBouncer)]
 
 ### 10.3 边界测试：连接池的 `deadpool` 与 async 生命周期（运行时超时/崩溃）
 
@@ -753,7 +753,7 @@ fn main() {}
 
 ### 测验 2：`sqlx` 的 `query!` 宏如何在编译期验证 SQL 语句？（理解层）
 
-**题目**: `sqlx` 的 `query!` 宏如何在编译期验证 SQL 语句？
+**题目**: `sqlx` 的 `query!` 宏（Macro）如何在编译期验证 SQL 语句？
 
 <details>
 <summary>✅ 答案与解析</summary>

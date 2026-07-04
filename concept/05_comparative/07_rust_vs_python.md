@@ -27,12 +27,12 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 设计哲学对比](#11-设计哲学对比)
-    - [1.2 类型系统（Type System）：静态 vs 动态](#12-类型系统静态-vs-动态)
-    - [1.3 内存模型：所有权（Ownership） vs GC](#13-内存模型所有权-vs-gc)
+    - [1.2 类型系统：静态 vs 动态](#12-类型系统静态-vs-动态)
+    - [1.3 内存模型：所有权 vs GC](#13-内存模型所有权-vs-gc)
   - [二、技术细节](#二技术细节)
-    - [2.1 错误处理（Error Handling）：Result vs Exception](#21-错误处理result-vs-exception)
+    - [2.1 错误处理：Result vs Exception](#21-错误处理result-vs-exception)
     - [2.2 并发模型：fearless vs GIL](#22-并发模型fearless-vs-gil)
-    - [2.3 元编程：宏（Macro） vs 装饰器/元类](#23-元编程宏-vs-装饰器元类)
+    - [2.3 元编程：宏 vs 装饰器/元类](#23-元编程宏-vs-装饰器元类)
   - [三、选型决策矩阵](#三选型决策矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -45,13 +45,13 @@
     - [10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）](#101-边界测试python-的动态类型-vs-rust-的静态类型编译错误)
   - [十、边界测试：Rust 与 Python 的编译错误对比](#十边界测试rust-与-python-的编译错误对比-1)
     - [10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）](#101-边界测试python-的动态类型-vs-rust-的静态类型编译错误-1)
-    - [10.2 边界测试：Python 的 GIL 与 Rust 的所有权（Ownership）并发（编译错误）](#102-边界测试python-的-gil-与-rust-的所有权并发编译错误)
-    - [10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时（Runtime）开销）](#105-边界测试python-的-gil-与-rust-的-arcmutext-的性能对比运行时开销)
+    - [10.2 边界测试：Python 的 GIL 与 Rust 的所有权并发（编译错误）](#102-边界测试python-的-gil-与-rust-的所有权并发编译错误)
+    - [10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时开销）](#105-边界测试python-的-gil-与-rust-的-arcmutext-的性能对比运行时开销)
     - [10.3 边界测试：Python 式动态类型在 Rust 中的不可表达（编译错误）](#103-边界测试python-式动态类型在-rust-中的不可表达编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 和 Python 在类型系统（Type System）上的核心区别是什么？（理解层）](#测验-1rust-和-python-在类型系统上的核心区别是什么理解层)
+    - [测验 1：Rust 和 Python 在类型系统上的核心区别是什么？（理解层）](#测验-1rust-和-python-在类型系统上的核心区别是什么理解层)
     - [测验 2：Python 的 GIL（全局解释器锁）对并发有什么限制？Rust 有类似限制吗？（理解层）](#测验-2python-的-gil全局解释器锁对并发有什么限制rust-有类似限制吗理解层)
-    - [测验 3：为什么 Rust 常被用来重写 Python 的性能瓶颈模块（Module）（如 `numpy`、`cryptography`）？（理解层）](#测验-3为什么-rust-常被用来重写-python-的性能瓶颈模块如-numpycryptography理解层)
+    - [测验 3：为什么 Rust 常被用来重写 Python 的性能瓶颈模块（如 `numpy`、`cryptography`）？（理解层）](#测验-3为什么-rust-常被用来重写-python-的性能瓶颈模块如-numpycryptography理解层)
     - [测验 4：Python 的"鸭子类型"（Duck Typing）与 Rust 的 Trait 系统有什么异同？（理解层）](#测验-4python-的鸭子类型duck-typing与-rust-的-trait-系统有什么异同理解层)
     - [测验 5：在数据科学/ML 领域，Rust 目前为什么还不能完全替代 Python？（理解层）](#测验-5在数据科学ml-领域rust-目前为什么还不能完全替代-python理解层)
   - [认知路径](#认知路径)
@@ -277,7 +277,7 @@ def read_config(path: str) -> dict:
   # 运行时生成 __init__, __repr__ 等
 ```
 
-> **元编程洞察**: Rust 的宏（Macro）是**编译期代码生成**——零运行时开销，但限制于编译期可用信息。Python 的元编程是**运行时动态修改**——极其灵活，但有性能代价和可维护性风险。
+> **元编程洞察**: Rust 的宏（Macro）是**编译期代码生成**——零运行时（Runtime）开销，但限制于编译期可用信息。Python 的元编程是**运行时动态修改**——极其灵活，但有性能代价和可维护性风险。
 > [来源: [Rust Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [Python Decorators](https://docs.python.org/3/glossary.html#term-decorator)]
 
 ---
@@ -377,7 +377,7 @@ graph TD
 └── 混合异步代码需要 careful 的桥接（如 tokio 的 block_on）
 ```
 
-> **边界要点**: Rust 与 Python 的边界主要与**类型系统的完备性**、**学习成本**、**FFI 开销**和**异步（Async）模型差异**相关。这些边界决定了两者在实践中的最佳协作方式。
+> **边界要点**: Rust 与 Python 的边界主要与**类型系统（Type System）的完备性**、**学习成本**、**FFI 开销**和**异步（Async）模型差异**相关。这些边界决定了两者在实践中的最佳协作方式。
 > [来源: [PyO3 Performance Guide](https://pyo3.rs/main/performance.html)]
 
 ---
@@ -559,7 +559,7 @@ fn fixed() {
 }
 ```
 
-> **Python 对比**: Python 通过 **GIL**（Global Interpreter Lock）保证单线程执行字节码，实现"线程安全"——但代价是真正的并行计算受限（CPU 密集型任务无法利用多核）。Rust 没有 GIL，通过**所有权和类型系统**保证线程安全：`Rc<T>`（非原子）不能跨线程，`Arc<T>`（原子）可以。编译器在编译期拒绝数据竞争，无需运行时锁。这使得 Rust 的并发程序既有 C/C++ 的性能，又有 Python 的安全性——但无需全局锁。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **Python 对比**: Python 通过 **GIL**（Global Interpreter Lock）保证单线程执行字节码，实现"线程安全"——但代价是真正的并行计算受限（CPU 密集型任务无法利用多核）。Rust 没有 GIL，通过**所有权（Ownership）和类型系统**保证线程安全：`Rc<T>`（非原子）不能跨线程，`Arc<T>`（原子）可以。编译器在编译期拒绝数据竞争，无需运行时锁。这使得 Rust 的并发程序既有 C/C++ 的性能，又有 Python 的安全性——但无需全局锁。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时开销）
 
@@ -637,7 +637,7 @@ GIL 阻止 Python 线程真正并行执行 CPU 密集型任务。Rust 没有 GIL
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 性能接近 C/C++，且内存安全（Memory Safety）。通过 PyO3 等工具将 Rust 编译为 Python 扩展模块，可在保留 Python 易用性的同时大幅提升热点性能。
+Rust 性能接近 C/C++，且内存安全（Memory Safety）。通过 PyO3 等工具将 Rust 编译为 Python 扩展模块（Module），可在保留 Python 易用性的同时大幅提升热点性能。
 </details>
 
 ---

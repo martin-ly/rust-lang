@@ -165,7 +165,7 @@
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
   - [权威来源索引](#权威来源索引)
     - [10.5 边界测试：trait 的孤儿规则（Orphan Rule）与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
-    - [10.6 边界测试：关联常量与泛型参数的交互（编译错误）](#106-边界测试关联常量与泛型参数的交互编译错误)
+    - [10.6 边界测试：关联常量与泛型（Generics）参数的交互（编译错误）](#106-边界测试关联常量与泛型参数的交互编译错误)
   - [实践](#实践)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
@@ -426,7 +426,7 @@ pub unsafe auto trait Sync {}
 > **Send 核心语义**:
 > `Send` 标记**可以安全跨线程转移所有权（Ownership）**的类型——即值的所有权从一个线程 move 到另一个线程不会导致数据竞争或内存不安全
 > 来源: [Rust Reference — Send and Sync / 2025; Rustonomicon — Send and Sync / 2025; RustBelt — 数据竞争自由定理 / POPL 2018](https://doc.rust-lang.org/reference/)。
-> `Sync` 标记**可以安全跨线程共享引用**的类型——即 `&T` 可以安全地传递给多个线程同时读取。
+> `Sync` 标记**可以安全跨线程共享引用（Reference）**的类型——即 `&T` 可以安全地传递给多个线程同时读取。
 
 #### 自动推导规则
 
@@ -820,7 +820,7 @@ impl Convert<String> for &str {
 
 | 维度 | Rust Specialization | C++ Template Specialization |
 |:---|:---|:---|
-| **类型安全** | 编译期检查重叠；Coherence 保证唯一性 | 无类型系统检查；SFINAE 复杂 |
+| **类型安全** | 编译期检查重叠；Coherence 保证唯一性 | 无类型系统（Type System）检查；SFINAE 复杂 |
 | **默认实现** | ✅ 支持默认 impl + 特化 impl | ✅ 支持默认模板 + 特化模板 |
 | **部分特化** | ❌ `min_specialization` 限制多参数 | ✅ 支持部分特化（`template<T> class Foo<T*>`） |
 | **零成本抽象（Zero-Cost Abstraction）** | 单态化（Monomorphization）后无运行时（Runtime）开销 | 单态化后无运行时开销 |
@@ -1258,7 +1258,7 @@ graph TD
 
 ### 6.3 反命题 3: "`dyn Trait` 和 `impl Trait` 等价"
 
-> 语义/编译期层 — 两者在类型论中不等价：`impl Trait` 是存在类型（编译期擦除），`dyn Trait` 是动态分发（运行时擦除），分发方式和大小信息有本质差异。
+> 语义/编译期层 — 两者在类型论中不等价：`impl Trait` 是存在类型（编译期擦除），`dyn Trait` 是动态分发（运行时（Runtime）擦除），分发方式和大小信息有本质差异。
 > **来源: [TRPL Ch19.3](https://doc.rust-lang.org/book/ch10-02-traits.html)** `impl Trait`（存在类型，编译期擦除）与 `dyn Trait`（动态分发，运行时擦除）在类型论中不等价，信息隐藏的时机决定了能力边界。
 
 ```mermaid
@@ -1330,7 +1330,7 @@ graph TD
 | 语义 | 对象安全是 dyn 的充要条件，不是 Trait 可用性的充要条件 | ⚠️ 概念区分 |
 | 工程 | 拆分为对象安全部分 + Sized 部分（如 Iterator + ExactSizeIterator） | ✅ 可解 |
 
-> **过渡到边界极限测试**: 反命题决策树揭示了定理失效的逻辑路径，但极限测试将定理推向边界——通过代码展示编译器在极端约束下的精确行为，验证理论预测与编译器实现的一致性。
+> **过渡到边界极限测试**: 反命题决策树揭示了定理失效的逻辑路径，但极限测试将定理推向边界——通过代码展示编译器在极端约束下的精确行为，验证理论预测与编译器实现的一致性（Coherence）。
 
 ---
 
@@ -1538,7 +1538,7 @@ fn notify<T: Summary>(item: &T) { ... }
 
 **核心问题**: "为什么我不能为 Vec 实现 Display？"
 
-**过渡解释**: 语法熟练后，学习者首次遭遇"设计意图"层面的问题。Orphan Rule 看似武断限制，实则是 Coherence 的工程代价。这一步需要解释：如果两个 crate 都为 `Vec<u8>` 实现了 `Display`，链接时谁赢？没有全局唯一性，编译器的单态化就会崩溃。从 Step 3 到 Step 4 的过渡是认知的关键跃迁——从"为什么不允许"到"如果允许会发生什么"的反事实推理，这正是形式化思维的入口。理解 Orphan Rule 后，学习者已经站在了类型论的门槛上。
+**过渡解释**: 语法熟练后，学习者首次遭遇"设计意图"层面的问题。Orphan Rule 看似武断限制，实则是 Coherence 的工程代价。这一步需要解释：如果两个 crate 都为 `Vec<u8>` 实现了 `Display`，链接时谁赢？没有全局唯一性，编译器的单态化（Monomorphization）就会崩溃。从 Step 3 到 Step 4 的过渡是认知的关键跃迁——从"为什么不允许"到"如果允许会发生什么"的反事实推理，这正是形式化思维的入口。理解 Orphan Rule 后，学习者已经站在了类型论的门槛上。
 
 ```text
 反事实推理:
@@ -1632,7 +1632,7 @@ fn notify<T: Summary>(item: &T) { ... }
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | 泛型与单态化 | [02_generics.md](02_generics.md) | Trait Bounds 的载体 |
-| 所有权（Ownership）与生命周期 | [01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | Trait 方法签名的基础约束 |
+| 所有权（Ownership）与生命周期（Lifetimes） | [01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | Trait 方法签名的基础约束 |
 | 类型系统基础 | [01_foundation/04_type_system.md](../01_foundation/04_type_system.md) | Trait 的理论前提 |
 | 并发与 Send/Sync | [03_advanced/01_concurrency.md](../03_advanced/01_concurrency.md) | Auto Trait 的核心应用 |
 | 异步（Async）与 Future | 03_advanced/02_async.md | 关联类型 Trait 的典型场景 |

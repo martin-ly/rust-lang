@@ -43,7 +43,7 @@
   - [三、实时系统](#三实时系统)
     - [3.1 实时约束](#31-实时约束)
     - [3.2 RTIC 框架](#32-rtic-框架)
-    - [3.3 Embassy：嵌入式异步（Async）运行时（Runtime）](#33-embassy嵌入式异步运行时)
+    - [3.3 Embassy：嵌入式异步运行时](#33-embassy嵌入式异步运行时)
     - [3.4 embedded-hal-async：异步硬件抽象](#34-embedded-hal-async异步硬件抽象)
     - [3.5 Ariel OS：安全 IoT Library OS](#35-ariel-os安全-iot-library-os)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -57,7 +57,7 @@
   - [十、边界测试：嵌入式系统的编译错误](#十边界测试嵌入式系统的编译错误)
     - [10.1 边界测试：`no_std` 中的 `println!`（编译错误）](#101-边界测试no_std-中的-println编译错误)
     - [10.2 边界测试：中断处理器的 `static mut`（编译错误）](#102-边界测试中断处理器的-static-mut编译错误)
-    - [10.3 边界测试：临界区的中断禁用与 `unsafe` 的误用（运行时（Runtime）数据竞争）](#103-边界测试临界区的中断禁用与-unsafe-的误用运行时数据竞争)
+    - [10.3 边界测试：临界区的中断禁用与 `unsafe` 的误用（运行时数据竞争）](#103-边界测试临界区的中断禁用与-unsafe-的误用运行时数据竞争)
     - [10.4 边界测试：`no_std` 中的 `panic` 处理与固件大小（编译错误/链接错误）](#104-边界测试no_std-中的-panic-处理与固件大小编译错误链接错误)
     - [10.4 边界测试：裸机（`no_std`）中的 `alloc` 与全局分配器缺失（编译错误）](#104-边界测试裸机no_std中的-alloc-与全局分配器缺失编译错误)
     - [补充定理链](#补充定理链)
@@ -429,7 +429,7 @@ async fn main(_spawner: Spawner) {
 
 ### 3.4 embedded-hal-async：异步硬件抽象
 
-> **[embedded-hal-async](https://docs.rs/embedded-hal-async/latest/embedded_hal_async/)** 是 Rust Embedded Working Group 推出的异步硬件抽象层 trait，为 Embassy 和其他嵌入式异步运行时提供统一的 I/O 接口。它是对同步 `embedded-hal` 的 async 扩展，允许驱动 crate 同时支持阻塞和异步模式。
+> **[embedded-hal-async](https://docs.rs/embedded-hal-async/latest/embedded_hal_async/)** 是 Rust Embedded Working Group 推出的异步硬件抽象层 trait，为 Embassy 和其他嵌入式异步运行时（Runtime）提供统一的 I/O 接口。它是对同步 `embedded-hal` 的 async 扩展，允许驱动 crate 同时支持阻塞和异步模式。
 > [来源: [embedded-hal-async Docs](https://docs.rs/embedded-hal-async/latest/embedded_hal_async/)] · [来源: [Rust Embedded WG HAL Team](https://github.com/rust-embedded/wg)]
 
 ```rust,ignore
@@ -524,7 +524,7 @@ Ariel OS 架构:
 
 | 特性 | Ariel OS | Tock | Embassy |
 |:---|:---|:---|:---|
-| **架构** | Library OS | 微内核 | 异步运行时 |
+| **架构** | Library OS | 微内核 | 异步（Async）运行时 |
 | **内存占用** | 极小 (~KB) | 小 (~10KB) | 小 (~KB) |
 | **安全模型** | 能力安全 + 类型安全 | 能力安全 | 类型安全 |
 | **网络** | embassy-net | 自定义栈 | embassy-net |

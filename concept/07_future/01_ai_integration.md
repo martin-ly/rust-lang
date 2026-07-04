@@ -15,7 +15,7 @@
 > [Type System](../01_foundation/04_type_system.md) ·
 > [Traits](../02_intermediate/01_traits.md) ·
 > [Formal Methods](02_formal_methods.md)
-> **主要来源**: [AI Coding Trends 2025-2026] · [Rust AI Ecosystem] · [Verus](https://github.com/verus-lang/verusverus/guide/) / Creusot + LLM · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**: [AI Coding Trends 2025-2026] · [Rust AI Ecosystem] · [Verus](https://github.com/verus-lang/verus/guide/) / Creusot + LLM · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 
 ---
@@ -35,7 +35,6 @@
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
-
 ---
 
 > **过渡**: 从 AI × Rust 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -44,7 +43,6 @@
 
 > **过渡**: 最后，将 AI × Rust 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
-
 ---
 
 > **定理 1** [Tier 2]: AI × Rust 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
@@ -52,7 +50,6 @@
 > **定理 2** [Tier 2]: 正确理解 AI × Rust 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
 >
 > **定理 3** [Tier 3]: 将 AI × Rust 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 
 ## 一、核心命题
 
@@ -196,7 +193,7 @@ fn rl_fix_borrow_error() {
 | 特性 | C/C++ 编译器 | Python 解释器 | Rust 编译器 (`rustc`) |
 |:---|:---|:---|:---|
 | 错误结构化 | 文本诊断，难以解析 | 运行时（Runtime）异常，位置模糊 | **JSON 输出，精确 span** |
-| 反馈密度 | 编译错误稀疏 | 运行时错误稀疏 | **类型/所有权（Ownership）/生命周期（Lifetimes）错误密集** |
+| 反馈密度 | 编译错误稀疏 | 运行时（Runtime）错误稀疏 | **类型/所有权（Ownership）/生命周期（Lifetimes）错误密集** |
 | 确定性 | 宏（Macro）/条件编译引入不确定性 | 动态类型引入不确定性 | **相同输入 → 相同诊断** |
 | 错误可修复性 | 指针错误难以自动修复 | 类型错误运行时才发现 | **类型系统（Type System）约束缩小搜索空间** |
 
@@ -640,7 +637,7 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 | AI 生成代码安全 | L3 Unsafe 契约需机器可读 | `03_advanced/03_unsafe.md` | 反向约束 |
 | AI 类型推断（Type Inference）辅助 | L1 类型系统（Type System）需更易推断 | `01_foundation/04_type_system.md` | 反向约束 |
 | AI 错误修复 | L2 错误处理（Error Handling）模式需标准化 | `02_intermediate/04_error_handling.md` | 反向约束 |
-| 确定性容器 | L1 所有权需扩展确定性语义 | `01_foundation/01_ownership.md` | 潜在扩展 |
+| 确定性容器 | L1 所有权（Ownership）需扩展确定性语义 | `01_foundation/01_ownership.md` | 潜在扩展 |
 
 ---
 
@@ -681,7 +678,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: Rust 的类型系统保证内存安全（Memory Safety），但**不保证逻辑正确**。AI 生成的代码即使通过编译，仍需单元测试、属性测试（proptest）或形式化验证（Kani）来验证功能正确性。[来源: 💡 原创分析]
+> **关键洞察**: Rust 的类型系统（Type System）保证内存安全（Memory Safety），但**不保证逻辑正确**。AI 生成的代码即使通过编译，仍需单元测试、属性测试（proptest）或形式化验证（Kani）来验证功能正确性。[来源: 💡 原创分析]
 
 ### 13.2 边界测试：AI 生成 unsafe 代码的 Miri 验证
 
@@ -733,7 +730,7 @@ fn correct_fix(s: &str) -> String {
 ```
 
 > **关键洞察**:
-> 生命周期错误（E0716、E0515）是 AI 生成 Rust 代码的**最大弱点**之一。
+> 生命周期（Lifetimes）错误（E0716、E0515）是 AI 生成 Rust 代码的**最大弱点**之一。
 > RustRepair-RL 报告显示，RL 模型在修复 `E0382`（use of moved value）上达到 78% 准确率，但 `E0716`（lifetime mismatch）仅 45%。
 > 这表明生命周期推理需要更深层的语义理解，而非单纯的模式匹配（Pattern Matching）。
 > [来源: RustRepair-RL, 2024] ⚠️ 前沿

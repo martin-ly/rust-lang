@@ -342,7 +342,7 @@ impl Iterator for FibGen {
 }
 ```
 
-> **技术要点**: 生成器状态机与异步状态机共享编译器内部实现（`Generator` trait）。`yield` 点对应状态机的状态转换，与 `.await` 点的机制相同。
+> **技术要点**: 生成器状态机与异步（Async）状态机共享编译器内部实现（`Generator` trait）。`yield` 点对应状态机的状态转换，与 `.await` 点的机制相同。
 > [来源: [Rust Compiler Dev Guide — Generators](https://rustc-dev-guide.rust-lang.org/)]
 
 ---
@@ -597,7 +597,7 @@ fn borrow_iter(data: &mut Vec<i32>) -> impl Iterator<Item = &i32> {
 > `gen` 块转换为状态机后，其 `next` 方法返回的引用（Reference）的生命周期（Lifetimes）与状态机本身绑定。
 > 若 `gen` 块借用（Borrowing）了外部变量（如 `data: &mut Vec<i32>`），返回的引用（Reference）必须不超越 `data` 的生命周期（Lifetimes）。
 > 但 `impl Iterator<Item = &i32>` 的隐式生命周期（Lifetimes）参数无法捕获 `data` 的生命周期——迭代器（Iterator）的 `Item` 类型需要一个显式生命周期参数。
-> 正确写法：返回 `impl Iterator<Item = &'_ i32>` 或显式命名生命周期。这与手写 `Iterator` 实现的生命周期问题相同——`gen` 块的便利不消除生命周期约束，只是隐藏了状态机的复杂性。
+> 正确写法：返回 `impl Iterator<Item = &'_ i32>` 或显式命名生命周期（Lifetimes）。这与手写 `Iterator` 实现的生命周期问题相同——`gen` 块的便利不消除生命周期约束，只是隐藏了状态机的复杂性。
 > 这与 Rust 的 async/await 类似：await 点保存的引用（Reference）必须满足状态机的生命周期。
 > [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
@@ -616,8 +616,8 @@ fn self_referential_gen() -> impl Iterator<Item = &str> {
 
 > **修正**:
 > `gen` 块（实验性）编译为状态机，与 `async` 块类似。
-> 若 `gen` 块包含自引用（Reference）（如 `yield &s` 中 `s` 是局部变量），生成的迭代器需要 `Pin` 保证不移动。
-> 但 `impl Iterator` 返回类型不隐含 `Pin`——调用者获得普通迭代器，可移动，导致悬垂引用。
+> 若 `gen` 块包含自引用（Reference）（如 `yield &s` 中 `s` 是局部变量），生成的迭代器（Iterator）需要 `Pin` 保证不移动。
+> 但 `impl Iterator` 返回类型不隐含 `Pin`——调用者获得普通迭代器，可移动，导致悬垂引用（Reference）。
 > 解决方案：
 >
 > 1) 不 yield 局部引用（yield 拥有值如 `String`）；

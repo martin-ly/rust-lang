@@ -98,7 +98,7 @@
     - [编译验证：Edition 机制与向后兼容性](#编译验证edition-机制与向后兼容性)
     - [13.1 `cargo-fuzz`：模糊测试集成](#131-cargo-fuzz模糊测试集成)
     - [13.2 `sccache`：分布式编译缓存](#132-sccache分布式编译缓存)
-  - [十五、定理一致性（Coherence）矩阵（工具链保证层）](#十五定理一致性矩阵工具链保证层)
+  - [十五、定理一致性矩阵（工具链保证层）](#十五定理一致性矩阵工具链保证层)
   - [十六、待补充与演进方向（TODOs）](#十六待补充与演进方向todos)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：工具链的编译错误](#十边界测试工具链的编译错误)
@@ -832,7 +832,7 @@ pre-build = ["apt-get update && apt-get install -y libssl-dev"]
 |:---|:---|:---|
 | 快速开始 | ✅ 零配置 | ❌ 需安装交叉工具链 |
 | 复杂系统依赖 | ✅ 容器内可安装任意库 | ⚠️ 需手动处理 sysroot |
-| CI/CD | ✅ 一致性高 | ⚠️ 环境差异风险 |
+| CI/CD | ✅ 一致性（Coherence）高 | ⚠️ 环境差异风险 |
 | 自定义目标 | ⚠️ 需自定义 Docker 镜像 | ✅ 完全可控 |
 
 > **关键洞察**: `cross` 的核心价值不是"简化配置"，而是**环境可复现性**——编译环境以 Docker 镜像形式版本化，消除了"在我机器上能编译"的变异源。对于需要多平台发布的开源项目（如 `ripgrep`、`bat`），`cross` 是 CI 管道的标准组件。
@@ -939,7 +939,7 @@ build-std = ["core", "alloc"]  # cargo build -Z build-std
 - 链接器: `no_std` 目标通常使用 `rust-lld`（LLVM 链接器）或 GNU `ld`，需通过链接脚本指定内存布局。
 - `alloc` 错误处理（Error Handling）: 在 `no_std` + `alloc` 环境中，必须提供 `alloc_error_handler` 以处理堆分配失败（ nightly 特性，稳定版需通过条件编译处理）。
 
-> **关键洞察**: `no_std` 交叉编译的本质是**从"应用程序"降级为"裸机程序"**——失去标准库的同时，也失去了其背后的运行时假设（堆分配、线程、文件系统）。每个降级层级（std → alloc → core）都意味着更多的手动基础设施重建，对应嵌入式开发中"HAL（硬件抽象层）→ PAC（外设访问 crate）→ 寄存器操作"的抽象梯度。
+> **关键洞察**: `no_std` 交叉编译的本质是**从"应用程序"降级为"裸机程序"**——失去标准库的同时，也失去了其背后的运行时（Runtime）假设（堆分配、线程、文件系统）。每个降级层级（std → alloc → core）都意味着更多的手动基础设施重建，对应嵌入式开发中"HAL（硬件抽象层）→ PAC（外设访问 crate）→ 寄存器操作"的抽象梯度。
 > **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Rust Reference — No_std](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute) · [cargo-build-std RFC](https://github.com/rust-lang/wg-cargo-std-aware) · 可信度: ✅
 
 ### 4.3 自定义 Target
@@ -1441,7 +1441,7 @@ graph TD
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | 编译器检查根基 |
+| 所有权（Ownership） | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | 编译器检查根基 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | Miri 检测对象 |
 | 形式化验证 | [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md) | 理论基础 |
 | 设计模式 | [`./02_patterns.md`](02_patterns.md) | 工程实践 |

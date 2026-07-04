@@ -18,7 +18,6 @@
 
 ---
 
-
 > **跨层回溯**: [学习方法论](../00_meta/methodology.md) · [术语表](../00_meta/terminology_glossary.md)
 
 ---
@@ -33,7 +32,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与项（Items）的适用边界。
 5. **迁移应用**: 将 项（Items） 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -43,7 +41,6 @@
 > **反命题 2**: "忽略 项（Items） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 项（Items） 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 项（Items） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 项（Items） 具有语言特有的形态。
-
 
 ## 一、什么是 Item
 
@@ -63,7 +60,7 @@ Rust 中的 item 包括：
 
 | 类别 | 说明 |
 |:---|:---|
-| Modules | 模块声明，组织代码命名空间 |
+| Modules | 模块（Module）声明，组织代码命名空间 |
 | `extern crate` declarations | 外部 crate 声明 |
 | `use` declarations | 引入或重导出名称 |
 | Function definitions | 函数定义 |

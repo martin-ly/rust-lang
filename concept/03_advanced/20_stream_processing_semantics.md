@@ -75,7 +75,7 @@
     - [12.3 边界测试：背压与死锁](#123-边界测试背压与死锁)
   - [十三、知识来源关系](#十三知识来源关系)
   - [十、边界测试：流处理语义的编译错误](#十边界测试流处理语义的编译错误)
-    - [10.1 边界测试：Tokio Stream 与所有权（Ownership）冲突（编译错误）](#101-边界测试tokio-stream-与所有权冲突编译错误)
+    - [10.1 边界测试：Tokio Stream 与所有权冲突（编译错误）](#101-边界测试tokio-stream-与所有权冲突编译错误)
     - [10.2 边界测试：背压传播中的类型不匹配（编译错误）](#102-边界测试背压传播中的类型不匹配编译错误)
     - [10.3 边界测试：Stream 的 `fuse` 与重复 poll 后的行为（逻辑错误）](#103-边界测试stream-的-fuse-与重复-poll-后的行为逻辑错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -501,7 +501,7 @@ GROUP BY region;
 > **关键洞察**:
 > Rust 实现的流处理系统（Materialize、timely-dataflow）在"无 GC 暂停"和"内存安全（Memory Safety）"两个维度上具有结构性优势。
 > 对于低延迟流处理（sub-100ms），GC 暂停是不可接受的噪声源。
-> Rust 的所有权系统消除了 GC 的需要，同时保证了并发安全（Concurrency Safety）——这正是 Frank McSherry 选择 Rust 实现 TD/DD 的根本原因。
+> Rust 的所有权（Ownership）系统消除了 GC 的需要，同时保证了并发安全（Concurrency Safety）——这正是 Frank McSherry 选择 Rust 实现 TD/DD 的根本原因。
 > [来源: 💡 原创分析] · [Materialize Interview — SE-Radio 2022] ✅
 
 ---

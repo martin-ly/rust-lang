@@ -45,11 +45,11 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：CLI 开发的编译错误](#十边界测试cli-开发的编译错误)
-    - [10.1 边界测试：`clap` 派生宏（Macro）的字段类型约束（编译错误）](#101-边界测试clap-派生宏的字段类型约束编译错误)
-    - [10.2 边界测试：信号处理与异步（Async）代码的交互（编译错误）](#102-边界测试信号处理与异步代码的交互编译错误)
-    - [10.6 边界测试：终端颜色检测与 `NO_COLOR` 标准（运行时（Runtime）显示问题）](#106-边界测试终端颜色检测与-no_color-标准运行时显示问题)
-    - [10.7 边界测试：ANSI 颜色代码与 Windows 旧版控制台兼容性问题（运行时（Runtime）显示异常）](#107-边界测试ansi-颜色代码与-windows-旧版控制台兼容性问题运行时显示异常)
-    - [10.3 边界测试：`clap` 的 derive 宏（Macro）与字段类型不匹配（编译错误）](#103-边界测试clap-的-derive-宏与字段类型不匹配编译错误)
+    - [10.1 边界测试：`clap` 派生宏的字段类型约束（编译错误）](#101-边界测试clap-派生宏的字段类型约束编译错误)
+    - [10.2 边界测试：信号处理与异步代码的交互（编译错误）](#102-边界测试信号处理与异步代码的交互编译错误)
+    - [10.6 边界测试：终端颜色检测与 `NO_COLOR` 标准（运行时显示问题）](#106-边界测试终端颜色检测与-no_color-标准运行时显示问题)
+    - [10.7 边界测试：ANSI 颜色代码与 Windows 旧版控制台兼容性问题（运行时显示异常）](#107-边界测试ansi-颜色代码与-windows-旧版控制台兼容性问题运行时显示异常)
+    - [10.3 边界测试：`clap` 的 derive 宏与字段类型不匹配（编译错误）](#103-边界测试clap-的-derive-宏与字段类型不匹配编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`clap` crate 在 Rust CLI 开发中提供什么功能？（理解层）](#测验-1clap-crate-在-rust-cli-开发中提供什么功能理解层)
@@ -429,7 +429,7 @@ fn print_man_page(cmd: Command) {
 
 > **文档洞察**:
 > 现代 Rust CLI 工具应**自动生成 shell 补全和 man page**，而非手动维护。
-> clap 的 derive 宏自动提取参数信息，`clap_complete` 和 `clap_mangen` 将其转换为目标格式。
+> clap 的 derive 宏（Macro）自动提取参数信息，`clap_complete` 和 `clap_mangen` 将其转换为目标格式。
 > 这确保了文档与代码的同步——添加新参数时，补全和手册自动更新。
 > [来源: [clap_complete](https://docs.rs/clap_complete/latest/clap_complete/)] ·
 > [clap_mangen](https://docs.rs/clap_mangen/latest/clap_mangen/)
@@ -739,7 +739,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 编译为原生机器码，无解释器/JIT 启动开销。单二进制文件可静态链接，无需运行时依赖（如 Python 解释器或 node_modules）。
+Rust 编译为原生机器码，无解释器/JIT 启动开销。单二进制文件可静态链接，无需运行时（Runtime）依赖（如 Python 解释器或 node_modules）。
 </details>
 
 ---

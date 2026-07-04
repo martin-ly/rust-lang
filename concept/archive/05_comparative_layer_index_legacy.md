@@ -53,7 +53,7 @@
 
 | 维度 | Rust | C++ | Go |
 |:---|:---|:---|:---|
-| **内存安全（Memory Safety）** | 所有权 + 借用（Borrowing）检查 | 智能指针（Smart Pointer） + RAII（运行时）| GC（运行时）|
+| **内存安全（Memory Safety）** | 所有权（Ownership） + 借用（Borrowing）检查 | 智能指针（Smart Pointer） + RAII（运行时）| GC（运行时）|
 | **并发安全（Concurrency Safety）** | `Send/Sync`（类型级）| 无（程序员负责）| channel（语言级）|
 | **类型系统（Type System）** | 代数类型 + Trait | 模板 + 继承 | 结构类型 + 接口 |
 | **形式化基础** | 线性逻辑 + 分离逻辑 | 无统一基础 | CSP + π 演算 |

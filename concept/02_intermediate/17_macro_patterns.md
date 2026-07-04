@@ -31,7 +31,7 @@
   - [一、核心概念](#一核心概念)
     - [1.1 宏（Macro）的工程价值](#11-宏的工程价值)
     - [1.2 声明宏（Declarative Macro） vs 过程宏（Procedural Macro）](#12-声明宏-vs-过程宏)
-    - [1.3 宏的卫生性工程](#13-宏的卫生性工程)
+    - [1.3 宏（Macro）的卫生性工程](#13-宏的卫生性工程)
   - [二、技术细节](#二技术细节)
     - [2.1 DRY 代码生成](#21-dry-代码生成)
     - [2.2 条件编译模式](#22-条件编译模式)
@@ -717,7 +717,7 @@ fn main() {
 }
 ```
 
-> **修正**: `macro_rules!` 的**片段分类器**（fragment specifiers）：1) `expr` — 匹配完整表达式（不含顶层逗号）；2) `tt` — 匹配 token tree（任何括号对的内容，最灵活）；3) `stmt` — 匹配语句；4) `pat` — 匹配模式；5) `ty` — 匹配类型。`expr` 的限制：不能匹配 `foo(1, 2)`（逗号被视为宏参数分隔符），需用 `tt` 或嵌套宏。复杂宏设计：1) 内部宏（`macro_rules! internal { ... }`）处理递归；2) `tt` 作为通用匹配器，再进一步解析；3) 过程宏（`proc_macro`）替代 `macro_rules!` 处理复杂语法。这与 C 的宏（无分类器，纯文本替换，逗号无特殊含义）或 Scheme 的宏（语法对象，结构化匹配）不同——Rust 的 `macro_rules!` 在灵活性和类型安全之间取得平衡。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)]
+> **修正**: `macro_rules!` 的**片段分类器**（fragment specifiers）：1) `expr` — 匹配完整表达式（不含顶层逗号）；2) `tt` — 匹配 token tree（任何括号对的内容，最灵活）；3) `stmt` — 匹配语句；4) `pat` — 匹配模式；5) `ty` — 匹配类型。`expr` 的限制：不能匹配 `foo(1, 2)`（逗号被视为宏参数分隔符），需用 `tt` 或嵌套宏。复杂宏设计：1) 内部宏（`macro_rules! internal { ... }`）处理递归；2) `tt` 作为通用匹配器，再进一步解析；3) 过程宏（Procedural Macro）（`proc_macro`）替代 `macro_rules!` 处理复杂语法。这与 C 的宏（无分类器，纯文本替换，逗号无特殊含义）或 Scheme 的宏（语法对象，结构化匹配）不同——Rust 的 `macro_rules!` 在灵活性和类型安全之间取得平衡。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -735,7 +735,7 @@ fn main() {
 
 ### 测验 2：声明宏的"卫生性"（hygiene）主要解决什么问题？（理解层）
 
-**题目**: 声明宏的"卫生性"（hygiene）主要解决什么问题？
+**题目**: 声明宏（Declarative Macro）的"卫生性"（hygiene）主要解决什么问题？
 
 <details>
 <summary>✅ 答案与解析</summary>

@@ -428,7 +428,7 @@ async fn good_query(pool: &sqlx::SqlitePool) -> Result<(), sqlx::Error> {
 }
 ```
 
-> **修正**: SQLx 的宏（Macro）（`query!`、`query_as!`）在编译期解析 SQL 并验证返回类型与数据库 schema 的一致性（Coherence）。若类型不匹配，编译错误而非运行时 panic。这是 Rust"将错误提前到编译期"哲学在数据库访问层的典型应用。与 Go/Java 的运行时反射映射相比，SQLx 提供零开销、类型安全的查询接口。[来源: [SQLx Documentation](https://docs.rs/sqlx/)]
+> **修正**: SQLx 的宏（Macro）（`query!`、`query_as!`）在编译期解析 SQL 并验证返回类型与数据库 schema 的一致性（Coherence）。若类型不匹配，编译错误而非运行时（Runtime） panic。这是 Rust"将错误提前到编译期"哲学在数据库访问层的典型应用。与 Go/Java 的运行时反射映射相比，SQLx 提供零开销、类型安全的查询接口。[来源: [SQLx Documentation](https://docs.rs/sqlx/)]
 
 ---
 
