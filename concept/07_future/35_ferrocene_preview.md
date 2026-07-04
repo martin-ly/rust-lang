@@ -296,7 +296,7 @@ Rust Foundation 与 AdaCore、Arm、Ferrous Systems、HighTec、Lynx Software Te
 
 - 截至 2025 年底，成员约 **180 人**（较 Utrecht 会议后增长 29%），Coding Guidelines 子委员会约 50 人、Liaison 约 15 人、Tooling 约 30 人
 - 2025 年在伦敦与 Utrecht 举行两次线下全体会议，每次约 30 名成员参与
-- 2026 年，SCRC 正推动将 **MC/DC 覆盖率支持** 建立为 Rust Project Goal，采用“共享需求所有权 + 企业主导实现与维护”的模式，避免给 rustc 覆盖率基础设施带来无主维护负担
+- 2026 年，SCRC 正推动将 **MC/DC 覆盖率支持** 建立为 Rust Project Goal，采用“共享需求所有权（Ownership） + 企业主导实现与维护”的模式，避免给 rustc 覆盖率基础设施带来无主维护负担
 - 同步推进 [Safety-Critical Rust coding guidelines](https://github.com/rustfoundation/safety-critical-rust-consortium/tree/main/subcommittee/coding-guidelines) 草案，为安全关键子集提供行业共识
 
 **与 Ferrocene 的关系**：
@@ -340,7 +340,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助评估 Ferrocene 是否适合特定项目。核心判断标准是**std 依赖**、**目标平台支持**和**功能延迟容忍度**。
-> **使用建议**: 裸机/RTOS 嵌入式项目优先考虑 Ferrocene；需要 std 或异步（Async）运行时的项目需评估替代方案。
+> **使用建议**: 裸机/RTOS 嵌入式项目优先考虑 Ferrocene；需要 std 或异步（Async）运行时（Runtime）的项目需评估替代方案。
 > **关键洞察**: Ferrocene 的**不适用场景**同样重要——明确边界避免项目在选择工具链时做出错误决策。
 > [来源: 💡 原创分析]
 

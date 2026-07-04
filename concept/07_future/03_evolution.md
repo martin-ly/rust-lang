@@ -291,7 +291,7 @@ cargo check -W rust-2024-compatibility
 | **模块（Module）系统** | `extern crate` 不再需要（宏（Macro） crate 除外） | 依赖自动进入 extern prelude | 自动，无需 `extern crate` |
 | **模块（Module）系统** | `crate::` 作为当前 crate 绝对路径根 | 统一路径语义 | `cargo fix` 自动重写路径 |
 | **模块（Module）系统** | Uniform paths：`use` 路径相对当前模块 | 消除 `use` 与其他路径的不一致 | 自动 |
-| **模块系统** | `foo.rs` + `foo/` 共存，`mod.rs` 非必需 | 更灵活的目录布局 | 可选迁移 |
+| **模块（Module）系统** | `foo.rs` + `foo/` 共存，`mod.rs` 非必需 | 更灵活的目录布局 | 可选迁移 |
 | **关键字** | `async`、`await`、`try` 成为保留关键字 | 禁止作为标识符 | `cargo fix` 重命名或 `r#` 原始标识符 |
 | **关键字** | `dyn` 成为严格关键字 | 禁止作为标识符 | `cargo fix` |
 | **Trait** | `dyn Trait` 必须显式标注 | `Box<Trait>` → `Box<dyn Trait>` | `cargo fix` 自动添加 `dyn` |
@@ -315,7 +315,7 @@ cargo check -W rust-2024-compatibility
 | **宏（Macro）** | `panic!` 宏一致性（Coherence）：必须传格式字符串 | `panic!(val)` → `panic!("{}", val)` | `cargo fix` 自动改写 |
 | **语法预留** | 预留 `ident#`、`ident"..."` 语法 | 为未来语法扩展保留空间 | 自动检查冲突 |
 | **Lint 升级** | `bare_trait_objects`、`ellipsis_inclusive_range_patterns` 从 warn 升为 error | 强制 `dyn Trait` 和 `..=` 语法 | 编译器报错后手动修复 |
-| **生命周期** | `'_` 在更多上下文可用 | 进一步简化显式生命周期 | 可选 |
+| **生命周期（Lifetimes）** | `'_` 在更多上下文可用 | 进一步简化显式生命周期 | 可选 |
 
 **关键洞察**：Rust 2021 的核心主题是**精细化所有权（Ownership）与捕获**。Disjoint capture 使闭包（Closures）不再过度捕获整个结构体（Struct），这是 Rust 所有权系统在「更精确、更细粒度」方向上的重要演进，与 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) 中的「最小权限原则」一脉相承。
 
@@ -336,7 +336,7 @@ cargo check -W rust-2024-compatibility
 | **匹配** | Match ergonomics reservations | 禁止某些易混淆的 `&` + `ref` 模式组合 | 编译器报错后手动修复 |
 | **临时值** | `if let` 临时值作用域变化 | `if let Some(x) = expr()` 中临时值作用域调整 | 自动，通常无感知 |
 | **临时值** | 尾部表达式临时值作用域变化 | 块尾部表达式的临时值生命周期延长 | 自动 |
-| **宏** | `:expr` 片段指定符匹配 `const` 和 `_` | 宏更灵活 | 自动 |
+| **宏（Macro）** | `:expr` 片段指定符匹配 `const` 和 `_` | 宏更灵活 | 自动 |
 | **宏** | 缺失片段指定符成为硬错误 | `($x)` → `($x:tt)` 必须补全 | `cargo fix` |
 | **宏** | `macro_rules!` 支持 `pub` / `pub(crate)` | 宏可见性可控 | 可选显式声明 |
 | **Prelude** | `Future`、`IntoFuture` 加入 prelude | async 生态更无缝 | 自动 |
@@ -386,7 +386,7 @@ timeline
 
 > **认知功能**:
 > 此 timeline 将四个 Edition 的**数十项变更**浓缩为各自的核心主题。
-> 视觉上可以清晰看到演进节奏：2015→2018（3年，模块系统大改）→ 2021（3年，所有权精细化）→ 2024（3年，Unsafe 显式化）。
+> 视觉上可以清晰看到演进节奏：2015→2018（3年，模块系统大改）→ 2021（3年，所有权（Ownership）精细化）→ 2024（3年，Unsafe 显式化）。
 > 每个 Edition 的变更数量递增，表明语言在保持向后兼容的同时不断清理历史包袱。
 
 #### 2.3.4 代码示例：同一功能在不同 Edition 中的写法差异
@@ -433,7 +433,7 @@ for x in arr { println!("{}", x); } // x: i32（按值）
 // 注意：arr 在此处被移动，后续不可再使用
 ```
 
-**示例 4：闭包 disjoint capture**
+**示例 4：闭包（Closures） disjoint capture**
 
 ```rust
 #[derive(Debug)]
@@ -518,7 +518,7 @@ Rust 语言团队已公开表示 Edition 将继续以约 3 年为周期发布。
 | **生成器（Generators）稳定** | `gen` 已预留关键字 | `gen { yield 1; }` 语法稳定 | L3 Async / 协程 |
 | **特化（Specialization）** | `min_specialization` 内部使用 | 逐步向用户开放安全子集 | L2 Trait Coherence |
 | **Const 泛型（Generics）完整化** | `generic_const_exprs` nightly | 常量表达式 `where N > 0` | L2 泛型系统 |
-| **Type Alias Impl Trait (TAIT)** | nightly，预计 2025-2026 稳定 | `type MyIter = impl Iterator<Item = i32>` | L2 泛型 + 存在类型 |
+| **Type Alias Impl Trait (TAIT)** | nightly，预计 2025-2026 稳定 | `type MyIter = impl Iterator<Item = i32>` | L2 泛型（Generics） + 存在类型 |
 | **用户自定义 allocators** | nightly (`allocator_api`) | 容器类型默认 allocator 参数化 | L1 内存管理 |
 | **Safe 子集外部函数** | `safe fn` in `extern` 块已部分实现 | 更精细的 FFI 安全边界 | L3 Unsafe/FFI |
 
@@ -649,7 +649,7 @@ Rust 进入 Linux 内核是语言演进史上最重大的外部验证事件：
 
 - **内核特定的标准库**：`core` + `alloc` 的裁剪版，无 `std`
 - **Unsafe 封装**：将 C 内核 API 包装为安全的 Rust 抽象
-- **Pin 与自引用**：内核中的异步工作队列大量依赖 `Pin`
+- **Pin 与自引用（Reference）**：内核中的异步（Async）工作队列大量依赖 `Pin`
 - **FFI 边界演进**：从手动 `bindgen` 到半自动的内核 API 绑定生成
 
 ### 3.7 未来语言设计方向
@@ -755,7 +755,7 @@ timeline
         AI 辅助编译 : 类型推断增强
 ```
 
-> **认知功能**: 纵向展示 Rust 2015–2027+ 的关键里程碑，以五个阶段划分演进节奏。建议横向对比各阶段技术重心，识别从"基础语义稳定"到"类型系统深化"的长期主线。关键洞察：GATs、AFIT、Effects 系统、Const 泛型等高级特性集中在 2022 年后，标志着 Rust 从"稳定可用"进入"表达能力扩展"的新阶段。[来源: 💡 原创分析]
+> **认知功能**: 纵向展示 Rust 2015–2027+ 的关键里程碑，以五个阶段划分演进节奏。建议横向对比各阶段技术重心，识别从"基础语义稳定"到"类型系统（Type System）深化"的长期主线。关键洞察：GATs、AFIT、Effects 系统、Const 泛型等高级特性集中在 2022 年后，标志着 Rust 从"稳定可用"进入"表达能力扩展"的新阶段。[来源: 💡 原创分析]
 
 ---
 
@@ -1184,7 +1184,7 @@ impl LendingIterator for Vec<String> {
 > **修正**:
 > 泛型关联类型（GAT，Generic Associated Types）是 Rust 类型系统的重大扩展，允许关联类型带有自己的泛型参数（如 `type Item<'a>`）。
 > 这在 Rust 1.65（2022-11）稳定。GAT 之前， Lending Iterator（返回对集合内部元素的引用）无法安全表达——`Iterator::Item` 不能有生命周期参数。
-> GAT 的引入是 Rust 从"足够好"向"表达能力接近 Haskell"演进的关键一步，使流式解析器、借用迭代器等模式成为可能。
+> GAT 的引入是 Rust 从"足够好"向"表达能力接近 Haskell"演进的关键一步，使流式解析器、借用（Borrowing）迭代器（Iterator）等模式成为可能。
 > [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
 
 ### 10.4 边界测试： let-else 语法与模式匹配（编译错误）
@@ -1314,7 +1314,7 @@ fn fixed() {
 | **C++/Rust Interop Problem Space Mapping** | FFI | 系统梳理 C++ 与 Rust 的语义鸿沟，为自动化绑定生成（如 `autocxx`、`cxx`）提供理论基础 |
 | **Unsafe Fields** | Unsafe 边界 | 允许字段级 `unsafe` 标注，精确到字段而非整个结构体（Struct）；细化 Rust 的**安全契约粒度** |
 | **Const Generics 完善** | 编译期计算 | `generic_const_exprs` 和 `const_trait_impl` 的稳定化，使编译期计算 Turing-complete |
-| **MemorySanitizer / ThreadSanitizer** | 运行时安全 | 将 MSan/TSan 支持稳定化，与 Miri 形成"静态+动态"的 UB 检测双保险 |
+| **MemorySanitizer / ThreadSanitizer** | 运行时（Runtime）安全 | 将 MSan/TSan 支持稳定化，与 Miri 形成"静态+动态"的 UB 检测双保险 |
 | **Rust Vision Document** | 语言哲学 | 社区驱动的 Rust 长期愿景文档，定义 2030 年的 Rust 应该是什么样 |
 | **SVE / SME on AArch64** | 平台扩展 | 可伸缩向量扩展（SVE）和矩阵扩展（SME）的 Rust 绑定；高性能计算的新前沿 |
 | **Project-wide LLM Policy** ([RFC 3936](https://github.com/rust-lang/rfcs/pull/3936)) | 社区治理 | 定义 Rust Project 空间内 LLM/AI 生成贡献的边界，防止 "slop" 污染；首个项目级 AI 使用政策，影响 issue/PR/rfc 的审核标准和知识产权归属 |
@@ -1519,7 +1519,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 - 该 Foundation 倡议与 PM April 更新中提到的 `splat` lang experiment、Rust for Linux edition 迁移工具等项目共同构成 2026 年互操作工作组合
 - 它标志着 Rust 生态从“单语言替代”叙事转向“**在现有 C/C++ 系统中安全、渐进地集成 Rust**”的工业级路径
 
-> **关键洞察**: Rust/C++ 互操作不是单一语言特性问题，而是跨越 ABI、类型系统、构建系统、错误处理（Error Handling）、内存分配器和标准政治的多层基础设施问题。Foundation 的阶段性策略——长期推动 C++ 内存安全标准化，近期聚焦问题映射与具体工程——体现了在“理想终点”与“当下可用性”之间取得平衡的治理智慧。
+> **关键洞察**: Rust/C++ 互操作不是单一语言特性问题，而是跨越 ABI、类型系统、构建系统、错误处理（Error Handling）、内存分配器和标准政治的多层基础设施问题。Foundation 的阶段性策略——长期推动 C++ 内存安全（Memory Safety）标准化，近期聚焦问题映射与具体工程——体现了在“理想终点”与“当下可用性”之间取得平衡的治理智慧。
 > **来源**: [Rust Foundation — Interop Initiative Update: From Research to Implementation](https://rustfoundation.org/media/rust-foundation-interop-initiative-update-from-research-to-implementation/) · 可信度: ✅
 
 ### 6.14 Rust Innovation Lab：孵化 Rust 生态的下一个项目（2026-03-30）
@@ -2124,7 +2124,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 <details>
 <summary>✅ 答案与解析</summary>
 
-1) 稳定性（Stability without stagnation）；2) 零成本抽象；3) 内存安全；4) 开发者体验。新特性不破坏现有代码，Edition 机制允许受控演进。
+1) 稳定性（Stability without stagnation）；2) 零成本抽象（Zero-Cost Abstraction）；3) 内存安全；4) 开发者体验。新特性不破坏现有代码，Edition 机制允许受控演进。
 
 </details>
 

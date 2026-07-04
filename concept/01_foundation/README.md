@@ -195,7 +195,7 @@ Type System（理解"类型即证明"）
 - [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](17_collections_advanced.md)
 - [字符串与编码：Rust 的文本处理类型系统（Type System）](18_strings_and_encoding.md)
 - 测验：所有权（Ownership）、借用（Borrowing）与生命周期（Lifetimes）（嵌入式互动试点）
-- [测验：类型系统（嵌入式互动试点）](24_quiz_type_system.md)
+- [测验：类型系统（Type System）（嵌入式互动试点）](24_quiz_type_system.md)
 - [测验：错误处理（Error Handling）（嵌入式互动试点）](25_quiz_error_handling.md)
 - [测验：模块（Module）系统与测试（嵌入式互动试点）](26_quiz_modules_testing.md)
 - 测验：闭包（Closures）与迭代器（Iterator）（嵌入式互动试点）
@@ -231,7 +231,7 @@ Type System（理解"类型即证明"）
 |:---|:---|:---|:---|:---|:---|
 | 所有权（Ownership）唯一性 | 每个值有唯一 owner | 无 double-free | 线性逻辑 ⊗ | `Rc` 循环、`mem::forget` | — |
 | AXM (Alias-XOR-Mutation) | 借用（Borrowing）检查器接受 | 无数据竞争 | 分离逻辑 | `UnsafeCell`、裸指针 | E0502 |
-| 引用有效性 | 生命周期（Lifetimes）约束满足 | 无悬垂指针 | 区域类型 | `'static` 误用、循环引用 | E0597 |
+| 引用（Reference）有效性 | 生命周期（Lifetimes）约束满足 | 无悬垂指针 | 区域类型 | `'static` 误用、循环引用 | E0597 |
 | Move 语义安全 | 非 Copy 类型赋值后 | 原变量不可访问 | 仿射逻辑 | 隐式 Copy（意外） | E0382 |
 
 > 完整定理一致性（Coherence）矩阵见各文件"定理推理链"章节。跨层映射见 [`../00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md)。
@@ -268,7 +268,7 @@ Type System（理解"类型即证明"）
 
 掌握 L1 后可进入：
 
-- **L2 进阶**: Trait（类型系统延伸）、泛型（Generics）（生命周期参数化）、内存管理（所有权进阶）、错误处理（Result 类型）
+- **L2 进阶**: Trait（类型系统延伸）、泛型（Generics）（生命周期（Lifetimes）参数化）、内存管理（所有权（Ownership）进阶）、错误处理（Result 类型）
 - **L4 形式化**: 线性逻辑（所有权数学根基）、区域类型（生命周期形式化）、分离逻辑（借用（Borrowing）形式化）
 - **L5 对比**: Rust vs C++（所有权 vs 智能指针（Smart Pointer））
 

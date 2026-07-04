@@ -104,7 +104,7 @@ Rust 的两种字符串类型:
   String → 其他: into_bytes()、char [来源: [Rust char](https://doc.rust-lang.org/std/primitive.char.html)]s()、lines() 等
 ```
 
-> **认知功能**: String/str 的关系是 Rust **所有权模型**的典型应用——String 拥有数据，str 借用（Borrowing）数据，两者通过 Deref 无缝协作。
+> **认知功能**: String/str 的关系是 Rust **所有权（Ownership）模型**的典型应用——String 拥有数据，str 借用（Borrowing）数据，两者通过 Deref 无缝协作。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: 这种设计避免了 C++ 中 `std::string` 和 `const char*` 的混淆，以及 Java 中 `String` 和 `StringBuilder` 的性能陷阱。
 > [来源: [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html)]
@@ -819,7 +819,7 @@ fn main() {
 
 ### 测验 5：字符串切片边界（分析层）
 
-以下代码在运行时会发生什么？
+以下代码在运行时（Runtime）会发生什么？
 
 ```rust
 fn main() {

@@ -29,7 +29,7 @@
 - [闭包（Closures）基础：捕获环境与匿名函数](#闭包基础捕获环境与匿名函数)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 闭包的语法与捕获](#11-闭包的语法与捕获)
+    - [1.1 闭包（Closures）的语法与捕获](#11-闭包的语法与捕获)
     - [1.2 Fn / FnMut / FnOnce](#12-fn--fnmut--fnonce)
     - [1.3 闭包与所有权（Ownership）](#13-闭包与所有权)
   - [二、技术细节](#二技术细节)
@@ -196,7 +196,7 @@ let c = move || x;  // x 被 copy（不是 move）
 println!("{}", x);  // ✅ i32 是 Copy
 ```
 
-> **所有权洞察**: 闭包的**捕获方式由编译器自动推断**——但开发者可以通过 `move` 关键字强制移动捕获。
+> **所有权（Ownership）洞察**: 闭包的**捕获方式由编译器自动推断**——但开发者可以通过 `move` 关键字强制移动捕获。
 > [来源: [Rust Reference — Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html)]
 
 ---
@@ -620,7 +620,7 @@ fn main() {
 > `move` 的使用场景：
 >
 > 1) 闭包返回或发送到其他线程（需要 `'static`）；
-> 2) 闭包的生命周期长于被捕获的引用（Reference）；
+> 2) 闭包的生命周期（Lifetimes）长于被捕获的引用（Reference）；
 > 3) 明确表达"闭包拥有数据"的意图。
 > 这与 C++ 的 lambda capture `[=]`（按值复制，即使是非可复制类型也调用拷贝构造）或 JavaScript 的闭包（总是引用（Reference）捕获，无所有权概念）不同——Rust 的 `move` 与 `Copy` trait 交互，产生微妙但一致的行为。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
@@ -726,7 +726,7 @@ fn main() {
 > 1) 改用 `FnMut` 约束 + `mut` 参数；
 > 2) 重构闭包避免修改状态（用返回值传递状态）；
 > 3) 使用 `Cell`/`RefCell` 内部可变性（使闭包变为 `Fn`）。
-> 这与 C++ 的 lambda（按值/按引用捕获显式指定，无 Fn/FnMut/FnOnce 区分）或 Java 的 lambda（隐式 final 变量捕获，只能读取）不同——Rust 的闭包推断是自动的，但开发者需理解捕获模式对调用次数的限制。
+> 这与 C++ 的 lambda（按值/按引用（Reference）捕获显式指定，无 Fn/FnMut/FnOnce 区分）或 Java 的 lambda（隐式 final 变量捕获，只能读取）不同——Rust 的闭包推断是自动的，但开发者需理解捕获模式对调用次数的限制。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
 > [来源: [Rust Reference — Closure Traits](https://doc.rust-lang.org/reference/types/closure.html)]
 
@@ -815,7 +815,7 @@ fn main() {
 
 `move` 关键字强制闭包**按值捕获**环境变量。`s` 被 move 进闭包，`f()` 之后 `s` 已无效，因此 `println!("{}", s)` 触发 E0382（use of moved value）。
 
-修复方案：在闭包中借用而非拥有：
+修复方案：在闭包中借用（Borrowing）而非拥有：
 
 ```rust,ignore
 let f = || println!("{}", s);  // 默认按引用捕获

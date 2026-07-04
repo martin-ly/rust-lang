@@ -38,7 +38,7 @@
     - [2.1 impl Trait 在参数位置](#21-impl-trait-在参数位置)
     - [2.2 Const Generics 实战](#22-const-generics-实战)
     - [2.3 类型别名与类型族](#23-类型别名与类型族)
-  - [三、类型系统模式矩阵](#三类型系统模式矩阵)
+  - [三、类型系统（Type System）模式矩阵](#三类型系统模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
@@ -60,7 +60,7 @@
     - [10.4 边界测试：关联类型的默认实现与具体化冲突（编译错误）](#104-边界测试关联类型的默认实现与具体化冲突编译错误)
     - [10.2 边界测试：函数重复定义](#102-边界测试函数重复定义)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：关联类型（Associated Type）与泛型参数的区别是什么？什么时候更适合用关联类型？（理解层）](#测验-1关联类型associated-type与泛型参数的区别是什么什么时候更适合用关联类型理解层)
+    - [测验 1：关联类型（Associated Type）与泛型（Generics）参数的区别是什么？什么时候更适合用关联类型？（理解层）](#测验-1关联类型associated-type与泛型参数的区别是什么什么时候更适合用关联类型理解层)
     - [测验 2：`type Output = i32;` 这种语法出现在哪里？它有什么约束？（理解层）](#测验-2type-output--i32-这种语法出现在哪里它有什么约束理解层)
     - [测验 3：Higher-Ranked Trait Bounds（HRTB）`for<'a>` 的用途是什么？（理解层）](#测验-3higher-ranked-trait-boundshrtbfora-的用途是什么理解层)
     - [测验 4：类型级编程（Type-Level Programming）在 Rust 中主要通过什么机制实现？（理解层）](#测验-4类型级编程type-level-programming在-rust-中主要通过什么机制实现理解层)
@@ -812,7 +812,7 @@ fn main() {}
 
 > **修正**:
 > `impl Trait` 的**自动 trait 捕获**：返回类型不自动实现 `Send`、`Sync`、`Unpin` 等 auto trait，即使底层类型实现了。
-> Rust 1.75+ 的 `impl Trait` 生命周期捕获规则变更：返回类型可能捕获更少的生命周期。
+> Rust 1.75+ 的 `impl Trait` 生命周期（Lifetimes）捕获规则变更：返回类型可能捕获更少的生命周期。
 > 修复：
 >
 > 1) `fn async_fn() -> impl Future<Output = i32> + Send` — 显式约束；

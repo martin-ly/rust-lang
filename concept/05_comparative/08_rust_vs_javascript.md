@@ -53,7 +53,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 与 JavaScript 的编译错误对比](#十边界测试rust-与-javascript-的编译错误对比)
     - [10.1 边界测试：JavaScript 的隐式转换 vs Rust 的显式转换（编译错误）](#101-边界测试javascript-的隐式转换-vs-rust-的显式转换编译错误)
-    - [10.2 边界测试：JavaScript 的闭包（Closures）变量捕获与 Rust 的所有权（编译错误）](#102-边界测试javascript-的闭包变量捕获与-rust-的所有权编译错误)
+    - [10.2 边界测试：JavaScript 的闭包（Closures）变量捕获与 Rust 的所有权（Ownership）（编译错误）](#102-边界测试javascript-的闭包变量捕获与-rust-的所有权编译错误)
     - [10.3 边界测试：JavaScript 的 `this` 动态绑定与 Rust 的方法调用（编译错误）](#103-边界测试javascript-的-this-动态绑定与-rust-的方法调用编译错误)
     - [10.4 边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译错误）](#104-边界测试javascript-的弱类型与-rust-的强制类型编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -104,7 +104,7 @@
   └─────────────────┴─────────────────┴─────────────────┘
 ```
 
-> **运行时洞察**: Rust 的**无运行时**设计与 JavaScript 的**重型运行时**形成鲜明对比——Rust 适合资源受限环境，JavaScript 适合快速部署。
+> **运行时（Runtime）洞察**: Rust 的**无运行时**设计与 JavaScript 的**重型运行时**形成鲜明对比——Rust 适合资源受限环境，JavaScript 适合快速部署。
 > [来源: [V8 Blog — JIT](https://v8.dev/blog/maglev)] · [来源: [TRPL — No Runtime](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)]
 
 ---
@@ -226,7 +226,7 @@ graph LR
   └─────────────────┴─────────────────┴─────────────────┘
 ```
 
-> **异步洞察**: Rust 的 Future 是**惰性**的——创建时不会执行，需要运行时 poll。JavaScript 的 Promise 是**立即执行**的——创建时就开始执行。
+> **异步（Async）洞察**: Rust 的 Future 是**惰性**的——创建时不会执行，需要运行时 poll。JavaScript 的 Promise 是**立即执行**的——创建时就开始执行。
 > [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)] · [来源: [MDN — Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)]
 
 ---
@@ -659,7 +659,7 @@ JS 原型继承是运行时的对象链接，可动态修改。Rust trait 是编
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 模块系统是编译期静态的，路径和可见性由编译器解析。Node.js 模块解析在运行时，支持动态 `require()` 和循环依赖。
+Rust 模块（Module）系统是编译期静态的，路径和可见性由编译器解析。Node.js 模块解析在运行时，支持动态 `require()` 和循环依赖。
 </details>
 
 ## 认知路径
@@ -674,7 +674,7 @@ Rust 模块系统是编译期静态的，路径和可见性由编译器解析。
 | Rust vs JavaScript：系统编程与脚本执行的范式差异 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Rust vs JavaScript：系统编程与脚本执行的范式差异 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> **过渡**: 掌握 Rust vs JavaScript：系统编程与脚本执行的范式差异 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 Rust vs JavaScript：系统编程与脚本执行的范式差异 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 Rust vs JavaScript：系统编程与脚本执行的范式差异 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: Rust vs JavaScript：系统编程与脚本执行的范式差异 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 

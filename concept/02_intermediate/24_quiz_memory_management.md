@@ -298,7 +298,7 @@ let b2 = ref_cell.borrow_mut(); // ❌ 运行时 panic！
 | `Arc<Mutex<T>>` | ✅ | ✅ | 运行时（Runtime）（锁） |
 | `Arc<RwLock<T>>` | ✅ | ✅（读多写少） | 运行时（Runtime）（锁） |
 
-**知识点**：`Rc<RefCell<T>>` 是 Rust 标准库中"绕过编译期借用（Borrowing）检查"的标准方式——不是关闭检查器，而是将检查推迟到运行时。[→ 内存管理详解](03_memory_management.md)
+**知识点**：`Rc<RefCell<T>>` 是 Rust 标准库中"绕过编译期借用（Borrowing）检查"的标准方式——不是关闭检查器，而是将检查推迟到运行时（Runtime）。[→ 内存管理详解](03_memory_management.md)
 
 </details>
 
@@ -328,7 +328,7 @@ fn main() {
 | 特性 | `Cell<T>` | `RefCell<T>` |
 |:---|:---|:---|
 | 适用类型 | `Copy` 类型 | 任意类型 |
-| 获取内部值 | `.get()`（复制值） | `.borrow()`（返回引用） |
+| 获取内部值 | `.get()`（复制值） | `.borrow()`（返回引用（Reference）） |
 | 修改 | `.set(new_val)` | `.borrow_mut()` |
 | 运行时检查 | 无（因为值被复制） | 有（借用（Borrowing）规则检查） |
 | 开销 | 最低 | 较低（引用计数） |
@@ -517,7 +517,7 @@ fn main() {
 
 | 函数 | 签名 | 作用 |
 |:---|:---|:---|
-| `std::mem::drop<T>(_x: T)` | 获取所有权 | 提前释放值 |
+| `std::mem::drop<T>(_x: T)` | 获取所有权（Ownership） | 提前释放值 |
 | `Drop::drop(&mut self)` | 可变引用（Mutable Reference） | trait 方法，被编译器自动调用 |
 
 **为什么不能直接调用 `s.drop()`**：
@@ -699,7 +699,7 @@ hello(&(*m)[..]);
 |:---:|:---|:---|
 | 10/10 | 🏆 内存管理已内化 | 尝试实现自定义智能指针（Smart Pointer）（带 `Deref`/`Drop`） |
 | 7–9/10 | ✅ 核心概念掌握 | 用 `Rc<RefCell<T>>` 实现图结构，对比 `Arc<Mutex<T>>` 版本 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Memory Management](03_memory_management.md)，完成 rustlings 智能指针章节 |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Memory Management](03_memory_management.md)，完成 rustlings 智能指针（Smart Pointer）章节 |
 | 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../01_foundation/01_ownership.md) 确认基础，再读内存管理 |
 
 ---

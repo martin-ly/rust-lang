@@ -79,7 +79,7 @@
 `!`（读作 "bang" 或 "never type"）是 Rust 中最特殊的类型：
 
 - **它没有值**——不存在任何类型为 `!` 的值
-- **它可以转换为任何类型**——通过类型系统的 coercion 规则
+- **它可以转换为任何类型**——通过类型系统（Type System）的 coercion 规则
 - **它表示"永远不会返回"**——用于标记 diverging 的控制流
 
 ```rust
@@ -480,7 +480,7 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 <details>
 <summary>✅ 答案与解析</summary>
 
-代码合法。`panic!` 的返回类型是 `!`，而 `!` 可以强制转换为任何类型（包括 `String`）。但运行时会在 `panic!` 处立即 panic，赋值永远不会真正执行。
+代码合法。`panic!` 的返回类型是 `!`，而 `!` 可以强制转换为任何类型（包括 `String`）。但运行时（Runtime）会在 `panic!` 处立即 panic，赋值永远不会真正执行。
 </details>
 
 ---

@@ -57,7 +57,7 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：BorrowSanitizer 预览的编译错误](#十边界测试borrowsanitizer-预览的编译错误)
-    - [10.1 边界测试：BorrowSanitizer 的别名分析误报（编译错误/运行时检测）](#101-边界测试borrowsanitizer-的别名分析误报编译错误运行时检测)
+    - [10.1 边界测试：BorrowSanitizer 的别名分析误报（编译错误/运行时（Runtime）检测）](#101-边界测试borrowsanitizer-的别名分析误报编译错误运行时检测)
     - [10.2 边界测试：Sanitizer 与优化的交互（运行时检测丢失）](#102-边界测试sanitizer-与优化的交互运行时检测丢失)
     - [10.3 边界测试：BorrowSanitizer 与 FFI 的交互盲区（运行时漏报）](#103-边界测试borrowsanitizer-与-ffi-的交互盲区运行时漏报)
     - [10.6 边界测试：BorrowSanitizer 与 `unsafe` 块内的合法别名（运行时误报）](#106-边界测试borrowsanitizer-与-unsafe-块内的合法别名运行时误报)
@@ -68,7 +68,7 @@
     - [测验 1：BorrowSanitizer 是什么？它与 Miri 有什么区别？（理解层）](#测验-1borrowsanitizer-是什么它与-miri-有什么区别理解层)
     - [测验 2：BorrowSanitizer 基于什么技术实现？（理解层）](#测验-2borrowsanitizer-基于什么技术实现理解层)
     - [测验 3：BorrowSanitizer 对生产环境代码有什么意义？（理解层）](#测验-3borrowsanitizer-对生产环境代码有什么意义理解层)
-    - [测验 4：为什么需要 BorrowSanitizer 而不是仅依赖编译器的借用检查器？（理解层）](#测验-4为什么需要-borrowsanitizer-而不是仅依赖编译器的借用检查器理解层)
+    - [测验 4：为什么需要 BorrowSanitizer 而不是仅依赖编译器的借用（Borrowing）检查器？（理解层）](#测验-4为什么需要-borrowsanitizer-而不是仅依赖编译器的借用检查器理解层)
     - [测验 5：BorrowSanitizer 预计何时可用？（理解层）](#测验-5borrowsanitizer-预计何时可用理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -569,7 +569,7 @@ fn main() {
 >
 > 互补策略：开发期用 Miri 全面检查，CI 用 BorrowSanitizer 快速回归测试，发布用 ASan 检测残余内存问题。
 > 当前状态（2025）：BorrowSanitizer 仍是研究概念，无可用实现；社区用 Miri + `cargo fuzz` + ASan 组合覆盖。
-> 这与 C/C++ 的 sanitizer 生态（ASan/MSan/UBSan/TSan 成熟可用）不同——Rust 的内存安全保证减少了 sanitizer 的必要性，但 unsafe 代码和 FFI 边界仍需工具支持。
+> 这与 C/C++ 的 sanitizer 生态（ASan/MSan/UBSan/TSan 成熟可用）不同——Rust 的内存安全（Memory Safety）保证减少了 sanitizer 的必要性，但 unsafe 代码和 FFI 边界仍需工具支持。
 > [来源: [Miri Documentation](https://github.com/rust-lang/miri)] ·
 > [来源: [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]
 > **过渡**: BorrowSanitizer 概念预研：运行时借用检查工业化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

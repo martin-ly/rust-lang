@@ -76,14 +76,14 @@ DST 在编译期大小未知，必须置于指针之后：
 | 类型 | 适用场景 |
 |:---|:---|
 | `Cell<T>` | 单线程，只要求 `Copy` |
-| `RefCell<T>` | 单线程，运行时借用（Borrowing）检查 |
+| `RefCell<T>` | 单线程，运行时（Runtime）借用（Borrowing）检查 |
 | `Mutex<T>` | 多线程，互斥 |
 | `RwLock<T>` | 多线程，读写锁 |
 | `Atomic*` | 多线程，原子操作（Atomic Operations） |
 
 ## 四、子类型与变型
 
-- 生命周期具有子类型关系：`'static: 'a`。
+- 生命周期（Lifetimes）具有子类型关系：`'static: 'a`。
 - 变型描述类型构造器对子类型的保留方式：协变、逆变、不变。
 
 详见 [Subtyping and Variance](06_subtype_variance.md)。
@@ -106,7 +106,7 @@ Rust 在特定位置自动执行类型强制（coercion）：
 
 | 强制 | 示例 |
 |:---|:---|
-| 解引用 | `&String` → `&str` |
+| 解引用（Reference） | `&String` → `&str` |
 | 数组转切片（Slice） | `[T; N]` → `[T]` |
 | 子类型 | `&'static str` → `&'a str` |
 | Trait 对象 | `&T` → `&dyn Trait` |

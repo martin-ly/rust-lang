@@ -55,7 +55,7 @@
 ### 8.8 Waker 契约与活性
 
 > **章节过渡**：取消安全回答了"Future 被丢弃时会发生什么"，而 Waker 契约则回答"Future 被挂起后如何复活"。
-> 二者共同构成异步执行的生命周期（Lifetimes）闭环：从 poll 到 Pending，从 wake 到再 poll，任何一环断裂都会导致活锁或资源泄漏。
+> 二者共同构成异步（Async）执行的生命周期（Lifetimes）闭环：从 poll 到 Pending，从 wake 到再 poll，任何一环断裂都会导致活锁或资源泄漏。
 
 **Waker 契约（Waker Contract）**：
 
@@ -662,7 +662,7 @@ async fn pipeline() {
 | 分发方式 | 静态分发（单态化） | 动态分发（vtable） |
 | 堆分配 | ❌ 无（通常栈分配） | ✅ 必须堆分配 |
 | 内联优化 | ✅ 编译器可内联 poll | ❌ 虚表跳转阻止内联 |
-| 类型擦除 | ❌ 具体类型暴露 | ✅ 运行时类型擦除 |
+| 类型擦除 | ❌ 具体类型暴露 | ✅ 运行时（Runtime）类型擦除 |
 | 适用场景 | 通用路径 | trait 对象、递归、运行时类型选择 |
 
 > **来源**: [Rust Reference: Trait objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Tokio 博客: Pinning] · [Rust Performance Book: Dynamic dispatch]
@@ -1410,7 +1410,7 @@ fn main() {
 
 | 版本 | 方案 | 说明 |
 |:---|:---|:---|
-| < 1.75 | `#[async_trait]` 宏 | 将 `async fn` 展开为返回 `Pin<Box<dyn Future>>` 的函数，有堆分配开销 |
+| < 1.75 | `#[async_trait]` 宏（Macro） | 将 `async fn` 展开为返回 `Pin<Box<dyn Future>>` 的函数，有堆分配开销 |
 | ≥ 1.75 | 原生 `async fn` in trait | 使用 RPITIT（Return Position Impl Trait In Traits），零成本抽象（Zero-Cost Abstraction） |
 
 **Rust 1.75+ 代码**：
@@ -1503,7 +1503,7 @@ impl Stream for MyInterval {
 // let stream = tokio_stream::wrappers::IntervalStream::new(interval(Duration::from_secs(1)));
 ```
 
-> **关键洞察**: `Pin<&mut Self>` 是 async/await 生态的基石。任何包含 `.await` 点的结构体（Struct）都需要 `Pin` 保证，因为编译器生成的状态机可能自引用。
+> **关键洞察**: `Pin<&mut Self>` 是 async/await 生态的基石。任何包含 `.await` 点的结构体（Struct）都需要 `Pin` 保证，因为编译器生成的状态机可能自引用（Reference）。
 </details>
 
 ---

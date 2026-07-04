@@ -894,7 +894,7 @@ Tokio 版本是异步（Async）的，`bind` 本身通常不阻塞，但 `accept
 <details>
 <summary>✅ 答案与解析</summary>
 
-会阻塞当前 executor 线程，导致该线程上的其他异步任务无法推进，降低并发性能。应使用 `tokio::time::sleep`。
+会阻塞当前 executor 线程，导致该线程上的其他异步（Async）任务无法推进，降低并发性能。应使用 `tokio::time::sleep`。
 </details>
 
 ---

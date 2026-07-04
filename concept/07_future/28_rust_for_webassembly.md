@@ -79,10 +79,10 @@
   - [十、边界测试：WebAssembly 的编译错误](#十边界测试webassembly-的编译错误)
     - [10.1 边界测试：WASI 的文件系统权限（运行时（Runtime）错误）](#101-边界测试wasi-的文件系统权限运行时错误)
     - [10.2 边界测试：`wasm-bindgen` 的类型不匹配（编译错误）](#102-边界测试wasm-bindgen-的类型不匹配编译错误)
-    - [10.3 边界测试：WASM 模块（Module）的大小限制与 `wee_alloc`（运行时错误）](#103-边界测试wasm-模块的大小限制与-wee_alloc运行时错误)
+    - [10.3 边界测试：WASM 模块（Module）的大小限制与 `wee_alloc`（运行时（Runtime）错误）](#103-边界测试wasm-模块的大小限制与-wee_alloc运行时错误)
     - [10.3 边界测试：WASM 组件模型（Component Model）的类型映射（编译错误）](#103-边界测试wasm-组件模型component-model的类型映射编译错误)
     - [10.4 边界测试：WASI Preview 2 的功能性权限（运行时错误）](#104-边界测试wasi-preview-2-的功能性权限运行时错误)
-    - [10.3 边界测试：WASM 模块的线性内存与 Rust 的 Vec 增长策略（运行时 OOM）](#103-边界测试wasm-模块的线性内存与-rust-的-vec-增长策略运行时-oom)
+    - [10.3 边界测试：WASM 模块（Module）的线性内存与 Rust 的 Vec 增长策略（运行时 OOM）](#103-边界测试wasm-模块的线性内存与-rust-的-vec-增长策略运行时-oom)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 在 WASM 生态中的长期愿景是什么？（理解层）](#测验-1rust-在-wasm-生态中的长期愿景是什么理解层)
@@ -390,7 +390,7 @@ Wasm 线性内存布局:
   └──────────────────────────────────────────────────────┘
 ```
 
-> **所有权映射**: Rust 的所有权系统在线性内存中映射为**编译期静态分析**——`Box<T>` 的 drop 调用释放堆内存，`Vec<T>` 的重新分配触发 `memory.grow`。Wasm 运行时的**边界检查**确保所有内存访问安全，与 Rust 的所有权保证形成**双层防御**。[来源: [WebAssembly Specification](https://webassembly.github.io/spec/)]
+> **所有权（Ownership）映射**: Rust 的所有权系统在线性内存中映射为**编译期静态分析**——`Box<T>` 的 drop 调用释放堆内存，`Vec<T>` 的重新分配触发 `memory.grow`。Wasm 运行时的**边界检查**确保所有内存访问安全，与 Rust 的所有权保证形成**双层防御**。[来源: [WebAssembly Specification](https://webassembly.github.io/spec/)]
 
 ```rust,ignore
 // Wasm 内存管理示例（需要 wasm-bindgen crate）

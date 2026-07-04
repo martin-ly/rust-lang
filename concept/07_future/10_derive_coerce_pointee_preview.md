@@ -39,7 +39,7 @@
 - [派生 CoercePointee 预研：智能指针（Smart Pointer）的自动类型强制](#派生-coercepointee-预研智能指针的自动类型强制)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 问题：自定义智能指针的样板代码](#11-问题自定义智能指针的样板代码)
+    - [1.1 问题：自定义智能指针（Smart Pointer）的样板代码](#11-问题自定义智能指针的样板代码)
     - [1.2 CoerceUnsized 与 DispatchFromDyn](#12-coerceunsized-与-dispatchfromdyn)
     - [1.3 `#[derive(CoercePointee)]` 方案](#13-derivecoercepointee-方案)
   - [二、技术细节](#二技术细节)
@@ -133,7 +133,7 @@ graph TD
     end
 ```
 
-> **认知功能**: 此图对比了当前手动实现与目标派生方案的**安全差异**——手动实现引入 unsafe 风险，而派生宏由编译器生成已验证的代码。
+> **认知功能**: 此图对比了当前手动实现与目标派生方案的**安全差异**——手动实现引入 unsafe 风险，而派生宏（Macro）由编译器生成已验证的代码。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 对于任何自定义智能指针，优先使用 `#[derive(CoercePointee)]`；仅在特殊布局需求时手动实现。
 > **关键洞察**: `CoerceUnsized` 和 `DispatchFromDyn` 的实现是**纯机械性**的——给定字段结构，实现是唯一确定的。这正是派生宏的理想应用场景。
@@ -468,7 +468,7 @@ fn main() {
 > **修正**:
 > `CoercePointee` 不仅涉及类型 coercion（`String` → `str`），还涉及**生命周期（Lifetimes） coercion**。
 > `Ref<'a, T>` 的 `'a` 是引用（Reference）的生命周期（Lifetimes），`T` 的变化（`String` → `str`）需保持生命周期约束。
-> `Ref<'short, String>` → `Ref<'long, str>` 要求 `'short: 'long`（短生命周期可 coerce 为长生命周期）。
+> `Ref<'short, String>` → `Ref<'long, str>` 要求 `'short: 'long`（短生命周期（Lifetimes）可 coerce 为长生命周期）。
 > 若生命周期不匹配，编译错误。这是 Rust 生命周期系统的常规行为，但 `CoercePointee` 增加了复杂度：coercion 现在同时涉及类型和生命周期两个维度。
 > 这与 `&'a String` → `&'a str` 的自动 coercion（Deref coercion）类似——`CoercePointee` 将这一能力扩展到自定义智能指针。
 > [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html)] ·

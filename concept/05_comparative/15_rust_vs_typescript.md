@@ -28,7 +28,7 @@
     - [1.3 编译模型差异](#13-编译模型差异)
     - 1.4 内存模型：所有权（Ownership） vs GC
   - [二、技术细节](#二技术细节)
-    - [2.1 类型系统对比矩阵](#21-类型系统对比矩阵)
+    - [2.1 类型系统（Type System）对比矩阵](#21-类型系统对比矩阵)
     - 2.2 异步（Async）模型对比
     - 2.3 错误处理（Error Handling）：Result vs Throw
     - [2.4 WASM 互操作](#24-wasm-互操作)
@@ -180,7 +180,7 @@ TypeScript 核心特征:
   > [来源: [Node.js Performance](https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop)] · [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 ```
 
-> **认知功能**: TypeScript 牺牲编译期保证换取**开发速度和生态兼容**，Rust 牺牲开发速度换取**运行时安全和性能**——这是"开发效率"与"运行时效率"的经典权衡。
+> **认知功能**: TypeScript 牺牲编译期保证换取**开发速度和生态兼容**，Rust 牺牲开发速度换取**运行时（Runtime）安全和性能**——这是"开发效率"与"运行时效率"的经典权衡。
 > [来源: [TypeScript Design Goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals)] · [来源: [TRPL — Zero Cost Abstractions](https://doc.rust-lang.org/book/ch10-00-generics.html)]
 
 ---

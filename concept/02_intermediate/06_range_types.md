@@ -157,7 +157,7 @@ graph LR
     end
 ```
 
-> **认知功能**: 此图展示 `Range` 语义从**直接迭代器**到**可迭代值**的关键架构变化。旧模型中范围与迭代器状态耦合；新模型通过 `IntoIterator` 解耦，范围作为**工厂**生成迭代器。
+> **认知功能**: 此图展示 `Range` 语义从**直接迭代器（Iterator）**到**可迭代值**的关键架构变化。旧模型中范围与迭代器状态耦合；新模型通过 `IntoIterator` 解耦，范围作为**工厂**生成迭代器。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 在需要多次遍历同一范围的场景中，优先使用 `core::range::Range`；在需要保存迭代进度（如 `break` 后恢复）的场景中，使用显式迭代器。
 > **关键洞察**: `IntoIterator` 分离了"可迭代性"和"迭代状态"，使范围回归数学区间的**纯值本质**。
@@ -578,7 +578,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-会触发 panic（对于 `Vec` 和数组的索引）。Rust 的切片索引范围检查是运行时（Runtime）的。
+会触发 panic（对于 `Vec` 和数组的索引）。Rust 的切片（Slice）索引范围检查是运行时（Runtime）的。
 </details>
 
 ---
@@ -612,7 +612,7 @@ fn main() {
 | 定理 | 前提 | 结论 | 置信度 |
 | :--- | :--- | :--- | :--- |
 | Rust 范围类型语义：`std::ops::Range` → `core::range` 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| Rust 范围类型语义：`std::ops::Range` → `core::range` 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Rust 范围类型语义：`std::ops::Range` → `core::range` 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | Rust 范围类型语义：`std::ops::Range` → `core::range` 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 区间操作安全 ⟸ RangeInclusive 边界 ⟸ 迭代器协议

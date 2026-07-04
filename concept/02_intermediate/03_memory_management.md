@@ -52,16 +52,16 @@
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
     - [4.1 引理：Box ⟹ 堆分配 + 唯一所有权（Ownership）](#41-引理box--堆分配--唯一所有权)
-    - [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用（Reference）计数）](#42-定理rcarc--共享所有权安全引用计数)
+    - [4.2 定理：Rc/Arc ⟹ 共享所有权（Ownership）安全（引用（Reference）计数）](#42-定理rcarc--共享所有权安全引用计数)
     - [4.3 推论：RefCell ⟹ 内部可变性运行时（Runtime）检查](#43-推论refcell--内部可变性运行时检查)
     - [4.4 RAII + 所有权 ⟹ 确定性释放](#44-raii--所有权--确定性释放)
     - [4.5 定理一致性（Coherence）矩阵](#45-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：Box 堆分配](#51-正确示例box-堆分配)
     - [5.2 正确示例：Rc 共享所有权](#52-正确示例rc-共享所有权)
-    - [5.3 正确示例：用 Weak 打破循环引用](#53-正确示例用-weak-打破循环引用)
+    - [5.3 正确示例：用 Weak 打破循环引用（Reference）](#53-正确示例用-weak-打破循环引用)
     - [5.4 反例：Rc 循环引用导致泄漏](#54-反例rc-循环引用导致泄漏)
-    - [5.5 反例：RefCell 运行时借用（Borrowing）冲突（panic）](#55-反例refcell-运行时借用冲突panic)
+    - [5.5 反例：RefCell 运行时（Runtime）借用（Borrowing）冲突（panic）](#55-反例refcell-运行时借用冲突panic)
     - [5.5 补充：`Pin<&mut T>` 的堆内存语义与自引用安全](#55-补充pinmut-t-的堆内存语义与自引用安全)
       - [栈 Pin vs 堆 Pin](#栈-pin-vs-堆-pin)
       - [自引用结构的形式化保证](#自引用结构的形式化保证)
@@ -71,9 +71,9 @@
       - [`String`：UTF-8 字节数组的特化](#stringutf-8-字节数组的特化)
       - [`HashMap<K, V>`：Robin Hood 哈希 + 开放寻址](#hashmapk-vrobin-hood-哈希--开放寻址)
   - [六、反命题与边界分析（Counter-proposition \& Boundary Analysis）](#六反命题与边界分析counter-proposition--boundary-analysis)
-    - [6.1 反命题 1: "智能指针总是安全的"](#61-反命题-1-智能指针总是安全的)
+    - [6.1 反命题 1: "智能指针（Smart Pointer）总是安全的"](#61-反命题-1-智能指针总是安全的)
     - [6.2 反命题 2: "Rust 无内存泄漏"](#62-反命题-2-rust-无内存泄漏)
-    - [6.3 反命题 3: "RefCell 等价于编译期借用检查"](#63-反命题-3-refcell-等价于编译期借用检查)
+    - [6.3 反命题 3: "RefCell 等价于编译期借用（Borrowing）检查"](#63-反命题-3-refcell-等价于编译期借用检查)
     - [6.4 反命题 4: "Arc + Mutex 总是线程安全的"](#64-反命题-4-arc--mutex-总是线程安全的)
   - [七、边界极限测试代码（Boundary Limit Tests）](#七边界极限测试代码boundary-limit-tests)
     - [7.1 测试 1: Rc\<RefCell\> 循环引用极限](#71-测试-1-rcrefcell-循环引用极限)
@@ -759,7 +759,7 @@ graph TD
 
 ### 6.4 反命题 4: "Arc + Mutex 总是线程安全的"
 
-> 工程层 — Arc+Mutex 提供内存安全，但不提供死锁自由。
+> 工程层 — Arc+Mutex 提供内存安全（Memory Safety），但不提供死锁自由。
 
 ```mermaid
 graph TD
@@ -1821,7 +1821,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Box::into_raw` 将 `Box<T>` 转换为 `*mut T`，不释放内存。调用者负责管理内存生命周期。常见错误：1) 双重释放（多次 `from_raw` + `drop`）；2) 使用-after-free（`from_raw` 后继续使用原指针）；3) 内存泄漏（`into_raw` 后忘记释放）。安全模式：使用 `Box::from_raw` 的返回值立即 drop，不保存裸指针。如果需要共享所有权，用 `Rc`/`Arc`；如果需要临时借用，用 `as_mut_ptr()`（保留 `Box` 所有权）。这与 C++ 的 `std::unique_ptr::release`（类似语义）或 C 的 `malloc`/`free`（无所有权跟踪）不同——Rust 的 `Box` 转换显式放弃了所有权，责任转移到开发者。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/boxed/struct.Box.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: `Box::into_raw` 将 `Box<T>` 转换为 `*mut T`，不释放内存。调用者负责管理内存生命周期（Lifetimes）。常见错误：1) 双重释放（多次 `from_raw` + `drop`）；2) 使用-after-free（`from_raw` 后继续使用原指针）；3) 内存泄漏（`into_raw` 后忘记释放）。安全模式：使用 `Box::from_raw` 的返回值立即 drop，不保存裸指针。如果需要共享所有权，用 `Rc`/`Arc`；如果需要临时借用，用 `as_mut_ptr()`（保留 `Box` 所有权）。这与 C++ 的 `std::unique_ptr::release`（类似语义）或 C 的 `malloc`/`free`（无所有权跟踪）不同——Rust 的 `Box` 转换显式放弃了所有权，责任转移到开发者。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/boxed/struct.Box.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.4 边界测试：Box::leak 后的可变借用与原始 Box 的关系（编译错误）
 

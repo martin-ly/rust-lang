@@ -45,7 +45,7 @@
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 REST：表述性状态转移](#11-rest表述性状态转移)
-    - [1.2 GraphQL：查询语言与运行时](#12-graphql查询语言与运行时)
+    - [1.2 GraphQL：查询语言与运行时（Runtime）](#12-graphql查询语言与运行时)
     - [1.3 gRPC：高性能 RPC 框架](#13-grpc高性能-rpc-框架)
   - [二、概念属性矩阵](#二概念属性矩阵)
   - [三、API 设计原则](#三api-设计原则)
@@ -1201,7 +1201,7 @@ struct UserV2 {
 - [安全实践](19_security_practices.md) — 防御性编程、密码学
 - [Async/Await](../03_advanced/02_async.md) — 异步编程基础
 - [Trait](../02_intermediate/01_traits.md) — 接口设计、类型抽象
-- [错误处理](../01_foundation/32_error_handling_basics.md) — Result、? 运算符
+- [错误处理（Error Handling）](../01_foundation/32_error_handling_basics.md) — Result、? 运算符
 - [云原生](24_cloud_native.md) — Kubernetes、容器化、可观测性
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)

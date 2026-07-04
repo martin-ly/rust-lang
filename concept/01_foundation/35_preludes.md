@@ -25,7 +25,7 @@
 
 ---
 
-> **过渡**: 从 Preludes（预导入模块） 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+> **过渡**: 从 Preludes（预导入模块（Module）） 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
 
 > **过渡**: 在建立 Preludes（预导入模块） 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
 
@@ -68,7 +68,7 @@
 > **关键性质**
 >
 > - Prelude 名字在模块作用域中可见。
-> - Prelude 名字**不是**模块成员，因此不能通过 `self::` 引用。
+> - Prelude 名字**不是**模块成员，因此不能通过 `self::` 引用（Reference）。
 > - 存在多种 prelude，分别由语言、标准库、外部 crate、宏（Macro）和工具提供。
 
 ---
@@ -144,7 +144,7 @@ use core::cell::RefCell;
 
 ## 五、`macro_use` Prelude
 
-`macro_use` prelude 包含通过 `#[macro_use] extern crate foo;` 从外部 crate 导入的宏。
+`macro_use` prelude 包含通过 `#[macro_use] extern crate foo;` 从外部 crate 导入的宏（Macro）。
 
 ```rust
 #[macro_use]

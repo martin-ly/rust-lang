@@ -60,7 +60,7 @@
 
 - [Type Inference Complexity（类型推断复杂度）](#type-inference-complexity类型推断复杂度)
   - [📑 目录](#-目录)
-  - [一、HM：类型推断的黄金标准](#一hm类型推断的黄金标准)
+  - [一、HM：类型推断（Type Inference）的黄金标准](#一hm类型推断的黄金标准)
   - [二、Rust 的四项复杂度放大器](#二rust-的四项复杂度放大器)
   - [三、约束生成与 Robinson 合一](#三约束生成与-robinson-合一)
     - [3.1 约束生成（Constraint Generation）](#31-约束生成constraint-generation)
@@ -272,7 +272,7 @@ rustc 把上述理论映射到具体模块（Module）：
 | 主查询 | `typeck` query | 输入 item，输出类型结果、trait obligations、区域约束 |
 | 类型相等/子类型 | `infcx.at(...).eq` / `.sub` | 生成并求解约束 |
 | Trait 求解 | trait solver（旧 / 新 next-gen） | 处理 `T: Trait` 等 obligation |
-| 区域约束 | region constraint / borrowck | 收集并求解生命周期偏序 |
+| 区域约束 | region constraint / borrowck | 收集并求解生命周期（Lifetimes）偏序 |
 
 ```rust,ignore
 // rustc 内部近似示意

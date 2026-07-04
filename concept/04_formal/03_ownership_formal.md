@@ -15,7 +15,7 @@
 > **后置延伸**: [L4 RustBelt](04_rustbelt.md) · [L7 形式化方法](../07_future/02_formal_methods.md) · [L3 Unsafe](../03_advanced/03_unsafe.md)
 > **跨层映射**: L4↔L1 形式化 ↔ 直觉 双射 | L4→L3 Unsafe 边界 ↔ 公理扩展
 > **定理链编号**: T-100 借用（Borrowing）检查可判定性 → T-101 所有权（Ownership）类型 soundness → T-102 内存安全（Memory Safety）完备性
-> **ROD 迁移备注**: 本文档是所有权形式化的主入口。关于借用（Borrowing）检查的**可判定性**与**复杂度**，详见 [Borrow Checking Decidability](28_borrow_checking_decidability.md)；关于 Aeneas 符号化语义对借用规则的自动化证明，详见 [Aeneas Symbolic Semantics](30_aeneas_symbolic_semantics.md)。
+> **ROD 迁移备注**: 本文档是所有权（Ownership）形式化的主入口。关于借用（Borrowing）检查的**可判定性**与**复杂度**，详见 [Borrow Checking Decidability](28_borrow_checking_decidability.md)；关于 Aeneas 符号化语义对借用规则的自动化证明，详见 [Aeneas Symbolic Semantics](30_aeneas_symbolic_semantics.md)。
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ## 零、认知路径（Cognitive Path）
@@ -40,7 +40,7 @@
 ### Step 1: 为什么需要形式化所有权？
 >
 
-直觉上，Rust 编译器通过"借用检查器"拒绝危险代码，但这一过程为什么是**正确且完备**的？形式化的作用是将编译器的隐式规则转化为可证明的数学对象，从而回答：
+直觉上，Rust 编译器通过"借用（Borrowing）检查器"拒绝危险代码，但这一过程为什么是**正确且完备**的？形式化的作用是将编译器的隐式规则转化为可证明的数学对象，从而回答：
 
 - 编译器拒绝的程序是否**确实**存在内存安全（Memory Safety）问题？（可靠性 / Soundness）
 - 所有内存安全（Memory Safety）的程序是否**都能**被编译器接受？（完备性 / Completeness，答案是否定的，Rust 是保守的）
@@ -67,7 +67,7 @@
 - 生命周期（Lifetimes）检查转化为**约束可满足性（Constraint Satisfaction）**问题
 - 若约束图无环且满足包含关系，则引用（Reference）的使用点始终位于被引用值的存活区域内
 
-**> [L1↔L4: lifetimes]** L1 中"引用必须有效"对应 L4 的区域包含关系 `κ_ref ⊑ κ_own`。编译器错误 E0597 的实质是：求解器发现 `κ_ref ⊄ κ_own`，即存在一条从引用使用点到值释放点的反链。
+**> [L1↔L4: lifetimes]** L1 中"引用（Reference）必须有效"对应 L4 的区域包含关系 `κ_ref ⊑ κ_own`。编译器错误 E0597 的实质是：求解器发现 `κ_ref ⊄ κ_own`，即存在一条从引用使用点到值释放点的反链。
 
 ### Step 4: 和实际 Rust 代码怎么对应？
 >
@@ -338,7 +338,7 @@ graph TD
 | **T6**: 内存模型一致性（Coherence） | TSO/Release-Acquire ⟹ 并发访问有序 | C11 内存模型 + Atomic 操作正确标记 | 并发读写无数据竞争，满足 `Send`/`Sync` trait 语义 | C2（内部可变性）、T4（分离逻辑） | 错误使用 `Ordering::Relaxed` 或绕过 `UnsafeCell` 的原子保证 | [concurrency] `Arc<T>`、`Mutex<T>` |
 
 > **一致性（Coherence）检查**: **L1（权限分离） ⟹ L2（分数权限） ⟹ T1（100% 移交） ⟹ C1（弱化失效）** 构成"从权限定义到转移再到失效"的静态链；**T3（区域） ⟹ T5（别名模型） ⟹ T6（内存模型）** 构成"从时间约束到空间约束到并发有序"的动态链。两条链在 **C2（内部可变性）** 处交汇，体现静态规则与运行时（Runtime）检查的互补。
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §3.1 "L1-L4 形式化映射" · §4.1 "内存安全完备性"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §3.1 "L1-L4 形式化映射" · §4.1 "内存安全（Memory Safety）完备性"
 
 ### 5.2 反命题决策树
 
@@ -380,8 +380,8 @@ graph TD
     style A3 fill:#ff9
 ```
 
-> **认知功能**: 此决策树对比**线性类型与 Rust 所有权的本质差异**。功能定位：澄清 Rust 不是严格线性类型，而是仿射类型系统（Type System）。使用建议：在阅读线性逻辑文献时，注意 Rust 额外引入了生命周期和 unsafe 封装两个维度。关键洞察：**仿射弱化（允许丢弃）+ 区域约束 + Iris 高阶协议 = Rust 超越经典线性类型的三要素**。[来源: 💡 原创分析]
-> **分析**: Rust 是**仿射类型（Affine）**而非严格线性类型：值可以被丢弃（weakening），但不能被复制（contraction）。此外，Rust 的**生命周期（Lifetimes）**和 **unsafe** 封装都是传统线性类型系统不具备的维度。RustBelt 的 Iris 模型正是为了弥合这一差距而设计。 [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]
+> **认知功能**: 此决策树对比**线性类型与 Rust 所有权的本质差异**。功能定位：澄清 Rust 不是严格线性类型，而是仿射类型系统（Type System）。使用建议：在阅读线性逻辑文献时，注意 Rust 额外引入了生命周期（Lifetimes）和 unsafe 封装两个维度。关键洞察：**仿射弱化（允许丢弃）+ 区域约束 + Iris 高阶协议 = Rust 超越经典线性类型的三要素**。[来源: 💡 原创分析]
+> **分析**: Rust 是**仿射类型（Affine）**而非严格线性类型：值可以被丢弃（weakening），但不能被复制（contraction）。此外，Rust 的**生命周期（Lifetimes）**和 **unsafe** 封装都是传统线性类型系统（Type System）不具备的维度。RustBelt 的 Iris 模型正是为了弥合这一差距而设计。 [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]
 
 #### 决策树 3: "权限系统可自动化验证所有属性"
 
@@ -1304,7 +1304,7 @@ fn main() {
 > **修正**:
 > 形式化上，`x` 的生命周期 `ℓ_x` 受限于函数作用域。`&x` 的类型是 `&'a i32`，其中 `'a` 是引用的生命周期。
 > 函数返回类型 `&i32` 隐含一个生命周期参数 `'a`，但编译器无法找到与 `x` 的生命周期匹配的输入参数——`x` 是局部变量，其生命周期短于函数返回后。
-> 这与 C 的返回局部变量指针（编译器通常警告但不阻止，运行时悬垂）或 C++ 的返回局部引用（同样警告，运行时 UB）形成鲜明对比。
+> 这与 C 的返回局部变量指针（编译器通常警告但不阻止，运行时（Runtime）悬垂）或 C++ 的返回局部引用（同样警告，运行时 UB）形成鲜明对比。
 > Rust 的所有权形式化将"悬垂指针"这一运行时错误转化为编译期类型错误，通过**区域类型**（region types）和**生命周期包含**（lifetime inclusion）的约束系统实现。
 > [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]

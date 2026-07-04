@@ -254,7 +254,7 @@ loop {
 }
 ```
 
-`select!` 的每个分支都是**编译期类型检查**的：分支的 Future 输出类型无需一致，因为每个分支有独立的处理逻辑。这与 Go 的 `select`（基于接口和运行时反射）形成对比——Rust 的版本在编译期验证所有事件类型的完备处理。
+`select!` 的每个分支都是**编译期类型检查**的：分支的 Future 输出类型无需一致，因为每个分支有独立的处理逻辑。这与 Go 的 `select`（基于接口和运行时（Runtime）反射）形成对比——Rust 的版本在编译期验证所有事件类型的完备处理。
 
 **发布-订阅 (Pub/Sub) 模式**
 
@@ -494,7 +494,7 @@ where
 }
 ```
 
-| 维度 | `dyn Trait` | 泛型单态化（Monomorphization） |
+| 维度 | `dyn Trait` | 泛型（Generics）单态化（Monomorphization） |
 |:---|:---|:---|
 | 运行时开销 | 虚表查找 + 间接调用 | 直接调用 + 内联 |
 | 二进制体积 | 一份代码 | 每种类型组合一份 |
@@ -506,12 +506,12 @@ where
 过度使用泛型组合（如 Tower 的深层 Layer 栈）会导致编译时间指数增长。工程上的平衡策略：
 
 - 开发期：使用泛型保持类型安全
-- 发布期：在边界处使用 `.boxed()` 减少单态化爆炸
+- 发布期：在边界处使用 `.boxed()` 减少单态化（Monomorphization）爆炸
 - 关键路径：用 `cargo bench` 测量 `dyn` vs 单态化的实际差异
 
 ### 4.4 通道组合中的死锁风险
 
-错误组合同步/异步通道可能导致循环等待或任务饿死：
+错误组合同步/异步（Async）通道可能导致循环等待或任务饿死：
 
 ```rust
 // ❌ 反模式：同步发送在异步上下文中阻塞 executor
@@ -792,7 +792,7 @@ fn main() {}
 
 ### 测验 5：Rust 的类型系统如何防止"组合爆炸"（Combinatorial Explosion）？（理解层）
 
-**题目**: Rust 的类型系统如何防止"组合爆炸"（Combinatorial Explosion）？
+**题目**: Rust 的类型系统（Type System）如何防止"组合爆炸"（Combinatorial Explosion）？
 
 <details>
 <summary>✅ 答案与解析</summary>

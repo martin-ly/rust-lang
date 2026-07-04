@@ -38,7 +38,7 @@
     - [1.2 泛型（Generics）关联类型（GATs）](#12-泛型关联类型gats)
     - [1.3 特化（Specialization）](#13-特化specialization)
   - [二、技术细节](#二技术细节)
-    - [2.1 关联类型 vs 泛型参数](#21-关联类型-vs-泛型参数)
+    - [2.1 关联类型 vs 泛型（Generics）参数](#21-关联类型-vs-泛型参数)
     - [2.2 负 Trait 实现](#22-负-trait-实现)
     - [2.3 Trait 别名](#23-trait-别名)
   - [三、Trait 模式矩阵](#三trait-模式矩阵)
@@ -740,7 +740,7 @@ GAT（Generic Associated Types）是 Rust 1.65 稳定化的重要特性。它允
 - 用于实现"出借迭代器"（lending iterator），返回引用（Reference）而非值
 - 解决传统 `Iterator` 无法返回自引用（Reference）数据的限制
 
-没有 GAT 时，返回生命周期依赖于 `&mut self` 的元素非常困难。
+没有 GAT 时，返回生命周期（Lifetimes）依赖于 `&mut self` 的元素非常困难。
 </details>
 
 ---

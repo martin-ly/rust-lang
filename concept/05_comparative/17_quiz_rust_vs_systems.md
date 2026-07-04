@@ -167,7 +167,7 @@ fn main() {
 | 方面 | Go | Rust |
 |:---|:---|:---|
 | nil 指针 | 语言内置，运行期 panic | safe Rust 无 nil；`Option<T>` 显式处理缺失 |
-| 解引用 Optional | N/A（无此概念） | `unwrap()` panic；`if let`/`match` 安全处理 |
+| 解引用（Reference） Optional | N/A（无此概念） | `unwrap()` panic；`if let`/`match` 安全处理 |
 | 默认安全 | 运行期检查 | 编译期强制处理所有情况 |
 
 **核心差异**：Go 的 `nil` 是**十亿美元错误**（C.A.R. Hoare）的现代延续。Rust 通过 `Option<T>` 将"可能缺失"显式编码到类型系统（Type System）中。[→ Rust vs Go 详解](02_rust_vs_go.md)
@@ -260,7 +260,7 @@ fn main() {
 | 方面 | C++ | Rust |
 |:---|:---|:---|
 | 数据竞争 | 允许（UB） | 编译期阻止 |
-| 同步原语 | 手动选择（mutex、atomic） | `Mutex`、`RwLock` 与所有权系统集成 |
+| 同步原语 | 手动选择（mutex、atomic） | `Mutex`、`RwLock` 与所有权（Ownership）系统集成 |
 | 检测 | ThreadSanitizer（运行时） | 编译器借用（Borrowing）检查（编译期） |
 | 性能开销 | 零（若代码正确） | 零（检查在编译期完成） |
 
@@ -672,7 +672,7 @@ fn read_config() -> Result<i32, Box<dyn std::error::Error>> {
 | Go | 显式错误值 | 简单、明确 | 冗长（if err != nil） |
 | Rust | `Result` + `?` | 显式 + 简洁 + 编译期强制 | 学习曲线 |
 
-**知识点**：Rust 的错误处理（Error Handling）结合了 Go 的显式和 C++ 的简洁，通过类型系统和 `?` 运算符实现了"显式但不冗长"的理想平衡。[→ 错误处理详解](../01_foundation/32_error_handling_basics.md)
+**知识点**：Rust 的错误处理（Error Handling）结合了 Go 的显式和 C++ 的简洁，通过类型系统（Type System）和 `?` 运算符实现了"显式但不冗长"的理想平衡。[→ 错误处理详解](../01_foundation/32_error_handling_basics.md)
 
 </details>
 

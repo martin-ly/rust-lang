@@ -277,7 +277,7 @@ Rust 的所有权（Ownership）系统使反向传播的状态管理复杂（需
 <details>
 <summary>✅ 答案与解析</summary>
 
-使用 const generics 将张量形状编码到类型中（如 `Tensor<(B, C, H, W)>`），编译期检查矩阵乘法维度匹配，消除运行时形状错误。
+使用 const generics 将张量形状编码到类型中（如 `Tensor<(B, C, H, W)>`），编译期检查矩阵乘法维度匹配，消除运行时（Runtime）形状错误。
 </details>
 
 ---

@@ -32,7 +32,7 @@
     - [1.2 资源作为类型](#12-资源作为类型)
     - [1.3 Session Types 与通信协议](#13-session-types-与通信协议)
   - [二、技术细节](#二技术细节)
-    - [2.1 所有权即线性类型](#21-所有权即线性类型)
+    - [2.1 所有权（Ownership）即线性类型](#21-所有权即线性类型)
     - [2.2 仿射类型与 Drop](#22-仿射类型与-drop)
     - [2.3 类型状态模式](#23-类型状态模式)
   - [三、工程应用矩阵](#三工程应用矩阵)
@@ -319,7 +319,7 @@ let committed = txn.commit();
 // └── 状态转换是类型转换
 ```
 
-> **类型状态洞察**: **类型状态模式**是线性逻辑在 Rust 中的**最直接工程应用**——它将状态机从运行时检查转化为编译期类型约束。
+> **类型状态洞察**: **类型状态模式**是线性逻辑在 Rust 中的**最直接工程应用**——它将状态机从运行时（Runtime）检查转化为编译期类型约束。
 > [来源: [Rust Patterns — Typestate](https://rust-unofficial.github.io/patterns/)]
 
 ---
@@ -354,7 +354,7 @@ let committed = txn.commit();
   └── 会话密钥
 ```
 
-> **应用矩阵**: 线性逻辑的**核心工程价值**是"让非法状态不可表示"——通过类型系统消除运行时状态错误。
+> **应用矩阵**: 线性逻辑的**核心工程价值**是"让非法状态不可表示"——通过类型系统（Type System）消除运行时状态错误。
 > [来源: [Session Types in Rust](https://munksgaard.me/papers/laumann-munksgaard-larsen.pdf)]
 
 ---
@@ -719,7 +719,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-主要体现在借用检查器（borrow checker）中，它确保资源按线性/affine 规则使用：不重复释放、不悬垂引用（Reference）、不 use-after-move。
+主要体现在借用（Borrowing）检查器（borrow checker）中，它确保资源按线性/affine 规则使用：不重复释放、不悬垂引用（Reference）、不 use-after-move。
 </details>
 
 ## 认知路径

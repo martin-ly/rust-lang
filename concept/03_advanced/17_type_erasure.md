@@ -656,7 +656,7 @@ fn make_clone(obj: &dyn Cloneable) -> Box<dyn Cloneable> {
 // }
 ```
 
-> **修正**: Trait object 在运行时（Runtime）通过 vtable 动态分发，vtable 中的方法签名必须是"对象安全"（object-safe）的。返回 `Self` 的方法不是对象安全的，因为编译器无法在编译期确定 `Self` 的具体类型和大小。类似地，泛型方法（`fn method<T>(&self, t: T)`）也不是对象安全的——vtable 无法存储无限多单态化（Monomorphization）版本。Rust 编译器在 trait 定义时检查对象安全性，拒绝将非对象安全 trait 转为 `dyn Trait`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Trait object 在运行时（Runtime）通过 vtable 动态分发，vtable 中的方法签名必须是"对象安全"（object-safe）的。返回 `Self` 的方法不是对象安全的，因为编译器无法在编译期确定 `Self` 的具体类型和大小。类似地，泛型（Generics）方法（`fn method<T>(&self, t: T)`）也不是对象安全的——vtable 无法存储无限多单态化（Monomorphization）版本。Rust 编译器在 trait 定义时检查对象安全性，拒绝将非对象安全 trait 转为 `dyn Trait`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（编译错误）
 
@@ -694,7 +694,7 @@ fn main() {
 }
 ```
 
-> **修正**: Trait 对象（`dyn Trait`）通过 vtable 实现动态分发，vtable 在编译期生成，包含所有方法的函数指针。泛型方法（`fn process<T>`）无法在 vtable 中表示，因为 `T` 的可能实例无限——编译器不能为所有类型生成函数指针。因此含泛型方法的 trait 不是**对象安全**的（object-safe），不能作为 `dyn Trait` 使用。这与 C++ 的虚函数（无泛型虚函数，模板方法不能是虚的）或 Java 的泛型接口（类型擦除，泛型信息在运行时不可用）不同——Rust 在编译期拒绝非对象安全的 trait 对象，防止运行时类型错误。替代方案：将泛型方法改为关联函数或非泛型方法，或使用静态分发（`impl Trait`）。[来源: [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
+> **修正**: Trait 对象（`dyn Trait`）通过 vtable 实现动态分发，vtable 在编译期生成，包含所有方法的函数指针。泛型方法（`fn process<T>`）无法在 vtable 中表示，因为 `T` 的可能实例无限——编译器不能为所有类型生成函数指针。因此含泛型方法的 trait 不是**对象安全**的（object-safe），不能作为 `dyn Trait` 使用。这与 C++ 的虚函数（无泛型虚函数，模板方法不能是虚的）或 Java 的泛型接口（类型擦除，泛型信息在运行时（Runtime）不可用）不同——Rust 在编译期拒绝非对象安全的 trait 对象，防止运行时类型错误。替代方案：将泛型方法改为关联函数或非泛型方法，或使用静态分发（`impl Trait`）。[来源: [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
 
 ### 10.3 边界测试：`dyn Trait` 与 `Sized` 边界的冲突（编译错误）
 

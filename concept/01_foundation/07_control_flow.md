@@ -29,7 +29,7 @@
   - [一、核心概念](#一核心概念)
     - [1.1 表达式 vs 语句](#11-表达式-vs-语句)
     - [1.2 match：穷尽性模式匹配（Pattern Matching）](#12-match穷尽性模式匹配)
-    - [1.3 if let / while let：简化的模式匹配](#13-if-let--while-let简化的模式匹配)
+    - [1.3 if let / while let：简化的模式匹配（Pattern Matching）](#13-if-let--while-let简化的模式匹配)
   - [二、技术细节](#二技术细节)
     - [2.1 loop 与值返回](#21-loop-与值返回)
     - [2.2 标签与嵌套循环控制](#22-标签与嵌套循环控制)
@@ -749,7 +749,7 @@ fn main() {
 > 2) 守卫中的变量是引用（Reference）而非值（若使用 `ref`）；
 > 3) 守卫不移动值，但若守卫失败，后续臂可能获得 move 绑定。
 > 这与 Haskell 的 `case` guard（类似，但 Haskell 是惰性求值，守卫语义不同）或 Scala 的 `match` with `if` guard（类似，但无所有权（Ownership）影响）不同
-> ——Rust 的模式守卫需考虑所有权和借用（Borrowing）的交互。
+> ——Rust 的模式守卫需考虑所有权（Ownership）和借用（Borrowing）的交互。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)] ·
 > [来源: [Rust Reference — Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)]
 
@@ -1234,7 +1234,7 @@ CFG 与支配树是许多编译器优化的基础数据结构：
 
 #### Rust 关联
 
-Rust 编译器在生成 MIR（Mid-level IR）时会构建函数的 CFG；借用检查器（borrowck）利用支配关系判断值的生命周期（Lifetimes）、借用是否合法以及 `&mut` 是否唯一。例如，变量的定义必须**支配**其使用点，否则会出现 use-before-init 错误。
+Rust 编译器在生成 MIR（Mid-level IR）时会构建函数的 CFG；借用（Borrowing）检查器（borrowck）利用支配关系判断值的生命周期（Lifetimes）、借用是否合法以及 `&mut` 是否唯一。例如，变量的定义必须**支配**其使用点，否则会出现 use-before-init 错误。
 
 #### 代码示例：一个极小 CFG 与迭代式支配集计算
 
@@ -1433,7 +1433,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**：循环不变量是连接"代码如何运行"与"代码为何正确"的桥梁。Rust 的穷尽性 `match` 与强类型系统进一步减少了需要显式维护的不变量数量。
+> **关键洞察**：循环不变量是连接"代码如何运行"与"代码为何正确"的桥梁。Rust 的穷尽性 `match` 与强类型系统（Type System）进一步减少了需要显式维护的不变量数量。
 > **关联章节**: [Assert & Matches](../02_intermediate/05_assert_matches.md) · [Range Types](../02_intermediate/06_range_types.md)
 
 ---

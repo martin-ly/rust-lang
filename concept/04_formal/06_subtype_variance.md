@@ -43,7 +43,7 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：子类型变异性的编译错误](#十边界测试子类型变异性的编译错误)
-    - [10.1 边界测试：协变与逆变的生命周期误用（编译错误）](#101-边界测试协变与逆变的生命周期误用编译错误)
+    - [10.1 边界测试：协变与逆变的生命周期（Lifetimes）误用（编译错误）](#101-边界测试协变与逆变的生命周期误用编译错误)
     - [10.2 边界测试：`UnsafeCell` 的不变性（编译错误）](#102-边界测试unsafecell-的不变性编译错误)
     - [10.3 边界测试：逆变与 `fn` 参数的不变性（编译错误）](#103-边界测试逆变与-fn-参数的不变性编译错误)
     - [10.4 边界测试：`UnsafeCell` 的不变性（编译错误/运行时（Runtime） UB）](#104-边界测试unsafecell-的不变性编译错误运行时-ub)
@@ -337,7 +337,7 @@ graph TD
 ├── 而是通过生命周期包含关系（'a: 'b）间接处理
 ```
 
-> **边界要点**: 变型规则是 Rust 类型系统的**深层机制**——大多数开发者无需显式理解，但遇到生命周期相关编译错误时，变型知识是理解错误原因的关键。
+> **边界要点**: 变型规则是 Rust 类型系统（Type System）的**深层机制**——大多数开发者无需显式理解，但遇到生命周期相关编译错误时，变型知识是理解错误原因的关键。
 > [来源: [Rust Reference — Variance](https://doc.rust-lang.org/reference/subtyping.html)]
 
 ---
@@ -540,7 +540,7 @@ fn extend_lifetime<'a>(r: &'a i32) -> &'static i32 {
 fn main() {}
 ```
 
-> **修正**: **生命周期子类型**：1) `'static: 'a`（`'static` 是所有生命周期的子类型，因为 `'static` 比任何 `'a` 都长）；2) `&'static T` 可安全转为 `&'a T`（协变）；3) `&'a T` 不能转为 `&'static T`（逆变/不変）。协变位置：1) `&'a T` — `'a` 和 `T` 都协变；2) `Box<T>`、`Vec<T>` — `T` 协变；3) `fn(T) -> U` — `T` 逆变，`U` 协变。逆变：1) `fn(&'a T)` 的参数位置 — `'a` 越长，函数越具体（子类型关系反转）；2) `&mut T` — `T` 不变（同时读写要求类型完全相同）。这与 Java 的泛型协变（`List<? extends T>`，通配符）或 C# 的 `in`/`out` 关键字（显式声明协变/逆变）不同——Rust 的协变/逆变是隐式的，由类型构造器的位置决定。[来源: [Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: **生命周期子类型**：1) `'static: 'a`（`'static` 是所有生命周期的子类型，因为 `'static` 比任何 `'a` 都长）；2) `&'static T` 可安全转为 `&'a T`（协变）；3) `&'a T` 不能转为 `&'static T`（逆变/不変）。协变位置：1) `&'a T` — `'a` 和 `T` 都协变；2) `Box<T>`、`Vec<T>` — `T` 协变；3) `fn(T) -> U` — `T` 逆变，`U` 协变。逆变：1) `fn(&'a T)` 的参数位置 — `'a` 越长，函数越具体（子类型关系反转）；2) `&mut T` — `T` 不变（同时读写要求类型完全相同）。这与 Java 的泛型（Generics）协变（`List<? extends T>`，通配符）或 C# 的 `in`/`out` 关键字（显式声明协变/逆变）不同——Rust 的协变/逆变是隐式的，由类型构造器的位置决定。[来源: [Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.4 边界测试：函数重复定义
 
@@ -598,7 +598,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-不变。因为 `UnsafeCell` 允许通过共享引用进行可变访问，协变会导致与 `&mut T` 类似的类型安全问题。
+不变。因为 `UnsafeCell` 允许通过共享引用（Reference）进行可变访问，协变会导致与 `&mut T` 类似的类型安全问题。
 </details>
 
 ---

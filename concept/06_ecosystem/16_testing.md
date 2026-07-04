@@ -582,7 +582,7 @@ impl<T: Database> Service<T> {
 ```
 
 > **修正**:
-> Rust 的 mock 对象必须**显式实现**被模拟的 trait。这与 Python 的 `unittest.mock`（动态创建 mock）或 Java 的 Mockito（运行时字节码生成）不同——Rust 没有运行时反射，mock 必须在编译期存在。
+> Rust 的 mock 对象必须**显式实现**被模拟的 trait。这与 Python 的 `unittest.mock`（动态创建 mock）或 Java 的 Mockito（运行时（Runtime）字节码生成）不同——Rust 没有运行时反射，mock 必须在编译期存在。
 > `mockall` crate 通过过程宏（Procedural Macro）自动生成 mock 实现，但底层仍是"为 trait 生成 struct 并实现"。
 > 这增加了测试代码的样板，但保证类型安全——mock 对象的方法签名必须与 trait 完全一致，编译器拒绝不一致的 mock。
 > [来源: [mockall Documentation](https://docs.rs/mockall/)]

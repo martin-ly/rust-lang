@@ -62,14 +62,14 @@
 | `break` | 立即退出循环 |
 | `const` | 定义常量或常量原始指针（Raw Pointer） |
 | `continue` | 跳到下一次循环迭代 |
-| `crate` | 模块路径中指代 crate root |
+| `crate` | 模块（Module）路径中指代 crate root |
 | `dyn` | trait object 动态分发 |
 | `else` | `if` / `if let` 的 fallback 分支 |
 | `enum` | 定义枚举（Enum） |
 | `extern` | 链接外部函数或变量 |
 | `false` | 布尔假字面量 |
 | `fn` | 定义函数或函数指针类型 |
-| `for` | 迭代循环、trait 实现、高阶生命周期 |
+| `for` | 迭代循环、trait 实现、高阶生命周期（Lifetimes） |
 | `if` | 条件分支 |
 | `impl` | 实现 inherent 或 trait 功能 |
 | `in` | `for` 循环语法的一部分 |
@@ -78,9 +78,9 @@
 | `match` | 模式匹配（Pattern Matching） |
 | `mod` | 定义模块 |
 | `move` | 使闭包（Closures）获取所有捕获变量的所有权（Ownership） |
-| `mut` | 标注引用（Reference）、原始指针或模式绑定的可变性 |
+| `mut` | 标注引用（Reference）、原始指针（Raw Pointer）或模式绑定的可变性 |
 | `pub` | 标注 struct 字段、`impl` 块或模块的公开可见性 |
-| `ref` | 按引用绑定 |
+| `ref` | 按引用（Reference）绑定 |
 | `return` | 从函数返回 |
 | `Self` | 正在定义或实现的类型的别名 |
 | `self` | 方法接收者或当前模块 |
@@ -110,7 +110,7 @@
 | `do` | 潜在用于 do-notation |
 | `final` | 潜在用于不可覆写 |
 | `gen` | 潜在用于生成器语法 |
-| `macro` | 潜在用于宏相关保留 |
+| `macro` | 潜在用于宏（Macro）相关保留 |
 | `override` | 潜在用于覆写标记 |
 | `priv` | 潜在用于私有性 |
 | `try` | 2018+ 版本中为保留关键字 |

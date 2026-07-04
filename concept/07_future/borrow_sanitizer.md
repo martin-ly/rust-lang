@@ -277,7 +277,7 @@ Miri 是解释器，检测广泛的 UB（越界、未对齐、数据竞争）。
 <details>
 <summary>✅ 答案与解析</summary>
 
-基于 LLVM 的 sanitizer 框架，编译时插入检查代码，运行时通过 shadow memory 追踪引用（Reference）状态，检测悬垂引用和非法别名。
+基于 LLVM 的 sanitizer 框架，编译时插入检查代码，运行时（Runtime）通过 shadow memory 追踪引用（Reference）状态，检测悬垂引用和非法别名。
 </details>
 
 ---
@@ -301,7 +301,7 @@ Miri 是解释器，检测广泛的 UB（越界、未对齐、数据竞争）。
 <details>
 <summary>✅ 答案与解析</summary>
 
-可在 CI 中自动化检测 `unsafe` 代码的借用违规，减少人工审计负担。特别适用于 FFI 边界和手动内存管理代码。
+可在 CI 中自动化检测 `unsafe` 代码的借用（Borrowing）违规，减少人工审计负担。特别适用于 FFI 边界和手动内存管理代码。
 </details>
 
 ---

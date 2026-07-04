@@ -83,7 +83,7 @@
     - [10.3 边界测试：绿色线程与 OS 线程的 API 混用（编译错误）](#103-边界测试绿色线程与-os-线程的-api-混用编译错误)
     - [10.4 边界测试：CPS 变换与 Rust 的 `?` 运算符（编译错误）](#104-边界测试cps-变换与-rust-的--运算符编译错误)
     - [10.5 边界测试：CPS 变换中的栈溢出（运行时（Runtime） panic）](#105-边界测试cps-变换中的栈溢出运行时-panic)
-    - [10.3 边界测试：尾递归与 Rust 的 TCO 缺失（运行时栈溢出）](#103-边界测试尾递归与-rust-的-tco-缺失运行时栈溢出)
+    - [10.3 边界测试：尾递归与 Rust 的 TCO 缺失（运行时（Runtime）栈溢出）](#103-边界测试尾递归与-rust-的-tco-缺失运行时栈溢出)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：什么是"执行模型同构"（Execution Model Isomorphism）？为什么这个概念对理解 Rust 很重要？（理解层）](#测验-1什么是执行模型同构execution-model-isomorphism为什么这个概念对理解-rust-很重要理解层)
     - [测验 2：Rust 的 OS 线程（`std::thread`）与 goroutine 在调度模型上有什么根本区别？（理解层）](#测验-2rust-的-os-线程stdthread与-goroutine-在调度模型上有什么根本区别理解层)
@@ -163,7 +163,7 @@ graph TD
 | **async/await** | 协作式（用户态） | 单线程共享 / 多线程 Send | Future 组合 | `tokio` / `smol` [历史: async-std [已归档]] | goroutine + select | Kahn 网络 / CPS |
 | **Fork-Join** | 工作窃取 | 共享内存 | 隐式（子任务结果合并） | `rayon` | 无原生 | Blelloch 工作度量 |
 | **CSP** | 同步阻塞 / 异步（Async）缓冲 | 消息传递（所有权（Ownership）转移） | channel send/recv | `crossbeam-channel` | `chan <- v` / `<-chan` | Hoare CSP |
-| **Actor** | 单线程事件循环 | 隔离（每个 Actor 独占） | 异步 mailbox | `actix` / `ractor` | 无原生 | Hewitt Actor |
+| **Actor** | 单线程事件循环 | 隔离（每个 Actor 独占） | 异步（Async） mailbox | `actix` / `ractor` | 无原生 | Hewitt Actor |
 | **内存共享** | 无（显式同步） | happens-before / release-acquire | 无（直接读写） | `std::sync` | `sync` 包 | C11 Memory Model |
 | **事件驱动** | 反应式（epoll/kqueue/IOCP） | 单线程 Reactor | 回调 / Future | `mio` / `tokio` | netpoller | Reactor 模式 |
 
@@ -539,7 +539,7 @@ Go 的事件驱动是**隐式的**：`netpoller` 集成在运行时，goroutine 
 | 维度 | Rust | Go |
 |:---|:---|:---|
 | 核心哲学 | "Communicate by sharing memory" 的安全版本 | "Share memory by communicating" |
-| 默认安全机制 | 编译期所有权 + Send/Sync | 运行时 GC + channel 约定 |
+| 默认安全机制 | 编译期所有权（Ownership） + Send/Sync | 运行时 GC + channel 约定 |
 | 并发原语 | 两套：`std::thread`（并行）+ `async/await`（并发） | 一套：goroutine（统一） |
 | 内存管理 | 编译期（无 GC） | 运行时 GC |
 | 错误处理（Error Handling） | `Result` + `?`（显式传播） | 多值返回 `(_, err)`（约定） |
@@ -633,7 +633,7 @@ xychart-beta
     bar [0.9, 0.8, 0.3, 0.9, 0.6, 0.4, 0.5]
 ```
 
-> 七维度：内存效率、启动速度、调度透明性、并行表达力、并发表达力、容错能力、生态一致性
+> 七维度：内存效率、启动速度、调度透明性、并行表达力、并发表达力、容错能力、生态一致性（Coherence）
 > **认知功能**: 多维量化对比不同语言/运行时的执行模型特征，将抽象权衡转化为可直观比较的形状。
 > 使用建议：用雷达图识别技术选型的核心 trade-off——Rust 强在内存效率与并行表达力，Go 强在调度透明性与生态一致性。
 > 关键洞察：语言设计哲学直接决定雷达图轮廓——无 GC 带来内存效率优势，但也以启动速度和调度透明性为代价。

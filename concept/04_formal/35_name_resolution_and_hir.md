@@ -107,7 +107,7 @@
 ### 2.1 第一阶段：宏展开期间的早期解析
 
 - 解析 `use` 导入和宏（Macro）名字；
-- 目的：知道要展开哪些宏；
+- 目的：知道要展开哪些宏（Macro）；
 - 宏展开与名称解析通过 `ResolverAstLoweringExt` trait 互相通信。
 
 ### 2.2 第二阶段：完整解析（`rustc_resolve::late`）
@@ -181,7 +181,7 @@ fn outer() {
 Lowering 把 AST 转换为 HIR，主要做两件事：
 
 1. **解糖（desugaring）**: 把语法糖展开成更基础的形式；
-2. **显式化（making implicit explicit）**: 把省略的生命周期、隐式解引用（Reference）等显式表示。
+2. **显式化（making implicit explicit）**: 把省略的生命周期（Lifetimes）、隐式解引用（Reference）等显式表示。
 
 ### 4.1 典型解糖
 
@@ -212,7 +212,7 @@ HIR 使用多种 ID 来表示不同粒度的实体：
 
 | ID | 含义 | 稳定性 | 用途 |
 |:---|:---|:---|:---|
-| `DefId` | 跨 crate 定义标识 | 包含 `CrateNum` + `DefIndex` | 引用外部 crate 的项 |
+| `DefId` | 跨 crate 定义标识 | 包含 `CrateNum` + `DefIndex` | 引用（Reference）外部 crate 的项 |
 | `LocalDefId` | 当前 crate 的定义标识 | 不含 `CrateNum` | 引用本地项，类型系统（Type System）更安全 |
 | `HirId` | HIR 节点标识 | `owner` + `local_id` | 可指向表达式等细粒度节点 |
 | `BodyId` | HIR Body 标识 | 包裹 `HirId` | 指向函数/闭包（Closures）/常量的可执行体 |

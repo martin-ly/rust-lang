@@ -247,7 +247,7 @@ fn test_heap_pointer() {
 | 错误 | Miri 输出 | 修复策略 |
 |:---|:---|:---|
 | 返回局部变量指针 | `use-after-free` | 改为堆分配或让调用者提供缓冲区 |
-| 同时存在 `&mut` 与其他引用（Reference）并写入 | `trying to reborrow` / `no protected tag` | 缩小借用作用域，或使用 `Cell`/`RefCell` |
+| 同时存在 `&mut` 与其他引用（Reference）并写入 | `trying to reborrow` / `no protected tag` | 缩小借用（Borrowing）作用域，或使用 `Cell`/`RefCell` |
 | `MaybeUninit` 未初始化就 `assume_init` | `reading uninitialized memory` | 确保所有字节已写入后再调用 |
 | 裸指针越界偏移 | `pointer arithmetic overflow` | 检查偏移量，使用 `wrapping_offset` 仅在合法场景 |
 | 通过 `&T` 修改数据 | `trying to reborrow` | 使用 `UnsafeCell` 或内部可变性包装 |

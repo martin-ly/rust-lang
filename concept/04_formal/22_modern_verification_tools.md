@@ -405,7 +405,7 @@ RUSTFLAGS="-Zsanitizer=borrow" cargo run --target x86_64-unknown-linux-gnu
 # 注意: BSan 需要 nightly toolchain 和目标平台的 sanitizer 运行时支持
 ```
 
-**适用场景**: 生产环境部署前的借用安全检查，Miri 太慢（100-1000x）时的替代方案。
+**适用场景**: 生产环境部署前的借用（Borrowing）安全检查，Miri 太慢（100-1000x）时的替代方案。
 
 **关键限制**: 仅检测运行时可达路径；静态分析覆盖不如 Miri 全面。
 

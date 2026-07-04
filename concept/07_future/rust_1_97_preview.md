@@ -200,7 +200,7 @@ const HASHER: BuildHasherDefault<DefaultHasher> = BuildHasherDefault::new();
 
 ### 2.8 `Box::as_ptr`
 
-`Box<T>` 新增 `as_ptr` 方法，无需先解引用即可获取堆分配对象的裸指针。
+`Box<T>` 新增 `as_ptr` 方法，无需先解引用（Reference）即可获取堆分配对象的裸指针。
 
 ```rust
 let b = Box::new(42);

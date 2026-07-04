@@ -37,11 +37,11 @@
 - v4.1 (2026-05-13): Phase B 形式化深化——新增§3.1b 状态机操作语义（小步语义、poll 状态转移函数、.await CPS 变换、Pin 约束在操作语义中的体现）；
 - 新增§3.2b Pin LTL 形式化（不动性公理 A1-A3、Unpin 豁免、poll 递归调用链验证、与§3.1b 操作语义衔接）
 - v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、
-- §8.10 Stream/Sink trait 完整分析（异步迭代器（Iterator）与生产者）、
+- §8.10 Stream/Sink trait 完整分析（异步（Async）迭代器（Iterator）与生产者）、
 - §8.11 `Pin<Box<dyn Future>>` vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
 - v3.0 (2026-05-13): 深度重构——新增§3.5调度模型对比（含三维Mermaid图）、§3.1状态机变换精确推导（含Pin（Pin）内存布局约束）、
 - §8.7取消安全系统分析（含3种安全模式与形式化定义）、§8.8 Waker契约与活性（含决策树），建立异步语义模型完整推理链
-- v2.0 (2026-05-13): 定理一致性矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注
+- v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注
 - v1.0 (2026-05-12): 初始版本，完成权威定义、Future 状态机模型、async/await 语法糖解析、Pin 分析、思维导图、示例反例
 
 ---
@@ -58,7 +58,7 @@
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 异步 vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
     - [2.2 Future 组合子矩阵](#22-future-组合子矩阵)
-    - [2.3 运行时对比矩阵](#23-运行时对比矩阵)
+    - [2.3 运行时（Runtime）对比矩阵](#23-运行时对比矩阵)
   - [三、形式化理论根基（Formal Foundation）](#三形式化理论根基formal-foundation)
     - [3.1 async fn 作为状态机：精确推导](#31-async-fn-作为状态机精确推导)
     - [3.1b 状态机操作语义（Operational Semantics）](#31b-状态机操作语义operational-semantics)
@@ -90,7 +90,7 @@
     - [8.2 正确示例：并发执行](#82-正确示例并发执行)
     - [8.3 正确示例：Stream 异步迭代](#83-正确示例stream-异步迭代)
     - [8.4 反例：在 async 中阻塞线程](#84-反例在-async-中阻塞线程)
-    - [8.5 反例：未 Pin 的自引用 Future](#85-反例未-pin-的自引用-future)
+    - [8.5 反例：未 Pin 的自引用（Reference） Future](#85-反例未-pin-的自引用-future)
     - [8.6 边界极限测试：跨越 await 的 Send 约束](#86-边界极限测试跨越-await-的-send-约束)
     - [8.7 边界极限测试：取消安全系统分析](#87-边界极限测试取消安全系统分析)
     - [8.8 Waker 契约与活性](#88-waker-契约与活性)
@@ -98,7 +98,7 @@
     - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
     - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
     - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
-    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
+    - [8.13 Miri 动态验证：async 状态机的内存安全（Memory Safety）检测](#813-miri-动态验证async-状态机的内存安全检测)
       - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
       - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
       - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
@@ -109,9 +109,9 @@
       - [问题与解决方案演进](#问题与解决方案演进)
       - [当前最佳实践](#当前最佳实践)
       - [限制与注意事项](#限制与注意事项)
-      - [生命周期陷阱](#生命周期陷阱)
+      - [生命周期（Lifetimes）陷阱](#生命周期陷阱)
   - [十一、国际课程与论文对齐](#十一国际课程与论文对齐)
-  - [十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
+  - [十二、`AsyncFn` Trait 家族：异步闭包（Closures）的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
     - [12.1 问题：异步闭包的类型真空](#121-问题异步闭包的类型真空)
     - [12.2 `AsyncFn` 家族层级](#122-asyncfn-家族层级)
     - [12.3 关键形式化特性：可重入性限制](#123-关键形式化特性可重入性限制)
@@ -677,7 +677,7 @@ graph LR
     style C fill:#ff9,stroke:#333
 ```
 
-> **认知功能**: 工程权衡决策辅助——在三维设计空间中定位不同并发模型的优劣。读者在技术选型时，可对照延迟、内存、吞吐量三个维度的项目需求优先级，判断 Rust 的协作式选择是否为最优解。关键洞察：零成本抽象是刻意 trade-off，用程序员的显式挂起标注换取对底层硬件的最大控制。[来源: 💡 原创分析]
+> **认知功能**: 工程权衡决策辅助——在三维设计空间中定位不同并发模型的优劣。读者在技术选型时，可对照延迟、内存、吞吐量三个维度的项目需求优先级，判断 Rust 的协作式选择是否为最优解。关键洞察：零成本抽象（Zero-Cost Abstraction）是刻意 trade-off，用程序员的显式挂起标注换取对底层硬件的最大控制。[来源: 💡 原创分析]
 > [来源: [Tokio Docs](https://tokio.rs/)]
 > [来源: [Rust Async Book]]
 
@@ -1574,7 +1574,7 @@ impl UringReactor {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 > **章节过渡**：Future 表示单个异步计算，但许多场景需要处理异步序列（如网络数据包流、消息队列）。`Stream` 将异步能力扩展到迭代器（Iterator）领域，`Sink` 则提供异步生产者抽象。理解它们与 `Iterator`、`Future` 的关系，是构建异步管道的关键。
 
-**`Stream`：异步迭代器**
+**`Stream`：异步迭代器（Iterator）**
 
 > **[futures-rs 文档]** `Stream` 是异步版的 `Iterator`，其核心方法为 `poll_next`，返回 `Poll<Option<Self::Item>>`。每次 `poll_next` 可能返回 `Pending`，表示下一个元素尚未就绪。✅ 已验证
 > **[Rust Async Book]** `Stream` 允许在 `await` 循环中逐个消费异步产生的元素，是 `Iterator` 在异步世界的直接对应物。✅ 已验证
@@ -1997,7 +1997,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **章节过渡**：异步代码的正确性不仅依赖类型系统，还依赖并发执行的时序。`loom` 通过穷举所有可能的线程交错（interleaving），在测试中发现数据竞争和死锁，是验证并发原语（如自定义 Mutex、Channel）的利器。
+> **章节过渡**：异步代码的正确性不仅依赖类型系统（Type System），还依赖并发执行的时序。`loom` 通过穷举所有可能的线程交错（interleaving），在测试中发现数据竞争和死锁，是验证并发原语（如自定义 Mutex、Channel）的利器。
 
 **loom 的用途与原理**
 
@@ -2719,7 +2719,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | Unsafe | [](../03_advanced/03_unsafe.md) | Pin 内部实现 |
 | 形式化方法 | [](../07_future/02_formal_methods.md) | 异步协议验证 |
 | Rust 版本特性演进 | [](../07_future/05_rust_version_tracking.md) | `AsyncFn`、`gen` blocks 等异步语义扩展 |
-| 泛型与类型系统 | [](../02_intermediate/02_generics.md) | `use<..>` precise capturing、GATs |
+| 泛型（Generics）与类型系统 | [](../02_intermediate/02_generics.md) | `use<..>` precise capturing、GATs |
 | Unsafe 权限分离 | [](../03_advanced/03_unsafe.md) | `unsafe_op_in_unsafe_fn` 的权限模型 |
 
 > **过渡: L3 → L2**

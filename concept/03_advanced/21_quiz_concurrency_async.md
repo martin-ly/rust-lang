@@ -363,7 +363,7 @@ async fn example() {
 }
 ```
 
-`Pin` 承诺：被固定的值**在内存中不会移动**，从而保证自引用的安全性。
+`Pin` 承诺：被固定的值**在内存中不会移动**，从而保证自引用（Reference）的安全性。
 
 **规则**：
 
@@ -534,7 +534,7 @@ fn main() {
 
 **错误信息**：`use of moved value: s`
 
-**解析**：`thread::spawn(move || ...)` 已经将 `s` 的所有权**移动**到新线程，`main` 中不能再使用 `s`（包括 `drop`）。
+**解析**：`thread::spawn(move || ...)` 已经将 `s` 的所有权（Ownership）**移动**到新线程，`main` 中不能再使用 `s`（包括 `drop`）。
 
 **`'static` 约束的深层含义**：
 
@@ -649,7 +649,7 @@ fn main() {
 
 **错误信息**：`counter` moved into closure in previous iteration of loop`
 
-**解析**：`counter` 在第一次迭代时被 `move` 进闭包，后续迭代无法再次使用。
+**解析**：`counter` 在第一次迭代时被 `move` 进闭包（Closures），后续迭代无法再次使用。
 
 **修复方案**——使用 `Arc<Mutex<T>>`：
 

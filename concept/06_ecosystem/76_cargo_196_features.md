@@ -76,7 +76,7 @@ Rust 1.96 在 Cargo 与工具链层面的核心变更可归纳为四类：
 | 特性 | 用户可见变化 | 典型应用场景 |
 |:---|:---|:---|
 | **`pubtime` 字段** | crate index 与 lockfile 可记录版本发布时间 | 依赖冷却策略、Renovate/Dependabot 时间规则、历史依赖重放 |
-| **`CARGO_BIN_EXE_<crate>` 运行时可用** | 测试运行时可读取 `env!("CARGO_BIN_EXE_foo")` / `std::env::var` | 集成测试调用 `[[bin]]` 目标，替代从 `[[test]]` 路径推断 |
+| **`CARGO_BIN_EXE_<crate>` 运行时（Runtime）可用** | 测试运行时可读取 `env!("CARGO_BIN_EXE_foo")` / `std::env::var` | 集成测试调用 `[[bin]]` 目标，替代从 `[[test]]` 路径推断 |
 | **TOML v1.1 解析** | `Cargo.toml` 与 `.cargo/config.toml` 支持多行 inline table、新转义序列等 | 更紧凑的依赖表、跨行 inline 配置 |
 | **嵌套子命令 manpage** | `cargo help report future-incompat` 等可展示完整 manpage | CI 文档化、离线工具链参考 |
 

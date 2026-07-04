@@ -201,7 +201,7 @@ let s2 = s1; // s1 的所有权转移到 s2
 | :--- | :--- | :--- | :--- |
 | **值语义** | 拷贝值 | C、C++、Rust、Swift、Go | 独立副本，无副作用 |
 | **引用（Reference）语义** | 共享引用 | Java、Python、JavaScript、Ruby | 共享对象，赋值传播副作用 |
-| **混合语义** | 依类型而定 | C++、Swift、Rust | 值类型（struct）vs 引用类型（class/pointer） |
+| **混合语义** | 依类型而定 | C++、Swift、Rust | 值类型（struct）vs 引用（Reference）类型（class/pointer） |
 
 ### 4.2 Rust 的极端值语义
 
@@ -375,7 +375,7 @@ fn reference_vs_pointer() {
 
 | 维度 | C | C++ | Java | Python | Rust |
 |:---|:---|:---|:---|:---|:---|
-| **变量模型** | 存储模型 | 存储模型 + RAII | 引用模型（变量 = 对象引用） | 名字-值绑定 | 存储模型 + 线性所有权 |
+| **变量模型** | 存储模型 | 存储模型 + RAII | 引用模型（变量 = 对象引用） | 名字-值绑定 | 存储模型 + 线性所有权（Ownership） |
 | **赋值语义** | 存储更新 | 存储更新 / 移动构造 | 引用重绑定 | 名字重新绑定 | 存储更新（Copy）/ 所有权转移（Move） |
 | **别名管理** | 手动（指针） | 手动（指针/引用（Reference）） | 自动（GC） | 自动（GC） | 编译器静态检查 |
 | **空悬指针** | 运行时（Runtime） UB | 运行时 UB | 不可能（GC） | 不可能（GC） | 编译期错误 |
@@ -463,7 +463,7 @@ fn init() {
 // static STATIC_RES_NEW: std::sync::OnceLock<Resource> = std::sync::OnceLock::new();
 ```
 
-> **修正**: `const` 变量在编译期求值并内联到使用处，要求值实现 `Copy` 或 `'static` 且不含运行时分配。`static` 变量在数据段分配，允许非 `Copy` 类型，但初始化必须是编译期常量（Rust 1.83+ 的 `const {}` 块放宽了部分限制）。`String`、`Vec` 等堆分配类型不能作为 `const`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: `const` 变量在编译期求值并内联到使用处，要求值实现 `Copy` 或 `'static` 且不含运行时（Runtime）分配。`static` 变量在数据段分配，允许非 `Copy` 类型，但初始化必须是编译期常量（Rust 1.83+ 的 `const {}` 块放宽了部分限制）。`String`、`Vec` 等堆分配类型不能作为 `const`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：变量遮蔽（shadowing）与不可变引用的冲突（编译错误）
 

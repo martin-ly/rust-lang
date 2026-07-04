@@ -54,7 +54,7 @@
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：WASM 的"组件模型"（Component Model）解决了什么问题？（理解层）](#测验-1wasm-的组件模型component-model解决了什么问题理解层)
-    - [测验 2：`wasmtime` 与浏览器中的 WASM 运行时有什么区别？（理解层）](#测验-2wasmtime-与浏览器中的-wasm-运行时有什么区别理解层)
+    - [测验 2：`wasmtime` 与浏览器中的 WASM 运行时（Runtime）有什么区别？（理解层）](#测验-2wasmtime-与浏览器中的-wasm-运行时有什么区别理解层)
     - [测验 3：WASM 的"WASI Preview 2"相比 Preview 1 有什么重大改进？（理解层）](#测验-3wasm-的wasi-preview-2相比-preview-1-有什么重大改进理解层)
     - [测验 4：`wit-bindgen` 在组件模型开发中起什么作用？（理解层）](#测验-4wit-bindgen-在组件模型开发中起什么作用理解层)
     - [测验 5：Rust 编译为 WASM 时，`wasm-bindgen` 与 `wit-bindgen` 分别适用于什么场景？（理解层）](#测验-5rust-编译为-wasm-时wasm-bindgen-与-wit-bindgen-分别适用于什么场景理解层)
@@ -109,7 +109,7 @@ Wasm 演进路径:
 
 ### 1.3 WASI：WebAssembly 系统接口
 
-> **[WASI Docs](https://wasi.dev)** WASI (WebAssembly System Interface) 是 WebAssembly 的模块化系统接口，核心设计原则是 **capability-based security**：程序只能访问显式被授予的能力。[来源: [WASI Overview](https:/wasi.dev)]
+> **[WASI Docs](https://wasi.dev)** WASI (WebAssembly System Interface) 是 WebAssembly 的模块（Module）化系统接口，核心设计原则是 **capability-based security**：程序只能访问显式被授予的能力。[来源: [WASI Overview](https:/wasi.dev)]
 
 ```text
 WASI 演进:
@@ -385,7 +385,7 @@ let mut store = Store::new(&engine, wasi);
 | **资源标识** | 能力句柄（不可伪造） | 所有权（Ownership）变量（唯一） |
 | **资源转移** | 能力句柄 move 到 guest | 所有权（Ownership） move |
 | **资源共享** | 能力降级（只读/只写） | `&T` / `&mut T` |
-| **资源回收** | 句柄 drop → 能力失效 | 所有权离开作用域 → drop |
+| **资源回收** | 句柄 drop → 能力失效 | 所有权（Ownership）离开作用域 → drop |
 | **安全保证** | 无句柄 = 无访问权 | 无所有权 = 无访问权 |
 
 > **关键洞察**: WASI 的能力安全模型与 Rust 的所有权模型存在**深层同构**——二者都通过"资源唯一标识 + 显式转移"来消除隐式全局访问。这是 Rust 成为 Wasm 生态首选语言的深层原因。

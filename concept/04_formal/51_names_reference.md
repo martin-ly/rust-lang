@@ -81,7 +81,7 @@ Prelude 是自动导入的名字集合：
 
 | 路径形式 | 示例 | 说明 |
 |:---|:---|:---|
-| 相对路径 | `foo::bar` | 从当前模块开始 |
+| 相对路径 | `foo::bar` | 从当前模块（Module）开始 |
 | 绝对路径 | `::crate::foo::bar` | 从 crate 根开始 |
 | 自我路径 | `self::foo`, `super::bar` | 当前模块 / 父模块 |
 | `Self` 路径 | `Self::Assoc` | 当前实现类型 |

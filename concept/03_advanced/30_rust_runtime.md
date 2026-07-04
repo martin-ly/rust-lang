@@ -7,7 +7,7 @@
 > **内容分级**: [专家级]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Specification / Systems
-> **双维定位**: S×Sys — 语言与运行时系统
+> **双维定位**: S×Sys — 语言与运行时（Runtime）系统
 > **前置依赖**: [Memory Management](../02_intermediate/03_memory_management.md) · [Custom Allocators](14_custom_allocators.md) · [Linkage](27_linkage.md)
 > **后置概念**: [Embedded Systems](../06_ecosystem/22_embedded_systems.md) · [Unsafe Rust](03_unsafe.md)
 > **定理链**: Runtime Attribute → Allocation / Subsystem → Binary Behavior

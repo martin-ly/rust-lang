@@ -73,13 +73,13 @@
 
 | 运算符 | 示例 | 说明 | 可重载？ |
 |:---|:---|:---|:---:|
-| `!` | `ident!(...)` / `ident!{...}` / `ident![...]` | 宏展开 | — |
+| `!` | `ident!(...)` / `ident!{...}` / `ident![...]` | 宏（Macro）展开 | — |
 | `!` | `!expr` | 按位/逻辑取反 | `Not` |
 | `!=` | `expr != expr` | 不等比较 | `PartialEq` |
 | `%` | `expr % expr` | 算术取余 | `Rem` |
 | `%=` | `var %= expr` | 取余并赋值 | `RemAssign` |
 | `&` | `&expr` / `&mut expr` | 借用（Borrowing） | — |
-| `&` | `&type` / `&mut type` / `&'a type` | 借用指针类型 | — |
+| `&` | `&type` / `&mut type` / `&'a type` | 借用（Borrowing）指针类型 | — |
 | `&` | `expr & expr` | 按位与 | `BitAnd` |
 | `&=` | `var &= expr` | 按位与并赋值 | `BitAndAssign` |
 | `&&` | `expr && expr` | 短路逻辑与 | — |
@@ -144,7 +144,7 @@
 | `br"..."` / `br#"..."#` | 原始字节字符串字面量 |
 | `'a'` | 字符字面量 |
 | `b'a'` | ASCII 字节字面量 |
-| `\|…\| expr` | 闭包 |
+| `\|…\| expr` | 闭包（Closures） |
 | `!` | 发散函数/ never type |
 | `_` | 忽略的模式绑定；也用于数字可读性分隔 |
 
@@ -157,7 +157,7 @@
 | `ident::ident` | 命名空间路径 |
 | `::path` | 相对于 crate root 的绝对路径 |
 | `self::path` | 相对于当前模块（Module）的路径 |
-| `super::path` | 相对于父模块的路径 |
+| `super::path` | 相对于父模块（Module）的路径 |
 | `type::ident` / `<type as trait>::ident` | 关联常量、函数、类型 |
 | `<type>::...` | 不能直接命名的类型的关联项，如 `<&T>::...`、`<[T]>::...` |
 | `trait::method(...)` | 通过 trait 名消除方法调用歧义 |
@@ -171,12 +171,12 @@
 | 符号 | 说明 |
 |:---|:---|
 | `path<...>` | 为泛型（Generics）类型指定参数，如 `Vec<u8>` |
-| `path::<...>` / `method::<...>` | 表达式中为泛型指定参数（turbofish），如 `"42".parse::<i32>()` |
+| `path::<...>` / `method::<...>` | 表达式中为泛型（Generics）指定参数（turbofish），如 `"42".parse::<i32>()` |
 | `fn ident<...> ...` | 定义泛型函数 |
 | `struct ident<...> ...` | 定义泛型结构体（Struct） |
 | `enum ident<...> ...` | 定义泛型枚举（Enum） |
 | `impl<...> ...` | 定义泛型实现 |
-| `for<...> type` | 高阶生命周期约束 |
+| `for<...> type` | 高阶生命周期（Lifetimes）约束 |
 | `type<ident=type>` | 为关联类型赋值，如 `Iterator<Item=T>` |
 
 ---

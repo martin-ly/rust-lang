@@ -800,7 +800,7 @@ Follower（跟随者，接收日志）、Candidate（候选者，发起选举）
 <details>
 <summary>✅ 答案与解析</summary>
 
-`serde` 保证消息序列化的类型安全（日志条目、投票请求）。`tokio` 提供异步网络 IO 和超时管理，处理 leader 选举和心跳的并发需求。
+`serde` 保证消息序列化的类型安全（日志条目、投票请求）。`tokio` 提供异步（Async）网络 IO 和超时管理，处理 leader 选举和心跳的并发需求。
 </details>
 
 ## 认知路径

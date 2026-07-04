@@ -170,7 +170,7 @@ fn main() {
 
 **捕获方式推断**：
 
-| 闭包体使用 | 捕获方式 | 实现的 trait |
+| 闭包（Closures）体使用 | 捕获方式 | 实现的 trait |
 |:---|:---|:---|
 | 只读使用 `count` | `&count` | `Fn` |
 | 修改 `count` | `&mut count` | `FnMut` |
@@ -366,7 +366,7 @@ fn main() {
 }
 ```
 
-实际上，`Iterator` 自动实现 `IntoIterator`（`into_iter` 返回自身），但 `for` 循环会消耗迭代器。上面的代码应该能编译...让我修正。
+实际上，`Iterator` 自动实现 `IntoIterator`（`into_iter` 返回自身），但 `for` 循环会消耗迭代器（Iterator）。上面的代码应该能编译...让我修正。
 
 **实际上**：实现了 `Iterator` 的类型自动获得 `IntoIterator` 实现，所以上面的代码应该能编译。让我重新检查...
 
@@ -663,7 +663,7 @@ fn main() {
 
 **注意**：修复后闭包参数从 `&i32` 改为 `i32`，因此需要使用 `into_iter()` 或调整闭包签名。
 
-**更通用的修复**——使用引用 + 显式生命周期（Lifetimes）：
+**更通用的修复**——使用引用（Reference） + 显式生命周期（Lifetimes）：
 
 ```rust
 fn make_filter(min: i32) -> impl Fn(&i32) -> bool {

@@ -60,7 +60,7 @@
     - [10.3 边界测试：`HashMap` 的 `Entry` API 与借用（Borrowing）冲突（编译错误）](#103-边界测试hashmap-的-entry-api-与借用冲突编译错误)
     - [10.4 边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错误）](#104-边界测试btreemap-的-range-查询与可变遍历编译错误)
     - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（Coherence）（运行时（Runtime）逻辑错误）](#105-边界测试hashset-的自定义哈希与-hash-一致性运行时逻辑错误)
-    - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
+    - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用（Borrowing）冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
     - [10.6 边界测试：`BTreeMap` 的键修改与排序不变性破坏（逻辑错误/UB）](#106-边界测试btreemap-的键修改与排序不变性破坏逻辑错误ub)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`BTreeMap` 与 `HashMap` 在键的遍历顺序上有什么本质区别？（理解层）](#测验-1btreemap-与-hashmap-在键的遍历顺序上有什么本质区别理解层)
@@ -843,7 +843,7 @@ fn main() {
 > 1) 哈希中包含随机数或时间戳；
 > 2) 哈希中包含未实现 `Hash` 的字段的指针地址；
 > 3) `PartialEq` 和 `Hash` 基于不同字段（如 `Eq` 比较 `id`，`Hash` 哈希 `name`）。
-> 这与 Java 的 `hashCode`/`equals` 契约（同样要求一致）或 Python 的 `__hash__`/`__eq__`（同样要求一致）相同——哈希表的正确性依赖哈希函数的一致性。
+> 这与 Java 的 `hashCode`/`equals` 契约（同样要求一致）或 Python 的 `__hash__`/`__eq__`（同样要求一致）相同——哈希表的正确性依赖哈希函数的一致性（Coherence）。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/hash/trait.Hash.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 
@@ -985,7 +985,7 @@ fn main() {
 | 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 内存安全（Memory Safety）数据结构 ⟸ 所有权（Ownership）自动管理 ⟸ Vec/HashMap 实现
-> 迭代器安全 ⟸ 借用检查器验证 ⟸ 集合 API 设计
+> 迭代器（Iterator）安全 ⟸ 借用检查器验证 ⟸ 集合 API 设计
 > **过渡**: 掌握 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。

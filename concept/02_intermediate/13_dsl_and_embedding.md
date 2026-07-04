@@ -46,7 +46,7 @@
   - [十、边界测试：DSL 与嵌入的编译错误](#十边界测试dsl-与嵌入的编译错误)
     - [10.1 边界测试：构建器模式的链式调用与所有权（Ownership）（编译错误）](#101-边界测试构建器模式的链式调用与所有权编译错误)
     - [10.2 边界测试：状态机 DSL 的非法状态转换（编译错误）](#102-边界测试状态机-dsl-的非法状态转换编译错误)
-    - [10.3 边界测试：宏递归深度限制（编译错误）](#103-边界测试宏递归深度限制编译错误)
+    - [10.3 边界测试：宏（Macro）递归深度限制（编译错误）](#103-边界测试宏递归深度限制编译错误)
     - [10.4 边界测试：DSL 的类型安全与运行时（Runtime）错误（运行时 panic）](#104-边界测试dsl-的类型安全与运行时错误运行时-panic)
     - [10.3 边界测试：DSL 宏的优先级与歧义解析（编译错误）](#103-边界测试dsl-宏的优先级与歧义解析编译错误)
     - [10.4 边界测试：DSL 宏的优先级与运算符结合性（编译错误）](#104-边界测试dsl-宏的优先级与运算符结合性编译错误)
@@ -619,7 +619,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 类型状态模式（Typestate Pattern）将状态机的状态编码为类型参数，非法的状态转换在编译期被拒绝。`Machine<Idle>` 有 `start()` 方法，`Machine<Running>` 有 `stop()` 方法，但 `Machine<Running>` 没有 `start()` 方法——从 Running 再次 start 是非法的。这是 Rust 类型系统（Type System）的强大应用：将运行时状态机验证转为编译期类型检查，消除整类状态转换错误。这与 Erlang 的 gen_fsm 或 C 的枚举（Enum）+switch 实现形成对比——Rust 在编译期保证状态转换的合法性。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: 类型状态模式（Typestate Pattern）将状态机的状态编码为类型参数，非法的状态转换在编译期被拒绝。`Machine<Idle>` 有 `start()` 方法，`Machine<Running>` 有 `stop()` 方法，但 `Machine<Running>` 没有 `start()` 方法——从 Running 再次 start 是非法的。这是 Rust 类型系统（Type System）的强大应用：将运行时（Runtime）状态机验证转为编译期类型检查，消除整类状态转换错误。这与 Erlang 的 gen_fsm 或 C 的枚举（Enum）+switch 实现形成对比——Rust 在编译期保证状态转换的合法性。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：宏递归深度限制（编译错误）
 
@@ -731,7 +731,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-声明宏适合简单模式匹配（Pattern Matching）和代码模板，编译快。过程宏（Procedural Macro）可解析任意语法树，适合复杂 DSL（如 `tokio::main`、`derive`），但需要单独 crate。
+声明宏（Declarative Macro）适合简单模式匹配（Pattern Matching）和代码模板，编译快。过程宏（Procedural Macro）可解析任意语法树，适合复杂 DSL（如 `tokio::main`、`derive`），但需要单独 crate。
 </details>
 
 ---

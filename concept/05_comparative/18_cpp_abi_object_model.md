@@ -551,7 +551,7 @@ pub struct CDrawable {
 | dyn Trait 胖指针 | [Rust Reference §4.1.13](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
 | null pointer optimization | [Rust Reference §4.2.1](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
 | C++ vs Rust 移动 ABI | [💡 原创分析] | ⚠️ | Tier 3 |
-| 对象切片不可能性 | [💡 原创分析] | ⚠️ | Tier 3 |
+| 对象切片（Slice）不可能性 | [💡 原创分析] | ⚠️ | Tier 3 |
 
 ---
 

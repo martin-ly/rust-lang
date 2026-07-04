@@ -57,8 +57,8 @@
     - [10.4 边界测试：C# 的属性与 Rust 的派生宏（Macro）的编译期差异（编译错误）](#104-边界测试c-的属性与-rust-的派生宏的编译期差异编译错误)
     - [10.3 边界测试：C# 的 async/await 与 Rust 的 Future 语义差异（运行时（Runtime）行为差异）](#103-边界测试c-的-asyncawait-与-rust-的-future-语义差异运行时行为差异)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：C# 的 async/await 与 Rust 的 async/await 在运行时模型上有什么根本区别？（理解层）](#测验-1c-的-asyncawait-与-rust-的-asyncawait-在运行时模型上有什么根本区别理解层)
-    - [测验 2：C# 的 LINQ 与 Rust 的迭代器适配器（`Iterator` trait）在功能上有什么对应关系？（理解层）](#测验-2c-的-linq-与-rust-的迭代器适配器iterator-trait在功能上有什么对应关系理解层)
+    - [测验 1：C# 的 async/await 与 Rust 的 async/await 在运行时（Runtime）模型上有什么根本区别？（理解层）](#测验-1c-的-asyncawait-与-rust-的-asyncawait-在运行时模型上有什么根本区别理解层)
+    - [测验 2：C# 的 LINQ 与 Rust 的迭代器（Iterator）适配器（`Iterator` trait）在功能上有什么对应关系？（理解层）](#测验-2c-的-linq-与-rust-的迭代器适配器iterator-trait在功能上有什么对应关系理解层)
     - [测验 3：C# 的 `unsafe` 块与 Rust 的 `unsafe` 块在使用频率上有什么不同？（理解层）](#测验-3c-的-unsafe-块与-rust-的-unsafe-块在使用频率上有什么不同理解层)
     - [测验 4：C# 的属性和事件（Property/Event）在 Rust 中如何实现？（理解层）](#测验-4c-的属性和事件propertyevent在-rust-中如何实现理解层)
     - [测验 5：.NET 的 CLR JIT 优化与 Rust 的 LLVM AOT 编译各有什么优势？（理解层）](#测验-5net-的-clr-jit-优化与-rust-的-llvm-aot-编译各有什么优势理解层)
@@ -171,7 +171,7 @@
   └── C# 反射可操作泛型参数
 ```
 
-> **泛型洞察**: **C# 的 Reified 泛型更灵活，Rust 的单态化（Monomorphization）更高效**——设计目标不同。
+> **泛型（Generics）洞察**: **C# 的 Reified 泛型更灵活，Rust 的单态化（Monomorphization）更高效**——设计目标不同。
 > [来源: [C# Generics](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/)]
 
 ---
@@ -219,7 +219,7 @@
   └── C# 有同步上下文概念
 ```
 
-> **异步洞察**: **C# 的异步更集成但更重，Rust 的异步更灵活但更底层**。
+> **异步（Async）洞察**: **C# 的异步更集成但更重，Rust 的异步更灵活但更底层**。
 > [来源: [C# Async](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/)]
 
 ---
@@ -710,7 +710,7 @@ fn main() {
 }
 ```
 
-> **修正**: C# 的**属性**（attributes）主要是**元数据**：`[Serializable]`、`[Obsolete]` 等标记供运行时反射读取，不改变代码行为（少数如 `[MethodImpl]` 影响 JIT）。Rust 的**派生宏**（`#[derive(...)]`）是**代码生成**：在编译期生成 trait 实现代码（`Debug::fmt`、`Clone::clone` 等）。这是编译期 vs 运行期的根本差异：C# 的属性轻量但能力有限，Rust 的 derive 强大但增加编译时间。C# 的代码生成需额外工具（T4 模板、Source Generators），Rust 的宏是语言原生特性。这与 Java 的注解（类似 C# 属性，运行时反射）或 Python 的装饰器（运行时元编程）不同——Rust 的宏是编译期元编程，零运行时开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [C# Attributes](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/)]
+> **修正**: C# 的**属性**（attributes）主要是**元数据**：`[Serializable]`、`[Obsolete]` 等标记供运行时反射读取，不改变代码行为（少数如 `[MethodImpl]` 影响 JIT）。Rust 的**派生宏（Macro）**（`#[derive(...)]`）是**代码生成**：在编译期生成 trait 实现代码（`Debug::fmt`、`Clone::clone` 等）。这是编译期 vs 运行期的根本差异：C# 的属性轻量但能力有限，Rust 的 derive 强大但增加编译时间。C# 的代码生成需额外工具（T4 模板、Source Generators），Rust 的宏是语言原生特性。这与 Java 的注解（类似 C# 属性，运行时反射）或 Python 的装饰器（运行时元编程）不同——Rust 的宏是编译期元编程，零运行时开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [C# Attributes](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/)]
 
 ### 10.3 边界测试：C# 的 async/await 与 Rust 的 Future 语义差异（运行时行为差异）
 

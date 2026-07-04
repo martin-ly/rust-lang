@@ -43,7 +43,7 @@
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
-  - [五、工具链与运行时](#五工具链与运行时)
+  - [五、工具链与运行时（Runtime）](#五工具链与运行时)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -501,7 +501,7 @@ fn main() {
 // 或使用 Web Workers（通过 js-sys）
 ```
 
-> **修正**: `wasm32-unknown-unknown` 目标没有操作系统支持，因此 `std::thread`、`std::fs`、`std::net` 等模块不可用。WebAssembly 的线程支持通过 `wasm32-wasip1` 或 `wasm32-wasip2` 或 `wasm32-unknown-emscripten` 目标实现，或浏览器的 Web Workers。Rust 编译器在编译期拒绝 wasm32 上不支持的 API，防止运行时错误。这与 C/C++ 的 WASM 编译（可能链接失败或运行时崩溃）不同——Rust 在类型系统（Type System）层面保证目标平台兼容性。[来源: [Rust and WebAssembly](https://rustwasm.github.io/book/)]
+> **修正**: `wasm32-unknown-unknown` 目标没有操作系统支持，因此 `std::thread`、`std::fs`、`std::net` 等模块（Module）不可用。WebAssembly 的线程支持通过 `wasm32-wasip1` 或 `wasm32-wasip2` 或 `wasm32-unknown-emscripten` 目标实现，或浏览器的 Web Workers。Rust 编译器在编译期拒绝 wasm32 上不支持的 API，防止运行时错误。这与 C/C++ 的 WASM 编译（可能链接失败或运行时崩溃）不同——Rust 在类型系统（Type System）层面保证目标平台兼容性。[来源: [Rust and WebAssembly](https://rustwasm.github.io/book/)]
 
 ### 10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）
 
@@ -533,7 +533,7 @@ pub extern "C" fn process(data: *mut u8, len: usize) {
 }
 ```
 
-> **修正**: WASM 的线性内存（Linear Memory）是一个连续的 byte 数组，Rust 的引用（`&T`、`&mut T`）要求**非空、对齐、有效**。从 host 传递的指针可能：1) 为 null；2) 未对齐；3) 越界。`slice::from_raw_parts_mut` 不验证这些条件，违反即 UB。安全封装：1) 验证 `data != null`；2) 验证 `data + len <= memory_size`；3) 使用 `wasm-bindgen` 生成的绑定（自动处理类型转换）。这与 C 的 WASM 模块（同样需验证指针）或 AssemblyScript（类型安全的 TypeScript 子集编译到 WASM）类似——WASM 的低级接口需要显式安全检查。`wasm-bindgen` 和 `wit-bindgen` 提供高层绑定生成，减少手动指针操作。[来源: [WASM Linear Memory](https://webassembly.org/docs/modules/#linear-memory)] · [来源: [wasm-bindgen Documentation](https://rustwasm.github.io/docs/wasm-bindgen/)]
+> **修正**: WASM 的线性内存（Linear Memory）是一个连续的 byte 数组，Rust 的引用（Reference）（`&T`、`&mut T`）要求**非空、对齐、有效**。从 host 传递的指针可能：1) 为 null；2) 未对齐；3) 越界。`slice::from_raw_parts_mut` 不验证这些条件，违反即 UB。安全封装：1) 验证 `data != null`；2) 验证 `data + len <= memory_size`；3) 使用 `wasm-bindgen` 生成的绑定（自动处理类型转换）。这与 C 的 WASM 模块（同样需验证指针）或 AssemblyScript（类型安全的 TypeScript 子集编译到 WASM）类似——WASM 的低级接口需要显式安全检查。`wasm-bindgen` 和 `wit-bindgen` 提供高层绑定生成，减少手动指针操作。[来源: [WASM Linear Memory](https://webassembly.org/docs/modules/#linear-memory)] · [来源: [wasm-bindgen Documentation](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ### 10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）
 
@@ -603,7 +603,7 @@ WASM 是低级别字节码，解析和编译速度更快，执行性能接近原
 <details>
 <summary>✅ 答案与解析</summary>
 
-WASM 使用单一的连续字节数组作为内存，通过偏移量访问。Rust 编译器将所有权和借用（Borrowing）检查转化为安全的内存偏移计算，WASM 沙箱进一步隔离了越界访问的影响。
+WASM 使用单一的连续字节数组作为内存，通过偏移量访问。Rust 编译器将所有权（Ownership）和借用（Borrowing）检查转化为安全的内存偏移计算，WASM 沙箱进一步隔离了越界访问的影响。
 </details>
 
 ---

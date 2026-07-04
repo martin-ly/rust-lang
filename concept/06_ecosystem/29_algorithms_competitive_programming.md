@@ -782,11 +782,11 @@ temp.extend_from_slice(&nums[..]);
 
 ### 8.1 核心要点回顾
 
-1. **Rust 的竞赛竞争力**: 零成本抽象 + 编译期内存安全（Memory Safety），使 Rust 在复杂数据结构中比 C++ 更不易出错，性能同级。
+1. **Rust 的竞赛竞争力**: 零成本抽象（Zero-Cost Abstraction） + 编译期内存安全（Memory Safety），使 Rust 在复杂数据结构中比 C++ 更不易出错，性能同级。
 2. **所有权（Ownership）即算法约束**: `split_at_mut` 替代危险指针算术，`Option<T>` 强制处理空节点，`VecDeque` 提供安全双端队列。
 3. **Fast I/O 是入场券**: `BufRead` + 自定义 scanner 是将 Rust 竞赛代码从 TLE 边缘拯救出来的第一步。
 4. **形式验证从可能到可行**: VeriContest 证明 946 道题可验证，Kani 可在 CI 中自动化验证边界安全。
-5. **类型系统（Type System）编码不变量**: Const generics 将数组维度编码进类型，迭代器（Iterator） `size_hint` 指导预分配，将运行时错误转化为编译期拒绝。
+5. **类型系统（Type System）编码不变量**: Const generics 将数组维度编码进类型，迭代器（Iterator） `size_hint` 指导预分配，将运行时（Runtime）错误转化为编译期拒绝。
 
 ### 8.2 相关概念文件
 

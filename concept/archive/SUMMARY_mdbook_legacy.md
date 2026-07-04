@@ -55,7 +55,7 @@
   - [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](01_foundation/17_collections_advanced.md)
   - 字符串与编码：Rust 的文本处理类型系统（Type System）
   - 变量模型：从通用 PL 视角看 Rust 的所有权（Ownership）
-  - [副作用与纯度：从引用透明到 Rust 的所有权效果](01_foundation/21_effects_and_purity.md)
+  - [副作用与纯度：从引用（Reference）透明到 Rust 的所有权（Ownership）效果](01_foundation/21_effects_and_purity.md)
   - [数据抽象谱系：从 C struct 到 Rust enum + trait](01_foundation/22_data_abstraction_spectrum.md)
 
 - [02](02.md)
@@ -67,17 +67,17 @@
   - [Error Handling（错误处理）](02_intermediate/04_error_handling.md)
   - `assert_matches!`：模式匹配（Pattern Matching）断言的形式化语义
   - [Rust 范围类型语义：`std::ops::Range` → `core::range`](02_intermediate/06_range_types.md)
-  - [闭包类型系统：Fn、FnMut、FnOnce 的捕获语义](02_intermediate/07_closure_types.md)
+  - [闭包（Closures）类型系统（Type System）：Fn、FnMut、FnOnce 的捕获语义](02_intermediate/07_closure_types.md)
   - 内部可变性：编译期规则的运行时（Runtime）逃逸
   - [Serde 序列化模式：Rust 的类型驱动数据转换](02_intermediate/09_serde_patterns.md)
-  - [模块系统：Rust 的代码组织与可见性规则](02_intermediate/10_module_system.md)
+  - [模块（Module）系统：Rust 的代码组织与可见性规则](02_intermediate/10_module_system.md)
   - [Cow：写时克隆与零拷贝抽象](02_intermediate/11_cow_and_borrowed.md)
   - 智能指针（Smart Pointer）：堆内存管理与共享语义
   - [DSL 与嵌入 式设计：Rust 中的领域特定语言](02_intermediate/13_dsl_and_embedding.md)
-  - [Newtype 与包装器模式：类型安全的零成本抽象](02_intermediate/14_newtype_and_wrapper.md)
-  - [错误处理深入：从 Result 到自定义错误生态](02_intermediate/16_error_handling_deep_dive.md)
+  - [Newtype 与包装器模式：类型安全的零成本抽象（Zero-Cost Abstraction）](02_intermediate/14_newtype_and_wrapper.md)
+  - [错误处理（Error Handling）深入：从 Result 到自定义错误生态](02_intermediate/16_error_handling_deep_dive.md)
   - Rust 迭代器（Iterator）模式
-  - [迭代器模式：Rust 的惰性计算与零成本抽象](02_intermediate/16_iterator_patterns.md)
+  - [迭代器（Iterator）模式：Rust 的惰性计算与零成本抽象](02_intermediate/16_iterator_patterns.md)
   - 宏（Macro）模式：编译期代码生成的工程实践
   - 生命周期（Lifetimes）高级主题：从 HRTB 到自引用类型
   - [高级 Trait 主题：从关联类型到特化](02_intermediate/19_advanced_traits.md)
@@ -92,7 +92,7 @@
   - [Async 高级主题](03_advanced/02_async_advanced.md)
   - [Async 模式](03_advanced/26_async_patterns.md)
   - [Unsafe Rust](03_advanced/03_unsafe.md)
-  - [Macros（宏系统）](03_advanced/04_macros.md)
+  - [Macros（宏（Macro）系统）](03_advanced/04_macros.md)
   - [Rust FFI：与外部代码的安全边界](03_advanced/05_rust_ffi.md)
   - [Pin 与 Unpin：自引用类型的不动性保证](03_advanced/06_pin_unpin.md)
   - 过程宏（Procedural Macro）：编译期代码生成的元编程工具
@@ -140,9 +140,9 @@
   - [Rust vs Go：线性所有权 vs CSP 过程逻辑](05_comparative/02_rust_vs_go.md)
   - [Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）](05_comparative/03_paradigm_matrix.md)
   - [Rust 安全保证的边界条件全景（Safety Boundary Panorama）](05_comparative/04_safety_boundaries.md)
-  - [Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行](05_comparative/05_execution_model_isomorphism.md)
+  - [Rust 执行模型同构性矩阵：同步 · 异步（Async） · 并发 · 并行](05_comparative/05_execution_model_isomorphism.md)
   - [Rust vs C++：ABI、对象模型与内存布局](05_comparative/18_cpp_abi_object_model.md)
-  - [Rust vs Java：系统编程与托管运行时的范式对比](05_comparative/06_rust_vs_java.md)
+  - [Rust vs Java：系统编程与托管运行时（Runtime）的范式对比](05_comparative/06_rust_vs_java.md)
   - [Rust vs Python：系统编程与动态脚本的对照分析](05_comparative/07_rust_vs_python.md)
   - [Rust vs JavaScript：系统编程与脚本执行的范式差异](05_comparative/08_rust_vs_javascript.md)
   - [Rust vs Ruby：性能与表达力的两极](05_comparative/08_rust_vs_ruby.md)
@@ -225,10 +225,10 @@
   - [Rust 形式模型演进跟踪（1.79–1.97+）](07_future/05_rust_version_tracking.md)
   - [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](07_future/07_mcdc_coverage_preview.md)
   - [Safety Tags 概念预研：Unsafe 契约的机器可读标注](07_future/08_safety_tags_preview.md)
-  - [BorrowSanitizer 概念预研：运行时借用检查工业化](07_future/20_borrowsanitizer_preview.md)
+  - [BorrowSanitizer 概念预研：运行时借用（Borrowing）检查工业化](07_future/20_borrowsanitizer_preview.md)
   - [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举（Enum）](../00_meta/placeholders/placeholder_generic.md)
   - [并行 前端编译预研：Rust 编译器 的多核扩展](07_future/09_parallel_frontend_preview.md)
-  - [派生 CoercePointee 预研：智能指针的自动类型强制](07_future/10_derive_coerce_pointee_preview.md)
+  - [派生 CoercePointee 预研：智能指针（Smart Pointer）的自动类型强制](07_future/10_derive_coerce_pointee_preview.md)
   - [Const Trait Impl 预研：常量上下文中的 Trait 泛化](07_future/11_const_trait_impl_preview.md)
   - [Stable ABI Preview](07_future/11_stable_abi_preview.md)
   - [Inline Const Pattern Preview](07_future/12_inline_const_pattern_preview.md)

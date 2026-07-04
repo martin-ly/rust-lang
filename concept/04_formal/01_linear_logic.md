@@ -146,7 +146,7 @@ Rust 对应:
   let pair = (a, b);  // Γ, Δ ⊢ A ⊗ B
 ```
 
-> 此处为 L1/01_ownership.md §2 "所有权规则" 的精确对应——元组构造 `(a, b)` 同时消耗 `a` 和 `b` 的所有权，对应 ⊗-intro 中上下文 `Γ` 和 `Δ` 的合并。 [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
+> 此处为 L1/01_ownership.md §2 "所有权（Ownership）规则" 的精确对应——元组构造 `(a, b)` 同时消耗 `a` 和 `b` 的所有权，对应 ⊗-intro 中上下文 `Γ` 和 `Δ` 的合并。 [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
 
 ```text
 线性蕴含引入 (⊸-intro):
@@ -601,7 +601,7 @@ fn session_demo() {
 | 来源 | 核心内容 | 与本文件对应 |
 |:---|:---|:---|
 | **[Girard 1987: Linear Logic]** | 线性逻辑的创立；sequent calculus；!A/?A 指数模态 | 理论基础；§1.1, §3 |
-| **[Pierce 2002: TAPL §15.3]** | 子结构类型系统；linear/affine/relevant types 谱系 | 类型论定位；§1.1, §2.3, §5.2 |
+| **[Pierce 2002: TAPL §15.3]** | 子结构类型系统（Type System）；linear/affine/relevant types 谱系 | 类型论定位；§1.1, §2.3, §5.2 |
 | **[Wadler 1990: Linear Types]** | 线性类型在编程中的应用；"线性类型可以改变世界" | 编程语言映射；§3, §6 |
 | **[CMU 17-363: PL Pragmatics]** | 类型系统（Type System）、子结构类型、会话类型 | 教学对齐；§6, §7.2 |
 | **[Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic)** | 线性逻辑通用概念；连接词语义 | 权威定义；§1.1 |
@@ -633,7 +633,7 @@ fn session_demo() {
 
 > **过渡: L4 → L1**
 > 线性逻辑的 `⊗`（tensor）对应 Rust 的元组所有权，`⊸`（lollipop）对应所有权的转移（move），`!`（exponential）对应 `Copy` trait 的 weakening 规则。从形式化符号到编译器实际行为的映射，是理解 "为什么 Rust 不需要垃圾回收" 的理论根基。
-> 工程实践中的对应见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权规则）与 [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md)（借用作为分数权限的弱化形式）。
+> 工程实践中的对应见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权规则）与 [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md)（借用（Borrowing）作为分数权限的弱化形式）。
 > **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 十、相关概念链接
@@ -904,7 +904,7 @@ Rust 所有权系统（仿射变体）:
 > 线性逻辑的 `⊗`（tensor）和 `⊸`（lollipop）不是纯理论游戏——它们直接对应 Rust 的元组构造和所有权转移。当你写 `let y = x;` 时，你正在执行一个 lollipop 消除规则；当你写 `let pair = (x, y);` 时，你正在构造一个 tensor 积。
 > 工程对应见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)（unsafe 作为线性规则的逃逸门）与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)（并发作为线性资源的交互）。
 > **过渡: L4 → L5**
-> 线性逻辑在不同语言中有不同实现：Rust 用所有权、Haskell 用 LinearTypes 扩展、ATS 用依赖类型 + 线性类型。比较这些实现能揭示 "线性逻辑是必要不充分条件"——线性类型保证内存安全，但内存安全不需要完整的线性类型系统。
+> 线性逻辑在不同语言中有不同实现：Rust 用所有权、Haskell 用 LinearTypes 扩展、ATS 用依赖类型 + 线性类型。比较这些实现能揭示 "线性逻辑是必要不充分条件"——线性类型保证内存安全（Memory Safety），但内存安全不需要完整的线性类型系统。
 > 对比视角见 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)（类型系统谱系）。
 
 ---
@@ -1233,7 +1233,7 @@ Rust 中没有任何单一机制完全对应 `!A`，但 `Copy` + `Clone` + `Drop
 - Cut 消除定理保证这条边可被安全归约为直接资源转移
 - `move` 语义确保资源线性转移（发送后 data 不可用）
 
-这与 Go 的 channel（无所有权，共享内存）或 Erlang 的消息传递（复制语义）不同——Rust 的 channel 是**线性逻辑 Cut 规则**的运行时实现。
+这与 Go 的 channel（无所有权，共享内存）或 Erlang 的消息传递（复制语义）不同——Rust 的 channel 是**线性逻辑 Cut 规则**的运行时（Runtime）实现。
 </details>
 
 ---

@@ -285,7 +285,7 @@ fn main() {
 }
 ```
 
-> **修正**: Theseus OS 的 Cell 类型是 Rust `std::cell::Cell` 的变体，要求 `T: Copy` 以确保获取值时不会发生所有权转移或别名问题。这与 Rust 标准库 `Cell::get` 的约束一致。Theseus 将这一约束扩展到内核态所有共享状态，通过类型系统（Type System）排除非 Copy 类型的共享可变访问，从而消除数据竞争的可能。[来源: [Theseus OS Documentation](https://theseus-os.github.io/Theseus/)]
+> **修正**: Theseus OS 的 Cell 类型是 Rust `std::cell::Cell` 的变体，要求 `T: Copy` 以确保获取值时不会发生所有权（Ownership）转移或别名问题。这与 Rust 标准库 `Cell::get` 的约束一致。Theseus 将这一约束扩展到内核态所有共享状态，通过类型系统（Type System）排除非 Copy 类型的共享可变访问，从而消除数据竞争的可能。[来源: [Theseus OS Documentation](https://theseus-os.github.io/Theseus/)]
 
 ### 编译错误 5：Redox 的 URL 方案与 Capability 不匹配（编译错误）
 

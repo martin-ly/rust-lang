@@ -48,10 +48,10 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：async drop 的编译错误](#十边界测试async-drop-的编译错误)
-    - [10.1 边界测试：异步析构的 `.await` 位置约束（编译错误）](#101-边界测试异步析构的-await-位置约束编译错误)
+    - [10.1 边界测试：异步（Async）析构的 `.await` 位置约束（编译错误）](#101-边界测试异步析构的-await-位置约束编译错误)
     - [10.2 边界测试：异步析构与 panic 的交互（运行时（Runtime） UB）](#102-边界测试异步析构与-panic-的交互运行时-ub)
     - [10.3 边界测试：async drop 与 `std::mem::forget` 的交互（内存泄漏）](#103-边界测试async-drop-与-stdmemforget-的交互内存泄漏)
-    - [10.4 边界测试：async drop 在 panic 时的双重取消（运行时 UB）](#104-边界测试async-drop-在-panic-时的双重取消运行时-ub)
+    - [10.4 边界测试：async drop 在 panic 时的双重取消（运行时（Runtime） UB）](#104-边界测试async-drop-在-panic-时的双重取消运行时-ub)
     - [10.3 边界测试：async drop 与同步 Drop 的语义冲突（编译错误/设计问题）](#103-边界测试async-drop-与同步-drop-的语义冲突编译错误设计问题)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -721,7 +721,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-自引用异步类型通常被 `Pin`。`async_drop` 需要正确处理 `Pin<&mut Self>`，确保在异步销毁过程中内存位置保持稳定。
+自引用（Reference）异步类型通常被 `Pin`。`async_drop` 需要正确处理 `Pin<&mut Self>`，确保在异步销毁过程中内存位置保持稳定。
 </details>
 
 ---

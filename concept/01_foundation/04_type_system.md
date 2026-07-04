@@ -83,9 +83,9 @@
     - [5.3 反例：未覆盖的 match 分支（E0004）](#53-反例未覆盖的-match-分支e0004)
     - [5.4 反例：递归类型需要间接层（E0072）](#54-反例递归类型需要间接层e0072)
   - [六、反命题与边界分析（Inverse Propositions \& Boundary Analysis）](#六反命题与边界分析inverse-propositions--boundary-analysis)
-    - [6.1 命题: "Rust 类型系统总是安全的"](#61-命题-rust-类型系统总是安全的)
+    - [6.1 命题: "Rust 类型系统（Type System）总是安全的"](#61-命题-rust-类型系统总是安全的)
     - [6.2 命题: "enum match 强制穷尽"](#62-命题-enum-match-强制穷尽)
-    - [6.3 命题: "类型推断总是完备的"](#63-命题-类型推断总是完备的)
+    - [6.3 命题: "类型推断（Type Inference）总是完备的"](#63-命题-类型推断总是完备的)
   - [七、边界极限测试代码（Boundary Stress Tests）](#七边界极限测试代码boundary-stress-tests)
     - [7.1 边界：unsafe 绕过类型系统后的行为](#71-边界unsafe-绕过类型系统后的行为)
     - [7.2 边界：#\[non\_exhaustive\] 对穷尽性的削弱](#72-边界non_exhaustive-对穷尽性的削弱)
@@ -123,7 +123,7 @@
       - [11.4.6 与 Haskell、ML 的类型推断对比](#1146-与-haskellml-的类型推断对比)
     - [11.5 Discriminant 与 Enum 内存布局](#115-discriminant-与-enum-内存布局)
       - [11.5.1 Discriminant 的基本概念与 `std::mem::discriminant`](#1151-discriminant-的基本概念与-stdmemdiscriminant)
-      - [11.5.2 枚举的内存布局：Tagged Union 模型](#1152-枚举的内存布局tagged-union-模型)
+      - [11.5.2 枚举（Enum）的内存布局：Tagged Union 模型](#1152-枚举的内存布局tagged-union-模型)
       - [11.5.3 Niche Optimization 与 Null Pointer Optimization（NPO）](#1153-niche-optimization-与-null-pointer-optimizationnpo)
       - [11.5.4 `#[repr]` 对 Discriminant 与布局的影响](#1154-repr-对-discriminant-与布局的影响)
       - [11.5.5 `std::mem::Discriminant<T>` 与 `DiscriminantKind`](#1155-stdmemdiscriminantt-与-discriminantkind)
@@ -135,13 +135,13 @@
       - [11.7.2 Rust 的类型二元性：名义与结构并存](#1172-rust-的类型二元性名义与结构并存)
       - [11.7.3 内部二元性：生命周期（Lifetimes）子类型化的结构本质](#1173-内部二元性生命周期子类型化的结构本质)
       - [11.7.4 幻影类型与新类型惯用法：名义类型的零成本抽象（Zero-Cost Abstraction）](#1174-幻影类型与新类型惯用法名义类型的零成本抽象)
-      - [11.7.5 一致性规则与名义类型的深层绑定](#1175-一致性规则与名义类型的深层绑定)
+      - [11.7.5 一致性（Coherence）规则与名义类型的深层绑定](#1175-一致性规则与名义类型的深层绑定)
       - [11.7.6 FFI 翻译中的类型范式冲突](#1176-ffi-翻译中的类型范式冲突)
       - [11.7.7 跨语言对比表](#1177-跨语言对比表)
       - [11.7.8 反命题与边界分析](#1178-反命题与边界分析)
         - [命题 1: "名义类型阻止了所有非预期的类型等价"](#命题-1-名义类型阻止了所有非预期的类型等价)
         - [命题 2: "结构类型系统可以解决孤儿规则（Orphan Rule）的问题"](#命题-2-结构类型系统可以解决孤儿规则orphan-rule的问题)
-        - [命题 3: "新类型模式（Newtype）具有零运行时成本"](#命题-3-新类型模式newtype具有零运行时成本)
+        - [命题 3: "新类型模式（Newtype）具有零运行时（Runtime）成本"](#命题-3-新类型模式newtype具有零运行时成本)
       - [11.7.9 认知路径：何时名义、何时结构](#1179-认知路径何时名义何时结构)
     - [11.7.10 与多级引用（Reference）语义的交叉：引用的名义与结构行为](#11710-与多级引用语义的交叉引用的名义与结构行为)
   - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
@@ -152,14 +152,14 @@
     - [12.2 边界测试：泛型（Generics）约束不满足（编译错误）](#122-边界测试泛型约束不满足编译错误)
     - [12.3 边界测试：match 非穷尽（编译错误）](#123-边界测试match-非穷尽编译错误)
     - [12.4 边界测试：impl Trait 在参数位置与返回位置的差异（编译错误）](#124-边界测试impl-trait-在参数位置与返回位置的差异编译错误)
-    - [12.5 边界测试：生命周期省略（Lifetime Elision）规则失效（编译错误）](#125-边界测试生命周期省略规则失效编译错误)
+    - [12.5 边界测试：生命周期（Lifetimes）省略（Lifetime Elision）规则失效（编译错误）](#125-边界测试生命周期省略规则失效编译错误)
     - [10.1 边界测试：类型不匹配的基础错误](#101-边界测试类型不匹配的基础错误)
   - [实践](#实践)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
   - [Never 类型元组强制（Rust 1.96）](#never-类型元组强制rust-196)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：结构体与元组结构体（理解层）](#测验-1结构体与元组结构体理解层)
+    - [测验 1：结构体（Struct）与元组结构体（理解层）](#测验-1结构体与元组结构体理解层)
     - [测验 2：枚举与模式匹配（Pattern Matching）穷尽性（应用层）](#测验-2枚举与模式匹配穷尽性应用层)
     - [测验 3：Option 与 unwrap（分析层）](#测验-3option-与-unwrap分析层)
     - [测验 4：类型推断边界（应用层）](#测验-4类型推断边界应用层)
@@ -531,7 +531,7 @@ Rust 类型系统的安全性保障同样由引理、定理与推论构成严密
 | **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型错误码** |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | L1: ADT 代数完备性 | struct = 积, enum = 余积 | 所有数据结构可组合表达 | 范畴论（积/余积） | T1, C2, C3 | 无法表达开放变体（需 dyn Trait） | — |
-| L2: NPO 零成本优化 | `&T` 永不为 null | Option<&T> ≅ &T 内存布局 | 内存安全（Memory Safety）公理 | C1 | 非引用类型无 NPO | — |
+| L2: NPO 零成本优化 | `&T` 永不为 null | Option<&T> ≅ &T 内存布局 | 内存安全（Memory Safety）公理 | C1 | 非引用（Reference）类型无 NPO | — |
 | T1: Match 穷尽性 | enum 封闭 + match 全覆盖 | 无遗漏 case | 代数类型论（和类型） | C1, C2 | `#[non_exhaustive]` 跨 crate | E0004 |
 | T2: 类型推断完备性 | 无显式泛型（Generics）约束 | 唯一最一般类型可推断 | HM 类型推断 | — | 多态场景需标注 | E0282 |
 | T3: 类型安全定理 | 类型检查通过 + 无 unsafe | Progress + Preservation | 类型论元定理 | — | `std::mem::transmute` | — |
@@ -2604,7 +2604,7 @@ fn main() {
 <details>
 <summary>✅ 答案</summary>
 
-**编译错误：非穷尽模式匹配**。
+**编译错误：非穷尽模式匹配（Pattern Matching）**。
 
 Rust 要求 `match` 表达式覆盖枚举的所有变体。此处缺少 `East` 和 `West` 的处理。
 

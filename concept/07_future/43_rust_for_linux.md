@@ -54,7 +54,7 @@
     - [10.2 边界测试：内核锁的原子顺序与 `unsafe` 封装（编译错误）](#102-边界测试内核锁的原子顺序与-unsafe-封装编译错误)
     - [10.3 边界测试：内核模块（Module）的 `no_std` 与 `alloc` 的谨慎使用（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-的谨慎使用编译错误)
     - 10.4 边界测试：内核锁的 `spinlock` 与睡眠的互斥（运行时（Runtime）死锁）
-    - [10.3 边界测试：内核模块的 `no_std` 与 alloc 限制（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-限制编译错误)
+    - [10.3 边界测试：内核模块（Module）的 `no_std` 与 alloc 限制（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-限制编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust for Linux 项目的核心目标是什么？（理解层）](#测验-1rust-for-linux-项目的核心目标是什么理解层)
@@ -600,7 +600,7 @@ graph TD
 
 ### 7.1 学习路径建议
 
-1. **基础**：掌握 Rust 所有权（Ownership）、生命周期、`no_std`、FFI
+1. **基础**：掌握 Rust 所有权（Ownership）、生命周期（Lifetimes）、`no_std`、FFI
 2. **入门**：阅读 `samples/rust/` 中的官方示例
 3. **进阶**：尝试编写简单的字符设备驱动
 4. **深入**：理解 `kernel` crate 的内存模型和并发抽象
@@ -698,7 +698,7 @@ fn increment() {
 > 2) 不能发送到其他 CPU（锁的 CPU 亲和性）；
 > 3) 中断上下文中必须使用 `irqsave` 变体（禁用中断防止死锁）。
 > 这些约束部分通过类型系统（Type System）强制（`Send`/`Sync` bound），部分通过文档约定。
-> 违反约束不是编译错误，而是运行时死锁或数据损坏——这是内核编程的本质：某些约束无法完全静态检查。
+> 违反约束不是编译错误，而是运行时（Runtime）死锁或数据损坏——这是内核编程的本质：某些约束无法完全静态检查。
 > 与用户空间的 `std::sync::Mutex`（可睡眠、跨线程安全）相比，内核锁更底层、约束更多。
 > [来源: [Rust for Linux](https://rust-for-linux.com/)] ·
 > [来源: [Linux Kernel Locking Documentation](https://docs.kernel.org/kernel-hacking/locking.html)]
@@ -792,7 +792,7 @@ fn main() {}
 >
 > 1) 内存安全（Memory Safety）（减少 CVE）；
 > 2) 零成本抽象（Zero-Cost Abstraction）（与 C 代码同等性能）；
-> 3) 现代类型系统（减少逻辑错误）。
+> 3) 现代类型系统（Type System）（减少逻辑错误）。
 >
 > 挑战：
 >
@@ -800,7 +800,7 @@ fn main() {}
 > 2) 编译时间（内核代码量大）；
 > 3) 社区接受度。这与 Linux 内核的 C 代码（40 年历史，大量遗留代码）或 Windows 内核的 Rust 实验（Microsoft 也在探索）不同——Rust for Linux 是操作系统内核现代化的前沿尝试。
 > [来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Documentation](https://docs.kernel.org/rust/)]
-> **过渡**: Rust for Linux ：操作系统内核中的内存安全 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Rust for Linux ：操作系统内核中的内存安全（Memory Safety） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 

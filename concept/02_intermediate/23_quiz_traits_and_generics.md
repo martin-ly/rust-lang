@@ -287,7 +287,7 @@ Option<&str>   // 编译期生成另一个版本
 
 对比 C++ 模板：Rust 泛型（Generics）在类型检查阶段就验证约束，错误信息更清晰。
 
-**知识点**：泛型通过单态化（Monomorphization）实现零成本抽象（Zero-Cost Abstraction）——运行时（Runtime）没有类型擦除或虚函数调用的开销。→ 泛型详解
+**知识点**：泛型（Generics）通过单态化（Monomorphization）实现零成本抽象（Zero-Cost Abstraction）——运行时（Runtime）没有类型擦除或虚函数调用的开销。→ 泛型详解
 
 </details>
 
@@ -536,7 +536,7 @@ fn random_animal(n: i32) -> Box<dyn Animal> {
 | 函数参数 | ✅（简化签名） | — |
 | 需要递归或复杂控制流 | ❌ | 用显式泛型或 trait 对象 |
 
-**知识点**：`impl Trait` 是语法糖，编译器在编译期确定具体类型。它不提供运行时多态能力。[→ 泛型详解](02_generics.md)
+**知识点**：`impl Trait` 是语法糖，编译器在编译期确定具体类型。它不提供运行时（Runtime）多态能力。[→ 泛型详解](02_generics.md)
 
 </details>
 

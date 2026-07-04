@@ -389,7 +389,7 @@ Vulkan 核心概念:
 ### 4.2 wgpu：安全的跨平台 GPU 抽象
 
 > **[wgpu](https://wgpu.rs/)** 是 Rust 的跨平台 GPU 抽象层，基于 WebGPU 标准，但也可用于原生应用。
-> 核心设计：**安全的 GPU 资源管理**——利用 Rust 的所有权和生命周期（Lifetimes）系统，在编译期防止常见的 GPU 编程错误（use-after-free、资源泄漏、错误的绑定）。
+> 核心设计：**安全的 GPU 资源管理**——利用 Rust 的所有权（Ownership）和生命周期（Lifetimes）系统，在编译期防止常见的 GPU 编程错误（use-after-free、资源泄漏、错误的绑定）。
 > [来源: [wgpu Documentation](https://docs.rs/wgpu/latest/wgpu/)]
 
 ```rust
@@ -464,7 +464,7 @@ fn render_frame(
 | **命令编码器使用** | 二次 begin 导致 UB | 编译期保证 encoder 唯一性 |
 | **缓冲区越界** | 运行时（Runtime）可能静默失败 | 绑定验证层检测 |
 | **线程安全** | 手动同步 | `Send`/`Sync` 编译期检查 |
-| **管线状态不匹配** | 运行时错误 | 类型系统（Type System）保证绑定一致性（Coherence） |
+| **管线状态不匹配** | 运行时（Runtime）错误 | 类型系统（Type System）保证绑定一致性（Coherence） |
 
 > **来源**: [wgpu Learn](https://sotrh.github.io/learn-wgpu/) ·
 > [WebGPU Spec](https://www.w3.org/TR/webgpu/) ·
@@ -908,7 +908,7 @@ struct InputSync {
 | **渲染实体数** | Bevy: 10k+ @ 60fps | GPU 绘制调用限制 | 合批（Batching）+ GPU Instancing |
 | **物理实体数** | Rapier: 1k+ 刚体 | CPU 碰撞检测限制 | 空间分割（BVH/八叉树）|
 | **网络延迟隐藏** | 预测 100-200ms | 光速限制 | 本地预测 + 插值 |
-| **资源加载** | SSD: ~1GB/s | I/O 带宽 | 异步流式 + LOD |
+| **资源加载** | SSD: ~1GB/s | I/O 带宽 | 异步（Async）流式 + LOD |
 | **音频延迟** | 10-50ms | OS 音频缓冲区 | 低延迟模式 + 专属线程 |
 | **内存碎片** | Arena/Pool 分配器 | 物理内存限制 | ECS 平铺布局天然紧凑 |
 

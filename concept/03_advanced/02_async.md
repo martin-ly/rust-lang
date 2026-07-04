@@ -67,7 +67,7 @@
     - [1.2 官方文档定义](#12-官方文档定义)
     - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
-    - [2.1 异步 vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
+    - [2.1 异步（Async） vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
     - [2.2 Future 组合子矩阵](#22-future-组合子矩阵)
     - [2.3 运行时（Runtime）对比矩阵](#23-运行时对比矩阵)
   - [三、形式化理论根基（Formal Foundation）](#三形式化理论根基formal-foundation)
@@ -123,7 +123,7 @@
       - [生命周期（Lifetimes）陷阱](#生命周期陷阱)
   - [十一、国际课程与论文对齐](#十一国际课程与论文对齐)
   - [十二、`AsyncFn` Trait 家族：异步闭包（Closures）的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
-    - [12.1 问题：异步闭包的类型真空](#121-问题异步闭包的类型真空)
+    - [12.1 问题：异步闭包（Closures）的类型真空](#121-问题异步闭包的类型真空)
     - [12.2 `AsyncFn` 家族层级](#122-asyncfn-家族层级)
     - [12.3 关键形式化特性：可重入性限制](#123-关键形式化特性可重入性限制)
     - [12.4 效果系统原型](#124-效果系统原型)
@@ -142,7 +142,7 @@
     - [16.1 边界测试：非 Send 类型跨 await 点（编译错误）](#161-边界测试非-send-类型跨-await-点编译错误)
     - [16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）](#162-边界测试在-async-块中调用阻塞函数逻辑错误)
     - [16.3 边界测试：递归 async fn（编译错误）](#163-边界测试递归-async-fn编译错误)
-    - [16.4 边界测试：在 async 块中借用（Borrowing）局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
+    - [16.4 边界测试：在 async 块中借用（Borrowing）局部变量生命周期（Lifetimes）不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
     - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
     - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -154,7 +154,7 @@
   - [嵌入式测验](#嵌入式测验)
     - [测验 1：async fn 的本质（记忆层）](#测验-1async-fn-的本质记忆层)
     - [测验 2：`.await` 的语义（理解层）](#测验-2await-的语义理解层)
-    - [测验 3：运行时选择（应用层）](#测验-3运行时选择应用层)
+    - [测验 3：运行时（Runtime）选择（应用层）](#测验-3运行时选择应用层)
     - [测验 4：取消安全（分析层）](#测验-4取消安全分析层)
 
 ## 〇、认知路径（Cognitive Path）
@@ -370,7 +370,7 @@ Pin<&mut Self> 的内存布局约束:
 ```
 
 > **来源**: [RFC 2349 §3: Pin invariants](https://rust-lang.github.io/rfcs/2349-pin.html) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rustonomicon: Pinning](https://doc.rust-lang.org/std/pin/struct.Pin.html)
-> **[RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)** Pin 被引入以支持自引用结构：Pin<&mut T> 保证 T 的内存地址不会被改变，除非 T: Unpin。✅ 已验证
+> **[RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)** Pin 被引入以支持自引用（Reference）结构：Pin<&mut T> 保证 T 的内存地址不会被改变，除非 T: Unpin。✅ 已验证
 > **[TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html)** Pin 是 async/await 安全的关键——编译器生成的状态机可能包含自引用（局部变量的引用），Pin 防止状态机被 move 后引用失效。✅ 已验证
 > **[Phil-opp OS blog]** 自引用结构在操作系统开发中常见（如页表自引用），Pin 提供了类型系统（Type System）级别的安全保证。✅ 已验证
 > **[RFC 2349: Pin](https://rust-lang.github.io/rfcs/2349-pin.html)** `Pin<P<T>>` was introduced to guarantee that `!Unpin` values cannot be moved, providing the formal foundation for safe self-referential async state machines. ✅ 已验证
@@ -739,7 +739,7 @@ graph TD
 ## 五、定理一致性矩阵（Theorem Consistency Matrix）
 
 > **章节过渡**：思维导图提供概念拓扑，而定理矩阵提供严格的推理链条。以下 10 条定理按"语言层（L）→ 变换层（T）→ 约束层（C）→ 运行时层（P）→ 抽象层（A）→ 系统层（S）"递进排列，每行均含"⟹"推理链，展示从前提到结论的必然性。
-> **[Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)** 一致性检查: Pin 不动性 ⟹ Future 轮询安全 ⟹ async 状态机安全，形成**从内存到状态到控制流**的递进链。注意：async 的完整形式化仍是活跃研究领域。✅ 已验证
+> **[Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)** 一致性（Coherence）检查: Pin 不动性 ⟹ Future 轮询安全 ⟹ async 状态机安全，形成**从内存到状态到控制流**的递进链。注意：async 的完整形式化仍是活跃研究领域。✅ 已验证
 > **[🔍 待验证]** async 的完整形式化（包括 Waker 契约、执行器正确性）仍是活跃研究领域，目前仅有部分片段被形式化验证。
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.3 "async 正确性"
 
@@ -1773,7 +1773,7 @@ async fn pipeline() {
 
 ### 8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异
 
-> **章节过渡**：定理 T1 声称 async/await 是零成本抽象，但实践中我们常常看到 `Box::pin` 和 `dyn Future`。理解静态分发与动态分发的边界、栈 pinning 与堆 pinning 的差异，是判断"何时零成本成立"的关键。
+> **章节过渡**：定理 T1 声称 async/await 是零成本抽象（Zero-Cost Abstraction），但实践中我们常常看到 `Box::pin` 和 `dyn Future`。理解静态分发与动态分发的边界、栈 pinning 与堆 pinning 的差异，是判断"何时零成本成立"的关键。
 
 **动态分发 vs 静态分发的 async 开销**
 
@@ -1991,7 +1991,7 @@ fn test_mutex_concurrent_access() {
 | 测试对象 | 同步原语、并发数据结构 | 任意 Rust 代码（含 unsafe） |
 | 执行方式 | 模型检测（穷举交错） | 解释执行（动态分析） |
 | 覆盖范围 | 小状态空间（需控制并发度） | 单执行路径 |
-| 适用场景 | 验证并发算法正确性 | 验证 unsafe 代码内存安全 |
+| 适用场景 | 验证并发算法正确性 | 验证 unsafe 代码内存安全（Memory Safety） |
 | 使用方式 | 替换 `std::sync` 为 `loom::sync` | `cargo +nightly miri test` |
 
 **反例：loom 状态空间爆炸**
@@ -2613,7 +2613,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | Unsafe | [](03_unsafe.md) | Pin 内部实现 |
 | 形式化方法 | [](../07_future/02_formal_methods.md) | 异步协议验证 |
 | Rust 版本特性演进 | [](../07_future/05_rust_version_tracking.md) | `AsyncFn`、`gen` blocks 等异步语义扩展 |
-| 泛型（Generics）与类型系统 | [](../02_intermediate/02_generics.md) | `use<..>` precise capturing、GATs |
+| 泛型（Generics）与类型系统（Type System） | [](../02_intermediate/02_generics.md) | `use<..>` precise capturing、GATs |
 | Unsafe 权限分离 | [](03_unsafe.md) | `unsafe_op_in_unsafe_fn` 的权限模型 |
 
 > **过渡: L3 → L2**

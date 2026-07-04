@@ -948,7 +948,7 @@ Rust 的 `as` 执行**截断/重新解释转换**（truncating/reinterpreting ca
 - `Option<&T>` 使用 null 指针表示 `None`（也是 niche optimization）
 - `Option<NonNull<T>>` 同样压缩为指针大小
 
-这是 Rust **类型系统与内存布局**结合的经典优化案例。
+这是 Rust **类型系统（Type System）与内存布局**结合的经典优化案例。
 </details>
 
 ---

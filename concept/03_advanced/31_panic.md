@@ -93,7 +93,7 @@ fn panic(_info: &PanicInfo) -> ! {
 
 - 并非所有目标都支持 `unwind`。
 - 使用 `std` 链接时，可通过 `-C panic` 选择策略；大多数目标默认 `unwind`。
-- 可通过 `std::panic::set_hook` 在运行时修改标准库 panic 行为。
+- 可通过 `std::panic::set_hook` 在运行时（Runtime）修改标准库 panic 行为。
 - 链接 `no_std` binary、dylib、cdylib 或 staticlib 时必须自行指定 panic handler。
 
 ---

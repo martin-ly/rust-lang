@@ -295,7 +295,7 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 <details>
 <summary>✅ 答案与解析</summary>
 
-过程宏在编译器解析阶段运行，必须在依赖它的 crate 之前编译完成。Rust 的编译模型要求 proc macro crate 是独立的编译单元。
+过程宏（Procedural Macro）在编译器解析阶段运行，必须在依赖它的 crate 之前编译完成。Rust 的编译模型要求 proc macro crate 是独立的编译单元。
 </details>
 
 ---

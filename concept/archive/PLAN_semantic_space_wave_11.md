@@ -70,13 +70,13 @@
 
 - Rust 表征空间 = {类型系统（Type System）, 所有权（Ownership）系统, Trait（Trait）系统, 生命周期（Lifetimes）系统, 宏（Macro）系统, unsafe（Unsafe）系统, async系统}
 - 每个子系统的表征能力范围
-- 子系统之间的交互约束（如：所有权 × 生命周期（Lifetimes） = 借用（Borrowing）规则）
+- 子系统之间的交互约束（如：所有权（Ownership） × 生命周期（Lifetimes） = 借用（Borrowing）规则）
 
 #### §2 安全 Rust 的语义封闭性
 
 - **封闭世界假设**：safe Rust 是一个封闭的形式系统
-  - 公理：所有权唯一性、借用（Borrowing）规则、生命周期约束
-  - 推理规则：类型检查、借用检查
+  - 公理：所有权唯一性、借用（Borrowing）规则、生命周期（Lifetimes）约束
+  - 推理规则：类型检查、借用（Borrowing）检查
   - 封闭性：safe 代码不能突破这些规则（除非通过 unsafe）
 - **逃逸舱口**：unsafe 作为封闭系统的"门"
   - unsafe 不改变类型系统（Type System）的规则，但允许程序员手动保证不变量
@@ -91,7 +91,7 @@
 | 系统编程 | 所有权 + unsafe | 完全 | 零运行时（Runtime） |
 | 零成本抽象（Zero-Cost Abstraction） | 泛型（Generics） + 单态化（Monomorphization） | 完全 | 编译时间 |
 | fearless并发 | Send/Sync + 借用（Borrowing） | 完全 | 零运行时（Runtime） |
-| 确定性资源管理 | RAII + Drop | 完全 | 零运行时 |
+| 确定性资源管理 | RAII + Drop | 完全 | 零运行时（Runtime） |
 | 编译期计算 | const generics + const fn | 部分 | 编译时间 |
 
 **能但低效/痛苦表达**：
@@ -100,7 +100,7 @@
 |:---|:---|:---|:---|
 | GUI 开发 | 生命周期与回调冲突 | 自引用（Reference）、事件循环 | `Rc<RefCell>`、`Pin` |
 | 动态类型 | enum 模拟 | 样板代码 | `dyn Any`（有限）|
-| 运行时反射 | `Any::downcast` | 类型信息丢失 | 宏生成代码 |
+| 运行时反射 | `Any::downcast` | 类型信息丢失 | 宏（Macro）生成代码 |
 | 复杂元编程 | 过程宏（Procedural Macro） | 调试困难、无类型信息 | `macro_rules!` + 约定 |
 | 快速原型 | 编译时间 + 学习曲线 | 迭代慢 | `cargo script` |
 
@@ -114,7 +114,7 @@
 | 异常控制流 | 隐藏控制流、非局部跳转 | `Result` + `?` | 设计哲学 |
 | GC 自动回收 | 运行时开销、非确定性 | 所有权 + `Rc`/`Arc` | 设计哲学 |
 | 运行时反射 | 编译期信息擦除 | 宏 + `Any` | 设计哲学 |
-| 可变长度数组 (VLA) | 栈安全、类型系统简化 | `Vec<T>` | 设计哲学 |
+| 可变长度数组 (VLA) | 栈安全、类型系统（Type System）简化 | `Vec<T>` | 设计哲学 |
 | 联合体自动析构 | 不知道哪个变体活跃 | `enum` + `match` | 设计哲学 |
 
 #### §4 等价表达的语义保持

@@ -42,13 +42,13 @@
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Cow 与借用的编译错误](#十边界测试cow-与借用的编译错误)
+  - [十、边界测试：Cow 与借用（Borrowing）的编译错误](#十边界测试cow-与借用的编译错误)
     - [10.1 边界测试：`Cow` 的写时复制与借用冲突（编译错误）](#101-边界测试cow-的写时复制与借用冲突编译错误)
     - [10.2 边界测试：`Borrow` trait 与 `AsRef` 的误用（编译错误）](#102-边界测试borrow-trait-与-asref-的误用编译错误)
     - [10.3 边界测试：`Cow` 的 `ToOwned` 约束（编译错误）](#103-边界测试cow-的-toowned-约束编译错误)
     - [10.4 边界测试：`Cow` 在 `match` 中的所有权（Ownership）转移（编译错误）](#104-边界测试cow-在-match-中的所有权转移编译错误)
-    - [10.2 边界测试：`Cow` 的生命周期（Lifetimes）与所有权转换（编译错误）](#102-边界测试cow-的生命周期与所有权转换编译错误)
-    - [10.4 边界测试：Cow 的生命周期与泛型（Generics）约束不匹配（编译错误）](#104-边界测试cow-的生命周期与泛型约束不匹配编译错误)
+    - [10.2 边界测试：`Cow` 的生命周期（Lifetimes）与所有权（Ownership）转换（编译错误）](#102-边界测试cow-的生命周期与所有权转换编译错误)
+    - [10.4 边界测试：Cow 的生命周期（Lifetimes）与泛型（Generics）约束不匹配（编译错误）](#104-边界测试cow-的生命周期与泛型约束不匹配编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`Cow<'a, str>` 的两种变体是什么？各自代表什么语义？（理解层）](#测验-1cowa-str-的两种变体是什么各自代表什么语义理解层)
     - [测验 2：`Cow::Borrowed(s).to_mut()` 在什么情况下会触发克隆？（理解层）](#测验-2cowborrowedsto_mut-在什么情况下会触发克隆理解层)
@@ -724,7 +724,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-`'a` 生命周期可能比 `'static` 短，若允许则返回的引用可能悬垂。解决方式是 `Cow::Owned(s.to_string())` 或让函数也返回 `Cow<'a, str>`。
+`'a` 生命周期可能比 `'static` 短，若允许则返回的引用（Reference）可能悬垂。解决方式是 `Cow::Owned(s.to_string())` 或让函数也返回 `Cow<'a, str>`。
 </details>
 
 ## 实践

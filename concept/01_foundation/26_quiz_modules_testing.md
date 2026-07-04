@@ -157,7 +157,7 @@ fn main() {}
 
 | 关键字 | 含义 | 示例 |
 |:---|:---|:---|
-| `self` | 当前模块 | `self::baz()` = `inner::baz()` |
+| `self` | 当前模块（Module） | `self::baz()` = `inner::baz()` |
 | `super` | 父模块 | `super::foo()` = `outer::foo()` |
 | `crate` | crate 根 | `crate::outer::foo()` |
 

@@ -652,7 +652,7 @@ fn fixed() {
 }
 ```
 
-> **Kotlin 对比**: Kotlin 的 `data class` 自动生成 `equals`、`hashCode`、`toString`、`copy`，默认支持解构和比较。Rust 的 `#[derive(...)]` 提供类似功能，但要求显式 opt-in——默认不生成任何 trait 实现。这体现了 Rust 的"显式优于隐式"哲学：只有声明了 `#[derive(Clone)]` 的类型才可 clone，避免了 Kotlin/Java 中意外深拷贝的性能问题。Rust 的 derive 在编译期展开，无运行时开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **Kotlin 对比**: Kotlin 的 `data class` 自动生成 `equals`、`hashCode`、`toString`、`copy`，默认支持解构和比较。Rust 的 `#[derive(...)]` 提供类似功能，但要求显式 opt-in——默认不生成任何 trait 实现。这体现了 Rust 的"显式优于隐式"哲学：只有声明了 `#[derive(Clone)]` 的类型才可 clone，避免了 Kotlin/Java 中意外深拷贝的性能问题。Rust 的 derive 在编译期展开，无运行时（Runtime）开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：Kotlin 的协程与 Rust 的 async 的调度模型差异（运行时死锁）
 
@@ -795,7 +795,7 @@ Kotlin 负责应用层（UI、业务逻辑），利用 JVM 生态和快速开发
 | Rust vs Kotlin：静态安全的两种路径 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Rust vs Kotlin：静态安全的两种路径 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> **过渡**: 掌握 Rust vs Kotlin：静态安全的两种路径 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 Rust vs Kotlin：静态安全的两种路径 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 Rust vs Kotlin：静态安全的两种路径 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: Rust vs Kotlin：静态安全的两种路径 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 

@@ -370,7 +370,7 @@ for &n in &numbers {
 ### 4.1
 
 > 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Newtype 模式
-> **惯用**: 用单字段元组结构体（Struct）为已有类型赋予新的语义身份，零运行时成本。
+> **惯用**: 用单字段元组结构体（Struct）为已有类型赋予新的语义身份，零运行时（Runtime）成本。
 
 ```rust
 // 惯用：Newtype 区分同底层类型的不同语义
@@ -718,7 +718,7 @@ fn process(data: Option<&[u8]>) -> Result<Output, Error> {
 ### 7.4
 
 > [来源: Rust docs, collect 方法] `collect` 与 Turbofish
-> **惯用**: 用 `collect::<Vec<_>>()`（turbofish）显式指定目标类型，或利用类型推断让编译器推断。
+> **惯用**: 用 `collect::<Vec<_>>()`（turbofish）显式指定目标类型，或利用类型推断（Type Inference）让编译器推断。
 
 ```rust
 // 惯用：turbofish 显式收集类型
@@ -954,7 +954,7 @@ graph TD
 
 | 反惯用 | 问题 | 惯用替代 | Clippy Lint |
 |:---|:---|:---|:---|
-| `Stringly Typed` | 类型系统无法检查状态合法性 | enum + match | — |
+| `Stringly Typed` | 类型系统（Type System）无法检查状态合法性 | enum + match | — |
 | 频繁 `.clone()` on `Copy` | 不必要的函数调用 | 直接复制 | `clone_on_copy` |
 | `.unwrap()` 在库代码 | panic 风险 | `?` / `if let` / `Result` | `unnecessary_unwrap` |
 | `&Vec<T>` 参数 | 限制调用灵活性 | `&[T]` | `ptr_arg` |
@@ -1092,7 +1092,7 @@ quadrantChart
 ### 相关概念文件
 
 - [L6 设计模式](02_patterns.md) —— 设计模式（面向问题）与本文件惯用法（面向表达）的互补
-- [L1 所有权](../01_foundation/01_ownership.md) —— 所有权与 RAII 的根基
+- [L1 所有权（Ownership）](../01_foundation/01_ownership.md) —— 所有权与 RAII 的根基
 - [L1 借用（Borrowing）](../01_foundation/02_borrowing.md) —— 借用与内部可变性的分层
 - [L2 Trait](../02_intermediate/01_traits.md) —— Trait Bound 组合与 Deref 多态
 - [L3 异步](../03_advanced/02_async.md) —— async/await 与 Pin 不动性
@@ -1196,7 +1196,7 @@ fn fixed() {
 > `Vec::clone()` 分配新内存并复制所有元素——O(n) 操作。
 > 在性能关键路径上，应使用引用（Reference）（`&T`）或迭代器（Iterator）（`iter()`）避免克隆。
 > 这与 C++ 的拷贝构造函数（隐式调用）或 Java 的对象引用（Reference）（总是共享）不同——Rust 的 `clone()` 是显式方法调用，提醒开发者注意成本。
-> `Rc<T>` 和 `Arc<T>` 在需要共享时减少克隆，但增加了引用计数开销。
+> `Rc<T>` 和 `Arc<T>` 在需要共享时减少克隆，但增加了引用（Reference）计数开销。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：Clippy 警告的编译错误等价（编译错误）
@@ -1351,7 +1351,7 @@ fn main() {
 
 ### 测验 4：`todo!()` 和 `unimplemented!()` 宏在开发中有什么用途？（理解层）
 
-**题目**: `todo!()` 和 `unimplemented!()` 宏在开发中有什么用途？
+**题目**: `todo!()` 和 `unimplemented!()` 宏（Macro）在开发中有什么用途？
 
 <details>
 <summary>✅ 答案与解析</summary>

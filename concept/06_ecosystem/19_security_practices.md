@@ -66,7 +66,7 @@
     - [10.1 边界测试：密码学常量时间操作（运行时（Runtime）风险）](#101-边界测试密码学常量时间操作运行时风险)
     - [10.2 边界测试：`unsafe` 代码的审计边界（编译错误）](#102-边界测试unsafe-代码的审计边界编译错误)
     - [10.3 边界测试：`zeroize` 与编译器优化的冲突（逻辑错误）](#103-边界测试zeroize-与编译器优化的冲突逻辑错误)
-    - [10.4 边界测试：依赖供应链的 typo-squatting（运行时安全风险）](#104-边界测试依赖供应链的-typo-squatting运行时安全风险)
+    - [10.4 边界测试：依赖供应链的 typo-squatting（运行时（Runtime）安全风险）](#104-边界测试依赖供应链的-typo-squatting运行时安全风险)
     - [10.7 边界测试：secret 在内存中的残留与 `zeroize`（运行时信息泄露）](#107-边界测试secret-在内存中的残留与-zeroize运行时信息泄露)
     - [10.3 边界测试：secret 在日志中的意外泄露（运行时信息泄露）](#103-边界测试secret-在日志中的意外泄露运行时信息泄露)
     - [补充定理链](#补充定理链)
@@ -997,7 +997,7 @@ fn main() {
 }
 ```
 
-> **修正**: `secrecy` crate 的 `Secret<T>` 包装敏感类型：1) `Debug` 输出 `[REDACTED]`；2) `Display` 同样隐藏；3) `zeroize` on drop 覆盖内存。但泄露风险仍存在：1) `expose_secret()` 返回 `&T`，调用者可能复制或记录；2) `SecretString` 的 `as_str()` 暴露内部 `str`；3) 第三方库的 panic 消息可能包含 secret。深层防护：1) `mlock` 防止交换到磁盘；2) `memfd_secret`（Linux）创建仅进程可见的匿名内存；3) 编译时防止 secret 进入 `.rodata`。这与 Go 的 `string`（无自动 zeroize）或 C++ 的 `secure_allocator`（类似概念）不同——Rust 的类型系统可通过 wrapper 类型在编译期强制安全实践，但完全防泄露需系统性设计。[来源: [secrecy crate](https://docs.rs/secrecy/)] · [来源: [zeroize crate](https://docs.rs/zeroize/)] · [来源: [CWE-226](https://cwe.mitre.org/data/definitions/226.html)]
+> **修正**: `secrecy` crate 的 `Secret<T>` 包装敏感类型：1) `Debug` 输出 `[REDACTED]`；2) `Display` 同样隐藏；3) `zeroize` on drop 覆盖内存。但泄露风险仍存在：1) `expose_secret()` 返回 `&T`，调用者可能复制或记录；2) `SecretString` 的 `as_str()` 暴露内部 `str`；3) 第三方库的 panic 消息可能包含 secret。深层防护：1) `mlock` 防止交换到磁盘；2) `memfd_secret`（Linux）创建仅进程可见的匿名内存；3) 编译时防止 secret 进入 `.rodata`。这与 Go 的 `string`（无自动 zeroize）或 C++ 的 `secure_allocator`（类似概念）不同——Rust 的类型系统（Type System）可通过 wrapper 类型在编译期强制安全实践，但完全防泄露需系统性设计。[来源: [secrecy crate](https://docs.rs/secrecy/)] · [来源: [zeroize crate](https://docs.rs/zeroize/)] · [来源: [CWE-226](https://cwe.mitre.org/data/definitions/226.html)]
 > **过渡**: 安全 实践：Rust 代码的防御性编程 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 安全 实践：Rust 代码的防御性编程 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 安全 实践：Rust 代码的防御性编程 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -1041,7 +1041,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-所有权和借用（Borrowing）检查在编译期阻止越界访问和 use-after-free。`Vec` 和切片（Slice）索引有边界检查，无法像 C 那样通过指针算术绕过。
+所有权（Ownership）和借用（Borrowing）检查在编译期阻止越界访问和 use-after-free。`Vec` 和切片（Slice）索引有边界检查，无法像 C 那样通过指针算术绕过。
 </details>
 
 ---

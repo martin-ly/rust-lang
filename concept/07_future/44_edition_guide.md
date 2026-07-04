@@ -53,7 +53,7 @@
     - [10.2 边界测试：`gen` 关键字保留与宏（Macro）解析冲突（编译错误）](#102-边界测试gen-关键字保留与宏解析冲突编译错误)
     - [10.6 边界测试：Edition 迁移后的 `cargo fix` 残留问题（编译错误）](#106-边界测试edition-迁移后的-cargo-fix-残留问题编译错误)
     - [10.7 边界测试：Edition 迁移的自动修复遗漏（编译中断/语义变更）](#107-边界测试edition-迁移的自动修复遗漏编译中断语义变更)
-    - [10.3 边界测试：Edition 迁移中的宏 hygiene 变更（编译错误）](#103-边界测试edition-迁移中的宏-hygiene-变更编译错误)
+    - [10.3 边界测试：Edition 迁移中的宏（Macro） hygiene 变更（编译错误）](#103-边界测试edition-迁移中的宏-hygiene-变更编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：什么是 Rust 的"Edition"？它与语义版本（SemVer）有什么关系？（理解层）](#测验-1什么是-rust-的edition它与语义版本semver有什么关系理解层)
@@ -613,7 +613,7 @@ fn main() {
 > 手动审查清单：
 >
 > 1) 检查所有闭包（Closures）的使用（尤其是 `move` 关键字）；
-> 2) 检查 `async` 块的生命周期；
+> 2) 检查 `async` 块的生命周期（Lifetimes）；
 > 3) 检查 `macro_rules!` 的 hygiene 变化。
 >
 > 这与 Python 的 `2to3`（自动迁移后需大量手动修复）或 JavaScript 的 Babel（语法转换，但语义不变）不同——Rust 的 Edition 变更涉及语义，自动化有限。
@@ -639,7 +639,7 @@ use inner::helper; // 可能在某些嵌套模块中失效
 > **修正**: Rust 的 **Edition** 机制允许语言演进而不破坏现有代码，但**迁移**（`cargo fix --edition`）的局限：
 >
 > 1) 纯语法变更（`async fn`、统一路径）→ 自动修复；
-> 2) 语义变更（`panic!` 宏的 `panic_any` 行为、闭包捕获规则）→ 需人工审查；
+> 2) 语义变更（`panic!` 宏的 `panic_any` 行为、闭包（Closures）捕获规则）→ 需人工审查；
 > 3) 依赖库未升级 → 无法使用新 edition 特性。
 >
 > 迁移策略：

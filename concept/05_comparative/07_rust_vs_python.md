@@ -45,11 +45,11 @@
     - [10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）](#101-边界测试python-的动态类型-vs-rust-的静态类型编译错误)
   - [十、边界测试：Rust 与 Python 的编译错误对比](#十边界测试rust-与-python-的编译错误对比-1)
     - [10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）](#101-边界测试python-的动态类型-vs-rust-的静态类型编译错误-1)
-    - [10.2 边界测试：Python 的 GIL 与 Rust 的所有权并发（编译错误）](#102-边界测试python-的-gil-与-rust-的所有权并发编译错误)
+    - [10.2 边界测试：Python 的 GIL 与 Rust 的所有权（Ownership）并发（编译错误）](#102-边界测试python-的-gil-与-rust-的所有权并发编译错误)
     - [10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时（Runtime）开销）](#105-边界测试python-的-gil-与-rust-的-arcmutext-的性能对比运行时开销)
     - [10.3 边界测试：Python 式动态类型在 Rust 中的不可表达（编译错误）](#103-边界测试python-式动态类型在-rust-中的不可表达编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 和 Python 在类型系统上的核心区别是什么？（理解层）](#测验-1rust-和-python-在类型系统上的核心区别是什么理解层)
+    - [测验 1：Rust 和 Python 在类型系统（Type System）上的核心区别是什么？（理解层）](#测验-1rust-和-python-在类型系统上的核心区别是什么理解层)
     - [测验 2：Python 的 GIL（全局解释器锁）对并发有什么限制？Rust 有类似限制吗？（理解层）](#测验-2python-的-gil全局解释器锁对并发有什么限制rust-有类似限制吗理解层)
     - [测验 3：为什么 Rust 常被用来重写 Python 的性能瓶颈模块（Module）（如 `numpy`、`cryptography`）？（理解层）](#测验-3为什么-rust-常被用来重写-python-的性能瓶颈模块如-numpycryptography理解层)
     - [测验 4：Python 的"鸭子类型"（Duck Typing）与 Rust 的 Trait 系统有什么异同？（理解层）](#测验-4python-的鸭子类型duck-typing与-rust-的-trait-系统有什么异同理解层)
@@ -199,7 +199,7 @@ def read_config(path: str) -> dict:
 # 调用者可能忘记处理 FileNotFoundError / TOMLDecodeError
 ```
 
-> **错误处理（Error Handling）洞察**: Rust 的 `Result` 强制**显式错误处理**——忽略 Result 会产生编译警告。Python 的异常是**隐式的控制流**——容易遗漏处理，导致运行时崩溃。Python 的类型提示可以部分缓解（标注 `-> dict` 不表达可能抛出的异常），但无法达到 Rust 的编译期保证。
+> **错误处理（Error Handling）洞察**: Rust 的 `Result` 强制**显式错误处理**——忽略 Result 会产生编译警告。Python 的异常是**隐式的控制流**——容易遗漏处理，导致运行时（Runtime）崩溃。Python 的类型提示可以部分缓解（标注 `-> dict` 不表达可能抛出的异常），但无法达到 Rust 的编译期保证。
 > [来源: [Rust Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)] · [来源: [Python Exceptions](https://docs.python.org/3/tutorial/errors.html)]
 
 ---
@@ -632,7 +632,7 @@ GIL 阻止 Python 线程真正并行执行 CPU 密集型任务。Rust 没有 GIL
 
 ### 测验 3：为什么 Rust 常被用来重写 Python 的性能瓶颈模块（如 `numpy`、`cryptography`）？（理解层）
 
-**题目**: 为什么 Rust 常被用来重写 Python 的性能瓶颈模块（如 `numpy`、`cryptography`）？
+**题目**: 为什么 Rust 常被用来重写 Python 的性能瓶颈模块（Module）（如 `numpy`、`cryptography`）？
 
 <details>
 <summary>✅ 答案与解析</summary>

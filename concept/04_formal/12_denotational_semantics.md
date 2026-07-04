@@ -545,7 +545,7 @@ fn main() {
 > Rust 是**严格求值**语言，不支持直接表达无限值（如 Haskell 的无限列表 `[1..]`）。
 > Rust 中的无限结构：
 >
-> 1) **trait object**：`Box<dyn Iterator<Item = i32>>`（运行时延迟计算）；
+> 1) **trait object**：`Box<dyn Iterator<Item = i32>>`（运行时（Runtime）延迟计算）；
 > 2) **生成器/协程**：`async fn` 或 `gen` 块（2024+）；
 > 3) **手动状态机**：`Stream` 实现。递归类型（`List<T>`）在 Rust 中必须间接（`Box` 或 `Rc`），因为编译器需要确定类型大小。
 >

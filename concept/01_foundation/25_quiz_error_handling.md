@@ -411,7 +411,7 @@ fn main() {
 3. `.filter(...)` → `None`（短路）
 4. `.unwrap_or(0.0)` → `0.0`
 
-**知识点**：`Option` 组合子的链式调用是 Rust 函数式编程风格的典型表现，每个操作都是"失败即短路"。[→ 错误处理基础详解](32_error_handling_basics.md)
+**知识点**：`Option` 组合子的链式调用是 Rust 函数式编程风格的典型表现，每个操作都是"失败即短路"。[→ 错误处理（Error Handling）基础详解](32_error_handling_basics.md)
 
 </details>
 

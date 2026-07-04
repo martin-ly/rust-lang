@@ -236,7 +236,7 @@ FROM person:tobie;
 | 全文搜索（产品级） | Meilisearch | 轻量、快速启动、Rust 原生 |
 | 多模型数据（原型/边缘） | SurrealDB | 文档+图+关系、嵌入部署 |
 | 日志分析（云原生） | Quickwit + Tantivy | 对象存储后端、低成本 |
-| 嵌入式 KV（IoT/边缘） | sled / rocksdb-rs | 无运行时、极小体积 |
+| 嵌入式 KV（IoT/边缘） | sled / rocksdb-rs | 无运行时（Runtime）、极小体积 |
 
 ---
 
@@ -470,7 +470,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 的显式哲学和数据所有权使延迟加载（lazy loading）难以安全实现。Rust ORM 如 `diesel` 显式声明查询，编译期检查 N+1 和类型安全。
+Rust 的显式哲学和数据所有权（Ownership）使延迟加载（lazy loading）难以安全实现。Rust ORM 如 `diesel` 显式声明查询，编译期检查 N+1 和类型安全。
 </details>
 
 ---

@@ -47,20 +47,20 @@
 
 **实体（entity）** 是源代码中可以被引用（Reference）的语言构造，例如类型、项（item）、泛型（Generics）参数、变量绑定、循环标签、生命周期（Lifetimes）、字段、属性和 lint。
 
-**声明（declaration）** 是引入名称以引用实体的语法构造。实体名称在**作用域（scope）**内有效，即源代码中可以引用该名称的区域。
+**声明（declaration）** 是引入名称以引用（Reference）实体的语法构造。实体名称在**作用域（scope）**内有效，即源代码中可以引用该名称的区域。
 
 ### 显式声明的实体
 
 - 项：模块（Module）、外部 crate、`use` 声明、函数与参数、类型别名、结构体（Struct）/联合体/枚举（Enum）及其字段、`const`/`static`、trait 及关联项、外部块项、`macro_rules`、实现关联项等。
 - 表达式：闭包（Closures）参数、`while let`/`for`/`if let`/`match` 模式绑定、循环标签。
-- 泛型参数、高阶 trait bound、`let` 语句模式绑定。
+- 泛型（Generics）参数、高阶 trait bound、`let` 语句模式绑定。
 - `macro_use` / `macro_export` 属性引入的宏（Macro）名称。
 
 ### 隐式声明的实体
 
 - 语言 prelude：`bool`、`char`、`str`、整数类型、浮点类型、`usize`/`isize`。
-- 内置属性、标准库 prelude 项/属性/宏、标准库 crate、外部链接 crate、工具属性、lint、derive 辅助属性。
-- `'static` 生命周期。
+- 内置属性、标准库 prelude 项/属性/宏（Macro）、标准库 crate、外部链接 crate、工具属性、lint、derive 辅助属性。
+- `'static` 生命周期（Lifetimes）。
 
 ---
 
@@ -73,7 +73,7 @@
 - 宏命名空间（macro namespace）
 - 生命周期命名空间（lifetime namespace）
 
-例如，可以同时定义一个名为 `Foo` 的模块和一个名为 `Foo` 的函数，因为它们处于不同命名空间。
+例如，可以同时定义一个名为 `Foo` 的模块（Module）和一个名为 `Foo` 的函数，因为它们处于不同命名空间。
 
 ---
 
@@ -84,7 +84,7 @@
 - 整个 crate
 - 模块体
 - 块表达式
-- 函数/闭包体
+- 函数/闭包（Closures）体
 - `match` 臂
 - 循环体
 - `if let` / `while let` 条件绑定的作用域

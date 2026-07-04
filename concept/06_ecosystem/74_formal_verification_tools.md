@@ -62,7 +62,7 @@
     - [8.2 边界极限](#82-边界极限)
   - [九、边界测试](#九边界测试)
     - [9.1 边界测试：Kani 数组越界未被 harness 覆盖（验证盲区）](#91-边界测试kani-数组越界未被-harness-覆盖验证盲区)
-    - [9.2 边界测试：MIRI 无法检测未执行的 unsafe 路径（运行时盲区）](#92-边界测试miri-无法检测未执行的-unsafe-路径运行时盲区)
+    - [9.2 边界测试：MIRI 无法检测未执行的 unsafe 路径（运行时（Runtime）盲区）](#92-边界测试miri-无法检测未执行的-unsafe-路径运行时盲区)
     - [9.3 边界测试：Prusti 前置条件过强导致合法调用被拒绝（假阴性）](#93-边界测试prusti-前置条件过强导致合法调用被拒绝假阴性)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
@@ -477,7 +477,7 @@ fn binary_search(v: &Vec<u64>, k: u64) -> (r: usize)
 |:---|:---|
 | **幽灵类型 (`Ghost<T>`)** | 仅在验证时存在，运行时零开销 |
 | **可执行规格** | 规格代码在编译后保留，可用于运行时检查 |
-| **所有权追踪** | 利用 Rust 的所有权系统简化验证条件生成 |
+| **所有权（Ownership）追踪** | 利用 Rust 的所有权系统简化验证条件生成 |
 | **线性类型** | 支持线性 ghost 状态，追踪资源使用 |
 
 > **来源**: [Verus Paper — OSDI 2023](https://www.microsoft.com/en-us/research/publication/verus-verifying-rust-programs-using-linear-ghost-types/) · [Verus Guide](https://github.com/verus-lang/verusverus/guide/guide/) · [Z3 SMT Solver](https://github.com/Z3Prover/z3)
@@ -632,7 +632,7 @@ Iris 分离逻辑公式
 
 ### 7.2 RustBelt 验证框架
 
-> **RustBelt** 是 MPI-SWS 的奠基性工作（POPL 2018），首次在数学上证明了 Rust 类型系统的**语义正确性**：如果程序通过借用检查器，则它确实是内存安全（Memory Safety）的。RustBelt 使用 **Iris** 分离逻辑在 Coq 中形式化了 Rust 核心语言（包括生命周期（Lifetimes）、借用（Borrowing）、共享/独占引用（Reference））。来源: [RustBelt Paper — POPL 2018]
+> **RustBelt** 是 MPI-SWS 的奠基性工作（POPL 2018），首次在数学上证明了 Rust 类型系统（Type System）的**语义正确性**：如果程序通过借用检查器，则它确实是内存安全（Memory Safety）的。RustBelt 使用 **Iris** 分离逻辑在 Coq 中形式化了 Rust 核心语言（包括生命周期（Lifetimes）、借用（Borrowing）、共享/独占引用（Reference））。来源: [RustBelt Paper — POPL 2018]
 
 ```text
 RustBelt 的核心定理:
@@ -841,8 +841,8 @@ fn caller() {
 - [安全与密码学](43_security_cryptography.md) — 侧信道防护、常量时间操作
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — Miri、UB、别名模型
 - [形式化验证](../04_formal/05_verification_toolchain.md) — 定理证明器、SMT、分离逻辑
-- [类型系统](../01_foundation/04_type_system.md) — 类型论、泛型、Trait
-- [生命周期](../01_foundation/03_lifetimes.md) — 借用（Borrowing）规则、NLL、Polonius
+- [类型系统](../01_foundation/04_type_system.md) — 类型论、泛型（Generics）、Trait
+- [生命周期（Lifetimes）](../01_foundation/03_lifetimes.md) — 借用（Borrowing）规则、NLL、Polonius
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、数据竞争
 - [嵌入式系统](22_embedded_systems.md) — `#![no_std]`、资源受限验证
 - [版本跟踪](../07_future/05_rust_version_tracking.md) — Rust 语言演进对验证工具的影响
@@ -880,7 +880,7 @@ fn caller() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-基于 Viper 验证基础设施，使用分离逻辑（Separation Logic）和权限（Permissions）建模所有权和借用，通过 SMT 求解器验证前置/后置条件。
+基于 Viper 验证基础设施，使用分离逻辑（Separation Logic）和权限（Permissions）建模所有权和借用（Borrowing），通过 SMT 求解器验证前置/后置条件。
 </details>
 
 ---

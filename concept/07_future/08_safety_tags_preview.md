@@ -626,7 +626,7 @@ Miri 可以根据安全标签选择不同的检查策略。例如，标记为 `e
 | Tag | 语义 | 适用场景 |
 |:---|:---|:---|
 | `valid_ptr(p)` | `p` 是非空且已分配的指针 | 所有解引用（Reference）操作 |
-| `aligned(p)` | `p` 满足 `T` 的对齐要求 | 非包装解引用 |
+| `aligned(p)` | `p` 满足 `T` 的对齐要求 | 非包装解引用（Reference） |
 | `non_overlapping(a, b)` | `a` 和 `b` 的内存范围不重叠 | `copy_nonoverlapping` |
 | `initialized(p)` | `p` 指向已初始化的内存 | `read` / 转型 |
 | `no_alias(p)` | `p` 在生命周期（Lifetimes）内是唯一的访问路径 | `&mut` 构造 |

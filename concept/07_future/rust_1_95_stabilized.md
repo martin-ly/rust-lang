@@ -293,7 +293,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 
 稳定版本：**1.95.0**
 
-| API | 模块 |
+| API | 模块（Module） |
 |-----|------|
 | `fmt::from_fn` | `std::fmt` |
 | `ControlFlow::is_break` | `core::ops::ControlFlow` |

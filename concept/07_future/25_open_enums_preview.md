@@ -38,7 +38,7 @@
 
 - [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举（Enum）](#open-enums-概念预研从-non_exhaustive-到可扩展枚举)
   - [📑 目录](#-目录)
-  - [一、核心概念：封闭 vs 开放枚举](#一核心概念封闭-vs-开放枚举)
+  - [一、核心概念：封闭 vs 开放枚举（Enum）](#一核心概念封闭-vs-开放枚举)
     - [1.1 封闭枚举（Closed Enums）](#11-封闭枚举closed-enums)
     - [1.2 `#[non_exhaustive]`：兼容性层面的开放](#12-non_exhaustive兼容性层面的开放)
     - [1.3 开放枚举（Open Enums）的设计空间](#13-开放枚举open-enums的设计空间)
@@ -64,7 +64,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Open Enums 预览的编译错误](#十边界测试open-enums-预览的编译错误)
     - [10.1 边界测试：开放枚举的穷尽匹配失效（编译错误）](#101-边界测试开放枚举的穷尽匹配失效编译错误)
-    - [10.2 边界测试：开放枚举的整数转换安全（编译错误/运行时 panic）](#102-边界测试开放枚举的整数转换安全编译错误运行时-panic)
+    - [10.2 边界测试：开放枚举的整数转换安全（编译错误/运行时（Runtime） panic）](#102-边界测试开放枚举的整数转换安全编译错误运行时-panic)
     - [10.3 边界测试：open enum 的 match 穷尽性检查松弛（编译错误）](#103-边界测试open-enum-的-match-穷尽性检查松弛编译错误)
     - [10.4 边界测试：open enum 的整数转换与有效性检查（运行时 panic）](#104-边界测试open-enum-的整数转换与有效性检查运行时-panic)
     - [10.3 边界测试：open enum 的穷尽匹配与未知变体（编译错误/运行时 panic）](#103-边界测试open-enum-的穷尽匹配与未知变体编译错误运行时-panic)
@@ -209,7 +209,7 @@ flowchart TD
     end
 ```
 
-> **认知功能**: 此流程图对比展示 `#[non_exhaustive]` 对穷尽性检查的精确影响——它不改变枚举定义 crate 内的行为，仅影响**外部 crate** 的模式匹配。
+> **认知功能**: 此流程图对比展示 `#[non_exhaustive]` 对穷尽性检查的精确影响——它不改变枚举定义 crate 内的行为，仅影响**外部 crate** 的模式匹配（Pattern Matching）。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 在评估是否对公共 API 枚举使用 `#[non_exhaustive]` 时，参考此图理解对下游用户的强制成本（必须保留 `_` 分支）。
 > **关键洞察**: `#[non_exhaustive]` 的约束是**单向传播**的——定义 crate 知道全部变体，消费 crate 必须假设未知变体存在。

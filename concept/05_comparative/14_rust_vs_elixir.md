@@ -130,7 +130,7 @@ fn main() {
 }
 ```
 
-> **认知功能**: **Rust 和 Elixir 对错误的根本态度不同**——Rust 在编译期预防，Elixir 在运行时恢复。
+> **认知功能**: **Rust 和 Elixir 对错误的根本态度不同**——Rust 在编译期预防，Elixir 在运行时（Runtime）恢复。
 > [来源: [Elixir Error Handling](https://elixir-lang.org/getting-started/try-catch-and-rescue.html)]
 
 ---
@@ -271,7 +271,7 @@ Rust 并发模型:
   }
 ```
 
-> **Rust 并发洞察**: **Rust 通过所有权（Ownership）和类型系统实现并发安全（Concurrency Safety）**——无数据竞争的编译期保证。
+> **Rust 并发洞察**: **Rust 通过所有权（Ownership）和类型系统（Type System）实现并发安全（Concurrency Safety）**——无数据竞争的编译期保证。
 > [来源: [TRPL — Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)]
 
 ---
@@ -733,7 +733,7 @@ fn main() {
 }
 ```
 
-> **修正**: Elixir/Erlang 的 **Actor 模型** 中，进程完全隔离——不共享内存，所有通信通过异步（Async）消息传递。Rust 支持 Actor 模型（`actix`），但默认是**共享内存并发**：线程共享地址空间，通过锁/原子同步。Elixir 的优势：1) 无数据竞争（无共享内存）；2) 容错（进程崩溃不影响其他进程，supervisor 重启）；3) 热代码升级。Rust 的优势：1) 性能（无消息序列化开销）；2) 细粒度控制（可选择共享或无共享）；3) 类型安全（编译期防止数据竞争）。从 Elixir 迁移到 Rust 时，需注意：1) 不再有进程隔离的保护；2) 共享状态需 `Mutex`/`RwLock`；3) 错误处理从"let it crash"变为显式 `Result` 传播。这与 Go 的 goroutine + channel（可选择共享或通信）类似——Rust 提供两种并发模型，但共享内存是默认和最高效的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)] · [来源: [Elixir Processes](https://elixir-lang.org/getting-started/processes.html)]
+> **修正**: Elixir/Erlang 的 **Actor 模型** 中，进程完全隔离——不共享内存，所有通信通过异步（Async）消息传递。Rust 支持 Actor 模型（`actix`），但默认是**共享内存并发**：线程共享地址空间，通过锁/原子同步。Elixir 的优势：1) 无数据竞争（无共享内存）；2) 容错（进程崩溃不影响其他进程，supervisor 重启）；3) 热代码升级。Rust 的优势：1) 性能（无消息序列化开销）；2) 细粒度控制（可选择共享或无共享）；3) 类型安全（编译期防止数据竞争）。从 Elixir 迁移到 Rust 时，需注意：1) 不再有进程隔离的保护；2) 共享状态需 `Mutex`/`RwLock`；3) 错误处理（Error Handling）从"let it crash"变为显式 `Result` 传播。这与 Go 的 goroutine + channel（可选择共享或通信）类似——Rust 提供两种并发模型，但共享内存是默认和最高效的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)] · [来源: [Elixir Processes](https://elixir-lang.org/getting-started/processes.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 

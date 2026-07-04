@@ -43,12 +43,12 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Serde 模式的编译错误](#十边界测试serde-模式的编译错误)
     - [10.1 边界测试：反序列化时字段缺失（运行时（Runtime）错误）](#101-边界测试反序列化时字段缺失运行时错误)
-    - [10.2 边界测试：`#[serde(flatten)]` 与重复字段（编译错误 / 运行时错误）](#102-边界测试serdeflatten-与重复字段编译错误--运行时错误)
+    - [10.2 边界测试：`#[serde(flatten)]` 与重复字段（编译错误 / 运行时（Runtime）错误）](#102-边界测试serdeflatten-与重复字段编译错误--运行时错误)
     - [10.3 边界测试：反序列化的 `deny_unknown_fields`（运行时错误）](#103-边界测试反序列化的-deny_unknown_fields运行时错误)
     - [10.4 边界测试：枚举（Enum）的 `untagged` 反序列化歧义（运行时错误）](#104-边界测试枚举的-untagged-反序列化歧义运行时错误)
     - [10.5 边界测试：`serde` 的 `skip_serializing_if` 与 `Option` 的交互（逻辑错误）](#105-边界测试serde-的-skip_serializing_if-与-option-的交互逻辑错误)
     - [10.3 边界测试：serde 的私有字段与反序列化失败（运行时错误）](#103-边界测试serde-的私有字段与反序列化失败运行时错误)
-    - [10.4 边界测试：`serde` 的枚举标签与外部标签冲突（运行时反序列化失败）](#104-边界测试serde-的枚举标签与外部标签冲突运行时反序列化失败)
+    - [10.4 边界测试：`serde` 的枚举（Enum）标签与外部标签冲突（运行时反序列化失败）](#104-边界测试serde-的枚举标签与外部标签冲突运行时反序列化失败)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：如何让 Serde 在序列化时将 Rust 字段名 `user_name` 映射为 JSON 中的 `userName`？（理解层）](#测验-1如何让-serde-在序列化时将-rust-字段名-user_name-映射为-json-中的-username理解层)
     - [测验 2：枚举的 `#[serde(tag = "type")]` 属性会产生怎样的 JSON 结构？（理解层）](#测验-2枚举的-serdetag--type-属性会产生怎样的-json-结构理解层)
@@ -654,7 +654,7 @@ fn main() {
 > `#[serde(deny_unknown_fields)]` 在反序列化时检查输入中是否包含 struct 未定义的字段。
 > 若存在未知字段，返回 `Err`（`unknown field \`extra\`, expected \`host\` or \`port\``）。
 > 这是 API 版本兼容性设计的工具：strict 模式（拒绝未知）防止客户端发送未来版本的字段导致误解；
-> lenient 模式（默认，忽略未知）允许向前兼容。Rust 的 serde 生态通过属性宏控制这些行为，编译期生成对应的反序列化代码。
+> lenient 模式（默认，忽略未知）允许向前兼容。Rust 的 serde 生态通过属性宏（Macro）控制这些行为，编译期生成对应的反序列化代码。
 > 这与 Go 的`json.Unmarshal`（默认忽略未知字段，`DisallowUnknownFields` 选项开启严格模式）或 Python 的 `dataclasses`（无内置未知字段检查）类似，
 > 但 Rust 的配置在编译期固定，无运行时开销。
 > [来源: [Serde Documentation](https://serde.rs/container-attrs.html)] ·

@@ -307,7 +307,7 @@ Error Handling
 
 掌握 L2 后可进入：
 
-- **L3 高级**: Concurrency（Send/Sync 是 Auto Trait）、Async（Future 是泛型 Trait）、Unsafe（MaybeUninit、UnsafeCell）
+- **L3 高级**: Concurrency（Send/Sync 是 Auto Trait）、Async（Future 是泛型（Generics） Trait）、Unsafe（MaybeUninit、UnsafeCell）
 - **L4 形式化**: 类型论（参数多态、约束求解）、子类型与 Variance
 - **L6 生态**: 设计模式（Typestate、Builder 依赖 Trait）
 

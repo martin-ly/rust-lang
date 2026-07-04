@@ -42,7 +42,7 @@
   - [五、常见困惑解析](#五常见困惑解析)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
-  - [七、多级引用语义与部分重借用（Multi-level References \& Partial Reborrows）](#七多级引用语义与部分重借用multi-level-references--partial-reborrows)
+  - [七、多级引用（Reference）语义与部分重借用（Multi-level References \& Partial Reborrows）](#七多级引用语义与部分重借用multi-level-references--partial-reborrows)
     - [7.1 多级引用类型](#71-多级引用类型)
       - [7.1.1 共享引用的嵌套：`&T` → `&&T` → `&&&T`](#711-共享引用的嵌套t--t--t)
       - 7.1.2 可变引用（Mutable Reference）的嵌套：`&mut T`、`&mut &T`、`&mut &mut T`
@@ -79,7 +79,7 @@
   - [十、边界测试：引用语义的编译错误](#十边界测试引用语义的编译错误)
     - [10.1 边界测试：多级引用自动解引用层级（编译错误）](#101-边界测试多级引用自动解引用层级编译错误)
     - [10.2 边界测试：`&str` 与 `String` 的混用（编译错误）](#102-边界测试str-与-string-的混用编译错误)
-    - [10.3 边界测试：`&mut` 的重新借用与原始引用失效（编译错误）](#103-边界测试mut-的重新借用与原始引用失效编译错误)
+    - [10.3 边界测试：`&mut` 的重新借用（Borrowing）与原始引用失效（编译错误）](#103-边界测试mut-的重新借用与原始引用失效编译错误)
     - 10.4 边界测试：内部可变性与 `&T` 的不可变性矛盾（编译错误/运行时（Runtime） UB）
     - [10.4 边界测试：`&mut T` 的重新借用与显式解引用混用（编译错误）](#104-边界测试mut-t-的重新借用与显式解引用混用编译错误)
     - [10.2 边界测试：返回局部变量的悬垂引用](#102-边界测试返回局部变量的悬垂引用)
@@ -515,7 +515,7 @@ assert_eq!(r, &42);     // ✅ 编译器展开: &&&i32 → &&i32 → &i32 → i3
 
 #### 7.1.2 可变引用的嵌套：`&mut T`、`&mut &T`、`&mut &mut T`
 
-可变引用的嵌套引入了更复杂的语义层次：
+可变引用（Mutable Reference）的嵌套引入了更复杂的语义层次：
 
 ```rust,ignore
 let mut x = 10;
@@ -645,7 +645,7 @@ fn child_set_value(parent: &mut Parent) -> &mut Child {
 > **当前限制**: 借用检查器虽然内部跟踪字段粒度，但这种粒度**不跨越函数边界**传递。函数签名只能表达"借用整个 `Parent`"或"借用某个字段"，不能表达"借用整个结构体（Struct），但排除特定字段"。
 > [来源: [Rust Internals — Partial Reborrows Discussion, 2023](https://internals.rust-lang.org/)]（二级来源）
 
-一种常见的工作模式是使用**临时作用域**来缩小借用的生命周期：
+一种常见的工作模式是使用**临时作用域**来缩小借用的生命周期（Lifetimes）：
 
 ```rust,ignore
 fn workaround(parent: &mut Parent) {
@@ -1224,7 +1224,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的自动解引用（auto-deref）在方法调用时最多递归应用，但在赋值和类型匹配时不会无限解引用。`&&&&T` 不会自动变成 `T`，需要显式使用 `*` 运算符。这保持了类型系统的显式性和可预测性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 的自动解引用（auto-deref）在方法调用时最多递归应用，但在赋值和类型匹配时不会无限解引用。`&&&&T` 不会自动变成 `T`，需要显式使用 `*` 运算符。这保持了类型系统（Type System）的显式性和可预测性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：`&str` 与 `String` 的混用（编译错误）
 
@@ -1299,7 +1299,7 @@ fn main() {
 > **修正**: `RefCell` 提供**内部可变性**（interior mutability）：通过 `&RefCell<T>`（共享引用）获取 `&mut T`（可变引用）。
 > 这是运行时（Runtime）借用检查：`borrow()` 增加共享计数，`borrow_mut()` 检查共享计数为 0，否则 panic。
 > 编译器无法静态验证 `RefCell` 的借用规则，因为 `RefCell` 的内部状态是动态的。
-> 这与编译期借用检查（`&mut T` 不能从 `&T` 获取）形成对比：内部可变性是"信任的逃脱 hatch"——编译器信任开发者通过运行时检查保证安全。
+> 这与编译期借用检查（`&mut T` 不能从 `&T` 获取）形成对比：内部可变性是"信任的逃脱 hatch"——编译器信任开发者通过运行时（Runtime）检查保证安全。
 > 代价：运行时开销（引用计数）和可能的 panic。
 > 这与 C++ 的 `mutable` 关键字（突破 const 约束，无运行时检查）或 Java 的 `final` 字段（引用不可变，但对象状态可变）不同——Rust 的内部可变性是显式、有检查的安全机制。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)] ·

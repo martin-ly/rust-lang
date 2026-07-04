@@ -612,7 +612,7 @@ graph LR
 | 寄存器状态 | 验证器追踪每个分支 | 状态爆炸导致"验证器拒绝" |
 | 辅助函数调用 | 白名单机制 | 只能调用内核允许的函数 |
 
-Rust 的所有权系统无法直接绕过这些限制——它们属于 eBPF 执行模型的固有约束。Aya 和 Rex 的作用是让开发者在给定约束下写出**更安全、更易维护**的代码，而非消除约束本身。
+Rust 的所有权（Ownership）系统无法直接绕过这些限制——它们属于 eBPF 执行模型的固有约束。Aya 和 Rex 的作用是让开发者在给定约束下写出**更安全、更易维护**的代码，而非消除约束本身。
 
 ### 8.2 Map 大小与内存约束
 
@@ -658,7 +658,7 @@ Rust 的编译时延在 eBPF 开发中尤为明显：
 
 ## 9. 相关概念链接
 
-- [Rust for Linux 内核编程](43_rust_for_linux.md) —— Rust 内核模块开发与 eBPF 的交叉领域
+- [Rust for Linux 内核编程](43_rust_for_linux.md) —— Rust 内核模块（Module）开发与 eBPF 的交叉领域
 - 异步（Async）编程与 Tokio —— Aya 用户态异步事件处理的基础
 - [形式验证工具链](../04_formal/05_verification_toolchain.md) —— Kani、Miri 等工具对 eBPF 程序的验证潜力
 - [unsafe Rust 模式](../03_advanced/03_unsafe.md) —— eBPF 内核态编程中的 unsafe 边界管理
@@ -737,7 +737,7 @@ pub fn test_prog(ctx: ProbeContext) -> u32 {
 > eBPF 程序运行在内核上下文中，资源极其受限：栈大小最大 512 字节（Linux 内核限制），指令数限制 100 万条，无堆分配，无递归，无循环（或有限循环，取决于内核版本）。
 > Rust 的 eBPF 生态（aya、redbpf）在编译期通过编译器插件和验证器检查这些约束。
 > 大数组必须使用 `PerCpuArray` 或 `HashMap`（BPF map，驻留在内核内存而非栈），函数调用必须内联（或受限于 BPF-to-BPF call 限制）。
-> 这与用户空间 Rust（GB 级内存、递归、动态分配）截然不同——eBPF 是"在极端约束下编程"，Rust 的类型系统（Type System）和宏（Macro）在此场景下仍提供内存安全（无空指针、无 use-after-free），但不能防止资源超限。
+> 这与用户空间 Rust（GB 级内存、递归、动态分配）截然不同——eBPF 是"在极端约束下编程"，Rust 的类型系统（Type System）和宏（Macro）在此场景下仍提供内存安全（Memory Safety）（无空指针、无 use-after-free），但不能防止资源超限。
 > [来源: [aya Documentation](https://aya-rs.dev/)] ·
 > [来源: [Linux Kernel eBPF Documentation](https://www.kernel.org/doc/html/latest/bpf/)]
 
@@ -812,7 +812,7 @@ pub fn trace_handler(ctx: TracePointContext) -> u32 {
 > 调试方法：
 >
 > 1) `bpftool prog load` 查看验证器日志；
-> 2) `aya-log` 输出运行时日志；
+> 2) `aya-log` 输出运行时（Runtime）日志；
 > 3) 简化 Rust 代码，逐步定位验证器拒绝点。
 >
 > 这与 C 的 eBPF（同样需通过验证器，但控制流更简单）或 Go 的 eBPF（通过 `cilium/ebpf` 生成，较少高级抽象）类似——Rust 的类型安全在 eBPF 中仍有效，但验证器的保守性要求代码风格适应。

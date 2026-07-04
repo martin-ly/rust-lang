@@ -67,7 +67,7 @@
     - [1.2 TRPL 官方定义](#12-trpl-官方定义)
     - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
-    - [2.1 泛型参数类型矩阵](#21-泛型参数类型矩阵)
+    - [2.1 泛型（Generics）参数类型矩阵](#21-泛型参数类型矩阵)
     - [2.2 泛型实现机制对比](#22-泛型实现机制对比)
     - [2.3 泛型约束演进矩阵](#23-泛型约束演进矩阵)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
@@ -83,7 +83,7 @@
     - [5.3 反例：类型大小未知（E0277）](#53-反例类型大小未知e0277)
     - [5.4 反例：生命周期（Lifetimes）约束不足（E0310）](#54-反例生命周期约束不足e0310)
     - [5.5 参数性定理（Theorems for Free）](#55-参数性定理theorems-for-free)
-    - [5.6 泛型实现机制对比：单态化 vs 类型擦除 vs 模板](#56-泛型实现机制对比单态化-vs-类型擦除-vs-模板)
+    - [5.6 泛型实现机制对比：单态化（Monomorphization） vs 类型擦除 vs 模板](#56-泛型实现机制对比单态化-vs-类型擦除-vs-模板)
     - [5.7 Const Generics 进阶用法](#57-const-generics-进阶用法)
       - [5.7.1 常量表达式与 `generic_const_exprs`](#571-常量表达式与-generic_const_exprs)
       - [5.7.2 where 约束中的 const generics](#572-where-约束中的-const-generics)
@@ -99,7 +99,7 @@
     - [6.4 反命题 4: "Const Generics 完全替代运行时（Runtime）值"](#64-反命题-4-const-generics-完全替代运行时值)
   - [七、边界极限测试代码（Boundary Limit Tests）](#七边界极限测试代码boundary-limit-tests)
     - [7.1 测试 1: 单态化代码膨胀与 dyn Trait 权衡极限](#71-测试-1-单态化代码膨胀与-dyn-trait-权衡极限)
-    - [7.2 测试 2: 生命周期约束递归传递与 HRTB 边界](#72-测试-2-生命周期约束递归传递与-hrtb-边界)
+    - [7.2 测试 2: 生命周期（Lifetimes）约束递归传递与 HRTB 边界](#72-测试-2-生命周期约束递归传递与-hrtb-边界)
     - [7.3 测试 3: Const Generics 类型级运算与特化边界](#73-测试-3-const-generics-类型级运算与特化边界)
   - [八、认知路径（Cognitive Path）](#八认知路径cognitive-path)
     - [Step 1: 直觉类比 — "泛型像填空题模板"](#step-1-直觉类比--泛型像填空题模板)
@@ -120,8 +120,8 @@
       - [与 `default impl` 的交互](#与-default-impl-的交互)
       - [实际用例：为 `&str` 和 `String` 提供不同优化实现](#实际用例为-str-和-string-提供不同优化实现)
     - [9.3 补充：泛型代码的编译时间优化策略](#93-补充泛型代码的编译时间优化策略)
-      - [策略 1：Turbofish 显式标注减少类型推断开销](#策略-1turbofish-显式标注减少类型推断开销)
-      - [策略 2：dyn Trait 替代单态化（运行时代码共享）](#策略-2dyn-trait-替代单态化运行时代码共享)
+      - [策略 1：Turbofish 显式标注减少类型推断（Type Inference）开销](#策略-1turbofish-显式标注减少类型推断开销)
+      - [策略 2：dyn Trait 替代单态化（运行时（Runtime）代码共享）](#策略-2dyn-trait-替代单态化运行时代码共享)
       - [策略 3：编译单元拆分与 `-Zshare-generics`](#策略-3编译单元拆分与--zshare-generics)
       - [策略 4：`cargo bloat` 工具——量化单态化膨胀](#策略-4cargo-bloat-工具量化单态化膨胀)
       - [策略 5：`thin LTO` 与泛型编译时间优化](#策略-5thin-lto-与泛型编译时间优化)
@@ -431,14 +431,14 @@ fn draw_dyn(d: &dyn Drawable) {
 | **引理**: HRTB 全称约束 | `for<'a>` 合法，高阶函数签名良构 | 高阶函数类型安全，生命周期无关性 | 全称量词 (∀) 语义 | 回调抽象、生命周期擦除 | 过度约束不可满足，闭包（Closures）推断失败 | E0582 |
 | **推论**: 泛型一致性（Coherence） | 单态化后类型检查通过 | 所有实例类型安全，行为一致 | 类型替换引理（Substitution Lemma） | — | `transmute` 绕过类型系统（Type System） | E0133 |
 | **引理**: 关联类型归一化 | 关联类型有唯一实现，无重叠 | 类型别名可替换，Trait 方法可解析 | 约束可满足性 | GATs 使用、Iterator 实现 | 重叠关联类型定义（coherence 破坏） | E0119 |
-| **定理**: 生命周期约束可满足 | `T: 'a` 合法，区域包含关系成立 | 无悬垂引用，借用（Borrowing）检查通过 | 区域子类型（Region Subtyping） | 泛型生命周期安全 | 约束遗漏，T 含短于 'a 的引用 | E0310 |
+| **定理**: 生命周期约束可满足 | `T: 'a` 合法，区域包含关系成立 | 无悬垂引用（Reference），借用（Borrowing）检查通过 | 区域子类型（Region Subtyping） | 泛型生命周期安全 | 约束遗漏，T 含短于 'a 的引用 | E0310 |
 | **引理**: Sized 默认约束 ⟹ 静态分发 | T 默认 Sized，内存布局已知 | 单态化生成确定代码，无动态分发 | Sized trait 语义 | 泛型数据结构布局 | `?Sized` 使用但未正确处理 DST | E0277 |
 | **定理**: 类型推断可判定性 | HM 算法扩展，约束图无环 | 主类型存在时可自动推导 | Hindley-Milner 类型推断（Type Inference） | 泛型函数调用、闭包（Closures）参数 | 多解歧义（collect、数值字面量） | E0282/E0283 |
 | **推论**: impl Trait 隐藏 ⟹ 抽象能力 | 返回位置 impl Trait 合法使用 | 隐藏具体类型，保持零成本 | 存在类型（Existential Type） | API 设计、抽象类型返回 | 参数位置 impl Trait 在 Trait 方法中 | E0562/E0666 |
 | **定理**: 参数性 ⟹ 行为由类型决定 | 无 Trait Bound 的纯参数多态 | 函数行为空间仅由类型签名决定 | Reynolds / Wadler 参数性 | API 推理、形式化验证 | `Default` bound / `unsafe` / `transmute` | E0133 |
 | **定理**: 单态化语义保持 | 无 `dyn Trait`，无 `unsafe` | 单态化后行为等价于原泛型代码 | 擦除语义（Erasure Semantics） | 编译正确性证明 | `dyn Trait` 引入动态分发 | E0038 |
 
-> **一致性检查**:
+> **一致性（Coherence）检查**:
 > 参数多态 ⟹ System F 类型规则 ⟹ 约束可满足性 ⟹ 单态化零成本 ⟹ 语义保持 ⟹ 泛型一致性，形成**从类型规则到代码生成到运行时保证**的完整推理链。
 > 参数性定理（Wadler 1989）是单态化语义保持的核心依据——正因泛型函数不能基于类型参数的内部表示做分支，单态化才保持行为等价。
 > Const Generics 是依赖类型的有限形式，HRTB 是全称量词在生命周期上的应用，Sized 默认约束确保单态化所需的静态内存布局。
@@ -849,7 +849,7 @@ type RingBuffer256<T> = RingBuffer<T, 256>;
 
 #### 5.7.5 Const Generics 与泛型关联类型的交互
 
-Const Generics 与 GATs（Generic Associated Types，见 §9.5）的交互是 Rust 类型系统向依赖类型演进的显著标志。关联类型可携带生命周期参数，但在稳定 Rust 中**不能直接携带 const generic 参数**：[来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html) / RFC 1598]
+Const Generics 与 GATs（Generic Associated Types，见 §9.5）的交互是 Rust 类型系统（Type System）向依赖类型演进的显著标志。关联类型可携带生命周期参数，但在稳定 Rust 中**不能直接携带 const generic 参数**：[来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html) / RFC 1598]
 
 ```rust
 // ❌ 不稳定: 关联类型不能直接携带 const generic
@@ -1491,7 +1491,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
 | 泛型通过单态化实现 | [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) · [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) | ✅ |
-| 单态化产生零成本抽象 | [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) | ✅ |
+| 单态化产生零成本抽象（Zero-Cost Abstraction） | [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) | ✅ |
 | 单态化导致二进制膨胀 | [Rust Performance Book](https://nnethercote.github.io/perf-book/compile-times.html) | ✅ |
 | Const Generics | [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html) · [Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html) | ✅ |
 | GATs | [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) · [TRPL: Ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | ✅ |

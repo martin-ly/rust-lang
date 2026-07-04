@@ -149,9 +149,9 @@ async fn capture_examples() {
 | 形式 | 语法 | 捕获方式 | 返回类型 | 典型场景 |
 |---|---|---|---|---|
 | `async fn` | `async fn f() -> T` | 按值传参 | `impl Future<Output = T>` | 具名函数 |
-| `async` 块 | `async { ... }` | 按引用（Reference）捕获环境 | `impl Future<Output = T>` | 局部异步逻辑 |
+| `async` 块 | `async { ... }` | 按引用（Reference）捕获环境 | `impl Future<Output = T>` | 局部异步（Async）逻辑 |
 | `async move` 块 | `async move { ... }` | 按值 move 环境 | `impl Future<Output = T>`（可能 `'static`） | 转移所有权（Ownership） |
-| `async` 闭包 | `async \|x\| { ... }` | 按引用捕获（默认） | `impl AsyncFn(...) -> T` | 高阶异步函数参数 |
+| `async` 闭包（Closures） | `async \|x\| { ... }` | 按引用（Reference）捕获（默认） | `impl AsyncFn(...) -> T` | 高阶异步函数参数 |
 | `async move` 闭包 | `async move \|x\| { ... }` | 按值 move 捕获 | `impl AsyncFnOnce(...) -> T` | 单次 / 可 `spawn` |
 | 普通闭包返回 async 块 | `\|x\| async move { ... }` | 闭包按引用捕获，async 块按值 move | `impl Fn(...) -> impl Future` | 旧生态 API |
 
@@ -243,7 +243,7 @@ pub trait AsyncFnOnce<Args> {
 }
 ```
 
-`CallRefFuture<'a>` 是泛型（Generics）关联类型（GAT），它允许返回的 `Future` 借用 `&self`。这正是 `AsyncFn` 与 `Fn` 的本质差异：同步 `Fn` 只能返回一个已经构造好的值，无法让返回值携带 `self` 的生命周期（Lifetimes）。
+`CallRefFuture<'a>` 是泛型（Generics）关联类型（GAT），它允许返回的 `Future` 借用（Borrowing） `&self`。这正是 `AsyncFn` 与 `Fn` 的本质差异：同步 `Fn` 只能返回一个已经构造好的值，无法让返回值携带 `self` 的生命周期（Lifetimes）。
 
 ---
 
@@ -424,7 +424,7 @@ async fn bad_spawn() {
 }
 ```
 
-**修复**：使用 `async move ||` 转移所有权，或用 `Arc` 共享 `'static` 数据。
+**修复**：使用 `async move ||` 转移所有权（Ownership），或用 `Arc` 共享 `'static` 数据。
 
 ```rust,ignore
 async fn good_spawn() {

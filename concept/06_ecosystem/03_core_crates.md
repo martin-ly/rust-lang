@@ -87,7 +87,7 @@
 
 - A. （单线程）
 - B. （默认，工作线程池）
-- C. 不需要运行时
+- C. 不需要运行时（Runtime）
 
 <details>
 <summary>✅ 答案</summary>
@@ -309,7 +309,7 @@ graph TD
 | **toml** | TOML | Rust 配置标准 (Cargo.toml) | 同上 |
 | **prost** | Protocol Buffers | 二进制、版本兼容、gRPC 基础 | 泛型（Generics） + Trait |
 | **flatbuffers** | FlatBuffers | 零拷贝反序列化、游戏/实时系统 | 内存布局 (repr(C)) |
-| **bincode** | 二进制 | 最小开销、仅 Rust 互操作 | 泛型 + 单态化（Monomorphization） |
+| **bincode** | 二进制 | 最小开销、仅 Rust 互操作 | 泛型（Generics） + 单态化（Monomorphization） |
 | **rmp-serde** | MessagePack | 二进制 JSON、紧凑 | 同上 |
 
 **关键洞察**：serde 的 `derive(Serialize, Deserialize)` 是 Rust **Trait 系统 + 过程宏（Procedural Macro）**的工业级典范。编译器通过单态化（Monomorphization）为每个类型生成专门的序列化代码，实现零成本抽象（Zero-Cost Abstraction）。 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
@@ -343,7 +343,7 @@ graph TD
 
 - 需要与 tokio/tower 生态深度集成 → **axum**
 - 追求极致吞吐量和成熟度 → **actix-web**
-- 开发速度优先、喜欢声明式宏 → **rocket**
+- 开发速度优先、喜欢声明式宏（Macro） → **rocket**
 - 需要 OpenAPI 自动生成 → **poem**
 
 > **来源**: [Tokio Blog — Axum] · [Actix 文档] · [Rocket 文档] · 可信度: ✅
@@ -445,7 +445,7 @@ graph TD
 | `crossbeam::epoch` | 无锁内存回收 | 三代 epoch 垃圾回收 | 实现自定义无锁数据结构 |
 | `crossbeam::deque` | 工作窃取双端队列 | Chase-Lev 算法 | 自定义调度器、并行运行时 |
 
-> **关键洞察**: crossbeam 的 epoch GC 解决了无锁数据结构的**安全内存回收问题**——当读者可能正在访问节点时，延迟释放直到所有读者进入新 epoch。这是 Rust 无法直接用所有权解决的问题（因为无锁读取不持有所有权）。
+> **关键洞察**: crossbeam 的 epoch GC 解决了无锁数据结构的**安全内存回收问题**——当读者可能正在访问节点时，延迟释放直到所有读者进入新 epoch。这是 Rust 无法直接用所有权（Ownership）解决的问题（因为无锁读取不持有所有权）。
 
 #### rayon：数据并行迭代器
 
@@ -654,7 +654,7 @@ graph TD
 | *Rayon: Data Parallelism in Rust* | Josh Stone / Niko, POPL 2015 workshop | 无数据竞争的数据并行 | Send/Sync + 所有权 ⇒ 安全并行 |
 | *Security Analysis of Rust Cryptography* | 2023-2025 工业审计 | Rust 密码学库安全评估 | ring/rustls 审计基础 |
 | *Tokio: An Asynchronous Rust Runtime* | tokio.rs Team | 协作式调度 + work-stealing | tokio 的调度理论 |
-| *Rustls: Modern TLS in Rust* | rustls 团队 | 内存安全 TLS | 替代 OpenSSL 的工程实践 |
+| *Rustls: Modern TLS in Rust* | rustls 团队 | 内存安全（Memory Safety） TLS | 替代 OpenSSL 的工程实践 |
 | *Rayon: Data Parallelism in Rust* | Josh Stone / Niko Matsakis | 无数据竞争的数据并行 | Send/Sync + 所有权 ⇒ 安全并行 |
 | *Security Analysis of Rust Cryptography* | 2023-2025 工业审计 | Rust 密码学库安全评估 | ring/rustls 审计基础 |
 
@@ -690,7 +690,7 @@ graph TD
 | 所有权 / Drop | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | RAII 资源管理根基 |
 | Trait 系统 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | derive 宏 + 接口抽象 |
 | 泛型 | [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) | 零成本抽象（Zero-Cost Abstraction） |
-| 异步编程 | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | tokio/axum 根基 |
+| 异步（Async）编程 | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | tokio/axum 根基 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | FFI/密码学边界 |
 | 宏系统 | [`../03_advanced/04_macros.md`](../03_advanced/04_macros.md) | serde/clap derive |
 | 工具链 | [`./01_toolchain.md`](01_toolchain.md) | Cargo/crates.io 支撑 |
@@ -1146,7 +1146,7 @@ graph TD
 | **C5** | `axum` Web 路由 | 处理器函数类型匹配 | 请求/响应类型安全 | 自定义 extractor 漏洞 | 类型混淆 / 注入攻击 |
 | **C6** | `cargo audit` 扫描 | RustSec DB 覆盖 | 已知 CVE 被标记 | 0-day；未注册漏洞 | 供应链攻击 |
 
-> **⟹ 推理链**: C1-C5 的**安全保证都不超出 Rust 编译器的 safe 子集**——crate 的安全性本质上是 Rust 类型系统的组合应用。C6 是供应链层面的元保证，独立于单个 crate 的正确性。
+> **⟹ 推理链**: C1-C5 的**安全保证都不超出 Rust 编译器的 safe 子集**——crate 的安全性本质上是 Rust 类型系统（Type System）的组合应用。C6 是供应链层面的元保证，独立于单个 crate 的正确性。
 
 ---
 

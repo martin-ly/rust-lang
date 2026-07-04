@@ -28,7 +28,7 @@
 - [`assert_matches!`：模式匹配（Pattern Matching）断言的形式化语义](#assert_matches模式匹配断言的形式化语义)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 `matches!`：模式匹配的布尔化](#11-matches模式匹配的布尔化)
+    - [1.1 `matches!`：模式匹配（Pattern Matching）的布尔化](#11-matches模式匹配的布尔化)
     - [1.2 `assert_matches!`：从判断到断言](#12-assert_matches从判断到断言)
     - [1.3 `debug_assert_matches!`：编译期条件断言](#13-debug_assert_matches编译期条件断言)
   - [二、形式化语义](#二形式化语义)
@@ -57,7 +57,7 @@
     - [测验 2：`assert_matches!` 是否可以在模式中绑定变量？绑定后的变量在测试体中可用吗？（理解层）](#测验-2assert_matches-是否可以在模式中绑定变量绑定后的变量在测试体中可用吗理解层)
     - [测验 3：如果 `assert_matches!` 在你的 stable Rust 版本中不可用，最简单的替代方案是什么？（理解层）](#测验-3如果-assert_matches-在你的-stable-rust-版本中不可用最简单的替代方案是什么理解层)
     - [测验 4：`assert_matches!(x, Some(_))` 与 `assert!(x.is_some())` 在语义上有区别吗？（理解层）](#测验-4assert_matchesx-some_-与-assertxis_some-在语义上有区别吗理解层)
-    - [测验 5：`assert_matches!` 对测试枚举变体有什么特别便利之处？（理解层）](#测验-5assert_matches-对测试枚举变体有什么特别便利之处理解层)
+    - [测验 5：`assert_matches!` 对测试枚举（Enum）变体有什么特别便利之处？（理解层）](#测验-5assert_matches-对测试枚举变体有什么特别便利之处理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -400,7 +400,7 @@ let x = 42;
 |:---|:---:|:---|
 | [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) | ✅ 一级 | 稳定化公告 |
 | [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html) | ✅ 一级 | API 文档 |
-| [std::matches](https://doc.rust-lang.org/std/macro.matches.html) | ✅ 一级 | `matches!` 宏文档 |
+| [std::matches](https://doc.rust-lang.org/std/macro.matches.html) | ✅ 一级 | `matches!` 宏（Macro）文档 |
 | [RFC 2005 — `matches!`](https://github.com/rust-lang/rfcs/pull/2005) | ✅ 一级 | 设计动机与语义 |
 | [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) | ✅ 一级 | 模式匹配权威规范 |
 

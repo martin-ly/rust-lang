@@ -246,7 +246,7 @@ graph TD
 
 ---
 
-> **[教学类比]** Pin Ergonomics 的改进类似于给 Rust 的异步编程"解除绑腿"——核心机制（Pin 保证内存安全（Memory Safety））不变，但使用方式更自然。Reborrow Traits 让 `Pin<&mut T>` 的行为更接近普通 `&mut T`，而 `pin` 关键字则从根本上简化自引用类型的表达。
+> **[教学类比]** Pin Ergonomics 的改进类似于给 Rust 的异步（Async）编程"解除绑腿"——核心机制（Pin 保证内存安全（Memory Safety））不变，但使用方式更自然。Reborrow Traits 让 `Pin<&mut T>` 的行为更接近普通 `&mut T`，而 `pin` 关键字则从根本上简化自引用（Reference）类型的表达。
 >
 > **来源**: [Rust Project Goals 2026 — Pin Ergonomics](https://rust-lang.github.io/rust-project-goals/2026/pin-ergonomics.html) · [withoutboats — "Pin and Suffering"](https://without.boats/blog/pin/) · [RFC #3709](https://github.com/rust-lang/rfcs/issues/3709)
 
@@ -271,14 +271,14 @@ graph TD
 <details>
 <summary>✅ 答案与解析</summary>
 
-`Pin::as_mut()` 保持 `Pin` 包装，返回 `Pin<&mut T>`。普通 `&mut` 重新借用（Borrowing）会丢失 `Pin` 语义，可能破坏自引用类型的内存安全。
+`Pin::as_mut()` 保持 `Pin` 包装，返回 `Pin<&mut T>`。普通 `&mut` 重新借用（Borrowing）会丢失 `Pin` 语义，可能破坏自引用类型的内存安全（Memory Safety）。
 </details>
 
 ---
 
 ### 测验 3：`pin!` 宏在 Rust 1.96+ 中提供了什么便利？（理解层）
 
-**题目**: `pin!` 宏在 Rust 1.96+ 中提供了什么便利？
+**题目**: `pin!` 宏（Macro）在 Rust 1.96+ 中提供了什么便利？
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -295,7 +295,7 @@ graph TD
 <details>
 <summary>✅ 答案与解析</summary>
 
-让 `Pin<&mut T>` 的行为更接近普通 `&mut T`，允许自动重新借用和模式匹配（Pattern Matching），减少显式的 `as_mut()` 调用。
+让 `Pin<&mut T>` 的行为更接近普通 `&mut T`，允许自动重新借用（Borrowing）和模式匹配（Pattern Matching），减少显式的 `as_mut()` 调用。
 </details>
 
 ---

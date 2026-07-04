@@ -447,7 +447,7 @@ pub fn old_api() {}
 // Cargo 的 SemVer 检查在编译期发现破坏
 ```
 
-> **修正**: Rust 的 Cargo 使用 **SemVer**（语义化版本）管理依赖。`cargo update` 自动应用兼容更新（PATCH 和 MINOR），但不应用破坏更新（MAJOR）。`cargo-semver-checks` 工具在发布前自动验证 API 兼容性，检测破坏变更（删除函数、修改 trait 方法签名等）。这与 Java 的二进制兼容性或 Go 的模块兼容性不同——Rust 的工具链在编译期强制执行 SemVer 契约，防止"依赖地狱"。[来源: [Cargo SemVer Check](https://doc.rust-lang.org/cargo/reference/semver.html)]
+> **修正**: Rust 的 Cargo 使用 **SemVer**（语义化版本）管理依赖。`cargo update` 自动应用兼容更新（PATCH 和 MINOR），但不应用破坏更新（MAJOR）。`cargo-semver-checks` 工具在发布前自动验证 API 兼容性，检测破坏变更（删除函数、修改 trait 方法签名等）。这与 Java 的二进制兼容性或 Go 的模块（Module）兼容性不同——Rust 的工具链在编译期强制执行 SemVer 契约，防止"依赖地狱"。[来源: [Cargo SemVer Check](https://doc.rust-lang.org/cargo/reference/semver.html)]
 
 ### 10.3 边界测试：依赖公开的 trait 泄露（编译错误）
 

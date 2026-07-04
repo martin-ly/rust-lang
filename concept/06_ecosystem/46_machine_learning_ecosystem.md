@@ -325,8 +325,8 @@ fn train_neural_net() {
 | **优势** | **劣势** |
 |:---|:---|
 | 完整 PyTorch 功能 | 依赖 libtorch（~1GB）|
-| 模型可直接加载 `.pt` 文件 | 需要 C++ 运行时 |
-| 自动微分 | 内存安全由 libtorch 管理（unsafe 边界）|
+| 模型可直接加载 `.pt` 文件 | 需要 C++ 运行时（Runtime） |
+| 自动微分 | 内存安全（Memory Safety）由 libtorch 管理（unsafe 边界）|
 | CUDA 支持成熟 | 编译时间长（libtorch 链接）|
 
 > **来源**: [tch-rs Examples](https://github.com/LaurentMazare/tch-rs/tree/main/examples) · [PyTorch C++ API](https://pytorch.org/cppdocs/)

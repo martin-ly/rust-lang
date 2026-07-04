@@ -47,7 +47,7 @@
     - [2.3 Rocket：声明式编程与类型安全](#23-rocket声明式编程与类型安全)
     - [2.4 Poem：模块（Module）化与 OpenAPI 优先](#24-poem模块化与-openapi-优先)
   - [三、异步（Async）运行时（Runtime）集成对比](#三异步运行时集成对比)
-    - [3.1 运行时绑定策略](#31-运行时绑定策略)
+    - [3.1 运行时（Runtime）绑定策略](#31-运行时绑定策略)
     - [3.2 运行时兼容性矩阵](#32-运行时兼容性矩阵)
   - [四、中间件机制深度对比](#四中间件机制深度对比)
     - [4.1 中间件模型分类](#41-中间件模型分类)
@@ -761,7 +761,7 @@ graph TD
 | [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) | ✅ 二级 | 性能基准测试 |
 | [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html) | ✅ 一级 | async/await 设计 |
 | [hyper 文档](https://docs.rs/hyper/latest/hyper/) | ✅ 一级 | HTTP 协议实现 |
-| [Rust 异步编程](https://rust-lang.github.io/async-book/) | ✅ 一级 | 异步模型 |
+| [Rust 异步（Async）编程](https://rust-lang.github.io/async-book/) | ✅ 一级 | 异步模型 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ⚠️ 三级 | 生态动态 |
 | [crates.io 下载统计](https://crates.io/) | ✅ 二级 | 生态健康度指标 |
 
@@ -827,7 +827,7 @@ fn app() -> Router {
 }
 ```
 
-> **修正**: axum 的路由系统要求处理函数（handler）返回实现 `IntoResponse` 的类型。`String` 实际上实现了 `IntoResponse`，但此示例展示的是更常见的问题：自定义类型未实现 `IntoResponse`，或函数签名不符合 `Fn(Request) -> Future<Output = Response>`。axum 使用 `tower::Service` trait 抽象处理函数，编译期通过宏生成 `Service` 实现。若类型不匹配，编译错误会指出缺少 `IntoResponse` 实现。这与 Go 的 `http.HandlerFunc`（任何 `func(w, r)` 都可用）或 Python Flask 的返回值（自动 `str()` 转换）不同——Rust Web 框架在编译期验证响应类型可序列化。[来源: [axum Documentation](https://docs.rs/axum/)] · [来源: [Tower Documentation](https://docs.rs/tower/)]
+> **修正**: axum 的路由系统要求处理函数（handler）返回实现 `IntoResponse` 的类型。`String` 实际上实现了 `IntoResponse`，但此示例展示的是更常见的问题：自定义类型未实现 `IntoResponse`，或函数签名不符合 `Fn(Request) -> Future<Output = Response>`。axum 使用 `tower::Service` trait 抽象处理函数，编译期通过宏（Macro）生成 `Service` 实现。若类型不匹配，编译错误会指出缺少 `IntoResponse` 实现。这与 Go 的 `http.HandlerFunc`（任何 `func(w, r)` 都可用）或 Python Flask 的返回值（自动 `str()` 转换）不同——Rust Web 框架在编译期验证响应类型可序列化。[来源: [axum Documentation](https://docs.rs/axum/)] · [来源: [Tower Documentation](https://docs.rs/tower/)]
 
 ### 10.2 边界测试：共享状态的生命周期与 `Clone` 约束（编译错误）
 

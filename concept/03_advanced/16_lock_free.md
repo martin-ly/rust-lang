@@ -53,7 +53,7 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
     - [10.5 边界测试：内存序的 `Release`/`Acquire` 与数据依赖（运行时（Runtime）可见性问题）](#105-边界测试内存序的-releaseacquire-与数据依赖运行时可见性问题)
-    - [10.3 边界测试：ABA 问题与无锁栈的内存安全（Memory Safety）（运行时 UB）](#103-边界测试aba-问题与无锁栈的内存安全运行时-ub)
+    - [10.3 边界测试：ABA 问题与无锁栈的内存安全（Memory Safety）（运行时（Runtime） UB）](#103-边界测试aba-问题与无锁栈的内存安全运行时-ub)
     - [10.5 边界测试：返回局部变量的悬垂引用（Reference）](#105-边界测试返回局部变量的悬垂引用)
   - [参考来源](#参考来源)
   - [认知路径](#认知路径)
@@ -1108,7 +1108,7 @@ fn pop(&self) -> Option<T> {
 |:---|:---|
 | `epoch::pin()` | 线程"钉住"当前 epoch，声明"我正在访问共享数据" |
 | `defer_destroy` | 将内存加入"待释放列表"，绑定到当前 epoch |
-| 全局 epoch 推进 | 当所有线程离开旧 epoch，旧 epoch 的内存安全释放 |
+| 全局 epoch 推进 | 当所有线程离开旧 epoch，旧 epoch 的内存安全（Memory Safety）释放 |
 
 > **crossbeam_epoch 是 Rust Lock-Free 的标准方案**。它处理了 ABA、内存回收、Hazard Pointer 等所有复杂问题，且 API 安全（不需要 unsafe）。
 </details>

@@ -66,7 +66,7 @@
 |:---|:---|:---|:---|:---|
 | P3-T1 | 线性逻辑与仿射逻辑：所有权（Ownership）数学根基 | `04_formal/01_linear_logic.md` | 🔴 高 | ✅ 完成 |
 | P3-T2 | 类型论基础：ADT、类型推导、子类型 | `04_formal/02_type_theory.md` | 🔴 高 | ✅ 完成 |
-| P3-T3 | 所有权形式化：COR、区域类型、分离逻辑 | `04_formal/03_ownership_formal.md` | 🟡 中 | ✅ 完成 |
+| P3-T3 | 所有权（Ownership）形式化：COR、区域类型、分离逻辑 | `04_formal/03_ownership_formal.md` | 🟡 中 | ✅ 完成 |
 | P3-T4 | RustBelt 与形式化验证工具链 | `04_formal/04_rustbelt.md` | 🟡 中 | ✅ 完成 |
 | P3-T5 | Rust vs Go：CSP vs 所有权（Ownership）、服务编排语义 | `05_comparative/02_rust_vs_go.md` | 🟡 中 | ✅ 完成 |
 | P3-T6 | 多语言范式矩阵：系统级形式化对比 | `05_comparative/03_paradigm_matrix.md` | 🟡 中 | ✅ 完成 |
@@ -98,7 +98,7 @@
 | P5-T7 | L5-L7 文件补充关系映射 | 9 个文件更新 | ✅ 完成 |
 | P5-T8 | 构建安全边界全景 | `05_comparative/04_safety_boundaries.md` | ✅ 完成 |
 | P5-T9 | 更新方法论（关系规范+定理规范+认知路径） | `00_meta/methodology.md` v1.1 | ✅ 完成 |
-| P5-T10 | 建立概念一致性检查清单 | `00_meta/audit_checklist.md` | ✅ 完成 |
+| P5-T10 | 建立概念一致性（Coherence）检查清单 | `00_meta/audit_checklist.md` | ✅ 完成 |
 
 ### Phase 6：持续维护与演进（2026-05-13 起，持续）
 
@@ -408,7 +408,7 @@
 |:---|:---|:---|:---:|
 | P16-T1 | 新增 `07_future/07_mcdc_coverage_preview.md` | DO-178C/ISO 26262 合规、MC/DC 形式化语义 | ✅ |
 | P16-T2 | 新增 `07_future/08_safety_tags_preview.md` | Unsafe 契约机器可读标注、AI 生成安全边界 | ✅ |
-| P16-T3 | 更新 version_tracking.md MC/DC / Safety Tags 状态 | 添加 concept/ 引用 | ✅ |
+| P16-T3 | 更新 version_tracking.md MC/DC / Safety Tags 状态 | 添加 concept/ 引用（Reference） | ✅ |
 | P16-T4 | 批量补充核心文件来源标注（3 文件并行） | 01_traits (+42) / 03_memory_management (+12) / 04_macros (+19) | ✅ |
 | P16-T5 | 质量基线报告同步 | 全部指标刷新至 83 文件 / 328 图表 / 241 编译 | ✅ |
 
@@ -454,7 +454,7 @@
 | P17-T24 | 新增 `05_comparative/08_rust_vs_javascript.md` | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ |
 | P17-T25 | 新增 `01_foundation/08_collections.md` | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ |
 | P17-T26 | 新增 `06_ecosystem/16_testing.md` | 单元/集成/文档测试、mockall、proptest、cargo-fuzz | ✅ |
-| P17-T27 | 新增 `03_advanced/08_nll_and_polonius.md` | 非词法生命周期、数据流分析、Origin 模型 | ✅ |
+| P17-T27 | 新增 `03_advanced/08_nll_and_polonius.md` | 非词法生命周期（Lifetimes）、数据流分析、Origin 模型 | ✅ |
 | P17-T28 | 新增 `04_formal/09_operational_semantics.md` | 小步/大步语义、求值上下文、Rust 形式化 | ✅ |
 | P17-T29 | 新增 `02_intermediate/13_dsl_and_embedding.md` | 宏（Macro） DSL、Builder、Parser Combinator、类型安全 | ✅ |
 | P17-T30 | 新增 `01_foundation/09_strings_and_text.md` | String/str、UTF-8、格式化、OS 字符串、C 字符串 | ✅ |

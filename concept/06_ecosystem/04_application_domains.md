@@ -135,7 +135,7 @@ embedded-hal/actix/anchor/bevy等框架
 | 智能合约/节点 | solana-program / substrate | 极高 |  无 GC 确定执行、内存安全（Memory Safety） | 学习曲线陡峭 |
 | 数据管道/ETL | polars + arrow + tokio | 中 |  性能接近 C++、类型安全 | Pandas 生态更大 |
 | OS/驱动/内核 | Rust for Linux + bindgen | 极高 |  内存安全（Memory Safety） + 零成本 + C 互操作 | unsafe 比例高 |
-| 跨平台桌面应用 | tauri + React/Vue | 中 |  内存安全 + 小体积 + 前端生态 | 不如 Electron 成熟 |
+| 跨平台桌面应用 | tauri + React/Vue | 中 |  内存安全（Memory Safety） + 小体积 + 前端生态 | 不如 Electron 成熟 |
 
 ---
 
@@ -258,7 +258,7 @@ Rust 在 CLI 领域是最成熟的应用之一。核心优势：
 
 Rust 在嵌入式领域的独特价值：
 
-- **no_std**: 无标准库运行时，适合裸机/RTOS
+- **no_std**: 无标准库运行时（Runtime），适合裸机/RTOS
 - **内存安全**: 消除 C 中常见的缓冲区溢出、use-after-free
 - **确定性**: 无 GC、无隐式分配，满足硬实时需求
 - **现代抽象**: 泛型（Generics）、Trait、模式匹配（Pattern Matching）在裸机上的零成本使用
@@ -594,7 +594,7 @@ fn main() -> Result<()> {
 | 物理 | `bevy_rapier` | 刚体/碰撞/关节 | `heron` (2D), `xpbd` |
 | 音频 | `bevy_kira_audio` / `rodio` | 空间音频、流播放 | `cpal` (底层) |
 | 输入 | `bevy_input` | 键盘/鼠标/手柄/触摸 | — |
-| 资产 | `bevy_asset` | 热重载、异步加载 | — |
+| 资产 | `bevy_asset` | 热重载、异步（Async）加载 | — |
 | UI | `bevy_ui` | 即时模式 + 保留模式混合 | `egui` (工具UI) |
 
 **ECS 与所有权（Ownership）的同构性（深度）**：
@@ -628,7 +628,7 @@ fn move_player(
 
 | **应用领域** | **L1 基础** | **L2 进阶** | **L3 高级** | **L4 形式化** | **L5 对比** |
 |:---|:---|:---|:---|:---|:---|
-| **Web 后端** | 所有权 + 生命周期（Lifetimes） | Trait (Handler) | async/await + Send/Sync | — | Go/Java 并发模型 |
+| **Web 后端** | 所有权（Ownership） + 生命周期（Lifetimes） | Trait (Handler) | async/await + Send/Sync | — | Go/Java 并发模型 |
 | **CLI** | 所有权 + Result | Trait (derive) | 过程宏（Procedural Macro） | — | Python Click |
 | **嵌入式** | 裸指针 + no_std | — | unsafe + 中断安全 | — | C bare-metal |
 | **游戏** | 所有权 | 泛型 (ECS) | unsafe (GPU) | — | C++ Unreal |
@@ -899,7 +899,7 @@ fn main() {
 > **迁移策略**：
 >
 > 1. **Phase 1**：用 PyO3 将 Rust 作为 Python 扩展模块（Module）（保留 Python 生态）
-> 2. **Phase 2**：用 Rust 重写性能瓶颈模块（保持 Python 胶水层）
+> 2. **Phase 2**：用 Rust 重写性能瓶颈模块（Module）（保持 Python 胶水层）
 > 3. **Phase 3**：完整迁移到 Rust（CLI、服务、嵌入式）
 
 #### 从 Go 迁移到 Rust
@@ -945,7 +945,7 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 
 | 场景 | 原因 | 替代方案 |
 |:---|:---|:---|
-| **快速原型 / MVP** | 编译期约束拖慢迭代速度；借用检查器对初学者门槛高 | Python/TypeScript/Go |
+| **快速原型 / MVP** | 编译期约束拖慢迭代速度；借用（Borrowing）检查器对初学者门槛高 | Python/TypeScript/Go |
 | **极小的脚本（<100 行）** | 编译时间 > 运行时间；Cargo 项目结构过重 | Python/bash/Perl |
 | **与 GC 语言频繁互操作** | FFI 开销 + 所有权转换成本；心智负担高 | 纯 GC 语言或纯 Rust |
 | **需要频繁反射/动态分派** | Rust 反射能力弱（宏（Macro）编译期）；动态分发需 `dyn` | Go/Java/C# |
@@ -1186,7 +1186,7 @@ graph TD
 
 ## 十一、生态前沿的形式化梳理（2026.05）
 
-> **定位**: 本章节从**形式模型视角**梳理各生态前沿方向，不展开使用教程，聚焦"该领域与 Rust 所有权/类型系统的交互、安全边界、与 L1-L4 的映射"。
+> **定位**: 本章节从**形式模型视角**梳理各生态前沿方向，不展开使用教程，聚焦"该领域与 Rust 所有权/类型系统（Type System）的交互、安全边界、与 L1-L4 的映射"。
 > **原则**: 点到为止，每方向一段形式化分析。
 
 ---
@@ -1249,7 +1249,7 @@ graph TD
 - **L3 Async**: `tokio-uring` 将 io_uring 的 completion 事件映射为 `Future`。与传统 epoll 不同，io_uring 的**无系统调用批量提交**（batch submission）改变了异步运行时的事件循环模型——从"poll → 等待 → 回调"变为"提交 → 内核执行 → 完成事件"。
 - **L4 形式化**: io_uring 的 ring buffer 是**线性资源**的经典案例——submission entry 一旦被提交，其内存区域在操作完成前不可修改或释放。这与 Rust 的 `Pin` 语义同构：提交的 `Op` 被 `Pin` 在 ring buffer 中，直到 completion 解固定。
 
-**安全边界**: `tokio-uring` 的 `Buffer` trait 要求提交的缓冲区在操作完成前保持有效。`unsafe` 边界在于：如果用户在 `Op` 完成前 `drop` 缓冲区，会导致内核写入已释放内存。封装层通过**生命周期标注**（`&'a [u8]`）将这一约束编码到类型系统。
+**安全边界**: `tokio-uring` 的 `Buffer` trait 要求提交的缓冲区在操作完成前保持有效。`unsafe` 边界在于：如果用户在 `Op` 完成前 `drop` 缓冲区，会导致内核写入已释放内存。封装层通过**生命周期（Lifetimes）标注**（`&'a [u8]`）将这一约束编码到类型系统。
 
 > **[来源: tokio-rs/io-uring]** io_uring 的共享环形缓冲区是 Rust 所有权模型的压力测试。
 
@@ -1277,7 +1277,7 @@ graph TD
 
 **与 L1-L4 的映射**:
 
-- **L1 所有权**: `egui` 的立即模式每帧丢弃 UI 状态，所有权模型简化为**栈分配 + 借用**——无长期状态管理，无循环引用。`iced` 的保留模式维护 `Element` 树，需要 `Rc` 或 arena 分配器管理父子关系。
+- **L1 所有权**: `egui` 的立即模式每帧丢弃 UI 状态，所有权模型简化为**栈分配 + 借用**——无长期状态管理，无循环引用（Reference）。`iced` 的保留模式维护 `Element` 树，需要 `Rc` 或 arena 分配器管理父子关系。
 - **L2 Trait**: `egui` 的 `Widget` trait 是**纯函数式**的——`ui(ui: &mut Ui) -> Response`，无状态副作用。`iced` 的 `Element` 是**代数数据类型**——`Element::new(widget).on_event(handler)`，事件处理通过 `Message` enum 分发。
 - **L4 形式化**: `egui` 的纯函数式 Widget 对应于**线性逻辑中的消耗性资源**——每帧的 `Ui` 对象被消耗后不可重用。`iced` 的 `Message` 分发对应于**代数效应（Algebraic Effects）**的简化形式——事件是效应，处理器是效应处理器。
 

@@ -66,7 +66,7 @@
   - [九、边界测试](#九边界测试)
     - [9.1 边界测试：无背压导致内存溢出（运行时（Runtime）错误）](#91-边界测试无背压导致内存溢出运行时错误)
     - [9.2 边界测试：跨线程 Stream 发送违反 Send（编译错误）](#92-边界测试跨线程-stream-发送违反-send编译错误)
-    - [9.3 边界测试：FRP 信号循环引用（Reference）导致死锁（运行时错误）](#93-边界测试frp-信号循环引用导致死锁运行时错误)
+    - [9.3 边界测试：FRP 信号循环引用（Reference）导致死锁（运行时（Runtime）错误）](#93-边界测试frp-信号循环引用导致死锁运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -116,7 +116,7 @@ Reactive Manifesto 四特质（2014）:
 >
 > - **弹性**（Resilience）保证系统部分故障时不完全崩溃 → 从而保持响应
 > - **弹性扩展**（Elasticity）保证负载变化时自动调整资源 → 从而保持响应
-> - **消息驱动**（Message Driven）是前两者实现的**基础机制**——通过异步、非阻塞、背压感知的消息传递解耦组件
+> - **消息驱动**（Message Driven）是前两者实现的**基础机制**——通过异步（Async）、非阻塞、背压感知的消息传递解耦组件
 >
 > **来源**: [Reactive Manifesto](https://www.reactivemanifesto.org/) · [Reactive Streams Specification](https://www.reactive-streams.org/)
 > [来源: [Elliott 2009 — Push-Pull FRP](https://conal.net/papers/push-pull-frp/push-pull-frp.pdf)] · [来源: [Tokio Stream](https://docs.rs/tokio-stream/latest/tokio_stream/)]

@@ -30,7 +30,7 @@
 | Async closures | `async |x| { ... }` 闭包语法 | stable |
 | Never type fallback | `!` 类型的默认回退调整为 `!` 本身 | stable |
 | Lifetime capture in RPIT | `impl Trait` 生命周期（Lifetimes）捕获规则更精确 | stable |
-| `if let` 临时作用域收窄 | 临时值在 `if let` 条件中的生命周期缩短 | stable |
+| `if let` 临时作用域收窄 | 临时值在 `if let` 条件中的生命周期（Lifetimes）缩短 | stable |
 
 > **注意**: `gen {}` 块和 `gen fn` 目前仍是 nightly-only 特性（`feature(gen_blocks)`），不在 2024 Edition stable 范围内。
 

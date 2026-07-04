@@ -305,7 +305,7 @@ async fn fixed() {
 ```
 
 > **修正**:
-> `Stream` 和 `Future` 是 Rust 异步生态中的两个核心 trait。
+> `Stream` 和 `Future` 是 Rust 异步（Async）生态中的两个核心 trait。
 > `Future` 代表**单次**异步计算，`Stream` 代表**多次**异步值序列。
 > `Stream` 不实现 `Future`，必须通过 `StreamExt::next()` 获取 `Future<Item = Option<T>>`。
 > 这与 JavaScript 的 `AsyncIterator`（`for await...of`）类似，但 Rust 的区分更严格——编译器拒绝将 Stream 直接 await。
@@ -1018,7 +1018,7 @@ impl Actor {
 
 - A. 任何线程都可以直接调用 `actor.handle(cmd)`
 - B. 只有 Actor 自己的 `run` 循环调用 `handle`，保证单线程串行执行
-- C. Tokio 运行时自动调度 `handle` 到可用线程
+- C. Tokio 运行时（Runtime）自动调度 `handle` 到可用线程
 - D. `handle` 是 `async fn`，可以被多个调用者并发调用
 
 <details>

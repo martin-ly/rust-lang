@@ -28,7 +28,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 从霍尔逻辑到分离逻辑](#11-从霍尔逻辑到分离逻辑)
-    - [1.2 分离合取与资源所有权](#12-分离合取与资源所有权)
+    - [1.2 分离合取与资源所有权（Ownership）](#12-分离合取与资源所有权)
     - [1.3 框架规则与局部推理](#13-框架规则与局部推理)
   - [二、技术细节](#二技术细节)
     - [2.1 分离逻辑的基本断言](#21-分离逻辑的基本断言)
@@ -614,7 +614,7 @@ fn main() {
 > **修正**:
 > `GhostCell`（基于 GhostCell paper）是 Rust 中**零运行时（Runtime）成本**的内部可变性抽象，使用分离逻辑建模：
 > 每个 `GhostCell` 关联一个编译期品牌（brand，由 `GhostToken` 代表），同一品牌的所有 cell 共享一个可变借用（Mutable Borrow） token。
-> 这与 `RefCell`（运行时引用计数）或 `Mutex`（运行时锁）不同——`GhostCell` 在编译期检查借用规则，无运行时开销。
+> 这与 `RefCell`（运行时（Runtime）引用（Reference）计数）或 `Mutex`（运行时锁）不同——`GhostCell` 在编译期检查借用（Borrowing）规则，无运行时开销。
 > 代价：`GhostToken` 的生命周期（Lifetimes）约束要求所有相关操作在闭包（Closures）内完成，API  ergonomics 较差。
 > 分离逻辑视角：`GhostToken` 是权限（capability），`GhostCell` 是资源，借用规则对应于权限的独占转移。
 > 这是 Rust 类型系统（Type System）表达力的高级展示：将运行时检查迁移到编译期，同时保持零成本。

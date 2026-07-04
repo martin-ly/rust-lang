@@ -66,7 +66,7 @@
 | 表达式 | 说明 |
 |:---|:---|
 | 字面量 | `42`、`"hello"`、`true` 等 |
-| const 参数 | 泛型 const 参数 |
+| const 参数 | 泛型（Generics） const 参数 |
 | 函数/常量路径 | 指向函数或常量的路径；不允许递归定义常量 |
 | static 路径 | 限制：不可写入 static；不可读取 `extern` static；非 static 初始化器中不可读取 mutable static |
 | 元组、数组、结构体（Struct）表达式 |  |
@@ -88,8 +88,8 @@
 
 在常量表达式中，对临时值的共享借用或可变借用（Mutable Borrow）受到限制：
 
-- 不允许对生命周期（Lifetimes）被延长到程序末尾的临时值进行**可变借用**。
-- 不允许对生命周期被延长到程序末尾、且具有内部可变性（interior mutability）的临时值进行**共享借用**。
+- 不允许对生命周期（Lifetimes）被延长到程序末尾的临时值进行**可变借用（Mutable Borrow）**。
+- 不允许对生命周期（Lifetimes）被延长到程序末尾、且具有内部可变性（interior mutability）的临时值进行**共享借用（Borrowing）**。
 
 允许的 place 表达式归纳为三类：**瞬态（transient）**、**间接（indirect）**、**静态（static）**。
 
@@ -101,11 +101,11 @@
 
 1. 数组类型长度表达式
 2. 数组重复长度表达式
-3. `const`、`static`、枚举 discriminant 的初始化器
+3. `const`、`static`、枚举（Enum） discriminant 的初始化器
 4. const 泛型参数
 5. `const` 块
 
-对于数组长度、数组重复长度和 const 泛型参数，外部泛型参数的使用受到限制：表达式必须是单个 const 泛型参数，或者不引用任何泛型参数。
+对于数组长度、数组重复长度和 const 泛型参数，外部泛型参数的使用受到限制：表达式必须是单个 const 泛型参数，或者不引用（Reference）任何泛型参数。
 
 ---
 
@@ -130,7 +130,7 @@ const VALUE: i32 = square(12);
 
 ## 五、溢出与越界
 
-在 const context 中，数组越界索引、整数溢出等行为是**编译错误**。在非 const context 中，这些行为可能只是警告，并可能在运行时 panic。
+在 const context 中，数组越界索引、整数溢出等行为是**编译错误**。在非 const context 中，这些行为可能只是警告，并可能在运行时（Runtime） panic。
 
 ---
 

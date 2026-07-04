@@ -601,7 +601,7 @@ fn main() {
 >
 > 风险：忘记显式 `drop` 导致内存泄漏——不是 UB，但资源浪费。
 > Rust 的类型系统（Type System）不阻止内存泄漏（`Rc` 循环引用（Reference）、`Mem::forget`、`ManuallyDrop` 都是安全的），但工具（`cargo leak`）和模式（`scopeguard::defer`）可帮助检测。
-> 这与 C++ 的 `std::unique_ptr`（必须释放，否则泄漏）或 Java 的 GC（自动回收循环引用... eventually）不同——Rust 的所有权（Ownership）系统通常防止泄漏，但显式控制时责任回归开发者。
+> 这与 C++ 的 `std::unique_ptr`（必须释放，否则泄漏）或 Java 的 GC（自动回收循环引用（Reference）... eventually）不同——Rust 的所有权（Ownership）系统通常防止泄漏，但显式控制时责任回归开发者。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html)]
 
@@ -736,7 +736,7 @@ ZST 不占用内存，可用于类型级标记（phantom types）、空迭代器
 | [Pierce — TAPL, §18-§24](https://www.cis.upenn.edu/~bcpierce/tapl/) | 抽象数据类型、存在类型与模块（Module）系统的形式化 |
 | [Cardelli & Wegner 1985](https://doi.org/10.1145/6041.6042) | 类型、数据抽象与多态性的统一框架 |
 | [Wikipedia: Abstract data type](https://en.wikipedia.org/wiki/Abstract_data_type) | ADT 与 OOP 类类型的区分 |
-| [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) | Rust 类型系统的语法与语义定义 |
+| [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) | Rust 类型系统（Type System）的语法与语义定义 |
 | [TRPL Ch 5 — Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) | Rust struct 与 impl 块的封装实践 |
 | [TRPL Ch 6 — Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) | `enum` + `match` 的穷尽性检查 |
 | [TRPL Ch 10 — Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) | trait 作为行为抽象与泛型（Generics）约束 |

@@ -75,7 +75,7 @@
 
 - `cfg` 属性：`#[cfg(...)]`
 - `cfg_attr` 属性：`#[cfg_attr(..., attr)]`
-- `cfg!` 宏：`cfg!(predicate)`
+- `cfg!` 宏（Macro）：`cfg!(predicate)`
 - `cfg_select!` 宏：`cfg_select! { ... }`
 
 条件编译的判定依据是**配置谓词（configuration predicate）**，谓词求值为 `true` 或 `false`。
@@ -144,7 +144,7 @@ fn not_windows() {}
 | 选项 | 说明 |
 |:---|:---|
 | `target_has_atomic = "8"` | 目标支持 8 位原子操作（Atomic Operations） |
-| `target_has_atomic = "ptr"` | 目标支持指针宽度原子操作 |
+| `target_has_atomic = "ptr"` | 目标支持指针宽度原子操作（Atomic Operations） |
 
 > Rust 1.97 新增 `target_has_atomic_equal_alignment = "ptr"`，详见 [Rust 1.97 Preview (Beta)](../07_future/rust_1_97_preview.md)。
 
@@ -217,7 +217,7 @@ let machine_kind = if cfg!(unix) {
 };
 ```
 
-> 与 `#[cfg]` 不同，`cfg!` 的两分支代码都会被编译，只是运行时选择路径。
+> 与 `#[cfg]` 不同，`cfg!` 的两分支代码都会被编译，只是运行时（Runtime）选择路径。
 
 ---
 

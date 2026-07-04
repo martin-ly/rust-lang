@@ -45,7 +45,7 @@
     - [10.1 边界测试：ECS 系统的组件借用（Borrowing）冲突（编译错误）](#101-边界测试ecs-系统的组件借用冲突编译错误)
     - [10.2 边界测试：图形渲染的生命周期（Lifetimes）与 `Send` 约束（编译错误）](#102-边界测试图形渲染的生命周期与-send-约束编译错误)
     - [10.6 边界测试：游戏状态序列化的循环引用（Reference）（运行时（Runtime）栈溢出）](#106-边界测试游戏状态序列化的循环引用运行时栈溢出)
-    - [10.5 边界测试：ECS 的 archetype 变更与迭代器（Iterator）失效（运行时 panic/UB）](#105-边界测试ecs-的-archetype-变更与迭代器失效运行时-panicub)
+    - [10.5 边界测试：ECS 的 archetype 变更与迭代器（Iterator）失效（运行时（Runtime） panic/UB）](#105-边界测试ecs-的-archetype-变更与迭代器失效运行时-panicub)
     - [10.3 边界测试：Bevy ECS 的 system 参数顺序与冲突（编译错误）](#103-边界测试bevy-ecs-的-system-参数顺序与冲突编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -596,7 +596,7 @@ fn main() {
 }
 ```
 
-> **修正**: 游戏对象树常包含**循环引用**（如双向链接的节点、父子循环）。`serde` 的默认序列化是深度递归，循环引用导致栈溢出。解决方案：1) 使用 `serde` 的 `serialize_with` 自定义序列化，记录已访问对象 ID；2) 使用 `serde_json` 的 `preserve_order` + 手动打破循环；3) 使用 `slotmap` 或 `petgraph` 的图结构替代原生引用。Bevy 的 ECS 避免了这一问题：实体（Entity）是整数 ID，组件是扁平存储，无引用循环。这与 Unity 的 `SerializeReference`（支持循环引用检测）或 Godot 的节点树（使用 NodePath 而非直接引用）类似——游戏引擎的序列化系统设计需处理循环引用。[来源: [serde Documentation](https://serde.rs/)] · [来源: [Bevy ECS Serialization](https://docs.rs/bevy/)]
+> **修正**: 游戏对象树常包含**循环引用（Reference）**（如双向链接的节点、父子循环）。`serde` 的默认序列化是深度递归，循环引用导致栈溢出。解决方案：1) 使用 `serde` 的 `serialize_with` 自定义序列化，记录已访问对象 ID；2) 使用 `serde_json` 的 `preserve_order` + 手动打破循环；3) 使用 `slotmap` 或 `petgraph` 的图结构替代原生引用。Bevy 的 ECS 避免了这一问题：实体（Entity）是整数 ID，组件是扁平存储，无引用循环。这与 Unity 的 `SerializeReference`（支持循环引用检测）或 Godot 的节点树（使用 NodePath 而非直接引用）类似——游戏引擎的序列化系统设计需处理循环引用。[来源: [serde Documentation](https://serde.rs/)] · [来源: [Bevy ECS Serialization](https://docs.rs/bevy/)]
 
 ### 10.5 边界测试：ECS 的 archetype 变更与迭代器失效（运行时 panic/UB）
 

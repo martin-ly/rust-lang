@@ -51,7 +51,7 @@
   - [十、边界测试：Cranelift 后端预览的编译错误](#十边界测试cranelift-后端预览的编译错误)
     - [10.1 边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行时（Runtime）差异）](#101-边界测试cranelift-的调试构建与-llvm-的语义差异运行时差异)
     - [10.2 边界测试：Cranelift 不支持的平台特定内联汇编（Inline Assembly）（编译错误）](#102-边界测试cranelift-不支持的平台特定内联汇编编译错误)
-    - [10.3 边界测试：Cranelift 的尾调用优化缺失（运行时栈溢出）](#103-边界测试cranelift-的尾调用优化缺失运行时栈溢出)
+    - [10.3 边界测试：Cranelift 的尾调用优化缺失（运行时（Runtime）栈溢出）](#103-边界测试cranelift-的尾调用优化缺失运行时栈溢出)
     - [10.4 边界测试：Cranelift 的 SIMD 向量类型宽度限制（编译错误）](#104-边界测试cranelift-的-simd-向量类型宽度限制编译错误)
     - [10.6 边界测试：Cranelift 的 debug 信息生成与 GDB 兼容性（调试困难）](#106-边界测试cranelift-的-debug-信息生成与-gdb-兼容性调试困难)
     - [10.5 边界测试：Cranelift 的调试构建与发布构建行为差异（运行时性能/语义差异）](#105-边界测试cranelift-的调试构建与发布构建行为差异运行时性能语义差异)
@@ -444,7 +444,7 @@ fn cpuid() {
 > 开发者的应对：
 >
 > 1) 优先使用可移植的 Rust 代码或 `core::intrinsics`；
-> 2) 对必须使用内联汇编的代码，限制在 release 构建（LLVM）中使用，debug 构建使用模拟实现；
+> 2) 对必须使用内联汇编（Inline Assembly）的代码，限制在 release 构建（LLVM）中使用，debug 构建使用模拟实现；
 > 3) 向 Cranelift 项目报告缺失的功能。
 >
 > 这与 Rust 的多后端战略一致：Cranelift 负责快速迭代，LLVM 负责生产优化。

@@ -111,7 +111,7 @@ let declared_last = PrintOnDrop("outer last");
 
 ## 六、临时作用域（Temporary Scopes）
 
-表达式的**临时作用域**用于存放该表达式产生的临时变量。除生命周期延长外，临时作用域是包含该表达式的最小 scope：
+表达式的**临时作用域**用于存放该表达式产生的临时变量。除生命周期（Lifetimes）延长外，临时作用域是包含该表达式的最小 scope：
 
 - 整个函数
 - 一个语句
@@ -127,7 +127,7 @@ let declared_last = PrintOnDrop("outer last");
 
 ## 七、常量提升（Constant Promotion）
 
-当某个值表达式可以在常量上下文中写出并被借用（Borrowing），且该借用可以在原位置解引用（Reference）而不改变运行时行为时，该表达式会被提升到 `'static` 槽位。被提升的表达式不能包含内部可变性或析构函数。
+当某个值表达式可以在常量上下文中写出并被借用（Borrowing），且该借用可以在原位置解引用（Reference）而不改变运行时（Runtime）行为时，该表达式会被提升到 `'static` 槽位。被提升的表达式不能包含内部可变性或析构函数。
 
 ---
 
@@ -145,8 +145,8 @@ println!("{}", x);
 延长规则基于**扩展模式（extending patterns）**和**扩展表达式（extending expressions）**。例如：
 
 - `let ref x = temp()` 是扩展模式。
-- `let x = &temp()` 是扩展表达式（借用的操作数）。
-- 函数调用参数、方法调用 receiver、`match` scrutinee、`async` 块 tail、闭包 tail、`break` 操作数等**不会**延长。
+- `let x = &temp()` 是扩展表达式（借用（Borrowing）的操作数）。
+- 函数调用参数、方法调用 receiver、`match` scrutinee、`async` 块 tail、闭包（Closures） tail、`break` 操作数等**不会**延长。
 
 ---
 

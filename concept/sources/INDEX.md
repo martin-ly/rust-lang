@@ -51,7 +51,7 @@
 | 概念 | 精确章节 URL |
 | :--- | :--- |
 | 所有权与移动语义 | REF — §4.1.8 Ownership and moves |
-| 借用与引用 | REF — §4.1.9 Borrowing |
+| 借用与引用（Reference） | REF — §4.1.9 Borrowing |
 | 生命周期 | REF — §4.1.10 Lifetimes |
 | 类型系统（Type System） | REF — §4.2 Types |
 | 泛型（Generics） | REF — §4.2.4 Generic parameters |

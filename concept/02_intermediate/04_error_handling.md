@@ -43,7 +43,7 @@
     - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 错误处理（Error Handling）机制矩阵](#21-错误处理机制矩阵)
-    - [2.2 Rust vs 其他语言错误处理对比](#22-rust-vs-其他语言错误处理对比)
+    - [2.2 Rust vs 其他语言错误处理（Error Handling）对比](#22-rust-vs-其他语言错误处理对比)
     - [2.3 `Result` 组合子矩阵](#23-result-组合子矩阵)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
@@ -60,7 +60,7 @@
     - [5.5 边界示例：`Option` 与 `Result` 互转](#55-边界示例option-与-result-互转)
     - [5.5 补充：异步（Async）错误处理与 `poll_fn` / `TryFuture` 模式](#55-补充异步错误处理与-poll_fn--tryfuture-模式)
       - [`poll_fn`：将闭包（Closures）提升为 Future](#poll_fn将闭包提升为-future)
-      - [`TryFuture` 与 `?` 运算符的异步扩展](#tryfuture-与--运算符的异步扩展)
+      - [`TryFuture` 与 `?` 运算符的异步（Async）扩展](#tryfuture-与--运算符的异步扩展)
       - [取消安全（Cancellation Safety）与错误处理](#取消安全cancellation-safety与错误处理)
   - [六、反命题与边界分析（Counter-proposition \& Boundary Analysis）](#六反命题与边界分析counter-proposition--boundary-analysis)
     - [6.1 反命题 1: "Result 消除了所有错误"](#61-反命题-1-result-消除了所有错误)
@@ -68,7 +68,7 @@
     - [6.3 反命题 3: "panic 只应在完全不可能时发生"](#63-反命题-3-panic-只应在完全不可能时发生)
     - [6.4 反命题 4: "Option 完全替代 null"](#64-反命题-4-option-完全替代-null)
   - [七、边界极限测试代码（Boundary Limit Tests）](#七边界极限测试代码boundary-limit-tests)
-    - [7.1 测试 1: ? 运算符在闭包中的限制](#71-测试-1--运算符在闭包中的限制)
+    - [7.1 测试 1: ? 运算符在闭包（Closures）中的限制](#71-测试-1--运算符在闭包中的限制)
     - [7.2 测试 2: From 转换链的边界](#72-测试-2-from-转换链的边界)
     - [7.3 测试 3: panic 边界与 catch\_unwind](#73-测试-3-panic-边界与-catch_unwind)
     - [7.4 测试 4: Result 与 Option 的组合边界](#74-测试-4-result-与-option-的组合边界)
@@ -628,7 +628,7 @@ graph TD
 
 ### 6.1 反命题 1: "Result 消除了所有错误"
 
-> 运行时层 — Result 消除了静默错误忽略，但 unwrap 和 panic 仍是错误爆发的通道。
+> 运行时（Runtime）层 — Result 消除了静默错误忽略，但 unwrap 和 panic 仍是错误爆发的通道。
 
 ```mermaid
 graph TD
@@ -1624,7 +1624,7 @@ fn parse_port(s: &str) -> Result<u16, AppError> {
 | **Backtrace** | ✅ 自动 | ✅ `#[backtrace]` | ✅ 自动 | ✅ 彩色 backtrace | ✅ 可集成 | ✅ 可选 |
 | **自定义报告** | ❌ | ❌ | ✅ `EyreHandler` | ✅ 主题/颜色/过滤器 | ✅ `ReportHandler` | ❌ |
 | **编译时间** | 极低 | 低 | 低 | 中（额外依赖） | 中（`fancy` 依赖多） | 低 |
-| **运行时开销** | 低（窄指针） | 零成本抽象（Zero-Cost Abstraction） | 低（narrow pointer） | 中（backtrace/spantrace） | 低（标注为引用） | 低（选择器零成本） |
+| **运行时开销** | 低（窄指针） | 零成本抽象（Zero-Cost Abstraction） | 低（narrow pointer） | 中（backtrace/spantrace） | 低（标注为引用（Reference）） | 低（选择器零成本） |
 | **向下转型** | ✅ `downcast_ref` | ✅ `match` 枚举（Enum） | ✅ `downcast_ref` | ✅ `downcast_ref` | ✅ `match` / `downcast` | ✅ `match` 枚举 |
 | **与 `?` 互操作** | ✅ 任意 `Error` | ✅ 需 `From` 实现 | ✅ 任意 `Error` | ✅ 任意 `Error` | ✅ 需 `Into<miette::Report>` | ✅ 需 `From` / `context` |
 
@@ -1770,7 +1770,7 @@ fn parse_port(s: &str) -> Result<u16, LocatedError> {
 |:---|:---|:---|:---|:---|
 | `Backtrace` | `std::backtrace::Backtrace` | 高（栈展开+符号解析） | 完整调用链 | 审计、生产故障诊断 |
 | `#[track_caller]` + `Location` | `&'static Location<'static>` | 极低（寄存器/栈参数传递） | 单点（文件+行+列） | 高频错误路径、库断言 |
-| 手动 `file!/line!` | `&'static str` + `u32` | 零（编译期常量） | 单点 | 宏生成的错误 |
+| 手动 `file!/line!` | `&'static str` + `u32` | 零（编译期常量） | 单点 | 宏（Macro）生成的错误 |
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** 库代码若仅需记录"错误在哪个调用点产生"，应优先使用 `#[track_caller]` 而非 `Backtrace`，以避免在热路径引入运行时展开开销。 ✅
 

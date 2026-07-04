@@ -49,7 +49,7 @@
     - [6.1 设计原则依赖图](#61-设计原则依赖图)
     - [6.2 系统架构决策树](#62-系统架构决策树)
   - [七、定理推理链](#七定理推理链)
-    - [定理一致性矩阵（系统设计专集）](#定理一致性矩阵系统设计专集)
+    - [定理一致性（Coherence）矩阵（系统设计专集）](#定理一致性矩阵系统设计专集)
   - [八、相关概念链接（L0-L7 映射）](#八相关概念链接l0-l7-映射)
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
@@ -63,7 +63,7 @@
     - [10.3 边界测试：过度泛型（Generics）化导致的单态化（Monomorphization）膨胀（编译后体积爆炸）](#103-边界测试过度泛型化导致的单态化膨胀编译后体积爆炸)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 中"零成本抽象"（Zero-Cost Abstractions）对系统架构设计意味着什么？（理解层）](#测验-1rust-中零成本抽象zero-cost-abstractions对系统架构设计意味着什么理解层)
+    - [测验 1：Rust 中"零成本抽象（Zero-Cost Abstraction）"（Zero-Cost Abstractions）对系统架构设计意味着什么？（理解层）](#测验-1rust-中零成本抽象zero-cost-abstractions对系统架构设计意味着什么理解层)
     - [测验 2：在 Rust 微服务架构中，为什么选择 `tokio` 而非多线程模型？（理解层）](#测验-2在-rust-微服务架构中为什么选择-tokio-而非多线程模型理解层)
     - [测验 3：Rust 的 `trait` 系统在解耦模块（Module）时有什么优势？（理解层）](#测验-3rust-的-trait-系统在解耦模块时有什么优势理解层)
     - [测验 4：什么是"错误即类型"（Errors as Values）？Rust 如何通过类型系统（Type System）实现它？（理解层）](#测验-4什么是错误即类型errors-as-valuesrust-如何通过类型系统实现它理解层)
@@ -113,7 +113,7 @@
 
 > **Capability-Based Security**: 由 Dennis & Van Horn 1966 提出，核心思想是——进程对资源的访问权限不基于身份（identity），而基于**不可伪造的令牌（capability）**。拥有 capability 即可访问资源，无需额外检查。 [来源: Dennis & Van Horn, CACM 1966]
 
-Rust 的所有权系统正是 Capability-Based Security 的现代实现：
+Rust 的所有权（Ownership）系统正是 Capability-Based Security 的现代实现：
 
 | Capability 理论 | Rust 实现 |
 |:---|:---|
@@ -196,12 +196,12 @@ trait Service<Request> {
 | Rust 概念 | 分布式系统对应 | 一致性保证 |
 |:---|:---|:---|
 | 所有权唯一性 | 单主复制（Single Primary Replication） | 强一致性 |
-| `&T` 共享借用 | 多主只读复制（Multi-Primary Read） | 最终一致性 |
+| `&T` 共享借用（Borrowing） | 多主只读复制（Multi-Primary Read） | 最终一致性 |
 | `&mut T` 独占借用 | 独占写锁（Exclusive Write Lock） | 线性一致性 |
 | `Arc<Mutex<T>>` | 分布式锁（如 etcd / ZooKeeper） | 顺序一致性 |
 | channel send | 两阶段提交（2PC）的 prepare 阶段 | 原子性 |
 
-> **权威对齐**: Raft 共识算法中的 Leader Election 确保任何时刻只有一个 Leader（所有者），与 Rust 的所有权唯一性在**抽象层面同构**。CAP 定理告诉我们无法在分区时同时保证可用性和一致性；Rust 的所有权系统通过**编译期拒绝**（而非运行时协调）来避免分布式系统中的竞争条件，这是一种「预防胜于治疗」的设计哲学。 [来源: Lamport, *Paxos Made Simple*; Brewer, *CAP Twelve Years Later*]
+> **权威对齐**: Raft 共识算法中的 Leader Election 确保任何时刻只有一个 Leader（所有者），与 Rust 的所有权唯一性在**抽象层面同构**。CAP 定理告诉我们无法在分区时同时保证可用性和一致性；Rust 的所有权系统通过**编译期拒绝**（而非运行时（Runtime）协调）来避免分布式系统中的竞争条件，这是一种「预防胜于治疗」的设计哲学。 [来源: Lamport, *Paxos Made Simple*; Brewer, *CAP Twelve Years Later*]
 
 ### 2.6 安全边界：Zero Trust + WASI 能力安全
 
@@ -334,7 +334,7 @@ graph TD
     C --> E[分布式系统: 协议验证]
 ```
 
-> **认知功能**: 通过 Rust 类型系统的已有直觉，建立对分布式协议的快速认知桥梁。读者可将编译期已熟悉的所有权、借用（Borrowing）、生命周期（Lifetimes）等概念，迁移理解为分布式系统中的主从复制、锁机制和租约协议。[来源: 💡 原创分析]
+> **认知功能**: 通过 Rust 类型系统（Type System）的已有直觉，建立对分布式协议的快速认知桥梁。读者可将编译期已熟悉的所有权、借用（Borrowing）、生命周期（Lifetimes）等概念，迁移理解为分布式系统中的主从复制、锁机制和租约协议。[来源: 💡 原创分析]
 
 **隐喻映射表**:
 
@@ -451,7 +451,7 @@ graph TD
 |:---|:---|:---|:---|:---|:---|:---|:---|
 | Capability 安全 | 所有权 / 借用 | 智能指针（Smart Pointer） | Pin / Unsafe | 分离逻辑 | vs C++ 指针 | Scopeguard | 自定义分配器 |
 | Session Types | 生命周期（Lifetimes） | Trait | 并发原语 | 线性逻辑 | vs Go channel | crossbeam | 流处理 |
-| 零成本抽象 | 类型系统（Type System） | 泛型 / GATs | async/await | 参数性 | vs C++ 模板 | 优化工具链 | Effects |
+| 零成本抽象 | 类型系统（Type System） | 泛型（Generics） / GATs | async/await | 参数性 | vs C++ 模板 | 优化工具链 | Effects |
 | 组件组合 | struct / enum | Trait | 宏（Macro）系统 | 范畴论 | vs Haskell | Tower / Axum | 架构框架 |
 | 分布式一致性 | — | — | Send/Sync | TLA+ / Paxos | vs Erlang | 分布式 crate | 区块链 |
 | 安全边界 | unsafe | FFI | Miri | RustBelt | vs C 安全 | WASI | 零信任 |
@@ -693,7 +693,7 @@ Tokio 的异步（Async）任务切换成本远低于 OS 线程（~100ns vs ~1µ
 <details>
 <summary>✅ 答案与解析</summary>
 
-`trait` 定义行为契约而不绑定具体实现，允许不同模块独立演化。依赖注入通过泛型参数或 `dyn Trait` 实现，无需运行时反射或继承层次。
+`trait` 定义行为契约而不绑定具体实现，允许不同模块（Module）独立演化。依赖注入通过泛型参数或 `dyn Trait` 实现，无需运行时反射或继承层次。
 </details>
 
 ---

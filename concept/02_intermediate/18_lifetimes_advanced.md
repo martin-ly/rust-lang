@@ -43,7 +43,7 @@
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-  - [十、边界测试：高级生命周期的编译错误](#十边界测试高级生命周期的编译错误)
+  - [十、边界测试：高级生命周期（Lifetimes）的编译错误](#十边界测试高级生命周期的编译错误)
     - 10.1 边界测试：自引用（Reference）结构体（Struct）与 `Pin`（编译错误）
     - [10.2 边界测试：生命周期边界中的 `for<'a>` HRTB（编译错误）](#102-边界测试生命周期边界中的-fora-hrtb编译错误)
     - [10.5 边界测试：闭包（Closures）捕获引用（Reference）与 `Fn` trait 的生命周期约束（编译错误）](#105-边界测试闭包捕获引用与-fn-trait-的生命周期约束编译错误)
@@ -53,7 +53,7 @@
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：变型（Variance）方向（理解层）](#测验-1变型variance方向理解层)
     - [测验 2：HRTB 与闭包（Closures）（应用层）](#测验-2hrtb-与闭包应用层)
-    - [测验 3：`Pin` 与自引用（分析层）](#测验-3pin-与自引用分析层)
+    - [测验 3：`Pin` 与自引用（Reference）（分析层）](#测验-3pin-与自引用分析层)
     - [测验 4：生命周期边界中的 `+ 'a`（应用层）](#测验-4生命周期边界中的--a应用层)
     - [测验 5：生命周期省略（Lifetime Elision）规则的例外（分析层）](#测验-5生命周期省略规则的例外分析层)
   - [认知路径](#认知路径)
@@ -357,7 +357,7 @@ fn closure_lifetimes() {
 // └── 只需要一次/消耗数据 → FnOnce
 ```
 
-> **闭包洞察**: 闭包的**三种 Fn trait**对应三种借用（Borrowing）模式——它们是 Rust **所有权（Ownership）系统**在闭包上的自然延伸。
+> **闭包（Closures）洞察**: 闭包的**三种 Fn trait**对应三种借用（Borrowing）模式——它们是 Rust **所有权（Ownership）系统**在闭包上的自然延伸。
 > [来源: [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
 ---

@@ -42,14 +42,14 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 与 Swift 的编译错误对比](#十边界测试rust-与-swift-的编译错误对比)
-    - [10.1 边界测试：Swift 的 ARC 与 Rust 的所有权（编译错误）](#101-边界测试swift-的-arc-与-rust-的所有权编译错误)
+    - [10.1 边界测试：Swift 的 ARC 与 Rust 的所有权（Ownership）（编译错误）](#101-边界测试swift-的-arc-与-rust-的所有权编译错误)
     - [10.2 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）](#102-边界测试swift-的-optional-链与-rust-的--运算符编译错误)
     - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权的循环引用（Reference）差异（运行时（Runtime）内存泄漏）](#103-边界测试swift-的-arc-与-rust-的所有权的循环引用差异运行时内存泄漏)
     - [10.4 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）](#104-边界测试swift-的-optional-链与-rust-的--运算符编译错误)
-    - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权内存管理对比（运行时差异）](#103-边界测试swift-的-arc-与-rust-的所有权内存管理对比运行时差异)
+    - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权内存管理对比（运行时（Runtime）差异）](#103-边界测试swift-的-arc-与-rust-的所有权内存管理对比运行时差异)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 和 Swift 在设计目标上有什么根本不同？（理解层）](#测验-1rust-和-swift-在设计目标上有什么根本不同理解层)
-    - [测验 2：Swift 使用自动引用计数（ARC），Rust 使用所有权系统。两者在内存管理上有什么本质区别？（理解层）](#测验-2swift-使用自动引用计数arcrust-使用所有权系统两者在内存管理上有什么本质区别理解层)
+    - [测验 2：Swift 使用自动引用（Reference）计数（ARC），Rust 使用所有权系统。两者在内存管理上有什么本质区别？（理解层）](#测验-2swift-使用自动引用计数arcrust-使用所有权系统两者在内存管理上有什么本质区别理解层)
     - [测验 3：Swift 的 `Optional<T>` 与 Rust 的 `Option<T>` 在语义和使用上是否相同？（理解层）](#测验-3swift-的-optionalt-与-rust-的-optiont-在语义和使用上是否相同理解层)
     - [测验 4：Swift 的协议（Protocol）与 Rust 的 trait 有什么主要区别？（理解层）](#测验-4swift-的协议protocol与-rust-的-trait-有什么主要区别理解层)
     - [测验 5：在跨平台开发中，Rust 相比 Swift 有什么优势？（理解层）](#测验-5在跨平台开发中rust-相比-swift-有什么优势理解层)
@@ -715,7 +715,7 @@ Rust 原生支持 Windows/Linux/macOS/嵌入式等多种平台，工具链跨平
 | Rust vs Swift：现代系统语言的两种路径 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Rust vs Swift：现代系统语言的两种路径 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> **过渡**: 掌握 Rust vs Swift：现代系统语言的两种路径 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 Rust vs Swift：现代系统语言的两种路径 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 Rust vs Swift：现代系统语言的两种路径 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: Rust vs Swift：现代系统语言的两种路径 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 

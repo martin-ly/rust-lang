@@ -150,7 +150,7 @@ graph BT
 | **库** | **地位** | **形式化根基** | **可组合性** | **可观测性** |
 |:---|:---|:---|:---|:---|
 | **Tracing** | 生态标准 | `Span` 是**调用树的形式化节点**；`#[instrument]` 将函数调用转化为可追踪的层次结构；与 Rust 的 `async` 状态机集成保证上下文不丢失 | `Layer` 模型（类似 Tower）允许日志、指标、追踪的组合；`tracing-subscriber` 支持多后端同时输出 | 本身就是观测基础设施；支持结构化日志、OpenTelemetry 导出 |
-| **OpenTelemetry Rust** | 生产标准 | 遵循 W3C Trace Context 标准；Trace ID / Span ID 的传递受 Rust 类型系统约束（不能随意伪造） | 与 `tracing` 通过 `tracing-opentelemetry` 桥接；与 Axum/Tokio 通过中间件注入 | 完整的分布式追踪、指标、日志三支柱 |
+| **OpenTelemetry Rust** | 生产标准 | 遵循 W3C Trace Context 标准；Trace ID / Span ID 的传递受 Rust 类型系统（Type System）约束（不能随意伪造） | 与 `tracing` 通过 `tracing-opentelemetry` 桥接；与 Axum/Tokio 通过中间件注入 | 完整的分布式追踪、指标、日志三支柱 |
 | **Vector** | 14.3k+ | 数据管道是**函数式转换图**：源 → 转换 → 汇聚，每个节点是纯函数，组合后形成有向无环图 | 配置文件即组合声明；Rust 源码级可扩展 | 自观测 + 数据流背压监控 |
 | **Prometheus (metrics-rs)** | 标准 | 指标类型（Counter/Gauge/Histogram）是**代数数据类型**，保证只能执行合法操作（如 Counter 只增不减） | 通过宏（Macro）自动注册；与 Tokio 运行时指标集成 | 原生 Prometheus 协议导出 |
 
@@ -221,10 +221,10 @@ quadrantChart
 
 **2026 年的黄金组合**（可组合 × 可观测 × 形式化潜力）： [来源: [lib.rs](https://lib.rs/)]
 
-1. **Tokio + Tower + Axum**：异步生态的范畴论骨架，组合性的工业巅峰
+1. **Tokio + Tower + Axum**：异步（Async）生态的范畴论骨架，组合性的工业巅峰
 2. **SQLx + Serde + Prost**：数据层的类型安全同态链
 3. **Tracing + OpenTelemetry + Vector**：可观测性的函数式管道
-4. **Kani + Verus（关键模块）**：超越编译器的功能正确性验证
+4. **Kani + Verus（关键模块（Module））**：超越编译器的功能正确性验证
 
 ---
 
@@ -271,7 +271,7 @@ quadrantChart
 | **sqlx** | 0.8 | 1.74 | 2021 | sqlx-macros, tokio | 编译期查询验证 |
 | **tracing** | 0.1 | 1.63 | 2021 | tracing-core, pin-project | 调用树形式化（span 代数） |
 | **kani** | 0.54 | 1.75 | 2021 | cbmc, bookrunner | 有界模型检测 |
-| **verus** | 0.1 | 1.76 | 2021 | z3, air | SMT + 所有权逻辑 |
+| **verus** | 0.1 | 1.76 | 2021 | z3, air | SMT + 所有权（Ownership）逻辑 |
 | **wasmtime** | 21.0 | 1.76 | 2021 | wasmparser, cranelift | Wasm 规范形式化 |
 
 > **MSRV 策略**：Rust 生态的 MSRV 演进速度约为**每 6-9 个月提升一个 minor 版本**。团队应在 `Cargo.toml` 中显式声明 `rust-version = "1.70"`，并利用 `cargo check --minimum-version` 验证兼容性。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]

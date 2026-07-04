@@ -105,7 +105,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-`impl Trait` 在函数返回位置是匿名的、局部的。TAIT 提供了命名，可在多个函数间共享同一隐藏类型，实现模块化抽象。
+`impl Trait` 在函数返回位置是匿名的、局部的。TAIT 提供了命名，可在多个函数间共享同一隐藏类型，实现模块（Module）化抽象。
 </details>
 
 ---

@@ -81,7 +81,7 @@ mindmap
 
 1. **显式优于隐式**: 所有关系必须标注类型，禁止无标签链接
 2. **可验证性**: 每个三元组必须可追溯至权威来源
-3. **层次一致性**: 实体类型必须匹配其所在的 L0-L7 层级
+3. **层次一致性（Coherence）**: 实体类型必须匹配其所在的 L0-L7 层级
 4. **闭环性**: 互斥关系必须双向声明（A mutexWith B ⟹ B mutexWith A）
 5. **粒度适中**: 关系类型数量控制在 8-12 个，避免过度细分
 
@@ -95,7 +95,7 @@ mindmap
 | **Theory** | `t:` | 形式化理论或数学基础 | `t:LinearLogic`, `t:TypeTheory`, `t:SeparationLogic` |
 | **Model** | `m:` | 概念的具体实现模型 | `m:BorrowChecker`, `m:NLL`, `m:Polonius` |
 | **Property** | `p:` | 概念或类型的属性 | `p:Send`, `p:Sync`, `p:Copy`, `p:Sized` |
-| **Rule** | `r:` | 编译器或类型系统的规则 | `r:AXM`, `r:OrphanRule`, `r:Elision` |
+| **Rule** | `r:` | 编译器或类型系统（Type System）的规则 | `r:AXM`, `r:OrphanRule`, `r:Elision` |
 | **Primitive** | `prim:` | 语言原语 | `prim:fn`, `prim:struct`, `prim:enum` |
 
 ---
@@ -402,5 +402,5 @@ ex:Borrowing rdf:type ex:Concept ;
 <details>
 <summary>✅ 答案与解析</summary>
 
-不能。元数据层提供导航和评估框架，但不能替代对核心概念（所有权、类型系统、并发等）的深入理解与实践。
+不能。元数据层提供导航和评估框架，但不能替代对核心概念（所有权（Ownership）、类型系统、并发等）的深入理解与实践。
 </details>

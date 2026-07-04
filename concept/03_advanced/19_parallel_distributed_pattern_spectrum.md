@@ -63,8 +63,8 @@
     - [10.1 边界测试：`rayon::join` 闭包（Closures）返回值生命周期（Lifetimes）（编译错误）](#101-边界测试rayonjoin-闭包返回值生命周期编译错误)
     - [10.2 边界测试：分布式 Actor 的消息类型未实现 `Serialize`（编译错误）](#102-边界测试分布式-actor-的消息类型未实现-serialize编译错误)
     - [10.3 边界测试：`rayon` 的线程池饥饿与任务粒度（运行时（Runtime）性能下降）](#103-边界测试rayon-的线程池饥饿与任务粒度运行时性能下降)
-    - [10.4 边界测试：rayon 的并行迭代与顺序依赖（运行时逻辑错误）](#104-边界测试rayon-的并行迭代与顺序依赖运行时逻辑错误)
-    - [10.8 边界测试：生命周期参数的不匹配返回](#108-边界测试生命周期参数的不匹配返回)
+    - [10.4 边界测试：rayon 的并行迭代与顺序依赖（运行时（Runtime）逻辑错误）](#104-边界测试rayon-的并行迭代与顺序依赖运行时逻辑错误)
+    - [10.8 边界测试：生命周期（Lifetimes）参数的不匹配返回](#108-边界测试生命周期参数的不匹配返回)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -381,7 +381,7 @@ Gossip 传播模型:
 
 > **[来源: Shapiro et al. 2011 — A Comprehensive Study of Convergent and Commutative Replicated Data Types] · [Rust crdt crate] · [Wikipedia: CRDT](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type)** ✅
 
-CRDT 是**无需同步**即可保证最终一致性的数据结构：
+CRDT 是**无需同步**即可保证最终一致性（Coherence）的数据结构：
 
 ```rust,ignore
 // G-Counter（Grow-only Counter）: 单调递增的分布式计数器
@@ -857,7 +857,7 @@ API 几乎相同（得益于相同的 `Iterator`/`ParallelIterator` 接口），
 
 > 分布式容错 ⟸ 错误传播边界 ⟸ 效果系统追踪
 > 并行计算正确 ⟸ rayon 工作窃取 ⟸ Send 边界
-> **过渡**: 掌握 并行与分布式模式谱系：从线程池到共识算法 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 并行与分布式模式谱系：从线程池到共识算法 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 并行与分布式模式谱系：从线程池到共识算法 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: 并行与分布式模式谱系：从线程池到共识算法 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 

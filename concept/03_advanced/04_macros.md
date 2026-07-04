@@ -69,7 +69,7 @@
 
 ### 1.3 形式化定义
 
-宏对应**编译期元编程**（compile-time metaprogramming），在语法树层面操作：
+宏（Macro）对应**编译期元编程**（compile-time metaprogramming），在语法树层面操作：
 
 ```text
 宏的抽象层次:
@@ -370,7 +370,7 @@ graph TD
 
 ### 5.4 反命题决策树三："过程宏总是类型安全的"
 
-> **命题来源**: 因过程宏生成的是 Rust 代码，直觉上认为"生成的代码自然会通过类型检查"。
+> **命题来源**: 因过程宏（Procedural Macro）生成的是 Rust 代码，直觉上认为"生成的代码自然会通过类型检查"。
 > **形式化反驳**: 过程宏的输入是未类型化的 TokenStream，解析失败或逻辑错误会直接生成非法代码；类型安全是编译器**后续阶段**的保证，而非宏本身的保证。
 
 ```mermaid
@@ -480,7 +480,7 @@ graph TD
 
 ---
 
-<!-- 层级一致性: L3 定理推导 — 带 ⟹ 推理链的一致性矩阵，将形式化命题与工程约束系统关联 -->
+<!-- 层级一致性（Coherence）: L3 定理推导 — 带 ⟹ 推理链的一致性矩阵，将形式化命题与工程约束系统关联 -->
 
 ## 六、定理推理链（Theorem Chain）
 
@@ -987,7 +987,7 @@ macro_rules! assert_impl {
 
 ## 补充章节：进阶主题与工程实践
 
-> **层次一致性标注**：本节内容属于 L3 宏系统的工程实践延伸，涵盖过程宏生态 crate 的使用、声明宏高级语法、编译期计算替代趋势，以及宏系统的演进方向。需在理解 §三形式化根基与 §七示例反例后阅读。
+> **层次一致性标注**：本节内容属于 L3 宏系统的工程实践延伸，涵盖过程宏生态 crate 的使用、声明宏（Declarative Macro）高级语法、编译期计算替代趋势，以及宏系统的演进方向。需在理解 §三形式化根基与 §七示例反例后阅读。
 
 ### 1. `proc_macro2` 与 `syn` / `quote` crate 的最佳实践
 
@@ -1765,7 +1765,7 @@ pub fn inject_instrument(_args: TokenStream, input: TokenStream) -> TokenStream 
 
 #### 5.4 保留原始函数签名的同时注入前置/后置代码
 
-属性宏最常见的工程错误是**丢失原始签名信息**（泛型参数、where 子句、`async`、`const`、`unsafe`、生命周期（Lifetimes）等）。
+属性宏最常见的工程错误是**丢失原始签名信息**（泛型（Generics）参数、where 子句、`async`、`const`、`unsafe`、生命周期（Lifetimes）等）。
 
 **错误示范：硬编码函数签名**
 
@@ -1952,7 +1952,7 @@ macro_rules! trace_fn {
 
 | 问题 | `macro_rules!` 行为 | 期望行为 |
 |:---|:---|:---|
-| 作用域 | 宏一旦被 `macro_export`，在 crate 根可见 | 模块路径控制 |
+| 作用域 | 宏一旦被 `macro_export`，在 crate 根可见 | 模块（Module）路径控制 |
 | 可见性 | 无法使用 `pub(crate)` 等修饰 | `pub` / `pub(crate)` / `pub(super)` |
 | 导入 | 必须通过 `#[macro_use]` 或 `use crate::mac!` | 与模块系统自然集成 |
 | 递归 | 递归深度受限（默认 128） | 更清晰的递归语义 |

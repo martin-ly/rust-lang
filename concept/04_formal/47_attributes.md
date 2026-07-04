@@ -64,7 +64,7 @@ struct Point { x: i32, y: i32 }
 | 诊断 | `#[allow]`, `#[warn]`, `#[deny]`, `#[forbid]`, `#[deprecated]` | 控制 lint 与弃用 |
 | 代码生成 | `#[inline]`, `#[cold]`, `#[no_mangle]`, `#[repr(...)]` | 影响代码生成 |
 | 限制 | `#[allow(...)]`, `#[feature(...)]`（nightly） | 能力开关 |
-| 类型系统 | `#[non_exhaustive]`, `#[must_use]` | 影响类型/接口语义 |
+| 类型系统（Type System） | `#[non_exhaustive]`, `#[must_use]` | 影响类型/接口语义 |
 | 调试器 | `#[debugger_visualizer]` | 调试器可视化 |
 
 ## 三、条件编译属性

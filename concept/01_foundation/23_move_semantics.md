@@ -147,7 +147,7 @@ fn main() {
 
 Rust 的 move（Rust Reference: [Moved and Copied Types](https://doc.rust-lang.org/reference/expressions.html#moved-and-copied-types)）：
 
-- 对于未实现 `Copy` 的类型，赋值 = 所有权转移。
+- 对于未实现 `Copy` 的类型，赋值 = 所有权（Ownership）转移。
 - 转移是 bitwise copy（对于堆分配类型是复制指针/长度/容量）。
 - 源变量在编译期被标记为无效，后续访问被禁止。
 

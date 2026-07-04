@@ -75,7 +75,7 @@
 模式常见于：
 
 - `let` 声明
-- 函数和闭包参数
+- 函数和闭包（Closures）参数
 - `match` 表达式
 - `if let` / `while let` 表达式
 - `for` 表达式
@@ -178,7 +178,7 @@ if let Some(y) = x {
 
 ### Rest pattern (`..`)
 
-匹配零个或多个剩余元素，用于元组、元组结构体、切片（Slice）模式。不可反驳。
+匹配零个或多个剩余元素，用于元组、元组结构体（Struct）、切片（Slice）模式。不可反驳。
 
 ```rust
 match slice {
@@ -202,7 +202,7 @@ match slice {
 
 ### Reference patterns (`&` / `&mut`)
 
-解引用被匹配的指针并借用它们。
+解引用（Reference）被匹配的指针并借用（Borrowing）它们。
 
 ```rust
 let int_reference = &3;
@@ -218,7 +218,7 @@ match int_reference {
 
 ### Slice patterns
 
-匹配固定大小数组或动态大小切片。
+匹配固定大小数组或动态大小切片（Slice）。
 
 ```rust
 let arr = [1, 2, 3];
@@ -230,7 +230,7 @@ match arr {
 
 ### Path patterns
 
-指向常量、枚举变体、结构体（无字段）或关联常量的路径。
+指向常量、枚举（Enum）变体、结构体（无字段）或关联常量的路径。
 
 ### Or-patterns (`|`)
 
@@ -249,7 +249,7 @@ match x {
 
 ## 五、穷尽性检查
 
-Rust 编译器检查 `match` 表达式是否穷尽所有可能的值。不可穷尽的模式匹配会导致编译错误。
+Rust 编译器检查 `match` 表达式是否穷尽所有可能的值。不可穷尽的模式匹配（Pattern Matching）会导致编译错误。
 
 ---
 

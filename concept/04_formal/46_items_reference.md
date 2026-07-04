@@ -43,7 +43,7 @@
 
 ## 一、Item 概述
 
-**Item（条目）** 是 Rust 模块中的声明单元，构成 crate 的静态结构。每个 item 都有名称、可见性和作用域。
+**Item（条目）** 是 Rust 模块（Module）中的声明单元，构成 crate 的静态结构。每个 item 都有名称、可见性和作用域。
 
 主要 item 类别：
 
@@ -54,15 +54,15 @@
 | Use 声明 | `use` | 名称重绑定与重导出 |
 | 函数 | `fn` | 可调用代码单元 |
 | 类型别名 | `type` | 现有类型的同义名 |
-| 结构体 | `struct` | 命名字段复合类型 |
-| 枚举 | `enum` | 带变体的代数数据类型 |
+| 结构体（Struct） | `struct` | 命名字段复合类型 |
+| 枚举（Enum） | `enum` | 带变体的代数数据类型 |
 | 联合体 | `union` | 类似 C union 的内存共享类型 |
 | 常量 | `const` | 编译期常量 |
 | 静态项 | `static` | 全局生命周期（Lifetimes）变量 |
 | Trait | `trait` | 抽象接口 |
 | 实现 | `impl` | trait 实现或固有实现 |
 | 外部块 | `extern` | FFI 声明块 |
-| 泛型参数 | `<T>` | 类型/生命周期/const 参数 |
+| 泛型（Generics）参数 | `<T>` | 类型/生命周期（Lifetimes）/const 参数 |
 | 关联项 | `type` / `const` / `fn` | trait/impl 内部的从属 item |
 
 ## 二、模块与路径

@@ -244,7 +244,7 @@ TROUBLESHOOTING_AND_DEBUGGING_GUIDE.md
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```
+```text
 必读:
 1. 矩阵对比 → 技术选型
 2. 决策树 → 架构决策

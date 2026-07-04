@@ -54,7 +54,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：性能优化的编译错误](#十边界测试性能优化的编译错误)
     - [10.1 边界测试：`unsafe` 性能优化的正确性假设（运行时（Runtime） UB）](#101-边界测试unsafe-性能优化的正确性假设运行时-ub)
-    - [10.2 边界测试：`MaybeUninit` 的未初始化内存（运行时 UB）](#102-边界测试maybeuninit-的未初始化内存运行时-ub)
+    - [10.2 边界测试：`MaybeUninit` 的未初始化内存（运行时（Runtime） UB）](#102-边界测试maybeuninit-的未初始化内存运行时-ub)
     - [10.3 边界测试：`mem::transmute` 的大小不匹配（编译错误）](#103-边界测试memtransmute-的大小不匹配编译错误)
     - [10.4 边界测试：内联汇编（Inline Assembly）的操作数类型约束（编译错误）](#104-边界测试内联汇编的操作数类型约束编译错误)
     - [10.6 边界测试：`#[inline(always)]` 与代码膨胀（编译错误/链接错误）](#106-边界测试inlinealways-与代码膨胀编译错误链接错误)
@@ -119,7 +119,7 @@ Rust 性能优化的核心原则: "先测量，再优化"
   └── 所以: 优先写清晰的代码，只在测量后发现热点时优化
 ```
 
-> **认知功能**: 测量优先原则避免了"过早优化"——Rust 的零成本抽象使代码清晰度和性能不再对立。
+> **认知功能**: 测量优先原则避免了"过早优化"——Rust 的零成本抽象（Zero-Cost Abstraction）使代码清晰度和性能不再对立。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: 在 Rust 中，**清晰的代码往往也是高性能的代码**——因为编译器的优化能力远超手写低级代码。
 > [来源: [Rust Performance Book — Profiling](https://nnethercote.github.io/perf-book/profiling.html)]

@@ -195,7 +195,7 @@ fn rl_fix_borrow_error() {
 
 | 特性 | C/C++ 编译器 | Python 解释器 | Rust 编译器 (`rustc`) |
 |:---|:---|:---|:---|
-| 错误结构化 | 文本诊断，难以解析 | 运行时异常，位置模糊 | **JSON 输出，精确 span** |
+| 错误结构化 | 文本诊断，难以解析 | 运行时（Runtime）异常，位置模糊 | **JSON 输出，精确 span** |
 | 反馈密度 | 编译错误稀疏 | 运行时错误稀疏 | **类型/所有权（Ownership）/生命周期（Lifetimes）错误密集** |
 | 确定性 | 宏（Macro）/条件编译引入不确定性 | 动态类型引入不确定性 | **相同输入 → 相同诊断** |
 | 错误可修复性 | 指针错误难以自动修复 | 类型错误运行时才发现 | **类型系统（Type System）约束缩小搜索空间** |
@@ -476,7 +476,7 @@ Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，
 
 **关键发现**：
 
-- **错误类型敏感性**：RL 模型在修复 `E0382`（use of moved value）和 `E0499`（multiple mutable borrows）上达到 78% 的 Top-1 准确率，但 `E0716`（lifetime mismatch）仅 45%，说明生命周期推理仍是 AI 弱点。[来源: RustRepair-RL, 2024]
+- **错误类型敏感性**：RL 模型在修复 `E0382`（use of moved value）和 `E0499`（multiple mutable borrows）上达到 78% 的 Top-1 准确率，但 `E0716`（lifetime mismatch）仅 45%，说明生命周期（Lifetimes）推理仍是 AI 弱点。[来源: RustRepair-RL, 2024]
 - **多轮修复优于单轮**：允许模型进行 3-5 轮"生成-编译-修复"迭代的 RL 策略，比单轮生成准确率提高 22%。[来源: Error2Learn, MPI-SWS]
 - **小模型亦可**：经过 Rust 语料微调的 7B 参数模型在编译错误修复上接近 GPT-4 水平，说明领域专用化比模型规模更重要。[来源: Compiler-Guided Fine-Tuning, CMU 2025]
 - **Constrained Decoding**：在 LLM 解码过程中集成 rustc 类型检查器，可将生成代码的编译通过率从 34% 提升至 71%，同时减少 40% 的迭代步数。[来源: PLDI 2024/2025 Compiler-Guided Code Generation]
@@ -629,7 +629,7 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 |:---|:---|:---|
 | Neuro-Symbolic Synthesis | 神经网络 + 符号推理（类型检查、SMT）结合 | [MIT CSAIL] |
 | Proof-Carrying Code from LLM | LLM 同时生成代码和形式化证明 | [INRIA/MSR] |
-| Rust-Specific Fine-Tuning | 在 Rust 代码库上继续预训练，强化所有权理解 | [HuggingFace StarCoder2] |
+| Rust-Specific Fine-Tuning | 在 Rust 代码库上继续预训练，强化所有权（Ownership）理解 | [HuggingFace StarCoder2] |
 
 ---
 
@@ -638,7 +638,7 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 | AI 需求 | 驱动的下层变化 | 关联文件 | 约束类型 |
 |:---|:---|:---|:---|
 | AI 生成代码安全 | L3 Unsafe 契约需机器可读 | `03_advanced/03_unsafe.md` | 反向约束 |
-| AI 类型推断（Type Inference）辅助 | L1 类型系统需更易推断 | `01_foundation/04_type_system.md` | 反向约束 |
+| AI 类型推断（Type Inference）辅助 | L1 类型系统（Type System）需更易推断 | `01_foundation/04_type_system.md` | 反向约束 |
 | AI 错误修复 | L2 错误处理（Error Handling）模式需标准化 | `02_intermediate/04_error_handling.md` | 反向约束 |
 | 确定性容器 | L1 所有权需扩展确定性语义 | `01_foundation/01_ownership.md` | 潜在扩展 |
 
@@ -933,7 +933,7 @@ fn main() {
 > 2) 在闭包（Closures）中错误捕获引用（Reference）（非 `'static`）；
 > 3) 借用（Borrowing）冲突（`&mut` 与 `&` 重叠）。
 >
-> AI 的训练数据包含大量 C/Java/Python 代码，这些语言的引用语义与 Rust 不同，导致生成"看起来像正确 Rust"但实际编译错误的代码。
+> AI 的训练数据包含大量 C/Java/Python 代码，这些语言的引用（Reference）语义与 Rust 不同，导致生成"看起来像正确 Rust"但实际编译错误的代码。
 > 缓解：
 >
 > 1) **始终编译 AI 生成的代码**；
@@ -982,7 +982,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-推理需要低延迟、高吞吐、确定性资源使用。Rust 的无 GC 特性避免了 Python 服务的 GC 停顿，内存安全防止了处理用户输入时的安全漏洞。
+推理需要低延迟、高吞吐、确定性资源使用。Rust 的无 GC 特性避免了 Python 服务的 GC 停顿，内存安全（Memory Safety）防止了处理用户输入时的安全漏洞。
 </details>
 
 ---

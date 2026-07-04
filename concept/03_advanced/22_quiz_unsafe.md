@@ -224,7 +224,7 @@ let num = 5;
 let r1 = &num as *const i32;  // 从有效引用创建
 ```
 
-**知识点**：原始指针的主要用途是与 C 代码交互（FFI）和构建安全抽象（如 `Vec`、`Box` 的内部实现）。[→ Unsafe 详解](03_unsafe.md)
+**知识点**：原始指针（Raw Pointer）的主要用途是与 C 代码交互（FFI）和构建安全抽象（如 `Vec`、`Box` 的内部实现）。[→ Unsafe 详解](03_unsafe.md)
 
 </details>
 

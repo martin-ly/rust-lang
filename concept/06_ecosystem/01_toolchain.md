@@ -228,7 +228,7 @@ graph LR
 | `cargo audit` 扫描漏洞 | RustSec Advisory 数据库同步 | ⟹ 供应链安全预警 | `cargo-audit` | 0-day / 未报告漏洞 |
 | 增量编译缓存命中 | 依赖图与源码未变更 | ⟹ 缩短反馈循环 | `rustc` / `sccache` | 缓存失效 / 全量重建 |
 
-> **层次一致性**：上表将 L6 工具链行为映射到 L1-L3 的具体保证；失效条件揭示"工具链不是银弹"的工程边界。
+> **层次一致性（Coherence）**：上表将 L6 工具链行为映射到 L1-L3 的具体保证；失效条件揭示"工具链不是银弹"的工程边界。
 
 ### 2.6 rustup 1.29.0 工具链管理更新（2026-03-05）
 >
@@ -895,7 +895,7 @@ mod linux_parallel_impl;
 | `alloc` | 需显式引入 | `Vec`、`String`、`Box`、Rc/Arc | `extern crate alloc;` + `alloc_error_handler`（nightly） |
 | `std` | 不可用 | 文件、线程、网络、进程 | — |
 | Panic 处理 | 必须自定义 | 无默认 panic handler | `#[panic_handler]` |
-| 启动运行时 | 无 `main` | 需自定义入口或链接脚本 | `#[no_main]` |
+| 启动运行时（Runtime） | 无 `main` | 需自定义入口或链接脚本 | `#[no_main]` |
 
 ```rust,ignore
 // 嵌入式裸机目标示例（thumbv7em-none-eabihf）
@@ -1187,7 +1187,7 @@ flowchart LR
 | 类型检查 | `typeck` | HM 推断 + Trait 求解 |
 | 借用（Borrowing）检查 | `borrowck` | NLL / Polonius |
 | MIR 构建 | `mir_built` | 降级 AST 到 MIR |
-| 单态化（Monomorphization） | `collect_and_partition_mono_items` | 泛型实例化 |
+| 单态化（Monomorphization） | `collect_and_partition_mono_items` | 泛型（Generics）实例化 |
 | LLVM 生成 | `codegen_crate` | 生成 LLVM IR |
 
 > **来源**: [rustc Dev Guide — The Rustc Driver and Query System](https://rustc-dev-guide.rust-lang.org/rustc-driver/intro.html) · 可信度: ✅
@@ -1406,7 +1406,7 @@ graph TD
 
 | 工具链组件 | 实现的上层概念 | 形式化支撑 | 对应文件 |
 |:---|:---|:---|:---|
-| `rustc` 借用检查器 | L1 所有权/借用（Borrowing）/生命周期（Lifetimes） | L4 线性逻辑 + 区域类型 | `01_foundation/`, `04_formal/` |
+| `rustc` 借用检查器 | L1 所有权（Ownership）/借用（Borrowing）/生命周期（Lifetimes） | L4 线性逻辑 + 区域类型 | `01_foundation/`, `04_formal/` |
 | `rustc` 类型检查 | L1 类型系统（Type System） + L2 泛型（Generics） | L4 HM 推断 + System F | `04_formal/02_type_theory.md` |
 | Clippy lint | L1-L3 最佳实践 | —（工程约定） | `01_foundation/` - `03_advanced/` |
 | Miri | L3 Unsafe 检测 | L4 别名模型 (Stacked/Tree) | `03_advanced/03_unsafe.md` |

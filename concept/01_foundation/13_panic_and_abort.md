@@ -46,7 +46,7 @@
     - [10.1 边界测试：`catch_unwind` 捕获非 `UnwindSafe` 类型（编译错误）](#101-边界测试catch_unwind-捕获非-unwindsafe-类型编译错误)
     - [10.2 边界测试：在 `Drop` 中 panic 导致双重 panic（运行时（Runtime） abort）](#102-边界测试在-drop-中-panic-导致双重-panic运行时-abort)
     - [10.3 边界测试：`panic=abort` 与 `catch_unwind` 的冲突（编译错误/链接错误）](#103-边界测试panicabort-与-catch_unwind-的冲突编译错误链接错误)
-    - [10.4 边界测试：双重 panic（Panic）导致 abort（运行时行为）](#104-边界测试双重-panic导致-abort运行时行为)
+    - [10.4 边界测试：双重 panic（Panic）导致 abort（运行时（Runtime）行为）](#104-边界测试双重-panic导致-abort运行时行为)
     - [10.5 边界测试：`panic=abort` 与 `Drop` 的补偿动作缺失（运行时资源泄漏）](#105-边界测试panicabort-与-drop-的补偿动作缺失运行时资源泄漏)
     - [10.6 边界测试：`catch_unwind` 与 FFI 的不可恢复性（运行时 UB）](#106-边界测试catch_unwind-与-ffi-的不可恢复性运行时-ub)
     - [10.7 边界测试：`core::intrinsics::abort` 与 `std::process::abort` 的差异（运行时行为）](#107-边界测试coreintrinsicsabort-与-stdprocessabort-的差异运行时行为)
@@ -895,7 +895,7 @@ catch_unwind(AssertUnwindSafe(|| {
 <details>
 <summary>✅ 答案</summary>
 
-**A. 闭包修改了外部变量，可能留下不一致状态**。
+**A. 闭包（Closures）修改了外部变量，可能留下不一致状态**。
 
 `catch_unwind` 要求捕获的闭包实现 `UnwindSafe` —— 即在 panic 后不会留下破损的不变量。修改外部可变引用（Mutable Reference）（`&mut x`）的闭包**不是** `UnwindSafe`，因为 panic 可能在 `x += 1` 之后发生，导致外部状态部分更新。
 

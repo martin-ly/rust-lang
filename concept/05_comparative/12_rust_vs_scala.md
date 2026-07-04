@@ -236,7 +236,7 @@
   └── 两者推断能力都强
 ```
 
-> **推断洞察**: **Scala 的类型推断更学术化，Rust 的类型推断更工程化**——两者都减少样板代码。
+> **推断洞察**: **Scala 的类型推断（Type Inference）更学术化，Rust 的类型推断更工程化**——两者都减少样板代码。
 > [来源: [Scala Type Inference](https://docs.scala-lang.org/scala3/book/types-inferred.html)]
 
 ---
@@ -746,7 +746,7 @@ Rust 要求函数签名通常显式标注类型（生命周期（Lifetimes）和
 
 ## 认知路径
 
-> **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust vs Scala：类型系统的两种哲学** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust vs Scala：类型系统（Type System）的两种哲学** 核心原理，通向 L2 进阶模式与 L3 工程实践。
 
 ### 核心推理链
 

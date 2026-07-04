@@ -59,7 +59,7 @@
   - [导航：下一步去哪？](#导航下一步去哪)
   - [嵌入式测验](#嵌入式测验)
     - [测验 1：并发模式识别（记忆层）](#测验-1并发模式识别记忆层)
-    - [测验 2：Arc 引用计数（理解层）](#测验-2arc-引用计数理解层)
+    - [测验 2：Arc 引用（Reference）计数（理解层）](#测验-2arc-引用计数理解层)
     - [测验 3：工作窃取模式（应用层）](#测验-3工作窃取模式应用层)
     - [测验 4：死锁预防（分析层）](#测验-4死锁预防分析层)
 
@@ -150,7 +150,7 @@ fn spawn_thread<T: Send + 'static>(data: T) {
 }
 ```
 
-> **Send/Sync 洞察**: `Send` 和 `Sync` 是 Rust **并发安全的类型系统（Type System）根基**——它们将线程安全从文档约定提升为**编译期可验证的属性**。
+> **Send/Sync 洞察**: `Send` 和 `Sync` 是 Rust **并发安全（Concurrency Safety）的类型系统（Type System）根基**——它们将线程安全从文档约定提升为**编译期可验证的属性**。
 > [来源: [std::marker::Send](https://doc.rust-lang.org/std/marker/trait.Send.html)]
 
 ---
@@ -196,7 +196,7 @@ fn spawn_thread<T: Send + 'static>(data: T) {
     });
 ```
 
-> **模型洞察**: Rust 的**所有权系统**使两种模型都可以**安全地实现**——消息传递自动转移所有权，共享状态通过类型系统（Type System）保证互斥。
+> **模型洞察**: Rust 的**所有权（Ownership）系统**使两种模型都可以**安全地实现**——消息传递自动转移所有权，共享状态通过类型系统（Type System）保证互斥。
 > [来源: [Rust By Example — Concurrency](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html)]
 
 ---
@@ -979,7 +979,7 @@ fn quicksort(arr: &mut [i32]) {
 ```
 
 - A. `join` 自动选择更快的分支先执行
-- B. `join` 将两个闭包分发到不同线程，利用工作窃取调度器平衡负载
+- B. `join` 将两个闭包（Closures）分发到不同线程，利用工作窃取调度器平衡负载
 - C. `join` 保证左分支总是先于右分支完成
 - D. `join` 只是语法糖，等价于顺序执行两个闭包
 

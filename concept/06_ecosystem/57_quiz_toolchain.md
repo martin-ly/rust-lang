@@ -255,7 +255,7 @@ error: Undefined Behavior: attempting to write to ... but tag ... does not have 
 - `let ptr2 = &mut x as *mut u32`：再次创建独占引用（Reference） `&mut x`，**第一个引用失效**
 - 在 Tree Borrows 模型中，`ptr1` 的写权限在 `ptr2` 创建时被撤销
 
-**修复方案**——使用 `addr_of_mut!`（不创建中间引用）：
+**修复方案**——使用 `addr_of_mut!`（不创建中间引用（Reference））：
 
 ```rust
 use std::ptr::addr_of_mut;

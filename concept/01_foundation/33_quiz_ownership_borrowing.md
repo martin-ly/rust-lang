@@ -328,7 +328,7 @@ fn longest(x: &str, y: &str) -> &str {
 
 **错误信息**：`missing lifetime specifier`
 
-**解析**：编译器无法确定返回的引用是 `x` 的还是 `y` 的。需要显式标注生命周期（Lifetimes）：
+**解析**：编译器无法确定返回的引用（Reference）是 `x` 的还是 `y` 的。需要显式标注生命周期（Lifetimes）：
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -338,7 +338,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 **语义**：返回的引用生命周期（Lifetimes）至少与 `x` 和 `y` 中**较短的那个**一样长。
 
-**知识点**：生命周期（Lifetimes）标注不改变运行时（Runtime）代码，仅向编译器提供**借用关系约束**。→ 生命周期语法
+**知识点**：生命周期（Lifetimes）标注不改变运行时（Runtime）代码，仅向编译器提供**借用（Borrowing）关系约束**。→ 生命周期语法
 
 </details>
 
@@ -384,7 +384,7 @@ fn main() {
 }
 ```
 
-**知识点**：生命周期约束遵循"**最小公约数**"原则——返回引用的有效期不超过任何输入引用的有效期。[→ 生命周期详解](03_lifetimes.md)
+**知识点**：生命周期（Lifetimes）约束遵循"**最小公约数**"原则——返回引用的有效期不超过任何输入引用的有效期。[→ 生命周期详解](03_lifetimes.md)
 
 </details>
 
@@ -462,7 +462,7 @@ shared shared
 
 **限制**：`Rc` 不提供内部可变性。如需修改共享数据，需配合 `RefCell<T>` 或 `Mutex<T>`。
 
-**知识点**：`Rc` 是 Rust 所有权系统的**补充**而非替代——它通过运行时（Runtime）引用计数允许有限的共享所有权，代价是只能用于单线程场景。→ 智能指针（Smart Pointer）详解
+**知识点**：`Rc` 是 Rust 所有权（Ownership）系统的**补充**而非替代——它通过运行时（Runtime）引用计数允许有限的共享所有权，代价是只能用于单线程场景。→ 智能指针（Smart Pointer）详解
 
 </details>
 

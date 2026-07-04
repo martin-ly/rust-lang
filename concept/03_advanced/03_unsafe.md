@@ -117,7 +117,7 @@
       - [反例：Miri 无法检测的逻辑错误](#反例miri-无法检测的逻辑错误)
       - [Miri 常用标志详解](#miri-常用标志详解)
       - [Miri 与 Valgrind / ASan / TSan 的对比](#miri-与-valgrind--asan--tsan-的对比)
-    - [补充章节：`std::ptr::read/write` vs `*ptr` 解引用的语义差异](#补充章节stdptrreadwrite-vs-ptr-解引用的语义差异)
+    - [补充章节：`std::ptr::read/write` vs `*ptr` 解引用（Reference）的语义差异](#补充章节stdptrreadwrite-vs-ptr-解引用的语义差异)
       - [语义精确定义](#语义精确定义)
         - [`std::ptr::read<T>(src: *const T) -> T`](#stdptrreadtsrc-const-t---t)
           - [Rust 1.96 `valid for read/write` 语义变更详解](#rust-196-valid-for-readwrite-语义变更详解)
@@ -179,7 +179,7 @@
   - [十六、边界测试：Unsafe 代码的编译错误与运行时（Runtime）灾难](#十六边界测试unsafe-代码的编译错误与运行时灾难)
     - [16.1 边界测试：裸指针解引用前的空检查（编译错误）](#161-边界测试裸指针解引用前的空检查编译错误)
     - [16.2 边界测试：将 \&T 转换为 \&mut T（编译错误）](#162-边界测试将-t-转换为-mut-t编译错误)
-    - [16.3 边界测试：无效 UTF-8 的 str::from\_utf8\_unchecked（运行时 UB）](#163-边界测试无效-utf-8-的-strfrom_utf8_unchecked运行时-ub)
+    - [16.3 边界测试：无效 UTF-8 的 str::from\_utf8\_unchecked（运行时（Runtime） UB）](#163-边界测试无效-utf-8-的-strfrom_utf8_unchecked运行时-ub)
     - [16.4 边界测试：通过 `&T` 获取 `&mut T`（编译错误）](#164-边界测试通过-t-获取-mut-t编译错误)
     - [16.5 边界测试：裸指针算术越界（运行时 UB）](#165-边界测试裸指针算术越界运行时-ub)
     - [16.6 边界测试：`std::mem::transmute` 类型大小不匹配（编译错误）](#166-边界测试stdmemtransmute-类型大小不匹配编译错误)
@@ -301,7 +301,7 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 
 | **UB 子类** | **精确条件** | **Miri 检测** | **典型触发代码** |
 |:---|:---|:---:|:---|
-| **无效枚举值** | discriminant 不在枚举声明的变体范围内 | ✅ | `mem::transmute::<u8, Option<bool>>(3)` |
+| **无效枚举（Enum）值** | discriminant 不在枚举声明的变体范围内 | ✅ | `mem::transmute::<u8, Option<bool>>(3)` |
 | **类型混淆（Type punning）** | 通过 `union` 读取非活跃变体；或 `transmute` 到不兼容布局 | ✅ | `union.u32` 写入后读 `union.f32` |
 | **无效布尔值** | bool 的内存表示不是 0x00 或 0x01 | ✅ | `mem::transmute::<u8, bool>(2)` |
 | **无效字符值** | char 的内存表示不是合法 Unicode scalar value | ✅ | `mem::transmute::<u32, char>(0xD800)` |
@@ -351,7 +351,7 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 | **角色** | **责任** | **证明对象** | **工具支持** |
 |:---|:---|:---|:---|
 | **unsafe 实现者** | 保证 unsafe 块内部不触发 UB | 局部代码正确性 | Miri、Kani、审阅 |
-| **safe 接口设计者** | 保证 safe API 不泄露 UB | 所有调用路径安全 | 类型系统、测试 |
+| **safe 接口设计者** | 保证 safe API 不泄露 UB | 所有调用路径安全 | 类型系统（Type System）、测试 |
 | **safe 用户** | 正确使用 safe API | 无需证明（编译器保证） | 编译器 |
 | **unsafe trait 实现者** | 满足 trait 的 unsafe 契约 | 全局语义约束 | 文档、审阅 |
 
@@ -361,7 +361,7 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 
 ## 三、形式化理论根基（Formal Foundation）
 
-> 概念分类之后，需要从类型系统视角理解 unsafe 的本质。unsafe 不是"关闭编译器"，而是在封闭证明系统中引入新的公理，并由程序员人工保证其一致性。
+> 概念分类之后，需要从类型系统视角理解 unsafe 的本质。unsafe 不是"关闭编译器"，而是在封闭证明系统中引入新的公理，并由程序员人工保证其一致性（Coherence）。
 > **[Rustonomicon: The Safe/Unsafe Boundary](https://doc.rust-lang.org/nomicon/)** Safe Rust 是封闭的证明系统；unsafe 是显式引入新公理并人工保证一致性的扩展。类比：Safe Rust = 欧氏几何，Unsafe = 非欧几何。💡 原创分析
 > **来源: [Rustonomicon: The Safe/Unsafe Boundary](https://doc.rust-lang.org/nomicon/)** Unsafe 不是关闭检查器，而是引入人工验证的公理。
 
@@ -1368,7 +1368,7 @@ pub struct TcpHeader {
 > **权威来源**: [Miri Book](https://rustc-dev-guide.rust-lang.org/miri.html) · [Rust Blog: Miri is available on CI](https://github.com/rust-lang/miri)
 > **层级标注**: `L3::动态验证` → `L1::借用` 别名违规检测 · `L4::RustBelt` 操作语义动态近似
 
-**定义**：Miri（Memory Inspector for Rust）是 Rust 编译器 MIR（Mid-level IR）的解释执行器。它不生成机器码，而是在 MIR 层面逐步解释程序，同时维护精确的内存状态（包括初始化状态、别名权限栈/树、分配生命周期），从而动态检测未定义行为（UB）。
+**定义**：Miri（Memory Inspector for Rust）是 Rust 编译器 MIR（Mid-level IR）的解释执行器。它不生成机器码，而是在 MIR 层面逐步解释程序，同时维护精确的内存状态（包括初始化状态、别名权限栈/树、分配生命周期（Lifetimes）），从而动态检测未定义行为（UB）。
 
 > **[Miri Documentation](https://github.com/rust-lang/miri)** Miri is an interpreter for Rust's mid-level intermediate representation (MIR). It can detect many classes of undefined behavior, including memory errors, invalid use of uninitialized data, and violation of aliasing rules. ✅ 已验证
 
@@ -1411,7 +1411,7 @@ cargo miri run
 | **所有可能的 UB** | 停机问题不可解；Miri 仅覆盖已定义的操作语义 | 形式化验证（Kani、RustBelt） |
 | **逻辑错误** | 功能正确性超出 Miri 范围 | 单元测试、属性测试（proptest） |
 | **FFI 边界错误** | 外部代码不透明，Miri 无法进入 C 函数内部 | 人工审查、Valgrind/ASan |
-| **硬件相关行为** | 内联汇编、SIMD、内存映射 I/O 不在 MIR 层面 | 真机测试、QEMU |
+| **硬件相关行为** | 内联汇编（Inline Assembly）、SIMD、内存映射 I/O 不在 MIR 层面 | 真机测试、QEMU |
 | **活性问题（死锁/饥饿）** | Miri 检测安全性（safety），不检测活性（liveness） | `loom` 模型检查 |
 | **性能回归** | Miri 解释执行比原生慢 100x~1000x | 基准测试（criterion） |
 
@@ -1605,7 +1605,7 @@ unsafe { std::ptr::read(p.as_ptr()); }
 
 - **读取上下文**（`let x = *ptr`）：等价于从该位置 move 出一个值。若 `T` 非 `Copy`，原位置**逻辑上失效**（但编译器不追踪裸指针的失效状态）。
 - **写入上下文**（`*ptr = val`）：编译器会生成**先 drop 旧值、再写入新值**的代码序列。若目标位置未初始化，drop 旧值 = 读取未初始化内存 = **UB**。
-- **受借用检查器保护的程度**：`unsafe` 块内的裸指针解引用**完全绕过**借用检查器。编译器不验证 `ptr` 的生命周期、对齐或有效性。
+- **受借用（Borrowing）检查器保护的程度**：`unsafe` 块内的裸指针解引用**完全绕过**借用检查器。编译器不验证 `ptr` 的生命周期、对齐或有效性。
 
 > **来源: [TRPL Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)** 裸指针解引用是 `unsafe` 的五大超能力之一，它关闭了编译器对生命周期和别名的自动追踪。✅ 已验证
 
@@ -1618,7 +1618,7 @@ unsafe { std::ptr::read(p.as_ptr()); }
 | **底层操作** | bitwise copy（`memcpy`） | bitwise overwrite（`memcpy`） | move / copy（视 `T`） | drop + move / copy |
 | **是否调用 `Clone`** | ❌ 否 | ❌ 否 | ❌ 否（move）/ ✅ 是（`Copy`） | ❌ 否（move）/ ✅ 是（`Copy`） |
 | **是否触发 `Drop`** | ❌ 否 | ❌ **否** | ❌ 否（仅读取） | ✅ **是**（先 drop 旧值） |
-| **是否转移所有权** | 否（复制后两位置同时"有效"） | 是（`src` move 入 `dst`） | 是（原位置失效） | 是（`val` move 入） |
+| **是否转移所有权（Ownership）** | 否（复制后两位置同时"有效"） | 是（`src` move 入 `dst`） | 是（原位置失效） | 是（`val` move 入） |
 | **是否需要 `unsafe`** | ✅ 是（函数本身 unsafe） | ✅ 是（函数本身 unsafe） | ✅ 是（裸指针解引用） | ✅ 是（裸指针解引用） |
 | **是否受借用检查器保护** | ❌ 否 | ❌ 否 | ❌ 否 | ❌ 否 |
 | **对未初始化内存的安全性** | ⚠️ 可读，但读取后原+新值不能双 drop | ✅ **安全**（唯一正确方式） | ⚠️ 读取 = UB | ❌ **UB**（drop 未初始化值） |
@@ -2983,7 +2983,7 @@ fn inspect(ring: &IoUring) {
 
 **形式模型意义**：
 
-| 维度 | 当前（结构体级） | 目标（字段级） |
+| 维度 | 当前（结构体（Struct）级） | 目标（字段级） |
 |:---|:---|:---|
 | **安全契约粒度** | 整个类型 | 单个字段 |
 | **API 设计** | 结构体构造函数必须 unsafe | 仅 unsafe 字段的 setter/getter 需 unsafe |

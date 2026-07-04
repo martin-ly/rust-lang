@@ -50,7 +50,7 @@
 - **大小（size）**: 类型在内存中占用的字节数。
 - **对齐（alignment）**: 类型必须存放的内存地址的倍数。
 - **字段相对偏移（offsets）**: 复合类型中各字段相对于起始地址的位置。
-- **枚举 discriminant 布局**: 枚举如何存储和解释其判别值。
+- **枚举（Enum） discriminant 布局**: 枚举如何存储和解释其判别值。
 
 Rust 只保证稳定的布局规则，具体细节可能随编译版本变化。
 
@@ -73,7 +73,7 @@ Rust 允许通过属性控制类型的内存布局。
 
 使类型布局与 C 兼容，便于 FFI：
 
-- 结构体字段按声明顺序排列。
+- 结构体（Struct）字段按声明顺序排列。
 - 枚举 discriminant 类型默认为 `isize`，但可指定（如 `#[repr(C, u8)]`）。
 
 ```rust
@@ -127,7 +127,7 @@ struct AlignedBuffer([u8; 64]);
 - 只包含 ZST 字段的结构体
 - `PhantomData<T>`
 
-ZST 不占用运行时内存，但参与类型系统（Type System）和泛型（Generics）单态化（Monomorphization）。
+ZST 不占用运行时（Runtime）内存，但参与类型系统（Type System）和泛型（Generics）单态化（Monomorphization）。
 
 ---
 

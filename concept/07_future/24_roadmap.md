@@ -73,8 +73,8 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 路线图的编译错误](#十边界测试rust-路线图的编译错误)
     - [10.1 边界测试：`never_type` (`!`) 的降级与类型推断（Type Inference）（编译错误）](#101-边界测试never_type--的降级与类型推断编译错误)
-    - [10.2 边界测试：GAT（泛型关联类型）的递归约束（编译错误）](#102-边界测试gat泛型关联类型的递归约束编译错误)
-    - [10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断限制（编译错误）](#106-边界测试impl-trait-在-let-绑定中的类型推断限制编译错误)
+    - [10.2 边界测试：GAT（泛型（Generics）关联类型）的递归约束（编译错误）](#102-边界测试gat泛型关联类型的递归约束编译错误)
+    - [10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断（Type Inference）限制（编译错误）](#106-边界测试impl-trait-在-let-绑定中的类型推断限制编译错误)
     - [10.5 边界测试：语言特性稳定化的时间预估偏差（工程规划风险）](#105-边界测试语言特性稳定化的时间预估偏差工程规划风险)
     - [10.3 边界测试：nightly 特性在 production 中的不可预测性（编译中断）](#103-边界测试nightly-特性在-production-中的不可预测性编译中断)
     - [补充定理链](#补充定理链)
@@ -369,7 +369,7 @@ trait AsyncProcessor {
 
 **2027 目标**: 完整 `dyn AsyncProcessor` 支持 + Send-bound 控制。
 
-> **技术要点**: `async fn in trait` 的稳定化通过 **RPITIT（Return Position Impl Trait In Traits）** 实现。`dyn` 支持需要解决**对象安全（object safety）**与**异步状态机大小**问题。
+> **技术要点**: `async fn in trait` 的稳定化通过 **RPITIT（Return Position Impl Trait In Traits）** 实现。`dyn` 支持需要解决**对象安全（object safety）**与**异步（Async）状态机大小**问题。
 > [来源: [RFC 3185](https://github.com/rust-lang/rfcs/pull/3185)] · [来源: [Rust Blog — Async Fn in Traits](https://blog.rust-lang.org/)]
 
 ---
@@ -509,7 +509,7 @@ pub enum Event { Click, KeyPress }
 // 尚处于早期设计讨论阶段，无 RFC
 ```
 
-**2027 预期**: `#[non_exhaustive]` 仍然是官方推荐路径。真正的开放枚举需要解决**穷尽性检查**与**零成本抽象（Zero-Cost Abstraction）**的根本张力。
+**2027 预期**: `#[non_exhaustive]` 仍然是官方推荐路径。真正的开放枚举（Enum）需要解决**穷尽性检查**与**零成本抽象（Zero-Cost Abstraction）**的根本张力。
 
 > **来源**: [RFC 2008](https://github.com/rust-lang/rfcs/pull/2008) · [来源: [Open Enums Discussion](https://internals.rust-lang.org/)]
 
@@ -517,7 +517,7 @@ pub enum Event { Click, KeyPress }
 
 ### 4.3 Effects System 与关键字泛型
 
-Effects System（效果系统）是 Rust 远期最具雄心的类型系统扩展：
+Effects System（效果系统）是 Rust 远期最具雄心的类型系统（Type System）扩展：
 
 ```text
 效果系统愿景:
@@ -855,10 +855,10 @@ impl Iterable for Vec<i32> {
 
 > **修正**:
 >
-> GAT（Generic Associated Types，Rust 1.65 稳定）允许关联类型带有自己的泛型参数（通常是生命周期），解决了返回"借用（Borrowing）迭代器（Iterator）"等长期问题。
+> GAT（Generic Associated Types，Rust 1.65 稳定）允许关联类型带有自己的泛型参数（通常是生命周期（Lifetimes）），解决了返回"借用（Borrowing）迭代器（Iterator）"等长期问题。
 > 但 GAT 的使用引入了新的复杂度：**递归约束**和**高阶 trait bound（HRTB）**。
 > 上述代码中，`fn iter` 的实现递归调用自身（无限循环），但编译错误可能首先由生命周期约束引起——`Self::Iter<'a>` 的定义要求 `'a` 与 `self` 的借用（Borrowing）生命周期匹配。
-> GAT 的正确使用模式：标准库中的 `LendingIterator`（实验性）、自定义集合的借用视图、类型状态机（type-state machines）。
+> GAT 的正确使用模式：标准库中的 `LendingIterator`（实验性）、自定义集合的借用（Borrowing）视图、类型状态机（type-state machines）。
 > Rust 的 GAT 设计与 Haskell 的 type families、C++ 的模板模板参数类似，但集成在 trait system 中，保持零成本抽象（Zero-Cost Abstraction）。
 > [来源: [Rust RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]

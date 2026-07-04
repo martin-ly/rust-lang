@@ -105,7 +105,7 @@ const fn compute<T: Add>(a: T, b: T) -> T {
 
 > **核心痛点**:
 >
-> 1. `const fn` 的泛型参数只能使用**内建操作**（`+`, `-`, `*` 等），无法使用**抽象 Trait 接口**
+> 1. `const fn` 的泛型（Generics）参数只能使用**内建操作**（`+`, `-`, `*` 等），无法使用**抽象 Trait 接口**
 > 2. 库作者需要为 `const fn` 和运行时（Runtime）分别提供两套 API
 > 3. 阻碍了编译期计算（CTFE, Compile-Time Function Evaluation）的表达能力
 > [来源: [Rust RFC 2632](https://github.com/rust-lang/rfcs/pull/2632)]
@@ -404,7 +404,7 @@ fn main() {
 
 > **修正**:
 > 在 const 上下文中（`const` 变量、`static` 变量、数组长度、`match` 分支守卫），只能调用 `const fn`。
-> 普通 `fn` 可能包含堆分配、I/O、panic 等运行时才允许的操作，因此不能在编译期执行。
+> 普通 `fn` 可能包含堆分配、I/O、panic 等运行时（Runtime）才允许的操作，因此不能在编译期执行。
 > `const trait impl`（[RFC 2632](https://github.com/rust-lang/rfcs/pull/2632)）扩展了这一能力：允许 trait 方法在 const 上下文中调用，但要求 trait 和实现都标记为 `const`。
 > 例如 `const impl Add for Point` 允许 `const SUM: Point = A + B;`。
 > 这是 Rust"编译期计算"能力的关键扩展，使自定义类型在 const 上下文中的表现力接近内置类型。
@@ -451,7 +451,7 @@ const fn sum<T: ~const Add>(a: T, b: T) -> T {
 
 > **修正**:
 > `~const Trait`（"maybe const"）bound 是 `const trait impl` 的关键语法：它表示"此泛型参数可以是 const 或非 const 实现，但在 const 上下文中要求 const"。
-> 这增加了类型系统的维度：trait bound 现在需考虑"const 性"（constness）。
+> 这增加了类型系统（Type System）的维度：trait bound 现在需考虑"const 性"（constness）。
 > 设计挑战：
 >
 > 1) 向后兼容性：现有代码无需修改；
