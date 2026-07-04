@@ -65,7 +65,7 @@
     - [10.1 边界测试：const 上下文中调用非 const 方法（编译错误）](#101-边界测试const-上下文中调用非-const-方法编译错误)
     - [10.2 边界测试：trait bound 的 const 兼容性（编译错误）](#102-边界测试trait-bound-的-const-兼容性编译错误)
     - [10.6 边界测试：`~const` bound 与默认实现的交互（编译错误）](#106-边界测试const-bound-与默认实现的交互编译错误)
-    - [10.5 边界测试：const trait 的默认实现与泛型约束（编译错误）](#105-边界测试const-trait-的默认实现与泛型约束编译错误)
+    - [10.5 边界测试：const trait 的默认实现与泛型（Generics）约束（编译错误）](#105-边界测试const-trait-的默认实现与泛型约束编译错误)
     - [10.3 边界测试：`~const` 边界的语法演进与兼容性（编译错误）](#103-边界测试const-边界的语法演进与兼容性编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -577,7 +577,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-它是 `const trait` 的边界标记，表示"这个泛型参数可以是 const 或非 const 的 trait 实现"。允许函数同时服务于 const 和运行时上下文。
+它是 `const trait` 的边界标记，表示"这个泛型参数可以是 const 或非 const 的 trait 实现"。允许函数同时服务于 const 和运行时（Runtime）上下文。
 </details>
 
 ---

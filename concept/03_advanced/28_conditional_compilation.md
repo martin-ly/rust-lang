@@ -269,6 +269,6 @@ Cargo 中通过 `RUSTFLAGS` 或在 `.cargo/config.toml` 中设置。
 | 概念 | 关系 |
 |:---|:---|
 | [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) | `cfg` 是属性的重要用例 |
-| [Linkage](27_linkage.md) | `target_feature = "crt-static"` 影响 C 运行时链接 |
+| [Linkage](27_linkage.md) | `target_feature = "crt-static"` 影响 C 运行时（Runtime）链接 |
 | [FFI Advanced](09_ffi_advanced.md) | 平台相关 FFI 代码常用 `cfg` 条件编译 |
 | [Cargo Features](../06_ecosystem/64_cargo_manifest_reference.md) | `feature = "..."` 是 Cargo 传递给 rustc 的自定义 cfg |

@@ -64,8 +64,8 @@
 | RFC | 主题 | 项目文档 | 状态 |
 |-----|------|----------|------|
 | [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) — async/await | 异步语法 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ |
-| [RFC 2418](https://rust-lang.github.io/rfcs/2394-async_await.html) / [RFC 3185](https://rust-lang.github.io/rfcs/3185-async-drop.html) — Async Drop | 异步析构 | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | ✅ |
-| [RFC 2645](https://rust-lang.github.io/rfcs/2645-transparent-enums.html) | 不透明类型 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 🔄 |
+| [RFC 2418](https://rust-lang.github.io/rfcs/2394-async_await.html) / [RFC 3185 [已失效]]<!-- 原链接: https://rust-lang.github.io/rfcs/3185-async-drop.html --> — Async Drop | 异步析构 | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | ✅ |
+| [RFC 2645 [已失效]]<!-- 原链接: https://rust-lang.github.io/rfcs/2645-transparent-enums.html --> | 不透明类型 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 🔄 |
 
 ---
 
@@ -74,7 +74,7 @@
 | RFC | 主题 | 项目文档 | 状态 |
 |-----|------|----------|------|
 | [RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html) — Epochs/Editions | Edition 机制 | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) | ✅ |
-| [RFC 3101](https://rust-lang.github.io/rfcs/3101-reserved-prefix.html) — Reserved Prefix | 保留前缀 | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §3 | ✅ |
+| [RFC 3101 [已失效]]<!-- 原链接: https://rust-lang.github.io/rfcs/3101-reserved-prefix.html --> — Reserved Prefix | 保留前缀 | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §3 | ✅ |
 
 ---
 

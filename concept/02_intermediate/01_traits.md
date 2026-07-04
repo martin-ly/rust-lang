@@ -80,8 +80,8 @@
       - [定义与语法](#定义与语法)
       - [自动推导规则](#自动推导规则)
       - [`unsafe impl` 的例外情况](#unsafe-impl-的例外情况)
-    - [4.4 Trait + 泛型（Generics） ⟹ 零成本抽象（Zero-Cost Abstraction）](#44-trait--泛型--零成本抽象)
-    - [4.5 定理一致性（Coherence）矩阵](#45-定理一致性矩阵)
+    - [4.4 Trait + 泛型 ⟹ 零成本抽象](#44-trait--泛型--零成本抽象)
+    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：Trait 定义与实现](#51-正确示例trait-定义与实现)
     - [5.2 正确示例：关联类型](#52-正确示例关联类型)
@@ -92,7 +92,7 @@
       - [语法与动机](#语法与动机)
       - [与 HKT（Higher-Kinded Types）的关系](#与-hkthigher-kinded-types的关系)
       - [Lending Iterator 示例](#lending-iterator-示例)
-      - [为什么 GATs 解决了关联类型不能泛型（Generics）的问题](#为什么-gats-解决了关联类型不能泛型的问题)
+      - [为什么 GATs 解决了关联类型不能泛型的问题](#为什么-gats-解决了关联类型不能泛型的问题)
     - [5.7 正确示例：Specialization（特化）的语义与边界](#57-正确示例specialization特化的语义与边界)
       - [问题与默认实现](#问题与默认实现)
       - [特化实现：为具体类型提供更优路径](#特化实现为具体类型提供更优路径)
@@ -137,7 +137,7 @@
       - [编译器如何处理 `impl Trait` 返回](#编译器如何处理-impl-trait-返回)
       - [限制：不能用于 trait object](#限制不能用于-trait-object)
       - [形式化语义：存在类型 vs 全称类型](#形式化语义存在类型-vs-全称类型)
-      - [高阶边界：RPITIT 与 HRTB / 生命周期（Lifetimes）参数](#高阶边界rpitit-与-hrtb--生命周期参数)
+      - [高阶边界：RPITIT 与 HRTB / 生命周期参数](#高阶边界rpitit-与-hrtb--生命周期参数)
     - [补充章节：Const Trait 与 `~const` 实验特性](#补充章节const-trait-与-const-实验特性)
       - [问题背景：const fn 中的 Trait Bound 限制](#问题背景const-fn-中的-trait-bound-限制)
       - [`~const` 语法与 `#[const_trait]`](#const-语法与-const_trait)
@@ -146,7 +146,7 @@
       - [`impl const Trait` 与 `~const` 的区别](#impl-const-trait-与-const-的区别)
       - [替代方案：当前稳定 Rust 的 workaround](#替代方案当前稳定-rust-的-workaround)
     - [补充章节：`#[fundamental]` Attribute 与 Orphan Rule 例外](#补充章节fundamental-attribute-与-orphan-rule-例外)
-      - [目的：为智能指针（Smart Pointer）和引用（Reference）打开 impl 空间](#目的为智能指针和引用打开-impl-空间)
+      - [目的：为智能指针和引用打开 impl 空间](#目的为智能指针和引用打开-impl-空间)
       - [哪些类型是 fundamental](#哪些类型是-fundamental)
       - [为什么这些类型是 fundamental：对下游 crate 的"透明性"](#为什么这些类型是-fundamental对下游-crate-的透明性)
       - [与 `#[non_exhaustive]` 的对比](#与-non_exhaustive-的对比)
@@ -164,8 +164,8 @@
     - [12.4 迁移准备](#124-迁移准备)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
   - [权威来源索引](#权威来源索引)
-    - [10.5 边界测试：trait 的孤儿规则（Orphan Rule）与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
-    - [10.6 边界测试：关联常量与泛型（Generics）参数的交互（编译错误）](#106-边界测试关联常量与泛型参数的交互编译错误)
+    - [10.5 边界测试：trait 的孤儿规则与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
+    - [10.6 边界测试：关联常量与泛型参数的交互（编译错误）](#106-边界测试关联常量与泛型参数的交互编译错误)
   - [实践](#实践)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
@@ -251,7 +251,7 @@ Trait 作为逻辑命题:
 | **动态分发** | ✅ `dyn Trait` | ❌（通常） | ✅ 虚函数 | ✅ 默认 | ✅ 接口值 |
 
 > **来源: [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class)** Type class 支持 ad hoc 多态，Rust Trait 直接受 Haskell Type Class 启发。 ✅
-> **来源: [Rust Reference: Traits](https://doc.rust-lang.org/reference/)** Rust Trait 通过显式 `impl` 实现，支持关联类型、默认实现和泛型约束。 ✅
+> **来源: [Rust Reference: Traits](https://doc.rust-lang.org/reference/)** Rust Trait 通过显式 `impl` 实现，支持关联类型、默认实现和泛型（Generics）约束。 ✅
 > **[来源: C++ Reference: Concepts]** C++20 Concepts 是模板的约束机制，通过 duck typing 自动匹配，无孤儿规则（Orphan Rule）。 ✅
 > **[来源: Go Spec: Interface types]** Go 接口是结构类型（structural typing），隐式实现，无显式 `implements` 关键字。 ✅
 
@@ -453,7 +453,7 @@ pub unsafe auto trait Sync {}
 | `enum Bar` | 所有变体的所有字段满足 | 所有变体的所有字段满足 | 取变体并集 |
 | `Vec<T>` | `T: Send` | `T: Sync` | 标准库内部已声明 |
 | `*const T` / `*mut T` | ❌ 默认 !Send | ❌ 默认 !Sync | 原始指针（Raw Pointer）保守策略 |
-| `Rc<T>` | ❌ !Send（非原子引用计数） | ❌ !Sync | 内部状态非线程安全 |
+| `Rc<T>` | ❌ !Send（非原子引用（Reference）计数） | ❌ !Sync | 内部状态非线程安全 |
 | `PhantomData<T>` | `T: Send` | `T: Sync` | 零大小，仅作标记 |
 
 ```rust
@@ -1064,7 +1064,7 @@ impl std::fmt::Display for Vec<u8> {
 
 **C++ `constexpr`** 允许函数在编译期求值；C++ 模板元编程（TMP）则把模板系统当作函数式语言，在类型层面进行计算（如递归、条件、数值计算）。
 
-**Rust `const fn`** 提供稳定的编译期计算能力，但相比 C++ TMP，Rust 的类型系统**不**把类型本身作为可计算的元语言。Rust 在类型级编程的主要工具是：
+**Rust `const fn`** 提供稳定的编译期计算能力，但相比 C++ TMP，Rust 的类型系统（Type System）**不**把类型本身作为可计算的元语言。Rust 在类型级编程的主要工具是：
 
 - `const fn`：编译期值计算。
 - 泛型 + `PhantomData`：构造类型级状态机，使非法状态在编译期不可表示。
@@ -1259,7 +1259,7 @@ graph TD
 ### 6.3 反命题 3: "`dyn Trait` 和 `impl Trait` 等价"
 
 > 语义/编译期层 — 两者在类型论中不等价：`impl Trait` 是存在类型（编译期擦除），`dyn Trait` 是动态分发（运行时（Runtime）擦除），分发方式和大小信息有本质差异。
-> **来源: [TRPL Ch19.3](https://doc.rust-lang.org/book/ch10-02-traits.html)** `impl Trait`（存在类型，编译期擦除）与 `dyn Trait`（动态分发，运行时擦除）在类型论中不等价，信息隐藏的时机决定了能力边界。
+> **来源: [TRPL Ch19.3](https://doc.rust-lang.org/book/ch10-02-traits.html)** `impl Trait`（存在类型，编译期擦除）与 `dyn Trait`（动态分发，运行时（Runtime）擦除）在类型论中不等价，信息隐藏的时机决定了能力边界。
 
 ```mermaid
 graph TD
@@ -1572,7 +1572,7 @@ fn notify<T: Summary>(item: &T) { ... }
 
 **核心问题**: "什么时候用 dyn Trait？什么时候用泛型约束？"
 
-**过渡解释**: 类型论提供了静态分发的零成本保证，但工程中有异构集合、递归类型、隐藏实现细节等场景需要动态分发。这一步要求学习者在性能（零成本抽象）、二进制体积（单态化膨胀）、灵活性（运行时多态）之间做工程决策。Trait 对象安全条件是这一决策的硬性边界——不是所有 Trait 都能 dyn。从 Step 5 到 Step 6 的过渡是"从使用到设计"——不仅会选择分发方式，还能设计符合对象安全条件的 Trait，将对象安全规则内化为设计直觉。
+**过渡解释**: 类型论提供了静态分发的零成本保证，但工程中有异构集合、递归类型、隐藏实现细节等场景需要动态分发。这一步要求学习者在性能（零成本抽象）、二进制体积（单态化（Monomorphization）膨胀）、灵活性（运行时多态）之间做工程决策。Trait 对象安全条件是这一决策的硬性边界——不是所有 Trait 都能 dyn。从 Step 5 到 Step 6 的过渡是"从使用到设计"——不仅会选择分发方式，还能设计符合对象安全条件的 Trait，将对象安全规则内化为设计直觉。
 
 ```text
 决策框架:
@@ -1676,7 +1676,7 @@ impl Drawable for Point {
 | **类型可见性** | 调用方可通过 `T::Output` 引用（Reference） | 隐藏具体类型，仅知满足 Trait |
 | **多返回类型** | 不同实现者可返回不同类型 | 不同实现者可返回不同类型 |
 | **trait object** | ✅ 支持 `dyn Trait` | ❌ **不能用于 trait object** |
-| **生命周期表达** | 可精确标注 | 需 `impl Trait + 'a` 形式 |
+| **生命周期（Lifetimes）表达** | 可精确标注 | 需 `impl Trait + 'a` 形式 |
 
 ```rust,ignore
 // 显式关联类型版本（等价但冗长）

@@ -588,7 +588,7 @@ where
 }
 ```
 
-> **修正**: 闭包根据捕获方式分为三类：`Fn`（共享借用（Borrowing））、`FnMut`（可变借用）、`FnOnce`（所有权消耗）。
+> **修正**: 闭包根据捕获方式分为三类：`Fn`（共享借用（Borrowing））、`FnMut`（可变借用（Mutable Borrow））、`FnOnce`（所有权消耗）。
 > 接受闭包的函数必须声明正确的 trait bound。
 > 若闭包消耗捕获变量（如 `drop`），则只能实现 `FnOnce`，不能传递给要求 `Fn` 或 `FnMut` 的函数。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -790,7 +790,7 @@ fn main() {
 
 闭包自动以可变引用（Mutable Reference）捕获 `count`（`&mut count`），因为闭包体内修改了它。`count` 的类型是 `i32`，实现了 `Copy`，但闭包优先选择最少权限的捕获方式——此处需要 `&mut`，因此使用可变引用。
 
-注意：调用 `inc()` 后，`count` 被闭包的可变借用（Borrowing）锁定，直到闭包最后一次使用后才能再次直接访问 `count`。
+注意：调用 `inc()` 后，`count` 被闭包的可变借用（Mutable Borrow）锁定，直到闭包最后一次使用后才能再次直接访问 `count`。
 </details>
 
 ---

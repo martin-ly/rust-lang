@@ -55,7 +55,7 @@
 | RAII | [Rust Book Ch 15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | 资源获取即初始化 |
 | Newtype | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/type-safety.html) | [type_theory/60_type_system_counterexamples.md](type_theory/60_type_system_counterexamples.md) §5 | Orphan 规则、类型安全 |
 | Sealed Trait | [API Guidelines](https://rust-lang.github.io/api-guidelines/future-proofing.html) | [formal_modules/70_module_patterns_and_refactoring.md](formal_modules/70_module_patterns_and_refactoring.md) §3 | 防止外部实现 |
-| Interior Mutability | [Rustonomicon](https://doc.rust-lang.org/nomicon/interior-mutability.html) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §3 | Cell / RefCell / Mutex |
+| Interior Mutability | [Rustonomicon](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §3 | Cell / RefCell / Mutex |
 | Deref Polymorphism | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/predictability.html) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §5 | 不滥用 Deref |
 
 ---
@@ -77,7 +77,7 @@
 |--------|------|----------|------|
 | 全局可变状态 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §1 | 单例反模式 |
 | 过度泛型化 | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §6 | 类型参数过多 |
-| 滥用内部可变性 | [Rustonomicon](https://doc.rust-lang.org/nomicon/interior-mutability.html) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §3 | RefCell 过度使用 |
+| 滥用内部可变性 | [Rustonomicon](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §3 | RefCell 过度使用 |
 
 ---
 

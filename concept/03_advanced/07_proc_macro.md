@@ -49,7 +49,7 @@
     - [10.5 边界测试：过程宏（Procedural Macro）的 `Span` 与错误定位精度（编译错误/调试困难）](#105-边界测试过程宏的-span-与错误定位精度编译错误调试困难)
     - [10.3 边界测试：过程宏（Macro）的 hygiene 与路径解析（编译错误）](#103-边界测试过程宏的-hygiene-与路径解析编译错误)
     - [10.4 边界测试：proc\_macro 的 TokenStream 与 hygiene 标识符生成（编译错误）](#104-边界测试proc_macro-的-tokenstream-与-hygiene-标识符生成编译错误)
-    - 10.6 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突
+    - 10.6 边界测试：不可变借用（Immutable Borrow）与可变借用的冲突
   - [参考来源](#参考来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：过程宏（Procedural Macro）的类型（理解层）](#测验-1过程宏的类型理解层)
@@ -188,7 +188,7 @@ graph TD
      └─────────────────────────────────────────────┘
 ```
 
-> **执行模型**: 过程宏在**编译期**作为**编译器的插件**执行——它们是普通的 Rust 函数，但运行在编译器的上下文中，操作 TokenStream 而非值。
+> **执行模型**: 过程宏（Procedural Macro）在**编译期**作为**编译器的插件**执行——它们是普通的 Rust 函数，但运行在编译器的上下文中，操作 TokenStream 而非值。
 > [来源: [rustc-dev-guide — Macros](https://rustc-dev-guide.rust-lang.org/macro-expansion.html)]
 
 ---
@@ -229,7 +229,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 // - 不解析语义，只操作语法树
 ```
 
-> **TokenStream**: 过程宏的输入/输出都是 `TokenStream`——它是**语法树**而非字符串。这保证了宏生成的代码总是语法合法的（但不一定语义合法）。
+> **TokenStream**: 过程宏（Macro）的输入/输出都是 `TokenStream`——它是**语法树**而非字符串。这保证了宏生成的代码总是语法合法的（但不一定语义合法）。
 > [来源: [std::proc_macro::TokenStream](https://doc.rust-lang.org/proc_macro/struct.TokenStream.html)]
 
 ---
@@ -688,7 +688,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 fn main() {
     let mut v = vec![1, 2, 3];
     let r = &v;
-    // ❌ 编译错误: 已存在不可变借用时不能可变借用
+    // ❌ 编译错误: 已存在不可变借用（Immutable Borrow）时不能可变借用
     v.push(4);
     println!("{:?}", r);
 }

@@ -27,7 +27,7 @@
 
 > **过渡**: 在建立 Preludes（预导入模块（Module）） 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
 
-> **过渡**: 最后，将 Preludes（预导入模块） 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+> **过渡**: 最后，将 Preludes（预导入模块（Module）） 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
 ---
 
@@ -109,7 +109,7 @@ use core::cell::RefCell;
 ### Edition 差异
 
 - **2015 Edition**：外部 prelude 中的 crate 不能通过 `use` 引用（Reference），通常需要显式 `extern crate`。
-- **2018 Edition+**：`use foo::bar;` 可以直接引用外部 prelude 中的 crate，`extern crate` 被视为非惯用写法。
+- **2018 Edition+**：`use foo::bar;` 可以直接引用（Reference）外部 prelude 中的 crate，`extern crate` 被视为非惯用写法。
 
 > **注意**：`alloc`、`test` 等随 `rustc` 一起发布的 crate 不会自动进入外部 prelude（即使 2018+），需要显式 `extern crate alloc;`。
 
@@ -199,7 +199,7 @@ mod example {
 
 1. **大多数代码不需要关注 prelude**：日常 Rust 代码依赖 `std::prelude` 自动导入的常用类型（`Option`、`Result`、`Vec`、`String` 等）。
 2. **使用 `#![no_std]` 时记得 `extern crate alloc`**：如果需要 `Box`、`Vec`、`Rc`、`Arc` 等堆分配类型，必须显式引入 `alloc`。
-3. **库 crate 谨慎使用 `no_implicit_prelude`**：它会使代码变得冗长，通常只在特定宏生成或教学场景中使用。
+3. **库 crate 谨慎使用 `no_implicit_prelude`**：它会使代码变得冗长，通常只在特定宏（Macro）生成或教学场景中使用。
 4. **2018 Edition+ 优先用 `use crate_name::item;`**：避免不必要的 `extern crate` 声明。
 
 ---

@@ -358,7 +358,7 @@ impl std::error::Error for ManualError {
   → file.read_to_string(&mut buf).context("read config")?
 ```
 
-> **模式矩阵**: Rust 错误处理的**核心哲学**是"显式优于隐式"——每个可能的失败点都在类型系统（Type System）中可见。
+> **模式矩阵**: Rust 错误处理（Error Handling）的**核心哲学**是"显式优于隐式"——每个可能的失败点都在类型系统（Type System）中可见。
 > [来源: [Rust Error Handling Patterns](https://doc.rust-lang.org/rust-by-example/error.html)]
 
 ---

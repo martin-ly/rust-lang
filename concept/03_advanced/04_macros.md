@@ -86,7 +86,7 @@ Rust 宏 hygiene:
 
 ---
 
-<!-- 层级一致性（Coherence）: L2 概念分类矩阵 — 横向对比四种宏类型，纵向对比多语言元编程机制 -->
+<!-- 层级一致性（Coherence）: L2 概念分类矩阵 — 横向对比四种宏（Macro）类型，纵向对比多语言元编程机制 -->
 
 ## 二、概念属性矩阵（Attribute Matrix）
 
@@ -392,7 +392,7 @@ graph TD
 > **认知功能**: L2 安全认知校准工具，纠正常见的"derive 宏自动保证正确"的过度信任。
 > [来源: [proc_macro2 crate docs](https://docs.rs/proc-macro2/latest/proc_macro2/)]
 > [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
-> 编写或使用过程宏时，应始终意识到 TokenStream 解析可能失败，生成的 impl 仍需编译器二次检查。
+> 编写或使用过程宏（Procedural Macro）时，应始终意识到 TokenStream 解析可能失败，生成的 impl 仍需编译器二次检查。
 > 核心洞察：过程宏的"安全"仅限于 Token 语法合法性，语义类型安全是编译器后续阶段的保证。[来源: 💡 原创分析]
 > [来源: [Rust Reference: Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)]
 > **[RFC 1566: Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)** Procedural macros operate on `TokenStream` before type checking, implementing a restricted compiler-plugin model for derive, attribute, and function-like macros. ✅ 已验证
@@ -524,7 +524,7 @@ graph TD
 
 ---
 
-<!-- 层级一致性: L1 工程实践 — 正确示例、反例、边界极限测试的三段式验证 -->
+<!-- 层级一致性（Coherence）: L1 工程实践 — 正确示例、反例、边界极限测试的三段式验证 -->
 
 ## 七、示例与反例（Examples & Counter-examples）
 
@@ -1898,7 +1898,7 @@ fn foo() {}
 | 能力 | 属性宏 | `macro_rules!` | 根本原因 |
 |:---|:---:|:---:|:---|
 | 解析完整函数签名（泛型（Generics）、where、async） | ✅ | ❌ | 过程宏通过 `syn` 解析 `ItemFn.sig`；声明宏（Declarative Macro）无类型化 AST 访问能力 |
-| 遍历/修改函数体内部 AST 节点 | ✅ | ❌ | `syn::Fold` 或手动替换 `stmts`；声明宏只能做 token 模式匹配 |
+| 遍历/修改函数体内部 AST 节点 | ✅ | ❌ | `syn::Fold` 或手动替换 `stmts`；声明宏（Declarative Macro）只能做 token 模式匹配 |
 | 生成带 hygiene 的唯一标识符 | ✅ | ✅ | 二者均基于编译器 hygiene 机制，内部变量不污染外部 |
 | 在函数前后注入代码并保留签名 | ✅ | ⚠️ 极困难 | 声明宏可包裹表达式，但无法可靠包裹 item 并保留完整签名 |
 | 操作任意 item（fn / struct / impl / mod） | ✅ | ❌ | 属性宏接收完整 item TokenStream；声明宏仅匹配 token 树片段 |
@@ -1910,7 +1910,7 @@ fn foo() {}
 `macro_rules!` 的匹配基于 **token tree 模式**，而非类型化 AST。它无法：
 
 1. **识别"这是一个合法的函数定义"** —— 只能匹配 `fn $name:ident(...) {...}` 的 token 外形，无法保证语义合法性（如 where 子句的位置）
-2. **提取并复用完整函数签名** —— 泛型参数、where 子句、生命周期（Lifetimes）界限的 token 模式极其复杂，声明宏几乎无法正确编写
+2. **提取并复用完整函数签名** —— 泛型（Generics）参数、where 子句、生命周期（Lifetimes）界限的 token 模式极其复杂，声明宏几乎无法正确编写
 3. **递归遍历函数体内部的表达式节点** —— 无 `Fold` 机制，只能做浅层 token 替换
 
 ```rust
@@ -2048,7 +2048,7 @@ mod internal {
   模块路径改善: use crate::mac! 已支持（Rust 1.32+）
 ```
 
-> **[RFC 1584](https://rust-lang.github.io/rfcs/1584-macros.html)** 声明宏 2.0 的设计目标不是取代 `macro_rules!`，而是提供一个更符合 Rust 模块系统的替代方案。`macro_rules!` 将长期保持兼容。✅ 已验证
+> **[RFC 1584](https://rust-lang.github.io/rfcs/1584-macros.html)** 声明宏 2.0 的设计目标不是取代 `macro_rules!`，而是提供一个更符合 Rust 模块（Module）系统的替代方案。`macro_rules!` 将长期保持兼容。✅ 已验证
 
 ---
 

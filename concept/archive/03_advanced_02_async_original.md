@@ -767,7 +767,7 @@ graph TD
 |:---|:---|:---|:---|:---|:---|:---|:---|
 | **L1** | Future trait 语义 ⟹ 惰性求值 | `async fn` / `async {}` 被调用 | 仅构造状态机，无实际执行；首次 `poll` 前零副作用 | λ-演算惰性求值语义 | T1, T2, C1 | 立即热启动（如某些语言 Promise） | 语义偏离 Rust 模型，产生意外副作用 |
 | **L2** | `Pin<&mut Self>` ⟹ 自引用安全 | `!Unpin` + 正确 Pin 构造（`Box::pin` 或栈 Pin） | 状态机内指针字段在跨 `poll` 间始终有效，地址恒定 | 内存位置稳定性公理 | T1, C2, P2 | `Unpin` 误实现、手动 `mem::swap`、栈帧移动 | UB（悬垂指针解引用） |
-| **T1** | async/await 状态机变换 ⟹ 零成本抽象 | 编译器生成 + L2（Pin 保证不动） | 运行时无额外开销，等价于手写状态机；无 GC、无动态分发（默认） | 编译器正确性公理 | A1, S1 | 强制 `Box::pin` 堆分配、`dyn Future` 动态分发、递归状态机膨胀 | 性能退化（非语义错误），缓存不友好 |
+| **T1** | async/await 状态机变换 ⟹ 零成本抽象（Zero-Cost Abstraction） | 编译器生成 + L2（Pin 保证不动） | 运行时无额外开销，等价于手写状态机；无 GC、无动态分发（默认） | 编译器正确性公理 | A1, S1 | 强制 `Box::pin` 堆分配、`dyn Future` 动态分发、递归状态机膨胀 | 性能退化（非语义错误），缓存不友好 |
 | **T2** | `Send` Future ⟹ 跨 await 点状态迁移安全 | 状态机所有捕获字段均实现 `Send` | 可安全跨线程传递并在新线程恢复 `poll`；await 点即为状态序列化点 | 线程安全传递公理 | C1, P1 | 字段含 `!Send`（如 `Rc<T>`、`MutexGuard`） | 编译错误 E0277 |
 | **C1** | `!Send` 类型跨 await ⟹ 编译错误 | 状态机含 `Rc`/裸指针/`MutexGuard` 等 | `tokio::spawn` 及跨线程调度被类型系统（Type System）拒绝 | 子类型拒绝公理 | — | `unsafe impl Send for T` 恶意/错误绕过 | 数据竞争（运行时 UB），破坏线程安全 |
 | **C2** | 未 Pin 的自引用结构被移动 ⟹ UB | 手写 Future 含自引用字段且未使用 `Pin<&mut Self>` | 内部指针悬垂，后续 `poll` 解引用无效 | 内存安全（Memory Safety）公理 | — | 编译器未生成 Pin（手写 `Future` 时遗漏） | UB（不可定义行为，可能静默崩溃） |
@@ -2632,7 +2632,7 @@ async fn async_fn(f: impl AsyncFn(i32) -> i32) -> i32 { f(42).await }
 
 > **[来源: RFC 3668]** Async closures trait family.
 > **[来源: Rust 1.85 Release Notes]** Async closures stabilized.
-> **[来源: rustify.rs 2026]** "`AsyncFn` 是 Rust 异步编程的类型系统拼图的最后一块。"
+> **[来源: rustify.rs 2026]** "`AsyncFn` 是 Rust 异步编程的类型系统（Type System）拼图的最后一块。"
 
 ---
 
@@ -2726,7 +2726,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 >
 > `async fn` 的本质是状态机——编译器将 `await` 点转换为 enum 变体。这种转换依赖于泛型（Generics）（`impl Future<Output = T>`）和 Trait（`Future::poll`）的协同。理解 async 的底层实现，需要回到泛型和 Trait 的基础。
 >
-> 底层机制见 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)（Trait 定义）与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)（泛型单态化）。
+> 底层机制见 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)（Trait 定义）与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)（泛型（Generics）单态化）。
 > **过渡: L3 → L5**
 >
 > 异步编程不是 Rust 的发明——JavaScript 的 Promise、C# 的 async/await、Go 的 goroutine 都解决了类似问题。但 Rust 的 `Future` 是零成本的：编译后的状态机没有运行时调度器开销，这与 Go 的 goroutine（M:N 调度）形成鲜明对比。

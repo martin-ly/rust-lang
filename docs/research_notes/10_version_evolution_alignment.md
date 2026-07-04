@@ -39,7 +39,7 @@
 
 | 版本范围 | 官方链接 | 项目文档 |
 |----------|----------|----------|
-| Rust 1.96 | <https://blog.rust-lang.org/2025/12/04/Rust-1.96.1.html> | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) |
+| Rust 1.96 | [https://blog.rust-lang.org/2025/12/04/Rust-1.96.1.html [已失效]]<!-- 原链接: https://blog.rust-lang.org/2025/12/04/Rust-1.96.1.html --> | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) |
 | Rust 1.85 (Rust 2024) | <https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html> | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) |
 | Rust 1.81 | <https://blog.rust-lang.org/2024/09/05/Rust-1.81.0.html> | [60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) §11 (move closure) |
 | Rust 1.80 | <https://blog.rust-lang.org/2024/07/25/Rust-1.80.0.html> | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §2 |
@@ -68,7 +68,7 @@
 | let-else | 1.65 | [Rust 1.65](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html) | [10_rust_book_alignment.md](10_rust_book_alignment.md) |
 | RPITIT | 1.75 | [Rust 1.75](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html) | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) |
 | async fn in trait | 1.75 | [Rust 1.75](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) |
-| `gen` blocks | 1.95 (nightly) | [RFC 3516](https://rust-lang.github.io/rfcs/3516-gen-blocks.html) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §3 |
+| `gen` blocks | 1.95 (nightly) | [RFC 3516 [已失效]]<!-- 原链接: https://rust-lang.github.io/rfcs/3516-gen-blocks.html --> | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §3 |
 | unsafe extern blocks | 1.82 | [Rust 1.82](https://blog.rust-lang.org/2024/10/17/Rust-1.82.0.html) | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) §5 |
 
 ---

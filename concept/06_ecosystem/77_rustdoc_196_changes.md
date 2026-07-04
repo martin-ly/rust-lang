@@ -18,7 +18,7 @@
 > **来源**: Rust 1.96.0 Release Notes · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) ·
 > [Cargo Book — Configuration](https://doc.rust-lang.org/cargo/reference/config.html) ·
-> [RFC 3271 — Rustdoc links](https://rust-lang.github.io/rfcs/3271-rustdoc-json.html)
+> [RFC 3271 — Rustdoc links [已失效]]<!-- 原链接: https://rust-lang.github.io/rfcs/3271-rustdoc-json.html -->
 
 ---
 
@@ -185,7 +185,7 @@ Rust 1.96 对 Rustdoc 生成的 HTML 侧边栏进行了多项可用性改进：
 
 - **范围更精确**：不再对明显不需要示例的项（如某些 trait alias、extern block）误报。
 - **诊断信息更友好**：指出具体缺少示例的项，并给出添加 `#[doc = ...]` 或 `/// # Examples` 的提示。
-- **与 `#[allow(...)]` 的交互更一致**：可以在模块或项级别精确控制。
+- **与 `#[allow(...)]` 的交互更一致**：可以在模块（Module）或项级别精确控制。
 
 ### 5.3 启用方式
 

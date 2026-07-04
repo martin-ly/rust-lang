@@ -786,7 +786,7 @@ fn main() {
     map.insert(2, "b");
     map.insert(3, "c");
 
-    // ❌ 编译错误: range 遍历需要不可变引用，同时修改不被允许
+    // ❌ 编译错误: range 遍历需要不可变引用（Immutable Reference），同时修改不被允许
     for (k, v) in map.range(1..3) {
         map.insert(*k + 10, *v); // 尝试在遍历中插入
     }
@@ -897,7 +897,7 @@ fn main() {
 
 > **修正**:
 > `BTreeMap` 基于**排序键**维护平衡二叉搜索树。键的排序位置决定树结构，若键被修改，排序不变性破坏，树操作可能产生错误结果或 panic。
-> Rust 的 API 设计禁止键修改：`keys()` 返回不可变引用（Mutable Reference），`values_mut()` 只返回值的可变引用。
+> Rust 的 API 设计禁止键修改：`keys()` 返回不可变引用（Immutable Reference），`values_mut()` 只返回值的可变引用（Mutable Reference）。
 > `HashMap` 同理：键的哈希值决定桶位置，修改键会破坏哈希表。这与 C++ 的 `std::map`（`iterator->first` 是 const，不能修改键）或 Java 的 `TreeMap`（`Map.Entry.setValue` 只允许修改值）类似——Rust 的编译期不可变性保证更严格。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]

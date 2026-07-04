@@ -330,7 +330,7 @@ fn process<T: Drawable + Serializable>(item: T) {
 |:---|:---|:---|
 | 冲突解决 | 虚继承、显式限定（`Base::method`） | 无冲突（方法通过 trait 限定调用） |
 | 默认实现 | 可能冲突 | 无冲突（trait 提供默认，impl 可覆盖） |
-| 内存开销 | 多个 vptr | 零开销（单态化）或胖指针（动态分发） |
+| 内存开销 | 多个 vptr | 零开销（单态化（Monomorphization））或胖指针（动态分发） |
 | 菱形继承 | 需要虚基类 | **不可能**（无继承层次） |
 
 ---
@@ -459,7 +459,7 @@ impl std::fmt::Display for MyVec {
 | **扩展性** | 无 | 继承（侵入式） | 实现接口（类需修改） | 类型类实例 | impl（Orphan Rule） |
 | **穷尽性检查** | 无 | `std::visit` 不强制 | `switch` 不强制 | 强制 | `match` 强制 |
 | **资源安全** | 手动 | RAII | GC | GC / 纯函数 | 所有权（Ownership） + RAII |
-| **零成本抽象（Zero-Cost Abstraction）** | — | 虚函数有开销 | 对象头有开销 | thunk 有开销 | 单态化零开销 |
+| **零成本抽象（Zero-Cost Abstraction）** | — | 虚函数有开销 | 对象头有开销 | thunk 有开销 | 单态化（Monomorphization）零开销 |
 | **模式匹配（Pattern Matching）** | 无 | `std::visit` | `switch` | `case` | `match`（原生） |
 
 ---

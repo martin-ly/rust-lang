@@ -121,7 +121,7 @@
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [nextest Book](https://nexte.st/) | [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) | 🔄 | 当前使用 `cargo test`；nextest 替换可提升速度与重试能力 |
-| [nextest profile / retries](https://nexte.st/book/) | — | ⏳ | flakiness 重试与分区运行 |
+| [nextest profile / retries [已失效]]<!-- 原链接: https://nexte.st/book/ --> | — | ⏳ | flakiness 重试与分区运行 |
 
 ### 3.4 cargo-llvm-cov {#34-cargo-llvm-cov}
 

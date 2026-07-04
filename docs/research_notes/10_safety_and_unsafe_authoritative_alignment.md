@@ -75,7 +75,7 @@
 | 安全边界 | 官方来源 | 学术支撑 | 项目反例 |
 |----------|----------|----------|----------|
 | 悬垂/越界指针 | [What is UB?](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | Stacked/Tree Borrows | [60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §1-§2 |
-| 数据竞争 | [Data Races](https://doc.rust-lang.org/nomicon/race-conditions.html) | RustBelt | [60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §3 |
+| 数据竞争 | [Data Races](https://doc.rust-lang.org/nomicon/races.html) | RustBelt | [60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §3 |
 | 类型双关 | [Type Layout](https://rust-lang.github.io/unsafe-code-guidelines/layout.html) | RustSEM | [60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §4 |
 | 虚假 Send/Sync | [Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | RustBelt | [60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §5 |
 | FFI 协议违规 | [FFI](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html) | — | [60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §6 |

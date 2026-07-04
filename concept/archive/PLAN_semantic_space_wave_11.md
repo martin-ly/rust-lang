@@ -88,7 +88,7 @@
 
 | 概念 | Rust 表达 | 语义保持 | 成本 |
 |:---|:---|:---|:---|
-| 系统编程 | 所有权 + unsafe | 完全 | 零运行时（Runtime） |
+| 系统编程 | 所有权（Ownership） + unsafe | 完全 | 零运行时（Runtime） |
 | 零成本抽象（Zero-Cost Abstraction） | 泛型（Generics） + 单态化（Monomorphization） | 完全 | 编译时间 |
 | fearless并发 | Send/Sync + 借用（Borrowing） | 完全 | 零运行时（Runtime） |
 | 确定性资源管理 | RAII + Drop | 完全 | 零运行时（Runtime） |
@@ -108,7 +108,7 @@
 
 | 概念 | 排除原因 | Rust 替代 | 历史证据 |
 |:---|:---|:---|:---|
-| 绿色线程 | FFI 成本、运行时依赖 | async/await + OS 线程 | RFC 230 |
+| 绿色线程 | FFI 成本、运行时（Runtime）依赖 | async/await + OS 线程 | RFC 230 |
 | OOP 继承 | Orphan Rule、组合优于继承 | Trait + 组合 | 设计哲学 |
 | 隐式转换 | 类型安全、意外行为 | 显式 `From`/`Into` | 设计哲学 |
 | 异常控制流 | 隐藏控制流、非局部跳转 | `Result` + `?` | 设计哲学 |
@@ -164,7 +164,7 @@ Rust 的核心机制可以看作一个代数组合系统：
 
 - `Own(T)`：所有权（线性资源）
 - `Borrow(T, mode)`：借用（Borrowing）（共享/独占）
-- `Lifetime('a)`：生命周期约束
+- `Lifetime('a)`：生命周期（Lifetimes）约束
 - `Trait(T)`：行为抽象
 - `Generic<T>`：参数多态
 
@@ -190,7 +190,7 @@ Lifetime('a) × Lifetime('b) where 'a > 'b → ❌ 生命周期不足 E0597
 **组合爆炸与约束**：
 
 - 合法组合 ≈ 类型系统（Type System）可判定的程序空间
-- 非法组合 ≈ 类型系统排除的程序空间（UB 空间）
+- 非法组合 ≈ 类型系统（Type System）排除的程序空间（UB 空间）
 - unsafe = 手动证明非法组合实际上是安全的
 
 #### §6 Rust 表征空间与其他语言的对比
@@ -217,7 +217,7 @@ Lifetime('a) × Lifetime('b) where 'a > 'b → ❌ 生命周期不足 E0597
 在以下文件的"层次一致性（Coherence）标注"部分，新增与 `semantic_space.md` 的映射：
 
 - `01_foundation/01_ownership.md`：§X 标注 "此处为表征空间 §2 的所有权算子"
-- `01_foundation/02_borrowing.md`：§X 标注 "此处为表征空间 §2 的借用算子"
+- `01_foundation/02_borrowing.md`：§X 标注 "此处为表征空间 §2 的借用（Borrowing）算子"
 - `02_intermediate/01_traits.md`：§X 标注 "此处为表征空间 §5 的 Trait 组合规则"
 - `03_advanced/03_unsafe.md`：§X 标注 "此处为表征空间 §2 的逃逸舱口"
 - `05_comparative/03_paradigm_matrix.md`：§X 标注 "此处为表征空间 §6 的语言对比"

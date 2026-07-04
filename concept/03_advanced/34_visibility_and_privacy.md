@@ -76,7 +76,7 @@ pub enum State {               // 公开枚举，变体默认公开
 
 ### 2. Private item
 
-如果 item 是 private 的，它可以被当前模块及其后代模块访问。
+如果 item 是 private 的，它可以被当前模块（Module）及其后代模块访问。
 
 ---
 

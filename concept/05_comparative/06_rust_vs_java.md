@@ -51,7 +51,7 @@
     - [10.4 边界测试：Java 的 null 安全与 Rust 的 Option 编译期检查（编译错误）](#104-边界测试java-的-null-安全与-rust-的-option-编译期检查编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 和 Java 在内存管理上的最根本区别是什么？（理解层）](#测验-1rust-和-java-在内存管理上的最根本区别是什么理解层)
-    - [测验 2：Java 的泛型（Generics）使用类型擦除，Rust 的泛型使用单态化。这对运行时（Runtime）性能和类型安全有什么影响？（理解层）](#测验-2java-的泛型generics使用类型擦除rust-的泛型使用单态化这对运行时性能和类型安全有什么影响理解层)
+    - [测验 2：Java 的泛型（Generics）使用类型擦除，Rust 的泛型使用单态化（Monomorphization）。这对运行时（Runtime）性能和类型安全有什么影响？（理解层）](#测验-2java-的泛型generics使用类型擦除rust-的泛型使用单态化这对运行时性能和类型安全有什么影响理解层)
     - [测验 3：为什么 Rust 没有 Java 那样的"受检异常"（Checked Exceptions）？Rust 如何处理错误？（理解层）](#测验-3为什么-rust-没有-java-那样的受检异常checked-exceptionsrust-如何处理错误理解层)
     - [测验 4：Rust 的 `async/await` 与 Java 的 `CompletableFuture`/`Virtual Threads` 在并发模型上有什么区别？（理解层）](#测验-4rust-的-asyncawait-与-java-的-completablefuturevirtual-threads-在并发模型上有什么区别理解层)
     - [测验 5：在需要与大量现有 Java 生态集成的场景下，Rust 通常如何与 Java 交互？（理解层）](#测验-5在需要与大量现有-java-生态集成的场景下rust-通常如何与-java-交互理解层)
@@ -115,7 +115,7 @@ graph LR
   Java 类型系统 ≈ 系统 F<: + 子类型多态 + 泛型擦除
 ```
 
-> **类型洞察**: Rust 的 `Option<T>` 和模式匹配（Pattern Matching）将**空值检查**从运行时异常转化为编译期错误。Java 的 `Optional<T>`（Java 8+）是类似的尝试，但因向后兼容性无法强制使用。
+> **类型洞察**: Rust 的 `Option<T>` 和模式匹配（Pattern Matching）将**空值检查**从运行时（Runtime）异常转化为编译期错误。Java 的 `Optional<T>`（Java 8+）是类似的尝试，但因向后兼容性无法强制使用。
 > [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)] · [JLS — Types](https://docs.oracle.com/javase/specs/jls/se21/html/jls-4.html)
 
 ---
@@ -414,7 +414,7 @@ fn fixed() {
 }
 ```
 
-> **Java 对比**: Java 的泛型通过**类型擦除**（type erasure）实现——编译后 `List<Integer>` 和 `List<String>` 都是 `List<Object>`，运行时无类型信息。Rust 通过**单态化**（monomorphization）实现泛型——为每个具体类型生成独立代码，`generic_id<i32>` 和 `generic_id<f64>` 是完全不同的函数。Java 的擦除允许运行时类型统一（`List<?>`），但无法获取泛型参数；Rust 的单态化提供零成本抽象（Zero-Cost Abstraction），但不同类型不能共存于同质集合（需用 `enum` 或 `Box<dyn Trait>`）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **Java 对比**: Java 的泛型（Generics）通过**类型擦除**（type erasure）实现——编译后 `List<Integer>` 和 `List<String>` 都是 `List<Object>`，运行时无类型信息。Rust 通过**单态化**（monomorphization）实现泛型——为每个具体类型生成独立代码，`generic_id<i32>` 和 `generic_id<f64>` 是完全不同的函数。Java 的擦除允许运行时类型统一（`List<?>`），但无法获取泛型参数；Rust 的单态化提供零成本抽象（Zero-Cost Abstraction），但不同类型不能共存于同质集合（需用 `enum` 或 `Box<dyn Trait>`）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Java 的 null 与 Rust 的 `Option`（编译错误）
 
@@ -535,7 +535,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 使用编译期所有权系统（无 GC），内存释放由编译器静态确定。Java 使用垃圾回收器（GC），内存释放由运行时自动管理，可能引入停顿。
+Rust 使用编译期所有权（Ownership）系统（无 GC），内存释放由编译器静态确定。Java 使用垃圾回收器（GC），内存释放由运行时自动管理，可能引入停顿。
 </details>
 
 ---
@@ -598,7 +598,7 @@ Rust async 是协作式调度、零成本抽象（Zero-Cost Abstraction），基
 | Rust vs Java：系统编程与托管运行时的范式对比 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Rust vs Java：系统编程与托管运行时的范式对比 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> **过渡**: 掌握 Rust vs Java：系统编程与托管运行时的范式对比 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 Rust vs Java：系统编程与托管运行时的范式对比 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 Rust vs Java：系统编程与托管运行时的范式对比 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: Rust vs Java：系统编程与托管运行时的范式对比 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 

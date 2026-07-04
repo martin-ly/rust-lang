@@ -219,7 +219,7 @@ graph TD
 | **维度** | **详情** |
 |:---|:---|
 | **发布策略** | 6 个月 LTS 周期，提供长期稳定的 API 保证 |
-| **技术特点** | 并行渲染引擎、GPU 加速布局、Rust 内存安全保证 |
+| **技术特点** | 并行渲染引擎、GPU 加速布局、Rust 内存安全（Memory Safety）保证 |
 | **应用场景** | 嵌入式浏览器、自定义渲染引擎、WebView 替代方案 |
 | **与 Chromium 对比** | Servo 的并行架构在理论上可扩展性更强，但生态成熟度远低于 Chromium |
 
@@ -395,7 +395,7 @@ Rust 在区块链领域占据**主导地位**的原因：
 | **修复** | **问题** | **解决方案** |
 |:---|:---|:---|
 | **pin-init InitOk token** | 初始化闭包（Closures）可能在所有字段初始化前返回，导致部分初始化结构体（Struct）的 soundness 漏洞 | 用不可外部构造的 `InitOk` token 替换脆弱的 name-shadowing 守卫 |
-| **移除未对齐字段初始化 escape hatch** | `#[disable_initialized_field_access]` 静默允许未对齐字段的就地初始化，产生运行时 UB | 移除该 escape hatch，依赖它的代码现在编译失败而非静默产生 UB |
+| **移除未对齐字段初始化 escape hatch** | `#[disable_initialized_field_access]` 静默允许未对齐字段的就地初始化，产生运行时（Runtime） UB | 移除该 escape hatch，依赖它的代码现在编译失败而非静默产生 UB |
 | **`unused_features` lint 兼容** | Rust 1.96 重新启用 `unused_features` lint，内核全局启用的 feature 列表触发大量警告 | 内核构建系统全局允许该 lint，避免逐 crate 修改 |
 
 > **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。pin-init 的 soundness 修复尤其重要：它展示了 Rust 内核代码如何通过类型系统（Type System）级别的封闭（sealed token）来消除初始化顺序相关的漏洞类别——这是 C 语言无法实现的保证。来源: [Rust Project Goals — Rust for Linux] · 来源: [Rust Blog — Project Goals Update 2026-04] · 来源: [Linux Kernel v7.0-rc4] · 可信度: ✅
@@ -631,7 +631,7 @@ fn move_player(
 | **Web 后端** | 所有权（Ownership） + 生命周期（Lifetimes） | Trait (Handler) | async/await + Send/Sync | — | Go/Java 并发模型 |
 | **CLI** | 所有权（Ownership） + Result | Trait (derive) | 过程宏（Procedural Macro） | — | Python Click |
 | **嵌入式** | 裸指针 + no_std | — | unsafe + 中断安全 | — | C bare-metal |
-| **游戏** | 所有权 | 泛型 (ECS) | unsafe (GPU) | — | C++ Unreal |
+| **游戏** | 所有权（Ownership） | 泛型 (ECS) | unsafe (GPU) | — | C++ Unreal |
 | **区块链** | 整数溢出检查 | — | unsafe (密码学) | — | Solidity/Go |
 | **数据工程** | 内存布局 | 泛型 (DataFrame) | SIMD + 并行 | — | Python pandas |
 | **系统编程** | 裸指针 | — | unsafe + FFI | — | C 驱动开发 |
@@ -1217,7 +1217,7 @@ graph TD
 - **L3 Unsafe**: 内核 Rust 代码的 `unsafe` 比例显著高于用户空间代码（约 10-20%），因为每个 C API 调用都是 FFI 边界。Rust for Linux 的创新在于：**将 unsafe 封装为 safe 抽象**，例如 `spinlock_t` → `SpinLock<T>` 的类型化封装。
 - **L4 形式化**: 内核的并发模型（RCU、seqlock、per-CPU 变量）尚无完整的 Rust 形式化证明。RustBelt 的并发分离逻辑（CSL）理论上可覆盖 `SpinLock<T>` 和 `Mutex<T>`，但 RCU 的读侧临界区（read-side critical section）无锁语义超出了当前 RustBelt 的证明范围。
 
-**安全边界**: `kernel::ffi` 模块是形式化边界的核心——它将 C 指针转换为 Rust 引用（Reference）时，必须显式声明**安全契约**（如"调用者必须持有锁"、"此指针仅在 RCU 读侧临界区内有效"）。这些契约目前以文档注释形式存在，未来可能进化为机器可读的 Safety Tags。 [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+**安全边界**: `kernel::ffi` 模块（Module）是形式化边界的核心——它将 C 指针转换为 Rust 引用（Reference）时，必须显式声明**安全契约**（如"调用者必须持有锁"、"此指针仅在 RCU 读侧临界区内有效"）。这些契约目前以文档注释形式存在，未来可能进化为机器可读的 Safety Tags。 [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 > **[来源: Rust for Linux Docs]** Rust for Linux 将内核的复杂不变量编码为 Rust 的类型契约。
 
@@ -1225,7 +1225,7 @@ graph TD
 
 ### 11.3 eBPF + Aya：沙箱验证与类型系统的结合
 
-**形式化定位**: eBPF 是 Linux 内核的**沙箱虚拟机**，Aya 是用 Rust 编写 eBPF 程序的工具链。其核心洞察：eBPF 验证器（verifier）在加载期证明程序的安全性（无无限循环、无越界访问、无无效指令），而 Rust 的类型系统在编译期证明内存安全——**双层形式化验证**。
+**形式化定位**: eBPF 是 Linux 内核的**沙箱虚拟机**，Aya 是用 Rust 编写 eBPF 程序的工具链。其核心洞察：eBPF 验证器（verifier）在加载期证明程序的安全性（无无限循环、无越界访问、无无效指令），而 Rust 的类型系统（Type System）在编译期证明内存安全——**双层形式化验证**。
 
 **与 L1-L4 的映射**:
 
@@ -1245,7 +1245,7 @@ graph TD
 
 **与 L1-L4 的映射**:
 
-- **L1 所有权**: io_uring 的 ring buffer 是**内核-用户空间共享内存**。Rust 封装层通过 `IoUring` 类型独占所有权，而 `Op`（操作）类型在提交时转移所有权到内核。操作完成后，所有权通过 completion queue **异步返回**——这是所有权模型在**跨地址空间/跨权限边界**上的扩展。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
+- **L1 所有权**: io_uring 的 ring buffer 是**内核-用户空间共享内存**。Rust 封装层通过 `IoUring` 类型独占所有权，而 `Op`（操作）类型在提交时转移所有权到内核。操作完成后，所有权通过 completion queue **异步（Async）返回**——这是所有权模型在**跨地址空间/跨权限边界**上的扩展。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 - **L3 Async**: `tokio-uring` 将 io_uring 的 completion 事件映射为 `Future`。与传统 epoll 不同，io_uring 的**无系统调用批量提交**（batch submission）改变了异步运行时的事件循环模型——从"poll → 等待 → 回调"变为"提交 → 内核执行 → 完成事件"。
 - **L4 形式化**: io_uring 的 ring buffer 是**线性资源**的经典案例——submission entry 一旦被提交，其内存区域在操作完成前不可修改或释放。这与 Rust 的 `Pin` 语义同构：提交的 `Op` 被 `Pin` 在 ring buffer 中，直到 completion 解固定。
 
@@ -1277,7 +1277,7 @@ graph TD
 
 **与 L1-L4 的映射**:
 
-- **L1 所有权**: `egui` 的立即模式每帧丢弃 UI 状态，所有权模型简化为**栈分配 + 借用**——无长期状态管理，无循环引用（Reference）。`iced` 的保留模式维护 `Element` 树，需要 `Rc` 或 arena 分配器管理父子关系。
+- **L1 所有权**: `egui` 的立即模式每帧丢弃 UI 状态，所有权模型简化为**栈分配 + 借用（Borrowing）**——无长期状态管理，无循环引用（Reference）。`iced` 的保留模式维护 `Element` 树，需要 `Rc` 或 arena 分配器管理父子关系。
 - **L2 Trait**: `egui` 的 `Widget` trait 是**纯函数式**的——`ui(ui: &mut Ui) -> Response`，无状态副作用。`iced` 的 `Element` 是**代数数据类型**——`Element::new(widget).on_event(handler)`，事件处理通过 `Message` enum 分发。
 - **L4 形式化**: `egui` 的纯函数式 Widget 对应于**线性逻辑中的消耗性资源**——每帧的 `Ui` 对象被消耗后不可重用。`iced` 的 `Message` 分发对应于**代数效应（Algebraic Effects）**的简化形式——事件是效应，处理器是效应处理器。
 
@@ -1332,7 +1332,7 @@ graph TD
 | **D5** | GUI (egui/iced) | 单线程事件循环 | 无数据竞争 UI 状态 | 跨线程 UI 访问；`unsafe` 渲染 | UI 崩溃 / 画面撕裂 |
 | **D6** | AI/ML (Candle) | 张量形状编译期检查 | 无越界张量访问 | 动态形状；`unsafe` 内核优化 | 内存越界 / 数值错误 |
 
-> **⟹ 推理链**: D1-D6 的共同主题是**将领域特定的安全需求映射到 Rust 已有的类型系统保证**。没有领域需要 Rust 之外的新安全机制——差异仅在于哪些类型系统特性（所有权、生命周期、`Send`/`Sync`、`const`）被重点利用。
+> **⟹ 推理链**: D1-D6 的共同主题是**将领域特定的安全需求映射到 Rust 已有的类型系统保证**。没有领域需要 Rust 之外的新安全机制——差异仅在于哪些类型系统特性（所有权、生命周期（Lifetimes）、`Send`/`Sync`、`const`）被重点利用。
 > **[来源: Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs]** 应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅
 > **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC [RFC 9000](https://www.rfc-editor.org/info/rfc9000); wgpu Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
 

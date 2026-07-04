@@ -53,9 +53,9 @@
 
 > **来源:** [Rustonomicon – Safe Abstraction](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html)
 >
-> **来源:** [Rust API Guidelines – Unsafe Guidelines](https://rust-lang.github.io/api-guidelines/safety.html)
+> **来源:** [Rust API Guidelines – Unsafe Guidelines](https://rust-lang.github.io/api-guidelines/type-safety.html)
 >
-> **来源:** [Rustonomicon – Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html)
+> **来源:** [Rustonomicon – Interior Mutability](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)
 
 ---
 
@@ -245,13 +245,13 @@ pub use inner::MyType;
 | 概念 | Rustonomicon | Rust API Guidelines | 备注 |
 | :--- | :--- | :--- | :--- |
 | Safe / Unsafe 含义 | [Safe Unsafe Meanings](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) | — | 明确 safe abstraction 的责任边界 |
-| 内部可变性 | [Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html) | — | `UnsafeCell` 是底层原语 |
-| Unsafe 工作方式 | [Working With Unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html) | [Unsafe Guidelines](https://rust-lang.github.io/api-guidelines/safety.html) | 设计 safe wrapper 的规范 |
+| 内部可变性 | [Interior Mutability](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | — | `UnsafeCell` 是底层原语 |
+| Unsafe 工作方式 | [Working With Unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html) | [Unsafe Guidelines](https://rust-lang.github.io/api-guidelines/type-safety.html) | 设计 safe wrapper 的规范 |
 | API 设计 | — | [API Guidelines](https://rust-lang.github.io/api-guidelines/) | 可见性与封装的 best practice |
 
 ---
 
-> **权威来源**: [Rustonomicon – Safe and Unsafe](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) | [Rustonomicon – Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html) | [Rust API Guidelines – Unsafe](https://rust-lang.github.io/api-guidelines/safety.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+> **权威来源**: [Rustonomicon – Safe and Unsafe](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) | [Rustonomicon – Interior Mutability](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [Rust API Guidelines – Unsafe](https://rust-lang.github.io/api-guidelines/type-safety.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 ---
 

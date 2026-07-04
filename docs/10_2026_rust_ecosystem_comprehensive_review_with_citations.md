@@ -414,7 +414,7 @@ DOI: 10.1145/3704904
 
 [^14]: Dev Newsletter. "State of Rust 2026." 2026-01-04. <https://devnewsletter.com/p/state-of-rust-2026/> (企业采用数据)
 
-[^15]: Rust Foundation. "Security Initiative." 2026. <https://foundation.rust-lang.org/security/> (供应链安全)
+[^15]: Rust Foundation. "Security Initiative." 2026. <https://foundation.rust-lang.org/> (供应链安全)
 
 [^16]: Google Security Research. "Memory Safety in Android." 2024-12. <https://security.googleblog.com/2024/12/memory-safety-in-android.html> (Rust安全数据)
 
@@ -436,7 +436,7 @@ DOI: 10.1145/3704904
 
 [^25]: Rust Security Response WG. "crates.io Security Updates." Rust Blog. 2025-12. <https://blog.rust-lang.org/>
 
-[^26]: The Update Framework (TUF). "crates.io TUF Integration." Rust Foundation. 2026. <https://foundation.rust-lang.org/security/>
+[^26]: The Update Framework (TUF). "crates.io TUF Integration." Rust Foundation. 2026. <https://foundation.rust-lang.org/>
 
 ---
 

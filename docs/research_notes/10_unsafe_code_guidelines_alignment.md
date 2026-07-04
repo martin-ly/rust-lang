@@ -52,7 +52,7 @@
 | UCG 主题 | 项目文档 | 状态 | 备注 |
 |-----------|----------|------|------|
 | [References](https://doc.rust-lang.org/nomicon/references.html) | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) §4 | ✅ | 悬垂引用 |
-| [Self-referential structs](https://doc.rust-lang.org/nomicon/self-referential-structs.html) | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) §5 | ✅ | 自引用类型 |
+| [Self-referential structs [已失效]]<!-- 原链接: https://doc.rust-lang.org/nomicon/self-referential-structs.html --> | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) §5 | ✅ | 自引用类型 |
 
 ---
 
@@ -62,7 +62,7 @@
 |-----------|----------|------|------|
 | [Type Layout](https://rust-lang.github.io/unsafe-code-guidelines/layout.html) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §4 | ✅ | 对齐、类型双关 |
 | [Uninitialized Memory](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §1-§2 | ✅ | 未初始化内存 |
-| [Transmute](https://doc.rust-lang.org/nomicon/unions.html) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §7 | ✅ | 类型转换 |
+| [Transmute [已失效]]<!-- 原链接: https://doc.rust-lang.org/nomicon/unions.html --> | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §7 | ✅ | 类型转换 |
 
 ---
 
@@ -71,7 +71,7 @@
 | UCG 主题 | 项目文档 | 状态 | 备注 |
 |-----------|----------|------|------|
 | [Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | ✅ | 并发安全 |
-| [Data Races](https://doc.rust-lang.org/nomicon/race-conditions.html) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §3 | ✅ | 数据竞争 |
+| [Data Races](https://doc.rust-lang.org/nomicon/races.html) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §3 | ✅ | 数据竞争 |
 
 ---
 
@@ -90,7 +90,7 @@
 |------|----------|----------|
 | 悬空裸指针 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §1 | [References](https://doc.rust-lang.org/nomicon/references.html) |
 | 越界访问 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §2 | [What is UB?](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) |
-| 数据竞争 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §3 | [Data Races](https://doc.rust-lang.org/nomicon/race-conditions.html) |
+| 数据竞争 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §3 | [Data Races](https://doc.rust-lang.org/nomicon/races.html) |
 | 类型双关 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §4 | [Type Layout](https://rust-lang.github.io/unsafe-code-guidelines/layout.html) |
 | 虚假 Send/Sync | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §5 | [Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) |
 | FFI use-after-free | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §6 | [FFI](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html) |

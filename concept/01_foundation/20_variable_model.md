@@ -294,7 +294,7 @@ BorrowState: None | Shared(usize) | Exclusive
 **Rust place expression 的种类**:
 
 - 变量名：`x`
-- 解引用：`*expr`（当 expr 是指针/引用时）
+- 解引用（Reference）：`*expr`（当 expr 是指针/引用时）
 - 索引：`expr[index]`
 - 字段访问：`expr.field`
 - 元组索引：`expr.0`
@@ -542,7 +542,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-`x` 是值的名称（binding）。Rust 变量绑定到值，而非内存位置。所有权系统决定值何时被释放。
+`x` 是值的名称（binding）。Rust 变量绑定到值，而非内存位置。所有权（Ownership）系统决定值何时被释放。
 </details>
 
 ---

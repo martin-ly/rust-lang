@@ -290,7 +290,7 @@ def check_theorem_tier(file_path):
 
 ### 测验 3：在引用来源时，为什么建议精确到具体章节而非只写根 URL？（理解层）
 
-**题目**: 在引用来源时，为什么建议精确到具体章节而非只写根 URL？
+**题目**: 在引用（Reference）来源时，为什么建议精确到具体章节而非只写根 URL？
 
 <details>
 <summary>✅ 答案与解析</summary>

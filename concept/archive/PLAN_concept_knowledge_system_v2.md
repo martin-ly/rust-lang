@@ -111,7 +111,7 @@
 | P6-T3 | 思维表征完整性检查（每文件是否包含≥2种表征） | 每季度 | 维护者 |
 | P6-T4 | 知识来源关系更新（新增论文、课程、工具） | 每季度 | 维护者 |
 | P6-T5 | 关系一致性（Coherence）审计（运行 audit_checklist.md） | 每季度 | 维护者 |
-| P6-T6 | 交叉概念一致性 diff 检查 | 每月 | 自动化脚本 |
+| P6-T6 | 交叉概念一致性（Coherence） diff 检查 | 每月 | 自动化脚本 |
 | P6-T7 | 社区反馈整合与修订 | 按需 | 维护者 |
 
 ---
@@ -448,7 +448,7 @@
 | P17-T18 | 新增 `02_intermediate/11_cow_and_borrowed.md` | Clone-on-Write、零拷贝、ToOwned、API 灵活性 | ✅ |
 | P17-T19 | 新增 `07_future/26_specialization_preview.md` | Trait 实现特化、重叠 impl、min_specialization | ✅ |
 | P17-T20 | 新增 `01_foundation/07_control_flow.md` | match/if let/loop、表达式导向、穷尽性检查 | ✅ |
-| P17-T21 | 新增 `02_intermediate/12_smart_pointers.md` | Box/Rc/Arc/RefCell/Cell、所有权语义、组合模式 | ✅ |
+| P17-T21 | 新增 `02_intermediate/12_smart_pointers.md` | Box/Rc/Arc/RefCell/Cell、所有权（Ownership）语义、组合模式 | ✅ |
 | P17-T22 | 新增 `06_ecosystem/15_performance_optimization.md` | Criterion、flamegraph、缓存优化、SIMD、PGO | ✅ |
 | P17-T23 | 新增 `04_formal/08_type_inference.md` | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ |
 | P17-T24 | 新增 `05_comparative/08_rust_vs_javascript.md` | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ |
@@ -482,7 +482,7 @@
 - 新增 `02_intermediate/09_serde_patterns.md`（~480 行，10 来源，2 Mermaid 图表）
 - 新增 `03_advanced/06_pin_unpin.md`（~380 行，10 来源，3 Mermaid 图表）
 - 新增 `06_ecosystem/13_logging_observability.md`（~380 行，10 来源，3 Mermaid 图表）
-- 涵盖编译器前端并行化、智能指针（Smart Pointer）派生宏（Macro）、Const Trait 效果系统、RTN 精确捕获、Unsafe Fields、Ferrocene 认证、Gen Blocks、Cranelift 后端、Rust 语言规范、FFI 跨语言、WebAssembly 生态、闭包（Closures）类型系统（Type System）、Rust vs Java、引用语义、内部可变性、子类型与变型、测试策略、零成本抽象（Zero-Cost Abstraction）、Serde 序列化、Pin 与 Unpin、日志与可观测性
+- 涵盖编译器前端并行化、智能指针（Smart Pointer）派生宏（Macro）、Const Trait 效果系统、RTN 精确捕获、Unsafe Fields、Ferrocene 认证、Gen Blocks、Cranelift 后端、Rust 语言规范、FFI 跨语言、WebAssembly 生态、闭包（Closures）类型系统（Type System）、Rust vs Java、引用（Reference）语义、内部可变性、子类型与变型、测试策略、零成本抽象（Zero-Cost Abstraction）、Serde 序列化、Pin 与 Unpin、日志与可观测性
 - **文件总数: 83 → 104，Mermaid 图表: 328 → 384**
 
 ---

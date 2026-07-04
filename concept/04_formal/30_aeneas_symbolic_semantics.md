@@ -56,7 +56,7 @@
   - [📑 目录](#-目录)
   - [一、问题与动机（Problem \& Motivation）](#一问题与动机problem--motivation)
   - [二、核心结构总览（Overview）](#二核心结构总览overview)
-  - [三、LLBC：显式借用演算](#三llbc显式借用演算)
+  - [三、LLBC：显式借用（Borrowing）演算](#三llbc显式借用演算)
     - [3.1 设计思想](#31-设计思想)
     - [3.2 核心构造](#32-核心构造)
     - [3.3 与 MIR 的关系](#33-与-mir-的关系)

@@ -94,7 +94,7 @@
   - [Unsafe Rust](03_advanced/03_unsafe.md)
   - [Macros（宏（Macro）系统）](03_advanced/04_macros.md)
   - [Rust FFI：与外部代码的安全边界](03_advanced/05_rust_ffi.md)
-  - [Pin 与 Unpin：自引用类型的不动性保证](03_advanced/06_pin_unpin.md)
+  - [Pin 与 Unpin：自引用（Reference）类型的不动性保证](03_advanced/06_pin_unpin.md)
   - 过程宏（Procedural Macro）：编译期代码生成的元编程工具
   - NLL 与 Polonius：借用（Borrowing）检查器的演进
   - [FFI 高级主题：跨语言边界的安全与性能](03_advanced/09_ffi_advanced.md)
@@ -120,7 +120,7 @@
   - [Operational Semantics（操作语义）](04_formal/17_operational_semantics.md)
   - [Axiomatic Semantics（公理语义）](04_formal/20_axiomatic_semantics.md)
   - [Type Semantics（类型语义）](04_formal/21_type_semantics.md)
-  - [子类型与变型：Rust 类型系统中的协变、逆变与不变](04_formal/06_subtype_variance.md)
+  - [子类型与变型：Rust 类型系统（Type System）中的协变、逆变与不变](04_formal/06_subtype_variance.md)
   - 类型推断（Type Inference）：Hindley-Milner 算法与 Rust 的工业实现
   - [线性逻辑在 Rust 中的工程应用](04_formal/09_linear_logic_applications.md)
   - [范畴论与 Rust：从函子到单子](04_formal/10_category_theory.md)
@@ -137,7 +137,7 @@
 
 - [L5 对比分析](05_comparative/README.md)
   - [Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证](05_comparative/01_rust_vs_cpp.md)
-  - [Rust vs Go：线性所有权 vs CSP 过程逻辑](05_comparative/02_rust_vs_go.md)
+  - [Rust vs Go：线性所有权（Ownership） vs CSP 过程逻辑](05_comparative/02_rust_vs_go.md)
   - [Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）](05_comparative/03_paradigm_matrix.md)
   - [Rust 安全保证的边界条件全景（Safety Boundary Panorama）](05_comparative/04_safety_boundaries.md)
   - [Rust 执行模型同构性矩阵：同步 · 异步（Async） · 并发 · 并行](05_comparative/05_execution_model_isomorphism.md)
@@ -225,7 +225,7 @@
   - [Rust 形式模型演进跟踪（1.79–1.97+）](07_future/05_rust_version_tracking.md)
   - [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](07_future/07_mcdc_coverage_preview.md)
   - [Safety Tags 概念预研：Unsafe 契约的机器可读标注](07_future/08_safety_tags_preview.md)
-  - [BorrowSanitizer 概念预研：运行时借用（Borrowing）检查工业化](07_future/20_borrowsanitizer_preview.md)
+  - [BorrowSanitizer 概念预研：运行时（Runtime）借用（Borrowing）检查工业化](07_future/20_borrowsanitizer_preview.md)
   - [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举（Enum）](../00_meta/placeholders/placeholder_generic.md)
   - [并行 前端编译预研：Rust 编译器 的多核扩展](07_future/09_parallel_frontend_preview.md)
   - [派生 CoercePointee 预研：智能指针（Smart Pointer）的自动类型强制](07_future/10_derive_coerce_pointee_preview.md)

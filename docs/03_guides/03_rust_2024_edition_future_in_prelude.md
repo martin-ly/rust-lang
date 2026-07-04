@@ -1,6 +1,6 @@
 > **权威来源**:
 >
-> [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/prelude-changes.html),
+> [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html),
 > [RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)
 >
 > **分级**: [A]
@@ -245,7 +245,7 @@ where
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [Rust Edition Guide: Future in Prelude](https://doc.rust-lang.org/edition-guide/rust-2024/prelude-changes.html)
+- [Rust Edition Guide: Future in Prelude](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 - [std::prelude 文档](https://doc.rust-lang.org/std/prelude/)
 
 ---

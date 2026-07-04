@@ -899,7 +899,7 @@ catch_unwind(AssertUnwindSafe(|| {
 
 `catch_unwind` 要求捕获的闭包（Closures）实现 `UnwindSafe` —— 即在 panic 后不会留下破损的不变量。修改外部可变引用（Mutable Reference）（`&mut x`）的闭包**不是** `UnwindSafe`，因为 panic 可能在 `x += 1` 之后发生，导致外部状态部分更新。
 
-`AssertUnwindSafe` 是一个**显式承诺**："我保证这个闭包在 panic 后是安全的"。这是 unsafe 的一种形式（虽然不需要 `unsafe` 关键字），应谨慎使用。
+`AssertUnwindSafe` 是一个**显式承诺**："我保证这个闭包（Closures）在 panic 后是安全的"。这是 unsafe 的一种形式（虽然不需要 `unsafe` 关键字），应谨慎使用。
 </details>
 
 ---

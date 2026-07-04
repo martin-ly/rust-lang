@@ -33,7 +33,7 @@
     - [补充文件索引](#补充文件索引)
   - [三、课程对齐路径](#三课程对齐路径)
   - [四、形式化层级定位（理论-模型-实践）](#四形式化层级定位理论-模型-实践)
-  - [五、本层定理一致性（Coherence）概览](#五本层定理一致性概览)
+  - [五、本层定理一致性概览](#五本层定理一致性概览)
   - [六、认知路径（从直觉到形式化）](#六认知路径从直觉到形式化)
   - [七、待创建内容](#七待创建内容)
   - [八、跨层出口](#八跨层出口)
@@ -221,7 +221,7 @@ Type System（理解"类型即证明"）
 | **所有权（Ownership）** | 线性/仿射逻辑：资源不可复制 | 所有权状态机：有主/无主 | `move`、`Copy`、`Drop`、RAII | Linear Logic ⊗ · Affine weakening |
 | **借用（Borrowing）** | 分离逻辑：分数权限 | 借用检查器算法 | `&T`、`&mut T`、编译错误 E0382/E0502 | Fractional Permissions · Separation Logic |
 | **生命周期（Lifetimes）** | 区域类型系统（Type System）：偏序约束 | 约束图、偏序求解 | 标注、`'a`、Elision、NLL | Region Types (Tofte & Talpin 1994) |
-| **类型系统** | 类型论、范畴论：和/积类型 | HM 推断 + 所有权（Ownership）约束 | `enum`、`struct`、`match`、类型标注 | Algebraic Type Theory · Hindley-Milner |
+| **类型系统（Type System）** | 类型论、范畴论：和/积类型 | HM 推断 + 所有权（Ownership）约束 | `enum`、`struct`、`match`、类型标注 | Algebraic Type Theory · Hindley-Milner |
 
 ---
 
@@ -270,7 +270,7 @@ Type System（理解"类型即证明"）
 
 - **L2 进阶**: Trait（类型系统延伸）、泛型（Generics）（生命周期（Lifetimes）参数化）、内存管理（所有权（Ownership）进阶）、错误处理（Result 类型）
 - **L4 形式化**: 线性逻辑（所有权（Ownership）数学根基）、区域类型（生命周期（Lifetimes）形式化）、分离逻辑（借用（Borrowing）形式化）
-- **L5 对比**: Rust vs C++（所有权 vs 智能指针（Smart Pointer））
+- **L5 对比**: Rust vs C++（所有权（Ownership） vs 智能指针（Smart Pointer））
 
 ---
 

@@ -1,6 +1,6 @@
 > **权威来源**:
 >
-> [FDA](https://www.fda.gov/),
+> [FDA [已失效]]<!-- 原链接: https://www.fda.gov/ -->,
 > [IEC 62304](https://www.iec.ch/),
 > [Rust Reference](https://doc.rust-lang.org/reference/)
 >

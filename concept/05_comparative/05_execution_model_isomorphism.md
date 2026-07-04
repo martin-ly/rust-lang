@@ -299,7 +299,7 @@ sequenceDiagram
 |:---|:---|:---|
 | 协程类型 | 无栈（stackless） | 有栈（stackful, ~2KB 起） |
 | 调度时机 | 惰性（仅 poll 时执行） | 立即（创建后开始执行） |
-| 调度器 | 外部 executor（Tokio / smol [历史: async-std [已归档]]） | Go 运行时内置 |
+| 调度器 | 外部 executor（Tokio / smol [历史: async-std [已归档]]） | Go 运行时（Runtime）内置 |
 | 并行性 | async 本身不产生并行 | goroutine 自动分配到多核 |
 | 内存布局 | 状态机在栈/调用者内存中内联 | 独立栈，运行时管理 |
 | 跨 await 状态 | 显式（Pin + 状态机） | 隐式（栈保存全部状态） |
@@ -366,7 +366,7 @@ Rust 的 `std::sync::mpsc`（multiple producer, single consumer）是 CSP 的工
 
 | CSP 原始语义 | Rust mpsc | 差异 |
 |:---|:---|:---|
-| 同步 rendezvous | `Sender::send` 异步缓冲（不阻塞至缓冲区满） | Rust 默认**有缓冲**，非严格 CSP |
+| 同步 rendezvous | `Sender::send` 异步（Async）缓冲（不阻塞至缓冲区满） | Rust 默认**有缓冲**，非严格 CSP |
 | 无类型通道 | `Sender<T>` / `Receiver<T>` | Rust 通道是**强类型**的 |
 | 值拷贝 | 值 **move**（所有权（Ownership）转移） | Rust 利用所有权保证发送后不可再用 |
 | 进程匿名 | channel 是值，可传递 | 一致 |
@@ -396,7 +396,7 @@ let received = rx.recv().unwrap(); // 所有权转移到 received
 | 类型系统（Type System） | 强类型（`Sender<T>`） | 无泛型（Generics）（`chan interface{}` 或具体类型） |
 | 所有权（Ownership） | **move 语义**（发送后不可用） | **值拷贝**（发送后可继续使用） |
 | 缓冲 | 默认无缓冲（`mpsc::channel`）或有缓冲（`sync_channel`） | 默认无缓冲（`make(chan T)`）或有缓冲（`make(chan T, n)`） |
-| select | `crossbeam::select!` / `tokio::select!`（宏） | `select` 语句（语言级） |
+| select | `crossbeam::select!` / `tokio::select!`（宏（Macro）） | `select` 语句（语言级） |
 | 关闭语义 | `drop(sender)` 关闭 | `close(ch)` 显式关闭 |
 | 零值 channel | 无（必须显式创建） | `nil` channel（永远阻塞） |
 

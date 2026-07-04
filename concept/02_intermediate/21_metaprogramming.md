@@ -58,7 +58,7 @@
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`macro_rules!` 与过程宏（proc macro）在元编程中的根本区别是什么？（理解层）](#测验-1macro_rules-与过程宏proc-macro在元编程中的根本区别是什么理解层)
     - [测验 2：声明宏（Declarative Macro）的"卫生性"（hygiene）意味着什么？（理解层）](#测验-2声明宏的卫生性hygiene意味着什么理解层)
-    - [测验 3：`compile_error!("msg")` 宏的作用是什么？（理解层）](#测验-3compile_errormsg-宏的作用是什么理解层)
+    - [测验 3：`compile_error!("msg")` 宏（Macro）的作用是什么？（理解层）](#测验-3compile_errormsg-宏的作用是什么理解层)
     - [测验 4：`concat!` 和 `stringify!` 宏分别做什么？（理解层）](#测验-4concat-和-stringify-宏分别做什么理解层)
     - [测验 5：为什么过程宏（Procedural Macro）必须放在独立的 crate 中，而不能与使用它的代码在同一 crate？（理解层）](#测验-5为什么过程宏必须放在独立的-crate-中而不能与使用它的代码在同一-crate理解层)
   - [实践](#实践)
@@ -202,7 +202,7 @@ macro_rules! my_vec {
   └── 错误通过 proc_macro::Diagnostic / compile_error! 报告
 ```
 
-> **认知功能**: 过程宏的**三类划分**对应三种"代码变换意图"——Derive 是"基于数据结构生成实现"，Attribute 是"基于元数据修改语义"，Function-like 是"自定义语法扩展"。
+> **认知功能**: 过程宏（Procedural Macro）的**三类划分**对应三种"代码变换意图"——Derive 是"基于数据结构生成实现"，Attribute 是"基于元数据修改语义"，Function-like 是"自定义语法扩展"。
 > [来源: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)]
 
 ---
@@ -513,7 +513,7 @@ Rust 元编程的演进方向:
 > [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html)]
 ```
 
-> **陷阱总结**: 元编程的陷阱集中在**错误定位**、**卫生性理解**、**模式匹配（Pattern Matching）细节**、**依赖限制**和**泛型替代**五个方面——每个陷阱都反映了"宏的语法层面操作"与"开发者的语义层面直觉"之间的鸿沟。
+> **陷阱总结**: 元编程的陷阱集中在**错误定位**、**卫生性理解**、**模式匹配（Pattern Matching）细节**、**依赖限制**和**泛型（Generics）替代**五个方面——每个陷阱都反映了"宏的语法层面操作"与"开发者的语义层面直觉"之间的鸿沟。
 > [来源: [proc-macro Workshop](https://github.com/dtolnay/proc-macro-workshop)]
 
 ---

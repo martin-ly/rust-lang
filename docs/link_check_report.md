@@ -3,7 +3,6 @@
 > **EN**: Link Check Report
 > **Summary**: 链接有效性检查报告 Link Check Report.
 
-
 ## 统计
 
 | 类别 | 数量 |

@@ -17,11 +17,11 @@
   - [📑 目录](#-目录)
   - [一、权威定义](#一权威定义)
     - [1.1 WebAssembly 作为通用字节码](#11-webassembly-作为通用字节码)
-    - [1.2 组件模型与模块链接](#12-组件模型与模块链接)
+    - [1.2 组件模型与模块（Module）链接](#12-组件模型与模块链接)
     - [1.3 WASI：WebAssembly 系统接口](#13-wasiwebassembly-系统接口)
   - [二、WASM 执行模型全景](#二wasm-执行模型全景)
     - [2.1 浏览器宿主：JS 引擎集成](#21-浏览器宿主js-引擎集成)
-    - [2.2 独立运行时：wasmtime 与 wasmer](#22-独立运行时wasmtime-与-wasmer)
+    - [2.2 独立运行时（Runtime）：wasmtime 与 wasmer](#22-独立运行时wasmtime-与-wasmer)
     - [2.3 边缘计算：Cloudflare Workers 与 Fastly Compute](#23-边缘计算cloudflare-workers-与-fastly-compute)
   - [三、Rust WASM 工具链深度](#三rust-wasm-工具链深度)
     - [3.1 wasm-bindgen：JS 互操作的生成艺术](#31-wasm-bindgenjs-互操作的生成艺术)
@@ -45,7 +45,7 @@
     - [7.2 wasm32-unknown-unknown 与 `wasm32-wasip1` 或 `wasm32-wasip2` 的安全边界](#72-wasm32-unknown-unknown-与-wasm32-wasip1-或-wasm32-wasip2-的安全边界)
   - [八、反命题树](#八反命题树)
   - [九、边界测试](#九边界测试)
-    - [9.1 边界测试：wasm-bindgen 跨边界传递含 `String` 的结构体](#91-边界测试wasm-bindgen-跨边界传递含-string-的结构体)
+    - [9.1 边界测试：wasm-bindgen 跨边界传递含 `String` 的结构体（Struct）](#91-边界测试wasm-bindgen-跨边界传递含-string-的结构体)
     - [9.2 边界测试：JS→WASM→JS 递归调用导致栈溢出](#92-边界测试jswasmjs-递归调用导致栈溢出)
     - [9.3 边界测试：在 `wasm32-unknown-unknown` 中使用 `std::fs`](#93-边界测试在-wasm32-unknown-unknown-中使用-stdfs)
   - [十、概念属性矩阵](#十概念属性矩阵)
@@ -388,7 +388,7 @@ let mut store = Store::new(&engine, wasi);
 | **资源回收** | 句柄 drop → 能力失效 | 所有权（Ownership）离开作用域 → drop |
 | **安全保证** | 无句柄 = 无访问权 | 无所有权（Ownership） = 无访问权 |
 
-> **关键洞察**: WASI 的能力安全模型与 Rust 的所有权模型存在**深层同构**——二者都通过"资源唯一标识 + 显式转移"来消除隐式全局访问。这是 Rust 成为 Wasm 生态首选语言的深层原因。
+> **关键洞察**: WASI 的能力安全模型与 Rust 的所有权（Ownership）模型存在**深层同构**——二者都通过"资源唯一标识 + 显式转移"来消除隐式全局访问。这是 Rust 成为 Wasm 生态首选语言的深层原因。
 > [来源: [Capability-Based Security Research](https://en.wikipedia.org/wiki/Capability-based_security)]
 
 ---

@@ -155,7 +155,7 @@ fn main() {
 }
 ```
 
-`TypeId` 是一个不透明的、可比较的值，用于在运行时判断两个类型是否相同（Rust Reference: [TypeId](https://doc.rust-lang.org/std/any/struct.TypeId.html)）。
+`TypeId` 是一个不透明的、可比较的值，用于在运行时（Runtime）判断两个类型是否相同（Rust Reference: [TypeId](https://doc.rust-lang.org/std/any/struct.TypeId.html)）。
 
 ### 3.3 `downcast_ref`：受限的向下转换
 

@@ -216,8 +216,8 @@ fn main() {
 | 特性 | `Rc<T>` | `Arc<T>` |
 |:---|:---|:---|
 | 名称 | Reference Counted | Atomically Reference Counted |
-| 线程安全 | ❌ 单线程 | ✅ 多线程（原子操作） |
-| 性能 | 快（非原子加减） | 较慢（原子操作有内存屏障成本） |
+| 线程安全 | ❌ 单线程 | ✅ 多线程（原子操作（Atomic Operations）） |
+| 性能 | 快（非原子加减） | 较慢（原子操作（Atomic Operations）有内存屏障成本） |
 | 实现 `Send` | 否 | 是（若 `T: Send + Sync`） |
 | 实现 `Sync` | 否 | 是（若 `T: Send + Sync`） |
 
@@ -273,7 +273,7 @@ fn main() {
 | 类型 | 功能 | 解决的问题 |
 |:---|:---|:---|
 | `Rc<T>` | 共享所有权（Ownership） | 多个所有者访问同一数据 |
-| `RefCell<T>` | 内部可变性 | 通过不可变引用（Mutable Reference）修改数据 |
+| `RefCell<T>` | 内部可变性 | 通过不可变引用（Immutable Reference）修改数据 |
 
 **内部可变性原理**：`RefCell` 在**运行时（Runtime）**检查借用（Borrowing）规则：
 
@@ -333,9 +333,9 @@ fn main() {
 | 运行时（Runtime）检查 | 无（因为值被复制） | 有（借用（Borrowing）规则检查） |
 | 开销 | 最低 | 较低（引用（Reference）计数） |
 
-**为什么 `Cell` 不需要运行时借用（Borrowing）检查**：
+**为什么 `Cell` 不需要运行时（Runtime）借用（Borrowing）检查**：
 
-`Cell::get()` 返回值的**副本**（`T: Copy`），因此不存在多个引用同时访问同一数据的问题。
+`Cell::get()` 返回值的**副本**（`T: Copy`），因此不存在多个引用（Reference）同时访问同一数据的问题。
 
 ```rust,ignore
 let c = Cell::new(5);

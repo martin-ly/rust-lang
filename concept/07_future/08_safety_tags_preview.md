@@ -542,7 +542,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-为 `unsafe` 代码块提供更细粒度的分类和文档，如标记 `unsafe { /* memory: 原始指针解引用 */ }`，使 unsafe 的语义更清晰，便于审计和工具分析。
+为 `unsafe` 代码块提供更细粒度的分类和文档，如标记 `unsafe { /* memory: 原始指针（Raw Pointer）解引用 */ }`，使 unsafe 的语义更清晰，便于审计和工具分析。
 </details>
 
 ---

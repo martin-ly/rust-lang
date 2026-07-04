@@ -171,7 +171,7 @@ graph TD
 ```
 
 > **来源**: [Solana Docs — Sealevel] · [Anatoly Yakovenko — Sealevel Paper]
-> **认知功能**: 此流程图揭示 Solana 如何将 Rust 的 `&`/`&mut` 借用（Borrowing）语义映射到运行时并行调度策略，实现"无数据竞争的并行合约执行"。[来源: 💡 原创分析]
+> **认知功能**: 此流程图揭示 Solana 如何将 Rust 的 `&`/`&mut` 借用（Borrowing）语义映射到运行时（Runtime）并行调度策略，实现"无数据竞争的并行合约执行"。[来源: 💡 原创分析]
 > **使用建议**: 设计并行交易时，优先将账户标记为 read-only 以最大化并行度；mutually exclusive writes 需显式排序。
 > **关键洞察**: Sealevel 的并行不是自动的——它依赖交易显式声明账户访问模式，这与 Rust 编译期借用（Borrowing）检查同构。
 
@@ -238,7 +238,7 @@ mod erc20 {
 | 漏洞 | Solidity 根源 | Rust 消除机制 | 形式化根基 |
 |:---|:---|:---|:---|
 | **重入 (Reentrancy)** | 默认 call 传递控制流 + 可重入锁需手动实现 | `&mut self` 独占 ⟹ 编译期保证无并发写；运行时借用（Borrowing）检查覆盖跨程序调用 | 线性逻辑：资源不可复制、不可丢弃 |
-| **整数溢出** | 默认 wrapping（0.8 前）或 checked（0.8+，gas 开销） | 默认 panic；`checked_add` / `saturating_add` 强制显式分支 | 类型系统：数值操作返回 `Option<T>` |
+| **整数溢出** | 默认 wrapping（0.8 前）或 checked（0.8+，gas 开销） | 默认 panic；`checked_add` / `saturating_add` 强制显式分支 | 类型系统（Type System）：数值操作返回 `Option<T>` |
 | **访问控制遗漏** | `onlyOwner` 修饰器需手动添加 | 无直接帮助，但 `Auth` 类型可通过类型状态模式强制检查 | Typestate：权限作为类型参数 |
 | **未检查的外部调用返回值** | `call` 返回 `bool` 可被忽略 | `Result<T, E>` 的 `#[must_use]` 强制处理错误 | 代数数据类型：错误不可静默丢弃 |
 | **时间操纵** | `block.timestamp` 为普通 `uint256` | 无根本解决，但 `Slot` / `Epoch` 新类型可限制误用 | 新类型模式（Newtype） |
@@ -407,7 +407,7 @@ let coin: Coin = get_coin();
 // 函数结尾未消费 coin → 编译器拒绝
 ```
 
-> **核心洞察**: Move 的 abilities 是**能力安全（Capability Security）**在类型系统中的表达。与 Rust 的所有权转移不同，Move 通过**编译期 ability 检查**和**字节码验证器（bytecode verifier）**双重保障资源安全。 [来源: [lib.rs](https://lib.rs/)]
+> **核心洞察**: Move 的 abilities 是**能力安全（Capability Security）**在类型系统中的表达。与 Rust 的所有权（Ownership）转移不同，Move 通过**编译期 ability 检查**和**字节码验证器（bytecode verifier）**双重保障资源安全。 [来源: [lib.rs](https://lib.rs/)]
 
 ### 4.2 Sui 的 Object-Centric 模型 vs Aptos 的账户存储模型
 
@@ -417,7 +417,7 @@ let coin: Coin = get_coin();
 | **所有权表达** | 对象有单一 `Owner` 地址 | 资源存储在发布者账户下 | `&mut self` 独占合约状态 |
 | **并行执行** | 交易显式声明输入对象，非冲突对象并行 | 区块级顺序执行（当前） | 依赖链运行时调度 |
 | **资源转移** | `transfer(object, recipient)` 显式转移 | `move_to` / `move_from` 全局操作 | 存储映射的 `insert` / `remove` |
-| **借用语义** | `&T` / `&mut T` 借用对象引用（Reference） | `borrow_global<T>(addr)` 全局借用 | `&` / `&mut` 编译期借用检查 |
+| **借用（Borrowing）语义** | `&T` / `&mut T` 借用对象引用（Reference） | `borrow_global<T>(addr)` 全局借用 | `&` / `&mut` 编译期借用检查 |
 
 ```move
 // ✅ Sui: 对象所有权显式转移

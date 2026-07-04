@@ -1122,7 +1122,7 @@ impl AuthManager {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **Jon Gjengset**, [Crust of Rust: Phantom Types](https://www.youtube.com/watch?v=QlM6HIXp5HQ) —— Phantom Types 与 Type-State 的可视化讲解。
-- **Without Boats**, ["Implied bounds and perfect derive"](https://without.boats/blog/implied-bounds/) —— 类型约束的隐含推导与派生宏设计。
+- **Without Boats**, ["Implied bounds and perfect derive"](https://without.boats/blog/) —— 类型约束的隐含推导与派生宏设计。
 
 ---
 

@@ -689,7 +689,7 @@ fn main() {
 >
 > 1) `gen` 关键字保留；
 > 2) `if let` 临时作用域缩短；
-> 3) `impl Trait` 生命周期捕获规则。
+> 3) `impl Trait` 生命周期（Lifetimes）捕获规则。
 >
 > 这与 C++ 的"无 edition，每次标准全量迁移"或 Java 的 LTS 版本不同——Rust 的 edition 提供可控的、可选的语言演进节奏。
 > [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] ·

@@ -271,7 +271,7 @@ graph TD
 <details>
 <summary>✅ 答案与解析</summary>
 
-`Pin::as_mut()` 保持 `Pin` 包装，返回 `Pin<&mut T>`。普通 `&mut` 重新借用（Borrowing）会丢失 `Pin` 语义，可能破坏自引用类型的内存安全（Memory Safety）。
+`Pin::as_mut()` 保持 `Pin` 包装，返回 `Pin<&mut T>`。普通 `&mut` 重新借用（Borrowing）会丢失 `Pin` 语义，可能破坏自引用（Reference）类型的内存安全（Memory Safety）。
 </details>
 
 ---
@@ -283,7 +283,7 @@ graph TD
 <details>
 <summary>✅ 答案与解析</summary>
 
-`pin!` 宏（Macro）在栈上创建 pinned 值，无需 `Box::pin` 的堆分配。简化了测试和局部异步代码中的 pinning 操作。
+`pin!` 宏（Macro）在栈上创建 pinned 值，无需 `Box::pin` 的堆分配。简化了测试和局部异步（Async）代码中的 pinning 操作。
 </details>
 
 ---

@@ -174,7 +174,7 @@ use super::foo;           // 引用父模块的 foo
 use crate::utils::helper; // 引用 crate 根的 utils
 ```
 
-**知识点**：`super` 常用于测试模块访问被测代码的私有项（测试通常放在 `super` 模块中）。[→ 模块系统详解](11_modules_and_paths.md)
+**知识点**：`super` 常用于测试模块（Module）访问被测代码的私有项（测试通常放在 `super` 模块中）。[→ 模块系统详解](11_modules_and_paths.md)
 
 </details>
 

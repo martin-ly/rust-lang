@@ -12,17 +12,20 @@
    ```bash
    cd exercises/rustlings_style/ex01_borrow_fix
    ```
+
 2. 尝试编译，观察错误信息：
 
    ```bash
    cargo check
    ```
+
 3. 根据编译器提示修复 `src/lib.rs` 中的代码
 4. 运行测试验证修复：
 
    ```bash
    cargo test
    ```
+
 5. 修复成功后进入下一题
 
 ---

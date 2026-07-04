@@ -117,7 +117,7 @@
 
 | 来源 | 用途 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |------|------|-----------------|----------|--------------|
-| [Rust 中文社区论坛](https://rustcc.cn/) | 问答、博客、招聘、活动 | L1-L6 | [10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) | [rustcc.cn](https://rustcc.cn/) |
+| [Rust 中文社区论坛 [已失效]]<!-- 原链接: https://rustcc.cn/ --> | 问答、博客、招聘、活动 | L1-L6 | [10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) | [rustcc.cn [已失效]]<!-- 原链接: https://rustcc.cn/ --> |
 | [Rust 语言中文翻译](https://kaisery.github.io/trpl-zh-cn/) | TRPL 中文版 | L1-L5 | [10_i18n_source_alignment.md](10_i18n_source_alignment.md) | [TRPL 中文](https://kaisery.github.io/trpl-zh-cn/) |
 | [Rust Reference 中文](https://rustwiki.org/zh-CN/reference/) | Reference 社区翻译 | L3-L6 | [10_i18n_source_alignment.md](10_i18n_source_alignment.md) | [Reference 中文](https://rustwiki.org/zh-CN/reference/) |
 
@@ -167,7 +167,7 @@
 |------------|------------|------------|----------|----------|
 | `impl Trait` 和 `dyn Trait` 的区别？ | 静态/动态分发 | L3-L4 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q17 | [TRPL Ch 18.2](https://doc.rust-lang.org/book/ch18-02-trait-objects.html)、[Reference Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) |
 | 什么是型变（Variance）？ | 子类型与型变 | L4-L5 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q19 | [Rustonomicon Subtyping](https://doc.rust-lang.org/nomicon/subtyping.html) |
-| 什么是 GAT？ | 泛型关联类型 | L5-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q22 | [RFC 1590 GAT](https://rust-lang.github.io/rfcs/1590-generic-associated-types.html) |
+| 什么是 GAT？ | 泛型关联类型 | L5-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q22 | [RFC 1590 GAT [已失效]]<!-- 原链接: https://rust-lang.github.io/rfcs/1590-generic-associated-types.html --> |
 | 空指针优化（NPO）是什么？ | 布局优化 | L4-L5 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q24 | [Rust Reference Niche](https://doc.rust-lang.org/reference/type-layout.html#reprc-enums)、[Rustonomicon NPO](https://doc.rust-lang.org/nomicon/exotic-sizes.html#niche-values) |
 
 ### 并发与异步 {#并发与异步}
@@ -177,7 +177,7 @@
 | `Send` 和 `Sync` 的区别？ | 并发安全标记 | L2-L3 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q26 | [TRPL Ch 16.4](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)、[Rustonomicon Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) |
 | `Mutex` 和 `RwLock` 怎么选？ | 锁选型 | L3-L4 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q27 | [std sync](https://doc.rust-lang.org/std/sync/index.html) |
 | 为什么 `Cell` 不是 `Sync`？ | 内部可变性与线程安全 | L4-L5 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q31 | [Rustonomicon Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) |
-| 什么是 `Pin`？为什么 async/await 需要它？ | 自引用与状态机 | L4-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q11、Q32 | [Rustonomicon Pin](https://doc.rust-lang.org/nomicon/pin.html)、[Async Book Pin](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) |
+| 什么是 `Pin`？为什么 async/await 需要它？ | 自引用与状态机 | L4-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q11、Q32 | [Rustonomicon Pin](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)、[Async Book Pin [已失效]]<!-- 原链接: https://rust-lang.github.io/async-book/04_pinning/01_chapter.html --> |
 | 跨 await 持锁有什么风险？ | 异步并发安全 | L5-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q33 | [Async Book Shared State](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html) |
 
 ### Unsafe 与 FFI {#unsafe-与-ffi}
@@ -244,7 +244,7 @@
 4. **社区视频/课程资源（如 Rustconf、YouTube 教程）未纳入**：当前仅覆盖文本型权威来源。
 5. **多语言面试题表述差异未系统整理**：可结合 [data/i18n_terminology.yaml](../../data/i18n_terminology.yaml) 扩展术语对照。
 
-> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | [Rustlings](https://github.com/rust-lang/rustlings) | [Rust Standard Library](https://doc.rust-lang.org/std/) | [course.rs](https://course.rs/) | [Rust 中文社区](https://rustcc.cn/) | [Rust Japan](https://rust-jp.rs/) | [Exercism Rust](https://exercism.org/tracks/rust)
+> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | [Rustlings](https://github.com/rust-lang/rustlings) | [Rust Standard Library](https://doc.rust-lang.org/std/) | [course.rs](https://course.rs/) | [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ --> | [Rust Japan](https://rust-jp.rs/) | [Exercism Rust](https://exercism.org/tracks/rust)
 
 ---
 
@@ -271,7 +271,7 @@
 > **来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/)
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **来源**: [course.rs](https://course.rs/)
-> **来源**: [Rust 中文社区](https://rustcc.cn/)
+> **来源**: [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->
 > **来源**: [Rust Japan](https://rust-jp.rs/)
 > **来源**: [Exercism Rust track](https://exercism.org/tracks/rust)
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)

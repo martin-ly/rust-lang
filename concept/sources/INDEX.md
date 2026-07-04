@@ -43,7 +43,7 @@
 | `CAR` | The Cargo Book | <https://doc.rust-lang.org/cargo/> | 持续维护 | `[来源: CAR — 章节]` |
 | `RUC` | The rustc Book | <https://doc.rust-lang.org/rustc/> | 持续维护 | `[来源: RUC — 章节]` |
 | `UNB` | The Unstable Book | <https://doc.rust-lang.org/nightly/unstable-book/> | nightly | `[来源: UNB — 特性名]` |
-| `STD` | Rust Standard Library | <https://doc.rust-lang.org/std/> | 与 stable 同步 | `[来源: STD — 模块::项]` |
+| `STD` | Rust Standard Library | <https://doc.rust-lang.org/std/> | 与 stable 同步 | `[来源: STD — 模块（Module）::项]` |
 | `FOR` | Rust Forge | <https://forge.rust-lang.org/> | 持续维护 | `[来源: FOR — 页面]` |
 
 ### REF — Rust Reference 精确章节映射（常用）
@@ -110,7 +110,7 @@
 
 ## 三级来源：社区与工业资源
 
-| 标识符 | 全称 | 类型 | 建议引用格式 |
+| 标识符 | 全称 | 类型 | 建议引用（Reference）格式 |
 | :--- | :--- | :--- | :--- |
 | `CR` | Comprehensive Rust (Google) | 培训 | `[来源: CR — 章节]` |
 | `RI` | Rust Internals (internals.rust-lang.org) | 论坛 | `[来源: RI — 帖子标题]` |

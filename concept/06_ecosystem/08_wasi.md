@@ -164,7 +164,7 @@ let dir_cap = preopen_dir("/sandbox/data")?;
 | **资源转移** | 能力句柄 move 到 guest | 所有权（Ownership） move |
 | **资源共享** | 能力降级（只读/只写） | `&T` / `&mut T` |
 | **资源回收** | 句柄 drop → 能力失效 | 所有权（Ownership）离开作用域 → drop |
-| **安全保证** | 无句柄 = 无访问权 | 无所有权 = 无访问权 |
+| **安全保证** | 无句柄 = 无访问权 | 无所有权（Ownership） = 无访问权 |
 
 > **关键洞察**: WASI 的能力安全模型与 Rust 的所有权模型存在深层同构——二者都通过**资源唯一标识 + 显式转移**来消除隐式全局访问。这是 Rust 成为 Wasm 生态首选语言的深层原因。[来源: WASI Docs; Rust Ownership Model] ✅
 
@@ -427,7 +427,7 @@ fn escape_sandbox() {
 }
 ```
 
-> **运行时错误**: WASI 能力检查器返回 `ENOTCAPABLE`（无能力）。
+> **运行时（Runtime）错误**: WASI 能力检查器返回 `ENOTCAPABLE`（无能力）。
 > **与 Rust 所有权的同构**: 这类似于 Rust 编译器阻止无所有权变量的访问——WASI 在运行时强制执行相同的逻辑，但边界是"能力句柄"而非"所有权变量"。
 > **关键洞察**: Rust 的所有权检查在编译期，WASI 的能力检查在运行时，二者形成**互补的安全层**。[来源: 💡 原创分析]
 
@@ -452,7 +452,7 @@ fn escape_sandbox() {
 ### 8.5 边界极限测试：Resource 句柄生命周期
 
 ```rust,ignore
-// 边界测试：Resource 句柄在跨组件传递时的生命周期
+// 边界测试：Resource 句柄在跨组件传递时的生命周期（Lifetimes）
 
 // 宿主创建 Resource
 let file = preopen_file("/sandbox/data.txt")?;

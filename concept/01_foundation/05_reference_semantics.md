@@ -44,7 +44,7 @@
   - [相关概念文件](#相关概念文件)
   - [七、多级引用（Reference）语义与部分重借用（Multi-level References \& Partial Reborrows）](#七多级引用语义与部分重借用multi-level-references--partial-reborrows)
     - [7.1 多级引用（Reference）类型](#71-多级引用类型)
-      - [7.1.1 共享引用的嵌套：`&T` → `&&T` → `&&&T`](#711-共享引用的嵌套t--t--t)
+      - [7.1.1 共享引用（Reference）的嵌套：`&T` → `&&T` → `&&&T`](#711-共享引用的嵌套t--t--t)
       - 7.1.2 可变引用（Mutable Reference）的嵌套：`&mut T`、`&mut &T`、`&mut &mut T`
       - [7.1.3 弱化的不可逆性](#713-弱化的不可逆性)
     - [7.2 部分重借用（Partial Reborrows）](#72-部分重借用partial-reborrows)
@@ -230,7 +230,7 @@ b.len();        // 自动: (&*b).len() → &String::len()
 >
 > 1. 编译器尝试 `s.method()` → `(&s).method()` → `(&mut s).method()` → `(*s).method()`
 > 2. 选择**第一个成功匹配**的调用方式
-> 3. 不可变引用（Mutable Reference）优先于可变引用（避免不必要的独占访问）
+> 3. 不可变引用（Immutable Reference）优先于可变引用（避免不必要的独占访问）
 > [来源: [Rust Reference — Method Call Expressions](https://doc.rust-lang.org/reference/expressions/method-call-expr.html#autoref)]
 
 ---
@@ -293,7 +293,7 @@ graph TD
     end
 ```
 
-> **认知功能**: 此图展示 Deref 强制与借用检查器的**协作关系**——Deref 强制发生在借用检查之后，因此不会绕过安全保证。
+> **认知功能**: 此图展示 Deref 强制与借用（Borrowing）检查器的**协作关系**——Deref 强制发生在借用检查之后，因此不会绕过安全保证。
 > **关键洞察**: Deref 返回的引用**仍然受借用检查器约束**。`DerefMut::deref_mut` 返回的 `&mut self.0` 遵守所有可变引用（Mutable Reference）的规则。
 > [来源: [Rust Reference — Borrow Checker](https://doc.rust-lang.org/reference/statements-and-expressions.html)]
 
@@ -542,7 +542,7 @@ assert_eq!(x, 20);
 
 > **重要区分**: `&mut &T` 与 `&&mut T` 是完全不同的类型：
 >
-> - `&mut &T`: 一个可变引用，其目标是一个共享引用。你可以修改这个可变引用使其指向**另一个**共享引用，但不能通过它修改最终目标（因为内层是 `&T`）。
+> - `&mut &T`: 一个可变引用（Mutable Reference），其目标是一个共享引用。你可以修改这个可变引用使其指向**另一个**共享引用，但不能通过它修改最终目标（因为内层是 `&T`）。
 > - `&&mut T`: 一个共享引用，其目标是一个可变引用。你不能通过外层的共享引用修改任何东西（外层是共享的），但可以通过内层的可变引用修改目标——前提是内层可变引用本身可达。
 
 ```rust
@@ -846,7 +846,7 @@ fn demo_lifetime_propagation<'a>(opt: &'a Option<&'a mut i32>) -> Option<&'a i32
 }
 ```
 
-> **关键洞察**: `as_ref()` 不创建新的引用，而是**重新打包**现有的引用，保持原始生命周期不变。对于嵌套引用，这意味着内层引用的生命周期约束会被完整保留。
+> **关键洞察**: `as_ref()` 不创建新的引用，而是**重新打包**现有的引用，保持原始生命周期（Lifetimes）不变。对于嵌套引用，这意味着内层引用的生命周期约束会被完整保留。
 > [来源: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)]（一级来源）
 
 ---
@@ -1291,7 +1291,7 @@ fn main() {
 > 编译器无法静态验证 `RefCell` 的借用规则，因为 `RefCell` 的内部状态是动态的。
 > 这与编译期借用检查（`&mut T` 不能从 `&T` 获取）形成对比：内部可变性是"信任的逃脱 hatch"——编译器信任开发者通过运行时（Runtime）检查保证安全。
 > 代价：运行时（Runtime）开销（引用计数）和可能的 panic。
-> 这与 C++ 的 `mutable` 关键字（突破 const 约束，无运行时检查）或 Java 的 `final` 字段（引用不可变，但对象状态可变）不同——Rust 的内部可变性是显式、有检查的安全机制。
+> 这与 C++ 的 `mutable` 关键字（突破 const 约束，无运行时（Runtime）检查）或 Java 的 `final` 字段（引用不可变，但对象状态可变）不同——Rust 的内部可变性是显式、有检查的安全机制。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.RefCell.html)]
 
@@ -1419,7 +1419,7 @@ fn main() {}
 
 > 内存安全（Memory Safety） ⟸ 引用有效性保证 ⟸ 所有权（Ownership）与借用规则
 > 别名分析正确 ⟸ &T 共享读 / &mut T 独占写 ⟸ 类型系统（Type System）
-> **过渡**: 掌握 引用语义：自动解引用、Deref 强制与类型转换 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 引用语义：自动解引用、Deref 强制与类型转换 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 引用语义：自动解引用、Deref 强制与类型转换 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: 引用语义：自动解引用、Deref 强制与类型转换 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 

@@ -67,23 +67,23 @@
     - [1.2 TRPL 官方定义](#12-trpl-官方定义)
     - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
-    - [2.1 泛型（Generics）参数类型矩阵](#21-泛型参数类型矩阵)
-    - [2.2 泛型（Generics）实现机制对比](#22-泛型实现机制对比)
+    - [2.1 泛型参数类型矩阵](#21-泛型参数类型矩阵)
+    - [2.2 泛型实现机制对比](#22-泛型实现机制对比)
     - [2.3 泛型约束演进矩阵](#23-泛型约束演进矩阵)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
     - [4.1 引理：参数多态 ⟹ System F 类型规则](#41-引理参数多态--system-f-类型规则)
-    - [4.2 定理：单态化（Monomorphization） ⟹ 零成本抽象（Zero-Cost Abstraction） ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)
+    - [4.2 定理：单态化 ⟹ 零成本抽象 ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)
     - [4.3 推论：Const Generics ⟹ 类型级编程](#43-推论const-generics--类型级编程)
     - [4.4 约束多态的类型安全](#44-约束多态的类型安全)
-    - [4.5 定理一致性（Coherence）矩阵](#45-定理一致性矩阵)
+    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：泛型函数与约束](#51-正确示例泛型函数与约束)
     - [5.2 正确示例：常量泛型](#52-正确示例常量泛型)
     - [5.3 反例：类型大小未知（E0277）](#53-反例类型大小未知e0277)
-    - [5.4 反例：生命周期（Lifetimes）约束不足（E0310）](#54-反例生命周期约束不足e0310)
+    - [5.4 反例：生命周期约束不足（E0310）](#54-反例生命周期约束不足e0310)
     - [5.5 参数性定理（Theorems for Free）](#55-参数性定理theorems-for-free)
-    - [5.6 泛型实现机制对比：单态化（Monomorphization） vs 类型擦除 vs 模板](#56-泛型实现机制对比单态化-vs-类型擦除-vs-模板)
+    - [5.6 泛型实现机制对比：单态化 vs 类型擦除 vs 模板](#56-泛型实现机制对比单态化-vs-类型擦除-vs-模板)
     - [5.7 Const Generics 进阶用法](#57-const-generics-进阶用法)
       - [5.7.1 常量表达式与 `generic_const_exprs`](#571-常量表达式与-generic_const_exprs)
       - [5.7.2 where 约束中的 const generics](#572-where-约束中的-const-generics)
@@ -94,12 +94,12 @@
       - [5.7.7 与 C++ 模板非类型参数的对比](#577-与-c-模板非类型参数的对比)
   - [六、反命题与边界分析（Counter-proposition \& Boundary Analysis）](#六反命题与边界分析counter-proposition--boundary-analysis)
     - [6.1 反命题 1: "泛型总是零成本的"](#61-反命题-1-泛型总是零成本的)
-    - [6.2 反命题 2: "类型推断（Type Inference）总是完备的"](#62-反命题-2-类型推断总是完备的)
+    - [6.2 反命题 2: "类型推断总是完备的"](#62-反命题-2-类型推断总是完备的)
     - [6.3 反命题 3: "泛型约束越严格越好"](#63-反命题-3-泛型约束越严格越好)
-    - [6.4 反命题 4: "Const Generics 完全替代运行时（Runtime）值"](#64-反命题-4-const-generics-完全替代运行时值)
+    - [6.4 反命题 4: "Const Generics 完全替代运行时值"](#64-反命题-4-const-generics-完全替代运行时值)
   - [七、边界极限测试代码（Boundary Limit Tests）](#七边界极限测试代码boundary-limit-tests)
-    - [7.1 测试 1: 单态化（Monomorphization）代码膨胀与 dyn Trait 权衡极限](#71-测试-1-单态化代码膨胀与-dyn-trait-权衡极限)
-    - [7.2 测试 2: 生命周期（Lifetimes）约束递归传递与 HRTB 边界](#72-测试-2-生命周期约束递归传递与-hrtb-边界)
+    - [7.1 测试 1: 单态化代码膨胀与 dyn Trait 权衡极限](#71-测试-1-单态化代码膨胀与-dyn-trait-权衡极限)
+    - [7.2 测试 2: 生命周期约束递归传递与 HRTB 边界](#72-测试-2-生命周期约束递归传递与-hrtb-边界)
     - [7.3 测试 3: Const Generics 类型级运算与特化边界](#73-测试-3-const-generics-类型级运算与特化边界)
   - [八、认知路径（Cognitive Path）](#八认知路径cognitive-path)
     - [Step 1: 直觉类比 — "泛型像填空题模板"](#step-1-直觉类比--泛型像填空题模板)
@@ -120,8 +120,8 @@
       - [与 `default impl` 的交互](#与-default-impl-的交互)
       - [实际用例：为 `&str` 和 `String` 提供不同优化实现](#实际用例为-str-和-string-提供不同优化实现)
     - [9.3 补充：泛型代码的编译时间优化策略](#93-补充泛型代码的编译时间优化策略)
-      - [策略 1：Turbofish 显式标注减少类型推断（Type Inference）开销](#策略-1turbofish-显式标注减少类型推断开销)
-      - [策略 2：dyn Trait 替代单态化（运行时（Runtime）代码共享）](#策略-2dyn-trait-替代单态化运行时代码共享)
+      - [策略 1：Turbofish 显式标注减少类型推断开销](#策略-1turbofish-显式标注减少类型推断开销)
+      - [策略 2：dyn Trait 替代单态化（运行时代码共享）](#策略-2dyn-trait-替代单态化运行时代码共享)
       - [策略 3：编译单元拆分与 `-Zshare-generics`](#策略-3编译单元拆分与--zshare-generics)
       - [策略 4：`cargo bloat` 工具——量化单态化膨胀](#策略-4cargo-bloat-工具量化单态化膨胀)
       - [策略 5：`thin LTO` 与泛型编译时间优化](#策略-5thin-lto-与泛型编译时间优化)
@@ -160,7 +160,7 @@
   - [参考来源](#参考来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：泛型函数（理解层）](#测验-1泛型函数理解层)
-    - [测验 2：泛型结构体（Struct）（应用层）](#测验-2泛型结构体应用层)
+    - [测验 2：泛型结构体（应用层）](#测验-2泛型结构体应用层)
     - [测验 3：多个 Trait Bound（应用层）](#测验-3多个-trait-bound应用层)
     - [测验 4：单态化与代码膨胀（分析层）](#测验-4单态化与代码膨胀分析层)
     - [测验 5：关联类型（分析层）](#测验-5关联类型分析层)
@@ -214,7 +214,7 @@
 | **类型参数** | `<T>` | 类型 | 无 | 最常见，泛型容器/函数 |
 | **生命周期（Lifetimes）参数** | `<'a>` | 引用（Reference）有效期 | 推断 | 函数/结构体（Struct）含引用 |
 
-> **形式化对应**: 生命周期参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用（Reference）有效性的形式化约束。详见 L1 生命周期 §4 和 [L4 所有权（Ownership）形式化](../04_formal/03_ownership_formal.md) §2.2。[来源: Tofte & Talpin 1994 — Region Types]
+> **形式化对应**: 生命周期（Lifetimes）参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用（Reference）有效性的形式化约束。详见 L1 生命周期 §4 和 [L4 所有权（Ownership）形式化](../04_formal/03_ownership_formal.md) §2.2。[来源: Tofte & Talpin 1994 — Region Types]
 | **常量泛型** | `<const N: usize>` | 编译期常量值 | 无 | 固定大小数组、类型状态 |
 | **关联类型** | `type Item;` | Trait 内部类型 | 实现时确定 | Iterator、Future 等 |
 
@@ -228,7 +228,7 @@
 | **Java** | 类型擦除（Type Erasure） | 编译为 Object，插入类型转换 | 有（装箱/拆箱） | 低 |
 | **C#** | Reified generics + JIT | 运行时（Runtime）生成专用代码 | 极低 | 中 |
 | **Go** | 接口实现（GCShape stenciling） | 为每个 GC shape 生成一份代码 | 极低 | 中 |
-| **Haskell** | 类型类字典传递 | 运行时传递字典指针 | 有（间接调用） | 低 |
+| **Haskell** | 类型类字典传递 | 运行时（Runtime）传递字典指针 | 有（间接调用） | 低 |
 
 > **来源: [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/)** Rust 泛型通过单态化实现零成本抽象（Zero-Cost Abstraction），为每个具体类型生成专用代码。 ✅
 > **[来源: C++ Reference: Templates]** C++ 模板通过文本替换实现编译期实例化，与 Rust 单态化类似但无统一类型检查。 ✅
@@ -443,7 +443,7 @@ fn draw_dyn(d: &dyn Drawable) {
 > 参数性定理（Wadler 1989）是单态化语义保持的核心依据——正因泛型函数不能基于类型参数的内部表示做分支，单态化才保持行为等价。
 > Const Generics 是依赖类型的有限形式，HRTB 是全称量词在生命周期上的应用，Sized 默认约束确保单态化所需的静态内存布局。
 > **跨层映射**:
-> 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统（Type System）一致性"
+> 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
 > **过渡到示例与反例**:
 > 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？下一节通过正例展示泛型的正确使用方式，通过反例揭示定理失效的精确条件——特别是 E0277（约束不满足）、E0275（类型递归溢出）、E0310（生命周期不足）等编译错误的触发机制，为反命题决策树建立具体场景。
 
@@ -1134,7 +1134,7 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 类型推断故障诊断工具。遇到 E0282/E0283 错误时，沿决策树定位推断失败的根因类别。关键洞察：HM 推断在理论上就有边界，Turbofish 不是对编译器的妥协，而是对推断搜索空间的精确控制。[来源: 💡 原创分析]
+> **认知功能**: 类型推断（Type Inference）故障诊断工具。遇到 E0282/E0283 错误时，沿决策树定位推断失败的根因类别。关键洞察：HM 推断在理论上就有边界，Turbofish 不是对编译器的妥协，而是对推断搜索空间的精确控制。[来源: 💡 原创分析]
 
 **四层分析**:
 
@@ -1564,7 +1564,7 @@ impl Factory for WidgetFactory {
 }
 ```
 
-> **关键洞察**: 参数位置的 `impl Trait` 是语法糖（糖衣），返回位置的 `impl Trait` 是类型系统的核心扩展（存在类型）。RPITIT 将这一能力进一步扩展到 trait 定义中，使 trait 方法也能返回不透明类型。
+> **关键洞察**: 参数位置的 `impl Trait` 是语法糖（糖衣），返回位置的 `impl Trait` 是类型系统（Type System）的核心扩展（存在类型）。RPITIT 将这一能力进一步扩展到 trait 定义中，使 trait 方法也能返回不透明类型。
 > **来源**: [Rust Reference: Impl trait](https://doc.rust-lang.org/reference/) · [RFC 1951: Extend impl Trait to function arguments](https://github.com/rust-lang/rfcs/pull/1951) · [RFC 2289: Associated type bounds](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) · [TAPL Ch.24: Existential types]
 
 ---
@@ -2402,7 +2402,7 @@ impl Displayable for i32 {
 }
 ```
 
-> **修正**: 泛型函数的 trait bound 必须在调用点由具体类型满足。如果未为目标类型实现所需 trait，编译器会拒绝单态化。这是 Rust 零成本抽象的核心——trait bound 检查在编译期完成，无运行时开销。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 泛型函数的 trait bound 必须在调用点由具体类型满足。如果未为目标类型实现所需 trait，编译器会拒绝单态化。这是 Rust 零成本抽象（Zero-Cost Abstraction）的核心——trait bound 检查在编译期完成，无运行时开销。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **相关判定树**: [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树)
 
 ### 10.5 边界测试：泛型约束的传递性与 trait bound 推导（编译错误）

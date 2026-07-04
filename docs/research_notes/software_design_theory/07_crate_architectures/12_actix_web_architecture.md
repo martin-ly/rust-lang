@@ -254,7 +254,7 @@ impl Actor for MyActor {
 }
 ```
 
-> [来源: Actix 文档 — Actors](https://actix.rs/actix/trait.Actor.html)
+> [来源: Actix 文档 — Actors](https://actix.rs/)
 
 ### 3.3 `Handler<M>` Trait {#33-handlerm-trait}
 

@@ -59,7 +59,7 @@
   - [十、边界测试：BorrowSanitizer 预览的编译错误](#十边界测试borrowsanitizer-预览的编译错误)
     - [10.1 边界测试：BorrowSanitizer 的别名分析误报（编译错误/运行时（Runtime）检测）](#101-边界测试borrowsanitizer-的别名分析误报编译错误运行时检测)
     - [10.2 边界测试：Sanitizer 与优化的交互（运行时（Runtime）检测丢失）](#102-边界测试sanitizer-与优化的交互运行时检测丢失)
-    - [10.3 边界测试：BorrowSanitizer 与 FFI 的交互盲区（运行时漏报）](#103-边界测试borrowsanitizer-与-ffi-的交互盲区运行时漏报)
+    - [10.3 边界测试：BorrowSanitizer 与 FFI 的交互盲区（运行时（Runtime）漏报）](#103-边界测试borrowsanitizer-与-ffi-的交互盲区运行时漏报)
     - [10.6 边界测试：BorrowSanitizer 与 `unsafe` 块内的合法别名（运行时误报）](#106-边界测试borrowsanitizer-与-unsafe-块内的合法别名运行时误报)
     - [10.5 边界测试：BorrowSanitizer 与 Miri 的检测范围差异（UB 漏检）](#105-边界测试borrowsanitizer-与-miri-的检测范围差异ub-漏检)
     - [10.3 边界测试：BorrowSanitizer 的插桩盲区与优化代码（UB 漏检）](#103-边界测试borrowsanitizer-的插桩盲区与优化代码ub-漏检)
@@ -289,7 +289,7 @@ graph TD
 └── 三者可同时使用（叠加开销）
 ```
 
-> **边界要点**: BorrowSanitizer 专注于**借用语义违规**，不替代 AddressSanitizer 或 ThreadSanitizer。三者形成互补的检测矩阵。
+> **边界要点**: BorrowSanitizer 专注于**借用（Borrowing）语义违规**，不替代 AddressSanitizer 或 ThreadSanitizer。三者形成互补的检测矩阵。
 > [来源: [Sanitizers Wiki](https://github.com/google/sanitizers/wiki)]
 
 ---

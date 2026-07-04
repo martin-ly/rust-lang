@@ -256,7 +256,7 @@ Ergonomic ref-counting 可显著降低内核绑定的样板代码量，提升可
 <summary>✅ 答案与解析</summary>
 
 Swift ARC 由编译器自动插入 retain/release，但循环引用仍需手动处理（`weak`/`unowned`）。
-Rust 的所有权系统更安全，但引用计数只是众多所有权策略之一。
+Rust 的所有权（Ownership）系统更安全，但引用计数只是众多所有权策略之一。
 </details>
 
 ---

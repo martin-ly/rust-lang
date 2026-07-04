@@ -369,7 +369,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 gen block 与 Stream 的**对称关系**——`gen` 对应 `Iterator`，`async gen` 对应 `Stream`。
-> **使用建议**: 同步数据流使用 `gen`；异步数据流（如网络请求序列）使用 `async gen`。
+> **使用建议**: 同步数据流使用 `gen`；异步（Async）数据流（如网络请求序列）使用 `async gen`。
 > **关键洞察**: `async gen` 解决了当前 Rust 中**异步迭代**的语法缺失——目前需要使用 `futures::stream::unfold` 或手动实现 `Stream` trait，语法繁琐。
 > [来源: [Async Working Group — Streams](https://rust-lang.github.io/async-fundamentals-initiative/)]
 
@@ -598,7 +598,7 @@ fn borrow_iter(data: &mut Vec<i32>) -> impl Iterator<Item = &i32> {
 > 若 `gen` 块借用（Borrowing）了外部变量（如 `data: &mut Vec<i32>`），返回的引用（Reference）必须不超越 `data` 的生命周期（Lifetimes）。
 > 但 `impl Iterator<Item = &i32>` 的隐式生命周期（Lifetimes）参数无法捕获 `data` 的生命周期——迭代器（Iterator）的 `Item` 类型需要一个显式生命周期参数。
 > 正确写法：返回 `impl Iterator<Item = &'_ i32>` 或显式命名生命周期（Lifetimes）。这与手写 `Iterator` 实现的生命周期问题相同——`gen` 块的便利不消除生命周期约束，只是隐藏了状态机的复杂性。
-> 这与 Rust 的 async/await 类似：await 点保存的引用（Reference）必须满足状态机的生命周期。
+> 这与 Rust 的 async/await 类似：await 点保存的引用（Reference）必须满足状态机的生命周期（Lifetimes）。
 > [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
@@ -617,12 +617,12 @@ fn self_referential_gen() -> impl Iterator<Item = &str> {
 > **修正**:
 > `gen` 块（实验性）编译为状态机，与 `async` 块类似。
 > 若 `gen` 块包含自引用（Reference）（如 `yield &s` 中 `s` 是局部变量），生成的迭代器（Iterator）需要 `Pin` 保证不移动。
-> 但 `impl Iterator` 返回类型不隐含 `Pin`——调用者获得普通迭代器，可移动，导致悬垂引用（Reference）。
+> 但 `impl Iterator` 返回类型不隐含 `Pin`——调用者获得普通迭代器（Iterator），可移动，导致悬垂引用（Reference）。
 > 解决方案：
 >
 > 1) 不 yield 局部引用（yield 拥有值如 `String`）；
 > 2) 使用 `yield` 的 `'static` 值（如字面量 `&'static str`）；
-> 3) 若必须自引用，返回 `Pin<Box<dyn Iterator>>`（复杂且 API 不友好）。
+> 3) 若必须自引用（Reference），返回 `Pin<Box<dyn Iterator>>`（复杂且 API 不友好）。
 >
 > 这与 `async` 块的自引用问题相同——`async fn` 自动处理 `Pin`，但 `gen` 块的返回类型设计仍在演进。
 > `gen` 块的简化目标（消除手写 Iterator 的样板）与自引用的复杂性形成张力。

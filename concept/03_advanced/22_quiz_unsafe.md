@@ -585,7 +585,7 @@ fn main() {
 
 **注意**：即使使用 `write_unaligned`，若 `data` 的地址不是 4 字节对齐的，某些架构（如 ARM）可能产生硬件异常。x86/x86_64 支持非对齐访问，但性能较低。
 
-**知识点**：原始指针的类型转换不等于合法访问。Rust 的别名模型（Stacked Borrows / Tree Borrows）对指针的类型和权限有严格要求。[→ Unsafe 详解](03_unsafe.md)
+**知识点**：原始指针（Raw Pointer）的类型转换不等于合法访问。Rust 的别名模型（Stacked Borrows / Tree Borrows）对指针的类型和权限有严格要求。[→ Unsafe 详解](03_unsafe.md)
 
 </details>
 

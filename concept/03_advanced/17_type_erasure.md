@@ -49,11 +49,11 @@
   - [十、边界测试：类型擦除的编译错误](#十边界测试类型擦除的编译错误)
     - [10.1 边界测试：`dyn Trait` 的大小未知（编译错误）](#101-边界测试dyn-trait-的大小未知编译错误)
     - [10.2 边界测试：trait object 的方法返回 `Self`（编译错误）](#102-边界测试trait-object-的方法返回-self编译错误)
-    - [10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（编译错误）](#103-边界测试any-的-downcast_ref-与生命周期编译错误)
+    - [10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（Lifetimes）（编译错误）](#103-边界测试any-的-downcast_ref-与生命周期编译错误)
     - [10.4 边界测试：vtable 与对象安全的隐性约束（编译错误）](#104-边界测试vtable-与对象安全的隐性约束编译错误)
     - [10.3 边界测试：`dyn Trait` 与 `Sized` 边界的冲突（编译错误）](#103-边界测试dyn-trait-与-sized-边界的冲突编译错误)
-    - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型约束（编译错误）](#104-边界测试dyn-trait-的-sized-要求与泛型约束编译错误)
-    - [10.6 边界测试：所有权移动后的再次使用](#106-边界测试所有权移动后的再次使用)
+    - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型（Generics）约束（编译错误）](#104-边界测试dyn-trait-的-sized-要求与泛型约束编译错误)
+    - [10.6 边界测试：所有权（Ownership）移动后的再次使用](#106-边界测试所有权移动后的再次使用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`dyn Trait` 的大小为什么在编译时未知？它如何被实际使用？（理解层）](#测验-1dyn-trait-的大小为什么在编译时未知它如何被实际使用理解层)
     - [测验 2：`&dyn Trait` 在内存中的布局是什么？（理解层）](#测验-2dyn-trait-在内存中的布局是什么理解层)
@@ -630,7 +630,7 @@ impl Canvas {
 }
 ```
 
-> **修正**: `dyn Trait` 是动态大小类型（DST），编译器无法在编译期确定其大小（不同实现类型大小不同）。DST 不能直接作为函数参数、返回值或变量类型，必须放在指针后面：`Box<dyn Trait>`（拥有）、`&dyn Trait`（借用）、`&mut dyn Trait`（可变借用）。这与 C++ 的虚函数表指针类似，但 Rust 的 `dyn` 是显式语法，编译器拒绝隐式类型擦除。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: `dyn Trait` 是动态大小类型（DST），编译器无法在编译期确定其大小（不同实现类型大小不同）。DST 不能直接作为函数参数、返回值或变量类型，必须放在指针后面：`Box<dyn Trait>`（拥有）、`&dyn Trait`（借用（Borrowing））、`&mut dyn Trait`（可变借用（Mutable Borrow））。这与 C++ 的虚函数表指针类似，但 Rust 的 `dyn` 是显式语法，编译器拒绝隐式类型擦除。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：trait object 的方法返回 `Self`（编译错误）
 
@@ -819,7 +819,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-优势是统一接口、解耦代码、支持运行时多态。代价是动态分发开销和失去静态类型信息，可能降低内联优化机会。
+优势是统一接口、解耦代码、支持运行时（Runtime）多态。代价是动态分发开销和失去静态类型信息，可能降低内联优化机会。
 </details>
 
 ## 认知路径

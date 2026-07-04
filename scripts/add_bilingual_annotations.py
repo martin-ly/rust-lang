@@ -189,7 +189,7 @@ def annotate_line(line: str, seen_terms: set[str]) -> tuple[str, bool]:
 
 
 def collect_text_blocks(content: str) -> str:
-    """收集 Markdown 中所有非代码块文本（用于检查术语覆盖）。"""
+    """收集 Markdown 中所有非代码块、非标题文本（用于检查术语覆盖）。"""
     blocks = []
     in_code = False
     for line in content.splitlines():
@@ -197,6 +197,8 @@ def collect_text_blocks(content: str) -> str:
             in_code = not in_code
             continue
         if in_code:
+            continue
+        if line.lstrip().startswith("#"):
             continue
         blocks.append(line)
     return "\n".join(blocks)
@@ -218,11 +220,13 @@ def check_term_coverage(content: str, path: Path) -> FileReport:
     text = collect_text_blocks(content)
 
     for cn, en in TERMS:
-        # 仅对确实出现的术语检查是否已标注
-        if cn in text and not has_bilingual_annotation(text, cn, en):
-            report.uncovered_terms.append(cn)
-        elif cn in text:
-            report.annotated_terms.append(cn)
+        # 仅对作为独立词/词组出现的术语检查是否已标注（前后不能是其他中文字符或单词字符）
+        term_pattern = re.compile(rf"(?<![A-Za-z0-9_\u4e00-\u9fff]){re.escape(cn)}(?![A-Za-z0-9_\u4e00-\u9fff])")
+        if term_pattern.search(text):
+            if not has_bilingual_annotation(text, cn, en):
+                report.uncovered_terms.append(cn)
+            else:
+                report.annotated_terms.append(cn)
 
     return report
 

@@ -195,7 +195,7 @@ fn rl_fix_borrow_error() {
 | 错误结构化 | 文本诊断，难以解析 | 运行时（Runtime）异常，位置模糊 | **JSON 输出，精确 span** |
 | 反馈密度 | 编译错误稀疏 | 运行时（Runtime）错误稀疏 | **类型/所有权（Ownership）/生命周期（Lifetimes）错误密集** |
 | 确定性 | 宏（Macro）/条件编译引入不确定性 | 动态类型引入不确定性 | **相同输入 → 相同诊断** |
-| 错误可修复性 | 指针错误难以自动修复 | 类型错误运行时才发现 | **类型系统（Type System）约束缩小搜索空间** |
+| 错误可修复性 | 指针错误难以自动修复 | 类型错误运行时（Runtime）才发现 | **类型系统（Type System）约束缩小搜索空间** |
 
 > **关键洞察**: Rust 编译器的**结构化密度**（每字节源码对应的诊断信息量）是 C++ 的 3-5 倍，这意味着 RL agent 的状态表示更紧凑、奖励信号更密集。来源: [Rust Reference: JSON Diagnostic Format](https://doc.rust-lang.org/reference/) ✅
 
@@ -704,7 +704,7 @@ fn main() {
 }
 ```
 
-> **认知功能**: 此反例展示了 AI 生成 unsafe 代码的典型风险模式——**隐式假设输入有效**。Rust 的安全抽象要求将这些假设转化为类型系统可检查的契约（如 `Option<T>` 或 `Result<T, E>`）。[来源: NOM — Validity Invariant] ✅
+> **认知功能**: 此反例展示了 AI 生成 unsafe 代码的典型风险模式——**隐式假设输入有效**。Rust 的安全抽象要求将这些假设转化为类型系统（Type System）可检查的契约（如 `Option<T>` 或 `Result<T, E>`）。[来源: NOM — Validity Invariant] ✅
 
 ### 13.3 边界测试：生命周期标注的 AI 生成质量
 
@@ -732,7 +732,7 @@ fn correct_fix(s: &str) -> String {
 > **关键洞察**:
 > 生命周期（Lifetimes）错误（E0716、E0515）是 AI 生成 Rust 代码的**最大弱点**之一。
 > RustRepair-RL 报告显示，RL 模型在修复 `E0382`（use of moved value）上达到 78% 准确率，但 `E0716`（lifetime mismatch）仅 45%。
-> 这表明生命周期推理需要更深层的语义理解，而非单纯的模式匹配（Pattern Matching）。
+> 这表明生命周期（Lifetimes）推理需要更深层的语义理解，而非单纯的模式匹配（Pattern Matching）。
 > [来源: RustRepair-RL, 2024] ⚠️ 前沿
 
 ---
@@ -830,7 +830,7 @@ fn fixed() {
 > AI 模型（权重、配置）在加载后通常是只读的。
 > 使用 `Arc<T>`（而非 `Arc<Mutex<T>>`）共享模型实例，编译器在类型层面保证不可变性。
 > 若需模型微调（fine-tuning），则必须使用 `Arc<RwLock<T>>` 或显式克隆后修改。
-> Rust 的所有权系统帮助区分"推理"（只读）和"训练"（可变）两种模式，防止运行时数据竞争。
+> Rust 的所有权（Ownership）系统帮助区分"推理"（只读）和"训练"（可变）两种模式，防止运行时数据竞争。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.5 边界测试：AI 生成代码的 unsafe 误用与形式化保证缺失（运行时 UB）

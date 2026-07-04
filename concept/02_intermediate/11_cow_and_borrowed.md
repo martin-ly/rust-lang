@@ -26,7 +26,7 @@
 - [Cow：写时克隆与零拷贝抽象](#cow写时克隆与零拷贝抽象)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 问题：借用（Borrowing）与拥有的选择困境](#11-问题借用与拥有的选择困境)
+    - [1.1 问题：借用与拥有的选择困境](#11-问题借用与拥有的选择困境)
     - [1.2 Cow 的设计：延迟克隆](#12-cow-的设计延迟克隆)
     - [1.3 两种变体：Borrowed vs Owned](#13-两种变体borrowed-vs-owned)
   - [二、技术细节](#二技术细节)
@@ -42,13 +42,13 @@
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Cow 与借用（Borrowing）的编译错误](#十边界测试cow-与借用的编译错误)
-    - [10.1 边界测试：`Cow` 的写时复制与借用（Borrowing）冲突（编译错误）](#101-边界测试cow-的写时复制与借用冲突编译错误)
+  - [十、边界测试：Cow 与借用的编译错误](#十边界测试cow-与借用的编译错误)
+    - [10.1 边界测试：`Cow` 的写时复制与借用冲突（编译错误）](#101-边界测试cow-的写时复制与借用冲突编译错误)
     - [10.2 边界测试：`Borrow` trait 与 `AsRef` 的误用（编译错误）](#102-边界测试borrow-trait-与-asref-的误用编译错误)
     - [10.3 边界测试：`Cow` 的 `ToOwned` 约束（编译错误）](#103-边界测试cow-的-toowned-约束编译错误)
-    - [10.4 边界测试：`Cow` 在 `match` 中的所有权（Ownership）转移（编译错误）](#104-边界测试cow-在-match-中的所有权转移编译错误)
-    - [10.2 边界测试：`Cow` 的生命周期（Lifetimes）与所有权（Ownership）转换（编译错误）](#102-边界测试cow-的生命周期与所有权转换编译错误)
-    - [10.4 边界测试：Cow 的生命周期（Lifetimes）与泛型（Generics）约束不匹配（编译错误）](#104-边界测试cow-的生命周期与泛型约束不匹配编译错误)
+    - [10.4 边界测试：`Cow` 在 `match` 中的所有权转移（编译错误）](#104-边界测试cow-在-match-中的所有权转移编译错误)
+    - [10.2 边界测试：`Cow` 的生命周期与所有权转换（编译错误）](#102-边界测试cow-的生命周期与所有权转换编译错误)
+    - [10.4 边界测试：Cow 的生命周期与泛型约束不匹配（编译错误）](#104-边界测试cow-的生命周期与泛型约束不匹配编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`Cow<'a, str>` 的两种变体是什么？各自代表什么语义？（理解层）](#测验-1cowa-str-的两种变体是什么各自代表什么语义理解层)
     - [测验 2：`Cow::Borrowed(s).to_mut()` 在什么情况下会触发克隆？（理解层）](#测验-2cowborrowedsto_mut-在什么情况下会触发克隆理解层)
@@ -128,7 +128,7 @@ graph TD
     style CLONED fill:#fff3e0
 ```
 
-> **认知功能**: 此图展示 Cow 的**核心机制**——只在需要修改时才克隆，否则保持零拷贝借用。
+> **认知功能**: 此图展示 Cow 的**核心机制**——只在需要修改时才克隆，否则保持零拷贝借用（Borrowing）。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)] · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch04-02-references-and-borrowing.html)
 > **使用建议**: 当 API 可能接受借用或拥有，且可能或不可能需要修改时，使用 Cow。
 > **关键洞察**: Cow 是 Rust **零成本抽象（Zero-Cost Abstraction）**的典范——如果不修改，它的开销与直接借用完全相同；如果需要修改，自动退化为拥有。
@@ -619,7 +619,7 @@ fn main() {
 > `Cow` 是枚举（Enum）（`enum Cow<'a, B> { Borrowed(&'a B), Owned(<B as ToOwned>::Owned) }`），在 `match` 中按值解构时，`Cow` 被移动，`Owned` 变体的内部值被取出。
 > 若需保留 `Cow`，应使用 `match &cow`（匹配引用（Reference））或 `cow.as_ref()`（获取 `&B`）。
 > `Cow` 的灵活性伴随着所有权（Ownership）复杂性：有时需要 `Cow` 本身（传递），有时需要内部值（使用），有时需要引用（Reference）（检查）。
-> 这与 `Option` 和 `Result` 的所有权管理相同——枚举（Enum）的按值匹配消耗所有者。
+> 这与 `Option` 和 `Result` 的所有权（Ownership）管理相同——枚举（Enum）的按值匹配消耗所有者。
 > `Cow` 提供 `into_owned()`（无论借用或拥有，都转为拥有）和 `to_mut()`（转为可变引用（Mutable Reference），必要时克隆）简化常见模式。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
@@ -665,7 +665,7 @@ fn bad_cow<'a>(s: &'a str) -> Cow<'static, str> {
 fn main() {}
 ```
 
-> **修正**: `Cow<'a, B>` 的**生命周期参数**：1) `'a` 是借用的最长期限；2) `Cow::Borrowed(&'a B)` 要求引用（Reference）至少存活 `'a`；3) 返回 `Cow<'static, str>` 要求数据是 `'static`（如 `String` 或字面量）。解决：1) 返回 `Cow<'a, str>` 而非 `'static`；2) 若必须 `'static`，使用 `Cow::Owned(s.to_string())`；3) 使用 `Into<Cow<'static, str>>` 让调用方决定。这与 C++ 的 `std::variant`（无生命周期，存储值或引用）或 Swift 的 `copy-on-write`（隐式，无生命周期标记）不同——Rust 的 `Cow` 显式跟踪所有权和借用生命周期。[来源: [Cow Documentation](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
+> **修正**: `Cow<'a, B>` 的**生命周期（Lifetimes）参数**：1) `'a` 是借用的最长期限；2) `Cow::Borrowed(&'a B)` 要求引用（Reference）至少存活 `'a`；3) 返回 `Cow<'static, str>` 要求数据是 `'static`（如 `String` 或字面量）。解决：1) 返回 `Cow<'a, str>` 而非 `'static`；2) 若必须 `'static`，使用 `Cow::Owned(s.to_string())`；3) 使用 `Into<Cow<'static, str>>` 让调用方决定。这与 C++ 的 `std::variant`（无生命周期，存储值或引用）或 Swift 的 `copy-on-write`（隐式，无生命周期标记）不同——Rust 的 `Cow` 显式跟踪所有权和借用生命周期。[来源: [Cow Documentation](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 

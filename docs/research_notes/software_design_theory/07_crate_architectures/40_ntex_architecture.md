@@ -246,7 +246,7 @@ HttpServer::new(|| async {
 
 > - [来源: [ntex GitHub Repository](https://github.com/ntex-rs/ntex)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
-> - [来源: [Rust 中文社区](https://rustcc.cn/)]
+> - [来源: [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->]
 
 ## 学术权威参考 {#学术权威参考}
 

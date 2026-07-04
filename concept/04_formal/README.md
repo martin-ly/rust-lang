@@ -188,7 +188,7 @@ graph TB
 | [29_type_inference_complexity.md](29_type_inference_complexity.md) | 类型推断（Type Inference）复杂度 [ROD 迁移] | HM 扩展、约束生成、PSPACE-完全、与 rustc typeck 映射 | ✅ 已迁移 | L2 Trait, L2 Generics | rustc_typeck |
 | [30_aeneas_symbolic_semantics.md](30_aeneas_symbolic_semantics.md) | Aeneas 符号化语义 [ROD 迁移] | LLBC、HLPL、符号执行、模拟关系、Aeneas 工具链 | ✅ 已迁移 | L3 Unsafe, L7 Formal Methods | Aeneas, Miri |
 | [17_operational_semantics.md](17_operational_semantics.md) | 操作语义 [教学类比] | 小步/大步语义、求值上下文、Rust 形式化 | ✅ v1.0 | L1 Ownership, L3 Unsafe | RustBelt, Miri |
-| [20_axiomatic_semantics.md](20_axiomatic_semantics.md) | 公理语义 [教学类比] | Hoare 逻辑、wp/sp 计算、Rust 所有权公理化 | ✅ v1.0 | L4 形式化理论, L3 Unsafe | Prusti, Creusot, Kani |
+| [20_axiomatic_semantics.md](20_axiomatic_semantics.md) | 公理语义 [教学类比] | Hoare 逻辑、wp/sp 计算、Rust 所有权（Ownership）公理化 | ✅ v1.0 | L4 形式化理论, L3 Unsafe | Prusti, Creusot, Kani |
 | [21_type_semantics.md](21_type_semantics.md) | 类型语义 [教学类比] | 进步/保持定理、Rust 特有类型语义、子类型与变型 | ✅ v1.0 | L2 Type System, L4 形式化理论 | Pierce TAPL, RustBelt |
 | [18_evaluation_strategies.md](18_evaluation_strategies.md) | 求值策略 [教学类比] | CBV/CBN/CBR、归约策略、Rust 的 CBV+Move 定位 | ✅ v1.0 | L1 Type System, L2 Generics | Lambda Calculus |
 

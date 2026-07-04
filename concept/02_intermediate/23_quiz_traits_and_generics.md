@@ -326,7 +326,7 @@ fn main() {
 
 **关联类型 vs 泛型（Generics）参数**：
 
-| 特性 | 关联类型 | 泛型参数 |
+| 特性 | 关联类型 | 泛型（Generics）参数 |
 |:---|:---|:---|
 | 声明位置 | `trait Iterator { type Item; }` | `trait Add<RHS> { ... }` |
 | 每个类型的实现数 | 只能有一个 `Item` | 可以有多个（`Add<i32>`、`Add<f64>`） |

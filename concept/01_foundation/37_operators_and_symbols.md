@@ -167,7 +167,7 @@
 | `path<...>` | 为泛型（Generics）类型指定参数，如 `Vec<u8>` |
 | `path::<...>` / `method::<...>` | 表达式中为泛型（Generics）指定参数（turbofish），如 `"42".parse::<i32>()` |
 | `fn ident<...> ...` | 定义泛型（Generics）函数 |
-| `struct ident<...> ...` | 定义泛型结构体（Struct） |
+| `struct ident<...> ...` | 定义泛型（Generics）结构体（Struct） |
 | `enum ident<...> ...` | 定义泛型枚举（Enum） |
 | `impl<...> ...` | 定义泛型实现 |
 | `for<...> type` | 高阶生命周期（Lifetimes）约束 |
@@ -182,7 +182,7 @@
 | `T: U` | 泛型参数 `T` 必须实现 `U` |
 | `T: 'a` | `T` 必须 outlive 生命周期（Lifetimes） `'a` |
 | `T: 'static` | `T` 不包含非 `'static` 的借用（Borrowing） |
-| `'b: 'a` | 生命周期 `'b` 必须 outlive `'a` |
+| `'b: 'a` | 生命周期（Lifetimes） `'b` 必须 outlive `'a` |
 | `T: ?Sized` | 允许 `T` 为动态大小类型 |
 | `'a + trait` / `trait + trait` | 复合约束 |
 
@@ -195,7 +195,7 @@
 | `#[meta]` | 外部属性 |
 | `#![meta]` | 内部属性 |
 | `$ident` | 宏（Macro）替换 |
-| `$ident:kind` | 宏元变量 |
+| `$ident:kind` | 宏（Macro）元变量 |
 | `$(...)...` | 宏重复 |
 | `ident!(...)` / `ident!{...}` / `ident![...]` | 宏调用 |
 

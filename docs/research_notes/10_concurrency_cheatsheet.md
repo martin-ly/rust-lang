@@ -528,4 +528,4 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 
 - [This Week in Rust](https://this-week-in-rust.org/)
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
-- [Rust 中文社区](https://rustcc.cn/)
+- [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->

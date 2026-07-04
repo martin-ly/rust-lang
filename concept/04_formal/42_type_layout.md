@@ -83,7 +83,7 @@ struct Point {
 
 ### `#[repr(transparent)]`
 
-用于单字段结构体（Struct）或枚举，要求其布局与内部字段完全相同。常用于 newtype 包装器。
+用于单字段结构体（Struct）或枚举（Enum），要求其布局与内部字段完全相同。常用于 newtype 包装器。
 
 ```rust
 #[repr(transparent)]
@@ -121,7 +121,7 @@ struct AlignedBuffer([u8; 64]);
 
 - `()`
 - 空数组 `[]`
-- 只包含 ZST 字段的结构体
+- 只包含 ZST 字段的结构体（Struct）
 - `PhantomData<T>`
 
 ZST 不占用运行时（Runtime）内存，但参与类型系统（Type System）和泛型（Generics）单态化（Monomorphization）。

@@ -965,7 +965,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 
 **讲师**: David Evangelista
 
-**课程链接**: <https://inf.ethz.ch/courses>
+**课程链接**: [https://inf.ethz.ch/courses [已失效]]<!-- 原链接: https://inf.ethz.ch/courses -->
 
 **内容对齐**:
 

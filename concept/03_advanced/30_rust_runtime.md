@@ -118,7 +118,7 @@ static GLOBAL: MyAllocator = MyAllocator;
 
 ## 四、运行时假设
 
-Rust 运行时还对程序行为做出一些假设，违反这些假设可能导致 UB：
+Rust 运行时（Runtime）还对程序行为做出一些假设，违反这些假设可能导致 UB：
 
 - Rust 栈帧在局部变量析构完成前不应被释放（如 `longjmp` 可能违反）。
 - unwinding 需遵守 panic 相关约定。

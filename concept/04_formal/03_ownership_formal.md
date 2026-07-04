@@ -52,8 +52,8 @@
 
 将所有权（Ownership）建模为**权限（permission）**，借用（Borrowing）建模为**分数权限（fractional permission）**：
 
-- 独占所有权 = 权限 `π = 1`，可读可写可转移（move/转移所有权：赋值、传参后原变量变为 uninitialized）
-- 共享借用 `&T` = 权限 `0 < π < 1`，多个引用（Reference）权限之和 `≤ 1` [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
+- 独占所有权（Ownership） = 权限 `π = 1`，可读可写可转移（move/转移所有权：赋值、传参后原变量变为 uninitialized）
+- 共享借用（Borrowing） `&T` = 权限 `0 < π < 1`，多个引用（Reference）权限之和 `≤ 1` [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
 - 可变借用（Mutable Borrow） `&mut T` = 临时将 `π = 1` 从原所有者处**出借**，原变量被冻结
 
 **> [L1↔L4: borrowing]** L1 中"&T 不转移所有权"对应 L4 的分数权限拆分：`&{π}x * &{ρ}x ⇔ π + ρ ≤ 1`。L1 的"&mut T 独占"对应 L4 的临时独占断言 `&mut{x} ↦_1 v`，其生命周期（Lifetimes）结束后果断归还。
@@ -232,7 +232,7 @@ COR 的核心类型判断：
   // r 获得对 x 的共享引用，x 仍有效 [来源] ✅
 ```
 
-**> [L1↔L4: borrowing]** L1 的共享引用不转移所有权，在 L4 中体现为分数权限拆分：`&{π}x` 其中 `π < 1`，原所有者仍保留 `1 - π` 的只读权限。
+**> [L1↔L4: borrowing]** L1 的共享引用（Reference）不转移所有权，在 L4 中体现为分数权限拆分：`&{π}x` 其中 `π < 1`，原所有者仍保留 `1 - π` 的只读权限。
 
 ```text
 可变借用（Mut Borrow）:
@@ -360,7 +360,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树揭示**形式化证明的精确边界**。功能定位：纠正常见误解——通过编译不等于"程序正确"。使用建议：在论证 Rust 安全性时，先明确"安全"的层次，避免将内存安全（Memory Safety）混同于功能正确。关键洞察：**形式化是内存安全的充分条件，但非程序正确的充分条件；Rust 的设计哲学是"证明你该证明的"，而非"证明一切"**。[来源: 💡 原创分析]
-> **分析**: 形式化所有权是**内存安全**的充分条件，而非**程序正确**的充分条件。逻辑正确性需要额外的功能规格（如 Hoare 三元组、 refinement types），通常由 Creusot/Verus/Dafny 等工具处理，而非所有权形式化本身。
+> **分析**: 形式化所有权是**内存安全（Memory Safety）**的充分条件，而非**程序正确**的充分条件。逻辑正确性需要额外的功能规格（如 Hoare 三元组、 refinement types），通常由 Creusot/Verus/Dafny 等工具处理，而非所有权形式化本身。
 
 #### 决策树 2: "线性类型和 Rust 所有权完全等价"
 
@@ -476,7 +476,7 @@ Unpin 的消解:
 
 **与 Oxide 的关联**
 
-Oxide（Weiss et al., 2019）将 Rust 的类型系统形式化为一个基于**来源（provenance）**的演算。在 Oxide 中，每个引用携带一个来源标识，标识其创建时的借用表达式。Pin 可以看作是对来源的额外约束——不仅要求引用有效，还要求引用的目标位置不可变：
+Oxide（Weiss et al., 2019）将 Rust 的类型系统（Type System）形式化为一个基于**来源（provenance）**的演算。在 Oxide 中，每个引用携带一个来源标识，标识其创建时的借用表达式。Pin 可以看作是对来源的额外约束——不仅要求引用有效，还要求引用的目标位置不可变：
 
 ```text
 Oxide 视角:
@@ -520,7 +520,7 @@ Oxide 视角:
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | 所有权 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | 形式化对象 |
-| 生命周期 | [`../01_foundation/03_lifetimes.md`](../01_foundation/03_lifetimes.md) | 区域类型对应 |
+| 生命周期（Lifetimes） | [`../01_foundation/03_lifetimes.md`](../01_foundation/03_lifetimes.md) | 区域类型对应 |
 | 借用（Borrowing） | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) | 分数权限对应 |
 | 线性逻辑 | [`./01_linear_logic.md`](01_linear_logic.md) | 理论基础 |
 | 类型论 | [`./02_type_theory.md`](02_type_theory.md) | 约束求解 |
@@ -1329,7 +1329,7 @@ fn main() {
 > 但编译器保守地拒绝——因为无法静态确定 `push` 是否重新分配。
 > Polonius（下一代借用检查器）可能放松此类限制，但当前 NLL 保守。
 > 这展示了**形式化模型**与**编译器实现**的差距：形式化证明安全，但实现为保守近似。
-> 这与 Java 的数组越界检查（运行时精确检查）或 C 的"信任程序员"（无检查）不同——Rust 在编译期做保守决策，牺牲部分合法程序以换取零运行时开销。
+> 这与 Java 的数组越界检查（运行时（Runtime）精确检查）或 C 的"信任程序员"（无检查）不同——Rust 在编译期做保守决策，牺牲部分合法程序以换取零运行时开销。
 > [来源: [Polonius](https://github.com/rust-lang/polonius)] · [来源: [Niko Matsakis Blog](https://smallcultfollowing.com/babysteps/)]
 
 ### 10.4 边界测试：形式化所有权与编译器实现的偏差（运行时 UB）

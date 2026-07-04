@@ -51,8 +51,8 @@
 
 | Async Book 章节 | 项目文档 | 状态 | 备注 |
 |-----------------|----------|------|------|
-| [Pinning](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) | ✅ | Pin 保证不移动 |
-| [Pin and Suffering](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §5 | ✅ | Pin 契约破坏 |
+| [Pinning [已失效]]<!-- 原链接: https://rust-lang.github.io/async-book/04_pinning/01_chapter.html --> | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) | ✅ | Pin 保证不移动 |
+| [Pin and Suffering [已失效]]<!-- 原链接: https://rust-lang.github.io/async-book/04_pinning/01_chapter.html --> | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §5 | ✅ | Pin 契约破坏 |
 
 ---
 
@@ -79,7 +79,7 @@
 | Async Book 章节 | 项目文档 | 状态 | 备注 |
 |-----------------|----------|------|------|
 | [Under the Hood](https://rust-lang.github.io/async-book/02_execution/01_chapter.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ | async 状态机展开 |
-| [Async Lifetimes](https://rust-lang.github.io/async-book/02_execution/03_async_lifetimes.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | ✅ | async 析构限制 |
+| [Async Lifetimes [已失效]]<!-- 原链接: https://rust-lang.github.io/async-book/02_execution/03_async_lifetimes.html --> | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | ✅ | async 析构限制 |
 
 ---
 
@@ -87,7 +87,7 @@
 
 | 误区 | 项目反例 | Async Book 来源 |
 |------|----------|-----------------|
-| 在 `Drop` 中调用 `.await` | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | [Async Drop](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) |
+| 在 `Drop` 中调用 `.await` | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | [Async Drop [已失效]]<!-- 原链接: https://rust-lang.github.io/async-book/04_pinning/01_chapter.html --> |
 | 同步锁跨越 await | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §4 | [Shared State](https://rust-lang.github.io/async-book/02_execution/01_chapter.html) |
 | poll 不注册 waker | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §7 | [Waker](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html) |
 
@@ -124,4 +124,4 @@
 
 - [This Week in Rust](https://this-week-in-rust.org/)
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
-- [Rust 中文社区](https://rustcc.cn/)
+- [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->

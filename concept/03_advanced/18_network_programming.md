@@ -71,7 +71,7 @@
     - 10.4 边界测试：缓冲区大小与 MTU 的匹配（运行时（Runtime）性能问题）
     - [10.3 边界测试：`TcpStream` 的 `set_nonblocking` 与 async 混用（运行时（Runtime）错误）](#103-边界测试tcpstream-的-set_nonblocking-与-async-混用运行时错误)
     - [10.4 边界测试：TcpStream 的同步读写与 async 混用（编译错误/运行时（Runtime）死锁）](#104-边界测试tcpstream-的同步读写与-async-混用编译错误运行时死锁)
-    - 10.7 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突
+    - 10.7 边界测试：不可变借用（Immutable Borrow）与可变借用的冲突
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`tokio::net::TcpListener::bind(...).await` 与 `std::net::TcpListener::bind(...)` 在阻塞行为上有什么区别？（理解层）](#测验-1tokionettcplistenerbindawait-与-stdnettcplistenerbind-在阻塞行为上有什么区别理解层)
     - [测验 2：在 async 函数中直接调用 `std::thread::sleep` 会有什么后果？（理解层）](#测验-2在-async-函数中直接调用-stdthreadsleep-会有什么后果理解层)
@@ -863,7 +863,7 @@ async fn read_async() {
 fn main() {
     let mut v = vec![1, 2, 3];
     let r = &v;
-    // ❌ 编译错误: 已存在不可变借用时不能可变借用
+    // ❌ 编译错误: 已存在不可变借用（Immutable Borrow）时不能可变借用
     v.push(4);
     println!("{:?}", r);
 }
@@ -942,7 +942,7 @@ Tokio 版本是异步（Async）的，`bind` 本身通常不阻塞，但 `accept
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
+| Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 异步 I/O 安全 ⟸ mio/epoll 抽象 ⟸ 事件驱动状态机

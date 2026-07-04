@@ -372,9 +372,9 @@ Rust 封闭效应系统的设计约束：
 | 开放系统的假设 | Rust 的现实约束 |
 | :--- | :--- |
 | 效果处理器可在运行时（Runtime）动态组合 | Rust 拒绝运行时开销（handler 栈、动态分派） |
-| 用户定义效果需编译器插件机制 | Rust 编译器架构不支持用户扩展类型系统核心 |
+| 用户定义效果需编译器插件机制 | Rust 编译器架构不支持用户扩展类型系统（Type System）核心 |
 | 行多态子类型需复杂类型推断（Type Inference） | Rust 已有生命周期（Lifetimes）推断，再加效果行推断会爆炸 |
-| 效果抽象边界模糊 | Rust 强调零成本抽象（Zero-Cost Abstraction），任何运行时成本都需显式 opt-in |
+| 效果抽象边界模糊 | Rust 强调零成本抽象（Zero-Cost Abstraction），任何运行时（Runtime）成本都需显式 opt-in |
 
 > **重要澄清**:
 > 封闭 ≠ 固定不变。Rust 的封闭效应系统可以随语言版本扩展新效果（如 Edition 2027 可能引入 `no-panic`）。
@@ -1707,7 +1707,7 @@ trait Generator<R> {
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 使用 `async fn`（效果：挂起）、`unsafe fn`（效果：绕过安全检查）、`const fn`（效果：编译期求值）等关键字标记效果，而非泛型效果系统。
+Rust 使用 `async fn`（效果：挂起）、`unsafe fn`（效果：绕过安全检查）、`const fn`（效果：编译期求值）等关键字标记效果，而非泛型（Generics）效果系统。
 </details>
 
 ---

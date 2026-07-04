@@ -174,13 +174,13 @@ fn main() {
 
 | Trait | 调用方式 | 实现条件 |
 |:---|:---|:---|
-| `Fn` | `&self` | 只捕获不可变引用（Mutable Reference） |
+| `Fn` | `&self` | 只捕获不可变引用（Immutable Reference） |
 | `FnMut` | `&mut self` | 捕获可变引用（Reference） |
 | `FnOnce` | `self` | 消耗捕获的值 |
 
 **层次关系**：`Fn` <: `FnMut` <: `FnOnce`（所有实现 `Fn` 的闭包（Closures）也自动实现 `FnMut` 和 `FnOnce`）
 
-**知识点**：Rust 编译器自动推断闭包的最小捕获方式。理解三种 `Fn` trait 是使用高阶函数（如 `map`、`filter`）的基础。[→ 闭包详解](15_closure_basics.md)
+**知识点**：Rust 编译器自动推断闭包（Closures）的最小捕获方式。理解三种 `Fn` trait 是使用高阶函数（如 `map`、`filter`）的基础。[→ 闭包详解](15_closure_basics.md)
 
 </details>
 
@@ -410,7 +410,7 @@ fn main() {
 
 **答案**：`[4, 16, 36]`
 
-**解析**：迭代器链的执行顺序：
+**解析**：迭代器（Iterator）链的执行顺序：
 
 ```rust,ignore
 [1, 2, 3, 4, 5, 6]

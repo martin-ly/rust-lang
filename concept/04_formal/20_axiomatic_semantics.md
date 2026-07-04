@@ -30,8 +30,8 @@
     - [2.1 公理语义方法对比矩阵](#21-公理语义方法对比矩阵)
   - [三、技术细节](#三技术细节)
     - [3.1 Rust 赋值规则的公理化](#31-rust-赋值规则的公理化)
-    - [3.2 所有权转移的 wp 计算](#32-所有权转移的-wp-计算)
-    - [3.3 借用规则的不变式](#33-借用规则的不变式)
+    - [3.2 所有权（Ownership）转移的 wp 计算](#32-所有权转移的-wp-计算)
+    - [3.3 借用（Borrowing）规则的不变式](#33-借用规则的不变式)
     - [3.4 unsafe 块的公理边界](#34-unsafe-块的公理边界)
   - [四、工具链映射](#四工具链映射)
     - [4.1 Prusti：Viper 后端的契约推导](#41-prustiviper-后端的契约推导)
@@ -44,7 +44,7 @@
   - [十、边界测试](#十边界测试)
     - [10.1 边界测试：wp 计算的无限 descending chain（逻辑错误）](#101-边界测试wp-计算的无限-descending-chain逻辑错误)
     - [10.2 边界测试：借用不变式违反的验证失败（验证错误）](#102-边界测试借用不变式违反的验证失败验证错误)
-    - [10.3 边界测试：unsafe 块的公理逃逸（运行时 UB）](#103-边界测试unsafe-块的公理逃逸运行时-ub)
+    - [10.3 边界测试：unsafe 块的公理逃逸（运行时（Runtime） UB）](#103-边界测试unsafe-块的公理逃逸运行时-ub)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Hoare 三元组 `{P} C {Q}` 中，P、C、Q 分别代表什么？（理解层）](#测验-1hoare-三元组-p-c-q-中pcq-分别代表什么理解层)
     - [测验 2：什么是"最弱前置条件"（Weakest Precondition, wp）？它在程序验证中的作用是什么？（理解层）](#测验-2什么是最弱前置条件weakest-precondition-wp它在程序验证中的作用是什么理解层)
@@ -59,14 +59,14 @@
     - [Step 4: 工具怎么自动验证？](#step-4-工具怎么自动验证)
     - [Step 5: 公理语义的边界在哪里？](#step-5-公理语义的边界在哪里)
   - [六、定理推理链](#六定理推理链)
-    - [6.1 定理一致性矩阵](#61-定理一致性矩阵)
+    - [6.1 定理一致性（Coherence）矩阵](#61-定理一致性矩阵)
     - [6.2 反命题决策树](#62-反命题决策树)
   - [七、工具链深度对比矩阵](#七工具链深度对比矩阵)
     - [7.1 Prusti vs Creusot vs Kani](#71-prusti-vs-creusot-vs-kani)
   - [八、更多边界测试](#八更多边界测试)
-    - [10.4 边界测试：Prusti 对泛型 Trait 的验证失败](#104-边界测试prusti-对泛型-trait-的验证失败)
+    - [10.4 边界测试：Prusti 对泛型（Generics） Trait 的验证失败](#104-边界测试prusti-对泛型-trait-的验证失败)
     - [10.5 边界测试：Kani 的路径爆炸与有界验证](#105-边界测试kani-的路径爆炸与有界验证)
-    - [10.6 边界测试：Creusot 的 Ghost 代码与零成本抽象](#106-边界测试creusot-的-ghost-代码与零成本抽象)
+    - [10.6 边界测试：Creusot 的 Ghost 代码与零成本抽象（Zero-Cost Abstraction）](#106-边界测试creusot-的-ghost-代码与零成本抽象)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
 
@@ -716,7 +716,7 @@ wp（最弱前置条件）是**反向推导**：从目标 `Q` 出发，计算实
 
 Prusti 将 Rust 翻译为 Viper 中间语言，使用分离逻辑自动验证内存安全（Memory Safety）；Creusot 基于 Why3 平台，显式使用 wp 计算推导验证条件；Kani 使用 CBMC 的符号执行引擎，从初始状态穷举路径。
 
-三种工具覆盖的 Rust 子集不同：Prusti 适合安全 Rust 的内存安全验证，Creusot 适合功能性规约的 wp 推导，Kani 适合小规模核心抽象的自动反例生成。
+三种工具覆盖的 Rust 子集不同：Prusti 适合安全 Rust 的内存安全（Memory Safety）验证，Creusot 适合功能性规约的 wp 推导，Kani 适合小规模核心抽象的自动反例生成。
 
 ### Step 5: 公理语义的边界在哪里？
 
@@ -933,7 +933,7 @@ fn factorial(n: Int) -> Int {
 
 - [操作语义：程序行为的形式化定义](17_operational_semantics.md) — 小步/大步语义、求值上下文
 - [指称语义：CPO 与不动点](12_denotational_semantics.md) — Scott-Strachey 语义
-- [类型论基础](02_type_theory.md) — HM 类型系统、System F、Rust 类型扩展
+- [类型论基础](02_type_theory.md) — HM 类型系统（Type System）、System F、Rust 类型扩展
 - [所有权形式化](03_ownership_formal.md) — COR、RustBelt、权限系统
 - [分离逻辑：Rust 所有权的形式化根基](11_separation_logic.md) — 框架规则、Iris、CSL
 - [RustBelt 与验证工具链](04_rustbelt.md) — 高阶幽灵状态、验证工具生态

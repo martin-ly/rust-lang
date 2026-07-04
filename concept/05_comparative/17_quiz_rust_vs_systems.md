@@ -318,7 +318,7 @@ async fn main() {
 | 取消机制 | 通过 context 手动传递 | 内置 `AbortHandle` |
 | 调试 | goroutine dump | `tokio-console` 运行时检查 |
 
-**知识点**：Rust 的所有权系统为并发原语提供了编译期保证，而 Go 依赖运行时检测和程序员纪律。[→ Rust vs Go 详解](02_rust_vs_go.md)
+**知识点**：Rust 的所有权（Ownership）系统为并发原语提供了编译期保证，而 Go 依赖运行时检测和程序员纪律。[→ Rust vs Go 详解](02_rust_vs_go.md)
 
 </details>
 
@@ -552,7 +552,7 @@ pub extern "C" fn _start() {
 
 ### Q9. 以下代码在 Rust 和 C++ 中的生命周期管理对比
 
-**C++（智能指针）**：
+**C++（智能指针（Smart Pointer））**：
 
 ```cpp
 std::shared_ptr<int> p1 = std::make_shared<int>(42);
@@ -591,14 +591,14 @@ std::thread::spawn(move || {
 });
 ```
 
-C++ 的 `shared_ptr` 允许这样做（因为原子引用计数是线程安全的），但 Rust 的 `Rc` 在编译期阻止——迫使你在多线程场景使用 `Arc`。
+C++ 的 `shared_ptr` 允许这样做（因为原子引用（Reference）计数是线程安全的），但 Rust 的 `Rc` 在编译期阻止——迫使你在多线程场景使用 `Arc`。
 
 **性能对比**：
 
 - `std::shared_ptr`：通常两次堆分配（控制块 + 数据）
 - `Rc<T>` / `Arc<T>`：一次堆分配（Rust 使用 `Box` 布局优化）
 
-**知识点**：Rust 的智能指针设计在功能上接近 C++，但通过类型系统（Type System）（`Send`/`Sync`）在编译期排除了整类并发错误。[→ 内存管理详解](../02_intermediate/03_memory_management.md)
+**知识点**：Rust 的智能指针（Smart Pointer）设计在功能上接近 C++，但通过类型系统（Type System）（`Send`/`Sync`）在编译期排除了整类并发错误。[→ 内存管理详解](../02_intermediate/03_memory_management.md)
 
 </details>
 

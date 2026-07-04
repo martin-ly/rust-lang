@@ -318,7 +318,7 @@ impl Client<Configured> {
 
 ## 零成本抽象示例 {#零成本抽象示例}
 
-> **来源: [Rust API Guidelines – Zero-Cost Abstractions](https://rust-lang.github.io/api-guidelines/performance.html)**
+> **来源: [Rust API Guidelines – Zero-Cost Abstractions](https://rust-lang.github.io/api-guidelines/predictability.html)**
 > **来源: [Rustonomicon – Zero-Cost](https://doc.rust-lang.org/nomicon/)**
 
 | 抽象 | 运行时开销 | 编译期保证 |

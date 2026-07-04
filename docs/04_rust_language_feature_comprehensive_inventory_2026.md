@@ -448,7 +448,7 @@ static COUNTER_CELL: UnsafeCell<u32> = UnsafeCell::new(0);
 **权威对齐**:
 
 - 稳定版本: **Rust 2024 Edition** (1.85.0)
-- 来源: [RFC 3560](https://rust-lang.github.io/rfcs/3560-alignment.html)
+- 来源: [RFC 3560 [已失效]]<!-- 原链接: https://rust-lang.github.io/rfcs/3560-alignment.html -->
 - 项目审计: `STATIC_MUT_AUDIT_2026_05_07.md`
 
 ### 01.5 权威来源对齐 {#015-权威来源对齐}

@@ -48,7 +48,7 @@
 | [Rust 程序设计语言 中文版](https://kaisery.github.io/trpl-zh-cn/) | 官方翻译 | [10_rust_book_alignment.md](10_rust_book_alignment.md) | TRPL 21 章中文翻译 | ✅ 已对齐 |
 | [Rust Reference 中文翻译](https://rustwiki.org/zh-CN/reference/) | 社区翻译 | [10_rust_reference_alignment.md](10_rust_reference_alignment.md) | 语言规范 | 🔄 部分 |
 | [Rust By Example 中文](https://rustwiki.org/zh-CN/rust-by-example/) | 社区翻译 | [10_rust_by_example_alignment.md](10_rust_by_example_alignment.md) | 交互式示例 | 🔄 部分 |
-| [Rust 中文社区](https://rustcc.cn/) | 社区论坛 | [10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) | 讨论、博客、招聘 | ✅ 持续 |
+| [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ --> | 社区论坛 | [10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) | 讨论、博客、招聘 | ✅ 持续 |
 | [Rust 语言圣经](https://course.rs/) | 中文教程 | [10_learning_path_comprehensive.md](10_learning_path_comprehensive.md) | 中文学习路径 | ✅ 已索引 |
 
 ---
@@ -113,7 +113,7 @@
 2. ~~日文/中文术语对照表可扩展至更多专业术语（如 variance、coercion、orphan rules）。~~ 已补充：高级术语已统一纳入 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml)。
 3. 可建立自动化脚本检查各语言翻译版本与英文原版的版本差异。
 
-> **权威来源**: [TRPL 中文](https://kaisery.github.io/trpl-zh-cn/) | [TRPL 日文](https://doc.rust-jp.rs/book-ja/) | [Rust 中文社区](https://rustcc.cn/) | [Rust Japan](https://rust-jp.rs/)
+> **权威来源**: [TRPL 中文](https://kaisery.github.io/trpl-zh-cn/) | [TRPL 日文](https://doc.rust-jp.rs/book-ja/) | [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ --> | [Rust Japan](https://rust-jp.rs/)
 
 ## 相关概念 {#相关概念}
 

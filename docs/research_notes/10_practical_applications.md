@@ -1116,7 +1116,7 @@ impl<T> Drop for SafeVec<T> {
 | :--- | :--- | :--- | :--- |
 | 所有权与移动 | [ch04](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | [ownership.html](https://doc.rust-lang.org/nomicon/ownership.html) | 核心语言设计 |
 | 借用与生命周期 | [ch10](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) | [lifetimes.html](https://doc.rust-lang.org/nomicon/lifetimes.html)、[lifetime-elision.html](https://doc.rust-lang.org/nomicon/lifetime-elision.html) | [RFC 141](https://rust-lang.github.io/rfcs/0141-lifetime-elision.html) |
-| 异步 / Future | [ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | [async-await.html](https://doc.rust-lang.org/nomicon/async-await.html) | [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) |
+| 异步 / Future | [ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | [async-await.html](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) |
 | 并发 / Send/Sync | [ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | [send-and-sync.html](https://doc.rust-lang.org/nomicon/send-and-sync.html) | 核心语言设计 |
 | Unsafe / 原始指针 | [ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | [what-unsafe-does.html](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [RFC 1966](https://rust-lang.github.io/rfcs/1966-unsafe-pointer-reform.html) |
 | impl Trait / 泛型 | [ch10](https://doc.rust-lang.org/book/ch10-02-traits.html) | — | [RFC 1522](https://rust-lang.github.io/rfcs/1522-conservative-impl-trait.html)、[RFC 1951](https://rust-lang.github.io/rfcs/1951-expand-impl-trait.html) |

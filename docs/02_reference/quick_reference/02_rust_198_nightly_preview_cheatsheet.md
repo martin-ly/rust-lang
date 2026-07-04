@@ -38,7 +38,7 @@
 
 ## 语言特性 {#语言特性}
 
-> **[来源: Rust Nightly Documentation](https://doc.rust-lang.org/nightly/std/ops/trait.Iterator.html)**
+> **[来源: Rust Nightly Documentation](https://doc.rust-lang.org/std/iter/trait.Iterator.html)**
 > **[来源: RFC 3513 — gen blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)**
 
 ### `gen` 块 — 原生生成器 {#gen-块-原生生成器}

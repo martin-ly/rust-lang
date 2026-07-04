@@ -179,7 +179,7 @@ fn main() {
 | 源对象状态 | 有效但未指定 | 编译期禁止访问 |
 | 值类别 | lvalue/xvalue/prvalue/glvalue/rvalue | place expression / value expression |
 | 空状态 | 某些类型有（如 `std::string`） | 无，变量要么有效要么不存在 |
-| 默认行为 | 拷贝构造（深拷贝） | move（所有权转移） |
+| 默认行为 | 拷贝构造（深拷贝） | move（所有权（Ownership）转移） |
 | 显式复制 | 拷贝构造函数 | `Clone::clone()` |
 | 编译期保证 | 无 | moved-from 访问被编译器拒绝 |
 

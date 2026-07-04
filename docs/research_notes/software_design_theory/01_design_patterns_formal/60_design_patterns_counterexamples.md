@@ -252,7 +252,7 @@ struct Service {
 | 过度泛型化 | 泛型设计 | 可读性差 | 关联类型 / 上下文对象 |
 | 锁粒度过大 | 并发架构 | 性能瓶颈 | 拆分锁 / DashMap |
 
-> **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language – Ch 17](https://doc.rust-lang.org/book/ch17-00-oop.html) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [Rustonomicon – Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html)
+> **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language – Ch 17](https://doc.rust-lang.org/book/ch17-00-oop.html) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [Rustonomicon – Interior Mutability](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)
 
 ## 相关概念 {#相关概念}
 

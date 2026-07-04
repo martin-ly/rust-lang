@@ -76,7 +76,7 @@
 | `mod` | 定义模块（Module） |
 | `move` | 使闭包（Closures）获取所有捕获变量的所有权（Ownership） |
 | `mut` | 标注引用（Reference）、原始指针（Raw Pointer）或模式绑定的可变性 |
-| `pub` | 标注 struct 字段、`impl` 块或模块的公开可见性 |
+| `pub` | 标注 struct 字段、`impl` 块或模块（Module）的公开可见性 |
 | `ref` | 按引用（Reference）绑定 |
 | `return` | 从函数返回 |
 | `Self` | 正在定义或实现的类型的别名 |
@@ -154,5 +154,5 @@ fn main() {
 | 概念 | 关系 |
 |:---|:---|
 | [Modules and Paths](11_modules_and_paths.md) | `crate`、`self`、`super` 用于路径 |
-| [Attributes and Macros](12_attributes_and_macros.md) | 宏可能生成以关键字命名的标识符 |
+| [Attributes and Macros](12_attributes_and_macros.md) | 宏（Macro）可能生成以关键字命名的标识符 |
 | [Control Flow](07_control_flow.md) | `if`、`else`、`match`、`loop`、`while`、`for`、`break`、`continue` 控制流关键字 |

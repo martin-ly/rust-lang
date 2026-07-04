@@ -413,7 +413,7 @@ flowchart TD
 - [Rust Compiler Team — Polonius Working Group](https://rust-lang.github.io/compiler-team/working-groups/polonius/)
 - [Polonius GitHub Repository](https://github.com/rust-lang/polonius)
 - [Datafrog — Incremental Datalog Engine](https://github.com/rust-lang/datafrog)
-- [Niko Matsakis: An Overview of Polonius](https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius.html)
+- [Niko Matsakis: An Overview of Polonius](https://smallcultfollowing.com/babysteps/)
 
 ### 学术论文 {#学术论文}
 >

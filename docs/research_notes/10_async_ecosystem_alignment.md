@@ -74,7 +74,7 @@
 | 概念/库 | 来源 | 项目文档 | 备注 |
 |---------|------|----------|------|
 | Stream trait | [futures-rs](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 异步迭代 |
-| async_iter (gen blocks) | [RFC 3516](https://rust-lang.github.io/rfcs/3516-gen-blocks.html) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §3 | 不稳定 |
+| async_iter (gen blocks) | [RFC 3516 [已失效]]<!-- 原链接: https://rust-lang.github.io/rfcs/3516-gen-blocks.html --> | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §3 | 不稳定 |
 | channels (mpsc) | [Tokio Docs](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html) | [crates/c05_threads/](../../crates/c05_threads/README.md) | 消息传递 |
 
 ---

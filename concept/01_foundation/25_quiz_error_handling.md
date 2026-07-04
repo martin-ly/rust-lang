@@ -591,7 +591,7 @@ result
     .and_then(|v| v.validate())
 ```
 
-**知识点**：`map` / `map_err` 是 `Result` 的"端点转换"工具，允许在不展开的情况下修改成功值或错误值。[→ 错误处理基础详解](32_error_handling_basics.md)
+**知识点**：`map` / `map_err` 是 `Result` 的"端点转换"工具，允许在不展开的情况下修改成功值或错误值。[→ 错误处理（Error Handling）基础详解](32_error_handling_basics.md)
 
 </details>
 

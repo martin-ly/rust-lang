@@ -346,7 +346,7 @@ async fn fixed() {
 > 取消安全（cancellation safety）指 async 操作在 future 被取消后仍保持正确状态。
 > `tokio::sync::mpsc::Receiver::recv` 是取消安全的——若 future 在 `await` 时被丢弃，消息保留在 channel 中。
 > 但自定义组合操作可能不 cancel-safe：若在 `await` 前后有状态变更，取消可能导致状态不一致。
-> Tokio 文档明确标注每个 API 的取消安全性，这是 Rust 异步编程相比其他语言更严格的契约。
+> Tokio 文档明确标注每个 API 的取消安全性，这是 Rust 异步（Async）编程相比其他语言更严格的契约。
 > [来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ```rust,ignore

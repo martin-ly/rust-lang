@@ -295,7 +295,7 @@ let d = NaiveDate::parse_from_str("2026-6-9", "%Y-%m-%d");
 
 - [chrono GitHub Repository](https://github.com/chronotope/chrono)
 - [This Week in Rust](https://this-week-in-rust.org/)
-- [Rust 中文社区](https://rustcc.cn/)
+- [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->
 
 > **来源: [ACM Digital Library - Time and Date Representation](https://dl.acm.org/)**
 > **来源: [IEEE Standards - Time and Date Formats](https://standards.ieee.org/)**

@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-04T12:59:36.952859+00:00
+> 生成时间: 2026-07-04T15:32:12.094360+00:00
 > 扫描文件数: 382
 
 ## 全局指标
@@ -123,28 +123,28 @@
 | concept\01_foundation\16_testing_basics.md | L1 | 741 | 3 | 2 | 0 | 3 | 1 | 8 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\17_collections_advanced.md | L1 | 996 | 3 | 2 | 0 | 3 | 2 | 11 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\18_strings_and_encoding.md | L1 | 830 | 3 | 2 | 0 | 3 | 2 | 9 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\19_value_vs_reference_semantics.md | L1 | 197 | 4 | 0 | 0 | 1 | 0 | 3 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\20_variable_model.md | L1 | 626 | 4 | 2 | 0 | 2 | 0 | 12 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\21_effects_and_purity.md | L1 | 697 | 3 | 2 | 0 | 2 | 0 | 17 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\22_data_abstraction_spectrum.md | L1 | 753 | 3 | 2 | 0 | 2 | 0 | 14 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\23_move_semantics.md | L1 | 285 | 7 | 2 | 0 | 1 | 0 | 4 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\19_value_vs_reference_semantics.md | L1 | 194 | 4 | 0 | 0 | 1 | 0 | 3 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\20_variable_model.md | L1 | 621 | 4 | 2 | 0 | 2 | 0 | 12 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\21_effects_and_purity.md | L1 | 693 | 3 | 2 | 0 | 2 | 0 | 17 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\22_data_abstraction_spectrum.md | L1 | 749 | 3 | 2 | 0 | 2 | 0 | 14 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\23_move_semantics.md | L1 | 279 | 7 | 2 | 0 | 1 | 0 | 4 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\24_quiz_type_system.md | L1 | 545 | 7 | 2 | 0 | 1 | 0 | 14 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\25_quiz_error_handling.md | L1 | 658 | 7 | 2 | 0 | 1 | 0 | 18 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\26_quiz_modules_testing.md | L1 | 747 | 7 | 2 | 0 | 1 | 0 | 22 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\27_quiz_closures_iterators.md | L1 | 733 | 7 | 2 | 0 | 1 | 0 | 33 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\28_ownership_inventories_brown_book.md | L1 | 223 | 4 | 2 | 0 | 1 | 0 | 3 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\29_quiz_pl_foundations.md | L1 | 171 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\25_quiz_error_handling.md | L1 | 652 | 7 | 2 | 0 | 1 | 0 | 18 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\26_quiz_modules_testing.md | L1 | 741 | 7 | 2 | 0 | 1 | 0 | 22 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\27_quiz_closures_iterators.md | L1 | 727 | 7 | 2 | 0 | 1 | 0 | 33 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\28_ownership_inventories_brown_book.md | L1 | 217 | 4 | 2 | 0 | 1 | 0 | 3 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\29_quiz_pl_foundations.md | L1 | 168 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\30_lifetimes_advanced.md | L1 | 1501 | 3 | 2 | 0 | 1 | 0 | 43 | 10 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\31_never_type.md | L1 | 553 | 3 | 2 | 0 | 1 | 0 | 15 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\32_error_handling_basics.md | L1 | 986 | 3 | 2 | 0 | 3 | 1 | 15 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\33_quiz_ownership_borrowing.md | L1 | 543 | 7 | 2 | 0 | 1 | 0 | 17 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\33_quiz_ownership_borrowing.md | L1 | 537 | 7 | 2 | 0 | 1 | 0 | 17 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\34_pl_prerequisites.md | L1 | 499 | 3 | 2 | 0 | 1 | 0 | 12 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\35_preludes.md | L1 | 221 | 4 | 2 | 0 | 1 | 0 | 4 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\36_keywords.md | L1 | 162 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\37_operators_and_symbols.md | L1 | 264 | 7 | 2 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\38_crates_and_source_files.md | L1 | 152 | 4 | 0 | 0 | 1 | 0 | 3 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\39_items.md | L1 | 127 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| concept\01_foundation\40_patterns.md | L1 | 265 | 7 | 2 | 0 | 1 | 0 | 10 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\35_preludes.md | L1 | 215 | 4 | 2 | 0 | 1 | 0 | 4 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\36_keywords.md | L1 | 159 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\37_operators_and_symbols.md | L1 | 258 | 7 | 2 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\38_crates_and_source_files.md | L1 | 149 | 4 | 0 | 0 | 1 | 0 | 3 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\39_items.md | L1 | 124 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| concept\01_foundation\40_patterns.md | L1 | 259 | 7 | 2 | 0 | 1 | 0 | 10 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\41_statements_and_expressions.md | L1 | 169 | 4 | 0 | 0 | 1 | 0 | 4 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | concept\01_foundation\42_useful_development_tools.md | L1 | 92 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | ✅ | ✅ | ✅ | 初学者 | 参考级 |
 | concept\02_intermediate\01_traits.md | L2 | 2561 | 15 | 2 | 0 | 7 | 5 | 63 | 10 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
@@ -169,17 +169,17 @@
 | concept\02_intermediate\20_type_system_advanced.md | L2 | 974 | 3 | 3 | 0 | 3 | 1 | 17 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | concept\02_intermediate\21_metaprogramming.md | L2 | 811 | 3 | 3 | 0 | 3 | 2 | 8 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | concept\02_intermediate\22_api_naming_conventions.md | L2 | 450 | 7 | 2 | 0 | 1 | 0 | 15 | 8 | ✅ | ✅ | ✅ | 进阶 | 中级 |
-| concept\02_intermediate\23_quiz_traits_and_generics.md | L2 | 710 | 7 | 2 | 0 | 1 | 0 | 19 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
+| concept\02_intermediate\23_quiz_traits_and_generics.md | L2 | 704 | 7 | 2 | 0 | 1 | 0 | 19 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | concept\02_intermediate\24_quiz_memory_management.md | L2 | 749 | 7 | 2 | 0 | 1 | 0 | 26 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
-| concept\02_intermediate\25_rtti_and_dynamic_typing.md | L2 | 265 | 7 | 2 | 0 | 1 | 0 | 5 | 6 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
-| concept\02_intermediate\26_c_preprocessor_vs_rust_macros.md | L2 | 258 | 7 | 2 | 0 | 1 | 0 | 4 | 6 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
-| concept\02_intermediate\27_exception_safety_rust_cpp.md | L2 | 263 | 9 | 2 | 0 | 1 | 0 | 4 | 6 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
-| concept\02_intermediate\28_construction_and_initialization.md | L2 | 274 | 7 | 2 | 0 | 1 | 0 | 5 | 6 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
-| concept\02_intermediate\29_friend_vs_module_privacy.md | L2 | 257 | 7 | 2 | 0 | 1 | 0 | 3 | 6 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
+| concept\02_intermediate\25_rtti_and_dynamic_typing.md | L2 | 259 | 7 | 2 | 0 | 1 | 0 | 5 | 6 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
+| concept\02_intermediate\26_c_preprocessor_vs_rust_macros.md | L2 | 252 | 7 | 2 | 0 | 1 | 0 | 4 | 6 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
+| concept\02_intermediate\27_exception_safety_rust_cpp.md | L2 | 257 | 9 | 2 | 0 | 1 | 0 | 4 | 6 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
+| concept\02_intermediate\28_construction_and_initialization.md | L2 | 268 | 7 | 2 | 0 | 1 | 0 | 5 | 6 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
+| concept\02_intermediate\29_friend_vs_module_privacy.md | L2 | 251 | 7 | 2 | 0 | 1 | 0 | 3 | 6 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
 | concept\02_intermediate\30_quiz_cpp_rust_foundations.md | L2 | 231 | 4 | 2 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
 | concept\02_intermediate\31_derive_traits.md | L2 | 274 | 7 | 2 | 0 | 1 | 0 | 10 | 6 | ✅ | ✅ | ✅ | 初学者 | 参考级 |
-| concept\02_intermediate\32_editions.md | L2 | 92 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
-| concept\02_intermediate\33_rust_release_process.md | L2 | 96 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
+| concept\02_intermediate\32_editions.md | L2 | 89 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
+| concept\02_intermediate\33_rust_release_process.md | L2 | 93 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
 | concept\03_advanced\00_before_formal.md | L3 | 174 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | concept\03_advanced\01_concurrency.md | L3 | 1610 | 21 | 2 | 0 | 3 | 10 | 23 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | concept\03_advanced\02_async.md | L3 | 3126 | 17 | 3 | 0 | 6 | 9 | 56 | 3 | ✅ | ✅ | ✅ | 专家 | 专家级 |
@@ -193,7 +193,7 @@
 | concept\03_advanced\10_concurrency_patterns.md | L3 | 1139 | 3 | 3 | 0 | 3 | 1 | 22 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | concept\03_advanced\11_atomics_and_memory_ordering.md | L3 | 1212 | 3 | 3 | 0 | 3 | 2 | 21 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | concept\03_advanced\12_unsafe_rust_patterns.md | L3 | 34 | 3 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
-| concept\03_advanced\13_inline_assembly.md | L3 | 817 | 7 | 2 | 0 | 1 | 0 | 25 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
+| concept\03_advanced\13_inline_assembly.md | L3 | 813 | 7 | 2 | 0 | 1 | 0 | 25 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | concept\03_advanced\14_custom_allocators.md | L3 | 864 | 3 | 3 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | concept\03_advanced\15_zero_copy_parsing.md | L3 | 907 | 3 | 3 | 0 | 3 | 1 | 13 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | concept\03_advanced\16_lock_free.md | L3 | 1189 | 3 | 3 | 0 | 3 | 1 | 20 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
@@ -201,20 +201,20 @@
 | concept\03_advanced\18_network_programming.md | L3 | 974 | 3 | 3 | 0 | 3 | 2 | 11 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | concept\03_advanced\19_parallel_distributed_pattern_spectrum.md | L3 | 897 | 3 | 3 | 0 | 3 | 0 | 17 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | concept\03_advanced\20_stream_processing_semantics.md | L3 | 846 | 3 | 3 | 0 | 2 | 0 | 8 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
-| concept\03_advanced\21_quiz_concurrency_async.md | L3 | 746 | 7 | 2 | 0 | 1 | 0 | 19 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
-| concept\03_advanced\22_quiz_unsafe.md | L3 | 652 | 7 | 2 | 0 | 1 | 0 | 21 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
-| concept\03_advanced\23_quiz_macros.md | L3 | 712 | 7 | 2 | 0 | 1 | 0 | 23 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
-| concept\03_advanced\24_async_closures.md | L3 | 571 | 3 | 2 | 0 | 1 | 0 | 20 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
+| concept\03_advanced\21_quiz_concurrency_async.md | L3 | 740 | 7 | 2 | 0 | 1 | 0 | 19 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
+| concept\03_advanced\22_quiz_unsafe.md | L3 | 646 | 7 | 2 | 0 | 1 | 0 | 21 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
+| concept\03_advanced\23_quiz_macros.md | L3 | 706 | 7 | 2 | 0 | 1 | 0 | 23 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
+| concept\03_advanced\24_async_closures.md | L3 | 568 | 3 | 2 | 0 | 1 | 0 | 20 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | concept\03_advanced\25_async_advanced.md | L3 | 1671 | 4 | 3 | 0 | 1 | 1 | 40 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | concept\03_advanced\26_async_patterns.md | L3 | 1142 | 3 | 3 | 0 | 3 | 1 | 20 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
-| concept\03_advanced\27_linkage.md | L3 | 293 | 7 | 2 | 0 | 1 | 0 | 10 | 6 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
-| concept\03_advanced\28_conditional_compilation.md | L3 | 281 | 7 | 2 | 0 | 1 | 0 | 8 | 6 | ✅ | ✅ | ✅ | 中级 | 专家级 |
+| concept\03_advanced\27_linkage.md | L3 | 287 | 7 | 2 | 0 | 1 | 0 | 10 | 6 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
+| concept\03_advanced\28_conditional_compilation.md | L3 | 275 | 7 | 2 | 0 | 1 | 0 | 8 | 6 | ✅ | ✅ | ✅ | 中级 | 专家级 |
 | concept\03_advanced\29_memory_model.md | L3 | 113 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
-| concept\03_advanced\30_rust_runtime.md | L3 | 142 | 4 | 0 | 0 | 1 | 0 | 2 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
-| concept\03_advanced\31_panic.md | L3 | 166 | 4 | 0 | 0 | 1 | 0 | 2 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
-| concept\03_advanced\32_memory_allocation_and_lifetime.md | L3 | 99 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
+| concept\03_advanced\30_rust_runtime.md | L3 | 139 | 4 | 0 | 0 | 1 | 0 | 2 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
+| concept\03_advanced\31_panic.md | L3 | 163 | 4 | 0 | 0 | 1 | 0 | 2 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
+| concept\03_advanced\32_memory_allocation_and_lifetime.md | L3 | 96 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | concept\03_advanced\33_variables.md | L3 | 131 | 4 | 0 | 0 | 1 | 0 | 3 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
-| concept\03_advanced\34_visibility_and_privacy.md | L3 | 151 | 4 | 0 | 0 | 1 | 0 | 3 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
+| concept\03_advanced\34_visibility_and_privacy.md | L3 | 148 | 4 | 0 | 0 | 1 | 0 | 3 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | concept\03_advanced\35_unsafe_reference.md | L3 | 103 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | concept\04_formal\01_linear_logic.md | L4 | 1240 | 14 | 0 | 0 | 4 | 5 | 13 | 3 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | concept\04_formal\02_type_theory.md | L4 | 1481 | 27 | 0 | 0 | 4 | 5 | 27 | 3 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
@@ -232,7 +232,7 @@
 | concept\04_formal\15_hoare_logic.md | L4 | 908 | 3 | 0 | 0 | 3 | 2 | 8 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | concept\04_formal\16_aerospace_certification_formal_methods.md | L4 | 1089 | 3 | 0 | 0 | 1 | 1 | 5 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | concept\04_formal\17_operational_semantics.md | L4 | 1076 | 3 | 0 | 0 | 3 | 1 | 13 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
-| concept\04_formal\18_evaluation_strategies.md | L4 | 684 | 4 | 0 | 0 | 2 | 0 | 14 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
+| concept\04_formal\18_evaluation_strategies.md | L4 | 681 | 4 | 0 | 0 | 2 | 0 | 14 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | concept\04_formal\19_rustc_query_system.md | L4 | 416 | 7 | 0 | 0 | 1 | 2 | 1 | 6 | ✅ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
 | concept\04_formal\20_axiomatic_semantics.md | L4 | 952 | 3 | 0 | 0 | 3 | 0 | 13 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | concept\04_formal\21_type_semantics.md | L4 | 896 | 3 | 0 | 0 | 3 | 0 | 18 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
@@ -241,32 +241,32 @@
 | concept\04_formal\24_autoverus.md | L4 | 183 | 1 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | concept\04_formal\25_quiz_formal_methods.md | L4 | 621 | 7 | 0 | 0 | 1 | 0 | 10 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | concept\04_formal\26_trait_solver_in_rustc.md | L4 | 314 | 7 | 0 | 0 | 1 | 1 | 5 | 6 | ✅ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
-| concept\04_formal\27_type_checking_and_inference.md | L4 | 313 | 7 | 0 | 0 | 1 | 0 | 7 | 6 | ✅ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
-| concept\04_formal\28_borrow_checking_decidability.md | L4 | 415 | 7 | 0 | 0 | 1 | 2 | 8 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
-| concept\04_formal\29_type_inference_complexity.md | L4 | 410 | 6 | 0 | 0 | 1 | 0 | 6 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
-| concept\04_formal\30_aeneas_symbolic_semantics.md | L4 | 446 | 6 | 0 | 0 | 1 | 1 | 4 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
+| concept\04_formal\27_type_checking_and_inference.md | L4 | 308 | 7 | 0 | 0 | 1 | 0 | 7 | 6 | ✅ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
+| concept\04_formal\28_borrow_checking_decidability.md | L4 | 411 | 7 | 0 | 0 | 1 | 2 | 8 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
+| concept\04_formal\29_type_inference_complexity.md | L4 | 407 | 6 | 0 | 0 | 1 | 0 | 6 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
+| concept\04_formal\30_aeneas_symbolic_semantics.md | L4 | 443 | 6 | 0 | 0 | 1 | 1 | 4 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | concept\04_formal\31_miri.md | L4 | 304 | 4 | 0 | 0 | 2 | 1 | 2 | 6 | ✅ | ✅ | ✅ | 进阶 / 工程 / 形式化 | 综述级 |
 | concept\04_formal\32_kani.md | L4 | 373 | 7 | 0 | 0 | 1 | 0 | 9 | 6 | ✅ | ✅ | ✅ | 进阶 / 工程 / 形式化 | 综述级 |
 | concept\04_formal\33_safety_tags_in_formal.md | L4 | 169 | 1 | 0 | 0 | 1 | 0 | 2 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
-| concept\04_formal\34_borrow_sanitizer_in_formal.md | L4 | 169 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
-| concept\04_formal\35_name_resolution_and_hir.md | L4 | 334 | 4 | 0 | 0 | 2 | 1 | 5 | 6 | ✅ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
-| concept\04_formal\36_tree_borrows_deep_dive.md | L4 | 160 | 1 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
-| concept\04_formal\37_behavior_considered_undefined.md | L4 | 167 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 专家 | 研究级 |
+| concept\04_formal\34_borrow_sanitizer_in_formal.md | L4 | 167 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
+| concept\04_formal\35_name_resolution_and_hir.md | L4 | 331 | 4 | 0 | 0 | 2 | 1 | 5 | 6 | ✅ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
+| concept\04_formal\36_tree_borrows_deep_dive.md | L4 | 158 | 1 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
+| concept\04_formal\37_behavior_considered_undefined.md | L4 | 164 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 专家 | 研究级 |
 | concept\04_formal\38_application_binary_interface.md | L4 | 169 | 4 | 0 | 0 | 1 | 0 | 4 | 0 | ✅ | ✅ | ✅ | 专家 | 研究级 |
-| concept\04_formal\39_constant_evaluation.md | L4 | 145 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
-| concept\04_formal\40_names_and_resolution.md | L4 | 144 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
-| concept\04_formal\41_special_types_and_traits.md | L4 | 188 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
-| concept\04_formal\42_type_layout.md | L4 | 164 | 4 | 0 | 0 | 1 | 0 | 4 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
+| concept\04_formal\39_constant_evaluation.md | L4 | 142 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
+| concept\04_formal\40_names_and_resolution.md | L4 | 141 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
+| concept\04_formal\41_special_types_and_traits.md | L4 | 185 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
+| concept\04_formal\42_type_layout.md | L4 | 161 | 4 | 0 | 0 | 1 | 0 | 4 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
 | concept\04_formal\43_destructors.md | L4 | 182 | 4 | 0 | 0 | 1 | 0 | 3 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
 | concept\04_formal\44_notation.md | L4 | 120 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
 | concept\04_formal\45_lexical_structure.md | L4 | 120 | 4 | 0 | 0 | 1 | 0 | 2 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
-| concept\04_formal\46_items_reference.md | L4 | 118 | 4 | 0 | 0 | 1 | 0 | 2 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
+| concept\04_formal\46_items_reference.md | L4 | 115 | 4 | 0 | 0 | 1 | 0 | 2 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
 | concept\04_formal\47_attributes.md | L4 | 108 | 4 | 0 | 0 | 1 | 0 | 4 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
 | concept\04_formal\48_statements_and_expressions_reference.md | L4 | 108 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
-| concept\04_formal\49_patterns_reference.md | L4 | 104 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
-| concept\04_formal\50_type_system_reference.md | L4 | 127 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
-| concept\04_formal\51_names_reference.md | L4 | 107 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
-| concept\04_formal\52_reference_appendices.md | L4 | 110 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
+| concept\04_formal\49_patterns_reference.md | L4 | 101 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
+| concept\04_formal\50_type_system_reference.md | L4 | 124 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
+| concept\04_formal\51_names_reference.md | L4 | 104 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
+| concept\04_formal\52_reference_appendices.md | L4 | 107 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 研究者 | 研究级 |
 | concept\05_comparative\01_rust_vs_cpp.md | L5 | 2127 | 9 | 0 | 0 | 2 | 10 | 12 | 6 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | concept\05_comparative\02_rust_vs_go.md | L5 | 975 | 3 | 0 | 0 | 3 | 6 | 11 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | concept\05_comparative\03_paradigm_matrix.md | L5 | 957 | 6 | 0 | 0 | 5 | 8 | 7 | 16 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
@@ -282,8 +282,8 @@
 | concept\05_comparative\13_rust_vs_csharp.md | L5 | 822 | 3 | 0 | 0 | 3 | 1 | 6 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | concept\05_comparative\14_rust_vs_elixir.md | L5 | 817 | 3 | 0 | 0 | 3 | 1 | 6 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | concept\05_comparative\15_rust_vs_typescript.md | L5 | 917 | 3 | 0 | 0 | 3 | 2 | 6 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
-| concept\05_comparative\16_cpp_rust_surface_features.md | L5 | 234 | 4 | 0 | 0 | 0 | 0 | 2 | 6 | ✅ | ✅ | ✅ | 进阶 | 研究级 |
-| concept\05_comparative\17_quiz_rust_vs_systems.md | L5 | 729 | 4 | 0 | 0 | 0 | 0 | 14 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
+| concept\05_comparative\16_cpp_rust_surface_features.md | L5 | 230 | 4 | 0 | 0 | 0 | 0 | 2 | 6 | ✅ | ✅ | ✅ | 进阶 | 研究级 |
+| concept\05_comparative\17_quiz_rust_vs_systems.md | L5 | 725 | 4 | 0 | 0 | 0 | 0 | 14 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | concept\05_comparative\18_cpp_abi_object_model.md | L5 | 839 | 3 | 0 | 0 | 3 | 0 | 17 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | concept\05_comparative\19_rust_vs_ruby.md | L5 | 733 | 3 | 0 | 0 | 3 | 1 | 8 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | concept\06_ecosystem\01_toolchain.md | L6 | 1888 | 13 | 0 | 0 | 2 | 9 | 15 | 14 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
@@ -317,7 +317,7 @@
 | concept\06_ecosystem\29_algorithms_competitive_programming.md | L6 | 1033 | 3 | 0 | 0 | 0 | 0 | 26 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | concept\06_ecosystem\30_system_composability.md | L6 | 802 | 3 | 0 | 0 | 0 | 4 | 23 | 6 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | concept\06_ecosystem\31_microservice_patterns.md | L6 | 972 | 6 | 0 | 0 | 2 | 6 | 15 | 12 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
-| concept\06_ecosystem\32_event_driven_architecture.md | L6 | 1050 | 6 | 0 | 0 | 2 | 4 | 15 | 8 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
+| concept\06_ecosystem\32_event_driven_architecture.md | L6 | 1038 | 6 | 0 | 0 | 2 | 4 | 15 | 8 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | concept\06_ecosystem\33_cqrs_event_sourcing.md | L6 | 1461 | 6 | 0 | 0 | 3 | 1 | 18 | 12 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | concept\06_ecosystem\34_idioms_spectrum.md | L6 | 1393 | 6 | 0 | 0 | 1 | 5 | 35 | 12 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | concept\06_ecosystem\35_architecture_patterns.md | L6 | 1206 | 6 | 0 | 0 | 3 | 0 | 13 | 12 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
@@ -357,7 +357,7 @@
 | concept\06_ecosystem\69_compiler_diagnostics_and_ui_tests.md | L6 | 293 | 3 | 0 | 0 | 0 | 0 | 5 | 6 | ❌ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
 | concept\06_ecosystem\70_rustc_bootstrap.md | L6 | 252 | 3 | 0 | 0 | 0 | 0 | 1 | 6 | ❌ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
 | concept\06_ecosystem\71_compiler_testing.md | L6 | 284 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
-| concept\06_ecosystem\72_cargo_security_cves.md | L6 | 478 | 4 | 0 | 0 | 3 | 1 | 0 | 8 | ✅ | ✅ | ✅ | 进阶 / 工程 | 综述级 |
+| concept\06_ecosystem\72_cargo_security_cves.md | L6 | 476 | 4 | 0 | 0 | 3 | 1 | 0 | 8 | ✅ | ✅ | ✅ | 进阶 / 工程 | 综述级 |
 | concept\06_ecosystem\73_pattern_composition_algebra.md | L6 | 726 | 6 | 0 | 0 | 3 | 0 | 15 | 12 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | concept\06_ecosystem\74_formal_verification_tools.md | L6 | 942 | 6 | 0 | 0 | 3 | 0 | 12 | 12 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | concept\06_ecosystem\75_industrial_case_studies.md | L6 | 357 | 6 | 0 | 0 | 1 | 0 | 2 | 12 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
@@ -415,14 +415,14 @@
 | concept\07_future\43_rust_for_linux.md | L7 | 1018 | 4 | 0 | 0 | 3 | 2 | 9 | 8 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | concept\07_future\44_edition_guide.md | L7 | 782 | 4 | 0 | 0 | 3 | 1 | 10 | 8 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | concept\07_future\45_std_autodiff_preview.md | L7 | 326 | 6 | 0 | 0 | 2 | 0 | 5 | 12 | ✅ | ✅ | ✅ | 研究者 | 实验级 |
-| concept\07_future\46_cargo_semver_checks_preview.md | L7 | 223 | 3 | 0 | 0 | 0 | 0 | 1 | 6 | ❌ | ✅ | ✅ | 专家 | 实验级 |
+| concept\07_future\46_cargo_semver_checks_preview.md | L7 | 220 | 3 | 0 | 0 | 0 | 0 | 1 | 6 | ❌ | ✅ | ✅ | 专家 | 实验级 |
 | concept\07_future\47_wasm_target_evolution.md | L7 | 142 | 3 | 0 | 0 | 1 | 0 | 1 | 6 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | concept\07_future\48_aarch64_sve_sme_preview.md | L7 | 271 | 3 | 0 | 0 | 0 | 0 | 3 | 6 | ❌ | ✅ | ✅ | 专家 | 实验级 |
 | concept\07_future\49_rust_in_space.md | L7 | 100 | 3 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | concept\07_future\50_nightly_rust.md | L7 | 128 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | ❌ | ✅ | ✅ | 初学者 | 研究级 |
 | concept\07_future\borrow_sanitizer.md | L7 | 315 | 3 | 0 | 0 | 1 | 1 | 1 | 6 | ❌ | ✅ | ✅ | 专家 | 实验级 |
-| concept\07_future\rust_1_95_stabilized.md | L7 | 330 | 3 | 0 | 0 | 0 | 0 | 14 | 6 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
-| concept\07_future\rust_1_96_stabilized.md | L7 | 318 | 3 | 0 | 0 | 0 | 0 | 5 | 6 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
-| concept\07_future\rust_1_97_preview.md | L7 | 296 | 3 | 0 | 0 | 0 | 0 | 11 | 6 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
+| concept\07_future\rust_1_95_stabilized.md | L7 | 327 | 3 | 0 | 0 | 0 | 0 | 14 | 6 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
+| concept\07_future\rust_1_96_stabilized.md | L7 | 315 | 3 | 0 | 0 | 0 | 0 | 5 | 6 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
+| concept\07_future\rust_1_97_preview.md | L7 | 293 | 3 | 0 | 0 | 0 | 0 | 11 | 6 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
 | concept\07_future\rust_1_97_stabilized.md | L7 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 占位级 |
 | concept\07_future\rust_1_98_preview.md | L7 | 578 | 3 | 0 | 0 | 0 | 0 | 6 | 6 | ❌ | ✅ | ✅ | 专家 | 实验级 |

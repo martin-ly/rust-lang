@@ -56,7 +56,7 @@
     - [2.2 UB（未定义行为）分类矩阵](#22-ub未定义行为分类矩阵)
     - [2.2b Unsafe Code Guidelines 完整 UB 分类](#22b-unsafe-code-guidelines-完整-ub-分类)
       - [内存访问类 UB](#内存访问类-ub)
-      - [类型系统类 UB](#类型系统类-ub)
+      - [类型系统（Type System）类 UB](#类型系统类-ub)
       - [并发与同步类 UB](#并发与同步类-ub)
       - [其他 UB](#其他-ub)
       - [UB 检测的不可判定性边界](#ub-检测的不可判定性边界)
@@ -81,7 +81,7 @@
     - [6.3 反命题决策树](#63-反命题决策树)
       - [反命题 1: "unsafe 块内没有安全检查"](#反命题-1-unsafe-块内没有安全检查)
       - [反命题 2: "只要用了 unsafe 就会触发 UB"](#反命题-2-只要用了-unsafe-就会触发-ub)
-      - [反命题 3: "raw pointer 和引用等价"](#反命题-3-raw-pointer-和引用等价)
+      - [反命题 3: "raw pointer 和引用（Reference）等价"](#反命题-3-raw-pointer-和引用等价)
       - [反命题 4: "FFI 调用总是安全的"](#反命题-4-ffi-调用总是安全的)
   - [七、定理推理链（Theorem Chain）](#七定理推理链theorem-chain)
     - [7.1 安全抽象定理](#71-安全抽象定理)
@@ -90,13 +90,13 @@
       - [Miri 检测的核心算法](#miri-检测的核心算法)
       - [Miri 与编译器优化的关系](#miri-与编译器优化的关系)
       - [MIRIFLAGS 完整选项速查](#miriflags-完整选项速查)
-    - [7.3 定理一致性矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)
+    - [7.3 定理一致性（Coherence）矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)
   - [八、示例与反例（Examples \& Counter-examples）](#八示例与反例examples--counter-examples)
     - [8.1 正确示例：安全封装裸指针（Vec 简化版）](#81-正确示例安全封装裸指针vec-简化版)
     - [8.2 正确示例：手动实现 Send/Sync](#82-正确示例手动实现-sendsync)
     - [8.3 反例：悬垂裸指针（UB）](#83-反例悬垂裸指针ub)
     - [8.4 反例：transmute 滥用（UB）](#84-反例transmute-滥用ub)
-    - [8.5 反例：无效枚举值（UB）](#85-反例无效枚举值ub)
+    - [8.5 反例：无效枚举（Enum）值（UB）](#85-反例无效枚举值ub)
     - [8.6 边界极限测试](#86-边界极限测试)
       - [命题: "unsafe 代码可以安全地封装"](#命题-unsafe-代码可以安全地封装)
       - [命题: "Miri 可以检测所有 UB"](#命题-miri-可以检测所有-ub)
@@ -152,7 +152,7 @@
   - [九、Unsafe/FFI 2024：权限分离与显式契约](#九unsafeffi-2024权限分离与显式契约)
     - [9.1 问题：权限的混淆](#91-问题权限的混淆)
     - [9.2 2024 Edition 的权限分离](#92-2024-edition-的权限分离)
-    - [9.3 形式化模型：权限的模块化](#93-形式化模型权限的模块化)
+    - [9.3 形式化模型：权限的模块（Module）化](#93-形式化模型权限的模块化)
     - [9.4 与 `unsafe extern` + `safe` 的关系](#94-与-unsafe-extern--safe-的关系)
     - [9.5 `unsafe extern` blocks：FFI 边界的显式 unsafe（Rust 2024）](#95-unsafe-extern-blocksffi-边界的显式-unsaferust-2024)
       - [9.5.1 问题：谁为 FFI 签名负责？](#951-问题谁为-ffi-签名负责)
@@ -176,7 +176,7 @@
       - [Tree Borrows（PLDI 2023）](#tree-borrowspldi-2023)
       - [Provenance（PLDI 2022）](#provenancepldi-2022)
     - [15.5 跨语言内存模型对比矩阵](#155-跨语言内存模型对比矩阵)
-  - [十六、边界测试：Unsafe 代码的编译错误与运行时灾难](#十六边界测试unsafe-代码的编译错误与运行时灾难)
+  - [十六、边界测试：Unsafe 代码的编译错误与运行时（Runtime）灾难](#十六边界测试unsafe-代码的编译错误与运行时灾难)
     - [16.1 边界测试：裸指针解引用前的空检查（编译错误）](#161-边界测试裸指针解引用前的空检查编译错误)
     - [16.2 边界测试：将 \&T 转换为 \&mut T（编译错误）](#162-边界测试将-t-转换为-mut-t编译错误)
     - [16.3 边界测试：无效 UTF-8 的 str::from\_utf8\_unchecked（运行时 UB）](#163-边界测试无效-utf-8-的-strfrom_utf8_unchecked运行时-ub)
@@ -1607,7 +1607,7 @@ unsafe { std::ptr::read(p.as_ptr()); }
 - **写入上下文**（`*ptr = val`）：编译器会生成**先 drop 旧值、再写入新值**的代码序列。若目标位置未初始化，drop 旧值 = 读取未初始化内存 = **UB**。
 - **受借用（Borrowing）检查器保护的程度**：`unsafe` 块内的裸指针解引用**完全绕过**借用检查器。编译器不验证 `ptr` 的生命周期（Lifetimes）、对齐或有效性。
 
-> **来源: [TRPL Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)** 裸指针解引用是 `unsafe` 的五大超能力之一，它关闭了编译器对生命周期和别名的自动追踪。✅ 已验证
+> **来源: [TRPL Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)** 裸指针解引用是 `unsafe` 的五大超能力之一，它关闭了编译器对生命周期（Lifetimes）和别名的自动追踪。✅ 已验证
 
 ---
 
@@ -1891,7 +1891,7 @@ unsafe fn swap_via_replace<T>(a: *mut T, b: *mut T) {
 | :--- | :--- | :--- | :--- |
 | `Unique<T>` | Rust 1.0 ~ 1.25 | 协变、非空、拥有语义（`Own`） | ❌ 已移除（内部使用） |
 | `Shared<T>` | Rust 1.0 ~ 1.25 | 协变、非空、共享语义（`Rc`/`Arc` 内部） | ❌ 已移除 |
-| `NonNull<T>` | Rust 1.25+ | 协变、非空、裸指针包装，不携带所有权语义 | ✅ 稳定 API |
+| `NonNull<T>` | Rust 1.25+ | 协变、非空、裸指针包装，不携带所有权（Ownership）语义 | ✅ 稳定 API |
 
 > **[Rust RFC 1184](https://github.com/rust-lang/rfcs/pull/1184)** `NonNull<T>` replaces `Unique<T>` as the standard covariant, non-null raw pointer abstraction.
 > Unlike `Unique`, `NonNull` does not encode ownership semantics—it is purely a pointer utility type. ✅ 已验证
@@ -2585,7 +2585,7 @@ fn main() {
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | 所有权（Ownership） | [](../01_foundation/01_ownership.md) | safe 边界 |
-| 借用规则 | [](../01_foundation/02_borrowing.md) | unsafe 突破 |
+| 借用（Borrowing）规则 | [](../01_foundation/02_borrowing.md) | unsafe 突破 |
 | 内存管理 | [](../02_intermediate/03_memory_management.md) | 裸指针 |
 | 形式化验证 | [](../04_formal/04_rustbelt.md) | unsafe 证明边界 |
 | 安全边界 | [](../05_comparative/04_safety_boundaries.md) | 全局边界汇总 |

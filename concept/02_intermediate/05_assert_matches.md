@@ -501,7 +501,7 @@ fn main() {
 
 > **修正**: `assert_matches!`（Rust 长期 unstable，于 1.96.1 stable，当前 patch 1.96.1）专门用于测试枚举（Enum）变体匹配。
 > 它不同于 `assert_eq!`——后者要求值实现 `PartialEq`，而 `assert_matches!` 使用模式匹配，不要求 `PartialEq`。
-> 在 `assert_matches!` 稳定前，使用 `matches!` 宏或 `if let` 进行测试断言。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> 在 `assert_matches!` 稳定前，使用 `matches!` 宏（Macro）或 `if let` 进行测试断言。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.2 边界测试：嵌套模式匹配中的绑定冲突（编译错误）
 

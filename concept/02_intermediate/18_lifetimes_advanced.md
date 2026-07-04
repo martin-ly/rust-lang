@@ -46,7 +46,7 @@
   - [十、边界测试：高级生命周期（Lifetimes）的编译错误](#十边界测试高级生命周期的编译错误)
     - 10.1 边界测试：自引用（Reference）结构体（Struct）与 `Pin`（编译错误）
     - [10.2 边界测试：生命周期（Lifetimes）边界中的 `for<'a>` HRTB（编译错误）](#102-边界测试生命周期边界中的-fora-hrtb编译错误)
-    - [10.5 边界测试：闭包（Closures）捕获引用（Reference）与 `Fn` trait 的生命周期约束（编译错误）](#105-边界测试闭包捕获引用与-fn-trait-的生命周期约束编译错误)
+    - [10.5 边界测试：闭包（Closures）捕获引用（Reference）与 `Fn` trait 的生命周期（Lifetimes）约束（编译错误）](#105-边界测试闭包捕获引用与-fn-trait-的生命周期约束编译错误)
     - [10.6 边界测试：`impl Trait` 返回类型的生命周期捕获（编译错误）](#106-边界测试impl-trait-返回类型的生命周期捕获编译错误)
     - [10.3 边界测试：lifetime bounds 与 trait object 的交互（编译错误）](#103-边界测试lifetime-bounds-与-trait-object-的交互编译错误)
   - [实践](#实践)
@@ -249,7 +249,7 @@ where F: for<'a> Fn(&'a str)
 }
 ```
 
-> **HRTB 洞察**: HRTB 的**核心应用场景**是**闭包（Closures）和回调**——它使泛型（Generics）代码可以灵活地接受临时引用。
+> **HRTB 洞察**: HRTB 的**核心应用场景**是**闭包（Closures）和回调**——它使泛型（Generics）代码可以灵活地接受临时引用（Reference）。
 > [来源: [Rust Reference — HRTB](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds)]
 
 ---
@@ -502,7 +502,7 @@ graph TD
      // s 被 move 进闭包
 ```
 
-> **陷阱总结**: 生命周期陷阱主要与**返回局部引用**、**标注不足**、**结构体（Struct）存储引用**、**HRTB**和**闭包捕获**相关。
+> **陷阱总结**: 生命周期陷阱主要与**返回局部引用**、**标注不足**、**结构体（Struct）存储引用**、**HRTB**和**闭包（Closures）捕获**相关。
 > [来源: [Common Lifetime Mistakes](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html)]
 
 ---

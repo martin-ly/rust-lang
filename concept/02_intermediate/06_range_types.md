@@ -525,7 +525,7 @@ fn main() {
 fn main() {
     let mut v = vec![1, 2, 3];
     let r = &v;
-    // ❌ 编译错误: 已存在不可变借用时不能可变借用
+    // ❌ 编译错误: 已存在不可变借用（Immutable Borrow）时不能可变借用（Mutable Borrow）
     v.push(4);
     println!("{:?}", r);
 }

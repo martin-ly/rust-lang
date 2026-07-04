@@ -28,8 +28,10 @@ URL_REPLACEMENTS: dict[str, str | None] = {
     "https://doc.rust-lang.org/reference/editions.html": "https://doc.rust-lang.org/edition-guide/",
     "https://doc.rust-lang.org/rustc/codegen-options.html": "https://doc.rust-lang.org/rustc/codegen-options/index.html",
     "https://doc.rust-lang.org/rustc/mir/index.html": "https://rustc-dev-guide.rust-lang.org/mir/index.html",
-    "https://doc.rust-lang.org/src/core/future.rs.html": "https://doc.rust-lang.org/stable/src/core/future.rs.html",
-    "https://doc.rust-lang.org/rust-by-example/std/net.html": "https://doc.rust-lang.org/rust-by-example/std_misc/networking.html",
+    "https://doc.rust-lang.org/src/core/future.rs.html": "https://doc.rust-lang.org/std/future/trait.Future.html",
+    "https://doc.rust-lang.org/stable/src/core/future.rs.html": "https://doc.rust-lang.org/std/future/trait.Future.html",
+    "https://doc.rust-lang.org/rust-by-example/std/net.html": "https://doc.rust-lang.org/rust-by-example/std_misc/file.html",
+    "https://doc.rust-lang.org/rust-by-example/std_misc/networking.html": "https://doc.rust-lang.org/rust-by-example/std_misc/file.html",
     "https://doc.rust-lang.org/rust-by-example/std_misc/atomics.html": "https://doc.rust-lang.org/std/sync/atomic/",
     "https://doc.rust-lang.org/rust-by-example/std_misc/async.html": "https://doc.rust-lang.org/book/ch17-00-async-await.html",
     "https://doc.rust-lang.org/rust-by-example/macros/procedural.html": "https://doc.rust-lang.org/book/ch19-06-macros.html",
@@ -38,24 +40,27 @@ URL_REPLACEMENTS: dict[str, str | None] = {
     "https://doc.rust-lang.org/cargo/reference/targets.html#integration-tests": "https://doc.rust-lang.org/cargo/reference/cargo-targets.html#integration-tests",
     "https://doc.rust-lang.org/cargo/reference/targets.html#tests": "https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests",
     # Nightly/unstable book pages that moved or were stabilized
-    "https://doc.rust-lang.org/nightly/unstable-book/language-features/const-eval.html": "https://doc.rust-lang.org/nightly/unstable-book/language-features/const-fn.html",
-    "https://doc.rust-lang.org/nightly/unstable-book/language-features/asm.html": "https://doc.rust-lang.org/nightly/unstable-book/language-features/asm.html",  # keep; may be transient
+    "https://doc.rust-lang.org/nightly/unstable-book/language-features/const-eval.html": "https://doc.rust-lang.org/reference/items/functions.html",
+    "https://doc.rust-lang.org/nightly/unstable-book/language-features/asm.html": "https://doc.rust-lang.org/reference/items/external-blocks.html",
     # Nomicon pages
     "https://doc.rust-lang.org/nomicon/uninit.html": "https://doc.rust-lang.org/nomicon/what-unsafe-does.html",
     "https://doc.rust-lang.org/nomicon/memory.html": "https://doc.rust-lang.org/nomicon/what-unsafe-does.html",
     "https://doc.rust-lang.org/nomicon/subtyping-and-variance.html": "https://doc.rust-lang.org/nomicon/subtyping.html",
-    "https://doc.rust-lang.org/nomicon/interior-mutability.html": "https://doc.rust-lang.org/nomicon/interior-mutability.html",  # keep
-    "https://doc.rust-lang.org/nomicon/pin.html": "https://doc.rust-lang.org/nomicon/pin.html",  # keep
-    "https://doc.rust-lang.org/nomicon/async-await.html": "https://doc.rust-lang.org/nomicon/async-await.html",  # keep
+    "https://doc.rust-lang.org/nomicon/interior-mutability.html": "https://doc.rust-lang.org/nomicon/what-unsafe-does.html",
+    "https://doc.rust-lang.org/nomicon/pin.html": "https://doc.rust-lang.org/nomicon/what-unsafe-does.html",
+    "https://doc.rust-lang.org/nomicon/async-await.html": "https://doc.rust-lang.org/nomicon/what-unsafe-does.html",
     # Edition guide
     "https://doc.rust-lang.org/edition-guide/rust-2024/let-else.html": "https://doc.rust-lang.org/rust-by-example/flow_control/let_else.html",
-    "https://doc.rust-lang.org/edition-guide/rust-2024/future-in-prelude.html": "https://doc.rust-lang.org/edition-guide/rust-2024/prelude-changes.html",
-    "https://doc.rust-lang.org/edition-guide/rust-2024/tail-expr-drop-order.html": "https://doc.rust-lang.org/edition-guide/rust-2024/drop-order.html",
-    "https://doc.rust-lang.org/edition-guide/rust-2024/gen-blocks.html": "https://doc.rust-lang.org/edition-guide/rust-2024/gen-blocks.html",  # keep
+    "https://doc.rust-lang.org/edition-guide/rust-2024/future-in-prelude.html": "https://doc.rust-lang.org/edition-guide/rust-2024/index.html",
+    "https://doc.rust-lang.org/edition-guide/rust-2024/prelude-changes.html": "https://doc.rust-lang.org/edition-guide/rust-2024/index.html",
+    "https://doc.rust-lang.org/edition-guide/rust-2024/tail-expr-drop-order.html": "https://doc.rust-lang.org/edition-guide/rust-2024/index.html",
+    "https://doc.rust-lang.org/edition-guide/rust-2024/drop-order.html": "https://doc.rust-lang.org/edition-guide/rust-2024/index.html",
+    "https://doc.rust-lang.org/edition-guide/rust-2024/gen-blocks.html": "https://doc.rust-lang.org/edition-guide/rust-2024/index.html",
     # Async book
-    "https://rust-lang.github.io/async-book/03_async_await/04_shared_state.html": "https://rust-lang.github.io/async-book/02_execution/01_chapter.html",
-    "https://rust-lang.github.io/async-book/03_async_await/02_async_lifetimes.html": "https://rust-lang.github.io/async-book/02_execution/03_async_lifetimes.html",
-    "https://rust-lang.github.io/async-book/04_pinning/01_chapter.html": "https://rust-lang.github.io/async-book/04_pinning/01_chapter.html",  # keep
+    "https://rust-lang.github.io/async-book/03_async_await/04_shared_state.html": None,
+    "https://rust-lang.github.io/async-book/03_async_await/02_async_lifetimes.html": None,
+    "https://rust-lang.github.io/async-book/04_pinning/01_chapter.html": None,
+    "https://rust-lang.github.io/async-book/02_execution/03_async_lifetimes.html": None,
     # Unsafe code guidelines
     "https://rust-lang.github.io/unsafe-code-guidelines/reference/ffi.html": "https://rust-lang.github.io/unsafe-code-guidelines/glossary.html",
     "https://rust-lang.github.io/unsafe-code-guidelines/layout/ffi.html": "https://rust-lang.github.io/unsafe-code-guidelines/glossary.html",
@@ -70,39 +75,41 @@ URL_REPLACEMENTS: dict[str, str | None] = {
     "https://rust-lang.github.io/unsafe-code-guidelines/stacked_borrows.html": "https://rust-lang.github.io/unsafe-code-guidelines/glossary.html",
     "https://rust-lang.github.io/unsafe-code-guidelines/tree_borrows.html": "https://rust-lang.github.io/unsafe-code-guidelines/glossary.html",
     # API guidelines
-    "https://rust-lang.github.io/api-guidelines/unsafe.html": "https://rust-lang.github.io/api-guidelines/safety.html",
-    "https://rust-lang.github.io/api-guidelines/safety.html": "https://rust-lang.github.io/api-guidelines/safety.html",  # keep
-    "https://rust-lang.github.io/api-guidelines/performance.html": "https://rust-lang.github.io/api-guidelines/performance.html",  # keep
+    "https://rust-lang.github.io/api-guidelines/unsafe.html": "https://rust-lang.github.io/api-guidelines/type-safety.html",
+    "https://rust-lang.github.io/api-guidelines/safety.html": "https://rust-lang.github.io/api-guidelines/type-safety.html",
+    "https://rust-lang.github.io/api-guidelines/performance.html": "https://rust-lang.github.io/api-guidelines/predictability.html",
     # RFCs
-    "https://rust-lang.github.io/rfcs/3271-rustdoc-links.html": "https://rust-lang.github.io/rfcs/3271-rustdoc-json.html",
-    "https://rust-lang.github.io/rfcs/2121-cargo-workspace.html": "https://rust-lang.github.io/rfcs/2121-cargo-profile.html",
-    "https://rust-lang.github.io/rfcs/2121-private-dependency.html": "https://rust-lang.github.io/rfcs/3516-private-dependency.html",
-    "https://rust-lang.github.io/rfcs/3560-static-mut-references.html": "https://rust-lang.github.io/rfcs/3560-alignment.html",
-    "https://rust-lang.github.io/rfcs/2616-http.html": "https://rust-lang.github.io/rfcs/2616-iterable.html",
-    "https://rust-lang.github.io/rfcs/3516-gen-blocks.html": "https://rust-lang.github.io/rfcs/3516-gen-blocks.html",  # keep
-    "https://rust-lang.github.io/rfcs/1590-generic-associated-types.html": "https://rust-lang.github.io/rfcs/1590-generic-associated-types.html",  # keep
+    "https://rust-lang.github.io/rfcs/3271-rustdoc-links.html": None,
+    "https://rust-lang.github.io/rfcs/2121-cargo-workspace.html": None,
+    "https://rust-lang.github.io/rfcs/2121-private-dependency.html": None,
+    "https://rust-lang.github.io/rfcs/3560-static-mut-references.html": None,
+    "https://rust-lang.github.io/rfcs/2616-http.html": None,
+    "https://rust-lang.github.io/rfcs/3516-gen-blocks.html": None,
+    "https://rust-lang.github.io/rfcs/1590-generic-associated-types.html": None,
     "https://rust-lang.github.io/rfcs/1859-non-lexical-lifetimes.html": "https://rust-lang.github.io/rfcs/2094-nll.html",
-    "https://rust-lang.github.io/rfcs/3185-async-drop.html": "https://rust-lang.github.io/rfcs/3185-async-drop.html",  # keep
+    "https://rust-lang.github.io/rfcs/3185-async-drop.html": None,
     "https://rust-lang.github.io/rfcs/2418-remove-async-fn.html": "https://rust-lang.github.io/rfcs/2394-async_await.html",
-    "https://rust-lang.github.io/rfcs/2645-transparent-unions-enums.html": "https://rust-lang.github.io/rfcs/2645-transparent-enums.html",
-    "https://rust-lang.github.io/rfcs/3101-reserved-prefix.html": "https://rust-lang.github.io/rfcs/3101-reserved-prefix.html",  # keep
-    "https://rust-lang.github.io/rfcs/0380-stabilize-no-std.html": "https://rust-lang.github.io/rfcs/1184-stabilize-no_std.html",
-    "https://rust-lang.github.io/rfcs/2504-try-trait.html": "https://rust-lang.github.io/rfcs/3058-try-trait-v2.html",
-    "https://rust-lang.github.io/rfcs/2592-pin.html": "https://rust-lang.github.io/rfcs/2349-pin.html",
+    "https://rust-lang.github.io/rfcs/2645-transparent-unions-enums.html": None,
+    "https://rust-lang.github.io/rfcs/3101-reserved-prefix.html": None,
+    "https://rust-lang.github.io/rfcs/0380-stabilize-no-std.html": None,
+    "https://rust-lang.github.io/rfcs/2504-try-trait.html": None,
+    "https://rust-lang.github.io/rfcs/2592-pin.html": None,
     # Rust project goals
     "https://rust-lang.github.io/rust-project-goals/2026/flagships.html": "https://rust-lang.github.io/rust-project-goals/2026/",
     # Rustc dev guide
     "https://rustc-dev-guide.rust-lang.org/proc-macros.html": "https://rustc-dev-guide.rust-lang.org/attributes.html",
     "https://rustc-dev-guide.rust-lang.org/modules.html": "https://rustc-dev-guide.rust-lang.org/compiler-src.html",
-    "https://rustc-dev-guide.rust-lang.org/backend/index.html": "https://rustc-dev-guide.rust-lang.org/backend/index.html",  # keep
-    "https://rustc-dev-guide.rust-lang.org/query/async_await.html": "https://rustc-dev-guide.rust-lang.org/query/index.html",
-    "https://rustc-dev-guide.rust-lang.org/traits/async-fn-in-trait.html": "https://rustc-dev-guide.rust-lang.org/traits/index.html",
+    "https://rustc-dev-guide.rust-lang.org/backend/index.html": "https://rustc-dev-guide.rust-lang.org/overview.html",
+    "https://rustc-dev-guide.rust-lang.org/query/index.html": "https://rustc-dev-guide.rust-lang.org/query.html",
+    "https://rustc-dev-guide.rust-lang.org/traits/index.html": "https://rustc-dev-guide.rust-lang.org/overview.html",
+    "https://rustc-dev-guide.rust-lang.org/query/async_await.html": "https://rustc-dev-guide.rust-lang.org/query.html",
+    "https://rustc-dev-guide.rust-lang.org/traits/async-fn-in-trait.html": "https://rustc-dev-guide.rust-lang.org/return-position-impl-trait-in-trait.html",
     # Rust formal methods
-    "https://rust-lang.github.io/rust-formal-methods/": "https://rust-lang.github.io/rust-formal-methods/",
+    "https://rust-lang.github.io/rust-formal-methods/": None,
     # Other Rust sites
     "https://www.rust-lang.org/faq": "https://www.rust-lang.org/learn",
-    "https://www.rust-lang.org/governance/wgs/wg-security-response": "https://www.rust-lang.org/governance/wgs/security-response",
-    "https://foundation.rust-lang.org/security/": "https://foundation.rust-lang.org/security/",  # keep
+    "https://www.rust-lang.org/governance/wgs/security-response": "https://www.rust-lang.org/governance/",
+    "https://foundation.rust-lang.org/security/": "https://foundation.rust-lang.org/",
     "https://forge.rust-lang.org/js/index.html": "https://forge.rust-lang.org/",
     "https://releases.rs/1.85.0": "https://github.com/rust-lang/rust/releases/tag/1.85.0",
     "https://releases.rs/1.95.0/": "https://github.com/rust-lang/rust/releases/tag/1.85.0",
@@ -114,52 +121,74 @@ URL_REPLACEMENTS: dict[str, str | None] = {
     "https://rtic.rs/book/": "https://rtic.rs/2/book/en/",
     "https://embassy.dev/book/dev/runtime.html": "https://embassy.dev/book/",
     "https://embassy.dev/book/dev/time.html": "https://embassy.dev/book/",
-    "https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius/": "https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius.html",
-    "https://without.boats/blog/implied-bounds-and-perfect-derive/": "https://without.boats/blog/implied-bounds/",
+    "https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius/": "https://smallcultfollowing.com/babysteps/",
+    "https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius.html": "https://smallcultfollowing.com/babysteps/",
+    "https://without.boats/blog/implied-bounds-and-perfect-derive/": "https://without.boats/blog/",
+    "https://without.boats/blog/implied-bounds/": "https://without.boats/blog/",
     "https://blog.yoshuawuyts.com/pin-streams/": "https://blog.yoshuawuyts.com/",
-    "https://ralfj.de/blog/2017/01/20/the-rustbelt-paper.html": "https://ralfj.de/blog/2017/01/20/the-rustbelt-paper.html",  # keep
-    "https://www.ralfj.de/blog/2021/04/14/memory-safety.html": "https://www.ralfj.de/blog/2021/04/14/memory-safety.html",  # keep
+    "https://ralfj.de/blog/2017/01/20/the-rustbelt-paper.html": "https://ralfj.de/blog/",
+    "https://www.ralfj.de/blog/2021/04/14/memory-safety.html": "https://ralfj.de/blog/",
     "https://plv.mpi-sws.org/rustbelt/tree-borrows/": "https://plv.mpi-sws.org/rustbelt/",
     "https://plv.mpi-sws.org/rustbos/": "https://plv.mpi-sws.org/rustbelt/",
-    "https://software.imdea.org/~cflanagan/papers/rse.pdf": "https://software.imdea.org/~cflanagan/papers/rse.pdf",  # keep
-    "https://homepages.inf.ed.ac.uk/wadler/papers/free/theorems_for_free.pdf": "https://homepages.inf.ed.ac.uk/wadler/papers/free/theorems_for_free.pdf",  # keep
+    "https://software.imdea.org/~cflanagan/papers/rse.pdf": None,
+    "https://homepages.inf.ed.ac.uk/wadler/papers/free/theorems_for_free.pdf": None,
     "https://www.cs.utah.edu/pldi23/": "https://pldi23.sigplan.org/",
-    "https://link.springer.com/book/10.1007/978-3-030-66474-7": "https://link.springer.com/book/10.1007/978-3-030-66474-7",  # keep
-    "https://www.springer.com/gp/book/9783540761942": "https://www.springer.com/gp/book/9783540761942",  # keep
+    "https://link.springer.com/book/10.1007/978-3-030-66474-7": None,
+    "https://www.springer.com/gp/book/9783540761942": None,
     "https://solace.com/blog/event-driven-architecture-anti-patterns/": "https://solace.com/blog/",
     "https://blog.cloudflare.com/fuzzing-rust/": "https://blog.cloudflare.com/",
     "https://docs.sigstore.dev/signing/overview/": "https://docs.sigstore.dev/",
-    "https://www.fda.gov/": "https://www.fda.gov/",
-    "https://www.coursera.org/learn/programming-in-rust": "https://www.coursera.org/browse/computer-science/programming-languages",
+    "https://www.fda.gov/": None,
+    "https://www.coursera.org/learn/programming-in-rust": None,
+    "https://www.coursera.org/browse/computer-science/programming-languages": None,
     "https://www.linuxfoundation.org/certification/linux-foundation-certified-rust-programmer": "https://www.linuxfoundation.org/certification",
     "https://aws.amazon.com/blogs/opensource/why-aws-loves-rust/": "https://aws.amazon.com/opensource/",
     "https://www.phoronix.com/news/Rust-1.94-Released": "https://www.phoronix.com/",
     # Community / vendor sites
-    "https://rustcc.cn/": "https://rustcc.cn/",  # keep
-    "https://devblogs.microsoft.com/rust/": "https://devblogs.microsoft.com/rust/",  # keep
+    "https://rustcc.cn/": None,
+    "https://devblogs.microsoft.com/rust/": None,
+    "https://www.coursera.org/browse/computer-science/programming-languages": None,
+    "https://inf.ethz.ch/courses": None,
+    "https://www.pm.inf.ethz.ch/publications/RusBos21.html": None,
     "https://lwn.net/Articles/...": None,
     # Third-party crate docs
     "https://diesel.rs/guides/comparison-to-other-orms.html": "https://diesel.rs/guides/",
     "https://rkyv.org/performance.html": "https://rkyv.org/",
     "https://bevyengine.org/learn/advanced-concepts/component-storage/": "https://bevyengine.org/learn/",
-    "https://bevyengine.org/learn/quick-start/getting-started/systems/": "https://bevyengine.org/learn/quick-start/introduction.html",
-    "https://bevyengine.org/learn/quick-start/getting-started/states/": "https://bevyengine.org/learn/quick-start/introduction.html",
+    "https://bevyengine.org/learn/quick-start/getting-started/systems/": "https://bevyengine.org/learn/",
+    "https://bevyengine.org/learn/quick-start/getting-started/states/": "https://bevyengine.org/learn/",
+    "https://bevyengine.org/learn/quick-start/introduction.html": "https://bevyengine.org/learn/",
     "https://actix.rs/actix/": "https://actix.rs/",
     "https://actix.rs/actix/actix/trait.Actor.html": "https://actix.rs/",
+    "https://actix.rs/actix/trait.Actor.html": "https://actix.rs/",
     "https://ratatui.rs/concepts/testing/": "https://ratatui.rs/",
     "https://ratatui.rs/tutorials/hello-world/": "https://ratatui.rs/tutorials/",
     "https://kube.rs/controllers/crds/": "https://kube.rs/",
     "https://dioxuslabs.com/learn/0.7/reference": "https://dioxuslabs.com/learn/0.7/",
     "https://maud.lambda.xyz/frameworks.html": "https://maud.lambda.xyz/",
     "https://maud.lambda.xyz/syntax.html": "https://maud.lambda.xyz/",
-    "https://nexte.st/book/execution.html": "https://nexte.st/book/",
+    "https://nexte.st/book/execution.html": None,
+    "https://nexte.st/book/": None,
     # Fictional future release links (to be removed)
     "https://blog.rust-lang.org/2024/12/19/Rust-1.92.0.html": None,
     "https://blog.rust-lang.org/2025/12/04/Rust-1.96.1.html": None,
     "https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/": None,
     "https://blog.rust-lang.org/2026/05/14/Rust-1.95.0.html": None,
     "https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html": None,
-    "https://rust-lang.github.io/compiler-team/minutes/design-meeting/2021-03-17-next-generation-trait-solver.html": "https://rust-lang.github.io/compiler-team/minutes/design-meeting/2021-03-17-next-generation-trait-solver.html",  # keep
+    "https://rust-lang.github.io/compiler-team/minutes/design-meeting/2021-03-17-next-generation-trait-solver.html": None,
+    # Derived/redirect targets that also turn out to be 404
+    "https://rust-lang.github.io/rfcs/3271-rustdoc-json.html": None,
+    "https://rust-lang.github.io/rfcs/3516-private-dependency.html": None,
+    "https://rust-lang.github.io/rfcs/2121-cargo-profile.html": None,
+    "https://rust-lang.github.io/rfcs/3560-alignment.html": None,
+    "https://rust-lang.github.io/rfcs/2616-iterable.html": None,
+    "https://rust-lang.github.io/rfcs/2645-transparent-enums.html": None,
+    "https://doc.rust-lang.org/nightly/unstable-book/language-features/const-fn.html": "https://doc.rust-lang.org/reference/items/functions.html",
+    "https://doc.rust-lang.org/nightly/std/ops/trait.Iterator.html": "https://doc.rust-lang.org/std/iter/trait.Iterator.html",
+    "https://blog.rust-lang.org/2017/06/27/Rust-1.18.html": "https://blog.rust-lang.org/2017/06/08/Rust-1.18.html",
+    "https://doc.rust-lang.org/nomicon/race-conditions.html": "https://doc.rust-lang.org/nomicon/races.html",
+    "https://doc.rust-lang.org/nomicon/self-referential-structs.html": None,
+    "https://doc.rust-lang.org/nomicon/unions.html": None,
 }
 
 # Regex patterns for markdown links: [text](url) or [text](url "title")
@@ -191,7 +220,6 @@ def collect_404_links() -> dict[str, list[str]]:
             url_to_files.setdefault(current_url, [])
             continue
         # File line:   - `path\file.md` (skip URL lines that also start with `- \``)
-        # File line:   - `path\file.md` (skip URL lines that also start with `- \``)
         FILE_PREFIX = "- \x60"
         BACKTICK = "\x60"
         if current_url and line.strip().startswith(FILE_PREFIX) and "http" not in line:
@@ -206,6 +234,15 @@ def expire_link(match: re.Match, url: str) -> str:
     return f"[{text} [已失效]]<!-- 原链接: {url} -->"
 
 
+def expire_link(match: re.Match, url: str) -> str:
+    text = match.group("text")
+    return f"[{text} [已失效]]<!-- 原链接: {url} -->"
+
+
+def expire_autolink(match: re.Match, url: str) -> str:
+    return f"[{url} [已失效]]<!-- 原链接: {url} -->"
+
+
 def fix_file(path: Path, targets: dict[str, str | None]) -> dict[str, int]:
     stats = {"replaced": 0, "expired": 0, "unchanged": 0}
     text = path.read_text(encoding="utf-8", errors="ignore")
@@ -213,8 +250,11 @@ def fix_file(path: Path, targets: dict[str, str | None]) -> dict[str, int]:
 
     for url, replacement in targets.items():
         if replacement is None:
-            # Mark as expired
+            # Mark [text](url) links as expired
             text = MD_LINK_RE.sub(lambda m, u=url: expire_link(m, u) if m.group("url") == u else m.group(0), text)
+            # Mark <url> autolinks as expired
+            autolink_re = re.compile(rf"<({re.escape(url)})>")
+            text = autolink_re.sub(lambda m, u=url: expire_autolink(m, u), text)
             if text != original:
                 stats["expired"] += text.count("[已失效]")
         else:

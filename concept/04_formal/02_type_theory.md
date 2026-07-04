@@ -55,7 +55,7 @@
 > **[Pierce 2002, Ch.23]** System F (λ2) extends λ→ with universal quantification over types. This is the theoretical basis for parametric polymorphism in ML, Haskell, and Rust.
 > **[Cardelli 1996, *Type Systems* (ACM Computing Surveys 28(1))]** A type system is a syntactic discipline for enforcing levels of abstraction. Type soundness — the guarantee that well-typed programs do not cause certain errors — is the central meta-theorem of type theory.
 
-Rust 的类型系统（Type System）是 **Hindley-Milner + 所有权（Ownership）约束 + 子类型（生命周期）** 的扩展：
+Rust 的类型系统（Type System）是 **Hindley-Milner + 所有权（Ownership）约束 + 子类型（生命周期（Lifetimes））** 的扩展：
 
 ```text
 HM 核心:          Γ ⊢ e : τ  （上下文 Γ 下表达式 e 具有类型 τ） [来源: Pierce 2002, Ch.22] ✅
@@ -95,7 +95,7 @@ Rust 扩展:
 ### 2.3 Rust 类型的 Variance
 >
 
-| **类型构造器** | **对生命周期** | **对类型参数** |
+| **类型构造器** | **对生命周期（Lifetimes）** | **对类型参数** |
 |:---|:---|:---|
 | `&'a T` | `'a`: 协变 | `T`: 协变 |
 | `&'a mut T` | `'a`: 协变 | `T`: 不变 |
@@ -235,7 +235,7 @@ Preservation: 若 ⊢ e : τ 且 e → e'，则 ⊢ e' : τ                    [
 | **L1**: 简单类型 λ 演算 | λ→ 良类型性 ⟹ **类型保持（Subject Reduction）** | 项在 Γ 下良类型，β-归约一步 | 归约后项仍保持原类型 | T1（类型安全性）; L2（System F 扩展基础） | 引入非终止（`loop {}`）或运行时（Runtime） panic（`unwrap()` 空值） |
 | **L2**: System F 参数多态 | L1 + ∀α.τ ⟹ **Rust 泛型（Generics）理论基础** | 类型变量无约束，替换保持良类型 | 零成本单态化（Monomorphization）实例化，Parametricity 成立 | T3（约束可满足性）; C2（高阶类型） | 存在类型（`dyn Trait`）引入运行时（Runtime）开销；GATs 高阶约束不可推断 |
 | **T1**: 类型安全性 | L1 + L2 ⟹ **进展性 + 保持性** | 程序通过类型检查，无 `unsafe` | 运行时（Runtime）无类型错误、无 UB | C1（递归类型安全性）; 所有 Rust Safe 代码 | `unsafe` 块；FFI；`std::mem::transmute`；非终止/资源耗尽 |
-| **T2**: 子类型传递性 | 偏序关系 ⟹ **trait bound 层次关系** | `'long <: 'short`，协变/逆变/不变定义清晰 | 生命周期替换安全，协变容器替换合法 | 生命周期替换、协变检查 | 逆变误用（`&mut T` 协变假设）; 循环子类型（`'a: 'b` 且 `'b: 'a` 非传递） |
+| **T2**: 子类型传递性 | 偏序关系 ⟹ **trait bound 层次关系** | `'long <: 'short`，协变/逆变/不变定义清晰 | 生命周期（Lifetimes）替换安全，协变容器替换合法 | 生命周期替换、协变检查 | 逆变误用（`&mut T` 协变假设）; 循环子类型（`'a: 'b` 且 `'b: 'a` 非传递） |
 | **T3**: 约束可满足性 | L2 + Trait Bound ⟹ **类型推导可判定** | `where` 子句为 Horn 子句形式，约束图无环 | 类型推导终止，主类型存在 | 所有带 Trait Bound 的泛型（Generics）代码 | GATs 无界递归导致不终止；重叠 impl（E0119）; HRTB 过度约束 |
 | **C1**: 递归类型 | μX.A(X) ⟹ **Rust enum 自引用（Reference）** | 递归锚点（`Box<T>` 指针间接），类型方程有最小不动点 | 链表/树等递归结构类型安全，大小有限 | T1（作为类型安全子情况） | 无 `Box`/`Rc` 间接层 → 无限大小（E0072）; 循环引用导致内存泄漏 |
 | **C2**: 高阶类型 | System Fω ⟹ **关联类型/高阶 Trait bound** | 类型构造子可抽象（`Vec` 作为参数），GATs 参数合法 | `Iterator<Item=T>` 归一化唯一，`for<'a>` 全称约束可解 | HKT 模拟；GATs 使用 | 关联类型重叠定义（coherence 破坏，E0119）; 归一化无限递归（E0275） |
@@ -247,7 +247,7 @@ Preservation: 若 ⊢ e : τ 且 e → e'，则 ⊢ e' : τ                    [
 > **⟹ 一致性（Coherence）推理链**:
 >
 > **链 A（类型安全链）**: L1 (λ→ 类型保持) ⟹ L2 (System F 参数多态) ⟹ T1 (进展+保持=类型安全) ⟹ C1 (递归类型安全) / L3 (所有权（Ownership）安全)
-> **链 B（子类型链）**: T2 (子类型传递性) ⟹ T4 (Variance 传播) ⟹ Rust 生命周期替换与容器协变检查
+> **链 B（子类型链）**: T2 (子类型传递性) ⟹ T4 (Variance 传播) ⟹ Rust 生命周期（Lifetimes）替换与容器协变检查
 > **链 C（推断链）**: T5 (HM 推断完备性) ⟹ T3 (约束可满足性) ⟹ C2 (高阶类型归一化) / C3 (存在类型抽象)
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §3.1 "L1-L4 形式化映射" · §4.2 "类型系统（Type System）一致性（Coherence）"
 
@@ -291,7 +291,7 @@ graph TD
 | **层面** | **反例** | **性质** |
 |:---|:---|:---|
 | 语义 | `loop {}` 非终止 | 类型正确，但无进展性（Progress 假设程序可归约） |
-| 运行时（Runtime） | 栈溢出、堆耗尽 | 类型正确，资源约束超出类型系统表达力 |
+| 运行时（Runtime） | 栈溢出、堆耗尽 | 类型正确，资源约束超出类型系统（Type System）表达力 |
 | 编译期 | `unsafe` / FFI | 显式绕过类型系统，类型安全承诺失效 |
 | 工程 | `unwrap()` panic | Safe Rust 内的受控崩溃，非 UB 但属错误 |
 
@@ -332,7 +332,7 @@ graph TD
 | 无类型 λ 演算 | 表达任意计算 | Curry 悖论导致不一致 | 需要类型来限制自指 |
 | Java `null` | 引用（Reference）类型安全 | `NullPointerException` 无处不在 | `null` 破坏 soundness 边界 |
 | 早期 Scala（2.x） | 类型安全 | 高阶类型与路径依赖类型存在 soundness hole | 复杂类型系统需形式化验证 |
-| pre-NLL Rust | 借用（Borrowing）检查安全 | 某些合法模式被错误拒绝（不完备），存在悬垂借用误放过 | 生命周期算法需持续验证 |
+| pre-NLL Rust | 借用（Borrowing）检查安全 | 某些合法模式被错误拒绝（不完备），存在悬垂借用误放过 | 生命周期（Lifetimes）算法需持续验证 |
 
 ### 5.3 反命题 3: "子类型总是安全的"
 
@@ -487,9 +487,9 @@ Rust 类型系统 = λ→ + System F + HM + λ<: + 线性类型 + 约束类型
 
 | **L1/L2 工程概念** | **L4 理论来源** | **映射路径** |
 |:---|:---|:---|
-| `fn<T>(x: T) -> T` | L2: System F `∀T. T → T` | L2 泛型 §4.1 → L4 L2 |
+| `fn<T>(x: T) -> T` | L2: System F `∀T. T → T` | L2 泛型（Generics） §4.1 → L4 L2 |
 | `T: Trait` | T3: 约束可满足性 | L2 约束 §4.4 → L4 T3 |
-| `'a: 'b` | T2: 子类型传递性 | L1 生命周期 → L4 T2 |
+| `'a: 'b` | T2: 子类型传递性 | L1 生命周期（Lifetimes） → L4 T2 |
 | `&mut T` 不变 | T4: Variance | L1 借用（Borrowing） → L4 T4 |
 | `Option<T>` / `Result<T, E>` | C1: 递归类型 + ADT | L1 ADT §4.1 → L4 C1 |
 | `impl Trait` | C3: 存在类型 | L2 Trait §4.4 → L4 C3 |
@@ -532,7 +532,7 @@ graph TD
     G --> G3[Subject Reduction]
 ```
 
-> **认知功能**: 本思维导图提供类型论六大知识模块（Module）的导航索引，将 λ 演算、多态性、ADT 代数语义、Variance、Rust 扩展和类型安全整合为一张定位地图。建议在学习或查阅时以此为「你在哪」的参照系。关键洞察：六轴并非独立——λ→ 是根基，System F 和 HM 是 Rust 泛型的双支柱，线性类型是所有权唯一性的理论来源。 [来源: 💡 原创分析]
+> **认知功能**: 本思维导图提供类型论六大知识模块（Module）的导航索引，将 λ 演算、多态性、ADT 代数语义、Variance、Rust 扩展和类型安全整合为一张定位地图。建议在学习或查阅时以此为「你在哪」的参照系。关键洞察：六轴并非独立——λ→ 是根基，System F 和 HM 是 Rust 泛型的双支柱，线性类型是所有权（Ownership）唯一性的理论来源。 [来源: 💡 原创分析]
 
 ---
 
@@ -591,8 +591,8 @@ enum List<T> {
 
 | Rust 语法 | 逻辑形式 | 类型论对应 | 限制 |
 |:---|:---|:---|:---|
-| `for<'a> T: Trait<'a>` | `∀'a. Trait(T, 'a)` | System F 的 `∀α.τ`（α 限定为生命周期）| 仅量化生命周期，不量化类型 |
-| `fn foo<'a>(x: &'a T)` | `λ'a.λx:&'a T. ...` | HM 推断 + 区域参数 | 生命周期参数不参与类型推断（Type Inference）的多解歧义 |
+| `for<'a> T: Trait<'a>` | `∀'a. Trait(T, 'a)` | System F 的 `∀α.τ`（α 限定为生命周期（Lifetimes））| 仅量化生命周期，不量化类型 |
+| `fn foo<'a>(x: &'a T)` | `λ'a.λx:&'a T. ...` | HM 推断 + 区域参数 | 生命周期（Lifetimes）参数不参与类型推断（Type Inference）的多解歧义 |
 | `dyn for<'a> Fn(&'a T)` | `∃f. ∀'a. f: Fn(&'a T)` | 存在类型 + 全称量化 | 对象安全限制：不能出现在返回位置 |
 
 **与 System F 的精确关系**
@@ -613,7 +613,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 
 **可满足性分析**
 
-生命周期约束系统是一个**偏序约束系统**：
+生命周期（Lifetimes）约束系统是一个**偏序约束系统**：
 
 ```text
 约束形式:  'a: 'b   （'a 包含 'b，即 'a 比 'b 长）
@@ -626,8 +626,8 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
   HRTB 约束求解:   O(V + E) — 多项式时间
 ```
 
-> **关键洞察**: HRTB 的**可判定性**来自生命周期量化域的结构性——生命周期是偏序关系上的点，而非任意类型。这使得 Rust 可以在编译期高效求解高阶生命周期约束，而无需面对 System F 的不可判定性噩梦。
-> **深入阅读**: 生命周期约束求解详见 [`03_lifetimes.md`](../01_foundation/03_lifetimes.md) §4；泛型约束系统详见 [`02_generics.md`](../02_intermediate/02_generics.md) §4.1。
+> **关键洞察**: HRTB 的**可判定性**来自生命周期（Lifetimes）量化域的结构性——生命周期是偏序关系上的点，而非任意类型。这使得 Rust 可以在编译期高效求解高阶生命周期约束，而无需面对 System F 的不可判定性噩梦。
+> **深入阅读**: 生命周期（Lifetimes）约束求解详见 [`03_lifetimes.md`](../01_foundation/03_lifetimes.md) §4；泛型约束系统详见 [`02_generics.md`](../02_intermediate/02_generics.md) §4.1。
 
 ---
 
@@ -648,7 +648,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 ---
 
 > **过渡: L4 → L2**
-> System F 的 `Λα.λx:α. x` 在 Rust 中写作 `fn identity<T>(x: T) -> T { x }`，但 System F 无法表达生命周期——后者需要 **System F_ω + 区域类型** 的扩展。HRTB 的 `for<'a>` 是全称量词 `∀` 在类型约束中的具体实现，而 GATs 则用类型族（type family）模拟了 Haskell 中缺失的 HKT。
+> System F 的 `Λα.λx:α. x` 在 Rust 中写作 `fn identity<T>(x: T) -> T { x }`，但 System F 无法表达生命周期（Lifetimes）——后者需要 **System F_ω + 区域类型** 的扩展。HRTB 的 `for<'a>` 是全称量词 `∀` 在类型约束中的具体实现，而 GATs 则用类型族（type family）模拟了 Haskell 中缺失的 HKT。
 > Rust 的具体实现见 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)（泛型与单态化（Monomorphization））与 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)（Trait 作为 Type Class 的变体）。
 
 ## 十一、相关概念链接
@@ -882,7 +882,7 @@ S-Record:  {lᵢ: Tᵢ} <: {lᵢ: Sᵢ}  若 ∀i. Tᵢ <: Sᵢ
 
 #### Rust 生命周期作为子类型关系
 
-Rust 中生命周期 `'a: 'b` 的语法表示 **"'a 至少和 'b 一样长"**，即 `'a` 是 `'b` 的子类型：
+Rust 中生命周期（Lifetimes） `'a: 'b` 的语法表示 **"'a 至少和 'b 一样长"**，即 `'a` 是 `'b` 的子类型：
 
 ```rust
 // ✅ 生命周期子类型的直观理解
@@ -894,7 +894,7 @@ where
 }
 ```
 
-**生命周期方差与子类型**：
+**生命周期（Lifetimes）方差与子类型**：
 
 | 类型构造器 | 参数位置 | 方差 | 子类型方向 |
 |:---|:---|:---:|:---|
@@ -926,7 +926,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 }
 ```
 
-> **定理**：Rust 的生命周期子类型化是**结构子类型**（structural subtyping）的特例——子类型关系由类型的结构（生命周期参数）决定，而非名义（name-based）。
+> **定理**：Rust 的生命周期（Lifetimes）子类型化是**结构子类型**（structural subtyping）的特例——子类型关系由类型的结构（生命周期参数）决定，而非名义（name-based）。
 > **来源**: [Pierce · Types and Programming Languages Ch.15–16] · [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rust Nomicon: Variance] · [Wikipedia: Subtyping](https://en.wikipedia.org/wiki/Subtyping)
 
 ---
@@ -936,7 +936,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 - [x] **TODO**: 补充 Dependent type 与 Const Generics 的关系 —— 优先级: 中 —— 已完成 §10.1
 - [x] **TODO**: 补充 Higher-Kinded Types 的缺失与 workaround —— 优先级: 中 —— 已完成 §10.2
 - [x] **TODO**: 补充线性逻辑（Linear Logic）与所有权类型的 Curry-Howard 对应 —— 优先级: 高 —— 已完成 §10.3
-- [x] **TODO**: 补充 Pierce *TAPL* Ch.15 子类型章节的完整规则与 Rust 生命周期映射 —— 优先级: 中 —— 已完成 §10.4
+- [x] **TODO**: 补充 Pierce *TAPL* Ch.15 子类型章节的完整规则与 Rust 生命周期（Lifetimes）映射 —— 优先级: 中 —— 已完成 §10.4
 
 > **过渡: L4 → L3**
 > 类型论中的全称量词 `∀α.τ` 在 Rust 中就是 `fn foo<T>(x: T)`，存在量词 `∃α.τ` 就是 `impl Trait`。类型论不是抽象数学——它是编译器类型检查算法的理论基础。理解 HM 算法如何推导 `let x = 5` 的类型，就是理解 `rustc` 如何处理 90% 的日常代码。
@@ -1085,7 +1085,7 @@ fn main() {
 
 > **修正**: 依赖类型（dependent types）是类型依赖值的类型系统（如 `Vec{n}` 表示长度为 `n` 的向量）。
 > Rust 的常量泛型（`const N: usize`）提供了**轻量级依赖类型**：数组长度 `[T; N]` 是类型的一部分，但 `N` 必须是编译期常量。
-> 运行时值（如 `args().len()`）不能用于类型构造。
+> 运行时（Runtime）值（如 `args().len()`）不能用于类型构造。
 > 这与 Idris、Agda、Coq 的完全依赖类型（任意值可用于类型）或 C++ 的 `std::array<T, N>`（同样编译期常量）不同——Rust 在类型安全性和编译期复杂性间取平衡。
 > 未来可能的扩展：`const` 泛型表达式（`[T; N + 1]`）、依赖 trait bound，但完全依赖类型可能永远不会进入 Rust（与零成本抽象（Zero-Cost Abstraction）和编译速度冲突）。
 > [来源: [Dependent Types](https://en.wikipedia.org/wiki/Dependent_type)] ·
@@ -1159,7 +1159,7 @@ fn main() {}
 > Rust **不原生支持 HKT**，因为：
 >
 > 1) 类型系统复杂度（HKT 的类型推断（Type Inference）是半可判定的）；
-> 2) 与当前 trait 系统的交互（关联类型、生命周期）；
+> 2) 与当前 trait 系统的交互（关联类型、生命周期（Lifetimes））；
 > 3) 工程优先级（GAT 已解决大部分用例）。
 >
 > 替代方案：
@@ -1315,7 +1315,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 ```
 
-- A. `'a` 是一个运行时变量，编译器在运行期检查生命周期
+- A. `'a` 是一个运行时变量，编译器在运行期检查生命周期（Lifetimes）
 - B. `'a` 是类型参数，与泛型参数 `T` 地位相同，但在编译期被擦除
 - C. `'a` 是一个特殊的注释，不影响代码生成
 - D. `'a` 是引用（Reference）计数器的名称
@@ -1325,7 +1325,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 **正确答案是 B**。
 
-**生命周期 = 类型参数**：
+**生命周期（Lifetimes） = 类型参数**：
 
 ```rust,ignore
 // longest 函数有两个参数:
@@ -1338,7 +1338,7 @@ fn longest_lt0(x: &lt0 str, y: &lt0 str) -> &lt0 str { ... }
 // lt0 是一个"编译期标签"，标记所有相关引用的有效范围
 ```
 
-**生命周期擦除（Lifetime Erasure）**：
+**生命周期（Lifetimes）擦除（Lifetime Erasure）**：
 
 ```rust
 // 编译后的机器码中，生命周期完全不存在！
@@ -1352,9 +1352,9 @@ fn borrow<'a>(x: &'a i32) -> &'a i32 { x }
 // 没有 'a 的痕迹！
 ```
 
-**生命周期 vs 泛型类型的对比**：
+**生命周期（Lifetimes） vs 泛型类型的对比**：
 
-| 特性 | 类型参数 `T` | 生命周期参数 `'a` |
+| 特性 | 类型参数 `T` | 生命周期（Lifetimes）参数 `'a` |
 |:---|:---|:---|
 | 声明位置 | `<T>` | `<'a>` |
 | 约束方式 | `T: Trait` | `'a: 'b`（outlives）|
@@ -1376,14 +1376,14 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str;
 fn foo<'a>(&'a self) -> &'a T;
 ```
 
-> **关键洞察**: 生命周期是**编译期的证明工具**，不是运行期的机制。理解这一点是掌握 Rust 借用（Borrowing）检查器的关键。
+> **关键洞察**: 生命周期（Lifetimes）是**编译期的证明工具**，不是运行期的机制。理解这一点是掌握 Rust 借用（Borrowing）检查器的关键。
 </details>
 
 ---
 
 ### 测验 4：类型推断与 Hindley-Milner（分析层）
 
-**题目**: Rust 的类型推断与 Haskell 的 Hindley-Milner (HM) 算法有什么本质区别？以下代码在 Rust 和 Haskell 中的行为有何不同？
+**题目**: Rust 的类型推断（Type Inference）与 Haskell 的 Hindley-Milner (HM) 算法有什么本质区别？以下代码在 Rust 和 Haskell 中的行为有何不同？
 
 ```rust,compile_fail
 let v = Vec::new();  // Rust

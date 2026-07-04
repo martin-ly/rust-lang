@@ -461,7 +461,7 @@ impl<T> Vec<T> {
    IEEE, 2002.
 
 7. **Ralf Jung's Blog**. "The RustBelt Paper and What It Means for Rust".
-   <https://ralfj.de/blog/2017/01/20/the-rustbelt-paper.html>
+   <https://ralfj.de/blog/>
 
 8. **Tree Borrows**. "Tree Borrows: A New Aliasing Model for Rust".
    <https://www.ralfj.de/blog/2023/06/02/tree-borrows.html>

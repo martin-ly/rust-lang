@@ -420,7 +420,7 @@ Rust for Linux 采用状态 (2024+):
 | 2026 年初 | Rust 正式成为 Linux 内核的**永久一级公民** |
 | 2026-04 | Linux 7.0 正式发布并移除 Rust 的 experimental 标签 |
 
-> **这意味着什么**：Rust 代码与 C 代码在内核中享有同等地位；内核维护者承诺长期支持 Rust 基础设施；第三方开发者可使用稳定的 `kernel` crate API 编写内核模块。
+> **这意味着什么**：Rust 代码与 C 代码在内核中享有同等地位；内核维护者承诺长期支持 Rust 基础设施；第三方开发者可使用稳定的 `kernel` crate API 编写内核模块（Module）。
 
 ### 3.4 生产级驱动案例（自 `docs/04_research/04_rust_for_linux.md` 合并）
 
@@ -815,7 +815,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-允许在 Linux 内核中编写 Rust 驱动和模块，利用 Rust 的内存安全保证减少内核漏洞，同时保持与现有 C 代码的互操作性。
+允许在 Linux 内核中编写 Rust 驱动和模块，利用 Rust 的内存安全（Memory Safety）保证减少内核漏洞，同时保持与现有 C 代码的互操作性。
 </details>
 
 ---

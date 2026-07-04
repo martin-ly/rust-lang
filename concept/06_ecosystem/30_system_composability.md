@@ -424,7 +424,7 @@ use tower::layer::util::Identity;
 
 ### 定理 3：有界通道组合保持背压
 >
-> **[来源类型: 原创分析]** 基于异步（Async）运行时内存安全（Memory Safety）模型。
+> **[来源类型: 原创分析]** 基于异步（Async）运行时（Runtime）内存安全（Memory Safety）模型。
 
 **定理 3**：设系统由生产者 `P`、有界通道 `C(n)`（容量 `n`）和消费者 `K` 顺序组合。若 `K` 的处理速率为 `r_k`，`P` 的生产速率为 `r_p`，则：
 
@@ -505,7 +505,7 @@ where
 
 过度使用泛型（Generics）组合（如 Tower 的深层 Layer 栈）会导致编译时间指数增长。工程上的平衡策略：
 
-- 开发期：使用泛型保持类型安全
+- 开发期：使用泛型（Generics）保持类型安全
 - 发布期：在边界处使用 `.boxed()` 减少单态化（Monomorphization）爆炸
 - 关键路径：用 `cargo bench` 测量 `dyn` vs 单态化（Monomorphization）的实际差异
 
@@ -718,7 +718,7 @@ fn use_service<D, K, V>(s: &dyn Service<D, K, V>) {
 fn main() {}
 ```
 
-> **修正**: 泛型参数过多的解决方案：1) **关联类型**：`trait Database { type Output; }` — 每个实现只有一个输出类型；2) **trait object**：`&dyn Database` — 运行时擦除类型；3) **类型别名**：`type UserService = dyn Service<User, String, User>`；4) **newtype**：`struct UserService(Box<dyn Service<User, String, User>>)`。设计原则：公共 API 减少泛型参数（使用关联类型或 trait object），内部实现使用泛型（性能关键路径）。这与 Java 的泛型（类型擦除，无单态化）或 C# 的泛型（运行时特化，但共享代码）不同——Rust 的泛型是编译期单态化，参数过多导致代码膨胀和编译时间增加。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-01-syntax.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+> **修正**: 泛型参数过多的解决方案：1) **关联类型**：`trait Database { type Output; }` — 每个实现只有一个输出类型；2) **trait object**：`&dyn Database` — 运行时擦除类型；3) **类型别名**：`type UserService = dyn Service<User, String, User>`；4) **newtype**：`struct UserService(Box<dyn Service<User, String, User>>)`。设计原则：公共 API 减少泛型参数（使用关联类型或 trait object），内部实现使用泛型（性能关键路径）。这与 Java 的泛型（类型擦除，无单态化（Monomorphization））或 C# 的泛型（运行时特化，但共享代码）不同——Rust 的泛型是编译期单态化，参数过多导致代码膨胀和编译时间增加。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-01-syntax.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ---
 

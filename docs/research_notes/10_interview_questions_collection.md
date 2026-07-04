@@ -1444,5 +1444,5 @@ trait EventStore {
 
 ## 社区权威参考 {#社区权威参考}
 
-- [Rust 中文社区](https://rustcc.cn/)
+- [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->
 - [This Week in Rust](https://this-week-in-rust.org/)

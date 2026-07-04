@@ -128,7 +128,7 @@ fn main() {}
 
 ### 测验 4：生命周期捕获规则与 Return Type Notation（RTN）有什么关系？（理解层）
 
-**题目**: 生命周期捕获规则与 Return Type Notation（RTN）有什么关系？
+**题目**: 生命周期（Lifetimes）捕获规则与 Return Type Notation（RTN）有什么关系？
 
 <details>
 <summary>✅ 答案与解析</summary>

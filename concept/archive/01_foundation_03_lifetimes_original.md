@@ -742,7 +742,7 @@ graph TD
     style F2 fill:#f66
 ```
 
-> **认知功能**: 此图解构了 'static 的**多重身份**。四种合法来源（字符串字面量、全局常量、Box::leak、LazyLock）本质不同——有的来自静态数据段，有的来自故意泄漏，有的来自延迟初始化——但类型系统将它们统一为 'static。关键认知：'static 不是「存储位置」的约束，而是「存活时间」的约束。两个反例展示了试图「伪造」'static 的后果：编译期拦截（局部变量）或运行时（Runtime） UB（unsafe 伪造）。这帮助读者理解 'static 的语义本质：它是「时间」的 ⊤，而非「空间」的全局。 [来源: 💡 原创分析]
+> **认知功能**: 此图解构了 'static 的**多重身份**。四种合法来源（字符串字面量、全局常量、Box::leak、LazyLock）本质不同——有的来自静态数据段，有的来自故意泄漏，有的来自延迟初始化——但类型系统（Type System）将它们统一为 'static。关键认知：'static 不是「存储位置」的约束，而是「存活时间」的约束。两个反例展示了试图「伪造」'static 的后果：编译期拦截（局部变量）或运行时（Runtime） UB（unsafe 伪造）。这帮助读者理解 'static 的语义本质：它是「时间」的 ⊤，而非「空间」的全局。 [来源: 💡 原创分析]
 > [来源: [TRPL — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ---
@@ -951,7 +951,7 @@ fn main() {
 | **形式化基础** | 区域类型 (Tofte-Talpin) + 分离逻辑 (RustBelt) | 无统一形式化 | 范畴论 + 线性逻辑 | 无 |
 | **表达能力** | 高（HRTB、Variance、Elision） | 中 | 高（但 LinearTypes 为可选扩展） | 低 |
 
-> **[来源: Rust Reference: Lifetimes]** Rust 生命周期是类型系统的核心特征，通过编译期区域推断保证引用有效性，零运行时开销。 ✅
+> **[来源: Rust Reference: Lifetimes]** Rust 生命周期是类型系统的核心特征，通过编译期区域推断保证引用有效性，零运行时（Runtime）开销。 ✅
 > **[来源: C++ Reference: unique_ptr]** C++ 智能指针（Smart Pointer）管理所有权（Ownership）生命周期，但无编译期引用有效性检查，悬垂引用为未定义行为。 ✅
 > **[来源: Haskell GHC User Guide: LinearTypes]** Haskell LinearTypes 扩展允许显式线性类型约束（`a %1 -> b`），与 Rust 生命周期在类型论上同源，但为可选扩展。 ✅
 > **[来源: Go Spec: Memory Model]** Go 无生命周期或借用概念，内存安全（Memory Safety）完全依赖垃圾回收器，引用有效性无编译期检查。 ✅
@@ -1432,7 +1432,7 @@ fn bad_static(s: &str) -> impl Display + 'static {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-在函数参数位置使用 `impl Trait`（APIT, Argument Position Impl Trait）时，其生命周期推断与 RPIT 存在本质差异。APIT 是**泛型参数的语法糖**，每个 `impl Trait` 参数对应一个隐式的泛型类型参数。
+在函数参数位置使用 `impl Trait`（APIT, Argument Position Impl Trait）时，其生命周期推断与 RPIT 存在本质差异。APIT 是**泛型（Generics）参数的语法糖**，每个 `impl Trait` 参数对应一个隐式的泛型类型参数。
 
 **形式化差异**。
 

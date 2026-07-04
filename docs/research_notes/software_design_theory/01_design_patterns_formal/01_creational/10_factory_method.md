@@ -447,7 +447,7 @@ ownership_model T2
 ## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
-> **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
+> **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/type-safety.html)**
 
 ### 不变式（Invariants） {#不变式invariants}
 

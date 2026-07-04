@@ -53,7 +53,7 @@
     - [测验 1：Rust 和 TypeScript 的静态类型检查最根本的区别是什么？（理解层）](#测验-1rust-和-typescript-的静态类型检查最根本的区别是什么理解层)
     - [测验 2：TypeScript 的渐进类型系统（Gradual Typing）与 Rust 的强制类型系统各有什么优劣？（理解层）](#测验-2typescript-的渐进类型系统gradual-typing与-rust-的强制类型系统各有什么优劣理解层)
     - [测验 3：Rust 的 `enum`（代数数据类型）与 TypeScript 的 Discriminated Unions 有什么区别？（理解层）](#测验-3rust-的-enum代数数据类型与-typescript-的-discriminated-unions-有什么区别理解层)
-    - [测验 4：为什么 TypeScript 的类型系统不能防止运行时（Runtime）类型错误（如 API 返回不符合预期的数据）？（理解层）](#测验-4为什么-typescript-的类型系统不能防止运行时类型错误如-api-返回不符合预期的数据理解层)
+    - [测验 4：为什么 TypeScript 的类型系统（Type System）不能防止运行时（Runtime）类型错误（如 API 返回不符合预期的数据）？（理解层）](#测验-4为什么-typescript-的类型系统不能防止运行时类型错误如-api-返回不符合预期的数据理解层)
     - [测验 5：在前后端同构项目中，Rust 能否替代 TypeScript？目前的限制是什么？（理解层）](#测验-5在前后端同构项目中rust-能否替代-typescript目前的限制是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -572,7 +572,7 @@ graph TD
   > [来源: [WASM Performance](https://webassembly.github.io/spec/core/appendix/index.html)] · [来源: [wasm-bindgen — Performance](https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/js-objects-in-rust.html)]
 ```
 
-> **层次一致性（Coherence）**: 反命题分析区分了**类型系统的力量**（Rust 的穷尽保证 vs TS 的渐进检查）和**运行时的真实行为**（TS 类型擦除后即为无类型 JS）。
+> **层次一致性（Coherence）**: 反命题分析区分了**类型系统的力量**（Rust 的穷尽保证 vs TS 的渐进检查）和**运行时（Runtime）的真实行为**（TS 类型擦除后即为无类型 JS）。
 > [来源: [TypeScript — Design Non-Goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals)]
 
 ---

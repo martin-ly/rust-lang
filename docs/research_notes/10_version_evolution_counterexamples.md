@@ -72,7 +72,7 @@ let x = {
 - 明确使用 `let` 绑定控制生命周期。
 - 不依赖临时值的隐式 drop 顺序编写程序逻辑。
 
-> **权威来源**: [Rust Edition Guide – Tail Expr Drop Order](https://doc.rust-lang.org/edition-guide/rust-2024/drop-order.html)
+> **权威来源**: [Rust Edition Guide – Tail Expr Drop Order](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 
 ---
 

@@ -326,7 +326,7 @@ cargo check -W rust-2024-compatibility
 | **关键字** | `gen` 成为保留关键字 | 为生成器（generator）语法预留 | `cargo fix` 自动重命名变量为 `r#gen` |
 | **关键字** | 预留 `#"foo"#` 和 `##` 语法 | 为守护字符串字面量预留 | 自动检查 |
 | **生命周期（Lifetimes）** | RPIT lifetime capture rules | `impl Trait` 默认捕获所有输入生命周期 | 自动（旧代码通常直接编译），反向需 `+ use<>` |
-| **生命周期** | `use<..>` precise capturing 语法稳定 | 显式控制 `impl Trait` 捕获哪些生命周期 | 手动设计（新 API 推荐显式标注）|
+| **生命周期（Lifetimes）** | `use<..>` precise capturing 语法稳定 | 显式控制 `impl Trait` 捕获哪些生命周期 | 手动设计（新 API 推荐显式标注）|
 | **Unsafe** | `unsafe_op_in_unsafe_fn` 默认 warn → deny | `unsafe fn` 体内的 unsafe 操作需显式 `unsafe { }` | `cargo fix` 自动包裹 |
 | **Unsafe** | `extern` 块必须标记 `unsafe` | `extern "C" { }` → `unsafe extern "C" { }` | `cargo fix` 自动添加 |
 | **Unsafe** | `no_mangle`、`export_name`、`link_section` 需 `#[unsafe(...)]` | 属性显式标记 unsafe | `cargo fix` 自动改写 |
@@ -338,7 +338,7 @@ cargo check -W rust-2024-compatibility
 | **临时值** | 尾部表达式临时值作用域变化 | 块尾部表达式的临时值生命周期延长 | 自动 |
 | **宏（Macro）** | `:expr` 片段指定符匹配 `const` 和 `_` | 宏更灵活 | 自动 |
 | **宏（Macro）** | 缺失片段指定符成为硬错误 | `($x)` → `($x:tt)` 必须补全 | `cargo fix` |
-| **宏** | `macro_rules!` 支持 `pub` / `pub(crate)` | 宏可见性可控 | 可选显式声明 |
+| **宏（Macro）** | `macro_rules!` 支持 `pub` / `pub(crate)` | 宏可见性可控 | 可选显式声明 |
 | **Prelude** | `Future`、`IntoFuture` 加入 prelude | async 生态更无缝 | 自动 |
 | **迭代器（Iterator）** | `Box<[T]>` 实现 `IntoIterator<Item = T>` | 盒装切片（Slice）可按值迭代 | 自动（方法解析隐藏旧行为）|
 | **Cargo** | Rust-version aware resolver | 依赖解析考虑 `rust-version` 字段 | 自动 |
@@ -386,7 +386,7 @@ timeline
 
 > **认知功能**:
 > 此 timeline 将四个 Edition 的**数十项变更**浓缩为各自的核心主题。
-> 视觉上可以清晰看到演进节奏：2015→2018（3年，模块系统大改）→ 2021（3年，所有权（Ownership）精细化）→ 2024（3年，Unsafe 显式化）。
+> 视觉上可以清晰看到演进节奏：2015→2018（3年，模块（Module）系统大改）→ 2021（3年，所有权（Ownership）精细化）→ 2024（3年，Unsafe 显式化）。
 > 每个 Edition 的变更数量递增，表明语言在保持向后兼容的同时不断清理历史包袱。
 
 #### 2.3.4 代码示例：同一功能在不同 Edition 中的写法差异
@@ -584,7 +584,7 @@ struct Array<T, const N: usize> {
 
 **已稳定（Rust 1.51+）**：
 
-- 整数、布尔、字符常量作为泛型参数
+- 整数、布尔、字符常量作为泛型（Generics）参数
 - 简单的 const 泛型表达式（`N + 1`）
 
 **演进中**：
@@ -1035,7 +1035,7 @@ graph TD
 
 > **认知功能**: 将技术因素置于更广泛的生态与社会背景中审视，破除技术决定论迷思。建议关注四条非技术反例（社区治理、Mozilla 支持、时机因素、营销文档）如何与技术特性耦合。关键洞察：Rust 的成功是技术设计（所有权）、社区治理（RFC 流程）、历史时机（C/C++ 安全危机）与资源投入共同作用的系统结果。[来源: 💡 原创分析]
 > **过渡: L7 → L1**
-> Rust 的演进不是破坏性的——Edition 系统保证 2015 年的代码在 2024 年仍能编译。这种向后兼容性是所有演进的前提。理解 Rust 如何从 "所有权 + 借用（Borrowing）" 的简单组合发展到今天的复杂类型系统，需要回到最初的设计原则。
+> Rust 的演进不是破坏性的——Edition 系统保证 2015 年的代码在 2024 年仍能编译。这种向后兼容性是所有演进的前提。理解 Rust 如何从 "所有权 + 借用（Borrowing）" 的简单组合发展到今天的复杂类型系统（Type System），需要回到最初的设计原则。
 > 设计根基见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)。
 > **过渡: L7 → L4**
 > Rust 的未来方向（Effects System、Generic Const Items、TAIT）都有形式化理论基础。Effects System 对应代数效应的类型论、TAIT 对应存在类型的隐式封装、Const Generics 对应依赖类型的受限形式。这些不是工程师的随意发明，而是类型论研究的工程转化。
@@ -1225,7 +1225,7 @@ fn fixed() {
 
 ## 六、Rust 2026 Project Goals 旗舰目标详解
 
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]** Rust 项目每年定义旗舰级工作方向，2026 年聚焦四大主题：超越引用、灵活编译、高阶抽象、Trait 解放。
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]** Rust 项目每年定义旗舰级工作方向，2026 年聚焦四大主题：超越引用（Reference）、灵活编译、高阶抽象、Trait 解放。
 
 2025H2 项目目标周期已结束，41 个 Project Goals 中 13 个为旗舰目标。2026 年 5 月 18 日，Rust Blog 发布了 2025H2 周期的最终状态报告，确认了以下关键结果：
 
@@ -1251,7 +1251,7 @@ fn fixed() {
 | 子目标 | 状态 | 形式模型意义 |
 | :--- | :--- | :--- |
 | **Pin Ergonomics** | 实验阶段 | `Pin<&mut T>` 的自引用场景（如异步（Async）状态机）需要显式 `unsafe` 解包；新设计旨在用类型系统自动证明"不会移动"，消除手动 `unsafe` |
-| **Field Projections** | 语言实验获积极反馈 | 允许 `&mut self.field` 在更复杂的嵌套结构中自动重新借用，减少生命周期标注；本质是**别名分析的局部精确化**。lang team 对 Field Representing Types PR 的实验性合并反应积极，Tyler Mandry 创建了 Beyond References wiki 统筹所有相关提案（含 Alice Ryhl 的 In-place Initialization 新提案） |
+| **Field Projections** | 语言实验获积极反馈 | 允许 `&mut self.field` 在更复杂的嵌套结构中自动重新借用（Borrowing），减少生命周期标注；本质是**别名分析的局部精确化**。lang team 对 Field Representing Types PR 的实验性合并反应积极，Tyler Mandry 创建了 Beyond References wiki 统筹所有相关提案（含 Alice Ryhl 的 In-place Initialization 新提案） |
 | **Reborrow Traits** | RFC 阶段 | 将重新借用规则从编译器硬编码提升为 trait 系统的一部分，使自定义智能指针（Smart Pointer）也能享受 `&mut` 的自动重借语义 |
 
 > **关键洞察**:
@@ -1281,7 +1281,7 @@ fn fixed() {
 
 | 子目标 | 状态 | 形式模型意义 |
 | :--- | :--- | :--- |
-| **Ergonomic Ref-counting** | RFC 决策中 | 自动识别"廉价克隆"类型（如 `Arc<T>`），允许闭包自动克隆而非移动；本质是**所有权语义的效果推断** |
+| **Ergonomic Ref-counting** | RFC 决策中 | 自动识别"廉价克隆"类型（如 `Arc<T>`），允许闭包（Closures）自动克隆而非移动；本质是**所有权语义的效果推断** |
 | **cargo-script stable** | 🔄 稳定化推进中（FCP 已结束，blocker 为 edition policy） | 单文件 Rust 脚本（nightly `-Zscript` 已可用），降低原型开发门槛；Project Goals 2026 Continued |
 
 > **关键洞察**:
@@ -1542,7 +1542,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 **rustls 作为范例**：
 
-- **展示 Rust 优势**：内存安全 TLS 实现，生产环境已广泛部署
+- **展示 Rust 优势**：内存安全（Memory Safety） TLS 实现，生产环境已广泛部署
 - **填补生态空白**：现代安全系统的重要基础组件
 - **RIL 独特价值**：帮助 rustls 吸引关注内存安全的组织资助
 
@@ -2106,7 +2106,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 - Structured Logging 扩展出 `cargo report timings` / `cargo report rebuild` / `cargo report sessions`；
 - TOML 1.1 支持合并（#16415），`cargo-cargofmt` 实验启动；
 - `lockfile-path` 转为 `resolver.lockfile-path` 配置字段（#16510）；
-- Build Dir Layout v2 继续推进，`CARGO_BIN_EXE_*` 运行时可用（#16421）。
+- Build Dir Layout v2 继续推进，`CARGO_BIN_EXE_*` 运行时（Runtime）可用（#16421）。
 
 **Cargo 1.96 稳定版**：
 

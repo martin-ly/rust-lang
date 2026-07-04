@@ -303,9 +303,9 @@ assert_eq!(cubes.into_iter().next(), Some(0));
 | 返回类型 | 二元组 `(A, B)` | 支持 1-12 arity 任意元组 |
 | 集合类型 | 两个集合必须相同类型 | 每个位置可以是不同集合类型 |
 | 使用场景 | 简单二元拆分 | 复杂多路 fanout |
-| 性能 | 单次遍历 | 单次遍历（零成本抽象） |
+| 性能 | 单次遍历 | 单次遍历（零成本抽象（Zero-Cost Abstraction）） |
 
-> **设计洞察**: 这是 Rust 2024 Edition 的**零成本抽象**典范——编译期元组展开，运行时（Runtime）无额外开销。
+> **设计洞察**: 这是 Rust 2024 Edition 的**零成本抽象（Zero-Cost Abstraction）**典范——编译期元组展开，运行时（Runtime）无额外开销。
 
 ---
 
@@ -573,7 +573,7 @@ fn fixed() {
 ```
 
 > **修正**: `into_iter()` 消耗集合所有权（Ownership），迭代器只能遍历一次。
-> 如需多次遍历，使用 `iter()`（共享引用（Reference））或 `iter_mut()`（可变引用）。
+> 如需多次遍历，使用 `iter()`（共享引用（Reference））或 `iter_mut()`（可变引用（Mutable Reference））。
 > 这体现了 Rust 所有权（Ownership）系统与迭代器模式的紧密结合——编译器通过所有权追踪防止"迭代器失效"和"重复消费"。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 
@@ -702,7 +702,7 @@ fn main() {
 > 迭代器安全 ⟸ 借用（Borrowing）检查器验证 ⟸ 集合 API 设计
 > **过渡**: 掌握 集合类型：Rust 标准库的数据结构谱系 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 集合类型：Rust 标准库的数据结构谱系 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 集合类型：Rust 标准库的数据结构谱系 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 集合类型：Rust 标准库的数据结构谱系 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

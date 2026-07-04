@@ -394,7 +394,7 @@ fn main() {
 }
 ```
 
-> [来源: Bevy 0.15 Docs — System Ordering](https://bevyengine.org/learn/quick-start/introduction.html)
+> [来源: Bevy 0.15 Docs — System Ordering](https://bevyengine.org/learn/)
 
 ### 4.2 依赖图与并行执行 {#42-依赖图与并行执行}
 
@@ -478,7 +478,7 @@ app.add_systems(Update,
 );
 ```
 
-> [来源: Bevy Docs — States](https://bevyengine.org/learn/quick-start/introduction.html)
+> [来源: Bevy Docs — States](https://bevyengine.org/learn/)
 
 ---
 

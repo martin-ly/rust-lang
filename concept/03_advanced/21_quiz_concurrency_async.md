@@ -678,7 +678,7 @@ fn main() {
 println!("Result: {}", *counter.lock().unwrap());
 ```
 
-**知识点**：`Arc<Mutex<T>>` 是 Rust 多线程共享可变状态的**三板斧**——原子引用计数 + 互斥锁 + 显式 join 同步。[→ 并发模式详解](10_concurrency_patterns.md)
+**知识点**：`Arc<Mutex<T>>` 是 Rust 多线程共享可变状态的**三板斧**——原子引用（Reference）计数 + 互斥锁 + 显式 join 同步。[→ 并发模式详解](10_concurrency_patterns.md)
 
 </details>
 

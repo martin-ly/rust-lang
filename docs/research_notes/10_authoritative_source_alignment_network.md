@@ -83,7 +83,7 @@
 | [Rust Error Codes](https://doc.rust-lang.org/error_codes/error-index.html) | 错误参考 | [10_rustc_errors_alignment.md](10_rustc_errors_alignment.md) | 所有权、类型、模块、并发错误码 | ✅ 已完成 |
 | [Ferrocene Language Specification](https://spec.ferrocene.dev/) | 形式化规范 | [10_ferrocene_fls_alignment.md](10_ferrocene_fls_alignment.md) | 语义规范、安全关键认证 | ✅ 已完成 |
 | [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | 编译器开发 | [10_rustc_dev_guide_alignment.md](10_rustc_dev_guide_alignment.md) | HIR/MIR、名称解析、类型推断 | ✅ 已完成 |
-| [Verification Tools](https://rust-lang.github.io/rust-formal-methods/) | 形式化工具 | [10_verification_tools_practical_alignment.md](10_verification_tools_practical_alignment.md) | Aeneas、coq-of-rust、Kani、Prusti、Creusot 实战映射 | ✅ 已完成 |
+| [Verification Tools [已失效]]<!-- 原链接: https://rust-lang.github.io/rust-formal-methods/ --> | 形式化工具 | [10_verification_tools_practical_alignment.md](10_verification_tools_practical_alignment.md) | Aeneas、coq-of-rust、Kani、Prusti、Creusot 实战映射 | ✅ 已完成 |
 | [RFC Argumentation](https://rust-lang.github.io/rfcs/) | 设计论证 | [10_rfc_argumentation_chain.md](10_rfc_argumentation_chain.md) | 关键 RFC 的 Motivation→Design→Drawbacks 论证链 | ✅ 已完成 |
 | [i18n Sources](https://rust-lang.org/) | 国际化资源 | [10_i18n_source_alignment.md](10_i18n_source_alignment.md) | 中/日/多语言官方翻译与社区资源 | ✅ 已完成 |
 | [i18n Translation Gap](https://github.com/rust-lang/book) | 翻译差异检测 | [10_i18n_translation_gap_analysis.md](10_i18n_translation_gap_analysis.md) | 多语言翻译版本差异检测与对齐流程 | ✅ 已完成 |

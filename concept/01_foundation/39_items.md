@@ -81,7 +81,7 @@ Rust 中的 item 包括：
 Item 可以声明在：
 
 - crate 根（crate root）
-- 模块内部
+- 模块（Module）内部
 - 块表达式（block expression）内部
 
 ---

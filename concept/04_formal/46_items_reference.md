@@ -64,7 +64,7 @@
 
 ## 二、模块与路径
 
-模块通过 `mod name { ... }` 声明，可嵌套。`pub use` 可重导出外部名称，改变名称在模块树中的可见路径。
+模块（Module）通过 `mod name { ... }` 声明，可嵌套。`pub use` 可重导出外部名称，改变名称在模块树中的可见路径。
 
 ```rust
 mod inner {
@@ -82,7 +82,7 @@ pub use inner::helper;
 |:---|:---|:---|
 | 类型参数 | `T` | `T: Trait` |
 | 生命周期（Lifetimes）参数 | `'a` | `'a: 'b` |
-| const 泛型 | `const N: usize` | 类型签名中 |
+| const 泛型（Generics） | `const N: usize` | 类型签名中 |
 
 ## 四、关联项
 

@@ -150,7 +150,7 @@ async fn capture_examples() {
 | `async move` 块 | `async move { ... }` | 按值 move 环境 | `impl Future<Output = T>`（可能 `'static`） | 转移所有权（Ownership） |
 | `async` 闭包（Closures） | `async \|x\| { ... }` | 按引用（Reference）捕获（默认） | `impl AsyncFn(...) -> T` | 高阶异步（Async）函数参数 |
 | `async move` 闭包（Closures） | `async move \|x\| { ... }` | 按值 move 捕获 | `impl AsyncFnOnce(...) -> T` | 单次 / 可 `spawn` |
-| 普通闭包返回 async 块 | `\|x\| async move { ... }` | 闭包按引用（Reference）捕获，async 块按值 move | `impl Fn(...) -> impl Future` | 旧生态 API |
+| 普通闭包（Closures）返回 async 块 | `\|x\| async move { ... }` | 闭包按引用（Reference）捕获，async 块按值 move | `impl Fn(...) -> impl Future` | 旧生态 API |
 
 > 💡 关键直觉：`async \|x\| {}` ≠ `\|x\| async move {}`。前者返回的 `Future` 可借用（Borrowing）闭包自身，后者返回的 `Future` 拥有闭包捕获。
 
@@ -456,7 +456,7 @@ async fn bad_once() {
 }
 ```
 
-若需多次调用，应改用 `async ||`（按引用捕获）或在 `async move ||` 中捕获 `Arc<Mutex<T>>` 等共享所有权（Ownership）类型。
+若需多次调用，应改用 `async ||`（按引用（Reference）捕获）或在 `async move ||` 中捕获 `Arc<Mutex<T>>` 等共享所有权（Ownership）类型。
 
 ---
 

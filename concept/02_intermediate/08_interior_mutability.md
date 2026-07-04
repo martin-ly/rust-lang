@@ -163,7 +163,7 @@ RefCell<T> 的运行时借用规则:
     └─────────────────┴──────────────────┴──────────────────┘
 ```
 
-> **运行时洞察**:
+> **运行时（Runtime）洞察**:
 > RefCell 的**运行时（Runtime） panic**不是 UB——它是安全的、确定性的失败模式。
 > 与 C/C++ 的未定义行为不同，Rust 的运行时检查确保即使规则被违反，程序也是安全的（虽然会崩溃）。
 > [来源: [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/concurrency.html)]
@@ -640,7 +640,7 @@ fn main() {
 > 4) `into_inner()` — 无约束（消耗 Cell，返回值）。
 >
 > `Cell` 的设计：适用于 `Copy` 类型或小值类型（`i32`、`bool`），因为 `get` 复制值。
-> 对于非 `Copy` 类型：使用 `RefCell<T>`（运行时借用检查）或 `Cell<T>` + `replace`/`take`。
+> 对于非 `Copy` 类型：使用 `RefCell<T>`（运行时借用（Borrowing）检查）或 `Cell<T>` + `replace`/`take`。
 > 这与 C++ 的 `std::atomic`（类似 `Cell`，但线程安全，需 `TriviallyCopyable`）或 Java 的 `AtomicReference`（类似 `Cell`，但线程安全）不同
 > ——Rust 的 `Cell` 是单线程的、无锁的内部可变性原语。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.Cell.html)] ·

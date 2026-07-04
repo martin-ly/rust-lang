@@ -29,7 +29,7 @@
     - [1.2 Serialize 与 Deserialize Trait](#12-serialize-与-deserialize-trait)
     - [1.3 数据格式解耦](#13-数据格式解耦)
   - [二、技术细节](#二技术细节)
-    - [2.1 Derive 宏（Macro）的展开逻辑](#21-derive-宏的展开逻辑)
+    - [2.1 Derive 宏的展开逻辑](#21-derive-宏的展开逻辑)
     - [2.2 自定义序列化行为](#22-自定义序列化行为)
     - [2.3 Visitor 模式与反序列化](#23-visitor-模式与反序列化)
   - [三、使用模式](#三使用模式)
@@ -42,16 +42,16 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Serde 模式的编译错误](#十边界测试serde-模式的编译错误)
-    - [10.1 边界测试：反序列化时字段缺失（运行时（Runtime）错误）](#101-边界测试反序列化时字段缺失运行时错误)
-    - [10.2 边界测试：`#[serde(flatten)]` 与重复字段（编译错误 / 运行时（Runtime）错误）](#102-边界测试serdeflatten-与重复字段编译错误--运行时错误)
-    - [10.3 边界测试：反序列化的 `deny_unknown_fields`（运行时（Runtime）错误）](#103-边界测试反序列化的-deny_unknown_fields运行时错误)
-    - [10.4 边界测试：枚举（Enum）的 `untagged` 反序列化歧义（运行时错误）](#104-边界测试枚举的-untagged-反序列化歧义运行时错误)
+    - [10.1 边界测试：反序列化时字段缺失（运行时错误）](#101-边界测试反序列化时字段缺失运行时错误)
+    - [10.2 边界测试：`#[serde(flatten)]` 与重复字段（编译错误 / 运行时错误）](#102-边界测试serdeflatten-与重复字段编译错误--运行时错误)
+    - [10.3 边界测试：反序列化的 `deny_unknown_fields`（运行时错误）](#103-边界测试反序列化的-deny_unknown_fields运行时错误)
+    - [10.4 边界测试：枚举的 `untagged` 反序列化歧义（运行时错误）](#104-边界测试枚举的-untagged-反序列化歧义运行时错误)
     - [10.5 边界测试：`serde` 的 `skip_serializing_if` 与 `Option` 的交互（逻辑错误）](#105-边界测试serde-的-skip_serializing_if-与-option-的交互逻辑错误)
     - [10.3 边界测试：serde 的私有字段与反序列化失败（运行时错误）](#103-边界测试serde-的私有字段与反序列化失败运行时错误)
-    - [10.4 边界测试：`serde` 的枚举（Enum）标签与外部标签冲突（运行时反序列化失败）](#104-边界测试serde-的枚举标签与外部标签冲突运行时反序列化失败)
+    - [10.4 边界测试：`serde` 的枚举标签与外部标签冲突（运行时反序列化失败）](#104-边界测试serde-的枚举标签与外部标签冲突运行时反序列化失败)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：如何让 Serde 在序列化时将 Rust 字段名 `user_name` 映射为 JSON 中的 `userName`？（理解层）](#测验-1如何让-serde-在序列化时将-rust-字段名-user_name-映射为-json-中的-username理解层)
-    - [测验 2：枚举（Enum）的 `#[serde(tag = "type")]` 属性会产生怎样的 JSON 结构？（理解层）](#测验-2枚举的-serdetag--type-属性会产生怎样的-json-结构理解层)
+    - [测验 2：枚举的 `#[serde(tag = "type")]` 属性会产生怎样的 JSON 结构？（理解层）](#测验-2枚举的-serdetag--type-属性会产生怎样的-json-结构理解层)
     - [测验 3：`#[serde(untagged)]` 的序列化/反序列化行为有什么风险和适用场景？（理解层）](#测验-3serdeuntagged-的序列化反序列化行为有什么风险和适用场景理解层)
     - [测验 4：如果希望字段在 JSON 中缺失时使用默认值，应该如何配置？（理解层）](#测验-4如果希望字段在-json-中缺失时使用默认值应该如何配置理解层)
     - [测验 5：`serde_json::to_string` 和 `serde_json::to_string_pretty` 输出有什么区别？（理解层）](#测验-5serde_jsonto_string-和-serde_jsonto_string_pretty-输出有什么区别理解层)
@@ -627,7 +627,7 @@ struct InnerFixed {
 > **修正**:
 > `#[serde(flatten)]` 将嵌套结构体（Struct）的字段展开到父结构体级别。
 > 若嵌套结构体（Struct）与父结构体有同名字段，Serde 的反序列化逻辑会产生歧义——它尝试按顺序匹配字段，可能导致类型不匹配或数据错位。
-> 这是 Serde 的一个已知限制：flatten 不支持字段重名，且对枚举类型的 flatten 支持有限（需 `#[serde(untagged)]` 配合）。
+> 这是 Serde 的一个已知限制：flatten 不支持字段重名，且对枚举（Enum）类型的 flatten 支持有限（需 `#[serde(untagged)]` 配合）。
 > [来源: [Serde Documentation](https://serde.rs/)]
 
 ### 10.3 边界测试：反序列化的 `deny_unknown_fields`（运行时错误）

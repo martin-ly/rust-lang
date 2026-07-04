@@ -307,7 +307,7 @@ graph TD
     style C5 fill:#9f6
 ```
 
-> **认知功能**: 此决策树对"Rust = 线性逻辑"的**等同谬误**进行三步拆解，从 weakening、内部可变性到生命周期（Lifetimes）逐层揭示映射偏差。建议在跨层解释 Rust 所有权时优先使用此树校准精确度。关键洞察：Rust 所有权是仿射逻辑、区域类型和分离逻辑的三元合成体——线性逻辑只是其必要核心而非充分描述。[来源: 💡 原创分析]
+> **认知功能**: 此决策树对"Rust = 线性逻辑"的**等同谬误**进行三步拆解，从 weakening、内部可变性到生命周期（Lifetimes）逐层揭示映射偏差。建议在跨层解释 Rust 所有权（Ownership）时优先使用此树校准精确度。关键洞察：Rust 所有权是仿射逻辑、区域类型和分离逻辑的三元合成体——线性逻辑只是其必要核心而非充分描述。[来源: 💡 原创分析]
 
 **形式化澄清**: 这是最关键的反命题。RustBelt (Jung et al. 2017, 2018) 明确将 Rust 建模为**仿射类型系统**（affine type system），而非严格线性类型系统。三个关键偏差：
 
@@ -619,7 +619,7 @@ fn session_demo() {
 |:---|:---|:---|
 | 线性逻辑由 Girard 1987 提出 | [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic) · Girard 1987, *Linear Logic* (TCS 50:1-102) | ✅ |
 | 仿射逻辑 = 线性逻辑 + weakening | [Wikipedia: Affine logic](https://en.wikipedia.org/wiki/Affine_logic) · Girard 1987 §1 | ✅ |
-| Rust 是仿射类型系统（非严格线性） | [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Utrecht] · Jung et al. 2017 | ✅ |
+| Rust 是仿射类型系统（Type System）（非严格线性） | [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Utrecht] · Jung et al. 2017 | ✅ |
 | 子结构类型谱系（linear/affine/relevant/ordered） | Pierce 2002, TAPL §15.3 | ✅ |
 | !A 对应 Copy trait | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · Wadler 1990 · 原创分析 | 💡 |
 | ⊗ 对应元组 | [Category Theory for Programmers] · Wadler 1990 | ✅ |
@@ -842,7 +842,7 @@ fn read_file_manual(path: &str) -> io::Result<String> {
 
 **[PLDI 2026 — Matsushita & Ishii]** Pure Borrow 是 Kyoto University 提出的理论框架，首次在 **Linear Haskell** 中完整实现了 **Rust 风格的非局部借用（non-local borrowing）**。这是一个重要的理论里程碑：它证明了 Rust 的核心借用机制可以嵌入纯函数式语言，且无需修改编译器（仅作为库实现，兼容 GHC 9.10+）。
 
-**核心问题**: Linear Haskell 已有线性类型（`%1 ->`），但缺少 Rust 的关键特性——**借用**。在 Rust 中，所有者可以临时将资源借出（`&mut T` / `&T`），借用人可在生命周期内自由分裂和丢弃，生命周期结束后所有权**非局部地**回归所有者。这种非局部性在 Linear Haskell 中此前无法实现，因为线性值必须通过显式 threading（手动传递所有权）。
+**核心问题**: Linear Haskell 已有线性类型（`%1 ->`），但缺少 Rust 的关键特性——**借用（Borrowing）**。在 Rust 中，所有者可以临时将资源借出（`&mut T` / `&T`），借用人可在生命周期内自由分裂和丢弃，生命周期结束后所有权**非局部地**回归所有者。这种非局部性在 Linear Haskell 中此前无法实现，因为线性值必须通过显式 threading（手动传递所有权）。
 
 **Pure Borrow 的核心 API**：
 

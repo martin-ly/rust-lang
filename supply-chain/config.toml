@@ -2581,7 +2581,7 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.ntex]]
-version = "3.10.0"
+version = "3.10.1"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
@@ -3463,7 +3463,7 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.rapidhash]]
-version = "4.5.0"
+version = "4.5.1"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"

@@ -277,7 +277,7 @@ impl<'a> FnMut(&i32) -> i32 for __Closure_1<'a> {
 | **闭包（Closures）** | `\|x\| x + 1` | **零**（内联后） | 回调、适配器参数 |
 | **async/await** | 状态机转换 | **零**（Poll 本身） | 异步 I/O |
 | **dyn Trait** | vtable 分发 | **有**（间接调用） | 运行时多态需求 |
-| **Rc/Arc** | 引用（Reference）计数 | **有**（原子操作） | 共享所有权（Ownership）需求 |
+| **Rc/Arc** | 引用（Reference）计数 | **有**（原子操作（Atomic Operations）） | 共享所有权（Ownership）需求 |
 | **Mutex/RwLock** | 系统调用 | **有**（阻塞） | 线程安全需求 |
 
 > **抽象选择原则**: 优先使用**零成本抽象（Zero-Cost Abstraction）**（泛型、迭代器（Iterator）、闭包（Closures））；只在需要**运行时灵活性**时接受有成本的抽象（dyn Trait、Rc、Mutex）。

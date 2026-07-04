@@ -53,7 +53,7 @@
   - [📚 Cargo Book 与 rustc dev guide 权威章节 {#cargo-book-与-rustc-dev-guide-权威章节}](#-cargo-book-与-rustc-dev-guide-权威章节-cargo-book-与-rustc-dev-guide-权威章节)
     - [Cargo Book 重点章节 {#cargo-book-重点章节}](#cargo-book-重点章节-cargo-book-重点章节)
     - [rustc dev guide 重点章节 {#rustc-dev-guide-重点章节}](#rustc-dev-guide-重点章节-rustc-dev-guide-重点章节)
-  - [🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960}](#-权威国际化内容升级-rust-1960-权威国际化内容升级-rust-1960)
+  - [🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960}](#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960)
     - [本次升级要点 {#本次升级要点}](#本次升级要点-本次升级要点)
   - [相关概念 {#相关概念}](#相关概念-相关概念)
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
@@ -843,7 +843,7 @@ cargo expand > expanded.rs
 | 借用检查 | [borrow_check.html](https://rustc-dev-guide.rust-lang.org/borrow_check.html) | NLL/Polonius 与生命周期检查 |
 | 类型推断 | [type-inference.html](https://rustc-dev-guide.rust-lang.org/type-inference.html) | 类型系统实现 |
 | trait 系统 | [traits/resolution.html](https://rustc-dev-guide.rust-lang.org/traits/resolution.html) | trait 解析与 coherence |
-| 代码生成 | [backend/index.html](https://rustc-dev-guide.rust-lang.org/backend/index.html) | LLVM 后端与目标平台 |
+| 代码生成 | [backend/index.html](https://rustc-dev-guide.rust-lang.org/overview.html) | LLVM 后端与目标平台 |
 | Miri | [miri.html](https://rustc-dev-guide.rust-lang.org/miri.html) | Miri 解释器架构 |
 
 ---

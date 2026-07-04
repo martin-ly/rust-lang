@@ -313,7 +313,7 @@ evcxr_jupyter 工作流程:
 
 ## 六、Python 互操作
 
-> **[来源: [PyO3 User Guide](https://pyo3.rs/v0.21.2/)]** PyO3 是 Rust 与 Python 互操作的核心 crate，允许：1) 从 Python 调用 Rust 函数（写 Python 扩展）；2) 从 Rust 调用 Python（嵌入 Python 解释器）；3) 用 Rust 写 Python 模块（maturin/pyo3）。数据科学生态的典型用法：用 Rust 写高性能数据处理核心，通过 PyO3 暴露给 Python 用户（如 Polars、ruff）。[来源: [PyO3 Guide](https://pyo3.rs/v0.21.2/)]
+> **[来源: [PyO3 User Guide](https://pyo3.rs/v0.21.2/)]** PyO3 是 Rust 与 Python 互操作的核心 crate，允许：1) 从 Python 调用 Rust 函数（写 Python 扩展）；2) 从 Rust 调用 Python（嵌入 Python 解释器）；3) 用 Rust 写 Python 模块（Module）。数据科学生态的典型用法：用 Rust 写高性能数据处理核心，通过 PyO3 暴露给 Python 用户（如 Polars、ruff）。[来源: [PyO3 Guide](https://pyo3.rs/v0.21.2/)]
 
 ```rust,ignore
 use pyo3::prelude::*;

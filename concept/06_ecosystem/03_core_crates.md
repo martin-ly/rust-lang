@@ -289,7 +289,7 @@ graph TD
     G --> G3[wasm-bindgen WASM]
 ```
 
-> **认知功能**: 此图建立核心 crate 的全景认知地图，按数据/网络/运行时/工具/安全/FFI 六层组织生态组件。使用建议：选型时先定位功能域，再在该域内比较具体 crate。关键洞察：serde、tokio、clap 分别是各自领域的"生态标准"，优先默认选择可降低决策成本。[来源: 💡 原创分析]
+> **认知功能**: 此图建立核心 crate 的全景认知地图，按数据/网络/运行时（Runtime）/工具/安全/FFI 六层组织生态组件。使用建议：选型时先定位功能域，再在该域内比较具体 crate。关键洞察：serde、tokio、clap 分别是各自领域的"生态标准"，优先默认选择可降低决策成本。[来源: 💡 原创分析]
 > [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ---
@@ -353,7 +353,7 @@ graph TD
 | **Crate** | **类型** | **特点** | **L2-L3 概念** |
 |:---|:---|:---|:---|
 | **sqlx** | 查询构建器 | 编译期 SQL 检查、async、零 ORM 开销 | async + 泛型（Generics） + 宏（Macro） |
-| **diesel** | ORM | 编译期查询验证、类型安全 schema、成熟 | 泛型 + Trait |
+| **diesel** | ORM | 编译期查询验证、类型安全 schema、成熟 | 泛型（Generics） + Trait |
 | **sea-orm** | 异步 ORM |  inspired by ActiveRecord、GraphQL 友好 | async + 泛型 |
 | **tokio-postgres** | 底层驱动 | 纯 Rust、async、PostgreSQL 专用 | async + unsafe(极少) |
 | **mongodb** | 文档驱动 | 官方驱动、async、BSON 原生 | async + serde |
@@ -379,7 +379,7 @@ graph TD
 
 | **Crate** | **功能** | **特点** |
 |:---|:---|:---|:---|
-| **clap** | 参数解析 | derive 宏、子命令、shell 补全、help 生成 | 生态标准 |
+| **clap** | 参数解析 | derive 宏（Macro）、子命令、shell 补全、help 生成 | 生态标准 |
 | **bpaf** | 参数解析 | 组合式 API、编译期验证、无 proc-macro | 轻量替代 |
 | **dialoguer** | 交互式提示 | 确认框、输入框、选择列表、多选 | 用户体验 |
 | **indicatif** | 进度条 | 多进度、自定义样式、ETA 计算 | 反馈感 |
@@ -579,7 +579,7 @@ graph TD
 | **clap** | — | Trait (Parser/Args) | 过程宏（Procedural Macro） | — | Python argparse |
 | **tracing** | — | Trait (Subscriber/Layer) | async Span 传播 | — | OpenTelemetry 多语言 |
 | **ring** | 类型安全 | — | unsafe (常量时间) | — | OpenSSL (C) |
-| **rayon** | 所有权 | — | Send/Sync + unsafe | — | C++ TBB |
+| **rayon** | 所有权（Ownership） | — | Send/Sync + unsafe | — | C++ TBB |
 | **pyo3** | 所有权 | Trait (IntoPy/PyClass) | unsafe + FFI | — | Cython |
 
 ---
@@ -1125,7 +1125,7 @@ graph TD
 > **认知功能**: 此图打破"最新即最好"的升级执念，建立版本管理的策略思维。使用建议：评估 SemVer 破坏性变更和生态系统协调成本，LTS 场景保持保守。关键洞察：版本选择是风险收益权衡，Cargo.lock 的精确锁定比盲目升级更重要。[来源: 💡 原创分析]
 > **过渡: L6 → L1**
 >
-> Crate 生态不是 Rust 语言的附加品——它是所有权系统的自然延伸。`serde` 的 derive 宏利用编译期反射，`tokio` 的异步运行时建立在 `Pin` 和生命周期（Lifetimes）之上，`rayon` 的数据并行依赖 `Send`/`Sync` 的保证。理解这些 crate 的设计，需要回到 Rust 核心概念。
+> Crate 生态不是 Rust 语言的附加品——它是所有权系统的自然延伸。`serde` 的 derive 宏利用编译期反射，`tokio` 的异步（Async）运行时建立在 `Pin` 和生命周期（Lifetimes）之上，`rayon` 的数据并行依赖 `Send`/`Sync` 的保证。理解这些 crate 的设计，需要回到 Rust 核心概念。
 > 核心概念见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权）与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)（并发安全）。
 > **过渡: L6 → L4**
 > 形式化验证工具（Kani、Miri、RustBelt）正在进入 crates.io 的供应链。`cargo-kani`、`cargo-miri` 等插件让形式化验证从学术研究走向 CI/CD 流水线——这不是未来，而是正在发生的生态演进。

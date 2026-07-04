@@ -167,7 +167,7 @@
 
 ![Rust async/await 编译 lowering 路径](sandbox:/mnt/agents/output/rust_async_lowering_path.png)
 
-**图3：编译器 lowering 路径** — 从源代码层的 `async fn` 语法糖，经 desugaring 生成 `impl Future` 和状态机枚举（Enum），通过 HIR/MIR 中间表示显式化，最终 lowering 到 LLVM IR 的 switch/branch 结构和 x86_64 汇编的 jmp table。全程零运行时开销，无 continuation 捕获，无 green thread，无隐式分配。
+**图3：编译器 lowering 路径** — 从源代码层的 `async fn` 语法糖，经 desugaring 生成 `impl Future` 和状态机枚举（Enum），通过 HIR/MIR 中间表示显式化，最终 lowering 到 LLVM IR 的 switch/branch 结构和 x86_64 汇编的 jmp table。全程零运行时（Runtime）开销，无 continuation 捕获，无 green thread，无隐式分配。
 
 ### 5.1 async/await 的 lowering 机制深化
 

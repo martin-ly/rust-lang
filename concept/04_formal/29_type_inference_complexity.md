@@ -57,7 +57,7 @@
 - [Type Inference Complexity（类型推断复杂度）](#type-inference-complexity类型推断复杂度)
   - [反命题决策树](#反命题决策树)
   - [📑 目录](#-目录)
-  - [一、HM：类型推断的黄金标准](#一hm类型推断的黄金标准)
+  - [一、HM：类型推断（Type Inference）的黄金标准](#一hm类型推断的黄金标准)
   - [二、Rust 的四项复杂度放大器](#二rust-的四项复杂度放大器)
   - [三、约束生成与 Robinson 合一](#三约束生成与-robinson-合一)
     - [3.1 约束生成（Constraint Generation）](#31-约束生成constraint-generation)
@@ -357,7 +357,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-HM 只允许受限的 let-多态性，不含子类型、trait 或生命周期。约束只有类型等式，可用 Robinson 合一在 $O(n^3)$ 内求解，且存在主类型。
+HM 只允许受限的 let-多态性，不含子类型、trait 或生命周期（Lifetimes）。约束只有类型等式，可用 Robinson 合一在 $O(n^3)$ 内求解，且存在主类型。
 </details>
 
 ---

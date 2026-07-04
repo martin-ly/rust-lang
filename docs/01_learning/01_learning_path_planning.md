@@ -482,7 +482,7 @@ fn main() {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 社区论坛](https://users.rust-lang.org/)
-- [Rust 中文社区](https://rustcc.cn/)
+- [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->
 - [Rust 周报](https://this-week-in-rust.org/)
 
 ### Coursera 在线课程 {#coursera-在线课程}
@@ -506,7 +506,7 @@ fn main() {
 
 #### Programming in Rust (University of Colorado Boulder) {#programming-in-rust-university-of-colorado-boulder}
 
-- **链接**: <https://www.coursera.org/browse/computer-science/programming-languages>
+- **链接**: [https://www.coursera.org/browse/computer-science/programming-languages [已失效]]<!-- 原链接: https://www.coursera.org/browse/computer-science/programming-languages -->
 - **内容**: Rust编程基础
 - **适合路径**: 路径 1: 完全新手（0 基础）
 - **与本文档对齐**: C01-C03 基础阶段

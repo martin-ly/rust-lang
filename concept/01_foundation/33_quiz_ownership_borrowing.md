@@ -378,7 +378,7 @@ fn main() {
 }
 ```
 
-**知识点**：生命周期（Lifetimes）约束遵循"**最小公约数**"原则——返回引用的有效期不超过任何输入引用的有效期。[→ 生命周期详解](03_lifetimes.md)
+**知识点**：生命周期（Lifetimes）约束遵循"**最小公约数**"原则——返回引用（Reference）的有效期不超过任何输入引用的有效期。[→ 生命周期详解](03_lifetimes.md)
 
 </details>
 
@@ -404,7 +404,7 @@ fn main() {
 
 **错误信息**：`cannot borrow`v`as mutable because it is also borrowed as immutable`
 
-**解析**：`&v[0]` 创建了对 `v` 内部元素的不可变引用（Mutable Reference）。`v.push(4)` 需要 `&mut v`。如果 `push` 导致 `Vec` 重新分配内存，`first` 将变成悬垂指针。
+**解析**：`&v[0]` 创建了对 `v` 内部元素的不可变引用（Immutable Reference）。`v.push(4)` 需要 `&mut v`。如果 `push` 导致 `Vec` 重新分配内存，`first` 将变成悬垂指针。
 
 **修改方案**——分离借用（Borrowing）：
 
@@ -503,7 +503,7 @@ shared shared
 
 ### 测验 1：本文件是 测验：所有权、借用与生命周期（试点） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 
-**题目**: 本文件是 测验：所有权（Ownership）、借用与生命周期（Lifetimes）（试点） 的专项测验集。这类测验文件的主要作用是什么？
+**题目**: 本文件是 测验：所有权（Ownership）、借用（Borrowing）与生命周期（Lifetimes）（试点） 的专项测验集。这类测验文件的主要作用是什么？
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -515,7 +515,7 @@ shared shared
 
 ### 测验 2：在 测验：所有权、借用与生命周期（试点） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？（理解层）
 
-**题目**: 在 测验：所有权、借用与生命周期（试点） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？
+**题目**: 在 测验：所有权（Ownership）、借用与生命周期（Lifetimes）（试点） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？
 
 <details>
 <summary>✅ 答案与解析</summary>

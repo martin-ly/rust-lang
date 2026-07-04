@@ -80,7 +80,7 @@
 |----------------------|----------|------|------|
 | [High-level IR (HIR)](https://rustc-dev-guide.rust-lang.org/hir.html) | [formal_modules/30_module_hir_mir_mapping.md](formal_modules/30_module_hir_mir_mapping.md) | ✅ | 模块结构到 HIR 映射 |
 | [MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html) | [formal_modules/30_module_hir_mir_mapping.md](formal_modules/30_module_hir_mir_mapping.md) | ✅ | 模块结构到 MIR 映射 |
-| [Codegen](https://rustc-dev-guide.rust-lang.org/backend/index.html) | [formal_modules/20_linkage_and_symbols.md](formal_modules/20_linkage_and_symbols.md) | 🔄 | 链接与符号 |
+| [Codegen](https://rustc-dev-guide.rust-lang.org/overview.html) | [formal_modules/20_linkage_and_symbols.md](formal_modules/20_linkage_and_symbols.md) | 🔄 | 链接与符号 |
 
 ---
 
@@ -88,8 +88,8 @@
 
 | rustc-dev-guide 章节 | 项目文档 | 状态 | 备注 |
 |----------------------|----------|------|------|
-| [Async/Await Lowering](https://rustc-dev-guide.rust-lang.org/query/index.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ | async 状态机展开 |
-| [Generator / Async Fn in Traits](https://rustc-dev-guide.rust-lang.org/traits/index.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 🔄 | async trait 实现机制 |
+| [Async/Await Lowering](https://rustc-dev-guide.rust-lang.org/query.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ | async 状态机展开 |
+| [Generator / Async Fn in Traits](https://rustc-dev-guide.rust-lang.org/overview.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 🔄 | async trait 实现机制 |
 
 ---
 

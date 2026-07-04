@@ -26,10 +26,10 @@
 
 ## 📑 目录
 
-- [NLL 与 Polonius：借用检查器的演进](#nll-与-polonius借用检查器的演进)
+- [NLL 与 Polonius：借用（Borrowing）检查器的演进](#nll-与-polonius借用检查器的演进)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 词法生命周期的问题](#11-词法生命周期的问题)
+    - [1.1 词法生命周期（Lifetimes）的问题](#11-词法生命周期的问题)
     - [1.2 NLL 的解决方案](#12-nll-的解决方案)
     - [1.3 Polonius 的进一步精确化](#13-polonius-的进一步精确化)
   - [二、技术细节](#二技术细节)
@@ -607,7 +607,7 @@ fn main() {
 > 1) 编译时间可能更长（分析更复杂）；
 > 2) 某些边缘情况的行为仍在定义；
 > 3) 尚未稳定（`-Zpolonius` 实验标志）。
-> 这与 C++ 的 borrow checker（无此概念，完全信任开发者）或 Swift 的内存安全（ARC，无编译期借用检查）不同——Rust 的借用检查器在持续精确化，逐步减少保守拒绝。
+> 这与 C++ 的 borrow checker（无此概念，完全信任开发者）或 Swift 的内存安全（Memory Safety）不同——Rust 的借用检查器在持续精确化，逐步减少保守拒绝。
 > [来源: [Polonius Initiative](https://rust-lang.github.io/polonius/)] ·
 > [来源: [NLL RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html)]
 
@@ -713,7 +713,7 @@ Polonius 相对于 NLL 的主要改进是什么？
 Polonius 是 Rust 借用检查器的下一代算法：
 
 - NLL 基于 MIR 的区域（region）分析
-- Polonius 基于**约束传播**和**数据流分析**，更精确地跟踪引用之间的关系
+- Polonius 基于**约束传播**和**数据流分析**，更精确地跟踪引用（Reference）之间的关系
 - 能接受一些 NLL 过于保守而拒绝的合法程序
 
 Polonius 仍处于实验阶段（`-Zpolonius`），但代表了借用检查器的发展方向。

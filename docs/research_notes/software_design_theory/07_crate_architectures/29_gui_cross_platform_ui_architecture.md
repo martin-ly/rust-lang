@@ -413,7 +413,7 @@ let window = web_sys::window().unwrap();
 - [egui GitHub Repository](https://github.com/emilk/egui)
 - [iced GitHub Repository](https://github.com/iced-rs/iced)
 - [This Week in Rust](https://this-week-in-rust.org/)
-- [Rust 中文社区](https://rustcc.cn/)
+- [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->
 
 ## 学术权威参考 {#学术权威参考}
 

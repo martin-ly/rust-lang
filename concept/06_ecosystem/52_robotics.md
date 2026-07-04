@@ -136,7 +136,7 @@
 反馈环: 执行 → 传感器 → 感知（闭环控制）
 ```
 
-> **来源**: [ROS2 Design](https://design.ros2.org/) · [Robotics Software Engineering — Springer](https://link.springer.com/book/10.1007/978-3-030-66474-7)
+> **来源**: [ROS2 Design](https://design.ros2.org/) · [Robotics Software Engineering — Springer [已失效]]<!-- 原链接: https://link.springer.com/book/10.1007/978-3-030-66474-7 -->
 
 ### 1.2 实时约束与确定性
 

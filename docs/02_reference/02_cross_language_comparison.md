@@ -611,7 +611,7 @@ $ python -m pytest
 - [The Rust Programming Language (TRPL)](https://doc.rust-lang.org/book/) —— 官方教程与设计理念
 - [Rust RFCs](https://rust-lang.github.io/rfcs/) —— 语言演进的设计决策记录
 - [RustBelt: POPL 2018](https://plv.mpi-sws.org/rustbelt/) —— 内存安全的机器验证证明
-- [Ralf Jung, "The Meaning of Memory Safety", PLArch 2021](https://www.ralfj.de/blog/2021/04/14/memory-safety.html) —— 内存安全精确定义
+- [Ralf Jung, "The Meaning of Memory Safety", PLArch 2021](https://ralfj.de/blog/) —— 内存安全精确定义
 
 #### C++（一级/二级来源） {#c一级二级来源}
 
@@ -635,7 +635,7 @@ $ python -m pytest
 
 - [GHC User Guide: LinearTypes](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/linear_types.html) —— GHC 9.0+ 线性类型扩展
 - [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) —— Type Classes 与 Rust Trait 的理论同源
-- [Wadler, "Theorems for Free!", FPCA 1989](https://homepages.inf.ed.ac.uk/wadler/papers/free/theorems_for_free.pdf) —— 参数多态的形式化性质
+- [Wadler, "Theorems for Free!", FPCA 1989 [已失效]]<!-- 原链接: https://homepages.inf.ed.ac.uk/wadler/papers/free/theorems_for_free.pdf --> —— 参数多态的形式化性质
 
 #### Python（三级来源） {#python三级来源}
 

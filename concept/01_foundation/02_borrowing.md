@@ -652,7 +652,7 @@ graph TD
 > 此图修正了「&T 总是只读」的直觉误解。
 > 关键认知：&T 的「只读」是编译期保证，但存在三类运行时（Runtime）例外——RefCell（内部可变性，运行时 panic 守卫）、Mutex（同步原语，运行时锁竞争）、UnsafeCell（unsafe 封装，信任程序员）。
 > 这三类都不破坏内存安全（Memory Safety）（无 UB），但改变了「&T 意味着无人修改」的直觉。
-> 读者应建立「&T = 编译期只读 + 运行时可能通过特殊机制可变」的精确模型。
+> 读者应建立「&T = 编译期只读 + 运行时（Runtime）可能通过特殊机制可变」的精确模型。
 > [来源: 💡 原创分析]
 >
 
@@ -1449,7 +1449,7 @@ fn fixed() {
 ```
 
 > **修正**: Rust 编译器不允许两个可变引用（Mutable Reference）同时指向同一数据（别名规则）。对于数组/切片（Slice），使用 `split_at_mut()` 或 `split_first_mut()` 获取不重叠的可变引用，满足编译器的别名分析。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> **相关判定树**: [借用判定树](../00_meta/concept_definition_decision_forest.md#三借用判定树) · [内存安全 FTA](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
+> **相关判定树**: [借用判定树](../00_meta/concept_definition_decision_forest.md#三借用判定树) · [内存安全（Memory Safety） FTA](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
 > **相关谓词映射**: [shr(κ, ℓ) 谓词](../00_meta/rustbelt_predicate_map.md#三共享谓词-shrκ-ℓ-映射)
 
 ### 10.5 边界测试：可变借用的嵌套与重新借用链（编译错误）
@@ -1647,7 +1647,7 @@ fn main() {
 
 `r1` 是不可变引用（Immutable Reference），`r2` 是可变引用，二者在同一作用域内不能共存。即使 `r1` 在 `println!` 之后不再使用，编译器仍按作用域整体检查。
 
-**修复**: 将不可变引用（Mutable Reference）的使用范围限制在可变引用之前：
+**修复**: 将不可变引用（Immutable Reference）的使用范围限制在可变引用之前：
 
 ```rust,ignore
 let r1 = &s;

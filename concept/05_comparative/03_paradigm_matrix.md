@@ -196,7 +196,7 @@ graph LR
 > Java/Go 通过 GC 自动化内存管理但引入运行时（Runtime）开销；
 > Haskell 提供高度抽象安全但 GC 不适合系统编程。
 > Rust 将线性/仿射类型理论（Girard 1987）与系统编程需求结合，通过所有权（Ownership）在编译期证明内存安全（Memory Safety）和无数据竞争，同时保持零运行时（Runtime）开销
-> ——这是类型系统演进史上首次在单一工业语言中实现如此完整的静态保证。
+> ——这是类型系统（Type System）演进史上首次在单一工业语言中实现如此完整的静态保证。
 > 来源: Girard 1987 / [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **过渡**: 理论差异如何在工程实践中转化为具体的技术选型？
 
@@ -333,7 +333,7 @@ const fn / const 泛型
 ```
 
 > **一致性（Coherence）验证**: 6 条推理链满足：特性（起点）⟹ 机制（中点）⟹ 保证（终点）。这是 L5 对比层与 L4 形式化层之间的桥梁。
-> **过渡**: 一致性矩阵证明自洽性，但科学严谨性要求主动寻找反命题和边界条件。
+> **过渡**: 一致性（Coherence）矩阵证明自洽性，但科学严谨性要求主动寻找反命题和边界条件。
 
 ## 七、反命题与边界分析
 
@@ -422,7 +422,7 @@ graph TD
 ```
 
 > **认知功能**: 将"限制"重新框架为"保护"，展示类型系统对 bug 类别的消除作用。用"非法状态不可表示"原则驱动类型设计，将不变式编码进类型。Curry-Howard 同构证明类型即命题——类型系统的约束无损于表达力，只排除错误程序。 [来源: 💡 原创分析]
-> **边界分析**: 类型系统限制"可编译的程序集合"，但排除的是运行时会出错的子集。`unsafe` 作为逃逸舱，恰恰证明类型系统是"默认安全网"而非牢笼。
+> **边界分析**: 类型系统限制"可编译的程序集合"，但排除的是运行时（Runtime）会出错的子集。`unsafe` 作为逃逸舱，恰恰证明类型系统是"默认安全网"而非牢笼。
 > **过渡**: 反命题分析划定了 Rust 范式选择的有效边界。超越这些边界，需要回到更基础的形式化工具和语言演进趋势中寻找答案。
 
 ---
@@ -476,7 +476,7 @@ graph TD
 | **运行时开销** | 无 | 无 | 无 | GC | GC/JIT | GC/Thunk |
 | **FFI 友好度** | ✅ 自身 | ✅ C 兼容 | ✅ C 兼容 | ✅ C 兼容 | ⚠️ JNI | ⚠️ C FFI |
 
-> **层次一致性**: L5 的对比结论必须与 L3（高级特性）和 L4（形式化理论）保持一致。例如"Rust 无 GC 停顿"的论断，在 L4 中由线性逻辑的所有权语义证明；在 L3 中由 `Box`/`Rc`/`Arc` 的具体 API 实现。
+> **层次一致性**: L5 的对比结论必须与 L3（高级特性）和 L4（形式化理论）保持一致。例如"Rust 无 GC 停顿"的论断，在 L4 中由线性逻辑的所有权（Ownership）语义证明；在 L3 中由 `Box`/`Rc`/`Arc` 的具体 API 实现。
 
 ---
 
@@ -595,7 +595,7 @@ graph TD
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| Rust 无 GC + 内存安全 | [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ |
+| Rust 无 GC + 内存安全（Memory Safety） | [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ |
 | Rust 数据竞争编译期消除 | [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ |
 | 各语言适用域 | 社区共识 · 工业实践 | ⚠️ 主观 |
 | Rust 线性类型论根基 | [Girard 1987 — Linear Logic] | ✅ |

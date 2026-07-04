@@ -47,21 +47,21 @@
     - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 Stack vs Heap 对比矩阵](#21-stack-vs-heap-对比矩阵)
-    - [2.2 智能指针（Smart Pointer）对比矩阵](#22-智能指针对比矩阵)
+    - [2.2 智能指针对比矩阵](#22-智能指针对比矩阵)
     - [2.3 内部可变性模式矩阵](#23-内部可变性模式矩阵)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
-    - [4.1 引理：Box ⟹ 堆分配 + 唯一所有权（Ownership）](#41-引理box--堆分配--唯一所有权)
-    - [4.2 定理：Rc/Arc ⟹ 共享所有权（Ownership）安全（引用（Reference）计数）](#42-定理rcarc--共享所有权安全引用计数)
-    - [4.3 推论：RefCell ⟹ 内部可变性运行时（Runtime）检查](#43-推论refcell--内部可变性运行时检查)
-    - [4.4 RAII + 所有权（Ownership） ⟹ 确定性释放](#44-raii--所有权--确定性释放)
-    - [4.5 定理一致性（Coherence）矩阵](#45-定理一致性矩阵)
+    - [4.1 引理：Box ⟹ 堆分配 + 唯一所有权](#41-引理box--堆分配--唯一所有权)
+    - [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用计数）](#42-定理rcarc--共享所有权安全引用计数)
+    - [4.3 推论：RefCell ⟹ 内部可变性运行时检查](#43-推论refcell--内部可变性运行时检查)
+    - [4.4 RAII + 所有权 ⟹ 确定性释放](#44-raii--所有权--确定性释放)
+    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：Box 堆分配](#51-正确示例box-堆分配)
     - [5.2 正确示例：Rc 共享所有权](#52-正确示例rc-共享所有权)
-    - [5.3 正确示例：用 Weak 打破循环引用（Reference）](#53-正确示例用-weak-打破循环引用)
-    - [5.4 反例：Rc 循环引用（Reference）导致泄漏](#54-反例rc-循环引用导致泄漏)
-    - [5.5 反例：RefCell 运行时（Runtime）借用（Borrowing）冲突（panic）](#55-反例refcell-运行时借用冲突panic)
+    - [5.3 正确示例：用 Weak 打破循环引用](#53-正确示例用-weak-打破循环引用)
+    - [5.4 反例：Rc 循环引用导致泄漏](#54-反例rc-循环引用导致泄漏)
+    - [5.5 反例：RefCell 运行时借用冲突（panic）](#55-反例refcell-运行时借用冲突panic)
     - [5.5 补充：`Pin<&mut T>` 的堆内存语义与自引用安全](#55-补充pinmut-t-的堆内存语义与自引用安全)
       - [栈 Pin vs 堆 Pin](#栈-pin-vs-堆-pin)
       - [自引用结构的形式化保证](#自引用结构的形式化保证)
@@ -71,25 +71,25 @@
       - [`String`：UTF-8 字节数组的特化](#stringutf-8-字节数组的特化)
       - [`HashMap<K, V>`：Robin Hood 哈希 + 开放寻址](#hashmapk-vrobin-hood-哈希--开放寻址)
   - [六、反命题与边界分析（Counter-proposition \& Boundary Analysis）](#六反命题与边界分析counter-proposition--boundary-analysis)
-    - [6.1 反命题 1: "智能指针（Smart Pointer）总是安全的"](#61-反命题-1-智能指针总是安全的)
+    - [6.1 反命题 1: "智能指针总是安全的"](#61-反命题-1-智能指针总是安全的)
     - [6.2 反命题 2: "Rust 无内存泄漏"](#62-反命题-2-rust-无内存泄漏)
-    - [6.3 反命题 3: "RefCell 等价于编译期借用（Borrowing）检查"](#63-反命题-3-refcell-等价于编译期借用检查)
+    - [6.3 反命题 3: "RefCell 等价于编译期借用检查"](#63-反命题-3-refcell-等价于编译期借用检查)
     - [6.4 反命题 4: "Arc + Mutex 总是线程安全的"](#64-反命题-4-arc--mutex-总是线程安全的)
   - [七、边界极限测试代码（Boundary Limit Tests）](#七边界极限测试代码boundary-limit-tests)
     - [7.1 测试 1: Rc\<RefCell\> 循环引用极限](#71-测试-1-rcrefcell-循环引用极限)
-    - [7.2 测试 2: RefCell 嵌套借用（Borrowing）边界](#72-测试-2-refcell-嵌套借用边界)
+    - [7.2 测试 2: RefCell 嵌套借用边界](#72-测试-2-refcell-嵌套借用边界)
     - [7.3 测试 3: Box::leak 与 ManuallyDrop 边界](#73-测试-3-boxleak-与-manuallydrop-边界)
     - [7.4 测试 4: Arc 跨线程原子序边界](#74-测试-4-arc-跨线程原子序边界)
   - [八、认知路径（Cognitive Path）](#八认知路径cognitive-path)
     - [Step 1: 直觉类比 — "内存像房产"](#step-1-直觉类比--内存像房产)
-    - [Step 2: 语法熟悉 — 堆分配与智能指针（Smart Pointer）](#step-2-语法熟悉--堆分配与智能指针)
+    - [Step 2: 语法熟悉 — 堆分配与智能指针](#step-2-语法熟悉--堆分配与智能指针)
     - [Step 3: 规则困惑 — 借用检查与内部可变性](#step-3-规则困惑--借用检查与内部可变性)
     - [Step 4: 并发扩展 — Arc 与线程安全](#step-4-并发扩展--arc-与线程安全)
     - [Step 5: 边界认知 — 泄漏、循环与 unsafe 边界](#step-5-边界认知--泄漏循环与-unsafe-边界)
     - [Step 6: 形式化掌控 — 线性逻辑与设计验证](#step-6-形式化掌控--线性逻辑与设计验证)
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
   - [十、相关概念链接](#十相关概念链接)
-    - [补充章节：`MaybeUninit<T>` 的内存安全（Memory Safety）边界](#补充章节maybeuninitt-的内存安全边界)
+    - [补充章节：`MaybeUninit<T>` 的内存安全边界](#补充章节maybeuninitt-的内存安全边界)
       - [用途：未初始化内存的安全抽象](#用途未初始化内存的安全抽象)
       - [与 `mem::uninitialized` 的区别](#与-memuninitialized-的区别)
       - [`assume_init` 的安全契约](#assume_init-的安全契约)
@@ -117,7 +117,7 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十三、边界测试：内存管理的编译错误](#十三边界测试内存管理的编译错误)
-    - [13.1 边界测试：Box::into\_raw 后双重释放（运行时（Runtime） UB）](#131-边界测试boxinto_raw-后双重释放运行时-ub)
+    - [13.1 边界测试：Box::into\_raw 后双重释放（运行时 UB）](#131-边界测试boxinto_raw-后双重释放运行时-ub)
     - [13.2 边界测试：Vec 索引越界（编译错误 vs 运行时 panic）](#132-边界测试vec-索引越界编译错误-vs-运行时-panic)
     - [13.3 边界测试：Pin 误用（编译错误）](#133-边界测试pin-误用编译错误)
     - [3.4 边界测试：`ManuallyDrop` 后重复访问（运行时 UB）](#34-边界测试manuallydrop-后重复访问运行时-ub)
@@ -125,7 +125,7 @@
     - [10.3 边界测试：`Box::leak` 的永久泄漏（逻辑错误）](#103-边界测试boxleak-的永久泄漏逻辑错误)
     - [10.4 边界测试：`Rc<RefCell<T>>` 的循环引用（运行时 panic/内存泄漏）](#104-边界测试rcrefcellt-的循环引用运行时-panic内存泄漏)
     - [10.3 边界测试：`Box::into_raw` 后双重释放（运行时 UB）](#103-边界测试boxinto_raw-后双重释放运行时-ub)
-    - [10.4 边界测试：Box::leak 后的可变借用（Mutable Borrow）与原始 Box 的关系（编译错误）](#104-边界测试boxleak-后的可变借用与原始-box-的关系编译错误)
+    - [10.4 边界测试：Box::leak 后的可变借用与原始 Box 的关系（编译错误）](#104-边界测试boxleak-后的可变借用与原始-box-的关系编译错误)
     - [10.3 边界测试：返回局部变量的悬垂引用](#103-边界测试返回局部变量的悬垂引用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Stack vs Heap（理解层）](#测验-1stack-vs-heap理解层)
@@ -784,7 +784,7 @@ graph TD
 
 **四层分析**:
 
-> **[TRPL Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [std docs: Mutex/Arc]** `Arc<Mutex<T>>` 阻止数据竞争，但不阻止死锁或 poisoning——后者属于并发正确性而非内存安全范畴。 ✅
+> **[TRPL Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [std docs: Mutex/Arc]** `Arc<Mutex<T>>` 阻止数据竞争，但不阻止死锁或 poisoning——后者属于并发正确性而非内存安全（Memory Safety）范畴。 ✅
 
 | **层面** | **分析** | **结果** |
 |:---|:---|:---|
@@ -1871,7 +1871,7 @@ fn main() {}
 Rust 内存分配规则：
 
 - **栈**：固定大小的局部变量（`i32`、数组、结构体（Struct）值）、函数调用帧
-- **堆**：动态大小或生命周期超出当前作用域的数据（`Box`、`String` 的内容、`Vec` 的元素）
+- **堆**：动态大小或生命周期（Lifetimes）超出当前作用域的数据（`Box`、`String` 的内容、`Vec` 的元素）
 
 注意：`Box<i32>` 变量本身在栈上（它只是一个指针），但它指向的数据在堆上。`String` 变量在栈上（包含指针、长度、容量），字符串内容在堆上。
 </details>

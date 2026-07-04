@@ -65,12 +65,12 @@
       - [三条路径的交集与协同](#三条路径的交集与协同)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：操作语义的编译错误](#十边界测试操作语义的编译错误)
-    - [10.1 边界测试：求值顺序的未定义行为（运行时 UB）](#101-边界测试求值顺序的未定义行为运行时-ub)
+    - [10.1 边界测试：求值顺序的未定义行为（运行时（Runtime） UB）](#101-边界测试求值顺序的未定义行为运行时-ub)
     - [10.2 边界测试：panic 的栈展开语义（运行时行为）](#102-边界测试panic-的栈展开语义运行时行为)
     - [10.3 边界测试：形式化规则违反导致的编译错误（编译错误）](#103-边界测试形式化规则违反导致的编译错误编译错误)
-    - [10.4 边界测试：悬垂引用的形式化禁止（编译错误）](#104-边界测试悬垂引用的形式化禁止编译错误)
+    - [10.4 边界测试：悬垂引用（Reference）的形式化禁止（编译错误）](#104-边界测试悬垂引用的形式化禁止编译错误)
     - [10.5 边界测试：形式化语义中的非确定性选择（运行时行为差异）](#105-边界测试形式化语义中的非确定性选择运行时行为差异)
-    - [10.6 边界测试：堆叠借用（Stacked Borrows）与原始指针的别名（运行时 UB）](#106-边界测试堆叠借用stacked-borrows与原始指针的别名运行时-ub)
+    - [10.6 边界测试：堆叠借用（Stacked Borrows）与原始指针（Raw Pointer）的别名（运行时 UB）](#106-边界测试堆叠借用stacked-borrows与原始指针的别名运行时-ub)
     - [10.7 边界测试：求值顺序与副作用的交互（运行时 UB）](#107-边界测试求值顺序与副作用的交互运行时-ub)
     - [10.3 边界测试：求值顺序与副作用的确定性（编译错误）](#103-边界测试求值顺序与副作用的确定性编译错误)
     - [10.2 边界测试：match 分支返回类型不一致](#102-边界测试match-分支返回类型不一致)
@@ -573,7 +573,7 @@ Rust 语言的形式化验证面临独特的「多维复杂性」挑战。与 C 
 
 **RustBelt (λRust)**：作为 Rust 形式化的奠基之作，RustBelt 在 Iris 高阶并发分离逻辑框架中为 λRust 演算建立了完整的 soundness 证明。其核心技术是将 Rust 的生命周期（Lifetimes）编码为 Iris 的「单调幽灵状态」（monotonic ghost state），从而在不显式建模时间的情况下捕获借用的时效性。λRust 的表达式语义涵盖所有权（Ownership）转移、可变借用（Mutable Borrow）、共享借用及 `unsafe` 原语（原始指针（Raw Pointer）、transmute、`alloc`/`dealloc`）。然而，λRust 是一个刻意设计的小核心演算，不包含 trait、泛型（Generics）、模式匹配（Pattern Matching）等 surface Rust 的关键特性。
 
-**Oxide**：Oxide 的核心贡献是将 Rust 的借用（Borrowing）检查归约为一个**流敏感、上下文敏感**的仿射类型系统。其创新点在于用「位置类型」（place types）和「流动断言」（flow assertions）精确刻画 NLL（Non-Lexical Lifetimes）的语义。Oxide 的形式化是纸笔完成的，但作者在 Redex 中实现了可执行规范，用于自动测试类型规则的一致性（Coherence）。Oxide 的局限性在于完全排除 unsafe，且将生命周期视为纯粹的语法标记而非语义对象。
+**Oxide**：Oxide 的核心贡献是将 Rust 的借用（Borrowing）检查归约为一个**流敏感、上下文敏感**的仿射类型系统（Type System）。其创新点在于用「位置类型」（place types）和「流动断言」（flow assertions）精确刻画 NLL（Non-Lexical Lifetimes）的语义。Oxide 的形式化是纸笔完成的，但作者在 Redex 中实现了可执行规范，用于自动测试类型规则的一致性（Coherence）。Oxide 的局限性在于完全排除 unsafe，且将生命周期视为纯粹的语法标记而非语义对象。
 
 **KRust / RustSEM**：这两个项目均采用 K Framework 的「可执行语义」方法论，将 Rust 子集翻译为 K 的重写规则。KRust 聚焦于 safe + unsafe 的内存操作，支持原始指针（Raw Pointer）和 `unsafe` 块的基本形式化；RustSEM 在此基础上扩展了并发原语（`std::sync::Mutex`、`std::thread::spawn`），并尝试为 trait 的最简子集（无关联类型）提供 K 规则。K Framework 的优势在于其工具链可自动生成解释器、模型检验器和符号执行引擎；劣势在于对高阶特性（如生命周期（Lifetimes）参数化）的表达较为笨拙。
 
@@ -583,7 +583,7 @@ Rust 语言的形式化验证面临独特的「多维复杂性」挑战。与 C 
 
 **Miri (Tree Borrows)**：Miri 不是传统意义上的「形式化项目」，而是一个基于操作语义的解释器，用于动态检测 UB（Undefined Behavior）。Tree Borrows（PLDI 2025）为 Miri 提供了新的别名模型，替换早期的 Stacked Borrows。Tree Borrows 的语义规则集合是有限且可判定的，这意味着 Miri 的检查过程在理论上是可终止的（受步数限制约束）。从形式化角度看，Tree Borrows 为 Rust 的「动态语义」提供了最接近生产环境的可执行规格。
 
-**Gillian-Rust**：Gillian-Rust 是帝国理工学院开发的 Rust 程序分析工具，基于 **Gillian** 平台——一个用于符号执行和分离逻辑的通用分析框架。与 RustBelt 或 RefinedRust 不同，Gillian-Rust 不生成 Coq 证明，而是使用**符号执行**自动探索程序的所有路径，并通过分离逻辑断言验证内存安全（Memory Safety）。其核心技术是将 Rust 的所有权规则编码为 Gillian 的「消费性谓词」（consumable predicates），从而在不修改 Rust 编译器的情况下验证 safe Rust 子集。Gillian-Rust 目前支持：所有权转移验证、借用（Borrowing）生命周期（Lifetimes）检查、以及简单的并发原语分析（`Arc`、`Mutex` 的最简模型）。其优势在于**完全自动化**（无需手写规范），劣势在于对复杂泛型（Generics）和 trait bound 的处理能力有限，且依赖 Gillian 平台的 JVM 运行时（Runtime），集成成本较高。[来源: [Gillian-Rust Paper — OOPSLA 2024](https://dl.acm.org/doi/10.1145/3689738)] · [来源: [Gillian Platform](https://gillianplatform.github.io/)]
+**Gillian-Rust**：Gillian-Rust 是帝国理工学院开发的 Rust 程序分析工具，基于 **Gillian** 平台——一个用于符号执行和分离逻辑的通用分析框架。与 RustBelt 或 RefinedRust 不同，Gillian-Rust 不生成 Coq 证明，而是使用**符号执行**自动探索程序的所有路径，并通过分离逻辑断言验证内存安全（Memory Safety）。其核心技术是将 Rust 的所有权（Ownership）规则编码为 Gillian 的「消费性谓词」（consumable predicates），从而在不修改 Rust 编译器的情况下验证 safe Rust 子集。Gillian-Rust 目前支持：所有权转移验证、借用（Borrowing）生命周期（Lifetimes）检查、以及简单的并发原语分析（`Arc`、`Mutex` 的最简模型）。其优势在于**完全自动化**（无需手写规范），劣势在于对复杂泛型（Generics）和 trait bound 的处理能力有限，且依赖 Gillian 平台的 JVM 运行时（Runtime），集成成本较高。[来源: [Gillian-Rust Paper — OOPSLA 2024](https://dl.acm.org/doi/10.1145/3689738)] · [来源: [Gillian Platform](https://gillianplatform.github.io/)]
 
 > **Gillian-Rust 的独特定位**：它是 Rust 形式化工具谱系中**唯一基于符号执行 + 分离逻辑**的混合方案。Kani 使用模型检验（CBMC），Miri 使用解释执行，而 Gillian-Rust 使用符号执行——这意味着它能处理未初始化的符号值（如任意整数 `n`），探索所有可能的执行路径，而无需像 Kani 那样设置循环展开界限。
 
@@ -616,7 +616,7 @@ Rust 语言的形式化验证面临独特的「多维复杂性」挑战。与 C 
 | 层级 | 代表项目 | 优势 | 劣势 |
 |:---|:---|:---|:---|
 | 源语言 (Surface Rust) | KRust, RustSEM | 与程序员直觉一致；直接验证源代码 | 语法复杂，boilerplate 多；需处理大量语法糖 |
-| 中间表示 (MIR) | a-mir-formality | 简化借用检查，消除语法糖；与编译器实现同构 | 丢失部分源语言语义；需额外证明「MIR 降级保持类型安全」 |
+| 中间表示 (MIR) | a-mir-formality | 简化借用（Borrowing）检查，消除语法糖；与编译器实现同构 | 丢失部分源语言语义；需额外证明「MIR 降级保持类型安全」 |
 | 核心演算 (λRust) | RustBelt | 极简，易于证明 soundness；可复用通用逻辑框架 | 与真实 Rust 差距大；无法直接验证生产代码 |
 
 这一发现暗示了一个尚未被充分探索的研究方向：**形式化 MIR 降级（lowering）的正确性**。如果 a-mir-formality 证明了 MIR 层的类型安全，但无法保证「Surface Rust → MIR」的翻译 preserves semantics，则其 soundness 证明对终端用户的价值将大打折扣。
@@ -646,7 +646,7 @@ CTFE 虽在 Miri 引擎中已有实现，但其形式化规格（特别是步数
 Trait 系统是 Rust 形式化验证中「最后的主要堡垒」。其难度源于以下五个相互交织的特征，每个特征单独已足够复杂，而它们的组合形成了一个「形式化瓶颈」：
 
 1. **Coherence（一致性）**：Rust 要求每个 trait 实现对给定类型组合至多存在一个。形式化上需要证明「impl 搜索的确定性」，这涉及全局程序分析而非局部类型规则。Coherence 的形式化需要引入一个「程序全局」的约束：对于任意类型组合 `(Type, Trait)`，满足 `Type: Trait` 的 impl 集合的基数 ≤ 1。这在传统类型系统中没有直接对应物。
-2. **Orphan Rules（孤儿规则）**：限制 impl 定义的 crate 边界，防止跨 crate 的 coherence 冲突。形式化需引入「crate 拓扑」与「可见性逻辑」。具体而言，orphan rules 要求：如果 trait `T` 和类型 `U` 均定义于外部 crate，则当前 crate 不能提供 `impl T for U`。形式化这一规则需要将程序模型从「平坦的符号表」扩展为「分层的、带可见性边界的模块（Module）图」。
+2. **Orphan Rules（孤儿规则（Orphan Rule））**：限制 impl 定义的 crate 边界，防止跨 crate 的 coherence 冲突。形式化需引入「crate 拓扑」与「可见性逻辑」。具体而言，orphan rules 要求：如果 trait `T` 和类型 `U` 均定义于外部 crate，则当前 crate 不能提供 `impl T for U`。形式化这一规则需要将程序模型从「平坦的符号表」扩展为「分层的、带可见性边界的模块（Module）图」。
 3. **关联类型（Associated Types）**：`type Output;` 的归一化（normalization）要求证明类型替换的终止性。当存在嵌套 trait bound 时，`<T as Add>::Output` 的解析可能触发连锁的 impl 搜索和类型替换。当前 Rust 编译器对此采用启发式 + 递归深度限制，无全局终止性保证。从可判定性角度看，关联类型归一化与 Haskell type family 的简化（simplification）问题同构，而后者已被证明在一般情况下是 undecidable 的。
 4. **泛型（Generics）关联类型（GATs）**：将关联类型提升到高阶，允许 `type Item<'a>;` 这样的定义。GATs 引入了与 Haskell type families 类似的复杂性，且由于 Rust 支持生命周期（Lifetimes）参数化，其形式化难度甚至高于 Haskell 对应物。GATs 的完全可判定性边界至今未闭合（见 decidability_spectrum.md §十）。
 5. **Specialization 交互**：允许重叠 impl 存在优先级（如 `impl<T> Trait for T` 与 `impl Trait for u32`），使 impl 搜索从「单射匹配」变为「偏序搜索」。形式化上需构造一个保证终止且确定的重叠解析算法。Specialization 还与 coherence 产生张力：编译器必须既允许重叠（按优先级解析），又保证全局一致性（对任意具体类型，最终选中的 impl 唯一）。
@@ -837,7 +837,7 @@ fn main() {
 }
 ```
 
-> **修正**: 在形式化语义中，局部变量 `x` 的生命周期 `ℓ_x` 受限于函数作用域。当函数返回时，`x` 的存储被释放，生命周期结束。返回 `&x` 意味着返回的引用生命周期 `ℓ_r` 必须满足 `ℓ_r ⊆ ℓ_x`，但函数返回后 `ℓ_x` 已结束，因此 `ℓ_r` 无法有效。编译器通过**生命周期推断**发现这一矛盾：返回类型的隐式生命周期参数 `'a` 无法与任何输入参数匹配（因为 `x` 是局部变量），因此无法构造有效的生命周期约束。这与 C/C++ 的悬垂指针（编译器通常不报错）形成鲜明对比——Rust 将"使用已释放内存"这一运行时错误转化为编译期类型错误。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)]
+> **修正**: 在形式化语义中，局部变量 `x` 的生命周期（Lifetimes） `ℓ_x` 受限于函数作用域。当函数返回时，`x` 的存储被释放，生命周期结束。返回 `&x` 意味着返回的引用生命周期 `ℓ_r` 必须满足 `ℓ_r ⊆ ℓ_x`，但函数返回后 `ℓ_x` 已结束，因此 `ℓ_r` 无法有效。编译器通过**生命周期推断**发现这一矛盾：返回类型的隐式生命周期参数 `'a` 无法与任何输入参数匹配（因为 `x` 是局部变量），因此无法构造有效的生命周期约束。这与 C/C++ 的悬垂指针（编译器通常不报错）形成鲜明对比——Rust 将"使用已释放内存"这一运行时错误转化为编译期类型错误。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)]
 
 ### 10.5 边界测试：形式化语义中的非确定性选择（运行时行为差异）
 

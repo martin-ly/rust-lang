@@ -420,7 +420,7 @@ impl AddOne for std::marker::U0 { type Result = std::marker::U1; }
   → 编译期算术
 ```
 
-> **模式矩阵**: Rust 的类型系统**在表达力和复杂性之间取得平衡**——不像 Haskell 那样完全类型级编程，但足够处理大多数工程需求。
+> **模式矩阵**: Rust 的类型系统（Type System）**在表达力和复杂性之间取得平衡**——不像 Haskell 那样完全类型级编程，但足够处理大多数工程需求。
 > [来源: [typenum crate](https://docs.rs/typenum/latest/typenum/)]
 
 ---
@@ -650,7 +650,7 @@ trait MyTrait {
 }
 ```
 
-> **修正**: trait 定义中不能使用 `impl Trait` 作为返回类型。应使用关联类型（`type Output: Iterator<Item = i32>;`）或泛型参数。
+> **修正**: trait 定义中不能使用 `impl Trait` 作为返回类型。应使用关联类型（`type Output: Iterator<Item = i32>;`）或泛型（Generics）参数。
 
 ```rust,compile_fail
 // 错误: const 泛型参数类型不匹配

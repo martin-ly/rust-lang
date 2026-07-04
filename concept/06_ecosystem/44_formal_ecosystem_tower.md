@@ -323,7 +323,7 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 |:---|:---|:---|:---|
 | **Wasm 规范** | 操作语义 + 类型系统（Type System） | Isabelle/HOL (WasmCert) | `wasmparser` |
 | **编译器后端** | Cranelift IR 优化 | 手工审查 + 模糊测试 | `cranelift-codegen` |
-| **运行时** | 内存隔离 +  Capability | Rust 类型系统 + Miri | `wasmtime` |
+| **运行时** | 内存隔离 +  Capability | Rust 类型系统（Type System） + Miri | `wasmtime` |
 | **WASI** | 能力安全（Capability-based）| 规范审查 | `wasi-common` |
 
 **关键定理**：Wasmtime 的 Rust 实现通过**编译期类型系统**（而非运行时检查）保证 Wasm 模块（Module）的内存隔离。`unsafe` 代码仅用于 Wasm 线性内存的底层访问，且被 Miri 和模糊测试双重验证。
@@ -506,7 +506,7 @@ fn main() {
 }
 ```
 
-> **修正**: 形式化验证的**组合性**是开放问题：若 crate A 经过验证（如 Prusti 证明无 panic、无溢出），crate B 使用 unsafe 调用 A 的函数，验证保证可能被破坏。Rust 的模块系统不自动传播验证结果——每个 crate 的验证是独立的。安全关键项目需要：1) 审计所有依赖（`cargo vet`）；2) 限制 unsafe 使用（`cargo geiger`）；3) 为关键依赖建立形式化规格（昂贵但必要）。这与数学中的"已证定理可组合"不同——软件的形式化验证受限于规格的不完整性和实现细节。RustBelt 项目试图为 Rust 的核心类型系统建立可组合的形式化基础，但覆盖整个生态仍是长期目标。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [cargo-vet Documentation](https://mozilla.github.io/cargo-vet/)]
+> **修正**: 形式化验证的**组合性**是开放问题：若 crate A 经过验证（如 Prusti 证明无 panic、无溢出），crate B 使用 unsafe 调用 A 的函数，验证保证可能被破坏。Rust 的模块（Module）系统不自动传播验证结果——每个 crate 的验证是独立的。安全关键项目需要：1) 审计所有依赖（`cargo vet`）；2) 限制 unsafe 使用（`cargo geiger`）；3) 为关键依赖建立形式化规格（昂贵但必要）。这与数学中的"已证定理可组合"不同——软件的形式化验证受限于规格的不完整性和实现细节。RustBelt 项目试图为 Rust 的核心类型系统建立可组合的形式化基础，但覆盖整个生态仍是长期目标。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [cargo-vet Documentation](https://mozilla.github.io/cargo-vet/)]
 
 ### 10.3 边界测试：形式化工具链的 nightly 依赖与稳定化鸿沟（编译错误）
 
@@ -558,7 +558,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 的所有权、生命周期（Lifetimes）和 trait 系统需要专门的建模。C 的工具不理解这些语义，直接复用会丢失 Rust 的安全保证信息。
+Rust 的所有权（Ownership）、生命周期（Lifetimes）和 trait 系统需要专门的建模。C 的工具不理解这些语义，直接复用会丢失 Rust 的安全保证信息。
 </details>
 
 ---
