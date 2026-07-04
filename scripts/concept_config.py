@@ -154,7 +154,7 @@ def iter_concept_files() -> list[Path]:
     for path in CONCEPT_DIR.rglob("*.md"):
         rel = path.relative_to(CONCEPT_DIR)
         # 排除 archive/ 与 sources/ 中的文件
-        if str(rel).startswith("archive/") or str(rel).startswith("sources/"):
+        if any(part in ("archive", "sources") for part in rel.parts):
             continue
         files.append(path)
     files.sort()
