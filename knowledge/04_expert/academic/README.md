@@ -68,7 +68,7 @@
 | [Iris Project](https://iris-project.org/) | 高阶并发分离逻辑框架 |
 | [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/) | 别名模型 |
 | [Kani](https://model-checking.github.io/kani/) | 模型检查工具 |
-| [Verus](https://verus-lang.github.io/verus/) | 自动证明生态 |
+| [Verus](https://github.com/verus-lang/verusverus/) | 自动证明生态 |
 
 ### 8.3 社区资源
 

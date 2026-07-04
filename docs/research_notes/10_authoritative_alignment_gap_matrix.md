@@ -147,7 +147,7 @@
 | Tree Borrows | `docs/research_notes/10_rustsem_semantics.md` | [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) | [Tree Borrows Blog](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)、[Tree Borrows Paper](https://arxiv.org/abs/2410.12379) | [Miri 文档](https://github.com/rust-lang/miri) | 别名模型动机、与 Stacked Borrows 对比 | 默认启用状态、与 `UnsafeCell`/raw pointer 交互、形式化操作语义 | P0 | 更新为默认别名模型，补充 UB 判定流程图 |
 | RustSEM | `docs/research_notes/10_rustsem_semantics.md` | [Rust Reference](https://doc.rust-lang.org/reference/)、[Rust Official Docs](https://doc.rust-lang.org/) | [RustSEM Project](https://rustsem.github.io/)、[Oxide](https://arxiv.org/abs/1903.00982) | [Rust Formal Methods WG](https://rust-formal-methods.github.io/) | 操作语义框架、小步/大步语义 | 并发语义、async 语义、与 rustc 最新 MIR 对齐 | P1 | 补充 1.96 语言子集覆盖表、与 Miri 对比 |
 | Oxide | *(引用多处，无独立文件)* | [Rust Reference](https://doc.rust-lang.org/reference/) | [Oxide Paper](https://arxiv.org/abs/1903.00982) | [Rust Formal Methods WG](https://rust-formal-methods.github.io/) | 生命周期/所有权类型系统 | 独立章节缺失、与 Polonius 对接、1.96 新类型特性 | P1 | 创建 `type_theory/10_oxide_formalization.md` 独立文档 |
-| Verus | `docs/research_notes/10_verification_tools_matrix.md` | [Verus – GitHub](https://github.com/verus-lang/verus) | [Verus Paper](https://verus-lang.github.io/verus/) | [Verus Zulip](https://verus-lang.zulipchat.com/) | 命令式验证、所有权证明 | 1.96 兼容性、并发证明、trait 规范支持 | P1 | 更新 Verus 对 2024 edition 支持状态，补充并发案例 |
+| Verus | `docs/research_notes/10_verification_tools_matrix.md` | [Verus – GitHub](https://github.com/verus-lang/verus) | [Verus Paper](https://github.com/verus-lang/verusverus/) | [Verus Zulip](https://verus-lang.zulipchat.com/) | 命令式验证、所有权证明 | 1.96 兼容性、并发证明、trait 规范支持 | P1 | 更新 Verus 对 2024 edition 支持状态，补充并发案例 |
 | Kani | `docs/research_notes/10_verification_tools_matrix.md` | [Kani – GitHub](https://github.com/model-checking/kani) | [Kani Documentation](https://model-checking.github.io/kani/) | [Kani 示例](https://github.com/model-checking/kani/tree/main/tests) | `#[kani::proof]`、属性证明 | 1.96 标准库 harness、并发模型检查、与 cargo 集成最佳实践 | P0 | 补充 `kani` 对 2024 edition 的验证示例、CI 模板 |
 | Prusti | `docs/research_notes/10_verification_tools_matrix.md` | [Prusti – ETH Zurich](https://www.pm.inf.ethz.ch/research/prusti.html) | [Prusti Paper](https://www.pm.inf.ethz.ch/publications/RusBos21.html) | [Prusti Zulip](https://prusti.zulipchat.com/) | 契约式验证、`#[requires]`/`#[ensures]` | Rust 1.96 支持状态、泛型/高阶函数证明、维护状态 | P2 | 标注工具维护状态，补充替代方案（Verus/Creusot）对比 |
 | Creusot | `docs/research_notes/10_verification_tools_matrix.md` | [Creusot – GitHub](https://github.com/creusot-rs/creusot) | [Creusot Paper](https://hal.science/hal-03737979/) | [Creusot 文档](https://creusot-rs.github.io/) | Why3 后端、谓词规范 | 1.96 语法支持、闭包/迭代器规范、教程完整性 | P1 | 更新 Creusot 安装指南、补充 iterator 规范示例 |
@@ -216,7 +216,7 @@
 | P1 | Oxide | <https://arxiv.org/abs/1903.00982> |
 | P1 | Aeneas LLBC Paper | <https://arxiv.org/abs/2207.09467> |
 | P1 | RustSEM | <https://rustsem.github.io/> |
-| P1 | Verus | <https://verus-lang.github.io/verus/> |
+| P1 | Verus | <https://github.com/verus-lang/verusverus/> |
 | P1 | Kani | <https://model-checking.github.io/kani/> |
 | P1 | Prusti | <https://www.pm.inf.ethz.ch/research/prusti.html> |
 | P1 | Creusot | <https://creusot-rs.github.io/> |

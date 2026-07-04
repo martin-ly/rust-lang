@@ -271,7 +271,7 @@ Design and Implementation (PLDI 2026).
 **相关资源**:
 
 1. **Verus 项目主页**: <https://github.com/verus-lang/verus>
-2. **Verus 文档**: <https://verus-lang.github.io/verus/>
+2. **Verus 文档**: <https://github.com/verus-lang/verusverus/>
 3. **RustBelt 论文**: Jung, R., et al. "RustBelt: Securing the Foundations of the Rust Programming Language". POPL 2018.
 4. **Iris 框架**: <https://iris-project.org/>
 

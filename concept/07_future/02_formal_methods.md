@@ -890,7 +890,7 @@ AWS 将 Kani 集成到多个核心项目的开发流程中：
 ### 7.2 Microsoft Verus
 >
 >
-> **来源**: [Microsoft Verus Blog](https://verus-lang.github.io/verus/guide/) · [IronRDP]
+> **来源**: [Microsoft Verus Blog](https://github.com/verus-lang/verusverus/guide/) · [IronRDP]
 
 Microsoft Research 的 Verus 项目致力于让系统软件验证更加实用：
 

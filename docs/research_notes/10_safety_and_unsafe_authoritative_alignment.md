@@ -63,7 +63,7 @@
 
 | 权威来源 | 类型 | 项目文档 | 覆盖主题 |
 |----------|------|----------|----------|
-| [Rust Secured](https://rust-secure-code.github.io/) | 安全工作组 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) | 安全编码、供应链 |
+| [Rust Secured](https://github.com/rust-secure-code/wg) | 安全工作组 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) | 安全编码、供应链 |
 | [Cargo Audit](https://docs.rs/cargo-audit/) | 安全工具 | [10_cargo_book_alignment.md](10_cargo_book_alignment.md) | 依赖漏洞扫描 |
 | [Rust Fuzzing](https://rust-fuzz.github.io/book/) | 模糊测试 | [experiments/10_concurrency_performance.md](experiments/10_concurrency_performance.md) | fuzz、cargo-fuzz |
 | [Miri](https://github.com/rust-lang/miri) | UB 检测器 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) | 运行时 UB 检测 |

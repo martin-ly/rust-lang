@@ -261,7 +261,7 @@ charon cargo --preset=aeneas
 
 ### Verus {#verus}
 
-> **来源**: [Verus](https://verus-lang.github.io/verus/)
+> **来源**: [Verus](https://github.com/verus-lang/verusverus/)
 
 **用途**: 面向低层系统代码的 Rust 验证器，使用 SMT 求解器静态检查可执行 Rust 代码是否满足规约。
 
@@ -291,10 +291,10 @@ verus! {
 **版本与官方资源**:
 
 - 推荐版本：以 [Verus GitHub](https://github.com/verus-lang/verus) 最新 commit / release 为准。
-- [Verus 官方文档](https://verus-lang.github.io/verus/)
+- [Verus 官方文档](https://github.com/verus-lang/verusverus/)
 - [Verus GitHub](https://github.com/verus-lang/verus)
-- [Verus 教程与参考](https://verus-lang.github.io/verus/guide/)
-- [Verus 标准库 API](https://verus-lang.github.io/verus/verusdoc/vstd/)
+- [Verus 教程与参考](https://github.com/verus-lang/verusverus/guide/)
+- [Verus 标准库 API](https://github.com/verus-lang/verusverus/verusdoc/vstd/)
 
 ---
 

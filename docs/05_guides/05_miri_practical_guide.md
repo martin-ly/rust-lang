@@ -520,7 +520,7 @@ CI 策略矩阵:
    - Stacked Borrows 模型的原始论文
 3. **Neven Villani, et al.** "Tree Borrows". 2023.
    - Tree Borrows 改进模型的技术报告
-   <https://www.ralfj.de/blog/2023/01/07/tree-borrows.html>
+   <https://www.ralfj.de/blog/2023/06/02/tree-borrows.html>
 
 4. **Rust 官方文档**. "Miri (Interpreter)".
    <https://github.com/rust-lang/miri>

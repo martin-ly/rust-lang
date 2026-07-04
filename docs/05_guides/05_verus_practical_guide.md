@@ -41,7 +41,7 @@ flowchart LR
 | 学习曲线 | 低（类似写测试） | 中（需理解不变量） |
 | 证明辅助 | 全自动 | 大部分自动，需手动提供不变量 |
 
-> [来源: [Verus Guide](https://verus-lang.github.io/verus/guide/)]
+> [来源: [Verus Guide](https://github.com/verus-lang/verusverus/guide/)]
 > [来源: [PLDI 2023 — Verus: Verifying Rust Programs using Linear Ghost Types](https://www.cs.utah.edu/pldi23/)]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
@@ -101,7 +101,7 @@ components = ["rustc-dev", "llvm-tools-preview", "rust-src"]
 verus = { git = "https://github.com/verus-lang/verus" }
 ```
 
-> [来源: [Verus Installation Guide](https://verus-lang.github.io/verus/guide/install.html)]
+> [来源: [Verus Installation Guide](https://github.com/verus-lang/verusverus/guide/install.html)]
 
 ---
 
@@ -189,8 +189,8 @@ fn factorial(n: u64) -> (result: u64)
 } // verus!
 ```
 
-> [来源: [Verus Guide — Specifications](https://verus-lang.github.io/verus/guide/spec.html)]
-> [来源: [Verus Guide — Loops and Invariants](https://verus-lang.github.io/verus/guide/loops.html)]
+> [来源: [Verus Guide — Specifications](https://github.com/verus-lang/verusverus/guide/spec.html)]
+> [来源: [Verus Guide — Loops and Invariants](https://github.com/verus-lang/verusverus/guide/loops.html)]
 
 ### 3.4 `decreases` — 终止性证明 {#34-decreases-终止性证明}
 >
@@ -265,7 +265,7 @@ fn push_with_ghost<T>(vec: &mut Vec<T>, value: T, ghost_old_len: Ghost<usize>)
 | `Ghost<T>` | ❌ | ✅ | 仅规格 |
 | `Tracked<T>` | ✅ | ✅ | 线性 ghost（所有权跟踪） |
 
-> [来源: [Verus Guide — Ghost Entities](https://verus-lang.github.io/verus/guide/ghost.html)]
+> [来源: [Verus Guide — Ghost Entities](https://github.com/verus-lang/verusverus/guide/ghost.html)]
 > [来源: [PLDI 2023 — Linear Ghost Types](https://dl.acm.org/doi/10.1145/3591285)]
 
 ### 4.2 `Proof` 类型与归纳证明 {#42-proof-类型与归纳证明}
@@ -375,7 +375,7 @@ fn get_first_mut(arr: &mut [i32]) -> (result: &mut i32)
 } // verus!
 ```
 
-> [来源: [Verus Guide — Mutable References](https://verus-lang.github.io/verus/guide/mut-ref.html)]
+> [来源: [Verus Guide — Mutable References](https://github.com/verus-lang/verusverus/guide/mut-ref.html)]
 
 ---
 
@@ -481,7 +481,7 @@ impl<T> Stack<T> {
 } // verus!
 ```
 
-> [来源: [Verus Guide — Concurrency](https://verus-lang.github.io/verus/guide/concurrency.html)]
+> [来源: [Verus Guide — Concurrency](https://github.com/verus-lang/verusverus/guide/concurrency.html)]
 > [来源: [PLDI 2023 — Verified Storage Systems with Linear Ghost Types](https://dl.acm.org/doi/10.1145/3591285)]
 
 ---
@@ -787,7 +787,7 @@ verus! {
 | **性能** | 大型项目验证耗时 | 增量验证，仅修改文件重验 |
 | **nightly 锁定** | 依赖特定 Rust 版本 | 使用 `rust-toolchain.toml` 管理 |
 
-> [来源: [Verus Guide — Limitations](https://verus-lang.github.io/verus/guide/limitations.html)]
+> [来源: [Verus Guide — Limitations](https://github.com/verus-lang/verusverus/guide/limitations.html)]
 
 ### 9.2 调试 SMT 超时 {#92-调试-smt-超时}
 >
@@ -854,7 +854,7 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 
 | 来源 | 链接 | 用途 |
 |:---|:---|:---|
-| Verus 官方指南 | <https://verus-lang.github.io/verus/guide/> | 语法、教程、API |
+| Verus 官方指南 | <https://github.com/verus-lang/verusverus/guide/> | 语法、教程、API |
 | Verus GitHub | <https://github.com/verus-lang/verus> | 源码、示例、issue |
 | Verus Examples | <https://github.com/verus-lang/verus/tree/main/source/rust_verify/example> | 工业级案例 |
 | Z3 SMT Solver | <https://github.com/Z3Prover/z3> | 底层求解器 |
@@ -898,8 +898,8 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **[来源: [Verus Documentation](https://verus-lang.github.io/verus/)]**
-> **[来源: [Microsoft Verus Blog](https://www.microsoft.com/en-us/research/project/verus/)]**
+> **[来源: [Verus Documentation](https://github.com/verus-lang/verusverus/)]**
+> **[来源: [Microsoft Verus Blog](https://verus-lang.github.io/verus/guide/)]**
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
