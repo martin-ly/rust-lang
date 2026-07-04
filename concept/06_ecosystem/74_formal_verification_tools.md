@@ -41,12 +41,12 @@
   - [三、模型检验工具](#三模型检验工具)
     - [3.1 Kani：基于 CBMC 的 Rust 验证器](#31-kani基于-cbmc-的-rust-验证器)
       - [Kani 0.66 新特性（2026-05 发布）](#kani-066-新特性2026-05-发布)
-    - [3.2 MIRI：运行时 UB 检测器](#32-miri运行时-ub-检测器)
+    - [3.2 MIRI：运行时（Runtime） UB 检测器](#32-miri运行时-ub-检测器)
   - [四、演绎验证工具](#四演绎验证工具)
     - [4.1 Prusti：Viper 分离逻辑验证器](#41-prustiviper-分离逻辑验证器)
     - [4.2 Creusot：Why3/WhyML 验证器](#42-creusotwhy3whyml-验证器)
     - [4.3 Verus：SMT-LIB 验证器](#43-verussmt-lib-验证器)
-  - [五、类型系统扩展](#五类型系统扩展)
+  - [五、类型系统（Type System）扩展](#五类型系统扩展)
     - [5.1 Flux：精化类型（Refinement Types）](#51-flux精化类型refinement-types)
     - [5.2 Aeneas：向函数式语言的转换](#52-aeneas向函数式语言的转换)
   - [六、验证工具对比与选型](#六验证工具对比与选型)
@@ -389,7 +389,7 @@ impl Node {
 |:---|:---|
 | 分离逻辑天然适合所有权（Ownership）推理 | 学习曲线陡峭（需理解权限、分形）|
 | 可验证复杂数据结构（链表、树）| 对泛型（Generics）和 Trait 支持有限 |
-| 与 Rust 所有权系统深度集成 | 编译速度慢（Viper 后端）|
+| 与 Rust 所有权（Ownership）系统深度集成 | 编译速度慢（Viper 后端）|
 | 自动推理循环不变式（部分）| 工具链维护活跃度下降 |
 
 > **来源**: [Prusti User Guide](https://viperproject.github.io/prusti-dev/user-guide/) · [Viper Project](https://www.pm.inf.ethz.ch/research/viper.html) · [Separation Logic — Reynolds 2002](https://doi.org/10.1007/s001650200018)
@@ -533,7 +533,7 @@ Flux 精化类型:    Vec<i32{v: v>0}>  →  编译期还保证所有元素 > 0
 ```
 
 > **来源**: [Flux GitHub](https://github.com/liquid-rust/flux) · [Liquid Types — PLDI 2008](https://goto.ucsd.edu/~rjhala/liquid/liquid_types.pdf) · [Refinement Types Survey](https://arxiv.org/abs/2010.07763)
-> **2025 最新进展 — Generic Refinement Types (POPL 2025)**: Flux 团队将精化类型扩展到**泛型上下文**，解决了原始 Flux 无法处理泛型函数（如 `fn max<T: Ord>(a: T, b: T) -> T`）的精化谓词问题。Generic Refinement Types 允许类型参数携带精化约束（如 `T{v: v >= 0}`），并通过**约束抽象**（Constraint Abstraction）在实例化时求解具体谓词。这是精化类型从"特定类型上的轻量验证"向"通用库级验证"的关键跃迁。[来源: [POPL 2025 — Lehmann et al., "Generic Refinement Types"](https://dl.acm.org/doi/10.1145/3704886)]
+> **2025 最新进展 — Generic Refinement Types (POPL 2025)**: Flux 团队将精化类型扩展到**泛型（Generics）上下文**，解决了原始 Flux 无法处理泛型函数（如 `fn max<T: Ord>(a: T, b: T) -> T`）的精化谓词问题。Generic Refinement Types 允许类型参数携带精化约束（如 `T{v: v >= 0}`），并通过**约束抽象**（Constraint Abstraction）在实例化时求解具体谓词。这是精化类型从"特定类型上的轻量验证"向"通用库级验证"的关键跃迁。[来源: [POPL 2025 — Lehmann et al., "Generic Refinement Types"](https://dl.acm.org/doi/10.1145/3704886)]
 
 ### 5.2 Aeneas：向函数式语言的转换
 
@@ -632,7 +632,7 @@ Iris 分离逻辑公式
 
 ### 7.2 RustBelt 验证框架
 
-> **RustBelt** 是 MPI-SWS 的奠基性工作（POPL 2018），首次在数学上证明了 Rust 类型系统的**语义正确性**：如果程序通过借用检查器，则它确实是内存安全（Memory Safety）的。RustBelt 使用 **Iris** 分离逻辑在 Coq 中形式化了 Rust 核心语言（包括生命周期、借用（Borrowing）、共享/独占引用（Reference））。来源: [RustBelt Paper — POPL 2018]
+> **RustBelt** 是 MPI-SWS 的奠基性工作（POPL 2018），首次在数学上证明了 Rust 类型系统的**语义正确性**：如果程序通过借用检查器，则它确实是内存安全（Memory Safety）的。RustBelt 使用 **Iris** 分离逻辑在 Coq 中形式化了 Rust 核心语言（包括生命周期（Lifetimes）、借用（Borrowing）、共享/独占引用（Reference））。来源: [RustBelt Paper — POPL 2018]
 
 ```text
 RustBelt 的核心定理:
@@ -842,7 +842,7 @@ fn caller() {
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — Miri、UB、别名模型
 - [形式化验证](../04_formal/05_verification_toolchain.md) — 定理证明器、SMT、分离逻辑
 - [类型系统](../01_foundation/04_type_system.md) — 类型论、泛型、Trait
-- [生命周期](../01_foundation/03_lifetimes.md) — 借用规则、NLL、Polonius
+- [生命周期](../01_foundation/03_lifetimes.md) — 借用（Borrowing）规则、NLL、Polonius
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、数据竞争
 - [嵌入式系统](22_embedded_systems.md) — `#![no_std]`、资源受限验证
 - [版本跟踪](../07_future/05_rust_version_tracking.md) — Rust 语言演进对验证工具的影响
@@ -917,7 +917,7 @@ fn caller() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-形式化验证通常针对特定属性（内存安全、功能正确性），且受限于规约的正确性和验证范围。测试补充验证性能、集成行为、用户体验和未建模的边界情况。
+形式化验证通常针对特定属性（内存安全（Memory Safety）、功能正确性），且受限于规约的正确性和验证范围。测试补充验证性能、集成行为、用户体验和未建模的边界情况。
 </details>
 
 ## 认知路径

@@ -26,15 +26,15 @@
 
 ## 📑 目录
 
-- [闭包基础：捕获环境与匿名函数](#闭包基础捕获环境与匿名函数)
+- [闭包（Closures）基础：捕获环境与匿名函数](#闭包基础捕获环境与匿名函数)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 闭包的语法与捕获](#11-闭包的语法与捕获)
     - [1.2 Fn / FnMut / FnOnce](#12-fn--fnmut--fnonce)
-    - [1.3 闭包与所有权](#13-闭包与所有权)
+    - [1.3 闭包与所有权（Ownership）](#13-闭包与所有权)
   - [二、技术细节](#二技术细节)
     - [2.1 闭包作为函数参数](#21-闭包作为函数参数)
-    - [2.2 闭包与类型推断](#22-闭包与类型推断)
+    - [2.2 闭包与类型推断（Type Inference）](#22-闭包与类型推断)
     - [2.3 move 闭包](#23-move-闭包)
   - [三、闭包模式矩阵](#三闭包模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -59,7 +59,7 @@
     - [测验 1：闭包捕获模式（理解层）](#测验-1闭包捕获模式理解层)
     - [测验 2：`move` 关键字（应用层）](#测验-2move-关键字应用层)
     - [测验 3：Fn/FnMut/FnOnce（分析层）](#测验-3fnfnmutfnonce分析层)
-    - [测验 4：闭包与生命周期（分析层）](#测验-4闭包与生命周期分析层)
+    - [测验 4：闭包与生命周期（Lifetimes）（分析层）](#测验-4闭包与生命周期分析层)
 
 ---
 
@@ -622,7 +622,7 @@ fn main() {
 > 1) 闭包返回或发送到其他线程（需要 `'static`）；
 > 2) 闭包的生命周期长于被捕获的引用（Reference）；
 > 3) 明确表达"闭包拥有数据"的意图。
-> 这与 C++ 的 lambda capture `[=]`（按值复制，即使是非可复制类型也调用拷贝构造）或 JavaScript 的闭包（总是引用捕获，无所有权概念）不同——Rust 的 `move` 与 `Copy` trait 交互，产生微妙但一致的行为。
+> 这与 C++ 的 lambda capture `[=]`（按值复制，即使是非可复制类型也调用拷贝构造）或 JavaScript 的闭包（总是引用（Reference）捕获，无所有权概念）不同——Rust 的 `move` 与 `Copy` trait 交互，产生微妙但一致的行为。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
 > [来源: [Rust Reference — Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html)]
 
@@ -790,7 +790,7 @@ fn main() {
 
 闭包自动以可变引用（Mutable Reference）捕获 `count`（`&mut count`），因为闭包体内修改了它。`count` 的类型是 `i32`，实现了 `Copy`，但闭包优先选择最少权限的捕获方式——此处需要 `&mut`，因此使用可变引用。
 
-注意：调用 `inc()` 后，`count` 被闭包的可变借用锁定，直到闭包最后一次使用后才能再次直接访问 `count`。
+注意：调用 `inc()` 后，`count` 被闭包的可变借用（Borrowing）锁定，直到闭包最后一次使用后才能再次直接访问 `count`。
 </details>
 
 ---

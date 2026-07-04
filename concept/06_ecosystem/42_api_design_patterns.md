@@ -1,5 +1,4 @@
-> **内容分级**:
->
+> **内容分级**: [综述级]
 > [专家级]
 > **代码状态**: ✅ 含可编译示例
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -24,7 +23,7 @@
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **前置概念**: N/A
 >
-> **说明**: 本文档包含可直接编译的示例（`rust`）、依赖外部 crate（如 axum、tonic、async-graphql）的示意代码（`rust,ignore`），以及展示运行时/逻辑错误的边界测试（`rust,ignore`）。
+> **说明**: 本文档包含可直接编译的示例（`rust`）、依赖外部 crate（如 axum、tonic、async-graphql）的示意代码（`rust,ignore`），以及展示运行时（Runtime）/逻辑错误的边界测试（`rust,ignore`）。
 ---
 
 > **来源**: [Fielding 2000 — Architectural Styles and the Design of Network-based Software Architectures](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) ·
@@ -52,13 +51,13 @@
   - [三、API 设计原则](#三api-设计原则)
     - [3.1 RESTful 资源建模](#31-restful-资源建模)
     - [3.2 API 版本化策略](#32-api-版本化策略)
-    - [3.3 错误处理与状态码](#33-错误处理与状态码)
+    - [3.3 错误处理（Error Handling）与状态码](#33-错误处理与状态码)
   - [四、REST API 设计](#四rest-api-设计)
     - [4.1 路由与处理器](#41-路由与处理器)
     - [4.2 请求验证与序列化](#42-请求验证与序列化)
     - [4.3 OpenAPI 文档生成](#43-openapi-文档生成)
   - [五、GraphQL API 设计](#五graphql-api-设计)
-    - [5.1 Schema 与类型系统](#51-schema-与类型系统)
+    - [5.1 Schema 与类型系统（Type System）](#51-schema-与类型系统)
     - [5.2 Resolver 与 N+1 问题](#52-resolver-与-n1-问题)
     - [5.3 订阅与实时数据](#53-订阅与实时数据)
   - [六、gRPC API 设计](#六grpc-api-设计)
@@ -81,7 +80,7 @@
     - [测验 2：`IntoIterator` trait 在 API 设计中有什么用途？（理解层）](#测验-2intoiterator-trait-在-api-设计中有什么用途理解层)
     - [测验 3：为什么 Rust 的公共 API 中通常避免返回 `impl Trait`，而更倾向于显式类型？（理解层）](#测验-3为什么-rust-的公共-api-中通常避免返回-impl-trait而更倾向于显式类型理解层)
     - [测验 4：`sealed trait` 模式在 Rust API 设计中有什么用途？（理解层）](#测验-4sealed-trait-模式在-rust-api-设计中有什么用途理解层)
-    - [测验 5：Rust API 的"零成本抽象"原则如何体现在集合 API 设计中？（理解层）](#测验-5rust-api-的零成本抽象原则如何体现在集合-api-设计中理解层)
+    - [测验 5：Rust API 的"零成本抽象（Zero-Cost Abstraction）"原则如何体现在集合 API 设计中？（理解层）](#测验-5rust-api-的零成本抽象原则如何体现在集合-api-设计中理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)

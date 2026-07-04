@@ -16,6 +16,33 @@
 
 ---
 
+
+> **跨层回溯**: [智能指针（Smart Pointer）](../02_intermediate/12_smart_pointers.md) · [内部可变性](../02_intermediate/08_interior_mutability.md)
+
+---
+
+## 认知路径
+
+> **认知路径**: 本节从 "Unsafe 参考（Unsafe Reference）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+
+1. **问题识别**: 为什么 Unsafe 参考（Unsafe Reference） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
+2. **概念建立**: 掌握 Unsafe 参考（Unsafe Reference） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
+3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与Unsafe 参考（Unsafe Reference）的适用边界。
+5. **迁移应用**: 将 Unsafe 参考（Unsafe Reference） 与前置/后置概念链接，形成跨层知识网络。
+
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "Unsafe 参考（Unsafe Reference） 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 Unsafe 参考（Unsafe Reference） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Unsafe 参考（Unsafe Reference） 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 Unsafe 参考（Unsafe Reference） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Unsafe 参考（Unsafe Reference） 具有语言特有的形态。
+
+
 ## 一、`unsafe` 关键字的四种用法
 
 | 用法 | 形式 | 说明 |
@@ -29,15 +56,15 @@
 
 在 `unsafe` 块内允许：
 
-1. 解引用裸指针 `*const T` / `*mut T`
+1. 解引用（Reference）裸指针 `*const T` / `*mut T`
 2. 调用 `unsafe` 函数或方法
 3. 访问 `union` 的字段
 4. 访问可变 `static`
 5. 实现 `unsafe` trait
 6. 调用 extern 函数
-7. 使用 `asm!` 内联汇编
+7. 使用 `asm!` 内联汇编（Inline Assembly）
 
-> `unsafe` 块**不**禁用借用检查器；它只放宽上述操作限制。
+> `unsafe` 块**不**禁用借用（Borrowing）检查器；它只放宽上述操作限制。
 
 ## 三、安全抽象层
 

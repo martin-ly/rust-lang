@@ -14,7 +14,7 @@
 > **Bloom 层级**: 分析 → 评价
 >
 > **定位**: 探讨 Rust 编译器基础设施中最影响异步（Async）编程体验的长期痛点 —— `Pin` 的 ergonomics，以及 Project Goals 2026 Flagship "Beyond the `&`" 的解决方案：Reborrow Traits、Pinned Places、Safe Pin Projection。
-> **前置概念**: · [并发与异步](../06_ecosystem/24_cloud_native.md)
+> **前置概念**: · [并发与异步（Async）](../06_ecosystem/24_cloud_native.md)
 > [Async](../03_advanced/02_async.md) ·
 > [Pin/Unpin](../03_advanced/06_pin_unpin.md) ·
 > [Traits](../02_intermediate/01_traits.md)
@@ -28,6 +28,22 @@
 > [RFC #3627 — Reborrow Traits](https://github.com/rust-lang/rfcs/pull/3627)
 
 ---
+
+---
+
+> **过渡**: 从 Pin Ergonomics 与 Reborrow Trai 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 Pin Ergonomics 与 Reborrow Trai 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 Pin Ergonomics 与 Reborrow Trai 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+---
+
+> **定理 1** [Tier 2]: Pin Ergonomics 与 Reborrow Trai 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
+>
+> **定理 2** [Tier 2]: 正确理解 Pin Ergonomics 与 Reborrow Trai 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
+>
+> **定理 3** [Tier 3]: 将 Pin Ergonomics 与 Reborrow Trai 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
 
 ## 一、核心问题：Pin 的人机工程学危机
 
@@ -68,7 +84,7 @@ pinned.as_mut().poll(cx);   // ✅ 可以
 pinned.poll(cx);            // ❌ 不能自动 reborrow
 ```
 
-对比普通引用：
+对比普通引用（Reference）：
 
 ```rust,ignore
 let mut r: &mut T = ...;
@@ -110,7 +126,7 @@ let shared: Pin<&MyFuture> = &pinned;  // ✅ 自动 CoerceShared
 
 - 2025H2 已实现 `Reborrow` / `CoerceShared` trait 的单生命周期（Lifetimes） + trivial 内存布局原型
 - 2026 年继续迭代：收集用户反馈、支持多生命周期（Lifetimes）重借、非平凡 `CoerceShared`、安全性验证、基于实现经验重写 RFC
-- Blocker：可能需要对编译器内部 `Rvalue::Ref` / `ExprKind::Ref` 进行大规模重构；多生命周期支持涉及 rmeta 复杂度
+- Blocker：可能需要对编译器内部 `Rvalue::Ref` / `ExprKind::Ref` 进行大规模重构；多生命周期（Lifetimes）支持涉及 rmeta 复杂度
 - 详见 [Rust Project Goals 2026 — Reborrow Traits](https://rust-lang.github.io/rust-project-goals/2026/reborrow-traits.html)
 
 ---
@@ -225,12 +241,12 @@ graph TD
 | Crate | 解决的问题 | 使用场景 |
 |:---|:---|:---|
 | `pin-project` / `pin-project-lite` | Safe pin projection | 自定义 Future / Stream |
-| `pin-utils` | `pin_mut!` 宏 | 栈上 pinning（已被 `std::pin::pin!` 取代）|
+| `pin-utils` | `pin_mut!` 宏（Macro） | 栈上 pinning（已被 `std::pin::pin!` 取代）|
 | `futures::FutureExt` | `.poll_unpin()` 等辅助方法 | 通用异步（Async）编程 |
 
 ---
 
-> **[教学类比]** Pin Ergonomics 的改进类似于给 Rust 的异步编程"解除绑腿"——核心机制（Pin 保证内存安全）不变，但使用方式更自然。Reborrow Traits 让 `Pin<&mut T>` 的行为更接近普通 `&mut T`，而 `pin` 关键字则从根本上简化自引用类型的表达。
+> **[教学类比]** Pin Ergonomics 的改进类似于给 Rust 的异步编程"解除绑腿"——核心机制（Pin 保证内存安全（Memory Safety））不变，但使用方式更自然。Reborrow Traits 让 `Pin<&mut T>` 的行为更接近普通 `&mut T`，而 `pin` 关键字则从根本上简化自引用类型的表达。
 >
 > **来源**: [Rust Project Goals 2026 — Pin Ergonomics](https://rust-lang.github.io/rust-project-goals/2026/pin-ergonomics.html) · [withoutboats — "Pin and Suffering"](https://without.boats/blog/pin/) · [RFC #3709](https://github.com/rust-lang/rfcs/issues/3709)
 
@@ -255,7 +271,7 @@ graph TD
 <details>
 <summary>✅ 答案与解析</summary>
 
-`Pin::as_mut()` 保持 `Pin` 包装，返回 `Pin<&mut T>`。普通 `&mut` 重新借用会丢失 `Pin` 语义，可能破坏自引用类型的内存安全。
+`Pin::as_mut()` 保持 `Pin` 包装，返回 `Pin<&mut T>`。普通 `&mut` 重新借用（Borrowing）会丢失 `Pin` 语义，可能破坏自引用类型的内存安全。
 </details>
 
 ---

@@ -74,6 +74,7 @@ async fn main() {
     println!("所有任务完成！");
 }
 ```
+
 ### 运行示例
 
 ```bash
@@ -90,6 +91,7 @@ cargo test
 # 运行性能测试
 cargo bench
 ```
+
 ### 推荐学习路径
 
 **🎯 快速入门** (3-5天):
@@ -191,6 +193,7 @@ c06_async/docs/
     ├── completion_reports/       # 完成报告
     └── deprecated/               # 已废弃文档
 ```
+
 ### 🎯 示例代码 (89个)
 
 ```bash
@@ -206,6 +209,7 @@ examples/
 ├── 05_performance/      # 性能优化
 └── 06_applications/     # 实际应用
 ```
+
 ---
 
 ## 🎯 核心理念
@@ -241,6 +245,7 @@ pub trait Future {
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
 ```
+
 **核心特点**:
 
 - 惰性求值 - 不调用`.await`不执行
@@ -255,6 +260,7 @@ async fn fetch_data() -> String {
     process_data(data).await
 }
 ```
+
 **编译器转换**: `async fn` → 返回`impl Future`的状态机
 
 ### 3. 运行时 - 执行环境
@@ -279,6 +285,7 @@ while let Some(item) = stream.next().await {
     println!("{}", item);
 }
 ```
+
 ---
 
 ## 📖 学习资源
@@ -304,6 +311,7 @@ while let Some(item) = stream.next().await {
 ✅ 量化 - 多维度评分和决策模型
 ✅ 理论化 - 从操作语义到代数语义的完整理论
 ```
+
 ### 本模块资源
 
 - 📋 **[主索引](00_MASTER_INDEX.md)** - 完整文档导航（必看）
@@ -390,6 +398,7 @@ futures = "0.3"
 tokio-stream = "0.1"
 async-trait = "0.1"
 ```
+
 ### 适用场景
 
 ✅ **适合使用异步**:

@@ -24,7 +24,7 @@
   - [📑 目录](#-目录)
   - [一、权威定义与核心概念](#一权威定义与核心概念)
     - [1.1 TypeScript 权威定义](#11-typescript-权威定义)
-    - [1.2 类型系统哲学对比](#12-类型系统哲学对比)
+    - [1.2 类型系统（Type System）哲学对比](#12-类型系统哲学对比)
     - [1.3 编译模型差异](#13-编译模型差异)
     - 1.4 内存模型：所有权（Ownership） vs GC
   - [二、技术细节](#二技术细节)
@@ -53,7 +53,7 @@
     - [测验 1：Rust 和 TypeScript 的静态类型检查最根本的区别是什么？（理解层）](#测验-1rust-和-typescript-的静态类型检查最根本的区别是什么理解层)
     - [测验 2：TypeScript 的渐进类型系统（Gradual Typing）与 Rust 的强制类型系统各有什么优劣？（理解层）](#测验-2typescript-的渐进类型系统gradual-typing与-rust-的强制类型系统各有什么优劣理解层)
     - [测验 3：Rust 的 `enum`（代数数据类型）与 TypeScript 的 Discriminated Unions 有什么区别？（理解层）](#测验-3rust-的-enum代数数据类型与-typescript-的-discriminated-unions-有什么区别理解层)
-    - [测验 4：为什么 TypeScript 的类型系统不能防止运行时类型错误（如 API 返回不符合预期的数据）？（理解层）](#测验-4为什么-typescript-的类型系统不能防止运行时类型错误如-api-返回不符合预期的数据理解层)
+    - [测验 4：为什么 TypeScript 的类型系统不能防止运行时（Runtime）类型错误（如 API 返回不符合预期的数据）？（理解层）](#测验-4为什么-typescript-的类型系统不能防止运行时类型错误如-api-返回不符合预期的数据理解层)
     - [测验 5：在前后端同构项目中，Rust 能否替代 TypeScript？目前的限制是什么？（理解层）](#测验-5在前后端同构项目中rust-能否替代-typescript目前的限制是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -490,7 +490,7 @@ graph TB
 
 > **认知功能**: 此图揭示 TypeScript 和 Rust 的**共同目标**（消除运行时类型错误）与**不同路径**（擦除 vs 证明、渐进 vs 穷尽）。
 > [来源: [TypeScript Design Goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals)] · [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
-> **关键洞察**: TypeScript 的"渐进"允许**局部收益**（给 JS 加类型即可获益），Rust 的"穷尽"要求**全局一致**（整个程序需满足所有权规则）。
+> **关键洞察**: TypeScript 的"渐进"允许**局部收益**（给 JS 加类型即可获益），Rust 的"穷尽"要求**全局一致**（整个程序需满足所有权（Ownership）规则）。
 > [来源: 💡 原创分析]
 
 ---
@@ -909,7 +909,7 @@ Rust 可通过 WASM 运行在浏览器中，但 DOM 操作需通过 JS 桥接，
 
 > **过渡**: 掌握 Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

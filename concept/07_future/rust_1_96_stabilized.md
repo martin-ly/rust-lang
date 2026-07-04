@@ -34,6 +34,25 @@
 
 ---
 
+
+---
+
+> **过渡**: 从 Rust 1.96 稳定特性（当前 patch 1.96.1 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 Rust 1.96 稳定特性（当前 patch 1.96.1 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 Rust 1.96 稳定特性（当前 patch 1.96.1 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
+---
+
+> **定理 1** [Tier 2]: Rust 1.96 稳定特性（当前 patch 1.96.1 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
+>
+> **定理 2** [Tier 2]: 正确理解 Rust 1.96 稳定特性（当前 patch 1.96.1 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
+>
+> **定理 3** [Tier 3]: 将 Rust 1.96 稳定特性（当前 patch 1.96.1 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
+
+
 ## 1. 语言层
 
 ### 1.1 `assert_matches!` / `debug_assert_matches!`
@@ -77,7 +96,7 @@ debug_assert_matches!(result, Ok(n) if n > 0);
 | `core::range::RangeToInclusive<T>` | 实现 `Copy`，`IntoIterator` |
 | `core::range::RangeIter<T>` | 对应迭代器（Iterator） |
 | `core::range::RangeFromIter<T>` | 对应迭代器（Iterator） |
-| `core::range::RangeToInclusiveIter<T>` | 对应迭代器 |
+| `core::range::RangeToInclusiveIter<T>` | 对应迭代器（Iterator） |
 
 ```rust
 use std::range::Range;
@@ -213,7 +232,7 @@ rustdocflags = ["--cfg", "docsrs"]
 |:---|:---|
 | `loongarch64-unknown-linux-gnu` | Link relaxation 启用 |
 | `riscv64gc-unknown-fuchsia` | 基线提升至 RVA22 + vector |
-| `s390x-unknown-linux-gnu` | 向量寄存器内联汇编支持 |
+| `s390x-unknown-linux-gnu` | 向量寄存器内联汇编（Inline Assembly）支持 |
 
 ### 6.5 底层与兼容性
 
@@ -259,7 +278,7 @@ rustc +nightly -Z unstable-options --print target-spec-json-schema
 | RPITIT 类型过严报错 | 过于私有的返回类型 |
 | `uninhabited_static` deny-by-default | 依赖项中的 static uninhabited 类型 |
 | 移除 `-Csoft-float` | 改用 `target-feature` |
-| `use S::{self as Other}` 禁止 | `{self}` 要求模块父级 |
+| `use S::{self as Other}` 禁止 | `{self}` 要求模块（Module）父级 |
 | 重复属性首项优先 | `export_name`/`link_name`/`link_section` |
 | 最低外部 LLVM 升至 21 | 构建 rustc 的 LLVM 要求 |
 | `avr` 目标 `c_double` 为 `f32` | 匹配 AVR 上 C 的 double 宽度 |

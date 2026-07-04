@@ -34,6 +34,32 @@
 
 > **Bloom 层级**: 理解 → 分析 → 评价
 
+
+---
+
+> **过渡**: 从 数据抽象谱系 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 数据抽象谱系 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 数据抽象谱系 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
+---
+
+> **定理 1** [Tier 2]: 数据抽象谱系 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
+>
+> **定理 2** [Tier 2]: 正确理解 数据抽象谱系 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
+>
+> **定理 3** [Tier 3]: 将 数据抽象谱系 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
+
+
+---
+
+> **反向推理 1**: 如果程序在 数据抽象谱系 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
+>
+> **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 数据抽象谱系 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
+
+
 ## 一、核心命题
 
 > **数据抽象不是单一概念，而是一个从"内存布局"到"行为契约"的连续谱系。
@@ -574,7 +600,7 @@ fn main() {
 > 3) 提前手动释放（如 `Vec::set_len(0)` 后手动 dealloc）。
 >
 > 风险：忘记显式 `drop` 导致内存泄漏——不是 UB，但资源浪费。
-> Rust 的类型系统（Type System）不阻止内存泄漏（`Rc` 循环引用、`Mem::forget`、`ManuallyDrop` 都是安全的），但工具（`cargo leak`）和模式（`scopeguard::defer`）可帮助检测。
+> Rust 的类型系统（Type System）不阻止内存泄漏（`Rc` 循环引用（Reference）、`Mem::forget`、`ManuallyDrop` 都是安全的），但工具（`cargo leak`）和模式（`scopeguard::defer`）可帮助检测。
 > 这与 C++ 的 `std::unique_ptr`（必须释放，否则泄漏）或 Java 的 GC（自动回收循环引用... eventually）不同——Rust 的所有权（Ownership）系统通常防止泄漏，但显式控制时责任回归开发者。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html)]
@@ -602,7 +628,7 @@ fn main() {
 > 1) `v.push(())` 永不分配；
 > 2) `v.iter()` 产生 N 个 `&()`，但所有引用可能指向同一地址；
 > 3) 内存报告工具显示 `Vec` 占用 0 字节，但逻辑上有 N 个元素。
-> 这与 C 的 `void`（不完整类型，不能用于变量）或 Haskell 的 `()`（同样单元类型，但无大小概念）不同——Rust 的 ZST 是完整的类型系统特性，有明确的语义和优化规则。
+> 这与 C 的 `void`（不完整类型，不能用于变量）或 Haskell 的 `()`（同样单元类型，但无大小概念）不同——Rust 的 ZST 是完整的类型系统（Type System）特性，有明确的语义和优化规则。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] ·
 > [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
 
@@ -629,7 +655,7 @@ fn main() {
 > 但 `println!("{}", p.age)` 实际上**可以编译**——部分移动后未移动字段仍可用。
 > 真正的编译错误：`let q = p;`（试图整体移动已部分移动的变量）或 `println!("{:?}", p)`（使用已移动字段）。
 > 部分移动使 Rust 的所有权（Ownership）系统更灵活：无需为单个字段移动而拆分整个 struct。
-> 这与 C++ 的默认拷贝（无移动语义）或 Swift 的拷贝语义不同——Rust 的部分移动是零成本抽象（Zero-Cost Abstraction），编译期跟踪每个字段的所有权状态。
+> 这与 C++ 的默认拷贝（无移动语义）或 Swift 的拷贝语义不同——Rust 的部分移动是零成本抽象（Zero-Cost Abstraction），编译期跟踪每个字段的所有权（Ownership）状态。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] ·
 > [来源: [Rust Reference — Moved Values](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
@@ -722,5 +748,5 @@ ZST 不占用内存，可用于类型级标记（phantom types）、空迭代器
 ### 总结
 
 - **L1**：数据抽象从 C struct 到 C++ class 再到 Rust enum + trait，逐步引入封装、类型安全与行为抽象。
-- **L2**：Rust 用 `pub`/`priv`、trait bound 和泛型实现零成本抽象（Zero-Cost Abstraction）；不需要继承即可获得多态与代码复用。
+- **L2**：Rust 用 `pub`/`priv`、trait bound 和泛型（Generics）实现零成本抽象（Zero-Cost Abstraction）；不需要继承即可获得多态与代码复用。
 - **L3**：抽象机制的选择是表达力与可预测性之间的权衡；Rust 倾向于显式约束，使抽象边界成为编译期可检查的合同。

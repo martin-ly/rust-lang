@@ -24,6 +24,16 @@
 > [Cargo Registries Reference](https://doc.rust-lang.org/cargo/reference/registries.html) ·
 > [Cargo Source Replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html)
 
+
+---
+
+> **过渡**: 从 Cargo 安全公告 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 Cargo 安全公告 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 Cargo 安全公告 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
 ## 📑 目录
 
 - [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](#cargo-安全公告cve-2026-5222-与-cve-2026-5223)

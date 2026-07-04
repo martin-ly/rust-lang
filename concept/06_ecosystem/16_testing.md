@@ -388,7 +388,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示测试投入的**优先级**。核心原则是：**公共 API + 复杂逻辑优先**。
-> **关键洞察**: Rust 的类型系统已消除了许多需要测试的"错误类"——测试应聚焦于**业务逻辑**而非**语言安全**。
+> **关键洞察**: Rust 的类型系统（Type System）已消除了许多需要测试的"错误类"——测试应聚焦于**业务逻辑**而非**语言安全**。
 > [来源: [Rust API Guidelines — Testing](https://rust-lang.github.io/api-guidelines//debuggability.html)]
 
 ---
@@ -550,7 +550,7 @@ fn broken_test() {
 > 编译错误导致**无测试运行**——这与测试失败（assertion 失败）不同。
 > CI 系统需要区分"编译失败"（代码错误）和"测试失败"（逻辑错误）。
 > Rust 的测试框架在编译期检查测试代码的类型安全，确保测试本身无 bug。
-> 这与 Python 的动态测试（测试代码错误在运行时发现）或 Java 的反射测试（运行时方法查找）不同——Rust 的测试在编译期就验证完整性。
+> 这与 Python 的动态测试（测试代码错误在运行时（Runtime）发现）或 Java 的反射测试（运行时方法查找）不同——Rust 的测试在编译期就验证完整性。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-00-testing.html)]
 
 ### 10.2 边界测试：mock 对象的 trait 约束（编译错误）
@@ -614,7 +614,7 @@ mod more_tests {
 > 2) 集成测试文件（`tests/` 目录）中的模块（Module）名与 lib 中的模块名（可能解析歧义）；
 > 3) doc test 中的示例函数名与单元测试冲突（罕见）。
 > `cargo test` 的输出显示完整路径，帮助区分。
-> 这与 Java 的 JUnit（方法名 + 类名唯一）或 Python 的 `pytest`（模块路径 + 函数名唯一）类似——Rust 的测试命名空间是层次化的，冲突风险低但过滤器匹配需小心。
+> 这与 Java 的 JUnit（方法名 + 类名唯一）或 Python 的 `pytest`（模块（Module）路径 + 函数名唯一）类似——Rust 的测试命名空间是层次化的，冲突风险低但过滤器匹配需小心。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)] ·
 > [来源: [Cargo Test Documentation](https://doc.rust-lang.org/cargo/commands/cargo-test.html)]
 

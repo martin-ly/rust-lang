@@ -8,6 +8,7 @@
 **内容已整合至**：[02_IPC机制参考](../tier_03_references/02_ipc_mechanisms_reference.md) | [02_ipc_mechanisms](../02_ipc_mechanisms.md) | [02_IPC通信实践](../tier_02_guides/02_ipc_communication_practice.md)
 
 **相关**: [11_practical_examples](11_practical_examples.md)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -65,7 +65,7 @@
     - [10.1 边界测试：const 上下文中调用非 const 方法（编译错误）](#101-边界测试const-上下文中调用非-const-方法编译错误)
     - [10.2 边界测试：trait bound 的 const 兼容性（编译错误）](#102-边界测试trait-bound-的-const-兼容性编译错误)
     - [10.6 边界测试：`~const` bound 与默认实现的交互（编译错误）](#106-边界测试const-bound-与默认实现的交互编译错误)
-    - [10.5 边界测试：const trait 的默认实现与泛型约束（编译错误）](#105-边界测试const-trait-的默认实现与泛型约束编译错误)
+    - [10.5 边界测试：const trait 的默认实现与泛型（Generics）约束（编译错误）](#105-边界测试const-trait-的默认实现与泛型约束编译错误)
     - [10.3 边界测试：`~const` 边界的语法演进与兼容性（编译错误）](#103-边界测试const-边界的语法演进与兼容性编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -274,7 +274,7 @@ graph TD
     style FALSE2 fill:#ffebee
 ```
 
-> **认知功能**: 此决策树帮助判断一个 Trait 是否适合提供 const impl。核心判断标准是**纯函数性**和**运行时独立性**。
+> **认知功能**: 此决策树帮助判断一个 Trait 是否适合提供 const impl。核心判断标准是**纯函数性**和**运行时（Runtime）独立性**。
 > **使用建议**: 数学运算、比较、拷贝等纯函数 Trait 优先 const impl；涉及 IO、随机数、全局状态的 Trait 不应 const impl。
 > **关键洞察**: `const` 在 Rust 中不仅是"编译期可执行"，更是"无副作用 + 确定性"的语义保证。这与函数式编程中的**纯函数**概念一致。
 > [来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)]
@@ -429,7 +429,7 @@ const fn process<T: Compute>(x: T) -> i32 {
 > `const trait impl` 引入 `~const Trait` bound（"maybe const"）：`fn process<T: ~const Compute>(x: T) -> i32` 表示 `T` 可以是 const 或非 const 实现，但仅在 const 上下文中要求 const。
 > 这是 Rust 类型系统（Type System）的复杂扩展：trait bound 现在需要考虑"const 性"（constness），形成类似 effect system 的维度。
 > 设计挑战：向后兼容性（现有代码无需修改）、默认行为（trait 默认非 const）、语法简洁性（`~const` 标记）。
-> 这与 C++ 的 `constexpr` 虚函数（C++23）方向类似，但 Rust 通过类型系统而非关键字控制编译期/运行时分派。
+> 这与 C++ 的 `constexpr` 虚函数（C++23）方向类似，但 Rust 通过类型系统（Type System）而非关键字控制编译期/运行时分派。
 > [来源: [Rust RFC 2632](https://github.com/rust-lang/rust/issues/67792)] ·
 > [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 

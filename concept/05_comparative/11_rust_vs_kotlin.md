@@ -35,7 +35,7 @@
     - [1.2 并发模型](#12-并发模型)
     - [1.3 平台与生态](#13-平台与生态)
   - [二、语言特性差异](#二语言特性差异)
-    - [2.1 类型推断与泛型](#21-类型推断与泛型)
+    - [2.1 类型推断（Type Inference）与泛型（Generics）](#21-类型推断与泛型)
     - [2.2 扩展函数与 Trait](#22-扩展函数与-trait)
     - [2.3 协程与 async/await](#23-协程与-asyncawait)
   - [三、工程实践差异](#三工程实践差异)
@@ -52,7 +52,7 @@
   - [十、边界测试：Rust 与 Kotlin 的编译错误对比](#十边界测试rust-与-kotlin-的编译错误对比)
     - [10.1 边界测试：Kotlin 的可空类型与 Rust 的 Option（编译错误）](#101-边界测试kotlin-的可空类型与-rust-的-option编译错误)
     - [10.2 边界测试：Kotlin 的 data class 与 Rust 的 derive（编译错误）](#102-边界测试kotlin-的-data-class-与-rust-的-derive编译错误)
-    - [10.3 边界测试：Kotlin 的协程与 Rust 的 async 的调度模型差异（运行时死锁）](#103-边界测试kotlin-的协程与-rust-的-async-的调度模型差异运行时死锁)
+    - [10.3 边界测试：Kotlin 的协程与 Rust 的 async 的调度模型差异（运行时（Runtime）死锁）](#103-边界测试kotlin-的协程与-rust-的-async-的调度模型差异运行时死锁)
     - [10.4 边界测试：Kotlin 的 null safety 与 Rust 的 `Option` 的语法差异（编译错误）](#104-边界测试kotlin-的-null-safety-与-rust-的-option-的语法差异编译错误)
     - [10.3 边界测试：Kotlin 的 nullable 类型与 Rust 的 Option 显式处理（编译错误）](#103-边界测试kotlin-的-nullable-类型与-rust-的-option-显式处理编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -721,7 +721,7 @@ fn main() {
 }
 ```
 
-> **修正**: Kotlin 的 **nullable 类型**（`String?`）在类型系统中标记可能为 null，但运行时与 `String` 相同（JVM 的引用（Reference）类型）。`?.`（安全调用）和 `?:`（Elvis 运算符）是语法糖，编译为 null 检查。Rust 的 `Option<T>` 是**枚举（Enum）**：`Some(T)` 或 `None`，占用额外空间（discriminant），但编译器优化（Niche Value Optimization）可使 `Option<&T>` 与 `&T` 同大小（用 null 指针表示 `None`）。Kotlin 的优势：与 Java 互操作、语法简洁；Rust 的优势：无 null 指针（`Option` 是显式枚举）、模式匹配（Pattern Matching）穷尽检查、零成本抽象（Zero-Cost Abstraction）（`Option<&T>` 无额外开销）。这与 TypeScript 的 `string | null`（联合类型，编译期检查）或 Haskell 的 `Maybe a`（类似 `Option`）相同——Rust 的 `Option` 是代数数据类型，非语言特殊的 null。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Kotlin Null Safety](https://kotlinlang.org/docs/null-safety.html)]
+> **修正**: Kotlin 的 **nullable 类型**（`String?`）在类型系统（Type System）中标记可能为 null，但运行时与 `String` 相同（JVM 的引用（Reference）类型）。`?.`（安全调用）和 `?:`（Elvis 运算符）是语法糖，编译为 null 检查。Rust 的 `Option<T>` 是**枚举（Enum）**：`Some(T)` 或 `None`，占用额外空间（discriminant），但编译器优化（Niche Value Optimization）可使 `Option<&T>` 与 `&T` 同大小（用 null 指针表示 `None`）。Kotlin 的优势：与 Java 互操作、语法简洁；Rust 的优势：无 null 指针（`Option` 是显式枚举）、模式匹配（Pattern Matching）穷尽检查、零成本抽象（Zero-Cost Abstraction）（`Option<&T>` 无额外开销）。这与 TypeScript 的 `string | null`（联合类型，编译期检查）或 Haskell 的 `Maybe a`（类似 `Option`）相同——Rust 的 `Option` 是代数数据类型，非语言特殊的 null。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Kotlin Null Safety](https://kotlinlang.org/docs/null-safety.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 

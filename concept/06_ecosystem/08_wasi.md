@@ -158,7 +158,7 @@ let dir_cap = preopen_dir("/sandbox/data")?;
 
 **与 Rust 所有权（Ownership）模型的同构性**:
 
-| 概念 | WASI 能力模型 | Rust 所有权模型 |
+| 概念 | WASI 能力模型 | Rust 所有权（Ownership）模型 |
 |:---|:---|:---|
 | **资源标识** | 能力句柄（不可伪造） | 所有权变量（唯一） |
 | **资源转移** | 能力句柄 move 到 guest | 所有权（Ownership） move |
@@ -339,7 +339,7 @@ impl GuestFile for File {
 | **W1** | Wasm 沙箱 | 线性内存隔离 | guest 无法访问宿主内存 | `unsafe` 宿主代码；Spectre 攻击 | 沙箱逃逸 |
 | **W2** | 能力安全 | 显式能力授予 | guest 仅能访问被授予资源 | 宿主错误授予过度能力 | 权限提升 |
 | **W3** | WIT 类型安全 | `wit-bindgen` 正确生成 | 跨组件调用类型匹配 | WIT 定义错误；生成器 bug | 类型混淆 |
-| **W4** | Rust 编译期安全 | `wasm32-wasip1` 或 `wasm32-wasip2` 目标 | 生成的 Wasm 无 UAF/DF | `unsafe` Rust 代码 | 运行时崩溃 |
+| **W4** | Rust 编译期安全 | `wasm32-wasip1` 或 `wasm32-wasip2` 目标 | 生成的 Wasm 无 UAF/DF | `unsafe` Rust 代码 | 运行时（Runtime）崩溃 |
 | **W5** | 组件组合安全 | 世界定义完整 | 组合后接口兼容 | 版本不匹配；接口漂移 | 链接错误 / 运行时失败 |
 
 > **⟹ 推理链**: W1（沙箱）+ W2（能力）构成**运行时隔离**，W3（WIT）+ W4（Rust）构成**编译期类型安全**，W5（组合）构成**架构级兼容性**。五层联合使 Component Model 成为目前最安全的软件组合模型之一。
@@ -579,7 +579,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-为 WebAssembly 提供可移植、安全的系统接口标准（文件、网络、时钟等），使 WASM 模块能在浏览器外运行（服务端、边缘计算、嵌入式）。
+为 WebAssembly 提供可移植、安全的系统接口标准（文件、网络、时钟等），使 WASM 模块（Module）能在浏览器外运行（服务端、边缘计算、嵌入式）。
 </details>
 
 ---

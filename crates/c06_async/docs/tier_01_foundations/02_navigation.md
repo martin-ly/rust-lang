@@ -104,6 +104,7 @@
         └── 浏览 03_术语表 → 熟悉核心术语
             └── 查阅 04_常见问题 → 解决常见疑惑
 ```
+
 ---
 
 ## 📖 Tier 2: 实践指南层
@@ -136,6 +137,7 @@
 ├── 05_异步性能优化指南        (1周)
 └── 06_异步调试与监控          (3-5天)
 ```
+
 ### 推荐阅读顺序
 
 ```text
@@ -151,6 +153,7 @@
    │
 6. 调试监控 → 掌握调试技巧
 ```
+
 ---
 
 ## 📘 Tier 3: 技术参考层
@@ -270,6 +273,7 @@
 3. [Future机制](../tier_02_guides/02_future_and_executor_mechanisms.md) - 理解原理
 4. 运行示例代码
 ```
+
 ### 我要选择异步运行时
 
 ```text
@@ -277,6 +281,7 @@
 2. [异步生态系统参考](../tier_03_references/03_async_ecosystem_reference.md)
 3. [Tokio完整API参考](../tier_03_references/02_tokio_complete_api_reference.md)
 ```
+
 ### 我要优化性能
 
 ```text
@@ -284,6 +289,7 @@
 2. [性能基准参考](../tier_03_references/05_performance_benchmarks_reference.md)
 3. [异步性能工程](../tier_04_advanced/04_async_performance_engineering.md)
 ```
+
 ### 我要构建生产系统
 
 ```text
@@ -291,6 +297,7 @@
 2. [调试与监控](../tier_02_guides/06_async_debugging_and_monitoring.md)
 3. [异步系统架构](../tier_04_advanced/02_async_system_architecture.md)
 ```
+
 ### 我要理解 Pin 机制
 
 ```text
@@ -298,6 +305,7 @@
 2. [Future与Executor机制](../tier_02_guides/02_future_and_executor_mechanisms.md)
 3. [Pin与Unsafe参考](../tier_03_references/04_pin_and_unsafe_reference.md)
 ```
+
 ---
 
 ## 📚 按难度导航

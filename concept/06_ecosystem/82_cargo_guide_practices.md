@@ -57,7 +57,7 @@ Cargo 自动识别四类测试：
 
 | 类型 | 位置 | 运行方式 |
 |:---|:---|:---|
-| 单元测试 | 内联于 `src/*.rs` 的 `#[cfg(test)]` 模块 | `cargo test` |
+| 单元测试 | 内联于 `src/*.rs` 的 `#[cfg(test)]` 模块（Module） | `cargo test` |
 | 集成测试 | `tests/*.rs` | `cargo test --test <name>` |
 | 文档测试 | `///` 示例代码 | `cargo test --doc` |
 | 基准测试 | `benches/*.rs` | `cargo bench` |

@@ -22,7 +22,7 @@
 - Rust vs Scala：类型系统（Type System）的两种哲学
   - [📑 目录](#-目录)
   - [一、核心对比](#一核心对比)
-    - [1.1 类型系统](#11-类型系统)
+    - [1.1 类型系统（Type System）](#11-类型系统)
     - 1.2 模式匹配（Pattern Matching）
     - [1.3 并发模型](#13-并发模型)
   - [二、语言特性差异](#二语言特性差异)
@@ -50,7 +50,7 @@
     - [测验 2：Scala 的隐式参数（Implicits）与 Rust 的 trait bounds 在类型类机制上有什么区别？（理解层）](#测验-2scala-的隐式参数implicits与-rust-的-trait-bounds-在类型类机制上有什么区别理解层)
     - [测验 3：Scala 运行在 JVM 上，Rust 编译为原生。这对 GC 和实时性有什么影响？（理解层）](#测验-3scala-运行在-jvm-上rust-编译为原生这对-gc-和实时性有什么影响理解层)
     - [测验 4：Scala 的 case class 与 Rust 的 `#[derive(Debug, Clone)]` struct 有什么对应关系？（理解层）](#测验-4scala-的-case-class-与-rust-的-derivedebug-clone-struct-有什么对应关系理解层)
-    - [测验 5：为什么 Rust 的类型推断比 Scala 更保守？（理解层）](#测验-5为什么-rust-的类型推断比-scala-更保守理解层)
+    - [测验 5：为什么 Rust 的类型推断（Type Inference）比 Scala 更保守？（理解层）](#测验-5为什么-rust-的类型推断比-scala-更保守理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -154,7 +154,7 @@
   └── Rust 的 match 是表达式（返回值）
 ```
 
-> **匹配洞察**: **Scala 的模式匹配更灵活，Rust 的模式匹配更高效**——两者都提供编译期穷尽性检查。
+> **匹配洞察**: **Scala 的模式匹配（Pattern Matching）更灵活，Rust 的模式匹配更高效**——两者都提供编译期穷尽性检查。
 > [来源: [Scala Pattern Matching](https://docs.scala-lang.org/tour/pattern-matching.html)]
 
 ---
@@ -753,7 +753,7 @@ Rust 要求函数签名通常显式标注类型（生命周期（Lifetimes）和
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | Rust vs Scala：类型系统的两种哲学 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| Rust vs Scala：类型系统的两种哲学 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Rust vs Scala：类型系统的两种哲学 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | Rust vs Scala：类型系统的两种哲学 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 Rust vs Scala：类型系统的两种哲学 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。

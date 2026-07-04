@@ -1,7 +1,7 @@
 # Rust 1.95.0 稳定特性
 
 > **EN**: Rust 1.95.0 Stabilized Features
-> **Summary**: Rust 1.95.0（2026-04-16 stable）引入的关键语言与库特性：`cfg_select!` 宏、`if let` guards、路径段关键字重命名导入、`core::range` 模块、原子 `update` / `try_update`、集合可变引用插入、`as_ref_unchecked` / `as_mut_unchecked`、`Layout` 新 API、`cold_path` 提示、布尔 `TryFrom<{integer}>`、`MaybeUninit` 与 `Cell` 数组互转，以及 PowerPC/PowerPC64 内联汇编稳定化。
+> **Summary**: Rust 1.95.0（2026-04-16 stable）引入的关键语言与库特性：`cfg_select!` 宏（Macro）、`if let` guards、路径段关键字重命名导入、`core::range` 模块（Module）、原子 `update` / `try_update`、集合可变引用（Mutable Reference）插入、`as_ref_unchecked` / `as_mut_unchecked`、`Layout` 新 API、`cold_path` 提示、布尔 `TryFrom<{integer}>`、`MaybeUninit` 与 `Cell` 数组互转，以及 PowerPC/PowerPC64 内联汇编（Inline Assembly）稳定化。
 >
 > **受众**: [进阶] / [专家]
 > **内容分级**: [参考级]
@@ -32,6 +32,25 @@
 >
 
 ---
+
+
+---
+
+> **过渡**: 从 Rust 1.95.0 稳定特性 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 Rust 1.95.0 稳定特性 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 Rust 1.95.0 稳定特性 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
+---
+
+> **定理 1** [Tier 2]: Rust 1.95.0 稳定特性 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
+>
+> **定理 2** [Tier 2]: 正确理解 Rust 1.95.0 稳定特性 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
+>
+> **定理 3** [Tier 3]: 将 Rust 1.95.0 稳定特性 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
+
 
 ## 1. 语言层
 
@@ -107,7 +126,7 @@ unsafe {
 | 新类型 | 说明 |
 |---|---|
 | `core::range::RangeInclusive` | 包含性范围类型 |
-| `core::range::RangeInclusiveIter` | 专属迭代器类型 |
+| `core::range::RangeInclusiveIter` | 专属迭代器（Iterator）类型 |
 
 ```rust
 use core::range::RangeInclusive;
@@ -142,7 +161,7 @@ counter.update(Ordering::Relaxed, Ordering::Relaxed, |current| current + 1);
 
 稳定版本：**1.95.0**
 
-`Vec::push_mut` / `insert_mut`、`VecDeque::push_front_mut` / `push_back_mut` / `insert_mut`、`LinkedList::push_front_mut` / `push_back_mut` 返回新插入元素的可变引用。
+`Vec::push_mut` / `insert_mut`、`VecDeque::push_front_mut` / `push_back_mut` / `insert_mut`、`LinkedList::push_front_mut` / `push_back_mut` 返回新插入元素的可变引用（Reference）。
 
 ```rust
 use std::collections::{VecDeque, LinkedList};
@@ -265,7 +284,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 ### 3.3 重要兼容性变更
 
 - **JSON target specs destabilized**：stable 通道不再支持自定义 target JSON，需 nightly `-Z unstable-options`。
-- **`#[non_exhaustive]` enum matching**：现在读取 discriminant，可能影响闭包捕获分析。
+- **`#[non_exhaustive]` enum matching**：现在读取 discriminant，可能影响闭包（Closures）捕获分析。
 - **`Eq::assert_receiver_is_total_eq`**：已废弃，手动实现会触发未来兼容性警告。
 
 ---

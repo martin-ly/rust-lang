@@ -1,7 +1,7 @@
 # 析构函数与 Drop Scope（Destructors）
 
 > **EN**: Destructors
-> **Summary**: Rust 析构函数规则：变量与临时值何时被 drop、drop scope 嵌套、临时生命周期延长、手动抑制析构。
+> **Summary**: Rust 析构函数规则：变量与临时值何时被 drop、drop scope 嵌套、临时生命周期（Lifetimes）延长、手动抑制析构。
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -18,6 +18,31 @@
 
 ---
 
+
+---
+
+## 认知路径
+
+> **认知路径**: 本节从 "析构函数与 Drop Scope（Destructors）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+
+1. **问题识别**: 为什么 析构函数与 Drop Scope（Destructors） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
+2. **概念建立**: 掌握 析构函数与 Drop Scope（Destructors） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
+3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与析构函数与 Drop Scope（Destructors）的适用边界。
+5. **迁移应用**: 将 析构函数与 Drop Scope（Destructors） 与前置/后置概念链接，形成跨层知识网络。
+
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "析构函数与 Drop Scope（Destructors） 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 析构函数与 Drop Scope（Destructors） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 析构函数与 Drop Scope（Destructors） 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 析构函数与 Drop Scope（Destructors） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 析构函数与 Drop Scope（Destructors） 具有语言特有的形态。
+
+
 ## 一、什么是析构函数
 
 当已初始化的变量或临时值离开作用域时，会运行其**析构函数（destructor）**，也称为被 **drop**。赋值也会运行左操作数的析构函数（如果已初始化）。部分初始化的变量只 drop 已初始化的字段。
@@ -30,11 +55,11 @@
 
 1. 若 `T: Drop`，调用 `<T as Drop>::drop`。
 2. 递归运行其所有字段的析构函数：
-   - 结构体字段按声明顺序 drop。
-   - 枚举活跃变体字段按声明顺序 drop。
+   - 结构体（Struct）字段按声明顺序 drop。
+   - 枚举（Enum）活跃变体字段按声明顺序 drop。
    - 元组按顺序 drop。
    - 数组或 owned slice 从第一个元素到最后一个元素 drop。
-   - 闭包按 move 捕获的变量 drop（顺序未指定）。
+   - 闭包（Closures）按 move 捕获的变量 drop（顺序未指定）。
    - trait object 运行底层类型的析构函数。
 
 如需手动运行析构函数，可使用 `core::ptr::drop_in_place`。
@@ -102,7 +127,7 @@ let declared_last = PrintOnDrop("outer last");
 
 ## 七、常量提升（Constant Promotion）
 
-当某个值表达式可以在常量上下文中写出并被借用，且该借用可以在原位置解引用而不改变运行时行为时，该表达式会被提升到 `'static` 槽位。被提升的表达式不能包含内部可变性或析构函数。
+当某个值表达式可以在常量上下文中写出并被借用（Borrowing），且该借用可以在原位置解引用（Reference）而不改变运行时行为时，该表达式会被提升到 `'static` 槽位。被提升的表达式不能包含内部可变性或析构函数。
 
 ---
 

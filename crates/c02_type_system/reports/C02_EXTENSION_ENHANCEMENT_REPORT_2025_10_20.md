@@ -71,6 +71,7 @@
    ┌────┼────┐
    基础  复合  高级
    ```
+
 2. **基础类型体系** - 完整的类型分类树
    - 标量类型（整数/浮点/布尔/字符）
    - 引用类型（&T / &mut T / 裸指针）
@@ -135,6 +136,7 @@ fn print_array<T: Display>(arr: impl IntoIterator<Item = T>) {
     }
 }
 ```
+
 **GAT (泛型关联类型)**:
 
 ```rust
@@ -143,6 +145,7 @@ trait LendingIterator {
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 }
 ```
+
 **RPITIT (返回位置 impl Trait)**:
 
 ```rust
@@ -150,6 +153,7 @@ trait Factory {
     fn create(&self) -> impl Display;  // Rust 1.75+
 }
 ```
+
 #### 2. 基础类型系统
 
 - **标量类型实战** - 整数/浮点/布尔/字符的全面使用
@@ -259,6 +263,7 @@ trait Factory {
 完整闭环:
 理论 ⇄ 实践 ⇄ 应用
 ```
+
 ---
 
 ## 📈 使用建议

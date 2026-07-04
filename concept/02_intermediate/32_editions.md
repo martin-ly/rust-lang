@@ -16,6 +16,31 @@
 
 ---
 
+
+---
+
+## 认知路径
+
+> **认知路径**: 本节从 "Rust Editions（语言版本）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+
+1. **问题识别**: 为什么 Rust Editions（语言版本） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
+2. **概念建立**: 掌握 Rust Editions（语言版本） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
+3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与Rust Editions（语言版本）的适用边界。
+5. **迁移应用**: 将 Rust Editions（语言版本） 与前置/后置概念链接，形成跨层知识网络。
+
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "Rust Editions（语言版本） 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 Rust Editions（语言版本） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Rust Editions（语言版本） 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 Rust Editions（语言版本） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rust Editions（语言版本） 具有语言特有的形态。
+
+
 ## 一、什么是 Edition
 
 **Edition** 是 Rust 语言在保持向后兼容的前提下引入非兼容性语法/语义变更的机制。每个 crate 可独立选择 edition，同一编译单元内可混用不同 edition 的依赖。
@@ -26,7 +51,7 @@
 |:---|:---:|:---|
 | 2015 | 1.0 | 初始版本 |
 | 2018 | 1.31 | module system 简化、`async`/await 语法准备、NLL、 dyn Trait 必须显式 |
-| 2021 | 1.56 | prelude 新增、`IntoIterator` for arrays、panic 宏一致性、reserving syntax |
+| 2021 | 1.56 | prelude 新增、`IntoIterator` for arrays、panic 宏（Macro）一致性（Coherence）、reserving syntax |
 | 2024 | 1.85+ | temp scope 收窄、unsafe extern blocks、gen blocks、match ergonomics 改进 |
 
 ## 三、选择 Edition

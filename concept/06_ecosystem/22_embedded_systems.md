@@ -43,7 +43,7 @@
   - [三、实时系统](#三实时系统)
     - [3.1 实时约束](#31-实时约束)
     - [3.2 RTIC 框架](#32-rtic-框架)
-    - [3.3 Embassy：嵌入式异步运行时](#33-embassy嵌入式异步运行时)
+    - [3.3 Embassy：嵌入式异步（Async）运行时（Runtime）](#33-embassy嵌入式异步运行时)
     - [3.4 embedded-hal-async：异步硬件抽象](#34-embedded-hal-async异步硬件抽象)
     - [3.5 Ariel OS：安全 IoT Library OS](#35-ariel-os安全-iot-library-os)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -798,7 +798,7 @@ unsafe extern "C" fn isr() {
 > 3) 使用 RTIC（Real-Time Interrupt-driven Concurrency）框架（编译期检查资源冲突）。
 >
 > Rust 的嵌入式生态（`cortex-m`、`embedded-hal`、`rtic`）将并发安全（Concurrency Safety）引入裸机编程。
-> 这与 C 的 `__disable_irq()`/`__enable_irq()`（手动开关中断，易遗漏）或 FreeRTOS 的互斥量（ heavier，需 OS 支持）不同——Rust 的类型系统可帮助管理临界区（如 RTIC 的任务优先级分析）。
+> 这与 C 的 `__disable_irq()`/`__enable_irq()`（手动开关中断，易遗漏）或 FreeRTOS 的互斥量（ heavier，需 OS 支持）不同——Rust 的类型系统（Type System）可帮助管理临界区（如 RTIC 的任务优先级分析）。
 > [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [RTIC Documentation](https://rtic.rs/)]
 
 ### 10.4 边界测试：`no_std` 中的 `panic` 处理与固件大小（编译错误/链接错误）

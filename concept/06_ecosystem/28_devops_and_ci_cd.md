@@ -367,7 +367,7 @@ COPY --from=builder /app/target/release/myapp /usr/local/bin/
 ENTRYPOINT ["myapp"]
 ```
 
-> **认知功能**: Docker 多阶段构建的**核心洞察**——Rust 的静态链接特性使其天然适合 distroless 镜像，最终产物可以小于 20MB 且无需任何运行时依赖。
+> **认知功能**: Docker 多阶段构建的**核心洞察**——Rust 的静态链接特性使其天然适合 distroless 镜像，最终产物可以小于 20MB 且无需任何运行时（Runtime）依赖。
 > [来源: [Google Distroless](https://github.com/GoogleContainerTools/distroless)]
 
 ---

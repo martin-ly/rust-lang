@@ -33,7 +33,7 @@
     - [补充文件索引](#补充文件索引)
   - [三、课程对齐路径](#三课程对齐路径)
   - [四、形式化层级定位（理论-模型-实践）](#四形式化层级定位理论-模型-实践)
-  - [五、本层定理一致性概览](#五本层定理一致性概览)
+  - [五、本层定理一致性（Coherence）概览](#五本层定理一致性概览)
   - [六、认知路径（从直觉到形式化）](#六认知路径从直觉到形式化)
   - [七、待创建内容](#七待创建内容)
   - [八、跨层出口](#八跨层出口)
@@ -173,7 +173,7 @@ Type System（理解"类型即证明"）
 | [10_numerics.md](10_numerics.md) | 数值类型与运算 | 整数、浮点、溢出、饱和运算、类型转换 | ✅ v1.0 | Type System | Zero Cost, Collections |
 | [19_value_vs_reference_semantics.md](19_value_vs_reference_semantics.md) | 值语义 vs 引用（Reference）语义 | C++/Java/Python/Rust 对比、Rust 所有权作为值语义极致 | ✅ v1.0 | Ownership, Variable Model | Rust vs C++ |
 | [20_variable_model.md](20_variable_model.md) | 变量模型（PL 通用） | 环境/存储、绑定语义、值语义 vs 引用（Reference）语义、lvalue/rvalue | ✅ v1.0 | Type System, Ownership | Evaluation Strategies |
-| [21_effects_and_purity.md](21_effects_and_purity.md) | 副作用与纯度 | 引用透明、效果系统、Rust const/unsafe/async 作为效果 | ✅ v1.0 | Ownership, Type System | Formal Methods |
+| [21_effects_and_purity.md](21_effects_and_purity.md) | 副作用与纯度 | 引用（Reference）透明、效果系统、Rust const/unsafe/async 作为效果 | ✅ v1.0 | Ownership, Type System | Formal Methods |
 | [22_data_abstraction_spectrum.md](22_data_abstraction_spectrum.md) | 数据抽象谱系 | C→C++→Java→Haskell→Rust 的抽象演进、Trait 统一性 | ✅ v1.0 | Type System, Trait | Comparative |
 | [23_move_semantics.md](23_move_semantics.md) | Move 语义 | C++ vs Rust 资源转移模型、Copy/Clone、RVO | ✅ v1.0 | Ownership, Variable Model | Rust vs C++ |
 
@@ -193,7 +193,7 @@ Type System（理解"类型即证明"）
 - [闭包（Closures）基础：捕获环境与匿名函数](15_closure_basics.md)
 - [测试基础：从单元测试到集成测试](16_testing_basics.md)
 - [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](17_collections_advanced.md)
-- [字符串与编码：Rust 的文本处理类型系统](18_strings_and_encoding.md)
+- [字符串与编码：Rust 的文本处理类型系统（Type System）](18_strings_and_encoding.md)
 - 测验：所有权（Ownership）、借用（Borrowing）与生命周期（Lifetimes）（嵌入式互动试点）
 - [测验：类型系统（嵌入式互动试点）](24_quiz_type_system.md)
 - [测验：错误处理（Error Handling）（嵌入式互动试点）](25_quiz_error_handling.md)
@@ -229,9 +229,9 @@ Type System（理解"类型即证明"）
 
 | 定理 | 前提 | 结论 | 依赖的 L4 公理 | 失效条件 | 典型错误码 |
 |:---|:---|:---|:---|:---|:---|
-| 所有权唯一性 | 每个值有唯一 owner | 无 double-free | 线性逻辑 ⊗ | `Rc` 循环、`mem::forget` | — |
+| 所有权（Ownership）唯一性 | 每个值有唯一 owner | 无 double-free | 线性逻辑 ⊗ | `Rc` 循环、`mem::forget` | — |
 | AXM (Alias-XOR-Mutation) | 借用（Borrowing）检查器接受 | 无数据竞争 | 分离逻辑 | `UnsafeCell`、裸指针 | E0502 |
-| 引用有效性 | 生命周期约束满足 | 无悬垂指针 | 区域类型 | `'static` 误用、循环引用 | E0597 |
+| 引用有效性 | 生命周期（Lifetimes）约束满足 | 无悬垂指针 | 区域类型 | `'static` 误用、循环引用 | E0597 |
 | Move 语义安全 | 非 Copy 类型赋值后 | 原变量不可访问 | 仿射逻辑 | 隐式 Copy（意外） | E0382 |
 
 > 完整定理一致性（Coherence）矩阵见各文件"定理推理链"章节。跨层映射见 [`../00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md)。
@@ -269,7 +269,7 @@ Type System（理解"类型即证明"）
 掌握 L1 后可进入：
 
 - **L2 进阶**: Trait（类型系统延伸）、泛型（Generics）（生命周期参数化）、内存管理（所有权进阶）、错误处理（Result 类型）
-- **L4 形式化**: 线性逻辑（所有权数学根基）、区域类型（生命周期形式化）、分离逻辑（借用形式化）
+- **L4 形式化**: 线性逻辑（所有权数学根基）、区域类型（生命周期形式化）、分离逻辑（借用（Borrowing）形式化）
 - **L5 对比**: Rust vs C++（所有权 vs 智能指针（Smart Pointer））
 
 ---

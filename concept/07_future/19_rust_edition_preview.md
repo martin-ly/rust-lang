@@ -29,7 +29,7 @@
 | `gen` 关键字保留 | `gen` 成为保留关键字，为未来的 `gen {}` 块做准备 | stable |
 | Async closures | `async |x| { ... }` 闭包语法 | stable |
 | Never type fallback | `!` 类型的默认回退调整为 `!` 本身 | stable |
-| Lifetime capture in RPIT | `impl Trait` 生命周期捕获规则更精确 | stable |
+| Lifetime capture in RPIT | `impl Trait` 生命周期（Lifetimes）捕获规则更精确 | stable |
 | `if let` 临时作用域收窄 | 临时值在 `if let` 条件中的生命周期缩短 | stable |
 
 > **注意**: `gen {}` 块和 `gen fn` 目前仍是 nightly-only 特性（`feature(gen_blocks)`），不在 2024 Edition stable 范围内。
@@ -63,4 +63,4 @@ cargo fix --edition
 
 ---
 
-> **Checklist**: 已提供 Rust 2024 Edition 核心特性预览 / 说明 Edition 机制 / 给出迁移命令 / 引用官方 Edition Guide 与 RFC。
+> **Checklist**: 已提供 Rust 2024 Edition 核心特性预览 / 说明 Edition 机制 / 给出迁移命令 / 引用（Reference）官方 Edition Guide 与 RFC。

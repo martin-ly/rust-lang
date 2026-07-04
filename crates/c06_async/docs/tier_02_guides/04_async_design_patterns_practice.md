@@ -110,6 +110,7 @@
     ├── 背压
     └── 速率限制
 ```
+
 ---
 
 ## 🎯 本章目标
@@ -179,6 +180,7 @@ async fn main() {
     println!("Count: {}", count);
 }
 ```
+
 ---
 
 ### 1.2 Reactor 模式
@@ -216,6 +218,7 @@ async fn main() -> std::io::Result<()> {
     }
 }
 ```
+
 ---
 
 ### 1.3 CSP (Communicating Sequential Processes)
@@ -247,6 +250,7 @@ async fn main() {
     );
 }
 ```
+
 ---
 
 ## 2. 结构化并发
@@ -277,6 +281,7 @@ async fn main() {
     }
 }
 ```
+
 ---
 
 ### 2.2 Select - 多路选择
@@ -304,6 +309,7 @@ async fn main() {
     }
 }
 ```
+
 ---
 
 ## 3. 生命周期管理
@@ -352,6 +358,7 @@ async fn main() {
     }
 }
 ```
+
 ---
 
 ### 3.2 任务取消
@@ -386,6 +393,7 @@ async fn main() {
     handle.await.unwrap();
 }
 ```
+
 ---
 
 ## 4. 错误处理模式
@@ -423,6 +431,7 @@ async fn main() {
     }
 }
 ```
+
 ---
 
 ### 4.2 重试模式
@@ -465,6 +474,7 @@ async fn main() {
     println!("Result: {:?}", result);
 }
 ```
+
 ---
 
 ## 5. 流量控制
@@ -505,6 +515,7 @@ async fn main() {
     );
 }
 ```
+
 ---
 
 ### 5.2 速率限制
@@ -526,6 +537,7 @@ async fn main() {
     rate_limited_task().await;
 }
 ```
+
 ---
 
 ## 6. 最佳实践
@@ -546,12 +558,14 @@ async fn main() {
 // 不推荐
 let counter = Arc::new(Mutex::new(0));
 ```
+
 ✅ **使用通道或 Actor**:
 
 ```rust
 // 推荐
 let (tx, rx) = mpsc::channel(100);
 ```
+
 ---
 
 ## 📚 延伸阅读

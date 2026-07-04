@@ -29,9 +29,9 @@
   - [一、核心概念](#一核心概念)
     - 1.1 内存管理：所有权（Ownership） vs GC
     - 1.2 类型系统（Type System）：静态显式 vs 静态推断
-    - [1.3 并发模型：所有权约束 vs JMM](#13-并发模型所有权约束-vs-jmm)
+    - [1.3 并发模型：所有权（Ownership）约束 vs JMM](#13-并发模型所有权约束-vs-jmm)
   - [二、技术细节](#二技术细节)
-    - [2.1 运行时架构对比](#21-运行时架构对比)
+    - [2.1 运行时（Runtime）架构对比](#21-运行时架构对比)
     - [2.2 异常处理哲学](#22-异常处理哲学)
     - 2.3 泛型（Generics）实现：单态化（Monomorphization） vs 擦除
   - [三、场景适用矩阵](#三场景适用矩阵)
@@ -43,7 +43,7 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 与 Java 的编译错误对比](#十边界测试rust-与-java-的编译错误对比)
-    - [10.1 边界测试：Java 的泛型擦除 vs Rust 的单态化（编译错误）](#101-边界测试java-的泛型擦除-vs-rust-的单态化编译错误)
+    - [10.1 边界测试：Java 的泛型（Generics）擦除 vs Rust 的单态化（Monomorphization）（编译错误）](#101-边界测试java-的泛型擦除-vs-rust-的单态化编译错误)
     - [10.2 边界测试：Java 的 null 与 Rust 的 `Option`（编译错误）](#102-边界测试java-的-null-与-rust-的-option编译错误)
     - [10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译错误）](#103-边界测试java-的泛型擦除与-rust-的单态化编译错误)
     - [10.4 边界测试：Java 的 GC 与 Rust 的所有权的资源管理差异（编译错误）](#104-边界测试java-的-gc-与-rust-的所有权的资源管理差异编译错误)
@@ -485,7 +485,7 @@ fn main() {
 }
 ```
 
-> **修正**: Java 的资源管理依赖**垃圾回收**（GC）：非内存资源（文件句柄、网络连接）通过 `try-finally` 或 `try-with-resources` 显式关闭，否则等待 GC 的**终结器**（finalizer，不确定时机）。Rust 的 `Drop` trait 提供**确定性析构**：资源在值离开作用域时立即释放，无 GC 延迟。但 Rust 的所有权移动改变析构时机：`let file2 = file;` 后，`file` 的所有权转移到 `file2`，`Drop` 在 `file2` 的作用域结束时调用。这与 C++ 的 RAII（同样确定性，但拷贝语义可能多次析构）或 Python 的 `with` 语句（确定性，但依赖开发者使用）不同——Rust 的所有权 + Drop 将资源管理与类型系统绑定，无需显式关闭（大部分情况），也无 GC 不确定性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Java Finalization](https://docs.oracle.com/javase/9/docs/api/java/lang/ref/Finalizer.html)]
+> **修正**: Java 的资源管理依赖**垃圾回收**（GC）：非内存资源（文件句柄、网络连接）通过 `try-finally` 或 `try-with-resources` 显式关闭，否则等待 GC 的**终结器**（finalizer，不确定时机）。Rust 的 `Drop` trait 提供**确定性析构**：资源在值离开作用域时立即释放，无 GC 延迟。但 Rust 的所有权移动改变析构时机：`let file2 = file;` 后，`file` 的所有权转移到 `file2`，`Drop` 在 `file2` 的作用域结束时调用。这与 C++ 的 RAII（同样确定性，但拷贝语义可能多次析构）或 Python 的 `with` 语句（确定性，但依赖开发者使用）不同——Rust 的所有权 + Drop 将资源管理与类型系统（Type System）绑定，无需显式关闭（大部分情况），也无 GC 不确定性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Java Finalization](https://docs.oracle.com/javase/9/docs/api/java/lang/ref/Finalizer.html)]
 
 ### 10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译后差异）
 
@@ -600,7 +600,7 @@ Rust async 是协作式调度、零成本抽象（Zero-Cost Abstraction），基
 
 > **过渡**: 掌握 Rust vs Java：系统编程与托管运行时的范式对比 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 Rust vs Java：系统编程与托管运行时的范式对比 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: Rust vs Java：系统编程与托管运行时的范式对比 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Rust vs Java：系统编程与托管运行时的范式对比 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

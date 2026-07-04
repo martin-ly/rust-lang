@@ -140,7 +140,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-`gen` 块提供了更灵活、更直观的迭代器定义方式，与适配器互补。复杂逻辑用 `gen` 块，简单转换用适配器链。
+`gen` 块提供了更灵活、更直观的迭代器（Iterator）定义方式，与适配器互补。复杂逻辑用 `gen` 块，简单转换用适配器链。
 </details>
 
 ---
@@ -191,7 +191,7 @@ fn main() {}
   - [二、技术细节](#二技术细节)
     - [2.1 生成器状态机](#21-生成器状态机)
     - [2.2 与 Stream 的协同](#22-与-stream-的协同)
-    - [2.3 与异步生成器的对比](#23-与异步生成器的对比)
+    - [2.3 与异步（Async）生成器的对比](#23-与异步生成器的对比)
   - [三、使用模式](#三使用模式)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -595,10 +595,10 @@ fn borrow_iter(data: &mut Vec<i32>) -> impl Iterator<Item = &i32> {
 
 > **修正**:
 > `gen` 块转换为状态机后，其 `next` 方法返回的引用（Reference）的生命周期（Lifetimes）与状态机本身绑定。
-> 若 `gen` 块借用了外部变量（如 `data: &mut Vec<i32>`），返回的引用（Reference）必须不超越 `data` 的生命周期。
+> 若 `gen` 块借用（Borrowing）了外部变量（如 `data: &mut Vec<i32>`），返回的引用（Reference）必须不超越 `data` 的生命周期（Lifetimes）。
 > 但 `impl Iterator<Item = &i32>` 的隐式生命周期参数无法捕获 `data` 的生命周期——迭代器的 `Item` 类型需要一个显式生命周期参数。
 > 正确写法：返回 `impl Iterator<Item = &'_ i32>` 或显式命名生命周期。这与手写 `Iterator` 实现的生命周期问题相同——`gen` 块的便利不消除生命周期约束，只是隐藏了状态机的复杂性。
-> 这与 Rust 的 async/await 类似：await 点保存的引用必须满足状态机的生命周期。
+> 这与 Rust 的 async/await 类似：await 点保存的引用（Reference）必须满足状态机的生命周期。
 > [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 

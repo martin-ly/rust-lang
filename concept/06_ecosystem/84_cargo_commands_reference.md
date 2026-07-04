@@ -30,7 +30,7 @@
 | 构建 | 编译、检查、文档 | `build`, `check`, `doc`, `run`, `test`, `bench` |
 | Manifest | 操作依赖与元数据 | `add`, `remove`, `update`, `tree`, `metadata` |
 | Package | 创建、安装、搜索 | `new`, `init`, `install`, `uninstall`, `search` |
-| 发布 | crates.io 生命周期 | `package`, `publish`, `yank`, `owner`, `login` |
+| 发布 | crates.io 生命周期（Lifetimes） | `package`, `publish`, `yank`, `owner`, `login` |
 | 报告 | 诊断与统计 | `report`, `report future-incompatibilities` |
 
 ## 二、高频构建命令

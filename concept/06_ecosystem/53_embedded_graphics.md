@@ -1,5 +1,4 @@
-> **受众**:
->
+> **受众**: [进阶]
 > [研究者]
 >
 # Rust 嵌入式图形开发
@@ -38,7 +37,7 @@
   - [八、常见陷阱](#八常见陷阱)
   - [九、来源与延伸阅读](#九来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
-  - [十、边界测试：嵌入式图形的编译错误与运行时风险](#十边界测试嵌入式图形的编译错误与运行时风险)
+  - [十、边界测试：嵌入式图形的编译错误与运行时（Runtime）风险](#十边界测试嵌入式图形的编译错误与运行时风险)
     - [10.1 边界测试：DMA 缓冲区未对齐到缓存行（运行时数据竞争）](#101-边界测试dma-缓冲区未对齐到缓存行运行时数据竞争)
     - [10.2 边界测试：绘制超出帧缓冲边界（内存损坏）](#102-边界测试绘制超出帧缓冲边界内存损坏)
     - [10.3 边界测试：中断上下文中阻塞 SPI 传输（实时性违例）](#103-边界测试中断上下文中阻塞-spi-传输实时性违例)
@@ -888,7 +887,7 @@ fn start_dma_transfer() {
 }
 ```
 
-> **修正**: ARM Cortex-M7 等核心带有数据缓存（D-Cache），DMA 直接访问物理 SRAM 而不经过缓存。**如果帧缓冲在 cacheable 区域，CPU 写入后必须显式 `clean_dcache` 或配置 MPU 将帧缓冲标记为 `non-cacheable`**。缓冲区首地址还应 32 字节对齐以匹配缓存行大小。这是嵌入式图形中最隐蔽的 bug 之一——代码逻辑完全正确，但显示结果随机错误。Rust 的 `cortex-m` crate 提供 `SCB::clean_dcache_by_address`。这与 Linux 的 `dma_alloc_coherent` 类似，但在裸机中需手动管理缓存一致性。[来源: [ARM Cortex-M7 TRM](https://developer.arm.com/documentation/100240/latest/)] · [来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/)] · [来源: [cortex-m Crate](https://docs.rs/cortex-m/latest/cortex_m/peripheral/struct.SCB.html)] · [来源: [STM32 HAL DMA](https://github.com/stm32-rs/stm32f4xx-hal)]
+> **修正**: ARM Cortex-M7 等核心带有数据缓存（D-Cache），DMA 直接访问物理 SRAM 而不经过缓存。**如果帧缓冲在 cacheable 区域，CPU 写入后必须显式 `clean_dcache` 或配置 MPU 将帧缓冲标记为 `non-cacheable`**。缓冲区首地址还应 32 字节对齐以匹配缓存行大小。这是嵌入式图形中最隐蔽的 bug 之一——代码逻辑完全正确，但显示结果随机错误。Rust 的 `cortex-m` crate 提供 `SCB::clean_dcache_by_address`。这与 Linux 的 `dma_alloc_coherent` 类似，但在裸机中需手动管理缓存一致性（Coherence）。[来源: [ARM Cortex-M7 TRM](https://developer.arm.com/documentation/100240/latest/)] · [来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/)] · [来源: [cortex-m Crate](https://docs.rs/cortex-m/latest/cortex_m/peripheral/struct.SCB.html)] · [来源: [STM32 HAL DMA](https://github.com/stm32-rs/stm32f4xx-hal)]
 
 ---
 

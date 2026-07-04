@@ -32,7 +32,7 @@
   - [精选文件索引（快速定位关键实现）](#精选文件索引快速定位关键实现)
   - [主要特性](#主要特性)
     - [0. Rust 1.93.0 Edition 2024 最新特性 ⭐ NEW](#0-rust-1930-edition-2024-最新特性--new)
-    - [1. 作用域线程 (Rust 1.96.1+ 特性)](#1-作用域线程-rust-1930-特性)
+    - [1. 作用域线程 (Rust 1.96.1+ 特性)](#1-作用域线程-rust-1961-特性)
     - [2. 工作窃取调度器](#2-工作窃取调度器)
     - [3. 无锁环形缓冲区](#3-无锁环形缓冲区)
     - [4. 自适应锁](#4-自适应锁)
@@ -160,16 +160,19 @@
 cargo build --release
 cargo test -p c05_threads
 ```
+
 - 运行示例：
 
 ```bash
 cargo run -p c05_threads --example basic
 ```
+
 - 运行基准（如有 benches）：
 
 ```bash
 cargo bench -p c05_threads
 ```
+
 ## 模块结构
 
 ### 1. 并发控制 (concurrency)
@@ -276,6 +279,7 @@ let allocator = rust_192_features::ThreadResourceAllocator::new(
 );
 let max_threads = allocator.max_threads();
 ```
+
 ### 1. 作用域线程 (Rust 1.96.1+ 特性)
 
 ```rust
@@ -298,6 +302,7 @@ thread::scope(|s| {
 // 所有线程在作用域结束前完成
 println!("处理后的数据: {:?}", data);
 ```
+
 ### 2. 工作窃取调度器
 
 ```rust
@@ -313,6 +318,7 @@ if let Some(task) = scheduler.steal_task(0) {
     println!("处理任务: {}", task);
 }
 ```
+
 ### 3. 无锁环形缓冲区
 
 ```rust
@@ -326,6 +332,7 @@ if let Some(value) = buffer.try_pop() {
     println!("接收到: {}", value);
 }
 ```
+
 ### 4. 自适应锁
 
 ```rust
@@ -339,6 +346,7 @@ lock.lock(|data| {
 let stats = lock.get_stats();
 println!("锁竞争率: {:.2}%", stats.get_contention_ratio() * 100.0);
 ```
+
 ### 5. 优先级通道
 
 ```rust
@@ -351,6 +359,7 @@ channel.send(3, "低优先级消息").unwrap();
 // 接收消息（按优先级顺序）
 let message = channel.recv();
 ```
+
 ## 性能优化
 
 ### 1. 内存布局优化
@@ -388,6 +397,7 @@ demo::run_performance_benchmarks();
 // 运行内存分析
 demo::run_memory_analysis();
 ```
+
 ### 运行 Rust 1.93.0 特性演示
 
 ```bash
@@ -406,6 +416,7 @@ cargo run -p c05_threads --example advanced_rust190_demo
 # 启用 tokio 特性运行异步演示
 cargo run -p c05_threads --example rust_190_features_demo --features tokio
 ```
+
 ### 运行特定模块演示
 
 ```rust
@@ -422,6 +433,7 @@ lockfree_ring_buffer::demonstrate_lockfree_ring_buffers();
 // 自适应锁演示
 adaptive_locks::demonstrate_adaptive_locks();
 ```
+
 ### 消息传递综合示例
 
 运行示例：
@@ -429,6 +441,7 @@ adaptive_locks::demonstrate_adaptive_locks();
 ```bash
 cargo run -p c05_threads --example message_passing_demo
 ```
+
 示例覆盖：标准库 channel、crossbeam mpsc、sync_channel、watch 与基于 `ReceiverStream` 的同步流。
 
 ### 限速 + 批量示例
@@ -438,6 +451,7 @@ cargo run -p c05_threads --example message_passing_demo
 ```bash
 cargo run -p c05_threads --example stream_rate_batch_demo
 ```
+
 示例覆盖：限速桥接、`next_batch_with_max_wait` 批处理消费。
 
 ### 优先级通道示例
@@ -447,6 +461,7 @@ cargo run -p c05_threads --example stream_rate_batch_demo
 ```bash
 cargo run -p c05_threads --example priority_channels_demo
 ```
+
 示例覆盖：简化与完整优先级通道的发送与接收顺序对比。
 
 ### Stream + 背压综合示例
@@ -456,6 +471,7 @@ cargo run -p c05_threads --example priority_channels_demo
 ```bash
 cargo run -p c05_threads --example stream_backpressure_demo
 ```
+
 示例覆盖：用丢弃型背压通道调节生产者速率，桥接为 `ReceiverStream` 并通过超时消费。
 
 ### 背压处理总览示例
@@ -465,6 +481,7 @@ cargo run -p c05_threads --example stream_backpressure_demo
 ```bash
 cargo run -p c05_threads --example backpressure_overview_demo
 ```
+
 示例覆盖：Blocking/Dropping/Adaptive/FlowControl 四种背压策略的基础行为对比。
 
 ## 基准测试与性能调优
@@ -481,6 +498,7 @@ cargo bench --bench rust_192_benchmarks
 # 运行并发基准测试
 cargo bench --bench concurrency_benchmark
 ```
+
 ### Rust 1.93.0 特性基准测试 ⭐ NEW
 
 新增的 `rust_192_benchmarks` 基准测试套件包括：
@@ -499,12 +517,14 @@ cargo bench --bench concurrency_benchmark
 ```bash
 RUSTFLAGS="-C target-cpu=native" cargo bench -p c05_threads
 ```
+
 在 Windows PowerShell 下：
 
 ```powershell
 $env:RUSTFLAGS = "-C target-cpu=native"
 cargo bench -p c05_threads
 ```
+
 - 构建优化：使用 `--release`，在 `Cargo.toml` 的 `[profile.release]` 中可考虑开启 `lto = true`、`codegen-units = 1`、`opt-level = "z"|"s"|3` 视场景调整。
 - 绑定亲和性：在多核/NUMA 机器上结合 `threads/thread_affinity.rs` 将计算线程绑定至本地节点，减少跨 NUMA 访存。
 - 伪共享规避：关键共享结构使用 `crossbeam_utils::CachePadded` 或等价手段做缓存行填充。
@@ -519,11 +539,13 @@ cargo bench -p c05_threads
 ```bash
 cargo test -p c05_threads
 ```
+
 运行 Rust 1.93.0 特性测试：
 
 ```bash
 cargo test --test rust_192_comprehensive_tests
 ```
+
 运行特定模块测试：
 
 ```bash
@@ -532,6 +554,7 @@ cargo test lockfree::lockfree_ring_buffer
 cargo test synchronization::adaptive_locks
 cargo test rust_192_features
 ```
+
 ## 平台与环境注意事项
 
 1. Windows 线程亲和性与优先级：请参考 `threads/os_thread_features.rs` 与 `threads/thread_affinity.rs`，部分策略在不同版本的 Windows 上权限/效果有所差异。

@@ -112,6 +112,7 @@
     ├── JSON
     └── 二进制
 ```
+
 ---
 
 ## 🎯 文档说明
@@ -328,6 +329,7 @@ async fn main() {}
 #[tokio::main(worker_threads = 4, max_blocking_threads = 16)]
 async fn main() {}
 ```
+
 ---
 
 ### 8.2 Channel 选择
@@ -352,6 +354,7 @@ let data = Arc::new(Mutex::new(Vec::new()));
 // ✅ 快 (20ms)
 let (tx, rx) = mpsc::channel(100);
 ```
+
 **陷阱 2: 阻塞运行时**:
 
 ```rust
@@ -361,6 +364,7 @@ std::thread::sleep(Duration::from_secs(1));
 // ✅ 异步等待
 tokio::time::sleep(Duration::from_secs(1)).await;
 ```
+
 ---
 
 ## 9. 测试工具
@@ -382,6 +386,7 @@ fn benchmark(c: &mut Criterion) {
 criterion_group!(benches, benchmark);
 criterion_main!(benches);
 ```
+
 ---
 
 ### 9.2 负载测试工具
@@ -397,6 +402,7 @@ criterion_main!(benches);
 ```bash
 wrk -t4 -c100 -d10s http://localhost:3000
 ```
+
 ---
 
 ## 10. 性能分析
@@ -411,6 +417,7 @@ perf report
 # flamegraph
 cargo flamegraph --bin myapp
 ```
+
 ---
 
 ### 10.2 内存分析
@@ -422,6 +429,7 @@ valgrind --leak-check=full ./target/release/myapp
 # heaptrack (Linux)
 heaptrack ./target/release/myapp
 ```
+
 ---
 
 ## 📚 延伸阅读

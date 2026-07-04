@@ -86,6 +86,7 @@ async fn fetch_data() -> String {
     // 异步操作
 }
 ```
+
 **相关术语**: [Await](#await-等待), [Future](#future-未来值), [Runtime](#runtime-运行时)
 
 ---
@@ -105,6 +106,7 @@ fn process() -> impl Future<Output = i32> {
     async { 42 }
 }
 ```
+
 **相关术语**: [Future](#future-未来值), [Await](#await-等待)
 
 ---
@@ -121,6 +123,7 @@ let future = async {
     result * 2
 };
 ```
+
 **相关术语**: [Future](#future-未来值)
 
 ---
@@ -137,6 +140,7 @@ async fn example() {
     println!("Result: {}", result);
 }
 ```
+
 **重要**: 只能在 `async` 函数/块中使用。
 
 **相关术语**: [Async](#async-异步), [Future](#future-未来值)
@@ -154,6 +158,7 @@ async fn bad_example() {
     std::thread::sleep(Duration::from_secs(1)); // ❌ 阻塞整个线程
 }
 ```
+
 **正确做法**:
 
 ```rust
@@ -161,6 +166,7 @@ async fn good_example() {
     tokio::time::sleep(Duration::from_secs(1)).await; // ✅ 只暂停当前任务
 }
 ```
+
 **相关术语**: [Non-Blocking](#non-blocking-非阻塞), [Runtime](#runtime-运行时)
 
 ---
@@ -176,6 +182,7 @@ let future = async_operation()
     .map(|x| x * 2)
     .and_then(|x| async move { Ok(x + 1) });
 ```
+
 **相关术语**: [Future](#future-未来值)
 
 ---
@@ -191,6 +198,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
     // cx.waker() 获取 Waker
 }
 ```
+
 **相关术语**: [Waker](#waker-唤醒器), [Poll](#poll-轮询)
 
 ---
@@ -227,6 +235,7 @@ Executor
       └── 轮询 Future::poll()
           └── 根据 Poll::Ready/Pending 决定下一步
 ```
+
 **相关术语**: [Runtime](#runtime-运行时), [Future](#future-未来值), [Poll](#poll-轮询)
 
 ---
@@ -243,6 +252,7 @@ pub trait Future {
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
 ```
+
 **关键点**:
 
 - **Output**: Future 完成后产生的值类型
@@ -257,6 +267,7 @@ async fn example() -> i32 {
 }
 // 返回 impl Future<Output = i32>
 ```
+
 **相关术语**: [Poll](#poll-轮询), [Pin](#pin-钉住), [Waker](#waker-唤醒器)
 
 ---
@@ -273,6 +284,7 @@ fn sync_fn() {
     // async_fn().await; // ❌ 不能在同步函数中使用 await
 }
 ```
+
 **影响**: 使用异步函数会强制调用者也变成异步。
 
 **相关术语**: [Async](#async-异步), [Await](#await-等待)
@@ -292,6 +304,7 @@ async fn example() {
     let (a, b) = join!(future1(), future2());
 }
 ```
+
 **对比 `.await` 链**: `.await` 是顺序执行，`join!` 是并发执行。
 
 **相关术语**: [Select](#select-选择), [Future](#future-未来值)
@@ -311,6 +324,7 @@ let future = async {
 // 只有调用 .await 才会执行：
 future.await;
 ```
+
 **相关术语**: [Future](#future-未来值)
 
 ---
@@ -328,6 +342,7 @@ async fn non_blocking_read() {
     let data = tokio::fs::read("file.txt").await; // 不阻塞线程
 }
 ```
+
 **相关术语**: [Blocking](#blocking-阻塞), [Async](#async-异步)
 
 ---
@@ -342,6 +357,7 @@ async fn non_blocking_read() {
 async fn get_number() -> i32 { 42 }
 // Future::Output = i32
 ```
+
 **相关术语**: [Future](#future-未来值)
 
 ---
@@ -362,6 +378,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
     }
 }
 ```
+
 **相关术语**: [Poll](#poll-轮询), [Ready](#ready-就绪)
 
 ---
@@ -377,6 +394,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 ```rust
 fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>
 ```
+
 **关键规则**:
 
 - **Pin<&mut T>**: T 在 Pin 之后不能移动
@@ -401,6 +419,7 @@ pub enum Poll<T> {
     Pending,     // Future 未完成
 }
 ```
+
 **工作流程**:
 
 ```text
@@ -408,6 +427,7 @@ Executor 调用 poll()
   ├── 返回 Poll::Ready(value) → Future 完成
   └── 返回 Poll::Pending → 等待 Waker 唤醒后再次 poll
 ```
+
 **相关术语**: [Future](#future-未来值), [Pending](#pending-待定), [Ready](#ready-就绪)
 
 ---
@@ -423,6 +443,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
     Poll::Ready(42) // Future 完成，返回 42
 }
 ```
+
 **相关术语**: [Poll](#poll-轮询), [Pending](#pending-待定)
 
 ---
@@ -446,6 +467,7 @@ async fn main() {
     println!("Hello, async world!");
 }
 ```
+
 **相关术语**: [Executor](#executor-执行器), [Task](#task-任务)
 
 ---
@@ -468,6 +490,7 @@ async fn example() {
     }
 }
 ```
+
 **对比 `join!`**: `select!` 是"任意一个完成"，`join!` 是"全部完成"。
 
 **相关术语**: [Join](#join-联结), [Future](#future-未来值)
@@ -486,6 +509,7 @@ async fn must_be_send() -> i32 {
     42
 }
 ```
+
 **常见问题**: `Rc<T>` 不是 `Send`，在异步代码中应使用 `Arc<T>`。
 
 **相关术语**: [Sync](#sync-可同步), [Task](#task-任务)
@@ -507,6 +531,7 @@ pub trait Sink<Item> {
     fn poll_close(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>>;
 }
 ```
+
 **示例**:
 
 ```rust
@@ -516,6 +541,7 @@ async fn send_data(mut sink: impl Sink<String>) {
     sink.send("Hello".to_string()).await.unwrap();
 }
 ```
+
 **相关术语**: [Stream](#stream-流), [Future](#future-未来值)
 
 ---
@@ -531,6 +557,7 @@ tokio::spawn(async {
     println!("Running in background");
 });
 ```
+
 **关键点**:
 
 - `spawn` 返回一个 `JoinHandle<T>`
@@ -552,6 +579,7 @@ pub trait Stream {
     fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>>;
 }
 ```
+
 **示例**:
 
 ```rust
@@ -563,6 +591,7 @@ async fn process_stream(mut stream: impl Stream<Item = i32>) {
     }
 }
 ```
+
 **相关术语**: [Sink](#sink-接收器), [Future](#future-未来值)
 
 ---
@@ -583,6 +612,7 @@ async fn example() {
     });
 }
 ```
+
 **相关术语**: [Send](#send-可发送), [Task](#task-任务)
 
 ---
@@ -605,6 +635,7 @@ let task = tokio::spawn(async {
 });
 task.await.unwrap(); // 等待任务完成
 ```
+
 **相关术语**: [Spawn](#spawn-生成), [Runtime](#runtime-运行时)
 
 ---
@@ -628,6 +659,7 @@ async fn main() {
     println!("Hello, Tokio!");
 }
 ```
+
 **相关术语**: [Runtime](#runtime-运行时), [Executor](#executor-执行器)
 
 ---
@@ -650,6 +682,7 @@ let x = Box::new(42); // Box<i32>: Unpin
 // async 块产生的 Future 是 !Unpin
 let fut = async { 42 }; // impl Future + !Unpin
 ```
+
 **相关术语**: [Pin](#pin-钉住), [Future](#future-未来值)
 
 ---
@@ -668,6 +701,7 @@ let fut = async { 42 }; // impl Future + !Unpin
 3. Executor 收到通知
    └── 再次 poll 该 Future
 ```
+
 **示例**:
 
 ```rust
@@ -681,6 +715,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
     }
 }
 ```
+
 **相关术语**: [Context](#context-上下文), [Poll](#poll-轮询), [Executor](#executor-执行器)
 
 ---
@@ -703,6 +738,7 @@ async fn example() -> i32 {
 }
 // 编译后接近手写状态机的性能
 ```
+
 **相关术语**: [Future](#future-未来值), [Async](#async-异步)
 
 ---

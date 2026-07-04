@@ -25,6 +25,7 @@ cat /proc/sys/kernel/io_uring_disabled  # 应该为 0 或 不存在
 # 安装依赖 (Debian/Ubuntu)
 sudo apt-get install liburing-dev
 ```
+
 ## 📦 安装
 
 在 `Cargo.toml` 中添加:
@@ -34,12 +35,14 @@ sudo apt-get install liburing-dev
 glommio = "0.9.0"
 futures = "0.3"
 ```
+
 **重要**: Glommio 仅支持 Linux，建议使用条件依赖:
 
 ```toml
 [target.'cfg(target_os = "linux")'.dependencies]
 glommio = "0.9.0"
 ```
+
 ## 💻 Hello World
 
 ```rust
@@ -62,6 +65,7 @@ fn main() {
     });
 }
 ```
+
 运行:
 
 ```bash
@@ -71,6 +75,7 @@ cargo run
 # ✅ Task running
 # 📊 Result: 42
 ```
+
 ## 🔄 并发任务
 
 ```rust
@@ -93,6 +98,7 @@ fn main() {
     });
 }
 ```
+
 ## 🎯 CPU 绑定
 
 Glommio 的核心优势: 将任务绑定到特定 CPU 核心。
@@ -114,6 +120,7 @@ fn main() {
     handle.join().unwrap();
 }
 ```
+
 ## 💾 高性能文件 I/O
 
 使用 DMA (Direct Memory Access) 实现零拷贝 I/O:
@@ -140,6 +147,7 @@ fn main() {
     });
 }
 ```
+
 ## 🌐 网络服务器
 
 ```rust
@@ -165,6 +173,7 @@ fn main() {
     });
 }
 ```
+
 ## 🔀 多核并行
 
 充分利用多核心:
@@ -195,6 +204,7 @@ fn main() {
     }
 }
 ```
+
 ## 📚 运行示例
 
 本项目提供了完整的示例:
@@ -206,6 +216,7 @@ cargo run --example glommio_comprehensive_2025
 # 运行性能基准测试
 cargo bench --bench glommio_benchmarks
 ```
+
 ## ⚠️ 常见问题
 
 ### Q: 为什么我的程序无法编译?

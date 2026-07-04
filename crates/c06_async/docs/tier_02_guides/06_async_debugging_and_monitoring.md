@@ -102,6 +102,7 @@
     ├── Prometheus
     └── 分布式追踪
 ```
+
 ---
 
 ## 🎯 本章目标
@@ -128,6 +129,7 @@
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 ```
+
 **初始化**:
 
 ```rust
@@ -142,6 +144,7 @@ fn main() {
     info!("Application started");
 }
 ```
+
 ---
 
 ### 1.2 Span 和 Event
@@ -167,12 +170,14 @@ async fn main() {
     info!("Got user: {}", user);
 }
 ```
+
 **输出**:
 
 ```text
 2025-10-22T10:00:00Z  INFO user_request{request_id=123}: Fetching user data
 2025-10-22T10:00:00Z  INFO user_request{request_id=123}: Got user: User 42
 ```
+
 ---
 
 ### 1.3 过滤和采样
@@ -188,12 +193,14 @@ fn main() {
         .init();
 }
 ```
+
 **环境变量控制**:
 
 ```bash
 RUST_LOG=debug cargo run
 RUST_LOG=my_app=trace,tokio=debug cargo run
 ```
+
 ---
 
 ## 2. tokio-console 实时监控
@@ -205,6 +212,7 @@ RUST_LOG=my_app=trace,tokio=debug cargo run
 ```bash
 cargo install tokio-console
 ```
+
 **配置项目** (`Cargo.toml`):
 
 ```toml
@@ -212,6 +220,7 @@ cargo install tokio-console
 tokio = { version = "1", features = ["full", "tracing"] }
 console-subscriber = "0.2"
 ```
+
 **初始化**:
 
 ```rust
@@ -227,6 +236,7 @@ fn main() {
         });
 }
 ```
+
 ---
 
 ### 2.2 使用 tokio-console
@@ -236,11 +246,13 @@ fn main() {
 ```bash
 cargo run
 ```
+
 **启动监控** (另一个终端):
 
 ```bash
 tokio-console
 ```
+
 **监控内容**:
 
 - ✅ 所有活跃任务
@@ -283,6 +295,7 @@ async fn main() {
     future.await;
 }
 ```
+
 ---
 
 ### 3.2 使用 `dbg!` 宏
@@ -298,6 +311,7 @@ async fn example() -> i32 {
     result
 }
 ```
+
 ---
 
 ### 3.3 IDE 调试器
@@ -325,6 +339,7 @@ async fn example() -> i32 {
   ]
 }
 ```
+
 ---
 
 ### 3.4 超时调试
@@ -340,6 +355,7 @@ async fn main() {
     }
 }
 ```
+
 ---
 
 ## 4. 常见问题诊断
@@ -365,6 +381,7 @@ async fn diagnose() {
     // 如果卡在这里，Step 3 不会打印
 }
 ```
+
 **常见原因**:
 
 - ❌ 忘记 `.await`
@@ -397,6 +414,7 @@ async fn good() {
     }).await.unwrap();
 }
 ```
+
 ---
 
 ### 4.3 内存泄漏
@@ -410,6 +428,7 @@ valgrind --leak-check=full ./target/release/my_app
 # Instruments (macOS)
 instruments -t Leaks ./target/release/my_app
 ```
+
 **常见原因**:
 
 - ❌ 循环引用 (`Arc` 循环)
@@ -428,6 +447,7 @@ instruments -t Leaks ./target/release/my_app
 [dependencies]
 prometheus = "0.13"
 ```
+
 **导出指标**:
 
 ```rust
@@ -446,6 +466,7 @@ async fn metrics_handler() -> String {
     String::from_utf8(buffer).unwrap()
 }
 ```
+
 ---
 
 ### 5.2 健康检查
@@ -472,6 +493,7 @@ fn app() -> Router {
         .route("/ready", get(readiness_check))
 }
 ```
+
 ---
 
 ### 5.3 分布式追踪
@@ -484,6 +506,7 @@ opentelemetry = "0.20"
 opentelemetry-jaeger = "0.19"
 tracing-opentelemetry = "0.21"
 ```
+
 ```rust
 use opentelemetry::global;
 use tracing_subscriber::layer::SubscriberExt;
@@ -500,6 +523,7 @@ fn init_tracer() {
     tracing::subscriber::set_global_default(subscriber).unwrap();
 }
 ```
+
 ---
 
 ## 6. 最佳实践
@@ -552,6 +576,7 @@ fn init_tracer() {
    └─> 分布式追踪
        └─> 定位慢服务 → 优化
 ```
+
 ---
 
 ## 📚 延伸阅读

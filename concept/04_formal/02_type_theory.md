@@ -135,7 +135,7 @@ Rust 扩展:
 Rust 扩展: 在 [Var] 和 [App] 之间插入所有权检查
 ```
 
-**类型系统层次类图（Mermaid classDiagram）**: [来源: [Iris Project](https://iris-project.org/)]
+**类型系统（Type System）层次类图（Mermaid classDiagram）**: [来源: [Iris Project](https://iris-project.org/)]
 
 ```mermaid
 classDiagram
@@ -234,13 +234,13 @@ Preservation: 若 ⊢ e : τ 且 e → e'，则 ⊢ e' : τ                    [
 |:---|:---|:---|:---|:---|:---|
 | **L1**: 简单类型 λ 演算 | λ→ 良类型性 ⟹ **类型保持（Subject Reduction）** | 项在 Γ 下良类型，β-归约一步 | 归约后项仍保持原类型 | T1（类型安全性）; L2（System F 扩展基础） | 引入非终止（`loop {}`）或运行时（Runtime） panic（`unwrap()` 空值） |
 | **L2**: System F 参数多态 | L1 + ∀α.τ ⟹ **Rust 泛型（Generics）理论基础** | 类型变量无约束，替换保持良类型 | 零成本单态化（Monomorphization）实例化，Parametricity 成立 | T3（约束可满足性）; C2（高阶类型） | 存在类型（`dyn Trait`）引入运行时（Runtime）开销；GATs 高阶约束不可推断 |
-| **T1**: 类型安全性 | L1 + L2 ⟹ **进展性 + 保持性** | 程序通过类型检查，无 `unsafe` | 运行时无类型错误、无 UB | C1（递归类型安全性）; 所有 Rust Safe 代码 | `unsafe` 块；FFI；`std::mem::transmute`；非终止/资源耗尽 |
+| **T1**: 类型安全性 | L1 + L2 ⟹ **进展性 + 保持性** | 程序通过类型检查，无 `unsafe` | 运行时（Runtime）无类型错误、无 UB | C1（递归类型安全性）; 所有 Rust Safe 代码 | `unsafe` 块；FFI；`std::mem::transmute`；非终止/资源耗尽 |
 | **T2**: 子类型传递性 | 偏序关系 ⟹ **trait bound 层次关系** | `'long <: 'short`，协变/逆变/不变定义清晰 | 生命周期替换安全，协变容器替换合法 | 生命周期替换、协变检查 | 逆变误用（`&mut T` 协变假设）; 循环子类型（`'a: 'b` 且 `'b: 'a` 非传递） |
-| **T3**: 约束可满足性 | L2 + Trait Bound ⟹ **类型推导可判定** | `where` 子句为 Horn 子句形式，约束图无环 | 类型推导终止，主类型存在 | 所有带 Trait Bound 的泛型代码 | GATs 无界递归导致不终止；重叠 impl（E0119）; HRTB 过度约束 |
+| **T3**: 约束可满足性 | L2 + Trait Bound ⟹ **类型推导可判定** | `where` 子句为 Horn 子句形式，约束图无环 | 类型推导终止，主类型存在 | 所有带 Trait Bound 的泛型（Generics）代码 | GATs 无界递归导致不终止；重叠 impl（E0119）; HRTB 过度约束 |
 | **C1**: 递归类型 | μX.A(X) ⟹ **Rust enum 自引用（Reference）** | 递归锚点（`Box<T>` 指针间接），类型方程有最小不动点 | 链表/树等递归结构类型安全，大小有限 | T1（作为类型安全子情况） | 无 `Box`/`Rc` 间接层 → 无限大小（E0072）; 循环引用导致内存泄漏 |
 | **C2**: 高阶类型 | System Fω ⟹ **关联类型/高阶 Trait bound** | 类型构造子可抽象（`Vec` 作为参数），GATs 参数合法 | `Iterator<Item=T>` 归一化唯一，`for<'a>` 全称约束可解 | HKT 模拟；GATs 使用 | 关联类型重叠定义（coherence 破坏，E0119）; 归一化无限递归（E0275） |
-| **L3**: 线性/仿射类型 | 资源敏感 ⟹ **Rust 所有权系统** | 每个值有唯一所有者，借用（Borrowing）不重叠 | 无悬垂引用（Reference），无 use-after-free，无数据竞争 | T1（内存安全（Memory Safety）层面） | `unsafe` 绕过；`Rc`/`Arc` 打破唯一性；自引用结构（pinning 前） |
-| **T4**: 子类型 + Variance | T2 + 构造器 Variance ⟹ **容器替换安全** | `&'a T` 对 `'a` 协变，`fn(T)` 对 T 逆变 | 子类型关系通过容器正确传播 | 所有含引用的泛型容器 | `Cell<T>` 协变假设（实际不变）; `*mut T` 协变误用（实际不变） |
+| **L3**: 线性/仿射类型 | 资源敏感 ⟹ **Rust 所有权（Ownership）系统** | 每个值有唯一所有者，借用（Borrowing）不重叠 | 无悬垂引用（Reference），无 use-after-free，无数据竞争 | T1（内存安全（Memory Safety）层面） | `unsafe` 绕过；`Rc`/`Arc` 打破唯一性；自引用结构（pinning 前） |
+| **T4**: 子类型 + Variance | T2 + 构造器 Variance ⟹ **容器替换安全** | `&'a T` 对 `'a` 协变，`fn(T)` 对 T 逆变 | 子类型关系通过容器正确传播 | 所有含引用（Reference）的泛型容器 | `Cell<T>` 协变假设（实际不变）; `*mut T` 协变误用（实际不变） |
 | **C3**: 存在类型 | `impl Trait` / `dyn Trait` ⟹ **抽象与分发** | 返回位置单一具体类型，或 Trait 对象安全 | 隐藏实现细节，保持静态/动态分发能力 | API 设计；版本兼容性 | 多分支返回不同类型（E0746，除非 `dyn Trait`）; 非对象安全 Trait（E0038） |
 | **T5**: HM 推断完备性 | L1 + 合一算法 ⟹ **Rust 局部推断** | 约束为 Hindley-Milner 片段，无显式高阶多态 | 主类型（Principal Type）存在且可自动推导 | 所有无歧义的局部变量声明 | 数值字面量多义（E0283）; `collect()` 多解（E0282）; HRTB/存在类型需标注 |
 
@@ -249,7 +249,7 @@ Preservation: 若 ⊢ e : τ 且 e → e'，则 ⊢ e' : τ                    [
 > **链 A（类型安全链）**: L1 (λ→ 类型保持) ⟹ L2 (System F 参数多态) ⟹ T1 (进展+保持=类型安全) ⟹ C1 (递归类型安全) / L3 (所有权安全)
 > **链 B（子类型链）**: T2 (子类型传递性) ⟹ T4 (Variance 传播) ⟹ Rust 生命周期替换与容器协变检查
 > **链 C（推断链）**: T5 (HM 推断完备性) ⟹ T3 (约束可满足性) ⟹ C2 (高阶类型归一化) / C3 (存在类型抽象)
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §3.1 "L1-L4 形式化映射" · §4.2 "类型系统一致性"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §3.1 "L1-L4 形式化映射" · §4.2 "类型系统一致性（Coherence）"
 
 ---
 
@@ -592,7 +592,7 @@ enum List<T> {
 | Rust 语法 | 逻辑形式 | 类型论对应 | 限制 |
 |:---|:---|:---|:---|
 | `for<'a> T: Trait<'a>` | `∀'a. Trait(T, 'a)` | System F 的 `∀α.τ`（α 限定为生命周期）| 仅量化生命周期，不量化类型 |
-| `fn foo<'a>(x: &'a T)` | `λ'a.λx:&'a T. ...` | HM 推断 + 区域参数 | 生命周期参数不参与类型推断的多解歧义 |
+| `fn foo<'a>(x: &'a T)` | `λ'a.λx:&'a T. ...` | HM 推断 + 区域参数 | 生命周期参数不参与类型推断（Type Inference）的多解歧义 |
 | `dyn for<'a> Fn(&'a T)` | `∃f. ∀'a. f: Fn(&'a T)` | 存在类型 + 全称量化 | 对象安全限制：不能出现在返回位置 |
 
 **与 System F 的精确关系**
@@ -649,7 +649,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 
 > **过渡: L4 → L2**
 > System F 的 `Λα.λx:α. x` 在 Rust 中写作 `fn identity<T>(x: T) -> T { x }`，但 System F 无法表达生命周期——后者需要 **System F_ω + 区域类型** 的扩展。HRTB 的 `for<'a>` 是全称量词 `∀` 在类型约束中的具体实现，而 GATs 则用类型族（type family）模拟了 Haskell 中缺失的 HKT。
-> Rust 的具体实现见 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)（泛型与单态化）与 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)（Trait 作为 Type Class 的变体）。
+> Rust 的具体实现见 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)（泛型与单态化（Monomorphization））与 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)（Trait 作为 Type Class 的变体）。
 
 ## 十一、相关概念链接
 
@@ -1061,7 +1061,7 @@ impl Iterable for Vec<i32> {
 > 但 GAT 的**高阶类型**（higher-kinded type）表达能力有限：不能将 `Iterable::Iter` 作为高阶类型参数传递（如 `fn process<I: Iterable, F: for<'a> Fn(I::Iter<'a>)>`）。
 > 这是 Rust 类型系统的已知限制——HKT 在 Haskell 中是原生支持（`Functor f => f a`），在 Rust 中只能通过 GAT 近似。
 > 未来可能的扩展：`type_family` 或 `higher-ranked type constructors`，但设计复杂。
-> 当前 workaround：使用宏生成单态代码，或使用 trait 的关联类型链模拟 HKT。
+> 当前 workaround：使用宏（Macro）生成单态代码，或使用 trait 的关联类型链模拟 HKT。
 > 这与 C++ 的模板模板参数（`template<template<typename> class F>`，类似 HKT）或 Scala 的 higher-kinded types（通过类型构造器实现）不同——Rust 的 GAT 是向 HKT 迈出的半步，但尚未完全到达。
 > [来源: [Rust RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)] ·
 
@@ -1358,7 +1358,7 @@ fn borrow<'a>(x: &'a i32) -> &'a i32 { x }
 |:---|:---|:---|
 | 声明位置 | `<T>` | `<'a>` |
 | 约束方式 | `T: Trait` | `'a: 'b`（outlives）|
-| 擦除时机 | 编译期（单态化）| 编译期（借用检查后）|
+| 擦除时机 | 编译期（单态化）| 编译期（借用（Borrowing）检查后）|
 | 运行时开销 | 零 | 零 |
 | 推断 | 通常显式标注或部分推断 | 通常自动推断（lifetime elision）|
 

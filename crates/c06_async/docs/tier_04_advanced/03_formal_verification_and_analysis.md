@@ -62,6 +62,7 @@ let b = tokio::spawn(async move {
     assert_eq!(val, 42);
 });
 ```
+
 ---
 
 ### 1.2 顺序一致性
@@ -82,6 +83,7 @@ if FLAG.load(Ordering::Acquire) {
     // 保证能看到 DATA 的更新
 }
 ```
+
 ---
 
 ## 2. 死锁检测
@@ -101,6 +103,7 @@ impl ResourceGraph {
     }
 }
 ```
+
 ---
 
 ### 2.2 锁顺序
@@ -121,6 +124,7 @@ async fn transfer(from: &Mutex<Account>, to: &Mutex<Account>, amount: u64) {
     second_lock.balance += amount;
 }
 ```
+
 ---
 
 ## 3. Liveness 属性
@@ -142,6 +146,7 @@ impl FairScheduler {
     }
 }
 ```
+
 ---
 
 ### 3.2 最终一致性
@@ -162,6 +167,7 @@ impl ReplicatedState {
     }
 }
 ```
+
 ---
 
 ## 4. 模型检查
@@ -192,6 +198,7 @@ fn check_counter() {
     // Model checking
 }
 ```
+
 ---
 
 ## 5. Tokio Console 集成
@@ -205,6 +212,7 @@ RUSTFLAGS="--cfg tokio_unstable" cargo run
 # 另一个终端启动 console
 tokio-console
 ```
+
 **检查项**:
 
 - 任务执行时间
@@ -222,6 +230,7 @@ tokio-console
 # 运行 Miri
 cargo +nightly miri test
 ```
+
 **检测内容**:
 
 - 内存安全
@@ -264,6 +273,7 @@ fn test_concurrent_increment() {
     });
 }
 ```
+
 ---
 
 ## 8. 类型级验证
@@ -299,6 +309,7 @@ impl File<Opened> {
 // let f = File::<Closed>::new();
 // f.read(); // ❌ 编译错误
 ```
+
 ---
 
 ## 9. 线性类型
@@ -321,6 +332,7 @@ impl LinearResource {
 impl !Clone for LinearResource {}
 impl !Copy for LinearResource {}
 ```
+
 ---
 
 ## 📚 延伸阅读

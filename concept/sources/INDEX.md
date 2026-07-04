@@ -31,7 +31,7 @@
 
 ## 一级来源：官方规范与设计文档
 
-| 标识符 | 全称 | 根 URL | 更新频率 | 建议引用格式 |
+| 标识符 | 全称 | 根 URL | 更新频率 | 建议引用（Reference）格式 |
 | :--- | :--- | :--- | :--- | :--- |
 | `REF` | Rust Reference | <https://doc.rust-lang.org/reference/> | 与 stable 同步 | `[来源: REF — §章节]` |
 | `TRPL` | The Rust Programming Language | <https://doc.rust-lang.org/book/title-page.html> | 每 Edition 更新 | `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)` |

@@ -32,7 +32,7 @@
     - [1.2 自动解引用（Reference）机制](#12-自动解引用机制)
     - [1.3 Deref 强制](#13-deref-强制)
   - [二、技术细节](#二技术细节)
-    - [2.1 方法调用的自动引用](#21-方法调用的自动引用)
+    - [2.1 方法调用的自动引用（Reference）](#21-方法调用的自动引用)
     - [2.2 类型强制规则](#22-类型强制规则)
     - 2.3 与借用（Borrowing）检查的交互
   - [三、使用模式](#三使用模式)
@@ -62,7 +62,7 @@
       - 7.5.2 生命周期（Lifetimes）行为
     - [7.6 代码示例集](#76-代码示例集)
       - 7.6.1 嵌套引用的构造与模式匹配（Pattern Matching）
-      - 7.6.2 结构体（Struct）字段的部分重借用
+      - 7.6.2 结构体（Struct）字段的部分重借用（Borrowing）
       - [7.6.3 `split_mut` 创建不相交可变引用（Mutable Reference）](#763-split_mut-创建不相交可变引用)
       - 7.6.4 迭代器（Iterator）可变链
     - [7.7 边界分析](#77-边界分析)
@@ -294,7 +294,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Deref 强制与借用检查器的**协作关系**——Deref 强制发生在借用检查之后，因此不会绕过安全保证。
-> **关键洞察**: Deref 返回的引用**仍然受借用检查器约束**。`DerefMut::deref_mut` 返回的 `&mut self.0` 遵守所有可变引用的规则。
+> **关键洞察**: Deref 返回的引用**仍然受借用检查器约束**。`DerefMut::deref_mut` 返回的 `&mut self.0` 遵守所有可变引用（Mutable Reference）的规则。
 > [来源: [Rust Reference — Borrow Checker](https://doc.rust-lang.org/reference/statements-and-expressions.html)]
 
 ---
@@ -493,7 +493,7 @@ let r3 = &r2;      // r3: &&&i32
 assert_eq!(***r3, 42);
 ```
 
-类型推断（Type Inference）行为：当写 `let r = &&&5;` 时，Rust 编译器推断的类型是 `&&&i32`，其中每一级引用都获得独立的匿名生命周期。
+类型推断（Type Inference）行为：当写 `let r = &&&5;` 时，Rust 编译器推断的类型是 `&&&i32`，其中每一级引用都获得独立的匿名生命周期（Lifetimes）。
 
 ```rust
 let r = &&&5;
@@ -962,7 +962,7 @@ let r3 = r2;        // r3: &&mut i32（复制共享引用是允许的）
 
 **命题 C**: "部分重借用适用于所有复合类型"
 
-- ⚠️ **大部分成立，但有例外**: 结构体字段、元组元素、数组元素都支持部分重借用。但以下类型存在限制：
+- ⚠️ **大部分成立，但有例外**: 结构体（Struct）字段、元组元素、数组元素都支持部分重借用。但以下类型存在限制：
   - **闭包（Closures）**: 无法部分重借用捕获的环境变量
   - **Trait 对象（Trait Objects）**: `&mut dyn Trait` 无法按字段拆分，因为具体字段布局被擦除
   - **联合体（Unions）**: 由于字段可能重叠，部分重借用不安全
@@ -1158,7 +1158,7 @@ let s: &mut &Secret = &mut &Secret(String::from("x"));
 
 > **分析**: 这一边界是 Rust 类型系统（Type System）安全性的核心支柱之一——多级引用提供了表达复杂内存关系的灵活性（结构规则），但名义类型确保了语义契约在任何引用层级都不会被意外破坏（名义规则）。
 > [来源: [Rust Reference: Types] · [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rust Reference: Type Coercions](https://doc.rust-lang.org/reference/)]（一级来源）
-> **与类型系统的关联**: 详见 [`04_type_system.md`](04_type_system.md) 对名义类型与结构类型的完整分析——其中第 11.7 节专门论证了引用构造的结构本质与目标类型名义约束的交互关系。
+> **与类型系统（Type System）的关联**: 详见 [`04_type_system.md`](04_type_system.md) 对名义类型与结构类型的完整分析——其中第 11.7 节专门论证了引用构造的结构本质与目标类型名义约束的交互关系。
 
 ---
 
@@ -1297,7 +1297,7 @@ fn main() {
 ```
 
 > **修正**: `RefCell` 提供**内部可变性**（interior mutability）：通过 `&RefCell<T>`（共享引用）获取 `&mut T`（可变引用）。
-> 这是运行时借用检查：`borrow()` 增加共享计数，`borrow_mut()` 检查共享计数为 0，否则 panic。
+> 这是运行时（Runtime）借用检查：`borrow()` 增加共享计数，`borrow_mut()` 检查共享计数为 0，否则 panic。
 > 编译器无法静态验证 `RefCell` 的借用规则，因为 `RefCell` 的内部状态是动态的。
 > 这与编译期借用检查（`&mut T` 不能从 `&T` 获取）形成对比：内部可变性是"信任的逃脱 hatch"——编译器信任开发者通过运行时检查保证安全。
 > 代价：运行时开销（引用计数）和可能的 panic。

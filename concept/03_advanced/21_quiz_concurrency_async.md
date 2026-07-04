@@ -33,6 +33,56 @@
 
 ---
 
+
+---
+
+## 认知路径
+
+> **认知路径**: 本节从 "测验" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+
+1. **问题识别**: 为什么 测验 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
+2. **概念建立**: 掌握 测验 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
+3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与测验的适用边界。
+5. **迁移应用**: 将 测验 与前置/后置概念链接，形成跨层知识网络。
+
+
+---
+
+> **过渡**: 从 测验 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 测验 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 测验 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
+---
+
+> **定理 1** [Tier 2]: 测验 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
+>
+> **定理 2** [Tier 2]: 正确理解 测验 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
+>
+> **定理 3** [Tier 3]: 将 测验 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
+
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "测验 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 测验 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 测验 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 测验 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 测验 具有语言特有的形态。
+
+
+---
+
+> **反向推理 1**: 如果程序在 测验 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
+>
+> **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 测验 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
+
+
 ## 一、并发基础：Send 与 Sync
 
 ### Q1. 以下代码能否编译？解释 `Send` 和 `Sync` 的语义
@@ -302,7 +352,7 @@ fn main() {
 
 **为什么需要 `Pin`**：
 
-`async fn` 编译后的状态机可能包含**自引用**（例如一个字段是指向另一个字段的引用）：
+`async fn` 编译后的状态机可能包含**自引用（Reference）**（例如一个字段是指向另一个字段的引用）：
 
 ```rust,ignore
 async fn example() {
@@ -381,7 +431,7 @@ async fn main() {
 | 内存开销 | ~1-2 MB 栈 | ~几 KB |
 | 适用场景 | CPU 密集型 | IO 密集型 |
 
-**知识点**：`tokio::spawn` 要求 Future 是 `'static`，因此不能借用（Borrowing）局部变量，必须转移所有权或使用 `Arc`。→ Async 模式详解
+**知识点**：`tokio::spawn` 要求 Future 是 `'static`，因此不能借用（Borrowing）局部变量，必须转移所有权（Ownership）或使用 `Arc`。→ Async 模式详解
 
 </details>
 
@@ -510,7 +560,7 @@ let s = String::from("hello");
 thread::spawn(|| { println!("{}", &s); });
 ```
 
-**知识点**：`'static` 不等于"程序全局存活"，而是"不借用（Borrowing）任何非 `'static` 数据"。理解这一点是掌握 Rust 并发闭包的关键。→ 生命周期（Lifetimes）详解
+**知识点**：`'static` 不等于"程序全局存活"，而是"不借用（Borrowing）任何非 `'static` 数据"。理解这一点是掌握 Rust 并发闭包（Closures）的关键。→ 生命周期（Lifetimes）详解
 
 </details>
 
@@ -645,7 +695,7 @@ println!("Result: {}", *counter.lock().unwrap());
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
 | 10/10 | 🏆 并发/异步（Async）已内化 | 进阶至 [Lock-Free](16_lock_free.md) 或 [Stream Processing](20_stream_processing_semantics.md) |
-| 7–9/10 | ✅ 核心概念掌握 | 强化 [并发练习](../../exercises/src/concurrency) 和 [异步练习](../../exercises/src/async_programming) |
+| 7–9/10 | ✅ 核心概念掌握 | 强化 [并发练习](../../exercises/src/concurrency) 和 [异步（Async）练习](../../exercises/src/async_programming) |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Concurrency](01_concurrency.md) · [Async](02_async.md) |
 | 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../01_foundation/01_ownership.md) 确认 Send/Sync 基础，再读并发章节 |
 

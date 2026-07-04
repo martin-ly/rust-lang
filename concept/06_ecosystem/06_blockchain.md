@@ -99,7 +99,7 @@ mindmap
 >
 > **使用建议**: 学习新链时，将其归入对应分支并比较漏洞消除机制与形式化验证策略。 [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 >
-> **关键洞察**: Rust 链的安全优势不是单一技术点，而是从编译期类型系统到运行时（Runtime）调度再到形式化验证的纵深防御体系。
+> **关键洞察**: Rust 链的安全优势不是单一技术点，而是从编译期类型系统（Type System）到运行时（Runtime）调度再到形式化验证的纵深防御体系。
 
 ---
 
@@ -111,7 +111,7 @@ mindmap
 | 漏洞类别 | Solidity/EVM 现状 | Rust 合约的编译期保证 |
 |:---|:---|:---|
 | **重入攻击 (Reentrancy)** | 依赖 `checks-effects-interactions` 模式和人工审计 | 所有权（Ownership） + `&mut` 独占访问 ⟹ 同一时刻只有一个调用者可修改状态 |
-| **整数溢出** | Solidity 0.8+ 引入运行时 checked math（gas 开销） | `u64`/`u128` 默认 panic on overflow；`checked_add` 强制显式处理 |
+| **整数溢出** | Solidity 0.8+ 引入运行时（Runtime） checked math（gas 开销） | `u64`/`u128` 默认 panic on overflow；`checked_add` 强制显式处理 |
 | **未初始化存储指针** | 可指向 slot 0（即 `owner` 等敏感状态） | `Option<T>` + 编译期初始化检查 ⟹ 不存在未初始化变量 |
 | **栈深度攻击** | EVM 1024 栈深度限制可被利用 | 无显式栈深度限制；调用栈由操作系统管理，且受 Rust 的 safe 边界保护 |
 | **时间操纵 (Timestamp)** | `block.timestamp` 可被矿工操纵 | 类型系统无法阻止时间操纵，但 `Instant` / `Slot` 类型可强制显式处理 |
@@ -171,7 +171,7 @@ graph TD
 ```
 
 > **来源**: [Solana Docs — Sealevel] · [Anatoly Yakovenko — Sealevel Paper]
-> **认知功能**: 此流程图揭示 Solana 如何将 Rust 的 `&`/`&mut` 借用语义映射到运行时并行调度策略，实现"无数据竞争的并行合约执行"。[来源: 💡 原创分析]
+> **认知功能**: 此流程图揭示 Solana 如何将 Rust 的 `&`/`&mut` 借用（Borrowing）语义映射到运行时并行调度策略，实现"无数据竞争的并行合约执行"。[来源: 💡 原创分析]
 > **使用建议**: 设计并行交易时，优先将账户标记为 read-only 以最大化并行度；mutually exclusive writes 需显式排序。
 > **关键洞察**: Sealevel 的并行不是自动的——它依赖交易显式声明账户访问模式，这与 Rust 编译期借用检查同构。
 
@@ -242,7 +242,7 @@ mod erc20 {
 | **访问控制遗漏** | `onlyOwner` 修饰器需手动添加 | 无直接帮助，但 `Auth` 类型可通过类型状态模式强制检查 | Typestate：权限作为类型参数 |
 | **未检查的外部调用返回值** | `call` 返回 `bool` 可被忽略 | `Result<T, E>` 的 `#[must_use]` 强制处理错误 | 代数数据类型：错误不可静默丢弃 |
 | **时间操纵** | `block.timestamp` 为普通 `uint256` | 无根本解决，但 `Slot` / `Epoch` 新类型可限制误用 | 新类型模式（Newtype） |
-| **Delegatecall 注入** | `delegatecall` 可任意修改调用者状态 | Rust 无 delegatecall 等价物；Wasm 模块（Module）边界隔离 | 模块边界 = 所有权隔离 |
+| **Delegatecall 注入** | `delegatecall` 可任意修改调用者状态 | Rust 无 delegatecall 等价物；Wasm 模块（Module）边界隔离 | 模块边界 = 所有权（Ownership）隔离 |
 
 > **关键论证**: Rust 消除的不是"所有漏洞"，而是**与内存安全（Memory Safety）和类型错误相关的系统性漏洞类别**。业务逻辑漏洞（如价格预言机操纵、闪电贷攻击）仍需形式化规约和审计。
 
@@ -443,7 +443,7 @@ public fun get_balance(addr: address): u64 acquires Coin {
 | **并发安全（Concurrency Safety）** | Sui 对象级并行；Aptos 顺序执行 | Solana Sealevel 运行时借用检查 | 会话类型 / 区域类型 |
 | **形式化验证** | Move Prover（Boogie/Z3 后端）| Kani（Rust 模型检测）| SMT 求解 / 符号执行 |
 
-> **关键差异**: Move 的**字节码验证器**在部署时执行额外的安全检查（引用不悬空、资源不丢失、类型不混淆），这是 Rust 编译器不提供的**链上验证层**。Rust 合约依赖 Wasm 沙箱和运行时检查，而 Move 合约在**字节码级别**即被验证为安全。
+> **关键差异**: Move 的**字节码验证器**在部署时执行额外的安全检查（引用（Reference）不悬空、资源不丢失、类型不混淆），这是 Rust 编译器不提供的**链上验证层**。Rust 合约依赖 Wasm 沙箱和运行时检查，而 Move 合约在**字节码级别**即被验证为安全。
 
 ### 4.4 双花预防的形式化对比
 
@@ -527,7 +527,7 @@ mod verification {
 
 ### 5.2 FRAME 存储与 Kani 的集成挑战
 
-Substrate FRAME 的存储 API 使用宏生成（`#[pallet::storage]`），这对 Kani 的符号执行构成挑战： [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+Substrate FRAME 的存储 API 使用宏（Macro）生成（`#[pallet::storage]`），这对 Kani 的符号执行构成挑战： [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 | 挑战 | 解决方案 | 验证范围 |
 |:---|:---|:---|
@@ -636,7 +636,7 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 
 | 规范 | 字节码层 | 形式化验证状态 | Rust 编译链路 | 关键挑战 |
 |:---|:---|:---|:---|:---|
-| **Solana SBF** | eBPF 扩展 | 字节码验证器（静态分析）| `rustc` → LLVM → SBF | 将 Rust 所有权语义映射到 eBPF 验证器的内存安全检查 |
+| **Solana SBF** | eBPF 扩展 | 字节码验证器（静态分析）| `rustc` → LLVM → SBF | 将 Rust 所有权语义映射到 eBPF 验证器的内存安全（Memory Safety）检查 |
 | **Polkadot PVF** | Wasm 子集 | 进行中（Wasm 核心形式化）| `rustc` → LLVM → Wasm | Wasm 宿主函数（Host Functions）的副作用形式化 |
 | **Move Bytecode** | Move IR → Move Bytecode | Move Prover（Boogie/Z3）| `movec` → Move Bytecode | 资源语义的形式化已较成熟（ abilities 系统）|
 

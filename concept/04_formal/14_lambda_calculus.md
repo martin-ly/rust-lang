@@ -30,7 +30,7 @@
   - [一、核心概念](#一核心概念)
     - [1.1 无类型 Lambda 演算](#11-无类型-lambda-演算)
     - [1.2 类型化 Lambda 演算](#12-类型化-lambda-演算)
-    - [1.3 Rust 闭包与 Lambda](#13-rust-闭包与-lambda)
+    - [1.3 Rust 闭包（Closures）与 Lambda](#13-rust-闭包与-lambda)
   - [二、计算能力](#二计算能力)
     - [2.1 Church 编码](#21-church-编码)
     - [2.2 Y 组合子](#22-y-组合子)
@@ -44,7 +44,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：lambda 演算的编译错误](#十边界测试lambda-演算的编译错误)
     - [10.1 边界测试：Y 组合子与递归类型（编译错误）](#101-边界测试y-组合子与递归类型编译错误)
-    - [10.2 边界测试：高阶函数的类型推断（编译错误）](#102-边界测试高阶函数的类型推断编译错误)
+    - [10.2 边界测试：高阶函数的类型推断（Type Inference）（编译错误）](#102-边界测试高阶函数的类型推断编译错误)
     - [10.3 边界测试：Y 组合子在 Rust 中的实现（编译错误）](#103-边界测试y-组合子在-rust-中的实现编译错误)
     - [10.4 边界测试：λ 演算中的变量捕获与闭包（编译错误）](#104-边界测试λ-演算中的变量捕获与闭包编译错误)
     - [10.3 边界测试：Y 组合子在 Rust 中的不可表达性（编译错误）](#103-边界测试y-组合子在-rust-中的不可表达性编译错误)
@@ -53,7 +53,7 @@
     - [测验 2：Rust 闭包的捕获模式（应用层）](#测验-2rust-闭包的捕获模式应用层)
     - [测验 3：Church 编码（应用层）](#测验-3church-编码应用层)
     - [测验 4：Y 组合子在 Rust 中的限制（分析层）](#测验-4y-组合子在-rust-中的限制分析层)
-    - [测验 5：类型化 Lambda 演算 ↔ Rust 类型系统（评价层）](#测验-5类型化-lambda-演算--rust-类型系统评价层)
+    - [测验 5：类型化 Lambda 演算 ↔ Rust 类型系统（Type System）（评价层）](#测验-5类型化-lambda-演算--rust-类型系统评价层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -555,7 +555,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的闭包实现**词法作用域**（lexical scoping）：捕获定义时环境中的变量，而非调用时的环境。这与 λ 演算的词法绑定一致（`λx.λy.x+y` 中 `x` 绑定到外层参数），与动态作用域（Lisp 早期版本、Bash 变量）不同。`move` 关键字改变捕获方式（按值而非按引用），但不改变作用域规则——仍绑定到定义时的值。Rust 的闭包类型（`Fn`、`FnMut`、`FnOnce`）根据捕获方式自动推断，是 λ 演算在系统编程语言中的实现。与 C++ 的 lambda（同样词法作用域，捕获列表 `[=]`/`[&]` 显式控制）或 JavaScript 的闭包（词法作用域，但 `this` 动态绑定）类似——Rust 的闭包设计兼顾了函数式编程的表达力和系统编程的性能。[来源: [Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)]
+> **修正**: Rust 的闭包实现**词法作用域**（lexical scoping）：捕获定义时环境中的变量，而非调用时的环境。这与 λ 演算的词法绑定一致（`λx.λy.x+y` 中 `x` 绑定到外层参数），与动态作用域（Lisp 早期版本、Bash 变量）不同。`move` 关键字改变捕获方式（按值而非按引用（Reference）），但不改变作用域规则——仍绑定到定义时的值。Rust 的闭包类型（`Fn`、`FnMut`、`FnOnce`）根据捕获方式自动推断，是 λ 演算在系统编程语言中的实现。与 C++ 的 lambda（同样词法作用域，捕获列表 `[=]`/`[&]` 显式控制）或 JavaScript 的闭包（词法作用域，但 `this` 动态绑定）类似——Rust 的闭包设计兼顾了函数式编程的表达力和系统编程的性能。[来源: [Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
 ### 10.3 边界测试：Y 组合子在 Rust 中的不可表达性（编译错误）
 
@@ -628,7 +628,7 @@ let g = move |y| x + y;  // 闭包 B
 
 Rust 闭包与 Lambda 演算的对应：
 
-- `|y| x + y` —— 默认捕获模式：按最小需求借用（`&x`）
+- `|y| x + y` —— 默认捕获模式：按最小需求借用（Borrowing）（`&x`）
 - `move |y| x + y` —— 强制按值捕获：将 `x` 的所有权（Ownership） move 进闭包
 
 类型系统实现：
@@ -724,7 +724,7 @@ fn factorial(n: u64) -> u64 {
 
 - STLC 的函数项 → Rust 的 `fn` 项（零大小类型，单例）
 - STLC 的函数变量 → Rust 的 `fn` 指针或 `Box<dyn Fn>` trait 对象
-- STLC 的高阶函数 → Rust 的泛型 `F: Fn(A) -> B`
+- STLC 的高阶函数 → Rust 的泛型（Generics） `F: Fn(A) -> B`
 
 Rust 的类型系统比 STLC 丰富得多（有泛型、生命周期（Lifetimes）、trait、关联类型），但核心函数抽象同源。
 </details>

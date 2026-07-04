@@ -20,6 +20,20 @@
 > **后置概念**: N/A
 ---
 
+
+---
+
+## 认知路径
+
+> **认知路径**: 本节从 "Tree Borrows 深度解析" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+
+1. **问题识别**: 为什么 Tree Borrows 深度解析 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
+2. **概念建立**: 掌握 Tree Borrows 深度解析 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
+3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与Tree Borrows 深度解析的适用边界。
+5. **迁移应用**: 将 Tree Borrows 深度解析 与前置/后置概念链接，形成跨层知识网络。
+
+
 ## 一、权威定义
 
 > Tree Borrows is a new aliasing model for Rust that generalizes Stacked Borrows to support more flexible borrowing patterns.
@@ -33,7 +47,7 @@
 
 ## 二、Stacked Borrows 的核心限制
 
-Stacked Borrows 要求借用按严格的 LIFO 顺序失效。这导致以下问题：
+Stacked Borrows 要求借用（Borrowing）按严格的 LIFO 顺序失效。这导致以下问题：
 
 ```rust,ignore
 // Stacked Borrows 下可能报 UB，但 Tree Borrows 允许

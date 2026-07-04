@@ -109,6 +109,7 @@
     ├── tokio-console
     └── 火焰图
 ```
+
 ---
 
 ## 🎯 本章目标
@@ -143,6 +144,7 @@
 criterion = { version = "0.5", features = ["async_tokio"] }
 tokio = { version = "1", features = ["full", "test-util"] }
 ```
+
 **基准测试示例**:
 
 ```rust
@@ -163,6 +165,7 @@ fn benchmark_async_task(c: &mut Criterion) {
 criterion_group!(benches, benchmark_async_task);
 criterion_main!(benches);
 ```
+
 ---
 
 ## 2. 并发优化
@@ -178,6 +181,7 @@ async fn slow() {
     // 总计: 3秒
 }
 ```
+
 **✅ 快 - 并发执行 (2秒)**:
 
 ```rust
@@ -186,6 +190,7 @@ async fn fast() {
     // 总计: max(1秒, 2秒) = 2秒
 }
 ```
+
 ---
 
 ### 2.2 合理使用 `spawn`
@@ -201,6 +206,7 @@ async fn bad() {
     }
 }
 ```
+
 **✅ 批量处理 (开销小)**:
 
 ```rust
@@ -215,6 +221,7 @@ async fn good() {
     }
 }
 ```
+
 ---
 
 ## 3. 内存优化
@@ -228,6 +235,7 @@ fn slow() -> Pin<Box<dyn Future<Output = i32>>> {
     Box::pin(async { 42 })
 }
 ```
+
 **✅ 快 - 栈分配**:
 
 ```rust
@@ -235,6 +243,7 @@ fn fast() -> impl Future<Output = i32> {
     async { 42 }
 }
 ```
+
 ---
 
 ### 3.2 使用 `Bytes` 避免拷贝
@@ -256,6 +265,7 @@ async fn fast(data: Bytes) {
     // ...
 }
 ```
+
 ---
 
 ### 3.3 对象池
@@ -284,6 +294,7 @@ impl<T> Pool<T> {
     }
 }
 ```
+
 ---
 
 ## 4. CPU 优化
@@ -306,6 +317,7 @@ fn heavy_computation() -> i32 {
     (0..1_000_000_000).sum()
 }
 ```
+
 ---
 
 ### 4.2 调整工作线程数
@@ -323,6 +335,7 @@ async fn main() {
     // 使用 4 个工作线程
 }
 ```
+
 ---
 
 ## 5. I/O 优化
@@ -346,6 +359,7 @@ async fn main() -> std::io::Result<()> {
     Ok(())
 }
 ```
+
 ---
 
 ### 5.2 批量I/O操作
@@ -376,6 +390,7 @@ async fn fast_write(data: Vec<String>) -> std::io::Result<()> {
     Ok(())
 }
 ```
+
 ---
 
 ## 6. 锁优化
@@ -403,6 +418,7 @@ async fn fast(data: Arc<Mutex<Vec<i32>>>) {
     data.lock().await.push(42);
 }
 ```
+
 ---
 
 ### 6.2 使用读写锁
@@ -426,6 +442,7 @@ async fn main() {
     write.push(4);
 }
 ```
+
 ---
 
 ## 7. 性能测量
@@ -437,6 +454,7 @@ async fn main() {
 ```bash
 cargo install tokio-console
 ```
+
 **配置** (`Cargo.toml`):
 
 ```toml
@@ -444,6 +462,7 @@ cargo install tokio-console
 tokio = { version = "1", features = ["full", "tracing"] }
 console-subscriber = "0.2"
 ```
+
 **代码**:
 
 ```rust
@@ -459,6 +478,7 @@ fn main() {
         });
 }
 ```
+
 **运行**:
 
 ```bash
@@ -468,6 +488,7 @@ cargo run
 # 终端2: 启动监控
 tokio-console
 ```
+
 ---
 
 ### 7.2 火焰图分析
@@ -479,6 +500,7 @@ cargo install flamegraph
 # 生成火焰图
 cargo flamegraph --bin my_app
 ```
+
 ---
 
 ## 8. 优化清单
@@ -520,6 +542,7 @@ async fn handle_request(req: Request) -> Response {
     Response::new(result)
 }
 ```
+
 **优化后** (5000 req/s):
 
 ```rust
@@ -538,6 +561,7 @@ async fn handle_request(req: Request) -> Response {
     Response::new(result)
 }
 ```
+
 **优化效果**: 5x 吞吐量提升
 
 ---

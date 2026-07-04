@@ -64,7 +64,7 @@
     - [2.3 框架选型矩阵](#23-框架选型矩阵)
   - [三、性能特征与 Wasm 内存模型](#三性能特征与-wasm-内存模型)
     - [3.1 Rust Wasm vs JavaScript 性能边界](#31-rust-wasm-vs-javascript-性能边界)
-    - [3.2 线性内存模型与所有权映射](#32-线性内存模型与所有权映射)
+    - [3.2 线性内存模型与所有权（Ownership）映射](#32-线性内存模型与所有权映射)
     - [3.3 JS ↔ Wasm 互操作开销分析](#33-js--wasm-互操作开销分析)
   - [四、工具链与工程实践](#四工具链与工程实践)
     - [4.1 目标三元组与编译配置](#41-目标三元组与编译配置)
@@ -77,9 +77,9 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：WebAssembly 的编译错误](#十边界测试webassembly-的编译错误)
-    - [10.1 边界测试：WASI 的文件系统权限（运行时错误）](#101-边界测试wasi-的文件系统权限运行时错误)
+    - [10.1 边界测试：WASI 的文件系统权限（运行时（Runtime）错误）](#101-边界测试wasi-的文件系统权限运行时错误)
     - [10.2 边界测试：`wasm-bindgen` 的类型不匹配（编译错误）](#102-边界测试wasm-bindgen-的类型不匹配编译错误)
-    - [10.3 边界测试：WASM 模块的大小限制与 `wee_alloc`（运行时错误）](#103-边界测试wasm-模块的大小限制与-wee_alloc运行时错误)
+    - [10.3 边界测试：WASM 模块（Module）的大小限制与 `wee_alloc`（运行时错误）](#103-边界测试wasm-模块的大小限制与-wee_alloc运行时错误)
     - [10.3 边界测试：WASM 组件模型（Component Model）的类型映射（编译错误）](#103-边界测试wasm-组件模型component-model的类型映射编译错误)
     - [10.4 边界测试：WASI Preview 2 的功能性权限（运行时错误）](#104-边界测试wasi-preview-2-的功能性权限运行时错误)
     - [10.3 边界测试：WASM 模块的线性内存与 Rust 的 Vec 增长策略（运行时 OOM）](#103-边界测试wasm-模块的线性内存与-rust-的-vec-增长策略运行时-oom)
@@ -714,7 +714,7 @@ impl Point {
 > **修正**:
 > `wasm-bindgen` 生成 Rust 与 JavaScript 之间的绑定代码，但只支持可映射到 JavaScript 类型的 Rust 类型。
 > 不支持的类型包括：裸指针（`*const T`、`*mut T`）、引用（Reference）（`&T` 在返回中有限支持）、泛型（Generics）、闭包（Closures）（有限支持）、大部分标准库类型（`Vec<T>` 支持，`HashMap` 不支持）。
-> 编译错误发生在 `wasm-bindgen` 宏展开阶段——它尝试为不支持的类型生成绑定代码并失败。
+> 编译错误发生在 `wasm-bindgen` 宏（Macro）展开阶段——它尝试为不支持的类型生成绑定代码并失败。
 > 安全替代：将裸指针包装为 `JsValue`，使用 `serde-wasm-bindgen` 序列化复杂类型，或手动编写 JS shim。
 > 这与 C 的 Emscripten（编译为 JS 并模拟 POSIX）不同——`wasm-bindgen` 是显式、类型安全的 FFI，而非透明移植。
 > [来源: [wasm-bindgen Documentation](https://rustwasm.github.io/docs/wasm-bindgen/)] ·

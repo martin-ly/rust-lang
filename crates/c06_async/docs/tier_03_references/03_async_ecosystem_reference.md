@@ -103,6 +103,7 @@
     ├── 异步工具
     └── 错误处理
 ```
+
 ---
 
 ## 🎯 文档说明
@@ -149,6 +150,7 @@ async fn main() {
     axum::serve(listener, app).await.unwrap();
 }
 ```
+
 ---
 
 ## 3. HTTP 客户端
@@ -166,6 +168,7 @@ let resp = reqwest::get("https://httpbin.org/ip")
     .text()
     .await?;
 ```
+
 ---
 
 ## 4. 数据库驱动
@@ -191,6 +194,7 @@ let row: (i64,) = sqlx::query_as("SELECT $1")
     .bind(150_i64)
     .fetch_one(&pool).await?;
 ```
+
 ---
 
 ### 4.2 NoSQL 数据库
@@ -222,6 +226,7 @@ struct User {
 let user = User { name: "Alice".to_string(), age: 30 };
 let json = serde_json::to_string(&user)?;
 ```
+
 ---
 
 ## 6. 消息队列/事件流
@@ -248,6 +253,7 @@ use tokio_tungstenite::{connect_async, tungstenite::Message};
 let (ws_stream, _) = connect_async("ws://localhost:9001").await?;
 ws_stream.send(Message::Text("Hello".into())).await?;
 ```
+
 ---
 
 ## 8. gRPC
@@ -268,6 +274,7 @@ impl MyService for MyServiceImpl {
     }
 }
 ```
+
 ---
 
 ## 9. 工具库
@@ -326,6 +333,7 @@ impl MyService for MyServiceImpl {
 ├── 日志: tracing
 └── 错误: anyhow + thiserror
 ```
+
 ---
 
 ### 11.2 微服务
@@ -339,6 +347,7 @@ impl MyService for MyServiceImpl {
 ├── 服务发现: consul
 └── 监控: tokio-console + prometheus
 ```
+
 ---
 
 ### 11.3 CLI 工具
@@ -350,6 +359,7 @@ impl MyService for MyServiceImpl {
 ├── 参数解析: clap
 └── 进度条: indicatif
 ```
+
 ---
 
 ## 📚 延伸阅读

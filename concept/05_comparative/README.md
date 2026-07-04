@@ -151,7 +151,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 - [Rust vs Swift：现代系统语言的两种路径](09_rust_vs_swift.md)
 - [Rust vs Zig：现代系统语言的两种哲学](10_rust_vs_zig.md)
 - [Rust vs Kotlin：静态安全的两种路径](11_rust_vs_kotlin.md)
-- [Rust vs Scala：类型系统的两种哲学](12_rust_vs_scala.md)
+- [Rust vs Scala：类型系统（Type System）的两种哲学](12_rust_vs_scala.md)
 - [Rust vs C#：托管与原生之路](13_rust_vs_csharp.md)
 - [Rust vs Elixir](14_rust_vs_elixir.md)
 - [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](15_rust_vs_typescript.md)
@@ -263,7 +263,7 @@ L5 的综合分析输出到：
 <details>
 <summary>✅ 答案与解析</summary>
 
-先浏览整体结构建立全局视野，然后根据自身水平选择对应层级，遇到模糊概念时利用交叉引用跳转复习。
+先浏览整体结构建立全局视野，然后根据自身水平选择对应层级，遇到模糊概念时利用交叉引用（Reference）跳转复习。
 </details>
 
 ---

@@ -105,6 +105,7 @@
 └── 反应式编程
     └── 流式处理
 ```
+
 ---
 
 ## 🎯 文档说明
@@ -196,6 +197,7 @@ impl Counter {
     }
 }
 ```
+
 ---
 
 ### 1.3 最佳实践
@@ -289,6 +291,7 @@ impl Reactor {
     }
 }
 ```
+
 ---
 
 ## 3. Pipeline 模式
@@ -351,6 +354,7 @@ async fn run_pipeline() {
     }
 }
 ```
+
 ---
 
 ## 4. CSP (Communicating Sequential Processes)
@@ -404,6 +408,7 @@ async fn csp_example() {
     }
 }
 ```
+
 ---
 
 ## 5. 对象池模式
@@ -470,6 +475,7 @@ impl<T> Drop for PooledObject<T> {
     }
 }
 ```
+
 ---
 
 ## 6. Work Stealing
@@ -511,6 +517,7 @@ async fn reactive_example() {
     println!("{:?}", results);
 }
 ```
+
 ---
 
 ## 8. 错误处理模式
@@ -556,6 +563,7 @@ impl Supervisor {
     }
 }
 ```
+
 ---
 
 ## 📚 延伸阅读

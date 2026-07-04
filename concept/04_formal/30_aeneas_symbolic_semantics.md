@@ -23,13 +23,43 @@
 
 > 本文内容来自已归档的 `docs/rust-ownership-decidability/formal-foundations/models/symbolic-borrow-checking.md`，经提炼后迁移。
 
+
+---
+
+> **过渡**: 从 Aeneas Symbolic Semantics（Aene 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 Aeneas Symbolic Semantics（Aene 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 Aeneas Symbolic Semantics（Aene 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
+---
+
+> **定理 1** [Tier 2]: Aeneas Symbolic Semantics（Aene 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
+>
+> **定理 2** [Tier 2]: 正确理解 Aeneas Symbolic Semantics（Aene 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
+>
+> **定理 3** [Tier 3]: 将 Aeneas Symbolic Semantics（Aene 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
+
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "Aeneas Symbolic Semantics（Aene 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 Aeneas Symbolic Semantics（Aene 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Aeneas Symbolic Semantics（Aene 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 Aeneas Symbolic Semantics（Aene 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Aeneas Symbolic Semantics（Aene 具有语言特有的形态。
+
+
 ## 📑 目录
 
 - [Aeneas Symbolic Semantics（Aeneas 符号化语义）](#aeneas-symbolic-semanticsaeneas-符号化语义)
   - [📑 目录](#-目录)
   - [一、问题与动机（Problem \& Motivation）](#一问题与动机problem--motivation)
   - [二、核心结构总览（Overview）](#二核心结构总览overview)
-  - [三、LLBC：显式借用演算](#三llbc显式借用演算)
+  - [三、LLBC：显式借用（Borrowing）演算](#三llbc显式借用演算)
     - [3.1 设计思想](#31-设计思想)
     - [3.2 核心构造](#32-核心构造)
     - [3.3 与 MIR 的关系](#33-与-mir-的关系)
@@ -314,7 +344,7 @@ Theorem sum_llbc_pure : forall v, llbc_sum v = sum v.
 Proof. (* Aeneas 生成的证明脚本 *) Qed.
 ```
 
-**示例 2：可变借用与状态重组**
+**示例 2：可变借用（Mutable Borrow）与状态重组**
 
 ```rust,ignore
 fn incr(v: &mut i32) { *v += 1; }
@@ -409,7 +439,7 @@ Aeneas 符号化语义五步认知路径
 
 - [L4 RustBelt](04_rustbelt.md)
 - [L4 分离逻辑](11_separation_logic.md)
-- [L4 所有权形式化](03_ownership_formal.md)
+- [L4 所有权（Ownership）形式化](03_ownership_formal.md)
 - [L3 Unsafe Rust](../03_advanced/03_unsafe.md)
 - [L6 形式化验证工具](../06_ecosystem/74_formal_verification_tools.md)
 - [BorrowSanitizer](34_borrow_sanitizer_in_formal.md)

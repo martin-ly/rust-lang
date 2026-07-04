@@ -13,7 +13,7 @@
 > **定位**: 解释 Rust 类型推断（Type Inference）为什么从 HM 的 $O(n^3)$ 跃迁到 PSPACE-完全，以及这一理论结论如何在 rustc 的约束求解器中得到工程化实现。
 > **前置依赖**: [Type Theory](02_type_theory.md) · [Type Inference](08_type_inference.md) · [Trait Solver in rustc](26_trait_solver_in_rustc.md)
 > **后置延伸**: [Type Checking and Inference in rustc](27_type_checking_and_inference.md) · [Subtype Variance](06_subtype_variance.md)
-> **来源**: · [类型推断](08_type_inference.md) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Hindley — The Principal Type-Scheme of an Object in Combinatory Logic](https://doi.org/10.2307/2270762) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: · [类型推断（Type Inference）](08_type_inference.md) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Hindley — The Principal Type-Scheme of an Object in Combinatory Logic](https://doi.org/10.2307/2270762) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > Rehman et al. (2023) — Rust type inference complexity ·
 > [Vytiniotis et al. 2011 — OutsideIn(X): Modular Type Inference with Local Assumptions](https://doi.org/10.1017/S0956796811000098) ·
@@ -25,6 +25,36 @@
 ---
 
 > 本文内容来自已归档的 `docs/rust-ownership-decidability/04-decidability-analysis/04-01-type-inference.md`，经提炼后迁移。
+
+
+---
+
+> **过渡**: 从 Type Inference Complexity（类型推断 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 Type Inference Complexity（类型推断 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 Type Inference Complexity（类型推断 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
+---
+
+> **定理 1** [Tier 2]: Type Inference Complexity（类型推断 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
+>
+> **定理 2** [Tier 2]: 正确理解 Type Inference Complexity（类型推断 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
+>
+> **定理 3** [Tier 3]: 将 Type Inference Complexity（类型推断 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
+
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "Type Inference Complexity（类型推断 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 Type Inference Complexity（类型推断 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Type Inference Complexity（类型推断 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 Type Inference Complexity（类型推断 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Type Inference Complexity（类型推断 具有语言特有的形态。
+
 
 ## 📑 目录
 
@@ -142,7 +172,7 @@ id(1);
 id("hi");
 ```
 
-Rust 的局部类型推断保留了这一思想，但函数签名通常需要显式标注，且泛化必须考虑 trait bound 和生命周期参数，因此不能像纯 HM 那样全局推广。
+Rust 的局部类型推断保留了这一思想，但函数签名通常需要显式标注，且泛化必须考虑 trait bound 和生命周期（Lifetimes）参数，因此不能像纯 HM 那样全局推广。
 
 ---
 

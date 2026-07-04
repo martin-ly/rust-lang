@@ -1,0 +1,190 @@
+{
+  "不可变引用": [
+    "concept\\01_foundation\\05_reference_semantics.md",
+    "concept\\01_foundation\\17_collections_advanced.md",
+    "concept\\01_foundation\\20_variable_model.md",
+    "concept\\02_intermediate\\24_quiz_memory_management.md",
+    "concept\\03_advanced\\01_concurrency.md",
+    "concept\\04_formal\\50_type_system_reference.md",
+    "concept\\05_comparative\\12_rust_vs_scala.md",
+    "concept\\archive\\Rust vs C++：形式系统模型 vs 机制工程模型 —— 核心论点索引.md"
+  ],
+  "原子操作": [
+    "concept\\01_foundation\\06_zero_cost_abstractions.md",
+    "concept\\02_intermediate\\24_quiz_memory_management.md",
+    "concept\\07_future\\rust_1_95_stabilized.md"
+  ],
+  "可变引用": [
+    "concept\\01_foundation\\08_collections.md",
+    "concept\\01_foundation\\20_variable_model.md",
+    "concept\\01_foundation\\24_quiz_type_system.md"
+  ],
+  "零成本抽象": [
+    "concept\\01_foundation\\08_collections.md",
+    "concept\\06_ecosystem\\73_pattern_composition_algebra.md"
+  ],
+  "可变借用": [
+    "concept\\01_foundation\\15_closure_basics.md",
+    "concept\\03_advanced\\17_type_erasure.md"
+  ],
+  "错误处理": [
+    "concept\\01_foundation\\22_data_abstraction_spectrum.md",
+    "concept\\06_ecosystem\\08_wasi.md",
+    "concept\\06_ecosystem\\34_idioms_spectrum.md"
+  ],
+  "单态化": [
+    "concept\\01_foundation\\22_data_abstraction_spectrum.md"
+  ],
+  "类型推断": [
+    "concept\\01_foundation\\27_quiz_closures_iterators.md",
+    "concept\\07_future\\22_gen_blocks_preview.md",
+    "concept\\archive\\rust_effect_system_encyclopedia.md"
+  ],
+  "内存安全": [
+    "concept\\01_foundation\\29_quiz_pl_foundations.md",
+    "concept\\03_advanced\\08_nll_and_polonius.md",
+    "concept\\03_advanced\\22_quiz_unsafe.md",
+    "concept\\archive\\rust_effect_system_boundary_analysis.md"
+  ],
+  "trait": [
+    "concept\\01_foundation\\34_pl_prerequisites.md",
+    "concept\\03_advanced\\00_before_formal.md",
+    "concept\\03_advanced\\08_nll_and_polonius.md",
+    "concept\\03_advanced\\09_ffi_advanced.md",
+    "concept\\03_advanced\\11_atomics_and_memory_ordering.md",
+    "concept\\03_advanced\\16_lock_free.md",
+    "concept\\04_formal\\22_modern_verification_tools.md",
+    "concept\\archive\\01_foundation_19_numerics_archived.md",
+    "concept\\archive\\03_advanced_03_unsafe_rust_archived.md",
+    "concept\\archive\\03_advanced_05_macros_archived.md",
+    "concept\\archive\\03_advanced_08_zero_cost_abstractions_archived.md",
+    "concept\\archive\\04_formal_07_separation_logic_archived.md",
+    "concept\\archive\\04_formal_09_operational_semantics_archived.md"
+  ],
+  "不可变借用": [
+    "concept\\02_intermediate\\06_range_types.md",
+    "concept\\02_intermediate\\07_closure_types.md",
+    "concept\\03_advanced\\07_proc_macro.md",
+    "concept\\03_advanced\\18_network_programming.md",
+    "concept\\04_formal\\13_formal_methods.md",
+    "concept\\06_ecosystem\\56_c_to_rust_translation.md"
+  ],
+  "Future": [
+    "concept\\02_intermediate\\12_smart_pointers.md",
+    "concept\\02_intermediate\\33_rust_release_process.md",
+    "concept\\05_comparative\\06_rust_vs_java.md",
+    "concept\\sources\\rfc_index.md"
+  ],
+  "Vec": [
+    "concept\\03_advanced\\13_inline_assembly.md",
+    "concept\\06_ecosystem\\24_cloud_native.md",
+    "concept\\06_ecosystem\\44_formal_ecosystem_tower.md",
+    "concept\\06_ecosystem\\51_quantum_computing_rust.md",
+    "concept\\07_future\\02_formal_methods.md",
+    "concept\\07_future\\48_aarch64_sve_sme_preview.md",
+    "concept\\archive\\01.md",
+    "concept\\archive\\SUMMARY_mdbook_legacy.md",
+    "concept\\SUMMARY.md"
+  ],
+  "Result": [
+    "concept\\03_advanced\\15_zero_copy_parsing.md",
+    "concept\\06_ecosystem\\23_database_access.md"
+  ],
+  "借用": [
+    "concept\\03_advanced\\17_type_erasure.md",
+    "concept\\06_ecosystem\\73_pattern_composition_algebra.md"
+  ],
+  "一致性": [
+    "concept\\03_advanced\\README.md",
+    "concept\\06_ecosystem\\02_patterns.md",
+    "concept\\06_ecosystem\\06_blockchain.md",
+    "concept\\06_ecosystem\\08_wasi.md",
+    "concept\\06_ecosystem\\29_algorithms_competitive_programming.md",
+    "concept\\07_future\\04_effects_system.md",
+    "concept\\07_future\\37_rpitit_preview.md",
+    "concept\\archive\\kg_ontology_v1_archived.md"
+  ],
+  "生命周期": [
+    "concept\\04_formal\\02_type_theory.md",
+    "concept\\06_ecosystem\\08_wasi.md",
+    "concept\\06_ecosystem\\37_database_systems.md",
+    "concept\\06_ecosystem\\38_network_protocols.md"
+  ],
+  "crate": [
+    "concept\\04_formal\\03_ownership_formal.md",
+    "concept\\04_formal\\04_rustbelt.md",
+    "concept\\04_formal\\25_quiz_formal_methods.md",
+    "concept\\05_comparative\\10_rust_vs_zig.md",
+    "concept\\06_ecosystem\\21_game_development.md",
+    "concept\\06_ecosystem\\23_database_access.md",
+    "concept\\06_ecosystem\\56_c_to_rust_translation.md",
+    "concept\\06_ecosystem\\63_cargo_authentication_and_cache.md",
+    "concept\\06_ecosystem\\73_pattern_composition_algebra.md",
+    "concept\\06_ecosystem\\75_industrial_case_studies.md",
+    "concept\\07_future\\24_roadmap.md",
+    "concept\\07_future\\49_rust_in_space.md",
+    "concept\\archive\\01_foundation_03_lifetimes_original.md",
+    "concept\\archive\\01_foundation_11_numeric_types_deprecated.md",
+    "concept\\archive\\06_ecosystem_26_game_development_deprecated.md",
+    "concept\\archive\\07_future_23_rust_edition_guide_deprecated.md",
+    "concept\\archive\\SUMMARY_mdbook_legacy.md"
+  ],
+  "unsafe": [
+    "concept\\04_formal\\06_subtype_variance.md",
+    "concept\\06_ecosystem\\57_quiz_toolchain.md",
+    "concept\\archive\\00_meta_layer_index_legacy.md",
+    "concept\\archive\\03_advanced_05_macros_archived.md",
+    "concept\\archive\\03_advanced_08_zero_cost_abstractions_archived.md",
+    "concept\\archive\\ARCHIVE_INDEX.md"
+  ],
+  "HashMap": [
+    "concept\\04_formal\\15_hoare_logic.md",
+    "concept\\07_future\\05_rust_version_tracking.md"
+  ],
+  "孤儿规则": [
+    "concept\\04_formal\\17_operational_semantics.md"
+  ],
+  "生命周期省略": [
+    "concept\\04_formal\\35_name_resolution_and_hir.md"
+  ],
+  "panic": [
+    "concept\\04_formal\\47_attributes.md",
+    "concept\\06_ecosystem\\14_documentation.md",
+    "concept\\06_ecosystem\\16_testing.md"
+  ],
+  "Send": [
+    "concept\\05_comparative\\03_paradigm_matrix.md"
+  ],
+  "宏": [
+    "concept\\05_comparative\\05_execution_model_isomorphism.md"
+  ],
+  "智能指针": [
+    "concept\\05_comparative\\17_quiz_rust_vs_systems.md"
+  ],
+  "Option": [
+    "concept\\06_ecosystem\\01_toolchain.md",
+    "concept\\06_ecosystem\\19_security_practices.md",
+    "concept\\06_ecosystem\\43_security_cryptography.md",
+    "concept\\06_ecosystem\\48_data_engineering.md"
+  ],
+  "Pin": [
+    "concept\\06_ecosystem\\18_distributed_systems.md",
+    "concept\\06_ecosystem\\37_database_systems.md",
+    "concept\\06_ecosystem\\50_distributed_consensus.md",
+    "concept\\06_ecosystem\\53_embedded_graphics.md"
+  ],
+  "模块": [
+    "concept\\06_ecosystem\\55_rust_for_data_science.md",
+    "concept\\sources\\INDEX.md"
+  ],
+  "原始指针": [
+    "concept\\07_future\\08_safety_tags_preview.md"
+  ],
+  "类型系统": [
+    "concept\\archive\\kg_ontology_v1_archived.md"
+  ],
+  "FFI": [
+    "concept\\archive\\rust_effect_system_comprehensive_analysis.md",
+    "concept\\archive\\rust_effect_system_encyclopedia.md"
+  ]
+}

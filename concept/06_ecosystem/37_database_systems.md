@@ -221,7 +221,7 @@ FROM person:tobie;
 | **嵌入部署** | ✅ 单二进制 | ❌ 需服务 | ❌ 需服务 |
 | **查询注入** | 参数化查询（类型安全） | 依赖驱动 | 依赖驱动 |
 
-> **关键洞察**: SurrealDB 的"单二进制嵌入"能力是 Rust 独有的工程优势。由于无 GC 和零依赖运行时，SurrealDB 可以编译为单个 ~50MB 的二进制文件，嵌入到任何应用中作为嵌入式数据库。这与 SQLite 的竞争定位不同——SurrealDB 提供文档+图+关系的多模型能力，而 SQLite 仅提供关系模型。[来源: SurrealDB Documentation] ✅
+> **关键洞察**: SurrealDB 的"单二进制嵌入"能力是 Rust 独有的工程优势。由于无 GC 和零依赖运行时（Runtime），SurrealDB 可以编译为单个 ~50MB 的二进制文件，嵌入到任何应用中作为嵌入式数据库。这与 SQLite 的竞争定位不同——SurrealDB 提供文档+图+关系的多模型能力，而 SQLite 仅提供关系模型。[来源: SurrealDB Documentation] ✅
 
 ---
 
@@ -372,7 +372,7 @@ fn query_result() -> &str {
 }
 ```
 
-> **修正**: 数据库查询结果通常需要返回拥有所有权的类型（`String`、`Vec<u8>`）或 `Box<str>`，不能返回局部数据的引用（Reference）。
+> **修正**: 数据库查询结果通常需要返回拥有所有权（Ownership）的类型（`String`、`Vec<u8>`）或 `Box<str>`，不能返回局部数据的引用（Reference）。
 
 ### 编译错误 4：并发连接池的 `Send` 约束不满足（编译错误）
 
@@ -402,7 +402,7 @@ struct PoolFixed {
 }
 ```
 
-> **修正**: 数据库连接池通常需要在多线程间共享。`Rc<T>` 使用非原子引用计数，不能跨线程。必须使用 `Arc<T>`（原子引用计数）包装连接对象。这是 Rust 并发模型的基本约束——共享状态必须是 `Send + Sync`。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: 数据库连接池通常需要在多线程间共享。`Rc<T>` 使用非原子引用（Reference）计数，不能跨线程。必须使用 `Arc<T>`（原子引用计数）包装连接对象。这是 Rust 并发模型的基本约束——共享状态必须是 `Send + Sync`。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 编译错误 5：SQLx 查询类型不匹配（编译错误）
 

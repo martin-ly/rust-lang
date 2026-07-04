@@ -21,6 +21,23 @@
 
 ---
 
+
+---
+
+> **过渡**: 从 Async Closures（异步闭包） 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 Async Closures（异步闭包） 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 Async Closures（异步闭包） 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
+---
+
+> **反向推理 1**: 如果程序在 Async Closures（异步闭包） 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
+>
+> **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 Async Closures（异步闭包） 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
+
+
 ## 1. 为什么需要 async closures？
 
 在 Rust 1.85 之前，表达“一个异步（Async）闭包（Closures）”通常写成：
@@ -112,7 +129,7 @@ async fn capture_examples() {
 }
 ```
 
-> ⚠️ 注意：async closure 体本身是一个 async block，调用时才产生 Future。捕获发生在闭包创建时，Future 内部再引用（Reference）这些捕获。
+> ⚠️ 注意：async closure 体本身是一个 async block，调用时才产生 Future。捕获发生在闭包（Closures）创建时，Future 内部再引用（Reference）这些捕获。
 
 ### 2.3 与 `|x| async move {}` 的对比
 
@@ -127,18 +144,18 @@ async fn capture_examples() {
 
 ### 2.4 异步可调用体谱系
 
-除了 `async || {}`，Rust 还提供多种“异步可调用”形式，它们的捕获方式与返回类型各不相同：
+除了 `async || {}`，Rust 还提供多种“异步（Async）可调用”形式，它们的捕获方式与返回类型各不相同：
 
 | 形式 | 语法 | 捕获方式 | 返回类型 | 典型场景 |
 |---|---|---|---|---|
 | `async fn` | `async fn f() -> T` | 按值传参 | `impl Future<Output = T>` | 具名函数 |
-| `async` 块 | `async { ... }` | 按引用捕获环境 | `impl Future<Output = T>` | 局部异步逻辑 |
-| `async move` 块 | `async move { ... }` | 按值 move 环境 | `impl Future<Output = T>`（可能 `'static`） | 转移所有权 |
+| `async` 块 | `async { ... }` | 按引用（Reference）捕获环境 | `impl Future<Output = T>` | 局部异步逻辑 |
+| `async move` 块 | `async move { ... }` | 按值 move 环境 | `impl Future<Output = T>`（可能 `'static`） | 转移所有权（Ownership） |
 | `async` 闭包 | `async \|x\| { ... }` | 按引用捕获（默认） | `impl AsyncFn(...) -> T` | 高阶异步函数参数 |
 | `async move` 闭包 | `async move \|x\| { ... }` | 按值 move 捕获 | `impl AsyncFnOnce(...) -> T` | 单次 / 可 `spawn` |
 | 普通闭包返回 async 块 | `\|x\| async move { ... }` | 闭包按引用捕获，async 块按值 move | `impl Fn(...) -> impl Future` | 旧生态 API |
 
-> 💡 关键直觉：`async \|x\| {}` ≠ `\|x\| async move {}`。前者返回的 `Future` 可借用闭包自身，后者返回的 `Future` 拥有闭包捕获。
+> 💡 关键直觉：`async \|x\| {}` ≠ `\|x\| async move {}`。前者返回的 `Future` 可借用（Borrowing）闭包自身，后者返回的 `Future` 拥有闭包捕获。
 
 ---
 
@@ -226,7 +243,7 @@ pub trait AsyncFnOnce<Args> {
 }
 ```
 
-`CallRefFuture<'a>` 是泛型关联类型（GAT），它允许返回的 `Future` 借用 `&self`。这正是 `AsyncFn` 与 `Fn` 的本质差异：同步 `Fn` 只能返回一个已经构造好的值，无法让返回值携带 `self` 的生命周期。
+`CallRefFuture<'a>` 是泛型（Generics）关联类型（GAT），它允许返回的 `Future` 借用 `&self`。这正是 `AsyncFn` 与 `Fn` 的本质差异：同步 `Fn` 只能返回一个已经构造好的值，无法让返回值携带 `self` 的生命周期（Lifetimes）。
 
 ---
 

@@ -55,7 +55,7 @@ fn main() {}
 > 2) 复杂泛型（Generics）代码的类型简化；
 > 3) 与 `impl Trait` 返回类型配合。
 >
-> 这与 Haskell 的 `type` synonym（完全透明，不隐藏实现）或 OCaml 的 `module type`（模块签名抽象，类似但不同粒度）不同——Rust 的 TAIT 是类型系统（Type System）的精确抽象机制。
+> 这与 Haskell 的 `type` synonym（完全透明，不隐藏实现）或 OCaml 的 `module type`（模块（Module）签名抽象，类似但不同粒度）不同——Rust 的 TAIT 是类型系统（Type System）的精确抽象机制。
 > [来源: [TAIT Tracking Issue](https://github.com/rust-lang/rust/issues/63063)] ·
 > [来源: [Type Alias Impl Trait](https://rust-lang.github.io/rfcs//2515-type_alias_impl_trait.html)]
 >

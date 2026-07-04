@@ -111,6 +111,7 @@ Pin 与 Unsafe 参考
 └── Unsafe in Async
     └── 安全抽象
 ```
+
 ---
 
 ## 🎯 文档说明
@@ -136,6 +137,7 @@ struct SelfReferential {
 let mut x = SelfReferential { /* ... */ };
 let y = x; // x 被移动，pointer 仍指向旧地址
 ```
+
 **Pin 的解决方案**:
 
 ```rust
@@ -144,6 +146,7 @@ use std::pin::Pin;
 // Pin 保证值不会被移动
 let pinned: Pin<Box<T>> = Box::pin(value);
 ```
+
 ---
 
 ### 1.2 Pin 的定义
@@ -164,6 +167,7 @@ impl<P: Deref> Pin<P> {
     pub fn as_ref(&self) -> Pin<&P::Target>;
 }
 ```
+
 ---
 
 ### 1.3 Unpin Trait
@@ -186,6 +190,7 @@ struct NotUnpin {
     _pin: PhantomPinned,
 }
 ```
+
 ---
 
 ## 2. Pin API
@@ -206,6 +211,7 @@ impl<'a, T: ?Sized> Pin<&'a mut T> {
         F: FnOnce(&mut T) -> &mut U;
 }
 ```
+
 ---
 
 ### 2.2 `Pin<Box<T>>`
@@ -219,6 +225,7 @@ impl<T> Pin<Box<T>> {
     pub unsafe fn new_unchecked(boxed: Box<T>) -> Pin<Box<T>>;
 }
 ```
+
 ---
 
 ## 3. Future 与 Pin
@@ -234,6 +241,7 @@ pub trait Future {
         -> Poll<Self::Output>;
 }
 ```
+
 ---
 
 ### 3.2 实现自引用 Future
@@ -274,6 +282,7 @@ impl Future for SelfRefFuture {
     }
 }
 ```
+
 ---
 
 ## 4. pin_project
@@ -301,6 +310,7 @@ impl<F: Future> Future for MyFuture<F> {
     }
 }
 ```
+
 ---
 
 ### 4.2 pin_project! 宏
@@ -314,6 +324,7 @@ pin_project! {
     }
 }
 ```
+
 ---
 
 ## 5. Unsafe in Async
@@ -327,6 +338,7 @@ unsafe fn access_pointer(ptr: *const i32) -> i32 {
     *ptr
 }
 ```
+
 **场景 2: 调用 unsafe 函数**:
 
 ```rust
@@ -336,12 +348,14 @@ unsafe {
     let data = slice::from_raw_parts(ptr, len);
 }
 ```
+
 **场景 3: 实现 unsafe trait**:
 
 ```rust
 unsafe impl Send for MyType {}
 unsafe impl Sync for MyType {}
 ```
+
 ---
 
 ### 5.2 异步中的 Send 和 Sync
@@ -363,6 +377,7 @@ fn is_send<T: Send>(_: T) {}
 is_send(send_future()); // ✅
 // is_send(not_send_future()); // ❌ 编译错误
 ```
+
 ---
 
 ## 6. 安全抽象
@@ -401,6 +416,7 @@ impl Drop for SafeWrapper {
 unsafe impl Send for SafeWrapper {}
 unsafe impl Sync for SafeWrapper {}
 ```
+
 ---
 
 ### 6.2 不变量保证
@@ -416,6 +432,7 @@ pub unsafe fn process_slice(ptr: *const u8, len: usize) {
     // 处理 slice
 }
 ```
+
 ---
 
 ## 7. 最佳实践
@@ -443,6 +460,7 @@ impl<F: Future> Future for MyFuture<F> {
     }
 }
 ```
+
 ---
 
 ### 7.2 Unsafe 使用建议
@@ -470,6 +488,7 @@ pub fn safe_read<T>(value: &T) -> T where T: Copy {
     unsafe { read_ptr(value as *const T) }
 }
 ```
+
 ---
 
 ## 8. 调试技巧
@@ -483,6 +502,7 @@ rustup +nightly component add miri
 # 运行测试
 cargo +nightly miri test
 ```
+
 ---
 
 ### 8.2 Address Sanitizer
@@ -492,6 +512,7 @@ cargo +nightly miri test
 export RUSTFLAGS="-Z sanitizer=address"
 cargo +nightly run
 ```
+
 ---
 
 ## 📚 延伸阅读

@@ -19,11 +19,36 @@
 
 ---
 
+
+---
+
+## 认知路径
+
+> **认知路径**: 本节从 "Rust 关键字（Keywords）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+
+1. **问题识别**: 为什么 Rust 关键字（Keywords） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
+2. **概念建立**: 掌握 Rust 关键字（Keywords） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
+3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与Rust 关键字（Keywords）的适用边界。
+5. **迁移应用**: 将 Rust 关键字（Keywords） 与前置/后置概念链接，形成跨层知识网络。
+
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "Rust 关键字（Keywords） 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 Rust 关键字（Keywords） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Rust 关键字（Keywords） 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 Rust 关键字（Keywords） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rust 关键字（Keywords） 具有语言特有的形态。
+
+
 ## 一、关键字概述
 
 关键字（keywords）是 Rust 保留给语言本身使用的词，**不能用作标识符**（变量名、函数名、类型名等），除非使用 **raw identifier** 语法 `r#`。
 
-标识符包括：函数、变量、参数、struct 字段、模块、crate、常量、宏、静态值、属性、类型、trait、生命周期的名字。
+标识符包括：函数、变量、参数、struct 字段、模块（Module）、crate、常量、宏（Macro）、静态值、属性、类型、trait、生命周期（Lifetimes）的名字。
 
 ---
 
@@ -35,12 +60,12 @@
 | `async` | 返回 `Future` 而非阻塞当前线程 |
 | `await` | 挂起执行直到 `Future` 就绪 |
 | `break` | 立即退出循环 |
-| `const` | 定义常量或常量原始指针 |
+| `const` | 定义常量或常量原始指针（Raw Pointer） |
 | `continue` | 跳到下一次循环迭代 |
 | `crate` | 模块路径中指代 crate root |
 | `dyn` | trait object 动态分发 |
 | `else` | `if` / `if let` 的 fallback 分支 |
-| `enum` | 定义枚举 |
+| `enum` | 定义枚举（Enum） |
 | `extern` | 链接外部函数或变量 |
 | `false` | 布尔假字面量 |
 | `fn` | 定义函数或函数指针类型 |
@@ -50,17 +75,17 @@
 | `in` | `for` 循环语法的一部分 |
 | `let` | 绑定变量 |
 | `loop` | 无条件循环 |
-| `match` | 模式匹配 |
+| `match` | 模式匹配（Pattern Matching） |
 | `mod` | 定义模块 |
-| `move` | 使闭包获取所有捕获变量的所有权 |
-| `mut` | 标注引用、原始指针或模式绑定的可变性 |
+| `move` | 使闭包（Closures）获取所有捕获变量的所有权（Ownership） |
+| `mut` | 标注引用（Reference）、原始指针或模式绑定的可变性 |
 | `pub` | 标注 struct 字段、`impl` 块或模块的公开可见性 |
 | `ref` | 按引用绑定 |
 | `return` | 从函数返回 |
 | `Self` | 正在定义或实现的类型的别名 |
 | `self` | 方法接收者或当前模块 |
 | `static` | 全局变量或贯穿整个程序执行的生命周期 |
-| `struct` | 定义结构体 |
+| `struct` | 定义结构体（Struct） |
 | `super` | 当前模块的父模块 |
 | `trait` | 定义 trait |
 | `true` | 布尔真字面量 |

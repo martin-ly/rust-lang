@@ -76,6 +76,7 @@ async fn platform_specific_io() -> std::io::Result<()> {
     Ok(())
 }
 ```
+
 ---
 
 ## 2. 信号处理
@@ -96,6 +97,7 @@ async fn handle_unix_signals() {
     }
 }
 ```
+
 ---
 
 ### 2.2 Windows 信号
@@ -114,6 +116,7 @@ async fn handle_windows_signals() {
     }
 }
 ```
+
 ---
 
 ## 3. 文件系统
@@ -133,6 +136,7 @@ fn cross_platform_path() -> PathBuf {
     path
 }
 ```
+
 ---
 
 ## 4. 网络编程
@@ -161,6 +165,7 @@ async fn macos_network() {
     // kqueue 自动使用
 }
 ```
+
 ---
 
 ## 5. 线程模型
@@ -191,6 +196,7 @@ fn configure_runtime() -> tokio::runtime::Runtime {
     }
 }
 ```
+
 ---
 
 ## 6. WASM 支持
@@ -215,6 +221,7 @@ pub async fn fetch_data() -> Result<String, JsValue> {
     Ok(text.as_string().unwrap())
 }
 ```
+
 ---
 
 ## 7. Android/iOS
@@ -237,6 +244,7 @@ pub extern "C" fn Java_com_example_MyClass_asyncTask(
     });
 }
 ```
+
 ---
 
 ### 7.2 iOS (Swift 互操作)
@@ -253,6 +261,7 @@ pub extern "C" fn rust_async_task(callback: extern "C" fn(*const i8)) {
     });
 }
 ```
+
 ---
 
 ## 8. 嵌入式系统
@@ -273,6 +282,7 @@ async fn main(_spawner: Spawner) {
     }
 }
 ```
+
 ---
 
 ## 9. 测试策略
@@ -297,6 +307,7 @@ async fn test_cross_platform() {
     // 跨平台测试
 }
 ```
+
 ---
 
 ## 10. 最佳实践
@@ -325,6 +336,7 @@ async fn use_platform_stream() {
     let stream = platform::connect("path").await.unwrap();
 }
 ```
+
 ---
 
 ### 10.2 Feature Flags
@@ -336,6 +348,7 @@ tokio-runtime = ["tokio"]
 // async-std [已归档]-runtime [已归档]
 smol-runtime = ["smol"]
 ```
+
 ```rust
 #[cfg(feature = "tokio-runtime")]
 use tokio::runtime::Runtime;
@@ -343,6 +356,7 @@ use tokio::runtime::Runtime;
 #[cfg(feature = "async-std [已归档]-runtime")]
 use async_std::task;
 ```
+
 ---
 
 ## 📚 延伸阅读

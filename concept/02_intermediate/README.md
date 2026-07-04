@@ -31,7 +31,7 @@
   - [三、学习路径建议](#三学习路径建议)
     - [3.1 严格依赖路径](#31-严格依赖路径)
   - [四、形式化层级定位](#四形式化层级定位)
-  - [五、本层定理一致性概览](#五本层定理一致性概览)
+  - [五、本层定理一致性（Coherence）概览](#五本层定理一致性概览)
   - [六、认知路径](#六认知路径)
   - [七、跨层出口](#七跨层出口)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -275,7 +275,7 @@ Error Handling
 | 定理 | 前提 | 结论 | 依赖的 L4 理论 | 失效条件 | 典型场景 |
 |:---|:---|:---|:---|:---|:---|
 | Orphan Rule 保证一致性 | crate 边界清晰 | 无矛盾 impl | Coherence (类型论) | 允许覆盖 impl（特化） | 孤儿规则冲突 |
-| 单态化（Monomorphization）零成本 | 泛型函数编译时实例化 | 无运行时（Runtime）分发开销 | Parametricity | `dyn Trait` 动态分发 | vtable 间接调用 |
+| 单态化（Monomorphization）零成本 | 泛型（Generics）函数编译时实例化 | 无运行时（Runtime）分发开销 | Parametricity | `dyn Trait` 动态分发 | vtable 间接调用 |
 | Rc 共享安全 | 单线程 | 共享所有权（Ownership）无 UAF | —（运行时） | 跨线程使用 Rc | 编译错误：Rc 非 Send |
 | RefCell 运行时借用（Borrowing）检查 | 单线程 | 运行时检测借用违规 | —（运行时） | 已借出时再次借用 | panic: already borrowed |
 | ? 运算符传播 | 函数返回 Result/Option | 自动错误短路 | Monad bind (>>=) | 在非 Result 返回函数中使用 | 编译错误 |

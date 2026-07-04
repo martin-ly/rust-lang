@@ -1,5 +1,4 @@
-> **受众**:
->
+> **受众**: [进阶]
 > [研究者]
 >
 # Rust 操作系统内核开发
@@ -138,7 +137,7 @@ Redox 是 Rust 编写的**类 Unix 微内核操作系统**，目标是替代 Lin
 | **GUI** | Orbital（自定义） | X11/Wayland |
 | **成熟度** | 实验性/研究 | 生产级 |
 
-> **关键洞察**: Redox 的 RedoxFS 文件系统采用**Copy-on-Write（COW）**设计，与 Rust 的所有权模型天然契合——文件写入时创建新副本（类似 `clone()`），旧版本保留（类似 `Rc::clone`）。
+> **关键洞察**: Redox 的 RedoxFS 文件系统采用**Copy-on-Write（COW）**设计，与 Rust 的所有权（Ownership）模型天然契合——文件写入时创建新副本（类似 `clone()`），旧版本保留（类似 `Rc::clone`）。
 > 这种设计使得 RedoxFS 可以高效支持快照和回滚，且无需垃圾回收。[来源: Redox OS Documentation] ✅
 
 ---
@@ -286,7 +285,7 @@ fn main() {
 }
 ```
 
-> **修正**: Theseus OS 的 Cell 类型是 Rust `std::cell::Cell` 的变体，要求 `T: Copy` 以确保获取值时不会发生所有权转移或别名问题。这与 Rust 标准库 `Cell::get` 的约束一致。Theseus 将这一约束扩展到内核态所有共享状态，通过类型系统排除非 Copy 类型的共享可变访问，从而消除数据竞争的可能。[来源: [Theseus OS Documentation](https://theseus-os.github.io/Theseus/)]
+> **修正**: Theseus OS 的 Cell 类型是 Rust `std::cell::Cell` 的变体，要求 `T: Copy` 以确保获取值时不会发生所有权转移或别名问题。这与 Rust 标准库 `Cell::get` 的约束一致。Theseus 将这一约束扩展到内核态所有共享状态，通过类型系统（Type System）排除非 Copy 类型的共享可变访问，从而消除数据竞争的可能。[来源: [Theseus OS Documentation](https://theseus-os.github.io/Theseus/)]
 
 ### 编译错误 5：Redox 的 URL 方案与 Capability 不匹配（编译错误）
 

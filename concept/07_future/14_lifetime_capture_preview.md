@@ -16,7 +16,15 @@
 > **双维定位**: C×Ana — 分析 impl Trait 的生命周期（Lifetimes）捕获规则
 > **前置依赖**: [Lifetime](../01_foundation/03_lifetimes.md) · [Trait](../02_intermediate/01_traits.md)
 > **后置延伸**: [RPITIT](37_rpitit_preview.md)
-> **来源**: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+>
+> [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) ·
+> [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+>
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
@@ -88,7 +96,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-`impl Trait` 返回类型隐式捕获所有输入生命周期，导致某些合法代码因生命周期过约束而编译失败。改进允许更精确的捕获控制。
+`impl Trait` 返回类型隐式捕获所有输入生命周期（Lifetimes），导致某些合法代码因生命周期过约束而编译失败。改进允许更精确的捕获控制。
 </details>
 
 > **前置概念**: N/A
@@ -113,7 +121,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-允许编写更精确、更灵活的泛型（Generics） API，特别是涉及异步（Async）和闭包时。减少了因生命周期推断保守性导致的不必要的 `Box` 分配。
+允许编写更精确、更灵活的泛型（Generics） API，特别是涉及异步（Async）和闭包（Closures）时。减少了因生命周期推断保守性导致的不必要的 `Box` 分配。
 </details>
 
 ---

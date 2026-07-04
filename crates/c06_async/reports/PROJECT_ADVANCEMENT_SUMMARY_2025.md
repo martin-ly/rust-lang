@@ -50,7 +50,6 @@
     - [学习价值](#学习价值)
     - [技术贡献](#技术贡献)
   - [🎉 总结](#-总结)
-  - [**维护状态**: 活跃开发中](#维护状态-活跃开发中)
 
 ## 🚀 项目概述
 
@@ -274,6 +273,7 @@
 **项目状态**: ✅ 核心功能完成
 **最后更新**: 2025年9月24日
 **维护状态**: 活跃开发中
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

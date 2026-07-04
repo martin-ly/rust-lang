@@ -29,7 +29,7 @@
   - [一、核心概念](#一核心概念)
     - [1.1 SQLx — 编译期检查](#11-sqlx--编译期检查)
     - [1.2 Diesel — 类型安全 ORM](#12-diesel--类型安全-orm)
-    - [1.3 SeaORM — 异步 ORM](#13-seaorm--异步-orm)
+    - [1.3 SeaORM — 异步（Async） ORM](#13-seaorm--异步-orm)
     - [1.4 Toasty — Tokio 团队的异步 ORM](#14-toasty--tokio-团队的异步-orm)
   - [二、查询模式](#二查询模式)
     - [2.1 原始 SQL](#21-原始-sql)
@@ -48,14 +48,14 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：数据库访问的编译错误](#十边界测试数据库访问的编译错误)
     - [10.1 边界测试：SQLx 的编译期查询验证（编译错误）](#101-边界测试sqlx-的编译期查询验证编译错误)
-    - [10.2 边界测试：连接池的生命周期管理（编译错误）](#102-边界测试连接池的生命周期管理编译错误)
-    - [10.6 边界测试：连接池的 `deadlock` 与异步等待（运行时死锁）](#106-边界测试连接池的-deadlock-与异步等待运行时死锁)
+    - [10.2 边界测试：连接池的生命周期（Lifetimes）管理（编译错误）](#102-边界测试连接池的生命周期管理编译错误)
+    - [10.6 边界测试：连接池的 `deadlock` 与异步等待（运行时（Runtime）死锁）](#106-边界测试连接池的-deadlock-与异步等待运行时死锁)
     - [10.5 边界测试：连接池耗尽与异步等待超时（运行时超时/崩溃）](#105-边界测试连接池耗尽与异步等待超时运行时超时崩溃)
     - [10.3 边界测试：连接池的 `deadpool` 与 async 生命周期（运行时超时/崩溃）](#103-边界测试连接池的-deadpool-与-async-生命周期运行时超时崩溃)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`sqlx` 与 `diesel` 在 Rust 数据库访问中各有什么特点？（理解层）](#测验-1sqlx-与-diesel-在-rust-数据库访问中各有什么特点理解层)
-    - [测验 2：`sqlx` 的 `query!` 宏如何在编译期验证 SQL 语句？（理解层）](#测验-2sqlx-的-query-宏如何在编译期验证-sql-语句理解层)
+    - [测验 2：`sqlx` 的 `query!` 宏（Macro）如何在编译期验证 SQL 语句？（理解层）](#测验-2sqlx-的-query-宏如何在编译期验证-sql-语句理解层)
     - [测验 3：Rust 的数据库连接池（如 `deadpool`、`bb8`）解决了什么问题？（理解层）](#测验-3rust-的数据库连接池如-deadpoolbb8解决了什么问题理解层)
     - [测验 4：ORM 的"N+1 查询问题"在 Rust 中如何缓解？（理解层）](#测验-4orm-的n1-查询问题在-rust-中如何缓解理解层)
     - [测验 5：为什么 Rust 的数据库驱动通常比 Node.js/Python 的驱动有更高的吞吐和更低的延迟？（理解层）](#测验-5为什么-rust-的数据库驱动通常比-nodejspython-的驱动有更高的吞吐和更低的延迟理解层)
@@ -689,7 +689,7 @@ async fn nested_query(pool: &SqlitePool) -> Result<(), sqlx::Error> {
 }
 ```
 
-> **修正**: 数据库连接池的**死锁**是常见生产问题：事务持有连接不放，同时尝试从池中获取新连接。若池大小为 N，并发事务数 ≥ N 时，所有事务等待新连接，但无连接可用——死锁。Rust 的 `sqlx` 和 `deadpool` 不提供自动死锁检测，需开发者避免：1) 在事务内只使用事务对象（`&mut tx`），不直接从 pool 获取连接；2) 限制并发事务数（`tokio::sync::Semaphore`）；3) 设置连接获取超时（`pool.acquire().timeout(...)`）。这与 Java 的 HikariCP（同样可能死锁）或 Go 的 `sql.DB`（连接管理在标准库，但死锁仍可能发生）类似——连接池死锁是通用问题，Rust 的类型系统不自动预防，但编译期查询检查减少了 SQL 错误。[来源: [sqlx Documentation](https://docs.rs/sqlx/)] · [来源: [Database Connection Pool Patterns](https://docs.oracle.com/en/database/oracle/oracle-database/19/jjucp/)]
+> **修正**: 数据库连接池的**死锁**是常见生产问题：事务持有连接不放，同时尝试从池中获取新连接。若池大小为 N，并发事务数 ≥ N 时，所有事务等待新连接，但无连接可用——死锁。Rust 的 `sqlx` 和 `deadpool` 不提供自动死锁检测，需开发者避免：1) 在事务内只使用事务对象（`&mut tx`），不直接从 pool 获取连接；2) 限制并发事务数（`tokio::sync::Semaphore`）；3) 设置连接获取超时（`pool.acquire().timeout(...)`）。这与 Java 的 HikariCP（同样可能死锁）或 Go 的 `sql.DB`（连接管理在标准库，但死锁仍可能发生）类似——连接池死锁是通用问题，Rust 的类型系统（Type System）不自动预防，但编译期查询检查减少了 SQL 错误。[来源: [sqlx Documentation](https://docs.rs/sqlx/)] · [来源: [Database Connection Pool Patterns](https://docs.oracle.com/en/database/oracle/oracle-database/19/jjucp/)]
 
 ### 10.5 边界测试：连接池耗尽与异步等待超时（运行时超时/崩溃）
 

@@ -272,7 +272,7 @@ async fn process_stream() {
 }
 ```
 
-> **并发洞察**: **tokio::join! 和 tokio::select! 是异步并发的核心原语**——它们对应同步并发中的 join 和 select 系统调用。
+> **并发洞察**: **tokio::join! 和 tokio::select! 是异步（Async）并发的核心原语**——它们对应同步并发中的 join 和 select 系统调用。
 > [来源: [tokio::select!](https://docs.rs/tokio/latest/tokio/macro.select.html)]
 
 ---
@@ -820,7 +820,7 @@ fn main() {}
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 异步模式：从 Future 到生产级并发 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 异步模式：从 Future 到生产级并发 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 异步模式：从 Future 到生产级并发 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 异步模式：从 Future 到生产级并发 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 异步状态机安全 ⟸ Pin 不动性 ⟸ Future::poll

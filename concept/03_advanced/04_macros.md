@@ -65,7 +65,7 @@
 
 > **[TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html)** Macros are a way of writing code that writes other code, which is known as metaprogramming. In Appendix C, we discuss the derive attribute, which generates an implementation of various traits for you. We've also used the `println!` and `vec!` macros throughout the book. All of these macros expand to produce more code than the code you've written manually.
 > **[TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html)** 宏是编写生成其他代码的代码的方式，即元编程。macro_rules! 在语法树层面进行模式匹配（Pattern Matching），过程宏（Procedural Macro）操作完整 TokenStream。✅ 已验证
-> **Rust Reference: Macros** Rust 宏在编译期展开，展开后的代码再进行类型检查，因此宏本身不感知类型，但生成代码受类型系统（Type System）约束。✅ 已验证
+> **Rust Reference: Macros** Rust 宏（Macro）在编译期展开，展开后的代码再进行类型检查，因此宏本身不感知类型，但生成代码受类型系统（Type System）约束。✅ 已验证
 
 ### 1.3 形式化定义
 
@@ -242,7 +242,7 @@ macro_rules! 的模式匹配 = 语法树上的正则表达式:
 
 ---
 
-<!-- 层级一致性: L2 全景认知 → L1 工程决策 — 思维导图为导航，决策树为操作手册 -->
+<!-- 层级一致性（Coherence）: L2 全景认知 → L1 工程决策 — 思维导图为导航，决策树为操作手册 -->
 
 ## 四、思维导图（Mind Map）
 
@@ -272,7 +272,7 @@ graph TD
     E --> E3[不污染外部命名空间]
 ```
 
-> **认知功能**: L2 全景分类工具，将 Rust 宏系统的四大维度（声明宏（Declarative Macro）、过程宏、编译期执行、卫生性）结构化呈现。
+> **认知功能**: L2 全景分类工具，将 Rust 宏系统的四大维度（声明宏（Declarative Macro）、过程宏（Procedural Macro）、编译期执行、卫生性）结构化呈现。
 > [来源: [Rust Reference: const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)]
 > [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 > 建议在学习初期将其作为导航锚点，快速建立"宏系统包含哪些子领域"的空间认知。
@@ -761,7 +761,7 @@ let v2 = make_vec![3, 4];
 
 > **直觉困惑**: "泛型（Generics）也能抽象代码，为什么还需要宏？"
 
-**概念解答**: 泛型抽象的是**类型**，宏抽象的是**语法模式**。泛型要求参数数量固定、语法结构固定；宏允许可变参数数量、自定义语法结构。
+**概念解答**: 泛型（Generics）抽象的是**类型**，宏抽象的是**语法模式**。泛型要求参数数量固定、语法结构固定；宏允许可变参数数量、自定义语法结构。
 
 | 场景 | 泛型（Generics） | 宏 |
 |:---|:---|:---|
@@ -842,7 +842,7 @@ fn main() {
 | 调试难度 | 中（cargo expand） | 高（需日志/测试） |
 | 典型代表 | `vec!`、`println!` | `#[derive(Debug)]`、`serde::Serialize` |
 ```rust
-// 声明宏: 模式匹配
+// 声明宏（Declarative Macro）: 模式匹配
 macro_rules! say_hello {
     () => { println!("Hello!"); };
     ($name:expr) => { println!("Hello, {}!", $name); };
@@ -1945,7 +1945,7 @@ macro_rules! trace_fn {
 
 ### 6. `macro_rules!` 与 `macro` 关键字（声明宏 2.0）的演进对比
 
-> **[RFC 1584: Macros](https://rust-lang.github.io/rfcs/1584-macros.html)** `macro` 关键字（声明宏 2.0）旨在解决 `macro_rules!` 的诸多限制：更好的作用域控制、模块路径支持、可见性修饰符，以及更像函数的语法。✅ 已验证
+> **[RFC 1584: Macros](https://rust-lang.github.io/rfcs/1584-macros.html)** `macro` 关键字（声明宏 2.0）旨在解决 `macro_rules!` 的诸多限制：更好的作用域控制、模块（Module）路径支持、可见性修饰符，以及更像函数的语法。✅ 已验证
 > **[Rust Reference: macro keyword](https://doc.rust-lang.org/reference/)** 截至 Rust 1.78，`macro` 关键字仍为不稳定特性（`#![feature(decl_macro)]`），但已在 `std` 内部广泛使用（如 `vec!`、`println!` 的标准库实现已迁移）。✅ 已验证
 
 **`macro_rules!` 的局限性**

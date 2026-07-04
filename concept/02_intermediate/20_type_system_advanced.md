@@ -28,12 +28,12 @@
 
 ## 📑 目录
 
-- [高级类型系统：从关联类型到类型级编程](#高级类型系统从关联类型到类型级编程)
+- [高级类型系统（Type System）：从关联类型到类型级编程](#高级类型系统从关联类型到类型级编程)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 impl Trait 的演进](#11-impl-trait-的演进)
     - [1.2 Const Generics](#12-const-generics)
-    - [1.3 类型推断与约束求解](#13-类型推断与约束求解)
+    - [1.3 类型推断（Type Inference）与约束求解](#13-类型推断与约束求解)
   - [二、技术细节](#二技术细节)
     - [2.1 impl Trait 在参数位置](#21-impl-trait-在参数位置)
     - [2.2 Const Generics 实战](#22-const-generics-实战)
@@ -51,7 +51,7 @@
     - [7.3 重载决议 vs Trait 解析](#73-重载决议-vs-trait-解析)
     - [编译错误示例](#编译错误示例)
     - [4.4 边界测试：高阶 trait bound（HRTB）误用（编译错误）](#44-边界测试高阶-trait-boundhrtb误用编译错误)
-    - [4.5 边界测试：关联类型与泛型参数冲突（编译错误）](#45-边界测试关联类型与泛型参数冲突编译错误)
+    - [4.5 边界测试：关联类型与泛型（Generics）参数冲突（编译错误）](#45-边界测试关联类型与泛型参数冲突编译错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -708,7 +708,7 @@ where
 }
 ```
 
-> **修正**: 高阶 trait bound（HRTB，`for<'a>`）要求闭包（Closures）实现对所有可能生命周期 `'a` 有效。当闭包签名涉及引用时，必须显式使用 HRTB 来正确关联输入和输出的生命周期，否则编译器无法推断返回引用的来源。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 高阶 trait bound（HRTB，`for<'a>`）要求闭包（Closures）实现对所有可能生命周期（Lifetimes） `'a` 有效。当闭包签名涉及引用时，必须显式使用 HRTB 来正确关联输入和输出的生命周期，否则编译器无法推断返回引用的来源。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.5 边界测试：关联类型与泛型参数冲突（编译错误）
 
@@ -913,7 +913,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-表示某个 trait bound 对所有可能的生命周期都成立。典型用例是要求闭包能处理任意生命周期的引用（Reference）：`F: for<'a> Fn(&'a str) -> &'a str`。
+表示某个 trait bound 对所有可能的生命周期都成立。典型用例是要求闭包（Closures）能处理任意生命周期的引用（Reference）：`F: for<'a> Fn(&'a str) -> &'a str`。
 </details>
 
 ---

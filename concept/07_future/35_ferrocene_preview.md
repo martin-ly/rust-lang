@@ -242,8 +242,8 @@ Ferrocene 证据包构成:
 | **航天** | ECSS-Q-ST-80C | 长周期任务需要确定性内存管理 | ⬜ 待探索 |
 
 > **行业洞察**:
-> 汽车行业是 Ferrocene 的**首要目标市场**——现代汽车有 100+ ECU，软件复杂度超过 1 亿行代码，传统 C/C++ 的内存安全缺陷是召回的主要原因。
-> Rust 的所有权模型直接针对这一痛点。
+> 汽车行业是 Ferrocene 的**首要目标市场**——现代汽车有 100+ ECU，软件复杂度超过 1 亿行代码，传统 C/C++ 的内存安全（Memory Safety）缺陷是召回的主要原因。
+> Rust 的所有权（Ownership）模型直接针对这一痛点。
 > [来源: [Ferrous Systems — Industry Reports](https://ferrous-systems.com/blog/)]
 
 ### 3.1 2026 Vision Doc：安全关键 Rust 的真实落地洞察
@@ -302,7 +302,7 @@ Rust Foundation 与 AdaCore、Arm、Ferrous Systems、HighTec、Lynx Software Te
 **与 Ferrocene 的关系**：
 
 - Ferrocene 提供**已认证的编译器工具链**，解决“编译器可信”问题
-- SCRC 解决**生态与标准对接**问题：需求定义、编码规范、工具链认证、async 运行时需求、FFI 边界指导
+- SCRC 解决**生态与标准对接**问题：需求定义、编码规范、工具链认证、async 运行时（Runtime）需求、FFI 边界指导
 - 两者共同构成 Rust 进入汽车/航空/医疗/工业安全关键市场的“工具链 + 行业治理”双支柱
 
 > **关键洞察**: 安全关键 Rust 的成熟不能仅靠单个产品（Ferrocene）或单个组织完成。SCRC 通过免费会员、子委员会分工和公开会议，把行业需求聚合为 Rust Project 可执行的目标，这是开源语言进入受监管行业的制度创新。

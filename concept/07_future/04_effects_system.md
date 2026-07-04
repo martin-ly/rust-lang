@@ -198,7 +198,7 @@ Rust 的 effect system 并非凭空产生，它延续了编程语言理论中近
 
 > **认知功能**:
 > 此谱系表揭示 Rust effect system 的**设计取舍**——它不是"缺乏理论深度的工程 hack"，而是**在零成本抽象（Zero-Cost Abstraction）约束下对理论的有意裁剪**。
-> Rust 选择不实现完整的代数效应（避免运行时 handler 栈开销），而是通过关键字 + trait + 状态机 desugar 在编译期消除效果成本。
+> Rust 选择不实现完整的代数效应（避免运行时（Runtime） handler 栈开销），而是通过关键字 + trait + 状态机 desugar 在编译期消除效果成本。
 > 这与 Koka 的"理论 purity"和 Java 的"弱类型检查"形成三极对比。
 > [来源: [Rust Keyword Generics Initiative](https://github.com/rust-lang/keyword-generics-initiative)]
 
@@ -288,7 +288,7 @@ N 种效果 → 2^N 种组合          N 种效果 → 1 种泛型机制
 
 > **[学术来源: Plotkin & Pretnar 2009 — Algebraic Effects; Koka Language]**
 
-**Effect 系统**（Effect System）是将"计算效果"（computational effects）显式编码到类型系统中的理论框架。
+**Effect 系统**（Effect System）是将"计算效果"（computational effects）显式编码到类型系统（Type System）中的理论框架。
 与类型系统回答"这个函数接受/返回什么值"不同，Effect 系统回答"这个函数在计算过程中**还做了什么**"。
 
 经典效果包括：
@@ -374,7 +374,7 @@ Rust 封闭效应系统的设计约束：
 | 效果处理器可在运行时动态组合 | Rust 拒绝运行时开销（handler 栈、动态分派） |
 | 用户定义效果需编译器插件机制 | Rust 编译器架构不支持用户扩展类型系统核心 |
 | 行多态子类型需复杂类型推断（Type Inference） | Rust 已有生命周期（Lifetimes）推断，再加效果行推断会爆炸 |
-| 效果抽象边界模糊 | Rust 强调零成本抽象，任何运行时成本都需显式 opt-in |
+| 效果抽象边界模糊 | Rust 强调零成本抽象（Zero-Cost Abstraction），任何运行时成本都需显式 opt-in |
 
 > **重要澄清**:
 > 封闭 ≠ 固定不变。Rust 的封闭效应系统可以随语言版本扩展新效果（如 Edition 2027 可能引入 `no-panic`）。
@@ -1003,7 +1003,7 @@ copy::<async>(reader, writer).await?; // 显式指定 async
 
 > **关键洞察**:
 > `maybe(async)` 不是"可选 async"，而是**编译期条件化 desugar**——效果由调用上下文推断，trait bound 与函数效果同步实例化。
-> 这与 `const fn` 的"maybe-const"语义一致（`const fn` 本身已是效果泛型的雏形）。
+> 这与 `const fn` 的"maybe-const"语义一致（`const fn` 本身已是效果泛型（Generics）的雏形）。
 
 #### 4.2.3 Carried vs Uncarried Effects
 
@@ -1170,7 +1170,7 @@ Q4: 与现有生态的兼容性？
 | **EF1** | `async` 效果追踪 | `async fn` 关键字 | 调用者必须 `await` 或 `spawn` | 阻塞调用在 async 上下文 | 执行器线程阻塞 |
 | **EF2** | `unsafe` 效果边界 | `unsafe fn` / `unsafe {}` | 调用者承担 safety proof 义务 | 调用者未验证 precondition | UB（未定义行为） |
 | **EF3** | `const` 效果限制 | `const fn` 关键字 | 仅编译期可求值操作 | 运行时依赖；堆分配 | 编译错误 |
-| **EF4** | `AsyncFn` 效果多态 | `AsyncFn` trait bound | 泛型代码接受 sync/async 闭包 | trait 系统表达能力不足 | 无法抽象异步回调 |
+| **EF4** | `AsyncFn` 效果多态 | `AsyncFn` trait bound | 泛型代码接受 sync/async 闭包（Closures） | trait 系统表达能力不足 | 无法抽象异步回调 |
 | **EF5** | 统一 `effect` 关键字（未来） | 语法设计完成 + Edition 迁移 | 所有副作用显式追踪 | 向后兼容破坏；推断失败 | 生态迁移成本 |
 
 > **⟹ 推理链**:
@@ -1417,7 +1417,7 @@ Rust 生命周期:  fn foo<'a>(x: &'a T)       // 编译期生命周期
 ```
 
 > **关键洞察**:
-> Flix 的区域系统展示了"如果 Rust 的生命周期是运行时的"会是什么样子。
+> Flix 的区域系统展示了"如果 Rust 的生命周期（Lifetimes）是运行时的"会是什么样子。
 > Flix 的区域允许动态内存管理（如 arena allocator），而 Rust 的 `'a` 是纯粹的编译期约束。
 > Flix 的设计更适合需要灵活内存管理的场景（如编译器、数据库），而 Rust 的设计更适合系统编程（零成本抽象）。
 > [来源: 💡 原创分析] · [Madsen et al., OOPSLA 2016] ✅
@@ -1557,7 +1557,7 @@ async 效果 → Future 状态机 → 状态机可能自引用 → poll 需要 P
      └────────────── 效果强制引入 Pin ────────────────────┘
 ```
 
-`async fn` 编译器 desugar 将函数体转换为状态机（`Future`），状态机在 `.await` 点可能持有局部变量的引用（自引用）。
+`async fn` 编译器 desugar 将函数体转换为状态机（`Future`），状态机在 `.await` 点可能持有局部变量的引用（Reference）（自引用）。
 为保证这些引用在挂起/恢复周期中有效，状态机不能被移动——这正是 `Pin` 的语义。
 
 ```rust,ignore
@@ -1702,7 +1702,7 @@ trait Generator<R> {
 
 ### 测验 2：Rust 目前如何通过类型系统处理效果（如异步、不安全）？（理解层）
 
-**题目**: Rust 目前如何通过类型系统处理效果（如异步、不安全）？
+**题目**: Rust 目前如何通过类型系统处理效果（如异步（Async）、不安全）？
 
 <details>
 <summary>✅ 答案与解析</summary>

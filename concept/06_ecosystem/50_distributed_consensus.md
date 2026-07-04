@@ -1,5 +1,4 @@
-> **内容分级**:
->
+> **内容分级**: [综述级]
 > [专家级]
 > **代码状态**: ✅ 含可编译示例
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -390,7 +389,7 @@ Rust 优势:
 
 ### 5.1 PBFT：实用拜占庭容错
 
-> **[PBFT — Castro & Liskov, OSDI 1999](https://pmg.csail.mit.edu/papers/osdi99.pdf)** PBFT（Practical Byzantine Fault Tolerance）是第一个实用的拜占庭容错共识算法。在异步网络 + n ≥ 3f + 1 条件下，容忍 f 个拜占庭节点。核心机制：**三阶段提交**（Pre-Prepare / Prepare / Commit）+ **视图更换**（View Change）。[来源: [PBFT Paper](https://pmg.csail.mit.edu/papers/osdi99.pdf)]
+> **[PBFT — Castro & Liskov, OSDI 1999](https://pmg.csail.mit.edu/papers/osdi99.pdf)** PBFT（Practical Byzantine Fault Tolerance）是第一个实用的拜占庭容错共识算法。在异步（Async）网络 + n ≥ 3f + 1 条件下，容忍 f 个拜占庭节点。核心机制：**三阶段提交**（Pre-Prepare / Prepare / Commit）+ **视图更换**（View Change）。[来源: [PBFT Paper](https://pmg.csail.mit.edu/papers/osdi99.pdf)]
 
 ```text
 PBFT 正常流程（三阶段）:

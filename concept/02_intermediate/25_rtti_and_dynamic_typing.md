@@ -26,6 +26,56 @@
 
 > **Bloom 层级**: 分析 → 评价
 
+
+---
+
+## 认知路径
+
+> **认知路径**: 本节从 "RTTI 与动态类型识别" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+
+1. **问题识别**: 为什么 RTTI 与动态类型识别 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
+2. **概念建立**: 掌握 RTTI 与动态类型识别 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
+3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与RTTI 与动态类型识别的适用边界。
+5. **迁移应用**: 将 RTTI 与动态类型识别 与前置/后置概念链接，形成跨层知识网络。
+
+
+---
+
+> **过渡**: 从 RTTI 与动态类型识别 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 RTTI 与动态类型识别 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 RTTI 与动态类型识别 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
+---
+
+> **定理 1** [Tier 2]: RTTI 与动态类型识别 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
+>
+> **定理 2** [Tier 2]: 正确理解 RTTI 与动态类型识别 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
+>
+> **定理 3** [Tier 3]: 将 RTTI 与动态类型识别 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
+
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "RTTI 与动态类型识别 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 RTTI 与动态类型识别 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 RTTI 与动态类型识别 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 RTTI 与动态类型识别 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 RTTI 与动态类型识别 具有语言特有的形态。
+
+
+---
+
+> **反向推理 1**: 如果程序在 RTTI 与动态类型识别 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
+>
+> **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 RTTI 与动态类型识别 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
+
+
 ## 一、核心命题
 
 > **运行时（Runtime）类型识别（RTTI）不是动态类型的专利，而是静态类型系统（Type System）在运行时对类型信息的有限暴露。
@@ -79,7 +129,7 @@ if (d) {
 
 ### 3.1 `Any` trait：显式的运行时类型擦除
 
-Rust 通过 `dyn Any` 提供类似 `void*` + RTTI 的能力，但完全受类型系统约束（Rust std::any: [Any trait](https://doc.rust-lang.org/std/any/trait.Any.html)；quinedot: [The `dyn Any` Guide](https://quinedot.github.io/rust-learning/dyn-any.html)）：
+Rust 通过 `dyn Any` 提供类似 `void*` + RTTI 的能力，但完全受类型系统（Type System）约束（Rust std::any: [Any trait](https://doc.rust-lang.org/std/any/trait.Any.html)；quinedot: [The `dyn Any` Guide](https://quinedot.github.io/rust-learning/dyn-any.html)）：
 
 ```rust
 use std::any::{Any, TypeId};
@@ -136,8 +186,8 @@ fn extract_string(value: Box<dyn Any>) -> Option<String> {
 | 核心机制 | `typeid` / `dynamic_cast` | `Any` trait / `TypeId` / `downcast_ref` |
 | 语法位置 | 语言内置 | 标准库 trait |
 | 多态要求 | 需要虚函数 | 不需要；任何 `'static` 类型都可擦除 |
-| 转换失败 | 指针返回 `nullptr`，引用抛异常 | 返回 `Option` / `Result` |
-| 运行时开销 | vtable 中存储 `type_info` | 单态化生成 `TypeId`，按需付费 |
+| 转换失败 | 指针返回 `nullptr`，引用（Reference）抛异常 | 返回 `Option` / `Result` |
+| 运行时开销 | vtable 中存储 `type_info` | 单态化（Monomorphization）生成 `TypeId`，按需付费 |
 | 类型安全 | 编译期无法保证转换成功 | `downcast_ref` 返回 `Option`，强制处理失败 |
 | 跨 crate | 依赖 ABI 兼容的 `type_info` | `TypeId` 在同一编译单元内稳定，跨进程不保证 |
 

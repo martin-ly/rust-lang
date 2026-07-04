@@ -62,6 +62,7 @@ async fn zero_copy_example(mut stream: TcpStream) -> std::io::Result<()> {
     Ok(())
 }
 ```
+
 ---
 
 ### 1.2 sendfile
@@ -79,6 +80,7 @@ async fn sendfile_example(file: &File, socket: &TcpStream) {
     }
 }
 ```
+
 ---
 
 ## 2. 内存池
@@ -91,6 +93,7 @@ use jemallocator::Jemalloc;
 #[global_allocator]
 static GLOBAL: Jemalloc = Jemalloc;
 ```
+
 ---
 
 ### 2.2 对象复用
@@ -113,6 +116,7 @@ impl BufferPool {
     }
 }
 ```
+
 ---
 
 ## 3. 批处理
@@ -137,6 +141,7 @@ async fn batch_insert(pool: &PgPool, records: Vec<Record>) {
     }
 }
 ```
+
 ---
 
 ## 4. 异步聚合
@@ -174,6 +179,7 @@ impl<K: Eq + Hash, V: Clone> Coalescer<K, V> {
     }
 }
 ```
+
 ---
 
 ## 5. 无锁数据结构
@@ -197,6 +203,7 @@ impl<T> LockFreeQueue<T> {
     }
 }
 ```
+
 ---
 
 ## 6. SIMD 优化
@@ -217,6 +224,7 @@ fn simd_sum(data: &[f32]) -> f32 {
     sum.horizontal_sum()
 }
 ```
+
 ---
 
 ## 7. 预取优化
@@ -235,6 +243,7 @@ fn prefetch<T>(ptr: *const T) {
     }
 }
 ```
+
 ---
 
 ## 8. CPU 亲和性
@@ -249,6 +258,7 @@ fn pin_to_core(core_id: usize) {
     core_affinity::set_for_current(core_ids[core_id]);
 }
 ```
+
 ---
 
 ## 9. 性能分析
@@ -263,6 +273,7 @@ cargo flamegraph --bin myapp
 perf record -F 99 -g -- ./target/release/myapp
 perf script | stackcollapse-perf.pl | flamegraph.pl > flame.svg
 ```
+
 ---
 
 ### 9.2 CPU 性能计数器
@@ -283,6 +294,7 @@ async fn profile_section() {
     }
 }
 ```
+
 ---
 
 ## 10. 网络优化
@@ -306,6 +318,7 @@ async fn optimize_tcp(stream: &TcpStream) -> std::io::Result<()> {
     Ok(())
 }
 ```
+
 ---
 
 ### 10.2 io_uring (Linux)
@@ -323,6 +336,7 @@ async fn io_uring_read() {
     println!("Read {} bytes", n);
 }
 ```
+
 ---
 
 ## 📚 延伸阅读

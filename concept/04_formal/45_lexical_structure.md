@@ -16,6 +16,33 @@
 
 ---
 
+
+> **跨层回溯**: [宏系统](../03_advanced/04_macros.md) · [过程宏（Procedural Macro）](../03_advanced/07_proc_macro.md)
+
+---
+
+## 认知路径
+
+> **认知路径**: 本节从 "词法结构（Lexical Structure）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+
+1. **问题识别**: 为什么 词法结构（Lexical Structure） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
+2. **概念建立**: 掌握 词法结构（Lexical Structure） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
+3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与词法结构（Lexical Structure）的适用边界。
+5. **迁移应用**: 将 词法结构（Lexical Structure） 与前置/后置概念链接，形成跨层知识网络。
+
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "词法结构（Lexical Structure） 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 词法结构（Lexical Structure） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 词法结构（Lexical Structure） 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 词法结构（Lexical Structure） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 词法结构（Lexical Structure） 具有语言特有的形态。
+
+
 ## 一、输入格式
 
 Rust 源文件必须是有效的 **UTF-8** 编码字节序列。编译器不接受其他编码。
@@ -79,7 +106,7 @@ Rust token 主要包括：
 | 标识符 | `foo`, `Foo`, `_bar` |
 | 关键字 | `fn`, `let`, `struct` |
 | 标点符号 | `(`, `)`, `{`, `}`, `;`, `,`, `::`, `->` |
-| 生命周期 | `'a`, `'static` |
+| 生命周期（Lifetimes） | `'a`, `'static` |
 | 文档注释 | `///`, `//!` |
 
 ## 八、与语法分析的关系

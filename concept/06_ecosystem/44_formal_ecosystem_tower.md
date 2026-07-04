@@ -140,8 +140,8 @@ graph BT
 | **库** | **Stars** | **形式化根基** | **可组合性** | **可观测性** |
 |:---|:---|:---|:---|:---|
 | **Tonic** | 生态标准 | 基于 Protobuf 的强类型 gRPC；`prost` 将模式定义编译为 Rust ADT，保持**代数结构同态** | `Service` Trait（Tower）与 gRPC 方法自动映射；拦截器（Interceptor）作为中间件组合 | gRPC 状态码自动映射；OpenTelemetry 集成 |
-| **Prost** | 底层基石 | Protobuf 模式即**代数规范**：字段编号、类型标签、可选/重复约束在编译期生成 Rust 代码 | 生成的 Rust 结构体自动实现 Serde/Traits，与生态无缝组合 | — |
-| **GraphQL (async-graphql)** | 活跃 | Schema 即类型契约；查询解析在编译期无验证（运行时），但 Rust 类型系统保证 Resolver 的返回类型匹配 | Schema 模块（Module）化组合；Federation 支持分布式 Schema 拼接 | 字段级 tracing 与性能分析 |
+| **Prost** | 底层基石 | Protobuf 模式即**代数规范**：字段编号、类型标签、可选/重复约束在编译期生成 Rust 代码 | 生成的 Rust 结构体（Struct）自动实现 Serde/Traits，与生态无缝组合 | — |
+| **GraphQL (async-graphql)** | 活跃 | Schema 即类型契约；查询解析在编译期无验证（运行时），但 Rust 类型系统（Type System）保证 Resolver 的返回类型匹配 | Schema 模块（Module）化组合；Federation 支持分布式 Schema 拼接 | 字段级 tracing 与性能分析 |
 
 ---
 
@@ -176,7 +176,7 @@ graph BT
 
 | **库/项目** | **Stars** | **形式化根基** | **可组合性** | **可观测性** |
 |:---|:---|:---|:---|:---|
-| **Firecracker** | 27k | AWS 微虚拟机；Rust 所有权（Ownership）保证设备模型内存安全；**形式化安全边界**通过 KVM 隔离实现 | 通过 API 组合配置；每个 MicroVM 是独立形式化单元 | 完整的 Metrics 与日志输出 |
+| **Firecracker** | 27k | AWS 微虚拟机；Rust 所有权（Ownership）保证设备模型内存安全（Memory Safety）；**形式化安全边界**通过 KVM 隔离实现 | 通过 API 组合配置；每个 MicroVM 是独立形式化单元 | 完整的 Metrics 与日志输出 |
 | **Wasmtime** | 13k | WebAssembly 的**形式化语义**（W3C 标准）；Rust 实现保证运行时与规范的一致性（Coherence） | 组件模型（Component Model）支持跨语言组合 | 内置 Profiling 与性能分析 |
 | **TiKV** | 13.6k | 分布式 KV；**Raft 共识协议**有形式化规约；Rust 保证状态机实现无数据竞争 | 模块（Module）化存储引擎（RocksDB/Titan）；PD 调度独立组合 | Prometheus 指标 + Jaeger 追踪 |
 
@@ -214,10 +214,10 @@ quadrantChart
 
 **2026 年的黄金组合**（可组合 × 可观测 × 形式化潜力）：
 
-1. **Tokio + Tower + Axum**：异步生态的范畴论骨架，组合性的工业巅峰
+1. **Tokio + Tower + Axum**：异步（Async）生态的范畴论骨架，组合性的工业巅峰
 2. **SQLx + Serde + Prost**：数据层的类型安全同态链
 3. **Tracing + OpenTelemetry + Vector**：可观测性的函数式管道
-4. **Kani + Verus（关键模块）**：超越编译器的功能正确性验证
+4. **Kani + Verus（关键模块（Module））**：超越编译器的功能正确性验证
 
 **2026 年的黄金组合**（可组合 × 可观测 × 形式化潜力）： [来源: [lib.rs](https://lib.rs/)]
 
@@ -232,7 +232,7 @@ quadrantChart
 
 2026 年 5 月的 Rust 生态已呈现清晰的形式化层级：
 
-> **L0 编译器层**：所有权/生命周期（Lifetimes）/并发安全（Concurrency Safety）（已完成，所有库受益） [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+> **L0 编译器层**：所有权（Ownership）/生命周期（Lifetimes）/并发安全（Concurrency Safety）（已完成，所有库受益） [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 > **L1 类型契约层**：Trait/Schema/接口（Serde/SQLx/Prost/Tonic 在此竞争）
 > **L2 架构组合层**：Tower/Axum 的 Service 态射复合（范畴论的工业实现）
 > **L3 可观测层**：Tracing/OpenTelemetry 的调用树形式化（Span 即节点）
@@ -335,7 +335,7 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 - [x] **高**: 补充每个 crate 的具体版本兼容性矩阵（MSRV、Edition 依赖） —— 已完成 §8.1
 - [x] **高**: 补充更多 2026 年新兴 crate 的形式化评估（如 `rkyv`、`nalgebra` 的编译期维度检查） —— 已融入矩阵
 - [x] **中**: 补充形式化验证工具与 CI/CD 集成的具体配置示例（Kani + GitHub Actions） —— 已完成 §8.2
- [x] **中**: 补充 Wasmtime 形式化语义与 Rust 实现一致性的技术细节 —— 已完成 §8.3
+ [x] **中**: 补充 Wasmtime 形式化语义与 Rust 实现一致性（Coherence）的技术细节 —— 已完成 §8.3
 
 ### 8.4 形式化视角 vs 传统功能分类映射
 
@@ -527,7 +527,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 形式化工具（Prusti、Kani、Creusot）大多依赖 **nightly 编译器**：1) `proc_macro_hygiene`（宏卫生扩展）；2) `rustc_private`（访问编译器内部 API）；3) 自定义 MIR  pass。这导致：1) 生产代码不能使用形式化工具（需 nightly）；2) nightly 版本漂移（工具可能滞后于最新 nightly）；3) CI 复杂（需固定 nightly 版本）。Ferrocene 项目致力于提供**经过认证的稳定 Rust 工具链**，包含形式化验证支持。替代方案：1) `contracts` crate（轻量级运行时契约检查，stable）；2) `assertion-rs`（运行时断言库）；3) 外部验证（F*、Coq 提取后独立验证）。这与 Java 的 JML（标准注释，但工具支持分散）或 .NET 的 Code Contracts（已停止维护）类似——Rust 的形式化生态仍在成熟中，nightly 依赖是主要采纳障碍。[来源: [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html)] · [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)]
+> **修正**: Rust 形式化工具（Prusti、Kani、Creusot）大多依赖 **nightly 编译器**：1) `proc_macro_hygiene`（宏（Macro）卫生扩展）；2) `rustc_private`（访问编译器内部 API）；3) 自定义 MIR  pass。这导致：1) 生产代码不能使用形式化工具（需 nightly）；2) nightly 版本漂移（工具可能滞后于最新 nightly）；3) CI 复杂（需固定 nightly 版本）。Ferrocene 项目致力于提供**经过认证的稳定 Rust 工具链**，包含形式化验证支持。替代方案：1) `contracts` crate（轻量级运行时契约检查，stable）；2) `assertion-rs`（运行时断言库）；3) 外部验证（F*、Coq 提取后独立验证）。这与 Java 的 JML（标准注释，但工具支持分散）或 .NET 的 Code Contracts（已停止维护）类似——Rust 的形式化生态仍在成熟中，nightly 依赖是主要采纳障碍。[来源: [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html)] · [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)]
 > **过渡**: Formal Ecosystem Tower（Rust 生态形式化分层塔） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Formal Ecosystem Tower（Rust 生态形式化分层塔） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Formal Ecosystem Tower（Rust 生态形式化分层塔） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

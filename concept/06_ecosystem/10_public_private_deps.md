@@ -217,7 +217,7 @@ pub fn foo(x: C::Internal)  // ❌ 错误：C 是私有依赖，不能出现在 
 编译器通过 `public` 标记实施**边界检查**：
 
 - `public = true` 的依赖类型可出现在 `pub` / `pub(crate)` API 中
-- `public = false` 的依赖类型**仅限**私有模块使用 [来源: [lib.rs](https://lib.rs/)]
+- `public = false` 的依赖类型**仅限**私有模块（Module）使用 [来源: [lib.rs](https://lib.rs/)]
 
 > [来源: [RFC 3516 §Semantics](https://github.com/rust-lang/rfcs/pull/3516) — 编译器在解析 `use` 语句和类型检查阶段验证公共 API 中是否出现私有依赖的类型。
 

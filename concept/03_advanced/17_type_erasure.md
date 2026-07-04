@@ -49,11 +49,11 @@
   - [十、边界测试：类型擦除的编译错误](#十边界测试类型擦除的编译错误)
     - [10.1 边界测试：`dyn Trait` 的大小未知（编译错误）](#101-边界测试dyn-trait-的大小未知编译错误)
     - [10.2 边界测试：trait object 的方法返回 `Self`（编译错误）](#102-边界测试trait-object-的方法返回-self编译错误)
-    - [10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（编译错误）](#103-边界测试any-的-downcast_ref-与生命周期编译错误)
+    - [10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（Lifetimes）（编译错误）](#103-边界测试any-的-downcast_ref-与生命周期编译错误)
     - [10.4 边界测试：vtable 与对象安全的隐性约束（编译错误）](#104-边界测试vtable-与对象安全的隐性约束编译错误)
     - [10.3 边界测试：`dyn Trait` 与 `Sized` 边界的冲突（编译错误）](#103-边界测试dyn-trait-与-sized-边界的冲突编译错误)
-    - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型约束（编译错误）](#104-边界测试dyn-trait-的-sized-要求与泛型约束编译错误)
-    - [10.6 边界测试：所有权移动后的再次使用](#106-边界测试所有权移动后的再次使用)
+    - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型（Generics）约束（编译错误）](#104-边界测试dyn-trait-的-sized-要求与泛型约束编译错误)
+    - [10.6 边界测试：所有权（Ownership）移动后的再次使用](#106-边界测试所有权移动后的再次使用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`dyn Trait` 的大小为什么在编译时未知？它如何被实际使用？（理解层）](#测验-1dyn-trait-的大小为什么在编译时未知它如何被实际使用理解层)
     - [测验 2：`&dyn Trait` 在内存中的布局是什么？（理解层）](#测验-2dyn-trait-在内存中的布局是什么理解层)
@@ -671,7 +671,7 @@ fn main() {
 }
 ```
 
-> **修正**: `dyn Any` 要求底层类型是 `'static`，因为 `Any` trait 的 `type_id` 方法在运行时识别类型，而运行时需要类型在程序生命周期（Lifetimes）内稳定。带生命引用（Reference）的类型（`&'a String`）不能转为 `dyn Any`，因为 `'a` 可能短于 `'static`。解决方案：1) 使用 `Any` 时只处理 `'static` 类型（`String`、`Vec<T>`、`i32`）；2) 对非 `'static` 类型使用自定义 trait object 或 enum；3) 使用 `unsafe` 和裸指针绕过（不推荐）。这与 Java 的 `instanceof`（无生命周期限制）或 C++ 的 `dynamic_cast`（无生命周期限制）不同——Rust 的生命周期系统渗透到运行时类型擦除，确保即使动态分派也不违反内存安全（Memory Safety）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/any/trait.Any.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
+> **修正**: `dyn Any` 要求底层类型是 `'static`，因为 `Any` trait 的 `type_id` 方法在运行时（Runtime）识别类型，而运行时需要类型在程序生命周期（Lifetimes）内稳定。带生命引用（Reference）的类型（`&'a String`）不能转为 `dyn Any`，因为 `'a` 可能短于 `'static`。解决方案：1) 使用 `Any` 时只处理 `'static` 类型（`String`、`Vec<T>`、`i32`）；2) 对非 `'static` 类型使用自定义 trait object 或 enum；3) 使用 `unsafe` 和裸指针绕过（不推荐）。这与 Java 的 `instanceof`（无生命周期限制）或 C++ 的 `dynamic_cast`（无生命周期限制）不同——Rust 的生命周期系统渗透到运行时类型擦除，确保即使动态分派也不违反内存安全（Memory Safety）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/any/trait.Any.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
 
 ### 10.4 边界测试：vtable 与对象安全的隐性约束（编译错误）
 

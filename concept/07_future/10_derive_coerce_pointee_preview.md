@@ -36,14 +36,14 @@
 
 ## 📑 目录
 
-- [派生 CoercePointee 预研：智能指针的自动类型强制](#派生-coercepointee-预研智能指针的自动类型强制)
+- [派生 CoercePointee 预研：智能指针（Smart Pointer）的自动类型强制](#派生-coercepointee-预研智能指针的自动类型强制)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 问题：自定义智能指针的样板代码](#11-问题自定义智能指针的样板代码)
     - [1.2 CoerceUnsized 与 DispatchFromDyn](#12-coerceunsized-与-dispatchfromdyn)
     - [1.3 `#[derive(CoercePointee)]` 方案](#13-derivecoercepointee-方案)
   - [二、技术细节](#二技术细节)
-    - [2.1 派生宏的展开逻辑](#21-派生宏的展开逻辑)
+    - [2.1 派生宏（Macro）的展开逻辑](#21-派生宏的展开逻辑)
     - [2.2 约束条件](#22-约束条件)
     - [2.3 与现有 Trait 的交互](#23-与现有-trait-的交互)
   - [三、安全分析](#三安全分析)
@@ -58,7 +58,7 @@
     - [10.1 边界测试：非 `#[repr(transparent)]` 类型的 CoercePointee（编译错误）](#101-边界测试非-reprtransparent-类型的-coercepointee编译错误)
     - [10.2 边界测试：多字段 struct 的 CoercePointee 尝试（编译错误）](#102-边界测试多字段-struct-的-coercepointee-尝试编译错误)
     - [10.3 边界测试：CoercePointee 与自定义 DST 的元数据（编译错误）](#103-边界测试coercepointee-与自定义-dst-的元数据编译错误)
-    - [10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期交互（编译错误）](#104-边界测试phantomdata-与-coercepointee-的生命周期交互编译错误)
+    - [10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期（Lifetimes）交互（编译错误）](#104-边界测试phantomdata-与-coercepointee-的生命周期交互编译错误)
     - [10.4 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）](#104-边界测试coercepointee-与智能指针的自动转换编译错误未来特性)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -501,7 +501,7 @@ fn main() {}
 >
 > 1) 自定义 allocator 的智能指针；
 > 2) 领域特定指针类型（`GpuBuffer<T>`）；
-> 3) 与 `Pin` 结合的自定义指针。这与 C++ 的隐式转换（`std::shared_ptr<Derived>` → `std::shared_ptr<Base>` 自动）或 Swift 的引用类型（始终支持多态转换）不同——Rust 的 trait object 转换需显式支持，`CoercePointee` 是类型系统的扩展。
+> 3) 与 `Pin` 结合的自定义指针。这与 C++ 的隐式转换（`std::shared_ptr<Derived>` → `std::shared_ptr<Base>` 自动）或 Swift 的引用（Reference）类型（始终支持多态转换）不同——Rust 的 trait object 转换需显式支持，`CoercePointee` 是类型系统（Type System）的扩展。
 > [来源: [CoercePointee RFC](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html)] ·
 > [来源: [Rust Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 > **过渡**: 派生 CoercePointee 预研：智能指针的自动类型强制 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

@@ -36,7 +36,7 @@
 
 ## 📑 目录
 
-- [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](#open-enums-概念预研从-non_exhaustive-到可扩展枚举)
+- [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举（Enum）](#open-enums-概念预研从-non_exhaustive-到可扩展枚举)
   - [📑 目录](#-目录)
   - [一、核心概念：封闭 vs 开放枚举](#一核心概念封闭-vs-开放枚举)
     - [1.1 封闭枚举（Closed Enums）](#11-封闭枚举closed-enums)
@@ -44,8 +44,8 @@
     - [1.3 开放枚举（Open Enums）的设计空间](#13-开放枚举open-enums的设计空间)
   - [二、`#[non_exhaustive]` 的形式化语义](#二non_exhaustive-的形式化语义)
     - [2.1 编译期影响：穷尽性检查的弱化](#21-编译期影响穷尽性检查的弱化)
-    - [2.2 运行时语义：无变化](#22-运行时语义无变化)
-    - [2.3 与模式匹配的交互](#23-与模式匹配的交互)
+    - [2.2 运行时（Runtime）语义：无变化](#22-运行时语义无变化)
+    - [2.3 与模式匹配（Pattern Matching）的交互](#23-与模式匹配的交互)
   - [三、跨语言对比：开放枚举的多种形态](#三跨语言对比开放枚举的多种形态)
     - [3.1 Scala：Sealed Traits + 子类](#31-scalasealed-traits--子类)
     - [3.2 Haskell：Open Data Types](#32-haskellopen-data-types)
@@ -604,7 +604,7 @@ fn main() {
 > 2) 返回 `Option<Self>`（`try_from` 模式）；
 > 3) panic（`from_raw_unchecked` 模式）。
 > Rust 的类型安全要求：转换操作必须将"可能的无效值"显式化——不能静默允许 `Priority::from_raw(999)` 而不加处理。
-> 这与 C 的枚举转换（`(enum Priority)5` 完全合法，无检查）或 Java 的 `Enum.valueOf`（未知名称抛 `IllegalArgumentException`）不同——Rust 倾向于使用类型系统（`Option`、`Result`）而非异常处理无效转换。
+> 这与 C 的枚举转换（`(enum Priority)5` 完全合法，无检查）或 Java 的 `Enum.valueOf`（未知名称抛 `IllegalArgumentException`）不同——Rust 倾向于使用类型系统（Type System）（`Option`、`Result`）而非异常处理无效转换。
 > [来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] ·
 > [来源: [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html)]
 

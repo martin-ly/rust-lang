@@ -75,7 +75,7 @@
     - [12.3 边界测试：背压与死锁](#123-边界测试背压与死锁)
   - [十三、知识来源关系](#十三知识来源关系)
   - [十、边界测试：流处理语义的编译错误](#十边界测试流处理语义的编译错误)
-    - [10.1 边界测试：Tokio Stream 与所有权冲突（编译错误）](#101-边界测试tokio-stream-与所有权冲突编译错误)
+    - [10.1 边界测试：Tokio Stream 与所有权（Ownership）冲突（编译错误）](#101-边界测试tokio-stream-与所有权冲突编译错误)
     - [10.2 边界测试：背压传播中的类型不匹配（编译错误）](#102-边界测试背压传播中的类型不匹配编译错误)
     - [10.3 边界测试：Stream 的 `fuse` 与重复 poll 后的行为（逻辑错误）](#103-边界测试stream-的-fuse-与重复-poll-后的行为逻辑错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -719,7 +719,7 @@ fn main() {
 > **从编译错误反推**：
 >
 > ```text
-> 流处理安全 ⟸ 背压 + 状态一致性
+> 流处理安全 ⟸ 背压 + 状态一致性（Coherence）
 > ```
 >
 ## 参考来源
@@ -805,7 +805,7 @@ fn main() {
 | 流处理语义：从 Dataflow Model 到 Differential Dataflow 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 流处理一致性 ⟸ 背压控制 ⟸ 生产者-消费者协议
-> 异步流安全 ⟸ Stream/AsyncRead 生命周期（Lifetimes） ⟸ Pin 约束
+> 异步（Async）流安全 ⟸ Stream/AsyncRead 生命周期（Lifetimes） ⟸ Pin 约束
 > **过渡**: 掌握 流处理语义：从 Dataflow Model 到 Differential Dataflow 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 流处理语义：从 Dataflow Model 到 Differential Dataflow 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: 流处理语义：从 Dataflow Model 到 Differential Dataflow 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。

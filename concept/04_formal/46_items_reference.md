@@ -1,7 +1,7 @@
 # 条目参考（Items Reference）
 
 > **EN**: Items Reference
-> **Summary**: Rust 语言中所有 item 种类的规范定义：模块、extern crate、use 声明、函数、类型别名、结构体、枚举、联合体、常量、静态项、trait、实现、外部块、泛型参数与关联项。
+> **Summary**: Rust 语言中所有 item 种类的规范定义：模块（Module）、extern crate、use 声明、函数、类型别名、结构体（Struct）、枚举（Enum）、联合体、常量、静态项、trait、实现、外部块、泛型（Generics）参数与关联项。
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -15,6 +15,31 @@
 > **来源**: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ---
+
+
+---
+
+## 认知路径
+
+> **认知路径**: 本节从 "条目参考（Items Reference）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+
+1. **问题识别**: 为什么 条目参考（Items Reference） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
+2. **概念建立**: 掌握 条目参考（Items Reference） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
+3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与条目参考（Items Reference）的适用边界。
+5. **迁移应用**: 将 条目参考（Items Reference） 与前置/后置概念链接，形成跨层知识网络。
+
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "条目参考（Items Reference） 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 条目参考（Items Reference） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 条目参考（Items Reference） 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 条目参考（Items Reference） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 条目参考（Items Reference） 具有语言特有的形态。
+
 
 ## 一、Item 概述
 
@@ -33,7 +58,7 @@
 | 枚举 | `enum` | 带变体的代数数据类型 |
 | 联合体 | `union` | 类似 C union 的内存共享类型 |
 | 常量 | `const` | 编译期常量 |
-| 静态项 | `static` | 全局生命周期变量 |
+| 静态项 | `static` | 全局生命周期（Lifetimes）变量 |
 | Trait | `trait` | 抽象接口 |
 | 实现 | `impl` | trait 实现或固有实现 |
 | 外部块 | `extern` | FFI 声明块 |

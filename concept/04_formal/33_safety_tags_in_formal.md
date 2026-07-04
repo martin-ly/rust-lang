@@ -18,6 +18,20 @@
 > **后置概念**: N/A
 ---
 
+
+---
+
+## 认知路径
+
+> **认知路径**: 本节从 "Safety Tags（安全标签）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+
+1. **问题识别**: 为什么 Safety Tags（安全标签） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
+2. **概念建立**: 掌握 Safety Tags（安全标签） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
+3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与Safety Tags（安全标签）的适用边界。
+5. **迁移应用**: 将 Safety Tags（安全标签） 与前置/后置概念链接，形成跨层知识网络。
+
+
 ## 一、权威定义
 
 > Safety tags are a lightweight, machine-readable convention for annotating the safety requirements of `unsafe` functions and discharging them at call sites.

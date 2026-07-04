@@ -66,7 +66,7 @@
 ### 第 2 步：ECS 如何重新组织游戏逻辑？
 >
 
-数据（Component）与行为（System）分离，Entity 只是组件的标识符。这种**结构扁平化**使 CPU 缓存命中率最大化，且天然适配 Rust 的所有权模型。
+数据（Component）与行为（System）分离，Entity 只是组件的标识符。这种**结构扁平化**使 CPU 缓存命中率最大化，且天然适配 Rust 的所有权（Ownership）模型。
 
 ### 第 3 步：Rust 的借用检查如何成为 ECS 的调度安全网？
 >
@@ -91,9 +91,9 @@
 | **Entity** | 轻量级标识符（通常是 `u64` 或整数索引） | `Entity`（`u64` 包装类型） | 无空指针；无效 Entity 通过 `Option` 显式处理 |
 | **Component** | 纯数据结构（POD） | `struct`（`#[derive(Component)]`） | 编译期保证字段类型安全；无隐式共享可变状态 |
 | **System** | 数据转换函数 `fn(Query<...>)` | 普通 Rust 函数 + `Query` 参数 | 借用（Borrowing）检查器验证组件访问不冲突 |
-| **World** | 组件存储（SoA/Archetype） | `World`（`HashMap<TypeId, Storage>`） | 运行时借用（Borrowing）检查覆盖动态查询 |
+| **World** | 组件存储（SoA/Archetype） | `World`（`HashMap<TypeId, Storage>`） | 运行时（Runtime）借用（Borrowing）检查覆盖动态查询 |
 
-> **核心洞察**: ECS 的"数据与行为分离"哲学与 Rust 的"数据与所有权分离"是**同构的**。Component 是被拥有的数据，System 是消耗/借用数据的函数，Entity 是数据的逻辑分组标识。
+> **核心洞察**: ECS 的"数据与行为分离"哲学与 Rust 的"数据与所有权分离"是**同构的**。Component 是被拥有的数据，System 是消耗/借用（Borrowing）数据的函数，Entity 是数据的逻辑分组标识。
 
 **ECS 架构 ER 图（Mermaid erDiagram）**:
 
@@ -538,7 +538,7 @@ fn render_system(
 | `HashMap<K, V>` | `heapless::IndexMap<K, V, N>` | 纯栈分配；线性探测 | 极小的键值表（< 256 项） |
 | `String` | `heapless::String<N>` | 固定容量 | 实体名称、调试文本 |
 
-> **ECS 存储映射的替代**: 在桌面 Bevy 中，`World` 使用 `HashMap<TypeId, Storage>` 动态管理组件存储。在 `no_std` + `alloc` 下，`hashbrown::HashMap` 可直接替代。但在无 `alloc` 场景，组件类型数量必须在编译期确定，使用泛型结构体（Struct）或 `enum` 包裹所有可能类型，而非运行时 `TypeId`。
+> **ECS 存储映射的替代**: 在桌面 Bevy 中，`World` 使用 `HashMap<TypeId, Storage>` 动态管理组件存储。在 `no_std` + `alloc` 下，`hashbrown::HashMap` 可直接替代。但在无 `alloc` 场景，组件类型数量必须在编译期确定，使用泛型（Generics）结构体（Struct）或 `enum` 包裹所有可能类型，而非运行时 `TypeId`。
 
 ```rust,ignore
 // ✅ 使用 heapless::Vec 作为固定容量命令队列
@@ -756,7 +756,7 @@ fn extract_sprites(
 
 ## 六、Bevy RenderGraph 与 wgpu 的所有权交互
 
-Bevy 的渲染管线通过 `RenderGraph` 将 GPU 资源管理抽象为**节点依赖图**，其设计与 Rust 所有权模型深度同构——每个渲染节点声明其资源需求（读/写），图调度器在编译期（节点注册时）和运行期（图执行时）双重验证资源生命周期安全。
+Bevy 的渲染管线通过 `RenderGraph` 将 GPU 资源管理抽象为**节点依赖图**，其设计与 Rust 所有权模型深度同构——每个渲染节点声明其资源需求（读/写），图调度器在编译期（节点注册时）和运行期（图执行时）双重验证资源生命周期（Lifetimes）安全。
 
 ### 6.1 RenderGraph 的节点与边
 
@@ -844,7 +844,7 @@ graph LR
     D -->|Submit: move| E[Queue<br/>驱动层]
 ```
 
-> **认知功能**: 此图追踪了渲染所有权从 World 到 GPU Queue 的完整转移链条——Extract 跨线程移动，Prepare 可变借用（Mutable Borrow），Render 消费生成 CommandBuffer，Submit 最终转移所有权。建议在自定义 RenderNode 时严格遵循这一单向流动，避免在节点间保留对已消费资源的引用。关键洞察：wgpu 的 API 设计本质上是线性类型理论的工程实现，每一次所有权转移都对应一次形式化的资源消耗。[来源: 💡 原创分析]
+> **认知功能**: 此图追踪了渲染所有权从 World 到 GPU Queue 的完整转移链条——Extract 跨线程移动，Prepare 可变借用（Mutable Borrow），Render 消费生成 CommandBuffer，Submit 最终转移所有权。建议在自定义 RenderNode 时严格遵循这一单向流动，避免在节点间保留对已消费资源的引用（Reference）。关键洞察：wgpu 的 API 设计本质上是线性类型理论的工程实现，每一次所有权转移都对应一次形式化的资源消耗。[来源: 💡 原创分析]
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 | 阶段 | 所有权操作 | Rust 保证 |
@@ -954,7 +954,7 @@ sequenceDiagram
     Note over S: 状态校正，可能产生跳帧
 ```
 
-> **认知功能**: 此序列图刻画了回滚网络的核心时序——本地预测、远程输入延迟到达、快照回滚、重模拟校正。建议将 World 快照与输入历史数组分离管理，确保回滚点的状态可完整恢复。关键洞察：Rust ECS 的确定性保证了“重模拟”与“正向模拟”产生完全相同的状态序列，使回滚不是 hack，而是类型系统支持的标准操作。[来源: 💡 原创分析]
+> **认知功能**: 此序列图刻画了回滚网络的核心时序——本地预测、远程输入延迟到达、快照回滚、重模拟校正。建议将 World 快照与输入历史数组分离管理，确保回滚点的状态可完整恢复。关键洞察：Rust ECS 的确定性保证了“重模拟”与“正向模拟”产生完全相同的状态序列，使回滚不是 hack，而是类型系统（Type System）支持的标准操作。[来源: 💡 原创分析]
 
 | 回滚阶段 | ECS 实现 | 所有权考量 |
 |:---|:---|:---|
@@ -1252,7 +1252,7 @@ fn system(query: Query<&mut Position>) {
 }
 ```
 
-> **修正**: ECS（Entity-Component-System）的 **archetype** 是具有相同组件组合的实体集合。添加/移除组件改变实体的 archetype，可能需要将实体移动到不同的存储块。在系统（system）执行期间修改 archetype（如给实体添加 `Velocity` 组件），可能导致迭代器失效——与 C++ 的 `vector` 插入导致迭代器失效类似。Bevy 的解决方案：1) **命令缓冲**（Commands）：延迟 archetype 变更到帧末；2) **分阶段执行**（stages）：先读系统，后写系统；3) **不稳定的 `query.iter_mut()` 与命令缓冲结合**。这与 Unity 的 `GameObject.AddComponent`（运行时修改，无编译期检查）或 C++ 的 EnTT（类似 Bevy，archetype-based）类似——ECS 的性能来自紧密打包的内存布局，但布局变更的成本需要显式管理。[来源: [Bevy ECS Documentation](https://docs.rs/bevy_ecs/)] · [来源: [ECS Pattern](https://en.wikipedia.org/wiki/Entity_component_system)]
+> **修正**: ECS（Entity-Component-System）的 **archetype** 是具有相同组件组合的实体集合。添加/移除组件改变实体的 archetype，可能需要将实体移动到不同的存储块。在系统（system）执行期间修改 archetype（如给实体添加 `Velocity` 组件），可能导致迭代器（Iterator）失效——与 C++ 的 `vector` 插入导致迭代器失效类似。Bevy 的解决方案：1) **命令缓冲**（Commands）：延迟 archetype 变更到帧末；2) **分阶段执行**（stages）：先读系统，后写系统；3) **不稳定的 `query.iter_mut()` 与命令缓冲结合**。这与 Unity 的 `GameObject.AddComponent`（运行时修改，无编译期检查）或 C++ 的 EnTT（类似 Bevy，archetype-based）类似——ECS 的性能来自紧密打包的内存布局，但布局变更的成本需要显式管理。[来源: [Bevy ECS Documentation](https://docs.rs/bevy_ecs/)] · [来源: [ECS Pattern](https://en.wikipedia.org/wiki/Entity_component_system)]
 
 ### 10.4 边界测试：多线程 ECS 与 `Send`/`Sync` 的组件约束（编译错误）
 
@@ -1334,7 +1334,7 @@ Entity（实体）：唯一标识符；Component（组件）：纯数据；Syste
 <details>
 <summary>✅ 答案与解析</summary>
 
-编译器通过单态化（Monomorphization）为每种查询组合生成专门代码，直接计算组件偏移量，运行时无动态查找开销。这是 ECS 零成本抽象的关键。
+编译器通过单态化（Monomorphization）为每种查询组合生成专门代码，直接计算组件偏移量，运行时无动态查找开销。这是 ECS 零成本抽象（Zero-Cost Abstraction）的关键。
 </details>
 
 ---

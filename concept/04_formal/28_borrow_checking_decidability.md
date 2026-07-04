@@ -10,12 +10,42 @@
 > **A/S/P 标记**: **F+P** — Formal + Procedure
 > **双维定位**: F×Algo — 形式化方法与算法可判定性
 > **前置依赖**: [L1 借用（Borrowing）](../01_foundation/02_borrowing.md) · L3 NLL 与 Polonius · [L4 所有权（Ownership）形式化](03_ownership_formal.md)
-> **后置延伸**: [L4 RustBelt](04_rustbelt.md) · [L4 类型检查与推断](27_type_checking_and_inference.md) · [L4 树借用](36_tree_borrows_deep_dive.md)
+> **后置延伸**: [L4 RustBelt](04_rustbelt.md) · [L4 类型检查与推断](27_type_checking_and_inference.md) · [L4 树借用（Borrowing）](36_tree_borrows_deep_dive.md)
 > 本文内容来自已归档的 `docs/rust-ownership-decidability/04-decidability-analysis/04-02-borrow-checking.md`，经提炼后迁移。
 > **来源**: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs/2094-nll.html) · [Polonius Repository](https://github.com/rust-lang/polonius) · [Rustc Dev Guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
+
+
+---
+
+> **过渡**: 从 Borrow Checking Decidability（借 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 Borrow Checking Decidability（借 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 Borrow Checking Decidability（借 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
+---
+
+> **定理 1** [Tier 2]: Borrow Checking Decidability（借 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
+>
+> **定理 2** [Tier 2]: 正确理解 Borrow Checking Decidability（借 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
+>
+> **定理 3** [Tier 3]: 将 Borrow Checking Decidability（借 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
+
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "Borrow Checking Decidability（借 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 Borrow Checking Decidability（借 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Borrow Checking Decidability（借 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 Borrow Checking Decidability（借 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Borrow Checking Decidability（借 具有语言特有的形态。
+
 
 ## 零、认知路径（Cognitive Path）
 
@@ -45,7 +75,7 @@ NLL 的数据流分析与 Polonius 的 Datalog 视角如何统一？
 
 Rust 借用检查器在编译期回答一个**安全判定问题**：
 
-> 给定 Safe Rust 程序，是否存在执行路径使得引用在使用时指向已释放或非法改写的内存？
+> 给定 Safe Rust 程序，是否存在执行路径使得引用（Reference）在使用时指向已释放或非法改写的内存？
 
 它维护三条不变式：
 
@@ -87,7 +117,7 @@ fn lexical_problem() {
 
 ### 2.2 NLL（Non-Lexical Lifetimes）
 
-生命周期由“创建点 → 最后一次使用点”定义，基于 MIR 与 CFG 数据流分析。
+生命周期（Lifetimes）由“创建点 → 最后一次使用点”定义，基于 MIR 与 CFG 数据流分析。
 
 ```rust
 fn nll_allows() {
@@ -260,7 +290,7 @@ flowchart TB
 |:---|:---|
 | **NLL** | 借用状态为有限格 + 单调数据流 → Knaster-Tarski 不动点 |
 | **Polonius** | 有限事实集 + 单调增长 → Datalog 半朴素求值收敛 |
-| **区域求解** | 图传递闭包在有限顶点上终止 |
+| **区域求解** | 图传递闭包（Closures）在有限顶点上终止 |
 
 > **教学类比**：可判定性来自“状态空间有限 + 每步只增不减”。借用检查不会发明新区域或新借用，只在已有集合上做闭包。
 

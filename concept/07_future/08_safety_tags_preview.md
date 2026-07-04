@@ -519,7 +519,7 @@ fn main() {}
 > 当前状态：讨论阶段，无 RFC。
 > 相关努力：
 >
-> 1) `contracts` crate（运行时契约检查）；
+> 1) `contracts` crate（运行时（Runtime）契约检查）；
 > 2) 文档约定（`SAFETY:` 注释）；
 > 3) `unsafe-code-guidelines` working group 的形式化规范。
 >
@@ -625,11 +625,11 @@ Miri 可以根据安全标签选择不同的检查策略。例如，标记为 `e
 
 | Tag | 语义 | 适用场景 |
 |:---|:---|:---|
-| `valid_ptr(p)` | `p` 是非空且已分配的指针 | 所有解引用操作 |
+| `valid_ptr(p)` | `p` 是非空且已分配的指针 | 所有解引用（Reference）操作 |
 | `aligned(p)` | `p` 满足 `T` 的对齐要求 | 非包装解引用 |
 | `non_overlapping(a, b)` | `a` 和 `b` 的内存范围不重叠 | `copy_nonoverlapping` |
 | `initialized(p)` | `p` 指向已初始化的内存 | `read` / 转型 |
-| `no_alias(p)` | `p` 在生命周期内是唯一的访问路径 | `&mut` 构造 |
+| `no_alias(p)` | `p` 在生命周期（Lifetimes）内是唯一的访问路径 | `&mut` 构造 |
 | `valid_utf8(s)` | `s` 是合法的 UTF-8 字节序列 | `str::from_utf8_unchecked` |
 
 ### 当前状态

@@ -29,6 +29,25 @@
 
 ---
 
+
+---
+
+> **过渡**: 从 测验 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 测验 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 测验 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
+---
+
+> **定理 1** [Tier 2]: 测验 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
+>
+> **定理 2** [Tier 2]: 正确理解 测验 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
+>
+> **定理 3** [Tier 3]: 将 测验 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
+
+
 ## 一、Cargo 依赖管理
 
 ### Q1. 以下 `Cargo.toml` 片段中，`^`、`~`、`=` 版本约束的含义是什么？
@@ -233,7 +252,7 @@ error: Undefined Behavior: attempting to write to ... but tag ... does not have 
 **解析**：
 
 - `let ptr1 = &mut x as *mut u32`：创建独占引用（Reference） `&mut x`，再转换为原始指针（Raw Pointer）
-- `let ptr2 = &mut x as *mut u32`：再次创建独占引用 `&mut x`，**第一个引用失效**
+- `let ptr2 = &mut x as *mut u32`：再次创建独占引用（Reference） `&mut x`，**第一个引用失效**
 - 在 Tree Borrows 模型中，`ptr1` 的写权限在 `ptr2` 创建时被撤销
 
 **修复方案**——使用 `addr_of_mut!`（不创建中间引用）：

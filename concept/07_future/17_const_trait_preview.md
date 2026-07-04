@@ -114,7 +114,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-表示"这个泛型参数可以是 const 或非 const 的 trait 实现"。允许函数同时服务于 const 和运行时（Runtime）上下文。
+表示"这个泛型（Generics）参数可以是 const 或非 const 的 trait 实现"。允许函数同时服务于 const 和运行时（Runtime）上下文。
 </details>
 
 ---
@@ -126,7 +126,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-允许在编译期构造复杂数据结构（如查找表、配置结构），无需运行时初始化代码，减少二进制体积和启动时间。
+允许在编译期构造复杂数据结构（如查找表、配置结构），无需运行时（Runtime）初始化代码，减少二进制体积和启动时间。
 </details>
 
 ---

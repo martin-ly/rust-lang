@@ -61,6 +61,7 @@ mod user_service {
     }
 }
 ```
+
 ### 1.2 服务发现
 
 ```rust
@@ -87,6 +88,7 @@ impl ServiceRegistry {
     }
 }
 ```
+
 ---
 
 ## 2. API Gateway
@@ -116,6 +118,7 @@ async fn proxy_to_order_service() -> &'static str {
     "Proxied to order service"
 }
 ```
+
 ### 2.2 负载均衡
 
 ```rust
@@ -133,6 +136,7 @@ impl LoadBalancer {
     }
 }
 ```
+
 ---
 
 ## 3. 消息队列
@@ -161,6 +165,7 @@ impl MessageBus {
     }
 }
 ```
+
 ---
 
 ## 4. 分布式追踪
@@ -180,6 +185,7 @@ async fn process_request(req_id: u64) {
     tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
 }
 ```
+
 ---
 
 ## 5. 容错模式
@@ -228,6 +234,7 @@ impl CircuitBreaker {
     }
 }
 ```
+
 ### 5.2 重试机制
 
 ```rust
@@ -248,6 +255,7 @@ async fn retry_example() {
     }).await;
 }
 ```
+
 ---
 
 ## 6. 事件溯源
@@ -282,6 +290,7 @@ impl EventStore {
     }
 }
 ```
+
 ---
 
 ## 7. CQRS (Command Query Responsibility Segregation)
@@ -300,6 +309,7 @@ async fn handle_query(query: GetUserQuery) -> User {
     read_model.get_user(query.id).await
 }
 ```
+
 ---
 
 ## 8. Saga 模式
@@ -348,6 +358,7 @@ impl Saga {
     }
 }
 ```
+
 ---
 
 ## 📚 延伸阅读

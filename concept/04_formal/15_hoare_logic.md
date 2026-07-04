@@ -52,12 +52,12 @@
     - [10.3 边界测试：霍尔逻辑的不变量与 Rust 的 `while let`（编译错误）](#103-边界测试霍尔逻辑的不变量与-rust-的-while-let编译错误)
     - [10.4 边界测试： weakest precondition 与 `unsafe` 代码的规范缺口（编译错误/验证失败）](#104-边界测试-weakest-precondition-与-unsafe-代码的规范缺口编译错误验证失败)
     - [10.5 边界测试：循环不变量的发现与人工介入（验证失败）](#105-边界测试循环不变量的发现与人工介入验证失败)
-    - [10.9 边界测试：生命周期参数的不匹配返回](#109-边界测试生命周期参数的不匹配返回)
+    - [10.9 边界测试：生命周期（Lifetimes）参数的不匹配返回](#109-边界测试生命周期参数的不匹配返回)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Hoare 三元组（理解层）](#测验-1hoare-三元组理解层)
     - [测验 2：最弱前置条件（Weakest Precondition）（应用层）](#测验-2最弱前置条件weakest-precondition应用层)
     - [测验 3：循环不变量（应用层）](#测验-3循环不变量应用层)
-    - [测验 4：Rust 类型系统对 Hoare 逻辑的编码（分析层）](#测验-4rust-类型系统对-hoare-逻辑的编码分析层)
+    - [测验 4：Rust 类型系统（Type System）对 Hoare 逻辑的编码（分析层）](#测验-4rust-类型系统对-hoare-逻辑的编码分析层)
     - [测验 5：Hoare 逻辑的局限性与 Rust 扩展（评价层）](#测验-5hoare-逻辑的局限性与-rust-扩展评价层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -653,7 +653,7 @@ fn drain_map(map: &mut std::collections::HashMap<i32, String>) {
 > 1) `while let Some((k, _)) = map.keys().next().copied() { map.remove(&k); }`（重新获取迭代器（Iterator））；
 > 2) `std::mem::take(map)` 后 drain；
 > 3) `retain`（若支持）。
-> 这与 Java 的 `ConcurrentHashMap`（迭代中修改可能抛 `ConcurrentModificationException`）或 C++ 的 `unordered_map`（迭代器可能失效）不同——Rust 在编译期阻止所有迭代中修改。
+> 这与 Java 的 `ConcurrentHashMap`（迭代中修改可能抛 `ConcurrentModificationException`）或 C++ 的 `unordered_map`（迭代器（Iterator）可能失效）不同——Rust 在编译期阻止所有迭代中修改。
 > [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-03-hash-maps.html)]
 
@@ -846,7 +846,7 @@ Hoare 逻辑视角：
 - 构造成功后，类型本身保证值非零 —— **不变量**
 - 除法操作无需运行时（Runtime）检查 —— 前置条件已在类型层面验证
 
-这是**类型驱动设计**：将运行时断言提升为编译期类型约束。与依赖类型相比，Rust 的编码能力有限（无法表达任意数学断言），但足以处理常见不变量。
+这是**类型驱动设计**：将运行时（Runtime）断言提升为编译期类型约束。与依赖类型相比，Rust 的编码能力有限（无法表达任意数学断言），但足以处理常见不变量。
 </details>
 
 ---

@@ -139,6 +139,7 @@ Glommio 最佳实践
     ├── 内存管理
     └── 批处理优化
 ```
+
 ---
 
 ## 1. 概述
@@ -160,6 +161,7 @@ LocalExecutor::default().run(async {
     println!("Result: {}", result);
 });
 ```
+
 ### 1.2 核心优势
 
 | 特性                | 描述                         | 性能提升        |
@@ -202,6 +204,7 @@ cat /proc/sys/kernel/io_uring_disabled  # 应该为 0
 # 安装依赖
 sudo apt-get install liburing-dev  # Debian/Ubuntu
 ```
+
 ### 2.2 安装配置
 
 ```toml
@@ -213,6 +216,7 @@ futures = "0.3"
 [target.'cfg(target_os = "linux")'.dependencies]
 glommio = "0.9.0"
 ```
+
 ### 2.3 第一个 Glommio 程序
 
 ```rust
@@ -235,6 +239,7 @@ fn main() {
     });
 }
 ```
+
 ---
 
 ## 3. Thread-per-core 架构
@@ -260,6 +265,7 @@ Glommio 的核心设计理念是 **Thread-per-core**:
     │ Queue  │ Queue  │ Queue  │
     └────────┴────────┴────────┘
 ```
+
 **关键特性**:
 
 - 每个执行器绑定到一个 CPU 核心
@@ -294,6 +300,7 @@ let handle = LocalExecutorBuilder::default()
 // ❌ 不好的做法: 在执行器之间频繁通信
 // 应该尽量保持任务在同一核心内完成
 ```
+
 ---
 
 ## 4. CPU 绑定与亲和性
@@ -334,6 +341,7 @@ for core_id in 0..num_cores {
     handles.push(handle);
 }
 ```
+
 ### 4.2 NUMA 优化
 
 在多 socket 系统上，NUMA (Non-Uniform Memory Access) 优化非常重要:
@@ -357,6 +365,7 @@ for (node_id, cpus) in numa_nodes {
     }
 }
 ```
+
 ### 4.3 最佳实践
 
 ```rust
@@ -370,6 +379,7 @@ for (node_id, cpus) in numa_nodes {
 // 2. 频繁跨 NUMA 节点通信
 // 3. 不考虑 CPU 缓存的影响
 ```
+
 ---
 
 ## 5. 任务调度与优先级
@@ -398,6 +408,7 @@ LocalExecutor::default().run(async {
     );
 });
 ```
+
 ### 5.2 优先级调度
 
 ```rust
@@ -438,6 +449,7 @@ LocalExecutor::default().run(async {
     let (high_result, low_result) = futures::join!(high_task, low_task);
 });
 ```
+
 ### 5.3 公平性与延迟
 
 ```rust
@@ -459,6 +471,7 @@ let throughput_oriented = executor().create_task_queue(
 // ❌ 不好的做法: 所有任务使用相同的队列
 // 会导致延迟敏感任务被阻塞
 ```
+
 ---
 
 ## 6. 高性能 I/O
@@ -486,6 +499,7 @@ LocalExecutor::default().run(async {
     file.close().await.unwrap();
 });
 ```
+
 **DMA I/O 优势**:
 
 - 零拷贝: 避免内核到用户空间的数据复制
@@ -527,6 +541,7 @@ async fn handle_connection(mut stream: TcpStream) {
     }
 }
 ```
+
 ### 6.3 零拷贝技术
 
 ```rust
@@ -539,6 +554,7 @@ let buf = file.read_at(offset, length).await.unwrap();
 let data = std::fs::read("/path/to/file").unwrap();
 // 涉及多次数据复制
 ```
+
 ---
 
 ## 7. 跨执行器通信
@@ -584,6 +600,7 @@ for handle in handles {
     handle.join().unwrap();
 }
 ```
+
 ### 7.2 Shared Channels
 
 ```rust
@@ -607,6 +624,7 @@ LocalExecutor::default().run(async {
     }).detach();
 });
 ```
+
 ### 7.3 通信模式
 
 ```rust
@@ -616,6 +634,7 @@ LocalExecutor::default().run(async {
 // ❌ 不好的做法: 频繁的跨执行器通信
 // 会导致性能下降和缓存失效
 ```
+
 ---
 
 ## 8. 性能优化技巧
@@ -649,6 +668,7 @@ let mut stack_buf = [0u8; SMALL_SIZE];  // 栈分配
 // ❌ 避免频繁的小对象分配
 // let buf = vec![0u8; 16];  // 每次都堆分配
 ```
+
 ### 8.2 批处理优化
 
 ```rust
@@ -666,6 +686,7 @@ async fn process_batch(requests: Vec<Request>) -> Vec<Response> {
 //     process_request(req).await;
 // }
 ```
+
 ### 8.3 缓存友好设计
 
 ```rust
@@ -682,6 +703,7 @@ struct CacheFriendly {
 //     data3: Box<[u8]>,
 // }  // 数据分散在内存中
 ```
+
 ---
 
 ## 9. 错误处理
@@ -709,6 +731,7 @@ async fn robust_operation() -> Result<()> {
 // ✅ 使用 Result 而非 panic
 // ❌ 不要使用 unwrap() 或 expect() 在生产代码中
 ```
+
 ### 9.2 恢复机制
 
 ```rust
@@ -731,6 +754,7 @@ where
     }
 }
 ```
+
 ---
 
 ## 10. 监控与调试
@@ -750,6 +774,7 @@ LocalExecutor::default().run(async {
     println!("IO completions: {}", stats.io_stats().completions);
 });
 ```
+
 ### 10.2 性能分析
 
 ```bash
@@ -761,6 +786,7 @@ perf report
 cargo install flamegraph
 sudo flamegraph ./your_app
 ```
+
 ---
 
 ## 11. 生产环境部署
@@ -779,6 +805,7 @@ let executor = LocalExecutorBuilder::default()
     })
     .unwrap();
 ```
+
 ### 11.2 容器化部署
 
 ```dockerfile
@@ -794,6 +821,7 @@ COPY target/release/app /app
 # 设置 CPU 亲和性
 CMD ["taskset", "-c", "0-3", "/app"]
 ```
+
 ---
 
 ## 12. 常见陷阱与解决方案

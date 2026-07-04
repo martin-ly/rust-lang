@@ -33,11 +33,11 @@
     - [1.1 问题背景](#11-问题背景)
     - [1.2 Field Projections 提案](#12-field-projections-提案)
   - [二、技术细节](#二技术细节)
-    - [2.1 投影类型系统](#21-投影类型系统)
+    - [2.1 投影类型系统（Type System）](#21-投影类型系统)
     - [2.2 与 `Pin` 的协同](#22-与-pin-的协同)
   - [三、使用场景](#三使用场景)
     - [场景 1：MMIO 寄存器访问（嵌入式/内核）](#场景-1mmio-寄存器访问嵌入式内核)
-    - [场景 2：安全地自引用结构](#场景-2安全地自引用结构)
+    - [场景 2：安全地自引用（Reference）结构](#场景-2安全地自引用结构)
     - [场景 3：零拷贝反序列化](#场景-3零拷贝反序列化)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 与 `offset_of!` 的关系](#41-与-offset_of-的关系)
@@ -50,7 +50,7 @@
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Pinned field projections 解决的是什么问题？（理解层）](#测验-1pinned-field-projections-解决的是什么问题理解层)
-    - [测验 2：为什么自引用结构体的字段投影是 unsafe 的？（理解层）](#测验-2为什么自引用结构体的字段投影是-unsafe-的理解层)
+    - [测验 2：为什么自引用结构体（Struct）的字段投影是 unsafe 的？（理解层）](#测验-2为什么自引用结构体的字段投影是-unsafe-的理解层)
     - [测验 3：`pin-project` crate 目前如何解决这个问题？（理解层）](#测验-3pin-project-crate-目前如何解决这个问题理解层)
     - [测验 4：语言级 field projection 支持对 `async fn` 有什么帮助？（理解层）](#测验-4语言级-field-projection-支持对-async-fn-有什么帮助理解层)
     - [测验 5：这个特性目前的实现状态如何？（理解层）](#测验-5这个特性目前的实现状态如何理解层)
@@ -276,7 +276,7 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 | **Step 4: Experimentation** | 计划中 | 在 Linux 内核（Benno Lossin）、crubit（Tyler Mandry）和标准库中 stress-test |
 
 > **关键依赖**: Step 1 被 Niko 正在开发的基于 expression 的新语法阻塞。
-> **Rust for Linux 现状**: `dma_read!` / `dma_write!` 宏已切换使用 projection 机制（纯宏实现，无语言特性），修复了一个 soundness issue。
+> **Rust for Linux 现状**: `dma_read!` / `dma_write!` 宏（Macro）已切换使用 projection 机制（纯宏实现，无语言特性），修复了一个 soundness issue。
 
 ### 5.2 长期时间轴
 

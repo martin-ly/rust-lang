@@ -19,6 +19,25 @@
 > [Cargo Book — Lints](https://doc.rust-lang.org/cargo/reference/lints.html) ·
 > [The Cargo Book](https://doc.rust-lang.org/cargo/)`](<https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section>)
 
+
+---
+
+> **过渡**: 从 Cargo Profiles 与 Lints 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 Cargo Profiles 与 Lints 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 Cargo Profiles 与 Lints 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
+---
+
+> **定理 1** [Tier 2]: Cargo Profiles 与 Lints 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
+>
+> **定理 2** [Tier 2]: 正确理解 Cargo Profiles 与 Lints 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
+>
+> **定理 3** [Tier 3]: 将 Cargo Profiles 与 Lints 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
+
+
 ## 📑 目录
 
 - [Cargo Profiles 与 Lints](#cargo-profiles-与-lints)

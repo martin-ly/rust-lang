@@ -47,18 +47,18 @@
     - [1.1 Edition 演进节奏与政策](#11-edition-演进节奏与政策)
     - [1.2 候选特性概览](#12-候选特性概览)
     - [1.3 特性依赖与 Edition 2027 关联图](#13-特性依赖与-edition-2027-关联图)
-  - [二、类型系统前沿](#二类型系统前沿)
+  - [二、类型系统（Type System）前沿](#二类型系统前沿)
     - [2.1 Specialization 稳定化](#21-specialization-稳定化)
     - [2.2 Type Alias Impl Trait (TAIT)](#22-type-alias-impl-trait-tait)
     - [2.3 可移植 SIMD (std::simd)](#23-可移植-simd-stdsimd)
-  - [三、异步与执行模型](#三异步与执行模型)
+  - [三、异步（Async）与执行模型](#三异步与执行模型)
     - [3.1 Async Traits 与静态分发](#31-async-traits-与静态分发)
-    - [3.2 Async Drop 与生命周期](#32-async-drop-与生命周期)
+    - [3.2 Async Drop 与生命周期（Lifetimes）](#32-async-drop-与生命周期)
     - [3.3 Custom Allocators 稳定化](#33-custom-allocators-稳定化)
   - [四、语言级语法演进](#四语言级语法演进)
     - [4.1 gen/kw：生成器关键字扩展](#41-genkw生成器关键字扩展)
-    - [4.2 Open Enums 与可扩展枚举](#42-open-enums-与可扩展枚举)
-    - [4.3 Effects System 与关键字泛型](#43-effects-system-与关键字泛型)
+    - [4.2 Open Enums 与可扩展枚举（Enum）](#42-open-enums-与可扩展枚举)
+    - [4.3 Effects System 与关键字泛型（Generics）](#43-effects-system-与关键字泛型)
   - [五、工具链与生态基础设施](#五工具链与生态基础设施)
     - [5.1 BorrowSanitizer 工业化](#51-borrowsanitizer-工业化)
     - [5.2 Cranelift 后端与编译速度](#52-cranelift-后端与编译速度)
@@ -72,7 +72,7 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 路线图的编译错误](#十边界测试rust-路线图的编译错误)
-    - [10.1 边界测试：`never_type` (`!`) 的降级与类型推断（编译错误）](#101-边界测试never_type--的降级与类型推断编译错误)
+    - [10.1 边界测试：`never_type` (`!`) 的降级与类型推断（Type Inference）（编译错误）](#101-边界测试never_type--的降级与类型推断编译错误)
     - [10.2 边界测试：GAT（泛型关联类型）的递归约束（编译错误）](#102-边界测试gat泛型关联类型的递归约束编译错误)
     - [10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断限制（编译错误）](#106-边界测试impl-trait-在-let-绑定中的类型推断限制编译错误)
     - [10.5 边界测试：语言特性稳定化的时间预估偏差（工程规划风险）](#105-边界测试语言特性稳定化的时间预估偏差工程规划风险)
@@ -857,7 +857,7 @@ impl Iterable for Vec<i32> {
 >
 > GAT（Generic Associated Types，Rust 1.65 稳定）允许关联类型带有自己的泛型参数（通常是生命周期），解决了返回"借用（Borrowing）迭代器（Iterator）"等长期问题。
 > 但 GAT 的使用引入了新的复杂度：**递归约束**和**高阶 trait bound（HRTB）**。
-> 上述代码中，`fn iter` 的实现递归调用自身（无限循环），但编译错误可能首先由生命周期约束引起——`Self::Iter<'a>` 的定义要求 `'a` 与 `self` 的借用生命周期匹配。
+> 上述代码中，`fn iter` 的实现递归调用自身（无限循环），但编译错误可能首先由生命周期约束引起——`Self::Iter<'a>` 的定义要求 `'a` 与 `self` 的借用（Borrowing）生命周期匹配。
 > GAT 的正确使用模式：标准库中的 `LendingIterator`（实验性）、自定义集合的借用视图、类型状态机（type-state machines）。
 > Rust 的 GAT 设计与 Haskell 的 type families、C++ 的模板模板参数类似，但集成在 trait system 中，保持零成本抽象（Zero-Cost Abstraction）。
 > [来源: [Rust RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)] ·

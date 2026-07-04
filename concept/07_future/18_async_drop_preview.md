@@ -32,7 +32,7 @@
 - [Async Drop：异步资源的优雅销毁](#async-drop异步资源的优雅销毁)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 问题：同步 Drop 与异步资源的冲突](#11-问题同步-drop-与异步资源的冲突)
+    - [1.1 问题：同步 Drop 与异步（Async）资源的冲突](#11-问题同步-drop-与异步资源的冲突)
     - [1.2 AsyncDrop Trait 设计](#12-asyncdrop-trait-设计)
     - [1.3 与 Pin 的交互](#13-与-pin-的交互)
   - [二、技术细节](#二技术细节)
@@ -49,7 +49,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：async drop 的编译错误](#十边界测试async-drop-的编译错误)
     - [10.1 边界测试：异步析构的 `.await` 位置约束（编译错误）](#101-边界测试异步析构的-await-位置约束编译错误)
-    - [10.2 边界测试：异步析构与 panic 的交互（运行时 UB）](#102-边界测试异步析构与-panic-的交互运行时-ub)
+    - [10.2 边界测试：异步析构与 panic 的交互（运行时（Runtime） UB）](#102-边界测试异步析构与-panic-的交互运行时-ub)
     - [10.3 边界测试：async drop 与 `std::mem::forget` 的交互（内存泄漏）](#103-边界测试async-drop-与-stdmemforget-的交互内存泄漏)
     - [10.4 边界测试：async drop 在 panic 时的双重取消（运行时 UB）](#104-边界测试async-drop-在-panic-时的双重取消运行时-ub)
     - [10.3 边界测试：async drop 与同步 Drop 的语义冲突（编译错误/设计问题）](#103-边界测试async-drop-与同步-drop-的语义冲突编译错误设计问题)
@@ -583,7 +583,7 @@ fn main() {
 > 这与同步 `Drop` 的 `forget` 行为相同，但 async drop 的泄漏更隐蔽（开发者可能期望"异步清理会在后台完成"）。
 > `AsyncDrop` 的设计必须明确：`forget` 是泄漏的合法方式，async drop 不例外。
 > 这与 `ManuallyDrop`（同样阻止自动 drop，但允许显式调用）或 `Rc` 循环引用（Reference）（类似泄漏）相同——Rust 不保证无泄漏，只保证无 use-after-free。
-> `async drop` 的生态系统影响：某些库（如数据库连接池）可能要求 `async drop` 完成，开发者需注意避免 `forget` 和循环引用。
+> `async drop` 的生态系统影响：某些库（如数据库连接池）可能要求 `async drop` 完成，开发者需注意避免 `forget` 和循环引用（Reference）。
 > [来源: [Async Drop Initiative](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/async_drop.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)]
 

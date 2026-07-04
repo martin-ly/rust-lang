@@ -103,6 +103,7 @@ Tokio API 参考
 └── FS API
     └── 文件操作
 ```
+
 ---
 
 ## 🎯 文档说明
@@ -136,6 +137,7 @@ let rt = tokio::runtime::Builder::new_multi_thread()
     .build()
     .unwrap();
 ```
+
 ---
 
 ### 1.2 执行异步代码
@@ -156,6 +158,7 @@ rt.spawn_blocking(|| {
     // 长时间计算
 });
 ```
+
 ---
 
 ## 2. Task API
@@ -180,6 +183,7 @@ task::LocalSet::new().run_until(async {
     }).await.unwrap();
 }).await;
 ```
+
 ---
 
 ### 2.2 JoinSet (Tokio 1.19+)
@@ -197,6 +201,7 @@ while let Some(res) = set.join_next().await {
     println!("Result: {:?}", res);
 }
 ```
+
 ---
 
 ## 3. Sync API
@@ -212,6 +217,7 @@ let data = Arc::new(Mutex::new(0));
 let mut guard = data.lock().await;
 *guard += 1;
 ```
+
 ---
 
 ### 3.2 Channel 类型
@@ -246,6 +252,7 @@ let (tx, mut rx) = watch::channel(0);
 tx.send(42).unwrap();
 let val = *rx.borrow_and_update();
 ```
+
 ---
 
 ### 3.3 同步原语
@@ -271,6 +278,7 @@ let notify = Arc::new(Notify::new());
 notify.notify_one();
 notify.notified().await;
 ```
+
 ---
 
 ## 4. Time API
@@ -298,6 +306,7 @@ let start = Instant::now();
 // ...操作...
 let elapsed = start.elapsed();
 ```
+
 ---
 
 ### 4.2 高级时间控制
@@ -314,6 +323,7 @@ let start = Instant::now();
 let mut interval = interval_at(start, Duration::from_millis(100));
 interval.set_missed_tick_behavior(MissedTickBehavior::Skip);
 ```
+
 ---
 
 ## 5. Net API
@@ -340,6 +350,7 @@ loop {
 let mut stream = TcpStream::connect("127.0.0.1:8080").await?;
 stream.write_all(b"hello").await?;
 ```
+
 ---
 
 ### 5.2 UDP
@@ -355,6 +366,7 @@ loop {
     socket.send_to(&buf[..len], addr).await?;
 }
 ```
+
 ---
 
 ### 5.3 Unix Domain Socket
@@ -369,6 +381,7 @@ let (socket, _) = listener.accept().await?;
 // 客户端
 let stream = UnixStream::connect("/tmp/my.sock").await?;
 ```
+
 ---
 
 ## 6. FS API
@@ -398,6 +411,7 @@ let file = OpenOptions::new()
     .open("file.txt")
     .await?;
 ```
+
 ---
 
 ### 6.2 目录操作
@@ -417,6 +431,7 @@ while let Some(entry) = entries.next_entry().await? {
 // 删除目录
 remove_dir_all("path/to/dir").await?;
 ```
+
 ---
 
 ## 7. IO Traits
@@ -441,6 +456,7 @@ async fn write_example<W: AsyncWriteExt + Unpin>(writer: &mut W) -> std::io::Res
     Ok(())
 }
 ```
+
 ---
 
 ### 7.2 BufReader / BufWriter
@@ -464,6 +480,7 @@ let mut writer = BufWriter::new(file);
 writer.write_all(b"Hello").await?;
 writer.flush().await?;
 ```
+
 ---
 
 ## 8. Macros
@@ -489,6 +506,7 @@ async fn main() {
     // ...
 }
 ```
+
 ---
 
 ### 8.2 测试宏
@@ -506,6 +524,7 @@ async fn test_single_threaded() {
     // ...
 }
 ```
+
 ---
 
 ### 8.3 select! 宏
@@ -525,6 +544,7 @@ select! {
     }
 }
 ```
+
 ---
 
 ### 8.4 join! 和 try_join! 宏
@@ -546,6 +566,7 @@ let result = try_join!(
     fallible_operation2(),
 )?;
 ```
+
 ---
 
 ## 9. 配置参考
@@ -570,6 +591,7 @@ tokio = { version = "1", features = [
     "tracing",       # tracing支持
 ] }
 ```
+
 ---
 
 ## 📚 延伸阅读

@@ -74,6 +74,7 @@ graph TB
     style Runtime fill:#bbf,stroke:#333,stroke-width:2px
     style Patterns fill:#bfb,stroke:#333,stroke-width:2px
 ```
+
 ### 1.2 Future 状态机模型
 
 ```mermaid
@@ -93,6 +94,7 @@ stateDiagram-v2
         返回Result
     end note
 ```
+
 ### 1.3 Runtime 架构体系
 
 ```mermaid
@@ -113,6 +115,7 @@ graph LR
     style Executor fill:#6c6,stroke:#333,stroke-width:2px
     style Reactor fill:#c6f,stroke:#333,stroke-width:2px
 ```
+
 ---
 
 ## 2. 概念属性矩阵
@@ -171,6 +174,7 @@ gantt
     JoinSet优化       :active, 2024-08, 2024-11
     性能改进          :active, 2024-08, 2024-11
 ```
+
 ---
 
 ## 5. Rust 1.92.0 特性映射（兼容 Rust 1.90+ 特性）

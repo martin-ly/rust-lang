@@ -8,7 +8,8 @@
 ## 📚 官方资源映射
 
 | 官方资源 | 链接 | 与本模块对应 |
-| :--- | :--- | :--- || **The Rust Book** | [Ch. 10 Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) | 泛型、Trait、生命周期 |
+| :--- | :--- | :--- |
+| **The Rust Book** | [Ch. 10 Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) | 泛型、Trait、生命周期 |
 | **RBE 练习** | [Generics](https://doc.rust-lang.org/rust-by-example/generics.html) | 泛型语法实践 |
 | **Rust Reference** | [Trait and lifetime bounds](https://doc.rust-lang.org/reference/trait-bounds.html) | 泛型约束规范 |
 

@@ -79,18 +79,18 @@
     - [12.2 惯用法效率-认知负荷象限图](#122-惯用法效率-认知负荷象限图)
     - [12.3 惯用法效率矩阵](#123-惯用法效率矩阵)
   - [十三、定理推理链](#十三定理推理链)
-    - [定理一致性矩阵（惯用法谱系专集）](#定理一致性矩阵惯用法谱系专集)
+    - [定理一致性（Coherence）矩阵（惯用法谱系专集）](#定理一致性矩阵惯用法谱系专集)
   - [十四、相关概念链接（L0-L7 映射）](#十四相关概念链接l0-l7-映射)
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
   - [十五、惯用法选择的认知路径](#十五惯用法选择的认知路径)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：惯用法谱系的编译错误](#十边界测试惯用法谱系的编译错误)
-    - [10.1 边界测试：`unwrap` 的滥用（运行时 panic）](#101-边界测试unwrap-的滥用运行时-panic)
+    - [10.1 边界测试：`unwrap` 的滥用（运行时（Runtime） panic）](#101-边界测试unwrap-的滥用运行时-panic)
     - [10.2 边界测试：`clone` 的隐式成本（逻辑错误）](#102-边界测试clone-的隐式成本逻辑错误)
     - [10.3 边界测试：Clippy 警告的编译错误等价（编译错误）](#103-边界测试clippy-警告的编译错误等价编译错误)
     - [10.4 边界测试：`String` 与 `&str` 的类型不匹配（编译错误）](#104-边界测试string-与-str-的类型不匹配编译错误)
-    - [10.5 边界测试：`Default::default()` 与类型推断的歧义（编译错误）](#105-边界测试defaultdefault-与类型推断的歧义编译错误)
+    - [10.5 边界测试：`Default::default()` 与类型推断（Type Inference）的歧义（编译错误）](#105-边界测试defaultdefault-与类型推断的歧义编译错误)
     - [10.7 边界测试：`std::mem::replace` 与 `take` 的惯用选择（逻辑错误）](#107-边界测试stdmemreplace-与-take-的惯用选择逻辑错误)
     - [10.3 边界测试：`Default` 派生与手动实现的语义差异（逻辑错误）](#103-边界测试default-派生与手动实现的语义差异逻辑错误)
     - [补充定理链](#补充定理链)
@@ -98,7 +98,7 @@
     - [测验 1：`Default` trait 的用途是什么？如何为自定义类型实现它？（理解层）](#测验-1default-trait-的用途是什么如何为自定义类型实现它理解层)
     - [测验 2：`AsRef` 与 `Borrow` trait 在语义上有什么区别？（理解层）](#测验-2asref-与-borrow-trait-在语义上有什么区别理解层)
     - [测验 3：什么是"早返回"（Early Return）模式？Rust 中通常如何实现？（理解层）](#测验-3什么是早返回early-return模式rust-中通常如何实现理解层)
-    - [测验 4：`todo!()` 和 `unimplemented!()` 宏在开发中有什么用途？（理解层）](#测验-4todo-和-unimplemented-宏在开发中有什么用途理解层)
+    - [测验 4：`todo!()` 和 `unimplemented!()` 宏（Macro）在开发中有什么用途？（理解层）](#测验-4todo-和-unimplemented-宏在开发中有什么用途理解层)
     - [测验 5：Rust 的 `must_use` 属性有什么作用？什么类型的返回值通常应该标记它？（理解层）](#测验-5rust-的-must_use-属性有什么作用什么类型的返回值通常应该标记它理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -426,7 +426,7 @@ impl Client<Connected> {
 ### 4.3
 
 > 来源: [Rustonomicon §4.6](https://doc.rust-lang.org/nomicon/) PhantomData 标记
-> **惯用**: 用 `PhantomData` 在不占用内存的情况下，向类型系统传递额外的约束信息。
+> **惯用**: 用 `PhantomData` 在不占用内存的情况下，向类型系统（Type System）传递额外的约束信息。
 
 ```rust,ignore
 // 惯用：PhantomData 标记生命周期关系
@@ -1084,7 +1084,7 @@ quadrantChart
 | 词法级惯用法 | match / if let | `?` 运算符 | 宏（Macro）扩展 | λ 演算语法糖 | vs C++ 异常 | Clippy lint | 语法演进 |
 | 类型级惯用法 | struct / enum | 泛型（Generics）约束 | GATs | 类型论 | vs OCaml | derive 宏（Macro） | 类型系统扩展 |
 | 接口级惯用法 | Trait 基础 | 关联类型 | 特化 | 范畴论 | vs Java 接口 | API Guidelines | Trait 系统演进 |
-| 资源级惯用法 | 所有权 / Drop | 智能指针（Smart Pointer） | Pin / Unsafe | 分离逻辑 | vs C++ RAII | Scopeguard crate | 自定义分配器 |
+| 资源级惯用法 | 所有权（Ownership） / Drop | 智能指针（Smart Pointer） | Pin / Unsafe | 分离逻辑 | vs C++ RAII | Scopeguard crate | 自定义分配器 |
 | 控制级惯用法 | loop / for | Iterator | async/await | CPS | vs JS 生成器 | itertools | gen blocks |
 | 并发级惯用法 | — | Send/Sync | 线程 / async | π 演算 | vs Go channel | crossbeam | 异步 trait |
 | 架构级惯用法 | — | — | unsafe 架构 | 进程代数 | vs Erlang OTP | Tower / Bevy | 微服务框架 |
@@ -1195,7 +1195,7 @@ fn fixed() {
 > Rust 的所有权系统强制开发者思考数据克隆的成本。
 > `Vec::clone()` 分配新内存并复制所有元素——O(n) 操作。
 > 在性能关键路径上，应使用引用（Reference）（`&T`）或迭代器（Iterator）（`iter()`）避免克隆。
-> 这与 C++ 的拷贝构造函数（隐式调用）或 Java 的对象引用（总是共享）不同——Rust 的 `clone()` 是显式方法调用，提醒开发者注意成本。
+> 这与 C++ 的拷贝构造函数（隐式调用）或 Java 的对象引用（Reference）（总是共享）不同——Rust 的 `clone()` 是显式方法调用，提醒开发者注意成本。
 > `Rc<T>` 和 `Arc<T>` 在需要共享时减少克隆，但增加了引用计数开销。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
@@ -1300,7 +1300,7 @@ fn main() {
 }
 ```
 
-> **修正**: `#[derive(Default)]` 为所有字段调用 `Default::default()`，可能产生**语义无效**的默认值。`u16::default() = 0`，`String::default() = ""`。修复：1) **手动实现** `Default`：`impl Default for Config { fn default() -> Self { Self { port: 8080, host: "localhost".to_string() } } }`；2) **builder 模式**：强制显式设置关键字段；3) **`#[serde(default = "default_port")]`**：自定义反序列化默认值。`Default` 的设计目的：类型系统的"空值"概念，用于泛型代码（`Vec::resize_with`、`Option::unwrap_or_default`）。这与 C++ 的默认构造函数（类似，但可能执行复杂逻辑）或 Java 的 `null`（无默认值概念）不同——Rust 的 `Default` 是纯函数，无副作用，语义简单。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/default/trait.Default.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//interoperability.html#c-common-traits)]
+> **修正**: `#[derive(Default)]` 为所有字段调用 `Default::default()`，可能产生**语义无效**的默认值。`u16::default() = 0`，`String::default() = ""`。修复：1) **手动实现** `Default`：`impl Default for Config { fn default() -> Self { Self { port: 8080, host: "localhost".to_string() } } }`；2) **builder 模式**：强制显式设置关键字段；3) **`#[serde(default = "default_port")]`**：自定义反序列化默认值。`Default` 的设计目的：类型系统的"空值"概念，用于泛型（Generics）代码（`Vec::resize_with`、`Option::unwrap_or_default`）。这与 C++ 的默认构造函数（类似，但可能执行复杂逻辑）或 Java 的 `null`（无默认值概念）不同——Rust 的 `Default` 是纯函数，无副作用，语义简单。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/default/trait.Default.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//interoperability.html#c-common-traits)]
 > **过渡**: Rust 惯用法谱系全景（Idioms Spectrum） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 惯用法谱系全景（Idioms Spectrum） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 惯用法谱系全景（Idioms Spectrum） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

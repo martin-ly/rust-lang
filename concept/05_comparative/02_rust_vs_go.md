@@ -93,7 +93,7 @@ Go的channel和goroutine vs Rust的 ownership + Send/Sync
 ### 第 4 步：编译速度和运行时性能怎么权衡？
 >
 
-Go编译快但运行时GC暂停，Rust编译慢但运行时可预测
+Go编译快但运行时GC暂停，Rust编译慢但运行时（Runtime）可预测
 
 ### 第 5 步：生态系统成熟度和适用场景？
 >
@@ -404,7 +404,7 @@ func main() {
 > 在现代云原生系统中，Rust 与 Go 的混合架构越来越常见：
 >
 > - **Go 负责编排层**：API Gateway、K8s Operator、控制平面——利用 Go 的快速编译、大生态和低延迟 GC。
-> - **Rust 负责数据平面**：高性能代理（如 Linkerd2-proxy）、存储引擎、实时计算模块（Module）——利用 Rust 的零成本抽象和无 GC 特性。
+> - **Rust 负责数据平面**：高性能代理（如 Linkerd2-proxy）、存储引擎、实时计算模块（Module）——利用 Rust 的零成本抽象（Zero-Cost Abstraction）和无 GC 特性。
 > - **FFI 边界**：通过 C ABI 或 gRPC 进行跨语言通信，避免 cgo 的高开销。 [来源: Linkerd 架构文档 / 工业实践]
 > - **典型案例**: Discord 从 Go 切换到 Rust 处理消息排序和推送；Dropbox 使用 Rust 重写核心同步引擎，Go 保留管理后台。 [来源: Discord Engineering Blog / Dropbox Tech Blog]
 
@@ -473,7 +473,7 @@ func main() {
 }
 ```
 
-> **关键差异**: Rust 的 `?` 使错误传播成为"默认路径"，Go 需要显式 `if err != nil`。Go 1.18+ 的泛型未改变错误处理（Error Handling）范式。 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) / Effective Go
+> **关键差异**: Rust 的 `?` 使错误传播成为"默认路径"，Go 需要显式 `if err != nil`。Go 1.18+ 的泛型（Generics）未改变错误处理（Error Handling）范式。 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) / Effective Go
 
 ### 8.3 错误处理反命题
 
@@ -490,7 +490,7 @@ graph TD
     style T fill:#ff9
 ```
 
-> **认知功能**: 揭示 Rust 与 Go 错误处理各自的优势边界，避免非黑即白的判断。建议结合 §8.1 对比矩阵阅读，关注 Go 的堆栈追踪优势与 Rust 的强制安全边界。关键洞察：当错误需要丰富上下文或代码呈线性脚本风格时，Go 的显式处理反而更具工程价值。[来源: 💡 原创分析]
+> **认知功能**: 揭示 Rust 与 Go 错误处理（Error Handling）各自的优势边界，避免非黑即白的判断。建议结合 §8.1 对比矩阵阅读，关注 Go 的堆栈追踪优势与 Rust 的强制安全边界。关键洞察：当错误需要丰富上下文或代码呈线性脚本风格时，Go 的显式处理反而更具工程价值。[来源: 💡 原创分析]
 
 ---
 
@@ -891,7 +891,7 @@ fn main() {
 }
 ```
 
-> **修正**: Go 的 `nil` 是多重含义的：指针 nil、接口 nil、channel nil、map nil、slice nil，且 "nil interface" 不等于 "nil 指针放入 interface"。Rust 用 `Option<T>` 统一表达"可能无值"：`Option<&T>` 的 `None` 对应 nil 指针，`Option<Box<T>>` 的 `None` 对应 nil 堆指针。Rust 无隐式 nil：所有引用必须有效（或显式 `Option`），裸指针可能为 null 但只能在 `unsafe` 中解引用。这与 Go 的 "nil 是零值"（所有引用类型的默认值）或 Java 的 `null`（所有引用类型的默认值）不同——Rust 消除了 billion-dollar mistake（Tony Hoare 对 null 的称呼）通过类型系统（Type System）强制显式处理缺失值。来源: [The Rust Programming Language] · 来源: [Null References: The Billion Dollar Mistake]
+> **修正**: Go 的 `nil` 是多重含义的：指针 nil、接口 nil、channel nil、map nil、slice nil，且 "nil interface" 不等于 "nil 指针放入 interface"。Rust 用 `Option<T>` 统一表达"可能无值"：`Option<&T>` 的 `None` 对应 nil 指针，`Option<Box<T>>` 的 `None` 对应 nil 堆指针。Rust 无隐式 nil：所有引用（Reference）必须有效（或显式 `Option`），裸指针可能为 null 但只能在 `unsafe` 中解引用。这与 Go 的 "nil 是零值"（所有引用类型的默认值）或 Java 的 `null`（所有引用类型的默认值）不同——Rust 消除了 billion-dollar mistake（Tony Hoare 对 null 的称呼）通过类型系统（Type System）强制显式处理缺失值。来源: [The Rust Programming Language] · 来源: [Null References: The Billion Dollar Mistake]
 
 ### 10.3 边界测试：Go 的接口nil与Rust的Option显式空值（运行时陷阱）
 
@@ -911,7 +911,7 @@ fn main() {
 }
 ```
 
-> **修正**: Go 的**接口 nil 陷阱**：接口值由（类型，值）对组成，nil 指针赋值给接口后，接口值不为 nil（类型信息存在）。这导致 `if r != nil` 为 true，但底层指针为 nil，解引用 panic。Rust 的 `Option<&T>` 是**显式空值**：`None` 和 `Some(&T)` 是不同的变体，编译器强制处理所有情况（`match`、`if let`、`unwrap`）。Rust 无 "nil 指针但非 None" 的概念——空值是显式的、类型安全的。这与 Haskell 的 `Maybe a`（`Nothing` / `Just a`）或 Swift 的 `Optional<T>`（`nil` / `T`）相同——Rust 的 `Option` 是代数数据类型，空值状态在类型系统中显式编码。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Go Interface Nil](https://golang.org/doc/faq#nil_error)]
+> **修正**: Go 的**接口 nil 陷阱**：接口值由（类型，值）对组成，nil 指针赋值给接口后，接口值不为 nil（类型信息存在）。这导致 `if r != nil` 为 true，但底层指针为 nil，解引用 panic。Rust 的 `Option<&T>` 是**显式空值**：`None` 和 `Some(&T)` 是不同的变体，编译器强制处理所有情况（`match`、`if let`、`unwrap`）。Rust 无 "nil 指针但非 None" 的概念——空值是显式的、类型安全的。这与 Haskell 的 `Maybe a`（`Nothing` / `Just a`）或 Swift 的 `Optional<T>`（`nil` / `T`）相同——Rust 的 `Option` 是代数数据类型，空值状态在类型系统（Type System）中显式编码。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Go Interface Nil](https://golang.org/doc/faq#nil_error)]
 
 ## 嵌入式测验（Embedded Quiz）
 

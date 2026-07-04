@@ -321,7 +321,7 @@ Rex 的关键安全属性：
 
 | 安全属性 | 传统 C eBPF | Rex Rust |
 |:---|:---|:---|
-| 内存安全 | 依赖验证器（运行时（Runtime）检查） | Rust 编译器（编译期证明） |
+| 内存安全（Memory Safety） | 依赖验证器（运行时（Runtime）检查） | Rust 编译器（编译期证明） |
 | 无数据竞争 | 验证器 + 原子操作（Atomic Operations）约束 | Rust 所有权（Ownership） + Send/Sync |
 | 资源泄漏 | 需手动释放 Map 引用（Reference） | RAII + Drop trait |
 | Panic 处理 | 未定义行为（C panic = abort） | 编译期 panic 消除或安全回退 |
@@ -366,7 +366,7 @@ impl kernel::Module for MyBpfModule {
 
 | 方向 | 状态 | 说明 |
 |:---|:---|:---|
-| Rust 写内核模块 | ⚠️ 实验性 | Linux 6.x 起逐步合并，API 不稳定 |
+| Rust 写内核模块（Module） | ⚠️ 实验性 | Linux 6.x 起逐步合并，API 不稳定 |
 | Rust 写 eBPF 程序 | ✅ 通过 Aya | Aya 不依赖 Rust for Linux |
 | Rust 替代 eBPF 验证器 | 🔬 研究阶段 | Rex 项目，尚未进入主线 |
 | 内核 eBPF 子系统 Rust 化 | ❌ 远期目标 | 社区讨论中，无明确时间表 |
@@ -578,10 +578,10 @@ graph LR
 |:---|:---|:---|:---|
 | **语言级安全** | 无（C 的内存不安全） | ✅ 所有权（Ownership） + 借用（Borrowing）检查 | ✅ 所有权 + 借用检查 + 受限子集 |
 | **编译期保证** | 仅语法/类型 | 用户态代码完全安全 | 内核态 + 用户态完全安全 |
-| **运行时检查** | Verifier 静态分析字节码 | Verifier 静态分析字节码 | **无 verifier**，信任编译器 |
+| **运行时（Runtime）检查** | Verifier 静态分析字节码 | Verifier 静态分析字节码 | **无 verifier**，信任编译器 |
 | **空指针安全** | Verifier 追踪（保守） | Rust `Option<T>` + Verifier | Rust `Option<T>` 编译期消除 |
 | **缓冲区溢出** | Verifier 边界检查（可能误拒） | Rust 索引检查 + Verifier | Rust 编译期边界证明 |
-| **use-after-free** | Verifier 追踪指针生命周期（Lifetimes） | Rust 所有权系统 + Verifier | Rust 所有权系统编译期消除 |
+| **use-after-free** | Verifier 追踪指针生命周期（Lifetimes） | Rust 所有权（Ownership）系统 + Verifier | Rust 所有权系统编译期消除 |
 | **并发安全（Concurrency Safety）** | 验证器原子操作（Atomic Operations）约束 | Rust `Send`/`Sync` + Verifier | Rust `Send`/`Sync` 编译期保证 |
 | **panic 安全** | C panic = 未定义行为 | Rust panic = 受控 abort | 编译期无 panic 或安全清理 |
 | **开发体验** | 验证器错误晦涩 | Rust 错误友好 + 验证器错误晦涩 | 纯 Rust 错误，无验证器黑盒 |
@@ -649,7 +649,7 @@ Rust 的编译时延在 eBPF 开发中尤为明显：
 
 | 编译阶段 | 时延来源 | 缓解策略 |
 |:---|:---|:---|
-| Rust → LLVM IR | 单态化（Monomorphization）、借用检查 | `cargo check` 快速验证语法/类型 |
+| Rust → LLVM IR | 单态化（Monomorphization）、借用（Borrowing）检查 | `cargo check` 快速验证语法/类型 |
 | LLVM → eBPF 字节码 | eBPF 后端优化 | `-C opt-level=s` 减少优化 |
 | 验证器检查 | 内核 verifier 分析 | 无直接缓解，需简化代码 |
 | BTF 生成 | 调试信息处理 | 仅在 release 构建启用 |
@@ -874,11 +874,11 @@ pub fn my_xdp(ctx: XdpContext) -> u32 {
 > 1) **栈大小**：最大 512 字节（所有局部变量总和）；
 > 2) **指令数**：最大 100 万条；
 > 3) **循环**：需证明有界终止；
-> 4) **无 null 解引用**：验证器跟踪指针有效性。
+> 4) **无 null 解引用（Reference）**：验证器跟踪指针有效性。
 >
 > Rust 的 eBPF 开发（`aya`、`redbpf`）：
 >
-> 1) 使用 `no_std` + 自定义宏（`#[xdp]`、`#[tracepoint]`）；
+> 1) 使用 `no_std` + 自定义宏（Macro）（`#[xdp]`、`#[tracepoint]`）；
 > 2) `aya-tool` 生成内核类型绑定；
 > 3) 用户空间程序用标准 Rust 加载 eBPF 程序。
 >

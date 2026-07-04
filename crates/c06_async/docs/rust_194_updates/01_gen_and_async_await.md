@@ -69,6 +69,7 @@ fn stateful_generator(seed: i32) -> impl Iterator<Item = i32> {
     }
 }
 ```
+
 ### 1.2 生成器与所有权
 
 ```rust
@@ -108,6 +109,7 @@ fn chunk_generator(
     }
 }
 ```
+
 ---
 
 ## 异步生成器
@@ -153,6 +155,7 @@ async fn backpressure_stream(
     }
 }
 ```
+
 ### 2.2 异步生成器与 Pin
 
 ```rust
@@ -211,6 +214,7 @@ fn pinned_stream(
     }
 }
 ```
+
 ---
 
 ## 与 Stream 的整合
@@ -284,6 +288,7 @@ fn combined_stream() -> impl Stream<Item = String> {
     }
 }
 ```
+
 ### 3.2 Stream 适配器
 
 ```rust
@@ -340,6 +345,7 @@ where
     }
 }
 ```
+
 ---
 
 ## 实战模式
@@ -439,6 +445,7 @@ async fn example_usage() {
     println!("Loaded {} items", all_items.len());
 }
 ```
+
 ### 4.2 实时数据处理管道
 
 ```rust
@@ -521,6 +528,7 @@ async fn pipeline_example() {
     }
 }
 ```
+
 ### 4.3 WebSocket 消息流
 
 ```rust
@@ -580,6 +588,7 @@ async fn resilient_websocket_stream(
     }
 }
 ```
+
 ---
 
 ## 性能优化
@@ -611,6 +620,7 @@ mod benchmarks {
     /// - 迭代器链更适合简单转换
 }
 ```
+
 ---
 
 ## 相关文档

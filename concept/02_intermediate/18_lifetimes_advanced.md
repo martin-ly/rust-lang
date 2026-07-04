@@ -34,7 +34,7 @@
     - [2.1 HRTB 的实际应用](#21-hrtb-的实际应用)
     - [2.2 自引用（Reference）与 Pin](#22-自引用与-pin)
     - 2.3 生命周期（Lifetimes）与闭包（Closures）
-  - [三、生命周期模式矩阵](#三生命周期模式矩阵)
+  - [三、生命周期（Lifetimes）模式矩阵](#三生命周期模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
@@ -46,7 +46,7 @@
   - [十、边界测试：高级生命周期的编译错误](#十边界测试高级生命周期的编译错误)
     - 10.1 边界测试：自引用（Reference）结构体（Struct）与 `Pin`（编译错误）
     - [10.2 边界测试：生命周期边界中的 `for<'a>` HRTB（编译错误）](#102-边界测试生命周期边界中的-fora-hrtb编译错误)
-    - [10.5 边界测试：闭包（Closures）捕获引用与 `Fn` trait 的生命周期约束（编译错误）](#105-边界测试闭包捕获引用与-fn-trait-的生命周期约束编译错误)
+    - [10.5 边界测试：闭包（Closures）捕获引用（Reference）与 `Fn` trait 的生命周期约束（编译错误）](#105-边界测试闭包捕获引用与-fn-trait-的生命周期约束编译错误)
     - [10.6 边界测试：`impl Trait` 返回类型的生命周期捕获（编译错误）](#106-边界测试impl-trait-返回类型的生命周期捕获编译错误)
     - [10.3 边界测试：lifetime bounds 与 trait object 的交互（编译错误）](#103-边界测试lifetime-bounds-与-trait-object-的交互编译错误)
   - [实践](#实践)
@@ -249,7 +249,7 @@ where F: for<'a> Fn(&'a str)
 }
 ```
 
-> **HRTB 洞察**: HRTB 的**核心应用场景**是**闭包和回调**——它使泛型（Generics）代码可以灵活地接受临时引用。
+> **HRTB 洞察**: HRTB 的**核心应用场景**是**闭包（Closures）和回调**——它使泛型（Generics）代码可以灵活地接受临时引用。
 > [来源: [Rust Reference — HRTB](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds)]
 
 ---
@@ -707,7 +707,7 @@ fn main() {}
 > 1) `fn use_processor<'a>(p: &dyn Processor<'a>, data: &'a str)` — 泛型（Generics）生命周期；
 > 2) `dyn for<'a> Processor<'a>` — HRTB（Higher-Ranked Trait Bounds），接受任意生命周期。
 > HRTB 的语法：`dyn for<'a> Fn(&'a str) -> &'a str` 表示闭包对所有 `'a` 有效。
-> 这与 Java 的泛型通配符（`? extends T`）或 C++ 的模板（无显式生命周期参数）不同——Rust 的 HRTB 允许 trait object 保持生命周期泛型，是高级类型系统（Type System）的核心特性。
+> 这与 Java 的泛型（Generics）通配符（`? extends T`）或 C++ 的模板（无显式生命周期参数）不同——Rust 的 HRTB 允许 trait object 保持生命周期泛型，是高级类型系统（Type System）的核心特性。
 > [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
@@ -858,7 +858,7 @@ fn longest(x: &str, y: &str) -> &str
 
 **B. 不能，多个输入引用时输出引用的生命周期不明确**。
 
-生命周期省略规则：
+生命周期省略（Lifetime Elision）规则：
 
 1. 每个输入引用参数获得独立生命周期
 2. 若只有一个输入生命周期，它赋给所有输出生命周期
@@ -888,7 +888,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 
 > 编译通过 ⟸ 生命周期标注正确 ⟸ 引用有效性
 > 无悬垂引用 ⟸ 生命周期偏序关系 ⟸ 借用（Borrowing）规则
-> **过渡**: 掌握 生命周期高级主题：从 HRTB 到自引用类型 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 生命周期高级主题：从 HRTB 到自引用类型 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 生命周期高级主题：从 HRTB 到自引用类型 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: 生命周期高级主题：从 HRTB 到自引用类型 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 

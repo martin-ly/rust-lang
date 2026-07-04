@@ -26,7 +26,7 @@
 - [Cow：写时克隆与零拷贝抽象](#cow写时克隆与零拷贝抽象)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 问题：借用与拥有的选择困境](#11-问题借用与拥有的选择困境)
+    - [1.1 问题：借用（Borrowing）与拥有的选择困境](#11-问题借用与拥有的选择困境)
     - [1.2 Cow 的设计：延迟克隆](#12-cow-的设计延迟克隆)
     - [1.3 两种变体：Borrowed vs Owned](#13-两种变体borrowed-vs-owned)
   - [二、技术细节](#二技术细节)
@@ -46,9 +46,9 @@
     - [10.1 边界测试：`Cow` 的写时复制与借用冲突（编译错误）](#101-边界测试cow-的写时复制与借用冲突编译错误)
     - [10.2 边界测试：`Borrow` trait 与 `AsRef` 的误用（编译错误）](#102-边界测试borrow-trait-与-asref-的误用编译错误)
     - [10.3 边界测试：`Cow` 的 `ToOwned` 约束（编译错误）](#103-边界测试cow-的-toowned-约束编译错误)
-    - [10.4 边界测试：`Cow` 在 `match` 中的所有权转移（编译错误）](#104-边界测试cow-在-match-中的所有权转移编译错误)
-    - [10.2 边界测试：`Cow` 的生命周期与所有权转换（编译错误）](#102-边界测试cow-的生命周期与所有权转换编译错误)
-    - [10.4 边界测试：Cow 的生命周期与泛型约束不匹配（编译错误）](#104-边界测试cow-的生命周期与泛型约束不匹配编译错误)
+    - [10.4 边界测试：`Cow` 在 `match` 中的所有权（Ownership）转移（编译错误）](#104-边界测试cow-在-match-中的所有权转移编译错误)
+    - [10.2 边界测试：`Cow` 的生命周期（Lifetimes）与所有权转换（编译错误）](#102-边界测试cow-的生命周期与所有权转换编译错误)
+    - [10.4 边界测试：Cow 的生命周期与泛型（Generics）约束不匹配（编译错误）](#104-边界测试cow-的生命周期与泛型约束不匹配编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`Cow<'a, str>` 的两种变体是什么？各自代表什么语义？（理解层）](#测验-1cowa-str-的两种变体是什么各自代表什么语义理解层)
     - [测验 2：`Cow::Borrowed(s).to_mut()` 在什么情况下会触发克隆？（理解层）](#测验-2cowborrowedsto_mut-在什么情况下会触发克隆理解层)
@@ -665,7 +665,7 @@ fn bad_cow<'a>(s: &'a str) -> Cow<'static, str> {
 fn main() {}
 ```
 
-> **修正**: `Cow<'a, B>` 的**生命周期参数**：1) `'a` 是借用的最长期限；2) `Cow::Borrowed(&'a B)` 要求引用至少存活 `'a`；3) 返回 `Cow<'static, str>` 要求数据是 `'static`（如 `String` 或字面量）。解决：1) 返回 `Cow<'a, str>` 而非 `'static`；2) 若必须 `'static`，使用 `Cow::Owned(s.to_string())`；3) 使用 `Into<Cow<'static, str>>` 让调用方决定。这与 C++ 的 `std::variant`（无生命周期，存储值或引用）或 Swift 的 `copy-on-write`（隐式，无生命周期标记）不同——Rust 的 `Cow` 显式跟踪所有权和借用生命周期。[来源: [Cow Documentation](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
+> **修正**: `Cow<'a, B>` 的**生命周期参数**：1) `'a` 是借用的最长期限；2) `Cow::Borrowed(&'a B)` 要求引用（Reference）至少存活 `'a`；3) 返回 `Cow<'static, str>` 要求数据是 `'static`（如 `String` 或字面量）。解决：1) 返回 `Cow<'a, str>` 而非 `'static`；2) 若必须 `'static`，使用 `Cow::Owned(s.to_string())`；3) 使用 `Into<Cow<'static, str>>` 让调用方决定。这与 C++ 的 `std::variant`（无生命周期，存储值或引用）或 Swift 的 `copy-on-write`（隐式，无生命周期标记）不同——Rust 的 `Cow` 显式跟踪所有权和借用生命周期。[来源: [Cow Documentation](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 

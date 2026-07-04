@@ -50,7 +50,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Edition Guide 的编译错误](#十边界测试edition-guide-的编译错误)
     - [10.1 边界测试：Edition 2024 的尾表达式模式变更（编译错误）](#101-边界测试edition-2024-的尾表达式模式变更编译错误)
-    - [10.2 边界测试：`gen` 关键字保留与宏解析冲突（编译错误）](#102-边界测试gen-关键字保留与宏解析冲突编译错误)
+    - [10.2 边界测试：`gen` 关键字保留与宏（Macro）解析冲突（编译错误）](#102-边界测试gen-关键字保留与宏解析冲突编译错误)
     - [10.6 边界测试：Edition 迁移后的 `cargo fix` 残留问题（编译错误）](#106-边界测试edition-迁移后的-cargo-fix-残留问题编译错误)
     - [10.7 边界测试：Edition 迁移的自动修复遗漏（编译中断/语义变更）](#107-边界测试edition-迁移的自动修复遗漏编译中断语义变更)
     - [10.3 边界测试：Edition 迁移中的宏 hygiene 变更（编译错误）](#103-边界测试edition-迁移中的宏-hygiene-变更编译错误)
@@ -549,7 +549,7 @@ fn main() {
 > **修正**:
 >
 > Rust Edition 2024 引入了**尾表达式作用域**（tail expression scope）的变更：块（`{}`）的尾表达式必须是有值表达式，`if` 无 `else` 分支时类型为 `()`，不能作为非 `()` 上下文的尾表达式。
-> 这是 Rust 类型系统的一致性（Coherence）改进——旧版 Edition 中某些边缘情况允许无意义类型推导。
+> 这是 Rust 类型系统（Type System）的一致性（Coherence）改进——旧版 Edition 中某些边缘情况允许无意义类型推导。
 > Edition 机制保证向后兼容性：
 >
 > 使用 `edition = "2021"` 的项目不受影响，迁移到 `"2024"` 时 `cargo fix` 自动建议修复。
@@ -608,11 +608,11 @@ fn main() {
 >
 > 1) 闭包（Closures）捕获规则变化（`r` 从借用（Borrowing）变为移动）；
 > 2) `impl Trait` 的生命周期（Lifetimes）捕获变化；
-> 3) `match` 的临时值生命周期变化。`cargo fix` 的自动修复基于模式匹配（Pattern Matching），无法处理所有语义变化。
+> 3) `match` 的临时值生命周期（Lifetimes）变化。`cargo fix` 的自动修复基于模式匹配（Pattern Matching），无法处理所有语义变化。
 >
 > 手动审查清单：
 >
-> 1) 检查所有闭包的使用（尤其是 `move` 关键字）；
+> 1) 检查所有闭包（Closures）的使用（尤其是 `move` 关键字）；
 > 2) 检查 `async` 块的生命周期；
 > 3) 检查 `macro_rules!` 的 hygiene 变化。
 >

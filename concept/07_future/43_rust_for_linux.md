@@ -52,7 +52,7 @@
   - [十、边界测试：Rust for Linux 的编译错误](#十边界测试rust-for-linux-的编译错误)
     - 10.1 边界测试：内核模块（Module）的 `no_std` 与标准库缺失（编译错误）
     - [10.2 边界测试：内核锁的原子顺序与 `unsafe` 封装（编译错误）](#102-边界测试内核锁的原子顺序与-unsafe-封装编译错误)
-    - [10.3 边界测试：内核模块的 `no_std` 与 `alloc` 的谨慎使用（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-的谨慎使用编译错误)
+    - [10.3 边界测试：内核模块（Module）的 `no_std` 与 `alloc` 的谨慎使用（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-的谨慎使用编译错误)
     - 10.4 边界测试：内核锁的 `spinlock` 与睡眠的互斥（运行时（Runtime）死锁）
     - [10.3 边界测试：内核模块的 `no_std` 与 alloc 限制（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-限制编译错误)
     - [补充定理链](#补充定理链)
@@ -427,7 +427,7 @@ Rust for Linux 采用状态 (2024+):
 #### Android Binder IPC
 
 - **用途**：Android 系统中进程间通信的核心机制
-- **选择 Rust 的原因**：Binder 历史上存在大量复杂对象生命周期漏洞
+- **选择 Rust 的原因**：Binder 历史上存在大量复杂对象生命周期（Lifetimes）漏洞
 - **状态**：已合并主线，投入生产
 - **代码位置**：`drivers/android/binder.rs`
 
@@ -446,7 +446,7 @@ Rust for Linux 采用状态 (2024+):
 
 ## 四、与形式化工具的交叉（2026-06 更新）
 
-Rust for Linux 是 Rust 形式化工具与运行时检查的重要落地场景：
+Rust for Linux 是 Rust 形式化工具与运行时（Runtime）检查的重要落地场景：
 
 - **[Safety Tags](../04_formal/33_safety_tags_in_formal.md)**：内核中存在大量 `unsafe` 边界，Safety Tags（RFC #3842）可将 `# Safety` 文档注释转化为机器可读契约，帮助内核维护者审查 `unsafe` 调用点。
 - **[BorrowSanitizer](../04_formal/34_borrow_sanitizer_in_formal.md)**：在 Rust/C 混合代码中检测别名模型违规，补充 Miri 无法覆盖的生产环境。
@@ -600,7 +600,7 @@ graph TD
 
 ### 7.1 学习路径建议
 
-1. **基础**：掌握 Rust 所有权、生命周期、`no_std`、FFI
+1. **基础**：掌握 Rust 所有权（Ownership）、生命周期、`no_std`、FFI
 2. **入门**：阅读 `samples/rust/` 中的官方示例
 3. **进阶**：尝试编写简单的字符设备驱动
 4. **深入**：理解 `kernel` crate 的内存模型和并发抽象
@@ -666,7 +666,7 @@ fn init() -> i32 {
 > `Vec`、`String`、`Box` 来自 `alloc`，但要求全局分配器——内核中的全局分配器是 `kmalloc`/`kfree` 的 Rust 封装。
 > 进一步限制：内核代码不能 panic（或 panic 必须调用 `BUG()`），不能使用 `unwrap()`，必须处理所有错误路径。
 > `rust-for-linux` 项目提供 `kernel` crate，封装内核 API（`printk`、锁、工作队列、设备驱动抽象）。
-> 这与用户空间 Rust 开发截然不同——内核 Rust 是"在更严酷的沙盒中编程"，但类型系统（Type System）仍提供内存安全和数据竞争自由。
+> 这与用户空间 Rust 开发截然不同——内核 Rust 是"在更严酷的沙盒中编程"，但类型系统（Type System）仍提供内存安全（Memory Safety）和数据竞争自由。
 > [来源: [Rust for Linux](https://rust-for-linux.com/)] ·
 > [来源: [Linux Kernel Documentation](https://docs.kernel.org/rust/)]
 
@@ -757,7 +757,7 @@ fn buggy_function() {
 > 2) **Mutex**：可睡眠，适用于长临界区、进程上下文；
 > 3) **RWSem**：读写锁，可睡眠。在持有 `SpinLock` 时睡眠是致命错误：当前 CPU 忙等待，调度器无法切换任务，若高优先级任务需同一锁，系统死锁。
 >
-> Rust 的 `rust-for-linux` 通过类型系统部分防止：`SpinLockGuard` 不实现 `Send`（不能跨线程/CPU），但无法静态检测睡眠操作——这需要更高级的效果系统（effect system）。
+> Rust 的 `rust-for-linux` 通过类型系统（Type System）部分防止：`SpinLockGuard` 不实现 `Send`（不能跨线程/CPU），但无法静态检测睡眠操作——这需要更高级的效果系统（effect system）。
 > 这与用户空间的 `std::sync::Mutex`（总是可睡眠）或 `spin` crate 的 `Mutex`（用户态忙等待，无调度概念）不同——内核锁的上下文敏感性是底层编程的本质。
 > [来源: [Rust for Linux](https://rust-for-linux.com/)] ·
 > [来源: [Linux Kernel Locking](https://docs.kernel.org/kernel-hacking/locking.html)]

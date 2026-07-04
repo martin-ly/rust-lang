@@ -43,7 +43,7 @@
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
     - [1.2 RustBelt 与 Iris 核心定义](#12-rustbelt-与-iris-核心定义)
-  - [二、定理一致性矩阵（Theorem Consistency Matrix）](#二定理一致性矩阵theorem-consistency-matrix)
+  - [二、定理一致性（Coherence）矩阵（Theorem Consistency Matrix）](#二定理一致性矩阵theorem-consistency-matrix)
     - [2.1 矩阵总览（11 行）](#21-矩阵总览11-行)
     - [2.2 ⟹ 推理链](#22--推理链)
     - [2.3 层次一致性标注（L1–L3 及扩展映射）](#23-层次一致性标注l1l3-及扩展映射)
@@ -73,7 +73,7 @@
   - [七之一、验证工具代码示例与 CI/CD 集成](#七之一验证工具代码示例与-cicd-集成)
     - [7.1 Prusti：`#[requires]` / `#[ensures]` 示例](#71-prustirequires--ensures-示例)
     - [7.2 Kani：`#[kani::proof]` 与并发验证](#72-kanikaniproof-与并发验证)
-    - [7.3 Verus：`proof fn` 与所有权推理](#73-verusproof-fn-与所有权推理)
+    - [7.3 Verus：`proof fn` 与所有权（Ownership）推理](#73-verusproof-fn-与所有权推理)
     - [7.4 Creusot：分离逻辑契约与预言（Prophecy）](#74-creusot分离逻辑契约与预言prophecy)
     - [7.5 CI/CD 集成方案](#75-cicd-集成方案)
   - [📑 目录](#-目录-1)
@@ -88,7 +88,7 @@
     - [7.6 RefinedRust：自动化分离逻辑推导](#76-refinedrust自动化分离逻辑推导)
     - [7.7 RustHornBelt：Horn 子句验证与 CHC 求解](#77-rusthornbelthorn-子句验证与-chc-求解)
     - [7.8 CSL 中 `RwLock` 与 `Condvar` 的 Iris 建模](#78-csl-中-rwlock-与-condvar-的-iris-建模)
-    - [7.9 `Vec` 重新分配：借用与重分配的形式化处理](#79-vec-重新分配借用与重分配的形式化处理)
+    - [7.9 `Vec` 重新分配：借用（Borrowing）与重分配的形式化处理](#79-vec-重新分配借用与重分配的形式化处理)
   - [十三、待补充与演进方向（TODOs）](#十三待补充与演进方向todos)
   - [十四、Wikipedia 概念对齐](#十四wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
@@ -96,10 +96,10 @@
     - [11.1 边界测试：违反唯一所有权（编译错误）](#111-边界测试违反唯一所有权编译错误)
     - [11.2 边界测试：Send/Sync 自动推导失败（编译错误）](#112-边界测试sendsync-自动推导失败编译错误)
     - [11.3 边界测试：drop 后使用（编译错误）](#113-边界测试drop-后使用编译错误)
-    - [11.4 边界测试：共享借用期间可变借用（编译错误）](#114-边界测试共享借用期间可变借用编译错误)
+    - [11.4 边界测试：共享借用期间可变借用（Mutable Borrow）（编译错误）](#114-边界测试共享借用期间可变借用编译错误)
     - [11.5 边界测试：形式化谓词与 `Cell<T>` 的冲突（编译错误）](#115-边界测试形式化谓词与-cellt-的冲突编译错误)
     - [11.6 边界测试：`mem::forget` 与所有权谓词泄漏（编译错误）](#116-边界测试memforget-与所有权谓词泄漏编译错误)
-    - [10.3 边界测试：unsafe 代码契约的形式化验证盲区（运行时 UB）](#103-边界测试unsafe-代码契约的形式化验证盲区运行时-ub)
+    - [10.3 边界测试：unsafe 代码契约的形式化验证盲区（运行时（Runtime） UB）](#103-边界测试unsafe-代码契约的形式化验证盲区运行时-ub)
 
 ## 一、权威定义（Definition）
 
@@ -262,7 +262,7 @@ graph BT
 | `P * Q` | 分离合取 | `P` 和 `Q` 持有**不相交**的内存资源 | 两个独立的所有权变量 |
 | `{P} C {Q}` | 霍尔三元组 | 前置 `P` 下执行 `C` 得后置 `Q` | 函数契约 `fn f(x: T) -> U` |
 | `I` | 资源不变量 | 共享资源在任意时刻必须满足的断言 | `Mutex<T>` guarding 的不变量 |
-| `□P` | 持久性模态 | `P` 可被任意多线程同时持有而不消耗 | 共享引用 `&T` |
+| `□P` | 持久性模态 | `P` 可被任意多线程同时持有而不消耗 | 共享引用（Reference） `&T` |
 | `▷P` | 后续模态 | `P` 在"下一步"成立，用于递归协议 | 延迟初始化的协议约束 |
 
 > **核心公理（CSL 并行组合规则）**:
@@ -521,7 +521,7 @@ RustBelt 证明了 Rust 的哪个子集是内存安全（Memory Safety）的？
 
 **B. 仅 safe Rust 子集，且 `unsafe` 代码若满足契约则不破坏安全保证**。
 
-RustBelt 的核心贡献：证明 Rust 的 **safe 子集** 是内存安全的，且 **unsafe 代码若满足契约** 则不破坏安全保证。unsafe 契约要求：
+RustBelt 的核心贡献：证明 Rust 的 **safe 子集** 是内存安全（Memory Safety）的，且 **unsafe 代码若满足契约** 则不破坏安全保证。unsafe 契约要求：
 
 1. `&mut T` 必须独占（无其他活跃引用）
 2. `&T` 必须有效（指向已初始化且未变性的内存）
@@ -620,7 +620,7 @@ CSL = 分离逻辑 + 资源不变量：
 
 RustBelt **不**证明所有 unsafe 代码安全。它证明的是：
 
-- Safe Rust 子集在类型系统下是内存安全的
+- Safe Rust 子集在类型系统（Type System）下是内存安全的
 - Unsafe 代码若满足其声明的契约（通过逻辑断言编码），则不破坏 safe 代码的安全保证
 
 unsafe 代码的正确性仍然依赖程序员的正确实现和额外验证（如 Miri、Kani、人工审查）。
@@ -861,7 +861,7 @@ jobs:
 
 | 工具 | CI 集成复杂度 | 运行时间 | 适用场景 |
 |:---|:---|:---|:---|
-| **Kani** | 中（需安装 CBMC） | 分钟~小时级 | 关键模块的并发安全、协议状态机 |
+| **Kani** | 中（需安装 CBMC） | 分钟~小时级 | 关键模块（Module）的并发安全（Concurrency Safety）、协议状态机 |
 | **Miri** | 低（rustup component） | 分钟级 | 常规回归测试中的 UB 检测 |
 | **cargo-audit** | 极低（cargo install） | 秒级 | 每次构建前的依赖漏洞扫描 |
 | **Prusti/Creusot/Verus** | 高（需特定工具链） | 小时级 | 安全关键模块的形式化规约验证 |

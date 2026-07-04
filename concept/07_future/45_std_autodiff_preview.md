@@ -65,7 +65,7 @@ tch-rs: 绑定 PyTorch Autograd（C++ 运行时）
 - 语言级 `#[autodiff]` 属性宏（Macro）
 - 编译器自动生成前向/反向模式代码
 - 与现有 Rust 类型系统（Type System）无缝集成（无需 DSL）
-- 零运行时开销（纯编译期变换）
+- 零运行时（Runtime）开销（纯编译期变换）
 
 ---
 

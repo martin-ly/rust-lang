@@ -35,7 +35,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 关联类型（Associated Types）](#11-关联类型associated-types)
-    - [1.2 泛型关联类型（GATs）](#12-泛型关联类型gats)
+    - [1.2 泛型（Generics）关联类型（GATs）](#12-泛型关联类型gats)
     - [1.3 特化（Specialization）](#13-特化specialization)
   - [二、技术细节](#二技术细节)
     - [2.1 关联类型 vs 泛型参数](#21-关联类型-vs-泛型参数)
@@ -736,7 +736,7 @@ trait LendingIterator {
 
 GAT（Generic Associated Types）是 Rust 1.65 稳定化的重要特性。它允许关联类型有自己的泛型参数：
 
-- `type Item<'a>;` —— 关联类型带生命周期参数
+- `type Item<'a>;` —— 关联类型带生命周期（Lifetimes）参数
 - 用于实现"出借迭代器"（lending iterator），返回引用（Reference）而非值
 - 解决传统 `Iterator` 无法返回自引用（Reference）数据的限制
 
@@ -856,7 +856,7 @@ fn main() {
 
 > 多态代码正确 ⟸ Trait bound 满足 ⟸ 类型约束系统
 > 动态分发安全 ⟸ 对象安全条件 ⟸ vtable 布局
-> **过渡**: 掌握 高级 Trait 主题：从关联类型到特化 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 高级 Trait 主题：从关联类型到特化 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 高级 Trait 主题：从关联类型到特化 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: 高级 Trait 主题：从关联类型到特化 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 

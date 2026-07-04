@@ -63,7 +63,7 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：安全实践的编译错误](#十边界测试安全实践的编译错误)
-    - [10.1 边界测试：密码学常量时间操作（运行时风险）](#101-边界测试密码学常量时间操作运行时风险)
+    - [10.1 边界测试：密码学常量时间操作（运行时（Runtime）风险）](#101-边界测试密码学常量时间操作运行时风险)
     - [10.2 边界测试：`unsafe` 代码的审计边界（编译错误）](#102-边界测试unsafe-代码的审计边界编译错误)
     - [10.3 边界测试：`zeroize` 与编译器优化的冲突（逻辑错误）](#103-边界测试zeroize-与编译器优化的冲突逻辑错误)
     - [10.4 边界测试：依赖供应链的 typo-squatting（运行时安全风险）](#104-边界测试依赖供应链的-typo-squatting运行时安全风险)
@@ -73,7 +73,7 @@
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`cargo audit` 工具的主要功能是什么？（理解层）](#测验-1cargo-audit-工具的主要功能是什么理解层)
     - [测验 2：为什么在 Rust 中处理密码时，建议使用 `secrecy` crate 而非普通 `String`？（理解层）](#测验-2为什么在-rust-中处理密码时建议使用-secrecy-crate-而非普通-string理解层)
-    - [测验 3：Rust 的所有权系统如何帮助防御缓冲区溢出攻击？（理解层）](#测验-3rust-的所有权系统如何帮助防御缓冲区溢出攻击理解层)
+    - [测验 3：Rust 的所有权（Ownership）系统如何帮助防御缓冲区溢出攻击？（理解层）](#测验-3rust-的所有权系统如何帮助防御缓冲区溢出攻击理解层)
     - [测验 4：`#[forbid(unsafe_code)]` 属性有什么作用？（理解层）](#测验-4forbidunsafe_code-属性有什么作用理解层)
     - [测验 5：在 Rust Web 应用中，如何防御 SQL 注入攻击？（理解层）](#测验-5在-rust-web-应用中如何防御-sql-注入攻击理解层)
   - [认知路径](#认知路径)
@@ -977,7 +977,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的 `drop` 释放内存但不**覆盖**（zeroize）内容——这是性能优化，但对敏感数据（密码、密钥、令牌）是安全风险。`zeroize` crate 提供 `Zeroize` trait，drop 时自动覆盖内存：`password.zeroize();`。更严格：使用 `secrecy` crate 包装敏感类型，禁止 `Debug`、`Display`，强制 zeroize。深层防护：1) `mlock` 防止交换到磁盘；2) `memfd_secret`（Linux）创建仅进程可见的匿名内存；3) 编译时防止 secret 进入 `.rodata`。这与 Go 的 `memset`（需手动调用，无自动 zeroize）或 C++ 的 `secure_allocator`（类似概念）不同——Rust 的类型系统可通过 wrapper 类型（`Secret<T>`）在编译期强制安全实践。[来源: [secrecy crate](https://docs.rs/secrecy/)] · [来源: [zeroize crate](https://docs.rs/zeroize/)] · [来源: [CWE-226: Sensitive Information in Resource Not Removed Before Reuse](https://cwe.mitre.org/data/definitions/226.html)]
+> **修正**: Rust 的 `drop` 释放内存但不**覆盖**（zeroize）内容——这是性能优化，但对敏感数据（密码、密钥、令牌）是安全风险。`zeroize` crate 提供 `Zeroize` trait，drop 时自动覆盖内存：`password.zeroize();`。更严格：使用 `secrecy` crate 包装敏感类型，禁止 `Debug`、`Display`，强制 zeroize。深层防护：1) `mlock` 防止交换到磁盘；2) `memfd_secret`（Linux）创建仅进程可见的匿名内存；3) 编译时防止 secret 进入 `.rodata`。这与 Go 的 `memset`（需手动调用，无自动 zeroize）或 C++ 的 `secure_allocator`（类似概念）不同——Rust 的类型系统（Type System）可通过 wrapper 类型（`Secret<T>`）在编译期强制安全实践。[来源: [secrecy crate](https://docs.rs/secrecy/)] · [来源: [zeroize crate](https://docs.rs/zeroize/)] · [来源: [CWE-226: Sensitive Information in Resource Not Removed Before Reuse](https://cwe.mitre.org/data/definitions/226.html)]
 
 ### 10.3 边界测试：secret 在日志中的意外泄露（运行时信息泄露）
 

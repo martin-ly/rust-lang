@@ -97,6 +97,7 @@
     ├── select! 宏
     └── Pin 和自引用
 ```
+
 ---
 
 ## 📋 文档概述
@@ -214,6 +215,7 @@ async fn main() {
     let _ = async_main().await;
 }
 ```
+
 **说明**:
 
 - **async fn**: 声明异步函数
@@ -253,6 +255,7 @@ Hello from async!
 
 值: 42
 ```
+
 ---
 
 ### 示例1.2: Future基础
@@ -360,6 +363,7 @@ async fn main() {
     println!("异步块返回: {}", result);
 }
 ```
+
 **说明**:
 
 - **Future trait**: 异步计算的核心抽象
@@ -392,6 +396,7 @@ Future 完成，结果: 3
 异步块结束
 异步块返回: 42
 ```
+
 ---
 
 ### 示例1.3: tokio运行时
@@ -498,6 +503,7 @@ fn main() {
     }).join().unwrap();
 }
 ```
+
 **说明**:
 
 - **#[tokio::main]**: 宏自动创建运行时
@@ -543,6 +549,7 @@ fn main() {
 
 从另一个线程执行异步代码
 ```
+
 ---
 
 ### 示例1.4: 异步任务spawn
@@ -669,6 +676,7 @@ async fn main() {
     }).await;
 }
 ```
+
 **说明**:
 
 - **tokio::spawn**: 创建异步任务
@@ -728,6 +736,7 @@ JoinSet 任务 2 完成
 本地任务执行
 本地任务完成
 ```
+
 ---
 
 ## 🎓 Tier 2: 实践层示例
@@ -812,6 +821,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 **说明**:
 
 - **tokio::fs**: 异步文件系统操作
@@ -858,6 +868,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 清理完成
 ```
+
 ---
 
 ### 示例2.2: 异步网络编程
@@ -984,6 +995,7 @@ async fn handle_client(mut socket: TcpStream) {
     }
 }
 ```
+
 **说明**:
 
 - **TcpListener**: 异步TCP服务器
@@ -1027,6 +1039,7 @@ async fn handle_client(mut socket: TcpStream) {
 HTTP/1.1 200 OK
 ...
 ```
+
 ---
 
 ### 示例2.3: 异步Channel
@@ -1188,6 +1201,7 @@ async fn main() {
     }
 }
 ```
+
 **说明**:
 
 - **mpsc**: 多生产者单消费者
@@ -1244,6 +1258,7 @@ Worker 0 处理: Task 0-0
 Worker 1 处理: Task 1-0
 ...
 ```
+
 ---
 
 ### 示例2.4: 异步锁和同步
@@ -1403,6 +1418,7 @@ async fn main() {
     println!("使用固定顺序避免死锁");
 }
 ```
+
 **说明**:
 
 - **异步Mutex**: 可在`.await`点持有
@@ -1465,6 +1481,7 @@ async fn main() {
 任务2获得锁2
 使用固定顺序避免死锁
 ```
+
 ---
 
 ## 🚀 Tier 3: 高级层示例
@@ -1662,6 +1679,7 @@ async fn main() {
     }
 }
 ```
+
 **说明**:
 
 - **select!**: 同时等待多个异步操作
@@ -1722,6 +1740,7 @@ Tick 5
 工作中... 2
 任务被取消
 ```
+
 ---
 
 ### 示例3.2: Pin和自引用
@@ -1917,6 +1936,7 @@ async fn main() {
     println!("WithPin 固定后不可移动");
 }
 ```
+
 **说明**:
 
 - **Pin**: 防止值在内存中移动
@@ -1968,6 +1988,7 @@ get_ref: data
 WithoutPin 可以移动
 WithPin 固定后不可移动
 ```
+
 ---
 
 ## 📝 总结

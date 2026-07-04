@@ -1,5 +1,4 @@
-> **内容分级**:
->
+> **内容分级**: [综述级]
 > [综述级]
 > **本节关键术语**: Build Script · `build.rs` · `OUT_DIR` · `rerun-if-changed` · `links` · Native Dependency · `build-dependencies` — [完整对照表](../00_meta/terminology_glossary.md)
 >
@@ -29,12 +28,31 @@
 > [Cargo Book — Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html) ·
 > [The `links` Manifest Key](https://doc.rust-lang.org/cargo/reference/build-scripts.html#the-links-manifest-key)
 
+
+---
+
+> **过渡**: 从 Cargo Build Scripts（`build.rs` 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 Cargo Build Scripts（`build.rs` 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 Cargo Build Scripts（`build.rs` 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
+---
+
+> **定理 1** [Tier 2]: Cargo Build Scripts（`build.rs` 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
+>
+> **定理 2** [Tier 2]: 正确理解 Cargo Build Scripts（`build.rs` 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
+>
+> **定理 3** [Tier 3]: 将 Cargo Build Scripts（`build.rs` 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
+
+
 ## 📑 目录
 
 - [Cargo Build Scripts（`build.rs`）](#cargo-build-scriptsbuildrs)
   - [📑 目录](#-目录)
   - [一、什么是 Build Script](#一什么是-build-script)
-  - [二、生命周期与执行时机](#二生命周期与执行时机)
+  - [二、生命周期（Lifetimes）与执行时机](#二生命周期与执行时机)
     - [2.1 默认执行条件](#21-默认执行条件)
     - [2.2 `rerun-if-changed`](#22-rerun-if-changed)
   - [三、向主 crate 传递信息](#三向主-crate-传递信息)

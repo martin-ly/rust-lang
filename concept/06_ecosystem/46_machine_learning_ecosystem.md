@@ -63,7 +63,7 @@
     - [8.2 边界极限](#82-边界极限)
   - [九、边界测试](#九边界测试)
     - [9.1 边界测试：未初始化张量内存导致信息泄露（安全漏洞）](#91-边界测试未初始化张量内存导致信息泄露安全漏洞)
-    - [9.2 边界测试：单线程 DataFrame 操作在并发场景下竞争（运行时错误）](#92-边界测试单线程-dataframe-操作在并发场景下竞争运行时错误)
+    - [9.2 边界测试：单线程 DataFrame 操作在并发场景下竞争（运行时（Runtime）错误）](#92-边界测试单线程-dataframe-操作在并发场景下竞争运行时错误)
     - [9.3 边界测试：模型输入维度不匹配导致 panic（逻辑错误）](#93-边界测试模型输入维度不匹配导致-panic逻辑错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
@@ -188,7 +188,7 @@ fn candle_tensor_ops() -> anyhow::Result<()> {
 | **依赖** | 极少（纯 Rust）| Python + C++ + CUDA |
 | **启动时间** | < 100ms | 数秒（Python 导入）|
 | **二进制大小** | ~10-50MB | ~500MB+ |
-| **内存安全** | ✅ 编译期保证 | ⚠️ 运行时（Runtime）检查 |
+| **内存安全（Memory Safety）** | ✅ 编译期保证 | ⚠️ 运行时（Runtime）检查 |
 | **GIL 限制** | 无 | 有（Python GIL）|
 | **生态** |  growing | 成熟丰富 |
 
@@ -843,7 +843,7 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 - [性能优化](15_performance_optimization.md) — SIMD、缓存优化、内存布局
 - [嵌入式系统](22_embedded_systems.md) — `#![no_std]`、资源受限环境
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、多线程并行
-- [类型系统](../01_foundation/04_type_system.md) — 泛型（Generics）、Trait、类型安全
+- [类型系统（Type System）](../01_foundation/04_type_system.md) — 泛型（Generics）、Trait、类型安全
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — FFI 绑定、C 库交互
 - [网络协议](38_network_protocols.md) — gRPC、HTTP/2、序列化
 - [云原生](24_cloud_native.md) — 容器化部署、微服务

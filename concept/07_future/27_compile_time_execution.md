@@ -30,7 +30,7 @@
   - [一、核心概念](#一核心概念)
     - [1.1 const fn](#11-const-fn)
     - [1.2 const 上下文](#12-const-上下文)
-    - [1.3 const 泛型](#13-const-泛型)
+    - [1.3 const 泛型（Generics）](#13-const-泛型)
   - [二、编译期能力边界](#二编译期能力边界)
     - [2.1 稳定的编译期操作](#21-稳定的编译期操作)
     - [2.2 不稳定特性](#22-不稳定特性)
@@ -46,10 +46,10 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：编译期执行的编译错误](#十边界测试编译期执行的编译错误)
     - [10.1 边界测试：`const fn` 的受限操作（编译错误）](#101-边界测试const-fn-的受限操作编译错误)
-    - [10.2 边界测试：过程宏的 TokenStream 解析错误（编译错误）](#102-边界测试过程宏的-tokenstream-解析错误编译错误)
+    - [10.2 边界测试：过程宏（Procedural Macro）的 TokenStream 解析错误（编译错误）](#102-边界测试过程宏的-tokenstream-解析错误编译错误)
     - [10.3 边界测试：`const fn` 中的浮点数限制（编译错误）](#103-边界测试const-fn-中的浮点数限制编译错误)
     - [10.4 边界测试：编译期堆分配的 `const Heap` 展望（编译错误）](#104-边界测试编译期堆分配的-const-heap-展望编译错误)
-    - [10.3 边界测试：`const fn` 中的浮点运算精度与确定性（编译错误/运行时差异）](#103-边界测试const-fn-中的浮点运算精度与确定性编译错误运行时差异)
+    - [10.3 边界测试：`const fn` 中的浮点运算精度与确定性（编译错误/运行时（Runtime）差异）](#103-边界测试const-fn-中的浮点运算精度与确定性编译错误运行时差异)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 的常量求值（const evaluation）目前已支持到什么程度？（理解层）](#测验-1rust-的常量求值const-evaluation目前已支持到什么程度理解层)
@@ -566,7 +566,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 > 过程宏（Procedural Macro）的调试困难：错误信息指向宏生成的代码，而非宏定义本身。
 > Rust 1.64+ 的 `Span::error` 和 `proc_macro::Diagnostic` 改善了错误报告。
 > 过程宏（Macro）的编译期执行能力强大但风险高：无限循环的宏导致编译器挂起，`quote!` 生成的代码可能有类型错误（在宏调用点报告）。
-> 这与 C 的宏预处理器（纯文本替换，无类型检查）或 Lisp 的宏（同像性，编译期执行）不同——Rust 的过程宏在编译期运行完整 Rust 代码，但输出仍需通过类型检查。
+> 这与 C 的宏（Macro）预处理器（纯文本替换，无类型检查）或 Lisp 的宏（同像性，编译期执行）不同——Rust 的过程宏在编译期运行完整 Rust 代码，但输出仍需通过类型检查。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] ·
 > [来源: [syn Documentation](https://docs.rs/syn/)]
 

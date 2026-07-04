@@ -505,7 +505,7 @@ enum CircuitState {
 >
 > **论证**: Rust 的所有权（Ownership）系统保证不相交的数据集不能被同时可变借用（Mutable Borrow）。若 A 和 B 只读取共享数据，或各自操作独立数据，则 `A ⊗ B` 无数据竞争。
 > **定理 C-002** [Tier 3]: 若模式 A 的输出类型 `T_A` 满足模式 B 的输入约束 `C_B[T]`，则 `A ∘ B`（串行复合）是类型安全的。
-> **论证**: Rust 的类型系统（Type System）保证函数复合的类型一致性。若 `A: Fn() -> T_A` 且 `B: Fn(T) -> U where T: C_B`，则当 `T_A: C_B` 时，`B(A())` 类型正确。
+> **论证**: Rust 的类型系统（Type System）保证函数复合的类型一致性（Coherence）。若 `A: Fn() -> T_A` 且 `B: Fn(T) -> U where T: C_B`，则当 `T_A: C_B` 时，`B(A())` 类型正确。
 > **定理 C-003** [Tier 3]: Singleton 与 Dependency Injection 在逻辑上互斥——Singleton 隐藏全局依赖，DI 要求依赖显式化。
 > **论证**: Singleton 模式通过全局访问点隐藏了依赖关系；DI 模式通过构造函数/参数显式注入依赖。二者对"依赖可见性"的哲学相反，不能在同一设计层级同时使用而不引入矛盾。
 

@@ -19,7 +19,7 @@
 > **后置概念**: N/A
 ---
 
-## 📑 目
+## 📑 目录
 
 - [L6 生态工程层索引（Ecosystem \& Engineering Layer Index）](#l6-生态工程层索引ecosystem--engineering-layer-index)
   - [📑 目录](#-目录)

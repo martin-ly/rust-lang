@@ -47,8 +47,8 @@
     - [1.4 Shadow Stack 与 Lock-and-Key 策略](#14-shadow-stack-与-lock-and-key-策略)
   - [二、与现有工具的对比矩阵](#二与现有工具的对比矩阵)
   - [三、形式化语义](#三形式化语义)
-    - 3.1 借用标签的生命周期（Lifetimes）
-    - [3.2 从 Tree Borrows 到运行时检测](#32-从-tree-borrows-到运行时检测)
+    - 3.1 借用（Borrowing）标签的生命周期（Lifetimes）
+    - [3.2 从 Tree Borrows 到运行时（Runtime）检测](#32-从-tree-borrows-到运行时检测)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
@@ -538,7 +538,7 @@ fn alias_violation() {
 > 互补策略：开发期用 Miri 全面检查，CI 用 BorrowSanitizer（若存在）快速回归测试，发布用 ASan 检测残余内存问题。
 > 当前状态（2025）：BorrowSanitizer 仍是研究概念，无可用实现；
 > 社区用 Miri + `cargo fuzz` + ASan 组合覆盖。
-> 这与 C/C++ 的 sanitizer 生态（ASan/MSan/UBSan/TSan 成熟可用）不同——Rust 的内存安全保证减少了 sanitizer 的必要性，但 unsafe 代码和 FFI 边界仍需工具支持。
+> 这与 C/C++ 的 sanitizer 生态（ASan/MSan/UBSan/TSan 成熟可用）不同——Rust 的内存安全（Memory Safety）保证减少了 sanitizer 的必要性，但 unsafe 代码和 FFI 边界仍需工具支持。
 > [来源: [Miri Documentation](https://github.com/rust-lang/miri)] ·
 > [来源: [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]
 

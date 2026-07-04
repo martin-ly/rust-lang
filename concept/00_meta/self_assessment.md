@@ -72,7 +72,6 @@
     - [Q38: Miri 用途](#q38-miri-用途)
     - [Q39: Rust 版本兼容性](#q39-rust-版本兼容性)
     - [Q40: unsafe 审计清单](#q40-unsafe-审计清单)
-  - [](#)
   - [L1 扩展层：所有权与类型系统（8 题） 来源: 题目基于 Rust Reference — Ownership, Lifetimes, Types / 2025; TRPL Ch4, Ch6, Ch10 / 2024; Rustonomicon — Life before Main](#l1-扩展层所有权与类型系统8-题-来源-题目基于-rust-reference--ownership-lifetimes-types--2025-trpl-ch4-ch6-ch10--2024-rustonomicon--life-before-main)
     - [Q41: 函数参数传递](#q41-函数参数传递)
     - [Q42: Copy 边界](#q42-copy-边界)
@@ -1017,11 +1016,13 @@ Rust 如何保证向后兼容？
 6. **panic 安全**：panic 时是否泄漏资源或破坏不变量？
 
 </details>
+
 ---
 
 > **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
 > **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
+
 ## L1 扩展层：所有权与类型系统（8 题） [来源: 题目基于 Rust Reference — Ownership, Lifetimes, Types / 2025; TRPL Ch4, Ch6, Ch10 / 2024; Rustonomicon — Life before Main](https://doc.rust-lang.org/nomicon/)
 
 ### Q41: 函数参数传递
@@ -2160,7 +2161,20 @@ fn main() {
 }
 ```
 
-> **修正**: Bloom 层级是认知复杂度框架：L1（记忆）→ L2（理解）→ L3（应用）→ L4（分析）→ L5（评价）→ L6（创造）。Rust 学习的分层：1) **L1-L2**：语法、基本类型、所有权直觉；2) **L3**：解决实际问题，使用标准库；3) **L4**：理解借用检查器算法、NLL、内部可变性；4) **L5**：评估设计模式、性能权衡、安全性；5) **L6**：设计新抽象、形式化验证、语言扩展。学习策略：匹配当前层级的内容，避免 L1 学习者接触 L4 形式化——认知过载。这与教育心理学中的"最近发展区"（ZPD）一致——有效学习发生在略高于当前能力的区域。[来源: [Bloom's Taxonomy](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy)] · [来源: [Zone of Proximal Development](https://en.wikipedia.org/wiki/Zone_of_proximal_development)]
+> **修正**:
+>
+> Bloom 层级是认知复杂度框架：L1（记忆）→ L2（理解）→ L3（应用）→ L4（分析）→ L5（评价）→ L6（创造）。
+> Rust 学习的分层：
+>
+> 1) **L1-L2**：语法、基本类型、所有权直觉；
+> 2) **L3**：解决实际问题，使用标准库；
+> 3) **L4**：理解借用检查器算法、NLL、内部可变性；
+> 4) **L5**：评估设计模式、性能权衡、安全性；
+> 5) **L6**：设计新抽象、形式化验证、语言扩展。
+>
+> 学习策略：匹配当前层级的内容，避免 L1 学习者接触 L4 形式化——认知过载。这与教育心理学中的"最近发展区"（ZPD）一致——有效学习发生在略高于当前能力的区域。
+> [来源: [Bloom's Taxonomy](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy)] ·
+> [来源: [Zone of Proximal Development](https://en.wikipedia.org/wiki/Zone_of_proximal_development)]
 
 ## 认知路径
 

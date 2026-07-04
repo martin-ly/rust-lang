@@ -18,6 +18,31 @@
 
 ---
 
+
+---
+
+## 认知路径
+
+> **认知路径**: 本节从 "常量求值（Constant Evaluation）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+
+1. **问题识别**: 为什么 常量求值（Constant Evaluation） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
+2. **概念建立**: 掌握 常量求值（Constant Evaluation） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
+3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与常量求值（Constant Evaluation）的适用边界。
+5. **迁移应用**: 将 常量求值（Constant Evaluation） 与前置/后置概念链接，形成跨层知识网络。
+
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "常量求值（Constant Evaluation） 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 常量求值（Constant Evaluation） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 常量求值（Constant Evaluation） 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 常量求值（Constant Evaluation） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 常量求值（Constant Evaluation） 具有语言特有的形态。
+
+
 ## 一、什么是常量求值
 
 **常量求值（Constant Evaluation）** 是指在编译期计算表达式结果的过程。Rust 只允许一部分表达式在编译期求值，这些表达式称为**常量表达式（constant expressions）**。
@@ -26,8 +51,8 @@
 
 - 数组类型长度 `[T; N]`
 - 数组重复表达式 `[x; N]`
-- `const`、`static`、枚举 discriminant 的初始化器
-- const 泛型参数
+- `const`、`static`、枚举（Enum） discriminant 的初始化器
+- const 泛型（Generics）参数
 - `const { ... }` 块
 
 在 const context 中，表达式**必须**是常量表达式，并且**一定**在编译期求值。
@@ -44,15 +69,15 @@
 | const 参数 | 泛型 const 参数 |
 | 函数/常量路径 | 指向函数或常量的路径；不允许递归定义常量 |
 | static 路径 | 限制：不可写入 static；不可读取 `extern` static；非 static 初始化器中不可读取 mutable static |
-| 元组、数组、结构体表达式 |  |
+| 元组、数组、结构体（Struct）表达式 |  |
 | 块表达式 | 包括 `unsafe` 块与 `const` 块 |
 | 字段访问 |  |
-| 数组/切片索引 | 索引必须是 `usize` |
+| 数组/切片（Slice）索引 | 索引必须是 `usize` |
 | Range 表达式 |  |
-| 闭包 | 不捕获环境变量的闭包 |
+| 闭包（Closures） | 不捕获环境变量的闭包 |
 | 内置运算符 | 整数、浮点、`bool`、`char` 上的算术、逻辑、比较、惰性布尔运算 |
-| 各种借用 | 限制见下文 |
-| 解引用 |  |
+| 各种借用（Borrowing） | 限制见下文 |
+| 解引用（Reference） |  |
 | 分组表达式 |  |
 | 类型转换 | 除外：指针转地址、函数指针转地址 |
 | const 函数/方法调用 |  |
@@ -61,9 +86,9 @@
 
 ### 借用限制
 
-在常量表达式中，对临时值的共享借用或可变借用受到限制：
+在常量表达式中，对临时值的共享借用或可变借用（Mutable Borrow）受到限制：
 
-- 不允许对生命周期被延长到程序末尾的临时值进行**可变借用**。
+- 不允许对生命周期（Lifetimes）被延长到程序末尾的临时值进行**可变借用**。
 - 不允许对生命周期被延长到程序末尾、且具有内部可变性（interior mutability）的临时值进行**共享借用**。
 
 允许的 place 表达式归纳为三类：**瞬态（transient）**、**间接（indirect）**、**静态（static）**。

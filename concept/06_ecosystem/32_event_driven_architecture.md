@@ -51,17 +51,17 @@
   - [六、Saga 编排器](#六saga-编排器)
   - [七、Reactive Streams](#七reactive-streams)
   - [八、综合示例](#八综合示例)
-  - [九、所有权交互](#九所有权交互)
+  - [九、所有权（Ownership）交互](#九所有权交互)
   - [十、反命题与边界](#十反命题与边界)
   - [十一、常见陷阱](#十一常见陷阱)
   - [十二、来源](#十二来源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：事件驱动架构的编译错误](#十边界测试事件驱动架构的编译错误)
-    - [10.1 边界测试：事件类型的反序列化安全（运行时错误）](#101-边界测试事件类型的反序列化安全运行时错误)
+    - [10.1 边界测试：事件类型的反序列化安全（运行时（Runtime）错误）](#101-边界测试事件类型的反序列化安全运行时错误)
     - [10.2 边界测试：事件处理器的 `Send` 约束（编译错误）](#102-边界测试事件处理器的-send-约束编译错误)
     - [10.3 边界测试：事件总线的类型擦除与向下转型失败（运行时 panic）](#103-边界测试事件总线的类型擦除与向下转型失败运行时-panic)
-    - [10.4 边界测试：事件处理顺序与生命周期管理（运行时悬垂引用）](#104-边界测试事件处理顺序与生命周期管理运行时悬垂引用)
+    - [10.4 边界测试：事件处理顺序与生命周期（Lifetimes）管理（运行时悬垂引用（Reference））](#104-边界测试事件处理顺序与生命周期管理运行时悬垂引用)
     - [10.3 边界测试：事件溯源的序列化版本兼容（运行时反序列化失败）](#103-边界测试事件溯源的序列化版本兼容运行时反序列化失败)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -716,7 +716,7 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Tokio Documentation](https://tokio.rs/) | ✅ 一级 | 异步运行时 |
+| [Tokio Documentation](https://tokio.rs/) | ✅ 一级 | 异步（Async）运行时 |
 | [Tokio Broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html) | ✅ 一级 | 广播通道 |
 | [lapin crate](https://docs.rs/lapin/latest/lapin/) | ✅ 一级 | AMQP/RabbitMQ |
 | [rdkafka crate](https://docs.rs/rdkafka/latest/rdkafka/) | ✅ 一级 | Kafka 客户端 |
@@ -739,7 +739,7 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
 - [云原生](24_cloud_native.md) — Kubernetes、容器化、可观测性
 - [系统设计原则](05_system_design_principles.md) — 安全-性能-可维护性帕累托前沿
 - [Async](../03_advanced/02_async.md) — async/await、并发模型
-- [泛型](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) — 类型组合、抽象机制
+- [泛型（Generics）](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) — 类型组合、抽象机制
 
 ---
 

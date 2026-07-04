@@ -1,7 +1,7 @@
 # Rust Reference 附录（Reference Appendices）
 
 > **EN**: Reference Appendices
-> **Summary**: Rust Reference 附录概览：语法摘要、语法索引、宏 follow-set 歧义规范、语言影响、测试摘要与术语表。
+> **Summary**: Rust Reference 附录概览：语法摘要、语法索引、宏（Macro） follow-set 歧义规范、语言影响、测试摘要与术语表。
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -15,6 +15,33 @@
 > **来源**: [Rust Reference — Appendices](https://doc.rust-lang.org/reference/appendices.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ---
+
+
+> **跨层回溯**: [宏系统](../03_advanced/04_macros.md) · [过程宏（Procedural Macro）](../03_advanced/07_proc_macro.md)
+
+---
+
+## 认知路径
+
+> **认知路径**: 本节从 "Rust Reference 附录（Reference Ap" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+
+1. **问题识别**: 为什么 Rust Reference 附录（Reference Ap 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
+2. **概念建立**: 掌握 Rust Reference 附录（Reference Ap 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
+3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与Rust Reference 附录（Reference Ap的适用边界。
+5. **迁移应用**: 将 Rust Reference 附录（Reference Ap 与前置/后置概念链接，形成跨层知识网络。
+
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "Rust Reference 附录（Reference Ap 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 Rust Reference 附录（Reference Ap 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Rust Reference 附录（Reference Ap 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 Rust Reference 附录（Reference Ap 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rust Reference 附录（Reference Ap 具有语言特有的形态。
+
 
 ## 一、附录结构
 
@@ -61,11 +88,11 @@ Rust 受到多种语言影响：
 
 | 语言/理论 | 影响领域 |
 |:---|:---|
-| C/C++ | 零成本抽象、内存布局、FFI |
-| ML/OCaml | 类型推断、代数数据类型、模式匹配 |
-| Haskell | Type classes → traits、类型系统 |
-| Cyclone | 区域类型、借用概念 |
-| Linear Logic | 所有权与资源管理 |
+| C/C++ | 零成本抽象（Zero-Cost Abstraction）、内存布局、FFI |
+| ML/OCaml | 类型推断（Type Inference）、代数数据类型、模式匹配（Pattern Matching） |
+| Haskell | Type classes → traits、类型系统（Type System） |
+| Cyclone | 区域类型、借用（Borrowing）概念 |
+| Linear Logic | 所有权（Ownership）与资源管理 |
 
 ## 六、Glossary
 

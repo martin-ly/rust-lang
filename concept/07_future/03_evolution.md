@@ -266,7 +266,7 @@ cargo build
 | **可自动修复** | **需手动审查** |
 |:---|:---|
 | 关键字冲突重命名（`async` → `r#async`） | `unsafe fn` 内 unsafe 操作的语义审查 |
-| `dyn Trait` 显式标注 | `impl Trait` + `use<>` 的生命周期设计 |
+| `dyn Trait` 显式标注 | `impl Trait` + `use<>` 的生命周期（Lifetimes）设计 |
 | 路径系统迁移（`extern crate` 移除） | `static mut` 引用（Reference）移除后的并发安全（Concurrency Safety）重构 |
 | `macro_rules!` 片段指定符补全 | 闭包（Closures） disjoint capture 导致的 Drop 顺序变化 |
 | `unsafe extern` 块标记 | 指针比较从值语义到地址语义的逻辑影响 |
@@ -290,7 +290,7 @@ cargo check -W rust-2024-compatibility
 |:---|:---|:---|:---|
 | **模块（Module）系统** | `extern crate` 不再需要（宏（Macro） crate 除外） | 依赖自动进入 extern prelude | 自动，无需 `extern crate` |
 | **模块（Module）系统** | `crate::` 作为当前 crate 绝对路径根 | 统一路径语义 | `cargo fix` 自动重写路径 |
-| **模块系统** | Uniform paths：`use` 路径相对当前模块 | 消除 `use` 与其他路径的不一致 | 自动 |
+| **模块（Module）系统** | Uniform paths：`use` 路径相对当前模块 | 消除 `use` 与其他路径的不一致 | 自动 |
 | **模块系统** | `foo.rs` + `foo/` 共存，`mod.rs` 非必需 | 更灵活的目录布局 | 可选迁移 |
 | **关键字** | `async`、`await`、`try` 成为保留关键字 | 禁止作为标识符 | `cargo fix` 重命名或 `r#` 原始标识符 |
 | **关键字** | `dyn` 成为严格关键字 | 禁止作为标识符 | `cargo fix` |
@@ -312,12 +312,12 @@ cargo check -W rust-2024-compatibility
 | **闭包（Closures）** | Disjoint capture（不相交捕获） | 闭包仅捕获用到的字段，而非整个变量 | 自动，极少数 Drop 顺序变化需手动处理 |
 | **模式** | 嵌套 `or` 模式在 `macro_rules!` `:pat` 中可用 | `matches!(x, A \| B \| C)` 在宏（Macro）内合法 | 新语法，无需迁移 |
 | **包解析** | Cargo Resolver 2 默认启用 | 按特性（feature）解析依赖，避免 feature 过度统一 | `resolver = "2"` 在 `Cargo.toml` 中声明 |
-| **宏** | `panic!` 宏一致性（Coherence）：必须传格式字符串 | `panic!(val)` → `panic!("{}", val)` | `cargo fix` 自动改写 |
+| **宏（Macro）** | `panic!` 宏一致性（Coherence）：必须传格式字符串 | `panic!(val)` → `panic!("{}", val)` | `cargo fix` 自动改写 |
 | **语法预留** | 预留 `ident#`、`ident"..."` 语法 | 为未来语法扩展保留空间 | 自动检查冲突 |
 | **Lint 升级** | `bare_trait_objects`、`ellipsis_inclusive_range_patterns` 从 warn 升为 error | 强制 `dyn Trait` 和 `..=` 语法 | 编译器报错后手动修复 |
 | **生命周期** | `'_` 在更多上下文可用 | 进一步简化显式生命周期 | 可选 |
 
-**关键洞察**：Rust 2021 的核心主题是**精细化所有权与捕获**。Disjoint capture 使闭包不再过度捕获整个结构体（Struct），这是 Rust 所有权系统在「更精确、更细粒度」方向上的重要演进，与 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) 中的「最小权限原则」一脉相承。
+**关键洞察**：Rust 2021 的核心主题是**精细化所有权（Ownership）与捕获**。Disjoint capture 使闭包（Closures）不再过度捕获整个结构体（Struct），这是 Rust 所有权系统在「更精确、更细粒度」方向上的重要演进，与 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) 中的「最小权限原则」一脉相承。
 
 #### 2.3.3 Rust 2021 → 2024（Rust 1.85，2025-02）
 
@@ -330,7 +330,7 @@ cargo check -W rust-2024-compatibility
 | **Unsafe** | `unsafe_op_in_unsafe_fn` 默认 warn → deny | `unsafe fn` 体内的 unsafe 操作需显式 `unsafe { }` | `cargo fix` 自动包裹 |
 | **Unsafe** | `extern` 块必须标记 `unsafe` | `extern "C" { }` → `unsafe extern "C" { }` | `cargo fix` 自动添加 |
 | **Unsafe** | `no_mangle`、`export_name`、`link_section` 需 `#[unsafe(...)]` | 属性显式标记 unsafe | `cargo fix` 自动改写 |
-| **Unsafe** | 禁止引用 `static mut` | `&STATIC_MUT` 成为硬错误 | 手动重构为 `UnsafeCell` 或原子类型 |
+| **Unsafe** | 禁止引用（Reference） `static mut` | `&STATIC_MUT` 成为硬错误 | 手动重构为 `UnsafeCell` 或原子类型 |
 | **Unsafe** | `std::env::set_var` / `remove_var` 变为 `unsafe fn` | 修改环境变量需显式 unsafe | 手动添加 `unsafe` 块 |
 | **Never type** | `!` fallback 规则调整 | never type 向目标类型的强制转换更严格 | 自动，极少数需显式类型标注 |
 | **匹配** | Match ergonomics reservations | 禁止某些易混淆的 `&` + `ref` 模式组合 | 编译器报错后手动修复 |
@@ -517,7 +517,7 @@ Rust 语言团队已公开表示 Edition 将继续以约 3 年为周期发布。
 | **Effects 系统语法** | Lang Team 早期设计 | 统一 `async`/`unsafe`/`const` 为 effect 标注 | L2 Trait 系统 + L3 Async |
 | **生成器（Generators）稳定** | `gen` 已预留关键字 | `gen { yield 1; }` 语法稳定 | L3 Async / 协程 |
 | **特化（Specialization）** | `min_specialization` 内部使用 | 逐步向用户开放安全子集 | L2 Trait Coherence |
-| **Const 泛型完整化** | `generic_const_exprs` nightly | 常量表达式 `where N > 0` | L2 泛型系统 |
+| **Const 泛型（Generics）完整化** | `generic_const_exprs` nightly | 常量表达式 `where N > 0` | L2 泛型系统 |
 | **Type Alias Impl Trait (TAIT)** | nightly，预计 2025-2026 稳定 | `type MyIter = impl Iterator<Item = i32>` | L2 泛型 + 存在类型 |
 | **用户自定义 allocators** | nightly (`allocator_api`) | 容器类型默认 allocator 参数化 | L1 内存管理 |
 | **Safe 子集外部函数** | `safe fn` in `extern` 块已部分实现 | 更精细的 FFI 安全边界 | L3 Unsafe/FFI |
@@ -610,10 +610,10 @@ trait LendingIterator {
 
 **成熟应用场景**：
 
-- **lending iterators**：返回借用（Borrowing）自迭代器本身的数据
+- **lending iterators**：返回借用（Borrowing）自迭代器（Iterator）本身的数据
 - **类型族（Type Families）**：将运行时（Runtime）类型映射到编译期类型
 - **HKT（高阶类型）模拟**：通过 GATs 部分实现 Haskell 风格的 HKT
-- **异步 trait**：`async fn` in trait 的 desugaring 依赖 GATs
+- **异步（Async） trait**：`async fn` in trait 的 desugaring 依赖 GATs
 
 ### 3.5 SIMD / Portable SIMD
 
@@ -673,7 +673,7 @@ fn fetch_data() -> String
 
 **设计目标**：
 
-- 统一 `async`、`unsafe`、`const` 等现有"修饰符"为类型系统的一等公民
+- 统一 `async`、`unsafe`、`const` 等现有"修饰符"为类型系统（Type System）的一等公民
 - 支持用户定义 effect（如 `Logging`、`Transaction`、`Pure`）
 - Effect 多态：`fn map<T, E>(f: impl Fn() -> T effect E)` 表示"不关心具体 effect"
 
@@ -1035,7 +1035,7 @@ graph TD
 
 > **认知功能**: 将技术因素置于更广泛的生态与社会背景中审视，破除技术决定论迷思。建议关注四条非技术反例（社区治理、Mozilla 支持、时机因素、营销文档）如何与技术特性耦合。关键洞察：Rust 的成功是技术设计（所有权）、社区治理（RFC 流程）、历史时机（C/C++ 安全危机）与资源投入共同作用的系统结果。[来源: 💡 原创分析]
 > **过渡: L7 → L1**
-> Rust 的演进不是破坏性的——Edition 系统保证 2015 年的代码在 2024 年仍能编译。这种向后兼容性是所有演进的前提。理解 Rust 如何从 "所有权 + 借用" 的简单组合发展到今天的复杂类型系统，需要回到最初的设计原则。
+> Rust 的演进不是破坏性的——Edition 系统保证 2015 年的代码在 2024 年仍能编译。这种向后兼容性是所有演进的前提。理解 Rust 如何从 "所有权 + 借用（Borrowing）" 的简单组合发展到今天的复杂类型系统，需要回到最初的设计原则。
 > 设计根基见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)。
 > **过渡: L7 → L4**
 > Rust 的未来方向（Effects System、Generic Const Items、TAIT）都有形式化理论基础。Effects System 对应代数效应的类型论、TAIT 对应存在类型的隐式封装、Const Generics 对应依赖类型的受限形式。这些不是工程师的随意发明，而是类型论研究的工程转化。
@@ -1266,7 +1266,7 @@ fn fixed() {
 | 子目标 | 状态 | 形式模型意义 |
 | :--- | :--- | :--- |
 | **build-std** | **[RFC 3874](https://rust-lang.github.io/rfcs//3874-build-std-always.html) FCP 完成待合并** | [RFC 3873](https://rust-lang.github.io/rfcs//3873-build-std-context.html)（自定义标准库编译目标）已合并，3874（`build-std: always`）FCP 已完成待合并，3875（显式依赖）处理反馈中；允许自定义编译 `core`/`std`，为嵌入式、安全关键和形式化验证提供"可剪裁的标准库" |
-| **Cranelift Backend** | ⚠️ **未完成（资金不足）** | 用 Cranelift（Wasmtime 的 JIT 编译器）替代 LLVM 作为 debug 编译后端，编译速度提升 2-5x；不改变语义，但改变**编译期验证与运行时分发的边界**。2025H2 周期因 Trifecta Tech Foundation 资金不足未能完成生产就绪目标，社区正在寻求新的资助渠道 |
+| **Cranelift Backend** | ⚠️ **未完成（资金不足）** | 用 Cranelift（Wasmtime 的 JIT 编译器）替代 LLVM 作为 debug 编译后端，编译速度提升 2-5x；不改变语义，但改变**编译期验证与运行时（Runtime）分发的边界**。2025H2 周期因 Trifecta Tech Foundation 资金不足未能完成生产就绪目标，社区正在寻求新的资助渠道 |
 | **Parallel Frontend** | 实现中 | 并行解析和类型检查；对 trait solver 的并发安全（Concurrency Safety）提出新要求 |
 | **Relink don't Rebuild** | 设计阶段 | 增量链接优化；通过精确依赖追踪减少全量重编译 |
 
@@ -1506,7 +1506,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 - Foundation 押注“更安全的 C++”是高性能、人体工学 Rust/C++ 互操作的最佳长期基础
 - 即使 WG21 在 2026 年批准相关工作，C++ 3 年发布周期也意味着**最早 2029 年**才能在生产环境落地
-- 因此，标准层面的内存安全是“长游戏”，不能解决当下的互操作痛点
+- 因此，标准层面的内存安全（Memory Safety）是“长游戏”，不能解决当下的互操作痛点
 
 **近期重心转移**：
 
@@ -1552,7 +1552,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 - 它与 Maintainer Fund（维护者可持续性）、Interop Initiative（跨语言互操作）共同构成 Foundation 2026 年的三大支柱投资
 - 对于工业界，RIL 提供了将内部 Rust 项目或研究原型推向生态的通道
 
-> **关键洞察**: 当语言生态成熟到一定规模，**项目孵化**成为治理工具：RIL 通过降低优秀项目的行政、资金与推广门槛，放大社区创新成果。这本质上是把 Rust 的“零成本抽象”理念扩展到**组织与制度层面**。
+> **关键洞察**: 当语言生态成熟到一定规模，**项目孵化**成为治理工具：RIL 通过降低优秀项目的行政、资金与推广门槛，放大社区创新成果。这本质上是把 Rust 的“零成本抽象（Zero-Cost Abstraction）”理念扩展到**组织与制度层面**。
 > **来源**: [Rust Foundation — What's Next for the Rust Innovation Lab?](https://rustfoundation.org/media/whats-next-for-the-rust-innovation-lab/) · 可信度: ✅
 
 ### 6.15 OpenAI 加入 Rust Foundation 与维护者资助生态成形（2026-06）
@@ -2161,7 +2161,7 @@ RFC（Request for Comments）是重大变更的标准化提案流程，确保设
 <details>
 <summary>✅ 答案与解析</summary>
 
-基于 Project Goals（年度目标）、社区反馈、工业需求（如安全关键领域）和语言设计一致性。平衡短期实用性和长期愿景。
+基于 Project Goals（年度目标）、社区反馈、工业需求（如安全关键领域）和语言设计一致性（Coherence）。平衡短期实用性和长期愿景。
 </details>
 
 ---

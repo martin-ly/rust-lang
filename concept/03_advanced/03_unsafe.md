@@ -56,7 +56,7 @@
     - [2.2 UB（未定义行为）分类矩阵](#22-ub未定义行为分类矩阵)
     - [2.2b Unsafe Code Guidelines 完整 UB 分类](#22b-unsafe-code-guidelines-完整-ub-分类)
       - [内存访问类 UB](#内存访问类-ub)
-      - [类型系统类 UB](#类型系统类-ub)
+      - [类型系统（Type System）类 UB](#类型系统类-ub)
       - [并发与同步类 UB](#并发与同步类-ub)
       - [其他 UB](#其他-ub)
       - [UB 检测的不可判定性边界](#ub-检测的不可判定性边界)
@@ -81,7 +81,7 @@
     - [6.3 反命题决策树](#63-反命题决策树)
       - [反命题 1: "unsafe 块内没有安全检查"](#反命题-1-unsafe-块内没有安全检查)
       - [反命题 2: "只要用了 unsafe 就会触发 UB"](#反命题-2-只要用了-unsafe-就会触发-ub)
-      - [反命题 3: "raw pointer 和引用等价"](#反命题-3-raw-pointer-和引用等价)
+      - [反命题 3: "raw pointer 和引用（Reference）等价"](#反命题-3-raw-pointer-和引用等价)
       - [反命题 4: "FFI 调用总是安全的"](#反命题-4-ffi-调用总是安全的)
   - [七、定理推理链（Theorem Chain）](#七定理推理链theorem-chain)
     - [7.1 安全抽象定理](#71-安全抽象定理)
@@ -90,13 +90,13 @@
       - [Miri 检测的核心算法](#miri-检测的核心算法)
       - [Miri 与编译器优化的关系](#miri-与编译器优化的关系)
       - [MIRIFLAGS 完整选项速查](#miriflags-完整选项速查)
-    - [7.3 定理一致性矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)
+    - [7.3 定理一致性（Coherence）矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)
   - [八、示例与反例（Examples \& Counter-examples）](#八示例与反例examples--counter-examples)
     - [8.1 正确示例：安全封装裸指针（Vec 简化版）](#81-正确示例安全封装裸指针vec-简化版)
     - [8.2 正确示例：手动实现 Send/Sync](#82-正确示例手动实现-sendsync)
     - [8.3 反例：悬垂裸指针（UB）](#83-反例悬垂裸指针ub)
     - [8.4 反例：transmute 滥用（UB）](#84-反例transmute-滥用ub)
-    - [8.5 反例：无效枚举值（UB）](#85-反例无效枚举值ub)
+    - [8.5 反例：无效枚举（Enum）值（UB）](#85-反例无效枚举值ub)
     - [8.6 边界极限测试](#86-边界极限测试)
       - [命题: "unsafe 代码可以安全地封装"](#命题-unsafe-代码可以安全地封装)
       - [命题: "Miri 可以检测所有 UB"](#命题-miri-可以检测所有-ub)
@@ -152,7 +152,7 @@
   - [九、Unsafe/FFI 2024：权限分离与显式契约](#九unsafeffi-2024权限分离与显式契约)
     - [9.1 问题：权限的混淆](#91-问题权限的混淆)
     - [9.2 2024 Edition 的权限分离](#92-2024-edition-的权限分离)
-    - [9.3 形式化模型：权限的模块化](#93-形式化模型权限的模块化)
+    - [9.3 形式化模型：权限的模块（Module）化](#93-形式化模型权限的模块化)
     - [9.4 与 `unsafe extern` + `safe` 的关系](#94-与-unsafe-extern--safe-的关系)
     - [9.5 `unsafe extern` blocks：FFI 边界的显式 unsafe（Rust 2024）](#95-unsafe-extern-blocksffi-边界的显式-unsaferust-2024)
       - [9.5.1 问题：谁为 FFI 签名负责？](#951-问题谁为-ffi-签名负责)
@@ -176,7 +176,7 @@
       - [Tree Borrows（PLDI 2023）](#tree-borrowspldi-2023)
       - [Provenance（PLDI 2022）](#provenancepldi-2022)
     - [15.5 跨语言内存模型对比矩阵](#155-跨语言内存模型对比矩阵)
-  - [十六、边界测试：Unsafe 代码的编译错误与运行时灾难](#十六边界测试unsafe-代码的编译错误与运行时灾难)
+  - [十六、边界测试：Unsafe 代码的编译错误与运行时（Runtime）灾难](#十六边界测试unsafe-代码的编译错误与运行时灾难)
     - [16.1 边界测试：裸指针解引用前的空检查（编译错误）](#161-边界测试裸指针解引用前的空检查编译错误)
     - [16.2 边界测试：将 \&T 转换为 \&mut T（编译错误）](#162-边界测试将-t-转换为-mut-t编译错误)
     - [16.3 边界测试：无效 UTF-8 的 str::from\_utf8\_unchecked（运行时 UB）](#163-边界测试无效-utf-8-的-strfrom_utf8_unchecked运行时-ub)
@@ -951,7 +951,7 @@ MIRIFLAGS=-Zmiri-stacked-borrows cargo miri test
 MIRIFLAGS=-Zmiri-tree-borrows cargo miri test --test integration test_name
 ```
 
-> **[Miri Documentation: Limitations]** Miri 无法检测所有 UB（停机问题不可解），且不支持与硬件相关的行为（如内联汇编）。✅ 已验证
+> **[Miri Documentation: Limitations]** Miri 无法检测所有 UB（停机问题不可解），且不支持与硬件相关的行为（如内联汇编（Inline Assembly））。✅ 已验证
 > **[Miri Book](https://github.com/rust-lang/miri)** Tree Borrows 自 2024 年末起成为 Miri 的**默认**别名模型（原 `-Zmiri-tree-borrows` 不再需显式指定；Stacked Borrows 退为 `-Zmiri-stacked-borrows` 兼容选项）。PLDI 2025 Distinguished Paper 正式确立了 Tree Borrows 作为 Rust 别名假设工业级标准的地位。✅ 已验证
 
 ### 7.2b Miri 检测算法原理与编译器优化关系
@@ -1040,7 +1040,7 @@ Miri 解释执行循环:
 | 编号 | 定理（前提 ⟹ 结论） | 推理链 | 失效条件 | 典型场景 | 层级标注 |
 |:---|:---|:---|:---|:---|:---|
 | **L1** | `unsafe {}` 或 `unsafe fn` ⟹ 程序员承担不变量责任 | 标记存在 ⟹ 编译器移交证明义务 ⟹ 程序员手动验证局部不变量 | 安全契约遗漏或证明不完整 | 任何 unsafe 块入口 | `L3::责任转移` |
-| **L2** | raw pointer 解引用 ⟹ 绕过借用（Borrowing）检查器 | `*const T` / `*mut T` ⟹ 无生命周期检查 ⟹ 无别名追踪 ⟹ 程序员保证内存有效且合法别名 | 悬垂指针、未对齐、已释放、非法别名 | FFI、底层数据结构、自引用结构 | `L3::借用绕过` |
+| **L2** | raw pointer 解引用 ⟹ 绕过借用（Borrowing）检查器 | `*const T` / `*mut T` ⟹ 无生命周期（Lifetimes）检查 ⟹ 无别名追踪 ⟹ 程序员保证内存有效且合法别名 | 悬垂指针、未对齐、已释放、非法别名 | FFI、底层数据结构、自引用结构 | `L3::借用绕过` |
 | **L3** | `unsafe fn` 调用 ⟹ 需满足函数安全契约 | 调用发生 ⟹ 前置条件必须成立 ⟹ 否则调用方触发 UB | 前置条件未验证即调用 | `std::ptr::read`、`std::mem::transmute` | `L3::契约调用` |
 | **T1** | unsafe 不关闭类型系统 ⟹ 仅关闭特定检查 | `unsafe` 关键字 ⟹ 类型检查仍运行 ⟹ 仅裸指针/FFI/trait/union 等特定检查关闭 | 误以为类型系统完全失效、在 unsafe 内放松类型约束 | 泛型（Generics）在 unsafe 块内、trait bound 推导 | `L3::类型保持` |
 | **T2** | FFI 边界 ⟹ 类型布局兼容性要求 | `extern "C"` ⟹ `#[repr(C)]` 保证布局一致 ⟹ ABI 调用约定匹配 ⟹ 调用行为可预期 | 布局不匹配、ABI 错误、字节序差异 | C 结构体（Struct）互操作、系统 API 调用 | `L3::FFI布局` |
@@ -1532,7 +1532,7 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
 > **权威来源**: [Rust Reference: Pointer operators](https://doc.rust-lang.org/reference/) · [Rust Reference: Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [The Rustonomicon: Ownership and Move Semantics](https://doc.rust-lang.org/nomicon/) · [std::ptr API docs](https://doc.rust-lang.org/std/ptr/) · [Rustonomicon: Working With Memory](https://doc.rust-lang.org/nomicon/)
 > **层级标注**: `L3::裸指针语义` → `L1::所有权` 移动语义延伸 · `L2::内存管理` drop 触发控制 · `L4::形式化` Validity Invariant 边界
 
-**核心区别**：裸指针的 `*` 解引用操作与 `std::ptr::read`/`std::ptr::write` 在**所有权（Ownership）语义**、**drop 触发**和**借用检查器介入程度**方面存在本质差异。`*ptr` 是**引用语义**的延伸——它假设目标位置已初始化、对齐且有效，并受 Rust 所有权规则约束；而 `ptr::read`/`ptr::write` 是**原始内存操作**，仅执行 bitwise copy 或按位覆盖，不调用 `Clone`，也不自动触发 `Drop`。
+**核心区别**：裸指针的 `*` 解引用操作与 `std::ptr::read`/`std::ptr::write` 在**所有权（Ownership）语义**、**drop 触发**和**借用（Borrowing）检查器介入程度**方面存在本质差异。`*ptr` 是**引用语义**的延伸——它假设目标位置已初始化、对齐且有效，并受 Rust 所有权规则约束；而 `ptr::read`/`ptr::write` 是**原始内存操作**，仅执行 bitwise copy 或按位覆盖，不调用 `Clone`，也不自动触发 `Drop`。
 
 > **[来源: std::ptr::read docs]** `ptr::read` 创建目标位置的按位副本，无论该位置是否已初始化。调用者必须确保后续不会导致原位置和新位置的值同时被 drop。✅ 已验证
 > **[来源: std::ptr::write docs]** `ptr::write` 将 `src` 按位写入 `dst` 指向的内存，不读取或 drop `dst` 指向的旧内容。这使其成为未初始化内存初始化的唯一安全方式。✅ 已验证
@@ -1594,7 +1594,7 @@ unsafe { std::ptr::read(p.as_ptr()); }
 将 `src` **按位覆盖**到 `dst` 指向的内存位置。
 
 - **不触发 `Drop`**：`dst` 指向的旧值（如果有）不会被 drop。这是它与 `*dst = src` 最关键的区别。
-- **转移所有权**：`src` 被 move 进 `dst` 指向的内存。此后 `src` 在调用者作用域中失效。
+- **转移所有权（Ownership）**：`src` 被 move 进 `dst` 指向的内存。此后 `src` 在调用者作用域中失效。
 - **不安全契约**：`dst` 必须对齐；若 `dst` 指向已初始化的内存，旧值将被静默覆盖——导致内存泄漏（若旧值含堆分配）。
 
 > **来源: [Rust Reference: Assignment expressions](https://doc.rust-lang.org/reference/)** `*ptr = val` 会先计算左值（place expression），若目标位置已初始化，编译器会插入 `Drop::drop` 调用，再执行 move/复制。✅ 已验证
@@ -2885,7 +2885,7 @@ fn safe_transmute() {
 
 > **修正**: `std::mem::transmute` 要求源类型和目标类型必须具有完全相同的内存布局大小。大小不匹配会在编译期报错。即使大小相同，transmute 也可能导致类型语义破坏（如将整数 transmute 为指针）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **相关判定树**: [Unsafe 判定树](../00_meta/concept_definition_decision_forest.md#九unsafe-判定树)
-> **相关 FTA**: [Unsafe 契约失效树](../00_meta/fault_tree_analysis_collection.md#六unsafe-契约失效树) · [内存安全失效树](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
+> **相关 FTA**: [Unsafe 契约失效树](../00_meta/fault_tree_analysis_collection.md#六unsafe-契约失效树) · [内存安全（Memory Safety）失效树](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
 
 ### 10.4 边界测试：`union` 的字段访问与活跃字段跟踪（运行时 UB）
 
@@ -2954,7 +2954,7 @@ fn main() {
 > **[来源: [RFC 3908 — Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3908)]**
 
 **核心命题**：
-当前 Rust 的 `unsafe` 粒度是**整个结构体**——如果结构体包含需要 unsafe 初始化的字段（如自引用、未对齐数据、原始句柄），则整个结构体的构造和使用都被 unsafe 污染。
+当前 Rust 的 `unsafe` 粒度是**整个结构体（Struct）**——如果结构体包含需要 unsafe 初始化的字段（如自引用、未对齐数据、原始句柄），则整个结构体的构造和使用都被 unsafe 污染。
 Unsafe Fields 提议将 unsafe 粒度下沉到**字段级别**。
 
 **语法草案**（仍在设计中）：
@@ -3302,7 +3302,7 @@ pub struct Arc<T> {
 关键 unsafe 技术：
 
 - **`NonNull<ArcInner<T>>`**：保证内部指针非空，使 `Arc<T>` 本身可以是 covariant over `T`。
-- **原子操作**：
+- **原子操作（Atomic Operations）**：
   - `clone`：`fetch_add(1, Acquire)` 或 `Relaxed`（视具体内存序要求）。
   - `drop`：`fetch_sub(1, Release)`；若减到 0，使用 `fence(Acquire)` 保证 `data` 的写操作对释放线程可见，再 drop `data`。
 - **`unsafe impl Send/Sync`**：
@@ -3350,7 +3350,7 @@ Rust 要求：**若类型实现 `Drop`，则其生命周期参数必须严格长
 
 #### 9.4.2 `#[may_dangle]`
 
-某些类型（如 `Box<T>`、`Vec<T>`）的 `Drop` 实现实际上不会访问泛型参数 `T`。若严格遵守 dropck，会导致过度保守的借用错误。`#[may_dangle]` 属性告诉编译器：
+某些类型（如 `Box<T>`、`Vec<T>`）的 `Drop` 实现实际上不会访问泛型（Generics）参数 `T`。若严格遵守 dropck，会导致过度保守的借用错误。`#[may_dangle]` 属性告诉编译器：
 
 > 此 `Drop` 实现不会访问标记为 `#[may_dangle]` 的类型参数，请放宽 dropck 检查。
 

@@ -45,7 +45,7 @@
     - [相关文档](#相关文档)
     - [外部资源](#外部资源)
   - [📝 总结](#-总结)
-  - [**最后更新**: 2025-12-11 | **Rust 版本**: 1.96.1+](#最后更新-2025-12-11--rust-版本-1920)
+  - [**最后更新**: 2025-12-11 | **Rust 版本**: 1.96.1+](#最后更新-2025-12-11--rust-版本-1961)
 
 ---
 
@@ -128,6 +128,7 @@ Future 与 Executor 机制
     ├── 状态机转换
     └── 错误传播
 ```
+
 ---
 
 ## 1. Future Trait 详解
@@ -146,6 +147,7 @@ pub trait Future {
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
 ```
+
 **三个核心组成**:
 
 1. **`Output`**: Future 完成后产生的值类型
@@ -162,6 +164,7 @@ pub enum Poll<T> {
     Pending,     // Future 未完成，需要稍后重试
 }
 ```
+
 **工作流程**:
 
 ```text
@@ -173,6 +176,7 @@ Executor 调用 future.poll(cx)
                     │
                     └──> 注册 Waker，等待唤醒后再次 poll
 ```
+
 ---
 
 ### 1.3 Context 和 Waker
@@ -191,6 +195,7 @@ impl<'a> Context<'a> {
     }
 }
 ```
+
 **Waker 的作用**:
 
 - **通知机制**: 告诉 Executor "这个 Future 现在可以再次 poll 了"
@@ -240,6 +245,7 @@ impl<'a> Context<'a> {
 │    → 回到步骤 2                                         │
 └─────────────────────────────────────────────────────────┘
 ```
+
 ---
 
 ### 2.2 Waker 示例
@@ -277,6 +283,7 @@ impl Future for MyFuture {
     }
 }
 ```
+
 ---
 
 ## 3. Executor 工作原理
@@ -294,6 +301,7 @@ impl Future for MyFuture {
 │ 5. 管理线程池 (多线程运行时)         │
 └───────────────────────────────────────┘
 ```
+
 ---
 
 ### 3.2 简化的 Executor 实现
@@ -369,6 +377,7 @@ static VTABLE: RawWakerVTable = RawWakerVTable::new(
     |_| {},
 );
 ```
+
 **使用示例**:
 
 ```rust
@@ -386,6 +395,7 @@ fn main() {
     executor.run();
 }
 ```
+
 ---
 
 ### 3.3 Tokio Executor 架构
@@ -423,6 +433,7 @@ fn main() {
 │                                                    │
 └────────────────────────────────────────────────────┘
 ```
+
 ---
 
 ## 4. 手动实现 Future
@@ -455,6 +466,7 @@ async fn main() {
     println!("Result: {}", result);
 }
 ```
+
 ---
 
 ### 4.2 示例 2: 延迟 Future
@@ -500,6 +512,7 @@ async fn main() {
     println!("1 second later");
 }
 ```
+
 ---
 
 ### 4.3 示例 3: 复合 Future
@@ -567,6 +580,7 @@ where
     }
 }
 ```
+
 ---
 
 ## 5. async/await 状态机
@@ -583,6 +597,7 @@ async fn example() -> i32 {
     c
 }
 ```
+
 **编译器生成的等价状态机**（简化版）:
 
 ```rust
@@ -638,6 +653,7 @@ impl Future for ExampleFuture {
     }
 }
 ```
+
 ---
 
 ### 5.2 状态机可视化
@@ -675,6 +691,7 @@ impl Future for ExampleFuture {
 │                                                     │
 └─────────────────────────────────────────────────────┘
 ```
+
 ---
 
 ### 5.3 零成本抽象验证
@@ -701,6 +718,7 @@ impl Future for ManualVersion {
     }
 }
 ```
+
 **性能对比**:
 
 - **async 版本**: 编译为状态机，零额外开销
@@ -769,6 +787,7 @@ async fn main() {
     println!("2 seconds later");
 }
 ```
+
 ---
 
 ### 6.2 可取消的 Future
@@ -832,6 +851,7 @@ async fn main() {
     }
 }
 ```
+
 ---
 
 ## 7. 最佳实践
@@ -875,6 +895,7 @@ impl<F: Future> Future for MyFuture<F> {
     }
 }
 ```
+
 **推荐**: 使用 `pin-project` crate 简化 Pin 操作。
 
 ---
@@ -894,6 +915,7 @@ fn good() -> impl Future<Output = i32> {
     async { 42 }
 }
 ```
+
 **2. 使用 `#[inline]` 提示**:
 
 ```rust
@@ -906,6 +928,7 @@ impl Future for MyFuture {
     }
 }
 ```
+
 ---
 
 ## 📚 延伸阅读

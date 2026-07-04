@@ -103,6 +103,7 @@ async fn process_stream(input: impl Stream<Item = i32>) -> Vec<i32> {
         .await
 }
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -116,6 +117,7 @@ async fn process_stream(input: impl Stream<Item = i32>) -> Vec<i32> {
         .unwrap()
 }
 ```
+
 #### 2. 复杂异步管道性能提升
 
 ```rust
@@ -127,6 +129,7 @@ async fn complex_pipeline(input: impl Stream<Item = i32>) -> Vec<i32> {
     async_iterator_improvements::complex_async_pipeline(input).await
 }
 ```
+
 ### 性能对比
 
 | 场景         | Rust 1.90 | Rust 1.91 | 性能提升 |
@@ -161,6 +164,7 @@ static TOTAL_BUFFER: usize = MAX_CONNECTIONS * BUFFER_SIZE;  // 可以计算
 // 无法创建引用
 // const CONNECTIONS_REF: &usize = &MAX_CONNECTIONS;  // ❌ Rust 1.90 不支持
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -178,6 +182,7 @@ let config = const_async_config::AsyncConfig {
     timeout_ms: *const_async_config::AsyncConfig::TIMEOUT_REF,
 };
 ```
+
 ### 实际应用场景
 
 #### 异步服务器配置
@@ -197,6 +202,7 @@ async fn start_server() {
     // 使用配置启动服务器
 }
 ```
+
 ---
 
 ## JIT 编译器优化对异步代码的影响
@@ -222,6 +228,7 @@ async fn optimized_processing(input: impl Stream<Item = i32>) -> Vec<i32> {
     async_jit_optimizations::optimized_async_iterator_chain(input).await
 }
 ```
+
 #### 2. 异步批处理优化
 
 ```rust
@@ -233,6 +240,7 @@ async fn batch_processing(input: impl Stream<Item = i32>, batch_size: usize) -> 
     async_jit_optimizations::async_batch_processing(input, batch_size).await
 }
 ```
+
 ---
 
 ## 内存分配优化对异步场景的影响
@@ -261,6 +269,7 @@ async fn create_objects(count: usize) -> Vec<Vec<i32>> {
     result
 }
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -271,6 +280,7 @@ async fn create_objects(count: usize) -> Vec<Vec<i32>> {
     async_memory_optimizations::async_small_object_allocation(count).await
 }
 ```
+
 #### 2. 异步 HashMap 操作优化
 
 ```rust
@@ -281,6 +291,7 @@ async fn hashmap_operations(count: usize) -> HashMap<usize, i32> {
     async_memory_optimizations::async_hashmap_operations(count).await
 }
 ```
+
 ---
 
 ## 异步错误处理改进
@@ -308,6 +319,7 @@ async fn validate_items(items: Vec<i32>) -> Result<Vec<i32>, String> {
     Ok(items)
 }
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -319,6 +331,7 @@ async fn validate_items(items: Vec<i32>) -> ControlFlow<String, Vec<i32>> {
     async_error_handling::async_validate_items(items).await
 }
 ```
+
 ### 实际应用
 
 ```rust
@@ -336,6 +349,7 @@ async fn process_data(items: Vec<i32>) {
     }
 }
 ```
+
 ---
 
 ## 实际应用示例
@@ -365,6 +379,7 @@ async fn main() {
     println!("吞吐量: {:.2} 元素/秒", perf_result.throughput_elements_per_sec);
 }
 ```
+
 ### 示例 2: 异步任务管理器
 
 ```rust
@@ -398,6 +413,7 @@ async fn main() {
     println!("任务统计: {:?}", stats);
 }
 ```
+
 ### 示例 3: 异步缓存系统
 
 ```rust
@@ -431,6 +447,7 @@ async fn main() {
     println!("缓存统计: {:?}", stats);
 }
 ```
+
 ---
 
 ## 迁移指南
@@ -443,6 +460,7 @@ async fn main() {
 rustup update stable
 rustc --version  # 应该显示 rustc 1.91.0
 ```
+
 #### 2. 利用新特性
 
 **使用改进的异步迭代器**:
@@ -467,6 +485,7 @@ async fn process_stream(input: impl Stream<Item = i32>) -> Vec<i32> {
         .unwrap()
 }
 ```
+
 **使用 const 上下文增强**:
 
 ```rust
@@ -479,6 +498,7 @@ const MAX_CONNECTIONS: usize = 100;
 const CONNECTIONS_REF: &usize = &MAX_CONNECTIONS;  // ✅ 支持
 const TOTAL_SIZE: usize = *CONNECTIONS_REF * 2;
 ```
+
 #### 3. 性能优化建议
 
 1. **利用异步迭代器优化**: 复杂链式操作会自动受益于性能提升

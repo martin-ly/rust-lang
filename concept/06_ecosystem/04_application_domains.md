@@ -134,7 +134,7 @@ embedded-hal/actix/anchor/bevy等框架
 | 独立游戏 | bevy + wgpu | 高 |  ECS + 并发 + WASM 部署 | 编辑器生态不及 Unity |
 | 智能合约/节点 | solana-program / substrate | 极高 |  无 GC 确定执行、内存安全（Memory Safety） | 学习曲线陡峭 |
 | 数据管道/ETL | polars + arrow + tokio | 中 |  性能接近 C++、类型安全 | Pandas 生态更大 |
-| OS/驱动/内核 | Rust for Linux + bindgen | 极高 |  内存安全 + 零成本 + C 互操作 | unsafe 比例高 |
+| OS/驱动/内核 | Rust for Linux + bindgen | 极高 |  内存安全（Memory Safety） + 零成本 + C 互操作 | unsafe 比例高 |
 | 跨平台桌面应用 | tauri + React/Vue | 中 |  内存安全 + 小体积 + 前端生态 | 不如 Electron 成熟 |
 
 ---
@@ -210,7 +210,7 @@ graph TD
 | **reqwest** | **0.13.3** (2026-05) | TLS 后端迁移至 `aws-lc-rs`，为 FIPS 140-3 合规奠定基础 | [reqwest releases](https://github.com/seanmonstar/reqwest/releases) |
 | **arrow-rs** | **58.3.0 + 补丁** (2026-05-07) | 多处整数溢出修复（`BufferBuilder`、`ArrayData::slice`、`FixedSizeBinaryArray`） | [arrow-rs releases](https://github.com/apache/arrow-rs/releases) |
 
-> **关键洞察**: sqlx 0.9.0 的 MSRV 提升至 1.94.0 反映了 Rust 生态的**快速演进压力**——核心基础设施 crate 的 MSRV 提升会迫使下游项目跟进，否则被锁定在旧版本。这与 Go 的向后兼容性承诺（Go 1 兼容性保证）形成对比：Rust 的快速语言演进带来了表达力优势，但也增加了生态维护负担。tokio 的 LIFO slot stealing 回退则展示了**生产环境性能回归的敏感性**——即使在最流行的异步（Async）运行时中，看似微小的调度策略变更也可能引发大规模性能问题。[来源: 💡 原创分析]
+> **关键洞察**: sqlx 0.9.0 的 MSRV 提升至 1.94.0 反映了 Rust 生态的**快速演进压力**——核心基础设施 crate 的 MSRV 提升会迫使下游项目跟进，否则被锁定在旧版本。这与 Go 的向后兼容性承诺（Go 1 兼容性保证）形成对比：Rust 的快速语言演进带来了表达力优势，但也增加了生态维护负担。tokio 的 LIFO slot stealing 回退则展示了**生产环境性能回归的敏感性**——即使在最流行的异步（Async）运行时（Runtime）中，看似微小的调度策略变更也可能引发大规模性能问题。[来源: 💡 原创分析]
 
 **浏览器引擎里程碑 — Servo v0.1.0 on crates.io（2026-04-13）**:
 
@@ -536,7 +536,7 @@ fn main() -> ! {
 
 - 需要 `alloc`（Vec、String）但无 std → 启用 `extern crate alloc`
 - 完全无堆（最严格）→ 使用 `heapless::Vec`、`heapless::String`
-- 异步多任务 → `embassy`（协作式）或 `RTIC`（基于中断）
+- 异步（Async）多任务 → `embassy`（协作式）或 `RTIC`（基于中断）
 
 > **关键洞察**: `defmt`（deferred formatting）通过将格式化字符串留在主机端，仅传输原始数据到调试器，将日志开销降低 **10-100 倍**。这是 Rust 嵌入式生态的**杀手级工具**。
 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -597,7 +597,7 @@ fn main() -> Result<()> {
 | 资产 | `bevy_asset` | 热重载、异步加载 | — |
 | UI | `bevy_ui` | 即时模式 + 保留模式混合 | `egui` (工具UI) |
 
-**ECS 与所有权的同构性（深度）**：
+**ECS 与所有权（Ownership）的同构性（深度）**：
 
 ```rust,ignore
 // Bevy 系统：函数签名即数据依赖声明
@@ -676,7 +676,7 @@ graph TD
 | 数据工程 | 探索性数据分析 | 交互式反馈慢 | Python + Jupyter |
 | ML 训练 | 大规模深度学习 | 生态不足 | Python + PyTorch |
 | 桌面 GUI | 复杂原生 UI | 控件库不完整 | Qt / Flutter |
-| 系统编程 | 硬实时 (μs 级) | 借用检查器编译时间不可预测 | Ada / C |
+| 系统编程 | 硬实时 (μs 级) | 借用（Borrowing）检查器编译时间不可预测 | Ada / C |
 
 ---
 
@@ -861,7 +861,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: axum 的路由系统利用 Rust 的类型系统保证 handler 函数的签名与路由路径匹配——`Path<u32>` 提取器要求 URL 参数可解析为 `u32`，`Json` 返回类型要求响应可序列化。这些约束在编译期验证，而非运行时出错。 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **关键洞察**: axum 的路由系统利用 Rust 的类型系统（Type System）保证 handler 函数的签名与路由路径匹配——`Path<u32>` 提取器要求 URL 参数可解析为 `u32`，`Json` 返回类型要求响应可序列化。这些约束在编译期验证，而非运行时出错。 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ---
 
@@ -898,7 +898,7 @@ fn main() {
 
 > **迁移策略**：
 >
-> 1. **Phase 1**：用 PyO3 将 Rust 作为 Python 扩展模块（保留 Python 生态）
+> 1. **Phase 1**：用 PyO3 将 Rust 作为 Python 扩展模块（Module）（保留 Python 生态）
 > 2. **Phase 2**：用 Rust 重写性能瓶颈模块（保持 Python 胶水层）
 > 3. **Phase 3**：完整迁移到 Rust（CLI、服务、嵌入式）
 
@@ -1175,7 +1175,7 @@ graph TD
 > 每个应用领域都面临特定的 unsafe 边界：嵌入式需要裸指针操作、WASM 需要 FFI 桥接、游戏引擎需要自定义内存分配器。这些场景不是"绕过 Rust 的安全保证"，而是"在理解安全边界的前提下精确控制"。
 > unsafe 边界见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)。
 > **过渡: L6 → L5**
-> 不同语言在不同领域有各自的优势：Go 在微服务、Python 在 AI、C++ 在游戏引擎。Rust 正在所有领域同时扩张，但这不是因为 Rust 万能，而是因为它的"零成本抽象 + 内存安全"组合在越来越多的场景下成为最优解。 [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
+> 不同语言在不同领域有各自的优势：Go 在微服务、Python 在 AI、C++ 在游戏引擎。Rust 正在所有领域同时扩张，但这不是因为 Rust 万能，而是因为它的"零成本抽象（Zero-Cost Abstraction） + 内存安全"组合在越来越多的场景下成为最优解。 [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 > 对比视角见 [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) 与 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)。
 > **过渡: L6 → L7**
 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
@@ -1197,7 +1197,7 @@ graph TD
 
 **与 L1-L4 的映射**:
 
-- **L1 所有权**: `no_std` 下无 `std::alloc`，所有权模型退化为**静态分配 + 借用检查**。Embassy 的任务（`Task`）是静态分配的，其生命周期由编译期证明管理。
+- **L1 所有权**: `no_std` 下无 `std::alloc`，所有权模型退化为**静态分配 + 借用检查**。Embassy 的任务（`Task`）是静态分配的，其生命周期（Lifetimes）由编译期证明管理。
 - **L3 Async**: `embassy::executor` 是 `Future` 状态机的手动轮询器，与 Tokio 的运行时对偶——Tokio 提供**运行时抽象**，Embassy 提供**编译期调度**。 [来源: [lib.rs](https://lib.rs/)]
 - **L4 形式化**: Embassy 的调度器是**确定性有限自动机（DFA）**——任务优先级、中断向量、DMA 完成回调构成状态转换函数，无非确定性调度（无抢占、无优先级反转）。
 
@@ -1217,7 +1217,7 @@ graph TD
 - **L3 Unsafe**: 内核 Rust 代码的 `unsafe` 比例显著高于用户空间代码（约 10-20%），因为每个 C API 调用都是 FFI 边界。Rust for Linux 的创新在于：**将 unsafe 封装为 safe 抽象**，例如 `spinlock_t` → `SpinLock<T>` 的类型化封装。
 - **L4 形式化**: 内核的并发模型（RCU、seqlock、per-CPU 变量）尚无完整的 Rust 形式化证明。RustBelt 的并发分离逻辑（CSL）理论上可覆盖 `SpinLock<T>` 和 `Mutex<T>`，但 RCU 的读侧临界区（read-side critical section）无锁语义超出了当前 RustBelt 的证明范围。
 
-**安全边界**: `kernel::ffi` 模块是形式化边界的核心——它将 C 指针转换为 Rust 引用时，必须显式声明**安全契约**（如"调用者必须持有锁"、"此指针仅在 RCU 读侧临界区内有效"）。这些契约目前以文档注释形式存在，未来可能进化为机器可读的 Safety Tags。 [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+**安全边界**: `kernel::ffi` 模块是形式化边界的核心——它将 C 指针转换为 Rust 引用（Reference）时，必须显式声明**安全契约**（如"调用者必须持有锁"、"此指针仅在 RCU 读侧临界区内有效"）。这些契约目前以文档注释形式存在，未来可能进化为机器可读的 Safety Tags。 [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 > **[来源: Rust for Linux Docs]** Rust for Linux 将内核的复杂不变量编码为 Rust 的类型契约。
 
@@ -1294,7 +1294,7 @@ graph TD
 **与 L1-L4 的映射**:
 
 - **L1 类型系统**: `candle` 的 `Tensor` 类型携带**形状信息**（`Shape`）和**数据类型**（`DType`）。矩阵乘法的形状约束（`(m, k) × (k, n) → (m, n)`）在编译期通过 trait 约束验证——这是**依赖类型**（dependent types）的 Rust 近似。
-- **L2 泛型**: `burn` 的 `Backend` trait 抽象了计算后端（CPU/CUDA/WGPU）。`Tensor<B, D>` 的泛型参数 `B` 是后端，`D` 是维度——这是**类型级编程**（type-level programming）的工程应用。
+- **L2 泛型（Generics）**: `burn` 的 `Backend` trait 抽象了计算后端（CPU/CUDA/WGPU）。`Tensor<B, D>` 的泛型参数 `B` 是后端，`D` 是维度——这是**类型级编程**（type-level programming）的工程应用。
 - **L3 Unsafe**: 张量操作底层依赖 `unsafe` 的 SIMD/BLAS 调用。`candle` 通过 `Storage` trait 封装内存布局，将 `unsafe` 限制在 `src/storage/` 模块内。`burn` 的 `NdArray` 后端完全用 safe Rust 实现，无 `unsafe`。
 - **L4 形式化**: 张量的**形状安全**（shape safety）是 Rust 类型系统向**数组语言**（APL/J）形式化能力的逼近。但 Rust 目前无法在编译期证明**动态形状**（如基于运行时输入的 reshape）的合法性——这需要 const generics 的进一步扩展或 dependent types 的引入。
 

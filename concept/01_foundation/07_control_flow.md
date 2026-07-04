@@ -28,7 +28,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 表达式 vs 语句](#11-表达式-vs-语句)
-    - [1.2 match：穷尽性模式匹配](#12-match穷尽性模式匹配)
+    - [1.2 match：穷尽性模式匹配（Pattern Matching）](#12-match穷尽性模式匹配)
     - [1.3 if let / while let：简化的模式匹配](#13-if-let--while-let简化的模式匹配)
   - [二、技术细节](#二技术细节)
     - [2.1 loop 与值返回](#21-loop-与值返回)
@@ -45,9 +45,9 @@
   - [十二、边界测试：控制流的编译错误](#十二边界测试控制流的编译错误)
     - [12.1 边界测试：`loop` 返回值类型不匹配（编译错误）](#121-边界测试loop-返回值类型不匹配编译错误)
     - [12.2 边界测试：`if let` 与 `while let` 的变量遮蔽（编译错误）](#122-边界测试if-let-与-while-let-的变量遮蔽编译错误)
-    - [10.3 边界测试：`loop` 表达式的类型推断（编译错误）](#103-边界测试loop-表达式的类型推断编译错误)
+    - [10.3 边界测试：`loop` 表达式的类型推断（Type Inference）（编译错误）](#103-边界测试loop-表达式的类型推断编译错误)
     - [10.4 边界测试：`?` 运算符在 `main` 中的返回类型（编译错误）](#104-边界测试-运算符在-main-中的返回类型编译错误)
-    - [10.5 边界测试：`loop` 返回值与 `break` 的类型一致性（编译错误）](#105-边界测试loop-返回值与-break-的类型一致性编译错误)
+    - [10.5 边界测试：`loop` 返回值与 `break` 的类型一致性（Coherence）（编译错误）](#105-边界测试loop-返回值与-break-的类型一致性编译错误)
     - [10.6 边界测试：`match` 臂中的变量绑定与模式守卫（编译错误）](#106-边界测试match-臂中的变量绑定与模式守卫编译错误)
   - [实践](#实践)
   - [参考来源](#参考来源)
@@ -748,7 +748,7 @@ fn main() {
 > 1) 守卫中不能引入新绑定；
 > 2) 守卫中的变量是引用（Reference）而非值（若使用 `ref`）；
 > 3) 守卫不移动值，但若守卫失败，后续臂可能获得 move 绑定。
-> 这与 Haskell 的 `case` guard（类似，但 Haskell 是惰性求值，守卫语义不同）或 Scala 的 `match` with `if` guard（类似，但无所有权影响）不同
+> 这与 Haskell 的 `case` guard（类似，但 Haskell 是惰性求值，守卫语义不同）或 Scala 的 `match` with `if` guard（类似，但无所有权（Ownership）影响）不同
 > ——Rust 的模式守卫需考虑所有权和借用（Borrowing）的交互。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)] ·
 > [来源: [Rust Reference — Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)]
@@ -1230,7 +1230,7 @@ CFG 与支配树是许多编译器优化的基础数据结构：
 | **死代码消除** | CFG 可达性 | 不可达基本块可直接删除 |
 | **SSA 形式** | 支配边界 | 确定在哪里插入 φ 函数 |
 | **循环不变量外提** | 支配树 + 回边 | 识别循环并判断表达式是否在每次迭代中不变 |
-| **借用检查** | CFG + 生命周期（Lifetimes） | Rust 的 borrowck 在 MIR CFG 上分析值的活跃区间 |
+| **借用（Borrowing）检查** | CFG + 生命周期（Lifetimes） | Rust 的 borrowck 在 MIR CFG 上分析值的活跃区间 |
 
 #### Rust 关联
 
@@ -1370,7 +1370,7 @@ fn main() {
 
 #### Rust 关联
 
-Rust 的类型系统已经在编译期保证了许多不变量（如引用（Reference）合法性、变量初始化），但数值/逻辑不变量仍需要程序员维护。Rust 通过 `assert!` / `debug_assert!` 可以在运行时（Runtime）检查不变量；在关键循环中显式写出不变量注释，是提高代码可信度的有效手段。
+Rust 的类型系统（Type System）已经在编译期保证了许多不变量（如引用（Reference）合法性、变量初始化），但数值/逻辑不变量仍需要程序员维护。Rust 通过 `assert!` / `debug_assert!` 可以在运行时（Runtime）检查不变量；在关键循环中显式写出不变量注释，是提高代码可信度的有效手段。
 
 #### 代码示例 1：二分查找的循环不变量
 
@@ -1490,7 +1490,7 @@ task<int> fetch_and_double() {
 
 #### Rust `break 'label` 与 `?`：结构化跳转的两种受限形式
 
-Rust 明确拒绝 `goto`，因为无限制跳转会使数据流与生命周期分析变得不可行。`break 'label` 是 Rust 对嵌套循环控制的唯一"非局部跳转"机制，且只能向上跳出循环，不能跳入循环或跳转到任意标签。`?` 则通过 `Try` trait 把错误处理（Error Handling）控制流从正常路径中分离，使代码保持线性阅读体验。
+Rust 明确拒绝 `goto`，因为无限制跳转会使数据流与生命周期（Lifetimes）分析变得不可行。`break 'label` 是 Rust 对嵌套循环控制的唯一"非局部跳转"机制，且只能向上跳出循环，不能跳入循环或跳转到任意标签。`?` 则通过 `Try` trait 把错误处理（Error Handling）控制流从正常路径中分离，使代码保持线性阅读体验。
 
 ```rust
 fn find_pair_sum(target: i32, matrix: &[Vec<i32>]) -> Option<(usize, usize)> {
@@ -1567,7 +1567,7 @@ goto 的错误清理模式
   └─────────────┘
 ```
 
-> **关键洞察**：`break 'label`、`?` 与 `async/await` 都是 Rust 在结构化程序定理框架内提供的受限"跳转"机制——分别处理循环嵌套、错误路径与异步挂起；二者都不会破坏资源的安全释放，也不会像 `goto` 那样导致不可达代码或生命周期（Lifetimes）混乱。C++ 的 `co_await` 则在另一套类型系统约束下解决了同一类问题。
+> **关键洞察**：`break 'label`、`?` 与 `async/await` 都是 Rust 在结构化程序定理框架内提供的受限"跳转"机制——分别处理循环嵌套、错误路径与异步（Async）挂起；二者都不会破坏资源的安全释放，也不会像 `goto` 那样导致不可达代码或生命周期（Lifetimes）混乱。C++ 的 `co_await` 则在另一套类型系统约束下解决了同一类问题。
 > **关联章节**: [Error Handling Basics](32_error_handling_basics.md) · [Async Control Flow](../03_advanced/02_async.md) · [Panic and Abort](13_panic_and_abort.md)
 
 ---

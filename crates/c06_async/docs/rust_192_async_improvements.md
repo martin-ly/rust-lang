@@ -78,6 +78,7 @@ async fn main() {
     example_async_task().await;
 }
 ```
+
 ### 2. 增强的异步特性
 
 Rust 1.92.0 增强了异步特性的支持：
@@ -103,6 +104,7 @@ async fn main() -> Result<(), io::Error> {
     Ok(())
 }
 ```
+
 ### 3. 编译器优化
 
 Rust 1.92.0 在编译器层面进行了优化：
@@ -141,6 +143,7 @@ async fn main() {
     concurrent_tasks().await;
 }
 ```
+
 ### 示例 2: 改进的错误处理
 
 ```rust
@@ -160,6 +163,7 @@ async fn main() -> io::Result<()> {
     Ok(())
 }
 ```
+
 ---
 
 ## 迁移指南

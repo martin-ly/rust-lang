@@ -60,7 +60,7 @@ Rust 的类型系统（Type System）通过**零成本抽象 (Zero-Cost Abstract
 |:---|:---|:---|
 | **所有权（Ownership）转移** | 数据在组件间流动时，编译器跟踪唯一所有者 | 无 use-after-move、无 double-free |
 | **生命周期（Lifetimes）参数** | 借用（Borrowing）数据的存活范围被形式化约束 | 无 dangling reference 跨组件传播 |
-| **泛型（Generics）单态化（Monomorphization）** | 每个类型组合生成特化代码 | 零运行时分发开销 |
+| **泛型（Generics）单态化（Monomorphization）** | 每个类型组合生成特化代码 | 零运行时（Runtime）分发开销 |
 | **Trait 关联类型** | 接口契约编码输出类型 | 管道阶段的输出自动匹配下一阶段输入 |
 | `Send`/`Sync` | 跨线程/异步（Async）边界的能力标记 | 编译期拒绝不安全并发组合 |
 
@@ -188,7 +188,7 @@ while let Some(data) = rx.recv().await {
 }
 ```
 
-**生命周期（Lifetimes）防止 use-after-close**：Rust 的借用（Borrowing）检查器确保管道关闭后无法再发送数据。`tx.send()` 返回 `Result`，而编译器拒绝在 `rx` 被 `drop` 后继续持有引用（Reference）——这是**协议安全性**的类型系统保证。
+**生命周期（Lifetimes）防止 use-after-close**：Rust 的借用（Borrowing）检查器确保管道关闭后无法再发送数据。`tx.send()` 返回 `Result`，而编译器拒绝在 `rx` 被 `drop` 后继续持有引用（Reference）——这是**协议安全性**的类型系统（Type System）保证。
 
 **async_stream 宏（Macro）**：生成自定义 Stream 的声明式方式
 
@@ -424,7 +424,7 @@ use tower::layer::util::Identity;
 
 ### 定理 3：有界通道组合保持背压
 >
-> **[来源类型: 原创分析]** 基于异步运行时内存安全（Memory Safety）模型。
+> **[来源类型: 原创分析]** 基于异步（Async）运行时内存安全（Memory Safety）模型。
 
 **定理 3**：设系统由生产者 `P`、有界通道 `C(n)`（容量 `n`）和消费者 `K` 顺序组合。若 `K` 的处理速率为 `r_k`，`P` 的生产速率为 `r_p`，则：
 
@@ -449,7 +449,7 @@ loop {
 ### 4.1 过度组合导致的类型爆炸
 >
 
-嵌套泛型在组合深度增加时会产生难以阅读的类型签名：
+嵌套泛型（Generics）在组合深度增加时会产生难以阅读的类型签名：
 
 ```rust,ignore
 // ❌ 反模式：深层嵌套的泛型类型签名
@@ -494,7 +494,7 @@ where
 }
 ```
 
-| 维度 | `dyn Trait` | 泛型单态化 |
+| 维度 | `dyn Trait` | 泛型单态化（Monomorphization） |
 |:---|:---|:---|
 | 运行时开销 | 虚表查找 + 间接调用 | 直接调用 + 内联 |
 | 二进制体积 | 一份代码 | 每种类型组合一份 |

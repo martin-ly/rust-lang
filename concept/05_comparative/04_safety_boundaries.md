@@ -149,7 +149,7 @@ graph TD
 | **无 use-after-free** | 所有权 + Drop | `mem::forget` / `ManuallyDrop` | Safe | 资源不释放（泄漏） | L1 Ownership |
 | | | `Rc<RefCell>` 循环引用（Reference） | Safe | 引用计数永不为 0（泄漏） | L2 Memory |
 | | | `Box::leak` | Safe | 故意泄漏获 'static | L2 Memory |
-| | | 裸指针解引用 | Unsafe | UAF（UB） | L3 Unsafe |
+| | | 裸指针解引用（Reference） | Unsafe | UAF（UB） | L3 Unsafe |
 | | | FFI 返回悬垂指针 | Unsafe | UAF（UB） | L3 Unsafe |
 | **无 double-free** | 所有权（Ownership）唯一性 | `Rc`/`Arc`（共享释放） | Safe | 原子计数安全释放 | L2 Memory |
 | | | `mem::swap` + Drop | Safe | 正常释放（无 double-free） | L1 Ownership |
@@ -223,9 +223,9 @@ Level 3: 完全绕过（直接破坏内存/类型系统）
 | 缺失机制 | 后果 | 现实替代 | 对比语言 |
 |:---|:---|:---|:---|
 | **无所有权（Ownership）系统** | 需 GC 或手动管理 | Java/Go 的 GC、C/C++ 手动管理 | C++ 智能指针（Smart Pointer）、Java GC |
-| **无借用检查器** | 数据竞争在编译期不可检测 | 运行时（Runtime）检测（TSan）、程序员纪律 | C/C++（无检测）、Go（race detector） |
+| **无借用（Borrowing）检查器** | 数据竞争在编译期不可检测 | 运行时（Runtime）检测（TSan）、程序员纪律 | C/C++（无检测）、Go（race detector） |
 | **无生命周期（Lifetimes）** | 悬垂指针风险 | 智能指针（C++）、引用计数 | C++ `shared_ptr`、Swift ARC |
-| **无 Send/Sync** | 并发安全（Concurrency Safety）无类型保证 | 运行时检查、编码规范 | C/C++（无）、Go（channel 约定） |
+| **无 Send/Sync** | 并发安全（Concurrency Safety）无类型保证 | 运行时（Runtime）检查、编码规范 | C/C++（无）、Go（channel 约定） |
 | **无 unsafe 边界** | 所有底层操作不可能 | 外部工具、语言扩展 | C（全 unsafe）、Java（JNI） |
 | **无 Result 类型** | 错误可忽略 | 异常、返回值检查 | Java 异常、C 返回值 |
 
@@ -290,7 +290,7 @@ graph TD
 |:---|:---|:---|:---|:---|
 | **手动 FFI** | `libc` + `bindgen` | 手写 `extern "C"` 声明 | 程序员完全负责 | 简单 C 库绑定 |
 | **自动生成绑定** | `bindgen` | 解析 C 头生成 Rust 签名 | 类型签名正确，语义仍须审查 | 大型 C 库（OpenSSL、SQLite） |
-| **C++ 桥接** | `cxx` | 安全子集 + 共享类型系统（Type System） | 编译期检查所有权/生命周期（Lifetimes） | C++ 代码库互操作 |
+| **C++ 桥接** | `cxx` | 安全子集 + 共享类型系统（Type System） | 编译期检查所有权（Ownership）/生命周期（Lifetimes） | C++ 代码库互操作 |
 | **双向生成** | `cbindgen` | Rust → C 头文件 | 保证 ABI 一致性（Coherence） | Rust 库供 C 调用 |
 | **diplomat** | `diplomat` | 多语言绑定（C/C++/JS/WASM） | IDL 驱动，类型安全 | 跨平台 SDK |
 | **Wasm 边界** | `wasm-bindgen` | JS ↔ WASM 类型映射 | 自动生成 marshalling | Web 前端互操作 |
@@ -501,7 +501,7 @@ graph LR
 - **信任硬件/OS**：Rust 不验证磁盘位翻转、不处理 OS 崩溃、不信任边界止于进程地址空间。
 - **不信任其他代码**：`unsafe` 块是显式逃逸门，但 `safe` API 封装者承担证明责任。
 
-**与区块链的对比**：区块链将不信任推向物理边界（全球冗余），Rust 将不信任推向编译边界（静态证明）。两者都是"用确定性替代信任"，但一个用**分布式共识**，一个用**形式化类型系统**。
+**与区块链的对比**：区块链将不信任推向物理边界（全球冗余），Rust 将不信任推向编译边界（静态证明）。两者都是"用确定性替代信任"，但一个用**分布式共识**，一个用**形式化类型系统（Type System）**。
 
 > **来源**: [Wikipedia: Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language)) · [Wikipedia: Zero trust security model](https://en.wikipedia.org/wiki/Zero_trust_security_model) · [Felleisen 1989 · On the Expressive Power of Programming Languages]
 
@@ -555,7 +555,7 @@ Rust 的安全边界在编译期和运行时有不同的表现形式：
 | **E0502** | cannot borrow `x` as mutable because it is also borrowed as immutable | 借用唯一性 | `&mut T` 独占性 | `let r = &v[0]; v.push(4);` |
 | **E0499** | cannot borrow `x` as mutable more than once at a time | 可变借用（Mutable Borrow）唯一性 | `&mut T` 不重复 | `let a = &mut x; let b = &mut x;` |
 | **E0505** | cannot move out of `x` because it is borrowed | 所有权与借用互斥 | move vs borrow | `let r = &x; let y = x;` |
-| **E0373** | closure may outlive the current function, but it borrows `x` | 生命周期逃逸 | closure capture | `thread::spawn(|| println!("{}", x))` |
+| **E0373** | closure may outlive the current function, but it borrows `x` | 生命周期（Lifetimes）逃逸 | closure capture | `thread::spawn(|| println!("{}", x))` |
 | **E0521** | borrowed value does not live long enough | 引用不能比数据活得久 | lifetime bound | `let r = { let x = 5; &x };` |
 | **E0597** | `x` does not live long enough | 引用生命周期不足 | 'static / scoped | `let s: &'static str = &String::new();` |
 | **E0308** | mismatched types | 类型安全 | type system | `let x: i32 = "hello";` |
@@ -569,7 +569,7 @@ Rust 的安全边界在编译期和运行时有不同的表现形式：
 | `panic: called Option::unwrap() on None` | `None.unwrap()` | 空值安全 | 使用 `?`、match、if let |
 | `panic: arithmetic overflow` | `i32::MAX + 1` (debug) | 整数安全 | `checked_add()`、`wrapping_add()` |
 | `panic: already borrowed: BorrowMutError` | `RefCell` 运行时借用冲突 | 动态借用安全 | 重构为编译期借用 |
-| `SIGSEGV` (未定义行为) | unsafe 代码中的悬垂指针 | 内存安全边界 | Miri 检测、代码审查 |
+| `SIGSEGV` (未定义行为) | unsafe 代码中的悬垂指针 | 内存安全（Memory Safety）边界 | Miri 检测、代码审查 |
 
 > **来源**: [Rust Error Index] · [Rust Reference: Error Codes](https://doc.rust-lang.org/reference/) · [Rust Standard Library: panic!]
 
@@ -950,7 +950,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-`unsafe` 块是安全边界：块内编译器暂停部分安全检查，程序员需手动保证内存安全、生命周期和类型一致性。块外编译器恢复完整检查。
+`unsafe` 块是安全边界：块内编译器暂停部分安全检查，程序员需手动保证内存安全、生命周期和类型一致性（Coherence）。块外编译器恢复完整检查。
 </details>
 
 ---

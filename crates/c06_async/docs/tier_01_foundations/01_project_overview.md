@@ -26,7 +26,7 @@
     - [思维导图](#思维导图)
   - [🎯 项目使命](#-项目使命)
   - [✨ 核心特性](#-核心特性)
-    - [1. 语言特性 (Rust 1.96.1+)](#1-语言特性-rust-1920)
+    - [1. 语言特性 (Rust 1.96.1+)](#1-语言特性-rust-1961)
     - [2. 运行时生态](#2-运行时生态)
       - [Tokio](#tokio)
       - [Smol](#smol)
@@ -158,6 +158,7 @@
     ├── 选择执行
     └── 错误处理
 ```
+
 ---
 
 ## 🎯 项目使命
@@ -306,6 +307,7 @@ cd rust-lang/crates/c06_async
 # 构建项目
 cargo build
 ```
+
 ### 2. 运行第一个示例
 
 ```bash
@@ -318,6 +320,7 @@ cargo run --example tokio_basics
 # 运行综合演示
 cargo run --example comprehensive_async_demo
 ```
+
 ### 3. 学习路径
 
 ```text
@@ -355,6 +358,7 @@ cargo run --example comprehensive_async_demo
     ├── 03_形式化验证与分析
     └── 04_异步性能工程
 ```
+
 ---
 
 ## 📊 项目统计
@@ -417,6 +421,7 @@ async fn fetch_data() -> String {
     "data".to_string()
 }
 ```
+
 ### async/await - 语法糖
 
 ```rust
@@ -428,6 +433,7 @@ async fn process() -> i32 {
 
 // 等价于手写状态机
 ```
+
 ### 运行时 - 执行引擎
 
 ```rust
@@ -437,6 +443,7 @@ async fn main() {
     println!("Result: {}", result);
 }
 ```
+
 ---
 
 ## 🌐 异步运行时生态
@@ -456,6 +463,7 @@ async fn main() {
 🎯 gRPC 服务
 🎯 微服务架构
 ```
+
 ### Smol - 轻量高效
 
 ```text
@@ -471,6 +479,7 @@ async fn main() {
 🎯 库开发
 🎯 简单异步任务
 ```
+
 ### smol - 易于学习
 
 ```text
@@ -485,6 +494,7 @@ async fn main() {
 🎯 快速原型
 🎯 简单应用
 ```
+
 ---
 
 ## ⚡ 性能特性
@@ -497,6 +507,7 @@ async fn main() {
 - Future 状态机: ~几百字节
 - 可支持: 百万级并发任务
 ```
+
 ### CPU 效率
 
 ```text
@@ -505,6 +516,7 @@ async fn main() {
 - 缓存友好
 - 高吞吐量
 ```
+
 ### 基准数据
 
 | 场景             | Tokio    | Smol    | async-std [已归档] | 线程      |

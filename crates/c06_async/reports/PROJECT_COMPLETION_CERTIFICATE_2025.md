@@ -39,7 +39,6 @@
   - [📞 项目信息](#-项目信息-1)
   - [🙏 致谢](#-致谢)
   - [📝 签署](#-签署)
-  - [**有效期**: 永久](#有效期-永久)
 
 -**Rust Async Programming Project Completion Certificate**
 
@@ -388,6 +387,7 @@
 **最后更新**: 2025-10-06
 **证书状态**: ✅ 有效
 **有效期**: 永久
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

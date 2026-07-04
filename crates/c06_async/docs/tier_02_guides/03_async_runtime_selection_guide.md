@@ -134,6 +134,7 @@
     ├── 学习/教学 → Tokio (生态活跃，文档丰富)
     └── 小型项目/嵌入式 → Smol
 ```
+
 ### 概念矩阵
 
 | 运行时    | 生态系统 | 性能  | 学习曲线 | 适用场景         | 维护状态 |
@@ -197,6 +198,7 @@
 [dependencies]
 tokio = { version = "1", features = ["full"] }
 ```
+
 **基本使用**:
 
 ```rust
@@ -205,6 +207,7 @@ async fn main() {
     println!("Hello, Tokio!");
 }
 ```
+
 ### 1.3 运行时配置
 
 **多线程运行时（默认）**:
@@ -221,6 +224,7 @@ async fn main() {
     // 使用 4 个工作线程
 }
 ```
+
 **单线程运行时**:
 
 ```rust
@@ -229,6 +233,7 @@ async fn main() {
     // 只在当前线程运行
 }
 ```
+
 ### 1.4 核心组件
 
 | 组件          | 功能              |
@@ -305,6 +310,7 @@ async-std [已归档] 曾是 Rust 异步生态的重要运行时，以"标准库
 [dependencies]
 smol = "2"
 ```
+
 **基本使用**:
 
 ```rust
@@ -314,6 +320,7 @@ fn main() {
     })
 }
 ```
+
 ---
 
 ## 4. 详细对比
@@ -362,6 +369,7 @@ fn main() {
     └─> 性能极致要求？
         └─> Tokio (✅ 推荐)
 ```
+
 ---
 
 ## 6. 实战示例
@@ -383,6 +391,7 @@ async fn main() {
     axum::serve(listener, app).await.unwrap();
 }
 ```
+
 **async-std [已归档] (历史示例，不推荐)**:
 
 ```rust
@@ -397,6 +406,7 @@ async fn main() -> tide::Result<()> {
     Ok(())
 }
 ```
+
 **Tokio (with Axum) — 推荐方案**:
 
 ```rust
@@ -409,6 +419,7 @@ async fn main() {
     axum::serve(listener, app).await.unwrap();
 }
 ```
+
 **Smol (with Hyper)**:
 
 ```rust
@@ -428,6 +439,7 @@ fn main() {
     });
 }
 ```
+
 ---
 
 ## 7. 混用运行时（高级）
@@ -440,6 +452,7 @@ fn main() {
 [dependencies]
 async-compat = "0.2"
 ```
+
 ```rust
 use async_compat::Compat;
 
@@ -455,6 +468,7 @@ async fn main() {
     println!("{}", result);
 }
 ```
+
 ⚠️ **警告**: 混用运行时会增加复杂性，仅在必要时使用。
 
 ---

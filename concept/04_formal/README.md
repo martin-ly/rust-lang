@@ -67,7 +67,7 @@ mindmap
 > 读者按数学背景选择入口——逻辑学背景从线性逻辑切入，类型论背景从 HM/System F 切入，程序验证背景从 RustBelt 切入。
 > 关键认知：L4 的四个分支不是并列的「可选知识」，而是「同一安全定理的不同证明视角」——它们共同构成 Rust 内存安全（Memory Safety）的形式化完备性。 [来源: 💡 原创分析]
 > **认知路径**: 本 mindmap 展示 L4 层的**数学根基**。
-> 线性逻辑提供资源语义，类型论提供结构规则，所有权形式化将两者映射到 Rust 的具体机制，RustBelt 提供机械可验证的安全证明。
+> 线性逻辑提供资源语义，类型论提供结构规则，所有权（Ownership）形式化将两者映射到 Rust 的具体机制，RustBelt 提供机械可验证的安全证明。
 > 关键洞察：**L4 不是"更高级的知识"，而是 L1-L3 的"地基"**——形式化证明向下保证上层概念的安全性。
 
 ## 一、本层概念关系图（完整版）
@@ -203,7 +203,7 @@ graph TB
 - [Lambda 演算与 Rust 计算模型](14_lambda_calculus.md)
 - [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](16_aerospace_certification_formal_methods.md)
 - [现代 Rust 验证工具生态（2025-2026）](22_modern_verification_tools.md)
-- [借用检查可判定性](28_borrow_checking_decidability.md)
+- [借用（Borrowing）检查可判定性](28_borrow_checking_decidability.md)
 - 类型推断（Type Inference）复杂度
 - [Aeneas 符号化语义](30_aeneas_symbolic_semantics.md)
 - [通用程序语言理论基础：Rust 的 PL 基座](23_programming_language_foundations.md)
@@ -217,11 +217,11 @@ graph TB
 |:---|:---|:---|:---|:---|
 | 线性逻辑 ⊗ | 所有权唯一性 | 双射 | **精确** | 所有权（Ownership） ⟺ 线性资源 |
 | 仿射逻辑 weakening | Copy trait | 特化 | **精确** | Copy = 显式允许 weakening |
-| 区域类型 | 生命周期 'a | 嵌入 | **精确** | 生命周期 = 区域约束 |
+| 区域类型 | 生命周期（Lifetimes） 'a | 嵌入 | **精确** | 生命周期 = 区域约束 |
 | 分数权限 | 借用（Borrowing） &/&mut | 同态 | **近似** | 借用 ⊂ 分数权限（编译期子集） |
 | 分离逻辑 | 并发安全（Concurrency Safety） | 同态 | **近似** | Send/Sync ⟹ CSL 资源安全 |
 | 代数类型 | enum/struct | 双射 | **精确** | sum/product 类型 ⟺ enum/struct |
-| HM 推断 | 类型推断 | 双射 | **精确** | Rust 类型推断是 HM 的扩展 |
+| HM 推断 | 类型推断（Type Inference） | 双射 | **精确** | Rust 类型推断是 HM 的扩展 |
 | System F | 泛型（Generics） | 嵌入 | **近似** | Rust 泛型 ≈ System F + 约束 |
 
 ### 3.2 映射的"损失"
@@ -326,7 +326,7 @@ L4 的形式化成果输出到：
 <details>
 <summary>✅ 答案与解析</summary>
 
-先浏览整体结构建立全局视野，然后根据自身水平选择对应层级，遇到模糊概念时利用交叉引用跳转复习。
+先浏览整体结构建立全局视野，然后根据自身水平选择对应层级，遇到模糊概念时利用交叉引用（Reference）跳转复习。
 </details>
 
 ---

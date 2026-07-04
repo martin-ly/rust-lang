@@ -46,7 +46,7 @@
     - [9.2 使用 impl Trait](#92-使用-impl-trait)
   - [📚 延伸阅读](#-延伸阅读)
   - [📝 总结](#-总结)
-  - [**最后更新**: 2025-12-11 | **Rust 版本**: 1.96.1+](#最后更新-2025-12-11--rust-版本-1920)
+  - [**最后更新**: 2025-12-11 | **Rust 版本**: 1.96.1+](#最后更新-2025-12-11--rust-版本-1961)
 
 ## 📐 知识结构
 
@@ -112,6 +112,7 @@
 └── async fn in Traits
     └── 异步 Trait 方法
 ```
+
 ---
 
 ## 🎯 文档说明
@@ -133,6 +134,7 @@ async fn function_name(params) -> ReturnType {
     // 异步代码
 }
 ```
+
 **特性**:
 
 - ✅ 返回 `impl Future<Output = ReturnType>`
@@ -148,6 +150,7 @@ async fn fetch_data(id: u64) -> Result<String, Error> {
     response.text().await
 }
 ```
+
 ---
 
 ### 1.2 async 块
@@ -159,6 +162,7 @@ let future = async {
     // 异步代码
 };
 ```
+
 **示例**:
 
 ```rust
@@ -169,6 +173,7 @@ let future = async {
 
 tokio::spawn(future);
 ```
+
 ---
 
 ### 1.3 async 闭包 (Rust 1.75+)
@@ -180,6 +185,7 @@ let closure = async || {
     // 异步代码
 };
 ```
+
 **示例**:
 
 ```rust
@@ -191,6 +197,7 @@ let tasks: Vec<_> = (0..10)
 
 futures::future::join_all(tasks).await;
 ```
+
 ---
 
 ## 2. Future Trait
@@ -212,6 +219,7 @@ pub enum Poll<T> {
     Pending,
 }
 ```
+
 ---
 
 ### 2.2 手动实现
@@ -250,6 +258,7 @@ impl Future for MyFuture {
     }
 }
 ```
+
 ---
 
 ## 3. Pin 与 Unpin
@@ -270,6 +279,7 @@ impl<P: DerefMut<Target: Unpin>> Pin<P> {
     pub fn get_mut(self) -> &mut P::Target;
 }
 ```
+
 ---
 
 ### 3.2 Unpin Trait
@@ -285,6 +295,7 @@ impl<T: Unpin> Unpin for Vec<T> {}
 // 异步块生成的 Future 是 !Unpin
 let fut = async { 42 }; // impl Future + !Unpin
 ```
+
 ---
 
 ## 4. async fn in Traits (Rust 1.75.0+)
@@ -302,6 +313,7 @@ impl AsyncTrait for MyStruct {
     }
 }
 ```
+
 ---
 
 ### 4.2 限制
@@ -312,6 +324,7 @@ impl AsyncTrait for MyStruct {
 // ❌ 编译错误
 let obj: Box<dyn AsyncTrait> = Box::new(MyStruct);
 ```
+
 **解决方案 - 使用 async-trait**:
 
 ```rust
@@ -322,6 +335,7 @@ trait AsyncTrait {
     async fn method(&self) -> i32;
 }
 ```
+
 ---
 
 ## 5. impl Trait in Return Position
@@ -333,6 +347,7 @@ fn get_future() -> impl Future<Output = i32> {
     async { 42 }
 }
 ```
+
 ---
 
 ### 5.2 泛型约束
@@ -348,6 +363,7 @@ where
     }
 }
 ```
+
 ---
 
 ## 6. Stream Trait
@@ -364,6 +380,7 @@ pub trait Stream {
     ) -> Poll<Option<Self::Item>>;
 }
 ```
+
 ---
 
 ### 6.2 使用示例
@@ -379,6 +396,7 @@ async fn process_stream() {
     }
 }
 ```
+
 ---
 
 ## 7. Rust 1.92.0 新特性
@@ -404,6 +422,7 @@ impl MyTrait for MyStruct {
     }
 }
 ```
+
 ---
 
 ### 7.3 async 闭包改进
@@ -434,6 +453,7 @@ let future = async {
 
 println!("Future size: {}", size_of_val(&future));
 ```
+
 ---
 
 ## 9. 最佳实践
@@ -451,6 +471,7 @@ fn bad() -> impl Future<Output = i32> {
     // 手动实现...
 }
 ```
+
 ---
 
 ### 9.2 使用 impl Trait
@@ -466,6 +487,7 @@ fn get_future_boxed() -> Box<dyn Future<Output = i32>> {
     Box::new(async { 42 })
 }
 ```
+
 ---
 
 ## 📚 延伸阅读

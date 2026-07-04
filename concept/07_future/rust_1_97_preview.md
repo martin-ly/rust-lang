@@ -23,6 +23,25 @@
 > **Nightly 探测结果（2026-07-01）**: 在最新 nightly 上运行 [`scripts/probe_rust_197_apis.rs`](../../scripts/probe_rust_197_apis.rs)，12 项候选 API 中 **9 项已可用**：`NonZero` 位操作、`char::is_control() const`、`NonZeroU32::midpoint`/`isqrt`、`ptr::fn_addr_eq`、`const size_of_val`/`align_of_val`、`BuildHasherDefault::new const`、`Box::as_ptr`、`int::format_into`。
 > 尚未可用/仍需 feature gate 的 3 项：`VecDeque::truncate_front`、`VecDeque::retain_back`、`Vec::into_non_null`，大概率推迟至 **Rust 1.98.0**。发布日前请再次运行探测程序确认。
 
+
+---
+
+> **过渡**: 从 Rust 1.97.0 前沿特性预览（Beta） 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
+
+> **过渡**: 在建立 Rust 1.97.0 前沿特性预览（Beta） 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将 Rust 1.97.0 前沿特性预览（Beta） 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+
+---
+
+> **定理 1** [Tier 2]: Rust 1.97.0 前沿特性预览（Beta） 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
+>
+> **定理 2** [Tier 2]: 正确理解 Rust 1.97.0 前沿特性预览（Beta） 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
+>
+> **定理 3** [Tier 3]: 将 Rust 1.97.0 前沿特性预览（Beta） 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
+
+
 ## 📑 目录
 
 - [Rust 1.97.0 前沿特性预览（Beta）](#rust-1970-前沿特性预览beta)
@@ -32,7 +51,7 @@
     - [1.2 空 `export_name` 报错](#12-空-export_name-报错)
     - [1.3 `linker-messages` 默认 warn](#13-linker-messages-默认-warn)
     - [1.4 元组索引简写修复](#14-元组索引简写修复)
-    - [1.5 `pin!` 阻止隐式解引用强制](#15-pin-阻止隐式解引用强制)
+    - [1.5 `pin!` 阻止隐式解引用（Reference）强制](#15-pin-阻止隐式解引用强制)
   - [二、标准库 API](#二标准库-api)
     - [2.1 `NonZero` 位操作](#21-nonzero-位操作)
     - [2.2 `char::is_control()` const 稳定](#22-charis_control-const-稳定)
@@ -97,7 +116,7 @@ RUSTFLAGS="-A linker-messages" cargo build
 
 ### 1.5 `pin!` 阻止隐式解引用强制
 
-`pin!` 宏现在阻止隐式 deref coercions，避免 `Pin<&mut T>` 在宏内部意外转换为其他类型，减少与 self-referential 类型相关的 bug。
+`pin!` 宏（Macro）现在阻止隐式 deref coercions，避免 `Pin<&mut T>` 在宏内部意外转换为其他类型，减少与 self-referential 类型相关的 bug。
 
 ---
 
@@ -191,7 +210,7 @@ assert_eq!(unsafe { *p }, 42);
 
 ### 2.9 `Option::as_slice` / `as_mut_slice`
 
-`Option<T>` 可直接转换为切片视图，`Some(x)` → `[x]`，`None` → `[]`。
+`Option<T>` 可直接转换为切片（Slice）视图，`Some(x)` → `[x]`，`None` → `[]`。
 
 ```rust
 let opt = Some(42);
