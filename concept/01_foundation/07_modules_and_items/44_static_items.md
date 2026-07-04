@@ -12,8 +12,8 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×App
-> **前置概念**: [Ownership](../01_ownership.md) · [Lifetimes](../03_lifetimes.md) · [Borrowing](../02_borrowing.md)
-> **后置概念**: [Interior Mutability](../../02_intermediate/08_interior_mutability.md) · [Concurrency](../../03_advanced/01_concurrency.md) · [Unsafe Rust](../../03_advanced/03_unsafe.md)
+> **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Lifetimes](../01_ownership_borrow_lifetime/03_lifetimes.md) · [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md)
+> **后置概念**: [Interior Mutability](../../02_intermediate/02_memory_management/08_interior_mutability.md) · [Concurrency](../../03_advanced/01_concurrency.md) · [Unsafe Rust](../../03_advanced/03_unsafe.md)
 >
 > **主要来源**: [The Rust Reference — Static Items](https://doc.rust-lang.org/reference/items/static-items.html) ·
 > [The Rust Programming Language — Constants and Statics](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) ·

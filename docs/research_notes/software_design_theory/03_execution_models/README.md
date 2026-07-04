@@ -107,10 +107,10 @@
 
 | 依赖 | 文档 |
 | :--- | :--- |
-| 异步状态机 | [async_state_machine](../../../research_notes/formal_methods/10_async_state_machine.md) |
-| Pin | [pin_self_referential](../../../research_notes/formal_methods/10_pin_self_referential.md) |
-| 借用 | [borrow_checker_proof](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
-| 所有权 | [ownership_model](../../../research_notes/formal_methods/10_ownership_model.md) |
+| 异步状态机 | [async_state_machine](../../formal_methods/10_async_state_machine.md) |
+| Pin | [pin_self_referential](../../formal_methods/10_pin_self_referential.md) |
+| 借用 | [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) |
+| 所有权 | [ownership_model](../../formal_methods/10_ownership_model.md) |
 | Rust Book Ch16 | 线程、消息传递、Send/Sync |
 | Async Book | Future、async/await、Pin |
 

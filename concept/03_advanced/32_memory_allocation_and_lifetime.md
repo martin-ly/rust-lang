@@ -8,8 +8,8 @@
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
-> **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Memory Model](29_memory_model.md) · [Variables](33_variables.md)
-> **后置概念**: [Smart Pointers](../02_intermediate/12_smart_pointers.md) · [Custom Allocators](14_custom_allocators.md) · [The Rust Runtime](30_rust_runtime.md)
+> **前置依赖**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Memory Model](29_memory_model.md) · [Variables](33_variables.md)
+> **后置概念**: [Smart Pointers](../02_intermediate/02_memory_management/12_smart_pointers.md) · [Custom Allocators](14_custom_allocators.md) · [The Rust Runtime](30_rust_runtime.md)
 > **定理链**: Allocation → Box Lifetime → Heap Stability
 > **主要来源**: [Rust Reference — Memory Allocation and Lifetime](https://doc.rust-lang.org/reference/memory-allocation-and-lifetime.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
@@ -90,6 +90,6 @@ let c = b; // b 被 move，所有权转移到 c
 |:---|:---|
 | [Memory Model](29_memory_model.md) | 内存分配模型是内存模型的一部分 |
 | [Variables](33_variables.md) | 局部变量在栈帧中分配 |
-| [Smart Pointers](../02_intermediate/12_smart_pointers.md) | `Box`、`Rc`、`Arc` 管理堆内存 |
+| [Smart Pointers](../02_intermediate/02_memory_management/12_smart_pointers.md) | `Box`、`Rc`、`Arc` 管理堆内存 |
 | [Custom Allocators](14_custom_allocators.md) | 自定义分配器改变堆分配行为 |
 | [The Rust Runtime](30_rust_runtime.md) | `#[global_allocator]` 影响堆分配 |

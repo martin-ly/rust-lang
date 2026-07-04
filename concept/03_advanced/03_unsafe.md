@@ -12,7 +12,7 @@
 > **层级**: L3 高级概念
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 评判 unsafe 契约的充分性
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Memory Management](../02_intermediate/03_memory_management.md) · [Concurrency](01_concurrency.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](../02_intermediate/02_memory_management/03_memory_management.md) · [Concurrency](01_concurrency.md)
 > **后置概念**: [FFI] · [Embedded] · [Custom Allocators]
 > **主要来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL: Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) ·
@@ -56,7 +56,7 @@
     - [2.2 UB（未定义行为）分类矩阵](#22-ub未定义行为分类矩阵)
     - [2.2b Unsafe Code Guidelines 完整 UB 分类](#22b-unsafe-code-guidelines-完整-ub-分类)
       - [内存访问类 UB](#内存访问类-ub)
-      - [类型系统（Type System）类 UB](#类型系统类-ub)
+      - [类型系统类 UB](#类型系统类-ub)
       - [并发与同步类 UB](#并发与同步类-ub)
       - [其他 UB](#其他-ub)
       - [UB 检测的不可判定性边界](#ub-检测的不可判定性边界)
@@ -81,7 +81,7 @@
     - [6.3 反命题决策树](#63-反命题决策树)
       - [反命题 1: "unsafe 块内没有安全检查"](#反命题-1-unsafe-块内没有安全检查)
       - [反命题 2: "只要用了 unsafe 就会触发 UB"](#反命题-2-只要用了-unsafe-就会触发-ub)
-      - [反命题 3: "raw pointer 和引用（Reference）等价"](#反命题-3-raw-pointer-和引用等价)
+      - [反命题 3: "raw pointer 和引用等价"](#反命题-3-raw-pointer-和引用等价)
       - [反命题 4: "FFI 调用总是安全的"](#反命题-4-ffi-调用总是安全的)
   - [七、定理推理链（Theorem Chain）](#七定理推理链theorem-chain)
     - [7.1 安全抽象定理](#71-安全抽象定理)
@@ -90,13 +90,13 @@
       - [Miri 检测的核心算法](#miri-检测的核心算法)
       - [Miri 与编译器优化的关系](#miri-与编译器优化的关系)
       - [MIRIFLAGS 完整选项速查](#miriflags-完整选项速查)
-    - [7.3 定理一致性（Coherence）矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)
+    - [7.3 定理一致性矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)
   - [八、示例与反例（Examples \& Counter-examples）](#八示例与反例examples--counter-examples)
     - [8.1 正确示例：安全封装裸指针（Vec 简化版）](#81-正确示例安全封装裸指针vec-简化版)
     - [8.2 正确示例：手动实现 Send/Sync](#82-正确示例手动实现-sendsync)
     - [8.3 反例：悬垂裸指针（UB）](#83-反例悬垂裸指针ub)
     - [8.4 反例：transmute 滥用（UB）](#84-反例transmute-滥用ub)
-    - [8.5 反例：无效枚举（Enum）值（UB）](#85-反例无效枚举值ub)
+    - [8.5 反例：无效枚举值（UB）](#85-反例无效枚举值ub)
     - [8.6 边界极限测试](#86-边界极限测试)
       - [命题: "unsafe 代码可以安全地封装"](#命题-unsafe-代码可以安全地封装)
       - [命题: "Miri 可以检测所有 UB"](#命题-miri-可以检测所有-ub)
@@ -152,7 +152,7 @@
   - [九、Unsafe/FFI 2024：权限分离与显式契约](#九unsafeffi-2024权限分离与显式契约)
     - [9.1 问题：权限的混淆](#91-问题权限的混淆)
     - [9.2 2024 Edition 的权限分离](#92-2024-edition-的权限分离)
-    - [9.3 形式化模型：权限的模块（Module）化](#93-形式化模型权限的模块化)
+    - [9.3 形式化模型：权限的模块化](#93-形式化模型权限的模块化)
     - [9.4 与 `unsafe extern` + `safe` 的关系](#94-与-unsafe-extern--safe-的关系)
     - [9.5 `unsafe extern` blocks：FFI 边界的显式 unsafe（Rust 2024）](#95-unsafe-extern-blocksffi-边界的显式-unsaferust-2024)
       - [9.5.1 问题：谁为 FFI 签名负责？](#951-问题谁为-ffi-签名负责)
@@ -176,7 +176,7 @@
       - [Tree Borrows（PLDI 2023）](#tree-borrowspldi-2023)
       - [Provenance（PLDI 2022）](#provenancepldi-2022)
     - [15.5 跨语言内存模型对比矩阵](#155-跨语言内存模型对比矩阵)
-  - [十六、边界测试：Unsafe 代码的编译错误与运行时（Runtime）灾难](#十六边界测试unsafe-代码的编译错误与运行时灾难)
+  - [十六、边界测试：Unsafe 代码的编译错误与运行时灾难](#十六边界测试unsafe-代码的编译错误与运行时灾难)
     - [16.1 边界测试：裸指针解引用前的空检查（编译错误）](#161-边界测试裸指针解引用前的空检查编译错误)
     - [16.2 边界测试：将 \&T 转换为 \&mut T（编译错误）](#162-边界测试将-t-转换为-mut-t编译错误)
     - [16.3 边界测试：无效 UTF-8 的 str::from\_utf8\_unchecked（运行时 UB）](#163-边界测试无效-utf-8-的-strfrom_utf8_unchecked运行时-ub)
@@ -744,7 +744,7 @@ Tree Borrows 用**树形结构**替代线性栈：
 | **关系** | 为 RustBelt 提供**执行层面的 UB 定义** | 为别名模型提供**类型安全定理** |
 
 > **[Ralf Jung Blog]** Tree Borrows 是向 RustBelt 逐步对齐的桥梁：操作语义定义了 Miri 可检测的边界，而 RustBelt 试图证明 Safe Rust 在该边界内永远不会触发 UB。🔍 待验证（RustBelt 对 unsafe 的完整覆盖仍在进行中）
-> **跨层映射**: `L3::别名模型` ↔ [`L1::借用规则`](../01_foundation/02_borrowing.md) 静态检查 · [`L4::RustBelt`](../04_formal/04_rustbelt.md) 形式化证明
+> **跨层映射**: `L3::别名模型` ↔ [`L1::借用规则`](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) 静态检查 · [`L4::RustBelt`](../04_formal/04_rustbelt.md) 形式化证明
 > 理解了别名模型的操作语义后，我们可以将 unsafe 的决策从"直觉判断"转化为"规则判定"。以下决策树提供工程实践中的判别工具。
 
 ---
@@ -1053,7 +1053,7 @@ Miri 解释执行循环:
 > **[Rustonomicon](https://doc.rust-lang.org/nomicon/)** 一致性说明: unsafe 领域的定理不依赖 L4 形式化——它们处于证明范围之外。Miri 提供动态检测作为近似验证手段。RustBelt 正在扩展以覆盖部分 unsafe 模式。✅ 已验证
 > **[🔍 待验证]** RustBelt 对 unsafe 的完整形式化覆盖仍在活跃研究中，目前仅覆盖部分常见模式（如 Vec、Rc、Arc 等）。
 > **跨层映射**: 本文件定理 ↔ `00_meta/inter_layer_map.md` §4.1 "内存安全（Memory Safety）完备性" · §6.1 "形式化保证失效条件"
-> **新增跨层映射**: `L3::别名模型` ↔ [`L1::所有权`](../01_foundation/01_ownership.md) 运行时动态验证 · [`L4::RustBelt`](../04_formal/04_rustbelt.md) 操作语义实例与逻辑关系
+> **新增跨层映射**: `L3::别名模型` ↔ [`L1::所有权`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 运行时动态验证 · [`L4::RustBelt`](../04_formal/04_rustbelt.md) 操作语义实例与逻辑关系
 
 ---
 
@@ -1676,7 +1676,7 @@ fn conditional_extract<T>(slot: &mut ManuallyDrop<T>, should_take: bool) -> Opti
 ```
 
 > **[来源: std::mem::ManuallyDrop docs]** `ManuallyDrop` 包装的值不会在其作用域结束时自动调用 `drop`，配合 `ptr::read` 可实现"手动控制资源释放时机"。✅ 已验证
-> **跨层映射**: `L3::ManuallyDrop` ↔ [`L2::内存管理`](../02_intermediate/03_memory_management.md) RAII 与自定义 drop 控制
+> **跨层映射**: `L3::ManuallyDrop` ↔ [`L2::内存管理`](../02_intermediate/02_memory_management/03_memory_management.md) RAII 与自定义 drop 控制
 
 ##### `ptr::write`：未初始化内存填充与 `MaybeUninit::write` 的前身模式
 
@@ -1709,7 +1709,7 @@ unsafe fn construct_in_place<T>(ptr: *mut T, f: impl FnOnce() -> T) {
 ```
 
 > **来源: [Rust Reference: MaybeUninit](https://doc.rust-lang.org/reference/)** `MaybeUninit::write` is implemented as `ptr::write(self.as_mut_ptr(), value)`. It is the standard way to initialize uninitialized memory. ✅ 已验证
-> **跨层映射**: `L3::未初始化内存` ↔ [`L1::所有权`](../01_foundation/01_ownership.md) 初始化要求 · [`L2::内存管理`](../02_intermediate/03_memory_management.md) 堆栈分配语义
+> **跨层映射**: `L3::未初始化内存` ↔ [`L1::所有权`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 初始化要求 · [`L2::内存管理`](../02_intermediate/02_memory_management/03_memory_management.md) 堆栈分配语义
 
 ---
 
@@ -1876,7 +1876,7 @@ unsafe fn swap_via_replace<T>(a: *mut T, b: *mut T) {
 
 > **定理**：`ptr::read` + `ptr::write` 组合 ≠ `*ptr` 解引用。前者是**内存层面的按位操作**，后者是**所有权（Ownership）层面的语义操作**。在 unsafe 代码中混淆两者是 UAF、double-free 和内存泄漏的常见根源。
 > **定理（安全性边界）**：`ptr::write` 是向未初始化内存写入的**唯一安全 primitive**；`*ptr = val` 是更新已初始化内存的**安全 primitive**（在 safe Rust 中）。二者不可互换。💡 原创分析
-> **跨层映射**: `L3::裸指针语义` ↔ [`L1::所有权`](../01_foundation/01_ownership.md) move 与 copy 语义 · [`L2::内存管理`](../02_intermediate/03_memory_management.md) drop 触发规则 · [`L4::形式化`](../04_formal/03_ownership_formal.md) Validity Invariant 与初始化要求
+> **跨层映射**: `L3::裸指针语义` ↔ [`L1::所有权`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) move 与 copy 语义 · [`L2::内存管理`](../02_intermediate/02_memory_management/03_memory_management.md) drop 触发规则 · [`L4::形式化`](../04_formal/03_ownership_formal.md) Validity Invariant 与初始化要求
 
 ---
 
@@ -2093,7 +2093,7 @@ fn demo_invariance<'a>(ptr: *mut &'a str) -> *mut &'static str {
 > **定理**：`NonNull<T>` 的协变设计是**类型系统层面的精巧权衡**
 > ——通过 `*const T` 的字段存储获得协变性，通过 `unsafe` API 控制写入风险，从而在"编译器优化假设"（非空性）和"程序员便利"（协变性）之间取得平衡。
 > 💡 原创分析
-> **跨层映射**: `L3::NonNull` ↔ [`L1::类型系统`](../01_foundation/04_type_system.md) 协变/逆变/不变 · [`L2::智能指针`](../02_intermediate/03_memory_management.md) Box/Rc/Arc 内部实现
+> **跨层映射**: `L3::NonNull` ↔ [`L1::类型系统`](../01_foundation/02_type_system/04_type_system.md) 协变/逆变/不变 · [`L2::智能指针`](../02_intermediate/02_memory_management/03_memory_management.md) Box/Rc/Arc 内部实现
 
 ---
 
@@ -2369,8 +2369,8 @@ where
 > **[来源: C11 Standard]** Reading uninitialized automatic variables results in indeterminate values; this is not explicitly UB in all cases, but using such values can lead to UB. ✅ 已验证
 > **来源: [Rust Reference: Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)** Reading uninitialized memory in Rust is immediate undefined behavior, and Miri can detect it precisely. ✅ 已验证
 > **定理**：`MaybeUninit<T>` 是 C `malloc` + 手动初始化模式的**类型安全升级版**——它将"未初始化内存"从隐式的 `void*` 状态提升为显式的 `MaybeUninit<T>` 类型，使编译器能够验证类型一致性，使 Miri 能够动态验证初始化完整性，使程序员能够通过 `unsafe { assume_init() }` 的显式边界承担证明责任。💡 原创分析
-> **跨层映射**: `L3::MaybeUninit` ↔ [`L1::所有权`](../01_foundation/01_ownership.md) 初始化要求 ·
-> [`L2::内存管理`](../02_intermediate/03_memory_management.md) RAII ·
+> **跨层映射**: `L3::MaybeUninit` ↔ [`L1::所有权`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 初始化要求 ·
+> [`L2::内存管理`](../02_intermediate/02_memory_management/03_memory_management.md) RAII ·
 > [`L5::对比`](../05_comparative/01_rust_vs_cpp.md) Rust vs C/C++ 内存模型
 
 ---
@@ -2584,9 +2584,9 @@ fn main() {
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权（Ownership） | [](../01_foundation/01_ownership.md) | safe 边界 |
-| 借用（Borrowing）规则 | [](../01_foundation/02_borrowing.md) | unsafe 突破 |
-| 内存管理 | [](../02_intermediate/03_memory_management.md) | 裸指针 |
+| 所有权（Ownership） | [](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | safe 边界 |
+| 借用（Borrowing）规则 | [](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | unsafe 突破 |
+| 内存管理 | [](../02_intermediate/02_memory_management/03_memory_management.md) | 裸指针 |
 | 形式化验证 | [](../04_formal/04_rustbelt.md) | unsafe 证明边界 |
 | 安全边界 | [](../05_comparative/04_safety_boundaries.md) | 全局边界汇总 |
 | Rust 版本特性演进 | [](../07_future/05_rust_version_tracking.md) | `unsafe_op_in_unsafe_fn`、`naked_functions`、`unsafe extern` |
@@ -2594,7 +2594,7 @@ fn main() {
 
 > **过渡: L3 → L1**
 > `unsafe` 不是 Rust 的例外——它是所有权系统的延伸。`unsafe` 块中的原始指针（Raw Pointer）解引用之所以危险，正是因为它绕过了借用检查器对 `&T`/`&mut T` 的约束。理解 unsafe 的安全契约，需要首先理解 safe Rust 中这些约束的精确含义。
-> 安全基础见 [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md)（借用规则）与 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权转移）。
+> 安全基础见 [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)（借用规则）与 [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)（所有权转移）。
 > **过渡: L3 → L6**
 > `cbindgen`、`cxx`、`diplomat` 等工具将 FFI 的 unsafe 边界自动化，而 `Miri` 和 `Kani` 则在 CI 中持续验证 unsafe 代码的正确性。unsafe 不是 "放弃安全"，而是 "将安全的责任从编译器转移到工具和流程"。
 > 工具化实践见 [`../06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md)（工具链安全审计）与 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)（形式化验证工具）。

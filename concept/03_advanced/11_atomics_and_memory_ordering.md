@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 评估原子操作（Atomic Operations）内存序的选型
 > **定位**: 深入分析 Rust **原子类型（Atomic）**和**内存排序（Memory Ordering [来源: [Atomic Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]）**——从基本的 load/store 到 compare-and-swap 和释放-获取语义，揭示无锁编程中硬件内存模型的精确控制。
-> **前置概念**: [Concurrency](01_concurrency.md) · [Unsafe](03_unsafe.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Concurrency](01_concurrency.md) · [Unsafe](03_unsafe.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [Lockfree Data Structures](https://en.wikipedia.org/wiki/Non-blocking_algorithm) · [Distributed Systems](../06_ecosystem/18_distributed_systems.md)
 
 ---
@@ -23,14 +23,14 @@
 > [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) ·
 > [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html) ·
 > [Wikipedia — Memory Ordering](https://en.wikipedia.org/wiki/Memory_ordering)
-> **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md)
-> **前置依赖**: [Traits](../02_intermediate/01_traits.md)
+> **前置依赖**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
+> **前置依赖**: [Traits](../02_intermediate/00_traits/01_traits.md)
 > **对应 Crate**: [`c05_threads`](../../crates/c05_threads)
 > **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency)
 
 ## 📑 目录
 
-- [原子操作（Atomic Operations）与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)
+- [原子操作与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 原子类型全景](#11-原子类型全景)
@@ -46,7 +46,7 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
-    - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时（Runtime） UB）](#44-边界测试原子操作与非原子操作混用数据竞争--运行时-ub)
+    - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时 UB）](#44-边界测试原子操作与非原子操作混用数据竞争--运行时-ub)
     - [4.5 边界测试：`Ordering::Relaxed` 导致逻辑错误（编译通过但语义错误）](#45-边界测试orderingrelaxed-导致逻辑错误编译通过但语义错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)

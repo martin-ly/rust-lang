@@ -15,7 +15,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: F×Eva — 评价跨 await 点的借用（Borrowing）安全性
-> **前置依赖**: [Async/Await](../03_advanced/02_async.md) · [Interior Mutability](../02_intermediate/08_interior_mutability.md)
+> **前置依赖**: [Async/Await](../03_advanced/02_async.md) · [Interior Mutability](../02_intermediate/02_memory_management/08_interior_mutability.md)
 > **后置延伸**: [Async Drop](18_async_drop_preview.md)
 > **来源**: [RFC 3014](https://rust-lang.github.io/rfcs//3014-must-not-suspend-lint.html) · [Tracking Issue](https://github.com/rust-lang/rust/issues/83310) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链

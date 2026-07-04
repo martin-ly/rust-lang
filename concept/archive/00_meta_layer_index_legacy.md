@@ -6,7 +6,7 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **归档声明**: 本文件前部为 Rust 概念知识体系 **L0 元信息层索引**。原 PostgreSQL 18+ 形式化分析内容已折叠至文件尾部 `§[PostgreSQL 18+ 形式化分析归档]`。
-> 与 Rust 相关的跨系统对比内容已提取至 [`05_comparative/04_safety_boundaries.md`](05_comparative/04_safety_boundaries.md) §10。
+> 与 Rust 相关的跨系统对比内容已提取至 [`05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) §10。
 >
 > **状态**: v1.1（2026-05-13 重构索引）
 >
@@ -30,15 +30,15 @@
 
 | 文件 | 主题 | 核心功能 | 状态 |
 | :--- | :--- | :--- | :--- |
-| [`00_meta/sources.md`](00_meta/sources.md) | 权威来源清单 | 五级来源体系（规范/学术/教学/工业/社区）+ 知识来源关系图谱 | ✅ v1.1 |
-| [`00_meta/methodology.md`](00_meta/methodology.md) | 方法论 | 六种思维表征规范、内容质量门禁、协作流程 | ✅ v1.1 |
-| [`00_meta/concept_index.md`](00_meta/concept_index.md) | 全局概念索引 | 倒排索引、SSO 单一来源规范、Bloom 层级排序、交叉概念审计 | ✅ v1.1 |
-| [`00_meta/inter_layer_map.md`](00_meta/inter_layer_map.md) | 跨层依赖图 | L0-L7 层间语义链接 + 严格依赖路径 | ✅ v1.0 |
-| [`00_meta/semantic_space.md`](00_meta/semantic_space.md) | 表征空间 | 能/不能/等价表达三维分析 + 跨语言表征对比 | ✅ v1.0 |
-| [`00_meta/audit_checklist.md`](00_meta/audit_checklist.md) | 审计清单 | 概念一致性（Coherence）检查清单 + 月度审计机制 | ✅ v1.0 |
-| [`00_meta/learning_guide.md`](00_meta/learning_guide.md) | 学习指南 | 不同背景读者的路径推荐 | ✅ v1.0 |
-| [`00_meta/quick_reference.md`](00_meta/quick_reference.md) | 速查手册 | 核心概念一页纸速查 | ✅ v1.0 |
-| [`00_meta/semantic_bridge_algorithms_patterns.md`](00_meta/semantic_bridge_algorithms_patterns.md) | 语义桥 | 算法↔设计模式↔工作流模式的三层同构坐标系 | ✅ v1.0 |
+| [`00_meta/sources.md`](../00_meta/sources.md) | 权威来源清单 | 五级来源体系（规范/学术/教学/工业/社区）+ 知识来源关系图谱 | ✅ v1.1 |
+| [`00_meta/methodology.md`](../00_meta/methodology.md) | 方法论 | 六种思维表征规范、内容质量门禁、协作流程 | ✅ v1.1 |
+| [`00_meta/concept_index.md`](../00_meta/concept_index.md) | 全局概念索引 | 倒排索引、SSO 单一来源规范、Bloom 层级排序、交叉概念审计 | ✅ v1.1 |
+| [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) | 跨层依赖图 | L0-L7 层间语义链接 + 严格依赖路径 | ✅ v1.0 |
+| [`00_meta/semantic_space.md`](../00_meta/semantic_space.md) | 表征空间 | 能/不能/等价表达三维分析 + 跨语言表征对比 | ✅ v1.0 |
+| [`00_meta/audit_checklist.md`](../00_meta/audit_checklist.md) | 审计清单 | 概念一致性（Coherence）检查清单 + 月度审计机制 | ✅ v1.0 |
+| [`00_meta/learning_guide.md`](../00_meta/learning_guide.md) | 学习指南 | 不同背景读者的路径推荐 | ✅ v1.0 |
+| [`00_meta/quick_reference.md`](../00_meta/quick_reference.md) | 速查手册 | 核心概念一页纸速查 | ✅ v1.0 |
+| [`00_meta/semantic_bridge_algorithms_patterns.md`](../00_meta/semantic_bridge_algorithms_patterns.md) | 语义桥 | 算法↔设计模式↔工作流模式的三层同构坐标系 | ✅ v1.0 |
 
 ---
 
@@ -63,11 +63,11 @@ L0 元规则
 
 | 读者类型 | 推荐起点 | 路径 |
 |:---|:---|:---|
-| **Rust 初学者** | [`01_foundation/README.md`](01_foundation/README.md) | L1 → L2 → L3 |
-| **系统工程师** | [`05_comparative/01_rust_vs_cpp.md`](05_comparative/01_rust_vs_cpp.md) | L5 → L6 → L3 |
-| **形式化研究者** | [`04_formal/README.md`](04_formal/README.md) | L4 → L1 → L7 |
-| **语言设计者** | [`07_future/03_evolution.md`](07_future/03_evolution.md) | L7 → L4 → L5 |
-| **技术选型者** | [`05_comparative/README.md`](05_comparative/README.md) | L5 → L6 → L7 |
+| **Rust 初学者** | [`01_foundation/README.md`](../01_foundation/README.md) | L1 → L2 → L3 |
+| **系统工程师** | [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | L5 → L6 → L3 |
+| **形式化研究者** | [`04_formal/README.md`](../04_formal/README.md) | L4 → L1 → L7 |
+| **语言设计者** | [`07_future/03_evolution.md`](../07_future/03_evolution.md) | L7 → L4 → L5 |
+| **技术选型者** | [`05_comparative/README.md`](../05_comparative/README.md) | L5 → L6 → L7 |
 
 ---
 

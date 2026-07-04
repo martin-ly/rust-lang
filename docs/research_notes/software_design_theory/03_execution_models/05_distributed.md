@@ -337,13 +337,13 @@ where
 
 补偿闭包 `Box<dyn Fn() -> Result<(), E> + Send>` 保证跨线程安全。
 
-由 [send_sync_formalization](../../../research_notes/formal_methods/10_send_sync_formalization.md) SEND-T1、SYNC-T1 与 Saga 补偿语义组合。
+由 [send_sync_formalization](../../formal_methods/10_send_sync_formalization.md) SEND-T1、SYNC-T1 与 Saga 补偿语义组合。
 
 **定理 DI-CONC-T2（CQRS + 通道组合）**：CQRS 读写分离时，命令端与查询端通过 channel 通信；
 
 `Sender<Event>: Send`、`Receiver<Event>: Send` 保证跨线程事件传递无数据竞争。
 
-由 [borrow_checker_proof](../../../research_notes/formal_methods/10_borrow_checker_proof.md) T1 与 channel 语义。
+由 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) T1 与 channel 语义。
 
 **Rust 对应**：`OrchestratedSaga` 的 `steps`/`compensations` 若为 `Vec<Box<dyn Saga<(), E> + Send>>`，则 `run()` 可安全跨线程调度；
 

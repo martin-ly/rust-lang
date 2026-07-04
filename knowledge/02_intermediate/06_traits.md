@@ -2,7 +2,7 @@
 
 > **EN**: Traits
 > **Summary**: Trait 系统 Traits. (stub/archive redirect)
-> **权威来源**: 本主题深度解释见 [concept/02_intermediate/01_traits.md](../../concept/02_intermediate/01_traits.md)。
+> **权威来源**: 本主题深度解释见 [concept/02_intermediate/00_traits/01_traits.md](../../concept/02_intermediate/00_traits/01_traits.md)。
 > **历史版本存档**: [archive/knowledge/02_intermediate/06_traits.md](../../archive/knowledge/02_intermediate/06_traits.md)
 >
 > **定位**: 本文件为精简知识卡片，保留核心概念与常见陷阱。详细解释、形式化语义与代码示例请查看权威来源。
@@ -31,4 +31,4 @@
 
 ---
 
-**详细内容已迁移**：请点击上方 [concept/02_intermediate/01_traits.md](../../concept/02_intermediate/01_traits.md) 查看最新权威解释。
+**详细内容已迁移**：请点击上方 [concept/02_intermediate/00_traits/01_traits.md](../../concept/02_intermediate/00_traits/01_traits.md) 查看最新权威解释。

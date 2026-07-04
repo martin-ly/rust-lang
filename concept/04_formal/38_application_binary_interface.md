@@ -9,7 +9,7 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Specification / Systems
 > **双维定位**: S×Sys — 语言与二进制接口
-> **前置依赖**: [Linkage](../03_advanced/27_linkage.md) · [FFI Advanced](../03_advanced/09_ffi_advanced.md) · [Attributes and Macros](../01_foundation/12_attributes_and_macros.md)
+> **前置依赖**: [Linkage](../03_advanced/27_linkage.md) · [FFI Advanced](../03_advanced/09_ffi_advanced.md) · [Attributes and Macros](../01_foundation/09_macros_basics/12_attributes_and_macros.md)
 > **后置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Inline Assembly](../03_advanced/13_inline_assembly.md)
 > **定理链**: N/A — 语言规范/平台相关文档
 > **主要来源**: [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/items/external-blocks.html#abi) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/) · [System V AMD64 ABI](https://gitlab.com/x86-psABIs/x86-64-ABI) · [ARM Procedure Call Standard](https://developer.arm.com/documentation/ihi0042/latest/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/) · [System V AMD64 ABI](https://gitlab.com/x86-psABIs/x86-64-ABI) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
@@ -18,7 +18,6 @@
 > **来源**: [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/abi.html) · [Rust Reference — extern functions](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rust Reference — external blocks](https://doc.rust-lang.org/reference/items/external-blocks.html)
 
 ---
-
 
 ---
 
@@ -32,7 +31,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与Application Binary Interface（A的适用边界。
 5. **迁移应用**: 将 Application Binary Interface（A 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -42,7 +40,6 @@
 > **反命题 2**: "忽略 Application Binary Interface（A 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Application Binary Interface（A 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 Application Binary Interface（A 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Application Binary Interface（A 具有语言特有的形态。
-
 
 ## 一、什么是 ABI
 

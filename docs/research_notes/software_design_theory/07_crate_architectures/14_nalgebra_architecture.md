@@ -582,7 +582,7 @@ def transform_point(m: np.ndarray, p: np.ndarray) -> np.ndarray:
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - 类型系统与所有权
-- [泛型与特化](../../../../concept/02_intermediate/20_type_system_advanced.md)
+- [泛型与特化](../../../../concept/02_intermediate/04_types_and_conversions/20_type_system_advanced.md)
 
 ---
 

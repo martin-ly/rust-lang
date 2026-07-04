@@ -41,7 +41,7 @@
 
 | 原文件 | 新归档名 | 行数 | 去向/替代 |
 | :--- | :--- | :---: | :--- |
-| `00.md` | `00_meta_layer_index_legacy.md` | 145 | `concept/00_meta/README.md` |
+| `00.md` | `00_meta_layer_index_legacy.md` | 145 | `concept/00_meta/knowledge_topology/README.md` |
 | `01.md` | `01.md` | 2,136 | `concept/05_comparative/01_rust_vs_cpp.md` |
 | `02.md` | — | — | 原文件为 0 字节占位符，已直接删除 |
 | `03.md` | `03_advanced_layer_index_legacy.md` | 145 | `concept/03_advanced/README.md` |
@@ -56,8 +56,8 @@
 
 | 原文件 | 新归档名 | 行数 | 主文件/整合去向 | 归档日期 |
 | :--- | :--- | :---: | :--- | :--- |
-| `01_foundation/19_numerics.md` | `01_foundation_19_numerics_archived.md` | ~95 | `01_foundation/10_numerics.md` | 2026-06-08 |
-| `02_intermediate/22_iterator_patterns.md` | `02_intermediate_22_iterator_patterns_archived.md` | ~105 | `02_intermediate/15_iterator_patterns.md` | 2026-06-08 |
+| `01_foundation/19_numerics.md` | `01_foundation_19_numerics_archived.md` | ~95 | `01_foundation/02_type_system/10_numerics.md` | 2026-06-08 |
+| `02_intermediate/22_iterator_patterns.md` | `02_intermediate_22_iterator_patterns_archived.md` | ~105 | `02_intermediate/07_iterators_and_closures/15_iterator_patterns.md` | 2026-06-08 |
 | `04_formal/07_separation_logic.md` | `04_formal_07_separation_logic_archived.md` | ~105 | `04_formal/11_separation_logic.md` | 2026-05-25 → 2026-06-08 |
 | `04_formal/09_operational_semantics.md` | `04_formal_09_operational_semantics_archived.md` | ~105 | `04_formal/17_operational_semantics.md` | 2026-05-25 → 2026-06-08 |
 | `05_comparative/16_rust_vs_ruby.md` | `05_comparative_16_rust_vs_ruby_archived.md` | ~100 | `05_comparative/08_rust_vs_ruby.md` | 2026-06-08 |
@@ -66,9 +66,9 @@
 | `03_advanced/02_async_programming.md` | `03_advanced_02_async_programming_archived.md` | ~30 | `03_advanced/02_async.md` + `02_async_patterns.md` | 2026-06-08 |
 | `03_advanced/03_unsafe_rust.md` | `03_advanced_03_unsafe_rust_archived.md` | ~45 | `03_advanced/03_unsafe.md` | 2026-06-08 |
 | `03_advanced/05_macros.md` | `03_advanced_05_macros_archived.md` | ~45 | `03_advanced/04_macros.md` + `07_proc_macro.md` | 2026-06-08 |
-| `03_advanced/08_zero_cost_abstractions.md` | `03_advanced_08_zero_cost_abstractions_archived.md` | ~45 | `01_foundation/06_zero_cost_abstractions.md` | 2026-06-08 |
+| `03_advanced/08_zero_cost_abstractions.md` | `03_advanced_08_zero_cost_abstractions_archived.md` | ~45 | `01_foundation/00_start/06_zero_cost_abstractions.md` | 2026-06-08 |
 | `03_advanced/13_async_patterns.md` | `03_advanced_13_async_patterns_archived.md` | ~45 | `03_advanced/26_async_patterns.md` | 2026-06-08 |
-| `01_foundation/03_lifetimes_original.md` | `01_foundation_03_lifetimes_original.md` | ~2,300 | `01_foundation/03_lifetimes.md`（精简重构版） | 2026-05-30 |
+| `01_foundation/03_lifetimes_original.md` | `01_foundation_03_lifetimes_original.md` | ~2,300 | `01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`（精简重构版） | 2026-05-30 |
 | `01_foundation/11_numeric_types_deprecated.md` | `01_foundation_11_numeric_types_deprecated.md` | ~400 | `01_foundation/11_numeric_types.md` | 2026-05-30 |
 | `03_advanced/02_async_original.md` | `03_advanced_02_async_original.md` | ~3,600 | `03_advanced/02_async.md`（精简重构版） | 2026-05-30 |
 | `06_ecosystem/26_game_development_deprecated.md` | `06_ecosystem_26_game_development_deprecated.md` | ~340 | 内容已分散至 `06_ecosystem/35_*`、`06_ecosystem/36_*` 等相关生态文件 | 2026-05-30 |

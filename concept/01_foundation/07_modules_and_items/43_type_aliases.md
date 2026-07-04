@@ -12,8 +12,8 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×App
-> **前置概念**: [Type System Basics](../04_type_system.md) · [Generics](../../02_intermediate/02_generics.md)
-> **后置概念**: [Newtype and Wrapper Types](../../02_intermediate/14_newtype_and_wrapper.md) · [Traits](../../02_intermediate/01_traits.md)
+> **前置概念**: [Type System Basics](../02_type_system/04_type_system.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)
+> **后置概念**: [Newtype and Wrapper Types](../../02_intermediate/04_types_and_conversions/14_newtype_and_wrapper.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
 >
 > **主要来源**: [The Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html) ·
 > [The Rust Programming Language — Custom Types](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html) ·

@@ -10,7 +10,7 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 覆盖从“创建 package”到“在团队中维护依赖锁定”的完整日常流程。
-> **前置概念**: [Cargo Getting Started](80_cargo_getting_started.md) · [Modules and Paths](../01_foundation/11_modules_and_paths.md)
+> **前置概念**: [Cargo Getting Started](80_cargo_getting_started.md) · [Modules and Paths](../01_foundation/07_modules_and_items/11_modules_and_paths.md)
 > **后置概念**: [Cargo Guide Practices](82_cargo_guide_practices.md) · [Cargo Workspaces](78_cargo_workspaces.md) · [Cargo Dependency Resolution](60_cargo_dependency_resolution.md)
 
 ---

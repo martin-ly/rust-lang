@@ -19,7 +19,7 @@
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: P×Eva — 评估工具链选型和验证策略
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Macros](../03_advanced/04_macros.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Macros](../03_advanced/04_macros.md)
 > **后置概念**: [CI/CD Integration]
 > **主要来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/) · [Rustup Documentation] · [Clippy Documentation] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -98,7 +98,7 @@
     - [编译验证：Edition 机制与向后兼容性](#编译验证edition-机制与向后兼容性)
     - [13.1 `cargo-fuzz`：模糊测试集成](#131-cargo-fuzz模糊测试集成)
     - [13.2 `sccache`：分布式编译缓存](#132-sccache分布式编译缓存)
-  - [十五、定理一致性（Coherence）矩阵（工具链保证层）](#十五定理一致性矩阵工具链保证层)
+  - [十五、定理一致性矩阵（工具链保证层）](#十五定理一致性矩阵工具链保证层)
   - [十六、待补充与演进方向（TODOs）](#十六待补充与演进方向todos)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：工具链的编译错误](#十边界测试工具链的编译错误)
@@ -1410,7 +1410,7 @@ graph TD
 | `rustc` 类型检查 | L1 类型系统（Type System） + L2 泛型（Generics） | L4 HM 推断 + System F | `04_formal/02_type_theory.md` |
 | Clippy lint | L1-L3 最佳实践 | —（工程约定） | `01_foundation/` - `03_advanced/` |
 | Miri | L3 Unsafe 检测 | L4 别名模型 (Stacked/Tree) | `03_advanced/03_unsafe.md` |
-| Cargo SemVer | L2 Trait 兼容性 | —（社会技术系统） | `02_intermediate/01_traits.md` |
+| Cargo SemVer | L2 Trait 兼容性 | —（社会技术系统） | `02_intermediate/00_traits/01_traits.md` |
 | `rustfmt` | L1 代码可读性 | —（风格约定） | — |
 | Cross-compilation | L3 嵌入式/FFI | —（目标平台ABI） | `03_advanced/03_unsafe.md` |
 
@@ -1441,7 +1441,7 @@ graph TD
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权（Ownership） | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | 编译器检查根基 |
+| 所有权（Ownership） | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 编译器检查根基 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | Miri 检测对象 |
 | 形式化验证 | [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md) | 理论基础 |
 | 设计模式 | [`./02_patterns.md`](02_patterns.md) | 工程实践 |

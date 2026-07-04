@@ -2,7 +2,7 @@
 
 > **EN**: Rust Philosophy
 > **Summary**: Rust 设计哲学 Rust Philosophy.
-> **相关概念**: [所有权](../../concept/01_foundation/01_ownership.md)
+> **相关概念**: [所有权](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **Bloom 层级**: 理解
 > **理解 Rust 为什么是这样设计的**
 > **预计时间**: 30 分钟

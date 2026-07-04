@@ -14,7 +14,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 impl Trait 的生命周期（Lifetimes）捕获规则
-> **前置依赖**: [Lifetime](../01_foundation/03_lifetimes.md) · [Trait](../02_intermediate/01_traits.md)
+> **前置依赖**: [Lifetime](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Trait](../02_intermediate/00_traits/01_traits.md)
 > **后置延伸**: [RPITIT](37_rpitit_preview.md)
 > **来源**:
 >

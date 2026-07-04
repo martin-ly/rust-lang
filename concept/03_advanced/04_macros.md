@@ -18,11 +18,11 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Cre — 设计元编程抽象
 > **前置概念**:
-> [Type System](../01_foundation/04_type_system.md) ·
-> [Traits](../02_intermediate/01_traits.md) ·
-> [Generics](../02_intermediate/02_generics.md)
+> [Type System](../01_foundation/02_type_system/04_type_system.md) ·
+> [Traits](../02_intermediate/00_traits/01_traits.md) ·
+> [Generics](../02_intermediate/01_generics/02_generics.md)
 > **后置概念**: [DSL Construction] · [Meta-programming]
-> **相关阅读**: [C 预处理器 vs Rust 宏（Macro）](../02_intermediate/26_c_preprocessor_vs_rust_macros.md) — 从文本替换到语法树的入门对比
+> **相关阅读**: [C 预处理器 vs Rust 宏（Macro）](../02_intermediate/06_macros_and_metaprogramming/26_c_preprocessor_vs_rust_macros.md) — 从文本替换到语法树的入门对比
 > **主要来源**:
 > [TRPL: Ch19.5](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
 > [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/) ·
@@ -1938,7 +1938,7 @@ macro_rules! trace_fn {
 > **[The Little Book of Rust Macros](https://veykril.github.io/tlborm/)** `macro_rules!` 的片段分类器（`expr`、`ty`、`ident`、`path` 等）匹配语法范畴而非语义实体。对于函数定义这类结构复杂、分支众多的语法结构，声明宏的模式匹配能力迅速耗尽，这正是过程宏的设计动机。✅ 已验证
 > **[Rust Reference: Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html)** 声明宏不支持递归下降解析复杂语法结构（如完整函数签名含泛型与 where 子句），也无法在匹配后对内部节点做结构化遍历。✅ 已验证
 > **[RFC 1566: Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)** 过程宏被引入的核心动机之一，正是弥补 `macro_rules!` 在复杂 AST 变换场景下的能力缺口。✅ 已验证
-> **跨层映射**: 本文件属性宏示例 ↔ [`01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) § 泛型与 trait bound（签名保留中的泛型参数）
+> **跨层映射**: 本文件属性宏示例 ↔ [`01_foundation/02_type_system/04_type_system.md`](../01_foundation/02_type_system/04_type_system.md) § 泛型与 trait bound（签名保留中的泛型参数）
 > **跨层映射**: 本文件 `Fold` trait ↔ [`04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) § 语法树归纳定义（AST 递归结构的归纳遍历）
 
 ---
@@ -2101,8 +2101,8 @@ mod internal {
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| Trait 系统 | [](../02_intermediate/01_traits.md) | Derive 宏目标 |
-| 类型系统（Type System） | [](../01_foundation/04_type_system.md) | 宏与类型交互 |
+| Trait 系统 | [](../02_intermediate/00_traits/01_traits.md) | Derive 宏目标 |
+| 类型系统（Type System） | [](../01_foundation/02_type_system/04_type_system.md) | 宏与类型交互 |
 | 形式化方法 | [](../07_future/02_formal_methods.md) | 宏安全验证 |
 | 语言演进 | [](../07_future/03_evolution.md) | 宏系统演进 |
 | 编译期计算 | [](03_const_generics.md) | const fn 替代宏的趋势 |

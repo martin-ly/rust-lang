@@ -19,7 +19,7 @@
 > 性能分析（flamegraph [来源: [flamegraph.rs](https://github.com/flamegraph-rs/flamegraph)]、perf）、
 > 缓存优化、SIMD [来源: [packed_simd](https://doc.rust-lang.org/std/simd/index.html)] 到零成本抽象（Zero-Cost Abstraction）的验证，
 > 建立"测量 → 分析 → 优化 → 验证"的工程闭环。
-> **前置概念**: [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md) · [Ownership](../01_foundation/01_ownership.md)
+> **前置概念**: [Zero Cost Abstractions](../01_foundation/00_start/06_zero_cost_abstractions.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Async](../03_advanced/02_async.md)
 
 ---
@@ -39,7 +39,7 @@
   - [一、核心概念](#一核心概念)
     - [1.1 测量优先原则](#11-测量优先原则)
     - [1.2 编译器优化层级](#12-编译器优化层级)
-    - [1.3 零成本抽象（Zero-Cost Abstraction）的验证](#13-零成本抽象的验证)
+    - [1.3 零成本抽象的验证](#13-零成本抽象的验证)
   - [二、技术细节](#二技术细节)
     - [2.1 Criterion：统计性基准测试](#21-criterion统计性基准测试)
     - [2.2 Flamegraph：可视化性能分析](#22-flamegraph可视化性能分析)
@@ -53,10 +53,10 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：性能优化的编译错误](#十边界测试性能优化的编译错误)
-    - [10.1 边界测试：`unsafe` 性能优化的正确性假设（运行时（Runtime） UB）](#101-边界测试unsafe-性能优化的正确性假设运行时-ub)
+    - [10.1 边界测试：`unsafe` 性能优化的正确性假设（运行时 UB）](#101-边界测试unsafe-性能优化的正确性假设运行时-ub)
     - [10.2 边界测试：`MaybeUninit` 的未初始化内存（运行时 UB）](#102-边界测试maybeuninit-的未初始化内存运行时-ub)
     - [10.3 边界测试：`mem::transmute` 的大小不匹配（编译错误）](#103-边界测试memtransmute-的大小不匹配编译错误)
-    - [10.4 边界测试：内联汇编（Inline Assembly）的操作数类型约束（编译错误）](#104-边界测试内联汇编的操作数类型约束编译错误)
+    - [10.4 边界测试：内联汇编的操作数类型约束（编译错误）](#104-边界测试内联汇编的操作数类型约束编译错误)
     - [10.6 边界测试：`#[inline(always)]` 与代码膨胀（编译错误/链接错误）](#106-边界测试inlinealways-与代码膨胀编译错误链接错误)
     - [10.7 边界测试：`inline(always)` 的代码膨胀（编译后性能下降）](#107-边界测试inlinealways-的代码膨胀编译后性能下降)
     - [10.3 边界测试：SIMD 类型的内存对齐要求（运行时 UB）](#103-边界测试simd-类型的内存对齐要求运行时-ub)
@@ -492,8 +492,8 @@ graph TD
 
 ## 相关概念文件
 
-- [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
-- [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）模型
+- [Zero Cost Abstractions](../01_foundation/00_start/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
+- [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）模型
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发模型
 - [Async](../03_advanced/02_async.md) — 异步（Async）编程
 

@@ -10,7 +10,7 @@
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。
-> **前置概念**: [Unsafe](03_unsafe.md) · [Type System](../01_foundation/04_type_system.md) · [Memory Management](../02_intermediate/03_memory_management.md)
+> **前置概念**: [Unsafe](03_unsafe.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) · [Memory Management](../02_intermediate/02_memory_management/03_memory_management.md)
 > **后置概念**: [Application Domains](../06_ecosystem/04_application_domains.md)
 
 ---
@@ -34,21 +34,21 @@
   - [二、技术细节](#二技术细节)
     - [2.1 extern 块的完整语法](#21-extern-块的完整语法)
     - [2.2 不透明类型与封装](#22-不透明类型与封装)
-    - [2.3 回调与闭包（Closures）传递](#23-回调与闭包传递)
+    - [2.3 回调与闭包传递](#23-回调与闭包传递)
   - [三、工具链生态](#三工具链生态)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱与最佳实践](#五常见陷阱与最佳实践)
     - [编译错误示例](#编译错误示例)
-    - [3.4 边界测试：C 结构体（Struct）布局不匹配（编译错误 / 运行时（Runtime） UB）](#34-边界测试c-结构体布局不匹配编译错误--运行时-ub)
-    - [3.5 边界测试：裸指针生命周期（Lifetimes）与 FFI 边界（编译错误）](#35-边界测试裸指针生命周期与-ffi-边界编译错误)
+    - [3.4 边界测试：C 结构体布局不匹配（编译错误 / 运行时 UB）](#34-边界测试c-结构体布局不匹配编译错误--运行时-ub)
+    - [3.5 边界测试：裸指针生命周期与 FFI 边界（编译错误）](#35-边界测试裸指针生命周期与-ffi-边界编译错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：FFI 中的空指针解引用（Reference）（运行时 UB）](#103-边界测试ffi-中的空指针解引用运行时-ub)
-    - [10.5 边界测试：所有权（Ownership）移动后的再次使用](#105-边界测试所有权移动后的再次使用)
+    - [10.3 边界测试：FFI 中的空指针解引用（运行时 UB）](#103-边界测试ffi-中的空指针解引用运行时-ub)
+    - [10.5 边界测试：所有权移动后的再次使用](#105-边界测试所有权移动后的再次使用)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -532,8 +532,8 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 ## 相关概念文件
 
 - [Unsafe](03_unsafe.md) — unsafe Rust 与内存安全（Memory Safety）
-- [Type System](../01_foundation/04_type_system.md) — Rust 类型系统基础
-- [Memory Management](../02_intermediate/03_memory_management.md) — 内存管理模型
+- [Type System](../01_foundation/02_type_system/04_type_system.md) — Rust 类型系统基础
+- [Memory Management](../02_intermediate/02_memory_management/03_memory_management.md) — 内存管理模型
 - [Application Domains](../06_ecosystem/04_application_domains.md) — 应用领域分析
 
 ---

@@ -405,8 +405,8 @@ graph TD
 - [边界扩展树](boundary_extension_tree.md) —— 安全边界推演
 - [可判定性谱系](decidability_spectrum.md) —— 定理的判定性边界
 - [表达力多视角](expressiveness_multiview.md) —— 表达力与定理的关系
-- [L1 所有权](../01_foundation/01_ownership.md) —— T-001 / T-002 / T-003
-- [L1 借用](../01_foundation/02_borrowing.md) —— T-010 / T-011 / T-012
+- [L1 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) —— T-001 / T-002 / T-003
+- [L1 借用](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) —— T-010 / T-011 / T-012
 - [L3 并发](../03_advanced/01_concurrency.md) —— T-040 / T-041 / T-042
 
 ## 十一、遍历定理森林的认知路径

@@ -288,9 +288,9 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 | 定理 | 依赖 | 来源 |
 | :--- | :--- | :--- |
-| CE-T1 | ownership T2、T3 | [ownership_model](../../../research_notes/formal_methods/10_ownership_model.md) |
-| CE-T2 | borrow T1、Send/Sync | [borrow_checker_proof](../../../research_notes/formal_methods/10_borrow_checker_proof.md)、[send_sync_formalization](../../../research_notes/formal_methods/10_send_sync_formalization.md) |
-| CE-T3 | type T1、T2、T3 | [type_system_foundations](../../../research_notes/type_theory/10_type_system_foundations.md) |
+| CE-T1 | ownership T2、T3 | [ownership_model](../../formal_methods/10_ownership_model.md) |
+| CE-T2 | borrow T1、Send/Sync | [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md)、[send_sync_formalization](../../formal_methods/10_send_sync_formalization.md) |
+| CE-T3 | type T1、T2、T3 | [type_system_foundations](../../type_theory/10_type_system_foundations.md) |
 
 ---
 
@@ -430,7 +430,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 ~~RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN~~（已归档至 ../../../archive/process_reports/）支柱 2+3；
 
-现参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](../../../research_notes/10_authoritative_alignment_guide.md)。
+现参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](../../10_authoritative_alignment_guide.md)。
 
 ---
 

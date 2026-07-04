@@ -11,11 +11,11 @@
 > **双维定位**: P×Cre — 设计 ECS 游戏架构
 > **前置概念**: · [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 >
-> [Ownership](../01_foundation/01_ownership.md) ·
-> [Borrowing](../01_foundation/02_borrowing.md) ·
-> [Lifetimes](../01_foundation/03_lifetimes.md) ·
-> [Traits](../02_intermediate/01_traits.md) ·
-> [Generics](../02_intermediate/02_generics.md) ·
+> [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
+> [Lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) ·
+> [Traits](../02_intermediate/00_traits/01_traits.md) ·
+> [Generics](../02_intermediate/01_generics/02_generics.md) ·
 > [Concurrency](../03_advanced/01_concurrency.md) ·
 > [Unsafe](../03_advanced/03_unsafe.md)
 >
@@ -381,7 +381,7 @@ queue.submit(std::iter::once(encoder.finish()));
 | **`no_std`（无 `alloc`）** | 无全局分配器；仅栈与静态存储 | 所有实体/组件数量必须在编译期确定；使用 `MaybeUninit` 数组或 `heapless` 容器 | Cortex-M0/M0+、GBA、Playdate |
 | **`no_std` + `alloc`** | 有全局分配器，但无 `std` 的 OS 抽象 | 可使用 `Box`、`Vec`、自定义分配器；但需避免碎片与 OOM | ESP32、RG35XX（Linux）、PocketCHIP |
 
-> **核心约束**: 在无 `alloc` 的极致场景下，ECS 的 `World` 不再能动态增长。实体数量上限、组件类型组合、系统执行顺序都需在编译期或启动期固化。这与 [L1 所有权模型](../01_foundation/01_ownership.md) 中的"资源必须显式拥有"形成强烈共鸣——动态分配的自由被剥夺后，所有权的静态化成为唯一选择。
+> **核心约束**: 在无 `alloc` 的极致场景下，ECS 的 `World` 不再能动态增长。实体数量上限、组件类型组合、系统执行顺序都需在编译期或启动期固化。这与 [L1 所有权模型](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 中的"资源必须显式拥有"形成强烈共鸣——动态分配的自由被剥夺后，所有权的静态化成为唯一选择。
 
 #### 2.4.2 掌机平台 Rust 游戏开发现状
 
@@ -503,7 +503,7 @@ impl FixedArchetype {
 | **Tilemap + Sprite** | GBA、Analogue Pocket | ECS 管理动态 Sprite；背景层由独立系统处理 | `Position`（像素坐标）、`Tile`（瓦片索引） |
 | **Pico8 风格** | fantasy console 仿真 | 固定调色板、128×128 分辨率；ECS 实体对应"画图命令" | `DrawCmd { color: u4, shape: Shape }` |
 
-> **渲染系统的所有权模式**: 帧缓冲作为唯一的全局可变资源，在 ECS 中通常以 `&mut [u8]` 或自定义的 `FrameBuffer` 资源传入 Render System。这与 [L1 所有权](../01_foundation/01_ownership.md) 中的"单一可变引用（Mutable Reference）"原则完全一致——在任何一帧中，只有一个 Render System 能持有帧缓冲的 `&mut`。
+> **渲染系统的所有权模式**: 帧缓冲作为唯一的全局可变资源，在 ECS 中通常以 `&mut [u8]` 或自定义的 `FrameBuffer` 资源传入 Render System。这与 [L1 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 中的"单一可变引用（Mutable Reference）"原则完全一致——在任何一帧中，只有一个 Render System 能持有帧缓冲的 `&mut`。
 
 ```rust,ignore
 // ✅ Playdate 风格 1-bit 渲染系统（no_std + alloc）
@@ -1147,11 +1147,11 @@ struct ChildOf {
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | Component 生命周期与资源管理 |
-| 借用检查 | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) | System 调度冲突检测同构 |
-| 生命周期 | [`../01_foundation/03_lifetimes.md`](../01_foundation/03_lifetimes.md) | Entity 引用跨 System 有效性 |
-| Trait 系统 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | `Component` / `SystemParam` derive |
-| 泛型（Generics） | `../02_intermediate/02_generics.md` | `Query<Q>` 的零成本抽象（Zero-Cost Abstraction） |
+| 所有权 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Component 生命周期与资源管理 |
+| 借用检查 | [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | System 调度冲突检测同构 |
+| 生命周期 | [`../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | Entity 引用跨 System 有效性 |
+| Trait 系统 | [`../02_intermediate/00_traits/01_traits.md`](../02_intermediate/00_traits/01_traits.md) | `Component` / `SystemParam` derive |
+| 泛型（Generics） | `../02_intermediate/01_generics/02_generics.md` | `Query<Q>` 的零成本抽象（Zero-Cost Abstraction） |
 | 并发 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | `Send`/`Sync` 在多线程循环中的保证 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | SIMD / GPU 底层边界 |
 | 线性逻辑 | [`../04_formal/01_linear_logic.md`](../04_formal/01_linear_logic.md) | 消耗性资源的形式化对应 |

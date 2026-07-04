@@ -10,10 +10,10 @@
 > **A/S/P 标记**: **A+S+P** — 全维度
 > **双维定位**: P×Cre — 设计区块链系统的 Rust 架构
 > **前置概念**: · [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-> [Ownership](../01_foundation/01_ownership.md) ·
-> [Borrowing](../01_foundation/02_borrowing.md) ·
-> [Lifetimes](../01_foundation/03_lifetimes.md) ·
-> [Type System](../01_foundation/04_type_system.md) ·
+> [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
+> [Lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) ·
+> [Type System](../01_foundation/02_type_system/04_type_system.md) ·
 > [Unsafe](../03_advanced/03_unsafe.md) ·
 > [Linear Logic](../04_formal/01_linear_logic.md)
 > [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
@@ -670,10 +670,10 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | 合约状态独占访问的根基 |
-| 借用检查 | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) | Sealevel 运行时并行调度同构 |
-| 生命周期（Lifetimes） | [`../01_foundation/03_lifetimes.md`](../01_foundation/03_lifetimes.md) | 跨区块状态引用（Reference）有效性 |
-| 类型系统 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) | 漏洞类别消除机制 |
+| 所有权 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 合约状态独占访问的根基 |
+| 借用检查 | [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | Sealevel 运行时并行调度同构 |
+| 生命周期（Lifetimes） | [`../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 跨区块状态引用（Reference）有效性 |
+| 类型系统 | [`../01_foundation/02_type_system/04_type_system.md`](../01_foundation/02_type_system/04_type_system.md) | 漏洞类别消除机制 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | VM 运行时底层边界 |
 | 线性逻辑 | [`../04_formal/01_linear_logic.md`](../04_formal/01_linear_logic.md) | 代币作为线性资源的形式化 |
 | 形式化验证工具链 | [`../04_formal/05_verification_toolchain.md`](../04_formal/05_verification_toolchain.md) | Kani / Verus 的验证理论 |

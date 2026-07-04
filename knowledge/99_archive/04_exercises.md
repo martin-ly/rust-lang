@@ -2,7 +2,7 @@
 
 > **EN**: Exercises
 > **Summary**: Rust 编程练习集 Exercises.
-> **相关概念**: [Rc](../../concept/02_intermediate/03_memory_management.md)
+> **相关概念**: [Rc](../../concept/02_intermediate/02_memory_management/03_memory_management.md)
 > **Bloom 层级**: 理解
 
 本练习集包含从入门到专家级的 Rust 编程练习题，涵盖所有权、生命周期、泛型、特质、异步编程等核心概念。建议按顺序完成，逐步提升 Rust 编程能力。

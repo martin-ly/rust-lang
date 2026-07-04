@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计游戏开发架构
 > **定位**: 探讨 Rust 在游戏开发领域的应用——从 ECS 架构到渲染引擎，分析 Rust 的性能优势和开发模式。
-> **前置概念**: [ECS](07_game_ecs.md) · [Memory](../02_intermediate/03_memory_management.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Ownership](../01_foundation/01_ownership.md)
+> **前置概念**: [ECS](07_game_ecs.md) · [Memory](../02_intermediate/02_memory_management/03_memory_management.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **后置概念**: [WebAssembly](11_webassembly.md) · [Performance](15_performance_optimization.md)
 >
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://docs.rs/wgpu/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -42,10 +42,10 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：游戏开发的编译错误](#十边界测试游戏开发的编译错误)
-    - [10.1 边界测试：ECS 系统的组件借用（Borrowing）冲突（编译错误）](#101-边界测试ecs-系统的组件借用冲突编译错误)
-    - [10.2 边界测试：图形渲染的生命周期（Lifetimes）与 `Send` 约束（编译错误）](#102-边界测试图形渲染的生命周期与-send-约束编译错误)
-    - [10.6 边界测试：游戏状态序列化的循环引用（Reference）（运行时（Runtime）栈溢出）](#106-边界测试游戏状态序列化的循环引用运行时栈溢出)
-    - [10.5 边界测试：ECS 的 archetype 变更与迭代器（Iterator）失效（运行时 panic/UB）](#105-边界测试ecs-的-archetype-变更与迭代器失效运行时-panicub)
+    - [10.1 边界测试：ECS 系统的组件借用冲突（编译错误）](#101-边界测试ecs-系统的组件借用冲突编译错误)
+    - [10.2 边界测试：图形渲染的生命周期与 `Send` 约束（编译错误）](#102-边界测试图形渲染的生命周期与-send-约束编译错误)
+    - [10.6 边界测试：游戏状态序列化的循环引用（运行时栈溢出）](#106-边界测试游戏状态序列化的循环引用运行时栈溢出)
+    - [10.5 边界测试：ECS 的 archetype 变更与迭代器失效（运行时 panic/UB）](#105-边界测试ecs-的-archetype-变更与迭代器失效运行时-panicub)
     - [10.3 边界测试：Bevy ECS 的 system 参数顺序与冲突（编译错误）](#103-边界测试bevy-ecs-的-system-参数顺序与冲突编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -502,9 +502,9 @@ graph TD
 - [ECS](07_game_ecs.md) — ECS 模式
 - [WebAssembly](11_webassembly.md) — WebAssembly
 - [Performance](15_performance_optimization.md) — 性能优化
-- [Memory](../02_intermediate/03_memory_management.md) — 内存管理
+- [Memory](../02_intermediate/02_memory_management/03_memory_management.md) — 内存管理
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发
-- [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）
+- [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）
 
 ---
 

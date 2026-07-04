@@ -177,41 +177,41 @@ Trait Bounds 是 L2 的"枢纽概念"：
 
 | 文件 | 概念 | 核心内容 | 状态 | 前置（L1） | 后置（L3） |
 |:---|:---|:---|:---|:---|:---|
-| [01_traits.md](01_traits.md) | Trait 系统 | 定义、约束、Orphan Rule、关联类型/GATs、Supertrait、Auto Trait | ✅ v1.0 | Type System, Ownership | Concurrency (Send/Sync), Async (Future) |
-| [02_generics.md](02_generics.md) | 泛型系统 | 单态化（Monomorphization）、Trait Bounds、Const Generics、GATs、HRTB | ✅ v1.0 | Lifetimes, Type System | Async (Future), Memory (Pin) |
-| [03_memory_management.md](03_memory_management.md) | 内存管理 | Box/Rc/Arc、RefCell/Mutex、Cell/UnsafeCell、Pin、MaybeUninit | ✅ v1.0 | Ownership, Borrowing | Concurrency (Arc), Unsafe (MaybeUninit) |
-| [04_error_handling.md](04_error_handling.md) | 错误处理（Error Handling） | Result/Option、`?`、Custom Error、Error trait | ✅ v1.0 | Type System (enum), Trait | Async (异步错误传播) |
-| [05_assert_matches.md](05_assert_matches.md) | 模式匹配（Pattern Matching）断言 | `matches!`、`assert_matches!`、模式断言语义 | ✅ v1.0 | Type System (Pattern), Error Handling | Macros |
-| [06_range_types.md](06_range_types.md) | 范围类型语义 | `std::ops::Range` → `core::range`、`IntoIterator` 设计 | ✅ v1.0 | Type System, Generics | Version Tracking |
+| [01_traits.md](00_traits/01_traits.md) | Trait 系统 | 定义、约束、Orphan Rule、关联类型/GATs、Supertrait、Auto Trait | ✅ v1.0 | Type System, Ownership | Concurrency (Send/Sync), Async (Future) |
+| [02_generics.md](01_generics/02_generics.md) | 泛型系统 | 单态化（Monomorphization）、Trait Bounds、Const Generics、GATs、HRTB | ✅ v1.0 | Lifetimes, Type System | Async (Future), Memory (Pin) |
+| [03_memory_management.md](02_memory_management/03_memory_management.md) | 内存管理 | Box/Rc/Arc、RefCell/Mutex、Cell/UnsafeCell、Pin、MaybeUninit | ✅ v1.0 | Ownership, Borrowing | Concurrency (Arc), Unsafe (MaybeUninit) |
+| [04_error_handling.md](03_error_handling/04_error_handling.md) | 错误处理（Error Handling） | Result/Option、`?`、Custom Error、Error trait | ✅ v1.0 | Type System (enum), Trait | Async (异步错误传播) |
+| [05_assert_matches.md](06_macros_and_metaprogramming/05_assert_matches.md) | 模式匹配（Pattern Matching）断言 | `matches!`、`assert_matches!`、模式断言语义 | ✅ v1.0 | Type System (Pattern), Error Handling | Macros |
+| [06_range_types.md](04_types_and_conversions/06_range_types.md) | 范围类型语义 | `std::ops::Range` → `core::range`、`IntoIterator` 设计 | ✅ v1.0 | Type System, Generics | Version Tracking |
 | 07_closure_types.md | 闭包类型系统（Type System） | 捕获模式、Fn/FnMut/FnOnce、move 闭包（Closures）、生命周期（Lifetimes）擦除 | ✅ v1.0 | Ownership, Borrowing | Async, Iterator |
-| [08_interior_mutability.md](08_interior_mutability.md) | 内部可变性 | Cell/RefCell/UnsafeCell、Mutex/RwLock、原子类型 | ✅ v1.0 | Ownership, Borrowing | Concurrency, Unsafe |
-| [09_serde_patterns.md](09_serde_patterns.md) | Serde 序列化 | Serialize/Deserialize、自定义 Visitor、性能优化 | ✅ v1.0 | Trait, Generics | Application Domains |
-| [10_module_system.md](10_module_system.md) | 模块系统 | Crate/Module/Package、可见性、use 声明、Workspace | ✅ v1.0 | Ownership, Type System | Macros, Toolchain |
-| [11_cow_and_borrowed.md](11_cow_and_borrowed.md) | Cow 写时克隆 | Clone-on-Write、零拷贝、ToOwned、API 灵活性 | ✅ v1.0 | Ownership, Borrowing | String Patterns, Zero Cost |
-| [12_smart_pointers.md](12_smart_pointers.md) | 智能指针（Smart Pointer） | Box/Rc/Arc/RefCell/Cell、所有权语义、组合模式 | ✅ v1.0 | Ownership, Borrowing | Pin, Concurrency |
-| [13_dsl_and_embedding.md](13_dsl_and_embedding.md) | DSL 与嵌入 | 宏（Macro） DSL、Builder、Parser Combinator、类型安全 | ✅ v1.0 | Trait, Macros | Serde, WebAssembly |
-| [14_newtype_and_wrapper.md](14_newtype_and_wrapper.md) | Newtype 与包装器 | 类型安全、零成本抽象（Zero-Cost Abstraction）、孤儿规则（Orphan Rule）、单位类型 | ✅ v1.0 | Type System, Trait | Patterns, Smart Pointers |
+| [08_interior_mutability.md](02_memory_management/08_interior_mutability.md) | 内部可变性 | Cell/RefCell/UnsafeCell、Mutex/RwLock、原子类型 | ✅ v1.0 | Ownership, Borrowing | Concurrency, Unsafe |
+| [09_serde_patterns.md](00_traits/09_serde_patterns.md) | Serde 序列化 | Serialize/Deserialize、自定义 Visitor、性能优化 | ✅ v1.0 | Trait, Generics | Application Domains |
+| [10_module_system.md](05_modules_and_visibility/10_module_system.md) | 模块系统 | Crate/Module/Package、可见性、use 声明、Workspace | ✅ v1.0 | Ownership, Type System | Macros, Toolchain |
+| [11_cow_and_borrowed.md](02_memory_management/11_cow_and_borrowed.md) | Cow 写时克隆 | Clone-on-Write、零拷贝、ToOwned、API 灵活性 | ✅ v1.0 | Ownership, Borrowing | String Patterns, Zero Cost |
+| [12_smart_pointers.md](02_memory_management/12_smart_pointers.md) | 智能指针（Smart Pointer） | Box/Rc/Arc/RefCell/Cell、所有权语义、组合模式 | ✅ v1.0 | Ownership, Borrowing | Pin, Concurrency |
+| [13_dsl_and_embedding.md](06_macros_and_metaprogramming/13_dsl_and_embedding.md) | DSL 与嵌入 | 宏（Macro） DSL、Builder、Parser Combinator、类型安全 | ✅ v1.0 | Trait, Macros | Serde, WebAssembly |
+| [14_newtype_and_wrapper.md](04_types_and_conversions/14_newtype_and_wrapper.md) | Newtype 与包装器 | 类型安全、零成本抽象（Zero-Cost Abstraction）、孤儿规则（Orphan Rule）、单位类型 | ✅ v1.0 | Type System, Trait | Patterns, Smart Pointers |
 
 ---
 
 ### 补充文件索引
 
-- [错误处理（Error Handling）深入：从 Result 到自定义错误生态](16_error_handling_deep_dive.md)
+- [错误处理（Error Handling）深入：从 Result 到自定义错误生态](03_error_handling/16_error_handling_deep_dive.md)
 - Rust 迭代器（Iterator）模式
-- [Rust 迭代器（Iterator）模式](15_iterator_patterns.md)
+- [Rust 迭代器（Iterator）模式](07_iterators_and_closures/15_iterator_patterns.md)
 - 宏（Macro）模式：编译期代码生成的工程实践
-- [RTTI 与动态类型识别：从 C++ 到 Rust](25_rtti_and_dynamic_typing.md)
-- [C 预处理器 vs Rust 宏（Macro）：从文本替换到语法树](26_c_preprocessor_vs_rust_macros.md)
-- [异常安全：C++ 与 Rust 的错误处理（Error Handling）哲学](27_exception_safety_rust_cpp.md)
-- [构造与初始化：C++ 的构造函数 vs Rust 的结构体（Struct）字面量](28_construction_and_initialization.md)
-- [友元 vs 模块（Module）可见性：C++ 的 `friend` 与 Rust 的隐私边界](29_friend_vs_module_privacy.md)
-- [测验：C/C++ → Rust 基础知识对比](30_quiz_cpp_rust_foundations.md)
-- [生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型](18_lifetimes_advanced.md)
-- [高级 Trait 主题：从关联类型到特化](19_advanced_traits.md)
-- [高级类型系统（Type System）：从关联类型到类型级编程](20_type_system_advanced.md)
-- [元编程：Rust 的编译期代码生成与变换](21_metaprogramming.md)
-- [测验：Trait 与泛型（Generics）（嵌入式互动试点）](23_quiz_traits_and_generics.md)
-- [测验：内存管理（嵌入式互动试点）](24_quiz_memory_management.md)
+- [RTTI 与动态类型识别：从 C++ 到 Rust](04_types_and_conversions/25_rtti_and_dynamic_typing.md)
+- [C 预处理器 vs Rust 宏（Macro）：从文本替换到语法树](06_macros_and_metaprogramming/26_c_preprocessor_vs_rust_macros.md)
+- [异常安全：C++ 与 Rust 的错误处理（Error Handling）哲学](03_error_handling/27_exception_safety_rust_cpp.md)
+- [构造与初始化：C++ 的构造函数 vs Rust 的结构体（Struct）字面量](00_traits/28_construction_and_initialization.md)
+- [友元 vs 模块（Module）可见性：C++ 的 `friend` 与 Rust 的隐私边界](05_modules_and_visibility/29_friend_vs_module_privacy.md)
+- [测验：C/C++ → Rust 基础知识对比](09_quizzes/30_quiz_cpp_rust_foundations.md)
+- [生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型](00_traits/18_lifetimes_advanced.md)
+- [高级 Trait 主题：从关联类型到特化](00_traits/19_advanced_traits.md)
+- [高级类型系统（Type System）：从关联类型到类型级编程](04_types_and_conversions/20_type_system_advanced.md)
+- [元编程：Rust 的编译期代码生成与变换](06_macros_and_metaprogramming/21_metaprogramming.md)
+- [测验：Trait 与泛型（Generics）（嵌入式互动试点）](01_generics/23_quiz_traits_and_generics.md)
+- [测验：内存管理（嵌入式互动试点）](02_memory_management/24_quiz_memory_management.md)
 
 ## 三、学习路径建议
 

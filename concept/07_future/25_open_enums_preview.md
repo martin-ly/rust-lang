@@ -16,7 +16,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Open Enums 预览特性
 > **定位**: 探讨 Rust 枚举（Enum）类型在 API 演进与跨 crate 兼容性维度的**开放性语义**，从现有 `#[non_exhaustive]` 机制延伸到语言级开放枚举的设计空间。
-> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Error Handling](../02_intermediate/04_error_handling.md) · [Evolution](03_evolution.md)
+> **前置概念**: [Type System](../01_foundation/02_type_system/04_type_system.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) · [Evolution](03_evolution.md)
 > **后置概念**:
 > [Version Tracking](05_rust_version_tracking.md) ·
 > [Effects System](04_effects_system.md)
@@ -515,9 +515,9 @@ pub enum ConstExample {
 
 ## 相关概念文件
 
-- [Type System](../01_foundation/04_type_system.md) — 枚举类型的形式化根基
-- [Traits](../02_intermediate/01_traits.md) — Sealed Traits 与开放/封闭设计
-- [Error Handling](../02_intermediate/04_error_handling.md) — `ErrorKind` 实践案例
+- [Type System](../01_foundation/02_type_system/04_type_system.md) — 枚举类型的形式化根基
+- [Traits](../02_intermediate/00_traits/01_traits.md) — Sealed Traits 与开放/封闭设计
+- [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) — `ErrorKind` 实践案例
 - [Evolution](03_evolution.md) — 语言演进机制与向后兼容
 - [Version Tracking](05_rust_version_tracking.md) — Rust 版本特性演进跟踪
 

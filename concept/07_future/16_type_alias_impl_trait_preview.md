@@ -15,7 +15,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 TAIT 的类型系统（Type System）影响
-> **前置依赖**: [Generics](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
+> **前置依赖**: [Generics](../02_intermediate/01_generics/02_generics.md) · [Trait](../02_intermediate/00_traits/01_traits.md)
 > **后置延伸**: [RPITIT](37_rpitit_preview.md)
 > **来源**: [Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html) · [RFC 2515](https://rust-lang.github.io/rfcs//2515-type_alias_impl_trait.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链

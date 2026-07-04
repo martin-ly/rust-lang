@@ -119,13 +119,13 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **ADT (Algebraic Data Type)** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 Trait、L4 类型论 | 理解 | ← 类型系统基础 → 模式匹配 |
+| **ADT (Algebraic Data Type)** | [L1: 类型系统](../01_foundation/02_type_system/04_type_system.md) | L2 Trait、L4 类型论 | 理解 | ← 类型系统基础 → 模式匹配 |
 | **Aerospace Certification & Formal Methods** | [L4: 航空航天认证](../04_formal/16_aerospace_certification_formal_methods.md) | L4 RustBelt、L4 形式化方法 | 分析 | ← RustBelt + 形式化方法 → 安全关键认证 |
 | **AFIT (Async Fn In Trait)** | [L3: 异步](../03_advanced/02_async.md) | L2 Trait、L7 演进 | 分析 | ← Trait + async → RPITIT |
 | **Algorithms & Competitive Programming** | [L6: 算法与竞赛编程](../06_ecosystem/29_algorithms_competitive_programming.md) | L1 所有权、L2 泛型、L3 并发 | 应用 | ← 所有权 + 泛型 → 算法验证 |
-| **Alias-XOR-Mutation (AXM)** | [L1: 借用](../01_foundation/02_borrowing.md) | L3 并发、L4 分离逻辑 | 理解 | ← 所有权 → 并发安全 |
+| **Alias-XOR-Mutation (AXM)** | [L1: 借用](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | L3 并发、L4 分离逻辑 | 理解 | ← 所有权 → 并发安全 |
 | **Ariel OS** | [L6: 嵌入式系统](../06_ecosystem/22_embedded_systems.md) | L3 Unsafe、L6 IoT | 分析 | ← Library OS → 安全 IoT
-| **Arc** | [L2: 内存管理](../02_intermediate/03_memory_management.md) | L3 并发、L1 所有权 | 应用 | ← Rc + Send/Sync → 跨线程共享 |
+| **Arc** | [L2: 内存管理](../02_intermediate/02_memory_management/03_memory_management.md) | L3 并发、L1 所有权 | 应用 | ← Rc + Send/Sync → 跨线程共享 |
 | **Async/Await** | [L3: 异步](../03_advanced/02_async.md) | L2 泛型、L3 Pin、L4 形式化 | 分析 | ← Future + Pin → 运行时 |
 | **Atomic Memory Ordering** | [L3: 并发](../03_advanced/01_concurrency.md) | L1 借用、L4 内存模型 | 评价 | ← Send/Sync → 无锁数据结构 |
 
@@ -133,18 +133,18 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **Borrowing (&/&mut)** | [L1: 借用](../01_foundation/02_borrowing.md) | L1 所有权、L3 并发、L4 分离逻辑 | 理解 | ← 所有权 → 生命周期 ≡ 分数权限 |
+| **Borrowing (&/&mut)** | [L1: 借用](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | L1 所有权、L3 并发、L4 分离逻辑 | 理解 | ← 所有权 → 生命周期 ≡ 分数权限 |
 | **Bootstrap (rustc)** | [L6: rustc Bootstrap](../06_ecosystem/70_rustc_bootstrap.md) | L6 rustc、L6 基础设施 | 分析 | ← rustc_driver → Stage0/1/2
-| **Box** | [L2: 内存管理](../02_intermediate/03_memory_management.md) | L1 所有权、L4 线性逻辑 | 应用 | ← 所有权 → 智能指针 |
+| **Box** | [L2: 内存管理](../02_intermediate/02_memory_management/03_memory_management.md) | L1 所有权、L4 线性逻辑 | 应用 | ← 所有权 → 智能指针 |
 | **Builder Pattern** | [L6: 设计模式](../06_ecosystem/02_patterns.md) | L2 Trait、L1 类型系统 | 应用 | ← 所有权 + 方法链 → API 设计 |
 
 ### C 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / 学术论文
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **Cell / RefCell** | [L2: 内存管理](../02_intermediate/03_memory_management.md) | L1 借用、L3 并发 | 分析 | ← 内部可变性 → 运行时借用检查 |
-| **Const Generics** | [L2: 泛型](../02_intermediate/02_generics.md) | L4 类型论、L7 演进 | 分析 | ← 泛型 → 类型级编程 |
-| **Copy Trait** | [L1: 所有权](../01_foundation/01_ownership.md) | L2 Trait、L4 线性逻辑 | 理解 | ⊘ Move ≡ 线性逻辑 weakening |
+| **Cell / RefCell** | [L2: 内存管理](../02_intermediate/02_memory_management/03_memory_management.md) | L1 借用、L3 并发 | 分析 | ← 内部可变性 → 运行时借用检查 |
+| **Const Generics** | [L2: 泛型](../02_intermediate/01_generics/02_generics.md) | L4 类型论、L7 演进 | 分析 | ← 泛型 → 类型级编程 |
+| **Copy Trait** | [L1: 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | L2 Trait、L4 线性逻辑 | 理解 | ⊘ Move ≡ 线性逻辑 weakening |
 | **Concurrency** | [L3: 并发](../03_advanced/01_concurrency.md) | L1 借用、L2 Send/Sync、L4 CSL | 分析 | ← 借用 + Send/Sync → 异步 |
 | **CSP (Communicating Sequential Processes)** | [L5: Rust vs Go](../05_comparative/02_rust_vs_go.md) | L3 并发、L5 范式矩阵 | 评价 | ⊘ 所有权并发 |
 | **Career Landscape** | [L0: 职业市场](career_landscape.md) | L0 Bloom、L6 应用领域 | 知道 | ← 市场数据 → 职业决策 |
@@ -157,8 +157,8 @@
 | **Decision Tree (定理推理)** | [L0: 方法论](methodology.md) | 所有文件 | — | 规范所有推理链的呈现方式 |
 | **Compiler Diagnostics and UI Tests** | [L6: Compiler Diagnostics](../06_ecosystem/69_compiler_diagnostics_and_ui_tests.md) | L4 rustc、L6 基础设施 | 分析 | ← rustc_driver → Lint / UI Test |
 | **Compiler Testing** | [L6: Compiler Testing](../06_ecosystem/71_compiler_testing.md) | L4 rustc、L6 基础设施 | 应用 | ← UI Test → Crater / rustc-perf
-| **Drop Trait** | [L1: 所有权](../01_foundation/01_ownership.md) | L2 Trait、L4 线性逻辑 | 理解 | ← 所有权 → RAII ≡ 资源消耗 |
-| **dyn Trait** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 Trait、L4 类型论 | 分析 | ⊘ impl Trait → 动态分发 |
+| **Drop Trait** | [L1: 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | L2 Trait、L4 线性逻辑 | 理解 | ← 所有权 → RAII ≡ 资源消耗 |
+| **dyn Trait** | [L1: 类型系统](../01_foundation/02_type_system/04_type_system.md) | L2 Trait、L4 类型论 | 分析 | ⊘ impl Trait → 动态分发 |
 
 ### E 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / 学术论文
 
@@ -167,9 +167,9 @@
 | **eBPF Rust Mapping** | [L7: eBPF Rust 映射](../07_future/29_ebpf_rust.md) | L3 Unsafe、L6 生态 | 分析 | ← Unsafe + FFI → 内核可编程 |
 | **Edition Mechanism** | [L7: 语言演进](../07_future/03_evolution.md) | 所有层 | 评价 | ← RFC 流程 → 向后兼容演进 |
 | **Effect System (效果系统)** | [L7: Effects System](../07_future/04_effects_system.md) | L2 泛型、L3 async/const/unsafe、L4 类型论 | 评价 | ← async/const/try → 统一效果语法；effects × substructural types × refinement types 三元愿景 |
-| **Elision Rules** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L2 泛型、L4 区域类型 | 应用 | ← 生命周期标注 → 简化书写 |
-| **enum (Sum Type)** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 错误处理、L4 代数类型 | 理解 | ≡ 和类型 / 余积 (A + B) |
-| **Error Handling (Result/Option)** | [L2: 错误处理](../02_intermediate/04_error_handling.md) | L1 类型系统、L3 异步 | 应用 | ← Option/Result → ? 运算符 |
+| **Elision Rules** | [L1: 生命周期](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | L2 泛型、L4 区域类型 | 应用 | ← 生命周期标注 → 简化书写 |
+| **enum (Sum Type)** | [L1: 类型系统](../01_foundation/02_type_system/04_type_system.md) | L2 错误处理、L4 代数类型 | 理解 | ≡ 和类型 / 余积 (A + B) |
+| **Error Handling (Result/Option)** | [L2: 错误处理](../02_intermediate/03_error_handling/04_error_handling.md) | L1 类型系统、L3 异步 | 应用 | ← Option/Result → ? 运算符 |
 | **Error Pedagogy** | [L0: 学习指南](learning_guide.md) | L0 Bloom、L1-L3 | 应用 | ← 编译错误 → 概念学习 |
 | **embedded-hal-async** | [L6: 嵌入式系统](../06_ecosystem/22_embedded_systems.md) | L3 async、L6 Embassy | 应用 | ← 异步 trait → 嵌入式 I/O |
 | **Cargo Build Scripts** | [L6: Cargo Build Scripts](../06_ecosystem/59_cargo_build_scripts.md) | L6 Toolchain、L6 Dependency Resolution | 应用 | ← Cargo 工作区 → 原生库链接 |
@@ -194,15 +194,15 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **GATs (Generic Associated Types)** | [L2: 泛型](../02_intermediate/02_generics.md) | L2 Trait、L4 类型论 | 评价 | ← 关联类型 + 泛型 → HKT |
-| **Generics** | [L2: 泛型](../02_intermediate/02_generics.md) | L1 类型系统、L4 类型论 | 应用 | ← 类型系统 → 单态化 |
+| **GATs (Generic Associated Types)** | [L2: 泛型](../02_intermediate/01_generics/02_generics.md) | L2 Trait、L4 类型论 | 评价 | ← 关联类型 + 泛型 → HKT |
+| **Generics** | [L2: 泛型](../02_intermediate/01_generics/02_generics.md) | L1 类型系统、L4 类型论 | 应用 | ← 类型系统 → 单态化 |
 | **Gillian-Rust** | [L4: 操作语义](../04_formal/17_operational_semantics.md) | L4 RustBelt、L4 Miri | 评价 | ← 符号执行 + 分离逻辑 → 自动验证
 
 ### H
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **HRTB (Higher-Ranked Trait Bounds)** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L2 Trait、L4 类型论 | 评价 | ← 生命周期 + 泛型 ≡ ∀<'a> |
+| **HRTB (Higher-Ranked Trait Bounds)** | [L1: 生命周期](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | L2 Trait、L4 类型论 | 评价 | ← 生命周期 + 泛型 ≡ ∀<'a> |
 | **HM Type Inference** | [L4: 类型论](../04_formal/02_type_theory.md) | L1 类型系统、L2 泛型 | 分析 | → 类型自动推导 |
 | **hax** | [L6: 形式化验证](../06_ecosystem/74_formal_verification_tools.md) | L4 形式化、L6 密码学 | 分析 | ← Rust → F*/Rocq 翻译 → 验证 |
 | **HIR (High-level IR)** | [L4: Name Resolution and HIR](../04_formal/35_name_resolution_and_hir.md) | L4 rustc、L4 Type System | 分析 | ← AST → Type Checking → MIR
@@ -211,8 +211,8 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **Impl Trait** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 Trait、L4 类型论 | 分析 | ← Trait → 抽象返回类型 |
-| **Interior Mutability** | [L2: 内存管理](../02_intermediate/03_memory_management.md) | L1 借用、L4 分离逻辑 | 分析 | ← Cell/RefCell → 运行时检查 |
+| **Impl Trait** | [L1: 类型系统](../01_foundation/02_type_system/04_type_system.md) | L2 Trait、L4 类型论 | 分析 | ← Trait → 抽象返回类型 |
+| **Interior Mutability** | [L2: 内存管理](../02_intermediate/02_memory_management/03_memory_management.md) | L1 借用、L4 分离逻辑 | 分析 | ← Cell/RefCell → 运行时检查 |
 | **Iris (Logic)** | [L4: RustBelt](../04_formal/04_rustbelt.md) | L3 并发、L4 分离逻辑 | 评价 | → RustBelt 验证框架 |
 
 ### K
@@ -226,9 +226,9 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **Lifetimes ('a)** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L2 泛型、L3 异步、L4 区域类型 | 理解 | ← 借用 → Send/Sync ≡ 区域约束 |
+| **Lifetimes ('a)** | [L1: 生命周期](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | L2 泛型、L3 异步、L4 区域类型 | 理解 | ← 借用 → Send/Sync ≡ 区域约束 |
 | **Linear Logic** | [L4: 线性逻辑](../04_formal/01_linear_logic.md) | L1 所有权、L5 Rust vs C++ | 评价 | ≡ 所有权的形式化根基 |
-| **Liskov Substitution** | [L2: Trait](../02_intermediate/01_traits.md) | L4 子类型 | 理解 | → Trait 对象安全 |
+| **Liskov Substitution** | [L2: Trait](../02_intermediate/00_traits/01_traits.md) | L4 子类型 | 理解 | → Trait 对象安全 |
 | **LLVM Backend and Codegen** | [L6: LLVM Backend](../06_ecosystem/67_llvm_backend_and_codegen.md) | L4 rustc、L6 编译器基础设施 | 分析 | ← MIR → 目标文件 / LTO
 
 ### M
@@ -238,9 +238,9 @@
 | **Macros** | [L3: 宏](../03_advanced/04_macros.md) | L1 类型系统、L4 元编程 | 分析 | ← 语法扩展 → DSL |
 | **MaybeUninit** | [L3: Unsafe](../03_advanced/03_unsafe.md) | L1 所有权、L4 内存模型 | 评价 | ← unsafe → 延迟初始化 |
 | **Memory Model** | [L3: Unsafe](../03_advanced/03_unsafe.md) | L4 RustBelt、L5 对比 | 分析 | → Stacked/Tree Borrows |
-| **Memory Safety** | [L1: 所有权](../01_foundation/01_ownership.md) | 所有层 | 理解 | ← 所有权 + 借用 + 生命周期 |
-| **Monomorphization** | [L2: 泛型](../02_intermediate/02_generics.md) | L4 类型论 | 应用 | ← 泛型 → 零成本抽象 |
-| **Move Semantics** | [L1: 所有权](../01_foundation/01_ownership.md) | L4 线性逻辑 | 理解 | ← 所有权 → 借用 ≡ 资源消耗 |
+| **Memory Safety** | [L1: 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 所有层 | 理解 | ← 所有权 + 借用 + 生命周期 |
+| **Monomorphization** | [L2: 泛型](../02_intermediate/01_generics/02_generics.md) | L4 类型论 | 应用 | ← 泛型 → 零成本抽象 |
+| **Move Semantics** | [L1: 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | L4 线性逻辑 | 理解 | ← 所有权 → 借用 ≡ 资源消耗 |
 | **Mutex / RwLock** | [L3: 并发](../03_advanced/01_concurrency.md) | L2 Send/Sync、L4 分离逻辑 | 应用 | ← Send/Sync → 互斥访问 |
 
 ### N
@@ -248,23 +248,23 @@
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
 | **Newtype Pattern** | [L6: 设计模式](../06_ecosystem/02_patterns.md) | L1 类型系统、L2 Trait | 应用 | ← 零大小类型 → 类型安全 |
-| **NLL (Non-Lexical Lifetimes)** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L4 区域类型 | 分析 | ← 词法作用域 → 控制流敏感 |
+| **NLL (Non-Lexical Lifetimes)** | [L1: 生命周期](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | L4 区域类型 | 分析 | ← 词法作用域 → 控制流敏感 |
 | **Name Resolution** | [L4: Name Resolution and HIR](../04_formal/35_name_resolution_and_hir.md) | L1 模块、L3 宏、L4 rustc | 分析 | ← 命名空间 + Rib → HIR |
 
 ### O
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **Option / Result** | [L2: 错误处理](../02_intermediate/04_error_handling.md) | L1 类型系统、L3 异步 | 应用 | ≡ Maybe Monad → ? 运算符 |
-| **Orphan Rule** | [L2: Trait](../02_intermediate/01_traits.md) | L4 类型论 | 分析 | ← Trait 一致性 → 封装 |
-| **Ownership** | [L1: 所有权](../01_foundation/01_ownership.md) | 所有层 | 理解 | ≡ 线性资源 ⊗ → 借用 |
+| **Option / Result** | [L2: 错误处理](../02_intermediate/03_error_handling/04_error_handling.md) | L1 类型系统、L3 异步 | 应用 | ≡ Maybe Monad → ? 运算符 |
+| **Orphan Rule** | [L2: Trait](../02_intermediate/00_traits/01_traits.md) | L4 类型论 | 分析 | ← Trait 一致性 → 封装 |
+| **Ownership** | [L1: 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 所有层 | 理解 | ≡ 线性资源 ⊗ → 借用 |
 
 ### P
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
 | **Paradigm Matrix** | [L5: 范式矩阵](../05_comparative/03_paradigm_matrix.md) | L1-L4 | 评价 | ← 所有基础概念 → 语言选型 |
-| **Pattern Matching** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 错误处理 | 应用 | ← enum → 穷尽性检查 |
+| **Pattern Matching** | [L1: 类型系统](../01_foundation/02_type_system/04_type_system.md) | L2 错误处理 | 应用 | ← enum → 穷尽性检查 |
 | **Pin** | [L3: 异步](../03_advanced/02_async.md) | L1 借用、L2 内存管理、L4 形式化 | 分析 | ← 自引用 → Future 安全 |
 | **Proc Macros** | [L3: 宏](../03_advanced/04_macros.md) | L1 类型系统 | 分析 | ← 编译器插件 → 派生宏 |
 
@@ -272,8 +272,8 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **RAII** | [L1: 所有权](../01_foundation/01_ownership.md) | L2 内存管理、L6 设计模式 | 理解 | ← Drop → 资源自动管理 |
-| **Rc / RefCell** | [L2: 内存管理](../02_intermediate/03_memory_management.md) | L1 借用、L4 内存安全 | 分析 | ← 内部可变性 → 循环引用 |
+| **RAII** | [L1: 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | L2 内存管理、L6 设计模式 | 理解 | ← Drop → 资源自动管理 |
+| **Rc / RefCell** | [L2: 内存管理](../02_intermediate/02_memory_management/03_memory_management.md) | L1 借用、L4 内存安全 | 分析 | ← 内部可变性 → 循环引用 |
 | **Region Types** | [L4: 所有权形式化](../04_formal/03_ownership_formal.md) | L1 生命周期 | 评价 | ≡ 生命周期 |
 | **repr** | [L3: Unsafe](../03_advanced/03_unsafe.md) | L5 Rust vs C++ | 应用 | ← FFI → 内存布局控制 |
 | **Representational Space (表征空间)** | [L0: 语义空间](semantic_space.md) | 所有层 | 评价 | ← 所有概念 → 能/不能表达边界 |
@@ -288,20 +288,20 @@
 |:---|:---|:---|:---|:---|
 | **Send / Sync** | [L3: 并发](../03_advanced/01_concurrency.md) | L1 所有权、L2 Trait、L4 CSL | 分析 | ← 所有权 + 借用 → 并发安全 |
 | **Separation Logic** | [L4: RustBelt](../04_formal/04_rustbelt.md) | L1 借用、L3 并发 | 评价 | ≡ 借用规则 + 并发安全 |
-| **Specialization** | [L2: Trait](../02_intermediate/01_traits.md) | L4 类型论、L7 演进 | 评价 | ← 泛型 → 特化实现 |
+| **Specialization** | [L2: Trait](../02_intermediate/00_traits/01_traits.md) | L4 类型论、L7 演进 | 评价 | ← 泛型 → 特化实现 |
 | **Stacked Borrows / Tree Borrows** | [L4: RustBelt](../04_formal/04_rustbelt.md) | L3 Unsafe、L4 形式化 | 评价 | → Unsafe 代码别名规则 |
-| **struct (Product Type)** | [L1: 类型系统](../01_foundation/04_type_system.md) | L4 代数类型 | 理解 | ≡ 积类型 / 记录 (A × B) |
-| **Subtyping / Variance** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L4 类型论 | 分析 | ← 生命周期 → 类型安全 |
-| **Supertrait** | [L2: Trait](../02_intermediate/01_traits.md) | L4 子类型 | 理解 | ← Trait 继承 → 组合约束 |
+| **struct (Product Type)** | [L1: 类型系统](../01_foundation/02_type_system/04_type_system.md) | L4 代数类型 | 理解 | ≡ 积类型 / 记录 (A × B) |
+| **Subtyping / Variance** | [L1: 生命周期](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | L4 类型论 | 分析 | ← 生命周期 → 类型安全 |
+| **Supertrait** | [L2: Trait](../02_intermediate/00_traits/01_traits.md) | L4 子类型 | 理解 | ← Trait 继承 → 组合约束 |
 | **System Composability** | [L6: 系统可组合性](../06_ecosystem/30_system_composability.md) | L1 所有权、L2 Trait、L3 异步 | 评价 | ← Trait + 泛型 + 异步 → 架构组合 |
 
 ### T
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **Trait** | [L2: Trait](../02_intermediate/01_traits.md) | L1 类型系统、L3 并发、L4 类型论 | 应用 | ← 类型系统 → 泛型约束 |
-| **Trait Bounds** | [L2: Trait](../02_intermediate/01_traits.md) | L2 泛型、L4 约束求解 | 应用 | ← Trait + 泛型 → where 子句 |
-| **Trait Objects (dyn)** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 Trait、L4 存在类型 | 分析 | ⊘ 泛型 → 动态分发 |
+| **Trait** | [L2: Trait](../02_intermediate/00_traits/01_traits.md) | L1 类型系统、L3 并发、L4 类型论 | 应用 | ← 类型系统 → 泛型约束 |
+| **Trait Bounds** | [L2: Trait](../02_intermediate/00_traits/01_traits.md) | L2 泛型、L4 约束求解 | 应用 | ← Trait + 泛型 → where 子句 |
+| **Trait Objects (dyn)** | [L1: 类型系统](../01_foundation/02_type_system/04_type_system.md) | L2 Trait、L4 存在类型 | 分析 | ⊘ 泛型 → 动态分发 |
 | **Typestate Pattern** | [L6: 设计模式](../06_ecosystem/02_patterns.md) | L1 所有权、L2 泛型 | 分析 | ← 所有权 → 编译期状态机 |
 | **Core Crates** | [L6: 核心库谱系](../06_ecosystem/03_core_crates.md) | L1-L5 全部 | 应用 | ← 概念 → 工程选型 |
 | **serde** | [L6: 核心库谱系](../06_ecosystem/03_core_crates.md) | L2 Trait、L1 类型系统 | 应用 | ← derive → 序列化 |
@@ -315,7 +315,7 @@
 | **Game Engine** | [L6: 应用主题](../06_ecosystem/04_application_domains.md) | L3 unsafe、L2 泛型 | 应用 | ← bevy → ECS |
 | **Trait Solver** | [L4: Trait Solver in rustc](../04_formal/26_trait_solver_in_rustc.md) | L2 Trait、L4 Type Inference | 分析 | ← Obligation → Selection / Fulfillment |
 | **Type Checking and Inference** | [L4: Type Checking](../04_formal/27_type_checking_and_inference.md) | L4 Trait Solver、L4 Name Resolution | 分析 | ← HIR → MIR / Borrow Check |
-| **Type System** | [L1: 类型系统](../01_foundation/04_type_system.md) | 所有层 | 理解 | → 所有类型相关概念 |
+| **Type System** | [L1: 类型系统](../01_foundation/02_type_system/04_type_system.md) | 所有层 | 理解 | → 所有类型相关概念 |
 
 ### U
 
@@ -329,7 +329,7 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **Variance** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L4 类型论 | 分析 | ← 子类型 → 生命周期安全 |
+| **Variance** | [L1: 生命周期](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | L4 类型论 | 分析 | ← 子类型 → 生命周期安全 |
 
 ### W
 
@@ -355,8 +355,8 @@
 | 文件 | 定义侧重点 | 一致性检查 |
 |:---|:---|:---|
 | [L3: 异步](../03_advanced/02_async.md) | Pin 的核心定义：自引用安全 | ✅ 主定义 |
-| [L1: 借用](../01_foundation/02_borrowing.md) | Pin 与借用规则的交互 | ⚠️ 需链接到主定义 |
-| [L2: 内存管理](../02_intermediate/03_memory_management.md) | Pin 在堆内存中的使用 | ⚠️ 需链接到主定义 |
+| [L1: 借用](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | Pin 与借用规则的交互 | ⚠️ 需链接到主定义 |
+| [L2: 内存管理](../02_intermediate/02_memory_management/03_memory_management.md) | Pin 在堆内存中的使用 | ⚠️ 需链接到主定义 |
 | [L4: 形式化](../04_formal/03_ownership_formal.md) | Pin 的形式化语义 | ✅ 已添加 🔍 待补充标记，链接到 L3 §8 |
 
 **一致性要求**: 所有文件中对 Pin 的定义必须以 L3 为准，差异处需显式标注。
@@ -366,7 +366,7 @@
 | 文件 | 定义侧重点 | 一致性检查 |
 |:---|:---|:---|
 | [L3: 并发](../03_advanced/01_concurrency.md) | Send/Sync 的完整定义与规则 | ✅ 主定义 |
-| [L2: Trait](../02_intermediate/01_traits.md) | Send/Sync 作为 Auto Trait 的特性 | ✅ 已链接 |
+| [L2: Trait](../02_intermediate/00_traits/01_traits.md) | Send/Sync 作为 Auto Trait 的特性 | ✅ 已链接 |
 | [L4: RustBelt](../04_formal/04_rustbelt.md) | Send/Sync 的并发分离逻辑语义 | ✅ 已显式映射 |
 
 ### 3.3 Unsafe（出现在 3+ 个文件中）
@@ -374,7 +374,7 @@
 | 文件 | 定义侧重点 | 一致性检查 |
 |:---|:---|:---|
 | [L3: Unsafe](../03_advanced/03_unsafe.md) | Unsafe 的完整定义与安全契约 | ✅ 主定义 |
-| [L1: 所有权](../01_foundation/01_ownership.md) | Unsafe 突破所有权 | ✅ 已标注边界条件 |
+| [L1: 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Unsafe 突破所有权 | ✅ 已标注边界条件 |
 | [L5: Rust vs C++](../05_comparative/01_rust_vs_cpp.md) | Unsafe 在对比语境中的意义 | ✅ 已对齐 |
 | [L4: RustBelt](../04_formal/04_rustbelt.md) | Unsafe 在形式化中的范围 | ✅ 一致: unsafe 在证明范围外 |
 
@@ -382,8 +382,8 @@
 
 | 文件 | 定义侧重点 | 一致性检查 |
 |:---|:---|:---|
-| [L1: 生命周期](../01_foundation/03_lifetimes.md) | 核心定义、标注、Elision | ✅ 主定义 |
-| [L2: 泛型](../02_intermediate/02_generics.md) | 生命周期作为泛型参数 | ⚠️ 需链接 |
+| [L1: 生命周期](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 核心定义、标注、Elision | ✅ 主定义 |
+| [L2: 泛型](../02_intermediate/01_generics/02_generics.md) | 生命周期作为泛型参数 | ⚠️ 需链接 |
 | [L3: 异步](../03_advanced/02_async.md) | 生命周期在 Future 中的传播 | ⚠️ 需链接 |
 | [L4: 形式化](../04_formal/03_ownership_formal.md) | 区域类型的形式化对应 | ✅ 已显式映射 |
 
@@ -546,7 +546,7 @@
 
 | 项目 | 规范 |
 |:---|:---|
-| **主定义文件** | [`../01_foundation/03_lifetimes.md`](../01_foundation/03_lifetimes.md) §1–§4 |
+| **主定义文件** | [`../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) §1–§4 |
 | **核心语义** | 生命周期是引用的**有效范围标注**，编译器通过区域约束求解验证 "引用不悬垂"；`'static` 是最大（最长久）生命周期 |
 | **允许的差异** | L2/L3/L4 文件可从泛型参数（L2）、async 捕获（L3）、区域类型形式化（L4）角度扩展，但不得与 "有效范围" 核心定义冲突 |
 | **一致性检查** | 禁止将生命周期描述为 "运行时存在的东西" 或 "引用计数"；必须强调生命周期是**编译期静态分析**的抽象 |
@@ -682,11 +682,11 @@
 
 | 判定树 | 概念文件 | 判定节点数 | 边界条件数 | 失效模式数 |
 |:---|:---|:---:|:---:|:---:|
-| 所有权判定树 | `01_foundation/01_ownership.md` | 3 | 3 | 5 |
-| 借用判定树 | `01_foundation/02_borrowing.md` | 2 | 4 | 4 |
-| 生命周期判定树 | `01_foundation/03_lifetimes.md` | 3 | 4 | 5 |
-| Trait 判定树 | `02_intermediate/01_traits.md` | 4 | 3 | 4 |
-| 泛型判定树 | `02_intermediate/02_generics.md` | 3 | 4 | 4 |
+| 所有权判定树 | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | 3 | 3 | 5 |
+| 借用判定树 | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | 2 | 4 | 4 |
+| 生命周期判定树 | `01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` | 3 | 4 | 5 |
+| Trait 判定树 | `02_intermediate/00_traits/01_traits.md` | 4 | 3 | 4 |
+| 泛型判定树 | `02_intermediate/01_generics/02_generics.md` | 3 | 4 | 4 |
 | 并发判定树 | `03_advanced/01_concurrency.md` | 3 | 4 | 5 |
 | 异步判定树 | `03_advanced/02_async.md` | 4 | 4 | 5 |
 | Unsafe 判定树 | `03_advanced/03_unsafe.md` | 3 | 5 | 6 |

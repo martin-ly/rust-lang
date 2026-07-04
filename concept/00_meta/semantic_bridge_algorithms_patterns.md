@@ -276,7 +276,7 @@ eval = cata(f)                  // catamorphism（折叠）
 
 Composite 的 `eval` 就是一个 catamorphism；工作流 Sequence 则是把该 catamorphism 展开为线性指令序列。**后序遍历 + 节点聚合**的统一结构正是初始代数的折叠语义。[来源: [Category Theory for Programmers — Bartosz Milewski](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
 
-> **关联章节**: [Control Flow](../01_foundation/07_control_flow.md) · [Design Patterns](../06_ecosystem/02_patterns.md) · [Algorithms](../06_ecosystem/29_algorithms_competitive_programming.md)
+> **关联章节**: [Control Flow](../01_foundation/04_control_flow/07_control_flow.md) · [Design Patterns](../06_ecosystem/02_patterns.md) · [Algorithms](../06_ecosystem/29_algorithms_competitive_programming.md)
 
 ---
 
@@ -452,7 +452,7 @@ DP 的填表顺序则是 DAG 拓扑排序的一种具体实现。
 [来源: [Wikipedia — Lazy Evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation)] ·
 [来源: [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition)]
 
-> **关联章节**: [Iterator Patterns](../02_intermediate/15_iterator_patterns.md) · [Closures](../01_foundation/15_closure_basics.md) · [Algorithms](../06_ecosystem/29_algorithms_competitive_programming.md)
+> **关联章节**: [Iterator Patterns](../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) · [Closures](../01_foundation/00_start/15_closure_basics.md) · [Algorithms](../06_ecosystem/29_algorithms_competitive_programming.md)
 
 ---
 
@@ -592,7 +592,7 @@ Iterator 的惰性本质把图这一余代数结构展开为**最终的 `Option<
 因此，图遍历 ↔ Visitor ↔ Iterator 的同构可以概括为：**从图的余代数到线性轨迹的展开，再对轨迹施加代数操作**。
 [来源: [Category Theory for Programmers — Coalgebras](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
 
-> **关联章节**: [Visitor](../06_ecosystem/02_patterns.md) · [Iterator Patterns](../02_intermediate/15_iterator_patterns.md) · [Control Flow](../01_foundation/07_control_flow.md)
+> **关联章节**: [Visitor](../06_ecosystem/02_patterns.md) · [Iterator Patterns](../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) · [Control Flow](../01_foundation/04_control_flow/07_control_flow.md)
 
 ---
 

@@ -8,7 +8,7 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Specification / Systems
 > **双维定位**: S×Sys — 语言与运行时（Runtime）系统
-> **前置依赖**: [Memory Management](../02_intermediate/03_memory_management.md) · [Custom Allocators](14_custom_allocators.md) · [Linkage](27_linkage.md)
+> **前置依赖**: [Memory Management](../02_intermediate/02_memory_management/03_memory_management.md) · [Custom Allocators](14_custom_allocators.md) · [Linkage](27_linkage.md)
 > **后置概念**: [Embedded Systems](../06_ecosystem/22_embedded_systems.md) · [Unsafe Rust](03_unsafe.md)
 > **定理链**: Runtime Attribute → Allocation / Subsystem → Binary Behavior
 > **主要来源**: [Rust Reference — The Rust Runtime](https://doc.rust-lang.org/reference/runtime.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)

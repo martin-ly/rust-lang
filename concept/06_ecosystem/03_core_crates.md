@@ -19,7 +19,7 @@
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: P×Eva — 评估生态 crate 的安全性和可维护性
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)]
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)]
 > **后置概念**: [Application Domains](04_application_domains.md)
 > **主要来源**: [crates.io](https://crates.io) · [lib.rs](https:/lib.rs) · [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -687,9 +687,9 @@ graph TD
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权 / Drop | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | RAII 资源管理根基 |
-| Trait 系统 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | derive 宏 + 接口抽象 |
-| 泛型 | [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) | 零成本抽象（Zero-Cost Abstraction） |
+| 所有权 / Drop | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | RAII 资源管理根基 |
+| Trait 系统 | [`../02_intermediate/00_traits/01_traits.md`](../02_intermediate/00_traits/01_traits.md) | derive 宏 + 接口抽象 |
+| 泛型 | [`../02_intermediate/01_generics/02_generics.md`](../02_intermediate/01_generics/02_generics.md) | 零成本抽象（Zero-Cost Abstraction） |
 | 异步（Async）编程 | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | tokio/axum 根基 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | FFI/密码学边界 |
 | 宏系统 | [`../03_advanced/04_macros.md`](../03_advanced/04_macros.md) | serde/clap derive |
@@ -1126,7 +1126,7 @@ graph TD
 > **过渡: L6 → L1**
 >
 > Crate 生态不是 Rust 语言的附加品——它是所有权系统的自然延伸。`serde` 的 derive 宏利用编译期反射，`tokio` 的异步（Async）运行时建立在 `Pin` 和生命周期（Lifetimes）之上，`rayon` 的数据并行依赖 `Send`/`Sync` 的保证。理解这些 crate 的设计，需要回到 Rust 核心概念。
-> 核心概念见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权）与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)（并发安全）。
+> 核心概念见 [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)（所有权）与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)（并发安全）。
 > **过渡: L6 → L4**
 > 形式化验证工具（Kani、Miri、RustBelt）正在进入 crates.io 的供应链。`cargo-kani`、`cargo-miri` 等插件让形式化验证从学术研究走向 CI/CD 流水线——这不是未来，而是正在发生的生态演进。
 > 形式化工具链见 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)。 [来源: [crates.io](https://crates.io/)]

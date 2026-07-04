@@ -8,8 +8,8 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
-> **前置依赖**: [Type System](../01_foundation/04_type_system.md) · [Expressions](../01_foundation/07_control_flow.md) · [Functions](../01_foundation/07_control_flow.md)
-> **后置概念**: [Generics](../02_intermediate/02_generics.md) · [Const Generics](../02_intermediate/02_generics.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
+> **前置依赖**: [Type System](../01_foundation/02_type_system/04_type_system.md) · [Expressions](../01_foundation/04_control_flow/07_control_flow.md) · [Functions](../01_foundation/04_control_flow/07_control_flow.md)
+> **后置概念**: [Generics](../02_intermediate/01_generics/02_generics.md) · [Const Generics](../02_intermediate/01_generics/02_generics.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 > **定理链**: Const Context → Constant Expression → Compile-time Evaluation
 > **主要来源**: [Rust Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Tarditi — Design and Implementation of Code Optimization](https://www.microsoft.com/en-us/research/publication/design-and-implementation-of-code-optimization/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
@@ -135,7 +135,7 @@ const VALUE: i32 = square(12);
 
 | 概念 | 关系 |
 |:---|:---|
-| [Generics](../02_intermediate/02_generics.md) | const 泛型参数扩展了常量求值的应用 |
+| [Generics](../02_intermediate/01_generics/02_generics.md) | const 泛型参数扩展了常量求值的应用 |
 | [Unsafe Rust](../03_advanced/03_unsafe.md) | const 块中允许使用 `unsafe` 块，但需满足常量表达式规则 |
 | [Memory Model](../03_advanced/29_memory_model.md) | 常量求值涉及初始化字节、指针 provenance 等内存模型概念 |
 | [Application Binary Interface](38_application_binary_interface.md) | `static` 初始化与 ABI 属性交互 |

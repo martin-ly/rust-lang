@@ -12,8 +12,8 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×App
-> **前置概念**: [Type System Basics](../04_type_system.md) · [Functions and Control Flow](../07_control_flow.md)
-> **后置概念**: [Generics](../../02_intermediate/02_generics.md) · [Constant Evaluation](../../04_formal/39_constant_evaluation.md) · [Unsafe Rust](../../03_advanced/03_unsafe.md)
+> **前置概念**: [Type System Basics](../02_type_system/04_type_system.md) · [Functions and Control Flow](../04_control_flow/07_control_flow.md)
+> **后置概念**: [Generics](../../02_intermediate/01_generics/02_generics.md) · [Constant Evaluation](../../04_formal/39_constant_evaluation.md) · [Unsafe Rust](../../03_advanced/03_unsafe.md)
 >
 > **主要来源**: [The Rust Reference — Constant Items](https://doc.rust-lang.org/reference/items/constant-items.html) ·
 > [The Rust Reference — Const Functions](https://doc.rust-lang.org/reference/const_eval.html#const-functions) ·

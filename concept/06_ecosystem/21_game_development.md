@@ -13,7 +13,7 @@
 > **双维定位**: P×Cre — 设计游戏开发架构
 > **定位**: 分析 Rust 在游戏开发领域的生态格局——从 Bevy ECS 到 WGPU 图形渲染，探讨 Rust 的内存安全（Memory Safety）与性能优势如何重塑游戏引擎设计。
 > **前置概念**: [Concurrency](../03_advanced/01_concurrency.md) ·
-> [Type System](../01_foundation/04_type_system.md) ·
+> [Type System](../01_foundation/02_type_system/04_type_system.md) ·
 > [Performance](15_performance_optimization.md)
 > **后置概念**: [WebAssembly](11_webassembly.md) ·
 > [ECS](04_application_domains.md)
@@ -53,13 +53,13 @@
   - [十、边界测试：游戏开发的编译错误](#十边界测试游戏开发的编译错误)
     - [10.1 边界测试：Bevy 的 Resource 与 System 参数（编译错误）](#101-边界测试bevy-的-resource-与-system-参数编译错误)
     - [10.2 边界测试：游戏循环中的 `Send` 约束（编译错误）](#102-边界测试游戏循环中的-send-约束编译错误)
-    - [10.3 边界测试：游戏循环中的固定时间步长与渲染解耦（运行时（Runtime）卡顿）](#103-边界测试游戏循环中的固定时间步长与渲染解耦运行时卡顿)
+    - [10.3 边界测试：游戏循环中的固定时间步长与渲染解耦（运行时卡顿）](#103-边界测试游戏循环中的固定时间步长与渲染解耦运行时卡顿)
     - [10.4 边界测试：WGPU 的着色器编译与平台支持差异（运行时 panic）](#104-边界测试wgpu-的着色器编译与平台支持差异运行时-panic)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：为什么 Rust 在游戏开发中越来越受到关注？与传统 C++ 相比有什么优势？（理解层）](#测验-1为什么-rust-在游戏开发中越来越受到关注与传统-c-相比有什么优势理解层)
     - [测验 2：`Bevy` 引擎的 ECS（Entity-Component-System）架构与传统 OOP 继承树有什么区别？（理解层）](#测验-2bevy-引擎的-ecsentity-component-system架构与传统-oop-继承树有什么区别理解层)
-    - [测验 3：Rust 的所有权（Ownership）系统对游戏开发中的"场景图"（Scene Graph）设计有什么影响？（理解层）](#测验-3rust-的所有权系统对游戏开发中的场景图scene-graph设计有什么影响理解层)
+    - [测验 3：Rust 的所有权系统对游戏开发中的"场景图"（Scene Graph）设计有什么影响？（理解层）](#测验-3rust-的所有权系统对游戏开发中的场景图scene-graph设计有什么影响理解层)
     - [测验 4：`wgpu` 在 Rust 图形生态中扮演什么角色？（理解层）](#测验-4wgpu-在-rust-图形生态中扮演什么角色理解层)
     - [测验 5：Rust 的游戏开发生态目前相比 Unity/Unreal 的主要短板是什么？（理解层）](#测验-5rust-的游戏开发生态目前相比-unityunreal-的主要短板是什么理解层)
   - [认知路径](#认知路径)

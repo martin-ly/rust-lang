@@ -29,8 +29,8 @@
 > **前置概念**:
 >
 > [Unsafe](../03_advanced/03_unsafe.md) ·
-> [Ownership](../01_foundation/01_ownership.md) ·
-> [Type System](../01_foundation/04_type_system.md)
+> [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Type System](../01_foundation/02_type_system/04_type_system.md)
 >
 > **后置概念**: [Safety Tags](08_safety_tags_preview.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -397,8 +397,8 @@ graph TD
 ## 相关概念文件
 
 - [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust 与内存安全（Memory Safety）
-- [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）与借用（Borrowing）
-- [Type System](../01_foundation/04_type_system.md) — Rust 类型系统（Type System）
+- [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）与借用（Borrowing）
+- [Type System](../01_foundation/02_type_system/04_type_system.md) — Rust 类型系统（Type System）
 - [Safety Tags](08_safety_tags_preview.md) — 安全契约机器可读标注
 - [Version Tracking](05_rust_version_tracking.md) — Rust 版本特性演进
 

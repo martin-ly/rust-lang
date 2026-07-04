@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 交叉编译工具链的应用
 > **定位**: 分析 Rust **交叉编译**生态——从 target triple 的语义、条件编译（cfg）、到不同架构（x86_64/ARM/RISC-V/WASM）的编译策略，揭示 Rust 如何在不修改源代码的情况下支持从嵌入式到服务器的全谱系平台。
-> **前置概念**: [Toolchain](01_toolchain.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Toolchain](01_toolchain.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [WASI](08_wasi.md) · [WebAssembly](11_webassembly.md)
 
 ---

@@ -4,7 +4,7 @@
 > [SAE J3016](https://www.sae.org/standards/content/j3016_202104/),
 > [Rust Reference](https://doc.rust-lang.org/reference/)
 >
-> **相关概念**: [DSL](../../../../concept/02_intermediate/13_dsl_and_embedding.md)
+> **相关概念**: [DSL](../../../../concept/02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增自动驾驶 Rust 应用案例来源标注 [来源: Authority Source Sprint Batch 8]
 >

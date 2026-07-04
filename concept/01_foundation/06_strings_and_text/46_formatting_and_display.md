@@ -12,8 +12,8 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: C×App
-> **前置概念**: [Strings and Text](../09_strings_and_text.md) · [Traits](../../02_intermediate/01_traits.md)
-> **后置概念**: [Error Handling](../../02_intermediate/04_error_handling.md) · [Logging and Tracing](../../06_ecosystem/79_development_tools.md)
+> **前置概念**: [Strings and Text](09_strings_and_text.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
+> **后置概念**: [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Logging and Tracing](../../06_ecosystem/79_development_tools.md)
 >
 > **主要来源**: [std::fmt](https://doc.rust-lang.org/std/fmt/index.html) ·
 > [The Rust Programming Language — Printing Values](https://doc.rust-lang.org/book/ch01-02-hello-world.html) ·

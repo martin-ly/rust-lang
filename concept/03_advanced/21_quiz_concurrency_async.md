@@ -19,7 +19,7 @@
 > **前置概念**:
 > [Concurrency](01_concurrency.md) ·
 > [Async/Await](02_async.md) ·
-> [Ownership](../01_foundation/01_ownership.md)
+> [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 >
 > **对应练习**:
 > [`exercises/src/concurrency/`](../../exercises/src/concurrency) ·
@@ -691,7 +691,7 @@ println!("Result: {}", *counter.lock().unwrap());
 | 10/10 | 🏆 并发/异步（Async）已内化 | 进阶至 [Lock-Free](16_lock_free.md) 或 [Stream Processing](20_stream_processing_semantics.md) |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [并发练习](../../exercises/src/concurrency) 和 [异步（Async）练习](../../exercises/src/async_programming) |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Concurrency](01_concurrency.md) · [Async](02_async.md) |
-| 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../01_foundation/01_ownership.md) 确认 Send/Sync 基础，再读并发章节 |
+| 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 确认 Send/Sync 基础，再读并发章节 |
 
 ---
 

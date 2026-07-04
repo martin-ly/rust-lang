@@ -504,7 +504,7 @@ impl<T> Vec<T> {
 
 - [上级目录](../README.md)
 - [形式化验证工具链 (concept)](../../concept/04_formal/05_verification_toolchain.md) — 概念层工具链全景与 2026 状态矩阵
-- [Tree Borrows (concept)](../../concept/01_foundation/05_reference_semantics.md) — PLDI 2025 Distinguished Paper 别名模型详解
+- [Tree Borrows (concept)](../../concept/01_foundation/03_values_and_references/05_reference_semantics.md) — PLDI 2025 Distinguished Paper 别名模型详解
 - [安全关键认证 (concept)](../../concept/04_formal/16_aerospace_certification_formal_methods.md) — Ferrocene 认证与形式化方法工业映射
 
 ---

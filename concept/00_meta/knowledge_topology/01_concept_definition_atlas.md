@@ -14,152 +14,152 @@
 
 | 编号 | 中文名 | EN | 定义 | 来源数 |
 |:---|:---|:---|:---|:---:|
-| `03_bloom_taxonomy` | [Bloom Taxonomy](../../00_meta/03_bloom_taxonomy.md) | Bloom Taxonomy | Bloom's taxonomy adapted for Rust cognitive skill assessment, mapping remembering to creation across knowledge dimensions. | 7 |
-| `05_cross_reference_matrix` | [Cross Reference Matrix](../../00_meta/05_cross_reference_matrix.md) | Cross Reference Matrix | — | 0 |
-| `08_concept_audit_guide` | [Concept Audit Guide](../../00_meta/08_concept_audit_guide.md) | Concept Audit Guide | Concept Audit Guide. Core Rust concept. | 2 |
-| `asp_marking_guide` | [Rust 知识体系 A/S/P 三维认知标记规范](../../00_meta/asp_marking_guide.md) | Asp Marking Guide | Asp Marking Guide. Core Rust concept. | 5 |
-| `audit_checklist` | [概念一致性检查清单](../../00_meta/audit_checklist.md) | Audit Checklist | Audit Checklist. Core Rust concept. | 19 |
-| `authority_source_map` | [权威来源映射表](../../00_meta/authority_source_map.md) | Authority Source Map | Authority Source Map. Core Rust concept. | 12 |
-| `bilingual_template` | [Concept 文件双语模板](../../00_meta/bilingual_template.md) | Bilingual Concept Template | Standardized bilingual header template for all `concept/` files to support internationalization. | 6 |
-| `boundary_extension_tree` | [Rust 安全边界扩展推理树](../../00_meta/boundary_extension_tree.md) | Boundary Extension Tree | A reasoning tree for extending Rust's safety boundaries across unsafe, FFI, and formal-verification layers. | 11 |
-| `career_landscape` | [Rust 职业市场全景：2026 年数据与分析](../../00_meta/career_landscape.md) | Career Landscape | Career Landscape. Core Rust concept. | 11 |
-| `cognitive_dimension_matrix` | [Rust 知识体系双维认知矩阵](../../00_meta/cognitive_dimension_matrix.md) | Cognitive Dimension Matrix | Cognitive Dimension Matrix. Core Rust concept. | 7 |
-| `competency_graph` | [Rust 知识体系能力图谱](../../00_meta/competency_graph.md) | Competency Graph | Competency Graph. Core Rust concept. | 6 |
-| `comprehensive_rust_mapping` | [Comprehensive Rust 课程映射](../../00_meta/comprehensive_rust_mapping.md) | Comprehensive Rust Mapping | Comprehensive Rust Mapping. Core Rust concept. | 6 |
-| `concept_consistency_audit_checklist` | [概念一致性（Coherence）检查清单](../../00_meta/concept_consistency_audit_checklist.md) | Concept Consistency Audit Checklist | — | 0 |
-| `concept_definition_decision_forest` | [Rust 知识体系概念定义判定森林](../../00_meta/concept_definition_decision_forest.md) | Concept Definition Decision Forest | Concept Definition Decision Forest. Core Rust concept. | 6 |
-| `concept_index` | [全局概念索引](../../00_meta/concept_index.md) | Concept Index | Concept Index. Core Rust concept. | 22 |
-| `cpp_rust_engineering_roadmap` | [C/C++ → Rust 工程层对比路线图](../../00_meta/cpp_rust_engineering_roadmap.md) | C/C++ to Rust Engineering Comparison Roadmap | A unified roadmap and index for all C/C++ engineering-level comparison files, helping C++ programmers migrate to Rust through structured topic clusters. | 4 |
-| `decidability_spectrum` | [Rust 编译期可判定性谱系全景](../../00_meta/decidability_spectrum.md) | Decidability Spectrum | Decidability Spectrum. Core Rust concept. | 23 |
-| `expressiveness_multiview` | [Rust 语义表达力多视角深化](../../00_meta/expressiveness_multiview.md) | Expressiveness Multiview | Expressiveness Multiview. Core Rust concept. | 26 |
-| `fault_tree_analysis_collection` | [Rust 知识体系失效分析树集](../../00_meta/fault_tree_analysis_collection.md) | Fault Tree Analysis Collection | Fault Tree Analysis Collection. Core Rust concept. | 8 |
-| `foundations_gap_closure_index` | [基础知识缺口补全总索引](../../00_meta/foundations_gap_closure_index.md) | Foundations Gap Closure Index | A completion index tracking the closure of foundational knowledge gaps identified in SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md across Phase A, B, and C. | 4 |
-| `grading_system` | [内容分级与受众标签体系](../../00_meta/grading_system.md) | Grading System | Grading System. Core Rust concept. | 2 |
-| `inter_layer_map` | [跨层知识图谱](../../00_meta/inter_layer_map.md) | Inter Layer Map | Inter Layer Map. Core Rust concept. | 14 |
-| `inter_layer_topology` | [Rust 知识体系跨层依赖与蕴含拓扑图](../../00_meta/inter_layer_topology.md) | Cross-layer Dependency and Implication Topology | — | 0 |
-| `intra_layer_model_map` | [Rust 知识体系层次内模型间映射图](../../00_meta/intra_layer_model_map.md) | Intra Layer Model Map | Intra Layer Model Map. Core Rust concept. | 4 |
-| `kg_ontology_v2` | [Rust 知识体系知识图谱本体规范 v2.0](../../00_meta/kg_ontology_v2.md) | Knowledge Graph Ontology v2.0 | Upgraded KG ontology aligned with RDF 1.2, RDF-star, SKOS multilingual labels, and SHACL validation. | 2 |
-| `kg_tlo_alignment` | [Rust 知识体系顶层本体（TLO）对齐](../../00_meta/kg_tlo_alignment.md) | Top-level Ontology Alignment for Rust Knowledge Graph | Maps project knowledge-graph entities to upper ontologies (BFO / DOLCE) for semantic-web interoperability and engineering reference. | 3 |
-| `knowledge_mindmap` | [Rust 知识体系全局思维导图](../../00_meta/knowledge_mindmap.md) | Knowledge Mindmap | Knowledge Mindmap. Core Rust concept. | 8 |
-| `01_concept_definition_atlas` | [概念定义图谱](../../00_meta/knowledge_topology/01_concept_definition_atlas.md) | Concept Definition Atlas | 全部核心概念的中英名称、层级、一句话定义、权威来源、同义/近义/反义关系。 | 2 |
-| `02_attribute_relationship_atlas` | [属性关系图谱](../../00_meta/knowledge_topology/02_attribute_relationship_atlas.md) | Attribute Relationship Atlas | 概念属性矩阵：每个核心概念的必备/可选属性、内容分级、A/S/P、Bloom 层级、定理链。 | 3 |
-| `03_scenario_decision_tree_atlas` | [场景决策树图谱](../../00_meta/knowledge_topology/03_scenario_decision_tree_atlas.md) | Scenario Decision Tree Atlas | 典型开发场景 → 决策问题 → 候选方案 → Rust 概念/工具选择。 | 2 |
-| `04_example_counterexample_atlas` | [示例与反例图谱](../../00_meta/knowledge_topology/04_example_counterexample_atlas.md) | Example and Counterexample Atlas | 按概念组织的正确示例、错误示例、边界示例与反例分析。 | 2 |
-| `05_logical_reasoning_atlas` | [逻辑推理图谱](../../00_meta/knowledge_topology/05_logical_reasoning_atlas.md) | Logical Reasoning Atlas | 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。 | 2 |
-| `06_inter_layer_mapping_atlas` | [层间映射图谱](../../00_meta/knowledge_topology/06_inter_layer_mapping_atlas.md) | Inter-Layer Mapping Atlas | L0–L7 各层之间的依赖、蕴含、反馈关系，基于前置/后置概念引用统计。 | 2 |
-| `07_intra_layer_mapping_atlas` | [层内映射图谱](../../00_meta/knowledge_topology/07_intra_layer_mapping_atlas.md) | Intra-Layer Mapping Atlas | 每层内部核心模型/概念间的等价、蕴含、依赖、互斥关系，基于同层前置/后置引用。 | 2 |
-| `08_concept_source_alignment_atlas` | [概念-权威来源对齐图谱](../../00_meta/knowledge_topology/08_concept_source_alignment_atlas.md) | Concept-Source Alignment Atlas | 每个核心概念与国际化权威来源的对齐：Rust Reference、TRPL、RFCs、学术、课程、工业、标准。 | 2 |
-| `09_reasoning_judgment_tree_atlas` | [推理判定树图谱](../../00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md) | Reasoning Judgment Tree Atlas | 编译错误/运行时问题 → 判定问题 → 根因 → 修复策略的概念路径。 | 2 |
-| `10_gap_and_action_plan` | [缺口与行动计划](../../00_meta/knowledge_topology/10_gap_and_action_plan.md) | Gap and Action Plan | 基于拓扑抽取结果识别的当前缺口：来源覆盖、表征完整性、层间/层内映射、定义一致性。 | 2 |
-| `learning_guide` | [Rust 知识体系学习指南](../../00_meta/learning_guide.md) | Learning Guide | Learning Guide. Core Rust concept. | 21 |
-| `learning_mvp_path` | [MVP 学习路径：从零到多线程 CLI](../../00_meta/learning_mvp_path.md) | Learning Mvp Path | Learning Mvp Path. Core Rust concept. | 2 |
-| `learning_mvp_path_en` | [Rust Minimum Viable Learning Path (MVP Path)](../../00_meta/learning_mvp_path_en.md) |  | — | 4 |
-| `methodology` | [方法论：思维表征与知识结构规范](../../00_meta/methodology.md) | Methodology | Methodology for organizing, maintaining, and evolving the Rust knowledge base. | 18 |
-| `navigation` | [Rust 知识体系全景导航](../../00_meta/navigation.md) | Navigation | Navigation hub and learning-path index for the concept map. | 5 |
-| `paradigm_transition_matrix` | [Rust 范式转换模式矩阵](../../00_meta/paradigm_transition_matrix.md) | Paradigm Transition Matrix | Paradigm Transition Matrix. Core Rust concept. | 4 |
-| `pattern_semantic_space_index` | [模式语义空间索引：设计模式在概念体系中的坐标](../../00_meta/pattern_semantic_space_index.md) | Pattern Semantic Space Index | A unified index and learning path for all design-pattern-related concepts across the concept hierarchy. | 3 |
-| `pl_foundations_roadmap` | [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../../00_meta/pl_foundations_roadmap.md) | General PL Foundations Roadmap | A unified index for general programming-language mechanism files that provide the foundational context for understanding Rust's specific design choices. | 3 |
-| `placeholder_generic` | [占位符页面](../../00_meta/placeholders/placeholder_generic.md) | Placeholder | This page is a generic placeholder for links in concept files that point to content not yet created. | 3 |
-| `problem_graph` | [Rust 知识体系问题图谱](../../00_meta/problem_graph.md) | Problem Graph | Problem Graph. Core Rust concept. | 4 |
-| `quality_dashboard_v2` | [Rust 知识体系思维表征覆盖率仪表板](../../00_meta/quality_dashboard_v2.md) | Quality Dashboard V2 | Quality Dashboard V2. Core Rust concept. | 6 |
-| `quick_reference` | [Rust 概念速查卡片](../../00_meta/quick_reference.md) | Quick Reference | Quick Reference. Core Rust concept. | 23 |
-| `rustbelt_predicate_map` | [RustBelt 谓词映射图](../../00_meta/rustbelt_predicate_map.md) | RustBelt | RustBelt. Core Rust concept covering formal methods foundations, practical examples. | 5 |
-| `self_assessment` | [Rust 知识体系自测题库](../../00_meta/self_assessment.md) | Self Assessment | Self Assessment. Core Rust concept. | 51 |
-| `semantic_bridge_algorithms_patterns` | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/semantic_bridge_algorithms_patterns.md) | Algorithms–Patterns Semantic Bridge | A semantic bridge linking algorithmic thinking to design patterns in Rust. | 22 |
-| `semantic_expressiveness` | [Rust Semantic Expressiveness: A Panoramic Survey](../../00_meta/semantic_expressiveness.md) | Semantic Expressiveness | Rust Semantic Expressiveness: A Panoramic Survey. Guide to Semantic Expressiveness. | 36 |
-| `semantic_space` | [Rust 表征空间](../../00_meta/semantic_space.md) | Semantic Space | Semantic Space. Core Rust concept. | 22 |
-| `sources` | [权威来源清单与知识来源关系分析](../../00_meta/sources.md) | Sources | Curated authoritative sources and citations for Rust concepts. | 6 |
-| `template_deduplication_guide` | [模板去同质化指南](../../00_meta/template_deduplication_guide.md) | Template Deduplication Guide | Guidelines for reducing boilerplate repetition across `concept/` files while preserving the bilingual header and core pedagogical structure. | 3 |
-| `terminology_glossary` | [Rust 核心术语英中对照表](../../00_meta/terminology_glossary.md) | Terminology Glossary | Terminology Glossary. Core Rust concept. | 7 |
-| `theorem_inference_forest` | [Rust 知识体系定理推理森林](../../00_meta/theorem_inference_forest.md) | Theorem Inference Forest | Theorem Inference Forest. Core Rust concept. | 13 |
-| `todos` | [全局待办清单](../../00_meta/todos.md) | Todos | Active tasks and backlog tracker for concept documentation. | 13 |
-| `topic_authority_alignment_map` | [主题-权威来源对齐图谱 (Topic-Authority Alignment Map)](../../00_meta/topic_authority_alignment_map.md) |  | — | 0 |
+| `03_bloom_taxonomy` | [Bloom Taxonomy](../03_bloom_taxonomy.md) | Bloom Taxonomy | Bloom's taxonomy adapted for Rust cognitive skill assessment, mapping remembering to creation across knowledge dimensions. | 7 |
+| `05_cross_reference_matrix` | [Cross Reference Matrix](../05_cross_reference_matrix.md) | Cross Reference Matrix | — | 0 |
+| `08_concept_audit_guide` | [Concept Audit Guide](../08_concept_audit_guide.md) | Concept Audit Guide | Concept Audit Guide. Core Rust concept. | 2 |
+| `asp_marking_guide` | [Rust 知识体系 A/S/P 三维认知标记规范](../asp_marking_guide.md) | Asp Marking Guide | Asp Marking Guide. Core Rust concept. | 5 |
+| `audit_checklist` | [概念一致性检查清单](../audit_checklist.md) | Audit Checklist | Audit Checklist. Core Rust concept. | 19 |
+| `authority_source_map` | [权威来源映射表](../authority_source_map.md) | Authority Source Map | Authority Source Map. Core Rust concept. | 12 |
+| `bilingual_template` | [Concept 文件双语模板](../bilingual_template.md) | Bilingual Concept Template | Standardized bilingual header template for all `concept/` files to support internationalization. | 6 |
+| `boundary_extension_tree` | [Rust 安全边界扩展推理树](../boundary_extension_tree.md) | Boundary Extension Tree | A reasoning tree for extending Rust's safety boundaries across unsafe, FFI, and formal-verification layers. | 11 |
+| `career_landscape` | [Rust 职业市场全景：2026 年数据与分析](../career_landscape.md) | Career Landscape | Career Landscape. Core Rust concept. | 11 |
+| `cognitive_dimension_matrix` | [Rust 知识体系双维认知矩阵](../cognitive_dimension_matrix.md) | Cognitive Dimension Matrix | Cognitive Dimension Matrix. Core Rust concept. | 7 |
+| `competency_graph` | [Rust 知识体系能力图谱](../competency_graph.md) | Competency Graph | Competency Graph. Core Rust concept. | 6 |
+| `comprehensive_rust_mapping` | [Comprehensive Rust 课程映射](../comprehensive_rust_mapping.md) | Comprehensive Rust Mapping | Comprehensive Rust Mapping. Core Rust concept. | 6 |
+| `concept_consistency_audit_checklist` | [概念一致性（Coherence）检查清单](../concept_consistency_audit_checklist.md) | Concept Consistency Audit Checklist | — | 0 |
+| `concept_definition_decision_forest` | [Rust 知识体系概念定义判定森林](../concept_definition_decision_forest.md) | Concept Definition Decision Forest | Concept Definition Decision Forest. Core Rust concept. | 6 |
+| `concept_index` | [全局概念索引](../concept_index.md) | Concept Index | Concept Index. Core Rust concept. | 22 |
+| `cpp_rust_engineering_roadmap` | [C/C++ → Rust 工程层对比路线图](../cpp_rust_engineering_roadmap.md) | C/C++ to Rust Engineering Comparison Roadmap | A unified roadmap and index for all C/C++ engineering-level comparison files, helping C++ programmers migrate to Rust through structured topic clusters. | 4 |
+| `decidability_spectrum` | [Rust 编译期可判定性谱系全景](../decidability_spectrum.md) | Decidability Spectrum | Decidability Spectrum. Core Rust concept. | 23 |
+| `expressiveness_multiview` | [Rust 语义表达力多视角深化](../expressiveness_multiview.md) | Expressiveness Multiview | Expressiveness Multiview. Core Rust concept. | 26 |
+| `fault_tree_analysis_collection` | [Rust 知识体系失效分析树集](../fault_tree_analysis_collection.md) | Fault Tree Analysis Collection | Fault Tree Analysis Collection. Core Rust concept. | 8 |
+| `foundations_gap_closure_index` | [基础知识缺口补全总索引](../foundations_gap_closure_index.md) | Foundations Gap Closure Index | A completion index tracking the closure of foundational knowledge gaps identified in SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md across Phase A, B, and C. | 4 |
+| `grading_system` | [内容分级与受众标签体系](../grading_system.md) | Grading System | Grading System. Core Rust concept. | 2 |
+| `inter_layer_map` | [跨层知识图谱](../inter_layer_map.md) | Inter Layer Map | Inter Layer Map. Core Rust concept. | 14 |
+| `inter_layer_topology` | [Rust 知识体系跨层依赖与蕴含拓扑图](../inter_layer_topology.md) | Cross-layer Dependency and Implication Topology | — | 0 |
+| `intra_layer_model_map` | [Rust 知识体系层次内模型间映射图](../intra_layer_model_map.md) | Intra Layer Model Map | Intra Layer Model Map. Core Rust concept. | 4 |
+| `kg_ontology_v2` | [Rust 知识体系知识图谱本体规范 v2.0](../kg_ontology_v2.md) | Knowledge Graph Ontology v2.0 | Upgraded KG ontology aligned with RDF 1.2, RDF-star, SKOS multilingual labels, and SHACL validation. | 2 |
+| `kg_tlo_alignment` | [Rust 知识体系顶层本体（TLO）对齐](../kg_tlo_alignment.md) | Top-level Ontology Alignment for Rust Knowledge Graph | Maps project knowledge-graph entities to upper ontologies (BFO / DOLCE) for semantic-web interoperability and engineering reference. | 3 |
+| `knowledge_mindmap` | [Rust 知识体系全局思维导图](../knowledge_mindmap.md) | Knowledge Mindmap | Knowledge Mindmap. Core Rust concept. | 8 |
+| `01_concept_definition_atlas` | [概念定义图谱](01_concept_definition_atlas.md) | Concept Definition Atlas | 全部核心概念的中英名称、层级、一句话定义、权威来源、同义/近义/反义关系。 | 2 |
+| `02_attribute_relationship_atlas` | [属性关系图谱](02_attribute_relationship_atlas.md) | Attribute Relationship Atlas | 概念属性矩阵：每个核心概念的必备/可选属性、内容分级、A/S/P、Bloom 层级、定理链。 | 3 |
+| `03_scenario_decision_tree_atlas` | [场景决策树图谱](03_scenario_decision_tree_atlas.md) | Scenario Decision Tree Atlas | 典型开发场景 → 决策问题 → 候选方案 → Rust 概念/工具选择。 | 2 |
+| `04_example_counterexample_atlas` | [示例与反例图谱](04_example_counterexample_atlas.md) | Example and Counterexample Atlas | 按概念组织的正确示例、错误示例、边界示例与反例分析。 | 2 |
+| `05_logical_reasoning_atlas` | [逻辑推理图谱](05_logical_reasoning_atlas.md) | Logical Reasoning Atlas | 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。 | 2 |
+| `06_inter_layer_mapping_atlas` | [层间映射图谱](06_inter_layer_mapping_atlas.md) | Inter-Layer Mapping Atlas | L0–L7 各层之间的依赖、蕴含、反馈关系，基于前置/后置概念引用统计。 | 2 |
+| `07_intra_layer_mapping_atlas` | [层内映射图谱](07_intra_layer_mapping_atlas.md) | Intra-Layer Mapping Atlas | 每层内部核心模型/概念间的等价、蕴含、依赖、互斥关系，基于同层前置/后置引用。 | 2 |
+| `08_concept_source_alignment_atlas` | [概念-权威来源对齐图谱](08_concept_source_alignment_atlas.md) | Concept-Source Alignment Atlas | 每个核心概念与国际化权威来源的对齐：Rust Reference、TRPL、RFCs、学术、课程、工业、标准。 | 2 |
+| `09_reasoning_judgment_tree_atlas` | [推理判定树图谱](09_reasoning_judgment_tree_atlas.md) | Reasoning Judgment Tree Atlas | 编译错误/运行时问题 → 判定问题 → 根因 → 修复策略的概念路径。 | 2 |
+| `10_gap_and_action_plan` | [缺口与行动计划](10_gap_and_action_plan.md) | Gap and Action Plan | 基于拓扑抽取结果识别的当前缺口：来源覆盖、表征完整性、层间/层内映射、定义一致性。 | 2 |
+| `learning_guide` | [Rust 知识体系学习指南](../learning_guide.md) | Learning Guide | Learning Guide. Core Rust concept. | 21 |
+| `learning_mvp_path` | [MVP 学习路径：从零到多线程 CLI](../learning_mvp_path.md) | Learning Mvp Path | Learning Mvp Path. Core Rust concept. | 2 |
+| `learning_mvp_path_en` | [Rust Minimum Viable Learning Path (MVP Path)](../learning_mvp_path_en.md) |  | — | 4 |
+| `methodology` | [方法论：思维表征与知识结构规范](../methodology.md) | Methodology | Methodology for organizing, maintaining, and evolving the Rust knowledge base. | 18 |
+| `navigation` | [Rust 知识体系全景导航](../navigation.md) | Navigation | Navigation hub and learning-path index for the concept map. | 5 |
+| `paradigm_transition_matrix` | [Rust 范式转换模式矩阵](../paradigm_transition_matrix.md) | Paradigm Transition Matrix | Paradigm Transition Matrix. Core Rust concept. | 4 |
+| `pattern_semantic_space_index` | [模式语义空间索引：设计模式在概念体系中的坐标](../pattern_semantic_space_index.md) | Pattern Semantic Space Index | A unified index and learning path for all design-pattern-related concepts across the concept hierarchy. | 3 |
+| `pl_foundations_roadmap` | [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../pl_foundations_roadmap.md) | General PL Foundations Roadmap | A unified index for general programming-language mechanism files that provide the foundational context for understanding Rust's specific design choices. | 3 |
+| `placeholder_generic` | [占位符页面](../placeholders/placeholder_generic.md) | Placeholder | This page is a generic placeholder for links in concept files that point to content not yet created. | 3 |
+| `problem_graph` | [Rust 知识体系问题图谱](../problem_graph.md) | Problem Graph | Problem Graph. Core Rust concept. | 4 |
+| `quality_dashboard_v2` | [Rust 知识体系思维表征覆盖率仪表板](../quality_dashboard_v2.md) | Quality Dashboard V2 | Quality Dashboard V2. Core Rust concept. | 6 |
+| `quick_reference` | [Rust 概念速查卡片](../quick_reference.md) | Quick Reference | Quick Reference. Core Rust concept. | 23 |
+| `rustbelt_predicate_map` | [RustBelt 谓词映射图](../rustbelt_predicate_map.md) | RustBelt | RustBelt. Core Rust concept covering formal methods foundations, practical examples. | 5 |
+| `self_assessment` | [Rust 知识体系自测题库](../self_assessment.md) | Self Assessment | Self Assessment. Core Rust concept. | 51 |
+| `semantic_bridge_algorithms_patterns` | [语义桥：算法、设计模式与工作流模式的统一谱系](../semantic_bridge_algorithms_patterns.md) | Algorithms–Patterns Semantic Bridge | A semantic bridge linking algorithmic thinking to design patterns in Rust. | 22 |
+| `semantic_expressiveness` | [Rust Semantic Expressiveness: A Panoramic Survey](../semantic_expressiveness.md) | Semantic Expressiveness | Rust Semantic Expressiveness: A Panoramic Survey. Guide to Semantic Expressiveness. | 36 |
+| `semantic_space` | [Rust 表征空间](../semantic_space.md) | Semantic Space | Semantic Space. Core Rust concept. | 22 |
+| `sources` | [权威来源清单与知识来源关系分析](../sources.md) | Sources | Curated authoritative sources and citations for Rust concepts. | 6 |
+| `template_deduplication_guide` | [模板去同质化指南](../template_deduplication_guide.md) | Template Deduplication Guide | Guidelines for reducing boilerplate repetition across `concept/` files while preserving the bilingual header and core pedagogical structure. | 3 |
+| `terminology_glossary` | [Rust 核心术语英中对照表](../terminology_glossary.md) | Terminology Glossary | Terminology Glossary. Core Rust concept. | 7 |
+| `theorem_inference_forest` | [Rust 知识体系定理推理森林](../theorem_inference_forest.md) | Theorem Inference Forest | Theorem Inference Forest. Core Rust concept. | 13 |
+| `todos` | [全局待办清单](../todos.md) | Todos | Active tasks and backlog tracker for concept documentation. | 13 |
+| `topic_authority_alignment_map` | [主题-权威来源对齐图谱 (Topic-Authority Alignment Map)](../topic_authority_alignment_map.md) |  | — | 0 |
 
 ### L1 基础概念层
 
 | 编号 | 中文名 | EN | 定义 | 来源数 |
 |:---|:---|:---|:---|:---:|
-| `00_start` | [Rust 起步指南](../../01_foundation/00_start.md) | Getting Started with Rust | Getting Started with Rust: core Rust concepts, syntax, and examples. | 9 |
-| `01_ownership` | [Ownership](../../01_foundation/01_ownership.md) | Ownership | Ownership is Rust's core memory-management model: every value has a single owner, ownership moves on assignment, and memory is freed deterministically when the owner drops. It explains move versus Copy, the borrow checker, and common pitfalls such as use-after-move, laying the foundation for memory safety without a garbage collector. | 32 |
-| `02_borrowing` | [Borrowing](../../01_foundation/02_borrowing.md) | Borrowing | Borrowing lets code access data by reference without taking ownership. Rust enforces aliasing-XOR-mutability: any number of immutable borrows or exactly one mutable borrow may exist in a scope, and references must never dangle. This chapter covers shared and mutable references, reborrowing, splitting borrows, and patterns that keep the borrow checker happy. | 35 |
-| `03_lifetimes` | [Lifetimes](../../01_foundation/03_lifetimes.md) | Lifetimes | Lifetimes are compile-time annotations that track how long references remain valid, ensuring borrowed data outlives every reference to it. The chapter explains lifetime elision rules, explicit lifetime parameters, subtyping relationships, and advanced forms such as Higher-Ranked Trait Bounds, showing how Rust proves reference safety statically. | 25 |
-| `04_type_system` | [Type System Basics](../../01_foundation/04_type_system.md) | Type System | Rust's static type system combines scalar and compound types with algebraic data types, pattern matching, generics, and trait bounds. This chapter covers structs, enums, the match expression, type inference, and the path from everyday types toward formal type theory, giving learners the vocabulary needed for generic and trait-based design. | 67 |
-| `05_reference_semantics` | [引用语义：自动解引用、Deref 强制与类型转换](../../01_foundation/05_reference_semantics.md) | Reference Semantics | Reference Semantics: core Rust concepts, syntax, and examples. | 44 |
-| `06_zero_cost_abstractions` | [零成本抽象：Rust 的性能哲学](../../01_foundation/06_zero_cost_abstractions.md) | Zero Cost Abstractions | Zero Cost Abstractions: core Rust concepts, syntax, and examples. | 26 |
-| `07_control_flow` | [控制流：表达式导向的流程控制](../../01_foundation/07_control_flow.md) | Control Flow | Control Flow: core Rust concepts, syntax, and examples. | 30 |
-| `08_collections` | [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/08_collections.md) | Collections | Collections: core Rust concepts, syntax, and examples. | 30 |
-| `09_strings_and_text` | [字符串与文本：Rust 的 Unicode 处理与格式化系统](../../01_foundation/09_strings_and_text.md) | Strings and Text | Strings and Text: core Rust concepts, syntax, and examples. | 29 |
-| `10_numerics` | [数值类型与运算：从整数到浮点的完整图景](../../01_foundation/10_numerics.md) | Numerics | Numerics: core Rust concepts, syntax, and examples. | 26 |
-| `11_modules_and_paths` | [模块系统与路径：Rust 的代码组织哲学](../../01_foundation/11_modules_and_paths.md) | Modules | Modules. Core Rust concept covering practical examples, aerospace and fault-tolerant systems. | 26 |
-| `12_attributes_and_macros` | [属性与声明宏：编译期元编程基础](../../01_foundation/12_attributes_and_macros.md) | Macros | Macros. Core Rust concept covering practical examples, design patterns, metaprogramming techniques. | 25 |
-| `13_panic_and_abort` | [Panic 与 Abort：不可恢复错误的处理机制](../../01_foundation/13_panic_and_abort.md) | Panic and Abort | Panic and Abort: core Rust concepts, syntax, and examples. | 32 |
-| `14_coercion_and_casting` | [类型强制与转换：显式与隐式的边界](../../01_foundation/14_coercion_and_casting.md) | Coercion and Casting | Coercion and Casting: core Rust concepts, syntax, and examples. | 34 |
-| `15_closure_basics` | [闭包基础：捕获环境与匿名函数](../../01_foundation/15_closure_basics.md) | Closures | Closures. Core Rust concept covering type system mechanics, ownership and borrowing, AI/ML integration patterns. | 21 |
-| `16_testing_basics` | [测试基础：从单元测试到集成测试](../../01_foundation/16_testing_basics.md) | Testing | Testing. Core Rust concept covering testing strategies, mechanism analysis. | 28 |
-| `17_collections_advanced` | [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](../../01_foundation/17_collections_advanced.md) | Collections Advanced | Collections Advanced: core Rust concepts, syntax, and examples. | 36 |
-| `18_strings_and_encoding` | [字符串与编码：Rust 的文本处理类型系统](../../01_foundation/18_strings_and_encoding.md) | Strings and Encoding | Rust's string types (`String`, `str`, `OsString`, `CString`) and Unicode/encoding handling. | 40 |
-| `19_value_vs_reference_semantics` | [值语义 vs 引用语义：从 C++、Java、Python 到 Rust](../../01_foundation/19_value_vs_reference_semantics.md) | Value Semantics vs Reference Semantics | A cross-language comparison of value semantics and reference semantics, positioning Rust's ownership model as an extreme form of value semantics. | 9 |
-| `20_variable_model` | [变量模型：从通用 PL 视角看 Rust 的所有权](../../01_foundation/20_variable_model.md) | Variable Model | Rust's variable bindings, mutability, shadowing, and move/copy semantics. | 15 |
-| `21_effects_and_purity` | [副作用与纯度：从引用透明到 Rust 的所有权效果](../../01_foundation/21_effects_and_purity.md) | Effects and Purity | Tracking side effects and purity in Rust functions, const contexts, and unsafe boundaries. | 27 |
-| `22_data_abstraction_spectrum` | [数据抽象谱系：从 C struct 到 Rust enum + trait](../../01_foundation/22_data_abstraction_spectrum.md) | Data Abstraction Spectrum | Data Abstraction Spectrum: core Rust concepts, syntax, and examples. | 25 |
-| `23_move_semantics` | [Move 语义：C++ 与 Rust 的资源转移模型](../../01_foundation/23_move_semantics.md) | Move Semantics | A focused comparison of move semantics in C++ (move constructors, xvalues, moved-from state) and Rust (ownership transfer, Copy/Clone, compiler-enforced invalidation). | 13 |
-| `24_quiz_type_system` | [测验：类型系统](../../01_foundation/24_quiz_type_system.md) | Type System | Quiz Type System. Core Rust concept. | 16 |
-| `25_quiz_error_handling` | [测验：错误处理](../../01_foundation/25_quiz_error_handling.md) | Error Handling | Quiz Error Handling. Core Rust concept. | 15 |
-| `26_quiz_modules_testing` | [测验：模块系统与测试](../../01_foundation/26_quiz_modules_testing.md) | Modules | Quiz Modules Testing. Core Rust concept. | 11 |
-| `27_quiz_closures_iterators` | [测验：闭包与迭代器](../../01_foundation/27_quiz_closures_iterators.md) | Closures | Quiz Closures Iterators. Core Rust concept. | 13 |
-| `28_ownership_inventories_brown_book` | [所有权清单自测：Brown University Ownership Inventory](../../01_foundation/28_ownership_inventories_brown_book.md) | Brown University Ownership Inventory | Brown University Ownership Inventory: core Rust concepts, syntax, and examples. | 17 |
-| `29_quiz_pl_foundations` | [测验：通用 PL 基座](../../01_foundation/29_quiz_pl_foundations.md) | Quiz: General PL Foundations | Embedded quiz for the general programming-language mechanism files: variable model, evaluation strategies, effects and purity, control flow, and data abstraction spectrum. | 6 |
-| `30_lifetimes_advanced` | [Lifetimes 高级主题](../../01_foundation/30_lifetimes_advanced.md) | Lifetimes Advanced | Lifetimes Advanced: core Rust concepts, syntax, and examples. | 19 |
-| `31_never_type` | [Never Type (`!`)：底类型与穷尽性](../../01_foundation/31_never_type.md) | Never Type | Never Type: core Rust concepts, syntax, and examples. | 22 |
-| `32_error_handling_basics` | [Rust 错误处理基础](../../01_foundation/32_error_handling_basics.md) | Error Handling | Error Handling. Core Rust concept covering mechanism analysis, type system mechanics, error handling strategies. | 34 |
-| `33_quiz_ownership_borrowing` | [测验：所有权、借用与生命周期](../../01_foundation/33_quiz_ownership_borrowing.md) | Ownership | Quiz Ownership Borrowing. Core Rust concept. | 18 |
-| `34_pl_prerequisites` | [编程语言理论基础](../../01_foundation/34_pl_prerequisites.md) | Pl Prerequisites | Pl Prerequisites: core Rust concepts, syntax, and examples. | 11 |
-| `35_preludes` | [Preludes](../../01_foundation/35_preludes.md) | Preludes | Rust 中自动进入每个模块作用域的名字集合：标准库 prelude、extern prelude、language prelude、macro_use prelude 与 tool prelude。 | 9 |
-| `36_keywords` | [Rust 关键字](../../01_foundation/36_keywords.md) | Keywords | Rust 中保留给当前或未来语言使用的关键字列表，以及 raw identifier（原始标识符）用法。 | 7 |
-| `37_operators_and_symbols` | [Rust 运算符与符号](../../01_foundation/37_operators_and_symbols.md) | Operators and Symbols | Rust 语法中运算符与各类符号的速查参考，包括可重载运算符对应的 trait、路径/泛型/trait bound/宏/注释/括号等上下文中的符号含义。 | 9 |
-| `38_crates_and_source_files` | [Crate 与源文件](../../01_foundation/38_crates_and_source_files.md) | Crates and Source Files | Rust 编译模型核心：crate 作为编译、链接、版本控制与运行加载单元；源文件、模块树、crate 属性与 `main` 函数的规则。 | 7 |
-| `39_items` | [项](../../01_foundation/39_items.md) | Items | Rust crate 的组成单元：模块、`use` 声明、函数、类型定义、常量、static、trait、实现、`extern` 块等项的分类与作用域规则。 | 7 |
-| `40_patterns` | [模式匹配](../../01_foundation/40_patterns.md) | Patterns | Rust 模式匹配的权威规范：解构、可反驳性、各种模式形式（literal、identifier、wildcard、rest、range、reference、struct、tuple、slice、path、or-patterns）及其绑定模式。 | 8 |
-| `41_statements_and_expressions` | [语句与表达式](../../01_foundation/41_statements_and_expressions.md) | Statements and Expressions | Rust 作为表达式语言的核心特征：表达式嵌套、求值顺序，以及语句如何封装和显式排序表达式求值。 | 8 |
-| `42_useful_development_tools` | [常用开发工具](../../01_foundation/42_useful_development_tools.md) | Useful Development Tools | Rust 生态中常用的官方与社区开发工具：rustfmt、clippy、rustdoc、cargo、rust-analyzer，以及它们在开发流程中的定位。 | 8 |
+| `00_start` | [Rust 起步指南](../../01_foundation/00_start/00_start.md) | Getting Started with Rust | Getting Started with Rust: core Rust concepts, syntax, and examples. | 9 |
+| `01_ownership` | [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Ownership | Ownership is Rust's core memory-management model: every value has a single owner, ownership moves on assignment, and memory is freed deterministically when the owner drops. It explains move versus Copy, the borrow checker, and common pitfalls such as use-after-move, laying the foundation for memory safety without a garbage collector. | 32 |
+| `02_borrowing` | [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | Borrowing | Borrowing lets code access data by reference without taking ownership. Rust enforces aliasing-XOR-mutability: any number of immutable borrows or exactly one mutable borrow may exist in a scope, and references must never dangle. This chapter covers shared and mutable references, reborrowing, splitting borrows, and patterns that keep the borrow checker happy. | 35 |
+| `03_lifetimes` | [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | Lifetimes | Lifetimes are compile-time annotations that track how long references remain valid, ensuring borrowed data outlives every reference to it. The chapter explains lifetime elision rules, explicit lifetime parameters, subtyping relationships, and advanced forms such as Higher-Ranked Trait Bounds, showing how Rust proves reference safety statically. | 25 |
+| `04_type_system` | [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) | Type System | Rust's static type system combines scalar and compound types with algebraic data types, pattern matching, generics, and trait bounds. This chapter covers structs, enums, the match expression, type inference, and the path from everyday types toward formal type theory, giving learners the vocabulary needed for generic and trait-based design. | 67 |
+| `05_reference_semantics` | [引用语义：自动解引用、Deref 强制与类型转换](../../01_foundation/03_values_and_references/05_reference_semantics.md) | Reference Semantics | Reference Semantics: core Rust concepts, syntax, and examples. | 44 |
+| `06_zero_cost_abstractions` | [零成本抽象：Rust 的性能哲学](../../01_foundation/00_start/06_zero_cost_abstractions.md) | Zero Cost Abstractions | Zero Cost Abstractions: core Rust concepts, syntax, and examples. | 26 |
+| `07_control_flow` | [控制流：表达式导向的流程控制](../../01_foundation/04_control_flow/07_control_flow.md) | Control Flow | Control Flow: core Rust concepts, syntax, and examples. | 30 |
+| `08_collections` | [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/05_collections/08_collections.md) | Collections | Collections: core Rust concepts, syntax, and examples. | 30 |
+| `09_strings_and_text` | [字符串与文本：Rust 的 Unicode 处理与格式化系统](../../01_foundation/06_strings_and_text/09_strings_and_text.md) | Strings and Text | Strings and Text: core Rust concepts, syntax, and examples. | 29 |
+| `10_numerics` | [数值类型与运算：从整数到浮点的完整图景](../../01_foundation/02_type_system/10_numerics.md) | Numerics | Numerics: core Rust concepts, syntax, and examples. | 26 |
+| `11_modules_and_paths` | [模块系统与路径：Rust 的代码组织哲学](../../01_foundation/07_modules_and_items/11_modules_and_paths.md) | Modules | Modules. Core Rust concept covering practical examples, aerospace and fault-tolerant systems. | 26 |
+| `12_attributes_and_macros` | [属性与声明宏：编译期元编程基础](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) | Macros | Macros. Core Rust concept covering practical examples, design patterns, metaprogramming techniques. | 25 |
+| `13_panic_and_abort` | [Panic 与 Abort：不可恢复错误的处理机制](../../01_foundation/08_error_handling/13_panic_and_abort.md) | Panic and Abort | Panic and Abort: core Rust concepts, syntax, and examples. | 32 |
+| `14_coercion_and_casting` | [类型强制与转换：显式与隐式的边界](../../01_foundation/02_type_system/14_coercion_and_casting.md) | Coercion and Casting | Coercion and Casting: core Rust concepts, syntax, and examples. | 34 |
+| `15_closure_basics` | [闭包基础：捕获环境与匿名函数](../../01_foundation/00_start/15_closure_basics.md) | Closures | Closures. Core Rust concept covering type system mechanics, ownership and borrowing, AI/ML integration patterns. | 21 |
+| `16_testing_basics` | [测试基础：从单元测试到集成测试](../../01_foundation/10_testing_basics/16_testing_basics.md) | Testing | Testing. Core Rust concept covering testing strategies, mechanism analysis. | 28 |
+| `17_collections_advanced` | [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](../../01_foundation/05_collections/17_collections_advanced.md) | Collections Advanced | Collections Advanced: core Rust concepts, syntax, and examples. | 36 |
+| `18_strings_and_encoding` | [字符串与编码：Rust 的文本处理类型系统](../../01_foundation/06_strings_and_text/18_strings_and_encoding.md) | Strings and Encoding | Rust's string types (`String`, `str`, `OsString`, `CString`) and Unicode/encoding handling. | 40 |
+| `19_value_vs_reference_semantics` | [值语义 vs 引用语义：从 C++、Java、Python 到 Rust](../../01_foundation/03_values_and_references/19_value_vs_reference_semantics.md) | Value Semantics vs Reference Semantics | A cross-language comparison of value semantics and reference semantics, positioning Rust's ownership model as an extreme form of value semantics. | 9 |
+| `20_variable_model` | [变量模型：从通用 PL 视角看 Rust 的所有权](../../01_foundation/03_values_and_references/20_variable_model.md) | Variable Model | Rust's variable bindings, mutability, shadowing, and move/copy semantics. | 15 |
+| `21_effects_and_purity` | [副作用与纯度：从引用透明到 Rust 的所有权效果](../../01_foundation/00_start/21_effects_and_purity.md) | Effects and Purity | Tracking side effects and purity in Rust functions, const contexts, and unsafe boundaries. | 27 |
+| `22_data_abstraction_spectrum` | [数据抽象谱系：从 C struct 到 Rust enum + trait](../../01_foundation/02_type_system/22_data_abstraction_spectrum.md) | Data Abstraction Spectrum | Data Abstraction Spectrum: core Rust concepts, syntax, and examples. | 25 |
+| `23_move_semantics` | [Move 语义：C++ 与 Rust 的资源转移模型](../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) | Move Semantics | A focused comparison of move semantics in C++ (move constructors, xvalues, moved-from state) and Rust (ownership transfer, Copy/Clone, compiler-enforced invalidation). | 13 |
+| `24_quiz_type_system` | [测验：类型系统](../../01_foundation/11_quizzes/24_quiz_type_system.md) | Type System | Quiz Type System. Core Rust concept. | 16 |
+| `25_quiz_error_handling` | [测验：错误处理](../../01_foundation/11_quizzes/25_quiz_error_handling.md) | Error Handling | Quiz Error Handling. Core Rust concept. | 15 |
+| `26_quiz_modules_testing` | [测验：模块系统与测试](../../01_foundation/11_quizzes/26_quiz_modules_testing.md) | Modules | Quiz Modules Testing. Core Rust concept. | 11 |
+| `27_quiz_closures_iterators` | [测验：闭包与迭代器](../../01_foundation/11_quizzes/27_quiz_closures_iterators.md) | Closures | Quiz Closures Iterators. Core Rust concept. | 13 |
+| `28_ownership_inventories_brown_book` | [所有权清单自测：Brown University Ownership Inventory](../../01_foundation/01_ownership_borrow_lifetime/28_ownership_inventories_brown_book.md) | Brown University Ownership Inventory | Brown University Ownership Inventory: core Rust concepts, syntax, and examples. | 17 |
+| `29_quiz_pl_foundations` | [测验：通用 PL 基座](../../01_foundation/11_quizzes/29_quiz_pl_foundations.md) | Quiz: General PL Foundations | Embedded quiz for the general programming-language mechanism files: variable model, evaluation strategies, effects and purity, control flow, and data abstraction spectrum. | 6 |
+| `30_lifetimes_advanced` | [Lifetimes 高级主题](../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md) | Lifetimes Advanced | Lifetimes Advanced: core Rust concepts, syntax, and examples. | 19 |
+| `31_never_type` | [Never Type (`!`)：底类型与穷尽性](../../01_foundation/02_type_system/31_never_type.md) | Never Type | Never Type: core Rust concepts, syntax, and examples. | 22 |
+| `32_error_handling_basics` | [Rust 错误处理基础](../../01_foundation/08_error_handling/32_error_handling_basics.md) | Error Handling | Error Handling. Core Rust concept covering mechanism analysis, type system mechanics, error handling strategies. | 34 |
+| `33_quiz_ownership_borrowing` | [测验：所有权、借用与生命周期](../../01_foundation/11_quizzes/33_quiz_ownership_borrowing.md) | Ownership | Quiz Ownership Borrowing. Core Rust concept. | 18 |
+| `34_pl_prerequisites` | [编程语言理论基础](../../01_foundation/00_start/34_pl_prerequisites.md) | Pl Prerequisites | Pl Prerequisites: core Rust concepts, syntax, and examples. | 11 |
+| `35_preludes` | [Preludes](../../01_foundation/07_modules_and_items/35_preludes.md) | Preludes | Rust 中自动进入每个模块作用域的名字集合：标准库 prelude、extern prelude、language prelude、macro_use prelude 与 tool prelude。 | 9 |
+| `36_keywords` | [Rust 关键字](../../01_foundation/00_start/36_keywords.md) | Keywords | Rust 中保留给当前或未来语言使用的关键字列表，以及 raw identifier（原始标识符）用法。 | 7 |
+| `37_operators_and_symbols` | [Rust 运算符与符号](../../01_foundation/00_start/37_operators_and_symbols.md) | Operators and Symbols | Rust 语法中运算符与各类符号的速查参考，包括可重载运算符对应的 trait、路径/泛型/trait bound/宏/注释/括号等上下文中的符号含义。 | 9 |
+| `38_crates_and_source_files` | [Crate 与源文件](../../01_foundation/07_modules_and_items/38_crates_and_source_files.md) | Crates and Source Files | Rust 编译模型核心：crate 作为编译、链接、版本控制与运行加载单元；源文件、模块树、crate 属性与 `main` 函数的规则。 | 7 |
+| `39_items` | [项](../../01_foundation/07_modules_and_items/39_items.md) | Items | Rust crate 的组成单元：模块、`use` 声明、函数、类型定义、常量、static、trait、实现、`extern` 块等项的分类与作用域规则。 | 7 |
+| `40_patterns` | [模式匹配](../../01_foundation/04_control_flow/40_patterns.md) | Patterns | Rust 模式匹配的权威规范：解构、可反驳性、各种模式形式（literal、identifier、wildcard、rest、range、reference、struct、tuple、slice、path、or-patterns）及其绑定模式。 | 8 |
+| `41_statements_and_expressions` | [语句与表达式](../../01_foundation/04_control_flow/41_statements_and_expressions.md) | Statements and Expressions | Rust 作为表达式语言的核心特征：表达式嵌套、求值顺序，以及语句如何封装和显式排序表达式求值。 | 8 |
+| `42_useful_development_tools` | [常用开发工具](../../01_foundation/10_testing_basics/42_useful_development_tools.md) | Useful Development Tools | Rust 生态中常用的官方与社区开发工具：rustfmt、clippy、rustdoc、cargo、rust-analyzer，以及它们在开发流程中的定位。 | 8 |
 
 ### L2 进阶概念层
 
 | 编号 | 中文名 | EN | 定义 | 来源数 |
 |:---|:---|:---|:---|:---:|
-| `01_traits` | [Traits](../../02_intermediate/01_traits.md) | Traits | Traits define shared behavior in Rust: interfaces with methods, associated types, and default implementations that can be composed through trait bounds. The chapter explores implementing traits, trait objects, object safety, the orphan rule, coherence, and advanced patterns such as associated types and blanket impls. | 50 |
-| `02_generics` | [Generics](../../02_intermediate/02_generics.md) | Generics | Generics. Parametric polymorphism in Rust enabling type-safe, reusable code across types. Covers generic functions, structs, trait bounds, and monomorphization trade-offs. | 59 |
-| `03_memory_management` | [Memory Management](../../02_intermediate/03_memory_management.md) | Memory Management | Memory Management. Rust's compile-time memory safety through ownership, borrowing, and lifetimes. Covers stack vs heap, RAII, smart pointers, and zero-cost abstractions. | 43 |
-| `04_error_handling` | [Error Handling](../../02_intermediate/04_error_handling.md) | Error Handling | Error Handling. Guide to 04 Error Handling. | 43 |
-| `05_assert_matches` | [`assert_matches!`：模式匹配断言的形式化语义](../../02_intermediate/05_assert_matches.md) | assert_matches! Macro | The `assert_matches!` macro for pattern-based assertions on enums and trait objects. | 21 |
-| `06_range_types` | [Rust 范围类型语义：`std::ops::Range` → `core::range`](../../02_intermediate/06_range_types.md) | Range Types | Range Types: intermediate Rust mechanisms, patterns, and practical examples. | 30 |
-| `07_closure_types` | [闭包类型系统：Fn、FnMut、FnOnce 的捕获语义](../../02_intermediate/07_closure_types.md) | Closure Types | Rust closure types, capture modes, `Fn`/`FnMut`/`FnOnce` traits, and lifetime interactions. | 20 |
-| `08_interior_mutability` | [内部可变性：编译期规则的运行时逃逸](../../02_intermediate/08_interior_mutability.md) | Interior Mutability | Interior Mutability: intermediate Rust mechanisms, patterns, and practical examples. | 26 |
-| `09_serde_patterns` | [Serde 序列化模式：Rust 的类型驱动数据转换](../../02_intermediate/09_serde_patterns.md) | Serde Patterns | Serde Patterns: intermediate Rust mechanisms, patterns, and practical examples. | 28 |
-| `10_module_system` | [模块系统：Rust 的代码组织与可见性规则](../../02_intermediate/10_module_system.md) | Modules | Modules. Core Rust concept covering mechanism analysis, in-depth analysis. | 28 |
-| `11_cow_and_borrowed` | [Cow：写时克隆与零拷贝抽象](../../02_intermediate/11_cow_and_borrowed.md) | Cow and Borrowed | Cow and Borrowed: intermediate Rust mechanisms, patterns, and practical examples. | 25 |
-| `12_smart_pointers` | [智能指针：堆内存管理与共享语义](../../02_intermediate/12_smart_pointers.md) | Smart Pointers | Smart Pointers. Core Rust concept covering mechanism analysis, design patterns, ownership and borrowing. | 26 |
-| `13_dsl_and_embedding` | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/13_dsl_and_embedding.md) | Dsl and Embedding | Dsl and Embedding: intermediate Rust mechanisms, patterns, and practical examples. | 27 |
-| `14_newtype_and_wrapper` | [Newtype 与包装器模式：类型安全的零成本抽象](../../02_intermediate/14_newtype_and_wrapper.md) | Newtype and Wrapper Types | Using newtype and wrapper patterns for type safety, zero-cost abstraction, and trait orphan rules. | 28 |
-| `15_iterator_patterns` | [Rust 迭代器模式](../../02_intermediate/15_iterator_patterns.md) | Iterators | Iterators. Core Rust concept covering practical applications, mechanism analysis, in-depth analysis, performance optimization. | 31 |
-| `16_error_handling_deep_dive` | [错误处理深入：从 Result 到自定义错误生态](../../02_intermediate/16_error_handling_deep_dive.md) | Error Handling | Error Handling. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics. | 28 |
-| `17_macro_patterns` | [宏模式：编译期代码生成的工程实践](../../02_intermediate/17_macro_patterns.md) | Macros | Macros. Core Rust concept covering practical examples, mechanism analysis, in-depth analysis. | 22 |
-| `18_lifetimes_advanced` | [生命周期高级主题：从 HRTB 到自引用类型](../../02_intermediate/18_lifetimes_advanced.md) | Lifetimes | Lifetimes. Core Rust concept covering mechanism analysis, in-depth analysis, lifetime semantics. | 27 |
-| `19_advanced_traits` | [高级 Trait 主题：从关联类型到特化](../../02_intermediate/19_advanced_traits.md) | Traits | Traits. Core Rust concept covering mechanism analysis, in-depth analysis, generic programming. | 23 |
-| `20_type_system_advanced` | [高级类型系统：从关联类型到类型级编程](../../02_intermediate/20_type_system_advanced.md) | Type System | Type System. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics. | 25 |
-| `21_metaprogramming` | [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/21_metaprogramming.md) | Metaprogramming | Metaprogramming: intermediate Rust mechanisms, patterns, and practical examples. | 37 |
-| `22_api_naming_conventions` | [Rust API 命名约定](../../02_intermediate/22_api_naming_conventions.md) | Idiomatic Rust API Naming Conventions | Rust API naming conventions aligned with the Rust API Guidelines and std library style. | 11 |
-| `23_quiz_traits_and_generics` | [测验：Trait 与泛型](../../02_intermediate/23_quiz_traits_and_generics.md) | Generics | Quiz Traits And Generics. Core Rust concept. | 15 |
-| `24_quiz_memory_management` | [测验：内存管理](../../02_intermediate/24_quiz_memory_management.md) | Memory Management | Quiz Memory Management. Core Rust concept. | 13 |
-| `25_rtti_and_dynamic_typing` | [RTTI 与动态类型识别：从 C++ 到 Rust](../../02_intermediate/25_rtti_and_dynamic_typing.md) | RTTI and Dynamic Type Identification | Comparison of runtime type identification mechanisms between C++ (`typeid`, `dynamic_cast`) and Rust (`Any` trait, `TypeId`, `downcast_ref`). | 13 |
-| `26_c_preprocessor_vs_rust_macros` | [C 预处理器 vs Rust 宏：从文本替换到语法树](../../02_intermediate/26_c_preprocessor_vs_rust_macros.md) | C Preprocessor vs Rust Macros | Comparison between the C preprocessor (textual substitution) and Rust macros (hygienic syntax-tree metaprogramming), covering conditional compilation, include guards, and macro hygiene. | 11 |
-| `27_exception_safety_rust_cpp` | [异常安全：C++ 与 Rust 的错误处理哲学](../../02_intermediate/27_exception_safety_rust_cpp.md) | Exception Safety: C++ vs Rust | A deep comparison of exception safety guarantees in C++ (strong/basic/no-throw) and Rust's error-handling model (Result, panic, Drop). | 9 |
-| `28_construction_and_initialization` | [构造与初始化：C++ 的构造函数 vs Rust 的结构体字面量](../../02_intermediate/28_construction_and_initialization.md) | Construction and Initialization | Comparison of object construction and initialization between C++ (constructors, initializer lists, copy/move semantics) and Rust (struct literals, associated functions, Default, const fn). | 11 |
-| `29_friend_vs_module_privacy` | [友元 vs 模块可见性：C++ 的 `friend` 与 Rust 的隐私边界](../../02_intermediate/29_friend_vs_module_privacy.md) | Friend vs Module Privacy | Comparison of C++ `friend` access control and Rust module visibility system. | 10 |
-| `30_quiz_cpp_rust_foundations` | [测验：C/C++ → Rust 基础知识对比](../../02_intermediate/30_quiz_cpp_rust_foundations.md) | Quiz: C/C++ to Rust Foundations | Embedded quiz for the C/C++ engineering-layer comparison files: RTTI, macros, exception safety, construction, friend, move semantics, and value/reference semantics. | 8 |
-| `31_derive_traits` | [可派生 Trait](../../02_intermediate/31_derive_traits.md) | Derivable Traits | 标准库中可通过 `#[derive(...)]` 自动实现的 trait 参考：行为、默认实现语义、对字段类型的要求及典型使用场景。 | 9 |
-| `32_editions` | [Rust Editions](../../02_intermediate/32_editions.md) | Rust Editions | Rust Edition 机制：2015、2018、2021、2024 各版本的关键差异、版本选择规则、迁移工具 `cargo fix`，以及 edition 与工具链版本的关系。 | 10 |
-| `33_rust_release_process` | [Rust 发布流程](../../02_intermediate/33_rust_release_process.md) | Rust Release Process | Rust 的版本发布模型：稳定版、Beta 版、Nightly 版的六周发布周期，以及 Rust 是如何构建和发布的。 | 10 |
+| `01_traits` | [Traits](../../02_intermediate/00_traits/01_traits.md) | Traits | Traits define shared behavior in Rust: interfaces with methods, associated types, and default implementations that can be composed through trait bounds. The chapter explores implementing traits, trait objects, object safety, the orphan rule, coherence, and advanced patterns such as associated types and blanket impls. | 50 |
+| `02_generics` | [Generics](../../02_intermediate/01_generics/02_generics.md) | Generics | Generics. Parametric polymorphism in Rust enabling type-safe, reusable code across types. Covers generic functions, structs, trait bounds, and monomorphization trade-offs. | 59 |
+| `03_memory_management` | [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) | Memory Management | Memory Management. Rust's compile-time memory safety through ownership, borrowing, and lifetimes. Covers stack vs heap, RAII, smart pointers, and zero-cost abstractions. | 43 |
+| `04_error_handling` | [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) | Error Handling | Error Handling. Guide to 04 Error Handling. | 43 |
+| `05_assert_matches` | [`assert_matches!`：模式匹配断言的形式化语义](../../02_intermediate/06_macros_and_metaprogramming/05_assert_matches.md) | assert_matches! Macro | The `assert_matches!` macro for pattern-based assertions on enums and trait objects. | 21 |
+| `06_range_types` | [Rust 范围类型语义：`std::ops::Range` → `core::range`](../../02_intermediate/04_types_and_conversions/06_range_types.md) | Range Types | Range Types: intermediate Rust mechanisms, patterns, and practical examples. | 30 |
+| `07_closure_types` | [闭包类型系统：Fn、FnMut、FnOnce 的捕获语义](../../02_intermediate/04_types_and_conversions/07_closure_types.md) | Closure Types | Rust closure types, capture modes, `Fn`/`FnMut`/`FnOnce` traits, and lifetime interactions. | 20 |
+| `08_interior_mutability` | [内部可变性：编译期规则的运行时逃逸](../../02_intermediate/02_memory_management/08_interior_mutability.md) | Interior Mutability | Interior Mutability: intermediate Rust mechanisms, patterns, and practical examples. | 26 |
+| `09_serde_patterns` | [Serde 序列化模式：Rust 的类型驱动数据转换](../../02_intermediate/00_traits/09_serde_patterns.md) | Serde Patterns | Serde Patterns: intermediate Rust mechanisms, patterns, and practical examples. | 28 |
+| `10_module_system` | [模块系统：Rust 的代码组织与可见性规则](../../02_intermediate/05_modules_and_visibility/10_module_system.md) | Modules | Modules. Core Rust concept covering mechanism analysis, in-depth analysis. | 28 |
+| `11_cow_and_borrowed` | [Cow：写时克隆与零拷贝抽象](../../02_intermediate/02_memory_management/11_cow_and_borrowed.md) | Cow and Borrowed | Cow and Borrowed: intermediate Rust mechanisms, patterns, and practical examples. | 25 |
+| `12_smart_pointers` | [智能指针：堆内存管理与共享语义](../../02_intermediate/02_memory_management/12_smart_pointers.md) | Smart Pointers | Smart Pointers. Core Rust concept covering mechanism analysis, design patterns, ownership and borrowing. | 26 |
+| `13_dsl_and_embedding` | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md) | Dsl and Embedding | Dsl and Embedding: intermediate Rust mechanisms, patterns, and practical examples. | 27 |
+| `14_newtype_and_wrapper` | [Newtype 与包装器模式：类型安全的零成本抽象](../../02_intermediate/04_types_and_conversions/14_newtype_and_wrapper.md) | Newtype and Wrapper Types | Using newtype and wrapper patterns for type safety, zero-cost abstraction, and trait orphan rules. | 28 |
+| `15_iterator_patterns` | [Rust 迭代器模式](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) | Iterators | Iterators. Core Rust concept covering practical applications, mechanism analysis, in-depth analysis, performance optimization. | 31 |
+| `16_error_handling_deep_dive` | [错误处理深入：从 Result 到自定义错误生态](../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md) | Error Handling | Error Handling. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics. | 28 |
+| `17_macro_patterns` | [宏模式：编译期代码生成的工程实践](../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md) | Macros | Macros. Core Rust concept covering practical examples, mechanism analysis, in-depth analysis. | 22 |
+| `18_lifetimes_advanced` | [生命周期高级主题：从 HRTB 到自引用类型](../../02_intermediate/00_traits/18_lifetimes_advanced.md) | Lifetimes | Lifetimes. Core Rust concept covering mechanism analysis, in-depth analysis, lifetime semantics. | 27 |
+| `19_advanced_traits` | [高级 Trait 主题：从关联类型到特化](../../02_intermediate/00_traits/19_advanced_traits.md) | Traits | Traits. Core Rust concept covering mechanism analysis, in-depth analysis, generic programming. | 23 |
+| `20_type_system_advanced` | [高级类型系统：从关联类型到类型级编程](../../02_intermediate/04_types_and_conversions/20_type_system_advanced.md) | Type System | Type System. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics. | 25 |
+| `21_metaprogramming` | [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) | Metaprogramming | Metaprogramming: intermediate Rust mechanisms, patterns, and practical examples. | 37 |
+| `22_api_naming_conventions` | [Rust API 命名约定](../../02_intermediate/05_modules_and_visibility/22_api_naming_conventions.md) | Idiomatic Rust API Naming Conventions | Rust API naming conventions aligned with the Rust API Guidelines and std library style. | 11 |
+| `23_quiz_traits_and_generics` | [测验：Trait 与泛型](../../02_intermediate/01_generics/23_quiz_traits_and_generics.md) | Generics | Quiz Traits And Generics. Core Rust concept. | 15 |
+| `24_quiz_memory_management` | [测验：内存管理](../../02_intermediate/02_memory_management/24_quiz_memory_management.md) | Memory Management | Quiz Memory Management. Core Rust concept. | 13 |
+| `25_rtti_and_dynamic_typing` | [RTTI 与动态类型识别：从 C++ 到 Rust](../../02_intermediate/04_types_and_conversions/25_rtti_and_dynamic_typing.md) | RTTI and Dynamic Type Identification | Comparison of runtime type identification mechanisms between C++ (`typeid`, `dynamic_cast`) and Rust (`Any` trait, `TypeId`, `downcast_ref`). | 13 |
+| `26_c_preprocessor_vs_rust_macros` | [C 预处理器 vs Rust 宏：从文本替换到语法树](../../02_intermediate/06_macros_and_metaprogramming/26_c_preprocessor_vs_rust_macros.md) | C Preprocessor vs Rust Macros | Comparison between the C preprocessor (textual substitution) and Rust macros (hygienic syntax-tree metaprogramming), covering conditional compilation, include guards, and macro hygiene. | 11 |
+| `27_exception_safety_rust_cpp` | [异常安全：C++ 与 Rust 的错误处理哲学](../../02_intermediate/03_error_handling/27_exception_safety_rust_cpp.md) | Exception Safety: C++ vs Rust | A deep comparison of exception safety guarantees in C++ (strong/basic/no-throw) and Rust's error-handling model (Result, panic, Drop). | 9 |
+| `28_construction_and_initialization` | [构造与初始化：C++ 的构造函数 vs Rust 的结构体字面量](../../02_intermediate/00_traits/28_construction_and_initialization.md) | Construction and Initialization | Comparison of object construction and initialization between C++ (constructors, initializer lists, copy/move semantics) and Rust (struct literals, associated functions, Default, const fn). | 11 |
+| `29_friend_vs_module_privacy` | [友元 vs 模块可见性：C++ 的 `friend` 与 Rust 的隐私边界](../../02_intermediate/05_modules_and_visibility/29_friend_vs_module_privacy.md) | Friend vs Module Privacy | Comparison of C++ `friend` access control and Rust module visibility system. | 10 |
+| `30_quiz_cpp_rust_foundations` | [测验：C/C++ → Rust 基础知识对比](../../02_intermediate/09_quizzes/30_quiz_cpp_rust_foundations.md) | Quiz: C/C++ to Rust Foundations | Embedded quiz for the C/C++ engineering-layer comparison files: RTTI, macros, exception safety, construction, friend, move semantics, and value/reference semantics. | 8 |
+| `31_derive_traits` | [可派生 Trait](../../02_intermediate/00_traits/31_derive_traits.md) | Derivable Traits | 标准库中可通过 `#[derive(...)]` 自动实现的 trait 参考：行为、默认实现语义、对字段类型的要求及典型使用场景。 | 9 |
+| `32_editions` | [Rust Editions](../../02_intermediate/00_traits/32_editions.md) | Rust Editions | Rust Edition 机制：2015、2018、2021、2024 各版本的关键差异、版本选择规则、迁移工具 `cargo fix`，以及 edition 与工具链版本的关系。 | 10 |
+| `33_rust_release_process` | [Rust 发布流程](../../02_intermediate/00_traits/33_rust_release_process.md) | Rust Release Process | Rust 的版本发布模型：稳定版、Beta 版、Nightly 版的六周发布周期，以及 Rust 是如何构建和发布的。 | 10 |
 
 ### L3 高级概念层
 
@@ -436,11 +436,11 @@
 
 | A/S/P | 数量 | 代表概念 |
 |:---|:---:|:---|
-| A | 13 | [Rust 职业市场全景：2026 年数据与分析](../../00_meta/career_landscape.md), [Comprehensive Rust 课程映射](../../00_meta/comprehensive_rust_mapping.md), [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/08_collections.md), [模块系统与路径：Rust 的代码组织哲学](../../01_foundation/11_modules_and_paths.md), [`assert_matches!`：模式匹配断言的形式化语义](../../02_intermediate/05_assert_matches.md) |
+| A | 13 | [Rust 职业市场全景：2026 年数据与分析](../career_landscape.md), [Comprehensive Rust 课程映射](../comprehensive_rust_mapping.md), [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/05_collections/08_collections.md), [模块系统与路径：Rust 的代码组织哲学](../../01_foundation/07_modules_and_items/11_modules_and_paths.md), [`assert_matches!`：模式匹配断言的形式化语义](../../02_intermediate/06_macros_and_metaprogramming/05_assert_matches.md) |
 | F | 9 | [Rustc 查询系统与增量编译](../../04_formal/19_rustc_query_system.md), [rustc 中的 Trait Solver](../../04_formal/26_trait_solver_in_rustc.md), [rustc 类型检查与类型推断](../../04_formal/27_type_checking_and_inference.md), [Type Inference Complexity](../../04_formal/29_type_inference_complexity.md), [Rustc 名称解析与 HIR](../../04_formal/35_name_resolution_and_hir.md) |
-| P | 35 | [Concept Audit Guide](../../00_meta/08_concept_audit_guide.md), [常用开发工具](../../01_foundation/42_useful_development_tools.md), [Rust 发布流程](../../02_intermediate/33_rust_release_process.md), [内联汇编 (Inline Assembly)](../../03_advanced/13_inline_assembly.md), [Linkage](../../03_advanced/27_linkage.md) |
-| S | 81 | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/semantic_bridge_algorithms_patterns.md), [Ownership](../../01_foundation/01_ownership.md), [Borrowing](../../01_foundation/02_borrowing.md), [Type System Basics](../../01_foundation/04_type_system.md), [引用语义：自动解引用、Deref 强制与类型转换](../../01_foundation/05_reference_semantics.md) |
-| 未标注 | 244 | [Bloom Taxonomy](../../00_meta/03_bloom_taxonomy.md), [Cross Reference Matrix](../../00_meta/05_cross_reference_matrix.md), [Rust 知识体系 A/S/P 三维认知标记规范](../../00_meta/asp_marking_guide.md), [概念一致性检查清单](../../00_meta/audit_checklist.md), [权威来源映射表](../../00_meta/authority_source_map.md) |
+| P | 35 | [Concept Audit Guide](../08_concept_audit_guide.md), [常用开发工具](../../01_foundation/10_testing_basics/42_useful_development_tools.md), [Rust 发布流程](../../02_intermediate/00_traits/33_rust_release_process.md), [内联汇编 (Inline Assembly)](../../03_advanced/13_inline_assembly.md), [Linkage](../../03_advanced/27_linkage.md) |
+| S | 81 | [语义桥：算法、设计模式与工作流模式的统一谱系](../semantic_bridge_algorithms_patterns.md), [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md), [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md), [Type System Basics](../../01_foundation/02_type_system/04_type_system.md), [引用语义：自动解引用、Deref 强制与类型转换](../../01_foundation/03_values_and_references/05_reference_semantics.md) |
+| 未标注 | 244 | [Bloom Taxonomy](../03_bloom_taxonomy.md), [Cross Reference Matrix](../05_cross_reference_matrix.md), [Rust 知识体系 A/S/P 三维认知标记规范](../asp_marking_guide.md), [概念一致性检查清单](../audit_checklist.md), [权威来源映射表](../authority_source_map.md) |
 
 ## 三、核心枢纽概念（被引用最多）
 
@@ -450,7 +450,7 @@
 | [Application Domains](../../06_ecosystem/04_application_domains.md) | 16 |
 | [Unsafe Rust 安全编程](../../03_advanced/03_unsafe.md) | 16 |
 | [RustBelt & Verification Toolchain](../../04_formal/04_rustbelt.md) | 16 |
-| [Generics](../../02_intermediate/02_generics.md) | 14 |
+| [Generics](../../02_intermediate/01_generics/02_generics.md) | 14 |
 | [Async/Await](../../03_advanced/02_async.md) | 12 |
 | [Rust 形式模型演进跟踪](../../07_future/05_rust_version_tracking.md) | 12 |
 | [Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>](../../05_comparative/01_rust_vs_cpp.md) | 11 |
@@ -463,9 +463,9 @@
 | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/17_cross_compilation.md) | 9 |
 | [Language Evolution](../../07_future/03_evolution.md) | 8 |
 | [Concurrency](../../03_advanced/01_concurrency.md) | 7 |
-| [Borrowing](../../01_foundation/02_borrowing.md) | 6 |
+| [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | 6 |
 | [Core Crates](../../06_ecosystem/03_core_crates.md) | 6 |
-| [Traits](../../02_intermediate/01_traits.md) | 6 |
+| [Traits](../../02_intermediate/00_traits/01_traits.md) | 6 |
 
 ---
 

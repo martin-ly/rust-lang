@@ -9,7 +9,7 @@
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×App — 应用设计模式解决类型安全问题
-> **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
+> **前置概念**: [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
 > **主要来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -692,7 +692,7 @@ impl ThreadSafeSubject {
 }
 ```
 
-`Weak<T>` 在此起到关键作用：它允许 Observer 引用 Subject（或反之）而不增加强引用计数，从而保证当所有强引用消失时，资源可以被确定性释放。[来源: `../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) · [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md)
+`Weak<T>` 在此起到关键作用：它允许 Observer 引用 Subject（或反之）而不增加强引用计数，从而保证当所有强引用消失时，资源可以被确定性释放。[来源: `../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [`../02_intermediate/02_memory_management/03_memory_management.md`](../02_intermediate/02_memory_management/03_memory_management.md)
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** 当需要共享所有权且可能存在循环引用时，优先使用 `Weak` 打破循环，避免内存泄漏。✅
 
@@ -1013,7 +1013,7 @@ fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> 
 2. 性能测试证明单态化（Monomorphization）带来的内联优化有显著收益；
 3. 该抽象为公共 API，需向外部用户承诺稳定接口。
 
-**与 L1-L4 的关联**：过度工程的泛型滥用直接违背 [L2 泛型](../02_intermediate/02_generics.md) 中"约束即文档"的原则——无约束的泛型参数丧失类型信息；过度使用 `dyn Trait` 则绕过了 [L1 所有权](../01_foundation/01_ownership.md) 的编译期精确分析，引入运行时间接调用。
+**与 L1-L4 的关联**：过度工程的泛型滥用直接违背 [L2 泛型](../02_intermediate/01_generics/02_generics.md) 中"约束即文档"的原则——无约束的泛型参数丧失类型信息；过度使用 `dyn Trait` 则绕过了 [L1 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 的编译期精确分析，引入运行时间接调用。
 
 > **来源**: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines//flexibility.html) · [Rust Design Patterns — Gold Plating](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
 
@@ -1076,7 +1076,7 @@ impl Transport {
 | 3 | 提取为泛型函数或 Trait | `fn foo<T: Bound>(x: T)` / `trait Foo` |
 | ≥5 | 考虑 crate 级拆分 | Workspace 独立 crate |
 
-**与 L1-L4 的关联**：过早抽象常表现为对 [L2 Trait](../02_intermediate/01_traits.md) 的过早承诺——Trait 一旦作为公共 API 发布，其变更即构成破坏性修改；同时，enum 优先于 dyn Trait 的策略正是 [L1 类型系统](../01_foundation/04_type_system.md) 中"代数数据类型 + 穷尽性检查"优势的体现。
+**与 L1-L4 的关联**：过早抽象常表现为对 [L2 Trait](../02_intermediate/00_traits/01_traits.md) 的过早承诺——Trait 一旦作为公共 API 发布，其变更即构成破坏性修改；同时，enum 优先于 dyn Trait 的策略正是 [L1 类型系统](../01_foundation/02_type_system/04_type_system.md) 中"代数数据类型 + 穷尽性检查"优势的体现。
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//about.html) · [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html) · 可信度: ✅
 
@@ -1124,7 +1124,7 @@ fn run_command(cmd: Command) {
 }
 ```
 
-**与 L1-L4 的关联**：Stringly typed 直接违背 [L1 类型系统](../01_foundation/04_type_system.md) 的核心原则——"使非法状态不可表示"（Making Illegal States Unrepresentable）。enum 的穷尽性检查是 Rust 编译期保证的关键机制，参见 [L1 类型系统](../01_foundation/04_type_system.md) §代数数据类型。
+**与 L1-L4 的关联**：Stringly typed 直接违背 [L1 类型系统](../01_foundation/02_type_system/04_type_system.md) 的核心原则——"使非法状态不可表示"（Making Illegal States Unrepresentable）。enum 的穷尽性检查是 Rust 编译期保证的关键机制，参见 [L1 类型系统](../01_foundation/02_type_system/04_type_system.md) §代数数据类型。
 
 > **来源**: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html) · 可信度: ✅
 
@@ -1181,7 +1181,7 @@ async fn handler(db: &DatabaseLayer, sessions: &SessionLayer) { /* ... */ }
 - 利用所有权系统将状态分散到不同模块，通过消息传递（channel）或 Actor 模式通信。
 - 对跨线程共享状态，优先使用 `tokio::sync::mpsc` 而非 `Arc<Mutex<GlobalState>>`，将共享可变转化为消息传递。
 
-**与 L1-L4 的关联**：上帝对象的 `Mutex<GlobalState>` 模式违背了 L1 所有权 的核心理念——"单一所有者决定生命周期"。通过 Actor / Channel 模型将状态拆分，正是 L3 并发 中"共享状态转化为消息传递"原则的实践。参见 [L1 借用（Borrowing）](../01_foundation/02_borrowing.md) §内部可变性、L3 并发 §Actor 模型。
+**与 L1-L4 的关联**：上帝对象的 `Mutex<GlobalState>` 模式违背了 L1 所有权 的核心理念——"单一所有者决定生命周期"。通过 Actor / Channel 模型将状态拆分，正是 L3 并发 中"共享状态转化为消息传递"原则的实践。参见 [L1 借用（Borrowing）](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) §内部可变性、L3 并发 §Actor 模型。
 
 > **来源**: [Rust API Guidelines — Structs](https://rust-lang.github.io/api-guidelines//predictability.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) · 可信度: ✅
 
@@ -1403,17 +1403,17 @@ fn main() {
 
 | 设计模式 | 依赖的 Rust 概念 | 概念来源文件 | 形式化意义 |
 |:---|:---|:---|:---|
-| RAII | L1 所有权 + Drop trait | `01_foundation/01_ownership.md` | 线性逻辑资源消耗 |
-| Typestate | L1 所有权 + L2 泛型 | `01_foundation/`, `02_intermediate/02_generics.md` | 编译期状态机验证 |
-| Newtype | L1 类型系统 | `01_foundation/04_type_system.md` | 零大小类型包装 |
-| Builder | L2 Trait + 方法链 | `../02_intermediate/01_traits.md` | fluent API 构造 |
-| Zero-cost Abstraction | L2 单态化（Monomorphization） | `02_intermediate/02_generics.md` | 参数多态的编译期消除 |
-| Interior Mutability | L1 借用（Borrowing） + L2 内存 | `01_foundation/02_borrowing.md`, `02_intermediate/03_memory_management.md` | 运行时权限检查替代编译期 |
-| Command | L2 Trait + L1 所有权 | `../02_intermediate/01_traits.md` | 行为参数化 |
-| Visitor | L2 Trait + enum | `../02_intermediate/01_traits.md` | 结构归纳 |
-| Strategy | L2 Trait + 泛型 | `../02_intermediate/01_traits.md` | 多态分发 |
-| State Machine | L1 enum + match | `01_foundation/04_type_system.md` | 代数数据类型穷尽性 |
-| Observer | L1 所有权 + L2 内部可变性 + L3 并发 | `../01_foundation/02_borrowing.md` · `../02_intermediate/03_memory_management.md` | 发布-订阅解耦与循环引用打破 |
+| RAII | L1 所有权 + Drop trait | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | 线性逻辑资源消耗 |
+| Typestate | L1 所有权 + L2 泛型 | `01_foundation/`, `02_intermediate/01_generics/02_generics.md` | 编译期状态机验证 |
+| Newtype | L1 类型系统 | `01_foundation/02_type_system/04_type_system.md` | 零大小类型包装 |
+| Builder | L2 Trait + 方法链 | `../02_intermediate/00_traits/01_traits.md` | fluent API 构造 |
+| Zero-cost Abstraction | L2 单态化（Monomorphization） | `02_intermediate/01_generics/02_generics.md` | 参数多态的编译期消除 |
+| Interior Mutability | L1 借用（Borrowing） + L2 内存 | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`, `02_intermediate/02_memory_management/03_memory_management.md` | 运行时权限检查替代编译期 |
+| Command | L2 Trait + L1 所有权 | `../02_intermediate/00_traits/01_traits.md` | 行为参数化 |
+| Visitor | L2 Trait + enum | `../02_intermediate/00_traits/01_traits.md` | 结构归纳 |
+| Strategy | L2 Trait + 泛型 | `../02_intermediate/00_traits/01_traits.md` | 多态分发 |
+| State Machine | L1 enum + match | `01_foundation/02_type_system/04_type_system.md` | 代数数据类型穷尽性 |
+| Observer | L1 所有权 + L2 内部可变性 + L3 并发 | `../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` · `../02_intermediate/02_memory_management/03_memory_management.md` | 发布-订阅解耦与循环引用打破 |
 
 ---
 
@@ -1460,12 +1460,12 @@ fn main() {
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权 / Drop | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | RAII 根基 |
-| 借用（Borrowing）规则 | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) | 内部可变性前提 |
-| Trait 系统 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | 模式实现基础 |
-| 泛型 | [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) | 零成本抽象（Zero-Cost Abstraction） |
-| 内存管理 | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) | 智能指针（Smart Pointer）模式 |
-| 错误处理（Error Handling） | [`../02_intermediate/04_error_handling.md`](../02_intermediate/04_error_handling.md) | Result 模式 |
+| 所有权 / Drop | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | RAII 根基 |
+| 借用（Borrowing）规则 | [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | 内部可变性前提 |
+| Trait 系统 | [`../02_intermediate/00_traits/01_traits.md`](../02_intermediate/00_traits/01_traits.md) | 模式实现基础 |
+| 泛型 | [`../02_intermediate/01_generics/02_generics.md`](../02_intermediate/01_generics/02_generics.md) | 零成本抽象（Zero-Cost Abstraction） |
+| 内存管理 | [`../02_intermediate/02_memory_management/03_memory_management.md`](../02_intermediate/02_memory_management/03_memory_management.md) | 智能指针（Smart Pointer）模式 |
+| 错误处理（Error Handling） | [`../02_intermediate/03_error_handling/04_error_handling.md`](../02_intermediate/03_error_handling/04_error_handling.md) | Result 模式 |
 | 工具链 | [`./01_toolchain.md`](01_toolchain.md) | 工程支撑 |
 | 设计模式对比 | [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) | 范式定位 |
 | 并发 / 异步（Async） | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) · [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | Observer 异步实现基础 |
@@ -1630,7 +1630,7 @@ impl std::fmt::Display for MyVec {
 ```
 
 > **修正**: 孤儿规则（Orphan Rule）禁止为外部 crate 的外部类型实现外部 trait。使用 Newtype 模式（`struct Wrapper(ExternalType)`）是标准解法。
-> **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [能力图谱](../00_meta/competency_graph.md#三设计能力) · [Trait](../02_intermediate/01_traits.md)
+> **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [能力图谱](../00_meta/competency_graph.md#三设计能力) · [Trait](../02_intermediate/00_traits/01_traits.md)
 
 ### 10.5 边界测试：访问者模式与 Rust 的枚举匹配（设计权衡）
 

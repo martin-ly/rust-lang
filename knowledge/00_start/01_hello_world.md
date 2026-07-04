@@ -2,7 +2,7 @@
 
 > **EN**: Hello, World
 > **Summary**: Hello, World Hello, World.
-> **相关概念**: [控制流](../../concept/01_foundation/07_control_flow.md)
+> **相关概念**: [控制流](../../concept/01_foundation/04_control_flow/07_control_flow.md)
 > **Bloom 层级**: 理解
 > **你的第一个 Rust 程序**
 > **预计时间**: 15 分钟

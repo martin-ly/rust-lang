@@ -8,7 +8,7 @@
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
-> **前置依赖**: [Unsafe Rust](03_unsafe.md) · [Ownership](../01_foundation/01_ownership.md) · [Behavior Considered Undefined](../04_formal/37_behavior_considered_undefined.md)
+> **前置依赖**: [Unsafe Rust](03_unsafe.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Behavior Considered Undefined](../04_formal/37_behavior_considered_undefined.md)
 > **后置概念**: [Atomics and Memory Ordering](11_atomics_and_memory_ordering.md) · [Inline Assembly](13_inline_assembly.md) · [Tree Borrows](../04_formal/36_tree_borrows_deep_dive.md)
 > **定理链**: Byte Model → Provenance → UB Boundary
 > **主要来源**: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -18,8 +18,7 @@
 
 ---
 
-
-> **跨层回溯**: [内存管理](../02_intermediate/03_memory_management.md)
+> **跨层回溯**: [内存管理](../02_intermediate/02_memory_management/03_memory_management.md)
 
 ---
 
@@ -33,7 +32,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与Rust 内存模型（Memory Model）的适用边界。
 5. **迁移应用**: 将 Rust 内存模型（Memory Model） 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -43,7 +41,6 @@
 > **反命题 2**: "忽略 Rust 内存模型（Memory Model） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Rust 内存模型（Memory Model） 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 Rust 内存模型（Memory Model） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rust 内存模型（Memory Model） 具有语言特有的形态。
-
 
 ## 一、内存模型状态
 

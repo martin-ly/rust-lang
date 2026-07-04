@@ -16,7 +16,7 @@
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 Web 框架模式
 > **定位**: 对比分析 Rust 主流 Web 框架——Axum、Actix-web、Rocket、Poem——从架构设计、运行时（Runtime）集成、中间件机制到性能特征，建立系统化的选型决策框架。
-> **前置概念**: [Async](../03_advanced/02_async.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Traits](../02_intermediate/01_traits.md)
+> **前置概念**: [Async](../03_advanced/02_async.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Traits](../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [云原生生态](24_cloud_native.md) · [设计模式](02_patterns.md)
 >
 > **来源**: [axum](https://docs.rs/axum/) · [actix-web](https://docs.rs/actix-web/) · [Rocket](https://rocket.rs/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -771,7 +771,7 @@ graph TD
 
 - [Async/Await](../03_advanced/02_async.md) — 异步编程基础
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发模型
-- [Traits](../02_intermediate/01_traits.md) — Trait 系统与泛型（Generics）约束
+- [Traits](../02_intermediate/00_traits/01_traits.md) — Trait 系统与泛型（Generics）约束
 - [云原生生态](24_cloud_native.md) — 容器化与微服务部署
 - [设计模式](02_patterns.md) — Rust 设计模式
 

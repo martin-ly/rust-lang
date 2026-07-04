@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 HM 类型推断（Type Inference）算法
 > **定位**: 深入分析 **Hindley-Milner (HM) 类型推断（Type Inference）算法**——从 λ 演算到 Rust 的工业实现，探讨 HM 的完备性、Rust 对 HM 的扩展（trait 约束、泛型（Generics）、生命周期（Lifetimes）），以及类型推断与代码可读性的平衡。
-> **前置概念**: [Type Theory](02_type_theory.md) · [Generics](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
+> **前置概念**: [Type Theory](02_type_theory.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Trait](../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [RustBelt](04_rustbelt.md) · [Subtype Variance](06_subtype_variance.md)
 
 ---
@@ -21,12 +21,12 @@
 > [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html) ·
 > [Wikipedia — Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system) ·
 > [Rust RFC 438 — Type Inference](https://github.com/rust-lang/rfcs/pull/438)
-> **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+> **前置依赖**: [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md)
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
 
 ## 📑 目录
 
-- [类型推断（Type Inference）：Hindley-Milner 算法与 Rust 的工业实现](#类型推断hindley-milner-算法与-rust-的工业实现)
+- [类型推断：Hindley-Milner 算法与 Rust 的工业实现](#类型推断hindley-milner-算法与-rust-的工业实现)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 从显式类型到隐式推断](#11-从显式类型到隐式推断)
@@ -35,10 +35,10 @@
   - [二、技术细节](#二技术细节)
     - [2.1 统一（Unification）](#21-统一unification)
   - [十、边界测试：类型推断的编译错误](#十边界测试类型推断的编译错误)
-    - [10.1 边界测试：泛型（Generics）方法链中的类型推断失败（编译错误）](#101-边界测试泛型方法链中的类型推断失败编译错误)
-    - [10.2 边界测试：闭包（Closures）参数类型推断的歧义（编译错误）](#102-边界测试闭包参数类型推断的歧义编译错误)
+    - [10.1 边界测试：泛型方法链中的类型推断失败（编译错误）](#101-边界测试泛型方法链中的类型推断失败编译错误)
+    - [10.2 边界测试：闭包参数类型推断的歧义（编译错误）](#102-边界测试闭包参数类型推断的歧义编译错误)
     - [2.2 泛型函数的类型推断](#22-泛型函数的类型推断)
-    - [2.3 生命周期（Lifetimes）推断](#23-生命周期推断)
+    - [2.3 生命周期推断](#23-生命周期推断)
   - [三、Rust 与 HM 的差异](#三rust-与-hm-的差异)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -487,8 +487,8 @@ graph TD
 ## 相关概念文件
 
 - [Type Theory](02_type_theory.md) — 类型论基础
-- [Generics](../02_intermediate/02_generics.md) — 泛型系统
-- [Trait](../02_intermediate/01_traits.md) — Trait 系统
+- [Generics](../02_intermediate/01_generics/02_generics.md) — 泛型系统
+- [Trait](../02_intermediate/00_traits/01_traits.md) — Trait 系统
 - [Subtype Variance](06_subtype_variance.md) — 子类型与变型
 
 ---

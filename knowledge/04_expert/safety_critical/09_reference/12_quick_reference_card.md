@@ -3,7 +3,7 @@
 > **EN**: Quick Reference Card
 > **Summary**: Rust安全关键系统快速参考卡片 Quick Reference Card.
 >
-> **相关概念**: [引用](../../../../concept/01_foundation/05_reference_semantics.md)
+> **相关概念**: [引用](../../../../concept/01_foundation/03_values_and_references/05_reference_semantics.md)
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]

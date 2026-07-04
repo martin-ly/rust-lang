@@ -230,8 +230,8 @@ Rust 并发     ≡  并发分离逻辑  （Iris: own + shr + 协议验证）
 - [跨层依赖拓扑](inter_layer_topology.md) —— L0-L7 纵向关系
 - [定理推理森林](theorem_inference_forest.md) —— 模型内定理链
 - [边界扩展树](boundary_extension_tree.md) —— 安全边界推演
-- [L1 所有权](../01_foundation/01_ownership.md)
-- [L1 借用](../01_foundation/02_borrowing.md)
+- [L1 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+- [L1 借用](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
 - [L4 线性逻辑](../04_formal/01_linear_logic.md)
 - [L4 所有权形式化](../04_formal/03_ownership_formal.md)
 

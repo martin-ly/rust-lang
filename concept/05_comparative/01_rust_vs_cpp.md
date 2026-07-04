@@ -15,8 +15,8 @@
 > **双维定位**: C×Eva — 评价技术选型的形式化论据
 > **前置概念**:
 >
-> [Ownership](../01_foundation/01_ownership.md) ·
-> [Type System](../01_foundation/04_type_system.md) ·
+> [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Type System](../01_foundation/02_type_system/04_type_system.md) ·
 > [Linear Logic](../04_formal/01_linear_logic.md)
 >
 > **后置概念**:
@@ -93,7 +93,7 @@
 ## 一、核心命题：两种编程本体论
 
 > **L1-L4 映射**: 本节核心概念横跨 L4（形式系统本体论 / 机制工程本体论）与 L1（所有权（Ownership）语义 / C++ 对象模型）。
-> 建议读者在理解本节后再回溯 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)。
+> 建议读者在理解本节后再回溯 [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)。
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐

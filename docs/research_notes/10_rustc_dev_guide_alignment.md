@@ -42,7 +42,7 @@
 | rustc-dev-guide 章节 | 项目文档 | 状态 | 备注 |
 |----------------------|----------|------|------|
 | [Overview](https://rustc-dev-guide.rust-lang.org/overview.html) | [10_formal_full_model_overview.md](10_formal_full_model_overview.md) | ✅ | 编译流程与形式化模型总览 |
-| [Compiler Source](https://rustc-dev-guide.rust-lang.org/compiler-src.html) | [software_design_theory/07_crate_architectures/](./software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) | 🔄 | rustc 自身架构可后续扩展 |
+| [Compiler Source](https://rustc-dev-guide.rust-lang.org/compiler-src.html) | [software_design_theory/07_crate_architectures/](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) | 🔄 | rustc 自身架构可后续扩展 |
 
 ---
 

@@ -5,7 +5,7 @@
 > [Ferrocene](https://ferrous-systems.com/ferrocene/),
 > [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 >
-> **相关概念**: [条件](../../../../concept/01_foundation/07_control_flow.md)
+> **相关概念**: [条件](../../../../concept/01_foundation/04_control_flow/07_control_flow.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 >

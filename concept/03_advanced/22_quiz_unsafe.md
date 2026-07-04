@@ -16,10 +16,10 @@
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [Rust Reference — Unsafe Operations](https://doc.rust-lang.org/reference/unsafe-blocks.html)
 >
-> **前置概念**: [Error Handling](../02_intermediate/04_error_handling.md)
+> **前置概念**: [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md)
 > [Unsafe Rust](03_unsafe.md) ·
-> [Ownership](../01_foundation/01_ownership.md) ·
-> [Borrowing](../01_foundation/02_borrowing.md)
+> [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
 >
 > **对应练习**:
 > [`exercises/src/unsafe_rust/`](../../exercises/src/unsafe_rust)
@@ -598,7 +598,7 @@ fn main() {
 | 10/10 | 🏆 Unsafe 边界已内化 | 进阶至 [Unsafe Patterns](12_unsafe_rust_patterns.md) 或尝试为 crates/ 编写 unsafe 抽象 |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [Unsafe 练习](../../exercises/src/unsafe_rust)，用 Miri 验证所有代码 |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Unsafe Rust](03_unsafe.md) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) |
-| 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../01_foundation/01_ownership.md) 确认基础，再读 Unsafe 章节 |
+| 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 确认基础，再读 Unsafe 章节 |
 
 ---
 

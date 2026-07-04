@@ -19,10 +19,10 @@
 > [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/) ·
 > [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)
 >
-> **前置概念**: [宏（Macro）模式](../02_intermediate/17_macro_patterns.md)
+> **前置概念**: [宏（Macro）模式](../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md)
 > [Macros](04_macros.md) ·
 > [Proc Macros](07_proc_macro.md) ·
-> [Type System](../01_foundation/04_type_system.md)
+> [Type System](../01_foundation/02_type_system/04_type_system.md)
 >
 > **对应练习**:
 > [`exercises/src/macros/`](../../exercises/src/macros)
@@ -657,7 +657,7 @@ macro_rules! make_vec {
 | 10/10 | 🏆 宏系统已内化 | 尝试为 crates/ 编写自定义 derive 或属性宏 |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [宏练习](../../exercises/src/macros)，阅读 `vec!` 等标准宏的源码 |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Macros](04_macros.md) · [Proc Macros](07_proc_macro.md) |
-| 0–3/10 | 📚 建议重新开始 | 从 [宏基础](../01_foundation/12_attributes_and_macros.md) 开始，配合 [TLBoRM](https://danielkeep.github.io/tlborm/book/) |
+| 0–3/10 | 📚 建议重新开始 | 从 [宏基础](../01_foundation/09_macros_basics/12_attributes_and_macros.md) 开始，配合 [TLBoRM](https://danielkeep.github.io/tlborm/book/) |
 
 ---
 

@@ -10,7 +10,7 @@
 > **A/S/P 标记**: **F** — Formal / Infrastructure
 > **双维定位**: F×Inf — 编译器基础设施与形式化方法
 > **定位**: 将 `rustc` 从“顺序 pass 流水线”还原为“按需查询 + 缓存”的真实架构，理解增量编译的底层机制。
-> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Type Inference](08_type_inference.md) · [NLL and Polonius](../03_advanced/08_nll_and_polonius.md)
+> **前置概念**: [Type System](../01_foundation/02_type_system/04_type_system.md) · [Type Inference](08_type_inference.md) · [NLL and Polonius](../03_advanced/08_nll_and_polonius.md)
 > **后置概念**: [Compiler Internals](../06_ecosystem/45_compiler_internals.md) · [Compiler Infrastructure](../06_ecosystem/47_compiler_infrastructure.md)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -20,7 +20,6 @@
 > [Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation.html) ·
 > [Rustc Dev Guide — Overview](https://rustc-dev-guide.rust-lang.org/overview.html) ·
 > [Salsa](https://salsa-rs.github.io/salsa/)
-
 
 ---
 
@@ -34,7 +33,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与Rustc 查询系统与增量编译的适用边界。
 5. **迁移应用**: 将 Rustc 查询系统与增量编译 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 > **过渡**: 从 Rustc 查询系统与增量编译 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -43,7 +41,6 @@
 
 > **过渡**: 最后，将 Rustc 查询系统与增量编译 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
-
 ---
 
 > **定理 1** [Tier 2]: Rustc 查询系统与增量编译 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
@@ -51,7 +48,6 @@
 > **定理 2** [Tier 2]: 正确理解 Rustc 查询系统与增量编译 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
 >
 > **定理 3** [Tier 3]: 将 Rustc 查询系统与增量编译 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 
 ---
 
@@ -63,10 +59,11 @@
 
 > **反命题 3**: "其他语言对 Rustc 查询系统与增量编译 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rustc 查询系统与增量编译 具有语言特有的形态。
 
-
 ## 📑 目录
 
 - [Rustc 查询系统与增量编译](#rustc-查询系统与增量编译)
+  - [认知路径](#认知路径)
+  - [反命题决策树](#反命题决策树)
   - [📑 目录](#-目录)
   - [一、为什么需要查询系统](#一为什么需要查询系统)
   - [二、查询系统的核心抽象](#二查询系统的核心抽象)

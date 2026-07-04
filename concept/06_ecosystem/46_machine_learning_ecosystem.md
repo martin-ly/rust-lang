@@ -11,7 +11,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust ML 生态的技术选型与工程权衡
-> **前置依赖**: [类型系统（Type System）](../01_foundation/04_type_system.md) · [泛型（Generics）](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
+> **前置依赖**: [类型系统（Type System）](../01_foundation/02_type_system/04_type_system.md) · [泛型（Generics）](../02_intermediate/01_generics/02_generics.md) · [Trait](../02_intermediate/00_traits/01_traits.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 > **后置延伸**: [嵌入式系统](22_embedded_systems.md) · [性能优化](15_performance_optimization.md) · [并发编程](../03_advanced/01_concurrency.md)
 >
 > **来源**: [candle](https://docs.rs/candle-core/) · [burn](https://docs.rs/burn/) · [tch-rs](https://docs.rs/tch/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -63,7 +63,7 @@
     - [8.2 边界极限](#82-边界极限)
   - [九、边界测试](#九边界测试)
     - [9.1 边界测试：未初始化张量内存导致信息泄露（安全漏洞）](#91-边界测试未初始化张量内存导致信息泄露安全漏洞)
-    - [9.2 边界测试：单线程 DataFrame 操作在并发场景下竞争（运行时（Runtime）错误）](#92-边界测试单线程-dataframe-操作在并发场景下竞争运行时错误)
+    - [9.2 边界测试：单线程 DataFrame 操作在并发场景下竞争（运行时错误）](#92-边界测试单线程-dataframe-操作在并发场景下竞争运行时错误)
     - [9.3 边界测试：模型输入维度不匹配导致 panic（逻辑错误）](#93-边界测试模型输入维度不匹配导致-panic逻辑错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
@@ -843,7 +843,7 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 - [性能优化](15_performance_optimization.md) — SIMD、缓存优化、内存布局
 - [嵌入式系统](22_embedded_systems.md) — `#![no_std]`、资源受限环境
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、多线程并行
-- [类型系统（Type System）](../01_foundation/04_type_system.md) — 泛型（Generics）、Trait、类型安全
+- [类型系统（Type System）](../01_foundation/02_type_system/04_type_system.md) — 泛型（Generics）、Trait、类型安全
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — FFI 绑定、C 库交互
 - [网络协议](38_network_protocols.md) — gRPC、HTTP/2、序列化
 - [云原生](24_cloud_native.md) — 容器化部署、微服务

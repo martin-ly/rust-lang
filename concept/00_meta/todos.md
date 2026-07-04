@@ -234,8 +234,8 @@
 
 ### Wave 4: L2-L4 精细化增强（待开始）
 
-- [x] `02_intermediate/01_traits.md` —— CMU 17-363 traits、Type Class 论文 ✅ 2026-05-13
-- [x] `02_intermediate/02_generics.md` —— System F 论文、Const Generics RFC ✅ 2026-05-13
+- [x] `02_intermediate/00_traits/01_traits.md` —— CMU 17-363 traits、Type Class 论文 ✅ 2026-05-13
+- [x] `02_intermediate/01_generics/02_generics.md` —— System F 论文、Const Generics RFC ✅ 2026-05-13
 - [x] `04_formal/01_linear_logic.md` —— 786 行 ✅（目标 450+）
 - [x] `04_formal/02_type_theory.md` —— 765 行 ✅（目标 400+）
 - [x] `04_formal/03_ownership_formal.md` —— 782 行 ✅（目标 350+）

@@ -10,7 +10,7 @@
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Type — 类型系统（Type System）与形式化方法
 > **定位**: 把“这个类型是否实现了某 trait”这一核心问题，还原为候选装配、筛选、确认与约束求解的完整算法。
-> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Type Inference](08_type_inference.md) · [Name Resolution and HIR](35_name_resolution_and_hir.md)
+> **前置概念**: [Type System](../01_foundation/02_type_system/04_type_system.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Type Inference](08_type_inference.md) · [Name Resolution and HIR](35_name_resolution_and_hir.md)
 > **后置概念**: [Rustc Query System](19_rustc_query_system.md) · [Ownership Formal](03_ownership_formal.md)
 
 ---
@@ -19,7 +19,6 @@
 > [Rustc Dev Guide — Next-gen trait solving](https://rustc-dev-guide.rust-lang.org/solve/the-solver.html) ·
 > [Rustc Dev Guide — Trait Specialization](https://rustc-dev-guide.rust-lang.org/traits/specialization.html) ·
 > [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)
-
 
 ---
 
@@ -33,7 +32,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与rustc 中的 Trait Solver的适用边界。
 5. **迁移应用**: 将 rustc 中的 Trait Solver 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 > **过渡**: 从 rustc 中的 Trait Solver 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -42,7 +40,6 @@
 
 > **过渡**: 最后，将 rustc 中的 Trait Solver 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
-
 ---
 
 > **定理 1** [Tier 2]: rustc 中的 Trait Solver 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
@@ -50,7 +47,6 @@
 > **定理 2** [Tier 2]: 正确理解 rustc 中的 Trait Solver 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
 >
 > **定理 3** [Tier 3]: 将 rustc 中的 Trait Solver 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 
 ---
 
@@ -62,10 +58,11 @@
 
 > **反命题 3**: "其他语言对 rustc 中的 Trait Solver 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 rustc 中的 Trait Solver 具有语言特有的形态。
 
-
 ## 📑 目录
 
 - [rustc 中的 Trait Solver](#rustc-中的-trait-solver)
+  - [认知路径](#认知路径)
+  - [反命题决策树](#反命题决策树)
   - [📑 目录](#-目录)
   - [一、问题定义：Obligation](#一问题定义obligation)
   - [二、三大核心操作](#二三大核心操作)

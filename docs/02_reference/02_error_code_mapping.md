@@ -6,7 +6,7 @@
 > **Bloom 层级**: L2 (理解)
 >
 > **层次定位**: L1-L3 基础-高级 / 编译器诊断参考
-> **前置依赖**: [docs 核心概念](../01_core/README.md) · [concept L1 所有权](../../concept/01_foundation/01_ownership.md)
+> **前置依赖**: [docs 核心概念](../01_core/README.md) · [concept L1 所有权](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **后置延伸**: [docs 性能调优](../05_guides/05_performance_tuning_guide.md) · [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md)
 > **跨层映射**: docs→concept 诊断映射 | L1-L3 错误→概念
 > **定理链编号**: E0502 ↔ T-010 | E0597 ↔ T-011

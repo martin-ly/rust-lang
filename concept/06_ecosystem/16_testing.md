@@ -17,7 +17,7 @@
 > property-based testing（proptest [来源: [proptest](https://docs.rs/proptest/latest/proptest/)]）到模糊测试（cargo-fuzz），
 > 分析 Rust 的类型系统（Type System）如何与测试策略协同实现"编译即验证"的工程学理念。
 > **前置概念**:
-> [Error Handling](../02_intermediate/04_error_handling.md) ·
+> [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) ·
 > [Macros](../03_advanced/04_macros.md)
 > **后置概念**:
 > [Miri](../03_advanced/03_unsafe.md) ·
@@ -500,7 +500,7 @@ graph TD
 
 ## 相关概念文件
 
-- [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理（Error Handling）
+- [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) — 错误处理（Error Handling）
 - [Unsafe](../03_advanced/03_unsafe.md) — unsafe 代码测试
 - [Documentation](14_documentation.md) — 文档测试
 

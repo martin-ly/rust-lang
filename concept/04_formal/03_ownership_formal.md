@@ -11,7 +11,7 @@
 > **层次定位**: L4 形式化理论 / 所有权（Ownership）形式化子域 [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价形式化模型的完备性
-> **前置依赖**: [L1 所有权（Ownership）](../01_foundation/01_ownership.md) · [L1 借用（Borrowing）](../01_foundation/02_borrowing.md) · L4 线性逻辑
+> **前置依赖**: [L1 所有权（Ownership）](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [L1 借用（Borrowing）](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · L4 线性逻辑
 > **后置延伸**: [L4 RustBelt](04_rustbelt.md) · [L7 形式化方法](../07_future/02_formal_methods.md) · [L3 Unsafe](../03_advanced/03_unsafe.md)
 > **跨层映射**: L4↔L1 形式化 ↔ 直觉 双射 | L4→L3 Unsafe 边界 ↔ 公理扩展
 > **定理链编号**: T-100 借用（Borrowing）检查可判定性 → T-101 所有权（Ownership）类型 soundness → T-102 内存安全（Memory Safety）完备性
@@ -142,7 +142,7 @@ stateDiagram-v2
 > **认知功能**: 此状态图将所有权形式化的**分数权限模型**转化为可视化的状态机。关键洞察：**所有权不是静态属性，而是随程序执行动态变化的状态**。`Owned` 态（π=1）可以分化为 `SharedBorrow`（π 拆分）或 `MutBorrow`（临时转移），但最终必须回归 `Owned` 或进入 `Dropped`。这对应分离逻辑中的资源不变量：资源要么被持有，要么被释放，不存在"悬空持有"状态。
 > [来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)]
 > **前置概念**: [Type System](06_subtype_variance.md)
-> **后置概念**: [Borrowing](../01_foundation/02_borrowing.md)
+> **后置概念**: [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
 ---
 
 ## 一、权威定义（Definition）
@@ -519,9 +519,9 @@ Oxide 视角:
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | 形式化对象 |
-| 生命周期（Lifetimes） | [`../01_foundation/03_lifetimes.md`](../01_foundation/03_lifetimes.md) | 区域类型对应 |
-| 借用（Borrowing） | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) | 分数权限对应 |
+| 所有权 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 形式化对象 |
+| 生命周期（Lifetimes） | [`../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 区域类型对应 |
+| 借用（Borrowing） | [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | 分数权限对应 |
 | 线性逻辑 | [`./01_linear_logic.md`](01_linear_logic.md) | 理论基础 |
 | 类型论 | [`./02_type_theory.md`](02_type_theory.md) | 约束求解 |
 | RustBelt | [`./04_rustbelt.md`](04_rustbelt.md) | 验证实现 |

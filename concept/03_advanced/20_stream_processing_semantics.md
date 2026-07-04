@@ -9,7 +9,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析流处理系统的形式化语义与工程实现
 > **定位**: 深入分析流处理的核心语义——时间域、窗口、水印、容错、状态管理、背压，并将 Rust 的 timely/differential dataflow 置于国际流处理理论谱系中定位。
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) ·
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
 > [Concurrency](01_concurrency.md) ·
 > [Async/Await](02_async.md) ·
 > [Evaluation Strategies](../04_formal/18_evaluation_strategies.md)
@@ -75,7 +75,7 @@
     - [12.3 边界测试：背压与死锁](#123-边界测试背压与死锁)
   - [十三、知识来源关系](#十三知识来源关系)
   - [十、边界测试：流处理语义的编译错误](#十边界测试流处理语义的编译错误)
-    - [10.1 边界测试：Tokio Stream 与所有权（Ownership）冲突（编译错误）](#101-边界测试tokio-stream-与所有权冲突编译错误)
+    - [10.1 边界测试：Tokio Stream 与所有权冲突（编译错误）](#101-边界测试tokio-stream-与所有权冲突编译错误)
     - [10.2 边界测试：背压传播中的类型不匹配（编译错误）](#102-边界测试背压传播中的类型不匹配编译错误)
     - [10.3 边界测试：Stream 的 `fuse` 与重复 poll 后的行为（逻辑错误）](#103-边界测试stream-的-fuse-与重复-poll-后的行为逻辑错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)

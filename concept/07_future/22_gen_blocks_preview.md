@@ -15,7 +15,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 应用 gen 块构建迭代器（Iterator）
-> **前置依赖**: [Iterator](../02_intermediate/15_iterator_patterns.md) · [Async](../03_advanced/02_async.md)
+> **前置依赖**: [Iterator](../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) · [Async](../03_advanced/02_async.md)
 > **后置延伸**: [Async Gen](22_gen_blocks_preview.md)
 > **来源**: [RFC 3513 — Gen Blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html) · [Tracking Issue #117078](https://github.com/rust-lang/rust/issues/117078) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -165,7 +165,7 @@ fn main() {}
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Gen Blocks 预览特性
 > **定位**: 探讨 Rust 中 **gen blocks**（生成器块）的提案——将 `async`/`.await` 的模式从**异步（Async）计算**泛化到**惰性迭代**和**协程**，分析其对迭代器（Iterator）生态、流处理（Stream）和异步生成器的影响。
-> **前置概念**: [Async](../03_advanced/02_async.md) · [Traits/Iterators](../02_intermediate/01_traits.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Async](../03_advanced/02_async.md) · [Traits/Iterators](../02_intermediate/00_traits/01_traits.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [Version Tracking](05_rust_version_tracking.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -527,7 +527,7 @@ graph TD
 ## 相关概念文件
 
 - [Async](../03_advanced/02_async.md) — 异步编程与 Future
-- [Traits](../02_intermediate/01_traits.md) — Trait 系统与 Iterator
+- [Traits](../02_intermediate/00_traits/01_traits.md) — Trait 系统与 Iterator
 - [Version Tracking](05_rust_version_tracking.md) — Rust 版本特性演进
 
 ---

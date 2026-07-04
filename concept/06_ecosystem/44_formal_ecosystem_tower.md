@@ -8,9 +8,9 @@
 > **内容分级**: [专家级]
 > **层级**: L6 生态工程
 > **前置概念**:
-> [Ownership](../01_foundation/01_ownership.md) ·
-> [Traits](../02_intermediate/01_traits.md) ·
-> [Generics](../02_intermediate/02_generics.md) ·
+> [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Traits](../02_intermediate/00_traits/01_traits.md) ·
+> [Generics](../02_intermediate/01_generics/02_generics.md) ·
 > [Async](../03_advanced/02_async.md) ·
 > [Unsafe](../03_advanced/03_unsafe.md) ·
 > [Type Theory](../04_formal/02_type_theory.md)

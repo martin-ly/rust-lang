@@ -4,8 +4,8 @@
 > **Summary**: 迭代器 Iterators.
 > **📎 交叉引用**
 >
-> 本主题在 concept 中有深度的概念分析：[迭代器](../../concept/02_intermediate/15_iterator_patterns.md)
-> **相关概念**: [迭代器](../../concept/02_intermediate/15_iterator_patterns.md)
+> 本主题在 concept 中有深度的概念分析：[迭代器](../../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
+> **相关概念**: [迭代器](../../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
 > **Bloom 层级**: 理解
 > **版本**: Rust 1.94 引入 (`array_windows`，1.96+ 可用) / 1.80.0 (`Peekable::next_if`)
 > **特性**: `array_windows`, `Peekable::next_if`
@@ -403,7 +403,7 @@ fn parse_args(input: &str) -> Vec<String> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 借用与引用 (Borrowing and References)](01_borrowing.md)
-- [Rust 生命周期 (Lifetimes)](03_lifetimes.md)
+- [Rust 生命周期 (Lifetimes)](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 - [Rust 所有权深入](04_ownership.md)
 - [集合类型 (Collections)](../02_intermediate/01_collections.md)
 

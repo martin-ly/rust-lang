@@ -8,12 +8,12 @@
 > **Bloom 层级**: 分析 → 应用
 > **定位**: 深入探讨 Rust 中的**类型擦除**技术——从 trait object 到 vtable，分析动态分发如何在保持类型安全的同时实现运行时（Runtime）多态。
 > **前置概念**:
-> [Trait](../02_intermediate/01_traits.md) ·
-> [Type System](../01_foundation/04_type_system.md) ·
-> [Generics](../02_intermediate/02_generics.md)
+> [Trait](../02_intermediate/00_traits/01_traits.md) ·
+> [Type System](../01_foundation/02_type_system/04_type_system.md) ·
+> [Generics](../02_intermediate/01_generics/02_generics.md)
 > **后置概念**:
 > [Performance](../06_ecosystem/15_performance_optimization.md) ·
-> [Object Safety](../02_intermediate/01_traits.md)
+> [Object Safety](../02_intermediate/00_traits/01_traits.md)
 
 ---
 
@@ -49,11 +49,11 @@
   - [十、边界测试：类型擦除的编译错误](#十边界测试类型擦除的编译错误)
     - [10.1 边界测试：`dyn Trait` 的大小未知（编译错误）](#101-边界测试dyn-trait-的大小未知编译错误)
     - [10.2 边界测试：trait object 的方法返回 `Self`（编译错误）](#102-边界测试trait-object-的方法返回-self编译错误)
-    - [10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（Lifetimes）（编译错误）](#103-边界测试any-的-downcast_ref-与生命周期编译错误)
+    - [10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（编译错误）](#103-边界测试any-的-downcast_ref-与生命周期编译错误)
     - [10.4 边界测试：vtable 与对象安全的隐性约束（编译错误）](#104-边界测试vtable-与对象安全的隐性约束编译错误)
     - [10.3 边界测试：`dyn Trait` 与 `Sized` 边界的冲突（编译错误）](#103-边界测试dyn-trait-与-sized-边界的冲突编译错误)
-    - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型（Generics）约束（编译错误）](#104-边界测试dyn-trait-的-sized-要求与泛型约束编译错误)
-    - [10.6 边界测试：所有权（Ownership）移动后的再次使用](#106-边界测试所有权移动后的再次使用)
+    - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型约束（编译错误）](#104-边界测试dyn-trait-的-sized-要求与泛型约束编译错误)
+    - [10.6 边界测试：所有权移动后的再次使用](#106-边界测试所有权移动后的再次使用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`dyn Trait` 的大小为什么在编译时未知？它如何被实际使用？（理解层）](#测验-1dyn-trait-的大小为什么在编译时未知它如何被实际使用理解层)
     - [测验 2：`&dyn Trait` 在内存中的布局是什么？（理解层）](#测验-2dyn-trait-在内存中的布局是什么理解层)
@@ -565,10 +565,10 @@ graph TD
 
 ## 相关概念文件
 
-- [Trait](../02_intermediate/01_traits.md) — Trait
-- [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）
+- [Trait](../02_intermediate/00_traits/01_traits.md) — Trait
+- [Generics](../02_intermediate/01_generics/02_generics.md) — 泛型（Generics）
 - [Performance](../06_ecosystem/15_performance_optimization.md) — 性能优化
-- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
+- [Type System](../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 
 ---
 

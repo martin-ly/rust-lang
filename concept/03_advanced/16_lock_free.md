@@ -22,8 +22,8 @@
 > [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) ·
 > [Wikipedia — Lock-free](https://en.wikipedia.org/wiki/Non-blocking_algorithm) ·
 > [Herlihy & Shavit — The Art of Multiprocessor Programming](https://www.amazon.com/Art-Multiprocessor-Programming-Revised-Reprint/dp/0123973376)
-> **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md)
-> **前置依赖**: [Traits](../02_intermediate/01_traits.md)
+> **前置依赖**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
+> **前置依赖**: [Traits](../02_intermediate/00_traits/01_traits.md)
 > **对应 Crate**: [`c05_threads`](../../crates/c05_threads)
 > **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency)
 
@@ -52,9 +52,9 @@
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-    - [10.5 边界测试：内存序的 `Release`/`Acquire` 与数据依赖（运行时（Runtime）可见性问题）](#105-边界测试内存序的-releaseacquire-与数据依赖运行时可见性问题)
-    - [10.3 边界测试：ABA 问题与无锁栈的内存安全（Memory Safety）（运行时（Runtime） UB）](#103-边界测试aba-问题与无锁栈的内存安全运行时-ub)
-    - [10.5 边界测试：返回局部变量的悬垂引用（Reference）](#105-边界测试返回局部变量的悬垂引用)
+    - [10.5 边界测试：内存序的 `Release`/`Acquire` 与数据依赖（运行时可见性问题）](#105-边界测试内存序的-releaseacquire-与数据依赖运行时可见性问题)
+    - [10.3 边界测试：ABA 问题与无锁栈的内存安全（运行时 UB）](#103-边界测试aba-问题与无锁栈的内存安全运行时-ub)
+    - [10.5 边界测试：返回局部变量的悬垂引用](#105-边界测试返回局部变量的悬垂引用)
   - [参考来源](#参考来源)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)

@@ -159,7 +159,7 @@
 - **LazyCell** - [03_advanced/lazy_initialization.md](03_advanced/04_lazy_initialization.md) - Rust 1.96 (`get`, `get_mut`, `force_mut` accessors)
 - **LazyLock** - [03_advanced/lazy_initialization.md](03_advanced/04_lazy_initialization.md) - Rust 1.96 (`get`, `get_mut`, `force_mut` accessors)
 - **learning roadmap** - [00_start/03_learning_roadmap.md](00_start/03_learning_roadmap.md)
-- **lifetimes** - [01_fundamentals/lifetimes.md](01_fundamentals/03_lifetimes.md)
+- **lifetimes** - [01_fundamentals/lifetimes.md](../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 - **LRU Cache** - [99_archive/case_studies.md](99_archive/03_case_studies.md)
 
 ### M

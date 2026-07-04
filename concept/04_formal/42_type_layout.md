@@ -8,7 +8,7 @@
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
-> **前置依赖**: [Type System](../01_foundation/04_type_system.md) · [Special Types and Traits](41_special_types_and_traits.md) · [Memory Model](../03_advanced/29_memory_model.md)
+> **前置依赖**: [Type System](../01_foundation/02_type_system/04_type_system.md) · [Special Types and Traits](41_special_types_and_traits.md) · [Memory Model](../03_advanced/29_memory_model.md)
 > **后置概念**: [Behavior Considered Undefined](37_behavior_considered_undefined.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [FFI Advanced](../03_advanced/09_ffi_advanced.md)
 > **定理链**: Type → Size/Align/Offset → Repr → ABI
 > **主要来源**: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/) · [System V AMD64 ABI](https://gitlab.com/x86-psABIs/x86-64-ABI) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)

@@ -9,7 +9,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析借用（Borrowing）检查算法的精度演进
 > **定位**: 深入分析 Rust **借用（Borrowing）检查器**的两个里程碑——Non-Lexical Lifetimes (NLL) 如何放宽词法作用域限制，以及 Polonius 如何通过数据流分析实现更精确的借用检查，揭示 Rust 类型系统（Type System）的持续演进。
-> **前置概念**: [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [Unsafe](03_unsafe.md) · [Formal Methods](../04_formal/04_rustbelt.md)
 >
 > **来源**: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs//2094-nll.html) · [Polonius](https://github.com/rust-lang/polonius) · [Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -20,16 +20,16 @@
 > [Polonius Repository](https://github.com/rust-lang/polonius) ·
 > [The Rust Compiler Guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html) ·
 > [Wikipedia — Data-flow Analysis](https://en.wikipedia.org/wiki/Data-flow_analysis)
-> **前置依赖**: [Traits](../02_intermediate/01_traits.md)
+> **前置依赖**: [Traits](../02_intermediate/00_traits/01_traits.md)
 > **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope)
 > **对应练习**: [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing)
 
 ## 📑 目录
 
-- [NLL 与 Polonius：借用（Borrowing）检查器的演进](#nll-与-polonius借用检查器的演进)
+- [NLL 与 Polonius：借用检查器的演进](#nll-与-polonius借用检查器的演进)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 词法生命周期（Lifetimes）的问题](#11-词法生命周期的问题)
+    - [1.1 词法生命周期的问题](#11-词法生命周期的问题)
     - [1.2 NLL 的解决方案](#12-nll-的解决方案)
     - [1.3 Polonius 的进一步精确化](#13-polonius-的进一步精确化)
   - [二、技术细节](#二技术细节)
@@ -544,9 +544,9 @@ fn main() {
 
 ## 相关概念文件
 
-- [Borrowing](../01_foundation/02_borrowing.md) — 借用系统
-- [Lifetimes](../01_foundation/03_lifetimes.md) — 生命周期（Lifetimes）
-- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
+- [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用系统
+- [Lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) — 生命周期（Lifetimes）
+- [Type System](../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Unsafe](03_unsafe.md) — 不安全代码
 - [RustBelt](../04_formal/04_rustbelt.md) — 形式化验证
 

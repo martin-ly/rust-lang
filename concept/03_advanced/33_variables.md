@@ -8,7 +8,7 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
-> **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Move Semantics](../01_foundation/23_move_semantics.md) · [Memory Model](29_memory_model.md)
+> **前置依赖**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Move Semantics](../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) · [Memory Model](29_memory_model.md)
 > **后置概念**: [Memory Allocation and Lifetime](32_memory_allocation_and_lifetime.md) · [Destructors](../04_formal/43_destructors.md) · [Unsafe Rust](03_unsafe.md)
 > **定理链**: Variable → Initialization → Drop Scope
 > **主要来源**: [Rust Reference — Variables](https://doc.rust-lang.org/reference/variables.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Variables](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -17,7 +17,6 @@
 > **来源**: [Rust Reference — Variables](https://doc.rust-lang.org/reference/variables.html)
 
 ---
-
 
 ---
 
@@ -31,7 +30,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与变量（Variables）的适用边界。
 5. **迁移应用**: 将 变量（Variables） 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -41,7 +39,6 @@
 > **反命题 2**: "忽略 变量（Variables） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 变量（Variables） 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 变量（Variables） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 变量（Variables） 具有语言特有的形态。
-
 
 ## 一、什么是变量
 
@@ -122,9 +119,9 @@ fn initialization_example() {
 
 | 概念 | 关系 |
 |:---|:---|
-| [Ownership](../01_foundation/01_ownership.md) | 变量是所有权系统的核心载体 |
-| [Move Semantics](../01_foundation/23_move_semantics.md) | 变量赋值涉及 move 语义 |
+| [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 变量是所有权系统的核心载体 |
+| [Move Semantics](../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) | 变量赋值涉及 move 语义 |
 | [Memory Allocation and Lifetime](32_memory_allocation_and_lifetime.md) | 局部变量在栈上分配 |
 | [Destructors](../04_formal/43_destructors.md) | 变量离开作用域时触发析构 |
 | [Unsafe Rust](03_unsafe.md) | 未初始化内存操作需要 unsafe |
-| [Smart Pointers](../02_intermediate/12_smart_pointers.md) | 智能指针（Smart Pointer）管理堆上变量所有权（Ownership） |
+| [Smart Pointers](../02_intermediate/02_memory_management/12_smart_pointers.md) | 智能指针（Smart Pointer）管理堆上变量所有权（Ownership） |

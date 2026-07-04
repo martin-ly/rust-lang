@@ -66,10 +66,10 @@ Week 2: 并发与工程化（20h）
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
 | 安装 | `rustup` 安装、IDE 配置、Cargo 初识 | 0.5h | **必修** | `cargo --version` 正常输出 |
-| 阅读 | [concept/01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | 0.5h | **必修** | 理解 `fn main` 和 `println!` |
-| 阅读 | [concept/01_foundation/20_variable_model.md](../01_foundation/20_variable_model.md) | 0.5h | **必修** | 区分 `let` / `let mut` / `const` |
+| 阅读 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 0.5h | **必修** | 理解 `fn main` 和 `println!` |
+| 阅读 | [concept/01_foundation/03_values_and_references/20_variable_model.md](../01_foundation/03_values_and_references/20_variable_model.md) | 0.5h | **必修** | 区分 `let` / `let mut` / `const` |
 | 练习 | [exercises/rustlings_style/variables.rs](../exercises/rustlings_style/variables.rs) | 0.5h | **必修** | 全部编译通过 |
-| 阅读 | [concept/01_foundation/03_control_flow.md](../01_foundation/07_control_flow.md) | 1h | **必修** | 掌握 `if` / `match` / `for` / `while` |
+| 阅读 | [concept/01_foundation/03_control_flow.md](../01_foundation/04_control_flow/07_control_flow.md) | 1h | **必修** | 掌握 `if` / `match` / `for` / `while` |
 | 练习 | 编写猜数字游戏（无错误处理版） | 1h | **必修** | 能运行，可猜测 1-100 的随机数 |
 
 **产出**: `guessing_game_v1.rs` — 基础猜数字游戏
@@ -84,13 +84,13 @@ Week 2: 并发与工程化（20h）
 
 > 📚 **TRPL 3rd Ed 参考**: [Ch 4 (Understanding Ownership)](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) · [Ch 19.2 (Refutability)](https://doc.rust-lang.org/book/ch19-03-pattern-syntax.html#refutability-whether-a-pattern-might-fail-to-match)
 > 🎓 **Brown 书强化**: [Understanding Ownership](https://rust-book.cs.brown.edu/ch04-00-understanding-ownership.html) — Aquascope 可视化 + Fixing Ownership Errors 小节
-> 📝 **自测**: [所有权清单自测（Brown University Ownership Inventory）](../01_foundation/28_ownership_inventories_brown_book.md) — Inventory #1 本地映射与样题
+> 📝 **自测**: [所有权清单自测（Brown University Ownership Inventory）](../01_foundation/01_ownership_borrow_lifetime/28_ownership_inventories_brown_book.md) — Inventory #1 本地映射与样题
 
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
-| 阅读 | [concept/01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | 1.5h | **必修** | 能向他人解释"所有权三规则" |
+| 阅读 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 1.5h | **必修** | 能向他人解释"所有权三规则" |
 | 练习 | [exercises/rustlings_style/move_semantics.rs](../exercises/rustlings_style/move_semantics.rs) | 1h | **必修** | 全部编译通过 |
-| 阅读 | [concept/01_foundation/02_borrowing.md](../01_foundation/02_borrowing.md) | 1.5h | **必修** | 区分 `&T` / `&mut T`，理解生命周期标注 |
+| 阅读 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | 1.5h | **必修** | 区分 `&T` / `&mut T`，理解生命周期标注 |
 | 练习 | 修复 5 个编译器借用错误（从错误信息推导修复方案） | 1h | **必修** | 不使用 `clone()` 或 `Rc` 也能编译 |
 | 测验 | 自测：为什么这段代码编译失败？ | 1h | **必修** | 能说出"同时存在可变和不可变引用" |
 
@@ -110,11 +110,11 @@ Week 2: 并发与工程化（20h）
 
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
-| 阅读 | [concept/01_foundation/04_type_system.md](../01_foundation/04_type_system.md) | 1.5h | **必修** | 区分 `struct` / `enum` / `tuple` |
-| 阅读 | [concept/02_intermediate/01_traits.md](../02_intermediate/01_traits.md) | 1.5h | **必修** | 能为自己定义的 `struct` 实现 `Debug` 和 `Display` |
-| 阅读 | [concept/01_foundation/05_error_handling.md](../01_foundation/32_error_handling_basics.md) | 1h | **必修** | 掌握 `Result` / `Option` / `?` 运算符 |
+| 阅读 | [concept/01_foundation/02_type_system/04_type_system.md](../01_foundation/02_type_system/04_type_system.md) | 1.5h | **必修** | 区分 `struct` / `enum` / `tuple` |
+| 阅读 | [concept/02_intermediate/00_traits/01_traits.md](../02_intermediate/00_traits/01_traits.md) | 1.5h | **必修** | 能为自己定义的 `struct` 实现 `Debug` 和 `Display` |
+| 阅读 | [concept/01_foundation/05_error_handling.md](../01_foundation/08_error_handling/32_error_handling_basics.md) | 1h | **必修** | 掌握 `Result` / `Option` / `?` 运算符 |
 | 练习 | 重构猜数字游戏：添加输入验证、优雅错误处理 | 1.5h | **必修** | 输入非数字时不 panic |
-| 阅读 | [concept/02_intermediate/02_generics.md](../02_intermediate/02_generics.md) | 0.5h | **必修** | 理解泛型函数的基本写法 |
+| 阅读 | [concept/02_intermediate/01_generics/02_generics.md](../02_intermediate/01_generics/02_generics.md) | 0.5h | **必修** | 理解泛型函数的基本写法 |
 
 **产出**: `guessing_game_v2.rs` — 带错误处理的猜数字游戏
 
@@ -150,9 +150,9 @@ Week 2: 并发与工程化（20h）
 
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
-| 阅读 | [concept/02_intermediate/04_collections.md](../01_foundation/08_collections.md) | 1h | **必修** | 知道何时用 `Vec` / `HashMap` / `BTreeMap` |
+| 阅读 | [concept/02_intermediate/04_collections.md](../01_foundation/05_collections/08_collections.md) | 1h | **必修** | 知道何时用 `Vec` / `HashMap` / `BTreeMap` |
 | 练习 | 用迭代器重构 `rsgrep`（消除显式 `for` 循环） | 1h | **必修** | 代码行数减少 30%+ |
-| 阅读 | [concept/02_intermediate/05_iterators.md](../02_intermediate/15_iterator_patterns.md) | 1h | **必修** | 掌握 `map` / `filter` / `fold` / `collect` |
+| 阅读 | [concept/02_intermediate/05_iterators.md](../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) | 1h | **必修** | 掌握 `map` / `filter` / `fold` / `collect` |
 | 练习 | 实现管道操作：读取 → 过滤 → 转换 → 输出 | 1h | **必修** | 使用 `Iterator` 链式调用 |
 
 **产出**: `rsgrep` v2 — 迭代器驱动的惯用 Rust 代码
@@ -167,7 +167,7 @@ Week 2: 并发与工程化（20h）
 
 > 📚 **TRPL 3rd Ed 参考**: [Ch 16 (Fearless Concurrency)](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 > 🎓 **Brown 书强化**: [Fearless Concurrency](https://rust-book.cs.brown.edu/ch16-00-concurrency.html) — 并发中的所有权转移可视化
-> 📝 **自测**: 生命周期相关 Inventory 见 [所有权清单自测](../01_foundation/28_ownership_inventories_brown_book.md) Inventory #3
+> 📝 **自测**: 生命周期相关 Inventory 见 [所有权清单自测](../01_foundation/01_ownership_borrow_lifetime/28_ownership_inventories_brown_book.md) Inventory #3
 
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
@@ -294,7 +294,7 @@ cargo test --test l3_ecosystem_alignment
 | [Rust Learning Path (官方)](https://www.rust-lang.org/learn) | 入门 → 进阶 | Week 1 → Week 2 | 官方路径更侧重语言本身，本路径增加工程实践 |
 | [Rust by Example](https://doc.rust-lang.org/rust-by-example/) | 主题式学习 | Day 1-6 阅读材料 | 可作为概念文件的代码示例补充 |
 | [TRPL 3rd Ed](https://doc.rust-lang.org/book/title-page.html) | 官方教程 | 全路径 | Rust 1.96.1+ / Edition 2024 基准；Ch 17 为完整异步编程入门 |
-| [Brown University Interactive Book](https://rust-book.cs.brown.edu/) | 交互式教程 | Day 3-4 / Day 10-11 | Aquascope 所有权可视化 + 嵌入式测验；OOPSLA 2023/2024 研究支撑；本地映射见 [`28_ownership_inventories_brown_book.md`](../01_foundation/28_ownership_inventories_brown_book.md) |
+| [Brown University Interactive Book](https://rust-book.cs.brown.edu/) | 交互式教程 | Day 3-4 / Day 10-11 | Aquascope 所有权可视化 + 嵌入式测验；OOPSLA 2023/2024 研究支撑；本地映射见 [`28_ownership_inventories_brown_book.md`](../01_foundation/01_ownership_borrow_lifetime/28_ownership_inventories_brown_book.md) |
 | [Google Comprehensive Rust](https://google.github.io/comprehensive-rust/) | 工业级课程 | Week 1 Day 1-6 + 扩展专题 | Google Android 团队维护；4 天基础 + Android/Chromium/Bare Metal/Concurrency/Idiomatic/Unsafe 专题；本地映射见 [`GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md`](../../archive/reports/2026_07/GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md) |
 
 > **差异说明**:

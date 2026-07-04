@@ -10,7 +10,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 形式化验证工具的技术能力与适用边界
-> **前置依赖**: [类型系统（Type System）](../01_foundation/04_type_system.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · 形式化验证 · [生命周期（Lifetimes）](../01_foundation/03_lifetimes.md)
+> **前置依赖**: [类型系统（Type System）](../01_foundation/02_type_system/04_type_system.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · 形式化验证 · [生命周期（Lifetimes）](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 > **后置延伸**: [编译器内部原理](45_compiler_internals.md) · [安全与密码学](43_security_cryptography.md) · [嵌入式系统](22_embedded_systems.md)
 >
 > **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://github.com/verus-lang/verus/guide/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -41,12 +41,12 @@
   - [三、模型检验工具](#三模型检验工具)
     - [3.1 Kani：基于 CBMC 的 Rust 验证器](#31-kani基于-cbmc-的-rust-验证器)
       - [Kani 0.66 新特性（2026-05 发布）](#kani-066-新特性2026-05-发布)
-    - [3.2 MIRI：运行时（Runtime） UB 检测器](#32-miri运行时-ub-检测器)
+    - [3.2 MIRI：运行时 UB 检测器](#32-miri运行时-ub-检测器)
   - [四、演绎验证工具](#四演绎验证工具)
     - [4.1 Prusti：Viper 分离逻辑验证器](#41-prustiviper-分离逻辑验证器)
     - [4.2 Creusot：Why3/WhyML 验证器](#42-creusotwhy3whyml-验证器)
     - [4.3 Verus：SMT-LIB 验证器](#43-verussmt-lib-验证器)
-  - [五、类型系统（Type System）扩展](#五类型系统扩展)
+  - [五、类型系统扩展](#五类型系统扩展)
     - [5.1 Flux：精化类型（Refinement Types）](#51-flux精化类型refinement-types)
     - [5.2 Aeneas：向函数式语言的转换](#52-aeneas向函数式语言的转换)
   - [六、验证工具对比与选型](#六验证工具对比与选型)
@@ -841,8 +841,8 @@ fn caller() {
 - [安全与密码学](43_security_cryptography.md) — 侧信道防护、常量时间操作
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — Miri、UB、别名模型
 - [形式化验证](../04_formal/05_verification_toolchain.md) — 定理证明器、SMT、分离逻辑
-- [类型系统](../01_foundation/04_type_system.md) — 类型论、泛型（Generics）、Trait
-- [生命周期（Lifetimes）](../01_foundation/03_lifetimes.md) — 借用（Borrowing）规则、NLL、Polonius
+- [类型系统](../01_foundation/02_type_system/04_type_system.md) — 类型论、泛型（Generics）、Trait
+- [生命周期（Lifetimes）](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) — 借用（Borrowing）规则、NLL、Polonius
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、数据竞争
 - [嵌入式系统](22_embedded_systems.md) — `#![no_std]`、资源受限验证
 - [版本跟踪](../07_future/05_rust_version_tracking.md) — Rust 语言演进对验证工具的影响

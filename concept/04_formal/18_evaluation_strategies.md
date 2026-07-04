@@ -13,13 +13,13 @@
 > **前置概念**:
 >
 > [Lambda Calculus](14_lambda_calculus.md) ·
-> [Variable Model](../01_foundation/20_variable_model.md) ·
-> [Type System](../01_foundation/04_type_system.md)
+> [Variable Model](../01_foundation/03_values_and_references/20_variable_model.md) ·
+> [Type System](../01_foundation/02_type_system/04_type_system.md)
 >
 > **后置概念**:
 >
 > [Ownership Formalization](03_ownership_formal.md) ·
-> [Control Flow](../01_foundation/07_control_flow.md)
+> [Control Flow](../01_foundation/04_control_flow/07_control_flow.md)
 >
 > **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
@@ -82,7 +82,7 @@
   - [四、Lambda 演算中的归约策略](#四lambda-演算中的归约策略)
     - [4.1 三种归约策略](#41-三种归约策略)
     - [4.2 Rust 的求值顺序](#42-rust-的求值顺序)
-  - [五、求值策略与类型系统（Type System）的交互](#五求值策略与类型系统的交互)
+  - [五、求值策略与类型系统的交互](#五求值策略与类型系统的交互)
     - [5.1 严格性 vs 类型系统表达能力](#51-严格性-vs-类型系统表达能力)
   - [六、反例与边界测试](#六反例与边界测试)
     - [6.1 反例：严格求值的性能陷阱](#61-反例严格求值的性能陷阱)
@@ -91,8 +91,8 @@
   - [七、跨语言求值策略对比矩阵](#七跨语言求值策略对比矩阵)
   - [八、知识来源关系](#八知识来源关系)
     - [10.3 边界测试：按值传递与 `Copy` 的交互（编译错误）](#103-边界测试按值传递与-copy-的交互编译错误)
-    - [10.4 边界测试：惰性迭代器（Iterator）与严格求值的混合（编译错误/逻辑错误）](#104-边界测试惰性迭代器与严格求值的混合编译错误逻辑错误)
-    - [10.5 边界测试：惰性求值与 panic 的延迟触发（运行时（Runtime）行为差异）](#105-边界测试惰性求值与-panic-的延迟触发运行时行为差异)
+    - [10.4 边界测试：惰性迭代器与严格求值的混合（编译错误/逻辑错误）](#104-边界测试惰性迭代器与严格求值的混合编译错误逻辑错误)
+    - [10.5 边界测试：惰性求值与 panic 的延迟触发（运行时行为差异）](#105-边界测试惰性求值与-panic-的延迟触发运行时行为差异)
     - [10.3 边界测试：按值传递与大类型的性能陷阱（编译错误/逻辑问题）](#103-边界测试按值传递与大类型的性能陷阱编译错误逻辑问题)
     - [10.3 边界测试：const fn 中的非编译期操作](#103-边界测试const-fn-中的非编译期操作)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)

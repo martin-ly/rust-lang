@@ -2,7 +2,7 @@
 
 > **EN**: if let Guards on Match Arms Rust 1.95.0
 > **Summary**: if let Guards on Match Arms（Rust 1.95.0） if let Guards on Match Arms Rust 1.95.0.
-> **相关概念**: [变量绑定](../../../concept/01_foundation/07_control_flow.md)
+> **相关概念**: [变量绑定](../../../concept/01_foundation/04_control_flow/07_control_flow.md)
 > **Bloom 层级**: 理解
 > **稳定版本**: Rust 1.95.0 (2026-04-16)
 > **关联特性**: `let chains`（Rust 1.88.0, Edition 2024）

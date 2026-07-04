@@ -2,8 +2,8 @@
 
 > **EN**: Lifetimes
 > **Summary**: Rust 生命周期 Lifetimes. (stub/archive redirect)
-> **权威来源**: 本主题深度解释见 [concept/01_foundation/03_lifetimes.md](../../concept/01_foundation/03_lifetimes.md)。
-> **历史版本存档**: [archive/knowledge/01_fundamentals/03_lifetimes.md](../../archive/knowledge/01_fundamentals/03_lifetimes.md)
+> **权威来源**: 本主题深度解释见 [concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)。
+> **历史版本存档**: [archive/knowledge/01_fundamentals/03_lifetimes.md](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 >
 > **定位**: 本文件为精简知识卡片，保留核心规则与常见陷阱。详细解释、形式化语义与代码示例请查看权威来源。
 
@@ -31,4 +31,4 @@
 
 ---
 
-**详细内容已迁移**：请点击上方 [concept/01_foundation/03_lifetimes.md](../../concept/01_foundation/03_lifetimes.md) 查看最新权威解释。
+**详细内容已迁移**：请点击上方 [concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) 查看最新权威解释。

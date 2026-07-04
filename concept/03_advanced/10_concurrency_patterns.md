@@ -10,7 +10,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析并发模式的设计意图
 > **定位**: 深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权（Ownership）系统如何为并发安全（Concurrency Safety）提供编译期保证。
-> **前置概念**: [Concurrency](01_concurrency.md) · [Async](02_async.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Concurrency](01_concurrency.md) · [Async](02_async.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [Distributed Systems](../06_ecosystem/18_distributed_systems.md) · [Lockfree](01_concurrency.md)
 
 ---
@@ -28,8 +28,8 @@
 - [并发 模式：从消息 传递到锁自由的数据结构](#并发-模式从消息-传递到锁自由的数据结构)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 所有权（Ownership）与并发的统一](#11-所有权与并发的统一)
-    - [1.2 Send 与 Sync：编译期并发安全（Concurrency Safety）](#12-send-与-sync编译期并发安全)
+    - [1.1 所有权与并发的统一](#11-所有权与并发的统一)
+    - [1.2 Send 与 Sync：编译期并发安全](#12-send-与-sync编译期并发安全)
     - [1.3 共享状态 vs 消息传递](#13-共享状态-vs-消息传递)
   - [二、技术细节](#二技术细节)
     - [2.1 通道模式](#21-通道模式)
@@ -41,7 +41,7 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
-    - [4.4 边界测试：`ScopedThread` 中引用（Reference）逃逸（编译错误）](#44-边界测试scopedthread-中引用逃逸编译错误)
+    - [4.4 边界测试：`ScopedThread` 中引用逃逸（编译错误）](#44-边界测试scopedthread-中引用逃逸编译错误)
     - [4.5 边界测试：`Condvar` 虚假唤醒未处理（逻辑错误）](#45-边界测试condvar-虚假唤醒未处理逻辑错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)

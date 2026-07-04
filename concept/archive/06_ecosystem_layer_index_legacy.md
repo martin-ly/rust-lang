@@ -13,7 +13,7 @@
 > **定位**: Rust 的工程实践、工具链、设计模式和生态协作机制。L1-L5 知识的**工程化落地**。
 > **Bloom 层级**: 应用 + 评价
 > **功能**: 将概念知识转化为**工程能力**
-> **规范文件**: [`06_ecosystem/README.md`](06_ecosystem/README.md)
+> **规范文件**: [`06_ecosystem/README.md`](../06_ecosystem/README.md)
 > **[来源: The Rust Programming Language (TRPL)]** · **[来源: Cargo Book - doc.rust-lang.org/cargo]** · **[来源: crates.io]** · **[来源: Rust RFCs]**
 > **前置概念**: N/A
 > **后置概念**: N/A
@@ -37,16 +37,16 @@
 
 | 文件 | 概念 | 核心内容 | 状态 |
 |:---|:---|:---|:---|
-| [`06_ecosystem/01_toolchain.md`](06_ecosystem/01_toolchain.md) | 工具链 | Cargo、SemVer、Clippy、交叉编译、Miri、Sanitizers | ✅ v1.0 |
-| [`06_ecosystem/02_patterns.md`](06_ecosystem/02_patterns.md) | 设计模式 | Typestate、Builder、RAII、Newtype、Zero-cost | ✅ v1.0 |
-| [`06_ecosystem/03_core_crates.md`](06_ecosystem/03_core_crates.md) | 核心库谱系 | serde、tokio、axum、clap、tracing、sqlx 等 40+ crate | ✅ v1.0 |
-| [`06_ecosystem/04_application_domains.md`](06_ecosystem/04_application_domains.md) | 应用主题 | Web、CLI、嵌入式、游戏、区块链、数据工程、系统、GUI | ✅ v1.0 |
-| [`06_ecosystem/44_formal_ecosystem_tower.md`](06_ecosystem/44_formal_ecosystem_tower.md) | 形式化生态塔 | 核心 crate 的形式化根基/可组合性/可观测性三维评估 | ✅ v1.0 |
-| [`06_ecosystem/11_webassembly.md`](06_ecosystem/11_webassembly.md) | WebAssembly | Rust 的 Wasm 编译模型、组件模型、应用场景 | ✅ v1.0 |
-| [`06_ecosystem/13_logging_observability.md`](06_ecosystem/13_logging_observability.md) | 日志与可观测性 | tracing、log、metrics、OpenTelemetry、分布式追踪 | ✅ v1.0 |
-| [`06_ecosystem/14_documentation.md`](06_ecosystem/14_documentation.md) | 文档生态 | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ v1.0 |
-| [`06_ecosystem/15_performance_optimization.md`](06_ecosystem/15_performance_optimization.md) | 性能优化 | Criterion、flamegraph、缓存优化、SIMD、PGO | ✅ v1.0 |
-| [`06_ecosystem/16_testing.md`](06_ecosystem/16_testing.md) | 测试生态 | 单元/集成/文档测试、mockall、proptest、cargo-fuzz | ✅ v1.0 |
+| [`06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md) | 工具链 | Cargo、SemVer、Clippy、交叉编译、Miri、Sanitizers | ✅ v1.0 |
+| [`06_ecosystem/02_patterns.md`](../06_ecosystem/02_patterns.md) | 设计模式 | Typestate、Builder、RAII、Newtype、Zero-cost | ✅ v1.0 |
+| [`06_ecosystem/03_core_crates.md`](../06_ecosystem/03_core_crates.md) | 核心库谱系 | serde、tokio、axum、clap、tracing、sqlx 等 40+ crate | ✅ v1.0 |
+| [`06_ecosystem/04_application_domains.md`](../06_ecosystem/04_application_domains.md) | 应用主题 | Web、CLI、嵌入式、游戏、区块链、数据工程、系统、GUI | ✅ v1.0 |
+| [`06_ecosystem/44_formal_ecosystem_tower.md`](../06_ecosystem/44_formal_ecosystem_tower.md) | 形式化生态塔 | 核心 crate 的形式化根基/可组合性/可观测性三维评估 | ✅ v1.0 |
+| [`06_ecosystem/11_webassembly.md`](../06_ecosystem/11_webassembly.md) | WebAssembly | Rust 的 Wasm 编译模型、组件模型、应用场景 | ✅ v1.0 |
+| [`06_ecosystem/13_logging_observability.md`](../06_ecosystem/13_logging_observability.md) | 日志与可观测性 | tracing、log、metrics、OpenTelemetry、分布式追踪 | ✅ v1.0 |
+| [`06_ecosystem/14_documentation.md`](../06_ecosystem/14_documentation.md) | 文档生态 | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ v1.0 |
+| [`06_ecosystem/15_performance_optimization.md`](../06_ecosystem/15_performance_optimization.md) | 性能优化 | Criterion、flamegraph、缓存优化、SIMD、PGO | ✅ v1.0 |
+| [`06_ecosystem/16_testing.md`](../06_ecosystem/16_testing.md) | 测试生态 | 单元/集成/文档测试、mockall、proptest、cargo-fuzz | ✅ v1.0 |
 
 ---
 

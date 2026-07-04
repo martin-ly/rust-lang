@@ -4,7 +4,7 @@
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/),
 > [Ferrocene](https://ferrous-systems.com/ferrocene/),
 > [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
-> **相关概念**: [Rc](../../../../concept/02_intermediate/03_memory_management.md)
+> **相关概念**: [Rc](../../../../concept/02_intermediate/02_memory_management/03_memory_management.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 

@@ -225,7 +225,7 @@ mindmap
 - [边界扩展树](boundary_extension_tree.md) —— 安全边界风险评估
 - [可判定性谱系](decidability_spectrum.md) —— 编译期判定边界
 - [表达力多视角](expressiveness_multiview.md) —— 七视角表达力分析
-- [L1 所有权](../01_foundation/01_ownership.md) —— 所有权唯一性
+- [L1 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) —— 所有权唯一性
 - [L3 异步](../03_advanced/02_async.md) —— async/await 状态机
 - [表达力多视角](expressiveness_multiview.md) —— 七视角表达力分析
 

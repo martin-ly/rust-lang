@@ -6,7 +6,7 @@
 > **Bloom 层级**: L3 (应用)
 >
 > **层次定位**: L6-L7 生态-前沿 / 编译器特性
-> **前置依赖**: [concept L2 泛型](../../concept/02_intermediate/02_generics.md) · [docs 核心概念](../01_core/README.md)
+> **前置依赖**: [concept L2 泛型](../../concept/02_intermediate/01_generics/02_generics.md) · [docs 核心概念](../01_core/README.md)
 > **后置延伸**: [docs 并行前端](06_parallel_frontend.md) · [concept L7 语言演进](../../concept/07_future/03_evolution.md)
 > **跨层映射**: L6→L7 工具驱动映射 | 编译器→语言
 > **定理链编号**: T-030 单态化正确性 → 优化保持性

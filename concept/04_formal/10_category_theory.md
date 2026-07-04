@@ -9,7 +9,7 @@
 >
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 从**范畴论**视角分析 Rust 的类型系统（Type System）——从函子（Functor）、应用函子（Applicative）到单子（Monad），揭示 Rust 的类型构造器如何隐式实现这些抽象代数结构。
-> **前置概念**: [Type Theory](02_type_theory.md) · [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md)
+> **前置概念**: [Type Theory](02_type_theory.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Traits](../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [Linear Logic](01_linear_logic.md) · [RustBelt](04_rustbelt.md)
 
 ---
@@ -19,7 +19,7 @@
 > [Rust RFC — Monad](https://github.com/rust-lang/rfcs/issues/1815) ·
 > [Haskell Wiki — Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
-> **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+> **前置依赖**: [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md)
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
 > 🚨 **纯数学内容警告**
 >
@@ -38,10 +38,10 @@
     - [1.3 单子（Monad）](#13-单子monad)
   - [二、技术细节](#二技术细节)
     - [2.1 Option 作为单子](#21-option-作为单子)
-    - [2.2 Result 与错误处理（Error Handling）](#22-result-与错误处理)
+    - [2.2 Result 与错误处理](#22-result-与错误处理)
   - [十、边界测试：范畴论视角的编译错误](#十边界测试范畴论视角的编译错误)
     - [10.1 边界测试：`Option` 与 `Result` 的 monad 定律违反（编译错误）](#101-边界测试option-与-result-的-monad-定律违反编译错误)
-    - [10.2 边界测试：`Iterator` 的 functor 映射与所有权（Ownership）（编译错误）](#102-边界测试iterator-的-functor-映射与所有权编译错误)
+    - [10.2 边界测试：`Iterator` 的 functor 映射与所有权（编译错误）](#102-边界测试iterator-的-functor-映射与所有权编译错误)
     - [2.3 Iterator 作为函子](#23-iterator-作为函子)
   - [三、范畴模式矩阵](#三范畴模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -51,7 +51,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：`Functor` 与 Rust 迭代器（Iterator）的映射（编译错误）](#103-边界测试functor-与-rust-迭代器的映射编译错误)
+    - [10.3 边界测试：`Functor` 与 Rust 迭代器的映射（编译错误）](#103-边界测试functor-与-rust-迭代器的映射编译错误)
     - [10.4 边界测试：`Monad` 与 Rust 的 `?` 运算符（编译错误）](#104-边界测试monad-与-rust-的--运算符编译错误)
     - [10.7 边界测试：所有权移动后的再次使用](#107-边界测试所有权移动后的再次使用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -548,9 +548,9 @@ graph TD
 ## 相关概念文件
 
 - [Type Theory](02_type_theory.md) — 类型论
-- [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）
-- [Traits](../02_intermediate/01_traits.md) — Trait 系统
-- [Iterator](../02_intermediate/15_iterator_patterns.md) — 迭代器（Iterator）
+- [Generics](../02_intermediate/01_generics/02_generics.md) — 泛型（Generics）
+- [Traits](../02_intermediate/00_traits/01_traits.md) — Trait 系统
+- [Iterator](../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) — 迭代器（Iterator）
 
 ---
 

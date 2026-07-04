@@ -17,7 +17,7 @@
 > **前置概念**: · [并发与异步（Async）](../06_ecosystem/24_cloud_native.md)
 > [Async](../03_advanced/02_async.md) ·
 > [Pin/Unpin](../03_advanced/06_pin_unpin.md) ·
-> [Traits](../02_intermediate/01_traits.md)
+> [Traits](../02_intermediate/00_traits/01_traits.md)
 > **后置概念**:
 > [Version Tracking](05_rust_version_tracking.md) ·
 > [Async Drop](18_async_drop_preview.md)

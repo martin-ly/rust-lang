@@ -2,8 +2,8 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [字符串与文本](../../../../concept/01_foundation/09_strings_and_text.md)
-> - [字符串与编码](../../../../concept/01_foundation/18_strings_and_encoding.md)
+> - [字符串与文本](../../../../concept/01_foundation/06_strings_and_text/09_strings_and_text.md)
+> - [字符串与编码](../../../../concept/01_foundation/06_strings_and_text/18_strings_and_encoding.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **⚠️ 历史文档提示**：
@@ -273,8 +273,8 @@ graph LR
 
 - [Clap CLI 解析架构](04_clap_architecture.md) — 参数验证中常用的正则模式
 - [Serde 序列化架构](01_serde_architecture.md) — 字符串反序列化与验证边界
-- [字符串与文本](../../../../concept/01_foundation/09_strings_and_text.md)
-- [知识图谱索引：字符串处理 / 解析 / 验证](../../../../docs/research_notes/10_knowledge_graph_index.md)
+- [字符串与文本](../../../../concept/01_foundation/06_strings_and_text/09_strings_and_text.md)
+- [知识图谱索引：字符串处理 / 解析 / 验证](../../10_knowledge_graph_index.md)
 
 ---
 

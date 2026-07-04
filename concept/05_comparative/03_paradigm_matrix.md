@@ -288,8 +288,8 @@ graph TD
 | 内存模型 | 线性/仿射 + 分离逻辑 | L4 线性逻辑 | `04_formal/01_linear_logic.md` | ✅ |
 | 类型系统（Type System） | 代数类型 + 参数多态 | L4 类型论 | `04_formal/02_type_theory.md` | ✅ |
 | 并发模型 | 所有权（Ownership）并发 / CSL | L4 RustBelt | `04_formal/04_rustbelt.md` | ✅ |
-| 抽象机制 | Trait / 零成本抽象（Zero-Cost Abstraction） | L2 Trait + 单态化（Monomorphization） | `02_intermediate/01_traits.md` | ✅ |
-| 错误模型 | 和类型显式传播 | L2 错误处理（Error Handling） | `02_intermediate/04_error_handling.md` | ✅ |
+| 抽象机制 | Trait / 零成本抽象（Zero-Cost Abstraction） | L2 Trait + 单态化（Monomorphization） | `02_intermediate/00_traits/01_traits.md` | ✅ |
+| 错误模型 | 和类型显式传播 | L2 错误处理（Error Handling） | `02_intermediate/03_error_handling/04_error_handling.md` | ✅ |
 | 编译保证 | 编译期证明 | L4 形式化层 | `04_formal/` | ✅ |
 
 **⟹ 推理链：从语言特性到编程范式到安全保证**

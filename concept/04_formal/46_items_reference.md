@@ -8,8 +8,8 @@
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
-> **前置依赖**: [Crates and Source Files](../01_foundation/38_crates_and_source_files.md) · [Modules and Paths](../01_foundation/11_modules_and_paths.md) · [Visibility and Privacy](../03_advanced/34_visibility_and_privacy.md)
-> **后置概念**: [Attributes](47_attributes.md) · [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md)
+> **前置依赖**: [Crates and Source Files](../01_foundation/07_modules_and_items/38_crates_and_source_files.md) · [Modules and Paths](../01_foundation/07_modules_and_items/11_modules_and_paths.md) · [Visibility and Privacy](../03_advanced/34_visibility_and_privacy.md)
+> **后置概念**: [Attributes](47_attributes.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Traits](../02_intermediate/00_traits/01_traits.md)
 > **定理链**: Crate → Module → Item → Declaration
 >
 > **来源**: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)

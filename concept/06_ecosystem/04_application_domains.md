@@ -19,7 +19,7 @@
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **A+S+P** — 全维度
 > **双维定位**: P×Eva — 评估 Rust 在特定领域的适用性
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Core Crates](03_core_crates.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Core Crates](03_core_crates.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
 > **后置概念**: [AI Integration](../07_future/01_ai_integration.md) · [Formal Methods](../07_future/02_formal_methods.md)
 > **主要来源**: [Rust in Production](https://www.rust-lang.org/) · [Rust Foundation] · [Ferrous Systems] · [RustConf] · [AWS/Google/Microsoft Rust 博客]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -810,7 +810,7 @@ graph TD
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | 所有领域的安全根基 |
+| 所有权 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 所有领域的安全根基 |
 | 并发 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | Web/游戏/数据工程核心 |
 | 异步（Async） | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | Web 后端/嵌入式事件循环 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | 系统编程/游戏/密码学边界 |

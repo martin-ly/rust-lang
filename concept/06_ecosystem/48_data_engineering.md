@@ -12,7 +12,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust 数据工程生态的技术选型与工程权衡
-> **前置依赖**: [类型系统（Type System）](../01_foundation/04_type_system.md) · [泛型（Generics）](../02_intermediate/02_generics.md) · Async/Await · Machine Learning Ecosystem
+> **前置依赖**: [类型系统（Type System）](../01_foundation/02_type_system/04_type_system.md) · [泛型（Generics）](../02_intermediate/01_generics/02_generics.md) · Async/Await · Machine Learning Ecosystem
 > **后置延伸**: [流处理生态](36_stream_processing_ecosystem.md) · [云原生](24_cloud_native.md) · [性能优化](15_performance_optimization.md)
 >
 > **来源**: [polars](https://docs.rs/polars/) · [arrow-rs](https://docs.rs/arrow/) · [datafusion](https://docs.rs/datafusion/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -59,8 +59,8 @@
     - [8.2 边界极限](#82-边界极限)
   - [九、边界测试](#九边界测试)
     - [9.1 边界测试：Parquet 写入时 schema 演化导致读取失败（兼容性错误）](#91-边界测试parquet-写入时-schema-演化导致读取失败兼容性错误)
-    - [9.2 边界测试：对象存储流式下载内存溢出（运行时（Runtime）错误）](#92-边界测试对象存储流式下载内存溢出运行时错误)
-    - [9.3 边界测试：ETL 管道中类型推断（Type Inference）失败导致运行时（Runtime） panic（类型错误）](#93-边界测试etl-管道中类型推断失败导致运行时-panic类型错误)
+    - [9.2 边界测试：对象存储流式下载内存溢出（运行时错误）](#92-边界测试对象存储流式下载内存溢出运行时错误)
+    - [9.3 边界测试：ETL 管道中类型推断失败导致运行时 panic（类型错误）](#93-边界测试etl-管道中类型推断失败导致运行时-panic类型错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -68,7 +68,7 @@
     - [测验 2：`arrow-rs` 在数据生态中扮演什么角色？（理解层）](#测验-2arrow-rs-在数据生态中扮演什么角色理解层)
     - [测验 3：为什么列式存储（Columnar Storage）比行式存储更适合分析查询？（理解层）](#测验-3为什么列式存储columnar-storage比行式存储更适合分析查询理解层)
     - [测验 4：`datafusion` 在 Rust 中提供什么功能？（理解层）](#测验-4datafusion-在-rust-中提供什么功能理解层)
-    - [测验 5：Rust 的内存安全（Memory Safety）如何帮助数据管道避免生产事故？（理解层）](#测验-5rust-的内存安全如何帮助数据管道避免生产事故理解层)
+    - [测验 5：Rust 的内存安全如何帮助数据管道避免生产事故？（理解层）](#测验-5rust-的内存安全如何帮助数据管道避免生产事故理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)

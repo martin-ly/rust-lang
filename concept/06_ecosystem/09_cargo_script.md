@@ -426,7 +426,7 @@ Cargo Script:  File = Crate (单模块，无子模块)
 
 - [工具链总览](01_toolchain.md) — Cargo 工作空间与编译器生态
 - [核心 Crate 选型](03_core_crates.md) — 脚本中常用依赖的选择策略
-- [L2 泛型与 Trait](../02_intermediate/01_traits.md) — 脚本中泛型（Generics）约束的完整支持
+- [L2 泛型与 Trait](../02_intermediate/00_traits/01_traits.md) — 脚本中泛型（Generics）约束的完整支持
 
 ---
 

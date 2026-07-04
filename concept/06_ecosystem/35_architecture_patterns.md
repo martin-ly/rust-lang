@@ -11,7 +11,7 @@
 > **Bloom 层级**: 分析 → 创造
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Cre — 分析系统架构层级与依赖关系设计
-> **前置依赖**: [泛型（Generics）](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) · [生命周期（Lifetimes）](../01_foundation/03_lifetimes.md) · 设计模式
+> **前置依赖**: [泛型（Generics）](../02_intermediate/01_generics/02_generics.md) · [Trait](../02_intermediate/00_traits/01_traits.md) · [生命周期（Lifetimes）](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · 设计模式
 > **后置延伸**: [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) · [微服务架构模式](31_microservice_patterns.md) · [事件驱动架构](32_event_driven_architecture.md)
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -68,13 +68,13 @@
   - [十、边界测试](#十边界测试)
     - [10.1 边界测试：适配器绕过端口直接依赖核心（编译错误）](#101-边界测试适配器绕过端口直接依赖核心编译错误)
     - [10.2 边界测试：跨层依赖导致循环依赖（编译错误）](#102-边界测试跨层依赖导致循环依赖编译错误)
-    - [10.3 边界测试：Serverless 超时导致状态不一致（运行时（Runtime）错误）](#103-边界测试serverless-超时导致状态不一致运行时错误)
+    - [10.3 边界测试：Serverless 超时导致状态不一致（运行时错误）](#103-边界测试serverless-超时导致状态不一致运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 中常用的分层架构（Layered Architecture）如何划分？（理解层）](#测验-1rust-中常用的分层架构layered-architecture如何划分理解层)
     - [测验 2：六边形架构（Hexagonal Architecture / Ports and Adapters）在 Rust 中如何体现？（理解层）](#测验-2六边形架构hexagonal-architecture--ports-and-adapters在-rust-中如何体现理解层)
-    - [测验 3：Rust 的强类型系统（Type System）对洋葱架构（Onion Architecture）有什么天然支持？（理解层）](#测验-3rust-的强类型系统对洋葱架构onion-architecture有什么天然支持理解层)
+    - [测验 3：Rust 的强类型系统对洋葱架构（Onion Architecture）有什么天然支持？（理解层）](#测验-3rust-的强类型系统对洋葱架构onion-architecture有什么天然支持理解层)
     - [测验 4：什么是"依赖倒置原则"（DIP）？Rust 的 trait 如何帮助实现它？（理解层）](#测验-4什么是依赖倒置原则diprust-的-trait-如何帮助实现它理解层)
     - [测验 5：在 Rust 中，为什么 Repository 模式比直接在 Service 中调用 SQL 更受推荐？（理解层）](#测验-5在-rust-中为什么-repository-模式比直接在-service-中调用-sql-更受推荐理解层)
   - [认知路径](#认知路径)

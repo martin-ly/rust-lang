@@ -9,7 +9,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust** 与 **Zig** 的设计哲学——从编译期计算、错误处理（Error Handling）到内存管理，揭示两种语言如何在"显式控制"与"抽象安全"之间做出选择。
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Comptime](../06_ecosystem/03_core_crates.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) · [Comptime](../06_ecosystem/03_core_crates.md)
 > **后置概念**: [Cross Compilation](../06_ecosystem/17_cross_compilation.md) · [Embedded](../06_ecosystem/04_application_domains.md)
 
 ---
@@ -23,7 +23,7 @@
   - [📑 目录](#-目录)
   - [一、核心对比](#一核心对比)
     - [1.1 编译期计算](#11-编译期计算)
-    - [1.2 错误处理（Error Handling）哲学](#12-错误处理哲学)
+    - [1.2 错误处理哲学](#12-错误处理哲学)
     - [1.3 内存管理](#13-内存管理)
   - [二、工程实践差异](#二工程实践差异)
     - [2.1 构建系统](#21-构建系统)
@@ -40,7 +40,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 与 Zig 的编译错误对比](#十边界测试rust-与-zig-的编译错误对比)
     - [10.1 边界测试：Zig 的 comptime vs Rust 的 const generics（编译错误）](#101-边界测试zig-的-comptime-vs-rust-的-const-generics编译错误)
-    - [10.2 边界测试：Zig 的显式内存管理与 Rust 的所有权（Ownership）（编译错误）](#102-边界测试zig-的显式内存管理与-rust-的所有权编译错误)
+    - [10.2 边界测试：Zig 的显式内存管理与 Rust 的所有权（编译错误）](#102-边界测试zig-的显式内存管理与-rust-的所有权编译错误)
     - [10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 的能力差异（编译错误）](#103-边界测试zig-的-comptime-与-rust-的-const-fn-的能力差异编译错误)
     - [10.4 边界测试：Zig 的显式内存分配与 Rust 的全局分配器（编译错误）](#104-边界测试zig-的显式内存分配与-rust-的全局分配器编译错误)
     - [10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 能力差距（编译错误）](#103-边界测试zig-的-comptime-与-rust-的-const-fn-能力差距编译错误)
@@ -48,7 +48,7 @@
     - [测验 1：Rust 和 Zig 的设计哲学有什么根本差异？（理解层）](#测验-1rust-和-zig-的设计哲学有什么根本差异理解层)
     - [测验 2：Zig 的 `comptime` 与 Rust 的宏系统（`macro_rules!` / proc macro）有什么区别？（理解层）](#测验-2zig-的-comptime-与-rust-的宏系统macro_rules--proc-macro有什么区别理解层)
     - [测验 3：Zig 没有隐式内存分配的策略对系统编程有什么意义？（理解层）](#测验-3zig-没有隐式内存分配的策略对系统编程有什么意义理解层)
-    - [测验 4：Rust 的所有权系统与 Zig 的显式生命周期（Lifetimes）管理相比，哪种更适合大型团队协作？（理解层）](#测验-4rust-的所有权系统与-zig-的显式生命周期管理相比哪种更适合大型团队协作理解层)
+    - [测验 4：Rust 的所有权系统与 Zig 的显式生命周期管理相比，哪种更适合大型团队协作？（理解层）](#测验-4rust-的所有权系统与-zig-的显式生命周期管理相比哪种更适合大型团队协作理解层)
     - [测验 5：在已有 C 代码库的项目中，Zig 的 C 互操作与 Rust 的 FFI 相比有什么特点？（理解层）](#测验-5在已有-c-代码库的项目中zig-的-c-互操作与-rust-的-ffi-相比有什么特点理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -544,8 +544,8 @@ fn main() {
 
 ## 相关概念文件
 
-- [Ownership](../01_foundation/01_ownership.md) — 所有权系统
-- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
+- [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权系统
+- [Type System](../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Cross Compilation](../06_ecosystem/17_cross_compilation.md) — 交叉编译
 - [FFI](../03_advanced/05_rust_ffi.md) — 外部函数接口
 

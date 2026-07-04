@@ -10,7 +10,7 @@
 > **层级**: L5 对比分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价并发模型的设计差异
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Memory Management](../02_intermediate/03_memory_management.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Memory Management](../02_intermediate/02_memory_management/03_memory_management.md)
 > **后置概念**: [Paradigm Matrix](03_paradigm_matrix.md)
 > **主要来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Effective Go] · [Wikipedia: Communicating sequential processes](https://en.wikipedia.org/wiki/Communicating_sequential_processes) · [Wikipedia: Go](https://en.wikipedia.org/wiki/Go) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
@@ -728,8 +728,8 @@ func ParseJSON(input string) string {
 | 概念 | 文件 | 关系 |
 | :--- | :--- | :--- |
 | 并发 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | Rust 并发模型 |
-| 内存管理 | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) | Rust 所有权 vs Go GC |
-| 错误处理（Error Handling） | [`../02_intermediate/04_error_handling.md`](../02_intermediate/04_error_handling.md) | Result vs 多返回值 |
+| 内存管理 | [`../02_intermediate/02_memory_management/03_memory_management.md`](../02_intermediate/02_memory_management/03_memory_management.md) | Rust 所有权 vs Go GC |
+| 错误处理（Error Handling） | [`../02_intermediate/03_error_handling/04_error_handling.md`](../02_intermediate/03_error_handling/04_error_handling.md) | Result vs 多返回值 |
 | Rust vs C++ | [`./01_rust_vs_cpp.md`](01_rust_vs_cpp.md) | 同层对比 |
 | 范式矩阵 | [`./03_paradigm_matrix.md`](03_paradigm_matrix.md) | 定位参考 |
 | 安全边界 | [`./04_safety_boundaries.md`](04_safety_boundaries.md) | 安全保证对比 |

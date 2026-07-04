@@ -8,7 +8,7 @@
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
-> **前置依赖**: [Modules and Paths](../01_foundation/11_modules_and_paths.md) · [Names and Resolution](40_names_and_resolution.md) · [Visibility and Privacy](../03_advanced/34_visibility_and_privacy.md)
+> **前置依赖**: [Modules and Paths](../01_foundation/07_modules_and_items/11_modules_and_paths.md) · [Names and Resolution](40_names_and_resolution.md) · [Visibility and Privacy](../03_advanced/34_visibility_and_privacy.md)
 > **后置概念**: [Items Reference](46_items_reference.md) · [Patterns Reference](49_patterns_reference.md)
 > **定理链**: Source File → Module Tree → Namespace → Scope → Name Resolution
 >
@@ -70,7 +70,7 @@ Prelude 是自动导入的名字集合：
 - `std::prelude::rust_2024`
 - 包含 `Option`, `Result`, `Vec`, `String`, `Drop`, `Copy` 等核心 trait 和类型。
 
-详见 [Preludes](../01_foundation/35_preludes.md)。
+详见 [Preludes](../01_foundation/07_modules_and_items/35_preludes.md)。
 
 ## 四、路径
 

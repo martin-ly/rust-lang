@@ -27,7 +27,7 @@
 |------|------|------|
 | [ownership.md](04_ownership.md) | 所有权系统 | ⭐⭐ |
 | [borrowing.md](01_borrowing.md) | 借用与引用 | ⭐⭐ |
-| [lifetimes.md](03_lifetimes.md) | 生命周期 | ⭐⭐⭐ |
+| [lifetimes.md](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 生命周期 | ⭐⭐⭐ |
 | [iterators.md](02_iterators.md) | 迭代器 | ⭐⭐ |
 
 ## ⏱️ 预计时间

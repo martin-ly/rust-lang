@@ -11,7 +11,7 @@
 > **层级**: L4 形式化理论
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析线性逻辑到 Rust 的映射
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **后置概念**: [Ownership Formalization](03_ownership_formal.md) · [RustBelt](04_rustbelt.md)
 > **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic) ·
@@ -633,15 +633,15 @@ fn session_demo() {
 
 > **过渡: L4 → L1**
 > 线性逻辑的 `⊗`（tensor）对应 Rust 的元组所有权，`⊸`（lollipop）对应所有权的转移（move），`!`（exponential）对应 `Copy` trait 的 weakening 规则。从形式化符号到编译器实际行为的映射，是理解 "为什么 Rust 不需要垃圾回收" 的理论根基。
-> 工程实践中的对应见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权规则）与 [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md)（借用（Borrowing）作为分数权限的弱化形式）。
+> 工程实践中的对应见 [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)（所有权规则）与 [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)（借用（Borrowing）作为分数权限的弱化形式）。
 > **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 十、相关概念链接
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | 线性逻辑的应用（L1 精确对应标注于全文） |
-| 借用（Borrowing） | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) | 分离逻辑的应用（L1 §5） |
+| 所有权 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 线性逻辑的应用（L1 精确对应标注于全文） |
+| 借用（Borrowing） | [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | 分离逻辑的应用（L1 §5） |
 | 类型论 | [`./02_type_theory.md`](02_type_theory.md) | 形式化同层；TAPL 引用（Reference）交叉 |
 | 所有权形式化 | [`./03_ownership_formal.md`](03_ownership_formal.md) | 线性逻辑的扩展；RustBelt 细节 |
 | RustBelt | [`./04_rustbelt.md`](04_rustbelt.md) | 验证实现；Iris 分离逻辑 |

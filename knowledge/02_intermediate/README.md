@@ -4,7 +4,7 @@
 > **Summary**: 02 - 进阶 Rust Intermediate Index.
 > **📎 交叉引用**
 >
-> 本主题在 concept 中有深度的概念分析：[闭包](../../concept/01_foundation/15_closure_basics.md)
+> 本主题在 concept 中有深度的概念分析：[闭包](../../concept/01_foundation/00_start/15_closure_basics.md)
 > **Bloom 层级**: 理解
 > **掌握 Rust 的核心抽象能力**
 >
@@ -35,7 +35,7 @@
 |------|------|------|
 | [generics.md](03_generics.md) | 泛型编程 | ⭐⭐⭐ |
 | [traits.md](06_traits.md) | Trait 系统 | ⭐⭐⭐⭐ |
-| [lifetimes.md](../01_fundamentals/03_lifetimes.md) | 生命周期 | ⭐⭐⭐⭐ |
+| [lifetimes.md](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 生命周期 | ⭐⭐⭐⭐ |
 
 ### 数据处理
 >

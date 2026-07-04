@@ -17,7 +17,7 @@
 > **定位**: Rust 在 AI 时代、形式化方法工业化、分布式系统形式化等前沿方向的**演进预测**与**需求驱动**。知识体系的"前锋"，反向约束下层设计。
 > **Bloom 层级**: 评价 → 创造
 > **功能**: 预测演进方向，反向驱动 L1-L6 的更新
-> **规范文件**: [`07_future/README.md`](07_future/README.md)
+> **规范文件**: [`07_future/README.md`](../07_future/README.md)
 > **[来源: Rust RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Blog - blog.rust-lang.org]** · **[来源: Wikipedia - Artificial Intelligence]** · **[来源: Formal Methods Industry Reports 2026]**
 > **前置概念**: N/A
 > **后置概念**: N/A
@@ -41,20 +41,20 @@
 
 | 文件 | 概念 | 核心内容 | 状态 |
 |:---|:---|:---|:---|
-| [`07_future/01_ai_integration.md`](07_future/01_ai_integration.md) | AI × Rust | 生成-验证闭环、确定性容器、AI 语义安全网 | ✅ v1.0 |
-| [`07_future/02_formal_methods.md`](07_future/02_formal_methods.md) | 形式化方法工业化 | Code-Level + System-Level 验证、PObserve、CI 集成 | ✅ v1.0 |
-| [`07_future/03_evolution.md`](07_future/03_evolution.md) | 语言演进 | Edition、RFC、Const 泛型（Generics）、GATs、Effects、特化 | ✅ v1.0 |
-| [`07_future/09_parallel_frontend_preview.md`](07_future/09_parallel_frontend_preview.md) | 并行前端编译 | 查询系统并行化、编译器多核扩展 | ✅ v1.0 |
-| [`07_future/10_derive_coerce_pointee_preview.md`](07_future/10_derive_coerce_pointee_preview.md) | 派生 CoercePointee | 智能指针（Smart Pointer）自动类型强制、零 unsafe | ✅ v1.0 |
-| [`07_future/11_const_trait_impl_preview.md`](07_future/11_const_trait_impl_preview.md) | Const Trait Impl | 常量上下文 Trait 泛化、~const 限定 | ✅ v1.0 |
-| [`07_future/12_return_type_notation_preview.md`](07_future/12_return_type_notation_preview.md) | Return Type Notation | use<..> 精确捕获、生命周期（Lifetimes）控制 | ✅ v1.0 |
-| [`07_future/13_unsafe_fields_preview.md`](07_future/13_unsafe_fields_preview.md) | Unsafe Fields | 字段级 unsafe 标记、安全边界细化 | ✅ v1.0 |
-| [`07_future/35_ferrocene_preview.md`](07_future/35_ferrocene_preview.md) | Ferrocene | Rust 安全关键认证、ISO 26262 | ✅ v1.0 |
-| [`07_future/22_gen_blocks_preview.md`](07_future/22_gen_blocks_preview.md) | Gen Blocks | 泛化生成器、惰性迭代、异步（Async）流 | ✅ v1.0 |
-| [`07_future/38_cranelift_backend_preview.md`](07_future/38_cranelift_backend_preview.md) | Cranelift 后端 | 快速调试编译、LLVM 替代 | ✅ v1.0 |
+| [`07_future/01_ai_integration.md`](../07_future/01_ai_integration.md) | AI × Rust | 生成-验证闭环、确定性容器、AI 语义安全网 | ✅ v1.0 |
+| [`07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 形式化方法工业化 | Code-Level + System-Level 验证、PObserve、CI 集成 | ✅ v1.0 |
+| [`07_future/03_evolution.md`](../07_future/03_evolution.md) | 语言演进 | Edition、RFC、Const 泛型（Generics）、GATs、Effects、特化 | ✅ v1.0 |
+| [`07_future/09_parallel_frontend_preview.md`](../07_future/09_parallel_frontend_preview.md) | 并行前端编译 | 查询系统并行化、编译器多核扩展 | ✅ v1.0 |
+| [`07_future/10_derive_coerce_pointee_preview.md`](../07_future/10_derive_coerce_pointee_preview.md) | 派生 CoercePointee | 智能指针（Smart Pointer）自动类型强制、零 unsafe | ✅ v1.0 |
+| [`07_future/11_const_trait_impl_preview.md`](../07_future/11_const_trait_impl_preview.md) | Const Trait Impl | 常量上下文 Trait 泛化、~const 限定 | ✅ v1.0 |
+| [`07_future/12_return_type_notation_preview.md`](../07_future/12_return_type_notation_preview.md) | Return Type Notation | use<..> 精确捕获、生命周期（Lifetimes）控制 | ✅ v1.0 |
+| [`07_future/13_unsafe_fields_preview.md`](../07_future/13_unsafe_fields_preview.md) | Unsafe Fields | 字段级 unsafe 标记、安全边界细化 | ✅ v1.0 |
+| [`07_future/35_ferrocene_preview.md`](../07_future/35_ferrocene_preview.md) | Ferrocene | Rust 安全关键认证、ISO 26262 | ✅ v1.0 |
+| [`07_future/22_gen_blocks_preview.md`](../07_future/22_gen_blocks_preview.md) | Gen Blocks | 泛化生成器、惰性迭代、异步（Async）流 | ✅ v1.0 |
+| [`07_future/38_cranelift_backend_preview.md`](../07_future/38_cranelift_backend_preview.md) | Cranelift 后端 | 快速调试编译、LLVM 替代 | ✅ v1.0 |
 | [`07_future/17_rust_specification_preview.md`](07_future/17_rust_specification_preview.md) | Rust 语言规范 | 形式化规范演进、分层需求 | ✅ v1.0 |
-| [`07_future/18_async_drop_preview.md`](07_future/18_async_drop_preview.md) | Async Drop | 异步资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs//3308-offset_of.html)、Pin 交互 | ⚠️ nightly |
-| [`07_future/26_specialization_preview.md`](07_future/26_specialization_preview.md) | Specialization | Trait 实现特化、重叠 impl、min_specialization | ⚠️ nightly |
+| [`07_future/18_async_drop_preview.md`](../07_future/18_async_drop_preview.md) | Async Drop | 异步资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs//3308-offset_of.html)、Pin 交互 | ⚠️ nightly |
+| [`07_future/26_specialization_preview.md`](../07_future/26_specialization_preview.md) | Specialization | Trait 实现特化、重叠 impl、min_specialization | ⚠️ nightly |
 
 ---
 

@@ -22,7 +22,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Const Trait Impl 预览特性
 > **定位**: 探讨 Rust 在**常量上下文**（`const fn`）中支持 Trait 调用的演进，分析其对泛型（Generics）编程、`const fn` 表达能力以及编译期计算的影响。
-> **前置概念**: [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Generics](../02_intermediate/01_generics/02_generics.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [Evolution](03_evolution.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -349,9 +349,9 @@ graph TD
 
 ## 相关概念文件
 
-- [Generics](../02_intermediate/02_generics.md) — 泛型与参数多态
-- [Traits](../02_intermediate/01_traits.md) — Trait 系统与接口抽象
-- [Type System](../01_foundation/04_type_system.md) — Rust 类型系统（Type System）基础
+- [Generics](../02_intermediate/01_generics/02_generics.md) — 泛型与参数多态
+- [Traits](../02_intermediate/00_traits/01_traits.md) — Trait 系统与接口抽象
+- [Type System](../01_foundation/02_type_system/04_type_system.md) — Rust 类型系统（Type System）基础
 - [Evolution](03_evolution.md) — 语言演进机制
 - [Effects System](04_effects_system.md) — 效果系统预研
 - [Version Tracking](05_rust_version_tracking.md) — Rust 版本特性演进

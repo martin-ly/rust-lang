@@ -281,11 +281,11 @@ Rust 的常量求值器（const evaluator）是 MIR 解释器的一个子集，*
 
 | 本维度内容 | 对应 L0-L7 文件 | 对应章节 |
 |:---|:---|:---|
-| `const fn` 语义 | [](../01_foundation/01_ownership.md) | §3 所有权规则 |
-| `const` generics | [](../02_intermediate/02_generics.md) | §5.7 Const Generics |
+| `const fn` 语义 | [](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | §3 所有权规则 |
+| `const` generics | [](../02_intermediate/01_generics/02_generics.md) | §5.7 Const Generics |
 | `inline const` | [](../07_future/05_rust_version_tracking.md) | §2.2 inline const blocks |
 | 常量求值形式化 | [](../04_formal/02_type_theory.md) | §10.1b Const Generics 形式化演进 |
-| `~const Trait` | [](../02_intermediate/01_traits.md) | §4.4 Const Trait / `~const` |
+| `~const Trait` | [](../02_intermediate/00_traits/01_traits.md) | §4.4 Const Trait / `~const` |
 
 ---
 
@@ -374,12 +374,12 @@ Rust 削减:
 | 本维度内容 | 对应 L0-L7 文件 | 对应章节 |
 |:---|:---|:---|
 | 参数多态 / System F | [](../04_formal/02_type_theory.md) | §2.2 参数多态 |
-| 存在类型 `impl`/`dyn` | [](../02_intermediate/02_generics.md) | §6 存在类型 |
-| GATs | [](../02_intermediate/01_traits.md) | §7 GATs |
-| 生命周期 / 区域类型 | [](../01_foundation/03_lifetimes.md) | 全文 |
-| `const` generics | [](../02_intermediate/02_generics.md) | §5.7 Const Generics |
+| 存在类型 `impl`/`dyn` | [](../02_intermediate/01_generics/02_generics.md) | §6 存在类型 |
+| GATs | [](../02_intermediate/00_traits/01_traits.md) | §7 GATs |
+| 生命周期 / 区域类型 | [](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 全文 |
+| `const` generics | [](../02_intermediate/01_generics/02_generics.md) | §5.7 Const Generics |
 | 类型推断 / HM | [](../04_formal/02_type_theory.md) | §2.3 类型推断 |
-| 类型一致性 / coherence | [](../02_intermediate/01_traits.md) | §6 Orphan Rules |
+| 类型一致性 / coherence | [](../02_intermediate/00_traits/01_traits.md) | §6 Orphan Rules |
 
 ---
 
@@ -461,12 +461,12 @@ Rust 如何表达计算的控制结构？从结构化控制到异常处理到异
 
 | 本维度内容 | 对应 L0-L7 文件 | 对应章节 |
 |:---|:---|:---|
-| `match` 穷尽性 | [](../01_foundation/04_type_system.md) | §4 模式匹配 |
-| `Result` / `?` | [](../02_intermediate/04_error_handling.md) | 全文 |
-| `panic` / `catch_unwind` | [](../02_intermediate/04_error_handling.md) | §5 panic |
+| `match` 穷尽性 | [](../01_foundation/02_type_system/04_type_system.md) | §4 模式匹配 |
+| `Result` / `?` | [](../02_intermediate/03_error_handling/04_error_handling.md) | 全文 |
+| `panic` / `catch_unwind` | [](../02_intermediate/03_error_handling/04_error_handling.md) | §5 panic |
 | `async` / `await` | [](../03_advanced/02_async.md) | 全文 |
 | `gen` blocks | [](../03_advanced/02_async.md) | §13 gen blocks |
-| 闭包捕获语义 | [](../02_intermediate/01_traits.md) | §4 闭包与 `Fn` 家族 |
+| 闭包捕获语义 | [](../02_intermediate/00_traits/01_traits.md) | §4 闭包与 `Fn` 家族 |
 | 状态机形式化 | [](../04_formal/03_ownership_formal.md) | §9.5 Pin LTL 形式化 |
 
 ---
@@ -565,9 +565,9 @@ A ⊸ B            fn(T) -> U —— 消耗 T 产生 U
 
 | 本维度内容 | 对应 L0-L7 文件 | 对应章节 |
 |:---|:---|:---|
-| 所有权与 Move | [](../01_foundation/01_ownership.md) | 全文 |
-| 借用与生命周期 | [](../01_foundation/02_borrowing.md) | 全文 |
-| 内部可变性 | [](../02_intermediate/03_memory_management.md) | §4 智能指针 |
+| 所有权与 Move | [](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 全文 |
+| 借用与生命周期 | [](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | 全文 |
+| 内部可变性 | [](../02_intermediate/02_memory_management/03_memory_management.md) | §4 智能指针 |
 | `Pin` 不动性 | [](../03_advanced/02_async.md) | §3.2 Pin 形式化 |
 | 别名模型 | [](../04_formal/03_ownership_formal.md) | §11 SB/TB |
 | 线性逻辑映射 | [](../04_formal/01_linear_logic.md) | 全文 |
@@ -758,8 +758,8 @@ Rust 的宏系统分为两层：
 
 | 本维度内容 | 对应 L0-L7 文件 | 对应章节 |
 |:---|:---|:---|
-| 模块与可见性 | [](../01_foundation/04_type_system.md) | §2.1 模块系统 |
-| Trait 与泛型 | [](../02_intermediate/01_traits.md) | 全文 |
+| 模块与可见性 | [](../01_foundation/02_type_system/04_type_system.md) | §2.1 模块系统 |
+| Trait 与泛型 | [](../02_intermediate/00_traits/01_traits.md) | 全文 |
 | 宏系统 | [](../03_advanced/04_macros.md) | 全文 |
 | FFI | [](../03_advanced/03_unsafe.md) | §4 FFI |
 | 参数性 | [](../04_formal/02_type_theory.md) | §5.1 参数性 |
@@ -971,21 +971,21 @@ Rust 的任何语义扩展必须满足以下约束（由语言设计哲学决定
 
 | 本文件维度 | L0-L7 映射文件 | 核心章节 | 关系类型 |
 |:---|:---|:---|:---:|
-| D1 计算表达力 | [](../01_foundation/01_ownership.md) | §3 所有权规则 | `==>` 计算在所有权框架内执行 |
-| D1 计算表达力 | [](../02_intermediate/02_generics.md) | §5.7 Const Generics | `==>` 常量参数扩展计算到类型级 |
+| D1 计算表达力 | [](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | §3 所有权规则 | `==>` 计算在所有权框架内执行 |
+| D1 计算表达力 | [](../02_intermediate/01_generics/02_generics.md) | §5.7 Const Generics | `==>` 常量参数扩展计算到类型级 |
 | D1 计算表达力 | [](../04_formal/02_type_theory.md) | §10.1b Const Generics 演进 | `==>` 形式化对应依赖类型子集 |
-| D2 类型表达力 | [](../01_foundation/03_lifetimes.md) | 全文 | `==>` 区域类型是类型系统核心 |
-| D2 类型表达力 | [](../02_intermediate/01_traits.md) | §7 GATs | `==>` GATs 扩展类型表达力 |
+| D2 类型表达力 | [](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 全文 | `==>` 区域类型是类型系统核心 |
+| D2 类型表达力 | [](../02_intermediate/00_traits/01_traits.md) | §7 GATs | `==>` GATs 扩展类型表达力 |
 | D2 类型表达力 | [](../04_formal/02_type_theory.md) | §2.2 参数多态 | `==>` 形式化类型论根基 |
-| D3 控制流表达力 | [](../02_intermediate/04_error_handling.md) | 全文 | `==>` Result/? 是控制流核心 |
+| D3 控制流表达力 | [](../02_intermediate/03_error_handling/04_error_handling.md) | 全文 | `==>` Result/? 是控制流核心 |
 | D3 控制流表达力 | [](../03_advanced/02_async.md) | 全文 | `==>` async 是控制流扩展 |
 | D3 控制流表达力 | [](../03_advanced/02_async.md) | §13 gen blocks | `==>` gen 是控制流对偶 |
-| D4 内存表达力 | [](../01_foundation/01_ownership.md) | 全文 | `==>` 所有权是内存语义根基 |
-| D4 内存表达力 | [](../01_foundation/02_borrowing.md) | 全文 | `==>` 借用是内存访问控制 |
+| D4 内存表达力 | [](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 全文 | `==>` 所有权是内存语义根基 |
+| D4 内存表达力 | [](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | 全文 | `==>` 借用是内存访问控制 |
 | D4 内存表达力 | [](../04_formal/03_ownership_formal.md) | §11 SB/TB | `==>` 别名模型形式化 |
 | D5 并发表达力 | [](../03_advanced/01_concurrency.md) | 全文 | `==>` Send/Sync 是并发类型安全 |
 | D5 并发表达力 | [](../04_formal/04_rustbelt.md) | §3 CSL | `==>` 并发分离逻辑形式化 |
-| D6 抽象表达力 | [](../02_intermediate/01_traits.md) | 全文 | `==>` Trait 是抽象核心 |
+| D6 抽象表达力 | [](../02_intermediate/00_traits/01_traits.md) | 全文 | `==>` Trait 是抽象核心 |
 | D6 抽象表达力 | [](../03_advanced/04_macros.md) | 全文 | `==>` 宏是元编程扩展 |
 | D7 安全边界 | [](../03_advanced/03_unsafe.md) | 全文 | `==>` unsafe 是安全边界定义 |
 | D7 安全边界 | [](../04_formal/04_rustbelt.md) | §2 定理矩阵 | `==>` RustBelt 证明安全边界 |

@@ -8,7 +8,7 @@
 >
 > **定位**: L3（高级）与 L4（形式化）之间的**决策缓冲带**，帮助你判断是否需要阅读形式化内容。
 >
-> **来源**: · [Traits](../02_intermediate/01_traits.md) · [TRPL](https://doc.rust-lang.org/book/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: · [Traits](../02_intermediate/00_traits/01_traits.md) · [TRPL](https://doc.rust-lang.org/book/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
@@ -17,7 +17,6 @@
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
-
 
 ---
 
@@ -31,7 +30,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与是否需要进入 L4 形式化层？的适用边界。
 5. **迁移应用**: 将 是否需要进入 L4 形式化层？ 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 ## 反命题决策树
@@ -41,7 +39,6 @@
 > **反命题 2**: "忽略 是否需要进入 L4 形式化层？ 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 是否需要进入 L4 形式化层？ 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 是否需要进入 L4 形式化层？ 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 是否需要进入 L4 形式化层？ 具有语言特有的形态。
-
 
 ## 快速决策树
 

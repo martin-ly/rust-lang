@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估安全实践和审计策略
 > **定位**: 系统讲解 Rust **安全编程实践**——从输入验证、加密使用、到审计和供应链安全，揭示如何在 Rust 的内存安全（Memory Safety）基础上构建全面的安全防御体系。
-> **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Type System](../01_foundation/04_type_system.md) · [Error Handling](../02_intermediate/16_error_handling_deep_dive.md)
+> **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) · [Error Handling](../02_intermediate/03_error_handling/16_error_handling_deep_dive.md)
 > **后置概念**: [Blockchain](06_blockchain.md) · [Formal Methods](../04_formal/04_rustbelt.md)
 >
 > **来源**: [Rust Secure Code WG](https://github.com/rust-secure-code/wg) · [Cargo — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -63,7 +63,7 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：安全实践的编译错误](#十边界测试安全实践的编译错误)
-    - [10.1 边界测试：密码学常量时间操作（运行时（Runtime）风险）](#101-边界测试密码学常量时间操作运行时风险)
+    - [10.1 边界测试：密码学常量时间操作（运行时风险）](#101-边界测试密码学常量时间操作运行时风险)
     - [10.2 边界测试：`unsafe` 代码的审计边界（编译错误）](#102-边界测试unsafe-代码的审计边界编译错误)
     - [10.3 边界测试：`zeroize` 与编译器优化的冲突（逻辑错误）](#103-边界测试zeroize-与编译器优化的冲突逻辑错误)
     - [10.4 边界测试：依赖供应链的 typo-squatting（运行时安全风险）](#104-边界测试依赖供应链的-typo-squatting运行时安全风险)
@@ -73,7 +73,7 @@
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`cargo audit` 工具的主要功能是什么？（理解层）](#测验-1cargo-audit-工具的主要功能是什么理解层)
     - [测验 2：为什么在 Rust 中处理密码时，建议使用 `secrecy` crate 而非普通 `String`？（理解层）](#测验-2为什么在-rust-中处理密码时建议使用-secrecy-crate-而非普通-string理解层)
-    - [测验 3：Rust 的所有权（Ownership）系统如何帮助防御缓冲区溢出攻击？（理解层）](#测验-3rust-的所有权系统如何帮助防御缓冲区溢出攻击理解层)
+    - [测验 3：Rust 的所有权系统如何帮助防御缓冲区溢出攻击？（理解层）](#测验-3rust-的所有权系统如何帮助防御缓冲区溢出攻击理解层)
     - [测验 4：`#[forbid(unsafe_code)]` 属性有什么作用？（理解层）](#测验-4forbidunsafe_code-属性有什么作用理解层)
     - [测验 5：在 Rust Web 应用中，如何防御 SQL 注入攻击？（理解层）](#测验-5在-rust-web-应用中如何防御-sql-注入攻击理解层)
   - [认知路径](#认知路径)
@@ -868,7 +868,7 @@ cargo audit
 ## 相关概念文件
 
 - [Unsafe](../03_advanced/03_unsafe.md) — 不安全代码
-- [Type System](../01_foundation/04_type_system.md) — 类型系统
+- [Type System](../01_foundation/02_type_system/04_type_system.md) — 类型系统
 - [Blockchain](06_blockchain.md) — 区块链安全
 - [Formal Methods](../04_formal/04_rustbelt.md) — 形式化验证
 

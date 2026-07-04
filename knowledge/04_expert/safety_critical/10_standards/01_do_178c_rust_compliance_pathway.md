@@ -4,7 +4,7 @@
 > [Ferrocene](https://ferrous-systems.com/ferrocene/),
 > [Rust Reference](https://doc.rust-lang.org/reference/)
 >
-> **相关概念**: [路径](../../../../concept/02_intermediate/10_module_system.md)
+> **相关概念**: [路径](../../../../concept/02_intermediate/05_modules_and_visibility/10_module_system.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 DO-178C 标准来源标注、Ferrocene 认证工具链引用 [来源: Authority Source Sprint Batch 8]
 >

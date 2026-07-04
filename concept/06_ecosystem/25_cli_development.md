@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 CLI 开发模式
 > **定位**: 探讨 Rust 在命令行工具开发领域的生态——从 clap 的参数解析到 indicatif 的进度条，分析 Rust 如何成为现代 CLI 工具的首选语言。
-> **前置概念**: [Error Handling](../02_intermediate/04_error_handling.md) · [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md)
+> **前置概念**: [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) · [Traits](../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [Performance](15_performance_optimization.md) · [Cross Compilation](17_cross_compilation.md)
 
 ---
@@ -45,9 +45,9 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：CLI 开发的编译错误](#十边界测试cli-开发的编译错误)
-    - [10.1 边界测试：`clap` 派生宏（Macro）的字段类型约束（编译错误）](#101-边界测试clap-派生宏的字段类型约束编译错误)
-    - [10.2 边界测试：信号处理与异步（Async）代码的交互（编译错误）](#102-边界测试信号处理与异步代码的交互编译错误)
-    - [10.6 边界测试：终端颜色检测与 `NO_COLOR` 标准（运行时（Runtime）显示问题）](#106-边界测试终端颜色检测与-no_color-标准运行时显示问题)
+    - [10.1 边界测试：`clap` 派生宏的字段类型约束（编译错误）](#101-边界测试clap-派生宏的字段类型约束编译错误)
+    - [10.2 边界测试：信号处理与异步代码的交互（编译错误）](#102-边界测试信号处理与异步代码的交互编译错误)
+    - [10.6 边界测试：终端颜色检测与 `NO_COLOR` 标准（运行时显示问题）](#106-边界测试终端颜色检测与-no_color-标准运行时显示问题)
     - [10.7 边界测试：ANSI 颜色代码与 Windows 旧版控制台兼容性问题（运行时显示异常）](#107-边界测试ansi-颜色代码与-windows-旧版控制台兼容性问题运行时显示异常)
     - [10.3 边界测试：`clap` 的 derive 宏与字段类型不匹配（编译错误）](#103-边界测试clap-的-derive-宏与字段类型不匹配编译错误)
     - [补充定理链](#补充定理链)
@@ -568,10 +568,10 @@ fn main() {
 
 ## 相关概念文件
 
-- [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理（Error Handling）
+- [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) — 错误处理（Error Handling）
 - [Performance](15_performance_optimization.md) — 性能优化
 - [Cross Compilation](17_cross_compilation.md) — 交叉编译
-- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
+- [Type System](../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 
 ---
 

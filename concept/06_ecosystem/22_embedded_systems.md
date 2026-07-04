@@ -13,8 +13,8 @@
 > **双维定位**: P×Cre — 设计嵌入式系统架构
 > **定位**: 探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全（Memory Safety）如何保证关键系统的可靠性。
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) ·
-> [Memory Management](../02_intermediate/03_memory_management.md) ·
-> [Type System](../01_foundation/04_type_system.md)
+> [Memory Management](../02_intermediate/02_memory_management/03_memory_management.md) ·
+> [Type System](../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [Cross Compilation](17_cross_compilation.md) ·
 > [RTOS](04_application_domains.md)
 
@@ -43,7 +43,7 @@
   - [三、实时系统](#三实时系统)
     - [3.1 实时约束](#31-实时约束)
     - [3.2 RTIC 框架](#32-rtic-框架)
-    - [3.3 Embassy：嵌入式异步（Async）运行时（Runtime）](#33-embassy嵌入式异步运行时)
+    - [3.3 Embassy：嵌入式异步运行时](#33-embassy嵌入式异步运行时)
     - [3.4 embedded-hal-async：异步硬件抽象](#34-embedded-hal-async异步硬件抽象)
     - [3.5 Ariel OS：安全 IoT Library OS](#35-ariel-os安全-iot-library-os)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -687,7 +687,7 @@ fn main() {
 ## 相关概念文件
 
 - [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust
-- [Memory Management](../02_intermediate/03_memory_management.md) — 内存管理
+- [Memory Management](../02_intermediate/02_memory_management/03_memory_management.md) — 内存管理
 - [Cross Compilation](17_cross_compilation.md) — 交叉编译
 - [Performance](15_performance_optimization.md) — 性能优化
 

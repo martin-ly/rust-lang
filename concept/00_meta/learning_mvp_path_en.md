@@ -7,7 +7,7 @@
 > **End Goal**: Independently write a multi-threaded command-line tool (CLI)
 > **Design Principle**: Every stage must have runnable code; every concept must have corresponding exercises
 > **主要来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Cargo Book](https://doc.rust-lang.org/cargo/)
-> ⚠️ **草案状态**: 本文件为英文 MVP 路径草案，其中部分链接指向的概念文件编号/名称可能与当前 `concept/` 目录结构不一致。请以中文版 [`learning_mvp_path.md`](./learning_mvp_path.md) 为权威学习路径。
+> ⚠️ **草案状态**: 本文件为英文 MVP 路径草案，其中部分链接指向的概念文件编号/名称可能与当前 `concept/` 目录结构不一致。请以中文版 [`learning_mvp_path.md`](learning_mvp_path.md) 为权威学习路径。
 ---
 
 ## Path Overview
@@ -55,7 +55,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | 45m | Can draw ownership transfer diagrams |
+| Read [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 45m | Can draw ownership transfer diagrams |
 | Read `concept/01_foundation/02_move_semantics.md` | 30m | Predicts move vs. copy correctly |
 | Solve rustlings `move_semantics` exercises | 30m | All tests pass |
 | Take `L1 Ownership Quiz` | 15m | Score ≥ 3/4 |
@@ -112,7 +112,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/02_intermediate/01_traits.md](../02_intermediate/01_traits.md) | 45m | Implements custom trait |
+| Read [concept/02_intermediate/00_traits/01_traits.md](../02_intermediate/00_traits/01_traits.md) | 45m | Implements custom trait |
 | Read `concept/02_intermediate/06_generics.md` | 30m | Writes generic `fn` and generic `struct` |
 | Practice: Generic `Stack<T>` | 30m | Works for `i32`, `String`, custom types |
 | Take `L2 Traits Quiz` | 15m | Score ≥ 3/4 |
@@ -123,8 +123,8 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/02_intermediate/04_error_handling.md](../02_intermediate/04_error_handling.md) | 45m | Chooses between `Result` and `panic!` |
-| Read [concept/02_intermediate/05_assert_matches.md](../02_intermediate/05_assert_matches.md) | 15m | Uses `assert_matches!` in tests |
+| Read [concept/02_intermediate/03_error_handling/04_error_handling.md](../02_intermediate/03_error_handling/04_error_handling.md) | 45m | Chooses between `Result` and `panic!` |
+| Read [concept/02_intermediate/06_macros_and_metaprogramming/05_assert_matches.md](../02_intermediate/06_macros_and_metaprogramming/05_assert_matches.md) | 15m | Uses `assert_matches!` in tests |
 | Practice: File parser with error propagation | 45m | Uses `?` operator, custom error type |
 | Solve rustlings `error_handling` | 15m | All tests pass |
 
@@ -134,7 +134,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/01_foundation/11_modules_and_paths.md](../01_foundation/11_modules_and_paths.md) | 30m | Organizes code into modules |
+| Read [concept/01_foundation/07_modules_and_items/11_modules_and_paths.md](../01_foundation/07_modules_and_items/11_modules_and_paths.md) | 30m | Organizes code into modules |
 | Read `docs/06_toolchain/06_cargo_workspace_guide.md` | 30m | Creates multi-crate workspace |
 | Practice: Split analyzer into lib + bin | 45m | `cargo test` and `cargo run` work |
 | Configure `Cargo.toml`: dependencies, features | 15m | Adds `clap`, `serde` correctly |
@@ -216,10 +216,10 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Topic | File | Bloom Level |
 |:---|:---|:---:|
-| Ownership | [concept/01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | Understand |
+| Ownership | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Understand |
 | Borrowing | `concept/01_foundation/03_borrowing.md` | Understand |
-| Traits | [concept/02_intermediate/01_traits.md](../02_intermediate/01_traits.md) | Apply |
-| Error Handling | [concept/02_intermediate/04_error_handling.md](../02_intermediate/04_error_handling.md) | Apply |
+| Traits | [concept/02_intermediate/00_traits/01_traits.md](../02_intermediate/00_traits/01_traits.md) | Apply |
+| Error Handling | [concept/02_intermediate/03_error_handling/04_error_handling.md](../02_intermediate/03_error_handling/04_error_handling.md) | Apply |
 | Concurrency | [concept/03_advanced/01_concurrency.md](../03_advanced/01_concurrency.md) | Apply |
 
 ### Cheat Sheets

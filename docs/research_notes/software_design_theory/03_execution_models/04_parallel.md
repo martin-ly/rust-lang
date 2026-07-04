@@ -78,7 +78,7 @@ $\mathit{par\_map}(f, S) = \mathit{merge}(\mathit{map}(f, S_1), \ldots, \mathit{
 
 **Axiom PL2**：任务结果合并顺序可无关（如归约满足结合律）；或任务顺序确定。
 
-**定理 PL-T1**：Rayon 等库保证数据竞争自由；由 Send/Sync 与 [borrow_checker_proof](../../../research_notes/formal_methods/10_borrow_checker_proof.md)。
+**定理 PL-T1**：Rayon 等库保证数据竞争自由；由 Send/Sync 与 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md)。
 
 **引理 PL-L1（无共享可变）**：`par_iter` 闭包捕获为 move 或只读引用；各子任务无共享可变；归约满足结合律时结果确定。
 

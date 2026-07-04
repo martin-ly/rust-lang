@@ -18,7 +18,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust** 与 **Kotlin** 的设计哲学——从空安全、并发模型到平台支持，揭示静态类型语言如何在不同生态中实现安全与表达力的平衡。
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Null Safety](../02_intermediate/04_error_handling.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) · [Null Safety](../02_intermediate/03_error_handling/04_error_handling.md)
 > **后置概念**: [JVM Ecosystem](../06_ecosystem/03_core_crates.md) · [Android Development](../06_ecosystem/04_application_domains.md)
 
 ---
@@ -35,7 +35,7 @@
     - [1.2 并发模型](#12-并发模型)
     - [1.3 平台与生态](#13-平台与生态)
   - [二、语言特性差异](#二语言特性差异)
-    - [2.1 类型推断（Type Inference）与泛型（Generics）](#21-类型推断与泛型)
+    - [2.1 类型推断与泛型](#21-类型推断与泛型)
     - [2.2 扩展函数与 Trait](#22-扩展函数与-trait)
     - [2.3 协程与 async/await](#23-协程与-asyncawait)
   - [三、工程实践差异](#三工程实践差异)
@@ -52,7 +52,7 @@
   - [十、边界测试：Rust 与 Kotlin 的编译错误对比](#十边界测试rust-与-kotlin-的编译错误对比)
     - [10.1 边界测试：Kotlin 的可空类型与 Rust 的 Option（编译错误）](#101-边界测试kotlin-的可空类型与-rust-的-option编译错误)
     - [10.2 边界测试：Kotlin 的 data class 与 Rust 的 derive（编译错误）](#102-边界测试kotlin-的-data-class-与-rust-的-derive编译错误)
-    - [10.3 边界测试：Kotlin 的协程与 Rust 的 async 的调度模型差异（运行时（Runtime）死锁）](#103-边界测试kotlin-的协程与-rust-的-async-的调度模型差异运行时死锁)
+    - [10.3 边界测试：Kotlin 的协程与 Rust 的 async 的调度模型差异（运行时死锁）](#103-边界测试kotlin-的协程与-rust-的-async-的调度模型差异运行时死锁)
     - [10.4 边界测试：Kotlin 的 null safety 与 Rust 的 `Option` 的语法差异（编译错误）](#104-边界测试kotlin-的-null-safety-与-rust-的-option-的语法差异编译错误)
     - [10.3 边界测试：Kotlin 的 nullable 类型与 Rust 的 Option 显式处理（编译错误）](#103-边界测试kotlin-的-nullable-类型与-rust-的-option-显式处理编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -570,9 +570,9 @@ fn main() {
 
 ## 相关概念文件
 
-- [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）
-- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
-- [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理（Error Handling）
+- [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）
+- [Type System](../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
+- [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) — 错误处理（Error Handling）
 - [Async](../03_advanced/02_async.md) — 异步（Async）编程
 
 ---

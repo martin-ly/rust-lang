@@ -909,8 +909,8 @@ impl GoodNode {
 - [网络协议](38_network_protocols.md) — UDP/TCP、序列化、gRPC/QUIC
 - [操作系统内核](39_os_kernel.md) — 调度器、中断、内存管理
 - [性能优化](15_performance_optimization.md) — SIMD、缓存、零拷贝
-- [内存管理](../02_intermediate/03_memory_management.md) — 分配器、生命周期（Lifetimes）、RAII
-- [类型系统（Type System）](../01_foundation/04_type_system.md) — 泛型（Generics）、trait、类型状态
+- [内存管理](../02_intermediate/02_memory_management/03_memory_management.md) — 分配器、生命周期（Lifetimes）、RAII
+- [类型系统（Type System）](../01_foundation/02_type_system/04_type_system.md) — 泛型（Generics）、trait、类型状态
 - [机器学习生态](46_machine_learning_ecosystem.md) — 感知算法、神经网络推理
 - [形式化验证工具](74_formal_verification_tools.md) — 模型检查、定理证明、Kani
 - [分布式共识](50_distributed_consensus.md) — 多机器人协同、一致性（Coherence）

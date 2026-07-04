@@ -571,7 +571,7 @@ Rust 目前用三种不兼容的语法表达三种效果：
 > Rust 语言团队采取渐进策略：先通过 `try` blocks、`gen` blocks 等独立特性积累经验，再考虑统一语法。
 > 这反映了 Rust 演化的保守哲学——**先验证，后统一**。
 > **深入阅读**: `async`/`await` 的详细语义模型见 [`02_async.md`](../03_advanced/02_async.md)；
-> 错误处理与 `?` 运算符见 [`04_error_handling.md`](../02_intermediate/04_error_handling.md)。
+> 错误处理与 `?` 运算符见 [`04_error_handling.md`](../02_intermediate/03_error_handling/04_error_handling.md)。
 
 ---
 
@@ -1073,7 +1073,7 @@ Java ⊂ Rust（系统编程能力）
 > **关键洞察**: Rust 的 `const generics` 是**受限的依赖类型**——它允许值参数化类型，但值必须是编译期常量。
 > 这与 C++ 的 `template <int N>` 类似，但比完整依赖类型弱得多。
 > Rust 的设计哲学是"**足够表达系统编程需求，但不追求类型系统的理论完备性**"——这是工业实用主义与学术理想主义之间的刻意平衡。
-> **深入阅读**: const generics 的能力边界详见 [`02_generics.md`](../02_intermediate/02_generics.md) §5.7；类型论基础详见 [`04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) §2。
+> **深入阅读**: const generics 的能力边界详见 [`02_generics.md`](../02_intermediate/01_generics/02_generics.md) §5.7；类型论基础详见 [`04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) §2。
 
 ### 6.4 知识体系导航：从元层到实践层
 
@@ -1082,18 +1082,18 @@ Java ⊂ Rust（系统编程能力）
 
 | 元概念（本文件） | 实践层文件 | 对应章节 | 映射关系 |
 | :--- | :--- | :--- | :--- |
-| **所有权算子 Own(T)** | [`01_ownership.md`](../01_foundation/01_ownership.md) | §1-§3 | 元定义 → 权威定义 + 形式化根基 |
-| **借用算子 Borrow(T, m)** | [`02_borrowing.md`](../01_foundation/02_borrowing.md) | §1-§3 | 元定义 → AXM 规则 + 分数权限 |
-| **生命周期算子 Lifetime('a)** | [`03_lifetimes.md`](../01_foundation/03_lifetimes.md) | §1-§4 | 元定义 → 区域类型 + 约束推导 |
-| **Trait 算子 Trait(B)** | [`01_traits.md`](../02_intermediate/01_traits.md) | §1-§3 | 元定义 → 行为抽象 + Orphan Rule |
-| **泛型算子 `Generic<T>`** | [`02_generics.md`](../02_intermediate/02_generics.md) | §1-§4 | 元定义 → 单态化 + 参数性定理 |
+| **所有权算子 Own(T)** | [`01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | §1-§3 | 元定义 → 权威定义 + 形式化根基 |
+| **借用算子 Borrow(T, m)** | [`02_borrowing.md`](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | §1-§3 | 元定义 → AXM 规则 + 分数权限 |
+| **生命周期算子 Lifetime('a)** | [`03_lifetimes.md`](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | §1-§4 | 元定义 → 区域类型 + 约束推导 |
+| **Trait 算子 Trait(B)** | [`01_traits.md`](../02_intermediate/00_traits/01_traits.md) | §1-§3 | 元定义 → 行为抽象 + Orphan Rule |
+| **泛型算子 `Generic<T>`** | [`02_generics.md`](../02_intermediate/01_generics/02_generics.md) | §1-§4 | 元定义 → 单态化 + 参数性定理 |
 | **异步算子 Async** | [`02_async.md`](../03_advanced/02_async.md) | §1-§8 | 元定义 → Future + Pin + 调度模型 |
 | **Unsafe 算子** | [`03_unsafe.md`](../03_advanced/03_unsafe.md) | §1-§7 | 元定义 → 逃逸舱口 + 别名模型 |
 | **宏算子 Macro** | [`04_macros.md`](../03_advanced/04_macros.md) | §1-§5 | 元定义 → 语法扩展 + 卫生宏 |
 | **语义封闭性** | [`04_rustbelt.md`](../04_formal/04_rustbelt.md) | §1-§6 | 元定理 → Iris 分离逻辑证明 |
-| **等价表达（继承→Trait）** | [`01_traits.md`](../02_intermediate/01_traits.md) §5 | 默认方法 + 组合 | 元分析 → 工程实践 |
-| **等价表达（异常→Result）** | [`04_error_handling.md`](../02_intermediate/04_error_handling.md) | §1-§4 | 元分析 → `?` 运算符 + 错误类型 |
-| **等价表达（虚函数→dyn）** | [`04_type_system.md`](../01_foundation/04_type_system.md) §4 | dyn Trait + enum | 元分析 → 类型系统实现 |
+| **等价表达（继承→Trait）** | [`01_traits.md`](../02_intermediate/00_traits/01_traits.md) §5 | 默认方法 + 组合 | 元分析 → 工程实践 |
+| **等价表达（异常→Result）** | [`04_error_handling.md`](../02_intermediate/03_error_handling/04_error_handling.md) | §1-§4 | 元分析 → `?` 运算符 + 错误类型 |
+| **等价表达（虚函数→dyn）** | [`04_type_system.md`](../01_foundation/02_type_system/04_type_system.md) §4 | dyn Trait + enum | 元分析 → 类型系统实现 |
 | **并发安全** | [`01_concurrency.md`](../03_advanced/01_concurrency.md) | §1-§7 | 元分析 → Send/Sync + happens-before |
 | **跨语言对比** | [`01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | §1-§6 | 元分析 → 本体论差异 |
 | **依赖类型边界** | [`02_type_theory.md`](../04_formal/02_type_theory.md) | §1-§3 | 元分析 → HM 类型系统扩展 |

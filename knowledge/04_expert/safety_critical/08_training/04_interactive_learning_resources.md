@@ -3,7 +3,7 @@
 > **EN**: Interactive Learning Resources
 > **Summary**: 交互式学习资源 Interactive Learning Resources.
 >
-> **相关概念**: [Rc](../../../../concept/02_intermediate/03_memory_management.md)
+> **相关概念**: [Rc](../../../../concept/02_intermediate/02_memory_management/03_memory_management.md)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]

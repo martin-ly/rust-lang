@@ -20,7 +20,6 @@
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
-
 ---
 
 ## 反命题决策树
@@ -30,4 +29,3 @@
 > **反命题 2**: "忽略 Unsafe Rust 模式 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Unsafe Rust 模式 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 Unsafe Rust 模式 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Unsafe Rust 模式 具有语言特有的形态。
-

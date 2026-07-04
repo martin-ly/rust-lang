@@ -13,7 +13,7 @@
 > **双维定位**: C×App — 应用 Edition 指南
 > **定位**: 全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。
 > **注意**: Rust 2024 Edition 已在 **Rust 1.85.0** 稳定；`gen {}` blocks / `gen fn` 仍为 nightly（feature `gen_blocks`，跟踪 issue #117078），本文档将其作为前瞻特性介绍。
-> **前置概念**: [Rust Version Tracking](05_rust_version_tracking.md) · [Async](../03_advanced/02_async.md) · [Generics](../02_intermediate/02_generics.md)
+> **前置概念**: [Rust Version Tracking](05_rust_version_tracking.md) · [Async](../03_advanced/02_async.md) · [Generics](../02_intermediate/01_generics/02_generics.md)
 > **后置概念**: [Evolution](03_evolution.md) · [NLL](../03_advanced/08_nll_and_polonius.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -496,7 +496,7 @@ graph TD
 - [Rust Version Tracking](05_rust_version_tracking.md) — 版本跟踪
 - [Evolution](03_evolution.md) — 语言演进
 - [Async](../03_advanced/02_async.md) — 异步编程
-- [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）系统
+- [Generics](../02_intermediate/01_generics/02_generics.md) — 泛型（Generics）系统
 
 ---
 

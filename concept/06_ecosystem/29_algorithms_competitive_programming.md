@@ -11,7 +11,7 @@
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用算法和竞赛编程模式
-> **前置概念**: · [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
+> **前置概念**: · [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Ecosystem Tower](44_formal_ecosystem_tower.md) · [Performance Optimization](15_performance_optimization.md)
 > **主要来源**: [CLRS — Introduction to Algorithms] · [LeetCode] · [Codeforces] · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [VeriContest arXiv 2026-05-08] · [Kani Docs] · [CSES Problem Set] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
@@ -794,8 +794,8 @@ temp.extend_from_slice(&nums[..]);
 |:---|:---|
 | [`crates/c08_algorithms/`](../crates/c08_algorithms) | 132+ LeetCode 问题的 Rust 实现，覆盖本文件全部模式 |
 | [`concept/04_formal/05_verification_toolchain.md`](../04_formal/05_verification_toolchain.md) | Kani / Verus / Creusot 形式验证工具链选型指南 |
-| [`concept/02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) | 泛型与 const generics 的理论基础 |
-| [`concept/01_foundation/06_zero_cost_abstractions.md`](../01_foundation/06_zero_cost_abstractions.md) | 零成本抽象（Zero-Cost Abstraction）原则的理论根基 |
+| [`concept/02_intermediate/01_generics/02_generics.md`](../02_intermediate/01_generics/02_generics.md) | 泛型与 const generics 的理论基础 |
+| [`concept/01_foundation/00_start/06_zero_cost_abstractions.md`](../01_foundation/00_start/06_zero_cost_abstractions.md) | 零成本抽象（Zero-Cost Abstraction）原则的理论根基 |
 | `concept/03_advanced/01_concurrency.md` | `rayon` 并行分治的并发安全（Concurrency Safety）原理 |
 | [`concept/06_ecosystem/15_performance_optimization.md`](15_performance_optimization.md) | Criterion / flamegraph 性能分析方法论 |
 

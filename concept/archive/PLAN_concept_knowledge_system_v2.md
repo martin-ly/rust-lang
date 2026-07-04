@@ -35,10 +35,10 @@
 |:---|:---|:---|:---|:---|
 | P1-T1 | 完成 00_meta/ 权威来源清单 | `00_meta/sources.md` | 🔴 高 | ✅ 完成 |
 | P1-T2 | 完成 00_meta/ 方法论说明 | `00_meta/methodology.md` | 🔴 高 | ✅ 完成 |
-| P1-T3 | 完成 01_foundation/ 所有权（Ownership）系统概念文件 | `01_foundation/01_ownership.md` | 🔴 高 | ✅ 完成 |
-| P1-T4 | 完成 01_foundation/ 借用（Borrowing）系统概念文件 | `01_foundation/02_borrowing.md` | 🔴 高 | ✅ 完成 |
-| P1-T5 | 完成 01_foundation/ 生命周期（Lifetimes）概念文件 | `01_foundation/03_lifetimes.md` | 🔴 高 | ✅ 完成 |
-| P1-T6 | 完成 01_foundation/ 类型系统（Type System）基础 | `01_foundation/04_type_system.md` | 🔴 高 | ✅ 完成 |
+| P1-T3 | 完成 01_foundation/ 所有权（Ownership）系统概念文件 | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | 🔴 高 | ✅ 完成 |
+| P1-T4 | 完成 01_foundation/ 借用（Borrowing）系统概念文件 | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | 🔴 高 | ✅ 完成 |
+| P1-T5 | 完成 01_foundation/ 生命周期（Lifetimes）概念文件 | `01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` | 🔴 高 | ✅ 完成 |
+| P1-T6 | 完成 01_foundation/ 类型系统（Type System）基础 | `01_foundation/02_type_system/04_type_system.md` | 🔴 高 | ✅ 完成 |
 | P1-T7 | 迁移并索引原 01.md | `05_comparative/01_rust_vs_cpp.md` | 🟡 中 | ✅ 完成 |
 | P1-T8 | 创建 README.md 总索引 | `README.md` | 🔴 高 | ✅ 完成 |
 | P1-T9 | 创建本 PLAN.md | `PLAN.md` | 🔴 高 | ✅ 完成 |
@@ -49,10 +49,10 @@
 
 | 任务ID | 任务内容 | 交付物 | 优先级 |
 |:---|:---|:---|:---|
-| P2-T1 | Trait 系统：定义、约束、Orphan Rule、关联类型 | `02_intermediate/01_traits.md` | 🔴 高 |
-| P2-T2 | 泛型系统：单态化（Monomorphization）、约束、GATs、Const Generics | `02_intermediate/02_generics.md` | 🔴 高 |
-| P2-T3 | 内存管理：Stack/Heap、智能指针（Smart Pointer）、自定义分配器 | `02_intermediate/03_memory_management.md` | 🔴 高 |
-| P2-T4 | 错误处理（Error Handling）：Option/Result、?运算符、自定义错误 | `02_intermediate/04_error_handling.md` | 🔴 高 |
+| P2-T1 | Trait 系统：定义、约束、Orphan Rule、关联类型 | `02_intermediate/00_traits/01_traits.md` | 🔴 高 |
+| P2-T2 | 泛型系统：单态化（Monomorphization）、约束、GATs、Const Generics | `02_intermediate/01_generics/02_generics.md` | 🔴 高 |
+| P2-T3 | 内存管理：Stack/Heap、智能指针（Smart Pointer）、自定义分配器 | `02_intermediate/02_memory_management/03_memory_management.md` | 🔴 高 |
+| P2-T4 | 错误处理（Error Handling）：Option/Result、?运算符、自定义错误 | `02_intermediate/03_error_handling/04_error_handling.md` | 🔴 高 |
 | P2-T5 | 并发模型：Send/Sync、 fearless concurrency、Mutex/RwLock | `03_advanced/01_concurrency.md` | 🟡 中 |
 | P2-T6 | 异步编程：Future、async/await、Pin、运行时（Runtime） | `03_advanced/02_async.md` | 🟡 中 |
 | P2-T7 | Unsafe Rust：raw pointer、FFI、unsafe 边界判定 | `03_advanced/03_unsafe.md` | 🟡 中 |
@@ -353,7 +353,7 @@
 
 | 任务ID | 任务内容 | 交付物 | 状态 |
 |:---|:---|:---|:---:|
-| P14-T1 | 新增 `02_intermediate/05_assert_matches.md` | `matches!` / `assert_matches!` / `debug_assert_matches!` 形式化语义 | ✅ |
+| P14-T1 | 新增 `02_intermediate/06_macros_and_metaprogramming/05_assert_matches.md` | `matches!` / `assert_matches!` / `debug_assert_matches!` 形式化语义 | ✅ |
 | P14-T2 | mdBook 静态站点配置 | `book.toml` + `scripts/generate_summary.py` + Mermaid CDN 按需加载 | ✅ |
 | P14-T3 | GitHub Pages 自动部署工作流 | `.github/workflows/mdbook_pages.yml` | ✅ |
 | P14-T4 | 更新 02_intermediate/README.md 索引 | 添加 assert_matches 条目 | ✅ |
@@ -361,7 +361,7 @@
 
 **关键成果**:
 
-- 新增 `02_intermediate/05_assert_matches.md`（~367 行，17 来源，3 Mermaid 图表）
+- 新增 `02_intermediate/06_macros_and_metaprogramming/05_assert_matches.md`（~367 行，17 来源，3 Mermaid 图表）
 - mdBook 构建成功，Mermaid 图表 CDN 按需加载
 - GitHub Actions 自动部署工作流就绪
 - **文件总数: 78 → 79，代码块编译: 234 → 235/235**
@@ -370,14 +370,14 @@
 
 | 任务ID | 任务内容 | 交付物 | 状态 |
 |:---|:---|:---|:---:|
-| P15-T1 | 新增 `02_intermediate/06_range_types.md` | `std::ops::Range` → `core::range` 语义演进 | ✅ |
+| P15-T1 | 新增 `02_intermediate/04_types_and_conversions/06_range_types.md` | `std::ops::Range` → `core::range` 语义演进 | ✅ |
 | P15-T2 | 更新 version_tracking.md core::range 状态 | 添加 concept/ 引用（Reference） | ✅ |
 | P15-T3 | 更新 02_intermediate/README.md 索引 | 添加 range_types 条目 | ✅ |
 | P15-T4 | 质量基线报告同步更新 | 全部指标刷新 | ✅ |
 
 **关键成果**:
 
-- 新增 `02_intermediate/06_range_types.md`（~319 行，17 来源，2 Mermaid 图表）
+- 新增 `02_intermediate/04_types_and_conversions/06_range_types.md`（~319 行，17 来源，2 Mermaid 图表）
 - 涵盖 `IntoIterator` vs `Iterator` 设计权衡、`Copy` 语义影响、跨语言对比
 - **文件总数: 79 → 80，Mermaid 图表: 317 → 319，代码块编译: 235 → 239/239**
 
@@ -387,7 +387,7 @@
 
 | 任务ID | 任务内容 | 交付物 | 状态 |
 |:---|:---|:---|:---:|
-| P15-T1 | 新增 `02_intermediate/06_range_types.md` | `std::ops::Range` → `core::range` 语义演进 | ✅ |
+| P15-T1 | 新增 `02_intermediate/04_types_and_conversions/06_range_types.md` | `std::ops::Range` → `core::range` 语义演进 | ✅ |
 | P15-T2 | 新增 `07_future/borrowsanitizer_preview.md` | Shadow Stack、Lock-and-Key、Miri 对比 | ✅ |
 | P15-T3 | BorrowSanitizer 技术调研 | 详细调研报告：里程碑状态、Retag Intrinsics、GC 策略 | ✅ |
 | P15-T4 | 更新 version_tracking.md | core::range / BorrowSanitizer 状态更新 | ✅ |
@@ -395,7 +395,7 @@
 
 **关键成果**:
 
-- 新增 `02_intermediate/06_range_types.md`（~319 行，17 来源，2 Mermaid 图表）
+- 新增 `02_intermediate/04_types_and_conversions/06_range_types.md`（~319 行，17 来源，2 Mermaid 图表）
 - 新增 `07_future/borrowsanitizer_preview.md`（~340 行，18 来源，3 Mermaid 图表）
 - BorrowSanitizer 调研完成：MCP #958 已发布、~80% Miri 测试通过、预期 Nightly 2026 Q4
 - **文件总数: 79 → 81，Mermaid 图表: 317 → 322，代码块编译: 235 → 239/239**
@@ -439,25 +439,25 @@
 | P17-T9 | 质量基线报告同步 | 全部指标刷新 | ✅ |
 | P17-T10 | 新增 `03_advanced/06_pin_unpin.md` | Pin 不动性、自引用（Reference）类型、PhantomPinned、async 状态机 | ✅ |
 | P17-T11 | 新增 `06_ecosystem/13_logging_observability.md` | tracing、log、metrics、OpenTelemetry、分布式追踪 | ✅ |
-| P17-T12 | 新增 `02_intermediate/10_module_system.md` | Crate/Module/Package、可见性、use 声明、Workspace | ✅ |
+| P17-T12 | 新增 `02_intermediate/05_modules_and_visibility/10_module_system.md` | Crate/Module/Package、可见性、use 声明、Workspace | ✅ |
 | P17-T13 | 新增 `04_formal/07_separation_logic.md` | * 算子、帧规则、CSL、Iris、RustBelt 应用映射 | ✅ |
 | P17-T14 | 新增 `07_future/18_async_drop_preview.md` | 异步（Async）资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs//3308-offset_of.html)、Pin 交互、workaround 模式 | ✅ |
 | P17-T15 | 新增 `05_comparative/07_rust_vs_python.md` | 静态 vs 动态类型、所有权（Ownership） vs GC、 fearless vs GIL | ✅ |
 | P17-T16 | 新增 `03_advanced/07_proc_macro.md` | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ |
 | P17-T17 | 新增 `06_ecosystem/14_documentation.md` | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ |
-| P17-T18 | 新增 `02_intermediate/11_cow_and_borrowed.md` | Clone-on-Write、零拷贝、ToOwned、API 灵活性 | ✅ |
+| P17-T18 | 新增 `02_intermediate/02_memory_management/11_cow_and_borrowed.md` | Clone-on-Write、零拷贝、ToOwned、API 灵活性 | ✅ |
 | P17-T19 | 新增 `07_future/26_specialization_preview.md` | Trait 实现特化、重叠 impl、min_specialization | ✅ |
-| P17-T20 | 新增 `01_foundation/07_control_flow.md` | match/if let/loop、表达式导向、穷尽性检查 | ✅ |
-| P17-T21 | 新增 `02_intermediate/12_smart_pointers.md` | Box/Rc/Arc/RefCell/Cell、所有权（Ownership）语义、组合模式 | ✅ |
+| P17-T20 | 新增 `01_foundation/04_control_flow/07_control_flow.md` | match/if let/loop、表达式导向、穷尽性检查 | ✅ |
+| P17-T21 | 新增 `02_intermediate/02_memory_management/12_smart_pointers.md` | Box/Rc/Arc/RefCell/Cell、所有权（Ownership）语义、组合模式 | ✅ |
 | P17-T22 | 新增 `06_ecosystem/15_performance_optimization.md` | Criterion、flamegraph、缓存优化、SIMD、PGO | ✅ |
 | P17-T23 | 新增 `04_formal/08_type_inference.md` | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ |
 | P17-T24 | 新增 `05_comparative/08_rust_vs_javascript.md` | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ |
-| P17-T25 | 新增 `01_foundation/08_collections.md` | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ |
+| P17-T25 | 新增 `01_foundation/05_collections/08_collections.md` | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ |
 | P17-T26 | 新增 `06_ecosystem/16_testing.md` | 单元/集成/文档测试、mockall、proptest、cargo-fuzz | ✅ |
 | P17-T27 | 新增 `03_advanced/08_nll_and_polonius.md` | 非词法生命周期（Lifetimes）、数据流分析、Origin 模型 | ✅ |
 | P17-T28 | 新增 `04_formal/09_operational_semantics.md` | 小步/大步语义、求值上下文、Rust 形式化 | ✅ |
-| P17-T29 | 新增 `02_intermediate/13_dsl_and_embedding.md` | 宏（Macro） DSL、Builder、Parser Combinator、类型安全 | ✅ |
-| P17-T30 | 新增 `01_foundation/09_strings_and_text.md` | String/str、UTF-8、格式化、OS 字符串、C 字符串 | ✅ |
+| P17-T29 | 新增 `02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md` | 宏（Macro） DSL、Builder、Parser Combinator、类型安全 | ✅ |
+| P17-T30 | 新增 `01_foundation/06_strings_and_text/09_strings_and_text.md` | String/str、UTF-8、格式化、OS 字符串、C 字符串 | ✅ |
 
 **关键成果**:
 
@@ -472,14 +472,14 @@
 - 新增 `07_future/17_rust_specification_preview.md`（~345 行，10 来源，3 Mermaid 图表）
 - 新增 `03_advanced/05_rust_ffi.md`（~399 行，10 来源，3 Mermaid 图表）
 - 新增 `06_ecosystem/11_webassembly.md`（~342 行，10 来源，3 Mermaid 图表）
-- 新增 `02_intermediate/07_closure_types.md`（~362 行，10 来源，3 Mermaid 图表）
+- 新增 `02_intermediate/04_types_and_conversions/07_closure_types.md`（~362 行，10 来源，3 Mermaid 图表）
 - 新增 `05_comparative/06_rust_vs_java.md`（~326 行，10 来源，3 Mermaid 图表）
-- 新增 `01_foundation/05_reference_semantics.md`（~384 行，10 来源，3 Mermaid 图表）
-- 新增 `02_intermediate/08_interior_mutability.md`（~417 行，10 来源，2 Mermaid 图表）
+- 新增 `01_foundation/03_values_and_references/05_reference_semantics.md`（~384 行，10 来源，3 Mermaid 图表）
+- 新增 `02_intermediate/02_memory_management/08_interior_mutability.md`（~417 行，10 来源，2 Mermaid 图表）
 - 新增 `04_formal/06_subtype_variance.md`（~363 行，10 来源，2 Mermaid 图表）
 - 新增 `06_ecosystem/12_testing_strategies.md`（~410 行，10 来源，2 Mermaid 图表）
-- 新增 `01_foundation/06_zero_cost_abstractions.md`（~372 行，10 来源，2 Mermaid 图表）
-- 新增 `02_intermediate/09_serde_patterns.md`（~480 行，10 来源，2 Mermaid 图表）
+- 新增 `01_foundation/00_start/06_zero_cost_abstractions.md`（~372 行，10 来源，2 Mermaid 图表）
+- 新增 `02_intermediate/00_traits/09_serde_patterns.md`（~480 行，10 来源，2 Mermaid 图表）
 - 新增 `03_advanced/06_pin_unpin.md`（~380 行，10 来源，3 Mermaid 图表）
 - 新增 `06_ecosystem/13_logging_observability.md`（~380 行，10 来源，3 Mermaid 图表）
 - 涵盖编译器前端并行化、智能指针（Smart Pointer）派生宏（Macro）、Const Trait 效果系统、RTN 精确捕获、Unsafe Fields、Ferrocene 认证、Gen Blocks、Cranelift 后端、Rust 语言规范、FFI 跨语言、WebAssembly 生态、闭包（Closures）类型系统（Type System）、Rust vs Java、引用（Reference）语义、内部可变性、子类型与变型、测试策略、零成本抽象（Zero-Cost Abstraction）、Serde 序列化、Pin 与 Unpin、日志与可观测性
@@ -500,7 +500,7 @@
 | P17-T41 | 新增 `06_ecosystem/21_game_development.md` | Bevy、WGPU、ECS、Rapier | ✅ |
 | P17-T42 | 新增 `06_ecosystem/22_embedded_systems.md` | no_std、PAC、HAL、RTIC | ✅ |
 | P17-T43 | 新增 `07_future/27_compile_time_execution.md` | const fn、const 泛型（Generics）、类型状态机 | ✅ |
-| P17-T44 | 新增 `01_foundation/32_error_handling_basics.md` | Result、Option、? 运算符、错误组合 | ✅ |
+| P17-T44 | 新增 `01_foundation/08_error_handling/32_error_handling_basics.md` | Result、Option、? 运算符、错误组合 | ✅ |
 | P17-T45 | 新增 `05_comparative/12_rust_vs_scala.md` | HKT、模式匹配（Pattern Matching）、Actor、隐式 vs Trait | ✅ |
 | P17-T46 | 新增 `04_formal/13_formal_methods.md` | Kani、Creusot、Miri、形式化验证 | ✅ |
 | P17-T47 | 新增 `06_ecosystem/24_cloud_native.md` | Axum、Actix、Firecracker、Vector | ✅ |
@@ -510,7 +510,7 @@
 
 **关键成果**:
 
-- 新增 `01_foundation/32_error_handling_basics.md`（~340 行，10+ 来源，2 Mermaid 图表）
+- 新增 `01_foundation/08_error_handling/32_error_handling_basics.md`（~340 行，10+ 来源，2 Mermaid 图表）
 - 新增 `05_comparative/12_rust_vs_scala.md`（~350 行，10+ 来源，2 Mermaid 图表）
 - 新增 `04_formal/13_formal_methods.md`（~320 行，10+ 来源，2 Mermaid 图表）
 - 新增 `06_ecosystem/24_cloud_native.md`（~340 行，10+ 来源，2 Mermaid 图表）
@@ -566,7 +566,7 @@
 | 任务ID | 任务内容 | 交付物 | 状态 |
 |:---|:---|:---|:---:|
 | P18-T1 | 来源标注率整体提升（~15%→≥20%） | 核心文件批量补充 Wikipedia/TRPL/RFC 来源 | 🔄 |
-| P18-T2 | 新增 L1 概念文件填补缺口 | `01_foundation/32_error_handling_basics.md` ✅ | 🔄 |
+| P18-T2 | 新增 L1 概念文件填补缺口 | `01_foundation/08_error_handling/32_error_handling_basics.md` ✅ | 🔄 |
 | P18-T3 | 新增 L3/L4 高级主题 | `03_advanced/14_custom_allocators.md` ✅, `15_zero_copy_parsing.md` ✅, `16_lock_free.md` ✅, `17_type_erasure.md` ✅, `04_formal/13_formal_methods.md` ✅, `14_lambda_calculus.md` ✅, `15_category_theory.md` (重复已归档) | ✅ |
 | P18-T4 | 新增 L5 对比分析 | `05_comparative/12_rust_vs_scala.md` ✅, `13_rust_vs_csharp.md` ✅, `14_rust_vs_elixir.md` ✅ | ✅ |
 | P18-T5 | 新增 L6 生态扩展 | `06_ecosystem/21_game_development.md` ✅, `22_embedded_systems.md` ✅, `23_database_access.md` ✅, `24_cloud_native.md` ✅, `25_cli_development.md` ✅, `26_game_development.md` ✅, `27_web_frameworks.md` ✅ | ✅ |

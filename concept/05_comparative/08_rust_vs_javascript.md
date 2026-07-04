@@ -17,7 +17,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust**（编译型、强类型、内存安全（Memory Safety））与 **JavaScript**（解释型、动态类型、事件驱动）在语言语义、运行时（Runtime）模型、异步（Async）处理和生态工具链四个维度的本质差异，特别关注 WASM 作为两者交汇点的作用。
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [WebAssembly](../06_ecosystem/11_webassembly.md) · [Async](../03_advanced/02_async.md)
 
 ---
@@ -36,12 +36,12 @@
 - [Rust vs JavaScript：系统编程与脚本执行的范式差异](#rust-vs-javascript系统编程与脚本执行的范式差异)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 运行时（Runtime）模型：编译 vs 解释](#11-运行时模型编译-vs-解释)
-    - [1.2 类型系统（Type System）：静态 vs 动态](#12-类型系统静态-vs-动态)
-    - [1.3 内存模型：所有权（Ownership） vs GC](#13-内存模型所有权-vs-gc)
+    - [1.1 运行时模型：编译 vs 解释](#11-运行时模型编译-vs-解释)
+    - [1.2 类型系统：静态 vs 动态](#12-类型系统静态-vs-动态)
+    - [1.3 内存模型：所有权 vs GC](#13-内存模型所有权-vs-gc)
   - [二、技术细节](#二技术细节)
-    - [2.1 异步（Async）模型对比](#21-异步模型对比)
-    - [2.2 错误处理（Error Handling）：Result vs Throw](#22-错误处理result-vs-throw)
+    - [2.1 异步模型对比](#21-异步模型对比)
+    - [2.2 错误处理：Result vs Throw](#22-错误处理result-vs-throw)
     - [2.3 WASM：两个世界的桥梁](#23-wasm两个世界的桥梁)
   - [三、选型决策矩阵](#三选型决策矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -53,7 +53,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 与 JavaScript 的编译错误对比](#十边界测试rust-与-javascript-的编译错误对比)
     - [10.1 边界测试：JavaScript 的隐式转换 vs Rust 的显式转换（编译错误）](#101-边界测试javascript-的隐式转换-vs-rust-的显式转换编译错误)
-    - [10.2 边界测试：JavaScript 的闭包（Closures）变量捕获与 Rust 的所有权（编译错误）](#102-边界测试javascript-的闭包变量捕获与-rust-的所有权编译错误)
+    - [10.2 边界测试：JavaScript 的闭包变量捕获与 Rust 的所有权（编译错误）](#102-边界测试javascript-的闭包变量捕获与-rust-的所有权编译错误)
     - [10.3 边界测试：JavaScript 的 `this` 动态绑定与 Rust 的方法调用（编译错误）](#103-边界测试javascript-的-this-动态绑定与-rust-的方法调用编译错误)
     - [10.4 边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译错误）](#104-边界测试javascript-的弱类型与-rust-的强制类型编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -61,7 +61,7 @@
     - [测验 2：JavaScript 的 `Promise` 与 Rust 的 `Future` 在语义上有什么区别？（理解层）](#测验-2javascript-的-promise-与-rust-的-future-在语义上有什么区别理解层)
     - [测验 3：为什么 Rust 编译为 WebAssembly 后可以与 JavaScript 互操作？WASM 在这两种语言间扮演什么角色？（理解层）](#测验-3为什么-rust-编译为-webassembly-后可以与-javascript-互操作wasm-在这两种语言间扮演什么角色理解层)
     - [测验 4：JavaScript 的"原型继承"与 Rust 的 `trait` 系统在代码复用上有什么区别？（理解层）](#测验-4javascript-的原型继承与-rust-的-trait-系统在代码复用上有什么区别理解层)
-    - [测验 5：Node.js 的 `require`/`import` 模块（Module）系统与 Rust 的 `crate`/`mod` 系统有什么主要区别？（理解层）](#测验-5nodejs-的-requireimport-模块系统与-rust-的-cratemod-系统有什么主要区别理解层)
+    - [测验 5：Node.js 的 `require`/`import` 模块系统与 Rust 的 `crate`/`mod` 系统有什么主要区别？（理解层）](#测验-5nodejs-的-requireimport-模块系统与-rust-的-cratemod-系统有什么主要区别理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -481,7 +481,7 @@ graph TD
 
 - [WebAssembly](../06_ecosystem/11_webassembly.md) — WebAssembly 生态
 - [Async](../03_advanced/02_async.md) — 异步编程
-- [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）模型
+- [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）模型
 - [Rust vs Python](07_rust_vs_python.md) — Rust vs Python 对比
 
 ---

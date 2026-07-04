@@ -15,7 +15,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: F×App — 应用 RPITIT 于 trait 设计
-> **前置依赖**: [Trait](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+> **前置依赖**: [Trait](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md)
 > **后置延伸**: [Type Alias Impl Trait](16_type_alias_impl_trait_preview.md)
 > **来源**: [Rust Reference — Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html) · [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) · [Rust Blog — AFIT](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链

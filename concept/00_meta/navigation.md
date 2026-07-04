@@ -66,10 +66,10 @@
 
 | 文件 | 核心内容 | 关键图表 |
 |:---|:---|:---|
-| [01_ownership](../01_foundation/01_ownership.md) | 所有权唯一性、Move/Copy/Drop、RAII | 7 |
-| [02_borrowing](../01_foundation/02_borrowing.md) | &T/&mut T、AXM 规则、Reborrow、内部可变性 | 6 |
-| [03_lifetimes](../01_foundation/03_lifetimes.md) | 生命周期标注、Elision、NLL、HRTB、Variance | 5 |
-| [04_type_system](../01_foundation/04_type_system.md) | ADT、Trait 对象、模式匹配、类型推断 | 8 |
+| [01_ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 所有权唯一性、Move/Copy/Drop、RAII | 7 |
+| [02_borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | &T/&mut T、AXM 规则、Reborrow、内部可变性 | 6 |
+| [03_lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 生命周期标注、Elision、NLL、HRTB、Variance | 5 |
+| [04_type_system](../01_foundation/02_type_system/04_type_system.md) | ADT、Trait 对象、模式匹配、类型推断 | 8 |
 
 > **认知路径**: L1 是 Rust 的"地基"——不理解所有权和借用，后续所有内容都无法建立正确直觉。建议从 ownership 开始，依次阅读 borrowing → lifetimes → type_system。
 
@@ -77,10 +77,10 @@
 
 | 文件 | 核心内容 | 关键图表 |
 |:---|:---|:---|
-| [01_traits](../02_intermediate/01_traits.md) | Trait 定义、Bounds、Orphan Rule、GATs、Auto Traits | 5 |
-| [02_generics](../02_intermediate/02_generics.md) | 单态化、Const Generics、HRTB | 6 |
-| [03_memory_management](../02_intermediate/03_memory_management.md) | Box/Rc/Arc、RefCell/Mutex、Pin | 5 |
-| [04_error_handling](../02_intermediate/04_error_handling.md) | Result/Option、? 运算符、错误传播 | 8 |
+| [01_traits](../02_intermediate/00_traits/01_traits.md) | Trait 定义、Bounds、Orphan Rule、GATs、Auto Traits | 5 |
+| [02_generics](../02_intermediate/01_generics/02_generics.md) | 单态化、Const Generics、HRTB | 6 |
+| [03_memory_management](../02_intermediate/02_memory_management/03_memory_management.md) | Box/Rc/Arc、RefCell/Mutex、Pin | 5 |
+| [04_error_handling](../02_intermediate/03_error_handling/04_error_handling.md) | Result/Option、? 运算符、错误传播 | 8 |
 
 > **关键交叉点**: Trait Bounds 是 Trait 与泛型的结合部——理解这一点是掌握 Rust 零成本抽象的关键。
 

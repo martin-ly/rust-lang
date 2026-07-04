@@ -12,7 +12,7 @@
 > **跟踪版本**: Rust 1.97.0 beta / nightly candidate (预计 2026-07-09 stable)
 > **Rust 属性标记**: `#[stable(feature = "...", since = "1.97.0")]`
 >
-> **前置依赖**: [Rust 1.96 稳定特性](rust_1_96_stabilized.md) · [Toolchain](../06_ecosystem/01_toolchain.md) · [NonZero](../02_intermediate/03_memory_management.md)
+> **前置依赖**: [Rust 1.96 稳定特性](rust_1_96_stabilized.md) · [Toolchain](../06_ecosystem/01_toolchain.md) · [NonZero](../02_intermediate/02_memory_management/03_memory_management.md)
 > **后置概念**: [Rust 1.98 前沿特性预览](rust_1_98_preview.md)
 
 ---

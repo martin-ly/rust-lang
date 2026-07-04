@@ -13,7 +13,6 @@
 
 from __future__ import annotations
 
-import re
 import sys
 from pathlib import Path
 
@@ -24,13 +23,61 @@ SUMMARY_PATH = concept_config.CONCEPT_DIR / "SUMMARY.md"
 
 
 def parse_summary_links(summary_text: str) -> list[tuple[str, str]]:
-    """解析 SUMMARY.md 中的 Markdown 链接，返回 (显示文本, 相对路径) 列表。"""
+    """解析 SUMMARY.md 中的 Markdown 链接，返回 (显示文本, 相对路径) 列表。
+
+    兼容链接文本中的代码段、嵌套方括号与反斜杠转义。
+    """
     links: list[tuple[str, str]] = []
-    # 匹配 [text](path.md) 或 [text](../path.md)
-    for m in re.finditer(r'\[([^\]]+)\]\(([^)]+\.md)\)', summary_text):
-        text = m.group(1).strip()
-        path = m.group(2).strip()
-        links.append((text, path))
+    i = 0
+    n = len(summary_text)
+    while i < n:
+        if summary_text[i] == "[" and (i == 0 or summary_text[i - 1] != "\\"):
+            start = i
+            depth = 1
+            i += 1
+            in_code = False
+            code_delim = ""
+            while i < n and depth > 0:
+                if not in_code:
+                    if summary_text[i] == "\\" and i + 1 < n:
+                        i += 2
+                        continue
+                    if summary_text[i] == "`":
+                        j = i
+                        while j < n and summary_text[j] == "`":
+                            j += 1
+                        code_delim = summary_text[i:j]
+                        in_code = True
+                        i = j
+                        continue
+                    if summary_text[i] == "[":
+                        depth += 1
+                    elif summary_text[i] == "]":
+                        depth -= 1
+                else:
+                    if summary_text[i : i + len(code_delim)] == code_delim:
+                        in_code = False
+                        i += len(code_delim)
+                        continue
+                i += 1
+            if depth == 0 and i < n and summary_text[i] == "(":
+                j = i + 1
+                pdepth = 1
+                while j < n and pdepth > 0:
+                    if summary_text[j] == "\\" and j + 1 < n:
+                        j += 2
+                        continue
+                    if summary_text[j] == "(":
+                        pdepth += 1
+                    elif summary_text[j] == ")":
+                        pdepth -= 1
+                    j += 1
+                link_text = summary_text[start + 1 : i - 1]
+                path = summary_text[i + 1 : j - 1]
+                links.append((link_text.strip(), path.strip()))
+                i = j
+                continue
+        i += 1
     return links
 
 
@@ -68,6 +115,9 @@ def main() -> int:
     missing_files: list[tuple[str, str]] = []
     for text, raw_path in links:
         # SUMMARY 中的路径相对于 concept/ 根目录
+        if not raw_path.endswith(".md"):
+            # 外部 URL、锚点等不参与 concept/ 文件一致性检查
+            continue
         p = Path(raw_path)
         linked_paths.add(p)
         target = concept_config.CONCEPT_DIR / p

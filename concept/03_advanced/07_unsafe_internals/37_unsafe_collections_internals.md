@@ -12,7 +12,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Exp
-> **前置概念**: [Unsafe Rust](../03_unsafe.md) · [Memory Management](../../02_intermediate/03_memory_management.md) · [Interior Mutability](../../02_intermediate/08_interior_mutability.md)
+> **前置概念**: [Unsafe Rust](../03_unsafe.md) · [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Interior Mutability](../../02_intermediate/02_memory_management/08_interior_mutability.md)
 > **后置概念**: [Custom Allocators](../14_custom_allocators.md) · [Type Layout](../../04_formal/42_type_layout.md) · [Separation Logic](../../04_formal/11_separation_logic.md)
 >
 > **主要来源**: [The Rustonomicon — Implementing Vec](https://doc.rust-lang.org/nomicon/vec.html) ·

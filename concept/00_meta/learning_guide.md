@@ -449,31 +449,31 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 
 | 错误码 | 错误信息关键词 | 根本原因 | 推荐阅读 | 对应章节 |
 |:---|:---|:---|:---|:---|
-| **E0106** | missing lifetime specifier | 函数返回引用但未标注生命周期 | `01_foundation/03_lifetimes.md` | §2.3 Elision Rules |
-| **E0716** | temporary value dropped while borrowed | 返回局部变量的引用 | `01_foundation/03_lifetimes.md` | §5.3 反例：返回局部引用 |
-| **E0597** | borrowed value does not live long enough | 引用的值在引用使用前已释放 | `01_foundation/03_lifetimes.md` | §5.4 反例：生命周期不匹配 |
-| **E0621** | explicit lifetime required | 泛型参数与返回值生命周期不匹配 | `01_foundation/03_lifetimes.md` | §2.2 生命周期关系矩阵 |
+| **E0106** | missing lifetime specifier | 函数返回引用但未标注生命周期 | `01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` | §2.3 Elision Rules |
+| **E0716** | temporary value dropped while borrowed | 返回局部变量的引用 | `01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` | §5.3 反例：返回局部引用 |
+| **E0597** | borrowed value does not live long enough | 引用的值在引用使用前已释放 | `01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` | §5.4 反例：生命周期不匹配 |
+| **E0621** | explicit lifetime required | 泛型参数与返回值生命周期不匹配 | `01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` | §2.2 生命周期关系矩阵 |
 
 #### 所有权与借用类错误（L1 基础概念）
 
 | 错误码 | 错误信息关键词 | 根本原因 | 推荐阅读 | 对应章节 |
 |:---|:---|:---|:---|:---|
-| **E0382** | use of moved value | 值已被 move，再次使用 | `01_foundation/01_ownership.md` | §3 Move 语义 |
-| **E0499** | cannot borrow `x` as mutable more than once | 同一作用域内多次 &mut 借用 | `01_foundation/02_borrowing.md` | §2 借用规则 |
-| **E0502** | cannot borrow `x` as mutable because it is also borrowed as immutable | 已存在 & 时申请 &mut | `01_foundation/02_borrowing.md` | §2.2 借用冲突矩阵 |
-| **E0505** | cannot move out of `x` because it is borrowed | 在借用期间 move 值 | `01_foundation/02_borrowing.md` | §5 反例：借用期间转移 |
-| **E0507** | cannot move out of borrowed content | 从 &T 中 move 值 | `01_foundation/02_borrowing.md` | §3.2 解引用与 move |
+| **E0382** | use of moved value | 值已被 move，再次使用 | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | §3 Move 语义 |
+| **E0499** | cannot borrow `x` as mutable more than once | 同一作用域内多次 &mut 借用 | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | §2 借用规则 |
+| **E0502** | cannot borrow `x` as mutable because it is also borrowed as immutable | 已存在 & 时申请 &mut | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | §2.2 借用冲突矩阵 |
+| **E0505** | cannot move out of `x` because it is borrowed | 在借用期间 move 值 | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | §5 反例：借用期间转移 |
+| **E0507** | cannot move out of borrowed content | 从 &T 中 move 值 | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | §3.2 解引用与 move |
 
 #### Trait 与泛型类错误（L2 进阶概念）
 
 | 错误码 | 错误信息关键词 | 根本原因 | 推荐阅读 | 对应章节 |
 |:---|:---|:---|:---|:---|
-| **E0117** | only traits defined in the current crate can be implemented for arbitrary types | Orphan Rule 违反 | `02_intermediate/01_traits.md` | §4.1 Orphan Rule |
-| **E0119** | conflicting implementations of trait | impl 重叠（Coherence 违反） | `02_intermediate/01_traits.md` | §4.1b Blanket impl 重叠检测 |
-| **E0038** | the trait `Foo` cannot be made into an object | Trait 不满足对象安全条件 | `02_intermediate/01_traits.md` | §4.2 对象安全 |
-| **E0277** | the trait bound `T: Foo` is not satisfied | 类型未实现所需 Trait | `02_intermediate/01_traits.md` | §2.1 Trait bound 矩阵 |
-| **E0283** | type annotations needed | 类型推断歧义 | `02_intermediate/02_generics.md` | §3 类型推断 |
-| **E0308** | mismatched types | 类型不匹配 | `01_foundation/04_type_system.md` | §2 类型检查 |
+| **E0117** | only traits defined in the current crate can be implemented for arbitrary types | Orphan Rule 违反 | `02_intermediate/00_traits/01_traits.md` | §4.1 Orphan Rule |
+| **E0119** | conflicting implementations of trait | impl 重叠（Coherence 违反） | `02_intermediate/00_traits/01_traits.md` | §4.1b Blanket impl 重叠检测 |
+| **E0038** | the trait `Foo` cannot be made into an object | Trait 不满足对象安全条件 | `02_intermediate/00_traits/01_traits.md` | §4.2 对象安全 |
+| **E0277** | the trait bound `T: Foo` is not satisfied | 类型未实现所需 Trait | `02_intermediate/00_traits/01_traits.md` | §2.1 Trait bound 矩阵 |
+| **E0283** | type annotations needed | 类型推断歧义 | `02_intermediate/01_generics/02_generics.md` | §3 类型推断 |
+| **E0308** | mismatched types | 类型不匹配 | `01_foundation/02_type_system/04_type_system.md` | §2 类型检查 |
 
 #### 并发类错误（L3 高级概念）
 
@@ -494,8 +494,8 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 
 | 错误码 | 错误信息关键词 | 根本原因 | 推荐阅读 | 对应章节 |
 |:---|:---|:---|:---|:---|
-| **E0080** | could not evaluate constant | const eval 求值失败 | `01_foundation/01_ownership.md` | §3 所有权规则（常量上下文） |
-| **E0744** | const generic must be a `usize` or `bool` | const generic 参数类型受限 | `02_intermediate/02_generics.md` | §5.7 Const Generics |
+| **E0080** | could not evaluate constant | const eval 求值失败 | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | §3 所有权规则（常量上下文） |
+| **E0744** | const generic must be a `usize` or `bool` | const generic 参数类型受限 | `02_intermediate/01_generics/02_generics.md` | §5.7 Const Generics |
 
 ### 诊断路径速查
 

@@ -14,8 +14,8 @@
 > **定位**: 从系统架构视角分析 Rust 实现事件驱动架构的核心模式——类型安全事件总线、消息队列集成、幂等处理、背压传播——揭示所有权（Ownership）系统与不可变事件流的深层契合。
 > **前置概念**: [Async](../03_advanced/02_async.md) ·
 > [微服务架构模式](31_microservice_patterns.md) ·
-> [泛型（Generics）](../02_intermediate/02_generics.md) ·
-> [Trait](../02_intermediate/01_traits.md)
+> [泛型（Generics）](../02_intermediate/01_generics/02_generics.md) ·
+> [Trait](../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [分布式系统](18_distributed_systems.md) ·
 > [云原生](24_cloud_native.md)
 >
@@ -739,7 +739,7 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
 - [云原生](24_cloud_native.md) — Kubernetes、容器化、可观测性
 - [系统设计原则](05_system_design_principles.md) — 安全-性能-可维护性帕累托前沿
 - [Async](../03_advanced/02_async.md) — async/await、并发模型
-- [泛型（Generics）](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) — 类型组合、抽象机制
+- [泛型（Generics）](../02_intermediate/01_generics/02_generics.md) · [Trait](../02_intermediate/00_traits/01_traits.md) — 类型组合、抽象机制
 
 ---
 

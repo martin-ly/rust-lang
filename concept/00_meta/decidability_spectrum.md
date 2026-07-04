@@ -636,11 +636,11 @@ graph TD
 
 ### 相关概念文件
 
-- [L1 所有权](../01_foundation/01_ownership.md) —— 所有权唯一性的编译期判定
-- [L1 借用](../01_foundation/02_borrowing.md) —— AXM 规则与借用检查
-- [L1 生命周期](../01_foundation/03_lifetimes.md) —— 偏序约束可满足性
-- [L1 类型系统](../01_foundation/04_type_system.md) —— 类型推断与一致性
-- [L2 泛型](../02_intermediate/02_generics.md) —— Trait 求解与 Const Generics
+- [L1 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) —— 所有权唯一性的编译期判定
+- [L1 借用](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) —— AXM 规则与借用检查
+- [L1 生命周期](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) —— 偏序约束可满足性
+- [L1 类型系统](../01_foundation/02_type_system/04_type_system.md) —— 类型推断与一致性
+- [L2 泛型](../02_intermediate/01_generics/02_generics.md) —— Trait 求解与 Const Generics
 - [L3 并发](../03_advanced/01_concurrency.md) —— Send/Sync 推导与数据竞争排除
 - [L3 异步](../03_advanced/02_async.md) —— Future 状态机与执行模型
 - [L4 所有权形式化](../04_formal/03_ownership_formal.md) —— COR / Polonius Datalog

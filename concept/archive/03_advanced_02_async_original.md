@@ -17,14 +17,14 @@
 > **层次定位**: L3 高级概念 / 异步（Async）子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析 Pin 与状态机的交互
-> **前置依赖**: [L2 泛型（Generics）](../02_intermediate/02_generics.md) · [L2 Trait](../02_intermediate/01_traits.md) · L1 生命周期（Lifetimes）
+> **前置依赖**: [L2 泛型（Generics）](../02_intermediate/01_generics/02_generics.md) · [L2 Trait](../02_intermediate/00_traits/01_traits.md) · L1 生命周期（Lifetimes）
 > **后置延伸**: L4 异步（Async）语义形式化 · L6 Tokio · L7 效果系统
 > **跨层映射**: L3→L4 Future [来源: [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)] ↔  continuation monad | L3→L7 async effects → algebraic effects
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性（Coherence） → T-052 async/await 转换正确性
 > **层级**: L3 高级概念
 > **层级一致性（Coherence）**: 本文件所有定理与定义均锚定于 L3 抽象层；涉及 L4 形式化公理处已显式标注。前置概念（L1-L2）为推理前提，后置概念（Pin/Streams）为自然延伸。
 > **前置概念**:
-> [Ownership](../01_foundation/01_ownership.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Error Handling](../02_intermediate/04_error_handling.md)
+> [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md)
 > **后置概念**: [Pin/Unpin] · [Streams]
 > **主要来源**: [TRPL: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) · [RFC 2394] · [RFC 2349]
 
@@ -1989,7 +1989,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 
 > **[来源: Tokio 文档: Task spawning internals]** Tokio 的任务调度器在内部使用 `Pin<Box<dyn Future + Send + 'static>>` 存储任务，这是类型擦除的必要代价。但 Tokio 的 `spawn` API 接受 `impl Future`，仅在入队时进行一次 Box 包装，用户代码仍享受单态化优化。[来源: [RFC 2592](https://rust-lang.github.io/rfcs//2592-futures.html): futures 0.3 设计原则]
 
-> **交叉链接**: 单态化机制见 [../02_intermediate/02_generics.md](../02_intermediate/02_generics.md) §4.5（泛型（Generics）单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §4.3（trait object 与 vtable）。
+> **交叉链接**: 单态化机制见 [../02_intermediate/01_generics/02_generics.md](../02_intermediate/01_generics/02_generics.md) §4.5（泛型（Generics）单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/00_traits/01_traits.md](../02_intermediate/00_traits/01_traits.md) §4.3（trait object 与 vtable）。
 
 ---
 
@@ -2253,7 +2253,7 @@ mod tests {
 
 > **[来源: loom 官方示例; Rust Atomics and Locks by Mara Bos]** 自定义并发原语（自旋锁、无锁队列、RCU）是 loom 的核心应用场景。loom 会系统地探索 `compare_exchange_weak` 的失败路径、线程切换时机以及 Drop 的顺序，从而发现手工难以构造的边界情况。[来源: Tokio 内部 loom 测试套件]
 > **Bloom 层级**: 应用 —— 使用 loom 验证并发原语是生产级 Rust 并发编程的标准实践。
-> **交叉链接**: 内存序模型见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/03_unsafe.md](../03_advanced/03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
+> **交叉链接**: 内存序模型见 [../02_intermediate/00_traits/01_traits.md](../02_intermediate/00_traits/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/03_unsafe.md](../03_advanced/03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
 
 ### 8.13 Miri 动态验证：async 状态机的内存安全检测
 
@@ -2713,20 +2713,20 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | 所有权（Ownership） | [](../00_meta/placeholders/placeholder_generic.md) | Pin 根基 |
-| 生命周期 | [](../01_foundation/03_lifetimes.md) | async fn 捕获规则 |
-| Traits | [](../02_intermediate/01_traits.md) | Future trait 定义 |
+| 生命周期 | [](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | async fn 捕获规则 |
+| Traits | [](../02_intermediate/00_traits/01_traits.md) | Future trait 定义 |
 | 并发 | [](../03_advanced/01_concurrency.md) | 并行与并发对比 |
 | Unsafe | [](../03_advanced/03_unsafe.md) | Pin 内部实现 |
 | 形式化方法 | [](../07_future/02_formal_methods.md) | 异步协议验证 |
 | Rust 版本特性演进 | [](../07_future/05_rust_version_tracking.md) | `AsyncFn`、`gen` blocks 等异步语义扩展 |
-| 泛型（Generics）与类型系统 | [](../02_intermediate/02_generics.md) | `use<..>` precise capturing、GATs |
+| 泛型（Generics）与类型系统 | [](../02_intermediate/01_generics/02_generics.md) | `use<..>` precise capturing、GATs |
 | Unsafe 权限分离 | [](../03_advanced/03_unsafe.md) | `unsafe_op_in_unsafe_fn` 的权限模型 |
 
 > **过渡: L3 → L2**
 >
 > `async fn` 的本质是状态机——编译器将 `await` 点转换为 enum 变体。这种转换依赖于泛型（Generics）（`impl Future<Output = T>`）和 Trait（`Future::poll`）的协同。理解 async 的底层实现，需要回到泛型和 Trait 的基础。
 >
-> 底层机制见 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)（Trait 定义）与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)（泛型（Generics）单态化）。
+> 底层机制见 [`../02_intermediate/00_traits/01_traits.md`](../02_intermediate/00_traits/01_traits.md)（Trait 定义）与 [`../02_intermediate/01_generics/02_generics.md`](../02_intermediate/01_generics/02_generics.md)（泛型（Generics）单态化）。
 > **过渡: L3 → L5**
 >
 > 异步编程不是 Rust 的发明——JavaScript 的 Promise、C# 的 async/await、Go 的 goroutine 都解决了类似问题。但 Rust 的 `Future` 是零成本的：编译后的状态机没有运行时调度器开销，这与 Go 的 goroutine（M:N 调度）形成鲜明对比。

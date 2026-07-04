@@ -9,7 +9,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust**（编译期内存安全（Memory Safety）、零成本抽象（Zero-Cost Abstraction）、所有权（Ownership）系统）与 **TypeScript**（渐进式类型、JavaScript 超集、运行时（Runtime）主导）在类型系统（Type System）、编译模型、异步（Async）生态和 WASM 互操作四个维度的本质差异，建立系统化的选型决策框架。
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Async](../03_advanced/02_async.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) · [Async](../03_advanced/02_async.md)
 > **后置概念**: [WebAssembly](../06_ecosystem/11_webassembly.md) · [Rust vs JavaScript](08_rust_vs_javascript.md)
 
 ---
@@ -684,7 +684,7 @@ fn main() {
 - [Rust vs JavaScript](08_rust_vs_javascript.md) — Rust 与 JavaScript 对比
 - [Async/Await](../03_advanced/02_async.md) — 异步编程深度分析
 - [WebAssembly](../06_ecosystem/11_webassembly.md) — WASM 生态与工具链
-- [Type System](../01_foundation/04_type_system.md) — Rust 类型系统基础
+- [Type System](../01_foundation/02_type_system/04_type_system.md) — Rust 类型系统基础
 
 ---
 

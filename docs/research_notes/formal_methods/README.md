@@ -42,7 +42,7 @@
 **与子文档衔接**：
 
 - [borrow_checker_proof](10_borrow_checker_proof.md) Def MATCH1/FOR1/QUERY1、定理 MATCH-T1/FOR-T1/QUERY-T1
-- [type_system_foundations](../../research_notes/type_theory/10_type_system_foundations.md) 定理 T2（保持性）、T3（类型安全）
+- [type_system_foundations](../type_theory/10_type_system_foundations.md) 定理 T2（保持性）、T3（类型安全）
 
 ---
 

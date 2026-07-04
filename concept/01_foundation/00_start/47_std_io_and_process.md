@@ -12,8 +12,8 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: C×App
-> **前置概念**: [Error Handling Basics](../32_error_handling_basics.md) · [Ownership](../01_ownership.md) · [Strings and Text](../09_strings_and_text.md)
-> **后置概念**: [Async I/O](../../03_advanced/02_async.md) · [Command Line Apps](../../06_ecosystem/04_application_domains.md) · [Testing Basics](../16_testing_basics.md)
+> **前置概念**: [Error Handling Basics](../08_error_handling/32_error_handling_basics.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Strings and Text](../06_strings_and_text/09_strings_and_text.md)
+> **后置概念**: [Async I/O](../../03_advanced/02_async.md) · [Command Line Apps](../../06_ecosystem/04_application_domains.md) · [Testing Basics](../10_testing_basics/16_testing_basics.md)
 >
 > **主要来源**: [std::io](https://doc.rust-lang.org/std/io/index.html) ·
 > [std::fs](https://doc.rust-lang.org/std/fs/index.html) ·

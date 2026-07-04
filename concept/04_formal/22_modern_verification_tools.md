@@ -17,7 +17,7 @@
 ---
 
 > **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
-> **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+> **前置依赖**: [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md)
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
 
 ## 目录
@@ -47,7 +47,7 @@
   - [快速开始：工具安装与运行](#快速开始工具安装与运行)
     - [Miri（Rust 官方动态分析器）](#mirirust-官方动态分析器)
     - [Kani（AWS 有界模型检查器）](#kaniaws-有界模型检查器)
-    - [BorrowSanitizer（运行时（Runtime）借用（Borrowing）检查 Sanitizer）](#borrowsanitizer运行时借用检查-sanitizer)
+    - [BorrowSanitizer（运行时借用检查 Sanitizer）](#borrowsanitizer运行时借用检查-sanitizer)
     - [Verus（Microsoft 演绎验证器）](#verusmicrosoft-演绎验证器)
   - [嵌入式测验](#嵌入式测验)
   - [认知路径](#认知路径)

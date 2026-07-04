@@ -17,9 +17,9 @@
 > **定位**: 分析 Rust **特化（Specialization）**机制的设计动机——允许为特定类型提供比泛型（Generics）实现更精确的 Trait 实现，解决当前 Orphan Rule 和 Coherence 规则下的表达能力限制。
 > **前置概念**:
 >
-> [Trait](../02_intermediate/01_traits.md) ·
-> [Generics](../02_intermediate/02_generics.md) ·
-> [Type System](../01_foundation/04_type_system.md)
+> [Trait](../02_intermediate/00_traits/01_traits.md) ·
+> [Generics](../02_intermediate/01_generics/02_generics.md) ·
+> [Type System](../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**:
 >
 > [Const Trait Impl](11_const_trait_impl_preview.md) ·
@@ -448,8 +448,8 @@ graph TD
 
 ## 相关概念文件
 
-- [Trait](../02_intermediate/01_traits.md) — Trait 系统
-- [Generics](../02_intermediate/02_generics.md) — 泛型系统
+- [Trait](../02_intermediate/00_traits/01_traits.md) — Trait 系统
+- [Generics](../02_intermediate/01_generics/02_generics.md) — 泛型系统
 - [Const Trait Impl](11_const_trait_impl_preview.md) — 常量 Trait 实现
 - [Effects System](04_effects_system.md) — 效果系统
 

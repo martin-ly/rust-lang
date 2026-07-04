@@ -10,7 +10,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 >
 > **层次定位**: L4 形式化 / 类型论基础研究
-> **前置依赖**: [concept L4 类型论](../../../concept/04_formal/02_type_theory.md) · [concept L2 泛型](../../../concept/02_intermediate/02_generics.md)
+> **前置依赖**: [concept L4 类型论](../../../concept/04_formal/02_type_theory.md) · [concept L2 泛型](../../../concept/02_intermediate/01_generics/02_generics.md)
 > **后置延伸**: [ROD 形式语义](../../../archive/rust-ownership-decidability/formal-foundations/README.md) · [concept L7 效果系统](../../../concept/07_future/04_effects_system.md)
 > **跨层映射**: L4 System F ↔ Rust 泛型 | 研究笔记扩展
 > **定理链编号**: T-130 类型一致性 → T-131 子类型 soundness

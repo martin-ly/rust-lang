@@ -9,7 +9,7 @@
 > **A/S/P 标记**: **P** — Process / Platform
 > **双维定位**: C×Ana — 分析跨平台内联汇编（Inline Assembly）的语义差异与安全边界
 > **定位**: 深入分析 Rust `asm!` 宏（Macro）的语法、约束系统、寄存器管理，以及 x86_64、aarch64、RISC-V、s390x 四大平台的差异，重点覆盖 Rust 1.96 为 s390x 引入的向量寄存器支持。
-> **前置概念**: [Unsafe Rust](03_unsafe.md) · [FFI](05_rust_ffi.md) · [Platform Support](../06_ecosystem/17_cross_compilation.md) · [Unsafe Rust 模式](../03_advanced/12_unsafe_rust_patterns.md) · [Generics](../02_intermediate/02_generics.md)
+> **前置概念**: [Unsafe Rust](03_unsafe.md) · [FFI](05_rust_ffi.md) · [Platform Support](../06_ecosystem/17_cross_compilation.md) · [Unsafe Rust 模式](12_unsafe_rust_patterns.md) · [Generics](../02_intermediate/01_generics/02_generics.md)
 > **后置概念**: [Rust for Linux](../07_future/43_rust_for_linux.md) · [Kernel Development](../07_future/43_rust_for_linux.md)
 
 ---
@@ -76,7 +76,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 为什么需要内联汇编](#11-为什么需要内联汇编)
-    - [1.2 `asm!` 宏（Macro）基础语法](#12-asm-宏基础语法)
+    - [1.2 `asm!` 宏基础语法](#12-asm-宏基础语法)
     - [1.3 约束系统 (Constraints)](#13-约束系统-constraints)
     - [1.4 Clobber 与 Options](#14-clobber-与-options)
   - [二、平台差异矩阵](#二平台差异矩阵)
@@ -97,7 +97,7 @@
   - [嵌入式测验](#嵌入式测验)
     - [测验 1：asm! 宏基本语法（记忆层）](#测验-1asm-宏基本语法记忆层)
     - [测验 2：操作数约束（理解层）](#测验-2操作数约束理解层)
-    - [测验 3：用内联汇编实现原子操作（Atomic Operations）（应用层）](#测验-3用内联汇编实现原子操作应用层)
+    - [测验 3：用内联汇编实现原子操作（应用层）](#测验-3用内联汇编实现原子操作应用层)
     - [测验 4：clobber 与内存屏障（分析层）](#测验-4clobber-与内存屏障分析层)
 
 ---

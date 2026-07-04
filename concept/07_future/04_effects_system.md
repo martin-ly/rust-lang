@@ -28,7 +28,7 @@
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析 Effects 系统对 Rust 的潜力
 > **定位**: 本文件是 Rust 效果系统（Effect System）的**概念预研**，跟踪类型系统（Type System）向显式效果追踪演进的理论动向与工程实践。内容具有推测性，随语言团队决策动态更新。
-> **前置概念**: [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Theory](../04_formal/02_type_theory.md)
+> **前置概念**: [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Type Theory](../04_formal/02_type_theory.md)
 > **主要来源**:
 > [Plotkin & Pretnar 2009 — Algebraic Effects] ·
 > [Lucassen & Gifford 1988 — Polymorphic Effect Systems] ·

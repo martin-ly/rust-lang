@@ -12,8 +12,8 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×App
-> **前置概念**: [Type System Basics](../../01_foundation/04_type_system.md) · [Traits](../01_traits.md) · [Error Handling](../04_error_handling.md)
-> **后置概念**: [Newtype and Wrapper Types](../14_newtype_and_wrapper.md) · [Coercion and Casting](../../01_foundation/14_coercion_and_casting.md)
+> **前置概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../00_traits/01_traits.md) · [Error Handling](../03_error_handling/04_error_handling.md)
+> **后置概念**: [Newtype and Wrapper Types](14_newtype_and_wrapper.md) · [Coercion and Casting](../../01_foundation/02_type_system/14_coercion_and_casting.md)
 >
 > **主要来源**: [The Rust Reference — Type Conversions](https://doc.rust-lang.org/reference/type-coercions.html) ·
 > [The Rust Reference — From and Into](https://doc.rust-lang.org/reference/items/traits.html) ·

@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Pin 不动性对自引用（Reference）的必要性
 > **定位**: 深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。
-> **前置概念**: [Async](02_async.md) · [Ownership](../01_foundation/01_ownership.md) · [Generics](../02_intermediate/02_generics.md)
+> **前置概念**: [Async](02_async.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Generics](../02_intermediate/01_generics/02_generics.md)
 > **后置概念**: [Unsafe](03_unsafe.md) · [Gen Blocks](../07_future/22_gen_blocks_preview.md)
 
 ---
@@ -28,7 +28,7 @@
 ## 📑 目录
 >
 
-- [Pin 与 Unpin：自引用（Reference）类型的不动性保证](#pin-与-unpin自引用类型的不动性保证)
+- [Pin 与 Unpin：自引用类型的不动性保证](#pin-与-unpin自引用类型的不动性保证)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 问题：自引用类型的移动陷阱](#11-问题自引用类型的移动陷阱)
@@ -36,7 +36,7 @@
     - [1.3 Unpin：大多数类型的默认](#13-unpin大多数类型的默认)
   - [二、技术细节](#二技术细节)
     - [2.1 Pin API 的契约](#21-pin-api-的契约)
-    - [2.2 自引用结构体（Struct）的安全构建](#22-自引用结构体的安全构建)
+    - [2.2 自引用结构体的安全构建](#22-自引用结构体的安全构建)
     - [2.3 与 async/await 的关系](#23-与-asyncawait-的关系)
   - [三、使用模式](#三使用模式)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -542,7 +542,7 @@ fn main() {
 
 - [Async](02_async.md) — 异步（Async）编程（Pin 的核心用例）
 - [Unsafe](03_unsafe.md) — unsafe Rust
-- [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）模型
+- [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）模型
 - [Gen Blocks](../07_future/22_gen_blocks_preview.md) — 生成器（也是 !Unpin）
 
 ---

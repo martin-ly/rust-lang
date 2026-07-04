@@ -420,8 +420,8 @@ flowchart TD
 
 - [上级目录](../README.md)
 - [Rust 版本跟踪 (concept)](../../concept/07_future/05_rust_version_tracking.md) — Next Solver 稳定化状态全局跟踪
-- [Traits (concept)](../../concept/02_intermediate/01_traits.md) — Trait 系统核心概念与 §12 Next Solver 前瞻
-- [泛型 (concept)](../../concept/02_intermediate/02_generics.md) — 泛型系统与关联类型详解
+- [Traits (concept)](../../concept/02_intermediate/00_traits/01_traits.md) — Trait 系统核心概念与 §12 Next Solver 前瞻
+- [泛型 (concept)](../../concept/02_intermediate/01_generics/02_generics.md) — 泛型系统与关联类型详解
 
 ---
 

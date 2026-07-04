@@ -115,7 +115,7 @@ async fn foo() -> i32 { 42 }
 **代码**: `let a = Arc::new(Mutex::new(0)); let b = Arc::clone(&a);`
 **常见错误**: `Arc<RefCell<T>>` — RefCell 不是 Sync，不能跨线程共享
 **关联**: Rc · Mutex · Send/Sync
-**深入**: [`03_memory_management.md`](../02_intermediate/03_memory_management.md)
+**深入**: [`03_memory_management.md`](../02_intermediate/02_memory_management/03_memory_management.md)
 
 ### B
 
@@ -125,7 +125,7 @@ async fn foo() -> i32 { 42 }
 **代码**: `let b = Box::new(5);`
 **常见错误**: `Box<dyn Trait>` 是胖指针，大小不固定
 **关联**: Own · Drop · 递归类型
-**深入**: [`01_ownership.md`](../01_foundation/01_ownership.md)
+**深入**: [`01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 
 #### Borrowing（借用）
 
@@ -139,7 +139,7 @@ let r = &x; let r2 = &mut x; // ❌ E0502
 ```
 
 **关联**: 生命周期 · 分离逻辑 · 分数权限
-**深入**: [`02_borrowing.md`](../01_foundation/02_borrowing.md)
+**深入**: [`02_borrowing.md`](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
 
 #### Builder Pattern
 
@@ -166,7 +166,7 @@ HttpRequestBuilder::new()
 **代码**: `const N: usize = 10; const fn square(n: i32) -> i32 { n * n }`
 **常见错误**: `const` 变量在多处使用会被内联复制，而非共享引用
 **关联**: Const Generics · 编译期计算
-**深入**: [`02_generics.md`](../02_intermediate/02_generics.md)
+**深入**: [`02_generics.md`](../02_intermediate/01_generics/02_generics.md)
 
 #### `Copy` Trait
 
@@ -182,7 +182,7 @@ let p2 = p1;  // p1 仍可用（Copy）
 
 **常见错误**: 为含 `String`/`Vec` 的类型实现 Copy → 编译错误 E0204
 **关联**: Move · Clone · 仿射逻辑 weakening
-**深入**: [`01_ownership.md`](../01_foundation/01_ownership.md)
+**深入**: [`01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 
 #### `crossbeam` / Channel
 
@@ -208,7 +208,7 @@ impl Drop for MyType {
 
 **常见错误**: `mem::forget` 或循环引用（Rc）会阻止 Drop 执行
 **关联**: RAII · 所有权 · 资源管理
-**深入**: [`01_ownership.md`](../01_foundation/01_ownership.md)
+**深入**: [`01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 
 #### `dyn Trait`
 
@@ -216,7 +216,7 @@ impl Drop for MyType {
 **代码**: `let items: Vec<Box<dyn Drawable>> = vec![Box::new(Circle), Box::new(Rect)];`
 **常见错误**: `dyn Trait` 要求 Trait 是对象安全的（无泛型方法、无 Self: Sized bound）
 **关联**: enum + match · 静态/动态分发 · vtable
-**深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
+**深入**: [`04_type_system.md`](../01_foundation/02_type_system/04_type_system.md)
 
 [来源: [Rust Reference — Drop](https://doc.rust-lang.org/reference/destructors.html) · [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 
@@ -234,7 +234,7 @@ enum Result<T, E> { Ok(T), Err(E) }
 
 **常见错误**: `match` 未穷尽 → 编译错误 E0004
 **关联**: 模式匹配 · ADT · 和类型
-**深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
+**深入**: [`04_type_system.md`](../01_foundation/02_type_system/04_type_system.md)
 
 #### Error Handling（`Result<T, E>`）
 
@@ -251,7 +251,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 ```
 
 **关联**: Option · panic · Try trait
-**深入**: [`04_error_handling.md`](../02_intermediate/04_error_handling.md)
+**深入**: [`04_error_handling.md`](../02_intermediate/03_error_handling/04_error_handling.md)
 
 ### F
 
@@ -299,7 +299,7 @@ fn identity<T>(x: T) -> T { x }
 
 **常见错误**: 过度泛化导致编译时间爆炸、二进制膨胀
 **关联**: Trait bounds · 单态化 · 参数性定理
-**深入**: [`02_generics.md`](../02_intermediate/02_generics.md)
+**深入**: [`02_generics.md`](../02_intermediate/01_generics/02_generics.md)
 
 #### `Generic Associated Types (GATs)`
 
@@ -314,7 +314,7 @@ trait LendingIterator {
 ```
 
 **关联**: 关联类型 · 生命周期泛型 · HKT 模拟
-**深入**: [`02_generics.md`](../02_intermediate/02_generics.md)
+**深入**: [`02_generics.md`](../02_intermediate/01_generics/02_generics.md)
 
 ### H
 
@@ -324,7 +324,7 @@ trait LendingIterator {
 **代码**: `let mut map = HashMap::new(); map.insert("key", 42);`
 **常见错误**: 自定义类型作 Key 需实现 `Eq + Hash`；修改已插入 Key 的哈希值 → UB
 **关联**: 集合类型 · 哈希 · BTreeMap
-**深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
+**深入**: [`04_type_system.md`](../01_foundation/02_type_system/04_type_system.md)
 
 #### `HRTB`（Higher-Ranked Trait Bounds）
 
@@ -348,7 +348,7 @@ fn make_iter() -> impl Iterator<Item = i32> {
 
 **常见错误**: `impl Trait` 在 Trait 定义中不稳定（需 RPITIT）；不能作为结构体字段类型
 **关联**: dyn Trait · 存在类型 · 零成本抽象
-**深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
+**深入**: [`04_type_system.md`](../01_foundation/02_type_system/04_type_system.md)
 
 #### Interior Mutability（内部可变性）
 
@@ -365,7 +365,7 @@ fn make_iter() -> impl Iterator<Item = i32> {
 
 [来源: [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html) · [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 
-**深入**: [`03_memory_management.md`](../02_intermediate/03_memory_management.md)
+**深入**: [`03_memory_management.md`](../02_intermediate/02_memory_management/03_memory_management.md)
 
 ### L
 
@@ -382,7 +382,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 **常见错误**: 返回局部变量的引用 → E0597
 **关联**: 借用 · 区域类型 · 子类型
-**深入**: [`03_lifetimes.md`](../01_foundation/03_lifetimes.md)
+**深入**: [`03_lifetimes.md`](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 
 #### `Lock` / `Mutex<T>`
 
@@ -425,7 +425,7 @@ let s2 = s1;  // s1 被 move，之后不可用
 ```
 
 **关联**: Copy · Drop · 线性逻辑
-**深入**: [`01_ownership.md`](../01_foundation/01_ownership.md)
+**深入**: [`01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 
 ### N
 
@@ -464,7 +464,7 @@ let y = x.unwrap_or(0);  // 安全取值
 ```
 
 **关联**: Result · ? 运算符 · Monad
-**深入**: [`04_error_handling.md`](../02_intermediate/04_error_handling.md)
+**深入**: [`04_error_handling.md`](../02_intermediate/03_error_handling/04_error_handling.md)
 
 #### `Ownership`
 
@@ -475,7 +475,7 @@ let y = x.unwrap_or(0);  // 安全取值
 2. 值可以 move 到新的 owner
 3. owner 离开作用域 → 值被 drop
 **关联**: Move · Borrow · Drop · RAII
-**深入**: [`01_ownership.md`](../01_foundation/01_ownership.md)
+**深入**: [`01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 
 ### P
 
@@ -504,7 +504,7 @@ struct MyPtr<T> { ptr: *mut (), _marker: PhantomData<T> }
 ```
 
 **关联**: 方差 · 类型标记 · 零大小类型
-**深入**: [`02_generics.md`](../02_intermediate/02_generics.md)
+**深入**: [`02_generics.md`](../02_intermediate/01_generics/02_generics.md)
 
 ### R
 
@@ -514,7 +514,7 @@ struct MyPtr<T> { ptr: *mut (), _marker: PhantomData<T> }
 **选择**: 单线程 → `Rc<T>`；多线程 → `Arc<T>`
 **常见错误**: `Rc` 循环引用 → 内存泄漏；`Arc` 性能开销来自原子操作
 **关联**: 共享所有权 · 内部可变性 · 弱引用
-**深入**: [`03_memory_management.md`](../02_intermediate/03_memory_management.md)
+**深入**: [`03_memory_management.md`](../02_intermediate/02_memory_management/03_memory_management.md)
 
 #### `Result<T, E>`
 
@@ -529,7 +529,7 @@ let val = may_fail()?;  // ? 传播错误
 ```
 
 **关联**: Option · ? 运算符 · panic
-**深入**: [`04_error_handling.md`](../02_intermediate/04_error_handling.md)
+**深入**: [`04_error_handling.md`](../02_intermediate/03_error_handling/04_error_handling.md)
 
 ### S
 
@@ -551,7 +551,7 @@ let val = may_fail()?;  // ? 传播错误
 **代码**: `fn foo<T: ?Sized>(x: &T) { }` — 可接受 `&str`、`&[i32]`、`&dyn Trait`
 **常见错误**: 泛型参数默认 `Sized`，需显式 `?Sized` 才能使用 trait object
 **关联**: DST · 胖指针 · vtable
-**深入**: [`02_generics.md`](../02_intermediate/02_generics.md)
+**深入**: [`02_generics.md`](../02_intermediate/01_generics/02_generics.md)
 
 #### `std::mem`
 
@@ -574,7 +574,7 @@ impl Drawable for Circle { fn draw(&self) { ... } }
 
 **关键限制**: Orphan Rule — 不能为外部类型实现外部 Trait
 **关联**: 泛型 · dyn Trait · 关联类型 · 特化
-**深入**: [`01_traits.md`](../02_intermediate/01_traits.md)
+**深入**: [`01_traits.md`](../02_intermediate/00_traits/01_traits.md)
 
 #### Typestate Pattern
 
@@ -625,7 +625,7 @@ v.insert(1, 5);      // O(n)
 
 **常见错误**: `v[i]` 越界 → panic；迭代时修改 → 编译错误 E0499
 **关联**: Slice · 迭代器 · 集合类型
-**深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
+**深入**: [`04_type_system.md`](../01_foundation/02_type_system/04_type_system.md)
 
 ### W
 
@@ -653,23 +653,23 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 
 | 错误码 | 含义 | 触发场景 | 解决方向 | 深入文件 |
 |:---|:---|:---|:---|:---|
-| **E0382** | borrow of moved value | Move 后使用原变量 | 改用 `clone()` 或重新设计所有权 | [01_ownership](../01_foundation/01_ownership.md) |
-| **E0499** | cannot borrow as mutable more than once | 同时存在两个 `&mut T` | 缩小借用作用域或使用内部可变性 | [02_borrowing](../01_foundation/02_borrowing.md) |
-| **E0502** | cannot borrow as mutable because borrowed as immutable | `&T` 和 `&mut T` 共存 | 确保 `&T` 在 `&mut T` 之前结束 | [02_borrowing](../01_foundation/02_borrowing.md) |
-| **E0597** | borrowed value does not live long enough | 悬垂引用 | 确保引用 outlive 其指向的数据 | [03_lifetimes](../01_foundation/03_lifetimes.md) |
-| **E0106** | missing lifetime specifier | 函数返回引用无生命周期标注 | 显式标注 `'a` 或使用 `'static` | [03_lifetimes](../01_foundation/03_lifetimes.md) |
-| **E0204** | trait bound not satisfied | 为不满足条件的类型实现 Trait | 检查类型参数是否满足 Trait bounds | [01_traits](../02_intermediate/01_traits.md) |
-| **E0277** | size not known at compile time | 使用 `?Sized` 但未正确处理 DST | 通过引用/Box 使用 DST | [02_generics](../02_intermediate/02_generics.md) |
-| **E0308** | mismatched types | 类型不匹配 | 检查泛型参数、类型推断歧义 | [04_type_system](../01_foundation/04_type_system.md) |
-| **E0384** | reassignment of immutable variable | 修改不可变变量 | 改用 `let mut` 或 `Cell`/`RefCell` | [02_borrowing](../01_foundation/02_borrowing.md) |
-| **E0392** | parameter `T` is never used | 泛型参数未在类型中使用 | 使用 `PhantomData<T>` 标记 | [02_generics](../02_intermediate/02_generics.md) |
-| **E0433** | failed to resolve use statement | 模块路径错误 | 检查 `use` 路径和模块结构 | [04_type_system](../01_foundation/04_type_system.md) |
-| **E0495** | cannot infer an appropriate lifetime | 生命周期推断失败 | 显式标注生命周期约束 | [03_lifetimes](../01_foundation/03_lifetimes.md) |
+| **E0382** | borrow of moved value | Move 后使用原变量 | 改用 `clone()` 或重新设计所有权 | [01_ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
+| **E0499** | cannot borrow as mutable more than once | 同时存在两个 `&mut T` | 缩小借用作用域或使用内部可变性 | [02_borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| **E0502** | cannot borrow as mutable because borrowed as immutable | `&T` 和 `&mut T` 共存 | 确保 `&T` 在 `&mut T` 之前结束 | [02_borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| **E0597** | borrowed value does not live long enough | 悬垂引用 | 确保引用 outlive 其指向的数据 | [03_lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
+| **E0106** | missing lifetime specifier | 函数返回引用无生命周期标注 | 显式标注 `'a` 或使用 `'static` | [03_lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
+| **E0204** | trait bound not satisfied | 为不满足条件的类型实现 Trait | 检查类型参数是否满足 Trait bounds | [01_traits](../02_intermediate/00_traits/01_traits.md) |
+| **E0277** | size not known at compile time | 使用 `?Sized` 但未正确处理 DST | 通过引用/Box 使用 DST | [02_generics](../02_intermediate/01_generics/02_generics.md) |
+| **E0308** | mismatched types | 类型不匹配 | 检查泛型参数、类型推断歧义 | [04_type_system](../01_foundation/02_type_system/04_type_system.md) |
+| **E0384** | reassignment of immutable variable | 修改不可变变量 | 改用 `let mut` 或 `Cell`/`RefCell` | [02_borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| **E0392** | parameter `T` is never used | 泛型参数未在类型中使用 | 使用 `PhantomData<T>` 标记 | [02_generics](../02_intermediate/01_generics/02_generics.md) |
+| **E0433** | failed to resolve use statement | 模块路径错误 | 检查 `use` 路径和模块结构 | [04_type_system](../01_foundation/02_type_system/04_type_system.md) |
+| **E0495** | cannot infer an appropriate lifetime | 生命周期推断失败 | 显式标注生命周期约束 | [03_lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
 | **E0520** | requires `Sync` bound | 跨线程共享非 Sync 类型 | 使用 `Mutex`/`RwLock` 包装 | [01_concurrency](../03_advanced/01_concurrency.md) |
-| **E0596** | cannot borrow data in dereference of ... as mutable | 不可变上下文中需要可变引用 | 检查 `Deref` 返回的是否为 `&mut` | [02_borrowing](../01_foundation/02_borrowing.md) |
-| **E0603** | module is private | 访问私有模块 | 使用 `pub` 暴露或检查可见性 | [04_type_system](../01_foundation/04_type_system.md) |
+| **E0596** | cannot borrow data in dereference of ... as mutable | 不可变上下文中需要可变引用 | 检查 `Deref` 返回的是否为 `&mut` | [02_borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| **E0603** | module is private | 访问私有模块 | 使用 `pub` 暴露或检查可见性 | [04_type_system](../01_foundation/02_type_system/04_type_system.md) |
 | **E0658** | feature is unstable | 使用了不稳定特性 | 添加 `#![feature(...)]` 或使用稳定替代 | [03_evolution](../07_future/03_evolution.md) |
-| **E0716** | temporary value dropped while borrowed | 临时值的引用被延长 | 将临时值绑定到变量 | [03_lifetimes](../01_foundation/03_lifetimes.md) |
+| **E0716** | temporary value dropped while borrowed | 临时值的引用被延长 | 将临时值绑定到变量 | [03_lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
 
 [来源: [Rust Reference — Compiler Errors](https://doc.rust-lang.org/error_codes/) · [TRPL — Appendix: Error Codes](https://doc.rust-lang.org/book/appendix-02-operators.html)]
 

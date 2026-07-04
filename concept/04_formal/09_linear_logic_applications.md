@@ -9,7 +9,7 @@
 >
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析**线性逻辑**如何从理论概念转化为 Rust 的**工程实践**——从资源管理、协议状态机到 session types，揭示形式化类型论在现代系统编程中的实际价值。
-> **前置概念**: [Linear Logic](01_linear_logic.md) · [Type System](../01_foundation/04_type_system.md) · [Ownership](../01_foundation/01_ownership.md)
+> **前置概念**: [Linear Logic](01_linear_logic.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **后置概念**: [RustBelt](04_rustbelt.md) · [Session Types](https://en.wikipedia.org/wiki/Session_type)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -20,7 +20,7 @@
 > [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsub/linearsub.ps) ·
 > [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)
-> **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+> **前置依赖**: [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md)
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
 
 ## 📑 目录
@@ -28,7 +28,7 @@
 - [线性逻辑在 Rust 中的工程应用](#线性逻辑在-rust-中的工程应用)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 从线性逻辑到所有权（Ownership）](#11-从线性逻辑到所有权)
+    - [1.1 从线性逻辑到所有权](#11-从线性逻辑到所有权)
     - [1.2 资源作为类型](#12-资源作为类型)
     - [1.3 Session Types 与通信协议](#13-session-types-与通信协议)
   - [二、技术细节](#二技术细节)
@@ -45,7 +45,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：线性逻辑应用的编译错误](#十边界测试线性逻辑应用的编译错误)
     - [10.1 边界测试：资源线性消耗与 `Drop` 的冲突（编译错误）](#101-边界测试资源线性消耗与-drop-的冲突编译错误)
-    - [10.2 边界测试：`Vec` 的线性所有权与索引（运行时（Runtime） panic）](#102-边界测试vec-的线性所有权与索引运行时-panic)
+    - [10.2 边界测试：`Vec` 的线性所有权与索引（运行时 panic）](#102-边界测试vec-的线性所有权与索引运行时-panic)
     - [10.3 边界测试：线性资源的隐式复制（编译错误）](#103-边界测试线性资源的隐式复制编译错误)
     - [10.4 边界测试：`Copy` 与 `Drop` 的互斥性（编译错误）](#104-边界测试copy-与-drop-的互斥性编译错误)
     - [10.5 边界测试：`Vec::drain` 与线性资源的消耗（编译错误）](#105-边界测试vecdrain-与线性资源的消耗编译错误)
@@ -54,8 +54,8 @@
     - [测验 1：线性逻辑中的"线性"（linearity）指什么？与 Rust 的所有权有什么对应关系？（理解层）](#测验-1线性逻辑中的线性linearity指什么与-rust-的所有权有什么对应关系理解层)
     - [测验 2：在线性逻辑中，`A ⊗ B`（张量积）和 `A & B`（with）分别对应 Rust 的什么概念？（理解层）](#测验-2在线性逻辑中a--b张量积和-a--bwith分别对应-rust-的什么概念理解层)
     - [测验 3：Rust 的 `clone()` 在线性逻辑视角下是什么操作？（理解层）](#测验-3rust-的-clone-在线性逻辑视角下是什么操作理解层)
-    - [测验 4：为什么 Rust 的借用（Borrowing）（`&T` 和 `&mut T`）可以在线性逻辑框架中被建模？（理解层）](#测验-4为什么-rust-的借用t-和-mut-t可以在线性逻辑框架中被建模理解层)
-    - [测验 5：线性逻辑对 Rust 类型系统（Type System）设计的影响主要体现在哪个编译器组件中？（理解层）](#测验-5线性逻辑对-rust-类型系统设计的影响主要体现在哪个编译器组件中理解层)
+    - [测验 4：为什么 Rust 的借用（`&T` 和 `&mut T`）可以在线性逻辑框架中被建模？（理解层）](#测验-4为什么-rust-的借用t-和-mut-t可以在线性逻辑框架中被建模理解层)
+    - [测验 5：线性逻辑对 Rust 类型系统设计的影响主要体现在哪个编译器组件中？（理解层）](#测验-5线性逻辑对-rust-类型系统设计的影响主要体现在哪个编译器组件中理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -483,8 +483,8 @@ graph TD
 ## 相关概念文件
 
 - [Linear Logic](01_linear_logic.md) — 线性逻辑
-- [Ownership](../01_foundation/01_ownership.md) — 所有权系统
-- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
+- [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权系统
+- [Type System](../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 - [RustBelt](04_rustbelt.md) — 形式化验证
 
 ---

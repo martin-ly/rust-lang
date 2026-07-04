@@ -8,7 +8,7 @@
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
-> **前置依赖**: [Patterns](../01_foundation/40_patterns.md) · [Statements and Expressions Reference](48_statements_and_expressions_reference.md) · [Variables](../03_advanced/33_variables.md)
+> **前置依赖**: [Patterns](../01_foundation/04_control_flow/40_patterns.md) · [Statements and Expressions Reference](48_statements_and_expressions_reference.md) · [Variables](../03_advanced/33_variables.md)
 > **后置概念**: [Destructors](43_destructors.md) · [Match Expressions](48_statements_and_expressions_reference.md)
 > **定理链**: Value → Pattern Match → Binding → Destructuring
 >

@@ -8,7 +8,7 @@
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
-> **前置依赖**: [Type System](../01_foundation/04_type_system.md) · [Type Layout](42_type_layout.md) · [Variables](../03_advanced/33_variables.md)
+> **前置依赖**: [Type System](../01_foundation/02_type_system/04_type_system.md) · [Type Layout](42_type_layout.md) · [Variables](../03_advanced/33_variables.md)
 > **后置概念**: [Subtyping and Variance](06_subtype_variance.md) · [Behavior Considered Undefined](37_behavior_considered_undefined.md) · [Application Binary Interface](38_application_binary_interface.md)
 > **定理链**: Type → Kind → Size/Align → Lifetime → Trait Bounds
 >
@@ -64,7 +64,7 @@ DST 在编译期大小未知，必须置于指针之后：
 
 通过 `&dyn Trait`、`&[T]`、`&str`、`Box<dyn Trait>` 等 fat pointer 使用。
 
-详见 [Type System Advanced](../02_intermediate/20_type_system_advanced.md)。
+详见 [Type System Advanced](../02_intermediate/04_types_and_conversions/20_type_system_advanced.md)。
 
 ## 三、内部可变性
 

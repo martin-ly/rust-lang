@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: T×Fml — 工具链与形式化验证
 > **定位**: 将 Kani 从"AWS 内部工具"还原为日常安全关键代码审查与教学的标准模型检查器。
-> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Ownership](../01_foundation/01_ownership.md) · [现代验证工具生态](22_modern_verification_tools.md)
+> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [现代验证工具生态](22_modern_verification_tools.md)
 > **后置概念**: [Miri](31_miri.md) · [BorrowSanitizer](34_borrow_sanitizer_in_formal.md)
 
 ---
@@ -21,7 +21,6 @@
 > [Kani GitHub](https://github.com/model-checking/kani) ·
 > [CBMC](https://github.com/diffblue/cbmc) ·
 > [Kani 教程](https://model-checking.github.io/kani/tutorial-first-steps.html)
-
 
 ---
 
@@ -35,7 +34,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与Kani的适用边界。
 5. **迁移应用**: 将 Kani 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 > **过渡**: 从 Kani 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -44,7 +42,6 @@
 
 > **过渡**: 最后，将 Kani 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
-
 ---
 
 > **定理 1** [Tier 2]: Kani 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
@@ -52,7 +49,6 @@
 > **定理 2** [Tier 2]: 正确理解 Kani 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
 >
 > **定理 3** [Tier 3]: 将 Kani 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 
 ---
 
@@ -64,10 +60,11 @@
 
 > **反命题 3**: "其他语言对 Kani 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Kani 具有语言特有的形态。
 
-
 ## 📑 目录
 
 - [Kani：Rust 有界模型检查器](#kanirust-有界模型检查器)
+  - [认知路径](#认知路径)
+  - [反命题决策树](#反命题决策树)
   - [📑 目录](#-目录)
   - [一、Kani 是什么](#一kani-是什么)
     - [与测试、Miri、Verus 的定位差异](#与测试miriverus-的定位差异)

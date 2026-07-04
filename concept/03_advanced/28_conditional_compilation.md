@@ -9,7 +9,7 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Specification / Language semantics
 > **双维定位**: S×Sys — 语言与平台交互
-> **前置依赖**: [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) · [Modules and Paths](../01_foundation/11_modules_and_paths.md) · [Error Handling](../02_intermediate/04_error_handling.md)
+> **前置依赖**: [Attributes and Macros](../01_foundation/09_macros_basics/12_attributes_and_macros.md) · [Modules and Paths](../01_foundation/07_modules_and_items/11_modules_and_paths.md) · [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md)
 > **后置概念**: [FFI Advanced](09_ffi_advanced.md) · [Linkage](27_linkage.md) · [Cargo Profiles and Lints](../06_ecosystem/65_cargo_profiles_and_lints.md)
 > **定理链**: N/A — 语言规范/平台相关文档
 > **主要来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -268,7 +268,7 @@ Cargo 中通过 `RUSTFLAGS` 或在 `.cargo/config.toml` 中设置。
 
 | 概念 | 关系 |
 |:---|:---|
-| [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) | `cfg` 是属性的重要用例 |
+| [Attributes and Macros](../01_foundation/09_macros_basics/12_attributes_and_macros.md) | `cfg` 是属性的重要用例 |
 | [Linkage](27_linkage.md) | `target_feature = "crt-static"` 影响 C 运行时（Runtime）链接 |
 | [FFI Advanced](09_ffi_advanced.md) | 平台相关 FFI 代码常用 `cfg` 条件编译 |
 | [Cargo Features](../06_ecosystem/64_cargo_manifest_reference.md) | `feature = "..."` 是 Cargo 传递给 rustc 的自定义 cfg |

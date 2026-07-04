@@ -12,8 +12,8 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×App
-> **前置概念**: [Type System Basics](../../01_foundation/04_type_system.md) · [Unsafe Rust](../../03_advanced/03_unsafe.md) · [FFI](../../03_advanced/05_rust_ffi.md)
-> **后置概念**: [Interior Mutability](../08_interior_mutability.md) · [Custom Allocators](../../03_advanced/14_custom_allocators.md) · [Memory Layout](../../04_formal/42_type_layout.md)
+> **前置概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Unsafe Rust](../../03_advanced/03_unsafe.md) · [FFI](../../03_advanced/05_rust_ffi.md)
+> **后置概念**: [Interior Mutability](../02_memory_management/08_interior_mutability.md) · [Custom Allocators](../../03_advanced/14_custom_allocators.md) · [Memory Layout](../../04_formal/42_type_layout.md)
 >
 > **主要来源**: [The Rust Reference — Unions](https://doc.rust-lang.org/reference/items/unions.html) ·
 > [The Rustonomicon — Unions](https://doc.rust-lang.org/nomicon/unions.html) ·

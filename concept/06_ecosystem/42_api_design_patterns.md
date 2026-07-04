@@ -13,8 +13,8 @@
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Cre — 设计类型安全的 REST/GraphQL/gRPC API
 > **前置依赖**: [Async/Await](../03_advanced/02_async.md) ·
-> [Trait](../02_intermediate/01_traits.md) ·
-> [错误处理（Error Handling）](../01_foundation/32_error_handling_basics.md) ·
+> [Trait](../02_intermediate/00_traits/01_traits.md) ·
+> [错误处理（Error Handling）](../01_foundation/08_error_handling/32_error_handling_basics.md) ·
 > [架构设计模式](35_architecture_patterns.md)
 > **后置延伸**: [微服务架构模式](31_microservice_patterns.md) ·
 > [事件驱动架构](32_event_driven_architecture.md) ·
@@ -45,19 +45,19 @@
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 REST：表述性状态转移](#11-rest表述性状态转移)
-    - [1.2 GraphQL：查询语言与运行时（Runtime）](#12-graphql查询语言与运行时)
+    - [1.2 GraphQL：查询语言与运行时](#12-graphql查询语言与运行时)
     - [1.3 gRPC：高性能 RPC 框架](#13-grpc高性能-rpc-框架)
   - [二、概念属性矩阵](#二概念属性矩阵)
   - [三、API 设计原则](#三api-设计原则)
     - [3.1 RESTful 资源建模](#31-restful-资源建模)
     - [3.2 API 版本化策略](#32-api-版本化策略)
-    - [3.3 错误处理（Error Handling）与状态码](#33-错误处理与状态码)
+    - [3.3 错误处理与状态码](#33-错误处理与状态码)
   - [四、REST API 设计](#四rest-api-设计)
     - [4.1 路由与处理器](#41-路由与处理器)
     - [4.2 请求验证与序列化](#42-请求验证与序列化)
     - [4.3 OpenAPI 文档生成](#43-openapi-文档生成)
   - [五、GraphQL API 设计](#五graphql-api-设计)
-    - [5.1 Schema 与类型系统（Type System）](#51-schema-与类型系统)
+    - [5.1 Schema 与类型系统](#51-schema-与类型系统)
     - [5.2 Resolver 与 N+1 问题](#52-resolver-与-n1-问题)
     - [5.3 订阅与实时数据](#53-订阅与实时数据)
   - [六、gRPC API 设计](#六grpc-api-设计)
@@ -80,7 +80,7 @@
     - [测验 2：`IntoIterator` trait 在 API 设计中有什么用途？（理解层）](#测验-2intoiterator-trait-在-api-设计中有什么用途理解层)
     - [测验 3：为什么 Rust 的公共 API 中通常避免返回 `impl Trait`，而更倾向于显式类型？（理解层）](#测验-3为什么-rust-的公共-api-中通常避免返回-impl-trait而更倾向于显式类型理解层)
     - [测验 4：`sealed trait` 模式在 Rust API 设计中有什么用途？（理解层）](#测验-4sealed-trait-模式在-rust-api-设计中有什么用途理解层)
-    - [测验 5：Rust API 的"零成本抽象（Zero-Cost Abstraction）"原则如何体现在集合 API 设计中？（理解层）](#测验-5rust-api-的零成本抽象原则如何体现在集合-api-设计中理解层)
+    - [测验 5：Rust API 的"零成本抽象"原则如何体现在集合 API 设计中？（理解层）](#测验-5rust-api-的零成本抽象原则如何体现在集合-api-设计中理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -1200,8 +1200,8 @@ struct UserV2 {
 - [Reactive Programming](40_reactive_programming.md) — Stream、背压、实时数据
 - [安全实践](19_security_practices.md) — 防御性编程、密码学
 - [Async/Await](../03_advanced/02_async.md) — 异步编程基础
-- [Trait](../02_intermediate/01_traits.md) — 接口设计、类型抽象
-- [错误处理（Error Handling）](../01_foundation/32_error_handling_basics.md) — Result、? 运算符
+- [Trait](../02_intermediate/00_traits/01_traits.md) — 接口设计、类型抽象
+- [错误处理（Error Handling）](../01_foundation/08_error_handling/32_error_handling_basics.md) — Result、? 运算符
 - [云原生](24_cloud_native.md) — Kubernetes、容器化、可观测性
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)

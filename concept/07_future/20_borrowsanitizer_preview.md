@@ -19,7 +19,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 BorrowSanitizer 预览特性
 > **定位**: 探讨 BorrowSanitizer 作为 Rust **运行时（Runtime）借用（Borrowing）检查**工具的工业化路径，从 Miri 的纯解释执行扩展到编译后二进制检测的设计空间。
-> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Version Tracking](05_rust_version_tracking.md)
+> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Version Tracking](05_rust_version_tracking.md)
 > **后置概念**: [Formal Methods](02_formal_methods.md) · [RustBelt](../04_formal/04_rustbelt.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -343,8 +343,8 @@ fn main() {
 ## 相关概念文件
 
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — Unsafe 边界与借用规则
-- [Ownership](../01_foundation/01_ownership.md) — 所有权系统的形式化根基
-- [Borrowing](../01_foundation/02_borrowing.md) — 借用检查的核心机制
+- [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权系统的形式化根基
+- [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用检查的核心机制
 - [Formal Methods](02_formal_methods.md) — 形式化验证工具链
 - RustBelt — 所有权（Ownership）的形式化证明
 - [Version Tracking](05_rust_version_tracking.md) — Rust 版本特性演进

@@ -5,7 +5,7 @@
 > [Ferrocene](https://ferrous-systems.com/ferrocene/),
 > [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 >
-> **相关概念**: [位置](../../../../concept/01_foundation/13_panic_and_abort.md)
+> **相关概念**: [位置](../../../../concept/01_foundation/08_error_handling/13_panic_and_abort.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 >

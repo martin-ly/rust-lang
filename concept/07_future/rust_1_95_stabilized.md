@@ -19,7 +19,7 @@
 > **前置概念**:
 >
 > [Rust 版本跟踪](05_rust_version_tracking.md) ·
-> [Control Flow](../01_foundation/07_control_flow.md) ·
+> [Control Flow](../01_foundation/04_control_flow/07_control_flow.md) ·
 > [Atomic](../03_advanced/11_atomics_and_memory_ordering.md) ·
 > [Unsafe](../03_advanced/03_unsafe.md)
 >

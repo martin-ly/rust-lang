@@ -216,9 +216,9 @@ Lifetime('a) × Lifetime('b) where 'a > 'b → ❌ 生命周期不足 E0597
 
 在以下文件的"层次一致性（Coherence）标注"部分，新增与 `semantic_space.md` 的映射：
 
-- `01_foundation/01_ownership.md`：§X 标注 "此处为表征空间 §2 的所有权算子"
-- `01_foundation/02_borrowing.md`：§X 标注 "此处为表征空间 §2 的借用（Borrowing）算子"
-- `02_intermediate/01_traits.md`：§X 标注 "此处为表征空间 §5 的 Trait 组合规则"
+- `01_foundation/01_ownership_borrow_lifetime/01_ownership.md`：§X 标注 "此处为表征空间 §2 的所有权算子"
+- `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`：§X 标注 "此处为表征空间 §2 的借用（Borrowing）算子"
+- `02_intermediate/00_traits/01_traits.md`：§X 标注 "此处为表征空间 §5 的 Trait 组合规则"
 - `03_advanced/03_unsafe.md`：§X 标注 "此处为表征空间 §2 的逃逸舱口"
 - `05_comparative/03_paradigm_matrix.md`：§X 标注 "此处为表征空间 §6 的语言对比"
 

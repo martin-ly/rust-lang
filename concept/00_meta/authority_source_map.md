@@ -23,8 +23,8 @@
 
 > **相关概念文件**:
 >
-> - [`concept/01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) — 所有权的形式化基础
-> - [`concept/02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) — Trait 系统的跨语言对比
+> - [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权的形式化基础
+> - [`concept/02_intermediate/00_traits/01_traits.md`](../02_intermediate/00_traits/01_traits.md) — Trait 系统的跨语言对比
 > - [`concept/05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) — Rust vs C++ 深度对比
 > - [`concept/04_formal/01_linear_logic.md`](../04_formal/01_linear_logic.md) — 线性逻辑与所有权形式化
 > - [`concept/07_future/03_evolution.md`](../07_future/03_evolution.md) — 语言演进与 RFC 追踪
@@ -35,8 +35,8 @@
 
 | 概念 | 官方来源 | 学术来源 | 社区权威 | C++ 对标 | Haskell 对标 | Go 对标 | 备注 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Ownership** | TRPL Ch4 · Reference § Ownership Types | Ralf Jung *"RustBelt: Securing the Foundations of the Rust Programming Language"* (POPL 2018) · Clarke *"Ownership Types for Flexible Alias Protection"* (OOPSLA 1998) | Niko Matsakis blog *"The problem of safe and convenient parallelism"* | `unique_ptr` (cppreference) · RAII | Linear Types (Wadler, ICFP 1990) · Affine Logic | 无（GC 管理） | [来源: 核心形式化论证见 concept/01_foundation/01_ownership.md]
-| **Borrowing** | TRPL Ch4.2 · Reference § References and Borrowing | Ralf Jung *"Stacked Borrows: An Aliasing Model for Rust"* (POPL 2021) | Niko Matsakis *"Two interpretations of borrowing"* | 引用 `&T` / `const T&` 语义 · 悬垂引用规则 | Borrowing in linear/affine type systems (Wadler) | 指针借用（无编译期检查） | [来源: 核心形式化论证见 concept/01_foundation/02_borrowing.md]
+| **Ownership** | TRPL Ch4 · Reference § Ownership Types | Ralf Jung *"RustBelt: Securing the Foundations of the Rust Programming Language"* (POPL 2018) · Clarke *"Ownership Types for Flexible Alias Protection"* (OOPSLA 1998) | Niko Matsakis blog *"The problem of safe and convenient parallelism"* | `unique_ptr` (cppreference) · RAII | Linear Types (Wadler, ICFP 1990) · Affine Logic | 无（GC 管理） | [来源: 核心形式化论证见 concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md]
+| **Borrowing** | TRPL Ch4.2 · Reference § References and Borrowing | Ralf Jung *"Stacked Borrows: An Aliasing Model for Rust"* (POPL 2021) | Niko Matsakis *"Two interpretations of borrowing"* | 引用 `&T` / `const T&` 语义 · 悬垂引用规则 | Borrowing in linear/affine type systems (Wadler) | 指针借用（无编译期检查） | [来源: 核心形式化论证见 concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md]
 | **Lifetimes** | TRPL Ch10 · Reference § Lifetime Elision · [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) (NLL) | Villani, Hostert, Dreyer & Jung *"Tree Borrows: A New Aliasing Model for Rust"* ([PLDI 2025](https://pldi26.sigplan.org/), **Distinguished Paper Award**) | Jon Gjengset *"Crust of Rust: Lifetime Annotations"* | 无直接对应（RAII + 智能指针处理） | 显式 region / let-binding scope | 无（GC 决定） |
 | **Type System** | Reference § Types · [RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html) (impl trait) | Pierce *"Types and Programming Languages"* (TAPL, MIT Press) · Hindley-Milner 类型推断 | Without Boats *"Implied bounds and perfect derive"* | Templates · Concepts (C++20) | HM 类型推断 · Type Classes (Wadler & Blott, 1989) | 结构化类型 · 接口（隐式实现） | [来源: TAPL 是类型系统的标准教材; HM 类型推断是 Rust 类型系统的基础]
 | **Traits** | Reference § Traits · RFC 255 | Morrisett *"Typed Closure Conversion"* · Trait objects vtable 形式化 | Niko Matsakis *"After NLL: Interprocedural lifetimes"* | 抽象类 · Concepts · CRTP | Type Classes · Type Families | 接口 (interface) · 嵌入式接口 |
@@ -110,12 +110,12 @@ dtolnay:               https://dtolnay.github.io/
 
 | 批次 | 目标文件 | 核心补全内容 |
 |:---|:---|:---|
-| **Batch 1** | `concept/01_foundation/01_ownership.md` | 深化 RustBelt / COR 论证摘要，补全 C++ RAII vs Rust Ownership 形式化差异 |
+| **Batch 1** | `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | 深化 RustBelt / COR 论证摘要，补全 C++ RAII vs Rust Ownership 形式化差异 |
 | **Batch 1** | `knowledge/01_fundamentals/ownership.md` | 补全 TRPL / Wikipedia 来源标注，添加 C++ / Go 内存管理对比来源 |
 | **Batch 1** | `docs/02_reference/CROSS_LANGUAGE_COMPARISON.md` | 全篇补来源标注（cppreference / Go Spec / Haskell Wiki） |
-| **Batch 2** | `concept/01_foundation/02_borrowing.md` + 对应 knowledge/docs | Stacked Borrows → Tree Borrows 演进论证，C++ 引用语义对比 |
-| **Batch 3** | `concept/01_foundation/03_lifetimes.md` + 对应 knowledge/docs | NLL / Polonius / Tree Borrows 来源链，形式化区域类型论证 |
-| **Batch 4** | `concept/02_intermediate/01_traits.md` + 对应 knowledge/docs | Type Classes 对比论证，Orphan Rule 设计来源 |
+| **Batch 2** | `concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` + 对应 knowledge/docs | Stacked Borrows → Tree Borrows 演进论证，C++ 引用语义对比 |
+| **Batch 3** | `concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` + 对应 knowledge/docs | NLL / Polonius / Tree Borrows 来源链，形式化区域类型论证 |
+| **Batch 4** | `concept/02_intermediate/00_traits/01_traits.md` + 对应 knowledge/docs | Type Classes 对比论证，Orphan Rule 设计来源 |
 | **Batch 5** | L3-L7 核心文件 + 对应知识层 | 按映射表逐篇补全 |
 
 ---

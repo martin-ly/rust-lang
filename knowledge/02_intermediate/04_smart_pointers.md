@@ -2,7 +2,7 @@
 
 > **EN**: Smart Pointers
 > **Summary**: 智能指针 Smart Pointers. (stub/archive redirect)
-> **权威来源**: 本主题深度解释见 [concept/02_intermediate/12_smart_pointers.md](../../concept/02_intermediate/12_smart_pointers.md)。
+> **权威来源**: 本主题深度解释见 [concept/02_intermediate/02_memory_management/12_smart_pointers.md](../../concept/02_intermediate/02_memory_management/12_smart_pointers.md)。
 > **历史版本存档**: [archive/knowledge/02_intermediate/04_smart_pointers.md](../../archive/knowledge/02_intermediate/04_smart_pointers.md)
 >
 > **定位**: 本文件为精简知识卡片，保留核心规则/概念与常见陷阱。详细解释、形式化语义与代码示例请查看权威来源。
@@ -33,4 +33,4 @@
 
 ---
 
-**详细内容已迁移**：请点击上方 [concept/02_intermediate/12_smart_pointers.md](../../concept/02_intermediate/12_smart_pointers.md) 查看最新权威解释。
+**详细内容已迁移**：请点击上方 [concept/02_intermediate/02_memory_management/12_smart_pointers.md](../../concept/02_intermediate/02_memory_management/12_smart_pointers.md) 查看最新权威解释。

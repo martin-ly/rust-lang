@@ -8,8 +8,8 @@
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
-> **前置依赖**: [Panic and Abort](../01_foundation/13_panic_and_abort.md) · [Unsafe Rust](03_unsafe.md) · [The Rust Runtime](30_rust_runtime.md)
-> **后置概念**: [Error Handling](../02_intermediate/04_error_handling.md) · [FFI Advanced](09_ffi_advanced.md) · [Behavior Considered Undefined](../04_formal/37_behavior_considered_undefined.md)
+> **前置依赖**: [Panic and Abort](../01_foundation/08_error_handling/13_panic_and_abort.md) · [Unsafe Rust](03_unsafe.md) · [The Rust Runtime](30_rust_runtime.md)
+> **后置概念**: [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) · [FFI Advanced](09_ffi_advanced.md) · [Behavior Considered Undefined](../04_formal/37_behavior_considered_undefined.md)
 > **定理链**: Panic → Handler → Strategy → Unwind → UB Boundary
 > **主要来源**: [Rust Reference — Panic](https://doc.rust-lang.org/reference/panic.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Panic](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
@@ -155,8 +155,8 @@ Panic 可以是可恢复的，也可以是不可恢复的，具体取决于 pani
 
 | 概念 | 关系 |
 |:---|:---|
-| [Panic and Abort](../01_foundation/13_panic_and_abort.md) | panic 与 abort 的基础概念 |
-| [Error Handling](../02_intermediate/04_error_handling.md) | panic 是不可恢复错误的机制，`Result` 用于可恢复错误 |
+| [Panic and Abort](../01_foundation/08_error_handling/13_panic_and_abort.md) | panic 与 abort 的基础概念 |
+| [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) | panic 是不可恢复错误的机制，`Result` 用于可恢复错误 |
 | [FFI Advanced](09_ffi_advanced.md) | 跨 FFI unwind 需要正确的 ABI |
 | [Behavior Considered Undefined](../04_formal/37_behavior_considered_undefined.md) | 错误的 FFI unwind 是 UB |
 | [The Rust Runtime](30_rust_runtime.md) | panic handler 是运行时的一部分 |

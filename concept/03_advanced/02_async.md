@@ -20,7 +20,7 @@
 > **层次定位**: L3 高级概念 / 异步（Async）子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析 Pin 与状态机的交互
-> **前置依赖**: [L2 泛型（Generics）](../02_intermediate/02_generics.md) · [L2 Trait](../02_intermediate/01_traits.md) · L1 生命周期（Lifetimes）
+> **前置依赖**: [L2 泛型（Generics）](../02_intermediate/01_generics/02_generics.md) · [L2 Trait](../02_intermediate/00_traits/01_traits.md) · L1 生命周期（Lifetimes）
 > **后置延伸**: [L4 异步（Async）语义形式化](../04_formal/03_ownership_formal.md) · [L6 Tokio](../06_ecosystem/03_core_crates.md) · [L7 效果系统](../07_future/04_effects_system.md)
 > **跨层映射**: L3→L4 Future [来源: [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)] ↔  continuation monad | L3→L7 async effects → algebraic effects
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性（Coherence） → T-052 async/await 转换正确性
@@ -29,11 +29,11 @@
 > 本文件所有定理与定义均锚定于 L3 抽象层；涉及 L4 形式化公理处已显式标注。
 > 前置概念（L1-L2）为推理前提，后置概念（Pin/Streams）为自然延伸。
 > **前置概念**:
-> [Ownership](../01_foundation/01_ownership.md) ·
-> [Lifetimes](../01_foundation/03_lifetimes.md) ·
-> [Traits](../02_intermediate/01_traits.md) ·
-> [Generics](../02_intermediate/02_generics.md) ·
-> [Error Handling](../02_intermediate/04_error_handling.md)
+> [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) ·
+> [Traits](../02_intermediate/00_traits/01_traits.md) ·
+> [Generics](../02_intermediate/01_generics/02_generics.md) ·
+> [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md)
 > **后置概念**: [Pin/Unpin] · [Streams]
 > **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL 3rd Ed: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Brown University Interactive Book: Ch17](https://rust-book.cs.brown.edu/ch17-00-async-await.html) ·
@@ -67,9 +67,9 @@
     - [1.2 官方文档定义](#12-官方文档定义)
     - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
-    - [2.1 异步（Async） vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
+    - [2.1 异步 vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
     - [2.2 Future 组合子矩阵](#22-future-组合子矩阵)
-    - [2.3 运行时（Runtime）对比矩阵](#23-运行时对比矩阵)
+    - [2.3 运行时对比矩阵](#23-运行时对比矩阵)
   - [三、形式化理论根基（Formal Foundation）](#三形式化理论根基formal-foundation)
     - [3.1 async fn 作为状态机：精确推导](#31-async-fn-作为状态机精确推导)
     - [3.1b 状态机操作语义（Operational Semantics）](#31b-状态机操作语义operational-semantics)
@@ -86,7 +86,7 @@
     - [3.5 调度模型对比：抢占式 vs 协作式 vs 绿色线程](#35-调度模型对比抢占式-vs-协作式-vs-绿色线程)
     - [3.5·补充：跨语言异步机制对比](#35补充跨语言异步机制对比)
   - [四、思维导图（Mind Map）](#四思维导图mind-map)
-  - [五、定理一致性（Coherence）矩阵（Theorem Consistency Matrix）](#五定理一致性矩阵theorem-consistency-matrix)
+  - [五、定理一致性矩阵（Theorem Consistency Matrix）](#五定理一致性矩阵theorem-consistency-matrix)
     - [5.1 定理矩阵（10 行，含 ⟹ 推理链）](#51-定理矩阵10-行含--推理链)
     - [5.2 推理链层级图](#52-推理链层级图)
   - [六、反命题决策树（Counter-proposition Decision Trees）](#六反命题决策树counter-proposition-decision-trees)
@@ -101,7 +101,7 @@
     - [8.2 正确示例：并发执行](#82-正确示例并发执行)
     - [8.3 正确示例：Stream 异步迭代](#83-正确示例stream-异步迭代)
     - [8.4 反例：在 async 中阻塞线程](#84-反例在-async-中阻塞线程)
-    - [8.5 反例：未 Pin 的自引用（Reference） Future](#85-反例未-pin-的自引用-future)
+    - [8.5 反例：未 Pin 的自引用 Future](#85-反例未-pin-的自引用-future)
     - [8.6 边界极限测试：跨越 await 的 Send 约束](#86-边界极限测试跨越-await-的-send-约束)
     - [8.7 边界极限测试：取消安全系统分析](#87-边界极限测试取消安全系统分析)
     - [8.8 Waker 契约与活性](#88-waker-契约与活性)
@@ -109,7 +109,7 @@
     - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
     - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
     - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
-    - [8.13 Miri 动态验证：async 状态机的内存安全（Memory Safety）检测](#813-miri-动态验证async-状态机的内存安全检测)
+    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
       - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
       - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
       - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
@@ -120,9 +120,9 @@
       - [问题与解决方案演进](#问题与解决方案演进)
       - [当前最佳实践](#当前最佳实践)
       - [限制与注意事项](#限制与注意事项)
-      - [生命周期（Lifetimes）陷阱](#生命周期陷阱)
+      - [生命周期陷阱](#生命周期陷阱)
   - [十一、国际课程与论文对齐](#十一国际课程与论文对齐)
-  - [十二、`AsyncFn` Trait 家族：异步闭包（Closures）的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
+  - [十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
     - [12.1 问题：异步闭包的类型真空](#121-问题异步闭包的类型真空)
     - [12.2 `AsyncFn` 家族层级](#122-asyncfn-家族层级)
     - [12.3 关键形式化特性：可重入性限制](#123-关键形式化特性可重入性限制)
@@ -142,7 +142,7 @@
     - [16.1 边界测试：非 Send 类型跨 await 点（编译错误）](#161-边界测试非-send-类型跨-await-点编译错误)
     - [16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）](#162-边界测试在-async-块中调用阻塞函数逻辑错误)
     - [16.3 边界测试：递归 async fn（编译错误）](#163-边界测试递归-async-fn编译错误)
-    - [16.4 边界测试：在 async 块中借用（Borrowing）局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
+    - [16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
     - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
     - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -1919,7 +1919,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
                 └── 否 → impl Future（默认最优路径）
 ```
 
-> **交叉链接**: 单态化机制见 [../02_intermediate/02_generics.md](../02_intermediate/02_generics.md) §4.5（泛型（Generics）单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §4.3（trait object 与 vtable）。
+> **交叉链接**: 单态化机制见 [../02_intermediate/01_generics/02_generics.md](../02_intermediate/01_generics/02_generics.md) §4.5（泛型（Generics）单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/00_traits/01_traits.md](../02_intermediate/00_traits/01_traits.md) §4.3（trait object 与 vtable）。
 
 ---
 
@@ -2179,7 +2179,7 @@ mod tests {
 ```
 
 > **Bloom 层级**: 应用 —— 使用 loom 验证并发原语是生产级 Rust 并发编程的标准实践。
-> **交叉链接**: 内存序模型见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/03_unsafe.md](03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
+> **交叉链接**: 内存序模型见 [../02_intermediate/00_traits/01_traits.md](../02_intermediate/00_traits/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/03_unsafe.md](03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
 
 ### 8.13 Miri 动态验证：async 状态机的内存安全检测
 
@@ -2606,19 +2606,19 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权（Ownership） | [](../01_foundation/01_ownership.md) | Pin 根基 |
-| 生命周期（Lifetimes） | [](../01_foundation/03_lifetimes.md) | async fn 捕获规则 |
-| Traits | [](../02_intermediate/01_traits.md) | Future trait 定义 |
+| 所有权（Ownership） | [](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Pin 根基 |
+| 生命周期（Lifetimes） | [](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | async fn 捕获规则 |
+| Traits | [](../02_intermediate/00_traits/01_traits.md) | Future trait 定义 |
 | 并发 | [](01_concurrency.md) | 并行与并发对比 |
 | Unsafe | [](03_unsafe.md) | Pin 内部实现 |
 | 形式化方法 | [](../07_future/02_formal_methods.md) | 异步协议验证 |
 | Rust 版本特性演进 | [](../07_future/05_rust_version_tracking.md) | `AsyncFn`、`gen` blocks 等异步语义扩展 |
-| 泛型（Generics）与类型系统（Type System） | [](../02_intermediate/02_generics.md) | `use<..>` precise capturing、GATs |
+| 泛型（Generics）与类型系统（Type System） | [](../02_intermediate/01_generics/02_generics.md) | `use<..>` precise capturing、GATs |
 | Unsafe 权限分离 | [](03_unsafe.md) | `unsafe_op_in_unsafe_fn` 的权限模型 |
 
 > **过渡: L3 → L2**
 > `async fn` 的本质是状态机——编译器将 `await` 点转换为 enum 变体。这种转换依赖于泛型（Generics）（`impl Future<Output = T>`）和 Trait（`Future::poll`）的协同。理解 async 的底层实现，需要回到泛型和 Trait 的基础。
-> 底层机制见 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)（Trait 定义）与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)（泛型（Generics）单态化）。
+> 底层机制见 [`../02_intermediate/00_traits/01_traits.md`](../02_intermediate/00_traits/01_traits.md)（Trait 定义）与 [`../02_intermediate/01_generics/02_generics.md`](../02_intermediate/01_generics/02_generics.md)（泛型（Generics）单态化）。
 > **过渡: L3 → L5**
 > 异步编程不是 Rust 的发明——JavaScript 的 Promise、C# 的 async/await、Go 的 goroutine 都解决了类似问题。但 Rust 的 `Future` 是零成本的：编译后的状态机没有运行时调度器开销，这与 Go 的 goroutine（M:N 调度）形成鲜明对比。
 > 对比分析见 [`../05_comparative/02_rust_vs_go.md`](../05_comparative/02_rust_vs_go.md)（并发模型对比）。

@@ -266,7 +266,7 @@ $
 
 - [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) — 92 项特性；formal_methods 衔接
 - [ARGUMENTATION_GAP_INDEX](../10_argumentation_gap_index.md) — 论证缺口追踪
-- [type_theory/00_completeness_gaps](../../research_notes/formal_methods/00_completeness_gaps.md) — 类型理论缺口（可交叉引用）
+- [type_theory/00_completeness_gaps](00_completeness_gaps.md) — 类型理论缺口（可交叉引用）
 
 ---
 

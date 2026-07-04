@@ -11,9 +11,9 @@
 > **层级**: L7 前沿趋势
 > **A/S/P 标记**: **P** — Procedure（策略决策）
 > **双维定位**: P×Cre — 设计 AI × Rust 集成策略
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) ·
-> [Type System](../01_foundation/04_type_system.md) ·
-> [Traits](../02_intermediate/01_traits.md) ·
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Type System](../01_foundation/02_type_system/04_type_system.md) ·
+> [Traits](../02_intermediate/00_traits/01_traits.md) ·
 > [Formal Methods](02_formal_methods.md)
 > **主要来源**: [AI Coding Trends 2025-2026] · [Rust AI Ecosystem] · [Verus](https://github.com/verus-lang/verus/guide/) / Creusot + LLM · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -633,9 +633,9 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 | AI 需求 | 驱动的下层变化 | 关联文件 | 约束类型 |
 |:---|:---|:---|:---|
 | AI 生成代码安全 | L3 Unsafe 契约需机器可读 | `03_advanced/03_unsafe.md` | 反向约束 |
-| AI 类型推断（Type Inference）辅助 | L1 类型系统（Type System）需更易推断 | `01_foundation/04_type_system.md` | 反向约束 |
-| AI 错误修复 | L2 错误处理（Error Handling）模式需标准化 | `02_intermediate/04_error_handling.md` | 反向约束 |
-| 确定性容器 | L1 所有权（Ownership）需扩展确定性语义 | `01_foundation/01_ownership.md` | 潜在扩展 |
+| AI 类型推断（Type Inference）辅助 | L1 类型系统（Type System）需更易推断 | `01_foundation/02_type_system/04_type_system.md` | 反向约束 |
+| AI 错误修复 | L2 错误处理（Error Handling）模式需标准化 | `02_intermediate/03_error_handling/04_error_handling.md` | 反向约束 |
+| 确定性容器 | L1 所有权（Ownership）需扩展确定性语义 | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | 潜在扩展 |
 
 ---
 

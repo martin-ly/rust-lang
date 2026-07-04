@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 文档工具和约定的应用
 > **定位**: 覆盖 Rust **文档生态**的核心工具与实践——从 rustdoc 的渲染机制、文档测试（doctest）、到 API 文档规范（[RFC 1574](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html)）和 mdBook 静态站点生成，分析 Rust 文档文化如何成为语言生态的竞争优势。
-> **前置概念**: [Macros](../03_advanced/04_macros.md) · [Module System](../02_intermediate/10_module_system.md)
+> **前置概念**: [Macros](../03_advanced/04_macros.md) · [Module System](../02_intermediate/05_modules_and_visibility/10_module_system.md)
 > **后置概念**: [Cargo Toolchain](01_toolchain.md) · [WebAssembly](11_webassembly.md)
 
 ---
@@ -484,7 +484,7 @@ graph TD
 
 - [Cargo Toolchain](01_toolchain.md) — Cargo 与 rustdoc 集成
 - [Macros](../03_advanced/04_macros.md) — 文档宏（doc comments）
-- [Module System](../02_intermediate/10_module_system.md) — 模块（Module）级文档
+- [Module System](../02_intermediate/05_modules_and_visibility/10_module_system.md) — 模块（Module）级文档
 
 ---
 

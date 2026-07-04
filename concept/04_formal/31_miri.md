@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: T×Fml — 工具链与形式化验证
 > **定位**: 将 Miri 从“nightly 玩具”还原为日常 unsafe 代码审查与教学的标准工具。
-> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Ownership](../01_foundation/01_ownership.md)
+> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **后置概念**: [Tree Borrows](36_tree_borrows_deep_dive.md) · [BorrowSanitizer](34_borrow_sanitizer_in_formal.md) · [Kani](22_modern_verification_tools.md)
 
 ---
@@ -21,7 +21,6 @@
 > [Rustonomicon — Undefined Behavior](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) ·
 > [Tree Borrows Paper](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) ·
 > [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
-
 
 ---
 
@@ -35,7 +34,6 @@
 4. **边界辨析**: 借助反命题/反例理解常见错误与Miri的适用边界。
 5. **迁移应用**: 将 Miri 与前置/后置概念链接，形成跨层知识网络。
 
-
 ---
 
 > **过渡**: 从 Miri 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
@@ -43,7 +41,6 @@
 > **过渡**: 在建立 Miri 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
 
 > **过渡**: 最后，将 Miri 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
 
 ---
 
@@ -53,10 +50,10 @@
 >
 > **定理 3** [Tier 3]: 将 Miri 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
 
-
 ## 📑 目录
 
 - [Miri：Rust 未定义行为动态检测器](#mirirust-未定义行为动态检测器)
+  - [认知路径](#认知路径)
   - [📑 目录](#-目录)
   - [一、Miri 是什么](#一miri-是什么)
     - [与测试/Clippy 的区别](#与测试clippy-的区别)

@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计微服务架构
 > **定位**: 从系统架构视角梳理 Rust 在微服务场景中的核心模式——服务发现、熔断、Saga、CQRS、事件溯源——揭示 Rust 的类型安全与零成本抽象（Zero-Cost Abstraction）如何支撑高可靠分布式系统。
-> **前置概念**: [Async](../03_advanced/02_async.md) · 分布式系统 · [错误处理（Error Handling）](../01_foundation/32_error_handling_basics.md)
+> **前置概念**: [Async](../03_advanced/02_async.md) · 分布式系统 · [错误处理（Error Handling）](../01_foundation/08_error_handling/32_error_handling_basics.md)
 > **后置概念**: [事件驱动架构](32_event_driven_architecture.md) · [云原生](24_cloud_native.md)
 >
 > **来源**: [tower](https://docs.rs/tower/) · [tonic](https://docs.rs/tonic/) · [failsafe](https://docs.rs/failsafe/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -46,9 +46,9 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：微服务模式的编译错误](#十边界测试微服务模式的编译错误)
-    - [10.1 边界测试：配置注入的生命周期（Lifetimes）（编译错误）](#101-边界测试配置注入的生命周期编译错误)
+    - [10.1 边界测试：配置注入的生命周期（编译错误）](#101-边界测试配置注入的生命周期编译错误)
     - [10.2 边界测试：gRPC trait 对象与序列化（编译错误）](#102-边界测试grpc-trait-对象与序列化编译错误)
-    - [10.5 边界测试：断路器模式的半开状态竞态条件（运行时（Runtime）雪崩）](#105-边界测试断路器模式的半开状态竞态条件运行时雪崩)
+    - [10.5 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）](#105-边界测试断路器模式的半开状态竞态条件运行时雪崩)
     - [10.3 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）](#103-边界测试断路器模式的半开状态竞态条件运行时雪崩)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)

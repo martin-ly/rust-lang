@@ -14,12 +14,12 @@
 
 | 源概念 | 关系 | 目标概念 |
 |:---|:---:|:---|
-| [C/C++ → Rust 工程层对比路线图](../../00_meta/cpp_rust_engineering_roadmap.md) | ⟹ | [模式语义空间索引：设计模式在概念体系中的坐标](../../00_meta/pattern_semantic_space_index.md) |
-| [基础知识缺口补全总索引](../../00_meta/foundations_gap_closure_index.md) | ⟹ | [Concept Audit Guide](../../00_meta/08_concept_audit_guide.md) |
-| [模式语义空间索引：设计模式在概念体系中的坐标](../../00_meta/pattern_semantic_space_index.md) | ⟹ | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/semantic_bridge_algorithms_patterns.md) |
-| [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../../00_meta/pl_foundations_roadmap.md) | ⟹ | [C/C++ → Rust 工程层对比路线图](../../00_meta/cpp_rust_engineering_roadmap.md) |
-| [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../../00_meta/pl_foundations_roadmap.md) | ⟹ | [模式语义空间索引：设计模式在概念体系中的坐标](../../00_meta/pattern_semantic_space_index.md) |
-| [模板去同质化指南](../../00_meta/template_deduplication_guide.md) | ⟹ | [Rust 知识体系思维表征覆盖率仪表板](../../00_meta/quality_dashboard_v2.md) |
+| [C/C++ → Rust 工程层对比路线图](../cpp_rust_engineering_roadmap.md) | ⟹ | [模式语义空间索引：设计模式在概念体系中的坐标](../pattern_semantic_space_index.md) |
+| [基础知识缺口补全总索引](../foundations_gap_closure_index.md) | ⟹ | [Concept Audit Guide](../08_concept_audit_guide.md) |
+| [模式语义空间索引：设计模式在概念体系中的坐标](../pattern_semantic_space_index.md) | ⟹ | [语义桥：算法、设计模式与工作流模式的统一谱系](../semantic_bridge_algorithms_patterns.md) |
+| [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../pl_foundations_roadmap.md) | ⟹ | [C/C++ → Rust 工程层对比路线图](../cpp_rust_engineering_roadmap.md) |
+| [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../pl_foundations_roadmap.md) | ⟹ | [模式语义空间索引：设计模式在概念体系中的坐标](../pattern_semantic_space_index.md) |
+| [模板去同质化指南](../template_deduplication_guide.md) | ⟹ | [Rust 知识体系思维表征覆盖率仪表板](../quality_dashboard_v2.md) |
 
 ## L1 基础概念层
 
@@ -27,24 +27,24 @@
 
 | 源概念 | 关系 | 目标概念 |
 |:---|:---:|:---|
-| [Ownership](../../01_foundation/01_ownership.md) | ⟹ | [Borrowing](../../01_foundation/02_borrowing.md) |
-| [Ownership](../../01_foundation/01_ownership.md) | ⟹ | [Lifetimes](../../01_foundation/03_lifetimes.md) |
-| [字符串与文本：Rust 的 Unicode 处理与格式化系统](../../01_foundation/09_strings_and_text.md) | ⟹ | [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/08_collections.md) |
-| [数值类型与运算：从整数到浮点的完整图景](../../01_foundation/10_numerics.md) | ⟹ | [零成本抽象：Rust 的性能哲学](../../01_foundation/06_zero_cost_abstractions.md) |
-| [数值类型与运算：从整数到浮点的完整图景](../../01_foundation/10_numerics.md) | ⟹ | [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/08_collections.md) |
-| [字符串与编码：Rust 的文本处理类型系统](../../01_foundation/18_strings_and_encoding.md) | ⟹ | [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/08_collections.md) |
-| [值语义 vs 引用语义：从 C++、Java、Python 到 Rust](../../01_foundation/19_value_vs_reference_semantics.md) | ⟹ | [Move 语义：C++ 与 Rust 的资源转移模型](../../01_foundation/23_move_semantics.md) |
-| [值语义 vs 引用语义：从 C++、Java、Python 到 Rust](../../01_foundation/19_value_vs_reference_semantics.md) | ⟹ | [Borrowing](../../01_foundation/02_borrowing.md) |
-| [变量模型：从通用 PL 视角看 Rust 的所有权](../../01_foundation/20_variable_model.md) | ⟹ | [Borrowing](../../01_foundation/02_borrowing.md) |
-| [副作用与纯度：从引用透明到 Rust 的所有权效果](../../01_foundation/21_effects_and_purity.md) | ⟹ | [Borrowing](../../01_foundation/02_borrowing.md) |
-| [测验：类型系统](../../01_foundation/24_quiz_type_system.md) | ⟹ | [测验：所有权、借用与生命周期](../../01_foundation/33_quiz_ownership_borrowing.md) |
-| [测验：所有权、借用与生命周期](../../01_foundation/33_quiz_ownership_borrowing.md) | ⟹ | [Borrowing](../../01_foundation/02_borrowing.md) |
-| [Rust 关键字](../../01_foundation/36_keywords.md) | ⟹ | [属性与声明宏：编译期元编程基础](../../01_foundation/12_attributes_and_macros.md) |
-| [Rust 关键字](../../01_foundation/36_keywords.md) | ⟹ | [模块系统与路径：Rust 的代码组织哲学](../../01_foundation/11_modules_and_paths.md) |
-| [Rust 运算符与符号](../../01_foundation/37_operators_and_symbols.md) | ⟹ | [Type System Basics](../../01_foundation/04_type_system.md) |
-| [模式匹配](../../01_foundation/40_patterns.md) | ⟹ | [语句与表达式](../../01_foundation/41_statements_and_expressions.md) |
-| [语句与表达式](../../01_foundation/41_statements_and_expressions.md) | ⟹ | [闭包基础：捕获环境与匿名函数](../../01_foundation/15_closure_basics.md) |
-| [常用开发工具](../../01_foundation/42_useful_development_tools.md) | ⟹ | [测试基础：从单元测试到集成测试](../../01_foundation/16_testing_basics.md) |
+| [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | ⟹ | [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | ⟹ | [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
+| [字符串与文本：Rust 的 Unicode 处理与格式化系统](../../01_foundation/06_strings_and_text/09_strings_and_text.md) | ⟹ | [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/05_collections/08_collections.md) |
+| [数值类型与运算：从整数到浮点的完整图景](../../01_foundation/02_type_system/10_numerics.md) | ⟹ | [零成本抽象：Rust 的性能哲学](../../01_foundation/00_start/06_zero_cost_abstractions.md) |
+| [数值类型与运算：从整数到浮点的完整图景](../../01_foundation/02_type_system/10_numerics.md) | ⟹ | [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/05_collections/08_collections.md) |
+| [字符串与编码：Rust 的文本处理类型系统](../../01_foundation/06_strings_and_text/18_strings_and_encoding.md) | ⟹ | [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/05_collections/08_collections.md) |
+| [值语义 vs 引用语义：从 C++、Java、Python 到 Rust](../../01_foundation/03_values_and_references/19_value_vs_reference_semantics.md) | ⟹ | [Move 语义：C++ 与 Rust 的资源转移模型](../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) |
+| [值语义 vs 引用语义：从 C++、Java、Python 到 Rust](../../01_foundation/03_values_and_references/19_value_vs_reference_semantics.md) | ⟹ | [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| [变量模型：从通用 PL 视角看 Rust 的所有权](../../01_foundation/03_values_and_references/20_variable_model.md) | ⟹ | [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| [副作用与纯度：从引用透明到 Rust 的所有权效果](../../01_foundation/00_start/21_effects_and_purity.md) | ⟹ | [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| [测验：类型系统](../../01_foundation/11_quizzes/24_quiz_type_system.md) | ⟹ | [测验：所有权、借用与生命周期](../../01_foundation/11_quizzes/33_quiz_ownership_borrowing.md) |
+| [测验：所有权、借用与生命周期](../../01_foundation/11_quizzes/33_quiz_ownership_borrowing.md) | ⟹ | [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| [Rust 关键字](../../01_foundation/00_start/36_keywords.md) | ⟹ | [属性与声明宏：编译期元编程基础](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) |
+| [Rust 关键字](../../01_foundation/00_start/36_keywords.md) | ⟹ | [模块系统与路径：Rust 的代码组织哲学](../../01_foundation/07_modules_and_items/11_modules_and_paths.md) |
+| [Rust 运算符与符号](../../01_foundation/00_start/37_operators_and_symbols.md) | ⟹ | [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) |
+| [模式匹配](../../01_foundation/04_control_flow/40_patterns.md) | ⟹ | [语句与表达式](../../01_foundation/04_control_flow/41_statements_and_expressions.md) |
+| [语句与表达式](../../01_foundation/04_control_flow/41_statements_and_expressions.md) | ⟹ | [闭包基础：捕获环境与匿名函数](../../01_foundation/00_start/15_closure_basics.md) |
+| [常用开发工具](../../01_foundation/10_testing_basics/42_useful_development_tools.md) | ⟹ | [测试基础：从单元测试到集成测试](../../01_foundation/10_testing_basics/16_testing_basics.md) |
 
 ## L2 进阶概念层
 
@@ -52,20 +52,20 @@
 
 | 源概念 | 关系 | 目标概念 |
 |:---|:---:|:---|
-| [Traits](../../02_intermediate/01_traits.md) | ⟹ | [Generics](../../02_intermediate/02_generics.md) |
-| [Cow：写时克隆与零拷贝抽象](../../02_intermediate/11_cow_and_borrowed.md) | ⟹ | [Serde 序列化模式：Rust 的类型驱动数据转换](../../02_intermediate/09_serde_patterns.md) |
-| [智能指针：堆内存管理与共享语义](../../02_intermediate/12_smart_pointers.md) | ⟹ | [Cow：写时克隆与零拷贝抽象](../../02_intermediate/11_cow_and_borrowed.md) |
-| [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/13_dsl_and_embedding.md) | ⟹ | [Serde 序列化模式：Rust 的类型驱动数据转换](../../02_intermediate/09_serde_patterns.md) |
-| [Newtype 与包装器模式：类型安全的零成本抽象](../../02_intermediate/14_newtype_and_wrapper.md) | ⟹ | [智能指针：堆内存管理与共享语义](../../02_intermediate/12_smart_pointers.md) |
-| [宏模式：编译期代码生成的工程实践](../../02_intermediate/17_macro_patterns.md) | ⟹ | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/13_dsl_and_embedding.md) |
-| [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/21_metaprogramming.md) | ⟹ | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/13_dsl_and_embedding.md) |
-| [Rust API 命名约定](../../02_intermediate/22_api_naming_conventions.md) | ⟹ | [高级类型系统：从关联类型到类型级编程](../../02_intermediate/20_type_system_advanced.md) |
-| [RTTI 与动态类型识别：从 C++ 到 Rust](../../02_intermediate/25_rtti_and_dynamic_typing.md) | ⟹ | [错误处理深入：从 Result 到自定义错误生态](../../02_intermediate/16_error_handling_deep_dive.md) |
-| [RTTI 与动态类型识别：从 C++ 到 Rust](../../02_intermediate/25_rtti_and_dynamic_typing.md) | ⟹ | [高级 Trait 主题：从关联类型到特化](../../02_intermediate/19_advanced_traits.md) |
-| [C 预处理器 vs Rust 宏：从文本替换到语法树](../../02_intermediate/26_c_preprocessor_vs_rust_macros.md) | ⟹ | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/13_dsl_and_embedding.md) |
-| [异常安全：C++ 与 Rust 的错误处理哲学](../../02_intermediate/27_exception_safety_rust_cpp.md) | ⟹ | [错误处理深入：从 Result 到自定义错误生态](../../02_intermediate/16_error_handling_deep_dive.md) |
-| [可派生 Trait](../../02_intermediate/31_derive_traits.md) | ⟹ | [高级 Trait 主题：从关联类型到特化](../../02_intermediate/19_advanced_traits.md) |
-| [Rust Editions](../../02_intermediate/32_editions.md) | ⟹ | [Rust 发布流程](../../02_intermediate/33_rust_release_process.md) |
+| [Traits](../../02_intermediate/00_traits/01_traits.md) | ⟹ | [Generics](../../02_intermediate/01_generics/02_generics.md) |
+| [Cow：写时克隆与零拷贝抽象](../../02_intermediate/02_memory_management/11_cow_and_borrowed.md) | ⟹ | [Serde 序列化模式：Rust 的类型驱动数据转换](../../02_intermediate/00_traits/09_serde_patterns.md) |
+| [智能指针：堆内存管理与共享语义](../../02_intermediate/02_memory_management/12_smart_pointers.md) | ⟹ | [Cow：写时克隆与零拷贝抽象](../../02_intermediate/02_memory_management/11_cow_and_borrowed.md) |
+| [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md) | ⟹ | [Serde 序列化模式：Rust 的类型驱动数据转换](../../02_intermediate/00_traits/09_serde_patterns.md) |
+| [Newtype 与包装器模式：类型安全的零成本抽象](../../02_intermediate/04_types_and_conversions/14_newtype_and_wrapper.md) | ⟹ | [智能指针：堆内存管理与共享语义](../../02_intermediate/02_memory_management/12_smart_pointers.md) |
+| [宏模式：编译期代码生成的工程实践](../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md) | ⟹ | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md) |
+| [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) | ⟹ | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md) |
+| [Rust API 命名约定](../../02_intermediate/05_modules_and_visibility/22_api_naming_conventions.md) | ⟹ | [高级类型系统：从关联类型到类型级编程](../../02_intermediate/04_types_and_conversions/20_type_system_advanced.md) |
+| [RTTI 与动态类型识别：从 C++ 到 Rust](../../02_intermediate/04_types_and_conversions/25_rtti_and_dynamic_typing.md) | ⟹ | [错误处理深入：从 Result 到自定义错误生态](../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md) |
+| [RTTI 与动态类型识别：从 C++ 到 Rust](../../02_intermediate/04_types_and_conversions/25_rtti_and_dynamic_typing.md) | ⟹ | [高级 Trait 主题：从关联类型到特化](../../02_intermediate/00_traits/19_advanced_traits.md) |
+| [C 预处理器 vs Rust 宏：从文本替换到语法树](../../02_intermediate/06_macros_and_metaprogramming/26_c_preprocessor_vs_rust_macros.md) | ⟹ | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md) |
+| [异常安全：C++ 与 Rust 的错误处理哲学](../../02_intermediate/03_error_handling/27_exception_safety_rust_cpp.md) | ⟹ | [错误处理深入：从 Result 到自定义错误生态](../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md) |
+| [可派生 Trait](../../02_intermediate/00_traits/31_derive_traits.md) | ⟹ | [高级 Trait 主题：从关联类型到特化](../../02_intermediate/00_traits/19_advanced_traits.md) |
+| [Rust Editions](../../02_intermediate/00_traits/32_editions.md) | ⟹ | [Rust 发布流程](../../02_intermediate/00_traits/33_rust_release_process.md) |
 
 ## L3 高级概念层
 

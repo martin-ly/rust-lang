@@ -2,7 +2,7 @@
 
 > **EN**: Lazy Initialization
 > **Summary**: 延迟初始化 Lazy Initialization.
-> **相关概念**: [内部可变性](../../concept/02_intermediate/08_interior_mutability.md)
+> **相关概念**: [内部可变性](../../concept/02_intermediate/02_memory_management/08_interior_mutability.md)
 > **Bloom 层级**: 理解
 > **版本**: Rust 1.96.1+ (accessors), `LazyCell`/`LazyLock` 类型稳定于 1.80
 > **特性**: `LazyCell`, `LazyLock`, `get`, `get_mut`, `force_mut`
