@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 > [综述级]
-> **本节关键术语**: Dependency Resolution · SemVer · Lockfile · Features Unification · Resolver Version · `rust-version` · `cargo tree` · Yanked — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: Dependency Resolution · SemVer · Lockfile · Features Unification · Resolver Version · `rust-version` · `cargo tree` · Yanked — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 # Cargo 依赖解析
 

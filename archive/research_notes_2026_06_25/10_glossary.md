@@ -547,7 +547,7 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [主索引](README.md) - 完整的研究笔记索引
+- [主索引](../../README.md) - 完整的研究笔记索引
 - [快速参考](10_quick_reference.md) - 快速查找指南
 - [研究方法论](10_research_methodology.md) - 研究方法框架
 
@@ -556,7 +556,7 @@
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [形式化方法研究](formal_methods/README.md) - 形式化方法索引
-- [类型理论研究](type_theory/README.md) - 类型理论索引
+- [类型理论研究](../../README.md) - 类型理论索引
 - [实验研究](experiments/README.md) - 实验研究索引
 
 ---
@@ -636,7 +636,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

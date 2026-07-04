@@ -549,7 +549,7 @@ Sized trait
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [formal_methods 目录](README.md)
-- [上级目录](../README.md)
+- [上级目录](../../../README.md)
 
 ---
 

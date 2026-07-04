@@ -1,7 +1,7 @@
 # Cargo Manifest 目标与元数据（Cargo Manifest Targets）
 
 > **内容分级**: [参考级]
-> **本节关键术语**: Cargo Target · Lib Target · Bin Target · Test Target · Example Target · Bench Target · Rust Version · Package ID Specification — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: Cargo Target · Lib Target · Bin Target · Test Target · Example Target · Bench Target · Rust Version · Package ID Specification — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Manifest Targets
 > **Summary**: Cargo `Cargo.toml` 中的 target 定义：lib、bin、test、example、bench，以及 `rust-version`、`package` 元数据和 Package ID Specification。

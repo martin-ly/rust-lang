@@ -279,7 +279,7 @@ fn main() {
 - 实现 Rust 的内存模型（Stacked Borrows / Tree Borrows）
 - 比 Valgrind/ASan 更精确地检测 Rust 特有的别名违规
 
-**知识点**：Miri 是 Rust 内存安全（Memory Safety）的终极验证工具。`&mut T as *mut T` 的转换模式在 Miri 下经常暴露别名问题，应优先使用 `addr_of_mut!`。[→ Miri 详解](../03_advanced/03_unsafe.md)
+**知识点**：Miri 是 Rust 内存安全（Memory Safety）的终极验证工具。`&mut T as *mut T` 的转换模式在 Miri 下经常暴露别名问题，应优先使用 `addr_of_mut!`。[→ Miri 详解](../03_advanced/02_unsafe/03_unsafe.md)
 
 </details>
 

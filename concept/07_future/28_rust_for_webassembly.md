@@ -562,7 +562,7 @@ Wasm 调试工具链:
 
 > **并发边界**:
 > 标准 Rust 线程模型在浏览器 Wasm 中不可用。`wasm-bindgen-rayon` 通过 Web Workers 实现数据并行，但初始化开销显著。
-> 这是 [并发模型](../03_advanced/01_concurrency.md) 在 Wasm 目标上的根本限制。
+> 这是 [并发模型](../03_advanced/00_concurrency/01_concurrency.md) 在 Wasm 目标上的根本限制。
 > [来源: [WebAssembly Specification](https://webassembly.github.io/spec/)]
 
 **边界 3: 异常处理与 panic**

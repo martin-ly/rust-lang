@@ -22,7 +22,7 @@
 | **Rust Reference** | [Async blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) | async 规范 |
 | **Tokio** | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | 主流异步运行时 |
 
-**一页纸总结**: [ONE_PAGE_SUMMARY.md](ONE_PAGE_SUMMARY.md) — 核心概念、常见坑、速选表
+**一页纸总结**: [ONE_PAGE_SUMMARY.md](one_page_summary.md) — 核心概念、常见坑、速选表
 
 ## 📂 目录详解
 
@@ -56,7 +56,7 @@
 | 05_async_in_traits_and_ecosystem         | ⭐⭐⭐     | ⭐⭐⭐⭐   | Trait支持 |
 | 06_critical_analysis_and_advanced_topics | ⭐⭐⭐⭐⭐ | ⭐⭐⭐     | 深度分析  |
 
-**查看详情**: [core/README.md](core/README.md)
+**查看详情**: [core/README.md](../../../README.md)
 
 ---
 
@@ -69,7 +69,7 @@
 - **03_smol_best_practices.md** - Smol轻量方案 ⭐⭐⭐
 - **04_cookbook.md** - 实战代码手册 ⭐⭐⭐⭐
 
-**查看详情**: [runtimes/README.md](runtimes/README.md)
+**查看详情**: [runtimes/README.md](../../../README.md)
 
 ---
 
@@ -81,7 +81,7 @@
 - **02_patterns_and_pitfalls.md** - 常见陷阱与解决方案 ⭐⭐⭐⭐⭐
 - **03_advanced_patterns.md** - 高级模式
 
-**查看详情**: [patterns/README.md](patterns/README.md)
+**查看详情**: [patterns/README.md](../../../README.md)
 
 ---
 
@@ -93,7 +93,7 @@
 - **02_benchmark_analysis.md** - 基准测试方法
 - **03_benchmark_results.md** - 测试结果数据
 
-**查看详情**: [performance/README.md](performance/README.md)
+**查看详情**: [performance/README.md](../../../README.md)
 
 ---
 
@@ -105,7 +105,7 @@
 - **02_language_features_192.md** - Rust 1.96.1+特性
 - **03_formal_methods.md** - 形式化方法
 
-**查看详情**: [ecosystem/README.md](ecosystem/README.md)
+**查看详情**: [ecosystem/README.md](../../../README.md)
 
 ---
 
@@ -117,7 +117,7 @@
 - **utils_reference.md** - 工具函数
 - **msrv_and_compatibility.md** - 版本兼容性
 
-**查看详情**: [references/README.md](references/README.md)
+**查看详情**: [references/README.md](../../../README.md)
 
 ---
 
@@ -128,7 +128,7 @@
 - **comprehensive_guide_2025.md** - 2025综合指南 (1200+行) ⭐⭐⭐⭐⭐
 - **ultimate_guide_cn.md** - 终极中文指南 ⭐⭐⭐⭐⭐
 
-**查看详情**: [comprehensive/README.md](comprehensive/README.md)
+**查看详情**: [comprehensive/README.md](../../../README.md)
 
 ---
 
@@ -139,7 +139,7 @@
 - **basic/** - 14个基础视角分析
 - **specialized/** - 6个专题视角（async/sync对比、CPU/GPU异步等）
 
-**查看详情**: [views/README.md](views/README.md)
+**查看详情**: [views/README.md](../../../README.md)
 
 ---
 
@@ -150,7 +150,7 @@
 - **tokio_console_tracing.md** - 调试监控工具
 - **dashboards/** - Grafana监控面板配置
 
-**查看详情**: [tools/README.md](tools/README.md)
+**查看详情**: [tools/README.md](../../../README.md)
 
 ---
 
@@ -164,7 +164,7 @@
 
 ⚠️ **注意**: 归档文档可能过时，优先查阅主文档
 
-**查看详情**: [archives/README.md](archives/README.md)
+**查看详情**: [archives/README.md](../../../README.md)
 
 ---
 

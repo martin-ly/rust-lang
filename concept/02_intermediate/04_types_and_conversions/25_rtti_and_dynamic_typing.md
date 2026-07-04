@@ -9,7 +9,7 @@
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: S+A
 > **双维定位**: C×Ana
-> **前置概念**: [Type Erasure](../../03_advanced/17_type_erasure.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Generics](../01_generics/02_generics.md)
+> **前置概念**: [Type Erasure](../../03_advanced/06_low_level_patterns/17_type_erasure.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Generics](../01_generics/02_generics.md)
 > **后置概念**: [Error Handling Deep Dive](../03_error_handling/16_error_handling_deep_dive.md) · [Advanced Traits](../00_traits/19_advanced_traits.md)
 > **主要来源**: · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >

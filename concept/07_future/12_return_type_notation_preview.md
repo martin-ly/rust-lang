@@ -17,7 +17,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析返回类型标注预览特性
 > **定位**: 澄清 **Return Type Notation (RTN)** 与 **`use<..>` 精确捕获**是两个不同的特性；RTN 解决的是「如何为 trait 中 `async fn` / RPITIT 的返回类型添加 `Send` 等边界」的问题。
-> **前置概念**: [Lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Async Closures](../03_advanced/24_async_closures.md)
+> **前置概念**: [Lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Async](../03_advanced/01_async/02_async.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Async Closures](../03_advanced/01_async/24_async_closures.md)
 > **后置概念**: [Version Tracking](05_rust_version_tracking.md) · [Async Drop Preview](18_async_drop_preview.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -329,8 +329,8 @@ impl<T: Service<call(..): Send + 'static>> SendService for T {}
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| Async Closures | [](../03_advanced/24_async_closures.md) | RTN 未来可能扩展至 async closures |
-| AFIT / RPITIT | [](../03_advanced/02_async.md) | RTN 的主要应用场景 |
+| Async Closures | [](../03_advanced/01_async/24_async_closures.md) | RTN 未来可能扩展至 async closures |
+| AFIT / RPITIT | [](../03_advanced/01_async/02_async.md) | RTN 的主要应用场景 |
 | Precise Capturing | [](../02_intermediate/04_types_and_conversions/20_type_system_advanced.md) | 与 RTN 互补但不同 |
 | Version Tracking | [](05_rust_version_tracking.md) | 稳定化时间线 |
 

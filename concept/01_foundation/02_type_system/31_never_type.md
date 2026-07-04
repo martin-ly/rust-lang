@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 >
-> **本节关键术语**: Never 类型 (!) · 发散函数 (Diverging Function) · 类型归一 (Type Unification) · 空类型 (Empty Type) · 穷尽匹配 (Exhaustiveness) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: Never 类型 (!) · 发散函数 (Diverging Function) · 类型归一 (Type Unification) · 空类型 (Empty Type) · 穷尽匹配 (Exhaustiveness) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 
 # Never Type (`!`)：底类型与穷尽性
@@ -13,7 +13,7 @@
 > **双维定位**: C×Str — 结构型类型系统（Type System）
 > **定位**: 系统讲解 Rust 中 `!` (never type) 的形式语义、类型推导规则、控制流应用和穷尽性检查机制。
 > **前置概念**: [类型系统（Type System）](04_type_system.md) · [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) · [错误处理（Error Handling）](../08_error_handling/32_error_handling_basics.md)
-> **后置概念**: [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [Async](../../03_advanced/02_async.md) · 形式方法
+> **后置概念**: [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [Async](../../03_advanced/01_async/02_async.md) · 形式方法
 
 ---
 
@@ -525,7 +525,7 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

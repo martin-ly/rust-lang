@@ -12,10 +12,10 @@
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 在机器人全栈中的适用性、实时约束满足度与 ROS2 集成成熟度
 > **前置依赖**: [嵌入式系统](22_embedded_systems.md) ·
-> [并发编程](../03_advanced/01_concurrency.md) ·
-> [Async/Await](../03_advanced/02_async.md) ·
+> [并发编程](../03_advanced/00_concurrency/01_concurrency.md) ·
+> [Async/Await](../03_advanced/01_async/02_async.md) ·
 > [网络协议](38_network_protocols.md) ·
-> [Unsafe Rust](../03_advanced/03_unsafe.md)
+> [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md)
 > **后置延伸**: [操作系统内核](39_os_kernel.md) ·
 > [性能优化](15_performance_optimization.md) ·
 > [机器学习生态](46_machine_learning_ecosystem.md) ·
@@ -48,7 +48,7 @@
 > [PREEMPT_RT Wiki](https://wiki.linuxfoundation.org/realtime/start) ·
 > [Rust Embedded Book](https://docs.rust-embedded.org/book/)
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -903,9 +903,9 @@ impl GoodNode {
 ## 相关概念文件
 
 - [嵌入式系统](22_embedded_systems.md) — `no_std`、硬件抽象层、交叉编译
-- [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、Mutex、线程池
+- [并发编程](../03_advanced/00_concurrency/01_concurrency.md) — Send/Sync、Mutex、线程池
 - Async/Await — 异步（Async）运行时（Runtime）、非阻塞 I/O
-- [Unsafe Rust](../03_advanced/03_unsafe.md) — FFI、裸指针、内存模型
+- [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) — FFI、裸指针、内存模型
 - [网络协议](38_network_protocols.md) — UDP/TCP、序列化、gRPC/QUIC
 - [操作系统内核](39_os_kernel.md) — 调度器、中断、内存管理
 - [性能优化](15_performance_optimization.md) — SIMD、缓存、零拷贝

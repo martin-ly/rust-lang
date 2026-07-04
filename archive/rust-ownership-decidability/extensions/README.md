@@ -39,7 +39,7 @@
 
 **适用场景**：框架开发、代码生成、DSL 设计、自动化 trait 实现
 
-### 3. [Unsafe Rust 模式](../../../concept/03_advanced/03_unsafe.md)
+### 3. [Unsafe Rust 模式](../../../concept/03_advanced/02_unsafe/03_unsafe.md)
 
 深入理解 Rust 的底层编程能力：
 

@@ -478,10 +478,10 @@ Petri 网是工作流模式最经典的形式化基础。van der Aalst 等人的
 | 文件路径 | 内容说明 | 与本索引的关系 |
 |:---|:---|:---|
 | [`../../concept/06_ecosystem/18_distributed_systems.md`](../../../concept/06_ecosystem/18_distributed_systems.md) | 分布式系统概念 | WCP 模式在分布式工作流引擎（如 Temporal、Cadence）中的扩展；WCP3 Synchronization 的分布式变体 |
-| [`../../concept/02_intermediate/01_traits.md`](../../../concept/02_intermediate/01_traits.md) | Trait 系统深度解析 | WCP 状态机实现依赖的 `State` trait、`Transition` trait 设计模式；WCP17 交错路由的状态机编码 |
-| [`../../concept/03_advanced/03_unsafe.md`](../../../concept/03_advanced/03_unsafe.md) | Unsafe Rust 深度指南 | WCP10 Arbitrary Cycles 等需 `unsafe` 模式的实现细节与安全边界；`Pin` 与自引用结构 |
-| [`../../concept/03_advanced/02_async.md`](../../../concept/03_advanced/02_async.md) | 异步编程模型 | `tokio::select!`、`FuturesUnordered`、`JoinSet` 等核心抽象的语义详解；WCP16 Deferred Choice 的 async 实现 |
-| [`../../concept/03_advanced/01_concurrency.md`](../../../concept/03_advanced/01_concurrency.md) | 并发编程模型 | `Mutex`、`RwLock`、`Barrier`、`Semaphore` 的内存序与死锁分析；WCP39 Critical Section 的实现策略 |
+| [`../../concept/02_intermediate/01_traits.md`](../../../concept/02_intermediate/00_traits/01_traits.md) | Trait 系统深度解析 | WCP 状态机实现依赖的 `State` trait、`Transition` trait 设计模式；WCP17 交错路由的状态机编码 |
+| [`../../concept/03_advanced/03_unsafe.md`](../../../concept/03_advanced/02_unsafe/03_unsafe.md) | Unsafe Rust 深度指南 | WCP10 Arbitrary Cycles 等需 `unsafe` 模式的实现细节与安全边界；`Pin` 与自引用结构 |
+| [`../../concept/03_advanced/02_async.md`](../../../concept/03_advanced/01_async/02_async.md) | 异步编程模型 | `tokio::select!`、`FuturesUnordered`、`JoinSet` 等核心抽象的语义详解；WCP16 Deferred Choice 的 async 实现 |
+| [`../../concept/03_advanced/01_concurrency.md`](../../../concept/03_advanced/00_concurrency/01_concurrency.md) | 并发编程模型 | `Mutex`、`RwLock`、`Barrier`、`Semaphore` 的内存序与死锁分析；WCP39 Critical Section 的实现策略 |
 | [`04-control-data-flow.md`](04-control-data-flow.md) | 控制流与数据流语义 | WCP 模式的底层语义形式化（操作语义、数据流方程）；SSA 形式与所有权的对应 |
 | [`02-concurrency-semantics.md`](02-concurrency-semantics.md) | 并发语义学 | Happens-Before、线性一致性、顺序一致性等形式化概念与 WCP 的关系；WCP3 同步的内存模型基础 |
 | [`00-semantic-framework.md`](00-semantic-framework.md) | 语义框架总论 | 知识库的通用语义框架：操作语义、指称语义、公理语义的定义与选择标准 |

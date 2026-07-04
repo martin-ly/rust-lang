@@ -19,7 +19,7 @@
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 在不同平台约束下的工程实践
 > **定位**: 系统对比 Android AOSP、Chromium、Bare Metal 三个典型场景中 Rust 的集成方式、构建系统、互操作模式与常见陷阱。
-> **前置概念**: [Cross Compilation](17_cross_compilation.md) · [Embedded Systems](22_embedded_systems.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md) · [安全边界](../05_comparative/04_safety_boundaries.md)
+> **前置概念**: [Cross Compilation](17_cross_compilation.md) · [Embedded Systems](22_embedded_systems.md) · [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) · [FFI](../03_advanced/04_ffi/05_rust_ffi.md) · [安全边界](../05_comparative/04_safety_boundaries.md)
 > **后置概念**: [Industrial Case Studies](75_industrial_case_studies.md) · [OS Kernel](39_os_kernel.md)
 > **来源**:
 >

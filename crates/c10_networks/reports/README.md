@@ -101,7 +101,7 @@
 ## 📚 相关文档
 
 - [项目主README](../README.md)
-- [文档索引](../docs/00_MASTER_INDEX.md)
+- [文档索引](../docs/00_master_index.md)
 - [贡献指南](../CONTRIBUTING.md)
 
 ## 🔄 报告更新

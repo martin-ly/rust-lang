@@ -1,6 +1,6 @@
 # FFI (Foreign Function Interface)
 
-> **相关概念**: [FFI](../../../concept/03_advanced/09_ffi_advanced.md)
+> **相关概念**: [FFI](../../../../concept/03_advanced/04_ffi/09_ffi_advanced.md)
 > **Bloom 层级**: 理解
 > **📌 简介**:
 > FFI 是 Rust 与外部代码（主要是 C/C++）互操作的桥梁 [来源: Rustonomicon — FFI / 2025;
@@ -923,7 +923,7 @@ pub extern "C" fn process_string(s: *mut c_char) -> c_int {
 
 - [内联汇编 (Inline Assembly)](02_inline_asm.md)
 - [MaybeUninit](03_maybe_uninit.md)
-- [Unsafe Rust 指南](README.md)
+- [Unsafe Rust 指南](../../../../README.md)
 - [Rust 所有权深入](../../01_fundamentals/04_ownership.md)
 
 ---

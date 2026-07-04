@@ -1,7 +1,7 @@
 # Cargo 指南实践（Cargo Guide Practices）
 
 > **内容分级**: [参考级]
-> **本节关键术语**: Dependencies · Features · CI · Build Performance · Cache · `CARGO_TARGET_DIR` — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: Dependencies · Features · CI · Build Performance · Cache · `CARGO_TARGET_DIR` — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Guide Practices
 > **Summary**: Cargo 指南中的实践主题：依赖管理、features、测试组织、持续集成配置，以及构建性能优化策略。 Practical topics from the Cargo Guide: dependency management, features, test organization, CI configuration, and build performance.

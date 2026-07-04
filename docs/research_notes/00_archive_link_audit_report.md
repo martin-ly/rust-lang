@@ -11,7 +11,7 @@
 > **生成日期**: 2026-06-29
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [docs/research_notes/](../../docs/research_notes/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [docs/research_notes/](.)
 > **扫描范围**: docs/research_notes/**/*.md
 > **总链接数**: 57
 > **可替换链接数**: 12

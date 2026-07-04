@@ -10,7 +10,7 @@
 # C06 异步编程 - 一页纸总结
 
 > **用途**: 快速回顾核心概念、常见坑、学习路径
-> **完整文档**: [00_MASTER_INDEX](00_MASTER_INDEX.md)
+> **完整文档**: [00_MASTER_INDEX](00_master_index.md)
 
 ---
 

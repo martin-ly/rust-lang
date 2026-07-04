@@ -11,7 +11,7 @@
 > **后置概念**: N/A
 ---
 
-> **来源**: · [自测题库](../../00_meta/self_assessment.md) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: · [自测题库](../../00_meta/04_navigation/self_assessment.md) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [The Rust Programming Language — Ch13 Closures](https://doc.rust-lang.org/book/ch13-01-closures.html) ·
 > [The Rust Programming Language — Ch13 Iterators](https://doc.rust-lang.org/book/ch13-01-closures.html) ·
 > [Rust Reference — Closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html)

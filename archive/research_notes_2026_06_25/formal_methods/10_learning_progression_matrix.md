@@ -289,7 +289,7 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
-| Unsafe基础 | [UNSAFE_CONCEPT_MINDMAP](../../../concept/03_advanced/03_unsafe.md) | 1周 |
+| Unsafe基础 | [UNSAFE_CONCEPT_MINDMAP](../../../concept/03_advanced/02_unsafe/03_unsafe.md) | 1周 |
 | 裸指针 | 10_memory_model_mindmap.md §原始指针 | 3天 |
 | FFI | 外部文档 | 1周 |
 | 内存布局 | 10_memory_model_mindmap.md §内存布局 | 3天 |
@@ -563,7 +563,7 @@ Level 1 ──> Level 2 ──> Level 3 ──> 证明技术 ──> Coq ──>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [formal_methods 目录](README.md)
-- [上级目录](../README.md)
+- [上级目录](../../../README.md)
 
 ---
 

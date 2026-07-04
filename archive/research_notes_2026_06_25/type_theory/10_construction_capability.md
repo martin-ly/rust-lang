@@ -294,8 +294,8 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [type_theory 目录](README.md)
-- [上级目录](../README.md)
+- [type_theory 目录](../../../README.md)
+- [上级目录](../../../README.md)
 
 ---
 

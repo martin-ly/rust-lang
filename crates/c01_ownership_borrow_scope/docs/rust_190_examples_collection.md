@@ -2083,7 +2083,7 @@ pub fn run_all_examples() {
 
 - **[知识图谱](theory/knowledge_graph_and_concept_relations.md)**: 概念关系可视化
 - **[多维矩阵](theory/multi_dimensional_comparison_matrix.md)**: 技术详细对比
-- **[思维导图](RUST_190_COMPREHENSIVE_MINDMAP.md)**: 学习路径指南
+- **[思维导图](rust_190_comprehensive_mindmap.md)**: 学习路径指南
 
 ---
 

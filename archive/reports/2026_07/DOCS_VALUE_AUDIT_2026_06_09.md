@@ -1155,7 +1155,7 @@
 
 ### docs\rust-formal-engineering-system\09_research_agenda\04_research_methods\README.md
 
-- ⚠️ 损坏链接: [返回研究议程索引](../README.md)
+- ⚠️ 损坏链接: [返回研究议程索引](../../../README.md)
 - ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
 - ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
 - ⚠️ 最后更新: 2026-02-28（101 天前，建议复审）
@@ -1170,27 +1170,27 @@
 
 ### docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\00-foundations\00-01-linear-logic.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\00-foundations\00-02-affine-types.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\00-foundations\00-03-separation-logic.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\00-foundations\00-04-theory-connections.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules-deep.md
 
@@ -1198,111 +1198,111 @@
 
 ### docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system-deep.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\01-04-runtime-vs-compile-time.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\polonius-borrow-checker.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\trait-system.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\ownership-counterexamples.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\short-concepts\borrowing-concept-card.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\short-concepts\lifetime-concept-card.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
 
 ### docs\rust-ownership-decidability\01-core-concepts\short-concepts\ownership-concept-card.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
 
 ### docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\03-verification-tools\03-02-creusot-deep-dive.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\03-verification-tools\03-03-miri-deep-dive.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\03-verification-tools\03-07-refinedrust-deep-dive.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\04-decidability-analysis\04-01-type-inference.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\04-decidability-analysis\04-02-borrow-checking.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\05-comparative-study\05-01-linear-vs-affine.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\05-comparative-study\05-03-rust-vs-go.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\05-comparative-study\05-04-rust-vs-java.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\05-comparative-study\05-05-rust-vs-swift.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\07-references\README.md
 
@@ -1326,11 +1326,11 @@
 
 ### docs\rust-ownership-decidability\08-advanced-topics\08-05-rust-195-features-formal.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\08-advanced-topics\README.md
 
-- ⚠️ 损坏链接: [所有权可判定性总览](../README.md)
+- ⚠️ 损坏链接: [所有权可判定性总览](../../../README.md)
 
 ### docs\rust-ownership-decidability\10-research-frontiers\10-01-future-directions.md
 
@@ -1354,7 +1354,7 @@
 
 ### docs\rust-ownership-decidability\10-research-frontiers\10-06-formal-verification.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\10-research-frontiers\README.md
 
@@ -1362,98 +1362,98 @@
 
 ### docs\rust-ownership-decidability\10-research-frontiers\rust-1.93-features-analysis.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\100_PERCENT_COMPLETION_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\11-design-patterns\11-01-rust-design-patterns.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
 
 ### docs\rust-ownership-decidability\11-design-patterns\11-02-idiomatic-patterns.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
 
 ### docs\rust-ownership-decidability\11-design-patterns\11-03-type-state-pattern.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
 
 ### docs\rust-ownership-decidability\11-design-patterns\behavioral\command.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [behavioral 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [behavioral 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\11-design-patterns\behavioral\observer.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [behavioral 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [behavioral 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\11-design-patterns\behavioral\strategy.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [behavioral 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [behavioral 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\11-design-patterns\creational\builder.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [creational 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [creational 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\11-design-patterns\creational\factory.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [creational 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [creational 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\11-design-patterns\rust-specific\newtype.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-specific 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-specific 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\11-design-patterns\rust-specific\raii-guard.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-specific 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-specific 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\11-design-patterns\structural\adapter.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [structural 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [structural 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\11-design-patterns\structural\decorator.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [structural 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [structural 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\11-design-patterns\structural\proxy.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [structural 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [structural 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\13-architecture-patterns\clean-architecture.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\14-distributed-systems\13-01-distributed-patterns.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\14-distributed-systems\consensus-patterns.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\15-application-domains\data-engineering.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
 
 ### docs\rust-ownership-decidability\15-application-domains\systems-programming.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
 
 ### docs\rust-ownership-decidability\15-application-domains\web-development.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
 
 ### docs\rust-ownership-decidability\16-program-semantics\00-foundations\00a-lambda-calculus.md
 
@@ -1473,11 +1473,11 @@
 
 ### docs\rust-ownership-decidability\16-program-semantics\COMPLETION_STATUS_2026_03_08.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\16-program-semantics\COMPREHENSIVE_ANALYSIS_AND_ROADMAP.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\16-program-semantics\README.md
 
@@ -1508,77 +1508,77 @@
 - ⚠️ 损坏链接: [COMPLETION_ROADMAP_2026_Q1.md](COMPLETION_ROADMAP_2026_Q1.md)
 - ⚠️ 损坏链接: [COMPLETION_ROADMAP_2026_Q1.md](COMPLETION_ROADMAP_2026_Q1.md)
 - ⚠️ 损坏链接: [progress/2026-03-07_DESIGN_PATTERNS_COMPLETION_REPORT.md](progress/2026-03-07_DESIGN_PATTERNS_COMPLETION_REPORT.md)
-- ⚠️ 损坏链接: [progress/](progress/README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [progress/](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\BATCH_4_COMPLETION_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\COMPARATIVE_ANALYSIS.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\COMPILATION_VERIFICATION_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\COMPLETE_KNOWLEDGE_MATRIX.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\COMPLETION_100_PERCENT_SUMMARY.md
 
 - ⚠️ 损坏链接: [DOCUMENT_INDEX_MASTER.md](DOCUMENT_INDEX_MASTER.md)
-- ⚠️ 损坏链接: [README.md](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README.md](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\COMPREHENSIVE_COMPLETION_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\COMPREHENSIVE_FAQ.md
 
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md
 
 - ⚠️ 损坏链接: [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md)
-- ⚠️ 损坏链接: [README.md](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README.md](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\CONCEPT_MAP.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\CONTENT_ASSOCIATION_ANALYSIS.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\CONTENT_TEMPLATE_L2.md
 
-- ⚠️ 损坏链接: [所有权可判定性总览](README.md)
+- ⚠️ 损坏链接: [所有权可判定性总览](../../../README.md)
 - ⚠️ 旧版本声明: '**Rust 版本**: 1.94.0' → 建议更新为 1.96.0+
 - ⚠️ 旧版本声明: '> **Rust 版本**: 1.94.0' → 建议更新为 1.96.0+
 
 ### docs\rust-ownership-decidability\CONTINUOUS_IMPROVEMENT_ACTION_PLAN.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 - ⚠️ 损坏链接: [formal-foundations/models/](formal-foun... |
 | MASTER_INDEX_AUTO.md |  | 54 | \| Semantics \| [formal-foundations/semantics/](formal-found... |
 | MASTER_INDEX_AUTO.md |  | 55 | \| Proofs \| [formal-foundations/proofs/](formal-foundations... |
@@ -1588,331 +1588,331 @@
 | MASTER_INDEX_AUTO.md |  | 85 | - **Theory**: [lifetime-logic.md](formal-foundations/models/... |
 | README.md |  | 56 | \| ... |
 | README.md |  | 65 | \| 形式化理论 \| 形式化基础 (待补充)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_SUMMARY.md
 
 - ⚠️ 损坏链接: [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\DESIGN_RATIONALE.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\ERROR_DIAGNOSTICS_GUIDE.md
 
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\FAQ_COMPREHENSIVE.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\FINAL_100_PERCENT_COMPLETION_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\FINAL_ASSOCIATION_COMPLETION_REPORT.md
 
 - ⚠️ 损坏链接: [10_final_100_percent_completion_certification.md](FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\FINAL_COMPLETION_CERTIFICATE.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\FINAL_COMPLETION_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\FINAL_DOCUMENTATION.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\FINAL_EXECUTIVE_SUMMARY.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\FINAL_MASTER_INDEX.md
 
-- ⚠️ 损坏链接: [README.md](README.md)
-- ⚠️ 损坏链接: [coq-formalization/README.md](coq-formalization/README.md)
-- ⚠️ 损坏链接: [coq-formalization/README.md](coq-formalization/README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README.md](../../../README.md)
+- ⚠️ 损坏链接: [coq-formalization/README.md](../../../README.md)
+- ⚠️ 损坏链接: [coq-formalization/README.md](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\FINAL_ULTIMATE_COMPLETION_REPORT.md
 
 - ⚠️ 损坏链接: [DOCUMENT_INDEX_MASTER.md](DOCUMENT_INDEX_MASTER.md)
 - ⚠️ 损坏链接: [ULTIMATE_COMPREHENSIVE_GUIDE.md](ULTIMATE_COMPREHENSIVE_GUIDE.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 - ⚠️ 最后更新: 2026-03-09（92 天前，建议复审）
 
 ### docs\rust-ownership-decidability\FINAL_VERIFICATION_100_PERCENT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\FOUNDATIONS_TO_PRACTICE_BRIDGE.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\FRAMEWORK_COMPLETION_SUMMARY.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\HISTORICAL_EVOLUTION.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\HORIZONTAL_CONNECTIONS.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\INITIAL_PHASE_COMPLETION_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\INTERACTIVE_LEARNING_GUIDE.md
 
-- ⚠️ 损坏链接: [Coq形式化](coq-formalization/README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [Coq形式化](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\MASTER_COMPREHENSIVE_ANALYSIS.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\NATURAL_LANGUAGE_ARGUMENTATION_INDEX.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\NATURAL_LANGUAGE_COMPLETION_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\OVERVIEW_AND_INTUITION.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\PROJECT_COMPREHENSIVE_AUDIT_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\PROJECT_STRUCTURE.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 - ⚠️ 最后更新: 2026-03-05（96 天前，建议复审）
 
 ### docs\rust-ownership-decidability\QUICK_REFERENCE_CARD.md
 
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 - ⚠️ 损坏链接: [完整认证](FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md)
 
 ### docs\rust-ownership-decidability\RESEARCH_TRACKING_SYSTEM.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\RUST_194_ALIGNMENT_PLAN.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\RUST_194_VS_193_COMPARISON.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\THEOREM_DEPENDENCY_GRAPH.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\THEOREM_INTUITIONS.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\THEOREM_TO_COMPILER_BRIDGE.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\THEORY_TO_PATTERN_BRIDGE.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\VISUAL_THINKING_GUIDE.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [rust-ownership-decidability 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [rust-ownership-decidability 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\actor-specialty\ACTOR_MODEL_DEEP_DIVE.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\actor-specialty\COMPLETION_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\actor-specialty\case-studies\actix-web-production.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\actor-specialty\decision-trees\actor-framework-selection.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\actor-specialty\distributed\distributed-actors-formal.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\actor-specialty\examples\chat-system-example.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\actor-specialty\formal-proofs\actor-safety-theorems.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\actor-specialty\matrices\actor-framework-matrix.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\actor-specialty\mindmaps\actor-model-mindmap.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns-expanded.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\actor-specialty\scenario-trees\actor-application-domains.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\actor-specialty\theory\actor-model-foundation.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\async-specialty\ASYNC_ECOSYSTEM_COMPLETE.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\async-specialty\COMPLETION_REPORT.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\async-specialty\README.md
 
-- ⚠️ 损坏链接: [actor-specialty/README.md](../actor-specialty/README.md)
+- ⚠️ 损坏链接: [actor-specialty/README.md](../../../README.md)
 
 ### docs\rust-ownership-decidability\audit_reports\CONTENT_QUALITY_AUDIT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [audit_reports 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [audit_reports 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETE_ANALYSIS_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [audit_reports 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [audit_reports 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETION_REPORT_V3.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [audit_reports 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [audit_reports 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\audit_reports\FORMALIZATION_FRAMEWORK.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [audit_reports 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [audit_reports 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\audit_reports\LIBRARY_ANALYSIS_COMPLETION_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [audit_reports 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [audit_reports 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\audit_reports\PHASE3_LIBRARY_ANALYSIS_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [audit_reports 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [audit_reports 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\case-studies\COMPLETE_DOMAIN_COVERAGE_INDEX.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\case-studies\MODERN_CRATES_EXPANSION_REPORT.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\case-studies\MODERN_CRATES_FINAL_REPORT.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\case-studies\MODERN_CRATES_INDEX.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\case-studies\MODERN_CRATES_ROUND2_REPORT.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\case-studies\README.md
 
-- ⚠️ 损坏链接: [所有权可判定性总览](../README.md)
+- ⚠️ 损坏链接: [所有权可判定性总览](../../../README.md)
 
 ### docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md
 
@@ -1936,256 +1936,256 @@
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\COMPLETION_REPORT.md
 
-- ⚠️ 损坏链接: [README.md](README.md)
+- ⚠️ 损坏链接: [README.md](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\authoritative-sources\academic-papers.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\case-studies\embassy-embedded-analysis.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\case-studies\tokio-runtime-analysis.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\concurrency-model-selection.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\pattern-selection.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\design-patterns-comprehensive.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [comprehensive-analysis 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [comprehensive-analysis 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\extensions\advanced-ownership-patterns.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\extensions\performance-optimization.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\formal-framework\definitions.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\matrices\comprehensive-comparison-matrix.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\matrices\safety-analysis-matrix.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\mindmaps\borrowing-system-mindmap.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\mindmaps\ownership-system-mindmap.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\open-source-analysis.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [comprehensive-analysis 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [comprehensive-analysis 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\proofs\memory-safety-proof.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\application-domain-tree.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\real-time-systems-tree.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\exercises\09-01-practice-problems.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\exercises\ADVANCED_OWNERSHIP_WORKSHOP.md
 
-- ⚠️ 损坏链接: [exercises 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [exercises 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\exercises\ownership-basics.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [exercises 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [exercises 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\formal-foundations\README.md
 
-- ⚠️ 损坏链接: [所有权可判定性总览](../README.md)
+- ⚠️ 损坏链接: [所有权可判定性总览](../../../README.md)
 - ⚠️ 最后更新: 2026-03-07（94 天前，建议复审）
 
 ### docs\rust-ownership-decidability\meta-model\01_abstract_syntax.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [meta-model 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [meta-model 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 - ⚠️ 最后更新: 2026-03-05（96 天前，建议复审）
 
 ### docs\rust-ownership-decidability\meta-model\02_semantic_domains.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [meta-model 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [meta-model 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 - ⚠️ 最后更新: 2026-03-05（96 天前，建议复审）
 
 ### docs\rust-ownership-decidability\meta-model\03_judgments.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [meta-model 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [meta-model 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 - ⚠️ 最后更新: 2026-03-05（96 天前，建议复审）
 
 ### docs\rust-ownership-decidability\meta-model\RUST_194_COMPREHENSIVE_GUIDE.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\meta-model\rust-194-alignment.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [meta-model 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [meta-model 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\practical-examples\comprehensive-code-collection.md
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [Parent README](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\2026-03-05_initial_setup.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\2026-03-06_FORMAL_ANALYSIS_PROGRESS.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\2026-03-06_week1_progress.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\2026-03-07_CONTENT_CREATION_BATCH_1.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\2026-03-07_CONTENT_CREATION_BATCH_2.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\2026-03-07_CONTENT_CREATION_BATCH_3.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\2026-03-07_FINAL_COMPLETION_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\2026-03-07_daily_update.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\2026-03-08_weekend_sprint.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\2026-03-09_50_PERCENT_MILESTONE.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\2026-03-09_phase1_completion.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\2026-03-10_MILESTONE_75_PERCENT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\2026-03-11_MILESTONE_90_PERCENT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\COMPREHENSIVE_STATUS_REPORT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\FINAL_100_PERCENT_COMPLETION_REPORT.md
 
-- ⚠️ 损坏链接: [README](../README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\FINAL_COMPLETION_REPORT_40_PERCENT.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\progress\PROGRESS_TRACKING.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [progress 目录](README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [progress 目录](../../../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\ref.md
 
-- ⚠️ 损坏链接: [README](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
 
 ### docs\rust-ownership-decidability\theorems\README.md
 
@@ -2193,44 +2193,44 @@
 
 ### docs\rust-ownership-decidability\theorems\decidability_theorems.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 - ⚠️ 最后更新: 2026-03-05（96 天前，建议复审）
 
 ### docs\rust-ownership-decidability\visualizations\KNOWLEDGE_GRAPH_MINDMAP.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\visualizations\README.md
 
-- ⚠️ 损坏链接: [决策树目录](decision-trees/README.md)
-- ⚠️ 损坏链接: [所有权可判定性总览](../README.md)
-- ⚠️ 损坏链接: [矩阵目录](matrices/README.md)
+- ⚠️ 损坏链接: [决策树目录](../../../README.md)
+- ⚠️ 损坏链接: [所有权可判定性总览](../../../README.md)
+- ⚠️ 损坏链接: [矩阵目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\visualizations\decision-tree.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\visualizations\decision-trees\type-selection-decision-tree.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [decision-trees 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [decision-trees 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\visualizations\matrices\rust-safety-mechanisms-matrix.md
 
-- ⚠️ 损坏链接: [README](README.md)
-- ⚠️ 损坏链接: [matrices 目录](README.md)
+- ⚠️ 损坏链接: [README](../../../README.md)
+- ⚠️ 损坏链接: [matrices 目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\visualizations\ownership-comprehensive-mindmap.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\visualizations\ownership-mindmap.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ### docs\rust-ownership-decidability\visualizations\scenario-tree.md
 
-- ⚠️ 损坏链接: [上级目录](../README.md)
+- ⚠️ 损坏链接: [上级目录](../../../README.md)
 
 ## 后续建议
 

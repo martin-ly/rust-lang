@@ -19,7 +19,7 @@
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: P×Eva — 评估工具链选型和验证策略
-> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Macros](../03_advanced/04_macros.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Macros](../03_advanced/03_proc_macros/04_macros.md)
 > **后置概念**: [CI/CD Integration]
 > **主要来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/) · [Rustup Documentation] · [Clippy Documentation] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -1409,10 +1409,10 @@ graph TD
 | `rustc` 借用检查器 | L1 所有权（Ownership）/借用（Borrowing）/生命周期（Lifetimes） | L4 线性逻辑 + 区域类型 | `01_foundation/`, `04_formal/` |
 | `rustc` 类型检查 | L1 类型系统（Type System） + L2 泛型（Generics） | L4 HM 推断 + System F | `04_formal/02_type_theory.md` |
 | Clippy lint | L1-L3 最佳实践 | —（工程约定） | `01_foundation/` - `03_advanced/` |
-| Miri | L3 Unsafe 检测 | L4 别名模型 (Stacked/Tree) | `03_advanced/03_unsafe.md` |
+| Miri | L3 Unsafe 检测 | L4 别名模型 (Stacked/Tree) | `03_advanced/02_unsafe/03_unsafe.md` |
 | Cargo SemVer | L2 Trait 兼容性 | —（社会技术系统） | `02_intermediate/00_traits/01_traits.md` |
 | `rustfmt` | L1 代码可读性 | —（风格约定） | — |
-| Cross-compilation | L3 嵌入式/FFI | —（目标平台ABI） | `03_advanced/03_unsafe.md` |
+| Cross-compilation | L3 嵌入式/FFI | —（目标平台ABI） | `03_advanced/02_unsafe/03_unsafe.md` |
 
 ---
 
@@ -1442,8 +1442,8 @@ graph TD
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | 所有权（Ownership） | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 编译器检查根基 |
-| Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | Miri 检测对象 |
-| 形式化验证 | [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md) | 理论基础 |
+| Unsafe | [`../03_advanced/02_unsafe/03_unsafe.md`](../03_advanced/02_unsafe/03_unsafe.md) | Miri 检测对象 |
+| 形式化验证 | [`../04_formal/04_rustbelt.md`](../04_formal/02_separation_logic/04_rustbelt.md) | 理论基础 |
 | 设计模式 | [`./02_patterns.md`](02_patterns.md) | 工程实践 |
 | AI × Rust | [`../07_future/01_ai_integration.md`](../07_future/01_ai_integration.md) | 工具链扩展 |
 | 形式化工业化 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 验证工具集成 |
@@ -1624,7 +1624,7 @@ export SCCACHE_REGION=us-east-1        # AWS 区域
 ---
 
 > **补充来源**
-> **相关文件**: [能力图谱](../00_meta/competency_graph.md#六工程实践) · [质量仪表板](../00_meta/quality_dashboard_v2.md) · [版本跟踪](../07_future/05_rust_version_tracking.md)
+> **相关文件**: [能力图谱](../00_meta/00_framework/competency_graph.md#六工程实践) · [质量仪表板](../00_meta/03_audit/quality_dashboard_v2.md) · [版本跟踪](../07_future/05_rust_version_tracking.md)
 
 ## 十、边界测试：工具链的编译错误
 

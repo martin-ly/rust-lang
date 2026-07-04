@@ -412,7 +412,7 @@ drop(num); // 显式释放锁
 println!("{}", *m.lock().unwrap());
 ```
 
-**知识点**：Rust 的 `MutexGuard`（`m.lock()` 的返回值）在离开作用域时自动释放锁。利用这个 RAII 特性管理锁生命周期（Lifetimes）是避免死锁的关键。[→ 并发模式详解](../../03_advanced/10_concurrency_patterns.md)
+**知识点**：Rust 的 `MutexGuard`（`m.lock()` 的返回值）在离开作用域时自动释放锁。利用这个 RAII 特性管理锁生命周期（Lifetimes）是避免死锁的关键。[→ 并发模式详解](../../03_advanced/00_concurrency/10_concurrency_patterns.md)
 
 </details>
 

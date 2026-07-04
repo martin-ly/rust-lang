@@ -207,7 +207,7 @@ async fn page() -> impl IntoResponse {
 - [42_maud_architecture.md](42_maud_architecture.md) — Maud 模板宏架构
 - [07_axum_architecture.md](07_axum_architecture.md) — Axum Web 框架架构
 - [12_actix_web_architecture.md](12_actix_web_architecture.md) — Actix-web 框架架构
-- [concept L6: Web 框架与中间件](../../../../concept/06_ecosystem/)
+- [concept L6: Web 框架与中间件](../../../../06_ecosystem)
 
 ---
 

@@ -23,7 +23,7 @@
 ## 快速开始
 
 - [📄 README](README.md) - 文档中心与快速示例
-- [📄 ONE_PAGE_SUMMARY](ONE_PAGE_SUMMARY.md) - 一页纸总结
+- [📄 ONE_PAGE_SUMMARY](one_page_summary.md) - 一页纸总结
 
 ---
 
@@ -31,10 +31,10 @@
 
 | 文档 | 说明 |
 |------|------|
-| [WASM_CONCEPT_MATRIX.md](WASM_CONCEPT_MATRIX.md) | 概念矩阵 |
-| [WASM_DECISION_TREE.md](WASM_DECISION_TREE.md) | 决策树 |
-| [WASM_MIND_MAPS.md](WASM_MIND_MAPS.md) | 思维导图 |
-| [WASM_PROOF_TREE.md](WASM_PROOF_TREE.md) | 证明树 |
+| [WASM_CONCEPT_MATRIX.md](wasm_concept_matrix.md) | 概念矩阵 |
+| [WASM_DECISION_TREE.md](wasm_decision_tree.md) | 决策树 |
+| [WASM_MIND_MAPS.md](wasm_mind_maps.md) | 思维导图 |
+| [WASM_PROOF_TREE.md](wasm_proof_tree.md) | 证明树 |
 
 ---
 
@@ -42,12 +42,12 @@
 
 ### Rust 1.94 WASM 特性
 
-- [RUST_193_WASM_IMPROVEMENTS.md](RUST_193_WASM_IMPROVEMENTS.md)
+- [RUST_193_WASM_IMPROVEMENTS.md](rust_193_wasm_improvements.md)
 
 ### 历史版本
 
-- [RUST_192_WASM_IMPROVEMENTS.md](RUST_192_WASM_IMPROVEMENTS.md)
-- [RUST_191_WASM_IMPROVEMENTS.md](RUST_191_WASM_IMPROVEMENTS.md)
+- [RUST_192_WASM_IMPROVEMENTS.md](rust_192_wasm_improvements.md)
+- [RUST_191_WASM_IMPROVEMENTS.md](rust_191_wasm_improvements.md)
 
 ---
 

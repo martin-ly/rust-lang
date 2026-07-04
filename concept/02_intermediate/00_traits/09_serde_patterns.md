@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 序列化 (Serialization) · 反序列化 (Deserialization) · serde · Serialize · Deserialize · 自定义反序列化 — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 序列化 (Serialization) · 反序列化 (Deserialization) · serde · Serialize · Deserialize · 自定义反序列化 — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # Serde 序列化模式：Rust 的类型驱动数据转换
 >
@@ -10,7 +10,7 @@
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Serde 序列化设计模式
 > **定位**: 深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏（Macro）、自定义序列化逻辑、以及类型系统（Type System）如何保障数据转换的安全性。
-> **前置概念**: [Traits](01_traits.md) · [Macros](../../03_advanced/04_macros.md) · [Generics](../01_generics/02_generics.md)
+> **前置概念**: [Traits](01_traits.md) · [Macros](../../03_advanced/03_proc_macros/04_macros.md) · [Generics](../01_generics/02_generics.md)
 > **后置概念**: [Core Crates](../../06_ecosystem/03_core_crates.md) · [Application Domains](../../06_ecosystem/04_application_domains.md)
 
 ---
@@ -511,7 +511,7 @@ graph TD
 ## 相关概念文件
 
 - [Traits](01_traits.md) — Trait 系统与 derive
-- [Macros](../../03_advanced/04_macros.md) — 过程宏（Procedural Macro）机制
+- [Macros](../../03_advanced/03_proc_macros/04_macros.md) — 过程宏（Procedural Macro）机制
 - [Generics](../01_generics/02_generics.md) — 泛型（Generics）与参数多态
 - [Core Crates](../../06_ecosystem/03_core_crates.md) — 核心 crate 生态
 - [Application Domains](../../06_ecosystem/04_application_domains.md) — 应用领域分析
@@ -873,7 +873,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

@@ -4,10 +4,10 @@
 > **Summary**: Unsafe Rust Unsafe Rust.
 > **📎 交叉引用**
 >
-> 本主题在 concept 中有深度的概念分析：[Unsafe Rust](../../../concept/03_advanced/03_unsafe.md)
+> 本主题在 concept 中有深度的概念分析：[Unsafe Rust](../../../concept/03_advanced/02_unsafe/03_unsafe.md)
 > **层次定位**: L3 高级概念 / Unsafe 子域索引
 > **前置依赖**: [knowledge 所有权](../../01_fundamentals/04_ownership.md) · [knowledge 借用](../../01_fundamentals/01_borrowing.md)
-> **后置延伸**: [knowledge 专家层](../../04_expert) · [concept L3 Unsafe](../../../concept/03_advanced/03_unsafe.md)
+> **后置延伸**: [knowledge 专家层](../../04_expert) · [concept L3 Unsafe](../../../concept/03_advanced/02_unsafe/03_unsafe.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L3 底层控制
 > **定理链编号**: T-060 unsafe 块 ↔ safe 抽象层可靠性
 >

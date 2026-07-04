@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 内部可变性 (Interior Mutability) · RefCell · Cell · Mutex · RwLock · 运行时（Runtime）借用（Borrowing）检查 — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 内部可变性 (Interior Mutability) · RefCell · Cell · Mutex · RwLock · 运行时（Runtime）借用（Borrowing）检查 — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 内部可变性：编译期规则的运行时逃逸
 >
@@ -15,8 +15,8 @@
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
 > [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
 > [Type System](../../01_foundation/02_type_system/04_type_system.md)
-> **后置概念**: [Concurrency](../../03_advanced/01_concurrency.md) ·
-> [Async](../../03_advanced/02_async.md)
+> **后置概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
+> [Async](../../03_advanced/01_async/02_async.md)
 
 ---
 
@@ -551,8 +551,8 @@ fn correct_upgrade() {
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）模型
 - [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用与生命周期（Lifetimes）
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — Rust 类型系统（Type System）
-- [Concurrency](../../03_advanced/01_concurrency.md) — 并发编程
-- [Async](../../03_advanced/02_async.md) — 异步（Async）编程
+- [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) — 并发编程
+- [Async](../../03_advanced/01_async/02_async.md) — 异步（Async）编程
 
 ---
 
@@ -652,7 +652,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

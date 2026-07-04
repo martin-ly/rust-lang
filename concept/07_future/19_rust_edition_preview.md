@@ -10,7 +10,7 @@
 > **层级**: L3 高级概念
 > **A/S/P 标记**: A+S — Application + Structure
 > **双维定位**: C×App — 应用 Edition 机制
-> **前置概念**: [Rust Version Tracking](05_rust_version_tracking.md) · [Async](../03_advanced/02_async.md) · [Generics](../02_intermediate/01_generics/02_generics.md)
+> **前置概念**: [Rust Version Tracking](05_rust_version_tracking.md) · [Async](../03_advanced/01_async/02_async.md) · [Generics](../02_intermediate/01_generics/02_generics.md)
 > **后置概念**: [Edition Guide](44_edition_guide.md) · [Rust Edition Mechanism](23_rust_edition_guide.md) · [Evolution](03_evolution.md)
 > **主要来源**: [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) · [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs/3501-edition-2024.html) · [TRPL — Appendix: Rust Editions](https://doc.rust-lang.org/book/appendix-05-editions.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 

@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 迭代器模式 (Iterator Pattern) · 适配器 (Adapter) · 消费者 (Consumer) · 惰性求值 (Lazy Evaluation) · 自定义迭代器 — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 迭代器模式 (Iterator Pattern) · 适配器 (Adapter) · 消费者 (Consumer) · 惰性求值 (Lazy Evaluation) · 自定义迭代器 — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # Rust 迭代器模式
 >
@@ -14,7 +14,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入探讨 Rust 迭代器（Iterator）模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Generics](../01_generics/02_generics.md) · [Closures](../../01_foundation/00_start/15_closure_basics.md)
-> **后置概念**: [Concurrency](../../03_advanced/01_concurrency.md) · [Performance](../../06_ecosystem/15_performance_optimization.md)
+> **后置概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Performance](../../06_ecosystem/15_performance_optimization.md)
 
 ---
 
@@ -820,8 +820,8 @@ fn main() {
 - [Closures](../../01_foundation/00_start/15_closure_basics.md) — 闭包（Closures）
 - [Trait](../00_traits/01_traits.md) — Trait 系统
 - [Zero Cost](../../01_foundation/00_start/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
-- [Async](../../03_advanced/02_async.md) — 异步（Async）编程
-- [Concurrency](../../03_advanced/01_concurrency.md) — 并发
+- [Async](../../03_advanced/01_async/02_async.md) — 异步（Async）编程
+- [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) — 并发
 - [Performance](../../06_ecosystem/15_performance_optimization.md) — 性能优化
 
 ---
@@ -1241,7 +1241,7 @@ fn main() {}
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

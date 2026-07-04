@@ -389,7 +389,7 @@ Send/Sync 安全 (SEND-T1, SYNC-T1)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [formal_methods 目录](README.md)
-- [上级目录](../README.md)
+- [上级目录](../../../README.md)
 
 ---
 

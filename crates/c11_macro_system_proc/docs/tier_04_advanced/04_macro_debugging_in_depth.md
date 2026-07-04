@@ -995,7 +995,7 @@ macro_rules! generate_impl {
 
 - → 阅读 [05\_生产级宏开发.md](05_production_grade_macro_development.md) 学习发布策略
 - → 参考 [C11 主索引](../../02_navigation.md) 探索其他主题
-- → 实践 [Tier 2 宏开发指南](../../tier_02_guides/README.md) 巩固知识
+- → 实践 [Tier 2 宏开发指南](../../../../README.md) 巩固知识
 
 ---
 

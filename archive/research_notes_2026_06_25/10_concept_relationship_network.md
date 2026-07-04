@@ -799,7 +799,7 @@ C6 共享借用 ⊥ C7 可变借用
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

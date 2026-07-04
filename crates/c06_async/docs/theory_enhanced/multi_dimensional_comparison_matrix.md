@@ -144,7 +144,7 @@
 
 ### 相关文档
 
-- [知识图谱](KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)
+- [知识图谱](knowledge_graph_and_concept_relations.md)
 - [Runtime对比](../runtimes/01_comparison_2025.md)
 - [性能优化](../performance/01_optimization_guide.md)
 

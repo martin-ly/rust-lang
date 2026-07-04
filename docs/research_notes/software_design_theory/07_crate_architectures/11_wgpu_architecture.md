@@ -858,7 +858,7 @@ compute_pass.dispatch_workgroups(256, 1, 1);
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Bevy 游戏引擎架构](05_bevy_architecture.md)
-- [Unsafe Rust 与 FFI](../../../../concept/03_advanced/03_unsafe.md)
+- [Unsafe Rust 与 FFI](../../../../concept/03_advanced/02_unsafe/03_unsafe.md)
 
 ---
 

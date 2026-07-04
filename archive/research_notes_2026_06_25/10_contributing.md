@@ -138,7 +138,7 @@
 
 在贡献前，请先查看：
 
-- [主索引](README.md) - 了解现有研究主题
+- [主索引](../../README.md) - 了解现有研究主题
 - [快速参考](10_quick_reference.md) - 查找相关主题
 - [研究路线图](10_research_roadmap.md) - 了解研究计划
 
@@ -159,7 +159,7 @@
 
 确保您的内容遵循：
 
-- [研究笔记规范](README.md#研究笔记规范)
+- [研究笔记规范](../../README.md#研究笔记规范)
 - [质量标准](#质量标准)
 - [检查清单](#检查清单)
 - **格式门禁**：新文档须符合 [QUALITY_CHECKLIST](10_quality_checklist.md) § research_notes 元信息统一模板（创建日期、最后更新、**Rust 版本**: 1.93.1+ (Edition 2024)、状态）；不符合时请在 PR 中说明例外理由。详见 FORMAT_AND_CONTENT_ALIGNMENT_PLAN、[MAINTENANCE_GUIDE](10_maintenance_guide.md) § 格式统一检查清单。
@@ -227,7 +227,7 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [ ] 查看 [主索引](README.md) 确认主题不重复
+- [ ] 查看 [主索引](../../README.md) 确认主题不重复
 - [ ] 查看 [研究路线图](10_research_roadmap.md) 了解优先级
 - [ ] 使用 [模板](10_template.md) 创建文件
 - [ ] 选择合适的目录（formal_methods/、type_theory/、experiments/）
@@ -288,7 +288,7 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [研究笔记规范](README.md#研究笔记规范)
+- [研究笔记规范](../../README.md#研究笔记规范)
 - [研究笔记模板](10_template.md)
 - [快速参考](10_quick_reference.md)
 - [研究路线图](10_research_roadmap.md)
@@ -467,7 +467,7 @@ A: 在研究笔记的元信息中更新状态：
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

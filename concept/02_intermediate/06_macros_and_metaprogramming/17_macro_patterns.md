@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 宏模式 (Macro Pattern) · 声明宏 (Declarative Macro) · macro_rules! · 卫生宏 (Hygienic Macro) · 重复模式 — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 宏模式 (Macro Pattern) · 声明宏 (Declarative Macro) · macro_rules! · 卫生宏 (Hygienic Macro) · 重复模式 — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 宏模式：编译期代码生成的工程实践
 >
@@ -14,7 +14,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入分析 Rust **宏（Macro）的工程模式**——从 DRY 代码生成、API 设计到编译期计算，揭示如何在不牺牲可读性的前提下利用宏提升代码复用和类型安全。
 > **前置概念**: [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) · [Traits](../00_traits/01_traits.md)
-> **后置概念**: [Proc Macros](../../03_advanced/07_proc_macro.md) · [DSL](13_dsl_and_embedding.md)
+> **后置概念**: [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) · [DSL](13_dsl_and_embedding.md)
 
 ---
 
@@ -546,7 +546,7 @@ graph TD
 ## 相关概念文件
 
 - [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) — 属性与宏基础
-- [Proc Macros](../../03_advanced/07_proc_macro.md) — 过程宏（Procedural Macro）
+- [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) — 过程宏（Procedural Macro）
 - [DSL](13_dsl_and_embedding.md) — DSL 模式
 - [Traits](../00_traits/01_traits.md) — Trait 系统
 
@@ -785,7 +785,7 @@ derive 宏（Macro）（为 struct/enum 派生 trait）、属性宏（修饰 ite
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

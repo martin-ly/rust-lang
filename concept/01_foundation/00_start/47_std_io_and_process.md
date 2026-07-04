@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: C×App
 > **前置概念**: [Error Handling Basics](../08_error_handling/32_error_handling_basics.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Strings and Text](../06_strings_and_text/09_strings_and_text.md)
-> **后置概念**: [Async I/O](../../03_advanced/02_async.md) · [Command Line Apps](../../06_ecosystem/04_application_domains.md) · [Testing Basics](../10_testing_basics/16_testing_basics.md)
+> **后置概念**: [Async I/O](../../03_advanced/01_async/02_async.md) · [Command Line Apps](../../06_ecosystem/04_application_domains.md) · [Testing Basics](../10_testing_basics/16_testing_basics.md)
 >
 > **主要来源**: [std::io](https://doc.rust-lang.org/std/io/index.html) ·
 > [std::fs](https://doc.rust-lang.org/std/fs/index.html) ·
@@ -372,7 +372,7 @@ graph TD
 
 ## 九、来源与延伸阅读
 
-- [Rust 核心术语英中对照表](../../00_meta/terminology_glossary.md)
+- [Rust 核心术语英中对照表](../../00_meta/01_terminology/terminology_glossary.md)
 - [std::io](https://doc.rust-lang.org/std/io/index.html)
 - [std::fs](https://doc.rust-lang.org/std/fs/index.html)
 - [std::path](https://doc.rust-lang.org/std/path/index.html)

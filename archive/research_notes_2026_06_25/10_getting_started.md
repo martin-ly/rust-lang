@@ -96,7 +96,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-首先，阅读 [主索引](README.md) 了解系统结构：
+首先，阅读 [主索引](../../README.md) 了解系统结构：
 
 - 研究目标
 - 研究方向
@@ -141,7 +141,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-查看 [完整索引](INDEX.md) 浏览所有研究笔记：
+查看 [完整索引](../../concept/sources/INDEX.md) 浏览所有研究笔记：
 
 - 核心文档索引
 - 研究笔记索引
@@ -169,7 +169,7 @@
 查看各目录的 README：
 
 - [形式化方法索引](formal_methods/README.md)
-- [类型理论索引](type_theory/README.md)
+- [类型理论索引](../../README.md)
 - [实验研究索引](experiments/README.md)
 
 ---
@@ -241,7 +241,7 @@
 
 确保您的内容遵循：
 
-- [研究笔记规范](README.md#研究笔记规范)
+- [研究笔记规范](../../README.md#研究笔记规范)
 - [质量检查清单](10_quality_checklist.md)
 - [贡献指南](10_contributing.md)
 
@@ -252,8 +252,8 @@
 创建新笔记后，更新：
 
 - 相应目录的 README.md
-- [主索引](README.md)
-- [完整索引](INDEX.md)
+- [主索引](../../README.md)
+- [完整索引](../../concept/sources/INDEX.md)
 
 ---
 
@@ -309,7 +309,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-1. **了解系统** → 阅读 [主索引](README.md) 和 [系统总结](10_system_summary.md)
+1. **了解系统** → 阅读 [主索引](../../README.md) 和 [系统总结](10_system_summary.md)
 2. **第一个可运行示例** → [10_example.md](10_example.md) 含所有权、借用、生命周期的完整代码（可直接复制运行）
 3. **选择主题** → 从 [快速参考](10_quick_reference.md) 选择感兴趣的主题
 4. **阅读笔记** → 阅读相关研究笔记（所有权 → [ownership_model](formal_methods/10_ownership_model.md)）
@@ -320,7 +320,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-1. **深入研究** → 阅读 [形式化方法研究](formal_methods/README.md) 和 [类型理论研究](type_theory/README.md)
+1. **深入研究** → 阅读 [形式化方法研究](formal_methods/README.md) 和 [类型理论研究](../../README.md)
 2. **实验研究** → 查看 [实验研究索引](experiments/README.md)
 3. **工具使用** → 学习 [工具使用指南](10_tools_guide.md)
 4. **贡献研究** → 参考 [贡献指南](10_contributing.md) 开始贡献
@@ -373,7 +373,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [主索引](README.md) - 完整的研究笔记索引
+- [主索引](../../README.md) - 完整的研究笔记索引
 - [快速参考](10_quick_reference.md) - 快速查找指南
 - [研究路线图](10_research_roadmap.md) - 研究计划
 - [贡献指南](10_contributing.md) - 贡献流程
@@ -456,7 +456,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

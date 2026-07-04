@@ -342,7 +342,7 @@ graph TD
 
 ## 九、来源与延伸阅读
 
-- [Rust 核心术语英中对照表](../../00_meta/terminology_glossary.md)
+- [Rust 核心术语英中对照表](../../00_meta/01_terminology/terminology_glossary.md)
 - [std::fmt](https://doc.rust-lang.org/std/fmt/index.html)
 - [std::fmt::Display](https://doc.rust-lang.org/std/fmt/trait.Display.html)
 - [std::fmt::Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)

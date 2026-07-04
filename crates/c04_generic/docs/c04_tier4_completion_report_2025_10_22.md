@@ -347,7 +347,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $mat
 
 - [C04 项目概览](../tier_01_foundations/01_project_overview.md)
 - [C04 主索引导航](../tier_01_foundations/02_navigation.md)
-- [Tier 4 索引](../tier_04_advanced/README.md)
+- [Tier 4 索引](../../../README.md)
 
 **外部资源**:
 

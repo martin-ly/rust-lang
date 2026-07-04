@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 >
-> **本节关键术语**: panic · 展开 (Unwind) · 中止 (Abort) · 栈回溯 (Stack Trace) · 不可恢复错误 (Unrecoverable Error) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: panic · 展开 (Unwind) · 中止 (Abort) · 栈回溯 (Stack Trace) · 不可恢复错误 (Unrecoverable Error) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # Panic 与 Abort：不可恢复错误的处理机制
 >
@@ -12,7 +12,7 @@
 > **双维定位**: C×Eva — 评价 panic 与 abort 的策略选择
 > **定位**: 系统讲解 Rust **panic** 机制——从 panic 与 Result 的哲学分野、panic 传播、到自定义 panic 处理和 abort 模式，揭示 Rust 如何在"优雅失败"与"快速崩溃"之间做出设计选择。
 > **前置概念**: [Error Handling](../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)
-> **后置概念**: [Unsafe](../../03_advanced/03_unsafe.md) · [FFI](../../03_advanced/05_rust_ffi.md)
+> **后置概念**: [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) · [FFI](../../03_advanced/04_ffi/05_rust_ffi.md)
 
 ---
 
@@ -494,8 +494,8 @@ graph TD
 ## 相关概念文件
 
 - [Error Handling](../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md) — 错误处理（Error Handling）
-- [Unsafe](../../03_advanced/03_unsafe.md) — 不安全代码
-- [FFI](../../03_advanced/05_rust_ffi.md) — 外部函数接口
+- [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) — 不安全代码
+- [FFI](../../03_advanced/04_ffi/05_rust_ffi.md) — 外部函数接口
 
 ---
 
@@ -910,7 +910,7 @@ catch_unwind(AssertUnwindSafe(|| {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

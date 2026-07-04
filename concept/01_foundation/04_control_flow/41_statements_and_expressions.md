@@ -9,7 +9,7 @@
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
 > **前置依赖**: [Control Flow](07_control_flow.md) · [Variables and Bindings](../03_values_and_references/20_variable_model.md) · [Patterns](40_patterns.md)
-> **后置概念**: [Closures](../00_start/15_closure_basics.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Async/Await](../../03_advanced/02_async.md)
+> **后置概念**: [Closures](../00_start/15_closure_basics.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Async/Await](../../03_advanced/01_async/02_async.md)
 > **定理链**: Expression → Evaluation Order → Statement Sequencing
 > **主要来源**: [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [MIT 6.824 — Distributed Systems](https://pdos.csail.mit.edu/6.824/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL — Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
@@ -161,5 +161,5 @@ let result = match option {
 | [Control Flow](07_control_flow.md) | `if`、`match`、`loop` 是核心控制流表达式 |
 | [Closures](../00_start/15_closure_basics.md) | 闭包是表达式的一种 |
 | [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) | `?` 运算符是基于表达式的错误传播 |
-| [Async/Await](../../03_advanced/02_async.md) | `.await` 是表达式求值的挂起点 |
-| [Terminology Glossary](../../00_meta/terminology_glossary.md) | 术语表（元层参考） |
+| [Async/Await](../../03_advanced/01_async/02_async.md) | `.await` 是表达式求值的挂起点 |
+| [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md) | 术语表（元层参考） |

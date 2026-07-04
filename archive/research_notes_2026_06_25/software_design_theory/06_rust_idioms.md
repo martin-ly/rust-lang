@@ -602,6 +602,6 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [software_design_theory 目录](README.md)
-- [上级目录](../README.md)
+- [上级目录](../../../README.md)
 
 ---

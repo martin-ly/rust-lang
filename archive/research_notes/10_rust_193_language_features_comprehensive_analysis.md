@@ -417,7 +417,7 @@
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) | 构造性语义、表达能力边界 |
 | [toolchain/07_rust_1.93_full_changelog](../06_toolchain/06_07_rust_1_93_full_changelog.md) | Rust 1.93 完整变更清单 |
 | [toolchain/09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | Rust 1.93 兼容性深度解析 |
-| [toolchain/10_rust_1.89_to_1.93_cumulative_features_overview](../../archive/docs/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md) | 1.89→1.93 累积特性总览 |
+| [toolchain/10_rust_1.89_to_1.93_cumulative_features_overview](../docs/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md) | 1.89→1.93 累积特性总览 |
 
 ---
 
@@ -484,7 +484,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

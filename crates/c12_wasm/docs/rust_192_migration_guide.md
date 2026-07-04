@@ -326,8 +326,8 @@ let mut buffer: WasmCircularBuffer<i32> = WasmCircularBuffer::new(10);
 
 ## 📚 相关文档
 
-- [Rust 1.92.0 WASM 改进文档](RUST_192_WASM_IMPROVEMENTS.md) - 详细特性说明
-- [Rust 1.92.0 WASM 快速参考](RUST_192_QUICK_REFERENCE.md) - 快速查找
+- [Rust 1.92.0 WASM 改进文档](rust_192_wasm_improvements.md) - 详细特性说明
+- [Rust 1.92.0 WASM 快速参考](rust_192_quick_reference.md) - 快速查找
 - [Rust 1.92.0 特性参考](tier_03_references/04_rust_192_features_reference.md) - API 参考
 - [示例代码](../examples/rust_192_features_demo.rs) - 完整示例
 - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/) - 官方发布说明

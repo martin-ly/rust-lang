@@ -52,7 +52,7 @@
 
 | 角色 | 文档 | 用途 |
 | :--- | :--- | :--- |
-| **导航** | [README](README.md)、[00_ORGANIZATION_AND_NAVIGATION](10_00_organization_and_navigation.md)、[INDEX](INDEX.md)、[QUICK_REFERENCE](10_quick_reference.md)、[QUICK_FIND](10_quick_find.md) | 入口、按目标导航、索引、快速查找 |
+| **导航** | [README](../../README.md)、[00_ORGANIZATION_AND_NAVIGATION](10_00_organization_and_navigation.md)、[INDEX](../../concept/sources/INDEX.md)、[QUICK_REFERENCE](10_quick_reference.md)、[QUICK_FIND](10_quick_find.md) | 入口、按目标导航、索引、快速查找 |
 | **总结与论证脉络** | [00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md)、[ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) | 完整总结综合、知识地图、论证思路与脉络关系 |
 | **证明索引** | [PROOF_INDEX](10_proof_index.md)、[ARGUMENTATION_GAP_INDEX](10_argumentation_gap_index.md) | 公理-定理映射、缺口追踪 |
 | **框架** | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md)、[UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md)、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) | 全局一致性、概念族谱、理论/论证架构 |
@@ -156,7 +156,7 @@
 | **首次使用、按目标选路径** | [00_ORGANIZATION_AND_NAVIGATION](10_00_organization_and_navigation.md) |
 | 快速定位文档 | [QUICK_REFERENCE](10_quick_reference.md)、[QUICK_FIND](10_quick_find.md) |
 | 理解文档角色 | 本表 § 一 |
-| 按主题查 | [INDEX § 按主题分类](INDEX.md) |
+| 按主题查 | [INDEX § 按主题分类](../../concept/sources/INDEX.md) |
 | 查证明与缺口 | [PROOF_INDEX](10_proof_index.md)、[ARGUMENTATION_GAP_INDEX](10_argumentation_gap_index.md) |
 | 查设计理由 | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) |
 | 查 Rust 1.93 特性 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) |
@@ -168,8 +168,8 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [INDEX](INDEX.md) — 完整索引
-- [README](README.md) — 主入口
+- [INDEX](../../concept/sources/INDEX.md) — 完整索引
+- [README](../../README.md) — 主入口
 - [ARGUMENTATION_GAP_INDEX](10_argumentation_gap_index.md) — 论证缺口
 
 ---
@@ -231,7 +231,7 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

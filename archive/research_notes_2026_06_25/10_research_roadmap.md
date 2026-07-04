@@ -412,7 +412,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [主索引](README.md) - 完整的研究笔记索引
+- [主索引](../../README.md) - 完整的研究笔记索引
 - [快速参考](10_quick_reference.md) - 快速查找指南
 - [研究方法论](10_research_methodology.md) - 研究方法指导
 
@@ -481,7 +481,7 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

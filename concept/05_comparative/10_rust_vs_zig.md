@@ -15,7 +15,7 @@
 ---
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Zig Documentation](https://ziglang.org/documentation/master/) · [Ziglang.org](https://ziglang.org/) · [Andrew Kelley — Zig Design](https://ziglang.org/learn/overview/) · [Wikipedia — Zig (programming language)](https://en.wikipedia.org/wiki/Zig_(programming_language)) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 
 ## 📑 目录
 
@@ -547,7 +547,7 @@ fn main() {
 - [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权系统
 - [Type System](../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Cross Compilation](../06_ecosystem/17_cross_compilation.md) — 交叉编译
-- [FFI](../03_advanced/05_rust_ffi.md) — 外部函数接口
+- [FFI](../03_advanced/04_ffi/05_rust_ffi.md) — 外部函数接口
 
 ---
 

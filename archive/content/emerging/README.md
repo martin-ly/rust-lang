@@ -96,7 +96,7 @@ where
 
 > **状态**: ✅ **Stable since Rust 1.85.0**
 >
-> **正式文档已迁移**: [concept/03_advanced/24_async_closures.md](../../concept/03_advanced/24_async_closures.md)
+> **正式文档已迁移**: [concept/03_advanced/24_async_closures.md](../../../concept/03_advanced/01_async/24_async_closures.md)
 
 **描述**: 原生支持异步闭包，无需 `async move` 包裹。
 

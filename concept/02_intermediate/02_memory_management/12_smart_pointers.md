@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 智能指针 (Smart Pointer) · Box · Rc · Arc · RefCell · 自定义智能指针 — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 智能指针 (Smart Pointer) · Box · Rc · Arc · RefCell · 自定义智能指针 — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 智能指针：堆内存管理与共享语义
 >
@@ -14,7 +14,7 @@
 > **双维定位**: C×Eva — 评价不同智能指针（Smart Pointer）的适用场景
 > **定位**: 系统分析 Rust **智能指针（Smart Pointer）**的设计——Box（独占堆分配）、Rc/Arc（引用（Reference）计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权（Ownership）语义和适用场景。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](03_memory_management.md)
-> **后置概念**: [Pin](../../03_advanced/06_pin_unpin.md) · [Cow](11_cow_and_borrowed.md)
+> **后置概念**: [Pin](../../03_advanced/01_async/06_pin_unpin.md) · [Cow](11_cow_and_borrowed.md)
 
 ---
 
@@ -590,7 +590,7 @@ fn fixed() {
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权模型
 - [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用规则
 - [Memory Management](03_memory_management.md) — 内存管理
-- [Pin](../../03_advanced/06_pin_unpin.md) — Pin 不动性
+- [Pin](../../03_advanced/01_async/06_pin_unpin.md) — Pin 不动性
 - [Cow](11_cow_and_borrowed.md) — 写时克隆
 
 ---
@@ -680,7 +680,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

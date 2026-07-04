@@ -114,10 +114,10 @@
 5. **[快速入门指南](async_programming_comprehensive_review_readme_2025_10_06.md)** (2,000+ 字)
    - 快速开始步骤
    - 推荐阅读顺序
-6. **[项目索引](INDEX.md)** (4,000+ 字) ⭐ 新增
+6. **[项目索引](../../../concept/sources/INDEX.md)** (4,000+ 字) ⭐ 新增
    - 完整导航系统
    - 按主题/难度/场景索引
-7. **[主 README](README.md)** (5,000+ 字)
+7. **[主 README](../../../README.md)** (5,000+ 字)
    - 项目概述
    - 完整特性列表
 

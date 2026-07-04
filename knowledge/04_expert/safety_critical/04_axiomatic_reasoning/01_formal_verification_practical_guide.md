@@ -3,7 +3,7 @@
 > **EN**: Formal Verification Practical Guide
 > **Summary**: 形式化验证实战指南 Formal Verification Practical Guide. (stub/archive redirect)
 >
-> **相关概念**: [形式化方法](../../../../concept/04_formal/01_linear_logic.md)
+> **相关概念**: [形式化方法](../../../../concept/04_formal/01_ownership_logic/01_linear_logic.md)
 > **Bloom 层级**: 理解
 >
 > **受众**: [专家] / [研究者]

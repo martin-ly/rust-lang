@@ -23,7 +23,7 @@
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计云原生架构
 > **定位**: 分析 Rust 在云原生领域的应用——从微服务框架到容器化部署，探讨 Rust 的内存安全（Memory Safety）与性能优势如何重塑云基础设施。
-> **前置概念**: [Async](../03_advanced/02_async.md) · [Network](18_distributed_systems.md) · [Performance](15_performance_optimization.md)
+> **前置概念**: [Async](../03_advanced/01_async/02_async.md) · [Network](18_distributed_systems.md) · [Performance](15_performance_optimization.md)
 > **后置概念**: [WebAssembly](11_webassembly.md) · [Distributed Systems](18_distributed_systems.md)
 
 ---
@@ -34,7 +34,7 @@
 > [Actix](https://actix.rs/) · [Rust Cloud Native](https://rust-cloud-native.github.io/) ·
 > [Wikipedia — Cloud Native](https://en.wikipedia.org/wiki/Cloud-native_computing)
 >
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -49,7 +49,7 @@
     - [2.2 Actix-web](#22-actix-web)
   - [三、基础设施](#三基础设施)
     - [3.1 服务网格](#31-服务网格)
-    - [3.2 容器运行时（Runtime）](#32-容器运行时)
+    - [3.2 容器运行时](#32-容器运行时)
     - [3.3 可观测性](#33-可观测性)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -60,8 +60,8 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：云原生开发的编译错误](#十边界测试云原生开发的编译错误)
-    - [10.1 边界测试：异步（Async）运行时混用（编译错误）](#101-边界测试异步运行时混用编译错误)
-    - [10.2 边界测试：配置结构的反序列化生命周期（Lifetimes）（编译错误）](#102-边界测试配置结构的反序列化生命周期编译错误)
+    - [10.1 边界测试：异步运行时混用（编译错误）](#101-边界测试异步运行时混用编译错误)
+    - [10.2 边界测试：配置结构的反序列化生命周期（编译错误）](#102-边界测试配置结构的反序列化生命周期编译错误)
     - [10.6 边界测试：Kubernetes 的优雅关闭与 `SIGTERM` 处理（运行时数据丢失）](#106-边界测试kubernetes-的优雅关闭与-sigterm-处理运行时数据丢失)
     - [10.5 边界测试：Kubernetes 探针配置不当导致的级联重启（运行时可用性下降）](#105-边界测试kubernetes-探针配置不当导致的级联重启运行时可用性下降)
     - [10.3 边界测试：Kubernetes 的 readiness 与 liveness 探针混淆（运行时可用性下降）](#103-边界测试kubernetes-的-readiness-与-liveness-探针混淆运行时可用性下降)
@@ -505,7 +505,7 @@ fn main() {
 
 ## 相关概念文件
 
-- [Async](../03_advanced/02_async.md) — 异步编程
+- [Async](../03_advanced/01_async/02_async.md) — 异步编程
 - [Network](18_distributed_systems.md) — 网络
 - [Performance](15_performance_optimization.md) — 性能优化
 - [WebAssembly](11_webassembly.md) — WebAssembly

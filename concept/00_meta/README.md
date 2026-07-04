@@ -13,15 +13,15 @@
 
 ## 核心索引文件
 
-- [全局概念索引](concept_index.md) — 按字母顺序索引所有概念
+- [全局概念索引](04_navigation/concept_index.md) — 按字母顺序索引所有概念
 - [知识体系拓扑图谱集](knowledge_topology/README.md) — 概念定义、属性关系、场景决策树、层间/层内映射、权威来源对齐
-- [交叉引用矩阵](05_cross_reference_matrix.md) — 概念间依赖关系
-- [权威来源映射表](authority_source_map.md) — 概念与权威来源对照
-- [语义桥：算法、设计模式与工作流模式的统一谱系](semantic_bridge_algorithms_patterns.md) — 算法 ↔ 模式语义关联
-- [模式语义空间索引](pattern_semantic_space_index.md) — 设计模式在概念体系中的坐标
-- [C/C++ → Rust 工程层对比路线图](cpp_rust_engineering_roadmap.md) — C++ 迁移者的主题簇地图
-- [通用 PL 基座路线图](pl_foundations_roadmap.md) — 通用 PL 机制与 Rust 的对应关系
-- [基础知识缺口补全总索引](foundations_gap_closure_index.md) — Phase A/B/C 补全状态追踪
+- [交叉引用矩阵](04_navigation/05_cross_reference_matrix.md) — 概念间依赖关系
+- [权威来源映射表](02_sources/authority_source_map.md) — 概念与权威来源对照
+- [语义桥：算法、设计模式与工作流模式的统一谱系](00_framework/semantic_bridge_algorithms_patterns.md) — 算法 ↔ 模式语义关联
+- [模式语义空间索引](00_framework/pattern_semantic_space_index.md) — 设计模式在概念体系中的坐标
+- [C/C++ → Rust 工程层对比路线图](00_framework/cpp_rust_engineering_roadmap.md) — C++ 迁移者的主题簇地图
+- [通用 PL 基座路线图](00_framework/pl_foundations_roadmap.md) — 通用 PL 机制与 Rust 的对应关系
+- [基础知识缺口补全总索引](04_navigation/foundations_gap_closure_index.md) — Phase A/B/C 补全状态追踪
 
 ## 嵌入式测验（Embedded Quiz）
 

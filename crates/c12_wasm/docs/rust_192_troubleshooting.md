@@ -283,8 +283,8 @@ if (value !== undefined) {
 
 ## 📚 相关文档
 
-- [Rust 1.92.0 WASM 迁移指南](RUST_192_MIGRATION_GUIDE.md) - 迁移步骤
-- [Rust 1.92.0 WASM 最佳实践](RUST_192_BEST_PRACTICES.md) - 最佳实践
+- [Rust 1.92.0 WASM 迁移指南](rust_192_migration_guide.md) - 迁移步骤
+- [Rust 1.92.0 WASM 最佳实践](rust_192_best_practices.md) - 最佳实践
 - [常见问题](../tier_01_foundations/04_faq.md) - 通用常见问题
 - [性能优化指南](tier_02_guides/04_performance_optimization_guide.md) - 性能优化
 

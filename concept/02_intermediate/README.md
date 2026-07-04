@@ -11,7 +11,7 @@
 > **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_programming)** ·
 > **来源: [Wikipedia - Trait-based Programming](https://en.wikipedia.org/wiki/Trait-based_programming)** ·
 > **[来源: Microsoft Rust Training - Advanced Topics]**
-> **本节关键术语**: 进阶概念 (Intermediate) · 特征 (Trait) · 泛型 (Generics) · 生命周期 (Lifetime) · 智能指针 (Smart Pointer) — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: 进阶概念 (Intermediate) · 特征 (Trait) · 泛型 (Generics) · 生命周期 (Lifetime) · 智能指针 (Smart Pointer) — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **前置概念**: N/A
@@ -31,7 +31,7 @@
   - [三、学习路径建议](#三学习路径建议)
     - [3.1 严格依赖路径](#31-严格依赖路径)
   - [四、形式化层级定位](#四形式化层级定位)
-  - [五、本层定理一致性（Coherence）概览](#五本层定理一致性概览)
+  - [五、本层定理一致性概览](#五本层定理一致性概览)
   - [六、认知路径](#六认知路径)
   - [七、跨层出口](#七跨层出口)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)

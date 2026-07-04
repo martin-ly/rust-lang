@@ -39,15 +39,15 @@
 | **Ch 9: Error Handling** | [10_error_handling_basics.md](../concept/01_foundation/10_error_handling_basics.md) · [04_error_handling.md](../concept/02_intermediate/03_error_handling/04_error_handling.md) · [15_error_handling_deep_dive.md](../concept/02_intermediate/15_error_handling_deep_dive.md) | ✅ | panic、Result、? 完全覆盖；concept/ L2 额外包含 anyhow/thiserror |
 | **Ch 10: Generics, Traits, Lifetimes** | [01_traits.md](../concept/02_intermediate/00_traits/01_traits.md) · [02_generics.md](../concept/02_intermediate/01_generics/02_generics.md) · [03_lifetimes.md](../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [18_lifetimes_advanced.md](../concept/02_intermediate/00_traits/18_lifetimes_advanced.md) | ✅ | 三大核心主题完全覆盖；concept/ 拆分更细 |
 | **Ch 11: Writing Automated Tests** | [16_testing_basics.md](../concept/01_foundation/10_testing_basics/16_testing_basics.md) · [12_testing_strategies.md](../concept/06_ecosystem/12_testing_strategies.md) | ✅ | 单元测试、集成测试完全覆盖；concept/ 额外包含属性测试 |
-| **Ch 12: I/O Project: CLI** | [MVP 学习路径](../concept/00_meta/learning_mvp_path.md) | ⚠️ | TRPL 以完整 CLI 项目贯穿；concept/ MVP 路径更宏观 |
+| **Ch 12: I/O Project: CLI** | [MVP 学习路径](../concept/00_meta/04_navigation/learning_mvp_path.md) | ⚠️ | TRPL 以完整 CLI 项目贯穿；concept/ MVP 路径更宏观 |
 | **Ch 13: Iterators and Closures** | [15_closure_basics.md](../concept/01_foundation/00_start/15_closure_basics.md) · [07_closure_types.md](../concept/02_intermediate/04_types_and_conversions/07_closure_types.md) · [15_iterator_patterns.md](../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) | ✅ | 闭包、迭代器完全覆盖；concept/ 额外包含自定义迭代器 |
 | **Ch 14: More About Cargo** | [09_cargo_script.md](../concept/06_ecosystem/09_cargo_script.md) · [01_toolchain.md](../concept/06_ecosystem/01_toolchain.md) | ⚠️ | TRPL 侧重 Cargo 工作流；concept/ 分散在生态层 |
 | **Ch 15: Smart Pointers** | [12_smart_pointers.md](../concept/02_intermediate/02_memory_management/12_smart_pointers.md) | ✅ | Box、Rc、RefCell、Arc 完全覆盖；concept/ 额外包含自定义智能指针 |
-| **Ch 16: Fearless Concurrency** | [01_concurrency.md](../concept/03_advanced/01_concurrency.md) | ✅ | 线程、Mutex、Arc、Channel 完全覆盖；concept/ 额外包含内存顺序 |
+| **Ch 16: Fearless Concurrency** | [01_concurrency.md](../concept/03_advanced/00_concurrency/01_concurrency.md) | ✅ | 线程、Mutex、Arc、Channel 完全覆盖；concept/ 额外包含内存顺序 |
 | **Ch 17: OOP Features** | [01_traits.md](../concept/02_intermediate/00_traits/01_traits.md) · [01_rust_vs_cpp.md](../concept/05_comparative/01_rust_vs_cpp.md) | ⚠️ | TRPL 以 trait 对象讲解动态分发；concept/ 强调无继承设计哲学 |
 | **Ch 18: Patterns and Matching** | [07_control_flow.md](../concept/01_foundation/04_control_flow/07_control_flow.md) · [12_attributes_and_macros.md](../concept/01_foundation/09_macros_basics/12_attributes_and_macros.md) · [15_iterator_patterns.md](../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) | ✅ | `match`/`if let` 模式语法完全覆盖；concept/ 额外包含守卫条件、@ 绑定与迭代器模式 |
-| **Ch 19: Advanced Features** | [03_advanced/](../concept/03_advanced) 整层 | 🆕 | TRPL 单章覆盖；concept/ L3 拆分为 20+ 独立文件，深度远超 TRPL |
-| **Ch 20: Multithreaded Web Server** | [18_network_programming.md](../concept/03_advanced/18_network_programming.md) · [comprehensive_web_server.rs](../examples/comprehensive_web_server.rs) | ⚠️ | TRPL 渐进式项目教学；concept/ 有示例但缺少同步逐步教程 |
+| **Ch 19: Advanced Features** | [03_advanced/](../03_advanced) 整层 | 🆕 | TRPL 单章覆盖；concept/ L3 拆分为 20+ 独立文件，深度远超 TRPL |
+| **Ch 20: Multithreaded Web Server** | [18_network_programming.md](../concept/03_advanced/06_low_level_patterns/18_network_programming.md) · [comprehensive_web_server.rs](../examples/comprehensive_web_server.rs) | ⚠️ | TRPL 渐进式项目教学；concept/ 有示例但缺少同步逐步教程 |
 | **Ch 21: Appendix** | [02_reference/](02_reference) | ✅ | 关键字、运算符、可派生 trait、宏等参考内容完全覆盖 |
 
 ---
@@ -106,7 +106,7 @@ TRPL Ch 12   →  concept/00_meta/learning_mvp_path.md (Week 1 Day 7)
 TRPL Ch 13   →  concept/02_intermediate/04_types_and_conversions/07_closure_types.md + 15_iterator_patterns.md
 TRPL Ch 14   →  concept/06_ecosystem/01_toolchain.md + 09_cargo_script.md
 TRPL Ch 15   →  concept/02_intermediate/02_memory_management/12_smart_pointers.md
-TRPL Ch 16   →  concept/03_advanced/01_concurrency.md
+TRPL Ch 16   →  concept/03_advanced/00_concurrency/01_concurrency.md
 TRPL Ch 17   →  concept/05_comparative/02_rust_vs_cpp.md (OOP 对比)
 TRPL Ch 18   →  concept/01_foundation/04_control_flow/07_control_flow.md + concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md
 TRPL Ch 19   →  concept/03_advanced/ (L3 整层)

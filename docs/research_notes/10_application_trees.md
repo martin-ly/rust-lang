@@ -450,7 +450,7 @@ mindmap
 |------|----------|----------|
 | 系统编程 | [TUTORIAL_OWNERSHIP](10_tutorial_ownership_safety.md) | [THREADS_CONCURRENCY](../05_guides/05_threads_concurrency_usage_guide.md) |
 | 网络服务 | [ASYNC_PROGRAMMING](../05_guides/05_async_programming_usage_guide.md) | [DESIGN_PATTERNS](../05_guides/05_design_patterns_usage_guide.md) |
-| 数据系统 | TYPE_SYSTEM | [UNSAFE_RUST](../../concept/03_advanced/03_unsafe.md) |
+| 数据系统 | TYPE_SYSTEM | [UNSAFE_RUST](../../concept/03_advanced/02_unsafe/03_unsafe.md) |
 
 ### 6.2 领域特定资源 {#62-领域特定资源}
 >

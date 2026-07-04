@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: Registry · crates.io · Cargo Index · Sparse Protocol · Git Protocol · `cargo publish` · `cargo yank` · `cargo owner` · Authentication Token — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: Registry · crates.io · Cargo Index · Sparse Protocol · Git Protocol · `cargo publish` · `cargo yank` · `cargo owner` · Authentication Token — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 # Cargo Registry 与包发布
 

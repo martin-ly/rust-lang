@@ -1,7 +1,7 @@
 # C11 Macro System Proc
 
 > **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
-> 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
+> 概念解释的权威来源为 [`concept/`](../../../..) 对应主题。
 >
 > Crate: `c11_macro_system_proc`
 > **版本**: 0.1.0
@@ -15,7 +15,7 @@
 ## 🎯 快速开始
 
 1. 查看 [主索引](00_MASTER_INDEX.md) 了解本 crate 的完整文档结构。
-2. 查看 [单页总结](ONE_PAGE_SUMMARY.md) 获取核心概念速览。
+2. 查看 [单页总结](one_page_summary.md) 获取核心概念速览。
 3. 运行示例：`cargo run -p c11_macro_system_proc --example <example_name>`。
 
 ## 📚 文档结构

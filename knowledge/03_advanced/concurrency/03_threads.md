@@ -2,7 +2,7 @@
 
 > **EN**: Threads
 > **Summary**: Rust 线程与并发安全模型 Threads. (stub/archive redirect)
-> **权威来源**: 本主题深度解释见 [concept/03_advanced/01_concurrency.md](../../../concept/03_advanced/01_concurrency.md)。
+> **权威来源**: 本主题深度解释见 [concept/03_advanced/00_concurrency/01_concurrency.md](../../../concept/03_advanced/00_concurrency/01_concurrency.md)。
 > **历史版本存档**: [archive/knowledge/03_advanced/concurrency/03_threads.md](../../../archive/knowledge/03_advanced/concurrency/03_threads.md)
 >
 > **定位**: 本文件为精简知识卡片，保留核心规则/概念与常见陷阱。详细解释、形式化语义与代码示例请查看权威来源。
@@ -32,4 +32,4 @@
 
 ---
 
-**详细内容已迁移**：请点击上方 [concept/03_advanced/01_concurrency.md](../../../concept/03_advanced/01_concurrency.md) 查看最新权威解释。
+**详细内容已迁移**：请点击上方 [concept/03_advanced/00_concurrency/01_concurrency.md](../../../concept/03_advanced/00_concurrency/01_concurrency.md) 查看最新权威解释。

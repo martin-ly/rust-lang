@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 错误处理 (Error Handling) · Result · Option · ? 运算符 · 自定义错误类型 · thiserror — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 错误处理 (Error Handling) · Result · Option · ? 运算符 · 自定义错误类型 · thiserror — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # Error Handling（错误处理）
 >
@@ -15,8 +15,8 @@
 > **前置概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) ·
 > [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
 > [Traits](../00_traits/01_traits.md)
-> **后置概念**: [Concurrency](../../03_advanced/01_concurrency.md) ·
-> [Async](../../03_advanced/02_async.md)
+> **后置概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
+> [Async](../../03_advanced/01_async/02_async.md)
 > **主要来源**: [TRPL: Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference: Errors](https://doc.rust-lang.org/reference/) ·
 > [Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling) ·
@@ -340,7 +340,7 @@ graph TD
 
 > **一致性（Coherence）检查**: Option 空值安全 ⟹ Result 显式传播 ⟹ ? 运算符合法性 ⟹ From 转换链，形成**从值到函数到控制流到类型统一**的递进链。panic 是独立维度（不可恢复边界），与 Result 形成互补。
 >
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/inter_layer_map.md) §4.1 "内存安全（Memory Safety）完备性"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/inter_layer_map.md) §4.1 "内存安全（Memory Safety）完备性"
 > **过渡到示例与反例**: 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？下一节通过正例展示错误处理的正确使用方式，通过反例揭示定理失效的精确条件——特别是 unwrap panic、? 类型不匹配、错误忽略等边界场景。
 
 ---
@@ -1400,7 +1400,7 @@ fn parse_config_bad(path: &str) -> Result<Config, AppError> {
 > **[来源: Rust Standard Library: Backtrace]** `Backtrace` 采用惰性求值策略：构造时仅捕获原始帧指针，格式化时才解析符号。但即使如此，栈展开本身仍有不可忽略的开销。 ✅
 > **来源: [RFC 2504](https://github.com/rust-lang/rfcs/pull/2504)** Backtrace 稳定化 RFC 明确要求"在默认情况下不产生开销"，因此 `capture()` 在环境变量未启用时返回 `disabled`。 ✅
 
-**跨层映射**: Backtrace 的运行时成本 ↔ [§9.3.6](#936-与-paniclocation-的对比) `Location` 的编译期零成本 ↔ [../04_formal/04_rustbelt.md](../../04_formal/04_rustbelt.md) §3 "运行时与编译期保证的边界"
+**跨层映射**: Backtrace 的运行时成本 ↔ [§9.3.6](#936-与-paniclocation-的对比) `Location` 的编译期零成本 ↔ [../04_formal/04_rustbelt.md](../../04_formal/02_separation_logic/04_rustbelt.md) §3 "运行时与编译期保证的边界"
 
 ---
 
@@ -1922,7 +1922,7 @@ fn ensure_nonzero(x: i32) -> i32 {
 
 > **来源: [Rust Reference: track_caller](https://doc.rust-lang.org/reference/)** · **[RFC 2091: Implicit caller location](https://github.com/rust-lang/rfcs/pull/2091)** · **[rustc-dev-guide]** `#[track_caller]` 的设计目标是为错误报告提供"足够好的位置信息"，而非替代调试符号或 profiling 工具。 ✅
 
-**跨层映射**: `#[track_caller]` 的编译期定位 ↔ [§9.3](#93-stdbacktracebacktrace-与错误追踪) `Backtrace` 的运行时定位 ↔ [../04_formal/04_rustbelt.md](../../04_formal/04_rustbelt.md) §3 "编译期保证与运行时观察的边界"
+**跨层映射**: `#[track_caller]` 的编译期定位 ↔ [§9.3](#93-stdbacktracebacktrace-与错误追踪) `Backtrace` 的运行时定位 ↔ [../04_formal/04_rustbelt.md](../../04_formal/02_separation_logic/04_rustbelt.md) §3 "编译期保证与运行时观察的边界"
 
 ---
 
@@ -2015,9 +2015,9 @@ fn compute() -> Maybe<i32> {
 | 泛型（Generics）系统 | [02_generics.md](../01_generics/02_generics.md) | Result<T, E> 的泛型参数约束 |
 | 所有权（Ownership）与生命周期（Lifetimes） | 01_foundation/01_ownership_borrow_lifetime/01_ownership.md | panic 时的资源清理 |
 | 类型系统（Type System）基础 | [01_foundation/02_type_system/04_type_system.md](../../01_foundation/02_type_system/04_type_system.md) | 和类型的理论基础 |
-| 并发与 Send/Sync | [03_advanced/01_concurrency.md](../../03_advanced/01_concurrency.md) | 跨线程错误传播 |
-| 异步与 Future | [03_advanced/02_async.md](../../03_advanced/02_async.md) | async 中的 ? 运算符 |
-| 形式化验证 | [04_formal/04_rustbelt.md](../../04_formal/04_rustbelt.md) | 错误处理的逻辑基础 |
+| 并发与 Send/Sync | [03_advanced/00_concurrency/01_concurrency.md](../../03_advanced/00_concurrency/01_concurrency.md) | 跨线程错误传播 |
+| 异步与 Future | [03_advanced/01_async/02_async.md](../../03_advanced/01_async/02_async.md) | async 中的 ? 运算符 |
+| 形式化验证 | [04_formal/04_rustbelt.md](../../04_formal/02_separation_logic/04_rustbelt.md) | 错误处理的逻辑基础 |
 
 ---
 
@@ -2317,7 +2317,7 @@ const fn checked_div_fixed(a: i32, b: i32) -> i32 {
 ```
 
 > **修正**: `const fn` 中的 `panic!` 从 Rust 1.57 起稳定支持，但要求 panic 信息为字符串字面量（非动态格式化）。在 Edition 2021 之前，`panic!` 完全不能在 `const fn` 中使用。这反映了编译期求值的严格约束。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> **相关问题树**: [错误处理问题树](../00_meta/problem_graph.md#七错误处理问题树)
+> **相关问题树**: [错误处理问题树](../../00_meta/04_navigation/problem_graph.md#七错误处理问题树)
 
 ### 10.5 边界测试：`?` 运算符与 `From` 转换的失败（编译错误）
 
@@ -2524,6 +2524,6 @@ Rust 的设计选择：
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

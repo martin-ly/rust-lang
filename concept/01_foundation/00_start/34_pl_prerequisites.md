@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.1+ (Edition 2024)
-> **本节关键术语**: 编程语言理论 (PL Theory) · 语法 (Syntax) · 语义 (Semantics) · 求值策略 (Evaluation Strategy) · 副作用 (Side Effect) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 编程语言理论 (PL Theory) · 语法 (Syntax) · 语义 (Semantics) · 求值策略 (Evaluation Strategy) · 副作用 (Side Effect) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 编程语言理论基础（PL Prerequisites）
 >

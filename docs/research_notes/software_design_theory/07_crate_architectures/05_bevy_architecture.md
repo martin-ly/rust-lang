@@ -925,7 +925,7 @@ graph TD
 
 - [Rayon 数据并行架构](13_rayon_architecture.md)
 - [Wgpu GPU 图形架构](11_wgpu_architecture.md)
-- [并发编程模型](../../../../concept/03_advanced/01_concurrency.md)
+- [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 
 ---
 

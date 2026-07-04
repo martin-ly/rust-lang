@@ -25,11 +25,11 @@
 
 | 源层 | 概念 | 指向层 | 后置概念 |
 |:---|:---|:---|:---|
-| L0 元信息层 | [Rust 职业市场全景：2026 年数据与分析](../career_landscape.md) | L6 生态工程层 | Application Domains |
-| L0 元信息层 | [Comprehensive Rust 课程映射](../comprehensive_rust_mapping.md) | L6 生态工程层 | Application Domains |
-| L0 元信息层 | [C/C++ → Rust 工程层对比路线图](../cpp_rust_engineering_roadmap.md) | L5 对比分析层 | C++ ABI Object Model |
-| L0 元信息层 | [模式语义空间索引：设计模式在概念体系中的坐标](../pattern_semantic_space_index.md) | L6 生态工程层 | Pattern Composition Algebra |
-| L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../semantic_bridge_algorithms_patterns.md) | L6 生态工程层 | Pattern Composition Algebra |
+| L0 元信息层 | [Rust 职业市场全景：2026 年数据与分析](../04_navigation/career_landscape.md) | L6 生态工程层 | Application Domains |
+| L0 元信息层 | [Comprehensive Rust 课程映射](../00_framework/comprehensive_rust_mapping.md) | L6 生态工程层 | Application Domains |
+| L0 元信息层 | [C/C++ → Rust 工程层对比路线图](../00_framework/cpp_rust_engineering_roadmap.md) | L5 对比分析层 | C++ ABI Object Model |
+| L0 元信息层 | [模式语义空间索引：设计模式在概念体系中的坐标](../00_framework/pattern_semantic_space_index.md) | L6 生态工程层 | Pattern Composition Algebra |
+| L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../00_framework/semantic_bridge_algorithms_patterns.md) | L6 生态工程层 | Pattern Composition Algebra |
 | L1 基础概念层 | [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | L2 进阶概念层 | Smart Pointers |
 | L1 基础概念层 | [引用语义：自动解引用、Deref 强制与类型转换](../../01_foundation/03_values_and_references/05_reference_semantics.md) | L2 进阶概念层 | Smart Pointers |
 | L1 基础概念层 | [引用语义：自动解引用、Deref 强制与类型转换](../../01_foundation/03_values_and_references/05_reference_semantics.md) | L2 进阶概念层 | Generics |
@@ -88,9 +88,9 @@
 
 ## 三、与现有元文件的关系
 
-- 更详细的层间依赖图见 [../inter_layer_map.md](../inter_layer_map.md)
-- 层内模型映射见 [../intra_layer_model_map.md](../intra_layer_model_map.md)
-- 形式化本体规范见 [../kg_ontology_v2.md](../kg_ontology_v2.md)
+- 更详细的层间依赖图见 [../inter_layer_map.md](../04_navigation/inter_layer_map.md)
+- 层内模型映射见 [../intra_layer_model_map.md](../04_navigation/intra_layer_model_map.md)
+- 形式化本体规范见 [../kg_ontology_v2.md](kg_ontology_v2.md)
 
 ---
 

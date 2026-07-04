@@ -81,9 +81,9 @@
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- **所有权/借用**：deref_nullptr、全局分配器反例见 [formal_methods](formal_methods/README.md) 六篇并表与 [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)。
+- **所有权/借用**：deref_nullptr、全局分配器反例见 [formal_methods](../../README.md) 六篇并表与 [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)。
 
-- **类型/Trait**：Copy 特化移除、const/static 边界见 [type_theory](type_theory/README.md)、[trait_system_formalization](type_theory/10_trait_system_formalization.md)、[advanced_types](type_theory/10_advanced_types.md)。
+- **类型/Trait**：Copy 特化移除、const/static 边界见 [type_theory](../../README.md)、[trait_system_formalization](type_theory/10_trait_system_formalization.md)、[advanced_types](type_theory/10_advanced_types.md)。
 
 - **92 项特性与反例**：每项特性的动机/形式化/反例见 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md)；本索引仅作 1.93 相关反例的集中入口。
 
@@ -177,7 +177,7 @@
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 
 - [上级目录](../README.md)
 

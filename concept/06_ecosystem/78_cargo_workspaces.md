@@ -1,7 +1,7 @@
 # Cargo Workspaces（工作区）
 
 > **内容分级**: [综述级]
-> **本节关键术语**: Workspace · Root Package · Virtual Workspace · Workspace Inheritance · `workspace.package` · `workspace.dependencies` · `workspace.lints` · `default-members` · `resolver` — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: Workspace · Root Package · Virtual Workspace · Workspace Inheritance · `workspace.package` · `workspace.dependencies` · `workspace.lints` · `default-members` · `resolver` — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Workspaces
 > **Summary**: Cargo workspace 的组成方式：root package 与 virtual workspace、`members`/`exclude`/`default-members`、`workspace.package`/`workspace.dependencies`/`workspace.lints` 继承机制，以及 resolver 设置。
@@ -10,7 +10,7 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“何时该用 workspace、如何组织多 crate 项目、如何统一依赖与 lint 配置”讲清楚。
-> **前置概念**: [Cargo Dependency Resolution](60_cargo_dependency_resolution.md) · [Cargo Manifest Reference](64_cargo_manifest_reference.md) · [Terminology Glossary](../00_meta/terminology_glossary.md)
+> **前置概念**: [Cargo Dependency Resolution](60_cargo_dependency_resolution.md) · [Cargo Manifest Reference](64_cargo_manifest_reference.md) · [Terminology Glossary](../00_meta/01_terminology/terminology_glossary.md)
 > **后置概念**: [Cargo Profiles and Lints](65_cargo_profiles_and_lints.md) · [Cargo Registries and Publishing](62_cargo_registries_and_publishing.md) · [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ---

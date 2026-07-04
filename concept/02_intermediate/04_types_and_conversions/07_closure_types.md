@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 闭包类型 (Closure Type) · Fn · FnMut · FnOnce · 捕获模式 (Capture Mode) · move 闭包（Closures） — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 闭包类型 (Closure Type) · Fn · FnMut · FnOnce · 捕获模式 (Capture Mode) · move 闭包（Closures） — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义
 >
@@ -13,7 +13,7 @@
 > **前置概念**: [Traits](../00_traits/01_traits.md) ·
 > [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
 > [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
-> **后置概念**: [Async](../../03_advanced/02_async.md) ·
+> **后置概念**: [Async](../../03_advanced/01_async/02_async.md) ·
 > [Generics](../01_generics/02_generics.md)
 
 ---
@@ -392,7 +392,7 @@ graph TD
 - [Traits](../00_traits/01_traits.md) — Trait 系统与接口抽象
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权模型
 - [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用（Borrowing）与生命周期（Lifetimes）
-- [Async](../../03_advanced/02_async.md) — 异步编程（async 块是特殊闭包）
+- [Async](../../03_advanced/01_async/02_async.md) — 异步编程（async 块是特殊闭包）
 - [Generics](../01_generics/02_generics.md) — 泛型与参数多态
 
 ---
@@ -560,7 +560,7 @@ fn main() {}
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

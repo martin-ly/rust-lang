@@ -4,7 +4,7 @@
 > **Summary**: Rust 1.92 研究更新报告 Rust 192 Research Update 2025 12 11. (stub/archive redirect)
 > **归档说明**: 本文档为 Rust 1.92 历史版本研究笔记，已迁移到 `archive/research_notes/10_rust_192_research_update_2025_12_11.md`。
 > 最新 Rust 版本特性请参阅 [concept/07_future/rust_1_96_stabilized.md](../../concept/07_future/rust_1_96_stabilized.md)。
-> 历史版本存档：[archive/research_notes/10_rust_192_research_update_2025_12_11.md](../../archive/research_notes/10_rust_192_research_update_2025_12_11.md)
+> 历史版本存档：[archive/research_notes/10_rust_192_research_update_2025_12_11.md](../research_notes/10_rust_192_research_update_2025_12_11.md)
 
 ---
 

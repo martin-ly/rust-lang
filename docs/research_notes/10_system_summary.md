@@ -373,7 +373,7 @@ research_notes/
 | 文档 | 链接 | 用途 |
 | :--- | :--- | :--- |
 | 主索引 | [README.md](README.md) | 系统入口 |
-| 完整索引 | [INDEX.md](INDEX.md) | 所有文档索引 |
+| 完整索引 | [INDEX.md](../../concept/sources/INDEX.md) | 所有文档索引 |
 | 快速参考 | [10_quick_reference.md](10_quick_reference.md) | 快速查找 |
 | 研究路线图 | [10_research_roadmap.md](10_research_roadmap.md) | 研究计划 |
 | 工具使用指南 | [10_tools_guide.md](10_tools_guide.md) | 工具指南 |

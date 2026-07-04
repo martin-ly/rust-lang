@@ -558,7 +558,7 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [研究笔记主索引](README.md)
+- [研究笔记主索引](../../README.md)
 - [研究进展跟踪](10_progress_tracking.md)
 - [研究路线图](10_research_roadmap.md)
 - [系统总结](10_system_summary.md)
@@ -659,7 +659,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

@@ -1163,8 +1163,8 @@ error: the async fn must be inside a tokio runtime
 **总结**：
 
 - → 参考 [C11 主索引](../../02_navigation.md) 探索其他主题
-- → 实践 [Tier 2 宏开发指南](../../tier_02_guides/README.md) 巩固知识
-- → 查看 [Tier 1 核心概念](../../tier_01_core/README.md) 复习基础
+- → 实践 [Tier 2 宏开发指南](../../../../README.md) 巩固知识
+- → 查看 [Tier 1 核心概念](../../../../README.md) 复习基础
 
 ---
 

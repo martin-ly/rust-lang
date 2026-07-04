@@ -20,7 +20,7 @@
 > 缓存优化、SIMD [来源: [packed_simd](https://doc.rust-lang.org/std/simd/index.html)] 到零成本抽象（Zero-Cost Abstraction）的验证，
 > 建立"测量 → 分析 → 优化 → 验证"的工程闭环。
 > **前置概念**: [Zero Cost Abstractions](../01_foundation/00_start/06_zero_cost_abstractions.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
-> **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Async](../03_advanced/02_async.md)
+> **后置概念**: [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) · [Async](../03_advanced/01_async/02_async.md)
 
 ---
 
@@ -494,8 +494,8 @@ graph TD
 
 - [Zero Cost Abstractions](../01_foundation/00_start/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
 - [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）模型
-- [Concurrency](../03_advanced/01_concurrency.md) — 并发模型
-- [Async](../03_advanced/02_async.md) — 异步（Async）编程
+- [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) — 并发模型
+- [Async](../03_advanced/01_async/02_async.md) — 异步（Async）编程
 
 ---
 

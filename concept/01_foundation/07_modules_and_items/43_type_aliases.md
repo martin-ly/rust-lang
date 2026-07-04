@@ -351,7 +351,7 @@ graph TD
 
 ## 九、来源与延伸阅读
 
-- [Rust 核心术语英中对照表](../../00_meta/terminology_glossary.md)
+- [Rust 核心术语英中对照表](../../00_meta/01_terminology/terminology_glossary.md)
 - [The Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html)
 - [The Rust Programming Language — Advanced Types](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)
 - [Rust By Example — Alias](https://doc.rust-lang.org/rust-by-example/custom_types/alias.html)

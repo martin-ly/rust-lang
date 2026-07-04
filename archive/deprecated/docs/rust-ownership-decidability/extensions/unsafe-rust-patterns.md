@@ -1,4 +1,4 @@
-> **🗄️ ARCHIVED**: 本文档内容已完全覆盖于 [concept/03_advanced/03_unsafe.md](../../../concept/03_advanced/03_unsafe.md) 及 [concept/03_advanced/12_unsafe_rust_patterns.md](../../../concept/03_advanced/12_unsafe_rust_patterns.md)。
+> **🗄️ ARCHIVED**: 本文档内容已完全覆盖于 [concept/03_advanced/03_unsafe.md](../../../../../concept/03_advanced/02_unsafe/03_unsafe.md) 及 [concept/03_advanced/12_unsafe_rust_patterns.md](../../../../../concept/03_advanced/02_unsafe/12_unsafe_rust_patterns.md)。
 > **归档日期**: 2026-06-09
 > **归档原因**: 与主轨 concept/ 完全重复（相似度 1.00），维护价值集中于主轨。
 > **原始位置**: `docs/rust-ownership-decidability/extensions/unsafe-rust-patterns.md`
@@ -1393,7 +1393,7 @@ impl<T: Send> ConcurrentPool<T> {
 
 ---
 
-- [README](README.md)
+- [README](../../../../../README.md)
 
 ---
 

@@ -2,9 +2,9 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [并发编程](../../../../concept/03_advanced/01_concurrency.md)
-> - [并发模式](../../../../concept/03_advanced/10_concurrency_patterns.md)
-> - [无锁编程](../../../../concept/03_advanced/16_lock_free.md)
+> - [并发编程](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
+> - [并发模式](../../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md)
+> - [无锁编程](../../../../concept/03_advanced/00_concurrency/16_lock_free.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 
@@ -495,10 +495,10 @@ graph BT
 
 - [Tokio 异步运行时架构](06_tokio_architecture.md)
 - [Rayon 数据并行架构](13_rayon_architecture.md)
-- [并发编程模型](../../../../concept/03_advanced/01_concurrency.md)
-- [原子操作与内存排序](../../../../concept/03_advanced/11_atomics_and_memory_ordering.md)
-- [无锁数据结构](../../../../concept/03_advanced/16_lock_free.md)
-- [形式化操作语义](../../../../concept/04_formal/17_operational_semantics.md)
+- [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
+- [原子操作与内存排序](../../../../concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md)
+- [无锁数据结构](../../../../concept/03_advanced/00_concurrency/16_lock_free.md)
+- [形式化操作语义](../../../../concept/04_formal/03_operational_semantics/17_operational_semantics.md)
 
 ---
 

@@ -897,7 +897,7 @@ fn use_abstractions() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Coq 形式化验证指南](01_coq_formalization_guide.md)
-- [Academic 学术研究](README.md)
+- [Academic 学术研究](../../../../README.md)
 - [Miri Tree Borrows](../miri/01_tree_borrows.md)
 - [Rust Reference](https://doc.rust-lang.org/reference/)
 
@@ -918,7 +918,7 @@ fn use_abstractions() {
 
 ## 相关概念
 
-- [引用语义 (concept)](../../../concept/01_foundation/05_reference_semantics.md) — Tree Borrows 工业级应用与 Miri 默认启用状态
+- [引用语义 (concept)](../../../../concept/01_foundation/03_values_and_references/05_reference_semantics.md) — Tree Borrows 工业级应用与 Miri 默认启用状态
 
 ## 📚 模块 8: 国际化对齐
 

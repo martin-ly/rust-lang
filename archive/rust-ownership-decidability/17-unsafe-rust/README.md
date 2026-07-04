@@ -19,7 +19,7 @@
 
 | 文件 | 主题 | 难度 |
 |------|------|------|
-| [`01-intro.md`](../../../concept/03_advanced/03_unsafe.md) | Unsafe Rust 入门 | 🟢 初级 |
+| [`01-intro.md`](../../../concept/03_advanced/02_unsafe/03_unsafe.md) | Unsafe Rust 入门 | 🟢 初级 |
 | [`02-raw-pointers.md`](02-raw-pointers.md) | 原始指针详解 | 🟡 中级 |
 | [`03-unsafe-functions.md`](03-unsafe-functions.md) | Unsafe 函数与 FFI | 🟡 中级 |
 
@@ -70,7 +70,7 @@
 
 ## 目录
 
-- [1. Unsafe Rust 入门](../../../concept/03_advanced/03_unsafe.md)
+- [1. Unsafe Rust 入门](../../../concept/03_advanced/02_unsafe/03_unsafe.md)
 - [2. 原始指针](02-raw-pointers.md)
 - [3. Unsafe 函数与 FFI](03-unsafe-functions.md)
 - [4. 未初始化内存](05-uninitialized-memory.md)

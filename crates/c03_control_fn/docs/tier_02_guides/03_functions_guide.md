@@ -1652,7 +1652,7 @@ fn main() {
 
 - [闭包深入](../tier_04_advanced/02_closures_in_depth.md)
 - [函数式编程](../tier_04_advanced/03_functional_programming.md)
-- [异步编程指南](../../c06_async/docs/README.md)
+- [异步编程指南](../../../../README.md)
 
 **外部资源**:
 

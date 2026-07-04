@@ -601,11 +601,11 @@ fn api_stabilization_examples() {
 
 | :--- | :--- | :--- |
 
-| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
 
-| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../../archive/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
 
-| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../../archive/deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
 
 ### 相关研究笔记 {#相关研究笔记}
 
@@ -735,7 +735,7 @@ fn api_stabilization_examples() {
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 
 - [上级目录](../README.md)
 

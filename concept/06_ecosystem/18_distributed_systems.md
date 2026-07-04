@@ -12,8 +12,8 @@
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计分布式系统架构
 > **定位**: 分析 Rust 在**分布式系统**中的独特价值——从 gRPC 服务网格、分布式共识到消息队列和 actor 模型，揭示 Rust 如何在云原生基础设施中提供 C++ 的性能和 Go 的开发效率。
-> **前置概念**: [Async](../03_advanced/02_async.md) ·
-> [Concurrency](../03_advanced/01_concurrency.md)
+> **前置概念**: [Async](../03_advanced/01_async/02_async.md) ·
+> [Concurrency](../03_advanced/00_concurrency/01_concurrency.md)
 > **后置概念**: [WebAssembly](11_webassembly.md) ·
 > [Observability](13_logging_observability.md)
 >
@@ -26,7 +26,7 @@
 > [Consul by HashiCorp](https://www.consul.io/) ·
 > [Linkerd](https://linkerd.io/) ·
 > [NATS](https://nats.io/)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -35,7 +35,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Rust 在分布式系统中的定位](#11-rust-在分布式系统中的定位)
-    - [1.2 异步（Async）运行时（Runtime）作为分布式基础](#12-异步运行时作为分布式基础)
+    - [1.2 异步运行时作为分布式基础](#12-异步运行时作为分布式基础)
     - [1.3 服务发现与负载均衡](#13-服务发现与负载均衡)
   - [二、技术细节](#二技术细节)
     - [2.1 gRPC 与 Protocol Buffers](#21-grpc-与-protocol-buffers)
@@ -54,7 +54,7 @@
     - [10.2 边界测试：分布式事务的 `Send` 约束（编译错误）](#102-边界测试分布式事务的-send-约束编译错误)
     - [10.3 边界测试：序列化消息的大小限制（运行时错误）](#103-边界测试序列化消息的大小限制运行时错误)
     - [10.4 边界测试：分布式共识的时钟偏差（逻辑错误）](#104-边界测试分布式共识的时钟偏差逻辑错误)
-    - [10.5 边界测试：Raft 共识中的网络分区与脑裂（运行时一致性（Coherence）破坏）](#105-边界测试raft-共识中的网络分区与脑裂运行时一致性破坏)
+    - [10.5 边界测试：Raft 共识中的网络分区与脑裂（运行时一致性破坏）](#105-边界测试raft-共识中的网络分区与脑裂运行时一致性破坏)
     - [10.3 边界测试：Raft 的日志不一致与快照安装（运行时一致性风险）](#103-边界测试raft-的日志不一致与快照安装运行时一致性风险)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -506,9 +506,9 @@ graph TD
 
 ## 相关概念文件
 
-- [Async](../03_advanced/02_async.md) — 异步编程
-- [Concurrency](../03_advanced/01_concurrency.md) — 并发模型
-- [Stream Processing Semantics](../03_advanced/20_stream_processing_semantics.md) — 流处理核心语义
+- [Async](../03_advanced/01_async/02_async.md) — 异步编程
+- [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) — 并发模型
+- [Stream Processing Semantics](../03_advanced/06_low_level_patterns/20_stream_processing_semantics.md) — 流处理核心语义
 - [Stream Processing Ecosystem](36_stream_processing_ecosystem.md) — 流处理生态
 - [WebAssembly](11_webassembly.md) — WebAssembly
 

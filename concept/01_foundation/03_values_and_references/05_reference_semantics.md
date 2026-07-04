@@ -1,7 +1,7 @@
 > **内容分级**: [综述级]
 >
 > **本节关键术语**:
-> 引用 (Reference) · 借用 (Borrowing) · 解引用 (Dereferencing) · 自动解引用 (Auto Deref) · 强制转换 (Coercion) — [完整对照表](../../00_meta/terminology_glossary.md)
+> 引用 (Reference) · 借用 (Borrowing) · 解引用 (Dereferencing) · 自动解引用 (Auto Deref) · 强制转换 (Coercion) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 引用语义：自动解引用、Deref 强制与类型转换
 >
@@ -465,7 +465,7 @@ graph TD
 > **Bloom 层级**: 理解 → 分析 → 应用
 > **定位**: 深入 Rust 的**多级引用**（`&&T`、`&mut &T`）与**部分重借用**（partial reborrow）机制，澄清嵌套引用在借用检查器中的行为、编译器对结构体（Struct）字段级粒度的跟踪，以及 Tree Borrows 模型下的权限语义。
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Lifetime](../01_ownership_borrow_lifetime/03_lifetimes.md)
-> **后置概念**: [Unsafe Rust](../../03_advanced/03_unsafe.md) · [Formal Methods](../../04_formal/01_linear_logic.md)
+> **后置概念**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Formal Methods](../../04_formal/01_ownership_logic/01_linear_logic.md)
 
 ---
 
@@ -1395,7 +1395,7 @@ fn main() {}
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

@@ -5,7 +5,7 @@
 >
 > 数值类型 (Numeric Types) · 整数类型 (Integer) · 浮点类型 (Float) · 有符号 (Signed) · 无符号 (Unsigned) ·
 > 整数溢出 (Integer Overflow) · 浮点数 (Floating Point) · 类型转换 (Type Conversion) · 类型推断 (Type Inference) · 字面值后缀 (Literal Suffix)
-> — [完整对照表](../../00_meta/terminology_glossary.md)
+> — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 
 # 数值类型与运算：从整数到浮点的完整图景
@@ -826,7 +826,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

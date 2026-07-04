@@ -1,11 +1,11 @@
 # C07 进程管理 (c07_process)
 
-> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs)。
 > 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
 >
 > **文档定位**: C07进程管理模块主入口，提供快速开始指南、IPC通信机制介绍和完整的学习资源导航
 > **先修知识**: [C01 所有权](../../c01_ownership_borrow_scope/docs/README.md) | [C05 线程](../../c05_threads/docs/README.md)
-> **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](tier_01_foundations/04_faq.md) | [Glossary](tier_01_foundations/03_glossary.md)
+> **相关文档**: [主索引](00_master_index.md) | [FAQ](tier_01_foundations/04_faq.md) | [Glossary](tier_01_foundations/03_glossary.md)
 
 **最后更新**: 2025-12-25
 **适用版本**: Rust 1.96.1+ (Edition 2024)
@@ -230,7 +230,7 @@ let output = Command::new("app")
 
 ### 本模块资源
 
-- 📋 **[主索引](00_MASTER_INDEX.md)** - 完整文档导航
+- 📋 **[主索引](00_master_index.md)** - 完整文档导航
 - ❓ **[FAQ](tier_01_foundations/04_faq.md)** - 5个核心问答
 - 📚 **[Glossary](tier_01_foundations/03_glossary.md)** - 13个核心术语
 - 📖 **[核心系列01-10](01_process_model_and_lifecycle.md)** - 系统学习
@@ -339,10 +339,10 @@ winapi = "0.3"  # Windows API
 
 ### 按问题类型
 
-- **如何创建进程?** → [](tier_01_foundations/04_faq.mdFAQ Q1) | [01_process_model](01_process_model_and_lifecycle.md)
-- **进程间通信?** → [](tier_01_foundations/04_faq.mdFAQ Q2) | [02_ipc](02_ipc_mechanisms.md)
-- **跨平台实现?** → [](tier_01_foundations/04_faq.mdFAQ Q3) | [10_cross_platform](10_cross_platform_guide.md)
-- **僵尸进程?** → [](tier_01_foundations/04_faq.mdFAQ Q4)
+- **如何创建进程?** → [](tier_01_foundations/04_faq.md) | [01_process_model](01_process_model_and_lifecycle.md)
+- **进程间通信?** → [](tier_01_foundations/04_faq.md) | [02_ipc](02_ipc_mechanisms.md)
+- **跨平台实现?** → [](tier_01_foundations/04_faq.md) | [10_cross_platform](10_cross_platform_guide.md)
+- **僵尸进程?** → [](tier_01_foundations/04_faq.md)
 
 ### 按IPC机制
 
@@ -358,7 +358,7 @@ winapi = "0.3"  # Windows API
 
 1. **🚀 快速体验** → 运行上面的示例代码
 2. **📚 系统学习** → [01_process_model_and_lifecycle.md](01_process_model_and_lifecycle.md)
-3. **🔍 查找文档** → [00_MASTER_INDEX.md](00_MASTER_INDEX.md)
+3. **🔍 查找文档** → [00_MASTER_INDEX.md](00_master_index.md)
 4. **❓ 解决问题** → [FAQ.md](tier_01_foundations/04_faq.md)
 5. **💡 查询术语** → [Glossary.md](tier_01_foundations/03_glossary.md)
 

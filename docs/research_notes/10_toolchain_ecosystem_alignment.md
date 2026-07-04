@@ -67,7 +67,7 @@
 | clippy | [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html) | [.clippy.toml](../../.clippy.toml) | lint、性能、风格 |
 | rustfmt | [rustfmt](https://github.com/rust-lang/rustfmt) | [Cargo.toml](../../Cargo.toml) | 代码格式化 |
 | rustdoc | [rustdoc book](https://doc.rust-lang.org/rustdoc/) | [docs/06_toolchain/03_rustdoc_advanced.md](../06_toolchain/03_rustdoc_advanced.md) | 文档、doctests |
-| cargo test | [Cargo Tests](https://doc.rust-lang.org/cargo/commands/cargo-test.html) | [exercises/tests/](../../exercises/tests/) | 单元/集成测试 |
+| cargo test | [Cargo Tests](https://doc.rust-lang.org/cargo/commands/cargo-test.html) | [exercises/tests/](../../exercises/tests) | 单元/集成测试 |
 | cargo bench | [Cargo Benchmarks](https://doc.rust-lang.org/cargo/commands/cargo-bench.html) | [experiments/10_concurrency_performance.md](experiments/10_concurrency_performance.md) | 基准测试 |
 
 ---

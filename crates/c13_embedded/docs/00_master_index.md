@@ -9,21 +9,21 @@
 ## 目录
 
 - [c13 嵌入式系统 - 文档指南](README.md)
-- [一页纸总结](ONE_PAGE_SUMMARY.md)
-- [裸机基础指南](BARE_METAL_GUIDE.md)
-- [build-std 与自定义目标](BUILD_STD_GUIDE.md)
-- [embedded-hal 1.0 迁移指南](EMBEDDED_HAL_1_0_MIGRATION.md)
+- [一页纸总结](one_page_summary.md)
+- [裸机基础指南](bare_metal_guide.md)
+- [build-std 与自定义目标](build_std_guide.md)
+- [embedded-hal 1.0 迁移指南](embedded_hal_1_0_migration.md)
 
 ## 按主题浏览
 
 ### 基础
 
-- [裸机基础指南](BARE_METAL_GUIDE.md) - `no_std`、启动流程、链接脚本
-- [build-std 与自定义目标](BUILD_STD_GUIDE.md) - 自定义 target 与 `build-std`
+- [裸机基础指南](bare_metal_guide.md) - `no_std`、启动流程、链接脚本
+- [build-std 与自定义目标](build_std_guide.md) - 自定义 target 与 `build-std`
 
 ### 硬件抽象
 
-- [embedded-hal 1.0 迁移指南](EMBEDDED_HAL_1_0_MIGRATION.md) - HAL trait 与迁移实践
+- [embedded-hal 1.0 迁移指南](embedded_hal_1_0_migration.md) - HAL trait 与迁移实践
 
 ### 代码模块
 

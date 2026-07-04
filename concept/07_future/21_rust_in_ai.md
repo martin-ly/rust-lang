@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估 Rust 在 AI 领域的应用
 > **定位**: 分析 Rust 在**AI/ML 基础设施**中的新兴应用——从张量运算、推理引擎到 ML 管道编排，揭示 Rust 如何在高性能 AI 系统中提供内存安全（Memory Safety）和低延迟优势。
-> **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Concurrency](../03_advanced/01_concurrency.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)
+> **前置概念**: [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) · [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)
 > **后置概念**: [AI Integration](01_ai_integration.md) · [Evolution](03_evolution.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -501,8 +501,8 @@ graph TD
 
 - [AI Integration](01_ai_integration.md) — AI 集成
 - [WebAssembly](../06_ecosystem/11_webassembly.md) — WebAssembly
-- [Concurrency](../03_advanced/01_concurrency.md) — 并发编程
-- [Unsafe](../03_advanced/03_unsafe.md) — 不安全代码
+- [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) — 并发编程
+- [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) — 不安全代码
 
 ---
 

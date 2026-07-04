@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: assert_matches! · 模式匹配（Pattern Matching）断言 (Pattern Match Assertion) · debug_assert_matches! · 测试断言 (Test Assertion) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: assert_matches! · 模式匹配（Pattern Matching）断言 (Pattern Match Assertion) · debug_assert_matches! · 测试断言 (Test Assertion) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # `assert_matches!`：模式匹配断言的形式化语义
 >
@@ -11,7 +11,7 @@
 > **双维定位**: F×App — 断言和模式匹配（Pattern Matching）语法应用
 > **定位**: 将 Rust 的**模式匹配（Pattern Matching）**能力从"表达式求值"扩展到"测试断言"的工程机制，实现编译期模式检查与运行时（Runtime）断言的统一。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Error Handling](../03_error_handling/04_error_handling.md)
-> **后置概念**: [Macros](../../03_advanced/04_macros.md) · [Version Tracking](../../07_future/05_rust_version_tracking.md)
+> **后置概念**: [Macros](../../03_advanced/03_proc_macros/04_macros.md) · [Version Tracking](../../07_future/05_rust_version_tracking.md)
 
 ---
 
@@ -440,7 +440,7 @@ fn main() {
 
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 模式匹配的形式化根基
 - [Error Handling](../03_error_handling/04_error_handling.md) — Result/Option 测试断言实践
-- [Macros](../../03_advanced/04_macros.md) — 宏（Macro）系统的语法糖机制
+- [Macros](../../03_advanced/03_proc_macros/04_macros.md) — 宏（Macro）系统的语法糖机制
 - [Version Tracking](../../07_future/05_rust_version_tracking.md) — Rust 1.96 特性演进
 
 ---
@@ -654,7 +654,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

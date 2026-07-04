@@ -2,8 +2,8 @@
 
 > **📎 交叉引用**
 >
-> 本主题在 concept 中有深度的概念分析：[生命周期](../../concept/01_foundation/03_lifetimes.md)
-> **相关概念**: [生命周期](../../concept/01_foundation/03_lifetimes.md)
+> 本主题在 concept 中有深度的概念分析：[生命周期](../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
+> **相关概念**: [生命周期](../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 > **Bloom 层级**: 理解
 > **📌 简介**:
 > 生命周期是 Rust 借用检查器的核心机制。它不是运行时检查，而是编译期对引用有效范围的**形式化推理**。

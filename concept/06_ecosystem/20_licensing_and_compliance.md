@@ -25,7 +25,7 @@
 > [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) ·
 > [OSI Approved Licenses](https://opensource.org/licenses) ·
 > [Wikipedia — Software License](https://en.wikipedia.org/wiki/Software_license)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

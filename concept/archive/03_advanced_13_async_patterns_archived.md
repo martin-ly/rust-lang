@@ -10,7 +10,7 @@
 > 原文件保留用于历史追溯。请勿独立编辑本文件。
 > **归档原因**: 命名规范化（`13_` → `02_` 与 async 主文件序列对齐）。
 > **状态**: 已归档（2026-05-25 Phase 1 Cleanup）
-> **后置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
+> **后置概念**: [Formal Verification](../04_formal/01_ownership_logic/03_ownership_formal.md)
 > **前置概念**: [Async Programming](../03_advanced/02_async_programming.md)
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 

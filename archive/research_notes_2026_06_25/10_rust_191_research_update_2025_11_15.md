@@ -4,7 +4,7 @@
 > **Summary**: Rust 1.91 研究更新报告 Rust 191 Research Update 2025 11 15. (stub/archive redirect)
 > **归档说明**: 本文档为 Rust 1.91 历史版本研究笔记，已迁移到 `archive/research_notes/10_rust_191_research_update_2025_11_15.md`。
 > 最新 Rust 版本特性请参阅 [concept/07_future/rust_1_96_stabilized.md](../../concept/07_future/rust_1_96_stabilized.md)。
-> 历史版本存档：[archive/research_notes/10_rust_191_research_update_2025_11_15.md](../../archive/research_notes/10_rust_191_research_update_2025_11_15.md)
+> 历史版本存档：[archive/research_notes/10_rust_191_research_update_2025_11_15.md](../research_notes/10_rust_191_research_update_2025_11_15.md)
 
 ---
 

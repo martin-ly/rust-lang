@@ -75,12 +75,12 @@
 
 ## 📋 快速导航
 
-📄 **一页纸总结**: [ONE_PAGE_SUMMARY](ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
+📄 **一页纸总结**: [ONE_PAGE_SUMMARY](one_page_summary.md) - 核心概念、常见坑、速选表、学习路径
 
 ### 🎯 按角色导航
 
 | 角色           | 推荐路径                                                          | 关键文档           |
-| :--- | :--- | :--- || **初学者**     | [README](README.md) → [OVERVIEW](OVERVIEW.md) → 创建型模式    | 基础概念、示例代码 |
+| :--- | :--- | :--- || **初学者**     | [README](README.md) → [OVERVIEW](overview.md) → 创建型模式    | 基础概念、示例代码 |
 | **中级开发者** | 行为型模式 → 并发模式 → 最佳实践                                  | 实战案例、性能优化 |
 | **架构师**     | [综合指南](COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) → 形式化理论 | 架构设计、模式组合 |
 | **研究者**     | 形式化文档 → 等价性分析 → 性能基准                                | 理论证明、语义模型 |
@@ -89,11 +89,11 @@
 
 | 类型                   | 文档/目录                                                                       | 说明                                    |
 | :--- | :--- | :--- || **入门指南**           | [README](README.md)                                                           | 项目概述和快速开始                      |
-| **概览**               | [OVERVIEW](OVERVIEW.md)                                                       | 文档结构和阅读路径                      |
+| **概览**               | [OVERVIEW](overview.md)                                                       | 文档结构和阅读路径                      |
 | **综合指南**           | [COMPREHENSIVE_DESIGN_PATTERNS_GUIDE](COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) | 完整的模式理论与实践                    |
-| **知识图谱** 🆕        | [KNOWLEDGE_GRAPH](KNOWLEDGE_GRAPH.md)                                         | 模式关系网络与组合策略                  |
-| **多维矩阵** 🆕        | [MULTIDIMENSIONAL_MATRIX_COMPARISON](MULTIDIMENSIONAL_MATRIX_COMPARISON.md)   | 7维度性能对比分析                       |
-| **思维导图** 🆕        | [MIND_MAP](MIND_MAP.md)                                                       | 可视化学习路径与决策树                  |
+| **知识图谱** 🆕        | [KNOWLEDGE_GRAPH](knowledge_graph.md)                                         | 模式关系网络与组合策略                  |
+| **多维矩阵** 🆕        | [MULTIDIMENSIONAL_MATRIX_COMPARISON](multidimensional_matrix_comparison.md)   | 7维度性能对比分析                       |
+| **思维导图** 🆕        | [MIND_MAP](mind_map.md)                                                       | 可视化学习路径与决策树                  |
 | **Rust 1.92.0示例** 🆕 | [RUST_192_EXAMPLES](RUST_192_EXAMPLES.md)                                     | 最新特性完整示例集（自 Rust 1.90 引入） |
 | **FAQ**                | [FAQ](tier_01_foundations/04_faq.md)                                                                 | 常见问题解答                            |
 | **术语表**             | [Glossary](tier_01_foundations/03_glossary.md)                                                       | 核心概念快速参考                        |
@@ -171,10 +171,10 @@
 #### 6. 形式化文档
 
 | 文档                                                   | 主题     | 核心内容               |
-| :--- | :--- | :--- || [异步vs同步等价性](ASYNC_SYNC_EQUIVALENCE_THEORY.md) | 语义等价 | CPS变换, Monad, 控制流 |
-| [Actor与Reactor模式](ACTOR_REACTOR_PATTERNS.md)      | 并发模型 | 消息传递, 事件驱动     |
-| [CSP vs Async分析](CSP_VS_ASYNC_ANALYSIS.md)         | 模型对比 | Golang vs Rust         |
-| [异步递归分析](ASYNC_RECURSION_ANALYSIS.md)          | 递归优化 | Box::pin, 尾递归       |
+| :--- | :--- | :--- || [异步vs同步等价性](async_sync_equivalence_theory.md) | 语义等价 | CPS变换, Monad, 控制流 |
+| [Actor与Reactor模式](actor_reactor_patterns.md)      | 并发模型 | 消息传递, 事件驱动     |
+| [CSP vs Async分析](csp_vs_async_analysis.md)         | 模型对比 | Golang vs Rust         |
+| [异步递归分析](async_recursion_analysis.md)          | 递归优化 | Box::pin, 尾递归       |
 
 #### 7. 形式化验证代码
 
@@ -255,7 +255,7 @@ cargo bench -p c09_design_pattern
 
 ### 🚀 初学者路径 (1-2周)
 
-1. **起步**: [README](README.md) → [OVERVIEW](OVERVIEW.md)
+1. **起步**: [README](README.md) → [OVERVIEW](overview.md)
 2. **基础概念**: 创建型模式 (单例、工厂、建造者)
 3. **实践**: 运行 examples/ 下的基础示例
 4. **巩固**: 完成 FAQ 中的练习题
@@ -279,10 +279,10 @@ cargo bench -p c09_design_pattern
 
 ### 🔬 高级路径 (5-8周)
 
-1. **形式化理论**: [异步vs同步等价性](ASYNC_SYNC_EQUIVALENCE_THEORY.md)
-2. **并发模型**: [Actor与Reactor](ACTOR_REACTOR_PATTERNS.md)
-3. **模型对比**: [CSP vs Async](CSP_VS_ASYNC_ANALYSIS.md)
-4. **深度优化**: [异步递归](ASYNC_RECURSION_ANALYSIS.md)
+1. **形式化理论**: [异步vs同步等价性](async_sync_equivalence_theory.md)
+2. **并发模型**: [Actor与Reactor](actor_reactor_patterns.md)
+3. **模型对比**: [CSP vs Async](csp_vs_async_analysis.md)
+4. **深度优化**: [异步递归](async_recursion_analysis.md)
 5. **实战项目**: 应用到实际项目中
 
 **推荐阅读顺序**:

@@ -362,9 +362,9 @@ fn main() {
 
 | 主题 | 延伸阅读 | 说明 |
 |------|----------|------|
-| 类型论基础 | [`concept/04_formal/02_type_theory.md`](../../../concept/04_formal/02_type_theory.md) | λ 演算、简单类型、系统 F、Curry-Howard |
-| Trait 求解器 | [`concept/04_formal/26_trait_solver_in_rustc.md`](../../../concept/04_formal/26_trait_solver_in_rustc.md) | rustc Trait 求解流程、Chalk、新 solver |
-| 类型推断复杂度 | [`concept/04_formal/29_type_inference_complexity.md`](../../../concept/04_formal/29_type_inference_complexity.md) | HM 复杂度、约束求解边界 |
+| 类型论基础 | [`concept/04_formal/02_type_theory.md`](../../../../concept/04_formal/00_type_theory/02_type_theory.md) | λ 演算、简单类型、系统 F、Curry-Howard |
+| Trait 求解器 | [`concept/04_formal/26_trait_solver_in_rustc.md`](../../../../concept/04_formal/05_rustc_internals/26_trait_solver_in_rustc.md) | rustc Trait 求解流程、Chalk、新 solver |
+| 类型推断复杂度 | [`concept/04_formal/29_type_inference_complexity.md`](../../../../concept/04_formal/00_type_theory/29_type_inference_complexity.md) | HM 复杂度、约束求解边界 |
 | 型变细节 | [`docs/research_notes/type_theory/10_variance_theory.md`](../../../docs/research_notes/type_theory/10_variance_theory.md) | 完整型变规则、反例、证明树 |
 | 生命周期形式化 | [`docs/research_notes/type_theory/10_lifetime_formalization.md`](../../../docs/research_notes/type_theory/10_lifetime_formalization.md) | 区域变量、outlives、借用检查 |
 

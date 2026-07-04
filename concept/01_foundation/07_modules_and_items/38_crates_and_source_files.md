@@ -9,7 +9,7 @@
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
 > **前置依赖**: [Modules and Paths](11_modules_and_paths.md) · [Attributes and Macros](../09_macros_basics/12_attributes_and_macros.md)
-> **后置概念**: [Cargo Workspaces](../../06_ecosystem/78_cargo_workspaces.md) · [Linkage](../../03_advanced/27_linkage.md) · [The Rust Runtime](../../03_advanced/30_rust_runtime.md)
+> **后置概念**: [Cargo Workspaces](../../06_ecosystem/78_cargo_workspaces.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md) · [The Rust Runtime](../../03_advanced/02_unsafe/30_rust_runtime.md)
 > **定理链**: Crate → Module Tree → Compilation Unit
 > **主要来源**: [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
@@ -143,6 +143,6 @@ use foo::bar as main;
 | [Modules and Paths](11_modules_and_paths.md) | crate 由模块树组织 |
 | [Items](39_items.md) | crate 由各种 item 组成 |
 | [Cargo Workspaces](../../06_ecosystem/78_cargo_workspaces.md) | Cargo 在 crate 之上组织 workspace |
-| [Linkage](../../03_advanced/27_linkage.md) | crate 输出参与链接 |
-| [The Rust Runtime](../../03_advanced/30_rust_runtime.md) | crate 运行时行为由运行时定义 |
-| [Terminology Glossary](../../00_meta/terminology_glossary.md) | 术语表（元层参考） |
+| [Linkage](../../03_advanced/04_ffi/27_linkage.md) | crate 输出参与链接 |
+| [The Rust Runtime](../../03_advanced/02_unsafe/30_rust_runtime.md) | crate 运行时行为由运行时定义 |
+| [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md) | 术语表（元层参考） |

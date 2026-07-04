@@ -36,7 +36,7 @@ cargo run -- search "所有权"
 ## 相关文档
 
 - [项目 README](../../README.md)
-- [mdBook 使用说明](../../book/README.md)
+- [mdBook 使用说明](../../README.md)
 
 ---
 

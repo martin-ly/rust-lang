@@ -68,7 +68,7 @@
 
 ## 🎯 快速开始
 
-📄 **一页纸总结**: [ONE_PAGE_SUMMARY](ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
+📄 **一页纸总结**: [ONE_PAGE_SUMMARY](one_page_summary.md) - 核心概念、常见坑、速选表、学习路径
 
 ### 新手入门
 
@@ -130,8 +130,8 @@
 
 ### 4️⃣ 概览和规划文档
 
-- 📋 **[OVERVIEW.md](OVERVIEW.md)** - 模块概览
-- 📘 **[COMPREHENSIVE_DOCUMENTATION_PLAN.md](COMPREHENSIVE_DOCUMENTATION_PLAN.md)** - 文档计划
+- 📋 **[OVERVIEW.md](overview.md)** - 模块概览
+- 📘 **[COMPREHENSIVE_DOCUMENTATION_PLAN.md](comprehensive_documentation_plan.md)** - 文档计划
 - 📖 **[process_management.md](process_management.md)** - 进程管理总览
 
 ### 5️⃣ 视角分析文档
@@ -355,7 +355,7 @@
 
 ### 待完善工作
 
-详见 [PENDING_ITEMS.md](PENDING_ITEMS.md)。
+详见 [PENDING_ITEMS.md](pending_items.md)。
 
 - [ ] 补充更多代码示例
 - [ ] 完善跨平台差异案例

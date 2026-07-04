@@ -301,7 +301,7 @@ research_notes/
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-1. 阅读 [主索引](README.md) 了解系统结构
+1. 阅读 [主索引](../../README.md) 了解系统结构
 2. 查看 [快速参考](10_quick_reference.md) 查找感兴趣的主题
 3. 参考 [研究路线图](10_research_roadmap.md) 了解研究计划
 
@@ -310,7 +310,7 @@ research_notes/
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. 使用 [研究笔记模板](10_template.md) 创建新笔记
-2. 遵循 [研究笔记规范](README.md#研究笔记规范)
+2. 遵循 [研究笔记规范](../../README.md#研究笔记规范)
 3. 使用 [质量检查清单](10_quality_checklist.md) 确保质量
 
 ### 贡献研究
@@ -368,8 +368,8 @@ research_notes/
 
 | 文档 | 链接 | 用途 |
 | :--- | :--- | :--- |
-| 主索引 | [README.md](README.md) | 系统入口 |
-| 完整索引 | [INDEX.md](INDEX.md) | 所有文档索引 |
+| 主索引 | [README.md](../../README.md) | 系统入口 |
+| 完整索引 | [INDEX.md](../../concept/sources/INDEX.md) | 所有文档索引 |
 | 快速参考 | [10_quick_reference.md](10_quick_reference.md) | 快速查找 |
 | 研究路线图 | [10_research_roadmap.md](10_research_roadmap.md) | 研究计划 |
 | 工具使用指南 | [10_tools_guide.md](10_tools_guide.md) | 工具指南 |
@@ -393,7 +393,7 @@ research_notes/
 
 | 资源 | 链接 | 说明 |
 | :--- | :--- | :--- |
-| 形式化工程系统 | [../rust-formal-engineering-system/README.md](../rust-formal-engineering-system/README.md) | 形式化工程 |
+| 形式化工程系统 | [../rust-formal-engineering-system/README.md](../../README.md) | 形式化工程 |
 | Rust Book | [https://doc.rust-lang.org/book/](https://doc.rust-lang.org/book/) | 官方教程 |
 | Rust Reference | [https://doc.rust-lang.org/reference/](https://doc.rust-lang.org/reference/) | 语言参考 |
 | releases.rs | [https://releases.rs/](https://releases.rs/) | 版本追踪 |
@@ -668,7 +668,7 @@ fn main() {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

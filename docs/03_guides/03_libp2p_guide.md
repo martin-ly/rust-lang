@@ -6,7 +6,7 @@
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **分级**: [A]
 > **层级**: L6 生态工具 / L3 高级网络
-> **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Network Programming](../../crates/c10_networks)
+> **前置概念**: [Async](../../concept/03_advanced/01_async/02_async.md) · [Network Programming](../../crates/c10_networks)
 > **Bloom 层级**: 应用 → 分析
 > **[来源: libp2p Specification]** · **[来源: rust-libp2p crate]** · **[来源: Protocol Labs - libp2p]** · **来源: [Wikipedia - Peer-to-Peer](https://en.wikipedia.org/wiki/Peer_to_Peer)** ✅
 >

@@ -9,7 +9,7 @@
 > **层级**: L1 基础概念
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana
-> **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Variable Model](20_variable_model.md) · [学习指南](../../00_meta/learning_guide.md)
+> **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Variable Model](20_variable_model.md) · [学习指南](../../00_meta/04_navigation/learning_guide.md)
 > **后置概念**: [Move Semantics](../01_ownership_borrow_lifetime/23_move_semantics.md) · [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md)
 > **主要来源**: · [Rust Reference — Pointer Types](https://doc.rust-lang.org/reference/types/pointer.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >

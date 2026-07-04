@@ -230,10 +230,10 @@
 | 多维矩阵 | 12 维度对比 | 精确参考 | [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) §3 |
 | 决策树 | 技术选型判断 | 工程决策 | [`05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) §4 |
 | 历史必然性 | CS → SE 两种路径 | 历史语境 | [`05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) |
-| 编译模型 | 证明检查 vs 代码生成 | 编译器行为 | [`04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) / [`06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md) |
-| 形式化边界 | Pin、FFI、循环引用（Reference） | 能力边界 | `03_advanced/03_unsafe.md` / `02_intermediate/02_memory_management/03_memory_management.md` |
+| 编译模型 | 证明检查 vs 代码生成 | 编译器行为 | [`04_formal/02_type_theory.md`](../04_formal/00_type_theory/02_type_theory.md) / [`06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md) |
+| 形式化边界 | Pin、FFI、循环引用（Reference） | 能力边界 | `03_advanced/02_unsafe/03_unsafe.md` / `02_intermediate/02_memory_management/03_memory_management.md` |
 | 五层扩展 | L0-L5 形式化层级 | 架构设计 | [`07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) |
-| 秩序与语义 | 欧氏几何模式论证 | 深层设计哲学 | [`00_meta/semantic_space.md`](../00_meta/semantic_space.md) |
+| 秩序与语义 | 欧氏几何模式论证 | 深层设计哲学 | [`00_meta/semantic_space.md`](../00_meta/00_framework/semantic_space.md) |
 
 ---
 

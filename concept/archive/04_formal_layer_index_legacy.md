@@ -38,13 +38,13 @@
 
 | 理论 | 规范文件 | 核心内容 | 状态 |
 |:---|:---|:---|:---|
-| **线性/仿射逻辑** | [`04_formal/01_linear_logic.md`](../04_formal/01_linear_logic.md) | 资源敏感逻辑、⊗/⅋/⊸、Girard 1987、weakening | ✅ v1.0 |
-| **类型论基础** | [`04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) | ADT、HM 推断、子类型、Variance、System F / Fω | ✅ v1.0 |
-| **所有权（Ownership）形式化** | [`04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) | COR、区域类型、分数权限、Stacked/Tree Borrows | ✅ v1.0 |
-| **RustBelt 验证** | [`04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md) | Iris 分离逻辑、验证工具链（Creusot/Verus/Kani）、工业应用 | ✅ v1.0 |
-| **子类型与变型** | [`04_formal/06_subtype_variance.md`](../04_formal/06_subtype_variance.md) | 协变/逆变/不变、生命周期（Lifetimes）子类型、形式化推导 | ✅ v1.0 |
+| **线性/仿射逻辑** | [`04_formal/01_linear_logic.md`](../04_formal/01_ownership_logic/01_linear_logic.md) | 资源敏感逻辑、⊗/⅋/⊸、Girard 1987、weakening | ✅ v1.0 |
+| **类型论基础** | [`04_formal/02_type_theory.md`](../04_formal/00_type_theory/02_type_theory.md) | ADT、HM 推断、子类型、Variance、System F / Fω | ✅ v1.0 |
+| **所有权（Ownership）形式化** | [`04_formal/03_ownership_formal.md`](../04_formal/01_ownership_logic/03_ownership_formal.md) | COR、区域类型、分数权限、Stacked/Tree Borrows | ✅ v1.0 |
+| **RustBelt 验证** | [`04_formal/04_rustbelt.md`](../04_formal/02_separation_logic/04_rustbelt.md) | Iris 分离逻辑、验证工具链（Creusot/Verus/Kani）、工业应用 | ✅ v1.0 |
+| **子类型与变型** | [`04_formal/06_subtype_variance.md`](../04_formal/00_type_theory/06_subtype_variance.md) | 协变/逆变/不变、生命周期（Lifetimes）子类型、形式化推导 | ✅ v1.0 |
 | **分离逻辑** | [`04_formal/07_separation_logic.md`](04_formal/07_separation_logic.md) | * 算子、帧规则、CSL、Iris 框架、RustBelt 应用映射 | ✅ v1.0 |
-| **类型推断（Type Inference）** | [`04_formal/08_type_inference.md`](../04_formal/08_type_inference.md) | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ v1.0 |
+| **类型推断（Type Inference）** | [`04_formal/08_type_inference.md`](../04_formal/00_type_theory/08_type_inference.md) | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ v1.0 |
 | **操作语义** | [`04_formal/09_operational_semantics.md`](04_formal/09_operational_semantics.md) | 小步/大步语义、求值上下文、Rust 形式化 | ✅ v1.0 |
 
 ---

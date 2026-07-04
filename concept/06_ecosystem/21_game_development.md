@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计游戏开发架构
 > **定位**: 分析 Rust 在游戏开发领域的生态格局——从 Bevy ECS 到 WGPU 图形渲染，探讨 Rust 的内存安全（Memory Safety）与性能优势如何重塑游戏引擎设计。
-> **前置概念**: [Concurrency](../03_advanced/01_concurrency.md) ·
+> **前置概念**: [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) ·
 > [Type System](../01_foundation/02_type_system/04_type_system.md) ·
 > [Performance](15_performance_optimization.md)
 > **后置概念**: [WebAssembly](11_webassembly.md) ·
@@ -26,7 +26,7 @@
 > [Rust GameDev Working Group](https://gamedev.rs/) ·
 > [Are We Game Yet?](https://arewegameyet.rs/) ·
 > [Wikipedia — Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -484,7 +484,7 @@ fn main() {
 
 ## 相关概念文件
 
-- [Concurrency](../03_advanced/01_concurrency.md) — 并发
+- [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) — 并发
 - [Performance](15_performance_optimization.md) — 性能优化
 - [WebAssembly](11_webassembly.md) — WebAssembly
 - [Design Patterns](02_patterns.md) — 设计模式

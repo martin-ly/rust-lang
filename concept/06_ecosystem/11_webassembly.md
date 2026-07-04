@@ -14,7 +14,7 @@
 > 探讨 `wasm32-unknown-unknown` / `wasm32-wasip1` 或 `wasm32-wasip2` 目标、
 > `wasm-bindgen [来源: [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen)]`、
 > 组件模型以及 Rust 作为 Wasm 首选语言的工程原因。
-> **前置概念**: [Toolchain](01_toolchain.md) · [FFI](../03_advanced/05_rust_ffi.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
+> **前置概念**: [Toolchain](01_toolchain.md) · [FFI](../03_advanced/04_ffi/05_rust_ffi.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [WASI](08_wasi.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -448,7 +448,7 @@ Rust Wasm 工具链:
 
 - [Toolchain](01_toolchain.md) — Rust 工具链
 - [WASI](08_wasi.md) — WebAssembly System Interface
-- [FFI](../03_advanced/05_rust_ffi.md) — FFI 跨语言交互
+- [FFI](../03_advanced/04_ffi/05_rust_ffi.md) — FFI 跨语言交互
 - [Application Domains](04_application_domains.md) — 应用领域分析
 
 ---

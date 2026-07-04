@@ -61,7 +61,7 @@ docs/
    - [函数系统指南](tier_02_guides/03_functions_guide.md)
    - [错误处理指南](tier_02_guides/05_error_handling_guide.md)
 3. **Week 3：新特性与实践**
-   - [Rust 1.92.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) 🆕
+   - [Rust 1.92.0 控制流改进](rust_192_control_flow_improvements.md) 🆕
    - [代码示例集合](tier_02_guides/06_code_examples.md)
 
 ### 🎓 进阶路径（3-4周）
@@ -94,7 +94,7 @@ docs/
    - [代码示例集合](tier_02_guides/06_code_examples.md)
    - [常见问题](tier_01_foundations/04_faq.md)
 3. **版本特性**
-   - [Rust 1.92.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) 🆕
+   - [Rust 1.92.0 控制流改进](rust_192_control_flow_improvements.md) 🆕
 
 ## 📂 分类索引
 
@@ -177,9 +177,9 @@ Rust 1.92.0 版本特性文档：
 
 | 文档                                                                           | 内容概述                           |
 | :--- | :--- |
-| [RUST_192_CONTROL_FLOW_IMPROVEMENTS.md](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) | Rust 1.92.0 控制流改进 🆕          |
-| [RUST_192_CONTROL_FLOW_IMPROVEMENTS.md](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) | Rust 1.92.0 控制流改进（最新版本） |
-| [RUST_191_CONTROL_FLOW_IMPROVEMENTS.md](RUST_191_CONTROL_FLOW_IMPROVEMENTS.md) | Rust 1.91 控制流改进（历史版本）   |
+| [RUST_192_CONTROL_FLOW_IMPROVEMENTS.md](rust_192_control_flow_improvements.md) | Rust 1.92.0 控制流改进 🆕          |
+| [RUST_192_CONTROL_FLOW_IMPROVEMENTS.md](rust_192_control_flow_improvements.md) | Rust 1.92.0 控制流改进（最新版本） |
+| [RUST_191_CONTROL_FLOW_IMPROVEMENTS.md](rust_191_control_flow_improvements.md) | Rust 1.91 控制流改进（历史版本）   |
 
 ## 🔍 按主题查找
 

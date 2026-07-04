@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 编码 (Encoding) · UTF-8 · OsString · CString · 字符串操作 · 字符 (char) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 编码 (Encoding) · UTF-8 · OsString · CString · 字符串操作 · 字符 (char) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 字符串与编码：Rust 的文本处理类型系统
 >
@@ -9,7 +9,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 系统分析 Rust **字符串类型体系**的设计——String 与 str 的所有权（Ownership）语义、UTF-8 编码约束、OsString/OsStr 的平台抽象、CString/CStr 的 FFI 互操作，以及 grapheme clusters、unicode normalization 等高级文本处理概念。
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/04_type_system.md)
-> **后置概念**: [Collections](../05_collections/08_collections.md) · [FFI](../../03_advanced/05_rust_ffi.md)
+> **后置概念**: [Collections](../05_collections/08_collections.md) · [FFI](../../03_advanced/04_ffi/05_rust_ffi.md)
 
 ---
 
@@ -547,7 +547,7 @@ classDiagram
 - [Type System](../02_type_system/04_type_system.md) — 类型系统（Type System）基础
 - [Strings and Text](09_strings_and_text.md) — 字符串与文本处理概述
 - [Collections](../05_collections/08_collections.md) — 集合类型
-- [FFI](../../03_advanced/05_rust_ffi.md) — 外部函数接口
+- [FFI](../../03_advanced/04_ffi/05_rust_ffi.md) — 外部函数接口
 
 ---
 
@@ -802,7 +802,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

@@ -2,7 +2,7 @@
 
 > **EN**: Atomic Operations
 > **Summary**: Rust 原子操作 Atomic Operations. (stub/archive redirect)
-> **权威来源**: 本主题深度解释见 [concept/03_advanced/11_atomics_and_memory_ordering.md](../../../concept/03_advanced/11_atomics_and_memory_ordering.md)。
+> **权威来源**: 本主题深度解释见 [concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md](../../../concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md)。
 > **历史版本存档**: [archive/knowledge/03_advanced/concurrency/01_atomics.md](../../../archive/knowledge/03_advanced/concurrency/01_atomics.md)
 >
 > **定位**: 本文件为精简知识卡片，保留核心规则/概念与常见陷阱。详细解释、形式化语义与代码示例请查看权威来源。
@@ -33,4 +33,4 @@
 
 ---
 
-**详细内容已迁移**：请点击上方 [concept/03_advanced/11_atomics_and_memory_ordering.md](../../../concept/03_advanced/11_atomics_and_memory_ordering.md) 查看最新权威解释。
+**详细内容已迁移**：请点击上方 [concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md](../../../concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md) 查看最新权威解释。

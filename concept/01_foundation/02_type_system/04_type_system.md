@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 >
-> **本节关键术语**: 类型系统 (Type System) · 结构体 (Struct) · 枚举 (Enum) · 模式匹配 (Pattern Matching) · 泛型 (Generic) · Trait — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 类型系统 (Type System) · 结构体 (Struct) · 枚举 (Enum) · 模式匹配 (Pattern Matching) · 泛型 (Generic) · Trait — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 
 # Type System Basics（类型系统基础）
 >
@@ -540,7 +540,7 @@ Rust 类型系统的安全性保障同样由引理、定理与推论构成严密
 | C3: Never 类型完备性 | L1 | 发散函数参与任意控制流 | 空类型 (⊥) | — | 不稳定特性需 nightly | — |
 
 > **一致性（Coherence）检查**: L1 ⟹ L2 ⟹ T1/T2/T3 ⟹ C1/C2/C3，形成**从代数结构到运行时安全**的递进链。T1 是连接 ADT 结构与程序正确性的枢纽定理。
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/inter_layer_map.md) §4.2 "类型系统一致性"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/inter_layer_map.md) §4.2 "类型系统一致性"
 
 ---
 
@@ -945,7 +945,7 @@ fn main() {
 - [Lifetimes](../01_ownership_borrow_lifetime/03_lifetimes.md) — 生命周期（Lifetimes）是类型系统的参数化扩展，将时间维度引入类型
 - [Traits](../../02_intermediate/00_traits/01_traits.md) — Trait 将行为抽象引入类型系统，对应 Haskell Type Class
 - [Generics](../../02_intermediate/01_generics/02_generics.md) — 泛型参数化使 ADT 具备多态表达能力
-- [00_meta/inter_layer_map.md](../../00_meta/inter_layer_map.md) — 跨层定理映射 §4.2 "类型系统一致性"
+- [00_meta/inter_layer_map.md](../../00_meta/04_navigation/inter_layer_map.md) — 跨层定理映射 §4.2 "类型系统一致性"
 
 ---
 
@@ -1213,7 +1213,7 @@ let b: Array<i32, 5> = Array { data: [1, 2, 3, 4, 5] };
 >
 > [L1 生命周期: Elision 规则](../01_ownership_borrow_lifetime/03_lifetimes.md) ·
 > [L2 泛型: 约束推导](../../02_intermediate/01_generics/02_generics.md) ·
-> [L4 类型论: 系统 F](../../04_formal/02_type_theory.md)
+> [L4 类型论: 系统 F](../../04_formal/00_type_theory/02_type_theory.md)
 
 #### 11.4.1 HM 核心规则（Var、App、Abs、Let）
 
@@ -1449,7 +1449,7 @@ Rust 类型推断:    HM + Trait 求解 + 生命周期约束，NP-hard 最坏情
 
 > **Bloom 层级**: 分析 → 评价
 > 本节从工程直觉深入到内存表示的精确分析，建立 enum 作为 **tagged union** 的完整心智模型。内容覆盖 discriminant 的工作原理、编译器 niche optimization 的数学条件、`#[repr]` 的强制布局语义，以及通过 `unsafe` 对原始字节的验证实验。
-> **交叉链接**: [L4 类型论: ADT 代数语义](../../04_formal/02_type_theory.md) · [L3 unsafe: 无效枚举值](../../03_advanced/03_unsafe.md) · [00_meta/inter_layer_map.md](../../00_meta/inter_layer_map.md) §4.2 "类型系统一致性"
+> **交叉链接**: [L4 类型论: ADT 代数语义](../../04_formal/00_type_theory/02_type_theory.md) · [L3 unsafe: 无效枚举值](../../03_advanced/02_unsafe/03_unsafe.md) · [00_meta/inter_layer_map.md](../../00_meta/04_navigation/inter_layer_map.md) §4.2 "类型系统一致性"
 
 #### 11.5.1 Discriminant 的基本概念与 `std::mem::discriminant`
 
@@ -1795,8 +1795,8 @@ unsafe {
 > **交叉链接**:
 > [L2 Trait: 一致性规则](../../02_intermediate/00_traits/01_traits.md) ·
 > [L2 泛型: Variance](../../02_intermediate/01_generics/02_generics.md) ·
-> [L3 Unsafe: 裸指针与类型双关](../../03_advanced/03_unsafe.md) ·
-> [L4 形式化: 子类型关系](../../04_formal/02_type_theory.md)
+> [L3 Unsafe: 裸指针与类型双关](../../03_advanced/02_unsafe/03_unsafe.md) ·
+> [L4 形式化: 子类型关系](../../04_formal/00_type_theory/02_type_theory.md)
 
 #### 11.7.1 定义与形式化区分
 
@@ -2485,8 +2485,8 @@ fn longest_fixed<'a>(x: &'a str, y: &'a str) -> &'a str {
 ```
 
 > **修正**: 生命周期省略规则（lifetime elision）仅适用于简单模式（单个输入引用 → 输出引用与其相同）。当存在多个输入引用且输出引用需要与其中某个关联时，必须显式标注生命周期。省略规则不适用于复杂签名。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
-> **相关判定树**: [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树) · [Trait 判定树](../00_meta/concept_definition_decision_forest.md#五trait-判定树)
-> **相关 FTA**: [类型系统失效树](../00_meta/fault_tree_analysis_collection.md#四类型系统失效树)
+> **相关判定树**: [泛型判定树](../../00_meta/00_framework/concept_definition_decision_forest.md#六泛型判定树) · [Trait 判定树](../../00_meta/00_framework/concept_definition_decision_forest.md#五trait-判定树)
+> **相关 FTA**: [类型系统失效树](../../00_meta/00_framework/fault_tree_analysis_collection.md#四类型系统失效树)
 
 ### 10.1 边界测试：类型不匹配的基础错误
 

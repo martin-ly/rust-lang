@@ -8,7 +8,7 @@
 ---
 
 > **内容分级**: [归档级]
-> **说明**: 本文档为历史研究材料，最新对比分析请参阅 [concept/05_comparative/](../../../concept/05_comparative) 对应主题
+> **说明**: 本文档为历史研究材料，最新对比分析请参阅 [concept/05_comparative/](../../../05_comparative) 对应主题
 
 ---
 

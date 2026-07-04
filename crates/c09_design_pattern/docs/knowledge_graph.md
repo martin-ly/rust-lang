@@ -700,8 +700,8 @@ pub mod pattern_checklist {
 
 ## 🔗 相关文档
 
-- [多维矩阵对比](MULTIDIMENSIONAL_MATRIX_COMPARISON.md) - 详细的性能和特性对比
-- [思维导图](MIND_MAP.md) - 可视化学习路径
+- [多维矩阵对比](multidimensional_matrix_comparison.md) - 详细的性能和特性对比
+- [思维导图](mind_map.md) - 可视化学习路径
 - [Rust 1.92.0 特性示例](RUST_192_EXAMPLES.md) - 最新特性应用（自 Rust 1.90 引入）
 - [综合设计模式指南](COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 完整理论和实践
 

@@ -5,7 +5,7 @@
 > **深度**: [综述级]
 > **主轨引用**: 概念级深度分析请参阅 [concept/07_future/19_rust_edition_preview.md](../../06_ecosystem/02_edition_2024.md)
 >
-> **相关概念**: [异步闭包](../../../concept/03_advanced/02_async.md)
+> **相关概念**: [异步闭包](../../../../concept/03_advanced/01_async/02_async.md)
 > **Bloom 层级**: 理解
 > **提示**: 本文档为快速参考。如需完整教学（概念定义、反例集、自我检测等），请参阅 [async_closure.md](02_async_closure.md)。
 > **权威来源**: [RFC 3668 — Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html), [Rust Reference — Async closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures), [Rust 1.85 Release Notes](https://releases.rs/docs/1.85.0/)

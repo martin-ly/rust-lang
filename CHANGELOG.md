@@ -1050,7 +1050,7 @@
 - **速查表版本声明批量更新**（9 个文件）: `1.93.0/1.93.1+` → `1.96.0+`
   - `02_wasm_cheatsheet.md`, `02_type_system.md`, `02_threads_concurrency_cheatsheet.md`, `02_testing_cheatsheet.md`, `02_strings_formatting_cheatsheet.md`, `02_smart_pointers_cheatsheet.md`, `02_collections_iterators_cheatsheet.md`, `02_control_flow_functions_cheatsheet.md`, `02_modules_cheatsheet.md`
 - **`docs/06_toolchain/06_jump_tables_guide.md`**: 版本声明更新为 `1.93.0+ (MSRV 1.96.0)`
-- **速查表损坏链接批量修复**（24 个文件）: `[上级目录](../README.md)` → `[速查表索引](README.md)`
+- **速查表损坏链接批量修复**（24 个文件）: `[上级目录](README.md)` → `[速查表索引](README.md)`
 - **审计脚本**: 新建 `scripts/docs_value_audit.py`，自动扫描 docs/ 中版本声明、最后更新日期和内部链接损坏
 
 ---
@@ -1135,10 +1135,10 @@
 
 ### 🔗 L3 概念 ↔ 测验闭环
 
-- **`concept/03_advanced/01_concurrency.md`**: 末尾添加指向 [L3 并发与异步测验](21_quiz_concurrency_async.md) 的链接
-- **`concept/03_advanced/02_async.md`**: 末尾添加指向 [L3 并发与异步测验](21_quiz_concurrency_async.md) 的链接
-- **`concept/03_advanced/03_unsafe.md`**: 末尾添加指向 [L3 Unsafe Rust 测验](22_quiz_unsafe.md) 的链接
-- **`concept/03_advanced/04_macros.md`**: 末尾添加指向 [L3 宏系统测验](23_quiz_macros.md) 的链接
+- **`concept/03_advanced/01_concurrency.md`**: 末尾添加指向 [L3 并发与异步测验](concept/03_advanced/00_concurrency/21_quiz_concurrency_async.md) 的链接
+- **`concept/03_advanced/02_async.md`**: 末尾添加指向 [L3 并发与异步测验](concept/03_advanced/00_concurrency/21_quiz_concurrency_async.md) 的链接
+- **`concept/03_advanced/03_unsafe.md`**: 末尾添加指向 [L3 Unsafe Rust 测验](concept/03_advanced/02_unsafe/22_quiz_unsafe.md) 的链接
+- **`concept/03_advanced/04_macros.md`**: 末尾添加指向 [L3 宏系统测验](concept/03_advanced/03_proc_macros/23_quiz_macros.md) 的链接
 - **`concept/03_advanced/06_pin_unpin.md`**: 新增 4 道嵌入式测验（Pin 设计动机/Unpin 自动实现/`Pin::new` 限制/async 状态机自引用）
 - **`concept/03_advanced/03_unsafe.md`**: 新增 4 道嵌入式测验（`unsafe` 块 5 种能力/`unsafe fn` 调用契约/裸指针安全解引用/`unsafe impl Send` 契约）
 - **`concept/03_advanced/01_concurrency.md`**: 新增 4 道嵌入式测验（Send/Sync 定义/Rc vs Arc/`Arc<Mutex<T>>` 共享状态/死锁分析）

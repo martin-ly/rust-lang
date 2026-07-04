@@ -9,8 +9,8 @@
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana
-> **前置概念**: [Macros](../../03_advanced/04_macros.md) · [Generics](../01_generics/02_generics.md) · [Traits](../00_traits/01_traits.md)
-> **后置概念**: [Proc Macro](../../03_advanced/07_proc_macro.md) · [DSL and Embedding](13_dsl_and_embedding.md)
+> **前置概念**: [Macros](../../03_advanced/03_proc_macros/04_macros.md) · [Generics](../01_generics/02_generics.md) · [Traits](../00_traits/01_traits.md)
+> **后置概念**: [Proc Macro](../../03_advanced/03_proc_macros/07_proc_macro.md) · [DSL and Embedding](13_dsl_and_embedding.md)
 > **主要来源**: · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
 > [TRPL Ch 19.5 — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
@@ -209,7 +209,7 @@ fn max<T: Ord>(a: T, b: T) -> T {
 - 自定义属性宏修改函数/结构体（Struct）
 - 编译期 DSL 解析
 
-详见 [Proc Macro](../../03_advanced/07_proc_macro.md)。
+详见 [Proc Macro](../../03_advanced/03_proc_macros/07_proc_macro.md)。
 
 ---
 

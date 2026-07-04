@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 生命周期（Lifetimes）省略 (Lifetime Elision) · HRTB (Higher-Ranked Trait Bounds) · 协变 (Covariance) · 逆变 (Contravariance) · 不变 (Invariance) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 生命周期（Lifetimes）省略 (Lifetime Elision) · HRTB (Higher-Ranked Trait Bounds) · 协变 (Covariance) · 逆变 (Contravariance) · 不变 (Invariance) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # Lifetimes 高级主题
 >
@@ -211,8 +211,8 @@
 - [Ownership](01_ownership.md) — 生命周期建立在所有权转移规则之上
 - [Borrowing](02_borrowing.md) — 借用检查是生命周期约束的执行机制
 - [Advanced Generics](../../02_intermediate/01_generics/02_generics.md) — 泛型（Generics）与生命周期参数共同构成参数化多态
-- [Async/Await](../../03_advanced/02_async.md) — async 状态机的自引用需要生命周期与 Pin 协同
-- [00_meta/inter_layer_map.md](../../00_meta/inter_layer_map.md) — 跨层定理映射 §4.2
+- [Async/Await](../../03_advanced/01_async/02_async.md) — async 状态机的自引用需要生命周期与 Pin 协同
+- [00_meta/inter_layer_map.md](../../00_meta/04_navigation/inter_layer_map.md) — 跨层定理映射 §4.2
 
 ---
 
@@ -536,7 +536,7 @@ fn longest(x: &str, y: &str) -> &str;    // ❌ E0106
 > **核心洞察**：Elision 是编译器在"不引入歧义"的前提下的最大努力推导。它的 soundness 来源于**函数返回值不能凭空产生引用**这一 Rust 核心公理——任何返回的引用必须"继承"自某个输入。
 > **来源: [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html)** 完整的 Elision 规则定义于 Reference 的 "Lifetime elision" 章节，覆盖函数签名、方法签名及 trait 对象场景。✅
 
-**跨层映射**: 本章节形式化规则 ↔ [`../04_formal/03_ownership_formal.md`](../../04_formal/03_ownership_formal.md) §2.2 "区域约束的语法与语义"
+**跨层映射**: 本章节形式化规则 ↔ [`../04_formal/03_ownership_formal.md`](../../04_formal/01_ownership_logic/03_ownership_formal.md) §2.2 "区域约束的语法与语义"
 
 ---
 
@@ -825,7 +825,7 @@ Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where 
 
 > **Bloom 层级**: 分析 → 评价
 > `union` 是 Rust 中唯一允许在同一内存位置存储不同类型的语言构造。它与 `enum` 形成鲜明对比：enum 用 tag 保证类型安全，union 则将类型安全的责任完全交给程序员。本节从内存布局、drop 语义、`ManuallyDrop` 机制、impl 限制与 FFI 互操作五个维度，建立 union 的完整安全模型。
-> **交叉链接**: [L1 类型系统（Type System）: ADT 与 Union 对比](../02_type_system/04_type_system.md) · [L3 unsafe: union 字段访问](../../03_advanced/03_unsafe.md) · [L3 unsafe: ManuallyDrop](../../03_advanced/03_unsafe.md)
+> **交叉链接**: [L1 类型系统（Type System）: ADT 与 Union 对比](../02_type_system/04_type_system.md) · [L3 unsafe: union 字段访问](../../03_advanced/02_unsafe/03_unsafe.md) · [L3 unsafe: ManuallyDrop](../../03_advanced/02_unsafe/03_unsafe.md)
 
 ### 16.1 union 的内存布局与 enum 的本质区别
 
@@ -1157,7 +1157,7 @@ enum SafeValue {
 
 ## 权威来源索引
 
-> **相关判定树**: [生命周期判定树](../00_meta/concept_definition_decision_forest.md#四生命周期判定树)
+> **相关判定树**: [生命周期判定树](../../00_meta/00_framework/concept_definition_decision_forest.md#四生命周期判定树)
 > **相关谓词映射**: [生命周期令牌 [α]₁](../00_meta/rustbelt_predicate_map.md#四生命周期令牌-α₁-映射)
 
 ## 十、边界测试：高级生命周期的编译错误
@@ -1495,6 +1495,6 @@ fn dangle() -> &String {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

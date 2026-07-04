@@ -13,8 +13,8 @@
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: E×Eva — 评估 C→Rust 自动化翻译工具的适用性与局限
 > **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) ·
-> [Unsafe Rust](../03_advanced/03_unsafe.md) ·
-> [FFI](../03_advanced/09_ffi_advanced.md)
+> [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) ·
+> [FFI](../03_advanced/04_ffi/09_ffi_advanced.md)
 > **后置概念**: [Formal Verification Tools](74_formal_verification_tools.md) ·
 > [Compiler Internals](45_compiler_internals.md)
 > **Bloom 层级**: 分析 → 评价

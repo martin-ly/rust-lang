@@ -1,7 +1,7 @@
 # Gillian-Rust: 混合方法验证 Unsafe Rust
 
 > **内容分级**: [归档级]
-> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/03_advanced/12_unsafe_rust_patterns.md](../../../concept/03_advanced/12_unsafe_rust_patterns.md)
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/03_advanced/12_unsafe_rust_patterns.md](../../../concept/03_advanced/02_unsafe/12_unsafe_rust_patterns.md)
 >
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)

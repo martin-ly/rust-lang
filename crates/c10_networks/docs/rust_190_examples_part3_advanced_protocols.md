@@ -2949,12 +2949,12 @@ tonic-build = "0.11"
 
 ## 🔗 相关文档
 
-- [Part 1: TCP/UDP/基础特性](RUST_190_EXAMPLES_COLLECTION.md)
-- [Part 2: HTTP/WebSocket/DNS](RUST_190_EXAMPLES_PART2.md)
+- [Part 1: TCP/UDP/基础特性](rust_190_examples_collection.md)
+- [Part 2: HTTP/WebSocket/DNS](rust_190_examples_part2.md)
 - [知识图谱](theory/knowledge_graph_and_concept_relations.md)
 - [多维矩阵对比](theory/multi_dimensional_comparison_matrix.md)
-- [思维导图](RUST_190_COMPREHENSIVE_EXAMPLES.md)
-- [文档索引](RUST_190_PRACTICAL_EXAMPLES.md)
+- [思维导图](rust_190_comprehensive_examples.md)
+- [文档索引](rust_190_practical_examples.md)
 
 ---
 

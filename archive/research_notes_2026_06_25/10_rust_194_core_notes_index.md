@@ -4,7 +4,7 @@
 > **Summary**: Rust 1.94 核心笔记索引 Rust 194 Core Notes Index. (stub/archive redirect)
 > **归档说明**: 本文档为 Rust 1.94 历史版本研究笔记，已迁移到 `archive/research_notes/10_rust_194_core_notes_index.md`。
 > Rust 1.94/1.95 稳定特性的权威来源为 [concept/07_future/rust_1_95_stabilized.md](../../concept/07_future/rust_1_95_stabilized.md)。
-> 历史版本存档：[archive/research_notes/10_rust_194_core_notes_index.md](../../archive/research_notes/10_rust_194_core_notes_index.md)
+> 历史版本存档：[archive/research_notes/10_rust_194_core_notes_index.md](../research_notes/10_rust_194_core_notes_index.md)
 
 ---
 

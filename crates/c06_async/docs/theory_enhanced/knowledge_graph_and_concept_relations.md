@@ -220,7 +220,7 @@ gantt
 
 **相关文档**:
 
-- [多维矩阵对比](MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)
+- [多维矩阵对比](multi_dimensional_comparison_matrix.md)
 - [README](../../README.md)
 - [知识系统](../knowledge_system)
 

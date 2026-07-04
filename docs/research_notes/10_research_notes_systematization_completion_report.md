@@ -156,7 +156,7 @@
 - [知识图谱索引](10_knowledge_graph_index.md)
 - [跨文档映射网络](10_cross_reference_index.md)
 - [层次化梳理与映射总结](10_hierarchical_mapping_and_summary.md)
-- [研究笔记主索引](INDEX.md)
+- [研究笔记主索引](../../concept/sources/INDEX.md)
 
 ## 社区权威参考 {#社区权威参考}
 

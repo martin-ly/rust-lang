@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 >
-> **本节关键术语**: 副作用 (Side Effect) · 纯函数 (Pure Function) · 引用（Reference）透明 (Referential Transparency) · 效果系统 (Effect System) · IO — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 副作用 (Side Effect) · 纯函数 (Pure Function) · 引用（Reference）透明 (Referential Transparency) · 效果系统 (Effect System) · IO — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 副作用与纯度：从引用透明到 Rust 的所有权效果
 >
@@ -15,8 +15,8 @@
 > **层级**: L1 基础概念 — 通用编程语言机制
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Und — 理解副作用在编程语言中的本质与 Rust 的控制机制
-> **前置概念**: [Variable Model](../03_values_and_references/20_variable_model.md) · [Evaluation Strategies](../../04_formal/18_evaluation_strategies.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)
-> **后置概念**: [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Effects System](../../07_future/04_effects_system.md) · [Async](../../03_advanced/02_async.md)
+> **前置概念**: [Variable Model](../03_values_and_references/20_variable_model.md) · [Evaluation Strategies](../../04_formal/03_operational_semantics/18_evaluation_strategies.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)
+> **后置概念**: [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Effects System](../../07_future/04_effects_system.md) · [Async](../../03_advanced/01_async/02_async.md)
 > **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > [Haskell Wiki — Referential Transparency](https://wiki.haskell.org/Referential_transparency) ·
@@ -651,7 +651,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

@@ -47,7 +47,7 @@
 
 ## 相关概念
 
-- [形式化验证工具链 (concept)](../../../concept/04_formal/05_verification_toolchain.md) — KVerus (arXiv 2026)、AutoVerus (OOPSLA 2025)、Vest (USENIX Security 2025)
+- [形式化验证工具链 (concept)](../../../concept/04_formal/04_model_checking/05_verification_toolchain.md) — KVerus (arXiv 2026)、AutoVerus (OOPSLA 2025)、Vest (USENIX Security 2025)
 
 ## 📚 模块 8: 国际化对齐
 

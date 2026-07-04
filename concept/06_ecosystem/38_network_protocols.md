@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: C×Syn — 综合网络协议的工程实现与选型
 > **定位**: 深入分析 QUIC/HTTP-3、TCP 栈和 eBPF 的 Rust 实现，揭示 Rust 的所有权（Ownership）模型如何映射到网络协议的状态机和包处理。
-> **前置概念**: [Async/Await](../03_advanced/02_async.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Unsafe](../03_advanced/03_unsafe.md)
+> **前置概念**: [Async/Await](../03_advanced/01_async/02_async.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Unsafe](../03_advanced/02_unsafe/03_unsafe.md)
 > **后置概念**: [Stream Processing Ecosystem](36_stream_processing_ecosystem.md) · [Distributed Systems](18_distributed_systems.md)
 >
 > **来源**: [tokio](https://docs.rs/tokio/) · [quinn](https://docs.rs/quinn/) · [rustls](https://docs.rs/rustls/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -28,7 +28,7 @@
 
 ---
 
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 一、QUIC：基于 UDP 的安全传输协议

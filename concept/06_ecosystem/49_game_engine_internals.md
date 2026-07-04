@@ -12,7 +12,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 游戏引擎核心系统的架构设计与实现权衡
-> **前置依赖**: [ECS 架构](07_game_ecs.md) · [游戏开发](21_game_development.md) · [并发编程](../03_advanced/01_concurrency.md) · [Async/Await](../03_advanced/02_async.md)
+> **前置依赖**: [ECS 架构](07_game_ecs.md) · [游戏开发](21_game_development.md) · [并发编程](../03_advanced/00_concurrency/01_concurrency.md) · [Async/Await](../03_advanced/01_async/02_async.md)
 > **后置延伸**: [性能优化](15_performance_optimization.md) · [嵌入式系统](22_embedded_systems.md) · [内存管理](../02_intermediate/02_memory_management/03_memory_management.md)
 >
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://docs.rs/wgpu/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -28,7 +28,7 @@
 > [Vulkan Specification](https://www.khronos.org/registry/vulkan/specs/1.3/html/vkspec.html) ·
 > [WGPU Documentation](https://docs.rs/wgpu/latest/wgpu/)
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -1030,11 +1030,11 @@ enum AssetState {
 
 - [ECS 架构](07_game_ecs.md) — Entity-Component-System 设计模式
 - [游戏开发](21_game_development.md) — 游戏开发概述与工具链
-- [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、多线程并行
-- [Async/Await](../03_advanced/02_async.md) — 异步资源加载、网络
+- [并发编程](../03_advanced/00_concurrency/01_concurrency.md) — Send/Sync、多线程并行
+- [Async/Await](../03_advanced/01_async/02_async.md) — 异步资源加载、网络
 - [性能优化](15_performance_optimization.md) — SIMD、缓存优化、内存布局
 - [内存管理](../02_intermediate/02_memory_management/03_memory_management.md) — Arena/Pool 分配器
-- [Unsafe Rust](../03_advanced/03_unsafe.md) — GPU FFI、图形 API 绑定
+- [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) — GPU FFI、图形 API 绑定
 - [网络协议](38_network_protocols.md) — QUIC、UDP、序列化
 - [嵌入式系统](22_embedded_systems.md) — `#![no_std]`、资源受限
 - [架构设计模式](35_architecture_patterns.md) — 分层/六边形架构

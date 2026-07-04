@@ -18,9 +18,9 @@
 > 分析 Rust 的类型系统（Type System）如何与测试策略协同实现"编译即验证"的工程学理念。
 > **前置概念**:
 > [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) ·
-> [Macros](../03_advanced/04_macros.md)
+> [Macros](../03_advanced/03_proc_macros/04_macros.md)
 > **后置概念**:
-> [Miri](../03_advanced/03_unsafe.md) ·
+> [Miri](../03_advanced/02_unsafe/03_unsafe.md) ·
 > [Formal Methods](../07_future/02_formal_methods.md)
 
 ---
@@ -31,7 +31,7 @@
 > [cargo-fuzz](https://github.com/rust-fuzz/cargo-fuzz) ·
 > [Miri](https://github.com/rust-lang/miri) ·
 > [Rust [RFC 2318](https://rust-lang.github.io/rfcs//2318-custom-test-frameworks.html) — Custom Test Frameworks](<https://github.com/rust-lang/rfcs/pull/2318>)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -501,7 +501,7 @@ graph TD
 ## 相关概念文件
 
 - [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) — 错误处理（Error Handling）
-- [Unsafe](../03_advanced/03_unsafe.md) — unsafe 代码测试
+- [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) — unsafe 代码测试
 - [Documentation](14_documentation.md) — 文档测试
 
 ---

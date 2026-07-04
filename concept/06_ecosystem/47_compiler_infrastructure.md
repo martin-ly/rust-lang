@@ -11,14 +11,14 @@ Compiler Internals. Core Rust concept covering mechanism analysis, parallel prog
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统梳理 Rust 编译器（rustc）的核心基础设施——并行前端、Cranelift 后端、build-std、Sanitizer——分析其对编译速度、目标平台和开发体验的影响。
-> **前置概念**: [Toolchain](01_toolchain.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
+> **前置概念**: [Toolchain](01_toolchain.md) · [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md)
 > **后置延伸**: [Rust 1.97.0 前沿特性预览（Beta）](../07_future/rust_1_97_preview.md) · [Performance Optimization](15_performance_optimization.md)
 
 ---
 
 > **来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [rustc_driver](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_driver/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 一、编译器架构总览

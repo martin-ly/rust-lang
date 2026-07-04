@@ -14,8 +14,8 @@
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估安全实践和审计策略
 > **定位**: 系统讲解 Rust **安全编程实践**——从输入验证、加密使用、到审计和供应链安全，揭示如何在 Rust 的内存安全（Memory Safety）基础上构建全面的安全防御体系。
-> **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) · [Error Handling](../02_intermediate/03_error_handling/16_error_handling_deep_dive.md)
-> **后置概念**: [Blockchain](06_blockchain.md) · [Formal Methods](../04_formal/04_rustbelt.md)
+> **前置概念**: [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) · [Error Handling](../02_intermediate/03_error_handling/16_error_handling_deep_dive.md)
+> **后置概念**: [Blockchain](06_blockchain.md) · [Formal Methods](../04_formal/02_separation_logic/04_rustbelt.md)
 >
 > **来源**: [Rust Secure Code WG](https://github.com/rust-secure-code/wg) · [Cargo — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
@@ -26,7 +26,7 @@
 > [Rust CVEs](https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=rust) ·
 > [ANSSI Rust Guidelines](https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-programming_rules_to_develop_secure_applications_with_rust-v1.0.pdf) ·
 > [Wikipedia — Defense in Depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing))
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -867,10 +867,10 @@ cargo audit
 
 ## 相关概念文件
 
-- [Unsafe](../03_advanced/03_unsafe.md) — 不安全代码
+- [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) — 不安全代码
 - [Type System](../01_foundation/02_type_system/04_type_system.md) — 类型系统
 - [Blockchain](06_blockchain.md) — 区块链安全
-- [Formal Methods](../04_formal/04_rustbelt.md) — 形式化验证
+- [Formal Methods](../04_formal/02_separation_logic/04_rustbelt.md) — 形式化验证
 
 ---
 

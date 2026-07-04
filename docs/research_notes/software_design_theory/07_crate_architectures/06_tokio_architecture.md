@@ -11,5 +11,5 @@
 >
 > 相关概念参考：
 >
-> - [异步编程](../../../../concept/03_advanced/02_async.md)
-> - [并发编程](../../../../concept/03_advanced/01_concurrency.md)
+> - [异步编程](../../../../concept/03_advanced/01_async/02_async.md)
+> - [并发编程](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)

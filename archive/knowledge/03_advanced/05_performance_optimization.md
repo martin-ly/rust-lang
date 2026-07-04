@@ -2,8 +2,8 @@
 
 > **📎 交叉引用**
 >
-> 本主题在 concept 中有深度的概念分析：[性能优化](../../concept/06_ecosystem/15_performance_optimization.md)
-> **相关概念**: [性能优化](../../concept/06_ecosystem/15_performance_optimization.md)
+> 本主题在 concept 中有深度的概念分析：[性能优化](../../../concept/06_ecosystem/15_performance_optimization.md)
+> **相关概念**: [性能优化](../../../concept/06_ecosystem/15_performance_optimization.md)
 > **Bloom 层级**: 理解
 > **📌 简介**: Rust 性能优化涵盖零成本抽象、编译器内联、缓存友好布局、SIMD、内存分配优化和 `unsafe` 性能技巧。Rust 的设计哲学是"零成本抽象"——高级特性不带来运行时开销，但掌握优化技术可以榨取硬件极限性能。
 >
@@ -429,7 +429,7 @@ if likely(normal_condition()) {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [延迟初始化 (Lazy Initialization)](04_lazy_initialization.md)
-- [03 - 高级 Rust](README.md)
+- [03 - 高级 Rust](../../../README.md)
 - [Rust 并发编程 (Threads)](concurrency/03_threads.md)
 - [Rust 所有权深入](../01_fundamentals/04_ownership.md)
 

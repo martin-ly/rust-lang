@@ -32,7 +32,7 @@
 
 **Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 
-**一页纸总结**: [ONE_PAGE_SUMMARY.md](ONE_PAGE_SUMMARY.md) — 核心概念、常见坑、速选表
+**一页纸总结**: [ONE_PAGE_SUMMARY.md](one_page_summary.md) — 核心概念、常见坑、速选表
 
 ---
 
@@ -61,7 +61,7 @@
 ## 📚 Tier 1-4 分层导航
 
 | Tier | 层级名称 | 文档数 | 适合人群 | 入口 |
-| :--- | :--- | :--- | :--- | :--- || **Tier 1** | 基础层 | 4 个 | 初学者 | [tier_01_foundations/](tier_01_foundations/README.md) |
+| :--- | :--- | :--- | :--- | :--- || **Tier 1** | 基础层 | 4 个 | 初学者 | [tier_01_foundations/](../../../README.md) |
 | **Tier 2** | 核心指南层 | 多篇 | 进阶学习者 | [tier_02_guides/](tier_02_guides) |
 | **Tier 3** | 参考层 | 多篇 | 高级开发者 | [tier_03_references/](tier_03_references) |
 | **Tier 4** | 高级层 | 5 篇 | 专家/研究者 | [tier_04_advanced/](tier_04_advanced/README.md) |
@@ -70,16 +70,16 @@
 
 ## 📦 Cargo 包管理专题
 
-> 注：该专题文档已迁移至项目级 [`../../../archive/cargo_package_management_from_c02/`](../../../archive/cargo_package_management_from_c02/)，
+> 注：该专题文档已迁移至项目级 [`../../../archive/cargo_package_management_from_c02/`](../../../archive/cargo_package_management_from_c02)，
 > 因为它与 `c02_type_system` 的学习主线无关。
 
 ---
 
 ## 🆕 Rust 版本特性
 
-- [Rust 1.91 类型系统改进](RUST_191_TYPE_SYSTEM_IMPROVEMENTS.md)
-- [Rust 1.92 类型系统改进](RUST_192_TYPE_SYSTEM_IMPROVEMENTS.md)
-- [Rust 1.92 示例集合](RUST_192_EXAMPLES_COLLECTION.md)
+- [Rust 1.91 类型系统改进](rust_191_type_system_improvements.md)
+- [Rust 1.92 类型系统改进](rust_192_type_system_improvements.md)
+- [Rust 1.92 示例集合](rust_192_examples_collection.md)
 
 ---
 

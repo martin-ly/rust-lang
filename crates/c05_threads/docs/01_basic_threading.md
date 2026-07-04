@@ -2,7 +2,7 @@
 
 > **文档定位**: 掌握Rust基础线程操作的实践指南，包含大量代码示例和可视化图表
 > **先修知识**: [01_threads_and_ownership](01_threads_and_ownership.md)
-> **相关文档**: [02_thread_synchronization](02_thread_synchronization.md) | [FAQ](tier_01_foundations/04_faq.md) | [主索引](00_MASTER_INDEX.md) | [知识图谱](KNOWLEDGE_GRAPH.md)
+> **相关文档**: [02_thread_synchronization](02_thread_synchronization.md) | [FAQ](tier_01_foundations/04_faq.md) | [主索引](00_master_index.md) | [知识图谱](KNOWLEDGE_GRAPH.md)
 
 **最后更新**: 2025-10-19
 **适用版本**: Rust 1.96.1+ (充分利用最新特性)

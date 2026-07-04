@@ -5,11 +5,11 @@
 >
 > **📎 交叉引用**
 >
-> 本主题在 concept 中有深度的概念分析：[异步编程](../../../concept/03_advanced/02_async.md)
+> 本主题在 concept 中有深度的概念分析：[异步编程](../../../concept/03_advanced/01_async/02_async.md)
 >
 > **层次定位**: L3 高级概念 / 异步子域索引
 > **前置依赖**: [knowledge 泛型](../../02_intermediate/03_generics.md) · [knowledge Trait](../../02_intermediate/06_traits.md)
-> **后置延伸**: [knowledge Unsafe](../unsafe/README.md) · [concept L3 Async](../../../concept/03_advanced/02_async.md)
+> **后置延伸**: [knowledge Unsafe](../unsafe/README.md) · [concept L3 Async](../../../concept/03_advanced/01_async/02_async.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L3 系统编程
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性
 >

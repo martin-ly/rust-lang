@@ -16,7 +16,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 MCDC 覆盖率预览特性
 > **定位**: 探讨 Modified Condition/Decision Coverage（MC/DC）作为**安全关键软件验证**核心指标的形式化语义，以及 Rust 编译器实现 MC/DC 覆盖率的技术路径。
-> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Version Tracking](05_rust_version_tracking.md)
+> **前置概念**: [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) · [Version Tracking](05_rust_version_tracking.md)
 > **后置概念**: [Formal Methods](02_formal_methods.md) · [Rust for Linux](../06_ecosystem/04_application_domains.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -312,7 +312,7 @@ graph TD
 
 ## 相关概念文件
 
-- [Unsafe Rust](../03_advanced/03_unsafe.md) — 安全关键代码的 unsafe 边界
+- [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) — 安全关键代码的 unsafe 边界
 - [Formal Methods](02_formal_methods.md) — 形式化验证替代方案
 - [Version Tracking](05_rust_version_tracking.md) — Rust 版本特性演进
 - [Application Domains](../06_ecosystem/04_application_domains.md) — 安全关键应用领域

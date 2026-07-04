@@ -14,8 +14,8 @@
 > [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
 > [Lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) ·
 > [Type System](../01_foundation/02_type_system/04_type_system.md) ·
-> [Unsafe](../03_advanced/03_unsafe.md) ·
-> [Linear Logic](../04_formal/01_linear_logic.md)
+> [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) ·
+> [Linear Logic](../04_formal/01_ownership_logic/01_linear_logic.md)
 > [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
 > **后置概念**:
 > [Formal Ecosystem Tower](44_formal_ecosystem_tower.md) ·
@@ -674,9 +674,9 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 | 借用检查 | [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | Sealevel 运行时并行调度同构 |
 | 生命周期（Lifetimes） | [`../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 跨区块状态引用（Reference）有效性 |
 | 类型系统 | [`../01_foundation/02_type_system/04_type_system.md`](../01_foundation/02_type_system/04_type_system.md) | 漏洞类别消除机制 |
-| Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | VM 运行时底层边界 |
-| 线性逻辑 | [`../04_formal/01_linear_logic.md`](../04_formal/01_linear_logic.md) | 代币作为线性资源的形式化 |
-| 形式化验证工具链 | [`../04_formal/05_verification_toolchain.md`](../04_formal/05_verification_toolchain.md) | Kani / Verus 的验证理论 |
+| Unsafe | [`../03_advanced/02_unsafe/03_unsafe.md`](../03_advanced/02_unsafe/03_unsafe.md) | VM 运行时底层边界 |
+| 线性逻辑 | [`../04_formal/01_linear_logic.md`](../04_formal/01_ownership_logic/01_linear_logic.md) | 代币作为线性资源的形式化 |
+| 形式化验证工具链 | [`../04_formal/05_verification_toolchain.md`](../04_formal/04_model_checking/05_verification_toolchain.md) | Kani / Verus 的验证理论 |
 | 核心库谱系 | [`./03_core_crates.md`](03_core_crates.md) | `solana-program`、`ink` 等 crate 定位 |
 | 应用领域 | [`./04_application_domains.md`](04_application_domains.md) | 区块链作为 L6 应用域 |
 

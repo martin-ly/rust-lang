@@ -69,7 +69,7 @@ chmod +x csv_filter.rs && ./csv_filter.rs
 > [rust-lang/cargo#12207](https://github.com/rust-lang/cargo/issues/12207) ·
 > [rust-lang/rust#136889](https://github.com/rust-lang/rust/issues/136889)
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -92,7 +92,7 @@ chmod +x csv_filter.rs && ./csv_filter.rs
     - [4.3 数据处理与临时任务](#43-数据处理与临时任务)
   - [五、形式化定位](#五形式化定位)
     - [5.1 匿名 Crate 语义](#51-匿名-crate-语义)
-    - [5.2 与模块（Module）系统的关系](#52-与模块系统的关系)
+    - [5.2 与模块系统的关系](#52-与模块系统的关系)
   - [六、与 L1-L4 的关系映射](#六与-l1-l4-的关系映射)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
@@ -101,7 +101,7 @@ chmod +x csv_filter.rs && ./csv_filter.rs
   - [十、边界测试：Cargo Script 的编译错误](#十边界测试cargo-script-的编译错误)
     - [10.1 边界测试：`cargo script` 的依赖解析（编译错误）](#101-边界测试cargo-script-的依赖解析编译错误)
     - [10.2 边界测试：单文件脚本的模块限制（编译错误）](#102-边界测试单文件脚本的模块限制编译错误)
-    - [10.5 边界测试：`cargo script` 的缓存与依赖版本漂移（运行时（Runtime）行为变化）](#105-边界测试cargo-script-的缓存与依赖版本漂移运行时行为变化)
+    - [10.5 边界测试：`cargo script` 的缓存与依赖版本漂移（运行时行为变化）](#105-边界测试cargo-script-的缓存与依赖版本漂移运行时行为变化)
     - [10.7 边界测试：cargo script 的依赖解析与版本冲突（运行时/编译错误）](#107-边界测试cargo-script-的依赖解析与版本冲突运行时编译错误)
     - [10.3 边界测试：cargo script 的 shebang 与 Windows 兼容性（运行时错误）](#103-边界测试cargo-script-的-shebang-与-windows-兼容性运行时错误)
     - [补充定理链](#补充定理链)

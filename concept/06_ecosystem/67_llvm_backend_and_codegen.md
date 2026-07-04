@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: LLVM · Codegen · LLVM IR · Codegen Unit · Monomorphization · Target Spec · LTO · `rustc_codegen_llvm` · `rustc_codegen_ssa` — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: LLVM · Codegen · LLVM IR · Codegen Unit · Monomorphization · Target Spec · LTO · `rustc_codegen_llvm` · `rustc_codegen_ssa` — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 # Rust 编译器的 LLVM 后端与代码生成
 

@@ -140,7 +140,7 @@
 - [分布式模式特性矩阵](10_distributed_pattern_matrix.md)
 - [Rust 工业级 Crate 架构解构总索引](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md)
 - [知识图谱索引](10_knowledge_graph_index.md)
-- [研究笔记完整索引](INDEX.md)
+- [研究笔记完整索引](../../concept/sources/INDEX.md)
 
 ---
 

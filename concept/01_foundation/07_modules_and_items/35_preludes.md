@@ -9,8 +9,8 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Specification / Language semantics
 > **双维定位**: S×Lang — 语言名称解析机制
-> **前置依赖**: [Modules and Paths](11_modules_and_paths.md) · [Attributes and Macros](../09_macros_basics/12_attributes_and_macros.md) · [Terminology Glossary](../../00_meta/terminology_glossary.md)
-> **后置概念**: [Unsafe Rust](../../03_advanced/03_unsafe.md) · [Linkage](../../03_advanced/27_linkage.md)
+> **前置依赖**: [Modules and Paths](11_modules_and_paths.md) · [Attributes and Macros](../09_macros_basics/12_attributes_and_macros.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
+> **后置概念**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md)
 > **定理链**: N/A — 语言规范/综述性文档
 > **主要来源**: [Rust Reference — Preludes](https://doc.rust-lang.org/reference/names/preludes.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
@@ -210,5 +210,5 @@ mod example {
 |:---|:---|
 | [Modules and Paths](11_modules_and_paths.md) | prelude 决定哪些名字在模块作用域中默认可见 |
 | [Attributes and Macros](../09_macros_basics/12_attributes_and_macros.md) | `#[macro_use]` 和工具属性与 macro_use/tool prelude 相关 |
-| [Unsafe Rust](../../03_advanced/03_unsafe.md) | `#![no_std]` 常与裸机/unsafe 代码一起使用 |
-| [Linkage](../../03_advanced/27_linkage.md) | `extern crate` 和 `--extern` 影响外部 prelude 和链接行为 |
+| [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | `#![no_std]` 常与裸机/unsafe 代码一起使用 |
+| [Linkage](../../03_advanced/04_ffi/27_linkage.md) | `extern crate` 和 `--extern` 影响外部 prelude 和链接行为 |

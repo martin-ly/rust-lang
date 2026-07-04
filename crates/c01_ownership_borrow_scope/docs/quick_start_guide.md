@@ -52,7 +52,7 @@
 
 ### 第一步：查看知识图谱（2分钟）
 
-打开 [知识图谱](KNOWLEDGE_GRAPH.md)，快速了解整体架构：
+打开 [知识图谱](knowledge_graph.md)，快速了解整体架构：
 
 ```text
 基础层 → 核心层 → 应用层 → 实践层
@@ -99,7 +99,7 @@ println!("{}", s2);               // ✅ s2 有效
 - ✅ 所有者离开作用域时值被释放
 - ✅ 所有权可以转移
 
-**详细学习**：[示例2-1](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-1-所有权三大规则实战)
+**详细学习**：[示例2-1](rust_190_rich_examples_integration.md#示例2-1-所有权三大规则实战)
 
 #### 15分钟：理解借用
 
@@ -123,7 +123,7 @@ r1.push_str(" world");
 - ✅ 借用不能超过所有者的生命周期
 - ✅ Rust 1.90 的NLL让借用更灵活
 
-**详细学习**：[示例2-3](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-3-不可变借用深度解析)
+**详细学习**：[示例2-3](rust_190_rich_examples_integration.md#示例2-3-不可变借用深度解析)
 
 #### 15分钟：理解生命周期
 
@@ -144,7 +144,7 @@ let result = longest(&s1, &s2);
 - ✅ 编译器通常能自动推断
 - ✅ 复杂情况需要显式标注
 
-**详细学习**：[示例2-6](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-6-生命周期基础)
+**详细学习**：[示例2-6](rust_190_rich_examples_integration.md#示例2-6-生命周期基础)
 
 #### 20分钟：实践练习
 
@@ -189,7 +189,7 @@ thread::spawn(move |
 - ✅ Rc：单线程共享所有权
 - ✅ Arc：多线程共享所有权
 
-**详细学习**：[第三部分](RUST_190_RICH_EXAMPLES_INTEGRATION.md#第三部分应用层示例layer-2)
+**详细学习**：[第三部分](rust_190_rich_examples_integration.md#第三部分应用层示例layer-2)
 
 #### 15分钟：并发安全
 
@@ -213,7 +213,7 @@ for _ in 0..10 {
 - ✅ Mutex保证互斥访问
 - ✅ 编译器保证线程安全
 
-**详细学习**：[示例4-1](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例4-1-多线程所有权传递)
+**详细学习**：[示例4-1](rust_190_rich_examples_integration.md#示例4-1-多线程所有权传递)
 
 #### 30分钟：综合实践
 
@@ -224,7 +224,7 @@ for _ in 0..10 {
 cargo run --example rust_190_rich_practical_examples
 ```
 
-阅读并理解：[LRU缓存完整实现](RUST_190_RICH_EXAMPLES_INTEGRATION.md#51-完整项目安全的并发缓存)
+阅读并理解：[LRU缓存完整实现](rust_190_rich_examples_integration.md#51-完整项目安全的并发缓存)
 
 ---
 
@@ -233,14 +233,14 @@ cargo run --example rust_190_rich_practical_examples
 ### Day 1-2: 基础巩固（已完成 ✅）
 
 - [x] 完成2小时快速入门
-- [ ] 阅读 [知识图谱](KNOWLEDGE_GRAPH.md) 完整版
+- [ ] 阅读 [知识图谱](knowledge_graph.md) 完整版
 - [ ] 运行所有基础示例（示例1-13）
 
 ### Day 3-4: 深入核心
 
 - [ ] 阅读 [所有权理论](tier_04_advanced/06_type_system_theory.md)
 - [ ] 阅读 [借用理论](tier_04_advanced/06_type_system_theory.md)
-- [ ] 完成 [多维矩阵对比](MULTIDIMENSIONAL_MATRIX.md) 阅读
+- [ ] 完成 [多维矩阵对比](multidimensional_matrix.md) 阅读
 - [ ] 运行所有核心示例（示例14-17）
 
 ### Day 5-6: 应用实战
@@ -254,7 +254,7 @@ cargo run --example rust_190_rich_practical_examples
 
 - [ ] 阅读 [最佳实践](../tier_01_foundations/04_faq.md)
 - [ ] 研究 [设计模式](../tier_02_guides/07_hands_on_projects.md)
-- [ ] 完成 [LRU缓存项目](RUST_190_RICH_EXAMPLES_INTEGRATION.md#51-完整项目安全的并发缓存)
+- [ ] 完成 [LRU缓存项目](rust_190_rich_examples_integration.md#51-完整项目安全的并发缓存)
 - [ ] 总结一周学习成果
 
 ---
@@ -265,11 +265,11 @@ cargo run --example rust_190_rich_practical_examples
 
 | 问题             | 查看资源                                                                      | 预计时间 |
 | :--- | :--- | :--- |
-| 什么是所有权？   | [示例2-1](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-1-所有权三大规则实战) | 10分钟   |
-| 如何借用数据？   | [示例2-3](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-3-不可变借用深度解析) | 15分钟   |
-| 生命周期怎么用？ | [示例2-6](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-6-生命周期基础)       | 20分钟   |
-| 如何共享数据？   | [对比示例](RUST_190_RICH_EXAMPLES_INTEGRATION.md#对比示例数据共享的5种方式) | 15分钟   |
-| 如何写并发代码？ | [示例4-1](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例4-1-多线程所有权传递)   | 25分钟   |
+| 什么是所有权？   | [示例2-1](rust_190_rich_examples_integration.md#示例2-1-所有权三大规则实战) | 10分钟   |
+| 如何借用数据？   | [示例2-3](rust_190_rich_examples_integration.md#示例2-3-不可变借用深度解析) | 15分钟   |
+| 生命周期怎么用？ | [示例2-6](rust_190_rich_examples_integration.md#示例2-6-生命周期基础)       | 20分钟   |
+| 如何共享数据？   | [对比示例](rust_190_rich_examples_integration.md#对比示例数据共享的5种方式) | 15分钟   |
+| 如何写并发代码？ | [示例4-1](rust_190_rich_examples_integration.md#示例4-1-多线程所有权传递)   | 25分钟   |
 
 ### 按场景查找
 
@@ -308,7 +308,7 @@ let s2 = s1.clone();
 println!("{}", s1);  // OK：s1仍有效
 ```
 
-**详细学习**：[示例2-2](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-2-所有权转移的各种场景)
+**详细学习**：[示例2-2](rust_190_rich_examples_integration.md#示例2-2-所有权转移的各种场景)
 
 ### Q2: "cannot borrow as mutable"
 
@@ -331,7 +331,7 @@ let mut s = String::from("hello");
 let r2 = &mut s;  // OK：r1已结束
 ```
 
-**详细学习**：[示例2-4](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-4-可变借用深度解析)
+**详细学习**：[示例2-4](rust_190_rich_examples_integration.md#示例2-4-可变借用深度解析)
 
 ### Q3: "lifetime may not live long enough"
 
@@ -353,7 +353,7 @@ fn no_dangle() -> String {
 }
 ```
 
-**详细学习**：[示例2-7](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-7-高级生命周期模式)
+**详细学习**：[示例2-7](rust_190_rich_examples_integration.md#示例2-7-高级生命周期模式)
 
 ---
 
@@ -430,14 +430,14 @@ fn no_dangle() -> String {
    - 3种学习路径选择
    - 12周完整课程
    - 6个实战项目
-2. **丰富示例集**：[RUST_190_RICH_EXAMPLES_INTEGRATION.md](RUST_190_RICH_EXAMPLES_INTEGRATION.md)
+2. **丰富示例集**：[RUST_190_RICH_EXAMPLES_INTEGRATION.md](rust_190_rich_examples_integration.md)
    - 115+ 可运行示例
    - 6000+ 行代码
    - 完整注释和说明
 3. **可视化资源**：
-   - [知识图谱](KNOWLEDGE_GRAPH.md) - 概念关系
-   - [思维导图](MIND_MAP.md) - 学习路径
-   - [多维矩阵](MULTIDIMENSIONAL_MATRIX.md) - 系统对比
+   - [知识图谱](knowledge_graph.md) - 概念关系
+   - [思维导图](mind_map.md) - 学习路径
+   - [多维矩阵](multidimensional_matrix.md) - 系统对比
 
 ### 实战项目推荐
 
@@ -473,9 +473,9 @@ fn no_dangle() -> String {
 
 **文档链接**：
 
-- [返回主索引](00_MASTER_INDEX.md)
+- [返回主索引](00_master_index.md)
 - [完整学习指南](COMPREHENSIVE_LEARNING_GUIDE.md)
-- [丰富示例集](RUST_190_RICH_EXAMPLES_INTEGRATION.md)
+- [丰富示例集](rust_190_rich_examples_integration.md)
 
 ---
 

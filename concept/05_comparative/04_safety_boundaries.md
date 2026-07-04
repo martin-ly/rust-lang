@@ -516,10 +516,10 @@ graph LR
 | 生命周期（Lifetimes）陷阱 | `../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` §7.1 反命题与边界分析 |
 | 类型系统（Type System）绕过 | [`../01_foundation/02_type_system/04_type_system.md`](../01_foundation/02_type_system/04_type_system.md) §7.1 反命题与边界分析 |
 | Rc/RefCell 循环 | [`../02_intermediate/02_memory_management/03_memory_management.md`](../02_intermediate/02_memory_management/03_memory_management.md) §7.1 反命题与边界分析 |
-| 并发死锁 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) §7.1 反命题与边界分析 |
-| Pin 不动性突破 | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §7.1 反命题与边界分析 |
-| unsafe 契约失效 | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) §7.1 反命题与边界分析 |
-| RustBelt 证明边界 | [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md) §7.1 反命题与边界分析 |
+| 并发死锁 | [`../03_advanced/00_concurrency/01_concurrency.md`](../03_advanced/00_concurrency/01_concurrency.md) §7.1 反命题与边界分析 |
+| Pin 不动性突破 | [`../03_advanced/01_async/02_async.md`](../03_advanced/01_async/02_async.md) §7.1 反命题与边界分析 |
+| unsafe 契约失效 | [`../03_advanced/02_unsafe/03_unsafe.md`](../03_advanced/02_unsafe/03_unsafe.md) §7.1 反命题与边界分析 |
+| RustBelt 证明边界 | [`../04_formal/04_rustbelt.md`](../04_formal/02_separation_logic/04_rustbelt.md) §7.1 反命题与边界分析 |
 
 ---
 
@@ -597,7 +597,7 @@ E0373 (闭包捕获逃逸)
 E0277 (Send 不满足)
   └─→ 边界: 并发安全 · 跨线程所有权转移
       └─→ 概念: L1 Send/Sync → L3 并发类型 → L4 CSL
-      └─→ 文件: ../03_advanced/01_concurrency.md §2
+      └─→ 文件: ../03_advanced/00_concurrency/01_concurrency.md §2
       └─→ 修复: 使用 Arc<Mutex<T>> / 实现 Send
 ```
 
@@ -768,10 +768,10 @@ graph TD
 > **认知功能**: 澄清形式化证明在 unsafe 代码验证中的实际地位，避免过度工程或盲目信任。根据 unsafe 代码的复杂度和风险等级，在审计、Miri 和形式化证明之间选择验证手段。**关键洞察**: 形式化证明成本高且规格编写本身困难——工程审计 + Miri 子集检测是更普遍的实践路径。[来源: 💡 原创分析]
 > **过渡: L5 → L3**
 > 安全边界不是抽象概念——`unsafe` 块的每一次原始指针（Raw Pointer）解引用、每一个 `unsafe impl Send` 都是边界的具体体现。理解 "边界在哪里" 需要同时掌握 safe Rust 的编译期保证和 unsafe Rust 的运行时风险。
-> unsafe 的具体逃逸门见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)。
+> unsafe 的具体逃逸门见 [`../03_advanced/02_unsafe/03_unsafe.md`](../03_advanced/02_unsafe/03_unsafe.md)。
 > **过渡: L5 → L4**
 > 形式化验证能将 "我相信这是安全的" 转化为 "机器证明了这是安全的"，但形式化工具有自己的边界——它们无法验证未规格化的需求、无法处理无限状态空间、无法覆盖所有 unsafe 模式。安全边界的形式化分析是理解 "什么能被证明" 的关键。
-> 验证工具的边界见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)（RustBelt 能力边界）。
+> 验证工具的边界见 [`../04_formal/04_rustbelt.md`](../04_formal/02_separation_logic/04_rustbelt.md)（RustBelt 能力边界）。
 
 ---
 
@@ -818,7 +818,7 @@ graph TD
 
 ---
 
-> **相关文件**: [失效分析树集](../00_meta/fault_tree_analysis_collection.md) · [边界扩展树](../00_meta/boundary_extension_tree.md) · [Unsafe](../03_advanced/03_unsafe.md)
+> **相关文件**: [失效分析树集](../00_meta/00_framework/fault_tree_analysis_collection.md) · [边界扩展树](../00_meta/00_framework/boundary_extension_tree.md) · [Unsafe](../03_advanced/02_unsafe/03_unsafe.md)
 
 ## 十、边界测试：安全边界的编译错误
 

@@ -367,7 +367,7 @@ crates/c05_threads/docs/
 
 ## 🔗 快速链接
 
-- **主文档**: [README.md](README.md)
+- **主文档**: [README.md](../../../README.md)
 - **知识图谱**: [KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md](docs/theory/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)
 - **多维矩阵**: [MULTI_DIMENSIONAL_COMPARISON_MATRIX.md](docs/theory/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)
 - **思维导图**: [RUST_190_COMPREHENSIVE_MINDMAP.md](docs/RUST_190_COMPREHENSIVE_MINDMAP.md)

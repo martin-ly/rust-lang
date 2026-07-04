@@ -466,7 +466,7 @@ graph TD
 - [Toolchain](01_toolchain.md) — Cargo 与工具链
 - [WASI](08_wasi.md) — WASI 与 Wasm
 - [WebAssembly](11_webassembly.md) — WebAssembly 生态
-- [FFI](../03_advanced/05_rust_ffi.md) — FFI 跨语言
+- [FFI](../03_advanced/04_ffi/05_rust_ffi.md) — FFI 跨语言
 
 ---
 

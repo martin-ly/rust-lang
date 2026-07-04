@@ -308,7 +308,7 @@
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - [形式化论证系统梳理指南](../10_formal_proof_system_guide.md) - 论证缺口分析、反例索引、公理-定理证明树
-- [形式化工程系统 - 理论基础](../../rust-formal-engineering-system/01_theoretical_foundations/README.md)
+- [形式化工程系统 - 理论基础](../../../README.md)
 - [所有权与借用文档](../../../crates/c01_ownership_borrow_scope/README.md)
 - [异步语义理论](../../../crates/c06_async/src/lib.rs)
 

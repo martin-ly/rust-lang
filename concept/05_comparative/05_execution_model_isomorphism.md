@@ -703,12 +703,12 @@ graph TD
 
 ### 相关概念文件
 
-- [L3 并发编程](../03_advanced/01_concurrency.md) —— Send/Sync / Mutex / 内存模型
-- [L3 异步编程](../03_advanced/02_async.md) —— Future / Pin / async/await
-- [L4 线性逻辑](../04_formal/01_linear_logic.md) —— 资源与通道的形式化根基
+- [L3 并发编程](../03_advanced/00_concurrency/01_concurrency.md) —— Send/Sync / Mutex / 内存模型
+- [L3 异步编程](../03_advanced/01_async/02_async.md) —— Future / Pin / async/await
+- [L4 线性逻辑](../04_formal/01_ownership_logic/01_linear_logic.md) —— 资源与通道的形式化根基
 - [L5 Rust vs Go](02_rust_vs_go.md) —— 语言级并发哲学对比
-- [L0 表达力多视角](../00_meta/expressiveness_multiview.md) —— 并发语义视角
-- [L0 可判定性谱系](../00_meta/decidability_spectrum.md) —— 并发安全（Concurrency Safety）的判定性边界
+- [L0 表达力多视角](../00_meta/00_framework/expressiveness_multiview.md) —— 并发语义视角
+- [L0 可判定性谱系](../00_meta/00_framework/decidability_spectrum.md) —— 并发安全（Concurrency Safety）的判定性边界
 - [L6 设计模式](../06_ecosystem/02_patterns.md) —— 并发设计模式
 - [L7 Effects 系统](../07_future/04_effects_system.md) —— 异步与效果系统前沿
 
@@ -736,7 +736,7 @@ graph TD
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html),
 > [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
-> **相关文件**: [范式矩阵](03_paradigm_matrix.md) · [异步](../03_advanced/02_async.md) · [并发](../03_advanced/01_concurrency.md)
+> **相关文件**: [范式矩阵](03_paradigm_matrix.md) · [异步](../03_advanced/01_async/02_async.md) · [并发](../03_advanced/00_concurrency/01_concurrency.md)
 
 ## 十、边界测试：执行模型同构的编译错误
 

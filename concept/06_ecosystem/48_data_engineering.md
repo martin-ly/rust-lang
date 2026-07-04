@@ -27,7 +27,7 @@
 > [Object Store](https://docs.rs/object_store/latest/object_store/) ·
 > [Rust ETL Patterns](https://github.com/apache/arrow-datafusion)
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -841,7 +841,7 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 - [云原生](24_cloud_native.md) — 容器化、对象存储、微服务部署
 - [性能优化](15_performance_optimization.md) — SIMD、缓存优化、内存布局
 - [API Design Patterns](42_api_design_patterns.md) — REST/gRPC 数据服务
-- [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、异步（Async）并行
+- [并发编程](../03_advanced/00_concurrency/01_concurrency.md) — Send/Sync、异步（Async）并行
 - [数据库系统](37_database_systems.md) — 存储引擎、事务、索引
 - [网络协议](38_network_protocols.md) — HTTP/2、gRPC、对象存储协议
 - [安全与密码学](43_security_cryptography.md) — 数据加密、合规性

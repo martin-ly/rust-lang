@@ -190,8 +190,8 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 - [Tokio 异步运行时架构](06_tokio_architecture.md) — `ort` 异步执行与 Tokio 集成
 - [tract 纯 Rust 推理引擎架构](36_tract_architecture.md) — 与 `ort` 的设计对比
 - [candle / AI/ML 生态示例](../../../../crates/c08_algorithms/examples/ai_ml_ecosystem_demo.rs) — Rust ML 基础张量操作
-- [异步编程模型](../../../../concept/03_advanced/02_async.md)
-- [FFI 与 unsafe 边界](../../../../concept/04_formal/05_verification_toolchain.md)
+- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
+- [FFI 与 unsafe 边界](../../../../concept/04_formal/04_model_checking/05_verification_toolchain.md)
 
 ---
 

@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 闭包 (Closure) · 捕获 (Capture) · Fn · FnMut · FnOnce · 环境 (Environment) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 闭包 (Closure) · 捕获 (Capture) · Fn · FnMut · FnOnce · 环境 (Environment) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 闭包基础：捕获环境与匿名函数
 >
@@ -14,7 +14,7 @@
 > **双维定位**: C×App — 应用闭包（Closures）和捕获模式
 > **定位**: 系统讲解 Rust **闭包（Closure）**——从环境捕获、Fn/FnMut/FnOnce trait 到闭包作为参数和返回值，揭示 Rust 如何将函数式编程的灵活性与所有权（Ownership）系统的安全性结合。
 > **前置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md)
-> **后置概念**: [Iterator](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) · [Async](../../03_advanced/02_async.md) · [Functional Patterns](../../02_intermediate/04_types_and_conversions/07_closure_types.md)
+> **后置概念**: [Iterator](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) · [Async](../../03_advanced/01_async/02_async.md) · [Functional Patterns](../../02_intermediate/04_types_and_conversions/07_closure_types.md)
 
 ---
 
@@ -506,7 +506,7 @@ graph TD
 - [Traits](../../02_intermediate/00_traits/01_traits.md) — Trait 系统
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）
 - [Iterator](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) — 迭代器（Iterator）
-- [Async](../../03_advanced/02_async.md) — 异步编程
+- [Async](../../03_advanced/01_async/02_async.md) — 异步编程
 
 ---
 
@@ -736,7 +736,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

@@ -189,7 +189,7 @@ async fn main() -> io::Result<()> {
 - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
 - [异步编程指南](https://rust-lang.github.io/async-book/)
 - [Tokio 文档](https://tokio.rs/)
-- [C06 异步模块主索引](00_MASTER_INDEX.md)
+- [C06 异步模块主索引](00_master_index.md)
 
 ---
 

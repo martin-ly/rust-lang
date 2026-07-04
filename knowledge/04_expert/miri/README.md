@@ -50,7 +50,7 @@
 ## 相关概念
 
 - [Tree Borrows (concept)](../../../concept/01_foundation/03_values_and_references/05_reference_semantics.md) — PLDI 2025 Distinguished Paper 详解
-- [形式化验证工具链 (concept)](../../../concept/04_formal/05_verification_toolchain.md) — Miri POPL 2026、KVerus、AutoVerus、Vest 2026 状态矩阵
+- [形式化验证工具链 (concept)](../../../concept/04_formal/04_model_checking/05_verification_toolchain.md) — Miri POPL 2026、KVerus、AutoVerus、Vest 2026 状态矩阵
 
 ## 📚 模块 8: 国际化对齐
 

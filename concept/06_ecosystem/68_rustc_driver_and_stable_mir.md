@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: rustc_driver · rustc_interface · `run_compiler` · Callbacks · `rustc_private` · Stable MIR · `rustc_public` · Compiler Session — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: rustc_driver · rustc_interface · `run_compiler` · Callbacks · `rustc_private` · Stable MIR · `rustc_public` · Compiler Session — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 # rustc Driver、Interface 与 Stable MIR
 

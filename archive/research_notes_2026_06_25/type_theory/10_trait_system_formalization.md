@@ -1195,7 +1195,7 @@ fn main() {
 
 - [Trait 系统实现](../../../crates/c02_type_system/src/README.md)
 - [Trait 系统示例](../../../crates/c02_type_system/examples/README.md)
-- [形式化工程系统 - Trait](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
+- [形式化工程系统 - Trait](../../../README.md)
 
 ### 工具资源
 

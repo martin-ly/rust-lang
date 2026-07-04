@@ -11,8 +11,8 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Async Drop 预览特性
 > **定位**: 分析 Rust 中 **异步（Async）资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（[Async Drop Initiative](https://github.com/rust-lang/rust/issues/126482)）、设计约束与当前 nightly 实现状态。
-> **前置概念**: [Async](../03_advanced/02_async.md) · [Pin](../03_advanced/06_pin_unpin.md)
-> **后置概念**: [Gen Blocks](22_gen_blocks_preview.md) · [Async Closures](../03_advanced/24_async_closures.md)
+> **前置概念**: [Async](../03_advanced/01_async/02_async.md) · [Pin](../03_advanced/01_async/06_pin_unpin.md)
+> **后置概念**: [Gen Blocks](22_gen_blocks_preview.md) · [Async Closures](../03_advanced/01_async/24_async_closures.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 > **状态**: 🧪 Nightly 实验性
@@ -461,8 +461,8 @@ graph TD
 
 ## 相关概念文件
 
-- [Async](../03_advanced/02_async.md) — 异步编程
-- [Pin](../03_advanced/06_pin_unpin.md) — Pin 不动性
+- [Async](../03_advanced/01_async/02_async.md) — 异步编程
+- [Pin](../03_advanced/01_async/06_pin_unpin.md) — Pin 不动性
 - [Gen Blocks](22_gen_blocks_preview.md) — 生成器
 
 ---

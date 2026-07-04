@@ -19,7 +19,7 @@
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [Wikipedia — Python (programming language)](https://en.wikipedia.org/wiki/Python_(programming_language)) ·
 > [Wikipedia — Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 
 ## 📑 目录
 

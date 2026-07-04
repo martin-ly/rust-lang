@@ -12,7 +12,7 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
-> **后置概念**: [Async/Await](../../03_advanced/02_async.md)
+> **后置概念**: [Async/Await](../../03_advanced/01_async/02_async.md)
 ---
 
 > **来源**: · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
@@ -652,7 +652,7 @@ fn main() {
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
-| 10/10 | 🏆 Trait/泛型已内化 | 进阶至 [L3 高级泛型](../../03_advanced/03_unsafe.md) 或 [L4 类型理论](../../04_formal/02_type_theory.md) |
+| 10/10 | 🏆 Trait/泛型已内化 | 进阶至 [L3 高级泛型](../../03_advanced/02_unsafe/03_unsafe.md) 或 [L4 类型理论](../../04_formal/00_type_theory/02_type_theory.md) |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [L2 练习](../../exercises/src/generics_traits)，关注错题对应的概念文件 |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Traits](../00_traits/01_traits.md) · [Generics](02_generics.md)，完成 rustlings 对应章节 |
 | 0–3/10 | 📚 建议重新开始 | 从 [Traits](../00_traits/01_traits.md) 逐节阅读，配合 [crates/c04_generic](../../crates/c04_generic) 示例 |

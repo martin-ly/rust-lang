@@ -1,6 +1,6 @@
 # C10 Networks 文档中心
 
-> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs)。
 > 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
 >
 > 适用范围：Rust 1.96.1+，Tokio 1.35+。文档风格遵循 [`STYLE.md`](STYLE.md)。
@@ -395,8 +395,8 @@ API参考和规范文档：
 
 ### 6. 文档索引
 
-- [主索引](00_MASTER_INDEX.md) - 所有文档的完整导航和交叉引用
-- [综合文档索引](COMPREHENSIVE_DOCUMENTATION_INDEX.md) - 详细的文档索引
+- [主索引](00_master_index.md) - 所有文档的完整导航和交叉引用
+- [综合文档索引](comprehensive_documentation_index.md) - 详细的文档索引
   - 核心文档索引（入门文档、理论文档、实践文档、参考文档）
   - 协议文档索引（传输层协议、应用层协议、安全协议、自定义协议）
   - 性能文档索引（性能分析、优化指南、基准测试、监控工具）

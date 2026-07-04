@@ -433,7 +433,7 @@ L3: 机器检查 (Coq骨架)
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

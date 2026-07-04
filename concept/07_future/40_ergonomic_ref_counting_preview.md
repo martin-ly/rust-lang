@@ -30,7 +30,7 @@
 > **前置概念**: [核心 Crate](../06_ecosystem/03_core_crates.md)
 > [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
 > [Smart Pointers](../02_intermediate/02_memory_management/12_smart_pointers.md) ·
-> [Unsafe](../03_advanced/03_unsafe.md)
+> [Unsafe](../03_advanced/02_unsafe/03_unsafe.md)
 > **后置概念**: [Rust for Linux](43_rust_for_linux.md)
 
 ---

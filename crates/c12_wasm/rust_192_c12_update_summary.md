@@ -93,7 +93,7 @@
 - [Rust 1.93.0 Release Notes](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0) 🆕
 - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)（历史）
 - [C12 WASM 模块主 README](README.md)
-- [项目状态报告](PROJECT_STATUS.md)
+- [项目状态报告](project_status.md)
 
 ---
 

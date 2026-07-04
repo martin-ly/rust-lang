@@ -14,7 +14,7 @@
 >
 > 基础概念 (Foundation) · 所有权 (Ownership) · 借用 (Borrowing) ·
 > 生命周期 (Lifetime) · 类型系统 (Type System) —
-> [完整对照表](../00_meta/terminology_glossary.md)
+> [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 > **前置概念**: N/A
@@ -234,7 +234,7 @@ Type System（理解"类型即证明"）
 | 引用（Reference）有效性 | 生命周期（Lifetimes）约束满足 | 无悬垂指针 | 区域类型 | `'static` 误用、循环引用 | E0597 |
 | Move 语义安全 | 非 Copy 类型赋值后 | 原变量不可访问 | 仿射逻辑 | 隐式 Copy（意外） | E0382 |
 
-> 完整定理一致性（Coherence）矩阵见各文件"定理推理链"章节。跨层映射见 [`../00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md)。
+> 完整定理一致性（Coherence）矩阵见各文件"定理推理链"章节。跨层映射见 [`../00_meta/inter_layer_map.md`](../00_meta/04_navigation/inter_layer_map.md)。
 
 ---
 

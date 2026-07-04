@@ -224,7 +224,7 @@
 
 ### 内部文档
 
-- [C03 README](README.md)
+- [C03 README](../../../README.md)
 - [理论基础](docs/01_theory)
 - [基础文档](docs/02_basics)
 - [高级文档](docs/03_advanced)

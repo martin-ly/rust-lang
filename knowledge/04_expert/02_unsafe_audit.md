@@ -2,7 +2,7 @@
 
 > **EN**: Unsafe Code Auditing
 > **Summary**: 不安全代码审计 Unsafe Code Auditing.
-> **相关概念**: [Unsafe Rust](../../concept/03_advanced/03_unsafe.md)
+> **相关概念**: [Unsafe Rust](../../concept/03_advanced/02_unsafe/03_unsafe.md)
 > **Bloom 层级**: 理解
 > 学习如何在生产环境中审计和验证 `unsafe` Rust 代码的安全性，掌握系统级的代码审查技能与工具链。
 >

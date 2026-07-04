@@ -307,11 +307,11 @@ c08_algorithms/
 
 ### 子目录导航
 
-- [docs/guides/README.md](docs/guides/README.md) - 实用指南导航
-- [docs/theory/README.md](docs/theory/README.md) - 理论文档导航
-- [docs/advanced/README.md](docs/advanced/README.md) - 高级专题导航
-- [docs/rust-features/README.md](docs/rust-features/README.md) - Rust 特性导航
-- [docs/references/README.md](docs/references/README.md) - 参考资料导航
+- [docs/guides/README.md](../../README.md) - 实用指南导航
+- [docs/theory/README.md](../../README.md) - 理论文档导航
+- [docs/advanced/README.md](../../README.md) - 高级专题导航
+- [docs/rust-features/README.md](../../README.md) - Rust 特性导航
+- [docs/references/README.md](../../README.md) - 参考资料导航
 
 ### 辅助文档
 

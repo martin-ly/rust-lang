@@ -1,11 +1,11 @@
 # C05 线程与并发编程
 
-> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs)。
 > 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
 >
 > **文档定位**: 本文档是C05线程模块的主入口，提供模块概览和快速导航
 > **先修知识**: [C04 泛型](../../c04_generic/docs/README.md)
-> **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](tier_01_foundations/04_faq.md) | [术语表](tier_01_foundations/03_glossary.md)
+> **相关文档**: [主索引](00_master_index.md) | [FAQ](tier_01_foundations/04_faq.md) | [术语表](tier_01_foundations/03_glossary.md)
 
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.96.1+ (推荐 1.96.1+)
@@ -52,7 +52,7 @@ cargo bench -p c05_threads
 - [06_parallel_algorithms](06_parallel_algorithms.md) - 并行算法
 - [04_lock_free_programming](04_lock_free_programming.md) - 无锁编程
 
-**完整导航**: 查看 [主索引](00_MASTER_INDEX.md)
+**完整导航**: 查看 [主索引](00_master_index.md)
 
 ---
 
@@ -151,7 +151,7 @@ Rust 的编译器确保：
 
 ### 模块资源
 
-- [主索引](00_MASTER_INDEX.md) - 完整文档导航
+- [主索引](00_master_index.md) - 完整文档导航
 - [示例代码](../examples/README.md) - 实践示例
 - [源代码](../src) - 模块实现
 - [基准测试](../benches) - 性能测试
@@ -175,8 +175,8 @@ Rust 的编译器确保：
 
 ### 常见问题
 
-- **Send vs Sync**: 查看 [](tier_01_foundations/04_faq.mdFAQ Q1)
-- **何时用Mutex**: 查看 [](tier_01_foundations/04_faq.mdFAQ Q2)
+- **Send vs Sync**: 查看 [](tier_01_foundations/04_faq.md)
+- **何时用Mutex**: 查看 [](tier_01_foundations/04_faq.md)
 - **性能优化**: 查看 [advanced_concurrency_optimization](advanced_concurrency_optimization.md)
 
 ---
@@ -194,7 +194,7 @@ Rust 的编译器确保：
 
 ---
 
-🚀 **开始学习**: 前往 [主索引](00_MASTER_INDEX.md) 查看完整导航
+🚀 **开始学习**: 前往 [主索引](00_master_index.md) 查看完整导航
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

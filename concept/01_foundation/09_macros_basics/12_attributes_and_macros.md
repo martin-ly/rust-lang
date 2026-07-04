@@ -1,7 +1,7 @@
 > **内容分级**: [综述级]
 >
 > **Rust 版本**: 1.96.1+ (Edition 2024)
-> **本节关键术语**: 属性 (Attribute) · 宏 (Macro) · 声明宏 (Declarative Macro) · 过程宏 (Procedural Macro) · derive — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 属性 (Attribute) · 宏 (Macro) · 声明宏 (Declarative Macro) · 过程宏 (Procedural Macro) · derive — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 属性与声明宏：编译期元编程基础
 >
@@ -16,7 +16,7 @@
 > **双维定位**: C×App — 应用属性和宏（Macro）扩展
 > **定位**: 系统讲解 Rust **属性（attributes）**和**声明宏（macro_rules!）**——从编译期元编程的基础语法到模式匹配（Pattern Matching）、递归宏和卫生性，揭示 Rust 如何在编译期生成代码同时保持类型安全。
 > **前置概念**: [Type System](../02_type_system/04_type_system.md) · [Modules](../07_modules_and_items/11_modules_and_paths.md)
-> **后置概念**: [Proc Macros](../../03_advanced/07_proc_macro.md) · [DSL](../../02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md)
+> **后置概念**: [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) · [DSL](../../02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md)
 
 ---
 
@@ -553,7 +553,7 @@ graph TD
 
 - [Type System](../02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Modules](../07_modules_and_items/11_modules_and_paths.md) — 模块（Module）系统
-- [Proc Macros](../../03_advanced/07_proc_macro.md) — 过程宏（Procedural Macro）
+- [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) — 过程宏（Procedural Macro）
 - [DSL](../../02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md) — DSL 模式
 
 ---
@@ -724,7 +724,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

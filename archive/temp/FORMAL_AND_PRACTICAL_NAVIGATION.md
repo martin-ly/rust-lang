@@ -34,7 +34,7 @@
   - [代码示例](../../../crates/c01_ownership_borrow_scope/examples/) - 150+ 个所有权示例
   - [综合示例](../../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs) - 完整的所有权应用
   - [测试用例](../../../crates/c01_ownership_borrow_scope/tests/) - 完整的测试套件
-  - [Tier 文档](../../../crates/c01_ownership_borrow_scope/docs/README.md) - 4-Tier 分层学习文档
+  - [Tier 文档](../../README.md) - 4-Tier 分层学习文档
 
 **学习路径**:
 
@@ -224,7 +224,7 @@
   - [编译器特性与优化](../../06_toolchain/01_compiler_features.md) - 编译器优化深入指南（935行）
   - [Cargo 工作空间指南](../../06_toolchain/02_cargo_workspace_guide.md) - Workspace 和依赖管理（1013行）
   - [Rustdoc 高级功能](../../06_toolchain/03_rustdoc_advanced.md) - 文档生成高级技巧（1004行）
-  - [工具链 README](../../06_toolchain/README.md) - 工具链文档总览
+  - [工具链 README](../../README.md) - 工具链文档总览
 
 **学习路径**:
 
@@ -266,22 +266,22 @@
 
 ### 形式化系统入口
 
-- **[形式化系统主页](../../rust-formal-engineering-system/README.md)**
+- **[形式化系统主页](../../README.md)**
 - **[主索引](../../rust-formal-engineering-system/00_master_index.md)**
 - **[完整度报告](../../rust-formal-engineering-system/COMPLETION_STATUS_REAL_2025_10_30.md)**
 
 ### 主项目入口
 
 - **[主项目 README](../../README.md)**
-- **[C01 所有权模块](../../../crates/c01_ownership_borrow_scope/README.md)**
-- **[C02 类型系统模块](../../../crates/c02_type_system/README.md)**
-- **[C03 控制流与函数模块](../../../crates/c03_control_fn/README.md)**
-- **[C04 泛型编程模块](../../../crates/c04_generic/README.md)**
-- **[C05 线程模块](../../../crates/c05_threads/README.md)**
-- **[C06 异步编程模块](../../../crates/c06_async/README.md)**
-- **[C09 设计模式模块](../../../crates/c09_design_pattern/README.md)**
-- **[C11 宏系统模块](../../../crates/c11_macro_system/README.md)**
-- **[工具链文档](../../06_toolchain/README.md)**
+- **[C01 所有权模块](../../README.md)**
+- **[C02 类型系统模块](../../README.md)**
+- **[C03 控制流与函数模块](../../README.md)**
+- **[C04 泛型编程模块](../../README.md)**
+- **[C05 线程模块](../../README.md)**
+- **[C06 异步编程模块](../../README.md)**
+- **[C09 设计模式模块](../../README.md)**
+- **[C11 宏系统模块](../../README.md)**
+- **[工具链文档](../../README.md)**
 
 ---
 

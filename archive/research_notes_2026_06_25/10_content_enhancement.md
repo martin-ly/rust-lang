@@ -628,7 +628,7 @@ error[E0382]: borrow of moved value: `s1`
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [研究笔记主索引](README.md)
+- [研究笔记主索引](../../README.md)
 - [研究笔记写作指南](10_writing_guide.md)
 - [研究笔记模板](10_template.md)
 - [质量检查清单](10_quality_checklist.md)

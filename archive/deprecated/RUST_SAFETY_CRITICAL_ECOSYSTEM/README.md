@@ -6,7 +6,7 @@
 >
 > ⚠️ 本文档为历史归档，内容可能已过时，请以项目最新活跃文档为准。
 >
-> **活跃版本**: 本主题的最新维护版本已迁移至 [`knowledge/04_expert/safety_critical/`](../../../knowledge/04_expert/safety_critical/)。请勿在本归档目录中继续更新内容。
+> **活跃版本**: 本主题的最新维护版本已迁移至 [`knowledge/04_expert/safety_critical/`](../../../knowledge/04_expert/safety_critical)。请勿在本归档目录中继续更新内容。
 >
 > ---
 >

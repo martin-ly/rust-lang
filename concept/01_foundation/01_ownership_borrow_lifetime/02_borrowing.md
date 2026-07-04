@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 >
-> **本节关键术语**: 借用 (Borrowing) · 引用 (Reference) · 可变引用（Mutable Reference） (&mut T) · 不可变引用（Immutable Reference） (&T) · 悬垂引用 (Dangling Reference) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 借用 (Borrowing) · 引用 (Reference) · 可变引用（Mutable Reference） (&mut T) · 不可变引用（Immutable Reference） (&T) · 悬垂引用 (Dangling Reference) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 
 # Borrowing（借用）
 >
@@ -16,7 +16,7 @@
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Und — AXM 规则的结构化推理
 > **前置依赖**: [L1 所有权（Ownership）](01_ownership.md)
-> **后置延伸**: [L2 Trait](../../02_intermediate/00_traits/01_traits.md) · [L4 分离逻辑](../../04_formal/01_linear_logic.md) · [L3 并发](../../03_advanced/01_concurrency.md)
+> **后置延伸**: [L2 Trait](../../02_intermediate/00_traits/01_traits.md) · [L4 分离逻辑](../../04_formal/01_ownership_logic/01_linear_logic.md) · [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md)
 > **跨层映射**: L1→L4 借用规则 ↔ 线性逻辑 !A 规则 | L1→L3 借用（Borrowing） → Send/Sync
 > **定理链编号**: T-010 借用（Borrowing）唯一性 → T-011 生命周期（Lifetimes）包含 → T-012 悬垂引用 [来源: [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html)]不可达
 > **层级**: L1 基础概念
@@ -465,7 +465,7 @@ graph TD
 > **来源: [RFC 2025](https://github.com/rust-lang/rfcs/pull/2025)** T6 — Two-Phase Borrows 允许方法调用中的临时不可变借用（Immutable Borrow）。 ✅
 > **[来源: 💡 原创分析]** C1 — 内部可变性通过运行时（Runtime）检查替代编译期检查，是公理体系的受控扩展。 💡
 > **一致性（Coherence）检查**: L1 ⟹ L2 ⟹ T1(AXM) ⟹ T5(无数据竞争)；T2(引用有效) ⟹ T3(Reborrow) ⟹ T6(两阶段)；C1 是 T1 的受控逆否扩展。全部 9 个定理形成**分层推理网络**。
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/inter_layer_map.md) §4.1 "内存安全（Memory Safety）完备性"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/inter_layer_map.md) §4.1 "内存安全（Memory Safety）完备性"
 > **过渡**: 定理链提供了自上而下的形式化保证，而示例与反例则提供自下而上的直觉验证——通过正确代码与错误代码的对比，将抽象定理落地为具体可感知的编译器行为。
 
 ---
@@ -948,12 +948,12 @@ fn main() {
 | **Traits** | [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) | `Borrow`、`AsRef`、`Deref` 等 trait 的借用语义 |
 | **智能指针（Smart Pointer）** | [`../02_intermediate/02_memory_management/03_memory_management.md`](../../02_intermediate/02_memory_management/03_memory_management.md) | `Box`、`Rc`、`Arc` 的 Deref 自动借用 |
 | **内部可变性** | [`../02_intermediate/02_memory_management/03_memory_management.md`](../../02_intermediate/02_memory_management/03_memory_management.md) | `RefCell`、`Cell` 运行时替代编译期检查 |
-| **并发** | [`../03_advanced/01_concurrency.md`](../../03_advanced/01_concurrency.md) | `Send`/`Sync` + AXM = 无数据竞争 |
-| **Pin 与自引用** | [`../03_advanced/02_async.md`](../../03_advanced/02_async.md) §8.5 | 自引用结构的借用检查器边界 |
-| **Unsafe Rust** | [`../03_advanced/03_unsafe.md`](../../03_advanced/03_unsafe.md) | `UnsafeCell`、裸指针突破借用规则 |
+| **并发** | [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md) | `Send`/`Sync` + AXM = 无数据竞争 |
+| **Pin 与自引用** | [`../03_advanced/01_async/02_async.md`](../../03_advanced/01_async/02_async.md) §8.5 | 自引用结构的借用检查器边界 |
+| **Unsafe Rust** | [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md) | `UnsafeCell`、裸指针突破借用规则 |
 | **C++ 对比** | [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_rust_vs_cpp.md) | `const T&`/`T&` vs `&T`/`&mut T` |
 | **Rust 版本特性演进** | [`../07_future/05_rust_version_tracking.md`](../../07_future/05_rust_version_tracking.md) | `let_chains`、模式匹配（Pattern Matching）扩展 |
-| **异步（Async）编程** | [`../03_advanced/02_async.md`](../../03_advanced/02_async.md) | `AsyncFn` 与借用检查 |
+| **异步（Async）编程** | [`../03_advanced/01_async/02_async.md`](../../03_advanced/01_async/02_async.md) | `AsyncFn` 与借用检查 |
 
 > **过渡**: 相关概念链接构建了知识网络的全局视图，而待补充与演进方向则标记了本文件尚未覆盖的前沿主题与改进路径。
 
@@ -1449,8 +1449,8 @@ fn fixed() {
 ```
 
 > **修正**: Rust 编译器不允许两个可变引用（Mutable Reference）同时指向同一数据（别名规则）。对于数组/切片（Slice），使用 `split_at_mut()` 或 `split_first_mut()` 获取不重叠的可变引用，满足编译器的别名分析。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> **相关判定树**: [借用判定树](../00_meta/concept_definition_decision_forest.md#三借用判定树) · [内存安全（Memory Safety） FTA](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
-> **相关谓词映射**: [shr(κ, ℓ) 谓词](../00_meta/rustbelt_predicate_map.md#三共享谓词-shrκ-ℓ-映射)
+> **相关判定树**: [借用判定树](../../00_meta/00_framework/concept_definition_decision_forest.md#三借用判定树) · [内存安全（Memory Safety） FTA](../../00_meta/00_framework/fault_tree_analysis_collection.md#二内存安全失效树)
+> **相关谓词映射**: [shr(κ, ℓ) 谓词](../../00_meta/02_sources/rustbelt_predicate_map.md#三共享谓词-shrκ-ℓ-映射)
 
 ### 10.5 边界测试：可变借用的嵌套与重新借用链（编译错误）
 

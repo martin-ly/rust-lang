@@ -9,7 +9,7 @@
 > **内容分级**: [专家级]
 > **分级**: [A]
 > **层级**: L6 生态工具
-> **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Concurrency](../../concept/03_advanced/01_concurrency.md)
+> **前置概念**: [Async](../../concept/03_advanced/01_async/02_async.md) · [Concurrency](../../concept/03_advanced/00_concurrency/01_concurrency.md)
 > **Bloom 层级**: 应用 → 分析
 > **[来源: Linux Kernel Documentation]** · **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **[来源: tokio-uring]** ✅
 

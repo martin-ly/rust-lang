@@ -80,7 +80,7 @@
 ---
 
 > 导航：
-> 返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) ·
+> 返回 [`rust-formal-engineering-system`](../../README.md) ·
 > 质量保障 [`10_quality_assurance/00_index.md`](../../rust-formal-engineering-system/10_quality_assurance/00_index.md) ·
 > 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md) ·
 > 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md) ·

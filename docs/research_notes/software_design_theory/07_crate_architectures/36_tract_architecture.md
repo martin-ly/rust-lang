@@ -187,7 +187,7 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 
 - [ort ONNX Runtime Rust 架构](35_ort_architecture.md) — 与 `tract` 的 FFI vs 纯 Rust 对比
 - [candle / AI/ML 生态示例](../../../../crates/c08_algorithms/examples/ai_ml_ecosystem_demo.rs) — Rust ML 张量基础
-- [嵌入式与 FFI 模式](../../../../concept/04_formal/05_verification_toolchain.md)
+- [嵌入式与 FFI 模式](../../../../concept/04_formal/04_model_checking/05_verification_toolchain.md)
 - [设计模式：策略模式](../../../../concept/06_ecosystem/02_patterns.md)
 
 ---

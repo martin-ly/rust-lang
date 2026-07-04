@@ -6,7 +6,7 @@
 > **Bloom 层级**: L3-L4 (应用/分析)
 >
 > **层次定位**: L3-L6 高级-生态 / 异步工程实践
-> **前置依赖**: [concept L3 Async](../../concept/03_advanced/02_async.md) · [docs 设计模式](05_design_patterns_usage_guide.md)
+> **前置依赖**: [concept L3 Async](../../concept/03_advanced/01_async/02_async.md) · [docs 设计模式](05_design_patterns_usage_guide.md)
 > **后置延伸**: [docs 嵌入式](05_embedded_rust_guide.md) · [knowledge Async](../../knowledge/03_advanced/async/README.md)
 > **跨层映射**: L3→L6 运行时映射 | 语义→实现
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性 → Tokio 调度正确性

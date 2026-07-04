@@ -2,7 +2,7 @@
 
 > **文档定位**: 理解线程基础和Rust所有权系统如何保证线程安全
 > **先修知识**: Rust所有权基础
-> **相关文档**: [01_basic_threading](01_basic_threading.md) | [02_message_passing](02_message_passing.md) | [主索引](00_MASTER_INDEX.md)
+> **相关文档**: [01_basic_threading](01_basic_threading.md) | [02_message_passing](02_message_passing.md) | [主索引](00_master_index.md)
 
 **最后更新**: 2025-10-19
 **适用版本**: Rust 1.0+

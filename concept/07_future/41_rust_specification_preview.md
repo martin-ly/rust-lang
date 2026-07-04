@@ -16,7 +16,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Rust 规范预览特性
 > **定位**: 探讨 Rust 语言从**参考文档**（Rust Reference）向**形式化规范**演进的必要性与路径，分析 Ferrocene、编译器开发和形式化验证社区对规范的不同需求。
-> **前置概念**: [Formal Methods](02_formal_methods.md) · [RustBelt](../04_formal/04_rustbelt.md) · [Ferrocene](35_ferrocene_preview.md)
+> **前置概念**: [Formal Methods](02_formal_methods.md) · [RustBelt](../04_formal/02_separation_logic/04_rustbelt.md) · [Ferrocene](35_ferrocene_preview.md)
 > **后置概念**: [Version Tracking](05_rust_version_tracking.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -387,7 +387,7 @@ fn main() {
 ## 相关概念文件
 
 - [Formal Methods](02_formal_methods.md) — 形式化方法工业化
-- [RustBelt](../04_formal/04_rustbelt.md) — Rust 所有权（Ownership）的形式化模型
+- [RustBelt](../04_formal/02_separation_logic/04_rustbelt.md) — Rust 所有权（Ownership）的形式化模型
 - [Ferrocene](35_ferrocene_preview.md) — Rust 安全关键认证工具链
 - [Version Tracking](05_rust_version_tracking.md) — Rust 版本特性演进
 

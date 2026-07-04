@@ -691,7 +691,7 @@ mod tool_qualification {
 
 ## 相关概念
 
-- [Ferrocene 认证 (concept)](../../../../concept/04_formal/16_aerospace_certification_formal_methods.md) — Ferrocene vs CompCert 对比、TQL-1~TQL-5 工具鉴定映射
+- [Ferrocene 认证 (concept)](../../../../concept/04_formal/04_model_checking/16_aerospace_certification_formal_methods.md) — Ferrocene vs CompCert 对比、TQL-1~TQL-5 工具鉴定映射
 
 ## 📚 模块 8: 国际化对齐
 

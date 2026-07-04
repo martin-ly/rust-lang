@@ -1488,7 +1488,7 @@ async fn migrated() {
 | Future / async/await | Rust Book Ch.17, RFC 2394 | ✅ 已引用 |
 | Tokio | tokio.rs docs | ✅ 已引用 |
 | AFIT | RFC 3185, 1.75 | ⚠️ 部分覆盖 |
-| Async Closures | RFC 3668, **1.85.0 stable** | ✅ 已覆盖 (c06_async / concept/03_advanced/24_async_closures.md) |
+| Async Closures | RFC 3668, **1.85.0 stable** | ✅ 已覆盖 (c06_async / concept/03_advanced/01_async/24_async_closures.md) |
 | AsyncFn traits | **1.85.0 stable**, 2024 prelude | ✅ 已覆盖 (c06_async) |
 | AFIDT | rust-lang/rust#133882 | 🔴 **未覆盖** |
 | RTN | RFC 3654 | 🔴 **未覆盖** |

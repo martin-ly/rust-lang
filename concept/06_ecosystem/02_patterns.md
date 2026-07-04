@@ -1468,7 +1468,7 @@ fn main() {
 | 错误处理（Error Handling） | [`../02_intermediate/03_error_handling/04_error_handling.md`](../02_intermediate/03_error_handling/04_error_handling.md) | Result 模式 |
 | 工具链 | [`./01_toolchain.md`](01_toolchain.md) | 工程支撑 |
 | 设计模式对比 | [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) | 范式定位 |
-| 并发 / 异步（Async） | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) · [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | Observer 异步实现基础 |
+| 并发 / 异步（Async） | [`../03_advanced/00_concurrency/01_concurrency.md`](../03_advanced/00_concurrency/01_concurrency.md) · [`../03_advanced/01_async/02_async.md`](../03_advanced/01_async/02_async.md) | Observer 异步实现基础 |
 
 ---
 
@@ -1630,7 +1630,7 @@ impl std::fmt::Display for MyVec {
 ```
 
 > **修正**: 孤儿规则（Orphan Rule）禁止为外部 crate 的外部类型实现外部 trait。使用 Newtype 模式（`struct Wrapper(ExternalType)`）是标准解法。
-> **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [能力图谱](../00_meta/competency_graph.md#三设计能力) · [Trait](../02_intermediate/00_traits/01_traits.md)
+> **相关文件**: [问题图谱](../00_meta/04_navigation/problem_graph.md) · [能力图谱](../00_meta/00_framework/competency_graph.md#三设计能力) · [Trait](../02_intermediate/00_traits/01_traits.md)
 
 ### 10.5 边界测试：访问者模式与 Rust 的枚举匹配（设计权衡）
 

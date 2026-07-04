@@ -1,6 +1,6 @@
 # 归档目录
 
-本目录用于存放只读的历史参考内容。详细规则见项目根目录的 [`ARCHIVE_POLICY.md`](../ARCHIVE_POLICY.md)。
+本目录用于存放只读的历史参考内容。详细规则见项目根目录的 [`ARCHIVE_POLICY.md`](../archive_policy.md)。
 
 ## 主要子目录
 

@@ -95,7 +95,7 @@
 | 文档/目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
 | [quick_reference/](../../../docs/02_reference/quick_reference/README.md) | 20 个速查卡（含 AI/ML、类型、所有权、异步等） | → [05_guides](#05-专题指南) → [research_notes](#03-理论与形式化) |
-| [ALIGNMENT_GUIDE.md](../../../docs/02_reference/ALIGNMENT_GUIDE.md) | 对齐知识综合（内存/格式化/unsafe/缓存行） | → [PERFORMANCE_TUNING_GUIDE](../../../docs/05_guides/05_performance_tuning_guide.md) → UNSAFE_RUST_GUIDE |
+| [ALIGNMENT_GUIDE.md](../../../docs/02_reference/alignment_guide.md) | 对齐知识综合（内存/格式化/unsafe/缓存行） | → [PERFORMANCE_TUNING_GUIDE](../../../docs/05_guides/05_performance_tuning_guide.md) → UNSAFE_RUST_GUIDE |
 | [02_error_code_mapping.md](../../../docs/02_reference/02_error_code_mapping.md) | 编译器错误码 → 本项目文档映射 | → [TROUBLESHOOTING_GUIDE](../../../docs/05_guides/05_troubleshooting_guide.md) → [research_notes/formal_methods](../../research_notes_2026_06_25/formal_methods/README.md) |
 | [02_edge_cases_and_special_cases.md](../../../docs/02_reference/02_edge_cases_and_special_cases.md) | 空集、零长度、溢出等边界特例 | → [SAFE_DECIDABLE_MECHANISMS](../../research_notes_2026_06_25/10_safe_decidable_mechanisms_overview.md) → [SAFE_UNSAFE_ANALYSIS](../../../docs/research_notes/10_safe_unsafe_comprehensive_analysis.md) |
 | [02_standard_library_comprehensive_analysis_2025_12_25.md](../../../docs/02_reference/02_standard_library_comprehensive_analysis_2025_12_25.md) | 标准库全面分析 | → [type_theory](../../../docs/research_notes/type_theory/README.md) → [crates/*/examples/](../../../crates/README.md) |
@@ -120,7 +120,7 @@
 | [collections_iterators_cheatsheet](../../../docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](../../../docs/05_guides/05_performance_tuning_guide.md) | [ownership_model](../../../docs/research_notes/formal_methods/10_ownership_model.md) |
 | [smart_pointers_cheatsheet](../../../docs/02_reference/quick_reference/02_smart_pointers_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](../../../docs/05_guides/05_performance_tuning_guide.md) | [ownership_model](../../../docs/research_notes/formal_methods/10_ownership_model.md) |
 | [modules_cheatsheet](../../../docs/02_reference/quick_reference/02_modules_cheatsheet.md) | [CROSS_MODULE_INTEGRATION_EXAMPLES](../../../docs/05_guides/05_cross_module_integration_examples.md) | [trait_system_formalization](../../research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) |
-| [strings_formatting_cheatsheet](../../../docs/02_reference/quick_reference/02_strings_formatting_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../../../docs/05_guides/05_cli_applications_guide.md) | [ALIGNMENT_GUIDE](../../../docs/02_reference/ALIGNMENT_GUIDE.md) |
+| [strings_formatting_cheatsheet](../../../docs/02_reference/quick_reference/02_strings_formatting_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../../../docs/05_guides/05_cli_applications_guide.md) | [ALIGNMENT_GUIDE](../../../docs/02_reference/alignment_guide.md) |
 | [cargo_cheatsheet](../../../docs/02_reference/quick_reference/02_cargo_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../../../docs/05_guides/05_cli_applications_guide.md) | [06_toolchain](../../../docs/06_toolchain/README.md) |
 | [process_management_cheatsheet](../../../docs/02_reference/quick_reference/02_process_management_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../../../docs/05_guides/05_cli_applications_guide.md) | [SAFE_UNSAFE_ANALYSIS](../../../docs/research_notes/10_safe_unsafe_comprehensive_analysis.md) |
 | [network_programming_cheatsheet](../../../docs/02_reference/quick_reference/02_network_programming_cheatsheet.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](../../../docs/05_guides/05_async_programming_usage_guide.md) | [async_state_machine](../../research_notes_2026_06_25/formal_methods/10_async_state_machine.md) |
@@ -227,7 +227,7 @@
 | [05_cli_applications_guide.md](../../../docs/05_guides/05_cli_applications_guide.md) | CLI 应用开发 | ← [cargo_cheatsheet](../../../docs/02_reference/quick_reference/02_cargo_cheatsheet.md) ← [process_management_cheatsheet](../../../docs/02_reference/quick_reference/02_process_management_cheatsheet.md) |
 | [05_embedded_rust_guide.md](../../../docs/05_guides/05_embedded_rust_guide.md) | 嵌入式 Rust | ← UNSAFE_RUST_GUIDE |
 | [05_troubleshooting_guide.md](../../../docs/05_guides/05_troubleshooting_guide.md) | 故障排查指南 | ← [error_handling_cheatsheet](../../../docs/02_reference/quick_reference/02_error_handling_cheatsheet.md) ← [ERROR_CODE_MAPPING](../../../docs/02_reference/02_error_code_mapping.md) |
-| [05_performance_tuning_guide.md](../../../docs/05_guides/05_performance_tuning_guide.md) | 性能调优指南 | ← [algorithms_cheatsheet](../../../docs/02_reference/quick_reference/02_algorithms_cheatsheet.md) ← [smart_pointers_cheatsheet](../../../docs/02_reference/quick_reference/02_smart_pointers_cheatsheet.md) ← [ALIGNMENT_GUIDE](../../../docs/02_reference/ALIGNMENT_GUIDE.md) |
+| [05_performance_tuning_guide.md](../../../docs/05_guides/05_performance_tuning_guide.md) | 性能调优指南 | ← [algorithms_cheatsheet](../../../docs/02_reference/quick_reference/02_algorithms_cheatsheet.md) ← [smart_pointers_cheatsheet](../../../docs/02_reference/quick_reference/02_smart_pointers_cheatsheet.md) ← [ALIGNMENT_GUIDE](../../../docs/02_reference/alignment_guide.md) |
 | [05_performance_testing_report.md](05_guides/05_performance_testing_report.md) | 性能测试报告 | ← [testing_cheatsheet](../../../docs/02_reference/quick_reference/02_testing_cheatsheet.md) ← [PERFORMANCE_TUNING_GUIDE](../../../docs/05_guides/05_performance_tuning_guide.md) |
 | [05_testing_coverage_guide.md](../../../docs/05_guides/05_testing_coverage_guide.md) | 测试覆盖率指南 | ← [testing_cheatsheet](../../../docs/02_reference/quick_reference/02_testing_cheatsheet.md) |
 | 10_best_practices.md | 综合最佳实践 | ← 所有速查卡 ← [formal_methods/](../../research_notes_2026_06_25/formal_methods/README.md) |
@@ -270,7 +270,7 @@
 | [07_module_1_93_adaptation_status.md](07_project/07_module_1_93_adaptation_status.md) | C01–C12 模块 1.93 适配状态 | ←→ [crates/](../../../crates/README.md) ←→ [06_toolchain/](../../../docs/06_toolchain/README.md) |
 | [07_project_critical_evaluation_report_2026_02.md](07_project/07_project_critical_evaluation_report_2026_02.md) | 项目批判性评估报告 | ←→ 所有主要文档 |
 | [07_international_benchmark_critical_evaluation_2026_02.md](07_project/07_international_benchmark_critical_evaluation_2026_02.md) | 国际化对标与全面批判性评估 | ←→ [formal_methods/](../../research_notes_2026_06_25/formal_methods/README.md) |
-| [07_alignment_knowledge_critical_evaluation_2026_02.md](07_project/07_alignment_knowledge_critical_evaluation_2026_02.md) | 对齐知识批判性评估与推进方案 | ←→ [ALIGNMENT_GUIDE](../../../docs/02_reference/ALIGNMENT_GUIDE.md) |
+| [07_alignment_knowledge_critical_evaluation_2026_02.md](07_project/07_alignment_knowledge_critical_evaluation_2026_02.md) | 对齐知识批判性评估与推进方案 | ←→ [ALIGNMENT_GUIDE](../../../docs/02_reference/alignment_guide.md) |
 | 07_documentation_theme_organization_plan.md | 文档主题梳理与重组规划 | ←→ DOCS_STRUCTURE_OVERVIEW |
 | archive/process_reports/ | 改进总结、计划实施、链接修复、Crates 计划等过程性文档 | ←→ 所有主要文档 |
 

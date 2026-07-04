@@ -6,12 +6,12 @@
 > **受众**: [专家]
 > **Bloom 层级**: 理解
 > **状态**: 已归档（内容已迁移至主文件）
-> **归档声明**: 本文件内容已迁移至 [`02_async.md`](02_async.md) 和 [`02_async_patterns.md`](02_async_patterns.md)。
+> **归档声明**: 本文件内容已迁移至 [`02_async.md`](../03_advanced/01_async/02_async.md) 和 [`02_async_patterns.md`](02_async_patterns.md)。
 > 原文件保留用于历史追溯。请勿独立编辑本文件。
 > **归档原因**: 内容碎片化（仅 25 行），已被主文件和模式文件覆盖。
 > **状态**: 已归档（2026-05-25 Phase 1 Cleanup）
-> **后置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
-> **前置概念**: [Async Basics](../03_advanced/02_async.md)
+> **后置概念**: [Formal Verification](../04_formal/01_ownership_logic/03_ownership_formal.md)
+> **前置概念**: [Async Basics](../03_advanced/01_async/02_async.md)
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 
 ## 认知路径

@@ -541,7 +541,7 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 ## 相关概念
 
 - [Tree Borrows (concept)](../../../../concept/01_foundation/03_values_and_references/05_reference_semantics.md) — PLDI 2025 Distinguished Paper 别名模型
-- [Ferrocene 认证 (concept)](../../../../concept/04_formal/16_aerospace_certification_formal_methods.md) — 认证分层矩阵（core/alloc/std）
+- [Ferrocene 认证 (concept)](../../../../concept/04_formal/04_model_checking/16_aerospace_certification_formal_methods.md) — 认证分层矩阵（core/alloc/std）
 
 ## 📚 模块 8: 国际化对齐
 

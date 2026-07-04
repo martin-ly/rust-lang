@@ -17,7 +17,7 @@
 >
 > [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
 > [Type System](../01_foundation/02_type_system/04_type_system.md) ·
-> [Linear Logic](../04_formal/01_linear_logic.md)
+> [Linear Logic](../04_formal/01_ownership_logic/01_linear_logic.md)
 >
 > **后置概念**:
 >
@@ -1911,7 +1911,7 @@ fn main() {
 ```
 
 > **C++ 对比**: C++ 允许返回局部变量的引用，运行时产生未定义行为。Rust 在编译期通过生命周期系统阻止此类错误。
-> **相关文件**: [范式转换矩阵](../00_meta/paradigm_transition_matrix.md) · [Rust vs Go](02_rust_vs_go.md) · [执行模型同构](05_execution_model_isomorphism.md)
+> **相关文件**: [范式转换矩阵](../00_meta/00_framework/paradigm_transition_matrix.md) · [Rust vs Go](02_rust_vs_go.md) · [执行模型同构](05_execution_model_isomorphism.md)
 
 ### 9.3 边界测试：C++ 隐式复制 vs Rust 显式 Clone（编译错误）
 

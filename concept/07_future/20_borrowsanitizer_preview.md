@@ -19,8 +19,8 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 BorrowSanitizer 预览特性
 > **定位**: 探讨 BorrowSanitizer 作为 Rust **运行时（Runtime）借用（Borrowing）检查**工具的工业化路径，从 Miri 的纯解释执行扩展到编译后二进制检测的设计空间。
-> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Version Tracking](05_rust_version_tracking.md)
-> **后置概念**: [Formal Methods](02_formal_methods.md) · [RustBelt](../04_formal/04_rustbelt.md)
+> **前置概念**: [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Version Tracking](05_rust_version_tracking.md)
+> **后置概念**: [Formal Methods](02_formal_methods.md) · [RustBelt](../04_formal/02_separation_logic/04_rustbelt.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -342,7 +342,7 @@ fn main() {
 
 ## 相关概念文件
 
-- [Unsafe Rust](../03_advanced/03_unsafe.md) — Unsafe 边界与借用规则
+- [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) — Unsafe 边界与借用规则
 - [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权系统的形式化根基
 - [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用检查的核心机制
 - [Formal Methods](02_formal_methods.md) — 形式化验证工具链

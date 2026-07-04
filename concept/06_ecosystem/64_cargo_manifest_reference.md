@@ -1,5 +1,5 @@
 > **内容分级**: [参考级]
-> **本节关键术语**: Manifest · `Cargo.toml` · `[package]` · `[dependencies]` · `[features]` · `[profile]` · `[workspace]` · `[lints]` · `[patch]` — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: Manifest · `Cargo.toml` · `[package]` · `[dependencies]` · `[features]` · `[profile]` · `[workspace]` · `[lints]` · `[patch]` — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 # Cargo Manifest 参考速查
 

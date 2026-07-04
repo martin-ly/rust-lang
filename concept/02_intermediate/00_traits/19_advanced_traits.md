@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 高级特征 (Advanced Traits) · 关联类型 (Associated Type) · GAT · 特化 (Specialization) · 负实现 (Negative Impl) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 高级特征 (Advanced Traits) · 关联类型 (Associated Type) · GAT · 特化 (Specialization) · 负实现 (Negative Impl) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 高级 Trait 主题：从关联类型到特化
 >
@@ -12,7 +12,7 @@
 > **双维定位**: C×Ana — 分析 GATs 和 HRTB 的类型系统（Type System）扩展
 > **定位**: 深入分析 Rust **Trait 系统的高级特性**——从关联类型、泛型（Generics）关联类型（GATs）到特化（Specialization）和负实现，揭示 Trait 系统如何支持复杂抽象和零成本多态。
 > **前置概念**: [Traits](01_traits.md) · [Generics](../01_generics/02_generics.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)
-> **后置概念**: [Type Inference](../../04_formal/08_type_inference.md) · [RustBelt](../../04_formal/04_rustbelt.md)
+> **后置概念**: [Type Inference](../../04_formal/00_type_theory/08_type_inference.md) · [RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md)
 
 ---
 
@@ -492,7 +492,7 @@ graph TD
 - [Traits](01_traits.md) — Trait 基础
 - [Generics](../01_generics/02_generics.md) — 泛型系统
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
-- [Type Inference](../../04_formal/08_type_inference.md) — 类型推断（Type Inference）
+- [Type Inference](../../04_formal/00_type_theory/08_type_inference.md) — 类型推断（Type Inference）
 
 ---
 
@@ -678,7 +678,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

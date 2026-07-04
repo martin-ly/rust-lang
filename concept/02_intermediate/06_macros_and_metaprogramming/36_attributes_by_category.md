@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×App
 > **前置概念**: [Attributes and Declarative Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) · [Modules and Paths](../../01_foundation/07_modules_and_items/11_modules_and_paths.md)
-> **后置概念**: [Procedural Macros](../../03_advanced/07_proc_macro.md) · [Conditional Compilation](../../03_advanced/28_conditional_compilation.md) · [Inline Assembly](../../03_advanced/13_inline_assembly.md)
+> **后置概念**: [Procedural Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) · [Conditional Compilation](../../03_advanced/03_proc_macros/28_conditional_compilation.md) · [Inline Assembly](../../03_advanced/05_inline_assembly/13_inline_assembly.md)
 >
 > **主要来源**: [The Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html) ·
 > [The Rust Reference — Attribute Catalog](https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index) ·

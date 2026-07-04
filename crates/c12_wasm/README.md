@@ -94,8 +94,8 @@
 
 **快速开始** 🚀:
 
-- 📖 [WasmEdge 2025 快速开始](WASMEDGE_2025_QUICK_START.md) - 15分钟上手指南
-- 📊 [WasmEdge 2025 完成报告](WASMEDGE_2025_ADVANCEMENT_REPORT.md) - 项目深化总结
+- 📖 [WasmEdge 2025 快速开始](wasmedge_2025_quick_start.md) - 15分钟上手指南
+- 📊 [WasmEdge 2025 完成报告](wasmedge_2025_advancement_report.md) - 项目深化总结
 
 ## 📚 知识结构文档
 
@@ -219,10 +219,10 @@ wasmedge target/wasm32-wasip1/release/wasi-app.wasm input.txt
 ## 🎯 快速链接
 
 | 链接                               | 描述           |
-| :--- | :--- || [🚀 快速开始](QUICK_START.md)    | 5 分钟上手指南 |
+| :--- | :--- || [🚀 快速开始](quick_start.md)    | 5 分钟上手指南 |
 | [📖 贡献指南](CONTRIBUTING.md)   | 如何参与贡献   |
 | [📋 更新日志](CHANGELOG.md)      | 版本更新记录   |
-| [📊 项目状态](PROJECT_STATUS.md) | 项目完成情况   |
+| [📊 项目状态](project_status.md) | 项目完成情况   |
 | [🛠️ 设置脚本](scripts)          | 自动化设置工具 |
 
 ## 📚 学习资源与文档

@@ -1212,7 +1212,7 @@ macro_rules! generate_getter {
 
 - → 阅读 [03\_代码生成优化.md](03_code_generation_optimization.md) 学习优化技术
 - → 参考 [C11 主索引](../../02_navigation.md) 探索其他主题
-- → 实践 [Tier 2 宏开发指南](../../tier_02_guides/README.md) 巩固知识
+- → 实践 [Tier 2 宏开发指南](../../../../README.md) 巩固知识
 
 ---
 

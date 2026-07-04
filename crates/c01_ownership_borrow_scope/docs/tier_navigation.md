@@ -234,22 +234,22 @@ Week 2+: 根据需要学习 Tier 4
 
 ### 核心导航
 
-- 📖 [主索引](00_MASTER_INDEX.md) - 传统文档导航
-- 📖 [分层导航](TIER_NAVIGATION.md) - 本文档
+- 📖 [主索引](00_master_index.md) - 传统文档导航
+- 📖 [分层导航](tier_navigation.md) - 本文档
 - 📖 [完整学习指南](COMPREHENSIVE_LEARNING_GUIDE.md) - 详细学习计划
 
 ### 可视化资源
 
-- 📊 [可视化索引](VISUALIZATION_INDEX.md) - 可视化资源总览
-- 📈 [知识图谱](KNOWLEDGE_GRAPH.md) - 概念关系图
-- 🧠 [思维导图](MIND_MAP.md) - 学习路径图
-- 🔗 [概念关系网络](CONCEPT_RELATIONSHIP_NETWORK.md) - 概念依赖分析
+- 📊 [可视化索引](visualization_index.md) - 可视化资源总览
+- 📈 [知识图谱](knowledge_graph.md) - 概念关系图
+- 🧠 [思维导图](mind_map.md) - 学习路径图
+- 🔗 [概念关系网络](concept_relationship_network.md) - 概念依赖分析
 
 ### 快速参考
 
 - 📚 [术语表](tier_01_foundations/03_glossary.md) - 核心术语定义
 - ❓ [FAQ](tier_01_foundations/04_faq.md) - 常见问题解答
-- 🚀 [快速开始](QUICK_START_GUIDE.md) - 快速入门指南
+- 🚀 [快速开始](quick_start_guide.md) - 快速入门指南
 
 ### 项目信息
 
@@ -289,7 +289,7 @@ Week 2+: 根据需要学习 Tier 4
 
 1. 先查看对应 Tier 的 README
 2. 查阅 [FAQ](tier_01_foundations/04_faq.md) 和 [术语表](tier_01_foundations/03_glossary.md)
-3. 查看 [可视化资源](VISUALIZATION_INDEX.md)
+3. 查看 [可视化资源](visualization_index.md)
 4. 提交 Issue 或联系维护者
 
 ---

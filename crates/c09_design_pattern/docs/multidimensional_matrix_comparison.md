@@ -713,8 +713,8 @@ graph TD
 
 ## 📚 参考资源
 
-- [知识图谱](KNOWLEDGE_GRAPH.md) - 模式关系网络
-- [思维导图](MIND_MAP.md) - 学习路径可视化
+- [知识图谱](knowledge_graph.md) - 模式关系网络
+- [思维导图](mind_map.md) - 学习路径可视化
 - [Rust 1.92.0 示例集](RUST_192_EXAMPLES.md) - 最新特性示例（自 Rust 1.90 引入）
 - [综合指南](COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 完整理论
 

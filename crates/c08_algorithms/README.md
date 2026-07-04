@@ -461,7 +461,7 @@ cargo llvm-cov test --workspace --html
 
 | 题目 | 说明 |
 | :--- | :--- || 142. Linked List Cycle II | 占位实现，待完整实现 |
-| 其他 | 详见 [LEETCODE_IMPLEMENTATION_COMPLETE.md](LEETCODE_IMPLEMENTATION_COMPLETE.md) |
+| 其他 | 详见 [LEETCODE_IMPLEMENTATION_COMPLETE.md](leetcode_implementation_complete.md) |
 
 ---
 

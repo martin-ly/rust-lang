@@ -9,7 +9,7 @@
 > **内容分级**: [专家级]
 > **分级**: [A]
 > **层次定位**: L3-L6 高级-生态 / 嵌入式异步系统
-> **前置依赖**: [concept L3 Async](../../concept/03_advanced/02_async.md) · [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md) · [EMBEDDED_RUST_GUIDE](03_embedded_rust_guide.md)
+> **前置依赖**: [concept L3 Async](../../concept/03_advanced/01_async/02_async.md) · [concept L3 Unsafe](../../concept/03_advanced/02_unsafe/03_unsafe.md) · [EMBEDDED_RUST_GUIDE](03_embedded_rust_guide.md)
 > **后置延伸**: [concept L6 嵌入式](../../concept/06_ecosystem/22_embedded_systems.md)
 > **跨层映射**: L3 async → L6 嵌入式工程映射
 

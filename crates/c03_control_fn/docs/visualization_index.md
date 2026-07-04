@@ -72,7 +72,7 @@
 
 ### 1️⃣ 思维导图 (MIND_MAP.md)
 
-**📍 [查看思维导图](MIND_MAP.md)**
+**📍 [查看思维导图](mind_map.md)**
 
 #### 特点
 
@@ -107,7 +107,7 @@
 
 ### 2️⃣ 知识图谱 (KNOWLEDGE_GRAPH.md)
 
-**📍 [查看知识图谱](KNOWLEDGE_GRAPH.md)**
+**📍 [查看知识图谱](knowledge_graph.md)**
 
 #### 特点2
 
@@ -142,7 +142,7 @@
 
 ### 3️⃣ 多维矩阵 (MULTIDIMENSIONAL_MATRIX.md)
 
-**📍 [查看多维矩阵](MULTIDIMENSIONAL_MATRIX.md)**
+**📍 [查看多维矩阵](multidimensional_matrix.md)**
 
 #### 特点3
 
@@ -180,7 +180,7 @@
 
 ### 4️⃣ 概念关系网络 (CONCEPT_RELATIONSHIP_NETWORK.md)
 
-**📍 [查看概念关系网络](CONCEPT_RELATIONSHIP_NETWORK.md)**
+**📍 [查看概念关系网络](concept_relationship_network.md)**
 
 #### 特点4
 
@@ -332,8 +332,8 @@
 
 ### 核心文档
 
-- [主索引](00_MASTER_INDEX.md) - 完整导航
-- [文档索引](DOCUMENTATION_INDEX.md) - 所有文档
+- [主索引](00_master_index.md) - 完整导航
+- [文档索引](documentation_index.md) - 所有文档
 - [README](README.md) - 文档中心
 
 ### 学习资源

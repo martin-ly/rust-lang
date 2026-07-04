@@ -757,7 +757,7 @@ graph TD
 >
 > **[🔍 待验证]** async 的完整形式化（包括 Waker 契约、执行器正确性）仍是活跃研究领域，目前仅有部分片段被形式化验证。
 >
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.3 "async 正确性"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/04_navigation/inter_layer_map.md) §4.3 "async 正确性"
 
 ### 5.1 定理矩阵（10 行，含 ⟹ 推理链）
 >
@@ -1830,7 +1830,7 @@ async fn pipeline() {
 
 > **[来源: futures-rs: StreamExt API 文档]** `buffer_unordered` 是异步编程的核心组合子——它允许在保持背压的同时最大化并发度。与 `tokio::join!` 不同，`buffer_unordered` 按完成顺序产出结果，而非输入顺序。
 
-> **交叉链接**: `Stream` 的异步惰性求值与 [§1.3 形式化定义](#13-形式化定义) 中 Future 的惰性语义一致；`Sink` 的线性状态机与 [../04_formal/03_ownership_formal.md](../04_formal/03_ownership_formal.md) §5.2 的线性类型资源管理形成对偶。
+> **交叉链接**: `Stream` 的异步惰性求值与 [§1.3 形式化定义](#13-形式化定义) 中 Future 的惰性语义一致；`Sink` 的线性状态机与 [../04_formal/03_ownership_formal.md](../04_formal/01_ownership_logic/03_ownership_formal.md) §5.2 的线性类型资源管理形成对偶。
 
 ---
 
@@ -2253,7 +2253,7 @@ mod tests {
 
 > **[来源: loom 官方示例; Rust Atomics and Locks by Mara Bos]** 自定义并发原语（自旋锁、无锁队列、RCU）是 loom 的核心应用场景。loom 会系统地探索 `compare_exchange_weak` 的失败路径、线程切换时机以及 Drop 的顺序，从而发现手工难以构造的边界情况。[来源: Tokio 内部 loom 测试套件]
 > **Bloom 层级**: 应用 —— 使用 loom 验证并发原语是生产级 Rust 并发编程的标准实践。
-> **交叉链接**: 内存序模型见 [../02_intermediate/00_traits/01_traits.md](../02_intermediate/00_traits/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/03_unsafe.md](../03_advanced/03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
+> **交叉链接**: 内存序模型见 [../02_intermediate/00_traits/01_traits.md](../02_intermediate/00_traits/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/02_unsafe/03_unsafe.md](../03_advanced/02_unsafe/03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
 
 ### 8.13 Miri 动态验证：async 状态机的内存安全检测
 
@@ -2539,7 +2539,7 @@ trait DataProvider<'a> {
 >
 > `async/await` 的编译期正确性依赖于状态机的自引用安全性，而 `Pin<&mut Self>` 保证的"地址不变性"在类型论中对应于 **location stability** 约束。当前 borrow checker 对自引用的分析存在过度保守的问题，Polonius 的下一代 Datalog 求解器正试图用路径敏感的 loan-based 语义精确刻画这一边界。
 >
-> 形式化视角见 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) §9.2（Polonius）与 [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) §4.1（存在类型与 `impl Trait`）。
+> 形式化视角见 [`../04_formal/03_ownership_formal.md`](../04_formal/01_ownership_logic/03_ownership_formal.md) §9.2（Polonius）与 [`../04_formal/02_type_theory.md`](../04_formal/00_type_theory/02_type_theory.md) §4.1（存在类型与 `impl Trait`）。
 
 ---
 
@@ -2715,12 +2715,12 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | 所有权（Ownership） | [](../00_meta/placeholders/placeholder_generic.md) | Pin 根基 |
 | 生命周期 | [](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | async fn 捕获规则 |
 | Traits | [](../02_intermediate/00_traits/01_traits.md) | Future trait 定义 |
-| 并发 | [](../03_advanced/01_concurrency.md) | 并行与并发对比 |
-| Unsafe | [](../03_advanced/03_unsafe.md) | Pin 内部实现 |
+| 并发 | [](../03_advanced/00_concurrency/01_concurrency.md) | 并行与并发对比 |
+| Unsafe | [](../03_advanced/02_unsafe/03_unsafe.md) | Pin 内部实现 |
 | 形式化方法 | [](../07_future/02_formal_methods.md) | 异步协议验证 |
 | Rust 版本特性演进 | [](../07_future/05_rust_version_tracking.md) | `AsyncFn`、`gen` blocks 等异步语义扩展 |
 | 泛型（Generics）与类型系统 | [](../02_intermediate/01_generics/02_generics.md) | `use<..>` precise capturing、GATs |
-| Unsafe 权限分离 | [](../03_advanced/03_unsafe.md) | `unsafe_op_in_unsafe_fn` 的权限模型 |
+| Unsafe 权限分离 | [](../03_advanced/02_unsafe/03_unsafe.md) | `unsafe_op_in_unsafe_fn` 的权限模型 |
 
 > **过渡: L3 → L2**
 >
@@ -2776,8 +2776,8 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 ---
 
-> **相关判定树**: [异步判定树](../00_meta/concept_definition_decision_forest.md#八异步判定树)
-> **相关 FTA**: [异步安全失效树](../00_meta/fault_tree_analysis_collection.md#五异步安全失效树)
+> **相关判定树**: [异步判定树](../00_meta/00_framework/concept_definition_decision_forest.md#八异步判定树)
+> **相关 FTA**: [异步安全失效树](../00_meta/00_framework/fault_tree_analysis_collection.md#五异步安全失效树)
 
 ## 嵌入式测验（Embedded Quiz）
 

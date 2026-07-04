@@ -332,9 +332,9 @@ println!("调用位置: {}", debug_info.format());
 
 ## 📚 相关文档
 
-- [Rust 1.92.0 WASM 改进文档](RUST_192_WASM_IMPROVEMENTS.md) - 详细说明
-- [Rust 1.92.0 WASM 迁移指南](RUST_192_MIGRATION_GUIDE.md) - 迁移步骤
-- [Rust 1.92.0 WASM 快速参考](RUST_192_QUICK_REFERENCE.md) - 快速查找
+- [Rust 1.92.0 WASM 改进文档](rust_192_wasm_improvements.md) - 详细说明
+- [Rust 1.92.0 WASM 迁移指南](rust_192_migration_guide.md) - 迁移步骤
+- [Rust 1.92.0 WASM 快速参考](rust_192_quick_reference.md) - 快速查找
 - [Rust 1.92.0 特性参考](tier_03_references/04_rust_192_features_reference.md) - API 参考
 
 ---

@@ -1033,6 +1033,6 @@ This handbook covered:
 
 - [所有权可判定性研究](FINAL_MASTER_INDEX.md)
 - [Rust 安全关键生态系统](../../knowledge/04_expert/safety_critical/02_rust_safety_critical_ecosystem_master_index.md)
-- [概念：所有权基础](../../concept/01_foundation/01_ownership.md)
+- [概念：所有权基础](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 
 ---

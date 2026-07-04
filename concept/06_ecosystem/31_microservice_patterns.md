@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计微服务架构
 > **定位**: 从系统架构视角梳理 Rust 在微服务场景中的核心模式——服务发现、熔断、Saga、CQRS、事件溯源——揭示 Rust 的类型安全与零成本抽象（Zero-Cost Abstraction）如何支撑高可靠分布式系统。
-> **前置概念**: [Async](../03_advanced/02_async.md) · 分布式系统 · [错误处理（Error Handling）](../01_foundation/08_error_handling/32_error_handling_basics.md)
+> **前置概念**: [Async](../03_advanced/01_async/02_async.md) · 分布式系统 · [错误处理（Error Handling）](../01_foundation/08_error_handling/32_error_handling_basics.md)
 > **后置概念**: [事件驱动架构](32_event_driven_architecture.md) · [云原生](24_cloud_native.md)
 >
 > **来源**: [tower](https://docs.rs/tower/) · [tonic](https://docs.rs/tonic/) · [failsafe](https://docs.rs/failsafe/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -745,8 +745,8 @@ Rust 微服务并非银弹:
 - [分布式系统](18_distributed_systems.md) — gRPC、Raft、Actor 模型
 - [云原生](24_cloud_native.md) — 容器化、Kubernetes、可观测性
 - [系统设计原则](05_system_design_principles.md) — 安全-性能-可维护性帕累托前沿
-- [Async](../03_advanced/02_async.md) — async/await、并发模型
-- [并发](../03_advanced/01_concurrency.md) — Send/Sync、线程安全
+- [Async](../03_advanced/01_async/02_async.md) — async/await、并发模型
+- [并发](../03_advanced/00_concurrency/01_concurrency.md) — Send/Sync、线程安全
 
 ---
 

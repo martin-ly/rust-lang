@@ -1,6 +1,6 @@
 # c09 设计模式：完整文档指南
 
-> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs)。
 > 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
 >
 
@@ -15,10 +15,10 @@
 
 ### 核心概念
 
-- [📖 概述与导航](OVERVIEW.md) - 文档结构和阅读路径
+- [📖 概述与导航](overview.md) - 文档结构和阅读路径
 - [📚 顶层说明](../README.md) - 项目概述和快速开始
 - [📋 章节导引](../09_design_patterns.md) - 设计模式章节导引
-- [🚀 Rust 1.93.0 设计模式改进](RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md) - 版本对齐分析
+- [🚀 Rust 1.93.0 设计模式改进](rust_192_design_pattern_improvements.md) - 版本对齐分析
 
 ### Tier 1 基础层 ⭐ NEW
 
@@ -84,7 +84,7 @@
    - [主索引导航](tier_01_foundations/02_navigation.md)
    - [术语表](tier_01_foundations/03_glossary.md)
    - [常见问题](tier_01_foundations/04_faq.md)
-2. **基础概念** → [OVERVIEW.md](OVERVIEW.md)
+2. **基础概念** → [OVERVIEW.md](overview.md)
 3. **项目概述** → [../README.md](../README.md)
 4. **创建型模式** → [../src/creational/](../src/creational)
 5. **实践应用** → [../src/bin/](../src/bin)

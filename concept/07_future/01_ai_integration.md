@@ -632,7 +632,7 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 
 | AI 需求 | 驱动的下层变化 | 关联文件 | 约束类型 |
 |:---|:---|:---|:---|
-| AI 生成代码安全 | L3 Unsafe 契约需机器可读 | `03_advanced/03_unsafe.md` | 反向约束 |
+| AI 生成代码安全 | L3 Unsafe 契约需机器可读 | `03_advanced/02_unsafe/03_unsafe.md` | 反向约束 |
 | AI 类型推断（Type Inference）辅助 | L1 类型系统（Type System）需更易推断 | `01_foundation/02_type_system/04_type_system.md` | 反向约束 |
 | AI 错误修复 | L2 错误处理（Error Handling）模式需标准化 | `02_intermediate/03_error_handling/04_error_handling.md` | 反向约束 |
 | 确定性容器 | L1 所有权（Ownership）需扩展确定性语义 | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | 潜在扩展 |

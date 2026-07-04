@@ -271,7 +271,7 @@ Rust 1.92.0 稳定化的标准库 API（如 `NonZero::div_ceil`、`rotate_right`
 
 ## 📚 相关文档
 
-- [Rust 1.92.0 所有权、借用、生命周期改进文档](RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md)
+- [Rust 1.92.0 所有权、借用、生命周期改进文档](rust_192_ownership_borrowing_lifetime_improvements.md)
 - [性能优化参考](../tier_03_references/09_performance_optimization_reference.md)
 - [零成本抽象参考](../tier_03_references/07_zero_cost_abstractions_reference.md)
 - [所有权性能优化](../tier_04_advanced/03_ownership_performance_optimization.md)

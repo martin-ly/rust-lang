@@ -1,6 +1,6 @@
 # 声明式宏 (Declarative Macros)
 
-> **相关概念**: [声明宏](../../../concept/03_advanced/04_macros.md)
+> **相关概念**: [声明宏](../../../../concept/03_advanced/03_proc_macros/04_macros.md)
 > **Bloom 层级**: 理解
 > **📌 简介**: `macro_rules!` 是 Rust 的声明式宏系统，基于模式匹配和模板替换 [来源: Rust Reference — Macros / 2025;
 > RFC 1584 / 2016; 核心设计决策: 在 AST 层面操作 Token 而非文本替换，保证卫生性（Hygiene）]。
@@ -931,7 +931,7 @@ impl Person {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [过程宏 (Procedural Macros)](02_procedural.md)
-- [Macros 宏系统](README.md)
+- [Macros 宏系统](../../../../README.md)
 - [Rust 元编程指南](../06_type_driven_correctness.md)
 - [Rust 所有权深入](../../01_fundamentals/04_ownership.md)
 

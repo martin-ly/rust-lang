@@ -1,7 +1,7 @@
 # Cargo 入门（Cargo Getting Started）
 
 > **内容分级**: [参考级]
-> **本节关键术语**: Cargo · Crate · Package · Manifest · `Cargo.toml` — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: Cargo · Crate · Package · Manifest · `Cargo.toml` — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Getting Started
 > **Summary**: Cargo 的定位与入门：安装验证、`cargo new` 创建 package、构建运行、依赖管理基础，以及 Cargo 在 Rust 工具链中的角色。
@@ -10,7 +10,7 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 让初学者在 5 分钟内理解 Cargo 是什么、能做什么、如何创建并运行第一个 Rust package。
-> **前置概念**: [Toolchain](01_toolchain.md) · [Rust Installation](../00_meta/learning_mvp_path.md)
+> **前置概念**: [Toolchain](01_toolchain.md) · [Rust Installation](../00_meta/04_navigation/learning_mvp_path.md)
 > **后置概念**: [Cargo Workflow](81_cargo_workflow.md) · [Cargo Dependency Resolution](60_cargo_dependency_resolution.md) · [Cargo Manifest Reference](64_cargo_manifest_reference.md)
 
 ---

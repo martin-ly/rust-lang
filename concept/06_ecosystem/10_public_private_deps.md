@@ -59,7 +59,7 @@ let _ = serde_json::to_string(&s);
 > [rust-lang/cargo#9094](https://github.com/rust-lang/cargo/issues/9094) ·
 > [Rust Project Goals 2026 — Public/Private Dependencies](https://rust-lang.github.io/rust-project-goals/2026/pub-priv.html)
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

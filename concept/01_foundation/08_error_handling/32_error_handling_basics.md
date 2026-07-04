@@ -2,7 +2,7 @@
 > [综述级]
 >
 > **Rust 版本**: 1.96.1+ (Edition 2024)
-> **本节关键术语**: 错误处理 (Error Handling) · Result · Option · 传播运算符 (? ) · 模式匹配（Pattern Matching）错误 (Match on Result) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 错误处理 (Error Handling) · Result · Option · 传播运算符 (? ) · 模式匹配（Pattern Matching）错误 (Match on Result) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # Rust 错误处理基础
 >
@@ -18,7 +18,7 @@
 > **定位**: 系统讲解 Rust 的错误处理（Error Handling）机制——从 `Result` 和 `Option` 到 `?` 运算符，分析 Rust 如何将错误处理融入类型系统（Type System），实现编译期安全。
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/04_type_system.md) · [Control Flow](../04_control_flow/07_control_flow.md)
 > **后置概念**: [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) ·
-> [Panic](../../03_advanced/03_unsafe.md) ·
+> [Panic](../../03_advanced/02_unsafe/03_unsafe.md) ·
 > [Logging](../../06_ecosystem/13_logging_observability.md)
 
 ---
@@ -804,7 +804,7 @@ fn main() {}
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

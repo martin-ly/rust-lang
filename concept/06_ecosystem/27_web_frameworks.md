@@ -16,7 +16,7 @@
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 Web 框架模式
 > **定位**: 对比分析 Rust 主流 Web 框架——Axum、Actix-web、Rocket、Poem——从架构设计、运行时（Runtime）集成、中间件机制到性能特征，建立系统化的选型决策框架。
-> **前置概念**: [Async](../03_advanced/02_async.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Traits](../02_intermediate/00_traits/01_traits.md)
+> **前置概念**: [Async](../03_advanced/01_async/02_async.md) · [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) · [Traits](../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [云原生生态](24_cloud_native.md) · [设计模式](02_patterns.md)
 >
 > **来源**: [axum](https://docs.rs/axum/) · [actix-web](https://docs.rs/actix-web/) · [Rocket](https://rocket.rs/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -30,7 +30,7 @@
 > [Tokio](https://tokio.rs/) ·
 > [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) ·
 > [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -45,8 +45,8 @@
     - [2.1 Axum：Tokio 生态的原生扩展](#21-axumtokio-生态的原生扩展)
     - [2.2 Actix-web：Actor 模型的工业级实现](#22-actix-webactor-模型的工业级实现)
     - [2.3 Rocket：声明式编程与类型安全](#23-rocket声明式编程与类型安全)
-    - [2.4 Poem：模块（Module）化与 OpenAPI 优先](#24-poem模块化与-openapi-优先)
-  - [三、异步（Async）运行时（Runtime）集成对比](#三异步运行时集成对比)
+    - [2.4 Poem：模块化与 OpenAPI 优先](#24-poem模块化与-openapi-优先)
+  - [三、异步运行时集成对比](#三异步运行时集成对比)
     - [3.1 运行时绑定策略](#31-运行时绑定策略)
     - [3.2 运行时兼容性矩阵](#32-运行时兼容性矩阵)
   - [四、中间件机制深度对比](#四中间件机制深度对比)
@@ -67,7 +67,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Web 框架的编译错误](#十边界测试web-框架的编译错误)
     - [10.1 边界测试：axum 处理函数的签名约束（编译错误）](#101-边界测试axum-处理函数的签名约束编译错误)
-    - [10.2 边界测试：共享状态的生命周期（Lifetimes）与 `Clone` 约束（编译错误）](#102-边界测试共享状态的生命周期与-clone-约束编译错误)
+    - [10.2 边界测试：共享状态的生命周期与 `Clone` 约束（编译错误）](#102-边界测试共享状态的生命周期与-clone-约束编译错误)
     - [10.6 边界测试：HTTP 请求的 body 大小限制与内存 DoS（运行时 OOM）](#106-边界测试http-请求的-body-大小限制与内存-dos运行时-oom)
     - [10.5 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）](#105-边界测试axum-的-extractor-顺序与请求体消耗运行时-panic)
     - [10.4 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）](#104-边界测试axum-的-extractor-顺序与请求体消耗运行时-panic)
@@ -769,8 +769,8 @@ graph TD
 
 ## 相关概念文件
 
-- [Async/Await](../03_advanced/02_async.md) — 异步编程基础
-- [Concurrency](../03_advanced/01_concurrency.md) — 并发模型
+- [Async/Await](../03_advanced/01_async/02_async.md) — 异步编程基础
+- [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) — 并发模型
 - [Traits](../02_intermediate/00_traits/01_traits.md) — Trait 系统与泛型（Generics）约束
 - [云原生生态](24_cloud_native.md) — 容器化与微服务部署
 - [设计模式](02_patterns.md) — Rust 设计模式

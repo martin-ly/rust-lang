@@ -272,14 +272,14 @@
    - 选择合适的研究主题
 2. **创建或更新文件**
    - 使用 [研究笔记模板](10_template.md)
-   - 遵循 [研究笔记规范](README.md#研究笔记规范)
+   - 遵循 [研究笔记规范](../../README.md#研究笔记规范)
 3. **质量检查**
    - 使用 [质量检查清单](10_quality_checklist.md)
    - 确保代码示例可运行
 4. **更新索引**
    - 更新相应目录的 README.md
-   - 更新 [主索引](README.md)
-   - 更新 [完整索引](INDEX.md)
+   - 更新 [主索引](../../README.md)
+   - 更新 [完整索引](../../concept/sources/INDEX.md)
    - 更新 [快速参考](10_quick_reference.md)
 5. **更新日志**
    - 更新 [更新日志](10_changelog.md)
@@ -553,7 +553,7 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [主索引](README.md) - 完整的研究笔记索引
+- [主索引](../../README.md) - 完整的研究笔记索引
 - [系统总结](10_system_summary.md) - 系统概览和统计
 - [贡献指南](10_contributing.md) - 贡献流程和规范
 - [质量检查清单](10_quality_checklist.md) - 质量检查标准
@@ -641,7 +641,7 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

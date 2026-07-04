@@ -979,7 +979,7 @@
 1. **📊 [知识图谱与概念关系](theory/knowledge_graph_and_concept_relations.md)**: Mermaid 图表可视化
 2. **📐 [多维矩阵对比](theory/multi_dimensional_comparison_matrix.md)**: 详细技术对比
 3. **🗺️ 本文档**: 思维导图与学习路径
-4. **💻 [实战示例 Part 1](RUST_190_EXAMPLES_COLLECTION.md)**: 所有权基础代码
+4. **💻 [实战示例 Part 1](rust_190_examples_collection.md)**: 所有权基础代码
 5. **📚 [README](../README.md)**: 模块总览
 
 ---

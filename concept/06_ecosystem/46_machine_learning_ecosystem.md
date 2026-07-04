@@ -11,8 +11,8 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust ML 生态的技术选型与工程权衡
-> **前置依赖**: [类型系统（Type System）](../01_foundation/02_type_system/04_type_system.md) · [泛型（Generics）](../02_intermediate/01_generics/02_generics.md) · [Trait](../02_intermediate/00_traits/01_traits.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
-> **后置延伸**: [嵌入式系统](22_embedded_systems.md) · [性能优化](15_performance_optimization.md) · [并发编程](../03_advanced/01_concurrency.md)
+> **前置依赖**: [类型系统（Type System）](../01_foundation/02_type_system/04_type_system.md) · [泛型（Generics）](../02_intermediate/01_generics/02_generics.md) · [Trait](../02_intermediate/00_traits/01_traits.md) · [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md)
+> **后置延伸**: [嵌入式系统](22_embedded_systems.md) · [性能优化](15_performance_optimization.md) · [并发编程](../03_advanced/00_concurrency/01_concurrency.md)
 >
 > **来源**: [candle](https://docs.rs/candle-core/) · [burn](https://docs.rs/burn/) · [tch-rs](https://docs.rs/tch/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
@@ -29,7 +29,7 @@
 > [Apache Arrow Rust](https://arrow.apache.org/rust/) ·
 > [DataFusion — Query Engine](https://arrow.apache.org/datafusion/)
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -842,9 +842,9 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 
 - [性能优化](15_performance_optimization.md) — SIMD、缓存优化、内存布局
 - [嵌入式系统](22_embedded_systems.md) — `#![no_std]`、资源受限环境
-- [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、多线程并行
+- [并发编程](../03_advanced/00_concurrency/01_concurrency.md) — Send/Sync、多线程并行
 - [类型系统（Type System）](../01_foundation/02_type_system/04_type_system.md) — 泛型（Generics）、Trait、类型安全
-- [Unsafe Rust](../03_advanced/03_unsafe.md) — FFI 绑定、C 库交互
+- [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) — FFI 绑定、C 库交互
 - [网络协议](38_network_protocols.md) — gRPC、HTTP/2、序列化
 - [云原生](24_cloud_native.md) — 容器化部署、微服务
 - [WebAssembly](11_webassembly.md) — WASM 目标、浏览器内推理

@@ -1256,7 +1256,7 @@ mod tests {
 
 ---
 
-- [README](README.md)
+- [README](../../../README.md)
 
 ---
 
@@ -1264,7 +1264,7 @@ mod tests {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [06_toolchain 目录](README.md)
+- [06_toolchain 目录](../../../README.md)
 - [docs 索引](../README.md)
 
 ---

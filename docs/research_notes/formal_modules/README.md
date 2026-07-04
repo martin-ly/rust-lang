@@ -74,9 +74,9 @@
 - [跨文档映射网络](../10_cross_reference_index.md) — 层级-主题-文档三维矩阵
 - [层次化梳理与映射总结](../10_hierarchical_mapping_and_summary.md) — 概念族↔文档↔定理映射
 - [Rust Book 对齐](../10_rust_book_alignment.md) — TRPL Ch 7 模块系统映射
-- [形式化方法索引](../formal_methods/)
+- [形式化方法索引](../formal_methods)
 - [研究笔记主索引](../README.md)
-- [Crate 架构分析](../software_design_theory/07_crate_architectures/)
+- [Crate 架构分析](../software_design_theory/07_crate_architectures)
 
 ---
 

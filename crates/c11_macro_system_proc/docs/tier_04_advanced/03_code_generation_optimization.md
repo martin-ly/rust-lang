@@ -1032,7 +1032,7 @@ pub fn my_generic_function<T: Display>(items: &[T]) {
 
 - → 阅读 [04\_宏调试深化.md](04_macro_debugging_in_depth.md) 学习调试技术
 - → 参考 [C11 主索引](../../02_navigation.md) 探索其他主题
-- → 实践 [Tier 2 宏开发指南](../../tier_02_guides/README.md) 巩固知识
+- → 实践 [Tier 2 宏开发指南](../../../../README.md) 巩固知识
 
 ---
 

@@ -1173,10 +1173,10 @@ graph TB
 
 ## 🔗 相关文档
 
-- [知识图谱](KNOWLEDGE_GRAPH.md) - 概念关系可视化
-- [多维矩阵](MULTIDIMENSIONAL_MATRIX.md) - 多维度对比分析
-- [概念关系网络](CONCEPT_RELATIONSHIP_NETWORK.md) - 深度关系分析
-- [Rust 1.92.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) - 最新特性详解 🆕
+- [知识图谱](knowledge_graph.md) - 概念关系可视化
+- [多维矩阵](multidimensional_matrix.md) - 多维度对比分析
+- [概念关系网络](concept_relationship_network.md) - 深度关系分析
+- [Rust 1.92.0 控制流改进](rust_192_control_flow_improvements.md) - 最新特性详解 🆕
 
 ---
 

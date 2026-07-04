@@ -2,7 +2,7 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [网络编程](../../../../concept/03_advanced/18_network_programming.md)
+> - [网络编程](../../../../concept/03_advanced/06_low_level_patterns/18_network_programming.md)
 > - [网络协议](../../../../concept/06_ecosystem/38_network_protocols.md)
 > - [Web 框架生态](../../../../concept/06_ecosystem/27_web_frameworks.md)
 >

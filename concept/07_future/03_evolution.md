@@ -56,7 +56,7 @@
 - v1.18 (2026-06-08): 内部维护（信息平坦期）：补齐缺失追踪文档——① 新建 `24_cargo_semver_checks_preview.md`（cargo-semver-checks 从社区工具到 Cargo 官方集成跟踪，覆盖 ~245 lint、type-checking lints GSoC 2026、public 依赖标记集成）；② 新建 `25_aarch64_sve_sme_preview.md`（AArch64 SVE/SME 可伸缩向量扩展跟踪，RFC #3838 未接受、Tracking Issue #145052、`sve_zeroinitializer` #157110）
 - v1.19 (2026-06-08): 内部维护（信息平坦期）：嵌入式互动测验试点——新建 `concept/01_foundation/11_quizzes/33_quiz_ownership_borrowing.md`，10 道所有权（Ownership）/借用（Borrowing）/生命周期（Lifetimes）互动题，采用 `<details>` 标签实现"自测-展开-核对"闭环，每题链接至对应概念文件、crate 示例和 exercises 练习；已加入 L1 README 索引
 - v1.20 (2026-06-08): 内部维护（信息平坦期）：嵌入式测验扩展——① 新建 `concept/01_foundation/11_quizzes/24_quiz_type_system.md`（类型系统（Type System） 10 题，标量/复合类型、enum、模式匹配（Pattern Matching）、类型转换）；② 新建 `concept/02_intermediate/01_generics/23_quiz_traits_and_generics.md`（Trait/泛型（Generics） 10 题，trait bound、关联类型、trait 对象、`impl Trait`）；③ 新建 `concept/01_foundation/11_quizzes/25_quiz_error_handling.md`（错误处理（Error Handling） 10 题，Result/Option、`?` 运算符、panic、自定义错误）；已全部加入对应层级 README 索引
-- v1.21 (2026-06-08): 内部维护（信息平坦期）：L3 嵌入式测验扩展——① 新建 `concept/03_advanced/21_quiz_concurrency_async.md`（并发/异步（Async） 10 题，Send/Sync、Mutex/Arc、channel、Future/Pin、`join!`）；② 新建 `concept/03_advanced/22_quiz_unsafe.md`（Unsafe 10 题，原始指针（Raw Pointer）、MaybeUninit、FFI、`unsafe_op_in_unsafe_fn`、Miri 验证）；③ 新建 `concept/03_advanced/23_quiz_macros.md`（宏系统 10 题，`macro_rules!` 重复模式、卫生性、derive/属性/函数式过程宏（Procedural Macro））；已全部加入 L3 README 索引
+- v1.21 (2026-06-08): 内部维护（信息平坦期）：L3 嵌入式测验扩展——① 新建 `concept/03_advanced/00_concurrency/21_quiz_concurrency_async.md`（并发/异步（Async） 10 题，Send/Sync、Mutex/Arc、channel、Future/Pin、`join!`）；② 新建 `concept/03_advanced/02_unsafe/22_quiz_unsafe.md`（Unsafe 10 题，原始指针（Raw Pointer）、MaybeUninit、FFI、`unsafe_op_in_unsafe_fn`、Miri 验证）；③ 新建 `concept/03_advanced/03_proc_macros/23_quiz_macros.md`（宏系统 10 题，`macro_rules!` 重复模式、卫生性、derive/属性/函数式过程宏（Procedural Macro））；已全部加入 L3 README 索引
 - v1.22 (2026-06-08): 内部维护（信息平坦期）：跨层级测验扩展——① 新建 `concept/06_ecosystem/57_quiz_toolchain.md`（工具链 10 题，Cargo 依赖解析、Clippy lint、Miri UB 检测、发布流程）；② 新建 `concept/01_foundation/11_quizzes/26_quiz_modules_testing.md`（模块（Module）/测试 10 题，可见性、集成测试、`should_panic`）；③ 新建 `concept/04_formal/24_quiz_formal_methods.md`（形式化方法 10 题，分离逻辑、RustBelt、验证工具链对比、Tree Borrows）；已全部加入对应层级 README 索引
 - v1.23 (2026-06-08): 内部维护（信息平坦期）：核心概念补全测验——① 新建 `concept/02_intermediate/02_memory_management/24_quiz_memory_management.md`（内存管理 10 题，Box/Rc/Arc/RefCell/Cell、Weak、Deref、Drop、内部可变性）；② 新建 `concept/05_comparative/17_quiz_rust_vs_systems.md`（跨语言对比 10 题，Rust vs C/C++/Go 在内存安全（Memory Safety）、并发、错误处理（Error Handling）、零成本抽象（Zero-Cost Abstraction）、嵌入式场景的对比）；③ 新建 `concept/01_foundation/11_quizzes/27_quiz_closures_iterators.md`（闭包（Closures）/迭代器（Iterator） 10 题，Fn/FnMut/FnOnce、move 闭包、惰性求值、适配器/消费者、fold/find/filter/map 组合）；已全部加入对应层级 README 索引
 - v1.24 (2026-06-08): Phase 3 内容瘦身启动：① 从 L1-L6 各层级 README 索引中移除 13 个已归档文件链接（`01_foundation/19_numerics.md`、`02_intermediate/22_iterator_patterns.md`、L3 的 6 个归档文件、`04_formal/07_separation_logic.md` 和 `09_operational_semantics.md`、`05_comparative/16_rust_vs_ruby.md`、L6 的 2 个归档文件）；② 清理 `07_future/README.md` 中指向 `archive/01_ai_integration_original.md` 的历史链接；③ 更新 `04_formal/README.md` 核心功能描述（"可机械验证"→"形式化直觉与教学类比"），为 6 个高形式化密度文件在索引表格中追加 `[教学类比]` 标注
@@ -856,12 +856,12 @@ components = ["rust-src", "rustc-dev", "llvm-tools"]
 | 演进方向 | 影响的概念层 | 关联文件 | 演进风险 |
 |:---|:---|:---|:---|
 | GATs 完整化 | L2 泛型 + Trait | `02_intermediate/01_generics/02_generics.md`, `01_traits.md` | 类型系统（Type System）复杂度 |
-| Effects 系统 | L2 Trait + L3 Async | `02_intermediate/00_traits/01_traits.md`, `03_advanced/02_async.md` | 学习曲线 |
+| Effects 系统 | L2 Trait + L3 Async | `02_intermediate/00_traits/01_traits.md`, `03_advanced/01_async/02_async.md` | 学习曲线 |
 | 特化 (Specialization) | L2 Trait | `02_intermediate/00_traits/01_traits.md` | Coherence 破坏 |
 | Const 泛型扩展 | L2 泛型 | `02_intermediate/01_generics/02_generics.md` | 编译时间 |
-| `gen` blocks / 协程 | L3 Async + L2 泛型 | `03_advanced/02_async.md` | 异步生成器仍在 RFC 中 |
-| 异步生态统一 | L3 Async | `03_advanced/02_async.md` | 生态系统分裂 |
-| SIMD 标准库 | L3 Unsafe/FFI | `03_advanced/03_unsafe.md` | 平台差异 |
+| `gen` blocks / 协程 | L3 Async + L2 泛型 | `03_advanced/01_async/02_async.md` | 异步生成器仍在 RFC 中 |
+| 异步生态统一 | L3 Async | `03_advanced/01_async/02_async.md` | 生态系统分裂 |
+| SIMD 标准库 | L3 Unsafe/FFI | `03_advanced/02_unsafe/03_unsafe.md` | 平台差异 |
 | 内核 Rust | L1-L3 全部 | 多个文件 | API 不稳定 |
 
 ---
@@ -922,7 +922,7 @@ fn main() {
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | GATs | [`../02_intermediate/01_generics/02_generics.md`](../02_intermediate/01_generics/02_generics.md) | 演进影响 |
-| AFIT/RPITIT | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | 演进影响 |
+| AFIT/RPITIT | [`../03_advanced/01_async/02_async.md`](../03_advanced/01_async/02_async.md) | 演进影响 |
 | Trait 系统 | [`../02_intermediate/00_traits/01_traits.md`](../02_intermediate/00_traits/01_traits.md) | 演进影响 |
 | Effects 系统 | [`../02_intermediate/00_traits/01_traits.md`](../02_intermediate/00_traits/01_traits.md) | 未来方向 |
 | 形式化方法 | [`../07_future/02_formal_methods.md`](02_formal_methods.md) | 协同演进 |
@@ -1039,7 +1039,7 @@ graph TD
 > 设计根基见 [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)。
 > **过渡: L7 → L4**
 > Rust 的未来方向（Effects System、Generic Const Items、TAIT）都有形式化理论基础。Effects System 对应代数效应的类型论、TAIT 对应存在类型的隐式封装、Const Generics 对应依赖类型的受限形式。这些不是工程师的随意发明，而是类型论研究的工程转化。
-> 理论基础见 [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md)。
+> 理论基础见 [`../04_formal/02_type_theory.md`](../04_formal/00_type_theory/02_type_theory.md)。
 
 ---
 
@@ -1103,7 +1103,7 @@ graph TD
 ## 权威来源索引
 
 > **补充来源**
-> **相关文件**: [版本跟踪](05_rust_version_tracking.md) · [Effects 系统](04_effects_system.md) · [能力图谱](../00_meta/competency_graph.md)
+> **相关文件**: [版本跟踪](05_rust_version_tracking.md) · [Effects 系统](04_effects_system.md) · [能力图谱](../00_meta/00_framework/competency_graph.md)
 
 ## 十、边界测试：语言演进的编译错误
 

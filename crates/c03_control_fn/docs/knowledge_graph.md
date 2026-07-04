@@ -765,7 +765,7 @@ graph TB
 - [条件语句指南](tier_02_guides/01_conditionals_guide.md) - 理论基础
 - [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md) - 核心概念
 - [闭包深入](tier_04_advanced/02_closures_in_depth.md) - 高级应用
-- [Rust 1.92.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) - 最新特性 🆕
+- [Rust 1.92.0 控制流改进](rust_192_control_flow_improvements.md) - 最新特性 🆕
 
 ### 实践指南
 

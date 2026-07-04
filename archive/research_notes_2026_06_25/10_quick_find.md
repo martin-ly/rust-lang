@@ -290,7 +290,7 @@
 
 - **批判性分析与推进计划** → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md)
 - **核心定理完整证明** → [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md)（L2 级 ownership T2、borrow T1、type T3）
-- **Coq 证明骨架** → [archive/deprecated/coq_skeleton](../archive/deprecated/coq_skeleton/README.md)（T-OW2）、[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)（已归档）
+- **Coq 证明骨架** → [archive/deprecated/coq_skeleton](../../README.md)（T-OW2）、[COQ_ISABELLE_PROOF_SCAFFOLDING](../../README.md)（已归档）
 - **国际对标** → [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](10_international_formal_verification_index.md)、[RUSTBELT_ALIGNMENT](10_rustbelt_alignment.md)
 - **权威对齐指南** → [AUTHORITATIVE_ALIGNMENT_GUIDE](10_authoritative_alignment_guide.md)（原三大支柱文档已归档至 `../archive/process_reports/2026_02/`）
 - **工具对接** → Aeneas 集成计划、coq-of-rust 集成计划（已归档）
@@ -404,9 +404,9 @@
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [研究笔记主索引](README.md)
+- [研究笔记主索引](../../README.md)
 - [快速参考](10_quick_reference.md)
-- [完整索引](INDEX.md)
+- [完整索引](../../concept/sources/INDEX.md)
 - [研究路线图](10_research_roadmap.md)
 
 ### 进展跟踪
@@ -491,7 +491,7 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

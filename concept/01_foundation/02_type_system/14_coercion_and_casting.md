@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 >
-> **本节关键术语**: 强制转换 (Coercion) · 显式转换 (Casting) · as · Deref 强制转换 · 类型推断（Type Inference） — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 强制转换 (Coercion) · 显式转换 (Casting) · as · Deref 强制转换 · 类型推断（Type Inference） — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 类型强制与转换：显式与隐式的边界
 >
@@ -12,7 +12,7 @@
 > **双维定位**: C×Und — 理解类型转换和强制转换规则
 > **定位**: 系统讲解 Rust **类型强制（coercion）**和**类型转换（casting）**——从 deref 强制、子类型强制到显式 `as` 转换，揭示 Rust 如何在安全与灵活性之间精确控制类型变换。
 > **前置概念**: [Type System](04_type_system.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
-> **后置概念**: [FFI](../../03_advanced/05_rust_ffi.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)
+> **后置概念**: [FFI](../../03_advanced/04_ffi/05_rust_ffi.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)
 
 ---
 
@@ -495,7 +495,7 @@ graph TD
 - [Type System](04_type_system.md) — 类型系统（Type System）
 - [Traits](../../02_intermediate/00_traits/01_traits.md) — Trait 系统
 - [Generics](../../02_intermediate/01_generics/02_generics.md) — 泛型（Generics）
-- [FFI](../../03_advanced/05_rust_ffi.md) — 外部函数接口
+- [FFI](../../03_advanced/04_ffi/05_rust_ffi.md) — 外部函数接口
 
 ---
 
@@ -744,7 +744,7 @@ fn main() {}
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

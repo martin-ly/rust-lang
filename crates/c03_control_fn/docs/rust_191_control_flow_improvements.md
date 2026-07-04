@@ -6,7 +6,7 @@
 > **创建日期**: 2025-01-27
 > **适用版本**: Rust 1.91.0+（历史版本）
 > **相关模块**: `c03_control_fn`
-> **注意**: 本文档为历史版本。请查看 [RUST_192_CONTROL_FLOW_IMPROVEMENTS.md](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) 了解 Rust 1.92.0 的最新改进。
+> **注意**: 本文档为历史版本。请查看 [RUST_192_CONTROL_FLOW_IMPROVEMENTS.md](rust_192_control_flow_improvements.md) 了解 Rust 1.92.0 的最新改进。
 
 ---
 

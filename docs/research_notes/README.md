@@ -516,7 +516,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 - [系统总结](10_system_summary.md) - 系统概览和统计信息
 - [工具使用指南](10_tools_guide.md) - 研究工具安装和使用方法
 - [更新日志](10_changelog.md) - 系统变更历史记录
-- [完整索引](INDEX.md) - 所有研究笔记的详细索引
+- [完整索引](../../concept/sources/INDEX.md) - 所有研究笔记的详细索引
 - [快速入门指南](10_getting_started.md) - 新用户入门指南
 - [常见问题解答](10_faq.md) - 常见问题解答
 - [维护指南](10_maintenance_guide.md) - 系统维护指南

@@ -395,7 +395,7 @@
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-- [主索引](README.md) - 完整的研究笔记索引
+- [主索引](../../README.md) - 完整的研究笔记索引
 - [工具使用指南](10_tools_guide.md) - 研究工具详细指南
 - [术语表](10_glossary.md) - 专业术语解释
 
@@ -404,7 +404,7 @@
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [形式化方法研究](formal_methods/README.md) - 形式化方法索引
-- [类型理论研究](type_theory/README.md) - 类型理论索引
+- [类型理论研究](../../README.md) - 类型理论索引
 - [实验研究](experiments/README.md) - 实验研究索引
 
 ### 形式化证明体系（2026-02-14）
@@ -483,7 +483,7 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

@@ -2,7 +2,7 @@
 >
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 >
-> **本节关键术语**: 集合 (Collection) · 向量 (Vec) · 哈希映射 (HashMap) · 哈希集合 (HashSet) · 二叉堆 (BinaryHeap) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 集合 (Collection) · 向量 (Vec) · 哈希映射 (HashMap) · 哈希集合 (HashSet) · 二叉堆 (BinaryHeap) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 
 # 集合类型：Rust 标准库的数据结构谱系
 >
@@ -676,7 +676,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

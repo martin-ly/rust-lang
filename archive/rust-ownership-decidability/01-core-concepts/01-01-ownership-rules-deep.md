@@ -6,7 +6,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 >
 > **层次定位**: L4 形式化 / 所有权深度分析
-> **前置依赖**: [concept L1 所有权](../../../concept/01_foundation/01_ownership.md) · [concept L4 所有权形式化](../../../concept/04_formal/03_ownership_formal.md)
+> **前置依赖**: [concept L1 所有权](../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [concept L4 所有权形式化](../../../concept/04_formal/01_ownership_logic/03_ownership_formal.md)
 > **后置延伸**: [ROD 借用系统](01-02-borrowing-system-deep.md) · [ROD 可判定性证明](../00-foundations)
 > **跨层映射**: L4↔L1 形式化 ↔ 直觉 | ROD 深度展开
 > **定理链编号**: T-100 借用检查可判定性 → T-101 所有权类型 soundness

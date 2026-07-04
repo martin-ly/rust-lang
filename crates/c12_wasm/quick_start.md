@@ -347,7 +347,7 @@ du -h pkg/c12_wasm_bg.wasm
 
 - 🛠️ [贡献指南](CONTRIBUTING.md)
 - 📋 [更新日志](CHANGELOG.md)
-- 📊 [项目状态](PROJECT_STATUS.md)
+- 📊 [项目状态](project_status.md)
 
 ---
 

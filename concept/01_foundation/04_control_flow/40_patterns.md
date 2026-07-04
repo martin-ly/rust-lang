@@ -255,4 +255,4 @@ Rust 编译器检查 `match` 表达式是否穷尽所有可能的值。不可穷
 | [Enums and Variants](../02_type_system/04_type_system.md) | 枚举（Enum）变体是模式匹配（Pattern Matching）的主要对象 |
 | [Destructuring](../../02_intermediate/01_generics/02_generics.md) | 模式解构与泛型（Generics）结合使用 |
 | [Control Flow](07_control_flow.md) | `if let`、`while let`、`for` 依赖模式 |
-| [Terminology Glossary](../../00_meta/terminology_glossary.md) | 术语表（元层参考） |
+| [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md) | 术语表（元层参考） |

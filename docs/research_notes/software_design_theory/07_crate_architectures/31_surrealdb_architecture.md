@@ -224,7 +224,7 @@ db.use_ns("test").use_db("test").await?;
 - [mongodb-rust-driver 文档数据库架构](23_mongodb_architecture.md) — 文档模型对比
 - [SQLx SQL 工具架构](09_sqlx_architecture.md) — 关系型查询对比
 - [Redis 缓存/消息架构](22_redis_architecture.md) — 与缓存层组合
-- [异步编程模型](../../../../concept/03_advanced/02_async.md)
+- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
 - [数据库与存储生态权威来源对齐](../../10_database_storage_cloud_alignment.md)
 
 ---

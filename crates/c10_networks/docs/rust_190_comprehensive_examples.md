@@ -831,7 +831,7 @@ Day 6-7: 巩固
 
 - [知识图谱](theory/knowledge_graph_and_concept_relations.md)
 - [多维对比](theory/multi_dimensional_comparison_matrix.md)
-- [Rust 1.90示例](RUST_190_COMPREHENSIVE_EXAMPLES.md)
+- [Rust 1.90示例](rust_190_comprehensive_examples.md)
 
 ---
 

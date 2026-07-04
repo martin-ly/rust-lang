@@ -3,7 +3,7 @@
 > **适用版本**: Rust 1.96.1+
 > **最后更新**: 2026-03-13
 
-📄 **一页纸总结**: [ONE_PAGE_SUMMARY](ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
+📄 **一页纸总结**: [ONE_PAGE_SUMMARY](one_page_summary.md) - 核心概念、常见坑、速选表、学习路径
 
 ## 📚 官方资源映射
 
@@ -97,7 +97,7 @@ docs/
 | 文档  | 版本 | 主要内容 |
 | :--- | :--- | :--- |
 | [03_Rust190特性参考](tier_03_references/03_rust_190_features_reference.md) | 1.90 | 特性应用     |
-| [RUST_192_ALGORITHMS_IMPROVEMENTS](RUST_192_ALGORITHMS_IMPROVEMENTS.md) | 1.93 | 算法特性 ⭐  |
+| [RUST_192_ALGORITHMS_IMPROVEMENTS](rust_192_algorithms_improvements.md) | 1.93 | 算法特性 ⭐  |
 
 ### 5. 参考资料 (tier_03_references/)
 

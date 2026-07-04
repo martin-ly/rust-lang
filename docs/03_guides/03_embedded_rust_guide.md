@@ -7,7 +7,7 @@
 > **分级**: [A]
 >
 > **层次定位**: L3-L6 高级-生态 / 嵌入式应用域
-> **前置依赖**: [concept L3 Async](../../concept/03_advanced/02_async.md) · [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md) · [docs 核心概念](../01_core/README.md)
+> **前置依赖**: [concept L3 Async](../../concept/03_advanced/01_async/02_async.md) · [concept L3 Unsafe](../../concept/03_advanced/02_unsafe/03_unsafe.md) · [docs 核心概念](../01_core/README.md)
 > **后置延伸**: [docs Rust for Linux](../04_research/04_rust_for_linux.md) · [knowledge Unsafe](../../knowledge/03_advanced/unsafe/README.md)
 > **跨层映射**: L3→L6 工程映射 | 理论→实践
 > **定理链编号**: T-050 Pin 安全性 → T-060 unsafe 抽象
@@ -39,7 +39,7 @@
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 > **层级**: L6 生态工具 / L3 高级系统编程
-> **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Ownership](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Unsafe](../../concept/03_advanced/03_unsafe.md)
+> **前置概念**: [Async](../../concept/03_advanced/01_async/02_async.md) · [Ownership](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Unsafe](../../concept/03_advanced/02_unsafe/03_unsafe.md)
 > **Bloom 层级**: 应用 → 评价
 > **来源: [Embassy Book](https://embassy.dev/book/)** ·
 > **来源: [RTIC Book](https://rtic.rs/2/book/en/)** · **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)** ·

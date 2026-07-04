@@ -132,7 +132,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 | :--- | :--- | :--- |
 | [00_ORGANIZATION_AND_NAVIGATION](10_00_organization_and_navigation.md) | 按目标选路径、三大支柱、层级 | 首次使用、不知道从哪看 |
 | [README](README.md) | 主入口、研究方向、规范、目录树 | 总览、规范 |
-| [INDEX](INDEX.md) | 完整列表、按领域/主题/证明 | 查具体文档、证明索引 |
+| [INDEX](../../concept/sources/INDEX.md) | 完整列表、按领域/主题/证明 | 查具体文档、证明索引 |
 | [QUICK_FIND](10_quick_find.md) | 关键词/领域/目标 | 快速定位 |
 | [QUICK_REFERENCE](10_quick_reference.md) | 按主题快速参考 | 按主题查 |
 | [HIERARCHICAL_MAPPING_AND_SUMMARY](10_hierarchical_mapping_and_summary.md) | 文档树、概念↔定理、文档↔思维表征 | 层次化检索、双向追溯 |

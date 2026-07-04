@@ -16,7 +16,7 @@
 > [Rust vs Go — Official Comparisons](https://go.dev/doc/) ·
 > [The C Programming Language — K&R]
 >
-> **前置概念**: [所有权（Ownership）形式化](../04_formal/03_ownership_formal.md)
+> **前置概念**: [所有权（Ownership）形式化](../04_formal/01_ownership_logic/03_ownership_formal.md)
 > [Rust vs C++](01_rust_vs_cpp.md) ·
 > [Rust vs Go](02_rust_vs_go.md)
 

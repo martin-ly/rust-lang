@@ -14,7 +14,7 @@
 
 ## Q3: 有哪些前置知识？
 
-**A**: 建议先掌握 Rust 基础（所有权、类型系统、错误处理），再阅读 [ONE_PAGE_SUMMARY.md](ONE_PAGE_SUMMARY.md)。
+**A**: 建议先掌握 Rust 基础（所有权、类型系统、错误处理），再阅读 [ONE_PAGE_SUMMARY.md](one_page_summary.md)。
 
 ---
 

@@ -9,8 +9,8 @@
 > **Bloom 层级**: 记忆 → 理解
 > **A/S/P 标记**: **S** — Specification / Language syntax
 > **双维定位**: S×Lang — 语言词法与语法
-> **前置依赖**: [Keywords](36_keywords.md) · [Type System](../02_type_system/04_type_system.md) · [Terminology Glossary](../../00_meta/terminology_glossary.md)
-> **后置概念**: [Traits](../02_type_system/04_type_system.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Macros](../../03_advanced/04_macros.md)
+> **前置依赖**: [Keywords](36_keywords.md) · [Type System](../02_type_system/04_type_system.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
+> **后置概念**: [Traits](../02_type_system/04_type_system.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Macros](../../03_advanced/03_proc_macros/04_macros.md)
 > **定理链**: N/A — 参考级文档
 > **主要来源**: [Rust Reference — Tokens](https://doc.rust-lang.org/reference/tokens.html) · [TRPL — Appendix B](https://doc.rust-lang.org/book/appendix-02-operators.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Unicode UAX #31 — Identifier and Pattern Syntax](https://www.unicode.org/reports/tr31/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
@@ -254,4 +254,4 @@
 | [Keywords](36_keywords.md) | 运算符与符号共同构成 Rust 词法 |
 | [Traits](../02_type_system/04_type_system.md) | 多数运算符通过 trait 重载 |
 | [Generics](../../02_intermediate/01_generics/02_generics.md) | `<>`、`:`、`where` 用于泛型约束 |
-| [Macros](../../03_advanced/04_macros.md) | `!`、`$`、`$(...)` 用于宏系统 |
+| [Macros](../../03_advanced/03_proc_macros/04_macros.md) | `!`、`$`、`$(...)` 用于宏系统 |

@@ -57,7 +57,7 @@
 - [DOCUMENTATION_STANDARDS.md](../references/DOCUMENTATION_STANDARDS.md)
 - [STYLE.md](../references/STYLE.md)
 - [DOCUMENTATION_STYLE_GUIDE.md](../references/DOCUMENTATION_STYLE_GUIDE.md)
-- [README.md](../references/README.md)
+- [README.md](../../../../README.md)
 
 ---
 

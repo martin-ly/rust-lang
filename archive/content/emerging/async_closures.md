@@ -5,7 +5,7 @@
 > async closures 自 **Rust 1.85.0** 起已 stable，不再是 "emerging" 实验性特性。
 > 其正式教学文档已并入 L3 高级概念层：
 >
-> **➡️ [concept/03_advanced/24_async_closures.md](../../concept/03_advanced/24_async_closures.md)**
+> **➡️ [concept/03_advanced/24_async_closures.md](../../../concept/03_advanced/01_async/24_async_closures.md)**
 >
 > 权威来源：
 >

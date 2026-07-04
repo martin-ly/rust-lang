@@ -485,7 +485,7 @@ serde = { version = "1.0", public = true }
 - `#[safety::checked(...)]` 标注调用处已检查的条件
 - Clippy / rust-analyzer 未来可提供 IDE 支持
 
-**深度文档**: [33_safety_tags_in_formal.md](../04_formal/33_safety_tags_in_formal.md)
+**深度文档**: [33_safety_tags_in_formal.md](../04_formal/02_separation_logic/33_safety_tags_in_formal.md)
 
 ---
 
@@ -500,7 +500,7 @@ serde = { version = "1.0", public = true }
 - 基于 LLVM 的 sanitizer，在运行时（Runtime）检测 Tree Borrows 违规
 - 支持 C/C++/Rust 混合代码
 
-**深度文档**: [34_borrow_sanitizer_in_formal.md](../04_formal/34_borrow_sanitizer_in_formal.md)
+**深度文档**: [34_borrow_sanitizer_in_formal.md](../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md)
 
 ---
 
@@ -558,10 +558,10 @@ serde = { version = "1.0", public = true }
 - [Pin Ergonomics 预览](15_pin_ergonomics_preview.md)
 - [Return Type Notation 预览](12_return_type_notation_preview.md)
 - [Async Drop 预览](18_async_drop_preview.md)
-- [Safety Tags](../04_formal/33_safety_tags_in_formal.md)
-- [BorrowSanitizer](../04_formal/34_borrow_sanitizer_in_formal.md)
-- [AutoVerus / Verus](../04_formal/24_autoverus.md)
-- [Tree Borrows 深度](../04_formal/36_tree_borrows_deep_dive.md)
+- [Safety Tags](../04_formal/02_separation_logic/33_safety_tags_in_formal.md)
+- [BorrowSanitizer](../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md)
+- [AutoVerus / Verus](../04_formal/04_model_checking/24_autoverus.md)
+- [Tree Borrows 深度](../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md)
 - [1.97/1.98 API 等效实现与测试](../../../crates/c08_algorithms/src/rust_197_features.rs)
 
 ---

@@ -9,14 +9,14 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 评价 → 创造
 > **定位**: 对比 Rust 和 Elixir（Erlang VM）在并发模型、错误处理（Error Handling）、类型系统（Type System）和运行时（Runtime）的异同。
-> **前置概念**: [Rust vs Go](02_rust_vs_go.md) · [Rust vs Haskell](03_paradigm_matrix.md) · [Async](../03_advanced/02_async.md)
-> **后置概念**: [Ecosystem](../06_ecosystem/README.md) · [Concurrency](../03_advanced/01_concurrency.md)
+> **前置概念**: [Rust vs Go](02_rust_vs_go.md) · [Rust vs Haskell](03_paradigm_matrix.md) · [Async](../03_advanced/01_async/02_async.md)
+> **后置概念**: [Ecosystem](../06_ecosystem/README.md) · [Concurrency](../03_advanced/00_concurrency/01_concurrency.md)
 
 ---
 
 > **来源**: [Elixir Official](https://elixir-lang.org/) · [Erlang/OTP](https://www.erlang.org/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Wikipedia — Erlang](https://en.wikipedia.org/wiki/Erlang_(programming_language)) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) · [Unsafe](../03_advanced/02_unsafe/03_unsafe.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 
 ## 📑 目录
 >
@@ -24,15 +24,15 @@
 - [Rust vs Elixir 对比分析](#rust-vs-elixir-对比分析)
   - [📑 目录](#-目录)
   - [一、设计哲学对比](#一设计哲学对比)
-    - [1.1 错误处理（Error Handling）哲学](#11-错误处理哲学)
+    - [1.1 错误处理哲学](#11-错误处理哲学)
     - [1.2 并发模型对比](#12-并发模型对比)
   - [二、并发模型](#二并发模型)
     - [2.1 BEAM 并发模型](#21-beam-并发模型)
     - [2.2 Rust 并发模型](#22-rust-并发模型)
-  - [三、类型系统（Type System）](#三类型系统)
+  - [三、类型系统](#三类型系统)
     - [3.1 静态 vs 动态](#31-静态-vs-动态)
-    - [3.2 模式匹配（Pattern Matching）](#32-模式匹配)
-  - [四、运行时（Runtime）与部署](#四运行时与部署)
+    - [3.2 模式匹配](#32-模式匹配)
+  - [四、运行时与部署](#四运行时与部署)
   - [五、互操作](#五互操作)
   - [六、反命题与适用场景](#六反命题与适用场景)
     - [6.1 反命题树](#61-反命题树)
@@ -602,8 +602,8 @@ graph TD
 
 - [Rust vs Go](02_rust_vs_go.md) — Rust vs Go
 - [Rust vs Haskell](03_paradigm_matrix.md) — Rust vs Haskell
-- [Concurrency](../03_advanced/01_concurrency.md) — 并发
-- [Async](../03_advanced/02_async.md) — 异步（Async）
+- [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) — 并发
+- [Async](../03_advanced/01_async/02_async.md) — 异步（Async）
 
 ---
 

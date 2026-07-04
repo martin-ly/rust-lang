@@ -226,8 +226,8 @@
 
 ## 📚 相关文档
 
-- [Rust 1.92.0 WASM 改进文档](RUST_192_WASM_IMPROVEMENTS.md) - 详细说明
-- [Rust 1.92.0 WASM 快速参考](RUST_192_QUICK_REFERENCE.md) - 快速查找
+- [Rust 1.92.0 WASM 改进文档](rust_192_wasm_improvements.md) - 详细说明
+- [Rust 1.92.0 WASM 快速参考](rust_192_quick_reference.md) - 快速查找
 - [性能优化指南](tier_02_guides/04_performance_optimization_guide.md) - 优化技巧
 - [示例代码](../examples/rust_192_features_demo.rs) - 完整示例
 

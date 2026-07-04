@@ -2,9 +2,9 @@
 
 > **📎 交叉引用**
 >
-> 本主题在 concept 中有深度的概念分析：[过程宏](../../../concept/03_advanced/07_proc_macro.md)
+> 本主题在 concept 中有深度的概念分析：[过程宏](../../../../concept/03_advanced/03_proc_macros/07_proc_macro.md)
 >
-> **相关概念**: [过程宏](../../../concept/03_advanced/07_proc_macro.md)
+> **相关概念**: [过程宏](../../../../concept/03_advanced/03_proc_macros/07_proc_macro.md)
 > **Bloom 层级**: 理解
 > **📌 简介**:
 > 过程宏是 Rust 的编译期元编程机制，允许你用 Rust 代码操作 TokenStream，实现自定义 `derive` 属性、自定义语法和代码生成
@@ -931,7 +931,7 @@ pub fn check(input: TokenStream) -> TokenStream {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [声明式宏 (Declarative Macros)](01_declarative.md)
-- [Macros 宏系统](README.md)
+- [Macros 宏系统](../../../../README.md)
 - [Rust 元编程指南](../06_type_driven_correctness.md)
 - [Rust 所有权深入](../../01_fundamentals/04_ownership.md)
 

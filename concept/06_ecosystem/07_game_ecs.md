@@ -16,8 +16,8 @@
 > [Lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) ·
 > [Traits](../02_intermediate/00_traits/01_traits.md) ·
 > [Generics](../02_intermediate/01_generics/02_generics.md) ·
-> [Concurrency](../03_advanced/01_concurrency.md) ·
-> [Unsafe](../03_advanced/03_unsafe.md)
+> [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) ·
+> [Unsafe](../03_advanced/02_unsafe/03_unsafe.md)
 >
 > **后置概念**:
 >
@@ -435,7 +435,7 @@ graph LR
 | **Archetype 分桶** | 编译期已知组件组合 → 独立 Table | 每个 archetype 一个 struct | 无动态 `TypeId` 查找，直接用类型索引 |
 | **系统调度** | 无并行；单线程顺序执行 | 普通函数调用 | 借用检查由 `&mut World` 在单线程保证 |
 
-> **与 Unsafe 的关系**: 固定容量 ECS 不可避免地触及 `MaybeUninit` 和原始指针（Raw Pointer），这直接关联到 [L3 Unsafe](../03_advanced/03_unsafe.md) 中的核心原则——`unsafe` 块应被最小化并封装在不可变接口之后。固定 ECS 的 `unsafe` 通常集中在 `query_mut()` 的迭代器（Iterator）实现中，外层 System 完全处于 safe Rust。
+> **与 Unsafe 的关系**: 固定容量 ECS 不可避免地触及 `MaybeUninit` 和原始指针（Raw Pointer），这直接关联到 [L3 Unsafe](../03_advanced/02_unsafe/03_unsafe.md) 中的核心原则——`unsafe` 块应被最小化并封装在不可变接口之后。固定 ECS 的 `unsafe` 通常集中在 `query_mut()` 的迭代器（Iterator）实现中，外层 System 完全处于 safe Rust。
 
 ```rust,ignore
 // ✅ no_std + 无 alloc：固定容量 Archetype Table 示意
@@ -1152,9 +1152,9 @@ struct ChildOf {
 | 生命周期 | [`../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | Entity 引用跨 System 有效性 |
 | Trait 系统 | [`../02_intermediate/00_traits/01_traits.md`](../02_intermediate/00_traits/01_traits.md) | `Component` / `SystemParam` derive |
 | 泛型（Generics） | `../02_intermediate/01_generics/02_generics.md` | `Query<Q>` 的零成本抽象（Zero-Cost Abstraction） |
-| 并发 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | `Send`/`Sync` 在多线程循环中的保证 |
-| Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | SIMD / GPU 底层边界 |
-| 线性逻辑 | [`../04_formal/01_linear_logic.md`](../04_formal/01_linear_logic.md) | 消耗性资源的形式化对应 |
+| 并发 | [`../03_advanced/00_concurrency/01_concurrency.md`](../03_advanced/00_concurrency/01_concurrency.md) | `Send`/`Sync` 在多线程循环中的保证 |
+| Unsafe | [`../03_advanced/02_unsafe/03_unsafe.md`](../03_advanced/02_unsafe/03_unsafe.md) | SIMD / GPU 底层边界 |
+| 线性逻辑 | [`../04_formal/01_linear_logic.md`](../04_formal/01_ownership_logic/01_linear_logic.md) | 消耗性资源的形式化对应 |
 | 核心库谱系 | [`./03_core_crates.md`](03_core_crates.md) | `bevy`、`wgpu`、`rapier` 等 crate |
 | 应用领域 | [`./04_application_domains.md`](04_application_domains.md) | 游戏作为 L6 应用域 |
 

@@ -660,9 +660,9 @@ Rust 的编译时延在 eBPF 开发中尤为明显：
 
 - [Rust for Linux 内核编程](43_rust_for_linux.md) —— Rust 内核模块（Module）开发与 eBPF 的交叉领域
 - 异步（Async）编程与 Tokio —— Aya 用户态异步事件处理的基础
-- [形式验证工具链](../04_formal/05_verification_toolchain.md) —— Kani、Miri 等工具对 eBPF 程序的验证潜力
-- [unsafe Rust 模式](../03_advanced/03_unsafe.md) —— eBPF 内核态编程中的 unsafe 边界管理
-- [网络编程](../03_advanced/18_network_programming.md) —— XDP/TC 网络处理的 Rust 生态
+- [形式验证工具链](../04_formal/04_model_checking/05_verification_toolchain.md) —— Kani、Miri 等工具对 eBPF 程序的验证潜力
+- [unsafe Rust 模式](../03_advanced/02_unsafe/03_unsafe.md) —— eBPF 内核态编程中的 unsafe 边界管理
+- [网络编程](../03_advanced/06_low_level_patterns/18_network_programming.md) —— XDP/TC 网络处理的 Rust 生态
 
 ---
 

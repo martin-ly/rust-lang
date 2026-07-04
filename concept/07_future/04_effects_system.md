@@ -28,7 +28,7 @@
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析 Effects 系统对 Rust 的潜力
 > **定位**: 本文件是 Rust 效果系统（Effect System）的**概念预研**，跟踪类型系统（Type System）向显式效果追踪演进的理论动向与工程实践。内容具有推测性，随语言团队决策动态更新。
-> **前置概念**: [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Type Theory](../04_formal/02_type_theory.md)
+> **前置概念**: [Async](../03_advanced/01_async/02_async.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **主要来源**:
 > [Plotkin & Pretnar 2009 — Algebraic Effects] ·
 > [Lucassen & Gifford 1988 — Polymorphic Effect Systems] ·
@@ -1157,7 +1157,7 @@ Q4: 与现有生态的兼容性？
 
 | 概念 | 文件 | 关系 |
 | :--- | :--- | :--- |
-| Async/Await | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | `Async` 效果的主要载体 |
+| Async/Await | [`../03_advanced/01_async/02_async.md`](../03_advanced/01_async/02_async.md) | `Async` 效果的主要载体 |
 
 ---
 
@@ -1179,9 +1179,9 @@ Q4: 与现有生态的兼容性？
 > EF5 是**远期方向**，其最大障碍不是技术可行性，而是**向后兼容性**和**社区共识**。
 >
 
-| `AsyncFn` Trait | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §12 | 效果多态的工程原型 |
-| `gen` blocks | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §13 | 另一种计算效果的实验 |
-| 类型论基础 | [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) | 效果系统的类型论根基 |
+| `AsyncFn` Trait | [`../03_advanced/01_async/02_async.md`](../03_advanced/01_async/02_async.md) §12 | 效果多态的工程原型 |
+| `gen` blocks | [`../03_advanced/01_async/02_async.md`](../03_advanced/01_async/02_async.md) §13 | 另一种计算效果的实验 |
+| 类型论基础 | [`../04_formal/02_type_theory.md`](../04_formal/00_type_theory/02_type_theory.md) | 效果系统的类型论根基 |
 | Rust 版本跟踪 | [`./05_rust_version_tracking.md`](05_rust_version_tracking.md) | 效果相关语言特性状态 |
 | 语言演进 | [`./03_evolution.md`](03_evolution.md) §2.1, §2.3.1 | 效果系统在长程演进中的定位 |
 

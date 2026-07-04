@@ -61,7 +61,7 @@
 
 > 💡 **提示**: 需要更详细的查找功能？请查看 [快速查找工具](10_quick_find.md)！
 > 📐 **分类体系**: 按文档角色、知识层次、主题域查找 → [10_classification.md](10_classification.md)
-> 📋 **速查卡**: 按主题的语法速查、代码示例、反例 → [docs/quick_reference](../02_reference/quick_reference/README.md)
+> 📋 **速查卡**: 按主题的语法速查、代码示例、反例 → [docs/quick_reference](../../README.md)
 
 ---
 
@@ -145,7 +145,7 @@
 
 - 批判性分析与推进计划 → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md)
 - 核心定理完整证明 → [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md)（L2）
-- Coq 证明骨架 → [archive/deprecated/coq_skeleton](../archive/deprecated/coq_skeleton/README.md)、[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)（已归档）
+- Coq 证明骨架 → [archive/deprecated/coq_skeleton](../../README.md)、[COQ_ISABELLE_PROOF_SCAFFOLDING](../../README.md)（已归档）
 
 **形式化方法研究**:
 
@@ -308,9 +308,9 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [主索引](README.md) - 完整的研究笔记索引
-- [速查卡快速参考](../02_reference/quick_reference/README.md) - 20 个速查卡（含 AI/ML、类型、所有权、并发、设计模式等）；与本研究笔记互为补充
-- [完整索引](INDEX.md) - 所有研究笔记的详细索引
+- [主索引](../../README.md) - 完整的研究笔记索引
+- [速查卡快速参考](../../README.md) - 20 个速查卡（含 AI/ML、类型、所有权、并发、设计模式等）；与本研究笔记互为补充
+- [完整索引](../../concept/sources/INDEX.md) - 所有研究笔记的详细索引
 - [软件设计理论](software_design_theory/README.md) - 设计模式、23/43、执行模型、组合工程
 - [快速入门指南](10_getting_started.md) - 新用户入门指南
 - [常见问题解答](10_faq.md) - 常见问题解答
@@ -321,7 +321,7 @@
 - [系统集成指南](10_system_integration.md) - 与形式化工程系统的集成
 - [研究笔记示例](10_example.md) - 完整的研究笔记示例
 - [形式化方法索引](formal_methods/README.md)
-- [类型理论索引](type_theory/README.md)
+- [类型理论索引](../../README.md)
 - [核心特性完整链](10_core_features_full_chain.md) - 13 项核心特性 Def→示例→论证→证明
 - [特性精简模板](10_feature_template.md) - 79 项非核心特性模板
 - [版本增量更新流程](10_incremental_update_flow.md) - 1.94+ 发布后更新步骤
@@ -332,7 +332,7 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [形式化工程系统](../rust-formal-engineering-system/README.md)
+- [形式化工程系统](../../README.md)
 - Rust Book
 - Rust Reference
 
@@ -401,7 +401,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

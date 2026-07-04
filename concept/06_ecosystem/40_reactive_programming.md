@@ -12,8 +12,8 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: C×Ana — 分析异步（Async）数据流的声明式组合模式
-> **前置依赖**: [Async/Await](../03_advanced/02_async.md) ·
-> [Stream Processing Semantics](../03_advanced/20_stream_processing_semantics.md) ·
+> **前置依赖**: [Async/Await](../03_advanced/01_async/02_async.md) ·
+> [Stream Processing Semantics](../03_advanced/06_low_level_patterns/20_stream_processing_semantics.md) ·
 > [事件驱动架构](32_event_driven_architecture.md)
 > **后置延伸**: [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) ·
 > [流处理生态](36_stream_processing_ecosystem.md)
@@ -38,7 +38,7 @@
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Reactive Manifesto：响应式系统的四大特质](#11-reactive-manifesto响应式系统的四大特质)
-    - [1.2 Reactive Streams：背压感知的异步（Async）数据流](#12-reactive-streams背压感知的异步数据流)
+    - [1.2 Reactive Streams：背压感知的异步数据流](#12-reactive-streams背压感知的异步数据流)
     - [1.3 FRP：函数式响应编程](#13-frp函数式响应编程)
   - [二、概念属性矩阵](#二概念属性矩阵)
     - [2.1 Reactive 编程模型对比矩阵](#21-reactive-编程模型对比矩阵)
@@ -64,9 +64,9 @@
     - [8.1 反命题树](#81-反命题树)
     - [8.2 边界极限](#82-边界极限)
   - [九、边界测试](#九边界测试)
-    - [9.1 边界测试：无背压导致内存溢出（运行时（Runtime）错误）](#91-边界测试无背压导致内存溢出运行时错误)
+    - [9.1 边界测试：无背压导致内存溢出（运行时错误）](#91-边界测试无背压导致内存溢出运行时错误)
     - [9.2 边界测试：跨线程 Stream 发送违反 Send（编译错误）](#92-边界测试跨线程-stream-发送违反-send编译错误)
-    - [9.3 边界测试：FRP 信号循环引用（Reference）导致死锁（运行时错误）](#93-边界测试frp-信号循环引用导致死锁运行时错误)
+    - [9.3 边界测试：FRP 信号循环引用导致死锁（运行时错误）](#93-边界测试frp-信号循环引用导致死锁运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -981,9 +981,9 @@ fn circular_signal_deadlock() {
 - [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) — 事件流、投影处理器
 - [流处理生态](36_stream_processing_ecosystem.md) — timely/differential dataflow、Materialize
 - [架构设计模式](35_architecture_patterns.md) — 分层/六边形/洋葱/整洁架构
-- [Stream Processing Semantics](../03_advanced/20_stream_processing_semantics.md) — 流处理语义学
-- [Async/Await](../03_advanced/02_async.md) — 异步编程基础
-- [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、线程安全
+- [Stream Processing Semantics](../03_advanced/06_low_level_patterns/20_stream_processing_semantics.md) — 流处理语义学
+- [Async/Await](../03_advanced/01_async/02_async.md) — 异步编程基础
+- [并发编程](../03_advanced/00_concurrency/01_concurrency.md) — Send/Sync、线程安全
 - [范型矩阵](../05_comparative/03_paradigm_matrix.md) — 多语言范式对比
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)

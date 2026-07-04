@@ -11,9 +11,9 @@
 > [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
 > [Traits](../02_intermediate/00_traits/01_traits.md) ·
 > [Generics](../02_intermediate/01_generics/02_generics.md) ·
-> [Async](../03_advanced/02_async.md) ·
-> [Unsafe](../03_advanced/03_unsafe.md) ·
-> [Type Theory](../04_formal/02_type_theory.md)
+> [Async](../03_advanced/01_async/02_async.md) ·
+> [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) ·
+> [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **后置概念**: [Application Domains](04_application_domains.md) · [Toolchain](01_toolchain.md)
 > **主要来源**: [crates.io](https://crates.io) · [lib.rs](https:/lib.rs) · [Tokio 文档] · [Tower 文档] · [AWS Kani 博客] · [Microsoft Verus 论文] · [INRIA Creusot 教程] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
@@ -28,7 +28,7 @@
 
 ---
 
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 权威定义
@@ -384,9 +384,9 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 ---
 
 - [L6: Toolchain](01_toolchain.md) —— Cargo、审计与供应链安全
-- [L3: Async](../03_advanced/02_async.md) —— Tokio/Tower 的 async 根基
-- [L3: Unsafe](../03_advanced/03_unsafe.md) —— Firecracker/Wasmtime 的 unsafe 边界
-- [L4: Type Theory](../04_formal/02_type_theory.md) —— 范畴论与类型论根基
+- [L3: Async](../03_advanced/01_async/02_async.md) —— Tokio/Tower 的 async 根基
+- [L3: Unsafe](../03_advanced/02_unsafe/03_unsafe.md) —— Firecracker/Wasmtime 的 unsafe 边界
+- [L4: Type Theory](../04_formal/00_type_theory/02_type_theory.md) —— 范畴论与类型论根基
 - [L7: Formal Methods](../07_future/02_formal_methods.md) —— Kani/Verus/Creusot 的工业化路径
 
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅

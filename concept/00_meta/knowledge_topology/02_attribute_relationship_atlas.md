@@ -12,66 +12,66 @@
 
 | 概念 | 层级 | 受众 | 分级 | A/S/P | Bloom | 定理链 |
 |:---|:---:|:---|:---|:---:|:---:|:---|
-| [Bloom Taxonomy](../03_bloom_taxonomy.md) | L0 元信息层 | 进阶 | 综述级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Cross Reference Matrix](../05_cross_reference_matrix.md) | L0 元信息层 | — | — | — | — | — |
-| [Concept Audit Guide](../08_concept_audit_guide.md) | L0 元信息层 | 专家 | 综述级 | P | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 知识体系 A/S/P 三维认知标记规范](../asp_marking_guide.md) | L0 元信息层 | 专家 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [概念一致性检查清单](../audit_checklist.md) | L0 元信息层 | 专家 | 综述级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [权威来源映射表](../authority_source_map.md) | L0 元信息层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Concept 文件双语模板](../bilingual_template.md) | L0 元信息层 | 初学者 \| 进阶 \| 研究者 | — | — | — | — |
-| [Rust 安全边界扩展推理树](../boundary_extension_tree.md) | L0 元信息层 | 专家 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 职业市场全景：2026 年数据与分析](../career_landscape.md) | L0 元信息层 | 入门 → 进阶 | > > [元层 | A | 知道 → 分析 | — |
-| [Rust 知识体系双维认知矩阵](../../00_meta/cognitive_dimension_matrix.md) | L0 元信息层 | 研究者 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 知识体系能力图谱](../../00_meta/competency_graph.md) | L0 元信息层 | 进阶 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Comprehensive Rust 课程映射](../../00_meta/comprehensive_rust_mapping.md) | L0 元信息层 | 初学者 → 进阶 | 元层 | A | 知道 → 应用 | — |
-| [概念一致性（Coherence）检查清单](../../00_meta/concept_consistency_audit_checklist.md) | L0 元信息层 | — | 专家级 | — | — | — |
-| [Rust 知识体系概念定义判定森林](../../00_meta/concept_definition_decision_forest.md) | L0 元信息层 | 专家 | 综述级 | — | 元（Meta） | — |
-| [全局概念索引](../../00_meta/concept_index.md) | L0 元信息层 | 进阶 | 综述级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [C/C++ → Rust 工程层对比路线图](../../00_meta/cpp_rust_engineering_roadmap.md) | L0 元信息层 | 进阶 | — | — | 理解 → 分析 → 评价 | — |
-| [Rust 编译期可判定性谱系全景](../../00_meta/decidability_spectrum.md) | L0 元信息层 | 研究者 | 综述级 | — | 分析 → 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 语义表达力多视角深化](../../00_meta/expressiveness_multiview.md) | L0 元信息层 | 研究者 | 综述级 | — | 分析 → 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 知识体系失效分析树集](../../00_meta/fault_tree_analysis_collection.md) | L0 元信息层 | 专家 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [基础知识缺口补全总索引](../../00_meta/foundations_gap_closure_index.md) | L0 元信息层 | 进阶 | — | — | 评价 | — |
-| [内容分级与受众标签体系](../../00_meta/grading_system.md) | L0 元信息层 | 初学者 | 综述级 | — | ... | — |
-| [跨层知识图谱](../../00_meta/inter_layer_map.md) | L0 元信息层 | 进阶 | 综述级 | — | 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 知识体系跨层依赖与蕴含拓扑图](../../00_meta/inter_layer_topology.md) | L0 元信息层 | — | 专家级 | — | — | — |
-| [Rust 知识体系层次内模型间映射图](../../00_meta/intra_layer_model_map.md) | L0 元信息层 | 进阶 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 知识体系知识图谱本体规范 v2.0](../../00_meta/kg_ontology_v2.md) | L0 元信息层 | 研究者 | — | — | 元（Meta） | N/A — 描述性/综述性/导航性文档 |
-| [Rust 知识体系顶层本体（TLO）对齐](../../00_meta/kg_tlo_alignment.md) | L0 元信息层 | 知识工程师、形式化方法研究者、本体论实践者 > **状态**: 教学/工程对齐草案，非形式化公理化 > **主要来源**: [Rust Reference | — | — | — | — |
-| [Rust 知识体系全局思维导图](../../00_meta/knowledge_mindmap.md) | L0 元信息层 | 进阶 | 综述级 | — | 记忆 → 理解 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [概念定义图谱](../../00_meta/knowledge_topology/01_concept_definition_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
-| [属性关系图谱](../../00_meta/knowledge_topology/02_attribute_relationship_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
-| [场景决策树图谱](../../00_meta/knowledge_topology/03_scenario_decision_tree_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
-| [示例与反例图谱](../../00_meta/knowledge_topology/04_example_counterexample_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
-| [逻辑推理图谱](../../00_meta/knowledge_topology/05_logical_reasoning_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
-| [层间映射图谱](../../00_meta/knowledge_topology/06_inter_layer_mapping_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
-| [层内映射图谱](../../00_meta/knowledge_topology/07_intra_layer_mapping_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
-| [概念-权威来源对齐图谱](../../00_meta/knowledge_topology/08_concept_source_alignment_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
-| [推理判定树图谱](../../00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
-| [缺口与行动计划](../../00_meta/knowledge_topology/10_gap_and_action_plan.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
-| [Rust 知识体系学习指南](../../00_meta/learning_guide.md) | L0 元信息层 | 初学者 | 综述级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [MVP 学习路径：从零到多线程 CLI](../../00_meta/learning_mvp_path.md) | L0 元信息层 | 初学者 | 综述级 | — | 记忆 → 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust Minimum Viable Learning Path (MVP Path)](../../00_meta/learning_mvp_path_en.md) | L0 元信息层 | — | — | — | — | — |
-| [方法论：思维表征与知识结构规范](../../00_meta/methodology.md) | L0 元信息层 | 研究者 | 综述级 | — | 理解 → 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 知识体系全景导航](../../00_meta/navigation.md) | L0 元信息层 | 初学者 | 综述级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 范式转换模式矩阵](../../00_meta/paradigm_transition_matrix.md) | L0 元信息层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [模式语义空间索引：设计模式在概念体系中的坐标](../../00_meta/pattern_semantic_space_index.md) | L0 元信息层 | 进阶 | — | — | 理解 → 分析 → 评价 | — |
-| [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../../00_meta/pl_foundations_roadmap.md) | L0 元信息层 | 初学者 | — | — | 理解 → 分析 | — |
-| [占位符页面](../../00_meta/placeholders/placeholder_generic.md) | L0 元信息层 | — | — | — | — | — |
-| [Rust 知识体系问题图谱](../../00_meta/problem_graph.md) | L0 元信息层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 知识体系思维表征覆盖率仪表板](../../00_meta/quality_dashboard_v2.md) | L0 元信息层 | 专家 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 概念速查卡片](../../00_meta/quick_reference.md) | L0 元信息层 | 进阶 | 综述级 | — | 记忆 → 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [RustBelt 谓词映射图](../../00_meta/rustbelt_predicate_map.md) | L0 元信息层 | 研究者 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 知识体系自测题库](../../00_meta/self_assessment.md) | L0 元信息层 | 初学者 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/semantic_bridge_algorithms_patterns.md) | L0 元信息层 | 专家 | 综述级 | S | 分析 → 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust Semantic Expressiveness: A Panoramic Survey](../../00_meta/semantic_expressiveness.md) | L0 元信息层 | 研究者 | 综述级 | — | 分析 → 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 表征空间](../../00_meta/semantic_space.md) | L0 元信息层 | 研究者 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [权威来源清单与知识来源关系分析](../../00_meta/sources.md) | L0 元信息层 | 进阶 | 研究者级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [模板去同质化指南](../../00_meta/template_deduplication_guide.md) | L0 元信息层 | 贡献者 | — | — | — | — |
-| [Rust 核心术语英中对照表](../../00_meta/terminology_glossary.md) | L0 元信息层 | 初学者 | 综述级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 知识体系定理推理森林](../../00_meta/theorem_inference_forest.md) | L0 元信息层 | 研究者 | 综述级 | — | 元（Meta） | — |
-| [全局待办清单](../../00_meta/todos.md) | L0 元信息层 | 专家 | 综述级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [主题-权威来源对齐图谱 (Topic-Authority Alignment Map)](../../00_meta/topic_authority_alignment_map.md) | L0 元信息层 | — | — | — | — | — |
+| [Bloom Taxonomy](../00_framework/03_bloom_taxonomy.md) | L0 元信息层 | 进阶 | 综述级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Cross Reference Matrix](../04_navigation/05_cross_reference_matrix.md) | L0 元信息层 | — | — | — | — | — |
+| [Concept Audit Guide](../03_audit/08_concept_audit_guide.md) | L0 元信息层 | 专家 | 综述级 | P | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 知识体系 A/S/P 三维认知标记规范](../03_audit/asp_marking_guide.md) | L0 元信息层 | 专家 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [概念一致性检查清单](../03_audit/audit_checklist.md) | L0 元信息层 | 专家 | 综述级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [权威来源映射表](../02_sources/authority_source_map.md) | L0 元信息层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Concept 文件双语模板](../01_terminology/bilingual_template.md) | L0 元信息层 | 初学者 \| 进阶 \| 研究者 | — | — | — | — |
+| [Rust 安全边界扩展推理树](../00_framework/boundary_extension_tree.md) | L0 元信息层 | 专家 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 职业市场全景：2026 年数据与分析](../04_navigation/career_landscape.md) | L0 元信息层 | 入门 → 进阶 | > > [元层 | A | 知道 → 分析 | — |
+| [Rust 知识体系双维认知矩阵](../00_framework/cognitive_dimension_matrix.md) | L0 元信息层 | 研究者 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 知识体系能力图谱](../00_framework/competency_graph.md) | L0 元信息层 | 进阶 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Comprehensive Rust 课程映射](../00_framework/comprehensive_rust_mapping.md) | L0 元信息层 | 初学者 → 进阶 | 元层 | A | 知道 → 应用 | — |
+| [概念一致性（Coherence）检查清单](../03_audit/concept_consistency_audit_checklist.md) | L0 元信息层 | — | 专家级 | — | — | — |
+| [Rust 知识体系概念定义判定森林](../00_framework/concept_definition_decision_forest.md) | L0 元信息层 | 专家 | 综述级 | — | 元（Meta） | — |
+| [全局概念索引](../04_navigation/concept_index.md) | L0 元信息层 | 进阶 | 综述级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [C/C++ → Rust 工程层对比路线图](../00_framework/cpp_rust_engineering_roadmap.md) | L0 元信息层 | 进阶 | — | — | 理解 → 分析 → 评价 | — |
+| [Rust 编译期可判定性谱系全景](../00_framework/decidability_spectrum.md) | L0 元信息层 | 研究者 | 综述级 | — | 分析 → 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 语义表达力多视角深化](../00_framework/expressiveness_multiview.md) | L0 元信息层 | 研究者 | 综述级 | — | 分析 → 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 知识体系失效分析树集](../00_framework/fault_tree_analysis_collection.md) | L0 元信息层 | 专家 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [基础知识缺口补全总索引](../04_navigation/foundations_gap_closure_index.md) | L0 元信息层 | 进阶 | — | — | 评价 | — |
+| [内容分级与受众标签体系](../03_audit/grading_system.md) | L0 元信息层 | 初学者 | 综述级 | — | ... | — |
+| [跨层知识图谱](../04_navigation/inter_layer_map.md) | L0 元信息层 | 进阶 | 综述级 | — | 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 知识体系跨层依赖与蕴含拓扑图](../04_navigation/inter_layer_topology.md) | L0 元信息层 | — | 专家级 | — | — | — |
+| [Rust 知识体系层次内模型间映射图](../04_navigation/intra_layer_model_map.md) | L0 元信息层 | 进阶 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 知识体系知识图谱本体规范 v2.0](kg_ontology_v2.md) | L0 元信息层 | 研究者 | — | — | 元（Meta） | N/A — 描述性/综述性/导航性文档 |
+| [Rust 知识体系顶层本体（TLO）对齐](kg_tlo_alignment.md) | L0 元信息层 | 知识工程师、形式化方法研究者、本体论实践者 > **状态**: 教学/工程对齐草案，非形式化公理化 > **主要来源**: [Rust Reference | — | — | — | — |
+| [Rust 知识体系全局思维导图](../00_framework/knowledge_mindmap.md) | L0 元信息层 | 进阶 | 综述级 | — | 记忆 → 理解 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [概念定义图谱](01_concept_definition_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [属性关系图谱](02_attribute_relationship_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [场景决策树图谱](03_scenario_decision_tree_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [示例与反例图谱](04_example_counterexample_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [逻辑推理图谱](05_logical_reasoning_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [层间映射图谱](06_inter_layer_mapping_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [层内映射图谱](07_intra_layer_mapping_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [概念-权威来源对齐图谱](08_concept_source_alignment_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [推理判定树图谱](09_reasoning_judgment_tree_atlas.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [缺口与行动计划](10_gap_and_action_plan.md) | L0 元信息层 | 研究者 | 元层 | — | — | — |
+| [Rust 知识体系学习指南](../04_navigation/learning_guide.md) | L0 元信息层 | 初学者 | 综述级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [MVP 学习路径：从零到多线程 CLI](../04_navigation/learning_mvp_path.md) | L0 元信息层 | 初学者 | 综述级 | — | 记忆 → 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust Minimum Viable Learning Path (MVP Path)](../04_navigation/learning_mvp_path_en.md) | L0 元信息层 | — | — | — | — | — |
+| [方法论：思维表征与知识结构规范](../00_framework/methodology.md) | L0 元信息层 | 研究者 | 综述级 | — | 理解 → 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 知识体系全景导航](../04_navigation/navigation.md) | L0 元信息层 | 初学者 | 综述级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 范式转换模式矩阵](../00_framework/paradigm_transition_matrix.md) | L0 元信息层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [模式语义空间索引：设计模式在概念体系中的坐标](../00_framework/pattern_semantic_space_index.md) | L0 元信息层 | 进阶 | — | — | 理解 → 分析 → 评价 | — |
+| [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../00_framework/pl_foundations_roadmap.md) | L0 元信息层 | 初学者 | — | — | 理解 → 分析 | — |
+| [占位符页面](../placeholders/placeholder_generic.md) | L0 元信息层 | — | — | — | — | — |
+| [Rust 知识体系问题图谱](../04_navigation/problem_graph.md) | L0 元信息层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 知识体系思维表征覆盖率仪表板](../03_audit/quality_dashboard_v2.md) | L0 元信息层 | 专家 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 概念速查卡片](../04_navigation/quick_reference.md) | L0 元信息层 | 进阶 | 综述级 | — | 记忆 → 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [RustBelt 谓词映射图](../02_sources/rustbelt_predicate_map.md) | L0 元信息层 | 研究者 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 知识体系自测题库](../04_navigation/self_assessment.md) | L0 元信息层 | 初学者 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [语义桥：算法、设计模式与工作流模式的统一谱系](../00_framework/semantic_bridge_algorithms_patterns.md) | L0 元信息层 | 专家 | 综述级 | S | 分析 → 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust Semantic Expressiveness: A Panoramic Survey](../00_framework/semantic_expressiveness.md) | L0 元信息层 | 研究者 | 综述级 | — | 分析 → 评价 → 创造 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 表征空间](../00_framework/semantic_space.md) | L0 元信息层 | 研究者 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [权威来源清单与知识来源关系分析](../02_sources/sources.md) | L0 元信息层 | 进阶 | 研究者级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [模板去同质化指南](../03_audit/template_deduplication_guide.md) | L0 元信息层 | 贡献者 | — | — | — | — |
+| [Rust 核心术语英中对照表](../01_terminology/terminology_glossary.md) | L0 元信息层 | 初学者 | 综述级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 知识体系定理推理森林](../00_framework/theorem_inference_forest.md) | L0 元信息层 | 研究者 | 综述级 | — | 元（Meta） | — |
+| [全局待办清单](../00_framework/todos.md) | L0 元信息层 | 专家 | 综述级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [主题-权威来源对齐图谱 (Topic-Authority Alignment Map)](../02_sources/topic_authority_alignment_map.md) | L0 元信息层 | — | — | — | — | — |
 | [Rust 起步指南](../../01_foundation/00_start/00_start.md) | L1 基础概念层 | 初学者 | 初学者 | — | 记忆 → 理解 | — |
 | [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | L1 基础概念层 | 初学者 | 综述级 | S | 理解 → 分析 | — |
 | [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | L1 基础概念层 | 初学者 | 综述级 | S | 理解 → 分析 → 评价 | — |
@@ -148,93 +148,93 @@
 | [可派生 Trait](../../02_intermediate/00_traits/31_derive_traits.md) | L2 进阶概念层 | 初学者 | 参考级 | S | 理解 → 应用 | N/A — 参考级文档 |
 | [Rust Editions](../../02_intermediate/00_traits/32_editions.md) | L2 进阶概念层 | 进阶 | 参考级 | S | 理解 → 应用 | Compiler Version → Edition → Syntax/Behavior → Migration |
 | [Rust 发布流程](../../02_intermediate/00_traits/33_rust_release_process.md) | L2 进阶概念层 | 进阶 | 参考级 | P | 理解 → 分析 | Nightly → Beta → Stable → Release Channel |
-| [是否需要进入 L4 形式化层？](../../03_advanced/00_before_formal.md) | L3 高级概念层 | 进阶 | 综述级 | — | — | — |
-| [Concurrency](../../03_advanced/01_concurrency.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
-| [Async/Await](../../03_advanced/02_async.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
-| [Unsafe Rust 安全编程](../../03_advanced/03_unsafe.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
-| [Macros](../../03_advanced/04_macros.md) | L3 高级概念层 | 专家 | 专家级 | — | 应用 → 分析 | — |
-| [Rust FFI：与外部代码的安全边界](../../03_advanced/05_rust_ffi.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
-| [Pin 与 Unpin：自引用类型的不动性保证](../../03_advanced/06_pin_unpin.md) | L3 高级概念层 | 专家 | 专家级 | S | 分析 → 评价 | — |
-| [过程宏：编译期代码生成的元编程工具](../../03_advanced/07_proc_macro.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
-| [NLL 与 Polonius：借用检查器的演进](../../03_advanced/08_nll_and_polonius.md) | L3 高级概念层 | 专家 | 专家级 | S | 分析 → 评价 | — |
-| [FFI 高级主题：跨语言边界的安全与性能](../../03_advanced/09_ffi_advanced.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
-| [并发 模式：从消息 传递到锁自由的数据结构](../../03_advanced/10_concurrency_patterns.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
-| [原子操作与内存序：无锁并发的精确控制](../../03_advanced/11_atomics_and_memory_ordering.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
-| [Unsafe Rust 模式：安全抽象的核心技术](../../03_advanced/12_unsafe_rust_patterns.md) | L3 高级概念层 | 专家 | 专家级 | — | — | — |
-| [内联汇编 (Inline Assembly)](../../03_advanced/13_inline_assembly.md) | L3 高级概念层 | 专家 | 专家级 | P | 分析 → 评价 | — |
-| [自定义分配器与内存布局优化](../../03_advanced/14_custom_allocators.md) | L3 高级概念层 | 专家 | 专家级 | — | 应用 → 分析 | — |
-| [零拷贝解析与序列化优化](../../03_advanced/15_zero_copy_parsing.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 应用 | — |
-| [无锁编程与内存模型](../../03_advanced/16_lock_free.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
-| [类型擦除与动态分发](../../03_advanced/17_type_erasure.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 应用 | — |
-| [Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象](../../03_advanced/18_network_programming.md) | L3 高级概念层 | 专家 | 专家级 | — | 应用 → 分析 | — |
-| [并行与分布式模式谱系：从线程池到共识算法](../../03_advanced/19_parallel_distributed_pattern_spectrum.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 → 创造 | — |
-| [流处理语义：从 Dataflow Model 到 Differential Dataflow](../../03_advanced/20_stream_processing_semantics.md) | L3 高级概念层 | 专家 | 专家级 | S | 分析 → 评价 | — |
-| [测验：并发与异步](../../03_advanced/21_quiz_concurrency_async.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
-| [测验：Unsafe Rust](../../03_advanced/22_quiz_unsafe.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
-| [测验：宏系统](../../03_advanced/23_quiz_macros.md) | L3 高级概念层 | 专家 | 专家级 | — | 应用 → 分析 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
-| [Async Closures](../../03_advanced/24_async_closures.md) | L3 高级概念层 | 专家 | 专家级 | — | 应用 → 分析 | — |
-| [Async/Await 高级主题](../../03_advanced/25_async_advanced.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 —— 理解 Waker 与 OS 的交互边界，是手写 Future 和自定义运行时（Runtime）的必要知识。 | — |
-| [异步模式：从 Future 到生产级并发](../../03_advanced/26_async_patterns.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
-| [Linkage](../../03_advanced/27_linkage.md) | L3 高级概念层 | 进阶 | 专家级 | P | 理解 → 应用 | N/A — 编译器行为/平台相关文档 |
-| [条件编译](../../03_advanced/28_conditional_compilation.md) | L3 高级概念层 | 中级 | 专家级 | S | 理解 → 应用 | N/A — 语言规范/平台相关文档 |
-| [Rust 内存模型](../../03_advanced/29_memory_model.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 分析 | Byte Model → Provenance → UB Boundary |
-| [Rust 运行时](../../03_advanced/30_rust_runtime.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 应用 | Runtime Attribute → Allocation / Subsystem → Binary Behavior |
-| [Panic 机制](../../03_advanced/31_panic.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 分析 | Panic → Handler → Strategy → Unwind → UB Boundary |
-| [内存分配与生命周期](../../03_advanced/32_memory_allocation_and_lifetime.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 分析 | Allocation → Box Lifetime → Heap Stability |
-| [变量](../../03_advanced/33_variables.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 应用 | Variable → Initialization → Drop Scope |
-| [可见性与隐私](../../03_advanced/34_visibility_and_privacy.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 应用 | Module Hierarchy → Visibility Rule → Public API Surface |
-| [Unsafe 参考](../../03_advanced/35_unsafe_reference.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 分析 | Unsafe Keyword → Unsafe Block → Unsafe Operation → UB Contract |
-| [Linear Logic & Affine Logic](../../04_formal/01_linear_logic.md) | L4 形式化理论层 | 研究者 | 专家级 | S | 分析 → 评价 | — |
-| [Type Theory](../../04_formal/02_type_theory.md) | L4 形式化理论层 | 研究者 | 专家级 | S | 分析 → 评价 | — |
-| [Ownership Formalization](../../04_formal/03_ownership_formal.md) | L4 形式化理论层 | 研究者 | 专家级 | — | — | — |
-| [RustBelt & Verification Toolchain](../../04_formal/04_rustbelt.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
-| [Verification Toolchain Selection Guide](../../04_formal/05_verification_toolchain.md) | L4 形式化理论层 | 研究者 | 专家级 | P | 评价 → 应用 | — |
-| [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/06_subtype_variance.md) | L4 形式化理论层 | 研究者 | 专家级 | S | 分析 → 评价 | — |
-| [类型推断：Hindley-Milner 算法与 Rust 的工业实现](../../04_formal/08_type_inference.md) | L4 形式化理论层 | 研究者 | 专家级 | S | 分析 → 评价 | — |
-| [线性逻辑在 Rust 中的工程应用](../../04_formal/09_linear_logic_applications.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
-| [范畴论与 Rust：从函子到单子](../../04_formal/10_category_theory.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
-| [分离逻辑：Rust 所有权的形式化根基](../../04_formal/11_separation_logic.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 评价 → 创造 | — |
-| [指称语义与领域理论](../../04_formal/12_denotational_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
-| [形式化方法在 Rust 中的应用](../../04_formal/13_formal_methods.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 评价 → 创造 | — |
-| [Lambda 演算与 Rust 计算模型](../../04_formal/14_lambda_calculus.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
-| [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](../../04_formal/15_hoare_logic.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
-| [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](../../04_formal/16_aerospace_certification_formal_methods.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
-| [操作语义：程序行为的形式化定义](../../04_formal/17_operational_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
-| [求值策略：Call-by-Value, Call-by-Name, Call-by-Need](../../04_formal/18_evaluation_strategies.md) | L4 形式化理论层 | 研究者 | 专家级 | S | 分析 → 评价 | — |
-| [Rustc 查询系统与增量编译](../../04_formal/19_rustc_query_system.md) | L4 形式化理论层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
-| [Axiomatic Semantics](../../04_formal/20_axiomatic_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | — | — | — |
-| [Type Semantics](../../04_formal/21_type_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | S | — | — |
-| [现代 Rust 验证工具生态](../../04_formal/22_modern_verification_tools.md) | L4 形式化理论层 | 研究者 | 专家级 | P | — | — |
-| [通用程序语言理论基础：Rust 的 PL 基座](../../04_formal/23_programming_language_foundations.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 评价 → 创造 | — |
-| [AutoVerus / Verus 自动证明生态](../../04_formal/24_autoverus.md) | L4 形式化理论层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 形式化验证/AI 辅助证明研究 |
-| [测验：形式化方法概念](../../04_formal/25_quiz_formal_methods.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
-| [rustc 中的 Trait Solver](../../04_formal/26_trait_solver_in_rustc.md) | L4 形式化理论层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
-| [rustc 类型检查与类型推断](../../04_formal/27_type_checking_and_inference.md) | L4 形式化理论层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
-| [Borrow Checking Decidability](../../04_formal/28_borrow_checking_decidability.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
-| [Type Inference Complexity](../../04_formal/29_type_inference_complexity.md) | L4 形式化理论层 | 研究者 | 专家级 | F | 分析 → 评价 | — |
-| [Aeneas Symbolic Semantics](../../04_formal/30_aeneas_symbolic_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
-| [Miri：Rust 未定义行为动态检测器](../../04_formal/31_miri.md) | L4 形式化理论层 | 进阶 / 工程 / 形式化 | 综述级 | A | 理解 → 应用 → 分析 | — |
-| [Kani：Rust 有界模型检查器](../../04_formal/32_kani.md) | L4 形式化理论层 | 进阶 / 工程 / 形式化 | 综述级 | A | 理解 → 应用 → 分析 | — |
-| [Safety Tags](../../04_formal/33_safety_tags_in_formal.md) | L4 形式化理论层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 语言设计/静态分析提案 |
-| [BorrowSanitizer 运行时别名模型检测](../../04_formal/34_borrow_sanitizer_in_formal.md) | L4 形式化理论层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 工具链/运行时（Runtime）研究 |
-| [Rustc 名称解析与 HIR](../../04_formal/35_name_resolution_and_hir.md) | L4 形式化理论层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
-| [Tree Borrows 深度解析](../../04_formal/36_tree_borrows_deep_dive.md) | L4 形式化理论层 | 进阶 | 专家级 | S | 分析 → 评价 | N/A — 操作语义研究 |
-| [未定义行为清单](../../04_formal/37_behavior_considered_undefined.md) | L4 形式化理论层 | 专家 | 研究级 | S | 理解 → 分析 | Unsafe Contract → UB 清单 → Soundness |
-| [Application Binary Interface](../../04_formal/38_application_binary_interface.md) | L4 形式化理论层 | 专家 | 研究级 | S | 理解 → 应用 | N/A — 语言规范/平台相关文档 |
-| [常量求值](../../04_formal/39_constant_evaluation.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 应用 | Const Context → Constant Expression → Compile-time Evaluation |
-| [名称、作用域与解析](../../04_formal/40_names_and_resolution.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Entity → Declaration → Scope → Namespace → Path → Resolution |
-| [特殊类型与 Trait](../../04_formal/41_special_types_and_traits.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Special Type → Compiler Support → Safety Guarantee |
-| [类型布局](../../04_formal/42_type_layout.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Type → Size/Align/Offset → Repr → ABI |
-| [析构函数与 Drop Scope](../../04_formal/43_destructors.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Scope → Drop Order → Temporary Lifetime Extension |
-| [符号约定](../../04_formal/44_notation.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 记忆 → 理解 | Syntax → Production Rule → Rust Grammar |
-| [词法结构](../../04_formal/45_lexical_structure.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Source Bytes → Unicode → Tokens → AST |
-| [条目参考](../../04_formal/46_items_reference.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Crate → Module → Item → Declaration |
-| [属性](../../04_formal/47_attributes.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 应用 | Attribute → Metadata → Compiler Behavior |
-| [语句与表达式参考](../../04_formal/48_statements_and_expressions_reference.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Statement → Expression → Value / Effect |
-| [模式参考](../../04_formal/49_patterns_reference.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Value → Pattern Match → Binding → Destructuring |
-| [类型系统参考](../../04_formal/50_type_system_reference.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Type → Kind → Size/Align → Lifetime → Trait Bounds |
-| [名字参考](../../04_formal/51_names_reference.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Source File → Module Tree → Namespace → Scope → Name Resolution |
-| [Rust Reference 附录](../../04_formal/52_reference_appendices.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Grammar → Lexicon → Syntax Index → Test Summary |
+| [是否需要进入 L4 形式化层？](../../03_advanced/02_unsafe/00_before_formal.md) | L3 高级概念层 | 进阶 | 综述级 | — | — | — |
+| [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
+| [Async/Await](../../03_advanced/01_async/02_async.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
+| [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/03_unsafe.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
+| [Macros](../../03_advanced/03_proc_macros/04_macros.md) | L3 高级概念层 | 专家 | 专家级 | — | 应用 → 分析 | — |
+| [Rust FFI：与外部代码的安全边界](../../03_advanced/04_ffi/05_rust_ffi.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
+| [Pin 与 Unpin：自引用类型的不动性保证](../../03_advanced/01_async/06_pin_unpin.md) | L3 高级概念层 | 专家 | 专家级 | S | 分析 → 评价 | — |
+| [过程宏：编译期代码生成的元编程工具](../../03_advanced/03_proc_macros/07_proc_macro.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
+| [NLL 与 Polonius：借用检查器的演进](../../03_advanced/02_unsafe/08_nll_and_polonius.md) | L3 高级概念层 | 专家 | 专家级 | S | 分析 → 评价 | — |
+| [FFI 高级主题：跨语言边界的安全与性能](../../03_advanced/04_ffi/09_ffi_advanced.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
+| [并发 模式：从消息 传递到锁自由的数据结构](../../03_advanced/00_concurrency/10_concurrency_patterns.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
+| [原子操作与内存序：无锁并发的精确控制](../../03_advanced/00_concurrency/11_atomics_and_memory_ordering.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
+| [Unsafe Rust 模式：安全抽象的核心技术](../../03_advanced/02_unsafe/12_unsafe_rust_patterns.md) | L3 高级概念层 | 专家 | 专家级 | — | — | — |
+| [内联汇编 (Inline Assembly)](../../03_advanced/05_inline_assembly/13_inline_assembly.md) | L3 高级概念层 | 专家 | 专家级 | P | 分析 → 评价 | — |
+| [自定义分配器与内存布局优化](../../03_advanced/06_low_level_patterns/14_custom_allocators.md) | L3 高级概念层 | 专家 | 专家级 | — | 应用 → 分析 | — |
+| [零拷贝解析与序列化优化](../../03_advanced/06_low_level_patterns/15_zero_copy_parsing.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 应用 | — |
+| [无锁编程与内存模型](../../03_advanced/00_concurrency/16_lock_free.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
+| [类型擦除与动态分发](../../03_advanced/06_low_level_patterns/17_type_erasure.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 应用 | — |
+| [Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象](../../03_advanced/06_low_level_patterns/18_network_programming.md) | L3 高级概念层 | 专家 | 专家级 | — | 应用 → 分析 | — |
+| [并行与分布式模式谱系：从线程池到共识算法](../../03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 → 创造 | — |
+| [流处理语义：从 Dataflow Model 到 Differential Dataflow](../../03_advanced/06_low_level_patterns/20_stream_processing_semantics.md) | L3 高级概念层 | 专家 | 专家级 | S | 分析 → 评价 | — |
+| [测验：并发与异步](../../03_advanced/00_concurrency/21_quiz_concurrency_async.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
+| [测验：Unsafe Rust](../../03_advanced/02_unsafe/22_quiz_unsafe.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
+| [测验：宏系统](../../03_advanced/03_proc_macros/23_quiz_macros.md) | L3 高级概念层 | 专家 | 专家级 | — | 应用 → 分析 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
+| [Async Closures](../../03_advanced/01_async/24_async_closures.md) | L3 高级概念层 | 专家 | 专家级 | — | 应用 → 分析 | — |
+| [Async/Await 高级主题](../../03_advanced/01_async/25_async_advanced.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 —— 理解 Waker 与 OS 的交互边界，是手写 Future 和自定义运行时（Runtime）的必要知识。 | — |
+| [异步模式：从 Future 到生产级并发](../../03_advanced/01_async/26_async_patterns.md) | L3 高级概念层 | 专家 | 专家级 | — | 分析 → 评价 | — |
+| [Linkage](../../03_advanced/04_ffi/27_linkage.md) | L3 高级概念层 | 进阶 | 专家级 | P | 理解 → 应用 | N/A — 编译器行为/平台相关文档 |
+| [条件编译](../../03_advanced/03_proc_macros/28_conditional_compilation.md) | L3 高级概念层 | 中级 | 专家级 | S | 理解 → 应用 | N/A — 语言规范/平台相关文档 |
+| [Rust 内存模型](../../03_advanced/02_unsafe/29_memory_model.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 分析 | Byte Model → Provenance → UB Boundary |
+| [Rust 运行时](../../03_advanced/02_unsafe/30_rust_runtime.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 应用 | Runtime Attribute → Allocation / Subsystem → Binary Behavior |
+| [Panic 机制](../../03_advanced/02_unsafe/31_panic.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 分析 | Panic → Handler → Strategy → Unwind → UB Boundary |
+| [内存分配与生命周期](../../03_advanced/06_low_level_patterns/32_memory_allocation_and_lifetime.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 分析 | Allocation → Box Lifetime → Heap Stability |
+| [变量](../../03_advanced/06_low_level_patterns/33_variables.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 应用 | Variable → Initialization → Drop Scope |
+| [可见性与隐私](../../03_advanced/06_low_level_patterns/34_visibility_and_privacy.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 应用 | Module Hierarchy → Visibility Rule → Public API Surface |
+| [Unsafe 参考](../../03_advanced/02_unsafe/35_unsafe_reference.md) | L3 高级概念层 | 专家 | 专家级 | S | 理解 → 分析 | Unsafe Keyword → Unsafe Block → Unsafe Operation → UB Contract |
+| [Linear Logic & Affine Logic](../../04_formal/01_ownership_logic/01_linear_logic.md) | L4 形式化理论层 | 研究者 | 专家级 | S | 分析 → 评价 | — |
+| [Type Theory](../../04_formal/00_type_theory/02_type_theory.md) | L4 形式化理论层 | 研究者 | 专家级 | S | 分析 → 评价 | — |
+| [Ownership Formalization](../../04_formal/01_ownership_logic/03_ownership_formal.md) | L4 形式化理论层 | 研究者 | 专家级 | — | — | — |
+| [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/04_rustbelt.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
+| [Verification Toolchain Selection Guide](../../04_formal/04_model_checking/05_verification_toolchain.md) | L4 形式化理论层 | 研究者 | 专家级 | P | 评价 → 应用 | — |
+| [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/00_type_theory/06_subtype_variance.md) | L4 形式化理论层 | 研究者 | 专家级 | S | 分析 → 评价 | — |
+| [类型推断：Hindley-Milner 算法与 Rust 的工业实现](../../04_formal/00_type_theory/08_type_inference.md) | L4 形式化理论层 | 研究者 | 专家级 | S | 分析 → 评价 | — |
+| [线性逻辑在 Rust 中的工程应用](../../04_formal/01_ownership_logic/09_linear_logic_applications.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
+| [范畴论与 Rust：从函子到单子](../../04_formal/00_type_theory/10_category_theory.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
+| [分离逻辑：Rust 所有权的形式化根基](../../04_formal/02_separation_logic/11_separation_logic.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 评价 → 创造 | — |
+| [指称语义与领域理论](../../04_formal/03_operational_semantics/12_denotational_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
+| [形式化方法在 Rust 中的应用](../../04_formal/04_model_checking/13_formal_methods.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 评价 → 创造 | — |
+| [Lambda 演算与 Rust 计算模型](../../04_formal/00_type_theory/14_lambda_calculus.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
+| [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](../../04_formal/03_operational_semantics/15_hoare_logic.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
+| [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](../../04_formal/04_model_checking/16_aerospace_certification_formal_methods.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
+| [操作语义：程序行为的形式化定义](../../04_formal/03_operational_semantics/17_operational_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
+| [求值策略：Call-by-Value, Call-by-Name, Call-by-Need](../../04_formal/03_operational_semantics/18_evaluation_strategies.md) | L4 形式化理论层 | 研究者 | 专家级 | S | 分析 → 评价 | — |
+| [Rustc 查询系统与增量编译](../../04_formal/05_rustc_internals/19_rustc_query_system.md) | L4 形式化理论层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
+| [Axiomatic Semantics](../../04_formal/03_operational_semantics/20_axiomatic_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | — | — | — |
+| [Type Semantics](../../04_formal/00_type_theory/21_type_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | S | — | — |
+| [现代 Rust 验证工具生态](../../04_formal/04_model_checking/22_modern_verification_tools.md) | L4 形式化理论层 | 研究者 | 专家级 | P | — | — |
+| [通用程序语言理论基础：Rust 的 PL 基座](../../04_formal/04_model_checking/23_programming_language_foundations.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 评价 → 创造 | — |
+| [AutoVerus / Verus 自动证明生态](../../04_formal/04_model_checking/24_autoverus.md) | L4 形式化理论层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 形式化验证/AI 辅助证明研究 |
+| [测验：形式化方法概念](../../04_formal/04_model_checking/25_quiz_formal_methods.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
+| [rustc 中的 Trait Solver](../../04_formal/05_rustc_internals/26_trait_solver_in_rustc.md) | L4 形式化理论层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
+| [rustc 类型检查与类型推断](../../04_formal/00_type_theory/27_type_checking_and_inference.md) | L4 形式化理论层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
+| [Borrow Checking Decidability](../../04_formal/01_ownership_logic/28_borrow_checking_decidability.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
+| [Type Inference Complexity](../../04_formal/00_type_theory/29_type_inference_complexity.md) | L4 形式化理论层 | 研究者 | 专家级 | F | 分析 → 评价 | — |
+| [Aeneas Symbolic Semantics](../../04_formal/03_operational_semantics/30_aeneas_symbolic_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
+| [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/31_miri.md) | L4 形式化理论层 | 进阶 / 工程 / 形式化 | 综述级 | A | 理解 → 应用 → 分析 | — |
+| [Kani：Rust 有界模型检查器](../../04_formal/04_model_checking/32_kani.md) | L4 形式化理论层 | 进阶 / 工程 / 形式化 | 综述级 | A | 理解 → 应用 → 分析 | — |
+| [Safety Tags](../../04_formal/02_separation_logic/33_safety_tags_in_formal.md) | L4 形式化理论层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 语言设计/静态分析提案 |
+| [BorrowSanitizer 运行时别名模型检测](../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md) | L4 形式化理论层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 工具链/运行时（Runtime）研究 |
+| [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/35_name_resolution_and_hir.md) | L4 形式化理论层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
+| [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md) | L4 形式化理论层 | 进阶 | 专家级 | S | 分析 → 评价 | N/A — 操作语义研究 |
+| [未定义行为清单](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md) | L4 形式化理论层 | 专家 | 研究级 | S | 理解 → 分析 | Unsafe Contract → UB 清单 → Soundness |
+| [Application Binary Interface](../../04_formal/05_rustc_internals/38_application_binary_interface.md) | L4 形式化理论层 | 专家 | 研究级 | S | 理解 → 应用 | N/A — 语言规范/平台相关文档 |
+| [常量求值](../../04_formal/03_operational_semantics/39_constant_evaluation.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 应用 | Const Context → Constant Expression → Compile-time Evaluation |
+| [名称、作用域与解析](../../04_formal/05_rustc_internals/40_names_and_resolution.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Entity → Declaration → Scope → Namespace → Path → Resolution |
+| [特殊类型与 Trait](../../04_formal/05_rustc_internals/41_special_types_and_traits.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Special Type → Compiler Support → Safety Guarantee |
+| [类型布局](../../04_formal/05_rustc_internals/42_type_layout.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Type → Size/Align/Offset → Repr → ABI |
+| [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/43_destructors.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Scope → Drop Order → Temporary Lifetime Extension |
+| [符号约定](../../04_formal/06_notation/44_notation.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 记忆 → 理解 | Syntax → Production Rule → Rust Grammar |
+| [词法结构](../../04_formal/05_rustc_internals/45_lexical_structure.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Source Bytes → Unicode → Tokens → AST |
+| [条目参考](../../04_formal/05_rustc_internals/46_items_reference.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Crate → Module → Item → Declaration |
+| [属性](../../04_formal/05_rustc_internals/47_attributes.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 应用 | Attribute → Metadata → Compiler Behavior |
+| [语句与表达式参考](../../04_formal/05_rustc_internals/48_statements_and_expressions_reference.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Statement → Expression → Value / Effect |
+| [模式参考](../../04_formal/05_rustc_internals/49_patterns_reference.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Value → Pattern Match → Binding → Destructuring |
+| [类型系统参考](../../04_formal/00_type_theory/50_type_system_reference.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Type → Kind → Size/Align → Lifetime → Trait Bounds |
+| [名字参考](../../04_formal/05_rustc_internals/51_names_reference.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Source File → Module Tree → Namespace → Scope → Name Resolution |
+| [Rust Reference 附录](../../04_formal/05_rustc_internals/52_reference_appendices.md) | L4 形式化理论层 | 研究者 | 研究级 | S | 理解 → 分析 | Grammar → Lexicon → Syntax Index → Test Summary |
 | [Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>](../../05_comparative/01_rust_vs_cpp.md) | L5 对比分析层 | 进阶 | 专家级 | — | 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Rust vs Go：线性所有权 vs CSP 过程逻辑](../../05_comparative/02_rust_vs_go.md) | L5 对比分析层 | 进阶 | 综述级 | — | 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Paradigm Matrix: Multi-Language Formal Comparison](../../05_comparative/03_paradigm_matrix.md) | L5 对比分析层 | 进阶 | 综述级 | S | 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |

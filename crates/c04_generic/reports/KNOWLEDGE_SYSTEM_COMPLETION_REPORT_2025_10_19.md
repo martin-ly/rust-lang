@@ -393,7 +393,7 @@ Generic = {
 
 ### 如何开始
 
-1. **第一步**: 阅读 [知识体系 README](docs/knowledge_system/README.md)
+1. **第一步**: 阅读 [知识体系 README](../../../README.md)
    - 了解整体结构
    - 选择适合自己的入口点
 2. **第二步**: 根据背景选择路径
@@ -453,7 +453,7 @@ Generic = {
 **索引导航系统**:
 
 1. [知识体系索引](docs/knowledge_system/00_KNOWLEDGE_SYSTEM_INDEX.md)
-2. [知识体系 README](docs/knowledge_system/README.md)
+2. [知识体系 README](../../../README.md)
 
 **知识图谱系统**:
 3. [概念本体](docs/knowledge_system/01_concept_ontology.md) - 13个核心概念形式化定义

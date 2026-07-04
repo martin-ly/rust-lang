@@ -383,7 +383,7 @@
 ```markdown
 ## 📑 完整索引
 
-**[INDEX.md](INDEX.md)** - 完整的项目索引和导航指南 ⭐⭐⭐ 强烈推荐
+**[INDEX.md](../../../concept/sources/INDEX.md)** - 完整的项目索引和导航指南 ⭐⭐⭐ 强烈推荐
 
 包含内容:
 - 📚 所有文档的分类索引
@@ -629,9 +629,9 @@ cargo run --example async_api_gateway_2025
 
 ### 初学者路径
 
-1. **[INDEX.md](INDEX.md)** - 项目索引 ⭐⭐⭐
+1. **[INDEX.md](../../../concept/sources/INDEX.md)** - 项目索引 ⭐⭐⭐
 2. **[async_programming_comprehensive_review_readme_2025_10_06.md](async_programming_comprehensive_review_readme_2025_10_06.md)** - 快速入门 ⭐⭐⭐
-3. **[README.md](README.md)** - 项目概述 ⭐⭐
+3. **[README.md](../../../README.md)** - 项目概述 ⭐⭐
 4. 基础示例 (tokio_smoke.rs, futures_smoke.rs) ⭐
 
 ### 中级开发者路径

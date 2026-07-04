@@ -526,8 +526,8 @@ loop {
 
 - [Tokio 异步运行时架构](06_tokio_architecture.md)
 - [Clap CLI 解析架构](04_clap_architecture.md)
-- [并发编程模型](../../../../concept/03_advanced/01_concurrency.md)
-- [异步编程模型](../../../../concept/03_advanced/02_async.md)
+- [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
+- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
 - [事件驱动与系统可组合性](../../../../concept/06_ecosystem/30_system_composability.md)
 
 ---

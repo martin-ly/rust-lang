@@ -495,7 +495,7 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [研究笔记规范](README.md#研究笔记规范)
+- [研究笔记规范](../../README.md#研究笔记规范)
 - [研究笔记模板](10_template.md)
 - [贡献指南](10_contributing.md)
 - [快速参考](10_quick_reference.md)

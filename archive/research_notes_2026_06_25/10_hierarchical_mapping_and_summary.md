@@ -148,7 +148,7 @@ research_notes/
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-以下为 research_notes 文档与思维表征（思维导图、多维矩阵、证明树、决策树）的对应关系；思维表征主文档位于 [04_thinking](../04_thinking/README.md)。
+以下为 research_notes 文档与思维表征（思维导图、多维矩阵、证明树、决策树）的对应关系；思维表征主文档位于 [04_thinking](../../README.md)。
 
 ### 3.1 按文档 → 思维表征
 
@@ -292,7 +292,7 @@ research_notes/
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

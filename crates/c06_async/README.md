@@ -962,7 +962,7 @@ kubectl get pods -n rust-async-190
 - [异步语言特性文档](docs/async_language_features_190.md)
 - [Tokio 最佳实践](docs/tokio_best_practices_2025.md)
 - [Smol 最佳实践](docs/smol_best_practices_2025.md)
-- [社区贡献指南](COMMUNITY_CONTRIBUTION_GUIDE.md)
+- [社区贡献指南](community_contribution_guide.md)
 - [项目完成报告](RUST_190_ASYNC_PROJECT_FINAL_COMPLETION_REPORT.md)
 
 ### 🔬 形式化理论
@@ -991,7 +991,7 @@ kubectl get pods -n rust-async-190
 
 ## 🤝 贡献
 
-我们欢迎社区贡献！请参阅 [社区贡献指南](COMMUNITY_CONTRIBUTION_GUIDE.md) 了解如何参与。
+我们欢迎社区贡献！请参阅 [社区贡献指南](community_contribution_guide.md) 了解如何参与。
 
 ### 贡献方式
 

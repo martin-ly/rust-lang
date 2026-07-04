@@ -3,7 +3,7 @@
 >
 > 高级类型系统 (Advanced Type System) · 类型推断 (Type Inference) ·
 > 高阶类型 (Higher-Kinded Type) · 类型族 (Type Family)
-> — [完整对照表](../../00_meta/terminology_glossary.md)
+> — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 高级类型系统：从关联类型到类型级编程
 >
@@ -16,7 +16,7 @@
 > **双维定位**: C×Ana — 分析高级类型系统（Type System）特性的形式化边界
 > **定位**: 深入分析 Rust **类型系统（Type System）的高级特性**——从 GATs、impl Trait 到类型级计算和 const generics，揭示 Rust 如何在保持编译期安全的同时提供强大的抽象能力。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Generics](../01_generics/02_generics.md) · [Traits](../00_traits/01_traits.md)
-> **后置概念**: [RustBelt](../../04_formal/04_rustbelt.md) · [Category Theory](../../04_formal/10_category_theory.md)
+> **后置概念**: [RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) · [Category Theory](../../04_formal/00_type_theory/10_category_theory.md)
 
 ---
 
@@ -758,7 +758,7 @@ impl Container for BadWrapper {
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 类型系统基础
 - [Generics](../01_generics/02_generics.md) — 泛型系统
 - [Traits](../00_traits/01_traits.md) — Trait 系统
-- [RustBelt](../../04_formal/04_rustbelt.md) — 形式化验证
+- [RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) — 形式化验证
 
 ---
 
@@ -946,7 +946,7 @@ fn main() {}
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

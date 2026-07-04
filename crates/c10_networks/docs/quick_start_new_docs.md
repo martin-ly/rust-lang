@@ -42,11 +42,11 @@
 
 | 想要...      | 推荐文档                                                                               | 耗时   |
 | :--- | :--- | :--- |
-| **了解全局** | [思维导图](RUST_190_COMPREHENSIVE_EXAMPLES.md)                                         | 5分钟  |
+| **了解全局** | [思维导图](rust_190_comprehensive_examples.md)                                         | 5分钟  |
 | **理解概念** | [知识图谱](theory/knowledge_graph_and_concept_relations.md)                            | 15分钟 |
 | **技术选型** | [多维矩阵](theory/multi_dimensional_comparison_matrix.md)                              | 20分钟 |
-| **动手实践** | [实战示例1](RUST_190_EXAMPLES_COLLECTION.md) + [实战示例2](RUST_190_EXAMPLES_PART2.md) | 60分钟 |
-| **系统学习** | [文档索引](RUST_190_PRACTICAL_EXAMPLES.md)                                             | 10分钟 |
+| **动手实践** | [实战示例1](rust_190_examples_collection.md) + [实战示例2](rust_190_examples_part2.md) | 60分钟 |
+| **系统学习** | [文档索引](rust_190_practical_examples.md)                                             | 10分钟 |
 
 ---
 
@@ -117,10 +117,10 @@ Week 4: 综合应用
 
 **推荐顺序**:
 
-1. 📖 [思维导图](RUST_190_COMPREHENSIVE_EXAMPLES.md) - 了解知识结构
+1. 📖 [思维导图](rust_190_comprehensive_examples.md) - 了解知识结构
 2. 📊 [知识图谱](theory/knowledge_graph_and_concept_relations.md) - 理解基础概念
-3. 💻 [实战示例1](RUST_190_EXAMPLES_COLLECTION.md) - 动手编写 TCP/UDP
-4. 💻 [实战示例2](RUST_190_EXAMPLES_PART2.md) - HTTP/WebSocket 实践
+3. 💻 [实战示例1](rust_190_examples_collection.md) - 动手编写 TCP/UDP
+4. 💻 [实战示例2](rust_190_examples_part2.md) - HTTP/WebSocket 实践
 
 **关键点**:
 
@@ -134,7 +134,7 @@ Week 4: 综合应用
 
 1. 📊 [多维矩阵](theory/multi_dimensional_comparison_matrix.md) - 全面对比
 2. 📊 [知识图谱](theory/knowledge_graph_and_concept_relations.md) - 依赖关系
-3. 💻 [实战示例](RUST_190_EXAMPLES_COLLECTION.md) - 验证决策
+3. 💻 [实战示例](rust_190_examples_collection.md) - 验证决策
 
 **关键点**:
 
@@ -146,8 +146,8 @@ Week 4: 综合应用
 
 **使用方法**:
 
-1. 📖 [文档索引](RUST_190_PRACTICAL_EXAMPLES.md) - 查找相关主题
-2. 💻 [实战示例](RUST_190_EXAMPLES_COLLECTION.md) - 找对应代码
+1. 📖 [文档索引](rust_190_practical_examples.md) - 查找相关主题
+2. 💻 [实战示例](rust_190_examples_collection.md) - 找对应代码
 3. 📊 [知识图谱](theory/knowledge_graph_and_concept_relations.md) - 理解原理
 
 **快速查找**:
@@ -164,7 +164,7 @@ Week 4: 综合应用
 
 1. 📊 [知识图谱](theory/knowledge_graph_and_concept_relations.md) - 整体架构
 2. 📊 [多维矩阵](theory/multi_dimensional_comparison_matrix.md) - 技术对比
-3. 💻 [实战示例](RUST_190_EXAMPLES_PART2.md) - 实现参考
+3. 💻 [实战示例](rust_190_examples_part2.md) - 实现参考
 
 **关键点**:
 
@@ -266,8 +266,8 @@ Week 4: 综合应用
 
 ### 遇到问题？
 
-1. **查文档**: 先在[文档索引](RUST_190_PRACTICAL_EXAMPLES.md)中搜索
-2. **看示例**: 查看[实战示例](RUST_190_EXAMPLES_COLLECTION.md)中的类似代码
+1. **查文档**: 先在[文档索引](rust_190_practical_examples.md)中搜索
+2. **看示例**: 查看[实战示例](rust_190_examples_collection.md)中的类似代码
 3. **查对比**: 在[多维矩阵](theory/multi_dimensional_comparison_matrix.md)中找替代方案
 4. **提Issue**: 如果还是解决不了，提交 GitHub Issue
 
@@ -285,8 +285,8 @@ Week 4: 综合应用
 
 **推荐起点**:
 
-- 📖 [思维导图](RUST_190_COMPREHENSIVE_EXAMPLES.md) - 5分钟了解全局
-- 💻 [实战示例1](RUST_190_EXAMPLES_COLLECTION.md) - 动手编写第一个程序
+- 📖 [思维导图](rust_190_comprehensive_examples.md) - 5分钟了解全局
+- 💻 [实战示例1](rust_190_examples_collection.md) - 动手编写第一个程序
 
 ---
 

@@ -2,8 +2,8 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [异步编程](../../../../concept/03_advanced/02_async.md)
-> - [网络编程](../../../../concept/03_advanced/18_network_programming.md)
+> - [异步编程](../../../../concept/03_advanced/01_async/02_async.md)
+> - [网络编程](../../../../concept/03_advanced/06_low_level_patterns/18_network_programming.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **⚠️ 历史文档提示**：
@@ -528,9 +528,9 @@ graph BT
 
 - [Tokio 异步运行时架构](06_tokio_architecture.md)
 - [Crossbeam 无锁并发架构](19_crossbeam_architecture.md)
-- [并发编程模型](../../../../concept/03_advanced/01_concurrency.md)
-- [异步编程模型](../../../../concept/03_advanced/02_async.md)
-- [网络编程](../../../../concept/03_advanced/18_network_programming.md)
+- [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
+- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
+- [网络编程](../../../../concept/03_advanced/06_low_level_patterns/18_network_programming.md)
 - [系统可组合性设计模式](../../../../concept/06_ecosystem/30_system_composability.md)
 
 ---

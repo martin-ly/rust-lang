@@ -11,7 +11,7 @@
 > **Bloom 层级**: 分析 → 创造
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Cre — 设计高可靠分布式系统的数据持久化模式
-> **前置依赖**: [Async](../03_advanced/02_async.md) · 事件驱动架构 · [泛型（Generics）](../02_intermediate/01_generics/02_generics.md) · [Trait](../02_intermediate/00_traits/01_traits.md)
+> **前置依赖**: [Async](../03_advanced/01_async/02_async.md) · 事件驱动架构 · [泛型（Generics）](../02_intermediate/01_generics/02_generics.md) · [Trait](../02_intermediate/00_traits/01_traits.md)
 > **后置延伸**: [分布式系统](18_distributed_systems.md) · [微服务架构模式](31_microservice_patterns.md) · [云原生](24_cloud_native.md)
 >
 > **来源**: [eventstore-rs](https://docs.rs/eventstore/) · [cqrs-es](https://docs.rs/cqrs-es/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -29,7 +29,7 @@
 > [来源: [Young — CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)] ·
 > [来源: [Axon Framework](https://docs.axoniq.io/reference-guide/)]
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -53,7 +53,7 @@
   - [五、CQRS+ES 协同模式](#五cqrses-协同模式)
     - [5.1 Saga / Process Manager 编排](#51-saga--process-manager-编排)
     - [5.2 Outbox 模式：保证事件发布](#52-outbox-模式保证事件发布)
-    - [5.3 读模型的最终一致性（Coherence）](#53-读模型的最终一致性)
+    - [5.3 读模型的最终一致性](#53-读模型的最终一致性)
   - [六、Rust 实现](#六rust-实现)
     - [6.1 事件定义与序列化](#61-事件定义与序列化)
     - [6.2 命令处理器](#62-命令处理器)
@@ -63,7 +63,7 @@
     - [7.1 反命题树](#71-反命题树)
     - [7.2 边界极限](#72-边界极限)
   - [十、边界测试](#十边界测试)
-    - [10.1 边界测试：无快照的查询退化（运行时（Runtime）性能）](#101-边界测试无快照的查询退化运行时性能)
+    - [10.1 边界测试：无快照的查询退化（运行时性能）](#101-边界测试无快照的查询退化运行时性能)
     - [10.2 边界测试：双写不一致导致数据丢失（逻辑错误）](#102-边界测试双写不一致导致数据丢失逻辑错误)
     - [10.3 边界测试：事件模式演化破坏反序列化（编译/运行时错误）](#103-边界测试事件模式演化破坏反序列化编译运行时错误)
   - [相关概念文件](#相关概念文件)
@@ -71,7 +71,7 @@
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：CQRS（命令查询职责分离）的核心思想是什么？与传统 CRUD 架构有什么区别？（理解层）](#测验-1cqrs命令查询职责分离的核心思想是什么与传统-crud-架构有什么区别理解层)
     - [测验 2：Event Sourcing（事件溯源）中，系统状态如何重建？（理解层）](#测验-2event-sourcing事件溯源中系统状态如何重建理解层)
-    - [测验 3：Rust 的强类型系统（Type System）对实现 CQRS/Event Sourcing 有什么帮助？（理解层）](#测验-3rust-的强类型系统对实现-cqrsevent-sourcing-有什么帮助理解层)
+    - [测验 3：Rust 的强类型系统对实现 CQRS/Event Sourcing 有什么帮助？（理解层）](#测验-3rust-的强类型系统对实现-cqrsevent-sourcing-有什么帮助理解层)
     - [测验 4：在 Event Sourcing 中，如何处理"事件 schema 演进"（Event Schema Evolution）？（理解层）](#测验-4在-event-sourcing-中如何处理事件-schema-演进event-schema-evolution理解层)
     - [测验 5：CQRS + Event Sourcing 相比传统架构增加了什么复杂度？什么场景下不值得使用？（理解层）](#测验-5cqrs--event-sourcing-相比传统架构增加了什么复杂度什么场景下不值得使用理解层)
   - [认知路径](#认知路径)
@@ -1366,8 +1366,8 @@ fn good_deserialization() {
 - [分布式系统](18_distributed_systems.md) — gRPC、Raft、Actor、消息队列
 - [云原生](24_cloud_native.md) — Kubernetes、容器化、可观测性
 - [架构设计模式](35_architecture_patterns.md) — 分层/六边形/洋葱/整洁架构
-- [Async/Await](../03_advanced/02_async.md) — 异步编程基础
-- [公理语义](../04_formal/20_axiomatic_semantics.md) — Hoare 逻辑、wp 计算
+- [Async/Await](../03_advanced/01_async/02_async.md) — 异步编程基础
+- [公理语义](../04_formal/03_operational_semantics/20_axiomatic_semantics.md) — Hoare 逻辑、wp 计算
 
 > **过渡**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

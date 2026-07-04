@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计嵌入式系统架构
 > **定位**: 探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全（Memory Safety）如何保证关键系统的可靠性。
-> **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) ·
+> **前置概念**: [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) ·
 > [Memory Management](../02_intermediate/02_memory_management/03_memory_management.md) ·
 > [Type System](../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [Cross Compilation](17_cross_compilation.md) ·
@@ -25,7 +25,7 @@
 > [Rust Embedded Working Group](https://github.com/rust-embedded/wg) ·
 > [Wikipedia — Embedded System](https://en.wikipedia.org/wiki/Embedded_system) ·
 > [Ferrous Systems](https://ferrous-systems.com/)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -686,7 +686,7 @@ fn main() {
 
 ## 相关概念文件
 
-- [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust
+- [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) — unsafe Rust
 - [Memory Management](../02_intermediate/02_memory_management/03_memory_management.md) — 内存管理
 - [Cross Compilation](17_cross_compilation.md) — 交叉编译
 - [Performance](15_performance_optimization.md) — 性能优化

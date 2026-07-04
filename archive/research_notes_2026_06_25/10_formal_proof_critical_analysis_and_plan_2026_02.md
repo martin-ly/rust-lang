@@ -63,7 +63,7 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [形式化证明系统指南](10_formal_proof_system_guide.md)
-- [研究笔记主索引](README.md)
+- [研究笔记主索引](../../README.md)
 
 ---
 
@@ -126,7 +126,7 @@
 
 ## 相关概念
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

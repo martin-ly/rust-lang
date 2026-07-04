@@ -11,7 +11,7 @@
 > **后置概念**: N/A
 ---
 
-> **来源**: · [自测题库](../../00_meta/self_assessment.md) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: · [自测题库](../../00_meta/04_navigation/self_assessment.md) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [The Rust Programming Language — Ch7 Managing Growing Projects](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) ·
 > [The Rust Programming Language — Ch11 Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)
 >

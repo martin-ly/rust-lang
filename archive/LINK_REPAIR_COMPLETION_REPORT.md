@@ -100,7 +100,7 @@
 保留链接但添加归档说明：
 
 ```markdown
-~~RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md~~ (已归档: [归档路径](process_reports/2026_02/README.md))
+~~RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md~~ (已归档: [归档路径](../README.md))
 ```
 
 ### 方法3: 修正文件名和路径

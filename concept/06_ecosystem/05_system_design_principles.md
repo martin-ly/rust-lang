@@ -33,11 +33,11 @@
   - [零、TL;DR —— 系统设计原则速查](#零tldr--系统设计原则速查)
   - [一、权威来源与设计原则分类学](#一权威来源与设计原则分类学)
   - [二、七项核心设计原则](#二七项核心设计原则)
-    - [2.1 内存安全（Memory Safety）：Capability-Based Security](#21-内存安全capability-based-security)
-    - [2.2 并发安全（Concurrency Safety）：Session Types 编译期编码](#22-并发安全session-types-编译期编码)
-    - [2.3 零成本抽象（Zero-Cost Abstraction）：Stroustrup 原则](#23-零成本抽象stroustrup-原则)
+    - [2.1 内存安全：Capability-Based Security](#21-内存安全capability-based-security)
+    - [2.2 并发安全：Session Types 编译期编码](#22-并发安全session-types-编译期编码)
+    - [2.3 零成本抽象：Stroustrup 原则](#23-零成本抽象stroustrup-原则)
     - [2.4 组件组合：范畴论态射复合](#24-组件组合范畴论态射复合)
-    - [2.5 分布式一致性（Coherence）：从所有权（Ownership）到共识的隐喻](#25-分布式一致性从所有权到共识的隐喻)
+    - [2.5 分布式一致性：从所有权到共识的隐喻](#25-分布式一致性从所有权到共识的隐喻)
     - [2.6 安全边界：Zero Trust + WASI 能力安全](#26-安全边界zero-trust--wasi-能力安全)
     - [2.7 容错设计：Error Kernel + Let It Crash](#27-容错设计error-kernel--let-it-crash)
   - [三、系统设计决策矩阵](#三系统设计决策矩阵)
@@ -58,15 +58,15 @@
   - [十、边界测试：系统设计原则的编译错误](#十边界测试系统设计原则的编译错误)
     - [10.1 边界测试：Send/Sync 违反导致跨线程共享状态（编译错误）](#101-边界测试sendsync-违反导致跨线程共享状态编译错误)
     - [10.2 边界测试：trait 对象的安全性约束（编译错误）](#102-边界测试trait-对象的安全性约束编译错误)
-    - [10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时（Runtime）开销）](#105-边界测试依赖注入与-trait-object-的性能权衡运行时开销)
+    - [10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时开销）](#105-边界测试依赖注入与-trait-object-的性能权衡运行时开销)
     - [10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）](#105-边界测试过度工程化的类型状态机编译复杂度爆炸)
-    - [10.3 边界测试：过度泛型（Generics）化导致的单态化（Monomorphization）膨胀（编译后体积爆炸）](#103-边界测试过度泛型化导致的单态化膨胀编译后体积爆炸)
+    - [10.3 边界测试：过度泛型化导致的单态化膨胀（编译后体积爆炸）](#103-边界测试过度泛型化导致的单态化膨胀编译后体积爆炸)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 中"零成本抽象"（Zero-Cost Abstractions）对系统架构设计意味着什么？（理解层）](#测验-1rust-中零成本抽象zero-cost-abstractions对系统架构设计意味着什么理解层)
     - [测验 2：在 Rust 微服务架构中，为什么选择 `tokio` 而非多线程模型？（理解层）](#测验-2在-rust-微服务架构中为什么选择-tokio-而非多线程模型理解层)
-    - [测验 3：Rust 的 `trait` 系统在解耦模块（Module）时有什么优势？（理解层）](#测验-3rust-的-trait-系统在解耦模块时有什么优势理解层)
-    - [测验 4：什么是"错误即类型"（Errors as Values）？Rust 如何通过类型系统（Type System）实现它？（理解层）](#测验-4什么是错误即类型errors-as-valuesrust-如何通过类型系统实现它理解层)
+    - [测验 3：Rust 的 `trait` 系统在解耦模块时有什么优势？（理解层）](#测验-3rust-的-trait-系统在解耦模块时有什么优势理解层)
+    - [测验 4：什么是"错误即类型"（Errors as Values）？Rust 如何通过类型系统实现它？（理解层）](#测验-4什么是错误即类型errors-as-valuesrust-如何通过类型系统实现它理解层)
     - [测验 5：在设计高可用 Rust 系统时，`Arc<Mutex<T>>` 与消息传递（channel）各适合什么场景？（理解层）](#测验-5在设计高可用-rust-系统时arcmutext-与消息传递channel各适合什么场景理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -461,14 +461,14 @@ graph TD
 >
 
 - [L7 形式化方法工业化](../07_future/02_formal_methods.md) —— 五层形式化扩展的详细展开
-- [L3 并发](../03_advanced/01_concurrency.md) —— Send/Sync 与 fearless concurrency
-- [L3 异步](../03_advanced/02_async.md) —— async/await 与 Tower 组合
-- [L4 RustBelt](../04_formal/04_rustbelt.md) —— Iris 逻辑与安全证明
+- [L3 并发](../03_advanced/00_concurrency/01_concurrency.md) —— Send/Sync 与 fearless concurrency
+- [L3 异步](../03_advanced/01_async/02_async.md) —— async/await 与 Tower 组合
+- [L4 RustBelt](../04_formal/02_separation_logic/04_rustbelt.md) —— Iris 逻辑与安全证明
 - [L5 Rust vs Go](../05_comparative/02_rust_vs_go.md) —— 并发模型哲学对比
 - [L6 惯用法谱系](34_idioms_spectrum.md) —— 架构级惯用法
 - [L6 设计模式](02_patterns.md) —— Error Kernel / 洋葱中间件
-- [L0 可判定性谱系](../00_meta/decidability_spectrum.md) —— 系统设计的判定性边界
-- [L0 表达力多视角](../00_meta/expressiveness_multiview.md) —— 安全语义视角
+- [L0 可判定性谱系](../00_meta/00_framework/decidability_spectrum.md) —— 系统设计的判定性边界
+- [L0 表达力多视角](../00_meta/00_framework/expressiveness_multiview.md) —— 安全语义视角
 
 ## 七、系统设计决策的知识流动图
 
@@ -540,7 +540,7 @@ graph LR
 
 ---
 
-> **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [能力图谱](../00_meta/competency_graph.md) · [安全边界](../05_comparative/04_safety_boundaries.md)
+> **相关文件**: [问题图谱](../00_meta/04_navigation/problem_graph.md) · [能力图谱](../00_meta/00_framework/competency_graph.md) · [安全边界](../05_comparative/04_safety_boundaries.md)
 
 ## 十、边界测试：系统设计原则的编译错误
 

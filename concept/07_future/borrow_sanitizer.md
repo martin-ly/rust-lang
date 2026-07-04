@@ -26,9 +26,9 @@
 > - [跟踪 Issue rust-lang/rust#126567](https://github.com/rust-lang/rust/issues/126567)
 >
 > **前置概念**:
-> [Unsafe](../03_advanced/03_unsafe.md) ·
+> [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) ·
 > [Miri](../04_expert/miri) ·
-> [Tree Borrows](../04_formal/03_ownership_formal.md)
+> [Tree Borrows](../04_formal/01_ownership_logic/03_ownership_formal.md)
 >
 > **后置概念**:
 > [Formal Methods](02_formal_methods.md) ·

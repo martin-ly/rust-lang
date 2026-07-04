@@ -120,7 +120,7 @@
 **Def BP2（实质内容完备）**：研究笔记 $N$ 满足**实质内容完备**，当且仅当 $N$ 含：
 形式化（Def/定理）、可运行代码、典型场景、反例或边界、
 与 [formal_methods](formal_methods/README.md)、
-[type_theory](type_theory/README.md)、
+[type_theory](../../README.md)、
 [PROOF_INDEX](10_proof_index.md) 的交叉引用。
 
 **实践对照表**：
@@ -171,7 +171,7 @@ fn example_anti_pattern() {
 
 **Def BP3（实质内容不足）**：研究笔记 $N$ 存在**实质内容不足**，当且仅当 $N$ 存在以下至少一项：无 Def/定理或仅占位、
 无可运行代码或代码与论点无关、无典型场景或仅泛泛描述、无反例或边界说明、
-无与 [formal_methods](formal_methods/README.md)/[type_theory](type_theory/README.md)/[PROOF_INDEX](10_proof_index.md) 的交叉引用。
+无与 [formal_methods](formal_methods/README.md)/[type_theory](../../README.md)/[PROOF_INDEX](10_proof_index.md) 的交叉引用。
 
 **常见无实质内容表现**：
 
@@ -854,7 +854,7 @@ git commit -m "添加所有权模型形式化研究笔记
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

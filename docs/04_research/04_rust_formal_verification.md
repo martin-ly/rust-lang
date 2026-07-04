@@ -307,7 +307,7 @@ impl<T> Vec<T> {
 | **Kani + VeriFast stdlib** | 联合倡议 (2025) | 使用 Kani 和 VeriFast 形式化验证 Rust 标准库子集，建立可验证标准库基线 | 🚧 推进中 |
 
 > **⟹ 关键洞察**: 2025–2026 年的趋势是 **"AI × 形式化验证"** —— KVerus/AutoVerus 利用 LLM 降低证明门槛，而 Vest/Creusot 持续扩展工业级验证覆盖。Miri 的 Tree Borrows 默认化标志着别名模型从学术研究进入日常开发工具链。
-> [来源: [concept/04_formal/05_verification_toolchain.md](../../concept/04_formal/05_verification_toolchain.md) §7]
+> [来源: [concept/04_formal/05_verification_toolchain.md](../../concept/04_formal/04_model_checking/05_verification_toolchain.md) §7]
 
 ---
 
@@ -503,9 +503,9 @@ impl<T> Vec<T> {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
-- [形式化验证工具链 (concept)](../../concept/04_formal/05_verification_toolchain.md) — 概念层工具链全景与 2026 状态矩阵
+- [形式化验证工具链 (concept)](../../concept/04_formal/04_model_checking/05_verification_toolchain.md) — 概念层工具链全景与 2026 状态矩阵
 - [Tree Borrows (concept)](../../concept/01_foundation/03_values_and_references/05_reference_semantics.md) — PLDI 2025 Distinguished Paper 别名模型详解
-- [安全关键认证 (concept)](../../concept/04_formal/16_aerospace_certification_formal_methods.md) — Ferrocene 认证与形式化方法工业映射
+- [安全关键认证 (concept)](../../concept/04_formal/04_model_checking/16_aerospace_certification_formal_methods.md) — Ferrocene 认证与形式化方法工业映射
 
 ---
 

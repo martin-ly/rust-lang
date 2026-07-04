@@ -12,14 +12,14 @@
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用数据库访问模式
 > **定位**: 分析 Rust 的数据库访问生态——从 SQLx 的编译期检查到 Diesel 的 ORM [来源: [Wikipedia — ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)]，探讨类型安全如何消除运行时（Runtime）查询错误。
-> **前置概念**: [Async](../03_advanced/02_async.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) · [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md)
+> **前置概念**: [Async](../03_advanced/01_async/02_async.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) · [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md)
 > **后置概念**: [Performance](15_performance_optimization.md) · [Web Development](04_application_domains.md)
 >
 > **来源**: [Diesel](https://docs.rs/diesel/) · [SQLx](https://docs.rs/sqlx/) · [tokio-postgres](https://docs.rs/tokio-postgres/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [SQLx](https://github.com/launchbadge/sqlx) · [Diesel](https://diesel.rs/) · [SeaORM](https://www.sea-ql.org/SeaORM/) · [Rust Database Guide](https://rust-lang-nursery.github.io/rust-cookbook/database.html) · [Wikipedia — ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -591,7 +591,7 @@ fn main() {
 
 ## 相关概念文件
 
-- [Async](../03_advanced/02_async.md) — 异步编程
+- [Async](../03_advanced/01_async/02_async.md) — 异步编程
 - [Type System](../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) — 错误处理（Error Handling）
 - [Performance](15_performance_optimization.md) — 性能优化

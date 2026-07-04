@@ -2,7 +2,7 @@
 
 > **说明**: 本文档为历史研究材料，最新内容请参阅 [knowledge/03_advanced/unsafe/04_unsafe_rust.md](../../../knowledge/03_advanced/unsafe/04_unsafe_rust.md)
 
-> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/03_advanced/03_unsafe.md](../../../concept/03_advanced/03_unsafe.md)
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/03_advanced/03_unsafe.md](../../../../../concept/03_advanced/02_unsafe/03_unsafe.md)
 
 ---
 
@@ -466,8 +466,8 @@ impl<T> Drop for UniquePtr<T> {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [formal_methods 目录](README.md)
-- [上级目录](../README.md)
+- [formal_methods 目录](../../../../../README.md)
+- [上级目录](../../../../../README.md)
 
 ---
 

@@ -998,8 +998,8 @@ mindmap
 
 ## 🔗 相关文档
 
-- [知识图谱](KNOWLEDGE_GRAPH.md) - 模式关系网络详解
-- [多维矩阵对比](MULTIDIMENSIONAL_MATRIX_COMPARISON.md) - 详细性能数据
+- [知识图谱](knowledge_graph.md) - 模式关系网络详解
+- [多维矩阵对比](multidimensional_matrix_comparison.md) - 详细性能数据
 - [Rust 1.92.0 示例集](RUST_192_EXAMPLES.md) - 最新特性示例（自 Rust 1.90 引入）
 - [综合指南](COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 完整理论
 

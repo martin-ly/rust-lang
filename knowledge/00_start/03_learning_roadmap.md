@@ -2,7 +2,7 @@
 
 > **EN**: Learning Roadmap
 > **Summary**: Rust 学习路线图 Learning Roadmap.
-> **相关概念**: [自我评估](../../concept/00_meta/self_assessment.md)
+> **相关概念**: [自我评估](../../concept/00_meta/04_navigation/self_assessment.md)
 > **从入门到精通的完整路径**
 > **总预计时间**: 200-400 小时
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust by Example](https://doc.rust-lang.org/rust-by-example/), [Rustlings](https://github.com/rust-lang/rustlings)

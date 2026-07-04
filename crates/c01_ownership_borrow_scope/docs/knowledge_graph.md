@@ -704,7 +704,7 @@ graph TB
 - [所有权理论](tier_04_advanced/06_type_system_theory.md) - 理论基础
 - [借用系统](tier_02_guides/02_borrowing_practice_guide.md) - 核心概念
 - [生命周期注解](tier_02_guides/03_lifetimes_practice.md) - 高级应用
-- [Rust 1.90 全面指南](RUST_190_COMPREHENSIVE_MINDMAP.md) - 最新特性
+- [Rust 1.90 全面指南](rust_190_comprehensive_mindmap.md) - 最新特性
 
 ### 实践指南
 

@@ -1,10 +1,10 @@
 # Rust 借用与引用 (Borrowing and References)
 
 > **📎 交叉引用**
-> 本主题在 concept 中有深度的概念分析：[借用](../../concept/01_foundation/02_borrowing.md)
+> 本主题在 concept 中有深度的概念分析：[借用](../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
 > **层次定位**: L1 基础概念 / 借用子域
 > **前置依赖**: [knowledge 所有权](04_ownership.md)
-> **后置延伸**: [knowledge Trait](../02_intermediate/06_traits.md) · [concept L1 借用](../../concept/01_foundation/02_borrowing.md)
+> **后置延伸**: [knowledge Trait](../02_intermediate/06_traits.md) · [concept L1 借用](../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L1 工程实践
 > **定理链编号**: T-010 借用唯一性 → T-011 生命周期包含
 >

@@ -2,7 +2,7 @@
 
 > **EN**: Rust 197 Features Cheatsheet (Beta / Nightly Candidate)
 > **Summary**: Rust 1.97 特性速查表（beta / nightly 候选）。当前最新稳定版为 1.96.1，1.97 尚未 stable。
-> **权威来源**: 本文对应权威来源为 [`concept/07_future/rust_1_97_preview.md`](../../../../concept/07_future/rust_1_97_preview.md)。
+> **权威来源**: 本文对应权威来源为 [`concept/07_future/rust_1_97_preview.md`](../../../concept/07_future/rust_1_97_preview.md)。
 > 本文与权威来源内容高度重叠；`concept/` 版本为项目权威主轨，本文保留作为快速参考。
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)

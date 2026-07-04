@@ -18,7 +18,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust**（编译型、强类型、内存安全（Memory Safety））与 **JavaScript**（解释型、动态类型、事件驱动）在语言语义、运行时（Runtime）模型、异步（Async）处理和生态工具链四个维度的本质差异，特别关注 WASM 作为两者交汇点的作用。
 > **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
-> **后置概念**: [WebAssembly](../06_ecosystem/11_webassembly.md) · [Async](../03_advanced/02_async.md)
+> **后置概念**: [WebAssembly](../06_ecosystem/11_webassembly.md) · [Async](../03_advanced/01_async/02_async.md)
 
 ---
 
@@ -29,7 +29,7 @@
 > [WASM Specification](https://webassembly.github.io/spec/) ·
 > [Rust and WASM](https://rustwasm.github.io/book/) ·
 > [V8 Blog](https://v8.dev/blog)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 
 ## 📑 目录
 
@@ -480,7 +480,7 @@ graph TD
 ## 相关概念文件
 
 - [WebAssembly](../06_ecosystem/11_webassembly.md) — WebAssembly 生态
-- [Async](../03_advanced/02_async.md) — 异步编程
+- [Async](../03_advanced/01_async/02_async.md) — 异步编程
 - [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）模型
 - [Rust vs Python](07_rust_vs_python.md) — Rust vs Python 对比
 

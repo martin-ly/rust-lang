@@ -1,8 +1,8 @@
 # Rust 字符串处理 (String Handling)
 
 > **📎 交叉引用**
-> 本主题在 concept 中有深度的概念分析：[字符串与文本](../../concept/01_foundation/09_strings_and_text.md)
-> **相关概念**: [字符串](../../concept/01_foundation/09_strings_and_text.md)
+> 本主题在 concept 中有深度的概念分析：[字符串与文本](../../../concept/01_foundation/06_strings_and_text/09_strings_and_text.md)
+> **相关概念**: [字符串](../../../concept/01_foundation/06_strings_and_text/09_strings_and_text.md)
 > **Bloom 层级**: 理解
 > 掌握 Rust 中字符串的所有细节 [来源: Rust Book Ch08 / 2024;
 > 核心设计决策: `String` 是堆分配的、拥有所有权的 UTF-8 字节缓冲区;

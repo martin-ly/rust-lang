@@ -13,10 +13,10 @@
 > **双维定位**: P×Ana — 分析 C/C++ 与 Rust 在二进制层面的工程差异
 > **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
 > [Type System](../01_foundation/02_type_system/04_type_system.md) ·
-> [Unsafe](../03_advanced/03_unsafe.md) ·
-> [FFI](../03_advanced/05_rust_ffi.md)
+> [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) ·
+> [FFI](../03_advanced/04_ffi/05_rust_ffi.md)
 > **后置概念**: [Memory Management](../02_intermediate/02_memory_management/03_memory_management.md) ·
-> [Pin/Unpin](../03_advanced/06_pin_unpin.md)
+> [Pin/Unpin](../03_advanced/01_async/06_pin_unpin.md)
 > **主要来源**: [Rust Foundation Interop Initiative] · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [Itanium C++ ABI Spec] ·
 > [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html) ·
@@ -27,7 +27,7 @@
 ---
 
 > **Bloom 层级**: 分析 → 评价
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 
 ## 一、核心命题
 

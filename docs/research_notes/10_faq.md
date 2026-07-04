@@ -120,7 +120,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**简短回答**: 使用 [快速参考](10_quick_reference.md) 或 [完整索引](INDEX.md)。
+**简短回答**: 使用 [快速参考](10_quick_reference.md) 或 [完整索引](../../concept/sources/INDEX.md)。
 
 **详细说明**:
 
@@ -131,7 +131,7 @@
 **相关资源**:
 
 - [快速参考](10_quick_reference.md)
-- [完整索引](INDEX.md)
+- [完整索引](../../concept/sources/INDEX.md)
 - [快速查找](10_quick_find.md)（按「我想理解…」查找）
 
 ---
@@ -299,7 +299,7 @@
 
 1. 更新相应目录的 README.md（添加新笔记链接）
 2. 更新 [主索引](README.md)（如需要）
-3. 更新 [完整索引](INDEX.md)（如需要）
+3. 更新 [完整索引](../../concept/sources/INDEX.md)（如需要）
 4. 更新 [快速参考](10_quick_reference.md)（如需要）
 
 **相关资源**:

@@ -446,7 +446,7 @@ c02_type_system/
 
 ### 快速开始
 
-1. 阅读 [README.md](docs/07_cargo_package_management/README.md)
+1. 阅读 [README.md](../../../README.md)
 2. 查看 [00_INDEX.md](docs/07_cargo_package_management/00_INDEX.md)
 3. 根据学习路径开始学习
 
@@ -509,9 +509,9 @@ c02_type_system/
 
 ### 入口文档
 
-- [🚀 快速开始](docs/07_cargo_package_management/README.md)
+- [🚀 快速开始](../../../README.md)
 - [📝 创建报告](docs/07_cargo_package_management/CREATION_REPORT.md)
-- [📦 主 README](README.md)
+- [📦 主 README](../../../README.md)
 
 ### 相关文档
 

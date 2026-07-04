@@ -19,7 +19,7 @@
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **双维定位**: P×App — 实施多层测试策略
 > **定位**: 系统分析 Rust 生态中的**测试方法论**——从内置测试框架到属性测试（proptest）、模糊测试（cargo-fuzz）、Miri 验证和形式化测试（Kani），构建多层次的质量保证体系。
-> **前置概念**: [Toolchain](01_toolchain.md) · [Unsafe](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md)
+> **前置概念**: [Toolchain](01_toolchain.md) · [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) · [FFI](../03_advanced/04_ffi/05_rust_ffi.md)
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -53,9 +53,9 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：测试策略的编译错误](#十边界测试测试策略的编译错误)
     - [10.1 边界测试：`#[should_panic]` 的误用（测试失败）](#101-边界测试should_panic-的误用测试失败)
-    - [10.2 边界测试：异步（Async）测试的运行时（Runtime）要求（编译错误）](#102-边界测试异步测试的运行时要求编译错误)
-    - [10.3 边界测试：属性宏（Macro）测试的顺序依赖（运行时测试失败）](#103-边界测试属性宏测试的顺序依赖运行时测试失败)
-    - [10.4 边界测试：`mockall` 的泛型（Generics） mock 限制（编译错误）](#104-边界测试mockall-的泛型-mock-限制编译错误)
+    - [10.2 边界测试：异步测试的运行时要求（编译错误）](#102-边界测试异步测试的运行时要求编译错误)
+    - [10.3 边界测试：属性宏测试的顺序依赖（运行时测试失败）](#103-边界测试属性宏测试的顺序依赖运行时测试失败)
+    - [10.4 边界测试：`mockall` 的泛型 mock 限制（编译错误）](#104-边界测试mockall-的泛型-mock-限制编译错误)
     - [10.5 边界测试：属性测试的 shrink 陷阱（测试覆盖盲区）](#105-边界测试属性测试的-shrink-陷阱测试覆盖盲区)
     - [10.3 边界测试：mockall 的期望设置与调用顺序验证（测试失败）](#103-边界测试mockall-的期望设置与调用顺序验证测试失败)
     - [补充定理链](#补充定理链)
@@ -448,8 +448,8 @@ jobs:
 ## 相关概念文件
 
 - [Toolchain](01_toolchain.md) — Rust 工具链
-- [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust
-- [FFI](../03_advanced/05_rust_ffi.md) — FFI 跨语言交互
+- [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) — unsafe Rust
+- [FFI](../03_advanced/04_ffi/05_rust_ffi.md) — FFI 跨语言交互
 - [Formal Methods](../07_future/02_formal_methods.md) — 形式化方法工业化
 
 ---

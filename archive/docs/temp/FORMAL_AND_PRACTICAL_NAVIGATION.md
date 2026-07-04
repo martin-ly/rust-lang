@@ -173,11 +173,11 @@
 
 #### 💻 实际代码
 
-- **[C11 宏系统模块](../../../crates/c11_macro_system/README.md)** - 完整的学习模块
-  - [代码示例](../../../crates/c11_macro_system/examples/README.md) - 宏系统实际代码示例
-  - [声明宏示例](../../../crates/c11_macro_system/examples/README.md) - `macro_rules!` 示例
-  - [过程宏示例](../../../crates/c11_macro_system/src/proc/README.md) - 过程宏实现
-  - [测试用例](../../../crates/c11_macro_system/tests/README.md) - 完整的测试套件
+- **[C11 宏系统模块](../../../README.md)** - 完整的学习模块
+  - [代码示例](../../../README.md) - 宏系统实际代码示例
+  - [声明宏示例](../../../README.md) - `macro_rules!` 示例
+  - [过程宏示例](../../../README.md) - 过程宏实现
+  - [测试用例](../../../README.md) - 完整的测试套件
 
 **学习路径**:
 
@@ -286,7 +286,7 @@
 - **[C05 线程模块](../../../crates/c05_threads/README.md)**
 - **[C06 异步编程模块](../../../crates/c06_async/README.md)**
 - **[C09 设计模式模块](../../../crates/c09_design_pattern/README.md)**
-- **[C11 宏系统模块](../../../crates/c11_macro_system/README.md)**
+- **[C11 宏系统模块](../../../README.md)**
 - **[工具链文档](../../../docs/06_toolchain/README.md)**
 
 ---

@@ -2,9 +2,9 @@
 
 > **📎 交叉引用**
 >
-> 本主题在 concept 中有深度的概念分析：[智能指针](../../concept/02_intermediate/12_smart_pointers.md)
+> 本主题在 concept 中有深度的概念分析：[智能指针](../../../concept/02_intermediate/02_memory_management/12_smart_pointers.md)
 >
-> **相关概念**: [智能指针](../../concept/02_intermediate/03_memory_management.md)
+> **相关概念**: [智能指针](../../../concept/02_intermediate/02_memory_management/03_memory_management.md)
 > **Bloom 层级**: 理解
 > **📌 简介**: 智能指针是在所有权模型基础上提供的抽象，允许超出普通引用的内存管理模式：堆分配（`Box<T>`）、共享所有权（`Rc<T>`/`Arc<T>`）、内部可变性（`RefCell<T>`/`Mutex<T>`）。它们是 Rust 所有权系统的补充，而非替代。
 >

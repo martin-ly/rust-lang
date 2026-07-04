@@ -748,9 +748,9 @@ fn main() {
 - [安全实践](19_security_practices.md) — 沙箱化、能力模型与最小权限原则
 - [性能优化](15_performance_optimization.md) — SIMD、内存布局、缓存优化与零拷贝
 - [跨编译](17_cross_compilation.md) — 目标三元组、条件编译与平台抽象
-- [FFI](../03_advanced/05_rust_ffi.md) — 跨语言边界、ABI 兼容与 unsafe 封装
-- [Unsafe Rust](../03_advanced/03_unsafe.md) — 原始指针（Raw Pointer）、FFI 边界与 UB 规避
-- [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、线程模型与异步（Async）运行时
+- [FFI](../03_advanced/04_ffi/05_rust_ffi.md) — 跨语言边界、ABI 兼容与 unsafe 封装
+- [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) — 原始指针（Raw Pointer）、FFI 边界与 UB 规避
+- [并发编程](../03_advanced/00_concurrency/01_concurrency.md) — Send/Sync、线程模型与异步（Async）运行时
 - [类型系统（Type System）](../01_foundation/02_type_system/04_type_system.md) — 泛型（Generics）、Trait 与零成本抽象（Zero-Cost Abstraction）
 
 ---

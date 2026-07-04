@@ -20,7 +20,7 @@
   - `[计算理论]` → [Theory of Computation](https://en.wikipedia.org/wiki/Theory_of_computation)
   - `[Felleisen 表达力理论]` → [Felleisen — On the Expressive Power of Programming Languages](https://doi.org/10.1007/BF00119822)
   - `[PL 语义学经典]` → [Programming Language Semantics](https://en.wikipedia.org/wiki/Semantics_(computer_science))
-  - `[concept/知识体系规范]` → [concept/知识体系规范](authority_source_map.md)
+  - `[concept/知识体系规范]` → [concept/知识体系规范](../../../concept/00_meta/02_sources/authority_source_map.md)
   - `[Bloom Taxonomy 2001]` → [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy)
   - `[The Rust Programming Language](https://doc.rust-lang.org/book/)` → [The Rust Programming Language](https://doc.rust-lang.org/book/)
 

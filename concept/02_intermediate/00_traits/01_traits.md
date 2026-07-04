@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 > [综述级]
-> **本节关键术语**: 特征 (Trait) · 实现 (Implement) · 孤儿规则 (Orphan Rule) · 一致性 (Coherence) · 对象安全 (Object Safety) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 特征 (Trait) · 实现 (Implement) · 孤儿规则 (Orphan Rule) · 一致性 (Coherence) · 对象安全 (Object Safety) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 
 # Traits（Trait 系统）
@@ -16,8 +16,8 @@
 > **双维定位**: C×Ana — 分析 Orphan Rule 的设计意图
 > **前置依赖**: L1 类型系统（Type System） ·
 > [L1 所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
-> **后置延伸**: [L3 并发](../../03_advanced/01_concurrency.md) ·
-> [L4 类型论](../../04_formal/02_type_theory.md) ·
+> **后置延伸**: [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md) ·
+> [L4 类型论](../../04_formal/00_type_theory/02_type_theory.md) ·
 > [L6 设计模式](../../06_ecosystem/02_patterns.md)
 > **跨层映射**: L2→L4 Trait ↔ 类型类 (Type Class) | L2→L3 Send/Sync Trait
 > **定理链编号**: T-020 特质一致性（Coherence） → T-021 孤儿规则（Orphan Rule）完备性 → T-022 关联类型规范化
@@ -25,8 +25,8 @@
 > **前置概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) ·
 > [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **后置概念**: [Generics](../01_generics/02_generics.md) ·
-> [Concurrency](../../03_advanced/01_concurrency.md) ·
-> [Async](../../03_advanced/02_async.md)
+> [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
+> [Async](../../03_advanced/01_async/02_async.md)
 > **主要来源**: [TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html) ·
 > [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class) ·
@@ -533,7 +533,7 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 
 > **一致性检查**: Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl（链 A），且 Trait 对象安全 ⟹ dyn Trait 可行性（链 B），形成**从定义约束到使用能力**的两条正交推理链。
 > Auto Trait 推导是编译器对结构性质的自动证明，Blanket impl 提供全称量词的默认行为，`impl Trait` 引入存在量化——三者与对象安全共同构成 Trait 系统的"静动两面"。
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
 > **过渡到示例与反例**:
 > 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？
 > 下一节通过正例展示定理的适用场景，通过反例揭示定理失效的精确条件——特别是 E0117、E0119、E0038 等编译错误的触发机制，将抽象定理映射到具体代码行为。
@@ -1634,9 +1634,9 @@ fn notify<T: Summary>(item: &T) { ... }
 | 泛型与单态化 | [02_generics.md](../01_generics/02_generics.md) | Trait Bounds 的载体 |
 | 所有权（Ownership）与生命周期（Lifetimes） | [01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Trait 方法签名的基础约束 |
 | 类型系统基础 | [01_foundation/02_type_system/04_type_system.md](../../01_foundation/02_type_system/04_type_system.md) | Trait 的理论前提 |
-| 并发与 Send/Sync | [03_advanced/01_concurrency.md](../../03_advanced/01_concurrency.md) | Auto Trait 的核心应用 |
-| 异步（Async）与 Future | 03_advanced/02_async.md | 关联类型 Trait 的典型场景 |
-| 形式化验证 | [04_formal/04_rustbelt.md](../../04_formal/04_rustbelt.md) | Trait 系统的逻辑基础 |
+| 并发与 Send/Sync | [03_advanced/00_concurrency/01_concurrency.md](../../03_advanced/00_concurrency/01_concurrency.md) | Auto Trait 的核心应用 |
+| 异步（Async）与 Future | 03_advanced/01_async/02_async.md | 关联类型 Trait 的典型场景 |
+| 形式化验证 | [04_formal/04_rustbelt.md](../../04_formal/02_separation_logic/04_rustbelt.md) | Trait 系统的逻辑基础 |
 
 > **过渡到待补充方向**: 相关概念链接描绘了 Trait 在知识体系中的坐标，但任何文档都有演进空间。最后一节记录已识别的待补充项和优先级，为后续迭代提供明确的路线图。
 
@@ -2314,7 +2314,7 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 
 ---
 
-> **相关判定树**: [Trait 判定树](../00_meta/concept_definition_decision_forest.md#五trait-判定树)
+> **相关判定树**: [Trait 判定树](../../00_meta/00_framework/concept_definition_decision_forest.md#五trait-判定树)
 
 ### 10.5 边界测试：trait 的孤儿规则与 blanket impl 冲突（编译错误）
 

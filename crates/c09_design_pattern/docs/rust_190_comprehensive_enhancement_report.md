@@ -577,10 +577,10 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match
 ## 🔗 相关链接
 
 - [README](../README.md) - 模块概述
-- [知识图谱](KNOWLEDGE_GRAPH.md) - 模式关系网络
-- [思维导图](MIND_MAP.md) - 学习路径
-- [多维对比](MULTIDIMENSIONAL_MATRIX_COMPARISON.md) - 详细对比
-- [Rust 1.90 示例](RUST_190_EXAMPLES.md) - 特性示例集
+- [知识图谱](knowledge_graph.md) - 模式关系网络
+- [思维导图](mind_map.md) - 学习路径
+- [多维对比](multidimensional_matrix_comparison.md) - 详细对比
+- [Rust 1.90 示例](rust_190_examples.md) - 特性示例集
 
 ---
 

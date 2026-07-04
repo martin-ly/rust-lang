@@ -345,7 +345,7 @@ Def SEND1, SYNC1
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [formal_methods 目录](README.md)
-- [上级目录](../README.md)
+- [上级目录](../../../README.md)
 
 ---
 

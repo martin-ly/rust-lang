@@ -150,7 +150,7 @@
 
 ## 五、自动化工具清单 {#五自动化工具清单}
 
-权威来源对齐 100% 路线图依赖以下自动化工具链，所有脚本均位于 [`scripts/maintenance/`](../../scripts/maintenance/)：
+权威来源对齐 100% 路线图依赖以下自动化工具链，所有脚本均位于 [`scripts/maintenance/`](../../scripts/maintenance)：
 
 | 工具 | 作用 | 输出 |
 |------|------|------|
@@ -198,4 +198,4 @@
 - [国际化多语言来源对齐](10_i18n_source_alignment.md)
 - [翻译版本差异检测](10_i18n_translation_gap_analysis.md)
 - [知识图谱索引](10_knowledge_graph_index.md)
-- [研究笔记完整索引](INDEX.md)
+- [研究笔记完整索引](../../concept/sources/INDEX.md)

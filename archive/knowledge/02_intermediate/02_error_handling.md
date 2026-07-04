@@ -4,7 +4,7 @@
 >
 > 本主题在 concept 中有深度的概念分析：[错误处理基础](../../concept/01_foundation/10_error_handling_basics.md)
 >
-> **相关概念**: [错误处理](../../concept/02_intermediate/04_error_handling.md)
+> **相关概念**: [错误处理](../../../concept/02_intermediate/03_error_handling/04_error_handling.md)
 > **Bloom 层级**: 理解
 > **📌 简介**:
 > Rust 将错误分为可恢复错误 (`Result<T, E>`) 和不可恢复错误 (`panic!`)，通过类型系统强制显式处理失败路径。

@@ -15,8 +15,8 @@
 >
 > **定位**: 探讨 Rust 编译器基础设施中最影响异步（Async）编程体验的长期痛点 —— `Pin` 的 ergonomics，以及 Project Goals 2026 Flagship "Beyond the `&`" 的解决方案：Reborrow Traits、Pinned Places、Safe Pin Projection。
 > **前置概念**: · [并发与异步（Async）](../06_ecosystem/24_cloud_native.md)
-> [Async](../03_advanced/02_async.md) ·
-> [Pin/Unpin](../03_advanced/06_pin_unpin.md) ·
+> [Async](../03_advanced/01_async/02_async.md) ·
+> [Pin/Unpin](../03_advanced/01_async/06_pin_unpin.md) ·
 > [Traits](../02_intermediate/00_traits/01_traits.md)
 > **后置概念**:
 > [Version Tracking](05_rust_version_tracking.md) ·

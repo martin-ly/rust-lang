@@ -522,8 +522,8 @@ sequenceDiagram
 - [Tokio 异步运行时架构](06_tokio_architecture.md)
 - [Tower 中间件组合架构](02_tower_architecture.md)
 - [Axum Web 框架架构](07_axum_architecture.md)
-- [并发编程模型](../../../../concept/03_advanced/01_concurrency.md)
-- [异步编程模型](../../../../concept/03_advanced/02_async.md)
+- [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
+- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
 - [系统可组合性设计模式](../../../../concept/06_ecosystem/30_system_composability.md)
 
 ---

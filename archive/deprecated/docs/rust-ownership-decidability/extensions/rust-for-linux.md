@@ -1042,7 +1042,7 @@ Rust for Linux 为内核开发带来了新的可能性。关键要点：
 
 ---
 
-- [README](README.md)
+- [README](../../../../../README.md)
 
 ---
 

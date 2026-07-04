@@ -175,10 +175,10 @@ content/
 
 ## 相关概念
 
-- [学术对接](../../../../docs/content/academic/README.md)
-- [生态系统](../../../../docs/content/ecosystem/README.md)
-- [前沿特性](../../../../docs/content/emerging/README.md)
-- [生产实践](../../../../docs/content/production/README.md)
+- [学术对接](../../../../README.md)
+- [生态系统](../../../../README.md)
+- [前沿特性](../../../../README.md)
+- [生产实践](../../../../README.md)
 - [Content Crates 映射](../../../../docs/content/10_content_crates_mapping.md)
 
 ---

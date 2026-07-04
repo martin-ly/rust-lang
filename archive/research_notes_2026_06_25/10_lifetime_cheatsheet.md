@@ -665,7 +665,7 @@ let r = &x;  // 编译器自动推断
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

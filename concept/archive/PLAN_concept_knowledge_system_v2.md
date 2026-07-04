@@ -53,10 +53,10 @@
 | P2-T2 | 泛型系统：单态化（Monomorphization）、约束、GATs、Const Generics | `02_intermediate/01_generics/02_generics.md` | 🔴 高 |
 | P2-T3 | 内存管理：Stack/Heap、智能指针（Smart Pointer）、自定义分配器 | `02_intermediate/02_memory_management/03_memory_management.md` | 🔴 高 |
 | P2-T4 | 错误处理（Error Handling）：Option/Result、?运算符、自定义错误 | `02_intermediate/03_error_handling/04_error_handling.md` | 🔴 高 |
-| P2-T5 | 并发模型：Send/Sync、 fearless concurrency、Mutex/RwLock | `03_advanced/01_concurrency.md` | 🟡 中 |
-| P2-T6 | 异步编程：Future、async/await、Pin、运行时（Runtime） | `03_advanced/02_async.md` | 🟡 中 |
-| P2-T7 | Unsafe Rust：raw pointer、FFI、unsafe 边界判定 | `03_advanced/03_unsafe.md` | 🟡 中 |
-| P2-T8 | 宏系统：macro_rules!、过程宏（Procedural Macro）、DSL 构建 | `03_advanced/04_macros.md` | 🟢 低 |
+| P2-T5 | 并发模型：Send/Sync、 fearless concurrency、Mutex/RwLock | `03_advanced/00_concurrency/01_concurrency.md` | 🟡 中 |
+| P2-T6 | 异步编程：Future、async/await、Pin、运行时（Runtime） | `03_advanced/01_async/02_async.md` | 🟡 中 |
+| P2-T7 | Unsafe Rust：raw pointer、FFI、unsafe 边界判定 | `03_advanced/02_unsafe/03_unsafe.md` | 🟡 中 |
+| P2-T8 | 宏系统：macro_rules!、过程宏（Procedural Macro）、DSL 构建 | `03_advanced/03_proc_macros/04_macros.md` | 🟢 低 |
 
 ### Phase 3：形式化理论与对比分析（2026-06-10 — 2026-06-30）
 
@@ -437,13 +437,13 @@
 | P17-T7 | 新增 `07_future/13_unsafe_fields_preview.md` | 字段级 unsafe 标记、安全边界细化 | ✅ |
 | P17-T8 | 补充 02_async / 02_generics 来源标注（后台 Agent） | +30 来源标注 | ⚠️ 02_generics ✅ / 02_async Agent 超时 |
 | P17-T9 | 质量基线报告同步 | 全部指标刷新 | ✅ |
-| P17-T10 | 新增 `03_advanced/06_pin_unpin.md` | Pin 不动性、自引用（Reference）类型、PhantomPinned、async 状态机 | ✅ |
+| P17-T10 | 新增 `03_advanced/01_async/06_pin_unpin.md` | Pin 不动性、自引用（Reference）类型、PhantomPinned、async 状态机 | ✅ |
 | P17-T11 | 新增 `06_ecosystem/13_logging_observability.md` | tracing、log、metrics、OpenTelemetry、分布式追踪 | ✅ |
 | P17-T12 | 新增 `02_intermediate/05_modules_and_visibility/10_module_system.md` | Crate/Module/Package、可见性、use 声明、Workspace | ✅ |
 | P17-T13 | 新增 `04_formal/07_separation_logic.md` | * 算子、帧规则、CSL、Iris、RustBelt 应用映射 | ✅ |
 | P17-T14 | 新增 `07_future/18_async_drop_preview.md` | 异步（Async）资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs//3308-offset_of.html)、Pin 交互、workaround 模式 | ✅ |
 | P17-T15 | 新增 `05_comparative/07_rust_vs_python.md` | 静态 vs 动态类型、所有权（Ownership） vs GC、 fearless vs GIL | ✅ |
-| P17-T16 | 新增 `03_advanced/07_proc_macro.md` | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ |
+| P17-T16 | 新增 `03_advanced/03_proc_macros/07_proc_macro.md` | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ |
 | P17-T17 | 新增 `06_ecosystem/14_documentation.md` | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ |
 | P17-T18 | 新增 `02_intermediate/02_memory_management/11_cow_and_borrowed.md` | Clone-on-Write、零拷贝、ToOwned、API 灵活性 | ✅ |
 | P17-T19 | 新增 `07_future/26_specialization_preview.md` | Trait 实现特化、重叠 impl、min_specialization | ✅ |
@@ -454,7 +454,7 @@
 | P17-T24 | 新增 `05_comparative/08_rust_vs_javascript.md` | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ |
 | P17-T25 | 新增 `01_foundation/05_collections/08_collections.md` | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ |
 | P17-T26 | 新增 `06_ecosystem/16_testing.md` | 单元/集成/文档测试、mockall、proptest、cargo-fuzz | ✅ |
-| P17-T27 | 新增 `03_advanced/08_nll_and_polonius.md` | 非词法生命周期（Lifetimes）、数据流分析、Origin 模型 | ✅ |
+| P17-T27 | 新增 `03_advanced/02_unsafe/08_nll_and_polonius.md` | 非词法生命周期（Lifetimes）、数据流分析、Origin 模型 | ✅ |
 | P17-T28 | 新增 `04_formal/09_operational_semantics.md` | 小步/大步语义、求值上下文、Rust 形式化 | ✅ |
 | P17-T29 | 新增 `02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md` | 宏（Macro） DSL、Builder、Parser Combinator、类型安全 | ✅ |
 | P17-T30 | 新增 `01_foundation/06_strings_and_text/09_strings_and_text.md` | String/str、UTF-8、格式化、OS 字符串、C 字符串 | ✅ |
@@ -470,7 +470,7 @@
 - 新增 `07_future/22_gen_blocks_preview.md`（~349 行，10 来源，3 Mermaid 图表）
 - 新增 `07_future/38_cranelift_backend_preview.md`（~303 行，10 来源，3 Mermaid 图表）
 - 新增 `07_future/17_rust_specification_preview.md`（~345 行，10 来源，3 Mermaid 图表）
-- 新增 `03_advanced/05_rust_ffi.md`（~399 行，10 来源，3 Mermaid 图表）
+- 新增 `03_advanced/04_ffi/05_rust_ffi.md`（~399 行，10 来源，3 Mermaid 图表）
 - 新增 `06_ecosystem/11_webassembly.md`（~342 行，10 来源，3 Mermaid 图表）
 - 新增 `02_intermediate/04_types_and_conversions/07_closure_types.md`（~362 行，10 来源，3 Mermaid 图表）
 - 新增 `05_comparative/06_rust_vs_java.md`（~326 行，10 来源，3 Mermaid 图表）
@@ -480,14 +480,14 @@
 - 新增 `06_ecosystem/12_testing_strategies.md`（~410 行，10 来源，2 Mermaid 图表）
 - 新增 `01_foundation/00_start/06_zero_cost_abstractions.md`（~372 行，10 来源，2 Mermaid 图表）
 - 新增 `02_intermediate/00_traits/09_serde_patterns.md`（~480 行，10 来源，2 Mermaid 图表）
-- 新增 `03_advanced/06_pin_unpin.md`（~380 行，10 来源，3 Mermaid 图表）
+- 新增 `03_advanced/01_async/06_pin_unpin.md`（~380 行，10 来源，3 Mermaid 图表）
 - 新增 `06_ecosystem/13_logging_observability.md`（~380 行，10 来源，3 Mermaid 图表）
 - 涵盖编译器前端并行化、智能指针（Smart Pointer）派生宏（Macro）、Const Trait 效果系统、RTN 精确捕获、Unsafe Fields、Ferrocene 认证、Gen Blocks、Cranelift 后端、Rust 语言规范、FFI 跨语言、WebAssembly 生态、闭包（Closures）类型系统（Type System）、Rust vs Java、引用（Reference）语义、内部可变性、子类型与变型、测试策略、零成本抽象（Zero-Cost Abstraction）、Serde 序列化、Pin 与 Unpin、日志与可观测性
 - **文件总数: 83 → 104，Mermaid 图表: 328 → 384**
 
 ---
 
-| P17-T31 | 新增 `03_advanced/10_concurrency_patterns.md` | 线程池、消息传递、共享状态、并发模式 | ✅ |
+| P17-T31 | 新增 `03_advanced/00_concurrency/10_concurrency_patterns.md` | 线程池、消息传递、共享状态、并发模式 | ✅ |
 | P17-T32 | 新增 `05_comparative/09_rust_vs_swift.md` | 内存安全（Memory Safety）、值/引用语义、性能与生态对比 | ✅ |
 | P17-T33 | 新增 `06_ecosystem/19_security_practices.md` | cargo-audit、安全编码、依赖管理、加密 | ✅ |
 | P17-T34 | 新增 `06_ecosystem/20_licensing_and_compliance.md` | 开源协议、Apache/MIT/GPL、合规实践 | ✅ |
@@ -495,8 +495,8 @@
 | P17-T36 | 新增 `05_comparative/10_rust_vs_zig.md` | comptime、显式分配器、交叉编译、C 互操作 | ✅ |
 | P17-T37 | 新增 `04_formal/12_denotational_semantics.md` | 指称语义、领域理论、不动点、CPO | ✅ |
 | P17-T38 | 新增 `05_comparative/11_rust_vs_kotlin.md` | 空安全、协程、JVM 互操作、类型系统（Type System） | ✅ |
-| P17-T39 | 新增 `03_advanced/14_custom_allocators.md` | GlobalAlloc、jemalloc、mimalloc、arena | ✅ |
-| P17-T40 | 新增 `03_advanced/15_zero_copy_parsing.md` | bytes、zerocopy、rkyv、memmap2 | ✅ |
+| P17-T39 | 新增 `03_advanced/06_low_level_patterns/14_custom_allocators.md` | GlobalAlloc、jemalloc、mimalloc、arena | ✅ |
+| P17-T40 | 新增 `03_advanced/06_low_level_patterns/15_zero_copy_parsing.md` | bytes、zerocopy、rkyv、memmap2 | ✅ |
 | P17-T41 | 新增 `06_ecosystem/21_game_development.md` | Bevy、WGPU、ECS、Rapier | ✅ |
 | P17-T42 | 新增 `06_ecosystem/22_embedded_systems.md` | no_std、PAC、HAL、RTIC | ✅ |
 | P17-T43 | 新增 `07_future/27_compile_time_execution.md` | const fn、const 泛型（Generics）、类型状态机 | ✅ |
@@ -522,8 +522,8 @@
 
 - 新增 `04_formal/12_denotational_semantics.md`（~320 行，10+ 来源，2 Mermaid 图表）
 - 新增 `05_comparative/11_rust_vs_kotlin.md`（~380 行，10+ 来源，2 Mermaid 图表）
-- 新增 `03_advanced/14_custom_allocators.md`（~330 行，10+ 来源，2 Mermaid 图表）
-- 新增 `03_advanced/15_zero_copy_parsing.md`（~340 行，10+ 来源，2 Mermaid 图表）
+- 新增 `03_advanced/06_low_level_patterns/14_custom_allocators.md`（~330 行，10+ 来源，2 Mermaid 图表）
+- 新增 `03_advanced/06_low_level_patterns/15_zero_copy_parsing.md`（~340 行，10+ 来源，2 Mermaid 图表）
 - 新增 `06_ecosystem/21_game_development.md`（~320 行，10+ 来源，2 Mermaid 图表）
 - 新增 `06_ecosystem/22_embedded_systems.md`（~340 行，10+ 来源，2 Mermaid 图表）
 - 新增 `07_future/27_compile_time_execution.md`（~310 行，10+ 来源，1 Mermaid 图表）
@@ -533,7 +533,7 @@
 
 **关键成果**:
 
-- 新增 `03_advanced/10_concurrency_patterns.md`（~380 行，15+ 来源，3 Mermaid 图表）
+- 新增 `03_advanced/00_concurrency/10_concurrency_patterns.md`（~380 行，15+ 来源，3 Mermaid 图表）
 - 新增 `05_comparative/09_rust_vs_swift.md`（~340 行，10+ 来源，2 Mermaid 图表）
 - 新增 `06_ecosystem/19_security_practices.md`（~380 行，15+ 来源，3 Mermaid 图表）
 - 新增 `06_ecosystem/20_licensing_and_compliance.md`（~420 行，15+ 来源，2 Mermaid 图表）
@@ -567,7 +567,7 @@
 |:---|:---|:---|:---:|
 | P18-T1 | 来源标注率整体提升（~15%→≥20%） | 核心文件批量补充 Wikipedia/TRPL/RFC 来源 | 🔄 |
 | P18-T2 | 新增 L1 概念文件填补缺口 | `01_foundation/08_error_handling/32_error_handling_basics.md` ✅ | 🔄 |
-| P18-T3 | 新增 L3/L4 高级主题 | `03_advanced/14_custom_allocators.md` ✅, `15_zero_copy_parsing.md` ✅, `16_lock_free.md` ✅, `17_type_erasure.md` ✅, `04_formal/13_formal_methods.md` ✅, `14_lambda_calculus.md` ✅, `15_category_theory.md` (重复已归档) | ✅ |
+| P18-T3 | 新增 L3/L4 高级主题 | `03_advanced/06_low_level_patterns/14_custom_allocators.md` ✅, `15_zero_copy_parsing.md` ✅, `16_lock_free.md` ✅, `17_type_erasure.md` ✅, `04_formal/13_formal_methods.md` ✅, `14_lambda_calculus.md` ✅, `15_category_theory.md` (重复已归档) | ✅ |
 | P18-T4 | 新增 L5 对比分析 | `05_comparative/12_rust_vs_scala.md` ✅, `13_rust_vs_csharp.md` ✅, `14_rust_vs_elixir.md` ✅ | ✅ |
 | P18-T5 | 新增 L6 生态扩展 | `06_ecosystem/21_game_development.md` ✅, `22_embedded_systems.md` ✅, `23_database_access.md` ✅, `24_cloud_native.md` ✅, `25_cli_development.md` ✅, `26_game_development.md` ✅, `27_web_frameworks.md` ✅ | ✅ |
 | P18-T6 | 新增 L7 前沿跟踪 | `07_future/27_compile_time_execution.md` ✅, `23_rust_edition_guide.md` ✅ | 🔄 |

@@ -1503,7 +1503,7 @@ fn main() {
 **内部文档**:
 
 - [条件语句指南](01_conditionals_guide.md)
-- [枚举与模式](../../c02_type_system/docs/README.md)
+- [枚举与模式](../../../../README.md)
 - [高级模式](../tier_04_advanced/01_高级模式.md)
 
 **外部资源**:

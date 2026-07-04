@@ -8,7 +8,7 @@
 > **内容分级**: [综述级]
 > **代码状态**: [综述级 — 待补充代码]
 >
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **来源**: [embedded-graphics](https://docs.rs/embedded-graphics/) · [lvgl-rs](https://docs.rs/lvgl/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
@@ -846,8 +846,8 @@ graph TD
 
 - [Embedded Systems](22_embedded_systems.md) — 嵌入式系统基础
 - [Performance Optimization](15_performance_optimization.md) — 性能优化
-- [Unsafe Rust](../03_advanced/03_unsafe.md) — unsafe Rust 模式
-- [Async/Await](../03_advanced/02_async.md) — 异步（Async）编程
+- [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) — unsafe Rust 模式
+- [Async/Await](../03_advanced/01_async/02_async.md) — 异步（Async）编程
 
 ---
 

@@ -62,7 +62,7 @@
 **Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 **思维表征**: [决策图网](../../../docs/04_thinking/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/04_thinking/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/04_thinking/THINKING_REPRESENTATION_METHODS.md)
 
-**一页纸总结**: [ONE_PAGE_SUMMARY.md](ONE_PAGE_SUMMARY.md) — 核心概念、常见坑、速选表
+**一页纸总结**: [ONE_PAGE_SUMMARY.md](one_page_summary.md) — 核心概念、常见坑、速选表
 
 ## 📚 文档导航总览
 
@@ -281,14 +281,14 @@
 **我想了解...**:
 
 - 并发vs并行 → [04_parallelism_and_beyond](04_parallelism_and_beyond.md)
-- Send/Sync → [](tier_01_foundations/04_faq.mdFAQ)
-- `Arc<Mutex<T>>` → [](tier_01_foundations/04_faq.mdFAQ)
+- Send/Sync → [](tier_01_foundations/04_faq.md)
+- `Arc<Mutex<T>>` → [](tier_01_foundations/04_faq.md)
 
 **我遇到问题...**:
 
 - 常见问题 → [FAQ](tier_01_foundations/04_faq.md)
 - 术语不懂 → [Glossary](tier_01_foundations/03_glossary.md)
-- 死锁问题 → [](tier_01_foundations/03_glossary.mdGlossary)
+- 死锁问题 → [](tier_01_foundations/03_glossary.md)
 
 ---
 

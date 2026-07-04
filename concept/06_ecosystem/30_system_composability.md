@@ -12,8 +12,8 @@
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估系统可组合性
-> **前置概念**: · [Rust vs Go](../05_comparative/02_rust_vs_go.md) [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Async](../03_advanced/02_async.md) · [Iterator](../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
-> **后置概念**: [Tower 架构](../04_formal/10_category_theory.md) · [应用域](04_application_domains.md)
+> **前置概念**: · [Rust vs Go](../05_comparative/02_rust_vs_go.md) [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Async](../03_advanced/01_async/02_async.md) · [Iterator](../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
+> **后置概念**: [Tower 架构](../04_formal/00_type_theory/10_category_theory.md) · [应用域](04_application_domains.md)
 > **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Tokio 文档](https://docs.rs/tokio/) · [Tower 文档](https://docs.rs/tower/) · [rayon 文档](https://docs.rs/rayon/)
 
 ---
@@ -563,10 +563,10 @@ async fn good() {
 
 ## 七、相关概念链接
 
-- [L3: Async](../03_advanced/02_async.md) —— 异步数据流管道的根基
+- [L3: Async](../03_advanced/01_async/02_async.md) —— 异步数据流管道的根基
 - [L3: Iterator](../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) —— 同步管道-过滤器的核心机制
 - [L6: Tower 形式化生态塔](44_formal_ecosystem_tower.md) —— Tower 在形式化分层中的位置
-- [L4: Type Theory](../04_formal/02_type_theory.md) —— 幺半群与范畴论的数学基础
+- [L4: Type Theory](../04_formal/00_type_theory/02_type_theory.md) —— 幺半群与范畴论的数学基础
 - [L6: Core Crates](03_core_crates.md) —— 可组合生态的 crate 谱系
 
 ---

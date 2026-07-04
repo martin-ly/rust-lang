@@ -16,7 +16,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Derive CoercePointee 预览特性
 > **定位**: 探讨 Rust 1.95+ 中通过派生宏（Macro）自动化 `CoerceUnsized` 和 `DispatchFromDyn` 实现，降低自定义智能指针（Smart Pointer）的**样板代码**和**unsafe 实现风险**。
-> **前置概念**: [Type System](../01_foundation/02_type_system/04_type_system.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Unsafe](../03_advanced/03_unsafe.md)
+> **前置概念**: [Type System](../01_foundation/02_type_system/04_type_system.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Unsafe](../03_advanced/02_unsafe/03_unsafe.md)
 > **后置概念**: [Evolution](03_evolution.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -345,7 +345,7 @@ graph TD
 
 - [Type System](../01_foundation/02_type_system/04_type_system.md) — Rust 类型系统（Type System）基础
 - [Generics](../02_intermediate/01_generics/02_generics.md) — 泛型（Generics）与 Trait Bounds
-- [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust 与内存安全（Memory Safety）
+- [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) — unsafe Rust 与内存安全（Memory Safety）
 - [Evolution](03_evolution.md) — 语言演进机制
 - [Version Tracking](05_rust_version_tracking.md) — Rust 版本特性演进
 

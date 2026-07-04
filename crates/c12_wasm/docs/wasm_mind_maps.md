@@ -643,10 +643,10 @@ WASM 知识关联
 ## 📚 相关文档
 
 - [项目概览](tier_01_foundations/01_project_overview.md)
-- [Rust 1.92.0 WASM 改进文档](RUST_192_WASM_IMPROVEMENTS.md)
-- [WASM 多维概念对比矩阵](WASM_CONCEPT_MATRIX.md)
-- [WASM 决策树图](WASM_DECISION_TREE.md)
-- [WASM 证明树图](WASM_PROOF_TREE.md)
+- [Rust 1.92.0 WASM 改进文档](rust_192_wasm_improvements.md)
+- [WASM 多维概念对比矩阵](wasm_concept_matrix.md)
+- [WASM 决策树图](wasm_decision_tree.md)
+- [WASM 证明树图](wasm_proof_tree.md)
 
 ---
 

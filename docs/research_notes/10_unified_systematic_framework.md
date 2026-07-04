@@ -649,7 +649,7 @@ Pin ──→ 自引用安全
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) | 构造性语义形式化、表达能力边界 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
 | [PROOF_INDEX](10_proof_index.md) | 形式化证明索引、公理编号规范 |
-| [INDEX](INDEX.md) | 研究笔记完整索引 |
+| [INDEX](../../concept/sources/INDEX.md) | 研究笔记完整索引 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念矩阵 |
 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 思维导图集合 |
 | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 决策树 |

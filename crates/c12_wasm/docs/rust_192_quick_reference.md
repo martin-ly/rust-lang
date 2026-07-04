@@ -32,12 +32,12 @@
 
 | 需求                 | 推荐特性                | 性能提升 | 文档                                                                                     |
 | :--- | :--- | :--- | :--- |
-| **未初始化内存管理** | MaybeUninit             | +5%      | [详细文档](RUST_192_WASM_IMPROVEMENTS.md#1-maybeuninit-在-wasm-内存管理中的应用)       |
-| **缓冲区分配计算**   | NonZero::div_ceil       | +10%     | [详细文档](RUST_192_WASM_IMPROVEMENTS.md#2-nonzerodiv_ceil-在-wasm-缓冲区分配中的应用) |
-| **FFI 互操作**       | 联合体原始引用          | 基准     | [详细文档](RUST_192_WASM_IMPROVEMENTS.md#3-联合体原始引用在-wasm-ffi-中的应用)         |
-| **数组比较**         | Iterator::eq 特化       | +15-25%  | [详细文档](RUST_192_WASM_IMPROVEMENTS.md#4-迭代器方法特化在-wasm-性能优化中的应用)     |
-| **数据旋转**         | rotate_right            | +30-35%  | [详细文档](RUST_192_WASM_IMPROVEMENTS.md#5-rotate_right-在-wasm-数据处理中的应用)      |
-| **调试信息**         | Location::file_as_c_str | 基准     | [详细文档](RUST_192_WASM_IMPROVEMENTS.md#6-locationfile_as_c_str-在-wasm-调试中的应用) |
+| **未初始化内存管理** | MaybeUninit             | +5%      | [详细文档](rust_192_wasm_improvements.md#1-maybeuninit-在-wasm-内存管理中的应用)       |
+| **缓冲区分配计算**   | NonZero::div_ceil       | +10%     | [详细文档](rust_192_wasm_improvements.md#2-nonzerodiv_ceil-在-wasm-缓冲区分配中的应用) |
+| **FFI 互操作**       | 联合体原始引用          | 基准     | [详细文档](rust_192_wasm_improvements.md#3-联合体原始引用在-wasm-ffi-中的应用)         |
+| **数组比较**         | Iterator::eq 特化       | +15-25%  | [详细文档](rust_192_wasm_improvements.md#4-迭代器方法特化在-wasm-性能优化中的应用)     |
+| **数据旋转**         | rotate_right            | +30-35%  | [详细文档](rust_192_wasm_improvements.md#5-rotate_right-在-wasm-数据处理中的应用)      |
+| **调试信息**         | Location::file_as_c_str | 基准     | [详细文档](rust_192_wasm_improvements.md#6-locationfile_as_c_str-在-wasm-调试中的应用) |
 
 ---
 
@@ -213,9 +213,9 @@ wasm_rotate_data(&mut data, 3);
 
 ## 📚 相关文档
 
-- [Rust 1.92.0 WASM 改进文档](RUST_192_WASM_IMPROVEMENTS.md) - 详细说明
-- [WASM 决策树图](WASM_DECISION_TREE.md) - 技术选型
-- [WASM 多维概念对比矩阵](WASM_CONCEPT_MATRIX.md) - 方案对比
+- [Rust 1.92.0 WASM 改进文档](rust_192_wasm_improvements.md) - 详细说明
+- [WASM 决策树图](wasm_decision_tree.md) - 技术选型
+- [WASM 多维概念对比矩阵](wasm_concept_matrix.md) - 方案对比
 - [示例代码](../../examples/rust_192_features_demo.rs) - 完整示例
 
 ---

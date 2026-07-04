@@ -228,7 +228,7 @@ let task = index.set_settings(&settings).await?;
 - [Reqwest HTTP 客户端架构](10_reqwest_architecture.md)
 - [Serde 序列化架构](01_serde_architecture.md)
 - [Redis 缓存/消息架构](22_redis_architecture.md) — 与搜索缓存组合
-- [异步编程模型](../../../../concept/03_advanced/02_async.md)
+- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
 - [数据库与存储生态权威来源对齐](../../10_database_storage_cloud_alignment.md)
 
 ---

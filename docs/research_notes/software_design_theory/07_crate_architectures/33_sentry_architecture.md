@@ -211,7 +211,7 @@ tx.finish();
 - [Tracing 可观测性架构](18_tracing_architecture.md) — 与 sentry-tracing 集成
 - [Tower 中间件抽象架构](02_tower_architecture.md) — sentry-tower 集成
 - [错误处理深入](../../../../concept/02_intermediate/15_error_handling_deep_dive.md)
-- [异步编程模型](../../../../concept/03_advanced/02_async.md)
+- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
 
 ---
 

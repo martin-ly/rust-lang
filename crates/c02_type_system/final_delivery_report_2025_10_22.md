@@ -407,7 +407,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $ma
 
 - [泛型系统](docs/03_advanced/01_generics.md) (661行)
 - [Trait系统](docs/03_advanced/02_traits.md) (1,017行)
-- [生命周期](docs/03_advanced/03_lifetimes.md) (939行)
+- [生命周期](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) (939行)
 - [类型推断](docs/03_advanced/04_type_inference.md) (575行)
 
 **知识体系**:

@@ -438,7 +438,7 @@
 
 - [研究笔记主索引](README.md)
 - [快速参考](10_quick_reference.md)
-- [完整索引](INDEX.md)
+- [完整索引](../../concept/sources/INDEX.md)
 - [研究路线图](10_research_roadmap.md)
 
 ### 进展跟踪 {#进展跟踪}

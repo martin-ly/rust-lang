@@ -215,8 +215,8 @@ HttpServer::new(|| async {
 - [07_axum_architecture.md](07_axum_architecture.md) — Axum Web 框架架构
 - [12_actix_web_architecture.md](12_actix_web_architecture.md) — Actix-web 框架架构
 - [39_salvo_architecture.md](39_salvo_architecture.md) — Salvo Web 框架架构
-- [concept L3: 异步编程](../../../../concept/03_advanced/02_async.md)
-- [concept L6: Web 框架与中间件](../../../../concept/06_ecosystem/)
+- [concept L3: 异步编程](../../../../concept/03_advanced/01_async/02_async.md)
+- [concept L6: Web 框架与中间件](../../../../06_ecosystem)
 
 ---
 

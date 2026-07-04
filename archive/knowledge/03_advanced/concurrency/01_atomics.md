@@ -2,8 +2,8 @@
 
 > **📎 交叉引用**
 >
-> 本主题在 concept 中有深度的概念分析：[原子操作](../../../concept/03_advanced/11_atomics_and_memory_ordering.md)
-> **相关概念**: [原子操作](../../../concept/03_advanced/11_atomics_and_memory_ordering.md)
+> 本主题在 concept 中有深度的概念分析：[原子操作](../../../../concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md)
+> **相关概念**: [原子操作](../../../../concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md)
 > **Bloom 层级**: 理解
 > **📌 简介**: 原子操作是 Rust 无锁并发编程的基石。通过 CPU 提供的原子指令和精细的内存序控制，原子操作可以在不使用锁的情况下实现线程安全，但正确使用需要对 happens-before 关系和内存模型有深入理解。
 > **⏱️ 预计学习时间**: 60-90 分钟
@@ -1187,7 +1187,7 @@ fn increment(counter: &AtomicUsize) {
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [Concurrency 并发编程](README.md)
+- [Concurrency 并发编程](../../../../README.md)
 - [Rust 同步原语深度解析](02_synchronization.md)
 - [Rust 线程 (Threads)](03_threads.md)
 - [Rust 所有权深入](../../01_fundamentals/04_ownership.md)

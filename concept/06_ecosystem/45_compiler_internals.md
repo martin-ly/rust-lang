@@ -741,11 +741,11 @@ fn undefined_behavior() {
 - [泛型（Generics）](../02_intermediate/01_generics/02_generics.md) — 单态化（Monomorphization）、Trait bound
 - [生命周期（Lifetimes）](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) — 借用规则、NLL
 - [Trait](../02_intermediate/00_traits/01_traits.md) — 多态、Trait 解析
-- [Async/Await](../03_advanced/02_async.md) — 状态机转换、MIR 生成
-- [宏系统](../03_advanced/07_proc_macro.md) — 宏展开、 hygiene
-- [Unsafe Rust](../03_advanced/03_unsafe.md) — Miri、UB、别名模型
-- [NLL 与 Polonius](../03_advanced/08_nll_and_polonius.md) — 借用检查演进
-- [形式化验证](../04_formal/05_verification_toolchain.md) — Kani、Prusti、MIRI
+- [Async/Await](../03_advanced/01_async/02_async.md) — 状态机转换、MIR 生成
+- [宏系统](../03_advanced/03_proc_macros/07_proc_macro.md) — 宏展开、 hygiene
+- [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) — Miri、UB、别名模型
+- [NLL 与 Polonius](../03_advanced/02_unsafe/08_nll_and_polonius.md) — 借用检查演进
+- [形式化验证](../04_formal/04_model_checking/05_verification_toolchain.md) — Kani、Prusti、MIRI
 - [工具链](01_toolchain.md) — Cargo、编译器标志、目标平台
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)

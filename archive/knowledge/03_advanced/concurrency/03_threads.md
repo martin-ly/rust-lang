@@ -1,6 +1,6 @@
 # Rust 线程与并发安全模型
 
-> **相关概念**: [线程](../../../concept/03_advanced/01_concurrency.md)
+> **相关概念**: [线程](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 > **Bloom 层级**: 理解
 > **📌 简介**:
 > Rust 的线程模型建立在 OS 线程之上 [来源: std::thread / Rust Standard Library 2025; POSIX Threads (pthreads) / IEEE Std 1003.1-2017]，
@@ -1222,7 +1222,7 @@ struct MyStruct {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 原子操作 (Atomic Operations)](01_atomics.md)
-- [Concurrency 并发编程](README.md)
+- [Concurrency 并发编程](../../../../README.md)
 - [Rust 所有权深入](../../01_fundamentals/04_ownership.md)
 - [Rust 异步编程 (Async/Await)](../async/01_async_await.md)
 

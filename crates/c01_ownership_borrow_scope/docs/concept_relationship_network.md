@@ -1236,10 +1236,10 @@ graph LR
 
 ## 🔗 相关文档
 
-- [知识图谱](KNOWLEDGE_GRAPH.md) - 概念可视化
-- [多维矩阵](MULTIDIMENSIONAL_MATRIX.md) - 多维对比
-- [思维导图](MIND_MAP.md) - 学习路径
-- [Rust 1.90 全面指南](RUST_190_COMPREHENSIVE_MINDMAP.md) - 最新特性
+- [知识图谱](knowledge_graph.md) - 概念可视化
+- [多维矩阵](multidimensional_matrix.md) - 多维对比
+- [思维导图](mind_map.md) - 学习路径
+- [Rust 1.90 全面指南](rust_190_comprehensive_mindmap.md) - 最新特性
 
 ---
 

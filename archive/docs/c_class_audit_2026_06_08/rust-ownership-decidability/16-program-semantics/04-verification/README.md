@@ -78,4 +78,4 @@
 
 - [形式验证概览](../../../../../../docs/04_research/04_safety_critical_alignment_2026.md)
 - [Rust 形式化验证](../../../../../../docs/04_research/04_rust_formal_verification.md)
-- [概念：形式化方法](../../../../../../concept/04_formal/01_linear_logic.md)
+- [概念：形式化方法](../../../../../../concept/04_formal/01_ownership_logic/01_linear_logic.md)

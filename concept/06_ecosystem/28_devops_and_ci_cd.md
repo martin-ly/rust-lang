@@ -27,7 +27,7 @@
 > [Cross-rs](https://github.com/cross-rs/cross) ·
 > [Rust CI Best Practices](https://pascalhertleif.de/artikel/good-practices-for-writing-rust-libraries/) ·
 > [Mozilla Rust CI Guide](https://firefox-source-docs.mozilla.org/build/buildsystem/rust.html)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

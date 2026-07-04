@@ -522,7 +522,7 @@ T: 'a  表示 T中所有引用都存活至少'a
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

@@ -1,7 +1,7 @@
 # Cargo 配置与环境变量（Cargo Configuration）
 
 > **内容分级**: [参考级]
-> **本节关键术语**: Configuration · Environment Variables · `.cargo/config.toml` · Credential Provider · `CARGO_*` — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: Configuration · Environment Variables · `.cargo/config.toml` · Credential Provider · `CARGO_*` — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Configuration
 > **Summary**: Cargo 完整配置机制：`.cargo/config.toml` 层级、常用配置项、环境变量映射、凭证提供者与 registry 认证配置。

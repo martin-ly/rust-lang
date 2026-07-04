@@ -13,8 +13,8 @@
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计 Rust for Linux 架构
 > **定位**: 深入分析 **Rust for Linux** 项目——如何将 Rust 引入 Linux 内核开发，从驱动程序编写、C 互操作到内核特定的安全保证，揭示系统编程范式的历史性转变。
-> **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md) · [Cross Compilation](../06_ecosystem/17_cross_compilation.md)
-> **后置概念**: [Formal Methods](../04_formal/04_rustbelt.md) · [Evolution](03_evolution.md)
+> **前置概念**: [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) · [FFI](../03_advanced/04_ffi/05_rust_ffi.md) · [Cross Compilation](../06_ecosystem/17_cross_compilation.md)
+> **后置概念**: [Formal Methods](../04_formal/02_separation_logic/04_rustbelt.md) · [Evolution](03_evolution.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -448,10 +448,10 @@ Rust for Linux 采用状态 (2024+):
 
 Rust for Linux 是 Rust 形式化工具与运行时（Runtime）检查的重要落地场景：
 
-- **[Safety Tags](../04_formal/33_safety_tags_in_formal.md)**：内核中存在大量 `unsafe` 边界，Safety Tags（RFC #3842）可将 `# Safety` 文档注释转化为机器可读契约，帮助内核维护者审查 `unsafe` 调用点。
-- **[BorrowSanitizer](../04_formal/34_borrow_sanitizer_in_formal.md)**：在 Rust/C 混合代码中检测别名模型违规，补充 Miri 无法覆盖的生产环境。
-- **[Tree Borrows](../04_formal/36_tree_borrows_deep_dive.md)**：相比 Stacked Borrows 更适合内核中常见的复杂借用（Borrowing）模式，已被 Miri 支持。
-- **[AutoVerus / Verus](../04_formal/24_autoverus.md)**：未来可用于验证内核抽象层（如 `kernel::sync`）的功能正确性。
+- **[Safety Tags](../04_formal/02_separation_logic/33_safety_tags_in_formal.md)**：内核中存在大量 `unsafe` 边界，Safety Tags（RFC #3842）可将 `# Safety` 文档注释转化为机器可读契约，帮助内核维护者审查 `unsafe` 调用点。
+- **[BorrowSanitizer](../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md)**：在 Rust/C 混合代码中检测别名模型违规，补充 Miri 无法覆盖的生产环境。
+- **[Tree Borrows](../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md)**：相比 Stacked Borrows 更适合内核中常见的复杂借用（Borrowing）模式，已被 Miri 支持。
+- **[AutoVerus / Verus](../04_formal/04_model_checking/24_autoverus.md)**：未来可用于验证内核抽象层（如 `kernel::sync`）的功能正确性。
 
 > **趋势判断**：内核代码对工具链的可审查性要求极高，Safety Tags + BorrowSanitizer 的组合有望成为 Rust for Linux 进入核心子系统前的标准流程。
 
@@ -610,10 +610,10 @@ graph TD
 
 ## 相关概念文件
 
-- [Unsafe](../03_advanced/03_unsafe.md) — 不安全代码
-- [FFI](../03_advanced/05_rust_ffi.md) — 外部函数接口
+- [Unsafe](../03_advanced/02_unsafe/03_unsafe.md) — 不安全代码
+- [FFI](../03_advanced/04_ffi/05_rust_ffi.md) — 外部函数接口
 - [Cross Compilation](../06_ecosystem/17_cross_compilation.md) — 交叉编译
-- [RustBelt](../04_formal/04_rustbelt.md) — 形式化验证
+- [RustBelt](../04_formal/02_separation_logic/04_rustbelt.md) — 形式化验证
 
 ---
 

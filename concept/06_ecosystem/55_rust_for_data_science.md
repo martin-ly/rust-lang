@@ -8,7 +8,7 @@
 > **代码状态**: ✅ 含可编译示例
 >
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **来源**: [polars](https://docs.rs/polars/) · [ndarray](https://docs.rs/ndarray/) · [plotters](https://docs.rs/plotters/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
@@ -513,7 +513,7 @@ fn robust_csv_read() -> Result<DataFrame, PolarsError> {
 - [性能优化](15_performance_optimization.md) — SIMD、缓存、内存布局
 - [WebAssembly](11_webassembly.md) — 浏览器内数据分析、跨平台部署
 - [云原生](24_cloud_native.md) — 容器化数据服务、对象存储
-- [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、Rayon 并行
+- [并发编程](../03_advanced/00_concurrency/01_concurrency.md) — Send/Sync、Rayon 并行
 - [类型系统（Type System）](../01_foundation/02_type_system/04_type_system.md) — 泛型（Generics）、Trait、零成本抽象（Zero-Cost Abstraction）
 - [量子计算](51_quantum_computing_rust.md) — 量子模拟、量子机器学习
 

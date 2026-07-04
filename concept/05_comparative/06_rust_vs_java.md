@@ -8,7 +8,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 从**内存模型**、**并发语义**、**类型系统（Type System）**和**运行时（Runtime）架构**四个维度，系统对比 Rust 与 Java 的设计哲学差异，分析两种范式在系统编程、云原生和嵌入式场景的适用边界。
-> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) · [Type System](../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [Application Domains](../06_ecosystem/04_application_domains.md)
 
 ---
@@ -18,7 +18,7 @@
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
 > [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) ·
 > [Java Memory Model (JMM)](https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 
 ## 📑 目录
 >
@@ -358,7 +358,7 @@ Java → Rust 的渐进迁移策略:
 - [Rust vs C++](01_rust_vs_cpp.md) — Rust 与 C++ 的对比
 - [Rust vs Go](02_rust_vs_go.md) — Rust 与 Go 的对比
 - [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — Rust 所有权（Ownership）模型
-- [Concurrency](../03_advanced/01_concurrency.md) — Rust 并发模型
+- [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) — Rust 并发模型
 - [Application Domains](../06_ecosystem/04_application_domains.md) — 应用领域分析
 
 ---

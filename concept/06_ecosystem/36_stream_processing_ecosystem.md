@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: C×Syn — 综合流处理生态的工程实践与选型决策
 > **定位**: 系统梳理 Rust 流处理生态（timely/differential dataflow、tokio-stream、fluvio）与工业级系统（Flink、Materialize、RisingWave）的架构、语义差异与选型策略。
-> **前置概念**: [Stream Processing Semantics](../03_advanced/20_stream_processing_semantics.md) · [Async/Await](../03_advanced/02_async.md) · [Concurrency](../03_advanced/01_concurrency.md)
+> **前置概念**: [Stream Processing Semantics](../03_advanced/06_low_level_patterns/20_stream_processing_semantics.md) · [Async/Await](../03_advanced/01_async/02_async.md) · [Concurrency](../03_advanced/00_concurrency/01_concurrency.md)
 > **后置概念**: [Distributed Systems](18_distributed_systems.md) · [Distributed Systems](18_distributed_systems.md)
 >
 > **来源**: [tokio-stream](https://docs.rs/tokio-stream/) · [futures](https://docs.rs/futures/) · [fluvio](https://docs.rs/fluvio/) · [TRPL — Async and Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -28,7 +28,7 @@
 
 ---
 
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 一、Rust 流处理生态谱系

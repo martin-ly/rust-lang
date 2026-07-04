@@ -9,10 +9,10 @@
 > **层级**: L1 基础概念
 > **A/S/P 标记**: S — Structure
 > **双维定位**: C×Eva
-> **前置概念**: · [自测题库](../../00_meta/self_assessment.md)
+> **前置概念**: · [自测题库](../../00_meta/04_navigation/self_assessment.md)
 >
 > [Variable Model](../03_values_and_references/20_variable_model.md) ·
-> [Evaluation Strategies](../../04_formal/18_evaluation_strategies.md) ·
+> [Evaluation Strategies](../../04_formal/03_operational_semantics/18_evaluation_strategies.md) ·
 > [Effects and Purity](../00_start/21_effects_and_purity.md) ·
 > [Control Flow](../04_control_flow/07_control_flow.md) ·
 > [Data Abstraction Spectrum](../02_type_system/22_data_abstraction_spectrum.md)

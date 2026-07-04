@@ -43,7 +43,7 @@
 ## 待完善
 
 - ✅ ~~增补"组合多个模式"的工程案例与评测~~ 已完成（见下方案例 A/B 与评测）
-- 与 `c11_macro_system_proc` 的框架性模式互链（详见 [PENDING_ITEMS.md](PENDING_ITEMS.md)）
+- 与 `c11_macro_system_proc` 的框架性模式互链（详见 [PENDING_ITEMS.md](pending_items.md)）
 
 ### 组合模式工程案例（补全）
 
@@ -64,7 +64,7 @@
 
 ### 互链
 
-- 与 [c11_macro_system_proc](../../c11_macro_system_proc/README.md)：宏元编程、DSL 构建、代码生成与设计模式的协同（见 [PENDING_ITEMS.md](PENDING_ITEMS.md)）
+- 与 [c11_macro_system_proc](../../c11_macro_system_proc/README.md)：宏元编程、DSL 构建、代码生成与设计模式的协同（见 [PENDING_ITEMS.md](pending_items.md)）
 
 ---
 

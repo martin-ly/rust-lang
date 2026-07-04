@@ -1,7 +1,7 @@
 # 可派生 Trait（Derive Traits）
 
 > **内容分级**: [参考级]
-> **本节关键术语**: Derive · `Debug` · `PartialEq` · `Eq` · `PartialOrd` · `Ord` · `Clone` · `Copy` · `Hash` · `Default` — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: Derive · `Debug` · `PartialEq` · `Eq` · `PartialOrd` · `Ord` · `Clone` · `Copy` · `Hash` · `Default` — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Derivable Traits
 > **Summary**: 标准库中可通过 `#[derive(...)]` 自动实现的 trait 参考：行为、默认实现语义、对字段类型的要求及典型使用场景。
@@ -9,8 +9,8 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Specification / Language semantics
 > **双维定位**: S×Lang — 语言标准库约定
-> **前置依赖**: [Traits](../../01_foundation/02_type_system/04_type_system.md) · [Structs and Enums](../../01_foundation/03_values_and_references/05_reference_semantics.md) · [Terminology Glossary](../../00_meta/terminology_glossary.md)
-> **后置概念**: [Advanced Traits](19_advanced_traits.md) · [Proc Macros](../../03_advanced/07_proc_macro.md)
+> **前置依赖**: [Traits](../../01_foundation/02_type_system/04_type_system.md) · [Structs and Enums](../../01_foundation/03_values_and_references/05_reference_semantics.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
+> **后置概念**: [Advanced Traits](19_advanced_traits.md) · [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md)
 > **定理链**: N/A — 参考级文档
 > **主要来源**: [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html) · [TRPL — Appendix C](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
@@ -264,4 +264,4 @@ struct User {
 |:---|:---|
 | [Traits](../../01_foundation/02_type_system/04_type_system.md) | derive 是 trait 实现的语法糖 |
 | [Advanced Traits](19_advanced_traits.md) | 手动实现 trait 替代默认 derive 行为 |
-| [Proc Macros](../../03_advanced/07_proc_macro.md) | 第三方 derive 通过过程宏（Procedural Macro）实现 |
+| [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) | 第三方 derive 通过过程宏（Procedural Macro）实现 |

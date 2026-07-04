@@ -13,7 +13,7 @@
 
 请访问 archive/deprecated/10_coq_of_rust_integration_plan.md 查看完整内容。
 
-**入口**: [RESEARCH_NOTES_ORGANIZATION](10_research_notes_organization.md) § 三、归档约定 | [INDEX](INDEX.md) 7g
+**入口**: [RESEARCH_NOTES_ORGANIZATION](10_research_notes_organization.md) § 三、归档约定 | [INDEX](../../concept/sources/INDEX.md) 7g
 
 ---
 
@@ -101,7 +101,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

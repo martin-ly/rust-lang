@@ -1095,8 +1095,8 @@ quadrantChart
 - [L1 所有权（Ownership）](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) —— 所有权与 RAII 的根基
 - [L1 借用（Borrowing）](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) —— 借用与内部可变性的分层
 - [L2 Trait](../02_intermediate/00_traits/01_traits.md) —— Trait Bound 组合与 Deref 多态
-- [L3 异步](../03_advanced/02_async.md) —— async/await 与 Pin 不动性
-- [L3 并发](../03_advanced/01_concurrency.md) —— Send/Sync 与并发原语
+- [L3 异步](../03_advanced/01_async/02_async.md) —— async/await 与 Pin 不动性
+- [L3 并发](../03_advanced/00_concurrency/01_concurrency.md) —— Send/Sync 与并发原语
 - [L5 Rust vs Go](../05_comparative/02_rust_vs_go.md) —— 并发模型惯用法对比
 - [L7 版本跟踪](../07_future/05_rust_version_tracking.md) —— 1.95/1.96 新惯用法来源
 
@@ -1145,9 +1145,9 @@ quadrantChart
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
 > **相关文件**:
 >
-> [A/S/P 标记规范](../00_meta/asp_marking_guide.md) ·
-> [问题图谱](../00_meta/problem_graph.md) ·
-> [范式转换矩阵](../00_meta/paradigm_transition_matrix.md)
+> [A/S/P 标记规范](../00_meta/03_audit/asp_marking_guide.md) ·
+> [问题图谱](../00_meta/04_navigation/problem_graph.md) ·
+> [范式转换矩阵](../00_meta/00_framework/paradigm_transition_matrix.md)
 >
 
 ## 十、边界测试：惯用法谱系的编译错误

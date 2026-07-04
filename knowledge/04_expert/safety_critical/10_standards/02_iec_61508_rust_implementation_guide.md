@@ -689,7 +689,7 @@ impl SafetyOpcUaServer {
 
 ## 相关概念
 
-- [Ferrocene 认证 (concept)](../../../../concept/04_formal/16_aerospace_certification_formal_methods.md) — IEC 61508 SIL 2 core 子集认证详情
+- [Ferrocene 认证 (concept)](../../../../concept/04_formal/04_model_checking/16_aerospace_certification_formal_methods.md) — IEC 61508 SIL 2 core 子集认证详情
 
 ## 📚 模块 8: 国际化对齐
 

@@ -1,7 +1,7 @@
 # Cargo Registry 内部机制（Cargo Registry Internals）
 
 > **内容分级**: [参考级]
-> **本节关键术语**: Registry Index · Registry Web API · Credential Provider · crates.io · Sparse Index — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: Registry Index · Registry Web API · Credential Provider · crates.io · Sparse Index — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Registry Internals
 > **Summary**: Cargo registry 的运行机制：索引格式、Web API、凭证提供程序协议，以及企业自建 registry 所需的核心概念。

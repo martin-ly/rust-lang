@@ -6,7 +6,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 >
 > **层次定位**: L4 形式化 / 类型论基础研究
-> **前置依赖**: [concept L4 类型论](../../../concept/04_formal/02_type_theory.md) · [concept L2 泛型](../../../concept/02_intermediate/02_generics.md)
+> **前置依赖**: [concept L4 类型论](../../../concept/04_formal/00_type_theory/02_type_theory.md) · [concept L2 泛型](../../../concept/02_intermediate/01_generics/02_generics.md)
 > **后置延伸**: [ROD 形式语义](../../rust-ownership-decidability/formal-foundations) · [concept L7 效果系统](../../../concept/07_future/04_effects_system.md)
 > **跨层映射**: L4 System F ↔ Rust 泛型 | 研究笔记扩展
 > **定理链编号**: T-130 类型一致性 → T-131 子类型 soundness
@@ -2744,7 +2744,7 @@ fn main() {
 
 - [类型系统实现](../../../crates/c02_type_system/src/README.md)
 - [类型系统示例](../../../crates/c02_type_system/examples/README.md)
-- [形式化工程系统 - 类型系统](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
+- [形式化工程系统 - 类型系统](../../../README.md)
 
 ### 工具资源
 
@@ -2955,7 +2955,7 @@ $
 \text{Transparent}(\tau_w, \tau) \rightarrow \text{Layout}(\tau_w) = \text{Layout}(\tau)
 $。
 
-**定理 NEWTYPE-T1**：`repr(transparent)` 保证单字段包装零成本；类型检查与 `transmute` 安全见 [UNSAFE_RUST_GUIDE](../../../concept/03_advanced/03_unsafe.md)。
+**定理 NEWTYPE-T1**：`repr(transparent)` 保证单字段包装零成本；类型检查与 `transmute` 安全见 [UNSAFE_RUST_GUIDE](../../../concept/03_advanced/02_unsafe/03_unsafe.md)。
 
 **Def DEREF-NULL1（deref_nullptr deny）**：1.93 中 `deref_nullptr` lint 默认 deny；对 `*const T`/`*mut T` 解引用需非空保证；与类型系统衔接：裸指针解引用 $*p$ 在 $p$ 可能为 null 时产生 lint 错误。
 

@@ -12,7 +12,7 @@
 > **双维定位**: C×Eva — 评估编译期执行的能力边界
 > **定位**: 深入探讨 Rust 的**编译期执行**能力——从 `const fn` 到 `const` 泛型（Generics），分析 Rust 如何在编译期完成计算，实现零成本抽象（Zero-Cost Abstraction）。
 > **前置概念**: [Generics](../02_intermediate/01_generics/02_generics.md) · [Type System](../01_foundation/02_type_system/04_type_system.md) · [Trait](../02_intermediate/00_traits/01_traits.md)
-> **后置概念**: [Macros](../03_advanced/04_macros.md) · [Zero Cost Abstractions](../01_foundation/00_start/06_zero_cost_abstractions.md)
+> **后置概念**: [Macros](../03_advanced/03_proc_macros/04_macros.md) · [Zero Cost Abstractions](../01_foundation/00_start/06_zero_cost_abstractions.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -477,7 +477,7 @@ fn main() {
 
 - [Generics](../02_intermediate/01_generics/02_generics.md) — 泛型
 - [Trait](../02_intermediate/00_traits/01_traits.md) — Trait
-- [Macros](../03_advanced/04_macros.md) — 宏（Macro）
+- [Macros](../03_advanced/03_proc_macros/04_macros.md) — 宏（Macro）
 - [Zero Cost Abstractions](../01_foundation/00_start/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
 
 ---

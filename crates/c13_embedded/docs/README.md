@@ -1,6 +1,6 @@
 # c13 嵌入式系统 - 文档指南
 
-> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs)。
 > 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
 >
 
@@ -10,11 +10,11 @@
 
 ## 快速导航
 
-- [裸机基础指南](BARE_METAL_GUIDE.md)
-- [build-std 与自定义目标](BUILD_STD_GUIDE.md)
-- [embedded-hal 1.0 迁移指南](EMBEDDED_HAL_1_0_MIGRATION.md)
-- [一页纸总结](ONE_PAGE_SUMMARY.md)
-- [完整索引](00_MASTER_INDEX.md)
+- [裸机基础指南](bare_metal_guide.md)
+- [build-std 与自定义目标](build_std_guide.md)
+- [embedded-hal 1.0 迁移指南](embedded_hal_1_0_migration.md)
+- [一页纸总结](one_page_summary.md)
+- [完整索引](00_master_index.md)
 
 ## 编译说明
 

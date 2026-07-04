@@ -17,7 +17,7 @@
 
 > **来源**:
 >
-> · [自测题库](../../00_meta/self_assessment.md)
+> · [自测题库](../../00_meta/04_navigation/self_assessment.md)
 > · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 > · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003)
 > · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/)
@@ -266,7 +266,7 @@ fn main() {
 }
 ```
 
-**知识点**：Rust 使用**非词法生命周期（NLL）**分析引用（Reference）的实际使用位置，而非仅依赖词法作用域。[→ NLL 与 Polonius](../../03_advanced/08_nll_and_polonius.md)
+**知识点**：Rust 使用**非词法生命周期（NLL）**分析引用（Reference）的实际使用位置，而非仅依赖词法作用域。[→ NLL 与 Polonius](../../03_advanced/02_unsafe/08_nll_and_polonius.md)
 
 </details>
 

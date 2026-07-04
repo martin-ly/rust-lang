@@ -338,7 +338,7 @@ A: 请参考 [10_project_maintenance_guide.md](10_project_maintenance_guide.md) 
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

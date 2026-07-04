@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 变量绑定 (Variable Binding) · 可变性 (Mutability) · 遮蔽 (Shadowing) · 常量 (Constant) · 静态变量 (Static) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 变量绑定 (Variable Binding) · 可变性 (Mutability) · 遮蔽 (Shadowing) · 常量 (Constant) · 静态变量 (Static) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 变量模型：从通用 PL 视角看 Rust 的所有权
 >
@@ -19,7 +19,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Und — 理解变量在编程语言中的通用语义
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/04_type_system.md)
-> **后置概念**: [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Evaluation Strategies](../../04_formal/18_evaluation_strategies.md)
+> **后置概念**: [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Evaluation Strategies](../../04_formal/03_operational_semantics/18_evaluation_strategies.md)
 > **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 [Pierce — TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
@@ -599,7 +599,7 @@ Rust 编译器要求所有变量在使用前必须初始化。读取未初始化
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

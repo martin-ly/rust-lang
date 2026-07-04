@@ -2,8 +2,8 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [并发编程](../../../../concept/03_advanced/01_concurrency.md)
-> - [并发模式](../../../../concept/03_advanced/10_concurrency_patterns.md)
+> - [并发编程](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
+> - [并发模式](../../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md)
 > - [性能优化](../../../../concept/06_ecosystem/15_performance_optimization.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
@@ -563,7 +563,7 @@ pool.install(|| {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Bevy 游戏引擎架构](05_bevy_architecture.md)
-- [并发编程模型](../../../../concept/03_advanced/01_concurrency.md)
+- [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 
 ---
 

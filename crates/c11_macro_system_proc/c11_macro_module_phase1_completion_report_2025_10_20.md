@@ -571,7 +571,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match
 
 - [宏模块规划提案](MACRO_MODULE_PLANNING_PROPOSAL_2025_10_20.md)
 - [项目路线图](ROADMAP.md)
-- [模块README](crates/C11_macro_system/README.md)
+- [模块README](../../README.md)
 - [主索引](crates/C11_macro_system/docs/00_master_index.md)
 
 ### B. 快速链接

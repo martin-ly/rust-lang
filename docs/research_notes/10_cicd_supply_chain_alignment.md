@@ -222,7 +222,7 @@
 | 性能与测试 | [10_performance_and_testing_alignment.md](10_performance_and_testing_alignment.md) | Criterion、Miri、Sanitizer、测试策略 |
 | 安全/unsafe 权威来源 | [10_safety_and_unsafe_authoritative_alignment.md](10_safety_and_unsafe_authoritative_alignment.md) | unsafe 边界与安全论证 |
 | 版本演进 | [10_version_evolution_alignment.md](10_version_evolution_alignment.md) | rust-version、MSRV、Edition |
-| CI 工作流目录 | [`.github/workflows/`](../../.github/workflows/) | 全部工作流 YAML 文件 |
+| CI 工作流目录 | [`.github/workflows/`](../../.github/workflows) | 全部工作流 YAML 文件 |
 | cargo-audit 配置 | [`.cargo/audit.toml`](../../.cargo/audit.toml) | 忽略规则与影响评估 |
 | cargo-vet 配置 | [`supply-chain/config.toml`](../../supply-chain/config.toml) | 审计标准与策略 |
 

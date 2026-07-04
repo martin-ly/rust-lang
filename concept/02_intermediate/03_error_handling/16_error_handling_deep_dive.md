@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 错误处理深入 (Error Handling Deep Dive) · 错误链 (Error Chain) · 回溯 (Backtrace) · anyhow · 错误转换 — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 错误处理深入 (Error Handling Deep Dive) · 错误链 (Error Chain) · 回溯 (Backtrace) · anyhow · 错误转换 — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 错误处理深入：从 Result 到自定义错误生态
 >
@@ -10,7 +10,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入分析 Rust **错误处理（Error Handling）机制**——从 `Result`/`Option` 的组合子到 `?` 运算符、错误转换、自定义错误类型和错误处理框架，揭示 Rust 如何将错误处理融入类型系统（Type System）实现编译期安全。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../00_traits/01_traits.md) · [Generics](../01_generics/02_generics.md)
-> **后置概念**: [Async](../../03_advanced/02_async.md) · [Logging](../../06_ecosystem/13_logging_observability.md)
+> **后置概念**: [Async](../../03_advanced/01_async/02_async.md) · [Logging](../../06_ecosystem/13_logging_observability.md)
 
 ---
 
@@ -506,7 +506,7 @@ graph TD
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Traits](../00_traits/01_traits.md) — Trait 系统
 - [Generics](../01_generics/02_generics.md) — 泛型（Generics）
-- [Async](../../03_advanced/02_async.md) — 异步（Async）编程
+- [Async](../../03_advanced/01_async/02_async.md) — 异步（Async）编程
 
 ---
 
@@ -742,7 +742,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

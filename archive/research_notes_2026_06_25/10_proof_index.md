@@ -106,7 +106,7 @@
 | **L2** | 完整证明 | 归纳基、归纳步、辅助引理编号、形式化陈述 |
 | **L3** | 机器可检查 | Coq/Isabelle/Lean 证明代码 |
 
-**本索引现状**: 多数为 L1；部分（如型变、组合工程、CORE_THEOREMS_FULL_PROOFS）为 L2；L3 骨架已创建（[coq_skeleton](coq_skeleton/README.md) T-OW2/T-BR1/T-TY3，证明 Admitted 待补全），见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md)。
+**本索引现状**: 多数为 L1；部分（如型变、组合工程、CORE_THEOREMS_FULL_PROOFS）为 L2；L3 骨架已创建（[coq_skeleton](../../README.md) T-OW2/T-BR1/T-TY3，证明 Admitted 待补全），见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md)。
 
 ---
 
@@ -826,7 +826,7 @@
 - [全局统一系统化框架](10_unified_systematic_framework.md) - 全景思维导图、多维矩阵、全链路图、反例总索引
 - [构造性语义与表达能力边界](10_language_semantics_expressiveness.md) - 操作/指称/公理语义、表达能力边界论证
 - [形式化论证系统梳理指南](10_formal_proof_system_guide.md) - 论证缺口分析、概念-公理-定理映射、反例索引
-- [研究笔记主索引](README.md)
+- [研究笔记主索引](../../README.md)
 - [研究进展跟踪](10_progress_tracking.md)
 - [研究任务清单](10_task_checklist.md)
 - [形式化工具验证指南](10_formal_verification_guide.md)（✅ 指南 100% 完成）
@@ -847,7 +847,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [类型理论研究索引](type_theory/README.md)
+- [类型理论研究索引](../../README.md)
 - [类型系统基础](type_theory/10_type_system_foundations.md)
 - [生命周期形式化](type_theory/10_lifetime_formalization.md)（类型论视角：Axiom LT1–LT2、定理 LT-T1/T2、引理 LT-L1、推论 LT-C1/C2）
 - [Trait 系统形式化](type_theory/10_trait_system_formalization.md)
@@ -970,7 +970,7 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

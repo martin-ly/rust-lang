@@ -87,10 +87,10 @@
 
 | Book 主题 | 本项目位置 | 形式化内容 | 代码示例 | 权威来源 |
 | :--- | :--- | :--- | :---: | :--- |
-| 安装与开始 | [docs/01_learning/](../01_learning/) | — | ✅ | TRPL [Ch1](https://doc.rust-lang.org/book/ch01-00-getting-started.html), RBE [Hello](https://doc.rust-lang.org/rust-by-example/hello.html) |
+| 安装与开始 | [docs/01_learning/](../01_learning) | — | ✅ | TRPL [Ch1](https://doc.rust-lang.org/book/ch01-00-getting-started.html), RBE [Hello](https://doc.rust-lang.org/rust-by-example/hello.html) |
 | 变量与可变性 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) §规则1-4 | Def 1.1-1.5 | ✅ | TRPL [Ch3.1](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) |
 | 数据类型 | [docs/02_reference/quick_reference/02_type_system.md](../02_reference/quick_reference/02_type_system.md) | 规则1-3 | ✅ | TRPL [Ch3.2](https://doc.rust-lang.org/book/ch03-02-data-types.html) |
-| 函数 | [crates/c03_control_fn/](../../crates/c03_control_fn/) | — | ✅ | TRPL [Ch3.3](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html), RBE [Functions](https://doc.rust-lang.org/rust-by-example/fn.html) |
+| 函数 | [crates/c03_control_fn/](../../crates/c03_control_fn) | — | ✅ | TRPL [Ch3.3](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html), RBE [Functions](https://doc.rust-lang.org/rust-by-example/fn.html) |
 | 注释与文档 | [docs/06_toolchain/03_rustdoc_advanced.md](../06_toolchain/03_rustdoc_advanced.md) | — | ✅ | TRPL [Ch3.4](https://doc.rust-lang.org/book/ch03-04-comments.html) |
 
 **对齐状态**: ✅ 已覆盖核心概念；缺口见概览表 Ch 3。
@@ -163,9 +163,9 @@
 
 | Book 主题 | 本项目位置 | 形式化定理 | 覆盖度 | 权威来源 |
 | :--- | :--- | :--- | :---: | :--- |
-| 线程创建 | [crates/c05_threads/](../../crates/c05_threads/) | — | 100% | TRPL [Ch16.1](https://doc.rust-lang.org/book/ch16-01-threads.html) |
-| 消息传递 | [crates/c05_threads/](../../crates/c05_threads/) | — | 100% | TRPL [Ch16.2](https://doc.rust-lang.org/book/ch16-02-message-passing.html) |
-| 共享状态 | [crates/c05_threads/](../../crates/c05_threads/) | T-MUTEX1 | 100% | TRPL [Ch16.3](https://doc.rust-lang.org/book/ch16-03-shared-state.html) |
+| 线程创建 | [crates/c05_threads/](../../crates/c05_threads) | — | 100% | TRPL [Ch16.1](https://doc.rust-lang.org/book/ch16-01-threads.html) |
+| 消息传递 | [crates/c05_threads/](../../crates/c05_threads) | — | 100% | TRPL [Ch16.2](https://doc.rust-lang.org/book/ch16-02-message-passing.html) |
+| 共享状态 | [crates/c05_threads/](../../crates/c05_threads) | T-MUTEX1 | 100% | TRPL [Ch16.3](https://doc.rust-lang.org/book/ch16-03-shared-state.html) |
 | Send/Sync | [docs/research_notes/10_concurrency_cheatsheet.md](10_concurrency_cheatsheet.md) | Def SEND1, SYNC1 | 100% | TRPL [Ch16.4](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html), RFC [0458 send-improvements](https://rust-lang.github.io/rfcs/0458-send-improvements.html) |
 
 **对齐检查清单**:

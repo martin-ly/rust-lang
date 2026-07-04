@@ -13,7 +13,7 @@
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评价密码学实现的安全性
-> **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Trait](../02_intermediate/00_traits/01_traits.md) · [类型系统（Type System）](../01_foundation/02_type_system/04_type_system.md) · 安全实践
+> **前置依赖**: [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) · [Trait](../02_intermediate/00_traits/01_traits.md) · [类型系统（Type System）](../01_foundation/02_type_system/04_type_system.md) · 安全实践
 > **后置延伸**: [区块链与智能合约安全](06_blockchain.md) · [网络协议](38_network_protocols.md) · [TLS/QUIC](38_network_protocols.md)
 >
 > **来源**: [ring](https://docs.rs/ring/) · [rustls](https://docs.rs/rustls/) · [Rust Crypto](https://github.com/RustCrypto) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
@@ -828,11 +828,11 @@ fn weak_hash_password(password: &str) -> String {
 - [安全实践](19_security_practices.md) — 防御性编程、安全模式
 - [网络协议](38_network_protocols.md) — QUIC/HTTP-3、TLS 底层
 - [区块链与智能合约安全](06_blockchain.md) — 链上密码学应用
-- [Unsafe Rust](../03_advanced/03_unsafe.md) — 密码学实现中的 unsafe 边界
+- [Unsafe Rust](../03_advanced/02_unsafe/03_unsafe.md) — 密码学实现中的 unsafe 边界
 - [类型系统（Type System）](../01_foundation/02_type_system/04_type_system.md) — 类型安全与密码学抽象
 - [内存管理](../02_intermediate/02_memory_management/03_memory_management.md) — 密钥材料的内存管理
-- [并发编程](../03_advanced/01_concurrency.md) — 密码学操作的线程安全
-- [形式化验证](../04_formal/05_verification_toolchain.md) — 密码学实现的形式化证明
+- [并发编程](../03_advanced/00_concurrency/01_concurrency.md) — 密码学操作的线程安全
+- [形式化验证](../04_formal/04_model_checking/05_verification_toolchain.md) — 密码学实现的形式化证明
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)

@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 高级生命周期 (Advanced Lifetimes) · HRTB · 生命周期省略（Lifetime Elision）规则 (Elision) · 子类型 (Subtyping) · 变型 (Variance) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 高级生命周期 (Advanced Lifetimes) · HRTB · 生命周期省略（Lifetime Elision）规则 (Elision) · 子类型 (Subtyping) · 变型 (Variance) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 生命周期高级主题：从 HRTB 到自引用类型
 >
@@ -12,7 +12,7 @@
 > **双维定位**: C×Ana — 分析高级生命周期（Lifetimes）的约束传播
 > **定位**: 深入分析 Rust **生命周期**的高级主题——从高阶生命周期（HRTB）、生命周期省略（Lifetime Elision）规则到自引用（Reference）结构和 Pin，揭示生命周期系统如何处理最复杂的借用（Borrowing）场景。
 > **前置概念**: [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Traits](01_traits.md) · [Generics](../01_generics/02_generics.md)
-> **后置概念**: [Pin](../../03_advanced/06_pin_unpin.md) · [NLL](../../03_advanced/08_nll_and_polonius.md) · [RustBelt](../../04_formal/04_rustbelt.md)
+> **后置概念**: [Pin](../../03_advanced/01_async/06_pin_unpin.md) · [NLL](../../03_advanced/02_unsafe/08_nll_and_polonius.md) · [RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md)
 
 ---
 
@@ -523,9 +523,9 @@ graph TD
 ## 相关概念文件
 
 - [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) — 生命周期基础
-- [Pin](../../03_advanced/06_pin_unpin.md) — Pin 与 Unpin
-- [NLL](../../03_advanced/08_nll_and_polonius.md) — NLL 与 Polonius
-- [RustBelt](../../04_formal/04_rustbelt.md) — 形式化验证
+- [Pin](../../03_advanced/01_async/06_pin_unpin.md) — Pin 与 Unpin
+- [NLL](../../03_advanced/02_unsafe/08_nll_and_polonius.md) — NLL 与 Polonius
+- [RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) — 形式化验证
 
 ---
 
@@ -717,7 +717,7 @@ fn main() {}
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: Credential Provider · `cargo:token` · `CARGO_HOME` · Build Cache · Target Dir · Build Dir · Dep-info · `sccache` · Registry Token — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: Credential Provider · `cargo:token` · `CARGO_HOME` · Build Cache · Target Dir · Build Dir · Dep-info · `sccache` · Registry Token — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 # Cargo 认证与构建缓存
 

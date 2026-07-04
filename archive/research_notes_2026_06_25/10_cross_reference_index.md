@@ -167,7 +167,7 @@
 
 | 速查卡 | → 链接到指南 | → 链接到研究笔记 |
 | :--- | :--- | :--- |
-| [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) | [UNSAFE_RUST_GUIDE](../../concept/03_advanced/03_unsafe.md) | [ownership_model](formal_methods/10_ownership_model.md) |
+| [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) | [UNSAFE_RUST_GUIDE](../../concept/03_advanced/02_unsafe/03_unsafe.md) | [ownership_model](formal_methods/10_ownership_model.md) |
 | [02_type_system.md](../02_reference/quick_reference/02_type_system.md) | [ADVANCED_TOPICS_DEEP_DIVE](../05_guides/05_advanced_topics_deep_dive.md) | [type_system_foundations](type_theory/10_type_system_foundations.md) |
 | [02_async_patterns.md](../02_reference/quick_reference/02_async_patterns.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/05_async_programming_usage_guide.md) | [async_state_machine](formal_methods/10_async_state_machine.md) |
 | [02_threads_concurrency_cheatsheet.md](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | [THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/05_threads_concurrency_usage_guide.md) | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) |
@@ -535,7 +535,7 @@ graph TD
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

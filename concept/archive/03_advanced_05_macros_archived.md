@@ -12,14 +12,14 @@
 > **归档原因**: 内容碎片化（< 40 行），已被主文件覆盖。
 > **状态**: 已归档
 >
-> - `03_unsafe_rust.md` → 整合至 [`03_unsafe.md`](03_unsafe.md)
-> - `05_macros.md` → 整合至 [`04_macros.md`](04_macros.md) 和 [`07_proc_macro.md`](07_proc_macro.md)
+> - `03_unsafe_rust.md` → 整合至 [`03_unsafe.md`](../03_advanced/02_unsafe/03_unsafe.md)
+> - `05_macros.md` → 整合至 [`04_macros.md`](../03_advanced/03_proc_macros/04_macros.md) 和 [`07_proc_macro.md`](../03_advanced/03_proc_macros/07_proc_macro.md)
 > - `08_zero_cost_abstractions.md` → 整合至 [`06_zero_cost_abstractions.md`](../01_foundation/00_start/06_zero_cost_abstractions.md)
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-> **后置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
+> **后置概念**: [Formal Verification](../04_formal/01_ownership_logic/03_ownership_formal.md)
 > **前置依赖**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
 > **前置依赖**: [Traits](../02_intermediate/00_traits/01_traits.md)
 

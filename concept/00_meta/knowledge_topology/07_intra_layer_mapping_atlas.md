@@ -14,12 +14,12 @@
 
 | 源概念 | 关系 | 目标概念 |
 |:---|:---:|:---|
-| [C/C++ → Rust 工程层对比路线图](../cpp_rust_engineering_roadmap.md) | ⟹ | [模式语义空间索引：设计模式在概念体系中的坐标](../pattern_semantic_space_index.md) |
-| [基础知识缺口补全总索引](../foundations_gap_closure_index.md) | ⟹ | [Concept Audit Guide](../08_concept_audit_guide.md) |
-| [模式语义空间索引：设计模式在概念体系中的坐标](../pattern_semantic_space_index.md) | ⟹ | [语义桥：算法、设计模式与工作流模式的统一谱系](../semantic_bridge_algorithms_patterns.md) |
-| [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../pl_foundations_roadmap.md) | ⟹ | [C/C++ → Rust 工程层对比路线图](../cpp_rust_engineering_roadmap.md) |
-| [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../pl_foundations_roadmap.md) | ⟹ | [模式语义空间索引：设计模式在概念体系中的坐标](../pattern_semantic_space_index.md) |
-| [模板去同质化指南](../template_deduplication_guide.md) | ⟹ | [Rust 知识体系思维表征覆盖率仪表板](../quality_dashboard_v2.md) |
+| [C/C++ → Rust 工程层对比路线图](../00_framework/cpp_rust_engineering_roadmap.md) | ⟹ | [模式语义空间索引：设计模式在概念体系中的坐标](../00_framework/pattern_semantic_space_index.md) |
+| [基础知识缺口补全总索引](../04_navigation/foundations_gap_closure_index.md) | ⟹ | [Concept Audit Guide](../03_audit/08_concept_audit_guide.md) |
+| [模式语义空间索引：设计模式在概念体系中的坐标](../00_framework/pattern_semantic_space_index.md) | ⟹ | [语义桥：算法、设计模式与工作流模式的统一谱系](../00_framework/semantic_bridge_algorithms_patterns.md) |
+| [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../00_framework/pl_foundations_roadmap.md) | ⟹ | [C/C++ → Rust 工程层对比路线图](../00_framework/cpp_rust_engineering_roadmap.md) |
+| [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../00_framework/pl_foundations_roadmap.md) | ⟹ | [模式语义空间索引：设计模式在概念体系中的坐标](../00_framework/pattern_semantic_space_index.md) |
+| [模板去同质化指南](../03_audit/template_deduplication_guide.md) | ⟹ | [Rust 知识体系思维表征覆盖率仪表板](../03_audit/quality_dashboard_v2.md) |
 
 ## L1 基础概念层
 
@@ -73,27 +73,27 @@
 
 | 源概念 | 关系 | 目标概念 |
 |:---|:---:|:---|
-| [Concurrency](../../03_advanced/01_concurrency.md) | ⟹ | [Async/Await](../../03_advanced/02_async.md) |
-| [Pin 与 Unpin：自引用类型的不动性保证](../../03_advanced/06_pin_unpin.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/03_unsafe.md) |
-| [NLL 与 Polonius：借用检查器的演进](../../03_advanced/08_nll_and_polonius.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/03_unsafe.md) |
-| [并发 模式：从消息 传递到锁自由的数据结构](../../03_advanced/10_concurrency_patterns.md) | ⟹ | [Concurrency](../../03_advanced/01_concurrency.md) |
-| [Unsafe Rust 模式：安全抽象的核心技术](../../03_advanced/12_unsafe_rust_patterns.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/03_unsafe.md) |
-| [无锁编程与内存模型](../../03_advanced/16_lock_free.md) | ⟹ | [并发 模式：从消息 传递到锁自由的数据结构](../../03_advanced/10_concurrency_patterns.md) |
-| [Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象](../../03_advanced/18_network_programming.md) | ⟹ | [无锁编程与内存模型](../../03_advanced/16_lock_free.md) |
-| [Linkage](../../03_advanced/27_linkage.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/03_unsafe.md) |
-| [条件编译](../../03_advanced/28_conditional_compilation.md) | ⟹ | [FFI 高级主题：跨语言边界的安全与性能](../../03_advanced/09_ffi_advanced.md) |
-| [条件编译](../../03_advanced/28_conditional_compilation.md) | ⟹ | [Linkage](../../03_advanced/27_linkage.md) |
-| [Rust 内存模型](../../03_advanced/29_memory_model.md) | ⟹ | [原子操作与内存序：无锁并发的精确控制](../../03_advanced/11_atomics_and_memory_ordering.md) |
-| [Rust 内存模型](../../03_advanced/29_memory_model.md) | ⟹ | [内联汇编 (Inline Assembly)](../../03_advanced/13_inline_assembly.md) |
-| [Rust 运行时](../../03_advanced/30_rust_runtime.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/03_unsafe.md) |
-| [Panic 机制](../../03_advanced/31_panic.md) | ⟹ | [FFI 高级主题：跨语言边界的安全与性能](../../03_advanced/09_ffi_advanced.md) |
-| [内存分配与生命周期](../../03_advanced/32_memory_allocation_and_lifetime.md) | ⟹ | [自定义分配器与内存布局优化](../../03_advanced/14_custom_allocators.md) |
-| [内存分配与生命周期](../../03_advanced/32_memory_allocation_and_lifetime.md) | ⟹ | [Rust 运行时](../../03_advanced/30_rust_runtime.md) |
-| [变量](../../03_advanced/33_variables.md) | ⟹ | [内存分配与生命周期](../../03_advanced/32_memory_allocation_and_lifetime.md) |
-| [变量](../../03_advanced/33_variables.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/03_unsafe.md) |
-| [Unsafe 参考](../../03_advanced/35_unsafe_reference.md) | ⟹ | [内联汇编 (Inline Assembly)](../../03_advanced/13_inline_assembly.md) |
-| [Unsafe 参考](../../03_advanced/35_unsafe_reference.md) | ⟹ | [FFI 高级主题：跨语言边界的安全与性能](../../03_advanced/09_ffi_advanced.md) |
-| [Unsafe 参考](../../03_advanced/35_unsafe_reference.md) | ⟹ | [自定义分配器与内存布局优化](../../03_advanced/14_custom_allocators.md) |
+| [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) | ⟹ | [Async/Await](../../03_advanced/01_async/02_async.md) |
+| [Pin 与 Unpin：自引用类型的不动性保证](../../03_advanced/01_async/06_pin_unpin.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/03_unsafe.md) |
+| [NLL 与 Polonius：借用检查器的演进](../../03_advanced/02_unsafe/08_nll_and_polonius.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/03_unsafe.md) |
+| [并发 模式：从消息 传递到锁自由的数据结构](../../03_advanced/00_concurrency/10_concurrency_patterns.md) | ⟹ | [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) |
+| [Unsafe Rust 模式：安全抽象的核心技术](../../03_advanced/02_unsafe/12_unsafe_rust_patterns.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/03_unsafe.md) |
+| [无锁编程与内存模型](../../03_advanced/00_concurrency/16_lock_free.md) | ⟹ | [并发 模式：从消息 传递到锁自由的数据结构](../../03_advanced/00_concurrency/10_concurrency_patterns.md) |
+| [Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象](../../03_advanced/06_low_level_patterns/18_network_programming.md) | ⟹ | [无锁编程与内存模型](../../03_advanced/00_concurrency/16_lock_free.md) |
+| [Linkage](../../03_advanced/04_ffi/27_linkage.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/03_unsafe.md) |
+| [条件编译](../../03_advanced/03_proc_macros/28_conditional_compilation.md) | ⟹ | [FFI 高级主题：跨语言边界的安全与性能](../../03_advanced/04_ffi/09_ffi_advanced.md) |
+| [条件编译](../../03_advanced/03_proc_macros/28_conditional_compilation.md) | ⟹ | [Linkage](../../03_advanced/04_ffi/27_linkage.md) |
+| [Rust 内存模型](../../03_advanced/02_unsafe/29_memory_model.md) | ⟹ | [原子操作与内存序：无锁并发的精确控制](../../03_advanced/00_concurrency/11_atomics_and_memory_ordering.md) |
+| [Rust 内存模型](../../03_advanced/02_unsafe/29_memory_model.md) | ⟹ | [内联汇编 (Inline Assembly)](../../03_advanced/05_inline_assembly/13_inline_assembly.md) |
+| [Rust 运行时](../../03_advanced/02_unsafe/30_rust_runtime.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/03_unsafe.md) |
+| [Panic 机制](../../03_advanced/02_unsafe/31_panic.md) | ⟹ | [FFI 高级主题：跨语言边界的安全与性能](../../03_advanced/04_ffi/09_ffi_advanced.md) |
+| [内存分配与生命周期](../../03_advanced/06_low_level_patterns/32_memory_allocation_and_lifetime.md) | ⟹ | [自定义分配器与内存布局优化](../../03_advanced/06_low_level_patterns/14_custom_allocators.md) |
+| [内存分配与生命周期](../../03_advanced/06_low_level_patterns/32_memory_allocation_and_lifetime.md) | ⟹ | [Rust 运行时](../../03_advanced/02_unsafe/30_rust_runtime.md) |
+| [变量](../../03_advanced/06_low_level_patterns/33_variables.md) | ⟹ | [内存分配与生命周期](../../03_advanced/06_low_level_patterns/32_memory_allocation_and_lifetime.md) |
+| [变量](../../03_advanced/06_low_level_patterns/33_variables.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/03_unsafe.md) |
+| [Unsafe 参考](../../03_advanced/02_unsafe/35_unsafe_reference.md) | ⟹ | [内联汇编 (Inline Assembly)](../../03_advanced/05_inline_assembly/13_inline_assembly.md) |
+| [Unsafe 参考](../../03_advanced/02_unsafe/35_unsafe_reference.md) | ⟹ | [FFI 高级主题：跨语言边界的安全与性能](../../03_advanced/04_ffi/09_ffi_advanced.md) |
+| [Unsafe 参考](../../03_advanced/02_unsafe/35_unsafe_reference.md) | ⟹ | [自定义分配器与内存布局优化](../../03_advanced/06_low_level_patterns/14_custom_allocators.md) |
 
 ## L4 形式化理论层
 
@@ -101,58 +101,58 @@
 
 | 源概念 | 关系 | 目标概念 |
 |:---|:---:|:---|
-| [Linear Logic & Affine Logic](../../04_formal/01_linear_logic.md) | ⟹ | [Ownership Formalization](../../04_formal/03_ownership_formal.md) |
-| [Linear Logic & Affine Logic](../../04_formal/01_linear_logic.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/04_rustbelt.md) |
-| [Type Theory](../../04_formal/02_type_theory.md) | ⟹ | [Ownership Formalization](../../04_formal/03_ownership_formal.md) |
-| [Type Theory](../../04_formal/02_type_theory.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/04_rustbelt.md) |
-| [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/06_subtype_variance.md) | ⟹ | [Type Theory](../../04_formal/02_type_theory.md) |
-| [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/06_subtype_variance.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/04_rustbelt.md) |
-| [类型推断：Hindley-Milner 算法与 Rust 的工业实现](../../04_formal/08_type_inference.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/04_rustbelt.md) |
-| [类型推断：Hindley-Milner 算法与 Rust 的工业实现](../../04_formal/08_type_inference.md) | ⟹ | [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/06_subtype_variance.md) |
-| [线性逻辑在 Rust 中的工程应用](../../04_formal/09_linear_logic_applications.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/04_rustbelt.md) |
-| [范畴论与 Rust：从函子到单子](../../04_formal/10_category_theory.md) | ⟹ | [Linear Logic & Affine Logic](../../04_formal/01_linear_logic.md) |
-| [范畴论与 Rust：从函子到单子](../../04_formal/10_category_theory.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/04_rustbelt.md) |
-| [分离逻辑：Rust 所有权的形式化根基](../../04_formal/11_separation_logic.md) | ⟹ | [Verification Toolchain Selection Guide](../../04_formal/05_verification_toolchain.md) |
-| [分离逻辑：Rust 所有权的形式化根基](../../04_formal/11_separation_logic.md) | ⟹ | [Type Theory](../../04_formal/02_type_theory.md) |
-| [指称语义与领域理论](../../04_formal/12_denotational_semantics.md) | ⟹ | [范畴论与 Rust：从函子到单子](../../04_formal/10_category_theory.md) |
-| [指称语义与领域理论](../../04_formal/12_denotational_semantics.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/04_rustbelt.md) |
-| [Lambda 演算与 Rust 计算模型](../../04_formal/14_lambda_calculus.md) | ⟹ | [范畴论与 Rust：从函子到单子](../../04_formal/10_category_theory.md) |
-| [Lambda 演算与 Rust 计算模型](../../04_formal/14_lambda_calculus.md) | ⟹ | [指称语义与领域理论](../../04_formal/12_denotational_semantics.md) |
-| [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](../../04_formal/15_hoare_logic.md) | ⟹ | [分离逻辑：Rust 所有权的形式化根基](../../04_formal/11_separation_logic.md) |
-| [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](../../04_formal/15_hoare_logic.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/04_rustbelt.md) |
-| [操作语义：程序行为的形式化定义](../../04_formal/17_operational_semantics.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/04_rustbelt.md) |
-| [操作语义：程序行为的形式化定义](../../04_formal/17_operational_semantics.md) | ⟹ | [分离逻辑：Rust 所有权的形式化根基](../../04_formal/11_separation_logic.md) |
-| [rustc 中的 Trait Solver](../../04_formal/26_trait_solver_in_rustc.md) | ⟹ | [Rustc 查询系统与增量编译](../../04_formal/19_rustc_query_system.md) |
-| [rustc 中的 Trait Solver](../../04_formal/26_trait_solver_in_rustc.md) | ⟹ | [Ownership Formalization](../../04_formal/03_ownership_formal.md) |
-| [Miri：Rust 未定义行为动态检测器](../../04_formal/31_miri.md) | ⟹ | [Tree Borrows 深度解析](../../04_formal/36_tree_borrows_deep_dive.md) |
-| [Miri：Rust 未定义行为动态检测器](../../04_formal/31_miri.md) | ⟹ | [BorrowSanitizer 运行时别名模型检测](../../04_formal/34_borrow_sanitizer_in_formal.md) |
-| [Miri：Rust 未定义行为动态检测器](../../04_formal/31_miri.md) | ⟹ | [现代 Rust 验证工具生态](../../04_formal/22_modern_verification_tools.md) |
-| [Kani：Rust 有界模型检查器](../../04_formal/32_kani.md) | ⟹ | [Miri：Rust 未定义行为动态检测器](../../04_formal/31_miri.md) |
-| [Kani：Rust 有界模型检查器](../../04_formal/32_kani.md) | ⟹ | [BorrowSanitizer 运行时别名模型检测](../../04_formal/34_borrow_sanitizer_in_formal.md) |
-| [Rustc 名称解析与 HIR](../../04_formal/35_name_resolution_and_hir.md) | ⟹ | [Rustc 查询系统与增量编译](../../04_formal/19_rustc_query_system.md) |
-| [Rustc 名称解析与 HIR](../../04_formal/35_name_resolution_and_hir.md) | ⟹ | [类型推断：Hindley-Milner 算法与 Rust 的工业实现](../../04_formal/08_type_inference.md) |
-| [Rustc 名称解析与 HIR](../../04_formal/35_name_resolution_and_hir.md) | ⟹ | [rustc 中的 Trait Solver](../../04_formal/26_trait_solver_in_rustc.md) |
-| [未定义行为清单](../../04_formal/37_behavior_considered_undefined.md) | ⟹ | [Miri：Rust 未定义行为动态检测器](../../04_formal/31_miri.md) |
-| [未定义行为清单](../../04_formal/37_behavior_considered_undefined.md) | ⟹ | [Tree Borrows 深度解析](../../04_formal/36_tree_borrows_deep_dive.md) |
-| [名称、作用域与解析](../../04_formal/40_names_and_resolution.md) | ⟹ | [Rustc 名称解析与 HIR](../../04_formal/35_name_resolution_and_hir.md) |
-| [类型布局](../../04_formal/42_type_layout.md) | ⟹ | [未定义行为清单](../../04_formal/37_behavior_considered_undefined.md) |
-| [析构函数与 Drop Scope](../../04_formal/43_destructors.md) | ⟹ | [未定义行为清单](../../04_formal/37_behavior_considered_undefined.md) |
-| [符号约定](../../04_formal/44_notation.md) | ⟹ | [词法结构](../../04_formal/45_lexical_structure.md) |
-| [词法结构](../../04_formal/45_lexical_structure.md) | ⟹ | [名称、作用域与解析](../../04_formal/40_names_and_resolution.md) |
-| [词法结构](../../04_formal/45_lexical_structure.md) | ⟹ | [条目参考](../../04_formal/46_items_reference.md) |
-| [条目参考](../../04_formal/46_items_reference.md) | ⟹ | [属性](../../04_formal/47_attributes.md) |
-| [语句与表达式参考](../../04_formal/48_statements_and_expressions_reference.md) | ⟹ | [模式参考](../../04_formal/49_patterns_reference.md) |
-| [语句与表达式参考](../../04_formal/48_statements_and_expressions_reference.md) | ⟹ | [常量求值](../../04_formal/39_constant_evaluation.md) |
-| [语句与表达式参考](../../04_formal/48_statements_and_expressions_reference.md) | ⟹ | [析构函数与 Drop Scope](../../04_formal/43_destructors.md) |
-| [模式参考](../../04_formal/49_patterns_reference.md) | ⟹ | [析构函数与 Drop Scope](../../04_formal/43_destructors.md) |
-| [模式参考](../../04_formal/49_patterns_reference.md) | ⟹ | [语句与表达式参考](../../04_formal/48_statements_and_expressions_reference.md) |
-| [类型系统参考](../../04_formal/50_type_system_reference.md) | ⟹ | [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/06_subtype_variance.md) |
-| [类型系统参考](../../04_formal/50_type_system_reference.md) | ⟹ | [未定义行为清单](../../04_formal/37_behavior_considered_undefined.md) |
-| [类型系统参考](../../04_formal/50_type_system_reference.md) | ⟹ | [Application Binary Interface](../../04_formal/38_application_binary_interface.md) |
-| [名字参考](../../04_formal/51_names_reference.md) | ⟹ | [条目参考](../../04_formal/46_items_reference.md) |
-| [名字参考](../../04_formal/51_names_reference.md) | ⟹ | [模式参考](../../04_formal/49_patterns_reference.md) |
-| [Rust Reference 附录](../../04_formal/52_reference_appendices.md) | ⟹ | [语句与表达式参考](../../04_formal/48_statements_and_expressions_reference.md) |
-| [Rust Reference 附录](../../04_formal/52_reference_appendices.md) | ⟹ | [模式参考](../../04_formal/49_patterns_reference.md) |
+| [Linear Logic & Affine Logic](../../04_formal/01_ownership_logic/01_linear_logic.md) | ⟹ | [Ownership Formalization](../../04_formal/01_ownership_logic/03_ownership_formal.md) |
+| [Linear Logic & Affine Logic](../../04_formal/01_ownership_logic/01_linear_logic.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/04_rustbelt.md) |
+| [Type Theory](../../04_formal/00_type_theory/02_type_theory.md) | ⟹ | [Ownership Formalization](../../04_formal/01_ownership_logic/03_ownership_formal.md) |
+| [Type Theory](../../04_formal/00_type_theory/02_type_theory.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/04_rustbelt.md) |
+| [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/00_type_theory/06_subtype_variance.md) | ⟹ | [Type Theory](../../04_formal/00_type_theory/02_type_theory.md) |
+| [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/00_type_theory/06_subtype_variance.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/04_rustbelt.md) |
+| [类型推断：Hindley-Milner 算法与 Rust 的工业实现](../../04_formal/00_type_theory/08_type_inference.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/04_rustbelt.md) |
+| [类型推断：Hindley-Milner 算法与 Rust 的工业实现](../../04_formal/00_type_theory/08_type_inference.md) | ⟹ | [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/00_type_theory/06_subtype_variance.md) |
+| [线性逻辑在 Rust 中的工程应用](../../04_formal/01_ownership_logic/09_linear_logic_applications.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/04_rustbelt.md) |
+| [范畴论与 Rust：从函子到单子](../../04_formal/00_type_theory/10_category_theory.md) | ⟹ | [Linear Logic & Affine Logic](../../04_formal/01_ownership_logic/01_linear_logic.md) |
+| [范畴论与 Rust：从函子到单子](../../04_formal/00_type_theory/10_category_theory.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/04_rustbelt.md) |
+| [分离逻辑：Rust 所有权的形式化根基](../../04_formal/02_separation_logic/11_separation_logic.md) | ⟹ | [Verification Toolchain Selection Guide](../../04_formal/04_model_checking/05_verification_toolchain.md) |
+| [分离逻辑：Rust 所有权的形式化根基](../../04_formal/02_separation_logic/11_separation_logic.md) | ⟹ | [Type Theory](../../04_formal/00_type_theory/02_type_theory.md) |
+| [指称语义与领域理论](../../04_formal/03_operational_semantics/12_denotational_semantics.md) | ⟹ | [范畴论与 Rust：从函子到单子](../../04_formal/00_type_theory/10_category_theory.md) |
+| [指称语义与领域理论](../../04_formal/03_operational_semantics/12_denotational_semantics.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/04_rustbelt.md) |
+| [Lambda 演算与 Rust 计算模型](../../04_formal/00_type_theory/14_lambda_calculus.md) | ⟹ | [范畴论与 Rust：从函子到单子](../../04_formal/00_type_theory/10_category_theory.md) |
+| [Lambda 演算与 Rust 计算模型](../../04_formal/00_type_theory/14_lambda_calculus.md) | ⟹ | [指称语义与领域理论](../../04_formal/03_operational_semantics/12_denotational_semantics.md) |
+| [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](../../04_formal/03_operational_semantics/15_hoare_logic.md) | ⟹ | [分离逻辑：Rust 所有权的形式化根基](../../04_formal/02_separation_logic/11_separation_logic.md) |
+| [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](../../04_formal/03_operational_semantics/15_hoare_logic.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/04_rustbelt.md) |
+| [操作语义：程序行为的形式化定义](../../04_formal/03_operational_semantics/17_operational_semantics.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/04_rustbelt.md) |
+| [操作语义：程序行为的形式化定义](../../04_formal/03_operational_semantics/17_operational_semantics.md) | ⟹ | [分离逻辑：Rust 所有权的形式化根基](../../04_formal/02_separation_logic/11_separation_logic.md) |
+| [rustc 中的 Trait Solver](../../04_formal/05_rustc_internals/26_trait_solver_in_rustc.md) | ⟹ | [Rustc 查询系统与增量编译](../../04_formal/05_rustc_internals/19_rustc_query_system.md) |
+| [rustc 中的 Trait Solver](../../04_formal/05_rustc_internals/26_trait_solver_in_rustc.md) | ⟹ | [Ownership Formalization](../../04_formal/01_ownership_logic/03_ownership_formal.md) |
+| [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/31_miri.md) | ⟹ | [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md) |
+| [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/31_miri.md) | ⟹ | [BorrowSanitizer 运行时别名模型检测](../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md) |
+| [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/31_miri.md) | ⟹ | [现代 Rust 验证工具生态](../../04_formal/04_model_checking/22_modern_verification_tools.md) |
+| [Kani：Rust 有界模型检查器](../../04_formal/04_model_checking/32_kani.md) | ⟹ | [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/31_miri.md) |
+| [Kani：Rust 有界模型检查器](../../04_formal/04_model_checking/32_kani.md) | ⟹ | [BorrowSanitizer 运行时别名模型检测](../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md) |
+| [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/35_name_resolution_and_hir.md) | ⟹ | [Rustc 查询系统与增量编译](../../04_formal/05_rustc_internals/19_rustc_query_system.md) |
+| [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/35_name_resolution_and_hir.md) | ⟹ | [类型推断：Hindley-Milner 算法与 Rust 的工业实现](../../04_formal/00_type_theory/08_type_inference.md) |
+| [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/35_name_resolution_and_hir.md) | ⟹ | [rustc 中的 Trait Solver](../../04_formal/05_rustc_internals/26_trait_solver_in_rustc.md) |
+| [未定义行为清单](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md) | ⟹ | [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/31_miri.md) |
+| [未定义行为清单](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md) | ⟹ | [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md) |
+| [名称、作用域与解析](../../04_formal/05_rustc_internals/40_names_and_resolution.md) | ⟹ | [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/35_name_resolution_and_hir.md) |
+| [类型布局](../../04_formal/05_rustc_internals/42_type_layout.md) | ⟹ | [未定义行为清单](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md) |
+| [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/43_destructors.md) | ⟹ | [未定义行为清单](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md) |
+| [符号约定](../../04_formal/06_notation/44_notation.md) | ⟹ | [词法结构](../../04_formal/05_rustc_internals/45_lexical_structure.md) |
+| [词法结构](../../04_formal/05_rustc_internals/45_lexical_structure.md) | ⟹ | [名称、作用域与解析](../../04_formal/05_rustc_internals/40_names_and_resolution.md) |
+| [词法结构](../../04_formal/05_rustc_internals/45_lexical_structure.md) | ⟹ | [条目参考](../../04_formal/05_rustc_internals/46_items_reference.md) |
+| [条目参考](../../04_formal/05_rustc_internals/46_items_reference.md) | ⟹ | [属性](../../04_formal/05_rustc_internals/47_attributes.md) |
+| [语句与表达式参考](../../04_formal/05_rustc_internals/48_statements_and_expressions_reference.md) | ⟹ | [模式参考](../../04_formal/05_rustc_internals/49_patterns_reference.md) |
+| [语句与表达式参考](../../04_formal/05_rustc_internals/48_statements_and_expressions_reference.md) | ⟹ | [常量求值](../../04_formal/03_operational_semantics/39_constant_evaluation.md) |
+| [语句与表达式参考](../../04_formal/05_rustc_internals/48_statements_and_expressions_reference.md) | ⟹ | [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/43_destructors.md) |
+| [模式参考](../../04_formal/05_rustc_internals/49_patterns_reference.md) | ⟹ | [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/43_destructors.md) |
+| [模式参考](../../04_formal/05_rustc_internals/49_patterns_reference.md) | ⟹ | [语句与表达式参考](../../04_formal/05_rustc_internals/48_statements_and_expressions_reference.md) |
+| [类型系统参考](../../04_formal/00_type_theory/50_type_system_reference.md) | ⟹ | [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/00_type_theory/06_subtype_variance.md) |
+| [类型系统参考](../../04_formal/00_type_theory/50_type_system_reference.md) | ⟹ | [未定义行为清单](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md) |
+| [类型系统参考](../../04_formal/00_type_theory/50_type_system_reference.md) | ⟹ | [Application Binary Interface](../../04_formal/05_rustc_internals/38_application_binary_interface.md) |
+| [名字参考](../../04_formal/05_rustc_internals/51_names_reference.md) | ⟹ | [条目参考](../../04_formal/05_rustc_internals/46_items_reference.md) |
+| [名字参考](../../04_formal/05_rustc_internals/51_names_reference.md) | ⟹ | [模式参考](../../04_formal/05_rustc_internals/49_patterns_reference.md) |
+| [Rust Reference 附录](../../04_formal/05_rustc_internals/52_reference_appendices.md) | ⟹ | [语句与表达式参考](../../04_formal/05_rustc_internals/48_statements_and_expressions_reference.md) |
+| [Rust Reference 附录](../../04_formal/05_rustc_internals/52_reference_appendices.md) | ⟹ | [模式参考](../../04_formal/05_rustc_internals/49_patterns_reference.md) |
 
 ## L5 对比分析层
 

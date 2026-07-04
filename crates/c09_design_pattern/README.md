@@ -274,7 +274,7 @@
 | 文档                                                                                    | 内容                                             | 难度       |
 | :--- | :--- | :--- || [`COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md`](docs/COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) | 🌟**综合指南**：所有模式的理论、实践、形式化验证 | ⭐⭐⭐⭐⭐ |
 | [`09_design_patterns.md`](09_design_patterns.md)                                        | 设计模式定义、数学表示、伪代码索引               | ⭐⭐⭐     |
-| [`IMPLEMENTATION_ROADMAP.md`](IMPLEMENTATION_ROADMAP.md)                                | Rust 1.93.0对齐路线图与实施计划                  | ⭐⭐⭐⭐   |
+| [`IMPLEMENTATION_ROADMAP.md`](implementation_roadmap.md)                                | Rust 1.93.0对齐路线图与实施计划                  | ⭐⭐⭐⭐   |
 | [`PROJECT_COMPLETION_REPORT.md`](PROJECT_COMPLETION_REPORT.md)                          | 项目完成状态与1.90特性集成报告                   | ⭐⭐⭐     |
 
 ### 形式化理论文档 🔬

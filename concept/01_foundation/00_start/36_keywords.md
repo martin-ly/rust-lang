@@ -9,7 +9,7 @@
 > **Bloom 层级**: 记忆 → 理解
 > **A/S/P 标记**: **S** — Specification / Language syntax
 > **双维定位**: S×Lang — 语言词法与语法
-> **前置依赖**: [Identifiers and Names](../03_values_and_references/20_variable_model.md) · [Terminology Glossary](../../00_meta/terminology_glossary.md)
+> **前置依赖**: [Identifiers and Names](../03_values_and_references/20_variable_model.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
 > **后置概念**: [Attributes and Macros](../09_macros_basics/12_attributes_and_macros.md) · [Modules and Paths](../07_modules_and_items/11_modules_and_paths.md)
 > **定理链**: N/A — 参考级文档
 > **主要来源**: [Rust Reference — Keywords](https://doc.rust-lang.org/reference/keywords.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Unicode UAX #31 — Identifier and Pattern Syntax](https://www.unicode.org/reports/tr31/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)

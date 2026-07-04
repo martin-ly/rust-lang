@@ -427,7 +427,7 @@
 
 ## 相关概念
 
-- [Ferrocene 认证 (concept)](../../../../concept/04_formal/16_aerospace_certification_formal_methods.md) — Property Preservation 论证链
+- [Ferrocene 认证 (concept)](../../../../concept/04_formal/04_model_checking/16_aerospace_certification_formal_methods.md) — Property Preservation 论证链
 
 ## 📚 模块 8: 国际化对齐
 

@@ -363,10 +363,10 @@
 
 ## 🔗 参考文档链接
 
-- [知识图谱](KNOWLEDGE_GRAPH.md) - 可视化概念关系
+- [知识图谱](knowledge_graph.md) - 可视化概念关系
 - [所有权理论](tier_04_advanced/06_type_system_theory.md) - 理论基础
 - [借用系统](tier_02_guides/02_borrowing_practice_guide.md) - 核心概念
-- [Rust 1.92.0 特性](RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md) - 最新特性
+- [Rust 1.92.0 特性](rust_192_ownership_borrowing_lifetime_improvements.md) - 最新特性
 
 ---
 

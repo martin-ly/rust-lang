@@ -6,13 +6,13 @@
 > **受众**: [研究者]
 > **Bloom 层级**: 理解
 > **状态**: 已归档（内容已迁移至主文件）
-> **归档声明**: 本文件内容已合并至 [`17_operational_semantics.md`](17_operational_semantics.md)。
+> **归档声明**: 本文件内容已合并至 [`17_operational_semantics.md`](../04_formal/03_operational_semantics/17_operational_semantics.md)。
 > 原文件保留用于历史追溯。请勿独立编辑本文件。
 > **归档原因**: 与 `17_operational_semantics.md` 内容高度重叠（>90%），且 `17` 版本结构更规范。
 > **状态**: 已归档（2026-05-25 Phase 1 Cleanup）
 > **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md)
-> **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
+> **前置依赖**: [Concurrency](../03_advanced/00_concurrency/01_concurrency.md)
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 
 ## 认知路径

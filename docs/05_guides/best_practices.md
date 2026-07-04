@@ -4,7 +4,7 @@
 > **Summary**: Rust 项目最佳实践指南 Best Practices. (stub/archive redirect)
 > **分级**: [A]
 > **层次定位**: L2-L6 进阶-生态 / 工程最佳实践
-> **前置依赖**: [concept L1-L2 基础-进阶](../../concept/01_foundation) · [docs 核心概念](../01_core/README.md)
+> **前置依赖**: [concept L1-L2 基础-进阶](../../01_foundation) · [docs 核心概念](../01_core/README.md)
 > **后置延伸**: [docs 设计模式](05_design_patterns_usage_guide.md) · [docs 性能调优](05_performance_tuning_guide.md)
 > **跨层映射**: L2→L6 经验映射 | 模式→规范
 > **定理链编号**: T-020 → T-030 → 工程模式库

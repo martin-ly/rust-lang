@@ -1,6 +1,6 @@
 # Rust 同步原语深度解析
 
-> **相关概念**: [并发同步](../../../concept/03_advanced/01_concurrency.md)
+> **相关概念**: [并发同步](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 > **Bloom 层级**: 理解
 > **📌 简介**:
 > Rust 的同步原语（`Mutex`、`RwLock`、`Condvar`、`Barrier`）建立在操作系统内核对象之上

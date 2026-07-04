@@ -584,7 +584,7 @@ graph TD
 
 | Crate | 当前状态 | 权威来源 | 使用指南/概念参考 |
 |:---|:---|:---|:---|
-| **Tokio** | 已重定向 | [knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md](../../../../knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md) | [concept/03_advanced/02_async.md](../../../../concept/03_advanced/02_async.md) |
+| **Tokio** | 已重定向 | [knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md](../../../../knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md) | [concept/03_advanced/01_async/02_async.md](../../../../concept/03_advanced/01_async/02_async.md) |
 | **Axum** | 已重定向 | [knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md](../../../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md) | [concept/06_ecosystem/27_web_frameworks.md](../../../../concept/06_ecosystem/27_web_frameworks.md) |
 | **SQLx** | 已重定向 | [knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md) | [concept/06_ecosystem/23_database_access.md](../../../../concept/06_ecosystem/23_database_access.md) |
 | **SQLx (进阶)** | 已重定向 | [knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md) | [concept/06_ecosystem/37_database_systems.md](../../../../concept/06_ecosystem/37_database_systems.md) |
@@ -596,9 +596,9 @@ graph TD
 
 - [concept L6: 设计模式](../../../../concept/06_ecosystem/02_patterns.md) — GoF 23 种模式与 crate 级架构的对应关系
 - [concept L6: 系统可组合性](../../../../concept/06_ecosystem/30_system_composability.md) — Tower Layer、Iterator chain、Rayon pipeline 的组合性定理
-- [concept L4: 形式验证工具链](../../../../concept/04_formal/05_verification_toolchain.md) — Kani、Miri 对 unsafe crate 的验证实践
-- [concept L3: 异步编程](../../../../concept/03_advanced/02_async.md) — Tokio/Axum 的 async/await 语义基础
-- [concept L3: 并发编程](../../../../concept/03_advanced/01_concurrency.md) — Rayon、Bevy 系统的并发安全保证
+- [concept L4: 形式验证工具链](../../../../concept/04_formal/04_model_checking/05_verification_toolchain.md) — Kani、Miri 对 unsafe crate 的验证实践
+- [concept L3: 异步编程](../../../../concept/03_advanced/01_async/02_async.md) — Tokio/Axum 的 async/await 语义基础
+- [concept L3: 并发编程](../../../../concept/03_advanced/00_concurrency/01_concurrency.md) — Rayon、Bevy 系统的并发安全保证
 - [22_redis_architecture.md](22_redis_architecture.md) — redis-rs 缓存、消息队列与分布式协调
 - [23_mongodb_architecture.md](23_mongodb_architecture.md) — mongodb-rust-driver 文档数据库、NoSQL 与异步数据访问
 - [24_regex_architecture.md](24_regex_architecture.md) — regex 正则表达式引擎、文本匹配与验证

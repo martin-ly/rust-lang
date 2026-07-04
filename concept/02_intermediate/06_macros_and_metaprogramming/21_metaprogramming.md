@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 > **本节关键术语**: 元编程 (Metaprogramming) · 宏 (Macro) · 编译期计算 (Compile-Time Computation) · const generics · 类型操作
-> — [完整对照表](../../00_meta/terminology_glossary.md)
+> — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 元编程：Rust 的编译期代码生成与变换
 >
@@ -11,7 +11,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配（Pattern Matching）、过程宏（Procedural Macro）的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。
 > **前置概念**: [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) · [Macro Patterns](17_macro_patterns.md)
-> **后置概念**: [Proc Macros](../../03_advanced/07_proc_macro.md) · [DSL](13_dsl_and_embedding.md)
+> **后置概念**: [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) · [DSL](13_dsl_and_embedding.md)
 
 ---
 
@@ -566,7 +566,7 @@ graph TD
 
 - [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) — 属性与声明宏（Declarative Macro）基础
 - [Macro Patterns](17_macro_patterns.md) — 宏的工程模式
-- [Proc Macros](../../03_advanced/07_proc_macro.md) — 过程宏高级主题
+- [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) — 过程宏高级主题
 - [DSL](13_dsl_and_embedding.md) — 领域特定语言嵌入
 
 ---
@@ -783,7 +783,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

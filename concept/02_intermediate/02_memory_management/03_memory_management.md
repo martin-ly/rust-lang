@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 内存管理 (Memory Management) · 堆 (Heap) · 栈 (Stack) · Drop · RAII · 内存布局 (Memory Layout) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 内存管理 (Memory Management) · 堆 (Heap) · 栈 (Stack) · Drop · RAII · 内存布局 (Memory Layout) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # Memory Management（内存管理）
 >
@@ -12,9 +12,9 @@
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
 > [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
 > [Type System](../../01_foundation/02_type_system/04_type_system.md)
-> **后置概念**: [Unsafe Rust](../../03_advanced/03_unsafe.md) ·
-> [Concurrency](../../03_advanced/01_concurrency.md) ·
-> [Async](../../03_advanced/02_async.md)
+> **后置概念**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) ·
+> [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
+> [Async](../../03_advanced/01_async/02_async.md)
 > **主要来源**: [TRPL: Ch4.1-4.3](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL: Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·
 > [Rust Reference: Memory Model](https://doc.rust-lang.org/reference/) ·
@@ -357,7 +357,7 @@ graph TD
 
 > **一致性（Coherence）检查**: Box（独占）⟹ Rc（单线程共享）⟹ Arc（多线程共享）⟹ RefCell（内部可变），形成**从严格到宽松**的能力递进链。Pin 是独立维度（位置稳定性），Weak 是共享所有权的补充（不拥有）。
 > **关键洞察**: Rc/Arc/RefCell 的定理**不在 L4 形式化范围内**（运行时机制），是工程折衷而非编译期证明。Box 的所有权可由线性逻辑完全编码。
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/inter_layer_map.md) §4.1 "内存安全（Memory Safety）完备性"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/inter_layer_map.md) §4.1 "内存安全（Memory Safety）完备性"
 > **过渡到示例与反例**: 定理链提供了形式化与工程保证，但实践中这些保证的边界在哪里？下一节通过正例展示智能指针的正确使用方式，通过反例揭示定理失效的精确条件——特别是 Rc 循环引用、RefCell panic、内存泄漏等边界场景。
 
 ---
@@ -1176,10 +1176,10 @@ assert_eq!(squares, [0, 1, 4, 9, 16]);
 ---
 
 | Trait 系统 | [01_traits.md](../00_traits/01_traits.md) | Drop/Deref trait 的实现基础 |
-| 并发与 Send/Sync | [03_advanced/01_concurrency.md](../../03_advanced/01_concurrency.md) | Arc/Mutex 的线程安全 |
-| Pin 与自引用 | [03_advanced/02_async.md](../../03_advanced/02_async.md) | 堆内存语义 |
-| Unsafe | [03_advanced/03_unsafe.md](../../03_advanced/03_unsafe.md) | 裸指针与 ManuallyDrop 边界 |
-| 形式化验证 | [04_formal/04_rustbelt.md](../../04_formal/04_rustbelt.md) | 内存安全证明 |
+| 并发与 Send/Sync | [03_advanced/00_concurrency/01_concurrency.md](../../03_advanced/00_concurrency/01_concurrency.md) | Arc/Mutex 的线程安全 |
+| Pin 与自引用 | [03_advanced/01_async/02_async.md](../../03_advanced/01_async/02_async.md) | 堆内存语义 |
+| Unsafe | [03_advanced/02_unsafe/03_unsafe.md](../../03_advanced/02_unsafe/03_unsafe.md) | 裸指针与 ManuallyDrop 边界 |
+| 形式化验证 | [04_formal/04_rustbelt.md](../../04_formal/02_separation_logic/04_rustbelt.md) | 内存安全证明 |
 
 ---
 
@@ -1720,8 +1720,8 @@ impl !Unpin for SelfRef {} // 标记为 !Unpin
 ```
 
 > **修正**: `Pin<&mut T>` 仅在 `T: Unpin` 时允许可变访问。对于 `!Unpin` 类型，Pin 保证内存位置不变。
-> **相关判定树**: [所有权判定树](../00_meta/concept_definition_decision_forest.md#二所有权判定树) · [借用判定树](../00_meta/concept_definition_decision_forest.md#三借用判定树)
-> **相关 FTA**: [内存安全失效树](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
+> **相关判定树**: [所有权判定树](../../00_meta/00_framework/concept_definition_decision_forest.md#二所有权判定树) · [借用判定树](../../00_meta/00_framework/concept_definition_decision_forest.md#三借用判定树)
+> **相关 FTA**: [内存安全失效树](../../00_meta/00_framework/fault_tree_analysis_collection.md#二内存安全失效树)
 
 ### 3.4 边界测试：`ManuallyDrop` 后重复访问（运行时 UB）
 

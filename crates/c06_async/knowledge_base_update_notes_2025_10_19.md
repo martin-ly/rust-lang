@@ -232,7 +232,7 @@ L2-L4: 逐层深入...
 
 ### 第一步: 阅读概览
 
-📖 [docs/knowledge_system/README.md](docs/knowledge_system/README.md)
+📖 [docs/knowledge_system/README.md](../../README.md)
 
 **10分钟了解**:
 
@@ -357,7 +357,7 @@ L2-L4: 逐层深入...
 
 ### 入口1: 知识体系概览
 
-👉 [docs/knowledge_system/README.md](docs/knowledge_system/README.md)
+👉 [docs/knowledge_system/README.md](../../README.md)
 
 ### 入口2: 主索引 (已更新)
 

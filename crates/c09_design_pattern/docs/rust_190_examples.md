@@ -1286,9 +1286,9 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $m
 
 ## 🔗 相关文档
 
-- [知识图谱](KNOWLEDGE_GRAPH.md) - 模式关系网络
-- [多维矩阵对比](MULTIDIMENSIONAL_MATRIX_COMPARISON.md) - 详细性能数据
-- [思维导图](MIND_MAP.md) - 学习路径
+- [知识图谱](knowledge_graph.md) - 模式关系网络
+- [多维矩阵对比](multidimensional_matrix_comparison.md) - 详细性能数据
+- [思维导图](mind_map.md) - 学习路径
 - [综合指南](COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 完整理论
 
 ---

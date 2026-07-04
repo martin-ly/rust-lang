@@ -1,6 +1,6 @@
 # C08 Algorithms 文档体系
 
-> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs/)。
+> **文档治理**: 本 crate 的通用模板文档（FAQ / Glossary / MIND_MAP / ONE_PAGE_SUMMARY / PENDING_ITEMS / MASTER_INDEX）已集中到 [`crates/common/docs/`](../../common/docs)。
 > 概念解释的权威来源为 [`concept/`](../../../../concept/) 对应主题。
 >
 
@@ -18,7 +18,7 @@
 
 ### 📍 主索引
 
-**[→ 查看主索引 (00_MASTER_INDEX.md)](00_MASTER_INDEX.md)**
+**[→ 查看主索引 (00_MASTER_INDEX.md)](00_master_index.md)**
 
 主索引提供完整的文档导航、分类浏览和学习路径，是您探索本文档体系的最佳起点。
 
@@ -29,14 +29,14 @@
 1. **[主 README](../README.md)** - 了解项目概览和安装方法
 2. **[本文档](#-文档体系结构)** - 理解文档组织方式
 3. **[算法快速入门](tier_02_guides/01_algorithms_quick_start.md)** - 学习基础知识
-4. **[主索引](00_MASTER_INDEX.md)** - 开始系统学习
+4. **[主索引](00_master_index.md)** - 开始系统学习
 
 ### ⚡ 快速查找
 
 - **找算法** → [01_算法分类参考](tier_03_references/01_algorithm_categories_reference.md)
 - **学基础** → [tier_02_guides/](tier_02_guides/README.md)
 - **看理论** → [tier_04_advanced/](tier_04_advanced/README.md)
-- **查特性** → [RUST_192_ALGORITHMS_IMPROVEMENTS](RUST_192_ALGORITHMS_IMPROVEMENTS.md)
+- **查特性** → [RUST_192_ALGORITHMS_IMPROVEMENTS](rust_192_algorithms_improvements.md)
 
 ---
 
@@ -101,7 +101,7 @@
 - Edition 2024 新语法
 - 特性应用指南
 
-**[→ RUST_192_ALGORITHMS_IMPROVEMENTS](RUST_192_ALGORITHMS_IMPROVEMENTS.md)**
+**[→ RUST_192_ALGORITHMS_IMPROVEMENTS](rust_192_algorithms_improvements.md)**
 
 ### 5. 📚 参考资料 (tier_03_references/)
 
@@ -179,7 +179,7 @@
 
 ### 按主题查找
 
-查看 **[主索引](00_MASTER_INDEX.md)** 的"按主题查找"部分。
+查看 **[主索引](00_master_index.md)** 的"按主题查找"部分。
 
 ### 按难度查找
 
@@ -307,7 +307,7 @@
 
 ---
 
-**开始探索**: [→ 查看主索引](00_MASTER_INDEX.md)
+**开始探索**: [→ 查看主索引](00_master_index.md)
 
 🚀 **祝您学习愉快！**
 ---

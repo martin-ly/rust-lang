@@ -348,7 +348,7 @@ ex:Borrowing rdf:type ex:Concept ;
 
 ---
 
-> **相关文件**: [概念索引](concept_index.md) · [知识图谱数据](kg_data.json) · [跨层拓扑](inter_layer_topology.md) · [层内映射](intra_layer_model_map.md)
+> **相关文件**: [概念索引](../00_meta/04_navigation/concept_index.md) · [知识图谱数据](kg_data.json) · [跨层拓扑](../00_meta/04_navigation/inter_layer_topology.md) · [层内映射](../00_meta/04_navigation/intra_layer_model_map.md)
 
 ## 认知路径
 

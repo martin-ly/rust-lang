@@ -346,7 +346,7 @@
 
 ### 内部文档
 
-- [C02 README](README.md)
+- [C02 README](../../../README.md)
 - [理论基础](docs/01_theory)
 - [知识系统](docs/knowledge_system)
 - [核心文档](docs/02_core)

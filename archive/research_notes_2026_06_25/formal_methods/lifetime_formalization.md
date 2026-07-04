@@ -910,7 +910,7 @@ impl<'a> ImportantExcerpt<'a> {
 
 - [生命周期实现](../../../crates/c02_type_system/src/README.md)
 - [生命周期示例](../../../crates/c02_type_system/examples/README.md)
-- [形式化工程系统 - 生命周期](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
+- [形式化工程系统 - 生命周期](../../../README.md)
 
 ### 工具资源
 >

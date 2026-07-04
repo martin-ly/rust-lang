@@ -4,10 +4,10 @@
 > **Summary**: Concurrency 并发编程 Concurrency Index. (stub/archive redirect)
 > **📎 交叉引用**
 >
-> 本主题在 concept 中有深度的概念分析：[并发](../../../concept/03_advanced/01_concurrency.md)
+> 本主题在 concept 中有深度的概念分析：[并发](../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 > **层次定位**: L3 高级概念 / 并发子域索引
 > **前置依赖**: [knowledge 泛型](../../02_intermediate/03_generics.md) · [knowledge Trait](../../02_intermediate/06_traits.md)
-> **后置延伸**: [knowledge Async](../async/README.md) · [concept L3 并发](../../../concept/03_advanced/01_concurrency.md)
+> **后置延伸**: [knowledge Async](../async/README.md) · [concept L3 并发](../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L3 系统编程
 > **定理链编号**: T-040 Send 类型安全 → T-041 Sync 数据竞争自由
 >
@@ -77,7 +77,7 @@
 
 ## 相关概念
 
-- [NLL 与 Polonius (concept)](../../../concept/03_advanced/08_nll_and_polonius.md) — Location-sensitive Polonius 与并发借用分析
+- [NLL 与 Polonius (concept)](../../../concept/03_advanced/02_unsafe/08_nll_and_polonius.md) — Location-sensitive Polonius 与并发借用分析
 
 ## 📚 模块 8: 国际化对齐
 

@@ -793,12 +793,12 @@ for item in collection {  // 自动调用 into_iter()
 
 ### 按主题查找
 
-- **所有权**: [C01 文档](../../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md)
-- **类型系统**: [C02 文档](../../../crates/c02_type_system/docs/00_MASTER_INDEX.md)
-- **控制流**: [C03 文档](../../../crates/c03_control_fn/docs/00_MASTER_INDEX.md)
-- **泛型**: [C04 文档](../../../crates/c04_generic/docs/00_MASTER_INDEX.md)
-- **并发**: [C05 文档](../../../crates/c05_threads/docs/00_MASTER_INDEX.md)
-- **异步**: [C06 文档](../../../crates/c06_async/docs/00_MASTER_INDEX.md)
+- **所有权**: [C01 文档](../../../crates/c01_ownership_borrow_scope/docs/00_master_index.md)
+- **类型系统**: [C02 文档](../../../crates/c02_type_system/docs/00_master_index.md)
+- **控制流**: [C03 文档](../../../crates/c03_control_fn/docs/00_master_index.md)
+- **泛型**: [C04 文档](../../../crates/c04_generic/docs/00_master_index.md)
+- **并发**: [C05 文档](../../../crates/c05_threads/docs/00_master_index.md)
+- **异步**: [C06 文档](../../../crates/c06_async/docs/00_master_index.md)
 
 ### 学习资源
 

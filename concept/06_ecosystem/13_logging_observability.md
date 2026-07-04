@@ -10,7 +10,7 @@
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **双维定位**: P×App — 实施可观测性工程实践
 > **定位**: 覆盖 Rust 生态中 **日志（log/tracing [来源: [tokio tracing](https://docs.rs/tracing/latest/tracing/)]）**、**指标（metrics）**、**分布式追踪（distributed tracing）**三大可观测性支柱，分析各 crate 的设计哲学与选型策略。
-> **前置概念**: [Async](../03_advanced/02_async.md) · [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md)
+> **前置概念**: [Async](../03_advanced/01_async/02_async.md) · [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md)
 > **后置概念**: [WebAssembly](11_webassembly.md) · [Rust Version Tracking](../07_future/05_rust_version_tracking.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -45,10 +45,10 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：日志与可观测性的编译错误](#十边界测试日志与可观测性的编译错误)
-    - [10.1 边界测试：`tracing` span 的生命周期（Lifetimes）（编译错误）](#101-边界测试tracing-span-的生命周期编译错误)
-    - [10.2 边界测试：OpenTelemetry 的全局提供者设置（运行时（Runtime） panic）](#102-边界测试opentelemetry-的全局提供者设置运行时-panic)
+    - [10.1 边界测试：`tracing` span 的生命周期（编译错误）](#101-边界测试tracing-span-的生命周期编译错误)
+    - [10.2 边界测试：OpenTelemetry 的全局提供者设置（运行时 panic）](#102-边界测试opentelemetry-的全局提供者设置运行时-panic)
     - [10.3 边界测试：结构化日志的字段类型不匹配（运行时错误）](#103-边界测试结构化日志的字段类型不匹配运行时错误)
-    - [10.4 边界测试：span 的生命周期与异步（Async）代码（编译错误/运行时丢失）](#104-边界测试span-的生命周期与异步代码编译错误运行时丢失)
+    - [10.4 边界测试：span 的生命周期与异步代码（编译错误/运行时丢失）](#104-边界测试span-的生命周期与异步代码编译错误运行时丢失)
     - [10.5 边界测试：`tracing` 的 span 泄漏与内存增长（运行时资源泄漏）](#105-边界测试tracing-的-span-泄漏与内存增长运行时资源泄漏)
     - [10.3 边界测试：tracing 的 span 生命周期与异步代码跨越 await（运行时泄漏）](#103-边界测试tracing-的-span-生命周期与异步代码跨越-await运行时泄漏)
     - [补充定理链](#补充定理链)
@@ -434,7 +434,7 @@ graph TD
 
 ## 相关概念文件
 
-- [Async](../03_advanced/02_async.md) — 异步编程（tracing 的核心用例）
+- [Async](../03_advanced/01_async/02_async.md) — 异步编程（tracing 的核心用例）
 - [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md) — 错误处理（Error Handling）（与日志紧密关联）
 - [WebAssembly](11_webassembly.md) — WebAssembly 生态（tracing 的 WASM 限制）
 

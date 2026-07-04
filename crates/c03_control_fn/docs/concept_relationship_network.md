@@ -1031,11 +1031,11 @@ graph TB
 
 ### 核心文档链接
 
-- [知识图谱](KNOWLEDGE_GRAPH.md) - 概念关系可视化
-- [多维矩阵](MULTIDIMENSIONAL_MATRIX.md) - 多维度对比分析
-- [思维导图](MIND_MAP.md) - 学习路径导航
+- [知识图谱](knowledge_graph.md) - 概念关系可视化
+- [多维矩阵](multidimensional_matrix.md) - 多维度对比分析
+- [思维导图](mind_map.md) - 学习路径导航
 - [条件语句指南](tier_02_guides/01_conditionals_guide.md) - 基础理论
-- [Rust 1.92.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) - 最新特性 🆕
+- [Rust 1.92.0 控制流改进](rust_192_control_flow_improvements.md) - 最新特性 🆕
 
 ### 深度阅读
 

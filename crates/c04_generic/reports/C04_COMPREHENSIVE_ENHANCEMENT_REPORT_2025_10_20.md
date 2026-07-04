@@ -223,7 +223,7 @@
 
 ### 内部文档
 
-- [C04 README](README.md)
+- [C04 README](../../../README.md)
 - [知识系统](docs/knowledge_system)
 - [Rust特性](docs/06_rust_features)
 

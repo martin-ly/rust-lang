@@ -370,7 +370,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 > **来源: [ACM](https://dl.acm.org/)**
 
 - [RustBelt 项目](https://github.com/rust-lang/rustbelt)
-- [所有权系统实现](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)
+- [所有权系统实现](../../README.md)
 
 ### 工具资源 {#工具资源}
 

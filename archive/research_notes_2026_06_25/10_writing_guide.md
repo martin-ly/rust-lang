@@ -876,7 +876,7 @@
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [研究笔记主索引](README.md)
+- [研究笔记主索引](../../README.md)
 - [研究笔记模板](10_template.md)
 - [最佳实践](10_best_practices.md)
 - [质量检查清单](10_quality_checklist.md)

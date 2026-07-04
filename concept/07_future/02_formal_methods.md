@@ -10,7 +10,7 @@
 > **层级**: L7 前沿趋势
 > **A/S/P 标记**: **P** — Procedure（策略决策）
 > **双维定位**: P×Eva — 评估形式化验证的工业 ROI
-> **前置概念**: [RustBelt](../04_formal/04_rustbelt.md) · [Ownership Formalization](../04_formal/03_ownership_formal.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
+> **前置概念**: [RustBelt](../04_formal/02_separation_logic/04_rustbelt.md) · [Ownership Formalization](../04_formal/01_ownership_logic/03_ownership_formal.md) · [Concurrency](../03_advanced/00_concurrency/01_concurrency.md) · [Unsafe](../03_advanced/02_unsafe/03_unsafe.md)
 > **主要来源**: [AWS Kani] · [Microsoft Verus] · [TLA+](https://lamport.azurewebsites.net/tla/tla.html) · [P Language] · [POPL](https://www.sigplan.org/Conferences/POPL/) / PLDI 2024-2026 · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page) · [O'Hearn 2007 — Separation Logic] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -278,7 +278,7 @@ Rust 编译器已通过 borrow checker 和类型系统（Type System）提供内
 - **在线监控**：实时检查轨迹是否违反时序逻辑属性
 - **工具**：PObserve、MongoDB Trace、Dtrace/BPF
 
-> **层次一致性（Coherence）标注**: L0 对应本文 §4「类型即证明」的编译期保证；L1-L2 对应 §5 工具链的代码级验证；L3-L5 对应 §8 分布式验证与运行时（Runtime）监控。L4 理论基础详见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)。
+> **层次一致性（Coherence）标注**: L0 对应本文 §4「类型即证明」的编译期保证；L1-L2 对应 §5 工具链的代码级验证；L3-L5 对应 §8 分布式验证与运行时（Runtime）监控。L4 理论基础详见 [`../04_formal/04_rustbelt.md`](../04_formal/02_separation_logic/04_rustbelt.md)。
 
 ---
 
@@ -546,7 +546,7 @@ fn swap<T>(x: &mut T, y: &mut T) {
 
 **局限性**：目前仅支持 Rust 子集（无泛型（Generics） trait、无 async、无递归类型），处于研究原型阶段。
 
-> **层次一致性（Coherence）标注**: L1 Code-Level 验证工具（Kani、Creusot、Verus、Prusti、RefinedRust）直接作用于源代码；L3 Unsafe 边界验证详见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)；L4 理论基础（RustBelt/Iris）详见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)。
+> **层次一致性（Coherence）标注**: L1 Code-Level 验证工具（Kani、Creusot、Verus、Prusti、RefinedRust）直接作用于源代码；L3 Unsafe 边界验证详见 [`../03_advanced/02_unsafe/03_unsafe.md`](../03_advanced/02_unsafe/03_unsafe.md)；L4 理论基础（RustBelt/Iris）详见 [`../04_formal/04_rustbelt.md`](../04_formal/02_separation_logic/04_rustbelt.md)。
 
 ---
 
@@ -1302,10 +1302,10 @@ graph TD
 
 | 工业工具 | 理论基础 | 对应 L4 文件 | 对应 L3 文件 | 成熟度 |
 |:---|:---|:---|:---|:---|
-| Kani | 模型检测 + 符号执行 | `04_formal/04_rustbelt.md` (扩展) | `03_advanced/03_unsafe.md` | 生产可用 |
+| Kani | 模型检测 + 符号执行 | `04_formal/04_rustbelt.md` (扩展) | `03_advanced/02_unsafe/03_unsafe.md` | 生产可用 |
 | Creusot | Why3 / MLCFG | `04_formal/04_rustbelt.md` | — | 研究→工业 |
 | Verus | SMT + 所有权（Ownership）逻辑 | `04_formal/03_ownership_formal.md` | — | 研究→工业 |
-| Miri | Stacked/Tree Borrows | `04_formal/03_ownership_formal.md` | `03_advanced/03_unsafe.md` | 生产可用 |
+| Miri | Stacked/Tree Borrows | `04_formal/03_ownership_formal.md` | `03_advanced/02_unsafe/03_unsafe.md` | 生产可用 |
 | Prusti | 分离逻辑 (Viper) | `04_formal/04_rustbelt.md` | — | 研究 |
 | TLA+ | 时序逻辑 | —（系统级） | — | 成熟 |
 
@@ -1376,9 +1376,9 @@ fn main() {
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| RustBelt | [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md) | 理论基础（L4） |
-| 所有权形式化 | [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) | 验证对象（L4） |
-| Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | 验证边界（L3） |
+| RustBelt | [`../04_formal/04_rustbelt.md`](../04_formal/02_separation_logic/04_rustbelt.md) | 理论基础（L4） |
+| 所有权形式化 | [`../04_formal/03_ownership_formal.md`](../04_formal/01_ownership_logic/03_ownership_formal.md) | 验证对象（L4） |
+| Unsafe | [`../03_advanced/02_unsafe/03_unsafe.md`](../03_advanced/02_unsafe/03_unsafe.md) | 验证边界（L3） |
 | 工具链 | [`../06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md) | CI 集成 |
 | AI × Rust | [`./01_ai_integration.md`](01_ai_integration.md) | 协同趋势 |
 | 语言演进 | [`./03_evolution.md`](03_evolution.md) | 验证需求驱动 |
@@ -1461,10 +1461,10 @@ graph TD
 > **过渡: L7 → L4**
 >
 > 形式化方法不是"写完后验证"的附加步骤——它是语言设计的内在组成部分。Rust 的所有权系统本身就是形式化语义（Oxide、RustBelt）的工程化实现。理解形式化方法的历史，就是理解 Rust 为什么选择了这条设计路径。
-> 形式化根基见 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) 与 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)。
+> 形式化根基见 [`../04_formal/03_ownership_formal.md`](../04_formal/01_ownership_logic/03_ownership_formal.md) 与 [`../04_formal/04_rustbelt.md`](../04_formal/02_separation_logic/04_rustbelt.md)。
 > **过渡: L7 → L3**
 > 形式化验证工具（Kani、Miri、Prusti）的实际使用场景集中在 unsafe 边界和并发协议。这些工具不验证"业务逻辑正确"，而是验证"内存安全"和"无数据竞争"——这正是 Rust 编译器已经保证 safe Rust 的部分，但 unsafe 和并发复杂场景需要额外验证。
-> 工程边界见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) 与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)。
+> 工程边界见 [`../03_advanced/02_unsafe/03_unsafe.md`](../03_advanced/02_unsafe/03_unsafe.md) 与 [`../03_advanced/00_concurrency/01_concurrency.md`](../03_advanced/00_concurrency/01_concurrency.md)。
 
 ---
 
@@ -1519,7 +1519,7 @@ graph TD
 ## 权威来源索引
 
 > **补充来源**
-> **相关文件**: [RustBelt 谓词映射](../00_meta/rustbelt_predicate_map.md) · [能力图谱](../00_meta/competency_graph.md#五形式化能力) · [RustBelt](../04_formal/04_rustbelt.md)
+> **相关文件**: [RustBelt 谓词映射](../00_meta/02_sources/rustbelt_predicate_map.md) · [能力图谱](../00_meta/00_framework/competency_graph.md#五形式化能力) · [RustBelt](../04_formal/02_separation_logic/04_rustbelt.md)
 
 ## 十、边界测试：形式化方法的编译错误
 

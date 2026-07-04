@@ -226,7 +226,7 @@
 | [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md) | **批判性分析与推进计划**：国际对标、证明深度、全模型入口、Coq 骨架 |
 | [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) | **核心定理完整证明**：ownership T2、borrow T1、type T3（L2 级） |
 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](10_international_formal_verification_index.md) | **国际对标索引**：RustBelt、Aeneas、RustSEM 等 |
-| [INDEX](INDEX.md) | 研究笔记完整索引 |
+| [INDEX](../../concept/sources/INDEX.md) | 研究笔记完整索引 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论体系**：设计模式形式化、23/43 模型、执行模型、组合工程 |
 
 ---

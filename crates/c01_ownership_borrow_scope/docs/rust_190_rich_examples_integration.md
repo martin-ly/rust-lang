@@ -1856,10 +1856,10 @@ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $ma
 
 ## 🔗 相关文档
 
-- [知识图谱](KNOWLEDGE_GRAPH.md) - 可视化概念关系
-- [多维矩阵对比](MULTIDIMENSIONAL_MATRIX.md) - 系统性对比分析
-- [思维导图](MIND_MAP.md) - 学习路径可视化
-- [概念关系网络](CONCEPT_RELATIONSHIP_NETWORK.md) - 深度依赖分析
+- [知识图谱](knowledge_graph.md) - 可视化概念关系
+- [多维矩阵对比](multidimensional_matrix.md) - 系统性对比分析
+- [思维导图](mind_map.md) - 学习路径可视化
+- [概念关系网络](concept_relationship_network.md) - 深度依赖分析
 
 ---
 

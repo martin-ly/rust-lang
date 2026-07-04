@@ -84,7 +84,7 @@
 | 边界系统 | L2 | [software_design_theory/05_boundary_system/README.md](software_design_theory/05_boundary_system/README.md) | [software_design_theory/05_boundary_system/README.md](software_design_theory/05_boundary_system/README.md) |
 | 分布式模式 | L2 | [software_design_theory/05_distributed/README.md](software_design_theory/05_distributed/README.md) | [software_design_theory/60_workflow_compositional_distributed_counterexamples.md](software_design_theory/60_workflow_compositional_distributed_counterexamples.md) |
 | Crate 架构 | L2 | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
-| 算法练习 | L2-L4 | [10_algorithm_exercises_guide.md](10_algorithm_exercises_guide.md) | [exercises/src/algorithms/](../../exercises/src/algorithms/) |
+| 算法练习 | L2-L4 | [10_algorithm_exercises_guide.md](10_algorithm_exercises_guide.md) | [exercises/src/algorithms/](../../exercises/src/algorithms) |
 
 ### L3 具体概念 {#l3-具体概念}
 
@@ -469,9 +469,9 @@
 | 并发 | `crates/c05_threads` | [crates/c05_threads/README.md](../../crates/c05_threads/README.md) |
 | 设计模式 | `crates/c09_design_pattern` | [crates/c09_design_pattern/README.md](../../crates/c09_design_pattern/README.md) |
 | 模块系统 | 单文件 Cargo script | [examples/module_system_patterns.rs](../../examples/module_system_patterns.rs) |
-| 宏系统 | `crates/c11_macro_system_proc` | [crates/c11_macro_system_proc/examples/](../../crates/c11_macro_system_proc/examples/) |
-| FFI / Embedded / WASM | `crates/c12_wasm` / `crates/c13_embedded` | [crates/c12_wasm/examples/](../../crates/c12_wasm/examples/) / [crates/c13_embedded/examples/](../../crates/c13_embedded/examples/) |
-| 异步/并发示例 | `crates/c06_async` / `crates/c05_threads` | [crates/c06_async/examples/](../../crates/c06_async/examples/) / [crates/c05_threads/examples/](../../crates/c05_threads/examples/) |
+| 宏系统 | `crates/c11_macro_system_proc` | [crates/c11_macro_system_proc/examples/](../../crates/c11_macro_system_proc/examples) |
+| FFI / Embedded / WASM | `crates/c12_wasm` / `crates/c13_embedded` | [crates/c12_wasm/examples/](../../crates/c12_wasm/examples) / [crates/c13_embedded/examples/](../../crates/c13_embedded/examples) |
+| 异步/并发示例 | `crates/c06_async` / `crates/c05_threads` | [crates/c06_async/examples/](../../crates/c06_async/examples) / [crates/c05_threads/examples/](../../crates/c05_threads/examples) |
 | Fallback / Degrade 示例 | `crates/c06_async` | [crates/c06_async/examples/fallback_degrade_pattern.rs](../../crates/c06_async/examples/fallback_degrade_pattern.rs) |
 | Redis 示例 | `crates/c06_async` | [crates/c06_async/examples/redis_basic_kv.rs](../../crates/c06_async/examples/redis_basic_kv.rs) / [redis_pub_sub.rs](../../crates/c06_async/examples/redis_pub_sub.rs) / [redis_distributed_lock.rs](../../crates/c06_async/examples/redis_distributed_lock.rs) |
 | Kafka 示例 | `crates/c10_networks` | [crates/c10_networks/examples/kafka_async_producer.rs](../../crates/c10_networks/examples/kafka_async_producer.rs) / [kafka_consumer_group.rs](../../crates/c10_networks/examples/kafka_consumer_group.rs) |
@@ -492,11 +492,11 @@
 | kube-rs 示例 | `crates/c10_networks` | [crates/c10_networks/examples/kube_list_pods.rs](../../crates/c10_networks/examples/kube_list_pods.rs) / [kube_watch_pods.rs](../../crates/c10_networks/examples/kube_watch_pods.rs) |
 | regex 示例 | `crates/c07_process` | [crates/c07_process/examples/regex_basic_matching.rs](../../crates/c07_process/examples/regex_basic_matching.rs) / [regex_common_validation.rs](../../crates/c07_process/examples/regex_common_validation.rs) |
 | chrono 示例 | `crates/c07_process` | [crates/c07_process/examples/chrono_parse_format.rs](../../crates/c07_process/examples/chrono_parse_format.rs) / [chrono_timezone_duration.rs](../../crates/c07_process/examples/chrono_timezone_duration.rs) |
-| 验证工具示例 | `crates/c15_verification_tools` | [crates/c15_verification_tools/examples/](../../crates/c15_verification_tools/examples/) |
-| GUI / 跨平台 UI 示例 | `crates/c16_gui` | [crates/c16_gui/examples/](../../crates/c16_gui/examples/) |
-| 顶层 examples 目录 | `examples/` | [examples/](../../examples/) |
+| 验证工具示例 | `crates/c15_verification_tools` | [crates/c15_verification_tools/examples/](../../crates/c15_verification_tools/examples) |
+| GUI / 跨平台 UI 示例 | `crates/c16_gui` | [crates/c16_gui/examples/](../../crates/c16_gui/examples) |
+| 顶层 examples 目录 | `examples/` | [examples/](../../examples) |
 | 缓存淘汰策略 | `c08_algorithms` | [crates/c08_algorithms/examples/cache_eviction_policies_demo.rs](../../crates/c08_algorithms/examples/cache_eviction_policies_demo.rs) |
-| 算法专项练习 | `exercises` | [exercises/src/algorithms/](../../exercises/src/algorithms/) |
+| 算法专项练习 | `exercises` | [exercises/src/algorithms/](../../exercises/src/algorithms) |
 | 形式化验证工具 | `crates/c15_verification_tools` | [crates/c15_verification_tools/README.md](../../crates/c15_verification_tools/README.md) |
 
 ---

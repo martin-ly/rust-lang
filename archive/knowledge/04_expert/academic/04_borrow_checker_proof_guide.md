@@ -389,5 +389,5 @@ fn valid<'a>(s: &'a String) -> &'a String {
 - [Rust Reference — References and Borrowing](https://doc.rust-lang.org/reference/)
 - [Rust Reference — Undefined Behavior](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
 - [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-- [concept/04_formal/28_borrow_checking_decidability.md](../../../concept/04_formal/28_borrow_checking_decidability.md)
+- [concept/04_formal/28_borrow_checking_decidability.md](../../../../concept/04_formal/01_ownership_logic/28_borrow_checking_decidability.md)
 - [docs/research_notes/formal_methods/10_borrow_checker_proof.md](../../../docs/research_notes/formal_methods/10_borrow_checker_proof.md)

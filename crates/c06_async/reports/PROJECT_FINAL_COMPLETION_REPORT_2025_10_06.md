@@ -174,8 +174,8 @@
  param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 1 | [知识分类体系](docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md) | 15,000+ | 100% | ✅ |
 | 2 | [模式对比文档](docs/ASYNC_PATTERNS_COMPARISON_2025.md) | 6,000+ | 100% | ✅ |
-| 3 | [主 README](README.md) | 5,000+ | 100% | ✅ |
-| 4 | [项目索引](INDEX.md) | 4,000+ | 100% | ✅ |
+| 3 | [主 README](../../../README.md) | 5,000+ | 100% | ✅ |
+| 4 | [项目索引](../../../concept/sources/INDEX.md) | 4,000+ | 100% | ✅ |
 | 5 | [最终报告](docs/异步编程全面梳理最终报告_2025_10_06.md) | 3,000+ | 100% | ✅ |
 | 6 | [实现总结](docs/COMPREHENSIVE_ASYNC_IMPLEMENTATION_SUMMARY_2025.md) | 3,000+ | 100% | ✅ |
 | 7 | [最终总结](FINAL_SESSION_SUMMARY_2025_10_06.md) | 3,000+ | 100% | ✅ |

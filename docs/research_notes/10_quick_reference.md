@@ -350,7 +350,7 @@
 
 - [主索引](README.md) - 完整的研究笔记索引
 - [速查卡快速参考](../02_reference/quick_reference/README.md) - 20 个速查卡（含 AI/ML、类型、所有权、并发、设计模式等）；与本研究笔记互为补充
-- [完整索引](INDEX.md) - 所有研究笔记的详细索引
+- [完整索引](../../concept/sources/INDEX.md) - 所有研究笔记的详细索引
 - [软件设计理论](software_design_theory/README.md) - 设计模式、23/43、执行模型、组合工程
 - [快速入门指南](10_getting_started.md) - 新用户入门指南
 - [常见问题解答](10_faq.md) - 常见问题解答

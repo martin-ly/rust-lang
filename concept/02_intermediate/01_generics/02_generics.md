@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 > [综述级]
-> **本节关键术语**: 泛型 (Generics) · 类型参数 (Type Parameter) · 约束 (Bound) · where 子句 · 单态化 (Monomorphization) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 泛型 (Generics) · 类型参数 (Type Parameter) · 约束 (Bound) · where 子句 · 单态化 (Monomorphization) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # Generics（泛型系统）
 >
@@ -14,12 +14,12 @@
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 实施泛型（Generics）参数化设计
 > **前置依赖**: L1 类型系统（Type System） · [L2 Trait](../00_traits/01_traits.md)
-> **后置延伸**: [L3 Async](../../03_advanced/02_async.md) · [L4 类型论](../../04_formal/02_type_theory.md) · [L7 效果系统](../../07_future/04_effects_system.md)
+> **后置延伸**: [L3 Async](../../03_advanced/01_async/02_async.md) · [L4 类型论](../../04_formal/00_type_theory/02_type_theory.md) · [L7 效果系统](../../07_future/04_effects_system.md)
 > **跨层映射**: L2→L4 参数多态 ↔ System F | L2→L7 泛型（Generics）效果 → Effect System
 > **定理链编号**: T-030 参数多态保持 → T-031 单态化（Monomorphization） [来源: [Rust Reference — Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)]正确性 → T-032 约束满足可判定
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../00_traits/01_traits.md)
-> **后置概念**: [Advanced Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [GATs](../../03_advanced/02_async.md) · [Const Generics [来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)]]
+> **后置概念**: [Advanced Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [GATs](../../03_advanced/01_async/02_async.md) · [Const Generics [来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)]]
 > **主要来源**: [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) ·
 > [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html) ·
@@ -214,7 +214,7 @@
 | **类型参数** | `<T>` | 类型 | 无 | 最常见，泛型容器/函数 |
 | **生命周期（Lifetimes）参数** | `<'a>` | 引用（Reference）有效期 | 推断 | 函数/结构体（Struct）含引用 |
 
-> **形式化对应**: 生命周期（Lifetimes）参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用（Reference）有效性的形式化约束。详见 L1 生命周期 §4 和 [L4 所有权（Ownership）形式化](../../04_formal/03_ownership_formal.md) §2.2。[来源: Tofte & Talpin 1994 — Region Types]
+> **形式化对应**: 生命周期（Lifetimes）参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用（Reference）有效性的形式化约束。详见 L1 生命周期 §4 和 [L4 所有权（Ownership）形式化](../../04_formal/01_ownership_logic/03_ownership_formal.md) §2.2。[来源: Tofte & Talpin 1994 — Region Types]
 | **常量泛型** | `<const N: usize>` | 编译期常量值 | 无 | 固定大小数组、类型状态 |
 | **关联类型** | `type Item;` | Trait 内部类型 | 实现时确定 | Iterator、Future 等 |
 
@@ -443,7 +443,7 @@ fn draw_dyn(d: &dyn Drawable) {
 > 参数性定理（Wadler 1989）是单态化语义保持的核心依据——正因泛型函数不能基于类型参数的内部表示做分支，单态化才保持行为等价。
 > Const Generics 是依赖类型的有限形式，HRTB 是全称量词在生命周期上的应用，Sized 默认约束确保单态化所需的静态内存布局。
 > **跨层映射**:
-> 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
+> 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
 > **过渡到示例与反例**:
 > 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？下一节通过正例展示泛型的正确使用方式，通过反例揭示定理失效的精确条件——特别是 E0277（约束不满足）、E0275（类型递归溢出）、E0310（生命周期不足）等编译错误的触发机制，为反命题决策树建立具体场景。
 
@@ -722,7 +722,7 @@ impl<T, const N: usize> Matrix<T, N, N> {
 
 > **L4 映射**: `generic_const_exprs` 将 Const Generics 从"常量值的类型参数化"扩展为"类型级计算"，对应依赖类型理论中 **索引类型（Indexed Types）** 的有限形式。
 > 但与完整依赖类型（如 Coq、Idris）不同，Rust 的常量表达式必须在编译期完全求值，且不能依赖运行时信息。
-> 详见 [L4 形式化验证](../../04_formal/04_rustbelt.md) §2 "索引类型与依赖类型的边界"。
+> 详见 [L4 形式化验证](../../04_formal/02_separation_logic/04_rustbelt.md) §2 "索引类型与依赖类型的边界"。
 
 #### 5.7.2 where 约束中的 const generics
 
@@ -910,7 +910,7 @@ fn main() {
 }
 ```
 
-> **跨层映射**: 类型状态机的编译期保证 ↔ [L3 异步状态机](../../03_advanced/02_async.md) §3 "async/await 状态转换" 的运行时状态机形成对比：前者将状态合法性证明推至编译期，后者在运行时管理状态。Const Generics 的类型状态机是**零运行时开销**的，所有状态转换在类型层面完成验证。
+> **跨层映射**: 类型状态机的编译期保证 ↔ [L3 异步状态机](../../03_advanced/01_async/02_async.md) §3 "async/await 状态转换" 的运行时状态机形成对比：前者将状态合法性证明推至编译期，后者在运行时管理状态。Const Generics 的类型状态机是**零运行时开销**的，所有状态转换在类型层面完成验证。
 
 #### 5.7.6 典型应用：固定大小数组的数学运算
 
@@ -2220,11 +2220,11 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 | Trait 与约束 | [01_traits.md](../00_traits/01_traits.md) | 泛型约束的载体 |
 | 所有权（Ownership）与生命周期 | [01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 泛型生命周期参数的基础 |
 | 类型系统基础 | [01_foundation/02_type_system/04_type_system.md](../../01_foundation/02_type_system/04_type_system.md) | 泛型的理论前提 |
-| 异步（Async）与 Future | [03_advanced/02_async.md](../../03_advanced/02_async.md) | 关联类型泛型（GATs）的典型应用 |
-| 并发与 Send/Sync | [03_advanced/01_concurrency.md](../../03_advanced/01_concurrency.md) | 泛型约束的线程安全应用 |
-| 形式化验证 | [04_formal/04_rustbelt.md](../../04_formal/04_rustbelt.md) | 泛型系统的逻辑基础 |
+| 异步（Async）与 Future | [03_advanced/01_async/02_async.md](../../03_advanced/01_async/02_async.md) | 关联类型泛型（GATs）的典型应用 |
+| 并发与 Send/Sync | [03_advanced/00_concurrency/01_concurrency.md](../../03_advanced/00_concurrency/01_concurrency.md) | 泛型约束的线程安全应用 |
+| 形式化验证 | [04_formal/04_rustbelt.md](../../04_formal/02_separation_logic/04_rustbelt.md) | 泛型系统的逻辑基础 |
 | Rust 版本特性演进 | [07_future/05_rust_version_tracking.md](../../07_future/05_rust_version_tracking.md) | `use<..>` precise capturing 等类型系统扩展 |
-| 异步与泛型 | [03_advanced/02_async.md](../../03_advanced/02_async.md) | `AsyncFn` trait 家族、GATs 在 async 中的应用 |
+| 异步与泛型 | [03_advanced/01_async/02_async.md](../../03_advanced/01_async/02_async.md) | `AsyncFn` trait 家族、GATs 在 async 中的应用 |
 
 ---
 
@@ -2403,7 +2403,7 @@ impl Displayable for i32 {
 ```
 
 > **修正**: 泛型函数的 trait bound 必须在调用点由具体类型满足。如果未为目标类型实现所需 trait，编译器会拒绝单态化。这是 Rust 零成本抽象（Zero-Cost Abstraction）的核心——trait bound 检查在编译期完成，无运行时开销。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> **相关判定树**: [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树)
+> **相关判定树**: [泛型判定树](../../00_meta/00_framework/concept_definition_decision_forest.md#六泛型判定树)
 
 ### 10.5 边界测试：泛型约束的传递性与 trait bound 推导（编译错误）
 

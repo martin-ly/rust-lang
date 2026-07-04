@@ -11,8 +11,8 @@
 > **双维定位**: C×App — 在复杂场景下正确标注生命周期（Lifetimes）
 > **前置概念**: [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
 > **后置概念**: [Advanced Generics](../02_intermediate/01_generics/02_generics.md) ·
-> [Async/Await](../03_advanced/02_async.md) ·
-> [Pin](../03_advanced/02_async.md)
+> [Async/Await](../03_advanced/01_async/02_async.md) ·
+> [Pin](../03_advanced/01_async/02_async.md)
 > **主要来源**: [TRPL: Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) ·
 > [Wikipedia: Region-based memory management] ·
 > [Rust Reference: Lifetime elision]
@@ -519,7 +519,7 @@ graph BT
 
 > **一致性（Coherence）检查**: L1 ⟹ L2 ⟹ T1/T2/T3 ⟹ C1/C2/C3，形成**从基础约束到高阶抽象**的递进链。T2 在宽松方向扩展合法程序，T3 在严格方向保证替换安全。
 >
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/04_navigation/inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
 
 ---
 
@@ -987,8 +987,8 @@ fn main() {
 - [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 生命周期建立在所有权转移规则之上
 - [Borrowing](../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用检查是生命周期约束的执行机制
 - [Advanced Generics](../02_intermediate/01_generics/02_generics.md) — 泛型与生命周期参数共同构成参数化多态
-- [Async/Await](../03_advanced/02_async.md) — async 状态机的自引用需要生命周期与 Pin 协同
-- [00_meta/inter_layer_map.md](../00_meta/inter_layer_map.md) — 跨层定理映射 §4.2
+- [Async/Await](../03_advanced/01_async/02_async.md) — async 状态机的自引用需要生命周期与 Pin 协同
+- [00_meta/inter_layer_map.md](../00_meta/04_navigation/inter_layer_map.md) — 跨层定理映射 §4.2
 
 ---
 
@@ -1328,7 +1328,7 @@ fn longest(x: &str, y: &str) -> &str;    // ❌ E0106
 
 > **[来源: Rust Reference: Lifetime elision]** 完整的 Elision 规则定义于 Reference 的 "Lifetime elision" 章节，覆盖函数签名、方法签名及 trait 对象场景。✅
 
-**跨层映射**: 本章节形式化规则 ↔ [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) §2.2 "区域约束的语法与语义"
+**跨层映射**: 本章节形式化规则 ↔ [`../04_formal/03_ownership_formal.md`](../04_formal/01_ownership_logic/03_ownership_formal.md) §2.2 "区域约束的语法与语义"
 
 ---
 
@@ -1642,7 +1642,7 @@ Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where 
 >
 > `union` 是 Rust 中唯一允许在同一内存位置存储不同类型的语言构造。它与 `enum` 形成鲜明对比：enum 用 tag 保证类型安全，union 则将类型安全的责任完全交给程序员。本节从内存布局、drop 语义、`ManuallyDrop` 机制、impl 限制与 FFI 互操作五个维度，建立 union 的完整安全模型。
 >
-> **交叉链接**: [L1 类型系统: ADT 与 Union 对比](../01_foundation/02_type_system/04_type_system.md) · [L3 unsafe: union 字段访问](../03_advanced/03_unsafe.md) · [L3 unsafe: ManuallyDrop](../03_advanced/03_unsafe.md)
+> **交叉链接**: [L1 类型系统: ADT 与 Union 对比](../01_foundation/02_type_system/04_type_system.md) · [L3 unsafe: union 字段访问](../03_advanced/02_unsafe/03_unsafe.md) · [L3 unsafe: ManuallyDrop](../03_advanced/02_unsafe/03_unsafe.md)
 
 ### 16.1 union 的内存布局与 enum 的本质区别
 >
@@ -1998,7 +1998,7 @@ enum SafeValue {
 
 ---
 
-> **相关判定树**: [生命周期判定树](../00_meta/concept_definition_decision_forest.md#四生命周期判定树)
+> **相关判定树**: [生命周期判定树](../00_meta/00_framework/concept_definition_decision_forest.md#四生命周期判定树)
 > **相关谓词映射**: [生命周期令牌 [α]₁](../00_meta/rustbelt_predicate_map.md#四生命周期令牌-α₁-映射)
 
 ## 嵌入式测验（Embedded Quiz）

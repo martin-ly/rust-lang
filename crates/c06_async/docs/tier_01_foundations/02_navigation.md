@@ -259,7 +259,7 @@
 
 ### 历史报告
 
-查看 [reports/README.md](../reports/README.md) 获取完整报告列表。
+查看 [reports/README.md](../../../../README.md) 获取完整报告列表。
 
 ---
 

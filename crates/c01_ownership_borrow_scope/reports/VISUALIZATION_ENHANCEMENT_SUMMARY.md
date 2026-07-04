@@ -304,7 +304,7 @@
 
 ### 📖 核心文档
 
-- [README](docs/README.md) - 主文档
+- [README](../../../README.md) - 主文档
 - [主索引](docs/00_MASTER_INDEX.md) - 文档索引
 - [完整报告](docs/VISUALIZATION_ENHANCEMENT_REPORT.md) - 详细报告
 

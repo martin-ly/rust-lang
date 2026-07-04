@@ -1,0 +1,127 @@
+# 变量（Variables）
+
+> **EN**: Variables
+> **Summary**: Rust 变量的规范定义：函数参数、匿名临时值、命名局部变量；栈分配、可变性、初始化规则。 Normative definition of Rust variables: function parameters, anonymous temporaries, named locals; stack allocation, mutability, and initialization rules.
+>
+> **受众**: [专家]
+> **内容分级**: [专家级]
+> **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **S** — Specification
+> **双维定位**: S×App — 规范应用
+> **前置依赖**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Move Semantics](../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) · [Memory Model](../02_unsafe/29_memory_model.md)
+> **后置概念**: [Memory Allocation and Lifetime](32_memory_allocation_and_lifetime.md) · [Destructors](../../04_formal/05_rustc_internals/43_destructors.md) · [Unsafe Rust](../02_unsafe/03_unsafe.md)
+> **定理链**: Variable → Initialization → Drop Scope
+> **主要来源**: [Rust Reference — Variables](https://doc.rust-lang.org/reference/variables.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Variables](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+
+>
+> **来源**: [Rust Reference — Variables](https://doc.rust-lang.org/reference/variables.html)
+
+---
+
+---
+
+## 认知路径
+
+> **认知路径**: 本节从 "变量（Variables）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+
+1. **问题识别**: 为什么 变量（Variables） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
+2. **概念建立**: 掌握 变量（Variables） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
+3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与变量（Variables）的适用边界。
+5. **迁移应用**: 将 变量（Variables） 与前置/后置概念链接，形成跨层知识网络。
+
+---
+
+## 反命题决策树
+
+> **反命题 1**: "变量（Variables） 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+
+> **反命题 2**: "忽略 变量（Variables） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 变量（Variables） 规则被违反的直接信号。
+
+> **反命题 3**: "其他语言对 变量（Variables） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 变量（Variables） 具有语言特有的形态。
+
+## 一、什么是变量
+
+**变量（variable）** 是栈帧的组成部分，包括：
+
+- 命名的函数参数（named function parameter）
+- 匿名临时值（anonymous temporary）
+- 命名的局部变量（named local variable）
+
+---
+
+## 二、局部变量
+
+**局部变量（local variable）** 直接在栈内存中持有值，该值是栈帧的一部分。
+
+### 可变性
+
+- 局部变量默认不可变。
+- 使用 `let mut` 声明可变局部变量。
+
+```rust
+let x = 5;      // 不可变
+let mut y = 5;  // 可变
+y = 6;
+```
+
+### 函数参数
+
+- 函数参数默认不可变。
+- 使用 `mut` 声明可变参数，该关键字只影响紧随其后的参数。
+
+```rust
+fn f(mut x: Box<i32>, y: Box<i32>) {
+    // x 可变，y 不可变
+}
+
+let closure = |mut a, b| { /* a 可变，b 不可变 */ };
+```
+
+---
+
+## 三、初始化规则
+
+局部变量在分配时**未初始化**。进入函数时，整个栈帧的局部变量都以未初始化状态分配。后续语句可能初始化这些变量。
+
+变量只能在所有可达控制流路径都已初始化之后才能使用。
+
+```rust
+fn random_bool() -> bool { true }
+
+fn initialization_example() {
+    let init_after_if: ();
+    let uninit_after_if: ();
+
+    if random_bool() {
+        init_after_if = ();
+        uninit_after_if = ();
+    } else {
+        init_after_if = ();
+    }
+
+    init_after_if;      // OK
+    // uninit_after_if; // ERROR: use of possibly uninitialized
+}
+```
+
+---
+
+## 四、变量与 Drop
+
+当已初始化的变量或临时值离开作用域时，会运行其**析构函数（destructor）**。赋值也会运行左操作数的析构函数（如果已初始化）。部分初始化的变量只 drop 已初始化的字段。
+
+更多细节参见 [Destructors](../../04_formal/05_rustc_internals/43_destructors.md)。
+
+---
+
+## 五、关联概念
+
+| 概念 | 关系 |
+|:---|:---|
+| [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 变量是所有权系统的核心载体 |
+| [Move Semantics](../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) | 变量赋值涉及 move 语义 |
+| [Memory Allocation and Lifetime](32_memory_allocation_and_lifetime.md) | 局部变量在栈上分配 |
+| [Destructors](../../04_formal/05_rustc_internals/43_destructors.md) | 变量离开作用域时触发析构 |
+| [Unsafe Rust](../02_unsafe/03_unsafe.md) | 未初始化内存操作需要 unsafe |
+| [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) | 智能指针（Smart Pointer）管理堆上变量所有权（Ownership） |

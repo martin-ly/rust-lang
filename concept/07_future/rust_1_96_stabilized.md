@@ -291,7 +291,7 @@ rustc +nightly -Z unstable-options --print target-spec-json-schema
 | `NonZero` 范围迭代 | `concept/02_intermediate/04_types_and_conversions/06_range_types.md` | `c02_type_system` | ✅ |
 | `From<T>` for cell types | `concept/02_intermediate/02_memory_management/08_interior_mutability.md` | `c02_type_system` | ✅ |
 | `ManuallyDrop` 常量模式 | `concept/02_intermediate/02_memory_management/03_memory_management.md` | `c02_type_system` | ✅ |
-| `expr` metavariable to `cfg` | `concept/03_advanced/04_macros.md` | `c11_macro_system_proc` | ✅ 97 passed |
+| `expr` metavariable to `cfg` | `concept/03_advanced/03_proc_macros/04_macros.md` | `c11_macro_system_proc` | ✅ 97 passed |
 | Never 类型 tuple coercion | `concept/02_intermediate/01_generics/02_generics.md` | `c02_type_system` | ✅ |
 
 ---

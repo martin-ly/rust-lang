@@ -12,10 +12,10 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评价工作流模型的形式化正确性
-> **前置依赖**: [Async/Await](../03_advanced/02_async.md) ·
+> **前置依赖**: [Async/Await](../03_advanced/01_async/02_async.md) ·
 > 异步（Async）状态机 ·
-> [公理语义](../04_formal/20_axiomatic_semantics.md) ·
-> [类型语义](../04_formal/21_type_semantics.md)
+> [公理语义](../04_formal/03_operational_semantics/20_axiomatic_semantics.md) ·
+> [类型语义](../04_formal/00_type_theory/21_type_semantics.md)
 > **后置延伸**: [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) ·
 > [Reactive Programming](40_reactive_programming.md) ·
 > [分布式系统](18_distributed_systems.md)
@@ -33,7 +33,7 @@
 > [Rust async-book](https://rust-lang.github.io/async-book/)
 > [来源: [WfMC — Reference Model](https://wfmc.org/public-documents/)] · [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)] · [来源: [Workflow Patterns](http://www.workflowpatterns.com/)]
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -50,8 +50,8 @@
     - [3.2 状态机语义](#32-状态机语义)
     - [3.3 执行语义](#33-执行语义)
   - [四、Rust 中的工作流实现](#四rust-中的工作流实现)
-    - [4.1 异步（Async）机制与工作流同构性](#41-异步机制与工作流同构性)
-    - [4.2 类型系统（Type System）映射](#42-类型系统映射)
+    - [4.1 异步机制与工作流同构性](#41-异步机制与工作流同构性)
+    - [4.2 类型系统映射](#42-类型系统映射)
     - [4.3 状态机转换](#43-状态机转换)
   - [五、形式化验证](#五形式化验证)
     - [5.1 Petri 网模型](#51-petri-网模型)
@@ -66,7 +66,7 @@
     - [7.2 边界极限](#72-边界极限)
   - [八、边界测试](#八边界测试)
     - [8.1 边界测试：状态机转换遗漏导致死代码（编译/逻辑错误）](#81-边界测试状态机转换遗漏导致死代码编译逻辑错误)
-    - [8.2 边界测试：Petri 网可达性分析的 state explosion（运行时（Runtime）性能）](#82-边界测试petri-网可达性分析的-state-explosion运行时性能)
+    - [8.2 边界测试：Petri 网可达性分析的 state explosion（运行时性能）](#82-边界测试petri-网可达性分析的-state-explosion运行时性能)
     - [8.3 边界测试：工作流循环缺乏终止条件导致无限执行（运行时错误）](#83-边界测试工作流循环缺乏终止条件导致无限执行运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
@@ -1293,11 +1293,11 @@ async fn unbounded_backoff() -> Result<Output> {
 - [分布式系统](18_distributed_systems.md) — gRPC、Raft、Actor、服务发现
 - [架构设计模式](35_architecture_patterns.md) — 分层/六边形/洋葱/整洁架构
 - [微服务架构模式](31_microservice_patterns.md) — 服务发现、熔断、Saga
-- [Async/Await](../03_advanced/02_async.md) — 异步编程基础
-- [异步状态机](../03_advanced/02_async.md) — async/await 状态机转换
-- [公理语义](../04_formal/20_axiomatic_semantics.md) — Hoare 逻辑、正确性证明
-- [类型语义](../04_formal/21_type_semantics.md) — 类型系统（Type System）、Progress & Preservation
-- [操作语义](../04_formal/17_operational_semantics.md) — 结构化操作语义
+- [Async/Await](../03_advanced/01_async/02_async.md) — 异步编程基础
+- [异步状态机](../03_advanced/01_async/02_async.md) — async/await 状态机转换
+- [公理语义](../04_formal/03_operational_semantics/20_axiomatic_semantics.md) — Hoare 逻辑、正确性证明
+- [类型语义](../04_formal/00_type_theory/21_type_semantics.md) — 类型系统（Type System）、Progress & Preservation
+- [操作语义](../04_formal/03_operational_semantics/17_operational_semantics.md) — 结构化操作语义
 
 > **过渡**: Workflow Theory & Formalization（工作流理论与形式化） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Workflow Theory & Formalization（工作流理论与形式化） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

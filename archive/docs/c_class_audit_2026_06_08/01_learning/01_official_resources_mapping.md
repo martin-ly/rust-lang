@@ -651,7 +651,7 @@
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - **RBE 练习**：上表「RBE 练习（可点击）」列提供各模块对应的 RBE 章节链接，可直接点击进入练习
-- **Rustlings 模块映射**：[exercises/RUSTLINGS_MAPPING.md](../../../../exercises/RUSTLINGS_MAPPING.md) — C01–C12 与 Rustlings 习题主题对应表（含可点击 GitHub 链接）
+- **Rustlings 模块映射**：[exercises/RUSTLINGS_MAPPING.md](../../../../exercises/rustlings_mapping.md) — C01–C12 与 Rustlings 习题主题对应表（含可点击 GitHub 链接）
 
 ---
 
@@ -867,7 +867,7 @@
 
 1. 完成 edX Microsoft 入门课程
 2. 结合本项目 [01_learning_path_planning.md](../../../../docs/01_learning/01_learning_path_planning.md) 深化理解
-3. 通过 [Rustlings 练习](../../../../exercises/RUSTLINGS_MAPPING.md) 巩固知识
+3. 通过 [Rustlings 练习](../../../../exercises/rustlings_mapping.md) 巩固知识
 
 **开发者进阶路径** (Linux Foundation课程 → 本项目):
 
@@ -883,7 +883,7 @@
 
 - [文档中心](../README.md)
 - [学习路径规划](../../../../docs/01_learning/01_learning_path_planning.md)
-- [Rustlings 映射](../../../../exercises/RUSTLINGS_MAPPING.md)
+- [Rustlings 映射](../../../../exercises/rustlings_mapping.md)
 - [形式化方法研究](../../../research_notes_2026_06_25/formal_methods/README.md)
 - [类型理论研究](../../../../docs/research_notes/type_theory/README.md)
 

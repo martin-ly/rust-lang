@@ -2,7 +2,7 @@
 >
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 >
-> **本节关键术语**: 生命周期 (Lifetime) · 生命周期注解 (Lifetime Annotation) · 静态生命周期 ('static) · 省略规则 (Elision) — [完整对照表](../../00_meta/terminology_glossary.md)
+> **本节关键术语**: 生命周期 (Lifetime) · 生命周期注解 (Lifetime Annotation) · 静态生命周期 ('static) · 省略规则 (Elision) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 
 # Lifetimes（生命周期）
 >
@@ -21,8 +21,8 @@
 > **后置概念**:
 >
 > [Advanced Generics](../../02_intermediate/01_generics/02_generics.md) ·
-> [Async/Await](../../03_advanced/02_async.md) ·
-> [Pin](../../03_advanced/02_async.md)
+> [Async/Await](../../03_advanced/01_async/02_async.md) ·
+> [Pin](../../03_advanced/01_async/02_async.md)
 >
 > **主要来源**: · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
@@ -483,7 +483,7 @@ graph BT
 
 > **一致性（Coherence）检查**: L1 ⟹ L2 ⟹ T1/T2/T3 ⟹ C1/C2/C3，形成**从基础约束到高阶抽象**的递进链。T2 在宽松方向扩展合法程序，T3 在严格方向保证替换安全。
 >
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
 
 ---
 

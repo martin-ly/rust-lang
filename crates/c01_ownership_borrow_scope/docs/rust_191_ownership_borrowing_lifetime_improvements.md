@@ -4,7 +4,7 @@
 > **创建日期**: 2025-01-27
 > **适用版本**: Rust 1.91.0+（历史版本）
 > **相关模块**: `c01_ownership_borrow_scope`
-> **注意**: 本文档为历史版本。请查看 [RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md](RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md) 了解 Rust 1.92.0 的最新改进。
+> **注意**: 本文档为历史版本。请查看 [RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md](rust_192_ownership_borrowing_lifetime_improvements.md) 了解 Rust 1.92.0 的最新改进。
 
 ---
 

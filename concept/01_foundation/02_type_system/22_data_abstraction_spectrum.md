@@ -2,7 +2,7 @@
 >
 > **本节关键术语**:
 >
-> 数据抽象 (Data Abstraction) · 封装 (Encapsulation) · 信息隐藏 (Information Hiding) · 模块边界 (Module Boundary) · API 设计 — [完整对照表](../../00_meta/terminology_glossary.md)
+> 数据抽象 (Data Abstraction) · 封装 (Encapsulation) · 信息隐藏 (Information Hiding) · 模块边界 (Module Boundary) · API 设计 — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # 数据抽象谱系：从 C struct 到 Rust enum + trait
 >
@@ -15,7 +15,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析数据抽象机制的演进谱系
 > **前置概念**: [Type System](04_type_system.md) · [Variable Model](../03_values_and_references/20_variable_model.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)
-> **后置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Type Erasure](../../03_advanced/17_type_erasure.md)
+> **后置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Type Erasure](../../03_advanced/06_low_level_patterns/17_type_erasure.md)
 > **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
 > [Pierce — TAPL, §18-§24](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
@@ -721,7 +721,7 @@ ZST 不占用内存，可用于类型级标记（phantom types）、空迭代器
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../../00_meta/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 

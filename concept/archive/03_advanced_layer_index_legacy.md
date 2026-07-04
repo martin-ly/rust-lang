@@ -40,14 +40,14 @@
 
 | 概念 | 规范文件 | 核心内容 | 状态 |
 |:---|:---|:---|:---|
-| **并发模型** | [`03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | `Send`/`Sync`、fearless concurrency、同步原语、原子操作（Atomic Operations）、内存序 | ✅ v1.0 |
-| **异步（Async）编程** | [`03_advanced/02_async.md`](../03_advanced/02_async.md) | `Future`、`async/await`、`Pin`、AFIT/RPITIT、运行时（Runtime）、并发与异步的关系 | ✅ v1.0 |
-| **Unsafe Rust** | [`03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | 裸指针、FFI、UB 边界、Safety 契约、Miri、不安全代码的权限分离 | ✅ v1.0 |
-| **宏系统** | [`03_advanced/04_macros.md`](../03_advanced/04_macros.md) | `macro_rules!`、过程宏（Procedural Macro）、DSL、卫生宏、元编程 | ✅ v1.0 |
-| **FFI 跨语言** | [`03_advanced/05_rust_ffi.md`](../03_advanced/05_rust_ffi.md) | extern 块、ABI 兼容、类型映射、bindgen、回调封装 | ✅ v1.0 |
-| **Pin 与 Unpin** | [`03_advanced/06_pin_unpin.md`](../03_advanced/06_pin_unpin.md) | 自引用（Reference）类型、PhantomPinned、async 状态机、Pin API 契约 | ✅ v1.0 |
-| **过程宏（Procedural Macro）** | [`03_advanced/07_proc_macro.md`](../03_advanced/07_proc_macro.md) | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ v1.0 |
-| **NLL 与 Polonius** | [`03_advanced/08_nll_and_polonius.md`](../03_advanced/08_nll_and_polonius.md) | 非词法生命周期（Lifetimes）、数据流分析、Origin 模型 | ✅ v1.0 |
+| **并发模型** | [`03_advanced/00_concurrency/01_concurrency.md`](../03_advanced/00_concurrency/01_concurrency.md) | `Send`/`Sync`、fearless concurrency、同步原语、原子操作（Atomic Operations）、内存序 | ✅ v1.0 |
+| **异步（Async）编程** | [`03_advanced/01_async/02_async.md`](../03_advanced/01_async/02_async.md) | `Future`、`async/await`、`Pin`、AFIT/RPITIT、运行时（Runtime）、并发与异步的关系 | ✅ v1.0 |
+| **Unsafe Rust** | [`03_advanced/02_unsafe/03_unsafe.md`](../03_advanced/02_unsafe/03_unsafe.md) | 裸指针、FFI、UB 边界、Safety 契约、Miri、不安全代码的权限分离 | ✅ v1.0 |
+| **宏系统** | [`03_advanced/03_proc_macros/04_macros.md`](../03_advanced/03_proc_macros/04_macros.md) | `macro_rules!`、过程宏（Procedural Macro）、DSL、卫生宏、元编程 | ✅ v1.0 |
+| **FFI 跨语言** | [`03_advanced/04_ffi/05_rust_ffi.md`](../03_advanced/04_ffi/05_rust_ffi.md) | extern 块、ABI 兼容、类型映射、bindgen、回调封装 | ✅ v1.0 |
+| **Pin 与 Unpin** | [`03_advanced/01_async/06_pin_unpin.md`](../03_advanced/01_async/06_pin_unpin.md) | 自引用（Reference）类型、PhantomPinned、async 状态机、Pin API 契约 | ✅ v1.0 |
+| **过程宏（Procedural Macro）** | [`03_advanced/03_proc_macros/07_proc_macro.md`](../03_advanced/03_proc_macros/07_proc_macro.md) | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ v1.0 |
+| **NLL 与 Polonius** | [`03_advanced/02_unsafe/08_nll_and_polonius.md`](../03_advanced/02_unsafe/08_nll_and_polonius.md) | 非词法生命周期（Lifetimes）、数据流分析、Origin 模型 | ✅ v1.0 |
 
 ---
 

@@ -65,8 +65,8 @@
 针对以下主题补充 Unicode / ISO / IEEE / IETF / ABI 标准引用：
 
 - 字符串与编码：`concept/01_foundation/06_strings_and_text/18_strings_and_encoding.md` → Unicode Standard
-- 内联汇编：`concept/03_advanced/13_inline_assembly.md` → Intel/ARM 架构手册
-- 网络编程：`concept/03_advanced/18_network_programming.md` → IETF RFCs
+- 内联汇编：`concept/03_advanced/05_inline_assembly/13_inline_assembly.md` → Intel/ARM 架构手册
+- 网络编程：`concept/03_advanced/06_low_level_patterns/18_network_programming.md` → IETF RFCs
 - ABI：`concept/04_formal/38_application_binary_interface.md` → Itanium C++ ABI / System V AMD64 ABI
 - 交叉编译/嵌入式：`concept/06_ecosystem/17_cross_compilation.md` / `22_embedded_systems.md` → 目标平台规范
 

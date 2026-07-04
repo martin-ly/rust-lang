@@ -97,14 +97,14 @@
 
 **详细说明**:
 
-1. 阅读 [主索引](README.md) 了解系统结构
+1. 阅读 [主索引](../../README.md) 了解系统结构
 2. 查看 [系统总结](10_system_summary.md) 了解系统概览
 3. 浏览 [快速参考](10_quick_reference.md) 查找感兴趣的主题
 
 **相关资源**:
 
 - [快速入门指南](10_getting_started.md)
-- [主索引](README.md)
+- [主索引](../../README.md)
 - [系统总结](10_system_summary.md)
 
 ---
@@ -115,7 +115,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**简短回答**: 使用 [快速参考](10_quick_reference.md) 或 [完整索引](INDEX.md)。
+**简短回答**: 使用 [快速参考](10_quick_reference.md) 或 [完整索引](../../concept/sources/INDEX.md)。
 
 **详细说明**:
 
@@ -126,7 +126,7 @@
 **相关资源**:
 
 - [快速参考](10_quick_reference.md)
-- [完整索引](INDEX.md)
+- [完整索引](../../concept/sources/INDEX.md)
 - [快速查找](10_quick_find.md)（按「我想理解…」查找）
 
 ---
@@ -271,7 +271,7 @@
 **详细说明**:
 
 1. 使用 [研究笔记模板](10_template.md) 创建文件
-2. 遵循 [研究笔记规范](README.md#研究笔记规范)
+2. 遵循 [研究笔记规范](../../README.md#研究笔记规范)
 3. 使用 [质量检查清单](10_quality_checklist.md) 检查质量
 4. 请他人审查
 
@@ -291,14 +291,14 @@
 **详细说明**:
 
 1. 更新相应目录的 README.md（添加新笔记链接）
-2. 更新 [主索引](README.md)（如需要）
-3. 更新 [完整索引](INDEX.md)（如需要）
+2. 更新 [主索引](../../README.md)（如需要）
+3. 更新 [完整索引](../../concept/sources/INDEX.md)（如需要）
 4. 更新 [快速参考](10_quick_reference.md)（如需要）
 
 **相关资源**:
 
 - [贡献指南](10_contributing.md)
-- [主索引](README.md)
+- [主索引](../../README.md)
 
 ---
 
@@ -374,7 +374,7 @@
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-**简短回答**: 遵循 [研究笔记规范](README.md#研究笔记规范)。
+**简短回答**: 遵循 [研究笔记规范](../../README.md#研究笔记规范)。
 
 **详细说明**:
 每个研究笔记应包含：
@@ -388,7 +388,7 @@
 
 **相关资源**:
 
-- [研究笔记规范](README.md#研究笔记规范)
+- [研究笔记规范](../../README.md#研究笔记规范)
 - [研究笔记模板](10_template.md)
 
 ---
@@ -441,7 +441,7 @@
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 - [快速入门指南](10_getting_started.md) - 新用户入门指南
-- [主索引](README.md) - 完整的研究笔记索引
+- [主索引](../../README.md) - 完整的研究笔记索引
 - [快速参考](10_quick_reference.md) - 快速查找指南
 - [贡献指南](10_contributing.md) - 贡献流程和规范
 
@@ -530,7 +530,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

@@ -12,7 +12,7 @@
 > **Bloom 层级**: 应用 → 创造
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Cre — 设计类型安全的 REST/GraphQL/gRPC API
-> **前置依赖**: [Async/Await](../03_advanced/02_async.md) ·
+> **前置依赖**: [Async/Await](../03_advanced/01_async/02_async.md) ·
 > [Trait](../02_intermediate/00_traits/01_traits.md) ·
 > [错误处理（Error Handling）](../01_foundation/08_error_handling/32_error_handling_basics.md) ·
 > [架构设计模式](35_architecture_patterns.md)
@@ -36,7 +36,7 @@
 > [tonic](https://docs.rs/tonic/latest/tonic/) ·
 > [async-graphql](https://docs.rs/async-graphql/latest/async_graphql/)
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+> **前置依赖**: [Type Theory](../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -1199,7 +1199,7 @@ struct UserV2 {
 - [架构设计模式](35_architecture_patterns.md) — 分层/六边形/洋葱/整洁架构
 - [Reactive Programming](40_reactive_programming.md) — Stream、背压、实时数据
 - [安全实践](19_security_practices.md) — 防御性编程、密码学
-- [Async/Await](../03_advanced/02_async.md) — 异步编程基础
+- [Async/Await](../03_advanced/01_async/02_async.md) — 异步编程基础
 - [Trait](../02_intermediate/00_traits/01_traits.md) — 接口设计、类型抽象
 - [错误处理（Error Handling）](../01_foundation/08_error_handling/32_error_handling_basics.md) — Result、? 运算符
 - [云原生](24_cloud_native.md) — Kubernetes、容器化、可观测性

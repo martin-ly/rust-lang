@@ -52,7 +52,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [研究笔记主索引](README.md)
+- [研究笔记主索引](../../README.md)
 - [项目文档](../README.md)
 
 ---
@@ -136,7 +136,7 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [research_notes 目录](README.md)
+- [research_notes 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

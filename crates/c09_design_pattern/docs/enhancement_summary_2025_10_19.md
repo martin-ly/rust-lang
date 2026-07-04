@@ -231,11 +231,11 @@ cat docs/rust_190_comprehensive_enhancement_report.md
 ### 核心文档
 
 - [README](../README.md) - 模块概述
-- [知识图谱](KNOWLEDGE_GRAPH.md) - 模式关系网络
-- [思维导图](MIND_MAP.md) - 学习路径
-- [多维对比](MULTIDIMENSIONAL_MATRIX_COMPARISON.md) - 详细对比
+- [知识图谱](knowledge_graph.md) - 模式关系网络
+- [思维导图](mind_map.md) - 学习路径
+- [多维对比](multidimensional_matrix_comparison.md) - 详细对比
 - [Rust 1.92.0 示例](RUST_192_EXAMPLES.md) - 特性示例集（自 Rust 1.90 引入）
-- [增强报告](RUST_190_COMPREHENSIVE_ENHANCEMENT_REPORT.md) - 完整报告
+- [增强报告](rust_190_comprehensive_enhancement_report.md) - 完整报告
 
 ### 示例文件
 

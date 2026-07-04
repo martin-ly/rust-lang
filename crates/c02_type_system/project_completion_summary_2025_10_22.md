@@ -227,7 +227,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $ma
 - 📖 **[主索引](docs/00_master_index.md)** - 完整文档索引
 - 📝 **[变更日志](CHANGELOG.md)** - 版本记录
 - 🤝 **[贡献指南](CONTRIBUTING.md)** - 如何贡献
-- 📋 **[交付报告](FINAL_DELIVERY_REPORT_2025_10_22.md)** - 完整报告
+- 📋 **[交付报告](final_delivery_report_2025_10_22.md)** - 完整报告
 
 ---
 
