@@ -98,7 +98,7 @@ let v = clone_slice(&[1, 2, 3]);
 
 > **关键洞察**: Trait 求解 = 为每个 obligation 找到一个“证据”：一个 impl、一个 where-clause、或一个内建规则。
 >
-> [来源: Rustc Dev Guide — Trait resolution (old-style)](https://rustc-dev-guide.rust-lang.org/traits/resolution.html)
+> [Rustc Dev Guide — Trait resolution (old-style)](https://rustc-dev-guide.rust-lang.org/traits/resolution.html)(<https://rustc-dev-guide.rust-lang.org/traits/resolution.html>)
 
 ---
 
@@ -182,7 +182,7 @@ fn foo<T: Clone + Debug>(x: T) {
 
 > **定理**: Fulfillment 结束时，所有类型检查阶段的 trait obligation 都必须被证明可解。
 >
-> [来源: Rustc Dev Guide — Trait resolution — Overview](https://rustc-dev-guide.rust-lang.org/traits/resolution.html#overview)
+> [Rustc Dev Guide — Trait resolution — Overview](https://rustc-dev-guide.rust-lang.org/traits/resolution.html)(<https://rustc-dev-guide.rust-lang.org/traits/resolution.html#overview>)
 
 ---
 
@@ -215,7 +215,7 @@ Evaluation 只回答“这个 obligation 是否可能成立”，不会修改推
 
 > **状态（截至 Rust 1.96）**: 新 solver 仍在 nightly 中迭代，尚未成为默认。可通过 `-Ztrait-solver=next` 尝试。
 >
-> [来源: Rustc Dev Guide — Next-gen trait solving](https://rustc-dev-guide.rust-lang.org/solve/the-solver.html)
+> [Rustc Dev Guide — Next-gen trait solving](https://rustc-dev-guide.rust-lang.org/solve/trait-solving.html)(<https://rustc-dev-guide.rust-lang.org/solve/the-solver.html>)
 
 ---
 
@@ -239,7 +239,7 @@ where
 
 新 solver 使用 coinduction 来处理这类递归约束，避免无限展开。
 
-> [来源: Rustc Dev Guide — Coinduction](https://rustc-dev-guide.rust-lang.org/solve/coinduction.html)
+> [Rustc Dev Guide — Coinduction](https://rustc-dev-guide.rust-lang.org/solve/coinduction.html)(<https://rustc-dev-guide.rust-lang.org/solve/coinduction.html>)
 
 ---
 

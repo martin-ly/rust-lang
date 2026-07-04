@@ -343,7 +343,7 @@ match map.get(&key) {
 
 ### 3.4
 
-> [来源: Rust Iterator docs] 链式方法调用
+> [Rust Iterator docs](https://doc.rust-lang.org/std/iter/trait.Iterator.html) 链式方法调用
 > **惯用**: 利用 `Iterator` 和 `Option`/`Result` 的链式方法组合计算。
 
 ```rust,ignore
@@ -390,7 +390,7 @@ impl Meters {
 
 ### 4.2
 
-> [来源: Rust Design Patterns, Typestate] Typestate 模式
+> [Rust Design Patterns, Typestate](https://rust-unofficial.github.io/patterns/patterns/typestate.html) Typestate 模式
 > **惯用**: 利用泛型（Generics）和 `PhantomData` 将状态编码到类型中，使非法状态不可表示。
 
 ```rust,ignore
@@ -579,7 +579,7 @@ greeting(&"Rust".to_owned());    // &String
 
 ### 6.2
 
-> [来源: scopeguard crate docs] Scopeguard 退出处理
+> [scopeguard crate docs](https://docs.rs/scopeguard/latest/scopeguard/) Scopeguard 退出处理
 > **惯用**: 用 `scopeguard` crate 或自定义守卫，保证「无论是否 panic，退出时执行某操作」。
 
 ```rust,ignore
@@ -645,7 +645,7 @@ impl SelfReferential {
 
 ### 7.1
 
-> [来源: Rust Iterator docs, LLVM 优化指南] Iterator 消费链
+> [Rust Iterator docs, LLVM 优化指南](https://doc.rust-lang.org/std/iter/trait.Iterator.html) Iterator 消费链
 > **惯用**: 用 Iterator 的懒性求值链替代命令式循环，利用 LLVM 优化生成高效代码。
 
 ```rust,ignore
@@ -689,7 +689,7 @@ fn sum_fold(nums: &[i32]) -> i32 {
 
 ### 7.3
 
-> [来源: Rust Style Guide] 早期返回与守卫子句
+> [Rust Style Guide](https://doc.rust-lang.org/style-guide/index.html) 早期返回与守卫子句
 > **惯用**: 用早期返回减少嵌套层级，用守卫子句（guard clause）快速排除非法输入。
 
 ```rust,ignore
@@ -717,7 +717,7 @@ fn process(data: Option<&[u8]>) -> Result<Output, Error> {
 
 ### 7.4
 
-> [来源: Rust docs, collect 方法] `collect` 与 Turbofish
+> [Rust docs, collect 方法](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect) `collect` 与 Turbofish
 > **惯用**: 用 `collect::<Vec<_>>()`（turbofish）显式指定目标类型，或利用类型推断（Type Inference）让编译器推断。
 
 ```rust
@@ -756,7 +756,7 @@ struct LocalCache {
 
 ### 8.2
 
-> [来源: Hewitt 1973, Actix docs] Actor mailbox 单线程处理
+> [Hewitt 1973, Actix docs](https://www.ijcai.org/Proceedings/73/Papers/027B.pdf) Actor mailbox 单线程处理
 > **惯用**: 利用 Actor 模型的单线程消息处理，避免显式锁，编译期保证状态独占访问。
 
 ```rust,ignore
@@ -784,7 +784,7 @@ impl Actor for CounterActor {
 
 ### 8.3
 
-> [来源: Hoare CSP 1978, Rust std docs] CSP channel 所有权（Ownership）转移
+> [Hoare CSP 1978, Rust std docs](https://doi.org/10.1145/359576.359585) CSP channel 所有权（Ownership）转移
 > **惯用**: 通过 channel 发送值时利用 move 语义，编译期排除 use-after-send。
 
 ```rust,ignore
@@ -802,7 +802,7 @@ let received = rx.recv().unwrap(); // 所有权从 channel 转移到 received
 
 ### 8.4
 
-> [来源: crossbeam-epoch docs] 无锁结构的 epoch 安全
+> [crossbeam-epoch docs](https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/) 无锁结构的 epoch 安全
 > **惯用**: 使用 `crossbeam-epoch` 实现无锁数据结构的内存安全（Memory Safety）回收。
 
 ```rust
@@ -830,7 +830,7 @@ fn pop<T>(head: &Atomic<Node<T>>) -> Option<T> {
 
 ### 9.1
 
-> [来源: Tower docs, Category Theory] Tower Service 态射复合
+> [Tower docs, Category Theory](https://docs.rs/tower/latest/tower/) Tower Service 态射复合
 > **惯用**: 将服务抽象为 `Service<Request>` trait，通过函数复合构建处理流水线。
 
 ```rust
@@ -849,7 +849,7 @@ trait Service<Request> {
 
 ### 9.2
 
-> [来源: Tower/Axum middleware docs] 洋葱中间件模式
+> [Tower/Axum middleware docs](https://docs.rs/tower/latest/tower/) 洋葱中间件模式
 > **惯用**: 中间件以洋葱层方式包裹核心处理逻辑，每层处理横切关注点（日志、认证、限流）。
 
 ```rust,ignore
@@ -868,7 +868,7 @@ let app = ServiceBuilder::new()
 
 ### 9.3
 
-> [来源: Bevy ECS docs, Data-Oriented Design] ECS 系统图与 Archetype
+> [Bevy ECS docs](https://bevyengine.org/learn/book/ecs/); [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/) ECS 系统图与 Archetype
 > **惯用**: 用 ECS（Entity-Component-System）将数据（Component）与行为（System）分离，通过 Archetype 实现缓存友好布局。
 
 ```rust,ignore
@@ -891,7 +891,7 @@ fn movement(mut query: Query<(&mut Position, &Velocity)>) {
 
 ### 9.4
 
-> [来源: Armstrong 2003, Erlang Error Kernel] 错误内核模式（Error Kernel）
+> [Armstrong 2003, Erlang Error Kernel](https://erlang.org/download/armstrong_thesis_2003.pdf) 错误内核模式（Error Kernel）
 > **惯用**: 将系统的核心状态集中在最小化的「错误内核」中，外围组件可失败重启，内核必须保持可用。
 
 ```rust,ignore
@@ -922,7 +922,7 @@ impl Worker {
 
 ## 十、反惯用法
 
-> [来源: Clippy Lints, Rust Design Patterns Anti-patterns]（Anti-idioms）判定树
+> [Clippy Lints, Rust Design Patterns Anti-patterns](https://doc.rust-lang.org/clippy/)（Anti-idioms）判定树
 
 ```mermaid
 graph TD
@@ -1126,7 +1126,7 @@ quadrantChart
     └─ 标志：能为团队制定惯用法规范，评审代码时识别反模式
 ```
 
-> **思维表征说明**: 此认知路径将「七层惯用法谱系」转化为**渐进式学习阶梯**——不是要求初学者一次性掌握全部，而是根据经验匹配适当的抽象层级。这与 `inter_layer_topology.md` 的跨层认知路径和 `intra_layer_model_map.md` 的层内决策树形成三维导航：纵向（层间）、横向（层内）、深度（经验递进）。 [来源: Dreyfus 技能获取模型; Bloom 认知层级]
+> **思维表征说明**: 此认知路径将「七层惯用法谱系」转化为**渐进式学习阶梯**——不是要求初学者一次性掌握全部，而是根据经验匹配适当的抽象层级。这与 `inter_layer_topology.md` 的跨层认知路径和 `intra_layer_model_map.md` 的层内决策树形成三维导航：纵向（层间）、横向（层内）、深度（经验递进）。 [Dreyfus 技能获取模型; Bloom 认知层级](https://en.wikipedia.org/wiki/Dreyfus_model_of_skill_acquisition)
 
 ---
 

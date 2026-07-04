@@ -91,7 +91,7 @@ Phase 2: Commit
 | **存储引擎** | RocksDB（C++）+ Rust 封装 | 纯 Java/Go 实现 |
 | **部署模式** | 云原生（Kubernetes） | 虚拟机/裸金属为主 |
 
-> **关键洞察**: TiKV 选择 Rust 的核心动机是"确定性延迟"——分布式事务的 P99 延迟对 GC 暂停极其敏感。Java 的 G1/ZGC 虽已将暂停降至毫秒级，但对于 sub-millisecond 的事务而言仍不可接受。Rust 的无 GC 模型从根本上消除了这一噪声源。[来源: PingCAP Blog — Why Rust for TiKV] ✅
+> **关键洞察**: TiKV 选择 Rust 的核心动机是"确定性延迟"——分布式事务的 P99 延迟对 GC 暂停极其敏感。Java 的 G1/ZGC 虽已将暂停降至毫秒级，但对于 sub-millisecond 的事务而言仍不可接受。Rust 的无 GC 模型从根本上消除了这一噪声源。[PingCAP Blog — Why Rust for TiKV](https://www.pingcap.com/blog/) ✅
 
 ### 2.3 TiKV 中的 Rust 所有权模式
 
@@ -150,7 +150,7 @@ WHERE o.status = 'shipped';
 
 ## 四、Meilisearch：轻量级全文搜索引擎
 
-> **[来源: Meilisearch Documentation](https://www.meilisearch.com/docs) · [Tantivy GitHub](https://github.com/quickwit-oss/tantivy)** ✅
+> **[Meilisearch Documentation](https://www.meilisearch.com/docs/)(<https://www.meilisearch.com/docs>) · [Tantivy GitHub](https://github.com/quickwit-oss/tantivy)** ✅
 
 ### 4.1 架构设计
 
@@ -191,7 +191,7 @@ impl Index {
 
 ## 五、SurrealDB：多模型数据库
 
-> **[来源: SurrealDB Documentation](https://surrealdb.com/docs) · [SurrealDB GitHub](https://github.com/surrealdb/surrealdb)** ✅
+> **[SurrealDB Documentation](https://surrealdb.com/docs)(<https://surrealdb.com/docs>) · [SurrealDB GitHub](https://github.com/surrealdb/surrealdb)** ✅
 
 ### 5.1 多模型查询语义
 
@@ -221,7 +221,7 @@ FROM person:tobie;
 | **嵌入部署** | ✅ 单二进制 | ❌ 需服务 | ❌ 需服务 |
 | **查询注入** | 参数化查询（类型安全） | 依赖驱动 | 依赖驱动 |
 
-> **关键洞察**: SurrealDB 的"单二进制嵌入"能力是 Rust 独有的工程优势。由于无 GC 和零依赖运行时（Runtime），SurrealDB 可以编译为单个 ~50MB 的二进制文件，嵌入到任何应用中作为嵌入式数据库。这与 SQLite 的竞争定位不同——SurrealDB 提供文档+图+关系的多模型能力，而 SQLite 仅提供关系模型。[来源: SurrealDB Documentation] ✅
+> **关键洞察**: SurrealDB 的"单二进制嵌入"能力是 Rust 独有的工程优势。由于无 GC 和零依赖运行时（Runtime），SurrealDB 可以编译为单个 ~50MB 的二进制文件，嵌入到任何应用中作为嵌入式数据库。这与 SQLite 的竞争定位不同——SurrealDB 提供文档+图+关系的多模型能力，而 SQLite 仅提供关系模型。[SurrealDB Documentation](https://surrealdb.com/docs) ✅
 
 ---
 

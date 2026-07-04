@@ -2001,12 +2001,12 @@ $$
 
 > **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)**
 > **来源: [Wikipedia - Type Class](https://en.wikipedia.org/wiki/Type_Class)**
-> **[来源: Pierce - Types and Programming Languages]**
+> **[Pierce - Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 > **[ACM - Type System Formalization](https://dl.acm.org/)**
 > **来源: [IEEE - Type Safety Verification](https://standards.ieee.org/)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
-> **[来源: Wadler 1989 - Theorems for Free!]**
+> **[Wadler 1989 - Theorems for Free!](https://doi.org/10.1145/99370.99404)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

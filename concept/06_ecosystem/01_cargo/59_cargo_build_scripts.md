@@ -94,7 +94,7 @@ Cargo 允许 package 包含一个 **`build.rs`** 文件（默认路径，可在 
 
 > **关键洞察**: `build.rs` 本身是一个独立的二进制 crate，运行在**构建主机**上，而不是目标平台。跨平台编译时需要特别注意环境变量。
 >
-> [来源: Cargo Book — Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html)
+> [Cargo Book — Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html)(<https://doc.rust-lang.org/cargo/reference/build-scripts.html>)
 
 ---
 
@@ -173,7 +173,7 @@ fn main() {
 }
 ```
 
-> [来源: Cargo Book — Build Script Outputs](https://doc.rust-lang.org/cargo/reference/build-scripts.html#outputs-of-the-build-script)
+> [Cargo Book — Build Script Outputs](https://doc.rust-lang.org/cargo/reference/build-scripts.html#outputs-of-the-build-script)(<https://doc.rust-lang.org/cargo/reference/build-scripts.html#outputs-of-the-build-script>)
 
 ---
 

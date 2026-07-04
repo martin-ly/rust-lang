@@ -1073,7 +1073,7 @@ impl ReferenceStateMachine for MyStateMachine {
 
 ### 2.2 异步测试：tokio-test {#22-异步测试tokio-test}
 
-> **[来源: POPL - Programming Languages Research]**
+> **[POPL - Programming Languages Research](https://popl.sigplan.org/)**
 >
 > **[Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -1159,7 +1159,7 @@ async fn test_timer_behavior() {
 
 ### 2.3 模拟对象：mockall {#23-模拟对象mockall}
 
-> **[来源: PLDI - Programming Language Design]**
+> **[PLDI - Programming Language Design](https://pldi.sigplan.org/)**
 
 ```rust,ignore
 use mockall::{mock, predicate::*};
@@ -2342,7 +2342,7 @@ mod test_documentation {
 
 ### 6.1 常用命令 {#61-常用命令}
 
-> **[来源: POPL - Programming Languages Research]**
+> **[POPL - Programming Languages Research](https://popl.sigplan.org/)**
 
 ```bash
 # 运行所有测试 {#运行所有测试}
@@ -2384,7 +2384,7 @@ cargo flamegraph
 
 ### 6.2 常用属性 {#62-常用属性}
 
-> **[来源: PLDI - Programming Language Design]**
+> **[PLDI - Programming Language Design](https://pldi.sigplan.org/)**
 
 | 属性 | 用途 |
 | :--- | :--- |

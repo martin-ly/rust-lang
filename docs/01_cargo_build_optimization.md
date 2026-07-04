@@ -328,7 +328,7 @@ export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
-> **[来源: Criterion.rs]**
+> **[Criterion.rs](https://docs.rs/criterion/latest/criterion/)**
 > **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
 > **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 > **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)**

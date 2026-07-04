@@ -103,7 +103,7 @@ pub trait ParallelIterator: Sized + Send {
 }
 ```
 
-> [来源: Rayon 源码 — `rayon/src/iter/mod.rs`]
+> [Rayon 源码 — `rayon/src/iter/mod.rs`](https://docs.rs/rayon/latest/rayon/)
 
 关键观察：`ParallelIterator` 要求 `Item: Send`，这意味着迭代产生的每个元素都必须是线程安全的。
 
@@ -306,7 +306,7 @@ let bad: Vec<Rc<i32>> = vec![Rc::new(1)];
 // bad.par_iter(); // ERROR: `Rc<i32>` cannot be sent between threads safely
 ```
 
-> [来源: Rust Reference — Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html)
+> [Rust Reference — Send and Sync](https://doc.rust-lang.org/reference/introduction.html)(<https://doc.rust-lang.org/reference/special-types-and-traits.html>)
 
 ### 4.2 `ParallelIterator` 的 trait bounds {#42-paralleliterator-的-trait-bounds}
 

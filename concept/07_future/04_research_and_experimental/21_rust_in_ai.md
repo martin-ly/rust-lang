@@ -184,7 +184,7 @@ Rust 在 AI 流水线中的定位:
 ```
 
 > **定位洞察**: Rust 在 AI 中的**最佳切入点是推理和数据工程**——这些场景需要**稳定、高性能、低资源占用**。
-> [来源: [Rust in AI Infrastructure [已失效]]<!-- 原链接: https://www.pingcap.com/article/rust-in-ai/ -->]
+> [Rust in AI Infrastructure [已失效]]<!-- 原链接: https://www.pingcap.com/article/rust-in-ai/ -->](<https://www.pingcap.com/article/rust-in-ai/>)
 
 ---
 

@@ -27,9 +27,9 @@
 
 通过在类型层面编码状态和约束，我们可以在编译时排除大量逻辑错误，减少运行时检查和测试负担。
 
-> **[来源: TRPL: Ch19.3 — Advanced Traits]** `PhantomData<T>` 允许在类型层面携带信息而不影响运行时行为，是 Type-State 和标记类型的核心工具。 ✅
-> **[来源: Rust Reference: Marker traits]** Rust 编译器利用类型参数和标记 trait 在编译期验证程序约束。 ✅
-> **[来源: Fähndrich & Leino, "Declaring and Checking Non-null Types in an Object-Oriented Language" (OOPSLA 2003)]** Type-State 模式的学术起源——将运行时状态提升为编译时类型，在类型层面编码对象合法状态。 ⚠️（学术先驱）
+> **[TRPL: Ch19.3 — Advanced Traits](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)** `PhantomData<T>` 允许在类型层面携带信息而不影响运行时行为，是 Type-State 和标记类型的核心工具。 ✅
+> **[Rust Reference: Marker traits](https://doc.rust-lang.org/reference/introduction.html)** Rust 编译器利用类型参数和标记 trait 在编译期验证程序约束。 ✅
+> **[Fähndrich & Leino, "Declaring and Checking Non-null Types in an Object-Oriented Language" (OOPSLA 2003)](https://oopsla.org/)** Type-State 模式的学术起源——将运行时状态提升为编译时类型，在类型层面编码对象合法状态。 ⚠️（学术先驱）
 
 ---
 
@@ -43,8 +43,8 @@
 
 Type-State 模式将对象的**运行时状态**提升为**编译时类型**，使得非法状态转换在编译时被拒绝。
 
-> **[来源: Fähndrich & Leino, OOPSLA 2003]** Type-State 最早作为面向对象语言的类型系统扩展提出，核心思想是"对象类型随状态变化"。 ✅
-> **[来源: Pierce, TAPL §24.2 — Subtyping and Recursive Types]** 递归类型和子类型可用于编码状态机，与 Type-State 在类型论上同源。 ⚠️（教科书级参考）
+> **[Fähndrich & Leino, OOPSLA 2003](https://oopsla.org/)** Type-State 最早作为面向对象语言的类型系统扩展提出，核心思想是"对象类型随状态变化"。 ✅
+> **[Pierce, TAPL §24.2 — Subtyping and Recursive Types](https://www.cis.upenn.edu/~bcpierce/tapl/)** 递归类型和子类型可用于编码状态机，与 Type-State 在类型论上同源。 ⚠️（教科书级参考）
 
 ### 2.2 经典示例：文件状态机
 >
@@ -1159,14 +1159,14 @@ impl AuthManager {
 ## 权威来源索引
 
 > **[来源: TRPL — Ch19.3 高级 Traits](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)** ·
-> **[来源: Rust Reference — Marker Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html)** ·
-> **[来源: Fähndrich & Leino, "Declaring and Checking Non-null Types in an Object-Oriented Language", OOPSLA 2003](https://doi.org/10.1145/949305.949332)** ·
-> **[来源: Pierce, "Types and Programming Languages" (TAPL), MIT Press 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)** ·
+> **[Rust Reference — Marker Traits](https://doc.rust-lang.org/reference/introduction.html)(<https://doc.rust-lang.org/reference/special-types-and-traits.html>)** ·
+> **[Fähndrich & Leino, "Declaring and Checking Non-null Types in an Object-Oriented Language", OOPSLA 2003](https://oopsla.org/)(<https://doi.org/10.1145/949305.949332>)** ·
+> **[Pierce, "Types and Programming Languages" (TAPL), MIT Press 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)(<https://www.cis.upenn.edu/~bcpierce/tapl/>)** ·
 > **[来源: Rustnomicon — Type System](https://doc.rust-lang.org/nomicon/)** ·
-> **[来源: RFC 1228 — ` specialization `](https://rust-lang.github.io/rfcs/1228-placement-left-arrow.html)** ·
-> **[来源: Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html)** ·
-> **[来源: Session Types in Rust (Honda 1993 / POPL)](https://dl.acm.org/doi/10.1145/143165.143526)** ·
-> **[来源: Oxide: The Essence of Rust (Weiss et al., POPL 2023)](https://arxiv.org/abs/1903.00982)** ·
+> **[RFC 1228 — ` specialization `](https://rust-lang.github.io/rfcs/1228.html)(<https://rust-lang.github.io/rfcs/1228-placement-left-arrow.html>)** ·
+> **[Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html)(<https://rust-lang.github.io/api-guidelines/type-safety.html>)** ·
+> **[Session Types in Rust (Honda 1993](https://github.com/rust-lang/rfcs); [POPL)](https://popl.sigplan.org/)(<https://dl.acm.org/doi/10.1145/143165.143526>)** ·
+> **[Oxide: The Essence of Rust (Weiss et al., POPL 2023)](https://popl.sigplan.org/)(<https://arxiv.org/abs/1903.00982>)** ·
 > **[来源: Rust RFC Book — Type System Evolution](https://rust-lang.github.io/rfcs/)**
 
 ---

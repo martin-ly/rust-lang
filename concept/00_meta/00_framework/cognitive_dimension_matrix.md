@@ -91,7 +91,7 @@ mindmap
 > 它帮助读者理解：同一 Bloom 层级（如"应用"）可以对应完全不同的知识类型（事实性的应用 = 写出代码；概念性的应用 = 选择正确抽象）。
 > 这种区分对 AI 辅助编程时代尤为重要：事实性和程序性的低阶任务可被 AI 自动化，而概念性和元认知的高阶任务仍是人类学习者的核心竞争力。
 > [💡 原创分析](methodology.md)
-> [来源: [Wikipedia — Bloom's Taxonomy]]
+> [Wikipedia — Bloom's Taxonomy](https://en.wikipedia.org/wiki/Bloom's_Taxonomy)
 
 ---
 
@@ -331,7 +331,7 @@ graph LR
 
 **变更日志**:
 
-- v1.0 (2026-05-23): 初始版本 — Krathwohl × Bloom 双维矩阵 + L1-L7 全层映射 + A/S/P 整合 + 认知路径规划 [来源: 权威来源对齐 Wave 1]
+- v1.0 (2026-05-23): 初始版本 — Krathwohl × Bloom 双维矩阵 + L1-L7 全层映射 + A/S/P 整合 + 认知路径规划 [权威来源对齐 Wave 1](../02_sources/international_authority_index.md)
 
 ---
 

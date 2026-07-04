@@ -668,7 +668,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 > **来源: [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)**
 > **来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)**
 > **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
-> **[来源: Criterion.rs]**
+> **[Criterion.rs](https://docs.rs/criterion/latest/criterion/)**
 > **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
 > **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 

@@ -709,15 +709,15 @@ async fn main() {
 
 ### 官方来源
 
-- [Tokio 官方文档](https://docs.rs/tokio/latest/tokio/) [来源: Tokio Contributors / 2025]
-- [Tokio 教程](https://tokio.rs/tokio/tutorial) [来源: Tokio Team / 2025]
+- [Tokio 官方文档](https://docs.rs/tokio/latest/tokio/) [Tokio Contributors](https://docs.rs/tokio/latest/tokio/); 2025
+- [Tokio 教程](https://tokio.rs/tokio/tutorial) [Tokio Team](https://docs.rs/tokio/latest/tokio/); 2025
 - [Rust Async Book](https://rust-lang.github.io/async-book/) [来源: Rust Async Working Group / 2025]
 - [RFC 2394: async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) [来源: Rust Core Team / 2018]
 
 ### 学术来源
 
-- Lauer, H.E. & Needham, R.M. — *On the Duality of Operating System Structures*. ACM SIGOPS, 1979. [来源: 线程 vs 事件驱动（异步）的 duality; Tokio 事件驱动模型的理论基础]
-- Blumofe, R.D. & Leiserson, C.E. — *Scheduling Multithreaded Computations by Work Stealing*. JACM, 1999. [来源: work-stealing 调度算法的经典论文; Tokio 多线程运行时调度策略的理论基础]
+- Lauer, H.E. & Needham, R.M. — *On the Duality of Operating System Structures*. ACM SIGOPS, 1979. 线程 vs 事件驱动（异步）的 duality; [Tokio 事件驱动模型的理论基础](https://docs.rs/tokio/latest/tokio/)
+- Blumofe, R.D. & Leiserson, C.E. — *Scheduling Multithreaded Computations by Work Stealing*. JACM, 1999. work-stealing 调度算法的经典论文; [Tokio 多线程运行时调度策略的理论基础](https://docs.rs/tokio/latest/tokio/)
 
 ### 跨语言来源
 

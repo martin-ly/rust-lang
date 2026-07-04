@@ -14,7 +14,7 @@
 > **后置概念**: [Formal Methods](../../07_future/04_research_and_experimental/02_formal_methods.md)
 > **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot](https://creusot.rs/) · [Miri Book](https://github.com/rust-lang/miri) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [a-mir-formality] · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **Bloom 层级**: 评价 → 应用
-> **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **[来源: SOSP 2024 Verus]** · **[来源: PLDI 2024 RefinedRust]** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ✅
+> **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **[SOSP 2024 Verus](https://verus-lang.github.io/verus/)** · **[PLDI 2024 RefinedRust](https://arxiv.org/abs/2404.03613)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ✅
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
@@ -22,7 +22,7 @@
 **变更日志**:
 
 - v1.2 (2026-05-26): 补充 VerusBelt (PLDI 2026 Distinguished Paper)、Miri POPL 2026 论文、Miri 深度原理章节（7.3）、验证工具对比矩阵扩展 Miri 列 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
-- v1.3 (2026-05-26): 权威内容对齐 R22：补充 Rusted Types (ICSE 2026) — Rust 类型混淆漏洞静态检测 [来源: ICSE 2026]
+- v1.3 (2026-05-26): 权威内容对齐 R22：补充 Rusted Types (ICSE 2026) — Rust 类型混淆漏洞静态检测 [ICSE 2026](https://conf.researchr.org/home/icse-2026)
 - v1.3 (2026-05-26): 权威内容对齐：补充 Ravencheck (SOAP 2026) — Rust 的 Extended Effectively Propositional (EEPR) 自动验证，可判定逻辑片段的全自动验证路径 [Web Authority AlignmentBatch 14](../../00_meta/02_sources/international_authority_index.md)
 - v1.1 (2026-05-21): 补充 Wikipedia 概念对齐、a-mir-formality 工具链、Kani/Miri/Verus 2026 最新状态、学术引用（Reference）深化
 - v1.0 (2026-05-13): 初始版本。整合工具链选型矩阵、ROI 分析框架、分层验证策略、工业案例速查
@@ -113,7 +113,7 @@
 
 > **核心原则**: 没有"最好的"验证工具，只有"最适合当前约束"的组合。
 >
-> **[来源: AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust]** 工具选型建议基于各工具的公开文档、工业部署报告及学术评估。✅
+> **[AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust](https://model-checking.github.io/kani/)** 工具选型建议基于各工具的公开文档、工业部署报告及学术评估。✅
 
 ---
 
@@ -437,7 +437,7 @@ ROI: ★★★★★ 极高 — AWS s2n-quic 已验证
 标注成本:       中（spec + proof ≈ 80% 实现量）
 运行成本:       本地秒级，CI 分钟级
 ─────────────────────────────────────────
-ROI: ★★★★☆ 高 — Microsoft IronRDP 已验证 [来源: SOSP 2024 Verus] ✅
+ROI: ★★★★☆ 高 — Microsoft IronRDP 已验证 [SOSP 2024 Verus](https://verus-lang.github.io/verus/) ✅
 ```
 
 #### 场景 C: 日常 Web 服务业务逻辑
@@ -772,7 +772,7 @@ fn sum(n: i32) -> i32 {
 
 > **关键洞察**: Prusti 的分离逻辑方法是 Rust 验证的"经典路径"——将 Rust 所有权（Ownership）映射为分离逻辑的权限（permission）。
 > 这种映射在概念上优雅，但工程上复杂：Rust 的生命周期（Lifetimes）（`'a`）和借用（Borrowing）（`&T`/`&mut T`）的丰富语义在 Viper IL 中难以精确表达，导致某些合法 Rust 代码无法验证。
-> [来源: Astrauskas et al., OOPSLA 2022] ✅
+> [Astrauskas et al., OOPSLA 2022](https://doi.org/10.1145/3563331) ✅
 
 ### 7.2 Kani：基于 CBMC 的有界模型检测
 
@@ -925,7 +925,7 @@ fn binary_search(v: &Vec<u64>, key: u64) -> (r: usize)
 | **线性幽灵（Linear Ghost）** | `tracked` 标记的变量遵循线性逻辑——必须被消耗，不能复制或丢弃 |
 | **并发验证** | 支持 `std::thread::spawn` 的验证，通过线性幽灵传递权限 |
 
-> **关键洞察**: Verus 的 "exec/spec/proof" 三元分离是 Rust 验证工具中最接近"生产代码与验证代码共存"的设计。`spec` 代码在编译期被擦除（零运行时（Runtime）开销），`proof` 代码确保 `exec` 代码的正确性。这与 Rust 的 `const fn` 有哲学上的相似性——两者都区分"编译期计算"和"运行时计算"，但 Verus 将这一区分扩展到形式化证明。[来源: Lorch et al., SOSP 2024] ✅
+> **关键洞察**: Verus 的 "exec/spec/proof" 三元分离是 Rust 验证工具中最接近"生产代码与验证代码共存"的设计。`spec` 代码在编译期被擦除（零运行时（Runtime）开销），`proof` 代码确保 `exec` 代码的正确性。这与 Rust 的 `const fn` 有哲学上的相似性——两者都区分"编译期计算"和"运行时计算"，但 Verus 将这一区分扩展到形式化证明。[Lorch et al., SOSP 2024](https://doi.org/10.1145/3694715.3695970) ✅
 > **2026 最新进展 — VerusBelt (PLDI 2026 Distinguished Paper Award)**: VerusBelt 为 Verus 的 proof-oriented 扩展提供了完整的语义基础，形式化证明了 Verus 的 `tracked` 权限系统和 ghost 状态的正确性，建立了从 Verus 规格到 Z3 求解器的可靠翻译。
 > 这是首个为工业级 Rust 验证工具提供完全形式化语义基础的工作，标志着 Rust 验证从"工程实践"向"数学可信"的关键跃迁。
 > [来源: [PLDI 2026 — Hance et al., "VerusBelt: A Semantic Foundation for Verus's Proof-Oriented Extensions to the Rust Type System"](https://github.com/verus-lang/verus/guide/)]
@@ -972,7 +972,7 @@ Coma 的优势:
 
 > **关键洞察**: Creusot 的 Coma 中间语言解决了 Rust 验证的最大工程难题——**trait 的模块（Module）化验证**。
 > 在传统方法中，验证泛型（Generics）函数需要内联所有可能的实现；Coma 通过 trait 合约（contract）实现"验证一次，适用所有实现"，这是 Creusot 在 PLDI 2023 论文中的核心贡献。
-> [来源: Denis et al., PLDI 2023] ✅
+> [Denis et al., PLDI 2023](https://pldi23.sigplan.org/details/pldi-2023-pldi/64/Flux-Liquid-Types-for-Rust) ✅
 
 ### 7.5 Aeneas：基于借用的函数式翻译
 
@@ -1012,7 +1012,7 @@ Rust 的 Copy 类型        → 普通复制（非线性）
 
 > **关键洞察**: Aeneas 选择了与 Prusti/Verus/Creusot 完全不同的验证路径——不是"用 SMT 自动证明"，而是"翻译到定理证明器后手动证明"。
 > 这使得 Aeneas 能验证其他工具无法处理的复杂算法（如复杂的数据结构不变量），但代价是极高的证明负担（人天到人周级别）。
-> Aeneas 更适合研究场景，而非工业日常验证。[来源: Ho & Protzenko, ICFP 2022] ✅
+> Aeneas 更适合研究场景，而非工业日常验证。[Ho & Protzenko, ICFP 2022](https://icfp22.sigplan.org/) ✅
 
 ### 7.6 验证工具对比矩阵（深度版）
 
@@ -1277,7 +1277,7 @@ fn fixed() {
 
 > **验证映射**: 闭包（Closures）捕获分析是 Rust 类型系统的复杂部分。形式化工具（如 RustBelt 的 closure 语义）需要精确建模环境捕获（by-reference / by-value）与借用规则的一致性（Coherence）。编译器的拒绝对应于资源谓词 `own(τ)` 与 `shr(κ, ℓ)` 的不一致分配。
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/), [Wikipedia: Model Checking](https://en.wikipedia.org/wiki/Model_checking), [Wikipedia: Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md); 2026-05-21 补充 Wikipedia 概念对齐、a-mir-formality 工具链、2026 工具状态更新 [来源: Formal Methods Deep Dive]; 2026-05-22 网络权威内容对齐：Miri POPL 2026、KVerus arXiv 2026、AutoVerus OOPSLA 2025、Vest USENIX Security 2025、Rustlantis OOPSLA 2024、Kani+VeriFast 联合 std 验证 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md); 2026-05-21 补充 Wikipedia 概念对齐、a-mir-formality 工具链、2026 工具状态更新 [Formal Methods Deep Dive](https://rust-lang.github.io/rust-project-goals/2024h2/formal-methods.html); 2026-05-22 网络权威内容对齐：Miri POPL 2026、KVerus arXiv 2026、AutoVerus OOPSLA 2025、Vest USENIX Security 2025、Rustlantis OOPSLA 2024、Kani+VeriFast 联合 std 验证 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

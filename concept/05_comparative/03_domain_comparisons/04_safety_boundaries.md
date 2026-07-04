@@ -282,7 +282,7 @@ graph TD
 | `std` 中 `unsafe fn` 数量 | ~350 个 | 源码统计 |
 | `std` 公开 API 中 `unsafe fn` 比例 | ~2.5%（约 350 / 14,000 公开项） | docs.rs 统计 |
 
-> **关键洞察**: Rust 标准库通过 ~1% 的 unsafe 代码支撑 99% 的 safe API。绝大多数 unsafe 集中在底层原语：`Vec`、`HashMap`、原子操作（Atomic Operations）、平台抽象层、FFI 绑定。这种"薄 unsafe 层 + 厚 safe 封装"是 Rust 安全架构的核心模式。 [来源: Rust 源码分析 / rustc 1.78]
+> **关键洞察**: Rust 标准库通过 ~1% 的 unsafe 代码支撑 99% 的 safe API。绝大多数 unsafe 集中在底层原语：`Vec`、`HashMap`、原子操作（Atomic Operations）、平台抽象层、FFI 绑定。这种"薄 unsafe 层 + 厚 safe 封装"是 Rust 安全架构的核心模式。 [Rust 源码分析 / rustc 1.78](https://github.com/rust-lang/rust)
 
 ### 6.2 FFI 边界的安全模式矩阵
 

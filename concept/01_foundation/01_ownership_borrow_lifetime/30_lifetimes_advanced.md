@@ -180,8 +180,8 @@
 | **表达能力** | 高（HRTB、Variance、Elision） | 中 | 高（但 LinearTypes 为可选扩展） | 低 |
 
 > **来源: [Rust Reference: Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)** Rust 生命周期是类型系统（Type System）的核心特征，通过编译期区域推断保证引用有效性，零运行时（Runtime）开销。 ✅
-> **[来源: C++ Reference: unique_ptr]** C++ 智能指针（Smart Pointer）管理所有权（Ownership）生命周期，但无编译期引用有效性检查，悬垂引用为未定义行为。 ✅
-> **[来源: Haskell GHC User Guide: LinearTypes]** Haskell LinearTypes 扩展允许显式线性类型约束（`a %1 -> b`），与 Rust 生命周期在类型论上同源，但为可选扩展。 ✅
+> **[C++ Reference: unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr)** C++ 智能指针（Smart Pointer）管理所有权（Ownership）生命周期，但无编译期引用有效性检查，悬垂引用为未定义行为。 ✅
+> **[Haskell GHC User Guide: LinearTypes](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/linear_types.html)** Haskell LinearTypes 扩展允许显式线性类型约束（`a %1 -> b`），与 Rust 生命周期在类型论上同源，但为可选扩展。 ✅
 > **来源: Go Spec: Memory Model** Go 无生命周期或借用（Borrowing）概念，内存安全（Memory Safety）完全依赖垃圾回收器，引用有效性无编译期检查。 ✅
 
 **关键洞察**: Rust 是唯一将生命周期作为**显式、强制、核心类型系统（Type System）特征**的工业级主流语言。C++ 依赖运行时（Runtime） RAII 和程序员自律；Haskell LinearTypes 提供了类似的编译期保证但尚未成为主流实践；Go 完全依赖 GC。
@@ -902,7 +902,7 @@ fn main() {
 | 读取非活跃但位模式有效的变体 | ⚠️ 实现定义 | 如 `i: 0` 读为 `f: 0.0`，行为取决于具体位模式 |
 | 通过共享引用读取 | ⚠️ 需 `unsafe` | `&union.field` 仍需要 `unsafe` 块 |
 
-> **[来源: Unsafe Code Guidelines: Unions]** 读取 union 的非活跃字段时，如果位模式对目标类型不是有效值（如非规范浮点 NaN payload），行为在 Safe Rust 的抽象机模型中属于未定义行为。✅
+> **[Unsafe Code Guidelines: Unions](https://rust-lang.github.io/unsafe-code-guidelines/layout/unions.html)** 读取 union 的非活跃字段时，如果位模式对目标类型不是有效值（如非规范浮点 NaN payload），行为在 Safe Rust 的抽象机模型中属于未定义行为。✅
 
 ### 16.3 `ManuallyDrop<T>` 在 union 中的使用
 

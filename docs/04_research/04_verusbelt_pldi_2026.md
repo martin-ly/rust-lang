@@ -188,7 +188,7 @@ RustBelt (POPL 2018) ── 证明 Rust 所有权系统内存安全
 
 ### Verus 生态最新进展 (2025–2026) {#verus-生态最新进展-20252026}
 
-> **[来源: KVerus arXiv 2026; AutoVerus OOPSLA 2025; Vest USENIX Security 2025]** Verus 验证框架的周边工具链在 2025–2026 年快速扩展，降低了证明门槛并扩展了验证覆盖。
+> **KVerus arXiv 2026; [AutoVerus OOPSLA 2025](https://oopsla.org/); [Vest USENIX Security 2025](https://www.usenix.org/conference/usenixsecurity25)** Verus 验证框架的周边工具链在 2025–2026 年快速扩展，降低了证明门槛并扩展了验证覆盖。
 
 | 工具 | 会议/来源 | 与 VerusBelt 的关系 |
 | :--- | :--- | :--- |

@@ -55,8 +55,8 @@
 
 **Cargo** 是 Rust 的"一站式"项目管理工具。它整合了其他语言中分散在多个工具中的功能：
 
-> **[来源: The Cargo Book]** "Cargo is Rust's build system and package manager." Cargo 处理构建代码、下载依赖库、构建这些库等任务。 ✅
-> **[来源: Rust Reference: Crates and Source Files]** Rust 项目以 crate 为单位组织，Cargo 是 crate 的标准构建和发布工具。 ✅
+> **[The Cargo Book](https://doc.rust-lang.org/cargo/index.html)** "Cargo is Rust's build system and package manager." Cargo 处理构建代码、下载依赖库、构建这些库等任务。 ✅
+> **[Rust Reference: Crates and Source Files](https://doc.rust-lang.org/reference/introduction.html)** Rust 项目以 crate 为单位组织，Cargo 是 crate 的标准构建和发布工具。 ✅
 
 | 功能 | 其他语言的等价物 | Cargo 命令 |
 |------|-----------------|-----------|

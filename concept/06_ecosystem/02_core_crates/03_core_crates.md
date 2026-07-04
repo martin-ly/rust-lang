@@ -1154,10 +1154,10 @@ graph TD
 > Rust 生态仍在快速增长：2024 年 crates.io 下载量突破 500 亿，嵌入式、WASM、AI 推理等新领域正在涌现。生态的成熟度决定了 Rust 能否从"系统语言"扩展为"通用语言"。
 > 演进方向见 [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)（语言演进）与 [`../07_future/01_ai_integration.md`](../../07_future/04_research_and_experimental/01_ai_integration.md)（AI 集成）。
 > **来源: crates.io; lib.rs; Rust Cookbook; [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** Crate 分析基于 crates.io 的公开数据和社区评估。✅
-> **[来源: serde.rs; Tokio Documentation; rayon Docs; wasm-bindgen Guide; axum Docs]** 各 crate 的具体分析参考了官方文档和最新版本说明。✅
+> **[serde.rs](https://serde.rs/); [Tokio Documentation](https://docs.rs/tokio/latest/tokio/); [rayon docs](https://docs.rs/rayon/latest/rayon/); [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/); [Axum docs](https://docs.rs/axum/latest/axum/)** 各 crate 的具体分析参考了官方文档和最新版本说明。✅
 > **来源: crates.io; lib.rs; Rust Cookbook; [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/); docs.rs** Crate 分析基于官方仓库数据和社区评估。✅
-> **[来源: serde.rs; Tokio Documentation; rayon Docs; wasm-bindgen Guide; axum Docs; clap Docs]** 各 crate 的具体分析参考了官方文档和最新版本说明。✅
-> **[来源: Rust Foundation Survey 2024; Rust in Production Report; crates.io Download Statistics]** 生态数据基于公开统计和社区报告。✅
+> **[serde.rs](https://serde.rs/); [Tokio Documentation](https://docs.rs/tokio/latest/tokio/); [rayon docs](https://docs.rs/rayon/latest/rayon/); [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/); [Axum docs](https://docs.rs/axum/latest/axum/); [clap Docs](https://docs.rs/clap/latest/clap/)** 各 crate 的具体分析参考了官方文档和最新版本说明。✅
+> **[Rust Foundation Survey 2024](https://foundation.rust-lang.org/); [Rust in Production Report](https://foundation.rust-lang.org/); [crates.io Download Statistics](https://crates.io/)** 生态数据基于公开统计和社区报告。✅
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)

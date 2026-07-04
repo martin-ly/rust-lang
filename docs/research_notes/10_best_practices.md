@@ -348,13 +348,13 @@ fn example_anti_pattern() {
 
 ### 复合类型 {#复合类型}
 
-> **[来源: POPL - Programming Languages Research]**
+> **[POPL - Programming Languages Research](https://popl.sigplan.org/)**
 
 然后介绍复合类型...
 
 ### 高级类型 {#高级类型}
 
-> **[来源: PLDI - Programming Language Design]**
+> **[PLDI - Programming Language Design](https://pldi.sigplan.org/)**
 
 最后介绍高级类型...
 ```

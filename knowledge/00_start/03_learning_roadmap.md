@@ -353,8 +353,8 @@ Level 5: 专家 (持续学习)
 
 ## 📚 权威来源索引
 
-- [The Rust Programming Language](https://doc.rust-lang.org/book/) [来源: Rust Team / TRPL 2024]
-- [Rust by Example](https://doc.rust-lang.org/rust-by-example/) [来源: Rust Team / 2025]
+- [The Rust Programming Language](https://doc.rust-lang.org/book/) Rust Team; [TRPL 2024](https://doc.rust-lang.org/book/title-page.html)
+- [Rust by Example](https://doc.rust-lang.org/rust-by-example/) [Rust Team / 2025](https://www.rust-lang.org/)
 - [Rustlings](https://github.com/rust-lang/rustlings) [来源: Rust Community / 2025]
 
 ### 学术来源

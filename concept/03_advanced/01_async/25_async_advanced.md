@@ -336,7 +336,7 @@ fn create_waker(task_id: u64, scheduler: Arc<Scheduler>) -> Waker {
 }
 ```
 
-> **关键差异**: `Wake` trait 隐藏了 `RawWakerVTable` 的 unsafe 细节，但底层仍通过 vtable 实现类型擦除。`Waker::from(Arc<T>)` 在内部自动构建符合 `clone`/`wake`/`wake_by_ref`/`drop` 契约的 vtable。[来源: Rust std: std::task::Wake]
+> **关键差异**: `Wake` trait 隐藏了 `RawWakerVTable` 的 unsafe 细节，但底层仍通过 vtable 实现类型擦除。`Waker::from(Arc<T>)` 在内部自动构建符合 `clone`/`wake`/`wake_by_ref`/`drop` 契约的 vtable。[Rust std: std::task::Wake](https://doc.rust-lang.org/std/task/trait.Wake.html)
 
 **与 OS 异步（Async） I/O 的唤醒路径**
 
@@ -384,7 +384,7 @@ impl UringReactor {
 }
 ```
 
-> **[来源: tokio-rs/tokio-uring 设计文档]** io_uring 的 `user_data` 字段天然适合存储 Waker 标识，避免了 epoll 的 fd→Waker HashMap 查找开销。但 io_uring 的共享环设计对线程安全提出更高要求——Waker 的 `wake` 需是线程安全的（`Send + Sync`），因为完成事件可能在任意 CPU 核心上产生。
+> **[tokio-rs/tokio-uring 设计文档](https://github.com/tokio-rs/tokio-uring)** io_uring 的 `user_data` 字段天然适合存储 Waker 标识，避免了 epoll 的 fd→Waker HashMap 查找开销。但 io_uring 的共享环设计对线程安全提出更高要求——Waker 的 `wake` 需是线程安全的（`Send + Sync`），因为完成事件可能在任意 CPU 核心上产生。
 > **Bloom 层级**: 分析 —— 理解 Waker 与 OS 的交互边界，是手写 Future 和自定义运行时（Runtime）的必要知识。
 
 ---
@@ -607,7 +607,7 @@ where
 | **背压支持** | 拉取天然背压 | 拉取天然背压 + `tokio::sync::mpsc` 通道缓冲 |
 | **典型使用场景** | 通用异步管道、跨运行时（Runtime）兼容 | Tokio 生态（axum、tonic 流处理） |
 
-> **[来源: tokio-stream docs; futures-rs docs]** `tokio_stream::wrappers` 提供了将 Tokio 原语（`TcpListener`, `UnixSignal`, `WatchReceiver`）包装为 `Stream` 的适配器，这是 `futures::stream` 不提供的运行时（Runtime）专属扩展。
+> **[tokio-stream docs](https://docs.rs/tokio-stream/latest/tokio_stream/); [futures-rs docs](https://docs.rs/futures/latest/futures/)** `tokio_stream::wrappers` 提供了将 Tokio 原语（`TcpListener`, `UnixSignal`, `WatchReceiver`）包装为 `Stream` 的适配器，这是 `futures::stream` 不提供的运行时（Runtime）专属扩展。
 
 **`StreamExt` 常用组合子**
 
@@ -643,7 +643,7 @@ async fn pipeline() {
 }
 ```
 
-> **[来源: futures-rs: StreamExt API 文档]** `buffer_unordered` 是异步编程的核心组合子——它允许在保持背压的同时最大化并发度。与 `tokio::join!` 不同，`buffer_unordered` 按完成顺序产出结果，而非输入顺序。
+> **[futures-rs: StreamExt API 文档](https://docs.rs/futures/latest/futures/stream/trait.StreamExt.html)** `buffer_unordered` 是异步编程的核心组合子——它允许在保持背压的同时最大化并发度。与 `tokio::join!` 不同，`buffer_unordered` 按完成顺序产出结果，而非输入顺序。
 > **交叉链接**: `Stream` 的异步惰性求值与 1.3 形式化定义 中 Future 的惰性语义一致；`Sink` 的线性状态机与 [../04_formal/03_ownership_formal.md](../../04_formal/01_ownership_logic/03_ownership_formal.md) §5.2 的线性类型资源管理形成对偶。
 
 ---
@@ -770,7 +770,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 ```
 
 > **来源**: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [without.boats blog: The cost of dynamic dispatch in Rust]
-> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[来源: without.boats blog: "The cost of dynamic dispatch in Rust"; Rust Performance Book: "Dynamic dispatch"]
+> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats blog: "The cost of dynamic dispatch in Rust"](https://without.boats/blog/the-cost-of-dynamic-dispatch/); [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/dynamic-dispatch.html)
 
 **何时选择哪种：API 边界 vs 内部实现**
 
@@ -965,7 +965,7 @@ fn test_async_ready_flag() {
 }
 ```
 
-> **注意**: `loom::future` 的异步支持主要用于测试**同步原语在异步上下文中的使用**（如 `Mutex`、`Atomic` 在 async 块中的交互），而非测试 async/await 本身的调度语义。async 调度语义由执行器（Tokio 等）保证，不在 loom 的验证范围内。[来源: loom docs: loom::future module]
+> **注意**: `loom::future` 的异步支持主要用于测试**同步原语在异步上下文中的使用**（如 `Mutex`、`Atomic` 在 async 块中的交互），而非测试 async/await 本身的调度语义。async 调度语义由执行器（Tokio 等）保证，不在 loom 的验证范围内。[loom docs: loom::future module](https://docs.rs/loom/latest/loom/future/index.html)
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 **实际用例：验证自定义并发原语**

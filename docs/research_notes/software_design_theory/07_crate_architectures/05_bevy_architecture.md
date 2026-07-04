@@ -433,7 +433,7 @@ graph LR
 - `Query<&mut Position>` + `Query<&Position>` → **冲突**（读写）
 - `Query<&mut Position, With<Player>>` + `Query<&mut Velocity, With<Enemy>>` → **并行安全**（组件不同）
 
-> [来源: Rust Reference — Borrow Checker](https://doc.rust-lang.org/reference/expressions.html?highlight=borrow#evaluation-order)
+> [Rust Reference — Borrow Checker](https://doc.rust-lang.org/reference/introduction.html)(<https://doc.rust-lang.org/reference/expressions.html?highlight=borrow#evaluation-order>)
 
 ### 4.3 条件执行与状态机 {#43-条件执行与状态机}
 
@@ -538,7 +538,7 @@ where
 
 `for<'w, 's>` 确保系统函数可以对 World 进行任意生命周期的借用，而调度器在调用 `run` 时独占整个 `&mut World`，从而**静态保证**没有两个系统可以同时写入同一组件。
 
-> [来源: Rust Reference — Higher-Ranked Trait Bounds](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds)
+> [Rust Reference — Higher-Ranked Trait Bounds](https://doc.rust-lang.org/reference/introduction.html)(<https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds>)
 
 ### 5.2 Commands 延迟突变模式 {#52-commands-延迟突变模式}
 

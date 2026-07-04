@@ -402,7 +402,7 @@ fn unsafe_effect_escape() {
 }
 ```
 
-> **边界洞察**: `unsafe` 块允许副作用"逃逸"类型系统（Type System）的约束。这是 Rust 设计中唯一的效果逃逸口——Safe Rust 保证无副作用逃逸，Unsafe Rust 将保证责任转移给程序员。[来源: NOM — What is unsafe?] ✅
+> **边界洞察**: `unsafe` 块允许副作用"逃逸"类型系统（Type System）的约束。这是 Rust 设计中唯一的效果逃逸口——Safe Rust 保证无副作用逃逸，Unsafe Rust 将保证责任转移给程序员。[NOM — What is unsafe?](https://doc.rust-lang.org/nomicon/) ✅
 
 ### 7.3 边界测试：`const fn` 中的副作用逃逸（编译错误）
 

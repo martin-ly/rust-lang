@@ -394,7 +394,7 @@ graph TD
 ```
 
 > **认知功能**: **Apple 平台优先 Swift**，**跨平台/性能优先 Rust**——不是优劣之分，是场景适配。
-> [来源: [Swift vs Rust Performance [已失效]]<!-- 原链接: https://www.ben-morris.com/swift-vs-rust/ -->]
+> [Swift vs Rust Performance [已失效]](https://www.ben-morris.com/swift-vs-rust/)
 
 ---
 

@@ -41,11 +41,11 @@
 - v1.4 (2026-05-26): 补充 Rust 2026 Project Goals 四大旗舰目标详解（Beyond the &、灵活编译、高阶 Rust、释放沉睡 Trait）及子目标矩阵 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
 - v1.3 (2026-05-22): 网络权威内容对齐 Batch 9：补充 Project Goals 2026 年度旗舰目标（Polonius Alpha、Safety-Critical Rust、cargo-script）、Effects 系统 `gen<yield>` 跟踪、Ferrocene ASIL B/SIL 2 认证动态
 - v1.5 (2026-05-26): 权威内容对齐 R16：补充 2025H2 Project Goals 最终状态报告（Rust Blog 2026-05-18）；更新 build-std [RFC 3873](https://rust-lang.github.io/rfcs//3873-build-std-context.html)/3874 已合并状态、Cranelift 资金不足未完成确认 来源: [Rust Blog](https://blog.rust-lang.org/)
-- v1.6 (2026-05-26): 权威内容对齐 R18：补充 Project-wide LLM Policy [RFC 3936](https://github.com/rust-lang/rfcs/pull/3936)（Rust 首个项目级 AI 使用政策） [来源: TWiR 650]
+- v1.6 (2026-05-26): 权威内容对齐 R18：补充 Project-wide LLM Policy [RFC 3936](https://github.com/rust-lang/rfcs/pull/3936)（Rust 首个项目级 AI 使用政策） [TWiR 650](https://this-week-in-rust.org/)
 - v1.7 (2026-05-26): 权威内容对齐 R24：① 更新 build-std [RFC 3874](https://rust-lang.github.io/rfcs//3874-build-std-always.html) FCP 完成待合并；② 补充 [RFC 3962](https://github.com/rust-lang/rfcs/pull/3962) Documentation interpolation（FCP 中）；③ 补充 RustWeek 2026 All Hands（Utrecht, 5.18–5.23）关键 RFC 讨论 来源: [Rust Project Goals Update](https://rust-lang.github.io/rust-project-goals/)
 - v1.8 (2026-06-06): 权威内容对齐：① 修正 cargo-script 状态（非"已稳定"，而是稳定化推进中，Project Goals 2026 Continued，blocker 为 edition policy）；② 新建 `17_ergonomic_ref_counting_preview.md` 跟踪文档（Flagship: Higher-level Rust，Niko Matsakis + Santiago Pastorino 主导）；③ 更新 `13_unsafe_fields_preview.md`（RFC 3458 已接受 2026-02，Clippy #16767 等待 review） 来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
-- v1.9 (2026-06-06): 权威内容对齐 Batch 10：① Rust Foundation Maintainer Fund 正式上线（2026-06-02）；② `rust_1_97_preview.md` 补充 1.97 稳定化候选 API（`float_algebraic` FCP 中、`core::range::RangeFull/RangeTo` FCP 完成、`RandomSource`、`PathBuf::into_string`、`Result::map_or_default`）；③ `19_security_practices.md` 补充 CVE-2026-33055/33056（Cargo tar 提取，1.94.1 已修复） [来源: Rust Blog 2026-06-02; releases.rs 2026-06-06]
-- v1.10 (2026-06-06): 权威内容对齐 Batch 11：① `19_rust_for_linux.md` 补充 Debian 14 Forky MSRV 策略（Debian Stable 是 Rust for Linux 的 MSRV 基准，预计 2027 年夏季发布）；② `rust_1_97_preview.md` 补充 `new_range_remainder`（Tracking Issue #154458）、`core::alloc::Alloc`（PR #157286）、`box_vec_non_null`（PR #157273，PFCP） [来源: Inside Rust Blog 2026-03-27; releases.rs 2026-06-06]
+- v1.9 (2026-06-06): 权威内容对齐 Batch 10：① Rust Foundation Maintainer Fund 正式上线（2026-06-02）；② `rust_1_97_preview.md` 补充 1.97 稳定化候选 API（`float_algebraic` FCP 中、`core::range::RangeFull/RangeTo` FCP 完成、`RandomSource`、`PathBuf::into_string`、`Result::map_or_default`）；③ `19_security_practices.md` 补充 CVE-2026-33055/33056（Cargo tar 提取，1.94.1 已修复） [Rust Blog 2026-06-02; releases.rs 2026-06-06](https://blog.rust-lang.org/)
+- v1.10 (2026-06-06): 权威内容对齐 Batch 11：① `19_rust_for_linux.md` 补充 Debian 14 Forky MSRV 策略（Debian Stable 是 Rust for Linux 的 MSRV 基准，预计 2027 年夏季发布）；② `rust_1_97_preview.md` 补充 `new_range_remainder`（Tracking Issue #154458）、`core::alloc::Alloc`（PR #157286）、`box_vec_non_null`（PR #157273，PFCP） [Inside Rust Blog 2026-03-27; releases.rs 2026-06-06](https://blog.rust-lang.org/inside-rust/)
 - v1.11 (2026-06-06): 权威内容对齐 Batch 12：① `19_security_practices.md` 补充 crates.io 恶意 crate 通知政策变更（2026-02-13 起不再为每个恶意 crate 发布博客，仅发 RustSec advisory）及 2026 年恶意 crate 案例（`time_calibrator` RUSTSEC-2026-0030、`tracings` RUSTSEC-2026-0027、`rpc-check` RUSTSEC-2026-0018 等）；② `17_rust_specification_preview.md` 更新 gccrs 2026-03-18 月度报告进展（Rust-for-Linux 25%、测试用例 +347） [Rust Blog 2026-02-13; rust-gcc.github.io 2026-03-18](https://blog.rust-lang.org/)
 - v1.12 (2026-06-06): 权威内容对齐 Batch 13：`19_security_practices.md` 补充 2026-06 新 RustSec 公告——恶意 crate `exploration`（RUSTSEC-2026-0155）及生态漏洞速览（`russh` RUSTSEC-2026-0154 HIGH、`russh-cryptovec` RUSTSEC-2026-0153 HIGH、`oneringbuf` RUSTSEC-2026-0152 等） [RustSec Advisory DB 2026-06-05](https://rustsec.org/)
 - v1.13 (2026-06-06): 权威内容对齐 Batch 14：`19_rust_for_linux.md` 补充不稳定特性依赖边界最新进展——截至 LPC 2025（2025-12），Rust for Linux 仅剩 2 个不稳定特性待稳定化（`arbitrary_self_types` 和 `derive(CoercePointee)`），其他关键特性已稳定 [LPC 2025 Rust for Linux 幻灯片](https://rust-for-linux.com/)
@@ -301,7 +301,7 @@ cargo check -W rust-2024-compatibility
 | **Trait** | Trait 方法参数禁止匿名（必须有参数名） | `fn foo(&self, u8)` → `fn foo(&self, _: u8)` | `cargo fix` |
 | **类型推断（Type Inference）** | 裸指针方法分派改进 | 对推断变量的原始指针（Raw Pointer）更精确 | 自动 |
 
-**关键洞察**：Rust 2018 的核心主题是**路径清晰化（Path Clarity）**。`extern crate` 的消除、`crate::` 统一根路径、`use` 的相对化，共同构成了 "1path" 理念——无论身处 crate 的哪个模块（Module），`use` 路径与非 `use` 路径的解析规则一致。[来源: Rust Blog — Rust 1.31 and Rust 2018]
+**关键洞察**：Rust 2018 的核心主题是**路径清晰化（Path Clarity）**。`extern crate` 的消除、`crate::` 统一根路径、`use` 的相对化，共同构成了 "1path" 理念——无论身处 crate 的哪个模块（Module），`use` 路径与非 `use` 路径的解析规则一致。[Rust Blog — Rust 1.31 and Rust 2018](https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html)
 
 #### 2.3.2 Rust 2018 → 2021（Rust 1.56，2021-10）
 
@@ -508,7 +508,7 @@ unsafe extern "C" {
 
 ### 2.4 未来 Edition 方向（2027+）
 
-> **[来源: Rust Lang Team Roadmap; Inside Rust Blog; 社区讨论]** 📋 推测性内容
+> **[Rust Lang Team Roadmap](https://www.rust-lang.org/policies/roadmap); Inside Rust Blog; 社区讨论** 📋 推测性内容
 
 Rust 语言团队已公开表示 Edition 将继续以约 3 年为周期发布。基于当前 nightly 特性、RFC 草案和 Lang Team 博客，2027 Edition 可能聚焦以下方向：
 
@@ -522,7 +522,7 @@ Rust 语言团队已公开表示 Edition 将继续以约 3 年为周期发布。
 | **用户自定义 allocators** | nightly (`allocator_api`) | 容器类型默认 allocator 参数化 | L1 内存管理 |
 | **Safe 子集外部函数** | `safe fn` in `extern` 块已部分实现 | 更精细的 FFI 安全边界 | L3 Unsafe/FFI |
 
-**设计约束**：新 Edition 的变更必须满足三个条件——(1) 无法在不破坏兼容的前提下在旧 edition 中实现；(2) 有自动迁移工具支持或影响面极小；(3) 与现有 edition 的 crate 保持 ABI 互操作。[来源: Rust Edition Guide — Edition design principles]
+**设计约束**：新 Edition 的变更必须满足三个条件——(1) 无法在不破坏兼容的前提下在旧 edition 中实现；(2) 有自动迁移工具支持或影响面极小；(3) 与现有 edition 的 crate 保持 ABI 互操作。[Rust Edition Guide — Edition design principles](https://doc.rust-lang.org/edition-guide/index.html)
 
 ---
 
@@ -1063,11 +1063,11 @@ graph TD
 > Rust 的演进速度比 C++ 快（无历史包袱），比 Go 慢（需要社区共识）。Edition 系统每 2-3 年发布一次，每个 Edition 都是语言设计的阶段性总结。比较 Rust 与其他语言的演进机制，能揭示 "如何在不破坏生态的前提下推进语言进化"。
 > 演进对比见 [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) 与 [`../05_comparative/02_rust_vs_go.md`](../../05_comparative/01_systems_languages/02_rust_vs_go.md)。
 > **[来源: Rust Edition Guide; [RFC 2052](https://rust-lang.github.io/rfcs//2052-epochs.html); [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html); [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html); RFC 1210]** 语言演进分析基于官方 RFC 和 Edition 指南。✅
-> **[来源: Rust Lang Team Blog; Rust Internals Forum; Lang Team Roadmap]** 未来方向基于语言团队的公开讨论和路线图文档。✅
-> **[来源: Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** Rust 项目目标定义了语言团队每年的旗舰级工作方向，包括下一代 trait solver、const traits、Effects 系统等。✅
-> **[来源: Niko Matsakis, "Rust in 2025+" blog]** 语言设计决策的社区权威解读，涵盖 trait solver 演进、const generics 稳定化等主题。 ✅
-> **[来源: Without Boats, "The Rust I Wanted Had No Future"]** 对 Rust 语言设计哲学和演进方向的深度反思，涉及 effects、async fn in traits 等特性的设计权衡。 ✅
-> **[来源: Koka Language; Plotkin & Pretnar 2009; Type Theory Research]** Effects 系统和类型论扩展参考了学术文献。✅
+> **[Rust Lang Team Blog; Rust Internals Forum; Lang Team Roadmap](https://www.rust-lang.org/policies/roadmap)** 未来方向基于语言团队的公开讨论和路线图文档。✅
+> **[Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/)(<https://rust-lang.github.io/rust-project-goals/2026/>)** Rust 项目目标定义了语言团队每年的旗舰级工作方向，包括下一代 trait solver、const traits、Effects 系统等。✅
+> **[Niko Matsakis, "Rust in 2025+" blog](https://smallcultfollowing.com/babysteps/)** 语言设计决策的社区权威解读，涵盖 trait solver 演进、const generics 稳定化等主题。 ✅
+> **[Without Boats, "The Rust I Wanted Had No Future"](https://without.boats/blog/the-rust-i-wanted-had-no-future/)** 对 Rust 语言设计哲学和演进方向的深度反思，涉及 effects、async fn in traits 等特性的设计权衡。 ✅
+> **[Koka Language; Plotkin & Pretnar 2009; Type Theory Research](https://koka-lang.github.io/koka/doc/)** Effects 系统和类型论扩展参考了学术文献。✅
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html); [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 
@@ -1086,7 +1086,7 @@ graph TD
   - 已补充 §2.3.3 Rust 2021 → 2024 完整变更清单（19 项）
   - 已补充 §2.3.4 跨 Edition 代码示例（7 组对比）
   - 已补充 §2.4 未来 Edition 方向（2027+）
-  - 所有论断附 `[来源: ...]` 标注，含 Bloom 层级标注，与 L1-L4 文件交叉链接
+  - 所有论断附 `[...](https://doc.rust-lang.org/)` 标注，含 Bloom 层级标注，与 L1-L4 文件交叉链接
 
 ---
 

@@ -137,7 +137,7 @@ erDiagram
 
 > **认知功能**: 此 ER 图帮助建立 ECS 数据模型的关系骨架——World 作为中心枢纽组织 Entity、Component 与 System 的关联，理解这一点是设计缓存友好架构的起点。建议在实现自定义 ECS 存储时，先画出版本化的 ER 图验证组件访问路径的合理性。关键洞察：System 不直接持有 Component，而是通过 World 间接查询，这种间接性是并行调度安全的前提。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
-> **思维表征说明**: `erDiagram` 是 Mermaid 的**实体关系图**语法，与 `classDiagram` 不同——它强调**实体间的 cardinality（基数）关系**（`||--o{` 表示一对多），天然适合表达 ECS 中「一个 World 包含多个 Entity」「一个 Entity 拥有多个 Component」「一个 System 查询多个 Component」的关系。这与 `graph TD` 层次图（展示概念分类）形成互补——ER 图展示的是**数据模型中的实体关联**。 [来源: Bevy ECS Docs; Chen, *The Entity-Relationship Model*, 1976]
+> **思维表征说明**: `erDiagram` 是 Mermaid 的**实体关系图**语法，与 `classDiagram` 不同——它强调**实体间的 cardinality（基数）关系**（`||--o{` 表示一对多），天然适合表达 ECS 中「一个 World 包含多个 Entity」「一个 Entity 拥有多个 Component」「一个 System 查询多个 Component」的关系。这与 `graph TD` 层次图（展示概念分类）形成互补——ER 图展示的是**数据模型中的实体关联**。 [Bevy ECS Docs](https://bevyengine.org/learn/book/ecs/); [Chen, *The Entity-Relationship Model*, 1976](https://doi.org/10.1145/320434.320440)
 
 ### 1.2 极简 ECS 实现示例
 >
@@ -262,7 +262,7 @@ classDiagram
 ```
 
 > **认知功能**: 此 classDiagram 从类型系统（Type System）视角固化 ECS 的静态结构——Component 是数据 trait，System 是行为 trait，Query 是借用（Borrowing）检查的代理。建议在深入 Bevy 源码前，以此图为锚点理解泛型（Generics）参数的传播路径。关键洞察：Archetype 不是类型层次的节点，而是运行期存储优化的产物，这解释了为何 ECS 能在零成本抽象（Zero-Cost Abstraction）下实现 SOA 布局。[💡 原创分析](../../00_meta/00_framework/methodology.md)
-> **思维表征说明**: 此 `classDiagram` 从**类型系统（Type System）**视角展示 ECS 架构——`World` 是容器根，`Entity` 是标识符，`Component` 是数据 trait，`System` 是行为 trait，`Query` 是借用（Borrowing）检查的代理，`Archetype` 是存储优化结构。`-->` 表示组合关系，`..>` 表示依赖关系，`<|--` 表示继承。这种表征帮助程序员理解「ECS 不是 OOP 的替代品，而是数据导向的重新组织」。 [来源: Bevy ECS Docs; Data-Oriented Design Book]
+> **思维表征说明**: 此 `classDiagram` 从**类型系统（Type System）**视角展示 ECS 架构——`World` 是容器根，`Entity` 是标识符，`Component` 是数据 trait，`System` 是行为 trait，`Query` 是借用（Borrowing）检查的代理，`Archetype` 是存储优化结构。`-->` 表示组合关系，`..>` 表示依赖关系，`<|--` 表示继承。这种表征帮助程序员理解「ECS 不是 OOP 的替代品，而是数据导向的重新组织」。 [Bevy ECS Docs](https://bevyengine.org/learn/book/ecs/); [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/)
 
 ### 1.2 缓存友好性与 SoA 存储
 >
@@ -394,7 +394,7 @@ queue.submit(std::iter::once(encoder.finish()));
 > **Playdate 生态**: Playdate Developer Forum 上已有开发者使用 `hecs` 构建游戏原型，验证了 `no_std` + `alloc` 下 ECS 的可行性。其 16 MB RAM 对 ECS 极为充裕，但 1-bit 屏幕要求渲染系统与 ECS 解耦，通常采用帧缓冲（framebuffer）+ Sprite 批处理模式。
 > **ESP32 突破**: Espressif 于 2025 年发布了基于 `bevy_ecs` 的 `no_std` 迷宫游戏演示，标志着 Bevy 的 ECS 核心已正式下探到 MCU 级别。该演示使用 `embedded-graphics` crate 进行帧缓冲渲染，事件通过 Bevy 的 `EventReader<T>` 分发。
 
-[来源: Espressif Developer Blog — Bevy ECS on ESP32] · [来源: Playdate Developer Forum — Rust Development Thread]
+[Espressif Developer Blog — Bevy ECS on ESP32](https://blog.espressif.com/) · [Playdate Developer Forum — Rust Development Thread](https://devforum.play.date/)
 
 #### 2.4.3 `bevy_ecs` vs `hecs` vs `shipyard` 在 `no_std` 下的兼容性对比
 
@@ -409,7 +409,7 @@ queue.submit(std::iter::once(encoder.finish()));
 > **体积权衡**: `bevy_ecs` 即使在 `no_std` 下仍包含大量泛型（Generics）单态化（Monomorphization）代码，对 Flash < 1 MB 的 MCU 可能过重。`hecs` 的代码体积极小，更适合 ROM 受限场景。
 > **调度差异**: `shipyard` 的 Sparse Set 在固定容量下实现更简单（只需固定大小的 `dense`/`sparse` 数组），而 `hecs` 的 Archetype 存储在 `no_std` 下仍需 `alloc` 支持 archetype 分桶。对于无 `alloc` 场景，自定义固定容量 Sparse Set 往往是更实际的选择。
 
-[来源: Bevy ECS no_std Discussion #10680] · [来源: hecs Documentation] · [来源: Shipyard GitHub — Cargo Features]
+[Bevy ECS no_std Discussion #10680](https://github.com/bevyengine/bevy/discussions/10680) · [hecs Documentation](https://docs.rs/hecs/latest/hecs/) · [Shipyard GitHub — Cargo Features](https://github.com/leudz/shipyard)
 
 #### 2.4.4 固定容量 ECS（Fixed-capacity Archetype Tables）的设计模式
 
@@ -490,7 +490,7 @@ impl FixedArchetype {
 
 > **内存布局优势**: 固定容量 Archetype Table 的组件数组在 `.bss` 段静态分配，无运行时（Runtime）分配开销，且保证 SOA（Structure of Arrays）布局，缓存行为完全可预测。
 
-[来源: Embedded Rust Working Group — no_std Patterns] · [来源: Data-Oriented Design Book]
+[Embedded Rust Working Group — no_std Patterns](https://docs.rust-embedded.org/book/) · [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/)
 
 #### 2.4.5 嵌入式图形（Pico8 风格、Framebuffer 渲染）与 ECS 的结合
 
@@ -628,7 +628,7 @@ fn blit_sprite(_fb: &mut FrameBuffer, _pos: &Position, _sprite: &Sprite) {
 
 > **设计要点**: 在 `no_std` 下，`hecs` 的 `World` 仍然使用 `alloc` 进行内部存储，但 API 与桌面完全一致。系统不再由自动调度器并行执行，而是显式顺序调用。这种"框架降级"模式保持了 ECS 的数据-行为分离哲学，同时完全剔除了 `std` 依赖。
 
-[来源: hecs Documentation] · [来源: Espressif Developer Blog — Bevy ECS on ESP32]
+[hecs Documentation](https://docs.rs/hecs/latest/hecs/) · [Espressif Developer Blog — Bevy ECS on ESP32](https://blog.espressif.com/)
 
 ---
 
@@ -1157,9 +1157,9 @@ struct ChildOf {
 | 核心库谱系 | [`./03_core_crates.md`](../02_core_crates/03_core_crates.md) | `bevy`、`wgpu`、`rapier` 等 crate |
 | 应用领域 | [`./04_application_domains.md`](../06_data_and_distributed/04_application_domains.md) | 游戏作为 L6 应用域 |
 
-> **[来源: Bevy Book; Bevy ECS Docs; Fyrox Docs; wgpu Documentation; Data-Oriented Design Book]** 游戏开发分析基于官方引擎文档和 DOD 研究。✅
+> **[Bevy Book](https://bevyengine.org/learn/book/); [Bevy ECS Docs](https://bevyengine.org/learn/book/ecs/); [Fyrox Docs](https://fyrox-rs.github.io/); [wgpu Documentation](https://docs.rs/wgpu/latest/wgpu/); [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/)** 游戏开发分析基于官方引擎文档和 DOD 研究。✅
 > **来源: [Wikipedia — Entity component system; Richard Fabian — Data-Oriented Design; Niko Matsakis Blog](https://en.wikipedia.org/wiki/Entity_component_system%3B_Richard_Fabian_%E2%80%94_Data_Oriented_Design%3B_Niko_Matsakis_Blog)** ECS 和 DOD 概念参考了权威定义和核心开发者博客。✅
-> **[来源: Rust Concurrency Book; Rayon Docs; Rust Book Ch.16]** 并发渲染分析基于 Rust 并发安全（Concurrency Safety）的核心文献。✅
+> **[Rust Concurrency Book; Rayon Docs; Rust Book Ch.16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)** 并发渲染分析基于 Rust 并发安全（Concurrency Safety）的核心文献。✅
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)

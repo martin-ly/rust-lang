@@ -524,7 +524,7 @@ fn concat<const M: usize, const N: usize>(a: [i32; M], b: [i32; N]) -> [i32; M +
 
 ### 3.5.2 Effects System：控制流表征空间的统一
 
-> **[学术来源: Rust Effects Initiative]** · **[来源: yoshuawuyts 2024]** Rust 的效果系统（Effects System）研究旨在统一 `async`、`?`（try）、`gen`（迭代器）等**控制流效果**的语法和语义。✅
+> **[学术来源: Rust Effects Initiative]** · **[yoshuawuyts 2024](https://blog.yoshuawuyts.com/)** Rust 的效果系统（Effects System）研究旨在统一 `async`、`?`（try）、`gen`（迭代器）等**控制流效果**的语法和语义。✅
 
 **当前分裂**：
 

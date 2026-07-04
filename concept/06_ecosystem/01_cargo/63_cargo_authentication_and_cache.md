@@ -72,7 +72,7 @@
 - provider 负责安全地存储和检索 token；
 - 使用认证 registry **必须**配置 credential provider（公共 registry 除外）。
 
-> [来源: Cargo Book — Registry Authentication](https://doc.rust-lang.org/cargo/reference/registry-authentication.html)
+> [Cargo Book — Registry Authentication](https://doc.rust-lang.org/cargo/reference/authentication.html)(<https://doc.rust-lang.org/cargo/reference/registry-authentication.html>)
 
 ---
 
@@ -103,7 +103,7 @@ global-credential-providers = [
 
 > **注意**: 列表中越靠后的 provider 优先级越高。
 >
-> [来源: Cargo Book — Recommended configuration](https://doc.rust-lang.org/cargo/reference/registry-authentication.html#recommended-configuration)
+> [Cargo Book — Recommended configuration](https://doc.rust-lang.org/cargo/reference/config.html)(<https://doc.rust-lang.org/cargo/reference/registry-authentication.html#recommended-configuration>)
 
 ---
 
@@ -156,7 +156,7 @@ global-credential-providers = ["cargo-credential-1password --account my.1passwor
     └── db/           # git 依赖的 bare 仓库
 ```
 
-> [来源: Cargo Book — Cargo Home](https://doc.rust-lang.org/cargo/guide/cargo-home.html)
+> [Cargo Book — Cargo Home](https://doc.rust-lang.org/cargo/reference/config.html#credentialstransport)(<https://doc.rust-lang.org/cargo/guide/cargo-home.html>)
 
 ---
 
@@ -187,7 +187,7 @@ target/
 
 Rust 1.96+ 把中间产物（如 `deps/`、`incremental/`、`build/`）放到独立的 build dir，默认与 target dir 相同。可通过 `CARGO_BUILD_BUILD_DIR` 或 `build.build-dir` 单独配置。
 
-> [来源: Cargo Book — Build Cache](https://doc.rust-lang.org/cargo/reference/build-cache.html)
+> [Cargo Book — Build Cache](https://doc.rust-lang.org/cargo/reference/build-cache.html)(<https://doc.rust-lang.org/cargo/reference/build-cache.html>)
 
 ---
 

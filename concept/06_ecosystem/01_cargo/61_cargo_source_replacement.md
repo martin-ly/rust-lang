@@ -69,7 +69,7 @@
 
 > **关键约束**: Source replacement 假设两个 source 的源码**完全一致**。它不能用来打补丁，也不能当作私有 registry。
 >
-> [Cargo Book — Source Replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html)(https://doc.rust-lang.org/cargo/reference/source-replacement.html)
+> [Cargo Book — Source Replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html)(<https://doc.rust-lang.org/cargo/reference/source-replacement.html>)
 
 ---
 
@@ -177,7 +177,7 @@ my-project/
 
 > **注意**: 提交 `vendor/` 到仓库会显著增大体积，但能保证完全离线构建。
 >
-> [来源: Cargo Book — cargo vendor](https://doc.rust-lang.org/cargo/commands/cargo-vendor.html)
+> [Cargo Book — cargo vendor](https://doc.rust-lang.org/cargo/reference/commands/cargo-vendor.html)(<https://doc.rust-lang.org/cargo/commands/cargo-vendor.html>)
 
 ---
 
@@ -224,7 +224,7 @@ serde = { path = "../serde-fix" }
 
 > **反模式**: 用 source replacement 来“给依赖打补丁”会违反 Cargo 的等价性假设，应使用 `[patch]`。
 >
-> [来源: Cargo Book — Overriding Dependencies](https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html)
+> [Cargo Book — Overriding Dependencies](https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html)(<https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html>)
 
 ---
 

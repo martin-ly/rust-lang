@@ -43,7 +43,7 @@
 
 `regex` crate 是 Rust 生态中最广泛使用的正则表达式引擎，由 Rust 核心团队维护。它以**安全、高性能、Unicode 正确**著称，被 `ripgrep`、`clap`、`tracing`、`serde` 等众多工业级 crate 间接或直接依赖，是 Rust 文本处理基础设施的关键组成部分。
 
-> [来源: regex docs.rs](https://docs.rs/regex/latest/regex/)
+> [regex docs.rs](https://docs.rs/regex/latest/regex/)(<https://docs.rs/regex/latest/regex/>)
 
 与许多动态语言的正则实现不同，`regex` crate 在设计上强调**可预期的线性时间匹配**与**内存安全**：
 
@@ -55,7 +55,7 @@
 | **安全性** | 拒绝易导致灾难性回溯的模式 | 不可控用户输入下仍保持线性时间 |
 | **零拷贝** | `Captures` / `Match` 借用原字符串 | 避免不必要的内存分配 |
 
-> [来源: regex GitHub Repository](https://github.com/rust-lang/regex)
+> [regex GitHub Repository](https://github.com/rust-lang/regex)(<https://github.com/rust-lang/regex>)
 
 ```rust
 use regex::Regex;
@@ -89,7 +89,7 @@ graph TD
     RE -->|replace_all| SUB
 ```
 
-> [来源: regex Regex Docs](https://docs.rs/regex/latest/regex/struct.Regex.html)
+> [regex Regex Docs](https://docs.rs/regex/latest/regex/struct.Regex.html)(<https://docs.rs/regex/latest/regex/struct.Regex.html>)
 
 | 类型 | 职责 | 典型使用场景 |
 |:--|:--|:--|
@@ -97,7 +97,7 @@ graph TD
 | `RegexBuilder` | 控制大小写敏感、多行模式、Unicode 等选项 | 需要运行时配置匹配语义 |
 | `RegexSet` | 同时测试多个模式，返回匹配索引集合 | 日志分类、路由表、关键词过滤 |
 
-> [来源: regex RegexBuilder Docs](https://docs.rs/regex/latest/regex/struct.RegexBuilder.html)
+> [regex RegexBuilder Docs](https://docs.rs/regex/latest/regex/struct.RegexBuilder.html)(<https://docs.rs/regex/latest/regex/struct.RegexBuilder.html>)
 
 ### 2.2 匹配与捕获 {#22-匹配与捕获}
 
@@ -131,7 +131,7 @@ for ident in re.find_iter("let foo = bar + 1;") {
 }
 ```
 
-> [来源: regex Match Docs](https://docs.rs/regex/latest/regex/struct.Match.html)
+> [regex Match Docs](https://docs.rs/regex/latest/regex/struct.Match.html)(<https://docs.rs/regex/latest/regex/struct.Match.html>)
 
 | 方法 | 返回类型 | 语义 |
 |:--|:--|:--|
@@ -178,7 +178,7 @@ let matches: Vec<usize> = set.matches("abc123").into_iter().collect();
 assert!(matches.contains(&2));
 ```
 
-> [来源: regex RegexSet Docs](https://docs.rs/regex/latest/regex/struct.RegexSet.html)
+> [regex RegexSet Docs](https://docs.rs/regex/latest/regex/struct.RegexSet.html)(<https://docs.rs/regex/latest/regex/struct.RegexSet.html>)
 
 ---
 
@@ -195,7 +195,7 @@ assert!(matches.contains(&2));
 | **NFA（非确定性有限自动机）** | O(m × n) | 状态线性于模式 | 捕获组、反向引用、复杂模式 |
 | **Literal 优化** | O(n) 或子线性 | 极小额外内存 | 纯字符串搜索、前缀加速 |
 
-> [来源: regex Performance Notes](https://docs.rs/regex/latest/regex/#performance)
+> [regex Performance Notes](https://docs.rs/regex/latest/regex/#performance)(<https://docs.rs/regex/latest/regex/#performance>)
 
 ```mermaid
 graph LR

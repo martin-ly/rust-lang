@@ -131,7 +131,7 @@
     - [类型系统改进 {#类型系统改进}](#类型系统改进-类型系统改进)
     - [Rust 1.93.0 补充 {#rust-1930-补充}](#rust-1930-补充-rust-1930-补充)
     - [低优先级扩展（形式化占位） {#低优先级扩展形式化占位}](#低优先级扩展形式化占位-低优先级扩展形式化占位)
-  - [🆕 Rust 1.96.1 更新内容 {#rust-1960-更新内容}](#-rust-1960-更新内容-rust-1960-更新内容)
+  - [🆕 Rust 1.96.1 更新内容 {#rust-1960-更新内容}](#-rust-1961-更新内容-rust-1960-更新内容)
     - [1. ControlFlow::ok() - 控制流与Option转换 {#1-controlflowok---控制流与option转换}](#1-controlflowok---控制流与option转换-1-controlflowok---控制流与option转换)
     - [2. RangeToInclusive 类型 {#2-rangetoinclusive-类型}](#2-rangetoinclusive-类型-2-rangetoinclusive-类型)
     - [3. int\_format\_into - 高性能整数格式化 {#3-int\_format\_into---高性能整数格式化}](#3-int_format_into---高性能整数格式化-3-int_format_into---高性能整数格式化)
@@ -243,7 +243,7 @@
 
 ### Curry-Howard 对应 (Stanford CS242 Lecture 16-20) {#curry-howard-对应-stanford-cs242-lecture-16-20}
 
-> **[来源: POPL - Type Theory Advances]**
+> **[POPL - Type Theory Advances](https://popl.sigplan.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > **课程**: Stanford CS242: Programming Languages
@@ -1008,7 +1008,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 
 ### EPFL (瑞士洛桑联邦理工学院) {#epfl-瑞士洛桑联邦理工学院}
 
-> **[来源: POPL - Type Theory Advances]**
+> **[POPL - Type Theory Advances](https://popl.sigplan.org/)**
 
 **课程**: Concurrent and Parallel Programming
 
@@ -3479,7 +3479,7 @@ $。
 
 ## 🆕 Rust 1.96.1 更新内容 {#rust-1960-更新内容}
 
-> **[来源: POPL - Type Theory Advances]**
+> **[POPL - Type Theory Advances](https://popl.sigplan.org/)**
 > **发布日期**: 2026-03-05
 > **最后更新**: 2026-03-05
 > **状态**: ✅ 已整合
@@ -3792,7 +3792,7 @@ fn truncate_front(&mut self, len: usize)
 
 ## 形式化影响总结 {#形式化影响总结}
 
-> **[来源: Hindley-Milner Type Inference]**
+> **[Hindley-Milner Type Inference](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)**
 
 | 特性 | 类型系统影响 | 证明状态 |
 | :--- | :--- | :--- |
@@ -3924,7 +3924,7 @@ fn truncate_front(&mut self, len: usize)
 > **[ACM - Type Systems for Memory Safety](https://dl.acm.org/)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 > **来源: [PLDI 2023 - Aeneas](https://www.sigplan.org/Conferences/PLDI/)**
-> **[来源: Pierce 2002 - Types and Programming Languages]**
+> **[Pierce 2002 - Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 > **来源: [Wikipedia - Polymorphism](https://en.wikipedia.org/wiki/Polymorphism)**
 > **来源: [Wikipedia - Subtyping](https://en.wikipedia.org/wiki/Subtyping)**
@@ -3933,11 +3933,11 @@ fn truncate_front(&mut self, len: usize)
 > **[ACM - Type Soundness Proofs](https://dl.acm.org/)**
 > **[IEEE - Type Safety Standards](https://ieeexplore.ieee.org/)**
 > **来源: [POPL 2020 - Oxide](https://www.sigplan.org/Conferences/POPL/)**
-> **[来源: POPL 2021 - Rust Verification Tools]**
-> **[来源: PLDI 2021 - Rust Verification]**
-> **[来源: Harper 2016 - Practical Foundations for Programming Languages]**
-> **[来源: Cardelli 1996 - Type Systems]**
-> **[来源: Girard 1989 - Proofs and Types]**
+> **[POPL 2021 - Rust Verification Tools](https://popl21.sigplan.org/)**
+> **[PLDI 2021 - Rust Verification](https://pldi21.sigplan.org/)**
+> **[Harper 2016 - Practical Foundations for Programming Languages](https://www.cs.cmu.edu/~rwh/pfpl/)**
+> **[Cardelli 1996 - Type Systems](https://doi.org/10.1145/234313.234418)**
+> **[Girard 1989 - Proofs and Types](http://www.paultaylor.eu/stable/Proofs+Types.html)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

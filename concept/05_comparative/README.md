@@ -9,8 +9,8 @@
 > **来源:
 > [Wikipedia - Programming Language Comparison](https://en.wikipedia.org/wiki/Comparison_of_programming_languages)** ·
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)** ·
-> **[来源: PLDI 2023 - Comparative Language Studies]** ·
-> **[来源: IEEE Software - Rust Adoption Analysis]**
+> **[PLDI 2023 - Comparative Language Studies](https://pldi23.sigplan.org/)** ·
+> **[IEEE Software - Rust Adoption Analysis](https://ieeexplore.ieee.org/)**
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >

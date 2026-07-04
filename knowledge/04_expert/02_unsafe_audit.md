@@ -67,8 +67,8 @@ cargo install miri  # 或 rustup component add miri
 
 **Unsafe Code Auditing（不安全代码审计）** 是对 Rust 代码中 `unsafe` 块及其周边安全契约进行系统性审查的工程实践。其目标是识别可能导致未定义行为（Undefined Behavior, UB）的代码模式，验证 `SAFETY` 注释中的假设是否成立，并确保 unsafe 抽象对外暴露的 API 保持内存安全与线程安全。
 
-> **[来源: Rust Reference: Unsafe Rust]** `unsafe` 块允许使用五种 unsafe 操作：解引用裸指针、调用 unsafe 函数、访问或修改可变静态变量、访问 `union` 字段、调用 `extern` 函数。 ✅
-> **[来源: Rustonomicon]** "Safe Rust is the language you use 99% of the time. Unsafe Rust gives you five new superpowers..." 审计即验证这些 superpowers 的使用是否安全。 ✅
+> **[Rust Reference: Unsafe Rust](https://doc.rust-lang.org/reference/introduction.html)** `unsafe` 块允许使用五种 unsafe 操作：解引用裸指针、调用 unsafe 函数、访问或修改可变静态变量、访问 `union` 字段、调用 `extern` 函数。 ✅
+> **[Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)** "Safe Rust is the language you use 99% of the time. Unsafe Rust gives you five new superpowers..." 审计即验证这些 superpowers 的使用是否安全。 ✅
 > **[来源: Unsafe Code Guidelines]** Rust 官方不安全代码指南定义了未定义行为（UB）的边界和内存模型规则。 ✅
 
 直观上，审计如同为代码中的"安全漏洞"做体检——不是检查代码能否编译（编译器已做），而是检查代码在运行时的假设是否始终成立。
@@ -1406,16 +1406,16 @@ let combined = Layout::new::<u32>().extend_packed(Layout::new::<u8>()).unwrap();
 
 ## 权威来源索引
 
-> **[来源: Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html)** ·
-> **[来源: Rustonomicon](https://doc.rust-lang.org/nomicon/)** ·
+> **[Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/introduction.html)(<https://doc.rust-lang.org/reference/unsafe-blocks.html>)** ·
+> **[Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)(<https://doc.rust-lang.org/nomicon/>)** ·
 > **[来源: Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)** ·
-> **[来源: Miri 官方文档](https://github.com/rust-lang/miri)** ·
-> **[来源: Ralf Jung — Stacked Borrows / Tree Borrows](https://www.ralfj.de/blog/)** ·
+> **[Miri 官方文档](https://github.com/rust-lang/miri/)(<https://github.com/rust-lang/miri>)** ·
+> **[Ralf Jung — Stacked Borrows](https://www.ralfj.de/blog/); [Tree Borrows](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/tree-borrows.md)(<https://www.ralfj.de/blog/>)** ·
 > **[来源: Rust By Example — Unsafe Operations](https://doc.rust-lang.org/rust-by-example/unsafe.html)** ·
-> **[来源: RFC 2585 — Unsafe Blockin](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html)** ·
-> **[来源: cargo-geiger](https://github.com/rust-crate/cargo-geiger)** ·
-> **[来源: cargo-fuzz 指南](https://rust-fuzz.github.io/book/)** ·
-> **[来源: LLVM Sanitizer Docs](https://clang.llvm.org/docs/AddressSanitizer.html)**
+> **[RFC 2585 — Unsafe Blockin](https://rust-lang.github.io/rfcs/2585.html)(<https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html>)** ·
+> **[cargo-geiger](https://docs.rs/cargo-geiger/latest/cargo_geiger/)(<https://github.com/rust-crate/cargo-geiger>)** ·
+> **[cargo-fuzz 指南](https://rust-fuzz.github.io/book/)(<https://rust-fuzz.github.io/book/>)** ·
+> **[LLVM Sanitizer Docs](https://docs.rs/llvm/latest/llvm/)(<https://clang.llvm.org/docs/AddressSanitizer.html>)**
 
 ---
 

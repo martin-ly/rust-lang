@@ -380,7 +380,7 @@ Gossip 传播模型:
 
 ### 5.3 CRDT（Conflict-free Replicated Data Types）
 
-> **[来源: Shapiro et al. 2011 — A Comprehensive Study of Convergent and Commutative Replicated Data Types] · [Rust crdt crate] · [Wikipedia: CRDT](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type)** ✅
+> **[Shapiro et al. 2011 — A Comprehensive Study of Convergent and Commutative Replicated Data Types](https://hal.inria.fr/inria-00555588/) · [Rust crdt crate] · [Wikipedia: CRDT](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type)** ✅
 
 CRDT 是**无需同步**即可保证最终一致性（Coherence）的数据结构：
 

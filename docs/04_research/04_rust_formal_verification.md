@@ -292,7 +292,7 @@ impl<T> Vec<T> {
 
 ## 3.6 2025–2026 工具链最新进展 {#36-20252026-工具链最新进展}
 
-> **[来源: Miri POPL 2026 Preprint; KVerus arXiv 2026; AutoVerus OOPSLA 2025; Vest USENIX Security 2025; Creusot POPL 2026 Tutorial]**
+> **[Miri POPL 2026 Preprint; KVerus arXiv 2026; AutoVerus OOPSLA 2025; Vest USENIX Security 2025; Creusot POPL 2026 Tutorial](https://arxiv.org/)**
 
 形式化验证工具链在 2025–2026 年快速演进，以下是与 Rust 生态直接相关的关键进展：
 

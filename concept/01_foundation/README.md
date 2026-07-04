@@ -9,7 +9,7 @@
 > **来源: [TRPL Ch3](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)** ·
 > **来源: [Wikipedia - Ownership (programming)](https://en.wikipedia.org/wiki/Ownership_(programming))** ·
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)** ·
-> **[来源: Stanford CS242 - Programming Languages]**
+> **[Stanford CS242 - Programming Languages](https://web.stanford.edu/class/cs242/)**
 > **本节关键术语**:
 >
 > 基础概念 (Foundation) · 所有权 (Ownership) · 借用 (Borrowing) ·

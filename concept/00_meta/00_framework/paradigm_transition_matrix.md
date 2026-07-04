@@ -251,7 +251,7 @@ quadrantChart
 
 **变更日志**:
 
-- v1.0 (2026-05-23): 初始版本 — C++/Java/Go/Python → Rust 四大转换矩阵 + 四象限影响评估 + 认知陷阱分析 + 背景定制学习建议 [来源: 权威来源对齐 Wave 6]
+- v1.0 (2026-05-23): 初始版本 — C++/Java/Go/Python → Rust 四大转换矩阵 + 四象限影响评估 + 认知陷阱分析 + 背景定制学习建议 [权威来源对齐 Wave 6](../02_sources/international_authority_index.md)
 
 ---
 

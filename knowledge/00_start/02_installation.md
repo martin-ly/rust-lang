@@ -231,16 +231,16 @@ rustup default stable  # 切回稳定版
 
 ## 📖 延伸阅读
 
-- [Rust 官方安装指南](https://www.rust-lang.org/tools/install) [来源: Rust Team / 2025]
-- [rustup 文档](https://rust-lang.github.io/rustup/) [来源: Rust Core Team / 2025]
+- [Rust 官方安装指南](https://www.rust-lang.org/tools/install) [Rust Team / 2025](https://www.rust-lang.org/)
+- [rustup 文档](https://rust-lang.github.io/rustup/) [Rust Core Team / 2025](https://www.rust-lang.org/)
 - [Cargo 配置](https://doc.rust-lang.org/cargo/reference/config.html) [Rust Team / Cargo Book 2025](https://doc.rust-lang.org/cargo/index.html)
 
 ---
 
 ## 📚 权威来源索引
 
-- [Rust 官方安装指南](https://www.rust-lang.org/tools/install) [来源: Rust Team / 2025]
-- [rustup 文档](https://rust-lang.github.io/rustup/) [来源: Rust Core Team / 2025]
+- [Rust 官方安装指南](https://www.rust-lang.org/tools/install) [Rust Team / 2025](https://www.rust-lang.org/)
+- [rustup 文档](https://rust-lang.github.io/rustup/) [Rust Core Team / 2025](https://www.rust-lang.org/)
 - [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-01-installation.html) [Rust Team / TRPL 2025](https://doc.rust-lang.org/book/title-page.html)
 - [Cargo 配置](https://doc.rust-lang.org/cargo/reference/config.html) [Rust Team / Cargo Book 2025](https://doc.rust-lang.org/cargo/index.html)
 

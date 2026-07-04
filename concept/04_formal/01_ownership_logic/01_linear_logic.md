@@ -437,8 +437,8 @@ Rust 编译期的相位模型:
   Phase 5 (运行期): 实际执行 ──→ 对应 proof nets 的归约（cut elimination）
 ```
 
-> **[来源: Girard 1987 §5 Phase Semantics]** 相位语义将线性逻辑从证明论（proof theory）延伸到模型论（model theory）。Rust 编译器的 borrow checker 可视为一个**自动定理证明器**：它验证程序代码是否是"资源安全"这一逻辑定理的有效证明。
-> **[来源: 💡 原创映射]** "编译期检查 = 证明验证；运行期执行 = 证明归约"——这是 Curry-Howard 对应在 Rust 工程中的直接体现。💡
+> **[Girard 1987 §5 Phase Semantics](https://doi.org/10.1016/0304-3975(87)90045-4)** 相位语义将线性逻辑从证明论（proof theory）延伸到模型论（model theory）。Rust 编译器的 borrow checker 可视为一个**自动定理证明器**：它验证程序代码是否是"资源安全"这一逻辑定理的有效证明。
+> **[💡 原创映射](../../00_meta/00_framework/methodology.md)** "编译期检查 = 证明验证；运行期执行 = 证明归约"——这是 Curry-Howard 对应在 Rust 工程中的直接体现。💡
 
 ---
 
@@ -783,8 +783,8 @@ h x = ...  -- m 是重数变量
 | **生态状态** | 工业级，稳定 | 实验性，GHC 9.x+ 可用 | 工业级，标准化 | 工业级，稳定 |
 
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** Rust 的所有权系统可理解为嵌入在更大语言中的**仿射类型系统**，核心资源纪律在编译期强制执行。 ✅
-> **[来源: Bernardy et al. 2017, *Linear Haskell*]** Linear Haskell 通过重数（multiplicity）在现有类型系统中嵌入线性约束，是严格线性类型系统的工业级实验。 ✅
-> **[来源: C++ Reference: Smart pointers]** C++ 无内置线性/仿射类型系统；`unique_ptr` 提供运行时（Runtime）所有权管理，但编译器不检查 use-after-move。 ✅
+> **[Bernardy et al. 2017, *Linear Haskell*](https://doi.org/10.1145/3158124)** Linear Haskell 通过重数（multiplicity）在现有类型系统中嵌入线性约束，是严格线性类型系统的工业级实验。 ✅
+> **[C++ Reference: Smart pointers](https://en.cppreference.com/w/cpp/memory)** C++ 无内置线性/仿射类型系统；`unique_ptr` 提供运行时（Runtime）所有权管理，但编译器不检查 use-after-move。 ✅
 > **来源: Go Spec: Memory Model** Go 无线性/仿射类型概念，内存安全（Memory Safety）完全依赖 GC，引用（Reference）有效性无编译期检查。 ✅
 > **核心区别**: Rust 是**仿射类型系统**（允许 weakening，即资源可丢弃），而 Linear Haskell 是**严格线性类型系统**（weakening 不成立，资源必须精确使用一次）。C++ 和 Go 不在线性逻辑谱系中——C++ 依赖运行时（Runtime） RAII 和程序员自律，Go 依赖 GC。这使得 Rust 和 Linear Haskell 在"编译期资源安全"维度上形成独特阵营，而 C++ 和 Go 选择运行时方案。
 

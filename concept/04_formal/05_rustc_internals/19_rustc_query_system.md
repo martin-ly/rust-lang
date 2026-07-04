@@ -105,7 +105,7 @@
 
 > **关键洞察**: 查询系统是 `rustc` 实现**增量编译**的基础设施。通过记录查询之间的依赖关系，`rustc` 可以判断“上次编译后，哪些结果仍然有效”。
 >
-> [来源: Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html)
+> [Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html)(<https://rustc-dev-guide.rust-lang.org/query.html>)
 
 ---
 
@@ -143,7 +143,7 @@ TyCtxt<'tcx>
 
 > **注意**: 即使 `mir_borrowck` 会报错，它仍然是查询，因为错误本身也是结果的一部分。但某些查询为了保证所有函数的错误都被报告，会在 codegen 之前被强制预先执行。
 >
-> [来源: Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html)
+> [Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html)(<https://rustc-dev-guide.rust-lang.org/query.html>)
 
 ---
 
@@ -188,7 +188,7 @@ graph TD
 
 > **关键洞察**: Red-Green 不是“按文件”增量，而是**按查询结果**增量。即使一个文件被修改，只要它不影响某个查询的输入，该查询的结果仍可复用。
 >
-> [来源: Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation.html)
+> [Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation.html)(<https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation.html>)
 
 ### 3.3 哈希与序列化
 

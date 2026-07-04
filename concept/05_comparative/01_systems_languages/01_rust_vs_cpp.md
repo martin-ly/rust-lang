@@ -108,7 +108,7 @@
 │  类型即命题，程序即证明   │  内存即数组，指针即地址，执行即状态转换   │
 │  编译器是证明检查器       │  编译器是翻译器+优化器                  │
 └──────────────────────────┴──────────────────────────────────────┘
-> [来源: [Wikipedia — C++]]
+> [Wikipedia — C++](https://en.wikipedia.org/wiki/C++)
 ```
 
 ### 1.1 Rust：形式系统模型的本体论
@@ -352,7 +352,7 @@ C++ 的机制是**层叠式**的：
 
 ### 7.3 Move 语义系统对比（深度）
 
-> **[来源: The Coded Message — RAII] · [Stroustrup — The C++ Programming Language, Ch. 17] · [Rust Reference — §4.1.8 Moves](https://doc.rust-lang.org/reference/introduction.html)** ✅
+> **[The Coded Message — RAII](https://www.thecodedmessage.com/tags/rust/) · [Stroustrup — The C++ Programming Language, Ch. 17] · [Rust Reference — §4.1.8 Moves](https://doc.rust-lang.org/reference/introduction.html)** ✅
 > **核心术语**: Rust 的 `move` 语义意味着**赋值**和**传参**时，资源的所有权自动**转移**。原变量变为 **uninitialized**，后续访问被编译器禁止。
 
 #### 7.3.1 C++ 的 Move：值类别 + 移动构造函数

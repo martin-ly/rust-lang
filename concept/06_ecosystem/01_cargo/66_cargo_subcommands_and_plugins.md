@@ -67,7 +67,7 @@ Cargo 通过以下机制与第三方工具集成：
 - **`--message-format=json`**: 在构建过程中输出编译消息、产物、build script 结果等；
 - **环境变量**: 如 `CARGO`、`CARGO_MANIFEST_DIR` 等，供子命令感知当前 Cargo 上下文。
 
-> [来源: Cargo Book — External Tools](https://doc.rust-lang.org/cargo/reference/external-tools.html)
+> [Cargo Book — External Tools](https://doc.rust-lang.org/cargo/reference/external-tools.html)(<https://doc.rust-lang.org/cargo/reference/external-tools.html>)
 
 ---
 
@@ -145,7 +145,7 @@ JSON 消息类型：
 
 > **关键洞察**: `--message-format=json` 是 IDE、代码分析工具和 CI 集成 Cargo 的主要接口。
 >
-> [来源: Cargo Book — External Tools — JSON messages](https://doc.rust-lang.org/cargo/reference/external-tools.html#json-messages)
+> [Cargo Book — External Tools — JSON messages](https://doc.rust-lang.org/cargo/reference/external-tools.html#json-messages)(<https://doc.rust-lang.org/cargo/reference/external-tools.html#json-messages>)
 
 ---
 

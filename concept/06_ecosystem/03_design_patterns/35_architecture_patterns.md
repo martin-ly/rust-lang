@@ -948,7 +948,7 @@ async fn optimized_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Er
 └── 根结论: ❌ 架构模式提供结构，但需要纪律和自动化测试来维护
 ```
 
-> **来源**: [来源: [Fowler — Over-Engineering [已失效]]<!-- 原链接: https://martinfowler.com/bliki/OverEngineering.html -->]
+> **来源**: [Fowler — Over-Engineering [已失效]]<!-- 原链接: https://martinfowler.com/bliki/OverEngineering.html -->](<https://martinfowler.com/bliki/OverEngineering.html>)
 
 ### 9.2 边界极限
 >

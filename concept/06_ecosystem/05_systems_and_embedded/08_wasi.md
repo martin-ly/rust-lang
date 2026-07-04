@@ -144,7 +144,7 @@ graph TD
 
 ### 3.2 能力安全模型
 
-> **[来源: WASI Preview 2 Docs; Capability-Based Security Research]** WASI 采用**能力安全（Capability Security）**模型替代传统的 POSIX 系统调用。程序不通过全局文件描述符访问资源，而是通过显式传递的**能力句柄（capability handle）**。
+> **[WASI Preview 2 Docs](https://wasi.dev/); [Capability-Based Security Research](https://www.cl.cam.ac.uk/research/security/capabilities/)** WASI 采用**能力安全（Capability Security）**模型替代传统的 POSIX 系统调用。程序不通过全局文件描述符访问资源，而是通过显式传递的**能力句柄（capability handle）**。
 
 ```rust,ignore
 // 传统 POSIX: 进程隐式拥有全局文件系统访问权
@@ -166,7 +166,7 @@ let dir_cap = preopen_dir("/sandbox/data")?;
 | **资源回收** | 句柄 drop → 能力失效 | 所有权（Ownership）离开作用域 → drop |
 | **安全保证** | 无句柄 = 无访问权 | 无所有权（Ownership） = 无访问权 |
 
-> **关键洞察**: WASI 的能力安全模型与 Rust 的所有权模型存在深层同构——二者都通过**资源唯一标识 + 显式转移**来消除隐式全局访问。这是 Rust 成为 Wasm 生态首选语言的深层原因。[来源: WASI Docs; Rust Ownership Model] ✅
+> **关键洞察**: WASI 的能力安全模型与 Rust 的所有权模型存在深层同构——二者都通过**资源唯一标识 + 显式转移**来消除隐式全局访问。这是 Rust 成为 Wasm 生态首选语言的深层原因。[WASI Docs](https://wasi.dev/); [Rust Ownership Model](https://doc.rust-lang.org/reference/ownership.html) ✅
 
 ---
 
@@ -226,7 +226,7 @@ world calculator-world {
 
 ### 4.2 `wit-bindgen` 与 Rust 代码生成
 
-> **[来源: wit-bindgen GitHub; Component Model Tutorial]** `wit-bindgen` 从 WIT 定义生成 Rust 绑定代码：
+> **[wit-bindgen GitHub](https://github.com/bytecodealliance/wit-bindgen); [Component Model Spec](https://component-model.bytecodealliance.org/)** `wit-bindgen` 从 WIT 定义生成 Rust 绑定代码：
 
 ```bash
 # 生成 Rust guest 绑定
@@ -255,7 +255,7 @@ fn calc(input: CalcInput) -> Result<i32, String> {
 }
 ```
 
-**类型安全保证**: WIT 的 `result<T, E>` 映射到 Rust 的 `Result<T, String>`，编译器强制处理错误分支——跨组件边界保持了 Rust 的类型安全承诺。[来源: wit-bindgen Docs] ✅
+**类型安全保证**: WIT 的 `result<T, E>` 映射到 Rust 的 `Result<T, String>`，编译器强制处理错误分支——跨组件边界保持了 Rust 的类型安全承诺。[wit-bindgen Docs](https://docs.rs/wit-bindgen/latest/wit_bindgen/) ✅
 
 ### 4.3 世界（World）与组件组合
 >
@@ -356,9 +356,9 @@ impl GuestFile for File {
 | 形式化生态塔 | [`./05_formal_ecosystem_tower.md`](../08_formal_verification/44_formal_ecosystem_tower.md) | Wasm 在 L0-L4 中的位置 |
 | 应用领域 | [`./04_application_domains.md`](../06_data_and_distributed/04_application_domains.md) | Wasm 的工程落地场景 |
 
-> **[来源: WASI Preview 2 Docs; WebAssembly Component Model Spec; wit-bindgen Docs; WASMtime Docs]** WASI 分析基于 Bytecode Alliance 的官方规范。✅
-> **[来源: WebAssembly.org; wasm-bindgen Guide; Rust WASM Working Group]** Wasm 基础概念参考了 W3C 社区组和 Rust WASM 工作组的文档。✅
-> **[来源: Capability-Based Security Research; Dennis & Van Horn 1966; Rust Ownership Model]** 能力安全模型基于操作系统安全研究的经典文献。✅
+> **[WASI Preview 2 Docs](https://wasi.dev/); [Component Model Spec](https://component-model.bytecodealliance.org/); [wit-bindgen Docs](https://docs.rs/wit-bindgen/latest/wit_bindgen/); [WASMtime Docs](https://docs.wasmtime.dev/)** WASI 分析基于 Bytecode Alliance 的官方规范。✅
+> **[WebAssembly.org](https://webassembly.org/); [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/); [Rust WASM Working Group](https://rustwasm.github.io/)** Wasm 基础概念参考了 W3C 社区组和 Rust WASM 工作组的文档。✅
+> **[Capability-Based Security Research](https://www.cl.cam.ac.uk/research/security/capabilities/); [Dennis & Van Horn, CACM 1966](https://doi.org/10.1145/365230.365252); [Rust Ownership Model](https://doc.rust-lang.org/reference/ownership.html)** 能力安全模型基于操作系统安全研究的经典文献。✅
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
@@ -411,7 +411,7 @@ fn risky_run() -> i32 {
 ```
 
 > **编译错误** (`E0599`): `Result<Vec<u8>, IoError>` 没有 `.len()` 方法。
-> **认知功能**: 此反例展示了 WIT `result<T, E>` → Rust `Result<T, E>` 映射的核心价值——编译器强制处理跨组件边界的错误，消除静默失败。[来源: wit-bindgen Docs] ✅
+> **认知功能**: 此反例展示了 WIT `result<T, E>` → Rust `Result<T, E>` 映射的核心价值——编译器强制处理跨组件边界的错误，消除静默失败。[wit-bindgen Docs](https://docs.rs/wit-bindgen/latest/wit_bindgen/) ✅
 
 ### 8.3 反例：沙箱逃逸尝试（能力边界外访问）
 
@@ -447,7 +447,7 @@ fn escape_sandbox() {
 ```
 
 > **组合错误**: WebAssembly 组件组合器（compositor）在链接阶段检测到类型签名不匹配，拒绝组合。
-> **形式化根基**: Component Model 的**类型提升规则**（type lifting）要求导入/导出接口的 WIT 类型完全一致。这是 Wasm 从动态链接（C 的 `dlsym`）向**强类型组合**演进的关键设计。[来源: Component Model Spec] ✅
+> **形式化根基**: Component Model 的**类型提升规则**（type lifting）要求导入/导出接口的 WIT 类型完全一致。这是 Wasm 从动态链接（C 的 `dlsym`）向**强类型组合**演进的关键设计。[Component Model Spec](https://component-model.bytecodealliance.org/) ✅
 
 ### 8.5 边界极限测试：Resource 句柄生命周期
 

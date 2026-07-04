@@ -76,7 +76,7 @@
 
 ### 1. array_windows - 滑动窗口迭代
 
-`array_windows` 是 Rust 1.94 引入的方法 [来源: Rust 1.94 Release Notes / 2025; RFC 关于数组窗口迭代的设计决策; 核心语义: 在数组/切片上以固定大小的窗口进行迭代，返回 `[[T; N]]` 类型的窗口，编译期确定窗口大小 `N`]，在 Rust 1.96+ 中稳定可用。
+`array_windows` 是 Rust 1.94 引入的方法 [Rust 1.94 Release Notes / 2025; RFC 关于数组窗口迭代的设计决策; 核心语义: 在数组/切片上以固定大小的窗口进行迭代，返回 `[[T; N]]` 类型的窗口，编译期确定窗口大小 `N`](https://releases.rs/docs/1.94/)，在 Rust 1.96+ 中稳定可用。
 
 #### 1.1 基础用法
 >
@@ -387,14 +387,14 @@ fn parse_args(input: &str) -> Vec<String> {
 ### 官方来源
 
 - [Iterator trait 文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html) [Rust Standard Library / 2025](https://doc.rust-lang.org/std/index.html)
-- [array_windows API](https://doc.rust-lang.org/std/primitive.slice.html#method.array_windows) [来源: Rust Standard Library / 2026]
+- [array_windows API](https://doc.rust-lang.org/std/primitive.slice.html#method.array_windows) [Rust Standard Library / 2026](https://doc.rust-lang.org/std/index.html)
 - [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) [Rust Release Team / 2026](https://blog.rust-lang.org/)
-- [Rust 1.80 Release Notes](https://releases.rs/docs/1.80.0/) [来源: Rust Release Team / 2024]
+- [Rust 1.80 Release Notes](https://releases.rs/docs/1.80.0/) [Rust Release Team / 2024](https://blog.rust-lang.org/)
 
 ### 学术与形式化来源
 
-- Iterator 模式 — *Design Patterns: Elements of Reusable Object-Oriented Software* (GoF, 1994) [来源: 迭代器模式的经典定义; Rust 的 `Iterator` trait 是该模式的类型系统实现]
-- Wadler, P. — *Theorems for Free!* (FPCA 1989) [来源: 泛型函数的行为可由类型推导; `Iterator::map`/`filter` 等泛型组合子的参数多态性理论基础]
+- Iterator 模式 — *Design Patterns: Elements of Reusable Object-Oriented Software* (GoF, 1994) [迭代器模式的经典定义; Rust 的 `Iterator` trait 是该模式的类型系统实现](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
+- Wadler, P. — *Theorems for Free!* (FPCA 1989) [泛型函数的行为可由类型推导; `Iterator::map`/`filter` 等泛型组合子的参数多态性理论基础](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
 
 ---
 

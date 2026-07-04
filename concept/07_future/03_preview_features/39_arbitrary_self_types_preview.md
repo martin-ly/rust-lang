@@ -251,7 +251,7 @@ impl<T> TaggedPtr<T> {
 ## 参考
 
 > **来源: [Rust Project Goals 2026 — Arbitrary Self Types](https://rust-lang.github.io/rust-project-goals/2026/arbitrary-self-types.html)**
-> **[来源: Rust Internals — Arbitrary Self Types Discussion]**
+> **[Rust Internals — Arbitrary Self Types Discussion](https://internals.rust-lang.org/)**
 
 | 资源 | 链接 |
 |------|-----|

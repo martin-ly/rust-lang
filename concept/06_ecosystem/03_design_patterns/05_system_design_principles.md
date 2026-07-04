@@ -111,7 +111,7 @@
 
 ### 2.1 内存安全：Capability-Based Security
 
-> **Capability-Based Security**: 由 Dennis & Van Horn 1966 提出，核心思想是——进程对资源的访问权限不基于身份（identity），而基于**不可伪造的令牌（capability）**。拥有 capability 即可访问资源，无需额外检查。 [来源: Dennis & Van Horn, CACM 1966]
+> **Capability-Based Security**: 由 Dennis & Van Horn 1966 提出，核心思想是——进程对资源的访问权限不基于身份（identity），而基于**不可伪造的令牌（capability）**。拥有 capability 即可访问资源，无需额外检查。 [Dennis & Van Horn, CACM 1966](https://doi.org/10.1145/365230.365252)
 
 Rust 的所有权（Ownership）系统正是 Capability-Based Security 的现代实现：
 
@@ -147,11 +147,11 @@ Rust 的 `Send`/`Sync` trait 和所有权转移在编译期编码了 Session Typ
 | 数据竞争排除 | `Send`/`Sync`：编译期标记线程安全 |
 | 死锁避免（部分） | 无锁数据结构 / Actor 单线程处理 |
 
-> **权威对齐**: Wadler 2012 的 *Propositions as Sessions* 证明了 Session Types 与线性逻辑的 Curry-Howard 对应。Rust 的所有权系统正是这一对应的工程实现——`Sender<T>` 和 `Receiver<T>` 是线性命题，`send` 和 `recv` 是线性蕴含的应用。 [来源: Wadler, ICFP 2012]
+> **权威对齐**: Wadler 2012 的 *Propositions as Sessions* 证明了 Session Types 与线性逻辑的 Curry-Howard 对应。Rust 的所有权系统正是这一对应的工程实现——`Sender<T>` 和 `Receiver<T>` 是线性命题，`send` 和 `recv` 是线性蕴含的应用。 [Wadler, ICFP 2012](https://doi.org/10.1145/2364527.2364568)
 
 ### 2.3 零成本抽象：Stroustrup 原则
 
-> **Stroustrup 原则**: "你所不使用的，你就不应该为之付出代价。你使用的，你甚至不应该比手工编码付出更高代价。" [来源: Stroustrup, *The Design and Evolution of C++*, 1994]
+> **Stroustrup 原则**: "你所不使用的，你就不应该为之付出代价。你使用的，你甚至不应该比手工编码付出更高代价。" [Stroustrup, *The Design and Evolution of C++*, 1994](https://www.stroustrup.com/de.html)
 
 Rust 的零成本抽象（Zero-Cost Abstraction）机制：
 
@@ -167,7 +167,7 @@ Rust 的零成本抽象（Zero-Cost Abstraction）机制：
 
 ### 2.4 组件组合：范畴论态射复合
 
-> **范畴论视角**: Tower 的 `Service` trait 将 HTTP 处理抽象为**态射（morphism）**——`Service<Request>` 是从 `Request` 到 `Response` 的映射。中间件是**态射的复合（composition）**，满足结合律。 [来源: Tower 文档; Mac Lane, *Categories for the Working Mathematician*]
+> **范畴论视角**: Tower 的 `Service` trait 将 HTTP 处理抽象为**态射（morphism）**——`Service<Request>` 是从 `Request` 到 `Response` 的映射。中间件是**态射的复合（composition）**，满足结合律。 [Tower 文档](https://docs.rs/tower/latest/tower/); [Mac Lane, *Categories for the Working Mathematician*](https://en.wikipedia.org/wiki/Categories_for_the_Working_Mathematician)
 
 ```rust
 // Tower Service = 范畴论语义
@@ -201,11 +201,11 @@ trait Service<Request> {
 | `Arc<Mutex<T>>` | 分布式锁（如 etcd / ZooKeeper） | 顺序一致性 |
 | channel send | 两阶段提交（2PC）的 prepare 阶段 | 原子性 |
 
-> **权威对齐**: Raft 共识算法中的 Leader Election 确保任何时刻只有一个 Leader（所有者），与 Rust 的所有权唯一性在**抽象层面同构**。CAP 定理告诉我们无法在分区时同时保证可用性和一致性；Rust 的所有权系统通过**编译期拒绝**（而非运行时（Runtime）协调）来避免分布式系统中的竞争条件，这是一种「预防胜于治疗」的设计哲学。 [来源: Lamport, *Paxos Made Simple*; Brewer, *CAP Twelve Years Later*]
+> **权威对齐**: Raft 共识算法中的 Leader Election 确保任何时刻只有一个 Leader（所有者），与 Rust 的所有权唯一性在**抽象层面同构**。CAP 定理告诉我们无法在分区时同时保证可用性和一致性；Rust 的所有权系统通过**编译期拒绝**（而非运行时（Runtime）协调）来避免分布式系统中的竞争条件，这是一种「预防胜于治疗」的设计哲学。 [Lamport, *Paxos Made Simple*](https://lamport.azurewebsites.net/pubs/pubs.html#paxos-simple); [Brewer, *CAP Twelve Years Later*](https://sites.cs.ucsb.edu/~rich/class/cs293b-cloud/papers/brewer-cap.pdf)
 
 ### 2.6 安全边界：Zero Trust + WASI 能力安全
 
-> **Zero Trust Architecture**: NIST SP 800-207 定义的核心原则——"永不信任，始终验证"。每个访问请求都必须经过身份验证、授权和加密，无论请求来自何处。 [来源: NIST SP 800-207, 2020]
+> **Zero Trust Architecture**: NIST SP 800-207 定义的核心原则——"永不信任，始终验证"。每个访问请求都必须经过身份验证、授权和加密，无论请求来自何处。 [NIST SP 800-207, 2020](https://csrc.nist.gov/publications/detail/sp/800-207/final)
 
 Rust 的安全边界层次与 Zero Trust 的映射：
 
@@ -217,11 +217,11 @@ Rust 的安全边界层次与 Zero Trust 的映射：
 | 微分段 | Crate 边界 = 安全边界；模块（Module） = 微分段 |
 
 **WASI（WebAssembly System Interface）的能力安全**:
-WASI 采用 capability-based 设计——程序只能访问显式授予的资源（文件描述符、网络 socket）。Rust 的 `wasm32-wasip1` 或 `wasm32-wasip2` target 将 Rust 的所有权语义映射到 WASI 的 capability 模型，实现从源码到运行时（Runtime）的端到端安全。 [来源: WASI Specification; Bytecode Alliance]
+WASI 采用 capability-based 设计——程序只能访问显式授予的资源（文件描述符、网络 socket）。Rust 的 `wasm32-wasip1` 或 `wasm32-wasip2` target 将 Rust 的所有权语义映射到 WASI 的 capability 模型，实现从源码到运行时（Runtime）的端到端安全。 [WASI Specification](https://wasi.dev/); [Bytecode Alliance](https://bytecodealliance.org/)
 
 ### 2.7 容错设计：Error Kernel + Let It Crash
 
-> **Error Kernel 模式**: 由 Erlang/OTP 提出，核心思想是将系统的关键状态集中在最小化的「错误内核」中，外围组件可以失败和重启，但内核必须始终保持可用。 [来源: Armstrong, *Making Reliable Distributed Systems*, 2003]
+> **Error Kernel 模式**: 由 Erlang/OTP 提出，核心思想是将系统的关键状态集中在最小化的「错误内核」中，外围组件可以失败和重启，但内核必须始终保持可用。 [Armstrong, *Making Reliable Distributed Systems*, 2003](https://erlang.org/download/armstrong_thesis_2003.pdf)
 
 Rust 的容错设计机制：
 
@@ -513,7 +513,7 @@ graph LR
 > 虚线箭头是「V 模型」在 Rust 生态中的特化表达。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **思维表征说明**: 知识流动图是 `inter_layer_topology.md` 中「知识流动」概念在**系统设计场景**的具体化——它展示的不是概念之间的静态关系，而是**设计决策在系统各层之间的动态传播**。
 > 与 `graph TD` 流程图（展示结构）不同，知识流动图强调**反馈回路**（VERIFY → REQ 的虚线箭头）——设计不是一次性的，验证结果会反馈到需求层，驱动迭代优化。
-> 这是系统工程中「V 模型」的 Rust 特化版本。 [来源: Systems Engineering V-Model; ISO/IEC/IEEE 15288]
+> 这是系统工程中「V 模型」的 Rust 特化版本。 [Systems Engineering V-Model; ISO/IEC/IEEE 15288](https://www.iso.org/standard/43564.html)
 
 ---
 

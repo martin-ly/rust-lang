@@ -578,7 +578,7 @@ async fn load_aggregate(
 | **大小触发** | 聚合状态超过阈值 | 针对大数据聚合优化 | 需要监控状态大小 |
 | **自定义触发** | 业务事件（如订单完成）| 语义明确 | 实现复杂 |
 
-> **来源**: [EventStoreDB — Snapshots [已失效]]<!-- 原链接: https://developers.eventstore.com/server/v24.10/streams.html#snapshots --> · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
+> **来源**: [EventStoreDB — Snapshots](https://developers.eventstore.com/server/v24.10/streams.html#snapshots) · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 
 ### 4.3 事件升级（Event Upcasting）
 >
@@ -1255,7 +1255,7 @@ fn benchmark_rebuild_without_snapshot() {
 }
 ```
 
-> **修正**: 快照是生产环境的事件溯源必需品。推荐的快照策略是**计数触发 + 时间触发**的混合：每 1000 个事件或每 1 小时（以先到者为准）创建一次快照。快照存储应使用与事件存储不同的物理存储（如 S3/MinIO 对象存储），以降低成本。[来源: [EventStoreDB — Snapshots [已失效]]<!-- 原链接: https://developers.eventstore.com/server/v24.10/streams.html#snapshots -->] · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
+> **修正**: 快照是生产环境的事件溯源必需品。推荐的快照策略是**计数触发 + 时间触发**的混合：每 1000 个事件或每 1 小时（以先到者为准）创建一次快照。快照存储应使用与事件存储不同的物理存储（如 S3/MinIO 对象存储），以降低成本。[来源: [EventStoreDB — Snapshots](https://developers.eventstore.com/server/v24.10/streams.html#snapshots)] · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 
 ### 10.2 边界测试：双写不一致导致数据丢失（逻辑错误）
 

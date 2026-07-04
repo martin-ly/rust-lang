@@ -93,7 +93,7 @@
 
 > **关键洞察**: AST 接近源码；HIR 已做部分解糖（如 `for` 循环变成 `loop`），但仍保留模块（Module）/函数/impl 等结构；MIR 则是控制流图，供借用（Borrowing）检查和优化使用。
 >
-> [来源: Rustc Dev Guide — The HIR](https://rustc-dev-guide.rust-lang.org/hir.html)
+> [Rustc Dev Guide — The HIR](https://rustc-dev-guide.rust-lang.org/hir.html)(<https://rustc-dev-guide.rust-lang.org/hir.html>)
 
 ---
 
@@ -123,7 +123,7 @@ let v: Vec<i32> = Vec::new();
 > **定理**: 在第二阶段，每个名字只需要尝试解析一次，因为 AST 已经完整，不会再新增名字。
 > **证明**: 宏展开已完成，源码结构冻结，`rustc_resolve::late` 可以安全地自顶向下遍历。
 >
-> [来源: Rustc Dev Guide — Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html)
+> [Rustc Dev Guide — Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html)(<https://rustc-dev-guide.rust-lang.org/name-resolution.html>)
 
 ---
 
@@ -169,7 +169,7 @@ fn outer() {
 
 > **注意**: 嵌套函数（非闭包（Closures））比较特殊——内层函数不能访问外层函数的局部变量和参数，即使按普通作用域规则应该可见。
 >
-> [来源: Rustc Dev Guide — Name Resolution — Scopes and ribs](https://rustc-dev-guide.rust-lang.org/name-resolution.html#scopes-and-ribs)
+> [Rustc Dev Guide — Name Resolution — Scopes and ribs](https://rustc-dev-guide.rust-lang.org/name-resolution.html)(<https://rustc-dev-guide.rust-lang.org/name-resolution.html#scopes-and-ribs>)
 
 ---
 
@@ -219,7 +219,7 @@ HIR 使用多种 ID 来表示不同粒度的实体：
 > - 遍历 crate 无需递归整棵树；
 > - 增量编译可以精确追踪“访问了哪个项”。
 >
-> [来源: Rustc Dev Guide — The HIR — Out-of-band storage](https://rustc-dev-guide.rust-lang.org/hir.html#out-of-band-storage-and-the-crate-type)
+> [Rustc Dev Guide — The HIR — Out-of-band storage](https://rustc-dev-guide.rust-lang.org/hir.html)(<https://rustc-dev-guide.rust-lang.org/hir.html#out-of-band-storage-and-the-crate-type>)
 
 ---
 

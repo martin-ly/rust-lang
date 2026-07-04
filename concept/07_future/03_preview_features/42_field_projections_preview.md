@@ -296,7 +296,7 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 ## 参考
 
 > **来源: [Rust Project Goals 2026 — Field Projections](https://rust-lang.github.io/rust-project-goals/2026/field-projections.html)**
-> **[来源: Rust Internals — Field Projections Discussion]**
+> **[Rust Internals — Field Projections Discussion](https://internals.rust-lang.org/)**
 
 | 资源 | 链接 |
 |------|-----|

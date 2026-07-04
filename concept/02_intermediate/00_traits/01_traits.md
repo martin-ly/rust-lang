@@ -252,8 +252,8 @@ Trait 作为逻辑命题:
 
 > **来源: [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class)** Type class 支持 ad hoc 多态，Rust Trait 直接受 Haskell Type Class 启发。 ✅
 > **来源: [Rust Reference: Traits](https://doc.rust-lang.org/reference/introduction.html)** Rust Trait 通过显式 `impl` 实现，支持关联类型、默认实现和泛型（Generics）约束。 ✅
-> **[来源: C++ Reference: Concepts]** C++20 Concepts 是模板的约束机制，通过 duck typing 自动匹配，无孤儿规则（Orphan Rule）。 ✅
-> **[来源: Go Spec: Interface types]** Go 接口是结构类型（structural typing），隐式实现，无显式 `implements` 关键字。 ✅
+> **[C++ Reference: Concepts](https://en.cppreference.com/w/cpp/language/constraints)** C++20 Concepts 是模板的约束机制，通过 duck typing 自动匹配，无孤儿规则（Orphan Rule）。 ✅
+> **[Go Spec: Interface types](https://go.dev/ref/spec#Interface_types)** Go 接口是结构类型（structural typing），隐式实现，无显式 `implements` 关键字。 ✅
 
 ### 2.3 Orphan Rule 判定矩阵
 
@@ -370,7 +370,7 @@ graph TD
 impl<P₁...Pn> Trait<T₁...Tm> for Type
 
 > **来源**: [RFC 1023 §3 — Orphan rules formal definition](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html) · [Rust Reference: Orphan rules — Fundamental types](https://doc.rust-lang.org/reference/introduction.html) · [Dreyer 2017 §3.2.2]
-> **[来源: Pierce 2002 TAPL Ch.23; Wadler & Blott 1989]** Rust Trait 与 Haskell 类型类均可映射到 System F 的字典传递解释。
+> **[Pierce 2002 TAPL Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/); [Wadler & Blott 1989](https://doi.org/10.1145/75277.75283)** Rust Trait 与 Haskell 类型类均可映射到 System F 的字典传递解释。
 
 #### 与 System F 子类型化的对接
 

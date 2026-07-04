@@ -22,7 +22,7 @@
 
 严格关键字不能用作变量名、函数名或任何标识符。Rust 在编译时会拒绝将这些关键字作为标识符使用。
 
-> **[来源: Rust Reference: Keywords]** Rust 关键字分为严格关键字（strict keywords）和保留关键字（reserved keywords），由编译器在词法分析阶段识别。 ✅
+> **[Rust Reference: Keywords](https://doc.rust-lang.org/reference/introduction.html)** Rust 关键字分为严格关键字（strict keywords）和保留关键字（reserved keywords），由编译器在词法分析阶段识别。 ✅
 
 ### 控制流关键字
 >

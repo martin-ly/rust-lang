@@ -2614,10 +2614,10 @@ Rust 1.94 对错误诊断进行了多项改进：
 > **[IEEE - Programming Language Diagnostics](https://ieeexplore.ieee.org/)**
 > **[ACM - Compiler Error Message Design](https://dl.acm.org/)**
 > **来源: [Rust Reference - Error Codes](https://doc.rust-lang.org/reference/)**
-> **[来源: Rust Compiler Error Index]**
-> **[来源: rustc --explain Documentation]**
+> **[Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
+> **[rustc --explain Documentation](https://docs.rs/rustc/latest/rustc/)**
 > **[来源: LLVM - Error Handling]**
-> **[来源: ISO/IEC 14882 - C++ Standard Diagnostics]**
+> **[ISO/IEC 14882 - C++ Standard Diagnostics](../../concept/00_meta/02_sources/international_authority_index.md)**
 
 ---
 

@@ -190,7 +190,7 @@ graph LR
 > C++/Java 引入 OOP；
 > ML/Haskell 引入参数多态和代数数据类型；
 > Rust 在线性/仿射类型基础上，首次将内存安全（Memory Safety）与零成本抽象（Zero-Cost Abstraction）同时带入工业级系统编程。
-> [来源: Cardelli & Wegner 1985]
+> [Cardelli & Wegner 1985](https://doi.org/10.1145/6041.6042)
 > **从 C 到 Rust 的关键跃迁**:
 > C 提供底层控制但无安全保证；
 > Java/Go 通过 GC 自动化内存管理但引入运行时（Runtime）开销；
@@ -528,10 +528,10 @@ graph TD
 | **包管理** | ✅ SwiftPM | ✅ Gradle / Maven | ⚠️ 早期（`vendor`） |
 | **主要适用域** | iOS/macOS/Apple 生态 | Android/JVM 后端/多平台 | 游戏引擎/系统工具 |
 
-> **Swift 的所有权演进**: Swift 5.9+ 引入 `borrowing`/`consuming`/`mutating` 参数所有权修饰符，明确向 Rust 的所有权模型靠拢，但保留 ARC 作为默认策略。 [来源: Swift Evolution SE-0377 / Swift Blog]
+> **Swift 的所有权演进**: Swift 5.9+ 引入 `borrowing`/`consuming`/`mutating` 参数所有权修饰符，明确向 Rust 的所有权模型靠拢，但保留 ARC 作为默认策略。 [Swift Evolution SE-0377 / Swift Blog](https://www.swift.org/blog/)
 >
-> **Kotlin 的多平台策略**: Kotlin Multiplatform 允许共享业务逻辑（JVM/Native/JS），但 Kotlin/Native 的内存模型（2019 年前为严格隔离，2021 年后放宽）仍与 Rust 的所有权并发有本质差距。 [来源: Kotlin Docs / Kotlin/Native Memory Model]
-> **Odin 的设计哲学**: Odin 明确拒绝 Rust 的借用（Borrowing）检查器，主张"显式优于隐式"——程序员通过 `context.allocator` 控制内存，通过 `defer` 管理资源。与 Zig 类似，Odin 追求 C 的简单性 + 现代类型系统。 [来源: Odin Lang Docs / GingerBill Blog]
+> **Kotlin 的多平台策略**: Kotlin Multiplatform 允许共享业务逻辑（JVM/Native/JS），但 Kotlin/Native 的内存模型（2019 年前为严格隔离，2021 年后放宽）仍与 Rust 的所有权并发有本质差距。 [Kotlin Docs / Kotlin/Native Memory Model](https://kotlinlang.org/docs/native-memory-manager.html)
+> **Odin 的设计哲学**: Odin 明确拒绝 Rust 的借用（Borrowing）检查器，主张"显式优于隐式"——程序员通过 `context.allocator` 控制内存，通过 `defer` 管理资源。与 Zig 类似，Odin 追求 C 的简单性 + 现代类型系统。 [Odin Lang Docs / GingerBill Blog](https://odin-lang.org/docs/)
 
 ### 9.3 Rust 在范式谱系中的精确定位
 
@@ -580,13 +580,13 @@ graph TD
 
 ## 十、学术参考文献
 
-> **Cardelli, L., & Wegner, P. (1985).** *On understanding types, data abstraction, and polymorphism.* ACM Computing Surveys (CSUR), 17(4), 471-522. [来源: ACM Computing Surveys]
+> **Cardelli, L., & Wegner, P. (1985).** *On understanding types, data abstraction, and polymorphism.* ACM Computing Surveys (CSUR), 17(4), 471-522. [ACM Computing Surveys](https://dl.acm.org/journal/csur)
 > 这篇经典综述首次系统性地建立了类型理论的分类框架，将多态性划分为参数多态、包含多态和特设多态，为后世编程语言类型系统的设计提供了统一的术语基础和理论谱系。
 > **Van Roy, P. (2009).** *Programming Paradigms for Dummies: What Every Programmer Should Know.* In Encyclopedia of Computer Science and Engineering. 来源: Van Roy 2009 / [Wikipedia: Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm)
 > 该文献提出了编程范式的多维分类法，将语言特性映射到不同的计算模型，解释了为什么现代语言（包括 Rust）趋向于多范式融合。
-> **Hoare, C.A.R. (1978).** *Communicating Sequential Processes.* Communications of the ACM, 21(8), 666-677. [来源: CACM]
+> **Hoare, C.A.R. (1978).** *Communicating Sequential Processes.* Communications of the ACM, 21(8), 666-677. [CACM](https://cacm.acm.org/)
 > CSP 过程代数的形式化奠基之作，为理解 Go 的 channel-based 并发模型与 Rust 的 ownership-based 并发模型之间的语义差异提供了数学基础。
-> **Cardelli, L. (1989).** *Typeful Programming.* In Lecture Notes for the IFIP Advanced Seminar on Formal Methods in Programming Language Semantics. [来源: Cardelli 1989]
+> **Cardelli, L. (1989).** *Typeful Programming.* In Lecture Notes for the IFIP Advanced Seminar on Formal Methods in Programming Language Semantics. [Cardelli 1989](https://dl.acm.org/doi/10.1145/74878.74880)
 > 提出了"类型丰富编程"（Typeful Programming）的概念，主张类型系统不仅是错误检测工具，更是程序设计的第一类媒介，深刻影响了 Rust、Haskell、OCaml 等现代语言的类型设计理念。
 
 ---

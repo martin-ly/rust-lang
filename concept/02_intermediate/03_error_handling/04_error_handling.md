@@ -1160,7 +1160,7 @@ fn main() {
 - 符号名（symbol name）与偏移量
 - 源文件路径与行列号（若调试符号可用）
 
-> **[来源: Rust std docs — std::backtrace::Backtrace]** 稳定于 Rust 1.65。`Backtrace::capture()` 在 `RUST_BACKTRACE` 未设置时返回 `disabled`，避免无条件开销。 ✅
+> **[Rust std docs — std::backtrace::Backtrace](https://doc.rust-lang.org/std/backtrace/struct.Backtrace.html)** 稳定于 Rust 1.65。`Backtrace::capture()` 在 `RUST_BACKTRACE` 未设置时返回 `disabled`，避免无条件开销。 ✅
 
 #### 9.3.2 环境变量控制
 
@@ -1203,7 +1203,7 @@ fn main() {
 }
 ```
 
-> **[来源: anyhow docs — Features]** `anyhow` 的 `backtrace` feature 在 Rust 1.65+ 使用 `std::backtrace::Backtrace`，在旧版本回退到 `backtrace` crate。 ✅
+> **[anyhow docs — Features](https://docs.rs/anyhow/latest/anyhow/)** `anyhow` 的 `backtrace` feature 在 Rust 1.65+ 使用 `std::backtrace::Backtrace`，在旧版本回退到 `backtrace` crate。 ✅
 
 **`thiserror` 中嵌入 backtrace**：
 
@@ -1359,7 +1359,7 @@ graph TD
 ```
 
 > **认知功能**: 工程权衡决策器——在"完整调用链"与"精确源点"两个定位维度间提供结构化选择框架。读者可根据生产环境的性能约束和调试精度需求，快速确定使用 Backtrace、`#[track_caller]` 还是纯错误消息。核心洞察：定位精度与运行时开销呈正相关；大多数场景只需 `#[track_caller]` 的单点定位，Backtrace 应保留给故障审计。[💡 原创分析](../../00_meta/00_framework/methodology.md)
-> **[来源: Rust Standard Library: panic::Location]** `panic::Location` 是 `const` 友好的轻量级定位机制，与 Backtrace 的运行时重定位形成鲜明对比。 ✅
+> **[Rust Standard Library: panic::Location](https://doc.rust-lang.org/std/panic/struct.Location.html)** `panic::Location` 是 `const` 友好的轻量级定位机制，与 Backtrace 的运行时重定位形成鲜明对比。 ✅
 
 #### 9.3.7 性能考量：Backtrace 捕获的成本
 
@@ -1407,11 +1407,11 @@ fn parse_config_bad(path: &str) -> Result<Config, AppError> {
 ### 9.4 `eyre` / `color-eyre` / `miette` / `snafu` 生态库对比
 
 > **Bloom 层级**: 应用 → 分析
-> **[来源: eyre docs] · [color-eyre docs] · [miette docs] · [snafu docs] · [Rust CLI Book](https://rust-cli.github.io/book/index.html) · [thiserror docs] · [anyhow docs]** Rust 错误处理生态在 `anyhow` / `thiserror` 之外，已形成多个专攻不同场景的库：`eyre` 强调可定制的报告格式，`color-eyre` 提供富媒体诊断输出，`miette` 专注于源码级诊断标注，`snafu` 则强制显式上下文附件。以下逐一分析其设计哲学、API 风格与适用边界。✅
+> **[eyre docs](https://docs.rs/eyre/latest/eyre/) · [color-eyre docs] · [miette docs] · [snafu docs] · [Rust CLI Book](https://rust-cli.github.io/book/index.html) · [thiserror docs] · [anyhow docs]** Rust 错误处理生态在 `anyhow` / `thiserror` 之外，已形成多个专攻不同场景的库：`eyre` 强调可定制的报告格式，`color-eyre` 提供富媒体诊断输出，`miette` 专注于源码级诊断标注，`snafu` 则强制显式上下文附件。以下逐一分析其设计哲学、API 风格与适用边界。✅
 
 #### 9.4.1 `eyre`：可定制报告的错误处理
 
-`eyre` 是 `anyhow` 的 fork，核心创新在于 **`EyreHandler` trait**——允许应用通过 `eyre::set_hook` 全局自定义错误报告的格式、内容与附属信息。[来源: eyre docs]
+`eyre` 是 `anyhow` 的 fork，核心创新在于 **`EyreHandler` trait**——允许应用通过 `eyre::set_hook` 全局自定义错误报告的格式、内容与附属信息。[eyre docs](https://docs.rs/eyre/latest/eyre/)
 
 ```rust,ignore
 use eyre::{Result, WrapErr};
@@ -1441,12 +1441,12 @@ fn main() -> Result<()> {
 | `Option` 上下文 | ✅ `opt.context("msg")` | ⚠️ `opt.ok_or_eyre("msg")` 或 `ok_or_else` |
 | 与 anyhow 互操作 | — | ✅ 提供兼容 re-export（`Context` → `WrapErr`） |
 
-> **[来源: eyre docs]** `eyre::Report` 要求底层错误实现 `Send + Sync + 'static`，并以窄指针（single word）表示，与 `anyhow::Error` 的内存布局一致。✅
+> **[eyre docs](https://docs.rs/eyre/latest/eyre/)** `eyre::Report` 要求底层错误实现 `Send + Sync + 'static`，并以窄指针（single word）表示，与 `anyhow::Error` 的内存布局一致。✅
 > **设计定理**：`eyre` 将"错误类型统一"（anyhow 哲学）与"报告格式可插拔"分离，使应用可以在不修改错误构造代码的前提下，通过更换 handler 实现从纯文本到 JSON/结构化日志的迁移。
 
 #### 9.4.2 `color-eyre`：彩色诊断与链式回溯
 
-`color-eyre` 是 `eyre` 的官方 companion handler，提供**彩色、一致且格式良好的错误报告**，集成 `tracing-error::SpanTrace`、`color-backtrace` 与 `color-spantrace`。[来源: color-eyre docs]
+`color-eyre` 是 `eyre` 的官方 companion handler，提供**彩色、一致且格式良好的错误报告**，集成 `tracing-error::SpanTrace`、`color-backtrace` 与 `color-spantrace`。[color-eyre docs](https://docs.rs/color-eyre/latest/color_eyre/)
 
 ```rust,ignore
 use color_eyre::{config::HookBuilder, eyre::Result, Section, SectionExt};
@@ -1489,11 +1489,11 @@ fn main() -> Result<()> {
 | **Section** | `with_section` 附加任意诊断块（stdout/stderr/配置值） | [color-eyre docs] |
 | **聚合多错误** | 通过 `Section` trait 组合多个错误为一个报告 | [color-eyre examples] |
 
-> **[来源: color-eyre docs]** 生产环境中应通过 `RUST_SPANTRACE=0` 和 `RUST_BACKTRACE=0` 控制诊断噪声；`color-eyre` 在 debug 模式下性能显著低于 `eyre`，因为 `backtrace` crate 的 debug 构建比 `std::backtrace::Backtrace` 慢一个数量级，建议对 `backtrace` 包启用 `[profile.dev.package.backtrace] opt-level = 3`。✅
+> **[color-eyre docs](https://docs.rs/color-eyre/latest/color_eyre/)** 生产环境中应通过 `RUST_SPANTRACE=0` 和 `RUST_BACKTRACE=0` 控制诊断噪声；`color-eyre` 在 debug 模式下性能显著低于 `eyre`，因为 `backtrace` crate 的 debug 构建比 `std::backtrace::Backtrace` 慢一个数量级，建议对 `backtrace` 包启用 `[profile.dev.package.backtrace] opt-level = 3`。✅
 
 #### 9.4.3 `miette`：诊断式错误处理
 
-`miette` 的定位是**诊断库**（diagnostic library），而非单纯的错误包装器。其核心是 `Diagnostic` trait——对 `std::error::Error` 的扩展，支持源码标注、错误代码、帮助文本、URL 链接与严重程度分级。[来源: miette docs]
+`miette` 的定位是**诊断库**（diagnostic library），而非单纯的错误包装器。其核心是 `Diagnostic` trait——对 `std::error::Error` 的扩展，支持源码标注、错误代码、帮助文本、URL 链接与严重程度分级。[miette docs](https://docs.rs/miette/latest/miette/)
 
 ```rust,ignore
 use miette::{Diagnostic, NamedSource, SourceSpan};
@@ -1538,7 +1538,7 @@ pub trait Diagnostic: Error {
 }
 ```
 
-> **[来源: miette docs]** `miette` 与 `thiserror` 完全兼容：可用 `#[derive(Error, Diagnostic)]` 同时实现两个 trait。库代码应仅依赖 `miette` 的核心 trait（不启用 `fancy` feature），由顶层应用启用 `fancy` 获取图形化输出。✅
+> **[miette docs](https://docs.rs/miette/latest/miette/)** `miette` 与 `thiserror` 完全兼容：可用 `#[derive(Error, Diagnostic)]` 同时实现两个 trait。库代码应仅依赖 `miette` 的核心 trait（不启用 `fancy` feature），由顶层应用启用 `fancy` 获取图形化输出。✅
 
 **`miette::Result` 与 `miette::Report`**：
 
@@ -1563,7 +1563,7 @@ miette::set_hook(Box::new(|_| {
 
 #### 9.4.4 `snafu`：显式上下文错误类型
 
-`snafu` 的哲学与 `anyhow`/`eyre` 相反：它**拒绝隐式转换**，要求每个错误变体在构造时提供显式上下文。通过 `#[derive(Snafu)]` 自动生成 **Context Selector**（如 `ConfigFileSnafu`），在转换点强制开发者填充字段。[来源: snafu docs]
+`snafu` 的哲学与 `anyhow`/`eyre` 相反：它**拒绝隐式转换**，要求每个错误变体在构造时提供显式上下文。通过 `#[derive(Snafu)]` 自动生成 **Context Selector**（如 `ConfigFileSnafu`），在转换点强制开发者填充字段。[snafu docs](https://docs.rs/snafu/latest/snafu/)
 
 ```rust,ignore
 use snafu::prelude::*;
@@ -1609,7 +1609,7 @@ fn parse_port(s: &str) -> Result<u16, AppError> {
 | **`ensure!` / `whatever!`** | 类似 `assert!` 的错误构造宏（Macro）；`Whatever` 类型用于快速原型 | [snafu docs] |
 | **`snafu::Location`** | 轻量级错误源点跟踪（类似 `#[track_caller]`） | [snafu changelog] |
 
-> **[来源: snafu docs]** `snafu` 特别适合大型多 crate 项目：每个模块（Module）定义自己的错误类型，通过 `context` 方法在边界处转换，保持错误类型的模块内聚性。GreptimeDB 等工业项目采用此模式管理数百个错误变体。✅
+> **[snafu docs](https://docs.rs/snafu/latest/snafu/)** `snafu` 特别适合大型多 crate 项目：每个模块（Module）定义自己的错误类型，通过 `context` 方法在边界处转换，保持错误类型的模块内聚性。GreptimeDB 等工业项目采用此模式管理数百个错误变体。✅
 
 #### 9.4.5 六库综合对比矩阵
 
@@ -1663,7 +1663,7 @@ graph TD
 当函数标记为 `#[track_caller]` 时，编译器执行两项变换：
 
 1. **ABI 修改**：在函数的调用约定中追加一个隐式的 `&'static Location<'static>` 参数。调用方在每次调用时自动填充该参数为自己的源码位置（文件、行号、列号）。
-2. **MIR 重定向**：在 MIR（Mid-level IR）阶段，编译器将所有对 `#[track_caller]` 函数的调用重定向到一个内部闭包 `foo::{{closure}}`，该闭包负责把调用点的 `Location` 常数绑定到函数的隐式参数上。[来源: rustc-dev-guide — Implicit caller location]
+2. **MIR 重定向**：在 MIR（Mid-level IR）阶段，编译器将所有对 `#[track_caller]` 函数的调用重定向到一个内部闭包 `foo::{{closure}}`，该闭包负责把调用点的 `Location` 常数绑定到函数的隐式参数上。[rustc-dev-guide — Implicit caller location](https://rustc-dev-guide.rust-lang.org/codegen/implicit-caller-location.html)
 
 ```rust
 // ✅ #[track_caller] 使 panic 报告调用者位置
@@ -1722,8 +1722,8 @@ fn main() {
 }
 ```
 
-> **[来源: Rust Standard Library: Location::caller]** `Location::caller()` 在 `#[track_caller]` 函数内部返回调用者的 `Location`；在普通函数中返回自身位置。 ✅
-> **[来源: Rust Standard Library: PanicInfo]** `PanicInfo::location()` 返回 panic 实际发生的位置；当 panic 源自 `#[track_caller]` 函数时，该位置已被替换为调用者位置。 ✅
+> **[Rust Standard Library: Location::caller](https://doc.rust-lang.org/std/panic/struct.Location.html#method.caller)** `Location::caller()` 在 `#[track_caller]` 函数内部返回调用者的 `Location`；在普通函数中返回自身位置。 ✅
+> **[Rust Standard Library: PanicInfo](https://doc.rust-lang.org/std/panic/struct.PanicInfo.html)** `PanicInfo::location()` 返回 panic 实际发生的位置；当 panic 源自 `#[track_caller]` 函数时，该位置已被替换为调用者位置。 ✅
 
 #### 9.5.3 在自定义错误类型中使用 `#[track_caller]` 实现轻量级定位
 
@@ -1832,7 +1832,7 @@ fn load_config(path: &str) -> Result<String> {
 }
 ```
 
-> **[来源: anyhow source — macro rules]** `anyhow!` 宏利用 `#[track_caller]` 将错误位置绑定到调用方源码坐标，使错误链中的 `location()` 方法返回用户代码位置。 ✅
+> **[anyhow source — macro rules](https://docs.rs/anyhow/latest/anyhow/macro.anyhow.html)** `anyhow!` 宏利用 `#[track_caller]` 将错误位置绑定到调用方源码坐标，使错误链中的 `location()` 方法返回用户代码位置。 ✅
 
 **`thiserror` 中 `#[backtrace]` 与 `#[track_caller]` 的协同**：
 
@@ -1893,7 +1893,7 @@ impl AppError {
 | 普通函数 | ✅ 稳定 | Rust 1.46+ |
 | 泛型（Generics）函数 | ✅ 稳定 | 单态化（Monomorphization）后隐式参数正确传递 |
 | `const fn` | ✅ 稳定 | 编译期错误定位 |
-| trait 方法 | ✅ 稳定 | [RFC 2091](https://rust-lang.github.io/rfcs//2091-inline-semantic.html) 最初因 MIR 传递时机限制而禁止；后实现改为 monomorphization 之后注入，解除限制 [来源: rustc-dev-guide — track_caller in traits] |
+| trait 方法 | ✅ 稳定 | [RFC 2091](https://rust-lang.github.io/rfcs//2091-inline-semantic.html) 最初因 MIR 传递时机限制而禁止；后实现改为 monomorphization 之后注入，解除限制 [rustc-dev-guide — track_caller in traits](https://rustc-dev-guide.rust-lang.org/codegen/implicit-caller-location.html) |
 | `async fn` | ⚠️ 部分支持 | Stable 上为 **no-op**（编译通过但 `Location::caller()` 返回 async fn 自身位置）；完整支持需 nightly `#![feature(async_fn_track_caller)]`（Tracking: [rust-lang/rust#110011]） |
 | 闭包（Closures） | ❌ 不稳定 | 需 nightly `#![feature(closure_track_caller)]`（Tracking: [rust-lang/rust#87417]） |
 | `dyn Fn()` / 函数指针 | ❌ 不支持 | 动态分发无法传递隐式 `Location` 参数；通过 trait object 调用时丢失 caller 信息 |
@@ -2131,7 +2131,7 @@ match result {
 }
 ```
 
-> **关键洞察**: C++23 `std::expected` 是 Rust `Result` 的语法类似物，但**不强制错误处理**——调用者可以忽略 `expected`，直到访问 `.value()` 时才可能抛异常。Rust 的 `Result` 通过类型系统（Type System）强制错误处理的分支覆盖。[来源: C++23 Draft Standard] · [Rust Reference — §4.5.6](https://doc.rust-lang.org/reference/introduction.html) ✅
+> **关键洞察**: C++23 `std::expected` 是 Rust `Result` 的语法类似物，但**不强制错误处理**——调用者可以忽略 `expected`，直到访问 `.value()` 时才可能抛异常。Rust 的 `Result` 通过类型系统（Type System）强制错误处理的分支覆盖。[C++23 Draft Standard](https://en.cppreference.com/w/cpp/standard) · [Rust Reference — §4.5.6](https://doc.rust-lang.org/reference/introduction.html) ✅
 
 ### 10.4 析构函数异常：C++ 的致命陷阱
 

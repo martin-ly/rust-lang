@@ -888,7 +888,7 @@ impl GoodNode {
 > [来源: [Tock OS](https://www.tockos.org/)]
 > [来源: [Hubris](https://hubris.oxide.computer/)]
 > [来源: [PREEMPT_RT](https://wiki.linuxfoundation.org/realtime/start)]
-> [来源: [ROS2 Real-Time WG [已失效]]<!-- 原链接: https://ros-real-time.github.io/ -->]
+> [ROS2 Real-Time WG [已失效]]<!-- 原链接: https://ros-real-time.github.io/ -->](<https://ros-real-time.github.io/>)
 > [来源: [OSQP](https://osqp.org/)]
 > [来源: [argmin](https://argmin-rs.org/)]
 > [来源: [pathfinding](https://docs.rs/pathfinding/)]

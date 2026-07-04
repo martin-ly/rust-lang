@@ -82,7 +82,7 @@ error[E0308]: mismatched types
 | **Span** | 指向源码位置的 `Span`，包含主次 label |
 | **Sub-diagnostics** | `note`、`help`、建议等补充信息 |
 
-> [来源: Rustc Dev Guide — Diagnostic structure](https://rustc-dev-guide.rust-lang.org/diagnostics.html#diagnostic-structure)
+> [Rustc Dev Guide — Diagnostic structure](https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html)(<https://rustc-dev-guide.rust-lang.org/diagnostics.html#diagnostic-structure>)
 
 ---
 
@@ -140,7 +140,7 @@ err.span_suggestion(
 
 > 结构化建议是 `cargo fix` 和 IDE 自动修复的基础。
 >
-> [来源: Rustc Dev Guide — Suggestions](https://rustc-dev-guide.rust-lang.org/diagnostics.html#suggestions)
+> [Rustc Dev Guide — Suggestions](https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html)(<https://rustc-dev-guide.rust-lang.org/diagnostics.html#suggestions>)
 
 ---
 
@@ -177,7 +177,7 @@ Lint 运行的时机：
 | Late | HIR 后、类型检查等分析后 | 完整类型信息 |
 | MIR | MIR 上 | 控制流 |
 
-> [来源: Rustc Dev Guide — Lints](https://rustc-dev-guide.rust-lang.org/diagnostics.html#lints)
+> [Rustc Dev Guide — Lints](https://rustc-dev-guide.rust-lang.org/diagnostics/lint-guidelines.html)(<https://rustc-dev-guide.rust-lang.org/diagnostics.html#lints>)
 
 ---
 
@@ -219,7 +219,7 @@ fn main() {
 
 > **警告**: `--bless` 会覆盖 `.stderr` 文件，应仔细审查变更。
 >
-> [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html)(https://rustc-dev-guide.rust-lang.org/tests/ui.html)
+> [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html)(<https://rustc-dev-guide.rust-lang.org/tests/ui.html>)
 
 ---
 

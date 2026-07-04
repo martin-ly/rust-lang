@@ -74,7 +74,7 @@
 
 ## 🧪 Rust 1.97 预览特性索引
 >
-> **[来源: Rust Internals / Nightly]**
+> **[Rust Internals](https://internals.rust-lang.org/); Nightly**
 > 预计发布: 2026-07-16
 
 | 特性 | 文档 | 状态 |

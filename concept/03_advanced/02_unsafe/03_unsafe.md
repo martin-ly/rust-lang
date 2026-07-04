@@ -984,7 +984,7 @@ Miri 解释执行循环:
 ```
 
 > **来源**: [Miri Book](https://github.com/rust-lang/miri) · [rustc-dev-guide: MIR interpretation] · [Miri src/machine.rs]
-> **[来源: LLVM LangRef: Function Attributes]** Miri 的检测与 LLVM 优化假设一一对应。
+> **[LLVM LangRef: Function Attributes](https://llvm.org/docs/LangRef.html#function-attributes)** Miri 的检测与 LLVM 优化假设一一对应。
 
 #### Miri 与编译器优化的关系
 
@@ -1007,7 +1007,7 @@ Miri 解释执行循环:
 ```
 
 > **来源**: [LLVM LangRef: Function Attributes — noalias, dereferenceable, noundef] · [Rustonomicon: What is undefined behavior?](https://doc.rust-lang.org/nomicon/index.html) · [Ralf Jung Blog: Why undefined behavior is scary]
-> **[来源: rustc-dev-guide: Miri flags]** MIRIFLAGS 控制 Miri 的检测严格度和并发行为。
+> **[rustc-dev-guide: Miri flags](https://rustc-dev-guide.rust-lang.org/miri.html)** MIRIFLAGS 控制 Miri 的检测严格度和并发行为。
 
 #### MIRIFLAGS 完整选项速查
 
@@ -1520,9 +1520,9 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
           └── 否 → Miri（最精确的 Rust 语义检测）
 ```
 
-> **[来源: LLVM Sanitizers Docs]** ASan 使用影子内存（shadow memory）检测堆/栈/全局变量的越界访问，运行时开销约 2x，是 C/C++/Rust FFI 项目的首选工具。 ✅ 已验证
-> **[来源: Valgrind Documentation]** Valgrind 的 memcheck 通过 JIT 重编译检测未初始化读取和内存泄漏，无需重编译目标程序，但运行速度极慢（10x~50x）。 ✅ 已验证
-> **[来源: TSan Documentation]** TSan 使用 happens-before 向量时钟检测数据竞争，对 Rust 的 `std::sync` 原子操作（Atomic Operations）和锁结构均有效，但要求所有代码都经过插桩。 ✅ 已验证
+> **[LLVM Sanitizers Docs](https://llvm.org/docs/SanitizerCoverage.html)** ASan 使用影子内存（shadow memory）检测堆/栈/全局变量的越界访问，运行时开销约 2x，是 C/C++/Rust FFI 项目的首选工具。 ✅ 已验证
+> **[Valgrind Documentation](https://valgrind.org/docs/)** Valgrind 的 memcheck 通过 JIT 重编译检测未初始化读取和内存泄漏，无需重编译目标程序，但运行速度极慢（10x~50x）。 ✅ 已验证
+> **[TSan Documentation](https://clang.llvm.org/docs/ThreadSanitizer.html)** TSan 使用 happens-before 向量时钟检测数据竞争，对 Rust 的 `std::sync` 原子操作（Atomic Operations）和锁结构均有效，但要求所有代码都经过插桩。 ✅ 已验证
 > **跨层映射**: `L3::Miri` ↔ [`L6::工具链`](../../06_ecosystem/00_toolchain/01_toolchain.md) CI 集成 · [`L4::形式化`](../../04_formal/02_separation_logic/04_rustbelt.md) 操作语义动态验证
 
 ---
@@ -1534,8 +1534,8 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
 
 **核心区别**：裸指针的 `*` 解引用操作与 `std::ptr::read`/`std::ptr::write` 在**所有权（Ownership）语义**、**drop 触发**和**借用（Borrowing）检查器介入程度**方面存在本质差异。`*ptr` 是**引用语义**的延伸——它假设目标位置已初始化、对齐且有效，并受 Rust 所有权规则约束；而 `ptr::read`/`ptr::write` 是**原始内存操作**，仅执行 bitwise copy 或按位覆盖，不调用 `Clone`，也不自动触发 `Drop`。
 
-> **[来源: std::ptr::read docs]** `ptr::read` 创建目标位置的按位副本，无论该位置是否已初始化。调用者必须确保后续不会导致原位置和新位置的值同时被 drop。✅ 已验证
-> **[来源: std::ptr::write docs]** `ptr::write` 将 `src` 按位写入 `dst` 指向的内存，不读取或 drop `dst` 指向的旧内容。这使其成为未初始化内存初始化的唯一安全方式。✅ 已验证
+> **[std::ptr::read docs](https://doc.rust-lang.org/std/ptr/fn.read.html)** `ptr::read` 创建目标位置的按位副本，无论该位置是否已初始化。调用者必须确保后续不会导致原位置和新位置的值同时被 drop。✅ 已验证
+> **[std::ptr::write docs](https://doc.rust-lang.org/std/ptr/fn.write.html)** `ptr::write` 将 `src` 按位写入 `dst` 指向的内存，不读取或 drop `dst` 指向的旧内容。这使其成为未初始化内存初始化的唯一安全方式。✅ 已验证
 
 ---
 
@@ -1675,7 +1675,7 @@ fn conditional_extract<T>(slot: &mut ManuallyDrop<T>, should_take: bool) -> Opti
 }
 ```
 
-> **[来源: std::mem::ManuallyDrop docs]** `ManuallyDrop` 包装的值不会在其作用域结束时自动调用 `drop`，配合 `ptr::read` 可实现"手动控制资源释放时机"。✅ 已验证
+> **[std::mem::ManuallyDrop docs](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html)** `ManuallyDrop` 包装的值不会在其作用域结束时自动调用 `drop`，配合 `ptr::read` 可实现"手动控制资源释放时机"。✅ 已验证
 > **跨层映射**: `L3::ManuallyDrop` ↔ [`L2::内存管理`](../../02_intermediate/02_memory_management/03_memory_management.md) RAII 与自定义 drop 控制
 
 ##### `ptr::write`：未初始化内存填充与 `MaybeUninit::write` 的前身模式
@@ -1773,7 +1773,7 @@ fn safe_overwrite<T>(ptr: *mut T, new_value: T) {
 // 注: 上面的 safe_overwrite 实际上就是 ptr::replace 的语义
 ```
 
-> **[来源: std::ptr::write docs]** `ptr::write` does not drop the contents of `dst`. If `dst` points to a valid object, that object will be leaked. ✅ 已验证
+> **[std::ptr::write docs](https://doc.rust-lang.org/std/ptr/fn.write.html)** `ptr::write` does not drop the contents of `dst`. If `dst` points to a valid object, that object will be leaked. ✅ 已验证
 
 ##### 危险模式 3：对未初始化内存使用 `*ptr = val`
 
@@ -1842,7 +1842,7 @@ unsafe fn read_button_state() -> u32 {
 | 实际内存访问保证 | ❌ | ✅ |
 | 典型场景 | 堆内存管理、数据结构 | 硬件寄存器、MMIO、信号量 |
 
-> **[来源: LLVM LangRef: volatile]** Volatile operations are required to execute in program order relative to other volatile operations, and must produce actual memory accesses. ✅ 已验证
+> **[LLVM LangRef: volatile](https://llvm.org/docs/LangRef.html#volatile-memory-accesses)** Volatile operations are required to execute in program order relative to other volatile operations, and must produce actual memory accesses. ✅ 已验证
 > **来源: [Rust Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)** In embedded programming, memory-mapped registers must be accessed with volatile operations to prevent the compiler from optimizing away hardware state changes. ✅ 已验证
 
 ---
@@ -1870,7 +1870,7 @@ unsafe fn swap_via_replace<T>(a: *mut T, b: *mut T) {
 // 注: 上面的逻辑实际上就是 std::ptr::swap 的展开形式
 ```
 
-> **[来源: std::ptr::replace docs]** `replace` reads the value at `dest` without dropping it, writes `src` into it, and returns the old value. It is semantically equivalent to `read` followed by `write`. ✅ 已验证
+> **[std::ptr::replace docs](https://doc.rust-lang.org/std/ptr/fn.replace.html)** `replace` reads the value at `dest` without dropping it, writes `src` into it, and returns the old value. It is semantically equivalent to `read` followed by `write`. ✅ 已验证
 
 ---
 
@@ -2269,8 +2269,8 @@ fn from_iterator() -> [i32; 5] {
   5. 自定义分配器上的数组分配（非栈/堆标准路径）
 ```
 
-> **[来源: Rust 1.63 Release Notes]** `array::from_fn` and `array::map` were stabilized to provide safe, ergonomic array initialization without requiring unsafe `MaybeUninit` patterns. ✅ 已验证
-> **[来源: std::array::from_fn docs]** `from_fn` 的内部实现使用 unsafe 代码（可能涉及 MaybeUninit）来避免中间状态的泄漏风险，但对外暴露完全 safe 的 API。 ✅ 已验证
+> **[Rust 1.63 Release Notes](https://releases.rs/docs/1.63.0/)** `array::from_fn` and `array::map` were stabilized to provide safe, ergonomic array initialization without requiring unsafe `MaybeUninit` patterns. ✅ 已验证
+> **[std::array::from_fn docs](https://doc.rust-lang.org/std/array/fn.from_fn.html)** `from_fn` 的内部实现使用 unsafe 代码（可能涉及 MaybeUninit）来避免中间状态的泄漏风险，但对外暴露完全 safe 的 API。 ✅ 已验证
 
 #### 与 C 的 `malloc` + 手动初始化的对比
 
@@ -2366,7 +2366,7 @@ where
 }
 ```
 
-> **[来源: C11 Standard]** Reading uninitialized automatic variables results in indeterminate values; this is not explicitly UB in all cases, but using such values can lead to UB. ✅ 已验证
+> **[C11 Standard](https://www.iso.org/standard/57853.html)** Reading uninitialized automatic variables results in indeterminate values; this is not explicitly UB in all cases, but using such values can lead to UB. ✅ 已验证
 > **来源: [Rust Reference: Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)** Reading uninitialized memory in Rust is immediate undefined behavior, and Miri can detect it precisely. ✅ 已验证
 > **定理**：`MaybeUninit<T>` 是 C `malloc` + 手动初始化模式的**类型安全升级版**——它将"未初始化内存"从隐式的 `void*` 状态提升为显式的 `MaybeUninit<T>` 类型，使编译器能够验证类型一致性，使 Miri 能够动态验证初始化完整性，使程序员能够通过 `unsafe { assume_init() }` 的显式边界承担证明责任。💡 原创分析
 > **跨层映射**: `L3::MaybeUninit` ↔ [`L1::所有权`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 初始化要求 ·

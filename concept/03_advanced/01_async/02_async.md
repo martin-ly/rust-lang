@@ -691,10 +691,10 @@ graph LR
 | **形式化基础** | 状态机操作语义 + LTL (Pin) | 无统一形式化 | 单子 laws + 延续传递 (CPS) | 无统一形式化 |
 
 > **来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)** Rust `async/await` 基于 `Future` trait 和编译器状态机转换，承诺零成本抽象（Zero-Cost Abstraction）。 ✅
-> **[来源: C++ Reference: Coroutines]** C++20 Coroutines 通过 `co_await`/`co_yield`/`co_return` 和 promise 类型实现，编译器生成状态机，与 Rust 类似但自定义能力更强。 ✅
-> **[来源: Haskell GHC User Guide: Concurrent Haskell]** Haskell 异步通过 `IO` monad 和 `forkIO` 实现，纯函数隔离保证并发安全（Concurrency Safety），但运行时依赖 GC 和 thunk 求值。 ✅
-> **[来源: Go Spec: Goroutines]** Go goroutine 是轻量级线程，由运行时 M:N 调度，内存占用约 2KB 起，阻塞不影响其他 goroutine。 ✅
-> **[来源: Without Boats, "Pin and Suffering"]** Rust `Pin<T>` 的设计是为了安全表达自引用结构，这是 Rust 异步与 C++20 Coroutines 的关键差异之一。 ✅
+> **[C++ Reference: Coroutines](https://en.cppreference.com/w/cpp/language/coroutines)** C++20 Coroutines 通过 `co_await`/`co_yield`/`co_return` 和 promise 类型实现，编译器生成状态机，与 Rust 类似但自定义能力更强。 ✅
+> **[Haskell GHC User Guide: Concurrent Haskell](https://downloads.haskell.org/ghc/latest/docs/users_guide/parallel.html)** Haskell 异步通过 `IO` monad 和 `forkIO` 实现，纯函数隔离保证并发安全（Concurrency Safety），但运行时依赖 GC 和 thunk 求值。 ✅
+> **[Go Spec: Goroutines](https://go.dev/ref/spec#Go_statements)** Go goroutine 是轻量级线程，由运行时 M:N 调度，内存占用约 2KB 起，阻塞不影响其他 goroutine。 ✅
+> **[Without Boats, "Pin and Suffering"](https://without.boats/blog/pin-and-suffering/)** Rust `Pin<T>` 的设计是为了安全表达自引用结构，这是 Rust 异步与 C++20 Coroutines 的关键差异之一。 ✅
 
 ---
 
@@ -1459,7 +1459,7 @@ fn create_waker(task_id: u64, scheduler: Arc<Scheduler>) -> Waker {
 }
 ```
 
-> **关键差异**: `Wake` trait 隐藏了 `RawWakerVTable` 的 unsafe 细节，但底层仍通过 vtable 实现类型擦除。`Waker::from(Arc<T>)` 在内部自动构建符合 `clone`/`wake`/`wake_by_ref`/`drop` 契约的 vtable。[来源: Rust std: std::task::Wake]
+> **关键差异**: `Wake` trait 隐藏了 `RawWakerVTable` 的 unsafe 细节，但底层仍通过 vtable 实现类型擦除。`Waker::from(Arc<T>)` 在内部自动构建符合 `clone`/`wake`/`wake_by_ref`/`drop` 契约的 vtable。[Rust std: std::task::Wake](https://doc.rust-lang.org/std/task/trait.Wake.html)
 
 **与 OS 异步（Async） I/O 的唤醒路径**
 
@@ -1507,7 +1507,7 @@ impl UringReactor {
 }
 ```
 
-> **[来源: tokio-rs/tokio-uring 设计文档]** io_uring 的 `user_data` 字段天然适合存储 Waker 标识，避免了 epoll 的 fd→Waker HashMap 查找开销。但 io_uring 的共享环设计对线程安全提出更高要求——Waker 的 `wake` 需是线程安全的（`Send + Sync`），因为完成事件可能在任意 CPU 核心上产生。
+> **[tokio-rs/tokio-uring 设计文档](https://github.com/tokio-rs/tokio-uring)** io_uring 的 `user_data` 字段天然适合存储 Waker 标识，避免了 epoll 的 fd→Waker HashMap 查找开销。但 io_uring 的共享环设计对线程安全提出更高要求——Waker 的 `wake` 需是线程安全的（`Send + Sync`），因为完成事件可能在任意 CPU 核心上产生。
 > **Bloom 层级**: 分析 —— 理解 Waker 与 OS 的交互边界，是手写 Future 和自定义运行时的必要知识。
 
 ---
@@ -1730,7 +1730,7 @@ where
 | **背压支持** | 拉取天然背压 | 拉取天然背压 + `tokio::sync::mpsc` 通道缓冲 |
 | **典型使用场景** | 通用异步管道、跨运行时兼容 | Tokio 生态（axum、tonic 流处理） |
 
-> **[来源: tokio-stream docs; futures-rs docs]** `tokio_stream::wrappers` 提供了将 Tokio 原语（`TcpListener`, `UnixSignal`, `WatchReceiver`）包装为 `Stream` 的适配器，这是 `futures::stream` 不提供的运行时专属扩展。
+> **[tokio-stream docs](https://docs.rs/tokio-stream/latest/tokio_stream/); [futures-rs docs](https://docs.rs/futures/latest/futures/)** `tokio_stream::wrappers` 提供了将 Tokio 原语（`TcpListener`, `UnixSignal`, `WatchReceiver`）包装为 `Stream` 的适配器，这是 `futures::stream` 不提供的运行时专属扩展。
 
 **`StreamExt` 常用组合子**
 
@@ -1766,7 +1766,7 @@ async fn pipeline() {
 }
 ```
 
-> **[来源: futures-rs: StreamExt API 文档]** `buffer_unordered` 是异步编程的核心组合子——它允许在保持背压的同时最大化并发度。与 `tokio::join!` 不同，`buffer_unordered` 按完成顺序产出结果，而非输入顺序。
+> **[futures-rs: StreamExt API 文档](https://docs.rs/futures/latest/futures/stream/trait.StreamExt.html)** `buffer_unordered` 是异步编程的核心组合子——它允许在保持背压的同时最大化并发度。与 `tokio::join!` 不同，`buffer_unordered` 按完成顺序产出结果，而非输入顺序。
 > **交叉链接**: `Stream` 的异步惰性求值与 [§1.3 形式化定义](#13-形式化定义) 中 Future 的惰性语义一致；`Sink` 的线性状态机与 [../04_formal/03_ownership_formal.md](../../04_formal/01_ownership_logic/03_ownership_formal.md) §5.2 的线性类型资源管理形成对偶。
 
 ---
@@ -1893,7 +1893,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 ```
 
 > **来源**: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [without.boats blog: The cost of dynamic dispatch in Rust]
-> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[来源: without.boats blog: "The cost of dynamic dispatch in Rust"; Rust Performance Book: "Dynamic dispatch"]
+> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats blog: "The cost of dynamic dispatch in Rust"](https://without.boats/blog/the-cost-of-dynamic-dispatch/); [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/dynamic-dispatch.html)
 
 **何时选择哪种：API 边界 vs 内部实现**
 
@@ -2088,7 +2088,7 @@ fn test_async_ready_flag() {
 }
 ```
 
-> **注意**: `loom::future` 的异步支持主要用于测试**同步原语在异步上下文中的使用**（如 `Mutex`、`Atomic` 在 async 块中的交互），而非测试 async/await 本身的调度语义。async 调度语义由执行器（Tokio 等）保证，不在 loom 的验证范围内。[来源: loom docs: loom::future module]
+> **注意**: `loom::future` 的异步支持主要用于测试**同步原语在异步上下文中的使用**（如 `Mutex`、`Atomic` 在 async 块中的交互），而非测试 async/await 本身的调度语义。async 调度语义由执行器（Tokio 等）保证，不在 loom 的验证范围内。[loom docs: loom::future module](https://docs.rs/loom/latest/loom/future/index.html)
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 **实际用例：验证自定义并发原语**
@@ -2534,8 +2534,8 @@ async fn async_fn(f: impl AsyncFn(i32) -> i32) -> i32 { f(42).await }
 **形式化洞察**: `AsyncFn` 不是独立的类型系统（Type System）扩展，而是 `Fn` + `Future` 的组合。但它在**函数签名层面**显式标记了"异步效果"，为未来的 `effect` 关键字提供了设计原型。
 
 > **来源: [RFC 3668](https://github.com/rust-lang/rfcs/pull/3668)** Async closures trait family.
-> **[来源: Rust 1.85 Release Notes]** Async closures stabilized.
-> **[来源: rustify.rs 2026]** "`AsyncFn` 是 Rust 异步编程的类型系统（Type System）拼图的最后一块。"
+> **[Rust 1.85 Release Notes](https://releases.rs/docs/1.85.0/)** Async closures stabilized.
+> **[rustify.rs 2026](https://rustify.rs/)** "`AsyncFn` 是 Rust 异步编程的类型系统（Type System）拼图的最后一块。"
 
 ---
 
@@ -2597,7 +2597,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 **关键限制**: `gen` block 是**同步的**。异步生成器（`Stream`，支持 `.await` + `yield`）仍在 RFC 讨论中。
 
 > **来源**: [RFC 2394 §3: Generator transform](https://rust-lang.github.io/rfcs/2394-async_await.html) · [rust-lang/rust #117078] · [Rust 1.95 Release Notes](https://releases.rs/)
-> **[来源: rust-lang/rust #117078]** Gen blocks tracking issue.
+> **[rust-lang/rust #117078](https://github.com/rust-lang/rust/pull/117078)** Gen blocks tracking issue.
 > **来源: [Rust 1.95 Release Notes](https://releases.rs/)** `gen` blocks stabilized with feature gate.
 
 ---

@@ -31,14 +31,14 @@
 
 ---
 
-## 一、一级来源：Rust 官方与形式化 [来源: 来源分级方法论基于证据金字塔模型 — 官方标准 > 学术论文 > 社区权威 > 实践经验]
+## 一、一级来源：Rust 官方与形式化 [来源分级方法论基于证据金字塔模型 — 官方标准 > 学术论文 > 社区权威 > 实践经验](https://en.wikipedia.org/wiki/Evidence_hierarchy)
 
 | 概念 | 官方来源 | 学术来源 | 社区权威 | C++ 对标 | Haskell 对标 | Go 对标 | 备注 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Ownership** | TRPL Ch4 · Reference § Ownership Types | Ralf Jung *"RustBelt: Securing the Foundations of the Rust Programming Language"* (POPL 2018) · Clarke *"Ownership Types for Flexible Alias Protection"* (OOPSLA 1998) | Niko Matsakis blog *"The problem of safe and convenient parallelism"* | `unique_ptr` (cppreference) · RAII | Linear Types (Wadler, ICFP 1990) · Affine Logic | 无（GC 管理） | [来源: 核心形式化论证见 concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md]
-| **Borrowing** | TRPL Ch4.2 · Reference § References and Borrowing | Ralf Jung *"Stacked Borrows: An Aliasing Model for Rust"* (POPL 2021) | Niko Matsakis *"Two interpretations of borrowing"* | 引用 `&T` / `const T&` 语义 · 悬垂引用规则 | Borrowing in linear/affine type systems (Wadler) | 指针借用（无编译期检查） | [来源: 核心形式化论证见 concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md]
+| **Ownership** | TRPL Ch4 · Reference § Ownership Types | Ralf Jung *"RustBelt: Securing the Foundations of the Rust Programming Language"* (POPL 2018) · Clarke *"Ownership Types for Flexible Alias Protection"* (OOPSLA 1998) | Niko Matsakis blog *"The problem of safe and convenient parallelism"* | `unique_ptr` (cppreference) · RAII | Linear Types (Wadler, ICFP 1990) · Affine Logic | 无（GC 管理） | [核心形式化论证见 concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](https://doc.rust-lang.org/reference/introduction.html)
+| **Borrowing** | TRPL Ch4.2 · Reference § References and Borrowing | Ralf Jung *"Stacked Borrows: An Aliasing Model for Rust"* (POPL 2021) | Niko Matsakis *"Two interpretations of borrowing"* | 引用 `&T` / `const T&` 语义 · 悬垂引用规则 | Borrowing in linear/affine type systems (Wadler) | 指针借用（无编译期检查） | [核心形式化论证见 concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](https://doc.rust-lang.org/reference/introduction.html)
 | **Lifetimes** | TRPL Ch10 · Reference § Lifetime Elision · [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) (NLL) | Villani, Hostert, Dreyer & Jung *"Tree Borrows: A New Aliasing Model for Rust"* ([PLDI 2025](https://pldi26.sigplan.org/), **Distinguished Paper Award**) | Jon Gjengset *"Crust of Rust: Lifetime Annotations"* | 无直接对应（RAII + 智能指针处理） | 显式 region / let-binding scope | 无（GC 决定） |
-| **Type System** | Reference § Types · [RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html) (impl trait) | Pierce *"Types and Programming Languages"* (TAPL, MIT Press) · Hindley-Milner 类型推断 | Without Boats *"Implied bounds and perfect derive"* | Templates · Concepts (C++20) | HM 类型推断 · Type Classes (Wadler & Blott, 1989) | 结构化类型 · 接口（隐式实现） | [来源: TAPL 是类型系统的标准教材; HM 类型推断是 Rust 类型系统的基础]
+| **Type System** | Reference § Types · [RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html) (impl trait) | Pierce *"Types and Programming Languages"* (TAPL, MIT Press) · Hindley-Milner 类型推断 | Without Boats *"Implied bounds and perfect derive"* | Templates · Concepts (C++20) | HM 类型推断 · Type Classes (Wadler & Blott, 1989) | 结构化类型 · 接口（隐式实现） | [TAPL 是类型系统的标准教材; HM 类型推断是 Rust 类型系统的基础](https://www.cis.upenn.edu/~bcpierce/tapl/)
 | **Traits** | Reference § Traits · RFC 255 | Morrisett *"Typed Closure Conversion"* · Trait objects vtable 形式化 | Niko Matsakis *"After NLL: Interprocedural lifetimes"* | 抽象类 · Concepts · CRTP | Type Classes · Type Families | 接口 (interface) · 嵌入式接口 |
 | **Generics** | Reference § Generic Parameters · [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html) (const generics) | Jones *"A system of constructor classes"* (JFP 1993) · Monomorphization 成本分析 | Jon Gjengset *"Crust of Rust: GATs"* | Templates (全特化/偏特化) | Parametric Polymorphism · Higher-Ranked Types | 泛型 (type parameters) |
 | **Send/Sync** | Reference § Send and Sync · Nomicon § Send and Sync | RustBelt § Protocol Verification · Data Race Freedom Proof | Ralf Jung *"The Case for a Memory Safe Systems Language"* | `thread_safety` 概念（无编译器保证） | `NFData` / `Par` monad 约束 | Goroutine + Channel（CSP） |
@@ -48,7 +48,7 @@
 
 ---
 
-## 二、二级来源：跨语言权威入口 [来源: 跨语言对比方法论参照 concept/05_comparative/ 系列文件的对比框架]
+## 二、二级来源：跨语言权威入口 [跨语言对比方法论参照 concept/05_comparative/ 系列文件的对比框架](https://doc.rust-lang.org/reference/introduction.html)
 
 ### C++
 
@@ -70,7 +70,7 @@
 
 ---
 
-## 三、网络权威锚点（永久链接） [来源: 永久链接选择标准: 域名稳定性 > 版本归档 > 社区镜像; 参照 PURL (Persistent Uniform Resource Locator) 标准和 DOI 数字对象标识符的设计原则]
+## 三、网络权威锚点（永久链接） [永久链接选择标准: 域名稳定性 > 版本归档 > 社区镜像; 参照 PURL (Persistent Uniform Resource Locator) 标准和 DOI 数字对象标识符的设计原则](https://en.wikipedia.org/wiki/Persistent_uniform_resource_locator)
 
 ### Rust 官方
 
@@ -106,7 +106,7 @@ dtolnay:               https://dtolnay.github.io/
 
 ---
 
-## 四、执行批次 [来源: Authority Source Sprint 执行记录; 对齐方法论参照 AGENTS.md 质量铁三角 — Bloom 层级 100%、来源标注率 ≥15%、跨文件链接 ≥3/文件]
+## 四、执行批次 [Authority Source Sprint 执行记录; 对齐方法论参照 AGENTS.md 质量铁三角 — Bloom 层级 100%、来源标注率 ≥15%、跨文件链接 ≥3/文件](../00_framework/methodology.md)
 
 | 批次 | 目标文件 | 核心补全内容 |
 |:---|:---|:---|

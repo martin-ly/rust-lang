@@ -92,7 +92,7 @@ protocol = "git"
 
 > **状态**: Rust 1.96 默认使用 sparse 协议。
 >
-> [来源: Cargo Book — Registry Protocols](https://doc.rust-lang.org/cargo/reference/registries.html#registry-protocols)
+> [Cargo Book — Registry Protocols](https://doc.rust-lang.org/cargo/reference/registry-index.html)(<https://doc.rust-lang.org/cargo/reference/registries.html#registry-protocols>)
 
 ---
 
@@ -130,7 +130,7 @@ rust-version = "1.96.1"
 
 > **注意**: crates.io 要求 `license` 或 `license-file` 至少一个。
 >
-> [来源: Cargo Book — Publishing on crates.io](https://doc.rust-lang.org/cargo/reference/publishing.html)
+> [Cargo Book — Publishing on crates.io](https://doc.rust-lang.org/cargo/reference/publishing.html)(<https://doc.rust-lang.org/cargo/reference/publishing.html>)
 
 ---
 
@@ -177,7 +177,7 @@ Cargo 支持多种 token 存储方式：
 
 > **安全建议**: 在 CI 中使用环境变量或凭据提供者，避免把 token 提交到仓库。
 >
-> [来源: Cargo Book — Authentication](https://doc.rust-lang.org/cargo/reference/config.html#credentials)
+> [Cargo Book — Authentication](https://doc.rust-lang.org/cargo/reference/authentication.html)(<https://doc.rust-lang.org/cargo/reference/config.html#credentials>)
 
 ---
 
@@ -213,7 +213,7 @@ registry = "sparse+https://mirrors.my-company.com/crates.io-index/"
 
 > **注意**: Source replacement 只影响索引和下载位置，不改变 crate 名称或版本要求。
 >
-> [Cargo Book — Source Replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html)(https://doc.rust-lang.org/cargo/reference/source-replacement.html)
+> [Cargo Book — Source Replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html)(<https://doc.rust-lang.org/cargo/reference/source-replacement.html>)
 
 ---
 

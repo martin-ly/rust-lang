@@ -556,7 +556,7 @@ impl SelfReferential {
 ```
 
 > **来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)** `PhantomPinned` 是一个零大小类型，仅用于将包含它的类型标记为 `!Unpin`。这不是运行时标记，而是类型系统（Type System）标记——编译器在 trait 自动推导时将 `PhantomPinned` 视为"不可安全移动"的信号。✅
-> **[来源: PLDI 2024 · RefinedRust]** Pin 的形式化语义对应于分离逻辑中的 "location stability"：地址一旦被分配，就在该对象的整个生命周期（Lifetimes）内保持不变。这与 Rust 的 `&mut T` 可移动形成对比——`Pin` 通过类型系统（Type System）剥夺了 `&mut T` 的移动能力。
+> **[PLDI 2024 · RefinedRust](https://arxiv.org/abs/2404.03613)** Pin 的形式化语义对应于分离逻辑中的 "location stability"：地址一旦被分配，就在该对象的整个生命周期（Lifetimes）内保持不变。这与 Rust 的 `&mut T` 可移动形成对比——`Pin` 通过类型系统（Type System）剥夺了 `&mut T` 的移动能力。
 
 ---
 

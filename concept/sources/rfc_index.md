@@ -113,7 +113,7 @@
 ### 禁止格式
 
 ```markdown
-❌ [来源: RFCs]  # 无编号
+❌ [RFCs](https://rust-lang.github.io/rfcs/index.html)  # 无编号
 ❌ 来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)  # 无标题
 ❌ RFC 2394 (无状态标注)
 ```

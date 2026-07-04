@@ -680,8 +680,8 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 | 核心库谱系 | [`./03_core_crates.md`](../02_core_crates/03_core_crates.md) | `solana-program`、`ink` 等 crate 定位 |
 | 应用领域 | [`./04_application_domains.md`](../06_data_and_distributed/04_application_domains.md) | 区块链作为 L6 应用域 |
 
-> **[来源: Solana Docs; Polkadot Substrate Docs; Near Protocol Docs; Kani Verification Blog; Rust in Blockchain Report]** 区块链分析基于官方协议文档和形式化验证研究。✅
-> **[来源: Smart Contract Security Research; Reentrancy Attack Analysis; The DAO Post-Mortem]** 合约安全分析基于已公开的安全事件和研究文献。✅
+> **[Solana Docs; Polkadot Substrate Docs; Near Protocol Docs; Kani Verification Blog; Rust in Blockchain Report](https://docs.solana.com/)** 区块链分析基于官方协议文档和形式化验证研究。✅
+> **[Smart Contract Security Research](https://consensys.github.io/smart-contract-best-practices/); [Reentrancy Attack Analysis](https://consensys.github.io/smart-contract-best-practices/attacks/reentrancy/); [The DAO Post-Mortem](https://www.coindesk.com/learn/the-dao-attack-that-changed-ethereum/)** 合约安全分析基于已公开的安全事件和研究文献。✅
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 形式化映射基于 RustBelt 和分离逻辑的理论框架。✅
 ---
 

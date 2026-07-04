@@ -1285,7 +1285,7 @@ Rust 1.95+ 重要更新：
 > **来源: [TRPL Ch. 3 - Common Programming Concepts](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)**
 > **来源: [ACM - Advanced Type System Features](https://dl.acm.org/)**
 > **来源: [IEEE - Type Safety Verification](https://standards.ieee.org/)**
-> **[来源: Pierce 2002 - Types and Programming Languages]**
+> **[Pierce 2002 - Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

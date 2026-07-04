@@ -49,7 +49,7 @@
     - [4.2 Watermark 的两种失败模式](#42-watermark-的两种失败模式)
   - [五、Trigger：结果物化的时机控制](#五trigger结果物化的时机控制)
     - [5.1 Trigger 类型](#51-trigger-类型)
-    - [5.2 累积模式（Accumulation Mode）\[来源: Beam Programming Guide — Accumulation\]](#52-累积模式accumulation-mode来源-beam-programming-guide--accumulation)
+    - [5.2 累积模式（Accumulation Mode） (Beam Programming Guide — Accumulation)](#52-累积模式accumulation-mode来源-beam-programming-guide--accumulation)
   - [六、容错语义：Exactly-Once 的形式化](#六容错语义exactly-once-的形式化)
     - [6.1 三种处理保证](#61-三种处理保证)
     - [6.2 Chandy-Lamport 分布式快照](#62-chandy-lamport-分布式快照)
@@ -115,7 +115,7 @@
 > [来源: [Apache Flink Documentation](https://nightlies.apache.org/flink/flink-docs-stable/)]
 > **关键洞察**: Google Dataflow Model 的核心贡献是将流处理问题解构为四个正交维度：
 > **What**（计算什么）、**Where**（在哪个事件时间窗口）、**When**（在处理时间的哪个时刻物化结果）、**How**（早期结果如何与后期修正关联）。
-> 这种解构使批处理成为流处理的特例（全局窗口 + watermark 到达 ∞ 时触发）。[来源: Akidau et al., VLDB 2015] ✅
+> 这种解构使批处理成为流处理的特例（全局窗口 + watermark 到达 ∞ 时触发）。[Akidau et al., VLDB 2015](https://doi.org/10.14778/2824032.2824076) ✅
 
 ---
 
@@ -198,7 +198,7 @@ Session  [0,3)     [6,9)          [14,18)
 ```
 
 > **关键洞察**: 若使用处理时间窗口，事件B（t=12:02）会被分配到错误的窗口；若使用事件时间窗口，需要机制处理"窗口已触发但迟到数据到达"的情况。
-> 这正是 Watermark 的语义动机。[来源: Akidau et al.] ✅
+> 这正是 Watermark 的语义动机。[Akidau et al.](https://doi.org/10.14778/2824032.2824076) ✅
 
 ---
 
@@ -235,7 +235,7 @@ Akidau 等人指出 Watermark 存在两种系统性失败：
 
 > **关键洞察**: Watermark 不是"正确性保证"，而是"完整性启发式（completeness heuristic）"。
 > 它告诉系统"到这个事件时间为止，我们可能已经收到了大部分数据"，但从不保证 100%。
-> 这种设计承认了分布式系统中不可消除的不确定性。[来源: Akidau et al.] ✅
+> 这种设计承认了分布式系统中不可消除的不确定性。[Akidau et al.](https://doi.org/10.14778/2824032.2824076) ✅
 
 ---
 
@@ -276,7 +276,7 @@ Accumulating+Retracting: [10] ── [-10,25] ── [-25,30] (下游需 retract
 > **关键洞察**: Retraction 是流 SQL（如 Materialize）实现正确增量视图维护的核心机制。
 > 没有 retraction，流系统无法表达"之前输出的结果现在发现是错误的，需要撤回"。
 > 这正是批处理系统不需要而流处理系统必须面对的语义复杂性。
-> [来源: McSherry et al. — Materialize Blog] ✅
+> [McSherry et al. — Materialize Blog](https://materialize.com/blog/) ✅
 
 ---
 
@@ -291,7 +291,7 @@ Accumulating+Retracting: [10] ── [-10,25] ── [-25,30] (下游需 retract
 | **Exactly-Once** | 每条记录恰好被处理一次 | 既不丢失，也不重复 | 分布式快照 + 幂等/事务 sink |
 
 > **形式化澄清**: "Exactly-Once" 不是指物理上每条记录只被处理一次（这在分布式系统中不可能），而是指**可观察效果（observable effect）**恰好一次。
-> 即：失败恢复后的重放产生与无故障执行相同的状态和输出。[来源: Flink Documentation] ✅
+> 即：失败恢复后的重放产生与无故障执行相同的状态和输出。[Flink Documentation](https://nightlies.apache.org/flink/flink-docs-stable/) ✅
 
 ### 6.2 Chandy-Lamport 分布式快照
 
@@ -478,7 +478,7 @@ GROUP BY region;
 > **关键洞察**:
 > Materialize 的核心创新是将"物化视图维护"从批处理（定时刷新）转化为流处理（增量更新）。
 > 其正确性保证来自 Differential Dataflow 的严格串行化（strict serializability）——每个更新都对应一个逻辑时间戳，查询结果始终是某时间戳下的全局一致快照。
-> 这与 C++ 或 Java 流处理框架的"最终一致性（Coherence）"形成鲜明对比。[来源: Materialize Documentation] ✅
+> 这与 C++ 或 Java 流处理框架的"最终一致性（Coherence）"形成鲜明对比。[Materialize Documentation](https://materialize.com/docs/) ✅
 
 ---
 

@@ -75,7 +75,7 @@ rustc 测试体系
 └── 性能测试（rustc-perf）
 ```
 
-> [来源: Rustc Dev Guide — Testing the compiler](https://rustc-dev-guide.rust-lang.org/tests/intro.html)
+> [Rustc Dev Guide — Testing the compiler](https://rustc-dev-guide.rust-lang.org/tests/intro.html)(<https://rustc-dev-guide.rust-lang.org/tests/intro.html>)
 
 ---
 
@@ -102,7 +102,7 @@ rustc 测试体系
 
 > **关键洞察**: UI 测试是 rustc 测试中最具特色的部分，它把“错误信息应该长什么样”也纳入了回归保护。
 >
-> [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html)(https://rustc-dev-guide.rust-lang.org/tests/ui.html)
+> [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html)(<https://rustc-dev-guide.rust-lang.org/tests/ui.html>)
 
 ---
 
@@ -198,7 +198,7 @@ Crater 是 Rust 项目的生态回归测试基础设施：
 crater run start=master end=pr-branch
 ```
 
-> [来源: Rustc Dev Guide — Ecosystem testing](https://rustc-dev-guide.rust-lang.org/tests/intro.html#ecosystem-testing)
+> [Rustc Dev Guide — Ecosystem testing](https://rustc-dev-guide.rust-lang.org/tests/intro.html)(<https://rustc-dev-guide.rust-lang.org/tests/intro.html#ecosystem-testing>)
 
 ---
 
@@ -210,7 +210,7 @@ crater run start=master end=pr-branch
 - 检测回归并提供可视化对比；
 - 是 Rust 编译器性能优化的重要依据。
 
-> [来源: Rustc Dev Guide — Performance testing](https://rustc-dev-guide.rust-lang.org/tests/intro.html#performance-testing)
+> [Rustc Dev Guide — Performance testing](https://rustc-dev-guide.rust-lang.org/tests/profiling.html)(<https://rustc-dev-guide.rust-lang.org/tests/intro.html#performance-testing>)
 
 ---
 

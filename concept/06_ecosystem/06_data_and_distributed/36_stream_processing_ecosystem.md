@@ -85,7 +85,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: TD 的 API 设计刻意保持底层——它提供的是"数据流图的构建块"，而非高阶流 DSL。这与 Flink 的 Table API 或 Spark 的 DataFrame API 形成鲜明对比。TD 的目标用户是系统构建者（如 Materialize），而非业务开发者。[来源: Timely Dataflow README] ✅
+> **关键洞察**: TD 的 API 设计刻意保持底层——它提供的是"数据流图的构建块"，而非高阶流 DSL。这与 Flink 的 Table API 或 Spark 的 DataFrame API 形成鲜明对比。TD 的目标用户是系统构建者（如 Materialize），而非业务开发者。[Timely Dataflow README](https://github.com/TimelyDataflow/timely-dataflow) ✅
 
 ---
 
@@ -131,13 +131,13 @@ fn main() {
 | `reduce` | 按键分组聚合 | `FnMut(&K, &[(V, isize)], &mut Vec<(R, isize)])` |
 | `iterate` | 递归到不动点 | `FnMut(&Collection) -> Collection` |
 
-> **关键洞察**: DD 的 `iterate` 运算符是其在流处理系统中的独特优势——它支持递归查询（如图遍历、Datalog 规则），这是 Flink SQL 或 Kafka Streams 无法表达的。Materialize 利用这一特性实现了 `WITH MUTUALLY RECURSIVE` SQL 扩展。[来源: Materialize Documentation] ✅
+> **关键洞察**: DD 的 `iterate` 运算符是其在流处理系统中的独特优势——它支持递归查询（如图遍历、Datalog 规则），这是 Flink SQL 或 Kafka Streams 无法表达的。Materialize 利用这一特性实现了 `WITH MUTUALLY RECURSIVE` SQL 扩展。[Materialize Documentation](https://materialize.com/docs/) ✅
 
 ---
 
 ## 四、tokio-stream 与 async-stream：异步流抽象
 
-> **[来源: Tokio Documentation](https://docs.rs/tokio-stream/)** · **[来源: async-stream crate](https://docs.rs/async-stream/)** ✅
+> **[Tokio Documentation](https://docs.rs/tokio/latest/tokio/)(<https://docs.rs/tokio-stream/>)** · **[async-stream crate](https://docs.rs/async-stream/latest/async_stream/)(<https://docs.rs/async-stream/>)** ✅
 
 ### 4.1 Stream trait：Rust 的拉取式流
 
@@ -174,7 +174,7 @@ tx.send(42).await.unwrap();
 
 ## 五、fluvio：Rust 原生分布式流平台
 
-> **[来源: Fluvio Documentation](https://www.fluvio.io/)** ✅
+> **[Fluvio Documentation](https://www.fluvio.io/)(<https://www.fluvio.io/>)** ✅
 
 Fluvio 是一个用 Rust 从头构建的分布式流处理平台，定位为 Kafka 的轻量级替代。
 
@@ -188,7 +188,7 @@ Fluvio 是一个用 Rust 从头构建的分布式流处理平台，定位为 Kaf
 | **生态成熟度** | 新兴 | 工业标准 |
 | **云原生** | 专为 K8s 设计 | 需额外工具（Strimzi 等） |
 
-> **关键洞察**: Fluvio 的核心卖点不是功能超越 Kafka，而是"Rust 原生"带来的运维简化——无 JVM 调优、无 GC 暂停、低内存占用、快速启动。对于边缘计算和 IoT 场景，这些特性比 Kafka 的丰富生态更有价值。[来源: Fluvio Blog] ✅
+> **关键洞察**: Fluvio 的核心卖点不是功能超越 Kafka，而是"Rust 原生"带来的运维简化——无 JVM 调优、无 GC 暂停、低内存占用、快速启动。对于边缘计算和 IoT 场景，这些特性比 Kafka 的丰富生态更有价值。[Fluvio Blog](https://www.fluvio.io/blog/) ✅
 
 ---
 
@@ -232,7 +232,7 @@ Materialize Architecture
 
 ## 七、RisingWave：云原生流数据库
 
-> **[来源: RisingWave Documentation](https://docs.risingwave.com/)** · **[来源: RisingWave vs Materialize Benchmark 2026](https://risingwave.com/blog/risingwave-vs-materialize-benchmark-2026/)** ✅
+> **[RisingWave Documentation](https://docs.risingwave.com/)(<https://docs.risingwave.com/>)** · **[RisingWave vs Materialize Benchmark 2026](https://www.risingwave.com/blog/)(<https://risingwave.com/blog/risingwave-vs-materialize-benchmark-2026/>)** ✅
 
 RisingWave 是另一个 Rust 实现的云原生流数据库，与 Materialize 形成竞争。
 

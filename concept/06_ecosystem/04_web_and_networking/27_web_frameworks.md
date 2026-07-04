@@ -97,18 +97,18 @@ Rust Web 框架的核心职责可分解为四层：
 Web 框架职能分层:
   ┌─────────────────────────────────────────┐
   │  L4: 应用层 — 路由、Handler、状态管理      │
-  │     [来源: Axum docs] Router::route      │
+  │     [Axum docs](https://docs.rs/axum/latest/axum/) Router::route      │
   ├─────────────────────────────────────────┤
   │  L3: 中间件层 — 认证、日志、压缩、限流       │
-  │     [来源: Actix docs] Transform trait   │
+  │     [Actix docs](https://actix.rs/) Transform trait   │
   ├─────────────────────────────────────────┤
   │  L2: 协议层 — HTTP/1.1、HTTP/2、WebSocket  │
-  │     [来源: hyper docs] 底层 HTTP 实现    │
+  │     [hyper docs](https://docs.rs/hyper/latest/hyper/) 底层 HTTP 实现    │
   ├─────────────────────────────────────────┤
   │  L1: 运行时层 — async/await 调度、IO 事件  │
-  │     [来源: Tokio docs] Runtime 模型      │
+  │     [Tokio docs](https://docs.rs/Tokio/latest/Tokio/) Runtime 模型      │
   └─────────────────────────────────────────┘
-> [来源: [Axum Docs]]
+> [Axum Docs](https://docs.rs/Axum/latest/Axum/)
 ```
 
 > **认知功能**: Rust Web 框架的竞争力来自 L1+L2 的零成本抽象（Zero-Cost Abstraction）——无 GC、无运行时解释器，编译后即为高效原生代码。[💡 原创分析](../../00_meta/00_framework/methodology.md)
@@ -124,16 +124,16 @@ Rust Web 框架演进:
         [来源: Iron GitHub archive]
 
   2016: Rocket v0.x — 声明式路由先驱，需 nightly
-        [来源: Rocket v0.4 docs]
+        [Rocket v0.4 docs](https://docs.rs/rocket/latest/rocket/)
 
   2017: Actix-web v0.x — Actor 模型高性能框架崛起
-        [来源: Actix-web GitHub history]
+        [Actix-web GitHub history](https://actix.rs/)
 
   2018: Warp (基于 hyper + filter 组合) — 函数式路由探索
-        [来源: Warp docs]
+        [Warp docs](https://docs.rs/Warp/latest/Warp/)
 
   2021: Axum v0.1 — Tokio 官方出品，Tower 生态原生集成
-        [来源: Axum GitHub release history]
+        [Axum GitHub release history](https://docs.rs/axum/latest/axum/)
 
   2021: Rocket v0.5 — 稳定版 Rust 支持，async 化
         [来源: Rocket v0.5 release notes]
@@ -210,11 +210,11 @@ graph TD
 
 ### 2.1 Axum：Tokio 生态的原生扩展
 
-> **[来源: Axum docs]** Axum is a web application framework that focuses on ergonomics and modularity. It is built on top of Tokio, Tower, and Hyper.
+> **[Axum docs](https://docs.rs/axum/latest/axum/)** Axum is a web application framework that focuses on ergonomics and modularity. It is built on top of Tokio, Tower, and Hyper.
 
 ```text
 Axum 架构特征:
-  运行时绑定: Tokio 独占 [来源: Tokio docs]
+  运行时绑定: Tokio 独占 [Tokio docs](https://docs.rs/Tokio/latest/Tokio/)
   路由模型: 组合式（Router::merge、nest、route）
   提取器: 类型安全（impl FromRequestParts / FromRequest）
   状态共享: with_state（任意类型，通常 Arc<T>）
@@ -296,7 +296,7 @@ fn main() {
 }
 ```
 
-> **Axum 洞察**: **Axum 是 Tokio 生态的"原生 Web 层"**——它不重新发明轮子，而是将 Tower 的 Service 抽象和 Hyper 的 HTTP 能力封装为符合人体工程学的 API。[来源: Axum docs]
+> **Axum 洞察**: **Axum 是 Tokio 生态的"原生 Web 层"**——它不重新发明轮子，而是将 Tower 的 Service 抽象和 Hyper 的 HTTP 能力封装为符合人体工程学的 API。[Axum docs](https://docs.rs/axum/latest/axum/)
 
 ### 2.2 Actix-web：Actor 模型的工业级实现
 
@@ -429,25 +429,25 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
   ├── 独占 Tokio（设计决策，无抽象层）
   ├── 直接使用 tokio::spawn、tokio::sync
   └── 与 Tower Service 无缝集成
-  [来源: Axum docs — "Built on Tokio, Tower, and Hyper"]
+  [Axum docs — "Built on Tokio, Tower, and Hyper"](https://docs.rs/axum/latest/axum/)
 
   Actix-web:
   ├── 内部封装 Tokio（actix-rt 提供运行时入口）
   ├── 对外暴露 actix_web::rt::spawn（实际调用 tokio::spawn）
   └── 运行时切换不友好（深度绑定 actix-rt）
-  [来源: Actix docs — Runtime]
+  [Actix docs — Runtime](https://actix.rs/actors/)
 
   Rocket:
   ├── Tokio 独占（0.5+ 后从自定义运行时迁移）
   ├── 封装在 rocket::tokio 中
   └── Fairings 生命周期与 Tokio 运行时耦合
-  [来源: Rocket docs — Async I/O]
+  [Rocket docs — Async I/O](https://docs.rs/rocket/latest/rocket/)
 
   Poem:
   ├── Tokio 独占
   ├── 直接使用 tokio 原语
   └── 支持 poem-lambda（AWS Lambda 适配层）
-  [来源: Poem docs — Runtime]
+  [Poem docs — Runtime](https://docs.rs/poem/latest/poem/)
 ```
 
 > **关键洞察**: **所有主流 Rust Web 框架均绑定 Tokio**——这不是偶然，而是生态收敛的结果。Tokio 的 M:N 调度、工作窃取线程池和丰富的生态（tonic、hyper、axum）使其成为事实标准。来源: [Tokio docs](https://tokio.rs/) [💡 原创分析](../../00_meta/00_framework/methodology.md)
@@ -471,7 +471,7 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
 
 ### 4.1 中间件模型分类
 
-> **[来源: Tower docs]** Tower is a library of modular and reusable components for building robust networking clients and servers. The core abstraction is the `Service` trait.
+> **[Tower docs](https://docs.rs/tower/latest/tower/)** Tower is a library of modular and reusable components for building robust networking clients and servers. The core abstraction is the `Service` trait.
 
 ```rust
 fn process(req: &str) -> String {
@@ -500,7 +500,7 @@ fn main() {
   │  Layer::layer(inner) -> outer Service        │
   └─────────────────────────────────────────────┘
   特征: 函数式组合、类型安全、生态共享
-  [来源: Tower docs]
+  [Tower docs](https://docs.rs/tower/latest/tower/)
 
   Actix Transform 模型:
   ┌─────────────────────────────────────────────┐
@@ -508,7 +508,7 @@ fn main() {
   │  Service::call(req, ctx) -> Future<Response> │
   └─────────────────────────────────────────────┘
   特征: 与 Actor 系统深度集成、自研生态
-  [来源: Actix docs: Middleware]
+  [Actix docs: Middleware](https://actix.rs/actors/)
 
   Rocket Fairings 模型:
   ┌─────────────────────────────────────────────┐
@@ -517,7 +517,7 @@ fn main() {
   │  on_response(&self, req, res)               │
   └─────────────────────────────────────────────┘
   特征: 生命周期钩子、非环绕式
-  [来源: Rocket docs: Fairings]
+  [Rocket docs: Fairings](https://docs.rs/rocket/latest/rocket/)
 ```
 
 ### 4.2 中间件对比矩阵
@@ -542,7 +542,7 @@ fn main() {
 
 ### 5.1 TechEmpower 基准解读
 
-> **[来源: TechEmpower Benchmarks]** The TechEmpower Web Framework Benchmarks is a performance comparison of many web application frameworks executing fundamental tasks such as JSON serialization, database access, and server-side template composition.
+> **[TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)** The TechEmpower Web Framework Benchmarks is a performance comparison of many web application frameworks executing fundamental tasks such as JSON serialization, database access, and server-side template composition.
 
 ```text
 TechEmpower Round 22+ 解读（JSON 序列化 / 单次查询 / 多次查询）:
@@ -575,7 +575,7 @@ TechEmpower Round 22+ 解读（JSON 序列化 / 单次查询 / 多次查询）:
   [来源: TechEmpower Round 22+ 结果近似]
 ```
 
-> **性能洞察**: **Rust Web 框架的整体性能远超 GC 语言**——即使是最"慢"的 Rocket，也数倍于 Go 和 Node.js。在 Rust 内部选择时，性能差异通常不是首要决策因素。[来源: TechEmpower] [💡 原创分析](../../00_meta/00_framework/methodology.md)
+> **性能洞察**: **Rust Web 框架的整体性能远超 GC 语言**——即使是最"慢"的 Rocket，也数倍于 Go 和 Node.js。在 Rust 内部选择时，性能差异通常不是首要决策因素。[TechEmpower](https://www.techempower.com/benchmarks/) [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 5.2 资源占用对比
 
@@ -629,14 +629,14 @@ graph TD
 
 | **场景** | **推荐框架** | **理由** |
 |:---|:---|:---|
-| 微服务 + gRPC 混合 | **Axum** | Tower 生态与 Tonic 共享中间件 [来源: Tonic docs] |
+| 微服务 + gRPC 混合 | **Axum** | Tower 生态与 Tonic 共享中间件 [Tonic docs](https://docs.rs/tonic/latest/tonic/) |
 | 高并发 API 网关 | **Actix-web / Axum** | Actor 模型或纯 Tokio 均顶级性能 来源: [Actix docs](https://actix.rs/) |
 | 快速原型/MVP | **Rocket** | 声明式 API 开发效率最高 [Rocket docs](https://docs.rs/rocket/latest/rocket/) |
-| OpenAPI/文档驱动 | **Poem** | poem-openapi 类型安全生成 [来源: Poem OpenAPI docs] |
-| 企业级长期维护 | **Actix-web** | 生态最成熟，招聘/交接最友好 [来源: crates.io 下载量] |
-| 服务端渲染 (SSR) | **Axum / Actix-web** | 与 Askama/Leptos 集成最佳 [来源: Leptos docs] |
-| 区块链/Web3 后端 | **Axum / Actix-web** | 与 ethers-rs、solana-client 生态兼容 [来源: ethers-rs docs] |
-| AWS Lambda/Serverless | **Poem / Axum** | poem-lambda / lambda_http 适配成熟 [来源: AWS Lambda Rust runtime] |
+| OpenAPI/文档驱动 | **Poem** | poem-openapi 类型安全生成 [Poem OpenAPI docs](https://docs.rs/poem-openapi/latest/poem_openapi/) |
+| 企业级长期维护 | **Actix-web** | 生态最成熟，招聘/交接最友好 [crates.io 下载量](https://crates.io/) |
+| 服务端渲染 (SSR) | **Axum / Actix-web** | 与 Askama/Leptos 集成最佳 [Leptos docs](https://docs.rs/leptos/latest/leptos/) |
+| 区块链/Web3 后端 | **Axum / Actix-web** | 与 ethers-rs、solana-client 生态兼容 [ethers-rs docs](https://docs.rs/ethers/latest/ethers/) |
+| AWS Lambda/Serverless | **Poem / Axum** | poem-lambda / lambda_http 适配成熟 [AWS Lambda Rust runtime](https://github.com/awslabs/aws-lambda-rust-runtime) |
 
 ---
 
@@ -711,7 +711,7 @@ graph TD
 
   ✅ 统一使用 Tokio 原语
      use tokio::fs::read;
-  [来源: Tokio docs: Choosing a runtime]
+  [Tokio docs: Choosing a runtime](https://docs.rs/tokio/latest/tokio/)
 
 陷阱 2: 状态共享错误
   ❌ Handler 中使用全局可变状态
@@ -719,7 +719,7 @@ graph TD
 
   ✅ 使用 Arc<State> + with_state
      let app = Router::new().with_state(Arc::new(state));
-  [来源: Axum docs: State]
+  [Axum docs: State](https://docs.rs/axum/latest/axum/)
 
 陷阱 3: 阻塞操作在 async 中
   ❌ 在 async handler 中执行 CPU 密集型计算
@@ -735,7 +735,7 @@ graph TD
 
   ✅ 设计取消安全的 Future
      // 原子操作、幂等设计
-  [来源: Tokio docs: Cancellation safety]
+  [Tokio docs: Cancellation safety](https://docs.rs/tokio/latest/tokio/)
 
 陷阱 5: 错误处理不一致
   ❌ 各 Handler 使用不同的错误类型
@@ -743,7 +743,7 @@ graph TD
 
   ✅ 实现统一的 IntoResponse 错误类型
      // AppError + impl IntoResponse
-  [来源: Axum docs: Error handling]
+  [Axum docs: Error handling](https://docs.rs/axum/latest/axum/)
 ```
 
 ---

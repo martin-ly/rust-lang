@@ -308,6 +308,6 @@ A: 这是已知问题。尝试：
 > **[IEEE - Software Quality Standards](https://ieeexplore.ieee.org/)**
 > **[来源: Rust Book - Testing]**
 > **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
-> **[来源: Martin Fowler - Test Coverage]**
+> **[Martin Fowler - Test Coverage](../../concept/00_meta/02_sources/international_authority_index.md)**
 
 ---

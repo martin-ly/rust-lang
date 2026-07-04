@@ -10,9 +10,9 @@
 > **Bloom 层级**: 评价 → 创造
 > **功能**: 预测演进方向，反向驱动 L1-L6 的更新
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** ·
-> **[来源: Rust Blog - blog.rust-lang.org]** ·
+> **[Rust Blog - blog.rust-lang.org](https://blog.rust-lang.org/)** ·
 > **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)** ·
-> **[来源: Formal Methods Industry Reports 2026]**
+> **[Formal Methods Industry Reports 2026](https://arxiv.org/)**
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 > **前置概念**: N/A

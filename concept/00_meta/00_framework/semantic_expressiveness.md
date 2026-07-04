@@ -192,7 +192,7 @@ graph LR
 ```
 
 > **认知功能**: 此图以**双域映射**呈现 Rust 七维表达力的空间结构——左域定位各语义维度，右域统一标定表达力强度。建议在深入单维分析前 30 秒速览此图，建立"能力-边界"锚点。关键洞察：所有维度均指向同一弱极，印证 Rust 的缺失不是功能遗漏，而是"有纪律的表达力"的系统性设计。 [💡 原创分析](methodology.md)
-> [来源: [Wikipedia — Programming Language]]
+> [Wikipedia — Programming Language](https://en.wikipedia.org/wiki/Programming_Language)
 
 ### 2.2 评估指标
 
@@ -1046,7 +1046,7 @@ mindmap
 > [💡 原创分析](methodology.md)
 > **思维表征说明**: 此 `mindmap` 是七维光谱的**放射式紧凑视图**——与正文中逐项展开的矩阵和雷达图形成互补。
 > mindmap 适合「快速回顾」场景：读者可在 10 秒内扫视全部七个维度及其核心边界特征，建立整体认知锚点，然后根据需要深入对应章节。
-> [来源: Tony Buzan, *The Mind Map Book*; 双编码理论 — Paivio 1986]
+> [Tony Buzan, *The Mind Map Book*; 双编码理论 — Paivio 1986](https://www.tonybuzan.com/)
 
 ---
 

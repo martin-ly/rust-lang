@@ -139,7 +139,7 @@
 > [来源: [embedded-graphics PixelColor](https://docs.rs/embedded-graphics/latest/embedded_graphics/pixelcolor/index.html)]
 > **内存压力**: 高分辨率 + 真彩色 → 帧缓冲超出内部 SRAM → 必须使用外部 PSRAM 或 tile-based 渲染（分块绘制）。
 > [来源: [LVGL Porting Guide](https://docs.lvgl.io/8.3/porting/index.html)]
-> [来源: [LVGL Memory [已失效]]<!-- 原链接: https://docs.lvgl.io/8.3/porting/mem.html -->]
+> [LVGL Memory [已失效]]<!-- 原链接: https://docs.lvgl.io/8.3/porting/mem.html -->](<https://docs.rs/lvgl/latest/lvgl/>)
 
 ---
 
@@ -177,7 +177,7 @@
 ```
 
 > **实时洞察**: **60fps UI 要求整个渲染管线在 16.67ms 内完成**——从输入事件处理到帧缓冲传输，任何阻塞操作都会导致掉帧。
-> [来源: [LVGL Performance Guide [已失效]]<!-- 原链接: https://docs.lvgl.io/8.3/overview/perf.html -->]
+> [LVGL Performance Guide [已失效]]<!-- 原链接: https://docs.lvgl.io/8.3/overview/perf.html -->](<https://docs.rs/lvgl/latest/lvgl/>)
 > [来源: [Embedded Display Refresh](https://en.wikipedia.org/wiki/Refresh_rate)]
 > **触摸洞察**: 电容式触摸控制器通常通过 I2C 通信，中断引脚通知 MCU 有新事件，主循环轮询或中断服务程序读取坐标。
 > [来源: [FT5x06 Datasheet](https://www.focaltech-systems.com/)]
@@ -743,7 +743,7 @@ graph TD
 > [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 > **内存边界**: 最严苛的边界往往是内存——一个 800×480×24bpp 的帧缓冲需要 1.15MB，超过绝大多数 MCU 内部 SRAM，必须采用分块渲染或外部存储器。
 > [来源: [LVGL Porting — Display](https://docs.lvgl.io/8.3/porting/display.html)]
-> [来源: [LVGL Memory Manager [已失效]]<!-- 原链接: https://docs.lvgl.io/8.3/overview/memory.html -->]
+> [LVGL Memory Manager [已失效]]<!-- 原链接: https://docs.lvgl.io/8.3/overview/memory.html -->](<https://docs.rs/lvgl/latest/lvgl/>)
 
 ---
 

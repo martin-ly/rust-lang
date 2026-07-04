@@ -356,7 +356,7 @@ pub fn call_c_function() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)
 > **权威来源对齐变更日志**: 2026-05-26 创建 C-to-Rust 翻译生态专题文件，对齐 DARPA TRACTOR、PLDI 2026、OOPSLA 2026 等最新权威来源 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
 
-- 2026-05-26 R22: 补充 SmartC2Rust (ICSE 2026) — 迭代反馈驱动的 LLM C→Rust 翻译 [来源: ICSE 2026]
+- 2026-05-26 R22: 补充 SmartC2Rust (ICSE 2026) — 迭代反馈驱动的 LLM C→Rust 翻译 [ICSE 2026](https://conf.researchr.org/home/icse-2026)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

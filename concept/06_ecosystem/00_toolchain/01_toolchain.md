@@ -180,10 +180,10 @@ graph LR
 | **编译期脚本** | ✅ build.rs | ⚠️ postinstall | ❌ | ❌ |
 
 > **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)** Cargo 使用 TOML 格式的 manifest 文件，支持严格的 SemVer 约束、工作区、特性系统和编译期脚本。 ✅
-> **[来源: npm Docs: package.json]** Node.js 的 `package.json` 使用 JSON 格式，支持语义化版本但依赖解析行为与 Cargo 不同。 ✅
-> **[来源: Go Modules Reference]** Go 模块（Module）使用 `go.mod` 和最小版本选择（MVS）算法，锁文件为 `go.sum`。 ✅
-> **[来源: pip Documentation]** Python 的 `requirements.txt` 无内置锁文件机制，依赖版本约束较弱。 ✅
-> **[来源: SemVer Specification]** 语义化版本规范（SemVer 2.0.0）定义了 MAJOR.MINOR.PATCH 的兼容性契约。 ✅
+> **[npm Docs: package.json](https://docs.npmjs.com/cli/v10/configuring-npm/package-json)** Node.js 的 `package.json` 使用 JSON 格式，支持语义化版本但依赖解析行为与 Cargo 不同。 ✅
+> **[Go Modules Reference](https://go.dev/ref/mod)** Go 模块（Module）使用 `go.mod` 和最小版本选择（MVS）算法，锁文件为 `go.sum`。 ✅
+> **[pip Documentation](https://pip.pypa.io/en/stable/)** Python 的 `requirements.txt` 无内置锁文件机制，依赖版本约束较弱。 ✅
+> **[SemVer Specification](https://semver.org/)** 语义化版本规范（SemVer 2.0.0）定义了 MAJOR.MINOR.PATCH 的兼容性契约。 ✅
 
 ### 2.3 Clippy Lint 分类矩阵
 >
@@ -369,7 +369,7 @@ graph LR
 > 但此图聚焦于**具体的编译器管道**。
 > 前端（蓝绿色）负责 Rust 特有的语义分析（所有权（Ownership）、生命周期（Lifetimes）、借用（Borrowing）检查在 MIR 之前完成），后端（黄色）负责与目标平台无关的优化和代码生成。
 > Cargo 的调度层（虚线框外）负责依赖管理和增量构建，与编译器前端并行工作。
-> [来源: rustc Dev Guide; LLVM Documentation; *Engineering a Compiler* — Cooper & Torczon]
+> [rustc Dev Guide; LLVM Documentation; *Engineering a Compiler* — Cooper & Torczon](https://rustc-dev-guide.rust-lang.org/)
 
 ---
 

@@ -1496,7 +1496,7 @@ let saga = Saga::new()
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-> **[来源: Stack Overflow Rust Tag]**
+> **[Stack Overflow Rust Tag](../../concept/00_meta/02_sources/international_authority_index.md)**
 > **[来源: Rust Users Forum]**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

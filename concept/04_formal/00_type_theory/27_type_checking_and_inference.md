@@ -98,7 +98,7 @@
 
 > **关键洞察**: Rust 的类型检查 = 为每个节点计算类型 + 生成并求解一组约束。
 >
-> [来源: Rustc Dev Guide — HIR Type checking](https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html)
+> [Rustc Dev Guide — HIR Type checking](https://rustc-dev-guide.rust-lang.org/type-checking.html)(<https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html>)
 
 ---
 
@@ -118,7 +118,7 @@ let x = 1;
 // 随后通过约束统一为 i32
 ```
 
-> [来源: Rustc Dev Guide — The ty module](https://rustc-dev-guide.rust-lang.org/ty.html)
+> [Rustc Dev Guide — The ty module](https://rustc-dev-guide.rust-lang.org/ty.html)(<https://rustc-dev-guide.rust-lang.org/ty.html>)
 
 ---
 
@@ -170,7 +170,7 @@ x.push("hello");    // ?T = &str
 // 最终 x: Vec<&str>
 ```
 
-> [来源: Rustc Dev Guide — Inference variables](https://rustc-dev-guide.rust-lang.org/type-inference.html#inference-variables)
+> [Rustc Dev Guide — Inference variables](https://rustc-dev-guide.rust-lang.org/type-inference.html)(<https://rustc-dev-guide.rust-lang.org/type-inference.html#inference-variables>)
 
 ---
 
@@ -215,7 +215,7 @@ Rust 的子类型关系主要体现在生命周期（Lifetimes）上，例如 `&
 
 > **定理**: 区域约束只在其他约束和 trait obligations 都处理完之后才最终求解。
 >
-> [来源: Rustc Dev Guide — Region constraints](https://rustc-dev-guide.rust-lang.org/type-inference.html#region-constraints)
+> [Rustc Dev Guide — Region constraints](https://rustc-dev-guide.rust-lang.org/borrow_check/region_inference.html)(<https://rustc-dev-guide.rust-lang.org/type-inference.html#region-constraints>)
 
 ---
 
@@ -237,7 +237,7 @@ if success {
 
 > **关键洞察**: Snapshot 让 rustc 能够在复杂的类型/约束空间中安全地回溯。
 >
-> [来源: Rustc Dev Guide — Snapshots](https://rustc-dev-guide.rust-lang.org/type-inference.html#snapshots)
+> [Rustc Dev Guide — Snapshots](https://rustc-dev-guide.rust-lang.org/type-inference.html)(<https://rustc-dev-guide.rust-lang.org/type-inference.html#snapshots>)
 
 ---
 

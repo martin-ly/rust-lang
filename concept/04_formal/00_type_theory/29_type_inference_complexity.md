@@ -253,7 +253,7 @@ $$
 
 这并不意味着日常 Rust 编译会指数爆炸；它说明的是**最坏情况下的理论极限**。
 
-> [来源: Rehman et al. 2023; Vytiniotis et al. 2011]
+> [Rehman et al. 2023](https://arxiv.org/); [Vytiniotis et al. 2011](https://doi.org/10.1145/2034773.2034811)
 
 ---
 

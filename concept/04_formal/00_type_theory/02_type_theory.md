@@ -122,7 +122,7 @@ Rust 扩展:
 代数等式:
   Option<A> ≅ 1 + A
   Result<A, E> ≅ A + E
-  Vec<A> ≅ μX. 1 + (A × X)   （递归类型） [来源: Pierce 2002, Ch.20] ✅
+  Vec<A> ≅ μX. 1 + (A × X)   （递归类型） [Pierce 2002, Ch.20](https://www.cis.upenn.edu/~bcpierce/tapl/) ✅
 ```
 
 > **[学术来源: Damas & Milner 1982 POPL; Pierce 2002, Ch.22]** 算法 W 是 HM 类型推断（Type Inference）的经典形式化描述。
@@ -207,13 +207,13 @@ classDiagram
 > 建议对照 Rust 实际特性（泛型（Generics）、GATs、所有权（Ownership））定位其理论根基。
 > 关键洞察：Rust 刻意选择位于 `System F + HM + 线性类型` 的交集，排除了不可判定的 Dependent Types 和推断困难的完整 `System Fω`。
 > [💡 原创分析](../../00_meta/00_framework/methodology.md)
-> [来源: [TAPL — Pierce 2002]]
+> [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)
 > **思维表征说明**:
 >
 > `classDiagram` 将类型论中的**层次扩展关系**可视化——每个类型系统（Type System）不是孤立的存在，而是在前一级基础上增加新能力。
 > 箭头方向表示「继承/扩展」：`λ→` 在无类型 λ 上添加类型，`System F` 在 `λ→` 上添加参数多态，`System Fω` 在 `System F` 上添加类型构造子抽象。
 > Rust 的设计哲学是「选择足够表达力但可判定的子集」——因此 Rust 位于 `System F` + `HM` + `线性类型` 的交集，刻意排除了 `Dependent Types`（不可判定）和完整 `System Fω`（推断困难）。
-> [来源: Pierce 2002, *TAPL* Ch.11-30; Cardelli 1996, *Type Systems*]
+> [Pierce 2002, *TAPL* Ch.11-30; Cardelli 1996, *Type Systems*](https://www.cis.upenn.edu/~bcpierce/tapl/)
 
 ---
 
@@ -578,11 +578,11 @@ enum List<T> {
 |:---|:---|:---|:---|
 | 和类型 (A + B) | `enum { A, B }` | **精确** | 一对一 [Pierce 2002, Ch.11](https://www.cis.upenn.edu/~bcpierce/tapl/) ✅ |
 | 积类型 (A × B) | `struct { a: A, b: B }` | **精确** | 一对一 [Pierce 2002, Ch.11](https://www.cis.upenn.edu/~bcpierce/tapl/) ✅ |
-| 函数类型 (A → B) | `fn(A) -> B` | **近似** | Rust 函数有 effects（如 panic） [来源: Pierce 2002, Ch.9] 💡 |
-| 全称量词 (∀α.A) | `fn<T>(x: T)` | **近似** | 受 Trait Bounds 约束限制 [来源: Pierce 2002, Ch.23] 💡 |
-| 存在类型 (∃α.A) | `impl Trait` / `dyn Trait` | **近似** | `impl` 隐藏，`dyn` 动态 [来源: Pierce 2002, Ch.24] 💡 |
-| 递归类型 (μα.A) | 递归 enum/struct | **近似** | 需 `Box` 解除无限大小 [来源: Pierce 2002, Ch.20] 💡 |
-| 依赖类型 | Const Generics（有限） | **部分** | 仅限编译期常量 [来源: 原创分析] ⚠️ |
+| 函数类型 (A → B) | `fn(A) -> B` | **近似** | Rust 函数有 effects（如 panic） [Pierce 2002, Ch.9](https://www.cis.upenn.edu/~bcpierce/tapl/) 💡 |
+| 全称量词 (∀α.A) | `fn<T>(x: T)` | **近似** | 受 Trait Bounds 约束限制 [Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/) 💡 |
+| 存在类型 (∃α.A) | `impl Trait` / `dyn Trait` | **近似** | `impl` 隐藏，`dyn` 动态 [Pierce 2002, Ch.24](https://www.cis.upenn.edu/~bcpierce/tapl/) 💡 |
+| 递归类型 (μα.A) | 递归 enum/struct | **近似** | 需 `Box` 解除无限大小 [Pierce 2002, Ch.20](https://www.cis.upenn.edu/~bcpierce/tapl/) 💡 |
+| 依赖类型 | Const Generics（有限） | **部分** | 仅限编译期常量 [原创分析](../../00_meta/00_framework/methodology.md) ⚠️ |
 
 ### 9.3 HRTB 与全称量词的形式化语义
 

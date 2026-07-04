@@ -30,7 +30,7 @@
 > **定理 T-XXX** [Tier 1] — 定理名称
 >
 > **陈述**: ...
-> **证明**: 见 [来源: RB18 — §3.2] 或 [来源: REF — §4.1.9]。此处仅给出**直觉概述**。
+> **证明**: 见 [RB18 — §3.2](https://plv.mpi-sws.org/rustbelt/) 或 [REF — §4.1.9](https://doc.rust-lang.org/reference/introduction.html)。此处仅给出**直觉概述**。
 > **直觉概述**: ...
 ```
 
@@ -60,10 +60,10 @@
 > **陈述**: ...
 > **证明草图**:
 > 1. ...（建立不变量）
-> 2. ...（归纳步骤，见 [来源: TAPL — 引理 9.3.1]）
+> 2. ...（归纳步骤，见 [TAPL — 引理 9.3.1](https://www.cis.upenn.edu/~bcpierce/tapl/)）
 > 3. ...（结论）
 > **省略细节**: 步骤 2 的完整归纳假设展开见 [来源: 原始论文附录]。
-> **形式化根基**: [来源: RB18] / [来源: TAPL]
+> **形式化根基**: [RB18](https://plv.mpi-sws.org/rustbelt/) / [TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)
 ```
 
 **适用场景**:
@@ -180,7 +180,7 @@
 > - 此命题**不适用于** `Rc`/`Arc` 循环引用场景
 > - `std::mem::forget` 可人为阻止 Drop
 > - RustBelt 证明的是**内存安全**（无 UAF），而非**资源无泄漏**
-> **待形式化**: 资源无泄漏的形式化定义需要线性逻辑（非仿射逻辑），见 [来源: LL87]。
+> **待形式化**: 资源无泄漏的形式化定义需要线性逻辑（非仿射逻辑），见 [LL87](https://en.wikipedia.org/wiki/Linear_logic)。
 ```
 
 ### 示例 2：Tier 2 转换

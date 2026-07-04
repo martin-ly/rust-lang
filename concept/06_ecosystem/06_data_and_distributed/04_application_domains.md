@@ -1219,7 +1219,7 @@ graph TD
 
 **安全边界**: `kernel::ffi` 模块（Module）是形式化边界的核心——它将 C 指针转换为 Rust 引用（Reference）时，必须显式声明**安全契约**（如"调用者必须持有锁"、"此指针仅在 RCU 读侧临界区内有效"）。这些契约目前以文档注释形式存在，未来可能进化为机器可读的 Safety Tags。 [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
-> **[来源: Rust for Linux Docs]** Rust for Linux 将内核的复杂不变量编码为 Rust 的类型契约。
+> **[Rust for Linux Docs](https://rust-for-linux.com/)** Rust for Linux 将内核的复杂不变量编码为 Rust 的类型契约。
 
 ---
 
@@ -1235,7 +1235,7 @@ graph TD
 
 **安全边界**: Aya 的 `aya::maps` 模块将 eBPF map 操作封装为类型安全的 API。`PerCpuArray<T>` 的类型参数 `T` 必须在编译期满足 `Pod`（Plain Old Data）约束，确保 eBPF 验证器可以推断其内存布局。
 
-> **[来源: Aya Book]** eBPF 验证器在加载期证明程序安全性，Rust 类型系统在编译期证明内存安全。
+> **[Aya Book](https://aya-rs.dev/book/)** eBPF 验证器在加载期证明程序安全性，Rust 类型系统在编译期证明内存安全。
 
 ---
 
@@ -1251,7 +1251,7 @@ graph TD
 
 **安全边界**: `tokio-uring` 的 `Buffer` trait 要求提交的缓冲区在操作完成前保持有效。`unsafe` 边界在于：如果用户在 `Op` 完成前 `drop` 缓冲区，会导致内核写入已释放内存。封装层通过**生命周期（Lifetimes）标注**（`&'a [u8]`）将这一约束编码到类型系统。
 
-> **[来源: tokio-rs/io-uring]** io_uring 的共享环形缓冲区是 Rust 所有权模型的压力测试。
+> **[tokio-rs/io-uring](https://github.com/tokio-rs/io-uring)** io_uring 的共享环形缓冲区是 Rust 所有权模型的压力测试。
 
 ---
 
@@ -1267,7 +1267,7 @@ graph TD
 
 **安全边界**: QUIC 的**连接迁移**（connection migration）允许客户端在 IP 变化后保持连接——这在 Rust 中对应于**资源标识符的生命周期（Lifetimes）管理**。`quinn` 通过 `ConnectionId` 的类型化封装，确保迁移后的连接身份验证在编译期可验证。
 
-> **[来源: Quinn Docs]** QUIC 的有状态连接天然适合 Rust 的类型状态模式。
+> **[Quinn Docs](https://docs.rs/quinn/latest/quinn/)** QUIC 的有状态连接天然适合 Rust 的类型状态模式。
 
 ---
 
@@ -1283,7 +1283,7 @@ graph TD
 
 **安全边界**: GUI 的**跨线程 UI 更新**是 `Send/Sync` 的典型应用场景。`iced` 的 `Command<Message>` 通过 `Send` 约束保证后台任务的结果可以安全传递回 UI 线程。`egui` 的纯函数式设计避免了跨线程问题——UI 状态完全由单线程的 `Context` 管理。
 
-> **[来源: egui Docs]** 立即模式每帧重建 UI 状态，所有权模型简化为栈分配 + 借用。
+> **[egui Docs](https://docs.rs/egui/latest/egui/)** 立即模式每帧重建 UI 状态，所有权模型简化为栈分配 + 借用。
 
 ---
 
@@ -1300,7 +1300,7 @@ graph TD
 
 **安全边界**: AI 推理的**确定性**是关键需求——相同的输入必须产生相同的输出。Rust 的无 GC 确定性内存管理使其成为**确定性容器**的理想载体。`candle` 的 `no_std` 支持使其可在嵌入式设备上运行 LLaMA 模型，无 Python 解释器的非确定性干扰。
 
-> **[来源: Candle Book]** 张量的形状和类型可在编译期验证，避免运行时的形状不匹配。
+> **[Candle Book](https://huggingface.github.io/candle/)** 张量的形状和类型可在编译期验证，避免运行时的形状不匹配。
 
 ---
 
@@ -1347,7 +1347,7 @@ graph TD
 
 > **[Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs](https://foundation.rust-lang.org/)** 应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅
 > **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC [RFC 9000](https://www.rfc-editor.org/info/rfc9000); wgpu Docs; egui Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
-> **[来源: Rust Blockchain Report 2024; Solana Docs; Polkadot Substrate Docs; Near Protocol Docs]** 区块链方向基于公开协议文档和社区报告。✅
+> **[Rust Blockchain Report 2024; Solana Docs; Polkadot Substrate Docs; Near Protocol Docs](https://docs.solana.com/)** 区块链方向基于公开协议文档和社区报告。✅
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)

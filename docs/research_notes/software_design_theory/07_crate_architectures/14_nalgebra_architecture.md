@@ -84,7 +84,7 @@ where
 | `C` | 列数 | `U2`, `U3`, `Dynamic` |
 | `S` | 存储策略 | `MatrixArray` (栈), `MatrixVec` (堆) |
 
-> [来源: nalgebra 源码 — `src/base/matrix.rs`]
+> [nalgebra 源码 — `src/base/matrix.rs`](https://docs.rs/nalgebra/latest/nalgebra/)
 
 ### 2.2 类型级维度: `U2`, `U3`, `Dynamic` {#22-类型级维度-u2-u3-dynamic}
 

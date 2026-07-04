@@ -118,7 +118,7 @@ Cargo 默认使用 **SemVer**（语义化版本）。版本要求写法与含义
 
 > **关键洞察**: Cargo 只会在同一个 crate 的兼容主版本内选择一个版本；如果两个依赖分别要求 `^1` 和 `^2`，则 `foo` 会同时出现 `foo 1.x` 和 `foo 2.x`。
 >
-> [来源: Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html)
+> [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html)(<https://doc.rust-lang.org/cargo/reference/semver.html>)
 
 ---
 
@@ -133,7 +133,7 @@ Cargo 的解析器本质上是一个 SAT-like 约束求解器：
 
 > **定理**: 依赖解析问题在 NP 困难意义上与 SAT 类似，但 Cargo 使用启发式 + 回溯在实际 registry 规模下足够快。
 >
-> [来源: Cargo Book — How Cargo resolves dependencies](https://doc.rust-lang.org/cargo/reference/resolver.html#how-cargo-resolves-dependencies)
+> [Cargo Book — How Cargo resolves dependencies](https://doc.rust-lang.org/cargo/reference/resolver.html)(<https://doc.rust-lang.org/cargo/reference/resolver.html#how-cargo-resolves-dependencies>)
 
 ---
 
@@ -213,7 +213,7 @@ resolver = "3"
 > - **Edition 2024** 的项目默认使用 resolver v3。
 > - v3 与 v2 的 feature unification 行为相同；v3 的核心新增能力是 MSRV-aware version selection。
 >
-> [来源: Cargo Book — Resolver versions](https://doc.rust-lang.org/cargo/reference/resolver.html#resolver-versions) · [Rust 1.84.0 Release Notes](https://releases.rs/docs/1.84.0/)
+> [Cargo Book — Resolver versions](https://doc.rust-lang.org/cargo/reference/resolver.html#resolver-versions)(<https://doc.rust-lang.org/cargo/reference/resolver.html#resolver-versions>) · [Rust 1.84.0 Release Notes](https://releases.rs/docs/1.84.0/)
 
 ---
 
@@ -268,7 +268,7 @@ CARGO_RESOLVER_INCOMPATIBLE_RUST_VERSIONS=allow cargo update
 
 > **提示**: `rust-version` 是 Cargo 元数据，不是编译器强制的语法约束；真正失败通常发生在编译时遇到新语法或 API。MSRV-aware resolver 的目标是把失败从"编译时"提前到"解析时"，减少手动 `cargo update --precise` 的负担。
 >
-> [来源: Cargo Book — The rust-version field](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field) · [RFC 3537 — MSRV-aware resolver](https://rust-lang.github.io/rfcs/3537-msrv-resolver.html) · [Cargo issue #9930](https://github.com/rust-lang/cargo/issues/9930)
+> [Cargo Book — The rust-version field](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field)(<https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field>) · [RFC 3537 — MSRV-aware resolver](https://rust-lang.github.io/rfcs/3537-msrv-resolver.html) · [Cargo issue #9930](https://github.com/rust-lang/cargo/issues/9930)
 
 ---
 

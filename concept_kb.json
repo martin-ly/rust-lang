@@ -119,6 +119,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../02_sources/international_authority_index.md",
         "../03_audit/asp_marking_guide.md",
         "../04_navigation/concept_index.md",
         "../04_navigation/learning_guide.md",
@@ -156,6 +157,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../02_sources/international_authority_index.md",
         "../03_audit/asp_marking_guide.md",
         "../04_navigation/learning_guide.md",
         "../04_navigation/problem_graph.md",
@@ -248,6 +250,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../02_sources/international_authority_index.md",
         "../knowledge_topology/kg_ontology_v2.md",
         "boundary_extension_tree.md",
         "fault_tree_analysis_collection.md",
@@ -617,6 +620,7 @@
         "../../05_comparative/00_paradigms/03_paradigm_matrix.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
+        "../02_sources/international_authority_index.md",
         "../04_navigation/learning_guide.md",
         "methodology.md"
       ],
@@ -1121,7 +1125,7 @@
       "layer": "L0",
       "title": "Concept 文件双语模板 v2（Bilingual Template v2）",
       "positioning": "",
-      "line_count": 323,
+      "line_count": 321,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -1192,7 +1196,7 @@
           "`{Concept EN}` (`{relative_path}.md`) · ..."
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -1251,6 +1255,7 @@
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/04_research_and_experimental/03_evolution.md",
+        "../00_framework/methodology.md",
         "international_authority_index.md"
       ],
       "transitions": 6,
@@ -1352,7 +1357,8 @@
         "../../04_formal/02_separation_logic/04_rustbelt.md",
         "../00_framework/concept_definition_decision_forest.md",
         "../00_framework/methodology.md",
-        "../00_framework/theorem_inference_forest.md"
+        "../00_framework/theorem_inference_forest.md",
+        "international_authority_index.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
@@ -1483,7 +1489,8 @@
         "../00_framework/cognitive_dimension_matrix.md",
         "../00_framework/competency_graph.md",
         "../00_framework/concept_definition_decision_forest.md",
-        "../00_framework/methodology.md"
+        "../00_framework/methodology.md",
+        "../02_sources/international_authority_index.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
@@ -1609,6 +1616,7 @@
       "cross_references": [
         "../../../archive/reports/2026_07/QUALITY_BASELINE_v2_0.md",
         "../00_framework/methodology.md",
+        "../02_sources/international_authority_index.md",
         "../04_navigation/concept_index.md",
         "../04_navigation/navigation.md",
         "audit_checklist.md"
@@ -2063,7 +2071,7 @@
       "layer": "L0",
       "title": "Rust 知识体系学习指南（Learning Guide）",
       "positioning": "本文件是 `concept/` 知识体系的**用户手册**，回答三个核心问题——\"我应该从哪里开始？\"\"按什么顺序读？\"\"如何验证自己掌握了？\"",
-      "line_count": 659,
+      "line_count": 658,
       "theorem_chains": [
         {
           "text": "| `methodology.md` | 0.5h | — | 理解本知识体系的组织方法论 | 1. Bloom 层级如何映射到文件层级？2. ⟹ 推理链的格式要求是什么？ |",
@@ -2090,42 +2098,14 @@
           ],
           "lines": 58,
           "should_fail": false,
-          "code_preview": "2. **修改实验**：故意修改代码使其编译失败，理解错误信息 3. **扩展练习**：基于代码示例写一个变体，验证理解  ---  > **[来源: Rust..."
+          "code_preview": "2. **修改实验**：故意修改代码使其编译失败，理解错误信息 3. **扩展练习**：基于代码示例写一个变体，验证理解  ---  > **Rust 社区常见..."
         }
       ],
-      "sources": [
-        {
-          "source": "Bloom Taxonomy 2001; 认知科学前置依赖原则",
-          "context": "学习路径基于认知层级和前置依赖设计。"
-        },
-        {
-          "source": "concept/ 目录结构; 00_meta/inter_layer_map.md",
-          "context": "按 L0-L7 层级组织的 27+ 概念文件。"
-        },
-        {
-          "source": "Make It Stick (Brown et al. 2014); 间隔重复研究",
-          "context": "三遍阅读法和间隔重复基于认知科学证据。"
-        },
-        {
-          "source": "Rust 社区常见学习障碍调查; Rust Internals 论坛",
-          "context": "常见困难基于社区反馈统计。"
-        },
-        {
-          "source": "rustc 错误码索引; Rust Compiler Error Index",
-          "context": "错误码映射基于 rustc 官方文档和概念知识体系的一致性标注。"
-        },
-        {
-          "source": "rustc 错误码大全; Rust Compiler Error Index",
-          "context": "本索引将最常见的 Rust 编译错误码映射到概念知识体系中的定义文件和修复路径，实现\"遇到错误 → 定位概念 → 理解原理 → 修复代码\"的闭环。"
-        },
-        {
-          "source": "Niko Matsakis — Teaching Rust Through Errors (RustConf 2023); Rust Compiler Team — Diagnostic UX Guidelines",
-          "context": "本章节基于 Rust 编译器团队的教学研究和认知科学原理，提出\"错误驱动的概念学习\"方法论。"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../00_framework/cognitive_dimension_matrix.md",
         "../00_framework/competency_graph.md",
+        "../00_framework/methodology.md",
         "../00_framework/semantic_space.md",
         "../02_sources/international_authority_index.md",
         "concept_index.md",
@@ -2359,7 +2339,8 @@
         "../00_framework/competency_graph.md",
         "../00_framework/concept_definition_decision_forest.md",
         "../00_framework/methodology.md",
-        "../00_framework/semantic_space.md"
+        "../00_framework/semantic_space.md",
+        "../02_sources/international_authority_index.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
@@ -3003,16 +2984,7 @@
           "code_preview": "// ❌ 编译错误: L1 学习者的常见误区——在存在引用时修改集合 // 试图在持有元素引用时向 Vec 添加元素  fn main() {     let ..."
         }
       ],
-      "sources": [
-        {
-          "source": "Bloom Taxonomy 2001; 认知科学评估方法论",
-          "context": "自测题基于 Bloom 认知层级设计，覆盖记忆→理解→应用→分析。"
-        },
-        {
-          "source": "TAPL / RustBelt / Girard / Jung",
-          "context": "形式化方法基于类型论、线性逻辑和分离逻辑。"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../00_framework/semantic_space.md",
         "../02_sources/international_authority_index.md",
@@ -6680,36 +6652,7 @@
           "code_preview": "let word = get_first_word(s.clone()); // s 仍有效 ..."
         }
       ],
-      "sources": [
-        {
-          "source": "Ralf Jung, \"The Meaning of Memory Safety\", PLArch 2021",
-          "context": "内存安全的精确定义：程序不会出现「指向已释放内存的指针被解引用（Reference）」或「对同一内存的非原子并发写」。 ✅"
-        },
-        {
-          "source": "COR: ETH Zurich, Technical Report",
-          "context": "所有权跟踪的操作语义形式化，堆演进展现代数模型。 ⚠️（非 peer-reviewed 论文，为技术报告）"
-        },
-        {
-          "source": "Haskell GHC User Guide: LinearTypes",
-          "context": "GHC 9.0+ 引入 LinearTypes 扩展，允许显式线性类型约束，与 Rust 所有权在类型论上同源但实现阶段不同（Haskell 为可选扩展，Rust 为核心机制）。 ✅"
-        },
-        {
-          "source": "Girard 1987 (线性逻辑)",
-          "context": "资源消耗与产生的代数表示对应线性逻辑中的资源公理。 ✅"
-        },
-        {
-          "source": "Girard 1987 (线性逻辑)",
-          "context": "L1/L2 — 线性逻辑 ⊗ 与仿射逻辑 contraction 禁止。 ✅"
-        },
-        {
-          "source": "Girard 1987 (线性逻辑)",
-          "context": "\"Affine Logic: 资源不可复用\" — 仿射逻辑允许 weakening（丢弃）但禁止 contraction（复制）。 ✅"
-        },
-        {
-          "source": "Girard 1987 (线性逻辑)",
-          "context": "\"线性逻辑 ⊗: 资源组合\" — 张量积表示多个资源同时存在。 ✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
@@ -7133,28 +7076,7 @@
           "code_preview": "struct Point { x: i32, y: i32 }  fn main() {     let mut p = Point { x: 0, y: 0 ..."
         }
       ],
-      "sources": [
-        {
-          "source": "C++ Reference: Reference",
-          "context": "C++ 引用 `T&` 语义上为别名，编译器不检查别名-可变冲突，use-after-free 和 data race 为未定义行为 (UB)。 ✅"
-        },
-        {
-          "source": "Haskell GHC User Guide: ST",
-          "context": "Haskell `ST` monad 通过类型系统（Type System）封装可变状态（`STRef`），但同一 `STRef` 的别名访问不触发编译错误，依赖纯函数隔离保证安全。 ✅"
-        },
-        {
-          "source": "Go Spec: Pointers",
-          "context": "Go 指针 `*T` 允许任意别名和可变访问，内存安全（Memory Safety）由 GC 保证，但 data race 需依赖运行时（Runtime） race detector 检测。 ✅"
-        },
-        {
-          "source": "Wright-Felleisen 1994",
-          "context": "类型安全保证可推导出并发安全（Concurrency Safety），前提是所有权与别名规则被严格执行。 ✅"
-        },
-        {
-          "source": "Boyland 2003 (Fractional Permissions)",
-          "context": "\"分数权限 f ∈ (0,1]\" — 读权限可无限分割，写权限要求 f=1.0。 ✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
@@ -8109,20 +8031,7 @@
           "code_preview": "fn dangle() -> &String {     let s = String::from(\"hello\");     &s } ..."
         }
       ],
-      "sources": [
-        {
-          "source": "C++ Reference: unique_ptr",
-          "context": "C++ 智能指针（Smart Pointer）管理所有权（Ownership）生命周期，但无编译期引用有效性检查，悬垂引用为未定义行为。 ✅"
-        },
-        {
-          "source": "Haskell GHC User Guide: LinearTypes",
-          "context": "Haskell LinearTypes 扩展允许显式线性类型约束（`a %1 -> b`），与 Rust 生命周期在类型论上同源，但为可选扩展。 ✅"
-        },
-        {
-          "source": "Unsafe Code Guidelines: Unions",
-          "context": "读取 union 的非活跃字段时，如果位模式对目标类型不是有效值（如非规范浮点 NaN payload），行为在 Safe Rust 的抽象机模型中属于未定义行为。✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -8615,108 +8524,7 @@
           "code_preview": "struct Foo;  fn main() {     let a = Foo;     let b = Foo;     let _ = a + b; //..."
         }
       ],
-      "sources": [
-        {
-          "source": "Pierce \"Types and Programming Languages\"",
-          "context": "Hindley-Milner 类型推断（Type Inference）算法及其扩展是 Rust 类型系统的基础。✅"
-        },
-        {
-          "source": "COR: ETH Zurich",
-          "context": "Γ; Σ ⊢ e : τ {Σ'} 的所有权（Ownership）约束形式化表示 Rust 的堆状态演化。✅"
-        },
-        {
-          "source": "Category Theory for Programmers",
-          "context": "enum 对应余积（Coproduct / Sum Type），struct 对应积（Product Type）。✅"
-        },
-        {
-          "source": "Pierce \"Types and Programming Languages\"",
-          "context": "积与余积的组合构成代数数据类型的完备基。✅"
-        },
-        {
-          "source": "Pierce \"Types and Programming Languages\"",
-          "context": "Hindley-Milner 类型推断对无显式约束的表达式是完备的（Principal type property）。✅"
-        },
-        {
-          "source": "Wright & Felleisen 1994",
-          "context": "类型安全定理（Progress + Preservation）是类型系统的标准元定理。✅"
-        },
-        {
-          "source": "Damas & Milner 1982, *Principal Type-Schemes for Functional Programs*",
-          "context": "HM 算法的四条规则构成完整的类型推导系统，支持 let-多态性（let-polymorphism）。✅"
-        },
-        {
-          "source": "Pierce, *Types and Programming Languages*, Ch.22",
-          "context": "HM 算法是 ML 家族语言类型推断的理论基础，Var/App/Abs/Let 规则对应 λ-演算的四类语法节点。✅"
-        },
-        {
-          "source": "Robinson 1965, *A Machine-Oriented Logic Based on the Resolution Principle*",
-          "context": "统一算法是自动定理证明与类型推断的共同基础，Robinson 证明了 MGU 的存在唯一性（若存在）。✅"
-        },
-        {
-          "source": "rustc dev guide: Type inference",
-          "context": "rustc 的类型推断器将 HM 统一与 trait solver 分离：先统一类型变量，再求解 trait 约束。✅"
-        },
-        {
-          "source": "Damas & Milner 1982",
-          "context": "let-多态性是 HM 算法的核心创新：它将 `let` 绑定的右侧类型泛化，使多态性在不增加显式标注的情况下可用。✅"
-        },
-        {
-          "source": "Peyton Jones et al., *Haskell 98 Report*",
-          "context": "Haskell 的类型推断通过类型类扩展 HM，允许数值字面量保持多态直到使用上下文确定具体类型。✅"
-        },
-        {
-          "source": "Kfoury et al., *Typability and Type Checking in System F*",
-          "context": "System F（含显式 ∀ 类型）的类型推断是不可判定的；Rust 的显式泛型参数将类型推断限制在 HM 可判定片段内，确保编译终止。✅"
-        },
-        {
-          "source": "Unsafe Code Guidelines: Enum Layout",
-          "context": "Rust 无 `#[repr]` 的 enum 布局未指定（unspecified），编译器可自由重排字段、压缩 tag、合并 niche。✅"
-        },
-        {
-          "source": "Unsafe Code Guidelines: Values",
-          "context": "类型的 \"invalid value\" 集合是 niche optimization 的形式化基础。编译器在布局计算时枚举类型的有效值范围，寻找可用于编码 enum 变体的非法位模式。✅"
-        },
-        {
-          "source": "Pierce, *Types and Programming Languages* (TAPL), Ch.15",
-          "context": "> \"Nominal type systems associate types with names; structural type systems associate types with shapes.\" 名义系统将类型与名称绑定，结构系统将类型与形状绑定。✅"
-        },
-        {
-          "source": "TypeScript Handbook — Structural Type System",
-          "context": "> TypeScript 使用结构类型系统：\"The basic rule for TypeScript's structural type system is that `x` is compatible with `y` if `y` has at least the same members as `x`.\" ✅"
-        },
-        {
-          "source": "Cardelli & Wegner 1985, *On Understanding Types, Data Abstraction, and Polymorphism*",
-          "context": "名义类型与结构类型的区分是类型系统设计的首要决策之一，它深刻影响语言的模块（Module）化、演化能力与类型检查算法。✅"
-        },
-        {
-          "source": "Rust Internals — Blog: \"Coherence in Rust\"",
-          "context": "名义类型的全局唯一身份使得编译器可以在 crate 边界上做出「是否存在重叠 impl」的确定性判断。✅ 二级来源"
-        },
-        {
-          "source": "arXiv:2412.15042 — *Compiling C to Safe Rust, Formalized*",
-          "context": "> \"Nominal typing 'sets in stone' representation and mutability, causing 'contamination' when translating from C structs."
-        },
-        {
-          "source": "arXiv:2412.15042",
-          "context": "C 的 `const Point*` 是「调用时决定的只读视图」，Rust 的 `&Point` vs `&mut Point` 是「类型声明时固定的所有权（Ownership）状态」。这种差异导致 C→Rust 自动化翻译必须做「污染性选择」——要么保守地全部标记为 mutable，要么激进地拆分类型，两者都有代价。✅"
-        },
-        {
-          "source": "TypeScript Handbook",
-          "context": "TypeScript 的接口是纯粹结构的——只要对象满足接口的 shape，就自动兼容，无需显式声明 `implements`。✅ 三级来源"
-        },
-        {
-          "source": "Go Language Specification",
-          "context": "Go 的 interface 是结构类型的典型代表：类型自动满足 interface，只要它实现了所有方法。✅ 三级来源"
-        },
-        {
-          "source": "Haskell 2010 Report",
-          "context": "Haskell 的 Type Class 需要显式 `instance` 声明，与 Rust trait 同为名义系统。✅ 一级来源"
-        },
-        {
-          "source": "C++20 Concepts",
-          "context": "C++20 Concepts 是结构类型的回归：模板约束由「类型是否满足 expression 要求」自动判定，无需显式「实现」某个 concept。✅ 一级来源"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
@@ -14634,20 +14442,7 @@
           "code_preview": "trait Drawable {     fn draw(&self);     fn create() -> Self where Self: Sized; ..."
         }
       ],
-      "sources": [
-        {
-          "source": "C++ Reference: Concepts",
-          "context": "C++20 Concepts 是模板的约束机制，通过 duck typing 自动匹配，无孤儿规则（Orphan Rule）。 ✅"
-        },
-        {
-          "source": "Go Spec: Interface types",
-          "context": "Go 接口是结构类型（structural typing），隐式实现，无显式 `implements` 关键字。 ✅"
-        },
-        {
-          "source": "Pierce 2002 TAPL Ch.23; Wadler & Blott 1989",
-          "context": "Rust Trait 与 Haskell 类型类均可映射到 System F 的字典传递解释。"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../../knowledge/02_intermediate/06_traits.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
@@ -16055,24 +15850,7 @@
           "code_preview": "trait Container {     type Item;     fn get(&self) -> Option<&Self::Item>; }  st..."
         }
       ],
-      "sources": [
-        {
-          "source": "Java Language Spec: Type Erasure",
-          "context": "Java 泛型通过类型擦除实现，编译为 `Object` 并插入类型转换，有运行时装箱开销。 ✅"
-        },
-        {
-          "source": "Go Spec: Type parameters",
-          "context": "Go 1.18+ 泛型通过 GC shape stenciling 实现，为每个 GC shape 生成一份代码，运行时开销极低。 ✅"
-        },
-        {
-          "source": "Pierce, TAPL Ch.23",
-          "context": "参数多态（parametric polymorphism）与约束多态（bounded quantification）的理论基础。 ⚠️（教科书级参考）"
-        },
-        {
-          "source": "Rustify.rs 2026",
-          "context": "\"显式契约使形式化验证更容易，但增加了学习曲线。\""
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
@@ -16737,12 +16515,7 @@
           "code_preview": "use std::mem::ManuallyDrop;  let md = ManuallyDrop::new(vec![1, 2, 3]); // Rust ..."
         }
       ],
-      "sources": [
-        {
-          "source": "PLDI 2024 · RefinedRust",
-          "context": "Pin 的形式化语义对应于分离逻辑中的 \"location stability\"：地址一旦被分配，就在该对象的整个生命周期（Lifetimes）内保持不变。这与 Rust 的 `&mut T` 可移动形成对比——`Pin` 通过类型系统（Type System）剥夺了 `&mut T` 的移动能力。"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
@@ -17890,48 +17663,7 @@
           "code_preview": "let opt: Option<i32> = Some(42); let res: Result<i32, &str> = opt.ok_or(\"missing..."
         }
       ],
-      "sources": [
-        {
-          "source": "Rust std docs — std::backtrace::Backtrace",
-          "context": "稳定于 Rust 1.65。`Backtrace::capture()` 在 `RUST_BACKTRACE` 未设置时返回 `disabled`，避免无条件开销。 ✅"
-        },
-        {
-          "source": "anyhow docs — Features",
-          "context": "`anyhow` 的 `backtrace` feature 在 Rust 1.65+ 使用 `std::backtrace::Backtrace`，在旧版本回退到 `backtrace` crate。 ✅"
-        },
-        {
-          "source": "Rust Standard Library: panic::Location",
-          "context": "`panic::Location` 是 `const` 友好的轻量级定位机制，与 Backtrace 的运行时重定位形成鲜明对比。 ✅"
-        },
-        {
-          "source": "eyre docs",
-          "context": "`eyre::Report` 要求底层错误实现 `Send + Sync + 'static`，并以窄指针（single word）表示，与 `anyhow::Error` 的内存布局一致。✅"
-        },
-        {
-          "source": "color-eyre docs",
-          "context": "生产环境中应通过 `RUST_SPANTRACE=0` 和 `RUST_BACKTRACE=0` 控制诊断噪声；`color-eyre` 在 debug 模式下性能显著低于 `eyre`，因为 `backtrace` crate 的 debug 构建比 `std::backtrace::Backtrace` 慢一个数量级，建议对 `backtrace` 包启用 `[profile.dev.package.backtrace] opt-level = 3`。✅"
-        },
-        {
-          "source": "miette docs",
-          "context": "`miette` 与 `thiserror` 完全兼容：可用 `#[derive(Error, Diagnostic)]` 同时实现两个 trait。库代码应仅依赖 `miette` 的核心 trait（不启用 `fancy` feature），由顶层应用启用 `fancy` 获取图形化输出。✅"
-        },
-        {
-          "source": "snafu docs",
-          "context": "`snafu` 特别适合大型多 crate 项目：每个模块（Module）定义自己的错误类型，通过 `context` 方法在边界处转换，保持错误类型的模块内聚性。GreptimeDB 等工业项目采用此模式管理数百个错误变体。✅"
-        },
-        {
-          "source": "Rust Standard Library: Location::caller",
-          "context": "`Location::caller()` 在 `#[track_caller]` 函数内部返回调用者的 `Location`；在普通函数中返回自身位置。 ✅"
-        },
-        {
-          "source": "Rust Standard Library: PanicInfo",
-          "context": "`PanicInfo::location()` 返回 panic 实际发生的位置；当 panic 源自 `#[track_caller]` 函数时，该位置已被替换为调用者位置。 ✅"
-        },
-        {
-          "source": "anyhow source — macro rules",
-          "context": "`anyhow!` 宏利用 `#[track_caller]` 将错误位置绑定到调用方源码坐标，使错误链中的 `location()` 方法返回用户代码位置。 ✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
@@ -20071,7 +19803,7 @@
           "flags": [],
           "lines": 21,
           "should_fail": false,
-          "code_preview": "// 声明宏示例：递归实现 vec! 变体 // [来源: The Little Book of Rust Macros] macro_rules! my_ve..."
+          "code_preview": "// 声明宏示例：递归实现 vec! 变体 // [The Little Book of Rust Macros](https://veykril.github..."
         },
         {
           "flags": [
@@ -20079,7 +19811,7 @@
           ],
           "lines": 21,
           "should_fail": false,
-          "code_preview": "// Derive 宏示例骨架 [来源: syn docs] use proc_macro::TokenStream; use quote::quote; us..."
+          "code_preview": "// Derive 宏示例骨架 [syn docs](https://docs.rs/syn/latest/syn/) use proc_macro::Toke..."
         },
         {
           "flags": [],
@@ -20891,16 +20623,7 @@
           "code_preview": "use std::sync::{Arc, Mutex}; use std::thread;  fn main() {     let m1 = Arc::new..."
         }
       ],
-      "sources": [
-        {
-          "source": "C++ Reference: Thread support library",
-          "context": "C++11 引入 `std::thread` 和内存模型，但无编译期数据竞争检查。 ✅"
-        },
-        {
-          "source": "Haskell GHC User Guide: Parallelism and Concurrency",
-          "context": "Haskell 通过 `Par` monad 和 STM (`TVar`) 实现并发，纯函数隔离消除数据竞争，STM 有形式化语义基础。 ✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -22497,48 +22220,7 @@
           "code_preview": "use tokio::io::AsyncWriteExt;  async fn safe_operation() -> std::io::Result<()> ..."
         }
       ],
-      "sources": [
-        {
-          "source": "C++ Reference: Coroutines",
-          "context": "C++20 Coroutines 通过 `co_await`/`co_yield`/`co_return` 和 promise 类型实现，编译器生成状态机，与 Rust 类似但自定义能力更强。 ✅"
-        },
-        {
-          "source": "Haskell GHC User Guide: Concurrent Haskell",
-          "context": "Haskell 异步通过 `IO` monad 和 `forkIO` 实现，纯函数隔离保证并发安全（Concurrency Safety），但运行时依赖 GC 和 thunk 求值。 ✅"
-        },
-        {
-          "source": "Go Spec: Goroutines",
-          "context": "Go goroutine 是轻量级线程，由运行时 M:N 调度，内存占用约 2KB 起，阻塞不影响其他 goroutine。 ✅"
-        },
-        {
-          "source": "Without Boats, \"Pin and Suffering\"",
-          "context": "Rust `Pin<T>` 的设计是为了安全表达自引用结构，这是 Rust 异步与 C++20 Coroutines 的关键差异之一。 ✅"
-        },
-        {
-          "source": "tokio-rs/tokio-uring 设计文档",
-          "context": "io_uring 的 `user_data` 字段天然适合存储 Waker 标识，避免了 epoll 的 fd→Waker HashMap 查找开销。但 io_uring 的共享环设计对线程安全提出更高要求——Waker 的 `wake` 需是线程安全的（`Send + Sync`），因为完成事件可能在任意 CPU 核心上产生。"
-        },
-        {
-          "source": "tokio-stream docs; futures-rs docs",
-          "context": "`tokio_stream::wrappers` 提供了将 Tokio 原语（`TcpListener`, `UnixSignal`, `WatchReceiver`）包装为 `Stream` 的适配器，这是 `futures::stream` 不提供的运行时专属扩展。"
-        },
-        {
-          "source": "futures-rs: StreamExt API 文档",
-          "context": "`buffer_unordered` 是异步编程的核心组合子——它允许在保持背压的同时最大化并发度。与 `tokio::join!` 不同，`buffer_unordered` 按完成顺序产出结果，而非输入顺序。"
-        },
-        {
-          "source": "Rust 1.85 Release Notes",
-          "context": "Async closures stabilized."
-        },
-        {
-          "source": "rustify.rs 2026",
-          "context": "\"`AsyncFn` 是 Rust 异步编程的类型系统（Type System）拼图的最后一块。\""
-        },
-        {
-          "source": "rust-lang/rust #117078",
-          "context": "Gen blocks tracking issue."
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -23292,20 +22974,7 @@
           "code_preview": "use async_recursion::async_recursion;  #[async_recursion] async fn traverse_dir(..."
         }
       ],
-      "sources": [
-        {
-          "source": "tokio-rs/tokio-uring 设计文档",
-          "context": "io_uring 的 `user_data` 字段天然适合存储 Waker 标识，避免了 epoll 的 fd→Waker HashMap 查找开销。但 io_uring 的共享环设计对线程安全提出更高要求——Waker 的 `wake` 需是线程安全的（`Send + Sync`），因为完成事件可能在任意 CPU 核心上产生。"
-        },
-        {
-          "source": "tokio-stream docs; futures-rs docs",
-          "context": "`tokio_stream::wrappers` 提供了将 Tokio 原语（`TcpListener`, `UnixSignal`, `WatchReceiver`）包装为 `Stream` 的适配器，这是 `futures::stream` 不提供的运行时（Runtime）专属扩展。"
-        },
-        {
-          "source": "futures-rs: StreamExt API 文档",
-          "context": "`buffer_unordered` 是异步编程的核心组合子——它允许在保持背压的同时最大化并发度。与 `tokio::join!` 不同，`buffer_unordered` 按完成顺序产出结果，而非输入顺序。"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
@@ -24107,64 +23776,7 @@
           "code_preview": "pub struct MyBox<T: ?Sized> {     ptr: NonNull<T>,     _marker: PhantomData<T>, ..."
         }
       ],
-      "sources": [
-        {
-          "source": "LLVM LangRef: Function Attributes",
-          "context": "Miri 的检测与 LLVM 优化假设一一对应。"
-        },
-        {
-          "source": "rustc-dev-guide: Miri flags",
-          "context": "MIRIFLAGS 控制 Miri 的检测严格度和并发行为。"
-        },
-        {
-          "source": "LLVM Sanitizers Docs",
-          "context": "ASan 使用影子内存（shadow memory）检测堆/栈/全局变量的越界访问，运行时开销约 2x，是 C/C++/Rust FFI 项目的首选工具。 ✅ 已验证"
-        },
-        {
-          "source": "Valgrind Documentation",
-          "context": "Valgrind 的 memcheck 通过 JIT 重编译检测未初始化读取和内存泄漏，无需重编译目标程序，但运行速度极慢（10x~50x）。 ✅ 已验证"
-        },
-        {
-          "source": "TSan Documentation",
-          "context": "TSan 使用 happens-before 向量时钟检测数据竞争，对 Rust 的 `std::sync` 原子操作（Atomic Operations）和锁结构均有效，但要求所有代码都经过插桩。 ✅ 已验证"
-        },
-        {
-          "source": "std::ptr::read docs",
-          "context": "`ptr::read` 创建目标位置的按位副本，无论该位置是否已初始化。调用者必须确保后续不会导致原位置和新位置的值同时被 drop。✅ 已验证"
-        },
-        {
-          "source": "std::ptr::write docs",
-          "context": "`ptr::write` 将 `src` 按位写入 `dst` 指向的内存，不读取或 drop `dst` 指向的旧内容。这使其成为未初始化内存初始化的唯一安全方式。✅ 已验证"
-        },
-        {
-          "source": "std::mem::ManuallyDrop docs",
-          "context": "`ManuallyDrop` 包装的值不会在其作用域结束时自动调用 `drop`，配合 `ptr::read` 可实现\"手动控制资源释放时机\"。✅ 已验证"
-        },
-        {
-          "source": "std::ptr::write docs",
-          "context": "`ptr::write` does not drop the contents of `dst`. If `dst` points to a valid object, that object will be leaked. ✅ 已验证"
-        },
-        {
-          "source": "LLVM LangRef: volatile",
-          "context": "Volatile operations are required to execute in program order relative to other volatile operations, and must produce actual memory accesses. ✅ 已验证"
-        },
-        {
-          "source": "std::ptr::replace docs",
-          "context": "`replace` reads the value at `dest` without dropping it, writes `src` into it, and returns the old value. It is semantically equivalent to `read` followed by `write`. ✅ 已验证"
-        },
-        {
-          "source": "Rust 1.63 Release Notes",
-          "context": "`array::from_fn` and `array::map` were stabilized to provide safe, ergonomic array initialization without requiring unsafe `MaybeUninit` patterns. ✅ 已验证"
-        },
-        {
-          "source": "std::array::from_fn docs",
-          "context": "`from_fn` 的内部实现使用 unsafe 代码（可能涉及 MaybeUninit）来避免中间状态的泄漏风险，但对外暴露完全 safe 的 API。 ✅ 已验证"
-        },
-        {
-          "source": "C11 Standard",
-          "context": "Reading uninitialized automatic variables results in indeterminate values; this is not explicitly UB in all cases, but using such values can lead to UB. ✅ 已验证"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../../docs/02_reference/02_edge_cases_and_special_cases.md",
         "../../../docs/02_reference/quick_reference/02_ownership_cheatsheet.md",
@@ -29210,24 +28822,7 @@
           "code_preview": "fn main() {     let x = Some(5);     let v = match x {         Some(n) => n,    ..."
         }
       ],
-      "sources": [
-        {
-          "source": "Girard 1987 §5 Phase Semantics",
-          "context": "相位语义将线性逻辑从证明论（proof theory）延伸到模型论（model theory）。Rust 编译器的 borrow checker 可视为一个**自动定理证明器**：它验证程序代码是否是\"资源安全\"这一逻辑定理的有效证明。"
-        },
-        {
-          "source": "💡 原创映射",
-          "context": "\"编译期检查 = 证明验证；运行期执行 = 证明归约\"——这是 Curry-Howard 对应在 Rust 工程中的直接体现。💡"
-        },
-        {
-          "source": "Bernardy et al. 2017, *Linear Haskell*",
-          "context": "Linear Haskell 通过重数（multiplicity）在现有类型系统中嵌入线性约束，是严格线性类型系统的工业级实验。 ✅"
-        },
-        {
-          "source": "C++ Reference: Smart pointers",
-          "context": "C++ 无内置线性/仿射类型系统；`unique_ptr` 提供运行时（Runtime）所有权管理，但编译器不检查 use-after-move。 ✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -29440,16 +29035,7 @@
           "code_preview": "// fetch_add(n) 的原子性 = 读取-修改-写入是一个不可分的\"大步骤\" // 分离逻辑中: 这个\"大步骤\"持有 COUNTER 资源的独占权  ..."
         }
       ],
-      "sources": [
-        {
-          "source": "💡 原创推断",
-          "context": "· **[参考: Oxide: The Essence of Rust]** Pin 的形式化语义在 RustBelt 框架中尚未有完整证明，但可以从操作语义和类型系统（Type System）的交互中建立与**位置稳定性（location stability）**的对应。⚠️"
-        },
-        {
-          "source": "Kani Documentation: Proof harnesses; RefinedRust PLDI 2024",
-          "context": "以下代码展示如何用 Kani 将 §9.5 的 LTL 公理转化为**可机械验证的规格**。虽然 Pin 的不动性主要由类型系统保证（编译期），Kani 可用于验证 unsafe 代码中对 Pin 合约的遵守。"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -31280,12 +30866,7 @@
           "code_preview": "// Kani 验证代码: 假设输入范围 #[kani::proof] fn verify_overflow() {     let x: u32 = kani..."
         }
       ],
-      "sources": [
-        {
-          "source": "AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust",
-          "context": "工具选型建议基于各工具的公开文档、工业部署报告及学术评估。✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -35774,24 +35355,7 @@
           "code_preview": "// Cargo.toml: // [features] // default = [\"feat-a\"] // feat-a = [] // feat-b = ..."
         }
       ],
-      "sources": [
-        {
-          "source": "npm Docs: package.json",
-          "context": "Node.js 的 `package.json` 使用 JSON 格式，支持语义化版本但依赖解析行为与 Cargo 不同。 ✅"
-        },
-        {
-          "source": "Go Modules Reference",
-          "context": "Go 模块（Module）使用 `go.mod` 和最小版本选择（MVS）算法，锁文件为 `go.sum`。 ✅"
-        },
-        {
-          "source": "pip Documentation",
-          "context": "Python 的 `requirements.txt` 无内置锁文件机制，依赖版本约束较弱。 ✅"
-        },
-        {
-          "source": "SemVer Specification",
-          "context": "语义化版本规范（SemVer 2.0.0）定义了 MAJOR.MINOR.PATCH 的兼容性契约。 ✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -38212,20 +37776,7 @@
           "code_preview": "use tokio::runtime::Runtime;  fn main() {     let rt = Runtime::new().unwrap(); ..."
         }
       ],
-      "sources": [
-        {
-          "source": "serde.rs; Tokio Documentation; rayon Docs; wasm-bindgen Guide; axum Docs",
-          "context": "各 crate 的具体分析参考了官方文档和最新版本说明。✅"
-        },
-        {
-          "source": "serde.rs; Tokio Documentation; rayon Docs; wasm-bindgen Guide; axum Docs; clap Docs",
-          "context": "各 crate 的具体分析参考了官方文档和最新版本说明。✅"
-        },
-        {
-          "source": "Rust Foundation Survey 2024; Rust in Production Report; crates.io Download Statistics",
-          "context": "生态数据基于公开统计和社区报告。✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -38556,16 +38107,7 @@
           "code_preview": "struct UserId(u64); struct ProductId(u64); ..."
         }
       ],
-      "sources": [
-        {
-          "source": "GoF Design Patterns, 1994",
-          "context": "Observer 模式解耦了主题与观察者，使得主题无需知道观察者的具体类型。✅"
-        },
-        {
-          "source": "Tokio Docs — broadcast",
-          "context": "broadcast 通道实现 fan-out：每个订阅者接收事件的独立拷贝。✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -41009,20 +40551,7 @@
           "code_preview": "use axum::{extract::Json, routing::post, Router}; use serde::Deserialize;  #[der..."
         }
       ],
-      "sources": [
-        {
-          "source": "Axum docs",
-          "context": "Axum is a web application framework that focuses on ergonomics and modularity. It is built on top of Tokio, Tower, and Hyper."
-        },
-        {
-          "source": "Tower docs",
-          "context": "Tower is a library of modular and reusable components for building robust networking clients and servers. The core abstraction is the `Service` trait."
-        },
-        {
-          "source": "TechEmpower Benchmarks",
-          "context": "The TechEmpower Web Framework Benchmarks is a performance comparison of many web application frameworks executing fundamental tasks such as JSON serialization, database access, and server-side template composition."
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md",
         "../../00_meta/00_framework/methodology.md",
@@ -41473,28 +41002,7 @@
           "code_preview": "fn main() {     // ❌ 运行时拒绝: WASI 默认无网络访问权限     let stream = std::net::TcpStream:..."
         }
       ],
-      "sources": [
-        {
-          "source": "WASI Preview 2 Docs; Capability-Based Security Research",
-          "context": "WASI 采用**能力安全（Capability Security）**模型替代传统的 POSIX 系统调用。程序不通过全局文件描述符访问资源，而是通过显式传递的**能力句柄（capability handle）**。"
-        },
-        {
-          "source": "wit-bindgen GitHub; Component Model Tutorial",
-          "context": "`wit-bindgen` 从 WIT 定义生成 Rust 绑定代码："
-        },
-        {
-          "source": "WASI Preview 2 Docs; WebAssembly Component Model Spec; wit-bindgen Docs; WASMtime Docs",
-          "context": "WASI 分析基于 Bytecode Alliance 的官方规范。✅"
-        },
-        {
-          "source": "WebAssembly.org; wasm-bindgen Guide; Rust WASM Working Group",
-          "context": "Wasm 基础概念参考了 W3C 社区组和 Rust WASM 工作组的文档。✅"
-        },
-        {
-          "source": "Capability-Based Security Research; Dennis & Van Horn 1966; Rust Ownership Model",
-          "context": "能力安全模型基于操作系统安全研究的经典文献。✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -42548,36 +42056,7 @@
           "code_preview": "use tokio::task;  async fn handler() -> String {     // ❌ 运行时性能崩溃: 在 async 函数中执行..."
         }
       ],
-      "sources": [
-        {
-          "source": "Rust for Linux Docs",
-          "context": "Rust for Linux 将内核的复杂不变量编码为 Rust 的类型契约。"
-        },
-        {
-          "source": "Aya Book",
-          "context": "eBPF 验证器在加载期证明程序安全性，Rust 类型系统在编译期证明内存安全。"
-        },
-        {
-          "source": "tokio-rs/io-uring",
-          "context": "io_uring 的共享环形缓冲区是 Rust 所有权模型的压力测试。"
-        },
-        {
-          "source": "Quinn Docs",
-          "context": "QUIC 的有状态连接天然适合 Rust 的类型状态模式。"
-        },
-        {
-          "source": "egui Docs",
-          "context": "立即模式每帧重建 UI 状态，所有权模型简化为栈分配 + 借用。"
-        },
-        {
-          "source": "Candle Book",
-          "context": "张量的形状和类型可在编译期验证，避免运行时的形状不匹配。"
-        },
-        {
-          "source": "Rust Blockchain Report 2024; Solana Docs; Polkadot Substrate Docs; Near Protocol Docs",
-          "context": "区块链方向基于公开协议文档和社区报告。✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -44712,16 +44191,7 @@
           "code_preview": "#[panic_handler] fn panic(_info: &core::panic::PanicInfo) -> ! {     loop {} // ..."
         }
       ],
-      "sources": [
-        {
-          "source": "Solana Docs; Polkadot Substrate Docs; Near Protocol Docs; Kani Verification Blog; Rust in Blockchain Report",
-          "context": "区块链分析基于官方协议文档和形式化验证研究。✅"
-        },
-        {
-          "source": "Smart Contract Security Research; Reentrancy Attack Analysis; The DAO Post-Mortem",
-          "context": "合约安全分析基于已公开的安全事件和研究文献。✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -44957,16 +44427,7 @@
           "code_preview": "// 概念代码: Bevy system 参数冲突 // fn conflicting_system( //     mut query: Query<&mut..."
         }
       ],
-      "sources": [
-        {
-          "source": "Bevy Book; Bevy ECS Docs; Fyrox Docs; wgpu Documentation; Data-Oriented Design Book",
-          "context": "游戏开发分析基于官方引擎文档和 DOD 研究。✅"
-        },
-        {
-          "source": "Rust Concurrency Book; Rayon Docs; Rust Book Ch.16",
-          "context": "并发渲染分析基于 Rust 并发安全（Concurrency Safety）的核心文献。✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -45699,12 +45160,7 @@
           "code_preview": "use std::collections::BinaryHeap;  fn main() {     let mut heap = BinaryHeap::ne..."
         }
       ],
-      "sources": [
-        {
-          "source": "CLRS — Introduction to Algorithms, 4th Edition",
-          "context": "An algorithm is any well-defined computational procedure that takes some value, or set of values, as input and produces some value, or set of values, as output."
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/00_start/06_zero_cost_abstractions.md",
@@ -46580,40 +46036,7 @@
           "code_preview": "#[cfg(has_stable_api)] ..."
         }
       ],
-      "sources": [
-        {
-          "source": "Rust Standard Library Docs",
-          "context": "`get_disjoint_mut` returns mutable references to multiple elements, checked at runtime for overlap."
-        },
-        {
-          "source": "Rust 1.86 Release Notes",
-          "context": "Trait object upcasting allows implicit coercion from `dyn SubTrait` to `dyn SuperTrait`."
-        },
-        {
-          "source": "Rust 1.89 Release Notes",
-          "context": "`_` can infer const generic arguments."
-        },
-        {
-          "source": "Rust 1.79 Release Notes",
-          "context": "Bounds on associated types in bounds."
-        },
-        {
-          "source": "Rust 1.85 Release Notes",
-          "context": "Async closures stabilized."
-        },
-        {
-          "source": "rust-lang/rust #117078",
-          "context": "Gen blocks tracking issue."
-        },
-        {
-          "source": "Rust 1.96.0 release notes (GitHub #156512) 2026-05-28; releases.rs",
-          "context": "> Rust 1.96.0 已于 2026-05-28 发布 stable；1.96.1 为当前最新 patch。关键稳定化特性：assert_matches!、core::range 类型族、`From<T>` for LazyCell/LazyLock/AssertUnwindSafe、ManuallyDrop 常量模式、expr metavariable to cfg。"
-        },
-        {
-          "source": "Rust Security Advisory; Ferrous Systems Security Blog; rustsec.org 2026-05",
-          "context": "以下漏洞影响 Rust 生态系统的安全性，需在项目依赖审计中关注。"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../../docs/06_toolchain/06_19_rust_1_96_features.md",
         "../../../docs/06_toolchain/06_21_rust_1_97_features.md",
@@ -47663,24 +47086,7 @@
           "code_preview": "// gen block 也生成自引用状态机 gen {     let x = 42;     yield &x;  // 持有局部变量引用 → Genera..."
         }
       ],
-      "sources": [
-        {
-          "source": "Rust Keyword Generics Initiative 2024",
-          "context": "✅"
-        },
-        {
-          "source": "Rust Internals Discussion; Type Theory Research",
-          "context": "⚠️ 推测性"
-        },
-        {
-          "source": "Plotkin & Pretnar 2009 — Algebraic Effects; Koka Documentation; Eff Language",
-          "context": "Effect 系统概念基于代数效应的经典论文和现代语言实现。✅"
-        },
-        {
-          "source": "Haskell GHC; Java Checked Exceptions; Type Theory Research",
-          "context": "跨语言对比参考了多种语言的效果处理机制和类型论研究。✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -50267,12 +49673,7 @@
           "code_preview": "struct TaggedPtr<T> {     ptr: *mut T,     tag: u8, }  impl<T> TaggedPtr<T> {   ..."
         }
       ],
-      "sources": [
-        {
-          "source": "Rust Internals — Arbitrary Self Types Discussion",
-          "context": "| 资源 | 链接 |"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/02_memory_management/12_smart_pointers.md",
@@ -50594,12 +49995,7 @@
           "code_preview": "// 当前：offset_of! 宏（1.77+ stable） use std::mem::offset_of; let tx_offset = offset..."
         }
       ],
-      "sources": [
-        {
-          "source": "Rust Internals — Field Projections Discussion",
-          "context": "| 资源 | 链接 |"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
         "../../03_advanced/01_async/06_pin_unpin.md",
@@ -50955,7 +50351,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\04_research_and_experimental\\01_ai_integration.md",
       "layer": "L7",
       "title": "AI × Rust：生成-验证闭环与确定性容器",
-      "positioning": "Prophet 属于**监督学习**（学习历史补丁特征），而非 RL。但它是\"编译器/测试反馈驱动程序修复\"思想的早期工业级实践，为后续 RL 方法奠定了问题定义基础。[来源: MIT News, 2016]",
+      "positioning": "Prophet 属于**监督学习**（学习历史补丁特征），而非 RL。但它是\"编译器/测试反馈驱动程序修复\"思想的早期工业级实践，为后续 RL 方法奠定了问题定义基础。[MIT News, 2016](https://news.mit.edu/)",
       "line_count": 1007,
       "theorem_chains": [
         {
@@ -51059,16 +50455,7 @@
           "code_preview": "fn ai_function() -> String {     let data = String::from(\"temporary\");     // ❌ ..."
         }
       ],
-      "sources": [
-        {
-          "source": "Yasunaga & Liang, ICML 2021 — Break-It-Fix-It",
-          "context": "将编译器/类型检查器视为 critic，其输出（错误存在/不存在）构成自然的二元奖励，无需人工标注修复对。✅"
-        },
-        {
-          "source": "Gupta et al., AAAI 2019 — Deep RL for Syntactic Error Repair",
-          "context": "在学生程序修复任务中，使用编译通过作为最终奖励，中间奖励为错误数量变化，agent 在 5,156 个错误消息上训练，成功完全修复 1,625 个程序。✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -51208,28 +50595,7 @@
           "code_preview": "// 假设项目使用 nightly-2024-01-01 的 Miri // 但开发者升级到 nightly-2024-06-01  #![feature(cu..."
         }
       ],
-      "sources": [
-        {
-          "source": "Specifying Systems, Lamport 2002; TLA+ Video Course",
-          "context": "TLA+ 的数学基础是 ZF 集合论 + 线性时序逻辑。`[Next]_vars` 的 stuttering 不变性（stuttering invariance）是 TLA+ 支持层次化规约和实现精化的关键——规约不限制系统\"什么都不做\"的次数，从而允许不同抽象层级的规约相互精化。"
-        },
-        {
-          "source": "AWS CACM 2015 — How Amazon Web Services Uses Formal Methods; Kani Docs; Verus Docs",
-          "context": "TLA+ 用于验证\"设计是否正确\"，Kani/Verus 用于验证\"实现是否与设计一致\"。在工业实践中，TLA+ 往往在项目早期使用（甚至先于代码），而 Kani/Verus 在编码阶段迭代使用。"
-        },
-        {
-          "source": "AWS Kani Blog 2023; Microsoft Verus Docs; Creusot Tutorial; Prusti GitHub; Aeneas Docs",
-          "context": "形式化工具的分析基于各工具的官方文档和公开发表的论文。✅"
-        },
-        {
-          "source": "AWS Kani Blog 2023; Microsoft Verus Docs; Creusot Tutorial; Prusti GitHub",
-          "context": "工业工具分析基于各工具的官方文档和公开发表的论文。✅"
-        },
-        {
-          "source": "TLA+ Spec; P Language Docs; Spin Documentation",
-          "context": "协议验证工具参考了形式化方法领域的成熟工具文档。✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/02_sources/rustbelt_predicate_map.md",
@@ -51443,28 +50809,7 @@
           "code_preview": "fn main() {     let opt = Some(5);     // ❌ 编译错误: 在 Rust 1.65 之前，let-else 语法不稳定 ..."
         }
       ],
-      "sources": [
-        {
-          "source": "Rust Lang Team Roadmap; Inside Rust Blog; 社区讨论",
-          "context": "📋 推测性内容"
-        },
-        {
-          "source": "Rust Lang Team Blog; Rust Internals Forum; Lang Team Roadmap",
-          "context": "未来方向基于语言团队的公开讨论和路线图文档。✅"
-        },
-        {
-          "source": "Niko Matsakis, \"Rust in 2025+\" blog",
-          "context": "语言设计决策的社区权威解读，涵盖 trait solver 演进、const generics 稳定化等主题。 ✅"
-        },
-        {
-          "source": "Without Boats, \"The Rust I Wanted Had No Future\"",
-          "context": "对 Rust 语言设计哲学和演进方向的深度反思，涉及 effects、async fn in traits 等特性的设计权衡。 ✅"
-        },
-        {
-          "source": "Koka Language; Plotkin & Pretnar 2009; Type Theory Research",
-          "context": "Effects 系统和类型论扩展参考了学术文献。✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/competency_graph.md",
         "../../00_meta/00_framework/methodology.md",

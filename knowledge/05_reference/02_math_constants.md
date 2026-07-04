@@ -54,8 +54,8 @@
 
 Rust 将常用数学常量定义为关联常量（associated constants），挂载在 `f32` 和 `f64` 类型上：
 
-> **[来源: Rust Reference: Associated Items]** 关联常量是 trait 或 impl 块中定义的常量，与类型直接绑定。 ✅
-> **[来源: std::f64::consts 文档]** Rust 标准库提供精确到浮点表示极限的数学常量，编译期求值，零运行时开销。 ✅
+> **[Rust Reference: Associated Items](https://doc.rust-lang.org/reference/introduction.html)** 关联常量是 trait 或 impl 块中定义的常量，与类型直接绑定。 ✅
+> **[std::f64::consts 文档](https://doc.rust-lang.org/std/index.html)** Rust 标准库提供精确到浮点表示极限的数学常量，编译期求值，零运行时开销。 ✅
 
 ```rust,ignore
 // 编译时常量，零运行时开销

@@ -54,8 +54,8 @@
 
 `LazyCell` 提供单线程环境下的延迟初始化，线程不安全但性能更高。
 
-> **[来源: RFC 2788 — Lazy Cell]** `LazyCell` 和 `LazyLock` 提供无需宏的延迟初始化，取代 `lazy_static!` 和 `once_cell` crate 的部分用例。 ✅
-> **[来源: Rust Reference: Interior Mutability]** `LazyCell` 基于内部可变性模式，通过 `UnsafeCell` 在编译期不可变的位置实现运行时可变。 ✅
+> **[RFC 2788 — Lazy Cell](https://rust-lang.github.io/rfcs/2788.html)** `LazyCell` 和 `LazyLock` 提供无需宏的延迟初始化，取代 `lazy_static!` 和 `once_cell` crate 的部分用例。 ✅
+> **[Rust Reference: Interior Mutability](https://doc.rust-lang.org/reference/introduction.html)** `LazyCell` 基于内部可变性模式，通过 `UnsafeCell` 在编译期不可变的位置实现运行时可变。 ✅
 
 #### 2.1 基础用法
 

@@ -226,7 +226,7 @@ let json: serde_json::Value = resp.json().await?;         // JSON 反序列化
 let stream = resp.bytes_stream();                         // 流式处理（返回 Stream）
 ```
 
-> [来源: Rust Reference — Methods](https://doc.rust-lang.org/reference/items/associated-items.html#methods)
+> [Rust Reference — Methods](https://doc.rust-lang.org/reference/introduction.html)(<https://doc.rust-lang.org/reference/items/associated-items.html#methods>)
 
 ---
 

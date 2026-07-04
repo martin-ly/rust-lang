@@ -61,14 +61,14 @@ impl Driver for MyDriver {
 ```
 
 > **关键洞察**: Rust for Linux 的核心价值不是"用 Rust 重写整个内核"，而是"在关键子系统中用 Rust 的安全保证替代 C 的脆弱性"。
-> binder 驱动（Android IPC）是首个成功案例——它处理了复杂的跨进程引用（Reference）计数，而 Rust 的所有权（Ownership）系统消除了 C 代码中常见的 use-after-free 和 double-free 漏洞。[来源: LWN — Rust in the Linux Kernel] ✅
+> binder 驱动（Android IPC）是首个成功案例——它处理了复杂的跨进程引用（Reference）计数，而 Rust 的所有权（Ownership）系统消除了 C 代码中常见的 use-after-free 和 double-free 漏洞。[LWN — Rust in the Linux Kernel](https://lwn.net/Kernel/Index/#Rust) ✅
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
 
 ## 二、Theseus：Rust 编写的微内核操作系统
 
-> **[来源: Theseus OS — Raman et al., OSDI 2020] · [Theseus Documentation](https://www.theseus-os.com/)** ✅
+> **[Theseus OS — Raman et al., OSDI 2020](https://www.theseus-os.com/) · [Theseus Documentation](https://www.theseus-os.com/)** ✅
 
 ### 2.1 Theseus 的核心设计
 
@@ -117,13 +117,13 @@ trait IPC {
 > 传统操作系统依赖 MMU（内存管理单元）进行进程隔离；
 > Theseus 依赖 Rust 的所有权（Ownership）系统——如果一个 cell 没有另一个 cell 的引用（Reference），它就无法访问其内存。
 > 这在理论上是安全的，但在实践中需要完全排除 unsafe 代码（任何 unsafe 块都可能绕过类型系统（Type System）隔离）。
-> [来源: Raman et al., OSDI 2020] ✅
+> [Raman et al., OSDI 2020](https://www.usenix.org/conference/osdi20/presentation/raman) ✅
 
 ---
 
 ## 三、Redox OS：Rust 编写的通用操作系统
 
-> **[来源: Redox OS Website](https://www.redox-os.org/) · [Redox GitHub](https://gitlab.redox-os.org/redox-os/redox)** ✅
+> **[Redox OS Website](https://www.redox-os.org/)(<https://www.redox-os.org/>) · [Redox GitHub](https://gitlab.redox-os.org/redox-os/redox)** ✅
 
 Redox 是 Rust 编写的**类 Unix 微内核操作系统**，目标是替代 Linux/BSD：
 
@@ -138,7 +138,7 @@ Redox 是 Rust 编写的**类 Unix 微内核操作系统**，目标是替代 Lin
 | **成熟度** | 实验性/研究 | 生产级 |
 
 > **关键洞察**: Redox 的 RedoxFS 文件系统采用**Copy-on-Write（COW）**设计，与 Rust 的所有权（Ownership）模型天然契合——文件写入时创建新副本（类似 `clone()`），旧版本保留（类似 `Rc::clone`）。
-> 这种设计使得 RedoxFS 可以高效支持快照和回滚，且无需垃圾回收。[来源: Redox OS Documentation] ✅
+> 这种设计使得 RedoxFS 可以高效支持快照和回滚，且无需垃圾回收。[Redox OS Documentation](https://doc.redox-os.org/) ✅
 
 ---
 

@@ -18,33 +18,33 @@
 >
 > | 标识符 | 全称 | 根 URL | 更新频率 | 建议引用（Reference）格式 |
 > | :--- | :--- | :--- | :--- | :--- |
-> | `REF` | Rust Reference | <https://doc.rust-lang.org/reference/> | 与 stable 同步 | `[来源: REF — §章节]` |
+> | `REF` | Rust Reference | <https://doc.rust-lang.org/reference/> | 与 stable 同步 | `[REF — §章节](https://doc.rust-lang.org/reference/introduction.html)` |
 > | `TRPL` | The Rust Programming Language | <https://doc.rust-lang.org/book/title-page.html> | 每 Edition 更新 | `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)` |
 > | `NOM` |
 >
-> **定位**: 本项目所有 `[来源: ...]` 标注的**单一真相源（Single Source of Truth）**。
+> **定位**: 本项目所有 `[...](https://doc.rust-lang.org/)` 标注的**单一真相源（Single Source of Truth）**。
 > **原则**: 每个来源必须指向**具体章节或锚点**，禁止仅使用根 URL。
 > **维护**: 新增来源必须先在此索引注册，获取唯一标识符，然后在概念文件中引用（Reference）。
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
 
-## 一级来源：官方规范与设计文档
+## 一级[官方规范与设计文档](../00_meta/02_sources/international_authority_index.md)
 
 | 标识符 | 全称 | 根 URL | 更新频率 | 建议引用（Reference）格式 |
 | :--- | :--- | :--- | :--- | :--- |
-| `REF` | Rust Reference | <https://doc.rust-lang.org/reference/> | 与 stable 同步 | `[来源: REF — §章节]` |
+| `REF` | Rust Reference | <https://doc.rust-lang.org/reference/> | 与 stable 同步 | `[REF — §章节](https://doc.rust-lang.org/reference/introduction.html)` |
 | `TRPL` | The Rust Programming Language | <https://doc.rust-lang.org/book/title-page.html> | 每 Edition 更新 | `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)` |
-| `NOM` | The Rustonomicon | <https://doc.rust-lang.org/nomicon/> | 持续维护 | `[来源: NOM — 章节名]` |
-| `RBE` | Rust by Example | <https://doc.rust-lang.org/rust-by-example/> | 与 stable 同步 | `[来源: RBE — 示例名]` |
-| `RFC` | Rust RFCs | <https://rust-lang.github.io/rfcs/> | 持续活跃 | `[来源: RFC XXXX]` |
-| `EDG` | Rust Edition Guide | <https://doc.rust-lang.org/edition-guide/> | 每 Edition 更新 | `[来源: EDG — 章节]` |
-| `ASB` | Asynchronous Programming in Rust (Async Book) | <https://rust-lang.github.io/async-book/> | 重写中 | `[来源: ASB — 章节]` |
-| `CAR` | The Cargo Book | <https://doc.rust-lang.org/cargo/> | 持续维护 | `[来源: CAR — 章节]` |
-| `RUC` | The rustc Book | <https://doc.rust-lang.org/rustc/> | 持续维护 | `[来源: RUC — 章节]` |
-| `UNB` | The Unstable Book | <https://doc.rust-lang.org/nightly/unstable-book/> | nightly | `[来源: UNB — 特性名]` |
-| `STD` | Rust Standard Library | <https://doc.rust-lang.org/std/> | 与 stable 同步 | `[来源: STD — 模块（Module）::项]` |
-| `FOR` | Rust Forge | <https://forge.rust-lang.org/> | 持续维护 | `[来源: FOR — 页面]` |
+| `NOM` | The Rustonomicon | <https://doc.rust-lang.org/nomicon/> | 持续维护 | `[NOM — 章节名](https://docs.rs/nom/latest/nom/)` |
+| `RBE` | Rust by Example | <https://doc.rust-lang.org/rust-by-example/> | 与 stable 同步 | `[RBE — 示例名](https://doc.rust-lang.org/rust-by-example/index.html)` |
+| `RFC` | Rust RFCs | <https://rust-lang.github.io/rfcs/> | 持续活跃 | `[RFC XXXX](https://rust-lang.github.io/rfcs/index.html)` |
+| `EDG` | Rust Edition Guide | <https://doc.rust-lang.org/edition-guide/> | 每 Edition 更新 | `[EDG — 章节](https://doc.rust-lang.org/edition-guide/index.html)` |
+| `ASB` | Asynchronous Programming in Rust (Async Book) | <https://rust-lang.github.io/async-book/> | 重写中 | `[ASB — 章节](https://rust-lang.github.io/async-book/index.html)` |
+| `CAR` | The Cargo Book | <https://doc.rust-lang.org/cargo/> | 持续维护 | `[CAR — 章节](https://doc.rust-lang.org/cargo/index.html)` |
+| `RUC` | The rustc Book | <https://doc.rust-lang.org/rustc/> | 持续维护 | `[RUC — 章节](https://doc.rust-lang.org/rustc/index.html)` |
+| `UNB` | The Unstable Book | <https://doc.rust-lang.org/nightly/unstable-book/> | nightly | `[UNB — 特性名](https://doc.rust-lang.org/nightly/unstable-book/index.html)` |
+| `STD` | Rust Standard Library | <https://doc.rust-lang.org/std/> | 与 stable 同步 | `[STD — 模块（Module）::项](https://doc.rust-lang.org/std/index.html)` |
+| `FOR` | Rust Forge | <https://forge.rust-lang.org/> | 持续维护 | `[FOR — 页面](https://forge.rust-lang.org/)` |
 
 ### REF — Rust Reference 精确章节映射（常用）
 
@@ -90,36 +90,36 @@
 
 ---
 
-## 二级来源：学术论文与形式化验证
+## 二级[学术论文与形式化验证](../00_meta/02_sources/international_authority_index.md)
 
 | 标识符 | 全称 | 类型 | 建议引用（Reference）格式 |
 | :--- | :--- | :--- | :--- |
-| `RB18` | RustBelt: Securing the Foundations of the Rust Programming Language (POPL 2018) | 论文 | `[来源: RB18 — §章节]` |
-| `Jung21` | Stacked Borrows: An Aliasing Model for Rust (POPL 2021) | 论文 | `[来源: Jung21]` |
-| `Jung23` | Tree Borrows: An Aliasing Model for Rust (arXiv 2023) | 论文 | `[来源: Jung23]` |
-| `Wadler89` | Theorems for Free! (POPL 1989) | 论文 | `[来源: Wadler89]` |
-| `TAPL` | Types and Programming Languages (Pierce 2002) | 教材 | `[来源: TAPL — 章节]` |
-| `LL87` | Linear Logic (Girard 1987) | 论文 | `[来源: LL87]` |
-| `Reynolds02` | Separation Logic (Reynolds 2002) | 论文 | `[来源: Reynolds02]` |
-| `Iris` | Iris Framework | 工具 | `[来源: Iris]` |
-| `Viper` | Viper Verification Infrastructure | 工具 | `[来源: Viper]` |
-| `Kani` | Kani Rust Verifier | 工具 | `[来源: Kani — 文档章节]` |
-| `Miri` | Miri (Rust interpreter) | 工具 | `[来源: Miri]` |
+| `RB18` | RustBelt: Securing the Foundations of the Rust Programming Language (POPL 2018) | 论文 | `[RB18 — §章节](https://plv.mpi-sws.org/rustbelt/)` |
+| `Jung21` | Stacked Borrows: An Aliasing Model for Rust (POPL 2021) | 论文 | `[Jung21](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)` |
+| `Jung23` | Tree Borrows: An Aliasing Model for Rust (arXiv 2023) | 论文 | `[Jung23](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/tree-borrows.md)` |
+| `Wadler89` | Theorems for Free! (POPL 1989) | 论文 | `[Wadler89](https://doi.org/10.1145/99370.99404)` |
+| `TAPL` | Types and Programming Languages (Pierce 2002) | 教材 | `[TAPL — 章节](https://www.cis.upenn.edu/~bcpierce/tapl/)` |
+| `LL87` | Linear Logic (Girard 1987) | 论文 | `[LL87](https://en.wikipedia.org/wiki/Linear_logic)` |
+| `Reynolds02` | Separation Logic (Reynolds 2002) | 论文 | `[Reynolds02](https://doi.org/10.1007/3-540-36575-3_19)` |
+| `Iris` | Iris Framework | 工具 | `[Iris](https://iris-project.org/)` |
+| `Viper` | Viper Verification Infrastructure | 工具 | `[Viper](https://www.pm.inf.ethz.ch/research/prusti.html)` |
+| `Kani` | Kani Rust Verifier | 工具 | `[Kani — 文档章节](https://model-checking.github.io/kani/)` |
+| `Miri` | Miri (Rust interpreter) | 工具 | `[Miri](https://github.com/rust-lang/miri/)` |
 
 ---
 
-## 三级来源：社区与工业资源
+## 三级[社区与工业资源](../00_meta/02_sources/international_authority_index.md)
 
 | 标识符 | 全称 | 类型 | 建议引用（Reference）格式 |
 | :--- | :--- | :--- | :--- |
-| `CR` | Comprehensive Rust (Google) | 培训 | `[来源: CR — 章节]` |
-| `RI` | Rust Internals (internals.rust-lang.org) | 论坛 | `[来源: RI — 帖子标题]` |
-| `TWiR` | This Week in Rust | 周报 | `[来源: TWiR — 期号]` |
-| `BE` | Bevy Engine 文档 | 生态 | `[来源: BE]` |
-| `TK` | Tokio 文档 | 生态 | `[来源: TK — 章节]` |
-| `WG` | Rust GameDev Working Group | 社区 | `[来源: WG]` |
-| `COR` | corrode.dev | 博客 | `[来源: COR — 文章]` |
-| `BOATS` | without.boats 博客 | 博客 | `[来源: BOATS — 文章]` |
+| `CR` | Comprehensive Rust (Google) | 培训 | `[CR — 章节](https://google.github.io/comprehensive-rust/)` |
+| `RI` | Rust Internals (internals.rust-lang.org) | 论坛 | `[RI — 帖子标题](https://internals.rust-lang.org/)` |
+| `TWiR` | This Week in Rust | 周报 | `[TWiR — 期号](https://this-week-in-rust.org/)` |
+| `BE` | Bevy Engine 文档 | 生态 | `[BE](https://bevyengine.org/learn/book/)` |
+| `TK` | Tokio 文档 | 生态 | `[TK — 章节](https://docs.rs/tokio/latest/tokio/)` |
+| `WG` | Rust GameDev Working Group | 社区 | `[WG](https://gamedev.rs/)` |
+| `COR` | corrode.dev | 博客 | `[COR — 文章](https://corrode.dev/)` |
+| `BOATS` | without.boats 博客 | 博客 | `[BOATS — 文章](https://without.boats/blog/)` |
 
 ---
 
@@ -134,10 +134,10 @@
 
 ### 推荐行为
 
-1. ✅ **精确到章节**: `[来源: REF — §4.1.9 Borrowing]` 或 `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)`
-2. ✅ **标注来源状态**: 对 nightly/unstable 特性标注 `[来源: UNB — gen_blocks] (nightly, 1.95+)`
+1. ✅ **精确到章节**: `[REF — §4.1.9 Borrowing](https://doc.rust-lang.org/reference/introduction.html)` 或 `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)`
+2. ✅ **标注来源状态**: 对 nightly/unstable 特性标注 `[UNB — gen_blocks](https://doc.rust-lang.org/nightly/unstable-book/index.html) (nightly, 1.95+)`
 3. ✅ **区分原创与引用**: `[💡 原创分析](../00_meta/00_framework/methodology.md)` 仅用于有实质原创洞见的段落
-4. ✅ **论文引用完整**: `[来源: Jung21 — Stacked Borrows, POPL 2021, §3.2]`
+4. ✅ **论文引用完整**: `[Jung21 — Stacked Borrows, POPL 2021, §3.2](https://popl.sigplan.org/)`
 
 ---
 

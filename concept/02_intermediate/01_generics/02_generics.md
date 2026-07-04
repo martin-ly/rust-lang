@@ -214,7 +214,7 @@
 | **类型参数** | `<T>` | 类型 | 无 | 最常见，泛型容器/函数 |
 | **生命周期（Lifetimes）参数** | `<'a>` | 引用（Reference）有效期 | 推断 | 函数/结构体（Struct）含引用 |
 
-> **形式化对应**: 生命周期（Lifetimes）参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用（Reference）有效性的形式化约束。详见 L1 生命周期 §4 和 [L4 所有权（Ownership）形式化](../../04_formal/01_ownership_logic/03_ownership_formal.md) §2.2。[来源: Tofte & Talpin 1994 — Region Types]
+> **形式化对应**: 生命周期（Lifetimes）参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用（Reference）有效性的形式化约束。详见 L1 生命周期 §4 和 [L4 所有权（Ownership）形式化](../../04_formal/01_ownership_logic/03_ownership_formal.md) §2.2。[Tofte & Talpin 1994 — Region Types](https://doi.org/10.1145/176454.176456)
 | **常量泛型** | `<const N: usize>` | 编译期常量值 | 无 | 固定大小数组、类型状态 |
 | **关联类型** | `type Item;` | Trait 内部类型 | 实现时确定 | Iterator、Future 等 |
 
@@ -232,9 +232,9 @@
 
 > **来源: [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/introduction.html)** Rust 泛型通过单态化实现零成本抽象（Zero-Cost Abstraction），为每个具体类型生成专用代码。 ✅
 > **[C++ Reference: Templates](https://en.cppreference.com/w/cpp/templates)** C++ 模板通过文本替换实现编译期实例化，与 Rust 单态化类似但无统一类型检查。 ✅
-> **[来源: Java Language Spec: Type Erasure]** Java 泛型通过类型擦除实现，编译为 `Object` 并插入类型转换，有运行时装箱开销。 ✅
-> **[来源: Go Spec: Type parameters]** Go 1.18+ 泛型通过 GC shape stenciling 实现，为每个 GC shape 生成一份代码，运行时开销极低。 ✅
-> **[来源: Pierce, TAPL Ch.23]** 参数多态（parametric polymorphism）与约束多态（bounded quantification）的理论基础。 ⚠️（教科书级参考）
+> **[Java Language Spec: Type Erasure](https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.6)** Java 泛型通过类型擦除实现，编译为 `Object` 并插入类型转换，有运行时装箱开销。 ✅
+> **[Go Spec: Type parameters](https://go.dev/ref/spec#Type_parameters)** Go 1.18+ 泛型通过 GC shape stenciling 实现，为每个 GC shape 生成一份代码，运行时开销极低。 ✅
+> **[Pierce, TAPL Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/)** 参数多态（parametric polymorphism）与约束多态（bounded quantification）的理论基础。 ⚠️（教科书级参考）
 
 ### 2.3 泛型约束演进矩阵
 >
@@ -574,7 +574,7 @@ struct LongTermStore<T: 'static> {
 
 > **[Wadler 1989 — "Theorems for Free!", POPL](https://dl.acm.org/doi/10.1145/75277.75305)** · **[Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/)** 参数性定理（Reynolds 1983 / Wadler 1989）是参数多态的核心元定理：多态函数的行为仅由其类型决定，与具体类型无关。 ✅ 已验证
 
-**核心定理**: 对于任意无 Trait Bound 的多态函数 `f: ∀T. τ(T)`，其可观察行为完全由类型结构 `τ` 决定，函数不能基于 `T` 的具体内部表示做分支。[来源: Wadler 1989 — Theorems for Free!]
+**核心定理**: 对于任意无 Trait Bound 的多态函数 `f: ∀T. τ(T)`，其可观察行为完全由类型结构 `τ` 决定，函数不能基于 `T` 的具体内部表示做分支。[Wadler 1989 — Theorems for Free!](https://doi.org/10.1145/99370.99404)
 
 **示例推导 1：`fn f<T>(x: T) -> T`**
 
@@ -610,7 +610,7 @@ struct LongTermStore<T: 'static> {
 结论: 参数性 ⟹ 输出是输入的子序列（元素顺序保持，无新构造）
 ```
 
-**工程意义**: 参数性将类型签名转化为"免费定理"——调用方无需阅读实现即可推断函数的行为边界，显著降低认知负担。类型约束越严格（Trait Bounds），实现空间越小，推理能力越强。[来源: Wadler 1989 / 原创分析]
+**工程意义**: 参数性将类型签名转化为"免费定理"——调用方无需阅读实现即可推断函数的行为边界，显著降低认知负担。类型约束越严格（Trait Bounds），实现空间越小，推理能力越强。[Wadler 1989 / 原创分析](https://doi.org/10.1145/99370.99404)
 
 **反例边界：参数性何时失效**:
 
@@ -982,7 +982,7 @@ fn main() {
 
 #### 5.7.7 与 C++ 模板非类型参数的对比
 
-C++ 模板自 C++98 起支持非类型模板参数（NTTP, Non-Type Template Parameters），Rust 的 Const Generics 在设计上深受其影响，但存在关键差异：[来源: C++ Reference: Non-type template parameter]
+C++ 模板自 C++98 起支持非类型模板参数（NTTP, Non-Type Template Parameters），Rust 的 Const Generics 在设计上深受其影响，但存在关键差异：[C++ Reference: Non-type template parameter](https://en.cppreference.com/w/cpp/language/template_parameters)
 
 | **维度** | **Rust Const Generics** | **C++ 非类型模板参数 (NTTP)** |
 |:---|:---|:---|
@@ -2209,7 +2209,7 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 
 > **来源: [RFC 3617](https://github.com/rust-lang/rfcs/pull/3617)** Explicit lifetime capture in `impl Trait`.
 > **来源: [Rust 2024 Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)** RPIT capture rules changed.
-> **[来源: Rustify.rs 2026]** "显式契约使形式化验证更容易，但增加了学习曲线。"
+> **[Rustify.rs 2026](https://rustify.rs/)** "显式契约使形式化验证更容易，但增加了学习曲线。"
 
 ---
 

@@ -96,7 +96,7 @@
 
 > **关键洞察**: Kani 不是测试框架，而是**符号执行 + 模型检查器**。它回答的问题是："对于所有满足前置条件的输入，该函数是否永远不会 panic、越界、触发断言失败或其他指定错误？"
 >
-> [来源: Kani 官方文档](https://model-checking.github.io/kani/)
+> [Kani 官方文档](https://model-checking.github.io/kani/)(<https://model-checking.github.io/kani/>)
 
 ### 与测试、Miri、Verus 的定位差异
 

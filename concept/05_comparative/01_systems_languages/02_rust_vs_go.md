@@ -58,15 +58,15 @@
 
 | **课程** | **机构** | **相关内容** |
 |:---|:---|:---|
-| CS340R Rusty Systems | Stanford University | 项目驱动课程，探讨 Rust 如何改变软件系统研究，将 Rust、Go 视为 C 的竞争对手，分析"Rust 编写的软件系统面临的最重要开放研究挑战是什么" [来源: Stanford Explore Courses] |
-| 17-350 Safe Systems Programming in Rust | CMU | 涵盖所有权类型、安全手动内存管理、安全并发（Safe Concurrency），实践对比 Ownership-based 并发与 CSP-style 并发的安全保证差异 [来源: CMU Course Catalog] |
+| CS340R Rusty Systems | Stanford University | 项目驱动课程，探讨 Rust 如何改变软件系统研究，将 Rust、Go 视为 C 的竞争对手，分析"Rust 编写的软件系统面临的最重要开放研究挑战是什么" [Stanford Explore Courses](https://explorecourses.stanford.edu/) |
+| 17-350 Safe Systems Programming in Rust | CMU | 涵盖所有权类型、安全手动内存管理、安全并发（Safe Concurrency），实践对比 Ownership-based 并发与 CSP-style 并发的安全保证差异 [CMU Course Catalog](https://www.csd.cs.cmu.edu/) |
 
 ### 1.5 学术论文引用
 
-> **Hoare, C.A.R. (1978).** *Communicating Sequential Processes.* Communications of the ACM, 21(8), 666-677. [来源: ACM Digital Library / CACM]
+> **Hoare, C.A.R. (1978).** *Communicating Sequential Processes.* Communications of the ACM, 21(8), 666-677. [ACM Digital Library / CACM](https://dl.acm.org/)
 >
 > 这篇奠基性论文首次提出了 CSP 形式化模型，定义了进程间通过通道（channel）进行同步通信的代数语义，为 Go 的 goroutine + channel 并发模型提供了理论源头。
-> **The Go Memory Model (官方文档).** <https://go.dev/ref/mem> [来源: go.dev / Russ Cox et al.]
+> **The Go Memory Model (官方文档).** <https://go.dev/ref/mem> [go.dev / Russ Cox et al.](https://go.dev/)
 > Go 内存模型定义了 goroutine 之间内存可见性的 happens-before 关系，明确无数据竞争（data-race-free）程序具有顺序一致性（DRF-SC）。该模型的形式化基础参考了 Boehm & Adve (PLDI 2008) 的 C++ 并发内存模型工作。
 
 ---
@@ -255,7 +255,7 @@ graph TD
 > **认知功能**: 将技术选型问题转化为可操作的决策路径，降低选型焦虑。建议按顺序回答每个节点问题，不要跳过前置条件。关键洞察：P99 延迟和 GC 容忍度是最先决策的分水岭，团队经验往往比纯技术因素更重要。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **决策节点解释**:
 >
-> - P99 延迟 < 1ms：Go 的 GC 虽通常 <1ms，但在高压力下可能累积，无法满足硬实时要求 [来源: Go GC Guide / 工业实践]
+> - P99 延迟 < 1ms：Go 的 GC 虽通常 <1ms，但在高压力下可能累积，无法满足硬实时要求 [Go GC Guide / 工业实践](https://tip.golang.org/doc/gc-guide)
 > - 编译期数据竞争保证：只有 Rust 的 Send/Sync 能在编译期消除数据竞争；Go 依赖 `go test -race` 等运行时检测 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / Go Memory Model
 > - 静态单二进制：Go 更适合快速构建单个可执行文件；Rust 也可以，但编译时间更长
 
@@ -300,11 +300,11 @@ graph TD
 
 | **场景** | **Go 行为** | **Rust 行为** | **结论** |
 |:---|:---|:---|:---|
-| 高频交易（HFT） | GC 可能在关键时刻触发，导致 P99 尖峰 | 确定性内存释放，无停顿 | Rust 更适合 [来源: 工业实践] |
+| 高频交易（HFT） | GC 可能在关键时刻触发，导致 P99 尖峰 | 确定性内存释放，无停顿 | Rust 更适合 [工业实践](../../00_meta/00_framework/methodology.md) |
 | 长时间运行服务 | GC 随堆增长而调整，内存占用可能膨胀 | 精确控制内存生命周期（Lifetimes） | Rust 更可控 |
 | 小工具/CLI | GC 开销微不足道，开发效率优先 | 编译时间长，收益有限 | Go 更合适 |
 
-> **关键数据**: Go 1.20+ 的并发 GC 典型停顿时间约 10-100μs，但在大堆（>100GB）或高分配率场景下，mark 阶段可能消耗显著 CPU，导致吞吐下降。Rust 完全消除了这类不可预测性。 [来源: Go GC Guide / Go 1.20 Release Notes]
+> **关键数据**: Go 1.20+ 的并发 GC 典型停顿时间约 10-100μs，但在大堆（>100GB）或高分配率场景下，mark 阶段可能消耗显著 CPU，导致吞吐下降。Rust 完全消除了这类不可预测性。 [Go GC Guide / Go 1.20 Release Notes](https://tip.golang.org/doc/gc-guide)
 
 ### 6.3 反例: Go 的接口运行时开销 vs Rust 的零成本抽象
 
@@ -385,7 +385,7 @@ func main() {
 }
 ```
 
-> **关键机制**: Go 的 channel 传递的是值的拷贝（若传递指针则共享堆）。没有编译期所有权检查，开发者需自行避免数据竞争。`go` 关键字启动的 goroutine 由运行时调度器管理，栈动态增长（2KB 起始）。 [来源: Effective Go / Go Memory Model]
+> **关键机制**: Go 的 channel 传递的是值的拷贝（若传递指针则共享堆）。没有编译期所有权检查，开发者需自行避免数据竞争。`go` 关键字启动的 goroutine 由运行时调度器管理，栈动态增长（2KB 起始）。 [Effective Go / Go Memory Model](https://go.dev/doc/effective_go)
 
 ### 7.3 对比总结
 
@@ -405,8 +405,8 @@ func main() {
 >
 > - **Go 负责编排层**：API Gateway、K8s Operator、控制平面——利用 Go 的快速编译、大生态和低延迟 GC。
 > - **Rust 负责数据平面**：高性能代理（如 Linkerd2-proxy）、存储引擎、实时计算模块（Module）——利用 Rust 的零成本抽象（Zero-Cost Abstraction）和无 GC 特性。
-> - **FFI 边界**：通过 C ABI 或 gRPC 进行跨语言通信，避免 cgo 的高开销。 [来源: Linkerd 架构文档 / 工业实践]
-> - **典型案例**: Discord 从 Go 切换到 Rust 处理消息排序和推送；Dropbox 使用 Rust 重写核心同步引擎，Go 保留管理后台。 [来源: Discord Engineering Blog / Dropbox Tech Blog]
+> - **FFI 边界**：通过 C ABI 或 gRPC 进行跨语言通信，避免 cgo 的高开销。 [Linkerd 架构文档 / 工业实践](https://linkerd.io/2/overview/)
+> - **典型案例**: Discord 从 Go 切换到 Rust 处理消息排序和推送；Dropbox 使用 Rust 重写核心同步引擎，Go 保留管理后台。 [Discord Engineering Blog / Dropbox Tech Blog](https://discord.com/blog/engineering)
 
 ## 八、错误处理深度对比
 

@@ -269,7 +269,7 @@ classDiagram
 
 > **认知功能**: 将Visitor模式的"双重分发"结构可视化，清晰呈现Expr（元素层次）与ExprVisitor（操作层次）的正交分离。建议在实现AST遍历或代码生成前对照此图验证接口设计。
 > **关键洞察**: enum变体替代继承层次，`accept`方法的泛型（Generics）参数将运行时（Runtime）双重分发压缩为编译期单分发，消除虚函数表膨胀。
-> **思维表征说明**: `classDiagram` 是设计模式的**标准 UML 表达**——`--|>` 表示继承/变体关系，`<|..` 表示 trait 实现，`..>` 表示依赖关系。Visitor 模式的核心结构在此图中一目了然：Expr 是被访问的元素层次（enum 变体），ExprVisitor 是操作接口，EvalVisitor / PrintVisitor 是具体操作实现。这与 `graph TD` 流程图（展示概念关系）形成互补——类图展示的是**代码结构中的类型关系**。 [来源: GoF Design Patterns; UML 2.5 Class Diagram Standard]
+> **思维表征说明**: `classDiagram` 是设计模式的**标准 UML 表达**——`--|>` 表示继承/变体关系，`<|..` 表示 trait 实现，`..>` 表示依赖关系。Visitor 模式的核心结构在此图中一目了然：Expr 是被访问的元素层次（enum 变体），ExprVisitor 是操作接口，EvalVisitor / PrintVisitor 是具体操作实现。这与 `graph TD` 流程图（展示概念关系）形成互补——类图展示的是**代码结构中的类型关系**。 [GoF Design Patterns; UML 2.5 Class Diagram Standard](https://en.wikipedia.org/wiki/Design_Patterns)
 
 **与其他语言对比**：
 
@@ -491,7 +491,7 @@ unsafe {
 
 **核心问题**：一对多依赖关系中，如何在不硬编码订阅者列表的前提下，通知多个订阅者状态变化，同时避免所有权循环引用（Reference）导致的内存泄漏？
 
-> **[来源: GoF Design Patterns, 1994]** Observer 模式解耦了主题与观察者，使得主题无需知道观察者的具体类型。✅
+> **[GoF Design Patterns, 1994](https://en.wikipedia.org/wiki/Design_Patterns)** Observer 模式解耦了主题与观察者，使得主题无需知道观察者的具体类型。✅
 
 ---
 
@@ -607,9 +607,9 @@ async fn async_observer_example() {
 
 > [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)] · [Rust CLI Book](https://rust-cli.github.io/book/index.html)
 
-**关键洞察**：`broadcast` 通道解耦了生产者和消费者的生命周期（Lifetimes）——接收者可以独立存在，即使发送者已关闭，`recv()` 会返回错误而非悬垂引用。[来源: Tokio Documentation]
+**关键洞察**：`broadcast` 通道解耦了生产者和消费者的生命周期（Lifetimes）——接收者可以独立存在，即使发送者已关闭，`recv()` 会返回错误而非悬垂引用。[Tokio Documentation](https://docs.rs/tokio/latest/tokio/)
 
-> **[来源: Tokio Docs — broadcast]** broadcast 通道实现 fan-out：每个订阅者接收事件的独立拷贝。✅
+> **[Tokio Docs — broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html)** broadcast 通道实现 fan-out：每个订阅者接收事件的独立拷贝。✅
 
 ---
 
@@ -654,7 +654,7 @@ async fn lightweight_observer_example() {
 
 > [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html)]
 
-**关键洞察**：`event-listener` 使用无锁原子操作（Atomic Operations）实现通知，相比 `Mutex<Vec<Callback>>` 减少了锁竞争，适用于高并发细粒度事件场景。[来源: event-listener crate docs]
+**关键洞察**：`event-listener` 使用无锁原子操作（Atomic Operations）实现通知，相比 `Mutex<Vec<Callback>>` 减少了锁竞争，适用于高并发细粒度事件场景。[event-listener crate docs](https://docs.rs/event-listener/latest/event_listener/)
 
 ---
 
@@ -692,7 +692,7 @@ impl ThreadSafeSubject {
 }
 ```
 
-`Weak<T>` 在此起到关键作用：它允许 Observer 引用 Subject（或反之）而不增加强引用计数，从而保证当所有强引用消失时，资源可以被确定性释放。[来源: `../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [`../02_intermediate/02_memory_management/03_memory_management.md`](../../02_intermediate/02_memory_management/03_memory_management.md)
+`Weak<T>` 在此起到关键作用：它允许 Observer 引用 Subject（或反之）而不增加强引用计数，从而保证当所有强引用消失时，资源可以被确定性释放。[`L1 借用（Borrowing）`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [`L2 内存管理`](../../02_intermediate/02_memory_management/03_memory_management.md)
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** 当需要共享所有权且可能存在循环引用时，优先使用 `Weak` 打破循环，避免内存泄漏。✅
 
@@ -730,7 +730,7 @@ fn display_system(mut reader: EventReader<TemperatureChanged>) {
 
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
-**关键洞察**：Bevy 的事件系统消除了 Observer 与 Subject 之间的直接引用关系，将所有权交由 ECS 调度器统一管理，从根本上规避了循环引用问题。[来源: Bevy Engine Documentation]
+**关键洞察**：Bevy 的事件系统消除了 Observer 与 Subject 之间的直接引用关系，将所有权交由 ECS 调度器统一管理，从根本上规避了循环引用问题。[Bevy Engine Documentation](https://bevyengine.org/learn/book/)
 
 ---
 
@@ -966,7 +966,7 @@ fn load(path: &str) -> Result<Config, Error> {
 
 > **Bloom 层级**: 分析
 
-**定义**：为应对不太可能出现的需求而引入不必要的抽象层次，导致代码复杂度远超实际需要。[来源: Rust Design Patterns — Gold Plating]
+**定义**：为应对不太可能出现的需求而引入不必要的抽象层次，导致代码复杂度远超实际需要。[Rust Design Patterns — Gold Plating](https://rust-unofficial.github.io/patterns/anti_patterns/gold_plating.html)
 
 **Rust 表现**：
 

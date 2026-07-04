@@ -382,7 +382,7 @@ graph BT
     style E fill:#fff,stroke:#333
 ```
 
-> **认知功能**: 此 Hasse 图将抽象的「生命周期偏序关系」转化为**可视化的层次结构**。读者可直观理解三个核心事实：(1) 'static 是「祖宗」，outlives 一切；(2) 生命周期形成从顶到底的偏序链；(3) 并列节点（如 'a 和 'b）不可比较，不能互相替代。此图特别有助于理解协变/逆变：协变 = 沿箭头向下替换安全，逆变 = 沿箭头向上替换安全。建议读者在编写泛型（Generics）约束时，将此图作为「哪个生命周期可以替代哪个」的参考。 [来源: Davey & Priestley, *Introduction to Lattices and Order*; Tofte & Talpin 1994]
+> **认知功能**: 此 Hasse 图将抽象的「生命周期偏序关系」转化为**可视化的层次结构**。读者可直观理解三个核心事实：(1) 'static 是「祖宗」，outlives 一切；(2) 生命周期形成从顶到底的偏序链；(3) 并列节点（如 'a 和 'b）不可比较，不能互相替代。此图特别有助于理解协变/逆变：协变 = 沿箭头向下替换安全，逆变 = 沿箭头向上替换安全。建议读者在编写泛型（Generics）约束时，将此图作为「哪个生命周期可以替代哪个」的参考。 [Davey & Priestley, *Introduction to Lattices and Order*](https://www.cambridge.org/core/books/introduction-to-lattices-and-order/); [Tofte & Talpin 1994](https://doi.org/10.1145/176454.176456)
 
 ### 4.3 定理：函数签名中的生命周期省略规则 ⟹ Elision 的完备性
 

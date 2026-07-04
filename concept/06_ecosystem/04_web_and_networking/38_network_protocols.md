@@ -95,7 +95,7 @@ impl Connection {
 }
 ```
 
-> **关键洞察**: quinn 的设计中，**流（Stream）**的所有权（Ownership）模型与 Rust 的 `mpsc::channel` 同构——发送端（`SendStream`）和接收端（`RecvStream`）分离，各自独立关闭。这种设计自然映射到 QUIC 的"流独立传输"语义：一个流的丢包不影响其他流。[来源: quinn Documentation] ✅
+> **关键洞察**: quinn 的设计中，**流（Stream）**的所有权（Ownership）模型与 Rust 的 `mpsc::channel` 同构——发送端（`SendStream`）和接收端（`RecvStream`）分离，各自独立关闭。这种设计自然映射到 QUIC 的"流独立传输"语义：一个流的丢包不影响其他流。[quinn Documentation](https://docs.rs/quinn/latest/quinn/) ✅
 
 ---
 
@@ -185,7 +185,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 | **代码共享** | 用户态/内核态共享 Rust 类型 | 需手动同步结构 | 有限 |
 | **验证器友好** | 生成验证器易接受的代码 | 直接控制 | 间接控制 |
 
-> **关键洞察**: eBPF 验证器（verifier）对内存访问极其严格——任何越界访问都会导致加载失败。Rust 的所有权系统天然生成"验证器友好"的代码：数组访问通过切片（Slice）边界检查，指针操作通过 `&T`/`&mut T` 约束，无悬垂指针风险。这显著降低了 eBPF 程序被验证器拒绝的概率。[来源: aya-rs Documentation] ✅
+> **关键洞察**: eBPF 验证器（verifier）对内存访问极其严格——任何越界访问都会导致加载失败。Rust 的所有权系统天然生成"验证器友好"的代码：数组访问通过切片（Slice）边界检查，指针操作通过 `&T`/`&mut T` 约束，无悬垂指针风险。这显著降低了 eBPF 程序被验证器拒绝的概率。[aya-rs Documentation](https://docs.rs/aya/latest/aya/) ✅
 
 ---
 

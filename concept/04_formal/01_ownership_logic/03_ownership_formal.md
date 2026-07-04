@@ -435,7 +435,7 @@ graph TD
 
 ### 6.4 Pin 与自引用结构的形式化语义
 
-> **[来源: 💡 原创推断]** · **[参考: Oxide: The Essence of Rust]** Pin 的形式化语义在 RustBelt 框架中尚未有完整证明，但可以从操作语义和类型系统（Type System）的交互中建立与**位置稳定性（location stability）**的对应。⚠️
+> **[💡 原创推断](../../00_meta/00_framework/methodology.md)** · **[参考: Oxide: The Essence of Rust]** Pin 的形式化语义在 RustBelt 框架中尚未有完整证明，但可以从操作语义和类型系统（Type System）的交互中建立与**位置稳定性（location stability）**的对应。⚠️
 
 **Pin 的核心语义**
 
@@ -756,7 +756,7 @@ async 状态机安全定理:
 
 ### 9.5b Kani 验证：Pin 地址恒定规格
 
-> **[来源: Kani Documentation: Proof harnesses; RefinedRust PLDI 2024]** 以下代码展示如何用 Kani 将 §9.5 的 LTL 公理转化为**可机械验证的规格**。虽然 Pin 的不动性主要由类型系统保证（编译期），Kani 可用于验证 unsafe 代码中对 Pin 合约的遵守。
+> **[Kani Documentation: Proof harnesses](https://model-checking.github.io/kani/proof-harnesses.html); [RefinedRust PLDI 2024](https://arxiv.org/abs/2404.03613)** 以下代码展示如何用 Kani 将 §9.5 的 LTL 公理转化为**可机械验证的规格**。虽然 Pin 的不动性主要由类型系统保证（编译期），Kani 可用于验证 unsafe 代码中对 Pin 合约的遵守。
 
 ```rust
 // Kani 验证规格: Pin 地址恒定定理
@@ -933,7 +933,7 @@ Tree Borrows 通过 **Reserved → Active** 的延迟激活，允许裸指针与
 定理（Tree Borrows 工业就绪性）:
   前提: Tree Borrows 通过 Miri 的 Crater 回归测试（>40K crates）
       ↓
-  结论: Tree Borrows 是 Stacked Borrows 的工业级替代方案 [来源: PLDI 2025] ✅
+  结论: Tree Borrows 是 Stacked Borrows 的工业级替代方案 [PLDI 2025](https://pldi.sigplan.org/) ✅
 ```
 
 ### 11.5b Tree Borrows 操作语义规约

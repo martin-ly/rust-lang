@@ -432,7 +432,7 @@ graph LR
 | **队列容量** | `VecDeque` (非线程安全) | `ArrayQueue` (固定) / `SegQueue` (无界) | Crossbeam 提供线程安全且无锁的队列变体 |
 | **线程局部** | `thread_local!` | `CachePadded<T>` | Crossbeam 提供缓存行对齐，避免伪共享 |
 
-> [来源: std::sync docs](https://doc.rust-lang.org/std/sync/)
+> [std::sync docs](https://doc.rust-lang.org/std/ync.html)(<https://doc.rust-lang.org/std/sync/>)
 > [来源: Crossbeam vs std comparison](https://docs.rs/crossbeam/latest/crossbeam/#comparison-with-the-standard-library)
 
 ---

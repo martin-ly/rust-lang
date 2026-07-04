@@ -309,7 +309,7 @@ graph TD
 | **代码生成客户端** | aws-sdk-rust | Smithy 生成每服务 `Client` 与强类型 Builder，编译期约束请求参数 |
 | **统一核心抽象** | azure-sdk-rust | `TokenCredential`、`Pager<T>`、`Poller<T>` 跨服务复用同一接口 |
 
-> [来源: Rust Design Patterns Book · GoF Design Patterns · Rust API Guidelines]
+> Rust Design Patterns Book; GoF Design Patterns; [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 ---
 

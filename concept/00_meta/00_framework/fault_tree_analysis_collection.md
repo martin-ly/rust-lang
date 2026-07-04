@@ -235,7 +235,7 @@ graph TD
 **⬡ 顶事件：Rust 程序发生并发安全违规（数据竞争 / 死锁 / 活锁）**
 
 > **定义**: 程序在并发执行时出现非原子的读写竞争（数据竞争）、线程间循环等待（死锁）、或持续让步但无进展（活锁）。
-> [来源: C++ Memory Model; RustBelt — No-Data-Race Theorem 的反面]
+> [C++ Memory Model; RustBelt — No-Data-Race Theorem 的反面](https://plv.mpi-sws.org/rustbelt/)
 
 ### 3.2 故障树 Mermaid
 
@@ -706,7 +706,7 @@ graph TD
 
 **变更日志**:
 
-- v1.0 (2026-05-23): 初始版本 — 五棵标准 FTA（内存/并发/类型/异步/Unsafe）+ IEC 61025 符号系统 + 最小割集分析 + 跨树关联 [来源: 权威来源对齐 Wave 3]
+- v1.0 (2026-05-23): 初始版本 — 五棵标准 FTA（内存/并发/类型/异步/Unsafe）+ IEC 61025 符号系统 + 最小割集分析 + 跨树关联 [权威来源对齐 Wave 3](https://doc.rust-lang.org/)
 
 ---
 

@@ -20,8 +20,8 @@
 
 ## 一、概念定义
 
-Rust 1.96.0 引入了 `core::range` 模块 [来源: Rust 1.96.0 Release Notes / 2026; RFC 3550 — Rangeful / 2025;
-核心设计决策: 新增 `RangeInclusive` 和 `RangeInclusiveIter` 类型，为未来统一所有 range 类型提供命名空间]，新增 `RangeInclusive` 和 `RangeInclusiveIter` 类型。
+Rust 1.96.0 引入了 `core::range` 模块 [Rust 1.96.0 Release Notes / 2026; RFC 3550 — Rangeful / 2025;
+核心设计决策: 新增 `RangeInclusive` 和 `RangeInclusiveIter` 类型，为未来统一所有 range 类型提供命名空间](https://releases.rs/docs/1.96.0/)，新增 `RangeInclusive` 和 `RangeInclusiveIter` 类型。
 这是对 `std::ops::RangeInclusive` 的模块级补充，旨在为未来统一所有 range 类型提供命名空间。
 
 ### 关键区分
@@ -264,7 +264,7 @@ core::range::RangeInclusive (1.96.1+):
 ## 📚 权威来源索引
 
 - [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) [Rust Release Team / 2026](https://blog.rust-lang.org/)
-- [RFC 3550: Rangeful](https://rust-lang.github.io/rfcs/3550-new-range.html) [来源: Rust Core Team / 2025]
+- [RFC 3550: Rangeful](https://rust-lang.github.io/rfcs/3550-new-range.html) [Rust Core Team / 2025](https://www.rust-lang.org/)
 - [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html) [Rust Standard Library / 2025](https://doc.rust-lang.org/std/index.html)
 
 ---

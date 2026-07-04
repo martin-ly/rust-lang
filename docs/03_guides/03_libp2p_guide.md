@@ -325,7 +325,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 > **[libp2p Specification](https://specs.libp2p.io/)**
 > **[ACM - Peer-to-Peer Networking](https://dl.acm.org/)**
 > **[IEEE - Decentralized Network Protocols](https://ieeexplore.ieee.org/)**
-> **[来源: Protocol Labs - libp2p Docs]**
+> **[Protocol Labs - libp2p Docs](https://docs.rs/protocol/latest/protocol/)**
 > **来源: [Rust Reference - Networking](https://doc.rust-lang.org/reference/)**
 
 ---

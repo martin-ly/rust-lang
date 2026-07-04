@@ -142,12 +142,12 @@ graph TD
 
 - **SAFETY 注释**: 每个 `unsafe` 块必须注释「为什么此操作是安全的」。 [来源: [RFC 2585](https://rust-lang.github.io/rfcs//2585-unsafe-block-in-unsafe-fn.html), Rust Style Guide]
 - **Miri 验证**: 动态检测未定义行为。
-- **审计**: `cargo geiger` 统计 unsafe 代码比例。 [来源: cargo-geiger 文档]
+- **审计**: `cargo geiger` 统计 unsafe 代码比例。 [cargo-geiger 文档](https://docs.rs/cargo-geiger/latest/cargo_geiger/)
 
 ### 2.3 L2: FFI 边界（🔴 跨语言调用）
 
 > **扩展条件**: `extern "C"` 函数声明、`#[no_mangle]`、C 结构体映射。
-> **风险**: C 代码的 UAF、DF、数据竞争可能通过 FFI 传入 Rust，破坏 Rust 的安全假设。 [来源: Rust FFI 指南, The Rustonomicon §4]
+> **风险**: C 代码的 UAF、DF、数据竞争可能通过 FFI 传入 Rust，破坏 Rust 的安全假设。 [Rust FFI 指南, The Rustonomicon §4](https://doc.rust-lang.org/nomicon/ffi.html)
 
 ```rust,ignore
 // FFI 边界示例：Rust 调用 C
@@ -172,7 +172,7 @@ pub fn safe_wrapper(data: &mut [u8]) {
 > **扩展条件**: `#![no_std]`、裸机目标、`panic=abort`、自定义分配器。
 > **风险**: 无 OS 保护、无虚拟内存、硬件异常直接致命。
 
-| 特征 | 用户态 Rust | 内核态 Rust | [来源: Rust Embedded Book, Rust-for-Linux]
+| 特征 | 用户态 Rust | 内核态 Rust | [Rust Embedded Book, Rust-for-Linux](https://doc.rust-lang.org/embedded-book/)
 |:---|:---|:---|
 | 标准库 | `std` 完整 | `core` + `alloc`（可选） |
 | panic 处理 | unwind / abort | 必须 `panic=abort` |
@@ -182,14 +182,14 @@ pub fn safe_wrapper(data: &mut [u8]) {
 
 **补偿机制**:
 
-- **静态分析**: `cargo-call-stack` 检测栈溢出。 [来源: Jorge Aparicio, Embedded WG]
-- **形式化验证**: Kani 验证关键路径无 panic。 [来源: Kani Documentation, AWS]
+- **静态分析**: `cargo-call-stack` 检测栈溢出。 [Jorge Aparicio, Embedded WG](https://github.com/japaric)
+- **形式化验证**: Kani 验证关键路径无 panic。 [Kani Documentation, AWS](https://model-checking.github.io/kani/)
 - **硬件看门狗**: 外部重置机制。
 
 ### 2.5 L4: WASM 沙箱（🟡 能力安全）
 
 > **扩展条件**: `wasm32-wasip1` 或 `wasm32-wasip2` target、WASI 系统调用。
-> **特征**: WASM 提供内存沙箱，但 WASI capability 模型进一步限制资源访问。 [来源: WASI Specification, Bytecode Alliance]
+> **特征**: WASM 提供内存沙箱，但 WASI capability 模型进一步限制资源访问。 [WASI Specification, Bytecode Alliance](https://wasi.dev/)
 
 | 能力 | 传统 WASM | WASI |
 |:---|:---|:---|
@@ -276,7 +276,7 @@ graph TD
 > 认知路径是**纵向递进的学习阶梯**——与 `graph TD` 流程图（展示知识结构）和 `stateDiagram`（展示状态约束）都不同，认知路径回答「**学习者应该以什么顺序掌握这些概念**」。
 > 每一步有明确的目标和验证标准，帮助学习者自我评估当前位置。
 > 此路径遵循「从安全到危险、从编译器保证到人工证明、从应用到形式化」的渐进原则。
-> [来源: 认知负荷理论 — Sweller (1988); Bloom  taxonomy]
+> [认知负荷理论 — Sweller (1988); Bloom  taxonomy](https://en.wikipedia.org/wiki/Cognitive_load_theory)
 
 ## 五、相关概念链接
 

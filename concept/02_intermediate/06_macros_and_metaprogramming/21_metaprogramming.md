@@ -145,7 +145,7 @@ macro_rules! 的核心机制:
 
 ```rust
 // 声明宏示例：递归实现 vec! 变体
-// [来源: The Little Book of Rust Macros]
+// [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
 macro_rules! my_vec {
     // 基础: my_vec![] => Vec::new()
     () => {
@@ -248,7 +248,7 @@ macro_rules! my_vec {
 ```
 
 ```rust,ignore
-// Derive 宏示例骨架 [来源: syn docs]
+// Derive 宏示例骨架 [syn docs](https://docs.rs/syn/latest/syn/)
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, DeriveInput};

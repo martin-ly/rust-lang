@@ -117,7 +117,7 @@ Actor          actix / ractor          Hewitt Actor 1973       无原生        
 
 ### 1.1 同构性的定义
 
-> **同构（Isomorphism）**: 两个系统 A 和 B 同构，当且仅当存在双射 f: A → B，使得 A 中的所有操作和关系在 f 下被保持。在执行模型的语境中，「同构」通常指**行为等价性**——两个模型在相同的输入序列下产生相同的可观察行为（输出、状态转换、通信序列）。 [来源: 抽象代数 / 进程代数标准定义]
+> **同构（Isomorphism）**: 两个系统 A 和 B 同构，当且仅当存在双射 f: A → B，使得 A 中的所有操作和关系在 f 下被保持。在执行模型的语境中，「同构」通常指**行为等价性**——两个模型在相同的输入序列下产生相同的可观察行为（输出、状态转换、通信序列）。 [抽象代数 / 进程代数标准定义](https://en.wikipedia.org/wiki/Process_calculus)
 
 本文件区分三个层次的「相似性」：
 
@@ -209,7 +209,7 @@ handle.join().unwrap();
 > **同构性评价**:
 > Rust 1:1 线程与 Go goroutine 在**进程代数 CCS 层面**同构——两者都是独立的并发执行单元，可通过 channel / 共享内存通信。
 > 但在**资源模型**上不同构：Rust 线程是「重量级资源」（OS 可见），Go goroutine 是「轻量级对象」（运行时（Runtime）管理）。
-> [来源: rustvsgo.com; Go Runtime Scheduler 文档]
+> [rustvsgo.com; Go Runtime Scheduler 文档](https://www.rustvsgo.com/)
 
 ---
 
@@ -314,10 +314,10 @@ sequenceDiagram
 
 ## 五、并行模型
 
-> [来源: rayon docs, Blumofe 1999]：Fork-Join 与工作窃取
+> [rayon docs](https://docs.rs/rayon/latest/rayon/); [Blumofe 1999](https://doi.org/10.1145/324133.324234)：Fork-Join 与工作窃取
 > **Fork-Join 模型**: 将大问题递归分解为子问题（fork），在子任务完成后合并结果（join）。
 > Rust 的 `rayon` crate 实现了基于工作窃取（work-stealing）的 Fork-Join 调度器。
-> [来源: Blumofe & Leiserson, *Scheduling Multithreaded Computations by Work Stealing*, 1999]
+> [Blumofe & Leiserson, *Scheduling Multithreaded Computations by Work Stealing*, 1999](https://doi.org/10.1145/324133.324234)
 
 ```rust
 // 惯用：rayon 并行迭代
@@ -348,19 +348,19 @@ fn parallel_merge_sort<T: Ord + Send>(data: &mut [T]) {
 - **时间界**: T_p ≤ T_1/P + T_∞（P 处理器，T_1 串行时间，T_∞ 关键路径）。
 - **空间界**: S_p ≤ S_1 · P（工作窃取调度器的空间有界）。
 
-> **Go 的缺失**: Go 无原生 Fork-Join 抽象。goroutine 虽可并行执行，但缺乏「递归分解 + 结果合并」的结构化原语，程序员需手动管理 `sync.WaitGroup` 和结果收集。 [来源: SPAA 2024, *When Is Parallelism Fearless and Zero-Cost with Rust?*]
+> **Go 的缺失**: Go 无原生 Fork-Join 抽象。goroutine 虽可并行执行，但缺乏「递归分解 + 结果合并」的结构化原语，程序员需手动管理 `sync.WaitGroup` 和结果收集。 [SPAA 2024, *When Is Parallelism Fearless and Zero-Cost with Rust?*](https://spaa.acm.org/)
 
 ---
 
 ## 六、CSP 模型
 
-> [来源: Hoare 1978, Milner π-Calculus 1992]：Channel 与所有权（Ownership）转移
+> [Hoare 1978, Milner π-Calculus 1992](https://doi.org/10.1145/359576.359585)：Channel 与所有权（Ownership）转移
 
 ### 6.1 Rust channel 的 CSP 语义
 
 > **CSP（Communicating Sequential Processes）**: Hoare 1978 提出的并发模型，核心原则是「通过通信共享内存，而非通过共享内存通信」。
 > 进程通过**同步通道（synchronous channel）**通信，发送方和接收方在通道上「会合（rendezvous）」。
-> [来源: Hoare, *Communicating Sequential Processes*, CACM 1978]
+> [Hoare, *Communicating Sequential Processes*, CACM 1978](https://doi.org/10.1145/359576.359585)
 
 Rust 的 `std::sync::mpsc`（multiple producer, single consumer）是 CSP 的工程实现，但有以下关键扩展：
 
@@ -404,19 +404,19 @@ let received = rx.recv().unwrap(); // 所有权转移到 received
 > 但在**内存模型层面不同构**：
 > Rust 的 move 语义使 channel 通信变成了**线性通道**（值只能存在于一个地方），而 Go 的拷贝语义允许值在发送后继续存在于发送方栈上。
 > 这导致 Rust channel 在编译期即可排除 use-after-send 错误，Go 则需依赖 GC 和程序员约定。
-> [来源: Hoare 1978; Go Concurrency Patterns; rustvsgo.com]
+> [Hoare 1978](https://doi.org/10.1145/359576.359585); [Go Concurrency Patterns](https://go.dev/wiki/ConcurrencyPatterns); [rustvsgo.com](https://www.rustvsgo.com/)
 
 ---
 
 ## 七、Actor 模型
 
-> [来源: Hewitt 1973, Actix docs]：命名实体与异步邮箱
+> [Hewitt 1973, Actix docs](https://www.ijcai.org/Proceedings/73/Papers/027B.pdf)：命名实体与异步邮箱
 
 ### 7.1 Rust Actor 的实现原理
 
 > **Actor 模型**: 由 Carl Hewitt 1973 提出，Actor 是**有身份（named）**的独立计算实体，通过**异步、非阻塞**的消息投递（mailbox）通信。
 > 每个 Actor 顺序处理其 mailbox 中的消息，天然支持分布式和容错。
-> [来源: Hewitt, Bishop & Steiger, *A Universal Modular ACTOR Formalism*, IJCAI 1973]
+> [Hewitt, Bishop & Steiger, *A Universal Modular ACTOR Formalism*, IJCAI 1973](https://www.ijcai.org/Proceedings/73/Papers/027B.pdf)
 
 Rust 的 Actor 框架（Actix, Ractor, Kameo）利用类型系统（Type System）保证 Actor 安全：
 
@@ -458,7 +458,7 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 > **关键洞察**:
 > CSP 的「匿名进程 + 命名通道」与 Actor 的「命名进程 + 匿名通道（mailbox）」是**对偶（dual）**关系。
 > Rust 的类型系统（Type System）可同时编码两者：CSP 通过 `Sender<T>`/`Receiver<T>` 的类型保证，Actor 通过 `Addr<T>` 和 `Handler<M>` trait 的类型保证。
-> [来源: *Seven Concurrency Models in Seven Weeks*]
+> [*Seven Concurrency Models in Seven Weeks*](https://pragprog.com/titles/pb7con/seven-concurrency-models-in-seven-weeks/)
 
 ---
 
@@ -508,13 +508,13 @@ fn consumer() {
 
 > **定理 T-EM-002（Acquire-Release 同步）**:
 > 若线程 A 执行 `store(x, Release)` 且线程 B 执行 `load(x, Acquire)` 并读取到该值，则线程 A 中所有**sequenced-before **于该 `store` 的内存写入，对线程 B 中所有** sequenced-after** 于该 `load` 的操作可见。
-> [来源: Boehm & Adve PLDI 2008; Batty et al., *Mathematizing C++ Concurrency*, POPL 2011]
+> [Boehm & Adve PLDI 2008](https://doi.org/10.1145/1375581.1375591); [Batty et al., *Mathematizing C++ Concurrency*, POPL 2011](https://doi.org/10.1145/1926385.1926394)
 
 ---
 
 ## 九、事件驱动模型
 
-> [来源: Stevens UNP, Tokio Internals]：Reactor 与 Proactor
+> [Stevens UNP, Tokio Internals](https://tokio.rs/blog/2019-11-tokio-0-2)：Reactor 与 Proactor
 
 | 模型 | 机制 | Rust 实现 | Go 实现 |
 | :--- | :--- | :--- | :--- |
@@ -525,13 +525,13 @@ Rust 的事件驱动模型是**显式的**：
 程序员需选择 executor（Tokio / smol [历史: async-std [已归档]]）并理解 poll 语义。
 Go 的事件驱动是**隐式的**：`netpoller` 集成在运行时，goroutine 的阻塞 I/O 自动被转换为事件驱动。
 
-> **同构性评价**: Tokio 的 Reactor 与 Go 的 netpoller 在**epoll/kqueue 层面同构**——二者都基于操作系统的事件通知机制。但在**用户接口层面不同构**：Rust 要求显式 `async/await` + executor 选择，Go 将事件驱动透明化为阻塞语义。 [来源: Tokio Internals; Go Runtime 文档]
+> **同构性评价**: Tokio 的 Reactor 与 Go 的 netpoller 在**epoll/kqueue 层面同构**——二者都基于操作系统的事件通知机制。但在**用户接口层面不同构**：Rust 要求显式 `async/await` + executor 选择，Go 将事件驱动透明化为阻塞语义。 [Tokio Internals; Go Runtime 文档](https://tokio.rs/tokio/topics/runtime)
 
 ---
 
 ## 十、Rust ↔ Go
 
-> [来源: rustvsgo.com, SPAA 2024] 执行模型全面对比
+> [rustvsgo.com, SPAA 2024](https://www.rustvsgo.com/) 执行模型全面对比
 
 ### 10.1 并发模型哲学
 >

@@ -571,7 +571,7 @@ while let Some(item) = iter.next() {
 
 ### 范围类型（Rust 1.96+ stable） {#范围类型rust-196-stable}
 
-> **[来源: [Rust 1.96 Release Notes [已失效]]<!-- 原链接: https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html -->]**
+> **[Rust 1.96 Release Notes [已失效]]<!-- 原链接: https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html -->](<https://releases.rs/docs/1.96.0/>)**
 
 ```rust
 use core::range::{Range, RangeFrom, RangeToInclusive};

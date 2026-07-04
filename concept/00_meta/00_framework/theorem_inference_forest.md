@@ -175,7 +175,7 @@ graph TD
     ↓
 引理 L1-1: Rust 值可被安全遗忘（mem::forget 不触发 UB）
     ↓
-定理 T-001: 所有权唯一性 [来源: 01_ownership.md T-001, RustBelt POPL 2018]
+定理 T-001: 所有权唯一性 [01_ownership.md T-001, RustBelt POPL 2018](https://popl.sigplan.org/)
     「每个值在任意时刻有且只有一个所有者」
     ↓
 定理 T-002: Move 语义完备性 [来源: 01_ownership.md T-002, Oxide arXiv 2019]
@@ -209,7 +209,7 @@ graph TD
 引理 L2-1: &T 对应 q = ∞（无限共享，只读）
 引理 L2-2: &mut T 对应 q = 1（独占，可写）
     ↓
-定理 T-010: AXM（Alias XOR Mutation） [来源: 02_borrowing.md T-010, Reynolds Separation Logic]
+定理 T-010: AXM（Alias XOR Mutation） [02_borrowing.md T-010, Reynolds Separation Logic](https://doi.org/10.1007/3-540-36575-3_19)
     「同一时间，一个值要么被多个 &T 共享访问，要么被一个 &mut T 独占访问」
     ↓
 推论 C-010: 无数据竞争（Safe Rust） 来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
@@ -239,7 +239,7 @@ graph TD
 引理 L3-1: 生命周期 'a 是编译期区域变量
 引理 L3-2: 'a: 'b 表示区域包含关系（'a 至少和 'b 一样长）
     ↓
-定理 T-020: 生命周期偏序约束可满足性 [来源: 03_lifetimes.md T-020, Tofte-Talpin 1994]
+定理 T-020: 生命周期偏序约束可满足性 [03_lifetimes.md T-020, Tofte-Talpin 1994](https://doi.org/10.1145/176454.176456)
     「有限生命周期变量集上的约束图无环 ⟺ 约束可满足」
     ↓
 定理 T-021: NLL 流敏感安全 来源: [RFC 2094, Oxide 2019](https://rust-lang.github.io/rfcs/2094-nll.html)
@@ -272,7 +272,7 @@ graph TD
 定理 T-030: 局部类型推断可判定性 [来源: 04_type_system.md T-030, Pierce TAPL §22]
     「函数签名显式注解 + 无 HKT ⟹ 函数体内推断可判定」
     ↓
-定理 T-031: Trait 约束求解受限可判定性 [来源: 02_generics.md T-032, RFC 1665]
+定理 T-031: Trait 约束求解受限可判定性 [02_generics.md T-032, RFC 1665](https://rust-lang.github.io/rfcs/1665.html)
     「孤儿规则 + 一致性检查 ⟹ Trait 求解可判定」
     ↓
 推论 C-030: 全局类型一致性 来源: [Rust Reference §6](https://doc.rust-lang.org/reference/introduction.html)
@@ -306,7 +306,7 @@ graph TD
 定理 T-041: fearless concurrency 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
     「Safe Rust + Send/Sync ⟹ 无数据竞争」
     ↓
-推论 C-040: MutexGuard 自动释放 [来源: RAII 原则, Rust std docs]
+推论 C-040: MutexGuard 自动释放 [RAII 原则, Rust std docs](https://docs.rs/raii/latest/raii/)
     「锁守卫在作用域结束时自动释放（RAII）」
 ```
 
@@ -446,7 +446,7 @@ graph TD
 > 没有路径的森林会迷失方向，没有森林的路径会缺乏深度。
 > 此路径将「定理阅读」从被动接受转化为主动验证——读者不再是知识的消费者，而是推理的参与者。
 > 这与 `inter_layer_topology.md` 的跨层认知路径和 `intra_layer_model_map.md` 的层内决策树形成三维导航体系：纵向（层间）、横向（层内）、深度（定理内）。
-> [来源: 批判性思维 — Paul & Elder 2006; 科学方法论]
+> [批判性思维 — Paul & Elder 2006; 科学方法论](https://www.criticalthinking.org/)
 
 ---
 

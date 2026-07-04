@@ -322,7 +322,7 @@ sequenceDiagram
 
 当 Handler 处理速度低于请求到达速度时，未处理请求会在 mailbox 中排队，而非无限制地创建任务，从而避免内存爆炸。
 
-> [来源: Actix-web 源码 — `actix-web/src/worker.rs`]
+> [Actix-web 源码 — `actix-web/src/worker.rs`](https://actix.rs/)
 
 ---
 
@@ -657,7 +657,7 @@ tokio::select! {
 }
 ```
 
-> [来源: Actix-web 文档 — Server — Graceful shutdown](https://actix.rs/docs/server/#graceful-shutdown)
+> [Actix-web 文档 — Server — Graceful shutdown](https://actix.rs/docs/server)(<https://actix.rs/docs/server/#graceful-shutdown>)
 
 ---
 

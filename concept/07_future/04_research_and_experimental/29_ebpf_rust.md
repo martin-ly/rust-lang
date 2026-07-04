@@ -17,7 +17,7 @@
 ## 1. 引言
 
 eBPF（extended Berkeley Packet Filter）已从早期的网络包过滤机制演变为 Linux 内核的通用可编程基础设施。
-它允许在不修改内核源码、不加载内核模块（Module）的前提下，向内核注入沙盒化字节码，实现可观测性（tracing）、网络处理（XDP/TC）、安全策略（LSM）等功能 [来源: Linux Kernel Documentation, eBPF, https://docs.kernel.org/bpf/]。
+它允许在不修改内核源码、不加载内核模块（Module）的前提下，向内核注入沙盒化字节码，实现可观测性（tracing）、网络处理（XDP/TC）、安全策略（LSM）等功能 [Linux Kernel Documentation, eBPF, https://docs.kernel.org/bpf/](https://docs.kernel.org/bpf/)。
 
 然而，传统 eBPF 开发以 C 语言为主，依赖 llvm 编译器将 C 代码编译为 eBPF 字节码，再经由内核的 eBPF 验证器（verifier）进行安全性检查。
 这一流程存在显著痛点：
@@ -230,7 +230,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 4. Rex 革命性方案
 
-Rex（Rust for eBPF Extended）是 2025-2026 年间发表的一系列学术研究的实现项目，其核心命题是：**用 Rust 编译器替代 eBPF 验证器** [来源: Rex: Safe Rust for eBPF, arXiv:2501.xxxxx]。
+Rex（Rust for eBPF Extended）是 2025-2026 年间发表的一系列学术研究的实现项目，其核心命题是：**用 Rust 编译器替代 eBPF 验证器** [Rex: Safe Rust for eBPF, arXiv:2501.xxxxx](https://arxiv.org/abs/2501.xxxxx)。
 
 ### 4.1 问题域：eBPF 验证器的本质局限
 >

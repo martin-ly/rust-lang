@@ -222,10 +222,8 @@ graph TD
 ---
 
 > **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **权威来源对齐变更日志**: YYYY-MM-DD 创建 [来源: ...]
+> **权威来源对齐变更日志**: YYYY-MM-DD 创建 [...](https://doc.rust-lang.org/)
 > **状态**: ✅ 权威来源对齐完成
-
-```
 
 ---
 

@@ -83,7 +83,7 @@
 
 > **关键洞察**: Miri 不是测试框架，而是**运行时（Runtime）语义检查器**。它回答的问题是：“这段代码在 Rust 抽象机上的执行是否违反了内存模型？”
 >
-> [来源: Miri 官方 README](https://github.com/rust-lang/miri)
+> [Miri 官方 README](https://github.com/rust-lang/miri)(<https://github.com/rust-lang/miri>)
 
 ### 与测试/Clippy 的区别
 
@@ -111,7 +111,7 @@ Miri 目前能检测的主要 UB 类别包括：
 
 > **注意**: Miri 使用**动态分析**，只能验证实际执行到的路径。未被测试覆盖的分支仍然可能隐藏 UB。
 >
-> [来源: Rust Reference — Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
+> [Rust Reference — Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)(<https://doc.rust-lang.org/reference/behavior-considered-undefined.html>)
 
 ---
 

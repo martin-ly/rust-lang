@@ -55,7 +55,7 @@
 | **类型安全** | `Serialize`/`Deserialize` 边界 + 泛型 `Collection<T>` | 编译期保证文档结构与 Rust 类型匹配 |
 | **连接管理** | 内置连接池 + Server 选择器 + 拓扑监控 | 无需外部池即可支撑高并发 |
 
-> [来源: mongodb-rust-driver GitHub Repository](https://github.com/mongodb/mongo-rust-driver)
+> [mongodb-rust-driver GitHub Repository](https://github.com/mongodb/mongo-rust-driver)(<https://github.com/mongodb/mongo-rust-driver>)
 
 ```rust,ignore
 use mongodb::{Client, bson::doc};
@@ -89,7 +89,7 @@ graph TD
     CLIENT -->|start_session| SESSION[ClientSession<br/>事务会话]
 ```
 
-> [来源: mongodb-rust-driver Client Docs](https://docs.rs/mongodb/latest/mongodb/struct.Client.html)
+> [mongodb-rust-driver Client Docs](https://docs.rs/mongodb/latest/mongodb/struct.Client.html)(<https://docs.rs/mongodb/latest/mongodb/struct.Client.html>)
 
 | 类型 | 职责 | 共享能力 |
 |:--|:--|:--|
@@ -97,7 +97,7 @@ graph TD
 | `Database` | 执行数据库级命令（如 `drop_database`） | 由 `Client` 派生，可 `Clone` |
 | `Collection<T>` | CRUD、聚合、索引、变更流 | 内部使用 `Arc`，可安全跨任务共享 |
 
-> [来源: mongodb-rust-driver Collection Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)
+> [mongodb-rust-driver Collection Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)(<https://docs.rs/mongodb/latest/mongodb/struct.Collection.html>)
 
 ### 2.2 CRUD 操作：BSON 与强类型模型 {#22-crud-操作bson-与强类型模型}
 
@@ -144,7 +144,7 @@ while let Some(doc) = cursor.try_next().await? {
 }
 ```
 
-> [来源: mongodb-rust-driver Aggregate Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html#method.aggregate)
+> [mongodb-rust-driver Aggregate Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html#method.aggregate)(<https://docs.rs/mongodb/latest/mongodb/struct.Collection.html#method.aggregate>)
 
 `Cursor` 同时实现 `Stream<Item = Result<T>>` 与 `advance()`/`deserialize_current()` 手动模式，兼容 `futures::StreamExt`/`TryStreamExt` 组合子。
 
@@ -176,7 +176,7 @@ while let Some(event) = change_stream.next_if_any().await? {
 }
 ```
 
-> [来源: mongodb-rust-driver ChangeStream Docs](https://docs.rs/mongodb/latest/mongodb/change_stream/struct.ChangeStream.html)
+> [mongodb-rust-driver ChangeStream Docs](https://docs.rs/mongodb/latest/mongodb/change_stream/index.html)(<https://docs.rs/mongodb/latest/mongodb/change_stream/struct.ChangeStream.html>)
 
 `ChangeStream` 内置断点续传：通过 `resume_token()` 获取恢复令牌，可在故障后使用 `resume_after`/`start_after` 选项重建流。
 
@@ -213,7 +213,7 @@ opts.server_api = Some(ServerApi::builder().version(ServerApiVersion::V1).build(
 let client = Client::with_options(opts)?;
 ```
 
-> [来源: mongodb-rust-driver ClientOptions Docs](https://docs.rs/mongodb/latest/mongodb/options/struct.ClientOptions.html)
+> [mongodb-rust-driver ClientOptions Docs](https://docs.rs/mongodb/latest/mongodb/options/struct.ClientOptions.html)(<https://docs.rs/mongodb/latest/mongodb/options/struct.ClientOptions.html>)
 
 连接池内置于 `Client`，默认大小与 MongoDB 官方驱动推荐值一致；通过 `Clone` 共享 `Client` 即可获得池复用，无需额外引入第三方池 crate。
 
@@ -232,7 +232,7 @@ let client = Client::with_options(opts)?;
 | **Session 传递** | `.session(&mut session)` | 通过显式参数将操作绑定到事务边界，避免隐式上下文 |
 | **错误类型** | `mongodb::error::Error` / `Result<T>` | 所有 IO 与协议错误必须在调用点处理 |
 
-> [来源: mongodb-rust-driver Error Docs](https://docs.rs/mongodb/latest/mongodb/error/struct.Error.html)
+> [mongodb-rust-driver Error Docs](https://docs.rs/mongodb/latest/mongodb/error/struct.Error.html)(<https://docs.rs/mongodb/latest/mongodb/error/struct.Error.html>)
 
 ---
 
@@ -251,7 +251,7 @@ let client = Client::with_options(opts)?;
 | 变更流未处理 resume token | 故障后丢失事件 | 定期读取 `change_stream.resume_token()` 并在重建流时使用 |
 | 未配置读写关注 | 数据一致性问题 | 根据业务需求显式设置 `ReadConcern`/`WriteConcern` |
 
-> [来源: MongoDB 官方文档](https://www.mongodb.com/docs/)
+> [MongoDB 官方文档](https://www.mongodb.com/docs/)(<https://www.mongodb.com/docs/>)
 
 **特别警示**：mongodb-rust-driver 官方文档明确警告，**不要直接对驱动返回的 Future 使用 `tokio::time::timeout` 后丢弃**，因为这会让驱动内部状态不一致。正确做法是将驱动操作 `spawn` 到任务中，再对 `JoinHandle` 做超时。
 
@@ -267,7 +267,7 @@ let client = Client::with_options(opts)?;
 | 基本 CRUD | [`crates/c10_networks/examples/mongodb_basic_crud.rs`](../../../../crates/c10_networks/examples/mongodb_basic_crud.rs) | Client/Database/Collection、插入/查询/更新/删除/索引 |
 | 聚合与变更流 | [`crates/c10_networks/examples/mongodb_aggregation_change_streams.rs`](../../../../crates/c10_networks/examples/mongodb_aggregation_change_streams.rs) | Aggregation Pipeline、Change Stream 骨架 |
 
-> [来源: c10_networks Crate](../../../../crates/c10_networks/README.md)
+> [c10_networks Crate](https://github.com/rust-lang/rust)(../../../../crates/c10_networks/README.md)
 
 ---
 

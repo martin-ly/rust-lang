@@ -28,7 +28,7 @@
 
 ## 权威定义
 
-> **[来源: CLRS — Introduction to Algorithms, 4th Edition]** An algorithm is any well-defined computational procedure that takes some value, or set of values, as input and produces some value, or set of values, as output.
+> **[CLRS — Introduction to Algorithms, 4th Edition](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)** An algorithm is any well-defined computational procedure that takes some value, or set of values, as input and produces some value, or set of values, as output.
 > **来源**: <https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/>
 > **来源: [Wikipedia — Competitive Programming](https://en.wikipedia.org/wiki/Competitive_Programming)** Competitive programming is a mind sport usually held over the internet or a local network, involving participants trying to program according to provided specifications.
 > **来源**: <https://en.wikipedia.org/wiki/Competitive_programming>
@@ -173,7 +173,7 @@ pub fn dijkstra(graph: &[Vec<(usize, u64)>], start: usize) -> Vec<u64> {
 }
 ```
 
-> [来源: [CLRS] §16, §24] Dijkstra 的正确性依赖于非负权重的贪心选择性质；负权边会导致贪心失败，需改用 Bellman-Ford。
+> [来源: [CLRS §16, §24](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)] Dijkstra 的正确性依赖于非负权重的贪心选择性质；负权边会导致贪心失败，需改用 Bellman-Ford。
 
 **贪心失败反例**:
 
@@ -311,7 +311,7 @@ pub fn topological_sort(graph: &[Vec<usize>], indegree: &mut [usize]) -> Option<
 }
 ```
 
-> [来源: [CLRS] §21, §22] 并查集路径压缩的摊还复杂度为 $O(\alpha(n))$，其中 $\alpha$ 为反阿克曼函数，实际可视为常数。
+> [来源: [CLRS §21, §22](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)] 并查集路径压缩的摊还复杂度为 $O(\alpha(n))$，其中 $\alpha$ 为反阿克曼函数，实际可视为常数。
 
 ---
 

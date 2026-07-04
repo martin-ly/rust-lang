@@ -325,7 +325,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 
 #### Row Polymorphism：Effect System 的类型论基础
 
-> **[来源: Leijen 2014 — Koka: Programming with Row-polymorphic Effect Types] · [来源: Lucassen & Gifford 1988 — Polymorphic Effect Systems, POPL]** · [来源: [Rust Keyword Generics Initiative 2024](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)]**
+> **[Leijen 2014 — Koka: Programming with Row-polymorphic Effect Types](https://doi.org/10.1145/2692915.2628169) · [Lucassen & Gifford 1988 — Polymorphic Effect Systems, POPL](https://doi.org/10.1145/73560.73564)** · [来源: [Rust Keyword Generics Initiative 2024](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)]**
 
 Rust 的 `AsyncFn` trait 和设想的 `#[maybe(async)]` 语法，本质上是 **row-polymorphic effect types** 的工程化受限实现。在 Koka 等完整 effect system 中，效果通过行类型（row type）表达：
 
