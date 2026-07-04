@@ -11,7 +11,7 @@
 > **RFC**: [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html)
 > **权威来源**: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/), [RFC 3550: Rangeful](https://rust-lang.github.io/rfcs/3550-new-range.html), [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 RFC 3550 设计决策来源标注、Range 类型形式化语义引用 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 RFC 3550 设计决策来源标注、Range 类型形式化语义引用 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [实验级]
@@ -263,9 +263,9 @@ core::range::RangeInclusive (1.96.1+):
 
 ## 📚 权威来源索引
 
-- [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) [来源: Rust Release Team / 2026]
+- [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) [Rust Release Team / 2026](https://blog.rust-lang.org/)
 - [RFC 3550: Rangeful](https://rust-lang.github.io/rfcs/3550-new-range.html) [来源: Rust Core Team / 2025]
-- [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html) [来源: Rust Standard Library / 2025]
+- [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html) [Rust Standard Library / 2025](https://doc.rust-lang.org/std/index.html)
 
 ---
 

@@ -437,9 +437,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html), [Cargo Book](https://doc.rust-lang.org/cargo/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html), [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -489,7 +489,7 @@ mod outer {
 > Rust 的可见性修饰符精确控制项的暴露范围：`pub`（完全公开）、`pub(crate)`（crate 内）、`pub(super)`（父模块）、`pub(in path)`（指定路径）。
 > 这与 Java 的 `package-private` 或 C# 的 `internal` 类似，但 Rust 提供更细粒度的控制。
 > 模块项默认私有，必须显式提升可见性。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：模块文件与目录的命名冲突（编译错误）
 
@@ -518,7 +518,7 @@ mod foo {
 > 同一模块不能同时使用两种组织方式（如 `foo.rs` 和 `foo/mod.rs` 同时存在）。
 > 2018 Edition 引入的扁平结构减少了 `mod.rs` 的嵌套，但要求目录和文件命名严格对应。
 > 这是 Rust 模块系统的文件-模块同构原则——模块树直接映射到文件系统树。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.3 边界测试：`use self::` 与 `use crate::` 的路径解析（编译错误）
 

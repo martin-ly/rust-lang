@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo Book — Commands](https://doc.rust-lang.org/cargo/commands/index.html) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Cargo Book — Commands](https://doc.rust-lang.org/cargo/commands/index.html) · · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Cargo Book — cargo build](https://doc.rust-lang.org/cargo/commands/cargo-build.html) ·
 > [Cargo Book — cargo test](https://doc.rust-lang.org/cargo/commands/cargo-test.html) ·
 > [Cargo Book — cargo publish](https://doc.rust-lang.org/cargo/commands/cargo-publish.html)

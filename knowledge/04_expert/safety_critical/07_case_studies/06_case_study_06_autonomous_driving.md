@@ -6,7 +6,7 @@
 >
 > **相关概念**: [DSL](../../../../concept/02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增自动驾驶 Rust 应用案例来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增自动驾驶 Rust 应用案例来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # 案例研究06: 自动驾驶感知系统
 
@@ -16,7 +16,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本案例研究展示Rust在自动驾驶感知系统中的应用，符合ISO 26262 ASIL D要求，处理传感器融合和实时决策。
 
@@ -24,11 +24,11 @@
 
 ## 项目背景
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 系统信息
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 属性 | 详情 |
 |------|------|
@@ -41,7 +41,7 @@
 
 ### 为什么选择Rust
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **确定性性能**: 无GC暂停，满足实时要求
 2. **并发安全**: 多传感器并行处理的安全保障
@@ -53,7 +53,7 @@
 
 ## 系统架构
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 感知流水线
 >

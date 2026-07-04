@@ -8,7 +8,7 @@
 > **代码状态**: [综述级 — 待补充代码]
 > **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
-> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) · [std API Docs](https://doc.rust-lang.org/std/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) · [std API Docs](https://doc.rust-lang.org/std/index.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 
 ## 📑 目录
 
@@ -814,7 +814,7 @@ fn main() {
 - [形式化验证](../../04_formal/04_model_checking/05_verification_toolchain.md) — 密码学实现的形式化证明、常量时间验证
 - [WebAssembly](11_webassembly.md) — 浏览器内量子模拟、跨平台部署
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **过渡**: Quantum Computing in Rust（量子计算与 Rust） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Quantum Computing in Rust（量子计算与 Rust） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

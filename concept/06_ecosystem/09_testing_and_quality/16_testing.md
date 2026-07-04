@@ -364,7 +364,7 @@ unsafe 代码验证:
 ```
 
 > **策略矩阵**: Rust 的测试生态是**分层验证**——从编译期类型检查到运行时（Runtime）模糊测试，每层针对不同类型的错误。
-> [来源: [Rust Testing Guide](https://doc.rust-lang.org/rust-by-example/testing.html)] · [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
+> [来源: [Rust Testing Guide](https://doc.rust-lang.org/rust-by-example/testing.html)] · [来源: [Cargo Book](https://doc.rust-lang.org/cargo/index.html)]
 
 ---
 
@@ -482,11 +482,11 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
 | [TRPL Ch11 — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) | ✅ 一级 | 测试入门 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
-| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
+| [RFC Book](https://rust-lang.github.io/rfcs/index.html) | ✅ 一级 | RFC 文档 |
 | [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 | [mockall](https://docs.rs/mockall/latest/mockall/) | ✅ 一级 | Mock 框架 |
@@ -506,9 +506,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-00-testing.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-00-testing.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

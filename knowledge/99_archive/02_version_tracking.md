@@ -9,7 +9,7 @@
 
 ## 当前目标版本
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Rust**: 1.95.0
 **Edition**: 2024
@@ -19,11 +19,11 @@
 
 ## 版本同步状态
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Rust 1.95.0 ✅
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 文档状态 | 代码示例 | 最后更新 |
 |------|---------|---------|----------|
@@ -45,7 +45,7 @@
 
 ### Rust 1.94.0 ✅ (历史归档)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 文档状态 | 代码示例 | 最后更新 |
 |------|---------|---------|----------|
@@ -59,7 +59,7 @@
 
 ### Rust 1.96.0 ⏳ (Beta / 预计 2026-05-28)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 预计发布 | 准备状态 | 文档 |
 |------|---------|---------|------|
@@ -101,7 +101,7 @@
 
 ---
 
-> **权威来源**: [来源: Rust 官方文档](https://doc.rust-lang.org/)
+> **权威来源**: [Rust Official Docs](https://doc.rust-lang.org/)(https://doc.rust-lang.org/)
 
 ---
 

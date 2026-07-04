@@ -774,14 +774,14 @@ fn main() {}
 > [来源: [Ongaro & Ousterhout — Raft](https://raft.github.io/raft.pdf)]
 > [来源: [Shapiro et al. — CRDT](https://hal.inria.fr/hal-00932836/document)]
 > [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
-> [来源: [RFC 2349 — Async Closures](https://rust-lang.github.io/rfcs/)]
+> [来源: [RFC 2349 — Async Closures](https://rust-lang.github.io/rfcs/index.html)]
 > [来源: [Data Parallelism in Rust](https://doc.rust-lang.org/std/thread/)]
 > [来源: [MPI for Rust](https://docs.rs/mpi/)]
 > [来源: [Apache Arrow Rust](https://arrow.apache.org/rust/)]
-> [来源: [Rust Concurrency Patterns](https://rust-lang.github.io/async-book/)]
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> [来源: [Rust Concurrency Patterns](https://rust-lang.github.io/async-book/index.html)]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

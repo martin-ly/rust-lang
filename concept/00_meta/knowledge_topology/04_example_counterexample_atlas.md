@@ -4,7 +4,7 @@
 > **Summary**: 按概念组织的正确示例、错误示例、边界示例与反例分析。 Correct examples, incorrect examples, boundary cases, and counterexample analyses organized by concept.
 > **受众**: [研究者]
 > **内容分级**: [元层]
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---
 

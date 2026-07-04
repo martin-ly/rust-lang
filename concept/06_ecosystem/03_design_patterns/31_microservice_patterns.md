@@ -595,7 +595,7 @@ fn main() {
 }
 ```
 
-> **设计要点**: 此示例展示微服务的最小可行结构——**监听端口** → **解析请求** → **路由分发** → **构造响应**。Rust 的所有权（Ownership）模型天然保证 `TcpStream` 在一次请求处理后被正确关闭。生产环境应升级为 Tokio/Axum 以获得并发、中间件和生态集成。 [来源: 💡 原创实现]
+> **设计要点**: 此示例展示微服务的最小可行结构——**监听端口** → **解析请求** → **路由分发** → **构造响应**。Rust 的所有权（Ownership）模型天然保证 `TcpStream` 在一次请求处理后被正确关闭。生产环境应升级为 Tokio/Axum 以获得并发、中间件和生态集成。 [💡 原创实现](../../00_meta/00_framework/methodology.md)
 
 ### 10.2 生产级微服务骨架（依赖外部 crate）
 
@@ -750,9 +750,9 @@ Rust 微服务并非银弹:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建微服务架构模式概念文件 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建微服务架构模式概念文件 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

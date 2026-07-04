@@ -12,7 +12,7 @@
 > **基准版本**: Rust 1.96.1 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **Bloom 层级**: 应用 → 分析 → 评价
@@ -145,8 +145,8 @@ mindmap
 
 > **认知功能**: 本 mindmap 提供 Rust 惯用法的**七层抽象全景导航**，帮助读者建立「从语法糖到架构模式」的完整心智模型。
 > 建议将此图作为学习地图：新手聚焦 L0-L2 分支，专家关注 L5-L6 的并发与架构节点。
-> 关键洞察是惯用法层级与问题粒度正相关——词法级解决局部表达，架构级解决系统组织。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> 关键洞察是惯用法层级与问题粒度正相关——词法级解决局部表达，架构级解决系统组织。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **认知路径**: 本 mindmap 展示 Rust 惯用法的**七层抽象阶梯**。
 > 从 L0 词法级（语法糖）到 L6 架构级（系统设计），每层惯用法解决不同粒度的问题。
 > 新手应从 L0-L1 开始建立直觉，成长期聚焦 L2-L3，成熟期掌握 L4-L5，专家期探索 L6。
@@ -261,7 +261,7 @@ graph TD
     H --> H3[ECS Archetype]
 ```
 
-> **认知功能**: 此树状图将七层惯用法谱系转化为**可遍历的分类层级**，每层3个代表性节点构成最小完整集合。建议将其作为速查索引——当遇到具体代码场景时，可自上而下定位最匹配的惯用法层级。关键洞察是惯用法的「正交覆盖」：L0-L3 聚焦单线程正确性，L4-L6 聚焦性能与并发架构。[来源: 💡 原创分析]
+> **认知功能**: 此树状图将七层惯用法谱系转化为**可遍历的分类层级**，每层3个代表性节点构成最小完整集合。建议将其作为速查索引——当遇到具体代码场景时，可自上而下定位最匹配的惯用法层级。关键洞察是惯用法的「正交覆盖」：L0-L3 聚焦单线程正确性，L4-L6 聚焦性能与并发架构。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -269,7 +269,7 @@ graph TD
 
 ### 3.1
 
-> 来源: [Rust Reference §6.13](https://doc.rust-lang.org/reference/) `?` 传播运算符
+> 来源: [Rust Reference §6.13](https://doc.rust-lang.org/reference/introduction.html) `?` 传播运算符
 > **惯用**: 在返回 `Result` 或 `Option` 的函数中，用 `?` 自动传播错误，替代显式 `match`。
 
 **非惯用**:
@@ -299,11 +299,11 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 }
 ```
 
-**等价性**: `?` 是 `match` 的局部语法糖，不改变控制流语义。编译后生成相同的 MIR。 来源: [Rust Reference §6.13, TRPL §9](https://doc.rust-lang.org/reference/)
+**等价性**: `?` 是 `match` 的局部语法糖，不改变控制流语义。编译后生成相同的 MIR。 来源: [Rust Reference §6.13, TRPL §9](https://doc.rust-lang.org/reference/introduction.html)
 
 ### 3.2
 
-> 来源: [Rust Reference §8, Rust 1.95 Release Notes](https://doc.rust-lang.org/reference/) `match` 解构与模式守卫
+> 来源: [Rust Reference §8, Rust 1.95 Release Notes](https://doc.rust-lang.org/reference/introduction.html) `match` 解构与模式守卫
 > **惯用**: 利用模式穷尽性检查和 `if` guards 将条件与解构合一。
 
 **Rust 1.95 新增**: `if let` guards in match arms：
@@ -425,7 +425,7 @@ impl Client<Connected> {
 
 ### 4.3
 
-> 来源: [Rustonomicon §4.6](https://doc.rust-lang.org/nomicon/) PhantomData 标记
+> 来源: [Rustonomicon §4.6](https://doc.rust-lang.org/nomicon/index.html) PhantomData 标记
 > **惯用**: 用 `PhantomData` 在不占用内存的情况下，向类型系统（Type System）传递额外的约束信息。
 
 ```rust,ignore
@@ -445,7 +445,7 @@ struct MyBox<T> {
 
 ### 4.4
 
-> 来源: [Rust Reference §6.28](https://doc.rust-lang.org/reference/) Zero-Sized Types (ZST)
+> 来源: [Rust Reference §6.28](https://doc.rust-lang.org/reference/introduction.html) Zero-Sized Types (ZST)
 > **惯用**: 利用零大小类型（如 `()`、`PhantomData<T>`、`!`）作为编译期标记，无运行时（Runtime）开销。
 
 ```rust,ignore
@@ -560,7 +560,7 @@ greeting(&"Rust".to_owned());    // &String
 
 ### 6.1
 
-> 来源: [Rust Reference §10.8](https://doc.rust-lang.org/reference/) RAII 守卫模式
+> 来源: [Rust Reference §10.8](https://doc.rust-lang.org/reference/introduction.html) RAII 守卫模式
 > **惯用**: 将资源获取与释放绑定到值的生命周期（Lifetimes），利用 `Drop` 自动清理。
 
 ```rust,ignore
@@ -627,7 +627,7 @@ impl SelfReferential {
 
 ### 6.4
 
-> 来源: [Rustonomicon §7, Rust std docs](https://doc.rust-lang.org/nomicon/) 内部可变性分层
+> 来源: [Rustonomicon §7, Rust std docs](https://doc.rust-lang.org/nomicon/index.html) 内部可变性分层
 > **惯用**: 根据场景选择适当的内部可变性原语，形成安全梯度。
 
 | 原语 | 线程安全 | 运行时检查 | 适用场景 |
@@ -947,7 +947,7 @@ graph TD
     O -->|是| P["反惯用：用 &[T] / &str 替代"]
 ```
 
-> **认知功能**: 此判定树提供**代码审查的系统性检查清单**，将常见的反惯用模式转化为可执行的决策路径。建议在 CR（Code Review）时按节点逐项排查：从 Stringly Typed 到参数类型选择，形成结构化评审习惯。关键洞察是反惯用法往往源于「其他语言的习惯迁移」——判定树的核心作用是打破路径依赖。[来源: 💡 原创分析]
+> **认知功能**: 此判定树提供**代码审查的系统性检查清单**，将常见的反惯用模式转化为可执行的决策路径。建议在 CR（Code Review）时按节点逐项排查：从 Stringly Typed 到参数类型选择，形成结构化评审习惯。关键洞察是反惯用法往往源于「其他语言的习惯迁移」——判定树的核心作用是打破路径依赖。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 常见反惯用清单
 >
@@ -1005,7 +1005,7 @@ graph TD
     M -->|否| O[使用 Vec / 数组]
 ```
 
-> **认知功能**: 此决策树将惯用法选择转化为**基于问题特征的分类流程**，降低「面对空白该用什么」的决策焦虑。建议从根节点「需要处理错误？」开始，按实际场景逐层收敛到具体惯用法。关键洞察是惯用法选择的本质是**问题归类**而非记忆匹配——一旦建立「错误→控制→并发」的问题分类直觉，选择将变得自动化。[来源: 💡 原创分析]
+> **认知功能**: 此决策树将惯用法选择转化为**基于问题特征的分类流程**，降低「面对空白该用什么」的决策焦虑。建议从根节点「需要处理错误？」开始，按实际场景逐层收敛到具体惯用法。关键洞察是惯用法选择的本质是**问题归类**而非记忆匹配——一旦建立「错误→控制→并发」的问题分类直觉，选择将变得自动化。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 12.2 惯用法效率-认知负荷象限图
 
@@ -1141,8 +1141,8 @@ quadrantChart
 
 ## 权威来源索引
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 > **相关文件**:
 >
 > [A/S/P 标记规范](../../00_meta/03_audit/asp_marking_guide.md) ·

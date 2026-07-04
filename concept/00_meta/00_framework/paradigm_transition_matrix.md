@@ -11,7 +11,7 @@
 > **对齐来源**: [Microsoft RustTraining — C++→Rust 案例研究] · [Google — Rust in Chromium] · [Linux Kernel — Rust 引入报告] · [Ferrous Systems — Rust Migration Guide]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 > **来源**: [Microsoft RustTraining — github.com/microsoft/RustTraining · C++ Case Studies]
@@ -78,7 +78,7 @@ mindmap
 >
 > 范式转换矩阵帮助有特定语言背景的开发者**快速定位"我在旧语言中熟悉的模式，在 Rust 中对应什么"**。
 > 它不是语法对照表，而是**设计模式层面的映射**——关注"为什么 Rust 选择了不同的抽象"而非"Rust 的语法是什么"。
-> [来源: 💡 原创分析]
+> [💡 原创分析](methodology.md)
 
 ---
 
@@ -205,7 +205,7 @@ quadrantChart
 > - **第二象限**（高影响/低难度）：异常→Result — 收益大且相对容易，应优先转换
 > - **第三象限**（低影响/低难度）：RAII→Drop、defer→Drop — 几乎无缝过渡
 > - **第四象限**（低影响/高难度）：反射→宏 — 除非必要，可延后或寻找替代方案
-> [来源: 💡 原创分析]
+> [💡 原创分析](methodology.md)
 
 ---
 

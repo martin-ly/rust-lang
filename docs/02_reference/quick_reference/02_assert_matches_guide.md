@@ -9,7 +9,7 @@
 > **跟踪 Issue**: rust#108099
 > **Bloom 层级**: 应用
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** ·
-> **[来源: RFC 未正式发布，社区长期需求]** ·
+> **[RFC 未正式发布，社区长期需求](https://github.com/rust-lang/rfcs/pulls)** ·
 > **来源: [Rust Reference - Patterns](https://doc.rust-lang.org/reference/)** ·
 > **来源: [TRPL Ch. 18 - Patterns and Matching](https://doc.rust-lang.org/book/ch18-00-patterns.html)** ✅
 >

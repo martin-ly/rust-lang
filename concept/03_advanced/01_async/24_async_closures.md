@@ -492,7 +492,7 @@ Future trait          (1.36)
 | `AsyncFn` trait 语义 | [Rust Reference — Closure expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures) |
 | RFC 设计动机 | [RFC 3668](https://rust-lang.github.io/rfcs/3668-async-closures.html) |
 | 稳定化公告 | [Rust 1.85.0 Release](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html) |
-| async 生态与运行时（Runtime） | [Async Book](https://rust-lang.github.io/async-book/)（rewrite 中，状态 WIP） |
+| async 生态与运行时（Runtime） | [Async Book](https://rust-lang.github.io/async-book/index.html)（rewrite 中，状态 WIP） |
 
 ---
 

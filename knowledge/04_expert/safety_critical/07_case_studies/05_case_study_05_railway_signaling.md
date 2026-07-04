@@ -4,7 +4,7 @@
 > [EN 50128](https://www.cenelec.eu/),
 > [Rust Reference](https://doc.rust-lang.org/reference/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增铁路信号 Rust 应用案例来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增铁路信号 Rust 应用案例来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # 案例研究05: 铁路信号系统 (EN 50128/50129)
 
@@ -14,7 +14,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本案例研究展示Rust在欧洲铁路信号系统中的应用，符合EN 50128(软件安全)和EN 50129(系统安全)标准，达到SIL 4最高安全等级。
 
@@ -22,11 +22,11 @@
 
 ## 项目背景
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 系统信息
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 属性 | 详情 |
 |------|------|
@@ -40,7 +40,7 @@
 
 ### 安全要求
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 SIL 4系统要求:
 
@@ -53,7 +53,7 @@ SIL 4系统要求:
 
 ## 系统架构
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 硬件架构: 2x2取2
 >

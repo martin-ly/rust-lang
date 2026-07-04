@@ -7,7 +7,7 @@
 > **Summary**: Rust vs C++: comparative analysis with Rust across type systems, memory safety, and concurrency.
 > **受众**: [进阶]
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **层级**: L5 对比分析
@@ -27,7 +27,7 @@
 > **主要来源**:
 >
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [Wikipedia: C++](https://en.wikipedia.org/wiki/C%2B%2B) ·
 > [Wikipedia: Rust](https://en.wikipedia.org/wiki/Rust) ·
 > [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic) ·
@@ -168,7 +168,7 @@ graph TD
 > **认知功能**: 概念层级导航图，建立 Rust 与 C++ 设计哲学的系统对照框架。
 > [来源: [Wikipedia — C++](https://en.wikipedia.org/wiki/C%2B%2B)]
 > 建议读者在遇到具体语言机制时回溯此图，定位其哲学根源。
-> 核心洞察：两种语言的根本差异不是特性列表的对比，而是「数学公理」与「工程机制」的本体论分野。 [来源: 💡 原创分析]
+> 核心洞察：两种语言的根本差异不是特性列表的对比，而是「数学公理」与「工程机制」的本体论分野。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -233,7 +233,7 @@ graph TD
 
 > **认知功能**: 技术选型决策工具，将哲学差异转化为可操作的判断分支。
 > 读者可根据项目核心诉求（数学证明 vs 字节控制）沿分支快速定位适配本体论。
-> 核心洞察：不存在 universally better 的语言，只有与问题本质匹配的形式系统或机制工程模型。 [来源: 💡 原创分析]
+> 核心洞察：不存在 universally better 的语言，只有与问题本质匹配的形式系统或机制工程模型。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -352,7 +352,7 @@ C++ 的机制是**层叠式**的：
 
 ### 7.3 Move 语义系统对比（深度）
 
-> **[来源: The Coded Message — RAII] · [Stroustrup — The C++ Programming Language, Ch. 17] · [Rust Reference — §4.1.8 Moves](https://doc.rust-lang.org/reference/)** ✅
+> **[来源: The Coded Message — RAII] · [Stroustrup — The C++ Programming Language, Ch. 17] · [Rust Reference — §4.1.8 Moves](https://doc.rust-lang.org/reference/introduction.html)** ✅
 > **核心术语**: Rust 的 `move` 语义意味着**赋值**和**传参**时，资源的所有权自动**转移**。原变量变为 **uninitialized**，后续访问被编译器禁止。
 
 #### 7.3.1 C++ 的 Move：值类别 + 移动构造函数
@@ -396,7 +396,7 @@ let s2 = s1; // Move: s1 的所有权转移到 s2
 | C++17 | Guaranteed copy elision | 语言保证 | prvalue 的纯返回 |
 | Rust | Move semantics | **语言保证** | 所有 `!Copy` 类型的赋值都是移动 |
 
-> **关键洞察**: C++ 的 RVO 是编译器优化（可能不触发），Rust 的移动是语言语义（总是触发）。这使得 Rust 的性能更可预测。来源: [Rust Reference — §4.1.8](https://doc.rust-lang.org/reference/) ✅
+> **关键洞察**: C++ 的 RVO 是编译器优化（可能不触发），Rust 的移动是语言语义（总是触发）。这使得 Rust 的性能更可预测。来源: [Rust Reference — §4.1.8](https://doc.rust-lang.org/reference/introduction.html) ✅
 
 ---
 
@@ -764,7 +764,7 @@ graph TD
 
 > **认知功能**: 形式化方法的层次架构图，展示从人类意图到系统实现的确定性传递链。
 > 建议团队按此路线图逐层引入形式化工具，避免一次性投入过载。
-> 核心洞察：Prompt、Code、System 三层通过契约传递连接，形成「生成—验证—监控」的闭环。 [来源: 💡 原创分析]
+> 核心洞察：Prompt、Code、System 三层通过契约传递连接，形成「生成—验证—监控」的闭环。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -895,7 +895,7 @@ graph TD
 
 > **认知功能**: Rust 形式化能力的递进层级图，从编译器本地语义扩展到分布式运行时对齐。
 > 读者可根据团队规模与关键路径选择投入产出比最高的层级切入。
-> 核心洞察：Rust 编译器只是 L0 本地语义的终点，跨节点的系统级安全需要架构工具链与形式规约语言的共同使命。 [来源: 💡 原创分析]
+> 核心洞察：Rust 编译器只是 L0 本地语义的终点，跨节点的系统级安全需要架构工具链与形式规约语言的共同使命。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 | **层级** | **形式化对象** | **当前工具/理论** | **与 Rust 的结合点** |
 |:---|:---|:---|:---|
@@ -992,7 +992,7 @@ graph TD
 
 > **认知功能**: 认知引导与阅读路径图，预判读者在理解形式化扩展后的自然追问方向。
 > 建议按分支概率和自身关切选择阅读顺序，高概率分支优先。
-> 核心洞察：从工程落地到哲学批判的五层追问，构成了形式化方法从实践到理论的完整认知闭环。 [来源: 💡 原创分析]
+> 核心洞察：从工程落地到哲学批判的五层追问，构成了形式化方法从实践到理论的完整认知闭环。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -1180,7 +1180,7 @@ graph TD
 
 > **认知功能**: 哲学类比图，将软件工程的秩序建构与神经科学、AI 模型和文化演化进行跨域映射。
 > 使用建议：当争论「语法约束是否限制创造力」时，可用此图论证秩序是丰富性的脚手架。
-> 核心洞察：语法层（形式规则）不是语义层（意义创造）的敌人，而是使差异可传递、可组合的媒介。[来源: 💡 原创分析]
+> 核心洞察：语法层（形式规则）不是语义层（意义创造）的敌人，而是使差异可传递、可组合的媒介。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 1.1 人脑秩序的类比：Attractor 与可判定性
 
@@ -1351,7 +1351,7 @@ graph LR
 
 > **认知功能**: 正反馈循环图，揭示形式系统如何使语义世界「有序构建」。
 > 建议结合「欧氏几何模式」理解：公理的严格性不是丰富性的敌人。
-> 核心洞察：编译器验证不是创造性活动的终点，而是更高层抽象的起点——错误可判定性使大胆想象成为可能。 [来源: 💡 原创分析]
+> 核心洞察：编译器验证不是创造性活动的终点，而是更高层抽象的起点——错误可判定性使大胆想象成为可能。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **有序构建的四重机制**：
 
@@ -1430,7 +1430,7 @@ graph TD
 
 > **认知功能**: 架构全景映射图，将具体技术栈映射为从数据真理到用户感知的秩序层级。
 > 读者可审视自身栈的每一层是否找到对应的形式化根基。
-> 核心洞察：任何技术层如果没有形式化根基，就会退化为不可组合的工程债务，侵蚀系统的可扩展性。 [来源: 💡 原创分析]
+> 核心洞察：任何技术层如果没有形式化根基，就会退化为不可组合的工程债务，侵蚀系统的可扩展性。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 每一层如果不找到自己的形式化根基，就会退化为**不可组合的工程债务**。
 
@@ -1677,7 +1677,7 @@ graph TD
 
 > **认知功能**: 边界认知图，划定图灵机作为物理现实与逻辑序结构结合界面的能力范围。
 > 使用建议：当试图用代码表达连续、拓扑或无穷维问题时，回溯此图确认不可计算边界。
-> 核心洞察：图灵机的力量恰恰来自其局限性——离散序结构的自动化才是软件工程可规模化的根基。[来源: 💡 原创分析]
+> 核心洞察：图灵机的力量恰恰来自其局限性——离散序结构的自动化才是软件工程可规模化的根基。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 3.1 图灵机是"序结构"的自动化
 
@@ -1864,8 +1864,8 @@ fn main() {
 >
 >
 >
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 ---
 
@@ -2051,9 +2051,9 @@ fn main() {
 
 ## 参考来源
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > [来源: [C++ Reference](https://en.cppreference.com/)]
 > [来源: [ISO C++ Standard](https://isocpp.org/)]
 > [来源: [Wikipedia — RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization)]

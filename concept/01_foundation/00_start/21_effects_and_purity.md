@@ -91,7 +91,7 @@
 | **缓存/记忆化** | 结果可安全缓存 | 缓存可能导致错误行为 |
 | **调试** | 局部分析即可 | 需要全局状态追踪 |
 
-> **关键洞察**: Haskell 追求全局引用透明（所有副作用通过 Monad 显式化）；Rust 采用局部引用透明策略——在函数内部允许副作用，但通过类型系统（Type System）限制副作用的传播范围。[来源: 💡 原创分析]
+> **关键洞察**: Haskell 追求全局引用透明（所有副作用通过 Monad 显式化）；Rust 采用局部引用透明策略——在函数内部允许副作用，但通过类型系统（Type System）限制副作用的传播范围。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -151,7 +151,7 @@ fn process_unsafe(ptr: *mut i32) {  // unsafe 块表示未定义效果
 > **论证**:
 > 虽然 Rust 目前没有显式的效果类型（如 Koka 的 `fn f(): <io, state> T`），但其类型签名通过参数和返回类型**隐式编码**了效果信息。
 > 这与 Moggi 1989 提出的"通过 Monad 结构显式化计算"的思想同构，但实现方式不同：Haskell 用 Monad 组合子，Rust 用所有权（Ownership）约束。
-> [来源: 💡 原创分析] · [Moggi 1989] · [Wadler 1992]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md) · [Moggi 1989] · [Wadler 1992]
 >
 > **权威来源对齐**:
 > Rust 语言团队通过 [Keyword Generics Initiative](https://github.com/rust-lang/keyword-generics-initiative) 明确承认：Rust 自 1.0 起已隐性实现 effect system（`async`、`const`、`try`/`?`、`unsafe` 均为 effect types）。
@@ -302,7 +302,7 @@ fn sum(data: &[i32]) -> i32 {
 }
 ```
 
-> **关键洞察**: Rust 的 `&T` 参数类型可以作为**纯度的局部保证**——如果函数只接受 `&T` 参数（没有 `&mut T`、没有 `unsafe`、没有 IO 类型），则该函数对调用者而言是纯的（不修改调用者的状态）。这是 Rust 在"命令式语言"和"纯函数式语言"之间找到的中间地带。[来源: 💡 原创分析]
+> **关键洞察**: Rust 的 `&T` 参数类型可以作为**纯度的局部保证**——如果函数只接受 `&T` 参数（没有 `&mut T`、没有 `unsafe`、没有 IO 类型），则该函数对调用者而言是纯的（不修改调用者的状态）。这是 Rust 在"命令式语言"和"纯函数式语言"之间找到的中间地带。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -359,7 +359,7 @@ fn unwrap_or_default(opt: Option<i32>) -> i32 {
 }
 ```
 
-> **关键洞察**: Rust 通过**所有权（Ownership）系统**将函数式语言的"引用透明"理念部分地带入命令式世界：在 `&T` 借用（Borrowing）的范围内，数据不可变，函数调用具有局部引用透明性。[来源: 💡 原创分析]
+> **关键洞察**: Rust 通过**所有权（Ownership）系统**将函数式语言的"引用透明"理念部分地带入命令式世界：在 `&T` 借用（Borrowing）的范围内，数据不可变，函数调用具有局部引用透明性。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -415,7 +415,7 @@ const fn impure_const() -> i32 {
 }
 ```
 
-> **边界洞察**: `const fn` 是 Rust 中纯度要求最严格的上下文——不允许可变变量、不允许堆分配、不允许非 `const` 操作。任何副作用尝试都会在编译期被拒绝。这构成了 Rust 效果系统的"核心纯净区"。来源: [Rust Reference — §6.10.1 const contexts](https://doc.rust-lang.org/reference/) ✅
+> **边界洞察**: `const fn` 是 Rust 中纯度要求最严格的上下文——不允许可变变量、不允许堆分配、不允许非 `const` 操作。任何副作用尝试都会在编译期被拒绝。这构成了 Rust 效果系统的"核心纯净区"。来源: [Rust Reference — §6.10.1 const contexts](https://doc.rust-lang.org/reference/introduction.html) ✅
 
 ### 7.4 边界测试：闭包捕获的副作用
 
@@ -434,7 +434,7 @@ fn closure_effect() {
 }
 ```
 
-> **认知功能**: 此示例展示了 Rust 如何通过闭包（Closures）类型（`Fn`, `FnMut`, `FnOnce`）将副作用限制在明确的边界内。`FnMut` = 可修改捕获的环境，`Fn` = 只读环境，`FnOnce` = 消费环境。来源: [Rust Reference — §8.2.13 Closure expressions](https://doc.rust-lang.org/reference/) ✅
+> **认知功能**: 此示例展示了 Rust 如何通过闭包（Closures）类型（`Fn`, `FnMut`, `FnOnce`）将副作用限制在明确的边界内。`FnMut` = 可修改捕获的环境，`Fn` = 只读环境，`FnOnce` = 消费环境。来源: [Rust Reference — §8.2.13 Closure expressions](https://doc.rust-lang.org/reference/introduction.html) ✅
 
 ---
 
@@ -448,7 +448,7 @@ fn closure_effect() {
 | **Haskell** | `State` Monad | `IO` Monad | `Either` / `Maybe` | `IO` / `STM` | Monad + 惰性 |
 | **Rust** | `&mut T` / `Cell` / `RefCell` | 普通函数（无特殊标记） | `Result<T, E>` | `async` / `Send`/`Sync` | 所有权（Ownership） + 借用（Borrowing） |
 
-> **关键洞察**: Haskell 通过**Monad 组合子**将副作用完全显式化；Rust 通过**所有权（Ownership）约束**在类型层面部分显式化副作用。两者殊途同归——目标都是让副作用"可见、可追踪、可组合"。Rust 的选择更适合系统编程：零运行时（Runtime）开销、与命令式代码无缝集成。[来源: 💡 原创分析]
+> **关键洞察**: Haskell 通过**Monad 组合子**将副作用完全显式化；Rust 通过**所有权（Ownership）约束**在类型层面部分显式化副作用。两者殊途同归——目标都是让副作用"可见、可追踪、可组合"。Rust 的选择更适合系统编程：零运行时（Runtime）开销、与命令式代码无缝集成。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -460,15 +460,15 @@ fn closure_effect() {
 | 副作用分类 | [Moggi 1989] · [Peyton Jones & Wadler 1993] | ✅ | Tier 1 |
 | Monad 显式化副作用 | [Moggi 1989] · [Wadler 1992] | ✅ | Tier 1 |
 | Rust 效果系统原型 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · 原创分析 | ✅/💡 | Tier 3 |
-| `&mut T` 作为写效果 | [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ | Tier 2 |
+| `&mut T` 作为写效果 | [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ | Tier 2 |
 | 纯函数局部保证 | [💡 原创分析] | ⚠️ | Tier 3 |
 | 跨语言副作用对比矩阵 | [💡 原创分析] | ⚠️ | Tier 3 |
 
 ---
 
 > **权威来源**:
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [Moggi 1989 — Computational Lambda-Calculus and Monads](https://person.dibris.unige.it/moggi-eugenio/ftp/ic91.pdf) ·
 > [Wadler 1992 — The Essence of Functional Programming](https://dl.acm.org/doi/10.1145/143165.143169) ·
 > [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
@@ -510,7 +510,7 @@ const fn make_counter_fixed() -> Counter {
 }
 ```
 
-> **修正**: `const fn` 的效果约束限制其只能调用其他 `const fn`、使用常量、执行基本控制流。任何涉及堆分配、I/O、可变静态变量的操作都被禁止。这与 Haskell 的 `IO` monad 或纯函数语言的效果追踪类似——Rust 通过 `const` 关键字在编译期划分"纯计算"与"效果ful计算"的边界。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: `const fn` 的效果约束限制其只能调用其他 `const fn`、使用常量、执行基本控制流。任何涉及堆分配、I/O、可变静态变量的操作都被禁止。这与 Haskell 的 `IO` monad 或纯函数语言的效果追踪类似——Rust 通过 `const` 关键字在编译期划分"纯计算"与"效果ful计算"的边界。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：`unsafe` 块的传染性与 FFI 边界（编译错误）
 
@@ -541,7 +541,7 @@ fn safe_wrapper_fixed(size: usize) -> Vec<u8> {
 > `unsafe` 效果具有"传染性"——调用 `unsafe fn` 或解引用裸指针必须在 `unsafe` 块内进行。
 > 但 `unsafe` 块**不自动**使周围代码变为 unsafe；它只是告诉编译器"程序员已验证此处的安全性"。
 > 将 unsafe 操作包装为安全 API 时，必须确保所有 unsafe 前置条件在函数体内被满足（如空指针检查、长度验证、生命周期（Lifetimes）保证）。这是 Rust 安全抽象的核心契约。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：`const fn` 中的堆分配尝试（编译错误）
 
@@ -659,14 +659,14 @@ fn main() {
 
 > [来源: [ICFP 2014 — Extensible Effects](https://dl.acm.org/doi/10.1145/2628136.2628161)]
 > [来源: [Haskell — IO Monad](https://www.haskell.org/tutorial/io.html)]
-> [来源: [Rust [RFC 2593](https://github.com/rust-lang/rfcs/pull/2593) — Effects](https://rust-lang.github.io/rfcs/)]
+> [来源: [Rust [RFC 2593](https://github.com/rust-lang/rfcs/pull/2593) — Effects](https://rust-lang.github.io/rfcs/index.html)]
 > [来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)]
 > [来源: [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)]
 > **权威来源**:
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rust Standard Library](https://doc.rust-lang.org/std/) ·
-> [Rust RFCs](https://rust-lang.github.io/rfcs/)
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
+> [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 权威来源对照

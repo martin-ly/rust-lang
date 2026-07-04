@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo Book — Registries](https://doc.rust-lang.org/cargo/reference/registries.html) · · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Cargo Book — Registries](https://doc.rust-lang.org/cargo/reference/registries.html) · · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Cargo Book — Running a Registry](https://doc.rust-lang.org/cargo/reference/running-a-registry.html) ·
 > [Cargo Book — Registry Authentication](https://doc.rust-lang.org/cargo/reference/registry-authentication.html) ·
 > [Cargo Book — Registry Index Format](https://doc.rust-lang.org/cargo/reference/registry-index.html)

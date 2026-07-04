@@ -45,8 +45,8 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Educational Technology](https://en.wikipedia.org/wiki/Educational_Technology)** ·
 > **来源: [Wikipedia - Spiral Curriculum](https://en.wikipedia.org/wiki/Spiral_Curriculum)** ·
-> **[来源: ACM - CS Curriculum Guidelines]** ·
-> **[来源: IEEE - Learning Outcome Standards]**
+> **[ACM - CS Curriculum Guidelines](https://dl.acm.org/)** ·
+> **[IEEE - Learning Outcome Standards](https://ieeexplore.ieee.org/)**
 >
 
 ### 路径 1: 初学者 (4-6 周) {#路径-1-初学者-4-6-周}
@@ -333,7 +333,7 @@ async fn use_async_fn_trait() {
 
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、Rust by Example 来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、Rust by Example 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

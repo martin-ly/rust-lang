@@ -48,9 +48,9 @@
 
 > **Bloom 层级**: 应用 → 评价 → 创造
 > **来源: [Embassy Book](https://embassy.dev/book/)** ·
-> **[来源: embedded-hal 文档]** ·
-> **[来源: svd2rust 文档]** ·
-> **[来源: defmt 文档]** ·
+> **[embedded-hal 文档](https://docs.rs/embedded-hal/latest/embedded_hal/)** ·
+> **[svd2rust 文档](https://docs.rs/svd2rust/latest/svd2rust/)** ·
+> **[defmt 文档](https://docs.rs/defmt/latest/defmt/)** ·
 > **来源: [Rust Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)** ·
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** ✅
 
@@ -838,6 +838,6 @@ async fn main(spawner: Spawner) {
 >
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 
 ---

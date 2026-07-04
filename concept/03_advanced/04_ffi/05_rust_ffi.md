@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) · · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [The Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) ·
 > [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html) ·
 > [Rust Edition Guide 2024 — unsafe extern blocks](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-extern.html) ·
@@ -338,7 +338,7 @@ graph TD
 > **认知功能**: 此决策树评估 C 库是否适合被 Rust 安全封装。核心判断标准是**不变量的文档化程度**和**可表达性**。
 > **使用建议**: 优先封装有清晰 API 契约的 C 库（如 OpenSSL、SQLite）；避免封装内部行为不透明的遗留代码。
 > **关键洞察**: FFI 安全封装的本质是**将 C 的不变量映射到 Rust 的类型系统（Type System）**。如果 C 库本身没有明确的不变量，映射就不可能完整。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -488,7 +488,7 @@ fn verify_layout() {
 }
 ```
 
-> **修正**: `#[repr(C)]` 只保证 Rust 编译器使用 C 兼容的布局规则，但**不保证**与特定 C 编译器的布局完全一致（尤其是 bit field、packing pragma）。跨 FFI 传递结构体（Struct）时，应使用 `bindgen` 自动生成布局验证，或手动使用 `static_assertions::assert_eq_size!` 检查。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: `#[repr(C)]` 只保证 Rust 编译器使用 C 兼容的布局规则，但**不保证**与特定 C 编译器的布局完全一致（尤其是 bit field、packing pragma）。跨 FFI 传递结构体（Struct）时，应使用 `bindgen` 自动生成布局验证，或手动使用 `static_assertions::assert_eq_size!` 检查。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 3.5 边界测试：裸指针生命周期与 FFI 边界（编译错误）
 
@@ -512,7 +512,7 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 }
 ```
 
-> **修正**: C 函数返回的裸指针没有生命周期（Lifetimes）信息。将其转换为 Rust 引用（Reference）时，必须显式标注生命周期（通常是 `'a` 由调用者提供）。若 C 函数返回的指针指向局部变量或已释放内存，Rust 引用将悬垂——这是 unsafe 边界，编译器无法检测。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: C 函数返回的裸指针没有生命周期（Lifetimes）信息。将其转换为 Rust 引用（Reference）时，必须显式标注生命周期（通常是 `'a` 由调用者提供）。若 C 函数返回的指针指向局部变量或已释放内存，Rust 引用将悬垂——这是 unsafe 边界，编译器无法检测。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -538,7 +538,7 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -603,9 +603,9 @@ fn main() {
 ```
 
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 认知路径

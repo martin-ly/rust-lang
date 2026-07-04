@@ -499,9 +499,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -550,7 +550,7 @@ fn fixed() {
 > `catch_unwind` 捕获 panic 并恢复执行，但要求闭包（Closures）实现 `UnwindSafe` trait。
 > 共享/可变引用（Mutable Reference）（`&T`、`&mut T`）、`RefCell` 等类型不实现 `UnwindSafe`，因为 panic 可能导致它们处于不一致状态（如 `RefCell` 的借用（Borrowing）计数未递减）。
 > 使用 `AssertUnwindSafe` 包装闭包（Closures）可显式声明"我知道这是安全的"——但这是 unsafe 的契约。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.2 边界测试：在 `Drop` 中 panic 导致双重 panic（运行时 abort）
 
@@ -586,7 +586,7 @@ impl Drop for GoodDrop {
 > 若在 panic 处理过程中（unwinding stack）`Drop` 再次 panic，Rust 无法继续栈展开，直接调用 `abort()` 终止进程。
 > 这是 Rust 的"双重 panic = abort"策略——确保资源泄漏不会导致更严重的不安全状态。
 > `Drop` 实现应永不 panic。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：`panic=abort` 与 `catch_unwind` 的冲突（编译错误/链接错误）
 
@@ -700,7 +700,7 @@ fn main() {
 > 2) 不在 `catch_unwind` 中调用可能 `longjmp` 的 C 函数（如某些 libc 函数）；
 > 3) 使用 `panic=abort`（无栈展开，但进程终止）。这与 Java 的 JNI（Java 异常与 C 异常不互通）或 Python 的 `ctypes`（同样不捕获 C 异常）相同——跨语言异常处理是系统编程的边界问题。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] ·
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.7 边界测试：`core::intrinsics::abort` 与 `std::process::abort` 的差异（运行时行为）
 
@@ -723,7 +723,7 @@ fn main() {
 > 选择取决于场景：用户空间应用使用 `std::process::abort`（更友好），裸机代码使用 `core::intrinsics::abort`（更直接）。
 > 这与 C 的 `abort()`（SIGABRT，可能触发信号处理器）或 C++ 的 `std::abort`（类似 C）不同——Rust 的两种 abort 提供了不同层级的控制。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/process/fn.abort.html)] ·
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.5 边界测试：`catch_unwind` 与 `UnwindSafe` 边界（编译错误）
 

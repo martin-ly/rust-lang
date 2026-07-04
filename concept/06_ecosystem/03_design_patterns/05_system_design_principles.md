@@ -12,7 +12,7 @@
 > **基准版本**: Rust 1.96.1 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **Bloom 层级**: 评价 → 创造
@@ -136,7 +136,7 @@ fn process(data: Vec<u8>) { // 获得 data 的 capability
 
 ### 2.2 并发安全：Session Types 编译期编码
 
-> **Session Types**: 由 Honda 1993 提出，为通道通信协议赋予类型，保证通信双方遵循相同的协议顺序。 [来源: Honda, *Types for Dyadic Interaction*, 1993]
+> **Session Types**: 由 Honda 1993 提出，为通道通信协议赋予类型，保证通信双方遵循相同的协议顺序。 [Honda, *Types for Dyadic Interaction*, 1993](https://doi.org/10.1007/3-540-57208-2_35)
 
 Rust 的 `Send`/`Sync` trait 和所有权转移在编译期编码了 Session Types 的核心保证：
 
@@ -163,7 +163,7 @@ Rust 的零成本抽象（Zero-Cost Abstraction）机制：
 | `async/await` | 状态机变换 | 零（状态机在栈/内联内存） | 手写状态机 enum + poll |
 | `?` 错误传播 | `match` 展开 | 零 | 手写等效 match |
 
-> **定理 T-SD-001（零成本抽象（Zero-Cost Abstraction）保持）**: 在 `release` 模式下，Rust 的标准抽象（泛型（Generics）、Iterator、async/await、`?`）经 LLVM 优化后，生成的机器码与等价的手工编码在性能和内存占用上无统计显著差异。 来源: [Rust Reference §8; LLVM 优化管道文档](https://doc.rust-lang.org/reference/)
+> **定理 T-SD-001（零成本抽象（Zero-Cost Abstraction）保持）**: 在 `release` 模式下，Rust 的标准抽象（泛型（Generics）、Iterator、async/await、`?`）经 LLVM 优化后，生成的机器码与等价的手工编码在性能和内存占用上无统计显著差异。 来源: [Rust Reference §8; LLVM 优化管道文档](https://doc.rust-lang.org/reference/introduction.html)
 
 ### 2.4 组件组合：范畴论态射复合
 
@@ -287,8 +287,8 @@ graph LR
     style E fill:#9f9,stroke:#333,stroke-width:2px
 ```
 
-> **认知功能**: 将多维设计权衡可视化，帮助读者直觉理解「Safe Rust 在安全性、性能、可维护性三维空间中占据帕累托最优位置」。使用时注意，帕累托前沿是动态边界——随着编译器优化和形式化工具成熟，前沿会向右上扩展。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **认知功能**: 将多维设计权衡可视化，帮助读者直觉理解「Safe Rust 在安全性、性能、可维护性三维空间中占据帕累托最优位置」。使用时注意，帕累托前沿是动态边界——随着编译器优化和形式化工具成熟，前沿会向右上扩展。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 | 设计选择 | 安全性 | 性能 | 可维护性 | 适用场景 |
 |:---|:---:|:---:|:---:|:---|
@@ -334,7 +334,7 @@ graph TD
     C --> E[分布式系统: 协议验证]
 ```
 
-> **认知功能**: 通过 Rust 类型系统（Type System）的已有直觉，建立对分布式协议的快速认知桥梁。读者可将编译期已熟悉的所有权、借用（Borrowing）、生命周期（Lifetimes）等概念，迁移理解为分布式系统中的主从复制、锁机制和租约协议。[来源: 💡 原创分析]
+> **认知功能**: 通过 Rust 类型系统（Type System）的已有直觉，建立对分布式协议的快速认知桥梁。读者可将编译期已熟悉的所有权、借用（Borrowing）、生命周期（Lifetimes）等概念，迁移理解为分布式系统中的主从复制、锁机制和租约协议。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **隐喻映射表**:
 
@@ -366,7 +366,7 @@ graph TD
     L5[L5: 运行时验证<br/>监控 / 混沌工程]
 ```
 
-> **认知功能**: 将形式化验证的抽象层级结构化，帮助读者根据项目安全需求和资源投入选择验证深度。关键洞察：L0 是「免费午餐」（编译器自动保证），L4 是「高级定制」（需额外标注和工具投入），跳过中间层直接追求 L5 往往事倍功半。[来源: 💡 原创分析]
+> **认知功能**: 将形式化验证的抽象层级结构化，帮助读者根据项目安全需求和资源投入选择验证深度。关键洞察：L0 是「免费午餐」（编译器自动保证），L4 是「高级定制」（需额外标注和工具投入），跳过中间层直接追求 L5 往往事倍功半。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 | 层级 | 验证目标 | 工具/方法 | 形式化程度 | 覆盖率 |
 |:---|:---|:---|:---:|:---|
@@ -399,7 +399,7 @@ graph TD
     style F fill:#9f9
 ```
 
-> **认知功能**: 揭示七项设计原则之间的支撑关系，帮助读者建立「内存安全（Memory Safety）是基础、零成本抽象是杠杆、组件组合是放大器」的系统观。绿色节点标识根原则——它们不依赖其他原则，是整个设计体系的公理。[来源: 💡 原创分析]
+> **认知功能**: 揭示七项设计原则之间的支撑关系，帮助读者建立「内存安全（Memory Safety）是基础、零成本抽象是杠杆、组件组合是放大器」的系统观。绿色节点标识根原则——它们不依赖其他原则，是整个设计体系的公理。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 6.2 系统架构决策树
 >
@@ -423,7 +423,7 @@ graph TD
     K -->|性能优先| N[unsafe 热点 + Miri 验证]
 ```
 
-> **认知功能**: 将架构设计的多维判断转化为可遍历的决策路径。读者可根据项目约束（性能敏感、容错需求、安全等级）快速定位推荐架构模式。注意：决策树的分支是经验法则而非绝对规则，边界场景需结合定量基准测试验证。[来源: 💡 原创分析]
+> **认知功能**: 将架构设计的多维判断转化为可遍历的决策路径。读者可根据项目约束（性能敏感、容错需求、安全等级）快速定位推荐架构模式。注意：决策树的分支是经验法则而非绝对规则，边界场景需结合定量基准测试验证。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -510,7 +510,7 @@ graph LR
 
 > **认知功能**: 强调系统设计不是线性瀑布，而是带有反馈回路的迭代过程。
 > 验证层的结果（如 Miri 发现的数据竞争、Kani 证伪的不变式）应回流需求层，驱动需求精化和架构修正。
-> 虚线箭头是「V 模型」在 Rust 生态中的特化表达。[来源: 💡 原创分析]
+> 虚线箭头是「V 模型」在 Rust 生态中的特化表达。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **思维表征说明**: 知识流动图是 `inter_layer_topology.md` 中「知识流动」概念在**系统设计场景**的具体化——它展示的不是概念之间的静态关系，而是**设计决策在系统各层之间的动态传播**。
 > 与 `graph TD` 流程图（展示结构）不同，知识流动图强调**反馈回路**（VERIFY → REQ 的虚线箭头）——设计不是一次性的，验证结果会反馈到需求层，驱动迭代优化。
 > 这是系统工程中「V 模型」的 Rust 特化版本。 [来源: Systems Engineering V-Model; ISO/IEC/IEEE 15288]
@@ -535,8 +535,8 @@ graph LR
 
 ## 权威来源索引
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 ---
 
@@ -602,7 +602,7 @@ impl Service {
 }
 ```
 
-> **修正**: 依赖注入（DI）在 Rust 中通常通过**泛型**（静态分发）或 **trait object**（动态分发）实现。泛型无运行时开销，但代码膨胀；trait object 有 vtable 间接开销（约 1-2 个指针解引用（Reference）），但二进制更小。上述代码使用 `Box<dyn Repository>` 实现 DI，每次 `find` 调用有虚函数开销。在性能关键路径上，应使用泛型：`struct Service<R: Repository> { repo: R }`。Rust 的类型系统允许在编译期选择：开发时使用 trait object（快速迭代），发布时重构为泛型（性能优化）。这与 Java 的接口（总是动态分发，JIT 可能内联）或 C++ 的模板（总是静态分发）不同——Rust 提供了两种机制，让开发者根据场景选择。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust Performance Book]
+> **修正**: 依赖注入（DI）在 Rust 中通常通过**泛型**（静态分发）或 **trait object**（动态分发）实现。泛型无运行时开销，但代码膨胀；trait object 有 vtable 间接开销（约 1-2 个指针解引用（Reference）），但二进制更小。上述代码使用 `Box<dyn Repository>` 实现 DI，每次 `find` 调用有虚函数开销。在性能关键路径上，应使用泛型：`struct Service<R: Repository> { repo: R }`。Rust 的类型系统允许在编译期选择：开发时使用 trait object（快速迭代），发布时重构为泛型（性能优化）。这与 Java 的接口（总是动态分发，JIT 可能内联）或 C++ 的模板（总是静态分发）不同——Rust 提供了两种机制，让开发者根据场景选择。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [Rust Performance Book]
 
 ### 10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）
 

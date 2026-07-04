@@ -16,7 +16,7 @@
 
 ## 📋 目录
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Generic Const Expressions (泛型常量表达式)](#generic-const-expressions-泛型常量表达式)
   - [📋 目录](#-目录)
@@ -59,13 +59,13 @@
 
 ## 🎯 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 Generic Const Expressions 允许在泛型参数中使用**更复杂的常量表达式**，超越了简单的整数常量。
 
 ### 为什么需要这个特性？
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 当前限制: 只能使用简单的常量参数
@@ -86,11 +86,11 @@ where
 
 ### 模块 1: 概念定义
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 1.1 直观定义
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Generic Const Expressions** 扩展了 `const generics` 的能力，允许在泛型参数的 `where` 子句中使用**常量表达式**（如 `N * M`、`1 << N`）。
 
@@ -643,7 +643,7 @@ where
 **最后更新**: 2026-05-09
 > **权威来源**: [RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html), [Tracking Issue #76560](https://github.com/rust-lang/rust/issues/76560), [Const Eval](https://doc.rust-lang.org/reference/items/functions.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 RFC 2000 设计决策来源标注、Const Eval 不稳定特性文档引用 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 RFC 2000 设计决策来源标注、Const Eval 不稳定特性文档引用 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **状态**: 🧪 权威来源对齐完成 (Batch 8)
 

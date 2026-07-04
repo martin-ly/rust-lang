@@ -17,8 +17,8 @@
 
 ---
 
-> **来源**: [Miri 官方 README](https://github.com/rust-lang/miri) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> [Rustonomicon — Undefined Behavior](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) ·
+> **来源**: [Miri 官方 README](https://github.com/rust-lang/miri) · [rustc-dev-guide — Miri](https://rustc-dev-guide.rust-lang.org/miri.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> [Rustonomicon — What Unsafe Does](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) ·
 > [Tree Borrows Paper](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) ·
 > [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 
@@ -288,11 +288,11 @@ graph TD
 | [Rust Reference — UB](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) | ✅ 一级 | Rust 官方未定义行为列表 |
 | [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) | ✅ 二级 | 学术形式化模型 |
 | [Tree Borrows Blog](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) | ✅ 二级 | Tree Borrows 设计说明 |
-| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ 二级 | unsafe Rust 实践指南 |
+| [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) | ✅ 二级 | unsafe Rust 实践指南 |
 
 ---
 
-> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/), [The Rustonomicon](https://doc.rust-lang.org/nomicon/), [Miri](https://github.com/rust-lang/miri)
+> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html), [Miri](https://github.com/rust-lang/miri)
 > **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Rust 1.96.1 / Miri nightly
 
 **文档版本**: 1.0

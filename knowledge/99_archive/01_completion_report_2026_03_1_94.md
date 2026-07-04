@@ -13,7 +13,7 @@
 
 ## 🎉 完成概况
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 指标 | 数值 |
 |------|------|
@@ -28,7 +28,7 @@
 
 ## 📁 完整目录结构
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 knowledge/
@@ -102,7 +102,7 @@ knowledge/
 
 ## ✨ Rust 1.94 特性完整覆盖
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 文档位置 | 状态 |
 |------|----------|------|
@@ -122,7 +122,7 @@ knowledge/
 
 ### 1. 权威来源引用
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **PLDI 2025 Distinguished Paper**: Miri Tree Borrows 论文引用
 - **RFC 2788**: LazyCell/LazyLock 设计文档
@@ -131,7 +131,7 @@ knowledge/
 
 ### 2. 实践导向
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **200+ 可运行代码示例**
 - 最佳实践和反模式对比
@@ -262,7 +262,7 @@ knowledge/
 
 ---
 
-> **权威来源**: [来源: Rust 官方文档](https://doc.rust-lang.org/)
+> **权威来源**: [Rust Official Docs](https://doc.rust-lang.org/)(https://doc.rust-lang.org/)
 
 ## 📚 模块 8: 国际化对齐
 

@@ -5,7 +5,7 @@
 > [Ferrocene](https://ferrous-systems.com/ferrocene/),
 > [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # Rust安全关键系统生态系统 - 完整文档集
 
@@ -15,7 +15,7 @@
 
 ## 🎉 100% 全面完成
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档集提供了Rust在安全关键系统领域的全面国际化对齐内容，涵盖学术、工业、国防、教育等多个维度。
 
@@ -33,7 +33,7 @@
 
 ## 🚀 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **新用户**: 从 [00_COMPLETION_REPORT_100_PERCENT.md](01_completion_report_100_percent.md) 开始，了解全貌。
 
@@ -51,11 +51,11 @@
 
 ## 📁 文档导航
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 🏆 核心完成报告
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 描述 |
 |------|------|
@@ -65,7 +65,7 @@
 
 ### 1. 思维导图 (01_mind_maps/)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: [RUST_ECOSYSTEM_MIND_MAP.md](01_mind_maps/02_rust_ecosystem_mind_map.md) (16 KB)
 

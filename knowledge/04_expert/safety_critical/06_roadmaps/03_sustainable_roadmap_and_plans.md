@@ -7,7 +7,7 @@
 >
 > **相关概念**: [迭代器](../../../../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # Rust安全关键系统 - 可持续推进路线图与计划
 
@@ -17,7 +17,7 @@
 
 ## 一、总体战略路线图 (2026-2028)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────────┐
@@ -45,15 +45,15 @@
 
 ## 二、可持续推进任务安排计划
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 持续集成更新计划
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 每周任务 (Weekly Cadence)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 星期 | 任务 | 负责人 | 输出 | 时间 |
 |------|------|--------|------|------|
@@ -65,7 +65,7 @@
 
 #### 每月任务 (Monthly Cadence)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 周次 | 任务 | 参与方 | 输出 |
 |------|------|--------|------|

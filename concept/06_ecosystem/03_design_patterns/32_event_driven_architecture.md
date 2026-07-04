@@ -743,9 +743,9 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建事件驱动架构概念文件 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建事件驱动架构概念文件 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -830,7 +830,7 @@ struct HandlerFixed {
 > `Rc<T>` 使用非原子引用（Reference）计数，不能跨线程；`Arc<T>` 使用原子操作（Atomic Operations），是线程安全的。
 > Rust 编译器在编译期验证这些约束，阻止将非 Send 类型传递到线程池。
 > 这与 Java 的 `ExecutorService.submit()`（运行时才可能报错）或 Go 的 goroutine（自动共享，但可能数据竞争）不同——Rust 在编译期消除并发错误。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：事件总线的类型擦除与向下转型失败（运行时 panic）
 

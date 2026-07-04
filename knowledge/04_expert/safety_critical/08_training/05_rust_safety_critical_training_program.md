@@ -9,7 +9,7 @@
 
 ## 培训体系概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本培训计划旨在为安全关键系统开发培养合格的Rust工程师，从基础语法到功能安全认证的全流程覆盖。
 
@@ -38,15 +38,15 @@
 
 ## Level 1: Rust基础 (2周)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 第1周: 语法与语义
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 模块1: 所有权系统 (2天)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **理论** (4h)
   - 所有权三原则
@@ -72,7 +72,7 @@
 
 #### 模块2: 借用与生命周期 (2天)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **理论** (4h)
   - 不可变借用
@@ -375,7 +375,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 rustup component add clippy rustfmt llvm-tools-preview
 cargo install cargo-audit cargo-fuzz cargo-tarpaulin
 cargo install kani-verifier verus

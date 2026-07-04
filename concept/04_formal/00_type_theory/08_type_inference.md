@@ -203,7 +203,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的类型推断基于 Hindley-Milner 算法扩展，但方法链中的某些位置需要显式类型标注。`collect()` 是最常见的例子——它可返回 `Vec<T>`、`HashSet<T>`、`Result<Vec<T>, E>` 等多种类型，编译器无法从上下文推断时必须显式标注。`::<>`（turbofish）语法允许在方法调用处指定类型参数，避免引入额外变量绑定。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 的类型推断基于 Hindley-Milner 算法扩展，但方法链中的某些位置需要显式类型标注。`collect()` 是最常见的例子——它可返回 `Vec<T>`、`HashSet<T>`、`Result<Vec<T>, E>` 等多种类型，编译器无法从上下文推断时必须显式标注。`::<>`（turbofish）语法允许在方法调用处指定类型参数，避免引入额外变量绑定。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：闭包参数类型推断的歧义（编译错误）
 
@@ -223,7 +223,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 闭包（Closures）参数的类型推断依赖首次使用处的上下文。若闭包定义后立即调用（如 `let f = |x| x + 1; f(5)`），编译器从 `5` 推断 `x: i32`。但若闭包作为参数传递或存储在变量中，可能需要显式标注参数类型（`|x: i32| x + 1`）。这与 C++14 的泛型（Generics） lambda（`auto x`）不同——Rust 的闭包类型推断更严格，要求在首次使用时有足够信息。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 闭包（Closures）参数的类型推断依赖首次使用处的上下文。若闭包定义后立即调用（如 `let f = |x| x + 1; f(5)`），编译器从 `5` 推断 `x: i32`。但若闭包作为参数传递或存储在变量中，可能需要显式标注参数类型（`|x: i32| x + 1`）。这与 C++14 的泛型（Generics） lambda（`auto x`）不同——Rust 的闭包类型推断更严格，要求在首次使用时有足够信息。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ```text
 统一算法: 判断两个类型是否兼容，并生成替换
@@ -493,9 +493,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

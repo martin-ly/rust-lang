@@ -8,7 +8,7 @@
 > **创建日期**: 2026-04-24
 > **用途**: 将 LFRS 认证的 10 大考点映射到本项目内容，建立可量化的学习验证体系
 > **认证官网**: <https://www.linuxfoundation.org/certification>
-> **[来源: Linux Foundation]** ·
+> **[Linux Foundation](https://www.linuxfoundation.org/)** ·
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** ·
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** ·
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -469,7 +469,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

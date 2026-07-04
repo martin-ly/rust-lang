@@ -17,7 +17,7 @@
 > [Async](../../03_advanced/01_async/02_async.md)
 > **主要来源**: [TRPL: Ch4.1-4.3](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL: Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·
-> [Rust Reference: Memory Model](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference: Memory Model](https://doc.rust-lang.org/reference/introduction.html) ·
 > [Wikipedia: Memory management](https://en.wikipedia.org/wiki/Memory_management)
 
 ---
@@ -137,9 +137,9 @@
   - [参考来源](#参考来源)
   - [`ManuallyDrop` 模式匹配（Rust 1.96）](#manuallydrop-模式匹配rust-196)
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > [来源: [The Rust Programming Language — Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > [来源: [Wikipedia — Memory Management](https://en.wikipedia.org/wiki/Memory_management)]
 > [来源: [Wikipedia — Smart Pointer](https://en.wikipedia.org/wiki/Smart_pointer)]
 > [来源: [Wikipedia — Reference Counting](https://en.wikipedia.org/wiki/Reference_counting)]
@@ -263,7 +263,7 @@ graph TD
     F --> F4[std::mem::take]
 ```
 
-> **认知功能**: 概念拓扑图——将内存管理的多维机制（所有权模型 × 可变性模式）可视化为层次化概念网络。读者应将其作为"认知地图"，在面临具体设计问题时快速定位所需机制（如"需要共享+可变"→ `Rc<RefCell<T>>`）。关键洞察：Stack/Heap 只是起点，真正的设计决策发生在智能指针与内部可变性的交叉组合空间。[来源: 💡 原创分析]
+> **认知功能**: 概念拓扑图——将内存管理的多维机制（所有权模型 × 可变性模式）可视化为层次化概念网络。读者应将其作为"认知地图"，在面临具体设计问题时快速定位所需机制（如"需要共享+可变"→ `Rc<RefCell<T>>`）。关键洞察：Stack/Heap 只是起点，真正的设计决策发生在智能指针与内部可变性的交叉组合空间。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [TRPL — Memory Management](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 > **过渡到定理推理链**: 思维导图呈现了内存管理的概念拓扑，但缺乏严格的逻辑推导关系。下一节通过"⟹"标注的定理链，将 Box 所有权（Ownership）、Rc/Arc 共享安全、RefCell 运行时检查等核心命题形式化为可验证的推理网络。
 
@@ -273,7 +273,7 @@ graph TD
 
 ### 4.1 引理：Box<T> ⟹ 堆分配 + 唯一所有权
 >
-> **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference: Box](https://doc.rust-lang.org/reference/)** Box<T> 的语义是堆分配与唯一所有权的组合，对应线性逻辑中的资源唯一拥有。 ✅ 已验证
+> **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference: Box](https://doc.rust-lang.org/reference/introduction.html)** Box<T> 的语义是堆分配与唯一所有权的组合，对应线性逻辑中的资源唯一拥有。 ✅ 已验证
 
 ```text
 前提 1: Box::new(x) 在堆上分配 size_of::<T>() 字节并写入 x
@@ -342,7 +342,7 @@ graph TD
 
 ### 4.5 定理一致性矩阵
 
-> **[原创分析] · [std docs] · [Rustonomicon](https://doc.rust-lang.org/nomicon/)** 运行时内存管理定理基于 std 文档和 Rustonomicon 的运行时语义。 💡 原创分析
+> **[原创分析] · [std docs] · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)** 运行时内存管理定理基于 std 文档和 Rustonomicon 的运行时语义。 💡 原创分析
 
 | **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型场景** |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -646,7 +646,7 @@ struct HashMap<K, V> {
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
 
-> **[Rust Reference: Safety](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)** 反命题分析基于内存管理的形式化语义和已知边界案例。 ✅ 已验证
+> **[Rust Reference: Safety](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)** 反命题分析基于内存管理的形式化语义和已知边界案例。 ✅ 已验证
 
 ### 6.1 反命题 1: "智能指针总是安全的"
 
@@ -675,7 +675,7 @@ graph TD
     style T3 fill:#6f6
 ```
 
-> **认知功能**: 反命题诊断树——通过分类决策将"智能指针安全性"拆解为可遍历的检查路径。读者可按实际使用的指针类型逐层排查：用 RefCell 时检查借用规则、用 Rc 时检查循环引用、用 Box 时检查是否触及 unsafe 边界。关键洞察：没有一种智能指针是"绝对安全"的，安全保证的层级随抽象降低而递减。[来源: 💡 原创分析]
+> **认知功能**: 反命题诊断树——通过分类决策将"智能指针安全性"拆解为可遍历的检查路径。读者可按实际使用的指针类型逐层排查：用 RefCell 时检查借用规则、用 Rc 时检查循环引用、用 Box 时检查是否触及 unsafe 边界。关键洞察：没有一种智能指针是"绝对安全"的，安全保证的层级随抽象降低而递减。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **四层分析**:
 
@@ -711,11 +711,11 @@ graph TD
     style T1 fill:#ff9
 ```
 
-> **认知功能**: 语义边界标定器——精确标定 Rust "内存安全（Memory Safety）"与"无内存泄漏"之间的语义鸿沟。读者应以此纠正直觉误区：Rust 保证无 use-after-free 和 double-free，但循环引用、`mem::forget`、`Box::leak` 均为 Safe Rust 中的合法泄漏。关键洞察：泄漏是设计取舍而非缺陷——排除泄漏需要 GC 或更强的类型约束，Rust 选择将泄漏排除在 unsafe 定义之外。[来源: 💡 原创分析]
+> **认知功能**: 语义边界标定器——精确标定 Rust "内存安全（Memory Safety）"与"无内存泄漏"之间的语义鸿沟。读者应以此纠正直觉误区：Rust 保证无 use-after-free 和 double-free，但循环引用、`mem::forget`、`Box::leak` 均为 Safe Rust 中的合法泄漏。关键洞察：泄漏是设计取舍而非缺陷——排除泄漏需要 GC 或更强的类型约束，Rust 选择将泄漏排除在 unsafe 定义之外。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **四层分析**:
 
-> **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference: Safety](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)** Rust 不将内存泄漏视为 unsafe，这是明确的设计决策。 ✅
+> **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference: Safety](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)** Rust 不将内存泄漏视为 unsafe，这是明确的设计决策。 ✅
 
 | **层面** | **分析** | **结果** |
 |:---|:---|:---|
@@ -744,7 +744,7 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 等价性辨析图——揭示 RefCell 与编译期借用检查在"安全性等价"背后的多维差异。读者在编译失败考虑回退到 RefCell 时，应评估：是否单线程、性能是否敏感、错误是否可承受 panic。关键洞察：RefCell 是"安全的妥协"而非"免费的替代"——它以运行时 panic 风险和计数开销换取编译期无法证明的灵活性。[来源: 💡 原创分析]
+> **认知功能**: 等价性辨析图——揭示 RefCell 与编译期借用检查在"安全性等价"背后的多维差异。读者在编译失败考虑回退到 RefCell 时，应评估：是否单线程、性能是否敏感、错误是否可承受 panic。关键洞察：RefCell 是"安全的妥协"而非"免费的替代"——它以运行时 panic 风险和计数开销换取编译期无法证明的灵活性。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **四层分析**:
 
@@ -780,7 +780,7 @@ graph TD
     style T2 fill:#6f6
 ```
 
-> **认知功能**: 并发安全（Concurrency Safety）决策树——区分"内存安全（Memory Safety）"（无数据竞争）与"并发正确性"（无死锁、无 poisoning）两个层次。读者设计多线程共享状态时，应以此图为检查清单：排查锁嵌套顺序、panic 处理策略、锁粒度合理性。关键洞察：Arc<Mutex<T>> 的线程安全是有条件的——它阻止数据竞争，但死锁属于不可编译期判定（Halting Problem）的工程问题，需通过锁顺序约定与 try_lock 来缓解。[来源: 💡 原创分析]
+> **认知功能**: 并发安全（Concurrency Safety）决策树——区分"内存安全（Memory Safety）"（无数据竞争）与"并发正确性"（无死锁、无 poisoning）两个层次。读者设计多线程共享状态时，应以此图为检查清单：排查锁嵌套顺序、panic 处理策略、锁粒度合理性。关键洞察：Arc<Mutex<T>> 的线程安全是有条件的——它阻止数据竞争，但死锁属于不可编译期判定（Halting Problem）的工程问题，需通过锁顺序约定与 try_lock 来缓解。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **四层分析**:
 
@@ -998,7 +998,7 @@ c.borrow_mut().push_str("hello");     // 运行时检查的可变借用
 
 ### Step 3: 规则困惑 — 借用检查与内部可变性
 
-> **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rustonomicon: Interior Mutability](https://doc.rust-lang.org/nomicon/)** 编译期检查是静态证明（零开销但保守），RefCell 是动态监控（运行时开销但更灵活）。 ✅
+> **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rustonomicon: Interior Mutability](https://doc.rust-lang.org/nomicon/index.html)** 编译期检查是静态证明（零开销但保守），RefCell 是动态监控（运行时开销但更灵活）。 ✅
 
 **核心问题**: "编译期不让我可变借用（Mutable Borrow），RefCell 为什么可以？"
 
@@ -1031,7 +1031,7 @@ c.borrow_mut().push_str("hello");     // 运行时检查的可变借用
 
 ### Step 5: 边界认知 — 泄漏、循环与 unsafe 边界
 
-> **[Rust Reference: Safety](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Rustonomicon: Leaking](https://doc.rust-lang.org/nomicon/)** Rust 的安全保证明确排除内存泄漏——防止泄漏需要 GC 或更强的类型约束，Rust 选择将其排除在 unsafe 定义之外。 ✅
+> **[Rust Reference: Safety](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Rustonomicon: Leaking](https://doc.rust-lang.org/nomicon/index.html)** Rust 的安全保证明确排除内存泄漏——防止泄漏需要 GC 或更强的类型约束，Rust 选择将其排除在 unsafe 定义之外。 ✅
 
 **核心问题**: "Rust 真的完全安全吗？泄漏是怎么回事？"
 
@@ -1072,16 +1072,16 @@ c.borrow_mut().push_str("hello");     // 运行时检查的可变借用
 |:---|:---|:---|
 | Stack LIFO，Heap 动态分配 | [TRPL Ch4.1](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) | ✅ |
 | 智能指针拥有数据 | [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) | ✅ |
-| Rc 单线程，Arc 多线程 | [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ |
+| Rc 单线程，Arc 多线程 | [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ |
 | RefCell 运行时借用检查 | [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) | ✅ |
 | Weak 打破循环引用 | [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) | ✅ |
 | Rust 泄漏不被视为 unsafe | [Rust Reference: Safety](https://doc.rust-lang.org/reference/unsafe-blocks.html) | ✅ |
-| 内存分配器 API | [Rust Reference: GlobalAlloc](https://doc.rust-lang.org/reference/) | ✅ |
+| 内存分配器 API | [Rust Reference: GlobalAlloc](https://doc.rust-lang.org/reference/introduction.html) | ✅ |
 | 线性逻辑与所有权 | [Girard 1987 — Linear Logic] | ✅ |
 | 分离逻辑与 Rust | [Reynolds 2002 — Separation Logic] | ✅ |
 | 区域类型内存管理 | [Tofte & Talpin 1994 — POPL] | ✅ |
 | 分数权限理论 | [Boyland 2003 — Checking Interference with Fractional Permissions] | ✅ |
-| 智能指针形式化 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) · 原创分析 | 💡 |
+| 智能指针形式化 | [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · 原创分析 | 💡 |
 
 ---
 
@@ -1095,7 +1095,7 @@ c.borrow_mut().push_str("hello");     // 运行时检查的可变借用
 
 ### 补充章节：`MaybeUninit<T>` 的内存安全边界
 
-> **[Rust Reference: MaybeUninit](https://doc.rust-lang.org/reference/)** `MaybeUninit<T>` 是 Rust 提供的**未初始化内存的安全抽象**。它包装一块 `size_of::<T>()` 字节的内存，但**不假设该内存已包含有效的 T 值**，从而避免编译器基于 Validity Invariant 做出错误优化。✅ 已验证
+> **[Rust Reference: MaybeUninit](https://doc.rust-lang.org/reference/introduction.html)** `MaybeUninit<T>` 是 Rust 提供的**未初始化内存的安全抽象**。它包装一块 `size_of::<T>()` 字节的内存，但**不假设该内存已包含有效的 T 值**，从而避免编译器基于 Validity Invariant 做出错误优化。✅ 已验证
 > **[Rustonomicon: Untyped Memory](https://doc.rust-lang.org/nomicon/repr-rust.html)** 读取未初始化内存在 Rust 中是 UB，`MaybeUninit` 是 Safe Rust 中唯一合法处理未初始化堆栈/堆内存的方式。✅ 已验证
 
 #### 用途：未初始化内存的安全抽象
@@ -1171,7 +1171,7 @@ let squares: [i32; 5] = init_array(|i| (i * i) as i32);
 assert_eq!(squares, [0, 1, 4, 9, 16]);
 ```
 
-> **来源: [Rust Reference: MaybeUninit](https://doc.rust-lang.org/reference/)** `assume_init` 的安全契约是 Rust unsafe 边界的典型模式：Safe API 要求调用方通过外部证明满足前置条件。✅ 已验证
+> **来源: [Rust Reference: MaybeUninit](https://doc.rust-lang.org/reference/introduction.html)** `assume_init` 的安全契约是 Rust unsafe 边界的典型模式：Safe API 要求调用方通过外部证明满足前置条件。✅ 已验证
 
 ---
 
@@ -1185,7 +1185,7 @@ assert_eq!(squares, [0, 1, 4, 9, 16]);
 
 ### 5.7 补充：自定义 Allocator（`#[global_allocator]`）
 
-> **[Rust Reference: Global allocator](https://doc.rust-lang.org/reference/)** · **[RFC 1974](https://github.com/rust-lang/rfcs/pull/1974)** · **[Wikipedia: Memory management](https://en.wikipedia.org/wiki/Memory_management)** Rust 默认使用系统分配器（`std::alloc::System`），但允许通过 `#[global_allocator]` 替换为自定义分配器（如 `jemalloc`、`mimalloc`），以优化特定工作负载的内存性能。✅
+> **[Rust Reference: Global allocator](https://doc.rust-lang.org/reference/introduction.html)** · **[RFC 1974](https://github.com/rust-lang/rfcs/pull/1974)** · **[Wikipedia: Memory management](https://en.wikipedia.org/wiki/Memory_management)** Rust 默认使用系统分配器（`std::alloc::System`），但允许通过 `#[global_allocator]` 替换为自定义分配器（如 `jemalloc`、`mimalloc`），以优化特定工作负载的内存性能。✅
 
 #### 替换全局分配器
 
@@ -1221,7 +1221,7 @@ vec.push(1);  // 使用指定的分配器
 ```
 
 > **关键洞察**: 全局分配器替换是**链接期决策**——整个二进制文件使用同一个分配器。`Allocator` trait（实验性）则允许**局部分配器选择**，使不同数据结构可以使用不同的分配策略（如 arena allocation 用于短生命周期（Lifetimes）对象，系统分配器用于长生命周期对象）。
-> **来源**: [Rust Reference: Global allocator](https://doc.rust-lang.org/reference/) · [RFC 1974: Allocators](https://github.com/rust-lang/rfcs/pull/1974) · [jemalloc 文档] · [mimalloc 文档]
+> **来源**: [Rust Reference: Global allocator](https://doc.rust-lang.org/reference/introduction.html) · [RFC 1974: Allocators](https://github.com/rust-lang/rfcs/pull/1974) · [jemalloc 文档] · [mimalloc 文档]
 
 ### 5.8 补充：`ManuallyDrop<T>` 与 `mem::forget` 的形式化分析
 
@@ -1267,7 +1267,7 @@ pub unsafe extern "C" fn rust_string_to_c(s: String) -> *mut c_char {
 }
 ```
 
-> **来源**: [Rust Reference: ManuallyDrop](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html) · [Rust Reference: std::mem::forget](https://doc.rust-lang.org/std/mem/fn.forget.html) · [Rustonomicon: Special memory](https://doc.rust-lang.org/nomicon/) · [Wikipedia: Memory management](https://en.wikipedia.org/wiki/Memory_management)
+> **来源**: [Rust Reference: ManuallyDrop](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html) · [Rust Reference: std::mem::forget](https://doc.rust-lang.org/std/mem/fn.forget.html) · [Rustonomicon: Special memory](https://doc.rust-lang.org/nomicon/index.html) · [Wikipedia: Memory management](https://en.wikipedia.org/wiki/Memory_management)
 
 ---
 
@@ -1457,7 +1457,7 @@ vec.extend(0..1_000_000);
 ```
 
 > **定理**：分配器选择只能优化**内存管理开销**，无法优化**算法本身的分配模式**。减少分配次数（对象池、arena、栈分配）通常比更换分配器收益更大。
-> **来源**: [Rust Reference: Global Allocator](https://doc.rust-lang.org/reference/) · [jemalloc.net] · [mimalloc paper (Leijen & Sivakumar, 2019)] · [Wikipedia: Memory allocator](https://en.wikipedia.org/wiki/Memory_allocator) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
+> **来源**: [Rust Reference: Global Allocator](https://doc.rust-lang.org/reference/introduction.html) · [jemalloc.net] · [mimalloc paper (Leijen & Sivakumar, 2019)] · [Wikipedia: Memory allocator](https://en.wikipedia.org/wiki/Memory_allocator) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
 
 ---
 
@@ -1623,8 +1623,8 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 | **Pointer (computer programming)** | [Pointer (computer programming)](https://en.wikipedia.org/wiki/Pointer_(computer_programming)) | 指针 |
 | **RAII** | [RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) | 资源获取即初始化 |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -1745,7 +1745,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `ManuallyDrop<T>` 阻止编译器自动调用 `Drop::drop`，允许程序员手动控制析构时机。`ManuallyDrop::take` 取出内部值后，`ManuallyDrop` 本身变为未初始化状态。再次访问或 `take` 是未定义行为。这是 Rust unsafe 边界的典型模式——编译器放弃自动管理，程序员承担完全责任。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: `ManuallyDrop<T>` 阻止编译器自动调用 `Drop::drop`，允许程序员手动控制析构时机。`ManuallyDrop::take` 取出内部值后，`ManuallyDrop` 本身变为未初始化状态。再次访问或 `take` 是未定义行为。这是 Rust unsafe 边界的典型模式——编译器放弃自动管理，程序员承担完全责任。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 3.5 边界测试：对齐要求不满足的 `alloc::alloc`（运行时 UB）
 
@@ -1770,7 +1770,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的全局分配器 API 要求调用者提供正确的内存布局（大小和对齐）。对齐不足会导致未定义行为——不仅是性能问题，现代编译器假设所有引用都正确对齐，未对齐引用可能触发硬件异常或被优化掉。`Layout::new::<T>()` 自动使用类型 `T` 的自然对齐，是安全做法。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: Rust 的全局分配器 API 要求调用者提供正确的内存布局（大小和对齐）。对齐不足会导致未定义行为——不仅是性能问题，现代编译器假设所有引用都正确对齐，未对齐引用可能触发硬件异常或被优化掉。`Layout::new::<T>()` 自动使用类型 `T` 的自然对齐，是安全做法。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：`Box::leak` 的永久泄漏（逻辑错误）
 
@@ -1821,7 +1821,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Box::into_raw` 将 `Box<T>` 转换为 `*mut T`，不释放内存。调用者负责管理内存生命周期（Lifetimes）。常见错误：1) 双重释放（多次 `from_raw` + `drop`）；2) 使用-after-free（`from_raw` 后继续使用原指针）；3) 内存泄漏（`into_raw` 后忘记释放）。安全模式：使用 `Box::from_raw` 的返回值立即 drop，不保存裸指针。如果需要共享所有权，用 `Rc`/`Arc`；如果需要临时借用，用 `as_mut_ptr()`（保留 `Box` 所有权）。这与 C++ 的 `std::unique_ptr::release`（类似语义）或 C 的 `malloc`/`free`（无所有权跟踪）不同——Rust 的 `Box` 转换显式放弃了所有权，责任转移到开发者。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/boxed/struct.Box.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: `Box::into_raw` 将 `Box<T>` 转换为 `*mut T`，不释放内存。调用者负责管理内存生命周期（Lifetimes）。常见错误：1) 双重释放（多次 `from_raw` + `drop`）；2) 使用-after-free（`from_raw` 后继续使用原指针）；3) 内存泄漏（`into_raw` 后忘记释放）。安全模式：使用 `Box::from_raw` 的返回值立即 drop，不保存裸指针。如果需要共享所有权，用 `Rc`/`Arc`；如果需要临时借用，用 `as_mut_ptr()`（保留 `Box` 所有权）。这与 C++ 的 `std::unique_ptr::release`（类似语义）或 C 的 `malloc`/`free`（无所有权跟踪）不同——Rust 的 `Box` 转换显式放弃了所有权，责任转移到开发者。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/boxed/struct.Box.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.4 边界测试：Box::leak 后的可变借用与原始 Box 的关系（编译错误）
 
@@ -1835,7 +1835,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Box::leak` 消耗 `Box` 并返回 `&'static mut T`：1) `Box` 的堆内存不再被 drop；2) 返回的引用是 `'static`（程序生命周期（Lifetimes））；3) 原 `Box` 变量被 move，之后不可使用。使用场景：1) 全局配置（泄漏后全局可读）；2) 循环引用结构（避免 Rc 开销）；3) 与 C FFI 共享内存。风险：内存泄漏（ intentionally，但程序结束时 OS 回收）。这与 C 的 `malloc` 后丢弃指针（内存泄漏，无 Rust 的显式语义）或 Java 的静态引用（GC 不回收）不同——Rust 的 `Box::leak` 是显式的、有类型的内存泄漏原语。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/boxed/struct.Box.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: `Box::leak` 消耗 `Box` 并返回 `&'static mut T`：1) `Box` 的堆内存不再被 drop；2) 返回的引用是 `'static`（程序生命周期（Lifetimes））；3) 原 `Box` 变量被 move，之后不可使用。使用场景：1) 全局配置（泄漏后全局可读）；2) 循环引用结构（避免 Rc 开销）；3) 与 C FFI 共享内存。风险：内存泄漏（ intentionally，但程序结束时 OS 回收）。这与 C 的 `malloc` 后丢弃指针（内存泄漏，无 Rust 的显式语义）或 Java 的静态引用（GC 不回收）不同——Rust 的 `Box::leak` 是显式的、有类型的内存泄漏原语。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/boxed/struct.Box.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：返回局部变量的悬垂引用
 

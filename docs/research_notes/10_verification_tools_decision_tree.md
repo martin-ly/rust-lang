@@ -571,7 +571,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 
@@ -596,8 +596,8 @@
 ## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Decision Tree](https://en.wikipedia.org/wiki/Decision_Tree)**
-> **[来源: ACM - Decision Support Systems]**
-> **[来源: IEEE - Risk Analysis]**
+> **[ACM - Decision Support Systems](https://dl.acm.org/)**
+> **[IEEE - Risk Analysis](https://ieeexplore.ieee.org/)**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)**
 > **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**

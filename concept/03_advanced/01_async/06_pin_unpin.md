@@ -484,7 +484,7 @@ fn pin_heap() -> Pin<Box<i32>> {
 }
 ```
 
-> **修正**: `Pin<&mut T>` 是引用，必须保证目标内存的存活。固定栈值后返回 `Pin<&mut T>` 会导致悬垂引用。正确做法是将值固定到堆上（`Box::pin`）或使用 `std::pin::pin!` 宏（Rust 1.68+）在局部作用域内固定。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `Pin<&mut T>` 是引用，必须保证目标内存的存活。固定栈值后返回 `Pin<&mut T>` 会导致悬垂引用。正确做法是将值固定到堆上（`Box::pin`）或使用 `std::pin::pin!` 宏（Rust 1.68+）在局部作用域内固定。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 4.5 边界测试：手动实现 `Unpin` 破坏自引用保证（unsafe 逻辑错误）
 
@@ -519,7 +519,7 @@ fn main() {
 }
 ```
 
-> **修正**: 为包含自引用的类型手动实现 `Unpin` 是极其危险的。`Unpin` 是一个 "auto trait"，表示"移动是安全的"。手动实现 `Unpin` 等于告诉编译器"此类型即使被移动也是安全的"——如果类型实际包含自引用，移动后指针将悬垂，导致未定义行为。应始终让编译器自动推导 `Unpin`。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: 为包含自引用的类型手动实现 `Unpin` 是极其危险的。`Unpin` 是一个 "auto trait"，表示"移动是安全的"。手动实现 `Unpin` 等于告诉编译器"此类型即使被移动也是安全的"——如果类型实际包含自引用，移动后指针将悬垂，导致未定义行为。应始终让编译器自动推导 `Unpin`。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -547,7 +547,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch17-00-async-await.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch17-00-async-await.html)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
@@ -641,7 +641,7 @@ fn main() {
 ```
 
 > **修正**: **`Unpin`** 是**auto trait**：1) 编译器自动为大多数类型实现 `Unpin`；2) 包含 `PhantomPinned` 或 `!Unpin` 字段的类型自动 `!Unpin`；3) 不能为 `!Unpin` 类型手动实现 `Unpin`（不安全）。`Pin<P<T>>` 的行为：1) `T: Unpin` — `Pin` 允许 `get_mut()`（数据可安全移动）；2) `T: !Unpin` — `Pin` 禁止 `get_mut()`（数据不可移动）。自引用结构：1) 使用 `PhantomPinned` 标记 `!Unpin`；2) 通过 `Pin<&mut Self>` 访问；3) `unsafe` 创建 `Pin`（需保证数据不移动）。这与 C++ 的 `std::pin`（无原生支持，需手动管理）或 Swift 的引用类型（始终堆分配，无 move 问题）不同——Rust 的 `Pin` 是零成本抽象（Zero-Cost Abstraction），通过类型系统（Type System）保证。[来源: [Pin API](https://doc.rust-lang.org/std/pin/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/std/pin/index.html)]
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 认知路径
@@ -875,4 +875,4 @@ struct ExampleFuture {
 
 ---
 
-> **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Async Book — Pin](https://rust-lang.github.io/async-book/) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html)
+> **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Async Book — Pin](https://rust-lang.github.io/async-book/index.html) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html)

@@ -91,7 +91,7 @@ Trait 转换:
 - **Cast**：你明确告诉编译器“我要把这个值当作另一种类型”，可能伴随数据丢失。
 - **Trait 转换**：通过标准 trait 实现可组合、可发现的类型转换，是错误处理和 API 设计的首选。
 
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -435,6 +435,6 @@ D. 本地 newtype `struct Bytes(Vec<u8>)`
 
 ---
 
-> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/), [Rust By Example](https://doc.rust-lang.org/rust-by-example/), [std::convert](https://doc.rust-lang.org/std/convert/index.html)
+> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html), [std::convert](https://doc.rust-lang.org/std/convert/index.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [来源: Rust 1.96.1 Reference、std::convert、Rust By Example 对齐]
 > **状态**: ✅ 权威来源对齐完成

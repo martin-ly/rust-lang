@@ -13,7 +13,7 @@
 > **前置概念**: [Verification Toolchain](05_verification_toolchain.md) · [Hoare 逻辑](../03_operational_semantics/15_hoare_logic.md) · [RustBelt](../02_separation_logic/04_rustbelt.md)
 > **主要来源**: [AutoVerus arXiv 2025] · [Kani 0.65 Release] · [ESBMC Rust] · [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [TrustInSoft] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Verus](https://verus-lang.github.io/verus/) · [Kani](https://model-checking.github.io/kani/) · [Miri](https://github.com/rust-lang/miri)
 ---
 
 > **后置概念**: [Comparative Studies](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -453,7 +453,7 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 > **文档版本**: 1.1
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **最后更新**: 2026-06-26
-> **权威来源对齐变更日志**: 2026-06-26 新增 Kani 独立概念页 `./32_kani.md` 交叉链接 [来源: P2 Deep Content Sprint]
+> **权威来源对齐变更日志**: 2026-06-26 新增 Kani 独立概念页 `./32_kani.md` 交叉链接 [P2 Deep Content Sprint](../../00_meta/02_sources/international_authority_index.md)
 > **状态**: ✅ 现代验证工具生态补全
 
 ## 认知路径

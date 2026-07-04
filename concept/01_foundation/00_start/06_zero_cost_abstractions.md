@@ -308,7 +308,7 @@ graph TD
 > **认知功能**: 此决策树判断 Rust 抽象是否有运行时成本。核心判断标准是**是否使用动态分发或运行时管理机制**。
 > **使用建议**: 性能关键路径使用泛型 + 迭代器；需要运行时灵活性时接受 dyn Trait 的成本；避免在热路径使用 Rc/Arc/Mutex。
 > **关键洞察**: Rust 的**设计哲学**是"零成本抽象优先，运行时成本显式"。有成本的抽象（dyn Trait、Rc）在类型系统（Type System）中明确标记，不会意外引入。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -406,7 +406,7 @@ Rust 性能分析工具链:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
@@ -449,7 +449,7 @@ fn dyn_id(x: &dyn std::any::Any) -> &dyn std::any::Any {
 > 泛型单态化是 Rust 实现零成本多态的方式——每个具体类型生成独立代码，消除运行时分发。
 > 代价是二进制体积增大。在嵌入式或受限环境中，需权衡泛型与动态分发。
 > 这与 C++ 的模板膨胀问题相同，但 Rust 的编译器（monomorphization collector）更积极地消除未使用的泛型实例。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 12.2 边界测试：`inline` 提示与编译器优化（逻辑错误）
 
@@ -478,7 +478,7 @@ fn main() {
 > `inline(always)` 在递归函数或过大函数上可能被编译器拒绝。
 > 真正的零成本抽象依赖编译器的优化决策，而非人工指令。
 > 这与 C 的 `inline` 关键字类似，但 Rust 的编译器（LLVM）有更精细的启发式算法。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 12.3 边界测试：泛型递归类型的大小计算（编译错误）
 
@@ -524,7 +524,7 @@ fn fixed() {
 > `dyn Trait` 是动态大小类型（DST），编译器无法在编译期确定其大小（不同实现类型大小不同）。
 > DST 不能直接作为变量类型，必须放在指针后面：`Box<dyn Trait>`、`&dyn Trait`。
 > 这与 C++ 的虚函数表指针类似，但 Rust 的 `dyn` 是显式语法，编译器拒绝隐式类型擦除。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.3 边界测试：泛型单态化导致的代码膨胀（编译错误/链接错误）
 
@@ -598,7 +598,7 @@ fn main() {
 > 与 JavaScript 的 Promise（无自引用（Reference）问题，因为所有变量在闭包（Closures）中按引用捕获）或 Go 的 goroutine（栈可增长和移动，通过指针重定位处理）不同
 > ——Rust 的 async 在编译期生成固定布局的状态机，运行时无额外开销。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html)] ·
-> [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+> [来源: [Rust Async Book](https://rust-lang.github.io/async-book/index.html)]
 
 ### 10.3 边界测试：零大小类型的布局陷阱（编译错误/UB）
 

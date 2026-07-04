@@ -5,7 +5,7 @@
 > [Ferrocene](https://ferrous-systems.com/ferrocene/),
 > [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # 技术观察与新兴趋势
 
@@ -15,7 +15,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档跟踪Rust安全关键系统领域的新兴技术、工具和发展趋势。
 
@@ -23,11 +23,11 @@
 
 ## 1. 语言特性趋势
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 Rust 2024 Edition
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 已确认特性:
@@ -55,7 +55,7 @@
 
 ### 1.2 内存模型演进
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Tree Borrows:
@@ -74,7 +74,7 @@ Tree Borrows:
 
 ## 2. 工具链发展
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 编译器技术
 >

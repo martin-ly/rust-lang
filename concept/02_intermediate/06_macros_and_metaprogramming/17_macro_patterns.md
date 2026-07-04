@@ -552,9 +552,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -609,7 +609,7 @@ macro_rules! ordered {
 }
 ```
 
-> **修正**: `macro_rules!` 采用**顺序贪婪匹配**——从上到下尝试每个分支，第一个成功匹配的分支被展开。更通用的模式（如 `$e:expr`）若排在前面，会阻止后面更具体的模式（如 `$i:ident`）被匹配。这与正则表达式的贪婪匹配类似，但宏的匹配是结构化的（基于 token tree）。设计宏时必须将最具体的模式放在前面，通用模式放在后面。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: `macro_rules!` 采用**顺序贪婪匹配**——从上到下尝试每个分支，第一个成功匹配的分支被展开。更通用的模式（如 `$e:expr`）若排在前面，会阻止后面更具体的模式（如 `$i:ident`）被匹配。这与正则表达式的贪婪匹配类似，但宏的匹配是结构化的（基于 token tree）。设计宏时必须将最具体的模式放在前面，通用模式放在后面。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：宏中的 hygiene 与变量捕获（编译错误）
 
@@ -638,7 +638,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的宏系统具有**卫生性**（hygiene）——宏内部定义的标识符不会与外部作用域冲突。`let x = 42;` 在宏内部定义的 `x` 只在宏展开后的代码块内可见，外部无法访问。这与 C 的宏（文本替换，无卫生性）形成鲜明对比。 hygiene 通过给宏生成的标识符附加唯一上下文标记实现，确保宏不会意外污染调用者的命名空间。若需从宏返回值，应使用表达式（`42`）而非绑定语句（`let x = 42`）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 的宏系统具有**卫生性**（hygiene）——宏内部定义的标识符不会与外部作用域冲突。`let x = 42;` 在宏内部定义的 `x` 只在宏展开后的代码块内可见，外部无法访问。这与 C 的宏（文本替换，无卫生性）形成鲜明对比。 hygiene 通过给宏生成的标识符附加唯一上下文标记实现，确保宏不会意外污染调用者的命名空间。若需从宏返回值，应使用表达式（`42`）而非绑定语句（`let x = 42`）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.3 边界测试：`tt` muncher 的 token 消耗（编译错误）
 
@@ -680,7 +680,7 @@ fn main() {
 }
 ```
 
-> **修正**: 宏生成的 `unsafe` 块的可见性取决于宏设计。`unsafe_op!` 在展开代码中创建 `unsafe` 块，因此调用者不需要额外的 `unsafe`——这**隐藏了 unsafe 边界**，是危险的做法。Rust 社区的最佳实践：unsafe 操作应在调用点可见，即 `unsafe { unsafe_op!(...) }`，让代码审查者一眼看到 unsafe。`std` 中的某些宏（如 `vec!`）内部使用 unsafe，但经过了严格审计。自定义宏应避免隐藏 unsafe，或使用 `unsafe` 关键字要求调用者显式标记。这与 C 的宏（常隐藏 `*` 解引用（Reference）、指针运算等 unsafe 操作）或 C++ 的模板（unsafe 在模板内部，调用点不可见）不同——Rust 的 unsafe 块是语法层面的，宏展开后仍保留，可通过源码映射追踪。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **修正**: 宏生成的 `unsafe` 块的可见性取决于宏设计。`unsafe_op!` 在展开代码中创建 `unsafe` 块，因此调用者不需要额外的 `unsafe`——这**隐藏了 unsafe 边界**，是危险的做法。Rust 社区的最佳实践：unsafe 操作应在调用点可见，即 `unsafe { unsafe_op!(...) }`，让代码审查者一眼看到 unsafe。`std` 中的某些宏（如 `vec!`）内部使用 unsafe，但经过了严格审计。自定义宏应避免隐藏 unsafe，或使用 `unsafe` 关键字要求调用者显式标记。这与 C 的宏（常隐藏 `*` 解引用（Reference）、指针运算等 unsafe 操作）或 C++ 的模板（unsafe 在模板内部，调用点不可见）不同——Rust 的 unsafe 块是语法层面的，宏展开后仍保留，可通过源码映射追踪。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 
 ### 10.2 边界测试：宏递归深度限制（编译错误）
 

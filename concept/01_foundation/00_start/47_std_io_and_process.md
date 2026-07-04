@@ -96,7 +96,7 @@
 
 标准 I/O 和进程模块是 Rust 与“外部世界”交互的门户。无论是读取键盘输入、写入文件、启动子进程，还是获取环境变量，都通过这些模块完成。它们遵循 Rust 的核心原则：所有权、借用、`Result` 错误处理。
 
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -434,6 +434,6 @@ D. `let _ = file.read_to_string(&mut s);`
 
 ---
 
-> **权威来源**: [std::io](https://doc.rust-lang.org/std/io/index.html), [std::fs](https://doc.rust-lang.org/std/fs/index.html), [std::path](https://doc.rust-lang.org/std/path/index.html), [std::process](https://doc.rust-lang.org/std/process/index.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+> **权威来源**: [std::io](https://doc.rust-lang.org/std/io/index.html), [std::fs](https://doc.rust-lang.org/std/fs/index.html), [std::path](https://doc.rust-lang.org/std/path/index.html), [std::process](https://doc.rust-lang.org/std/process/index.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [来源: Rust 1.96.1 std 文档与 Rust By Example 对齐]
 > **状态**: ✅ 权威来源对齐完成

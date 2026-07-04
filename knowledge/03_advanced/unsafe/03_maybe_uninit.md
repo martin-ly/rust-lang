@@ -15,7 +15,7 @@
 > [Unsafe Code Guidelines — Validity](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html#validity),
 > [RFC 1892: MaybeUninit](https://rust-lang.github.io/rfcs/1892-uninitialized-uninhabited.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 MaybeUninit 形式化语义来源标注、validity invariant 学术引用、mem::uninitialized 弃用演进说明 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 MaybeUninit 形式化语义来源标注、validity invariant 学术引用、mem::uninitialized 弃用演进说明 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [实验级]
@@ -404,10 +404,10 @@ MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-ignore-leaks" cargo +nightly miri run
 
 ### 官方来源
 
-- [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html) [来源: Rust Standard Library / 2025]
-- [Rustonomicon — Uninitialized Memory](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) [来源: Rust Team / Rustonomicon 2025]
+- [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html) [Rust Standard Library / 2025](https://doc.rust-lang.org/std/index.html)
+- [Rustonomicon — Uninitialized Memory](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) [Rust Team / Rustonomicon 2025](https://doc.rust-lang.org/nomicon/index.html)
 - [Unsafe Code Guidelines — Validity](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html#validity) [来源: Rust Unsafe Code Guidelines WG / 2025]
-- [RFC 1892: MaybeUninit](https://rust-lang.github.io/rfcs/1892-uninitialized-uninhabited.html) [来源: Rust Core Team / 2017]
+- [RFC 1892: MaybeUninit](https://rust-lang.github.io/rfcs/1892-uninitialized-uninhabited.html) [Rust Core Team / 2017](https://blog.rust-lang.org/2017/)
 
 ### 学术来源
 

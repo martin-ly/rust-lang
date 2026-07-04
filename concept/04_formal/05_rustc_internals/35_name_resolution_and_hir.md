@@ -321,7 +321,7 @@ HIR 更接近编译器分析的需要：做了部分解糖（如 `for` 循环变
 
 ---
 
-> **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/), [Rust Standard Library](https://doc.rust-lang.org/std/) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 编译器前端
 
 **文档版本**: 1.0

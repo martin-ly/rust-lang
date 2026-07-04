@@ -632,7 +632,7 @@ def take_max (a b : U32) : Result U32 :=
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf), [Iris Project](https://iris-project.org/), [Aeneas](https://aeneas-verif.github.io/aeneas/), [RustHorn](https://www.kb.is.s.u-tokyo.ac.jp/old-users/yskm24t/web/papers/esop2020-rust-horn.pdf)
 >
-> **权威来源对齐变更日志**: 2026-06-29 新增 RustBelt、Aeneas、RustHorn、Iris 等国际形式化方法来源 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-06-29 新增 RustBelt、Aeneas、RustHorn、Iris 等国际形式化方法来源 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

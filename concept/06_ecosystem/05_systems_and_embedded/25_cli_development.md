@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [Rust CLI Book](https://rust-cli.github.io/book/) · [clap](https://docs.rs/clap/) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust CLI Book](https://rust-cli.github.io/book/index.html) · [clap](https://docs.rs/clap/) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -575,9 +575,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 12]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

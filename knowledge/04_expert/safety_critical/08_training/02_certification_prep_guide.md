@@ -7,7 +7,7 @@
 >
 > **相关概念**: [条件](../../../../concept/01_foundation/04_control_flow/07_control_flow.md)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # 功能安全认证备考指南
 
@@ -17,7 +17,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南帮助Rust开发者为功能安全认证考试做准备，涵盖ISO 26262、IEC 61508、DO-178C等标准的Rust特定内容。
 
@@ -25,11 +25,11 @@
 
 ## 认证体系概览
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 认证路径图
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 入门级
@@ -52,7 +52,7 @@
 
 ### 认证对比
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 认证 | 颁发机构 | 有效期 | 适用范围 | 考试形式 |
 |------|----------|--------|----------|----------|
@@ -66,7 +66,7 @@
 
 ## ISO 26262 认证备考
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 考试范围
 >

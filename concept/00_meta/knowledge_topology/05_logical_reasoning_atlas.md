@@ -4,7 +4,7 @@
 > **Summary**: 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。 Theorem chains (⟹/⟸), inference rules, proof/verification paths, and formal correspondences.
 > **受众**: [研究者]
 > **内容分级**: [元层]
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---
 

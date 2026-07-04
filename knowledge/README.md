@@ -12,7 +12,7 @@
 
 ## 🎯 快速导航
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 路径 | 内容 | 适合人群 |
 |------|------|----------|
@@ -26,7 +26,7 @@
 
 ## 📚 学习路径
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 00_start/ → 01_fundamentals/ → 02_intermediate/ → 03_advanced/ → 04_expert/
@@ -36,7 +36,7 @@
 
 ## 🆕 最新更新 (Rust 1.96.1)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 文档位置 | 状态 |
 |------|---------|------|
@@ -52,7 +52,7 @@
 
 ## 🔮 预览版本跟踪
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 版本 | 预计发布 | 关键特性 | 准备状态 |
 |------|---------|---------|----------|
@@ -62,7 +62,7 @@
 
 ## 📖 如何使用
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **新手**: 从 [00_start/](00_start) 开始，按顺序学习
 2. **有基础**: 查看 [INDEX.md](INDEX.md) 找到感兴趣的主题
@@ -83,7 +83,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

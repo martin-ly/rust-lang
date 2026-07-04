@@ -10,7 +10,7 @@
 > **对齐来源**: [W3C RDF 1.2 Concepts] · [W3C RDF-star] · [W3C SKOS Reference] · [W3C JSON-LD 1.1] · [W3C SHACL] · [ISO 704:2022] · [ISO/IEC 21838-1:2021]
 > **定理链**: N/A — 描述性/综述性/导航性文档
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 > **来源**: [W3C — RDF 1.2 Concepts and Abstract Syntax] · [W3C — RDF-star] · [W3C — SKOS Reference] · [W3C — JSON-LD 1.1] · [W3C — SHACL]

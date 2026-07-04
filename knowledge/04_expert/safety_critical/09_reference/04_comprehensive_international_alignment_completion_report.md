@@ -7,7 +7,7 @@
 >
 > **相关概念**: [变量绑定](../../../../concept/01_foundation/04_control_flow/07_control_flow.md)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # Rust生态系统全面国际化对齐 - 完成报告
 
@@ -22,7 +22,7 @@
 
 ## 执行摘要
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本报告总结了Rust安全关键系统生态系统的全面国际化对齐工作，包括网络权威内容、国际著名大学课程、工业/国防/工控标准（含MISRA Rust）的深度整合，以及多种思维表征方式的创新应用。
 
@@ -45,7 +45,7 @@
 
 ## 一、已完成的工作
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 网络权威内容对齐
 >
@@ -83,7 +83,7 @@
 
 ### 1.2 国际著名大学课程对齐
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 大学 | 课程 | 核心内容 | Rust应用 | 引用 |
 |------|------|----------|----------|------|
@@ -96,7 +96,7 @@
 
 #### 课程整合价值
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **教学理念**: 认知科学指导的Rust所有权教学
 - **实践项目**: 从Mini GDB到完整编译器
@@ -107,7 +107,7 @@
 
 ### 1.3 工业化/国防/工控标准对齐
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 功能安全标准矩阵
 

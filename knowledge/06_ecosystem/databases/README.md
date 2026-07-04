@@ -13,7 +13,7 @@
 
 ## 📚 内容
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
@@ -22,7 +22,7 @@
 
 ## 🎯 选型建议
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 需求 | 推荐 |
 |------|------|
@@ -33,7 +33,7 @@
 
 ## 🚀 相关层
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [03_advanced/async/async_await.md](../../03_advanced/async/01_async_await.md) - 异步基础
 - [02_intermediate/error_handling.md](../../02_intermediate/02_error_handling.md) - 错误处理
@@ -47,7 +47,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

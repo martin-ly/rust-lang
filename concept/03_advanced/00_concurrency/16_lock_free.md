@@ -18,7 +18,7 @@
 ---
 
 > **来源**: [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) · [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) ·
 > [Wikipedia — Lock-free](https://en.wikipedia.org/wiki/Non-blocking_algorithm) ·
 > [Herlihy & Shavit — The Art of Multiprocessor Programming](https://www.amazon.com/Art-Multiprocessor-Programming-Revised-Reprint/dp/0123973376)
@@ -450,7 +450,7 @@ graph TD
 ```
 
 > **边界要点**: 无锁编程的边界与**内存回收**、**调试**、**内存序**、**平台差异**和**性能**相关。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -558,7 +558,7 @@ fn compare_exchange_weak_loop() {
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ 一级 | unsafe 指南 |
+| [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) | ✅ 一级 | unsafe 指南 |
 | [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/) | ✅ 二级 | 无锁工具 |
 | [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) | ✅ 一级 | 原子操作（Atomic Operations） |
 | [Herlihy & Shavit](https://www.amazon.com/Art-Multiprocessor-Programming-Revised-Reprint/dp/0123973376) | ✅ 一级 | 经典教材 |
@@ -617,9 +617,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 11]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -747,9 +747,9 @@ fn main() {}
 > [来源: [RFC 1543 — Compare and Exchange Weak](https://rust-lang.github.io/rfcs//1543-integer_atomics.html)]
 > [来源: [LLVM AtomicRMW](https://llvm.org/docs/LangRef.html#atomicrmw-instruction)]
 > [来源: [Lock-free Algorithms — Michael Scott](https://dl.acm.org/doi/10.1145/248052.248106)]
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch16-00-concurrency.html) ·
-> [Rust Standard Library](https://doc.rust-lang.org/std/)
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 认知路径

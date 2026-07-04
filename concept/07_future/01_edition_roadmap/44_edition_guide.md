@@ -104,7 +104,7 @@ Rust Edition 机制:
 ```
 
 > **认知功能**: **Edition 机制是 Rust 语言演进的创新**——它解决了"如何改进语言而不分裂生态"的经典难题。
-> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)]
 
 ---
 
@@ -292,7 +292,7 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> impl Display + use<'a> {
 ```
 
 > **Lifetime 捕获洞察**: **精确的 lifetime captures** 是 Rust **类型系统（Type System）的精细化**——它减少了过度保守的借用（Borrowing）检查拒绝。
-> [来源: [impl Trait Lifetime Capture](https://rust-lang.github.io/rfcs//3498-lifetime-capture-rules-2024.html)]
+> [来源: [impl Trait Lifetime Capture](https://doc.rust-lang.org/reference/types/impl-trait.html)]
 
 ---
 
@@ -500,9 +500,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -555,7 +555,7 @@ fn main() {
 > 使用 `edition = "2021"` 的项目不受影响，迁移到 `"2024"` 时 `cargo fix` 自动建议修复。
 > 这与 C++ 的标准版本（`-std=c++17`、`-std=c++20`，允许混合链接）或 Java 的版本（字节码兼容）不同——Rust 的 Edition 是 crate 级别的，同一二进制可混合多个 Edition 的 crate。
 > Edition 的设计目标：在保持生态兼容的前提下，逐步改进语言和标准库。
-> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] ·
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)] ·
 > [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs//2052-epochs.html)]
 
 ### 10.2 边界测试：`gen` 关键字保留与宏解析冲突（编译错误）
@@ -618,7 +618,7 @@ fn main() {
 >
 > 这与 Python 的 `2to3`（自动迁移后需大量手动修复）或 JavaScript 的 Babel（语法转换，但语义不变）不同——Rust 的 Edition 变更涉及语义，自动化有限。
 > Rust 的 Edition 设计目标是最小化手动工作，但完全自动化是长期目标。
-> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] ·
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)] ·
 > [来源: [cargo fix Documentation](https://doc.rust-lang.org/cargo/commands/cargo-fix.html)]
 
 ### 10.7 边界测试：Edition 迁移的自动修复遗漏（编译中断/语义变更）
@@ -655,7 +655,7 @@ use inner::helper; // 可能在某些嵌套模块中失效
 > 2) `if let` 临时作用域缩短；
 > 3) `impl Trait` 生命周期（Lifetimes）捕获规则。
 > 这与 C++ 的"无 edition，每次标准全量迁移"或 Java 的"LTS 版本"不同——Rust 的 edition 提供可控的、可选的语言演进节奏，但迁移成本仍需管理。
-> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] ·
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)] ·
 > [来源: [cargo fix](https://doc.rust-lang.org/cargo/commands/cargo-fix.html)]
 
 ### 10.3 边界测试：Edition 迁移中的宏 hygiene 变更（编译错误）
@@ -692,7 +692,7 @@ fn main() {
 > 3) `impl Trait` 生命周期（Lifetimes）捕获规则。
 >
 > 这与 C++ 的"无 edition，每次标准全量迁移"或 Java 的 LTS 版本不同——Rust 的 edition 提供可控的、可选的语言演进节奏。
-> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] ·
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)] ·
 > [来源: [cargo fix](https://doc.rust-lang.org/cargo/commands/cargo-fix.html)]
 > **过渡**: Edition 2024 完全指南：新特性与迁移策略 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 

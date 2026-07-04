@@ -539,11 +539,11 @@ graph TD
 >
 
 | 来源 | 可信度 | 说明 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust Nomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) | ✅ 一级 | 权威指南 |
 | [bindgen Guide](https://rust-lang.github.io/rust-bindgen/) | ✅ 一级 | 绑定生成 |
@@ -562,9 +562,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -621,7 +621,7 @@ extern "C" fn increment_fixed() {
 }
 ```
 
-> **修正**: `static mut` 在 Rust 中几乎永远不应使用。它绕过所有权（Ownership）和借用（Borrowing）检查，允许数据竞争。FFI 回调若需维护全局状态，应使用 `Mutex<T>`、`RwLock<T>` 或原子类型。`static mut` 的访问需要 `unsafe`，且即使单线程 FFI 调用也可能因信号处理或重入导致未定义行为。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: `static mut` 在 Rust 中几乎永远不应使用。它绕过所有权（Ownership）和借用（Borrowing）检查，允许数据竞争。FFI 回调若需维护全局状态，应使用 `Mutex<T>`、`RwLock<T>` 或原子类型。`static mut` 的访问需要 `unsafe`，且即使单线程 FFI 调用也可能因信号处理或重入导致未定义行为。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.2 边界测试：`Box::into_raw` 后重复释放（运行时 UB）
 
@@ -651,7 +651,7 @@ fn fixed() {
 >
 > 1) 指针最终通过 `Box::from_raw` 或 `drop(Box::from_raw(ptr))` 释放恰好一次；
 > 2) 指针在释放后不再使用。双重释放（double free）是严重的内存安全（Memory Safety）漏洞，可能被利用进行代码执行。
-> 这与 C 的 `malloc`/`free` 管理相同——Rust 的 unsafe 边界将责任完全转移给程序员。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> 这与 C 的 `malloc`/`free` 管理相同——Rust 的 unsafe 边界将责任完全转移给程序员。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：C 变长参数的类型安全（编译错误/运行时 UB）
 
@@ -723,7 +723,7 @@ fn main() {
 > 2) 在 C API 中明确文档回调调用次数（一次、零次或多次）；
 > 3) 使用 `ManuallyDrop` 延迟释放，直到确定安全。
 > 这与 C++ 的 `std::shared_ptr` 传递到外代码（同样问题，需要自定义 deleter）或 Swift 的 `Unmanaged<T>`（显式 retain/release）类似——跨语言边界时，自动内存管理让位于显式契约。
-> [来源: [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.5 边界测试：C 的 `long double` 与 Rust 的类型映射缺失（编译错误）
 

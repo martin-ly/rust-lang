@@ -14,7 +14,7 @@
 > **双维定位**: P×Eva — 评估系统可组合性
 > **前置概念**: · [Rust vs Go](../../05_comparative/01_systems_languages/02_rust_vs_go.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Async](../../03_advanced/01_async/02_async.md) · [Iterator](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
 > **后置概念**: [Tower 架构](../../04_formal/00_type_theory/10_category_theory.md) · [应用域](../06_data_and_distributed/04_application_domains.md)
-> **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Tokio 文档](https://docs.rs/tokio/) · [Tower 文档](https://docs.rs/tower/) · [rayon 文档](https://docs.rs/rayon/)
+> **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Tokio 文档](https://docs.rs/tokio/) · [Tower 文档](https://docs.rs/tower/) · [rayon 文档](https://docs.rs/rayon/)
 
 ---
 
@@ -571,7 +571,7 @@ async fn good() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Tokio 文档](https://docs.rs/tokio/), [Tower 文档](https://docs.rs/tower/), [rayon 文档](https://docs.rs/rayon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Tokio 文档](https://docs.rs/tokio/), [Tower 文档](https://docs.rs/tower/), [rayon 文档](https://docs.rs/rayon/)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -587,8 +587,8 @@ async fn good() {
 >
 >
 >
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 ---
 
@@ -619,7 +619,7 @@ fn compose_fixed<T: ReadWrite>(rw: &T) {
 }
 ```
 
-> **修正**: Rust 的 trait object（`dyn Trait`）有对象安全性限制：只能包含一个"主 trait" 和若干 auto trait（`Send`、`Sync` 等）。不能直接写 `dyn TraitA + TraitB`（除非 TraitB 是 auto trait）。这是因为 vtable 只能存储一个主 trait 的方法指针。系统设计中的"接口组合"需通过泛型（`T: TraitA + TraitB`）或创建新的组合 trait（`trait Combo: TraitA + TraitB {}`）实现。这与 Java 的多接口继承或 Go 的隐式接口不同——Rust 在类型安全和运行时效率之间做了明确权衡。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 的 trait object（`dyn Trait`）有对象安全性限制：只能包含一个"主 trait" 和若干 auto trait（`Send`、`Sync` 等）。不能直接写 `dyn TraitA + TraitB`（除非 TraitB 是 auto trait）。这是因为 vtable 只能存储一个主 trait 的方法指针。系统设计中的"接口组合"需通过泛型（`T: TraitA + TraitB`）或创建新的组合 trait（`trait Combo: TraitA + TraitB {}`）实现。这与 Java 的多接口继承或 Go 的隐式接口不同——Rust 在类型安全和运行时效率之间做了明确权衡。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：插件系统的 ABI 稳定性（运行时 UB）
 
@@ -640,7 +640,7 @@ pub struct PluginVTable {
 }
 ```
 
-> **修正**: Rust 的 trait 和泛型**不保证 ABI 稳定性**——不同编译器版本、不同优化级别可能生成不同的 vtable 布局。设计插件系统时，必须使用 `#[repr(C)]` 结构体（Struct）和 `extern "C"` 函数作为 FFI 边界。这与 COM（Windows）或 GObject（GNOME）的虚表稳定 ABI 不同——Rust 优先类型安全和零成本抽象（Zero-Cost Abstraction），牺牲了跨版本二进制兼容性。`abi_stable` crate 提供了一种在 Rust 插件间维持 ABI 稳定的方案，但增加了运行时开销。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: Rust 的 trait 和泛型**不保证 ABI 稳定性**——不同编译器版本、不同优化级别可能生成不同的 vtable 布局。设计插件系统时，必须使用 `#[repr(C)]` 结构体（Struct）和 `extern "C"` 函数作为 FFI 边界。这与 COM（Windows）或 GObject（GNOME）的虚表稳定 ABI 不同——Rust 优先类型安全和零成本抽象（Zero-Cost Abstraction），牺牲了跨版本二进制兼容性。`abi_stable` crate 提供了一种在 Rust 插件间维持 ABI 稳定的方案，但增加了运行时开销。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：trait 组合子的菱形继承问题（编译错误）
 
@@ -693,7 +693,7 @@ impl Car {
 }
 ```
 
-> **修正**: Rust 不支持继承（无 `class Car extends Vehicle`），强制使用**组合**（composition）。组合的代价是**boilerplate**：需手动编写转发方法暴露内部组件的 API。缓解工具：1) `Deref` 委托（仅适用于智能指针（Smart Pointer）模式，不推荐领域类型）；2) `delegate` crate（宏（Macro）自动生成转发方法）；3) 公开内部字段（`pub engine: Engine`，牺牲封装）。Rust 的设计哲学：组合更灵活（运行时替换组件）、更安全（无继承层次导致的脆弱基类问题），但确实增加了样板代码。这与 Go 的 struct 嵌入（类似组合，但自动转发方法，是 Go 唯一的"继承"机制）或 Java 的委托模式（手动编写，与 Rust 类似）不同——Rust 正在探索 `#[derive(Delegate)]` 等宏简化组合委托。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+> **修正**: Rust 不支持继承（无 `class Car extends Vehicle`），强制使用**组合**（composition）。组合的代价是**boilerplate**：需手动编写转发方法暴露内部组件的 API。缓解工具：1) `Deref` 委托（仅适用于智能指针（Smart Pointer）模式，不推荐领域类型）；2) `delegate` crate（宏（Macro）自动生成转发方法）；3) 公开内部字段（`pub engine: Engine`，牺牲封装）。Rust 的设计哲学：组合更灵活（运行时替换组件）、更安全（无继承层次导致的脆弱基类问题），但确实增加了样板代码。这与 Go 的 struct 嵌入（类似组合，但自动转发方法，是 Go 唯一的"继承"机制）或 Java 的委托模式（手动编写，与 Rust 类似）不同——Rust 正在探索 `#[derive(Delegate)]` 等宏简化组合委托。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 ### 10.3 边界测试：泛型组件的类型参数爆炸（编译错误/设计反模式）
 
@@ -724,12 +724,12 @@ fn main() {}
 
 ## 参考来源
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > [来源: [Wikipedia — System Design](https://en.wikipedia.org/wiki/Systems_design)]
 > [来源: [Wikipedia — Software Architecture](https://en.wikipedia.org/wiki/Software_architecture)]
-> [来源: [RFCs — Rust Language](https://rust-lang.github.io/rfcs/)]
+> [来源: [RFCs — Rust Language](https://rust-lang.github.io/rfcs/index.html)]
 > **过渡**: 系统可组合性 (System Composability) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 系统可组合性 (System Composability) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 系统可组合性 (System Composability) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

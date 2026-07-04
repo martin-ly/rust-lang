@@ -84,7 +84,7 @@ static mut IDENTIFIER: Type = expr;   // 可变静态，需要 unsafe 访问
 
 静态项相当于程序的全局“公告板”：任何代码都可以看到它，但它不会被栈分配或堆分配释放。因为生命周期贯穿整个程序，所以常用于配置常量、全局计数器、单例状态等场景。
 
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -382,6 +382,6 @@ D. `static COUNTER: i32 = 0;` 并直接修改
 
 ---
 
-> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [来源: Rust 1.96.1 Reference 与 TRPL 对齐]
 > **状态**: ✅ 权威来源对齐完成

@@ -18,7 +18,7 @@
 ---
 
 > **来源**: [std::io](https://doc.rust-lang.org/std/io/) · [Rust By Example — File I/O](https://doc.rust-lang.org/rust-by-example/std_misc/file.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html) ·
 > [Wikipedia — Zero-copy](https://en.wikipedia.org/wiki/Zero-copy)
 > **对应 Crate**: [`c10_networks`](../../crates/c10_networks)
@@ -438,7 +438,7 @@ graph TD
 ```
 
 > **陷阱总结**: 零拷贝的陷阱主要与**生命周期（Lifetimes）**、**对齐**、**mmap 安全**、**字节序**和**可变性**相关。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -447,7 +447,7 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 官方参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 官方参考 |
 | [bytes crate](https://docs.rs/bytes/latest/bytes/) | ✅ 二级 | 字节缓冲区 |
 | [zerocopy crate](https://docs.rs/zerocopy/latest/zerocopy/) | ✅ 二级 | 零拷贝转换 |
 | [rkyv crate](https://docs.rs/rkyv/latest/rkyv/) | ✅ 二级 | 零拷贝序列化 |
@@ -500,9 +500,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 11]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -559,7 +559,7 @@ fn fixed() {
 > 若栈上分配的 `u8` 数组未按 `u64` 对齐，`transmute` 到 `u64` 会产生未对齐访问——UB。
 > 零拷贝解析（如 `bytemuck`、`zerocopy` crate）使用 `#[repr(C)]` 和 `align_to` 方法确保对齐，或返回 `&[u8]` 而非直接转换。
 > 正确的零拷贝应通过引用（Reference）转换（`&T` → `&U`）而非值转换，利用编译器的对齐检查。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.2 边界测试：生命周期过短的零拷贝视图（编译错误）
 
@@ -689,7 +689,7 @@ fn main() {
 }
 ```
 
-> **修正**: `std::mem::transmute` 是**按位重新解释**类型，要求源和目标类型**大小相同**（`size_of::<Src>() == size_of::<Dst>()`）。编译期检查：大小不同 → 编译错误。但大小相同不代表语义安全：`transmute::<&mut T, &mut U>()` 是 UB（可能违反借用（Borrowing）规则），`transmute::<bool, u8>(2)` 是 UB（bool 只能是 0 或 1）。安全替代：1) `as` 转换（数值类型，有定义行为）；2) `From`/`Into`（类型安全转换）；3) `bytemuck` crate（运行时（Runtime）检查 transmute 合法性）。零拷贝解析（如 `zerocopy` crate）使用 `transmute` 将字节切片（Slice）转为 struct，但需 `#[repr(C)]` 和对齐保证。这与 C 的指针强制转换（`(u64*)(&x)`，无大小检查）或 Go 的 `unsafe.Pointer`（类似但无编译期检查）不同——Rust 的 `transmute` 至少保证大小匹配，其他风险需开发者承担。来源: [Rust Standard Library] · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **修正**: `std::mem::transmute` 是**按位重新解释**类型，要求源和目标类型**大小相同**（`size_of::<Src>() == size_of::<Dst>()`）。编译期检查：大小不同 → 编译错误。但大小相同不代表语义安全：`transmute::<&mut T, &mut U>()` 是 UB（可能违反借用（Borrowing）规则），`transmute::<bool, u8>(2)` 是 UB（bool 只能是 0 或 1）。安全替代：1) `as` 转换（数值类型，有定义行为）；2) `From`/`Into`（类型安全转换）；3) `bytemuck` crate（运行时（Runtime）检查 transmute 合法性）。零拷贝解析（如 `zerocopy` crate）使用 `transmute` 将字节切片（Slice）转为 struct，但需 `#[repr(C)]` 和对齐保证。这与 C 的指针强制转换（`(u64*)(&x)`，无大小检查）或 Go 的 `unsafe.Pointer`（类似但无编译期检查）不同——Rust 的 `transmute` 至少保证大小匹配，其他风险需开发者承担。来源: [Rust Standard Library] · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 
 ### 10.4 边界测试：零拷贝解析的生命周期依赖与所有权转移（编译错误）
 
@@ -719,7 +719,7 @@ fn main() {
 ```
 
 > **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

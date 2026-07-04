@@ -18,7 +18,7 @@
 
 > **来源**:
 > · [核心 Crate](../../06_ecosystem/02_core_crates/03_core_crates.md) ·
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 > [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
 > [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·

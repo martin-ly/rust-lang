@@ -7,7 +7,7 @@
 >
 > **相关概念**: [条件](../../../../concept/01_foundation/04_control_flow/07_control_flow.md)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # 评估与认证体系
 
@@ -17,7 +17,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档定义Rust安全关键系统开发的技能评估和认证体系，帮助个人和组织验证能力水平。
 
@@ -25,11 +25,11 @@
 
 ## 1. 技能评估框架
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 能力模型
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 技术能力维度:
@@ -65,7 +65,7 @@ Rust语言 (权重30%)
 
 ### 1.2 等级定义
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 等级 | 经验 | 能力描述 | 项目复杂度 |
 |------|------|----------|------------|
@@ -79,7 +79,7 @@ Rust语言 (权重30%)
 
 ## 2. 认证体系
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 个人认证
 >

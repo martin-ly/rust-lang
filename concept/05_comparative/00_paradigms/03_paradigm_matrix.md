@@ -13,7 +13,7 @@
 > **后置概念**: [Future Evolution](../../07_future/04_research_and_experimental/03_evolution.md)
 > **主要来源**: [Wikipedia: Comparison of programming languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages) · [Wikipedia: Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) · [Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system) · [PL Papers] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 ---
 
 > **Bloom 层级**: 评价
@@ -183,8 +183,8 @@ graph LR
 > 展示类型系统（Type System）从"无类型"到"所有权（Ownership）类型"的历史演进脉络。
 > 将各语言的类型创新视为层层叠加的安全保证，而非孤立特性。
 > Rust 的仿射类型是类型系统（Type System）演进的集大成者，首次将线性逻辑带入工业级系统编程。
-> [来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **演进逻辑**: 类型系统（Type System）从"无类型"向"更强静态保证"演进：
 > C 提供类型骨架；
 > C++/Java 引入 OOP；
@@ -263,7 +263,7 @@ graph TD
     E --> E3[惰性求值: Haskell]
 ```
 
-> **认知功能**: 从类型系统、内存模型、并发模型、抽象成本四个维度构建范式分类框架。根据问题域的约束优先级（安全/性能/并发）选择对应谱系分支。Rust 的独特性在于同时满足"高抽象安全"与"零运行时（Runtime）开销"这对传统矛盾。 [来源: 💡 原创分析]
+> **认知功能**: 从类型系统、内存模型、并发模型、抽象成本四个维度构建范式分类框架。根据问题域的约束优先级（安全/性能/并发）选择对应谱系分支。Rust 的独特性在于同时满足"高抽象安全"与"零运行时（Runtime）开销"这对传统矛盾。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **过渡**: 思维导图展示四谱系分类，Rust 的独特性在于同时满足一组强约束。
 
 ## 五、定理：Rust 的不可压缩性
@@ -356,7 +356,7 @@ graph TD
     style T fill:#ff9
 ```
 
-> **认知功能**: 通过决策树揭示"最优解"命题的边界条件，训练批判性思维。遇到"X 是最好的语言"论断时，用约束条件逐层分解反例。不存在普适最优，Rust 的竞争力取决于"硬实时/内核集成/开发速度"的具体权衡。 [来源: 💡 原创分析]
+> **认知功能**: 通过决策树揭示"最优解"命题的边界条件，训练批判性思维。遇到"X 是最好的语言"论断时，用约束条件逐层分解反例。不存在普适最优，Rust 的竞争力取决于"硬实时/内核集成/开发速度"的具体权衡。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 7.2 反命题: "Rust 是纯函数式语言"
 >
@@ -377,7 +377,7 @@ graph TD
     style T2 fill:#ff9
 ```
 
-> **认知功能**: 澄清 Rust 的多范式本质，区分"支持函数式"与"纯函数式"。在 Rust 中按需使用函数式风格，但警惕 `mut`/`unsafe`/IO 的副作用。将 Rust 误判为纯函数式语言会导致 `unsafe` 边界和并发模型的系统性误用。 [来源: 💡 原创分析]
+> **认知功能**: 澄清 Rust 的多范式本质，区分"支持函数式"与"纯函数式"。在 Rust 中按需使用函数式风格，但警惕 `mut`/`unsafe`/IO 的副作用。将 Rust 误判为纯函数式语言会导致 `unsafe` 边界和并发模型的系统性误用。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **边界分析**: Rust 借鉴了 Haskell/ML 的代数数据类型、模式匹配（Pattern Matching），但 `mut`/`unsafe`/无约束 IO 明确表明它不是纯函数式语言。误判这一点会导致 `unsafe` 边界和并发模型的误用。
 
 ### 7.3 反命题: "多范式总是好的"
@@ -399,7 +399,7 @@ graph TD
     style T3 fill:#ff9
 ```
 
-> **认知功能**: 揭示多范式的隐性成本——范式冲突、认知超载、风格分裂。在项目层面制定编码规范，限制同一模块（Module）内混用的范式数量。多范式的收益取决于一致性约束的强度，而非范式的数量。 [来源: 💡 原创分析]
+> **认知功能**: 揭示多范式的隐性成本——范式冲突、认知超载、风格分裂。在项目层面制定编码规范，限制同一模块（Module）内混用的范式数量。多范式的收益取决于一致性约束的强度，而非范式的数量。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **边界分析**: 多范式≠多收益。缺乏统一原则时，范式冲突会成为技术债务。成功的 Rust 项目通过编码规范、架构分层、代码审查来约束范式选择。
 
 ### 7.4 反命题: "类型系统限制表达力"
@@ -421,7 +421,7 @@ graph TD
     style T4 fill:#ff9
 ```
 
-> **认知功能**: 将"限制"重新框架为"保护"，展示类型系统对 bug 类别的消除作用。用"非法状态不可表示"原则驱动类型设计，将不变式编码进类型。Curry-Howard 同构证明类型即命题——类型系统的约束无损于表达力，只排除错误程序。 [来源: 💡 原创分析]
+> **认知功能**: 将"限制"重新框架为"保护"，展示类型系统对 bug 类别的消除作用。用"非法状态不可表示"原则驱动类型设计，将不变式编码进类型。Curry-Howard 同构证明类型即命题——类型系统的约束无损于表达力，只排除错误程序。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **边界分析**: 类型系统限制"可编译的程序集合"，但排除的是运行时（Runtime）会出错的子集。`unsafe` 作为逃逸舱，恰恰证明类型系统是"默认安全网"而非牢笼。
 > **过渡**: 反命题分析划定了 Rust 范式选择的有效边界。超越这些边界，需要回到更基础的形式化工具和语言演进趋势中寻找答案。
 
@@ -462,7 +462,7 @@ graph TD
     style Rust fill:#f96
 ```
 
-> **认知功能**: 从命令式、函数式、托管、逻辑四个传统谱系定位 Rust 的交叉影响来源。将 Rust 的设计视为多谱系的融合实验，理解其 borrow checker 的跨范式创新。Rust 不是单一传统的继承者，而是系统/函数式/证明辅助三条线索的交汇点。 [来源: 💡 原创分析]
+> **认知功能**: 从命令式、函数式、托管、逻辑四个传统谱系定位 Rust 的交叉影响来源。将 Rust 的设计视为多谱系的融合实验，理解其 borrow checker 的跨范式创新。Rust 不是单一传统的继承者，而是系统/函数式/证明辅助三条线索的交汇点。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 8.2 扩展对比矩阵（6 语言）
 
@@ -569,7 +569,7 @@ graph TD
     style ZIG fill:#f9f
 ```
 
-> **认知功能**: 将 Rust 锚定在系统编程、应用编程、函数式、移动/嵌入式四个交叉谱系的中心。根据目标平台的生态（Apple/嵌入式/JVM/C 生态）选择 Rust 的互操作策略。Rust 正从"系统语言"向"通用安全基础设施"扩展，其影响力通过 FFI、WASM、`no_std` 向全栈渗透。 [来源: 💡 原创分析]
+> **认知功能**: 将 Rust 锚定在系统编程、应用编程、函数式、移动/嵌入式四个交叉谱系的中心。根据目标平台的生态（Apple/嵌入式/JVM/C 生态）选择 Rust 的互操作策略。Rust 正从"系统语言"向"通用安全基础设施"扩展，其影响力通过 FFI、WASM、`no_std` 向全栈渗透。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **Rust 的范式坐标**:
 >
 > - **横向**: 位于"底层控制"与"抽象安全"的交汇点，唯一同时满足无 GC、内存安全（Memory Safety）、数据竞争消除、零成本、工业级工具链的语言。
@@ -693,7 +693,7 @@ fn process(data: Vec<String>) -> Vec<String> {
 ```
 
 > **洞察**：AI 辅助编程**不会消除**对 Rust 所有权系统的理解需求——因为 AI 生成的代码仍需通过编译器检查。但 AI 可以显著降低**语法记忆成本**（如 `?` 运算符、`match` 模式、生命周期（Lifetimes）标注），让开发者更专注于架构设计。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
 > **悖论**：AI 越强大，类型系统的价值反而越高——因为 AI 生成的代码需要类型系统来验证其正确性。弱类型语言中 AI 生成的错误更难发现。
 > **来源**: [GitHub Copilot 研究报告] · [Microsoft AI 编程研究] · [Rust 用户调查 2023] · [PLDI 2024: LLM for Code Generation]
@@ -723,12 +723,12 @@ fn process(data: Vec<String>) -> Vec<String> {
 - [x] **TODO**: 补充更多新兴语言的 benchmark 对比数据（Vale、Hylo、Mojo） —— 已完成 §8.3
 - [x] **TODO**: 补充编程范式在 AI 辅助编程时代的演化趋势 —— 已完成 §8.4
 
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html); [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -806,7 +806,7 @@ mod inner_fixed {
 }
 ```
 
-> **修正**: Rust 没有 `class` 关键字，封装通过模块（Module）（`mod`）和可见性修饰符（`pub`）实现。结构体（Struct）字段默认私有，方法默认私有。这与 Java/C++ 的"类即封装边界"不同——Rust 的封装边界是模块，一个模块内的多个类型可互相访问私有字段。trait 只定义行为接口，不包含字段。这种设计鼓励"组合优于继承"，通过 trait 实现多态，通过模块实现封装。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **修正**: Rust 没有 `class` 关键字，封装通过模块（Module）（`mod`）和可见性修饰符（`pub`）实现。结构体（Struct）字段默认私有，方法默认私有。这与 Java/C++ 的"类即封装边界"不同——Rust 的封装边界是模块，一个模块内的多个类型可互相访问私有字段。trait 只定义行为接口，不包含字段。这种设计鼓励"组合优于继承"，通过 trait 实现多态，通过模块实现封装。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 
 ### 10.3 边界测试：多范式代码的 trait bound 爆炸（编译错误）
 
@@ -830,7 +830,7 @@ where
 // { }
 ```
 
-> **修正**: Rust 的多范式特性（OOP 的 trait、函数式的高阶函数、过程式的显式控制流）在组合时产生**trait bound 爆炸**：复杂函数需要大量 trait bound 约束参数。解决方案：1) 使用**超级 trait**（`trait MyTrait: Serialize + Clone + Debug {}`）封装常用组合；2) 使用 `where` 从句替代内联 bound，提高可读性；3) 使用关联类型减少泛型（Generics）参数。这与 C++ 的 `concept`（C++20，类似超级 trait，`requires` 约束可组合）或 Haskell 的 typeclass 层次（`class (Eq a, Show a) => Ord a`）类似——Rust 的超级 trait 和 `where` 从句提供了管理复杂约束的工具，但需要显式设计。这与 Go 的隐式接口（无 bound，无爆炸）或 Java 的泛型通配符（`<? extends T & U>` 有限）不同——Rust 的显式约束是类型安全的代价。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+> **修正**: Rust 的多范式特性（OOP 的 trait、函数式的高阶函数、过程式的显式控制流）在组合时产生**trait bound 爆炸**：复杂函数需要大量 trait bound 约束参数。解决方案：1) 使用**超级 trait**（`trait MyTrait: Serialize + Clone + Debug {}`）封装常用组合；2) 使用 `where` 从句替代内联 bound，提高可读性；3) 使用关联类型减少泛型（Generics）参数。这与 C++ 的 `concept`（C++20，类似超级 trait，`requires` 约束可组合）或 Haskell 的 typeclass 层次（`class (Eq a, Show a) => Ord a`）类似——Rust 的超级 trait 和 `where` 从句提供了管理复杂约束的工具，但需要显式设计。这与 Go 的隐式接口（无 bound，无爆炸）或 Java 的泛型通配符（`<? extends T & U>` 有限）不同——Rust 的显式约束是类型安全的代价。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 ### 10.4 边界测试：函数式与命令式的内存布局冲突（逻辑错误）
 
@@ -893,7 +893,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 支持**命令式**和**函数式**风格的混合，但编译器强制所有权规则：闭包（Closures）捕获 `&mut v` 后，`v` 被借用（Borrowing），不能同时在 `iter()` 中使用（`iter()` 也需要 `&v`）。设计选择：1) **命令式**：`for` 循环 + `mut` 变量，直接修改状态；2) **函数式**：迭代器（Iterator）适配器 + 不可变数据，生成新集合；3) **混合**：`fold` 累积状态（`v.iter().fold(0, |acc, x| acc + x)`）。Rust 不强制纯度（如 Haskell），但类型系统使副作用显式（`mut` 标记、IO 返回 `Result`）。这与 Haskell 的 `IO` Monad（强制显式标记副作用）或 C 的隐式全局状态修改（无任何检查）不同——Rust 在中间地带：允许副作用，但要求显式控制。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust Design Patterns]
+> **修正**: Rust 支持**命令式**和**函数式**风格的混合，但编译器强制所有权规则：闭包（Closures）捕获 `&mut v` 后，`v` 被借用（Borrowing），不能同时在 `iter()` 中使用（`iter()` 也需要 `&v`）。设计选择：1) **命令式**：`for` 循环 + `mut` 变量，直接修改状态；2) **函数式**：迭代器（Iterator）适配器 + 不可变数据，生成新集合；3) **混合**：`fold` 累积状态（`v.iter().fold(0, |acc, x| acc + x)`）。Rust 不强制纯度（如 Haskell），但类型系统使副作用显式（`mut` 标记、IO 返回 `Result`）。这与 Haskell 的 `IO` Monad（强制显式标记副作用）或 C 的隐式全局状态修改（无任何检查）不同——Rust 在中间地带：允许副作用，但要求显式控制。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [Rust Design Patterns]
 
 ## 嵌入式测验（Embedded Quiz）
 

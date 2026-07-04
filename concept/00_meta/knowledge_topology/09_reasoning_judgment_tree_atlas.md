@@ -4,7 +4,7 @@
 > **Summary**: 编译错误/运行时问题 → 判定问题 → 根因 → 修复策略的概念路径。
 > **受众**: [研究者]
 > **内容分级**: [元层]
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---
 

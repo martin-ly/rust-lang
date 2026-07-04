@@ -1282,7 +1282,7 @@ graph TD
 ```
 
 > **认知功能**: 以二维空间定位各工具的核心竞争力，帮助读者快速识别「工业甜点区」（高自动化 + 中高表达能力）。建议优先评估 Kani 和 Verus 所在的右上象限，再根据成本约束向左下延伸。关键洞察：Miri 虽自动化极高但表达能力有限，Creusot 表达力强但自动化低——组合使用才能覆盖完整需求。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
 
 ---
@@ -1506,8 +1506,8 @@ graph TD
 > **[来源: TLA+ Spec; P Language Docs; Spin Documentation]** 协议验证工具参考了形式化方法领域的成熟工具文档。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.3
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -1652,9 +1652,9 @@ fn main() {
 
 ## 参考来源
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > [来源: [Wikipedia — Formal Verification](https://en.wikipedia.org/wiki/Formal_verification)]
 > [来源: [Wikipedia — Model Checking](https://en.wikipedia.org/wiki/Model_checking)]
 > [来源: [Wikipedia — Theorem Proving](https://en.wikipedia.org/wiki/Automated_theorem_proving)]

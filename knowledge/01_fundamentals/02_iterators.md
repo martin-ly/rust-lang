@@ -10,7 +10,7 @@
 > **版本**: Rust 1.94 引入 (`array_windows`，1.96+ 可用) / 1.80.0 (`Peekable::next_if`)
 > **特性**: `array_windows`, `Peekable::next_if`
 > **权威来源**: [Rust 官方文档 — Iterator trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html), [Rust 1.94 Release Notes](https://releases.rs/docs/1.94.0/), [Rust 1.80 Release Notes](https://releases.rs/docs/1.80.0/)
-> **权威来源对齐变更日志**: 2026-05-19 新增 array_windows 与 next_if 的来源标注、Iterator  trait 形式化语义引用 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 array_windows 与 next_if 的来源标注、Iterator  trait 形式化语义引用 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
@@ -53,7 +53,7 @@
 
 ## 🎯 学习目标
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 完成本章后，你将能够：
 
@@ -64,7 +64,7 @@
 
 ## 📋 先决条件
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 基础 Rust 语法
 - 理解切片和数组
@@ -72,7 +72,7 @@
 
 ## 🧠 核心概念
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. array_windows - 滑动窗口迭代
 
@@ -80,7 +80,7 @@
 
 #### 1.1 基础用法
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn main() {
@@ -95,7 +95,7 @@ fn main() {
 
 #### 1.2 与 `windows` 的对比
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | `array_windows<N>()` | `windows(n)` |
 |------|---------------------|--------------|
@@ -386,9 +386,9 @@ fn parse_args(input: &str) -> Vec<String> {
 
 ### 官方来源
 
-- [Iterator trait 文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html) [来源: Rust Standard Library / 2025]
+- [Iterator trait 文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html) [Rust Standard Library / 2025](https://doc.rust-lang.org/std/index.html)
 - [array_windows API](https://doc.rust-lang.org/std/primitive.slice.html#method.array_windows) [来源: Rust Standard Library / 2026]
-- [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) [来源: Rust Release Team / 2026]
+- [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) [Rust Release Team / 2026](https://blog.rust-lang.org/)
 - [Rust 1.80 Release Notes](https://releases.rs/docs/1.80.0/) [来源: Rust Release Team / 2024]
 
 ### 学术与形式化来源

@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo — Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Cargo — Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) ·
 > [Cargo Book — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)
 
@@ -95,7 +95,7 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/you/my-crate"
 ```
 
-> 来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)` section](<https://doc.rust-lang.org/cargo/reference/manifest.html#the-package-section>)
+> 来源: [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)` section](<https://doc.rust-lang.org/cargo/reference/manifest.html#the-package-section>)
 
 ---
 
@@ -315,7 +315,7 @@ serde = { path = "../serde-fix" }
 
 ---
 
-> **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/)
+> **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 / Cargo manifest format
 
 **文档版本**: 1.0

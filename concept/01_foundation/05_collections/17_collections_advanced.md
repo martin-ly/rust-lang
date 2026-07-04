@@ -141,7 +141,7 @@ VecDeque 核心特征:
 > **认知功能**: VecDeque 解决了 Vec 的**前端插入性能问题**——Vec 的 insert(0) 是 O(n)，而 VecDeque 的 push_front 是 O(1)。
 > [来源: [std::collections::VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html)]
 > **关键洞察**: VecDeque 的环形缓冲区通过模运算实现逻辑循环，当 head == tail 时缓冲区为空；当 (tail + 1) % cap == head 时缓冲区满（使用空槽区分满/空）。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -669,9 +669,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -721,7 +721,7 @@ struct PointFixed {
 }
 ```
 
-> **修正**: `BTreeMap` 基于 B-Tree 实现，要求键具有全序关系（`Ord` trait）。与 `HashMap`（要求 `Hash + Eq`）不同，`BTreeMap` 使用比较而非哈希。`Ord` 要求满足反对称、传递和完全性（任何两个元素可比较）。自定义类型需手动实现 `Ord` 或 derive（derive 按字段顺序字典序比较）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `BTreeMap` 基于 B-Tree 实现，要求键具有全序关系（`Ord` trait）。与 `HashMap`（要求 `Hash + Eq`）不同，`BTreeMap` 使用比较而非哈希。`Ord` 要求满足反对称、传递和完全性（任何两个元素可比较）。自定义类型需手动实现 `Ord` 或 derive（derive 按字段顺序字典序比较）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 12.2 边界测试：`VecDeque` 容量与索引的环绕（逻辑错误）
 
@@ -754,7 +754,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `VecDeque` 使用环形缓冲区（circular buffer）实现 O(1) 双端操作。其内部存储可能"环绕"——逻辑首元素不一定在物理索引 0 处。直接索引 `deque[i]` 访问的是物理位置，而非逻辑第 i 个元素。应使用 `iter()`、`pop_front()`/`pop_back()` 等 API 保证逻辑顺序。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `VecDeque` 使用环形缓冲区（circular buffer）实现 O(1) 双端操作。其内部存储可能"环绕"——逻辑首元素不一定在物理索引 0 处。直接索引 `deque[i]` 访问的是物理位置，而非逻辑第 i 个元素。应使用 `iter()`、`pop_front()`/`pop_back()` 等 API 保证逻辑顺序。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）
 
@@ -773,7 +773,7 @@ fn main() {
 }
 ```
 
-> **修正**: `HashMap::entry` 需要 `&mut self`，因为 `or_insert` 可能修改 map（插入新键）。若同时持有 `get` 返回的 `&V`，则存在 `&mut self` 与 `&V` 的借用（Borrowing）冲突——即使 `entry` 的键与 `get` 的键不同，编译器也无法证明不重叠。解决方案：1) 先 `clone` 需要的值，再调用 `entry`；2) 使用 `HashMap::get_mut` 获取 `&mut V`，直接修改；3) 用 `if let Some(v) = map.get_mut("key")` 替代 `entry` API。这与 Java 的 `Map::compute`（无借用检查，可并发修改）或 C++ 的 `std::unordered_map`（迭代器（Iterator）失效规则）不同——Rust 的借用检查在编译期阻止"读的同时写"，即使逻辑上安全。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust Standard Library]
+> **修正**: `HashMap::entry` 需要 `&mut self`，因为 `or_insert` 可能修改 map（插入新键）。若同时持有 `get` 返回的 `&V`，则存在 `&mut self` 与 `&V` 的借用（Borrowing）冲突——即使 `entry` 的键与 `get` 的键不同，编译器也无法证明不重叠。解决方案：1) 先 `clone` 需要的值，再调用 `entry`；2) 使用 `HashMap::get_mut` 获取 `&mut V`，直接修改；3) 用 `if let Some(v) = map.get_mut("key")` 替代 `entry` API。这与 Java 的 `Map::compute`（无借用检查，可并发修改）或 C++ 的 `std::unordered_map`（迭代器（Iterator）失效规则）不同——Rust 的借用检查在编译期阻止"读的同时写"，即使逻辑上安全。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [Rust Standard Library]
 
 ### 10.4 边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错误）
 

@@ -20,7 +20,7 @@
 
 ## 🎯 学习目标
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 阅读本章后，你将能够：
 
@@ -33,7 +33,7 @@
 
 ## 📋 先决条件
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [01_fundamentals/ownership.md](../01_fundamentals/04_ownership.md) - 基础 Rust 语法
 - [02_intermediate/type_conversions.md](../02_intermediate/07_type_conversions.md) - 类型转换
@@ -42,15 +42,15 @@
 
 ## 🧠 核心概念
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 模块 1: 概念定义
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 1.1 标准库数学常量
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 将常用数学常量定义为关联常量（associated constants），挂载在 `f32` 和 `f64` 类型上：
 
@@ -299,7 +299,7 @@ let good = x * f32::consts::PI;
 
 > **权威来源**: [std::f64::consts](https://doc.rust-lang.org/std/f64/consts/index.html), [std::f32::consts](https://doc.rust-lang.org/std/f32/consts/index.html), [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（std::f64::consts 文档、Rust 1.96 Release Notes） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（std::f64::consts 文档、Rust 1.96 Release Notes） [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 2.1
 **对应 Rust 版本**: 1.96.1+

@@ -90,7 +90,7 @@ write!  (destination, "format_string", args...)
 
 `Display` 就像给类型穿上“正式服装”，用于日志、UI、错误消息；`Debug` 则是“X 光片”，暴露内部结构供调试。`format!` 是“字符串模板引擎”，在编译期检查参数类型和数量。
 
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -403,6 +403,6 @@ D. `{:<8}`
 
 ---
 
-> **权威来源**: [std::fmt](https://doc.rust-lang.org/std/fmt/index.html), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+> **权威来源**: [std::fmt](https://doc.rust-lang.org/std/fmt/index.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [来源: Rust 1.96.1 std::fmt 与 TRPL 对齐]
 > **状态**: ✅ 权威来源对齐完成

@@ -194,7 +194,7 @@
 
 ### 2.5 形式化方法完备性缺口 {#25-形式化方法完备性缺口}
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **[Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - [x] [formal_methods 完备性缺口](formal_methods/00_completeness_gaps.md) ✅ 100%
   - Phase 1–6 全部补全（RC/ARC/CELL/REFCELL/BOX、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、MAYBEUNINIT/ATOMIC/UNION/TRANSMUTE、EXTERN/CVARIADIC/QUERY、DROP/DEREF/REPR/CONST_MUT_STATIC、SPAWN）
@@ -473,7 +473,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Blog](https://blog.rust-lang.org/), [releases.rs](https://releases.rs/), [Rust RFCs](https://github.com/rust-lang/rfcs), [Rust Forge](https://forge.rust-lang.org/)
 >
-> **权威来源对齐变更日志**: 2026-06-29 新增 Rust Blog、releases.rs、RFCs、Rust Forge 官方路线图来源 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-06-29 新增 Rust Blog、releases.rs、RFCs、Rust Forge 官方路线图来源 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

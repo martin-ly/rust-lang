@@ -281,7 +281,7 @@ graph TD
 ```
 
 > **认知功能**: **纯计算可用 Lambda 描述，但系统编程需要更丰富的模型**——所有权（Ownership）、并发等超出 Lambda 范畴。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -442,9 +442,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 12]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -522,7 +522,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 高阶函数（HOF）在 lambda 演算中是核心构造。Rust 的闭包类型推断对高阶函数支持有限——多参数闭包的类型推断需要显式标注或使用泛型（Generics）函数。`impl Fn(A) -> C` 返回类型（RPIT）在 Rust 1.75+ 中支持，但闭包本身的类型是匿名的，不能显式写出。这与 Haskell 的自动类型推断（Hindley-Milner）形成对比——Rust 的推断更保守，要求关键位置显式标注，以换取更清晰的错误信息。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **修正**: 高阶函数（HOF）在 lambda 演算中是核心构造。Rust 的闭包类型推断对高阶函数支持有限——多参数闭包的类型推断需要显式标注或使用泛型（Generics）函数。`impl Fn(A) -> C` 返回类型（RPIT）在 Rust 1.75+ 中支持，但闭包本身的类型是匿名的，不能显式写出。这与 Haskell 的自动类型推断（Hindley-Milner）形成对比——Rust 的推断更保守，要求关键位置显式标注，以换取更清晰的错误信息。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 
 ### 10.3 边界测试：Y 组合子在 Rust 中的实现（编译错误）
 
@@ -538,7 +538,7 @@ where
 }
 ```
 
-> **修正**: Y 组合子是 λ 演算中的不动点组合子，允许递归函数的定义而不显式自引用（Reference）。Y 组合子需要**无限类型**（`T = T -> T`），Rust 的类型系统拒绝无限大小类型。间接实现：1) 使用 `Box` 打破循环（`Fn(Box<dyn Fn()>) -> Box<dyn Fn()>`）；2) 使用 trait object 延迟类型解析；3) 使用 `std::recursion`（不存在，需手动实现）。Rust 不支持 general recursion 的显式组合子，因为递归通过函数名直接自引用实现——这是设计的简化，而非限制。这与 Haskell 的 `fix`（`Data.Function.fix`，利用惰性求值实现 Y 组合子）或 Scheme 的 `letrec`（显式递归绑定）不同——Rust 的递归是直接的，无组合子抽象，但编译器可优化尾递归（虽不保证）。来源: [Fixed-Point Combinator] · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **修正**: Y 组合子是 λ 演算中的不动点组合子，允许递归函数的定义而不显式自引用（Reference）。Y 组合子需要**无限类型**（`T = T -> T`），Rust 的类型系统拒绝无限大小类型。间接实现：1) 使用 `Box` 打破循环（`Fn(Box<dyn Fn()>) -> Box<dyn Fn()>`）；2) 使用 trait object 延迟类型解析；3) 使用 `std::recursion`（不存在，需手动实现）。Rust 不支持 general recursion 的显式组合子，因为递归通过函数名直接自引用实现——这是设计的简化，而非限制。这与 Haskell 的 `fix`（`Data.Function.fix`，利用惰性求值实现 Y 组合子）或 Scheme 的 `letrec`（显式递归绑定）不同——Rust 的递归是直接的，无组合子抽象，但编译器可优化尾递归（虽不保证）。来源: [Fixed-Point Combinator] · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 
 ### 10.4 边界测试：λ 演算中的变量捕获与闭包（编译错误）
 

@@ -8,7 +8,7 @@
 > **使用方法**: 在支持 Mermaid 的 Markdown 阅读器中查看，点击节点 mentally 定位到对应主题。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 > **Bloom 层级**: 记忆 → 理解
@@ -128,7 +128,7 @@ mindmap
 > 放射式结构帮助学习者在 30 秒内建立「我在哪里」的空间定位——中心是 Rust 知识体系根节点，第一层放射是 L0-L7 八层架构，第二层放射是每层核心主题。
 > 建议作为每日打开的第一页，快速扫视建立全局感后再深入具体文件。
 > 关键认知：mindmap 不是「知识清单」，而是「认知地图」——它回答的不是「学什么」，而是「从哪开始学、学到哪一层、与什么关联」。
-> [来源: 💡 原创分析]
+> [💡 原创分析](methodology.md)
 > **思维表征说明**: `mindmap` 是 Mermaid 的**思维导图**语法，与 `graph TD` 流程图完全不同——它以**中心放射状**组织信息，强调「从整体到局部」的认知顺序。
 > 此图是知识体系的「鸟瞰图」：中心是 Rust 知识体系根节点，第一层放射是 L0-L7 八层架构，第二层放射是每层核心主题。
 > 学习者可以「由外向内」快速定位自己当前的学习位置。 [来源: Tony Buzan, *The Mind Map Book*; 认知心理学 — 组块化理论]
@@ -236,7 +236,7 @@ mindmap
 > **文档版本**: 1.1
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 全局思维导图 v1.1 — 新增相关概念链接
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 认知路径

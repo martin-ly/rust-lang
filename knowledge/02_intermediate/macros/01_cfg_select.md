@@ -10,7 +10,7 @@
 > **模块**: `core::macros`
 > **权威来源**: [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/), [core::macros::cfg_select](https://doc.rust-lang.org/core/macro.cfg_select.html), [rust-lang/rust#131038](https://github.com/rust-lang/rust/pull/131038)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 cfg_select 编译期条件选择语义来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 cfg_select 编译期条件选择语义来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]
@@ -25,7 +25,7 @@
 
 ### 语法
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 cfg_select! {
@@ -37,7 +37,7 @@ cfg_select! {
 
 ### 与现有方案对比
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 方案 | 适用层级 | 语法复杂度 | 默认分支 |
 |------|---------|-----------|---------|
@@ -49,11 +49,11 @@ cfg_select! {
 
 ## 二、基本用法
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 平台特定常量
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 const PAGE_SIZE: usize = cfg_select! {
@@ -65,7 +65,7 @@ const PAGE_SIZE: usize = cfg_select! {
 
 ### 2.2 特性标志选择
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn hasher_name() -> &'static str {
@@ -287,8 +287,8 @@ let x = cfg_select! {
 
 ## 📚 权威来源索引
 
-- [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/) [来源: Rust Release Team / 2026]
-- [core::macros::cfg_select](https://doc.rust-lang.org/core/macro.cfg_select.html) [来源: Rust Standard Library / 2025]
+- [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/) [Rust Release Team / 2026](https://blog.rust-lang.org/)
+- [core::macros::cfg_select](https://doc.rust-lang.org/core/macro.cfg_select.html) [Rust Standard Library / 2025](https://doc.rust-lang.org/std/index.html)
 - [rust-lang/rust#131038](https://github.com/rust-lang/rust/pull/131038) [来源: Rust Core Team / 2025]
 
 ---

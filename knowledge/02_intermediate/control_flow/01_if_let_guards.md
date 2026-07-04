@@ -8,7 +8,7 @@
 > **关联特性**: `let chains`（Rust 1.88.0, Edition 2024）
 > **前置知识**: 模式匹配（match）、if let、match guards
 > **权威来源**: [Rust Reference: Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html), [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/), [RFC 2294: if-let-guard](https://rust-lang.github.io/rfcs/2294-if-let-guard.html)
-> **权威来源对齐变更日志**: 2026-05-19 新增 if-let-guard RFC 设计决策来源标注、match 守卫形式化语义引用 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 if-let-guard RFC 设计决策来源标注、match 守卫形式化语义引用 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [实验级]
@@ -17,7 +17,7 @@
 
 ## 目录
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [`if let` Guards on Match Arms（Rust 1.95.0）](#if-let-guards-on-match-armsrust-1950)
   - [目录](#目录)
@@ -49,7 +49,7 @@
 
 ## 一、什么是 `if let` guards
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 `if let` guards 允许在 `match` 表达式的 arm guard（守卫）中使用 `if let` 进行模式匹配。
 
@@ -64,11 +64,11 @@
 
 ## 二、语法与基本用法
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 基础语法
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 match value {
@@ -88,7 +88,7 @@ match value {
 
 ### 2.2 与 `let chains` 的对比
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // let chains (1.88.0): 用于 if / while
@@ -407,9 +407,9 @@ match status {
 
 ## 📚 权威来源索引
 
-- [Rust Reference: Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html) [来源: Rust Reference / 2025]
-- [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/) [来源: Rust Release Team / 2026]
-- [RFC 2294: if-let-guard](https://rust-lang.github.io/rfcs/2294-if-let-guard.html) [来源: Rust Core Team / 2022]
+- [Rust Reference: Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html) [Rust Reference / 2025](https://doc.rust-lang.org/reference/introduction.html)
+- [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/) [Rust Release Team / 2026](https://blog.rust-lang.org/)
+- [RFC 2294: if-let-guard](https://rust-lang.github.io/rfcs/2294-if-let-guard.html) [Rust Core Team / 2022](https://blog.rust-lang.org/2022/)
 
 ---
 

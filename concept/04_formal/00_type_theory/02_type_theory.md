@@ -24,7 +24,7 @@
 > [Pierce 2002, *Types and Programming Languages*](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [Cardelli 1996, *Type Systems* (ACM Computing Surveys)](https://dl.acm.org/doi/10.1145/6041.6042)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **Bloom 层级**: 分析 → 评价
@@ -206,7 +206,7 @@ classDiagram
 > 本类图将类型论八十年演进压缩为一张层次地图——从 λ→ 到 Dependent Types 的每一步扩展都清晰可见。
 > 建议对照 Rust 实际特性（泛型（Generics）、GATs、所有权（Ownership））定位其理论根基。
 > 关键洞察：Rust 刻意选择位于 `System F + HM + 线性类型` 的交集，排除了不可判定的 Dependent Types 和推断困难的完整 `System Fω`。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [TAPL — Pierce 2002]]
 > **思维表征说明**:
 >
@@ -285,7 +285,7 @@ graph TD
 > **认知功能**:
 > 此决策树将「类型安全」的边界逐层剥离，训练读者区分「类型错误」与「非类型错误」（非终止、资源耗尽、unsafe）。
 > 建议遇到 panic 时沿树回溯，判断问题是否属于类型系统（Type System）管辖范围。关键洞察：Progress + Preservation 仅保证良类型程序「不卡住」，不保证终止性、资源充足或 FFI 安全。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **四层分析**:
 
@@ -324,7 +324,7 @@ graph TD
 > 该决策树以四个历史/理论反例说明 soundness 不是天然属性，而是需证明的元定理。
 > 建议在设计或评估新类型系统扩展时，逐一排查自指构造、任意递归类型和 `null` 子类型三类风险。
 > 关键洞察：Curry 悖论与 billion-dollar mistake 是类型论教科书级漏洞——它们解释了为什么现代语言必须限制自指并消除 null。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **历史反例对照**:
 
@@ -362,7 +362,7 @@ graph TD
 > 此决策树将协变/逆变/不变理论转化为可操作的类型安全检查清单。
 > 建议在设计泛型（Generics）容器或阅读标准库源码时，据此验证 Variance 标注是否与内部可变性一致。
 > 关键洞察：协变加可变写入等于类型污染（Java 数组的设计缺陷），而 `Cell<T>` 和 `&mut T` 的不变性正是 Rust 为此付出的安全成本。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **Variance 安全性分析**:
 
@@ -533,7 +533,7 @@ graph TD
     G --> G3[Subject Reduction]
 ```
 
-> **认知功能**: 本思维导图提供类型论六大知识模块（Module）的导航索引，将 λ 演算、多态性、ADT 代数语义、Variance、Rust 扩展和类型安全整合为一张定位地图。建议在学习或查阅时以此为「你在哪」的参照系。关键洞察：六轴并非独立——λ→ 是根基，System F 和 HM 是 Rust 泛型的双支柱，线性类型是所有权（Ownership）唯一性的理论来源。 [来源: 💡 原创分析]
+> **认知功能**: 本思维导图提供类型论六大知识模块（Module）的导航索引，将 λ 演算、多态性、ADT 代数语义、Variance、Rust 扩展和类型安全整合为一张定位地图。建议在学习或查阅时以此为「你在哪」的参照系。关键洞察：六轴并非独立——λ→ 是根基，System F 和 HM 是 Rust 泛型的双支柱，线性类型是所有权（Ownership）唯一性的理论来源。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -576,8 +576,8 @@ enum List<T> {
 
 | 类型论 | Rust 对应 | **映射精度** | 偏差说明 |
 |:---|:---|:---|:---|
-| 和类型 (A + B) | `enum { A, B }` | **精确** | 一对一 [来源: Pierce 2002, Ch.11] ✅ |
-| 积类型 (A × B) | `struct { a: A, b: B }` | **精确** | 一对一 [来源: Pierce 2002, Ch.11] ✅ |
+| 和类型 (A + B) | `enum { A, B }` | **精确** | 一对一 [Pierce 2002, Ch.11](https://www.cis.upenn.edu/~bcpierce/tapl/) ✅ |
+| 积类型 (A × B) | `struct { a: A, b: B }` | **精确** | 一对一 [Pierce 2002, Ch.11](https://www.cis.upenn.edu/~bcpierce/tapl/) ✅ |
 | 函数类型 (A → B) | `fn(A) -> B` | **近似** | Rust 函数有 effects（如 panic） [来源: Pierce 2002, Ch.9] 💡 |
 | 全称量词 (∀α.A) | `fn<T>(x: T)` | **近似** | 受 Trait Bounds 约束限制 [来源: Pierce 2002, Ch.23] 💡 |
 | 存在类型 (∃α.A) | `impl Trait` / `dyn Trait` | **近似** | `impl` 隐藏，`dyn` 动态 [来源: Pierce 2002, Ch.24] 💡 |
@@ -586,7 +586,7 @@ enum List<T> {
 
 ### 9.3 HRTB 与全称量词的形式化语义
 
-> **[学术来源: System F_ω]** · **[Rust Reference: Higher-Ranked Trait Bounds](https://doc.rust-lang.org/reference/)** `for<'a> T: Trait<'a>` 是 Rust 类型系统中**高阶 Trait Bound**的语法，其形式化语义对应于一阶逻辑中的受限全称量词。✅
+> **[学术来源: System F_ω]** · **[Rust Reference: Higher-Ranked Trait Bounds](https://doc.rust-lang.org/reference/introduction.html)** `for<'a> T: Trait<'a>` 是 Rust 类型系统中**高阶 Trait Bound**的语法，其形式化语义对应于一阶逻辑中的受限全称量词。✅
 
 **语法与逻辑对应**
 
@@ -947,8 +947,8 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 > 演进方向见 [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)（语言演进路线图）与 [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化方法的未来）。
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -1001,7 +1001,7 @@ fn unit_vs_never() {
 > `!` 是任何类型的子类型（`! <: T`），因为"假蕴含一切"（ex falso quodlibet）。
 > Rust 的 `!` 类型用于 `panic!()`、`loop {}`、`return` 等不返回的控制流。
 > 区分 `()` 和 `!` 是理解 Rust 错误处理（Error Handling）（`Result<T, !>` 表示不会失败）和并发（`JoinHandle<!>` 表示线程永不结束）的关键。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：代数数据类型的穷尽匹配（编译错误）
 
@@ -1138,7 +1138,7 @@ fn main() {
 > 3) 与当前类型系统的交互（lifetime、trait bound）尚未完全设计。
 >
 > 这与 Haskell 的 GADT（`data Expr a where ...`）或 OCaml 的 GADT（`type _ expr = ...`）不同——Rust 的 phantom 类型是轻量替代，但语法噪音更大。
-> [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)] · [来源: [GADT](https://en.wikipedia.org/wiki/Generalized_algebraic_data_type)]
+> [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)] · [来源: [GADT](https://en.wikipedia.org/wiki/Generalized_algebraic_data_type)]
 
 ### 10.4 边界测试：Rust 的类型系统与 HKT（高阶类型）的缺失（编译错误）
 

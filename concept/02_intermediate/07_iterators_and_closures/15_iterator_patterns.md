@@ -826,9 +826,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 13]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 13](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -874,7 +874,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `collect()` 是 Rust 中最常见的类型推断（Type Inference）失败点之一。它返回 `FromIterator` trait 的实现类型，编译器无法从空上下文推断具体集合类型。turbofish 语法 `::<Type>` 允许在方法链中指定类型参数，避免引入中间变量。这是 Rust 类型系统（Type System）的"显式优于隐式"原则在迭代器 API 中的体现。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `collect()` 是 Rust 中最常见的类型推断（Type Inference）失败点之一。它返回 `FromIterator` trait 的实现类型，编译器无法从空上下文推断具体集合类型。turbofish 语法 `::<Type>` 允许在方法链中指定类型参数，避免引入中间变量。这是 Rust 类型系统（Type System）的"显式优于隐式"原则在迭代器 API 中的体现。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.2 边界测试：迭代器适配器的惰性求值陷阱（逻辑错误）
 
@@ -938,7 +938,7 @@ fn main() {
 }
 ```
 
-> **修正**: 迭代器是**一次性**的——`collect`、`fold`、`for_each` 等消耗型方法获取迭代器所有权（Ownership），调用后迭代器失效。这与 C++ 的 `std::istream_iterator`（同样一次性）或 Java 的 `Iterator`（同样 `hasNext`/`next` 消耗）类似。Rust 的所有权系统显式追踪迭代器的消耗：调用 `into_iter()` 转移 `Vec` 所有权到迭代器，`collect` 转移迭代器所有权到 `Vec`。若需多次遍历，应 `clone` 底层集合（`data.clone().into_iter()`），或使用非消耗型迭代（`data.iter()` 借用（Borrowing））。`Iterator` trait 的 `by_ref()` 方法可借出迭代器引用（Reference），允许部分消耗后继续使用——高级但有用。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust Standard Library]
+> **修正**: 迭代器是**一次性**的——`collect`、`fold`、`for_each` 等消耗型方法获取迭代器所有权（Ownership），调用后迭代器失效。这与 C++ 的 `std::istream_iterator`（同样一次性）或 Java 的 `Iterator`（同样 `hasNext`/`next` 消耗）类似。Rust 的所有权系统显式追踪迭代器的消耗：调用 `into_iter()` 转移 `Vec` 所有权到迭代器，`collect` 转移迭代器所有权到 `Vec`。若需多次遍历，应 `clone` 底层集合（`data.clone().into_iter()`），或使用非消耗型迭代（`data.iter()` 借用（Borrowing））。`Iterator` trait 的 `by_ref()` 方法可借出迭代器引用（Reference），允许部分消耗后继续使用——高级但有用。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [Rust Standard Library]
 
 ### 10.5 边界测试：`flat_map` 与嵌套迭代器的所有权（编译错误）
 
@@ -960,7 +960,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `flat_map` 将嵌套迭代器扁平化为单层迭代器，但所有权（Ownership）规则仍然适用。若外层使用 `into_iter()`（消耗），内层也必须使用 `into_iter()`（消耗子集合），导致所有数据被转移。若需保留原数据，外层使用 `iter()`，内层使用 `iter()` + `cloned()`（复制元素）。`flat_map` 的签名 `FnMut(Self::Item) -> impl Iterator` 要求返回的迭代器与 `self` 的生命周期（Lifetimes）一致，增加了嵌套借用（Borrowing）时的复杂性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `flat_map` 将嵌套迭代器扁平化为单层迭代器，但所有权（Ownership）规则仍然适用。若外层使用 `into_iter()`（消耗），内层也必须使用 `into_iter()`（消耗子集合），导致所有数据被转移。若需保留原数据，外层使用 `iter()`，内层使用 `iter()` + `cloned()`（复制元素）。`flat_map` 的签名 `FnMut(Self::Item) -> impl Iterator` 要求返回的迭代器与 `self` 的生命周期（Lifetimes）一致，增加了嵌套借用（Borrowing）时的复杂性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.6 边界测试：`Iterator::fold` 的初始值类型不匹配（编译错误）
 
@@ -1015,7 +1015,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `skip_while` 和 `take_while` 是状态ful 的迭代器适配器——它们根据谓词的结果改变内部状态，一旦条件改变就永远改变。`skip_while(|x| x < 3)` 在遇到第一个 ≥ 3 的元素后停止跳过，后续元素无论大小都会被产出。这与 `filter` 不同——`filter` 对每个元素独立应用谓词。混淆两者是常见错误，尤其是在处理有序/无序数据时。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `skip_while` 和 `take_while` 是状态ful 的迭代器适配器——它们根据谓词的结果改变内部状态，一旦条件改变就永远改变。`skip_while(|x| x < 3)` 在遇到第一个 ≥ 3 的元素后停止跳过，后续元素无论大小都会被产出。这与 `filter` 不同——`filter` 对每个元素独立应用谓词。混淆两者是常见错误，尤其是在处理有序/无序数据时。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 12.2 边界测试：`cycle` 与无限迭代器（运行时死循环）
 
@@ -1031,7 +1031,7 @@ fn main() {
 }
 ```
 
-> **修正**: `cycle()` 将有限迭代器变为无限迭代器，重复循环原序列。若在 `cycle()` 后调用 `sum()`、`collect()` 或 `for_each()` 而不限制数量，将导致无限循环。这与 Python 的 `itertools.cycle` 行为相同。Rust 的 `cycle` 要求底层迭代器实现 `Clone`（因为要重复消费），编译器在类型层面验证此约束。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `cycle()` 将有限迭代器变为无限迭代器，重复循环原序列。若在 `cycle()` 后调用 `sum()`、`collect()` 或 `for_each()` 而不限制数量，将导致无限循环。这与 Python 的 `itertools.cycle` 行为相同。Rust 的 `cycle` 要求底层迭代器实现 `Clone`（因为要重复消费），编译器在类型层面验证此约束。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 12.3 边界测试：`enumerate` 与索引类型（逻辑错误）
 
@@ -1056,7 +1056,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `Iterator::enumerate` 返回 `(usize, Item)`，索引始终是 `usize`。在需要其他整数类型（如 `i32`、`u8`）的上下文中，必须显式转换。Rust 禁止隐式整数转换，即使是缩小范围（`usize` → `u8`）也需要 `as` 关键字。这消除了 C 中常见的整数截断 bug，但增加了显式转换的代码量。`enumerate` 的索引从 0 开始，不受迭代器跳过元素的影响（如 `skip(5).enumerate()` 的索引仍从 0 开始，而非 5）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `Iterator::enumerate` 返回 `(usize, Item)`，索引始终是 `usize`。在需要其他整数类型（如 `i32`、`u8`）的上下文中，必须显式转换。Rust 禁止隐式整数转换，即使是缩小范围（`usize` → `u8`）也需要 `as` 关键字。这消除了 C 中常见的整数截断 bug，但增加了显式转换的代码量。`enumerate` 的索引从 0 开始，不受迭代器跳过元素的影响（如 `skip(5).enumerate()` 的索引仍从 0 开始，而非 5）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 12.4 边界测试：`partition` 与所有权分割（编译错误）
 
@@ -1078,7 +1078,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `partition` 将迭代器元素分为两个集合，要求迭代器是 `IntoIterator`（消耗型）。对于非 `Copy` 类型（如 `String`），`partition` 会 move 所有元素，原集合不可用。若需保留原数据，必须先 `clone` 或使用 `iter()` + `cloned()` + `partition`。这体现了 Rust 所有权（Ownership）系统的严格性——数据不能同时存在于原位置和多个新位置，除非显式复制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `partition` 将迭代器元素分为两个集合，要求迭代器是 `IntoIterator`（消耗型）。对于非 `Copy` 类型（如 `String`），`partition` 会 move 所有元素，原集合不可用。若需保留原数据，必须先 `clone` 或使用 `iter()` + `cloned()` + `partition`。这体现了 Rust 所有权（Ownership）系统的严格性——数据不能同时存在于原位置和多个新位置，除非显式复制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 12.5 边界测试：`ChunksExact` 的剩余元素处理（逻辑错误）
 

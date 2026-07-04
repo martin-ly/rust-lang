@@ -396,7 +396,7 @@ PSPACE-完全。Rehman et al. (2023) 给出 Rust 类型推断复杂度的 PSPACE
 
 ---
 
-> **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-06-25 创建，迁移归档内容并提炼为 L4 形式化概念页
 

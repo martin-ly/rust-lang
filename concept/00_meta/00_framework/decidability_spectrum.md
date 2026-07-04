@@ -7,8 +7,8 @@
 > **原则**: 不做"编译器实现手册"，聚焦"什么问题 Rust 编译器能在编译期判定、什么不能、不能时的补偿机制是什么"。
 > **对齐来源**:
 >
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [Rust RFCs](https://rust-lang.github.io/rfcs/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust RFCs](https://rust-lang.github.io/rfcs/index.html) ·
 > [RustBelt / Oxide](https://plv.mpi-sws.org/rustbelt/) ·
 > [POPL Papers](https://dblp.org/db/conf/popl/index.html) ·
 > [Theory of Computation](https://en.wikipedia.org/wiki/Theory_of_computation)
@@ -16,7 +16,7 @@
 > **基准版本**: Rust 1.96.1 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 > **Bloom 层级**: 分析 → 评价 → 创造
@@ -158,7 +158,7 @@ graph TD
 > 该流程图将 Rust 编译管道与可判定性结果叠加，形成「**阶段×判定**」的双维认知框架。
 > 建议对照阅读时关注虚线标注的判定结果（✅/⚠️/❌），理解编译器的「能力边界」在哪里。
 > 关键洞察：编译器并非越往后越弱——L5 的 Send/Sync 推导反而能在编译期排除运行时不可判定的数据竞争。
-> [来源: 💡 原创分析]
+> [💡 原创分析](methodology.md)
 > [来源: [Wikipedia — Decidability]]
 
 ---
@@ -215,7 +215,7 @@ Rust 的语法分析基于一个**手工编写的递归下降解析器**（`rust
 2. **宏扩展的确定性**: `macro_rules!` 的匹配基于**最长匹配优先**（longest match）和**优先级排序**，保证对给定输入最多只有一个匹配分支被激活。过程宏（proc-macro）在语法层面是黑盒，但其输入是已解析的 TokenStream，输出也是 TokenStream，不影响解析阶段的判定性。
 3. **Edition 隔离**: 不同 Edition（2015/2018/2021/2024）的语法差异在 crate 边界隔离，避免跨 Edition 的语法歧义。
 
-> **边界**: 宏扩展后的代码若产生语法错误，错误报告位置需通过「跨度（span）」信息回溯到原始源码。这属于**工程复杂性**而非**理论不可判定性**。 来源: [Rust Reference §3, rustc dev guide](https://doc.rust-lang.org/reference/)
+> **边界**: 宏扩展后的代码若产生语法错误，错误报告位置需通过「跨度（span）」信息回溯到原始源码。这属于**工程复杂性**而非**理论不可判定性**。 来源: [Rust Reference §3, rustc dev guide](https://doc.rust-lang.org/reference/introduction.html)
 
 **判定树**:
 
@@ -232,7 +232,7 @@ graph TD
     H -->|是| J[✅ L0 判定通过]
 ```
 
-> **认知功能**: 该判定树将词法/语法分析流程可视化为**决策分支**，每个菱形节点对应编译器的实际判断逻辑。建议用于理解编译错误的来源层级——当看到「非法 token」或「宏扩展后非法」时，能准确定位到 L0 的哪个子阶段。关键洞察：Rust 刻意保持宏扩展的确定性，这是 L0 可判定性的工程核心。[来源: 💡 原创分析]
+> **认知功能**: 该判定树将词法/语法分析流程可视化为**决策分支**，每个菱形节点对应编译器的实际判断逻辑。建议用于理解编译错误的来源层级——当看到「非法 token」或「宏扩展后非法」时，能准确定位到 L0 的哪个子阶段。关键洞察：Rust 刻意保持宏扩展的确定性，这是 L0 可判定性的工程核心。[💡 原创分析](methodology.md)
 
 ---
 
@@ -449,7 +449,7 @@ Rust 的补偿机制（无法编译期判定时的工程策略）：
 
 LLVM 对 MIR 的优化（内联、常量传播、死代码消除、循环优化等）基于**启发式**和**局部规则**，而非全局语义等价证明。
 
-> **定理 T-DS-008（程序等价性的不可判定性）**: 判定两个程序是否在所有输入上等价（即是否具有相同的可观察行为）是**不可判定的**。这是 Rice 定理的直接推论。 [来源: Rice 1953]
+> **定理 T-DS-008（程序等价性的不可判定性）**: 判定两个程序是否在所有输入上等价（即是否具有相同的可观察行为）是**不可判定的**。这是 Rice 定理的直接推论。 [Rice 1953](https://doi.org/10.2307/2268381)
 
 Rust 的补偿机制：
 
@@ -463,7 +463,7 @@ Rust 的补偿机制：
 
 ### 10.1 Rice 定理在 Rust 中的映射
 
-> **Rice 定理**: 任何非平凡的（non-trivial）程序语义属性都是不可判定的。非平凡指：存在至少一个程序具有该属性，且至少一个程序不具有该属性。 [来源: Rice 1953]
+> **Rice 定理**: 任何非平凡的（non-trivial）程序语义属性都是不可判定的。非平凡指：存在至少一个程序具有该属性，且至少一个程序不具有该属性。 [Rice 1953](https://doi.org/10.2307/2268381)
 
 | 语义属性 | 平凡性 | 可判定性 | Rust 策略 |
 |:---|:---:|:---:|:---|
@@ -493,7 +493,7 @@ graph TD
     H -->|有界可判定| I[✅ 编译期保证]
 ```
 
-> **认知功能**: 该图通过**对比结构**（通用程序 vs Rust CTFE）揭示停机问题的不可判定性如何被 Rust 的有界约束「驯服」。建议用于理解「为什么 CTFE 不能堆分配」这一设计决策的理论根基。关键洞察：CTFE 的三重约束（无堆、步数上限、无递归无限展开）共同构成一个「有界图灵不完备」子集，这是编译期可预测性的刻意牺牲。[来源: 💡 原创分析]
+> **认知功能**: 该图通过**对比结构**（通用程序 vs Rust CTFE）揭示停机问题的不可判定性如何被 Rust 的有界约束「驯服」。建议用于理解「为什么 CTFE 不能堆分配」这一设计决策的理论根基。关键洞察：CTFE 的三重约束（无堆、步数上限、无递归无限展开）共同构成一个「有界图灵不完备」子集，这是编译期可预测性的刻意牺牲。[💡 原创分析](methodology.md)
 
 ---
 
@@ -552,7 +552,7 @@ graph TD
     H --> H1[修复: Arc<Mutex<T>> / unsafe impl]
 ```
 
-> **认知功能**: 该决策树将编译错误映射到**修复策略**，形成「症状→诊断→处方」的完整认知闭环。建议在遇到编译错误时按图索骥，快速定位应查阅的文档章节。关键洞察：借用冲突（L3）和线程安全（L5）的错误往往有多种修复路径——`Rc<RefCell>` 与 `unsafe` 代表了「运行时检查」与「程序员契约」两种哲学选择。[来源: 💡 原创分析]
+> **认知功能**: 该决策树将编译错误映射到**修复策略**，形成「症状→诊断→处方」的完整认知闭环。建议在遇到编译错误时按图索骥，快速定位应查阅的文档章节。关键洞察：借用冲突（L3）和线程安全（L5）的错误往往有多种修复路径——`Rc<RefCell>` 与 `unsafe` 代表了「运行时检查」与「程序员契约」两种哲学选择。[💡 原创分析](methodology.md)
 
 ### 13.2 谱系演化时间线
 
@@ -576,7 +576,7 @@ timeline
           : 下一代 Trait Solver，判定性保证不变
 ```
 
-> **认知功能**: 该时间线将 Rust 类型系统与借用检查的**代际演进**可视化，帮助读者理解当前编译器行为的历史成因。建议结合 Rust 版本号阅读，理解「为什么我的代码在旧版本编译失败」的深层原因。关键洞察：每一代借用检查（词法→NLL→Polonius）都是判定性不变前提下的精度提升——这是 Rust 向后兼容承诺的技术体现。[来源: 💡 原创分析]
+> **认知功能**: 该时间线将 Rust 类型系统与借用检查的**代际演进**可视化，帮助读者理解当前编译器行为的历史成因。建议结合 Rust 版本号阅读，理解「为什么我的代码在旧版本编译失败」的深层原因。关键洞察：每一代借用检查（词法→NLL→Polonius）都是判定性不变前提下的精度提升——这是 Rust 向后兼容承诺的技术体现。[💡 原创分析](methodology.md)
 
 ---
 
@@ -620,8 +620,8 @@ graph TD
     C -.-> R[编译期策略: 测试 + 形式化验证]
 ```
 
-> **认知功能**: 该图呈现八条定理的**依赖拓扑**——从数学公理（Rice 定理、HM 完备性等）到 Rust 编译器具体保证的推导路径。建议用于理解「为什么编译器能保证 X」的元理论根基。关键洞察：Rust 的编译期安全保证并非工程魔术，而是有坚实数学根基的——Iris 分离逻辑推导无数据竞争（T-DS-006）是最具代表性的例子。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **认知功能**: 该图呈现八条定理的**依赖拓扑**——从数学公理（Rice 定理、HM 完备性等）到 Rust 编译器具体保证的推导路径。建议用于理解「为什么编译器能保证 X」的元理论根基。关键洞察：Rust 的编译期安全保证并非工程魔术，而是有坚实数学根基的——Iris 分离逻辑推导无数据竞争（T-DS-006）是最具代表性的例子。[💡 原创分析](methodology.md)
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ---
 
@@ -691,14 +691,14 @@ graph TD
 | 特性 | 稳定版本 | 可判定性状态 | 论证 |
 |:---|:---:|:---:|:---|
 | `adt_const_params` | 1.75+ | ✅ 可判定（带边界） | 只允许 `#[derive(PartialEq, Eq)]` 类型作为 const generic 参数，限制搜索空间为有限等价类 来源: [RFC 2000](https://github.com/rust-lang/rfcs/pull/2000) |
-| `min_generic_const_args` | 1.79+ | ✅ 可判定（简化子集） | 仅允许整数、布尔、`char` 作为 const generic，无任意表达式，避免 Diophantine 复杂性 来源: [Rust Reference](https://doc.rust-lang.org/reference/) |
+| `min_generic_const_args` | 1.79+ | ✅ 可判定（简化子集） | 仅允许整数、布尔、`char` 作为 const generic，无任意表达式，避免 Diophantine 复杂性 来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) |
 | `async_fn_in_trait` | 1.75+ | ⚠️ 实际可判定 | 语义等价于返回 `impl Future` 的关联类型，当前编译器采用「惰性单态化」策略，未引入新的不可判定路径 来源: [RFC 3185](https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html) |
 | `let_chains` | 1.64+ | ✅ 可判定（语法糖） | 纯语法扩展，不改变类型系统或借用检查的判定性边界 来源: [RFC 2497](https://github.com/rust-lang/rfcs/pull/2497) |
 | `never_type` (`!`) | 1.41+ / 1.82 完善 | ✅ 可判定 | 底类型作为所有类型的子类型，子类型关系保持偏序，不引入递归 undecidability 来源: [RFC 1216](https://github.com/rust-lang/rfcs/pull/1216) |
 | `precise_capturing` (`use<...>`) | 1.82+ | ✅ 可判定 | 显式生命周期捕获列表是 borrow checker 输入的细化，不改变约束求解本身的复杂度类 来源: [RFC 3498](https://rust-lang.github.io/rfcs/3617-precise-capturing.html) |
-| `inline_const` | 1.79+ | ✅ 可判定（步数限制） | 编译期常量块受 `const_eval_limit` 约束，等价于有限状态解释器 来源: [Rust Reference](https://doc.rust-lang.org/reference/) |
+| `inline_const` | 1.79+ | ✅ 可判定（步数限制） | 编译期常量块受 `const_eval_limit` 约束，等价于有限状态解释器 来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) |
 | `impl_trait_in_assoc_type` | 1.79+ | ⚠️ 实际可判定 | `type Foo = impl Trait;` 的语义等价于存在量化类型，编译器通过延迟单态化控制复杂度 来源: [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) |
-| `cfg_version` / `cfg_accessible` | 1.79+ | ✅ 可判定 | 编译期条件编译属性，不涉及类型系统或运行时可判定性 来源: [Rust Reference](https://doc.rust-lang.org/reference/) |
+| `cfg_version` / `cfg_accessible` | 1.79+ | ✅ 可判定 | 编译期条件编译属性，不涉及类型系统或运行时可判定性 来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) |
 
 **关键洞察**：
 Rust 1.70–1.95 周期内稳定的新特性，在语言团队的设计审查中均经过了「可判定性筛查」。
@@ -790,7 +790,7 @@ Rust 社区正在逐步探索 effects 系统（如 `const`、`async`、`unsafe` 
 ---
 
 > **权威来源**:
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [RFC 1560](https://rust-lang.github.io/rfcs//1560-name-resolution.html) ·
 > [RFC 1665](https://rust-lang.github.io/rfcs//1665-windows-subsystem.html) ·
 > [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) ·

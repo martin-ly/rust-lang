@@ -200,7 +200,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Cranelift 与 LLVM 在不同**优化级别**下的编译速度与运行时性能权衡。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **关键洞察**: Cranelift Debug 的**运行时性能约为 LLVM Debug 的 80%**，但编译速度快 2-5 倍。对于开发迭代，这是极佳的权衡。
 > [来源: [rustc_codegen_cranelift Benchmarks](https://github.com/rust-lang/rustc_codegen_cranelift)]
 
@@ -272,7 +272,7 @@ graph TD
 > **认知功能**: 此决策树帮助判断是否使用 Cranelift。核心判断标准是**构建类型**、**平台支持**和**LTO 需求**。
 > **使用建议**: 开发迭代默认使用 Cranelift；Release 构建、交叉编译、LTO 场景使用 LLVM。
 > **关键洞察**: Cranelift 的**边界非常清晰**——它是 Debug 编译的专用工具，不试图替代 LLVM 的通用地位。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -329,16 +329,16 @@ graph TD
 >
 
 | 来源 | 可信度 | 说明 |
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
-| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/index.html) | ✅ 一级 | RFC 文档 |
 | [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [rustc_codegen_cranelift](https://github.com/rust-lang/rustc_codegen_cranelift) | ✅ 一级 | 官方项目仓库 |
 | [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift/docs) | ✅ 一级 | Cranelift IR 文档 |
@@ -364,7 +364,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
@@ -478,7 +478,7 @@ fn main() {
 > 这与 Scheme 的 guaranteed TCO（语言要求）或 JavaScript 的引擎优化（V8 做 TCO，但 ES6 未标准化）不同——Rust 明确不保证 TCO，鼓励迭代写法。
 > 这是系统编程语言的务实选择：栈帧用于调试和异常展开，TCO 使栈追踪丢失信息。
 > [来源: [Cranelift Tail Call Tracking](https://github.com/bytecodealliance/wasmtime/issues/...)] ·
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.4 边界测试：Cranelift 的 SIMD 向量类型宽度限制（编译错误）
 

@@ -542,9 +542,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -590,7 +590,7 @@ fn main() {
 > 这不同于 C/C++ 的未定义行为——Rust 明确定义了环绕语义，只是默认在 Debug 时 panic。
 > 生产代码应使用显式方法（`wrapping_*`、`saturating_*`、`checked_*`、`overflowing_*`）表达意图，避免依赖编译模式。
 > 这与 Swift 的默认溢出 panic（所有模式）和 C 的未定义行为形成对比。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 12.2 边界测试：浮点数相等比较（逻辑错误）
 
@@ -615,7 +615,7 @@ fn approx_eq(a: f64, b: f64, epsilon: f64) -> bool {
 > **修正**: 浮点数（IEEE 754）不能进行精确相等比较，因为二进制表示无法精确表达大多数十进制小数。
 > Rust 编译器会警告 `a == b`（clippy::float_cmp），但不阻止编译。
 > 正确做法是比较差值是否小于某个 epsilon。对于财务计算，考虑使用 `rust_decimal` 或 `bigdecimal` 库避免浮点误差。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 12.3 边界测试：`as` 转换的截断风险（编译错误）
 
@@ -638,7 +638,7 @@ fn fixed() {
 > **修正**: Rust 禁止隐式整数转换，即使是缩小范围（`i32` → `i8`）也需要 `as` 关键字。`as` 执行截断转换（truncating cast），高位丢弃。
 > 如需安全检查，使用 `TryInto::try_into()`（返回 `Result`）。
 > 这与 C 的隐式转换（`int` → `char` 静默截断）形成对比——Rust 的显式性消除了意外截断 bug。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 12.4 边界测试：浮点数作为 `match` 条件（编译错误）
 
@@ -665,7 +665,7 @@ fn fixed() {
 > `0.1 + 0.2 != 0.3` 在二进制浮点中是事实，因此 `match 0.3` 可能永远不会匹配。
 > 编译器直接拒绝浮点模式，强制开发者使用 epsilon 比较或区间检查。
 > 这与 C 的 `switch`（不支持浮点）类似，但 Rust 的错误信息更明确——指出浮点模式的语义问题。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 12.5 边界测试：`as` 转换的截断与符号变化（逻辑错误）
 
@@ -772,7 +772,7 @@ fn fixed() {
 > 数组大小 `[T; N]` 中的 `N` 必须是 `usize`，超大数组在栈上分配会导致栈溢出。
 > 对于动态或大数据，始终使用 `Vec<T>`（堆分配）。
 > Rust 的数组大小限制是 `isize::MAX` 字节，但实际受栈大小限制。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 12.9 边界测试：位运算与逻辑运算混用（编译错误）
 
@@ -796,7 +796,7 @@ fn fixed() {
 
 > **修正**: Rust 严格区分位运算（`&`、`|`、`^`、`!`）和逻辑运算（`&&`、`||`、`!`）。位运算作用于整数类型，逻辑运算作用于 `bool`。
 > C/C++ 中 `&&` 和 `&` 在某些上下文可互换（非零即真），但 Rust 不允许。这消除了 C 语言中常见的 `if (flags & MASK)` 与 `if (flags && MASK)` 混淆错误。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 12.10 边界测试：`Wrapping<T>` 与 `T` 的混用陷阱（编译错误）
 

@@ -48,7 +48,7 @@
 
 - v1.0 (2026-05-13): 初始版本。建立 Effect 系统概念框架、Rust 现有 effect 映射、AsyncFn 作为原型、跨语言对比、演进路线图
 - v1.1 (2026-05-22): 网络权威内容对齐：添加 `gen<yield>` effects 跟踪、Lang Team 2026 季度更新
-- v1.2 (2026-06-02): 补充 Rust Effects Initiative 官方定位、学术谱系（Plotkin & Pretnar 2009 / Lucassen & Gifford 1988）、carried/uncarried 官方分类、effect composition 规则、a-mir-formality 形式化验证关联 [来源: Web Authority Alignment Sprint]
+- v1.2 (2026-06-02): 补充 Rust Effects Initiative 官方定位、学术谱系（Plotkin & Pretnar 2009 / Lucassen & Gifford 1988）、carried/uncarried 官方分类、effect composition 规则、a-mir-formality 形式化验证关联 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
 - v1.3 (2026-06-02): Yoshua Wuyts 2025-2026 核心输出全面整合："Why Effects?" / "Open and Closed Effect Systems" / "Fallibility Effect" / "With-Clauses and Blocks" / "A Grand Vision for Rust"。
 - 添加 〇之三 Why Effects? 核心洞察、一之二 开放/封闭效应系统分类、一之三 Fallibility Effect 语法设计、二之二 With-Clauses 效应符号、六更新 Rust 2030+ 愿景（effects + substructural types + refinement types）。
 - 标注 `~const` 语法废弃方向，更新学术谱系时间线至 2026。
@@ -108,14 +108,14 @@ mindmap
 > 此 mindmap 构建 Effect System 的全局认知脚手架。
 > **功能定位**: 将分散的效果机制（async/unsafe/const/Result/Send）整合为"理论-实现-对比-演进"四维分析框架。
 > **使用建议**: 按背景选择入口——类型论背景从"理论基础"切入，工程背景从"Rust 现有实现"切入，策略背景从"演进方向"切入。
-> **关键洞察**: Rust 当前的效果表达是碎片化的（各关键字独立运作），向统一 effect 关键字演进是消除碎片化的长期趋势，最大障碍并非技术可行性，而是向后兼容性与社区共识。[来源: 💡 原创分析]
+> **关键洞察**: Rust 当前的效果表达是碎片化的（各关键字独立运作），向统一 effect 关键字演进是消除碎片化的长期趋势，最大障碍并非技术可行性，而是向后兼容性与社区共识。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 ---
 
 ## 〇之一、Rust Effects Initiative 官方定位
 
-> **[来源: Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅ ·
+> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://rust-lang.github.io/keyword-generics-initiative/updates/2024-02-09-extending-rusts-effect-system.html)(https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅ ·
 > **[来源: Inside Rust Blog — Keyword Generics Progress Report (2023-02-23)](https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html)** ✅
 
 Rust 语言团队自 2022 年起通过 **Keyword Generics Initiative** 系统性地推进 effect system 的设计。
@@ -487,7 +487,7 @@ with Ef {
 
 Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实现了效果的隐性追踪**。
 
-> **[来源: Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅
+> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://rust-lang.github.io/keyword-generics-initiative/updates/2024-02-09-extending-rusts-effect-system.html)(https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅
 > Rust 语言团队明确将以下五种关键字识别为 **effect types**：`async`、`.await`、`const`、`try` (`?`)、`unsafe`，以及不稳定的 `yield` (generators)。这些不是独立的语法糖，而是同一理论框架的不同实例。
 
 | 效果类别 | 当前 Rust 语法 | 效果语义 | 追踪方式 | 多态支持 |
@@ -500,7 +500,7 @@ Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实
 
 ### 2.1 Carried vs Uncarried Effects（Rust 官方分类）
 
-> **[来源: Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅ ·
+> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://rust-lang.github.io/keyword-generics-initiative/updates/2024-02-09-extending-rusts-effect-system.html)(https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅ ·
 > **[来源: Inside Rust Blog — Keyword Generics Progress Report (2023-02-23)](https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html)** ✅
 
 Rust 语言团队（由 Yoshua Wuyts 在 2024 年官方更新中明确提出）将效果分为两类，这一分类直接决定了不同效果的泛化难度和技术路径：
@@ -573,7 +573,7 @@ const {}            // always-const：强制编译期求值
 
 ### 2.2 Effect Composition：效果的组合规则
 
-> **[来源: Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅
+> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://rust-lang.github.io/keyword-generics-initiative/updates/2024-02-09-extending-rusts-effect-system.html)(https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅
 
 当函数携带多个 carried effects 时，Rust 需要定义它们的组合顺序。
 Rust 语言团队明确将 effects 定义为**与顺序无关的集合（order-independent sets）**，但组合规则需要硬编码：
@@ -910,7 +910,7 @@ fn block_on<T>(f: impl Future<Output = T>) -> T effects {} {
 
 ### 4.1 a-mir-formality：Rust 效果系统的形式化验证基础
 
-> **[来源: Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅ ·
+> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://rust-lang.github.io/keyword-generics-initiative/updates/2024-02-09-extending-rusts-effect-system.html)(https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅ ·
 > **[来源: a-mir-formality GitHub](https://github.com/rust-lang/a-mir-formality)** ✅
 
 Rust 语言团队通过 **a-mir-formality**（Rust 类型系统的官方形式化模型）来验证 effect generics 的 soundness。
@@ -1074,7 +1074,7 @@ sequenceDiagram
 > **步骤 3-4** 展示效果传播（效果系统强制调用者承担相同效果），
 > **步骤 5-9** 展示效果处理（运行时通过 poll/await 消除效果）。
 > 关键洞察：**效果多态（AsyncFn）允许调用者在不知道被调用者具体效果的情况下编写泛型（Generics）代码——效果变量 `e` 在调用点被实例化**。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 4.3 `gen` blocks 与效果叠加
 
@@ -1189,7 +1189,7 @@ Q4: 与现有生态的兼容性？
 
 ## 七之一、效果限制导致的编译错误
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]** Rust 现有效果系统（`async`/`const`/`unsafe`）在编译期即拒绝效果不匹配的程序。
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]** Rust 现有效果系统（`async`/`const`/`unsafe`）在编译期即拒绝效果不匹配的程序。
 
 ### 编译错误 1：`const fn` 中调用 `async fn`
 
@@ -1330,7 +1330,7 @@ mut（可变状态）         &mut T + Cell/RefCell
 > Koka 的效果系统是"显式且完整的"——每个效果都在类型签名中声明，编译器检查效果传播。
 > Rust 的效果是"隐式且碎片化的"——`async`/`unsafe`/`const` 是独立关键字，`Result` 是库级类型，`&mut T` 是类型系统的一部分。
 > Rust 的设计选择是工程折中：显式效果系统需要更复杂的类型推断（Type Inference）和编译器实现，Rust 选择用关键字 + trait 的组合实现"足够好"的效果追踪。
-> [来源: 💡 原创分析] · [Leijen, ICFP 2014] ✅
+> [💡 原创分析](../../00_meta/00_framework/methodology.md) · [Leijen, ICFP 2014] ✅
 
 ---
 
@@ -1369,7 +1369,7 @@ let safe_divide x y =
 > Eff 的"多 shot continuation"是效果系统的理论极限——它允许处理器将同一计算恢复多次（如非确定性搜索的分支）。
 > 但这与 Rust 的所有权（Ownership）模型根本冲突：恢复 continuation 意味着重新访问已 move 的资源，违反线性逻辑。
 > 因此 Rust 永远无法支持完整的多 shot 代数效果，只能支持"零 shot"（如 `Result`）或"单 shot"（如 `async/await`）近似。
-> [来源: 💡 原创分析] · [Pretnar, 2015] ✅
+> [💡 原创分析](../../00_meta/00_framework/methodology.md) · [Pretnar, 2015] ✅
 
 ---
 
@@ -1420,7 +1420,7 @@ Rust 生命周期:  fn foo<'a>(x: &'a T)       // 编译期生命周期
 > Flix 的区域系统展示了"如果 Rust 的生命周期（Lifetimes）是运行时的"会是什么样子。
 > Flix 的区域允许动态内存管理（如 arena allocator），而 Rust 的 `'a` 是纯粹的编译期约束。
 > Flix 的设计更适合需要灵活内存管理的场景（如编译器、数据库），而 Rust 的设计更适合系统编程（零成本抽象）。
-> [来源: 💡 原创分析] · [Madsen et al., OOPSLA 2016] ✅
+> [💡 原创分析](../../00_meta/00_framework/methodology.md) · [Madsen et al., OOPSLA 2016] ✅
 
 ---
 
@@ -1626,7 +1626,7 @@ trait Generator<R> {
 > `async` 和 `gen` 都是**挂起/恢复型效果**（suspend/resume effects），它们共享同一个底层机制：自引用（Reference）状态机 + Pin 保证。
 > 这是效果系统视角下的重要统一——两种看似不同的关键字（`async` vs `gen`）实际上是同一类效果的不同表面语法。
 > [来源: [Rust [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html) — Pin](https://rust-lang.github.io/rfcs//2349-pin.html)] ·
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 #### 统一效果系统能否消除 Pin？
 
@@ -1663,9 +1663,9 @@ trait Generator<R> {
 | **Refinement type** | [Refinement type](https://en.wikipedia.org/wiki/Refinement_type) | 精化类型（pattern types 的理论基础） |
 | **Row polymorphism** | [Row polymorphism](https://en.wikipedia.org/wiki/Row_polymorphism) | 行多态（Koka 效果类型的类型论基础） |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.3
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

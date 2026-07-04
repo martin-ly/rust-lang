@@ -74,8 +74,8 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Knowledge Organization](https://en.wikipedia.org/wiki/Knowledge_Organization)** ·
 > **来源: [Wikipedia - Information Quality](https://en.wikipedia.org/wiki/Information_Quality)** ·
-> **[来源: ACM - Source Attribution in Technical Documentation]** ·
-> **[来源: IEEE - Documentation Standards]**
+> **[ACM - Source Attribution in Technical Documentation](https://dl.acm.org/)** ·
+> **[IEEE - Documentation Standards](https://ieeexplore.ieee.org/)**
 
 ### Ch 1-3: 基础概念 {#ch-1-3-基础概念}
 
@@ -379,7 +379,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 

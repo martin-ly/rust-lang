@@ -21,7 +21,7 @@
 > **测验入口**: 每个阶段末尾标注可运行的 L3 嵌入式测验，用于验证学习效果。
 >
 >
-> **来源**: [TRPL 3rd Ed](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL 3rd Ed](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 ## 路径总览
@@ -292,7 +292,7 @@ cargo test --test l3_ecosystem_alignment
 | | **应用** (3-4 周) | Week 1 Day 7 + Week 2 Day 8-11 | CLI 工具 + 集合/迭代器 + 并发 |
 | | **精通** (5-8 周) | Week 2 Day 12-14 + 扩展路径 | 异步 + 综合项目 + 深入方向 |
 | [Rust Learning Path (官方)](https://www.rust-lang.org/learn) | 入门 → 进阶 | Week 1 → Week 2 | 官方路径更侧重语言本身，本路径增加工程实践 |
-| [Rust by Example](https://doc.rust-lang.org/rust-by-example/) | 主题式学习 | Day 1-6 阅读材料 | 可作为概念文件的代码示例补充 |
+| [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html) | 主题式学习 | Day 1-6 阅读材料 | 可作为概念文件的代码示例补充 |
 | [TRPL 3rd Ed](https://doc.rust-lang.org/book/title-page.html) | 官方教程 | 全路径 | Rust 1.96.1+ / Edition 2024 基准；Ch 17 为完整异步编程入门 |
 | [Brown University Interactive Book](https://rust-book.cs.brown.edu/) | 交互式教程 | Day 3-4 / Day 10-11 | Aquascope 所有权可视化 + 嵌入式测验；OOPSLA 2023/2024 研究支撑；本地映射见 [`28_ownership_inventories_brown_book.md`](../../01_foundation/01_ownership_borrow_lifetime/28_ownership_inventories_brown_book.md) |
 | [Google Comprehensive Rust](https://google.github.io/comprehensive-rust/) | 工业级课程 | Week 1 Day 1-6 + 扩展专题 | Google Android 团队维护；4 天基础 + Android/Chromium/Bare Metal/Concurrency/Idiomatic/Unsafe 专题；本地映射见 [`GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md`](../../../archive/reports/2026_07/GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md) |

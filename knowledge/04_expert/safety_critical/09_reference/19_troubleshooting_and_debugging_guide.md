@@ -11,7 +11,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南提供Rust安全关键系统开发中常见问题的诊断和解决方法，涵盖编译错误、运行时问题、工具链问题和认证相关问题。
 
@@ -19,15 +19,15 @@
 
 ## 1. 编译错误故障排除
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 借用检查器错误
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 错误 E0499: 多次可变借用
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // ❌ 错误代码
@@ -68,7 +68,7 @@ fn process_data_index(data: &mut Vec<u32>) {
 
 #### 错误 E0597: 悬垂引用
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // ❌ 错误代码
@@ -356,7 +356,7 @@ impl DeadlockDetector {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 # 原因: 使用了Miri不支持的系统调用
 # 解决: 条件编译跳过或使用Miri stub
 

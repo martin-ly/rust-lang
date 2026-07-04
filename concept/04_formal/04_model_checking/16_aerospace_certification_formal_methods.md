@@ -19,7 +19,7 @@
 > [DO-330 - Software Tool Qualification](https://www.rtca.org/) ·
 > [Ferrocene - Qualified Rust Compiler](https://ferrocene.dev/) ·
 > [Rockwell Collins - Field Guidance System Case Study](https://arxiv.org/abs/1409.7643) ·
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [Wikipedia — DO-178C](https://en.wikipedia.org/wiki/DO-178C)
 
 ## 📑 目录
@@ -821,8 +821,8 @@ Unsafe Rust 的形式化缺口:
 | [Rockwell Collins Case Study](https://arxiv.org/abs/1409.7643) | ✅ 一级 | DO-333 实际应用 |
 | [CompCert](https://compcert.org/) | ✅ 一级 | 认证 C 编译器 |
 | [Rust Verification Tools Survey](https://arxiv.org/abs/2305.02275) | ✅ 一级 | 工具综述论文 |
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言规范 |
-| [The Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ 一级 | Unsafe Rust 权威 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言规范 |
+| [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) | ✅ 一级 | Unsafe Rust 权威 |
 
 ---
 
@@ -870,8 +870,8 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [DO-178C/DO-333/DO-330 - RTCA](https://www.rtca.org/), [Ferrocene](https://ferrocene.dev/)
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]; 2026-05-22 网络对齐：Ferrocene 26.02.0 ISO 26262 ASIL B core 认证、IEC 61508 SIL 2 core 认证、Safety-Critical Rust Consortium 成立 [来源: Web Authority Alignment Sprint]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [DO-178C/DO-333/DO-330 - RTCA](https://www.rtca.org/), [Ferrocene](https://ferrocene.dev/)
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md); 2026-05-22 网络对齐：Ferrocene 26.02.0 ISO 26262 ASIL B core 认证、IEC 61508 SIL 2 core 认证、Safety-Critical Rust Consortium 成立 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -948,7 +948,7 @@ fn main() {
 }
 ```
 
-> **修正**: 航空航天系统要求**确定性执行**——相同输入总是产生相同输出，无未定义行为，无外部状态依赖。`const fn` 限制函数只能执行编译期可求值的操作（算术、控制流、调用其他 const fn），禁止 I/O、堆分配、可变静态变量。这与 SPARK/Ada 的 pure function 或 C 的 `constexpr` 类似，但 Rust 的 `const fn` 与类型系统（Type System）集成更紧密——const 值可用于类型参数（数组大小、常量泛型（Generics））。形式化验证中，const fn 对应于"全函数"（total function）——对所有输入都终止并返回结果。来源: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **修正**: 航空航天系统要求**确定性执行**——相同输入总是产生相同输出，无未定义行为，无外部状态依赖。`const fn` 限制函数只能执行编译期可求值的操作（算术、控制流、调用其他 const fn），禁止 I/O、堆分配、可变静态变量。这与 SPARK/Ada 的 pure function 或 C 的 `constexpr` 类似，但 Rust 的 `const fn` 与类型系统（Type System）集成更紧密——const 值可用于类型参数（数组大小、常量泛型（Generics））。形式化验证中，const fn 对应于"全函数"（total function）——对所有输入都终止并返回结果。来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
 ### 10.3 边界测试：SPARK 模式的 Rust 近似与 `no_panic`（编译错误）
 

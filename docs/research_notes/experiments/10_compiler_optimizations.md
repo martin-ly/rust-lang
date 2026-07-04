@@ -792,7 +792,7 @@ fn dead_code_example() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 
@@ -831,7 +831,7 @@ fn dead_code_example() {
 > **来源: [LLVM Documentation](https://llvm.org/docs/)**
 > **来源: [ACM](https://dl.acm.org/)**
 > **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
-> **[来源: Criterion.rs Documentation]**
+> **[Criterion.rs Documentation](https://bheisler.github.io/criterion.rs/book/index.html)**
 > **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
 > **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 

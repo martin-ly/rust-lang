@@ -510,7 +510,7 @@ println!("cargo:rerun-if-changed=src/config.json");
 
 ---
 
-> **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/), [The Rust Reference](https://doc.rust-lang.org/reference/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/index.html), [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Cargo 1.96+ 官方文档
 
 **文档版本**: 1.0

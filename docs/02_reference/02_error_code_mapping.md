@@ -27,8 +27,8 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Rust Reference - Error Codes](https://doc.rust-lang.org/reference/)** ·
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)** ·
-> **[来源: ACM - Compiler Error Message Design]** ·
-> **[来源: IEEE - Programming Language Diagnostics]**
+> **[ACM - Compiler Error Message Design](https://dl.acm.org/)** ·
+> **[IEEE - Programming Language Diagnostics](https://ieeexplore.ieee.org/)**
 
 - [Rust 编译器错误码映射文档 {#rust-编译器错误码映射文档}](#rust-编译器错误码映射文档-rust-编译器错误码映射文档)
   - [目录 {#目录}](#目录-目录)
@@ -2593,7 +2593,7 @@ Rust 1.94 对错误诊断进行了多项改进：
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -2611,8 +2611,8 @@ Rust 1.94 对错误诊断进行了多项改进：
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 > **来源: [Wikipedia - Error Message](https://en.wikipedia.org/wiki/Error_Message)**
 > **来源: [Wikipedia - Diagnostic (medicine)](https://en.wikipedia.org/wiki/Diagnostic_(medicine))**
-> **[来源: IEEE - Programming Language Diagnostics]**
-> **[来源: ACM - Compiler Error Message Design]**
+> **[IEEE - Programming Language Diagnostics](https://ieeexplore.ieee.org/)**
+> **[ACM - Compiler Error Message Design](https://dl.acm.org/)**
 > **来源: [Rust Reference - Error Codes](https://doc.rust-lang.org/reference/)**
 > **[来源: Rust Compiler Error Index]**
 > **[来源: rustc --explain Documentation]**

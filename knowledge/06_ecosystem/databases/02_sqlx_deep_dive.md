@@ -9,7 +9,7 @@
 > **关键词**: 异步、编译时检查、类型安全
 > **权威来源**: [SQLx 官方文档](https://docs.rs/sqlx/latest/sqlx/), [SQLx GitHub](https://github.com/launchbadge/sqlx)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 SQLx 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 SQLx 官方文档来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
@@ -18,7 +18,7 @@
 
 ## 📋 目录
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [SQLx 深度解析](#sqlx-深度解析)
   - [📋 目录](#-目录)
@@ -50,7 +50,7 @@
 
 ## 🎯 概述
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 SQLx 是一个异步纯 Rust SQL 工具包，提供：
 
@@ -61,7 +61,7 @@ SQLx 是一个异步纯 Rust SQL 工具包，提供：
 
 ### 对比其他 ORM
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | SQLx | Diesel | Sea-ORM |
 |------|------|--------|---------|
@@ -75,7 +75,7 @@ SQLx 是一个异步纯 Rust SQL 工具包，提供：
 
 ## 🏗️ 架构设计
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -96,7 +96,7 @@ graph TD
 
 ## 💡 核心特性
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 编译时查询检查
 >

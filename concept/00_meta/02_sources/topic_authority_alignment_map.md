@@ -1,11 +1,11 @@
 # 主题-权威来源对齐图谱 (Topic-Authority Alignment Map)
 >
-> 生成时间：2026-07-05 04:48
+> 生成时间：2026-07-05 05:12
 > 工具：`scripts/topic_authority_aligner.py` | 数据来源：Rust 官方文档、形式化/验证生态、工业生态、项目路线图
 
 ## 1. 当前项目概念层级（L0-L7）
 
-### L00（61 篇）
+### L00（62 篇）
 
 - `concept/00_meta/00_framework/03_bloom_taxonomy.md` — Bloom Taxonomy（Bloom 分类法）
 - `concept/00_meta/00_framework/boundary_extension_tree.md` — Rust 安全边界扩展推理树
@@ -31,13 +31,13 @@
 - `concept/00_meta/01_terminology/bilingual_template_v2.md` — Concept 文件双语模板 v2（Bilingual Template v2）
 - `concept/00_meta/01_terminology/terminology_glossary.md` — Rust 核心术语英中对照表
 - `concept/00_meta/02_sources/authority_source_map.md` — 权威来源映射表（Authority Source Map）
+- `concept/00_meta/02_sources/international_authority_index.md` — International Authority Index（国际化权威来源索引）
 - `concept/00_meta/02_sources/rustbelt_predicate_map.md` — RustBelt 谓词映射图（RustBelt Predicate Map）
 - `concept/00_meta/02_sources/sources.md` — 权威来源清单与知识来源关系分析
 - `concept/00_meta/02_sources/topic_authority_alignment_map.md` — 主题-权威来源对齐图谱 (Topic-Authority Alignment Map)
 - `concept/00_meta/03_audit/08_concept_audit_guide.md` — Concept Audit Guide（概念审计指南）
 - `concept/00_meta/03_audit/asp_marking_guide.md` — Rust 知识体系 A/S/P 三维认知标记规范
-- `concept/00_meta/03_audit/audit_checklist.md` — 概念一致性检查清单（Concept Consistency Audit Checklist）
-- … 共 61 篇
+- … 共 62 篇
 
 ### L01（53 篇）
 
@@ -275,48 +275,25 @@
 
 | 来源类别 | 权威主题数 | 已对齐 | 缺口 | 覆盖率 |
 |----------|-----------|--------|------|--------|
-| formal_verification | 12 | 7 | 5 | 58.3% |
-| industrial_ecosystem | 25 | 14 | 11 | 56.0% |
-| roadmap | 16 | 13 | 3 | 81.2% |
+| formal_verification | 12 | 12 | 0 | 100.0% |
+| industrial_ecosystem | 25 | 25 | 0 | 100.0% |
+| roadmap | 16 | 16 | 0 | 100.0% |
 
 ## 3. 未覆盖空间（按优先级分组）
 
 > 注：以下缺口基于标题/路径关键词匹配，部分可能已被项目文件间接覆盖但标题未体现，需人工复核。
 
-### P0 官方核心（4 项）
+### P0 官方核心（0 项）
 
-- **Iris: Higher-Order Concurrent Separation Logic Framework** — Separation Logic / Ownership [https://iris-project.org/](https://iris-project.org/)
-- **Borrow Sanitizer** — Memory Safety [https://github.com/rust-lang/miri/blob/master/BORROW_SANITIZER.md](https://github.com/rust-lang/miri/blob/master/BORROW_SANITIZER.md)
-- **bindgen / cbindgen** — FFI / C Interop [https://rust-lang.github.io/rust-bindgen/](https://rust-lang.github.io/rust-bindgen/)
-- **reqwest** — Async HTTP Client [https://docs.rs/reqwest/latest/reqwest/](https://docs.rs/reqwest/latest/reqwest/)
+### P1 形式化/验证（0 项）
 
-### P1 形式化/验证（3 项）
+### P2 工业生态（0 项）
 
-- **Verus: Verified Rust for Low-Level Systems** — Theorem Proving [https://verus-lang.github.io/verus/](https://verus-lang.github.io/verus/)
-- **Miri: Rust Interpreter for Undefined Behavior** — Undefined Behavior Detection [https://github.com/rust-lang/miri](https://github.com/rust-lang/miri)
-- **Ferrocene: Rust for Safety-Critical Systems** — Safety Certification [https://ferrocene.dev/](https://ferrocene.dev/)
-
-### P2 工业生态（7 项）
-
-- **sqlx** — Database Driver [https://github.com/launchbadge/sqlx](https://github.com/launchbadge/sqlx)
-- **Tauri** — GUI / Cross-platform [https://tauri.app/](https://tauri.app/)
-- **Dioxus** — GUI / Cross-platform [https://dioxuslabs.com/](https://dioxuslabs.com/)
-- **Leptos** — GUI / Web [https://leptos.dev/](https://leptos.dev/)
-- **egui** — GUI / Immediate Mode [https://www.egui.rs/](https://www.egui.rs/)
-- **PyO3** — Python Interop [https://pyo3.rs/](https://pyo3.rs/)
-- **rayon** — Data Parallelism [https://docs.rs/rayon/latest/rayon/](https://docs.rs/rayon/latest/rayon/)
-
-### P3 前沿探索（5 项）
-
-- **cortex-m / riscv-rt** — No-std / Bare Metal [https://docs.rs/cortex-m/latest/cortex_m/](https://docs.rs/cortex-m/latest/cortex_m/)
-- **ring / rustls** — Crypto [https://github.com/briansmith/ring](https://github.com/briansmith/ring)
-- **Cranelift Backend** — Compiler [https://github.com/bjorn3/rustc_codegen_cranelift](https://github.com/bjorn3/rustc_codegen_cranelift)
-- **MCDC Coverage** — Tooling [https://github.com/rust-lang/rust/pull/124658](https://github.com/rust-lang/rust/pull/124658)
-- **Rustdoc Search / Scraped Examples** — Tooling [https://doc.rust-lang.org/rustdoc/scraped-examples.html](https://doc.rust-lang.org/rustdoc/scraped-examples.html)
+### P3 前沿探索（0 项）
 
 ## 4. 项目独有主题（权威来源未直接强调）
 
-> 共 372 个 concept 文件未被权威来源主题直接命中。这些多为项目特色的中文学习路径、对比分析、决策树或生态 deep-dive。
+> 共 357 个 concept 文件未被权威来源主题直接命中。这些多为项目特色的中文学习路径、对比分析、决策树或生态 deep-dive。
 
 - `concept/00_meta/00_framework/03_bloom_taxonomy.md` — Bloom Taxonomy（Bloom 分类法）
 - `concept/00_meta/00_framework/boundary_extension_tree.md` — Rust 安全边界扩展推理树
@@ -358,7 +335,7 @@
 - `concept/00_meta/04_navigation/inter_layer_topology.md` — Rust 知识体系跨层依赖与蕴含拓扑图
 - `concept/00_meta/04_navigation/intra_layer_model_map.md` — Rust 知识体系层次内模型间映射图
 - `concept/00_meta/04_navigation/learning_mvp_path.md` — MVP 学习路径：从零到多线程 CLI（40 小时）
-- … 共 372 项
+- … 共 357 项
 
 ## 5. 重复/需合并主题提示
 

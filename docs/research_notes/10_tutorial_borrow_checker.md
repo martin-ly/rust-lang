@@ -1042,7 +1042,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 
@@ -1072,7 +1072,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 > **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 > **来源: [Rust Reference - Borrow Checker](https://doc.rust-lang.org/reference/)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
-> **[来源: ACM - Borrow Checking Survey]**
+> **[ACM - Borrow Checking Survey](https://dl.acm.org/)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

@@ -351,7 +351,7 @@ impl<E, S> ProjectionSync<E, S> {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 
@@ -378,8 +378,8 @@ impl<E, S> ProjectionSync<E, S> {
 > **来源: [Wikipedia - CQRS](https://en.wikipedia.org/wiki/CQRS)**
 > **来源: [Wikipedia - Event Sourcing](https://en.wikipedia.org/wiki/Event_Sourcing)**
 > **[来源: Martin Fowler - CQRS Pattern]**
-> **[来源: IEEE - Event-Driven Architecture]**
-> **[来源: ACM - Data Consistency Patterns]**
+> **[IEEE - Event-Driven Architecture](https://ieeexplore.ieee.org/)**
+> **[ACM - Data Consistency Patterns](https://dl.acm.org/)**
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**

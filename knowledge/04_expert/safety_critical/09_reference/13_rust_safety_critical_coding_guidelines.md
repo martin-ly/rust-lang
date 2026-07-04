@@ -7,7 +7,7 @@
 >
 > **相关概念**: [位置](../../../../concept/01_foundation/08_error_handling/13_panic_and_abort.md)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # Rust安全关键编码规范
 
@@ -17,7 +17,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档定义安全关键Rust项目的编码规范，确保代码安全、可靠、可维护，符合ISO 26262 ASIL D、IEC 61508 SIL 4等标准要求。
 
@@ -25,11 +25,11 @@
 
 ## 1. 安全编码原则
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 核心原则
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 原则1: 利用Rust类型系统
@@ -55,7 +55,7 @@
 
 ### 1.2 安全等级对应规范
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 等级 | unsafe代码 | 形式化验证 | 覆盖率 | 审查 |
 |------|------------|------------|--------|------|
@@ -69,7 +69,7 @@
 
 ## 2. 内存安全规范
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 所有权与借用
 >

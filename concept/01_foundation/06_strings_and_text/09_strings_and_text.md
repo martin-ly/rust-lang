@@ -105,7 +105,7 @@ Rust 的两种字符串类型:
 ```
 
 > **认知功能**: String/str 的关系是 Rust **所有权（Ownership）模型**的典型应用——String 拥有数据，str 借用（Borrowing）数据，两者通过 Deref 无缝协作。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **关键洞察**: 这种设计避免了 C++ 中 `std::string` 和 `const char*` 的混淆，以及 Java 中 `String` 和 `StringBuilder` 的性能陷阱。
 > [来源: [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html)]
 
@@ -481,9 +481,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -558,7 +558,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 禁止 `String`/`str` 的整数索引，因为 UTF-8 是多字节编码，第 N 个"字符"不一定是第 N 个字节。`"你好"[0]` 可能返回 UTF-8 首字节而非完整字符。这与 Python/Java 的透明 Unicode 处理不同——Rust 强制开发者显式选择字节级或字符级访问，避免隐式截断多字节字符。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: Rust 禁止 `String`/`str` 的整数索引，因为 UTF-8 是多字节编码，第 N 个"字符"不一定是第 N 个字节。`"你好"[0]` 可能返回 UTF-8 首字节而非完整字符。这与 Python/Java 的透明 Unicode 处理不同——Rust 强制开发者显式选择字节级或字符级访问，避免隐式截断多字节字符。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：`str::split` 与模式类型的不匹配（编译错误）
 

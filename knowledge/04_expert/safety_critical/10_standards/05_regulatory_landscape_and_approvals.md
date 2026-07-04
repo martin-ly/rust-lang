@@ -1,6 +1,6 @@
 > **权威来源**: [FAA](https://www.faa.gov/), [EASA](https://www.easa.europa.eu/), [FDA [已失效]]<!-- 原链接: https://www.fda.gov/ -->, [Rust Reference](https://doc.rust-lang.org/reference/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增监管机构标准来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增监管机构标准来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # 监管环境与认证审批
 
@@ -10,7 +10,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档梳理全球主要监管机构对Rust安全关键系统的态度、审批流程和成功案例，帮助组织导航复杂的监管环境。
 
@@ -18,11 +18,11 @@
 
 ## 1. 全球监管机构概览
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 汽车领域
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 主要监管机构:
@@ -69,7 +69,7 @@
 
 ### 1.2 航空领域
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 主要监管机构:
@@ -98,7 +98,7 @@
 
 ### 1.3 工业领域
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 主要监管机构:

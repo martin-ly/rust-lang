@@ -631,9 +631,9 @@ impl Validator {
 
 ### 1.4 基准测试 (Benchmarks) {#14-基准测试-benchmarks}
 
-> **[来源: ACM - Systems Programming Languages]**
+> **[ACM - Systems Programming Languages](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 何时选择基准测试?
@@ -781,9 +781,9 @@ criterion = { version = "0.5", features = ["async_tokio"] }
 
 ### 1.5 模糊测试 (Fuzz Testing) {#15-模糊测试-fuzz-testing}
 
-> **[来源: IEEE - Programming Language Standards]**
+> **[IEEE - Programming Language Standards](https://ieeexplore.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 何时选择模糊测试?
@@ -891,7 +891,7 @@ cargo fuzz run parser crash-abc123
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 何时选择属性测试?
@@ -1050,13 +1050,13 @@ impl ReferenceStateMachine for MyStateMachine {
 ## 二、测试工具选择矩阵 {#二测试工具选择矩阵}
 
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 工具对比表 {#21-工具对比表}
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 工具/库 | 用途 | 适用场景 | 学习曲线 | 维护状态 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -1075,7 +1075,7 @@ impl ReferenceStateMachine for MyStateMachine {
 
 > **[来源: POPL - Programming Languages Research]**
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 基础异步测试
@@ -1502,7 +1502,7 @@ criterion_main!(benches);
 ## 三、测试策略维度 {#三测试策略维度}
 
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 测试金字塔 {#31-测试金字塔}
 
@@ -1832,11 +1832,11 @@ criterion_main!(benches);
 ## 四、最佳实践 {#四最佳实践}
 
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 4.1 测试组织结构 {#41-测试组织结构}
 
-> **[来源: ACM - Systems Programming Languages]**
+> **[ACM - Systems Programming Languages](https://dl.acm.org/)**
 
 ```text
 crates/
@@ -1914,7 +1914,7 @@ mod tests {
 
 ### 4.2 测试数据管理 {#42-测试数据管理}
 
-> **[来源: IEEE - Programming Language Standards]**
+> **[IEEE - Programming Language Standards](https://ieeexplore.ieee.org/)**
 
 ```rust,ignore
 // tests/common/fixtures.rs
@@ -2263,7 +2263,7 @@ mod test_documentation {
 ## 五、决策流程图 {#五决策流程图}
 
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 开始测试规划
@@ -2338,7 +2338,7 @@ mod test_documentation {
 ## 六、快速参考卡片 {#六快速参考卡片}
 
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 6.1 常用命令 {#61-常用命令}
 
@@ -2401,7 +2401,7 @@ cargo flamegraph
 ## 七、推荐配置模板 {#七推荐配置模板}
 
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 7.1 Cargo.toml 测试配置 {#71-cargotoml-测试配置}
 
@@ -2585,7 +2585,7 @@ pub mod test_config {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 
@@ -2617,8 +2617,8 @@ pub mod test_config {
 > **来源: [Wikipedia - Unit Testing](https://en.wikipedia.org/wiki/Unit_Testing)**
 > **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
 > **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**
-> **[来源: ACM - Software Testing Methods]**
-> **[来源: IEEE - Test Coverage Standards]**
+> **[ACM - Software Testing Methods](https://dl.acm.org/)**
+> **[IEEE - Test Coverage Standards](https://ieeexplore.ieee.org/)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -2628,13 +2628,13 @@ pub mod test_config {
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 > **来源: [Wikipedia - Decision Tree](https://en.wikipedia.org/wiki/Decision_Tree)**
-> **[来源: ACM - Decision Support Systems]**
-> **[来源: IEEE - Risk Analysis]**
+> **[ACM - Decision Support Systems](https://dl.acm.org/)**
+> **[IEEE - Risk Analysis](https://ieeexplore.ieee.org/)**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
 > **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**
 > **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
-> **[来源: ACM - Software Testing]**
+> **[ACM - Software Testing](https://dl.acm.org/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 > **来源: [ACM](https://dl.acm.org/)**

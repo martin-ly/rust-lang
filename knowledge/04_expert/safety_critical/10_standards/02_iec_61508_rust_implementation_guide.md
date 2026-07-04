@@ -1,6 +1,6 @@
 > **权威来源**: [IEC 61508](https://www.iec.ch/), [Rust Reference](https://doc.rust-lang.org/reference/), [Ferrocene](https://ferrous-systems.com/ferrocene/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 IEC 61508 标准来源标注、Rust 安全关键应用引用 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 IEC 61508 标准来源标注、Rust 安全关键应用引用 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # IEC 61508 Rust实施指南
 
@@ -10,7 +10,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 IEC 61508是工业领域功能安全的国际标准，涵盖电气/电子/可编程电子系统的安全生命周期。本指南提供使用Rust满足IEC 61508要求的详细实施路径。
 
@@ -18,7 +18,7 @@ IEC 61508是工业领域功能安全的国际标准，涵盖电气/电子/可编
 
 ## IEC 61508结构概览
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 IEC 61508-x:
@@ -36,15 +36,15 @@ IEC 61508-x:
 
 ## Part 3: 软件要求详解
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 7.4.2 软件安全需求规范
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 安全完整性等级(SIL)映射
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | SIL | 风险降低因子 | Rust适用性 | 关键要求 |
 |-----|--------------|------------|----------|

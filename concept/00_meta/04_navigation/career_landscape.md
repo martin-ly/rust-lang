@@ -14,7 +14,7 @@
 > **前置概念**: [Bloom Taxonomy](../00_framework/03_bloom_taxonomy.md)
 > **后置概念**: [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md)
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 > **来源**: [JetBrains State of Developer Ecosystem 2025](https://www.jetbrains.com/lp/devecosystem-2025/) ·

@@ -24,7 +24,7 @@
 > **后置概念**: [Formal Methods](../../07_future/04_research_and_experimental/02_formal_methods.md)
 > **主要来源**: [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Iris Project](https://iris-project.org/) · [Creusot](https://creusot.rs/) · [Verus](https://github.com/verus-lang/verus/guide/) · [Kani: AWS] · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **Bloom 层级**: 分析 → 评价
@@ -457,7 +457,7 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 此决策树将"RustBelt 证明 Rust 完全安全"这一过度概括命题**逐步分解**为可检验的子条件。功能定位：揭示 RustBelt 保证范围的精确边界（safe 子集、无死锁、无 FFI）。使用建议：遇到"Rust 绝对安全"的绝对化论断时，沿树逐项排查前提假设。关键洞察：**三个否定分支（unsafe、死锁、FFI）对应 C1/C2 边界层**，它们不是 RustBelt 的缺陷，而是形式化证明的必要适用范围声明。[来源: 💡 原创分析]
+> **认知功能**: 此决策树将"RustBelt 证明 Rust 完全安全"这一过度概括命题**逐步分解**为可检验的子条件。功能定位：揭示 RustBelt 保证范围的精确边界（safe 子集、无死锁、无 FFI）。使用建议：遇到"Rust 绝对安全"的绝对化论断时，沿树逐项排查前提假设。关键洞察：**三个否定分支（unsafe、死锁、FFI）对应 C1/C2 边界层**，它们不是 RustBelt 的缺陷，而是形式化证明的必要适用范围声明。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **命题一分析**: RustBelt 仅覆盖 **safe Rust 子集**。unsafe、死锁、FFI 均位于证明边界之外。将结论外推到"Rust 完全安全"属于**过度概括**谬误。工业实践中，需将 RustBelt 与 Miri 动态检测、Kani 符号执行、人工审计相结合，形成纵深防御。
 
@@ -479,7 +479,7 @@ graph TD
     style T2 fill:#ff9
 ```
 
-> **认知功能**: 此决策树通过**三维度可行性探针**（规格复杂度、状态空间、时间成本）检验"形式化验证替代测试"命题。功能定位：澄清验证与测试的正交互补关系。使用建议：在评估关键模块（Module）验证策略时，先回答这三个问题再决定工具选型。关键洞察：**规格遗漏 = 遗漏 bug**，即使定理成立，错误的规格仍会导致错误的安全感——形式化验证保证的是"满足规格"而非"满足意图"。[来源: 💡 原创分析]
+> **认知功能**: 此决策树通过**三维度可行性探针**（规格复杂度、状态空间、时间成本）检验"形式化验证替代测试"命题。功能定位：澄清验证与测试的正交互补关系。使用建议：在评估关键模块（Module）验证策略时，先回答这三个问题再决定工具选型。关键洞察：**规格遗漏 = 遗漏 bug**，即使定理成立，错误的规格仍会导致错误的安全感——形式化验证保证的是"满足规格"而非"满足意图"。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **命题二分析**: 形式化验证与测试处于**正交维度**。验证回答"是否满足规格"，测试回答"预期输入下行为是否正确"。规格本身可能错误，且完整证明成本（人月级）使其难以全面替代测试。最佳实践是**分层策略**：核心不变量用 Verus/Creusot 证明，边界条件用 Kani 符号执行，回归用单元测试覆盖。
 
@@ -500,7 +500,7 @@ graph TD
     style T3 fill:#6f6
 ```
 
-> **认知功能**: 此决策树揭示 Iris 框架的**通用性层次**——L1 逻辑层可跨语言复用，但 L2/L3 层深度绑定 Rust 语义。功能定位：区分"逻辑框架可移植"与"形式化证明可移植"两个不同命题。使用建议：将 Iris 应用于其他语言时，需预留重构 λRust 语义和协议类型的工作量。关键洞察：**Iris 是证明基础设施，RustBelt 是 Rust 实例化；从框架到具体语言的证明迁移成本接近于重新发表论文**。[来源: 💡 原创分析]
+> **认知功能**: 此决策树揭示 Iris 框架的**通用性层次**——L1 逻辑层可跨语言复用，但 L2/L3 层深度绑定 Rust 语义。功能定位：区分"逻辑框架可移植"与"形式化证明可移植"两个不同命题。使用建议：将 Iris 应用于其他语言时，需预留重构 λRust 语义和协议类型的工作量。关键洞察：**Iris 是证明基础设施，RustBelt 是 Rust 实例化；从框架到具体语言的证明迁移成本接近于重新发表论文**。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **命题三分析**: Iris 是**通用**的高阶并发分离逻辑框架（L1 层），可实例化到多种语言。但 RustBelt 的 L2/L3 层——协议类型、生命周期（Lifetimes）逻辑、λRust 语义——深度绑定于 Rust 的所有权-借用（Borrowing）-生命周期体系。将 Iris 应用于其他语言需重建 L2 层，工作量接近于重新发表一篇 RustBelt 级别的论文。
 
@@ -1039,7 +1039,7 @@ graph TD
     I --> I3[动态 UB 检测]
 ```
 
-> **认知功能**: 此思维导图将 RustBelt 定理体系与**工业验证工具生态**整合为统一的知识拓扑。功能定位：建立从学术基础（Iris/λRust）到工程工具（Kani/Verus/Miri）的映射关系。使用建议：按"基础层→定理层→工具层"三层结构记忆各工具的定位差异。关键洞察：**RustBelt（理论根基）与 Kani/Verus（工业落地）并非竞争关系，而是同一安全光谱的两端——前者回答"为什么可信"，后者回答"如何验证"**。[来源: 💡 原创分析]
+> **认知功能**: 此思维导图将 RustBelt 定理体系与**工业验证工具生态**整合为统一的知识拓扑。功能定位：建立从学术基础（Iris/λRust）到工程工具（Kani/Verus/Miri）的映射关系。使用建议：按"基础层→定理层→工具层"三层结构记忆各工具的定位差异。关键洞察：**RustBelt（理论根基）与 Kani/Verus（工业落地）并非竞争关系，而是同一安全光谱的两端——前者回答"为什么可信"，后者回答"如何验证"**。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -1251,8 +1251,8 @@ unsafe {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -1399,7 +1399,7 @@ fn main() {
 }
 ```
 
-> **修正**: `mem::forget` 消耗所有权但不执行 `Drop`，导致资源泄漏。在 RustBelt 中，`own(τ)` 谓词包含释放义务；`forget` 通过将释放义务"遗忘"来形式化资源泄漏。Rust 2021 起 `mem::forget` 为安全函数，因为资源泄漏不被视为 unsafe。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: `mem::forget` 消耗所有权但不执行 `Drop`，导致资源泄漏。在 RustBelt 中，`own(τ)` 谓词包含释放义务；`forget` 通过将释放义务"遗忘"来形式化资源泄漏。Rust 2021 起 `mem::forget` 为安全函数，因为资源泄漏不被视为 unsafe。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.3 边界测试：unsafe 代码契约的形式化验证盲区（运行时 UB）
 
@@ -1419,4 +1419,4 @@ fn main() {
 }
 ```
 
-> **修正**: RustBelt 的核心贡献：证明 Rust 的**safe 子集**是内存安全的，且 **unsafe 代码若满足契约**则不破坏安全保证。unsafe 契约：1) `&mut T` 必须独占（无其他活跃引用）；2) `&T` 必须有效（指向已初始化且未变性的内存）；3) `*const T`/`*mut T` 的使用必须恢复上述不变量后再创建 safe 引用。RustBelt 使用**Iris 分离逻辑**建模：1) `own(τ, ℓ)` — 位置 ℓ 拥有类型 τ 的值；2) `shr(κ, ℓ)` — 共享权限，允许多个读者；3) `na(τ, ℓ)` — `UnsafeCell` 的非原子权限，允许内部可变。验证工具：Miri（检查 Stacked Borrows/Tree Borrows）、Kani（有界模型检查）、Prusti（Hoare 逻辑）。这与 C 的"信任程序员"（无任何验证）或 Java 的 JVM（运行时检查，无形式化内存模型）不同——Rust 提供从类型系统到形式化验证的多层安全网。[来源: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: RustBelt 的核心贡献：证明 Rust 的**safe 子集**是内存安全的，且 **unsafe 代码若满足契约**则不破坏安全保证。unsafe 契约：1) `&mut T` 必须独占（无其他活跃引用）；2) `&T` 必须有效（指向已初始化且未变性的内存）；3) `*const T`/`*mut T` 的使用必须恢复上述不变量后再创建 safe 引用。RustBelt 使用**Iris 分离逻辑**建模：1) `own(τ, ℓ)` — 位置 ℓ 拥有类型 τ 的值；2) `shr(κ, ℓ)` — 共享权限，允许多个读者；3) `na(τ, ℓ)` — `UnsafeCell` 的非原子权限，允许内部可变。验证工具：Miri（检查 Stacked Borrows/Tree Borrows）、Kani（有界模型检查）、Prusti（Hoare 逻辑）。这与 C 的"信任程序员"（无任何验证）或 Java 的 JVM（运行时检查，无形式化内存模型）不同——Rust 提供从类型系统到形式化验证的多层安全网。[来源: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]

@@ -146,10 +146,10 @@ graph LR
 ```
 
 > **认知功能**: 此图展示并行前端的**三层并行化粒度**——从粗粒度（模块（Module）级）到细粒度（查询级）的渐进式并行化策略。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **使用建议**: 大型 crate（>100 模块（Module））优先受益于模块级并行；小型 crate 可能因并行开销而无收益。
 > **关键洞察**: 并行前端不是"全有或全无"，而是**渐进式**的——先并行化独立的模块（Module），再逐步深入到函数和查询级别。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -315,16 +315,16 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
-| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/index.html) | ✅ 一级 | RFC 文档 |
 | [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust Compiler Team](https://github.com/rust-lang/compiler-team/) | ✅ 一级 | 编译器开发团队 |
 | [Rust Project Goals 2026 — Parallel Frontend](https://rust-lang.github.io/rust-project-goals/2026/parallel-front-end.html) | ✅ 一级 | 官方项目目标 |
@@ -351,7 +351,7 @@ fn main() {
 ---
 
 > **权威来源**:
-> [Rust Reference](https://doc.rust-lang.org/reference/),
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html),
 > [Rust Compiler Team](https://github.com/rust-lang/compiler-team/),
 > [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)

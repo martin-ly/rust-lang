@@ -131,7 +131,7 @@ graph LR
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 设计 Safety Tags 时，需同时考虑人类可读性和机器可解析性。纯逻辑表达式对人类不友好，需要注释+标注的混合形式。
 > **关键洞察**: Safety Tags 是 Rust 从"人工保证安全"向"机器辅助验证安全"演进的关键基础设施。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -363,7 +363,7 @@ graph TD
 ---
 
 > **权威来源**:
-> [Rust Reference](https://doc.rust-lang.org/reference/),
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html),
 > [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/),
 > [Rust for Linux](https://rust-for-linux.com/)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
@@ -490,7 +490,7 @@ fn main() {
 >
 > 这与航空领域的 DO-178C（"已验证"是认证过程的结果，非自我声明）或网络安全领域的 SOC 2（信任但需审计）类似——标签是起点，非终点。
 > Rust 社区正在探索将标签与形式化验证结合：标签声明 + 工具验证 = 可组合的安全保证。
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)] ·
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)] ·
 > [来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)]
 
 ### 10.4 边界测试：`#[safety::tag]` 的契约验证与工具链支持（编译错误/未来特性）

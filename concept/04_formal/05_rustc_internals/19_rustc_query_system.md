@@ -13,7 +13,7 @@
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Type Inference](../00_type_theory/08_type_inference.md) · [NLL and Polonius](../../03_advanced/02_unsafe/08_nll_and_polonius.md)
 > **后置概念**: [Compiler Internals](../../06_ecosystem/00_toolchain/45_compiler_internals.md) · [Compiler Infrastructure](../../06_ecosystem/00_toolchain/47_compiler_infrastructure.md)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html) ·
@@ -403,8 +403,8 @@ Salsa 本身是从 `rustc` 查询系统中提取出来的通用框架，被 `rus
 
 ---
 
-> **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 编译器架构；2026-06-26 新增 `examples/incremental_practice/` 可运行增量编译实验 [来源: P2 Deep Content Sprint]
+> **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 编译器架构；2026-06-26 新增 `examples/incremental_practice/` 可运行增量编译实验 [P2 Deep Content Sprint](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

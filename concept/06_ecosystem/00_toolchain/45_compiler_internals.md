@@ -10,7 +10,7 @@
 > **代码状态**: ✅ 含可编译示例
 > **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
-> **来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ## 📑 目录
 
@@ -748,7 +748,7 @@ fn undefined_behavior() {
 - [形式化验证](../../04_formal/04_model_checking/05_verification_toolchain.md) — Kani、Prusti、MIRI
 - [工具链](01_toolchain.md) — Cargo、编译器标志、目标平台
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **过渡**: Compiler Internals（Rust 编译器内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Compiler Internals（Rust 编译器内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

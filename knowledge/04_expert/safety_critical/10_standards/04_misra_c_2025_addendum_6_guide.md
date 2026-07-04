@@ -9,7 +9,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: MISRA C:2025 Addendum 6
 **标题**: Applicability of MISRA C:2025 to the Rust Programming Language
@@ -20,11 +20,11 @@
 
 ## 核心发现
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 规则映射统计
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 MISRA C:2025 总规则数: 143
@@ -53,11 +53,11 @@ MISRA C:2025 总规则数: 143
 
 ## 详细规则映射
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 标准C环境 (Rules 1.x)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 规则 | MISRA要求 | Rust保证 | 调整后级别 |
 |------|-----------|----------|------------|
@@ -300,7 +300,7 @@ MISRA C:2025 总规则数: 143
 
 > **权威来源**: [MISRA C](https://misra.org.uk/), [ISO 26262](https://www.iso.org/standard/68383.html), [Rust Reference](https://doc.rust-lang.org/reference/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 MISRA C 标准来源标注、Rust 安全编码规范引用 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 MISRA C 标准来源标注、Rust 安全编码规范引用 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 disallowed-methods = [
     "std::mem::transmute",
 ]

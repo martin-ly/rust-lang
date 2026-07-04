@@ -7,7 +7,7 @@
 > **理解 Rust 为什么是这样设计的**
 > **预计时间**: 30 分钟
 > **权威来源**: [Rust Language FAQ](https://www.rust-lang.org/learn), [Rust Book Ch00](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 设计决策来源标注、零成本抽象学术引用、内存安全形式化语义来源 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 设计决策来源标注、零成本抽象学术引用、内存安全形式化语义来源 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
@@ -255,8 +255,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 
 - [Rust Language FAQ](https://www.rust-lang.org/learn) [来源: Rust Team / 2025]
 - [The Rust Programming Language](https://doc.rust-lang.org/book/) [来源: Rust Team / TRPL 2024]
-- [Rustonomicon](https://doc.rust-lang.org/nomicon/) [来源: Rust Team / Rustonomicon 2025]
-- [RFC 2005: Match ergonomics](https://rust-lang.github.io/rfcs/2005-match-ergonomics.html) [来源: Rust Core Team / 2017]
+- [Rustonomicon](https://doc.rust-lang.org/nomicon/) [Rust Team / Rustonomicon 2025](https://doc.rust-lang.org/nomicon/index.html)
+- [RFC 2005: Match ergonomics](https://rust-lang.github.io/rfcs/2005-match-ergonomics.html) [Rust Core Team / 2017](https://blog.rust-lang.org/2017/)
 
 ### 学术来源
 

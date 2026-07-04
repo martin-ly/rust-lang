@@ -27,7 +27,7 @@
 > [MDN — JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) ·
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 > [WASM Specification](https://webassembly.github.io/spec/) ·
-> [Rust and WASM](https://rustwasm.github.io/book/) ·
+> [Rust and WASM](https://rustwasm.github.io/docs/book/index.html) ·
 > [V8 Blog](https://v8.dev/blog)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 
@@ -227,7 +227,7 @@ graph LR
 ```
 
 > **异步（Async）洞察**: Rust 的 Future 是**惰性**的——创建时不会执行，需要运行时 poll。JavaScript 的 Promise 是**立即执行**的——创建时就开始执行。
-> [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)] · [来源: [MDN — Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)]
+> [来源: [Rust Async Book](https://rust-lang.github.io/async-book/index.html)] · [来源: [MDN — Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)]
 
 ---
 
@@ -310,7 +310,7 @@ Rust + JavaScript + WASM 的工作模式:
 ```
 
 > **WASM 洞察**: WASM 不是**替代 JavaScript**，而是**增强 JavaScript**——在计算密集型任务上用 Rust/WASM，在 DOM/I/O 上用 JavaScript。
-> [来源: [Rust and WASM Book](https://rustwasm.github.io/book/)] · [来源: [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)]
+> [来源: [Rust and WASM Book](https://rustwasm.github.io/docs/book/index.html)] · [来源: [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ---
 
@@ -373,7 +373,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示 WASM 的**适用边界**。WASM 不是 JavaScript 的替代品，而是**互补技术**。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **关键洞察**: 大多数现代 Web 应用应采用**混合架构**——JS 处理 UI 和 I/O，WASM 处理计算密集型任务。
 > [来源: [WASM Use Cases](https://webassembly.org/docs/use-cases/)]
 
@@ -471,7 +471,7 @@ graph TD
 | [ECMAScript Specification](https://tc39.es/ecma262/) | ✅ 一级 | JavaScript 标准 |
 | [MDN — JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) | ✅ 一级 | JS 文档 |
 | [WASM Specification](https://webassembly.github.io/spec/) | ✅ 一级 | WASM 标准 |
-| [Rust and WASM Book](https://rustwasm.github.io/book/) | ✅ 一级 | Rust WASM 指南 |
+| [Rust and WASM Book](https://rustwasm.github.io/docs/book/index.html) | ✅ 一级 | Rust WASM 指南 |
 | [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) | ✅ 一级 | JS 绑定工具 |
 | [V8 Blog](https://v8.dev/blog) | ✅ 二级 | JS 引擎博客 |
 
@@ -486,9 +486,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [ECMAScript](https://tc39.es/ecma262/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [ECMAScript](https://tc39.es/ecma262/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -584,7 +584,7 @@ fn main() {
 }
 ```
 
-> **修正**: JavaScript 的 `this` 是**动态绑定**的：函数作为方法调用时 `this` 是对象，作为普通函数调用时 `this` 是 `undefined`（严格模式）或全局对象。Rust 无 `this` 概念：方法调用 `c.increment()` 是 `Counter::increment(&mut c)` 的语法糖，`self` 是显式参数。提取方法为函数值需要闭包：`|| c.increment()` 捕获 `c` 的引用（Reference）。这与 Python 的 `self`（显式参数，但方法可作为 bound method 提取）或 C++ 的 `std::bind`/`lambda`（类似 Rust 闭包（Closures））不同——Rust 的方法无隐式绑定，所有参数显式传递，消除了 `this` 的歧义。JavaScript 的箭头函数（词法 `this`）解决了部分问题，但 Rust 从根本上避免了动态绑定。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [JavaScript this Keyword]
+> **修正**: JavaScript 的 `this` 是**动态绑定**的：函数作为方法调用时 `this` 是对象，作为普通函数调用时 `this` 是 `undefined`（严格模式）或全局对象。Rust 无 `this` 概念：方法调用 `c.increment()` 是 `Counter::increment(&mut c)` 的语法糖，`self` 是显式参数。提取方法为函数值需要闭包：`|| c.increment()` 捕获 `c` 的引用（Reference）。这与 Python 的 `self`（显式参数，但方法可作为 bound method 提取）或 C++ 的 `std::bind`/`lambda`（类似 Rust 闭包（Closures））不同——Rust 的方法无隐式绑定，所有参数显式传递，消除了 `this` 的歧义。JavaScript 的箭头函数（词法 `this`）解决了部分问题，但 Rust 从根本上避免了动态绑定。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [JavaScript this Keyword]
 
 ### 10.4 边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译错误）
 

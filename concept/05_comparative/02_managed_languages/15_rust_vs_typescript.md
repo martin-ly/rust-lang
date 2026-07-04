@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TC39 ECMAScript](https://tc39.es/ecma262/) · [WASM Specification](https://webassembly.github.io/spec/) · [Rust and WASM](https://rustwasm.github.io/book/) · [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) · [ts-rs crate](https://docs.rs/ts-rs/latest/ts_rs/) · [oxc project](https://oxc.rs/) · [swc project](https://swc.rs/) · [Type System — Wikipedia](https://en.wikipedia.org/wiki/Type_system) · [Structural vs Nominal Typing](https://www.typescriptlang.org/docs/handbook/type-compatibility.html) · [Rustnomicon](https://doc.rust-lang.org/nomicon/) · [Node.js Performance](https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TC39 ECMAScript](https://tc39.es/ecma262/) · [WASM Specification](https://webassembly.github.io/spec/) · [Rust and WASM](https://rustwasm.github.io/docs/book/index.html) · [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) · [ts-rs crate](https://docs.rs/ts-rs/latest/ts_rs/) · [oxc project](https://oxc.rs/) · [swc project](https://swc.rs/) · [Type System — Wikipedia](https://en.wikipedia.org/wiki/Type_system) · [Structural vs Nominal Typing](https://www.typescriptlang.org/docs/handbook/type-compatibility.html) · [Rustnomicon](https://doc.rust-lang.org/nomicon/index.html) · [Node.js Performance](https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 
 ## 📑 目录
@@ -90,7 +90,7 @@ TypeScript 核心特征:
   ├── 无 any 等价物: unsafe 是受限的逃生舱
   ├── 所有权: 编译期资源管理证明
   └── 设计目标: 系统编程的安全与性能
-  > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+  > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 ```
 
 > **认知功能**: TypeScript 的"类型擦除"与 Rust 的"类型单态化（Monomorphization）"是根本不同的编译策略——TypeScript 类型只影响编译期检查，Rust 类型决定代码生成和内存布局。
@@ -138,7 +138,7 @@ TypeScript 核心特征:
 ```
 
 > **认知功能**: TypeScript 的"渐进式类型"允许**逐步迁移** JavaScript 代码库，而 Rust 的"穷尽式类型"要求**upfront 设计**——这是两种截然不同的工程哲学。
-> [来源: [TypeScript — Gradual Typing](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [TypeScript — Gradual Typing](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ---
 
@@ -208,7 +208,7 @@ TypeScript 核心特征:
   ├── 风险: 编译错误（而非运行时泄漏）
   ├── 确定性: 无 GC pause，内存行为可预测
   └── 典型场景: 系统编程、嵌入式、高性能服务
-  > [来源: [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)] · [来源: [Rustnomicon](https://doc.rust-lang.org/nomicon/)]
+  > [来源: [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)] · [来源: [Rustnomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
   内存泄漏边界:
   ├── TypeScript: 可能（循环引用、全局缓存）
@@ -289,7 +289,7 @@ TypeScript 核心特征:
   ├── 阻塞: spawn_blocking 隔离阻塞操作
   ├── async/await: 状态机转换（Future trait）
   └── 取消: 任务 drop（需取消安全设计）
-  > [来源: [Tokio Documentation](https://tokio.rs/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+  > [来源: [Tokio Documentation](https://tokio.rs/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/index.html)]
 
   async/await 语义差异:
   ┌─────────────────────┬─────────────────────┬─────────────────────┐
@@ -302,11 +302,11 @@ TypeScript 核心特征:
   │ 运行时绑定          │ 隐式（事件循环）    │ 显式（Tokio）│
   │ 取消语义            │ AbortSignal         │ 任务 drop + 取消安全 │
   └─────────────────────┴─────────────────────┴─────────────────────┘
-  > [来源: [TypeScript Handbook — Async/Await](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-1-7.html)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+  > [来源: [TypeScript Handbook — Async/Await](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-1-7.html)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/index.html)]
 ```
 
 > **认知功能**: JavaScript 的 async/await 建立在**Promise + 事件循环**之上，取消是外显的（AbortController）；Rust 的 async/await 建立在**Future + Waker**之上，取消是内隐的（drop 即取消）。
-> [来源: [JavaScript MDN — AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)] · [来源: [Rust Async Book — Cancellation](https://rust-lang.github.io/async-book/)]
+> [来源: [JavaScript MDN — AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)] · [来源: [Rust Async Book — Cancellation](https://rust-lang.github.io/async-book/index.html)]
 
 ---
 
@@ -372,7 +372,7 @@ WASM 互操作模型:
   ├── 内存: Linear Memory（Wasm 管理）
   ├── 字符串: 编码为 UTF-8 字节传递
   └── 优势: 高性能计算、游戏引擎、图像处理
-  > [来源: [Rust and WASM](https://rustwasm.github.io/book/)] · [来源: [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/)]
+  > [来源: [Rust and WASM](https://rustwasm.github.io/docs/book/index.html)] · [来源: [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
   TypeScript ↔ WASM (Rust):
   ├── Rust 侧: #[wasm_bindgen] 导出函数/结构体
@@ -404,11 +404,11 @@ WASM 互操作模型:
   │  ├── 高性能计算（图像处理、密码学）             │
   │  └── 游戏物理引擎                             │
   └──────────────────────────────────────────────┘
-  > [来源: [Rust and WASM — Use Cases](https://rustwasm.github.io/book/)]
+  > [来源: [Rust and WASM — Use Cases](https://rustwasm.github.io/docs/book/index.html)]
 ```
 
 > **认知功能**: WASM 是 Rust 与 TypeScript/JavaScript **协作而非竞争**的桥梁——Rust 处理性能敏感计算，TypeScript 处理 UI 和业务逻辑。
-> [来源: [WASM Specification](https://webassembly.github.io/spec/)] · [来源: [Rust and WASM](https://rustwasm.github.io/book/)]
+> [来源: [WASM Specification](https://webassembly.github.io/spec/)] · [来源: [Rust and WASM](https://rustwasm.github.io/docs/book/index.html)]
 
 ---
 
@@ -438,7 +438,7 @@ WASM 互操作模型:
   ├── BFF/API Gateway: TypeScript / Node.js（生态成熟）
   ├── 性能核心: Rust（WASM 或微服务）
   └── 基础设施: Rust（CLI、部署工具）
-  > [来源: [Rust and WASM](https://rustwasm.github.io/book/)] · [来源: [swc project](https://swc.rs/)]
+  > [来源: [Rust and WASM](https://rustwasm.github.io/docs/book/index.html)] · [来源: [swc project](https://swc.rs/)]
 ```
 
 > **选型原则**: TypeScript 适合**快速迭代、Web 生态、团队迁移**；Rust 适合**性能关键、系统层、长期维护**——两者在 WASM 场景下可协同。
@@ -491,7 +491,7 @@ graph TB
 > **认知功能**: 此图揭示 TypeScript 和 Rust 的**共同目标**（消除运行时（Runtime）类型错误）与**不同路径**（擦除 vs 证明、渐进 vs 穷尽）。
 > [来源: [TypeScript Design Goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals)] · [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **关键洞察**: TypeScript 的"渐进"允许**局部收益**（给 JS 加类型即可获益），Rust 的"穷尽"要求**全局一致**（整个程序需满足所有权（Ownership）规则）。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -534,7 +534,7 @@ graph TD
 
 > **认知功能**: 此决策树从"性能是否关键"出发，通过团队背景、交付周期、维护周期等维度引导至最优选择。
 > **使用建议**: WASM 场景是两者的**交汇点**——Rust 负责计算密集型模块（Module），TypeScript 负责 UI 和协调层。
-> [来源: [Rust and WASM](https://rustwasm.github.io/book/)]
+> [来源: [Rust and WASM](https://rustwasm.github.io/docs/book/index.html)]
 
 ---
 
@@ -550,7 +550,7 @@ graph TD
   │   └── const x: number = "hello" as any;  // 编译通过，运行时错误
   ├── 反例: tsconfig 的 strict 模式可被关闭
   └── 结论: ❌ 错误 — TypeScript 是"可选静态类型"，Rust 是"强制静态类型"
-  > [来源: [TypeScript Handbook — Type Inference](https://www.typescriptlang.org/docs/handbook/type-inference.html)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+  > [来源: [TypeScript Handbook — Type Inference](https://www.typescriptlang.org/docs/handbook/type-inference.html)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
   命题: "Rust 可以完全替代 TypeScript 做 Web 开发"
   ├── 反例: Rust/WASM 无法直接操作 DOM
@@ -592,7 +592,7 @@ graph TD
   ├── 大型项目编译: 数分钟（debug）到数十分钟（release）
   ├── cargo check: 秒级语法/类型检查（不生成代码）
   └── 边界: 迭代速度低于 TS 的 tsc --watch
-  > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)] · [来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/)]
+  > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)] · [来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/index.html)]
 
   边界 3: WASM 的内存限制
   ├── 默认线性内存: 1-2 GB（32-bit 地址空间）
@@ -655,17 +655,17 @@ graph TD
 | [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) | ✅ 一级 | TypeScript 官方文档 |
 | [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) | ✅ 二级 | TypeScript 深度指南 |
 | [TRPL](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | Rust 官方教程 |
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | Rust 语言参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | Rust 语言参考 |
 | [TC39 ECMAScript](https://tc39.es/ecma262/) | ✅ 一级 | JavaScript 语言规范 |
 | [WASM Specification](https://webassembly.github.io/spec/) | ✅ 一级 | WebAssembly 规范 |
-| [Rust and WASM](https://rustwasm.github.io/book/) | ✅ 一级 | Rust WASM 官方指南 |
+| [Rust and WASM](https://rustwasm.github.io/docs/book/index.html) | ✅ 一级 | Rust WASM 官方指南 |
 | [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) | ✅ 一级 | Rust ↔ JS 绑定工具 |
 | [ts-rs crate](https://docs.rs/ts-rs/latest/ts_rs/) | ✅ 二级 | Rust 类型生成 TS 接口 |
 | [swc project](https://swc.rs/) | ✅ 二级 | Rust 编写的 TS/JS 编译器 |
 | [oxc project](https://oxc.rs/) | ✅ 二级 | Rust 编写的 JS 工具链 |
 | [Type System — Wikipedia](https://en.wikipedia.org/wiki/Type_system) | ✅ 三级 | 类型系统理论基础 |
 | [Structural vs Nominal Typing](https://www.typescriptlang.org/docs/handbook/type-compatibility.html) | ✅ 一级 | TS 类型兼容性官方说明 |
-| [Rustnomicon](https://doc.rust-lang.org/nomicon/) | ✅ 二级 | Rust 不安全编程指南 |
+| [Rustnomicon](https://doc.rust-lang.org/nomicon/index.html) | ✅ 二级 | Rust 不安全编程指南 |
 | [Node.js Performance](https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop) | ✅ 二级 | Node.js 性能最佳实践 |
 
 ---
@@ -688,9 +688,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

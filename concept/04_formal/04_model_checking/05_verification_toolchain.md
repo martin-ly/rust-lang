@@ -16,14 +16,14 @@
 > **Bloom 层级**: 评价 → 应用
 > **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **[来源: SOSP 2024 Verus]** · **[来源: PLDI 2024 RefinedRust]** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ✅
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 **变更日志**:
 
-- v1.2 (2026-05-26): 补充 VerusBelt (PLDI 2026 Distinguished Paper)、Miri POPL 2026 论文、Miri 深度原理章节（7.3）、验证工具对比矩阵扩展 Miri 列 [来源: Web Authority Alignment Sprint]
+- v1.2 (2026-05-26): 补充 VerusBelt (PLDI 2026 Distinguished Paper)、Miri POPL 2026 论文、Miri 深度原理章节（7.3）、验证工具对比矩阵扩展 Miri 列 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
 - v1.3 (2026-05-26): 权威内容对齐 R22：补充 Rusted Types (ICSE 2026) — Rust 类型混淆漏洞静态检测 [来源: ICSE 2026]
-- v1.3 (2026-05-26): 权威内容对齐：补充 Ravencheck (SOAP 2026) — Rust 的 Extended Effectively Propositional (EEPR) 自动验证，可判定逻辑片段的全自动验证路径 [来源: Web Authority Alignment Batch 14]
+- v1.3 (2026-05-26): 权威内容对齐：补充 Ravencheck (SOAP 2026) — Rust 的 Extended Effectively Propositional (EEPR) 自动验证，可判定逻辑片段的全自动验证路径 [Web Authority AlignmentBatch 14](../../00_meta/02_sources/international_authority_index.md)
 - v1.1 (2026-05-21): 补充 Wikipedia 概念对齐、a-mir-formality 工具链、Kani/Miri/Verus 2026 最新状态、学术引用（Reference）深化
 - v1.0 (2026-05-13): 初始版本。整合工具链选型矩阵、ROI 分析框架、分层验证策略、工业案例速查
 
@@ -262,7 +262,7 @@ classDiagram
 > **认知功能**: 此类图将验证工具按**验证范式**（动态执行、模型检测、演绎验证、类型规范）进行层次分类。
 > 关键洞察：**演绎验证**分支下又细分为**自动化演绎**（Verus/Creusot/Prusti/RefinedRust）和**交互式证明**（Aeneas），二者共享"规格+证明"的核心模式，但人机分工不同。
 > Miri 和 Kani 处于"找反例"阵营，而 a-mir-formality 是唯一不验证具体程序、而是验证编译器本身的元工具。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ---
 
@@ -638,7 +638,7 @@ flowchart TD
 > **认知功能**: 此决策树将选型矩阵转化为**交互式路径剪枝**，通过 "unsafe → 功能正确 → 团队背景" 三个问题在 30 秒内收敛到最优工具。
 > **使用建议**: 按图从左到右回答，不要跳过 "团队背景" 评估——它是项目成败的最强预测因子。
 > **关键洞察**: 多数 Rust 项目实际落在最左侧分支（Miri 或无需验证），决策树的最大价值恰恰是明确告诉你"何时不需要形式化验证"。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -816,7 +816,7 @@ Kani 验证范围（有界模型检测的固有特性）:
 > Kani 是"工程师的验证工具"——它的学习曲线比 Prusti/Verus 平缓得多，因为用户只需写 `#[kani::proof]` 和 `kani::assume()`，无需形式化合约语言。
 > 但代价是验证的**有界性**——Kani 不证明"对所有 n"，而是证明"对所有 n < 100"。
 > 这与 Rust 的"零成本抽象（Zero-Cost Abstraction）"哲学形成有趣对比：Kani 是"低成本验证"，用有界性换取易用性。
-> [来源: 💡 原创分析] · [AWS Kani Blog] ✅
+> [💡 原创分析](../../00_meta/00_framework/methodology.md) · [AWS Kani Blog] ✅
 
 ### 7.3 Miri：基于 Tree Borrows 的动态 UB 检测
 
@@ -1016,7 +1016,7 @@ Rust 的 Copy 类型        → 普通复制（非线性）
 
 ### 7.6 验证工具对比矩阵（深度版）
 
-> **[来源: 💡 原创分析]** · 综合上述所有来源 ✅
+> **[💡 原创分析](../../00_meta/00_framework/methodology.md)** · 综合上述所有来源 ✅
 
 | 维度 | Miri | Prusti | Kani | Verus | Creusot | Aeneas | RefinedRust | Rustlantis |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|
@@ -1190,7 +1190,7 @@ EEPR 是一阶逻辑的一个可判定片段，形式为 $\exists x \forall y . 
 
 ## 八、验证边界：编译错误示例
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]** 验证工具的目标是捕获运行时错误；但 Rust 编译器本身已能在编译期拒绝大量不安全模式。
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]** 验证工具的目标是捕获运行时错误；但 Rust 编译器本身已能在编译期拒绝大量不安全模式。
 
 ### 编译错误 1：Safe Rust 中直接解引用裸指针
 
@@ -1276,8 +1276,8 @@ fn fixed() {
 ```
 
 > **验证映射**: 闭包（Closures）捕获分析是 Rust 类型系统的复杂部分。形式化工具（如 RustBelt 的 closure 语义）需要精确建模环境捕获（by-reference / by-value）与借用规则的一致性（Coherence）。编译器的拒绝对应于资源谓词 `own(τ)` 与 `shr(κ, ℓ)` 的不一致分配。
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/), [Wikipedia: Model Checking](https://en.wikipedia.org/wiki/Model_checking), [Wikipedia: Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]; 2026-05-21 补充 Wikipedia 概念对齐、a-mir-formality 工具链、2026 工具状态更新 [来源: Formal Methods Deep Dive]; 2026-05-22 网络权威内容对齐：Miri POPL 2026、KVerus arXiv 2026、AutoVerus OOPSLA 2025、Vest USENIX Security 2025、Rustlantis OOPSLA 2024、Kani+VeriFast 联合 std 验证 [来源: Web Authority Alignment Sprint]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/), [Wikipedia: Model Checking](https://en.wikipedia.org/wiki/Model_checking), [Wikipedia: Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md); 2026-05-21 补充 Wikipedia 概念对齐、a-mir-formality 工具链、2026 工具状态更新 [来源: Formal Methods Deep Dive]; 2026-05-22 网络权威内容对齐：Miri POPL 2026、KVerus arXiv 2026、AutoVerus OOPSLA 2025、Vest USENIX Security 2025、Rustlantis OOPSLA 2024、Kani+VeriFast 联合 std 验证 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

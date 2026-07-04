@@ -438,13 +438,13 @@ graph TD
 >
 
 | 来源 | 可信度 | 说明 |
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
-| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/index.html) | ✅ 一级 | RFC 文档 |
 | [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
 
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 |:---|:---:|:---|
@@ -464,9 +464,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -534,7 +534,7 @@ fn fixed() {
 > 若已是 `Owned`，则返回可变引用（Mutable Reference）。
 > `Cow` 的核心价值是延迟克隆——只在真正需要修改时才分配内存。
 > 这与 C++ 的 `copy-on-write` string 实现类似，但 Rust 的 `Cow` 是显式的、类型安全的。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.2 边界测试：`Borrow` trait 与 `AsRef` 的误用（编译错误）
 
@@ -563,7 +563,7 @@ fn takes_ref<R: AsRef<[i32]>>(r: R) {
 > `AsRef<T>` 只要求进行引用（Reference）转换，无哈希/相等性约束。
 > `String` 实现 `Borrow<str>` 和 `AsRef<str>`，但 `Vec<T>` 只实现 `AsRef<[T]>`，不实现 `Borrow<[T]>`（因 `Vec` 的容量字段不影响相等性）。
 > 混淆两者可能导致 `HashMap::get` 失败。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：`Cow` 的 `ToOwned` 约束（编译错误）
 

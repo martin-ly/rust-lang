@@ -16,7 +16,7 @@
 > **跨层映射**: L4↔L1 形式化 ↔ 直觉 双射 | L4→L3 Unsafe 边界 ↔ 公理扩展
 > **定理链编号**: T-100 借用（Borrowing）检查可判定性 → T-101 所有权（Ownership）类型 soundness → T-102 内存安全（Memory Safety）完备性
 > **ROD 迁移备注**: 本文档是所有权（Ownership）形式化的主入口。关于借用（Borrowing）检查的**可判定性**与**复杂度**，详见 [Borrow Checking Decidability](28_borrow_checking_decidability.md)；关于 Aeneas 符号化语义对借用规则的自动化证明，详见 [Aeneas Symbolic Semantics](../03_operational_semantics/30_aeneas_symbolic_semantics.md)。
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ## 零、认知路径（Cognitive Path）
 
@@ -302,7 +302,7 @@ graph TD
     F --> F5[证明边界]
 ```
 
-> **认知功能**: 此思维导图将所有权形式化的庞大知识体系映射为**五维认知框架**。功能定位：帮助学习者在进入具体定理前建立全局索引。使用建议：将本图作为"地图"，遇到陌生概念时回查对应分支。关键洞察：**COR 提供语法、RustBelt 提供语义、分离逻辑提供推理基础**——三者构成从"是什么"到"为什么正确"的完整链条。[来源: 💡 原创分析]
+> **认知功能**: 此思维导图将所有权形式化的庞大知识体系映射为**五维认知框架**。功能定位：帮助学习者在进入具体定理前建立全局索引。使用建议：将本图作为"地图"，遇到陌生概念时回查对应分支。关键洞察：**COR 提供语法、RustBelt 提供语义、分离逻辑提供推理基础**——三者构成从"是什么"到"为什么正确"的完整链条。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -359,7 +359,7 @@ graph TD
     style A1 fill:#9f6
 ```
 
-> **认知功能**: 此决策树揭示**形式化证明的精确边界**。功能定位：纠正常见误解——通过编译不等于"程序正确"。使用建议：在论证 Rust 安全性时，先明确"安全"的层次，避免将内存安全（Memory Safety）混同于功能正确。关键洞察：**形式化是内存安全的充分条件，但非程序正确的充分条件；Rust 的设计哲学是"证明你该证明的"，而非"证明一切"**。[来源: 💡 原创分析]
+> **认知功能**: 此决策树揭示**形式化证明的精确边界**。功能定位：纠正常见误解——通过编译不等于"程序正确"。使用建议：在论证 Rust 安全性时，先明确"安全"的层次，避免将内存安全（Memory Safety）混同于功能正确。关键洞察：**形式化是内存安全的充分条件，但非程序正确的充分条件；Rust 的设计哲学是"证明你该证明的"，而非"证明一切"**。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **分析**: 形式化所有权是**内存安全（Memory Safety）**的充分条件，而非**程序正确**的充分条件。逻辑正确性需要额外的功能规格（如 Hoare 三元组、 refinement types），通常由 Creusot/Verus/Dafny 等工具处理，而非所有权形式化本身。
 
 #### 决策树 2: "线性类型和 Rust 所有权完全等价"
@@ -380,7 +380,7 @@ graph TD
     style A3 fill:#ff9
 ```
 
-> **认知功能**: 此决策树对比**线性类型与 Rust 所有权的本质差异**。功能定位：澄清 Rust 不是严格线性类型，而是仿射类型系统（Type System）。使用建议：在阅读线性逻辑文献时，注意 Rust 额外引入了生命周期（Lifetimes）和 unsafe 封装两个维度。关键洞察：**仿射弱化（允许丢弃）+ 区域约束 + Iris 高阶协议 = Rust 超越经典线性类型的三要素**。[来源: 💡 原创分析]
+> **认知功能**: 此决策树对比**线性类型与 Rust 所有权的本质差异**。功能定位：澄清 Rust 不是严格线性类型，而是仿射类型系统（Type System）。使用建议：在阅读线性逻辑文献时，注意 Rust 额外引入了生命周期（Lifetimes）和 unsafe 封装两个维度。关键洞察：**仿射弱化（允许丢弃）+ 区域约束 + Iris 高阶协议 = Rust 超越经典线性类型的三要素**。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **分析**: Rust 是**仿射类型（Affine）**而非严格线性类型：值可以被丢弃（weakening），但不能被复制（contraction）。此外，Rust 的**生命周期（Lifetimes）**和 **unsafe** 封装都是传统线性类型系统（Type System）不具备的维度。RustBelt 的 Iris 模型正是为了弥合这一差距而设计。 [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]
 
 #### 决策树 3: "权限系统可自动化验证所有属性"
@@ -402,7 +402,7 @@ graph TD
     style A5 fill:#ff9
 ```
 
-> **认知功能**: 此决策树界定**权限系统自动化能力的边界**。功能定位：理解编译器能自动推导什么、不能推导什么。使用建议：将借用检查器视为"内存安全自动机"，功能正确性仍需 Creusot/Verus 等外部工具。关键洞察：**自动推导擅长"禁止什么"（内存错误），人工规格擅长"要求什么"（功能意图）——二者互补而非替代**。[来源: 💡 原创分析]
+> **认知功能**: 此决策树界定**权限系统自动化能力的边界**。功能定位：理解编译器能自动推导什么、不能推导什么。使用建议：将借用检查器视为"内存安全自动机"，功能正确性仍需 Creusot/Verus 等外部工具。关键洞察：**自动推导擅长"禁止什么"（内存错误），人工规格擅长"要求什么"（功能意图）——二者互补而非替代**。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **分析**: 权限系统的自动化优势集中在**推导（inference）**层面——编译器自动推导生命周期（Lifetimes）约束和借用合法性。但对于**功能规格**和**活性属性**，仍需人工提供不变量。这是自动化验证的根本限制：意图无法从代码中完全反推。
 
 ### 5.3 形式化模型与实现的差距
@@ -1067,7 +1067,7 @@ Tree Borrows 的状态空间 Σ = (M, P, T) 其中：
     - 优化假设：只要没有实际写冲突，多个潜在别名可暂时共存
 ```
 
-> **来源**: [Pichon-Pharabod & Dreyer 2024 §4 — Delayed activation and raw pointers] · [Rust Reference: &raw operator (1.82)](https://doc.rust-lang.org/reference/) · [Miri src/borrow_tracker/tree_borrows/tree.rs]
+> **来源**: [Pichon-Pharabod & Dreyer 2024 §4 — Delayed activation and raw pointers] · [Rust Reference: &raw operator (1.82)](https://doc.rust-lang.org/reference/introduction.html) · [Miri src/borrow_tracker/tree_borrows/tree.rs]
 
 #### Permissions 转换的完整状态机
 
@@ -1173,8 +1173,8 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 > 演进方向见 [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化方法工具链）与 [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)（语言演进路线图）。
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

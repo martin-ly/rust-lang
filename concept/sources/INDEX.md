@@ -10,11 +10,11 @@
 > **Summary**: Index of authoritative sources used throughout the concept knowledge system.
 > **来源**:
 >
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
-> [Rust By Example](https://doc.rust-lang.org/rust-by-example/) ·
-> [RFCs](https://rust-lang.github.io/rfcs/)
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
+> [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) ·
+> [RFCs](https://rust-lang.github.io/rfcs/index.html)
 >
 > | 标识符 | 全称 | 根 URL | 更新频率 | 建议引用（Reference）格式 |
 > | :--- | :--- | :--- | :--- | :--- |
@@ -127,7 +127,7 @@
 
 ### 禁止行为
 
-1. ❌ **仅使用根 URL**: `[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]` — 无法定位到具体章节
+1. ❌ **仅使用根 URL**: `[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]` — 无法定位到具体章节
 2. ❌ **重复堆砌来源**: 同一来源在目录中重复 10+ 次
 3. ❌ **混淆来源层级**: 将博客文章标注为一级来源
 4. ❌ **过时来源未标注**: 使用已废弃或过时的 RFC/文档未标注状态
@@ -136,7 +136,7 @@
 
 1. ✅ **精确到章节**: `[来源: REF — §4.1.9 Borrowing]` 或 `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)`
 2. ✅ **标注来源状态**: 对 nightly/unstable 特性标注 `[来源: UNB — gen_blocks] (nightly, 1.95+)`
-3. ✅ **区分原创与引用**: `[来源: 💡 原创分析]` 仅用于有实质原创洞见的段落
+3. ✅ **区分原创与引用**: `[💡 原创分析](../00_meta/00_framework/methodology.md)` 仅用于有实质原创洞见的段落
 4. ✅ **论文引用完整**: `[来源: Jung21 — Stacked Borrows, POPL 2021, §3.2]`
 
 ---

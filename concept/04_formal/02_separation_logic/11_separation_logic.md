@@ -12,7 +12,7 @@
 > **前置概念**: [Linear Logic](../01_ownership_logic/01_linear_logic.md) · [Ownership Formalization](../01_ownership_logic/03_ownership_formal.md) · [RustBelt](04_rustbelt.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 > **后置概念**: [Verification Toolchain](../04_model_checking/05_verification_toolchain.md) · [Type Theory](../00_type_theory/02_type_theory.md)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Iris Project](https://iris-project.org/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**:
@@ -484,9 +484,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -539,7 +539,7 @@ fn fixed() {
 > 分离逻辑的核心是 **frame rule**：若 `P` 描述某部分内存的状态，则可在保持 `P` 不变的情况下，对内存的其他部分进行推理。
 > `split_at_mut` 将数组分割为两个不重叠的可变切片（Slice），编译器验证分割点不会导致重叠借用（Borrowing）。
 > 这是 Rust 借用（Borrowing）检查器对分离逻辑 *-conjunction（`P ∗ Q`）的直接实现——两个不重叠的可变引用（Mutable Reference）可以同时存在，因为它们操作分离的内存区域。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.2 边界测试：`Box::leak` 与资源永久转移（运行时行为）
 
@@ -563,7 +563,7 @@ fn fixed() {
 > `Box::leak` 将堆内存转换为 `&'static` 引用（Reference），放弃释放义务。
 > 在分离逻辑中，`Box<T>` 对应于 `own(τ, ℓ)`（对 ℓ 的独占所有权），`Box::leak` 将 `own(τ, ℓ)` 转换为 `shr(static, ℓ)`（静态共享权限）。
 > 一旦转换，资源永远不会被释放——这是显式的资源泄漏，在 Rust 中被视为安全操作（因为不破坏内存安全（Memory Safety）），但可能违反系统资源约束。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：分离逻辑中的帧规则违反（编译错误）
 
@@ -619,7 +619,7 @@ fn main() {
 > 分离逻辑视角：`GhostToken` 是权限（capability），`GhostCell` 是资源，借用（Borrowing）规则对应于权限的独占转移。
 > 这是 Rust 类型系统（Type System）表达力的高级展示：将运行时（Runtime）检查迁移到编译期，同时保持零成本。
 > [来源: [GhostCell Paper](https://plv.mpi-sws.org/rustbelt/ghostcell/)] ·
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.5 边界测试：RustBelt 的 `own` 与 `shr` 断言的编码（编译错误）
 

@@ -89,7 +89,7 @@ Mutex<T>: inner: sys::Mutex, poison: Cell<bool>, data: UnsafeCell<T>
 - `Arc` 像是一个“共享图书馆借阅卡”：多个读者共享同一本书，只有最后一个读者归还时才销毁。
 - `Mutex` 像是一个“单人厕所”：任何时候只有一个人能进去，其他人必须排队。
 
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -379,7 +379,7 @@ graph TD
     Q3 -->|否| A4["先学习 Rustonomicon 和 Miri"]
 ```
 
-> **学习资源**: 若对 Rust 内存模型尚不熟悉，建议先阅读 [The Rustonomicon](https://doc.rust-lang.org/nomicon/) 并使用 [Miri](https://github.com/rust-lang/miri) 验证 unsafe 代码。
+> **学习资源**: 若对 Rust 内存模型尚不熟悉，建议先阅读 [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) 并使用 [Miri](https://github.com/rust-lang/miri) 验证 unsafe 代码。
 
 ### 7.2 与其他概念的辨析
 
@@ -473,6 +473,6 @@ D. `Ordering::SeqCst`
 
 ---
 
-> **权威来源**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/), [The Rust Reference](https://doc.rust-lang.org/reference/), [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
-> **权威来源对齐变更日志**: 2026-07-04 创建 来源: [Rustonomicon Vec/Arc/Mutex 章节对齐](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html), [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
+> **权威来源对齐变更日志**: 2026-07-04 创建 来源: [Rustonomicon Vec/Arc/Mutex 章节对齐](https://doc.rust-lang.org/nomicon/index.html)
 > **状态**: ✅ 权威来源对齐完成

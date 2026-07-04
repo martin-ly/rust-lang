@@ -905,7 +905,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 
@@ -923,7 +923,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 > **来源: [Wikipedia - Subtyping](https://en.wikipedia.org/wiki/Subtyping)**
 > **来源: [Rust Reference - Variance](https://doc.rust-lang.org/reference/)**
 > **来源: [Rustonomicon - Subtyping and Variance](https://doc.rust-lang.org/nomicon/)**
-> **[来源: ACM - Subtyping Theory]**
+> **[ACM - Subtyping Theory](https://dl.acm.org/)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

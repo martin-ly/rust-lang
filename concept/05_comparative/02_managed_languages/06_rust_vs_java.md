@@ -15,7 +15,7 @@
 
 > **来源**: [The Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [JVM Specification](https://docs.oracle.com/javase/specs/jvms/se21/html/index.html) ·
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) ·
 > [Java Memory Model (JMM)](https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
@@ -270,10 +270,10 @@ graph TD
 ```
 
 > **认知功能**: 此决策树评估 Rust 替代 Java 的可行性。核心判断标准是**生态依赖**和**团队能力**。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **使用建议**: 新项目在系统层优先 Rust；遗留系统或强依赖 Java 生态的场景保持 Java；微服务层可渐进迁移。
 > **关键洞察**: 语言选择是**社会-技术决策**——技术优劣只是因素之一，团队技能、生态依赖、维护成本同样重要。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -345,7 +345,7 @@ Java → Rust 的渐进迁移策略:
 | [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html) | ✅ 一级 | Java 语言规范 |
 | [JVM Specification](https://docs.oracle.com/javase/specs/jvms/se21/html/index.html) | ✅ 一级 | JVM 规范 |
 | [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | ✅ 一级 | Rust 所有权（Ownership） |
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | Rust 语言参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | Rust 语言参考 |
 | [Stack Overflow Developer Survey](https://survey.stackoverflow.co/) | 🔍 三级 | 行业采用数据 |
 | [Java Memory Model](https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html) | ✅ 一级 | JMM 规范 |
 | [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) | 🔍 三级 | Web 框架性能对比 |
@@ -363,7 +363,7 @@ Java → Rust 的渐进迁移策略:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 

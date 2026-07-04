@@ -30,7 +30,7 @@
 > [Google Comprehensive Rust — Bare Metal](https://google.github.io/comprehensive-rust/bare-metal.html) ·
 > [AOSP Rust](https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html) ·
 > [Chromium Rust](https://chromium.googlesource.com/chromium/src/+/main/docs/rust.md) ·
-> [The Embedded Rust Book](https://docs.rust-embedded.org/book/)
+> [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html)
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 
@@ -304,7 +304,7 @@ unsafe fn uart_putc(c: u8) {
 | [Google Comprehensive Rust — Bare Metal](https://google.github.io/comprehensive-rust/bare-metal.html) | no_std、PAC、HAL、UART 驱动 |
 | [AOSP Rust Documentation](https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html) | 官方 AOSP Rust 指南 |
 | [Chromium Rust Docs](https://chromium.googlesource.com/chromium/src/+/main/docs/rust.md) | Chromium Rust 策略与构建 |
-| [The Embedded Rust Book](https://docs.rust-embedded.org/book/) | 通用嵌入式 Rust |
+| [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html) | 通用嵌入式 Rust |
 | [rust-embedded/awesome-embedded-rust](https://github.com/rust-embedded/awesome-embedded-rust) | 嵌入式 crate 生态 |
 
 ---

@@ -80,7 +80,7 @@
 > **变更日志**:
 >
 > - v1.2 (2026-06-22): 更新 Kani 到 0.66，补充 quantifiers、autoharness、loop contracts 示例
-> - v1.1 (2026-05-26): 补充 Generic Refinement Types (POPL 2025) — Flux 泛型（Generics）精化类型扩展 [来源: Web Authority Alignment Sprint]
+> - v1.1 (2026-05-26): 补充 Generic Refinement Types (POPL 2025) — Flux 泛型（Generics）精化类型扩展 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
 > - v1.0 (2026-05-26): 初始创建——覆盖模型检验（Kani/MIRI）、演绎验证（Prusti/Creusot/Verus）、精化类型（Flux）、前沿框架（RefinedRust/RustBelt）、选型决策矩阵
 
 ---
@@ -847,7 +847,7 @@ fn caller() {
 - [嵌入式系统](../05_systems_and_embedded/22_embedded_systems.md) — `#![no_std]`、资源受限验证
 - [版本跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) — Rust 语言演进对验证工具的影响
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **过渡**: Formal Verification Tools（形式化验证工具生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Formal Verification Tools（形式化验证工具生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

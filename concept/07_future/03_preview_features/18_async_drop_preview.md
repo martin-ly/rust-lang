@@ -467,9 +467,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -554,7 +554,7 @@ async fn some_condition() -> bool { true }
 > 3) 与 `pin` 的交互——异步（Async） drop 要求值被固定（pinned）。
 > 这些约束使 `async drop` 的实现极具挑战性，也是该特性迟迟未稳定的主要原因。
 > [来源: [Async Drop Initiative](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/async_drop.html)] ·
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：async drop 与 `std::mem::forget` 的交互（内存泄漏）
 
@@ -625,7 +625,7 @@ fn main() {
 > 3) `require-async-context`（`AsyncDrop` 只能在 async 上下文中调用）。
 > `async drop` 的实现极具挑战性，是 Rust 语言演进中最复杂的特性之一。
 > [来源: [Async Drop Initiative](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/async_drop.html)] ·
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：async drop 与同步 Drop 的语义冲突（编译错误/设计问题）
 

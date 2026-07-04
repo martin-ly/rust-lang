@@ -409,7 +409,7 @@ graph TD
 > **认知功能**: 此决策树评估是否使用 Serde。核心判断标准是**性能需求**和**格式灵活性需求**。
 > **使用建议**: 绝大多数场景使用 Serde；仅在极致性能（如网络协议栈、零拷贝解析器）或特殊二进制格式时考虑手写。
 > **关键洞察**: Serde 的**真正价值**不是序列化本身，而是**类型系统（Type System）与数据格式的桥梁**——编译期保证类型安全，运行时处理任意格式。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -495,8 +495,8 @@ graph TD
 >
 
 | 来源 | 可信度 | 说明 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
 
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 |:---|:---:|:---|
@@ -518,7 +518,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
@@ -801,10 +801,10 @@ fn main() {
 > 这与 JSON Schema 的 `oneOf` / `discriminator` 或 Protocol Buffers 的 `oneof` 类似——serde 提供灵活的枚举序列化策略，但需前后端约定一致。
 > [来源: [serde](https://serde.rs/enum-representations.html)] ·
 > [来源: [serde_json](https://docs.rs/serde_json/)]
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rust Standard Library](https://doc.rust-lang.org/std/) ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

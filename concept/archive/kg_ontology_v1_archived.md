@@ -11,7 +11,7 @@
 > **对齐来源**: [W3C RDF/OWL 标准] · [Stanford CS520 — 知识图谱定义] · [Collins & Quillian (1969) — 层次语义网络] · [Bordes et al. (2013) — TransE 知识图谱嵌入]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 > **来源**: [W3C — *RDF 1.1 Concepts and Abstract Syntax*]

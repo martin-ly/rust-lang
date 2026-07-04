@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Cargo — External Tools](https://doc.rust-lang.org/cargo/reference/external-tools.html) · [Cargo — Commands](https://doc.rust-lang.org/cargo/commands/cargo.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Cargo — External Tools](https://doc.rust-lang.org/cargo/reference/external-tools.html) · [Cargo — Commands](https://doc.rust-lang.org/cargo/commands/cargo.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Cargo Book — cargo metadata](https://doc.rust-lang.org/cargo/commands/cargo-metadata.html) ·
 > [Cargo Book — Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html)
 
@@ -241,7 +241,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/)
+> **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 / Cargo 外部工具文档
 
 **文档版本**: 1.0

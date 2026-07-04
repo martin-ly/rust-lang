@@ -7,7 +7,7 @@
 > **分级**: [A]
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Book、cargo test、cargo-tarpaulin 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Book、cargo test、cargo-tarpaulin 官方文档来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 # 代码覆盖率测试指南 {#代码覆盖率测试指南}
 
@@ -304,8 +304,8 @@ A: 这是已知问题。尝试：
 
 > **来源: [Wikipedia - Code Coverage](https://en.wikipedia.org/wiki/Code_Coverage)**
 > **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
-> **[来源: ACM - Test Coverage Metrics]**
-> **[来源: IEEE - Software Quality Standards]**
+> **[ACM - Test Coverage Metrics](https://dl.acm.org/)**
+> **[IEEE - Software Quality Standards](https://ieeexplore.ieee.org/)**
 > **[来源: Rust Book - Testing]**
 > **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
 > **[来源: Martin Fowler - Test Coverage]**

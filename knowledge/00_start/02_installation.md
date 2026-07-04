@@ -8,7 +8,7 @@
 > **预计时间**: 15-30 分钟
 > **权威来源**: [Rust 官方安装指南](https://www.rust-lang.org/tools/install), [rustup 文档](https://rust-lang.github.io/rustup/), [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-01-installation.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 rustup 官方文档来源标注、工具链管理权威引用 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 rustup 官方文档来源标注、工具链管理权威引用 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
@@ -233,7 +233,7 @@ rustup default stable  # 切回稳定版
 
 - [Rust 官方安装指南](https://www.rust-lang.org/tools/install) [来源: Rust Team / 2025]
 - [rustup 文档](https://rust-lang.github.io/rustup/) [来源: Rust Core Team / 2025]
-- [Cargo 配置](https://doc.rust-lang.org/cargo/reference/config.html) [来源: Rust Team / Cargo Book 2025]
+- [Cargo 配置](https://doc.rust-lang.org/cargo/reference/config.html) [Rust Team / Cargo Book 2025](https://doc.rust-lang.org/cargo/index.html)
 
 ---
 
@@ -241,8 +241,8 @@ rustup default stable  # 切回稳定版
 
 - [Rust 官方安装指南](https://www.rust-lang.org/tools/install) [来源: Rust Team / 2025]
 - [rustup 文档](https://rust-lang.github.io/rustup/) [来源: Rust Core Team / 2025]
-- [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-01-installation.html) [来源: Rust Team / TRPL 2025]
-- [Cargo 配置](https://doc.rust-lang.org/cargo/reference/config.html) [来源: Rust Team / Cargo Book 2025]
+- [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-01-installation.html) [Rust Team / TRPL 2025](https://doc.rust-lang.org/book/title-page.html)
+- [Cargo 配置](https://doc.rust-lang.org/cargo/reference/config.html) [Rust Team / Cargo Book 2025](https://doc.rust-lang.org/cargo/index.html)
 
 ---
 

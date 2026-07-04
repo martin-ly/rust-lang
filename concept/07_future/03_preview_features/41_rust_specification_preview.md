@@ -23,7 +23,7 @@
 
 > **来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [Ferrocene Specification](https://spec.ferrocene.dev/) ·
 > [Rust Language Specification RFC](https://github.com/rust-lang/rfcs/pull/3355) ·
 > [Rust Compiler Team — Specification](https://github.com/rust-lang/compiler-team/issues/)
@@ -312,7 +312,7 @@ graph TD
 > **认知功能**: 此决策树评估编写完整形式化规范的**时机和方式**。核心判断标准是语言稳定性、资源可用性和需求紧迫性。
 > **使用建议**: 当前阶段（2026）应采取**渐进策略**——先完善 L1/L2（Reference + 技术规范），在语言更稳定后再推进 L3/L4（形式化/可执行规约）。
 > **关键洞察**: Ferrocene 的先行探索证明了"渐进可行"——从认证需要的子集开始，逐步扩展，而非等待"一次性完整规范"。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -368,7 +368,7 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 当前权威参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 当前权威参考 |
 | [Rust RFC 3355](https://github.com/rust-lang/rfcs/pull/3355) | ✅ 一级 | 语言规范 RFC |
 | [Ferrocene Specification](https://spec.ferrocene.dev/) | ✅ 一级 | 先行技术规范 |
 | [Rust Project Goals 2026 — Experimental Language Specification](https://rust-lang.github.io/rust-project-goals/2026/experimental-language-specification.html) | ✅ 一级 | 官方项目目标 |
@@ -393,7 +393,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 

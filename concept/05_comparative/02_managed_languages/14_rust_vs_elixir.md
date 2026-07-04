@@ -607,9 +607,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 12]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -710,7 +710,7 @@ fn fixed() {
 }
 ```
 
-> **Elixir 对比**: Elixir 的进程（Actor 模型）通过邮箱（mailbox）接收消息，每个进程有独立邮箱，无共享状态。Rust 的 `mpsc::channel` 是多生产者单消费者——多个发送者，一个接收者。若需广播，使用 `tokio::sync::broadcast` 或 `crossbeam::channel`。Elixir 的进程隔离在虚拟机（BEAM）层面实现，Rust 的 channel 在类型系统（Type System）层面保证线程安全。两者都消除了数据竞争，但实现层级不同。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **Elixir 对比**: Elixir 的进程（Actor 模型）通过邮箱（mailbox）接收消息，每个进程有独立邮箱，无共享状态。Rust 的 `mpsc::channel` 是多生产者单消费者——多个发送者，一个接收者。若需广播，使用 `tokio::sync::broadcast` 或 `crossbeam::channel`。Elixir 的进程隔离在虚拟机（BEAM）层面实现，Rust 的 channel 在类型系统（Type System）层面保证线程安全。两者都消除了数据竞争，但实现层级不同。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.5 边界测试：Elixir 的进程隔离与 Rust 的共享内存并发（编译错误）
 

@@ -1275,7 +1275,7 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -1289,8 +1289,8 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [Wikipedia - Future/Promise](https://en.wikipedia.org/wiki/Future/Promise)**
 > **来源: [Wikipedia - Coroutine](https://en.wikipedia.org/wiki/Coroutine)**
-> **[来源: IEEE - Concurrent Language Constructs]**
-> **[来源: ACM - Async Programming Patterns]**
+> **[IEEE - Concurrent Language Constructs](https://ieeexplore.ieee.org/)**
+> **[ACM - Async Programming Patterns](https://dl.acm.org/)**
 > **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 > **来源: [TRPL Ch. 17 - Async and Await](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
 > **来源: [Rustonomicon - Async](https://doc.rust-lang.org/std/pin/struct.Pin.html)**

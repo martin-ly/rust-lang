@@ -1,7 +1,7 @@
 > **Summary**:
 >
 > Ecosystem Layer Index Legacy. Core Rust concept.
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [crates.io](https://crates.io/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [crates.io](https://crates.io/) · [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
@@ -79,7 +79,7 @@
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 

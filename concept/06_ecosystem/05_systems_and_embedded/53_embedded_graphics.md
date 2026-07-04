@@ -89,7 +89,7 @@
 ```
 
 > **架构洞察**: **嵌入式显示系统的核心是 MCU + 显示控制器 + 帧缓冲的三元组**——帧缓冲的大小直接决定可支持的分辨率和色深。
-> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)]
+> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html)]
 > **关键约束**: MCU 的 SRAM 通常仅有 128KB~1MB，一个 480×320×16bit 的帧缓冲需要约 300KB，已接近许多 MCU 的极限。
 > [来源: [STM32 Reference Manual](https://www.st.com/resource/en/reference_manual/rm0090-stm32f405415-stm32f407417-stm32f427437-and-stm32f429439-advanced-armbased-32bit-mcus-stmicroelectronics.pdf)]
 > [来源: [ILI9341 Datasheet](https://cdn-shop.adafruit.com/datasheets/ILI9341.pdf)] · [来源: [ST7789 Datasheet](https://www.displayfuture.com/Display/datasheet/controller/ST7789.pdf)]
@@ -519,7 +519,7 @@ DMA (Direct Memory Access) 在图形中的应用:
 > [来源: [STM32 DMA Application Note](https://www.st.com/resource/en/application_note/an4031-using-the-stm32f2-stm32f4-and-stm32f7-series-dma-controllers-stmicroelectronics.pdf)]
 > [来源: [DMA Cache Coherency](https://developer.arm.com/documentation/dai0298/a/)]
 > **安全洞察**: DMA 缓冲区必须通过 `static mut` 或 `cortex-m::singleton!` 分配，且需要与缓存行对齐（通常 32 字节）以避免缓存一致性（Coherence）问题。这要求 `unsafe` 或专门的 safe 抽象。
-> [来源: [Rust Embedded Book — DMA](https://docs.rust-embedded.org/book/)]
+> [来源: [Rust Embedded Book — DMA](https://docs.rust-embedded.org/book/index.html)]
 > [来源: [cortex-m Singleton](https://docs.rs/cortex-m/latest/cortex_m/macro.singleton.html)]
 > **async 洞察**: embassy 框架将 DMA 传输包装为 `Future`，允许在 `async fn` 中 `await` DMA 完成——这是 Rust 异步模型在嵌入式的优雅应用。
 > [来源: [embassy Documentation](https://embassy.dev/)]
@@ -701,9 +701,9 @@ graph TD
 ```
 
 > **反命题洞察 1**: **"嵌入式 GUI 需要 OS"是错误命题**——`no_std` + `embedded-graphics` 或 `lvgl-rs` 已能在 64KB Flash 的 Cortex-M0+ 上驱动完整 UI。
-> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)]
+> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html)]
 > **反命题洞察 2**: **"Rust 太慢"是错误命题**——零成本抽象（Zero-Cost Abstraction）使迭代器（Iterator）、闭包（Closures）、泛型（Generics）在优化后等价于手写 C；DMA 卸载数据传输后，CPU 只需处理逻辑。
-> [来源: [Rust Reference — Zero Cost Abstractions](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference — Zero Cost Abstractions](https://doc.rust-lang.org/reference/introduction.html)]
 > **反命题洞察 3**: **"嵌入式 UI 千篇一律"是错误命题**——从 `embedded-graphics` 的像素级控制到 Slint 的声明式主题，Rust 生态提供从底层到高层的全栈定制能力。
 > [来源: [Slint Theming](https://docs.slint.dev/latest/docs/slint/reference/std-widgets/style/)]
 
@@ -739,7 +739,7 @@ graph TD
 ```
 
 > **边界要点**: 嵌入式图形的边界与**内存**、**计算**、**体积**、**实时性**和**生态覆盖度**相关。
-> [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
+> [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)]
 > [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 > **内存边界**: 最严苛的边界往往是内存——一个 800×480×24bpp 的帧缓冲需要 1.15MB，超过绝大多数 MCU 内部 SRAM，必须采用分块渲染或外部存储器。
 > [来源: [LVGL Porting — Display](https://docs.lvgl.io/8.3/porting/display.html)]
@@ -747,7 +747,7 @@ graph TD
 
 ---
 
-> [来源: [Rust Embedded Troubleshooting](https://docs.rust-embedded.org/book/)]
+> [来源: [Rust Embedded Troubleshooting](https://docs.rust-embedded.org/book/index.html)]
 
 ## 八、常见陷阱
 
@@ -802,7 +802,7 @@ graph TD
 > [来源: [embedded-graphics Examples](https://github.com/embedded-graphics/examples)]
 > [来源: [Rust Embedded Patterns](https://docs.rust-embedded.org/book/peripherals/index.html)]
 > **Rust 优势**: Rust 的类型系统（Type System）可防止帧缓冲越界（通过 safe 抽象），但 `unsafe` 直接指针操作仍需谨慎。`embedded-graphics` 的 `DrawTarget` 自动裁剪是安全的默认选择。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > [来源: [Rust Reference — Unsafe](https://doc.rust-lang.org/reference/unsafe-blocks.html)]
 
 ---
@@ -818,7 +818,7 @@ graph TD
 | [Slint UI](https://slint-ui.com/) | ✅ 一级 | 声明式跨平台 UI 框架 |
 | [egui](https://docs.rs/egui/latest/) | ✅ 一级 | 即时模式 Rust GUI |
 | [embedded-hal](https://docs.rs/embedded-hal/latest/) | ✅ 一级 | 硬件抽象层标准 |
-| [The Embedded Rust Book](https://docs.rust-embedded.org/book/) | ✅ 一级 | 官方嵌入式 Rust 指南 |
+| [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html) | ✅ 一级 | 官方嵌入式 Rust 指南 |
 | [ttf-parser](https://docs.rs/ttf-parser/latest/) | ✅ 二级 | 纯 Rust TrueType 解析器 |
 | [embassy](https://embassy.dev/) | ✅ 二级 | 嵌入式 async 框架 |
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 二级 | 性能优化指南 |
@@ -828,10 +828,10 @@ graph TD
 
 ---
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
-> **权威来源对齐变更日志**: 2026-05-26 创建 [来源: Authority Source Sprint Batch 12]
+> **权威来源对齐变更日志**: 2026-05-26 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -840,7 +840,7 @@ graph TD
 
 ---
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ## 相关概念文件
 
@@ -851,7 +851,7 @@ graph TD
 
 ---
 
-> [来源: [Rustnomicon — Undefined Behavior](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustnomicon — Undefined Behavior](https://doc.rust-lang.org/nomicon/index.html)]
 
 ## 十、边界测试：嵌入式图形的编译错误与运行时风险
 
@@ -887,7 +887,7 @@ fn start_dma_transfer() {
 }
 ```
 
-> **修正**: ARM Cortex-M7 等核心带有数据缓存（D-Cache），DMA 直接访问物理 SRAM 而不经过缓存。**如果帧缓冲在 cacheable 区域，CPU 写入后必须显式 `clean_dcache` 或配置 MPU 将帧缓冲标记为 `non-cacheable`**。缓冲区首地址还应 32 字节对齐以匹配缓存行大小。这是嵌入式图形中最隐蔽的 bug 之一——代码逻辑完全正确，但显示结果随机错误。Rust 的 `cortex-m` crate 提供 `SCB::clean_dcache_by_address`。这与 Linux 的 `dma_alloc_coherent` 类似，但在裸机中需手动管理缓存一致性（Coherence）。[来源: [ARM Cortex-M7 TRM](https://developer.arm.com/documentation/100240/latest/)] · [来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/)] · [来源: [cortex-m Crate](https://docs.rs/cortex-m/latest/cortex_m/peripheral/struct.SCB.html)] · [来源: [STM32 HAL DMA](https://github.com/stm32-rs/stm32f4xx-hal)]
+> **修正**: ARM Cortex-M7 等核心带有数据缓存（D-Cache），DMA 直接访问物理 SRAM 而不经过缓存。**如果帧缓冲在 cacheable 区域，CPU 写入后必须显式 `clean_dcache` 或配置 MPU 将帧缓冲标记为 `non-cacheable`**。缓冲区首地址还应 32 字节对齐以匹配缓存行大小。这是嵌入式图形中最隐蔽的 bug 之一——代码逻辑完全正确，但显示结果随机错误。Rust 的 `cortex-m` crate 提供 `SCB::clean_dcache_by_address`。这与 Linux 的 `dma_alloc_coherent` 类似，但在裸机中需手动管理缓存一致性（Coherence）。[来源: [ARM Cortex-M7 TRM](https://developer.arm.com/documentation/100240/latest/)] · [来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)] · [来源: [cortex-m Crate](https://docs.rs/cortex-m/latest/cortex_m/peripheral/struct.SCB.html)] · [来源: [STM32 HAL DMA](https://github.com/stm32-rs/stm32f4xx-hal)]
 
 ---
 
@@ -921,7 +921,7 @@ fn main() {
 
 ---
 
-> [来源: [Rust Embedded Interrupts](https://docs.rust-embedded.org/book/)]
+> [来源: [Rust Embedded Interrupts](https://docs.rust-embedded.org/book/index.html)]
 
 ### 10.3 边界测试：中断上下文中阻塞 SPI 传输（实时性违例）
 

@@ -270,8 +270,8 @@ print(f"结果: {counter}")
 
 > **来源: [Rust Reference: Send and Sync](https://doc.rust-lang.org/reference/)** `Send` 表示值可安全跨线程转移所有权，`Sync` 表示值可安全跨线程共享引用（`&T: Send`）。 ✅
 > **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)** Send/Sync 的语义在 Iris 中被形式化为协议验证：独占权限完整传递 ⇒ 无数据竞争。 ✅
-> **[来源: Go Spec: Concurrency]** Go 推荐 "Do not communicate by sharing memory; instead, share memory by communicating"（CSP 模型），但编译器不保证数据竞争自由。 ✅
-> **[来源: C++ Reference: thread]** C++11 `std::thread` + 手动 `std::mutex` 同步，数据竞争检测依赖 TSan 等运行时工具。 ✅
+> **[Go Spec: Concurrency](https://go.dev/ref/spec#Go_statements)** Go 推荐 "Do not communicate by sharing memory; instead, share memory by communicating"（CSP 模型），但编译器不保证数据竞争自由。 ✅
+> **[C++ Reference: thread](https://en.cppreference.com/w/cpp/thread)** C++11 `std::thread` + 手动 `std::mutex` 同步，数据竞争检测依赖 TSan 等运行时工具。 ✅
 
 **Rust 形式化定义**:
 
@@ -411,8 +411,8 @@ except Exception as e:
 
 > **来源: [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/)** `?` 操作符是 `match` 的语法糖，要求所在函数返回类型与 `Result`/`Option` 相容，由类型系统强制保证错误处理路径存在。 ✅
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** Rust 的 `Result<T, E>` 将错误显式编码在类型中，编译器拒绝忽略 `Result` 的代码。 ✅
-> **[来源: Go Spec: Errors]** Go 的 `error` 是内置接口类型，错误处理为惯用模式（`if err != nil`），但编译器不强制检查。 ✅
-> **[来源: C++ Reference: Exception handling]** C++ 异常处理依赖运行时栈展开，无编译期强制，且存在异常安全（Exception Safety）的复杂子问题。 ✅
+> **[Go Spec: Errors](https://go.dev/ref/spec#Errors)** Go 的 `error` 是内置接口类型，错误处理为惯用模式（`if err != nil`），但编译器不强制检查。 ✅
+> **[C++ Reference: Exception handling](https://en.cppreference.com/w/cpp/language/exceptions)** C++ 异常处理依赖运行时栈展开，无编译期强制，且存在异常安全（Exception Safety）的复杂子问题。 ✅
 
 **Rust 错误传播形式化**:
 
@@ -501,9 +501,9 @@ result = max_val(10, 20)
 | **Python** | 动态类型 | 不适用 | 运行时 | 无形式化 |
 
 > **来源: [Rust Reference: Types](https://doc.rust-lang.org/reference/)** Rust 类型系统基于 HM 推断 + Trait solving，泛型通过单态化实现零成本抽象。 ✅
-> **[来源: C++ Reference: Templates]** C++ 模板是图灵完备的编译期元编程系统，但无官方形式化语义，错误信息 notoriously 复杂。 ✅
-> **[来源: Go Spec: Types]** Go 1.18+ 泛型基于类型参数和类型集（type sets），实现为编译期单态化，与 Rust 类似但表达能力较弱（无特化）。 ✅
-> **[来源: Pierce, "Types and Programming Languages" (TAPL)]** Rust 的类型系统理论基础：HM 推断、子类型、参数多态，与 ML 家族同源。 ⚠️（教科书级参考）
+> **[C++ Reference: Templates](https://en.cppreference.com/w/cpp/templates)** C++ 模板是图灵完备的编译期元编程系统，但无官方形式化语义，错误信息 notoriously 复杂。 ✅
+> **[Go Spec: Types](https://go.dev/ref/spec#Types)** Go 1.18+ 泛型基于类型参数和类型集（type sets），实现为编译期单态化，与 Rust 类似但表达能力较弱（无特化）。 ✅
+> **[Pierce, "Types and Programming Languages" (TAPL)](https://www.cis.upenn.edu/~bcpierce/tapl/)** Rust 的类型系统理论基础：HM 推断、子类型、参数多态，与 ML 家族同源。 ⚠️（教科书级参考）
 
 **Rust 类型系统形式化**:
 
@@ -661,7 +661,7 @@ $ python -m pytest
 > **适用版本**: Rust 1.96.1+
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [ISO C++20](https://www.iso.org/standard/83626.html), [Go Language Specification](https://go.dev/ref/spec), [Haskell 2010 Language Report](https://www.haskell.org/definition/haskell2010.pdf)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference / RFC、C++ ISO / cppreference、Go Spec、学术论文），添加 Haskell 对标索引 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference / RFC、C++ ISO / cppreference、Go Spec、学术论文），添加 Haskell 对标索引 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

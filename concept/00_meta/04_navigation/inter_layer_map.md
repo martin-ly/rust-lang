@@ -11,10 +11,10 @@
 > **方法论对齐**: Semantic Link Network (Zhuge 2010) · Bloom's Revised Taxonomy · KB Completeness & Consistency (Torchiano et al. 2018)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/authority_source_map.md)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/authority_source_map.md)
 
 ## 📑 目录
 
@@ -53,7 +53,7 @@
     - [测验 2：《跨层知识图谱（Inter-Layer Dependency Map）》的主要用途是什么？（理解层）](#测验-2跨层知识图谱inter-layer-dependency-map的主要用途是什么理解层)
     - [测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）](#测验-3元数据层文档能否替代-l1-l7-的核心概念学习理解层)
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/authority_source_map.md)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/authority_source_map.md)
 >
 ## 一、全局层级依赖图
 
@@ -168,7 +168,7 @@ graph TB
 > 读者可将其作为「学习路径规划器」——从 L0 元信息出发，沿实线箭头逐层深入，理解每一层概念的前置依赖。
 > 反向箭头（虚线）揭示上层需求如何驱动下层设计（如 L7 AI 需求 → L3 Unsafe 约束）。
 > 关键认知：这不是静态的「知识目录」，而是动态的「依赖网络」——改变一个节点的理解深度会影响所有下游节点的认知质量。
-> 建议在学习任何新概念前，先回到此图确认其前置层是否已掌握。 [来源: 💡 原创分析]
+> 建议在学习任何新概念前，先回到此图确认其前置层是否已掌握。 [💡 原创分析](../00_framework/methodology.md)
 
 ---
 
@@ -230,7 +230,7 @@ graph LR
 
 ---
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/authority_source_map.md)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/authority_source_map.md)
 >
 ## 二、语义链接类型定义
 
@@ -261,7 +261,7 @@ graph LR
 | Move/Copy | 内存管理 (Box) | Unsafe (MaybeUninit) | 线性逻辑 ⊗ /  weakening | **部分映射** | Copy = weakening 特例 |
 | — | Send/Sync (Marker Trait) | 并发安全保证 | 并发分离逻辑 (CSL) | **同态** | Send/Sync ⟹ CSL 资源安全 |
 
-[来源: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [TAPL (Pierce, 2002)](https://www.cis.upenn.edu/~bcpierce/tapl/)]
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [TAPL (Pierce, 2002)](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 
 ### 3.2 L4-L3-L2 定理传递链
 
@@ -314,13 +314,13 @@ graph LR
     前提: 所有引用 'a 必须 outlive 其指向数据
     推理: 若数据已释放，引用生命周期必已结束
     反事实: 'static 引用指向局部变量（编译错误 E0597）
-    来源: ✅ [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · ✅ [Rust Reference: Lifetimes](https://doc.rust-lang.org/reference/)
+    来源: ✅ [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · ✅ [Rust Reference: Lifetimes](https://doc.rust-lang.org/reference/introduction.html)
 
 组合定理 (L2-L3): Send + Sync ⟹ 跨线程安全
     前提: T: Send（所有权可跨线程转移）∧ T: Sync（&T 可跨线程共享）
     推理: 线程间传递满足所有权唯一性或不可变共享
     反事实: Rc<T> 不是 Send（共享计数器非线程安全）
-    来源: ✅ [TRPL Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · ✅ [Rustonomicon: Send and Sync](https://doc.rust-lang.org/nomicon/)
+    来源: ✅ [TRPL Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · ✅ [Rustonomicon: Send and Sync](https://doc.rust-lang.org/nomicon/index.html)
 
 形式化完备 (L4): RustBelt ⟹ 上述所有定理可机械验证
     前提: Iris 分离逻辑 + λRust 操作语义
@@ -331,7 +331,7 @@ graph LR
 
 [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) ·
-[Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+[Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 [Wikipedia — Memory Safety](https://en.wikipedia.org/wiki/Memory_safety)]
 
 ### 4.2 链 2: 类型系统一致性
@@ -349,7 +349,7 @@ graph LR
     前提: 生命周期约束是偏序关系
     推理: 图可达性算法可在多项式时间求解
     反事实: HRTB (∀<'a>) 引入全称量词 ⟹ 更高复杂度但仍可判定
-    来源: ✅ [Rust Reference: Lifetime Elision](https://doc.rust-lang.org/reference/) · 💡 [原创分析]
+    来源: ✅ [Rust Reference: Lifetime Elision](https://doc.rust-lang.org/reference/introduction.html) · 💡 [原创分析]
 
 子定理 3 (L2-L3): 单态化 ⟹ 零成本抽象
     前提: 泛型函数在每个实例类型上独立编译
@@ -375,7 +375,7 @@ graph LR
     前提: 每次 poll 满足 Pin 约束
     推理: 状态机转换保持自引用有效性
     反事实: 在 poll 中手动 mem::swap ⟹ UB（unsafe）
-    来源: ✅ [The Rust Async Book](https://rust-lang.github.io/async-book/) · 💡 [原创分析]
+    来源: ✅ [The Rust Async Book](https://rust-lang.github.io/async-book/index.html) · 💡 [原创分析]
 
 形式化映射 (L4): Pin 对应线性逻辑中的 "location stability"
     前提: 地址是资源的一部分
@@ -385,7 +385,7 @@ graph LR
 ```
 
 [来源: [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html) ·
-[Rust Async Book](https://rust-lang.github.io/async-book/) ·
+[Rust Async Book](https://rust-lang.github.io/async-book/index.html) ·
 [RFC 2349 — Pin](https://rust-lang.github.io/rfcs//2349-pin.html) ·
 [Wikipedia — Linear Temporal Logic](https://en.wikipedia.org/wiki/Linear_temporal_logic)]
 
@@ -434,7 +434,7 @@ L4 形式化保证的边界:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-[来源: [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Wikipedia — Foreign Function Interface](https://en.wikipedia.org/wiki/Foreign_function_interface)]
+[来源: [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Wikipedia — Foreign Function Interface](https://en.wikipedia.org/wiki/Foreign_function_interface)]
 
 ### 6.2 跨层断裂点
 
@@ -561,8 +561,8 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

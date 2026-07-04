@@ -328,7 +328,7 @@ Week 3
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-06-29 升级为 Rust 1.96.1+ / Edition 2024 细粒度国际化来源对齐表，删除旧 Rust 1.94 模板 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-06-29 升级为 Rust 1.96.1+ / Edition 2024 细粒度国际化来源对齐表，删除旧 Rust 1.94 模板 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2
 

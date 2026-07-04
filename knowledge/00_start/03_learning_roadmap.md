@@ -6,14 +6,14 @@
 > **从入门到精通的完整路径**
 > **总预计时间**: 200-400 小时
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust by Example](https://doc.rust-lang.org/rust-by-example/), [Rustlings](https://github.com/rust-lang/rustlings)
-> **权威来源对齐变更日志**: 2026-05-19 新增学习路径来源标注、Bloom 认知层级学术引用、前置依赖设计方法论来源 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增学习路径来源标注、Bloom 认知层级学术引用、前置依赖设计方法论来源 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
 
 ## 🎯 学习阶段总览
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Level 1: 基础 (40-60小时)
@@ -35,11 +35,11 @@ Level 5: 专家 (持续学习)
 
 ## Level 1: 基础 - 建立根基 (40-60小时)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 起步 (5-8小时)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 主题 | 文档 | 时间 | 目标 |
 |------|------|------|------|
@@ -50,7 +50,7 @@ Level 5: 专家 (持续学习)
 
 ### 1.2 核心语法 (15-20小时)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 主题 | 文档位置 | 时间 | 掌握程度 |
 |------|---------|------|----------|
@@ -63,7 +63,7 @@ Level 5: 专家 (持续学习)
 
 ### 1.3 所有权系统 (20-30小时) ⭐⭐⭐⭐⭐
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **这是 Rust 最重要的概念！**
 

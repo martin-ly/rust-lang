@@ -6,7 +6,7 @@
 > [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 > **相关概念**: [Rc](../../../../concept/02_intermediate/02_memory_management/03_memory_management.md)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 
 # 学术研究全景
 
@@ -16,7 +16,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档梳理Rust安全关键系统相关的学术研究前沿，涵盖类型系统、形式化验证、内存模型等关键领域。
 
@@ -24,11 +24,11 @@
 
 ## 1. 内存模型研究
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 Stacked Borrows vs Tree Borrows
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Stacked Borrows (2018):
@@ -55,7 +55,7 @@ Tree Borrows (2023):
 
 ### 1.2 学术论文推荐
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 论文 | 作者 | 会议 | 重要性 |
 |------|------|------|--------|
@@ -68,7 +68,7 @@ Tree Borrows (2023):
 
 ## 2. 形式化验证
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 Rust验证工具研究
 >

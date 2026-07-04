@@ -10,7 +10,7 @@
 
 ---
 
-# Async/Await（异步 [来源: [Async Rust](https://rust-lang.github.io/async-book/)]编程）
+# Async/Await（异步 [来源: [Async Rust](https://rust-lang.github.io/async-book/index.html)]编程）
 >
 > **EN**: Advanced 02 Async Original
 > **受众**: [归档]
@@ -26,7 +26,7 @@
 > **前置概念**:
 > [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md)
 > **后置概念**: [Pin/Unpin] · [Streams]
-> **主要来源**: [TRPL: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) · [RFC 2394] · [RFC 2349]
+> **主要来源**: [TRPL: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/index.html) · [RFC 2394] · [RFC 2349]
 
 ---
 
@@ -186,7 +186,7 @@ Step 6: "什么时候会阻塞？"
 
 ### 1.1 Wikipedia 权威定义
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]**
 > **[Wikipedia: Asynchronous programming]** Asynchronous programming is a means of parallel programming in which a unit of work runs separately from the main application thread and notifies the calling thread of its completion, failure or progress. It is a programming paradigm that enables non-blocking operations.
 
 > **[Wikipedia: Coroutine]** Coroutines are computer program components that generalize subroutines for non-preemptive multitasking, by allowing execution to be suspended and resumed. Coroutines are well-suited for implementing familiar program components such as cooperative tasks, exceptions, event loops, iterators, infinite lists and pipes.
@@ -205,7 +205,7 @@ Step 6: "什么时候会阻塞？"
 
 ### 1.3 形式化定义
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]**
 
 `async/await` 可以形式化为**基于状态机的协程**（coroutines）或**可恢复函数**（resumable functions）：
 
@@ -246,7 +246,7 @@ Poll 类型:
 
 ### 2.1 异步 vs 并发 vs 并行对比矩阵
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]**
 
 | **维度** | **Async（异步）** | **Threading（线程）** | **Parallel（并行）** |
 |:---|:---|:---|:---|
@@ -263,7 +263,7 @@ Poll 类型:
 
 ### 2.2 Future 组合子矩阵
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)]**
 
 | **组合子** | **签名** | **语义** | **类比** |
 |:---|:---|:---|:---|
@@ -463,7 +463,7 @@ stateDiagram-v2
 ```
 
 > **认知功能**: 状态转移可视化工具——将编译器生成的匿名 enum 状态机映射为可读的状态图。读者可将此图作为阅读 MIR lowering 输出的"导航地图"，每个节点对应一个 enum 变体，每条边对应一次 poll 调用。关键洞察：Pin 约束不是装饰，而是 Suspend 状态期间地址恒定性的形式化保证。[来源: 💡 原创分析]
-> [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+> [来源: [Rust Async Book](https://rust-lang.github.io/async-book/index.html)]
 > [来源: [Rust Async Book]]
 
 > **思维表征说明**: `stateDiagram-v2` 是 Mermaid 专门用于状态机的语法，与 `graph TD` 流程图不同——它强调**状态**（节点）和**转移条件**（边标注），天然适合表达 Future 的 poll 状态机。每个状态对应编译器生成的 enum 变体，转移标注对应 poll 的返回值。 [来源: Mermaid stateDiagram 文档; [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html) §3.2]
@@ -640,7 +640,7 @@ async 状态机的 Pin 验证场景:
 
 ### 3.5 调度模型对比：抢占式 vs 协作式 vs 绿色线程
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]**
 
 > **章节过渡**：状态机变换展示了编译器如何将 async fn 翻译为协作式 Future，但为什么 Rust 选择这条路径而非其他？需将协作式调度置于操作系统线程与绿色线程的三维比较中，方能理解 Rust "零成本抽象（Zero-Cost Abstraction）"承诺的实质——它不是所有场景下的最优解，而是在延迟、吞吐量与内存约束下的刻意权衡。
 
@@ -761,7 +761,7 @@ graph TD
 
 ### 5.1 定理矩阵（10 行，含 ⟹ 推理链）
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]**
 
 | 编号 | 定理陈述（⟹ 推理链） | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 后果 |
 |:---|:---|:---|:---|:---|:---|:---|:---|
@@ -780,7 +780,7 @@ graph TD
 
 ### 5.2 推理链层级图
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]**
 
 ```text
 语言层 (L)
@@ -815,7 +815,7 @@ graph TD
 
 ### 6.1 反命题: "async/await 总是零成本"
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)]**
 > **误解来源**: 官方宣传"zero-cost abstraction"被简化为"绝对零开销"。
 
 ```mermaid
@@ -954,7 +954,7 @@ graph TD
 
 ### 7.2 Pin 使用边界
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]**
 
 ```mermaid
 graph TD
@@ -1003,7 +1003,7 @@ async fn main() {
 
 ### 8.2 正确示例：并发执行
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]**
 
 ```rust,ignore
 // ✅ 正确: join! 并发等待
@@ -1020,7 +1020,7 @@ async fn fetch_all() -> (String, String) {
 
 ### 8.3 正确示例：Stream 异步迭代
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]**
 
 ```rust,ignore
 // ✅ 正确: Stream 异步迭代
@@ -1037,7 +1037,7 @@ async fn process_stream() {
 
 ### 8.4 反例：在 async 中阻塞线程
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)]**
 
 ```rust
 // ❌ 反例: 在 async 中执行阻塞操作
@@ -1238,7 +1238,7 @@ async fn graceful_shutdown(token: CancellationToken) {
 
 ### 8.8 Waker 契约与活性
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]**
 > **章节过渡**：取消安全回答了"Future 被丢弃时会发生什么"，而 Waker 契约则回答"Future 被挂起后如何复活"。二者共同构成异步执行的生命周期闭环：从 poll 到 Pending，从 wake 到再 poll，任何一环断裂都会导致活锁或资源泄漏。
 
 **Waker 契约（Waker Contract）**：
@@ -1571,7 +1571,7 @@ impl UringReactor {
 
 ### 8.10 `Stream` / `Sink` trait 完整分析
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]**
 > **章节过渡**：Future 表示单个异步计算，但许多场景需要处理异步序列（如网络数据包流、消息队列）。`Stream` 将异步能力扩展到迭代器（Iterator）领域，`Sink` 则提供异步生产者抽象。理解它们与 `Iterator`、`Future` 的关系，是构建异步管道的关键。
 
 **`Stream`：异步迭代器（Iterator）**
@@ -1836,7 +1836,7 @@ async fn pipeline() {
 
 ### 8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]**
 
 > **章节过渡**：定理 T1 声称 async/await 是零成本抽象，但实践中我们常常看到 `Box::pin` 和 `dyn Future`。理解静态分发与动态分发的边界、栈 pinning 与堆 pinning 的差异，是判断"何时零成本成立"的关键。
 
@@ -1995,7 +1995,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 
 ### 8.12 `loom` 并发模型检测工具
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)]**
 
 > **章节过渡**：异步代码的正确性不仅依赖类型系统（Type System），还依赖并发执行的时序。`loom` 通过穷举所有可能的线程交错（interleaving），在测试中发现数据竞争和死锁，是验证并发原语（如自定义 Mutex、Channel）的利器。
 
@@ -2162,7 +2162,7 @@ fn test_async_ready_flag() {
 ```
 
 > **注意**: `loom::future` 的异步支持主要用于测试**同步原语在异步上下文中的使用**（如 `Mutex`、`Atomic` 在 async 块中的交互），而非测试 async/await 本身的调度语义。async 调度语义由执行器（Tokio 等）保证，不在 loom 的验证范围内。[来源: loom docs: loom::future module]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 **实际用例：验证自定义并发原语**
 
@@ -2296,7 +2296,7 @@ help: alloc232 was deallocated here:
 ```
 
 > **关键洞察**: Miri 不仅报告 UB，还精确追踪**分配点**和**释放点**，帮助开发者理解指针何时变为悬垂。这对于 async 状态机中的自引用结构尤为重要——状态机被 Pin 后若被 unsafe 代码移动，内部自引用指针会变为悬垂，Miri 能精确定位违规的 `move` 操作。
-[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+[来源: [Rust Async Book](https://rust-lang.github.io/async-book/index.html)]
 > [来源: [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html)]
 >
 #### 场景 2：无效值检测（非法 bool 构造）
@@ -2323,7 +2323,7 @@ error: Undefined Behavior: constructing invalid value of type bool:
 
 > **关键洞察**: Rust 编译器假设 `bool` 只能是 `0x00` 或 `0x01`，并基于此做分支优化（如将 `if b` 编译为跳转表）。无效 `bool` 值会导致控制流跳转到任意位置。async 状态机的 discriminant（状态标签）同理——若通过 unsafe 构造无效状态标签，恢复执行时会进入不存在的状态分支。
 [来源: [Tokio Docs](https://tokio.rs/)]
-> [来源: [Rust Async Book: Cancellation](https://rust-lang.github.io/async-book/)]
+> [来源: [Rust Async Book: Cancellation](https://rust-lang.github.io/async-book/index.html)]
 >
 #### 场景 3：async 状态机中的未初始化内存
 
@@ -2593,7 +2593,7 @@ AsyncFn<Args>         // 异步多次调用，不可变借用
 
 ### 12.3 关键形式化特性：可重入性限制
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]**
 
 `AsyncFn` 的 `call` 方法返回 `impl Future`，该 Future 可能**借用（Borrowing）**闭包捕获的状态。因此：
 
@@ -2644,7 +2644,7 @@ async fn async_fn(f: impl AsyncFn(i32) -> i32) -> i32 { f(42).await }
 
 ### 13.1 语法与语义
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]**
 
 ```rust,ignore
 // 手动状态机（旧模式）
@@ -2672,7 +2672,7 @@ fn fibonacci() -> impl Iterator<Item = u64> {
 
 ### 13.2 与 `async` 的对偶关系
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]**
 
 | 维度 | `async` block | `gen` block |
 |:---|:---|:---|
@@ -2684,7 +2684,7 @@ fn fibonacci() -> impl Iterator<Item = u64> {
 
 ### 13.3 形式化定位
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)]**
 
 `gen` block 是 **Continuation** 的受限形式：
 
@@ -2750,7 +2750,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | **Event loop** | [Event loop](https://en.wikipedia.org/wiki/Event_loop) | 事件循环 |
 | **Promise (programming)** | [Promise (programming)](https://en.wikipedia.org/wiki/Promise_(programming)) | Promise |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
@@ -2763,15 +2763,15 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 ## 权威来源索引
 
-> **[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]**
+> **[来源: [Rust Async Book](https://rust-lang.github.io/async-book/index.html)]**
 >
 > **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]**
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]**
 >
 
 ---
@@ -2781,9 +2781,9 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 ## 嵌入式测验（Embedded Quiz）
 
-### 测验 1：《Async/Await（异步 [来源: [Async Rust](https://rust-lang.github.io/async-book/)]编程）》是一份归档文件。归档文件在知识体系中有什么作用？（理解层）
+### 测验 1：《Async/Await（异步 [来源: [Async Rust](https://rust-lang.github.io/async-book/index.html)]编程）》是一份归档文件。归档文件在知识体系中有什么作用？（理解层）
 
-**题目**: 《Async/Await（异步 [来源: [Async Rust](https://rust-lang.github.io/async-book/)]编程）》是一份归档文件。归档文件在知识体系中有什么作用？
+**题目**: 《Async/Await（异步 [来源: [Async Rust](https://rust-lang.github.io/async-book/index.html)]编程）》是一份归档文件。归档文件在知识体系中有什么作用？
 
 <details>
 <summary>✅ 答案与解析</summary>

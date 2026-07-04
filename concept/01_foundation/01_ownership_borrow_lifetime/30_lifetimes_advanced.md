@@ -199,7 +199,7 @@
 | 区域类型理论 (Tofte & Talpin) | [Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management) | ✅ |
 | 生命周期子类型关系 | [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) | ✅ |
 | `'static` 是最长生命周期 | [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) | ✅ |
-| HRTB 全称量化语义 | [Rust Reference: HRTB](https://doc.rust-lang.org/reference/) | ✅ |
+| HRTB 全称量化语义 | [Rust Reference: HRTB](https://doc.rust-lang.org/reference/introduction.html) | ✅ |
 | GATs 生命周期约束 | [RFC 1598](https://github.com/rust-lang/rfcs/pull/1598) | ✅ |
 | Polonius (Datalog 约束求解) | [Polonius GitHub] · [Niko Matsakis blog] | ✅ |
 | Tree Borrows (下一代内存模型) | [Ralf Jung, arXiv 2023] · [Miri: Tree Borrows](https://github.com/rust-lang/miri) | ✅ |
@@ -588,7 +588,7 @@ fn filter<'a, 'b>(
 }
 ```
 
-> **来源: [Rust Reference: `impl Trait` in return position](https://doc.rust-lang.org/reference/)** RPIT 的生命周期捕获策略在 [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) 中定义：返回类型自动捕获所有在函数体中被实现类型使用且出现在签名中的生命周期。✅
+> **来源: [Rust Reference: `impl Trait` in return position](https://doc.rust-lang.org/reference/types/impl-trait.html)** RPIT 的生命周期捕获策略在 [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) 中定义：返回类型自动捕获所有在函数体中被实现类型使用且出现在签名中的生命周期。✅
 
 ### 14.2 `impl Trait` + `+'a` 的显式生命周期约束
 
@@ -628,7 +628,7 @@ fn bad_static(s: &str) -> impl Display + 'static {
 }
 ```
 
-> **来源: [Rust Reference: Lifetime bounds on `impl Trait`](https://doc.rust-lang.org/reference/)** `impl Trait + 'a` 的语义等价于"实现该 trait 的匿名类型，且该类型中所有引用至少存活 'a"。✅
+> **来源: [Rust Reference: Lifetime bounds on `impl Trait`](https://doc.rust-lang.org/reference/types/impl-trait.html)** `impl Trait + 'a` 的语义等价于"实现该 trait 的匿名类型，且该类型中所有引用至少存活 'a"。✅
 
 ### 14.3 `impl Trait` 参数位置（APIT）的生命周期推断差异
 
@@ -706,7 +706,7 @@ where
 | **HRTB 交互** | 复杂（隐式捕获与 `for<'a>` 量化冲突） | 直接（APIT 的隐式泛型可参与 HRTB） |
 | **类型推导方向** | 由函数体推导实现类型 | 由调用方推导具体类型 |
 
-> **来源: [Rust Reference: `impl Trait`; RFC 2289](https://doc.rust-lang.org/reference/)** APIT 于 Rust 1.26 稳定，RPIT 于 Rust 1.26 稳定；RPITIT（trait 中的 RPIT）于 Rust 1.75 稳定。✅
+> **来源: [Rust Reference: `impl Trait`; RFC 2289](https://doc.rust-lang.org/reference/types/impl-trait.html)** APIT 于 Rust 1.26 稳定，RPIT 于 Rust 1.26 稳定；RPITIT（trait 中的 RPIT）于 Rust 1.75 稳定。✅
 
 ### 14.5 为什么 `impl Trait` 不能随意出现在 Trait 定义中（RPITIT）
 
@@ -816,7 +816,7 @@ impl<'s> Iterator for Words<'s> {
 Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where Self: 'a` 确保**迭代器本身至少存活到返回引用的生命周期**，从而安全地表达自引用迭代。这是 GATs 解决表达力鸿沟的经典案例。
 
 > **[来源: [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) (GATs)]** `where Self: 'a` 约束确保关联类型不会引用比 `Self` 更短的生命周期，构成自引用集合的类型安全基础。✅
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html); [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 
 ---
@@ -1145,8 +1145,8 @@ enum SafeValue {
 | **Variable shadowing** | [Variable shadowing](https://en.wikipedia.org/wiki/Variable_shadowing) | 变量遮蔽 |
 | **Non-lexical lifetimes** | [Non-lexical lifetimes](https://en.wikipedia.org/wiki/Rust_(programming_language)#Non-lexical_lifetimes) | 非词法生命周期 |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -1195,7 +1195,7 @@ where
 }
 ```
 
-> **修正**: 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。当 trait 方法接受引用参数时，默认的生命周期省略（Lifetime Elision）可能不足以表达"对所有生命周期有效"的语义。HRTB 在回调函数、比较器、迭代器（Iterator）适配器等场景中至关重要。来源: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **修正**: 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。当 trait 方法接受引用参数时，默认的生命周期省略（Lifetime Elision）可能不足以表达"对所有生命周期有效"的语义。HRTB 在回调函数、比较器、迭代器（Iterator）适配器等场景中至关重要。来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
 ### 10.2 边界测试：自引用结构体的生命周期标注（编译错误）
 
@@ -1245,7 +1245,7 @@ impl SelfRefFixed {
 > 自引用结构体（Struct）（字段 A 引用字段 B）在 Rust 的生命周期系统中无法安全表达，因为结构体的生命周期参数只能引用外部数据，不能引用结构体自身字段。
 > 解决方案是使用裸指针（`*const T`）+ `Pin` + `PhantomPinned`，完全绕过生命周期系统，转由 unsafe 代码手动保证地址稳定性。
 > 这是 Rust 安全边界的典型突破点——编译器无法证明的安全属性，由程序员通过 unsafe 承担证明义务。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：HRTB（高阶 trait bound）的推导失败（编译错误）
 

@@ -17,7 +17,7 @@
 
 > **来源**:
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) ·
+> [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html) ·
 > [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs//2052-epochs.html) ·
 > [Rust Blog — Edition 2024](https://blog.rust-lang.org/) ·
 > [Wikipedia — Software Versioning](https://en.wikipedia.org/wiki/Software_versioning)
@@ -49,12 +49,12 @@
 
 ## 一、核心概念
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 1.1 Edition 机制
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]**
 
 ```text
 Edition 机制:
@@ -84,7 +84,7 @@ Edition 机制:
 ```
 
 > **认知功能**: **Edition 是 Rust 语言演进的"安全阀"**——允许语法变化而不分裂生态。
-> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)]
 
 ---
 
@@ -130,7 +130,7 @@ Edition 机制:
 
 ### 1.3 2024 Edition 关键变更
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]**
 
 ```text
 2024 Edition 主要变更:
@@ -167,13 +167,13 @@ Edition 机制:
 
 ## 二、迁移策略
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
 > [来源: [Rust Edition Guide]]
 
 ### 2.1 cargo fix
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]**
 
 ```text
 cargo fix:
@@ -209,7 +209,7 @@ cargo fix:
 
 ### 2.2 手动迁移
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)]**
 
 ```text
 手动迁移检查清单:
@@ -247,9 +247,9 @@ cargo fix:
 
 ## 三、反命题与边界分析
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 3.1 反命题树
 >
@@ -271,7 +271,7 @@ graph TD
 ```
 
 > **认知功能**: **迁移决策取决于项目活跃度和新特性需求**——不活跃的库保持现状即可。
-> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)]
 
 ---
 
@@ -313,7 +313,7 @@ graph TD
 
 ## 四、常见陷阱
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
 > [来源: [Rust Edition Guide]]
 
@@ -353,19 +353,19 @@ graph TD
 ```
 
 > **陷阱总结**: Edition 迁移的陷阱主要与**混用**、**自动修复**、**语义变化**、**CI**和**过度升级**相关。
-> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)]
 
 ---
 
 ## 五、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
 > [来源: [Rust Edition Guide]]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) | ✅ 一级 | 官方指南 |
+| [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html) | ✅ 一级 | 官方指南 |
 | [RFC 2052](https://rust-lang.github.io/rfcs//2052-epochs.html) | ✅ 一级 | Edition RFC |
 | [Rust Blog](https://blog.rust-lang.org/) | ✅ 一级 | 官方博客 |
 | [cargo fix](https://doc.rust-lang.org/cargo/commands/cargo-fix.html) | ✅ 一级 | 迁移工具 |
@@ -382,9 +382,9 @@ fn main() {
 
 ## 相关概念文件
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 - [Toolchain](../06_ecosystem/00_toolchain/01_toolchain.md) — 工具链
 - [Evolution](../07_future/04_research_and_experimental/03_evolution.md) — 语言演进
@@ -393,7 +393,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 11]
 
@@ -406,13 +406,13 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)]**
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 > **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 > **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]**
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]**
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]**
 
 ---
 

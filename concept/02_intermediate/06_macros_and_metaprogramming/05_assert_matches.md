@@ -102,7 +102,7 @@ assert!(matches!(x, Some(n) if n > 100)); // ❌ 失败
 ```
 
 > **关键洞察**: `matches!` 不改变模式匹配的语义，仅改变**返回类型**——从 `()`（控制流）到 `bool`（表达式值）。这是 Rust 宏（Macro）系统的典型应用：语法糖不改变语义，仅改变语法形式。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -445,7 +445,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-00-patterns.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-00-patterns.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1 (Edition 2024)
 
 **文档版本**: 1.1
@@ -501,7 +501,7 @@ fn main() {
 
 > **修正**: `assert_matches!`（Rust 长期 unstable，于 1.96.1 stable，当前 patch 1.96.1）专门用于测试枚举（Enum）变体匹配。
 > 它不同于 `assert_eq!`——后者要求值实现 `PartialEq`，而 `assert_matches!` 使用模式匹配，不要求 `PartialEq`。
-> 在 `assert_matches!` 稳定前，使用 `matches!` 宏（Macro）或 `if let` 进行测试断言。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> 在 `assert_matches!` 稳定前，使用 `matches!` 宏（Macro）或 `if let` 进行测试断言。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.2 边界测试：嵌套模式匹配中的绑定冲突（编译错误）
 
@@ -526,7 +526,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 在 Rust 模式匹配的 `|`（或模式）中，所有分支必须绑定**相同的变量名和类型**。若一个分支绑定 `x: i32`，另一个分支绑定 `x: Option<i32>`，编译器报错。这是 Rust 模式匹配（Pattern Matching）"穷尽性检查"的一部分——确保每个绑定在所有分支中具有一致性（Coherence）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 在 Rust 模式匹配的 `|`（或模式）中，所有分支必须绑定**相同的变量名和类型**。若一个分支绑定 `x: i32`，另一个分支绑定 `x: Option<i32>`，编译器报错。这是 Rust 模式匹配（Pattern Matching）"穷尽性检查"的一部分——确保每个绑定在所有分支中具有一致性（Coherence）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）
 

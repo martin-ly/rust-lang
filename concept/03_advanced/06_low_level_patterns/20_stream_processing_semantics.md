@@ -150,7 +150,7 @@
 
 > **形式化定义**: 设事件 `e` 携带时间戳 `τ(e)`（事件时间），算子 `op` 在时刻 `t` 处理该事件（处理时间）。
 > 流计算的语义应基于 `τ(e)` 而非 `t`，因为 `τ(e)` 是事件的内在属性，而 `t` 是系统的外在属性。
-> [来源: 💡 原创分析] · [Akidau et al.] ✅
+> [💡 原创分析](../../00_meta/00_framework/methodology.md) · [Akidau et al.] ✅
 
 ---
 
@@ -322,7 +322,7 @@ Checkpoint-1 完成（一致性全局快照）
 > **关键洞察**: Barrier 对齐是 Flink Exactly-Once 的核心代价——它通过阻塞数据流来确保快照的一致性（Coherence）切分。
 > 非对齐 Checkpoint 用"空间换时间"，将通道中的数据也纳入快照，消除了对齐等待。
 > Rust 的所有权（Ownership）系统为无锁实现非对齐 Checkpoint 提供了独特优势（无 GC 暂停意味着更稳定的 barrier 传播延迟）。
-> [来源: 💡 原创分析] · [Flink FLIP-76] ✅
+> [💡 原创分析](../../00_meta/00_framework/methodology.md) · [Flink FLIP-76] ✅
 
 ---
 
@@ -345,7 +345,7 @@ Checkpoint-1 完成（一致性全局快照）
 
 > **关键洞察**: RocksDB 的 LSM-Tree 结构天然支持增量快照——SST 文件一旦生成即不可变，Checkpoint 只需复制元数据并上传新增 SST。
 > 这与 Rust 的不可变性哲学（&T 共享引用（Reference））形成有趣的映射：两者都利用"写时复制"或"不可变快照"来实现高效的持久化。
-> [来源: 💡 原创分析] · [Flink Documentation] ✅
+> [💡 原创分析](../../00_meta/00_framework/methodology.md) · [Flink Documentation] ✅
 
 ---
 
@@ -387,7 +387,7 @@ tx.send(42).await?;
 
 > **关键洞察**: Rust 的 `async/await` + 有界 channel = 零成本背压。
 > 与 Java（需额外背压库）或 Go（channel 有界但无类型安全保证）相比，Rust 在编译期就保证了背压通道的正确性（Send/Sync + 类型安全 + 无数据竞争）。
-> [来源: 💡 原创分析] · [Tokio Documentation](https://tokio.rs/) ✅
+> [💡 原创分析](../../00_meta/00_framework/methodology.md) · [Tokio Documentation](https://tokio.rs/) ✅
 
 ---
 
@@ -440,7 +440,7 @@ Timely Dataflow（TD）是 DD 的底层执行引擎，核心创新是**时间戳
 > Timely Dataflow 的时间戳机制与 Rust 的生命周期（Lifetimes）系统有深层同构：两者都追踪"资源（数据/引用（Reference））何时可被安全释放"。
 > TD 的 `epoch` 类似于所有权（Ownership）的 drop 时刻，而 `iteration` 类似于借用（Borrowing）链的嵌套深度。
 > 这种同构不是巧合——Frank McSherry 选择 Rust 实现 TD 正是因为其类型系统（Type System）能精确表达 TD 的并发安全（Concurrency Safety）约束。
-> [来源: 💡 原创分析] · [McSherry Blog] ✅
+> [💡 原创分析](../../00_meta/00_framework/methodology.md) · [McSherry Blog] ✅
 
 ---
 
@@ -484,7 +484,7 @@ GROUP BY region;
 
 ## 十一、跨语言流处理系统对比矩阵
 
-> **[来源: 💡 原创分析]** · 综合上述所有来源 ✅
+> **[💡 原创分析](../../00_meta/00_framework/methodology.md)** · 综合上述所有来源 ✅
 
 | 维度 | Apache Flink | Kafka Streams | Spark Structured Streaming | Materialize | timely-dataflow |
 |:---|:---|:---|:---|:---|:---|
@@ -503,7 +503,7 @@ GROUP BY region;
 > Rust 实现的流处理系统（Materialize、timely-dataflow）在"无 GC 暂停"和"内存安全（Memory Safety）"两个维度上具有结构性优势。
 > 对于低延迟流处理（sub-100ms），GC 暂停是不可接受的噪声源。
 > Rust 的所有权（Ownership）系统消除了 GC 的需要，同时保证了并发安全（Concurrency Safety）——这正是 Frank McSherry 选择 Rust 实现 TD/DD 的根本原因。
-> [来源: 💡 原创分析] · [Materialize Interview — SE-Radio 2022] ✅
+> [💡 原创分析](../../00_meta/00_framework/methodology.md) · [Materialize Interview — SE-Radio 2022] ✅
 
 ---
 
@@ -730,7 +730,7 @@ fn main() {
 > [来源: [RFC 2996 — Async Iteration](https://rust-lang.github.io/rfcs//2996-async-iterator.html)]
 > [来源: [Stream Processing — Akka Streams](https://doc.akka.io/docs/akka/current/stream/)]
 > [来源: [Apache Flink — Stream Semantics](https://nightlies.apache.org/flink/flink-docs-stable/)]
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch17-00-async-await.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch17-00-async-await.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

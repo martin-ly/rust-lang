@@ -41,7 +41,7 @@
 > **覆盖版本**: Rust 1.96.1+ / FLS (Ferrocene Language Specification) 24.11 / Ferrocene 26.02.0
 > **官方来源**: [Rust Project Goals 2026 — Safety-Critical Rust](https://rust-lang.github.io/rust-project-goals/2026/) · [Ferrocene](https://ferrocene.dev/) · [MISRA Rust Guidelines](https://misra.org.uk/)
 > **Bloom 层级**: 分析 → 评价
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **[来源: Ferrocene]** · **[来源: MISRA]** · **[来源: IEC 61508]** · **[来源: ISO 26262]** · **[来源: DO-178C]** ✅
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **[Ferrocene](https://ferrocene.dev/)** · **[MISRA](https://www.misra.org.uk/)** · **[IEC 61508](https://webstore.iec.ch/publication/66912)** · **[ISO 26262](https://www.iso.org/standard/68383.html)** · **[DO-178C](https://www.rtca.org/product/307)** ✅
 
 ---
 
@@ -349,10 +349,10 @@ graph TD
 
 ## 权威来源索引 {#权威来源索引}
 
-> **[来源: ISO 26262 - Functional Safety]**
-> **[来源: IEC 61508 - Safety Standards]**
-> **[来源: MISRA Rust Guidelines]**
-> **[来源: Ferrocene Language Specification]**
-> **[来源: Ferrocene 26.02.0 Release Notes](https://ferrocene.dev/)** — ISO 26262 ASIL B + IEC 61508 SIL 2 core 子集认证 [来源: Authority Source Sprint Batch 9]
+> **[ISO 26262 - Functional Safety](https://www.iso.org/standard/68383.html)**
+> **[IEC 61508 - Safety Standards](https://webstore.iec.ch/publication/66912)**
+> **[MISRA Rust Guidelines](https://www.misra.org.uk/)**
+> **[Ferrocene Language Specification](https://spec.ferrocene.dev/)**
+> **[Ferrocene 26.02.0 Release Notes](https://ferrocene.dev/)(https://ferrocene.dev/)** — ISO 26262 ASIL B + IEC 61508 SIL 2 core 子集认证 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 
 ---

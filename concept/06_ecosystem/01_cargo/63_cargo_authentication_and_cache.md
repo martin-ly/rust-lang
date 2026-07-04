@@ -284,7 +284,7 @@ rustc-wrapper = "sccache"
 
 ---
 
-> **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/), [The Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/index.html), [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 / Cargo 认证与缓存文档
 
 **文档版本**: 1.0

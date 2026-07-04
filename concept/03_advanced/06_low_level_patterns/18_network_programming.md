@@ -3,7 +3,7 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
-> **来源**: [std::net](https://doc.rust-lang.org/std/net/) · [Tokio Docs](https://docs.rs/tokio/) · [Async Book](https://rust-lang.github.io/async-book/) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
+> **来源**: [std::net](https://doc.rust-lang.org/std/net/) · [Tokio Docs](https://docs.rs/tokio/) · [Async Book](https://rust-lang.github.io/async-book/index.html) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
 ---
 
 > **内容分级**: [专家级]
@@ -29,7 +29,7 @@
 > [Tower Service](https://docs.rs/tower/latest/tower/trait.Service.html) ·
 > [Tower Middleware](https://docs.rs/tower/latest/tower/) ·
 > [Hyper](https://hyper.rs/) ·
-> [Rust Async Book](https://rust-lang.github.io/async-book/) ·
+> [Rust Async Book](https://rust-lang.github.io/async-book/index.html) ·
 > [RFC 2394 — async/await](https://rust-lang.github.io/rfcs//2394-async_await.html) ·
 > [RFC 793 — TCP](https://tools.ietf.org/html/rfc793) ·
 > [RFC 768 — UDP](https://tools.ietf.org/html/rfc768) ·
@@ -127,7 +127,7 @@
 ```
 
 > **认知功能**: Tokio 将**多路复用 + 非阻塞 IO** 包装为 async/await 语法，使开发者能以"顺序代码"的思维编写高并发网络服务。
-> [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+> [来源: [Rust Async Book](https://rust-lang.github.io/async-book/index.html)]
 > **关键洞察**: Tokio 的 Runtime 本质上是一个**事件循环 + 任务调度器**——网络事件（可读/可写）触发对应的 Future 继续执行。
 > [来源: [Tokio Documentation — Runtime](https://tokio.rs/tokio/tutorial)]
 
@@ -286,7 +286,7 @@ fn fixed() {
 > Rust 的网络地址类型严格区分 IPv4（`SocketAddrV4`、`Ipv4Addr`）和 IPv6（`SocketAddrV6`、`Ipv6Addr`），两者是不同的类型，不能隐式转换。
 > `SocketAddr` 是一个枚举（Enum），可持有 V4 或 V6 地址。`TcpListener::bind` 接受 `ToSocketAddrs` trait 的实现，因此可传入 `"127.0.0.1:8080"`、`SocketAddrV4` 或 `SocketAddr`。
 > 这种严格类型区分避免了 C 中 `sockaddr` 指针强制转换导致的地址族混淆漏洞。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 > **[Tower Service Trait]** The Service trait is an abstraction of a function of the form `fn(Request) -> Future<Output = Response>`.
 > **来源**: <https://docs.rs/tower/latest/tower/trait.Service.html>
 
@@ -720,7 +720,7 @@ graph LR
 | [Tokio API Docs](https://docs.rs/tokio/latest/tokio/) | ✅ 一级 | Tokio API 参考文档 |
 | [Tower Service](https://docs.rs/tower/latest/tower/trait.Service.html) | ✅ 一级 | Tower Service trait 定义 |
 | [Tower Middleware](https://docs.rs/tower/latest/tower/) | ✅ 一级 | Tower 中间件生态文档 |
-| [Rust Async Book](https://rust-lang.github.io/async-book/) | ✅ 一级 | Rust 异步编程官方指南 |
+| [Rust Async Book](https://rust-lang.github.io/async-book/index.html) | ✅ 一级 | Rust 异步编程官方指南 |
 | [RFC 2394 — async/await](https://rust-lang.github.io/rfcs//2394-async_await.html) | ✅ 一级 | async/await 语言特性 RFC |
 | [RFC 793 — TCP](https://tools.ietf.org/html/rfc793) | ✅ 一级 | TCP 协议规范 |
 | [RFC 768 — UDP](https://tools.ietf.org/html/rfc768) | ✅ 一级 | UDP 协议规范 |
@@ -746,9 +746,9 @@ graph LR
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Tokio Documentation](https://tokio.rs/) · [IETF RFC 793 — TCP](https://tools.ietf.org/html/rfc793) · [IETF RFC 768 — UDP](https://tools.ietf.org/html/rfc768)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Tokio Documentation](https://tokio.rs/) · [IETF RFC 793 — TCP](https://tools.ietf.org/html/rfc793) · [IETF RFC 768 — UDP](https://tools.ietf.org/html/rfc768)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -798,7 +798,7 @@ async fn echo(stream: TcpStream) {
 }
 ```
 
-> **修正**: `TcpStream::split` 将双向流拆分为独立的读半和写半，允许并发读写（如一个任务读，一个任务写）。`split` 消耗 `TcpStream`，返回的 `ReadHalf` 和 `WriteHalf` 是独立的类型，不可复制。`reunite` 在两者都未 drop 时恢复原始的 `TcpStream`。这与 `TcpStream::into_split`（返回 `OwnedReadHalf` 和 `OwnedWriteHalf`，可发送到不同任务）或标准库的 `std::net::TcpStream`（`try_clone` 复制文件描述符）不同——tokio 的 `split` 是零成本的借用（Borrowing）拆分，`into_split` 是引用（Reference）计数的所有权（Ownership）拆分。选择取决于并发模型：单任务内并发用 `split`，跨任务用 `into_split`。来源: [Tokio Documentation] · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **修正**: `TcpStream::split` 将双向流拆分为独立的读半和写半，允许并发读写（如一个任务读，一个任务写）。`split` 消耗 `TcpStream`，返回的 `ReadHalf` 和 `WriteHalf` 是独立的类型，不可复制。`reunite` 在两者都未 drop 时恢复原始的 `TcpStream`。这与 `TcpStream::into_split`（返回 `OwnedReadHalf` 和 `OwnedWriteHalf`，可发送到不同任务）或标准库的 `std::net::TcpStream`（`try_clone` 复制文件描述符）不同——tokio 的 `split` 是零成本的借用（Borrowing）拆分，`into_split` 是引用（Reference）计数的所有权（Ownership）拆分。选择取决于并发模型：单任务内并发用 `split`，跨任务用 `into_split`。来源: [Tokio Documentation] · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 
 ### 10.4 边界测试：缓冲区大小与 MTU 的匹配（运行时性能问题）
 
@@ -855,7 +855,7 @@ async fn read_async() {
 }
 ```
 
-> **修正**: **同步 IO** 与 **async IO** 的区分：1) `std::net::TcpStream` — 阻塞 IO（`read`/`write` 阻塞当前线程）；2) `tokio::net::TcpStream` — 异步 IO（`read`/`write` 返回 `Future`）；3) 混用后果：在 async 上下文中使用阻塞 IO → 阻塞 executor 线程 → 其他任务饥饿。`tokio::net::TcpStream` 的创建：1) `TcpStream::connect("addr").await` — 异步连接；2) `listener.accept().await` — 异步接受连接；3) 从 `std::net::TcpStream` 转换：`tokio::net::TcpStream::from_std(std_stream)`（需设置 non-blocking）。这与 Go 的 `net` 包（所有 IO 隐式异步，通过 goroutine 调度）或 Python 的 `asyncio`（显式区分 `socket` 和 `asyncio.open_connection`）不同——Rust 要求显式选择 IO 模型。[来源: [Tokio Network](https://docs.rs/tokio/)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/)]
+> **修正**: **同步 IO** 与 **async IO** 的区分：1) `std::net::TcpStream` — 阻塞 IO（`read`/`write` 阻塞当前线程）；2) `tokio::net::TcpStream` — 异步 IO（`read`/`write` 返回 `Future`）；3) 混用后果：在 async 上下文中使用阻塞 IO → 阻塞 executor 线程 → 其他任务饥饿。`tokio::net::TcpStream` 的创建：1) `TcpStream::connect("addr").await` — 异步连接；2) `listener.accept().await` — 异步接受连接；3) 从 `std::net::TcpStream` 转换：`tokio::net::TcpStream::from_std(std_stream)`（需设置 non-blocking）。这与 Go 的 `net` 包（所有 IO 隐式异步，通过 goroutine 调度）或 Python 的 `asyncio`（显式区分 `socket` 和 `asyncio.open_connection`）不同——Rust 要求显式选择 IO 模型。[来源: [Tokio Network](https://docs.rs/tokio/)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/index.html)]
 
 ### 10.7 边界测试：不可变借用与可变借用的冲突
 
@@ -870,7 +870,7 @@ fn main() {
 ```
 
 > **修正**: **借用（Borrowing）规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

@@ -499,9 +499,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -548,7 +548,7 @@ fn main() {
 > 将大类型转为小类型时，高位被丢弃。
 > 如需安全检查，使用 `TryInto::try_into()`（返回 `Result`）。
 > 在 Rust 1.60+ 中，`as` 转换 `f64` → `i32` 的未定义行为已被定义为饱和截断（saturating cast），但整数间转换仍静默截断。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：裸指针与引用转换的生命周期丢失（编译错误 / 运行时 UB）
 
@@ -573,7 +573,7 @@ unsafe fn ptr_to_ref(ptr: *const i32) -> Option<&'static i32> {
 
 > **修正**: 引用（Reference） → 裸指针是安全操作（隐式转换），但裸指针 → 引用必须在 `unsafe` 块中进行，且程序员必须保证指针有效、对齐、不悬垂。
 > 这是 Rust 安全边界的典型设计：从安全区到 unsafe 区容易，从 unsafe 区回到安全区需要显式承诺。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试： trait 对象强制转换的 `Sized` 约束（编译错误）
 
@@ -727,15 +727,15 @@ fn main() {}
 > 3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
 >
 > **权威来源**:
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rust Standard Library](https://doc.rust-lang.org/std/) ·
-> [Rust RFCs](https://rust-lang.github.io/rfcs/)
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
+> [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **权威来源**:
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rust Standard Library](https://doc.rust-lang.org/std/)
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 实践

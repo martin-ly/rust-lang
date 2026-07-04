@@ -558,9 +558,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -613,7 +613,7 @@ struct PointFixed {
 }
 ```
 
-> **修正**: `#[derive(Eq)]` 要求所有字段实现 `Eq`（等价关系），`#[derive(Ord)]` 要求所有字段实现 `Ord`（全序关系）。`f32`/`f64` 因 IEEE 754 NaN 语义（NaN != NaN，且 NaN 不可比较）未实现 `Eq` 和 `Ord`，只实现 `PartialEq` 和 `PartialOrd`。包含浮点数的结构体（Struct）只能 derive 后者。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `#[derive(Eq)]` 要求所有字段实现 `Eq`（等价关系），`#[derive(Ord)]` 要求所有字段实现 `Ord`（全序关系）。`f32`/`f64` 因 IEEE 754 NaN 语义（NaN != NaN，且 NaN 不可比较）未实现 `Eq` 和 `Ord`，只实现 `PartialEq` 和 `PartialOrd`。包含浮点数的结构体（Struct）只能 derive 后者。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 12.2 边界测试：宏递归展开溢出（编译错误）
 
@@ -638,7 +638,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 宏（Macro）（`macro_rules!`）通过递归展开实现循环/迭代逻辑。编译器设置递归深度上限（默认 128），超过则报错。宏设计必须确保递归有终止分支（base case）。这与函数递归类似，但宏在编译期展开，其递归深度受编译器限制而非运行时（Runtime）栈限制。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 宏（Macro）（`macro_rules!`）通过递归展开实现循环/迭代逻辑。编译器设置递归深度上限（默认 128），超过则报错。宏设计必须确保递归有终止分支（base case）。这与函数递归类似，但宏在编译期展开，其递归深度受编译器限制而非运行时（Runtime）栈限制。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.3 边界测试：过程宏的 hygiene 与标识符捕获（编译错误）
 

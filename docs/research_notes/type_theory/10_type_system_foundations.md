@@ -213,7 +213,7 @@
 
 ### 相关理论 {#相关理论}
 
-> **[来源: ACM - Type System Research]**
+> **[ACM - Type System Research](https://dl.acm.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -229,7 +229,7 @@
 
 ### 理论背景 {#理论背景}
 
-> **[来源: IEEE - Type Safety]**
+> **[IEEE - Type Safety](https://ieeexplore.ieee.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -953,13 +953,13 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 
 ## 欧洲大学课程对齐 {#欧洲大学课程对齐}
 
-> **[来源: ACM - Type System Research]**
+> **[ACM - Type System Research](https://dl.acm.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ETH Zurich (瑞士联邦理工学院) {#eth-zurich-瑞士联邦理工学院}
 
-> **[来源: ACM - Type System Research]**
+> **[ACM - Type System Research](https://dl.acm.org/)**
 
 **课程**: Rust Programming
 
@@ -983,7 +983,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 
 ### University of Cambridge (剑桥大学) {#university-of-cambridge-剑桥大学}
 
-> **[来源: IEEE - Type Safety]**
+> **[IEEE - Type Safety](https://ieeexplore.ieee.org/)**
 
 **课程**: Computer Science Tripos (Rust部分)
 
@@ -1041,7 +1041,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 
 ## 🔬 形式化定义 {#形式化定义}
 
-> **[来源: IEEE - Type Safety]**
+> **[IEEE - Type Safety](https://ieeexplore.ieee.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -3898,7 +3898,7 @@ fn truncate_front(&mut self, len: usize)
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 
@@ -3920,8 +3920,8 @@ fn truncate_front(&mut self, len: usize)
 > **来源: [Wikipedia - Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_Calculus)**
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 > **来源: [Wikipedia - Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley_Milner_Type_System)**
-> **[来源: IEEE - Advanced Type System Features]**
-> **[来源: ACM - Type Systems for Memory Safety]**
+> **[IEEE - Advanced Type System Features](https://ieeexplore.ieee.org/)**
+> **[ACM - Type Systems for Memory Safety](https://dl.acm.org/)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 > **来源: [PLDI 2023 - Aeneas](https://www.sigplan.org/Conferences/PLDI/)**
 > **[来源: Pierce 2002 - Types and Programming Languages]**
@@ -3930,8 +3930,8 @@ fn truncate_front(&mut self, len: usize)
 > **来源: [Wikipedia - Subtyping](https://en.wikipedia.org/wiki/Subtyping)**
 > **来源: [Wikipedia - Type Inference](https://en.wikipedia.org/wiki/Type_Inference)**
 > **来源: [Wikipedia - Dependent Type](https://en.wikipedia.org/wiki/Dependent_Type)**
-> **[来源: ACM - Type Soundness Proofs]**
-> **[来源: IEEE - Type Safety Standards]**
+> **[ACM - Type Soundness Proofs](https://dl.acm.org/)**
+> **[IEEE - Type Safety Standards](https://ieeexplore.ieee.org/)**
 > **来源: [POPL 2020 - Oxide](https://www.sigplan.org/Conferences/POPL/)**
 > **[来源: POPL 2021 - Rust Verification Tools]**
 > **[来源: PLDI 2021 - Rust Verification]**

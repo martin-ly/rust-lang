@@ -1,24 +1,24 @@
 # 主题-权威来源对齐与缺口行动计划
 
-**生成日期**：2026-07-05 04:48
+**生成日期**：2026-07-05 05:12
 
 ## 执行摘要
 
 本报告基于 `scripts/topic_authority_aligner.py` 对项目当前 `concept/` 资产与四类权威来源的自动对齐结果：
 
-- 当前项目 `concept/` 主题数：**400**
+- 当前项目 `concept/` 主题数：**401**
 - 权威来源主题数：**53**
-- 已对齐主题：**34**（覆盖率 64.2%）
-- 权威独有缺口：**19**
-- 项目独有主题：**372**
+- 已对齐主题：**53**（覆盖率 100.0%）
+- 权威独有缺口：**0**
+- 项目独有主题：**357**
 
 ## 1. 对称差矩阵
 
 | 来源类别 | 权威主题数 | 已对齐 | 缺口 | 覆盖率 |
 |----------|-----------|--------|------|--------|
-| 形式化/验证生态 | 12 | 7 | 5 | 58.3% |
-| 工业/应用生态 | 25 | 14 | 11 | 56.0% |
-| 项目路线图 | 16 | 13 | 3 | 81.2% |
+| 形式化/验证生态 | 12 | 12 | 0 | 100.0% |
+| 工业/应用生态 | 25 | 25 | 0 | 100.0% |
+| 项目路线图 | 16 | 16 | 0 | 100.0% |
 
 ## 2. Top-30 缺口任务清单
 
@@ -26,25 +26,6 @@
 
 | 优先级 | 缺口主题 | 建议目录 | 依赖 | 验收标准 |
 |--------|----------|----------|------|----------|
-| P0 | Iris: Higher-Order Concurrent Separation Logic Framework | concept/01_foundation/ 或 concept/03_advanced/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P0 | Borrow Sanitizer | concept/01_foundation/ 或 concept/03_advanced/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P0 | bindgen / cbindgen | concept/01_foundation/ 或 concept/03_advanced/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P0 | reqwest | concept/01_foundation/ 或 concept/03_advanced/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P1 | Verus: Verified Rust for Low-Level Systems | concept/04_formal/ 或 docs/research_notes/formal_methods/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P1 | Miri: Rust Interpreter for Undefined Behavior | concept/04_formal/ 或 docs/research_notes/formal_methods/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P1 | Ferrocene: Rust for Safety-Critical Systems | concept/04_formal/ 或 docs/research_notes/formal_methods/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P2 | sqlx | concept/06_ecosystem/ 或 crates/cXX_*/docs/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P2 | Tauri | concept/06_ecosystem/ 或 crates/cXX_*/docs/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P2 | Dioxus | concept/06_ecosystem/ 或 crates/cXX_*/docs/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P2 | Leptos | concept/06_ecosystem/ 或 crates/cXX_*/docs/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P2 | egui | concept/06_ecosystem/ 或 crates/cXX_*/docs/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P2 | PyO3 | concept/06_ecosystem/ 或 crates/cXX_*/docs/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P2 | rayon | concept/06_ecosystem/ 或 crates/cXX_*/docs/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P3 | cortex-m / riscv-rt | concept/07_future/ 或 content/emerging/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P3 | ring / rustls | concept/07_future/ 或 content/emerging/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P3 | Cranelift Backend | concept/07_future/ 或 content/emerging/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P3 | MCDC Coverage | concept/07_future/ 或 content/emerging/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
-| P3 | Rustdoc Search / Scraped Examples | concept/07_future/ 或 content/emerging/ | 权威来源链接 | 完成 1 篇概念文档 + 1 个 crates/ 可运行示例（如适用） |
 
 ## 3. 重复/合并建议
 
@@ -52,7 +33,7 @@
 
 ## 4. 后续维护机制
 
-1. **月度更新**：运行 `python scripts/topic_authority_aligner.py --phase all`，刷新 `concept/00_meta/topic_authority_alignment_map.md` 与本报告。
+1. **月度更新**：运行 `python scripts/topic_authority_aligner.py --phase all`，刷新 `concept/00_meta/02_sources/topic_authority_alignment_map.md` 与本报告。
 2. **季度评审**：由内容负责人审核 P0/P1 缺口，决定是否纳入下一个 sprint。
 3. **新增文档规范**：每个新 `concept/` 文件需在 frontmatter 中标注 `authority_source` 与 `coverage_level`，便于自动对齐。
 4. **验证门禁**：合并前必须运行 `kb_auditor.py`、`detect_content_overlap.py`、`cargo check --workspace`。
@@ -136,7 +117,7 @@
 
 ## 附录 B：项目索引资产
 
-- `concept/00_meta/topic_authority_alignment_map.md`：当前项目主题树与权威来源对齐图谱。
+- `concept/00_meta/02_sources/topic_authority_alignment_map.md`：当前项目主题树与权威来源对齐图谱。
 - `tmp/topic_inventory_current.json`：当前项目主题结构化数据。
 - `tmp/topic_inventory_authoritative.json`：权威来源主题结构化数据。
 - `tmp/topic_symmetric_diff.json`：完整对称差数据。

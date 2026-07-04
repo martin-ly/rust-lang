@@ -7,7 +7,7 @@
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/),
 > [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、Rustonomicon 来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、Rustonomicon 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 # Rust 边界条件与特例示例 {#rust-边界条件与特例示例}
 

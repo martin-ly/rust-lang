@@ -10,7 +10,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 > **Bloom 层级**: 元（Meta）
@@ -78,8 +78,8 @@ mindmap
 > **认知功能**:
 > 该 mindmap 将 Rust 安全边界从中心向外辐射展开，帮助读者建立「安全层级」的全局拓扑直觉。
 > 建议将其作为进入本文件前的「认知锚点」快速扫读，定位当前知识所处的安全层级。
-> 关键洞察：每层扩展都是不可逆的单向跨越——颜色编码直观呈现了编译器保证的递减梯度。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> 关键洞察：每层扩展都是不可逆的单向跨越——颜色编码直观呈现了编译器保证的递减梯度。[💡 原创分析](methodology.md)
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **认知路径**:
 > 本 mindmap 将 Rust 安全边界从中心（Safe Rust）向外扩展，每层扩展都意味着**编译器保证递减，程序员责任递增**。
 > 颜色编码：绿色=编译器全责，黄色=程序员契约，红色=跨语言风险，黑色=系统级风险。理解这条边界扩展路径，是评估 Rust 项目安全风险的元框架。
@@ -110,7 +110,7 @@ graph TD
 > **认知功能**:
 > 该流程图呈现安全边界的**有向扩展关系**，unsafe 块、`extern` 声明等作为边标签，明确标注跨越条件。
 > 建议用于理解各层级之间的因果依赖（如 FFI 是进入内核的前置条件）。
-> 关键洞察：Safe Abstraction 是唯一能「逆流」的边——它是 Rust 安全哲学的核心设计模式。[来源: 💡 原创分析]
+> 关键洞察：Safe Abstraction 是唯一能「逆流」的边——它是 Rust 安全哲学的核心设计模式。[💡 原创分析](methodology.md)
 
 ---
 
@@ -120,7 +120,7 @@ graph TD
 
 ### 2.1 L0: Safe Rust（🟢 编译期保证）
 
-> **边界特征**: 编译器提供完整保证——无 UAF、无 DF、无数据竞争、无类型错误。 来源: [Rust Reference §3, RustBelt POPL 2018](https://doc.rust-lang.org/reference/)
+> **边界特征**: 编译器提供完整保证——无 UAF、无 DF、无数据竞争、无类型错误。 来源: [Rust Reference §3, RustBelt POPL 2018](https://doc.rust-lang.org/reference/introduction.html)
 > **程序员责任**: 仅需保证逻辑正确性，内存安全由编译器负责。
 > **失效模式**: 编译器 bug（极罕见）、标准库 unsafe 内部 bug（历史上极罕见）。
 
@@ -128,9 +128,9 @@ graph TD
 
 > **扩展条件**: 使用 `unsafe` 关键字标记的块、函数或 trait impl。
 > **安全保证**: 编译器不再验证内存安全，程序员必须手动维护不变式。
-> **核心契约**: 来源: [The Rustonomicon, *What Unsafe Rust Can Do*](https://doc.rust-lang.org/nomicon/)
+> **核心契约**: 来源: [The Rustonomicon, *What Unsafe Rust Can Do*](https://doc.rust-lang.org/nomicon/index.html)
 
-| 操作 | 是否需要 unsafe | 风险等级 | 典型场景 | 来源: [Rustonomicon §1.3](https://doc.rust-lang.org/nomicon/)
+| 操作 | 是否需要 unsafe | 风险等级 | 典型场景 | 来源: [Rustonomicon §1.3](https://doc.rust-lang.org/nomicon/index.html)
 |:---|:---:|:---:|:---|
 | 解引用裸指针 (`*const T`, `*mut T`) | ✅ | 🔴 | 与 C 交互、自定义数据结构 |
 | 调用 `unsafe` 函数 | ✅ | 🟡 | 使用 `std::ptr::read` / `write` |
@@ -238,7 +238,7 @@ graph TD
     L --> M[架构专家审查]
 ```
 
-> **认知功能**: 该决策树将抽象的边界扩展问题转化为**可操作的判断流程**，每个菱形节点对应一个工程决策点。建议在实际需要引入 unsafe/FFI/no_std 时对照使用，避免过早跨越安全边界。关键洞察：几乎所有边界扩展的第一步都是「能否用 Safe Rust 解决？」——这是 Rust 安全编程的黄金法则。[来源: 💡 原创分析]
+> **认知功能**: 该决策树将抽象的边界扩展问题转化为**可操作的判断流程**，每个菱形节点对应一个工程决策点。建议在实际需要引入 unsafe/FFI/no_std 时对照使用，避免过早跨越安全边界。关键洞察：几乎所有边界扩展的第一步都是「能否用 Safe Rust 解决？」——这是 Rust 安全编程的黄金法则。[💡 原创分析](methodology.md)
 
 ---
 

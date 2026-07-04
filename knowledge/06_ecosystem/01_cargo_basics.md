@@ -20,7 +20,7 @@
 
 ## 🎯 学习目标
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 完成本章后，你将能够：
 
@@ -34,7 +34,7 @@
 
 ## 📋 先决条件
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Rust 基础** — `rustc` 命令行工具（`01_fundamentals/`）
 2. **模块系统** — `mod`、`pub`、`use`（`01_fundamentals/modules.md`）
@@ -43,15 +43,15 @@
 
 ## 🧠 核心概念
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 模块 1: 概念定义
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 1.1 直观定义
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Cargo** 是 Rust 的"一站式"项目管理工具。它整合了其他语言中分散在多个工具中的功能：
 
@@ -582,7 +582,7 @@ tokio = { version = "1.0", features = ["full"] }
 **最后更新**: 2026-05-19
 > **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html), [RFC 2121: Private Dependencies [已失效]]<!-- 原链接: https://rust-lang.github.io/rfcs/3516-private-dependency.html -->
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Cargo Book、Rust Reference、SemVer 2.0.0、RFC 2121） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Cargo Book、Rust Reference、SemVer 2.0.0、RFC 2121） [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

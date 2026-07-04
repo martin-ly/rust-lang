@@ -5,7 +5,7 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **内容分级**: [专家级]
@@ -18,7 +18,7 @@
 > **受众**: [进阶]
 > **定位**: 本文件从**数学模型同构性**视角系统梳理 Rust 的执行模型（同步/异步（Async）/并发/并行），并与 Go、理论模型（CSP/Actor/π 演算/进程代数）建立精确的对应关系。
 > **原则**: 不做"并发编程教程"，聚焦"Rust 的执行模型在数学上与什么同构、与什么不同构、同构的精确条件是什么"。
-> **对齐来源**: [The Rust Async Book](https://rust-lang.github.io/async-book/) · [Tokio Tutorial] · [Go Memory Model] · [Hoare CSP 1978] · [Milner π-Calculus 1992] · [Hewitt Actor 1973] · [Boehm & Adve PLDI 2008]
+> **对齐来源**: [The Rust Async Book](https://rust-lang.github.io/async-book/index.html) · [Tokio Tutorial] · [Go Memory Model] · [Hoare CSP 1978] · [Milner π-Calculus 1992] · [Hewitt Actor 1973] · [Boehm & Adve PLDI 2008]
 > **对比语言**: Rust · Go · Erlang · C++ · Java
 > **基准版本**: Rust 1.96.1 stable (Edition 2024)
 
@@ -150,8 +150,8 @@ graph TD
     D --> D2[Actor + 内部可变性]
 ```
 
-> **认知功能**: 建立执行模型的高层分类框架，帮助开发者根据通信范式（共享内存/消息传递/混合）快速定位技术选型区间。关键洞察：Rust 的 `async/await + 共享状态` 是独特的混合模型，兼具两种范式的表达力与复杂度。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **认知功能**: 建立执行模型的高层分类框架，帮助开发者根据通信范式（共享内存/消息传递/混合）快速定位技术选型区间。关键洞察：Rust 的 `async/await + 共享状态` 是独特的混合模型，兼具两种范式的表达力与复杂度。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ---
 
@@ -290,7 +290,7 @@ sequenceDiagram
     end
 ```
 
-> **认知功能**: 可视化 Future 的惰性执行与唤醒协议，揭示异步（Async）调度的核心机制。使用建议：确保在 `Pending` 路径中正确注册 Waker，避免在 `poll` 中执行阻塞操作。关键洞察：Rust 异步的本质不是"运行"而是"被询问是否就绪"——这与 goroutine 的立即调度形成根本语义差异。[来源: 💡 原创分析]
+> **认知功能**: 可视化 Future 的惰性执行与唤醒协议，揭示异步（Async）调度的核心机制。使用建议：确保在 `Pending` 路径中正确注册 Waker，避免在 `poll` 中执行阻塞操作。关键洞察：Rust 异步的本质不是"运行"而是"被询问是否就绪"——这与 goroutine 的立即调度形成根本语义差异。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 4.3 与 Go goroutine 的本质差异
 >
@@ -464,13 +464,13 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 
 ## 八、内存共享模型
 
-> 来源: Boehm & Adve PLDI 2008, [Rust Reference §18.4](https://doc.rust-lang.org/reference/)：原子性与 happens-before
+> 来源: Boehm & Adve PLDI 2008, [Rust Reference §18.4](https://doc.rust-lang.org/reference/introduction.html)：原子性与 happens-before
 
 ### 8.1 Rust 与 C++11 内存模型的同构性
 
 > **Rust 直接复用 C++11 内存模型**:
 > Rust 1.0 起明确采用 C/C++11 的并发内存模型，包括 happens-before、synchronizes-with、sequenced-before 的完整框架。
-> 来源: [Rust Reference §18.4; Boehm & Adve, *Foundations of the C++ Concurrency Memory Model*, PLDI 2008](https://doc.rust-lang.org/reference/)
+> 来源: [Rust Reference §18.4; Boehm & Adve, *Foundations of the C++ Concurrency Memory Model*, PLDI 2008](https://doc.rust-lang.org/reference/introduction.html)
 
 | Rust `Ordering` | C++ `memory_order` | 语义 |
 | :--- | :--- | :--- |
@@ -483,7 +483,7 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 > **同构性评价**:
 > Rust 的五种 `Ordering` 与 C++11 的 `memory_order` **一一同构**（isomorphic）。
 > 在 Rust 中写 `AtomicUsize::fetch_add(1, Ordering::Acquire)` 与在 C++ 中写 `atomic_var.fetch_add(1, std::memory_order_acquire)` 具有完全相同的语义。
-> 来源: [Rust Reference §18.4.2](https://doc.rust-lang.org/reference/)
+> 来源: [Rust Reference §18.4.2](https://doc.rust-lang.org/reference/introduction.html)
 
 ### 8.2 Acquire-Release 的语义精化
 
@@ -614,7 +614,7 @@ graph TD
     B -->|实时/延迟敏感| P[std::thread + 优先级<br/>或 async + 优先级 executor]
 ```
 
-> **认知功能**: 提供工程实践中的执行模型选型决策路径，将抽象理论转化为可操作的判断流程。使用建议：先判断任务类型（CPU/I/O/状态机/共享状态），再按数据依赖、连接规模、容错需求逐层细化。关键洞察：不存在"最佳"执行模型，只有与问题特征最匹配的模型——选型错误是并发系统性能瓶颈的常见根因。[来源: 💡 原创分析]
+> **认知功能**: 提供工程实践中的执行模型选型决策路径，将抽象理论转化为可操作的判断流程。使用建议：先判断任务类型（CPU/I/O/状态机/共享状态），再按数据依赖、连接规模、容错需求逐层细化。关键洞察：不存在"最佳"执行模型，只有与问题特征最匹配的模型——选型错误是并发系统性能瓶颈的常见根因。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -637,7 +637,7 @@ xychart-beta
 > **认知功能**: 多维量化对比不同语言/运行时的执行模型特征，将抽象权衡转化为可直观比较的形状。
 > 使用建议：用雷达图识别技术选型的核心 trade-off——Rust 强在内存效率与并行表达力，Go 强在调度透明性与生态一致性（Coherence）。
 > 关键洞察：语言设计哲学直接决定雷达图轮廓——无 GC 带来内存效率优势，但也以启动速度和调度透明性为代价。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 13.2 内存-计算-通信 三维模型空间
 
@@ -668,7 +668,7 @@ graph TD
 > **认知功能**:
 > 将执行模型映射到"内存-计算-通信"正交维度，帮助理解不同语言抽象在模型空间中的占据位置。
 > 使用建议：当系统混合多种并发模型时，用三维空间定位各组件的交互界面与潜在冲突点。
-> 关键洞察：Rust 提供横跨整个三维空间的原语（thread/async/channel/rayon），而 Go 的 goroutine 主要集中于"消息传递+异步"象限，体现了不同的设计哲学。[来源: 💡 原创分析]
+> 关键洞察：Rust 提供横跨整个三维空间的原语（thread/async/channel/rayon），而 Go 的 goroutine 主要集中于"消息传递+异步"象限，体现了不同的设计哲学。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -715,7 +715,7 @@ graph TD
 ---
 
 > **权威来源**:
-> [Rust Async Book](https://rust-lang.github.io/async-book/) ·
+> [Rust Async Book](https://rust-lang.github.io/async-book/index.html) ·
 > [Tokio Tutorial](https://tokio.rs/tokio/tutorial/async) ·
 > [Hoare *Communicating Sequential Processes*](https://doi.org/10.1145/359576.359585) ·
 > [Milner *The Polyadic π-Calculus*](https://doi.org/10.1007/BFb0030902) ·
@@ -732,10 +732,10 @@ graph TD
 
 ## 权威来源索引
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/),
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html),
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html),
-> [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 > **相关文件**: [范式矩阵](03_paradigm_matrix.md) · [异步](../../03_advanced/01_async/02_async.md) · [并发](../../03_advanced/00_concurrency/01_concurrency.md)
 
 ## 十、边界测试：执行模型同构的编译错误
@@ -765,7 +765,7 @@ fn main() {
 > 嵌入式环境通常使用 `abort`。
 > 执行模型的选择影响资源管理语义——同一 Unsafe Rust 代码在两种策略下可能有不同的安全保证。
 > 形式化语义中，`unwind` 对应于带有异常处理的计算，`abort` 对应于底部（⊥）。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.2 边界测试：`async` 与线程的执行模型混淆（编译错误）
 

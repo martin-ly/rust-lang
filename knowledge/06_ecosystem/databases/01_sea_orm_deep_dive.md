@@ -9,7 +9,7 @@
 > **预计阅读时间**: 40分钟
 > **权威来源**: [Sea-ORM 官方文档](https://www.sea-ql.org/SeaORM/), [Sea-ORM GitHub](https://github.com/SeaQL/sea-orm)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Sea-ORM 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Sea-ORM 官方文档来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
@@ -18,7 +18,7 @@
 
 ## 📋 目录
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Sea-ORM 深度解析](#sea-orm-深度解析)
   - [📋 目录](#-目录)
@@ -59,13 +59,13 @@
 
 ## 🎯 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 Sea-ORM 是一个异步、动态的 Rust ORM，专为现代 Rust 生态系统设计。
 
 ### 核心特性
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 说明 |
 |------|------|
@@ -77,7 +77,7 @@ Sea-ORM 是一个异步、动态的 Rust ORM，专为现代 Rust 生态系统设
 
 ### 适用场景
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Sea-ORM 适用场景:
@@ -92,7 +92,7 @@ Sea-ORM 适用场景:
 
 ## 🏗️ 架构设计
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 核心概念
 >

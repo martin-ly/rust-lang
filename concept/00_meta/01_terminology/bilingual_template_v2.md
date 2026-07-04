@@ -3,7 +3,7 @@
 > **EN**: Bilingual Concept Template v2
 > **Summary**: Standardized bilingual template for `concept/` files with anti-examples, backward reasoning, decision trees, and authority source alignment.
 >
-> **主要来源**: [The Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [RFCs](https://rust-lang.github.io/rfcs/)
+> **主要来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [RFCs](https://rust-lang.github.io/rfcs/index.html)
 >
 > **适用范围**: `concept/` 目录下所有 L1-L7 概念文件
 > **版本**: 2.0
@@ -221,7 +221,7 @@ graph TD
 
 ---
 
-> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust By Example](https://doc.rust-lang.org/rust-by-example/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: YYYY-MM-DD 创建 [来源: ...]
 > **状态**: ✅ 权威来源对齐完成
 
@@ -275,7 +275,7 @@ graph TD
 原创分析使用：
 
 ```markdown
-> [来源: 💡 原创分析]
+> [💡 原创分析](../00_framework/methodology.md)
 ```
 
 ---

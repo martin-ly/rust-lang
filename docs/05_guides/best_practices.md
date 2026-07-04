@@ -21,9 +21,9 @@
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Software Development Best Practices](https://en.wikipedia.org/wiki/Software_Development_Best_Practices)** ·
-> **[来源: ACM - Code Quality Metrics]** ·
-> **[来源: IEEE - Software Engineering Standards]** ·
-> **[来源: Rust Project Guidelines]**
+> **[ACM - Code Quality Metrics](https://dl.acm.org/)** ·
+> **[IEEE - Software Engineering Standards](https://ieeexplore.ieee.org/)** ·
+> **[Rust Project Guidelines](https://www.rust-lang.org/policies)**
 
 - [Rust 项目最佳实践指南 {#rust-项目最佳实践指南}](#rust-项目最佳实践指南-rust-项目最佳实践指南)
   - [📋 目录 {#目录}](#-目录-目录)
@@ -2120,7 +2120,7 @@ fn process_with_control_flow(data: &[i64]) -> ControlFlow<Error, Vec<i64>> {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -2181,10 +2181,10 @@ graph TD
 > **来源: [Wikipedia - Code Review](https://en.wikipedia.org/wiki/Code_Review)**
 > **来源: [Wikipedia - Software Quality](https://en.wikipedia.org/wiki/Software_Quality)**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
-> **[来源: ACM - Code Quality Metrics]**
-> **[来源: IEEE - Software Engineering Standards]**
-> **[来源: Google Style Guides]**
-> **[来源: Microsoft Secure Coding Guidelines]**
+> **[ACM - Code Quality Metrics](https://dl.acm.org/)**
+> **[IEEE - Software Engineering Standards](https://ieeexplore.ieee.org/)**
+> **[Google Style Guides](https://google.github.io/styleguide/)**
+> **[Microsoft Secure Coding Guidelines](https://learn.microsoft.com/en-us/azure/security/develop/secure-design)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

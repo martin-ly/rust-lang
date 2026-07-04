@@ -23,7 +23,7 @@
 > **后置概念**: [Formal Methods](../04_research_and_experimental/02_formal_methods.md) · [RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**:
@@ -97,7 +97,7 @@ fn main() {
 > 1. **Unsafe 代码块**中的 raw pointer 操作
 > 2. **FFI 边界**的外部代码
 > 3. **编译期无法确定**的复杂控制流（如某些泛型（Generics）递归）
-> [来源: [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -145,7 +145,7 @@ graph LR
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 开发阶段使用编译器；测试阶段使用 BorrowSanitizer；深度审计使用 Miri。
 > **关键洞察**: BorrowSanitizer 的定位是"**可部署的 Miri 子集**"——牺牲部分检测能力以换取可接受的运行时开销。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -351,7 +351,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Miri](https://github.com/rust-lang/miri), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Miri](https://github.com/rust-lang/miri), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
 **文档版本**: 1.0

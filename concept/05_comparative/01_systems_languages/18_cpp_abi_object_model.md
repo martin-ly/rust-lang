@@ -23,7 +23,7 @@
 > [System V AMD64 ABI] ·
 > [simplifycpp.org C++_Rust.pdf]
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 ---
 
 > **Bloom 层级**: 分析 → 评价
@@ -212,7 +212,7 @@ fn draw_shape(shape: &dyn Drawable) {
 // fn bad(shape: dyn Drawable) {} // ❌ 编译错误: trait objects must include `dyn`
 ```
 
-> **关键洞察**: Rust 通过禁止 `dyn Trait` 的值类型（必须配合 `&`、`Box` 或 `Rc` 使用），**在类型层面消除了对象切片（Slice）问题**。这是 Rust 设计优于 C++ 的核心工程决策之一。[来源: 💡 原创分析]
+> **关键洞察**: Rust 通过禁止 `dyn Trait` 的值类型（必须配合 `&`、`Box` 或 `Rc` 使用），**在类型层面消除了对象切片（Slice）问题**。这是 Rust 设计优于 C++ 的核心工程决策之一。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 3.3 结构体内存布局对比
 
@@ -264,7 +264,7 @@ struct Packed {
 | C++ | 字段顺序 = 声明顺序 | `#pragma pack` / `alignas` |
 | Rust | 编译器可重排字段以优化大小 | `#[repr(C)]` 禁止重排 / `#[repr(packed)]` 无 padding |
 
-> **关键洞察**: Rust 编译器默认会重排结构体（Struct）字段以最小化 padding，而 C/C++ 保持声明顺序。这导致相同字段声明顺序的 Rust 结构体和 C 结构体可能有不同的内存布局——`#[repr(C)]` 是确保 FFI 兼容的必要条件。来源: [Rust Reference — §4.2.1](https://doc.rust-lang.org/reference/) ✅
+> **关键洞察**: Rust 编译器默认会重排结构体（Struct）字段以最小化 padding，而 C/C++ 保持声明顺序。这导致相同字段声明顺序的 Rust 结构体和 C 结构体可能有不同的内存布局——`#[repr(C)]` 是确保 FFI 兼容的必要条件。来源: [Rust Reference — §4.2.1](https://doc.rust-lang.org/reference/introduction.html) ✅
 
 ---
 
@@ -350,7 +350,7 @@ enum Value {
 
 > **关键洞察**: Rust 的 enum 布局优化（null pointer optimization）是 Rust 类型系统（Type System）优越性的典型体现：`Option<&T>` 和 `Option<Box<T>>` 的大小与 `&T` / `Box<T>` 相同，利用指针的非零特性将 `None` 编码为 null 指针。
 > C++ `std::optional<T*>` 无法实现此优化（标准不保证）。
-> 来源: [Rust Reference — §4.2.1](https://doc.rust-lang.org/reference/) ✅
+> 来源: [Rust Reference — §4.2.1](https://doc.rust-lang.org/reference/introduction.html) ✅
 
 ---
 
@@ -403,7 +403,7 @@ fn main() {
 | `noexcept` 要求 | 移动构造应 `noexcept` | 移动总是隐式 `noexcept` |
 | ABI 保证 | 依赖编译器优化 | 语言语义保证 |
 
-> **关键洞察**: Rust 的移动在 ABI 层面更简单（总是 bitwise copy），语义层面更安全（编译器禁止访问 moved-from 变量）。C++ 的移动依赖编译器优化和复杂的值类别体系，是 C++ 对象模型中最难正确实现的特性之一。[来源: 💡 原创分析]
+> **关键洞察**: Rust 的移动在 ABI 层面更简单（总是 bitwise copy），语义层面更安全（编译器禁止访问 moved-from 变量）。C++ 的移动依赖编译器优化和复杂的值类别体系，是 C++ 对象模型中最难正确实现的特性之一。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -547,9 +547,9 @@ pub struct CDrawable {
 |:---|:---|:---:|:---:|
 | C++ 无标准 ABI | [Rust Foundation Interop Initiative] | ✅ | Tier 1 |
 | Itanium ABI 规范 | [Itanium C++ ABI Spec] | ✅ | Tier 1 |
-| Rust 类型布局 | [Rust Reference §4.2.1](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
-| dyn Trait 胖指针 | [Rust Reference §4.1.13](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
-| null pointer optimization | [Rust Reference §4.2.1](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
+| Rust 类型布局 | [Rust Reference §4.2.1](https://doc.rust-lang.org/reference/introduction.html) | ✅ | Tier 1 |
+| dyn Trait 胖指针 | [Rust Reference §4.1.13](https://doc.rust-lang.org/reference/introduction.html) | ✅ | Tier 1 |
+| null pointer optimization | [Rust Reference §4.2.1](https://doc.rust-lang.org/reference/introduction.html) | ✅ | Tier 1 |
 | C++ vs Rust 移动 ABI | [💡 原创分析] | ⚠️ | Tier 3 |
 | 对象切片（Slice）不可能性 | [💡 原创分析] | ⚠️ | Tier 3 |
 
@@ -557,8 +557,8 @@ pub struct CDrawable {
 
 > **权威来源**:
 >
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) ·
 > [System V AMD64 ABI](https://gitlab.com/x86-psABIs/x86-64-ABI) ·
 > [Rust Foundation Interop Initiative](https://github.com/rustfoundation/interop-initiative)
@@ -595,7 +595,7 @@ fn use_both(obj: &(dyn Drawable + Clickable)) {
 > Rust 的 trait object（`dyn Trait`）只能包含一个"主 trait"，因为 vtable 只能存储一个主 trait 的方法指针。
 > 多 trait 组合需通过泛型（Generics）（`T: Drawable + Clickable`）或创建新的组合 trait（`trait Interactive: Drawable + Clickable {}`）。
 > 这与 C++ 的虚继承和菱形继承问题形成对比——Rust 的设计消除了 vtable 布局的复杂性，但限制了动态分发的灵活性。
-> 来源: [Rust Reference](https://doc.rust-lang.org/reference/)
+> 来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
 ### 10.2 边界测试：C++ 的隐式构造 vs Rust 的显式构造（编译错误）
 
@@ -743,14 +743,14 @@ fn main() {
 > 2) `cxx` crate（自动生成安全的 C++ 绑定）；
 > 3) `cbindgen`（生成 C 头文件）。
 > 这与 COM（Windows 的接口虚表，与 Rust 类似）或 Go 的 cgo（自动包装，但性能开销）不同——Rust 的 FFI 是零成本但需理解 ABI 差异。
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)] · [来源: [cxx crate](https://cxx.rs/)]
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)] · [来源: [cxx crate](https://cxx.rs/)]
 
 ---
 
 ## 参考来源
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > [来源: [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)]
 > [来源: [System V AMD64 ABI](https://gitlab.com/x86-psABIs/x86-64-ABI)]
 > [来源: [Wikipedia — Application Binary Interface](https://en.wikipedia.org/wiki/Application_binary_interface)]

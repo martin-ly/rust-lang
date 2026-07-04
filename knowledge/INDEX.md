@@ -12,7 +12,7 @@
 
 ## 📊 文档完成状态 (100%)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层级 | 文档数 | 状态 |
 |------|--------|------|
@@ -30,7 +30,7 @@
 
 ## 🆕 Rust 1.95 新特性索引
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 文档 | 状态 |
 |------|------|------|
@@ -56,7 +56,7 @@
 
 ## ✅ Rust 1.96 稳定特性索引
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 > Rust 1.96.0 已于 2026-05-28 发布；当前最新稳定 patch 为 1.96.1。
 
 | 特性 | 文档 | 状态 |
@@ -89,11 +89,11 @@
 
 ## 📚 按字母索引
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### A
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **array_windows** - [01_fundamentals/iterators.md](01_fundamentals/02_iterators.md) - Rust 1.94 引入，1.96+ 可用
 - **async/await** - [03_advanced/async/async_await.md](03_advanced/async/01_async_await.md)
@@ -317,7 +317,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

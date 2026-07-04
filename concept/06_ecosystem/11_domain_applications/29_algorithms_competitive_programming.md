@@ -13,9 +13,9 @@
 > **双维定位**: C×App — 应用算法和竞赛编程模式
 > **前置概念**: · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md)
 > **后置概念**: [Formal Ecosystem Tower](../08_formal_verification/44_formal_ecosystem_tower.md) · [Performance Optimization](../10_performance/15_performance_optimization.md)
-> **主要来源**: [CLRS — Introduction to Algorithms] · [LeetCode] · [Codeforces] · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [VeriContest arXiv 2026-05-08] · [Kani Docs] · [CSES Problem Set] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**: [CLRS — Introduction to Algorithms] · [LeetCode] · [Codeforces] · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [VeriContest arXiv 2026-05-08] · [Kani Docs] · [CSES Problem Set] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
-> **来源**: [std::collections](https://doc.rust-lang.org/std/collections/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/) · [The Algorithms — Rust](https://github.com/TheAlgorithms/Rust)
+> **来源**: [std::collections](https://doc.rust-lang.org/std/collections/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) · [The Algorithms — Rust](https://github.com/TheAlgorithms/Rust)
 ---
 
 > **Bloom 层级**: 应用 → 分析
@@ -32,7 +32,7 @@
 > **来源**: <https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/>
 > **来源: [Wikipedia — Competitive Programming](https://en.wikipedia.org/wiki/Competitive_Programming)** Competitive programming is a mind sport usually held over the internet or a local network, involving participants trying to program according to provided specifications.
 > **来源**: <https://en.wikipedia.org/wiki/Competitive_programming>
-> **[来源: VeriContest arXiv 2026-05-08]** VeriContest: A Benchmark of 946 LeetCode and Codeforces Problems for Rust + Verus Formal Verification.
+> **[VeriContest arXiv 2026-05-08](https://arxiv.org/)** VeriContest: A Benchmark of 946 LeetCode and Codeforces Problems for Rust + Verus Formal Verification.
 > **来源**: <https://arxiv.org/abs/2026.05.08> (概念引用（Reference）)
 
 ---
@@ -78,11 +78,11 @@ VeriContest 证明：946 道经典竞赛题的 Rust 实现可通过 Verus 形式
 | **竞赛生态** | ⚠️ 模板库较少，社区在成长 | ✅ 极成熟（AC Library 等） | ✅ LeetCode 默认支持 |
 | **形式验证** | ✅ Verus/Kani/Creusot 生态领先 | ⚠️ 有限（Frama-C 等） | ⚠️ 有限 |
 
-> 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) Rust 的零成本抽象（Zero-Cost Abstraction）原则意味着：使用高阶函数、迭代器（Iterator）、泛型（Generics）不会引入运行时（Runtime）开销。`slice::sort_unstable()` 在随机数据上通常比 C++ `std::sort` 更快。
+> 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) Rust 的零成本抽象（Zero-Cost Abstraction）原则意味着：使用高阶函数、迭代器（Iterator）、泛型（Generics）不会引入运行时（Runtime）开销。`slice::sort_unstable()` 在随机数据上通常比 C++ `std::sort` 更快。
 
 ### 1.2 VeriContest：形式验证的竞赛基准
 
-> **[来源: VeriContest arXiv 2026-05-08]** 首个大规模 Rust + Verus 形式验证基准测试集，覆盖 946 道 LeetCode/Codeforces 题目，涵盖排序、搜索、图论、动态规划、字符串等全类别算法。
+> **[VeriContest arXiv 2026-05-08](https://arxiv.org/)** 首个大规模 Rust + Verus 形式验证基准测试集，覆盖 946 道 LeetCode/Codeforces 题目，涵盖排序、搜索、图论、动态规划、字符串等全类别算法。
 
 **核心发现**:
 
@@ -622,7 +622,7 @@ impl ExactSizeIterator for RangeIter {}
 
 ### 5.1 VeriContest 案例研究
 
-> **[来源: VeriContest arXiv 2026-05-08]** Rust + Verus 对 946 道 LeetCode/Codeforces 题目的形式验证结果。
+> **[VeriContest arXiv 2026-05-08](https://arxiv.org/)** Rust + Verus 对 946 道 LeetCode/Codeforces 题目的形式验证结果。
 
 | 算法类别 | 验证成功率 | 核心规约模式 | 平均规约/代码比 |
 |:---|:---|:---|:---|
@@ -801,9 +801,9 @@ temp.extend_from_slice(&nums[..]);
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 新增算法与竞赛编程概念文件，覆盖 CLRS、LeetCode、Codeforces、VeriContest、Kani 等权威来源 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-22 新增算法与竞赛编程概念文件，覆盖 CLRS、LeetCode、Codeforces、VeriContest、Kani 等权威来源 [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -861,7 +861,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的索引操作 `v[i]` 在越界时 panic（与 C 的未定义行为、Python 的 `IndexError` 类似）。但 Rust 提供 `get` 方法返回 `Option<&T>`，允许安全处理越界情况。竞赛编程中，输入数据的不确定性（如边界条件、空数组）要求防御式编程：`v.get(i).copied().unwrap_or(0)` 是常见模式。Rust 的边界检查在 debug 模式下完全启用，release 模式下编译器可能优化掉已证明安全的检查（如迭代器（Iterator）遍历）。这与 C++ 的 `vector::at()`（越界抛异常）或 `operator[]`（无检查）不同——Rust 在安全和性能间提供明确选择：`[]` 快速但 panic，`get` 安全但略慢。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust Standard Library]
+> **修正**: Rust 的索引操作 `v[i]` 在越界时 panic（与 C 的未定义行为、Python 的 `IndexError` 类似）。但 Rust 提供 `get` 方法返回 `Option<&T>`，允许安全处理越界情况。竞赛编程中，输入数据的不确定性（如边界条件、空数组）要求防御式编程：`v.get(i).copied().unwrap_or(0)` 是常见模式。Rust 的边界检查在 debug 模式下完全启用，release 模式下编译器可能优化掉已证明安全的检查（如迭代器（Iterator）遍历）。这与 C++ 的 `vector::at()`（越界抛异常）或 `operator[]`（无检查）不同——Rust 在安全和性能间提供明确选择：`[]` 快速但 panic，`get` 安全但略慢。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [Rust Standard Library]
 
 ### 10.3 边界测试：自定义排序的比较器错误（编译错误/运行时 panic）
 
@@ -878,7 +878,7 @@ fn main() {
 }
 ```
 
-> **修正**: `sort_by` 要求比较器实现**严格弱序**（strict weak ordering）：1) 反自反性（`a < a` 为假）；2) 非对称性（`a < b` ⇒ `b < a` 为假）；3) 传递性（`a < b` ∧ `b < c` ⇒ `a < c`）。违反这些性质的比较器导致 `sort` panic（debug 模式）或产生未定义顺序（release 模式）。常见错误：比较浮点数时未处理 `NaN`（`NaN < x` 和 `NaN > x` 都为假，破坏严格弱序）。安全替代：`partial_cmp` 返回 `Option<Ordering>`，`NaN` 时返回 `None`；`sort_by` 的闭包（Closures）必须返回 `Ordering`（非 `Option`），因此需要显式处理 `NaN`（如映射到特定值或使用 `total_cmp`）。这与 C++ 的 `std::sort`（同样要求严格弱序，违反时 UB）类似，但 Rust 在 debug 模式下检查并 panic。来源: [Rust Standard Library] · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **修正**: `sort_by` 要求比较器实现**严格弱序**（strict weak ordering）：1) 反自反性（`a < a` 为假）；2) 非对称性（`a < b` ⇒ `b < a` 为假）；3) 传递性（`a < b` ∧ `b < c` ⇒ `a < c`）。违反这些性质的比较器导致 `sort` panic（debug 模式）或产生未定义顺序（release 模式）。常见错误：比较浮点数时未处理 `NaN`（`NaN < x` 和 `NaN > x` 都为假，破坏严格弱序）。安全替代：`partial_cmp` 返回 `Option<Ordering>`，`NaN` 时返回 `None`；`sort_by` 的闭包（Closures）必须返回 `Ordering`（非 `Option`），因此需要显式处理 `NaN`（如映射到特定值或使用 `total_cmp`）。这与 C++ 的 `std::sort`（同样要求严格弱序，违反时 UB）类似，但 Rust 在 debug 模式下检查并 panic。来源: [Rust Standard Library] · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 
 ### 10.4 边界测试：大数组栈分配导致的编译错误
 

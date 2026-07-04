@@ -571,9 +571,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -615,7 +615,7 @@ fn some_condition() -> bool { false }
 
 > **修正**: `loop` 表达式可以返回值（通过 `break expr;`），但所有 `break` 分支必须返回相同类型。编译器通过控制流分析推断 `loop` 的类型。
 > 若存在不一致的 `break` 类型，编译器报错。这类似于 `match` 的所有分支必须返回相同类型。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 12.2 边界测试：`if let` 与 `while let` 的变量遮蔽（编译错误）
 
@@ -766,7 +766,7 @@ fn main() {
 ## 参考来源
 
 > [来源: [The Rust Programming Language, Ch. 3.5](https://doc.rust-lang.org/book/ch03-05-control-flow.html)]
-> [来源: [RFC 1210 — `impl Trait`](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)]
+> [来源: [RFC 1210 — `impl Trait`](https://doc.rust-lang.org/reference/types/impl-trait.html)]
 > [来源: [RFC 2497 — if let chains](https://rust-lang.github.io/rfcs//2497-if-let-chains.html)]
 
 ## 认知路径

@@ -8,7 +8,7 @@
 > **内容分级**: [专家级]
 > **代码状态**: [综述级 — 待补充代码]
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
-> **来源**: [Rust for Linux](https://rust-for-linux.com/) · [Redox OS](https://www.redox-os.org/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust for Linux](https://rust-for-linux.com/) · [Redox OS](https://www.redox-os.org/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ## 一、Rust for Linux：内核中的 Rust 代码
 
@@ -178,7 +178,7 @@ Rust + aya 的优势:
 
 ## 五、Rust 操作系统选型矩阵
 
-> **[来源: 💡 原创分析]** · 综合上述所有来源 ✅
+> **[💡 原创分析](../../00_meta/00_framework/methodology.md)** · 综合上述所有来源 ✅
 
 | 场景 | 推荐方案 | 理由 |
 |:---|:---|:---|
@@ -214,7 +214,7 @@ Rust + aya 的优势:
 
 ## 七、编译错误示例
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]** 操作系统内核编程中的 Rust 编译错误模式。
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]** 操作系统内核编程中的 Rust 编译错误模式。
 
 ### 编译错误 1：`no_std` 中使用 `std`
 
@@ -317,7 +317,7 @@ fn open_resource_fixed(url: &str) -> Result<Resource, Error> {
 > [来源: [Redox OS Book](https://doc.redox-os.org/book/)]
 > [来源: [seL4 Reference Manual](https://sel4.systems/Info/Docs/seL4-manual-latest.pdf)]
 > [来源: [Tock OS](https://tockos.org/documentation/)]
-> [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
+> [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)]
 > [来源: [Rust OSDev Wiki](https://wiki.osdev.org/Rust)]
 > [来源: [Hubris OS](https://hubris.oxide.computer/)]
 > [来源: [Theseus OS — Rust OS Research](https://theseus-os.github.io/Theseus/book/)]

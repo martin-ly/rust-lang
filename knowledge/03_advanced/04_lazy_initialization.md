@@ -17,7 +17,7 @@
 
 ## 🎯 学习目标
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 完成本章后，你将能够：
 
@@ -28,7 +28,7 @@
 
 ## 📋 先决条件
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 理解所有权和借用
 - 了解 `RefCell` 和内部可变性
@@ -36,11 +36,11 @@
 
 ## 🧠 核心概念
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 为什么需要延迟初始化？
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 延迟初始化允许你在第一次访问时才计算值，适用于：
 
@@ -50,7 +50,7 @@
 
 ### 2. LazyCell - 单线程延迟初始化
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 `LazyCell` 提供单线程环境下的延迟初始化，线程不安全但性能更高。
 
@@ -932,7 +932,7 @@ fn reload_config() {
 
 > **权威来源**: [RFC 2788 — Lazy Cell](https://rust-lang.github.io/rfcs/2788-standard-lazy-types.html), [std::cell::LazyCell](https://doc.rust-lang.org/std/cell/struct.LazyCell.html), [std::sync::LazyLock](https://doc.rust-lang.org/std/sync/struct.LazyLock.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（RFC 2788、Rust Reference、std::cell 文档） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（RFC 2788、Rust Reference、std::cell 文档） [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1 (accessors) / 1.80.0 (types)

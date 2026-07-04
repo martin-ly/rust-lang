@@ -117,37 +117,37 @@
 
 ```markdown
 ## 单文档内容质量检查表 {#单文档内容质量检查表}
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 结构完整性 {#结构完整性}
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 - [ ] 文档有清晰的目录结构
 - [ ] 每个章节都有实质内容（非空）
 - [ ] 有总结和延伸阅读
 
 ### 代码示例 {#代码示例}
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 - [ ] 所有代码示例可运行
 - [ ] 代码有详细注释
 - [ ] 包含错误示例和解决方案
 - [ ] 有性能对比（如适用）
 
 ### 形式化内容 {#形式化内容}
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 - [ ] 核心概念有形式化定义 (Def)
 - [ ] 重要性质有公理/定理 (Axiom/Thm)
 - [ ] 定理有完整证明（至少L2）
 - [ ] 有反例说明边界情况
 
 ### 权威对齐 {#权威对齐-1}
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 - [ ] 引用 Rust Book 对应章节
 - [ ] 引用 Rust Reference 规范
 - [ ] 引用学术论文（形式化部分）
 - [ ] 版本信息准确（1.93.1+）
 
 ### 关联性 {#关联性}
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 - [ ] 与其他模块的交叉引用
 - [ ] 与实际应用场景的关联
 - [ ] 有学习路径指引
@@ -431,7 +431,7 @@ Week 4 (03/22-03/28): 完善与验证
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

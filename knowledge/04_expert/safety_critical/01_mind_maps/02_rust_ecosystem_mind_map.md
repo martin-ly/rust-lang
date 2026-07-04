@@ -7,7 +7,7 @@
 >
 > **相关概念**: [迭代器](../../../../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 
 # Rust生态系统思维导图
 
@@ -112,11 +112,11 @@
 
 ## 思维导图说明
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 核心维度
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **学术理论基础**: Tree Borrows (PLDI 2025), Miri (POPL 2026)
 2. **工具链与语言**: Rust 1.96 (MSRV), core库认证
@@ -126,7 +126,7 @@
 
 ### 核心安全保证
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 所有权系统
 - 借用检查器
@@ -136,7 +136,7 @@
 
 ### 应用领域
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 汽车 (ASIL D)
 - 航空航天 (DAL A-D)
@@ -146,7 +146,7 @@
 
 ### 认证工具链
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - Ferrocene (TÜV SÜD认证)
 - AdaCore GNAT Pro

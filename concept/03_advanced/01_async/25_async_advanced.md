@@ -9,7 +9,7 @@
 > **前置依赖**: [Async/Await 基础](02_async.md)
 > **定理链编号**: T-053 Waker 活性 ⟹ T-054 Stream 安全性
 >
-> **来源**: [Async Book](https://rust-lang.github.io/async-book/) · [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Async Book](https://rust-lang.github.io/async-book/index.html) · [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 ---
 
@@ -114,7 +114,7 @@ graph TD
 > **认知功能**: 活性调试路径图——当 Future 陷入永久 Pending 时，按此决策树定位故障根因。
 > 读者可逐层检查 Waker 注册、Reactor 唤醒调用、poll 返回值合法性三个环节。
 > 关键洞察：`poll → Pending → wake → poll` 的闭环是异步（Async）执行器活性（liveness）的根本保证，任一环节断裂即导致活锁或饥饿。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/index.html)]
 >
 > **[Async Book: Waker](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html)** Waker 是 Future 与 Reactor 之间的桥梁——poll 时将 Waker 传递给底层 I/O 源，I/O 就绪时源通过 Waker 通知执行器重新调度该 Future。✅ 已验证
@@ -176,7 +176,7 @@ fn create_waker(task: Arc<Task>) -> Waker {
 }
 ```
 
-> **来源**: [Rust Reference: RawWakerVTable](https://doc.rust-lang.org/reference/) · [futures-rs docs: Waker] · [Rust std: std::task::Waker]
+> **来源**: [Rust Reference: RawWakerVTable](https://doc.rust-lang.org/reference/introduction.html) · [futures-rs docs: Waker] · [Rust std: std::task::Waker]
 
 **Context 与 Waker 的关系**
 
@@ -265,7 +265,7 @@ impl Future for BadFuture {
 }
 ```
 
-> **来源**: [Rust Reference: Waker safety](https://doc.rust-lang.org/reference/) · [Async Book: Common mistakes](https://rust-lang.github.io/async-book/)
+> **来源**: [Rust Reference: Waker safety](https://doc.rust-lang.org/reference/introduction.html) · [Async Book: Common mistakes](https://rust-lang.github.io/async-book/index.html)
 
 ```rust,ignore
 // ❌ 反例: 返回 Pending 但未注册 Waker → 永久饥饿
@@ -284,7 +284,7 @@ impl Future for ForgetWakeFuture {
 }
 ```
 
-> **来源**: [Rust Reference: Future::poll contract](https://doc.rust-lang.org/reference/) · [Async Book: Waker registration](https://rust-lang.github.io/async-book/)
+> **来源**: [Rust Reference: Future::poll contract](https://doc.rust-lang.org/reference/introduction.html) · [Async Book: Waker registration](https://rust-lang.github.io/async-book/index.html)
 
 **边界：Waker 的 `wake` vs `wake_by_ref`**
 
@@ -396,7 +396,7 @@ impl UringReactor {
 **`Stream`：异步迭代器（Iterator）**
 
 > **[futures-rs 文档]** `Stream` 是异步版的 `Iterator`，其核心方法为 `poll_next`，返回 `Poll<Option<Self::Item>>`。每次 `poll_next` 可能返回 `Pending`，表示下一个元素尚未就绪。✅ 已验证
-> **[The Rust Async Book](https://rust-lang.github.io/async-book/)** `Stream` 允许在 `await` 循环中逐个消费异步产生的元素，是 `Iterator` 在异步世界的直接对应物。✅ 已验证
+> **[The Rust Async Book](https://rust-lang.github.io/async-book/index.html)** `Stream` 允许在 `await` 循环中逐个消费异步产生的元素，是 `Iterator` 在异步世界的直接对应物。✅ 已验证
 
 ```rust,ignore
 // ✅ 正确: 自定义 Stream（基于 futures-rs 的 Stream trait）
@@ -655,7 +655,7 @@ async fn pipeline() {
 **动态分发 vs 静态分发的 async 开销**
 
 > **[Tokio 博客]** `impl Future` 使用静态分发（单态化），编译器内联 `poll` 调用；`dyn Future` 通过虚表（vtable）跳转，引入间接调用开销和指令缓存不友好。✅ 已验证
-> **[Rust Reference](https://doc.rust-lang.org/reference/)** `async fn` 默认返回匿名具体类型（`impl Future`），这是零成本的基础；`Pin<Box<dyn Future>>` 是显式 opting-in 到动态分发。✅ 已验证
+> **[Rust Reference](https://doc.rust-lang.org/reference/introduction.html)** `async fn` 默认返回匿名具体类型（`impl Future`），这是零成本的基础；`Pin<Box<dyn Future>>` 是显式 opting-in 到动态分发。✅ 已验证
 
 | 维度 | `impl Future` | `Pin<Box<dyn Future>>` |
 |:---|:---|:---|
@@ -669,7 +669,7 @@ async fn pipeline() {
 
 **栈 pinning（`pin!` macro）vs 堆 pinning**
 
-> **[Rust Reference: pin_macro](https://doc.rust-lang.org/reference/)** Rust 1.68+ 引入 `std::pin::pin!` 宏（Macro），允许在栈上创建 `Pin<&mut T>`，避免 `Box::pin` 的堆分配开销。✅ 已验证
+> **[Rust Reference: pin_macro](https://doc.rust-lang.org/reference/introduction.html)** Rust 1.68+ 引入 `std::pin::pin!` 宏（Macro），允许在栈上创建 `Pin<&mut T>`，避免 `Box::pin` 的堆分配开销。✅ 已验证
 
 ```rust
 // ✅ 正确: 栈 pinning（Rust 1.68+）
@@ -719,7 +719,7 @@ async fn recursive(n: u32) -> u32 {
 // 编译错误: recursive async function has infinite size
 ```
 
-> **来源**: [Rust Reference: Recursive async fn](https://doc.rust-lang.org/reference/) · [RFC 2394 §3: State machine size](https://rust-lang.github.io/rfcs/2394-async_await.html) · [Tokio Documentation: Recursion]
+> **来源**: [Rust Reference: Recursive async fn](https://doc.rust-lang.org/reference/introduction.html) · [RFC 2394 §3: State machine size](https://rust-lang.github.io/rfcs/2394-async_await.html) · [Tokio Documentation: Recursion]
 
 ```rust
 // ✅ 修正: 使用 Box::pin 打破递归类型
@@ -966,7 +966,7 @@ fn test_async_ready_flag() {
 ```
 
 > **注意**: `loom::future` 的异步支持主要用于测试**同步原语在异步上下文中的使用**（如 `Mutex`、`Atomic` 在 async 块中的交互），而非测试 async/await 本身的调度语义。async 调度语义由执行器（Tokio 等）保证，不在 loom 的验证范围内。[来源: loom docs: loom::future module]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 **实际用例：验证自定义并发原语**
 
@@ -1173,7 +1173,7 @@ Miri 的局限（与 loom 互补）:
   - ✅ 检测别名违规、悬垂指针、无效值、未初始化内存、越界访问
 ```
 
-> **来源**: [Miri Book](https://github.com/rust-lang/miri) · [Rust Reference: Undefined behavior](https://doc.rust-lang.org/reference/) · [rustc-dev-guide: Miri and async]
+> **来源**: [Miri Book](https://github.com/rust-lang/miri) · [Rust Reference: Undefined behavior](https://doc.rust-lang.org/reference/introduction.html) · [rustc-dev-guide: Miri and async]
 
 ---
 
@@ -1184,24 +1184,24 @@ Miri 的局限（与 loom 互补）:
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
 | async fn 返回 Future | [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ |
-| Futures are lazy | [The Rust Async Book](https://rust-lang.github.io/async-book/) | ✅ |
+| Futures are lazy | [The Rust Async Book](https://rust-lang.github.io/async-book/index.html) | ✅ |
 | .await 是挂起点 | [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ |
 | async fn 编译为状态机 | [Rust Reference: Async](https://doc.rust-lang.org/reference/items/functions.html#async-functions) | ✅ |
 | Pin 保证内存位置稳定 | [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ |
 | Tokio 是生产级运行时 | [tokio.rs](https://tokio.rs/) · 社区共识 | ✅ |
 | 取消安全需手动保证 | [Async Book: Cancellation](https://rust-lang.github.io/async-book/part-reference/cancellation.html) | ✅ |
-| AFIT/RPITIT 语义等价 | [RFC 3185](https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html) · [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ |
+| AFIT/RPITIT 语义等价 | [RFC 3185](https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ |
 | Pin 形式化语义 | [PLDI 2024: RefinedRust] | ⚠️ 前沿研究 |
 | async 完整形式化 | 活跃研究领域 | 🔍 待验证 |
 | 异步计算与 Futures | [Wikipedia: Futures and promises](https://en.wikipedia.org/wiki/Futures_and_promises) · [CMU 17-350: Safe Systems Programming] | ✅ |
-| async/await 语法 | [Rust Reference: Await expressions](https://doc.rust-lang.org/reference/) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ |
-| Future trait 语义 | [Rust Reference: Future trait](https://doc.rust-lang.org/reference/) · [std::future::Future] | ✅ |
+| async/await 语法 | [Rust Reference: Await expressions](https://doc.rust-lang.org/reference/introduction.html) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ |
+| Future trait 语义 | [Rust Reference: Future trait](https://doc.rust-lang.org/reference/introduction.html) · [std::future::Future] | ✅ |
 | Pin 不动性保证 | [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) · [RFC 2592](https://github.com/rust-lang/rfcs/pull/2592) | ✅ |
 | 取消安全设计 | [Tokio Docs: Cancellation] · [Async Book: Cancellation](https://rust-lang.github.io/async-book/part-reference/cancellation.html) | ✅ |
 | Waker 契约 | [Rust Reference: Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) · [std::task::Waker] | ✅ |
 | Stream trait | [futures-rs docs] · [Rust Async Book: Streams](https://rust-lang.github.io/async-book/05_streams/01_chapter.html) | ✅ |
 | 动态分发开销 | [Rust Reference: Trait objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ |
-| Miri 检测能力 | [Miri Book](https://github.com/rust-lang/miri) · [Rust Reference: UB](https://doc.rust-lang.org/reference/) | ✅ |
+| Miri 检测能力 | [Miri Book](https://github.com/rust-lang/miri) · [Rust Reference: UB](https://doc.rust-lang.org/reference/introduction.html) | ✅ |
 | 协程与生成器 | [Wikipedia: Coroutine](https://en.wikipedia.org/wiki/Coroutine) · [RFC 2394: async/await desugaring](https://rust-lang.github.io/rfcs/2394-async_await.html) | ✅ |
 | 惰性求值与响应式编程 | [Wikipedia: Lazy evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation) · [CMU 15-214: Principles of Software Construction] | ✅ |
 
@@ -1331,7 +1331,7 @@ fn main() {
 > [来源: [Pin API Documentation](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
 > [来源: [Futures crate](https://docs.rs/futures/)]
 > [来源: [Tokio Internals](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 认知路径
@@ -1667,4 +1667,4 @@ async fn traverse_dir(path: &Path) -> Vec<String> {
 
 ---
 
-> **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Async Book](https://rust-lang.github.io/async-book/) · [Brown University Interactive TRPL](https://rust-book.cs.brown.edu/ch17-00-async-await.html)
+> **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Async Book](https://rust-lang.github.io/async-book/index.html) · [Brown University Interactive TRPL](https://rust-book.cs.brown.edu/ch17-00-async-await.html)

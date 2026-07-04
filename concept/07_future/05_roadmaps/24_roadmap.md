@@ -29,7 +29,7 @@
 > [RFC 3086 — Portable SIMD](https://github.com/rust-lang/rfcs/pull/3086) ·
 > [RFC 1398 — Global Allocators](https://github.com/rust-lang/rfcs/pull/1398) ·
 > [RFC 3185 — Static Async Traits](https://github.com/rust-lang/rfcs/pull/3185) ·
-> [RFC 2515 — Type Alias Impl Trait](https://github.com/rust-lang/rfcs/pull/2515) ·
+> [RFC 2515 — Type Alias Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html) ·
 > [Rust Internals — 2027 Edition Wishlist](https://internals.rust-lang.org/) ·
 > [Rust Foundation Roadmap](https://foundation.rust-lang.org/) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
@@ -114,7 +114,7 @@ Rust Edition 时间线:
 ```
 
 > **认知功能**: **Edition 是 Rust 语言演进的"节奏器"**——每 3 年一次的窗口允许必要的向后不兼容变更，同时保证生态整体连续性。
-> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)]
 
 **Rust Foundation 2026–2027 战略重点**：
 
@@ -196,9 +196,9 @@ graph TD
 ```
 
 > **认知功能**: 此图区分三类特性演进路径——**常规稳定化**（不依赖 Edition）、**Edition 2027 候选**（需要语法 break 或生态协调）、**远期研究**（无明确时间表）。虚线表示技术依赖关系。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **使用建议**: 技术规划时优先关注"常规稳定化"路径的特性；仅在需要语法 break 时考虑 Edition 2027 窗口。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -627,7 +627,7 @@ graph TD
 
 > **认知功能**: 此决策树帮助技术决策者判断**何时采用新特性**——大多数特性不需要等待 Edition，Edition 仅用于需要 break 的变更。
 > **使用建议**: 对 async traits、TAIT、portable SIMD 等特性，关注其常规稳定化进度；对语法 break 类特性（如保留关键字变更），规划 Edition 迁移。
-> [来源: [Rust Edition Guide — When to Migrate](https://doc.rust-lang.org/edition-guide/)]
+> [来源: [Rust Edition Guide — When to Migrate](https://doc.rust-lang.org/edition-guide/index.html)]
 
 ---
 
@@ -661,7 +661,7 @@ graph TD
 ```
 
 > **边界要点**: 2027 Edition 的边界与**预测不确定性**、**生态兼容性**、**学习成本**、**编译器复杂度**和**行业认证**相关。这些边界限制了 Rust 的演进速度，也是语言质量的根本保障。
-> [来源: [Rust RFC Process](https://rust-lang.github.io/rfcs/)] · [来源: [Crater](https://github.com/rust-lang/crater)]
+> [来源: [Rust RFC Process](https://rust-lang.github.io/rfcs/index.html)] · [来源: [Crater](https://github.com/rust-lang/crater)]
 
 ---
 
@@ -714,7 +714,7 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) | ✅ 一级 | 官方 Edition 机制说明 |
+| [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html) | ✅ 一级 | 官方 Edition 机制说明 |
 | [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) | ✅ 一级 | 官方年度项目目标 |
 | [RFC 1210 — Specialization](https://github.com/rust-lang/rfcs/pull/1210) | ✅ 一级 | 特化机制 RFC |
 | [RFC 2515 — TAIT](https://github.com/rust-lang/rfcs/pull/2515) | ✅ 一级 | 类型别名 impl trait |
@@ -770,8 +770,8 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 11]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -930,9 +930,9 @@ where
 >
 > 1) 生产代码只用稳定特性；
 > 2) nightly 特性用 feature flag 隔离，提供稳定回退；
-> 3) 跟踪 [Rust Lang Team 的优先级](https://github.com/rust-lang/lang-team/) 和 [RFC 合并状态](https://rust-lang.github.io/rfcs/)。
+> 3) 跟踪 [Rust Lang Team 的优先级](https://github.com/rust-lang/lang-team/) 和 [RFC 合并状态](https://rust-lang.github.io/rfcs/index.html)。
 > 这与 Go 的"无 nightly，所有特性直接进入稳定版"或 Java 的 JEP 流程（长期但可预测）不同——Rust 的 nightly/stable 双轨制提供早期实验能力，但稳定化时间表不确定性是工程风险。
-> [来源: [Rust Lang Team Roadmap](https://github.com/rust-lang/lang-team/)] · [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+> [来源: [Rust Lang Team Roadmap](https://github.com/rust-lang/lang-team/)] · [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)]
 
 ### 10.3 边界测试：nightly 特性在 production 中的不可预测性（编译中断）
 
@@ -974,7 +974,7 @@ fn main() {
 > 1) 生产代码只用稳定特性；
 > 2) nightly 特性用 feature flag 隔离，提供稳定回退；
 > 3) 跟踪 Rust Lang Team 的优先级和 RFC 合并状态。
-> [来源: [Rust Lang Team Roadmap](https://github.com/rust-lang/lang-team/)] · [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+> [来源: [Rust Lang Team Roadmap](https://github.com/rust-lang/lang-team/)] · [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)]
 > **过渡**: Rust 2027 Edition 及未来路线图 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链

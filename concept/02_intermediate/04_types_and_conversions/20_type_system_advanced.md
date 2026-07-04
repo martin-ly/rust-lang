@@ -116,7 +116,7 @@ trait Foo {
 ```
 
 > **impl Trait 洞察**: **impl Trait 是 Rust "零成本抽象（Zero-Cost Abstraction）"的关键**——它隐藏实现细节而不引入运行时（Runtime）开销。
-> [来源: [RFC 1522 — Conservative impl Trait](https://rust-lang.github.io/rfcs//1522-conservative-impl-trait.html)]
+> [来源: [RFC 1522 — Conservative impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)]
 > **Rust 2024 edition 补充**: 返回位置 `impl Trait` 的生命周期（Lifetimes）捕获规则发生变化。
 >
 > - Rust 2021：隐式捕获所有输入生命周期（Lifetimes）。
@@ -445,7 +445,7 @@ graph TD
 ```
 
 > **认知功能**: **impl Trait 是默认选择，但递归和需要命名类型的场景需要显式类型**。
-> [来源: [Rust API Guidelines — impl Trait](https://rust-lang.github.io/api-guidelines//future-proofing.html)]
+> [来源: [Rust API Guidelines — impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)]
 
 ---
 
@@ -637,7 +637,7 @@ let b: i32 = a.into();          // ✅ 显式: MyInt → i32
 > C++ 的运算符重载是**语法层面的重载**——`operator+` 是函数名，遵循 C++ 重载决议规则。
 > Rust 的运算符是**语法糖层面的 Trait 调用**——`a + b` 是 `Add::add(a, b)` 的语法糖，遵循 Trait 解析规则。
 > Rust 的设计消除了 C++ 运算符重载的歧义性（如 `*` 的一元/二元），但牺牲了 C++ 的灵活性（如自定义隐式转换链）。
-> [来源: 💡 原创分析] · [Rust Reference — §4.2.3](https://doc.rust-lang.org/reference/) ✅
+> [💡 原创分析](../../00_meta/00_framework/methodology.md) · [Rust Reference — §4.2.3](https://doc.rust-lang.org/reference/introduction.html) ✅
 
 ### 编译错误示例
 
@@ -708,7 +708,7 @@ where
 }
 ```
 
-> **修正**: 高阶 trait bound（HRTB，`for<'a>`）要求闭包（Closures）实现对所有可能生命周期（Lifetimes） `'a` 有效。当闭包签名涉及引用时，必须显式使用 HRTB 来正确关联输入和输出的生命周期，否则编译器无法推断返回引用的来源。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 高阶 trait bound（HRTB，`for<'a>`）要求闭包（Closures）实现对所有可能生命周期（Lifetimes） `'a` 有效。当闭包签名涉及引用时，必须显式使用 HRTB 来正确关联输入和输出的生命周期，否则编译器无法推断返回引用的来源。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 4.5 边界测试：关联类型与泛型参数冲突（编译错误）
 
@@ -736,7 +736,7 @@ impl Container for BadWrapper {
 }
 ```
 
-> **修正**: 关联类型（associated type）在 trait 实现中只能指定一次，且必须与实际方法签名一致。试图在同一实现中为关联类型指定多个不同具体类型，或方法返回类型与关联类型不匹配，都会导致编译错误。关联类型的单态化（Monomorphization）约束保证了类型一致性（Coherence）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 关联类型（associated type）在 trait 实现中只能指定一次，且必须与实际方法签名一致。试图在同一实现中为关联类型指定多个不同具体类型，或方法返回类型与关联类型不匹配，都会导致编译错误。关联类型的单态化（Monomorphization）约束保证了类型一致性（Coherence）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ---
 
@@ -747,7 +747,7 @@ impl Container for BadWrapper {
 |:---|:---:|:---|
 | [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) | ✅ 一级 | 类型参考 |
 | [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html) | ✅ 一级 | 常量泛型 |
-| [RFC 1522 — impl Trait](https://rust-lang.github.io/rfcs//1522-conservative-impl-trait.html) | ✅ 一级 | impl Trait |
+| [RFC 1522 — impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html) | ✅ 一级 | impl Trait |
 | [Rust Type Inference](https://doc.rust-lang.org/reference/types.html) | ✅ 一级 | 类型推断（Type Inference） |
 | [typenum crate](https://docs.rs/typenum/latest/typenum/) | ✅ 一级 | 类型级数字 |
 
@@ -762,9 +762,9 @@ impl Container for BadWrapper {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-03-advanced-types.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-03-advanced-types.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -791,7 +791,7 @@ impl Container for BadWrapper {
 ---
 
 > **补充来源**
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.3 边界测试：impl Trait 的自动 trait 捕获规则（编译错误）
 

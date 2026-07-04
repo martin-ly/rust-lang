@@ -15,7 +15,7 @@
 > **主要来源**: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [LLVM — Undefined Behavior](https://llvm.org/docs/UndefinedBehavior.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 >
-> **来源**: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Rust Reference — The unsafe keyword](https://doc.rust-lang.org/reference/unsafe-keyword.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **来源**: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Rust Reference — The unsafe keyword](https://doc.rust-lang.org/reference/unsafe-keyword.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 
 ---
 

@@ -102,7 +102,7 @@ rustc 测试体系
 
 > **关键洞察**: UI 测试是 rustc 测试中最具特色的部分，它把“错误信息应该长什么样”也纳入了回归保护。
 >
-> [来源: Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html)
+> [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html)(https://rustc-dev-guide.rust-lang.org/tests/ui.html)
 
 ---
 

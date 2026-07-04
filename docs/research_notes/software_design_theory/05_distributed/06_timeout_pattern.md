@@ -410,7 +410,7 @@ impl TimeoutHttpClient {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 
@@ -436,8 +436,8 @@ impl TimeoutHttpClient {
 
 > **来源: [Wikipedia - Timeout (computing)](https://en.wikipedia.org/wiki/Timeout_(computing))**
 > **来源: [Wikipedia - Distributed Computing](https://en.wikipedia.org/wiki/Distributed_Computing)**
-> **[来源: IEEE - Distributed System Design]**
-> **[来源: ACM - Timeout Pattern in Distributed Systems]**
+> **[IEEE - Distributed System Design](https://ieeexplore.ieee.org/)**
+> **[ACM - Timeout Pattern in Distributed Systems](https://dl.acm.org/)**
 > **[来源: Martin Kleppmann - Designing Data-Intensive Applications]**
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**

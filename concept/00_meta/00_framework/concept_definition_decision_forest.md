@@ -6,17 +6,17 @@
 > **受众**: [专家]
 > **Bloom 层级**: 元（Meta）
 > **定位**: 本文件为 L1-L4 核心概念建立从**定义**出发的完整判定链：**前提假设 → 推理规则 → 判定条件 → 边界 → 失效模式**。与 `theorem_inference_forest.md`（从 L4 公理出发的定理链）形成互补：后者回答「安全保证从哪来」，本文件回答「编译器/开发者如何逐步判定代码是否合法」。
-> **对齐来源**: [Gentzen 自然演绎系统] · [Novak & Cañas (2008) 概念地图理论] · [Torchiano et al. (2018) 边界分析] · [Rust Reference 类型判断规则](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **对齐来源**: [Gentzen 自然演绎系统] · [Novak & Cañas (2008) 概念地图理论] · [Torchiano et al. (2018) 边界分析] · [Rust Reference 类型判断规则](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 > **符号约定**: `⊢` 推导 / `⟹` 蕴含 / `⇐` 依赖 / `⊘` 反例 / `≡` 等价 / `∧` 与 / `∨` 或
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 > **来源**: [Gentzen, G. — *Untersuchungen über das logische Schließen*. 1935; 自然演绎系统]
 >
 > **来源**: [Novak, J.D. & Cañas, A.J. — *The Theory Underlying Concept Maps*. Technical Report, Florida Institute for Human and Machine Cognition, 2008]
 > **来源**: [Torchiano et al. (2018) — 软件工程知识库边界分析研究]
-> **来源**: [Rust Reference — 类型系统判断规则](https://doc.rust-lang.org/reference/)
+> **来源**: [Rust Reference — 类型系统判断规则](https://doc.rust-lang.org/reference/introduction.html)
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ## 📑 目录
@@ -89,7 +89,7 @@ mindmap
 > 每棵树的根是**概念定义**，叶节点是**判定结果**（合法 / 失效）。
 > 与 `theorem_inference_forest.md` 的关键区别：
 > 后者从 L4 **公理**出发（"仿射逻辑 ⟹ 所有权唯一性"），本文件从 L1 **概念定义**出发（"给定代码片段，逐步判定其所有权是否合法"）。
-> 前者是"理论保证从哪来"，后者是"工程实践怎么判"。[来源: 💡 原创分析]
+> 前者是"理论保证从哪来"，后者是"工程实践怎么判"。[💡 原创分析](methodology.md)
 
 ---
 
@@ -139,7 +139,7 @@ mindmap
 ┌─────────────────────────────────────────────────────────────┐
 │ 概念定义                                                    │
 │ 「每个值在任意时刻有且只有一个所有者」                        │
-│   来源: [Rust Reference §4.1; RustBelt T-001](https://doc.rust-lang.org/reference/)               │
+│   来源: [Rust Reference §4.1; RustBelt T-001](https://doc.rust-lang.org/reference/introduction.html)               │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -224,7 +224,7 @@ graph TD
     D -.->|边界: ManuallyDrop| B3[手动控制释放<br/>程序员承担唯一性]
 ```
 
-> **认知功能**: 本图将所有权判定的**逐步推理过程**可视化。从定义出发，经过三个独立的前提-规则-判定链，最终到达合法或失效的叶节点。边界条件（虚线）表示"什么情况下定义的前提被打破"——这是理解 Rust 安全边界的关键。[来源: 💡 原创分析]
+> **认知功能**: 本图将所有权判定的**逐步推理过程**可视化。从定义出发，经过三个独立的前提-规则-判定链，最终到达合法或失效的叶节点。边界条件（虚线）表示"什么情况下定义的前提被打破"——这是理解 Rust 安全边界的关键。[💡 原创分析](methodology.md)
 
 ### 2.3 失效条件矩阵
 
@@ -246,7 +246,7 @@ graph TD
 ┌─────────────────────────────────────────────────────────────┐
 │ 概念定义                                                    │
 │ 「借用是通过引用 (&T / &mut T) 临时访问值，不转移所有权」      │
-│   来源: [Rust Reference §4.2; RustBelt Borrow Prop](https://doc.rust-lang.org/reference/)         │
+│   来源: [Rust Reference §4.2; RustBelt Borrow Prop](https://doc.rust-lang.org/reference/introduction.html)         │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -326,7 +326,7 @@ graph TD
     D -.->|边界: 裸指针| B4[*const/*mut<br/>完全绕过借用检查]
 ```
 
-> **认知功能**: 本图展示借用判定的**核心矛盾**：Rust 同时允许"多个读者"（`&T`）和"一个写者"（`&mut T`），但禁止"读写并发"。判定 C2 是借用检查器的核心——检查引用作用域是否重叠。边界条件展示了从编译期保证（Safe Rust）到运行时检查（RefCell）再到完全绕过（裸指针）的完整光谱。[来源: 💡 原创分析]
+> **认知功能**: 本图展示借用判定的**核心矛盾**：Rust 同时允许"多个读者"（`&T`）和"一个写者"（`&mut T`），但禁止"读写并发"。判定 C2 是借用检查器的核心——检查引用作用域是否重叠。边界条件展示了从编译期保证（Safe Rust）到运行时检查（RefCell）再到完全绕过（裸指针）的完整光谱。[💡 原创分析](methodology.md)
 
 ### 3.3 失效条件矩阵
 
@@ -347,7 +347,7 @@ graph TD
 ┌─────────────────────────────────────────────────────────────┐
 │ 概念定义                                                    │
 │ 「生命周期是引用有效的程序点集合，编译期构造，不进入机器码」   │
-│   来源: [Rust Reference §10.3; Tofte-Talpin 区域类型](https://doc.rust-lang.org/reference/)       │
+│   来源: [Rust Reference §10.3; Tofte-Talpin 区域类型](https://doc.rust-lang.org/reference/introduction.html)       │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -435,7 +435,7 @@ graph TD
     D -.->|边界: NLL/Polonius| B4[非词法生命周期<br/>更精确的借用分析]
 ```
 
-> **认知功能**: 生命周期判定树的核心洞察是：**生命周期不是"时间"，而是"作用域的包含关系"**。判定 C2（输出 ≤ 输入）本质上是偏序关系的可满足性检查——这正是 Tofte-Talpin 区域类型的核心算法。边界条件展示了从简单省略（Elision）到高阶泛型（HRTB）的复杂度光谱。[来源: 💡 原创分析]
+> **认知功能**: 生命周期判定树的核心洞察是：**生命周期不是"时间"，而是"作用域的包含关系"**。判定 C2（输出 ≤ 输入）本质上是偏序关系的可满足性检查——这正是 Tofte-Talpin 区域类型的核心算法。边界条件展示了从简单省略（Elision）到高阶泛型（HRTB）的复杂度光谱。[💡 原创分析](methodology.md)
 
 ### 4.3 失效条件矩阵
 
@@ -457,7 +457,7 @@ graph TD
 ┌─────────────────────────────────────────────────────────────┐
 │ 概念定义                                                    │
 │ 「Trait 是定义共享行为的接口，可被类型实现，可被泛型约束」     │
-│   来源: [Rust Reference §8.18; Haskell Typeclass 对应](https://doc.rust-lang.org/reference/)      │
+│   来源: [Rust Reference §8.18; Haskell Typeclass 对应](https://doc.rust-lang.org/reference/introduction.html)      │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -566,7 +566,7 @@ graph TD
 │ 概念定义                                                    │
 │ 「泛型是参数化多态，允许函数/类型/Trait 对多种类型工作，      │
 │   编译器通过单态化生成具体代码」                              │
-│   来源: [Rust Reference §6.11; System F ∀T.λx:T](https://doc.rust-lang.org/reference/)            │
+│   来源: [Rust Reference §6.11; System F ∀T.λx:T](https://doc.rust-lang.org/reference/introduction.html)            │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -671,7 +671,7 @@ graph TD
 │ 概念定义                                                    │
 │ 「Rust 通过类型系统（Send/Sync）在编译期排除数据竞争，        │
 │   实现 fearless concurrency」                                │
-│   来源: [Rust Reference §13; RustBelt Thread Safety](https://doc.rust-lang.org/reference/)        │
+│   来源: [Rust Reference §13; RustBelt Thread Safety](https://doc.rust-lang.org/reference/introduction.html)        │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -776,7 +776,7 @@ graph TD
 │ 概念定义                                                    │
 │ 「async/await 是协作式多任务的语法糖，编译器将 async fn      │
 │   变换为实现了 Future trait 的状态机」                        │
-│   来源: [Rust Reference Ch 17; Tokio 文档](https://doc.rust-lang.org/reference/)                  │
+│   来源: [Rust Reference Ch 17; Tokio 文档](https://doc.rust-lang.org/reference/introduction.html)                  │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -887,7 +887,7 @@ graph TD
 │ 概念定义                                                    │
 │ 「unsafe 是 Rust 的安全边界逃逸舱口，标记程序员手动维护       │
 │   编译器不再验证的不变式」                                   │
-│   来源: [Rust Reference §16; Rustonomicon §1](https://doc.rust-lang.org/reference/)               │
+│   来源: [Rust Reference §16; Rustonomicon §1](https://doc.rust-lang.org/reference/introduction.html)               │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -973,7 +973,7 @@ graph TD
     D -.->|边界: Kani| B5[模型检测<br/>自动验证 unsafe]
 ```
 
-> **认知功能**: Unsafe 判定树的核心洞察：**unsafe 不是"无规则"，而是"规则由程序员手动执行而非编译器自动执行"**。判定 C2（SAFETY 注释）和 C3（安全封装）是工程实践中的关键——它们将不可验证的 unsafe 内部转化为可审计的安全接口。[来源: 💡 原创分析]
+> **认知功能**: Unsafe 判定树的核心洞察：**unsafe 不是"无规则"，而是"规则由程序员手动执行而非编译器自动执行"**。判定 C2（SAFETY 注释）和 C3（安全封装）是工程实践中的关键——它们将不可验证的 unsafe 内部转化为可审计的安全接口。[💡 原创分析](methodology.md)
 
 ### 9.3 失效条件矩阵
 
@@ -1017,7 +1017,7 @@ graph TD
     U ==>|"unsafe 绕过借用检查"| B
 ```
 
-> **关键洞察**: Unsafe 判定树是"交叉点之王"——它同时影响借用、生命周期、并发和异步判定树的边界。这意味着：unsafe 代码的 bug 往往不是局部问题，而是**系统性安全保证的破坏**。[来源: 💡 原创分析]
+> **关键洞察**: Unsafe 判定树是"交叉点之王"——它同时影响借用、生命周期、并发和异步判定树的边界。这意味着：unsafe 代码的 bug 往往不是局部问题，而是**系统性安全保证的破坏**。[💡 原创分析](methodology.md)
 
 ---
 
@@ -1033,7 +1033,7 @@ graph TD
 | **可视化** | 层级化的公理-定理依赖图 | 决策树（前提-规则-条件-结果） |
 | **关系** | **互补**: 定理森林证明"为什么安全"，判定森林展示"怎么判安全" | **互补**: 判定森林实践"怎么判"，定理森林保证"判得对" |
 
-> **使用建议**: 学习新概念时，先在**本文件**中找到对应判定树，理解编译器如何逐步检查代码；然后到 `theorem_inference_forest.md` 中追溯该判定的数学根基。这种"实践→理论"的双向路径是深度理解的标志。[来源: 💡 原创分析]
+> **使用建议**: 学习新概念时，先在**本文件**中找到对应判定树，理解编译器如何逐步检查代码；然后到 `theorem_inference_forest.md` 中追溯该判定的数学根基。这种"实践→理论"的双向路径是深度理解的标志。[💡 原创分析](methodology.md)
 
 ---
 
@@ -1041,7 +1041,7 @@ graph TD
 
 | 层级 | 来源 | 在本文件中的作用 |
 |:---|:---|:---|
-| **一级** | [Rust Reference](https://doc.rust-lang.org/reference/) | 所有权、借用、生命周期、Trait、泛型、Unsafe 的定义和规则 |
+| **一级** | [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | 所有权、借用、生命周期、Trait、泛型、Unsafe 的定义和规则 |
 | **一级** | RustBelt (Jung et al., POPL 2018) | 所有权谓词、借用命题、线程安全形式化的数学基础 |
 | **一级** | The Rustonomicon | Unsafe 操作的具体边界和契约 |
 | **二级** | Gentzen, G. (1935). *Untersuchungen über das logische Schließen*. | 自然演绎系统 — 判定树的逻辑结构基础 |

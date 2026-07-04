@@ -510,9 +510,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -598,7 +598,7 @@ fn outer_fixed() -> Result<i32, String> {
 }
 ```
 
-> **修正**: `?` 运算符自动将 `Result<T, E>` 的 `Err` 分支转换为函数返回类型（通过 `From` trait），但只能处理一层 `Result`。嵌套 `Result`（如 `Result<Result<T, E1>, E2>`）需要显式逐层解包。这是 Rust 显式错误处理哲学的体现——不自动扁平化嵌套错误类型，要求程序员明确每一层错误的语义。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: `?` 运算符自动将 `Result<T, E>` 的 `Err` 分支转换为函数返回类型（通过 `From` trait），但只能处理一层 `Result`。嵌套 `Result`（如 `Result<Result<T, E1>, E2>`）需要显式逐层解包。这是 Rust 显式错误处理哲学的体现——不自动扁平化嵌套错误类型，要求程序员明确每一层错误的语义。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.5 边界测试：`thiserror` 的 `#[from]` 与类型歧义（编译错误）
 

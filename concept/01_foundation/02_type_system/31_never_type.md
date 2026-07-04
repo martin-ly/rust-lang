@@ -21,7 +21,7 @@
 >
 > [Rust Reference — Never Type](https://doc.rust-lang.org/reference/types/never.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html) ·
 > [Rust Release Notes — 1.92.0](https://doc.rust-lang.org/beta/releases.html) ·
 > [Rust Release Notes — 1.96.0](https://github.com/rust-lang/rust/issues/156512)
@@ -264,7 +264,7 @@ pub fn handle_events(event: Event<i32, !>) -> Option<i32> {
 
 ### 3.2 与空枚举的对比
 
-> **[来源: 💡 原创分析]**
+> **[💡 原创分析](../../00_meta/00_framework/methodology.md)**
 
 | 特性 | `!` (never type) | `enum Void {}` (空枚举（Enum）) |
 |------|------------------|------------------------|
@@ -451,7 +451,7 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 > **权威来源**:
 > [Rust Reference — Never Type](https://doc.rust-lang.org/reference/types/never.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)
 >
 > **文档版本**: 1.0

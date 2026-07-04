@@ -12,7 +12,7 @@
 > **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Editions](../01_edition_roadmap/44_edition_guide.md)
 > **后置概念**: [Rust Version Tracking](05_rust_version_tracking.md) · [Rust 1.97 Preview (Beta)](rust_1_97_preview.md)
 > **定理链**: N/A — 流程/生态文档
-> **主要来源**: [TRPL — Appendix G](https://doc.rust-lang.org/book/appendix-07-nightly-rust.html) · [Rust Forge — Release Process](https://forge.rust-lang.org/release/process.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**: [TRPL — Appendix G](https://doc.rust-lang.org/book/appendix-07-nightly-rust.html) · [Rust Forge — Release Process](https://forge.rust-lang.org/release/process.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 >
 > **来源**: [TRPL — Appendix G: How Rust is Made and “Nightly Rust”](https://doc.rust-lang.org/book/appendix-07-nightly-rust.html) · [Rust Release Channels](https://doc.rust-lang.org/book/appendix-07-nightly-rust.html#choo-choo-release-channels-and-riding-the-trains)

@@ -19,7 +19,7 @@
 > [Wikipedia — Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic) ·
 > [Wikipedia — Predicate Transformer Semantics](https://en.wikipedia.org/wiki/Predicate_transformer_semantics) ·
 > [RustBelt — POPL 2018](https://doi.org/10.1145/3158154) ·
-> [The Rustonomicon — Safety](https://doc.rust-lang.org/nomicon/) ·
+> [The Rustonomicon — Safety](https://doc.rust-lang.org/nomicon/index.html) ·
 > [Floyd 1967 — Assigning Meanings to Programs](https://doi.org/10.1007/978-94-011-1793-7_4) ·
 > [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [VSTTE — Verified Software](https://www.verifythis.org/)
@@ -466,7 +466,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
   ✅ 将 unsafe 契约形式化记录
      // SAFETY: ptr must be non-null, properly aligned,
      //          and point to a valid T.
-> [来源: [The Rustonomicon — Safety](https://doc.rust-lang.org/nomicon/)]
+> [来源: [The Rustonomicon — Safety](https://doc.rust-lang.org/nomicon/index.html)]
 
 陷阱 4: 将运行时断言当作形式化验证
   ❌ assert!(x > 0); // 运行时检查
@@ -505,7 +505,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
 | [Wikipedia — Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic) | ✅ 三级 | 概念入门 |
 | [Wikipedia — Predicate Transformer](https://en.wikipedia.org/wiki/Predicate_transformer_semantics) | ✅ 三级 | WP 概念 |
 | [RustBelt — POPL 2018](https://doi.org/10.1145/3158154) | ✅ 一级 | Rust 分离逻辑形式化 |
-| [The Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ 一级 | Unsafe Rust 权威指南 |
+| [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) | ✅ 一级 | Unsafe Rust 权威指南 |
 | [Separation Logic — Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf) | ✅ 一级 | 分离逻辑奠基 |
 | [Iris Project](https://iris-project.org/) | ✅ 一级 | 高阶并发分离逻辑 |
 | [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) | ✅ 一级 | Rust 演绎验证工具 |
@@ -546,9 +546,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

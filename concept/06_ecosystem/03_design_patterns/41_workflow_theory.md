@@ -20,7 +20,7 @@
 > [Reactive Programming](../04_web_and_networking/40_reactive_programming.md) ·
 > [分布式系统](../04_web_and_networking/18_distributed_systems.md)
 >
-> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **前置概念**: N/A
 ---
 
@@ -30,7 +30,7 @@
 > [Petri Nets](https://www.informatik.uni-hamburg.de/TGI/PetriNets/) ·
 > [Milner — Communicating and Mobile Systems: The π-Calculus](https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691) ·
 > [Clarke & Emerson — Design and Synthesis of Synchronization Skeletons](https://dl.acm.org/doi/10.1145/567446.567462) ·
-> [Rust async-book](https://rust-lang.github.io/async-book/)
+> [Rust async-book](https://rust-lang.github.io/async-book/index.html)
 > [来源: [WfMC — Reference Model](https://wfmc.org/public-documents/)] · [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)] · [来源: [Workflow Patterns](http://www.workflowpatterns.com/)]
 > **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
@@ -177,7 +177,7 @@ where F: FnMut() -> Fut, Fut: Future<Output = Result<Output>>
 ```
 
 > **来源**: [WfMC — Workflow Patterns](http://www.workflowpatterns.com/) ·
-> [来源: [Plotkin — SOS](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf)] · [来源: [Rust async-book](https://rust-lang.github.io/async-book/)]
+> [来源: [Plotkin — SOS](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf)] · [来源: [Rust async-book](https://rust-lang.github.io/async-book/index.html)]
 > [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)
 
 ### 1.3 BPMN 与形式化语义
@@ -499,7 +499,7 @@ where G: FnMut() -> bool, W: FnMut() -> Future<Output = Result<T>>
 }
 ```
 
-> **来源**: [Rust async-book](https://rust-lang.github.io/async-book/) · [Tokio — Combinators](https://docs.rs/tokio/latest/tokio/macro.join.html)
+> **来源**: [Rust async-book](https://rust-lang.github.io/async-book/index.html) · [Tokio — Combinators](https://docs.rs/tokio/latest/tokio/macro.join.html)
 
 ### 4.2 类型系统映射
 >
@@ -544,7 +544,7 @@ where
 > - **Send/Sync 安全**: 跨线程工作流自动检查线程安全
 > - **生命周期（Lifetimes）**: 输入数据的生命周期在编译期验证，不存在 dangling reference
 >
-> **来源**: [Rust Type System](https://doc.rust-lang.org/reference/type-system.html) · [Rust async-book](https://rust-lang.github.io/async-book/)
+> **来源**: [Rust Type System](https://doc.rust-lang.org/reference/type-system.html) · [Rust async-book](https://rust-lang.github.io/async-book/index.html)
 
 ### 4.3 状态机转换
 >
@@ -1272,14 +1272,14 @@ async fn unbounded_backoff() -> Result<Output> {
 > [来源: [Petri Nets World](https://www.informatik.uni-hamburg.de/TGI/PetriNets/)]
 > [来源: [Workflow Patterns](http://www.workflowpatterns.com/)]
 > [来源: [OMG BPMN 2.0](https://www.omg.org/spec/BPMN/2.0/)]
-> [来源: [Rust async-book](https://rust-lang.github.io/async-book/)]
+> [来源: [Rust async-book](https://rust-lang.github.io/async-book/index.html)]
 > [来源: [Petri Nets World](https://www.informatik.uni-hamburg.de/TGI/PetriNets/)]
 > [来源: [Milner — π-Calculus](https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691)]
-> [来源: [Rust async-book](https://rust-lang.github.io/async-book/)]
+> [来源: [Rust async-book](https://rust-lang.github.io/async-book/index.html)]
 > [来源: [WfMC — XPDL Specification](https://www.wfmc.org/standards/xpdl)]
 > [来源: [van der Aalst — Workflow Patterns](http://www.workflowpatterns.com/)]
 > [来源: [BPMN 2.0 Specification](https://www.omg.org/spec/BPMN/2.0/)]
-> [来源: [Rust RFC — async/await](https://rust-lang.github.io/async-book/)]
+> [来源: [Rust RFC — async/await](https://rust-lang.github.io/async-book/index.html)]
 > [来源: [Clarke — Model Checking](https://mitpress.mit.edu/9780262037883/model-checking/)]
 > [来源: [Winskel — Event Structures](https://mitpress.mit.edu/9780262731034/the-formal-semantics-of-programming-languages/)]
 > [来源: [Milner — Communicating and Mobile Systems](https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691)]

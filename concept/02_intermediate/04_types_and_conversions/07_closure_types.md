@@ -304,7 +304,7 @@ graph TD
 > **认知功能**: 此决策树帮助选择闭包 Trait 约束。核心判断标准是**状态修改需求**和**复用性**。
 > **使用建议**: 优先 `Fn`，需要时升级到 `FnMut`，极少情况需要 `FnOnce`。
 > **关键洞察**: Trait 约束的选择是**API 契约设计**——约束越严格，调用者越灵活；约束越宽松，实现者越自由。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -397,7 +397,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
@@ -455,7 +455,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的闭包是匿名结构体（Struct），实现 `Fn`/`FnMut`/`FnOnce` trait。只有**不捕获环境**的闭包可以强制转换为函数指针（`fn`）。捕获环境变量的闭包有唯一的匿名类型，不能当作 `fn` 使用。这类似于 C++ 的 lambda——捕获变量的 lambda 不能转换为函数指针，无捕获的可以。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 的闭包是匿名结构体（Struct），实现 `Fn`/`FnMut`/`FnOnce` trait。只有**不捕获环境**的闭包可以强制转换为函数指针（`fn`）。捕获环境变量的闭包有唯一的匿名类型，不能当作 `fn` 使用。这类似于 C++ 的 lambda——捕获变量的 lambda 不能转换为函数指针，无捕获的可以。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：`dyn Fn` 与泛型闭包的性能差异（逻辑错误）
 

@@ -175,7 +175,7 @@ Comprehensive Rust 与本知识体系的互补关系:
 | [Comprehensive Rust 官网](https://google.github.io/comprehensive-rust/) | ✅ 一级 | Google 官方课程 |
 | [Comprehensive Rust GitHub](https://github.com/google/comprehensive-rust) | ✅ 一级 | 源码与练习题 |
 | [Google Blog — 课程发布](https://google.github.io/comprehensive-rust/) | ✅ 一级 | 官方发布说明 |
-| [Rust by Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 互补的示例驱动学习 |
+| [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 互补的示例驱动学习 |
 
 ---
 

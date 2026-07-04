@@ -4,7 +4,7 @@
 > **Summary**: 典型开发场景 → 决策问题 → 候选方案 → Rust 概念/工具选择。
 > **受众**: [研究者]
 > **内容分级**: [元层]
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---
 

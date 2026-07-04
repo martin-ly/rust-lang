@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 397,
+    "total_files": 398,
     "generated_at": "The system cannot accept the date entered.\nEnter the new date: (yy-mm-dd)"
   },
   "files": [
@@ -1247,6 +1247,38 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\02_sources\\international_authority_index.md",
+      "layer": "L0",
+      "title": "International Authority Index（国际化权威来源索引）",
+      "positioning": "集中维护 Rust 知识体系所需的国际权威来源 URL，便于 concept/、knowledge/、docs/ 各层统一引用，避免重复搜索与链接失效。",
+      "line_count": 218,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../00_framework/knowledge_mindmap.md",
+        "../04_navigation/concept_index.md",
+        "authority_source_map.md",
+        "sources.md",
+        "topic_authority_alignment_map.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 85,
+      "pre_post": {
+        "pre": [
+          "[Authority Source Map](authority_source_map.md) · [Sources](sources.md) · [Topic-Authority Alignment Map](topic_authority_alignment_map.md)"
+        ],
+        "post": [
+          "[Concept Index](../04_navigation/concept_index.md) · [Knowledge Mindmap](../00_framework/knowledge_mindmap.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\00_meta\\02_sources\\rustbelt_predicate_map.md",
       "layer": "L0",
       "title": "RustBelt 谓词映射图（RustBelt Predicate Map）",
@@ -1354,14 +1386,12 @@
       "layer": "L0",
       "title": "主题-权威来源对齐图谱 (Topic-Authority Alignment Map)",
       "positioning": "",
-      "line_count": 372,
+      "line_count": 349,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
-      "cross_references": [
-        "https://github.com/rust-lang/miri/blob/master/BORROW_SANITIZER.md"
-      ],
+      "cross_references": [],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
@@ -17875,7 +17905,7 @@
         },
         {
           "source": "Rust Standard Library: Backtrace",
-          "context": "· **[Rust Reference: track_caller](https://doc.rust-lang.org/reference/)** 两者结合可覆盖\"从精确源点到完整传播路径\"的全谱系定位需求。 ✅"
+          "context": "· **[Rust Reference: track_caller](https://doc.rust-lang.org/reference/introduction.html)** 两者结合可覆盖\"从精确源点到完整传播路径\"的全谱系定位需求。 ✅"
         },
         {
           "source": "anyhow source — macro rules",
@@ -20881,7 +20911,7 @@
       "layer": "L3",
       "title": "并发 模式：从消息 传递到锁自由的数据结构",
       "positioning": "深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权（Ownership）系统如何为并发安全（Concurrency Safety）提供编译期保证。",
-      "line_count": 1139,
+      "line_count": 1140,
       "theorem_chains": [
         {
           "text": "| 并发 模式：从消息 传递到锁自由的数据结构 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -36898,7 +36928,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\01_cargo\\10_public_private_deps.md",
       "layer": "L6",
       "title": "Cargo 公共与私有依赖",
-      "positioning": "解决 Rust  crate 图中\"依赖泄漏\"问题的核心机制，使 API 稳定性与依赖演进解耦。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]",
+      "positioning": "解决 Rust  crate 图中\"依赖泄漏\"问题的核心机制，使 API 稳定性与依赖演进解耦。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]",
       "line_count": 631,
       "theorem_chains": [
         {
@@ -44632,7 +44662,7 @@
       "layer": "L6",
       "title": "Game Development & ECS Architecture（游戏开发与 ECS 架构）",
       "positioning": "",
-      "line_count": 1363,
+      "line_count": 1362,
       "theorem_chains": [
         {
           "text": "### 3.1 `&mut Component` ⟹ System 独占访问",

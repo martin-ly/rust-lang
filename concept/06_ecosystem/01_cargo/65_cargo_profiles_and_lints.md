@@ -15,9 +15,9 @@
 
 ---
 
-> **来源**: [Cargo — Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) · [Cargo — Lints](https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-table) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Cargo — Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) · [Cargo — Lints](https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-table) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Cargo Book — Lints](https://doc.rust-lang.org/cargo/reference/lints.html) ·
-> [The Cargo Book](https://doc.rust-lang.org/cargo/)`](<https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section>)
+> [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)`](<https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section>)
 
 ---
 
@@ -294,11 +294,11 @@ Cargo lints 目前仍为 nightly-only 不稳定特性，需要在 nightly 工具
 |:---|:---:|:---|
 | [Cargo Book — Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) | ✅ 一级 | Profile 官方文档 |
 | [Cargo Book — Lints](https://doc.rust-lang.org/cargo/reference/lints.html) | ✅ 一级 | Cargo lints 官方文档 |
-| [The Cargo Book](https://doc.rust-lang.org/cargo/)`](<https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section>) | ✅ 一级 | `[lints]` 官方文档 |
+| [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)`](<https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section>) | ✅ 一级 | `[lints]` 官方文档 |
 
 ---
 
-> **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/)
+> **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 / Cargo profiles & lints
 
 **文档版本**: 1.0

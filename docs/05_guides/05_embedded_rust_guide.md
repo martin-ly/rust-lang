@@ -617,7 +617,7 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -647,7 +647,7 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
 > **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
 > **来源: [Rust Embedded WG](https://rust-embedded.github.io/book/)**
 > **来源: [Embassy Book](https://embassy.dev/book/)**
-> **[来源: IEEE - Embedded Software]**
+> **[IEEE - Embedded Software](https://ieeexplore.ieee.org/)**
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 > **来源: [ACM](https://dl.acm.org/)**
 > **来源: [IEEE](https://standards.ieee.org/)**

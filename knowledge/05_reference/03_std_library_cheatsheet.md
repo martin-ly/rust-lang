@@ -8,25 +8,25 @@
 > [Rust Reference: The std library prelude](https://doc.rust-lang.org/reference/names/preludes.html),
 > [Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Standard Library 文档、Rust Reference） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Standard Library 文档、Rust Reference） [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [进阶] / [专家]
 > **内容分级**: [实验级]
 
 **变更日志**:
 
-- v1.2 (2026-05-19): 补全权威来源标注（Rust Standard Library 文档、Rust Reference、RFCs） [来源: Authority Source Sprint Batch 8]
+- v1.2 (2026-05-19): 补全权威来源标注（Rust Standard Library 文档、Rust Reference、RFCs） [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 - v1.1 (2026-05-19): 补全权威来源标注（Rust Standard Library 文档、Rust Reference）
 
 ---
 
 ## 常用模块速查
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### std::vec - 动态数组
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 let mut v = Vec::new();
@@ -58,7 +58,7 @@ let v = Vec::with_capacity(10);  // 预分配容量
 
 ### std::option - 可选值
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 let x: Option<i32> = Some(5);
@@ -94,7 +94,7 @@ let x: Option<i32> = None.or(Some(3));    // Some(3)
 
 ### std::result - 错误处理
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 let x: Result<i32, &str> = Ok(5);
@@ -128,7 +128,7 @@ fn read_file() -> Result<String, io::Error> {
 
 ### std::collections - 集合类型
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### HashMap<K, V> / BTreeMap<K, V>
 

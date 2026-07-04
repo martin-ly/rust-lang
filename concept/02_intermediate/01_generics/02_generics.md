@@ -230,8 +230,8 @@
 | **Go** | 接口实现（GCShape stenciling） | 为每个 GC shape 生成一份代码 | 极低 | 中 |
 | **Haskell** | 类型类字典传递 | 运行时（Runtime）传递字典指针 | 有（间接调用） | 低 |
 
-> **来源: [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/)** Rust 泛型通过单态化实现零成本抽象（Zero-Cost Abstraction），为每个具体类型生成专用代码。 ✅
-> **[来源: C++ Reference: Templates]** C++ 模板通过文本替换实现编译期实例化，与 Rust 单态化类似但无统一类型检查。 ✅
+> **来源: [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/introduction.html)** Rust 泛型通过单态化实现零成本抽象（Zero-Cost Abstraction），为每个具体类型生成专用代码。 ✅
+> **[C++ Reference: Templates](https://en.cppreference.com/w/cpp/templates)** C++ 模板通过文本替换实现编译期实例化，与 Rust 单态化类似但无统一类型检查。 ✅
 > **[来源: Java Language Spec: Type Erasure]** Java 泛型通过类型擦除实现，编译为 `Object` 并插入类型转换，有运行时装箱开销。 ✅
 > **[来源: Go Spec: Type parameters]** Go 1.18+ 泛型通过 GC shape stenciling 实现，为每个 GC shape 生成一份代码，运行时开销极低。 ✅
 > **[来源: Pierce, TAPL Ch.23]** 参数多态（parametric polymorphism）与约束多态（bounded quantification）的理论基础。 ⚠️（教科书级参考）
@@ -288,7 +288,7 @@ graph TD
 
 > **认知功能**:
 > 泛型系统概念拓扑导航图。将分散的语法要素组织为可遍历的知识网络，读者可按分支顺序建立"参数声明→约束施加→代码生成"的完整心智模型。
-> 关键洞察：泛型不是单一概念，而是由类型参数、生命周期（Lifetimes）、常量泛型、约束系统构成的多维参数空间。[来源: 💡 原创分析]
+> 关键洞察：泛型不是单一概念，而是由类型参数、生命周期（Lifetimes）、常量泛型、约束系统构成的多维参数空间。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [TRPL — Generics](https://doc.rust-lang.org/book/ch10-00-generics.html)]
 > **过渡到定理推理链**:
 > 思维导图呈现了泛型系统的概念拓扑，但缺乏严格的逻辑推导关系。
@@ -646,7 +646,7 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 参数性定理适用性判定工具。设计泛型 API 时沿决策树检查"免费定理"是否成立，unsafe 和 Trait Bound 是参数性的两个主要破坏者。关键洞察：只有无约束、无 unsafe 的纯参数多态才能享受"类型签名完全决定行为"的形式化保证。[来源: 💡 原创分析]
+> **认知功能**: 参数性定理适用性判定工具。设计泛型 API 时沿决策树检查"免费定理"是否成立，unsafe 和 Trait Bound 是参数性的两个主要破坏者。关键洞察：只有无约束、无 unsafe 的纯参数多态才能享受"类型签名完全决定行为"的形式化保证。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **L4 映射**: 参数性定理对应 **Reynolds 关系语义（relational parametricity）**——在逻辑关系中解释多态类型。`∀T. T → T` 的行为约束来自逻辑关系对所有类型的同时满足性，任何基于具体类型的分支都会破坏关系一致性。
 
 ### 5.6 泛型实现机制对比：单态化 vs 类型擦除 vs 模板
@@ -726,7 +726,7 @@ impl<T, const N: usize> Matrix<T, N, N> {
 
 #### 5.7.2 where 约束中的 const generics
 
-`where` 子句可对含 const generics 的复合类型施加约束，这是连接常量泛型与 Trait 约束系统的关键桥梁：来源: [Rust Reference: Trait Bounds](https://doc.rust-lang.org/reference/)
+`where` 子句可对含 const generics 的复合类型施加约束，这是连接常量泛型与 Trait 约束系统的关键桥梁：来源: [Rust Reference: Trait Bounds](https://doc.rust-lang.org/reference/introduction.html)
 
 ```rust,ignore
 // ✅ 合法: 显式约束数组类型满足 Sized
@@ -783,7 +783,7 @@ where
 
 #### 5.7.3 默认 const generic 参数
 
-const generics 支持默认值，省略时自动填充（1.59+）：来源: [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/)
+const generics 支持默认值，省略时自动填充（1.59+）：来源: [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/introduction.html)
 
 ```rust
 // ✅ 合法: 默认常量泛型参数
@@ -1100,7 +1100,7 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 零成本承诺边界判定工具。性能敏感场景下沿决策树逐项检查当前代码路径是否真正零成本。关键洞察：零成本是运行时承诺，编译期（时间）和二进制（体积）层面存在显著代价，dyn Trait 与单态化是互斥的语义选择。[来源: 💡 原创分析]
+> **认知功能**: 零成本承诺边界判定工具。性能敏感场景下沿决策树逐项检查当前代码路径是否真正零成本。关键洞察：零成本是运行时承诺，编译期（时间）和二进制（体积）层面存在显著代价，dyn Trait 与单态化是互斥的语义选择。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **四层分析**:
 
@@ -1134,7 +1134,7 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 类型推断（Type Inference）故障诊断工具。遇到 E0282/E0283 错误时，沿决策树定位推断失败的根因类别。关键洞察：HM 推断在理论上就有边界，Turbofish 不是对编译器的妥协，而是对推断搜索空间的精确控制。[来源: 💡 原创分析]
+> **认知功能**: 类型推断（Type Inference）故障诊断工具。遇到 E0282/E0283 错误时，沿决策树定位推断失败的根因类别。关键洞察：HM 推断在理论上就有边界，Turbofish 不是对编译器的妥协，而是对推断搜索空间的精确控制。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **四层分析**:
 
@@ -1168,7 +1168,7 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 约束强度设计检查清单。设计泛型 API 时反向验证约束是否为最小必要集合，避免过度约束缩小可用性。关键洞察：过度约束违背参数性精神，最小能力原则是泛型设计的核心美学——约束越弱，复用性越强。[来源: 💡 原创分析]
+> **认知功能**: 约束强度设计检查清单。设计泛型 API 时反向验证约束是否为最小必要集合，避免过度约束缩小可用性。关键洞察：过度约束违背参数性精神，最小能力原则是泛型设计的核心美学——约束越弱，复用性越强。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **四层分析**:
 
@@ -1202,7 +1202,7 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 编译期 vs 运行时参数化决策工具。需要值参数化类型时，先沿决策树判断 Const Generics 是否适用，避免在边界外强行使用。关键洞察：Const Generics 是依赖类型的有限形式，有明确的类型论边界——理解边界才能正确选择 typenum、枚举（Enum）或运行时检查等替代方案。[来源: 💡 原创分析]
+> **认知功能**: 编译期 vs 运行时参数化决策工具。需要值参数化类型时，先沿决策树判断 Const Generics 是否适用，避免在边界外强行使用。关键洞察：Const Generics 是依赖类型的有限形式，有明确的类型论边界——理解边界才能正确选择 typenum、枚举（Enum）或运行时检查等替代方案。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **四层分析**:
 
@@ -1508,7 +1508,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 
 ### 9.1 补充：`impl Trait` 在返回位置 vs 参数位置的区别
 
-> **[Rust Reference: Impl trait](https://doc.rust-lang.org/reference/)** · **[RFC 1951](https://github.com/rust-lang/rfcs/pull/1951)** · **[RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)** `impl Trait` 在**参数位置**（argument position）和**返回位置**（return position）有截然不同的语义——前者是**全称量词 ∀**（调用者决定具体类型），后者是**存在量词 ∃**（实现者决定具体类型）。✅
+> **[Rust Reference: Impl trait](https://doc.rust-lang.org/reference/types/impl-trait.html)** · **[RFC 1951](https://github.com/rust-lang/rfcs/pull/1951)** · **[RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)** `impl Trait` 在**参数位置**（argument position）和**返回位置**（return position）有截然不同的语义——前者是**全称量词 ∀**（调用者决定具体类型），后者是**存在量词 ∃**（实现者决定具体类型）。✅
 
 #### 参数位置 `impl Trait` = Universal（全称）
 
@@ -1565,7 +1565,7 @@ impl Factory for WidgetFactory {
 ```
 
 > **关键洞察**: 参数位置的 `impl Trait` 是语法糖（糖衣），返回位置的 `impl Trait` 是类型系统（Type System）的核心扩展（存在类型）。RPITIT 将这一能力进一步扩展到 trait 定义中，使 trait 方法也能返回不透明类型。
-> **来源**: [Rust Reference: Impl trait](https://doc.rust-lang.org/reference/) · [RFC 1951: Extend impl Trait to function arguments](https://github.com/rust-lang/rfcs/pull/1951) · [RFC 2289: Associated type bounds](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) · [TAPL Ch.24: Existential types]
+> **来源**: [Rust Reference: Impl trait](https://doc.rust-lang.org/reference/types/impl-trait.html) · [RFC 1951: Extend impl Trait to function arguments](https://doc.rust-lang.org/reference/types/impl-trait.html) · [RFC 2289: Associated type bounds](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) · [TAPL Ch.24: Existential types]
 
 ---
 
@@ -2237,12 +2237,12 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 - [x] **TODO**: 补充 Generic Associated Types (GATs) 的完整形式化视角 —— 优先级: 中 —— 已完成 §9.5 —— 2026-05-13
 - [x] **TODO**: 补充 Const Generics 进阶用法（表达式、where 约束、generic_const_exprs、GATs 交互、C++ 对比） —— 优先级: 高 —— 已完成 §5.7 —— 2026-05-14
 
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-00-generics.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html); [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-00-generics.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-00-generics.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-00-generics.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -2402,7 +2402,7 @@ impl Displayable for i32 {
 }
 ```
 
-> **修正**: 泛型函数的 trait bound 必须在调用点由具体类型满足。如果未为目标类型实现所需 trait，编译器会拒绝单态化。这是 Rust 零成本抽象（Zero-Cost Abstraction）的核心——trait bound 检查在编译期完成，无运行时开销。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 泛型函数的 trait bound 必须在调用点由具体类型满足。如果未为目标类型实现所需 trait，编译器会拒绝单态化。这是 Rust 零成本抽象（Zero-Cost Abstraction）的核心——trait bound 检查在编译期完成，无运行时开销。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **相关判定树**: [泛型判定树](../../00_meta/00_framework/concept_definition_decision_forest.md#六泛型判定树)
 
 ### 10.5 边界测试：泛型约束的传递性与 trait bound 推导（编译错误）

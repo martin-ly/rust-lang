@@ -191,7 +191,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 四、Rust 网络协议栈的选型
 
-> **[来源: 💡 原创分析]** · 综合上述所有来源 ✅
+> **[💡 原创分析](../../00_meta/00_framework/methodology.md)** · 综合上述所有来源 ✅
 
 | 场景 | 推荐方案 | 理由 |
 |:---|:---|:---|
@@ -229,7 +229,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 六、编译错误示例
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]** 网络协议实现中的 Rust 编译错误模式。
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]** 网络协议实现中的 Rust 编译错误模式。
 
 ### 编译错误 1：`SendStream` 跨 await 不 Send
 

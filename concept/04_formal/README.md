@@ -10,7 +10,7 @@
 > **核心功能**: 为上层概念提供**形式化直觉**与**教学类比**的安全性解释；指向可机械验证证明的权威来源（RustBelt、Iris、Coq）
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)** · **来源: [Wikipedia - Linear Logic](https://en.wikipedia.org/wiki/Linear_Logic)** · **来源: [Iris Project - iris-project.org](https://iris-project.org/)**
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
@@ -65,7 +65,7 @@ mindmap
 > **认知功能**: 此 mindmap 是 L4 层的**放射式数学根基入口**。
 > 四个分支对应 Rust 安全保证的四种数学来源：线性逻辑（资源消耗公理）、类型论（结构规则）、所有权（Ownership）形式化（Rust 特定的操作语义）、RustBelt（机械验证框架）。
 > 读者按数学背景选择入口——逻辑学背景从线性逻辑切入，类型论背景从 HM/System F 切入，程序验证背景从 RustBelt 切入。
-> 关键认知：L4 的四个分支不是并列的「可选知识」，而是「同一安全定理的不同证明视角」——它们共同构成 Rust 内存安全（Memory Safety）的形式化完备性。 [来源: 💡 原创分析]
+> 关键认知：L4 的四个分支不是并列的「可选知识」，而是「同一安全定理的不同证明视角」——它们共同构成 Rust 内存安全（Memory Safety）的形式化完备性。 [💡 原创分析](../00_meta/00_framework/methodology.md)
 > **认知路径**: 本 mindmap 展示 L4 层的**数学根基**。
 > 线性逻辑提供资源语义，类型论提供结构规则，所有权（Ownership）形式化将两者映射到 Rust 的具体机制，RustBelt 提供机械可验证的安全证明。
 > 关键洞察：**L4 不是"更高级的知识"，而是 L1-L3 的"地基"**——形式化证明向下保证上层概念的安全性。
@@ -133,7 +133,7 @@ graph TB
 > 它展示了四股数学理论（线性逻辑、类型论、所有权（Ownership）形式化、RustBelt）如何向下支撑 L1-L3 的工程概念，又如何向上转化为 L6-L7 的工具与前沿研究。
 > 四种颜色编码四股理论，箭头方向揭示「理论奠基 → 工程实现 → 工具转化」的知识流动。
 > 关键认知：L4 不是孤立的数学象牙塔——每个形式化概念都有明确的工程对应（线性逻辑 ⊗ → 所有权（Ownership）转移、区域类型 → 生命周期（Lifetimes）、分数权限 → 借用（Borrowing）规则），
-> 读者应建立「形式化 ↔ 工程」的双向翻译能力。 [来源: 💡 原创分析]
+> 读者应建立「形式化 ↔ 工程」的双向翻译能力。 [💡 原创分析](../00_meta/00_framework/methodology.md)
 
 ### 1.1 概念间语义链接
 
@@ -295,9 +295,9 @@ L4 的形式化成果输出到：
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../00_meta/02_sources/international_authority_index.md)
 > **内容分级**: [研究者级]
 
 **文档版本**: 1.1

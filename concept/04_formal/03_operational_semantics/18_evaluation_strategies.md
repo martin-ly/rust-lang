@@ -33,7 +33,7 @@
 > [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
 >
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **Bloom 层级**: 分析 → 评价
@@ -194,7 +194,7 @@ fn main() {
 | `&T` 参数 | 传递引用（Reference）（只读借用（Borrowing）） | 受限的 CBR |
 | `&mut T` 参数 | 传递可变引用（Mutable Reference） | 受限的 CBR + 别名约束 |
 
-> **关键洞察**: Rust 的默认参数传递**不是纯粹的 CBV**，而是 **CBV + 线性所有权（Ownership）** 的混合体。`Copy` 类型 = 经典 CBV；`!Copy` 类型 = CBV 但原变量失效（所有权转移）。[来源: 💡 原创分析]
+> **关键洞察**: Rust 的默认参数传递**不是纯粹的 CBV**，而是 **CBV + 线性所有权（Ownership）** 的混合体。`Copy` 类型 = 经典 CBV；`!Copy` 类型 = CBV 但原变量失效（所有权转移）。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 3.2 显式引用传递：受限的 Call-by-Reference
 
@@ -318,7 +318,7 @@ Rust 明确规定了表达式的求值顺序：
 | 副作用顺序 | 不可预测（UB 风险） | 完全确定 |
 | 示例 | `foo(i++, i++)` // 未定义行为 | `foo(i, i)` // 编译错误（若涉及移动）或确定行为 |
 
-> **关键洞察**: Rust 的严格求值顺序消除了 C/C++ 中大量与求值顺序相关的 UB，是 Rust "无未定义行为"承诺的重要组成部分。来源: [Rust Reference §6.2.13](https://doc.rust-lang.org/reference/) ✅
+> **关键洞察**: Rust 的严格求值顺序消除了 C/C++ 中大量与求值顺序相关的 UB，是 Rust "无未定义行为"承诺的重要组成部分。来源: [Rust Reference §6.2.13](https://doc.rust-lang.org/reference/introduction.html) ✅
 
 ---
 
@@ -371,7 +371,7 @@ fn lazy_solution() {
 }
 ```
 
-> **认知功能**: 此反例展示了 Rust 严格求值的代价。工程上通过 `Fn` 闭包（Closures）、`Iterator` 适配器链、`Future` 等显式惰性机制来弥补。[来源: 💡 原创分析]
+> **认知功能**: 此反例展示了 Rust 严格求值的代价。工程上通过 `Fn` 闭包（Closures）、`Iterator` 适配器链、`Future` 等显式惰性机制来弥补。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 6.2 边界测试：求值顺序的确定性验证
 
@@ -434,8 +434,8 @@ fn linear_move() {
 | 严格 vs 非严格求值 | [Harper PFPL] · [Pierce TAPL §11] | ✅ | Tier 1 |
 | CBV/CBN/CBV-need 定义 | [Pierce TAPL §11] · [Wadler 1984] | ✅ | Tier 1 |
 | Normal Order 正规化定理 | [Curry & Feys 1958] · [Barendregt 1984] | ✅ | Tier 1 |
-| Rust 求值顺序 | [Rust Reference §6.2.13](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
-| Rust 参数传递语义 | [Rust Reference §6.2](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
+| Rust 求值顺序 | [Rust Reference §6.2.13](https://doc.rust-lang.org/reference/introduction.html) | ✅ | Tier 1 |
+| Rust 参数传递语义 | [Rust Reference §6.2](https://doc.rust-lang.org/reference/introduction.html) | ✅ | Tier 1 |
 | Rust 线性所有权 = CBV + 线性约束 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · 原创分析 | ✅/💡 | Tier 2 |
 | `&mut T` 编码局部可变性效果 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Moggi 1989] | ✅ | Tier 2 |
 | 跨语言对比矩阵 | [💡 原创分析] | ⚠️ | Tier 3 |
@@ -444,7 +444,7 @@ fn linear_move() {
 
 > **权威来源**:
 >
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [Pierce TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [Harper PFPL](https://www.cs.cmu.edu/~rwh/pfpl/) ·
 > [Barendregt — The Lambda Calculus](https://www.amazon.com/Lambda-Calculus-Its-Syntax-Studies/dp/0444875085) ·

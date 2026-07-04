@@ -16,7 +16,7 @@
 > [Type System](../../01_foundation/02_type_system/04_type_system.md) ·
 > [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) ·
 > [Linear Logic](../../04_formal/01_ownership_logic/01_linear_logic.md)
-> [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
+> [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html)]
 > **后置概念**:
 > [Formal Ecosystem Tower](../08_formal_verification/44_formal_ecosystem_tower.md) ·
 > [Application Domains](../06_data_and_distributed/04_application_domains.md)
@@ -35,7 +35,7 @@
 
 > **[Wikipedia — Blockchain](https://en.wikipedia.org/wiki/Blockchain)** A blockchain is a distributed ledger with growing lists of records (blocks) that are securely linked together via cryptographic hashes.
 > **来源**: <https://en.wikipedia.org/wiki/Blockchain>
-> **[Wikipedia — Smart contract](https://en.wikipedia.org/wiki/Smart_contract)** A smart contract is a self-executing program with the terms of the agreement between buyer and seller being directly written into lines of code. [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **[Wikipedia — Smart contract](https://en.wikipedia.org/wiki/Smart_contract)** A smart contract is a self-executing program with the terms of the agreement between buyer and seller being directly written into lines of code. [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > **来源**: <https://en.wikipedia.org/wiki/Smart_contract>
 > **[Ethereum Docs]** Smart contract security is the practice of creating and maintaining smart contracts that are resilient to attacks, bugs, and unintended behavior.
 
@@ -52,7 +52,7 @@
 
 ### 第 2 步：Rust 链与 EVM 链的本质差异是什么？
 
-Solana/Polkadot/Near 等 Rust 链将**合约执行模型**从"单线程状态机"推进到"并行交易处理"（Sealevel）或"异构分片"（Substrate）。Rust 的所有权（Ownership）模型天然匹配这种并行资源管理需求。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+Solana/Polkadot/Near 等 Rust 链将**合约执行模型**从"单线程状态机"推进到"并行交易处理"（Sealevel）或"异构分片"（Substrate）。Rust 的所有权（Ownership）模型天然匹配这种并行资源管理需求。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 第 3 步：类型系统如何替代安全审计的一部分工作？
 >
@@ -94,8 +94,8 @@ mindmap
 ```
 
 > **认知路径**: 本 mindmap 从四个维度组织区块链安全知识：**Rust 链架构**回答"有哪些主流 Rust 链"，**漏洞类别消除**回答"Rust 消除了哪些 Solidity 漏洞"，**形式化验证**回答"如何证明合约正确"，**跨链对比**回答"Move vs Rust vs Solidity 的安全模型差异"。
-> **认知功能**: 本 mindmap 以四层架构组织区块链安全知识全景，帮助读者建立"链架构→漏洞消除→形式化验证→跨链对比"的系统认知框架。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **认知功能**: 本 mindmap 以四层架构组织区块链安全知识全景，帮助读者建立"链架构→漏洞消除→形式化验证→跨链对比"的系统认知框架。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
 > **使用建议**: 学习新链时，将其归入对应分支并比较漏洞消除机制与形式化验证策略。 [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 >
@@ -171,7 +171,7 @@ graph TD
 ```
 
 > **来源**: [Solana Docs — Sealevel] · [Anatoly Yakovenko — Sealevel Paper]
-> **认知功能**: 此流程图揭示 Solana 如何将 Rust 的 `&`/`&mut` 借用（Borrowing）语义映射到运行时（Runtime）并行调度策略，实现"无数据竞争的并行合约执行"。[来源: 💡 原创分析]
+> **认知功能**: 此流程图揭示 Solana 如何将 Rust 的 `&`/`&mut` 借用（Borrowing）语义映射到运行时（Runtime）并行调度策略，实现"无数据竞争的并行合约执行"。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **使用建议**: 设计并行交易时，优先将账户标记为 read-only 以最大化并行度；mutually exclusive writes 需显式排序。
 > **关键洞察**: Sealevel 的并行不是自动的——它依赖交易显式声明账户访问模式，这与 Rust 编译期借用（Borrowing）检查同构。
 
@@ -380,7 +380,7 @@ classDiagram
 ```
 
 > **认知功能**: 此类图将三种合约语言的安全机制进行**类型系统级别的对比**。Move 的 Ability 系统（默认最严格，显式放宽）与 Rust 的 Trait 系统（默认宽松，显式约束）形成对偶。Solidity 没有编译期资源语义，依赖运行时修饰器和人工审计——这是 Solidity 合约漏洞频发的根本类型论原因。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 4.1 Move 资源模型的三要素
 
@@ -586,7 +586,7 @@ fn verify_weight_calculation_does_not_overflow() {
 
 ### 8.1 Solana SBF：eBPF 的受限安全子集
 
-SBF 是 Solana 对 eBPF（extended Berkeley Packet Filter）的扩展，用于在 Solana 虚拟机（SVM）中执行合约： [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
+SBF 是 Solana 对 eBPF（extended Berkeley Packet Filter）的扩展，用于在 Solana 虚拟机（SVM）中执行合约： [来源: [Cargo Book](https://doc.rust-lang.org/cargo/index.html)]
 
 | 维度 | SBF 设计 | Rust 角色 | 安全约束 |
 |:---|:---|:---|:---|
@@ -685,8 +685,8 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 形式化映射基于 RustBelt 和分离逻辑的理论框架。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

@@ -20,8 +20,8 @@
 
 ---
 
-> **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [Embedded Rust Working Group](https://github.com/rust-embedded/wg) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> [The Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html) · [Embedded Rust Working Group](https://github.com/rust-embedded/wg) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [Rust Embedded Working Group](https://github.com/rust-embedded/wg) ·
 > [Wikipedia — Embedded System](https://en.wikipedia.org/wiki/Embedded_system) ·
 > [Ferrous Systems](https://ferrous-systems.com/)
@@ -166,7 +166,7 @@ no_std:
 ```
 
 > **裸机洞察**: **裸机编程是 Rust unsafe 能力的核心应用场景**——直接内存映射、中断处理、寄存器操作都需要 unsafe。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -588,7 +588,7 @@ graph TD
 ```
 
 > **边界要点**: Rust 嵌入式的边界与**unsafe**、**调试**、**生态**、**编译时间**和**二进制大小**相关。
-> [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
+> [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)]
 
 ---
 
@@ -635,7 +635,7 @@ graph TD
 ```
 
 > **陷阱总结**: Rust 嵌入式的陷阱主要与**volatile**、**no_std**、**panic**、**并发**和**内存**相关。
-> [来源: [Rust Embedded Book — Troubleshooting](https://docs.rust-embedded.org/book/)]
+> [来源: [Rust Embedded Book — Troubleshooting](https://docs.rust-embedded.org/book/index.html)]
 
 ---
 
@@ -643,8 +643,8 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Embedded Rust Book](https://docs.rust-embedded.org/book/) | ✅ 一级 | 官方指南 |
-| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ 一级 | unsafe 指南 |
+| [Embedded Rust Book](https://docs.rust-embedded.org/book/index.html) | ✅ 一级 | 官方指南 |
+| [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) | ✅ 一级 | unsafe 指南 |
 | [embedded-hal](https://docs.rs/embedded-hal/latest/) | ✅ 二级 | 硬件抽象 |
 | [RTIC](https://rtic.rs/) | ✅ 二级 | 实时框架 |
 | [probe-rs](https://probe.rs/) | ✅ 二级 | 调试工具 |
@@ -693,9 +693,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [IEEE 802.1 — Time-Sensitive Networking](https://www.ieee802.org/1/pages/tsn.html) · [Cortex-M Devices Generic User Guide](https://developer.arm.com/documentation/dui0552/latest/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [IEEE 802.1 — Time-Sensitive Networking](https://www.ieee802.org/1/pages/tsn.html) · [Cortex-M Devices Generic User Guide](https://developer.arm.com/documentation/dui0552/latest/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 11]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -745,7 +745,7 @@ fn fixed() {
 > 嵌入式系统（ARM Cortex-M、RISC-V）通常无操作系统，因此 `#![no_std]` 禁用 `std` 库。`println!`、`Vec`、`String` 等需要 OS 支持的 API 不可用。
 > 替代方案：使用 `cortex-m-semihosting`（通过调试器输出）、`rtt-target`（实时传输）、或 UART HAL（硬件串口）。
 > 这与 Arduino 的 `Serial.println` 或 ESP-IDF 的 `ESP_LOG` 类似，但 Rust 的嵌入式生态通过 trait 抽象硬件（`embedded-hal`），实现跨平台可移植性。
-> [来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/)]
+> [来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)]
 
 ### 10.2 边界测试：中断处理器的 `static mut`（编译错误）
 
@@ -799,7 +799,7 @@ unsafe extern "C" fn isr() {
 >
 > Rust 的嵌入式生态（`cortex-m`、`embedded-hal`、`rtic`）将并发安全（Concurrency Safety）引入裸机编程。
 > 这与 C 的 `__disable_irq()`/`__enable_irq()`（手动开关中断，易遗漏）或 FreeRTOS 的互斥量（ heavier，需 OS 支持）不同——Rust 的类型系统（Type System）可帮助管理临界区（如 RTIC 的任务优先级分析）。
-> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [RTIC Documentation](https://rtic.rs/)]
+> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html)] · [来源: [RTIC Documentation](https://rtic.rs/)]
 
 ### 10.4 边界测试：`no_std` 中的 `panic` 处理与固件大小（编译错误/链接错误）
 
@@ -830,7 +830,7 @@ fn main() {
 >
 > panic handler 的选择影响固件大小：`panic = "abort"` 比 `panic = "unwind"` 小（无展开代码），自定义 handler 比默认 `core::panicking` 更小。
 > 嵌入式开发中，固件大小常受限（如 64KB Flash），每个字节都重要。这与 C 的 `assert`（调用 `abort()`，依赖 libc）或 Arduino 的 `Serial.println` + `while(1)`（类似 Rust 的自定义 handler）类似——Rust 的 `panic_handler` 是显式、可定制的错误终止机制。
-> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] ·
+> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html)] ·
 > [来源: [Rust Reference — Panic Handler](https://doc.rust-lang.org/reference/runtime.html#the-panic_handler-attribute)]
 
 ### 10.4 边界测试：裸机（`no_std`）中的 `alloc` 与全局分配器缺失（编译错误）
@@ -859,7 +859,7 @@ fn main() {
 > 裸机环境无操作系统提供的堆，需手动管理内存区域（定义 `.bss` 或特定 RAM 区域为堆）。
 > `#[global_allocator]` 标记静态分配器实例。
 > 这与 C 的 `malloc`（依赖 libc 或自定义实现）或 FreeRTOS 的 `pvPortMalloc`（RTOS 提供）类似——Rust 的 `alloc` crate 提供标准接口，但底层分配器需嵌入式开发者提供。
-> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [alloc crate](https://doc.rust-lang.org/alloc/index.html)]
+> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html)] · [来源: [alloc crate](https://doc.rust-lang.org/alloc/index.html)]
 > **过渡**: Rust 嵌入式系统开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链

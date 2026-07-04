@@ -6,7 +6,7 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 # Rust 知识体系问题图谱（Problem Graph）
@@ -101,7 +101,7 @@ mindmap
 >
 > 问题图谱的**三层结构**对应工程实践中的真实思维过程：面对一个系统级问题（如"如何设计并发系统"），工程师首先将其分解为 Rust 特有的概念级子问题（"Send/Sync 如何保证线程安全"），然后选择具体的方法层工具（"使用 `Arc<Mutex<T>>` 还是 `crossbeam::channel`"）。
 > 这种"问题驱动"的学习路径比"概念驱动"更贴近实际工程需求。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../00_framework/methodology.md)
 
 ---
 
@@ -435,7 +435,7 @@ graph TD
 
 | 层级 | 来源 | 在本文件中的作用 |
 |:---|:---|:---|
-| **一级** | [Rust Reference](https://doc.rust-lang.org/reference/) | 所有权、借用、并发、异步、FFI、错误处理的官方定义 |
+| **一级** | [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | 所有权、借用、并发、异步、FFI、错误处理的官方定义 |
 | **二级** | ACM — *Multidimensional Course Knowledge Graph Framework* (2024) | 问题图谱的三层结构（全局→概念→方法） |
 | **二级** | Stanford CS520 — *What is a Knowledge Graph* | 知识图谱在教育中的应用方法论 |
 | **二级** | Rutgers — *CD-Learning* | 条件决策学习 — 问题分解的决策树方法 |

@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [GitHub Actions Docs](https://docs.github.com/en/actions) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [GitHub Actions Docs](https://docs.github.com/en/actions) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) ·
 > [cargo-release](https://github.com/crate-ci/cargo-release) ·
 > [Docker — Best Practices](https://docs.docker.com/build/building/multi-stage/) ·
@@ -163,7 +163,7 @@ API_PORT="8080"
 }
 ```
 
-> **工程价值**: CI/CD 管道常需验证环境配置完整性。Rust 的类型安全（`HashMap<String, String>` 显式标注）和错误处理（`Vec<String>` 收集缺失项）使配置验证比 shell 脚本更可靠——在配置错误进入生产环境前即可捕获。 [来源: 💡 原创实现]
+> **工程价值**: CI/CD 管道常需验证环境配置完整性。Rust 的类型安全（`HashMap<String, String>` 显式标注）和错误处理（`Vec<String>` 收集缺失项）使配置验证比 shell 脚本更可靠——在配置错误进入生产环境前即可捕获。 [💡 原创实现](../../00_meta/00_framework/methodology.md)
 
   发布特性:
   ├── cargo build --release: 优化构建，编译时间更长
@@ -659,9 +659,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Cargo Book](https://doc.rust-lang.org/cargo/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

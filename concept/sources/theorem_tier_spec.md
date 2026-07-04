@@ -13,7 +13,7 @@
 > **原则**: 消除"伪形式化"——定理编号必须有对应的分级，证明深度必须与分级匹配。
 > **适用范围**: `concept/` 全部 45 个文件，retroactive 标注 + 新增内容强制执行。
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
@@ -207,7 +207,7 @@
 > **局限性**:
 > - "零成本"指**运行时零成本**，编译时间和二进制大小可能增加
 > - LLVM 的内联决策可能与手写代码不同，导致最终机器码差异
-> **形式化根基**: 来源: [Rust Reference — §6.1](https://doc.rust-lang.org/reference/) 单态化语义描述（非形式化证明）。
+> **形式化根基**: 来源: [Rust Reference — §6.1](https://doc.rust-lang.org/reference/introduction.html) 单态化语义描述（非形式化证明）。
 ```
 
 ---
@@ -259,7 +259,7 @@ def check_theorem_tier(file_path):
 **制定日期**: 2026-05-24
 **下次审计**: 2026-06-07
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

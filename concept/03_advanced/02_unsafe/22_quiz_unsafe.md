@@ -13,7 +13,7 @@
 
 > **来源**: · [Unsafe Rust](03_unsafe.md) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [The Rust Programming Language — Ch19 Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [Rust Reference — Unsafe Operations](https://doc.rust-lang.org/reference/unsafe-blocks.html)
 >
 > **前置概念**: [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
@@ -597,7 +597,7 @@ fn main() {
 |:---:|:---|:---|
 | 10/10 | 🏆 Unsafe 边界已内化 | 进阶至 [Unsafe Patterns](12_unsafe_rust_patterns.md) 或尝试为 crates/ 编写 unsafe 抽象 |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [Unsafe 练习](../../exercises/src/unsafe_rust)，用 Miri 验证所有代码 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Unsafe Rust](03_unsafe.md) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Unsafe Rust](03_unsafe.md) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) |
 | 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 确认基础，再读 Unsafe 章节 |
 
 ---
@@ -606,7 +606,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [The Rust Programming Language — Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html)
+> **权威来源**: [The Rust Programming Language — Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html)
 
 ## 嵌入式测验（Embedded Quiz）
 

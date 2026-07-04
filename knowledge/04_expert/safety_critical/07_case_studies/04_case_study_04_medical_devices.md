@@ -4,7 +4,7 @@
 > [IEC 62304](https://www.iec.ch/),
 > [Rust Reference](https://doc.rust-lang.org/reference/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增医疗器械 Rust 应用案例来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增医疗器械 Rust 应用案例来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # 案例研究04: 医疗设备软件 (IEC 62304)
 
@@ -14,7 +14,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本案例研究展示如何使用Rust开发符合IEC 62304标准的医疗设备软件，重点关注Class C(最高风险等级)设备的实施经验。
 
@@ -22,11 +22,11 @@
 
 ## 项目背景
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 设备信息
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 属性 | 详情 |
 |------|------|
@@ -39,7 +39,7 @@
 
 ### 为什么选择Rust
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **内存安全**: 消除缓冲区溢出风险
 2. **并发安全**: 防止多线程数据竞争
@@ -51,7 +51,7 @@
 
 ## 架构设计
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 系统架构
 >

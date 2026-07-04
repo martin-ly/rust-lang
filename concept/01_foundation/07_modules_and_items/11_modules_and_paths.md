@@ -497,9 +497,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -579,7 +579,7 @@ mod inner_fixed {
 > 这与 C/C++ 的前向声明（forward declaration）不同——Rust 的模块系统要求依赖关系是有向无环图（DAG）。
 > 若出现循环依赖，需重构代码：提取公共类型到独立模块，或使用 trait 抽象打破循环。
 > 这是 Rust 编译模型（整体编译、基于 crate 的依赖）的固有约束。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.3 边界测试：`pub(crate)` 与 `pub(super)` 的层级混淆（编译错误）
 
@@ -704,10 +704,10 @@ fn main() {
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-04-bringing-paths-into-scope-with-the-use-keyword.html)] ·
 > [来源: [Rust Reference — Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html)]
 > **权威来源**:
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) ·
-> [Rust Standard Library](https://doc.rust-lang.org/std/) ·
-> [Rust RFCs](https://rust-lang.github.io/rfcs/)
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
+> [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 实践

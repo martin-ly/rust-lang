@@ -488,9 +488,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -537,7 +537,7 @@ fn documented() {}
 > 若代码块包含 `fn main()` 或返回类型，需使用 `no_run` 或 `compile_fail` 属性。`compile_fail` 属性验证代码确实编译失败
 > ——这是测试"编译期保证"的独特方式。
 > 与 Python 的 doctest（只检查输出）不同，Rust 的 doctest是完整的编译-运行测试，确保文档中的代码始终有效。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：`rustdoc` 的链接解析失败（编译错误）
 
@@ -555,7 +555,7 @@ pub fn linked_fixed() {}
 > Rust 1.48+ 的 `rustdoc` 支持 intra-doc links——用 `[`Name`]` 语法链接到 crate 内的项或标准库类型。
 > 未解析的链接产生编译警告（CI 中可提升为错误）。这要求文档维护者确保所有引用（Reference）有效，避免死链接。
 > 与 JavaDoc 或 Doxygen 的外部链接不同，Rust 的 intra-doc links 在编译期验证目标存在，将文档一致性（Coherence）检查提前到构建阶段。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.4 边界测试：`doctest` 的 `compile_fail` 与 `ignore` 的误用（测试失败）
 

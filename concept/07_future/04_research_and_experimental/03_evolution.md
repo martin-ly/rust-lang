@@ -17,9 +17,9 @@
 > · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
-> [Rust RFCs](https://rust-lang.github.io/rfcs/) ·
+> [Rust RFCs](https://rust-lang.github.io/rfcs/index.html) ·
 > [Rust Blog](https://blog.rust-lang.org/) ·
-> [Edition Guide](https://doc.rust-lang.org/edition-guide/) ·
+> [Edition Guide](https://doc.rust-lang.org/edition-guide/index.html) ·
 > [Inside Rust](https://blog.rust-lang.org/inside-rust/) ·
 > [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -38,7 +38,7 @@
 - v1.0 (2026-05-12): 初始版本$entry
 - v1.1 (2026-05-12): Wave 3 扩展——补充定义、关键趋势、Edition 机制、RFC 流程、演进路线图、官方来源
 - v1.2 (2026-05-14): 补充完整 Edition 变更清单（2015→2018→2021→2024）、Edition 与 rustc 版本解耦、`cargo fix --edition` 自动迁移机制、跨 Edition 代码示例、未来 Edition 方向（2027+）
-- v1.4 (2026-05-26): 补充 Rust 2026 Project Goals 四大旗舰目标详解（Beyond the &、灵活编译、高阶 Rust、释放沉睡 Trait）及子目标矩阵 [来源: Web Authority Alignment Sprint]
+- v1.4 (2026-05-26): 补充 Rust 2026 Project Goals 四大旗舰目标详解（Beyond the &、灵活编译、高阶 Rust、释放沉睡 Trait）及子目标矩阵 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
 - v1.3 (2026-05-22): 网络权威内容对齐 Batch 9：补充 Project Goals 2026 年度旗舰目标（Polonius Alpha、Safety-Critical Rust、cargo-script）、Effects 系统 `gen<yield>` 跟踪、Ferrocene ASIL B/SIL 2 认证动态
 - v1.5 (2026-05-26): 权威内容对齐 R16：补充 2025H2 Project Goals 最终状态报告（Rust Blog 2026-05-18）；更新 build-std [RFC 3873](https://rust-lang.github.io/rfcs//3873-build-std-context.html)/3874 已合并状态、Cranelift 资金不足未完成确认 来源: [Rust Blog](https://blog.rust-lang.org/)
 - v1.6 (2026-05-26): 权威内容对齐 R18：补充 Project-wide LLM Policy [RFC 3936](https://github.com/rust-lang/rfcs/pull/3936)（Rust 首个项目级 AI 使用政策） [来源: TWiR 650]
@@ -46,12 +46,12 @@
 - v1.8 (2026-06-06): 权威内容对齐：① 修正 cargo-script 状态（非"已稳定"，而是稳定化推进中，Project Goals 2026 Continued，blocker 为 edition policy）；② 新建 `17_ergonomic_ref_counting_preview.md` 跟踪文档（Flagship: Higher-level Rust，Niko Matsakis + Santiago Pastorino 主导）；③ 更新 `13_unsafe_fields_preview.md`（RFC 3458 已接受 2026-02，Clippy #16767 等待 review） 来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 - v1.9 (2026-06-06): 权威内容对齐 Batch 10：① Rust Foundation Maintainer Fund 正式上线（2026-06-02）；② `rust_1_97_preview.md` 补充 1.97 稳定化候选 API（`float_algebraic` FCP 中、`core::range::RangeFull/RangeTo` FCP 完成、`RandomSource`、`PathBuf::into_string`、`Result::map_or_default`）；③ `19_security_practices.md` 补充 CVE-2026-33055/33056（Cargo tar 提取，1.94.1 已修复） [来源: Rust Blog 2026-06-02; releases.rs 2026-06-06]
 - v1.10 (2026-06-06): 权威内容对齐 Batch 11：① `19_rust_for_linux.md` 补充 Debian 14 Forky MSRV 策略（Debian Stable 是 Rust for Linux 的 MSRV 基准，预计 2027 年夏季发布）；② `rust_1_97_preview.md` 补充 `new_range_remainder`（Tracking Issue #154458）、`core::alloc::Alloc`（PR #157286）、`box_vec_non_null`（PR #157273，PFCP） [来源: Inside Rust Blog 2026-03-27; releases.rs 2026-06-06]
-- v1.11 (2026-06-06): 权威内容对齐 Batch 12：① `19_security_practices.md` 补充 crates.io 恶意 crate 通知政策变更（2026-02-13 起不再为每个恶意 crate 发布博客，仅发 RustSec advisory）及 2026 年恶意 crate 案例（`time_calibrator` RUSTSEC-2026-0030、`tracings` RUSTSEC-2026-0027、`rpc-check` RUSTSEC-2026-0018 等）；② `17_rust_specification_preview.md` 更新 gccrs 2026-03-18 月度报告进展（Rust-for-Linux 25%、测试用例 +347） [来源: Rust Blog 2026-02-13; rust-gcc.github.io 2026-03-18]
-- v1.12 (2026-06-06): 权威内容对齐 Batch 13：`19_security_practices.md` 补充 2026-06 新 RustSec 公告——恶意 crate `exploration`（RUSTSEC-2026-0155）及生态漏洞速览（`russh` RUSTSEC-2026-0154 HIGH、`russh-cryptovec` RUSTSEC-2026-0153 HIGH、`oneringbuf` RUSTSEC-2026-0152 等） [来源: RustSec Advisory DB 2026-06-05]
-- v1.13 (2026-06-06): 权威内容对齐 Batch 14：`19_rust_for_linux.md` 补充不稳定特性依赖边界最新进展——截至 LPC 2025（2025-12），Rust for Linux 仅剩 2 个不稳定特性待稳定化（`arbitrary_self_types` 和 `derive(CoercePointee)`），其他关键特性已稳定 [来源: LPC 2025 Rust for Linux 幻灯片]
-- v1.14 (2026-06-06): 权威内容对齐 Batch 15：① `19_security_practices.md` 补充 TrapDoor 跨生态系统供应链攻击（2026-05-25，含 Crates.io 恶意包 `sui-move-build-helper`、`move-compiler-tools` 及 AI 配置文件污染手法）；② `rust_1_97_preview.md` 补充 Open Enums / Unnamed Enum Variants（RFC 3894，Tracking Issue #156628，2026-04-22 批准为 lang experiment） [来源: ByteIota 2026-05-25; rust-lang/rust#156628]
-- v1.15 (2026-06-08): 权威内容对齐 Batch 16：① `19_security_practices.md` 补充 RustSec 2026-06-04/05 新公告——恶意 crate `logflux`（RUSTSEC-2026-0171）、`diesel` SQLite UAF（RUSTSEC-2026-0172）、`matrix-sdk-ui`/`matrix-sdk-crypto` 漏洞、PQClean 生态批量归档（7 个 `pqcrypto-*` unmaintained）；② `rust_1_97_preview.md` 补充 `VecDeque::retain_back`（PR #151973，FCP 完成） [来源: RustSec Advisory DB 2026-06-05; releases.rs 2026-06-08]
-- v1.16 (2026-06-08): 权威内容对齐 Batch 17：① `05_rust_version_tracking.md` 修复稳定化 PR 编号错误（`Result::map_or_default` #156629 误标为 #156222），补充 `-Zprofile-sample-use`（#156222）和 `c-variadic`（#155942）PFCP 状态；② `06_runtime_comparison_glommio_2025.md` / `02_network_library_comparison.md` 更新 `surf` / `tide` unmaintained 状态标注（RUSTSEC-2026-0169/0170） [来源: releases.rs 2026-06-06; RustSec Advisory DB 2026-06-04]
+- v1.11 (2026-06-06): 权威内容对齐 Batch 12：① `19_security_practices.md` 补充 crates.io 恶意 crate 通知政策变更（2026-02-13 起不再为每个恶意 crate 发布博客，仅发 RustSec advisory）及 2026 年恶意 crate 案例（`time_calibrator` RUSTSEC-2026-0030、`tracings` RUSTSEC-2026-0027、`rpc-check` RUSTSEC-2026-0018 等）；② `17_rust_specification_preview.md` 更新 gccrs 2026-03-18 月度报告进展（Rust-for-Linux 25%、测试用例 +347） [Rust Blog 2026-02-13; rust-gcc.github.io 2026-03-18](https://blog.rust-lang.org/)
+- v1.12 (2026-06-06): 权威内容对齐 Batch 13：`19_security_practices.md` 补充 2026-06 新 RustSec 公告——恶意 crate `exploration`（RUSTSEC-2026-0155）及生态漏洞速览（`russh` RUSTSEC-2026-0154 HIGH、`russh-cryptovec` RUSTSEC-2026-0153 HIGH、`oneringbuf` RUSTSEC-2026-0152 等） [RustSec Advisory DB 2026-06-05](https://rustsec.org/)
+- v1.13 (2026-06-06): 权威内容对齐 Batch 14：`19_rust_for_linux.md` 补充不稳定特性依赖边界最新进展——截至 LPC 2025（2025-12），Rust for Linux 仅剩 2 个不稳定特性待稳定化（`arbitrary_self_types` 和 `derive(CoercePointee)`），其他关键特性已稳定 [LPC 2025 Rust for Linux 幻灯片](https://rust-for-linux.com/)
+- v1.14 (2026-06-06): 权威内容对齐 Batch 15：① `19_security_practices.md` 补充 TrapDoor 跨生态系统供应链攻击（2026-05-25，含 Crates.io 恶意包 `sui-move-build-helper`、`move-compiler-tools` 及 AI 配置文件污染手法）；② `rust_1_97_preview.md` 补充 Open Enums / Unnamed Enum Variants（RFC 3894，Tracking Issue #156628，2026-04-22 批准为 lang experiment） [ByteIota 2026-05-25; rust-lang/rust#156628](https://github.com/rust-lang/rust/pull/156628)
+- v1.15 (2026-06-08): 权威内容对齐 Batch 16：① `19_security_practices.md` 补充 RustSec 2026-06-04/05 新公告——恶意 crate `logflux`（RUSTSEC-2026-0171）、`diesel` SQLite UAF（RUSTSEC-2026-0172）、`matrix-sdk-ui`/`matrix-sdk-crypto` 漏洞、PQClean 生态批量归档（7 个 `pqcrypto-*` unmaintained）；② `rust_1_97_preview.md` 补充 `VecDeque::retain_back`（PR #151973，FCP 完成） [RustSec Advisory DB 2026-06-05; releases.rs 2026-06-08](https://rustsec.org/)
+- v1.16 (2026-06-08): 权威内容对齐 Batch 17：① `05_rust_version_tracking.md` 修复稳定化 PR 编号错误（`Result::map_or_default` #156629 误标为 #156222），补充 `-Zprofile-sample-use`（#156222）和 `c-variadic`（#155942）PFCP 状态；② `06_runtime_comparison_glommio_2025.md` / `02_network_library_comparison.md` 更新 `surf` / `tide` unmaintained 状态标注（RUSTSEC-2026-0169/0170） [releases.rs 2026-06-06; RustSec Advisory DB 2026-06-04](https://releases.rs/)
 - v1.17 (2026-06-08): 内部维护（信息平坦期）：① `04_formal/` L4 纯数学 `[教学类比]` 标注扫查完成（22/22 活跃文件已标注，2 归档文件无需标注）；② L3 概念-代码-练习循环链接补全——16 个活跃高级概念文件新增指向 `crates/` 和 `exercises/src/` 的交叉引用（Reference）（并发/异步（Async）/Unsafe/宏（Macro）/Pin/类型擦除/零拷贝解析/锁自由等主题）；③ `cargo check --workspace` 验证通过
 - v1.18 (2026-06-08): 内部维护（信息平坦期）：补齐缺失追踪文档——① 新建 `24_cargo_semver_checks_preview.md`（cargo-semver-checks 从社区工具到 Cargo 官方集成跟踪，覆盖 ~245 lint、type-checking lints GSoC 2026、public 依赖标记集成）；② 新建 `25_aarch64_sve_sme_preview.md`（AArch64 SVE/SME 可伸缩向量扩展跟踪，RFC #3838 未接受、Tracking Issue #145052、`sve_zeroinitializer` #157110）
 - v1.19 (2026-06-08): 内部维护（信息平坦期）：嵌入式互动测验试点——新建 `concept/01_foundation/11_quizzes/33_quiz_ownership_borrowing.md`，10 道所有权（Ownership）/借用（Borrowing）/生命周期（Lifetimes）互动题，采用 `<details>` 标签实现"自测-展开-核对"闭环，每题链接至对应概念文件、crate 示例和 exercises 练习；已加入 L1 README 索引
@@ -61,8 +61,8 @@
 - v1.23 (2026-06-08): 内部维护（信息平坦期）：核心概念补全测验——① 新建 `concept/02_intermediate/02_memory_management/24_quiz_memory_management.md`（内存管理 10 题，Box/Rc/Arc/RefCell/Cell、Weak、Deref、Drop、内部可变性）；② 新建 `concept/05_comparative/17_quiz_rust_vs_systems.md`（跨语言对比 10 题，Rust vs C/C++/Go 在内存安全（Memory Safety）、并发、错误处理（Error Handling）、零成本抽象（Zero-Cost Abstraction）、嵌入式场景的对比）；③ 新建 `concept/01_foundation/11_quizzes/27_quiz_closures_iterators.md`（闭包（Closures）/迭代器（Iterator） 10 题，Fn/FnMut/FnOnce、move 闭包、惰性求值、适配器/消费者、fold/find/filter/map 组合）；已全部加入对应层级 README 索引
 - v1.24 (2026-06-08): Phase 3 内容瘦身启动：① 从 L1-L6 各层级 README 索引中移除 13 个已归档文件链接（`01_foundation/19_numerics.md`、`02_intermediate/22_iterator_patterns.md`、L3 的 6 个归档文件、`04_formal/07_separation_logic.md` 和 `09_operational_semantics.md`、`05_comparative/16_rust_vs_ruby.md`、L6 的 2 个归档文件）；② 清理 `07_future/README.md` 中指向 `archive/01_ai_integration_original.md` 的历史链接；③ 更新 `04_formal/README.md` 核心功能描述（"可机械验证"→"形式化直觉与教学类比"），为 6 个高形式化密度文件在索引表格中追加 `[教学类比]` 标注
 - v1.25 (2026-06-08): Phase 3 深度瘦身完成：① 迁移 12 个活跃层级中的"已归档-in-place"重复文件至 `concept/archive/`（L3 新增 5 个：02_async_programming、03_unsafe_rust、05_macros、08_zero_cost_abstractions、13_async_patterns；此前 L1/L2/L4/L5/L6 共 7 个）；② 归档/删除 8 个根目录级旧版索引（`00.md`/`03-07.md` 归档，`01.md` 已归档、`02.md` 0 字节占位符已删除）；③ 归档 3 个历史规划文件（`PLAN.md`、`PLAN_Semantic_Space_Wave.md`、`SUMMARY.md`）；④ 新建 `archive/ARCHIVE_INDEX.md` 统一索引；⑤ 修复 7 处指向已归档文件的活跃链接（`README.md` / `inter_layer_topology.md` / `LEARNING_MVP_PATH.md` / `53_embedded_graphics.md` / `17_quiz_rust_vs_systems.md` / `25_aarch64_sve_sme_preview.md` / `35_pattern_composition_algebra.md`），清理 `05_formal_ecosystem_tower.md` 变更日志 stray `$entry` 字符
-- v1.26 (2026-06-19): 权威内容对齐 Batch 22：① 新增 §6.9 维护者成长案例（Tiffany Pek Yuan）与 §6.10 跨仓库工程工具 Josh；② 新增 §6.11 Rust Foundation 3 月董事会治理动态。详见 `05_rust_version_tracking.md` §12.14–§12.16 [来源: Inside Rust 2026-05/06]
-- v1.27 (2026-06-19): 权威内容对齐 Batch 23：新增 §6.12 Leadership Council 与基金会 1–2 月治理动态（Project Priorities Budget、AI 贡献政策、代表选举）。详见 `05_rust_version_tracking.md` §12.17–§12.19 [来源: Inside Rust 2026-02/03/04]
+- v1.26 (2026-06-19): 权威内容对齐 Batch 22：① 新增 §6.9 维护者成长案例（Tiffany Pek Yuan）与 §6.10 跨仓库工程工具 Josh；② 新增 §6.11 Rust Foundation 3 月董事会治理动态。详见 `05_rust_version_tracking.md` §12.14–§12.16 [Inside Rust 2026-05/06](https://blog.rust-lang.org/inside-rust/)
+- v1.27 (2026-06-19): 权威内容对齐 Batch 23：新增 §6.12 Leadership Council 与基金会 1–2 月治理动态（Project Priorities Budget、AI 贡献政策、代表选举）。详见 `05_rust_version_tracking.md` §12.17–§12.19 [Inside Rust 2026-02/03/04](https://blog.rust-lang.org/inside-rust/)
 - v1.28 (2026-06-19): 权威内容对齐 Batch 24：新增 §6.13 Rust-C++ 互操作倡议进展（从研究转向实施、WG21 长期路线、Teor 受聘推进问题空间映射）。来源：Rust Foundation Interop Initiative Update 2026
 - v1.29 (2026-06-19): 权威内容对齐 Batch 25：新增 §6.14 Rust Innovation Lab 下一阶段（入选标准、rustls / Symposium 案例、基金会孵化模式）。来源：Rust Foundation Blog 2026-03-30
 - v1.30 (2026-06-20): 权威内容对齐 Batch 26：新增 §6.15 OpenAI 以铂金会员身份加入 Rust Foundation 并捐赠 $600k 支持维护者、Project Goals 与 RIL；补充 RFMF 筹款渠道（GitHub Sponsors、rust-lang.org/funding）。来源：Rust Foundation 2026-06
@@ -109,8 +109,8 @@ mindmap
       GAT完善[GAT 完善<br/>泛型关联类型]
 ```
 
-> **认知功能**: 提供 Rust 语言演进的全景认知框架，将 RFC 流程、火车模型、Edition 机制与各阶段核心主题统一为层级化心智模型。建议作为"地图"使用：首次阅读把握整体节奏，后续按需深入特定 Edition。关键洞察：三个 Edition 的主题递进揭示了 Rust 从语法简化到语义精确的演化逻辑。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **认知功能**: 提供 Rust 语言演进的全景认知框架，将 RFC 流程、火车模型、Edition 机制与各阶段核心主题统一为层级化心智模型。建议作为"地图"使用：首次阅读把握整体节奏，后续按需深入特定 Edition。关键洞察：三个 Edition 的主题递进揭示了 Rust 从语法简化到语义精确的演化逻辑。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **认知路径**: 本 mindmap 将 Rust 演进组织为**机制层**（RFC/火车/Edition）和**内容层**（各 Edition 的核心主题）。读者可按时间轴从中心向外阅读，或按兴趣直接跳转到特定 Edition。2018 的主题是"路径清晰化"，2021 是"精细化所有权（Ownership）"，2024 是"显式化 Unsafe 边界"——三个 Edition 形成从"语法简化"到"语义精确"的递进。
 
 ---
@@ -755,7 +755,7 @@ timeline
         AI 辅助编译 : 类型推断增强
 ```
 
-> **认知功能**: 纵向展示 Rust 2015–2027+ 的关键里程碑，以五个阶段划分演进节奏。建议横向对比各阶段技术重心，识别从"基础语义稳定"到"类型系统（Type System）深化"的长期主线。关键洞察：GATs、AFIT、Effects 系统、Const 泛型等高级特性集中在 2022 年后，标志着 Rust 从"稳定可用"进入"表达能力扩展"的新阶段。[来源: 💡 原创分析]
+> **认知功能**: 纵向展示 Rust 2015–2027+ 的关键里程碑，以五个阶段划分演进节奏。建议横向对比各阶段技术重心，识别从"基础语义稳定"到"类型系统（Type System）深化"的长期主线。关键洞察：GATs、AFIT、Effects 系统、Const 泛型等高级特性集中在 2022 年后，标志着 Rust 从"稳定可用"进入"表达能力扩展"的新阶段。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -870,7 +870,7 @@ components = ["rust-src", "rustc-dev", "llvm-tools"]
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| Edition 保证向后兼容 | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) | ✅ |
+| Edition 保证向后兼容 | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html) | ✅ |
 | RFC 流程公开透明 | [Rust RFCs](https://github.com/rust-lang/rfcs) | ✅ |
 | AFIT 2024 稳定 | [Rust Blog](https://blog.rust-lang.org/) | ✅ |
 | Effects 系统研究状态 | [Lang Team Blog](https://lang-team.rust-lang.org/) | 📋 早期设计 |
@@ -973,7 +973,7 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 以反例驱动破除"Rust 已完成演化"的静态思维定势，训练批判性认知。建议从根命题出发，沿四条反例路径逐一验证，最终收敛到限定条件下的修正命题。关键洞察：const generics、specialization、async trait 等关键特性仍在演进，且新领域（内核/AI）不断产生新需求——语言演进是持续过程而非终点。[来源: 💡 原创分析]
+> **认知功能**: 以反例驱动破除"Rust 已完成演化"的静态思维定势，训练批判性认知。建议从根命题出发，沿四条反例路径逐一验证，最终收敛到限定条件下的修正命题。关键洞察：const generics、specialization、async trait 等关键特性仍在演进，且新领域（内核/AI）不断产生新需求——语言演进是持续过程而非终点。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 2. "Edition 机制完美解决兼容性"
 
@@ -1003,7 +1003,7 @@ graph TD
     style T2 fill:#6f6
 ```
 
-> **认知功能**: 辩证审视 Edition 机制的能力边界，避免将其神化为万能兼容性方案。建议对比四条反例（跨 Edition 交互复杂性、生态迁移成本、认知负担、工具链支持）与修正命题。关键洞察：Edition 解决的是编译期语法隔离，而非生态统一迁移成本或开发者认知负担——完美兼容性在任何语言中都不存在。[来源: 💡 原创分析]
+> **认知功能**: 辩证审视 Edition 机制的能力边界，避免将其神化为万能兼容性方案。建议对比四条反例（跨 Edition 交互复杂性、生态迁移成本、认知负担、工具链支持）与修正命题。关键洞察：Edition 解决的是编译期语法隔离，而非生态统一迁移成本或开发者认知负担——完美兼容性在任何语言中都不存在。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 3. "Rust 的成功完全因为技术优越性"
 
@@ -1033,7 +1033,7 @@ graph TD
     style T3 fill:#6f6
 ```
 
-> **认知功能**: 将技术因素置于更广泛的生态与社会背景中审视，破除技术决定论迷思。建议关注四条非技术反例（社区治理、Mozilla 支持、时机因素、营销文档）如何与技术特性耦合。关键洞察：Rust 的成功是技术设计（所有权）、社区治理（RFC 流程）、历史时机（C/C++ 安全危机）与资源投入共同作用的系统结果。[来源: 💡 原创分析]
+> **认知功能**: 将技术因素置于更广泛的生态与社会背景中审视，破除技术决定论迷思。建议关注四条非技术反例（社区治理、Mozilla 支持、时机因素、营销文档）如何与技术特性耦合。关键洞察：Rust 的成功是技术设计（所有权）、社区治理（RFC 流程）、历史时机（C/C++ 安全危机）与资源投入共同作用的系统结果。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **过渡: L7 → L1**
 > Rust 的演进不是破坏性的——Edition 系统保证 2015 年的代码在 2024 年仍能编译。这种向后兼容性是所有演进的前提。理解 Rust 如何从 "所有权 + 借用（Borrowing）" 的简单组合发展到今天的复杂类型系统（Type System），需要回到最初的设计原则。
 > 设计根基见 [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)。
@@ -1068,7 +1068,7 @@ graph TD
 > **[来源: Niko Matsakis, "Rust in 2025+" blog]** 语言设计决策的社区权威解读，涵盖 trait solver 演进、const generics 稳定化等主题。 ✅
 > **[来源: Without Boats, "The Rust I Wanted Had No Future"]** 对 Rust 语言设计哲学和演进方向的深度反思，涉及 effects、async fn in traits 等特性的设计权衡。 ✅
 > **[来源: Koka Language; Plotkin & Pretnar 2009; Type Theory Research]** Effects 系统和类型论扩展参考了学术文献。✅
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html); [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 
 ---
@@ -1090,8 +1090,8 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.3
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -1128,7 +1128,7 @@ fn fixed() {
 > 新关键字（如 `async`、`await`、`try`）在旧 Edition 中不是关键字，但在新 Edition 中是。
 > 通过 **raw identifier**（`r#name`）语法，即使名称与新关键字冲突，仍可继续使用。
 > 这是 Rust 多 Edition 共存策略的关键——同一 crate 可以依赖不同 Edition 的库，编译器正确处理关键字差异。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：`const generics` 的泛型参数推断（编译错误）
 
@@ -1157,7 +1157,7 @@ fn fixed() {
 > 早期版本在某些上下文中无法推断 `const N: usize`，需要显式标注或使用 `_` 占位符。
 > Rust 1.79+ 通过 `inline const` 和增强推断减少了此类需求。
 > 这反映了 Rust 的演进策略：核心功能先稳定（最小可行产品），然后在后续版本中逐步增强人体工程学和推断能力，避免一次性引入过多复杂性。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ## 十、边界测试：语言演进的编译错误（续）
 
@@ -1185,7 +1185,7 @@ impl LendingIterator for Vec<String> {
 > 泛型关联类型（GAT，Generic Associated Types）是 Rust 类型系统的重大扩展，允许关联类型带有自己的泛型参数（如 `type Item<'a>`）。
 > 这在 Rust 1.65（2022-11）稳定。GAT 之前， Lending Iterator（返回对集合内部元素的引用（Reference））无法安全表达——`Iterator::Item` 不能有生命周期参数。
 > GAT 的引入是 Rust 从"足够好"向"表达能力接近 Haskell"演进的关键一步，使流式解析器、借用（Borrowing）迭代器（Iterator）等模式成为可能。
-> [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+> [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)]
 
 ### 10.4 边界测试： let-else 语法与模式匹配（编译错误）
 
@@ -1219,7 +1219,7 @@ fn fixed() {
 > 它简化了"提取值，否则退出"的常见模式，避免了 `match` 或 `if let` 的嵌套。
 > 这与 Swift 的 `guard let` 或 Kotlin 的 `?: return` 类似，但 Rust 的版本更通用——支持任意模式（不仅是 `Some`），且 else 块必须是发散的（否则编译错误）。
 > 这是 Rust 语法演进中"减少样板代码，但不牺牲显式性"的典范。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ---
 
@@ -1398,9 +1398,9 @@ fn fixed() {
 >
 > **权威来源**:
 >
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rust Standard Library](https://doc.rust-lang.org/std/)
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 >
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 

@@ -38,8 +38,8 @@
 
 ## 语言特性 {#语言特性}
 
-> **[来源: Rust Nightly Documentation](https://doc.rust-lang.org/std/iter/trait.Iterator.html)**
-> **[来源: RFC 3513 — gen blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)**
+> **[Rust Nightly Documentation](https://doc.rust-lang.org/nightly/unstable-book/index.html)(https://doc.rust-lang.org/std/iter/trait.Iterator.html)**
+> **[RFC 3513 — gen blocks](https://github.com/rust-lang/rfcs/pull/3513)(https://rust-lang.github.io/rfcs/3513-gen-blocks.html)**
 
 ### `gen` 块 — 原生生成器 {#gen-块-原生生成器}
 
@@ -199,8 +199,8 @@ pub fn debug_pause() {
 
 ## 核心标准库 API (进行中稳定化) {#核心标准库-api-进行中稳定化}
 
-> **[来源: Rust Standard Library — Unstable Features](https://doc.rust-lang.org/nightly/std/)**
-> **[来源: Rust Release Tracking](https://releases.rs/)**
+> **[Rust Standard Library — Unstable Features](https://doc.rust-lang.org/beta/unstable-book/index.html)(https://doc.rust-lang.org/nightly/std/)**
+> **[Rust Release Tracking](https://releases.rs/)(https://releases.rs/)**
 
 以下 API 的稳定化 PR 处于 FCP/PFCP 阶段，可能在 1.98/1.99 进入 stable：
 
@@ -222,7 +222,7 @@ pub fn debug_pause() {
 
 ## 快速参考示例 {#快速参考示例}
 
-> **[来源: Rust Nightly Documentation](https://doc.rust-lang.org/nightly/)**
+> **[Rust Nightly Documentation](https://doc.rust-lang.org/nightly/unstable-book/index.html)(https://doc.rust-lang.org/nightly/)**
 
 ### 惰性斐波那契序列 {#惰性斐波那契序列}
 

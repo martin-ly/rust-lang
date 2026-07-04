@@ -6,7 +6,7 @@
 > **分级**: [A]
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Edition Guide、RFC 2052 来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Edition Guide、RFC 2052 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 # Rust 2024 Edition `Future` in Prelude 影响分析 {#rust-2024-edition-future-in-prelude-影响分析}
 
@@ -276,6 +276,6 @@ where
 > **来源: [RFC 2645 - Future in Prelude](https://github.com/rust-lang/rfcs/pull/2645)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **来源: [Wikipedia - Promise (programming)](https://en.wikipedia.org/wiki/Promise_(programming))**
-> **[来源: ACM - Async Language Integration]**
+> **[ACM - Async Language Integration](https://dl.acm.org/)**
 
 ---

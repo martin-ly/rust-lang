@@ -84,7 +84,7 @@ type AliasName<T1, T2, ...> = ExistingType<T1, T2, ...>;
 
 类型别名类似于数学中的“令 `x = 5`”：它引入了一个新的符号，但没有改变符号背后的值。在 Rust 中，`type Meters = u32;` 使得 `Meters` 和 `u32` 在类型系统中不可区分。
 
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -393,6 +393,6 @@ D. 在函数签名中减少泛型参数重复
 
 ---
 
-> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [来源: Rust 1.96.1 Reference 与 TRPL 对齐]
 > **状态**: ✅ 权威来源对齐完成

@@ -371,12 +371,12 @@ graph TD
 > **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)**
 > **[来源: Embassy Book - embassy.dev]**
 > **[来源: RTIC Book - rtic.rs]**
-> **[来源: IEEE - Embedded Software Standards]**
-> **[来源: ACM - Embedded Systems Survey]**
+> **[IEEE - Embedded Software Standards](https://ieeexplore.ieee.org/)**
+> **[ACM - Embedded Systems Survey](https://dl.acm.org/)**
 > **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
 > **来源: [Rust Embedded WG](https://rust-embedded.github.io/book/)**
 > **来源: [Embassy Book](https://embassy.dev/book/)**
-> **[来源: IEEE - Embedded Software]**
+> **[IEEE - Embedded Software](https://ieeexplore.ieee.org/)**
 > **来源: [IEEE](https://standards.ieee.org/)**
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 

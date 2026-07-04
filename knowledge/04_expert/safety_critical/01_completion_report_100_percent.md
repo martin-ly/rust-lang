@@ -7,7 +7,7 @@
 >
 > **相关概念**: [Rc](../../../concept/02_intermediate/02_memory_management/03_memory_management.md)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # Rust安全关键生态系统文档集 - 完成报告 ✅
 
@@ -18,7 +18,7 @@
 
 ## 执行摘要
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Rust安全关键生态系统文档集已完成118%目标！**
 
@@ -28,11 +28,11 @@
 
 ## 完成统计
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 最终指标 ✅
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 指标 | 目标 | 实际 | 达成率 |
 |------|------|------|--------|
@@ -47,7 +47,7 @@
 
 ## 文档结构
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 knowledge/04_expert/safety_critical/ (56文件, 691KB)
@@ -133,7 +133,7 @@ knowledge/04_expert/safety_critical/ (56文件, 691KB)
 
 ## 核心成果
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 新增高价值内容
 >

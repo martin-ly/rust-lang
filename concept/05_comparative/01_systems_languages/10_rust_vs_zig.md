@@ -551,9 +551,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -598,7 +598,7 @@ fn fixed() {
 }
 ```
 
-> **Zig 对比**: Zig 的 `comptime` 是更通用的编译期计算机制——任何参数可标记为 `comptime`，函数在编译期执行。Rust 的 `const generics` 是类型系统（Type System）的扩展，仅支持特定上下文（数组大小、类型参数）。Zig 的 `comptime` 更灵活，但错误信息可能更复杂（编译期执行可能 panic）。Rust 的 `const generics` 更受限，但类型安全边界更清晰。两者都追求"编译期计算零运行时（Runtime）成本"，但 Zig 采用"通用编译期执行"，Rust 采用"受限常量泛型（Generics）"。来源: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **Zig 对比**: Zig 的 `comptime` 是更通用的编译期计算机制——任何参数可标记为 `comptime`，函数在编译期执行。Rust 的 `const generics` 是类型系统（Type System）的扩展，仅支持特定上下文（数组大小、类型参数）。Zig 的 `comptime` 更灵活，但错误信息可能更复杂（编译期执行可能 panic）。Rust 的 `const generics` 更受限，但类型安全边界更清晰。两者都追求"编译期计算零运行时（Runtime）成本"，但 Zig 采用"通用编译期执行"，Rust 采用"受限常量泛型（Generics）"。来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
 ### 10.2 边界测试：Zig 的显式内存管理与 Rust 的所有权（编译错误）
 
@@ -619,7 +619,7 @@ fn fixed() {
 } // s 在此释放
 ```
 
-> **Zig 对比**: Zig 使用显式分配器（`std.heap.page_allocator`）和手动内存管理——没有 GC，也没有 Rust 的所有权（Ownership）系统。Zig 的安全策略是"在调试模式下检测 UB"（边界检查、use-after-free 检测），但在发布模式移除检查。Rust 的安全策略是"编译期阻止 UB"——通过借用（Borrowing）检查器在编译期拒绝悬垂引用（Reference）、use-after-free、数据竞争。Zig 更灵活（可直接操作原始指针（Raw Pointer）），但安全性依赖运行时（Runtime）检查和程序员纪律；Rust 更严格，但编译器保证安全代码无 UB。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **Zig 对比**: Zig 使用显式分配器（`std.heap.page_allocator`）和手动内存管理——没有 GC，也没有 Rust 的所有权（Ownership）系统。Zig 的安全策略是"在调试模式下检测 UB"（边界检查、use-after-free 检测），但在发布模式移除检查。Rust 的安全策略是"编译期阻止 UB"——通过借用（Borrowing）检查器在编译期拒绝悬垂引用（Reference）、use-after-free、数据竞争。Zig 更灵活（可直接操作原始指针（Raw Pointer）），但安全性依赖运行时（Runtime）检查和程序员纪律；Rust 更严格，但编译器保证安全代码无 UB。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 的能力差异（编译错误）
 

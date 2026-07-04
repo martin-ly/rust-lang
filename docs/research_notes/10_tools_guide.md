@@ -876,7 +876,7 @@ cargo expand > expanded.rs
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [The Cargo Book](https://doc.rust-lang.org/cargo/), [rustc dev guide](https://rustc-dev-guide.rust-lang.org/)
 >
-> **权威来源对齐变更日志**: 2026-06-29 新增 Cargo Book、rustc dev guide、Kani/Prusti/Miri/Creusot/Aeneas/Verus 官方文档与版本信息 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-06-29 新增 Cargo Book、rustc dev guide、Kani/Prusti/Miri/Creusot/Aeneas/Verus 官方文档与版本信息 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -898,10 +898,10 @@ cargo expand > expanded.rs
 
 > **来源: [Wikipedia - Software Development Tool](https://en.wikipedia.org/wiki/Software_Development_Tool)**
 > **来源: [Wikipedia - Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_Development_Environment)**
-> **[来源: Rust Tools Team]**
+> **[Rust Tools Team](https://www.rust-lang.org/governance/teams/dev-tools)**
 > **来源: [Rust Reference - Compiler](https://doc.rust-lang.org/reference/)**
-> **[来源: ACM - Developer Tooling Survey]**
-> **[来源: IEEE - Software Engineering Environment]**
+> **[ACM - Developer Tooling Survey](https://dl.acm.org/)**
+> **[IEEE - Software Engineering Environment](https://ieeexplore.ieee.org/)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

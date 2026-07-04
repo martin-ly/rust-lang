@@ -11,10 +11,10 @@
 > **层级**: L6 生态工具
 > **前置概念**: [Cargo](../../concept/06_ecosystem/00_toolchain/01_toolchain.md) · [Build Systems](../../07_future)
 > **Bloom 层级**: 应用
-> **[来源: Rust Compiler Team]** · **[来源: rustc_parallel_frontend 跟踪 Issue]** ·
-> **[来源: Rust Compiler Development Guide]** · **[来源: Nicholas Nethercote - How to Speed Up the Rust Compiler]** ✅ ·
+> **[Rust Compiler Team](https://www.rust-lang.org/governance/teams/compiler)** · **[rustc_parallel_frontend 跟踪 Issue](https://github.com/rust-lang/rust/issues/48685)** ·
+> **[Rust Compiler Development Guide](https://rustc-dev-guide.rust-lang.org/)** · **[Nicholas Nethercote - How to Speed Up the Rust Compiler](https://nnethercote.github.io/2022/10/27/how-to-speed-up-the-rust-compiler-in-october-2022.html)** ✅ ·
 > **来源: [Wikipedia - Parallel Computing](https://en.wikipedia.org/wiki/Parallel_Computing)** · **来源: [Wikipedia - Compiler Optimization](https://en.wikipedia.org/wiki/Compiler_Optimization)** ·
-> **[来源: ACM - Parallel Compilation Techniques]** · **[来源: IEEE - Multi-Core Software Standards]**
+> **[ACM - Parallel Compilation Techniques](https://dl.acm.org/)** · **[IEEE - Multi-Core Software Standards](https://ieeexplore.ieee.org/)**
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]
@@ -107,7 +107,7 @@ $env:RUSTFLAGS = "-Z threads=$env:NUMBER_OF_PROCESSORS"
 | 大型 crate (100K LOC) | 120s | 45s | 2.7x |
 | 超大型 workspace | 600s | 200s | 3.0x |
 
-> **[来源: Rust Compiler Team Benchmarks]** — 实际加速比取决于代码结构（并行化可分割度）
+> **[Rust Compiler Team Benchmarks](https://perf.rust-lang.org/)** — 实际加速比取决于代码结构（并行化可分割度）
 
 ---
 
@@ -226,7 +226,7 @@ graph TD
 > **来源: [ACM](https://dl.acm.org/)**
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 
 ---
 

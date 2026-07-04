@@ -9,9 +9,9 @@
 > 本文档对应 Rust 生产级工程实践体系阶段三 —— 模糊测试。
 > 参考: Google OSS-Fuzz、Cloudflare 模糊测试实践、Rust Fuzzing Book。
 > **来源: [Wikipedia - Fuzzing](https://en.wikipedia.org/wiki/Fuzzing)** ·
-> **[来源: AFL - American Fuzzy Lop]** ·
-> **[来源: LLVM libFuzzer]** ·
-> **[来源: Rust Fuzzing Book - fuzzingbook.com]**
+> **[AFL - American Fuzzy Lop](https://github.com/google/AFL)** ·
+> **[LLVM libFuzzer](https://llvm.org/docs/LibFuzzer.html)** ·
+> **[Rust Fuzzing Book - fuzzingbook.com](https://rust-fuzz.github.io/book/introduction.html)**
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
@@ -304,7 +304,7 @@ fuzzing:
 
 > **权威来源**: [Rust Fuzzing Book](https://rust-fuzz.github.io/book/), [cargo-fuzz 仓库](https://github.com/rust-fuzz/cargo-fuzz), [libFuzzer 文档](https://llvm.org/docs/LibFuzzer.html), [Google OSS-Fuzz](https://google.github.io/oss-fuzz/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Fuzzing Book、cargo-fuzz、libFuzzer 官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Fuzzing Book、cargo-fuzz、libFuzzer 官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

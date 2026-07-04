@@ -510,9 +510,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -591,7 +591,7 @@ where
 > **修正**: 闭包根据捕获方式分为三类：`Fn`（共享借用（Borrowing））、`FnMut`（可变借用（Mutable Borrow））、`FnOnce`（所有权消耗）。
 > 接受闭包的函数必须声明正确的 trait bound。
 > 若闭包消耗捕获变量（如 `drop`），则只能实现 `FnOnce`，不能传递给要求 `Fn` 或 `FnMut` 的函数。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.3 边界测试：`move` 闭包与 `Copy` 类型的交互（编译错误/逻辑错误）
 

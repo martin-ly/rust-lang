@@ -19,7 +19,7 @@
 > **前置概念**: [Async](../../03_advanced/01_async/02_async.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [云原生生态](24_cloud_native.md) · [设计模式](../03_design_patterns/02_patterns.md)
 >
-> **来源**: [axum](https://docs.rs/axum/) · [actix-web](https://docs.rs/actix-web/) · [Rocket](https://rocket.rs/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [axum](https://docs.rs/axum/) · [actix-web](https://docs.rs/actix-web/) · [Rocket](https://rocket.rs/) · [reqwest](https://docs.rs/reqwest/latest/reqwest/) · [Tauri](https://tauri.app/) · [Dioxus](https://dioxuslabs.com/) · [Leptos](https://leptos.dev/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**:
@@ -111,8 +111,8 @@ Web 框架职能分层:
 > [来源: [Axum Docs]]
 ```
 
-> **认知功能**: Rust Web 框架的竞争力来自 L1+L2 的零成本抽象（Zero-Cost Abstraction）——无 GC、无运行时解释器，编译后即为高效原生代码。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **认知功能**: Rust Web 框架的竞争力来自 L1+L2 的零成本抽象（Zero-Cost Abstraction）——无 GC、无运行时解释器，编译后即为高效原生代码。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 1.2 Rust Web 框架演进史
 >
@@ -139,13 +139,13 @@ Rust Web 框架演进:
         [来源: Rocket v0.5 release notes]
 
   2022: Poem v1.0 — OpenAPI 优先、模块化设计
-        [来源: Poem docs]
+        [Poem docs](https://docs.rs/poem/latest/poem/)
 
   2024: Axum 0.7 / Actix-web 4.x / Rocket 0.5 — 生态成熟期
         [来源: crates.io 版本记录]
 ```
 
-> **洞察**: Rust Web 框架经历了从"百花齐放"到"头部收敛"的过程——Axum 和 Actix-web 占据生态主导地位，Rocket 坚守声明式哲学，Poem 填补 OpenAPI/GraphQL  niche。[来源: 💡 原创分析]
+> **洞察**: Rust Web 框架经历了从"百花齐放"到"头部收敛"的过程——Axum 和 Actix-web 占据生态主导地位，Rocket 坚守声明式哲学，Poem 填补 OpenAPI/GraphQL  niche。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 1.3 框架架构生态图
 >
@@ -201,7 +201,7 @@ graph TD
     style POEM fill:#bbdefb
 ```
 
-> **认知功能**: 生态依赖全景图——展示四个框架在 Tokio/Hyper/Tower 基础设施上的位置，以及上层扩展生态的兼容关系。关键洞察：TOWER 生态的共享性是 Axum 的核心优势，而 Actix-web 和 Rocket 的自研抽象层带来了生态隔离。[来源: 💡 原创分析]
+> **认知功能**: 生态依赖全景图——展示四个框架在 Tokio/Hyper/Tower 基础设施上的位置，以及上层扩展生态的兼容关系。关键洞察：TOWER 生态的共享性是 Axum 的核心优势，而 Actix-web 和 Rocket 的自研抽象层带来了生态隔离。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -342,7 +342,7 @@ HttpServer::new(|| {
 
 ### 2.3 Rocket：声明式编程与类型安全
 
-> **[来源: Rocket docs]** Rocket is a web framework for Rust that makes it simple to write fast, secure web applications without sacrificing flexibility, usability, or type safety.
+> **[Rocket docs](https://docs.rs/rocket/latest/rocket/)** Rocket is a web framework for Rust that makes it simple to write fast, secure web applications without sacrificing flexibility, usability, or type safety.
 
 ```text
 Rocket 架构特征:
@@ -375,11 +375,11 @@ fn rocket() -> _ {
 }
 ```
 
-> **Rocket 洞察**: **Rocket 的声明式宏（Macro）系统提供了 Rust Web 框架中最优雅的 API**——但 Fairings 中间件模型与主流 Tower/Service 生态不兼容，是特立独行的选择。[来源: Rocket docs]
+> **Rocket 洞察**: **Rocket 的声明式宏（Macro）系统提供了 Rust Web 框架中最优雅的 API**——但 Fairings 中间件模型与主流 Tower/Service 生态不兼容，是特立独行的选择。[Rocket docs](https://docs.rs/rocket/latest/rocket/)
 
 ### 2.4 Poem：模块化与 OpenAPI 优先
 
-> **[来源: Poem docs]** Poem is a full-featured and easy-to-use web framework with the Rust programming language.
+> **[Poem docs](https://docs.rs/poem/latest/poem/)** Poem is a full-featured and easy-to-use web framework with the Rust programming language.
 
 ```text
 Poem 架构特征:
@@ -412,7 +412,7 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
     .await;
 ```
 
-> **Poem 洞察**: **Poem 是 Rust Web 框架中的"瑞士军刀"**——核心轻量，但通过 poem-openapi 等扩展提供类型安全的 OpenAPI 生成，是 API 文档驱动开发的首选。[来源: Poem docs]
+> **Poem 洞察**: **Poem 是 Rust Web 框架中的"瑞士军刀"**——核心轻量，但通过 poem-openapi 等扩展提供类型安全的 OpenAPI 生成，是 API 文档驱动开发的首选。[Poem docs](https://docs.rs/poem/latest/poem/)
 
 ---
 
@@ -450,7 +450,7 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
   [来源: Poem docs — Runtime]
 ```
 
-> **关键洞察**: **所有主流 Rust Web 框架均绑定 Tokio**——这不是偶然，而是生态收敛的结果。Tokio 的 M:N 调度、工作窃取线程池和丰富的生态（tonic、hyper、axum）使其成为事实标准。来源: [Tokio docs](https://tokio.rs/) [来源: 💡 原创分析]
+> **关键洞察**: **所有主流 Rust Web 框架均绑定 Tokio**——这不是偶然，而是生态收敛的结果。Tokio 的 M:N 调度、工作窃取线程池和丰富的生态（tonic、hyper、axum）使其成为事实标准。来源: [Tokio docs](https://tokio.rs/) [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 3.2 运行时兼容性矩阵
 
@@ -534,7 +534,7 @@ fn main() {
 | **生态丰富度** | ⭐⭐⭐⭐⭐（Tower 共享） | ⭐⭐⭐⭐（Actix 专用） | ⭐⭐⭐（社区分散） | ⭐⭐⭐（Poem 专用） |
 
 > **来源**: [tower-http docs] · [actix-web middleware docs] · [Rocket fairings docs] · [Poem middleware docs]
-> **中间件洞察**: **Axum 的中间件优势来自 Tower 生态的复用**——为 Tower 写的中间件可被任何基于 Tower 的框架（axum、tonic 等）共享。Actix-web 的自研中间件生态历史久但不可复用，Rocket 的 Fairings 模型功能最弱（无环绕式请求处理）。[来源: 💡 原创分析]
+> **中间件洞察**: **Axum 的中间件优势来自 Tower 生态的复用**——为 Tower 写的中间件可被任何基于 Tower 的框架（axum、tonic 等）共享。Actix-web 的自研中间件生态历史久但不可复用，Rocket 的 Fairings 模型功能最弱（无环绕式请求处理）。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -575,7 +575,7 @@ TechEmpower Round 22+ 解读（JSON 序列化 / 单次查询 / 多次查询）:
   [来源: TechEmpower Round 22+ 结果近似]
 ```
 
-> **性能洞察**: **Rust Web 框架的整体性能远超 GC 语言**——即使是最"慢"的 Rocket，也数倍于 Go 和 Node.js。在 Rust 内部选择时，性能差异通常不是首要决策因素。[来源: TechEmpower] [来源: 💡 原创分析]
+> **性能洞察**: **Rust Web 框架的整体性能远超 GC 语言**——即使是最"慢"的 Rocket，也数倍于 Go 和 Node.js。在 Rust 内部选择时，性能差异通常不是首要决策因素。[来源: TechEmpower] [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 5.2 资源占用对比
 
@@ -623,7 +623,7 @@ graph TD
     style POEM fill:#c8e6c9
 ```
 
-> **认知功能**: 工程选型导航器——从生态兼容性、性能需求、API 风格偏好、社区成熟度四个维度出发，将框架特征与项目需求匹配。关键洞察：Axum 是 2024+ 新项目 safest default，Actix-web 是保守/成熟项目的稳妥选择。[来源: 💡 原创分析]
+> **认知功能**: 工程选型导航器——从生态兼容性、性能需求、API 风格偏好、社区成熟度四个维度出发，将框架特征与项目需求匹配。关键洞察：Axum 是 2024+ 新项目 safest default，Actix-web 是保守/成熟项目的稳妥选择。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 6.2 场景化推荐矩阵
 
@@ -631,7 +631,7 @@ graph TD
 |:---|:---|:---|
 | 微服务 + gRPC 混合 | **Axum** | Tower 生态与 Tonic 共享中间件 [来源: Tonic docs] |
 | 高并发 API 网关 | **Actix-web / Axum** | Actor 模型或纯 Tokio 均顶级性能 来源: [Actix docs](https://actix.rs/) |
-| 快速原型/MVP | **Rocket** | 声明式 API 开发效率最高 [来源: Rocket docs] |
+| 快速原型/MVP | **Rocket** | 声明式 API 开发效率最高 [Rocket docs](https://docs.rs/rocket/latest/rocket/) |
 | OpenAPI/文档驱动 | **Poem** | poem-openapi 类型安全生成 [来源: Poem OpenAPI docs] |
 | 企业级长期维护 | **Actix-web** | 生态最成熟，招聘/交接最友好 [来源: crates.io 下载量] |
 | 服务端渲染 (SSR) | **Axum / Actix-web** | 与 Askama/Leptos 集成最佳 [来源: Leptos docs] |
@@ -666,7 +666,7 @@ graph TD
     style T fill:#6f6
 ```
 
-> **认知功能**: 破除"Axum 万能论"——Tower 生态的复杂性、声明式宏（Macro）的缺失、OpenAPI 的非原生支持、Actor 模型的缺乏，均为 Axum 的明确边界。[来源: 💡 原创分析]
+> **认知功能**: 破除"Axum 万能论"——Tower 生态的复杂性、声明式宏（Macro）的缺失、OpenAPI 的非原生支持、Actor 模型的缺乏，均为 Axum 的明确边界。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 7.2 反命题："Web 框架性能决定一切"
 
@@ -695,10 +695,10 @@ graph TD
     场景: 团队已有 Actix-web 经验
     结果: 迁移到 Axum 的学习成本 > 性能收益
     → 维持现有选择是理性决策
-    [来源: 💡 原创分析]
+    [💡 原创分析](../../00_meta/00_framework/methodology.md)
 ```
 
-> **修正认知**: **框架性能只是技术选型的维度之一**——生态成熟度、团队熟悉度、编译速度、与现有架构的兼容性往往更重要。Rust 框架间的性能差异（< 2x）远小于 Rust 与 GC 语言的差异（> 5x）。[来源: 💡 原创分析]
+> **修正认知**: **框架性能只是技术选型的维度之一**——生态成熟度、团队熟悉度、编译速度、与现有架构的兼容性往往更重要。Rust 框架间的性能差异（< 2x）远小于 Rust 与 GC 语言的差异（> 5x）。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -761,7 +761,7 @@ graph TD
 | [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) | ✅ 二级 | 性能基准测试 |
 | [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html) | ✅ 一级 | async/await 设计 |
 | [hyper 文档](https://docs.rs/hyper/latest/hyper/) | ✅ 一级 | HTTP 协议实现 |
-| [Rust 异步（Async）编程](https://rust-lang.github.io/async-book/) | ✅ 一级 | 异步模型 |
+| [Rust 异步（Async）编程](https://rust-lang.github.io/async-book/index.html) | ✅ 一级 | 异步模型 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ⚠️ 三级 | 生态动态 |
 | [crates.io 下载统计](https://crates.io/) | ✅ 二级 | 生态健康度指标 |
 
@@ -777,9 +777,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 12]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

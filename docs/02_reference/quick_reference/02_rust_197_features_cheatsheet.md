@@ -45,7 +45,7 @@
 
 ## 语言特性 {#语言特性}
 
-> **[来源: Rust 1.97 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.97.0)**
+> **[Rust 1.97 Release Notes](https://releases.rs/docs/1.97.0/)(https://github.com/rust-lang/rust/releases/tag/1.97.0)**
 
 ### AsyncFn* trait family 加入 prelude {#asyncfn-trait-family-加入-prelude}
 
@@ -210,7 +210,7 @@ let poll_result = future.poll(&mut cx);
 
 ## Const 上下文稳定 {#const-上下文稳定}
 
-> **[来源: Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)**
+> **[Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)(https://doc.rust-lang.org/reference/const_eval.html)**
 
 以下 API 在 Rust 1.97 中可在 `const fn` / `const` 上下文中使用：
 
@@ -232,7 +232,7 @@ let poll_result = future.poll(&mut cx);
 
 ## Cargo 改进 {#cargo-改进}
 
-> **[来源: Cargo Documentation](https://doc.rust-lang.org/cargo/)**
+> **[Cargo Documentation](https://doc.rust-lang.org/cargo/index.html)(https://doc.rust-lang.org/cargo/)**
 
 | 特性 | 说明 |
 |------|------|
@@ -292,7 +292,7 @@ let original = tagged.with_addr(addr);    // 恢复原始地址，保留 provena
 
 ## 迁移检查清单 {#迁移检查清单}
 
-> **[来源: Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)**
+> **[Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)(https://doc.rust-lang.org/edition-guide/)**
 
 - [ ] 确认项目编译器升级到 Rust 1.97+
 - [ ] 检查新的 `io::ErrorKind` 变体是否需要处理

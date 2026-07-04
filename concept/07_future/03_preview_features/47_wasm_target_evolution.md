@@ -22,7 +22,7 @@
 > **双维定位**: P×Ana — 分析 WASM 目标的演进方向
 > **前置依赖**: [WASI](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) · [WebAssembly](../../06_ecosystem/11_domain_applications/11_webassembly.md)
 > **后置延伸**: [Rust for WebAssembly](../04_research_and_experimental/28_rust_for_webassembly.md)
-> **来源**: [Rust Compiler Repository](https://github.com/rust-lang/rust) · [WebAssembly Spec](https://webassembly.github.io/spec/) · [WASI Preview 2](https://github.com/WebAssembly/WASI/blob/main/specifications/wasi-0.2.4/Overview.md) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Compiler Repository](https://github.com/rust-lang/rust) · [WebAssembly Spec](https://webassembly.github.io/spec/) · [WASI Preview 2](https://github.com/WebAssembly/WASI/blob/main/specifications/wasi-0.2.4/Overview.md) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 

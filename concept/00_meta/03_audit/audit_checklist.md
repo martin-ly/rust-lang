@@ -9,10 +9,10 @@
 > **使用方法**: 每轮内容更新后，逐条检查并标记状态。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/authority_source_map.md)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/authority_source_map.md)
 
 ## 📑 目录
 
@@ -58,7 +58,7 @@
   - [五、权威来源](#五权威来源)
   - [六、常见反例](#六常见反例)
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/authority_source_map.md)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/authority_source_map.md)
 >
 ### 〇、质量门禁流程
 
@@ -103,7 +103,7 @@ flowchart TD
 ```
 
 > **认知功能**: 此流程图将质量门禁从"静态检查清单"转化为**动态决策流程**。每次内容更新后，按修改类型触发相应的检查分支：形式化定义修改→跨层一致性检查；新增来源→格式验证；新增定理→矩阵完整性检查；新增示例→代码块规范。最终必须通过 `concept_consistency_auditor.py` 的 0 错误验证。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ## 一、关系清晰度检查（Inter-File Consistency） [来源: 跨文件一致性审计方法论 — 确保概念定义在不同层级文件中保持逻辑等价; 参照 IEEE 1012 验证标准]
 >
@@ -138,7 +138,7 @@ flowchart TD
 
 ---
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/authority_source_map.md)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/authority_source_map.md)
 >
 ## 二、定理一致性检查（Theorem Consistency） [来源: 形式化验证中的定理证明一致性 — 参照 TAPL (Pierce, 2002) 类型系统元理论; RustBelt (Jung et al., POPL 2018) 的协议验证框架]
 
@@ -201,7 +201,7 @@ flowchart TD
 
 ---
 
-## 五、来源与可信度检查（Provenance） 来源: 来源可信度分级 — 一级: Rust Reference / RFCs / 学术论文; 二级: Rust Internals / 开发者博客; 三级: TRPL / [Rustonomicon; 参照证据金字塔模型](https://doc.rust-lang.org/nomicon/)
+## 五、来源与可信度检查（Provenance） 来源: 来源可信度分级 — 一级: Rust Reference / RFCs / 学术论文; 二级: Rust Internals / 开发者博客; 三级: TRPL / [Rustonomicon; 参照证据金字塔模型](https://doc.rust-lang.org/nomicon/index.html)
 
 ### 5.1 来源标注
 
@@ -328,8 +328,8 @@ python scripts/cross_concept_diff.py
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

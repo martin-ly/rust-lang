@@ -16,7 +16,7 @@
 > **来源**: [Python Documentation](https://docs.python.org/3/) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [PEP 484 — Type Hints](https://peps.python.org/pep-0484/) ·
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [Wikipedia — Python (programming language)](https://en.wikipedia.org/wiki/Python_(programming_language)) ·
 > [Wikipedia — Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
@@ -90,7 +90,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust 与 Python 的**设计哲学对立与互补**。两者在抽象成本、安全时机、显隐偏好上对立，但在"解决实际问题"的目标上互补。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **使用建议**: 不要用 Rust 的哲学评判 Python，也不要用 Python 的哲学评判 Rust——它们解决不同问题域。
 > **关键洞察**: Rust 的"显式"和 Python 的"隐式"不是优劣之分，而是**可靠性 vs 开发效率**的权衡。Rust 为长期维护付出代价，Python 为快速迭代付出代价。
 > [来源: [Zen of Python — PEP 20](https://peps.python.org/pep-0020/)] · [来源: [Rust Language Design FAQ](https://doc.rust-lang.org/reference/introduction.html)]
@@ -457,9 +457,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Python Documentation](https://docs.python.org/3/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Python Documentation](https://docs.python.org/3/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

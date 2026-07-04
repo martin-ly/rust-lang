@@ -5,7 +5,7 @@
 >
 > **分级**: [A]
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Standard Library 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Standard Library 官方文档来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 # Rust 标准库全面分析与论证文档 {#rust-标准库全面分析与论证文档}
 
@@ -1512,7 +1512,7 @@ fn main() {
 > **来源: [Wikipedia - Standard Library](https://en.wikipedia.org/wiki/Standard_Library)**
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 > **来源: [Rust Reference - The Standard Library](https://doc.rust-lang.org/reference/)**
-> **[来源: ACM - Library Design Patterns]**
-> **[来源: IEEE - API Standards]**
+> **[ACM - Library Design Patterns](https://dl.acm.org/)**
+> **[IEEE - API Standards](https://ieeexplore.ieee.org/)**
 
 ---

@@ -4,7 +4,7 @@
 > [AUTOSAR](https://www.autosar.org/),
 > [Rust Reference](https://doc.rust-lang.org/reference/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增汽车 ECU Rust 应用案例来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增汽车 ECU Rust 应用案例来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # 案例研究3: 汽车ECU Rust应用
 
@@ -14,7 +14,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **行业**: 汽车电子
 **应用**: 电子控制单元(ECU)
@@ -26,11 +26,11 @@
 
 ## 汽车ECU概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ECU类型
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | ECU类型 | 功能 | 安全等级 | 实时性 |
 |---------|------|----------|--------|
@@ -46,11 +46,11 @@
 
 ## Rust在汽车ECU中的机会
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 为什么选择Rust？
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **现有挑战**:
 

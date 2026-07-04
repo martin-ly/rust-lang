@@ -1135,7 +1135,7 @@ fn execute_workflow_steps(
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -1156,8 +1156,8 @@ fn execute_workflow_steps(
 
 > **来源: [Wikipedia - Workflow](https://en.wikipedia.org/wiki/Workflow)**
 > **来源: [Wikipedia - Software Development Process](https://en.wikipedia.org/wiki/Software_Development_Process)**
-> **[来源: ACM - Development Workflow Patterns]**
-> **[来源: IEEE - Software Process Standards]**
+> **[ACM - Development Workflow Patterns](https://dl.acm.org/)**
+> **[IEEE - Software Process Standards](https://ieeexplore.ieee.org/)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

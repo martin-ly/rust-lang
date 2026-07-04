@@ -10,7 +10,7 @@
 
 ## 🎯 本模块学习目标
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 完成本模块后，你将能够：
 
@@ -21,7 +21,7 @@
 
 ## 📚 学习路径
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 按顺序学习以下文档：
 
@@ -32,7 +32,7 @@
 
 ## ⏱️ 预计时间
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 安装配置: 15-30 分钟
 - Hello World: 15 分钟
@@ -41,7 +41,7 @@
 
 ## 🎓 预备知识
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 基本的命令行操作
 - 至少一门其他编程语言经验（推荐）
@@ -49,7 +49,7 @@
 
 ## ✅ 完成检查清单
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 成功运行 `rustc --version`
 - [ ] 成功运行 `cargo --version`
@@ -69,7 +69,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

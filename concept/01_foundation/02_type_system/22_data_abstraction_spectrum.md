@@ -380,7 +380,7 @@ let content = match read_file("config.txt") {
 };
 ```
 
-> **关键洞察**: `Option<T>` 和 `Result<T, E>` 是**和类型**的工程应用——它们将"可能存在"和"可能失败"的语义编码在类型中，编译器强制处理所有分支。这与 C++ `std::optional` / `std::expected` 的"可选使用"哲学不同——Rust 的设计是"强制显式"。[来源: 💡 原创分析]
+> **关键洞察**: `Option<T>` 和 `Result<T, E>` 是**和类型**的工程应用——它们将"可能存在"和"可能失败"的语义编码在类型中，编译器强制处理所有分支。这与 C++ `std::optional` / `std::expected` 的"可选使用"哲学不同——Rust 的设计是"强制显式"。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -471,14 +471,14 @@ impl std::fmt::Display for MyVec {
 | 代数数据类型定义 | [Pierce TAPL §11] · [Cardelli & Wegner 1985] | ✅ | Tier 1 |
 | C++ class 模型 | [Stroustrup — C++PL] · [C++ Standard §11.4] | ✅ | Tier 1 |
 | Java 接口模型 | [JLS Ch.9] | ✅ | Tier 1 |
-| Rust enum+trait | [Rust Reference §4.2.1](https://doc.rust-lang.org/reference/) · [RFC 0003](https://github.com/rust-lang/rfcs/pull/0003) | ✅ | Tier 1 |
+| Rust enum+trait | [Rust Reference §4.2.1](https://doc.rust-lang.org/reference/introduction.html) · [RFC 0003](https://github.com/rust-lang/rfcs/pull/0003) | ✅ | Tier 1 |
 | 数据抽象谱系 | [💡 原创分析] | ⚠️ | Tier 3 |
 | 跨语言对比矩阵 | [💡 原创分析] | ⚠️ | Tier 3 |
 
 ---
 
 > **权威来源**:
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [Pierce TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [Cardelli & Wegner 1985](https://dl.acm.org/doi/10.1145/6041.6042) ·
 > [Stroustrup — The C++ Programming Language](https://www.stroustrup.com/4th.html) ·
@@ -516,7 +516,7 @@ fn fixed() {
 > **修正**:
 > 零大小类型（ZST，如 `()`、`PhantomData<T>`、空结构体（Struct））不占用内存，其引用（Reference）可能指向同一虚拟地址。
 > 依赖 ZST 指针唯一性（如哈希表键）是未定义行为。ZST 的正确用途是类型级标记（phantom type）、编译期常量、状态机状态标签——利用类型系统（Type System）传递信息，无运行时（Runtime）开销。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：枚举变体内存布局的不可变性（逻辑错误）
 
@@ -547,7 +547,7 @@ fn fixed() {
 > **修正**:
 > 枚举（Enum）变体的字段默认不可变。即使枚举实例是 `mut`，通过模式匹配（Pattern Matching）获取的可变引用（Mutable Reference）仍需显式 `ref mut`。
 > 枚举（Enum）的内存布局由编译器优化（discriminant 可能内联、 niche optimization），应用代码不应假设枚举的具体内存表示（除非 `#[repr(C)]` 或 `#[repr(u8)]` 显式标记）。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.3 边界测试：零大小类型的 `Box` 分配（编译错误/运行时差异）
 

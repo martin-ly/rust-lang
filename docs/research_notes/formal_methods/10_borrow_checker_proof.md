@@ -2330,7 +2330,7 @@ Polonius；[FLS Ch. 15.4 Borrowing](https://spec.ferrocene.dev/ownership-and-dec
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 
@@ -2354,7 +2354,7 @@ Polonius；[FLS Ch. 15.4 Borrowing](https://spec.ferrocene.dev/ownership-and-dec
 > **来源: [Rustonomicon - Lifetimes](https://doc.rust-lang.org/nomicon/)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 > **来源: [ACM - Ownership Types](https://dl.acm.org/)**
-> **[来源: IEEE - Safe Systems Programming]**
+> **[IEEE - Safe Systems Programming](https://ieeexplore.ieee.org/)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

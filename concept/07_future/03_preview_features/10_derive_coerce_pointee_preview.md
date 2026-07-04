@@ -233,7 +233,7 @@ graph LR
 > **认知功能**: 此图展示 `CoercePointee` 在智能指针 Trait 生态中的**边界**——它只自动化与类型强制相关的两个 Trait，其他 Trait（Deref、AsRef、Borrow）仍需手动实现。
 > **使用建议**: `CoercePointee` 是智能指针实现的**补充**而非替代。完整的智能指针仍需实现 Deref、DerefMut 等。
 > **关键洞察**: Rust 的标准库智能指针（Box、Rc、Arc）未来也可能使用 `#[derive(CoercePointee)]` 简化实现，降低维护负担。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -351,7 +351,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
 **文档版本**: 1.0

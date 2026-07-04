@@ -13,18 +13,18 @@
 > [IEC 61025 — 故障树分析标准] ·
 > [NASA FTA 手册] ·
 > [RustBelt](https://plv.mpi-sws.org/rustbelt/) ·
-> [The Rustonomicon — What Unsafe Rust Can Do](https://doc.rust-lang.org/nomicon/) ·
+> [The Rustonomicon — What Unsafe Rust Can Do](https://doc.rust-lang.org/nomicon/index.html) ·
 > [MIRI 未定义行为检测]
 > **符号约定**: ⬡ 顶事件 / ◇ 中间事件 / ○ 基本事件 / ∧ 与门 / ∨ 或门
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 > **来源**: [IEC 61025 — *Fault Tree Analysis*]
 > **来源**: [NASA — *Fault Tree Handbook with Aerospace Applications*]
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
-> **来源**: [The Rustonomicon — *What Unsafe Rust Can Do*](https://doc.rust-lang.org/nomicon/)
+> **来源**: [The Rustonomicon — *What Unsafe Rust Can Do*](https://doc.rust-lang.org/nomicon/index.html)
 > **来源**: [Miri — Undefined Behavior Detection]
 
 ## 📑 目录
@@ -95,7 +95,7 @@ mindmap
       Miri逃逸层[Miri 检测逃逸层]
 ```
 
-> **认知功能**: 本 mindmap 展示五棵失效分析树的**分层结构**。每个顶事件下有三个层次：最上层是编译器/类型系统的保证（最难失效），中间层是标准库的抽象（中等风险），最下层是 unsafe/FFI 的逃逸（最高风险）。这种分层对应 Rust 的安全哲学：**安全保证是逐层递减的梯度，而非二元开关**。[来源: 💡 原创分析]
+> **认知功能**: 本 mindmap 展示五棵失效分析树的**分层结构**。每个顶事件下有三个层次：最上层是编译器/类型系统的保证（最难失效），中间层是标准库的抽象（中等风险），最下层是 unsafe/FFI 的逃逸（最高风险）。这种分层对应 Rust 的安全哲学：**安全保证是逐层递减的梯度，而非二元开关**。[💡 原创分析](methodology.md)
 
 ---
 
@@ -140,7 +140,7 @@ mindmap
 **⬡ 顶事件：Rust 程序发生内存安全违规（UAF / 双重释放 / 缓冲区溢出）**
 
 > **定义**: 程序在运行时访问已释放内存、重复释放同一块内存、或访问越界内存。
-> 来源: [Rust Reference §13 — Memory Model; RustBelt Soundness Theorem 的反面](https://doc.rust-lang.org/reference/)
+> 来源: [Rust Reference §13 — Memory Model; RustBelt Soundness Theorem 的反面](https://doc.rust-lang.org/reference/introduction.html)
 
 ### 2.2 故障树 Mermaid
 
@@ -203,7 +203,7 @@ graph TD
     style B7 fill:#f99,stroke:#333
 ```
 
-> **认知功能**: 本故障树的关键发现：**顶事件几乎不可能通过 Safe Rust 路径触发**（绿色节点 I1/I4）。所有实际风险都集中在 **Unsafe Rust（I2）** 和 **FFI（I3）** 两个分支。这与 Rust 的安全哲学一致：编译器保证排除了大部分路径，剩余的"窄缝"需要程序员通过契约和工具来管理。[来源: 💡 原创分析]
+> **认知功能**: 本故障树的关键发现：**顶事件几乎不可能通过 Safe Rust 路径触发**（绿色节点 I1/I4）。所有实际风险都集中在 **Unsafe Rust（I2）** 和 **FFI（I3）** 两个分支。这与 Rust 的安全哲学一致：编译器保证排除了大部分路径，剩余的"窄缝"需要程序员通过契约和工具来管理。[💡 原创分析](methodology.md)
 
 ### 2.3 基本事件概率与补偿
 
@@ -302,7 +302,7 @@ graph TD
     style B9 fill:#ff9,stroke:#333
 ```
 
-> **认知功能**: 数据竞争（I1）是**或门**分解——任一基本事件即可触发；死锁（I2）是**与门**——需要多个条件同时满足（嵌套锁 + 顺序不一致）。这与 Rust 的类型系统能力一致：编译器可阻止大部分数据竞争（通过 Send/Sync），但**无法阻止死锁**（死锁是不可判定的，Rice 定理）。活锁（I3）则是运行时行为问题，完全超出类型系统的范畴。[来源: 💡 原创分析]
+> **认知功能**: 数据竞争（I1）是**或门**分解——任一基本事件即可触发；死锁（I2）是**与门**——需要多个条件同时满足（嵌套锁 + 顺序不一致）。这与 Rust 的类型系统能力一致：编译器可阻止大部分数据竞争（通过 Send/Sync），但**无法阻止死锁**（死锁是不可判定的，Rice 定理）。活锁（I3）则是运行时行为问题，完全超出类型系统的范畴。[💡 原创分析](methodology.md)
 
 ### 3.3 基本事件概率与补偿
 
@@ -336,7 +336,7 @@ graph TD
 **⬡ 顶事件：Rust 类型系统保证失效（Coherence 破坏 / unsound impl / 类型推断歧义导致运行时错误）**
 
 > **定义**: 编译器允许了本应拒绝的程序，导致类型安全保证在运行时不成立。
-> 来源: [Rust Reference §10 — Type System; RustBelt Type Safety 的反面](https://doc.rust-lang.org/reference/)
+> 来源: [Rust Reference §10 — Type System; RustBelt Type Safety 的反面](https://doc.rust-lang.org/reference/introduction.html)
 
 ### 4.2 故障树 Mermaid
 
@@ -403,7 +403,7 @@ graph TD
 
 > **认知功能**: 类型系统失效树中，**Coherence 破坏（I1）** 需要**两个条件同时满足**（AND 门）——这是 Rust 设计的重要洞察：
 > 单独的 Orphan Rule 违反或单独的重叠 impl 都不足以破坏类型系统，但两者结合可以。
-> 编译器通过拒绝**任一**条件来防止 Coherence 破坏。Unsound impl（I2）则是**或门**——任一 unsafe 错误即可破坏类型安全。[来源: 💡 原创分析]
+> 编译器通过拒绝**任一**条件来防止 Coherence 破坏。Unsound impl（I2）则是**或门**——任一 unsafe 错误即可破坏类型安全。[💡 原创分析](methodology.md)
 
 ### 4.3 基本事件概率与补偿
 
@@ -493,7 +493,7 @@ graph TD
     style B6 fill:#ff9,stroke:#333
 ```
 
-> **认知功能**: 异步失效树的独特之处在于：**跨 await 引用悬垂（I2）** 是**与门**——需要"引用栈变量"和"生命周期超过 Future"同时发生。编译器通过生命周期检查阻止了大部分此类情况。Pin 违反（I1）和 Future 移动（I3）则是**或门**——任一 unsafe 错误即可触发，这是 async 安全的主要风险点。[来源: 💡 原创分析]
+> **认知功能**: 异步失效树的独特之处在于：**跨 await 引用悬垂（I2）** 是**与门**——需要"引用栈变量"和"生命周期超过 Future"同时发生。编译器通过生命周期检查阻止了大部分此类情况。Pin 违反（I1）和 Future 移动（I3）则是**或门**——任一 unsafe 错误即可触发，这是 async 安全的主要风险点。[💡 原创分析](methodology.md)
 
 ### 5.3 基本事件概率与补偿
 
@@ -523,7 +523,7 @@ graph TD
 **⬡ 顶事件：Rust 程序触发未定义行为（UB）或破坏安全抽象契约**
 
 > **定义**: 程序执行了 Rust 语言规范未定义行为，或 unsafe 代码违反了其公开 safe API 承诺的不变式。
-> 来源: [Rust Reference §16 — Unsafety; The Rustonomicon — List of UB](https://doc.rust-lang.org/reference/)
+> 来源: [Rust Reference §16 — Unsafety; The Rustonomicon — List of UB](https://doc.rust-lang.org/reference/introduction.html)
 
 ### 6.2 故障树 Mermaid
 
@@ -625,7 +625,7 @@ graph TD
 > 这反映了 Rust 的安全模型：所有 UB 最终都通过 unsafe 边界进入系统。
 > 关键洞察：**安全抽象契约破坏（I5）** 是**与门**——需要"unsafe 内部错误"和"safe API 封装不完整"同时发生。
 > 这意味着：即使 unsafe 代码有 bug，只要 safe API 完全封装了所有前提条件，外部用户仍然安全。
-> [来源: 💡 原创分析]
+> [💡 原创分析](methodology.md)
 
 ### 6.3 基本事件概率与补偿
 
@@ -671,7 +671,7 @@ graph TD
     A -.->|"Future 移动导致内存错误"| M
 ```
 
-> **关键洞察**: **Unsafe 契约失效树是所有其他树的"上游"**—— Unsafe 中的错误可以向下游触发内存、并发、类型、异步四个领域的失效。这验证了 Rust 安全设计的核心策略：**将风险集中在单一的、可审计的 unsafe 边界上**，而非分散在整个代码库中。[来源: 💡 原创分析]
+> **关键洞察**: **Unsafe 契约失效树是所有其他树的"上游"**—— Unsafe 中的错误可以向下游触发内存、并发、类型、异步四个领域的失效。这验证了 Rust 安全设计的核心策略：**将风险集中在单一的、可审计的 unsafe 边界上**，而非分散在整个代码库中。[💡 原创分析](methodology.md)
 
 ---
 
@@ -686,7 +686,7 @@ graph TD
 | **目标** | "如何判定代码是否合法" | "什么情况下系统会失效" |
 | **互补关系** | 判定森林的 ❌ 叶节点 = FTA 的基本事件输入 | FTA 的顶事件 = 判定森林的 ❌ 失效模式聚合 |
 
-> **使用建议**: **工程开发**时参考判定森林（"我的代码合法吗？"），**安全审计**时参考失效分析树（"什么情况下会出问题？"）。两者结合形成完整的"正向验证 + 反向分析"安全工程闭环。[来源: 💡 原创分析]
+> **使用建议**: **工程开发**时参考判定森林（"我的代码合法吗？"），**安全审计**时参考失效分析树（"什么情况下会出问题？"）。两者结合形成完整的"正向验证 + 反向分析"安全工程闭环。[💡 原创分析](methodology.md)
 
 ---
 
@@ -696,7 +696,7 @@ graph TD
 |:---|:---|:---|
 | **一级** | IEC 61025 — *Fault Tree Analysis* | FTA 方法论和符号标准 |
 | **一级** | NASA — *Fault Tree Handbook with Aerospace Applications* | 航空航天级 FTA 实践规范 |
-| **一级** | [Rust Reference — Memory Model / Concurrency / Unsafe](https://doc.rust-lang.org/reference/) | Rust 语义定义和 UB 分类 |
+| **一级** | [Rust Reference — Memory Model / Concurrency / Unsafe](https://doc.rust-lang.org/reference/introduction.html) | Rust 语义定义和 UB 分类 |
 | **一级** | RustBelt (Jung et al., POPL 2018) | 安全性定理的反面分析 — 失效条件 |
 | **二级** | The Rustonomicon — *What Unsafe Rust Can Do* | unsafe 操作的具体 UB 列表 |
 | **二级** | Miri 文档 — UB 检测分类 | 运行时 UB 检测覆盖范围 |

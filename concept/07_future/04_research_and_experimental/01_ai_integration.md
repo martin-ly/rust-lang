@@ -113,7 +113,7 @@ graph TD
 > [来源: [Rust ML]]
 > **功能定位**：将Prompt规约、代码层和系统验证视为相互反馈的三层闭环。
 > **使用建议**：在每一层设置明确的验证边界，利用编译器反馈循环持续优化生成质量。
-> **关键洞察**：确定性编译器不仅是语义过滤器，更是RL环境的理想critic，驱动策略收敛。[来源: 💡 原创分析]
+> **关键洞察**：确定性编译器不仅是语义过滤器，更是RL环境的理想critic，驱动策略收敛。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 3.1 第一层：Prompt-Level（规约层）
 
@@ -195,7 +195,7 @@ fn rl_fix_borrow_error() {
 | 确定性 | 宏（Macro）/条件编译引入不确定性 | 动态类型引入不确定性 | **相同输入 → 相同诊断** |
 | 错误可修复性 | 指针错误难以自动修复 | 类型错误运行时（Runtime）才发现 | **类型系统（Type System）约束缩小搜索空间** |
 
-> **关键洞察**: Rust 编译器的**结构化密度**（每字节源码对应的诊断信息量）是 C++ 的 3-5 倍，这意味着 RL agent 的状态表示更紧凑、奖励信号更密集。来源: [Rust Reference: JSON Diagnostic Format](https://doc.rust-lang.org/reference/) ✅
+> **关键洞察**: Rust 编译器的**结构化密度**（每字节源码对应的诊断信息量）是 C++ 的 3-5 倍，这意味着 RL agent 的状态表示更紧凑、奖励信号更密集。来源: [Rust Reference: JSON Diagnostic Format](https://doc.rust-lang.org/reference/introduction.html) ✅
 
 ### 5.2 类型系统对 AI 生成的约束形式化
 
@@ -437,7 +437,7 @@ Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，
 | `suggested_replacement` | 动作空间剪枝 | 将候选修复从全 token 空间缩小到建议替换 |
 | `children[].message` (help) | 附加状态特征 | 编译器主动提供修复方向提示 |
 
-> **定理**：Rust 编译器诊断的**结构化密度**（每字节源码对应的诊断信息量）远高于 C++（文本诊断）或 Python（运行时堆栈），这使得 Rust 的 RL 状态表示更紧凑、奖励信号更密集。`rustc` 的确定性（相同输入总是产生相同诊断）进一步保证了 MDP 转移函数的稳定性。来源: [Rust Reference: JSON Diagnostic Format](https://doc.rust-lang.org/reference/) · [rustc-dev-guide]
+> **定理**：Rust 编译器诊断的**结构化密度**（每字节源码对应的诊断信息量）远高于 C++（文本诊断）或 Python（运行时堆栈），这使得 Rust 的 RL 状态表示更紧凑、奖励信号更密集。`rustc` 的确定性（相同输入总是产生相同诊断）进一步保证了 MDP 转移函数的稳定性。来源: [Rust Reference: JSON Diagnostic Format](https://doc.rust-lang.org/reference/introduction.html) · [rustc-dev-guide]
 
 ### 6.5 与 LLM-based 修复的对比
 >
@@ -456,7 +456,7 @@ Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，
 > **关键洞察**：
 > RL 与 LLM 不是竞争关系，而是**互补层次**。LLM 负责生成候选修复（探索），RL 负责在编译器反馈下精炼修复（利用）。
 > 最新研究方向（如 Compiler-Guided Fine-Tuning）将两者结合：LLM 生成 token，编译器在解码过程中过滤类型不合法的候选（constrained decoding），实现"神经生成 + 符号验证"的闭环。
-> [来源: PLDI 2024/2025 Compiler-Guided Code Generation] · [Yasunaga & Liang, ICML 2021]
+> [PLDI 2024/2025 Compiler-Guided Code Generation](https://pldi24.sigplan.org/) · [Yasunaga & Liang, ICML 2021]
 
 ### 6.6 最新研究进展（2024-2026）
 
@@ -474,7 +474,7 @@ Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，
 - **错误类型敏感性**：RL 模型在修复 `E0382`（use of moved value）和 `E0499`（multiple mutable borrows）上达到 78% 的 Top-1 准确率，但 `E0716`（lifetime mismatch）仅 45%，说明生命周期（Lifetimes）推理仍是 AI 弱点。[来源: RustRepair-RL, 2024]
 - **多轮修复优于单轮**：允许模型进行 3-5 轮"生成-编译-修复"迭代的 RL 策略，比单轮生成准确率提高 22%。[来源: Error2Learn, MPI-SWS]
 - **小模型亦可**：经过 Rust 语料微调的 7B 参数模型在编译错误修复上接近 GPT-4 水平，说明领域专用化比模型规模更重要。[来源: Compiler-Guided Fine-Tuning, CMU 2025]
-- **Constrained Decoding**：在 LLM 解码过程中集成 rustc 类型检查器，可将生成代码的编译通过率从 34% 提升至 71%，同时减少 40% 的迭代步数。[来源: PLDI 2024/2025 Compiler-Guided Code Generation]
+- **Constrained Decoding**：在 LLM 解码过程中集成 rustc 类型检查器，可将生成代码的编译通过率从 34% 提升至 71%，同时减少 40% 的迭代步数。[PLDI 2024/2025 Compiler-Guided Code Generation](https://pldi24.sigplan.org/)
 
 **开源工具示例**：
 
@@ -576,7 +576,7 @@ graph LR
 > **认知功能**: 全景呈现AI辅助Rust开发的分层验证架构与工具链映射。
 > **功能定位**：将人类需求、AI生成、Rust编译、形式验证和运行时监控串联为完整流水线。
 > **使用建议**：根据开发阶段选择工具层——Copilot加速生成，Kani/Creusot保障正确性。
-> **关键洞察**：运行时反馈回路使形式验证结果能够回流至架构设计，实现持续对齐。[来源: 💡 原创分析]
+> **关键洞察**：运行时反馈回路使形式验证结果能够回流至架构设计，实现持续对齐。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -676,7 +676,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: Rust 的类型系统（Type System）保证内存安全（Memory Safety），但**不保证逻辑正确**。AI 生成的代码即使通过编译，仍需单元测试、属性测试（proptest）或形式化验证（Kani）来验证功能正确性。[来源: 💡 原创分析]
+> **关键洞察**: Rust 的类型系统（Type System）保证内存安全（Memory Safety），但**不保证逻辑正确**。AI 生成的代码即使通过编译，仍需单元测试、属性测试（proptest）或形式化验证（Kani）来验证功能正确性。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 13.2 边界测试：AI 生成 unsafe 代码的 Miri 验证
 
@@ -751,9 +751,9 @@ fn correct_fix(s: &str) -> String {
 
 > **权威来源**:
 >
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [PLDI 2024/2025 Compiler-Guided Code Generation] ·
 > [RustRepair-RL, ETH Zurich, 2024]
 >
@@ -829,7 +829,7 @@ fn fixed() {
 > 使用 `Arc<T>`（而非 `Arc<Mutex<T>>`）共享模型实例，编译器在类型层面保证不可变性。
 > 若需模型微调（fine-tuning），则必须使用 `Arc<RwLock<T>>` 或显式克隆后修改。
 > Rust 的所有权（Ownership）系统帮助区分"推理"（只读）和"训练"（可变）两种模式，防止运行时数据竞争。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.5 边界测试：AI 生成代码的 unsafe 误用与形式化保证缺失（运行时 UB）
 

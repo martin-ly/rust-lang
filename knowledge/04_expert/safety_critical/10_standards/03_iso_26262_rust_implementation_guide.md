@@ -1,6 +1,6 @@
 > **权威来源**: [ISO 26262](https://www.iso.org/standard/68383.html), [MISRA C](https://misra.org.uk/), [Rust Reference](https://doc.rust-lang.org/reference/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 ISO 26262 标准来源标注、MISRA C 对标引用 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 ISO 26262 标准来源标注、MISRA C 对标引用 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # ISO 26262 Rust实施指南
 
@@ -10,7 +10,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南提供在ISO 26262汽车功能安全标准框架下使用Rust进行开发的详细实施路径，涵盖ASIL A至ASIL D所有安全完整性等级。
 
@@ -18,15 +18,15 @@
 
 ## 目录与对应关系
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ISO 26262-3: 概念阶段
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 3.5 危害分析与风险评估(HARA)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Rust优势映射**:
 
@@ -87,7 +87,7 @@ pub enum BufferError {
 
 #### 3.6 功能安全概念
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **安全机制Rust实现**:
 

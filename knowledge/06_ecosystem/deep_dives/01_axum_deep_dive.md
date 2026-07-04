@@ -12,7 +12,7 @@
 > **预计阅读时间**: 45分钟
 > **权威来源**: [Axum 官方文档](https://docs.rs/axum/latest/axum/), [Tower 文档](https://docs.rs/tower/latest/tower/), [Hyper 文档](https://docs.rs/hyper/latest/hyper/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Axum/Tower/Hyper 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Axum/Tower/Hyper 官方文档来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
@@ -21,7 +21,7 @@
 
 ## 📋 目录
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Axum 深度解析](#axum-深度解析)
   - [📋 目录](#-目录)
@@ -56,7 +56,7 @@
 
 ## 🎯 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 Axum 是一个基于 Tower 的 Web 框架，专注于：
 
@@ -67,7 +67,7 @@ Axum 是一个基于 Tower 的 Web 框架，专注于：
 
 ### 设计理念
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Axum 设计原则:
@@ -82,11 +82,11 @@ Axum 设计原则:
 
 ## 🏗️ 架构设计
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 核心组件
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use axum::{

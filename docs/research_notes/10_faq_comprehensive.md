@@ -23,8 +23,8 @@
 > [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - FAQ](https://en.wikipedia.org/wiki/FAQ)** ·
 > **来源: [Wikipedia - Knowledge Base](https://en.wikipedia.org/wiki/Knowledge_Base)** ·
-> **[来源: ACM - Technical Q&A Best Practices]** ·
-> **[来源: IEEE - Documentation Usability]**
+> **[ACM - Technical Q&A Best Practices](https://dl.acm.org/)** ·
+> **[IEEE - Documentation Usability](https://ieeexplore.ieee.org/)**
 >
 
 - [Rust形式化方法 FAQ 汇总 {#rust形式化方法-faq-汇总}](#rust形式化方法-faq-汇总-rust形式化方法-faq-汇总)
@@ -1464,7 +1464,7 @@ let saga = Saga::new()
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 

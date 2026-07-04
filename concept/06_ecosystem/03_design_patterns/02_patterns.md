@@ -44,7 +44,7 @@
 > 2. **GoF模式在Rust中怎么用？** → 以Trait（Trait）替代继承，以enum+match替代多态类层次
 > 3. **Rust特有的模式？** → RAII、Typestate、Newtype——所有权（Ownership）与类型系统（Type System）的直接产物
 > 4. **类型系统（Type System）怎么替代模式？** → 编译期保证消除运行时（Runtime）校验需求（Typestate替代状态机检查）
-> 5. **什么时候模式是反模式？** → 过度工程、过早抽象、Stringly typed——抽象债务超过收益 [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
+> 5. **什么时候模式是反模式？** → 过度工程、过早抽象、Stringly typed——抽象债务超过收益 [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)]
 > 6. **模式选择的决策框架？** → 约束驱动：先问"类型系统（Type System）能否证明"，再问"是否需要运行时（Runtime）多态"
 
 ---
@@ -95,7 +95,7 @@
 | **State Machine** | 状态转换遗漏 | 穷尽性匹配 ⟹ 非法转换编译错误 | `enum`+`match` | 边界：状态>20时enum难以维护 |
 
 > **过渡**：以上模式展示了Rust如何利用类型系统（Type System）实现零成本抽象（Zero-Cost Abstraction）。然而，模式的滥用同样会产生"抽象债务"。以下反命题与反模式分析，旨在建立模式选择的批判性框架。
-[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ---
 
@@ -131,7 +131,7 @@ graph TD
 > **认知功能**: 提供设计模式的全景认知框架，帮助学习者建立"模式类型→具体问题→Rust实现"的三层检索路径。建议将其作为查阅具体模式前的导航图，快速定位问题所属的模式类别。
 > [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 > **关键洞察**: Rust特有模式（Typestate、Zero-cost Abstraction）并非GoF分类的补丁，而是所有权（Ownership）类型系统（Type System）的自然涌现。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -280,7 +280,7 @@ classDiagram
 
 ### 4.3 Strategy 模式
 
-[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 **定义**：定义一系列算法，把它们一个个封装起来，并且使它们可互相替换。
 
@@ -476,7 +476,7 @@ unsafe {
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [libloading docs] · 可信度: ✅
 > **过渡**：从静态分发的Strategy到动态加载的Plugin，Rust的模式谱系覆盖了编译期到运行时的全生命周期（Lifetimes）。理解这些实现机制后，必须警惕其对立面——反模式。
-[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 4.6 Observer 模式
 
@@ -605,7 +605,7 @@ async fn async_observer_example() {
 }
 ```
 
-> [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)] · [Rust CLI Book](https://rust-cli.github.io/book/)
+> [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)] · [Rust CLI Book](https://rust-cli.github.io/book/index.html)
 
 **关键洞察**：`broadcast` 通道解耦了生产者和消费者的生命周期（Lifetimes）——接收者可以独立存在，即使发送者已关闭，`recv()` 会返回错误而非悬垂引用。[来源: Tokio Documentation]
 
@@ -652,7 +652,7 @@ async fn lightweight_observer_example() {
 }
 ```
 
-> [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
+> [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html)]
 
 **关键洞察**：`event-listener` 使用无锁原子操作（Atomic Operations）实现通知，相比 `Mutex<Vec<Callback>>` 减少了锁竞争，适用于高并发细粒度事件场景。[来源: event-listener crate docs]
 
@@ -728,7 +728,7 @@ fn display_system(mut reader: EventReader<TemperatureChanged>) {
 }
 ```
 
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 **关键洞察**：Bevy 的事件系统消除了 Observer 与 Subject 之间的直接引用关系，将所有权交由 ECS 调度器统一管理，从根本上规避了循环引用问题。[来源: Bevy Engine Documentation]
 
@@ -742,7 +742,7 @@ fn display_system(mut reader: EventReader<TemperatureChanged>) {
 
 > **来源**: [GoF Design Patterns] · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Bevy Docs] · 可信度: ✅
 > **过渡**：从动态加载的 Plugin 到事件驱动的 Observer，Rust 的模式谱系覆盖了编译期到运行时的全生命周期。理解这些实现机制后，必须警惕其对立面——反模式。
-[来源: [Async Book](https://rust-lang.github.io/async-book/)]
+[来源: [Async Book](https://rust-lang.github.io/async-book/index.html)]
 
 ### 4.7 Rust 特有高级模式
 >
@@ -804,7 +804,7 @@ struct WriterVTable {
 // 零成本替代：enum 类型擦除（如 io::Write 的 Either<L, R>）
 ```
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **关键洞察**: `Box<dyn Write>` 是**动态擦除**，运行时通过 vtable 分发；`enum Either<L, R>` 是**静态擦除**，编译期确定分支，零运行时开销。
 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
@@ -1344,7 +1344,7 @@ fn main() {
 }
 ```
 
-> [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
+> [来源: [Cargo Book](https://doc.rust-lang.org/cargo/index.html)]
 
 ```rust
 // Builder 模式：编译期强制逐步构造
@@ -1436,7 +1436,7 @@ fn main() {
 |:---|:---|:---|
 | RAII 是 Rust 核心模式 | [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Wikipedia: RAII](https://en.wikipedia.org/wiki/RAII) | ✅ |
 | Typestate 利用类型系统 | [Rust Design Patterns] · [Aldrich et al. 2009] | ✅ |
-| Newtype 零成本 | [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ |
+| Newtype 零成本 | [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ |
 | Command/Visitor/Strategy 为 GoF 经典模式 | [GoF Design Patterns, 1994] | ✅ |
 | Stringly typed 为反模式 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | ✅ |
 | Over-engineering 定义与检测 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns — Gold Plating] | ✅ |
@@ -1489,7 +1489,7 @@ fn main() {
 | **Channel (mpsc)** | 生产者-消费者 | 内存拷贝/移动 | 缓冲区 | 低 | 任务解耦 |
 
 > **关键洞察**：Rust 的设计模式选择通常是在**零运行时开销**（单态化（Monomorphization）、GATs）和**编译期灵活性**（dyn、Type Erasure）之间权衡。没有绝对的最优模式，只有最匹配场景约束的模式。
-[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **来源**: [Rust Design Patterns Book] · [Rust Performance Book] · [Benchmarks Game]
 
 ---
@@ -1525,8 +1525,8 @@ fn main() {
 > **来源: [RFC 1598 GATs; RFC 1210 Specialization; Rust Reference: Generics](https://github.com/rust-lang/rfcs/pull/1598)** 高级模式的技术细节有 RFC 支撑。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

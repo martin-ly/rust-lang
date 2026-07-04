@@ -4,7 +4,7 @@
 >
 > **EN**: eBPF Rust
 > **Summary**: eBPF Rust: emerging Rust language feature or ecosystem trend.
-> **来源**: [Aya Book](https://aya-rs.dev/book/) · [Linux Kernel BPF Docs](https://docs.kernel.org/bpf/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Aya Book](https://aya-rs.dev/book/index.html) · [Linux Kernel BPF Docs](https://docs.kernel.org/bpf/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
@@ -698,8 +698,8 @@ Rust 的编译时延在 eBPF 开发中尤为明显：
 >
 >
 >
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 ---
 
@@ -895,9 +895,9 @@ pub fn my_xdp(ctx: XdpContext) -> u32 {
 
 ## 参考来源
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > [来源: [eBPF.io](https://ebpf.io/)]
 > [来源: [Linux Kernel — BPF Documentation](https://www.kernel.org/doc/html/latest/bpf/)]
 > [来源: [Aya — eBPF for Rust](https://aya-rs.dev/)]

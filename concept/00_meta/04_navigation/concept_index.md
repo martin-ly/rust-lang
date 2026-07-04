@@ -12,7 +12,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 ## 📑 目录
@@ -46,7 +46,7 @@
     - [W](#w)
     - [Z](#z)
   - [三、交叉概念一致性审计（🔶） \[来源: 交叉一致性检查方法论参照概念图 (Concept Map) 理论 — Novak \& Cañas, *The Theory Underlying Concept Maps* (2008); 知识网络的连通性验证\]](#三交叉概念一致性审计-来源-交叉一致性检查方法论参照概念图-concept-map-理论--novak--cañas-the-theory-underlying-concept-maps-2008-知识网络的连通性验证)
-    - [3.1 Pin（出现在 4+ 个文件中） \[来源: 跨文件概念一致性检查参照 RFC 2349 — Pin / 2018; concept/03\_advanced/02\_async.md 等 4+ 文件中的 Pin 定义一致性验证\]](#31-pin出现在-4-个文件中-来源-跨文件概念一致性检查参照-rfc-2349--pin--2018-concept03_advanced02_asyncmd-等-4-文件中的-pin-定义一致性验证)
+    - [3.1 Pin（出现在 4+ 个文件中） \[来源: 跨文件概念一致性检查参照 RFC 2349 — Pin / 2018; concept/03\_advanced/01\_async/02\_async.md 等 4+ 文件中的 Pin 定义一致性验证\]](#31-pin出现在-4-个文件中-来源-跨文件概念一致性检查参照-rfc-2349--pin--2018-concept03_advanced01_async02_asyncmd-等-4-文件中的-pin-定义一致性验证)
     - [3.2 Send / Sync（出现在 3+ 个文件中）](#32-send--sync出现在-3-个文件中)
     - [3.3 Unsafe（出现在 3+ 个文件中）](#33-unsafe出现在-3-个文件中)
     - [3.4 生命周期（出现在 4+ 个文件中）](#34-生命周期出现在-4-个文件中)
@@ -719,9 +719,9 @@
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/international_authority_index.md)
 
 **文档版本**: 1.4
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

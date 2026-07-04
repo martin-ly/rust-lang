@@ -329,7 +329,7 @@ impl<S, E> SagaExecutor<S, E> {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 
@@ -356,8 +356,8 @@ impl<S, E> SagaExecutor<S, E> {
 > **来源: [Wikipedia - Saga Pattern](https://en.wikipedia.org/wiki/Saga_Pattern)**
 > **来源: [Wikipedia - Long-Running Transaction](https://en.wikipedia.org/wiki/Long_Running_Transaction)**
 > **[来源: Hector Garcia-Molina - Sagas (1987)]**
-> **[来源: IEEE - Distributed Transaction Patterns]**
-> **[来源: ACM - Compensation-Based Transactions]**
+> **[IEEE - Distributed Transaction Patterns](https://ieeexplore.ieee.org/)**
+> **[ACM - Compensation-Based Transactions](https://dl.acm.org/)**
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**

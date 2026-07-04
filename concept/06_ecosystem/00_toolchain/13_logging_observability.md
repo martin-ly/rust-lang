@@ -93,7 +93,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示可观测性三支柱在 Rust 生态中的**实现映射**。logs 记录离散事件，metrics 聚合数值趋势，traces 追踪请求全链路——三者互补，缺一不可。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **使用建议**: 生产环境应同时部署三种可观测性手段，覆盖不同时间粒度和分析维度。
 > **关键洞察**: Rust 的**零成本抽象（Zero-Cost Abstraction）**哲学同样适用于可观测性——tracing 的 Span 在 release 模式下可通过编译期开关完全消除开销。
 > [来源: [Google SRE Book — Monitoring](https://sre.google/sre-book/monitoring-distributed-systems/)] · [来源: [OpenTelemetry Specification](https://opentelemetry.io/docs/specs/otel/)]
@@ -416,11 +416,11 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [tracing Documentation](https://docs.rs/tracing/latest/tracing/) | ✅ 一级 | 官方文档 |
 | [log crate](https://docs.rs/log/latest/log/) | ✅ 一级 | Rust 日志 facade |
@@ -440,9 +440,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

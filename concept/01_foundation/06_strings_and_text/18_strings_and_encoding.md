@@ -551,9 +551,9 @@ classDiagram
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html), [Rust Standard Library](https://doc.rust-lang.org/std/) · [Unicode Standard](https://unicode.org/versions/latest/) · [Unicode TR31 — Identifier and Pattern Syntax](https://unicode.org/reports/tr31/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Unicode Standard](https://unicode.org/versions/latest/) · [Unicode TR31 — Identifier and Pattern Syntax](https://unicode.org/reports/tr31/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -608,7 +608,7 @@ fn main() {
 > 这与 `from_utf8_unchecked`（unsafe，假设输入有效）形成对比。
 > Rust 的标准字符串类型 `String`/`str` **始终**是有效 UTF-8，任何创建无效 UTF-8 字符串的尝试都被编译器或运行时（Runtime）阻止。
 > 这与 C/C++ 的 `char*`（无编码保证）和 Python 的透明编码处理形成鲜明对比。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 12.2 边界测试：`OsStr` 与 `str` 的跨平台差异（编译错误）
 
@@ -641,7 +641,7 @@ fn fixed() {
 > Unix 上它是任意字节序列（可能非 UTF-8），Windows 上是 WTF-8（兼容 UTF-8 的变体）。
 > `OsStr` 不能直接转为 `&str`（可能失败），也不能直接与 `&str` 比较。
 > 必须使用 `to_str()`（返回 `Option<&str>`）或 `to_string_lossy()`（替换无效字符）进行显式转换。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：`String` 与 `OsString` 的编码差异（编译错误）
 
@@ -711,7 +711,7 @@ fn main() {
 > 3) 使用 `Vec<u8>` 存储非文本二进制数据。
 > 这与 C++ 的 `std::string`（可包含任意字节，无 UTF-8 保证）或 Python 3 的 `bytes.decode()`（类似 `from_utf8`，默认严格模式）不同——Rust 的 `String` 类型 invariant 是强保证，但 `unsafe` 允许打破。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html)] ·
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：`OsStr` 与 `str` 的隐式转换边界（编译错误）
 

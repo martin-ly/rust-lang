@@ -15,7 +15,7 @@
 > **跨层映射**: L4→L1 公理规约 ↔ 工程直觉 | L4→L3 Unsafe 边界 ↔ 公理失效区域
 > **定理链编号**: T-120 霍尔三元组可判定性 → T-121 wp 计算完备性 → T-122 所有权（Ownership）不变式可验证性
 > **后置概念**: [Comparative Studies](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ## 📑 目录
 
@@ -358,7 +358,7 @@ unsafe fn dereference_raw<T>(ptr: *const T) -> T {
 // 其中 unsafe_assumptions(ptr) 是程序员手动保证的前置条件
 ```
 
-> **关键洞察**: `unsafe` 块不是"无规则"的区域，而是**公理由程序员手动提供**的区域。Rust 的 `// SAFETY:` 注释文化正是公理语义在工程实践中的体现——程序员在 unsafe 块前显式声明所需的前置条件，这些条件构成了人工的霍尔三元组。然而，当前工具链（Prusti/Creusot/Kani）对 `unsafe` 的支持仍然有限，这是 Rust 形式化验证的最大缺口之一。[来源: [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/)] · [来源: [RustBelt — Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)]
+> **关键洞察**: `unsafe` 块不是"无规则"的区域，而是**公理由程序员手动提供**的区域。Rust 的 `// SAFETY:` 注释文化正是公理语义在工程实践中的体现——程序员在 unsafe 块前显式声明所需的前置条件，这些条件构成了人工的霍尔三元组。然而，当前工具链（Prusti/Creusot/Kani）对 `unsafe` 的支持仍然有限，这是 Rust 形式化验证的最大缺口之一。[来源: [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/index.html)] · [来源: [RustBelt — Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)]
 
 ---
 

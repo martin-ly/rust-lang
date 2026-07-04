@@ -150,7 +150,7 @@ fn handle_error(kind: ErrorKind) {
 ```
 
 > **认知要点**: `#[non_exhaustive]` 在类型论中引入了**显式的不完全性标记**（⊥），使穷尽性检查从"证明完备"降级为"证明覆盖已知变体"。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -349,7 +349,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust 当前处理枚举演进的**唯一官方路径**——`#[non_exhaustive]` 是向后兼容扩展枚举的编译器支持机制。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **使用建议**: 设计公共 API 时，若枚举代表可能扩展的概念域（错误类型、协议消息、事件），优先使用 `#[non_exhaustive]`。
 > **关键洞察**: Rust 选择"编译期失败 + 显式处理"而非"运行时开放"，体现了**Fail-Safe** 设计哲学。
 
@@ -523,7 +523,7 @@ pub enum ConstExample {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [RFC 2008](https://github.com/rust-lang/rfcs/pull/2008), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [RFC 2008](https://github.com/rust-lang/rfcs/pull/2008), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
 **文档版本**: 1.0

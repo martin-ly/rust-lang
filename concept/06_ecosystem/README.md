@@ -2,13 +2,13 @@
 >
 > **EN**: Readme
 > **Summary**: Ecosystem guide: toolchain, crates, patterns, and production practices.
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [Rust RFCs](https://rust-lang.github.io/rfcs/) · [crates.io](https://crates.io/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Rust RFCs](https://rust-lang.github.io/rfcs/index.html) · [crates.io](https://crates.io/)
 > **内容分级**: [综述级]
 > **受众**: [进阶]
 > **定位**：Rust 的工程实践、工具链、设计模式和生态协作机制。本层是 L1-L5 知识的**工程化落地**，将理论转化为可维护、可扩展的代码库。
 > **Bloom 层级**: 应用 + 评价
 > **功能**: 将概念知识转化为**工程能力**
-> **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)** · **来源: [crates.io](https://crates.io/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)**
+> **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)** · **来源: [crates.io](https://crates.io/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)**
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 > **前置概念**: N/A
 > **后置概念**: N/A
@@ -59,7 +59,7 @@ mindmap
       形式化塔[Formal Ecosystem Tower]
 ```
 
-> **认知功能**: 建立 L6 全景认知框架，按"工具链→设计模式→核心库→应用主题"四层递进组织工程知识。建议作为学习入口，快速定位目标领域后再深入各文件。关键洞察：每个分支都是 L1-L5 理论的可执行映射，而非独立知识集合。[来源: 💡 原创分析]
+> **认知功能**: 建立 L6 全景认知框架，按"工具链→设计模式→核心库→应用主题"四层递进组织工程知识。建议作为学习入口，快速定位目标领域后再深入各文件。关键洞察：每个分支都是 L1-L5 理论的可执行映射，而非独立知识集合。[💡 原创分析](../00_meta/00_framework/methodology.md)
 > **认知路径**: 本 mindmap 展示 L6 层的**工程化落地**。工具链将 L4 类型论转化为编译器实践，设计模式将 L1 所有权（Ownership）规则模式化，核心库谱系是生态的"基础设施"，应用主题展示 Rust 在特定领域的工程形态。L6 是知识体系的"出口"——将理论转化为可维护、可扩展的代码库。
 
 ## 一、本层概念关系图（完整版）
@@ -116,7 +116,7 @@ graph TB
     style PAT fill:#9f9,stroke:#333
 ```
 
-> **认知功能**: 可视化 L1-L5 → L6 → L7 的完整知识流，实线表示强工程依赖，虚线表示弱反馈关联。用于理解各文件如何承接上层理论并输出工程价值。关键洞察：L6 是双向枢纽——既将理论转化为工程能力，也向 L7 输出结构化模板驱动演进。[来源: 💡 原创分析]
+> **认知功能**: 可视化 L1-L5 → L6 → L7 的完整知识流，实线表示强工程依赖，虚线表示弱反馈关联。用于理解各文件如何承接上层理论并输出工程价值。关键洞察：L6 是双向枢纽——既将理论转化为工程能力，也向 L7 输出结构化模板驱动演进。[💡 原创分析](../00_meta/00_framework/methodology.md)
 
 ### 1.1 概念间语义链接
 
@@ -248,9 +248,9 @@ L6 的工程实践输出到：
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

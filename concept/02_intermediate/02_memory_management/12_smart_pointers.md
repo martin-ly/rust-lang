@@ -568,7 +568,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `Box::leak` 消耗 `Box` 的所有权（Ownership）并返回 `&'static T`。`Box` 本身不再可用。此操作将堆内存转为静态引用，内存永远不会被释放（除非程序结束）。仅在确实需要 `'static` 生命周期（Lifetimes）时使用。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `Box::leak` 消耗 `Box` 的所有权（Ownership）并返回 `&'static T`。`Box` 本身不再可用。此操作将堆内存转为静态引用，内存永远不会被释放（除非程序结束）。仅在确实需要 `'static` 生命周期（Lifetimes）时使用。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ---
 
@@ -595,9 +595,9 @@ fn fixed() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -672,7 +672,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Arc<T>` 实现 `Send` + `Sync` 当且仅当 `T: Send + Sync`。`RefCell<T>` 不实现 `Sync`（单线程运行时（Runtime）借用（Borrowing）检查），所以 `Arc<RefCell<T>>` 不能跨线程。线程安全的内部可变性：1) `Arc<Mutex<T>>` — 互斥锁；2) `Arc<RwLock<T>>` — 读写锁；3) `Arc<AtomicUsize>` — 无锁原子操作（Atomic Operations）。`RefCell` 的设计：单线程场景下零开销（无原子操作），但线程间共享导致编译错误。这与 C++ 的 `std::shared_ptr<std::mutex>`（可跨线程，但需手动锁管理）或 Java 的 `AtomicInteger`（线程安全，但无 RefCell 的借用语义）不同——Rust 的类型系统（Type System）通过 `Send`/`Sync` 在编译期排除不安全的线程共享。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust Standard Library]
+> **修正**: `Arc<T>` 实现 `Send` + `Sync` 当且仅当 `T: Send + Sync`。`RefCell<T>` 不实现 `Sync`（单线程运行时（Runtime）借用（Borrowing）检查），所以 `Arc<RefCell<T>>` 不能跨线程。线程安全的内部可变性：1) `Arc<Mutex<T>>` — 互斥锁；2) `Arc<RwLock<T>>` — 读写锁；3) `Arc<AtomicUsize>` — 无锁原子操作（Atomic Operations）。`RefCell` 的设计：单线程场景下零开销（无原子操作），但线程间共享导致编译错误。这与 C++ 的 `std::shared_ptr<std::mutex>`（可跨线程，但需手动锁管理）或 Java 的 `AtomicInteger`（线程安全，但无 RefCell 的借用语义）不同——Rust 的类型系统（Type System）通过 `Send`/`Sync` 在编译期排除不安全的线程共享。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [Rust Standard Library]
 
 ## 实践
 
@@ -690,7 +690,7 @@ fn main() {
 > [来源: [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html)]
 > [来源: [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)]
 > [来源: [Rustonomicon — Rc and Arc](https://doc.rust-lang.org/std/rc/struct.Rc.html)]
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

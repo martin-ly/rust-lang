@@ -5,7 +5,7 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
-> **来源**: [WASI](https://wasi.dev/) · [Rust and WebAssembly Book](https://rustwasm.github.io/book/) · [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [WASI](https://wasi.dev/) · [Rust and WebAssembly Book](https://rustwasm.github.io/docs/book/index.html) · [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 # WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）
@@ -111,7 +111,7 @@ graph TD
     style App fill:#fce4ec
 ```
 
-> **认知功能**: 此全景图定位 WASI 四层栈的垂直职责分割，建议以颜色分层为记忆锚点自上而下阅读。关键洞察：Component Model 的 WIT/World 抽象将 Wasm 从汇编级模块（Module）提升为可组合软件组件，而宿主能力检查器使 Rust 的所有权（Ownership）语义得以跨沙箱边界强制执行。[来源: 💡 原创分析]
+> **认知功能**: 此全景图定位 WASI 四层栈的垂直职责分割，建议以颜色分层为记忆锚点自上而下阅读。关键洞察：Component Model 的 WIT/World 抽象将 Wasm 从汇编级模块（Module）提升为可组合软件组件，而宿主能力检查器使 Rust 的所有权（Ownership）语义得以跨沙箱边界强制执行。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [WASI Spec]]
 > **认知路径**: 此架构图展示 WASI 的四层栈。**宿主运行时（Runtime）**（WASMtime）通过能力检查器实施安全策略；**Wasm Core** 提供线性内存和函数表的基础抽象；**Component Model** 引入 WIT 接口类型和世界（World）概念，将 Wasm 从汇编提升到组件级；**应用层**的 Rust 代码通过 `wit-bindgen` 与下层交互。颜色分层：蓝色=宿主基础设施，橙色=核心运行时，绿色=组件抽象，粉色=应用代码。
 
@@ -361,9 +361,9 @@ impl GuestFile for File {
 > **[来源: Capability-Based Security Research; Dennis & Van Horn 1966; Rust Ownership Model]** 能力安全模型基于操作系统安全研究的经典文献。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -429,7 +429,7 @@ fn escape_sandbox() {
 
 > **运行时（Runtime）错误**: WASI 能力检查器返回 `ENOTCAPABLE`（无能力）。
 > **与 Rust 所有权的同构**: 这类似于 Rust 编译器阻止无所有权变量的访问——WASI 在运行时强制执行相同的逻辑，但边界是"能力句柄"而非"所有权变量"。
-> **关键洞察**: Rust 的所有权检查在编译期，WASI 的能力检查在运行时，二者形成**互补的安全层**。[来源: 💡 原创分析]
+> **关键洞察**: Rust 的所有权检查在编译期，WASI 的能力检查在运行时，二者形成**互补的安全层**。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 8.4 反例：WIT 类型不匹配导致组件组合失败
 
@@ -498,7 +498,7 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 > - WASI 运行时通过能力检查器保证沙箱安全（无越权访问）
 > - 两者都基于"资源唯一标识 + 显式转移"的核心原则
 > - 关键差异：Rust 在编译期检查，WASI 在运行时检查
-> **局限性**: 此同构是概念层面的类比，而非数学上的严格同构。Rust 的所有权有线性逻辑的完整形式化（RustBelt），而 WASI 的能力安全目前缺乏同等深度的形式化证明。[来源: 💡 原创分析]
+> **局限性**: 此同构是概念层面的类比，而非数学上的严格同构。Rust 的所有权有线性逻辑的完整形式化（RustBelt），而 WASI 的能力安全目前缺乏同等深度的形式化证明。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 9.2 形式化验证的空白与挑战
 
@@ -510,7 +510,7 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 | wit-bindgen 生成代码正确性 | ❌ 无形式化证明 | 代码生成器的正确性依赖测试 |
 | Rust → Wasm 编译正确性 | ❌ 无端到端证明 | rustc → LLVM → Wasm 后端链过长 |
 
-> **关键洞察**: Wasm 生态目前处于"工程正确性领先于形式化证明"的状态。与 Rust 编译器（有 RustBelt 证明 Safe Rust 的内存安全（Memory Safety））相比，Wasm/Component Model 的形式化根基明显薄弱。这是未来 3-5 年的重要研究方向。[来源: 💡 原创分析]
+> **关键洞察**: Wasm 生态目前处于"工程正确性领先于形式化证明"的状态。与 Rust 编译器（有 RustBelt 证明 Safe Rust 的内存安全（Memory Safety））相比，Wasm/Component Model 的形式化根基明显薄弱。这是未来 3-5 年的重要研究方向。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 

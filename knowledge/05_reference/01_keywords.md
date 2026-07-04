@@ -18,7 +18,7 @@
 
 ## 严格关键字 (Strict Keywords)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 严格关键字不能用作变量名、函数名或任何标识符。Rust 在编译时会拒绝将这些关键字作为标识符使用。
 
@@ -26,13 +26,13 @@
 
 ### 控制流关键字
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 控制流关键字用于管理程序的执行顺序，是编程中最基础的部分。
 
 #### `if` / `else`
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 条件分支控制。`if` 计算布尔表达式，`else` 处理不满足条件的情况。
 
@@ -52,7 +52,7 @@ let abs = if x < 0 { -x } else { x };
 
 #### `match`
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 模式匹配，类似其他语言的 switch，但更强大。支持穷尽性检查。
 
@@ -68,7 +68,7 @@ match value {
 
 #### `loop`
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 无限循环，必须用 `break` 退出。可以带标签用于多层循环。
 
@@ -864,7 +864,7 @@ if let Some(ref s) = opt {
 
 > **权威来源**: [Rust Reference: Keywords](https://doc.rust-lang.org/reference/keywords.html), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference: Keywords） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference: Keywords） [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 2.1
 **对应 Rust 版本**: Edition 2024

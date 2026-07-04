@@ -59,6 +59,7 @@
   - [Concept 文件双语模板 v2（Bilingual Template v2）](00_meta/01_terminology/bilingual_template_v2.md)
   - [Rust 知识体系顶层本体（TLO）对齐](00_meta/knowledge_topology/kg_tlo_alignment.md)
   - [主题-权威来源对齐图谱 (Topic-Authority Alignment Map)](00_meta/02_sources/topic_authority_alignment_map.md)
+  - [国际化权威来源索引 (International Authority Index)](00_meta/02_sources/international_authority_index.md)
   - [知识体系拓扑图谱集（Knowledge Topology Atlas）](00_meta/knowledge_topology/README.md)
     - [概念定义图谱（Concept Definition Atlas）](00_meta/knowledge_topology/01_concept_definition_atlas.md)
     - [属性关系图谱（Attribute Relationship Atlas）](00_meta/knowledge_topology/02_attribute_relationship_atlas.md)
@@ -418,7 +419,7 @@
   - [Safety Tags（安全标签）预览](07_future/03_preview_features/31_safety_tags_preview.md)
   - [AutoVerus / Verus 预览](07_future/03_preview_features/33_autoverus_preview.md)
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
 - [Rust 的发布流程与 Nightly Rust](07_future/00_version_tracking/50_nightly_rust.md)
 - [Rust 1.95.0 稳定特性](07_future/00_version_tracking/rust_1_95_stabilized.md)

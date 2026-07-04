@@ -9,9 +9,9 @@
 >
 > [Wikipedia - Knowledge Organization](https://en.wikipedia.org/wiki/Knowledge_Organization)** ·
 > **来源: [Wikipedia - Taxonomy](https://en.wikipedia.org/wiki/Taxonomy)** ·
-> **[来源: ACM - Knowledge Representation]** ·
-> **[来源: IEEE - Information Architecture]** ·
-> **[来源: Bloom Taxonomy 2001]**
+> **[ACM - Knowledge Representation](https://dl.acm.org/)** ·
+> **[IEEE - Information Architecture](https://ieeexplore.ieee.org/)** ·
+> **[Bloom Taxonomy 2001](https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/)**
 >
 > **覆盖**: 30 个核心示范文件 + L0-L7 全局架构
 > **更新频率**: 每批次核心文件完善后同步更新

@@ -10,7 +10,7 @@
 > **预计时间**: 60分钟
 > **权威来源**: [Kubernetes 官方文档](https://kubernetes.io/docs/), [Distroless 镜像](https://github.com/GoogleContainerTools/distroless)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Kubernetes 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Kubernetes 官方文档来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
@@ -19,7 +19,7 @@
 
 ## 📋 目录
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Kubernetes 部署完整指南](#kubernetes-部署完整指南)
   - [📋 目录](#-目录)
@@ -58,7 +58,7 @@
 
 ## 🎯 概述
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南涵盖将 Rust 应用部署到 Kubernetes 的完整流程，包括：
 
@@ -72,7 +72,7 @@
 
 ## 🏗️ 基础架构
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────┐
@@ -104,11 +104,11 @@
 
 ## 🐳 容器化
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 多阶段构建
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```dockerfile
 # ==========================================

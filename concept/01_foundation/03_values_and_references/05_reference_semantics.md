@@ -452,7 +452,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
 **文档版本**: 1.1
@@ -937,7 +937,7 @@ fn iterator_mut_chains() {
 ### 7.7 边界分析
 
 > **Bloom 层级**: 分析
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 #### 7.7.1 命题与反命题
 
@@ -1157,7 +1157,7 @@ let s: &mut &Secret = &mut &Secret(String::from("x"));
 ```
 
 > **分析**: 这一边界是 Rust 类型系统（Type System）安全性的核心支柱之一——多级引用提供了表达复杂内存关系的灵活性（结构规则），但名义类型确保了语义契约在任何引用层级都不会被意外破坏（名义规则）。
-> [来源: [Rust Reference: Types] · [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rust Reference: Type Coercions](https://doc.rust-lang.org/reference/)]（一级来源）
+> [来源: [Rust Reference: Types] · [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rust Reference: Type Coercions](https://doc.rust-lang.org/reference/introduction.html)]（一级来源）
 > **与类型系统（Type System）的关联**: 详见 [`04_type_system.md`](../02_type_system/04_type_system.md) 对名义类型与结构类型的完整分析——其中第 11.7 节专门论证了引用构造的结构本质与目标类型名义约束的交互关系。
 
 ---
@@ -1181,8 +1181,8 @@ let s: &mut &Secret = &mut &Secret(String::from("x"));
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-22 新增多级引用语义、部分重借用、Tree Borrows 模型、as_ref/as_mut 嵌套引用转换 [来源: Authority Source Sprint Batch 9]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-22 新增多级引用语义、部分重借用、Tree Borrows 模型、as_ref/as_mut 嵌套引用转换 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 ---
 
@@ -1214,7 +1214,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的自动解引用（auto-deref）在方法调用时最多递归应用，但在赋值和类型匹配时不会无限解引用。`&&&&T` 不会自动变成 `T`，需要显式使用 `*` 运算符。这保持了类型系统（Type System）的显式性和可预测性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 的自动解引用（auto-deref）在方法调用时最多递归应用，但在赋值和类型匹配时不会无限解引用。`&&&&T` 不会自动变成 `T`，需要显式使用 `*` 运算符。这保持了类型系统（Type System）的显式性和可预测性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：`&str` 与 `String` 的混用（编译错误）
 

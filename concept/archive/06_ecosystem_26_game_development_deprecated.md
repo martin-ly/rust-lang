@@ -47,13 +47,13 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 1.1 游戏引擎概览
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]**
 
 ```text
 Rust 游戏引擎生态:
@@ -191,13 +191,13 @@ fn main() {
 
 ## 二、渲染与图形
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 2.1 wgpu 与跨平台渲染
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]**
 
 ```text
 wgpu:
@@ -247,7 +247,7 @@ wgpu:
 
 ### 2.2 渲染管线
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]**
 
 ```text
 渲染管线:
@@ -279,7 +279,7 @@ wgpu:
 
 ## 三、音频与输入
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
@@ -319,9 +319,9 @@ wgpu:
 
 ## 四、性能优化
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ```text
 游戏性能优化:
@@ -389,11 +389,11 @@ fn main() {
 
 ## 五、反命题与适用场景
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 5.1 反命题树
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)]**
 
 ```mermaid
 graph TD
@@ -449,7 +449,7 @@ graph TD
 
 ## 六、常见陷阱
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ```text
 陷阱 1: ECS 过度设计
@@ -495,7 +495,7 @@ graph TD
 
 ## 七、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -510,9 +510,9 @@ graph TD
 
 ## 相关概念文件
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 - [ECS](../06_ecosystem/11_domain_applications/07_game_ecs.md) — ECS 模式
 - [WebAssembly](../06_ecosystem/11_domain_applications/11_webassembly.md) — WebAssembly
@@ -523,7 +523,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 12]
 
@@ -538,13 +538,13 @@ graph TD
 
 > **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]**
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]**
 >
 
 ---

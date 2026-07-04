@@ -305,7 +305,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 迭代器（Iterator）在范畴论中是 **functor**——通过 `map` 将函数 `A → B` 提升为 `Iterator<A> → Iterator<B>`。Rust 的 `Iterator` trait 还体现了 **applicative**（`zip` + `map`）和 **monad**（`flat_map`/`and_then` 的迭代器版本 `flatten`）结构。所有权（Ownership）系统确保映射操作不会创建悬垂引用（Reference）：`v.into_iter()` 消耗集合，`v.iter()` 借用（Borrowing）集合。这是 Rust 将范畴论抽象与资源管理结合的典范。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: 迭代器（Iterator）在范畴论中是 **functor**——通过 `map` 将函数 `A → B` 提升为 `Iterator<A> → Iterator<B>`。Rust 的 `Iterator` trait 还体现了 **applicative**（`zip` + `map`）和 **monad**（`flat_map`/`and_then` 的迭代器版本 `flatten`）结构。所有权（Ownership）系统确保映射操作不会创建悬垂引用（Reference）：`v.into_iter()` 消耗集合，`v.iter()` 借用（Borrowing）集合。这是 Rust 将范畴论抽象与资源管理结合的典范。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ```rust
 // Result 作为单子（Either monad）
@@ -554,9 +554,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

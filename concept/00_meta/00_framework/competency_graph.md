@@ -9,7 +9,7 @@
 > **对齐来源**: [ACM 能力图谱框架] · [Bloom 修订版 2001 — 认知过程维度] · [Dreyfus 技能获取模型] · [Microsoft RustTraining — 能力评估]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 > **关联文件**: [学习指南 `learning_guide.md`](../04_navigation/learning_guide.md) · [双维认知矩阵 `cognitive_dimension_matrix.md`](cognitive_dimension_matrix.md)
 ---
 
@@ -76,7 +76,7 @@ mindmap
       里程碑[可验证的能力节点]
 ```
 
-> **认知功能**: 能力图谱将抽象的"Rust 能力"分解为**六个可测量、可提升的维度**，并与 A/S/P 标记对齐（语法=A、概念=S、设计=P 等）。学习者可以通过自评定位当前位置，获得针对性的训练推荐，而非盲目跟随线性教程。[来源: 💡 原创分析]
+> **认知功能**: 能力图谱将抽象的"Rust 能力"分解为**六个可测量、可提升的维度**，并与 A/S/P 标记对齐（语法=A、概念=S、设计=P 等）。学习者可以通过自评定位当前位置，获得针对性的训练推荐，而非盲目跟随线性教程。[💡 原创分析](methodology.md)
 
 ---
 
@@ -327,7 +327,7 @@ graph LR
   C6 工程实践  →  P — 综合程序性决策
 ```
 
-> **战略建议**: 在 AI 辅助编程时代，学习者应将**80% 的认知资源投入 S 和 P 类能力**（C2、C3、C4、C6），将 C1（语法）外包给 AI 工具。这与 `asp_marking_guide.md` 的"A 外包、S 内化、P 主导"原则一致。[来源: 💡 原创分析]
+> **战略建议**: 在 AI 辅助编程时代，学习者应将**80% 的认知资源投入 S 和 P 类能力**（C2、C3、C4、C6），将 C1（语法）外包给 AI 工具。这与 `asp_marking_guide.md` 的"A 外包、S 内化、P 主导"原则一致。[💡 原创分析](methodology.md)
 
 ---
 

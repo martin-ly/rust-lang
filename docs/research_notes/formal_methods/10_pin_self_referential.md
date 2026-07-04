@@ -1005,7 +1005,7 @@ async fn use_future() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 
@@ -1024,7 +1024,7 @@ async fn use_future() {
 > **来源: [Rustonomicon - Self-Referential Types](https://doc.rust-lang.org/nomicon/)**
 > **来源: [TRPL Ch. 17 - Pin](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
 > **来源: [RFC 2349 - Pin API](https://rust-lang.github.io/rfcs/2349-pin.html)**
-> **[来源: ACM - Safe Self-Referential Structures]**
+> **[ACM - Safe Self-Referential Structures](https://dl.acm.org/)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

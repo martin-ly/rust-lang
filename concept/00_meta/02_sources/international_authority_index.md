@@ -12,7 +12,7 @@
 > **前置概念**: [Authority Source Map](authority_source_map.md) · [Sources](sources.md) · [Topic-Authority Alignment Map](topic_authority_alignment_map.md)
 > **后置概念**: [Concept Index](../04_navigation/concept_index.md) · [Knowledge Mindmap](../00_framework/knowledge_mindmap.md)
 >
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
 
 ---
 
@@ -22,10 +22,24 @@
 ## 📑 目录
 
 - [International Authority Index（国际化权威来源索引）](#international-authority-index国际化权威来源索引)
+  - [📑 目录](#-目录)
   - [一、Rust 官方文档](#一rust-官方文档)
   - [二、形式化与验证生态](#二形式化与验证生态)
   - [三、工业与生态库](#三工业与生态库)
+    - [异步与网络](#异步与网络)
+    - [数据库与 ORM](#数据库与-orm)
+    - [并发与并行](#并发与并行)
+    - [GUI 与跨平台](#gui-与跨平台)
+    - [游戏与图形](#游戏与图形)
+    - [FFI 与互操作](#ffi-与互操作)
+    - [嵌入式](#嵌入式)
+    - [安全与密码学](#安全与密码学)
+    - [序列化、CLI、错误处理、可观测性](#序列化cli错误处理可观测性)
   - [四、跨语言权威入口](#四跨语言权威入口)
+    - [C++](#c)
+    - [Haskell](#haskell)
+    - [Go](#go)
+    - [学术通用](#学术通用)
   - [五、标准与行业规范](#五标准与行业规范)
   - [六、社区权威博客与演讲](#六社区权威博客与演讲)
   - [七、使用建议](#七使用建议)

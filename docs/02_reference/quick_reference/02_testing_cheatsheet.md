@@ -16,8 +16,8 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)** ·
 > **来源: [Wikipedia - Unit Testing](https://en.wikipedia.org/wiki/Unit_Testing)** ·
-> **[来源: ACM - Test-Driven Development]** ·
-> **[来源: IEEE - Software Testing Standards]**
+> **[ACM - Test-Driven Development](https://dl.acm.org/)** ·
+> **[IEEE - Software Testing Standards](https://ieeexplore.ieee.org/)**
 
 - [🧪 Rust 测试速查卡 {#rust-测试速查卡}](#-rust-测试速查卡-rust-测试速查卡)
   - [📋 目录 {#目录}](#-目录-目录)
@@ -1870,7 +1870,7 @@ pub fn get_test_db() -> Option<&'static TestDatabase> {
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -1889,8 +1889,8 @@ pub fn get_test_db() -> Option<&'static TestDatabase> {
 > **来源: [Wikipedia - Unit Testing](https://en.wikipedia.org/wiki/Unit_Testing)**
 > **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
 > **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**
-> **[来源: ACM - Software Testing Methods]**
-> **[来源: IEEE - Test Coverage Standards]**
+> **[ACM - Software Testing Methods](https://dl.acm.org/)**
+> **[IEEE - Test Coverage Standards](https://ieeexplore.ieee.org/)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1912,6 +1912,6 @@ pub fn get_test_db() -> Option<&'static TestDatabase> {
 > **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
 > **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**
 > **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
-> **[来源: ACM - Software Testing]**
+> **[ACM - Software Testing](https://dl.acm.org/)**
 
 ---

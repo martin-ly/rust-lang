@@ -21,7 +21,7 @@
 >
 > 探讨 Rust 中引入 **unsafe
 > [来源: [Rust Unsafe](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)]
-> [来源: [Rust Nomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rust Nomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > [来源: [Rust Reference — Unsafe](https://doc.rust-lang.org/reference/unsafe-keyword.html)]
 > field [来源: [Rust RFC - Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3458)]** 的提案
 >
@@ -38,7 +38,7 @@
 
 > **来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust RFC — Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3458) ·
-> [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/) ·
+> [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/index.html) ·
 > [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) ·
 > [Rust Internals — Unsafe Field Discussion](https://internals.rust-lang.org/)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -136,7 +136,7 @@ graph TD
 ```
 
 > **认知功能**: 此图对比块级 unsafe 与字段级 unsafe 的**审计粒度差异**——字段级 unsafe 将安全责任从"代码区域"下推到"数据结构定义"。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **使用建议**: 对于包含原始指针（Raw Pointer）、手动内存管理字段的结构体（Struct），使用 `unsafe` 字段标记；纯安全字段保持普通声明。
 > **关键洞察**: `unsafe` 字段将**不变量文档化**从注释/文档转移到类型系统（Type System）——字段声明即安全契约声明。
 > [来源: [Rust [RFC 3458](https://rust-lang.github.io/rfcs//3458-unsafe-fields.html) — Motivation](https://github.com/rust-lang/rfcs/pull/3458)]
@@ -315,7 +315,7 @@ graph TD
 > **认知功能**: 此决策树帮助判断是否应将字段标记为 unsafe。核心判断标准是**外部可访问性**和**safe API 封装程度**。
 > **使用建议**: 公开结构体（Struct）中所有原始指针（Raw Pointer）字段都应 unsafe；私有结构体中若通过 safe 方法完全封装，可酌情省略。
 > **关键洞察**: unsafe 字段的价值与**封装程度**成反比——完全封装的内部字段不需要 unsafe 标记，因为外部无法直接访问。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -375,19 +375,19 @@ graph TD
 >
 
 | 来源 | 可信度 | 说明 |
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
-| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/index.html) | ✅ 一级 | RFC 文档 |
 | [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust RFC 3458](https://github.com/rust-lang/rfcs/pull/3458) | ✅ 一级 | 官方 RFC，unsafe fields 设计 |
-| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ 一级 | unsafe Rust 权威指南 |
+| [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) | ✅ 一级 | unsafe Rust 权威指南 |
 | [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) | ✅ 一级 | unsafe 代码规范 |
 | [Safety Tags Preview](08_safety_tags_preview.md) | ✅ 一级 | 关联概念：机器可读安全契约 |
 | [Rust Internals Forum](https://internals.rust-lang.org/) | ⚠️ 二级 | 设计讨论 |
@@ -404,7 +404,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -480,7 +480,7 @@ impl Drop for RawBuffer {
 }
 ```
 
-> **修正**: `unsafe` 字段与 `Drop` 的交互是内存安全（Memory Safety）的关键边界。`Drop::drop` 必须处理字段可能处于的任何状态（已初始化、未初始化、已释放、部分初始化）。`unsafe` 字段的文档必须明确：1) 构造后是否总是初始化；2) `Drop` 是否总是有效；3) 是否存在 `into_raw` 模式转移所有权（Ownership）（类似 `Box::into_raw`，跳过 Drop）。Rust 的 `ManuallyDrop<T>` 和 `MaybeUninit<T>` 已部分解决此问题，但 `unsafe fields` 提供了更原生的语法。形式化上，`unsafe fields` 可建模为**部分类型**（partial types）：字段的存在性在类型层面追踪，编译器验证所有代码路径正确处理初始化/未初始化状态。这与 Rust 当前的初始化分析（flow-sensitive）扩展一致。来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/) · 来源: [Rust RFC 1892](https://github.com/rust-lang/rfcs/pull/1892)
+> **修正**: `unsafe` 字段与 `Drop` 的交互是内存安全（Memory Safety）的关键边界。`Drop::drop` 必须处理字段可能处于的任何状态（已初始化、未初始化、已释放、部分初始化）。`unsafe` 字段的文档必须明确：1) 构造后是否总是初始化；2) `Drop` 是否总是有效；3) 是否存在 `into_raw` 模式转移所有权（Ownership）（类似 `Box::into_raw`，跳过 Drop）。Rust 的 `ManuallyDrop<T>` 和 `MaybeUninit<T>` 已部分解决此问题，但 `unsafe fields` 提供了更原生的语法。形式化上，`unsafe fields` 可建模为**部分类型**（partial types）：字段的存在性在类型层面追踪，编译器验证所有代码路径正确处理初始化/未初始化状态。这与 Rust 当前的初始化分析（flow-sensitive）扩展一致。来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · 来源: [Rust RFC 1892](https://github.com/rust-lang/rfcs/pull/1892)
 
 ### 10.3 边界测试：unsafe 字段与 `#[repr(C)]` 的交互（编译错误）
 
@@ -526,7 +526,7 @@ impl Buffer {
 }
 ```
 
-> **修正**: `unsafe` 字段的核心价值是**显式化不变式**（invariant）：字段的维护是 unsafe 的，但公开 API 应保证不变式。上述代码中，`Buffer` 的不变式是 `data` 指向 `len` 字节的有效内存。`get` 方法若未检查 `index < len`，违反不变式，导致 UB。`unsafe` 字段要求：1) 所有公开方法维护不变式；2) `unsafe` 块的文档明确列出前置条件；3) `unsafe` 字段只在模块（Module）内部直接访问。这与 `Vec` 的实现（`buf` 指针、`len`、`cap` 是 private，外部无法破坏不变式）类似——`unsafe fields` 将这一模式提升到语法层面，使不变式的边界更清晰。这与 Eiffel 的 Design by Contract（前置/后置条件在语言层面）或 Ada 的 Spark（形式化验证不变式）类似——Rust 的 `unsafe fields` 是介于文档和形式化验证之间的实践。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+> **修正**: `unsafe` 字段的核心价值是**显式化不变式**（invariant）：字段的维护是 unsafe 的，但公开 API 应保证不变式。上述代码中，`Buffer` 的不变式是 `data` 指向 `len` 字节的有效内存。`get` 方法若未检查 `index < len`，违反不变式，导致 UB。`unsafe` 字段要求：1) 所有公开方法维护不变式；2) `unsafe` 块的文档明确列出前置条件；3) `unsafe` 字段只在模块（Module）内部直接访问。这与 `Vec` 的实现（`buf` 指针、`len`、`cap` 是 private，外部无法破坏不变式）类似——`unsafe fields` 将这一模式提升到语法层面，使不变式的边界更清晰。这与 Eiffel 的 Design by Contract（前置/后置条件在语言层面）或 Ada 的 Spark（形式化验证不变式）类似——Rust 的 `unsafe fields` 是介于文档和形式化验证之间的实践。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 > **过渡**: Unsafe Fields 预研：字段级安全边界的精确标注 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Unsafe Fields 预研：字段级安全边界的精确标注 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Unsafe Fields 预研：字段级安全边界的精确标注 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

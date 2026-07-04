@@ -215,7 +215,7 @@ NLL 的关键改进:
   求解器: 从基于"作用域嵌套树"变为基于"CFG 数据流分析"
 ```
 
-> **来源**: [rustc NLL [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — Non-Lexical Lifetimes] · [Rust Reference: Lifetime resolution](https://doc.rust-lang.org/reference/) · [rustc borrow_check/src/region_inference/mod.rs]
+> **来源**: [rustc NLL [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — Non-Lexical Lifetimes] · [Rust Reference: Lifetime resolution](https://doc.rust-lang.org/reference/introduction.html) · [rustc borrow_check/src/region_inference/mod.rs]
 
 #### 与 Polonius 的演进关系
 
@@ -319,7 +319,7 @@ graph TD
     F --> F3[HRTB: for<'a> 高阶]
 ```
 
-> **认知功能**: 此思维导图将生命周期知识组织为「标注—推断—约束—检查—特殊形式」五维结构。生命周期的学习难点在于「何时需要标注、何时可以省略、为什么编译器报错」，此图通过 B（显式）与 C（隐式）的对照，帮助读者理解编译器的「推断边界」——Elision 覆盖 90% 场景，复杂场景需显式标注。F 分支的 HRTB 和 'static 是高阶用法的入口，提醒读者生命周期不仅是「语法标注」，更是「类型系统（Type System）的参数化扩展」。 [来源: 💡 原创分析]
+> **认知功能**: 此思维导图将生命周期知识组织为「标注—推断—约束—检查—特殊形式」五维结构。生命周期的学习难点在于「何时需要标注、何时可以省略、为什么编译器报错」，此图通过 B（显式）与 C（隐式）的对照，帮助读者理解编译器的「推断边界」——Elision 覆盖 90% 场景，复杂场景需显式标注。F 分支的 HRTB 和 'static 是高阶用法的入口，提醒读者生命周期不仅是「语法标注」，更是「类型系统（Type System）的参数化扩展」。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [TRPL — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ---
@@ -424,7 +424,7 @@ graph BT
   ⟹ 长生命周期引用可安全替代短生命周期引用，无悬垂风险
 ```
 
-> **来源: [Rust Reference: Variance](https://doc.rust-lang.org/reference/)** 生命周期协变/逆变/不变的类型系统（Type System）规则基于子类型理论。✅
+> **来源: [Rust Reference: Variance](https://doc.rust-lang.org/reference/introduction.html)** 生命周期协变/逆变/不变的类型系统（Type System）规则基于子类型理论。✅
 
 ### 4.6 推论：'static 生命周期 ⟹ 全局/泄漏数据的安全性
 
@@ -626,7 +626,7 @@ graph TD
     style T fill:#6f6
 ```
 
-> **认知功能**: 此决策树按**危险层级**排列生命周期的失效路径：unsafe（编译器完全放弃检查，最危险）→ 自引用未 Pin（Safe Rust 边界情况，编译器本应阻止但自引用结构特殊）→ Rc 循环（非悬垂，但资源泄漏）。关键认知：生命周期系统不是「万能防悬垂盾」，它的保证有明确边界——unsafe 和特殊结构（自引用）是主要缺口。底部的「四层分类」表格进一步系统化这些边界，帮助读者从「编译错误」反向定位违规层次。 [来源: 💡 原创分析]
+> **认知功能**: 此决策树按**危险层级**排列生命周期的失效路径：unsafe（编译器完全放弃检查，最危险）→ 自引用未 Pin（Safe Rust 边界情况，编译器本应阻止但自引用结构特殊）→ Rc 循环（非悬垂，但资源泄漏）。关键认知：生命周期系统不是「万能防悬垂盾」，它的保证有明确边界——unsafe 和特殊结构（自引用）是主要缺口。底部的「四层分类」表格进一步系统化这些边界，帮助读者从「编译错误」反向定位违规层次。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **四层分类**：
 
@@ -658,7 +658,7 @@ graph TD
     style F1 fill:#f66
 ```
 
-> **认知功能**: 此图是 Elision 规则的**反向验证器**。四个绿色节点覆盖了「无需显式标注」的全部场景，红色节点标记了唯一例外。读者可从此图中提炼出极简记忆法则：「无引用 → 不标；单输入 → 不标；方法 &self → 不标；多输入多输出非方法 → 必须标」。这消除了「何时需要写 <'a>」的犹豫，将生命周期标注从「凭经验猜测」转化为「按条件判定」。 [来源: 💡 原创分析]
+> **认知功能**: 此图是 Elision 规则的**反向验证器**。四个绿色节点覆盖了「无需显式标注」的全部场景，红色节点标记了唯一例外。读者可从此图中提炼出极简记忆法则：「无引用 → 不标；单输入 → 不标；方法 &self → 不标；多输入多输出非方法 → 必须标」。这消除了「何时需要写 <'a>」的犹豫，将生命周期标注从「凭经验猜测」转化为「按条件判定」。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **核心洞察**：Elision 的三条规则覆盖了绝大多数函数签名，只有在"多输入生命周期 + 返回引用 + 非方法"的交集处才需要显式标注。
 
@@ -682,7 +682,7 @@ graph TD
     style F2 fill:#f66
 ```
 
-> **认知功能**: 此图解构了 'static 的**多重身份**。四种合法来源（字符串字面量、全局常量、Box::leak、LazyLock）本质不同——有的来自静态数据段，有的来自故意泄漏，有的来自延迟初始化——但类型系统（Type System）将它们统一为 'static。关键认知：'static 不是「存储位置」的约束，而是「存活时间」的约束。两个反例展示了试图「伪造」'static 的后果：编译期拦截（局部变量）或运行时（Runtime） UB（unsafe 伪造）。这帮助读者理解 'static 的语义本质：它是「时间」的 ⊤，而非「空间」的全局。 [来源: 💡 原创分析]
+> **认知功能**: 此图解构了 'static 的**多重身份**。四种合法来源（字符串字面量、全局常量、Box::leak、LazyLock）本质不同——有的来自静态数据段，有的来自故意泄漏，有的来自延迟初始化——但类型系统（Type System）将它们统一为 'static。关键认知：'static 不是「存储位置」的约束，而是「存活时间」的约束。两个反例展示了试图「伪造」'static 的后果：编译期拦截（局部变量）或运行时（Runtime） UB（unsafe 伪造）。这帮助读者理解 'static 的语义本质：它是「时间」的 ⊤，而非「空间」的全局。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -902,7 +902,7 @@ fn complex_lifetime_fixed<'a, 'b>(a: &'a str, b: &'b str, _c: &str) -> (&'a str,
 >
 > 生命周期省略（Lifetime Elision）规则仅适用于简单情况（单输入引用 → 单输出引用）。
 > 当函数签名涉及多个输入引用和多个输出引用时，编译器无法自动推断生命周期关系，必须显式标注。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 8.6 边界测试：生命周期与所有权转移的交互（编译错误）
 

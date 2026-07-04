@@ -19,7 +19,7 @@
 > **跨层映射**: L4→L1 类型语义 ↔ 类型直觉 | L4→L2 Trait 系统 ↔ 存在/全称类型
 > **定理链编号**: T-130 进步定理 → T-131 保持定理 → T-132 类型安全完备性
 > **后置概念**: [Comparative Studies](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ## 目录
 
@@ -118,7 +118,7 @@ Progress + Preservation（类型安全）
     └──→ 空指针解引用不可能：Option<T> 强制显式处理 None
 ```
 
-> **关键洞察**: 这不是偶然的——Rust 的类型系统（Type System）**从设计之初就以内存安全（Memory Safety）为目标**。`&mut T` 不是"可写引用（Reference）"，而是**独占访问令牌**；`Box<T>` 不是"堆指针"，而是**线性资源**；`Option<T>` 不是"可为空的值"，而是**显式存在性证明**。这些设计使 Cardelli 的"类型安全 → 内存安全"蕴含关系在 Rust 中成为定理，而非巧合。来源: [Cardelli 1996] · 来源: [Rust Reference — Type Safety](https://doc.rust-lang.org/reference/)
+> **关键洞察**: 这不是偶然的——Rust 的类型系统（Type System）**从设计之初就以内存安全（Memory Safety）为目标**。`&mut T` 不是"可写引用（Reference）"，而是**独占访问令牌**；`Box<T>` 不是"堆指针"，而是**线性资源**；`Option<T>` 不是"可为空的值"，而是**显式存在性证明**。这些设计使 Cardelli 的"类型安全 → 内存安全"蕴含关系在 Rust 中成为定理，而非巧合。来源: [Cardelli 1996] · 来源: [Rust Reference — Type Safety](https://doc.rust-lang.org/reference/introduction.html)
 > **前置概念**: N/A
 ---
 
@@ -321,7 +321,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 > Java/C++ 的异常是**隐式的控制流**，类型系统不跟踪哪些函数可能抛出异常。
 > Rust 的 `Result<T, E>` 是**显式的控制流**，函数签名直接声明可能的错误类型 `E`。
 > 这使类型语义可以精确追踪错误传播路径——编译器强制调用者处理 `Result`，而非在运行时（Runtime）意外捕获异常。
-> 来源: [Pierce 2002, Ch.11] · 来源: [Rust Reference — Option/Result](https://doc.rust-lang.org/reference/) · 来源: [Hoare's Billion Dollar Mistake]
+> 来源: [Pierce 2002, Ch.11] · 来源: [Rust Reference — Option/Result](https://doc.rust-lang.org/reference/introduction.html) · 来源: [Hoare's Billion Dollar Mistake]
 
 #### Row Polymorphism：Effect System 的类型论基础
 
@@ -424,7 +424,7 @@ fn draw_twice(x: impl Drawable) {
 > - C++ 的模板对应 Rust 的 `impl Trait`（编译时单态化（Monomorphization），零成本），但 C++ 模板无 trait bounds 的显式语义约束
 > - Rust 的独特设计：同一 trait 系统支持两种语义（`dyn` 存在类型 vs `impl` 全称类型），由程序员根据场景选择
 >
-> **来源**: [Pierce 2002, Ch.24 — Existential Types](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Pierce 2002, Ch.23 — Universal Types](https://www.cis.upenn.edu/~bcpierce/tapl/) · [RFC 1522 — Conservative impl Trait](https://rust-lang.github.io/rfcs//1522-conservative-impl-trait.html) · [RFC 2289 — Associated Type Bounds](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)
+> **来源**: [Pierce 2002, Ch.24 — Existential Types](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Pierce 2002, Ch.23 — Universal Types](https://www.cis.upenn.edu/~bcpierce/tapl/) · [RFC 1522 — Conservative impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html) · [RFC 2289 — Associated Type Bounds](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)
 
 ---
 
@@ -629,7 +629,7 @@ fn main() {
 }
 ```
 
-> **修正**: `impl Trait` 在返回位置是**存在类型**（`∃α. α`），但编译器为每个函数签名生成一个**唯一的**存在类型。`get_drawable()` 的返回类型是一个编译器生成的匿名类型，不是 `dyn Drawable`。这导致两个 `get_drawable()` 的返回值虽然都"实现 Drawable"，但它们的实际类型可能不同，因此不能放入同一个 `Vec<dyn Drawable>` 中。这与 `dyn Trait` 的**统一 vtable 类型**形成对比。[来源: [RFC 1522 — Conservative impl Trait](https://rust-lang.github.io/rfcs//1522-conservative-impl-trait.html)] · [Rust Reference — impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)
+> **修正**: `impl Trait` 在返回位置是**存在类型**（`∃α. α`），但编译器为每个函数签名生成一个**唯一的**存在类型。`get_drawable()` 的返回类型是一个编译器生成的匿名类型，不是 `dyn Drawable`。这导致两个 `get_drawable()` 的返回值虽然都"实现 Drawable"，但它们的实际类型可能不同，因此不能放入同一个 `Vec<dyn Drawable>` 中。这与 `dyn Trait` 的**统一 vtable 类型**形成对比。[来源: [RFC 1522 — Conservative impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)] · [Rust Reference — impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)
 
 ### 10.3 边界测试：生命周期子类型的悬垂引用（编译错误）
 
@@ -837,7 +837,7 @@ struct SoundVec<T> {
 // SoundVec<T> 对 T 的变型由 PhantomData<T> 决定。
 ```
 
-> **修正**: `PhantomData<T>` 是 Rust 类型系统的**语义桥接器**。它在运行时不占内存（ZST，Zero-Sized Type），但在编译期向类型系统传递关键语义信息："这个结构在逻辑上与 `T` 相关联"。这是 Rust 实现**零成本抽象（Zero-Cost Abstraction）**的典型模式——语义信息在编译期使用，运行时不带来任何开销。没有 `PhantomData`，像 `Vec<T>`、`Box<T>` 这样的容器无法在内部使用裸指针的同时保持正确的变型推断。来源: [Rust Reference — PhantomData](https://doc.rust-lang.org/reference/) · Rust Nomicon — PhantomData
+> **修正**: `PhantomData<T>` 是 Rust 类型系统的**语义桥接器**。它在运行时不占内存（ZST，Zero-Sized Type），但在编译期向类型系统传递关键语义信息："这个结构在逻辑上与 `T` 相关联"。这是 Rust 实现**零成本抽象（Zero-Cost Abstraction）**的典型模式——语义信息在编译期使用，运行时不带来任何开销。没有 `PhantomData`，像 `Vec<T>`、`Box<T>` 这样的容器无法在内部使用裸指针的同时保持正确的变型推断。来源: [Rust Reference — PhantomData](https://doc.rust-lang.org/reference/introduction.html) · Rust Nomicon — PhantomData
 
 ### 10.5 边界测试：`Pin<T>` 的类型语义（编译错误）
 
@@ -867,7 +867,7 @@ fn pinned_self_ref() {
 }
 ```
 
-> **修正**: `Pin<&mut T>` 的类型语义是**位置稳定性**（Location Stability）——保证 `T` 在内存中的地址不变。这对于自引用结构（如 `async fn` 编译后的状态机）至关重要，因为状态机内部可能包含指向自身的指针。`Pin` 不是普通引用，而是**带有不变式的引用**：`Pin<&mut T>` 不仅提供可变访问，还提供"不移动"的契约。这个契约通过类型系统强制：`Pin` 的构造函数是 `unsafe`，但构造后的使用是安全的——这是 Rust **安全抽象**（Safe Abstraction）范式的典范。[来源: [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)] · [RFC 2349 — Pin](https://rust-lang.github.io/rfcs//2349-pin.html) · [Rust Async Book — Pinning](https://rust-lang.github.io/async-book/)
+> **修正**: `Pin<&mut T>` 的类型语义是**位置稳定性**（Location Stability）——保证 `T` 在内存中的地址不变。这对于自引用结构（如 `async fn` 编译后的状态机）至关重要，因为状态机内部可能包含指向自身的指针。`Pin` 不是普通引用，而是**带有不变式的引用**：`Pin<&mut T>` 不仅提供可变访问，还提供"不移动"的契约。这个契约通过类型系统强制：`Pin` 的构造函数是 `unsafe`，但构造后的使用是安全的——这是 Rust **安全抽象**（Safe Abstraction）范式的典范。[来源: [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)] · [RFC 2349 — Pin](https://rust-lang.github.io/rfcs//2349-pin.html) · [Rust Async Book — Pinning](https://rust-lang.github.io/async-book/index.html)
 
 ---
 
@@ -882,7 +882,7 @@ fn pinned_self_ref() {
 - 泛型（Generics）系统 — 参数多态与约束
 - [RustBelt 与验证工具链](../02_separation_logic/04_rustbelt.md) — 高阶幽灵状态、验证工具生态
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **过渡**: Type Semantics（类型语义） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Type Semantics（类型语义） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

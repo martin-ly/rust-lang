@@ -9,7 +9,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供Rust项目的供应链安全管理策略，确保依赖项的可信度和完整性。
 
@@ -17,11 +17,11 @@
 
 ## 1. 供应链风险模型
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 风险分类
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 供应链风险:
@@ -47,7 +47,7 @@
 
 ### 1.2 Rust特定风险
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 风险 | 严重性 | 可能性 | 缓解措施 |
 |------|--------|--------|----------|
@@ -60,7 +60,7 @@
 
 ## 2. 依赖管理策略
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 依赖选择标准
 >
@@ -102,7 +102,7 @@ impl DependencyCriteria {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 [package]
 name = "safety-critical-module"
 version = "1.0.0"

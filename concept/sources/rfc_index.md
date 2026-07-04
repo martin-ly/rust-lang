@@ -18,7 +18,7 @@
 > **状态标注**: ✅ Implemented | 🚧 Accepted (未实现) | ⚠️ Deprecated | 🔍 Draft | ❌ Rejected
 > **维护**: 每 6 周扫描 RFC 仓库更新状态。
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---

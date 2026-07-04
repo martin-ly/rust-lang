@@ -48,7 +48,7 @@ let _ = serde_json::to_string(&s);
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用依赖可见性规则
-> **定位**: 解决 Rust  crate 图中"依赖泄漏"问题的核心机制，使 API 稳定性与依赖演进解耦。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **定位**: 解决 Rust  crate 图中"依赖泄漏"问题的核心机制，使 API 稳定性与依赖演进解耦。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **对标**: Java 模块（Module）系统 `requires` vs `requires transitive`，C++ 前置声明 vs 完整包含
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 > **前置概念**: N/A
@@ -143,8 +143,8 @@ graph TD
 > **功能定位**：作为引入依赖时的可见性边界预判框架，左侧为反模式，右侧为目标架构。
 > **使用建议**：代码审查时对照公共 API 边界验证 `public` 标记，默认采用隔离模式。
 > **关键洞察**：`public = false` 是编译期合约——它将实现细节与接口契约在语义层面分离，使内部升级不再意外破坏下游编译。
-> [来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ---
 
@@ -296,7 +296,7 @@ flowchart TD
     style Newtype fill:#ffe0b2
 ```
 
-> **认知功能**: 此决策树将 [RFC 3516](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html) 的工程实践转化为**可操作的检查清单**。核心原则：**默认私有（principle of least exposure）**，只有类型确实出现在公共 API 中才标记为 public。关键分支点是"未来可能替换实现"——如果答案是"是"，则优先使用 newtype 模式封装，保持依赖隔离的同时提供公共接口。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
+> **认知功能**: 此决策树将 [RFC 3516](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html) 的工程实践转化为**可操作的检查清单**。核心原则：**默认私有（principle of least exposure）**，只有类型确实出现在公共 API 中才标记为 public。关键分支点是"未来可能替换实现"——如果答案是"是"，则优先使用 newtype 模式封装，保持依赖隔离的同时提供公共接口。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/index.html)]
 
 ### 4.2 默认策略
 >
@@ -391,9 +391,9 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 | **Semantic versioning** | [Semantic versioning](https://en.wikipedia.org/wiki/Semantic_versioning) | 语义版本控制 |
 | **Diamond dependency problem** | [Diamond dependency problem](https://en.wikipedia.org/wiki/Dependency_hell#Diamond_dependency_problem) | 菱形依赖问题 |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -432,7 +432,7 @@ pub use a::PublicType; // 重新导出
 // C 不能直接使用 A::PublicType
 ```
 
-> **修正**: Cargo 的 **public/private dependencies**（Rust 1.74+ 稳定）控制依赖的可见性。若 crate B 依赖 crate A，但 A 是 private dependency，则 B 的下游 crate C 不能直接使用 A 的 API。这防止了"依赖泄漏"——库的实现对下游不可见，允许 B 在未来版本中更换实现（如从 A 切换到 D）而不破坏下游。这与 npm 的依赖扁平化或 Java 的传递依赖不同——Rust 的依赖可见性在 crate 级别显式控制。[来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/)]
+> **修正**: Cargo 的 **public/private dependencies**（Rust 1.74+ 稳定）控制依赖的可见性。若 crate B 依赖 crate A，但 A 是 private dependency，则 B 的下游 crate C 不能直接使用 A 的 API。这防止了"依赖泄漏"——库的实现对下游不可见，允许 B 在未来版本中更换实现（如从 A 切换到 D）而不破坏下游。这与 npm 的依赖扁平化或 Java 的传递依赖不同——Rust 的依赖可见性在 crate 级别显式控制。[来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/index.html)]
 
 ### 10.2 边界测试：SemVer 破坏的编译检测（编译错误）
 
@@ -486,7 +486,7 @@ impl Serializable for MyData {
 // 导致 B 的代码行为变化或编译错误
 ```
 
-> **修正**: Cargo 的 feature 统一（feature unification）机制：若依赖树中多个 crate 依赖同一 crate 的不同 feature，Cargo 启用所有 feature 的并集。这导致**非局部效应**：crate B 的代码在单独编译时正常，但在 crate C 的依赖树中（因 A 启用了额外 feature）可能编译失败或行为变化。典型问题：`cfg(feature = "...")` 的条件编译在 feature 统一后意外启用。解决方案：1) 最小化 feature 依赖（只启用需要的 feature）；2) 使用 `cargo tree -e features` 检查 feature 统一结果；3) 避免在公开 API 中使用 `cfg(feature)` 改变签名。这与 npm 的依赖（无 feature 概念，依赖版本独立）或 Cargo 的 workspace（统一版本但 feature 仍统一）相关——Rust 的 feature 系统是强大的配置工具，但也是复杂性的来源。[来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/reference/features.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)]
+> **修正**: Cargo 的 feature 统一（feature unification）机制：若依赖树中多个 crate 依赖同一 crate 的不同 feature，Cargo 启用所有 feature 的并集。这导致**非局部效应**：crate B 的代码在单独编译时正常，但在 crate C 的依赖树中（因 A 启用了额外 feature）可能编译失败或行为变化。典型问题：`cfg(feature = "...")` 的条件编译在 feature 统一后意外启用。解决方案：1) 最小化 feature 依赖（只启用需要的 feature）；2) 使用 `cargo tree -e features` 检查 feature 统一结果；3) 避免在公开 API 中使用 `cfg(feature)` 改变签名。这与 npm 的依赖（无 feature 概念，依赖版本独立）或 Cargo 的 workspace（统一版本但 feature 仍统一）相关——Rust 的 feature 系统是强大的配置工具，但也是复杂性的来源。[来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/reference/features.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)]
 
 ### 10.7 边界测试：public dependency 的 semver 传播（编译中断）
 

@@ -508,9 +508,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 12]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -574,7 +574,7 @@ fn spawn_render_thread(renderer: Renderer) {
 }
 ```
 
-> **修正**: GPU 上下文（Vulkan `VkDevice`、OpenGL `GLContext`、DirectX `ID3D11Device`）通常是线程不安全的，或仅限于创建线程使用。Rust 中，包含这些句柄的类型默认不是 `Send`，因为裸指针 `*mut T` 和 `*const T` 不自动实现 `Send`/`Sync`。若 GPU API 实际上线程安全（如 Vulkan 的 `VkDevice` 可多线程使用），可手动实现 `unsafe impl Send for Renderer {}`。但错误标记 `Send` 会导致运行时崩溃或 UB。这与 C++ 的 `std::thread`（无 Send 检查，开发者自行保证）或 Unity 的主线程限制（运行时检查）不同——Rust 在编译期强制线程亲和性（thread affinity）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: GPU 上下文（Vulkan `VkDevice`、OpenGL `GLContext`、DirectX `ID3D11Device`）通常是线程不安全的，或仅限于创建线程使用。Rust 中，包含这些句柄的类型默认不是 `Send`，因为裸指针 `*mut T` 和 `*const T` 不自动实现 `Send`/`Sync`。若 GPU API 实际上线程安全（如 Vulkan 的 `VkDevice` 可多线程使用），可手动实现 `unsafe impl Send for Renderer {}`。但错误标记 `Send` 会导致运行时崩溃或 UB。这与 C++ 的 `std::thread`（无 Send 检查，开发者自行保证）或 Unity 的主线程限制（运行时检查）不同——Rust 在编译期强制线程亲和性（thread affinity）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.6 边界测试：游戏状态序列化的循环引用（运行时栈溢出）
 

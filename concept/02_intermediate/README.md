@@ -13,7 +13,7 @@
 > **[来源: Microsoft Rust Training - Advanced Topics]**
 > **本节关键术语**: 进阶概念 (Intermediate) · 特征 (Trait) · 泛型 (Generics) · 生命周期 (Lifetime) · 智能指针 (Smart Pointer) — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
@@ -68,7 +68,7 @@ mindmap
 > **认知功能**: 本图是 L2 层的**全景认知地图**，帮助读者在深入学习前建立"四核机制"的整体拓扑框架。
 > 建议在学习各子模块（Module）前通览此图，定位当前概念在四核中的位置。
 > 关键洞察：Trait 是 Rust 行为抽象的基石，Trait Bounds 是 Trait 与泛型（Generics）的枢纽交叉点。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../00_meta/00_framework/methodology.md)
 > **认知路径**: 本 mindmap 展示 L2 层的**四核机制**。
 > Trait 是 Rust 的行为抽象核心，泛型（Generics）实现零成本参数多态，内存管理扩展所有权（Ownership）的表达能力（共享、内部可变性），错误处理（Error Handling）将异常转化为类型系统（Type System）的一部分。
 > 关键交叉点：**Trait Bounds** 是 Trait 与泛型（Generics）的结合部。
@@ -313,9 +313,9 @@ Error Handling
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../00_meta/02_sources/international_authority_index.md)
 > **内容分级**: [专家级]
 
 **文档版本**: 1.1

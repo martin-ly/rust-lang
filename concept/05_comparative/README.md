@@ -14,7 +14,7 @@
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
@@ -43,7 +43,7 @@ mindmap
 > **认知功能**: 此 mindmap 是 L5 层的**放射式综合入口**。
 > 三个分支对应三种对比视角：Rust vs C++（系统编程的两种本体论）、Rust vs Go（后端开发的两种并发哲学）、范式矩阵（多语言设计空间中的定位）。
 > 读者从其他语言转来 Rust 时，可先定位自己熟悉的语言分支，再逐层深入对比细节。
-> 关键认知：对比不是「谁更好」，而是「在什么约束下谁更合适」——L5 的目标是培养「约束驱动的技术选型思维」。 [来源: 💡 原创分析]
+> 关键认知：对比不是「谁更好」，而是「在什么约束下谁更合适」——L5 的目标是培养「约束驱动的技术选型思维」。 [💡 原创分析](../00_meta/00_framework/methodology.md)
 > **认知路径**: 本 mindmap 展示 L5 层的**综合功能**。
 > Rust vs C++ 是 L1-L4 的镜像对照，Rust vs Go 是并发模型的范式对比，范式矩阵将 Rust 置于多语言设计空间中定位。
 > L5 的核心价值不是"学新内容"，而是**将 L1-L4 的知识转化为工程决策能力**——为技术选型提供形式化论据。
@@ -98,7 +98,7 @@ graph TB
 > **认知功能**: 此图是 L5 层的**跨层知识转化拓扑**。它展示了 L1-L4 的「概念知识」如何通过 L5 的「对比分析」转化为 L6-L7 的「工程决策」。
 > 三种颜色编码三种对比维度：Rust vs C++（形式系统 vs 机制工程）、Rust vs Go（确定性 vs 工程性）、范式矩阵（多语言定位）。
 > 关键认知：L5 不是「学新内容」，而是「用旧知识做新决策」——读者应将 L1-L4 的每个概念映射到图中的对比节点，形成技术选型的形式化论据。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../00_meta/00_framework/methodology.md)
 
 ### 1.1 概念间语义链接
 
@@ -221,9 +221,9 @@ L5 的综合分析输出到：
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../00_meta/02_sources/international_authority_index.md)
 > **内容分级**: [综述级]
 
 **文档版本**: 1.1
@@ -235,9 +235,9 @@ L5 的综合分析输出到：
 
 ## 参考来源
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > [来源: [Wikipedia — Programming Language Comparison](https://en.wikipedia.org/wiki/Comparison_of_programming_languages)]
 > [来源: [Wikipedia — Memory Safety](https://en.wikipedia.org/wiki/Memory_safety)]
 > [来源: [Rust Foundation](https://foundation.rust-lang.org/)]

@@ -10,7 +10,7 @@
 
 ## 📚 内容
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 用途 | 行数 |
 |------|------|------|
@@ -20,7 +20,7 @@
 
 ## 🎯 使用方式
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **快速查找语法**: 查阅 [keywords.md](01_keywords.md) 确认关键字用法
 - **数值计算**: 查阅 [math_constants.md](02_math_constants.md) 获取标准库常量
@@ -28,7 +28,7 @@
 
 ## ⏱️ 使用建议
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档层的特点是**按需查阅**，无需从头到尾阅读：
 
@@ -38,7 +38,7 @@
 
 ## 🚀 相关层
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [04_expert/](../04_expert) - 深入理解编译器和形式化验证
 - [06_ecosystem/](../06_ecosystem) - 实际项目和框架使用
@@ -55,7 +55,7 @@
 > [The Rust Programming Language](https://doc.rust-lang.org/book/),
 > [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

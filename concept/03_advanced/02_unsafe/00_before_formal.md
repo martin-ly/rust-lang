@@ -8,11 +8,11 @@
 >
 > **定位**: L3（高级）与 L4（形式化）之间的**决策缓冲带**，帮助你判断是否需要阅读形式化内容。
 >
-> **来源**: · [Traits](../../02_intermediate/00_traits/01_traits.md) · [TRPL](https://doc.rust-lang.org/book/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: · [Traits](../../02_intermediate/00_traits/01_traits.md) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
-> [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
+> [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
 >
 > **前置概念**: N/A
 > **后置概念**: N/A

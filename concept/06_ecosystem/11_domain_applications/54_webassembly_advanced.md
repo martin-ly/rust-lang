@@ -9,7 +9,7 @@
 > **代码状态**: ✅ 含可编译示例
 >
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
-> **来源**: [Rust and WebAssembly Book](https://rustwasm.github.io/book/) · [wasm-bindgen](https://docs.rs/wasm-bindgen/) · [Wasmtime Rust API](https://docs.wasmtime.dev/lang-rust.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust and WebAssembly Book](https://rustwasm.github.io/docs/book/index.html) · [wasm-bindgen](https://docs.rs/wasm-bindgen/) · [Wasmtime Rust API](https://docs.wasmtime.dev/lang-rust.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ## 📑 目录
 
@@ -716,7 +716,7 @@ fn main() {
 ```
 
 > **修正**: `wasm32-unknown-unknown` 明确表示"无供应商、无操作系统"。Rust 标准库在此目标下仅提供 `core` 和可选的 `alloc`——`std::fs`、`std::net`、`std::thread` 等模块被编译器明确排除。这是 Rust 目标平台抽象的强大之处：**不支持的 API 在编译期即被拒绝**。相比之下，C/C++ 编译到 Wasm 时，I/O 调用可能静默链接到 Emscripten 虚拟文件系统或产生未定义符号。
-> [来源: [Rust Platform Support — wasm32](https://doc.rust-lang.org/nightly/rustc/platform-support.html)] · [来源: [Rust and WebAssembly Book](https://rustwasm.github.io/book/)]
+> [来源: [Rust Platform Support — wasm32](https://doc.rust-lang.org/nightly/rustc/platform-support.html)] · [来源: [Rust and WebAssembly Book](https://rustwasm.github.io/docs/book/index.html)]
 
 ---
 
@@ -778,7 +778,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [WebAssembly Specification](https://webassembly.github.io/spec/), [WASI Preview 2 Docs](https://wasi.dev), [Component Model Spec](https:/component-model.bytecodealliance.org)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html), [WebAssembly Specification](https://webassembly.github.io/spec/), [WASI Preview 2 Docs](https://wasi.dev), [Component Model Spec](https:/component-model.bytecodealliance.org)
 > **权威来源对齐变更日志**: 2026-05-26 初始创建，对齐 Rust 1.96.1+ (Edition 2024) 与 WASI Preview 2 / Component Model 最新规范
 
 **文档版本**: 1.0

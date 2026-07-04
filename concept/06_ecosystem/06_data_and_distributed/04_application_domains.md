@@ -5,7 +5,7 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [crates.io](https://crates.io/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [crates.io](https://crates.io/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 # Application Domains（软件工程应用主题）
@@ -29,7 +29,7 @@
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，覆盖 8 大应用领域、工业案例、技术栈矩阵、L1-L5 概念映射
-- v1.1 (2026-05-26): 权威内容对齐：补充 esp-hal 1.0.0（首个厂商官方支持 Rust SDK，Espressif 付费团队维护）、Linux 内核 v7.0-rc4 pin-init 安全修复（InitOk token、未对齐字段初始化移除） [来源: Web Authority Alignment Batch 15]
+- v1.1 (2026-05-26): 权威内容对齐：补充 esp-hal 1.0.0（首个厂商官方支持 Rust SDK，Espressif 付费团队维护）、Linux 内核 v7.0-rc4 pin-init 安全修复（InitOk token、未对齐字段初始化移除） [Web Authority AlignmentBatch 15](../../00_meta/02_sources/international_authority_index.md)
 
 ---
 
@@ -37,14 +37,14 @@
 
 ### 1.1 Wikipedia 权威定义
 
-[来源: [Async Book](https://rust-lang.github.io/async-book/)]
+[来源: [Async Book](https://rust-lang.github.io/async-book/index.html)]
 
 > **[Wikipedia: Software engineering](https://en.wikipedia.org/wiki/Software_engineering)** Software engineering is an engineering-based approach to software development.
 > A software engineer is a person who applies the engineering design process to design, develop, test, maintain, and evaluate computer software.
 > **来源**: <https://en.wikipedia.org/wiki/Software_engineering>
 > **[Wikipedia: Systems programming](https://en.wikipedia.org/wiki/Systems_programming)** Systems programming is the activity of programming computer system software.
 > The primary distinguishing characteristic of systems programming when compared to application programming is that application programming aims to produce software which provides services to the user,
-> whereas systems programming aims to produce software and software platforms which provide services to other software. [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
+> whereas systems programming aims to produce software and software platforms which provide services to other software. [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)]
 > **来源**: <https://en.wikipedia.org/wiki/Systems_programming>
 > **[Wikipedia: Web framework](https://en.wikipedia.org/wiki/Web_framework)** A web framework (WF) or web application framework (WAF) is a software framework that is designed to support the development of web applications including web services,
 > web resources, and web APIs.
@@ -172,7 +172,7 @@ graph TD
 ```
 
 > **认知功能**: 建立 Rust 生态全景认知框架，将分散的领域按技术属性聚类为五大板块。作为技术选型的第一层过滤——先定位大类（Web/系统/数据/创意/基础设施），再深入具体栈。Rust 的核心优势并非均匀分布：系统编程和 CLI 最为成熟，GUI 和 ML 训练仍在快速追赶中。 [来源: [Are We Web Yet](https://www.arewewebyet.org/)]
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -210,7 +210,7 @@ graph TD
 | **reqwest** | **0.13.3** (2026-05) | TLS 后端迁移至 `aws-lc-rs`，为 FIPS 140-3 合规奠定基础 | [reqwest releases](https://github.com/seanmonstar/reqwest/releases) |
 | **arrow-rs** | **58.3.0 + 补丁** (2026-05-07) | 多处整数溢出修复（`BufferBuilder`、`ArrayData::slice`、`FixedSizeBinaryArray`） | [arrow-rs releases](https://github.com/apache/arrow-rs/releases) |
 
-> **关键洞察**: sqlx 0.9.0 的 MSRV 提升至 1.94.0 反映了 Rust 生态的**快速演进压力**——核心基础设施 crate 的 MSRV 提升会迫使下游项目跟进，否则被锁定在旧版本。这与 Go 的向后兼容性承诺（Go 1 兼容性保证）形成对比：Rust 的快速语言演进带来了表达力优势，但也增加了生态维护负担。tokio 的 LIFO slot stealing 回退则展示了**生产环境性能回归的敏感性**——即使在最流行的异步（Async）运行时（Runtime）中，看似微小的调度策略变更也可能引发大规模性能问题。[来源: 💡 原创分析]
+> **关键洞察**: sqlx 0.9.0 的 MSRV 提升至 1.94.0 反映了 Rust 生态的**快速演进压力**——核心基础设施 crate 的 MSRV 提升会迫使下游项目跟进，否则被锁定在旧版本。这与 Go 的向后兼容性承诺（Go 1 兼容性保证）形成对比：Rust 的快速语言演进带来了表达力优势，但也增加了生态维护负担。tokio 的 LIFO slot stealing 回退则展示了**生产环境性能回归的敏感性**——即使在最流行的异步（Async）运行时（Runtime）中，看似微小的调度策略变更也可能引发大规模性能问题。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **浏览器引擎里程碑 — Servo v0.1.0 on crates.io（2026-04-13）**:
 
@@ -249,7 +249,7 @@ Rust 在 CLI 领域是最成熟的应用之一。核心优势：
 | **nushell** | bash/zsh | 结构化数据、类型安全 shell | 32k+ stars |
 | **helix** | vim | 模态编辑、tree-sitter、LSP | 35k+ stars |
 
-> **来源**: [GitHub](https://github.com/) · [Rust CLI Book](https://rust-cli.github.io/book/) · 可信度: ✅
+> **来源**: [GitHub](https://github.com/) · [Rust CLI Book](https://rust-cli.github.io/book/index.html) · 可信度: ✅
 
 ### 4.3 嵌入式与物联网
 >
@@ -503,7 +503,7 @@ Rust 编译为 WASM 的核心优势：
 
 ### 4.10 嵌入式（no_std）深度解析
 
-**技术栈扩展**: `embedded-hal` + `defmt` + `probe-rs` + `cortex-m-rt` [来源: [Rust CLI Book](https://rust-cli.github.io/book/)]
+**技术栈扩展**: `embedded-hal` + `defmt` + `probe-rs` + `cortex-m-rt` [来源: [Rust CLI Book](https://rust-cli.github.io/book/index.html)]
 
 | **维度** | `std` 环境 | `no_std` 环境 |
 |:---|:---|:---|
@@ -539,7 +539,7 @@ fn main() -> ! {
 - 异步（Async）多任务 → `embassy`（协作式）或 `RTIC`（基于中断）
 
 > **关键洞察**: `defmt`（deferred formatting）通过将格式化字符串留在主机端，仅传输原始数据到调试器，将日志开销降低 **10-100 倍**。这是 Rust 嵌入式生态的**杀手级工具**。
-[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 > **来源**: [Ferrous Systems] · [Embassy Book](https://embassy.dev/book/) · [probe-rs] · 可信度: ✅
 
@@ -579,13 +579,13 @@ fn main() -> Result<()> {
 ```
 
 > **关键洞察**: Rust CLI 的**分发优势**是其他语言难以比拟的——`cargo build --release` 生成单二进制，`cargo-dist` 自动打包 Windows `.msi`、macOS `.dmg`、Linux `.deb`。无需运行时、无依赖地狱。
-[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+[来源: [Rust Async Book](https://rust-lang.github.io/async-book/index.html)]
 
-> **来源**: [Rust CLI Book](https://rust-cli.github.io/book/) · [cargo-dist docs] · 可信度: ✅
+> **来源**: [Rust CLI Book](https://rust-cli.github.io/book/index.html) · [cargo-dist docs] · 可信度: ✅
 
 ### 4.12 游戏开发：Bevy 生态深度
 
-**技术栈**: `bevy` + `wgpu` + `rapier` + `rodio` + `bevy_ecs` [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
+**技术栈**: `bevy` + `wgpu` + `rapier` + `rodio` + `bevy_ecs` [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html)]
 
 | **子系统** | **Crate** | **功能** | **替代方案** |
 |:---|:---|:---|:---|
@@ -861,7 +861,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: axum 的路由系统利用 Rust 的类型系统（Type System）保证 handler 函数的签名与路由路径匹配——`Path<u32>` 提取器要求 URL 参数可解析为 `u32`，`Json` 返回类型要求响应可序列化。这些约束在编译期验证，而非运行时出错。 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **关键洞察**: axum 的路由系统利用 Rust 的类型系统（Type System）保证 handler 函数的签名与路由路径匹配——`Path<u32>` 提取器要求 URL 参数可解析为 `u32`，`Json` 返回类型要求响应可序列化。这些约束在编译期验证，而非运行时出错。 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -970,8 +970,8 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 | **系统软件** | 内存占用（空闲）| ~5MB | Go (~15MB), Java (~100MB) | 实测 |
 | **并发** | 百万连接内存 | ~50GB | Go (~100GB), Erlang (~30GB) | 社区 benchmark |
 
-> **注意**：benchmark 数据受具体实现、硬件、配置影响。上述数据仅供参考，实际项目需自行测试。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **注意**：benchmark 数据受具体实现、硬件、配置影响。上述数据仅供参考，实际项目需自行测试。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
 > **来源**: [TechEmpower Framework Benchmarks] · [Benchmarks Game] · [Rust 嵌入式书] · [社区 benchmark]
 
@@ -1171,14 +1171,14 @@ graph TD
 
 > **认知功能**: 揭示技术替代的非技术阻力——硬件覆盖率、行业认证、遗留代码、调试工具链成熟度是嵌入式领域切换语言的隐形壁垒。在嵌入式选型时，应先评估目标平台的 HAL 完整性和认证需求（如 FDA/DO-178C），再评估语言特性收益。Rust 的内存安全是充分条件而非必要条件；在已通过 MISRA-C 认证且运行稳定的项目中，切换语言的边际收益可能远低于迁移成本。
 > **过渡: L6 → L3**
-[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > 每个应用领域都面临特定的 unsafe 边界：嵌入式需要裸指针操作、WASM 需要 FFI 桥接、游戏引擎需要自定义内存分配器。这些场景不是"绕过 Rust 的安全保证"，而是"在理解安全边界的前提下精确控制"。
 > unsafe 边界见 [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md)。
 > **过渡: L6 → L5**
 > 不同语言在不同领域有各自的优势：Go 在微服务、Python 在 AI、C++ 在游戏引擎。Rust 正在所有领域同时扩张，但这不是因为 Rust 万能，而是因为它的"零成本抽象（Zero-Cost Abstraction） + 内存安全"组合在越来越多的场景下成为最优解。 [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 > 对比视角见 [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) 与 [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/03_paradigm_matrix.md)。
 > **过渡: L6 → L7**
-[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > 应用领域是技术演进的试验场：WASM 推动 Rust 的 `no_std` 生态成熟、AI 推理推动 `unsafe` 张量操作的封装标准化、嵌入式推动 `const generics` 的编译期计算。Rust 的未来方向由实际应用需求驱动。
 > 未来方向见 [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)。
 
@@ -1245,7 +1245,7 @@ graph TD
 
 **与 L1-L4 的映射**:
 
-- **L1 所有权**: io_uring 的 ring buffer 是**内核-用户空间共享内存**。Rust 封装层通过 `IoUring` 类型独占所有权，而 `Op`（操作）类型在提交时转移所有权到内核。操作完成后，所有权通过 completion queue **异步（Async）返回**——这是所有权模型在**跨地址空间/跨权限边界**上的扩展。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
+- **L1 所有权**: io_uring 的 ring buffer 是**内核-用户空间共享内存**。Rust 封装层通过 `IoUring` 类型独占所有权，而 `Op`（操作）类型在提交时转移所有权到内核。操作完成后，所有权通过 completion queue **异步（Async）返回**——这是所有权模型在**跨地址空间/跨权限边界**上的扩展。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/index.html)]
 - **L3 Async**: `tokio-uring` 将 io_uring 的 completion 事件映射为 `Future`。与传统 epoll 不同，io_uring 的**无系统调用批量提交**（batch submission）改变了异步运行时的事件循环模型——从"poll → 等待 → 回调"变为"提交 → 内核执行 → 完成事件"。
 - **L4 形式化**: io_uring 的 ring buffer 是**线性资源**的经典案例——submission entry 一旦被提交，其内存区域在操作完成前不可修改或释放。这与 Rust 的 `Pin` 语义同构：提交的 `Op` 被 `Pin` 在 ring buffer 中，直到 completion 解固定。
 
@@ -1333,7 +1333,7 @@ graph TD
 | **D6** | AI/ML (Candle) | 张量形状编译期检查 | 无越界张量访问 | 动态形状；`unsafe` 内核优化 | 内存越界 / 数值错误 |
 
 > **⟹ 推理链**: D1-D6 的共同主题是**将领域特定的安全需求映射到 Rust 已有的类型系统保证**。没有领域需要 Rust 之外的新安全机制——差异仅在于哪些类型系统特性（所有权、生命周期（Lifetimes）、`Send`/`Sync`、`const`）被重点利用。
-> **[来源: Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs]** 应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅
+> **[Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs](https://foundation.rust-lang.org/)** 应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅
 > **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC [RFC 9000](https://www.rfc-editor.org/info/rfc9000); wgpu Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
 
 ---
@@ -1345,13 +1345,13 @@ graph TD
 | v1.0 | 2026-05-12 | 初始版本 |
 | v1.1 | 2026-05-13 | 新增 §11 生态前沿的形式化梳理（Embassy/内核/eBPF/io_uring/QUIC/GUI/AI/Cargo Script）|
 
-> **[来源: Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs]** 应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅
+> **[Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs](https://foundation.rust-lang.org/)** 应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅
 > **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC [RFC 9000](https://www.rfc-editor.org/info/rfc9000); wgpu Docs; egui Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
 > **[来源: Rust Blockchain Report 2024; Solana Docs; Polkadot Substrate Docs; Near Protocol Docs]** 区块链方向基于公开协议文档和社区报告。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -1438,7 +1438,7 @@ fn main() {
 }
 ```
 
-> **修正**: 嵌入式系统（ bare-metal、RTOS、WASM 微内核）通常使用 `#![no_std]`，禁用标准库 `std`（依赖操作系统：文件系统、网络、线程、堆分配）。`no_std`  crate 只能使用 `core`（基本类型、迭代器（Iterator）、选项/结果）和可选的 `alloc`（`Vec`、`String`、`Box`，需全局分配器）。常见错误：1) 依赖的 crate 使用了 `std`（即使是简单的 `println!`）；2) 使用了 `std::collections::HashMap`（需 `std` 的随机数生成器，嵌入式中改用 `heapless::LinearMap`）；3) 使用了 `std::time`（嵌入式中改用 `embassy_time` 或硬件定时器）。`cargo tree` 和 `cargo-nono` 工具帮助检查 `no_std` 兼容性。这与 C 的嵌入式开发（无标准库依赖，直接使用寄存器）或 Arduino 的 C++（简化标准库）类似——Rust 的 `no_std` 提供了现代类型系统在资源受限环境中的应用。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: 嵌入式系统（ bare-metal、RTOS、WASM 微内核）通常使用 `#![no_std]`，禁用标准库 `std`（依赖操作系统：文件系统、网络、线程、堆分配）。`no_std`  crate 只能使用 `core`（基本类型、迭代器（Iterator）、选项/结果）和可选的 `alloc`（`Vec`、`String`、`Box`，需全局分配器）。常见错误：1) 依赖的 crate 使用了 `std`（即使是简单的 `println!`）；2) 使用了 `std::collections::HashMap`（需 `std` 的随机数生成器，嵌入式中改用 `heapless::LinearMap`）；3) 使用了 `std::time`（嵌入式中改用 `embassy_time` 或硬件定时器）。`cargo tree` 和 `cargo-nono` 工具帮助检查 `no_std` 兼容性。这与 C 的嵌入式开发（无标准库依赖，直接使用寄存器）或 Arduino 的 C++（简化标准库）类似——Rust 的 `no_std` 提供了现代类型系统在资源受限环境中的应用。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.4 边界测试：Web 服务中的阻塞操作与 async runtime 的冲突（运行时性能崩溃）
 
@@ -1462,7 +1462,7 @@ async fn handler() -> String {
 > 在多线程 runtime 中，一个线程阻塞降低整体吞吐；在单线程 runtime 中，整个应用死锁。
 > 解决方案：1) 使用异步版本的 API（`tokio::fs`、`tokio::time`）；2) 将阻塞操作放到 `spawn_blocking` 线程池；3) 使用 `tokio::task::yield_now().await` 手动 yield。
 > 这与 Node.js 的 event loop（单线程，阻塞操作冻结整个应用）或 Go 的 goroutine（阻塞操作挂起 goroutine，调度器切换到其他 goroutine）不同——Rust 的 async 任务不自动处理阻塞，需要开发者显式选择。
-> [来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+> [来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/index.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 

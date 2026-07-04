@@ -17,7 +17,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**:
-> [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [candle [来源: [Candle](https://github.com/huggingface/candle)] (Hugging Face)](<https://github.com/huggingface/candle>) ·
@@ -306,7 +306,7 @@ WASM 推理的优势:
 ```
 
 > **WASM 洞察**: **WASM + Rust** 使**客户端 AI**成为可能——数据不离开设备，保护隐私。
-> [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]
+> [来源: [Rust WASM Book](https://rustwasm.github.io/docs/book/index.html)]
 
 ### 2.4 NVIDIA GPU 目标基线提升（Rust 1.97）
 
@@ -483,11 +483,11 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Candle](https://github.com/huggingface/candle) | ✅ 一级 | Hugging Face Rust ML |
 | [burn-rs](https://burn.dev/) | ✅ 一级 | 深度学习框架 |
@@ -506,9 +506,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]；2026-05-22 Batch 9 对齐完成
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)；2026-05-22 Batch 9 对齐完成
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -582,7 +582,7 @@ fn simd_add(a: [f32; 4], b: [f32; 4]) -> [f32; 4] {
 > 安全替代：`std::simd`（实验性，portable SIMD）提供跨平台 SIMD 抽象，编译器自动选择最优指令集。
 > Rust AI 推理框架（candle、burn）广泛使用 SIMD/AVX 优化矩阵运算，通过 `unsafe` 内在函数或 `std::simd` 实现零成本加速。
 > [来源: [Rust SIMD Documentation](https://doc.rust-lang.org/std/simd/index.html)] ·
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.6 边界测试：AI 模型的序列化与版本兼容性（运行时加载失败）
 

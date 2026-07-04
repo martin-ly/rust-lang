@@ -703,7 +703,7 @@ hello(&(*m)[..]);
 
 ---
 
-> **权威来源**: [The Rust Programming Language — Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html) · [Rustonomicon — Memory Layout](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [The Rust Programming Language — Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html) · [Rustonomicon — Memory Layout](https://doc.rust-lang.org/nomicon/index.html)
 
 ## 嵌入式测验（Embedded Quiz）
 

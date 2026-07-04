@@ -26,7 +26,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [Rust and WebAssembly Book](https://rustwasm.github.io/book/) · [TRPL — Advanced Features](https://doc.rust-lang.org/book/ch19-00-advanced-features.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust and WebAssembly Book](https://rustwasm.github.io/docs/book/index.html) · [TRPL — Advanced Features](https://doc.rust-lang.org/book/ch19-00-advanced-features.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/) ·
 > [wasm-pack Book](https://rustwasm.github.io/docs/wasm-pack/) ·
 > [Yew Framework](https://yew.rs/) ·
@@ -493,7 +493,7 @@ Wasm 调试工具链:
   └── js-sys/web-sys: 模拟浏览器 API 进行测试
 ```
 
-> **工程实践**: `console_error_panic_hook` 是必装依赖，它将 Rust panic 消息捕获并输出到浏览器控制台。否则，Wasm trap 只会显示模糊的 "unreachable" 错误。[来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
+> **工程实践**: `console_error_panic_hook` 是必装依赖，它将 Rust panic 消息捕获并输出到浏览器控制台。否则，Wasm trap 只会显示模糊的 "unreachable" 错误。[来源: [Rust Wasm Book](https://rustwasm.github.io/docs/book/index.html)]
 
 ---
 
@@ -609,7 +609,7 @@ Rust panic in Wasm:
 ```
 
 > **陷阱总结**: Rust Wasm 开发的常见错误集中在**目标三元组选型**、**panic 处理**、**内存视图生命周期（Lifetimes）**、**主线程阻塞**和**宿主环境假设**五个维度。
-> [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
+> [来源: [Rust Wasm Book](https://rustwasm.github.io/docs/book/index.html)]
 
 ---
 
@@ -617,7 +617,7 @@ Rust panic in Wasm:
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rust Wasm Book](https://rustwasm.github.io/book/) | ✅ 一级 | 官方 Rust Wasm 教程 |
+| [Rust Wasm Book](https://rustwasm.github.io/docs/book/index.html) | ✅ 一级 | 官方 Rust Wasm 教程 |
 | [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/) | ✅ 一级 | JS 互操作官方文档 |
 | [wasm-pack Book](https://rustwasm.github.io/docs/wasm-pack/) | ✅ 一级 | 构建工具官方文档 |
 | [WebAssembly Specification](https://webassembly.github.io/spec/) | ✅ 一级 | W3C 规范 |
@@ -644,9 +644,9 @@ Rust panic in Wasm:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [WebAssembly Specification](https://webassembly.github.io/spec/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [WebAssembly Specification](https://webassembly.github.io/spec/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 初始创建，覆盖工具链、框架、性能、内存模型与互操作 [来源: Authority Source Sprint Batch 11]
+> **权威来源对齐变更日志**: 2026-05-22 初始创建，覆盖工具链、框架、性能、内存模型与互操作 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -684,7 +684,7 @@ fn main() {
 > Rust 的 `std::fs` 在 WASI 目标上编译为 WASI 调用，`File::open("/etc/passwd")` 在未预打开时返回 `PermissionDenied`。
 > 这是沙箱安全的关键：即使 Wasm 模块包含恶意代码，其影响范围被限制在预打开的能力内。
 > [来源: [WASI Documentation](https://wasi.dev/)] ·
-> [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
+> [来源: [Rust Wasm Book](https://rustwasm.github.io/docs/book/index.html)]
 
 ### 10.2 边界测试：`wasm-bindgen` 的类型不匹配（编译错误）
 
@@ -718,7 +718,7 @@ impl Point {
 > 安全替代：将裸指针包装为 `JsValue`，使用 `serde-wasm-bindgen` 序列化复杂类型，或手动编写 JS shim。
 > 这与 C 的 Emscripten（编译为 JS 并模拟 POSIX）不同——`wasm-bindgen` 是显式、类型安全的 FFI，而非透明移植。
 > [来源: [wasm-bindgen Documentation](https://rustwasm.github.io/docs/wasm-bindgen/)] ·
-> [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
+> [来源: [Rust Wasm Book](https://rustwasm.github.io/docs/book/index.html)]
 
 ### 10.3 边界测试：WASM 模块的大小限制与 `wee_alloc`（运行时错误）
 
@@ -857,7 +857,7 @@ fn main() {
 > WASM 的 `wasm32-unknown-unknown` target 无 `std`，需 `no_std` + `alloc` 或纯 `core`。
 > 这与 JavaScript 的 `Array`（V8 自动管理，无显式内存页概念）或 Native 的 `Vec`（操作系统管理虚拟内存）不同——WASM 的内存模型显式且受限。
 > [来源: [WebAssembly Memory](https://webassembly.org/docs/modules/#linear-memory)] ·
-> [来源: [WASM Rust](https://rustwasm.github.io/book/)]
+> [来源: [WASM Rust](https://rustwasm.github.io/docs/book/index.html)]
 > **过渡**: Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链

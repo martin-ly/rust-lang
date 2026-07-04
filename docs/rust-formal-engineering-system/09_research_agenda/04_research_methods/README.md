@@ -52,28 +52,28 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 问题陈述 {#问题陈述}
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 - 研究什么问题
 - 为什么重要
 
 ## 形式化定义 {#形式化定义}
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 - 数学符号定义
 - 类型/状态定义
 
 ## 定理与证明 {#定理与证明}
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 - 定理陈述
 - 证明步骤
 - 证明验证
 
 ## 实现考虑 {#实现考虑}
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 - Rust 实现映射
 - 边界条件
 
 ## 开放问题 {#开放问题}
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 - 未解决的疑问
 - 进一步研究方向
 ```
@@ -331,7 +331,7 @@ mod property_tests {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

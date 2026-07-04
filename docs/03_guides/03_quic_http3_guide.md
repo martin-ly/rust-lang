@@ -8,7 +8,7 @@
 > **层级**: L6 生态工具 / L3 高级网络
 > **前置概念**: [Async](../../concept/03_advanced/01_async/02_async.md) · [Network Programming](../../crates/c10_networks)
 > **Bloom 层级**: 应用 → 分析
-> **来源: [RFC 9000 (QUIC)](https://github.com/rust-lang/rfcs/pull/9000)** · **来源: [RFC 9114 (HTTP/3)](https://github.com/rust-lang/rfcs/pull/9114)** · **[来源: quinn crate]** ✅
+> **来源: [RFC 9000 (QUIC)](https://github.com/rust-lang/rfcs/pull/9000)** · **来源: [RFC 9114 (HTTP/3)](https://github.com/rust-lang/rfcs/pull/9114)** · **[quinn crate](https://docs.rs/quinn/latest/quinn/)** ✅
 >
 > **受众**: [进阶]
 > **内容分级**: [实验级]

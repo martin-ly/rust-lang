@@ -5,7 +5,7 @@
 > [Ferrocene](https://ferrous-systems.com/ferrocene/),
 > [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # 综合语言对比矩阵
 
@@ -15,7 +15,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供安全关键系统开发中主要编程语言的全面对比，帮助技术决策者选择最适合项目需求的语言。
 
@@ -23,11 +23,11 @@
 
 ## 1. 安全性对比矩阵
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 内存安全
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | Rust | C | C++ | Ada | Java | Go |
 |------|------|---|-----|-----|------|-----|
@@ -47,7 +47,7 @@
 
 ### 1.2 类型安全
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 类型系统强度排名 (1-10):
@@ -66,7 +66,7 @@
 
 ## 2. 性能对比矩阵
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 运行时性能
 >

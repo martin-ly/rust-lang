@@ -43,13 +43,13 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 1.1 整数类型
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]**
 
 ```text
 Rust 整数类型:
@@ -122,7 +122,7 @@ Rust 浮点类型:
 
 ### 1.3 类型转换
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]**
 
 ```text
 类型转换:
@@ -157,13 +157,13 @@ Rust 浮点类型:
 
 ## 二、运算模式
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 2.1 溢出检查
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]**
 
 ```text
 溢出行为:
@@ -197,7 +197,7 @@ Rust 浮点类型:
 
 ### 2.2 Wrapping 与 Saturating
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)]**
 
 ```text
 运算模式:
@@ -272,9 +272,9 @@ SIMD (Single Instruction Multiple Data):
 
 ## 三、反命题与边界分析
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 3.1 反命题树
 >
@@ -337,7 +337,7 @@ graph TD
 
 ## 四、常见陷阱
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
 
@@ -386,7 +386,7 @@ graph TD
 
 ## 五、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
 
@@ -418,9 +418,9 @@ fn main() {
 
 ## 相关概念文件
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 - [Type System](../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Generics](../02_intermediate/01_generics/02_generics.md) — 泛型（Generics）
@@ -429,7 +429,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 12]
 
@@ -444,11 +444,11 @@ fn main() {
 
 > **[来源: [Type Theory Research](https://en.wikipedia.org/wiki/Type_theory)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]**
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]**
 >
 
 ---

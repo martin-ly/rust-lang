@@ -11,7 +11,7 @@
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [验证工具链](05_verification_toolchain.md) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [验证工具链](05_verification_toolchain.md) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **后置概念**: N/A
 ---
 
@@ -576,7 +576,7 @@ let _ref = &mut x;     // Stacked Borrows: ptr 失效
 
 ---
 
-> **权威来源**: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Iris Tutorial](https://people.mpi-sws.org/~dreyer/papers/iris-ground-up/paper.pdf) · [The Rustonomicon — Rust's Memory Model](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Iris Tutorial](https://people.mpi-sws.org/~dreyer/papers/iris-ground-up/paper.pdf) · [The Rustonomicon — Rust's Memory Model](https://doc.rust-lang.org/nomicon/index.html)
 
 ## 嵌入式测验（Embedded Quiz）
 

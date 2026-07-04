@@ -12,7 +12,7 @@
 > **前置概念**: [Type Theory](../00_type_theory/02_type_theory.md) · [Operational Semantics](17_operational_semantics.md) · [Linear Logic](../01_ownership_logic/01_linear_logic.md)
 > **后置概念**: [Category Theory](../00_type_theory/10_category_theory.md) · [RustBelt](../02_separation_logic/04_rustbelt.md)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**:
@@ -201,7 +201,7 @@ fn call_diverges() -> i32 {
 > `⊥` 是任何域的子集（因为 `⊥ ⊑ v` 对所有 `v` 成立），因此 `!` 可被强制转换为任何类型。
 > 这与 Haskell 的 `undefined :: a` 或 Scala 的 `Nothing` 类似——底部类型是所有类型的子类型。
 > Rust 的 `!` 类型目前仍在部分特性中不稳定，但核心语义已稳定。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：`panic!` 的指称与 `Result` 的指称分离（编译错误）
 
@@ -459,9 +459,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 11]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -520,7 +520,7 @@ fn main() {
 > 形式化验证工具（Miri、Kani、RustBelt）试图为 `unsafe` 代码建立安全边界：Miri 解释执行检测 UB，Kani 符号验证断言，RustBelt 在分离逻辑中证明 unsafe 抽象的安全性。
 > 但完全的形式化覆盖仍是开放问题——`unsafe` 是 Rust 语义中的"已知未知"。
 > [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] ·
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：不动点语义与递归类型的无限展开（编译错误）
 

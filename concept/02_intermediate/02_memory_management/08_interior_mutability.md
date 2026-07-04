@@ -356,7 +356,7 @@ graph TD
 > **认知功能**: 此决策树判断是否使用内部可变性。核心判断标准是**线程上下文**、**共享需求**和**性能敏感度**。
 > **使用建议**: 优先外部可变性（编译期安全），仅在需要时才引入内部可变性。内部可变性是**工具而非默认**。
 > **关键洞察**: 过度使用内部可变性会导致**运行时（Runtime） panic 风险**和**性能开销**。最佳设计是：大部分代码用外部可变性，仅在边界处使用内部可变性。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -525,7 +525,7 @@ fn correct_upgrade() {
 }
 ```
 
-> **修正**: 标准库 `std::sync::RwLock` 不支持读锁升级（read-to-write upgrade）。尝试在持有读锁时获取写锁会导致死锁（写锁需等待所有读锁释放）。某些第三方库（如 `parking_lot::RwLockUpgradableReadGuard`）提供升级支持，但需谨慎使用。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: 标准库 `std::sync::RwLock` 不支持读锁升级（read-to-write upgrade）。尝试在持有读锁时获取写锁会导致死锁（写锁需等待所有读锁释放）。某些第三方库（如 `parking_lot::RwLockUpgradableReadGuard`）提供升级支持，但需谨慎使用。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ---
 
@@ -533,8 +533,8 @@ fn correct_upgrade() {
 >
 
 | 来源 | 可信度 | 说明 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
 
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 |:---|:---:|:---|
@@ -556,7 +556,7 @@ fn correct_upgrade() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -664,10 +664,10 @@ fn main() {
 > [来源: [std::sync::RwLock](https://doc.rust-lang.org/std/sync/struct.RwLock.html)]
 > [来源: [Rust Unsafe Code Guidelines — Interior Mutability](https://rust-lang.github.io/unsafe-code-guidelines//glossary.html)]
 > **权威来源**:
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html) ·
-> [Rust Standard Library](https://doc.rust-lang.org/std/) ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

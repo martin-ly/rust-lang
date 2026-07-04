@@ -12,7 +12,7 @@
 > **前置概念**: [Type Theory](../00_type_theory/02_type_theory.md) · [Linear Logic](../01_ownership_logic/01_linear_logic.md) · [Ownership Formal](../01_ownership_logic/03_ownership_formal.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 > **后置延伸**: [Effects System](../../07_future/03_preview_features/04_effects_system.md) · [Evolution](../../07_future/04_research_and_experimental/03_evolution.md)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [SF — Software Foundations](https://softwarefoundations.cis.upenn.edu/) · [CS 242 Stanford](https://stanford-cs242.github.io/f19/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)

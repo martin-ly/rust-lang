@@ -12,7 +12,7 @@
 > **后置概念**: N/A
 ---
 
-> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [rustup](https://rust-lang.github.io/rustup/) · [工具链](01_toolchain.md) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [rustup](https://rust-lang.github.io/rustup/) · [工具链](01_toolchain.md) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Clippy Documentation](https://doc.rust-lang.org/clippy/) ·
 > [Miri Documentation](https://github.com/rust-lang/miri) ·
 > [Rustfmt Documentation](https://github.com/rust-lang/rustfmt)
@@ -512,7 +512,7 @@ RUST_BACKTRACE=1 cargo run
 | 10/10 | 🏆 工具链已内化 | 探索 `cargo-make`、`cargo-xtask`、`cargo-bloat` 等高级工具 |
 | 7–9/10 | ✅ 核心概念掌握 | 在 CI 中集成 `cargo clippy -- -D warnings` + `cargo audit` |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Toolchain](01_toolchain.md)，实践 Workspace 配置 |
-| 0–3/10 | 📚 建议重新开始 | 从 [Cargo Book](https://doc.rust-lang.org/cargo/) 官方文档开始 |
+| 0–3/10 | 📚 建议重新开始 | 从 [Cargo Book](https://doc.rust-lang.org/cargo/index.html) 官方文档开始 |
 
 ---
 
@@ -520,7 +520,7 @@ RUST_BACKTRACE=1 cargo run
 
 ---
 
-> **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/) · [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html) · [Miri Book](https://rustc-dev-guide.rust-lang.org/miri.html)
+> **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html) · [Miri Book](https://rustc-dev-guide.rust-lang.org/miri.html)
 
 ## 嵌入式测验（Embedded Quiz）
 

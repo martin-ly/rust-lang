@@ -17,7 +17,7 @@
 > **双维定位**: F×Eva — 评价跨 await 点的借用（Borrowing）安全性
 > **前置依赖**: [Async/Await](../../03_advanced/01_async/02_async.md) · [Interior Mutability](../../02_intermediate/02_memory_management/08_interior_mutability.md)
 > **后置延伸**: [Async Drop](18_async_drop_preview.md)
-> **来源**: [RFC 3014](https://rust-lang.github.io/rfcs//3014-must-not-suspend-lint.html) · [Tracking Issue](https://github.com/rust-lang/rust/issues/83310) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [RFC 3014](https://rust-lang.github.io/rfcs//3014-must-not-suspend-lint.html) · [Tracking Issue](https://github.com/rust-lang/rust/issues/83310) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
@@ -55,7 +55,7 @@ fn main() {}
 > 2) 使用 `tokio::sync::Mutex`（`async` 锁，可跨 await）；
 > 3) 重新设计数据结构避免跨 await 借用（Borrowing）。这与 Go 的 defer + 锁（`defer mu.Unlock()`，goroutine 不挂起当前线程）或 Java 的 `synchronized`（阻塞线程，不挂起任务）不同——Rust 的 async/await 是协作式调度，锁跨越 yield 点危险。
 > [来源: [must_not_suspend lint](https://doc.rust-lang.org/nightly/rustc/lints/listing/allowed-by-default.html#must-not-suspend)] ·
-> [来源: [Async Rust](https://rust-lang.github.io/async-book/)]
+> [来源: [Async Rust](https://rust-lang.github.io/async-book/index.html)]
 >
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)

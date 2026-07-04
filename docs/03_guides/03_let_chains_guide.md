@@ -266,7 +266,7 @@ fn validate_user(name: Option<&str>, age: Option<&str>) -> Result<(), String> {
 }
 ```
 
-[来源: Rust By Example, "Flow Control"]
+[Rust By Example, "Flow Control"](https://doc.rust-lang.org/rust-by-example/flow_control.html)
 
 ---
 
@@ -352,7 +352,7 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 }
 ```
 
-[来源: Rust Internals Forum, "Let Chains Gotchas"]
+[Rust Internals Forum, "Let Chains Gotchas"](https://internals.rust-lang.org/)
 
 ---
 

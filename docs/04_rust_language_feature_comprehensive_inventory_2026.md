@@ -152,7 +152,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Programming Language Features](https://en.wikipedia.org/wiki/Programming_Language_Features)** ·
 > **来源: [Wikipedia - Language Evolution](https://en.wikipedia.org/wiki/Language_Evolution)** ·
-> **[来源: ACM - Language Feature Taxonomy]** · **[来源: IEEE - Language Standardization]**
+> **[ACM - Language Feature Taxonomy](https://dl.acm.org/)** · **[IEEE - Language Standardization](https://ieeexplore.ieee.org/)**
 
 ### 00.1 分析方法论 {#001-分析方法论}
 
@@ -2622,7 +2622,7 @@ graph TD
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

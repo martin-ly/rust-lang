@@ -496,8 +496,8 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-02-advanced-traits.html)
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-02-advanced-traits.html)
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -551,7 +551,7 @@ impl<T: Clone> Container for Wrapper<T> {
 }
 ```
 
-> **修正**: 关联类型（associated type）在 trait 实现中只能指定一次，但方法签名必须与此类型一致。若关联类型是泛型参数，方法中对该类型的操作必须满足相应的 trait bound。`Container::get` 返回 `Self::Item`，若 `Item = T` 且 `T` 未实现 `Copy`/`Clone`，则 `self.0` 的返回是 move，可能不符合 trait 的语义预期。在 trait 设计时，应通过 `where Self::Item: Clone` 等约束明确操作要求。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 关联类型（associated type）在 trait 实现中只能指定一次，但方法签名必须与此类型一致。若关联类型是泛型参数，方法中对该类型的操作必须满足相应的 trait bound。`Container::get` 返回 `Self::Item`，若 `Item = T` 且 `T` 未实现 `Copy`/`Clone`，则 `self.0` 的返回是 move，可能不符合 trait 的语义预期。在 trait 设计时，应通过 `where Self::Item: Clone` 等约束明确操作要求。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：特殊化（Specialization）的不稳定性（编译错误）
 
@@ -579,7 +579,7 @@ fn main() {
 }
 ```
 
-> **修正**: Trait 特殊化（specialization）允许为具体类型提供优先于泛型默认实现的特化版本，但截至 Rust 1.95+ 仍为**不稳定特性**（`#![feature(specialization)]`）。标准库内部使用 `min_specialization`（简化版）优化性能，但用户代码不能依赖。这与 C++ 的模板特化（template specialization）类似，但 Rust 的设计更保守——特殊化必须保证"始终安全"（始终适用），不能破坏一致性（Coherence）。当前稳定 Rust 中，需通过 blanket impl 的约束或显式类型匹配实现类似效果。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+> **修正**: Trait 特殊化（specialization）允许为具体类型提供优先于泛型默认实现的特化版本，但截至 Rust 1.95+ 仍为**不稳定特性**（`#![feature(specialization)]`）。标准库内部使用 `min_specialization`（简化版）优化性能，但用户代码不能依赖。这与 C++ 的模板特化（template specialization）类似，但 Rust 的设计更保守——特殊化必须保证"始终安全"（始终适用），不能破坏一致性（Coherence）。当前稳定 Rust 中，需通过 blanket impl 的约束或显式类型匹配实现类似效果。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)]
 
 ### 10.5 边界测试：关联常量与泛型参数的交互（编译错误）
 
@@ -593,7 +593,7 @@ struct Buffer<C: Config> {
 }
 ```
 
-> **修正**: Rust 的关联常量（associated constants）在 trait 中声明，在实现中定义。但**泛型参数**的关联常量不能在类型定义中用于确定数组大小——`[u8; C::MAX_SIZE]` 中 `C` 是泛型参数，编译器无法在单态化（Monomorphization）前知道 `MAX_SIZE` 的具体值。这是 Rust 常量泛化的限制：只有具体类型（如 `[u8; 1024]`）或 const 泛型参数（`[u8; N]`）可用于数组大小。Workaround：1) 使用 `GenericArray`（`typenum` crate，通过类型级数字模拟常量）；2) 使用 `Vec<u8>` 替代数组；3) 使用宏（Macro）为每个具体配置生成代码。这与 C++ 的 `template<size_t N>`（非类型模板参数可用于数组大小）或 Zig 的 `comptime`（编译期常量可用于任何类型位置）不同——Rust 的 const 泛型仍在扩展中。来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs/2000-2000-const-generics.html) · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **修正**: Rust 的关联常量（associated constants）在 trait 中声明，在实现中定义。但**泛型参数**的关联常量不能在类型定义中用于确定数组大小——`[u8; C::MAX_SIZE]` 中 `C` 是泛型参数，编译器无法在单态化（Monomorphization）前知道 `MAX_SIZE` 的具体值。这是 Rust 常量泛化的限制：只有具体类型（如 `[u8; 1024]`）或 const 泛型参数（`[u8; N]`）可用于数组大小。Workaround：1) 使用 `GenericArray`（`typenum` crate，通过类型级数字模拟常量）；2) 使用 `Vec<u8>` 替代数组；3) 使用宏（Macro）为每个具体配置生成代码。这与 C++ 的 `template<size_t N>`（非类型模板参数可用于数组大小）或 Zig 的 `comptime`（编译期常量可用于任何类型位置）不同——Rust 的 const 泛型仍在扩展中。来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs/2000-2000-const-generics.html) · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 
 ### 10.6 边界测试：trait alias 与 bound 的冗余（编译错误）
 
@@ -670,7 +670,7 @@ fn main() {
 }
 ```
 
-> **修正**: **GAT**（Generic Associated Types，Rust 1.65+）允许关联类型带泛型参数：`type Item<'a>`。但 GAT 的使用常需额外约束：1) `where Self: 'a` — 保证 `self` 的生命周期（Lifetimes）覆盖 `'a`；2) `Item<'a>: 'a` — 保证输出类型在 `'a` 内有效。GAT 的应用：1)  lending iterator（`LendingIterator` trait，返回与自身绑定的引用）；2) 类型级函数（`type Family<T>`）；3) 替代部分 HKT（Higher-Kinded Types）用例。GAT 的编译错误信息可能复杂，因涉及多个生命周期和关联类型约束。这与 Haskell 的 associated type families（`type family Item c :: * -> *`）或 C++ 的模板模板参数（`template<template<typename> class F>`）类似——Rust 的 GAT 是类型系统（Type System）的重要扩展，但学习曲线陡。来源: [Rust Reference — Generic Associated Types](https://doc.rust-lang.org/reference/) · 来源: [RFC 1598 — GAT](https://github.com/rust-lang/rfcs/pull/1598)
+> **修正**: **GAT**（Generic Associated Types，Rust 1.65+）允许关联类型带泛型参数：`type Item<'a>`。但 GAT 的使用常需额外约束：1) `where Self: 'a` — 保证 `self` 的生命周期（Lifetimes）覆盖 `'a`；2) `Item<'a>: 'a` — 保证输出类型在 `'a` 内有效。GAT 的应用：1)  lending iterator（`LendingIterator` trait，返回与自身绑定的引用）；2) 类型级函数（`type Family<T>`）；3) 替代部分 HKT（Higher-Kinded Types）用例。GAT 的编译错误信息可能复杂，因涉及多个生命周期和关联类型约束。这与 Haskell 的 associated type families（`type family Item c :: * -> *`）或 C++ 的模板模板参数（`template<template<typename> class F>`）类似——Rust 的 GAT 是类型系统（Type System）的重要扩展，但学习曲线陡。来源: [Rust Reference — Generic Associated Types](https://doc.rust-lang.org/reference/introduction.html) · 来源: [RFC 1598 — GAT](https://github.com/rust-lang/rfcs/pull/1598)
 
 ## 实践
 

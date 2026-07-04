@@ -32,7 +32,7 @@
 
 ## 📚 内容
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
@@ -43,7 +43,7 @@
 
 ## 🎯 学习路径
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Unsafe 基础** → [unsafe_rust.md](04_unsafe_rust.md)
 2. **C 互操作** → [ffi.md](01_ffi.md)
@@ -52,12 +52,12 @@
 
 ## ⚠️ 安全提醒
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 > 所有 unsafe 代码必须经过 Miri 验证和人工审计。每段 `unsafe` 块必须附带 `// SAFETY:` 注释。
 
 ## 🚀 相关层
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [04_expert/unsafe_audit.md](../../04_expert/02_unsafe_audit.md) - Unsafe 代码审计方法论
 - [04_expert/tree_borrows.md](../../04_expert/miri/01_tree_borrows.md) - 别名模型与内存规则
@@ -71,7 +71,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

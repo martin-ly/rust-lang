@@ -10,17 +10,17 @@
 
 ## 案例 1: 实现一个线程池 (like Rayon)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 背景
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 在高性能计算场景中，需要利用多核 CPU 并行处理任务。Rayon 是 Rust 生态中著名的并行计算库，其核心是一个高效的工作窃取(work-stealing)线程池。
 
 ### 问题分析
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 如何高效分配任务到多个工作线程？
 - 如何避免线程间的锁竞争？
@@ -29,7 +29,7 @@
 
 ### 架构设计
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
@@ -53,7 +53,7 @@
 
 ### 核心实现
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::sync::{mpsc, Arc, Mutex};
@@ -1226,7 +1226,7 @@ fn example_usage() {
 
 ---
 
-> **权威来源**: [来源: Rust 官方文档](https://doc.rust-lang.org/)
+> **权威来源**: [Rust Official Docs](https://doc.rust-lang.org/)(https://doc.rust-lang.org/)
 
 ---
 

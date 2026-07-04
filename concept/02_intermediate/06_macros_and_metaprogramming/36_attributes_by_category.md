@@ -84,7 +84,7 @@
 
 属性就像给编译器贴的“便签”：告诉它“对这个函数特殊处理”“在这个平台才编译”“为这个东西自动生成代码”。它们不改变运行时语义（大部分情况下），但深刻影响编译期和工具链行为。
 
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -444,6 +444,6 @@ D. `#[serde]`
 
 ---
 
-> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [来源: Rust 1.96.1 Reference 属性章节对齐]
 > **状态**: ✅ 权威来源对齐完成

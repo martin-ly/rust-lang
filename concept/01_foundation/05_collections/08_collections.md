@@ -415,7 +415,7 @@ graph TD
 ```
 
 > **边界要点**: 集合类型的边界主要与**哈希质量**、**B-Tree 参数**、**内存连续性**、**分配器**和**迭代器（Iterator）失效**相关。
-> [来源: [Rustonomicon — Collections](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon — Collections](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -490,9 +490,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -549,7 +549,7 @@ struct PointFixed {
 > **修正**: `HashMap` 的键必须实现 `Hash` 和 `Eq`（以及 `PartialEq`）。
 > `Hash` 用于计算哈希值，`Eq` 保证相等性判断的等价关系（自反、对称、传递）。
 > 浮点数（`f32`/`f64`）未实现 `Eq`（因 NaN != NaN），不能作为 `HashMap` 键。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 14.2 边界测试：迭代器消费后重复使用（编译错误）
 

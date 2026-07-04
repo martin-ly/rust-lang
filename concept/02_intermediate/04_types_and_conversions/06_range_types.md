@@ -161,7 +161,7 @@ graph LR
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 在需要多次遍历同一范围的场景中，优先使用 `core::range::Range`；在需要保存迭代进度（如 `break` 后恢复）的场景中，使用显式迭代器（Iterator）。
 > **关键洞察**: `IntoIterator` 分离了"可迭代性"和"迭代状态"，使范围回归数学区间的**纯值本质**。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -349,7 +349,7 @@ let rev = 10..0;
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [RFC 3550](https://github.com/rust-lang/rfcs/pull/3550), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [RFC 3550](https://github.com/rust-lang/rfcs/pull/3550), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1 (Edition 2024)
 
 **文档版本**: 1.1
@@ -405,7 +405,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的范围语法 `a..b`、`a..=b` 有两种用法：作为表达式（创建 `Range` 类型）和作为模式（在 `match` 中匹配）。作为表达式时，它表示一个迭代器或范围对象；作为模式时，它表示值范围匹配。不能在普通表达式位置使用模式语法。`contains` 方法是检查值是否在范围内的标准方式。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 的范围语法 `a..b`、`a..=b` 有两种用法：作为表达式（创建 `Range` 类型）和作为模式（在 `match` 中匹配）。作为表达式时，它表示一个迭代器或范围对象；作为模式时，它表示值范围匹配。不能在普通表达式位置使用模式语法。`contains` 方法是检查值是否在范围内的标准方式。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：`Range` 与 `RangeInclusive` 的类型不匹配（编译错误）
 
@@ -438,7 +438,7 @@ where
 > **1.97+ 前瞻**: `core::range::RangeFull` 和 `core::range::RangeTo` 将作为 `core::ops::RangeFull` / `RangeTo` 的 re-export 进入 `core::range` 模块（Module），同时 `core::range::legacy::*` 将成为旧范围类型的新家。这意味着未来版本将完成新旧 Range 体系的统一。当前（1.96）`core::range` 仅包含 `Range`、`RangeFrom`、`RangeInclusive` 及其迭代器。 [来源: [releases.rs — PR #156840](https://releases.rs/)]
 > 函数参数需明确指定接受哪种范围，或使用 `RangeBounds` trait 泛化。
 > 这体现了 Rust"显式优于隐式"的设计哲学——范围语义在类型层面区分，避免 C++ 中 `for (int i = a; i <= b; i++)` 与 `i < b` 的歧义。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：`RangeInclusive` 的 `Copy` 缺失（编译错误）
 

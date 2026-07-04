@@ -12,7 +12,7 @@
 > **前置概念**: [Linear Logic](01_linear_logic.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **后置概念**: [RustBelt](../02_separation_logic/04_rustbelt.md) · [Session Types](https://en.wikipedia.org/wiki/Session_type)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [Linear Logic — Girard 1987](https://girard.perso.math.cnrs.fr/linear.pdf) ·
@@ -489,9 +489,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -553,7 +553,7 @@ fn consume_clone(l: LinearClone) {
 }
 ```
 
-> **修正**: 线性逻辑要求资源**恰好使用一次**。Rust 的所有权系统是一种**仿射类型系统（Type System）**（affine）——资源最多使用一次，但允许通过 `Drop` 隐式丢弃。这与纯线性逻辑（不允许丢弃）不同，更符合系统编程需求。`#[derive(Clone)]` 显式 opt-in 复制语义，避免隐式复制导致的性能问题。这与 C++ 的拷贝构造函数（默认复制）形成鲜明对比——Rust 的默认是 move，复制需显式。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 线性逻辑要求资源**恰好使用一次**。Rust 的所有权系统是一种**仿射类型系统（Type System）**（affine）——资源最多使用一次，但允许通过 `Drop` 隐式丢弃。这与纯线性逻辑（不允许丢弃）不同，更符合系统编程需求。`#[derive(Clone)]` 显式 opt-in 复制语义，避免隐式复制导致的性能问题。这与 C++ 的拷贝构造函数（默认复制）形成鲜明对比——Rust 的默认是 move，复制需显式。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：`Vec` 的线性所有权与索引（运行时 panic）
 
@@ -571,7 +571,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Vec` 的索引操作 `v[i]` 在越界时 panic，体现了 Rust"快速失败"的哲学。从线性逻辑视角，`Vec` 是一个资源容器，其元素是子资源。越界访问试图获取不存在的子资源，是资源使用错误。`get()` 返回 `Option<&T>`，将可能的失败显式编码到类型中，调用者必须处理 `None` 情况。这是 Rust 将运行时错误转为编译期类型安全边界的典型模式。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `Vec` 的索引操作 `v[i]` 在越界时 panic，体现了 Rust"快速失败"的哲学。从线性逻辑视角，`Vec` 是一个资源容器，其元素是子资源。越界访问试图获取不存在的子资源，是资源使用错误。`get()` 返回 `Option<&T>`，将可能的失败显式编码到类型中，调用者必须处理 `None` 情况。这是 Rust 将运行时错误转为编译期类型安全边界的典型模式。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：线性资源的隐式复制（编译错误）
 
@@ -660,7 +660,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的 `std::mem::forget` 是**safe 函数**：它阻止值的 `drop` 被调用，但不触发 UB。这是 Rust "**leak safety**" 哲学的一部分：标准库不保证防泄漏，但泄漏不应导致内存不安全。`forget` 的合法用途：1) 将值的所有权转移给外部系统（如 FFI 的 C 代码负责释放）；2) 手动管理内存生命周期（Lifetimes）；3) 创建循环引用（Reference）（`Rc` 的 leak）。资源泄漏的风险：文件描述符耗尽、内存泄漏、锁未释放（导致死锁）。缓解：`ManuallyDrop<T>` 是更安全的替代——显式控制 drop 时机，不调用则编译器警告。这与 C++ 的 `std::unique_ptr::release`（放弃所有权，责任转移）或 Java 的 finalize（已废弃，不可靠）不同——Rust 的 `forget` 是显式的、有文档的安全操作。来源: [Rust Standard Library] · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **修正**: Rust 的 `std::mem::forget` 是**safe 函数**：它阻止值的 `drop` 被调用，但不触发 UB。这是 Rust "**leak safety**" 哲学的一部分：标准库不保证防泄漏，但泄漏不应导致内存不安全。`forget` 的合法用途：1) 将值的所有权转移给外部系统（如 FFI 的 C 代码负责释放）；2) 手动管理内存生命周期（Lifetimes）；3) 创建循环引用（Reference）（`Rc` 的 leak）。资源泄漏的风险：文件描述符耗尽、内存泄漏、锁未释放（导致死锁）。缓解：`ManuallyDrop<T>` 是更安全的替代——显式控制 drop 时机，不调用则编译器警告。这与 C++ 的 `std::unique_ptr::release`（放弃所有权，责任转移）或 Java 的 finalize（已废弃，不可靠）不同——Rust 的 `forget` 是显式的、有文档的安全操作。来源: [Rust Standard Library] · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 
 ## 嵌入式测验（Embedded Quiz）
 

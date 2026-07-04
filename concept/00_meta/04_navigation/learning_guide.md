@@ -12,7 +12,7 @@
 > **方法论**：基于 Bloom 认知层级设计路径，每条路径标注预计阅读时间、前置依赖和 Checkpoint 自测题。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 > **关联文件**: [能力图谱 `competency_graph.md`](../00_framework/competency_graph.md) · [双维认知矩阵 `cognitive_dimension_matrix.md`](../00_framework/cognitive_dimension_matrix.md)
 ---
 
@@ -124,7 +124,7 @@ graph TD
 ```
 
 > **认知功能**: 此路径图展示**不同背景学习者的最小阻力路径**。完全新手从 L1 基础层线性递进；C++ 开发者利用已有 RAII/指针知识，通过 Rust vs C++ 对比加速；Java/Go 开发者从 GC 思维转换，重点理解所有权替代 GC；Haskell/ML 开发者利用类型论基础，从 L2/L4 进入。颜色对应背景：蓝=新手、绿=C++、橙=Java/Go、粉=Haskell。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ## 一、如何使用本指南
 
@@ -594,8 +594,8 @@ rustc 错误信息结构:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

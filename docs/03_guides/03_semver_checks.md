@@ -7,7 +7,7 @@
 > **分级**: [A]
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 SemVer 2.0.0、cargo-semver-checks、Rust API Guidelines 来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 SemVer 2.0.0、cargo-semver-checks、Rust API Guidelines 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 # cargo-semver-checks 集成指南 {#cargo-semver-checks-集成指南}
 
@@ -47,7 +47,7 @@
 
 ## 1. 什么是 cargo-semver-checks？ {#1-什么是-cargo-semver-checks}
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Semantic Versioning](https://en.wikipedia.org/wiki/Semantic_Versioning)** · **来源: [Wikipedia - Software Versioning](https://en.wikipedia.org/wiki/Software_Versioning)** · **[来源: ACM - API Evolution Management]** · **[来源: IEEE - Software Configuration Management]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Semantic Versioning](https://en.wikipedia.org/wiki/Semantic_Versioning)** · **来源: [Wikipedia - Software Versioning](https://en.wikipedia.org/wiki/Software_Versioning)** · **[ACM - API Evolution Management](https://dl.acm.org/)** · **[IEEE - Software Configuration Management](https://ieeexplore.ieee.org/)**
 
 **cargo-semver-checks** 是一个静态分析工具，用于检测 Rust crate 的公共 API 是否违反了语义化版本控制（Semantic Versioning）规则。
 

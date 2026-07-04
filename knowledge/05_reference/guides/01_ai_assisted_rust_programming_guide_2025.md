@@ -8,7 +8,7 @@
 > **目的**: 结合 AI 工具高效学习 Rust 与构建项目
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference 来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference 来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
@@ -17,11 +17,11 @@
 
 ## 1. AI 辅助学习路径
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 提示词模板 (Prompt Templates)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **概念解释**:
 
@@ -46,7 +46,7 @@
 
 ### 1.2 与本项目结合
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **RAG 检索**: 将 `docs/02_reference/quick_reference/`、`crates/*/docs/` 纳入检索范围
 - **Embedding 索引**: 建议将速查卡、00_MASTER_INDEX、决策树文档纳入向量索引，便于语义检索
@@ -59,7 +59,7 @@
 
 ## 2. 常用 AI 工具
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 工具         | 适用场景           | 推荐用法                   |
 | :--- | :--- | :--- || **Cursor**   | 代码补全、重构     | 在项目内直接编辑和运行     |
@@ -71,7 +71,7 @@
 
 ## 3. 项目文档的 AI 友好性
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本项目已具备：
 

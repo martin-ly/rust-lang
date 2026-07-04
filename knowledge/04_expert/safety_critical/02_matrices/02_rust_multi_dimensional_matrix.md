@@ -5,7 +5,7 @@
 > [Ferrocene](https://ferrous-systems.com/ferrocene/),
 > [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # Rust生态系统多维概念矩阵对比
 
@@ -15,7 +15,7 @@
 
 ## 矩阵1: 编程语言安全特性对比矩阵
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | Rust | C | C++ | Ada | Java | Go |
 |------|------|---|---|-----|------|-----|
@@ -36,7 +36,7 @@
 
 ## 矩阵2: 安全关键标准与Rust对齐矩阵
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 标准要求 | ISO 26262 (汽车) | IEC 61508 (工业) | DO-178C (航空) | IEC 62304 (医疗) | Rust语言支持 | 工具链认证 |
 |----------|---------------------|---------------------|-------------------|---------------------|--------------|------------|
@@ -54,7 +54,7 @@
 
 ## 矩阵3: 国际大学Rust课程体系矩阵
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 大学 | 课程代码 | 课程名称 | Rust应用场景 | 教学重点 | 项目实践 | 认证关联 |
 |------|----------|----------|--------------|----------|----------|----------|
@@ -71,7 +71,7 @@
 
 ## 矩阵4: Rust认证工具链能力矩阵
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 能力维度 | Ferrocene (Ferrous Systems) | AdaCore GNAT Pro | High Assurance Rust | Kani (AWS) | Verus (VMware) |
 |----------|-------------------------------|---------------------|------------------------|---------------|-------------------|
@@ -90,7 +90,7 @@
 
 ## 矩阵5: 航天国防应用领域矩阵
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 应用领域 | 典型项目 | Rust应用 | 关键标准 | 安全等级 | 合作伙伴 | 当前状态 |
 |----------|----------|----------|----------|----------|----------|----------|

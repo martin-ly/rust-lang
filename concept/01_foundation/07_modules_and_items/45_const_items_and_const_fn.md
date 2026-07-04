@@ -86,7 +86,7 @@ const fn function_name(args) -> ReturnType { body }
 
 常量机制让编译器在程序运行前完成尽可能多的计算。就像烘焙前先把配方算好，而不是每次顾客点餐时才计算配料比例。这样运行时既快又无额外开销。
 
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -403,6 +403,6 @@ D. 返回基本类型如 `i32`
 
 ---
 
-> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [来源: Rust 1.96.1 Reference 与 TRPL 对齐]
 > **状态**: ✅ 权威来源对齐完成

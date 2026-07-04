@@ -12,7 +12,7 @@
 >
 > **来源**:
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rust Reference](https://doc.rust-lang.org/reference/)
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
 
 ## 相关概念文件

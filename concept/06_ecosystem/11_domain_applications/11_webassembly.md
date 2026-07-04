@@ -20,7 +20,7 @@
 ---
 
 > **来源**: [WebAssembly Specification](https://webassembly.github.io/spec/) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> [Rust Wasm Book](https://rustwasm.github.io/book/) ·
+> [Rust Wasm Book](https://rustwasm.github.io/docs/book/index.html) ·
 > [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/) ·
 > [Bytecode Alliance](https://bytecodealliance.org/) ·
 > [W3C WebAssembly](https://www.w3.org/wasm/)
@@ -139,7 +139,7 @@ graph LR
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 浏览器场景用 `wasm-bindgen`；服务端/边缘用 `wasmtime` + WASI；组件化系统用 `wit-bindgen` + 组件模型。
 > **关键洞察**: Rust 编译到 Wasm **不是转译**（transpile），而是完整编译——rustc 通过 LLVM 的 Wasm 后端直接生成 Wasm 字节码，保留所有优化。
-> [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
+> [来源: [Rust Wasm Book](https://rustwasm.github.io/docs/book/index.html)]
 
 ---
 
@@ -261,7 +261,7 @@ graph TD
 ```
 
 > **认知功能**: 此图对比当前**模块（Module）级 Wasm** 与未来的**组件模型**。组件模型通过 WIT（Wasm Interface Types）实现跨语言的类型安全组合。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **使用建议**: 当前项目使用模块（Module）级 Wasm + wasm-bindgen；面向未来的组件化系统开始评估 wit-bindgen。
 > **关键洞察**: 组件模型是 Wasm 的**"跨语言 ABI"**——类似于 COM 或 gRPC，但基于 Wasm 沙箱和 WIT 类型系统（Type System）。
 > [来源: [Bytecode Alliance — Component Model](https://component-model.bytecodealliance.org/)]
@@ -431,11 +431,11 @@ Rust Wasm 工具链:
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
 | [WebAssembly Specification](https://webassembly.github.io/spec/) | ✅ 一级 | W3C 官方规范 |
-| [Rust Wasm Book](https://rustwasm.github.io/book/) | ✅ 一级 | Rust 官方 Wasm 指南 |
+| [Rust Wasm Book](https://rustwasm.github.io/docs/book/index.html) | ✅ 一级 | Rust 官方 Wasm 指南 |
 | [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/) | ✅ 一级 | JS 互操作指南 |
 | [Bytecode Alliance](https://bytecodealliance.org/) | ✅ 一级 | Wasm 生态组织 |
 | [Component Model Docs](https://component-model.bytecodealliance.org/) | ✅ 一级 | 组件模型文档 |
@@ -453,7 +453,7 @@ Rust Wasm 工具链:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -501,7 +501,7 @@ fn main() {
 // 或使用 Web Workers（通过 js-sys）
 ```
 
-> **修正**: `wasm32-unknown-unknown` 目标没有操作系统支持，因此 `std::thread`、`std::fs`、`std::net` 等模块（Module）不可用。WebAssembly 的线程支持通过 `wasm32-wasip1` 或 `wasm32-wasip2` 或 `wasm32-unknown-emscripten` 目标实现，或浏览器的 Web Workers。Rust 编译器在编译期拒绝 wasm32 上不支持的 API，防止运行时错误。这与 C/C++ 的 WASM 编译（可能链接失败或运行时崩溃）不同——Rust 在类型系统（Type System）层面保证目标平台兼容性。[来源: [Rust and WebAssembly](https://rustwasm.github.io/book/)]
+> **修正**: `wasm32-unknown-unknown` 目标没有操作系统支持，因此 `std::thread`、`std::fs`、`std::net` 等模块（Module）不可用。WebAssembly 的线程支持通过 `wasm32-wasip1` 或 `wasm32-wasip2` 或 `wasm32-unknown-emscripten` 目标实现，或浏览器的 Web Workers。Rust 编译器在编译期拒绝 wasm32 上不支持的 API，防止运行时错误。这与 C/C++ 的 WASM 编译（可能链接失败或运行时崩溃）不同——Rust 在类型系统（Type System）层面保证目标平台兼容性。[来源: [Rust and WebAssembly](https://rustwasm.github.io/docs/book/index.html)]
 
 ### 10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）
 
@@ -547,7 +547,7 @@ fn main() {
 }
 ```
 
-> **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 `wasm32-wasip1` 或 `wasm32-wasip2` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理（Error Handling）。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]
+> **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 `wasm32-wasip1` 或 `wasm32-wasip2` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理（Error Handling）。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/docs/book/index.html)]
 > **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

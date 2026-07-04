@@ -529,9 +529,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -596,7 +596,7 @@ impl SelfRefFixed {
 > 自引用结构体（Struct）（字段引用同一结构体的其他字段）在 Rust 的生命周期系统中无法表达，因为结构体的生命周期参数只能引用外部数据。
 > 解决方案是使用裸指针（无生命周期约束）+ `Pin`（防止移动）+ `PhantomPinned`（标记为 !Unpin）。
 > 这是 Rust 安全边界的典型突破——编译器无法证明的安全属性，由 unsafe 代码承担证明义务。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.2 边界测试：生命周期边界中的 `for<'a>` HRTB（编译错误）
 
@@ -629,7 +629,7 @@ where
 > 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。
 > 当闭包作为参数传递时，默认的生命周期推断可能过于具体（绑定到特定作用域），
 > 导致无法满足泛型（Generics）函数的 trait bound。HRTB 在回调函数、比较器、迭代器（Iterator）适配器等高阶函数场景中至关重要，是 Rust 类型系统（Type System）表达"多态生命周期"的关键机制。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.5 边界测试：闭包捕获引用与 `Fn` trait 的生命周期约束（编译错误）
 

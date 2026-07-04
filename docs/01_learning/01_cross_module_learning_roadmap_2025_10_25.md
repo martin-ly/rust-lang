@@ -43,7 +43,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Learning Path](https://en.wikipedia.org/wiki/Learning_Path)** ·
 > **来源: [Wikipedia - Curriculum Design](https://en.wikipedia.org/wiki/Curriculum_Design)** ·
-> **[来源: ACM - Computing Education Research]** · **[来源: IEEE - Competency Frameworks]**
+> **[ACM - Computing Education Research](https://dl.acm.org/)** · **[IEEE - Competency Frameworks](https://ieeexplore.ieee.org/)**
 >
 
 ### 路径 1: 零基础入门 {#路径-1-零基础入门}
@@ -303,7 +303,7 @@ C07 高级系统编程 ────────────┘
 
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Rust releases](https://releases.rs/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、Rust releases 来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、Rust releases 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

@@ -8,14 +8,14 @@
 > **预计时间**: 15 分钟
 > **权威来源**: [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-00-getting-started.html), [Cargo Guide](https://doc.rust-lang.org/cargo/guide/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL 官方教程来源标注、Cargo 项目结构来源引用 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL 官方教程来源标注、Cargo 项目结构来源引用 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
 
 ## 🎯 学习目标
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 完成本章后，你将能够：
 
@@ -26,18 +26,18 @@
 
 ## 📋 先决条件
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 已完成 [安装 Rust](02_installation.md)
 - 了解基本的命令行操作
 
 ## 🚀 创建项目
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 使用 Cargo 创建
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 cargo new hello_world
@@ -56,7 +56,7 @@ hello_world/
 
 ## 📄 项目文件详解
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Cargo.toml
 >
@@ -270,15 +270,15 @@ fn main() {
 
 ## 📖 延伸阅读
 
-- [Cargo 指南](https://doc.rust-lang.org/cargo/guide/) [来源: Rust Team / Cargo Book 2025]
-- [Rust 程序结构](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) [来源: Rust Team / TRPL 2025]
+- [Cargo 指南](https://doc.rust-lang.org/cargo/guide/) [Rust Team / Cargo Book 2025](https://doc.rust-lang.org/cargo/index.html)
+- [Rust 程序结构](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) [Rust Team / TRPL 2025](https://doc.rust-lang.org/book/title-page.html)
 
 ---
 
 ## 📚 权威来源索引
 
-- [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-00-getting-started.html) [来源: Rust Team / TRPL 2025]
-- [Cargo Guide](https://doc.rust-lang.org/cargo/guide/) [来源: Rust Team / Cargo Book 2025]
+- [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-00-getting-started.html) [Rust Team / TRPL 2025](https://doc.rust-lang.org/book/title-page.html)
+- [Cargo Guide](https://doc.rust-lang.org/cargo/guide/) [Rust Team / Cargo Book 2025](https://doc.rust-lang.org/cargo/index.html)
 - [Rust 学习路线图](03_learning_roadmap.md)
 - [安装 Rust](02_installation.md)
 - [Rust 哲学与设计原则](04_rust_philosophy.md)

@@ -23,7 +23,7 @@
 > **目标读者**: 已掌握 Rust 泛型与 trait 系统，从事科学计算、图形学或机器学习基础设施的开发者
 > [来源: nalgebra 官方文档](https://docs.rs/nalgebra/latest/nalgebra/)
 > [来源: ndarray 官方文档](https://docs.rs/ndarray/latest/ndarray/)
-> [来源: Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)
+> [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)(https://doc.rust-lang.org/reference/items/generics.html#const-generics)
 > **状态**: ✅ 已完成
 
 ---
@@ -170,7 +170,7 @@ let m: SMatrix<f64, 3, 3> = SMatrix::identity();
 
 `Const<N>` 将编译期整数直接嵌入类型系统，比 `DimName` 更直接、更符合 Rust 语言演进方向。
 
-> [来源: Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)
+> [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)(https://doc.rust-lang.org/reference/items/generics.html#const-generics)
 > [来源: nalgebra 文档 — Const generics](https://docs.rs/nalgebra/latest/nalgebra/base/dimension/struct.Const.html)
 
 ### 2.4 编译时维度检查 {#24-编译时维度检查}
@@ -600,7 +600,7 @@ def transform_point(m: np.ndarray, p: np.ndarray) -> np.ndarray:
 >
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/international_authority_index.md)
 
 ---
 

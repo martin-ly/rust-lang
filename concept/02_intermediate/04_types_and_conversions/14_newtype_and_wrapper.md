@@ -453,16 +453,16 @@ graph TD
 >
 
 | 来源 | 可信度 | 说明 |
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
-| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/index.html) | ✅ 一级 | RFC 文档 |
 | [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines//type-safety.html#c-newtype) | ✅ 一级 | 官方指南 |
 | [TRPL — Newtype Pattern](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | ✅ 一级 | 模式介绍 |
@@ -481,9 +481,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -568,7 +568,7 @@ struct InvariantContainer<T> {
 }
 ```
 
-> **修正**: `PhantomData<T>` 不仅标记类型参数的使用，还影响类型的**变异性**（variance）。`PhantomData<&'a T>` 使类型对 `'a` 协变，`PhantomData<&'a mut T>` 使类型对 `'a` 逆变，`PhantomData<*const T>` 使类型对 `T` 不变。错误选择变异性可能导致生命周期（Lifetimes）绕过——将短生命周期值通过类型转换赋给期望长生命周期的上下文，产生悬垂引用（Reference）。这是 Rust 高级类型系统（Type System）的微妙之处，也是 unsafe 代码审查的重点。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: `PhantomData<T>` 不仅标记类型参数的使用，还影响类型的**变异性**（variance）。`PhantomData<&'a T>` 使类型对 `'a` 协变，`PhantomData<&'a mut T>` 使类型对 `'a` 逆变，`PhantomData<*const T>` 使类型对 `T` 不变。错误选择变异性可能导致生命周期（Lifetimes）绕过——将短生命周期值通过类型转换赋给期望长生命周期的上下文，产生悬垂引用（Reference）。这是 Rust 高级类型系统（Type System）的微妙之处，也是 unsafe 代码审查的重点。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：newtype 的 derive 限制（编译错误）
 

@@ -20,7 +20,7 @@
 > **来源**: [TRPL — Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html) · [Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) ·
 > [Wikipedia — Type Erasure](https://en.wikipedia.org/wiki/Type_erasure) ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [TRPL — Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)
 > **对应 Crate**: [`c04_generic`](../../crates/c04_generic)
 
@@ -500,7 +500,7 @@ graph TD
 ```
 
 > **边界要点**: 类型擦除的边界与**对象安全**、**生命周期（Lifetimes）**、**Downcast**、**调试**和**FFI**相关。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -557,7 +557,7 @@ graph TD
 |:---|:---:|:---|
 | [TRPL — Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html) | ✅ 一级 | 官方书 |
 | [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) | ✅ 一级 | 参考 |
-| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ 一级 | unsafe 指南 |
+| [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) | ✅ 一级 | unsafe 指南 |
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 二级 | 性能 |
 | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | ✅ 二级 | 设计模式 |
 
@@ -572,9 +572,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 12]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -630,7 +630,7 @@ impl Canvas {
 }
 ```
 
-> **修正**: `dyn Trait` 是动态大小类型（DST），编译器无法在编译期确定其大小（不同实现类型大小不同）。DST 不能直接作为函数参数、返回值或变量类型，必须放在指针后面：`Box<dyn Trait>`（拥有）、`&dyn Trait`（借用（Borrowing））、`&mut dyn Trait`（可变借用（Mutable Borrow））。这与 C++ 的虚函数表指针类似，但 Rust 的 `dyn` 是显式语法，编译器拒绝隐式类型擦除。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: `dyn Trait` 是动态大小类型（DST），编译器无法在编译期确定其大小（不同实现类型大小不同）。DST 不能直接作为函数参数、返回值或变量类型，必须放在指针后面：`Box<dyn Trait>`（拥有）、`&dyn Trait`（借用（Borrowing））、`&mut dyn Trait`（可变借用（Mutable Borrow））。这与 C++ 的虚函数表指针类似，但 Rust 的 `dyn` 是显式语法，编译器拒绝隐式类型擦除。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：trait object 的方法返回 `Self`（编译错误）
 
@@ -656,7 +656,7 @@ fn make_clone(obj: &dyn Cloneable) -> Box<dyn Cloneable> {
 // }
 ```
 
-> **修正**: Trait object 在运行时（Runtime）通过 vtable 动态分发，vtable 中的方法签名必须是"对象安全"（object-safe）的。返回 `Self` 的方法不是对象安全的，因为编译器无法在编译期确定 `Self` 的具体类型和大小。类似地，泛型（Generics）方法（`fn method<T>(&self, t: T)`）也不是对象安全的——vtable 无法存储无限多单态化（Monomorphization）版本。Rust 编译器在 trait 定义时检查对象安全性，拒绝将非对象安全 trait 转为 `dyn Trait`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Trait object 在运行时（Runtime）通过 vtable 动态分发，vtable 中的方法签名必须是"对象安全"（object-safe）的。返回 `Self` 的方法不是对象安全的，因为编译器无法在编译期确定 `Self` 的具体类型和大小。类似地，泛型（Generics）方法（`fn method<T>(&self, t: T)`）也不是对象安全的——vtable 无法存储无限多单态化（Monomorphization）版本。Rust 编译器在 trait 定义时检查对象安全性，拒绝将非对象安全 trait 转为 `dyn Trait`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（编译错误）
 
@@ -722,7 +722,7 @@ fn main() {
 }
 ```
 
-> **修正**: `dyn Trait` 是**动态分发**类型，大小不固定（`!Sized`），因为不同实现的大小不同。`Box<dyn Trait>` 和 `&dyn Trait` 是**胖指针**（数据指针 + vtable 指针），本身是 `Sized` 的。若函数要求 `P: Processor`（隐式 `P: Sized`），不能传入 `dyn Processor`。修复：1) `fn use_processor(p: &dyn Processor)`（接受引用）；2) `fn use_processor(p: Box<dyn Processor>)`（接受 Box）；3) `fn use_processor<P: Processor + ?Sized>(p: &P)`（放宽 Sized 约束）。类型擦除与单态化（Monomorphization）的权衡：`dyn Trait` 减少代码膨胀（一个函数处理所有类型），但有虚函数调用开销。这与 C++ 的虚函数（类似机制，但无显式 `dyn` 标记）或 Go 的 interface（类似 fat pointer，但隐式实现）不同——Rust 的 `dyn` 显式标记动态分发，编译器在类型层面区分静态和动态多态。来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **修正**: `dyn Trait` 是**动态分发**类型，大小不固定（`!Sized`），因为不同实现的大小不同。`Box<dyn Trait>` 和 `&dyn Trait` 是**胖指针**（数据指针 + vtable 指针），本身是 `Sized` 的。若函数要求 `P: Processor`（隐式 `P: Sized`），不能传入 `dyn Processor`。修复：1) `fn use_processor(p: &dyn Processor)`（接受引用）；2) `fn use_processor(p: Box<dyn Processor>)`（接受 Box）；3) `fn use_processor<P: Processor + ?Sized>(p: &P)`（放宽 Sized 约束）。类型擦除与单态化（Monomorphization）的权衡：`dyn Trait` 减少代码膨胀（一个函数处理所有类型），但有虚函数调用开销。这与 C++ 的虚函数（类似机制，但无显式 `dyn` 标记）或 Go 的 interface（类似 fat pointer，但隐式实现）不同——Rust 的 `dyn` 显式标记动态分发，编译器在类型层面区分静态和动态多态。来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 
 ### 10.4 边界测试：dyn Trait 的 Sized 要求与泛型约束（编译错误）
 
@@ -757,9 +757,9 @@ fn main() {
 ```
 
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用（Reference） `&s`。
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

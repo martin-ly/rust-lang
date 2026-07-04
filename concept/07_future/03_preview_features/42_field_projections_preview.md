@@ -121,7 +121,7 @@ fn project_status(base: &DeviceRegs) -> &u32 {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/types.html)]**
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]**
 
 ### 2.1 投影类型系统
 

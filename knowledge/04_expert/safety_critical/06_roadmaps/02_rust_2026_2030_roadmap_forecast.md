@@ -7,7 +7,7 @@
 >
 > **相关概念**: [迭代器](../../../../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # Rust 2026-2030 前瞻性路线图预测
 
@@ -17,7 +17,7 @@
 
 ## 执行摘要
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 基于Rust项目目标2026、行业趋势和学术研究方向，本文档预测Rust在安全关键系统领域2026-2030年的发展路线图。
 
@@ -25,11 +25,11 @@
 
 ## 历史回顾与趋势分析
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 过去5年发展 (2020-2025)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 2020: Linux内核实验性支持
@@ -59,7 +59,7 @@
 
 ### 技术成熟度曲线
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 技术 | 当前 | 2026 | 2028 | 2030 |
 |------|------|------|------|------|
@@ -73,7 +73,7 @@
 
 ## 2026年预测
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 语言特性
 >

@@ -19,8 +19,8 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Modular Programming](https://en.wikipedia.org/wiki/Modular_Programming)** ·
 > **来源: [Wikipedia - Namespace](https://en.wikipedia.org/wiki/Namespace)** ·
-> **[来源: ACM - Module System Design]** ·
-> **[来源: IEEE - Software Modularity Standards]**
+> **[ACM - Module System Design](https://dl.acm.org/)** ·
+> **[IEEE - Software Modularity Standards](https://ieeexplore.ieee.org/)**
 
 - [📦 Rust 模块系统速查卡 {#rust-模块系统速查卡}](#-rust-模块系统速查卡-rust-模块系统速查卡)
   - [📋 目录 {#目录}](#-目录-目录)
@@ -1192,7 +1192,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -1207,7 +1207,7 @@ let gamma = f64::consts::EULER_GAMMA;
 > **来源: [Wikipedia - Software Component](https://en.wikipedia.org/wiki/Software_Component)**
 > **来源: [Rust Reference - Modules](https://doc.rust-lang.org/reference/)**
 > **来源: [TRPL Ch. 7 - Packages and Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)**
-> **[来源: ACM - Modular Software Design]**
+> **[ACM - Modular Software Design](https://dl.acm.org/)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

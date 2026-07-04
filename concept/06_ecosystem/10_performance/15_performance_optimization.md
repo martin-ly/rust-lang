@@ -120,7 +120,7 @@ Rust 性能优化的核心原则: "先测量，再优化"
 ```
 
 > **认知功能**: 测量优先原则避免了"过早优化"——Rust 的零成本抽象（Zero-Cost Abstraction）使代码清晰度和性能不再对立。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **关键洞察**: 在 Rust 中，**清晰的代码往往也是高性能的代码**——因为编译器的优化能力远超手写低级代码。
 > [来源: [Rust Performance Book — Profiling](https://nnethercote.github.io/perf-book/profiling.html)]
 
@@ -470,16 +470,16 @@ graph TD
 >
 
 | 来源 | 可信度 | 说明 |
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
-| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/index.html) | ✅ 一级 | RFC 文档 |
 | [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 一级 | 官方性能优化指南 |
 | [Criterion.rs](https://bheisler.github.io/criterion.rs/book/) | ✅ 一级 | 基准测试框架 |
@@ -499,9 +499,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -554,7 +554,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 性能优化常涉及 `unsafe` 代码（裸指针、未初始化内存、`mem::transmute`）。这些优化的前提是遵守 Rust 的内存模型——`Vec` 的 `as_mut_ptr()` 返回的指针只在 `Vec` 不重新分配时有效。任何 `push`、`reserve`、`shrink` 都可能导致重新分配，使旧指针悬垂。Miri 可检测此类违规，但无法在编译期完全阻止——这是 unsafe 代码审查的重点。与 C++ 的 `vector::data()` 相同，但 Rust 要求显式 `unsafe` 块，增加审查可见性。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: 性能优化常涉及 `unsafe` 代码（裸指针、未初始化内存、`mem::transmute`）。这些优化的前提是遵守 Rust 的内存模型——`Vec` 的 `as_mut_ptr()` 返回的指针只在 `Vec` 不重新分配时有效。任何 `push`、`reserve`、`shrink` 都可能导致重新分配，使旧指针悬垂。Miri 可检测此类违规，但无法在编译期完全阻止——这是 unsafe 代码审查的重点。与 C++ 的 `vector::data()` 相同，但 Rust 要求显式 `unsafe` 块，增加审查可见性。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.2 边界测试：`MaybeUninit` 的未初始化内存（运行时 UB）
 
@@ -573,7 +573,7 @@ fn main() {
 }
 ```
 
-> **修正**: `MaybeUninit<T>` 是 Rust 中处理未初始化内存的安全抽象。`assume_init()` 告诉编译器"此值已初始化"，但实际上若未写入就读取，是未定义行为。编译器可能将未初始化值视为 `undef`（LLVM），导致任意行为。正确使用模式：1) `MaybeUninit::uninit()` 分配空间；2) `ptr.write(val)` 初始化；3) `assume_init()` 读取。这与 C 的 `malloc` + 使用未初始化内存相同，但 Rust 的类型系统（Type System）追踪初始化状态，Miri 在运行时（Runtime）验证。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `MaybeUninit<T>` 是 Rust 中处理未初始化内存的安全抽象。`assume_init()` 告诉编译器"此值已初始化"，但实际上若未写入就读取，是未定义行为。编译器可能将未初始化值视为 `undef`（LLVM），导致任意行为。正确使用模式：1) `MaybeUninit::uninit()` 分配空间；2) `ptr.write(val)` 初始化；3) `assume_init()` 读取。这与 C 的 `malloc` + 使用未初始化内存相同，但 Rust 的类型系统（Type System）追踪初始化状态，Miri 在运行时（Runtime）验证。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：`mem::transmute` 的大小不匹配（编译错误）
 
@@ -607,7 +607,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的内联汇编（Inline Assembly）（`asm!` macro，stable since 1.59）在编译期验证操作数类型与约束（constraint）的兼容性。`mov` 指令在 x86-64 上操作 64 位寄存器，但 `x` 是 `u32`（32位），类型不匹配导致编译错误。正确写法：统一为 `u64`，或使用 `in("eax") x` 显式指定 32 位寄存器。Rust 的内联汇编比 C 的 `asm` 关键字类型安全：操作数与 Rust 变量绑定，编译器检查类型和生命周期（Lifetimes），自动处理寄存器分配和 clobber 列表。这是 Rust "zero-cost abstraction with safety" 的延伸：直接控制硬件，同时保持类型系统（Type System）的保护。来源: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **修正**: Rust 的内联汇编（Inline Assembly）（`asm!` macro，stable since 1.59）在编译期验证操作数类型与约束（constraint）的兼容性。`mov` 指令在 x86-64 上操作 64 位寄存器，但 `x` 是 `u32`（32位），类型不匹配导致编译错误。正确写法：统一为 `u64`，或使用 `in("eax") x` 显式指定 32 位寄存器。Rust 的内联汇编比 C 的 `asm` 关键字类型安全：操作数与 Rust 变量绑定，编译器检查类型和生命周期（Lifetimes），自动处理寄存器分配和 clobber 列表。这是 Rust "zero-cost abstraction with safety" 的延伸：直接控制硬件，同时保持类型系统（Type System）的保护。来源: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 
 ### 10.6 边界测试：`#[inline(always)]` 与代码膨胀（编译错误/链接错误）
 

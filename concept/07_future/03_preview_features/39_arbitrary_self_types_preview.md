@@ -109,7 +109,7 @@ impl MyType {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/items/traits.html)]**
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]**
 
 ### 2.1 `DispatchFromDyn` Trait
 
@@ -216,7 +216,7 @@ impl<T> TaggedPtr<T> {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/unsafe-blocks.html)]**
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]**
 
 ### 4.1 安全边界
 

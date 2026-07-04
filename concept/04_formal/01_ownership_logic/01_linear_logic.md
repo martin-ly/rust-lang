@@ -20,7 +20,7 @@
 > [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) ·
 > [Utrecht: Ownership Types]
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **Bloom 层级**: 分析 → 评价
@@ -229,7 +229,7 @@ graph TD
     F --> F3[C1: 所有权 ⟹ 工程实现]
 ```
 
-> **认知功能**: 此思维导图提供线性逻辑知识的**五维导航框架**（结构规则、连接词、指数模态、Rust 映射、定理链）。建议在学习初期用作概念定位图，在复习时检验知识覆盖度。关键洞察：线性逻辑不是孤立的形式游戏，而是从 Girard 的推理规则到 Rust borrow checker 的连续谱系。[来源: 💡 原创分析]
+> **认知功能**: 此思维导图提供线性逻辑知识的**五维导航框架**（结构规则、连接词、指数模态、Rust 映射、定理链）。建议在学习初期用作概念定位图，在复习时检验知识覆盖度。关键洞察：线性逻辑不是孤立的形式游戏，而是从 Girard 的推理规则到 Rust borrow checker 的连续谱系。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -258,7 +258,7 @@ graph TD
     style C2 fill:#ff9
 ```
 
-> **认知功能**: 此决策树拆解"线性逻辑禁止所有复制"的过度简化命题，引导读者通过**指数模态判定**到达精确结论。建议在遇到"Rust 禁止复制"等模糊论断时回溯此树。关键洞察：`!A` 是线性逻辑故意设计的"经典出口"，Copy trait 不是规则的破坏而是框架内的特权通道。[来源: 💡 原创分析]
+> **认知功能**: 此决策树拆解"线性逻辑禁止所有复制"的过度简化命题，引导读者通过**指数模态判定**到达精确结论。建议在遇到"Rust 禁止复制"等模糊论断时回溯此树。关键洞察：`!A` 是线性逻辑故意设计的"经典出口"，Copy trait 不是规则的破坏而是框架内的特权通道。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **形式化澄清**: Girard 设计 `!A` 的明确意图就是**在资源敏感框架内恢复经典推理**。Dereliction (`!A ⊢ A`) 是线性逻辑中最关键的"向下转换"规则——它允许将不受限资源降级为线性资源使用。此处为 L1/01_ownership.md §4 "Copy trait" 的精确对应：`i32: Copy` 在 Rust 中正是 `!i32` 的 Dereliction 实现。
 
@@ -281,7 +281,7 @@ graph TD
     style C4 fill:#ff9
 ```
 
-> **认知功能**: 此决策树揭示"线性类型系统（Type System）可判定性"的**条件性真理**，通过递归类型与高阶多态两个分支暴露理论边界。建议在评估类型系统复杂度或理解 Rust borrow checker 设计取舍时参考。关键洞察：Rust 的工程实用性来自于故意回避不可判定区域——显式生命周期（Lifetimes）标注是理论限制向用户体验的优雅妥协。[来源: 💡 原创分析]
+> **认知功能**: 此决策树揭示"线性类型系统（Type System）可判定性"的**条件性真理**，通过递归类型与高阶多态两个分支暴露理论边界。建议在评估类型系统复杂度或理解 Rust borrow checker 设计取舍时参考。关键洞察：Rust 的工程实用性来自于故意回避不可判定区域——显式生命周期（Lifetimes）标注是理论限制向用户体验的优雅妥协。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **形式化澄清**: Rust 通过**拒绝部分递归类型模式**（如直接递归的 `Box<dyn Fn>` 需要显式类型擦除）和**显式生命周期（Lifetimes）参数**来保持 borrow checker 的可判定性。Pierce (TAPL §15.3) 指出："线性类型推断的复杂度取决于结构规则的限制程度——限制越多，推断越易。"此处为 L2/02_type_system.md §5 "类型推断（Type Inference）" 的精确对应——Rust 的类型推断有意保留显式标注点，正是为了避免线性约束下的不可判定区域。
 
@@ -307,7 +307,7 @@ graph TD
     style C5 fill:#9f6
 ```
 
-> **认知功能**: 此决策树对"Rust = 线性逻辑"的**等同谬误**进行三步拆解，从 weakening、内部可变性到生命周期（Lifetimes）逐层揭示映射偏差。建议在跨层解释 Rust 所有权（Ownership）时优先使用此树校准精确度。关键洞察：Rust 所有权是仿射逻辑、区域类型和分离逻辑的三元合成体——线性逻辑只是其必要核心而非充分描述。[来源: 💡 原创分析]
+> **认知功能**: 此决策树对"Rust = 线性逻辑"的**等同谬误**进行三步拆解，从 weakening、内部可变性到生命周期（Lifetimes）逐层揭示映射偏差。建议在跨层解释 Rust 所有权（Ownership）时优先使用此树校准精确度。关键洞察：Rust 所有权是仿射逻辑、区域类型和分离逻辑的三元合成体——线性逻辑只是其必要核心而非充分描述。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **形式化澄清**: 这是最关键的反命题。RustBelt (Jung et al. 2017, 2018) 明确将 Rust 建模为**仿射类型系统**（affine type system），而非严格线性类型系统。三个关键偏差：
 
@@ -926,8 +926,8 @@ Rust 所有权系统（仿射变体）:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

@@ -8,7 +8,7 @@
 > **分级**: [A]
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 ISO C++20、cxx crate 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 ISO C++20、cxx crate 官方文档来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 # C++ 互操作指南（cxx + bindgen） {#c-互操作指南cxx-bindgen}
 

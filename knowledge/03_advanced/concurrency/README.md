@@ -32,7 +32,7 @@
 
 ## 📚 内容
 
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
@@ -42,7 +42,7 @@
 
 ## 🎯 学习路径
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **线程基础** → [threads.md](03_threads.md)
 2. **原子操作** → [atomics.md](01_atomics.md)
@@ -50,7 +50,7 @@
 
 ## 🚀 相关层
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [03_advanced/async/](../async) - 异步编程
 - [06_ecosystem/deep_dives/tokio_deep_dive.md](../../06_ecosystem/deep_dives/02_tokio_deep_dive.md) - Tokio 运行时
@@ -66,7 +66,7 @@
 > [The Rust Programming Language](https://doc.rust-lang.org/book/),
 > [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

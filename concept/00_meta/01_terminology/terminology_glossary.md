@@ -2,7 +2,7 @@
 >
 > 本表为最小国际化 efforts（决策 3-C），聚焦高频术语标准化。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
-> 所有英文术语与 [TRPL](https://doc.rust-lang.org/book/title-page.html) 及 [Rust Reference](https://doc.rust-lang.org/reference/) 保持一致，
+> 所有英文术语与 [TRPL](https://doc.rust-lang.org/book/title-page.html) 及 [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) 保持一致，
 > 确保学习者能顺利对接 crates.io、RFC、GitHub Issue 等英文生态。
 >
 > **标准来源**: TRPL · Rust Reference · std API Docs · Rustnomicon · Async Book · Cargo Book · Edition Guide
@@ -18,12 +18,12 @@
 > **来源**:
 >
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [std API Docs](https://doc.rust-lang.org/std/) ·
-> [Rustnomicon](https://doc.rust-lang.org/nomicon/) ·
-> [Async Book](https://rust-lang.github.io/async-book/) ·
-> [Cargo Book](https://doc.rust-lang.org/cargo/) ·
-> [Edition Guide](https://doc.rust-lang.org/edition-guide/)
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [std API Docs](https://doc.rust-lang.org/std/index.html) ·
+> [Rustnomicon](https://doc.rust-lang.org/nomicon/index.html) ·
+> [Async Book](https://rust-lang.github.io/async-book/index.html) ·
+> [Cargo Book](https://doc.rust-lang.org/cargo/index.html) ·
+> [Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)
 > **受众**: [初学者]
 ---
 
@@ -63,7 +63,7 @@
 - **模块** (Module) [L1] — 通过 `mod` 组织的代码命名空间单元 — [TRPL](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html)
 - **包** (Package) [L1] — 包含一个或多个 crate 的 Cargo 项目 — [TRPL](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html)
 - **crate** (Crate) [L1] — Rust 的编译单元和包管理基本单位 — [TRPL](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html)
-- **Cargo** (Cargo) [L1] — Rust 官方的包管理与构建工具 — [Cargo Book](https://doc.rust-lang.org/cargo/)
+- **Cargo** (Cargo) [L1] — Rust 官方的包管理与构建工具 — [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
 - **panic** (Panic) [L1] — 不可恢复错误导致的线程栈展开与终止 — [TRPL](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)
 - **Result** (Result) [L1] — 显式处理可恢复错误的 `Ok(T)` 或 `Err(E)` — [TRPL](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)
 - **Option** (Option) [L1] — 显式处理可选值的 `Some(T)` 或 `None` — [TRPL](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)
@@ -196,7 +196,7 @@
 - **Serde** (Serde) [L5+] — Rust 生态通用的序列化与反序列化框架 — [serde.rs](https://serde.rs/)
 - **Protobuf** (Protocol Buffers) [L5+] — Google 的二进制数据交换格式与代码生成 — [protobuf.dev](https://protobuf.dev/)
 - **gRPC** (gRPC) [L5+] — 基于 HTTP/2 的高性能远程过程调用框架 — [grpc.io](https://grpc.io/)
-- **WebAssembly** (WebAssembly / WASM) [L5+] — 可移植二进制指令格式，Rust 可编译为目标 — [Rust and WASM](https://rustwasm.github.io/book/)
+- **WebAssembly** (WebAssembly / WASM) [L5+] — 可移植二进制指令格式，Rust 可编译为目标 — [Rust and WASM](https://rustwasm.github.io/docs/book/index.html)
 - **WASI** (WASI) [L5+] — WebAssembly 的系统接口标准规范 — [WASI Spec](https://github.com/WebAssembly/WASI)
 - **嵌入式** (Embedded) [L5+] — 无操作系统或 RTOS 环境下的 Rust 开发 — [Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)
 - **实时系统** (Real-Time Systems) [L5+] — 有严格时间约束的确定性执行环境 — [Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)

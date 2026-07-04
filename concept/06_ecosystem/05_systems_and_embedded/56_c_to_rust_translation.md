@@ -26,8 +26,8 @@
 
 **变更日志**:
 
-- v1.0 (2026-05-26): 初始创建。覆盖 DARPA TRACTOR、Scylla、&inator、His2Trans、C2Rust 生态等最新权威来源 [来源: Web Authority Alignment Sprint]
-- v1.1 (2026-05-26): 权威内容对齐：补充 Hayroll (PLDI 2026) — C 宏（Macro）与条件编译的模块（Module）化翻译，符号执行驱动配置覆盖，翻译器无关设计 [来源: Web Authority Alignment Batch 14]
+- v1.0 (2026-05-26): 初始创建。覆盖 DARPA TRACTOR、Scylla、&inator、His2Trans、C2Rust 生态等最新权威来源 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
+- v1.1 (2026-05-26): 权威内容对齐：补充 Hayroll (PLDI 2026) — C 宏（Macro）与条件编译的模块（Module）化翻译，符号执行驱动配置覆盖，翻译器无关设计 [Web Authority AlignmentBatch 14](../../00_meta/02_sources/international_authority_index.md)
 
 ---
 
@@ -353,8 +353,8 @@ pub fn call_c_function() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
-> **权威来源对齐变更日志**: 2026-05-26 创建 C-to-Rust 翻译生态专题文件，对齐 DARPA TRACTOR、PLDI 2026、OOPSLA 2026 等最新权威来源 [来源: Web Authority Alignment Sprint]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)
+> **权威来源对齐变更日志**: 2026-05-26 创建 C-to-Rust 翻译生态专题文件，对齐 DARPA TRACTOR、PLDI 2026、OOPSLA 2026 等最新权威来源 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
 
 - 2026-05-26 R22: 补充 SmartC2Rust (ICSE 2026) — 迭代反馈驱动的 LLM C→Rust 翻译 [来源: ICSE 2026]
 

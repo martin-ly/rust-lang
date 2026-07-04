@@ -31,7 +31,7 @@
 
 ## 一、Rust 数据库系统全景
 
-> **[来源: 💡 原创分析]** · 综合各项目官方文档 ✅
+> **[💡 原创分析](../../00_meta/00_framework/methodology.md)** · 综合各项目官方文档 ✅
 
 Rust 在数据库领域的渗透呈现"基础设施层优先"的特征：
 
@@ -185,7 +185,7 @@ impl Index {
 }
 ```
 
-> **关键洞察**: 搜索引擎的"段（segment）不可变性"与 Rust 的所有权（Ownership）模型天然匹配。Lucene/Elasticsearch 的段一旦写入即不可变，新的写入创建新段，后台合并旧段。Rust 的 `&T` 共享引用（Reference）完美表达了"段可被并发读取但不可修改"的语义，无需额外的读写锁。[来源: 💡 原创分析] · [Tantivy 设计文档] ✅
+> **关键洞察**: 搜索引擎的"段（segment）不可变性"与 Rust 的所有权（Ownership）模型天然匹配。Lucene/Elasticsearch 的段一旦写入即不可变，新的写入创建新段，后台合并旧段。Rust 的 `&T` 共享引用（Reference）完美表达了"段可被并发读取但不可修改"的语义，无需额外的读写锁。[💡 原创分析](../../00_meta/00_framework/methodology.md) · [Tantivy 设计文档] ✅
 
 ---
 
@@ -227,7 +227,7 @@ FROM person:tobie;
 
 ## 六、跨系统选型决策矩阵
 
-> **[来源: 💡 原创分析]** · 综合上述所有来源 ✅
+> **[💡 原创分析](../../00_meta/00_framework/methodology.md)** · 综合上述所有来源 ✅
 
 | 需求 | 推荐系统 | 理由 |
 |:---|:---|:---|
@@ -313,13 +313,13 @@ fn main() {
 }
 ```
 
-> **设计意图**: 此示例展示数据库系统的**数据模型**与**查询接口**核心——`HashMap` 作为最小存储引擎，`query_by_prefix` 模拟索引扫描。Rust 的 `HashMap` 在标准库中已针对缓存局部性优化（Robin Hood 哈希），与生产级嵌入式数据库（如 RocksDB、Sled）的设计哲学一致：数据局部性优先。 [来源: 💡 原创实现]
+> **设计意图**: 此示例展示数据库系统的**数据模型**与**查询接口**核心——`HashMap` 作为最小存储引擎，`query_by_prefix` 模拟索引扫描。Rust 的 `HashMap` 在标准库中已针对缓存局部性优化（Robin Hood 哈希），与生产级嵌入式数据库（如 RocksDB、Sled）的设计哲学一致：数据局部性优先。 [💡 原创实现](../../00_meta/00_framework/methodology.md)
 
 ---
 
 ## 八、编译错误示例
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]** 数据库系统中常见的 Rust 编译错误模式。
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]** 数据库系统中常见的 Rust 编译错误模式。
 
 ### 编译错误 1：`Arc<RefCell<T>>` 跨线程共享
 
@@ -402,7 +402,7 @@ struct PoolFixed {
 }
 ```
 
-> **修正**: 数据库连接池通常需要在多线程间共享。`Rc<T>` 使用非原子引用（Reference）计数，不能跨线程。必须使用 `Arc<T>`（原子引用计数）包装连接对象。这是 Rust 并发模型的基本约束——共享状态必须是 `Send + Sync`。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: 数据库连接池通常需要在多线程间共享。`Rc<T>` 使用非原子引用（Reference）计数，不能跨线程。必须使用 `Arc<T>`（原子引用计数）包装连接对象。这是 Rust 并发模型的基本约束——共享状态必须是 `Send + Sync`。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 编译错误 5：SQLx 查询类型不匹配（编译错误）
 

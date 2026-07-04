@@ -56,7 +56,7 @@
 ## 概述 {#概述}
 
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Workflow Engine](https://en.wikipedia.org/wiki/Workflow_Engine)** · **来源: [Wikipedia - Business Process Management](https://en.wikipedia.org/wiki/Business_Process_Management)** · **[来源: ACM - Workflow System Design]** · **[来源: IEEE - Process Automation Standards]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Workflow Engine](https://en.wikipedia.org/wiki/Workflow_Engine)** · **来源: [Wikipedia - Business Process Management](https://en.wikipedia.org/wiki/Business_Process_Management)** · **[ACM - Workflow System Design](https://dl.acm.org/)** · **[IEEE - Process Automation Standards](https://ieeexplore.ieee.org/)**
 
 工作流引擎能力矩阵对比主流工作流引擎的功能特性、适用场景和Rust集成能力，为技术选型提供参考。
 
@@ -433,7 +433,7 @@ impl<S: State> Workflow<S> {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 

@@ -86,7 +86,7 @@ union UnionName {
 
 联合体就像一个“可变形状的容器”：你可以把不同的东西放进去，但容器本身只有一份空间。你不能同时看到所有形状；你必须告诉 Rust：“我现在把它当作形状 A 来读。” 这需要你自己保证没有搞错。
 
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -407,6 +407,6 @@ D. 取决于是否实现 Copy
 
 ---
 
-> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/), [The Rustonomicon](https://doc.rust-lang.org/nomicon/), [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
-> **权威来源对齐变更日志**: 2026-07-04 创建 来源: Rust 1.96.1 Reference、[Rustonomicon](https://doc.rust-lang.org/nomicon/)、Unsafe Code Guidelines 对齐
+> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html), [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
+> **权威来源对齐变更日志**: 2026-07-04 创建 来源: Rust 1.96.1 Reference、[Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)、Unsafe Code Guidelines 对齐
 > **状态**: ✅ 权威来源对齐完成

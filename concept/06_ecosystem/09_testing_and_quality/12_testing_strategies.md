@@ -357,7 +357,7 @@ graph TD
 > **认知功能**: 此决策树评估 Rust 代码的测试需求。核心判断标准是**unsafe 使用**和**业务逻辑复杂度**。
 > **使用建议**: Rust 的类型系统（Type System）保证**内存安全（Memory Safety）**和**线程安全**，但不保证**逻辑正确性**。业务逻辑、算法实现、边界条件仍需充分测试。
 > **关键洞察**: Rust 的编译期保证减少了**安全相关测试**的需求，但不减少**功能正确性测试**的需求。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -454,7 +454,7 @@ jobs:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-00-testing.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-00-testing.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
 
 **文档版本**: 1.0

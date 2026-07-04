@@ -20,7 +20,7 @@
 > **关键词**: 异步运行时、任务调度、I/O驱动
 > **权威来源**: [Tokio 官方文档](https://docs.rs/tokio/latest/tokio/), [Tokio 教程](https://tokio.rs/tokio/tutorial), [Rust Async Book](https://rust-lang.github.io/async-book/), [RFC 2394: async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Tokio 运行时架构来源标注、Rust 异步模型学术引用、work-stealing 调度算法来源 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Tokio 运行时架构来源标注、Rust 异步模型学术引用、work-stealing 调度算法来源 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [实验级]

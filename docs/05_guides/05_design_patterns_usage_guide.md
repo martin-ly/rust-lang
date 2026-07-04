@@ -2423,7 +2423,7 @@ where
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -2441,9 +2441,9 @@ where
 > **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
 > **来源: [Wikipedia - Gang of Four](https://en.wikipedia.org/wiki/Gang_of_Four)**
 > **来源: [Wikipedia - Anti-pattern](https://en.wikipedia.org/wiki/Anti_pattern)**
-> **[来源: IEEE - Software Architecture Patterns]**
-> **[来源: ACM - Design Patterns in Rust]**
-> **[来源: Gamma et al. 1994 - Design Patterns]**
+> **[IEEE - Software Architecture Patterns](https://ieeexplore.ieee.org/)**
+> **[ACM - Design Patterns in Rust](https://dl.acm.org/)**
+> **[Gamma et al. 1994 - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)**
 > **来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)**

@@ -57,7 +57,7 @@ fn main() {}
 >
 > 这与 Haskell 的 `type` synonym（完全透明，不隐藏实现）或 OCaml 的 `module type`（模块（Module）签名抽象，类似但不同粒度）不同——Rust 的 TAIT 是类型系统（Type System）的精确抽象机制。
 > [来源: [TAIT Tracking Issue](https://github.com/rust-lang/rust/issues/63063)] ·
-> [来源: [Type Alias Impl Trait](https://rust-lang.github.io/rfcs//2515-type_alias_impl_trait.html)]
+> [来源: [Type Alias Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)]
 >
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)

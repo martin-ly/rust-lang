@@ -15,8 +15,8 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Performance Engineering](https://en.wikipedia.org/wiki/Performance_Engineering)** ·
 > **来源: [Wikipedia - Software Optimization](https://en.wikipedia.org/wiki/Software_Optimization)** ·
-> **[来源: ACM - Performance Measurement Methodology]** ·
-> **[来源: IEEE - Software Performance Standards]**
+> **[ACM - Performance Measurement Methodology](https://dl.acm.org/)** ·
+> **[IEEE - Software Performance Standards](https://ieeexplore.ieee.org/)**
 >
 
 ```mermaid
@@ -340,7 +340,7 @@ criterion_main!(benches);
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

@@ -259,7 +259,7 @@ graph TD
 > **认知功能**：
 > 此流程图揭示 Cargo Script 的"隐式编译"本质——单文件并非解释执行，而是经 frontmatter 解析、临时 crate 生成、缓存复用等步骤透明地完成编译。
 > 建议在理解执行延迟来源（首次编译 vs 缓存命中）和调试脚本依赖问题时调用此心智模型。
-> 关键洞察：缓存键基于文件内容与 frontmatter 的哈希，修改任一字符即触发重新编译。[来源: 💡 原创分析]
+> 关键洞察：缓存键基于文件内容与 frontmatter 的哈希，修改任一字符即触发重新编译。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **思维表征说明**: `graph TD` 流程图将 Cargo Script 的**内部执行机制**可视化——从单文件输入到最终运行的完整管道。
 > 关键洞察：Cargo Script 并非「无需编译」，而是「**隐式管理编译**」——frontmatter 被解析为临时 `Cargo.toml`，编译缓存存储在 `~/.cargo/script-cache/`，第二次执行时若源码未变更则直接复用。
@@ -296,7 +296,7 @@ graph TD
 > 建议在面对"这个脚本该用 Cargo Script 还是 cargo new？"的抉择时激活此判断框架。
 > 关键洞察：Cargo Script 的适用域是"快速验证与分享"，而非"长期维护与协作"；
 > gist 友好的背后是 workspace 和 build.rs 等高级功能的缺失。
-> [来源: 💡 原创分析]
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **思维表征说明**:
 > 此决策树帮助程序员在「Cargo Script」和「传统 Cargo 项目」之间做出**工程化的选择**
 > ——不是「Cargo Script 可以替代所有项目」，而是「根据项目规模、依赖复杂度、构建需求选择适当的工具」。
@@ -442,9 +442,9 @@ Cargo Script:  File = Crate (单模块，无子模块)
 | **Scripting language** | [Scripting language](https://en.wikipedia.org/wiki/Scripting_language) | 脚本语言 |
 | **Package manager** | [Package manager](https://en.wikipedia.org/wiki/Package_manager) | 包管理器 |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -494,7 +494,7 @@ fn main() {
 > 依赖解析遵循与普通 Cargo 项目相同的规则，但错误信息可能更复杂（因为无显式 Cargo.toml）。
 > 版本冲突时，Cargo 使用统一版本选择算法（unification），可能选择比预期更新的版本。
 > 这与 Python 的 `pip install` 或 Node 的 `npx` 不同——Cargo 的依赖解析是确定性的，生成 `Cargo.lock` 锁定版本。
-> [来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/)]
+> [来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/index.html)]
 
 ### 10.2 边界测试：单文件脚本的模块限制（编译错误）
 
@@ -511,7 +511,7 @@ fn main() {
 > 若需多模块，必须使用常规 Cargo 项目（`cargo new`）。
 > 这与 Python 的 `if __name__ == "__main__"` 单文件脚本不同——Rust 的模块系统严格映射到文件系统。
 > `cargo script` 适合快速原型和单次运行任务，复杂项目仍需完整项目结构。
-> [来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/)]
+> [来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/index.html)]
 
 ### 10.5 边界测试：`cargo script` 的缓存与依赖版本漂移（运行时行为变化）
 
@@ -540,7 +540,7 @@ fn main() {
 > 这与 Python 的 `pip install`（同样解析最新版本）或 Node 的 `npx`（每次可能下载最新版本）相同——便捷与确定性是权衡。
 > `cargo` 的 lock 文件机制缓解了部分风险，但 script 的隐式性增加了不确定性。
 > [来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs//3502-cargo-script.html)] ·
-> [来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/)]
+> [来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/index.html)]
 
 ### 10.7 边界测试：cargo script 的依赖解析与版本冲突（运行时/编译错误）
 
@@ -575,7 +575,7 @@ fn main() {
 > 这与 Python 的 `pip` + `requirements.txt`（类似冲突）或 Deno 的 URL 导入（无版本冲突，但无版本管理）不同
 > ——Cargo 的依赖解析是行业中最成熟的之一，但单文件脚本的限制仍需注意。
 > [来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs//3424-cargo-script.html)] ·
-> [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)]
+> [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)]
 
 ### 10.3 边界测试：cargo script 的 shebang 与 Windows 兼容性（运行时错误）
 
@@ -607,7 +607,7 @@ fn main() {
 > 这与 Python 的 shebang（跨平台更成熟）或 Deno 的 `deno run script.ts`（内置脚本运行，无需 shebang）不同
 > ——Rust 的 cargo script 是实验性功能，仍在演进。
 > [来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs//3424-cargo-script.html)] ·
-> [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)]
+> [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)]
 > **过渡**: Cargo Script：单文件 Rust 程序 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链

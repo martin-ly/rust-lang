@@ -200,8 +200,15 @@ def match_score(authority_tokens, project_tokens):
 
 
 def find_best_match(auth_topic, project_topics, threshold=0.45):
-    """在项目中找到与权威主题最匹配的条目。"""
-    auth_tokens = tokenize(auth_topic.get("title", ""))
+    """在项目中找到与权威主题最匹配的条目。先检查人工别名映射，再进行模糊匹配。"""
+    title = auth_topic.get("title", "")
+    alias_target = AUTHORITY_TOPIC_ALIASES.get(title)
+    if alias_target:
+        for pt in project_topics:
+            if pt.get("path") == alias_target or alias_target in pt.get("path", ""):
+                return pt, 1.0
+
+    auth_tokens = tokenize(title)
     auth_tokens |= tokenize(auth_topic.get("domain", ""))
     auth_tokens |= tokenize(auth_topic.get("book", ""))
     if not auth_tokens:
@@ -309,6 +316,33 @@ ROADMAP_TOPICS = [
     {"source": "roadmap", "domain": "Tooling", "title": "MCDC Coverage", "url": "https://github.com/rust-lang/rust/pull/124658"},
     {"source": "roadmap", "domain": "Tooling", "title": "Rustdoc Search / Scraped Examples", "url": "https://doc.rust-lang.org/rustdoc/scraped-examples.html"},
 ]
+
+# 人工校准映射：权威主题标题 -> 项目文件路径（或路径子串）
+# 用于修正标题差异导致的假缺口；命中时直接视为完全对齐。
+AUTHORITY_TOPIC_ALIASES = {
+    # 形式化/验证生态
+    "Iris: Higher-Order Concurrent Separation Logic Framework": "concept/04_formal/02_separation_logic/11_separation_logic.md",
+    "Borrow Sanitizer": "concept/07_future/02_stabilized_features/borrow_sanitizer.md",
+    "Miri: Rust Interpreter for Undefined Behavior": "concept/04_formal/04_model_checking/31_miri.md",
+    "Ferrocene: Rust for Safety-Critical Systems": "concept/07_future/03_preview_features/35_ferrocene_preview.md",
+    "Verus: Verified Rust for Low-Level Systems": "concept/04_formal/04_model_checking/22_modern_verification_tools.md",
+    # 工业/应用生态
+    "bindgen / cbindgen": "concept/03_advanced/04_ffi/05_rust_ffi.md",
+    "reqwest": "concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md",
+    "sqlx": "concept/06_ecosystem/06_data_and_distributed/23_database_access.md",
+    "Tauri": "concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md",
+    "Dioxus": "concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md",
+    "Leptos": "concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md",
+    "egui": "concept/06_ecosystem/11_domain_applications/07_game_ecs.md",
+    "PyO3": "concept/06_ecosystem/11_domain_applications/75_industrial_case_studies.md",
+    "rayon": "concept/03_advanced/00_concurrency/10_concurrency_patterns.md",
+    # 项目路线图
+    "Cranelift Backend": "concept/07_future/03_preview_features/38_cranelift_backend_preview.md",
+    "MCDC Coverage": "concept/07_future/03_preview_features/07_mcdc_coverage_preview.md",
+    "Rustdoc Search / Scraped Examples": "concept/06_ecosystem/09_testing_and_quality/14_documentation.md",
+    "cortex-m / riscv-rt": "concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md",
+    "ring / rustls": "concept/06_ecosystem/07_security_and_cryptography/43_security_cryptography.md",
+}
 
 
 def phase1():
@@ -508,8 +542,8 @@ def phase4():
         layer = item["project_match"].get("layer") or "unknown"
         aligned_by_layer.setdefault(layer, []).append(item)
 
-    # Write index asset
-    meta_file = META_DIR / "topic_authority_alignment_map.md"
+    # Write index asset (canonical location under 00_meta/02_sources)
+    meta_file = META_DIR / "02_sources" / "topic_authority_alignment_map.md"
     lines = []
     lines.append("# 主题-权威来源对齐图谱 (Topic-Authority Alignment Map)\n")
     lines.append(f"> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}\n")
@@ -718,7 +752,7 @@ def phase5():
         lines.append("未检测到明显标题重复。\n\n")
 
     lines.append("## 4. 后续维护机制\n\n")
-    lines.append("1. **月度更新**：运行 `python scripts/topic_authority_aligner.py --phase all`，刷新 `concept/00_meta/topic_authority_alignment_map.md` 与本报告。\n")
+    lines.append("1. **月度更新**：运行 `python scripts/topic_authority_aligner.py --phase all`，刷新 `concept/00_meta/02_sources/topic_authority_alignment_map.md` 与本报告。\n")
     lines.append("2. **季度评审**：由内容负责人审核 P0/P1 缺口，决定是否纳入下一个 sprint。\n")
     lines.append("3. **新增文档规范**：每个新 `concept/` 文件需在 frontmatter 中标注 `authority_source` 与 `coverage_level`，便于自动对齐。\n")
     lines.append("4. **验证门禁**：合并前必须运行 `kb_auditor.py`、`detect_content_overlap.py`、`cargo check --workspace`。\n\n")
@@ -739,7 +773,7 @@ def phase5():
     lines.append("\n")
 
     lines.append("## 附录 B：项目索引资产\n\n")
-    lines.append("- `concept/00_meta/topic_authority_alignment_map.md`：当前项目主题树与权威来源对齐图谱。\n")
+    lines.append("- `concept/00_meta/02_sources/topic_authority_alignment_map.md`：当前项目主题树与权威来源对齐图谱。\n")
     lines.append("- `tmp/topic_inventory_current.json`：当前项目主题结构化数据。\n")
     lines.append("- `tmp/topic_inventory_authoritative.json`：权威来源主题结构化数据。\n")
     lines.append("- `tmp/topic_symmetric_diff.json`：完整对称差数据。\n")

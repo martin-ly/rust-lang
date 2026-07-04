@@ -329,7 +329,7 @@ fn rebind_vs_assign() {
 }
 ```
 
-> **关键洞察**: Rust 的 `let mut x = 5; x = 6;` 是**存储模型**的赋值（更新存储中的值），而 `let x = 5; let x = 6;`（shadowing）是**环境模型**的重新绑定（创建新环境条目）。这是两种变量模型在同一语言中的共存。[来源: 💡 原创分析]
+> **关键洞察**: Rust 的 `let mut x = 5; x = 6;` 是**存储模型**的赋值（更新存储中的值），而 `let x = 5; let x = 6;`（shadowing）是**环境模型**的重新绑定（创建新环境条目）。这是两种变量模型在同一语言中的共存。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 7.2 边界测试：Move 后的环境-存储状态
 
@@ -387,13 +387,13 @@ fn reference_vs_pointer() {
 | 环境模型与存储模型 | [SICP Ch.3] · [Pierce TAPL §13] | ✅ | Tier 1 |
 | Rust 所有权（Ownership） = 存储模型 + 线性约束 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [LL87] | ✅ | Tier 1 |
 | C++ 值类别体系 | [C++ Standard §7.2.1] | ✅ | Tier 1 |
-| Rust place/value expression | [Rust Reference §8.2.8](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
+| Rust place/value expression | [Rust Reference §8.2.8](https://doc.rust-lang.org/reference/introduction.html) | ✅ | Tier 1 |
 | Rust 消除 xvalue 类别 | [💡 原创分析] | ⚠️ | Tier 3 |
 | 变量模型对比矩阵 | [💡 原创分析] | ⚠️ | Tier 3 |
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [TRPL](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) ·
 > [Pierce TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
@@ -423,7 +423,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的 `let` 绑定允许延迟初始化（declarative without immediate initialization），但编译器通过" definite assignment analysis "确保变量在使用前已被赋值。这与 C/C++ 的未初始化变量（包含垃圾值）形成鲜明对比——Rust 在编译期阻止使用未初始化变量。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 的 `let` 绑定允许延迟初始化（declarative without immediate initialization），但编译器通过" definite assignment analysis "确保变量在使用前已被赋值。这与 C/C++ 的未初始化变量（包含垃圾值）形成鲜明对比——Rust 在编译期阻止使用未初始化变量。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：`const` 与 `static` 的 `Drop` 限制（编译错误）
 
@@ -458,7 +458,7 @@ fn init() {
 // static STATIC_RES_NEW: std::sync::OnceLock<Resource> = std::sync::OnceLock::new();
 ```
 
-> **修正**: `const` 变量在编译期求值并内联到使用处，要求值实现 `Copy` 或 `'static` 且不含运行时（Runtime）分配。`static` 变量在数据段分配，允许非 `Copy` 类型，但初始化必须是编译期常量（Rust 1.83+ 的 `const {}` 块放宽了部分限制）。`String`、`Vec` 等堆分配类型不能作为 `const`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: `const` 变量在编译期求值并内联到使用处，要求值实现 `Copy` 或 `'static` 且不含运行时（Runtime）分配。`static` 变量在数据段分配，允许非 `Copy` 类型，但初始化必须是编译期常量（Rust 1.83+ 的 `const {}` 块放宽了部分限制）。`String`、`Vec` 等堆分配类型不能作为 `const`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.3 边界测试：变量遮蔽（shadowing）与不可变引用的冲突（编译错误）
 

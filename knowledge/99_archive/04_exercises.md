@@ -11,13 +11,13 @@
 
 ## 入门练习 ⭐
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 掌握 Rust 的所有权系统和基础语法。
 
 ### 练习 1: 所有权转移
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **描述**: 理解 Rust 的所有权转移机制。
 
@@ -65,7 +65,7 @@ fn borrow_string(s: &String) {
 
 ### 练习 2: 可变引用
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **描述**: 掌握可变引用的使用规则。
 
@@ -105,7 +105,7 @@ fn main() {
 
 ### 练习 3: 生命周期基础
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **描述**: 理解生命周期的基本概念。
 
@@ -144,7 +144,7 @@ fn main() {
 
 ### 练习 4: 结构体与所有权
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **描述**: 在结构体中管理所有权。
 
@@ -1681,7 +1681,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [来源: Rust 官方文档](https://doc.rust-lang.org/)
+> **权威来源**: [Rust Official Docs](https://doc.rust-lang.org/)(https://doc.rust-lang.org/)
 
 ---
 

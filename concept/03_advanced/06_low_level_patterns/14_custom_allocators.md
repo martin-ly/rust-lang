@@ -13,7 +13,7 @@
 ---
 
 > **来源**: [std::alloc::GlobalAlloc](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html) · [Reference — Allocator API](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [Rust Reference — Allocation](https://doc.rust-lang.org/std/alloc/index.html) ·
 > [RFC 1398 — Global Allocators](https://rust-lang.github.io/rfcs//1398-kinds-of-allocators.html) ·
 > [Wikipedia — Memory Management](https://en.wikipedia.org/wiki/Memory_management)
@@ -365,7 +365,7 @@ graph TD
 ```
 
 > **边界要点**: 自定义分配器的边界与**unsafe 风险**、**生态兼容性**、**平台差异**和**调试复杂度**相关。
-> [来源: [Rustonomicon — Allocators](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon — Allocators](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -423,7 +423,7 @@ graph TD
 | [Rust Reference — Allocation](https://doc.rust-lang.org/std/alloc/index.html) | ✅ 一级 | 官方参考 |
 | [std::alloc](https://doc.rust-lang.org/std/alloc/index.html) | ✅ 一级 | 标准库 API |
 | [RFC 1398](https://rust-lang.github.io/rfcs//1398-kinds-of-allocators.html) | ✅ 一级 | 全局分配器 RFC |
-| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ 一级 | unsafe 指南 |
+| [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) | ✅ 一级 | unsafe 指南 |
 | [jemalloc](http://jemalloc.net/) | ✅ 二级 | 高性能分配器 |
 | [mimalloc](https://github.com/microsoft/mimalloc) | ✅ 二级 | 安全快速分配器 |
 | [bumpalo](https://docs.rs/bumpalo/latest/bumpalo/) | ✅ 二级 | Bump 分配器 crate |
@@ -494,9 +494,9 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 11]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -536,7 +536,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的全局分配器 API 要求 `alloc` 和 `dealloc` 使用**完全相同的布局**（大小和对齐）。使用错误布局释放内存是未定义行为，可能导致分配器元数据损坏、双重释放或内存泄漏。这与 C 的 `malloc`/`free`（只需配对）不同——Rust 的分配器可能使用大小类（size class）优化，`Layout` 信息对正确释放至关重要。自定义分配器实现必须严格遵守此契约。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: Rust 的全局分配器 API 要求 `alloc` 和 `dealloc` 使用**完全相同的布局**（大小和对齐）。使用错误布局释放内存是未定义行为，可能导致分配器元数据损坏、双重释放或内存泄漏。这与 C 的 `malloc`/`free`（只需配对）不同——Rust 的分配器可能使用大小类（size class）优化，`Layout` 信息对正确释放至关重要。自定义分配器实现必须严格遵守此契约。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.2 边界测试：`Vec` 自定义分配器的泛型参数（编译错误）
 
@@ -568,7 +568,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的自定义分配器 API（`Allocator` trait）截至 1.95+ 仍为**不稳定特性**（`#![feature(allocator_api)]`）。`Vec<T, A>`、`Box<T, A>` 等类型的第二个泛型（Generics）参数只在 nightly 可用。稳定 Rust 中，自定义分配通常通过全局分配器替换（`#[global_allocator]`）实现，而非为单个集合指定分配器。这与 C++ 的 `std::allocator`（稳定且广泛使用）形成对比——Rust 的分配器设计更强调全局优化和安全性，牺牲了部分灵活性。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+> **修正**: Rust 的自定义分配器 API（`Allocator` trait）截至 1.95+ 仍为**不稳定特性**（`#![feature(allocator_api)]`）。`Vec<T, A>`、`Box<T, A>` 等类型的第二个泛型（Generics）参数只在 nightly 可用。稳定 Rust 中，自定义分配通常通过全局分配器替换（`#[global_allocator]`）实现，而非为单个集合指定分配器。这与 C++ 的 `std::allocator`（稳定且广泛使用）形成对比——Rust 的分配器设计更强调全局优化和安全性，牺牲了部分灵活性。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)]
 
 ### 10.3 边界测试：全局分配器的 `#[global_allocator]` 重复定义（编译错误）
 
@@ -625,7 +625,7 @@ unsafe impl GlobalAlloc for MyAlloc {
 > 但即使是安全的 `Allocator` API，底层实现仍需 unsafe 代码与操作系统分配器交互。
 > 这与 C 的 `malloc`/`free`（无对齐要求，由调用者保证）或 C++ 的 `std::allocator`（有 `allocate`/`deallocate` 但无运行时验证）不同——Rust 正在逐步增加分配器 API 的安全性。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)] ·
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.5 边界测试：分配器的 `dealloc` 与 `alloc` 的布局不匹配（运行时 UB）
 
@@ -659,7 +659,7 @@ fn main() {
 > 这与 C 的 `free`（只接受指针，无布局信息，依赖分配器内部追踪）或 C++ 的 `delete`（调用析构函数 + 释放，类型决定大小）不同
 > ——Rust 的 `GlobalAlloc` 要求显式布局，增加了安全性但也增加了出错机会。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)] ·
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：全局分配器与 `#[global_allocator]` 重复定义（编译错误）
 
@@ -696,7 +696,7 @@ fn main() {}
 > 这与 C 的 `malloc` 重载（通过宏（Macro）或链接器钩子）或 C++ 的 `operator new` 重载（类级别和全局级别）不同
 > ——Rust 的全局分配器替换是 crate 级别的，通过 trait 系统保证接口一致性（Coherence）。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)] ·
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.4 边界测试：自定义分配器的 Layout 不匹配与内存安全（运行时 UB）
 
@@ -747,7 +747,7 @@ fn main() {}
 ```
 
 > **修正**: **名称唯一性**：1) 同一作用域内不能有两个同名函数；2) trait 方法可同名（通过 trait 区分）；3) 重载（overloading）不支持（除 trait 外）。
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

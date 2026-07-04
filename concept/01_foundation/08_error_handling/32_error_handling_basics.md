@@ -534,7 +534,7 @@ graph TD
 ```
 
 > **边界要点**: 错误处理的边界与**类型设计**、**? 限制**、**性能**、**并发**和**FFI**相关。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -615,9 +615,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 12]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -686,7 +686,7 @@ fn main_fixed() -> Result<(), String> {
 > `?` 运算符只能在返回 `Result`、`Option` 或实现 `Try` trait 的类型的函数中使用。
 > 它会将错误值自动转换为函数返回类型（通过 `From` trait）。
 > 在 `main` 中如需使用 `?`，将 `main` 的返回类型改为 `Result<(), E>`。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.3 边界测试：`Result` 与 `Option` 的混用（编译错误）
 
@@ -765,7 +765,7 @@ fn main() {
 > 风险：错误使用导致任意行为（可能读取无效内存、可能崩溃、可能静默错误）。
 > 这与 C 的 `*(int*)NULL`（同样 UB，但编译器可能不警告）或 Swift 的 `try!`（运行时（Runtime） panic，非 UB）不同——Rust 的 `unwrap_unchecked` 是真正的"无安全网"操作。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/result/enum.Result.html)] ·
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.5 边界测试：生命周期参数的不匹配返回
 
@@ -787,15 +787,15 @@ fn main() {}
 >
 > **权威来源**:
 >
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
-> [Rust Standard Library](https://doc.rust-lang.org/std/) ·
-> [Rust RFCs](https://rust-lang.github.io/rfcs/)
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
+> [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 > **权威来源**:
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
-> [Rust Standard Library](https://doc.rust-lang.org/std/)
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 实践

@@ -25,7 +25,7 @@
 >
 > [rclrs](https://docs.rs/rclrs/) ·
 > [ROS2 Rust](https://github.com/ros2-rust/ros2_rust) ·
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 > [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
 > [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
@@ -46,7 +46,7 @@
 > [ROS2 Real-Time Paper — Maruyama et al. 2016](https://doi.org/10.1109/IROS.2016.7758091) ·
 > [ROS2 Executor Paper — Casini et al. 2019](https://doi.org/10.1109/LRA.2020.2967328) ·
 > [PREEMPT_RT Wiki](https://wiki.linuxfoundation.org/realtime/start) ·
-> [Rust Embedded Book](https://docs.rust-embedded.org/book/)
+> [Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)
 > **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -460,7 +460,7 @@ impl Drop for RtMutex {
 
 ### 4.3 no_std + RTOS 集成
 
-> **[Rust Embedded Book](https://docs.rust-embedded.org/book/)** 对于最严苛的实时场景（如电机驱动、飞控），Rust 可以在 `no_std` 环境下直接运行在 RTOS 上，绕过 Linux 的调度不确定性。[来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
+> **[Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)** 对于最严苛的实时场景（如电机驱动、飞控），Rust 可以在 `no_std` 环境下直接运行在 RTOS 上，绕过 Linux 的调度不确定性。[来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)]
 
 | **RTOS** | **Rust 支持** | **特色** | **适用场景** |
 |:---|:---:|:---|:---|
@@ -762,7 +762,7 @@ impl<const N: usize, const M: usize> KalmanFilter<N, M> {
            比 C/C++ 更强的时序和并发保证。
 ```
 
-> **来源**: [ROS2 Rust WG Roadmap](https://github.com/ros2-rust/ros2_rust) · [RTIC Safety Guarantees](https://rtic.rs/2/book/en/) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **来源**: [ROS2 Rust WG Roadmap](https://github.com/ros2-rust/ros2_rust) · [RTIC Safety Guarantees](https://rtic.rs/2/book/en/) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 
 ### 7.2 边界极限
 
@@ -896,8 +896,8 @@ impl GoodNode {
 > [来源: [ROS2 Real-Time Paper](https://doi.org/10.1109/IROS.2016.7758091)]
 > [来源: [SLAM Survey](https://doi.org/10.1109/TRO.2016.2624754)]
 > [来源: [Modern Control Engineering — Ogata](https://www.pearson.com/en-us/subject-catalog/p/modern-control-engineering/P200000005828)]
-> [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)]
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > [来源: [OMG DDS Spec](https://www.omg.org/spec/DDS/)]
 
 ## 相关概念文件

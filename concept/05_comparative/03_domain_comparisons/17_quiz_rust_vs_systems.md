@@ -11,8 +11,8 @@
 > **后置概念**: N/A
 ---
 
-> **来源**: · [Rust vs C++](../01_systems_languages/01_rust_vs_cpp.md) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> [Rust vs C++ — Rust Book](https://doc.rust-lang.org/nomicon/) ·
+> **来源**: · [Rust vs C++](../01_systems_languages/01_rust_vs_cpp.md) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> [Rust vs C++ — Rust Book](https://doc.rust-lang.org/nomicon/index.html) ·
 > [Rust vs Go — Official Comparisons](https://go.dev/doc/) ·
 > [The C Programming Language — K&R]
 >
@@ -678,14 +678,14 @@ fn read_config() -> Result<i32, Box<dyn std::error::Error>> {
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
-| 10/10 | 🏆 跨语言对比已内化 | 阅读 [Rustonomicon](https://doc.rust-lang.org/nomicon/) 深入 FFI 和兼容层 |
+| 10/10 | 🏆 跨语言对比已内化 | 阅读 [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) 深入 FFI 和兼容层 |
 | 7–9/10 | ✅ 核心差异掌握 | 用 Rust 重写一个 C/Go 项目，对比实现差异 |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Rust vs C++](../01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Go](../01_systems_languages/02_rust_vs_go.md) |
 | 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 确认 Rust 核心，再读对比分析 |
 
 ---
 
-> **权威来源**: [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [The Rust Programming Language — Ch19](https://doc.rust-lang.org/book/ch19-00-advanced-features.html) · [Rust vs Other Languages — Rust Book](https://doc.rust-lang.org/book/appendix-06-translation.html)
+> **权威来源**: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [The Rust Programming Language — Ch19](https://doc.rust-lang.org/book/ch19-00-advanced-features.html) · [Rust vs Other Languages — Rust Book](https://doc.rust-lang.org/book/appendix-06-translation.html)
 
 ## 嵌入式测验（Embedded Quiz）
 

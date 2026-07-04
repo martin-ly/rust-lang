@@ -16,7 +16,7 @@
 
 > **来源**: · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) ·
-> [Async Rust Book](https://rust-lang.github.io/async-book/) ·
+> [Async Rust Book](https://rust-lang.github.io/async-book/index.html) ·
 > [tokio.rs](https://tokio.rs/) ·
 > [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs//2394-async_await.html) ·
 > [Wikipedia — Futures and Promises](https://en.wikipedia.org/wiki/Futures_and_promises)
@@ -404,7 +404,7 @@ async fn auto_cancel() {
 ```
 
 > **取消洞察**: **Rust 的取消通过 Drop 传播**——当 Future 被 drop，所有已获取的资源自动清理，无需显式取消回调。
-> [来源: [Async Cancellation](https://rust-lang.github.io/async-book/)]
+> [来源: [Async Cancellation](https://rust-lang.github.io/async-book/index.html)]
 
 ---
 
@@ -511,7 +511,7 @@ async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
 ```
 
 > **模式矩阵**: Rust 异步的**核心模式可以归纳为 6 类**——覆盖从简单并发到复杂流处理的大部分场景。
-> [来源: [Async Patterns](https://rust-lang.github.io/async-book/)]
+> [来源: [Async Patterns](https://rust-lang.github.io/async-book/index.html)]
 
 ---
 
@@ -535,7 +535,7 @@ graph TD
 ```
 
 > **认知功能**: **async 适合 IO 密集型，CPU 密集型需要 spawn_blocking 或 rayon**——混合使用是关键。
-> [来源: [Async Rust Book — CPU Bound](https://rust-lang.github.io/async-book/)]
+> [来源: [Async Rust Book — CPU Bound](https://rust-lang.github.io/async-book/index.html)]
 
 ---
 
@@ -575,7 +575,7 @@ graph TD
 ```
 
 > **边界要点**: 异步的边界主要与**递归**、**调用栈**、**取消安全**、**调试**和**生态**相关。
-> [来源: [Async Rust Book — Workarounds](https://rust-lang.github.io/async-book/)]
+> [来源: [Async Rust Book — Workarounds](https://rust-lang.github.io/async-book/index.html)]
 
 ---
 
@@ -627,7 +627,7 @@ graph TD
 ```
 
 > **陷阱总结**: 异步陷阱主要与**阻塞**、**await 遗漏**、**取消安全**、**Send 约束**和**背压**相关。
-> [来源: [Common Async Mistakes](https://rust-lang.github.io/async-book/)]
+> [来源: [Common Async Mistakes](https://rust-lang.github.io/async-book/index.html)]
 
 ---
 
@@ -635,7 +635,7 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Async Rust Book](https://rust-lang.github.io/async-book/) | ✅ 一级 | 异步权威 |
+| [Async Rust Book](https://rust-lang.github.io/async-book/index.html) | ✅ 一级 | 异步权威 |
 | [tokio.rs](https://tokio.rs/) | ✅ 一级 | Tokio 文档 |
 | [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs//2394-async_await.html) | ✅ 一级 | 设计 RFC |
 | [TRPL — Async](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ 一级 | 基础教程 |
@@ -655,9 +655,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -707,7 +707,7 @@ async fn receiver() {
 }
 ```
 
-> **修正**: 取消安全性（cancellation safety）指 future 在被 `select!` 或 `AbortHandle` 取消后，不处于部分完成的不一致状态。`tokio::sync::mpsc::Receiver::recv` 是取消安全的——若被取消，消息仍在通道中，下次 `recv` 可获取。但许多操作不是取消安全的：1) `tokio::io::AsyncReadExt::read`（部分读取后取消，已读数据丢失）；2) 自定义 future 在 `poll` 中修改状态后返回 `Pending`。安全模式：使用 `tokio::select!` 的 `biased` 模式控制优先级，或将非取消安全操作包装为原子事务。这与 Go 的 `select`（goroutine 不会取消，只是阻塞）或 JavaScript 的 `Promise.race`（Promise 不可取消，只是忽略结果）不同——Rust 的 `select!` 实际取消未完成的分支，要求开发者考虑取消语义。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+> **修正**: 取消安全性（cancellation safety）指 future 在被 `select!` 或 `AbortHandle` 取消后，不处于部分完成的不一致状态。`tokio::sync::mpsc::Receiver::recv` 是取消安全的——若被取消，消息仍在通道中，下次 `recv` 可获取。但许多操作不是取消安全的：1) `tokio::io::AsyncReadExt::read`（部分读取后取消，已读数据丢失）；2) 自定义 future 在 `poll` 中修改状态后返回 `Pending`。安全模式：使用 `tokio::select!` 的 `biased` 模式控制优先级，或将非取消安全操作包装为原子事务。这与 Go 的 `select`（goroutine 不会取消，只是阻塞）或 JavaScript 的 `Promise.race`（Promise 不可取消，只是忽略结果）不同——Rust 的 `select!` 实际取消未完成的分支，要求开发者考虑取消语义。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/index.html)]
 
 ### 10.4 边界测试：`tokio::spawn` 的 `Send` 约束与 `Rc`（编译错误）
 
@@ -805,10 +805,10 @@ fn main() {}
 > ——Rust 的 `async fn` in trait 是类型系统（Type System）的重大扩展。
 > [来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] ·
 > [来源: [RPITIT](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)]
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) ·
-> [Rust Standard Library](https://doc.rust-lang.org/std/) ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
 ## 认知路径

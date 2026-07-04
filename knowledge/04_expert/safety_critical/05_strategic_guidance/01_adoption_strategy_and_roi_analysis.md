@@ -6,7 +6,7 @@
 > [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 > **相关概念**: [Option](../../../../concept/01_foundation/02_type_system/04_type_system.md)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # Rust安全关键系统采用策略与ROI分析
 
@@ -16,7 +16,7 @@
 
 ## 执行摘要
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档为组织提供采用Rust进行安全关键系统开发的战略指导和投资回报率(ROI)分析，基于实际行业数据和案例研究。
 
@@ -24,11 +24,11 @@
 
 ## 1. 采用动机分析
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 行业痛点
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 传统C/C++开发挑战:
@@ -48,7 +48,7 @@ Rust解决方案:
 
 ### 1.2 量化收益模型
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 指标 | C/C++基准 | Rust | 改进 |
 |------|-----------|------|------|
@@ -62,7 +62,7 @@ Rust解决方案:
 
 ## 2. 采用策略
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 分阶段采用模型
 >

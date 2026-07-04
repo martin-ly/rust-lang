@@ -10,7 +10,7 @@
 > **定位**：本文件定义 `concept/` 下所有主题文件的内容结构、思维表征方式和知识组织规范，确保内容的**一致性、可比较性、可扩展性**。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 ## 📑 目录
@@ -90,8 +90,8 @@ mindmap
       认知路径[渐进式推导]
 ```
 
-> **认知功能**: 本 mindmap 提供 `concept/` 知识生产的元规范全景，帮助读者在最高抽象层理解文件结构的组织逻辑。建议在学习新概念文件前先浏览此图，建立"内容-表征-质量"三维检查框架。关键洞察：所有概念文件的一致性不是风格偏好，而是可比较性的必要条件。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **认知功能**: 本 mindmap 提供 `concept/` 知识生产的元规范全景，帮助读者在最高抽象层理解文件结构的组织逻辑。建议在学习新概念文件前先浏览此图，建立"内容-表征-质量"三维检查框架。关键洞察：所有概念文件的一致性不是风格偏好，而是可比较性的必要条件。[💡 原创分析](methodology.md)
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **认知路径**: 本 mindmap 展示 `concept/` 知识体系的**元规范**。三个主分支对应文件生产的三个阶段："内容结构模板"定义写什么，"思维表征规范"定义怎么可视化，"质量控制"定义怎么验证。所有概念文件必须遵循此模板，确保跨文件的一致性和可比较性。
 
 ## 一、内容结构模板（强制）
@@ -165,7 +165,7 @@ graph TD
     C --> C2[属性 2]
 ```
 
-> **认知功能**: 本图展示概念思维导图的标准拓扑结构，用于将抽象概念展开为可导航的层级网络。建议在绘制新主题思维导图时遵循"中心→子概念→属性"三级展开模式。关键洞察：放射状层级结构对应认知科学中的图式激活，符合工作记忆的组块限制。[来源: 💡 原创分析]
+> **认知功能**: 本图展示概念思维导图的标准拓扑结构，用于将抽象概念展开为可导航的层级网络。建议在绘制新主题思维导图时遵循"中心→子概念→属性"三级展开模式。关键洞察：放射状层级结构对应认知科学中的图式激活，符合工作记忆的组块限制。[💡 原创分析](methodology.md)
 
 ### 2.3 决策树图（Decision Tree） [来源: 决策树方法论参照 Quinlan, J.R. — *Induction of Decision Trees*. Machine Learning, 1986; 信息增益与熵减作为决策分支的标准]
 
@@ -180,7 +180,7 @@ graph TD
     Q2 -->|否| R2[结论 2]
 ```
 
-> **认知功能**: 本图提供"何时使用/如何判断"类问题的标准决策树模板，将条件判断转化为可执行的路径选择。建议在构建决策树时保持"条件→分支→结论"的严格二叉结构，避免多分支混淆。关键洞察：决策树的每个分支应对应编译器或运行时的真实判定边界。[来源: 💡 原创分析]
+> **认知功能**: 本图提供"何时使用/如何判断"类问题的标准决策树模板，将条件判断转化为可执行的路径选择。建议在构建决策树时保持"条件→分支→结论"的严格二叉结构，避免多分支混淆。关键洞察：决策树的每个分支应对应编译器或运行时的真实判定边界。[💡 原创分析](methodology.md)
 
 ### 2.4 定理推理判断树（Theorem Inference Tree） [来源: 定理证明方法论参照 Gentzen 的自然演绎 (Natural Deduction) 系统; 推理规则的树形结构化表示]
 
@@ -214,7 +214,7 @@ graph TD
     L2 --> E2[运行时错误: panic]
 ```
 
-> **认知功能**: 本图展示边界判定树的标准格式，用于可视化概念的合法区域与非法区域。建议在分析新概念时，优先绘制其边界树以明确编译错误与运行时 panic 的触发条件。关键洞察：边界树本质是反事实推理的可视化——它回答"如果条件不成立，会发生什么"。[来源: 💡 原创分析]
+> **认知功能**: 本图展示边界判定树的标准格式，用于可视化概念的合法区域与非法区域。建议在分析新概念时，优先绘制其边界树以明确编译错误与运行时 panic 的触发条件。关键洞察：边界树本质是反事实推理的可视化——它回答"如果条件不成立，会发生什么"。[💡 原创分析](methodology.md)
 
 ---
 
@@ -384,7 +384,7 @@ graph TD
         Q2 -->|是| F2["反例: ..."]
         Q2 -->|否| T["定理成立"]
     ```
-    > **认知功能**: 本图展示反命题与边界分析的标准模板，将命题的真值判定转化为条件分支的可视化路径。建议在分析新概念时，用此模板穷尽命题的失效条件并标注典型错误码。关键洞察：反命题树的价值不在于证明命题成立，而在于系统地发现命题何时不成立。[来源: 💡 原创分析]
+    > **认知功能**: 本图展示反命题与边界分析的标准模板，将命题的真值判定转化为条件分支的可视化路径。建议在分析新概念时，用此模板穷尽命题的失效条件并标注典型错误码。关键洞察：反命题树的价值不在于证明命题成立，而在于系统地发现命题何时不成立。[💡 原创分析](methodology.md)
 ```
 
 **要求**:
@@ -465,8 +465,8 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

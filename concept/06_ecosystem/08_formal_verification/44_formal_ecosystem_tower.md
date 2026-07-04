@@ -14,7 +14,7 @@
 > [Async](../../03_advanced/01_async/02_async.md) ·
 > [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) ·
 > [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **后置概念**: [Application Domains](../06_data_and_distributed/04_application_domains.md) · [Toolchain](../00_toolchain/01_toolchain.md)
 > **主要来源**: [crates.io](https://crates.io) · [lib.rs](https:/lib.rs) · [Tokio 文档] · [Tower 文档] · [AWS Kani 博客] · [Microsoft Verus 论文] · [INRIA Creusot 教程] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -94,7 +94,7 @@ graph BT
     L0 -.->|内存安全基线| L4
 ```
 
-> **认知功能**: 此图是 Rust 生态的**形式化成熟度分层塔**。读者可按项目可靠性需求「对号入座」——需要基本内存安全（Memory Safety）选 L0（ rustc 自动保证），需要类型契约验证选 L1（Serde/SQLx），需要架构组合正确性选 L2（Tokio/Tower），需要可观测性选 L3（Tracing），需要功能正确性证明选 L4（Kani/Verus）。关键认知：形式化不是「全有或全无」的二元选择，而是**可逐层递增的投资**——从 L0 到 L4，每上一层都增加验证深度和开发成本，读者应根据项目安全关键性选择适当的层级组合。 [来源: 💡 原创分析]
+> **认知功能**: 此图是 Rust 生态的**形式化成熟度分层塔**。读者可按项目可靠性需求「对号入座」——需要基本内存安全（Memory Safety）选 L0（ rustc 自动保证），需要类型契约验证选 L1（Serde/SQLx），需要架构组合正确性选 L2（Tokio/Tower），需要可观测性选 L3（Tracing），需要功能正确性证明选 L4（Kani/Verus）。关键认知：形式化不是「全有或全无」的二元选择，而是**可逐层递增的投资**——从 L0 到 L4，每上一层都增加验证深度和开发成本，读者应根据项目安全关键性选择适当的层级组合。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **认知路径**: 此分层塔自下而上展示 Rust 生态的**形式化深度递进**。L0 是所有 Rust 代码的基线（编译器自动证明），L1-L3 是工业级成熟层（生态竞争焦点），L4 是前沿扩展层（2026 年工业突破中）。箭头的虚实区分：**实线**表示功能依赖（上层依赖下层），**虚线**表示形式化保证的传递（下层的证明结论被上层继承）。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
@@ -274,7 +274,7 @@ quadrantChart
 | **verus** | 0.1 | 1.76 | 2021 | z3, air | SMT + 所有权（Ownership）逻辑 |
 | **wasmtime** | 21.0 | 1.76 | 2021 | wasmparser, cranelift | Wasm 规范形式化 |
 
-> **MSRV 策略**：Rust 生态的 MSRV 演进速度约为**每 6-9 个月提升一个 minor 版本**。团队应在 `Cargo.toml` 中显式声明 `rust-version = "1.70"`，并利用 `cargo check --minimum-version` 验证兼容性。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
+> **MSRV 策略**：Rust 生态的 MSRV 演进速度约为**每 6-9 个月提升一个 minor 版本**。团队应在 `Cargo.toml` 中显式声明 `rust-version = "1.70"`，并利用 `cargo check --minimum-version` 验证兼容性。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/index.html)]
 
 ### 8.2 Kani + GitHub Actions：形式化验证 CI 集成
 >
@@ -389,13 +389,13 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 - [L4: Type Theory](../../04_formal/00_type_theory/02_type_theory.md) —— 范畴论与类型论根基
 - [L7: Formal Methods](../../07_future/04_research_and_experimental/02_formal_methods.md) —— Kani/Verus/Creusot 的工业化路径
 
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html); [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

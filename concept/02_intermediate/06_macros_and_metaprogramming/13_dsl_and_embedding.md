@@ -481,11 +481,11 @@ graph TD
 >
 
 | 来源 | 可信度 | 说明 |
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/index.html) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) | ✅ 一级 | 宏系统入门 |
 | [nom Parser Combinators](https://docs.rs/nom/latest/nom/) | ✅ 一级 | 解析器组合子 |
@@ -504,9 +504,9 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
@@ -619,7 +619,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 类型状态模式（Typestate Pattern）将状态机的状态编码为类型参数，非法的状态转换在编译期被拒绝。`Machine<Idle>` 有 `start()` 方法，`Machine<Running>` 有 `stop()` 方法，但 `Machine<Running>` 没有 `start()` 方法——从 Running 再次 start 是非法的。这是 Rust 类型系统（Type System）的强大应用：将运行时（Runtime）状态机验证转为编译期类型检查，消除整类状态转换错误。这与 Erlang 的 gen_fsm 或 C 的枚举（Enum）+switch 实现形成对比——Rust 在编译期保证状态转换的合法性。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: 类型状态模式（Typestate Pattern）将状态机的状态编码为类型参数，非法的状态转换在编译期被拒绝。`Machine<Idle>` 有 `start()` 方法，`Machine<Running>` 有 `stop()` 方法，但 `Machine<Running>` 没有 `start()` 方法——从 Running 再次 start 是非法的。这是 Rust 类型系统（Type System）的强大应用：将运行时（Runtime）状态机验证转为编译期类型检查，消除整类状态转换错误。这与 Erlang 的 gen_fsm 或 C 的枚举（Enum）+switch 实现形成对比——Rust 在编译期保证状态转换的合法性。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：宏递归深度限制（编译错误）
 

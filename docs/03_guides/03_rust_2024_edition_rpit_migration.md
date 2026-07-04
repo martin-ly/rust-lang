@@ -6,7 +6,7 @@
 > **分级**: [A]
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Edition Guide、RFC 2289 来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Edition Guide、RFC 2289 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 # Rust 2024 Edition RPIT Lifetime Capture 迁移指南 {#rust-2024-edition-rpit-lifetime-capture-迁移指南}
 
@@ -258,9 +258,9 @@ where
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - Editions](https://doc.rust-lang.org/reference/)**
 > **来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)**
-> **[来源: RFCs - Edition RFCs]**
+> **[RFCs - Edition RFCs](https://rust-lang.github.io/rfcs/index.html)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-> **[来源: ACM - Language Evolution Patterns]**
+> **[ACM - Language Evolution Patterns](https://dl.acm.org/)**
 > **来源: [IEEE](https://standards.ieee.org/)**
 > **来源: [Rust Reference - impl Trait](https://doc.rust-lang.org/reference/)**
 

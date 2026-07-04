@@ -21,7 +21,7 @@
 
 ## 🎯 学习目标
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 完成本章学习后，你将能够：
 
@@ -36,7 +36,7 @@
 
 ## 📋 先决条件
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 在开始学习本章之前，请确保你已掌握：
 
@@ -59,11 +59,11 @@ cargo install miri  # 或 rustup component add miri
 
 ### 模块 1: 概念定义
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 1.1 直观定义
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Unsafe Code Auditing（不安全代码审计）** 是对 Rust 代码中 `unsafe` 块及其周边安全契约进行系统性审查的工程实践。其目标是识别可能导致未定义行为（Undefined Behavior, UB）的代码模式，验证 `SAFETY` 注释中的假设是否成立，并确保 unsafe 抽象对外暴露的 API 保持内存安全与线程安全。
 
@@ -75,7 +75,7 @@ cargo install miri  # 或 rustup component add miri
 
 #### 1.2 操作定义
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | 审计 (Auditing) | 代码审查 (Code Review) | 测试 (Testing) |
 |------|-----------------|------------------------|----------------|
@@ -1393,7 +1393,7 @@ let combined = Layout::new::<u32>().extend_packed(Layout::new::<u8>()).unwrap();
 
 > **权威来源**: [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/), [Miri](https://github.com/rust-lang/miri)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、Rustonomicon、Unsafe Code Guidelines、Miri、Ralf Jung） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、Rustonomicon、Unsafe Code Guidelines、Miri、Ralf Jung） [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

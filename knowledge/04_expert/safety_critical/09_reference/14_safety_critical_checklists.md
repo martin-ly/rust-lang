@@ -5,7 +5,7 @@
 > [Ferrocene](https://ferrous-systems.com/ferrocene/),
 > [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # 安全关键Rust开发检查表
 
@@ -15,7 +15,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本检查表提供安全关键Rust开发各阶段的系统化验证清单，确保符合功能安全标准要求。
 
@@ -23,11 +23,11 @@
 
 ## 项目启动检查表
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 安全计划
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 定义项目安全范围
 - [ ] 确定适用的ASIL/SIL等级
@@ -42,7 +42,7 @@
 
 ### 团队准备
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 团队成员功能安全培训完成
 - [ ] Rust安全关键开发培训完成
@@ -55,7 +55,7 @@
 
 ### 工具链准备
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 选择预认证编译器 (Ferrocene/qualified)
 - [ ] 配置Clippy规则集

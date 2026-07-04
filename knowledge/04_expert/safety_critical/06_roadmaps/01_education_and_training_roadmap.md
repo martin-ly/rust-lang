@@ -7,7 +7,7 @@
 >
 > **相关概念**: [迭代器](../../../../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 >
 # 教育与培训路线图
 
@@ -17,7 +17,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供构建Rust安全关键系统开发能力的完整教育和培训路线图，涵盖个人学习路径和企业培训体系。
 
@@ -25,15 +25,15 @@
 
 ## 1. 个人学习路径
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 阶段1: Rust基础 (4-6周)
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 学习目标
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 掌握Rust所有权和借用系统
 - 理解类型系统和泛型
@@ -41,7 +41,7 @@
 
 #### 学习资源
 >
-> **[来源: Rust Official Docs]**
+> **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 必修:

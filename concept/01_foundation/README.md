@@ -16,7 +16,7 @@
 > 生命周期 (Lifetime) · 类型系统 (Type System) —
 > [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
@@ -69,7 +69,7 @@ mindmap
       Trait对象[impl Trait / dyn Trait]
 ```
 
-> **认知功能**: 本 mindmap 是 L1 层的**放射式认知入口**。放射式结构（中心向外扩散）适合展示「一个核心主题的多维分解」。四个分支对应 Rust 内存安全（Memory Safety）的「四根支柱」，每根支柱下的子节点是读者需要掌握的「最小核心概念集」。建议用法：新读者将此图作为「学习进度追踪器」——掌握一个子节点后标记完成，全部标记后再进入 L2。四根支柱的依赖关系是：所有权（Ownership） → 借用（Borrowing） → 生命周期（Lifetimes）（递进），类型系统（Type System）贯穿始终（横向支撑）。 [来源: 💡 原创分析]
+> **认知功能**: 本 mindmap 是 L1 层的**放射式认知入口**。放射式结构（中心向外扩散）适合展示「一个核心主题的多维分解」。四个分支对应 Rust 内存安全（Memory Safety）的「四根支柱」，每根支柱下的子节点是读者需要掌握的「最小核心概念集」。建议用法：新读者将此图作为「学习进度追踪器」——掌握一个子节点后标记完成，全部标记后再进入 L2。四根支柱的依赖关系是：所有权（Ownership） → 借用（Borrowing） → 生命周期（Lifetimes）（递进），类型系统（Type System）贯穿始终（横向支撑）。 [💡 原创分析](../00_meta/00_framework/methodology.md)
 > **认知路径**:
 
 ## 一、本层概念关系图（完整版）
@@ -119,7 +119,7 @@ graph TB
     style TS fill:#ff9,stroke:#333
 ```
 
-> **认知功能**: 此图是 L1 层的**概念关系拓扑图**，展示四概念之间的「递进依赖」与「循环强化」双重结构。==> 实线箭头表示严格的学习依赖顺序（所有权（Ownership） → 借用（Borrowing） → 生命周期（Lifetimes）），-.-> 虚线箭头表示概念间的反馈循环（类型系统（Type System）影响所有权语义，生命周期验证借用）。四种颜色编码帮助快速区分概念域。关键认知：L1 不是四个孤立文件的集合，而是一个**有机系统**——每个概念既依赖前面的概念，又反过来强化整个系统的保证。建议读者在学习过程中定期回到此图，确认自己理解了「当前概念与相邻概念的交互关系」。 [来源: 💡 原创分析]
+> **认知功能**: 此图是 L1 层的**概念关系拓扑图**，展示四概念之间的「递进依赖」与「循环强化」双重结构。==> 实线箭头表示严格的学习依赖顺序（所有权（Ownership） → 借用（Borrowing） → 生命周期（Lifetimes）），-.-> 虚线箭头表示概念间的反馈循环（类型系统（Type System）影响所有权语义，生命周期验证借用）。四种颜色编码帮助快速区分概念域。关键认知：L1 不是四个孤立文件的集合，而是一个**有机系统**——每个概念既依赖前面的概念，又反过来强化整个系统的保证。建议读者在学习过程中定期回到此图，确认自己理解了「当前概念与相邻概念的交互关系」。 [💡 原创分析](../00_meta/00_framework/methodology.md)
 
 ### 1.1 概念间语义链接
 
@@ -274,9 +274,9 @@ Type System（理解"类型即证明"）
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../00_meta/02_sources/international_authority_index.md)
 > **内容分级**: [综述级]
 
 **文档版本**: 1.1

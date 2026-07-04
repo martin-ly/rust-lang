@@ -8,7 +8,7 @@
 > **更新周期**: 每次新增/修改 00_meta/ 元信息文件时更新
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
 > **来源**: [`concept/` 知识体系规范 — `methodology.md`]
@@ -130,7 +130,7 @@ pie title 思维表征类型分布（总计 332 个图表）
 | 四级（教育心理学 / PL 理论经典） | ≥5% | 8% | **8%** | ✅ |
 | 五级（社区 / 博客 / 实践案例） | ≤10% | 7% | **4%** | ✅ |
 
-> **关键发现**: 本次新增的 4 个核心文件全部引用了一级和二级来源，提升了高可信度来源的比例。教育心理学来源（Krathwohl、Bloom、A/S/P 论文）的增加使四级来源占比保持稳定。[来源: 💡 原创分析]
+> **关键发现**: 本次新增的 4 个核心文件全部引用了一级和二级来源，提升了高可信度来源的比例。教育心理学来源（Krathwohl、Bloom、A/S/P 论文）的增加使四级来源占比保持稳定。[💡 原创分析](../00_framework/methodology.md)
 
 ---
 
@@ -204,7 +204,7 @@ graph LR
 | 异步安全失效 | 6 | 4 | 60% | 🟡 中 |
 | Unsafe 契约失效 | 16 | 4 | 38% | 🔴 高 |
 
-> **关键发现**: Unsafe 契约失效树的基本事件数最多（16 个）但补偿覆盖率最低（38%），这与 Rust 的设计哲学一致：**unsafe 是风险的集中点，需要最多的人工审查和工具辅助**。[来源: 💡 原创分析]
+> **关键发现**: Unsafe 契约失效树的基本事件数最多（16 个）但补偿覆盖率最低（38%），这与 Rust 的设计哲学一致：**unsafe 是风险的集中点，需要最多的人工审查和工具辅助**。[💡 原创分析](../00_framework/methodology.md)
 
 ---
 
