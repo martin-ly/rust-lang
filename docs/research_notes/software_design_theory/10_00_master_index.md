@@ -344,7 +344,7 @@
 > **[ACM - Design Patterns Survey](https://dl.acm.org/)**
 > **[IEEE - Software Design Standards](https://ieeexplore.ieee.org/)**
 > **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
-> **[来源: Martin Fowler - Patterns of Enterprise Application Architecture]**
+> **[Martin Fowler - Patterns of Enterprise Application Architecture](https://martinfowler.com/books/eaa.html)**
 
 ---
 

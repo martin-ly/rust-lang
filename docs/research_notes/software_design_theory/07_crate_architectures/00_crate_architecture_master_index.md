@@ -60,7 +60,7 @@
 
 ## 一、解构范围与选型标准 {#一解构范围与选型标准}
 
-> [来源: Rust Crate Ecosystem Analysis · crates.io download statistics]
+> [Rust Crate Ecosystem Analysis · crates.io download statistics](https://crates.io/)
 
 本目录选取 crate 的**三层标准**：
 
@@ -127,7 +127,7 @@
 | 41 | **Askama** | 模板引擎 | `#[derive(Template)]` → `render()` | 编译期 Jinja-like 模板、字段类型检查 | ✅ 运行时零模板解析开销 | [41_askama_architecture.md](41_askama_architecture.md) |
 | 42 | **Maud** | 模板引擎 | `html!` 过程宏 → `Markup` | 编译期 HTML DSL、`Render` trait 组件化 | ✅ 模板即 Rust 代码 | [42_maud_architecture.md](42_maud_architecture.md) |
 
-> [来源: crates.io download statistics · docs.rs API documentation]
+> [crates.io download statistics · docs.rs API documentation](https://crates.io/)
 
 ---
 

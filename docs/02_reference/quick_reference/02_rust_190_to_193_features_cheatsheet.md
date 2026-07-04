@@ -136,7 +136,7 @@ let zeroed: Box<u64> = Box::new_zeroed();
 
 ## Rust 1.93 (2026-01) {#rust-193-2026-01}
 
-> **[来源: [Rust Blog [已失效]]<!-- 原链接: https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/ -->]**
+> **[[Rust Blog [已失效]]<!-- 原链接: https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/ -->](https://blog.rust-lang.org/)**
 
 ### musl 1.2.5 {#musl-125}
 

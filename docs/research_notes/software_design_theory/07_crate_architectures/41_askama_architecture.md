@@ -238,7 +238,7 @@ async fn page() -> impl IntoResponse {
 
 > - [来源: [askama GitHub Repository](https://github.com/djc/askama)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
-> - [来源: [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->]
+> - [[Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->](https://rustcc.cn/)
 
 ## 学术权威参考 {#学术权威参考}
 

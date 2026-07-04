@@ -39,8 +39,8 @@ Tracing 的四大设计支柱：
 | **Subscriber** | 可插拔的消费后端 | `fmt`、`jaeger`、`opentelemetry` 等后端通过 trait 解耦 |
 | **Layer** | 中间件式组合 | 复用 Tower 的 `Layer` 模式实现遥测管道的可组合性 |
 
-> [来源: Tracing Docs — Core Concepts](https://docs.rs/tracing/latest/tracing/)
-> [来源: Tokio Blog — Introducing Tracing](https://tokio.rs/blog/2019-08-tracing)
+> [Tracing Docs — Core Concepts](https://docs.rs/tracing/latest/tracing/)(<https://docs.rs/tracing/latest/tracing/>)
+> [Tokio Blog — Introducing Tracing](https://tokio.rs/blog/2019-08-tracing)(<https://tokio.rs/blog/2019-08-tracing>)
 
 ```rust,ignore
 use tracing::{info, info_span, Instrument};
@@ -133,7 +133,7 @@ graph TB
 ```
 
 > **认知功能**: 此图展示 Tracing 的核心分层——应用代码通过宏生成事件，分发器根据 `Level` 和 `Filter` 进行快速路由决策，最终由 `Subscriber` + `Layer` 组合消费。与 `log` crate 的"全局 Logger"不同，Tracing 支持**线程局部和作用域级的 Subscriber 切换**。
-> [来源: Tracing Docs — Subscriber](https://docs.rs/tracing-subscriber/latest/tracing_subscriber/)
+> [Tracing Docs — Subscriber](https://docs.rs/tracing/latest/tracing/subscriber/index.html)(<https://docs.rs/tracing-subscriber/latest/tracing_subscriber/>)
 
 ### 2.2 Span 生命周期状态机 {#22-span-生命周期状态机}
 
@@ -260,7 +260,7 @@ async fn handle_request(req: Request, _ctx: Context) -> Result<Response, Error> 
 - 如果当前 Subscriber 的 `max_level_hint()` 低于 `INFO`，`span!` 宏展开为**无操作 (no-op)**，运行时开销为 0
 - `skip` 属性避免为大体积参数生成 `Value` 实现，减少单态化膨胀
 
-> [来源: Tracing Docs — `#[instrument]`](https://docs.rs/tracing/latest/tracing/attr.instrument.html)
+> [Tracing Docs — `#[instrument]`](https://docs.rs/tracing/latest/tracing/attr.instrument.html)(<https://docs.rs/tracing/latest/tracing/attr.instrument.html>)
 
 ### 3.3 `Layer` 组合：Tower 模式的遥测复用 {#33-layer-组合tower-模式的遥测复用}
 
@@ -338,8 +338,8 @@ subscriber.init();
 | Level < Filter | 0 | 同上，静态 `Metadata` 的比较可在编译期常量传播 |
 | 活跃 Subscriber | ~2-3 次虚调用 | `Dispatch::event` 通过 `dyn Subscriber` 分发 |
 
-> [来源: Tracing Docs — Performance](https://docs.rs/tracing/latest/tracing/#performance)
-> [来源: Rust Reference — Dead Code Elimination](https://doc.rust-lang.org/rustc/codegen-options/index.html)
+> [Tracing Docs — Performance](https://docs.rs/tracing/latest/tracing/)(<https://docs.rs/tracing/latest/tracing/#performance>)
+> [Rust Reference — Dead Code Elimination](https://doc.rust-lang.org/reference/introduction.html)(<https://doc.rust-lang.org/rustc/codegen-options/index.html>)
 
 ### 4.2 静态 Metadata {#42-静态-metadata}
 
@@ -410,7 +410,7 @@ std::thread::spawn(move || {
 - `Entered` guard 不实现 `Send`，防止 `exit()` 在错误线程被调用导致状态不一致
 - `#[instrument]` 宏生成的代码自动满足 `Send` 边界，因为 `Span` 在函数体外部构造
 
-> [来源: Tracing Docs — Thread Safety](https://docs.rs/tracing/latest/tracing/span/struct.Span.html)
+> [Tracing Docs — Thread Safety](https://docs.rs/tracing/latest/tracing/)(<https://docs.rs/tracing/latest/tracing/span/struct.Span.html>)
 
 ### 5.2 内存安全：无泄漏保证 {#52-内存安全无泄漏保证}
 
@@ -491,8 +491,8 @@ sequenceDiagram
 ```
 
 > **核心价值**: 开发者只需学习 Tracing API，即可获得 Jaeger、Zipkin、Honeycomb 等全链路追踪能力，无需直接操作 OpenTelemetry 的复杂 SDK。
-> [来源: OpenTelemetry Rust Docs](https://docs.rs/opentelemetry/latest/opentelemetry/)
-> [来源: Tracing OpenTelemetry Integration](https://docs.rs/tracing-opentelemetry/latest/tracing_opentelemetry/)
+> [OpenTelemetry Rust Docs](https://docs.rs/opentelemetry/latest/opentelemetry/)(<https://docs.rs/opentelemetry/latest/opentelemetry/>)
+> [Tracing OpenTelemetry Integration](https://docs.rs/tracing-opentelemetry/latest/tracing_opentelemetry/)(<https://docs.rs/tracing-opentelemetry/latest/tracing_opentelemetry/>)
 
 ---
 
@@ -509,8 +509,8 @@ sequenceDiagram
 | **结构化字段** | ❌ 无 | ✅ 编译期类型检查 | ✅ 格式化输出 | ✅ OTLP 属性 |
 | **跨线程传播** | ❌ 无上下文 | ✅ Span 树 | ✅ Span 树 | ✅ W3C TraceContext |
 
-> [来源: Tracing Benchmarks](https://github.com/tokio-rs/tracing/tree/master/tracing/benches)
-> [来源: Rust log crate comparison](https://docs.rs/log/latest/log/)
+> [Tracing Benchmarks](https://github.com/tokio-rs/tracing#performance)(<https://github.com/tokio-rs/tracing/tree/master/tracing/benches>)
+> [Rust log crate comparison](https://docs.rs/log/latest/log/)(<https://docs.rs/log/latest/log/>)
 
 ---
 

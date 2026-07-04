@@ -42,8 +42,8 @@ Crossbeam 的五大核心模块：
 | **`crossbeam-deque`** | 工作窃取双端队列 | Chase-Lev 算法 | Tokio/Rayon 的工作窃取调度器底层 |
 | **`crossbeam-utils`** | 线程屏障、原子工具 | — | `CachePadded`、`Backoff` 等性能优化原语 |
 
-> [来源: Crossbeam Docs — Overview](https://docs.rs/crossbeam/latest/crossbeam/)
-> [来源: Fraser, K. (2004). "Practical Lock-Freedom". PhD thesis, University of Cambridge]
+> [Crossbeam Docs — Overview](https://docs.rs/crossbeam/latest/crossbeam/)(<https://docs.rs/crossbeam/latest/crossbeam/>)
+> [Fraser, K. (2004). "Practical Lock-Freedom". PhD thesis, University of Cambridge](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-579.pdf)
 
 ```rust,ignore
 use crossbeam::channel::{bounded, select};
@@ -142,7 +142,7 @@ graph TB
 ```
 
 > **认知功能**: 此图展示 Crossbeam 的核心设计——所有无锁数据结构共享同一个 Epoch 回收系统。当一个线程从数据结构中移除节点时，该节点不会立即被释放，而是加入"延迟销毁队列"，直到全局 epoch 推进到所有活跃线程都已确认通过该 epoch 为止。
-> [来源: Brown, T. (2015). "Reclaiming Memory for Lock-Free Data Structures". TAAPS]
+> [Brown, T. (2015). "Reclaiming Memory for Lock-Free Data Structures". TAAPS](https://arxiv.org/abs/1507.06891)
 
 ### 2.2 Epoch 状态机 {#22-epoch-状态机}
 
@@ -245,7 +245,7 @@ impl Guard {
 - `defer` 要求闭包为 `Send + 'static`，防止在线程局部存储中捕获非 `Send` 数据
 - `Guard` 不实现 `Clone`，防止同一个线程多次 `pin` 造成 epoch 计数错误
 
-> [来源: Crossbeam Epoch — Guard](https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/struct.Guard.html)
+> [Crossbeam Epoch — Guard](https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/struct.Guard.html)(<https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/struct.Guard.html>)
 
 ### 3.2 `Atomic<T>` 与内存排序的类型化封装 {#32-atomict-与内存排序的类型化封装}
 
@@ -292,8 +292,8 @@ struct Slot<T> {
 - `Slot::stamp` 使用 `SeqCst` 仅在必要的边界处，避免过度同步
 - 通过类型系统禁止 `T: !Send` 的数据进入队列（`ArrayQueue<T>: Send` 仅当 `T: Send`）
 
-> [来源: Crossbeam Queue Docs](https://docs.rs/crossbeam-queue/latest/crossbeam_queue/)
-> [来源: Rustnomicon — Memory Ordering](https://doc.rust-lang.org/nomicon/atomics.html)
+> [Crossbeam Queue Docs](https://docs.rs/crossbeam-queue/latest/crossbeam_queue/)(<https://docs.rs/crossbeam-queue/latest/crossbeam_queue/>)
+> [Rustnomicon — Memory Ordering](https://doc.rust-lang.org/nomicon/atomics.html)(<https://doc.rust-lang.org/nomicon/atomics.html>)
 
 ### 3.3 `Scope` 与线程安全的借用 {#33-scope-与线程安全的借用}
 
@@ -389,8 +389,8 @@ pub fn push(&self, value: T) -> Result<(), T> {
 - **无锁**：即使某个线程在任意时刻停止，其他线程的 `push`/`pop` 仍能在有限步内完成
 - **ABA 安全**：`stamp` 同时编码世代信息，避免经典的 ABA 问题（`tail` 绕回整圈时 `stamp` 不匹配）
 
-> [来源: Crossbeam Queue — ArrayQueue](https://docs.rs/crossbeam-queue/latest/crossbeam_queue/struct.ArrayQueue.html)
-> [来源: Herlihy & Shavit (2011). "The Art of Multiprocessor Programming". Chapter 10]
+> [Crossbeam Queue — ArrayQueue](https://docs.rs/crossbeam-queue/latest/crossbeam_queue/struct.ArrayQueue.html)(<https://docs.rs/crossbeam-queue/latest/crossbeam_queue/struct.ArrayQueue.html>)
+> [Herlihy & Shavit (2011). "The Art of Multiprocessor Programming". Chapter 10](https://www.cs.brown.edu/~mph/HerlihyShavit/)
 
 ### 4.2 `SegQueue` 的动态扩展 {#42-segqueue-的动态扩展}
 
@@ -483,8 +483,8 @@ graph BT
 ```
 
 > **关键事实**: Tokio 的 `runtime::task` 模块和 Rayon 的 `ThreadPool` 都直接依赖 `crossbeam-deque` 实现工作窃取。没有 Crossbeam，Rust 的异步和数据并行生态将失去最重要的调度基础设施。
-> [来源: Tokio Cargo.toml](https://github.com/tokio-rs/tokio/blob/master/tokio/Cargo.toml)
-> [来源: Rayon Cargo.toml](https://github.com/rayon-rs/rayon/blob/master/Cargo.toml)
+> [Tokio Cargo.toml](https://github.com/tokio-rs/tokio/blob/master/tokio/Cargo.toml)(<https://github.com/tokio-rs/tokio/blob/master/tokio/Cargo.toml>)
+> [Rayon Cargo.toml](https://github.com/rayon-rs/rayon/blob/master/Cargo.toml)(<https://github.com/rayon-rs/rayon/blob/master/Cargo.toml>)
 
 ---
 

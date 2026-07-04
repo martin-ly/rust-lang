@@ -43,7 +43,7 @@
 
 `mongodb` crate 是 MongoDB 官方维护的 Rust 驱动，基于 Tokio 异步运行时，使用 `bson` crate 处理 MongoDB 的原生 BSON 数据模型。它为 Rust 应用提供了从单机到副本集、分片集群的统一访问抽象，是 Rust 生态中构建文档型数据持久化层的首选客户端。
 
-> [来源: mongodb-rust-driver docs.rs](https://docs.rs/mongodb/latest/mongodb/)
+> [mongodb-rust-driver docs.rs](https://docs.rs/mongodb/latest/mongodb/)(<https://docs.rs/mongodb/latest/mongodb/>)
 
 与关系型 SQL 客户端不同，`mongodb-rust-driver` 的设计哲学是**"BSON 原生、类型可选、异步优先"**：
 

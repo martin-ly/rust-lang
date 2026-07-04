@@ -41,7 +41,7 @@ ECS 的三元组定义：
 - **Component（组件）**: 纯数据结构（如 `Transform`、`Velocity`、`Health`），可被附加到实体上
 - **System（系统）**: 处理组件数据的函数，由调度器并行执行
 
-> [来源: Bevy Engine Official Docs — ECS Core Concepts](https://bevyengine.org/learn/quick-start/getting-started/ecs/)
+> [Bevy Engine Official Docs — ECS Core Concepts](https://bevyengine.org/learn/book/ecs/)(<https://bevyengine.org/learn/quick-start/getting-started/ecs/>)
 
 Bevy 的 ECS 实现采用 **Archetype（原型）存储** 模型，这是其性能优势的核心来源。具有相同组件组合的实体被存储在连续的内存块中，从而实现极致的 CPU 缓存友好性。
 
@@ -127,7 +127,7 @@ pub struct Entity {
 
 `Entity` 不包含任何业务数据，仅作为组件表的"行索引"。这种设计使得实体创建/销毁的开销极低（O(1)），且避免了传统 OOP 中继承层次带来的紧耦合。
 
-> [来源: Rust Reference — Ownership and Borrowing](https://doc.rust-lang.org/reference/)
+> [Rust Reference — Ownership and Borrowing](https://doc.rust-lang.org/reference/introduction.html)(<https://doc.rust-lang.org/reference/>)
 
 ### 2.2 Component = Plain Data Struct {#22-component-plain-data-struct}
 
@@ -214,7 +214,7 @@ fn complex_system(
 }
 ```
 
-> [来源: TRPL — Trait 与泛型](https://doc.rust-lang.org/book/ch10-00-generics.html)
+> [TRPL — Trait 与泛型](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)(<https://doc.rust-lang.org/book/ch10-00-generics.html>)
 
 ---
 
@@ -280,7 +280,7 @@ fn add_health(mut commands: Commands, query: Query<Entity, Without<Health>>) {
 3. 在原 Archetype 中标记行为"空"（或交换移除）
 4. 更新 `EntityMeta` 中的位置指针
 
-> [来源: Academic Paper — "Data-Oriented Design and C++" by Mike Acton, CppCon 2014](https://www.youtube.com/watch?v=rX0ItVEVjHc)
+> [Academic Paper — "Data-Oriented Design and C++" by Mike Acton, CppCon 2014](https://www.youtube.com/watch?v=rX0ItVEVjHc)(<https://www.youtube.com/watch?v=rX0ItVEVjHc>)
 
 ### 3.3 Archetype 图 {#33-archetype-图}
 
@@ -394,7 +394,7 @@ fn main() {
 }
 ```
 
-> [来源: Bevy 0.15 Docs — System Ordering](https://bevyengine.org/learn/)
+> [Bevy 0.15 Docs — System Ordering](https://docs.rs/bevy/latest/bevy/)(<https://bevyengine.org/learn/>)
 
 ### 4.2 依赖图与并行执行 {#42-依赖图与并行执行}
 
@@ -478,7 +478,7 @@ app.add_systems(Update,
 );
 ```
 
-> [来源: Bevy Docs — States](https://bevyengine.org/learn/)
+> [Bevy Docs — States](https://bevyengine.org/learn/book/states/)(<https://bevyengine.org/learn/>)
 
 ---
 
@@ -573,7 +573,7 @@ fn spawn_enemy(mut commands: Commands, assets: Res<AssetServer>) {
 
 命令在当前阶段的所有系统执行完毕后，由 `apply_deferred` 统一应用。这是**命令模式 (Command Pattern)** 的典型实现，避免了并行突变竞争。
 
-> [来源: Game Programming Patterns — Command Pattern by Robert Nystrom](https://gameprogrammingpatterns.com/command.html)
+> [Game Programming Patterns — Command Pattern by Robert Nystrom](https://gameprogrammingpatterns.com/command.html)(<https://gameprogrammingpatterns.com/command.html>)
 
 ### 5.3 反射与动态类型 {#53-反射与动态类型}
 
@@ -665,7 +665,7 @@ fn update_score(mut score: ResMut<Score>, query: Query<&Health, With<Player>>) {
 - **Component**: 每个实体可有一个，存储在 Archetype 中
 - **Resource**: 全局唯一一个，存储在 `World` 的独立资源表中
 
-> [来源: Bevy Docs — Resources](https://bevyengine.org/learn/quick-start/getting-started/resources/)
+> [Bevy Docs — Resources](https://bevyengine.org/learn/book/resources/)(<https://bevyengine.org/learn/quick-start/getting-started/resources/>)
 
 ### 6.2 EventReader / EventWriter：类型安全事件总线 {#62-eventreader-eventwriter类型安全事件总线}
 
@@ -805,7 +805,7 @@ ECS 并非银弹，以下场景传统模式更合适：
 3. **深层嵌套关系**: 父子 Transform 层级在 Bevy 中通过 `Parent`/`Children` 组件模拟，但过度嵌套会影响性能
 4. **小规模原型**: < 1000 个实体时，ECS 的复杂度可能不值得
 
-> [来源: Bevy Community Discussions — When not to use ECS](https://github.com/bevyengine/bevy/discussions)
+> [Bevy Community Discussions — When not to use ECS](https://github.com/bevyengine/bevy/discussions/)(<https://github.com/bevyengine/bevy/discussions>)
 
 ### 7.3 常见性能陷阱 {#73-常见性能陷阱}
 

@@ -14,8 +14,8 @@ TARGET_DIRS = [
 INDEX_TARGET = Path("concept/00_meta/02_sources/international_authority_index.md")
 METHOD_TARGET = Path("concept/00_meta/00_framework/methodology.md")
 
-BRACKETED_RE = re.compile(r"\[来源[：:]\s*([^\]]+)\]")
 BARE_RE = re.compile(r"(?<!\[)来源[：:]\s*([^\n\[\]]+?)(?=\s*$|\s+[,，;；]|\s*\|)")
+LINK_RE = re.compile(r"\]\(")
 
 
 def relative_path(from_file: Path, to_target: Path) -> str:
@@ -66,6 +66,10 @@ def transform_exact(label: str) -> str | None:
         "Cargo Book — Source Replacement": "https://doc.rust-lang.org/cargo/reference/source-replacement.html",
         "Rust Reference — Const Generics": "https://doc.rust-lang.org/reference/items/generics.html#const-generics",
         "Rust Reference — Const Evaluation": "https://doc.rust-lang.org/reference/const_eval.html",
+        "Rust Reference — Traits": "https://doc.rust-lang.org/reference/items/traits.html",
+        "Rust Reference — Closure types": "https://doc.rust-lang.org/reference/types/closure.html",
+        "Rust Reference — Ownership and Borrowing": "https://doc.rust-lang.org/reference/introduction.html",
+        "Rust Reference — Dead Code Elimination": "https://doc.rust-lang.org/reference/introduction.html",
         "Rustc Dev Guide — UI tests": "https://rustc-dev-guide.rust-lang.org/tests/ui.html",
         "Rust By Example, \"Flow Control\"": "https://doc.rust-lang.org/rust-by-example/flow_control.html",
         "Rust Internals Forum, \"Let Chains Gotchas\"": "https://internals.rust-lang.org/",
@@ -85,47 +89,27 @@ def transform_exact(label: str) -> str | None:
         "VeriContest arXiv 2026-05-08": "https://arxiv.org/",
         "LPC 2025 Rust for Linux 幻灯片": "https://rust-for-linux.com/",
         "ByteIota 2026-05-25; rust-lang/rust#156628": "https://github.com/rust-lang/rust/pull/156628",
+        # TRPL
+        "TRPL — Trait 与泛型": "https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html",
+        "TRPL 第 16 章 — Fearless Concurrency": "https://doc.rust-lang.org/book/ch16-00-concurrency.html",
         # 学术
         "Nicholas Nethercote - How to Speed Up the Rust Compiler": "https://nnethercote.github.io/2022/10/27/how-to-speed-up-the-rust-compiler-in-october-2022.html",
         "Rice 1953": "https://doi.org/10.2307/2268381",
+        "Honda, *Types for Dyadic Interaction*, 1993": "https://doi.org/10.1007/3-540-57208-2_35",
         'Pierce, "Types and Programming Languages" (TAPL)': "https://www.cis.upenn.edu/~bcpierce/tapl/",
         "Pierce 2002, Ch.11": "https://www.cis.upenn.edu/~bcpierce/tapl/",
         "Linux Foundation": "https://www.linuxfoundation.org/",
         "Rust Learning Resources": "https://www.rust-lang.org/learn",
-        # 生态库文档
-        "Criterion.rs Documentation": "https://bheisler.github.io/criterion.rs/book/index.html",
-        "thiserror docs": "https://docs.rs/thiserror/latest/thiserror/",
-        "Rocket docs": "https://docs.rs/rocket/latest/rocket/",
-        "Poem docs": "https://docs.rs/poem/latest/poem/",
-        "embedded-hal 文档": "https://docs.rs/embedded-hal/latest/embedded_hal/",
-        "svd2rust 文档": "https://docs.rs/svd2rust/latest/svd2rust/",
-        "defmt 文档": "https://docs.rs/defmt/latest/defmt/",
-        "tokio-uring": "https://docs.rs/tokio-uring/latest/tokio_uring/",
-        "quinn crate": "https://docs.rs/quinn/latest/quinn/",
-        "rust-libp2p crate": "https://docs.rs/libp2p/latest/libp2p/",
-        "Protocol Labs - libp2p": "https://libp2p.io/",
-        "libp2p Specification": "https://specs.libp2p.io/",
-        # 测试/安全
-        "AFL - American Fuzzy Lop": "https://github.com/google/AFL",
-        "LLVM libFuzzer": "https://llvm.org/docs/LibFuzzer.html",
-        "Rust Fuzzing Book - fuzzingbook.com": "https://rust-fuzz.github.io/book/introduction.html",
-        "Linux Kernel Documentation": "https://docs.kernel.org/",
-        "Linux Kernel io_uring 性能基准测试": "https://docs.kernel.org/io_uring.html",
-        # 跨语言参考
-        "Go Spec: Concurrency": "https://go.dev/ref/spec#Go_statements",
-        "Go Spec: Errors": "https://go.dev/ref/spec#Errors",
-        "Go Spec: Types": "https://go.dev/ref/spec#Types",
-        "C++ Reference: thread": "https://en.cppreference.com/w/cpp/thread",
-        "C++ Reference: Exception handling": "https://en.cppreference.com/w/cpp/language/exceptions",
-        "C++ Reference: Templates": "https://en.cppreference.com/w/cpp/templates",
-        # 失效/占位链接保留原 URL
-        "[Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->": "https://rustcc.cn/",
-        "[Rust Blog [已失效]]<!-- 原链接: https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/ -->": "https://blog.rust-lang.org/",
-        # 学术
-        "Honda, *Types for Dyadic Interaction*, 1993": "https://doi.org/10.1007/3-540-57208-2_35",
-        "Gamma et al. 1994 - Design Patterns": "https://en.wikipedia.org/wiki/Design_Patterns",
         "Bloom Taxonomy 2001": "https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/",
         "Tony Buzan - Mind Mapping": "https://www.tonybuzan.com/",
+        "Gamma et al. 1994 - Design Patterns": "https://en.wikipedia.org/wiki/Design_Patterns",
+        "Martin Fowler - Patterns of Enterprise Application Architecture": "https://martinfowler.com/books/eaa.html",
+        "Martin Fowler - Event Sourcing": "https://martinfowler.com/eaaDev/EventSourcing.html",
+        "Academic Paper — \"Data-Oriented Design and C++\" by Mike Acton, CppCon 2014": "https://www.youtube.com/watch?v=rX0ItVEVjHc",
+        '"Scheduling Multithreaded Computations by Work Stealing" — Blumofe & Leiserson, 1999': "https://doi.org/10.1145/324133.324234",
+        'Fraser, K. (2004). "Practical Lock-Freedom". PhD thesis, University of Cambridge': "https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-579.pdf",
+        'Brown, T. (2015). "Reclaiming Memory for Lock-Free Data Structures". TAAPS': "https://arxiv.org/abs/1507.06891",
+        'Herlihy & Shavit (2011). "The Art of Multiprocessor Programming". Chapter 10': "https://www.cs.brown.edu/~mph/HerlihyShavit/",
         # Rust 团队/治理
         "Rust Team / Cargo Book 2025": "https://doc.rust-lang.org/cargo/index.html",
         "Rust Team / TRPL 2025": "https://doc.rust-lang.org/book/title-page.html",
@@ -159,6 +143,92 @@ def transform_exact(label: str) -> str | None:
         # 通用/会议
         "PLDI 2024/2025 Compiler-Guided Code Generation": "https://pldi24.sigplan.org/",
         "anyhow.rs Documentation": "https://docs.rs/anyhow/latest/anyhow/",
+        # 失效/占位链接保留原 URL
+        "[Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->": "https://rustcc.cn/",
+        "[Rust Blog [已失效]]<!-- 原链接: https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/ -->": "https://blog.rust-lang.org/",
+        # 生态库官方文档（中文标签）
+        "Reqwest 官方文档": "https://docs.rs/reqwest/latest/reqwest/",
+        "reqwest-middleware crate 文档": "https://docs.rs/reqwest-middleware/latest/reqwest_middleware/",
+        "Hyper 官方文档 — Client": "https://docs.rs/hyper/latest/hyper/",
+        "serde 官方文档": "https://serde.rs/",
+        "Wgpu 官方文档": "https://docs.rs/wgpu/latest/wgpu/",
+        "Naga 文档": "https://docs.rs/naga/latest/naga/",
+        "WebGPU 标准 — Resource Usages": "https://www.w3.org/TR/webgpu/",
+        "Wgpu Wiki — Async Initialization": "https://github.com/gfx-rs/wgpu/wiki/",
+        "Actix-web 官方文档": "https://actix.rs/",
+        "Actix actor 框架文档": "https://actix.rs/actors/",
+        "Actix-web 文档 — Architecture Overview": "https://actix.rs/docs/architecture",
+        "Actix-web 源码 — `actix-web/src/server.rs`": "https://github.com/actix/actix-web/blob/master/actix-web/src/server.rs",
+        "Actix-web 文档 — Middleware": "https://actix.rs/docs/middleware",
+        "Actix-web GitHub — Performance Benchmarks": "https://github.com/actix/actix-web#benchmarks",
+        "Axum 文档 — Comparison with other frameworks": "https://docs.rs/axum/latest/axum/",
+        "Rayon 官方文档": "https://docs.rs/rayon/latest/rayon/",
+        "Rayon README — \"Data parallelism library for Rust\"": "https://docs.rs/rayon/latest/rayon/",
+        "Rayon 文档 — ThreadPool": "https://docs.rs/rayon/latest/rayon/struct.ThreadPool.html",
+        "Rayon 文档 — `ParallelSliceMut`": "https://docs.rs/rayon/latest/rayon/slice/trait.ParallelSliceMut.html",
+        "Rayon 文档 — `scope`": "https://docs.rs/rayon/latest/rayon/fn.scope.html",
+        "nalgebra 官方文档": "https://docs.rs/nalgebra/latest/nalgebra/",
+        "ndarray 官方文档": "https://docs.rs/ndarray/latest/ndarray/",
+        "nalgebra 文档 — Overview": "https://docs.rs/nalgebra/latest/nalgebra/",
+        "ndarray 文档 — ArrayBase": "https://docs.rs/ndarray/latest/ndarray/struct.ArrayBase.html",
+        "nalgebra 文档 — Const generics": "https://docs.rs/nalgebra/latest/nalgebra/",
+        "ndarray 源码 — `src/lib.rs`": "https://github.com/rust-ndarray/ndarray/blob/master/src/lib.rs",
+        "NumPy 文档 — Broadcasting": "https://numpy.org/doc/stable/user/basics.broadcasting.html",
+        "Tracing Docs — Core Concepts": "https://docs.rs/tracing/latest/tracing/",
+        "Tokio Blog — Introducing Tracing": "https://tokio.rs/blog/2019-08-tracing",
+        "Tracing Docs — Subscriber": "https://docs.rs/tracing/latest/tracing/subscriber/index.html",
+        "Tracing Docs — `#[instrument]`": "https://docs.rs/tracing/latest/tracing/attr.instrument.html",
+        "Tracing Docs — Performance": "https://docs.rs/tracing/latest/tracing/",
+        "Tracing Docs — Thread Safety": "https://docs.rs/tracing/latest/tracing/",
+        "OpenTelemetry Rust Docs": "https://docs.rs/opentelemetry/latest/opentelemetry/",
+        "Tracing OpenTelemetry Integration": "https://docs.rs/tracing-opentelemetry/latest/tracing_opentelemetry/",
+        "Tracing Benchmarks": "https://github.com/tokio-rs/tracing#performance",
+        "Rust log crate comparison": "https://docs.rs/log/latest/log/",
+        "Crossbeam Docs — Overview": "https://docs.rs/crossbeam/latest/crossbeam/",
+        "Crossbeam Epoch — Guard": "https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/struct.Guard.html",
+        "Crossbeam Queue Docs": "https://docs.rs/crossbeam-queue/latest/crossbeam_queue/",
+        "Crossbeam Queue — ArrayQueue": "https://docs.rs/crossbeam-queue/latest/crossbeam_queue/struct.ArrayQueue.html",
+        "Rustnomicon — Memory Ordering": "https://doc.rust-lang.org/nomicon/atomics.html",
+        "Rustnomicon — Zero-Cost Abstractions": "https://doc.rust-lang.org/nomicon/",
+        "Tokio Cargo.toml": "https://github.com/tokio-rs/tokio/blob/master/tokio/Cargo.toml",
+        "Rayon Cargo.toml": "https://github.com/rayon-rs/rayon/blob/master/Cargo.toml",
+        "Ratatui Docs — Overview": "https://docs.rs/ratatui/latest/ratatui/",
+        "Ratatui GitHub — Architecture": "https://github.com/ratatui/ratatui",
+        "Ratatui Docs — Concepts": "https://docs.rs/ratatui/latest/ratatui/",
+        "Ratatui Widget Docs": "https://docs.rs/ratatui/latest/ratatui/widgets/index.html",
+        "Ratatui Layout Docs": "https://docs.rs/ratatui/latest/ratatui/layout/index.html",
+        "Ratatui Backend Docs": "https://docs.rs/ratatui/latest/ratatui/backend/index.html",
+        "Ratatui Async Guide": "https://docs.rs/ratatui/latest/ratatui/",
+        "mio Docs — Getting Started": "https://docs.rs/mio/latest/mio/",
+        "Tokio Docs — mio Integration": "https://docs.rs/tokio/latest/tokio/",
+        "mio Docs — Poll": "https://docs.rs/mio/latest/mio/struct.Poll.html",
+        "mio — Platform Notes": "https://docs.rs/mio/latest/mio/",
+        "man 7 epoll": "https://man7.org/linux/man-pages/man7/epoll.7.html",
+        "man 2 kqueue": "https://man.freebsd.org/cgi/man.cgi?query=kqueue&sektion=2",
+        "mio Docs — Interest": "https://docs.rs/mio/latest/mio/struct.Interest.html",
+        "mio Docs — Waker": "https://docs.rs/mio/latest/mio/struct.Waker.html",
+        "Linux man 2 eventfd": "https://man7.org/linux/man-pages/man2/eventfd.2.html",
+        "redis-rs Documentation": "https://docs.rs/redis/latest/redis/",
+        "redis-rs GitHub Repository": "https://github.com/redis-rs/redis-rs",
+        "redis-rs Connection Docs": "https://docs.rs/redis/latest/redis/",
+        "redis-rs aio Module": "https://docs.rs/redis/latest/redis/aio/index.html",
+        "redis-rs MultiplexedConnection": "https://docs.rs/redis/latest/redis/aio/struct.MultiplexedConnection.html",
+        "redis-rs Streams": "https://docs.rs/redis/latest/redis/streams/index.html",
+        "redis-rs Pipeline": "https://docs.rs/redis/latest/redis/struct.Pipeline.html",
+        "Redis 官方 Commands": "https://redis.io/commands/",
+        "redis-rs FromRedisValue": "https://docs.rs/redis/latest/redis/trait.FromRedisValue.html",
+        "mongodb-rust-driver docs.rs": "https://docs.rs/mongodb/latest/mongodb/",
+        "wasm-bindgen 源码, crates/macro-support/src/parser.rs": "https://github.com/rustwasm/wasm-bindgen/blob/main/crates/macro-support/src/parser.rs",
+        # Bevy
+        "Bevy Engine Official Docs — ECS Core Concepts": "https://bevyengine.org/learn/book/ecs/",
+        "Bevy 0.15 Docs — System Ordering": "https://docs.rs/bevy/latest/bevy/",
+        "Bevy Docs — States": "https://bevyengine.org/learn/book/states/",
+        "Bevy Docs — Resources": "https://bevyengine.org/learn/book/resources/",
+        "Bevy Community Discussions — When not to use ECS": "https://github.com/bevyengine/bevy/discussions/",
+        "Game Programming Patterns — Command Pattern by Robert Nystrom": "https://gameprogrammingpatterns.com/command.html",
+        # crates.io / 生态统计
+        "Rust Crate Ecosystem Analysis · crates.io download statistics": "https://crates.io/",
+        "crates.io download statistics · docs.rs API documentation": "https://crates.io/",
     }
     if s in exact:
         return f"[{s}]({exact[s]})"
@@ -172,26 +242,65 @@ def transform_exact(label: str) -> str | None:
     return None
 
 
+def replace_bracketed_sources(text: str, index_link: str, method_link: str) -> str:
+    """处理 [来源: ...] 占位符，支持一层嵌套方括号。"""
+    result = []
+    i = 0
+    while i < len(text):
+        m = re.search(r"\[来源[：:]\s*", text[i:])
+        if not m:
+            result.append(text[i:])
+            break
+        start = i + m.start()
+        result.append(text[i:start])
+        inner_start = i + m.end()
+        # 查找匹配的 ]，允许一层嵌套 [ ... ]
+        depth = 0
+        pos = inner_start
+        found = False
+        while pos < len(text):
+            ch = text[pos]
+            if ch == "[":
+                depth += 1
+            elif ch == "]":
+                if depth == 0:
+                    found = True
+                    break
+                depth -= 1
+            pos += 1
+        if not found:
+            result.append(text[start:])
+            break
+        content = text[inner_start:pos]
+        whole = text[start : pos + 1]
+        # 如果内容里已经有 ]( 链接，视为已映射
+        if not LINK_RE.search(whole):
+            label = content.strip()
+            while label.startswith("[") and label.endswith("]"):
+                label = label[1:-1].strip()
+            new = transform_label(label, index_link, method_link)
+            if not new:
+                new = transform_exact(label)
+            if new:
+                result.append(new)
+                i = pos + 1
+                continue
+        result.append(whole)
+        i = pos + 1
+    return "".join(result)
+
+
 def fix_file(path: Path) -> int:
     text = path.read_text(encoding="utf-8", errors="ignore")
     original = text
     index_link = relative_path(path, INDEX_TARGET)
     method_link = relative_path(path, METHOD_TARGET)
 
-    def bracket_repl(m):
-        label = m.group(1)
-        if re.search(r"\]\(", label):
-            return m.group(0)
-        new = transform_label(label, index_link, method_link)
-        if not new:
-            new = transform_exact(label)
-        return new if new else m.group(0)
-
-    text = BRACKETED_RE.sub(bracket_repl, text)
+    text = replace_bracketed_sources(text, index_link, method_link)
 
     def bare_repl(m):
         label = m.group(1)
-        if re.search(r"\]\(", label):
+        if LINK_RE.search(label):
             return m.group(0)
         new = transform_label(label, index_link, method_link)
         if not new:

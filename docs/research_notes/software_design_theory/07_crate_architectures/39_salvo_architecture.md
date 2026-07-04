@@ -246,7 +246,7 @@ let router = Router::new().hoop(logger).get(hello);
 
 > - [来源: [salvo GitHub Repository](https://github.com/salvo-rs/salvo)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
-> - [来源: [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->]
+> - [[Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ -->](https://rustcc.cn/)
 
 ## 学术权威参考 {#学术权威参考}
 

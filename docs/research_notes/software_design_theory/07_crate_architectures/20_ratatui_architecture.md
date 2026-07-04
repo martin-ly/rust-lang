@@ -38,8 +38,8 @@ Ratatui 的三大设计支柱：
 | **Widget trait 组合** | `Widget::render` + `StatefulWidget` | 声明式 UI：布局（`Layout`）与表现（`Widget`）分离 |
 | **Backend 可插拔** | `Backend` trait（crossterm / termion / termwiz） | 同一应用代码可在不同终端后端上运行 |
 
-> [来源: Ratatui Docs — Overview](https://ratatui.rs/)
-> [来源: Ratatui GitHub — Architecture](https://github.com/ratatui/ratatui)
+> [Ratatui Docs — Overview](https://docs.rs/ratatui/latest/ratatui/)(<https://ratatui.rs/>)
+> [Ratatui GitHub — Architecture](https://github.com/ratatui/ratatui)(<https://github.com/ratatui/ratatui>)
 
 ```rust,ignore
 use ratatui::{
@@ -154,7 +154,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Ratatui 的渲染管线——与传统 GUI 框架的"保留模式"（维护一棵 widget 树）不同，Ratatui 的每帧都是**纯函数**：`fn ui(state) -> Buffer`。这种设计消除了状态同步的复杂性，但要求用户自行管理跨帧状态。
-> [来源: Ratatui Docs — Concepts](https://ratatui.rs/concepts/)
+> [Ratatui Docs — Concepts](https://docs.rs/ratatui/latest/ratatui/)(<https://ratatui.rs/concepts/>)
 
 ### 2.2 Buffer 与 Cell 的内存模型 {#22-buffer-与-cell-的内存模型}
 
@@ -237,7 +237,7 @@ impl Widget for Block<'_> {
 - **传入 `&mut Buffer`**：允许多个 widget 顺序渲染到同一个 buffer，合成最终画面
 - **不返回任何值**：渲染是副作用（side effect），纯函数式的设计使测试困难，但符合终端 IO 的本质
 
-> [来源: Ratatui Widget Docs](https://docs.rs/ratatui/latest/ratatui/widgets/trait.Widget.html)
+> [Ratatui Widget Docs](https://docs.rs/ratatui/latest/ratatui/widgets/index.html)(<https://docs.rs/ratatui/latest/ratatui/widgets/trait.Widget.html>)
 
 ### 3.2 `StatefulWidget`：有状态组件的借用模式 {#32-statefulwidget有状态组件的借用模式}
 
@@ -311,7 +311,7 @@ let layout = Layout::default()
   - 每个约束至少被满足到最小要求
 - 由于布局依赖运行时 `area` 尺寸（终端窗口大小），约束求解无法静态化，但算法本身是 O(n) 的贪心近似
 
-> [来源: Ratatui Layout Docs](https://ratatui.rs/concepts/layout/)
+> [Ratatui Layout Docs](https://docs.rs/ratatui/latest/ratatui/layout/index.html)(<https://ratatui.rs/concepts/layout/>)
 
 ---
 
@@ -420,7 +420,7 @@ pub trait Backend {
 | `TermwizBackend` | `termwiz` | Windows / Unix | WezTerm 团队维护 |
 | `TestBackend` | — | 测试 | 内存中的 buffer，用于单元测试 |
 
-> [来源: Ratatui Backend Docs](https://docs.rs/ratatui/latest/ratatui/backend/trait.Backend.html)
+> [Ratatui Backend Docs](https://docs.rs/ratatui/latest/ratatui/backend/index.html)(<https://docs.rs/ratatui/latest/ratatui/backend/trait.Backend.html>)
 
 ### 5.2 测试策略：纯函数的 UI 验证 {#52-测试策略纯函数的-ui-验证}
 
@@ -515,7 +515,7 @@ loop {
 }
 ```
 
-> [来源: Ratatui Async Guide](https://ratatui.rs/concepts/rendering/)
+> [Ratatui Async Guide](https://docs.rs/ratatui/latest/ratatui/)(<https://ratatui.rs/concepts/rendering/>)
 
 ---
 

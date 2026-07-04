@@ -53,8 +53,8 @@ mio 的三大核心抽象：
 | **`Registry`** | `epoll_ctl` / `kevent` / `WSAEventSelect` | 同上 | 注册/注销 IO 兴趣 |
 | **`Waker`** | `eventfd` / `kqueue EVFILT_USER` / `PostQueuedCompletionStatus` | 同上 | 跨线程唤醒事件循环 |
 
-> [来源: mio Docs — Getting Started](https://docs.rs/mio/latest/mio/)
-> [来源: Tokio Docs — mio Integration](https://tokio.rs/tokio/topics)
+> [mio Docs — Getting Started](https://docs.rs/mio/latest/mio/)(<https://docs.rs/mio/latest/mio/>)
+> [Tokio Docs — mio Integration](https://docs.rs/tokio/latest/tokio/)(<https://tokio.rs/tokio/topics>)
 
 ```rust,ignore
 use mio::{Events, Interest, Poll, Token};
@@ -155,7 +155,7 @@ graph TB
 ```
 
 > **认知功能**: 此图展示 mio 在 Rust 异步栈中的精确位置——它在应用 Futures 和操作系统 epoll/kqueue/IOCP 之间充当薄层适配器。mio 不管理任务状态机，只回答"哪些 IO 对象已就绪"这个问题。
-> [来源: mio Docs — Poll](https://docs.rs/mio/latest/mio/struct.Poll.html)
+> [mio Docs — Poll](https://docs.rs/mio/latest/mio/struct.Poll.html)(<https://docs.rs/mio/latest/mio/struct.Poll.html>)
 
 ### 2.2 跨平台抽象的统一语义 {#22-跨平台抽象的统一语义}
 
@@ -178,9 +178,9 @@ mio 的统一策略：
 - **显式注销**：所有平台都要求显式 `deregister`，避免 IOCP 的隐式状态不一致
 - **`Token` 作为用户数据**：epoll 的 `epoll_data.u64`、kqueue 的 `udata`、IOCP 的 `OVERLAPPED*` 都被映射为 `usize` 类型的 `Token`
 
-> [来源: mio — Platform Notes](https://docs.rs/mio/latest/mio/struct.Poll.html#platform-specific-notes)
-> [来源: man 7 epoll](https://man7.org/linux/man-pages/man7/epoll.7.html)
-> [来源: man 2 kqueue](https://man.freebsd.org/cgi/man.cgi?query=kqueue)
+> [mio — Platform Notes](https://docs.rs/mio/latest/mio/)(<https://docs.rs/mio/latest/mio/struct.Poll.html#platform-specific-notes>)
+> [man 7 epoll](https://man7.org/linux/man-pages/man7/epoll.7.html)(<https://man7.org/linux/man-pages/man7/epoll.7.html>)
+> [man 2 kqueue](https://man.freebsd.org/cgi/man.cgi?query=kqueue&sektion=2)(<https://man.freebsd.org/cgi/man.cgi?query=kqueue>)
 
 ---
 
@@ -283,7 +283,7 @@ registry.register(&mut socket, Token(0), RW)?;
 - `add` 是 `const fn`，编译期计算位掩码
 - `is_readable()` / `is_writable()` 方法将位检查封装为语义查询
 
-> [来源: mio Docs — Interest](https://docs.rs/mio/latest/mio/struct.Interest.html)
+> [mio Docs — Interest](https://docs.rs/mio/latest/mio/struct.Interest.html)(<https://docs.rs/mio/latest/mio/struct.Interest.html>)
 
 ### 3.3 `Registry` 的线程安全设计 {#33-registry-的线程安全设计}
 
@@ -371,8 +371,8 @@ sequenceDiagram
 | Windows | `PostQueuedCompletionStatus` | ~500ns | IOCP 的跨线程通知机制 |
 
 > **性能关键**：`Waker::wake()` 是 Tokio 任务调度中最频繁的操作之一。每次 `tokio::spawn` 或 `waker.wake_by_ref()` 最终都归结为一次 `Waker::wake()` 调用。
-> [来源: mio Docs — Waker](https://docs.rs/mio/latest/mio/struct.Waker.html)
-> [来源: Linux man 2 eventfd](https://man7.org/linux/man-pages/man2/eventfd.2.html)
+> [mio Docs — Waker](https://docs.rs/mio/latest/mio/struct.Waker.html)(<https://docs.rs/mio/latest/mio/struct.Waker.html>)
+> [Linux man 2 eventfd](https://man7.org/linux/man-pages/man2/eventfd.2.html)(<https://man7.org/linux/man-pages/man2/eventfd.2.html>)
 
 ### 4.2 与 `std::task::Waker` 的关系 {#42-与-stdtaskwaker-的关系}
 
@@ -461,7 +461,7 @@ poll.poll(&mut events, None)?;
 - **错误处理**：mio 将 `errno` 转换为 `io::Error`，增加一次分支判断（可忽略）
 
 > **结论**: mio 是**零成本抽象**的典范——它提供跨平台一致性和内存安全，同时不增加任何额外的系统调用或内存开销。
-> [来源: Rustnomicon — Zero-Cost Abstractions](https://doc.rust-lang.org/nomicon/)
+> [Rustnomicon — Zero-Cost Abstractions](https://doc.rust-lang.org/nomicon/)(<https://doc.rust-lang.org/nomicon/>)
 
 ---
 

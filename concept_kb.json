@@ -85,6 +85,7 @@
         "../../06_ecosystem/05_systems_and_embedded/08_wasi.md",
         "../04_navigation/inter_layer_topology.md",
         "../04_navigation/intra_layer_model_map.md",
+        "methodology.md",
         "theorem_inference_forest.md"
       ],
       "transitions": 6,
@@ -158,7 +159,8 @@
         "../03_audit/asp_marking_guide.md",
         "../04_navigation/learning_guide.md",
         "../04_navigation/problem_graph.md",
-        "cognitive_dimension_matrix.md"
+        "cognitive_dimension_matrix.md",
+        "methodology.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
@@ -249,6 +251,7 @@
         "../knowledge_topology/kg_ontology_v2.md",
         "boundary_extension_tree.md",
         "fault_tree_analysis_collection.md",
+        "methodology.md",
         "theorem_inference_forest.md"
       ],
       "transitions": 6,
@@ -358,6 +361,7 @@
         "../../04_formal/02_separation_logic/04_rustbelt.md",
         "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
         "../../07_future/00_version_tracking/05_rust_version_tracking.md",
+        "methodology.md",
         "semantic_expressiveness.md"
       ],
       "transitions": 6,
@@ -447,6 +451,7 @@
         "../../06_ecosystem/03_design_patterns/02_patterns.md",
         "../../07_future/03_preview_features/04_effects_system.md",
         "decidability_spectrum.md",
+        "methodology.md",
         "semantic_expressiveness.md"
       ],
       "transitions": 6,
@@ -483,7 +488,8 @@
         "../../../archive/reports/2026_07/MIRI_VALIDATION_2026_05_27.md",
         "../../05_comparative/03_domain_comparisons/04_safety_boundaries.md",
         "boundary_extension_tree.md",
-        "concept_definition_decision_forest.md"
+        "concept_definition_decision_forest.md",
+        "methodology.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
@@ -523,6 +529,7 @@
         "boundary_extension_tree.md",
         "decidability_spectrum.md",
         "expressiveness_multiview.md",
+        "methodology.md",
         "theorem_inference_forest.md"
       ],
       "transitions": 6,
@@ -566,8 +573,10 @@
       ],
       "sources": [],
       "cross_references": [
+        "../02_sources/international_authority_index.md",
         "../03_audit/audit_checklist.md",
         "../04_navigation/inter_layer_map.md",
+        "methodology.md",
         "semantic_expressiveness.md"
       ],
       "transitions": 6,
@@ -608,7 +617,8 @@
         "../../05_comparative/00_paradigms/03_paradigm_matrix.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
-        "../04_navigation/learning_guide.md"
+        "../04_navigation/learning_guide.md",
+        "methodology.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
@@ -822,6 +832,7 @@
       "cross_references": [
         "../../04_formal/02_separation_logic/04_rustbelt.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../02_sources/international_authority_index.md",
         "methodology.md"
       ],
       "transitions": 6,
@@ -968,7 +979,9 @@
         "../../03_advanced/03_proc_macros/04_macros.md",
         "../../04_formal/00_type_theory/02_type_theory.md",
         "../../04_formal/02_separation_logic/04_rustbelt.md",
-        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../02_sources/international_authority_index.md",
+        "methodology.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
@@ -1016,7 +1029,8 @@
         "../04_navigation/intra_layer_model_map.md",
         "boundary_extension_tree.md",
         "decidability_spectrum.md",
-        "expressiveness_multiview.md"
+        "expressiveness_multiview.md",
+        "methodology.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
@@ -1049,6 +1063,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../02_sources/international_authority_index.md",
         "../03_audit/audit_checklist.md",
         "../04_navigation/inter_layer_map.md",
         "semantic_expressiveness.md"
@@ -1162,7 +1177,9 @@
         }
       ],
       "sources": [],
-      "cross_references": [],
+      "cross_references": [
+        "../00_framework/methodology.md"
+      ],
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
@@ -1233,7 +1250,8 @@
         "../../02_intermediate/00_traits/01_traits.md",
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
-        "../../07_future/04_research_and_experimental/03_evolution.md"
+        "../../07_future/04_research_and_experimental/03_evolution.md",
+        "international_authority_index.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
@@ -1251,7 +1269,7 @@
       "layer": "L0",
       "title": "International Authority Index（国际化权威来源索引）",
       "positioning": "集中维护 Rust 知识体系所需的国际权威来源 URL，便于 concept/、knowledge/、docs/ 各层统一引用，避免重复搜索与链接失效。",
-      "line_count": 218,
+      "line_count": 232,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -1314,7 +1332,7 @@
           "type": "table_row"
         },
         {
-          "text": "> **双向桥梁**: `concept_definition_decision_forest.md` 中的\"借用判定树\"判定 C2（AXM 违反）对应于本文件的 `shr(κ, ℓ) ∗ &mut(κ', ℓ) ⟹ ⊥` 引理。前者是工程判定流程，后者是数学证明基础。[来源: 💡 原创分析]",
+          "text": "> **双向桥梁**: `concept_definition_decision_forest.md` 中的\"借用判定树\"判定 C2（AXM 违反）对应于本文件的 `shr(κ, ℓ) ∗ &mut(κ', ℓ) ⟹ ⊥` 引理。前者是工程判定流程，后者是数学证明基础。[💡 原创分析](../00_framework/methodology.md)",
           "type": "paragraph"
         },
         {
@@ -1333,6 +1351,7 @@
         "../../04_formal/01_ownership_logic/03_ownership_formal.md",
         "../../04_formal/02_separation_logic/04_rustbelt.md",
         "../00_framework/concept_definition_decision_forest.md",
+        "../00_framework/methodology.md",
         "../00_framework/theorem_inference_forest.md"
       ],
       "transitions": 6,
@@ -1368,7 +1387,8 @@
       "cross_references": [
         "../00_framework/methodology.md",
         "../00_framework/semantic_expressiveness.md",
-        "../03_audit/audit_checklist.md"
+        "../03_audit/audit_checklist.md",
+        "international_authority_index.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
@@ -1505,6 +1525,7 @@
       "cross_references": [
         "../00_framework/methodology.md",
         "../02_sources/authority_source_map.md",
+        "../02_sources/international_authority_index.md",
         "../02_sources/sources.md",
         "../04_navigation/inter_layer_map.md",
         "quality_dashboard_v2.md"
@@ -1587,6 +1608,7 @@
       "sources": [],
       "cross_references": [
         "../../../archive/reports/2026_07/QUALITY_BASELINE_v2_0.md",
+        "../00_framework/methodology.md",
         "../04_navigation/concept_index.md",
         "../04_navigation/navigation.md",
         "audit_checklist.md"
@@ -1785,6 +1807,7 @@
         "../00_framework/methodology.md",
         "../00_framework/semantic_expressiveness.md",
         "../00_framework/semantic_space.md",
+        "../02_sources/international_authority_index.md",
         "career_landscape.md",
         "learning_guide.md"
       ],
@@ -1917,7 +1940,8 @@
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../04_formal/01_ownership_logic/03_ownership_formal.md",
         "../00_framework/methodology.md",
-        "../02_sources/authority_source_map.md"
+        "../02_sources/authority_source_map.md",
+        "../02_sources/international_authority_index.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
@@ -2019,6 +2043,7 @@
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
         "../../04_formal/01_ownership_logic/03_ownership_formal.md",
         "../00_framework/boundary_extension_tree.md",
+        "../00_framework/methodology.md",
         "../00_framework/theorem_inference_forest.md",
         "inter_layer_topology.md"
       ],
@@ -2102,6 +2127,7 @@
         "../00_framework/cognitive_dimension_matrix.md",
         "../00_framework/competency_graph.md",
         "../00_framework/semantic_space.md",
+        "../02_sources/international_authority_index.md",
         "concept_index.md",
         "inter_layer_map.md"
       ],
@@ -2332,6 +2358,7 @@
         "../../06_ecosystem/03_design_patterns/05_system_design_principles.md",
         "../00_framework/competency_graph.md",
         "../00_framework/concept_definition_decision_forest.md",
+        "../00_framework/methodology.md",
         "../00_framework/semantic_space.md"
       ],
       "transitions": 6,
@@ -2559,6 +2586,7 @@
         "../../06_ecosystem/06_data_and_distributed/04_application_domains.md",
         "../../07_future/04_research_and_experimental/03_evolution.md",
         "../00_framework/semantic_space.md",
+        "../02_sources/international_authority_index.md",
         "learning_guide.md"
       ],
       "transitions": 6,
@@ -2987,6 +3015,7 @@
       ],
       "cross_references": [
         "../00_framework/semantic_space.md",
+        "../02_sources/international_authority_index.md",
         "learning_guide.md"
       ],
       "transitions": 6,
@@ -5505,6 +5534,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/00_traits/01_traits.md",
@@ -5695,6 +5725,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/04_types_and_conversions/07_closure_types.md",
@@ -5878,6 +5909,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../03_advanced/01_async/02_async.md",
@@ -6259,6 +6291,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../03_advanced/01_async/02_async.md",
         "../../06_ecosystem/06_data_and_distributed/04_application_domains.md",
@@ -6661,10 +6694,6 @@
           "context": "GHC 9.0+ 引入 LinearTypes 扩展，允许显式线性类型约束，与 Rust 所有权在类型论上同源但实现阶段不同（Haskell 为可选扩展，Rust 为核心机制）。 ✅"
         },
         {
-          "source": "💡 原创分析",
-          "context": "\"模循环引用\"的例外是引用计数本身的运行时限制，非编译期可证。 💡"
-        },
-        {
           "source": "Girard 1987 (线性逻辑)",
           "context": "资源消耗与产生的代数表示对应线性逻辑中的资源公理。 ✅"
         },
@@ -6673,28 +6702,18 @@
           "context": "L1/L2 — 线性逻辑 ⊗ 与仿射逻辑 contraction 禁止。 ✅"
         },
         {
-          "source": "💡 原创分析",
-          "context": "C3 — \"内存安全完备性\" 是各定理的合取，模 `unsafe` 与循环引用。 💡"
-        },
-        {
           "source": "Girard 1987 (线性逻辑)",
           "context": "\"Affine Logic: 资源不可复用\" — 仿射逻辑允许 weakening（丢弃）但禁止 contraction（复制）。 ✅"
         },
         {
           "source": "Girard 1987 (线性逻辑)",
           "context": "\"线性逻辑 ⊗: 资源组合\" — 张量积表示多个资源同时存在。 ✅"
-        },
-        {
-          "source": "💡 原创分析",
-          "context": "\"5 条主线的 6 步递进\" — 认知脚手架设计。 💡"
-        },
-        {
-          "source": "💡 原创分析",
-          "context": "\"T: Send ⇔ 将 T 的值从线程 A move 到线程 B 是内存安全的\" 是 Send 语义的形式化重述。 💡"
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -7132,24 +7151,14 @@
           "context": "类型安全保证可推导出并发安全（Concurrency Safety），前提是所有权与别名规则被严格执行。 ✅"
         },
         {
-          "source": "💡 原创分析",
-          "context": "C1 — 内部可变性通过运行时（Runtime）检查替代编译期检查，是公理体系的受控扩展。 💡"
-        },
-        {
           "source": "Boyland 2003 (Fractional Permissions)",
           "context": "\"分数权限 f ∈ (0,1]\" — 读权限可无限分割，写权限要求 f=1.0。 ✅"
-        },
-        {
-          "source": "💡 原创分析",
-          "context": "\"panic 是编译期错误的运行时等价物\"——RefCell 用可恢复的运行时崩溃替代不可编译，保持内存安全（Memory Safety）不变。💡"
-        },
-        {
-          "source": "Rust 1.88 Release Notes",
-          "context": "`let_chains` stabilized in 2024 Edition."
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/02_memory_management/03_memory_management.md",
@@ -7573,6 +7582,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -8115,6 +8125,7 @@
       ],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/00_traits/01_traits.md",
@@ -8707,7 +8718,9 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -8885,6 +8898,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../06_ecosystem/10_performance/15_performance_optimization.md",
@@ -9055,6 +9069,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -9213,6 +9228,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/00_traits/01_traits.md",
@@ -9378,13 +9394,9 @@
           "code_preview": "// ❌ 编译错误：match 不穷尽 fn incomplete_match(result: Result<i32, !>) -> i32 {     mat..."
         }
       ],
-      "sources": [
-        {
-          "source": "💡 原创分析",
-          "context": "| 特性 | `!` (never type) | `enum Void {}` (空枚举（Enum）) |"
-        }
-      ],
+      "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -9689,6 +9701,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../02_intermediate/02_memory_management/03_memory_management.md",
@@ -9910,6 +9923,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/02_memory_management/03_memory_management.md",
@@ -10151,6 +10165,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../02_intermediate/04_types_and_conversions/06_range_types.md",
@@ -10544,6 +10559,7 @@
       "cross_references": [
         "../../../knowledge/02_intermediate/01_collections.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../02_intermediate/02_memory_management/12_smart_pointers.md",
@@ -10679,7 +10695,9 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../02_intermediate/02_memory_management/12_smart_pointers.md",
@@ -10861,6 +10879,7 @@
       "cross_references": [
         "../../../knowledge/02_intermediate/05_strings.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../03_advanced/04_ffi/05_rust_ffi.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
@@ -10983,6 +11002,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../03_advanced/04_ffi/05_rust_ffi.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
@@ -11105,6 +11125,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
@@ -11250,6 +11271,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/02_core_crates/03_core_crates.md",
@@ -12053,6 +12075,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -12168,6 +12191,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../02_intermediate/02_memory_management/08_interior_mutability.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
@@ -12285,6 +12309,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -12429,6 +12454,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -12592,6 +12618,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
@@ -12752,6 +12779,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md",
         "../../03_advanced/03_proc_macros/07_proc_macro.md",
@@ -12872,6 +12900,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md",
         "../../06_ecosystem/07_security_and_cryptography/19_security_practices.md",
@@ -14622,6 +14651,7 @@
       "cross_references": [
         "../../../knowledge/02_intermediate/06_traits.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
@@ -14754,6 +14784,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../03_advanced/03_proc_macros/04_macros.md",
@@ -14913,6 +14944,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
         "../../03_advanced/01_async/06_pin_unpin.md",
@@ -15101,6 +15133,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../04_formal/00_type_theory/08_type_inference.md",
@@ -16024,10 +16057,6 @@
       ],
       "sources": [
         {
-          "source": "C++ Reference: Templates",
-          "context": "C++ 模板通过文本替换实现编译期实例化，与 Rust 单态化类似但无统一类型检查。 ✅"
-        },
-        {
           "source": "Java Language Spec: Type Erasure",
           "context": "Java 泛型通过类型擦除实现，编译为 `Object` 并插入类型转换，有运行时装箱开销。 ✅"
         },
@@ -16045,7 +16074,9 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
@@ -16713,7 +16744,9 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -16852,6 +16885,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -16973,6 +17007,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/00_start/06_zero_cost_abstractions.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -17121,6 +17156,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -17860,24 +17896,12 @@
           "context": "稳定于 Rust 1.65。`Backtrace::capture()` 在 `RUST_BACKTRACE` 未设置时返回 `disabled`，避免无条件开销。 ✅"
         },
         {
-          "source": "Rust Standard Library: Backtrace",
-          "context": "`Backtrace::capture()` 的行为受 `RUST_BACKTRACE` 环境变量控制；`force_capture()` 则无视环境变量强制捕获，适用于必须记录栈轨迹的关键错误。 ✅"
-        },
-        {
           "source": "anyhow docs — Features",
           "context": "`anyhow` 的 `backtrace` feature 在 Rust 1.65+ 使用 `std::backtrace::Backtrace`，在旧版本回退到 `backtrace` crate。 ✅"
         },
         {
-          "source": "thiserror docs",
-          "context": "`thiserror` 1.0+ 支持 `#[backtrace]` 属性，可自动在构造错误时填充 `Backtrace`。若字段类型为 `Backtrace`，`#[backtrace]` 标记后 `Error::backtrace()` 方法将返回该字段。 ✅"
-        },
-        {
           "source": "Rust Standard Library: panic::Location",
           "context": "`panic::Location` 是 `const` 友好的轻量级定位机制，与 Backtrace 的运行时重定位形成鲜明对比。 ✅"
-        },
-        {
-          "source": "Rust Standard Library: Backtrace",
-          "context": "`Backtrace` 采用惰性求值策略：构造时仅捕获原始帧指针，格式化时才解析符号。但即使如此，栈展开本身仍有不可忽略的开销。 ✅"
         },
         {
           "source": "eyre docs",
@@ -17904,20 +17928,14 @@
           "context": "`PanicInfo::location()` 返回 panic 实际发生的位置；当 panic 源自 `#[track_caller]` 函数时，该位置已被替换为调用者位置。 ✅"
         },
         {
-          "source": "Rust Standard Library: Backtrace",
-          "context": "· **[Rust Reference: track_caller](https://doc.rust-lang.org/reference/introduction.html)** 两者结合可覆盖\"从精确源点到完整传播路径\"的全谱系定位需求。 ✅"
-        },
-        {
           "source": "anyhow source — macro rules",
           "context": "`anyhow!` 宏利用 `#[track_caller]` 将错误位置绑定到调用方源码坐标，使错误链中的 `location()` 方法返回用户代码位置。 ✅"
-        },
-        {
-          "source": "thiserror docs",
-          "context": "· **[anyhow docs]** 生态库的设计哲学是：`anyhow` 默认提供丰富的运行时上下文，`thiserror` 提供编译期结构化能力，两者均内建对 `#[track_caller]` 的一阶支持。 ✅"
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -18052,6 +18070,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/01_async/02_async.md",
@@ -18291,6 +18310,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/02_type_system/04_type_system.md",
@@ -18451,6 +18471,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -18589,6 +18610,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../06_ecosystem/03_design_patterns/02_patterns.md",
@@ -18774,7 +18796,9 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../04_formal/00_type_theory/10_category_theory.md",
@@ -18979,6 +19003,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/04_ffi/05_rust_ffi.md",
@@ -19107,6 +19132,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../01_foundation/02_type_system/14_coercion_and_casting.md",
         "../00_traits/01_traits.md",
@@ -19272,6 +19298,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/03_proc_macros/04_macros.md",
@@ -19713,6 +19740,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/02_type_system/04_type_system.md",
@@ -19859,6 +19887,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
         "../../03_advanced/03_proc_macros/04_macros.md",
@@ -19984,6 +20013,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
         "../../03_advanced/03_proc_macros/07_proc_macro.md",
@@ -20101,6 +20131,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
         "../../03_advanced/03_proc_macros/07_proc_macro.md",
@@ -20317,6 +20348,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/07_modules_and_items/11_modules_and_paths.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
         "../../03_advanced/03_proc_macros/07_proc_macro.md",
@@ -20511,6 +20543,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/00_start/06_zero_cost_abstractions.md",
         "../../01_foundation/00_start/15_closure_basics.md",
@@ -20860,10 +20893,6 @@
       ],
       "sources": [
         {
-          "source": "Go Spec: Concurrency",
-          "context": "Go 通过 goroutine + channel 实现 CSP 模型，但编译器不保证数据竞争自由。 ✅"
-        },
-        {
           "source": "C++ Reference: Thread support library",
           "context": "C++11 引入 `std::thread` 和内存模型，但无编译期数据竞争检查。 ✅"
         },
@@ -20873,6 +20902,8 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -21106,6 +21137,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/04_types_and_conversions/07_closure_types.md",
@@ -21322,6 +21354,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -21531,6 +21564,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -22506,6 +22540,8 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -23271,6 +23307,7 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -23474,6 +23511,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../04_formal/README.md",
         "../../06_ecosystem/04_web_and_networking/18_distributed_systems.md",
@@ -24137,6 +24175,8 @@
         "../../../docs/research_notes/formal_methods/10_ownership_model.md",
         "../../../docs/research_notes/formal_methods/10_variance_concept_mindmap.md",
         "../../../knowledge/03_advanced/unsafe/04_unsafe_rust.md",
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -24282,6 +24322,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
@@ -25347,6 +25388,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/02_type_system/04_type_system.md",
@@ -25489,6 +25532,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
@@ -26011,6 +26055,7 @@
       "sources": [],
       "cross_references": [
         "../../../knowledge/03_advanced/02_ffi.md",
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/02_memory_management/03_memory_management.md",
@@ -26164,6 +26209,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -26695,6 +26741,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/02_memory_management/03_memory_management.md",
@@ -26849,6 +26896,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -26992,6 +27040,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
@@ -27131,6 +27180,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../06_ecosystem/04_web_and_networking/27_web_frameworks.md",
         "../00_concurrency/01_concurrency.md",
@@ -27242,13 +27292,9 @@
           "code_preview": "use futures::stream::{self, StreamExt};  fn main() {     let mut s = stream::ite..."
         }
       ],
-      "sources": [
-        {
-          "source": "💡 原创分析",
-          "context": "· 综合上述所有来源 ✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../02_intermediate/02_memory_management/03_memory_management.md",
@@ -27577,6 +27623,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../02_intermediate/02_memory_management/03_memory_management.md",
         "../../02_intermediate/02_memory_management/08_interior_mutability.md",
         "../../04_formal/02_separation_logic/11_separation_logic.md",
@@ -27933,6 +27980,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
@@ -28198,6 +28247,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
@@ -28340,6 +28390,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md",
@@ -28478,6 +28529,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../01_ownership_logic/03_ownership_formal.md",
         "../03_operational_semantics/12_denotational_semantics.md",
         "../03_operational_semantics/17_operational_semantics.md",
@@ -29177,6 +29229,8 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -29397,6 +29451,8 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -29544,6 +29600,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
@@ -29954,6 +30011,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/02_sources/rustbelt_predicate_map.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
@@ -30086,6 +30145,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../00_type_theory/02_type_theory.md",
         "../01_ownership_logic/01_linear_logic.md",
@@ -30301,6 +30361,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
@@ -30424,6 +30485,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../01_ownership_logic/01_linear_logic.md",
         "../01_ownership_logic/03_ownership_formal.md",
@@ -30573,6 +30635,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../00_type_theory/02_type_theory.md",
         "../01_ownership_logic/01_linear_logic.md",
@@ -30737,6 +30800,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../01_foundation/03_values_and_references/20_variable_model.md",
         "../../01_foundation/04_control_flow/07_control_flow.md",
@@ -31220,13 +31284,11 @@
         {
           "source": "AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust",
           "context": "工具选型建议基于各工具的公开文档、工业部署报告及学术评估。✅"
-        },
-        {
-          "source": "💡 原创分析",
-          "context": "· 综合上述所有来源 ✅"
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../07_future/00_version_tracking/05_rust_version_tracking.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
@@ -31337,6 +31399,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../02_separation_logic/04_rustbelt.md",
@@ -31427,6 +31490,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../02_separation_logic/04_rustbelt.md",
@@ -31540,6 +31604,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
@@ -32137,6 +32202,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/02_unsafe/08_nll_and_polonius.md",
         "../../06_ecosystem/00_toolchain/45_compiler_internals.md",
@@ -33300,7 +33366,9 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/00_framework/paradigm_transition_matrix.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../04_formal/00_type_theory/02_type_theory.md",
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
         "../../04_formal/02_separation_logic/04_rustbelt.md",
@@ -33448,6 +33516,8 @@
       "cross_references": [
         "../../00_meta/00_framework/decidability_spectrum.md",
         "../../00_meta/00_framework/expressiveness_multiview.md",
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/02_async.md",
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
@@ -33689,7 +33759,9 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/00_framework/paradigm_transition_matrix.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
@@ -33830,6 +33902,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../02_intermediate/02_memory_management/03_memory_management.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
@@ -33936,6 +34010,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/02_memory_management/03_memory_management.md",
@@ -34053,6 +34128,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/04_ffi/05_rust_ffi.md",
@@ -34234,6 +34310,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/02_memory_management/03_memory_management.md",
@@ -34351,6 +34428,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../04_formal/00_type_theory/02_type_theory.md",
@@ -34463,6 +34541,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
@@ -34570,6 +34649,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../04_formal/00_type_theory/02_type_theory.md",
@@ -34667,6 +34747,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/01_async/02_async.md",
@@ -34771,6 +34852,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
@@ -34876,6 +34958,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -34980,6 +35063,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -35084,6 +35168,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/02_async.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -35190,6 +35275,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/01_async/02_async.md",
@@ -35333,6 +35420,8 @@
       "cross_references": [
         "../../00_meta/00_framework/boundary_extension_tree.md",
         "../../00_meta/00_framework/fault_tree_analysis_collection.md",
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../01_foundation/02_type_system/04_type_system.md",
@@ -35704,6 +35793,8 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/03_audit/quality_dashboard_v2.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -35848,6 +35939,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../03_advanced/01_async/02_async.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
@@ -35971,6 +36063,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../04_formal/00_type_theory/02_type_theory.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../04_web_and_networking/24_cloud_native.md",
@@ -36900,6 +36994,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../04_formal/00_type_theory/02_type_theory.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
@@ -37053,6 +37149,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../04_formal/00_type_theory/02_type_theory.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/05_roadmaps/24_roadmap.md",
@@ -37243,6 +37341,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "59_cargo_build_scripts.md",
         "62_cargo_registries_and_publishing.md"
@@ -38128,6 +38227,8 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/problem_graph.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../02_intermediate/00_traits/01_traits.md",
@@ -38466,6 +38567,8 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/problem_graph.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -38599,6 +38702,8 @@
         "../../00_meta/00_framework/competency_graph.md",
         "../../00_meta/00_framework/decidability_spectrum.md",
         "../../00_meta/00_framework/expressiveness_multiview.md",
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/problem_graph.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/02_async.md",
@@ -38809,6 +38914,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -38998,6 +39104,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/08_error_handling/32_error_handling_basics.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/02_async.md",
@@ -39183,6 +39291,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../03_advanced/01_async/02_async.md",
@@ -39717,7 +39826,9 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/00_framework/paradigm_transition_matrix.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/03_audit/asp_marking_guide.md",
         "../../00_meta/04_navigation/problem_graph.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -40618,6 +40729,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/02_async.md",
         "../../03_advanced/06_low_level_patterns/20_stream_processing_semantics.md",
@@ -40739,6 +40851,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/01_async/02_async.md",
         "../../04_formal/00_type_theory/02_type_theory.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
@@ -40902,14 +41015,6 @@
           "context": "Axum is a web application framework that focuses on ergonomics and modularity. It is built on top of Tokio, Tower, and Hyper."
         },
         {
-          "source": "Rocket docs",
-          "context": "Rocket is a web framework for Rust that makes it simple to write fast, secure web applications without sacrificing flexibility, usability, or type safety."
-        },
-        {
-          "source": "Poem docs",
-          "context": "Poem is a full-featured and easy-to-use web framework with the Rust programming language."
-        },
-        {
           "source": "Tower docs",
           "context": "Tower is a library of modular and reusable components for building robust networking clients and servers. The core abstraction is the `Service` trait."
         },
@@ -40920,6 +41025,8 @@
       ],
       "cross_references": [
         "../../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md",
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/02_async.md",
@@ -41038,13 +41145,9 @@
           "code_preview": "use tokio::net::UdpSocket;  async fn bad_udp(socket: &UdpSocket) {     socket.co..."
         }
       ],
-      "sources": [
-        {
-          "source": "💡 原创分析",
-          "context": "· 综合上述所有来源 ✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../03_advanced/01_async/02_async.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -41393,6 +41496,8 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -41501,6 +41606,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/04_ffi/05_rust_ffi.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
@@ -41645,6 +41751,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/02_memory_management/03_memory_management.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -41788,6 +41895,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
@@ -41908,13 +42016,9 @@
           "code_preview": "// Redox 使用 URL 作为资源标识符 // file:/path/to/file, irq:10, memory:0x1000  fn open_re..."
         }
       ],
-      "sources": [
-        {
-          "source": "💡 原创分析",
-          "context": "· 综合上述所有来源 ✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
       ],
       "transitions": 12,
@@ -42204,6 +42308,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/01_async/02_async.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../04_formal/00_type_theory/02_type_theory.md",
@@ -42281,6 +42386,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/04_ffi/09_ffi_advanced.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
@@ -42468,19 +42574,13 @@
           "context": "张量的形状和类型可在编译期验证，避免运行时的形状不匹配。"
         },
         {
-          "source": "Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs",
-          "context": "应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅"
-        },
-        {
-          "source": "Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs",
-          "context": "应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅"
-        },
-        {
           "source": "Rust Blockchain Report 2024; Solana Docs; Polkadot Substrate Docs; Near Protocol Docs",
           "context": "区块链方向基于公开协议文档和社区报告。✅"
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
@@ -42618,6 +42718,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../03_advanced/01_async/02_async.md",
@@ -42756,17 +42857,9 @@
           "code_preview": "// 假设使用 Flink/Timely Dataflow 风格的窗口操作  fn windowed_sum(events: Stream<Event>) ->..."
         }
       ],
-      "sources": [
-        {
-          "source": "💡 原创分析",
-          "context": "· 综合各 crate 官方文档 ✅"
-        },
-        {
-          "source": "💡 原创分析",
-          "context": "· 综合上述所有来源 ✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/02_async.md",
         "../../03_advanced/06_low_level_patterns/20_stream_processing_semantics.md",
@@ -42900,17 +42993,9 @@
           "code_preview": "// 概念代码: Sea-ORM 的实体定义 // #[derive(Clone, Debug, PartialEq, DeriveEntityModel)] ..."
         }
       ],
-      "sources": [
-        {
-          "source": "💡 原创分析",
-          "context": "· 综合各项目官方文档 ✅"
-        },
-        {
-          "source": "💡 原创分析",
-          "context": "· 综合上述所有来源 ✅"
-        }
-      ],
+      "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../04_formal/04_model_checking/05_verification_toolchain.md",
@@ -43476,6 +43561,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -43770,6 +43856,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -43928,6 +44016,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
@@ -44075,6 +44164,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/04_ffi/05_rust_ffi.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
@@ -44186,6 +44276,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/05_modules_and_visibility/10_module_system.md",
         "../../03_advanced/03_proc_macros/04_macros.md",
         "../../04_formal/00_type_theory/02_type_theory.md",
@@ -44311,6 +44402,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/03_proc_macros/04_macros.md",
@@ -44458,6 +44550,7 @@
       "sources": [],
       "cross_references": [
         "../../../knowledge/03_advanced/05_performance_optimization.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/00_start/06_zero_cost_abstractions.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
@@ -44630,6 +44723,8 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
@@ -44873,6 +44968,8 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
@@ -45128,6 +45225,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../04_formal/00_type_theory/02_type_theory.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../00_toolchain/01_toolchain.md",
@@ -45255,6 +45353,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../04_formal/00_type_theory/02_type_theory.md",
@@ -45380,6 +45479,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../02_intermediate/02_memory_management/03_memory_management.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
@@ -45603,21 +45703,10 @@
         {
           "source": "CLRS — Introduction to Algorithms, 4th Edition",
           "context": "An algorithm is any well-defined computational procedure that takes some value, or set of values, as input and produces some value, or set of values, as output."
-        },
-        {
-          "source": "VeriContest arXiv 2026-05-08",
-          "context": "VeriContest: A Benchmark of 946 LeetCode and Codeforces Problems for Rust + Verus Formal Verification."
-        },
-        {
-          "source": "VeriContest arXiv 2026-05-08",
-          "context": "首个大规模 Rust + Verus 形式验证基准测试集，覆盖 946 道 LeetCode/Codeforces 题目，涵盖排序、搜索、图论、动态规划、字符串等全类别算法。"
-        },
-        {
-          "source": "VeriContest arXiv 2026-05-08",
-          "context": "Rust + Verus 对 946 道 LeetCode/Codeforces 题目的形式验证结果。"
         }
       ],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/00_start/06_zero_cost_abstractions.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -46493,10 +46582,6 @@
       ],
       "sources": [
         {
-          "source": "Rust 1.88 Release Notes",
-          "context": "`let_chains` allows `&&`-chaining `let` statements inside `if` and `while`."
-        },
-        {
           "source": "Rust Standard Library Docs",
           "context": "`get_disjoint_mut` returns mutable references to multiple elements, checked at runtime for overlap."
         },
@@ -46521,10 +46606,6 @@
           "context": "Gen blocks tracking issue."
         },
         {
-          "source": "Rust 1.88 Release Notes",
-          "context": "Naked functions allow writing functions with no compiler-generated prologue/epilogue."
-        },
-        {
           "source": "Rust 1.96.0 release notes (GitHub #156512) 2026-05-28; releases.rs",
           "context": "> Rust 1.96.0 已于 2026-05-28 发布 stable；1.96.1 为当前最新 patch。关键稳定化特性：assert_matches!、core::range 类型族、`From<T>` for LazyCell/LazyLock/AssertUnwindSafe、ManuallyDrop 常量模式、expr metavariable to cfg。"
         },
@@ -46536,6 +46617,8 @@
       "cross_references": [
         "../../../docs/06_toolchain/06_19_rust_1_96_features.md",
         "../../../docs/06_toolchain/06_21_rust_1_97_features.md",
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/03_audit/quality_dashboard_v2.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -47252,6 +47335,7 @@
       "sources": [],
       "cross_references": [
         "../../../knowledge/06_ecosystem/02_edition_2024.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../03_advanced/01_async/02_async.md",
         "../../03_advanced/02_unsafe/08_nll_and_polonius.md",
@@ -47314,6 +47398,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../04_formal/01_ownership_logic/03_ownership_formal.md",
         "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
@@ -47597,6 +47682,8 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../03_advanced/01_async/02_async.md",
@@ -47604,8 +47691,7 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../00_version_tracking/05_rust_version_tracking.md",
-        "../04_research_and_experimental/03_evolution.md",
-        "https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md"
+        "../04_research_and_experimental/03_evolution.md"
       ],
       "transitions": 12,
       "has_cognitive_path": true,
@@ -47701,6 +47787,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../06_ecosystem/06_data_and_distributed/04_application_domains.md",
         "../00_version_tracking/05_rust_version_tracking.md",
@@ -47807,6 +47894,7 @@
       "sources": [],
       "cross_references": [
         "../../../docs/05_guides/05_safety_tags_guide.md",
+        "../../00_meta/00_framework/methodology.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
@@ -47925,6 +48013,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../00_version_tracking/05_rust_version_tracking.md",
         "../04_research_and_experimental/03_evolution.md"
@@ -48039,6 +48128,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -48410,6 +48500,7 @@
       "sources": [],
       "cross_references": [
         "../../../docs/05_guides/05_unsafe_fields_preview.md",
+        "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -48829,6 +48920,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/01_async/02_async.md",
         "../../03_advanced/01_async/06_pin_unpin.md",
         "../../03_advanced/01_async/24_async_closures.md",
@@ -48942,6 +49034,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -49229,6 +49322,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
@@ -49350,6 +49444,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -49460,6 +49555,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/00_start/06_zero_cost_abstractions.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
@@ -49857,6 +49953,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../00_version_tracking/05_rust_version_tracking.md",
         "../04_research_and_experimental/02_formal_methods.md",
@@ -50051,6 +50148,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../00_version_tracking/05_rust_version_tracking.md",
         "09_parallel_frontend_preview.md",
@@ -50375,6 +50473,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../04_formal/02_separation_logic/04_rustbelt.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
@@ -50971,6 +51070,7 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
@@ -51131,6 +51231,7 @@
         }
       ],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/02_sources/rustbelt_predicate_map.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -51366,6 +51467,8 @@
       ],
       "cross_references": [
         "../../00_meta/00_framework/competency_graph.md",
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -51498,6 +51601,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../06_ecosystem/11_domain_applications/11_webassembly.md",
@@ -51636,6 +51740,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../06_ecosystem/04_web_and_networking/27_web_frameworks.md",
         "../../06_ecosystem/05_systems_and_embedded/08_wasi.md",
@@ -51813,6 +51918,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/06_low_level_patterns/18_network_programming.md",
         "../../04_formal/04_model_checking/05_verification_toolchain.md",
@@ -51949,6 +52055,7 @@
       "sources": [],
       "cross_references": [
         "../../../docs/04_research/04_rust_for_linux.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/04_ffi/05_rust_ffi.md",
         "../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md",
@@ -52144,6 +52251,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../00_version_tracking/05_rust_version_tracking.md",

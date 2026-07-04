@@ -193,7 +193,7 @@ export function greet(name) {
 }
 ```
 
-> [来源: wasm-bindgen 源码, crates/macro-support/src/parser.rs]
+> [wasm-bindgen 源码, crates/macro-support/src/parser.rs](https://github.com/rustwasm/wasm-bindgen/blob/main/crates/macro-support/src/parser.rs)
 
 ### 3.2 `JsValue` — JS 值的 opaque 封装 {#32-jsvalue-js-值的-opaque-封装}
 
