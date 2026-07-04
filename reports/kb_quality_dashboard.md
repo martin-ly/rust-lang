@@ -1,13 +1,13 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-04T20:50:32.423240+00:00
-> 扫描文件数: 398
+> 生成时间: 2026-07-04T20:58:12.746225+00:00
+> 扫描文件数: 397
 
 ## 全局指标
 
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
-| 总文件数 | 398 | 27 | ✅ |
+| 总文件数 | 397 | 27 | ✅ |
 | 总定理链 (⟹) | 1887 | ≥270 | ✅ |
 | 总反命题 | 707 | ≥40 | ✅ |
 | 总 Mermaid 图 | 550 | ≥50 | ✅ |
@@ -25,7 +25,7 @@
 
 | 层级 | 文件数 | 平均 ⟹/文件 | 平均过渡段/文件 | 认知路径 | ⟸/文件 | 模板化 | 前置覆盖 | 后置覆盖 | 双标签 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| L0 | 62 | 5.2 | 3.2 | 35/62 (56%) | 0.0 | 0 | 13/62 | 12/62 | 44/62 |
+| L0 | 61 | 5.3 | 3.2 | 35/61 (57%) | 0.0 | 0 | 13/61 | 12/61 | 44/61 |
 | L1 | 53 | 4.4 | 4.7 | 48/53 (90%) | 1.6 | 0 | 53/53 | 53/53 | 53/53 |
 | L2 | 36 | 5.4 | 5.4 | 36/36 (100%) | 2.5 | 0 | 36/36 | 36/36 | 36/36 |
 | L3 | 37 | 5.6 | 4.3 | 37/37 (100%) | 2.1 | 0 | 37/37 | 37/37 | 37/37 |
@@ -83,7 +83,7 @@
 | E:\_src\rust-lang\concept\00_meta\02_sources\authority_source_map.md | L0 | 188 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\02_sources\rustbelt_predicate_map.md | L0 | 412 | 9 | 0 | 0 | 1 | 6 | 0 | 6 | ✅ | ❌ | ❌ | 研究者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\02_sources\sources.md | L0 | 488 | 1 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 研究者级 |
-| E:\_src\rust-lang\concept\00_meta\02_sources\topic_authority_alignment_map.md | L0 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\00_meta\02_sources\topic_authority_alignment_map.md | L0 | 372 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\00_meta\03_audit\08_concept_audit_guide.md | L0 | 80 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 专家 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\03_audit\asp_marking_guide.md | L0 | 522 | 1 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\03_audit\audit_checklist.md | L0 | 442 | 1 | 0 | 0 | 2 | 1 | 0 | 6 | ✅ | ❌ | ❌ | 专家 | 综述级 |
@@ -118,7 +118,6 @@
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\kg_ontology_v2.md | L0 | 319 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | None |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\kg_tlo_alignment.md | L0 | 238 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\00_meta\placeholders\placeholder_generic.md | L0 | 22 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
-| E:\_src\rust-lang\concept\00_meta\topic_authority_alignment_map.md | L0 | 372 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\01_foundation\00_start\00_start.md | L1 | 139 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 初学者 | 初学者 |
 | E:\_src\rust-lang\concept\01_foundation\00_start\06_zero_cost_abstractions.md | L1 | 835 | 3 | 2 | 0 | 3 | 2 | 14 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\00_start\15_closure_basics.md | L1 | 888 | 3 | 2 | 0 | 3 | 1 | 18 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
@@ -320,28 +319,28 @@
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\28_devops_and_ci_cd.md | L6 | 874 | 6 | 0 | 0 | 3 | 2 | 7 | 12 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\45_compiler_internals.md | L6 | 842 | 6 | 0 | 0 | 3 | 0 | 7 | 12 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\47_compiler_infrastructure.md | L6 | 366 | 4 | 0 | 0 | 2 | 0 | 1 | 8 | ✅ | ✅ | ✅ | 专家 | 专家级 |
-| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\57_quiz_toolchain.md | L6 | 563 | 3 | 0 | 0 | 0 | 0 | 7 | 6 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\58_platform_rust_integration.md | L6 | 316 | 3 | 0 | 0 | 0 | 0 | 4 | 8 | ❌ | ✅ | ✅ | 专家 | 专家级 |
-| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\67_llvm_backend_and_codegen.md | L6 | 303 | 3 | 0 | 0 | 0 | 0 | 1 | 6 | ❌ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\68_rustc_driver_and_stable_mir.md | L6 | 268 | 3 | 0 | 0 | 0 | 0 | 2 | 6 | ❌ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\69_compiler_diagnostics_and_ui_tests.md | L6 | 293 | 3 | 0 | 0 | 0 | 0 | 5 | 6 | ❌ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\70_rustc_bootstrap.md | L6 | 252 | 3 | 0 | 0 | 0 | 0 | 1 | 6 | ❌ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\71_compiler_testing.md | L6 | 284 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\57_quiz_toolchain.md | L6 | 560 | 3 | 0 | 0 | 0 | 0 | 7 | 6 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\58_platform_rust_integration.md | L6 | 313 | 3 | 0 | 0 | 0 | 0 | 4 | 8 | ❌ | ✅ | ✅ | 专家 | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\67_llvm_backend_and_codegen.md | L6 | 300 | 3 | 0 | 0 | 0 | 0 | 1 | 6 | ❌ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\68_rustc_driver_and_stable_mir.md | L6 | 265 | 3 | 0 | 0 | 0 | 0 | 2 | 6 | ❌ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\69_compiler_diagnostics_and_ui_tests.md | L6 | 290 | 3 | 0 | 0 | 0 | 0 | 5 | 6 | ❌ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\70_rustc_bootstrap.md | L6 | 249 | 3 | 0 | 0 | 0 | 0 | 1 | 6 | ❌ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\71_compiler_testing.md | L6 | 281 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 专家 / 研究者 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\77_rustdoc_196_changes.md | L6 | 236 | 3 | 0 | 0 | 0 | 0 | 3 | 6 | ❌ | ✅ | ✅ | 进阶 / 工程 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\79_development_tools.md | L6 | 192 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | ❌ | ✅ | ✅ | 初学者 | 研究级 |
 | E:\_src\rust-lang\concept\06_ecosystem\01_cargo\09_cargo_script.md | L6 | 697 | 4 | 0 | 0 | 1 | 2 | 10 | 8 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\01_cargo\10_public_private_deps.md | L6 | 631 | 6 | 0 | 0 | 1 | 2 | 11 | 12 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\59_cargo_build_scripts.md | L6 | 523 | 3 | 0 | 0 | 2 | 2 | 14 | 6 | ❌ | ✅ | ✅ | 进阶 / 工程 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\60_cargo_dependency_resolution.md | L6 | 520 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\61_cargo_source_replacement.md | L6 | 298 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\62_cargo_registries_and_publishing.md | L6 | 302 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\63_cargo_authentication_and_cache.md | L6 | 297 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\64_cargo_manifest_reference.md | L6 | 328 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 参考级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\65_cargo_profiles_and_lints.md | L6 | 311 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\66_cargo_subcommands_and_plugins.md | L6 | 254 | 3 | 0 | 0 | 0 | 0 | 1 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\59_cargo_build_scripts.md | L6 | 520 | 3 | 0 | 0 | 2 | 2 | 14 | 6 | ❌ | ✅ | ✅ | 进阶 / 工程 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\60_cargo_dependency_resolution.md | L6 | 517 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\61_cargo_source_replacement.md | L6 | 295 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\62_cargo_registries_and_publishing.md | L6 | 299 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\63_cargo_authentication_and_cache.md | L6 | 294 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\64_cargo_manifest_reference.md | L6 | 325 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 参考级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\65_cargo_profiles_and_lints.md | L6 | 308 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\66_cargo_subcommands_and_plugins.md | L6 | 251 | 3 | 0 | 0 | 0 | 0 | 1 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\01_cargo\72_cargo_security_cves.md | L6 | 476 | 4 | 0 | 0 | 3 | 1 | 0 | 8 | ✅ | ✅ | ✅ | 进阶 / 工程 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\01_cargo\76_cargo_196_features.md | L6 | 264 | 3 | 0 | 0 | 0 | 0 | 1 | 6 | ❌ | ✅ | ✅ | 进阶 / 工程 | 专家级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\78_cargo_workspaces.md | L6 | 271 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\78_cargo_workspaces.md | L6 | 268 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\01_cargo\80_cargo_getting_started.md | L6 | 88 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 初学者 | 参考级 |
 | E:\_src\rust-lang\concept\06_ecosystem\01_cargo\81_cargo_workflow.md | L6 | 97 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
 | E:\_src\rust-lang\concept\06_ecosystem\01_cargo\82_cargo_guide_practices.md | L6 | 91 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |

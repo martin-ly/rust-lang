@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 398,
+    "total_files": 397,
     "generated_at": "The system cannot accept the date entered.\nEnter the new date: (yy-mm-dd)"
   },
   "files": [
@@ -1354,20 +1354,18 @@
       "layer": "L0",
       "title": "主题-权威来源对齐图谱 (Topic-Authority Alignment Map)",
       "positioning": "",
-      "line_count": 16,
+      "line_count": 372,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../04_navigation/concept_index.md",
-        "../04_navigation/navigation.md",
-        "authority_source_map.md"
+        "https://github.com/rust-lang/miri/blob/master/BORROW_SANITIZER.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "matrix_rows": 4,
       "pre_post": {
         "pre": [],
         "post": []
@@ -5288,30 +5286,6 @@
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
       "matrix_rows": 0,
-      "pre_post": {
-        "pre": [],
-        "post": []
-      },
-      "backward_chains": 0,
-      "templated_chains": 0
-    },
-    {
-      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\topic_authority_alignment_map.md",
-      "layer": "L0",
-      "title": "主题-权威来源对齐图谱 (Topic-Authority Alignment Map)",
-      "positioning": "",
-      "line_count": 372,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "https://github.com/rust-lang/miri/blob/master/BORROW_SANITIZER.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 4,
       "pre_post": {
         "pre": [],
         "post": []
@@ -36197,7 +36171,7 @@
       "layer": "L6",
       "title": "测验：Rust 工具链（L6 试点扩展）",
       "positioning": "L6 嵌入式互动测验——验证 Rust 工具链核心概念（Cargo 依赖管理、Clippy lint、Miri UB 检测、rustfmt、文档生成）的掌握程度。",
-      "line_count": 563,
+      "line_count": 560,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: 测验 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -36286,7 +36260,7 @@
       "layer": "L6",
       "title": "将 Rust 集成到现有平台",
       "positioning": "系统对比 Android AOSP、Chromium、Bare Metal 三个典型场景中 Rust 的集成方式、构建系统、互操作模式与常见陷阱。",
-      "line_count": 316,
+      "line_count": 313,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: 将 Rust 集成到现有平台 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -36365,7 +36339,7 @@
       "layer": "L6",
       "title": "Rust 编译器的 LLVM 后端与代码生成",
       "positioning": "把“MIR 之后发生了什么”讲清楚：从 LLVM IR 生成、代码优化到目标文件与链接，覆盖 rustc 代码生成层的核心机制。",
-      "line_count": 303,
+      "line_count": 300,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Rust 编译器的 LLVM 后端与代码生成 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -36418,7 +36392,7 @@
       "layer": "L6",
       "title": "rustc Driver、Interface 与 Stable MIR",
       "positioning": "把“如何把 rustc 当库用”讲清楚：driver 的回调机制、interface 的低级 API、以及面向外部工具的 Stable MIR（rustc_public）愿景。",
-      "line_count": 268,
+      "line_count": 265,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: rustc Driver、Interface 与 Stabl 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -36479,7 +36453,7 @@
       "layer": "L6",
       "title": "rustc 编译器诊断与 UI Tests",
       "positioning": "把“rustc 的错误信息是怎么构造的、如何测试错误输出”讲清楚，为贡献 rustc 或编写自定义 lint 打下基础。",
-      "line_count": 293,
+      "line_count": 290,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: rustc 编译器诊断与 UI Tests 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -36564,7 +36538,7 @@
       "layer": "L6",
       "title": "rustc 自举（Bootstrap）",
       "positioning": "把“Rust 编译器如何用 Rust 写、又用 Rust 编译自己”这一自举过程讲清楚，帮助理解 rustc 开发工作流。",
-      "line_count": 252,
+      "line_count": 249,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: rustc 自举（Bootstrap） 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -36616,7 +36590,7 @@
       "layer": "L6",
       "title": "rustc 编译器测试体系",
       "positioning": "把“rustc 如何保证每次修改不破坏生态”讲清楚，覆盖从单元测试到全生态系统回归的多层测试策略。",
-      "line_count": 284,
+      "line_count": 281,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: rustc 编译器测试体系 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -37077,7 +37051,7 @@
       "layer": "L6",
       "title": "Cargo Build Scripts（`build.rs`）",
       "positioning": "把 `build.rs` 从“神秘的编译前脚本”还原为可预测、可调试、可重用的构建阶段工具。",
-      "line_count": 523,
+      "line_count": 520,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Cargo Build Scripts（`build.rs` 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -37219,7 +37193,7 @@
       "layer": "L6",
       "title": "Cargo 依赖解析",
       "positioning": "把“`cargo build` 时到底选了哪个版本、为什么选这个版本、特性如何合并”讲清楚。",
-      "line_count": 520,
+      "line_count": 517,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Cargo 依赖解析 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -37263,7 +37237,7 @@
       "layer": "L6",
       "title": "Cargo Source Replacement 与 Vendoring",
       "positioning": "把“怎么让 Cargo 从镜像/本地目录/离线缓存下载依赖”系统化，区分 source replacement、`[patch]` 与私有 registry 的适用边界。",
-      "line_count": 298,
+      "line_count": 295,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Cargo Source Replacement 与 Ven 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -37307,7 +37281,7 @@
       "layer": "L6",
       "title": "Cargo Registry 与包发布",
       "positioning": "把“怎么把 crate 发布到 crates.io / 私有 registry、registry 内部如何索引、认证如何工作”系统化。",
-      "line_count": 302,
+      "line_count": 299,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Cargo Registry 与包发布 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -37351,7 +37325,7 @@
       "layer": "L6",
       "title": "Cargo 认证与构建缓存",
       "positioning": "把“Cargo 如何安全地存 token、如何组织缓存、如何加速构建”系统化，补齐 registry 之后的工程实践闭环。",
-      "line_count": 297,
+      "line_count": 294,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Cargo 认证与构建缓存 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -37395,7 +37369,7 @@
       "layer": "L6",
       "title": "Cargo Manifest 参考速查",
       "positioning": "把 `Cargo.toml` 的核心字段按用途整理成可速查的参考表，方便快速查阅而非从头阅读。",
-      "line_count": 328,
+      "line_count": 325,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Cargo Manifest 参考速查 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -37439,7 +37413,7 @@
       "layer": "L6",
       "title": "Cargo Profiles 与 Lints",
       "positioning": "把“如何调优编译参数”和“如何在 Cargo.toml 中统一管理 lint”讲清楚，覆盖 Profile 与 Cargo 自有 lint 两层机制。",
-      "line_count": 311,
+      "line_count": 308,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Cargo Profiles 与 Lints 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -37483,7 +37457,7 @@
       "layer": "L6",
       "title": "Cargo 子命令与插件生态",
       "positioning": "把“如何扩展 Cargo”讲清楚：从自定义子命令约定到常用插件选型，覆盖 Cargo 的工具集成接口。",
-      "line_count": 254,
+      "line_count": 251,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Cargo 子命令与插件生态 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -37653,7 +37627,7 @@
       "layer": "L6",
       "title": "Cargo Workspaces（工作区）",
       "positioning": "把“何时该用 workspace、如何组织多 crate 项目、如何统一依赖与 lint 配置”讲清楚。",
-      "line_count": 271,
+      "line_count": 268,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Cargo Workspaces（工作区） 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
