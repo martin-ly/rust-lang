@@ -598,7 +598,7 @@ fn fixed() {
 }
 ```
 
-> **Zig 对比**: Zig 的 `comptime` 是更通用的编译期计算机制——任何参数可标记为 `comptime`，函数在编译期执行。Rust 的 `const generics` 是类型系统（Type System）的扩展，仅支持特定上下文（数组大小、类型参数）。Zig 的 `comptime` 更灵活，但错误信息可能更复杂（编译期执行可能 panic）。Rust 的 `const generics` 更受限，但类型安全边界更清晰。两者都追求"编译期计算零运行时（Runtime）成本"，但 Zig 采用"通用编译期执行"，Rust 采用"受限常量泛型（Generics）"。来源: [Rust Reference]
+> **Zig 对比**: Zig 的 `comptime` 是更通用的编译期计算机制——任何参数可标记为 `comptime`，函数在编译期执行。Rust 的 `const generics` 是类型系统（Type System）的扩展，仅支持特定上下文（数组大小、类型参数）。Zig 的 `comptime` 更灵活，但错误信息可能更复杂（编译期执行可能 panic）。Rust 的 `const generics` 更受限，但类型安全边界更清晰。两者都追求"编译期计算零运行时（Runtime）成本"，但 Zig 采用"通用编译期执行"，Rust 采用"受限常量泛型（Generics）"。来源: [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ### 10.2 边界测试：Zig 的显式内存管理与 Rust 的所有权（编译错误）
 

@@ -948,7 +948,7 @@ fn main() {
 }
 ```
 
-> **修正**: 航空航天系统要求**确定性执行**——相同输入总是产生相同输出，无未定义行为，无外部状态依赖。`const fn` 限制函数只能执行编译期可求值的操作（算术、控制流、调用其他 const fn），禁止 I/O、堆分配、可变静态变量。这与 SPARK/Ada 的 pure function 或 C 的 `constexpr` 类似，但 Rust 的 `const fn` 与类型系统（Type System）集成更紧密——const 值可用于类型参数（数组大小、常量泛型（Generics））。形式化验证中，const fn 对应于"全函数"（total function）——对所有输入都终止并返回结果。来源: [Rust Reference]
+> **修正**: 航空航天系统要求**确定性执行**——相同输入总是产生相同输出，无未定义行为，无外部状态依赖。`const fn` 限制函数只能执行编译期可求值的操作（算术、控制流、调用其他 const fn），禁止 I/O、堆分配、可变静态变量。这与 SPARK/Ada 的 pure function 或 C 的 `constexpr` 类似，但 Rust 的 `const fn` 与类型系统（Type System）集成更紧密——const 值可用于类型参数（数组大小、常量泛型（Generics））。形式化验证中，const fn 对应于"全函数"（total function）——对所有输入都终止并返回结果。来源: [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ### 10.3 边界测试：SPARK 模式的 Rust 近似与 `no_panic`（编译错误）
 

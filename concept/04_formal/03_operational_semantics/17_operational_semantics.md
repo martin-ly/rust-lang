@@ -873,7 +873,7 @@ fn main() {
 }
 ```
 
-> **修正**: Stacked Borrows 是 Rust 的实验性内存模型，由 Miri 实现验证。它规定：通过引用创建的裸指针继承了引用的借用标签，同一内存位置的两个可变引用（Mutable Reference）（即使是通过 `as` 转换的裸指针）不能同时活跃。上述代码中，`r1` 和 `r2` 都从 `&mut x` 创建，Stacked Borrows 认为它们属于同一"借用栈"，不能同时使用。Tree Borrows 模型对此更宽松——允许不重叠区域的独立访问。Rust 规范尚未最终确定使用哪种模型，但当前 Miri 默认使用 Stacked Borrows。开发者应避免此类代码，除非确知底层内存模型。这与 C 的指针别名（完全合法，无检查）或 LLVM 的 `noalias`（优化假设，非语言语义）不同——Rust 正在发展精确的内存模型定义。来源: [Stacked Borrows Paper] · 来源: [Tree Borrows]
+> **修正**: Stacked Borrows 是 Rust 的实验性内存模型，由 Miri 实现验证。它规定：通过引用创建的裸指针继承了引用的借用标签，同一内存位置的两个可变引用（Mutable Reference）（即使是通过 `as` 转换的裸指针）不能同时活跃。上述代码中，`r1` 和 `r2` 都从 `&mut x` 创建，Stacked Borrows 认为它们属于同一"借用栈"，不能同时使用。Tree Borrows 模型对此更宽松——允许不重叠区域的独立访问。Rust 规范尚未最终确定使用哪种模型，但当前 Miri 默认使用 Stacked Borrows。开发者应避免此类代码，除非确知底层内存模型。这与 C 的指针别名（完全合法，无检查）或 LLVM 的 `noalias`（优化假设，非语言语义）不同——Rust 正在发展精确的内存模型定义。来源: [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) · 来源: [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/)
 
 ### 10.7 边界测试：求值顺序与副作用的交互（运行时 UB）
 
@@ -886,7 +886,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 明确指定了大多数表达式的**求值顺序**：元组/数组元素左到右、`let` 绑定右到左（先求值右侧）、函数参数左到右（但注意：这是 2024 Edition 的变更，旧 Edition 未指定）。但某些边缘情况：1) `a + b` 中 `a` 和 `b` 的求值顺序；2) 方法调用的 receiver 和参数顺序；3) 闭包（Closures）参数捕获顺序。依赖求值顺序的代码是脆弱的——不同编译器版本或优化级别可能改变行为。安全模式：将副作用分离到独立语句，不依赖复合表达式中的求值顺序。这与 C/C++ 的"大多数求值顺序未指定"（UB 来源之一）或 Java 的"左到右求值"（明确指定）不同——Rust 趋向于更明确的求值顺序，但仍在演进中。来源: [Rust Reference — Evaluation Order] · 来源: [Rust Edition 2024]
+> **修正**: Rust 明确指定了大多数表达式的**求值顺序**：元组/数组元素左到右、`let` 绑定右到左（先求值右侧）、函数参数左到右（但注意：这是 2024 Edition 的变更，旧 Edition 未指定）。但某些边缘情况：1) `a + b` 中 `a` 和 `b` 的求值顺序；2) 方法调用的 receiver 和参数顺序；3) 闭包（Closures）参数捕获顺序。依赖求值顺序的代码是脆弱的——不同编译器版本或优化级别可能改变行为。安全模式：将副作用分离到独立语句，不依赖复合表达式中的求值顺序。这与 C/C++ 的"大多数求值顺序未指定"（UB 来源之一）或 Java 的"左到右求值"（明确指定）不同——Rust 趋向于更明确的求值顺序，但仍在演进中。来源: [Rust Reference — Evaluation Order](https://doc.rust-lang.org/reference/) · 来源: [Rust Edition 2024]
 
 ### 10.3 边界测试：求值顺序与副作用的确定性（编译错误）
 

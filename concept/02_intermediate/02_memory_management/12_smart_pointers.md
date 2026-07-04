@@ -672,7 +672,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Arc<T>` 实现 `Send` + `Sync` 当且仅当 `T: Send + Sync`。`RefCell<T>` 不实现 `Sync`（单线程运行时（Runtime）借用（Borrowing）检查），所以 `Arc<RefCell<T>>` 不能跨线程。线程安全的内部可变性：1) `Arc<Mutex<T>>` — 互斥锁；2) `Arc<RwLock<T>>` — 读写锁；3) `Arc<AtomicUsize>` — 无锁原子操作（Atomic Operations）。`RefCell` 的设计：单线程场景下零开销（无原子操作），但线程间共享导致编译错误。这与 C++ 的 `std::shared_ptr<std::mutex>`（可跨线程，但需手动锁管理）或 Java 的 `AtomicInteger`（线程安全，但无 RefCell 的借用语义）不同——Rust 的类型系统（Type System）通过 `Send`/`Sync` 在编译期排除不安全的线程共享。来源: [The Rust Programming Language] · 来源: [Rust Standard Library]
+> **修正**: `Arc<T>` 实现 `Send` + `Sync` 当且仅当 `T: Send + Sync`。`RefCell<T>` 不实现 `Sync`（单线程运行时（Runtime）借用（Borrowing）检查），所以 `Arc<RefCell<T>>` 不能跨线程。线程安全的内部可变性：1) `Arc<Mutex<T>>` — 互斥锁；2) `Arc<RwLock<T>>` — 读写锁；3) `Arc<AtomicUsize>` — 无锁原子操作（Atomic Operations）。`RefCell` 的设计：单线程场景下零开销（无原子操作），但线程间共享导致编译错误。这与 C++ 的 `std::shared_ptr<std::mutex>`（可跨线程，但需手动锁管理）或 Java 的 `AtomicInteger`（线程安全，但无 RefCell 的借用语义）不同——Rust 的类型系统（Type System）通过 `Send`/`Sync` 在编译期排除不安全的线程共享。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust Standard Library]
 
 ## 实践
 

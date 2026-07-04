@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 392,
+    "total_files": 398,
     "generated_at": "The system cannot accept the date entered.\nEnter the new date: (yy-mm-dd)"
   },
   "files": [
@@ -5288,6 +5288,30 @@
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
       "matrix_rows": 0,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\topic_authority_alignment_map.md",
+      "layer": "L0",
+      "title": "主题-权威来源对齐图谱 (Topic-Authority Alignment Map)",
+      "positioning": "",
+      "line_count": 372,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "https://github.com/rust-lang/miri/blob/master/BORROW_SANITIZER.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 4,
       "pre_post": {
         "pre": [],
         "post": []
@@ -11241,6 +11265,471 @@
         ]
       },
       "backward_chains": 2,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\07_modules_and_items\\12_functions.md",
+      "layer": "L1",
+      "title": "Functions（函数）",
+      "positioning": "系统讲解 Rust 函数声明、参数传递、返回值、发散函数与所有权的交互，为后续 Trait、闭包、Async 打下语法基础。",
+      "line_count": 220,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn greet(name: &str) {     println!(\"Hello, {name}!\"); }  fn main() {     greet(..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "fn take_ownership(s: String) {     println!(\"{s}\"); // s 在此有效 } // s 被 drop  fn ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "fn add(a: i32, b: i32) -> i32 {     a + b // 末尾表达式作为返回值（无分号） }  fn early_return(..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "fn wrong() -> i32 {     5; // ❌ 类型不匹配：实际返回 ()，期望 i32 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "fn forever() -> ! {     loop {         println!(\"again\");     } }  fn must_not_h..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "let x = 5; fn print_x(x: i32) {     println!(\"{x}\"); } print_x(10); // 输出 10，不影响..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "fn double(x: i32) -> i32 {     x * 2; // ❌ 语句返回 () } ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "fn consume(s: String) {}  fn main() {     let s = String::from(\"hi\");     consum..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "fn append(dest: &mut String, src: &String) {     dest.push_str(src); }  fn main(..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../00_start/15_closure_basics.md",
+        "../01_ownership_borrow_lifetime/01_ownership.md",
+        "../02_type_system/04_type_system.md",
+        "../04_control_flow/41_statements_and_expressions.md",
+        "11_modules_and_paths.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 10,
+      "pre_post": {
+        "pre": [
+          "[Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/04_type_system.md) · [Statements and Expressions](../04_control_flow/41_statements_and_expressions.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)"
+        ],
+        "post": [
+          "[Traits](../../02_intermediate/00_traits/01_traits.md) · [Closures](../00_start/15_closure_basics.md) · [Modules and Paths](11_modules_and_paths.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\07_modules_and_items\\13_use_declarations.md",
+      "layer": "L1",
+      "title": "Use Declarations（使用声明）",
+      "positioning": "系统讲解 `use` 声明的语法、作用域规则、重导出与 glob 导入，帮助学习者建立清晰的模块命名空间心智模型。",
+      "line_count": 185,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "mod kitchen {     pub fn cook() {} }  use kitchen::cook; // 将 kitchen::cook 引入当前..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "use kitchen::cook as prepare; ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "mod outer {     pub const VAL: i32 = 1;      mod inner {         pub fn print() ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "mod backend {     pub struct User; }  mod api {     pub use crate::backend::User..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// 嵌套导入 use std::collections::{HashMap, HashSet, BTreeMap};  // 嵌套 + 重命名 use std..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "mod inner {     fn secret() {} }  use inner::secret; // ❌ 函数 `secret` 是私有的 ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 10,
+          "should_fail": true,
+          "code_preview": "mod a { pub fn foo() {} } mod b { pub fn foo() {} }  use a::foo; use b::foo; // ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "use std::io::*;  fn read() {} // 如果某个 trait/类型也叫 read，可能产生歧义 ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../02_intermediate/05_modules_and_visibility/22_api_naming_conventions.md",
+        "../01_ownership_borrow_lifetime/01_ownership.md",
+        "11_modules_and_paths.md",
+        "35_preludes.md",
+        "39_items.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 8,
+      "pre_post": {
+        "pre": [
+          "[Modules and Paths](11_modules_and_paths.md) · [Items](39_items.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)"
+        ],
+        "post": [
+          "[Preludes](35_preludes.md) · [API Naming Conventions](../../02_intermediate/05_modules_and_visibility/22_api_naming_conventions.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\07_modules_and_items\\14_structs.md",
+      "layer": "L1",
+      "title": "Structs（结构体）",
+      "positioning": "系统讲解 Rust 结构体的三种形式、字段可见性、结构体更新语法与方法基础，为后续 Trait、Enum、泛型奠定类型基础。",
+      "line_count": 193,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// 1. 命名字段型 struct User {     username: String,     email: String,     active: b..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "let u1 = User {     username: String::from(\"alice\"),     email: String::from(\"a@..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "mod user {     pub struct User {         pub username: String, // 外部可见         e..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "struct Meters(u32); struct Kilometers(u32);  fn run(m: Meters) {     println!(\"{..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 11,
+          "should_fail": true,
+          "code_preview": "struct Data {     s: String,     n: i32, }  fn main() {     let d1 = Data { s: S..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "let username = String::from(\"bob\"); let email = String::from(\"bob@example.com\");..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "fn main() {     let u = User { username: String::from(\"a\"), email: String::from(..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../01_ownership_borrow_lifetime/01_ownership.md",
+        "../02_type_system/04_type_system.md",
+        "12_functions.md",
+        "15_enumerations.md",
+        "16_implementations.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 7,
+      "pre_post": {
+        "pre": [
+          "[Type System](../02_type_system/04_type_system.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Functions](12_functions.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)"
+        ],
+        "post": [
+          "[Enumerations](15_enumerations.md) · [Implementations](16_implementations.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\07_modules_and_items\\15_enumerations.md",
+      "layer": "L1",
+      "title": "Enumerations（枚举）",
+      "positioning": "系统讲解 Rust 枚举的定义、变体负载、Option/Result 两个核心枚举、模式匹配穷尽性检查，以及与错误处理的关系。",
+      "line_count": 195,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "enum Message {     Quit,                           // 单元变体     Move { x: i32, y:..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "let maybe: Option<i32> = Some(5); let none: Option<i32> = None;  let ok: Result<..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn divide(a: f64, b: f64) -> Result<f64, &'static str> {     if b == 0.0 {      ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn handle(msg: Message) {     match msg {         Message::Quit => println!(\"qui..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn incomplete(msg: Message) {     match msg {         Message::Quit => println!(..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#[non_exhaustive] pub enum ApiError {     NotFound,     BadRequest, } ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "fn unwrap_unsafe(x: Option<i32>) -> i32 {     x.unwrap() // 运行时 panic if None } ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn may_fail() -> Result<(), &'static str> { Ok(()) }  fn main() {     if let Err..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 12,
+          "should_fail": true,
+          "code_preview": "enum Packet {     Data(String), }  fn main() {     let p = Packet::Data(String::..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
+        "../../04_formal/00_type_theory/02_type_theory.md",
+        "../02_type_system/04_type_system.md",
+        "../04_control_flow/40_patterns.md",
+        "../08_error_handling/32_error_handling_basics.md",
+        "14_structs.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 7,
+      "pre_post": {
+        "pre": [
+          "[Type System](../02_type_system/04_type_system.md) · [Structs](14_structs.md) · [Pattern Matching](../04_control_flow/40_patterns.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)"
+        ],
+        "post": [
+          "[Error Handling Basics](../08_error_handling/32_error_handling_basics.md) · [Result and Option Deep Dive](../../02_intermediate/03_error_handling/04_error_handling.md) · [Algebraic Data Types](../../04_formal/00_type_theory/02_type_theory.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\07_modules_and_items\\16_implementations.md",
+      "layer": "L1",
+      "title": "Implementations（实现块）",
+      "positioning": "系统讲解 Rust `impl` 块的两种形式（固有实现、Trait 实现）、方法 receiver、关联函数，以及与结构体/枚举/Trait 的关系。",
+      "line_count": 190,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "struct Rectangle {     width: u32,     height: u32, }  impl Rectangle {     fn a..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "impl String {     // 不可变借用     fn len(&self) -> usize { self.as_bytes().len() } ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "impl Rectangle {     fn square(size: u32) -> Rectangle {         Rectangle { wid..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "trait Drawable {     fn draw(&self); }  impl Drawable for Rectangle {     fn dra..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "impl Rectangle {     fn set_width(&self, w: u32) {         self.width = w; // ❌ ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "fn main() {     let s = String::from(\"hello\");     s.into_bytes();     println!(..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "trait MyTrait {} impl MyTrait for String {} // ❌ 当前 crate 既未定义 MyTrait 也未定义 Stri..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/00_traits/19_advanced_traits.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../02_intermediate/04_types_and_conversions/37_type_conversions.md",
+        "12_functions.md",
+        "14_structs.md",
+        "15_enumerations.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 7,
+      "pre_post": {
+        "pre": [
+          "[Structs](14_structs.md) · [Enumerations](15_enumerations.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Functions](12_functions.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)"
+        ],
+        "post": [
+          "[Generics](../../02_intermediate/01_generics/02_generics.md) · [Type Conversions](../../02_intermediate/04_types_and_conversions/37_type_conversions.md) · [Advanced Traits](../../02_intermediate/00_traits/19_advanced_traits.md)"
+        ]
+      },
+      "backward_chains": 0,
       "templated_chains": 0
     },
     {
@@ -26995,7 +27484,7 @@
       "layer": "L3",
       "title": "Unsafe 集合内部实现：Vec、Arc、Mutex（Unsafe Collections Internals）",
       "positioning": "",
-      "line_count": 477,
+      "line_count": 479,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"实现 Vec 只需要普通引用\" ⟹ 不成立。未初始化内存无法通过 safe 引用表达，必须使用原始指针。",
@@ -41973,10 +42462,6 @@
         {
           "source": "Candle Book",
           "context": "张量的形状和类型可在编译期验证，避免运行时的形状不匹配。"
-        },
-        {
-          "source": "Cargo RFC",
-          "context": "Cargo Script / Frontmatter FCP 已通过。"
         },
         {
           "source": "Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs",

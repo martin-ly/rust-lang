@@ -1008,7 +1008,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 线性逻辑的 **multiplicative conjunction**（`⊗`）对应 Rust 的元组/结构体（Struct）所有权分割，**additive conjunction**（`&`）对应共享借用。Rust 的借用规则是线性逻辑 **ILL**（Intuitionistic Linear Logic）的实用化变体：独占资源（`own`）可分割为共享权限（`shr`）和独占权限（`own ∗ shr`），但共享权限不能升级为独占权限。这保证了"读取者-写入者"互斥——多个读者或单个写者，永不会同时存在。来源: [RustBelt Paper]
+> **修正**: 线性逻辑的 **multiplicative conjunction**（`⊗`）对应 Rust 的元组/结构体（Struct）所有权分割，**additive conjunction**（`&`）对应共享借用。Rust 的借用规则是线性逻辑 **ILL**（Intuitionistic Linear Logic）的实用化变体：独占资源（`own`）可分割为共享权限（`shr`）和独占权限（`own ∗ shr`），但共享权限不能升级为独占权限。这保证了"读取者-写入者"互斥——多个读者或单个写者，永不会同时存在。来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ### 10.3 边界测试：所有权转移与线性逻辑的析取（编译错误）
 

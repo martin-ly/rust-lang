@@ -118,7 +118,7 @@ Progress + Preservation（类型安全）
     └──→ 空指针解引用不可能：Option<T> 强制显式处理 None
 ```
 
-> **关键洞察**: 这不是偶然的——Rust 的类型系统（Type System）**从设计之初就以内存安全（Memory Safety）为目标**。`&mut T` 不是"可写引用（Reference）"，而是**独占访问令牌**；`Box<T>` 不是"堆指针"，而是**线性资源**；`Option<T>` 不是"可为空的值"，而是**显式存在性证明**。这些设计使 Cardelli 的"类型安全 → 内存安全"蕴含关系在 Rust 中成为定理，而非巧合。来源: [Cardelli 1996] · 来源: [Rust Reference — Type Safety]
+> **关键洞察**: 这不是偶然的——Rust 的类型系统（Type System）**从设计之初就以内存安全（Memory Safety）为目标**。`&mut T` 不是"可写引用（Reference）"，而是**独占访问令牌**；`Box<T>` 不是"堆指针"，而是**线性资源**；`Option<T>` 不是"可为空的值"，而是**显式存在性证明**。这些设计使 Cardelli 的"类型安全 → 内存安全"蕴含关系在 Rust 中成为定理，而非巧合。来源: [Cardelli 1996] · 来源: [Rust Reference — Type Safety](https://doc.rust-lang.org/reference/)
 > **前置概念**: N/A
 ---
 
@@ -321,7 +321,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 > Java/C++ 的异常是**隐式的控制流**，类型系统不跟踪哪些函数可能抛出异常。
 > Rust 的 `Result<T, E>` 是**显式的控制流**，函数签名直接声明可能的错误类型 `E`。
 > 这使类型语义可以精确追踪错误传播路径——编译器强制调用者处理 `Result`，而非在运行时（Runtime）意外捕获异常。
-> 来源: [Pierce 2002, Ch.11] · 来源: [Rust Reference — Option/Result] · 来源: [Hoare's Billion Dollar Mistake]
+> 来源: [Pierce 2002, Ch.11] · 来源: [Rust Reference — Option/Result](https://doc.rust-lang.org/reference/) · 来源: [Hoare's Billion Dollar Mistake]
 
 #### Row Polymorphism：Effect System 的类型论基础
 
@@ -837,7 +837,7 @@ struct SoundVec<T> {
 // SoundVec<T> 对 T 的变型由 PhantomData<T> 决定。
 ```
 
-> **修正**: `PhantomData<T>` 是 Rust 类型系统的**语义桥接器**。它在运行时不占内存（ZST，Zero-Sized Type），但在编译期向类型系统传递关键语义信息："这个结构在逻辑上与 `T` 相关联"。这是 Rust 实现**零成本抽象（Zero-Cost Abstraction）**的典型模式——语义信息在编译期使用，运行时不带来任何开销。没有 `PhantomData`，像 `Vec<T>`、`Box<T>` 这样的容器无法在内部使用裸指针的同时保持正确的变型推断。来源: [Rust Reference — PhantomData] · Rust Nomicon — PhantomData
+> **修正**: `PhantomData<T>` 是 Rust 类型系统的**语义桥接器**。它在运行时不占内存（ZST，Zero-Sized Type），但在编译期向类型系统传递关键语义信息："这个结构在逻辑上与 `T` 相关联"。这是 Rust 实现**零成本抽象（Zero-Cost Abstraction）**的典型模式——语义信息在编译期使用，运行时不带来任何开销。没有 `PhantomData`，像 `Vec<T>`、`Box<T>` 这样的容器无法在内部使用裸指针的同时保持正确的变型推断。来源: [Rust Reference — PhantomData](https://doc.rust-lang.org/reference/) · Rust Nomicon — PhantomData
 
 ### 10.5 边界测试：`Pin<T>` 的类型语义（编译错误）
 

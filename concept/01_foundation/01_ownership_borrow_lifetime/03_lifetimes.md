@@ -184,7 +184,7 @@ Tofte-Talpin 区域推断的核心思想:
         引用的生命周期是 CFG 上的一组点，而非连续的语法范围
 ```
 
-> **来源**: [Rust Reference: Non-Lexical Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) · [rustc NLL RFC 2094] · [Rust Internals: NLL design notes]
+> **来源**: [Rust Reference: Non-Lexical Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) · [rustc NLL RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) · [Rust Internals: NLL design notes](https://internals.rust-lang.org/)
 
 #### Rust 中的区域约束生成与求解
 
@@ -424,7 +424,7 @@ graph BT
   ⟹ 长生命周期引用可安全替代短生命周期引用，无悬垂风险
 ```
 
-> **来源: [Rust Reference: Variance]** 生命周期协变/逆变/不变的类型系统（Type System）规则基于子类型理论。✅
+> **来源: [Rust Reference: Variance](https://doc.rust-lang.org/reference/)** 生命周期协变/逆变/不变的类型系统（Type System）规则基于子类型理论。✅
 
 ### 4.6 推论：'static 生命周期 ⟹ 全局/泄漏数据的安全性
 

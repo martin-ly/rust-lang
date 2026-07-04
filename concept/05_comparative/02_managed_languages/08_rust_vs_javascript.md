@@ -584,7 +584,7 @@ fn main() {
 }
 ```
 
-> **修正**: JavaScript 的 `this` 是**动态绑定**的：函数作为方法调用时 `this` 是对象，作为普通函数调用时 `this` 是 `undefined`（严格模式）或全局对象。Rust 无 `this` 概念：方法调用 `c.increment()` 是 `Counter::increment(&mut c)` 的语法糖，`self` 是显式参数。提取方法为函数值需要闭包：`|| c.increment()` 捕获 `c` 的引用（Reference）。这与 Python 的 `self`（显式参数，但方法可作为 bound method 提取）或 C++ 的 `std::bind`/`lambda`（类似 Rust 闭包（Closures））不同——Rust 的方法无隐式绑定，所有参数显式传递，消除了 `this` 的歧义。JavaScript 的箭头函数（词法 `this`）解决了部分问题，但 Rust 从根本上避免了动态绑定。来源: [The Rust Programming Language] · 来源: [JavaScript this Keyword]
+> **修正**: JavaScript 的 `this` 是**动态绑定**的：函数作为方法调用时 `this` 是对象，作为普通函数调用时 `this` 是 `undefined`（严格模式）或全局对象。Rust 无 `this` 概念：方法调用 `c.increment()` 是 `Counter::increment(&mut c)` 的语法糖，`self` 是显式参数。提取方法为函数值需要闭包：`|| c.increment()` 捕获 `c` 的引用（Reference）。这与 Python 的 `self`（显式参数，但方法可作为 bound method 提取）或 C++ 的 `std::bind`/`lambda`（类似 Rust 闭包（Closures））不同——Rust 的方法无隐式绑定，所有参数显式传递，消除了 `this` 的歧义。JavaScript 的箭头函数（词法 `this`）解决了部分问题，但 Rust 从根本上避免了动态绑定。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [JavaScript this Keyword]
 
 ### 10.4 边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译错误）
 

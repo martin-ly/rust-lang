@@ -379,6 +379,8 @@ graph TD
     Q3 -->|否| A4["先学习 Rustonomicon 和 Miri"]
 ```
 
+> **学习资源**: 若对 Rust 内存模型尚不熟悉，建议先阅读 [The Rustonomicon](https://doc.rust-lang.org/nomicon/) 并使用 [Miri](https://github.com/rust-lang/miri) 验证 unsafe 代码。
+
 ### 7.2 与其他概念的辨析
 
 | 场景 | 推荐选择 | 不推荐 | 理由 |
@@ -472,5 +474,5 @@ D. `Ordering::SeqCst`
 ---
 
 > **权威来源**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/), [The Rust Reference](https://doc.rust-lang.org/reference/), [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
-> **权威来源对齐变更日志**: 2026-07-04 创建 [来源: Rustonomicon Vec/Arc/Mutex 章节对齐]
+> **权威来源对齐变更日志**: 2026-07-04 创建 来源: [Rustonomicon Vec/Arc/Mutex 章节对齐](https://doc.rust-lang.org/nomicon/)
 > **状态**: ✅ 权威来源对齐完成

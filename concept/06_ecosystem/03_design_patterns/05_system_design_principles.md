@@ -602,7 +602,7 @@ impl Service {
 }
 ```
 
-> **修正**: 依赖注入（DI）在 Rust 中通常通过**泛型**（静态分发）或 **trait object**（动态分发）实现。泛型无运行时开销，但代码膨胀；trait object 有 vtable 间接开销（约 1-2 个指针解引用（Reference）），但二进制更小。上述代码使用 `Box<dyn Repository>` 实现 DI，每次 `find` 调用有虚函数开销。在性能关键路径上，应使用泛型：`struct Service<R: Repository> { repo: R }`。Rust 的类型系统允许在编译期选择：开发时使用 trait object（快速迭代），发布时重构为泛型（性能优化）。这与 Java 的接口（总是动态分发，JIT 可能内联）或 C++ 的模板（总是静态分发）不同——Rust 提供了两种机制，让开发者根据场景选择。来源: [The Rust Programming Language] · 来源: [Rust Performance Book]
+> **修正**: 依赖注入（DI）在 Rust 中通常通过**泛型**（静态分发）或 **trait object**（动态分发）实现。泛型无运行时开销，但代码膨胀；trait object 有 vtable 间接开销（约 1-2 个指针解引用（Reference）），但二进制更小。上述代码使用 `Box<dyn Repository>` 实现 DI，每次 `find` 调用有虚函数开销。在性能关键路径上，应使用泛型：`struct Service<R: Repository> { repo: R }`。Rust 的类型系统允许在编译期选择：开发时使用 trait object（快速迭代），发布时重构为泛型（性能优化）。这与 Java 的接口（总是动态分发，JIT 可能内联）或 C++ 的模板（总是静态分发）不同——Rust 提供了两种机制，让开发者根据场景选择。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust Performance Book]
 
 ### 10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）
 

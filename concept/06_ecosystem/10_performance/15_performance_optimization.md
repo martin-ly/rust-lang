@@ -607,7 +607,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的内联汇编（Inline Assembly）（`asm!` macro，stable since 1.59）在编译期验证操作数类型与约束（constraint）的兼容性。`mov` 指令在 x86-64 上操作 64 位寄存器，但 `x` 是 `u32`（32位），类型不匹配导致编译错误。正确写法：统一为 `u64`，或使用 `in("eax") x` 显式指定 32 位寄存器。Rust 的内联汇编比 C 的 `asm` 关键字类型安全：操作数与 Rust 变量绑定，编译器检查类型和生命周期（Lifetimes），自动处理寄存器分配和 clobber 列表。这是 Rust "zero-cost abstraction with safety" 的延伸：直接控制硬件，同时保持类型系统（Type System）的保护。来源: [Rust Reference — Inline Assembly] · 来源: [Rustonomicon]
+> **修正**: Rust 的内联汇编（Inline Assembly）（`asm!` macro，stable since 1.59）在编译期验证操作数类型与约束（constraint）的兼容性。`mov` 指令在 x86-64 上操作 64 位寄存器，但 `x` 是 `u32`（32位），类型不匹配导致编译错误。正确写法：统一为 `u64`，或使用 `in("eax") x` 显式指定 32 位寄存器。Rust 的内联汇编比 C 的 `asm` 关键字类型安全：操作数与 Rust 变量绑定，编译器检查类型和生命周期（Lifetimes），自动处理寄存器分配和 clobber 列表。这是 Rust "zero-cost abstraction with safety" 的延伸：直接控制硬件，同时保持类型系统（Type System）的保护。来源: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
 ### 10.6 边界测试：`#[inline(always)]` 与代码膨胀（编译错误/链接错误）
 

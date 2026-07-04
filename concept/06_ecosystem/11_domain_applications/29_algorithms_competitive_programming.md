@@ -78,7 +78,7 @@ VeriContest 证明：946 道经典竞赛题的 Rust 实现可通过 Verus 形式
 | **竞赛生态** | ⚠️ 模板库较少，社区在成长 | ✅ 极成熟（AC Library 等） | ✅ LeetCode 默认支持 |
 | **形式验证** | ✅ Verus/Kani/Creusot 生态领先 | ⚠️ 有限（Frama-C 等） | ⚠️ 有限 |
 
-> 来源: [TRPL] Rust 的零成本抽象（Zero-Cost Abstraction）原则意味着：使用高阶函数、迭代器（Iterator）、泛型（Generics）不会引入运行时（Runtime）开销。`slice::sort_unstable()` 在随机数据上通常比 C++ `std::sort` 更快。
+> 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) Rust 的零成本抽象（Zero-Cost Abstraction）原则意味着：使用高阶函数、迭代器（Iterator）、泛型（Generics）不会引入运行时（Runtime）开销。`slice::sort_unstable()` 在随机数据上通常比 C++ `std::sort` 更快。
 
 ### 1.2 VeriContest：形式验证的竞赛基准
 
@@ -861,7 +861,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的索引操作 `v[i]` 在越界时 panic（与 C 的未定义行为、Python 的 `IndexError` 类似）。但 Rust 提供 `get` 方法返回 `Option<&T>`，允许安全处理越界情况。竞赛编程中，输入数据的不确定性（如边界条件、空数组）要求防御式编程：`v.get(i).copied().unwrap_or(0)` 是常见模式。Rust 的边界检查在 debug 模式下完全启用，release 模式下编译器可能优化掉已证明安全的检查（如迭代器（Iterator）遍历）。这与 C++ 的 `vector::at()`（越界抛异常）或 `operator[]`（无检查）不同——Rust 在安全和性能间提供明确选择：`[]` 快速但 panic，`get` 安全但略慢。来源: [The Rust Programming Language] · 来源: [Rust Standard Library]
+> **修正**: Rust 的索引操作 `v[i]` 在越界时 panic（与 C 的未定义行为、Python 的 `IndexError` 类似）。但 Rust 提供 `get` 方法返回 `Option<&T>`，允许安全处理越界情况。竞赛编程中，输入数据的不确定性（如边界条件、空数组）要求防御式编程：`v.get(i).copied().unwrap_or(0)` 是常见模式。Rust 的边界检查在 debug 模式下完全启用，release 模式下编译器可能优化掉已证明安全的检查（如迭代器（Iterator）遍历）。这与 C++ 的 `vector::at()`（越界抛异常）或 `operator[]`（无检查）不同——Rust 在安全和性能间提供明确选择：`[]` 快速但 panic，`get` 安全但略慢。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust Standard Library]
 
 ### 10.3 边界测试：自定义排序的比较器错误（编译错误/运行时 panic）
 
@@ -878,7 +878,7 @@ fn main() {
 }
 ```
 
-> **修正**: `sort_by` 要求比较器实现**严格弱序**（strict weak ordering）：1) 反自反性（`a < a` 为假）；2) 非对称性（`a < b` ⇒ `b < a` 为假）；3) 传递性（`a < b` ∧ `b < c` ⇒ `a < c`）。违反这些性质的比较器导致 `sort` panic（debug 模式）或产生未定义顺序（release 模式）。常见错误：比较浮点数时未处理 `NaN`（`NaN < x` 和 `NaN > x` 都为假，破坏严格弱序）。安全替代：`partial_cmp` 返回 `Option<Ordering>`，`NaN` 时返回 `None`；`sort_by` 的闭包（Closures）必须返回 `Ordering`（非 `Option`），因此需要显式处理 `NaN`（如映射到特定值或使用 `total_cmp`）。这与 C++ 的 `std::sort`（同样要求严格弱序，违反时 UB）类似，但 Rust 在 debug 模式下检查并 panic。来源: [Rust Standard Library] · 来源: [The Rust Programming Language]
+> **修正**: `sort_by` 要求比较器实现**严格弱序**（strict weak ordering）：1) 反自反性（`a < a` 为假）；2) 非对称性（`a < b` ⇒ `b < a` 为假）；3) 传递性（`a < b` ∧ `b < c` ⇒ `a < c`）。违反这些性质的比较器导致 `sort` panic（debug 模式）或产生未定义顺序（release 模式）。常见错误：比较浮点数时未处理 `NaN`（`NaN < x` 和 `NaN > x` 都为假，破坏严格弱序）。安全替代：`partial_cmp` 返回 `Option<Ordering>`，`NaN` 时返回 `None`；`sort_by` 的闭包（Closures）必须返回 `Ordering`（非 `Option`），因此需要显式处理 `NaN`（如映射到特定值或使用 `total_cmp`）。这与 C++ 的 `std::sort`（同样要求严格弱序，违反时 UB）类似，但 Rust 在 debug 模式下检查并 panic。来源: [Rust Standard Library] · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ### 10.4 边界测试：大数组栈分配导致的编译错误
 
@@ -959,7 +959,7 @@ fn main() {
 }
 ```
 
-> **修正**: `BinaryHeap::peek_mut()` 返回 `PeekMut` guard，允许修改堆顶元素，drop 时自动 `sift_down` 恢复堆性质。若通过 `std::mem::forget(peek_mut)` 阻止 drop：1) 堆性质破坏（父节点 < 子节点）；2) 后续 `pop()` 返回错误元素；3) 但不触发内存不安全（`forget` 是 safe）。这是 Rust "leak safety" 的体现：泄漏只破坏逻辑不变量，不导致 UB。安全使用：1) 避免 `mem::forget`；2) 不在 `peek_mut` 活跃时修改堆的其他元素；3) 使用 `pop` + `push` 替代（若需完全替换堆顶）。这与 C++ 的 `std::priority_queue::top()`（const 引用（Reference），不可修改）或 Java 的 `PriorityQueue.peek()`（不可修改）不同——Rust 的 `peek_mut` 是独特设计，修改 + 自动恢复。来源: [Rust Standard Library] · 来源: [Rust API Guidelines]
+> **修正**: `BinaryHeap::peek_mut()` 返回 `PeekMut` guard，允许修改堆顶元素，drop 时自动 `sift_down` 恢复堆性质。若通过 `std::mem::forget(peek_mut)` 阻止 drop：1) 堆性质破坏（父节点 < 子节点）；2) 后续 `pop()` 返回错误元素；3) 但不触发内存不安全（`forget` 是 safe）。这是 Rust "leak safety" 的体现：泄漏只破坏逻辑不变量，不导致 UB。安全使用：1) 避免 `mem::forget`；2) 不在 `peek_mut` 活跃时修改堆的其他元素；3) 使用 `pop` + `push` 替代（若需完全替换堆顶）。这与 C++ 的 `std::priority_queue::top()`（const 引用（Reference），不可修改）或 Java 的 `PriorityQueue.peek()`（不可修改）不同——Rust 的 `peek_mut` 是独特设计，修改 + 自动恢复。来源: [Rust Standard Library] · 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **过渡**: 算法与竞赛编程 (Algorithms & Competitive Programming) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 算法与竞赛编程 (Algorithms & Competitive Programming) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 算法与竞赛编程 (Algorithms & Competitive Programming) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

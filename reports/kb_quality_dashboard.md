@@ -1,32 +1,32 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-04T20:29:54.838570+00:00
-> 扫描文件数: 392
+> 生成时间: 2026-07-04T20:50:32.423240+00:00
+> 扫描文件数: 398
 
 ## 全局指标
 
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
-| 总文件数 | 392 | 27 | ✅ |
+| 总文件数 | 398 | 27 | ✅ |
 | 总定理链 (⟹) | 1887 | ≥270 | ✅ |
-| 总反命题 | 702 | ≥40 | ✅ |
+| 总反命题 | 707 | ≥40 | ✅ |
 | 总 Mermaid 图 | 550 | ≥50 | ✅ |
-| 编译验证代码块 | 3559 | ≥150 | ✅ |
-| 定理矩阵总行 | 17324 | — | — |
+| 编译验证代码块 | 3599 | ≥150 | ✅ |
+| 定理矩阵总行 | 17367 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 255 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
-| 前置概念覆盖率 | 331/331 | 100% | ✅ |
-| 后置概念覆盖率 | 331/331 | 100% | ✅ |
-| 双标签覆盖率 | 331/331 | >=95% | ✅ |
+| 前置概念覆盖率 | 336/336 | 100% | ✅ |
+| 后置概念覆盖率 | 336/336 | 100% | ✅ |
+| 双标签覆盖率 | 336/336 | >=95% | ✅ |
 | 非法标签组合 | 0 | 0 | ✅ |
 
 ## 按层级分布
 
 | 层级 | 文件数 | 平均 ⟹/文件 | 平均过渡段/文件 | 认知路径 | ⟸/文件 | 模板化 | 前置覆盖 | 后置覆盖 | 双标签 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| L0 | 61 | 5.3 | 3.2 | 35/61 (57%) | 0.0 | 0 | 13/61 | 12/61 | 44/61 |
-| L1 | 48 | 4.9 | 5.2 | 48/48 (100%) | 1.8 | 0 | 48/48 | 48/48 | 48/48 |
+| L0 | 62 | 5.2 | 3.2 | 35/62 (56%) | 0.0 | 0 | 13/62 | 12/62 | 44/62 |
+| L1 | 53 | 4.4 | 4.7 | 48/53 (90%) | 1.6 | 0 | 53/53 | 53/53 | 53/53 |
 | L2 | 36 | 5.4 | 5.4 | 36/36 (100%) | 2.5 | 0 | 36/36 | 36/36 | 36/36 |
 | L3 | 37 | 5.6 | 4.3 | 37/37 (100%) | 2.1 | 0 | 37/37 | 37/37 | 37/37 |
 | L4 | 51 | 4.7 | 3.5 | 51/51 (100%) | 0.0 | 0 | 51/51 | 51/51 | 51/51 |
@@ -40,6 +40,11 @@
 |:---|:---|:---|
 | E:\_src\rust-lang\concept\01_foundation\00_start\47_std_io_and_process.md | L1 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\01_foundation\06_strings_and_text\46_formatting_and_display.md | L1 | 过渡段落不足 (0 < 3) |
+| E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\12_functions.md | L1 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 反向推理不足 (⟸ 0 < 2) |
+| E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\13_use_declarations.md | L1 | 缺失认知路径 |
+| E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\14_structs.md | L1 | 缺失认知路径 |
+| E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\15_enumerations.md | L1 | 缺失认知路径 |
+| E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\16_implementations.md | L1 | 缺失认知路径 |
 | E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\43_type_aliases.md | L1 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\44_static_items.md | L1 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\45_const_items_and_const_fn.md | L1 | 过渡段落不足 (0 < 3) |
@@ -113,6 +118,7 @@
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\kg_ontology_v2.md | L0 | 319 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | None |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\kg_tlo_alignment.md | L0 | 238 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\00_meta\placeholders\placeholder_generic.md | L0 | 22 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\00_meta\topic_authority_alignment_map.md | L0 | 372 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\01_foundation\00_start\00_start.md | L1 | 139 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 初学者 | 初学者 |
 | E:\_src\rust-lang\concept\01_foundation\00_start\06_zero_cost_abstractions.md | L1 | 835 | 3 | 2 | 0 | 3 | 2 | 14 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\00_start\15_closure_basics.md | L1 | 888 | 3 | 2 | 0 | 3 | 1 | 18 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
@@ -144,6 +150,11 @@
 | E:\_src\rust-lang\concept\01_foundation\06_strings_and_text\18_strings_and_encoding.md | L1 | 830 | 3 | 2 | 0 | 3 | 2 | 9 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\06_strings_and_text\46_formatting_and_display.md | L1 | 409 | 4 | 3 | 0 | 4 | 1 | 9 | 0 | ✅ | ✅ | ✅ | 初学者 | 基础级 |
 | E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\11_modules_and_paths.md | L1 | 889 | 3 | 2 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\12_functions.md | L1 | 220 | 0 | 0 | 0 | 1 | 0 | 9 | 0 | ❌ | ✅ | ✅ | 初学者 | 基础级 |
+| E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\13_use_declarations.md | L1 | 185 | 0 | 0 | 0 | 1 | 0 | 8 | 0 | ❌ | ✅ | ✅ | 初学者 | 基础级 |
+| E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\14_structs.md | L1 | 193 | 0 | 0 | 0 | 1 | 0 | 7 | 0 | ❌ | ✅ | ✅ | 初学者 | 基础级 |
+| E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\15_enumerations.md | L1 | 195 | 0 | 0 | 0 | 1 | 0 | 9 | 0 | ❌ | ✅ | ✅ | 初学者 | 基础级 |
+| E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\16_implementations.md | L1 | 190 | 0 | 0 | 0 | 1 | 0 | 7 | 0 | ❌ | ✅ | ✅ | 初学者 | 基础级 |
 | E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\35_preludes.md | L1 | 215 | 4 | 2 | 0 | 1 | 0 | 4 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\38_crates_and_source_files.md | L1 | 149 | 4 | 0 | 0 | 1 | 0 | 3 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\39_items.md | L1 | 124 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
@@ -233,7 +244,7 @@
 | E:\_src\rust-lang\concept\03_advanced\06_low_level_patterns\32_memory_allocation_and_lifetime.md | L3 | 96 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\06_low_level_patterns\33_variables.md | L3 | 128 | 4 | 0 | 0 | 1 | 0 | 3 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\06_low_level_patterns\34_visibility_and_privacy.md | L3 | 148 | 4 | 0 | 0 | 1 | 0 | 3 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
-| E:\_src\rust-lang\concept\03_advanced\07_unsafe_internals\37_unsafe_collections_internals.md | L3 | 477 | 4 | 4 | 0 | 4 | 1 | 8 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
+| E:\_src\rust-lang\concept\03_advanced\07_unsafe_internals\37_unsafe_collections_internals.md | L3 | 479 | 4 | 4 | 0 | 4 | 1 | 8 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\00_type_theory\02_type_theory.md | L4 | 1482 | 27 | 0 | 0 | 4 | 5 | 27 | 3 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\00_type_theory\06_subtype_variance.md | L4 | 635 | 3 | 0 | 0 | 3 | 2 | 10 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\00_type_theory\08_type_inference.md | L4 | 720 | 3 | 0 | 0 | 3 | 2 | 8 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |

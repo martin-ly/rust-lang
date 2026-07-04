@@ -660,7 +660,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的 `std::mem::forget` 是**safe 函数**：它阻止值的 `drop` 被调用，但不触发 UB。这是 Rust "**leak safety**" 哲学的一部分：标准库不保证防泄漏，但泄漏不应导致内存不安全。`forget` 的合法用途：1) 将值的所有权转移给外部系统（如 FFI 的 C 代码负责释放）；2) 手动管理内存生命周期（Lifetimes）；3) 创建循环引用（Reference）（`Rc` 的 leak）。资源泄漏的风险：文件描述符耗尽、内存泄漏、锁未释放（导致死锁）。缓解：`ManuallyDrop<T>` 是更安全的替代——显式控制 drop 时机，不调用则编译器警告。这与 C++ 的 `std::unique_ptr::release`（放弃所有权，责任转移）或 Java 的 finalize（已废弃，不可靠）不同——Rust 的 `forget` 是显式的、有文档的安全操作。来源: [Rust Standard Library] · 来源: [The Rustonomicon]
+> **修正**: Rust 的 `std::mem::forget` 是**safe 函数**：它阻止值的 `drop` 被调用，但不触发 UB。这是 Rust "**leak safety**" 哲学的一部分：标准库不保证防泄漏，但泄漏不应导致内存不安全。`forget` 的合法用途：1) 将值的所有权转移给外部系统（如 FFI 的 C 代码负责释放）；2) 手动管理内存生命周期（Lifetimes）；3) 创建循环引用（Reference）（`Rc` 的 leak）。资源泄漏的风险：文件描述符耗尽、内存泄漏、锁未释放（导致死锁）。缓解：`ManuallyDrop<T>` 是更安全的替代——显式控制 drop 时机，不调用则编译器警告。这与 C++ 的 `std::unique_ptr::release`（放弃所有权，责任转移）或 Java 的 finalize（已废弃，不可靠）不同——Rust 的 `forget` 是显式的、有文档的安全操作。来源: [Rust Standard Library] · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
 ## 嵌入式测验（Embedded Quiz）
 

@@ -590,7 +590,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 组合子模式（Combinator Pattern）通过小函数组合构建复杂行为。Rust 的所有权（Ownership）系统要求组合链中的每个中间结果必须正确传递或释放。部分 move（如 `w.0` 被 move 但 `w` 仍被视为整体）会导致编译错误。解构（`let Wrapper(inner) = w`）是安全的替代方案，它明确声明"消耗整个结构体（Struct），提取其字段"。这与 Haskell 的无限惰性组合链不同——Rust 的组合是严格的、所有权感知的。来源: [The Rust Programming Language]
+> **修正**: 组合子模式（Combinator Pattern）通过小函数组合构建复杂行为。Rust 的所有权（Ownership）系统要求组合链中的每个中间结果必须正确传递或释放。部分 move（如 `w.0` 被 move 但 `w` 仍被视为整体）会导致编译错误。解构（`let Wrapper(inner) = w`）是安全的替代方案，它明确声明"消耗整个结构体（Struct），提取其字段"。这与 Haskell 的无限惰性组合链不同——Rust 的组合是严格的、所有权感知的。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ### 10.3 边界测试：组合子嵌套过深导致的类型爆炸（编译错误/编译超时）
 
@@ -621,7 +621,7 @@ fn option_i(_: i32) -> Option<i32> { Some(9) }
 fn option_j(_: i32) -> Option<i32> { Some(10) }
 ```
 
-> **修正**: `Option`/`Result` 的 `and_then` 嵌套是**组合子模式**，但过度嵌套导致：1) 类型签名膨胀（每个 `and_then` 增加一层泛型（Generics））；2) 编译时间增加（类型推导复杂度）；3) 错误信息难读（10 层嵌套的错误链）。Rust 的替代方案：1) **`?` 运算符**：`let a = option_a()?; let b = option_b(a)?; ...`（扁平化，可读性高）；2) **`async`/`await`**：用异步（Async）组合替代同步组合子；3) **do-notation 宏（Macro）**（如 `try_block!`）。这与 Haskell 的 `do` notation（语法糖扁平化 Monad 嵌套）或 Scala 的 `for` comprehension（类似）不同——Rust 的 `?` 运算符是编译器内建的特殊语法，不是通用 Monad 操作，但提供了等价的扁平化能力。来源: [The Rust Programming Language] · 来源: [Rust Error Handling]
+> **修正**: `Option`/`Result` 的 `and_then` 嵌套是**组合子模式**，但过度嵌套导致：1) 类型签名膨胀（每个 `and_then` 增加一层泛型（Generics））；2) 编译时间增加（类型推导复杂度）；3) 错误信息难读（10 层嵌套的错误链）。Rust 的替代方案：1) **`?` 运算符**：`let a = option_a()?; let b = option_b(a)?; ...`（扁平化，可读性高）；2) **`async`/`await`**：用异步（Async）组合替代同步组合子；3) **do-notation 宏（Macro）**（如 `try_block!`）。这与 Haskell 的 `do` notation（语法糖扁平化 Monad 嵌套）或 Scala 的 `for` comprehension（类似）不同——Rust 的 `?` 运算符是编译器内建的特殊语法，不是通用 Monad 操作，但提供了等价的扁平化能力。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust Error Handling]
 
 ---
 

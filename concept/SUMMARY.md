@@ -88,6 +88,11 @@
   - [Rust 错误处理（Error Handling）基础](01_foundation/08_error_handling/32_error_handling_basics.md)
   - [数值类型与运算：从整数到浮点的完整图景](01_foundation/02_type_system/10_numerics.md)
   - [模块（Module）系统与路径：Rust 的代码组织哲学](01_foundation/07_modules_and_items/11_modules_and_paths.md)
+  - [Functions（函数）](01_foundation/07_modules_and_items/12_functions.md)
+  - [Use Declarations（使用声明）](01_foundation/07_modules_and_items/13_use_declarations.md)
+  - [Structs（结构体）](01_foundation/07_modules_and_items/14_structs.md)
+  - [Enumerations（枚举）](01_foundation/07_modules_and_items/15_enumerations.md)
+  - [Implementations（实现块）](01_foundation/07_modules_and_items/16_implementations.md)
   - [属性与声明宏（Declarative Macro）：编译期元编程基础](01_foundation/09_macros_basics/12_attributes_and_macros.md)
   - [Panic 与 Abort：不可恢复错误的处理机制](01_foundation/08_error_handling/13_panic_and_abort.md)
   - [类型强制与转换：显式与隐式的边界](01_foundation/02_type_system/14_coercion_and_casting.md)
@@ -415,5 +420,5 @@
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
-  - [Rust 的发布流程与 Nightly Rust](07_future/00_version_tracking/50_nightly_rust.md)
-  - [Rust 1.95.0 稳定特性](07_future/00_version_tracking/rust_1_95_stabilized.md)
+- [Rust 的发布流程与 Nightly Rust](07_future/00_version_tracking/50_nightly_rust.md)
+- [Rust 1.95.0 稳定特性](07_future/00_version_tracking/rust_1_95_stabilized.md)

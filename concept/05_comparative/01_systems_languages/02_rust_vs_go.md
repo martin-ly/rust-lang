@@ -891,7 +891,7 @@ fn main() {
 }
 ```
 
-> **修正**: Go 的 `nil` 是多重含义的：指针 nil、接口 nil、channel nil、map nil、slice nil，且 "nil interface" 不等于 "nil 指针放入 interface"。Rust 用 `Option<T>` 统一表达"可能无值"：`Option<&T>` 的 `None` 对应 nil 指针，`Option<Box<T>>` 的 `None` 对应 nil 堆指针。Rust 无隐式 nil：所有引用（Reference）必须有效（或显式 `Option`），裸指针可能为 null 但只能在 `unsafe` 中解引用。这与 Go 的 "nil 是零值"（所有引用类型的默认值）或 Java 的 `null`（所有引用类型的默认值）不同——Rust 消除了 billion-dollar mistake（Tony Hoare 对 null 的称呼）通过类型系统（Type System）强制显式处理缺失值。来源: [The Rust Programming Language] · 来源: [Null References: The Billion Dollar Mistake]
+> **修正**: Go 的 `nil` 是多重含义的：指针 nil、接口 nil、channel nil、map nil、slice nil，且 "nil interface" 不等于 "nil 指针放入 interface"。Rust 用 `Option<T>` 统一表达"可能无值"：`Option<&T>` 的 `None` 对应 nil 指针，`Option<Box<T>>` 的 `None` 对应 nil 堆指针。Rust 无隐式 nil：所有引用（Reference）必须有效（或显式 `Option`），裸指针可能为 null 但只能在 `unsafe` 中解引用。这与 Go 的 "nil 是零值"（所有引用类型的默认值）或 Java 的 `null`（所有引用类型的默认值）不同——Rust 消除了 billion-dollar mistake（Tony Hoare 对 null 的称呼）通过类型系统（Type System）强制显式处理缺失值。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Null References: The Billion Dollar Mistake]
 
 ### 10.3 边界测试：Go 的接口nil与Rust的Option显式空值（运行时陷阱）
 

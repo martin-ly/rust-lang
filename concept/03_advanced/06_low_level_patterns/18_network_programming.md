@@ -798,7 +798,7 @@ async fn echo(stream: TcpStream) {
 }
 ```
 
-> **修正**: `TcpStream::split` 将双向流拆分为独立的读半和写半，允许并发读写（如一个任务读，一个任务写）。`split` 消耗 `TcpStream`，返回的 `ReadHalf` 和 `WriteHalf` 是独立的类型，不可复制。`reunite` 在两者都未 drop 时恢复原始的 `TcpStream`。这与 `TcpStream::into_split`（返回 `OwnedReadHalf` 和 `OwnedWriteHalf`，可发送到不同任务）或标准库的 `std::net::TcpStream`（`try_clone` 复制文件描述符）不同——tokio 的 `split` 是零成本的借用（Borrowing）拆分，`into_split` 是引用（Reference）计数的所有权（Ownership）拆分。选择取决于并发模型：单任务内并发用 `split`，跨任务用 `into_split`。来源: [Tokio Documentation] · 来源: [The Rust Programming Language]
+> **修正**: `TcpStream::split` 将双向流拆分为独立的读半和写半，允许并发读写（如一个任务读，一个任务写）。`split` 消耗 `TcpStream`，返回的 `ReadHalf` 和 `WriteHalf` 是独立的类型，不可复制。`reunite` 在两者都未 drop 时恢复原始的 `TcpStream`。这与 `TcpStream::into_split`（返回 `OwnedReadHalf` 和 `OwnedWriteHalf`，可发送到不同任务）或标准库的 `std::net::TcpStream`（`try_clone` 复制文件描述符）不同——tokio 的 `split` 是零成本的借用（Borrowing）拆分，`into_split` 是引用（Reference）计数的所有权（Ownership）拆分。选择取决于并发模型：单任务内并发用 `split`，跨任务用 `into_split`。来源: [Tokio Documentation] · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ### 10.4 边界测试：缓冲区大小与 MTU 的匹配（运行时性能问题）
 

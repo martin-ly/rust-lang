@@ -695,7 +695,7 @@ fn main() {
 }
 ```
 
-> **修正**: `macro_rules!` 的**规则顺序**：从上到下依次尝试匹配，第一个匹配的规则被使用。长模式（含 WHERE）应放在短模式之前，否则短模式提前匹配导致错误。`macro_rules!` 的限制：1) 无优先级/结合性控制（不像 yacc/bison）；2) 无左递归（规则不能自引用（Reference）左部）；3) 模式是 token 树（`tt`），不是完整表达式。复杂 DSL 建议：1) 过程宏（Procedural Macro）（`proc_macro`）解析完整语法；2) `syn` crate 解析 Rust 表达式；3) 外部 DSL parser（`nom`、`pest`）。这与 Lisp 的宏（代码即数据，无模式匹配（Pattern Matching）限制）或 Template Haskell（编译期元编程，类型安全）不同——Rust 的 `macro_rules!` 是受限但高效的文本替换机制。来源: [The Little Book of Rust Macros] · 来源: [Rust Reference — Macros]
+> **修正**: `macro_rules!` 的**规则顺序**：从上到下依次尝试匹配，第一个匹配的规则被使用。长模式（含 WHERE）应放在短模式之前，否则短模式提前匹配导致错误。`macro_rules!` 的限制：1) 无优先级/结合性控制（不像 yacc/bison）；2) 无左递归（规则不能自引用（Reference）左部）；3) 模式是 token 树（`tt`），不是完整表达式。复杂 DSL 建议：1) 过程宏（Procedural Macro）（`proc_macro`）解析完整语法；2) `syn` crate 解析 Rust 表达式；3) 外部 DSL parser（`nom`、`pest`）。这与 Lisp 的宏（代码即数据，无模式匹配（Pattern Matching）限制）或 Template Haskell（编译期元编程，类型安全）不同——Rust 的 `macro_rules!` 是受限但高效的文本替换机制。来源: [The Little Book of Rust Macros] · 来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)
 
 ## 嵌入式测验（Embedded Quiz）
 

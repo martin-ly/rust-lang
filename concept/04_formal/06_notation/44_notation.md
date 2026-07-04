@@ -105,7 +105,7 @@ Rust Reference 为许多规则附加稳定标识符，形如：
 graph TD
     A[Notation] --> B[Lexical Structure]
     A --> C[Statements and Expressions Reference]
-    A --> D[Rust Reference Grammar]
+    A --> D[Rust Reference Grammar](https://doc.rust-lang.org/reference/)
     B --> E[Tokens]
     C --> F[Production Rules]
 ```

@@ -632,7 +632,7 @@ Iris 分离逻辑公式
 
 ### 7.2 RustBelt 验证框架
 
-> **RustBelt** 是 MPI-SWS 的奠基性工作（POPL 2018），首次在数学上证明了 Rust 类型系统（Type System）的**语义正确性**：如果程序通过借用检查器，则它确实是内存安全（Memory Safety）的。RustBelt 使用 **Iris** 分离逻辑在 Coq 中形式化了 Rust 核心语言（包括生命周期（Lifetimes）、借用（Borrowing）、共享/独占引用（Reference））。来源: [RustBelt Paper — POPL 2018]
+> **RustBelt** 是 MPI-SWS 的奠基性工作（POPL 2018），首次在数学上证明了 Rust 类型系统（Type System）的**语义正确性**：如果程序通过借用检查器，则它确实是内存安全（Memory Safety）的。RustBelt 使用 **Iris** 分离逻辑在 Coq 中形式化了 Rust 核心语言（包括生命周期（Lifetimes）、借用（Borrowing）、共享/独占引用（Reference））。来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ```text
 RustBelt 的核心定理:

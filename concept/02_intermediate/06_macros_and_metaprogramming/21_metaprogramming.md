@@ -697,7 +697,7 @@ fn main() {
 }
 ```
 
-> **修正**: `TypeId` 是 Rust 运行时（Runtime）的类型标识符，用于 `Any` trait 的向下转型（`downcast_ref`）。`TypeId` 在**同一编译会话**内是确定且可比较的，但不保证跨编译会话、跨 crate 版本、跨编译器版本的一致性（Coherence）。其内部表示是编译器生成的哈希值，可能随编译器版本变化。因此 `TypeId` 不能：1) 序列化到持久存储；2) 通过网络传递；3) 作为长期缓存的键。安全替代：使用自定义类型标签（`enum TypeTag { String, Int, ... }`）或字符串类型名（`std::any::type_name`，不稳定）。这与 Java 的 `Class.getName()`（跨 JVM 稳定）或 C++ 的 `typeid`（同一程序内稳定，跨程序不保证）类似——运行期类型信息的设计受限于编译器实现细节。来源: [Rust Standard Library] · 来源: [The Rust Programming Language]
+> **修正**: `TypeId` 是 Rust 运行时（Runtime）的类型标识符，用于 `Any` trait 的向下转型（`downcast_ref`）。`TypeId` 在**同一编译会话**内是确定且可比较的，但不保证跨编译会话、跨 crate 版本、跨编译器版本的一致性（Coherence）。其内部表示是编译器生成的哈希值，可能随编译器版本变化。因此 `TypeId` 不能：1) 序列化到持久存储；2) 通过网络传递；3) 作为长期缓存的键。安全替代：使用自定义类型标签（`enum TypeTag { String, Int, ... }`）或字符串类型名（`std::any::type_name`，不稳定）。这与 Java 的 `Class.getName()`（跨 JVM 稳定）或 C++ 的 `typeid`（同一程序内稳定，跨程序不保证）类似——运行期类型信息的设计受限于编译器实现细节。来源: [Rust Standard Library] · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ### 10.4 边界测试：编译期递归深度限制（编译错误）
 

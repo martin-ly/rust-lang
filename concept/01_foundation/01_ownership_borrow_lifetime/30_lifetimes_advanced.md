@@ -1195,7 +1195,7 @@ where
 }
 ```
 
-> **修正**: 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。当 trait 方法接受引用参数时，默认的生命周期省略（Lifetime Elision）可能不足以表达"对所有生命周期有效"的语义。HRTB 在回调函数、比较器、迭代器（Iterator）适配器等场景中至关重要。来源: [Rust Reference]
+> **修正**: 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。当 trait 方法接受引用参数时，默认的生命周期省略（Lifetime Elision）可能不足以表达"对所有生命周期有效"的语义。HRTB 在回调函数、比较器、迭代器（Iterator）适配器等场景中至关重要。来源: [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ### 10.2 边界测试：自引用结构体的生命周期标注（编译错误）
 

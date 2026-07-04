@@ -1381,10 +1381,10 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.fastbloom]]
-version = "0.14.1"
+version = "0.17.0"
 criteria = "safe-to-run"
 suggest = false
-notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+notes = "cargo update 后版本升级；safe-to-run 仅用于测试/示例依赖，后续应补充正式审计或导入权威来源审计。"
 
 [[exemptions.fastrand]]
 version = "2.4.1"
@@ -3103,16 +3103,16 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.quinn-proto]]
-version = "0.11.15"
+version = "0.11.16"
 criteria = "safe-to-run"
 suggest = false
-notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+notes = "cargo update 后版本升级；safe-to-run 仅用于测试/示例依赖，后续应补充正式审计或导入权威来源审计。"
 
 [[exemptions.quinn-udp]]
-version = "0.5.14"
+version = "0.5.15"
 criteria = "safe-to-run"
 suggest = false
-notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+notes = "cargo update 后版本升级；safe-to-run 仅用于测试/示例依赖，后续应补充正式审计或导入权威来源审计。"
 
 [[exemptions.quote]]
 version = "1.0.46"
@@ -3179,6 +3179,12 @@ version = "0.5.1"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.rand_pcg]]
+version = "0.10.2"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo update 后新增依赖；safe-to-run 仅用于测试/示例依赖，后续应补充正式审计或导入权威来源审计。"
 
 [[exemptions.rand_xorshift]]
 version = "0.4.0"

@@ -806,7 +806,7 @@ mod inner_fixed {
 }
 ```
 
-> **修正**: Rust 没有 `class` 关键字，封装通过模块（Module）（`mod`）和可见性修饰符（`pub`）实现。结构体（Struct）字段默认私有，方法默认私有。这与 Java/C++ 的"类即封装边界"不同——Rust 的封装边界是模块，一个模块内的多个类型可互相访问私有字段。trait 只定义行为接口，不包含字段。这种设计鼓励"组合优于继承"，通过 trait 实现多态，通过模块实现封装。来源: [The Rust Programming Language]
+> **修正**: Rust 没有 `class` 关键字，封装通过模块（Module）（`mod`）和可见性修饰符（`pub`）实现。结构体（Struct）字段默认私有，方法默认私有。这与 Java/C++ 的"类即封装边界"不同——Rust 的封装边界是模块，一个模块内的多个类型可互相访问私有字段。trait 只定义行为接口，不包含字段。这种设计鼓励"组合优于继承"，通过 trait 实现多态，通过模块实现封装。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ### 10.3 边界测试：多范式代码的 trait bound 爆炸（编译错误）
 
@@ -830,7 +830,7 @@ where
 // { }
 ```
 
-> **修正**: Rust 的多范式特性（OOP 的 trait、函数式的高阶函数、过程式的显式控制流）在组合时产生**trait bound 爆炸**：复杂函数需要大量 trait bound 约束参数。解决方案：1) 使用**超级 trait**（`trait MyTrait: Serialize + Clone + Debug {}`）封装常用组合；2) 使用 `where` 从句替代内联 bound，提高可读性；3) 使用关联类型减少泛型（Generics）参数。这与 C++ 的 `concept`（C++20，类似超级 trait，`requires` 约束可组合）或 Haskell 的 typeclass 层次（`class (Eq a, Show a) => Ord a`）类似——Rust 的超级 trait 和 `where` 从句提供了管理复杂约束的工具，但需要显式设计。这与 Go 的隐式接口（无 bound，无爆炸）或 Java 的泛型通配符（`<? extends T & U>` 有限）不同——Rust 的显式约束是类型安全的代价。来源: [The Rust Programming Language] · 来源: [Rust API Guidelines]
+> **修正**: Rust 的多范式特性（OOP 的 trait、函数式的高阶函数、过程式的显式控制流）在组合时产生**trait bound 爆炸**：复杂函数需要大量 trait bound 约束参数。解决方案：1) 使用**超级 trait**（`trait MyTrait: Serialize + Clone + Debug {}`）封装常用组合；2) 使用 `where` 从句替代内联 bound，提高可读性；3) 使用关联类型减少泛型（Generics）参数。这与 C++ 的 `concept`（C++20，类似超级 trait，`requires` 约束可组合）或 Haskell 的 typeclass 层次（`class (Eq a, Show a) => Ord a`）类似——Rust 的超级 trait 和 `where` 从句提供了管理复杂约束的工具，但需要显式设计。这与 Go 的隐式接口（无 bound，无爆炸）或 Java 的泛型通配符（`<? extends T & U>` 有限）不同——Rust 的显式约束是类型安全的代价。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 ### 10.4 边界测试：函数式与命令式的内存布局冲突（逻辑错误）
 
@@ -893,7 +893,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 支持**命令式**和**函数式**风格的混合，但编译器强制所有权规则：闭包（Closures）捕获 `&mut v` 后，`v` 被借用（Borrowing），不能同时在 `iter()` 中使用（`iter()` 也需要 `&v`）。设计选择：1) **命令式**：`for` 循环 + `mut` 变量，直接修改状态；2) **函数式**：迭代器（Iterator）适配器 + 不可变数据，生成新集合；3) **混合**：`fold` 累积状态（`v.iter().fold(0, |acc, x| acc + x)`）。Rust 不强制纯度（如 Haskell），但类型系统使副作用显式（`mut` 标记、IO 返回 `Result`）。这与 Haskell 的 `IO` Monad（强制显式标记副作用）或 C 的隐式全局状态修改（无任何检查）不同——Rust 在中间地带：允许副作用，但要求显式控制。来源: [The Rust Programming Language] · 来源: [Rust Design Patterns]
+> **修正**: Rust 支持**命令式**和**函数式**风格的混合，但编译器强制所有权规则：闭包（Closures）捕获 `&mut v` 后，`v` 被借用（Borrowing），不能同时在 `iter()` 中使用（`iter()` 也需要 `&v`）。设计选择：1) **命令式**：`for` 循环 + `mut` 变量，直接修改状态；2) **函数式**：迭代器（Iterator）适配器 + 不可变数据，生成新集合；3) **混合**：`fold` 累积状态（`v.iter().fold(0, |acc, x| acc + x)`）。Rust 不强制纯度（如 Haskell），但类型系统使副作用显式（`mut` 标记、IO 返回 `Result`）。这与 Haskell 的 `IO` Monad（强制显式标记副作用）或 C 的隐式全局状态修改（无任何检查）不同——Rust 在中间地带：允许副作用，但要求显式控制。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust Design Patterns]
 
 ## 嵌入式测验（Embedded Quiz）
 

@@ -398,7 +398,7 @@ Rust 在区块链领域占据**主导地位**的原因：
 | **移除未对齐字段初始化 escape hatch** | `#[disable_initialized_field_access]` 静默允许未对齐字段的就地初始化，产生运行时（Runtime） UB | 移除该 escape hatch，依赖它的代码现在编译失败而非静默产生 UB |
 | **`unused_features` lint 兼容** | Rust 1.96 重新启用 `unused_features` lint，内核全局启用的 feature 列表触发大量警告 | 内核构建系统全局允许该 lint，避免逐 crate 修改 |
 
-> **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。pin-init 的 soundness 修复尤其重要：它展示了 Rust 内核代码如何通过类型系统（Type System）级别的封闭（sealed token）来消除初始化顺序相关的漏洞类别——这是 C 语言无法实现的保证。来源: [Rust Project Goals — Rust for Linux] · 来源: [Rust Blog — Project Goals Update 2026-04] · 来源: [Linux Kernel v7.0-rc4] · 可信度: ✅
+> **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。pin-init 的 soundness 修复尤其重要：它展示了 Rust 内核代码如何通过类型系统（Type System）级别的封闭（sealed token）来消除初始化顺序相关的漏洞类别——这是 C 语言无法实现的保证。来源: [Rust Project Goals — Rust for Linux](https://rust-lang.github.io/rust-project-goals/2025h1/Rust-for-Linux.html) · 来源: [Rust Blog](https://blog.rust-lang.org/) · 来源: [Linux Kernel v7.0-rc4](https://kernel.org/) · 可信度: ✅
 > **来源**: [Rust for Linux] · [LWN] · 可信度: ✅
 
 ### 4.7-B Android AOSP：Rust 集成的实证研究（FSE 2026）
@@ -1315,7 +1315,7 @@ graph TD
 
 **关键限制**: Cargo Script 的 frontmatter 语法（`cargo +nightly -Zscript`）仍在 nightly 中稳定化进程中，尚未进入 stable。
 
-> **[来源: Cargo RFC]** Cargo Script / Frontmatter FCP 已通过。
+> **来源**: [RFC 3502 — cargo-script](https://rust-lang.github.io/rfcs/3502-cargo-script.html) · [RFC 3503 — frontmatter](https://rust-lang.github.io/rfcs/3503-frontmatter.html)
 
 ---
 

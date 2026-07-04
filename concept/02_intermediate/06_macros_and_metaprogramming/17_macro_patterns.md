@@ -680,7 +680,7 @@ fn main() {
 }
 ```
 
-> **修正**: 宏生成的 `unsafe` 块的可见性取决于宏设计。`unsafe_op!` 在展开代码中创建 `unsafe` 块，因此调用者不需要额外的 `unsafe`——这**隐藏了 unsafe 边界**，是危险的做法。Rust 社区的最佳实践：unsafe 操作应在调用点可见，即 `unsafe { unsafe_op!(...) }`，让代码审查者一眼看到 unsafe。`std` 中的某些宏（如 `vec!`）内部使用 unsafe，但经过了严格审计。自定义宏应避免隐藏 unsafe，或使用 `unsafe` 关键字要求调用者显式标记。这与 C 的宏（常隐藏 `*` 解引用（Reference）、指针运算等 unsafe 操作）或 C++ 的模板（unsafe 在模板内部，调用点不可见）不同——Rust 的 unsafe 块是语法层面的，宏展开后仍保留，可通过源码映射追踪。来源: [The Rust Programming Language] · 来源: [Rustonomicon]
+> **修正**: 宏生成的 `unsafe` 块的可见性取决于宏设计。`unsafe_op!` 在展开代码中创建 `unsafe` 块，因此调用者不需要额外的 `unsafe`——这**隐藏了 unsafe 边界**，是危险的做法。Rust 社区的最佳实践：unsafe 操作应在调用点可见，即 `unsafe { unsafe_op!(...) }`，让代码审查者一眼看到 unsafe。`std` 中的某些宏（如 `vec!`）内部使用 unsafe，但经过了严格审计。自定义宏应避免隐藏 unsafe，或使用 `unsafe` 关键字要求调用者显式标记。这与 C 的宏（常隐藏 `*` 解引用（Reference）、指针运算等 unsafe 操作）或 C++ 的模板（unsafe 在模板内部，调用点不可见）不同——Rust 的 unsafe 块是语法层面的，宏展开后仍保留，可通过源码映射追踪。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
 ### 10.2 边界测试：宏递归深度限制（编译错误）
 

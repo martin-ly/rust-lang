@@ -1727,7 +1727,7 @@ fn main() {
 }
 ```
 
-> **修正**: Cargo feature 是**累加**的：依赖树中任何 crate 启用 feature，该 feature 对整棵树生效。互斥 feature 的设计：1) `cfg_mutually_exclusive!`（第三方宏（Macro））；2) 运行时检查（`panic!("feat-a and feat-b are mutually exclusive")`）；3) 文档明确说明（但不强制）。Cargo 的 feature resolver v2（2021+）改进了特性解析：dev-dependencies 不激活 features，弱依赖（`dep-name?/feature-name`）按需启用。feature 滥用是 Rust 生态的常见问题：1) 过多 feature 导致测试矩阵爆炸；2) 隐式 feature 依赖（`tokio/rt` 启用 `tokio/rt-multi-thread`）；3) 编译时间增加（每个 feature 组合可能触发重新编译）。这与 npm 的 `optionalDependencies` 或 Python 的 `extras_require` 类似——Rust 的 feature 系统是编译期的条件编译，影响代码包含和依赖解析。来源: [The Cargo Book] · 来源: [RFC 2957 — Weak Dependencies]
+> **修正**: Cargo feature 是**累加**的：依赖树中任何 crate 启用 feature，该 feature 对整棵树生效。互斥 feature 的设计：1) `cfg_mutually_exclusive!`（第三方宏（Macro））；2) 运行时检查（`panic!("feat-a and feat-b are mutually exclusive")`）；3) 文档明确说明（但不强制）。Cargo 的 feature resolver v2（2021+）改进了特性解析：dev-dependencies 不激活 features，弱依赖（`dep-name?/feature-name`）按需启用。feature 滥用是 Rust 生态的常见问题：1) 过多 feature 导致测试矩阵爆炸；2) 隐式 feature 依赖（`tokio/rt` 启用 `tokio/rt-multi-thread`）；3) 编译时间增加（每个 feature 组合可能触发重新编译）。这与 npm 的 `optionalDependencies` 或 Python 的 `extras_require` 类似——Rust 的 feature 系统是编译期的条件编译，影响代码包含和依赖解析。来源: [The Cargo Book] · 来源: [RFC 2957 — Weak Dependencies](https://github.com/rust-lang/rfcs/pull/2957)
 
 ## 嵌入式测验（Embedded Quiz）
 

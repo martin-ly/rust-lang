@@ -773,7 +773,7 @@ fn main() {
 }
 ```
 
-> **修正**: `HashMap::entry` 需要 `&mut self`，因为 `or_insert` 可能修改 map（插入新键）。若同时持有 `get` 返回的 `&V`，则存在 `&mut self` 与 `&V` 的借用（Borrowing）冲突——即使 `entry` 的键与 `get` 的键不同，编译器也无法证明不重叠。解决方案：1) 先 `clone` 需要的值，再调用 `entry`；2) 使用 `HashMap::get_mut` 获取 `&mut V`，直接修改；3) 用 `if let Some(v) = map.get_mut("key")` 替代 `entry` API。这与 Java 的 `Map::compute`（无借用检查，可并发修改）或 C++ 的 `std::unordered_map`（迭代器（Iterator）失效规则）不同——Rust 的借用检查在编译期阻止"读的同时写"，即使逻辑上安全。来源: [The Rust Programming Language] · 来源: [Rust Standard Library]
+> **修正**: `HashMap::entry` 需要 `&mut self`，因为 `or_insert` 可能修改 map（插入新键）。若同时持有 `get` 返回的 `&V`，则存在 `&mut self` 与 `&V` 的借用（Borrowing）冲突——即使 `entry` 的键与 `get` 的键不同，编译器也无法证明不重叠。解决方案：1) 先 `clone` 需要的值，再调用 `entry`；2) 使用 `HashMap::get_mut` 获取 `&mut V`，直接修改；3) 用 `if let Some(v) = map.get_mut("key")` 替代 `entry` API。这与 Java 的 `Map::compute`（无借用检查，可并发修改）或 C++ 的 `std::unordered_map`（迭代器（Iterator）失效规则）不同——Rust 的借用检查在编译期阻止"读的同时写"，即使逻辑上安全。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust Standard Library]
 
 ### 10.4 边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错误）
 

@@ -595,7 +595,7 @@ fn use_both(obj: &(dyn Drawable + Clickable)) {
 > Rust 的 trait object（`dyn Trait`）只能包含一个"主 trait"，因为 vtable 只能存储一个主 trait 的方法指针。
 > 多 trait 组合需通过泛型（Generics）（`T: Drawable + Clickable`）或创建新的组合 trait（`trait Interactive: Drawable + Clickable {}`）。
 > 这与 C++ 的虚继承和菱形继承问题形成对比——Rust 的设计消除了 vtable 布局的复杂性，但限制了动态分发的灵活性。
-> 来源: [Rust Reference]
+> 来源: [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ### 10.2 边界测试：C++ 的隐式构造 vs Rust 的显式构造（编译错误）
 

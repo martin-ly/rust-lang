@@ -408,5 +408,5 @@ D. 取决于是否实现 Copy
 ---
 
 > **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/), [The Rustonomicon](https://doc.rust-lang.org/nomicon/), [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
-> **权威来源对齐变更日志**: 2026-07-04 创建 [来源: Rust 1.96.1 Reference、Rustonomicon、Unsafe Code Guidelines 对齐]
+> **权威来源对齐变更日志**: 2026-07-04 创建 来源: Rust 1.96.1 Reference、[Rustonomicon](https://doc.rust-lang.org/nomicon/)、Unsafe Code Guidelines 对齐
 > **状态**: ✅ 权威来源对齐完成

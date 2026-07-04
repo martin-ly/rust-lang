@@ -722,7 +722,7 @@ fn main() {
 }
 ```
 
-> **修正**: `dyn Trait` 是**动态分发**类型，大小不固定（`!Sized`），因为不同实现的大小不同。`Box<dyn Trait>` 和 `&dyn Trait` 是**胖指针**（数据指针 + vtable 指针），本身是 `Sized` 的。若函数要求 `P: Processor`（隐式 `P: Sized`），不能传入 `dyn Processor`。修复：1) `fn use_processor(p: &dyn Processor)`（接受引用）；2) `fn use_processor(p: Box<dyn Processor>)`（接受 Box）；3) `fn use_processor<P: Processor + ?Sized>(p: &P)`（放宽 Sized 约束）。类型擦除与单态化（Monomorphization）的权衡：`dyn Trait` 减少代码膨胀（一个函数处理所有类型），但有虚函数调用开销。这与 C++ 的虚函数（类似机制，但无显式 `dyn` 标记）或 Go 的 interface（类似 fat pointer，但隐式实现）不同——Rust 的 `dyn` 显式标记动态分发，编译器在类型层面区分静态和动态多态。来源: [Rust Reference — Trait Objects] · 来源: [The Rust Programming Language]
+> **修正**: `dyn Trait` 是**动态分发**类型，大小不固定（`!Sized`），因为不同实现的大小不同。`Box<dyn Trait>` 和 `&dyn Trait` 是**胖指针**（数据指针 + vtable 指针），本身是 `Sized` 的。若函数要求 `P: Processor`（隐式 `P: Sized`），不能传入 `dyn Processor`。修复：1) `fn use_processor(p: &dyn Processor)`（接受引用）；2) `fn use_processor(p: Box<dyn Processor>)`（接受 Box）；3) `fn use_processor<P: Processor + ?Sized>(p: &P)`（放宽 Sized 约束）。类型擦除与单态化（Monomorphization）的权衡：`dyn Trait` 减少代码膨胀（一个函数处理所有类型），但有虚函数调用开销。这与 C++ 的虚函数（类似机制，但无显式 `dyn` 标记）或 Go 的 interface（类似 fat pointer，但隐式实现）不同——Rust 的 `dyn` 显式标记动态分发，编译器在类型层面区分静态和动态多态。来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ### 10.4 边界测试：dyn Trait 的 Sized 要求与泛型约束（编译错误）
 

@@ -938,7 +938,7 @@ fn main() {
 }
 ```
 
-> **修正**: 迭代器是**一次性**的——`collect`、`fold`、`for_each` 等消耗型方法获取迭代器所有权（Ownership），调用后迭代器失效。这与 C++ 的 `std::istream_iterator`（同样一次性）或 Java 的 `Iterator`（同样 `hasNext`/`next` 消耗）类似。Rust 的所有权系统显式追踪迭代器的消耗：调用 `into_iter()` 转移 `Vec` 所有权到迭代器，`collect` 转移迭代器所有权到 `Vec`。若需多次遍历，应 `clone` 底层集合（`data.clone().into_iter()`），或使用非消耗型迭代（`data.iter()` 借用（Borrowing））。`Iterator` trait 的 `by_ref()` 方法可借出迭代器引用（Reference），允许部分消耗后继续使用——高级但有用。来源: [The Rust Programming Language] · 来源: [Rust Standard Library]
+> **修正**: 迭代器是**一次性**的——`collect`、`fold`、`for_each` 等消耗型方法获取迭代器所有权（Ownership），调用后迭代器失效。这与 C++ 的 `std::istream_iterator`（同样一次性）或 Java 的 `Iterator`（同样 `hasNext`/`next` 消耗）类似。Rust 的所有权系统显式追踪迭代器的消耗：调用 `into_iter()` 转移 `Vec` 所有权到迭代器，`collect` 转移迭代器所有权到 `Vec`。若需多次遍历，应 `clone` 底层集合（`data.clone().into_iter()`），或使用非消耗型迭代（`data.iter()` 借用（Borrowing））。`Iterator` trait 的 `by_ref()` 方法可借出迭代器引用（Reference），允许部分消耗后继续使用——高级但有用。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Rust Standard Library]
 
 ### 10.5 边界测试：`flat_map` 与嵌套迭代器的所有权（编译错误）
 

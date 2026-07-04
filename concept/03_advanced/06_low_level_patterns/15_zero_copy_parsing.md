@@ -689,7 +689,7 @@ fn main() {
 }
 ```
 
-> **修正**: `std::mem::transmute` 是**按位重新解释**类型，要求源和目标类型**大小相同**（`size_of::<Src>() == size_of::<Dst>()`）。编译期检查：大小不同 → 编译错误。但大小相同不代表语义安全：`transmute::<&mut T, &mut U>()` 是 UB（可能违反借用（Borrowing）规则），`transmute::<bool, u8>(2)` 是 UB（bool 只能是 0 或 1）。安全替代：1) `as` 转换（数值类型，有定义行为）；2) `From`/`Into`（类型安全转换）；3) `bytemuck` crate（运行时（Runtime）检查 transmute 合法性）。零拷贝解析（如 `zerocopy` crate）使用 `transmute` 将字节切片（Slice）转为 struct，但需 `#[repr(C)]` 和对齐保证。这与 C 的指针强制转换（`(u64*)(&x)`，无大小检查）或 Go 的 `unsafe.Pointer`（类似但无编译期检查）不同——Rust 的 `transmute` 至少保证大小匹配，其他风险需开发者承担。来源: [Rust Standard Library] · 来源: [The Rustonomicon]
+> **修正**: `std::mem::transmute` 是**按位重新解释**类型，要求源和目标类型**大小相同**（`size_of::<Src>() == size_of::<Dst>()`）。编译期检查：大小不同 → 编译错误。但大小相同不代表语义安全：`transmute::<&mut T, &mut U>()` 是 UB（可能违反借用（Borrowing）规则），`transmute::<bool, u8>(2)` 是 UB（bool 只能是 0 或 1）。安全替代：1) `as` 转换（数值类型，有定义行为）；2) `From`/`Into`（类型安全转换）；3) `bytemuck` crate（运行时（Runtime）检查 transmute 合法性）。零拷贝解析（如 `zerocopy` crate）使用 `transmute` 将字节切片（Slice）转为 struct，但需 `#[repr(C)]` 和对齐保证。这与 C 的指针强制转换（`(u64*)(&x)`，无大小检查）或 Go 的 `unsafe.Pointer`（类似但无编译期检查）不同——Rust 的 `transmute` 至少保证大小匹配，其他风险需开发者承担。来源: [Rust Standard Library] · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
 ### 10.4 边界测试：零拷贝解析的生命周期依赖与所有权转移（编译错误）
 
