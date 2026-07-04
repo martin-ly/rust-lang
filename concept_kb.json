@@ -6,7 +6,7 @@
   },
   "files": [
     {
-      "path": "concept\\00_meta\\03_bloom_taxonomy.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\03_bloom_taxonomy.md",
       "layer": "L0",
       "title": "Bloom Taxonomy（Bloom 分类法）",
       "positioning": "",
@@ -52,7 +52,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\05_cross_reference_matrix.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\05_cross_reference_matrix.md",
       "layer": "L0",
       "title": "Cross Reference Matrix（交叉引用矩阵）",
       "positioning": "",
@@ -80,7 +80,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\08_concept_audit_guide.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\08_concept_audit_guide.md",
       "layer": "L0",
       "title": "Concept Audit Guide（概念审计指南）",
       "positioning": "",
@@ -117,7 +117,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\asp_marking_guide.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\asp_marking_guide.md",
       "layer": "L0",
       "title": "Rust 知识体系 A/S/P 三维认知标记规范",
       "positioning": "本文件定义 `concept/` 知识体系中的 **A(应用) / S(结构) / P(程序)** 三维认知标记规范，作为现有 Bloom 层级标注的补充维度。A/S/P 标记连接 **Krathwohl 知识维度** 与 **Bloom 认知过程维度**，将抽象的双维矩阵压缩为可操作的标签系统。",
@@ -157,7 +157,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\audit_checklist.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\audit_checklist.md",
       "layer": "L0",
       "title": "概念一致性检查清单（Concept Consistency Audit Checklist）",
       "positioning": "本文件定义 `concept/` 知识体系的**质量门禁**，用于定期审计概念文件的一致性、完备性和关系清晰度。",
@@ -197,7 +197,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\authority_source_map.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\authority_source_map.md",
       "layer": "L0",
       "title": "权威来源映射表（Authority Source Map）",
       "positioning": "",
@@ -234,7 +234,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\bilingual_template.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\bilingual_template.md",
       "layer": "L0",
       "title": "Concept 文件双语模板（Bilingual Template）",
       "positioning": "",
@@ -271,7 +271,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\boundary_extension_tree.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\boundary_extension_tree.md",
       "layer": "L0",
       "title": "Rust 安全边界扩展推理树",
       "positioning": "本文件从「安全边界」核心出发，推演向更底层、更通用、更危险领域的扩展路径，标注每条扩展边的条件、风险和补偿机制。",
@@ -318,7 +318,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\career_landscape.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\career_landscape.md",
       "layer": "L0",
       "title": "Rust 职业市场全景：2026 年数据与分析",
       "positioning": "基于权威招聘数据（JetBrains、Stack Overflow、Levels.fyi、Robert Half）的 Rust 职业市场定量分析，覆盖薪资范围、岗位分布、技能需求和地域差异。",
@@ -352,7 +352,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\cognitive_dimension_matrix.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\cognitive_dimension_matrix.md",
       "layer": "L0",
       "title": "Rust 知识体系双维认知矩阵（Krathwohl × Bloom）",
       "positioning": "本文件建立 **Krathwohl 知识维度**（事实性 / 概念性 / 程序性 / 元认知）与 **Bloom 认知过程维度**（记忆 → 理解 → 应用 → 分析 → 评价 → 创造）的双维交叉矩阵，为 `concept/` 下每个概念文件提供超越单一 Bloom 标签的多维认知定位。",
@@ -389,7 +389,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\competency_graph.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\competency_graph.md",
       "layer": "L0",
       "title": "Rust 知识体系能力图谱（Competency Graph）",
       "positioning": "本文件建立 `concept/` 知识体系的**能力评估与提升框架**，定义 Rust 编程能力的六维雷达模型，提供自评工具、薄弱点诊断和个性化训练路径推荐。与 `problem_graph.md`（\"遇到什么问题\"）和 `cognitive_dimension_matrix.md`（\"认知类型是什么\"）形成三角互补。",
@@ -425,7 +425,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\comprehensive_rust_mapping.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\comprehensive_rust_mapping.md",
       "layer": "L0",
       "title": "Comprehensive Rust 课程映射",
       "positioning": "本文件建立 **Comprehensive Rust**（Google 开发的免费 Rust 课程）与本知识体系中 `concept/` 文件的双向映射，帮助学习者将课程章节定位到深层概念文档。",
@@ -472,7 +472,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\concept_consistency_audit_checklist.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\concept_consistency_audit_checklist.md",
       "layer": "L0",
       "title": "概念一致性（Coherence）检查清单",
       "positioning": "",
@@ -496,7 +496,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\concept_definition_decision_forest.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\concept_definition_decision_forest.md",
       "layer": "L0",
       "title": "Rust 知识体系概念定义判定森林（Concept Definition Decision Forest）",
       "positioning": "本文件为 L1-L4 核心概念建立从**定义**出发的完整判定链：**前提假设 → 推理规则 → 判定条件 → 边界 → 失效模式**。与 `theorem_inference_forest.md`（从 L4 公理出发的定理链）形成互补：后者回答「安全保证从哪来」，本文件回答「编译器/开发者如何逐步判定代码是否合法」。",
@@ -540,7 +540,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\concept_index.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\concept_index.md",
       "layer": "L0",
       "title": "全局概念索引（Concept Index）",
       "positioning": "本文件是 `concept/` 知识体系的**倒排索引**，从概念名称快速定位到定义文件、交叉引用位置、Bloom 认知层级和语义链接关系。",
@@ -644,7 +644,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\cpp_rust_engineering_roadmap.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\cpp_rust_engineering_roadmap.md",
       "layer": "L0",
       "title": "C/C++ → Rust 工程层对比路线图",
       "positioning": "",
@@ -692,7 +692,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\decidability_spectrum.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\decidability_spectrum.md",
       "layer": "L0",
       "title": "Rust 编译期可判定性谱系全景（Decidability Spectrum）",
       "positioning": "本文件从**纵向判定链路**梳理 Rust 编译器在全编译流程中的可判定性问题，与 `semantic_expressiveness.md` 的横向七维光谱形成正交互补。",
@@ -753,7 +753,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\expressiveness_multiview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\expressiveness_multiview.md",
       "layer": "L0",
       "title": "Rust 语义表达力多视角深化（Multiview Expressiveness Analysis）",
       "positioning": "本文件从**纵向理论视角**（计算/类型/控制/内存/并发/抽象/安全）深化 Rust 的表达能力，与 `semantic_expressiveness.md` 的**横向七维光谱**形成正交互补。前者回答「Rust 能表达什么」，后者回答「Rust 从哪些维度表达」。",
@@ -842,7 +842,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\fault_tree_analysis_collection.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\fault_tree_analysis_collection.md",
       "layer": "L0",
       "title": "Rust 知识体系失效分析树集（Fault Tree Analysis Collection）",
       "positioning": "> 本文件建立 Rust 知识体系中的**标准故障树分析（FTA）**体系，将现有反例路径升级为工程安全标准的失效分析格式。",
@@ -878,7 +878,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\foundations_gap_closure_index.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\foundations_gap_closure_index.md",
       "layer": "L0",
       "title": "基础知识缺口补全总索引",
       "positioning": "",
@@ -929,7 +929,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\grading_system.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\grading_system.md",
       "layer": "L0",
       "title": "内容分级与受众标签体系",
       "positioning": "",
@@ -951,7 +951,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\inter_layer_map.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\inter_layer_map.md",
       "layer": "L0",
       "title": "跨层知识图谱（Inter-Layer Dependency Map）",
       "positioning": "本文件是 `concept/` 知识体系的全局关系骨架，显式定义 L0-L7 各层之间的**逻辑蕴含关系**、**形式化映射**、**反事实依赖**和**反向反馈**。",
@@ -1031,7 +1031,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\inter_layer_topology.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\inter_layer_topology.md",
       "layer": "L0",
       "title": "Rust 知识体系跨层依赖与蕴含拓扑图",
       "positioning": "",
@@ -1055,7 +1055,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\intra_layer_model_map.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\intra_layer_model_map.md",
       "layer": "L0",
       "title": "Rust 知识体系层次内模型间映射图",
       "positioning": "本文件梳理每一层（L1-L4）内部核心模型之间的等价、蕴含、依赖和互斥关系，回答「同一层级内的概念如何相互定义、相互支撑、相互约束」。",
@@ -1134,7 +1134,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\kg_ontology_v2.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\kg_ontology_v2.md",
       "layer": "L0",
       "title": "Rust 知识体系知识图谱本体规范 v2.0（RDF 1.2 / RDF-star / SKOS 对齐版）",
       "positioning": "本文件是 `kg_ontology.md`（v1 已不再维护）的 v2 升级版，在保留原有教学关系本体的基础上，显式对齐 W3C RDF 1.2、RDF-star、SKOS、JSON-LD 1.1 与 SHACL 数据形状标准，使项目知识图谱从\"规范文档\"进化为\"可验证、可查询、可多语言消费\"的 Linked Data。",
@@ -1156,7 +1156,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\kg_tlo_alignment.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\kg_tlo_alignment.md",
       "layer": "L0",
       "title": "Rust 知识体系顶层本体（TLO）对齐",
       "positioning": "",
@@ -1178,7 +1178,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\knowledge_mindmap.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\knowledge_mindmap.md",
       "layer": "L0",
       "title": "Rust 知识体系全局思维导图（Knowledge Mindmap）",
       "positioning": "本文件是 `concept/` 知识体系的**认知入口**——用 Mermaid `mindmap` 语法将整个 L0-L7 知识体系浓缩为一张可导航的思维导图，帮助学习者建立全局认知地图。",
@@ -1218,7 +1218,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\knowledge_topology\\01_concept_definition_atlas.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\knowledge_topology\\01_concept_definition_atlas.md",
       "layer": "L0",
       "title": "概念定义图谱（Concept Definition Atlas）",
       "positioning": "",
@@ -1627,7 +1627,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\knowledge_topology\\02_attribute_relationship_atlas.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\knowledge_topology\\02_attribute_relationship_atlas.md",
       "layer": "L0",
       "title": "属性关系图谱（Attribute Relationship Atlas）",
       "positioning": "",
@@ -2031,7 +2031,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\knowledge_topology\\03_scenario_decision_tree_atlas.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\knowledge_topology\\03_scenario_decision_tree_atlas.md",
       "layer": "L0",
       "title": "场景决策树图谱（Scenario Decision Tree Atlas）",
       "positioning": "",
@@ -2053,7 +2053,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\knowledge_topology\\04_example_counterexample_atlas.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\knowledge_topology\\04_example_counterexample_atlas.md",
       "layer": "L0",
       "title": "示例与反例图谱（Example and Counterexample Atlas）",
       "positioning": "",
@@ -2075,7 +2075,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\knowledge_topology\\05_logical_reasoning_atlas.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\knowledge_topology\\05_logical_reasoning_atlas.md",
       "layer": "L0",
       "title": "逻辑推理图谱（Logical Reasoning Atlas）",
       "positioning": "",
@@ -2102,7 +2102,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\knowledge_topology\\06_inter_layer_mapping_atlas.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\knowledge_topology\\06_inter_layer_mapping_atlas.md",
       "layer": "L0",
       "title": "层间映射图谱（Inter-Layer Mapping Atlas）",
       "positioning": "",
@@ -2161,7 +2161,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\knowledge_topology\\07_intra_layer_mapping_atlas.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\knowledge_topology\\07_intra_layer_mapping_atlas.md",
       "layer": "L0",
       "title": "层内映射图谱（Intra-Layer Mapping Atlas）",
       "positioning": "",
@@ -3371,7 +3371,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\knowledge_topology\\08_concept_source_alignment_atlas.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\knowledge_topology\\08_concept_source_alignment_atlas.md",
       "layer": "L0",
       "title": "概念-权威来源对齐图谱（Concept-Source Alignment Atlas）",
       "positioning": "",
@@ -3393,7 +3393,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\knowledge_topology\\09_reasoning_judgment_tree_atlas.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\knowledge_topology\\09_reasoning_judgment_tree_atlas.md",
       "layer": "L0",
       "title": "推理判定树图谱（Reasoning Judgment Tree Atlas）",
       "positioning": "",
@@ -3415,7 +3415,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\knowledge_topology\\10_gap_and_action_plan.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\knowledge_topology\\10_gap_and_action_plan.md",
       "layer": "L0",
       "title": "缺口与行动计划（Gap and Action Plan）",
       "positioning": "",
@@ -3468,7 +3468,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\learning_guide.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\learning_guide.md",
       "layer": "L0",
       "title": "Rust 知识体系学习指南（Learning Guide）",
       "positioning": "本文件是 `concept/` 知识体系的**用户手册**，回答三个核心问题——\"我应该从哪里开始？\"\"按什么顺序读？\"\"如何验证自己掌握了？\"",
@@ -3551,7 +3551,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\learning_mvp_path.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\learning_mvp_path.md",
       "layer": "L0",
       "title": "MVP 学习路径：从零到多线程 CLI（40 小时）",
       "positioning": "本项目的**最小可行学习路径**（Minimum Viable Path）。无论背景如何，完成本路径即可独立编写带并发/异步的 Rust CLI 工具。",
@@ -3605,7 +3605,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\learning_mvp_path_en.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\learning_mvp_path_en.md",
       "layer": "L0",
       "title": "Rust Minimum Viable Learning Path (MVP Path)",
       "positioning": "",
@@ -3645,7 +3645,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\methodology.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\methodology.md",
       "layer": "L0",
       "title": "方法论：思维表征与知识结构规范",
       "positioning": "本文件定义 `concept/` 下所有主题文件的内容结构、思维表征方式和知识组织规范，确保内容的**一致性、可比较性、可扩展性**。",
@@ -3694,7 +3694,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\navigation.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\navigation.md",
       "layer": "L0",
       "title": "Rust 知识体系全景导航（Navigation Hub）",
       "positioning": "本文件是 `concept/` 知识体系的**统一入口**，提供按层级、按主题、按背景的多维导航路径。",
@@ -3793,7 +3793,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\paradigm_transition_matrix.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\paradigm_transition_matrix.md",
       "layer": "L0",
       "title": "Rust 范式转换模式矩阵（Paradigm Transition Matrix）",
       "positioning": "本文件系统化梳理从其他编程语言（主要是 C++）迁移到 Rust 时的**范式转换模式**，以矩阵形式呈现\"源语言模式 → Rust 模式 → 转换影响 → 学习难点\"。与 `05_comparative/` 的对比文件（如 `01_rust_vs_cpp.md`）形成互补：后者是\"逐项对比\"，本文件是\"转换模式矩阵\"。",
@@ -3829,7 +3829,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\pattern_semantic_space_index.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\pattern_semantic_space_index.md",
       "layer": "L0",
       "title": "模式语义空间索引：设计模式在概念体系中的坐标",
       "positioning": "",
@@ -3871,7 +3871,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\pl_foundations_roadmap.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\pl_foundations_roadmap.md",
       "layer": "L0",
       "title": "通用 PL 基座路线图：Rust 在编程语言坐标系中的位置",
       "positioning": "",
@@ -3909,7 +3909,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\placeholders\\placeholder_generic.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\placeholders\\placeholder_generic.md",
       "layer": "L0",
       "title": "占位符页面",
       "positioning": "",
@@ -3938,7 +3938,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\problem_graph.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\problem_graph.md",
       "layer": "L0",
       "title": "Rust 知识体系问题图谱（Problem Graph）",
       "positioning": "本文件建立 `concept/` 知识体系的**问题分解网络**，将复杂的系统级工程问题逐层分解为概念级子问题，再映射到具体的方法层解决方案。与 `concept_definition_decision_forest.md`（\"如何判定代码是否合法\"）形成互补：问题图谱回答**\"遇到什么问题 → 需要理解什么概念 → 应用什么方法\"**。",
@@ -3974,7 +3974,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\quality_dashboard_v2.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\quality_dashboard_v2.md",
       "layer": "L0",
       "title": "Rust 知识体系思维表征覆盖率仪表板（Quality Dashboard v2）",
       "positioning": "本文件是 `concept/` 知识体系的多维思维表征覆盖率统计面板，追踪每种表征类型（思维导图、矩阵、决策树、定理树、FTA 等）的覆盖概念数、来源对齐率和一致性状态。与 `navigation.md` 的\"质量状态速览\"形成互补：后者提供**静态快照**，本仪表板提供**动态趋势**和**维度细分**。",
@@ -4010,7 +4010,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\quick_reference.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\quick_reference.md",
       "layer": "L0",
       "title": "Rust 概念速查卡片（Quick Reference）",
       "positioning": "面试前/编码时的快速查阅手册。每个核心概念\"一页纸\"——定义 + 代码 + 错误码 + 关联概念。",
@@ -4237,7 +4237,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\rustbelt_predicate_map.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\rustbelt_predicate_map.md",
       "layer": "L0",
       "title": "RustBelt 谓词映射图（RustBelt Predicate Map）",
       "positioning": "本文件将 RustBelt（Jung et al., POPL 2018）中的核心形式化谓词——**所有权谓词 `own(τ)`** 和 **共享谓词 `shr(κ, ℓ)`**——可视化映射到 Rust 的 L1-L3 工程概念，建立\"数学符号 ↔ 代码直觉\"的双向桥梁。",
@@ -4305,7 +4305,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\self_assessment.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\self_assessment.md",
       "layer": "L0",
       "title": "Rust 知识体系自测题库（Self-Assessment）",
       "positioning": "每个层级配套的自测题，用于验证知识掌握程度。答案和解析附在每题之后（可折叠）。",
@@ -4733,7 +4733,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\semantic_bridge_algorithms_patterns.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\semantic_bridge_algorithms_patterns.md",
       "layer": "L0",
       "title": "语义桥：算法、设计模式与工作流模式的统一谱系",
       "positioning": "",
@@ -4823,7 +4823,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\semantic_expressiveness.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\semantic_expressiveness.md",
       "layer": "L0",
       "title": "Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理）",
       "positioning": "本文件从**横向语义维度**梳理 Rust 语言的表达能力光谱，与 L0-L7 纵向概念体系形成正交互补。",
@@ -4867,7 +4867,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\semantic_space.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\semantic_space.md",
       "layer": "L0",
       "title": "Rust 表征空间（Semantic / Representational Space）",
       "positioning": "本文件是 `concept/` 知识体系的**元层总论**，从表征空间（Representational Space）与语义空间（Semantic Space）的视角，系统分析 Rust 语言\"能表达什么\"、\"不能表达什么\"、\"等价表达的组合关系\"，以及其内部机制的完备性与封闭性。",
@@ -5013,7 +5013,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\sources.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\sources.md",
       "layer": "L0",
       "title": "权威来源清单与知识来源关系分析",
       "positioning": "本文件维护 Rust 概念知识体系的所有权威来源，构建如实的知识来源关系网络。所有 `concept/` 下的概念文件引用来源时，应优先引用本清单中的条目。",
@@ -5048,7 +5048,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\template_deduplication_guide.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\template_deduplication_guide.md",
       "layer": "L0",
       "title": "模板去同质化指南",
       "positioning": "",
@@ -5079,7 +5079,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\terminology_glossary.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\terminology_glossary.md",
       "layer": "L0",
       "title": "Rust 核心术语英中对照表",
       "positioning": "",
@@ -5110,7 +5110,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\theorem_inference_forest.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\theorem_inference_forest.md",
       "layer": "L0",
       "title": "Rust 知识体系定理推理森林",
       "positioning": "本文件建立 L1-L4 核心模型内的「公理 → 引理 → 定理 → 推论」推理链，形成跨模型的定理森林，标注每条推理链的前提、规则、失效条件和反例路径。",
@@ -5158,7 +5158,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\todos.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\todos.md",
       "layer": "L0",
       "title": "全局待办清单（Global TODO Tracker）",
       "positioning": "汇总 `concept/` 下所有文件的待补充项，按优先级和层级组织，支持持续审计与迭代。",
@@ -5193,7 +5193,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\topic_authority_alignment_map.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\topic_authority_alignment_map.md",
       "layer": "L0",
       "title": "主题-权威来源对齐图谱 (Topic-Authority Alignment Map)",
       "positioning": "",
@@ -5219,7 +5219,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\00_start.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\00_start.md",
       "layer": "L1",
       "title": "Rust 起步指南",
       "positioning": "Rust 学习路径的起点。本文档假设你没有任何 Rust 背景，只需基本的命令行操作经验。",
@@ -5268,7 +5268,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\01_ownership.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\01_ownership.md",
       "layer": "L1",
       "title": "Ownership（所有权）",
       "positioning": "",
@@ -5711,7 +5711,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\02_borrowing.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\02_borrowing.md",
       "layer": "L1",
       "title": "Borrowing（借用）",
       "positioning": "",
@@ -6168,7 +6168,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\03_lifetimes.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\03_lifetimes.md",
       "layer": "L1",
       "title": "Lifetimes（生命周期）",
       "positioning": "",
@@ -6583,7 +6583,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\04_type_system.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\04_type_system.md",
       "layer": "L1",
       "title": "Type System Basics（类型系统基础）",
       "positioning": "",
@@ -7173,7 +7173,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\05_reference_semantics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\05_reference_semantics.md",
       "layer": "L1",
       "title": "引用语义：自动解引用、Deref 强制与类型转换",
       "positioning": "深入分析 Rust 的**引用语义机制**——自动解引用（Auto-deref）、Deref 强制（Deref Coercion）、类型强制（Type Coercion）以及它们与借用（Borrowing）检查器的交互，澄清开发者常见的隐式转换困惑。",
@@ -7481,7 +7481,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\06_zero_cost_abstractions.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\06_zero_cost_abstractions.md",
       "layer": "L1",
       "title": "零成本抽象：Rust 的性能哲学",
       "positioning": "深入分析 Rust **零成本抽象（Zero-Cost Abstraction）**（Zero-Cost Abstractions）的设计哲学——探讨泛型（Generics）、迭代器（Iterator）、Trait 对象等高层抽象如何在编译期消除运行时（Runtime）开销，以及与 C++ \"零开销原则\" 的对比。",
@@ -7638,7 +7638,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\07_control_flow.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\07_control_flow.md",
       "layer": "L1",
       "title": "控制流：表达式导向的流程控制",
       "positioning": "分析 Rust **控制流结构**的设计哲学——从表达式导向（expression-oriented）的 `if`/`match`/`loop`，到 `if let`/`while let` 的模式匹配（Pattern Matching）集成，揭示 Rust 如何将控制流转化为**值生成**而非**副作用执行**。",
@@ -7885,7 +7885,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\08_collections.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\08_collections.md",
       "layer": "L1",
       "title": "集合类型：Rust 标准库的数据结构谱系",
       "positioning": "系统分析 Rust **标准库集合类型**的设计——从 Vec/VecDeque 的顺序容器，到 HashMap/BTreeMap 的关联容器，再到 HashSet/BTreeSet 的集合类型，揭示每种数据结构的所有权（Ownership）语义、性能特征和选型策略。",
@@ -8064,7 +8064,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\09_strings_and_text.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\09_strings_and_text.md",
       "layer": "L1",
       "title": "字符串与文本：Rust 的 Unicode 处理与格式化系统",
       "positioning": "> 系统分析 Rust **字符串类型**的设计——String [来源: [Rust String](https://doc.rust-lang.org/std/string/struct.String.html)] 与",
@@ -8243,7 +8243,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\10_numerics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\10_numerics.md",
       "layer": "L1",
       "title": "数值类型与运算：从整数到浮点的完整图景",
       "positioning": "系统讲解 Rust **数值类型**——从整数、浮点、饱和运算到类型转换和溢出行为，揭示 Rust 如何在安全性与性能之间做出精确的设计选择。",
@@ -8419,7 +8419,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\11_modules_and_paths.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\11_modules_and_paths.md",
       "layer": "L1",
       "title": "模块系统与路径：Rust 的代码组织哲学",
       "positioning": "系统讲解 Rust **模块（Module）系统**——从 `mod`、`use`、`pub` 的语法到文件系统映射、工作空间组织，揭示 Rust 如何通过模块系统实现代码封装、可见性控制和大型项目组织。",
@@ -8564,7 +8564,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\12_attributes_and_macros.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\12_attributes_and_macros.md",
       "layer": "L1",
       "title": "属性与声明宏：编译期元编程基础",
       "positioning": "系统讲解 Rust **属性（attributes）**和**声明宏（macro_rules!）**——从编译期元编程的基础语法到模式匹配（Pattern Matching）、递归宏和卫生性，揭示 Rust 如何在编译期生成代码同时保持类型安全。",
@@ -8722,7 +8722,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\13_panic_and_abort.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\13_panic_and_abort.md",
       "layer": "L1",
       "title": "Panic 与 Abort：不可恢复错误的处理机制",
       "positioning": "系统讲解 Rust **panic** 机制——从 panic 与 Result 的哲学分野、panic 传播、到自定义 panic 处理和 abort 模式，揭示 Rust 如何在\"优雅失败\"与\"快速崩溃\"之间做出设计选择。",
@@ -8865,7 +8865,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\14_coercion_and_casting.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\14_coercion_and_casting.md",
       "layer": "L1",
       "title": "类型强制与转换：显式与隐式的边界",
       "positioning": "系统讲解 Rust **类型强制（coercion）**和**类型转换（casting）**——从 deref 强制、子类型强制到显式 `as` 转换，揭示 Rust 如何在安全与灵活性之间精确控制类型变换。",
@@ -9033,7 +9033,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\15_closure_basics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\15_closure_basics.md",
       "layer": "L1",
       "title": "闭包基础：捕获环境与匿名函数",
       "positioning": "系统讲解 Rust **闭包（Closure）**——从环境捕获、Fn/FnMut/FnOnce trait 到闭包作为参数和返回值，揭示 Rust 如何将函数式编程的灵活性与所有权（Ownership）系统的安全性结合。",
@@ -9222,7 +9222,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\16_testing_basics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\16_testing_basics.md",
       "layer": "L1",
       "title": "测试基础：从单元测试到集成测试",
       "positioning": "系统讲解 Rust **测试机制**——从单元测试、集成测试到文档测试和基准测试，揭示 Rust 如何内置测试文化并支持多种测试层级。",
@@ -9342,7 +9342,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\17_collections_advanced.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\17_collections_advanced.md",
       "layer": "L1",
       "title": "高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析",
       "positioning": "深入分析 Rust **标准库高级集合类型**的设计权衡——从 BTreeMap/BTreeSet 的有序关联容器，到 HashMap 自定义 hasher，再到 VecDeque 的双端队列与 BinaryHeap 的优先队列，揭示每种数据结构的所有权（Ownership）语义、性能特征、内存布局与选型策略。",
@@ -9480,7 +9480,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\18_strings_and_encoding.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\18_strings_and_encoding.md",
       "layer": "L1",
       "title": "字符串与编码：Rust 的文本处理类型系统",
       "positioning": "系统分析 Rust **字符串类型体系**的设计——String 与 str 的所有权（Ownership）语义、UTF-8 编码约束、OsString/OsStr 的平台抽象、CString/CStr 的 FFI 互操作，以及 grapheme clusters、unicode normalization 等高级文本处理概念。",
@@ -9602,7 +9602,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\19_value_vs_reference_semantics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\19_value_vs_reference_semantics.md",
       "layer": "L1",
       "title": "值语义 vs 引用语义：从 C++、Java、Python 到 Rust",
       "positioning": "",
@@ -9674,7 +9674,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\20_variable_model.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\20_variable_model.md",
       "layer": "L1",
       "title": "变量模型：从通用 PL 视角看 Rust 的所有权",
       "positioning": "",
@@ -9819,7 +9819,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\21_effects_and_purity.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\21_effects_and_purity.md",
       "layer": "L1",
       "title": "副作用与纯度：从引用透明到 Rust 的所有权效果",
       "positioning": "",
@@ -10004,7 +10004,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\22_data_abstraction_spectrum.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\22_data_abstraction_spectrum.md",
       "layer": "L1",
       "title": "数据抽象谱系：从 C struct 到 Rust enum + trait",
       "positioning": "",
@@ -10164,7 +10164,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\23_move_semantics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\23_move_semantics.md",
       "layer": "L1",
       "title": "Move 语义：C++ 与 Rust 的资源转移模型",
       "positioning": "",
@@ -10255,7 +10255,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\24_quiz_type_system.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\24_quiz_type_system.md",
       "layer": "L1",
       "title": "测验：类型系统（试点扩展）",
       "positioning": "嵌入式互动测验扩展——验证 L1 类型系统（Type System）核心概念（标量/复合类型、enum、模式匹配（Pattern Matching）、类型转换）的掌握程度。",
@@ -10419,7 +10419,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\25_quiz_error_handling.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\25_quiz_error_handling.md",
       "layer": "L1",
       "title": "测验：错误处理（试点扩展）",
       "positioning": "嵌入式互动测验扩展——验证 L1 错误处理（Error Handling）核心概念（Result/Option、`?` 运算符、panic、自定义错误）的掌握程度。",
@@ -10612,7 +10612,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\26_quiz_modules_testing.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\26_quiz_modules_testing.md",
       "layer": "L1",
       "title": "测验：模块系统与测试（L1 试点扩展）",
       "positioning": "L1 嵌入式互动测验——验证模块系统（package/crate/module、可见性、路径）与测试（单元测试、集成测试、文档测试）核心概念的掌握程度。",
@@ -10828,7 +10828,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\27_quiz_closures_iterators.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\27_quiz_closures_iterators.md",
       "layer": "L1",
       "title": "测验：闭包与迭代器（L1 试点扩展）",
       "positioning": "L1 嵌入式互动测验——验证闭包（捕获环境、Fn/FnMut/FnOnce、move 闭包（Closures））与迭代器（Iterator trait、适配器、消费者、惰性求值）核心概念的掌握程度。",
@@ -11134,7 +11134,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\28_ownership_inventories_brown_book.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\28_ownership_inventories_brown_book.md",
       "layer": "L1",
       "title": "所有权清单自测：Brown University Ownership Inventory",
       "positioning": "> 本文档为 **Brown University Interactive Book** 中「Ownership Inventory」概念清单的本地映射。",
@@ -11210,7 +11210,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\29_quiz_pl_foundations.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\29_quiz_pl_foundations.md",
       "layer": "L1",
       "title": "测验：通用 PL 基座",
       "positioning": "",
@@ -11264,7 +11264,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\30_lifetimes_advanced.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\30_lifetimes_advanced.md",
       "layer": "L1",
       "title": "Lifetimes 高级主题",
       "positioning": "Polonius 是 Rust 的下一代借用（Borrowing）检查器，以 **Datalog 约束求解** 替代当前的基于集合的区域推断，能编译更多当前系统拒绝的**合法程序**。",
@@ -11643,7 +11643,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\31_never_type.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\31_never_type.md",
       "layer": "L1",
       "title": "Never Type (`!`)：底类型与穷尽性",
       "positioning": "系统讲解 Rust 中 `!` (never type) 的形式语义、类型推导规则、控制流应用和穷尽性检查机制。",
@@ -11814,7 +11814,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\32_error_handling_basics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\32_error_handling_basics.md",
       "layer": "L1",
       "title": "Rust 错误处理基础",
       "positioning": "系统讲解 Rust 的错误处理（Error Handling）机制——从 `Result` 和 `Option` 到 `?` 运算符，分析 Rust 如何将错误处理融入类型系统（Type System），实现编译期安全。",
@@ -11980,7 +11980,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\33_quiz_ownership_borrowing.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\33_quiz_ownership_borrowing.md",
       "layer": "L1",
       "title": "测验：所有权、借用与生命周期（试点）",
       "positioning": "> 本文件为**嵌入式互动测验试点**，采用 `<details>` 交互标签实现\"自测-展开-核对\"的轻量级学习闭环。",
@@ -12170,7 +12170,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\34_pl_prerequisites.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\34_pl_prerequisites.md",
       "layer": "L1",
       "title": "编程语言理论基础（PL Prerequisites）",
       "positioning": "L1 基础层的**前置知识补充**。理解这些通用 PL 概念后，你将能更深刻地回答\"为什么 Rust 要这样设计\"，而非仅仅记忆规则。",
@@ -12297,7 +12297,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\35_preludes.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\35_preludes.md",
       "layer": "L1",
       "title": "Preludes（预导入模块）",
       "positioning": "",
@@ -12375,7 +12375,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\36_keywords.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\36_keywords.md",
       "layer": "L1",
       "title": "Rust 关键字（Keywords）",
       "positioning": "",
@@ -12435,7 +12435,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\37_operators_and_symbols.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\37_operators_and_symbols.md",
       "layer": "L1",
       "title": "Rust 运算符与符号（Operators and Symbols）",
       "positioning": "",
@@ -12501,7 +12501,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\38_crates_and_source_files.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\38_crates_and_source_files.md",
       "layer": "L1",
       "title": "Crate 与源文件（Crates and Source Files）",
       "positioning": "",
@@ -12575,7 +12575,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\39_items.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\39_items.md",
       "layer": "L1",
       "title": "项（Items）",
       "positioning": "",
@@ -12634,7 +12634,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\40_patterns.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\40_patterns.md",
       "layer": "L1",
       "title": "模式匹配（Patterns）",
       "positioning": "",
@@ -12761,7 +12761,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\41_statements_and_expressions.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\41_statements_and_expressions.md",
       "layer": "L1",
       "title": "语句与表达式（Statements and Expressions）",
       "positioning": "",
@@ -12841,7 +12841,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\01_foundation\\42_useful_development_tools.md",
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\42_useful_development_tools.md",
       "layer": "L1",
       "title": "常用开发工具（Useful Development Tools）",
       "positioning": "",
@@ -12894,7 +12894,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\01_traits.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\01_traits.md",
       "layer": "L2",
       "title": "Traits（Trait 系统）",
       "positioning": "",
@@ -13473,7 +13473,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\02_generics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\02_generics.md",
       "layer": "L2",
       "title": "Generics（泛型系统）",
       "positioning": "",
@@ -14090,7 +14090,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\03_memory_management.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\03_memory_management.md",
       "layer": "L2",
       "title": "Memory Management（内存管理）",
       "positioning": "",
@@ -14552,7 +14552,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\04_error_handling.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\04_error_handling.md",
       "layer": "L2",
       "title": "Error Handling（错误处理）",
       "positioning": "",
@@ -15101,7 +15101,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\05_assert_matches.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\05_assert_matches.md",
       "layer": "L2",
       "title": "`assert_matches!`：模式匹配断言的形式化语义",
       "positioning": "将 Rust 的**模式匹配（Pattern Matching）**能力从\"表达式求值\"扩展到\"测试断言\"的工程机制，实现编译期模式检查与运行时（Runtime）断言的统一。",
@@ -15284,7 +15284,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\06_range_types.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\06_range_types.md",
       "layer": "L2",
       "title": "Rust 范围类型语义：`std::ops::Range` → `core::range`",
       "positioning": "探讨 Rust 范围类型从**运行时（Runtime）迭代器（Iterator）**到**编译期可复制的值类型**的语义演进，以及 `IntoIterator` vs `Iterator` 的设计权衡。",
@@ -15424,7 +15424,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\07_closure_types.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\07_closure_types.md",
       "layer": "L2",
       "title": "闭包类型系统：Fn、FnMut、FnOnce 的捕获语义",
       "positioning": "深入分析 Rust 闭包（Closures）的**类型系统（Type System）**——`Fn`、`FnMut`、`FnOnce` 三者的捕获规则、自动 trait 推导、以及闭包与函数指针的本质区别。",
@@ -15586,7 +15586,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\08_interior_mutability.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\08_interior_mutability.md",
       "layer": "L2",
       "title": "内部可变性：编译期规则的运行时逃逸",
       "positioning": "深入分析 Rust **内部可变性**（Interior Mutability）模式",
@@ -15722,7 +15722,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\09_serde_patterns.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\09_serde_patterns.md",
       "layer": "L2",
       "title": "Serde 序列化模式：Rust 的类型驱动数据转换",
       "positioning": "深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏（Macro）、自定义序列化逻辑、以及类型系统（Type System）如何保障数据转换的安全性。",
@@ -15850,7 +15850,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\10_module_system.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\10_module_system.md",
       "layer": "L2",
       "title": "模块系统：Rust 的代码组织与可见性规则",
       "positioning": "深入分析 Rust **模块系统**（module system）的设计——从文件系统映射、可见性规则（pub/use/super/self）、到 crate 边界与 workspace 组织，揭示 Rust 模块系统与 C++/Java/Python 的本质差异。",
@@ -16015,7 +16015,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\11_cow_and_borrowed.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\11_cow_and_borrowed.md",
       "layer": "L2",
       "title": "Cow：写时克隆与零拷贝抽象",
       "positioning": "深入分析 Rust 中 **Cow（Clone [来源: [std::clone::Clone](https://doc.rust-lang.org/std/clone/trait.Clone.html)] on Write）**类型的设计——如何在**借用（Borrowing）**（零拷贝）和**拥有**（必要时克隆）之间自动切换，以及它在 API 设计中的广泛应用。",
@@ -16135,7 +16135,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\12_smart_pointers.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\12_smart_pointers.md",
       "layer": "L2",
       "title": "智能指针：堆内存管理与共享语义",
       "positioning": "系统分析 Rust **智能指针（Smart Pointer）**的设计——Box（独占堆分配）、Rc/Arc（引用（Reference）计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权（Ownership）语义和适用场景。",
@@ -16283,7 +16283,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\13_dsl_and_embedding.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\13_dsl_and_embedding.md",
       "layer": "L2",
       "title": "DSL 与嵌入 式设计：Rust 中的领域特定语言",
       "positioning": "分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏（Macro）驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rustc-dev-guide.rust-lang.org/)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。",
@@ -16429,7 +16429,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\14_newtype_and_wrapper.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\14_newtype_and_wrapper.md",
       "layer": "L2",
       "title": "Newtype 与包装器模式：类型安全的零成本抽象",
       "positioning": "深入分析 Rust 中 **Newtype 模式**和**包装器类型**的设计——如何通过单字段元组结构体（Struct）创建语义上不同的类型，实现编译期单位检查、API 封装和安全边界，同时保持零运行时（Runtime）开销。",
@@ -16566,7 +16566,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\15_iterator_patterns.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\15_iterator_patterns.md",
       "layer": "L2",
       "title": "Rust 迭代器模式",
       "positioning": "深入探讨 Rust 迭代器（Iterator）模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。",
@@ -16764,7 +16764,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\16_error_handling_deep_dive.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\16_error_handling_deep_dive.md",
       "layer": "L2",
       "title": "错误处理深入：从 Result 到自定义错误生态",
       "positioning": "深入分析 Rust **错误处理（Error Handling）机制**——从 `Result`/`Option` 的组合子到 `?` 运算符、错误转换、自定义错误类型和错误处理框架，揭示 Rust 如何将错误处理融入类型系统（Type System）实现编译期安全。",
@@ -16894,7 +16894,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\17_macro_patterns.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\17_macro_patterns.md",
       "layer": "L2",
       "title": "宏模式：编译期代码生成的工程实践",
       "positioning": "深入分析 Rust **宏（Macro）的工程模式**——从 DRY 代码生成、API 设计到编译期计算，揭示如何在不牺牲可读性的前提下利用宏提升代码复用和类型安全。",
@@ -17017,7 +17017,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\18_lifetimes_advanced.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\18_lifetimes_advanced.md",
       "layer": "L2",
       "title": "生命周期高级主题：从 HRTB 到自引用类型",
       "positioning": "深入分析 Rust **生命周期**的高级主题——从高阶生命周期（HRTB）、生命周期省略（Lifetime Elision）规则到自引用（Reference）结构和 Pin，揭示生命周期系统如何处理最复杂的借用（Borrowing）场景。",
@@ -17177,7 +17177,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\19_advanced_traits.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\19_advanced_traits.md",
       "layer": "L2",
       "title": "高级 Trait 主题：从关联类型到特化",
       "positioning": "深入分析 Rust **Trait 系统的高级特性**——从关联类型、泛型（Generics）关联类型（GATs）到特化（Specialization）和负实现，揭示 Trait 系统如何支持复杂抽象和零成本多态。",
@@ -17363,7 +17363,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\20_type_system_advanced.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\20_type_system_advanced.md",
       "layer": "L2",
       "title": "高级类型系统：从关联类型到类型级编程",
       "positioning": "深入分析 Rust **类型系统（Type System）的高级特性**——从 GATs、impl Trait 到类型级计算和 const generics，揭示 Rust 如何在保持编译期安全的同时提供强大的抽象能力。",
@@ -17549,7 +17549,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\21_metaprogramming.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\21_metaprogramming.md",
       "layer": "L2",
       "title": "元编程：Rust 的编译期代码生成与变换",
       "positioning": "深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配（Pattern Matching）、过程宏（Procedural Macro）的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。",
@@ -17667,7 +17667,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\22_api_naming_conventions.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\22_api_naming_conventions.md",
       "layer": "L2",
       "title": "Rust API 命名约定",
       "positioning": "系统整理 Rust 标准库与生态中反复出现的命名模式，帮助学习者写出“看起来就像 Rust”的 API。",
@@ -17842,7 +17842,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\23_quiz_traits_and_generics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\23_quiz_traits_and_generics.md",
       "layer": "L2",
       "title": "测验：Trait 与泛型（试点扩展）",
       "positioning": "嵌入式互动测验扩展——验证 L2 Trait 与泛型（Generics）核心概念（trait 定义与实现、泛型约束、关联类型、trait 对象）的掌握程度。",
@@ -18043,7 +18043,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\24_quiz_memory_management.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\24_quiz_memory_management.md",
       "layer": "L2",
       "title": "测验：内存管理（L2 试点扩展）",
       "positioning": "L2 嵌入式互动测验——验证智能指针（Smart Pointer）核心概念（Box、Rc/Arc、RefCell/Mutex、内部可变性模式）的掌握程度。",
@@ -18295,7 +18295,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\25_rtti_and_dynamic_typing.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\25_rtti_and_dynamic_typing.md",
       "layer": "L2",
       "title": "RTTI 与动态类型识别：从 C++ 到 Rust",
       "positioning": "",
@@ -18391,7 +18391,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\26_c_preprocessor_vs_rust_macros.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\26_c_preprocessor_vs_rust_macros.md",
       "layer": "L2",
       "title": "C 预处理器 vs Rust 宏：从文本替换到语法树",
       "positioning": "",
@@ -18481,7 +18481,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\27_exception_safety_rust_cpp.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\27_exception_safety_rust_cpp.md",
       "layer": "L2",
       "title": "异常安全：C++ 与 Rust 的错误处理哲学",
       "positioning": "",
@@ -18579,7 +18579,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\28_construction_and_initialization.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\28_construction_and_initialization.md",
       "layer": "L2",
       "title": "构造与初始化：C++ 的构造函数 vs Rust 的结构体字面量",
       "positioning": "",
@@ -18675,7 +18675,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\29_friend_vs_module_privacy.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\29_friend_vs_module_privacy.md",
       "layer": "L2",
       "title": "友元 vs 模块可见性：C++ 的 `friend` 与 Rust 的隐私边界",
       "positioning": "",
@@ -18759,7 +18759,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\30_quiz_cpp_rust_foundations.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\30_quiz_cpp_rust_foundations.md",
       "layer": "L2",
       "title": "测验：C/C++ → Rust 基础知识对比",
       "positioning": "",
@@ -18814,7 +18814,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\31_derive_traits.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\31_derive_traits.md",
       "layer": "L2",
       "title": "可派生 Trait（Derive Traits）",
       "positioning": "",
@@ -18940,7 +18940,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\32_editions.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\32_editions.md",
       "layer": "L2",
       "title": "Rust Editions（语言版本）",
       "positioning": "",
@@ -18994,7 +18994,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\02_intermediate\\33_rust_release_process.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\33_rust_release_process.md",
       "layer": "L2",
       "title": "Rust 发布流程（Rust Release Process）",
       "positioning": "",
@@ -19054,7 +19054,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\00_before_formal.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\00_before_formal.md",
       "layer": "L3",
       "title": "是否需要进入 L4 形式化层？",
       "positioning": "L3（高级）与 L4（形式化）之间的**决策缓冲带**，帮助你判断是否需要阅读形式化内容。",
@@ -19103,7 +19103,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\01_concurrency.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\01_concurrency.md",
       "layer": "L3",
       "title": "Concurrency（并发模型）",
       "positioning": "",
@@ -19418,7 +19418,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\02_async.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_async.md",
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
@@ -20015,7 +20015,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\03_unsafe.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\03_unsafe.md",
       "layer": "L3",
       "title": "Unsafe Rust 安全编程",
       "positioning": "",
@@ -20637,7 +20637,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\04_macros.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\04_macros.md",
       "layer": "L3",
       "title": "Macros（宏系统）",
       "positioning": "",
@@ -21204,7 +21204,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\05_rust_ffi.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\05_rust_ffi.md",
       "layer": "L3",
       "title": "Rust FFI：与外部代码的安全边界",
       "positioning": "系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。",
@@ -21388,7 +21388,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\06_pin_unpin.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\06_pin_unpin.md",
       "layer": "L3",
       "title": "Pin 与 Unpin：自引用类型的不动性保证",
       "positioning": "深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。",
@@ -21590,7 +21590,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\07_proc_macro.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\07_proc_macro.md",
       "layer": "L3",
       "title": "过程宏：编译期代码生成的元编程工具",
       "positioning": "深入分析 Rust **过程宏（Procedural Macros）**的三种类型（derive、attribute、function-like）——它们的编译期执行模型、TokenStream 操作、卫生性（hygiene）保证，以及与 `macro_rules!` 的本质差异。",
@@ -21730,7 +21730,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\08_nll_and_polonius.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\08_nll_and_polonius.md",
       "layer": "L3",
       "title": "NLL 与 Polonius：借用检查器的演进",
       "positioning": "深入分析 Rust **借用（Borrowing）检查器**的两个里程碑——Non-Lexical Lifetimes (NLL) 如何放宽词法作用域限制，以及 Polonius 如何通过数据流分析实现更精确的借用检查，揭示 Rust 类型系统（Type System）的持续演进。",
@@ -21871,7 +21871,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\09_ffi_advanced.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\09_ffi_advanced.md",
       "layer": "L3",
       "title": "FFI 高级主题：跨语言边界的安全与性能",
       "positioning": "深入分析 Rust **FFI（外部函数接口）**的高级主题——从复杂类型映射、回调函数、到线程安全和内存布局控制，揭示如何在不安全边界上维持 Rust 的安全保证。",
@@ -22030,7 +22030,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\10_concurrency_patterns.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\10_concurrency_patterns.md",
       "layer": "L3",
       "title": "并发 模式：从消息 传递到锁自由的数据结构",
       "positioning": "深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权（Ownership）系统如何为并发安全（Concurrency Safety）提供编译期保证。",
@@ -22254,7 +22254,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\11_atomics_and_memory_ordering.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\11_atomics_and_memory_ordering.md",
       "layer": "L3",
       "title": "原子操作与内存序：无锁并发的精确控制",
       "positioning": "深入分析 Rust **原子类型（Atomic）**和**内存排序（Memory Ordering [来源: [Atomic Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]）**——从基本的 load/store 到 compare-and-swap 和释放-获取语义，揭示无锁编程中硬件内存模型的精确控制。",
@@ -22475,7 +22475,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\12_unsafe_rust_patterns.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\12_unsafe_rust_patterns.md",
       "layer": "L3",
       "title": "Unsafe Rust 模式：安全抽象的核心技术",
       "positioning": "",
@@ -22520,7 +22520,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\13_inline_assembly.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\13_inline_assembly.md",
       "layer": "L3",
       "title": "内联汇编 (Inline Assembly)",
       "positioning": "深入分析 Rust `asm!` 宏（Macro）的语法、约束系统、寄存器管理，以及 x86_64、aarch64、RISC-V、s390x 四大平台的差异，重点覆盖 Rust 1.96 为 s390x 引入的向量寄存器支持。",
@@ -22772,7 +22772,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\14_custom_allocators.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\14_custom_allocators.md",
       "layer": "L3",
       "title": "自定义分配器与内存布局优化",
       "positioning": "深入探讨 Rust 的**自定义分配器**机制——从 `GlobalAlloc` Trait 到 `allocator_api` 不稳定特性，分析内存布局对齐、分配策略与性能优化。",
@@ -22918,7 +22918,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\15_zero_copy_parsing.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\15_zero_copy_parsing.md",
       "layer": "L3",
       "title": "零拷贝解析与序列化优化",
       "positioning": "探讨 Rust 中的**零拷贝**（Zero-Copy）技术——从字节切片（Slice）直接解析结构化数据，无需中间复制，分析内存安全（Memory Safety）与性能权衡。",
@@ -23074,7 +23074,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\16_lock_free.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\16_lock_free.md",
       "layer": "L3",
       "title": "无锁编程与内存模型",
       "positioning": "深入探讨 Rust 中的**无锁编程**——从原子操作（Atomic Operations）到内存序，分析 lock-free 算法的内存安全（Memory Safety）保证与性能优势。",
@@ -23283,7 +23283,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\17_type_erasure.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\17_type_erasure.md",
       "layer": "L3",
       "title": "类型擦除与动态分发",
       "positioning": "深入探讨 Rust 中的**类型擦除**技术——从 trait object 到 vtable，分析动态分发如何在保持类型安全的同时实现运行时（Runtime）多态。",
@@ -23423,7 +23423,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\18_network_programming.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\18_network_programming.md",
       "layer": "L3",
       "title": "Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象",
       "positioning": "系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时（Runtime）下的 TCP/UDP 异步（Async） IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从\"怎么写\"到\"为什么这样设计\"的完整认知框架。",
@@ -23561,7 +23561,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\19_parallel_distributed_pattern_spectrum.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\19_parallel_distributed_pattern_spectrum.md",
       "layer": "L3",
       "title": "并行与分布式模式谱系：从线程池到共识算法",
       "positioning": "",
@@ -23747,7 +23747,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\20_stream_processing_semantics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\20_stream_processing_semantics.md",
       "layer": "L3",
       "title": "流处理语义：从 Dataflow Model 到 Differential Dataflow",
       "positioning": "深入分析流处理的核心语义——时间域、窗口、水印、容错、状态管理、背压，并将 Rust 的 timely/differential dataflow 置于国际流处理理论谱系中定位。",
@@ -23868,7 +23868,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\21_quiz_concurrency_async.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\21_quiz_concurrency_async.md",
       "layer": "L3",
       "title": "测验：并发与异步（L3 试点扩展）",
       "positioning": "L3 嵌入式互动测验——验证并发模型（Send/Sync、Mutex/Arc、channel）与异步（Async）编程（Future、Pin、await）核心概念的掌握程度。",
@@ -24064,7 +24064,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\22_quiz_unsafe.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\22_quiz_unsafe.md",
       "layer": "L3",
       "title": "测验：Unsafe Rust（L3 试点扩展）",
       "positioning": "L3 嵌入式互动测验——验证 Unsafe Rust 核心概念（原始指针（Raw Pointer）、unsafe 块/函数/Trait、 FFI、 Miri 验证）的掌握程度。",
@@ -24270,7 +24270,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\23_quiz_macros.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\23_quiz_macros.md",
       "layer": "L3",
       "title": "测验：宏系统（L3 试点扩展）",
       "positioning": "L3 嵌入式互动测验——验证宏系统核心概念（声明宏（Declarative Macro） `macro_rules!`、重复模式、卫生性、过程宏（Procedural Macro））的掌握程度。",
@@ -24490,7 +24490,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\24_async_closures.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\24_async_closures.md",
       "layer": "L3",
       "title": "Async Closures（异步闭包）",
       "positioning": "",
@@ -24681,7 +24681,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\25_async_advanced.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\25_async_advanced.md",
       "layer": "L3",
       "title": "Async/Await 高级主题",
       "positioning": "",
@@ -25043,7 +25043,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\26_async_patterns.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\26_async_patterns.md",
       "layer": "L3",
       "title": "异步模式：从 Future 到生产级并发",
       "positioning": "深入分析 Rust **异步编程的高级模式**——从 Future 状态机、Pin 保证到并发执行和取消传播，揭示 Rust async/await 如何在零运行时（Runtime）开销下实现高效并发。",
@@ -25244,7 +25244,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\27_linkage.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\27_linkage.md",
       "layer": "L3",
       "title": "Linkage（链接）",
       "positioning": "",
@@ -25372,7 +25372,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\28_conditional_compilation.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\28_conditional_compilation.md",
       "layer": "L3",
       "title": "条件编译（Conditional Compilation）",
       "positioning": "",
@@ -25489,7 +25489,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\29_memory_model.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\29_memory_model.md",
       "layer": "L3",
       "title": "Rust 内存模型（Memory Model）",
       "positioning": "",
@@ -25544,7 +25544,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\30_rust_runtime.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\30_rust_runtime.md",
       "layer": "L3",
       "title": "Rust 运行时（The Rust Runtime）",
       "positioning": "",
@@ -25612,7 +25612,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\31_panic.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\31_panic.md",
       "layer": "L3",
       "title": "Panic 机制",
       "positioning": "",
@@ -25679,7 +25679,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\32_memory_allocation_and_lifetime.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\32_memory_allocation_and_lifetime.md",
       "layer": "L3",
       "title": "内存分配与生命周期（Memory Allocation and Lifetime）",
       "positioning": "",
@@ -25740,7 +25740,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\33_variables.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\33_variables.md",
       "layer": "L3",
       "title": "变量（Variables）",
       "positioning": "",
@@ -25814,7 +25814,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\34_visibility_and_privacy.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\34_visibility_and_privacy.md",
       "layer": "L3",
       "title": "可见性与隐私（Visibility and Privacy）",
       "positioning": "",
@@ -25886,7 +25886,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\03_advanced\\35_unsafe_reference.md",
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\35_unsafe_reference.md",
       "layer": "L3",
       "title": "Unsafe 参考（Unsafe Reference）",
       "positioning": "",
@@ -25942,7 +25942,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\01_linear_logic.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\01_linear_logic.md",
       "layer": "L4",
       "title": "Linear Logic & Affine Logic（线性逻辑与仿射逻辑）",
       "positioning": "",
@@ -26161,7 +26161,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\02_type_theory.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\02_type_theory.md",
       "layer": "L4",
       "title": "Type Theory（类型论基础）",
       "positioning": "",
@@ -26524,7 +26524,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\03_ownership_formal.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\03_ownership_formal.md",
       "layer": "L4",
       "title": "Ownership Formalization（所有权形式化）",
       "positioning": "",
@@ -26752,7 +26752,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\04_rustbelt.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\04_rustbelt.md",
       "layer": "L4",
       "title": "RustBelt & Verification Toolchain（RustBelt 与验证工具链）",
       "positioning": "",
@@ -26938,7 +26938,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\05_verification_toolchain.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\05_verification_toolchain.md",
       "layer": "L4",
       "title": "Verification Toolchain Selection Guide（验证工具链选择指南）",
       "positioning": "",
@@ -27117,7 +27117,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\06_subtype_variance.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\06_subtype_variance.md",
       "layer": "L4",
       "title": "子类型与变型：Rust 类型系统中的协变、逆变与不变",
       "positioning": "深入分析 Rust 类型系统（Type System）中的**子类型关系**与**变型规则**（Variance），解释为什么 `&'static str` 可以赋给 `&'a str`，但 `&mut &'static str` 不能赋给 `&mut &'a str`。",
@@ -27253,7 +27253,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\08_type_inference.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\08_type_inference.md",
       "layer": "L4",
       "title": "类型推断：Hindley-Milner 算法与 Rust 的工业实现",
       "positioning": "深入分析 **Hindley-Milner (HM) 类型推断（Type Inference）算法**——从 λ 演算到 Rust 的工业实现，探讨 HM 的完备性、Rust 对 HM 的扩展（trait 约束、泛型（Generics）、生命周期（Lifetimes）），以及类型推断与代码可读性的平衡。",
@@ -27377,7 +27377,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\09_linear_logic_applications.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\09_linear_logic_applications.md",
       "layer": "L4",
       "title": "线性逻辑在 Rust 中的工程应用",
       "positioning": "深入分析**线性逻辑**如何从理论概念转化为 Rust 的**工程实践**——从资源管理、协议状态机到 session types，揭示形式化类型论在现代系统编程中的实际价值。",
@@ -27513,7 +27513,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\10_category_theory.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\10_category_theory.md",
       "layer": "L4",
       "title": "范畴论与 Rust：从函子到单子",
       "positioning": "从**范畴论**视角分析 Rust 的类型系统（Type System）——从函子（Functor）、应用函子（Applicative）到单子（Monad），揭示 Rust 的类型构造器如何隐式实现这些抽象代数结构。",
@@ -27655,7 +27655,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\11_separation_logic.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\11_separation_logic.md",
       "layer": "L4",
       "title": "分离逻辑：Rust 所有权的形式化根基",
       "positioning": "深入讲解**分离逻辑（Separation Logic）**——从霍尔逻辑到分离合取、框架规则，揭示 Rust 所有权（Ownership）系统如何建立在严格的数学基础之上，并连接形式化验证工具如 Iris 和 Viper。",
@@ -27781,7 +27781,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\12_denotational_semantics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\12_denotational_semantics.md",
       "layer": "L4",
       "title": "指称语义与领域理论",
       "positioning": "探讨 Rust 的**指称语义**（Denotational Semantics）基础——从 Scott-Strachey 方法到完备偏序（CPO）、不动点理论，分析 Rust 类型如何通过数学对象赋予意义。",
@@ -27894,7 +27894,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\13_formal_methods.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\13_formal_methods.md",
       "layer": "L4",
       "title": "形式化方法在 Rust 中的应用",
       "positioning": "探讨形式化验证工具在 Rust 生态中的应用——从 Kani 的模型检查到 Creusot 的演绎验证，分析如何用数学方法证明 Rust 代码正确性。",
@@ -28002,7 +28002,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\14_lambda_calculus.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\14_lambda_calculus.md",
       "layer": "L4",
       "title": "Lambda 演算与 Rust 计算模型",
       "positioning": "探讨 Lambda 演算作为 Rust 函数式编程的数学基础——从 β-归约到类型化 Lambda 演算，分析 Rust 的闭包（Closures）与函数类型如何映射到计算理论。",
@@ -28136,7 +28136,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\15_hoare_logic.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\15_hoare_logic.md",
       "layer": "L4",
       "title": "Hoare 逻辑：程序验证的形式化基础与 Rust 契约",
       "positioning": "系统讲解 **Hoare 逻辑（霍尔逻辑）**——从前置条件、后置条件、循环不变量的经典形式化，到最弱前置条件演算，揭示 Hoare 逻辑如何为 Rust 的 unsafe 代码契约、内部不变量和形式化验证工具提供理论基础。",
@@ -28256,7 +28256,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\16_aerospace_certification_formal_methods.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\16_aerospace_certification_formal_methods.md",
       "layer": "L4",
       "title": "航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)",
       "positioning": "系统讲解 **DO-178C 航空软件标准** 与 **DO-333 形式化方法补充** 的 Rust 映射——从软件等级 A~E 到定理证明、模型检查、抽象解释三类形式化方法在 Rust 生态中的工具链映射，分析 Rust 所有权（Ownership）系统在航空航天安全关键软件中的独特形式化优势。",
@@ -28347,7 +28347,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\17_operational_semantics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\17_operational_semantics.md",
       "layer": "L4",
       "title": "操作语义：程序行为的形式化定义",
       "positioning": "介绍 **操作语义（Operational Semantics）**——通过形式化规则定义程序的执行步骤，分析小步语义（Small-Step）与大步语义（Big-Step）的对比，以及 Rust 的所有权（Ownership）、借用（Borrowing）和并发操作的形式化建模方法。",
@@ -28493,7 +28493,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\18_evaluation_strategies.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\18_evaluation_strategies.md",
       "layer": "L4",
       "title": "求值策略：Call-by-Value, Call-by-Name, Call-by-Need",
       "positioning": "",
@@ -28656,7 +28656,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\19_rustc_query_system.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\19_rustc_query_system.md",
       "layer": "L4",
       "title": "Rustc 查询系统与增量编译",
       "positioning": "将 `rustc` 从“顺序 pass 流水线”还原为“按需查询 + 缓存”的真实架构，理解增量编译的底层机制。",
@@ -28731,7 +28731,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\20_axiomatic_semantics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\20_axiomatic_semantics.md",
       "layer": "L4",
       "title": "Axiomatic Semantics（公理语义）",
       "positioning": "",
@@ -28884,7 +28884,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\21_type_semantics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\21_type_semantics.md",
       "layer": "L4",
       "title": "Type Semantics（类型语义）",
       "positioning": "",
@@ -29074,7 +29074,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\22_modern_verification_tools.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\22_modern_verification_tools.md",
       "layer": "L4",
       "title": "现代 Rust 验证工具生态（2025-2026）",
       "positioning": "利用大语言模型（LLM）自动生成 Verus 证明注解，降低形式化验证的门槛。",
@@ -29193,7 +29193,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\23_programming_language_foundations.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\23_programming_language_foundations.md",
       "layer": "L4",
       "title": "通用程序语言理论基础：Rust 的 PL 基座",
       "positioning": "从通用程序语言（PL）理论视角审视 Rust 的设计根基，建立从 λ 演算到 Rust 类型系统（Type System）的概念桥梁。",
@@ -29308,7 +29308,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\24_autoverus.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\24_autoverus.md",
       "layer": "L4",
       "title": "AutoVerus / Verus 自动证明生态",
       "positioning": "",
@@ -29360,7 +29360,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\25_quiz_formal_methods.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\25_quiz_formal_methods.md",
       "layer": "L4",
       "title": "测验：形式化方法概念（L4 试点扩展）",
       "positioning": "L4 嵌入式互动测验——验证形式化方法核心概念（分离逻辑、RustBelt、类型安全、验证工具链）的概念掌握程度。",
@@ -29496,7 +29496,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\26_trait_solver_in_rustc.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\26_trait_solver_in_rustc.md",
       "layer": "L4",
       "title": "rustc 中的 Trait Solver",
       "positioning": "把“这个类型是否实现了某 trait”这一核心问题，还原为候选装配、筛选、确认与约束求解的完整算法。",
@@ -29604,7 +29604,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\27_type_checking_and_inference.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\27_type_checking_and_inference.md",
       "layer": "L4",
       "title": "rustc 类型检查与类型推断",
       "positioning": "把“编译器如何知道 `Vec<&str>` 并对未标注类型做推断”还原为约束生成、统一与区域求解的完整算法。",
@@ -29727,7 +29727,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\28_borrow_checking_decidability.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\28_borrow_checking_decidability.md",
       "layer": "L4",
       "title": "Borrow Checking Decidability（借用检查可判定性）",
       "positioning": "",
@@ -29844,7 +29844,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\29_type_inference_complexity.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\29_type_inference_complexity.md",
       "layer": "L4",
       "title": "Type Inference Complexity（类型推断复杂度）",
       "positioning": "解释 Rust 类型推断（Type Inference）为什么从 HM 的 $O(n^3)$ 跃迁到 PSPACE-完全，以及这一理论结论如何在 rustc 的约束求解器中得到工程化实现。",
@@ -29956,7 +29956,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\30_aeneas_symbolic_semantics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\30_aeneas_symbolic_semantics.md",
       "layer": "L4",
       "title": "Aeneas Symbolic Semantics（Aeneas 符号化语义）",
       "positioning": "",
@@ -30053,7 +30053,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\31_miri.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\31_miri.md",
       "layer": "L4",
       "title": "Miri：Rust 未定义行为动态检测器",
       "positioning": "将 Miri 从“nightly 玩具”还原为日常 unsafe 代码审查与教学的标准工具。",
@@ -30124,7 +30124,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\32_kani.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\32_kani.md",
       "layer": "L4",
       "title": "Kani：Rust 有界模型检查器",
       "positioning": "将 Kani 从\"AWS 内部工具\"还原为日常安全关键代码审查与教学的标准模型检查器。",
@@ -30264,7 +30264,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\33_safety_tags_in_formal.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\33_safety_tags_in_formal.md",
       "layer": "L4",
       "title": "Safety Tags（安全标签）",
       "positioning": "",
@@ -30325,7 +30325,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\34_borrow_sanitizer_in_formal.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\34_borrow_sanitizer_in_formal.md",
       "layer": "L4",
       "title": "BorrowSanitizer 运行时别名模型检测",
       "positioning": "",
@@ -30370,7 +30370,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\35_name_resolution_and_hir.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\35_name_resolution_and_hir.md",
       "layer": "L4",
       "title": "Rustc 名称解析与 HIR",
       "positioning": "把“名字怎么找到定义”和“源码如何变成编译器友好的 HIR”这两个前端核心步骤讲清楚，为理解类型检查、借用（Borrowing）检查打下基础。",
@@ -30462,7 +30462,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\36_tree_borrows_deep_dive.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\36_tree_borrows_deep_dive.md",
       "layer": "L4",
       "title": "Tree Borrows 深度解析",
       "positioning": "",
@@ -30516,7 +30516,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\37_behavior_considered_undefined.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\37_behavior_considered_undefined.md",
       "layer": "L4",
       "title": "未定义行为清单（Behavior Considered Undefined）",
       "positioning": "",
@@ -30571,7 +30571,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\38_application_binary_interface.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\38_application_binary_interface.md",
       "layer": "L4",
       "title": "Application Binary Interface（ABI）",
       "positioning": "",
@@ -30649,7 +30649,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\39_constant_evaluation.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\39_constant_evaluation.md",
       "layer": "L4",
       "title": "常量求值（Constant Evaluation）",
       "positioning": "",
@@ -30710,7 +30710,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\40_names_and_resolution.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\40_names_and_resolution.md",
       "layer": "L4",
       "title": "名称、作用域与解析（Names, Scopes and Resolution）",
       "positioning": "",
@@ -30764,7 +30764,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\41_special_types_and_traits.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\41_special_types_and_traits.md",
       "layer": "L4",
       "title": "特殊类型与 Trait（Special Types and Traits）",
       "positioning": "",
@@ -30821,7 +30821,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\42_type_layout.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\42_type_layout.md",
       "layer": "L4",
       "title": "类型布局（Type Layout）",
       "positioning": "",
@@ -30900,7 +30900,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\43_destructors.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\43_destructors.md",
       "layer": "L4",
       "title": "析构函数与 Drop Scope（Destructors）",
       "positioning": "",
@@ -30973,7 +30973,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\44_notation.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\44_notation.md",
       "layer": "L4",
       "title": "符号约定（Notation）",
       "positioning": "",
@@ -31025,7 +31025,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\45_lexical_structure.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\45_lexical_structure.md",
       "layer": "L4",
       "title": "词法结构（Lexical Structure）",
       "positioning": "",
@@ -31093,7 +31093,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\46_items_reference.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\46_items_reference.md",
       "layer": "L4",
       "title": "条目参考（Items Reference）",
       "positioning": "",
@@ -31160,7 +31160,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\47_attributes.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\47_attributes.md",
       "layer": "L4",
       "title": "属性（Attributes）",
       "positioning": "",
@@ -31237,7 +31237,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\48_statements_and_expressions_reference.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\48_statements_and_expressions_reference.md",
       "layer": "L4",
       "title": "语句与表达式参考（Statements and Expressions Reference）",
       "positioning": "",
@@ -31298,7 +31298,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\49_patterns_reference.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\49_patterns_reference.md",
       "layer": "L4",
       "title": "模式参考（Patterns Reference）",
       "positioning": "",
@@ -31357,7 +31357,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\50_type_system_reference.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\50_type_system_reference.md",
       "layer": "L4",
       "title": "类型系统参考（Type System Reference）",
       "positioning": "",
@@ -31419,7 +31419,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\51_names_reference.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\51_names_reference.md",
       "layer": "L4",
       "title": "名字参考（Names Reference）",
       "positioning": "",
@@ -31473,7 +31473,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\04_formal\\52_reference_appendices.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\52_reference_appendices.md",
       "layer": "L4",
       "title": "Rust Reference 附录（Reference Appendices）",
       "positioning": "",
@@ -31528,7 +31528,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\01_rust_vs_cpp.md",
       "layer": "L5",
       "title": "Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>",
       "positioning": "",
@@ -31700,7 +31700,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\02_rust_vs_go.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\02_rust_vs_go.md",
       "layer": "L5",
       "title": "Rust vs Go：线性所有权 vs CSP 过程逻辑",
       "positioning": "",
@@ -31841,7 +31841,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\03_paradigm_matrix.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\03_paradigm_matrix.md",
       "layer": "L5",
       "title": "Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）",
       "positioning": "",
@@ -31973,7 +31973,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\04_safety_boundaries.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\04_safety_boundaries.md",
       "layer": "L5",
       "title": "Rust 安全保证的边界条件全景（Safety Boundary Panorama）",
       "positioning": "本文件汇总 Rust 所有**编译期安全保证**的边界条件、失效场景和反例，形成完整的\"安全 ⇄ 不安全\"边界地图。",
@@ -32118,7 +32118,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\05_execution_model_isomorphism.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\05_execution_model_isomorphism.md",
       "layer": "L5",
       "title": "Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行",
       "positioning": "本文件从**数学模型同构性**视角系统梳理 Rust 的执行模型（同步/异步（Async）/并发/并行），并与 Go、理论模型（CSP/Actor/π 演算/进程代数）建立精确的对应关系。",
@@ -32266,7 +32266,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\06_rust_vs_java.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\06_rust_vs_java.md",
       "layer": "L5",
       "title": "Rust vs Java：系统编程与托管运行时的范式对比",
       "positioning": "从**内存模型**、**并发语义**、**类型系统（Type System）**和**运行时（Runtime）架构**四个维度，系统对比 Rust 与 Java 的设计哲学差异，分析两种范式在系统编程、云原生和嵌入式场景的适用边界。",
@@ -32379,7 +32379,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\07_rust_vs_python.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\07_rust_vs_python.md",
       "layer": "L5",
       "title": "Rust vs Python：系统编程与动态脚本的对照分析",
       "positioning": "对比分析 **Rust**（编译型、强类型、内存安全（Memory Safety））与 **Python**（解释型、动态类型、开发效率优先）在语言设计哲学、类型系统（Type System）、内存模型、并发模型和工程实践五个维度的深层差异。",
@@ -32484,7 +32484,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\08_rust_vs_javascript.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\08_rust_vs_javascript.md",
       "layer": "L5",
       "title": "Rust vs JavaScript：系统编程与脚本执行的范式差异",
       "positioning": "对比分析 **Rust**（编译型、强类型、内存安全（Memory Safety））与 **JavaScript**（解释型、动态类型、事件驱动）在语言语义、运行时（Runtime）模型、异步（Async）处理和生态工具链四个维度的本质差异，特别关注 WASM 作为两者交汇点的作用。",
@@ -32582,7 +32582,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\09_rust_vs_swift.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\09_rust_vs_swift.md",
       "layer": "L5",
       "title": "Rust vs Swift：现代系统语言的两种路径",
       "positioning": "对比分析 **Rust** 与 **Swift** 的设计选择——从内存管理模型、所有权（Ownership）系统到生态定位，揭示两种语言如何在\"安全\"与\"易用\"之间做出不同权衡。",
@@ -32687,7 +32687,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\10_rust_vs_zig.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\10_rust_vs_zig.md",
       "layer": "L5",
       "title": "Rust vs Zig：现代系统语言的两种哲学",
       "positioning": "对比分析 **Rust** 与 **Zig** 的设计哲学——从编译期计算、错误处理（Error Handling）到内存管理，揭示两种语言如何在\"显式控制\"与\"抽象安全\"之间做出选择。",
@@ -32804,7 +32804,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\11_rust_vs_kotlin.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\11_rust_vs_kotlin.md",
       "layer": "L5",
       "title": "Rust vs Kotlin：静态安全的两种路径",
       "positioning": "对比分析 **Rust** 与 **Kotlin** 的设计哲学——从空安全、并发模型到平台支持，揭示静态类型语言如何在不同生态中实现安全与表达力的平衡。",
@@ -32909,7 +32909,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\12_rust_vs_scala.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\12_rust_vs_scala.md",
       "layer": "L5",
       "title": "Rust vs Scala：类型系统的两种哲学",
       "positioning": "对比分析 **Rust** 与 **Scala** 的设计哲学——从类型推断（Type Inference）、模式匹配（Pattern Matching）到并发模型，揭示两种语言如何在类型表达力和运行时（Runtime）表示之间做出选择。",
@@ -33013,7 +33013,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\13_rust_vs_csharp.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\13_rust_vs_csharp.md",
       "layer": "L5",
       "title": "Rust vs C#：托管与原生之路",
       "positioning": "对比分析 **Rust** 与 **C#** 的设计哲学——从内存管理、泛型（Generics）系统到异步（Async）模型，揭示托管语言与原生语言在工程实践中的权衡。",
@@ -33119,7 +33119,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\14_rust_vs_elixir.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\14_rust_vs_elixir.md",
       "layer": "L5",
       "title": "Rust vs Elixir 对比分析",
       "positioning": "对比 Rust 和 Elixir（Erlang VM）在并发模型、错误处理（Error Handling）、类型系统（Type System）和运行时（Runtime）的异同。",
@@ -33223,7 +33223,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\15_rust_vs_typescript.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\15_rust_vs_typescript.md",
       "layer": "L5",
       "title": "Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程",
       "positioning": "对比分析 **Rust**（编译期内存安全（Memory Safety）、零成本抽象（Zero-Cost Abstraction）、所有权（Ownership）系统）与 **TypeScript**（渐进式类型、JavaScript 超集、运行时（Runtime）主导）在类型系统（Type System）、编译模型、异步（Async）生态和 WASM 互操作四个维度的本质差异，建立系统化的选型决策框架。",
@@ -33328,7 +33328,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\16_cpp_rust_surface_features.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\16_cpp_rust_surface_features.md",
       "layer": "L5",
       "title": "C++ vs Rust：构造、运算符、RTTI、友元",
       "positioning": "",
@@ -33396,7 +33396,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\17_quiz_rust_vs_systems.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\17_quiz_rust_vs_systems.md",
       "layer": "L5",
       "title": "测验：Rust vs 系统编程语言（L5 试点扩展）",
       "positioning": "L5 嵌入式互动测验——通过代码对比验证 Rust 与 C/C++/Go 在内存安全（Memory Safety）、并发模型、错误处理（Error Handling）等维度的核心差异。",
@@ -33544,7 +33544,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\18_cpp_abi_object_model.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\18_cpp_abi_object_model.md",
       "layer": "L5",
       "title": "Rust vs C++：ABI、对象模型与内存布局",
       "positioning": "",
@@ -33725,7 +33725,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\05_comparative\\19_rust_vs_ruby.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\19_rust_vs_ruby.md",
       "layer": "L5",
       "title": "Rust vs Ruby：性能与表达力的两极",
       "positioning": "对比分析 **Rust** 与 **Ruby** 的设计哲学——从动态类型的极致表达力到静态类型的编译期安全，揭示两种语言在Web开发、脚本编写和系统编程中的互补定位。",
@@ -33841,7 +33841,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\01_toolchain.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\01_toolchain.md",
       "layer": "L6",
       "title": "Toolchain（工具链与 Cargo）",
       "positioning": "",
@@ -34065,7 +34065,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\02_patterns.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\02_patterns.md",
       "layer": "L6",
       "title": "Design Patterns（设计模式）",
       "positioning": "",
@@ -34401,7 +34401,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\03_core_crates.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\03_core_crates.md",
       "layer": "L6",
       "title": "Core Crates（核心开源库谱系）",
       "positioning": "",
@@ -34627,7 +34627,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\04_application_domains.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\04_application_domains.md",
       "layer": "L6",
       "title": "Application Domains（软件工程应用主题）",
       "positioning": "本章节从**形式模型视角**梳理各生态前沿方向，不展开使用教程，聚焦\"该领域与 Rust 所有权/类型系统（Type System）的交互、安全边界、与 L1-L4 的映射\"。",
@@ -34842,7 +34842,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\05_system_design_principles.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\05_system_design_principles.md",
       "layer": "L6",
       "title": "Rust 系统设计原则与国际权威对齐",
       "positioning": "本文件从**系统架构设计**视角梳理 Rust 的核心设计原则，并与国际权威内容（形式化方法、分布式系统理论、安全工程、容错计算）建立对齐关系。",
@@ -34973,7 +34973,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\06_blockchain.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\06_blockchain.md",
       "layer": "L6",
       "title": "Blockchain & Smart Contract Security（区块链与智能合约安全）",
       "positioning": "",
@@ -35150,7 +35150,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\07_game_ecs.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\07_game_ecs.md",
       "layer": "L6",
       "title": "Game Development & ECS Architecture（游戏开发与 ECS 架构）",
       "positioning": "",
@@ -35394,7 +35394,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\08_wasi.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\08_wasi.md",
       "layer": "L6",
       "title": "WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）",
       "positioning": "",
@@ -35577,7 +35577,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\09_cargo_script.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\09_cargo_script.md",
       "layer": "L6",
       "title": "Cargo Script 脚本化 Rust",
       "positioning": "将 Rust 从\"项目级语言\"扩展为\"脚本级语言\"的工程机制，使单文件可执行成为一等公民。",
@@ -35714,7 +35714,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\10_public_private_deps.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\10_public_private_deps.md",
       "layer": "L6",
       "title": "Cargo 公共与私有依赖",
       "positioning": "解决 Rust  crate 图中\"依赖泄漏\"问题的核心机制，使 API 稳定性与依赖演进解耦。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]",
@@ -35866,7 +35866,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\11_webassembly.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\11_webassembly.md",
       "layer": "L6",
       "title": "WebAssembly 生态：Rust 的浏览器外运行时",
       "positioning": "> 系统分析 Rust 在 **WebAssembly (Wasm)** 生态中的核心地位，",
@@ -36000,7 +36000,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\12_testing_strategies.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\12_testing_strategies.md",
       "layer": "L6",
       "title": "Rust 测试策略：从单元测试到属性验证",
       "positioning": "系统分析 Rust 生态中的**测试方法论**——从内置测试框架到属性测试（proptest）、模糊测试（cargo-fuzz）、Miri 验证和形式化测试（Kani），构建多层次的质量保证体系。",
@@ -36139,7 +36139,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\13_logging_observability.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\13_logging_observability.md",
       "layer": "L6",
       "title": "日志与可观测性：Rust 服务端监控生态",
       "positioning": "覆盖 Rust 生态中 **日志（log/tracing [来源: [tokio tracing](https://docs.rs/tracing/latest/tracing/)]）**、**指标（metrics）**、**分布式追踪（distributed tracing）**三大可观测性支柱，分析各 crate 的设计哲学与选型策略。",
@@ -36278,7 +36278,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\14_documentation.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\14_documentation.md",
       "layer": "L6",
       "title": "文档生态：rustdoc、文档测试与 API 文档规范",
       "positioning": "覆盖 Rust **文档生态**的核心工具与实践——从 rustdoc 的渲染机制、文档测试（doctest）、到 API 文档规范（[RFC 1574](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html)）和 mdBook 静态站点生成，分析 Rust 文档文化如何成为语言生态的竞争优势。",
@@ -36391,7 +36391,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\15_performance_optimization.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\15_performance_optimization.md",
       "layer": "L6",
       "title": "性能优化：Rust 代码的测量与调优",
       "positioning": "> 覆盖 Rust **性能优化**的核心方法论——从基准测试（criterion）、",
@@ -36535,7 +36535,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\16_testing.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\16_testing.md",
       "layer": "L6",
       "title": "测试生态：单元测试、集成测试与验证策略",
       "positioning": "> 覆盖 Rust **测试生态**的全景——从内置测试框架（#[test]）、",
@@ -36661,7 +36661,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\17_cross_compilation.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\17_cross_compilation.md",
       "layer": "L6",
       "title": "交叉编译：多目标平台支持与条件编译",
       "positioning": "分析 Rust **交叉编译**生态——从 target triple 的语义、条件编译（cfg）、到不同架构（x86_64/ARM/RISC-V/WASM）的编译策略，揭示 Rust 如何在不修改源代码的情况下支持从嵌入式到服务器的全谱系平台。",
@@ -36769,7 +36769,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\18_distributed_systems.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\18_distributed_systems.md",
       "layer": "L6",
       "title": "分布式 系统：Rust 在微服务 与集群中的工程实践",
       "positioning": "分析 Rust 在**分布式系统**中的独特价值——从 gRPC 服务网格、分布式共识到消息队列和 actor 模型，揭示 Rust 如何在云原生基础设施中提供 C++ 的性能和 Go 的开发效率。",
@@ -36904,7 +36904,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\19_security_practices.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\19_security_practices.md",
       "layer": "L6",
       "title": "安全 实践：Rust 代码的防御性编程",
       "positioning": "系统讲解 Rust **安全编程实践**——从输入验证、加密使用、到审计和供应链安全，揭示如何在 Rust 的内存安全（Memory Safety）基础上构建全面的安全防御体系。",
@@ -37038,7 +37038,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\20_licensing_and_compliance.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\20_licensing_and_compliance.md",
       "layer": "L6",
       "title": "许可证与合规：Rust 项目的法律工程",
       "positioning": "系统讲解 Rust **开源许可证选择**、**依赖合规**和**版权管理**",
@@ -37155,7 +37155,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\21_game_development.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\21_game_development.md",
       "layer": "L6",
       "title": "Rust 游戏开发生态",
       "positioning": "分析 Rust 在游戏开发领域的生态格局——从 Bevy ECS 到 WGPU 图形渲染，探讨 Rust 的内存安全（Memory Safety）与性能优势如何重塑游戏引擎设计。",
@@ -37284,7 +37284,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\22_embedded_systems.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\22_embedded_systems.md",
       "layer": "L6",
       "title": "Rust 嵌入式系统开发",
       "positioning": "探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全（Memory Safety）如何保证关键系统的可靠性。",
@@ -37431,7 +37431,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\23_database_access.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\23_database_access.md",
       "layer": "L6",
       "title": "Rust 数据库访问生态",
       "positioning": "分析 Rust 的数据库访问生态——从 SQLx 的编译期检查到 Diesel 的 ORM [来源: [Wikipedia — ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)]，探讨类型安全如何消除运行时（Runtime）查询错误。",
@@ -37561,7 +37561,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\24_cloud_native.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\24_cloud_native.md",
       "layer": "L6",
       "title": "Rust 云原生生态",
       "positioning": "分析 Rust 在云原生领域的应用——从微服务框架到容器化部署，探讨 Rust 的内存安全（Memory Safety）与性能优势如何重塑云基础设施。",
@@ -37681,7 +37681,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\25_cli_development.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\25_cli_development.md",
       "layer": "L6",
       "title": "Rust CLI 开发生态",
       "positioning": "探讨 Rust 在命令行工具开发领域的生态——从 clap 的参数解析到 indicatif 的进度条，分析 Rust 如何成为现代 CLI 工具的首选语言。",
@@ -37823,7 +37823,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\26_game_development.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\26_game_development.md",
       "layer": "L6",
       "title": "Rust 游戏开发",
       "positioning": "探讨 Rust 在游戏开发领域的应用——从 ECS 架构到渲染引擎，分析 Rust 的性能优势和开发模式。",
@@ -37948,7 +37948,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\27_web_frameworks.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\27_web_frameworks.md",
       "layer": "L6",
       "title": "Rust Web 框架对比与选型",
       "positioning": "对比分析 Rust 主流 Web 框架——Axum、Actix-web、Rocket、Poem——从架构设计、运行时（Runtime）集成、中间件机制到性能特征，建立系统化的选型决策框架。",
@@ -38129,7 +38129,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\28_devops_and_ci_cd.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\28_devops_and_ci_cd.md",
       "layer": "L6",
       "title": "DevOps 与 CI/CD：Rust 的持续交付工程实践",
       "positioning": "系统分析 Rust **DevOps 工程实践**——从 GitHub Actions 工作流设计、cargo-release 发布自动化、交叉编译 CI 集成，到 Docker 镜像优化、构建缓存策略、CI 测试矩阵与安全审计（cargo-audit、cargo-deny），揭示 Rust 项目如何从代码提交到生产部署实现高可靠持续交付。",
@@ -38256,7 +38256,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\29_algorithms_competitive_programming.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\29_algorithms_competitive_programming.md",
       "layer": "L6",
       "title": "算法与竞赛编程 (Algorithms & Competitive Programming)",
       "positioning": "",
@@ -38494,7 +38494,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\30_system_composability.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\30_system_composability.md",
       "layer": "L6",
       "title": "系统可组合性 (System Composability)",
       "positioning": "",
@@ -38704,7 +38704,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\31_microservice_patterns.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\31_microservice_patterns.md",
       "layer": "L6",
       "title": "微服务架构模式 (Microservice Architecture Patterns)",
       "positioning": "从系统架构视角梳理 Rust 在微服务场景中的核心模式——服务发现、熔断、Saga、CQRS、事件溯源——揭示 Rust 的类型安全与零成本抽象（Zero-Cost Abstraction）如何支撑高可靠分布式系统。",
@@ -38889,7 +38889,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\32_event_driven_architecture.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\32_event_driven_architecture.md",
       "layer": "L6",
       "title": "事件驱动架构 (Event-Driven Architecture)",
       "positioning": "从系统架构视角分析 Rust 实现事件驱动架构的核心模式——类型安全事件总线、消息队列集成、幂等处理、背压传播——揭示所有权（Ownership）系统与不可变事件流的深层契合。",
@@ -39074,7 +39074,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\33_cqrs_event_sourcing.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\33_cqrs_event_sourcing.md",
       "layer": "L6",
       "title": "CQRS & Event Sourcing（命令查询职责分离与事件溯源）",
       "positioning": "",
@@ -39286,7 +39286,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\34_idioms_spectrum.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\34_idioms_spectrum.md",
       "layer": "L6",
       "title": "Rust 惯用法谱系全景（Idioms Spectrum）",
       "positioning": "本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `02_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。",
@@ -39613,7 +39613,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\35_architecture_patterns.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\35_architecture_patterns.md",
       "layer": "L6",
       "title": "Architecture Patterns（架构设计模式）",
       "positioning": "",
@@ -39782,7 +39782,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\36_stream_processing_ecosystem.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\36_stream_processing_ecosystem.md",
       "layer": "L6",
       "title": "流处理生态：Rust 实现与工业系统全景",
       "positioning": "系统梳理 Rust 流处理生态（timely/differential dataflow、tokio-stream、fluvio）与工业级系统（Flink、Materialize、RisingWave）的架构、语义差异与选型策略。",
@@ -39930,7 +39930,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\37_database_systems.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\37_database_systems.md",
       "layer": "L6",
       "title": "数据库系统：Rust 在存储引擎中的语义",
       "positioning": "深入分析 Rust 实现的数据库系统——TiKV（分布式事务）、Materialize（流式 SQL）、Meilisearch（搜索引擎）、SurrealDB（多模型）——的架构语义、正确性保证与选型策略。",
@@ -40073,7 +40073,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\38_network_protocols.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\38_network_protocols.md",
       "layer": "L6",
       "title": "网络协议：QUIC/HTTP-3 与 Rust 实现",
       "positioning": "深入分析 QUIC/HTTP-3、TCP 栈和 eBPF 的 Rust 实现，揭示 Rust 的所有权（Ownership）模型如何映射到网络协议的状态机和包处理。",
@@ -40198,7 +40198,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\39_os_kernel.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\39_os_kernel.md",
       "layer": "L6",
       "title": "Rust 操作系统内核开发",
       "positioning": "",
@@ -40318,7 +40318,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\40_reactive_programming.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\40_reactive_programming.md",
       "layer": "L6",
       "title": "Reactive Programming & FRP（响应式编程与函数式响应编程）",
       "positioning": "",
@@ -40481,7 +40481,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\41_workflow_theory.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\41_workflow_theory.md",
       "layer": "L6",
       "title": "Workflow Theory & Formalization（工作流理论与形式化）",
       "positioning": "",
@@ -40685,7 +40685,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\42_api_design_patterns.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\42_api_design_patterns.md",
       "layer": "L6",
       "title": "API Design Patterns（API 设计模式）",
       "positioning": "",
@@ -40891,7 +40891,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\43_security_cryptography.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\43_security_cryptography.md",
       "layer": "L6",
       "title": "Security & Cryptography（安全与密码学）",
       "positioning": "",
@@ -41089,7 +41089,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\44_formal_ecosystem_tower.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\44_formal_ecosystem_tower.md",
       "layer": "L6",
       "title": "Formal Ecosystem Tower（Rust 生态形式化分层塔）",
       "positioning": "",
@@ -41189,7 +41189,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\45_compiler_internals.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\45_compiler_internals.md",
       "layer": "L6",
       "title": "Rust 编译器内部原理",
       "positioning": "",
@@ -41321,7 +41321,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\46_machine_learning_ecosystem.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\46_machine_learning_ecosystem.md",
       "layer": "L6",
       "title": "Machine Learning Ecosystem（机器学习生态）",
       "positioning": "",
@@ -41498,7 +41498,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\47_compiler_infrastructure.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\47_compiler_infrastructure.md",
       "layer": "L6",
       "title": "Rust 编译器基础设施深度解析",
       "positioning": "系统梳理 Rust 编译器（rustc）的核心基础设施——并行前端、Cranelift 后端、build-std、Sanitizer——分析其对编译速度、目标平台和开发体验的影响。",
@@ -41565,7 +41565,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\48_data_engineering.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\48_data_engineering.md",
       "layer": "L6",
       "title": "Data Engineering（数据工程）",
       "positioning": "",
@@ -41732,7 +41732,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\49_game_engine_internals.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\49_game_engine_internals.md",
       "layer": "L6",
       "title": "Game Engine Internals（游戏引擎内部原理）",
       "positioning": "",
@@ -41903,7 +41903,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\50_distributed_consensus.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\50_distributed_consensus.md",
       "layer": "L6",
       "title": "Distributed Consensus（分布式共识）",
       "positioning": "",
@@ -42028,7 +42028,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\51_quantum_computing_rust.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\51_quantum_computing_rust.md",
       "layer": "L6",
       "title": "Rust 量子计算生态",
       "positioning": "",
@@ -42168,7 +42168,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\52_robotics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\52_robotics.md",
       "layer": "L6",
       "title": "Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态）",
       "positioning": "",
@@ -42367,7 +42367,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\53_embedded_graphics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\53_embedded_graphics.md",
       "layer": "L6",
       "title": "Rust 嵌入式图形开发",
       "positioning": "",
@@ -42463,7 +42463,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\54_webassembly_advanced.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\54_webassembly_advanced.md",
       "layer": "L6",
       "title": "Rust WebAssembly 高级开发",
       "positioning": "",
@@ -42635,7 +42635,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\55_rust_for_data_science.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\55_rust_for_data_science.md",
       "layer": "L6",
       "title": "Rust 数据科学与科学计算",
       "positioning": "",
@@ -42776,7 +42776,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\56_c_to_rust_translation.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\56_c_to_rust_translation.md",
       "layer": "L6",
       "title": "C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）",
       "positioning": "",
@@ -42850,7 +42850,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\57_quiz_toolchain.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\57_quiz_toolchain.md",
       "layer": "L6",
       "title": "测验：Rust 工具链（L6 试点扩展）",
       "positioning": "L6 嵌入式互动测验——验证 Rust 工具链核心概念（Cargo 依赖管理、Clippy lint、Miri UB 检测、rustfmt、文档生成）的掌握程度。",
@@ -42939,7 +42939,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\58_platform_rust_integration.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\58_platform_rust_integration.md",
       "layer": "L6",
       "title": "将 Rust 集成到现有平台",
       "positioning": "系统对比 Android AOSP、Chromium、Bare Metal 三个典型场景中 Rust 的集成方式、构建系统、互操作模式与常见陷阱。",
@@ -43018,7 +43018,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\59_cargo_build_scripts.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\59_cargo_build_scripts.md",
       "layer": "L6",
       "title": "Cargo Build Scripts（`build.rs`）",
       "positioning": "把 `build.rs` 从“神秘的编译前脚本”还原为可预测、可调试、可重用的构建阶段工具。",
@@ -43160,7 +43160,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\60_cargo_dependency_resolution.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\60_cargo_dependency_resolution.md",
       "layer": "L6",
       "title": "Cargo 依赖解析",
       "positioning": "把“`cargo build` 时到底选了哪个版本、为什么选这个版本、特性如何合并”讲清楚。",
@@ -43204,7 +43204,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\61_cargo_source_replacement.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\61_cargo_source_replacement.md",
       "layer": "L6",
       "title": "Cargo Source Replacement 与 Vendoring",
       "positioning": "把“怎么让 Cargo 从镜像/本地目录/离线缓存下载依赖”系统化，区分 source replacement、`[patch]` 与私有 registry 的适用边界。",
@@ -43248,7 +43248,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\62_cargo_registries_and_publishing.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\62_cargo_registries_and_publishing.md",
       "layer": "L6",
       "title": "Cargo Registry 与包发布",
       "positioning": "把“怎么把 crate 发布到 crates.io / 私有 registry、registry 内部如何索引、认证如何工作”系统化。",
@@ -43292,7 +43292,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\63_cargo_authentication_and_cache.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\63_cargo_authentication_and_cache.md",
       "layer": "L6",
       "title": "Cargo 认证与构建缓存",
       "positioning": "把“Cargo 如何安全地存 token、如何组织缓存、如何加速构建”系统化，补齐 registry 之后的工程实践闭环。",
@@ -43336,7 +43336,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\64_cargo_manifest_reference.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\64_cargo_manifest_reference.md",
       "layer": "L6",
       "title": "Cargo Manifest 参考速查",
       "positioning": "把 `Cargo.toml` 的核心字段按用途整理成可速查的参考表，方便快速查阅而非从头阅读。",
@@ -43380,7 +43380,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\65_cargo_profiles_and_lints.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\65_cargo_profiles_and_lints.md",
       "layer": "L6",
       "title": "Cargo Profiles 与 Lints",
       "positioning": "把“如何调优编译参数”和“如何在 Cargo.toml 中统一管理 lint”讲清楚，覆盖 Profile 与 Cargo 自有 lint 两层机制。",
@@ -43424,7 +43424,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\66_cargo_subcommands_and_plugins.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\66_cargo_subcommands_and_plugins.md",
       "layer": "L6",
       "title": "Cargo 子命令与插件生态",
       "positioning": "把“如何扩展 Cargo”讲清楚：从自定义子命令约定到常用插件选型，覆盖 Cargo 的工具集成接口。",
@@ -43477,7 +43477,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\67_llvm_backend_and_codegen.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\67_llvm_backend_and_codegen.md",
       "layer": "L6",
       "title": "Rust 编译器的 LLVM 后端与代码生成",
       "positioning": "把“MIR 之后发生了什么”讲清楚：从 LLVM IR 生成、代码优化到目标文件与链接，覆盖 rustc 代码生成层的核心机制。",
@@ -43530,7 +43530,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\68_rustc_driver_and_stable_mir.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\68_rustc_driver_and_stable_mir.md",
       "layer": "L6",
       "title": "rustc Driver、Interface 与 Stable MIR",
       "positioning": "把“如何把 rustc 当库用”讲清楚：driver 的回调机制、interface 的低级 API、以及面向外部工具的 Stable MIR（rustc_public）愿景。",
@@ -43591,7 +43591,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\69_compiler_diagnostics_and_ui_tests.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\69_compiler_diagnostics_and_ui_tests.md",
       "layer": "L6",
       "title": "rustc 编译器诊断与 UI Tests",
       "positioning": "把“rustc 的错误信息是怎么构造的、如何测试错误输出”讲清楚，为贡献 rustc 或编写自定义 lint 打下基础。",
@@ -43676,7 +43676,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\70_rustc_bootstrap.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\70_rustc_bootstrap.md",
       "layer": "L6",
       "title": "rustc 自举（Bootstrap）",
       "positioning": "把“Rust 编译器如何用 Rust 写、又用 Rust 编译自己”这一自举过程讲清楚，帮助理解 rustc 开发工作流。",
@@ -43728,7 +43728,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\71_compiler_testing.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\71_compiler_testing.md",
       "layer": "L6",
       "title": "rustc 编译器测试体系",
       "positioning": "把“rustc 如何保证每次修改不破坏生态”讲清楚，覆盖从单元测试到全生态系统回归的多层测试策略。",
@@ -43771,7 +43771,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\72_cargo_security_cves.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\72_cargo_security_cves.md",
       "layer": "L6",
       "title": "Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223",
       "positioning": "帮助开发者理解 Rust 1.96.0 中 Cargo 的两个 CVE，建立“升级 + 审计 + 验证”的供应链安全习惯。",
@@ -43833,7 +43833,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\73_pattern_composition_algebra.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\73_pattern_composition_algebra.md",
       "layer": "L6",
       "title": "模式组合代数：设计模式的结构化关联与冲突分析",
       "positioning": "",
@@ -44018,7 +44018,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\74_formal_verification_tools.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\74_formal_verification_tools.md",
       "layer": "L6",
       "title": "Formal Verification Tools（形式化验证工具生态）",
       "positioning": "",
@@ -44177,7 +44177,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\75_industrial_case_studies.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\75_industrial_case_studies.md",
       "layer": "L6",
       "title": "Rust 工业应用案例研究",
       "positioning": "",
@@ -44255,7 +44255,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\76_cargo_196_features.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\76_cargo_196_features.md",
       "layer": "L6",
       "title": "Cargo 1.96 新特性与工具链变更",
       "positioning": "",
@@ -44310,7 +44310,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\77_rustdoc_196_changes.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\77_rustdoc_196_changes.md",
       "layer": "L6",
       "title": "Rustdoc 1.96 变更",
       "positioning": "",
@@ -44376,7 +44376,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\78_cargo_workspaces.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\78_cargo_workspaces.md",
       "layer": "L6",
       "title": "Cargo Workspaces（工作区）",
       "positioning": "把“何时该用 workspace、如何组织多 crate 项目、如何统一依赖与 lint 配置”讲清楚。",
@@ -44423,7 +44423,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\79_development_tools.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\79_development_tools.md",
       "layer": "L6",
       "title": "Rust 常用开发工具",
       "positioning": "",
@@ -44486,7 +44486,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\80_cargo_getting_started.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\80_cargo_getting_started.md",
       "layer": "L6",
       "title": "Cargo 入门（Cargo Getting Started）",
       "positioning": "让初学者在 5 分钟内理解 Cargo 是什么、能做什么、如何创建并运行第一个 Rust package。",
@@ -44519,7 +44519,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\81_cargo_workflow.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\81_cargo_workflow.md",
       "layer": "L6",
       "title": "Cargo 工作流（Cargo Workflow）",
       "positioning": "覆盖从“创建 package”到“在团队中维护依赖锁定”的完整日常流程。",
@@ -44552,7 +44552,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\82_cargo_guide_practices.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\82_cargo_guide_practices.md",
       "layer": "L6",
       "title": "Cargo 指南实践（Cargo Guide Practices）",
       "positioning": "把 Cargo 官方指南中散落在多章的“怎么做”聚合为一份实践速查。",
@@ -44587,7 +44587,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\83_cargo_configuration.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\83_cargo_configuration.md",
       "layer": "L6",
       "title": "Cargo 配置与环境变量（Cargo Configuration）",
       "positioning": "把 Cargo 的“配置”与“环境变量”两大参考章节集中为一份可查阅权威页。",
@@ -44620,7 +44620,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\84_cargo_commands_reference.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\84_cargo_commands_reference.md",
       "layer": "L6",
       "title": "Cargo 命令参考（Cargo Commands Reference）",
       "positioning": "覆盖开发者日常最高频的 Cargo 命令，作为官方命令参考的浓缩权威页。",
@@ -44654,7 +44654,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\85_cargo_manifest_targets.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\85_cargo_manifest_targets.md",
       "layer": "L6",
       "title": "Cargo Manifest 目标与元数据（Cargo Manifest Targets）",
       "positioning": "补充 `64_cargo_manifest_reference.md` 未涉及的 target、rust-version、pkgid 等子主题。",
@@ -44686,7 +44686,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\06_ecosystem\\86_cargo_registry_internals.md",
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\86_cargo_registry_internals.md",
       "layer": "L6",
       "title": "Cargo Registry 内部机制（Cargo Registry Internals）",
       "positioning": "为需要自建 registry、审计依赖来源或集成内部凭证系统的团队提供权威参考。",
@@ -44720,11 +44720,11 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\01_ai_integration.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\01_ai_integration.md",
       "layer": "L7",
       "title": "AI × Rust：生成-验证闭环与确定性容器",
       "positioning": "Prophet 属于**监督学习**（学习历史补丁特征），而非 RL。但它是\"编译器/测试反馈驱动程序修复\"思想的早期工业级实践，为后续 RL 方法奠定了问题定义基础。[来源: MIT News, 2016]",
-      "line_count": 1009,
+      "line_count": 1007,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: AI × Rust 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -44863,7 +44863,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\02_formal_methods.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\02_formal_methods.md",
       "layer": "L7",
       "title": "Formal Methods Industrialization（形式化方法工业化）",
       "positioning": "",
@@ -45025,7 +45025,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\03_evolution.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\03_evolution.md",
       "layer": "L7",
       "title": "Language Evolution（语言演进）",
       "positioning": "",
@@ -45265,7 +45265,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\04_effects_system.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\04_effects_system.md",
       "layer": "L7",
       "title": "Effects System: Concept Pre-study（效果系统：概念预研）",
       "positioning": "本文件是 Rust 效果系统（Effect System）的**概念预研**，跟踪类型系统（Type System）向显式效果追踪演进的理论动向与工程实践。内容具有推测性，随语言团队决策动态更新。",
@@ -45554,7 +45554,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\05_rust_version_tracking.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\05_rust_version_tracking.md",
       "layer": "L7",
       "title": "Rust 形式模型演进跟踪（1.79–1.97+）",
       "positioning": "本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权（Ownership）模型、类型系统（Type System）、异步（Async）语义、Unsafe 边界**有结构性影响的特性。",
@@ -45752,7 +45752,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\07_mcdc_coverage_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\07_mcdc_coverage_preview.md",
       "layer": "L7",
       "title": "MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证",
       "positioning": "探讨 Modified Condition/Decision Coverage（MC/DC）作为**安全关键软件验证**核心指标的形式化语义，以及 Rust 编译器实现 MC/DC 覆盖率的技术路径。",
@@ -45849,7 +45849,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\08_safety_tags_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\08_safety_tags_preview.md",
       "layer": "L7",
       "title": "Safety Tags 概念预研：Unsafe 契约的机器可读标注",
       "positioning": "探讨 Safety Tags 作为 Rust **unsafe 代码契约**的机器可读标注机制，从人工文档注释演进为编译器可理解、工具可验证的安全契约格式。",
@@ -45960,7 +45960,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\09_parallel_frontend_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\09_parallel_frontend_preview.md",
       "layer": "L7",
       "title": "并行 前端编译预研：Rust 编译器 的多核扩展",
       "positioning": "探讨 Rust 编译器前端从**单线程串行**到**多核并行**的架构演进，分析其对编译时间、增量编译和 IDE 响应性的影响。",
@@ -46072,7 +46072,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\10_derive_coerce_pointee_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\10_derive_coerce_pointee_preview.md",
       "layer": "L7",
       "title": "派生 CoercePointee 预研：智能指针的自动类型强制",
       "positioning": "探讨 Rust 1.95+ 中通过派生宏（Macro）自动化 `CoerceUnsized` 和 `DispatchFromDyn` 实现，降低自定义智能指针（Smart Pointer）的**样板代码**和**unsafe 实现风险**。",
@@ -46192,7 +46192,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\11_const_trait_impl_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\11_const_trait_impl_preview.md",
       "layer": "L7",
       "title": "Const Trait Impl 预研：常量上下文中的 Trait 泛化",
       "positioning": "探讨 Rust 在**常量上下文**（`const fn`）中支持 Trait 调用的演进，分析其对泛型（Generics）编程、`const fn` 表达能力以及编译期计算的影响。",
@@ -46313,11 +46313,11 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\12_return_type_notation_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\12_return_type_notation_preview.md",
       "layer": "L7",
       "title": "Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界",
       "positioning": "澄清 **Return Type Notation (RTN)** 与 **`use<..>` 精确捕获**是两个不同的特性；RTN 解决的是「如何为 trait 中 `async fn` / RPITIT 的返回类型添加 `Send` 等边界」的问题。",
-      "line_count": 505,
+      "line_count": 503,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Return Type Notation（RTN）预研 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -46442,7 +46442,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\13_unsafe_fields_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\13_unsafe_fields_preview.md",
       "layer": "L7",
       "title": "Unsafe Fields 预研：字段级安全边界的精确标注",
       "positioning": ">",
@@ -46563,7 +46563,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\14_lifetime_capture_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\14_lifetime_capture_preview.md",
       "layer": "L7",
       "title": "Lifetime Capture in `impl Trait` Preview",
       "positioning": "",
@@ -46624,7 +46624,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\15_pin_ergonomics_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\15_pin_ergonomics_preview.md",
       "layer": "L7",
       "title": "Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`",
       "positioning": "探讨 Rust 编译器基础设施中最影响异步（Async）编程体验的长期痛点 —— `Pin` 的 ergonomics，以及 Project Goals 2026 Flagship \"Beyond the `&`\" 的解决方案：Reborrow Traits、Pinned Places、Safe Pin Projection。",
@@ -46740,7 +46740,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\16_type_alias_impl_trait_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\16_type_alias_impl_trait_preview.md",
       "layer": "L7",
       "title": "TAIT Preview",
       "positioning": "",
@@ -46801,7 +46801,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\17_const_trait_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\17_const_trait_preview.md",
       "layer": "L7",
       "title": "Const Trait 实现预览",
       "positioning": "",
@@ -46862,7 +46862,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\18_async_drop_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\18_async_drop_preview.md",
       "layer": "L7",
       "title": "Async Drop：异步资源的优雅销毁",
       "positioning": "分析 Rust 中 **异步（Async）资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（[Async Drop Initiative](https://github.com/rust-lang/rust/issues/126482)）、设计约束与当前 nightly 实现状态。",
@@ -46979,7 +46979,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\19_rust_edition_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\19_rust_edition_preview.md",
       "layer": "L7",
       "title": "Rust 2024 Edition (1.85.0+ stable)",
       "positioning": "",
@@ -47013,7 +47013,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\20_borrowsanitizer_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\20_borrowsanitizer_preview.md",
       "layer": "L7",
       "title": "BorrowSanitizer 概念预研：运行时借用检查工业化",
       "positioning": "探讨 BorrowSanitizer 作为 Rust **运行时（Runtime）借用（Borrowing）检查**工具的工业化路径，从 Miri 的纯解释执行扩展到编译后二进制检测的设计空间。",
@@ -47131,7 +47131,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\21_rust_in_ai.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\21_rust_in_ai.md",
       "layer": "L7",
       "title": "Rust 在 AI 与机器学习中的新兴角色",
       "positioning": "分析 Rust 在**AI/ML 基础设施**中的新兴应用——从张量运算、推理引擎到 ML 管道编排，揭示 Rust 如何在高性能 AI 系统中提供内存安全（Memory Safety）和低延迟优势。",
@@ -47253,7 +47253,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\22_gen_blocks_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\22_gen_blocks_preview.md",
       "layer": "L7",
       "title": "Generator Blocks（gen）预览",
       "positioning": "探讨 Rust 中 **gen blocks**（生成器块）的提案——将 `async`/`.await` 的模式从**异步（Async）计算**泛化到**惰性迭代**和**协程**，分析其对迭代器（Iterator）生态、流处理（Stream）和异步生成器的影响。",
@@ -47386,7 +47386,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\23_rust_edition_guide.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\23_rust_edition_guide.md",
       "layer": "L7",
       "title": "Rust Edition 机制与迁移指南",
       "positioning": "",
@@ -47414,7 +47414,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\24_roadmap.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\24_roadmap.md",
       "layer": "L7",
       "title": "Rust 2027 Edition 及未来路线图",
       "positioning": "分析 Rust **2027 Edition 及更远期**的潜在特性集合——从 gen/kw、特化稳定化、可移植 SIMD、自定义分配器到异步（Async） Trait、TAIT 等前沿议题，评价其技术成熟度与生态影响。",
@@ -47611,7 +47611,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\25_open_enums_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\25_open_enums_preview.md",
       "layer": "L7",
       "title": "Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举",
       "positioning": "探讨 Rust 枚举（Enum）类型在 API 演进与跨 crate 兼容性维度的**开放性语义**，从现有 `#[non_exhaustive]` 机制延伸到语言级开放枚举的设计空间。",
@@ -47764,7 +47764,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\26_specialization_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\26_specialization_preview.md",
       "layer": "L7",
       "title": "Specialization：Trait 实现的精确化与重叠解析",
       "positioning": "分析 Rust **特化（Specialization）**机制的设计动机——允许为特定类型提供比泛型（Generics）实现更精确的 Trait 实现，解决当前 Orphan Rule 和 Coherence 规则下的表达能力限制。",
@@ -47884,7 +47884,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\27_compile_time_execution.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\27_compile_time_execution.md",
       "layer": "L7",
       "title": "编译期执行与常量求值",
       "positioning": "深入探讨 Rust 的**编译期执行**能力——从 `const fn` 到 `const` 泛型（Generics），分析 Rust 如何在编译期完成计算，实现零成本抽象（Zero-Cost Abstraction）。",
@@ -47992,7 +47992,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\28_rust_for_webassembly.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\28_rust_for_webassembly.md",
       "layer": "L7",
       "title": "Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈",
       "positioning": "深度评价 Rust 在 **WebAssembly (Wasm)** 全栈开发中的技术成熟度——从 wasm-bindgen/wasm-pack 工具链到 Yew/Leptos 前端框架，分析 Rust→Wasm 编译模型、JS 互操作内存模型、性能权衡边界与工程选型决策。",
@@ -48131,7 +48131,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\29_ebpf_rust.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\29_ebpf_rust.md",
       "layer": "L7",
       "title": "eBPF / Aya / Rex 的 Rust 映射",
       "positioning": "",
@@ -48310,7 +48310,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\30_stable_abi_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\30_stable_abi_preview.md",
       "layer": "L7",
       "title": "Stable ABI Preview",
       "positioning": "",
@@ -48371,7 +48371,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\31_safety_tags_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\31_safety_tags_preview.md",
       "layer": "L7",
       "title": "Safety Tags（安全标签）预览",
       "positioning": "",
@@ -48429,7 +48429,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\32_inline_const_pattern_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\32_inline_const_pattern_preview.md",
       "layer": "L7",
       "title": "Inline Const Pattern 预览（Rust 1.98+ Nightly）",
       "positioning": "",
@@ -48490,7 +48490,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\33_autoverus_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\33_autoverus_preview.md",
       "layer": "L7",
       "title": "AutoVerus / Verus 预览",
       "positioning": "",
@@ -48538,7 +48538,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\34_must_not_suspend_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\34_must_not_suspend_preview.md",
       "layer": "L7",
       "title": "`must_not_suspend` Lint Preview",
       "positioning": "",
@@ -48599,7 +48599,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\35_ferrocene_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\35_ferrocene_preview.md",
       "layer": "L7",
       "title": "Ferrocene 预研：Rust 的安全关键认证之路",
       "positioning": "探讨 **Ferrocene** —— Rust 的**安全关键认证工具链**，分析其对汽车（ISO 26262 [来源: [ISO 26262](https://www.iso.org/standard/68383.html)]）、航空（DO-178C）和工业控制等安全关键领域的影响，以及 Rust 语言在形式化验证与工业认证之间的桥梁作用。",
@@ -48704,7 +48704,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\37_rpitit_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\37_rpitit_preview.md",
       "layer": "L7",
       "title": "特质中返回位置 impl Trait（RPITIT）预览",
       "positioning": "",
@@ -48765,7 +48765,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\38_cranelift_backend_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\38_cranelift_backend_preview.md",
       "layer": "L7",
       "title": "Cranelift 后端预研：Rust 编译器的快速调试编译",
       "positioning": "探讨 **Cranelift** 作为 Rust 编译器（rustc）的替代后端，分析其对**编译时间**、**调试体验**和**开发迭代效率**的影响，以及与 LLVM 后端的互补关系。",
@@ -48898,7 +48898,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\39_arbitrary_self_types_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\39_arbitrary_self_types_preview.md",
       "layer": "L7",
       "title": "Arbitrary Self Types 预览：自定义方法接收器",
       "positioning": "探讨 Rust 中 arbitrary self types 的提案——允许 `self` 参数使用任意类型（不仅是 `Self`、`&Self`、`&mut Self`、`Box<Self>`、`Rc<Self>`、`Arc<Self>`、`Pin<P<Self>>`），分析其对嵌入式驱动、内核编程和自定义指针类型的影响。",
@@ -49024,7 +49024,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\40_ergonomic_ref_counting_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\40_ergonomic_ref_counting_preview.md",
       "layer": "L7",
       "title": "Ergonomic Ref-Counting 预研：人机工学引用计数",
       "positioning": "",
@@ -49109,7 +49109,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\41_rust_specification_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\41_rust_specification_preview.md",
       "layer": "L7",
       "title": "Rust 语言规范预研：从参考文档到形式化规范",
       "positioning": "探讨 Rust 语言从**参考文档**（Rust Reference）向**形式化规范**演进的必要性与路径，分析 Ferrocene、编译器开发和形式化验证社区对规范的不同需求。",
@@ -49226,7 +49226,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\42_field_projections_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\42_field_projections_preview.md",
       "layer": "L7",
       "title": "Field Projections 预览：安全的字段级投影",
       "positioning": "探讨 Rust 中 field projections 的提案——允许安全地从复合类型中\"投影\"出对字段的引用（Reference），而不暴露内部结构。分析其对内核编程、自引用结构和内存安全（Memory Safety）保证的影响。",
@@ -49350,7 +49350,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\43_rust_for_linux.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\43_rust_for_linux.md",
       "layer": "L7",
       "title": "Rust for Linux ：操作系统内核中的内存安全",
       "positioning": "深入分析 **Rust for Linux** 项目——如何将 Rust 引入 Linux 内核开发，从驱动程序编写、C 互操作到内核特定的安全保证，揭示系统编程范式的历史性转变。",
@@ -49488,7 +49488,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\44_edition_guide.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\44_edition_guide.md",
       "layer": "L7",
       "title": "Edition 2024 完全指南：新特性与迁移策略",
       "positioning": "全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。",
@@ -49631,7 +49631,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\45_std_autodiff_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\45_std_autodiff_preview.md",
       "layer": "L7",
       "title": "`std::autodiff`：Rust 官方自动微分前沿追踪",
       "positioning": "追踪 Rust 语言层面的自动微分（Automatic Differentiation, AD）实验进展，分析其对 AI/ML 生态的潜在影响。",
@@ -49736,7 +49736,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\46_cargo_semver_checks_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\46_cargo_semver_checks_preview.md",
       "layer": "L7",
       "title": "cargo-semver-checks：从社区工具到 Cargo 官方集成",
       "positioning": "跟踪 `cargo-semver-checks` 从独立社区工具向 Cargo 官方生态集成的演进过程，分析其对 Rust 供应链稳定性和 API 兼容性验证的结构性影响。",
@@ -49787,7 +49787,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\47_wasm_target_evolution.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\47_wasm_target_evolution.md",
       "layer": "L7",
       "title": "WASM Target Evolution Preview",
       "positioning": "",
@@ -49845,11 +49845,11 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\48_aarch64_sve_sme_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\48_aarch64_sve_sme_preview.md",
       "layer": "L7",
       "title": "AArch64 SVE / SME：可伸缩向量扩展预览",
       "positioning": "跟踪 Rust 对 ARM AArch64 **SVE（Scalable Vector Extension，可伸缩向量扩展）** 和 **SME（Scalable Matrix Extension，可伸缩矩阵扩展）** 的支持进展。SVE/SME 是 ARMv9-A 的关键特性，代表向量计算从固定长度向硬件自适应长度的范式转变。",
-      "line_count": 271,
+      "line_count": 268,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: AArch64 SVE / SME 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -49912,7 +49912,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\49_rust_in_space.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\49_rust_in_space.md",
       "layer": "L7",
       "title": "Rust in Space Preview",
       "positioning": "",
@@ -49960,7 +49960,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\50_nightly_rust.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\50_nightly_rust.md",
       "layer": "L7",
       "title": "Rust 的发布流程与 Nightly Rust",
       "positioning": "",
@@ -49998,7 +49998,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\borrow_sanitizer.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\borrow_sanitizer.md",
       "layer": "L7",
       "title": "BorrowSanitizer：动态别名规则验证工具",
       "positioning": "",
@@ -50056,7 +50056,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\rust_1_95_stabilized.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\rust_1_95_stabilized.md",
       "layer": "L7",
       "title": "Rust 1.95.0 稳定特性",
       "positioning": "",
@@ -50189,7 +50189,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\rust_1_96_stabilized.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\rust_1_96_stabilized.md",
       "layer": "L7",
       "title": "Rust 1.96 稳定特性（当前 patch 1.96.1）",
       "positioning": "",
@@ -50267,7 +50267,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\rust_1_97_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\rust_1_97_preview.md",
       "layer": "L7",
       "title": "Rust 1.97.0 前沿特性预览（Beta）",
       "positioning": "",
@@ -50381,7 +50381,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\rust_1_97_stabilized.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\rust_1_97_stabilized.md",
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
@@ -50411,11 +50411,11 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\07_future\\rust_1_98_preview.md",
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\rust_1_98_preview.md",
       "layer": "L7",
       "title": "Rust 1.98+ 前沿特性预览",
       "positioning": "",
-      "line_count": 578,
+      "line_count": 575,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Rust 1.98+ 前沿特性预览 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",

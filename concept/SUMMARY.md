@@ -1,4 +1,6 @@
-> **Summary**: mdBook-style summary for the concept collection.
+> **Summary**:
+>
+> mdBook-style summary for the concept collection.
 >
 
 # 目录

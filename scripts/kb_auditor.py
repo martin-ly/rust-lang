@@ -22,8 +22,12 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
+# 统一配置
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import concept_config
+
 # 配置
-CONCEPT_DIR = Path("concept")
+CONCEPT_DIR = concept_config.CONCEPT_DIR
 REPORT_PATH = Path("reports/kb_quality_dashboard.md")
 JSON_PATH = Path("concept_kb.json")
 
@@ -52,8 +56,8 @@ def find_md_files() -> list[Path]:
                 continue
             if any(name.startswith(p) for p in EXCLUDE_PREFIXES):
                 continue
-            # 只包含 00_meta/ 和 0X_*/ 目录下的文件
-            if not (str(rel).startswith("00_meta") or str(rel).startswith("0") and len(str(rel)) >= 2 and str(rel)[1].isdigit()):
+            # 只包含 concept/ 下 L0-L7 目录及其子目录中的文件
+            if not any(part in concept_config.LAYER_DIRS for part in rel.parts):
                 continue
             files.append(Path(root) / name)
     files.sort()
@@ -61,33 +65,9 @@ def find_md_files() -> list[Path]:
 
 
 def detect_layer(filepath: Path) -> str:
-    """从路径检测层级 L0-L7。
-
-    以 concept/ 下的第一层目录名为准：
-    - 00_meta -> L0
-    - 01_foundation -> L1
-    - 02_intermediate -> L2
-    - 03_advanced -> L3
-    - 04_formal -> L4
-    - 05_comparative -> L5
-    - 06_ecosystem -> L6
-    - 07_future -> L7
-    """
-    parts = filepath.parts
-    layer_dirs = {
-        "00_meta": "L0",
-        "01_foundation": "L1",
-        "02_intermediate": "L2",
-        "03_advanced": "L3",
-        "04_formal": "L4",
-        "05_comparative": "L5",
-        "06_ecosystem": "L6",
-        "07_future": "L7",
-    }
-    for p in parts:
-        if p in layer_dirs:
-            return layer_dirs[p]
-    return "L?"
+    """从路径检测层级 L0-L7。兼容主题子目录。"""
+    layer = concept_config.detect_layer(filepath)
+    return layer if layer is not None else "L?"
 
 
 def extract_title(content: str) -> str:
