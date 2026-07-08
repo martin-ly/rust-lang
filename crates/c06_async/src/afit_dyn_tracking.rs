@@ -1,6 +1,6 @@
 //! AFIDT (async fn in dyn trait) 跟踪模块（Nightly）
 //! AFIDT (async fn in dyn trait) Tracking Module (Nightly)
-//! 预计稳定版本: **1.97-1.98**。
+//! 预计稳定版本: **待定**；截至 2026-07-09 仍为 nightly 实验（rust-lang/rust#133119）。
 //! this : **1.97-1.98**。
 //!
 //! # 概念定义
@@ -159,7 +159,7 @@ impl AsyncTraitComparison {
     /// 迁移路径说明
     /// explain
     pub fn migration_path() -> &'static str {
-        "1. 等待 AFIDT 稳定 (1.97-1.98)2. 移除 #[async_trait] 属性3. 移除 async-trait 依赖4. 检查 \
+        "1. 等待 AFIDT 稳定（rust-lang/rust#133119，截至 2026-07-09 仍为 nightly 实验）2. 移除 #[async_trait] 属性3. 移除 async-trait 依赖4. 检查 \
          Send bound 假设（可能需要 RTN）"
     }
 }

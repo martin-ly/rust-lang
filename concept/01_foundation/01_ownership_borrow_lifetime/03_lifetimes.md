@@ -109,6 +109,7 @@
     - [Q5: 以下代码的编译结果是什么？](#q5-以下代码的编译结果是什么)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
+  - [研究引用（Research Citations）](#研究引用research-citations)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：生命周期省略规则（理解层）](#测验-1生命周期省略规则理解层)
     - [测验 2：生命周期标注（应用层）](#测验-2生命周期标注应用层)
@@ -1280,6 +1281,14 @@ fn main() {
 > [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html#lifetime-parameters)]
 > [来源: [RFC 0387 — Higher-Ranked Trait Bounds](https://rust-lang.github.io/rfcs//0387-higher-ranked-trait-bounds.html)]
 > [来源: [PLDI 2023 — Polonius](https://dl.acm.org/doi/10.1145/3591283)]
+
+---
+
+## 研究引用（Research Citations）
+
+> Brown University Interactive Rust Book 的 [Ch10.3 — Validating References with Lifetimes](https://rust-book.cs.brown.edu/ch10-03-lifetime-syntax.html) 以交互方式展示生命周期标注如何阻止悬垂引用；本文件关于生命周期省略规则、结构体生命周期与 `'static` 的讨论与其对齐。Brown Book 的所有权可视化与测验设计同样基于 Will Crichton 等人 OOPSLA 2023 的 *A Grounded Conceptual Model for Ownership Types in Rust*。
+>
+> 生命周期的形式化根基可追溯至 Mads Tofte 与 Jean-Pierre Talpin 1994 年的区域类型（region types）理论，Rust 在其基础上做了命令式、可变借用与 NLL 的关键适配；Ralf Jung 等人 *RustBelt: Securing the Foundations of the Rust Programming Language*（POPL 2018）进一步将生命周期约束纳入 Iris 分离逻辑框架，证明了引用有效性定理。完整权威来源索引见 [International Authority Index](../../00_meta/02_sources/international_authority_index.md)。
 
 ---
 

@@ -138,6 +138,7 @@
     - [Q5: 以下代码的编译结果是什么？](#q5-以下代码的编译结果是什么)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
+  - [研究引用（Research Citations）](#研究引用research-citations)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：借用规则基础（理解层）](#测验-1借用规则基础理解层)
     - [测验 2：Reborrow 安全（应用层）](#测验-2reborrow-安全应用层)
@@ -1775,6 +1776,14 @@ data.push(4);            // ✅ 现在可以修改
 > [来源: [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html#reference-type)]
 > [来源: [Stacked Borrows (Miri)](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md)]
 > [来源: [Tree Borrows](https://perso.crans.org/vanille/treebor/)]
+
+---
+
+## 研究引用（Research Citations）
+
+> Brown University Interactive Rust Book 的 [Ch4.2 — References and Borrowing](https://rust-book.cs.brown.edu/ch04-02-references-and-borrowing.html) 与 [Fixing Ownership Errors](https://rust-book.cs.brown.edu/ch04-03-fixing-ownership-errors.html) 小节以可视化方式解释了 `&T`/`&mut T` 的权限差异与典型借用错误的修复策略；本文件 §9 借用检查器错误修复模式即参考了该教学研究材料。其背后的学习科学工作包括 Will Crichton 等人 OOPSLA 2023 论文 *A Grounded Conceptual Model for Ownership Types in Rust*。
+>
+> 借用的形式化语义来自 Ralf Jung 等人 POPL 2018 论文 *RustBelt: Securing the Foundations of the Rust Programming Language*：RustBelt 将 `&T` 建模为分离逻辑中的共享只读分数权限，将 `&mut T` 建模为独占权限，从而严格证明了 Alias-XOR-Mutation（别名与可变互斥）规则。完整权威来源索引见 [International Authority Index](../../00_meta/02_sources/international_authority_index.md)。
 
 ---
 

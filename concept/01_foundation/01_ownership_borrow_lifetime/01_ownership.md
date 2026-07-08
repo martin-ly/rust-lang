@@ -119,6 +119,7 @@
     - [Q5: 为什么 `&str` 作为函数参数比 `String` 更灵活？](#q5-为什么-str-作为函数参数比-string-更灵活)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
+  - [研究引用（Research Citations）](#研究引用research-citations)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Move vs Copy（理解层）](#测验-1move-vs-copy理解层)
     - [测验 2：所有权转移规则（应用层）](#测验-2所有权转移规则应用层)
@@ -1595,6 +1596,14 @@ fn greet_str(s: &str) { }
 > [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 > [来源: [RustBelt: Logical Foundations](https://plv.mpi-sws.org/rustbelt/)]
 > [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
+
+---
+
+## 研究引用（Research Citations）
+
+> Brown University Interactive Rust Book 的 [Ch4 — Understanding Ownership](https://rust-book.cs.brown.edu/ch04-00-understanding-ownership.html)（含 4.1/4.2/4.3 与 [Fixing Ownership Errors](https://rust-book.cs.brown.edu/ch04-03-fixing-ownership-errors.html)）以 Aquascope 可视化方式呈现所有权三规则、Move/Copy 语义与常见修复模式；其教学设计基于 Will Crichton 等人发表于 OOPSLA 2023 的 *A Grounded Conceptual Model for Ownership Types in Rust*，该研究从真实 StackOverflow 问题中提炼出 Rust 所有权概念模型。
+>
+> 所有权唯一性与内存安全的形式化证明则来自 Ralf Jung 等人 *RustBelt: Securing the Foundations of the Rust Programming Language*（POPL 2018），该工作在 Iris 高阶并发分离逻辑中建立了 Safe Rust 内存安全的机器可检验证明。完整权威来源索引见 [International Authority Index](../../00_meta/02_sources/international_authority_index.md)。
 
 ---
 

@@ -109,6 +109,17 @@
 - 新建 `.kimi/Q4_EXTERNAL_LINK_FIX_PLAN_2026_07_09.md`：提出 5 批外部链接自动化修复方案。
 - 新建 `.kimi/Q4_BROWN_INVENTORY_I18N_STATUS_2026_07_09.md`：8 个 Brown Inventory 文件已具备双语头，建议 Q4 标准化元数据。
 
+### P2-Q3 生态跟踪评估（2026-07-09）
+
+- **P2-7 Sea-ORM 2.0 stable 迁移评估**:
+  - 上游最新 RC 为 `2.0.0-rc.42`（2026-07-04），`2.0.0` stable 仍未发布。
+  - 创建 `.kimi/P2_7_SEA_ORM_2_0_ASSESSMENT_2026_07_09.md`。
+  - 更新 `knowledge/06_ecosystem/databases/01_sea_orm_deep_dive.md` 与 `archive/reports/2026_07/SEA_ORM_2_0_RELEASE_TRACKING_2026_06_22.md` 的状态标注。
+- **P2-8 AFIDT / dynosaur 状态更新**:
+  - AFIDT 跟踪 issue 为 [#133119](https://github.com/rust-lang/rust/issues/133119)，仍处于 nightly 实验性；`dynosaur` 最新版 `0.3.1`（2026-07-03）。
+  - 代码侧继续保留 `async_trait`；创建 `.kimi/P2_8_AFIDT_DYNOSAUR_STATUS_2026_07_09.md`。
+  - 更新 `concept/03_advanced/01_async/02_async.md`、`knowledge/INDEX.md`、`crates/c06_async/src/afit_dyn_tracking.rs`、`crates/c06_async/src/lib.rs` 的状态说明。
+
 ### P1 权威事实修正与 Rust 1.96 覆盖缺口回填（2026-06-26）
 
 - **确认主控与策略**：

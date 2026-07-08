@@ -133,6 +133,8 @@ pub mod utils;
 /// 本 crate 的部分示例代码仍使用 `#[async_trait::async_trait]`，原因如下：
 /// - Rust 1.75.0 AFIT（async fn in trait）已稳定，但**不支持 trait object（`dyn Trait`）**。
 /// - 教学代码需要在 `dyn Trait` 场景下演示，因此 `async_trait` 仍是必要 workaround。
+/// - 原生 AFIDT（async fn in dyn trait）仍处于 nightly 实验（rust-lang/rust#133119），未进入 stable。
+/// - `dynosaur 0.3.1` 提供 stable 兼容的 dyn async trait 方案，但本 crate 暂不引入，继续以 `async_trait` 作为教学示例。
 /// - 详见 [`afit_dyn_tracking`] 模块的对比分析。
 pub mod advanced_tools;
 

@@ -1,9 +1,9 @@
 # Sea-ORM 2.0 Stable 发布跟踪
 
 > **跟踪日期**: 2026-06-26
-> **当前 workspace 版本**: `2.0.0-rc.41`
+> **当前 workspace 版本**: `2.0.0-rc.42`
 > **目标版本**: `2.0.0` stable
-> **状态**: ⏳ 等待上游发布（代码侧保持现状，文档侧标注“实验性/跟踪中”）
+> **状态**: ⏳ 等待上游发布（代码侧保持 `2.0.0-rc.42`，文档侧标注“实验性/跟踪中”）
 
 ---
 
@@ -15,6 +15,7 @@
 | 2026-06-22 | `2.0.0-rc.41` | 已升级至 rc.41，继续等待 stable |
 | 2026-06-25 | `2.0.0-rc.41` | 上游仍未发布 stable，继续跟踪 |
 | 2026-06-26 | `2.0.0-rc.41` | 网络对齐：最新 rc.41 发布于 2026-06-18；stable 仍未发布 |
+| 2026-07-09 | `2.0.0-rc.42` | 已升级至 rc.42（2026-07-04 发布）；stable 仍未发布 |
 
 ---
 
@@ -22,7 +23,7 @@
 
 ```toml
 # workspace Cargo.toml
-sea-orm = { version = "2.0.0-rc.41", features = [
+sea-orm = { version = "2.0.0-rc.42", features = [
     "sqlx-postgres",
     "runtime-tokio-rustls",
 ], default-features = false }

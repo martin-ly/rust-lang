@@ -229,7 +229,9 @@ ROS2 通信原语:
 
 ### 3.1 rclrs：官方 Rust 客户端库
 
-> **[ros2-rust/rclrs](https://github.com/ros2-rust/ros2_rust)** 是 ROS2 官方支持的 Rust 客户端库，通过 `rcl`（ROS Client Library，C 接口）与 ROS2 核心交互。设计理念：**零成本抽象（Zero-Cost Abstraction）**与**内存安全（Memory Safety）**并重，利用 Rust 的所有权（Ownership）系统防止常见的 DDS 数据竞争和生命周期（Lifetimes）错误。[来源: [ros2-rust GitHub](https://github.com/ros2-rust/ros2_rust)]
+> **[ros2-rust/rclrs](https://github.com/ros2-rust/ros2_rust)** 是 ROS2 官方支持的 Rust 客户端库，通过 `rcl`（ROS Client Library，C 接口）与 ROS2 核心交互。
+> 设计理念：**零成本抽象（Zero-Cost Abstraction）**与**内存安全（Memory Safety）**并重，利用 Rust 的所有权（Ownership）系统防止常见的 DDS 数据竞争和生命周期（Lifetimes）错误。
+> [来源: [ros2-rust GitHub](https://github.com/ros2-rust/ros2_rust)]
 
 ```rust,ignore
 // rclrs 基础节点示例
@@ -456,7 +458,10 @@ impl Drop for RtMutex {
 }
 ```
 
-> **来源**: [PREEMPT_RT Patch](https://wiki.linuxfoundation.org/realtime/start) · [POSIX Real-Time Extensions](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap02.html#tag_02_01_06) · [Rust libc](https://docs.rs/libc/latest/libc/)
+> **来源**:
+> [PREEMPT_RT Patch](https://wiki.linuxfoundation.org/realtime/start) ·
+> [POSIX Real-Time Extensions](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap02.html#tag_02_01_06) ·
+> [Rust libc](https://docs.rs/libc/latest/libc/)
 
 ### 4.3 no_std + RTOS 集成
 

@@ -75,7 +75,7 @@
 ## 📑 目录
 
 - [Async/Await（异步编程）](#asyncawait异步编程)
-  - [� 权威教材对照：TRPL 3rd Ed Ch17](#-权威教材对照trpl-3rd-ed-ch17)
+  - [📚 权威教材对照：TRPL 3rd Ed Ch17](#-权威教材对照trpl-3rd-ed-ch17)
   - [📑 目录](#-目录)
   - [〇、认知路径（Cognitive Path）](#〇认知路径cognitive-path)
   - [一、权威定义（Definition）](#一权威定义definition)
@@ -2412,7 +2412,8 @@ impl AsyncProcessor for MyProcessor {
 
 ```text
 1. AFIT 方法不能直接用 dyn Trait（类型擦除问题）
-   解决: 使用 trait_variant crate 或手动 Box::pin
+   解决: 使用 `async_trait` crate（当前 stable 主流）、`dynosaur 0.3.1`（stable 兼容的 dyn async trait 宏），或手动 Box::pin
+   注意: 原生 AFIDT（`async fn in dyn trait`）仍处于 nightly 实验性，跟踪 issue [rust-lang/rust#133119](https://github.com/rust-lang/rust/issues/133119)
 
 2. 关联类型生命周期推断可能复杂
    解决: 显式标注或简化签名
@@ -2429,6 +2430,7 @@ impl AsyncProcessor for MyProcessor {
 ```
 
 > **来源**: [RFC 3185](https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html) · [Rust Reference: RPITIT](https://doc.rust-lang.org/reference/introduction.html) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html)
+> **AFIDT 跟踪**: [rust-lang/rust#133119](https://github.com/rust-lang/rust/issues/133119) · [dynosaur crate](https://crates.io/crates/dynosaur)
 
 #### 生命周期陷阱
 
@@ -2881,7 +2883,7 @@ impl Service for MyService {
 fn main() {}
 ```
 
-> **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75.0+ 已稳定！）。`async_trait` crate 提供过程宏（Procedural Macro） workaround：`// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75.0+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait` 或手动 `Box::pin`。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/async-trait/latest/async_trait/)]
+> **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75.0+ 已稳定！）。`async_trait` crate 提供过程宏（Procedural Macro） workaround：`// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75.0+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait`（或 `dynosaur 0.3.1` 等 stable 宏）或手动 `Box::pin`；原生 AFIDT 仍为 nightly 实验（[#133119](https://github.com/rust-lang/rust/issues/133119)）。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/async-trait/latest/async_trait/)]
 
 ## 逆向推理链（Backward Reasoning）
 

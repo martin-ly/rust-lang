@@ -79,7 +79,7 @@
 
 | 特性 | 文档 | 状态 |
 |------|------|------|
-| AFIDT (`async fn` in `dyn Trait`) | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 Nightly |
+| AFIDT (`async fn` in `dyn Trait`) | [concept/03_advanced/01_async/02_async.md](../concept/03_advanced/01_async/02_async.md) | 🧪 Nightly（[#133119](https://github.com/rust-lang/rust/issues/133119)）|
 | `VecDeque::truncate_front` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 Nightly |
 | `RefCell::try_map` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 Nightly |
 | `int_format_into` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 Nightly |

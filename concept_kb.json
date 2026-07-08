@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 401,
+    "total_files": 406,
     "generated_at": "The system cannot accept the date entered.\nEnter the new date: (yy-mm-dd)"
   },
   "files": [
@@ -6292,7 +6292,7 @@
       "layer": "L1",
       "title": "Ownership（所有权）",
       "positioning": "",
-      "line_count": 1810,
+      "line_count": 1819,
       "theorem_chains": [
         {
           "text": "> 引理 L1（所有权唯一性）⟹",
@@ -6692,7 +6692,7 @@
       "layer": "L1",
       "title": "Borrowing（借用）",
       "positioning": "",
-      "line_count": 1944,
+      "line_count": 1953,
       "theorem_chains": [
         {
           "text": "> **推理链全景**: 引理 L1（&T 共享读安全）⟹ 引理 L2（&mut T 独占写安全）⟹ 定理 T1（AXM: Alias-XOR-Mutation）⟹ 定理 T2（引用有效性）⟹ 定理 T3（Reborrow 安全）⟹ 定理 T4（NLL 流敏感安全）⟹ 定理 T5（借用（Borrowing） ⟹ 无数据竞争）⟹ 定理 T6（Two-Phase Borrow 安全）⟹ 推论 C1（内部可变性安全）",
@@ -7118,7 +7118,7 @@
       "layer": "L1",
       "title": "Lifetimes（生命周期）",
       "positioning": "",
-      "line_count": 1435,
+      "line_count": 1444,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡",
@@ -7506,6 +7506,7 @@
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/inter_layer_map.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../03_advanced/01_async/02_async.md",
@@ -15373,6 +15374,280 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\00_traits\\39_dispatch_mechanisms.md",
+      "layer": "L2",
+      "title": "分发机制 (Dispatch Mechanisms)",
+      "positioning": "",
+      "line_count": 1986,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 40,
+          "should_fail": false,
+          "code_preview": "trait Animal {     fn make_sound(&self); }  struct Dog; struct Cat;  impl Animal..."
+        },
+        {
+          "flags": [],
+          "lines": 32,
+          "should_fail": false,
+          "code_preview": "trait Draw {     fn draw(&self); }  struct Circle; struct Rectangle;  impl Draw ..."
+        },
+        {
+          "flags": [],
+          "lines": 38,
+          "should_fail": false,
+          "code_preview": "trait Draw {     fn draw(&self); }  struct Circle; struct Rectangle;  impl Draw ..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "fn process<T: std::fmt::Display>(value: T) {     println!(\"Value: {}\", value); }..."
+        },
+        {
+          "flags": [],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "trait Compute {     fn compute(&self) -> i32; }  struct FastCompute(i32);  impl ..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "fn large_function<T: std::fmt::Display>(value: T) {     // 100+ 行代码     println!..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "// 提取非泛型部分 fn common_logic() {     // 通用代码只有一份     println!(\"Common processing\")..."
+        },
+        {
+          "flags": [],
+          "lines": 41,
+          "should_fail": false,
+          "code_preview": "trait Shape {     fn area(&self) -> f64; }  struct Circle {     radius: f64, }  ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// trait 对象的内部表示 struct TraitObject {     data: *mut (),      // 指向数据     vtable..."
+        },
+        {
+          "flags": [],
+          "lines": 32,
+          "should_fail": false,
+          "code_preview": "trait Animal {     fn make_sound(&self);     fn move_forward(&self); }  struct D..."
+        },
+        {
+          "flags": [],
+          "lines": 44,
+          "should_fail": false,
+          "code_preview": "use std::time::Instant;  trait Processor {     fn process(&self, x: i32) -> i32;..."
+        },
+        {
+          "flags": [],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "// ✅ 对象安全 trait Safe {     fn method(&self); }  // ❌ 不对象安全：返回 Self trait NotSafe..."
+        },
+        {
+          "flags": [],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "// Clone 不是对象安全的 trait Animal: Clone {     fn make_sound(&self); }  struct Dog; ..."
+        },
+        {
+          "flags": [],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "trait CloneableAnimal {     fn make_sound(&self);     fn clone_box(&self) -> Box..."
+        },
+        {
+          "flags": [],
+          "lines": 46,
+          "should_fail": false,
+          "code_preview": "use std::time::Instant;  trait Calculator {     fn calculate(&self, a: i32, b: i..."
+        },
+        {
+          "flags": [],
+          "lines": 44,
+          "should_fail": false,
+          "code_preview": "enum Message {     Text(String),     Image(Vec<u8>),     Complex(Box<dyn Complex..."
+        },
+        {
+          "flags": [],
+          "lines": 60,
+          "should_fail": false,
+          "code_preview": "trait Plugin {     fn name(&self) -> &str;     fn execute(&self); }  struct Logg..."
+        },
+        {
+          "flags": [],
+          "lines": 70,
+          "should_fail": false,
+          "code_preview": "trait Component {     fn render(&self);     fn handle_event(&mut self, event: &s..."
+        },
+        {
+          "flags": [],
+          "lines": 45,
+          "should_fail": false,
+          "code_preview": "trait Logger {     fn log(&self, message: &str); }  struct ConsoleLogger; struct..."
+        },
+        {
+          "flags": [],
+          "lines": 77,
+          "should_fail": false,
+          "code_preview": "trait Serializer {     fn serialize_i32(&mut self, value: i32);     fn serialize..."
+        },
+        {
+          "flags": [],
+          "lines": 56,
+          "should_fail": false,
+          "code_preview": "trait EventHandler {     fn handle(&mut self, event: &str); }  struct ClickHandl..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "trait Process {     fn process(&self, data: &[u8]); }  // 热路径：静态分发 fn fast_path<..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "enum SmallVec<T> {     Inline([Option<T>; 4]),     Heap(Vec<T>), } ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// 在循环外获取方法指针 fn optimized(shapes: &[&dyn Shape]) {     for shape in shapes {   ..."
+        },
+        {
+          "flags": [],
+          "lines": 34,
+          "should_fail": false,
+          "code_preview": "// 使用enum代替trait对象 enum Operation {     Add(i32, i32),     Sub(i32, i32),     Mu..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "trait Compute {     #[inline(always)]     fn compute(&self, x: i32) -> i32; }  s..."
+        },
+        {
+          "flags": [],
+          "lines": 34,
+          "should_fail": false,
+          "code_preview": "// 使用enum分层减少动态分发 enum SimpleShape {     Circle { radius: f64 },     Rectangle {..."
+        },
+        {
+          "flags": [],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "// 使用profiling发现热点 use std::time::Instant;  fn benchmark_static<T: Process>(proc..."
+        },
+        {
+          "flags": [],
+          "lines": 40,
+          "should_fail": false,
+          "code_preview": "use std::mem;  trait Animal {     fn speak(&self);     fn move_to(&self, x: i32,..."
+        },
+        {
+          "flags": [],
+          "lines": 34,
+          "should_fail": false,
+          "code_preview": "// 编译器为每个 impl 生成一个 vtable  // Dog 的 vtable (伪代码) static DOG_ANIMAL_VTABLE: VTab..."
+        },
+        {
+          "flags": [],
+          "lines": 28,
+          "should_fail": false,
+          "code_preview": "// ❌ 无法内联（动态分派） fn process_dynamic(animal: &dyn Animal) {     animal.speak(); //..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "fn devirtualization_example() {     let dog = Dog {         name: \"Buddy\".to_str..."
+        },
+        {
+          "flags": [],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "// ❌ 差的缓存局部性 struct DynamicProcessor {     handlers: Vec<Box<dyn EventHandler>>,..."
+        },
+        {
+          "flags": [],
+          "lines": 118,
+          "should_fail": false,
+          "code_preview": "use std::time::Instant;  trait Computation {     fn compute(&self, x: i32) -> i3..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// Rust代码 fn static_call(dog: &Dog) {     dog.speak(); }  // 生成的汇编（简化） // call D..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// Rust代码 fn dynamic_call(animal: &dyn Animal) {     animal.speak(); }  // 生成的汇编..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "// ❌ 分支预测困难 fn process_mixed(items: &[Box<dyn Processor>]) {     for item in ite..."
+        },
+        {
+          "flags": [],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "use std::mem;  // 对于小型trait object，可以内联存储 enum SmallBox<T> {     Inline([u8; 24]..."
+        },
+        {
+          "flags": [],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "// 使用nightly特性 #![feature(specialization)]  trait Process {     fn process(&self..."
+        },
+        {
+          "flags": [],
+          "lines": 91,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashMap;  // 插件接口 trait Plugin: Send + Sync {     fn name(..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../01_foundation/02_type_system/04_type_system.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../06_ecosystem/10_performance/15_performance_optimization.md",
+        "39_dispatch_mechanisms.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 32,
+      "pre_post": {
+        "pre": [
+          "[Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)"
+        ],
+        "post": [
+          "[Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\01_generics\\02_generics.md",
       "layer": "L2",
       "title": "Generics（泛型系统）",
@@ -16169,6 +16444,88 @@
         ]
       },
       "backward_chains": 2,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\01_generics\\39_type_level_programming.md",
+      "layer": "L2",
+      "title": "类型级编程 (Type-Level Programming)",
+      "positioning": "",
+      "line_count": 614,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "use std::marker::PhantomData;  // 零 struct Zero;  // 后继（n + 1） struct Succ<N>(Ph..."
+        },
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "// 加法 trait trait Add<N> {     type Output; }  // 零 + N = N impl<N> Add<N> for Z..."
+        },
+        {
+          "flags": [],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "// 乘法 trait trait Mul<N> {     type Output; }  // 零 * N = 零 impl<N> Mul<N> for Z..."
+        },
+        {
+          "flags": [],
+          "lines": 63,
+          "should_fail": false,
+          "code_preview": "struct True; struct False;  // NOT 运算 trait Not {     type Output; }  impl Not f..."
+        },
+        {
+          "flags": [],
+          "lines": 81,
+          "should_fail": false,
+          "code_preview": "// 空列表 struct HNil;  // 非空列表 struct HCons<H, T> {     head: H,     tail: T, }  /..."
+        },
+        {
+          "flags": [],
+          "lines": 50,
+          "should_fail": false,
+          "code_preview": "// HKT trait trait HKT {     type Applied<T>; }  // Option 实现 struct OptionHKT; ..."
+        },
+        {
+          "flags": [],
+          "lines": 87,
+          "should_fail": false,
+          "code_preview": "use std::marker::PhantomData;  // 协议状态 struct Init; struct Handshake; struct Rea..."
+        },
+        {
+          "flags": [],
+          "lines": 52,
+          "should_fail": false,
+          "code_preview": "use std::marker::PhantomData;  // 非零自然数证明 trait NonZero {}  impl<N> NonZero for ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../01_foundation/02_type_system/04_type_system.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../06_ecosystem/10_performance/15_performance_optimization.md",
+        "39_type_level_programming.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 0,
+      "pre_post": {
+        "pre": [
+          "[Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)"
+        ],
+        "post": [
+          "[Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md)"
+        ]
+      },
+      "backward_chains": 0,
       "templated_chains": 0
     },
     {
@@ -21792,7 +22149,7 @@
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
-      "line_count": 3142,
+      "line_count": 3144,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注",
@@ -23288,6 +23645,142 @@
         ]
       },
       "backward_chains": 3,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\01_async\\39_future_and_executor_mechanisms.md",
+      "layer": "L3",
+      "title": "Future 与 Executor 机制 (Future and Executor Mechanisms)",
+      "positioning": "",
+      "line_count": 1001,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use std::pin::Pin; use std::task::{Context, Poll};  pub trait Future {     type ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "pub enum Poll<T> {     Ready(T),    // Future 已完成，返回结果     Pending,     // Futur..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "pub struct Context<'a> {     waker: &'a Waker,     // ... 其他字段 }  impl<'a> Conte..."
+        },
+        {
+          "flags": [],
+          "lines": 32,
+          "should_fail": false,
+          "code_preview": "use std::task::{Context, Poll, Waker}; use std::future::Future; use std::pin::Pi..."
+        },
+        {
+          "flags": [],
+          "lines": 70,
+          "should_fail": false,
+          "code_preview": "use std::collections::VecDeque; use std::future::Future; use std::pin::Pin; use ..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "fn main() {     let executor = SimpleExecutor::new();      executor.spawn(async ..."
+        },
+        {
+          "flags": [],
+          "lines": 25,
+          "should_fail": false,
+          "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll};  str..."
+        },
+        {
+          "flags": [],
+          "lines": 40,
+          "should_fail": false,
+          "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll}; use ..."
+        },
+        {
+          "flags": [],
+          "lines": 62,
+          "should_fail": false,
+          "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll};  str..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "async fn example() -> i32 {     let a = async_op1().await;     let b = async_op2..."
+        },
+        {
+          "flags": [],
+          "lines": 52,
+          "should_fail": false,
+          "code_preview": "enum ExampleState {     Start,     WaitingOp1(Op1Future),     WaitingOp2(Op2Futu..."
+        },
+        {
+          "flags": [],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "// async 版本 async fn async_version() -> i32 {     let a = compute_a().await;    ..."
+        },
+        {
+          "flags": [],
+          "lines": 55,
+          "should_fail": false,
+          "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll, Waker..."
+        },
+        {
+          "flags": [],
+          "lines": 58,
+          "should_fail": false,
+          "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll}; use ..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use pin_project::pin_project;  #[pin_project] struct MyFuture<F> {     #[pin]   ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// ❌ 不必要的堆分配 fn bad() -> Pin<Box<dyn Future<Output = i32>>> {     Box::pin(async..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "impl Future for MyFuture {     type Output = i32;      #[inline]     fn poll(sel..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../01_foundation/02_type_system/04_type_system.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../06_ecosystem/10_performance/15_performance_optimization.md",
+        "39_future_and_executor_mechanisms.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 4,
+      "pre_post": {
+        "pre": [
+          "[Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)"
+        ],
+        "post": [
+          "[Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md)"
+        ]
+      },
+      "backward_chains": 0,
       "templated_chains": 0
     },
     {
@@ -36816,38 +37309,30 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\01_cargo\\10_public_private_deps.md",
       "layer": "L6",
-      "title": "Cargo 公共与私有依赖",
-      "positioning": "解决 Rust  crate 图中\"依赖泄漏\"问题的核心机制，使 API 稳定性与依赖演进解耦。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]",
-      "line_count": 631,
+      "title": "Cargo `public = true` 与 Resolver v3",
+      "positioning": "解决 Rust crate 图中“依赖泄漏”问题的核心机制，使 API 稳定性与依赖演进解耦；同时说明 resolver v3 在版本选择上的 MSRV-aware 行为。",
+      "line_count": 242,
       "theorem_chains": [
         {
-          "text": "- **定理**: Public/Private Dependencies：可见性控制的工程化 定义 ⟹ 类型安全保证",
-          "type": "paragraph"
-        },
-        {
-          "text": "- **定理**: Public/Private Dependencies：可见性控制的工程化 定义 ⟹ 类型安全保证",
-          "type": "paragraph"
-        },
-        {
-          "text": "- **定理**: Public/Private Dependencies：可见性控制的工程化 定义 ⟹ 类型安全保证",
-          "type": "paragraph"
-        },
-        {
-          "text": "| Public/Private Dependencies：可见性控制的工程化 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
+          "text": "| Resolver v3 启用 `fallback` ⟹ MSRV 兼容版本优先 | workspace 存在 `rust-version` 约束 | 依赖解析不会选择超过成员 MSRV 的版本 | 高 |",
           "type": "table_row"
         },
         {
-          "text": "| Public/Private Dependencies：可见性控制的工程化 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |",
+          "text": "| `public = true` 声明 ⟹ 依赖类型可进入公共 API | 依赖被显式标记为 public | 编译器允许在 `pub` 项中使用该依赖类型 | 高（nightly 完整启用） |",
           "type": "table_row"
         },
         {
-          "text": "| Public/Private Dependencies：可见性控制的工程化 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |",
+          "text": "| `public = false` 声明 ⟹ 内部实现自由演进 | 依赖类型未进入公共 API | 升级/移除该依赖不会破坏下游编译 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 公共依赖链传递 ⟹ 版本与 feature 统一 | 上游 crate 将依赖标为 public | 下游使用同一版本与 feature 集合，避免类型不匹配 | 中（待 stable 完全启用） |",
           "type": "table_row"
         }
       ],
       "anti_propositions": [
         {
-          "title": "### 反命题"
+          "title": "## 六、反命题"
         }
       ],
       "code_blocks": [
@@ -36855,113 +37340,28 @@
           "flags": [
             "ignore"
           ],
-          "lines": 9,
+          "lines": 6,
           "should_fail": false,
-          "code_preview": "// 下游 crate 使用 my-api use my_api::SomeStruct;  // ✅ 可以，因为 serde 被标记为 public let ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "// Crate A 的 src/lib.rs pub use B::SomeType;  // ❌ 泄漏：B 的类型进入 A 的公共 API  pub fn ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "// Crate C use A::foo; let x = B::SomeType::new();  // 能编译，因为 A 泄漏了 B ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "// Crate A (public = true for B, public = false for C) pub use B::SomeType;     ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 8,
-          "should_fail": false,
-          "code_preview": "// 重构前：泄漏 B::Config pub fn parse_config(raw: &str) -> B::Config { /* ... */ }  /..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 10,
-          "should_fail": false,
-          "code_preview": "// crate A pub struct PublicType;  // crate B 依赖 A pub use a::PublicType; // 重新导..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 9,
-          "should_fail": false,
-          "code_preview": "// crate A v1.0.0 pub fn old_api() {}  // crate B 依赖 A v1.0.0 // A 升级到 v2.0.0，删除..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 19,
-          "should_fail": true,
-          "code_preview": "// Crate A (公开依赖 serde) pub trait Serializable {     fn to_json(&self) -> String..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 8,
-          "should_fail": false,
-          "code_preview": "// Crate A 依赖 tokio = { version = \"1\", features = [\"full\"] } // Crate B 依赖 tokio..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 9,
-          "should_fail": false,
-          "code_preview": "// Crate A 的 Cargo.toml // [dependencies] // serde = { version = \"1.0\", public =..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 20,
-          "should_fail": true,
-          "code_preview": "// ❌ 编译错误: trait 版本不兼容导致类型不匹配 // 模拟公开依赖版本冲突的场景  trait SerializeV1 { fn serialize..."
+          "code_preview": "// 下游 crate 可以合法使用 bitflags 类型，因为本 crate 已将其声明为 public pub fn flags() -> MyFlags..."
         }
       ],
       "sources": [],
       "cross_references": [
-        "../../00_meta/00_framework/methodology.md",
-        "../../00_meta/02_sources/international_authority_index.md",
-        "../../04_formal/00_type_theory/02_type_theory.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
-        "../../07_future/05_roadmaps/24_roadmap.md",
-        "../00_toolchain/01_toolchain.md",
-        "../02_core_crates/03_core_crates.md"
+        "60_cargo_dependency_resolution.md",
+        "78_cargo_workspaces.md"
       ],
-      "transitions": 12,
-      "has_cognitive_path": true,
-      "mermaid_blocks": 2,
-      "matrix_rows": 22,
+      "transitions": 6,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 14,
       "pre_post": {
         "pre": [
-          "N/A",
-          "[Type Theory](../../04_formal/00_type_theory/02_type_theory.md)",
-          "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
+          "[Cargo Workspaces](78_cargo_workspaces.md) · [Cargo Dependency Resolution](60_cargo_dependency_resolution.md)",
+          "[SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html)"
         ],
         "post": [
-          "[Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)"
+          "[Cargo Workspaces](78_cargo_workspaces.md)"
         ]
       },
       "backward_chains": 0,
@@ -40932,6 +41332,131 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\04_web_and_networking\\39_high_performance_network_service_architecture.md",
+      "layer": "L6",
+      "title": "高性能网络服务架构 (High-Performance Network Service Architecture)",
+      "positioning": "",
+      "line_count": 1918,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "// 传统方式：4次上下文切换 + 4次数据拷贝 use std::fs::File; use std::io::{Read, Write}; use std:..."
+        },
+        {
+          "flags": [],
+          "lines": 46,
+          "should_fail": false,
+          "code_preview": "use std::os::unix::io::AsRawFd; use std::fs::File; use std::net::TcpStream;  // ..."
+        },
+        {
+          "flags": [],
+          "lines": 90,
+          "should_fail": false,
+          "code_preview": "use tokio::net::{TcpListener, TcpStream}; use tokio::fs::File; use tokio::io::{s..."
+        },
+        {
+          "flags": [],
+          "lines": 47,
+          "should_fail": false,
+          "code_preview": "use std::time::Instant;  #[tokio::test] async fn benchmark_zero_copy_vs_traditio..."
+        },
+        {
+          "flags": [],
+          "lines": 40,
+          "should_fail": false,
+          "code_preview": "use io_uring::{opcode, types, IoUring}; use std::os::unix::io::AsRawFd; use std:..."
+        },
+        {
+          "flags": [],
+          "lines": 58,
+          "should_fail": false,
+          "code_preview": "use tokio_uring::net::{TcpListener, TcpStream}; use tokio_uring::buf::BoundedBuf..."
+        },
+        {
+          "flags": [],
+          "lines": 96,
+          "should_fail": false,
+          "code_preview": "use tokio_uring::net::{TcpListener, TcpStream}; use std::sync::Arc; use std::col..."
+        },
+        {
+          "flags": [],
+          "lines": 137,
+          "should_fail": false,
+          "code_preview": "use std::sync::atomic::{AtomicUsize, AtomicBool, Ordering}; use std::sync::Arc; ..."
+        },
+        {
+          "flags": [],
+          "lines": 65,
+          "should_fail": false,
+          "code_preview": "use std::time::Instant; use tokio::sync::Mutex;  #[tokio::test] async fn benchma..."
+        },
+        {
+          "flags": [],
+          "lines": 73,
+          "should_fail": false,
+          "code_preview": "use std::sync::Arc; use tokio::net::TcpListener; use core_affinity::CoreId;  ///..."
+        },
+        {
+          "flags": [],
+          "lines": 85,
+          "should_fail": false,
+          "code_preview": "use libnuma_sys::*; use std::alloc::{GlobalAlloc, Layout}; use std::ptr;  /// NU..."
+        },
+        {
+          "flags": [],
+          "lines": 31,
+          "should_fail": false,
+          "code_preview": "#[bench] fn bench_numa_aware_vs_default(b: &mut Bencher) {     const SIZE: usize..."
+        },
+        {
+          "flags": [],
+          "lines": 67,
+          "should_fail": false,
+          "code_preview": "use core_affinity::{CoreId, get_core_ids, set_for_current}; use libnuma_sys::*; ..."
+        },
+        {
+          "flags": [],
+          "lines": 73,
+          "should_fail": false,
+          "code_preview": "use tokio::net::TcpListener; use std::sync::Arc;  /// 多队列感知的网络服务器 struct MultiQu..."
+        },
+        {
+          "flags": [],
+          "lines": 116,
+          "should_fail": false,
+          "code_preview": "// 简化的 Pingora 风格架构  use tokio::net::TcpListener; use std::sync::Arc;  /// Pingo..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../01_foundation/02_type_system/04_type_system.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../06_ecosystem/10_performance/15_performance_optimization.md",
+        "39_high_performance_network_service_architecture.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 10,
+      "pre_post": {
+        "pre": [
+          "[Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)"
+        ],
+        "post": [
+          "[Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\04_web_and_networking\\40_reactive_programming.md",
       "layer": "L6",
       "title": "Reactive Programming & FRP（响应式编程与函数式响应编程）",
@@ -41779,7 +42304,7 @@
       "layer": "L6",
       "title": "Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态）",
       "positioning": "",
-      "line_count": 1007,
+      "line_count": 1012,
       "theorem_chains": [
         {
           "text": "- **定理**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 定义 ⟹ 类型安全保证",
@@ -46179,6 +46704,173 @@
         ],
         "post": [
           "[Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\76_algorithm_engineering_practice.md",
+      "layer": "L6",
+      "title": "算法工程实践 (Algorithm Engineering Practice)",
+      "positioning": "",
+      "line_count": 1896,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 124,
+          "should_fail": false,
+          "code_preview": "use std::fs::File; use std::io::{BufReader, BufWriter, Read, Write};  /// 外部归并排序..."
+        },
+        {
+          "flags": [],
+          "lines": 80,
+          "should_fail": false,
+          "code_preview": "use bit_vec::BitVec;  /// Bloom Filter pub struct BloomFilter {     bits: BitVec..."
+        },
+        {
+          "flags": [],
+          "lines": 143,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashMap; use std::sync::{Arc, Mutex};  /// LRU 缓存节点 struct..."
+        },
+        {
+          "flags": [],
+          "lines": 59,
+          "should_fail": false,
+          "code_preview": "use tokio::time::{interval, Duration};  /// 缓存管理器 pub struct CacheManager<K, V> ..."
+        },
+        {
+          "flags": [],
+          "lines": 108,
+          "should_fail": false,
+          "code_preview": "use std::collections::BTreeMap;  /// 一致性哈希负载均衡器 pub struct ConsistentHashLoadBal..."
+        },
+        {
+          "flags": [],
+          "lines": 60,
+          "should_fail": false,
+          "code_preview": "use std::arch::x86_64::*;  /// SIMD 向量加法 #[target_feature(enable = \"avx2\")] pub ..."
+        },
+        {
+          "flags": [],
+          "lines": 38,
+          "should_fail": false,
+          "code_preview": "/// 不友好的 AOS (Array of Structures) #[derive(Clone)] pub struct ParticleAOS {    ..."
+        },
+        {
+          "flags": [],
+          "lines": 80,
+          "should_fail": false,
+          "code_preview": "use std::sync::{Arc, Mutex};  /// 对象池 pub struct ObjectPool<T> {     pool: Arc<M..."
+        },
+        {
+          "flags": [],
+          "lines": 53,
+          "should_fail": false,
+          "code_preview": "use memmap2::MmapMut; use std::fs::OpenOptions;  /// 内存映射文件处理 pub struct MmapPro..."
+        },
+        {
+          "flags": [],
+          "lines": 54,
+          "should_fail": false,
+          "code_preview": "use tokio::fs::File; use tokio::io::{AsyncWriteExt, BufWriter}; use tokio::sync:..."
+        },
+        {
+          "flags": [],
+          "lines": 108,
+          "should_fail": false,
+          "code_preview": "use tokio::time::{sleep, Duration};  /// 指数退避重试 pub async fn retry_with_backoff<..."
+        },
+        {
+          "flags": [],
+          "lines": 79,
+          "should_fail": false,
+          "code_preview": "/// 服务降级管理器 pub struct DegradationManager {     levels: Vec<DegradationLevel>,  ..."
+        },
+        {
+          "flags": [],
+          "lines": 90,
+          "should_fail": false,
+          "code_preview": "use std::time::Instant;  /// 性能指标收集器 pub struct MetricsCollector {     requests:..."
+        },
+        {
+          "flags": [],
+          "lines": 61,
+          "should_fail": false,
+          "code_preview": "/// 排序策略 pub trait SortStrategy {     fn sort(&self, arr: &mut [i32]); }  pub st..."
+        },
+        {
+          "flags": [],
+          "lines": 30,
+          "should_fail": false,
+          "code_preview": "#[cfg(test)] mod tests {     use super::*;      /// 参数化测试宏     macro_rules! test..."
+        },
+        {
+          "flags": [],
+          "lines": 29,
+          "should_fail": false,
+          "code_preview": "use criterion::{black_box, criterion_group, criterion_main, Criterion, Benchmark..."
+        },
+        {
+          "flags": [],
+          "lines": 41,
+          "should_fail": false,
+          "code_preview": "use serde::{Deserialize, Serialize};  /// 算法配置 #[derive(Debug, Clone, Serialize,..."
+        },
+        {
+          "flags": [],
+          "lines": 51,
+          "should_fail": false,
+          "code_preview": "/// 灰度发布管理器 pub struct GrayReleaseManager {     gray_ratio: Arc<Mutex<f64>>,  //..."
+        },
+        {
+          "flags": [],
+          "lines": 68,
+          "should_fail": false,
+          "code_preview": "/// 状态快照 #[derive(Clone, Serialize, Deserialize)] pub struct Snapshot<T> {     d..."
+        },
+        {
+          "flags": [],
+          "lines": 98,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashMap;  /// 协同过滤推荐引擎 pub struct CollaborativeFilteringEn..."
+        },
+        {
+          "flags": [],
+          "lines": 50,
+          "should_fail": false,
+          "code_preview": "use std::collections::BinaryHeap; use std::cmp::Reverse;  /// 实时排行榜 pub struct L..."
+        },
+        {
+          "flags": [],
+          "lines": 61,
+          "should_fail": false,
+          "code_preview": "use std::time::{Duration, Instant};  /// 令牌桶限流器 pub struct TokenBucket {     cap..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../01_foundation/02_type_system/04_type_system.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../06_ecosystem/10_performance/15_performance_optimization.md",
+        "76_algorithm_engineering_practice.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 8,
+      "pre_post": {
+        "pre": [
+          "[Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)"
+        ],
+        "post": [
+          "[Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md)"
         ]
       },
       "backward_chains": 0,
