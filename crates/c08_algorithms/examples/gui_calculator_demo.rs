@@ -9,7 +9,7 @@
 //!
 
 use eframe::{App, Frame, NativeOptions};
-use egui::{CentralPanel, TextStyle, Ui, Vec2};
+use eframe::egui::{self, CentralPanel, TextStyle, Ui, Vec2};
 
 /// 计算器应用状态
 /// application state
@@ -223,7 +223,7 @@ impl App for CalculatorApp {
 
                 ui.add_space(20.0);
                 ui.label(
-                    egui::RichText::new("Rust 1.95.0 + egui 0.34 + eframe 0.34")
+                    egui::RichText::new("Rust 1.96.1 + egui 0.35 + eframe 0.35")
                         .size(12.0)
                         .color(ui.visuals().weak_text_color()),
                 );

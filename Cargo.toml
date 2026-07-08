@@ -414,7 +414,8 @@ metrics-exporter-prometheus = "0.18.3"
 chrono = { version = "0.4.45", features = ["serde"] }
 # time: 现代时间处理库，提供高性能的时间操作
 # 2026-06-22: 0.3.49 -> 0.3.51 (cargo update)
-time = { version = "0.3.51", features = ["serde", "macros"] }
+# 2026-07-08: cargo update 自动解析至 0.3.53
+time = { version = "0.3.53", features = ["serde", "macros"] }
 
 # 2025-12-11: 其他常用库最新稳定版本
 # uuid: UUID生成和解析库，支持多种UUID版本
@@ -457,8 +458,8 @@ memoffset = "0.9.1"
 # 2025-12-11: 数据库和存储最新稳定版本
 # sea-orm: 异步动态ORM，支持多种数据库后端
 # 2026-06-19: 2.0.0-rc.40 -> 2.0.0-rc.41
-# 2026-06-22 跟踪: crates.io 最新仍为 2.0.0-rc.41，2.0.0 stable 未发布，继续等待
-sea-orm = { version = "2.0.0-rc.41", features = [
+# 2026-07-08: cargo update 自动解析至 2.0.0-rc.42
+sea-orm = { version = "2.0.0-rc.42", features = [
     "sqlx-postgres",      # PostgreSQL支持
     "runtime-tokio-rustls", # tokio运行时和rustls支持
 ], default-features = false }
@@ -718,6 +719,7 @@ const-hex = "=1.19.1"
 # - log: 0.4.32 -> 0.4.33 (cargo update 2026-06-22)
 # - chrono: 0.4.44 -> 0.4.45
 # - time: 0.3.49 -> 0.3.51 (cargo update 2026-06-22)
+# - time: 0.3.51 -> 0.3.53 (cargo update 2026-07-08)
 # - quote: 1.0.45 -> 1.0.46 (cargo update 2026-06-22)
 # - 传递依赖 (cargo update 自动升级):
 #     libp2p-quic 0.13.0 -> 0.13.1
@@ -730,6 +732,7 @@ const-hex = "=1.19.1"
 # - syn: 2.0.117 -> 2.0.118
 # - wasm-bindgen 系列: wasm-bindgen 0.2.126 / js-sys 0.3.103 / wasm-bindgen-futures 0.4.76
 # - sea-orm: 2.0.0-rc.40 -> 2.0.0-rc.41 (仍等待 stable)
+# - sea-orm: 2.0.0-rc.41 -> 2.0.0-rc.42 (cargo update 2026-07-08)
 # - web-sys (c12_wasm): 0.3.102 -> 0.3.103
 # - protoc-bin-vendored (c10_networks): 3.1.0 -> 3.2.0
 # - const-hex / universal-hash: 更新记录以匹配 Cargo.lock 实际解析版本
@@ -739,9 +742,13 @@ const-hex = "=1.19.1"
 # - clap 4.5.x -> 4.6.x: 已升级至 4.6.1，传递依赖兼容性问题已解决
 # - eframe 0.33.3 -> 0.34.3: 已升级至 0.34.3 (cargo update 2026-05-28)
 # - egui 0.33.3 -> 0.34.3: 已升级至 0.34.3 (cargo update 2026-05-28)，wgpu 传递依赖兼容
+# - egui 0.34.3 -> 0.35.0: 已升级 (2026-07-08)，修复 quick-xml 传递依赖风险
+# - eframe 0.34.3 -> 0.35.0: 已升级 (2026-07-08)，修复 quick-xml 传递依赖风险
 # - generic-array 0.14.7 -> 0.14.9: crypto-common 0.1.7 精确锁定 =0.14.7，无法升级
 #       2026-06-08 验证: 上游 axum 无新版本，状态未变
 # - hecs 0.10.5 -> 0.11.0: minor 版本升级，需评估 ECS API 兼容性
+# - azure_core: 0.30.0 -> 1.0.0 (2026-07-08)，同步升级 azure_identity/azure_storage_blob，修复 quick-xml 传递依赖
+# - azure_storage_blob: 0.7.0 -> 1.0.0 (2026-07-08)，示例 azure_blob_list_containers.rs 已适配 API 变更
 # - hickory-resolver 0.25.2 -> 0.26.1: 已升级至 0.26.1，c10_networks DNS 模块已适配
 #       注意: libp2p 0.56.0 内部仍传递依赖 hickory-proto/resolver 0.25.2，无法通过 [patch.crates-io] 修复（同 registry 不能 patch 版本）
 # - io-uring 0.6.4 -> 0.7.12: tokio-uring 0.5.0 (crates.io 最新) 锁定 io-uring ^0.6.0，无法升级
@@ -767,14 +774,21 @@ const-hex = "=1.19.1"
 # - bare-metal 0.2.5: 已忽略 (RUSTSEC-2026-0110)，cortex-m 0.7.7 传递依赖，仅 ARM 嵌入式 target 使用
 # - instant 0.1.13: 已忽略 (RUSTSEC-2024-0384)，glommio 0.9.0 -> futures-lite 1.13 传递依赖，仅 Linux 实验性模块
 
-# 安全审计状态 (2026-06-25)
+# 安全审计状态 (2026-07-08)
 # 已修复:
 #   - RUSTSEC-2023-0071 (rsa Marvin Attack): 已移除 workspace sqlx 的 "mysql" feature，
 #     sqlx-mysql 和 rsa 不再出现在编译依赖树中。详见 .cargo/audit.toml
+#   - RUSTSEC-2026-0194/0195 (quick-xml HIGH severity): 部分修复
+#       * c10_networks 的 Azure SDK 从 0.30.0/0.7.0 升级至 1.0.0，将 quick-xml 从 0.38.4 推到 0.39.4
+#       * c16_gui 的 egui/eframe 从 0.34.3 升级至 0.35.0
+#       * 剩余 quick-xml 0.39.4 由 typespec 1.0.0 与 wayland-scanner 0.31.10 锁定，
+#         crates.io 暂无修复版本，已在 .cargo/audit.toml 中忽略并记录 rationale
 # 待上游修复:
 #   - RUSTSEC-2026-0118/0119 (hickory-proto 0.25.2): libp2p 0.56.0 内部传递依赖，
 #     本项目未启用 mdns/dns feature，0.25.2 不在编译路径中（仅 Cargo.lock 残留）
-#   - 3 个 unmaintained 依赖: 上游未发布修复版本，已通过 .cargo/audit.toml 显式忽略并记录 rationale
+#   - RUSTSEC-2026-0194/0195 (quick-xml 0.39.4): 等待 typespec 与 wayland-scanner 在 crates.io
+#     发布使用 quick-xml >=0.41.0 的新版本
+#   - 多个 unmaintained 依赖: 上游未发布修复版本，已通过 .cargo/audit.toml 显式忽略并记录 rationale
 # cargo audit 配置: .cargo/audit.toml
 
 [workspace.lints.rust]
@@ -832,3 +846,4 @@ similar_names = "allow"
 
 # 注: core2 补丁已移除
 # multihash 0.19.4+ / libp2p-core 已迁移到 no_std_io2，不再需要 core2 补丁
+

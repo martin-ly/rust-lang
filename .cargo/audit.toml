@@ -51,6 +51,29 @@ ignore = [
     # [已由 cargo-vet 覆盖/管理] instant 0.1.13 已在 supply-chain/audits.toml 中登记审计 stub
     "RUSTSEC-2024-0384",
 
+    # RUSTSEC-2026-0194: quick-xml - 检查重复属性名时二次时间复杂度
+    # 影响评估: MEDIUM -> LOW（传递依赖，非默认编译路径）
+    # - 攻击向量: 需要解析攻击者控制的 XML 文档
+    # - 影响范围: quick-xml 0.39.4，由 typespec 1.0.0 与 wayland-scanner 0.31.10 引入
+    # - 实际状态:
+    #     * c10_networks 的 Azure SDK 已升级至 1.0.0，将 quick-xml 从 0.38.4 推到 0.39.4
+    #     * c16_gui 的 egui/eframe 已升级至 0.35.0
+    #     * 但 typespec 1.0.0 与 wayland-scanner 0.31.10 仍锁定 quick-xml ^0.39
+    # - 上游状态:
+    #     * typespec git main (1.1.0-beta.1) 已升级到 quick-xml 0.41.0，但 crates.io 稳定版未发布
+    #     * wayland-scanner git master 仍使用 quick-xml 0.40，尚未修复
+    # - 触发条件:
+    #     * typespec: 仅在启用 c10_networks 的 azure-sdk feature 时进入编译依赖树
+    #     * wayland-scanner: 仅在 Linux 平台且启用 eframe Wayland 支持时编译
+    # [待上游发布 stable 后移除] 上游 crates.io 暂无修复版本
+    "RUSTSEC-2026-0194",
+
+    # RUSTSEC-2026-0195: quick-xml - NsReader 命名空间声明无界分配导致 DoS
+    # 影响评估: MEDIUM -> LOW（与 RUSTSEC-2026-0194 同路径）
+    # - 攻击向量/影响范围/实际状态/上游状态/触发条件 同上
+    # [待上游发布 stable 后移除] 上游 crates.io 暂无修复版本
+    "RUSTSEC-2026-0195",
+
     # RUSTSEC-2024-0436: paste 不再维护
     # 影响评估: LOW（仅 dev/benchmark 传递依赖）
     # - 攻击向量: 不适用（paste 是 proc-macro 工具）

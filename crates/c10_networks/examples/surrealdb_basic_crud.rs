@@ -9,8 +9,9 @@ use serde::{Deserialize, Serialize};
 use surrealdb::Surreal;
 use surrealdb::engine::remote::ws::Ws;
 use surrealdb::opt::auth::Root;
+use surrealdb::types::SurrealValue;
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, SurrealValue)]
 struct Person {
     name: String,
     age: u8,
@@ -25,8 +26,8 @@ async fn main() -> anyhow::Result<()> {
     let db = Surreal::new::<Ws>(&url).await?;
 
     db.signin(Root {
-        username: &username,
-        password: &password,
+        username: username.clone(),
+        password: password.clone(),
     })
     .await?;
 
