@@ -783,12 +783,18 @@ const-hex = "=1.19.1"
 #       * c16_gui 的 egui/eframe 从 0.34.3 升级至 0.35.0
 #       * 剩余 quick-xml 0.39.4 由 typespec 1.0.0 与 wayland-scanner 0.31.10 锁定，
 #         crates.io 暂无修复版本，已在 .cargo/audit.toml 中忽略并记录 rationale
+#   - RUSTSEC-2025-0012 (backoff 0.4.0 unmaintained): 已通过升级 c10_networks 的
+#     kube 0.98 -> 4.0.0 / k8s-openapi 0.24 -> 0.28.0 移除 backoff 传递依赖
+#   - surrealdb 2.0.0 -> 3.2.0: 已完成 API 迁移（示例 surrealdb_basic_crud.rs 已适配
+#     SurrealValue derive），同步消除旧版传递依赖风险
 # 待上游修复:
 #   - RUSTSEC-2026-0118/0119 (hickory-proto 0.25.2): libp2p 0.56.0 内部传递依赖，
 #     本项目未启用 mdns/dns feature，0.25.2 不在编译路径中（仅 Cargo.lock 残留）
 #   - RUSTSEC-2026-0194/0195 (quick-xml 0.39.4): 等待 typespec 与 wayland-scanner 在 crates.io
 #     发布使用 quick-xml >=0.41.0 的新版本
-#   - 多个 unmaintained 依赖: 上游未发布修复版本，已通过 .cargo/audit.toml 显式忽略并记录 rationale
+#   - 多个 unmaintained/unsound 依赖: gtk-rs GTK3 绑定、proc-macro-error 系列、
+#     rustls-pemfile、ttf-parser、unic-*、atomic-polyfill、glib 等，均为深层传递依赖，
+#     上游未发布修复版本，已通过 .cargo/audit.toml 显式忽略并记录 rationale
 # cargo audit 配置: .cargo/audit.toml
 
 [workspace.lints.rust]
@@ -846,4 +852,3 @@ similar_names = "allow"
 
 # 注: core2 补丁已移除
 # multihash 0.19.4+ / libp2p-core 已迁移到 no_std_io2，不再需要 core2 补丁
-

@@ -2,11 +2,13 @@
 #
 # 自 2026-07-04 起，cargo-vet 已成为本项目主要的供应链治理工具。
 # supply-chain/config.toml 与 supply-chain/audits.toml 共同覆盖所有 registry 依赖；
-# 本文件保留的 6 条 RUSTSEC 忽略仅作为历史记录，相关 crate/版本已由 cargo-vet
-# 通过 [exemptions] 或 [[audits]] 条目覆盖/管理。
+# 本文件保留的 RUSTSEC 忽略作为已知且暂时无法修复的安全/废弃警告记录。
 #
-# 本文件记录已知且暂时无法修复的安全警告和废弃依赖
-# 每个忽略项都必须包含明确的影响评估和理由（见下方注释）
+# 每个忽略项都必须包含明确的影响评估和理由（见下方注释）。
+# 忽略不代表问题不存在，而是因为：
+#   1) 相关 crate 为深层传递依赖，本项目代码不直接使用；
+#   2) 上游未发布修复版本，或升级会导致破坏性 API 变更/生态不兼容；
+#   3) 攻击向量在本项目的教学示例场景下难以触发或影响可控。
 
 [advisories]
 ignore = [
@@ -45,7 +47,7 @@ ignore = [
     # RUSTSEC-2024-0384: `instant` 不再维护
     # 影响评估: LOW（仅 Linux 下 glommio 实验性模块使用）
     # - 攻击向量: 不适用（instant 是时间工具库）
-    # - 影响范围: c06_async 的 glommio 0.9.0 -> futures-lite 1.13.0 -> fastrand 1.9.0
+    # - 影响范围: c06_async 的 glommio 0.9.0 -> futures-lite 1.13.0
     # - 实际状态: glommio 0.9.0 是 crates.io 最新版；移除 glommio 将损失 io_uring 教学内容
     # - 上游状态: 等待 glommio 升级至 futures-lite 2.x
     # [已由 cargo-vet 覆盖/管理] instant 0.1.13 已在 supply-chain/audits.toml 中登记审计 stub
@@ -82,8 +84,102 @@ ignore = [
     # - 上游状态: 等待 huggingface/candle 与 libp2p/rust-libp2p 迁移出 paste
     # [已由 cargo-vet 覆盖/管理] paste 1.0.15 已在 supply-chain/audits.toml 中登记审计 stub
     "RUSTSEC-2024-0436",
+
+    # RUSTSEC-2023-0089: atomic-polyfill 不再维护
+    # 影响评估: LOW（仅 ARM 嵌入式 target 的深层传递依赖）
+    # - 攻击向量: 不适用（atomic-polyfill 是底层原子操作抽象）
+    # - 影响范围: c13_embedded 在 target_arch = "arm" 时的传递依赖
+    # - 实际状态: atomic-polyfill 1.0.3 仍出现在 Cargo.lock；host 编译不编译
+    # - 上游状态: 依赖链上游未发布移除 atomic-polyfill 的新版本
+    # [待上游发布修复版本后移除]
+    "RUSTSEC-2023-0089",
+
+    # RUSTSEC-2024-0411 ~ RUSTSEC-2024-0420: gtk-rs GTK3 bindings 系列不再维护
+    # 影响评估: LOW（仅 tauri 的 linux 原生菜单/系统托盘功能使用）
+    # - 攻击向量: 不适用（GTK3 绑定为 UI 框架封装）
+    # - 影响范围: tauri 2.x -> gtk/gdk/atk/gdkx11/gdkwayland 等 GTK3 绑定
+    # - 实际状态: tauri 2.x 仍是当前稳定版；gtk4 迁移需要 Tauri 上游完成
+    # - 上游状态: gtk-rs 已停止 GTK3 维护，Tauri 3.x 计划迁移至 gtk4
+    # - 涉及 ID: 0411(gdkwayland-sys), 0412(gdk), 0413(atk), 0414(gdkx11-sys),
+    #           0415(gtk), 0416(atk-sys), 0417(gdkx11), 0418(gdk-sys),
+    #           0419(gtk3-macros), 0420(gtk-sys)
+    # [待 Tauri 3.x 或 gtk4 迁移后移除]
+    "RUSTSEC-2024-0411",
+    "RUSTSEC-2024-0412",
+    "RUSTSEC-2024-0413",
+    "RUSTSEC-2024-0414",
+    "RUSTSEC-2024-0415",
+    "RUSTSEC-2024-0416",
+    "RUSTSEC-2024-0417",
+    "RUSTSEC-2024-0418",
+    "RUSTSEC-2024-0419",
+    "RUSTSEC-2024-0420",
+
+    # RUSTSEC-2024-0429: glib VariantStrIter 实现存在 unsoundness
+    # 影响评估: LOW（GTK/Tauri 深层传递依赖，教学示例不处理不可信输入）
+    # - 攻击向量: 需要构造特定的 glib Variant 迭代器使用模式
+    # - 影响范围: tauri 2.x -> glib 0.18.x
+    # - 实际状态: glib 0.18.5 为 GTK3 配套最新版；Tauri 3.x 迁移后才能升级 glib
+    # - 上游状态: gtk-rs 已停止 0.18 维护，glib 修复只在 gtk4 分支
+    # [待 Tauri 迁移至 gtk4 后移除]
+    "RUSTSEC-2024-0429",
+
+    # RUSTSEC-2024-0370: proc-macro-error 不再维护
+    # 影响评估: LOW（proc-macro 工具，编译期使用）
+    # - 攻击向量: 不适用
+    # - 影响范围: proc-macro-error 0.4.x/1.x 的深层传递依赖（gtk-rs/eframe 等）
+    # - 实际状态: 依赖链上游未迁移至 proc-macro-error2 或替代方案
+    # - 上游状态: 等待 gtk-rs、eframe 等上游迁移
+    "RUSTSEC-2024-0370",
+
+    # RUSTSEC-2026-0173: proc-macro-error2 不再维护
+    # 影响评估: LOW（proc-macro 工具，编译期使用）
+    # - 攻击向量: 不适用
+    # - 影响范围: proc-macro-error2 1.x 的深层传递依赖
+    # - 实际状态: 迁移方案 proc-macro-error2 自身也被标记为 unmaintained
+    # - 上游状态: 等待生态迁移至更好的错误处理方案
+    "RUSTSEC-2026-0173",
+
+    # RUSTSEC-2025-0134: rustls-pemfile 不再维护
+    # 影响评估: LOW（PEM 解析工具，功能稳定）
+    # - 攻击向量: 需要解析恶意 PEM 输入
+    # - 影响范围: rustls 0.21/0.22 的传递依赖；kube 4.0.0 等仍依赖旧 rustls
+    # - 实际状态: rustls-pemfile 功能已被 rustls-pki-types 吸收，但旧 rustls 仍使用
+    # - 上游状态: 等待 kube、reqwest 等升级到 rustls 0.23+
+    "RUSTSEC-2025-0134",
+
+    # RUSTSEC-2026-0192: ttf-parser 不再维护
+    # 影响评估: LOW（字体解析库，教学示例不处理不可信字体）
+    # - 攻击向量: 需要解析恶意字体文件
+    # - 影响范围: epaint/egui/eframe 的字体传递依赖
+    # - 实际状态: ttf-parser 0.25.1 为 egui 0.35 依赖链中的最新可用版
+    # - 上游状态: 等待 egui 迁移至新的字体解析库
+    "RUSTSEC-2026-0192",
+
+    # RUSTSEC-2025-0075/0080/0081/0098/0100: unic-* 系列不再维护
+    # 影响评估: LOW（Unicode 属性库，仅 urlpattern 使用）
+    # - 攻击向量: 需要解析恶意 URL pattern
+    # - 影响范围: urlpattern 0.3.0 -> unic-*；urlpattern 为 deno_core/surrealdb 传递依赖
+    # - 实际状态: urlpattern 0.3.0 是 crates.io 最新稳定版；0.6.0 未发布到 crates.io
+    # - 上游状态: rust-urlpattern git 仓库有 v0.6.0 tag，但 crates.io 未发布
+    #   已尝试通过 [patch.crates-io] 引入 git 版本，但网络不稳定导致 fetch 失败
+    # - 涉及 ID: 0075(unic-char-range), 0080(unic-common), 0081(unic-char-property),
+    #           0098(unic-ucd-version), 0100(unic-ucd-ident)
+    # [待 urlpattern 0.6.0 发布到 crates.io 后移除]
+    "RUSTSEC-2025-0075",
+    "RUSTSEC-2025-0080",
+    "RUSTSEC-2025-0081",
+    "RUSTSEC-2025-0098",
+    "RUSTSEC-2025-0100",
 ]
 
-# 废弃依赖处理说明
-# - atomic-polyfill (RUSTSEC-2023-0089): 已修复
-#   2026-06-25 移除 c10_networks 的 postcard dev-dependency，atomic-polyfill 不再进入 Cargo.lock
+# 处理说明索引（按 crate）
+# - atomic-polyfill (RUSTSEC-2023-0089): 仅 ARM target 深层传递依赖，host 不编译
+# - gtk-rs GTK3 系列 (RUSTSEC-2024-0411~0420) + glib (RUSTSEC-2024-0429):
+#     Tauri 2.x 的 Linux 原生 UI 依赖，需等待 Tauri 3.x / gtk4 迁移
+# - proc-macro-error / proc-macro-error2 (RUSTSEC-2024-0370 / 2026-0173):
+#     多个 proc-macro crate 的传递依赖，上游迁移中
+# - rustls-pemfile (RUSTSEC-2025-0134): rustls 旧版本的 PEM 解析，需等上游升级 rustls
+# - ttf-parser (RUSTSEC-2026-0192): egui/eframe 字体解析链，需等 egui 迁移
+# - unic-* (RUSTSEC-2025-0075/0080/0081/0098/0100): urlpattern 0.3.0 的 Unicode 依赖，
+#     等待 urlpattern 0.6.0 在 crates.io 发布
