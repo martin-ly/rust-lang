@@ -30,7 +30,7 @@ aho-corasick = { version = "1.1.4", optional = true }
 crossbeam-epoch = { workspace = true }
 # ONNX / 纯 Rust 推理引擎示例依赖（可选，需启用 with-ort-tract）
 ort = { version = "=2.0.0-rc.12", optional = true }
-tract-onnx = { version = "0.23.1", optional = true }
+tract-onnx = { version = "0.23.4", optional = true }
 
 [features]
 default = []
@@ -44,7 +44,7 @@ criterion = { workspace = true }
 candle-core = { workspace = true }
 candle-nn = { workspace = true }
 egui = { workspace = true }
-eframe = { version = "0.34.3", default-features = false, features = ["default"] }
+eframe = { version = "0.35.0", default-features = false, features = ["default"] }
 
 [lib]
 name = "c08_algorithms"

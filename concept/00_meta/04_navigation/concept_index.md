@@ -46,7 +46,7 @@
     - [W](#w)
     - [Z](#z)
   - [三、交叉概念一致性审计（🔶） 交叉一致性检查方法论参照概念图 (Concept Map) 理论 — Novak \& Cañas, *The Theory Underlying Concept Maps* (2008); 知识网络的连通性验证](#三交叉概念一致性审计-交叉一致性检查方法论参照概念图-concept-map-理论--novak--cañas-the-theory-underlying-concept-maps-2008-知识网络的连通性验证)
-    - [3.1 Pin（出现在 4+ 个文件中） (RFC 2349 — Pin / 2018)](#31-pin出现在-4-个文件中-来源-跨文件概念一致性检查参照-rfc-2349--pin--2018-concept03_advanced01_async02_asyncmd-等-4-文件中的-pin-定义一致性验证)
+    - [3.1 Pin（出现在 4+ 个文件中） \[来源: 跨文件概念一致性检查参照 RFC 2349 — Pin / 2018; concept/03\_advanced/01\_async/02\_async.md 等 4+ 文件中的 Pin 定义一致性验证\]](#31-pin出现在-4-个文件中-来源-跨文件概念一致性检查参照-rfc-2349--pin--2018-concept03_advanced01_async02_asyncmd-等-4-文件中的-pin-定义一致性验证)
     - [3.2 Send / Sync（出现在 3+ 个文件中）](#32-send--sync出现在-3-个文件中)
     - [3.3 Unsafe（出现在 3+ 个文件中）](#33-unsafe出现在-3-个文件中)
     - [3.4 生命周期（出现在 4+ 个文件中）](#34-生命周期出现在-4-个文件中)

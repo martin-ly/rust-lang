@@ -1,6 +1,6 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-07-04（Rust 1.96.1 MSRV/文档对齐 + 修正 1.97/1.98 稳定性表述）
+> **最后更新**: 2026-07-09（Rust 1.97.0 稳定支持 + 依赖更新 + AGENTS.md 合规修复）
 
 ---
 
@@ -11,7 +11,78 @@
 - **1.97/1.98 稳定性表述修正**: 当前（2026-07-04）Rust 1.97.0 尚未 stable、1.98.0 仍为 nightly。所有 `rust_197_features.rs` 模块文档、`exercises/tests/l3_rust_197_alignment.rs`、`concept/07_future/rust_1_97_stabilized.md`、`concept/07_future/rust_1_97_preview.md`、`docs/06_toolchain/06_21_rust_1_97_features.md` 中“已稳定/stable”描述恢复为“beta / nightly 候选/前瞻”。
 - **验证**: `cargo check --workspace`、`cargo test --workspace`、`cargo clippy --workspace`、`cargo vet` 均通过。
 
-## [3.1.0] - 2026-07-09 — Rust 1.97.0 稳定支持（计划发布）
+## [3.1.0] - 2026-07-09 — Rust 1.97.0 稳定支持（已发布）
+
+### 发布日更新（2026-07-09）
+
+- **Rust 1.97.0 稳定文档对齐**：
+  - `concept/07_future/rust_1_97_preview.md` 状态更新为“已 stable（2026-07-09 发布）”。
+  - 填充 `concept/07_future/rust_1_97_stabilized.md` 为稳定特性摘要页，链接到权威详解。
+  - 更新 `docs/06_toolchain/06_21_rust_1_97_features.md` 为工具链参考入口。
+  - `rust-toolchain.toml` 保持 `channel = "stable"`，由 rustup 自动解析 latest stable。
+- **依赖更新**：
+  - `Cargo.toml` workspace: `bytes` `1.12.0` → `1.12.1`。
+  - `crates/c08_algorithms/Cargo.toml`: `tract-onnx` `0.23.1` → `0.23.4`；`eframe` `0.34.3` → `0.35.0`（与 workspace `egui = "0.35.0"` 对齐）。
+  - 修复 `crates/c08_algorithms/examples/gui_calculator_demo.rs` 中 `eframe` 0.35 API 变更：`CentralPanel::show_inside` → `show`。
+- **AGENTS.md 合规修复**：
+  - 为 `concept/00_meta/02_sources/topic_authority_alignment_map.md` 补充 `**EN**` / `**Summary**`。
+  - 为 `content/README.md` 补充 `**EN**` / `**Summary**`。
+  - 合并 `docs/research_notes/10_distributed_patterns_matrix.md` → `10_distributed_pattern_matrix.md`（后者改为重定向 stub）。
+  - 合并 `docs/research_notes/10_workflow_engine_matrix.md` → `formal_methods/10_workflow_engines_matrix.md`（前者改为重定向 stub）。
+  - 重命名 `concept/archive/Rust vs C++：形式系统模型 vs 机制工程模型 —— 核心论点索引.md` 为 snake_case。
+- **验证**：
+  - `cargo check -p c06_async -p c10_networks -p c08_algorithms` 通过。
+  - `cargo check -p c08_algorithms --example gui_calculator_demo` 通过。
+  - `cargo audit` 无新安全漏洞。
+  - `cargo update` 锁定 0 个包。
+  - `python scripts/detect_content_overlap.py` 发现 0 对潜在重复。
+
+### P2-Q3 深化计划启动（2026-07-09）
+
+- **P2-11 TRPL Ch17 对照索引**：
+  - 在 `concept/03_advanced/01_async/02_async.md` 新增“TRPL 3rd Ed Ch17”对照索引表，将本文章节映射到官方教材第 17 章节次，方便学习者按 TRPL 顺序复习。
+- **P2-1 rustc 查询系统动手实验**：
+  - 在 `concept/04_formal/05_rustc_internals/19_rustc_query_system.md` 新增 §4.5“动手实验：实现最小查询系统”。
+  - 提供一个自包含的 Rust 程序，模拟 `rustc` 查询系统的缓存、依赖追踪与失效机制。
+
+### 知识库质量风险清零（2026-07-09）
+
+- **修复 14 个质量风险文件**：
+  - 为 `concept/01_foundation/07_modules_and_items/` 下的 `12_functions.md`、`13_use_declarations.md`、`14_structs.md`、`15_enumerations.md`、`16_implementations.md` 补充认知路径、过渡段落、定理链与反向推理。
+  - 为 `concept/01_foundation/00_start/47_std_io_and_process.md`、`concept/01_foundation/06_strings_and_text/46_formatting_and_display.md`、`concept/01_foundation/07_modules_and_items/43_type_aliases.md`、`44_static_items.md`、`45_const_items_and_const_fn.md`、`concept/02_intermediate/04_types_and_conversions/35_unions.md`、`37_type_conversions.md`、`concept/02_intermediate/06_macros_and_metaprogramming/36_attributes_by_category.md`、`concept/03_advanced/07_unsafe_internals/37_unsafe_collections_internals.md` 补充过渡段落。
+- **验证**：
+  - `python scripts/kb_auditor.py` 风险文件数从 14 降至 **0**，所有文件通过质量门。
+  - 定理链 (⟹) 从 1887 增至 1907，反向推理 (⟸) 从 257 增至 267。
+
+### 供应链审计更新（2026-07-09）
+
+- **cargo vet 豁免更新**：
+  - `supply-chain/config.toml` 新增 6 项豁免，覆盖 `cargo update` 引入的新版本：`bytes 1.12.1`、`eframe 0.35.0`、`egui_glow 0.35.0`、`egui-wgpu 0.35.0`、`egui-winit 0.35.0`、`rustc-demangle 0.1.28`。
+  - 运行 `cargo vet` 通过：`923 fully audited, 831 exempted`。
+
+### 全量回归验证（2026-07-09）
+
+- `cargo check --workspace` ✅
+- `cargo test --workspace` ✅
+- `cargo clippy --workspace -- -D warnings` ✅
+- `cargo audit --no-fetch` ✅（0 漏洞）
+- `cargo vet` ✅（923 fully audited, 831 exempted）
+- `python scripts/kb_auditor.py --link-check` ✅（0 死链，0 跨层问题）
+- `python scripts/detect_content_overlap.py` ✅（0 潜在重复）
+
+### concept/ 结构治理（2026-07-09）
+
+- **`concept/SUMMARY.md` 补全**：
+  - 新增 7 个非归档 concept 页面的索引条目：
+    - `00_meta/01_terminology/bilingual_template.md`
+    - `00_meta/03_audit/audit_checklist.md`
+    - `00_meta/03_audit/template_deduplication_guide.md`
+    - `00_meta/placeholders/placeholder_generic.md`
+    - `sources/INDEX.md`
+    - `sources/rfc_index.md`
+    - `sources/theorem_tier_spec.md`
+  - 剩余 36 个未链接文件均为 `archive/` 历史归档，符合 AGENTS.md 规范。
+- **mdbook 构建验证**：`mdbook build` 通过，无 orphan page 警告。
 
 ### P1 权威事实修正与 Rust 1.96 覆盖缺口回填（2026-06-26）
 

@@ -6,10 +6,9 @@
 //! ```bash
 //! cargo run -p c08_algorithms --example gui_calculator_demo
 //! ```
-//!
 
-use eframe::{App, Frame, NativeOptions};
 use eframe::egui::{self, CentralPanel, TextStyle, Ui, Vec2};
+use eframe::{App, Frame, NativeOptions};
 
 /// 计算器应用状态
 /// application state
@@ -114,7 +113,7 @@ impl App for CalculatorApp {
             .insert(TextStyle::Heading, egui::FontId::proportional(36.0));
         ctx.set_global_style(style);
 
-        CentralPanel::default().show_inside(ui, |ui| {
+        CentralPanel::default().show(ui, |ui| {
             ui.vertical_centered(|ui| {
                 ui.heading("🧮 Rust 计算器");
                 ui.label("egui 即时模式 GUI 演示");

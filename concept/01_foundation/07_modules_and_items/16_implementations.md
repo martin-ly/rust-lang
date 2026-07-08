@@ -19,9 +19,44 @@
 > **对应 Crate**: [`c02_type_system`](../../crates/c02_type_system)
 > **对应练习**: [`exercises/src/type_system/`](../../exercises/src/type_system)
 
+## 认知路径
+
+> **认知路径**: 本节从“如何将行为绑定到类型”出发，依次建立固有实现、方法 receiver、关联函数与 Trait 实现的完整图景。
+
+1. **问题识别**: 当类型需要附带行为时，如何组织方法与函数？
+2. **概念建立**: 掌握 `impl` 块、`self` / `&self` / `&mut self`、关联函数、Trait `impl`。
+3. **机制推理**: 通过 ⟹ 定理链将方法调用、receiver 选择与所有权/借用规则串联起来。
+4. **边界辨析**: 借助反命题/反例理解在 `&self` 中修改字段、方法调用后继续使用、Orphan Rule 等问题。
+5. **迁移应用**: 将 `impl` 与泛型、类型转换、高级 Trait 等后置概念链接。
+
+---
+
+> **过渡**: 从实现块的直观描述转向其形式化定义，需要先把“给类型加方法”的直觉转化为 `impl` 块、receiver 类型与 Coherence 规则的精确表述。
+
+> **过渡**: 在建立实现块的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
+
+> **过渡**: 最后，将实现块与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
+
+---
+
+> **定理 1** [Tier 1]: `impl Type { ... }` 将方法绑定到类型 ⟹ 方法第一个参数 `self` / `&self` / `&mut self` 决定调用时的所有权转移或借用。
+>
+> **定理 2** [Tier 1]: 关联函数无 `self` 参数 ⟹ 通常用作构造函数，通过 `Type::func()` 调用，不依赖实例。
+>
+> **定理 3** [Tier 1]: `impl Trait for Type` 为类型实现 Trait ⟹ 受 Orphan Rule 与 Coherence 约束，防止不相关 crate 间的冲突实现。
+
+---
+
+> **反向推理 1** [Tier 1]: 若编译器报错 `cannot borrow ... as mutable` 在方法内部 ⟸ 应检查方法 receiver 是否为 `&mut self`。
+>
+> **反向推理 2** [Tier 1]: 若编译器报错 `conflicting implementations` ⟸ 应检查是否违反 Orphan Rule 或存在重叠 Blanket Impl。
+
+---
+
 ## 📑 目录
 
 - [Implementations（实现块）](#implementations实现块)
+  - [认知路径](#认知路径)
   - [📑 目录](#-目录)
   - [一、核心命题](#一核心命题)
   - [二、固有实现（Inherent Impl）](#二固有实现inherent-impl)

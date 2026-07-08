@@ -666,6 +666,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.bytes]]
+version = "1.12.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "Minor version bump from 1.12.0; byte buffer utility with no network or crypto surface change."
+
 [[exemptions.calloop]]
 version = "0.13.0"
 criteria = "safe-to-run"
@@ -1247,6 +1253,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.eframe]]
+version = "0.35.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "Minor version bump from 0.34.3; egui framework update aligned with egui 0.35.0."
+
 [[exemptions.egui]]
 version = "0.34.3"
 criteria = "safe-to-run"
@@ -1264,17 +1276,35 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.egui-wgpu]]
+version = "0.35.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "Minor version bump from 0.34.3; egui wgpu renderer update aligned with egui 0.35.0."
+
 [[exemptions.egui-winit]]
 version = "0.34.3"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.egui-winit]]
+version = "0.35.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "Minor version bump from 0.34.3; egui winit integration update aligned with egui 0.35.0."
+
 [[exemptions.egui_glow]]
 version = "0.34.3"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.egui_glow]]
+version = "0.35.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "Minor version bump from 0.34.3; egui Glow renderer update aligned with egui 0.35.0."
 
 [[exemptions.either]]
 version = "1.16.0"
@@ -3400,6 +3430,12 @@ version = "0.1.27"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.rustc-demangle]]
+version = "0.1.28"
+criteria = "safe-to-run"
+suggest = false
+notes = "Minor version bump from 0.1.27; demangling utility from rust-lang-owned crate."
 
 [[exemptions.rustc-hash]]
 version = "2.1.3"

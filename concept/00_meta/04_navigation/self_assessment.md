@@ -89,7 +89,7 @@
     - [Q54: Error Source Chain](#q54-error-source-chain)
     - [Q55: 泛型 vs Trait Object 错误处理](#q55-泛型-vs-trait-object-错误处理)
     - [Q56: Zero-Sized Types (ZST)](#q56-zero-sized-types-zst)
-  - [L3 扩展层：并发、异步、unsafe 与宏（8 题） (Async Book)](https://rust-lang.github.io/async-book/)
+  - [L3 扩展层：并发、异步、unsafe 与宏（8 题） \[来源: 题目基于 TRPL Ch16 (并发), Rust Async Book / 2025; Rust Reference — unsafe, Macros / 2025; RFC 2349 (Pin)\](https://rust-lang.github.io/async-book/)](#l3-扩展层并发异步unsafe-与宏8-题-来源-题目基于-trpl-ch16-并发-rust-async-book--2025-rust-reference--unsafe-macros--2025-rfc-2349-pinhttpsrust-langgithubioasync-book)
     - [Q57: Atomic Ordering](#q57-atomic-ordering)
     - [Q58: Stream vs Iterator](#q58-stream-vs-iterator)
     - [Q59: Cancel Safety](#q59-cancel-safety)

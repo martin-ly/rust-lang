@@ -1,5 +1,8 @@
 # Content 目录
 
+> **EN**: Content Directory
+> **Summary**: Content 目录的重定向入口。原专题集合已归档至 `archive/content/`，活跃 Rust 概念权威解释统一维护在 `concept/` 的 L0–L7 分层架构中。
+>
 > **状态**: 2026-07-01 清理后，原 `academic/`、`ecosystem/`、`emerging/`、`production/`、`representations/`、`scenarios/` 等专题集合已归档至 [`archive/content/`](../archive/content)。
 >
 > **权威来源**: 本项目的 Rust 概念权威解释统一维护在 [`concept/`](..) 的 L0–L7 分层架构中。

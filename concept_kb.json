@@ -1412,7 +1412,7 @@
       "layer": "L0",
       "title": "主题-权威来源对齐图谱 (Topic-Authority Alignment Map)",
       "positioning": "",
-      "line_count": 349,
+      "line_count": 352,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -6164,7 +6164,7 @@
       "layer": "L1",
       "title": "标准 I/O 与进程（std I/O and Process）",
       "positioning": "",
-      "line_count": 440,
+      "line_count": 452,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`std::io` 是异步的\" ⟹ 不成立。`std::io` 是同步阻塞 I/O；异步 I/O 使用 `tokio::io` 等。",
@@ -6272,7 +6272,7 @@
         "../08_error_handling/32_error_handling_basics.md",
         "../10_testing_basics/16_testing_basics.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 17,
@@ -10838,7 +10838,7 @@
       "layer": "L1",
       "title": "格式化与显示（Display and Debug Formatting）",
       "positioning": "",
-      "line_count": 409,
+      "line_count": 421,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`{}` 和 `{:?}` 相同\" ⟹ 不成立。`{}` 调用 `Display`，`{:?}` 调用 `Debug`。",
@@ -10940,7 +10940,7 @@
         "../../06_ecosystem/00_toolchain/79_development_tools.md",
         "09_strings_and_text.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 17,
@@ -11106,8 +11106,25 @@
       "layer": "L1",
       "title": "Functions（函数）",
       "positioning": "系统讲解 Rust 函数声明、参数传递、返回值、发散函数与所有权的交互，为后续 Trait、闭包、Async 打下语法基础。",
-      "line_count": 220,
-      "theorem_chains": [],
+      "line_count": 254,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将函数签名、所有权移动与借用规则串联起来。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 1** [Tier 1]: 函数签名精确声明参数类型与返回类型 ⟹ 编译器可在调用点静态检查类型一致性。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 2** [Tier 1]: 函数参数默认按值传递 ⟹ 调用者需显式使用 `&T` / `&mut T` 表达借用，否则发生所有权移动。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 3** [Tier 1]: 发散函数返回 `!` ⟹ 任何需要 `T` 的位置都可安全替换为发散函数调用（never 的底类型性质）。",
+          "type": "paragraph"
+        }
+      ],
       "anti_propositions": [
         {
           "title": "## 七、反例"
@@ -11187,8 +11204,8 @@
         "../04_control_flow/41_statements_and_expressions.md",
         "11_modules_and_paths.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 10,
       "pre_post": {
@@ -11199,7 +11216,7 @@
           "[Traits](../../02_intermediate/00_traits/01_traits.md) · [Closures](../00_start/15_closure_basics.md) · [Modules and Paths](11_modules_and_paths.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -11207,8 +11224,25 @@
       "layer": "L1",
       "title": "Use Declarations（使用声明）",
       "positioning": "系统讲解 `use` 声明的语法、作用域规则、重导出与 glob 导入，帮助学习者建立清晰的模块命名空间心智模型。",
-      "line_count": 185,
-      "theorem_chains": [],
+      "line_count": 219,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将 `use` 声明、作用域与可见性规则串联起来。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 1** [Tier 1]: `use path::Item;` 将路径绑定到当前作用域的短名 ⟹ 不创建新项，只创建别名，不影响原始可见性。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 2** [Tier 1]: `pub use path::Item;` 重导出内部路径 ⟹ 外部用户可通过当前模块访问该路径，构成 API 表面。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 3** [Tier 1]: Glob 导入 `use path::*;` 导入目标模块所有公开项 ⟹ 可能降低可读性并在名称冲突时引发编译错误。",
+          "type": "paragraph"
+        }
+      ],
       "anti_propositions": [
         {
           "title": "## 六、反例"
@@ -11279,8 +11313,8 @@
         "35_preludes.md",
         "39_items.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 8,
       "pre_post": {
@@ -11291,7 +11325,7 @@
           "[Preludes](35_preludes.md) · [API Naming Conventions](../../02_intermediate/05_modules_and_visibility/22_api_naming_conventions.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -11299,8 +11333,25 @@
       "layer": "L1",
       "title": "Structs（结构体）",
       "positioning": "系统讲解 Rust 结构体的三种形式、字段可见性、结构体更新语法与方法基础，为后续 Trait、Enum、泛型奠定类型基础。",
-      "line_count": 193,
-      "theorem_chains": [],
+      "line_count": 227,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将结构体定义、字段所有权与借用规则串联起来。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 1** [Tier 1]: 结构体是命名乘积类型 ⟹ 其值由所有字段共同决定，字段顺序不影响类型相等性。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 2** [Tier 1]: 结构体字段默认私有 ⟹ 跨模块访问需显式标注 `pub`，否则编译器拒绝访问。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 3** [Tier 1]: 结构体更新语法 `..old` 会移动未显式指定字段的所有权 ⟹ 若字段未实现 `Copy`，原实例将部分失效。",
+          "type": "paragraph"
+        }
+      ],
       "anti_propositions": [
         {
           "title": "## 六、反例"
@@ -11364,8 +11415,8 @@
         "15_enumerations.md",
         "16_implementations.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 7,
       "pre_post": {
@@ -11376,7 +11427,7 @@
           "[Enumerations](15_enumerations.md) · [Implementations](16_implementations.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -11384,8 +11435,25 @@
       "layer": "L1",
       "title": "Enumerations（枚举）",
       "positioning": "系统讲解 Rust 枚举的定义、变体负载、Option/Result 两个核心枚举、模式匹配穷尽性检查，以及与错误处理的关系。",
-      "line_count": 195,
-      "theorem_chains": [],
+      "line_count": 229,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将枚举、模式匹配与错误处理规则串联起来。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 1** [Tier 1]: 枚举是带标签联合类型 ⟹ 其值恰好属于一个变体，编译器可在 `match` 中强制穷尽所有可能。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 2** [Tier 1]: `Option<T>` 显式区分“有值”与“无值” ⟹ 替代空指针，消除解引用空指针的运行时错误。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 3** [Tier 1]: `Result<T, E>` 显式区分“成功”与“失败” ⟹ 错误处理成为类型系统的一部分，不可静默忽略。",
+          "type": "paragraph"
+        }
+      ],
       "anti_propositions": [
         {
           "title": "## 六、反例"
@@ -11463,8 +11531,8 @@
         "../08_error_handling/32_error_handling_basics.md",
         "14_structs.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 7,
       "pre_post": {
@@ -11475,7 +11543,7 @@
           "[Error Handling Basics](../08_error_handling/32_error_handling_basics.md) · [Result and Option Deep Dive](../../02_intermediate/03_error_handling/04_error_handling.md) · [Algebraic Data Types](../../04_formal/00_type_theory/02_type_theory.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -11483,8 +11551,25 @@
       "layer": "L1",
       "title": "Implementations（实现块）",
       "positioning": "系统讲解 Rust `impl` 块的两种形式（固有实现、Trait 实现）、方法 receiver、关联函数，以及与结构体/枚举/Trait 的关系。",
-      "line_count": 190,
-      "theorem_chains": [],
+      "line_count": 224,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将方法调用、receiver 选择与所有权/借用规则串联起来。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 1** [Tier 1]: `impl Type { ... }` 将方法绑定到类型 ⟹ 方法第一个参数 `self` / `&self` / `&mut self` 决定调用时的所有权转移或借用。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 2** [Tier 1]: 关联函数无 `self` 参数 ⟹ 通常用作构造函数，通过 `Type::func()` 调用，不依赖实例。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 3** [Tier 1]: `impl Trait for Type` 为类型实现 Trait ⟹ 受 Orphan Rule 与 Coherence 约束，防止不相关 crate 间的冲突实现。",
+          "type": "paragraph"
+        }
+      ],
       "anti_propositions": [
         {
           "title": "## 六、反例"
@@ -11551,8 +11636,8 @@
         "14_structs.md",
         "15_enumerations.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 7,
       "pre_post": {
@@ -11563,7 +11648,7 @@
           "[Generics](../../02_intermediate/01_generics/02_generics.md) · [Type Conversions](../../02_intermediate/04_types_and_conversions/37_type_conversions.md) · [Advanced Traits](../../02_intermediate/00_traits/19_advanced_traits.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -11782,7 +11867,7 @@
       "layer": "L1",
       "title": "类型别名（Type Alias）",
       "positioning": "",
-      "line_count": 399,
+      "line_count": 411,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"类型别名会创建新类型\" ⟹ 不成立。别名与原类型完全等价，编译器不会区分。",
@@ -11890,7 +11975,7 @@
         "../../02_intermediate/04_types_and_conversions/14_newtype_and_wrapper.md",
         "../02_type_system/04_type_system.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 16,
@@ -11910,7 +11995,7 @@
       "layer": "L1",
       "title": "静态项（Static Items）",
       "positioning": "",
-      "line_count": 388,
+      "line_count": 400,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`static` 和 `const` 完全相同\" ⟹ 不成立。`static` 有固定地址且可运行期存在；`const` 是编译期内联值。",
@@ -12008,7 +12093,7 @@
         "../01_ownership_borrow_lifetime/02_borrowing.md",
         "../01_ownership_borrow_lifetime/03_lifetimes.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 23,
@@ -12028,7 +12113,7 @@
       "layer": "L1",
       "title": "常量项与常量函数（Const Items and Const Functions）",
       "positioning": "",
-      "line_count": 409,
+      "line_count": 421,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`const` 和 `let` 一样\" ⟹ 不成立。`const` 是编译期常量，无运行时地址；`let` 是运行时局部绑定。",
@@ -12125,7 +12210,7 @@
         "../02_type_system/04_type_system.md",
         "../04_control_flow/07_control_flow.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 17,
@@ -18654,7 +18739,7 @@
       "layer": "L2",
       "title": "联合体（Unions）",
       "positioning": "",
-      "line_count": 413,
+      "line_count": 425,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"联合体与枚举相同\" ⟹ 不成立。枚举有标签，联合体没有；枚举模式匹配安全，联合体读取需 unsafe。",
@@ -18743,7 +18828,7 @@
         "../../04_formal/05_rustc_internals/42_type_layout.md",
         "../02_memory_management/08_interior_mutability.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 24,
@@ -18763,7 +18848,7 @@
       "layer": "L2",
       "title": "类型转换（Type Conversions）",
       "positioning": "",
-      "line_count": 441,
+      "line_count": 453,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`as` 转换总是安全的\" ⟹ 不成立。`as` 可能截断、改变符号或产生未定义行为（如指针转换）。",
@@ -18871,7 +18956,7 @@
         "../03_error_handling/04_error_handling.md",
         "14_newtype_and_wrapper.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 17,
@@ -19981,7 +20066,7 @@
       "layer": "L2",
       "title": "属性分类详解（Attributes by Category）",
       "positioning": "",
-      "line_count": 450,
+      "line_count": 462,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"属性只影响运行时行为\" ⟹ 不成立。属性主要影响编译期、代码生成、诊断和链接。",
@@ -20087,7 +20172,7 @@
         "../../03_advanced/03_proc_macros/28_conditional_compilation.md",
         "../../03_advanced/05_inline_assembly/13_inline_assembly.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 19,
@@ -21707,7 +21792,7 @@
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
-      "line_count": 3126,
+      "line_count": 3141,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注",
@@ -22247,7 +22332,7 @@
       "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 9,
-      "matrix_rows": 193,
+      "matrix_rows": 200,
       "pre_post": {
         "pre": [
           "[L2 泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md) · L1 生命周期（Lifetimes）",
@@ -27146,7 +27231,7 @@
       "layer": "L3",
       "title": "Unsafe 集合内部实现：Vec、Arc、Mutex（Unsafe Collections Internals）",
       "positioning": "",
-      "line_count": 479,
+      "line_count": 491,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"实现 Vec 只需要普通引用\" ⟹ 不成立。未初始化内存无法通过 safe 引用表达，必须使用原始指针。",
@@ -27243,7 +27328,7 @@
         "../02_unsafe/03_unsafe.md",
         "../06_low_level_patterns/14_custom_allocators.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 15,
@@ -31734,7 +31819,7 @@
       "layer": "L4",
       "title": "Rustc 查询系统与增量编译",
       "positioning": "将 `rustc` 从“顺序 pass 流水线”还原为“按需查询 + 缓存”的真实架构，理解增量编译的底层机制。",
-      "line_count": 413,
+      "line_count": 524,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -31771,6 +31856,12 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 86,
+          "should_fail": false,
+          "code_preview": "use std::collections::{HashMap, HashSet};  /// 模拟查询系统的最小实现 struct QuerySystem { ..."
+        },
         {
           "flags": [
             "ignore"
@@ -46338,7 +46429,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\rust_1_97_preview.md",
       "layer": "L7",
-      "title": "Rust 1.97.0 前沿特性预览（Beta）",
+      "title": "Rust 1.97.0 稳定特性详解",
       "positioning": "",
       "line_count": 293,
       "theorem_chains": [
@@ -46454,12 +46545,14 @@
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
-      "line_count": 19,
+      "line_count": 71,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../../docs/06_toolchain/06_21_rust_1_97_features.md",
+        "05_rust_version_tracking.md",
         "rust_1_96_stabilized.md",
         "rust_1_97_preview.md",
         "rust_1_98_preview.md"
@@ -46470,10 +46563,10 @@
       "matrix_rows": 0,
       "pre_post": {
         "pre": [
-          "[Rust 1.96 稳定特性](rust_1_96_stabilized.md) · [Rust 1.97 前沿特性预览](rust_1_97_preview.md)"
+          "[Rust 版本跟踪](05_rust_version_tracking.md) · [Rust 1.96 稳定特性](rust_1_96_stabilized.md)"
         ],
         "post": [
-          "[Rust 1.98 前沿特性预览](rust_1_98_preview.md)"
+          "[Rust 1.97.0 前沿特性预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)"
         ]
       },
       "backward_chains": 0,

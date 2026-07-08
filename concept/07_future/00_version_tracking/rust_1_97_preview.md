@@ -1,15 +1,15 @@
-# Rust 1.97.0 前沿特性预览（Beta）
+# Rust 1.97.0 稳定特性详解
 
 > **内容重叠提示**: 本文与 [`docs/02_reference/quick_reference/02_rust_197_features_cheatsheet.md`](../../../docs/02_reference/quick_reference/02_rust_197_features_cheatsheet.md) 内容高度重叠。`concept/` 版本为项目权威主轨；`docs/` 版本提供快速参考。
 > **代码状态**: [实现级 — 代码已补充]
 >
-> **EN**: Rust 1.97.0 Preview Features (Beta)
-> **Summary**: Comprehensive coverage of features targeted for stabilization in Rust 1.97.0 (beta/nightly candidate, expected stable 2026-07-09), including language, standard library, toolchain, and target changes.
+> **EN**: Rust 1.97.0 Stabilized Features In Detail
+> **Summary**: Comprehensive coverage of Rust 1.97.0 stabilized features (released 2026-07-09), including language, standard library, toolchain, and target changes.
 >
 > **受众**: [进阶]
 > **内容分级**: [参考级]
-> **状态**: Rust 1.97.0 尚未 stable（beta/nightly 候选，预计 2026-07-09 进入 stable）
-> **跟踪版本**: Rust 1.97.0 beta / nightly candidate (预计 2026-07-09 stable)
+> **状态**: ✅ Rust 1.97.0 已 stable（2026-07-09 发布）
+> **跟踪版本**: Rust 1.97.0 stable
 > **Rust 属性标记**: `#[stable(feature = "...", since = "1.97.0")]`
 >
 > **前置依赖**: [Rust 1.96 稳定特性](rust_1_96_stabilized.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [NonZero](../../02_intermediate/02_memory_management/03_memory_management.md)
@@ -41,7 +41,7 @@
 
 ## 📑 目录
 
-- [Rust 1.97.0 前沿特性预览（Beta）](#rust-1970-前沿特性预览beta)
+- [Rust 1.97.0 稳定特性详解](#rust-1970-稳定特性详解)
   - [📑 目录](#-目录)
   - [一、语言与编译器](#一语言与编译器)
     - [1.1 `must_use` lint 扩展](#11-must_use-lint-扩展)

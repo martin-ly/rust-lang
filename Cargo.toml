@@ -424,8 +424,8 @@ uuid = { version = "1.23.4", features = ["v4", "serde"] }
 # url: URL解析和操作库
 url = "2.5.8"
 # bytes: 字节缓冲区处理库，提供高效的字节操作
-# 2026-06-19: 1.11.1 -> 1.12.0
-bytes = "1.12.0"
+# 2026-07-09: cargo update 1.12.0 -> 1.12.1
+bytes = "1.12.1"
 # indexmap: 保持插入顺序的HashMap实现
 indexmap = "2.14.0"
 # once_cell: 单次初始化单元格，用于全局变量初始化

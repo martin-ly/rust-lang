@@ -81,6 +81,7 @@
       - [修改 `greet::hello` 后](#修改-greethello-后)
     - [4.3 增量编译不生效的常见原因](#43-增量编译不生效的常见原因)
     - [4.4 动手实验：修改-对比](#44-动手实验修改-对比)
+    - [4.5 动手实验：实现最小查询系统](#45-动手实验实现最小查询系统)
   - [五、局限与边界](#五局限与边界)
   - [六、与 Salsa 的关系](#六与-salsa-的关系)
   - [嵌入式测验](#嵌入式测验)
@@ -314,6 +315,118 @@ incremental: process 23 dirty nodes
 
 ---
 
+### 4.5 动手实验：实现最小查询系统
+
+下面用一个自包含的 Rust 程序模拟 `rustc` 查询系统的核心机制：
+
+1. 每个查询有唯一 ID；
+2. 查询执行前检查缓存；
+3. 查询之间记录依赖；
+4. 输入变化后，只使依赖该输入的查询失效。
+
+```rust
+use std::collections::{HashMap, HashSet};
+
+/// 模拟查询系统的最小实现
+struct QuerySystem {
+    /// 输入表：模拟源码/HIR 等外部输入
+    inputs: HashMap<&'static str, i64>,
+    /// 缓存：查询名 -> 结果
+    cache: HashMap<&'static str, i64>,
+    /// 依赖图：查询名 -> 它依赖的查询/输入集合
+    deps: HashMap<&'static str, HashSet<&'static str>>,
+    /// 当前正在收集的依赖集合
+    current_deps: Vec<&'static str>,
+}
+
+impl QuerySystem {
+    fn new() -> Self {
+        Self {
+            inputs: HashMap::new(),
+            cache: HashMap::new(),
+            deps: HashMap::new(),
+            current_deps: Vec::new(),
+        }
+    }
+
+    fn set_input(&mut self, name: &'static str, value: i64) {
+        self.inputs.insert(name, value);
+        // 输入变化：使所有依赖该输入的缓存失效
+        self.invalidate(name);
+    }
+
+    fn invalidate(&mut self, changed: &'static str) {
+        let mut to_remove: Vec<&'static str> = Vec::new();
+        for (query, deps) in &self.deps {
+            if deps.contains(changed) {
+                to_remove.push(query);
+            }
+        }
+        for q in to_remove {
+            self.cache.remove(q);
+            // 递归向上失效：该查询结果变化会影响它的依赖方
+            self.invalidate(q);
+        }
+    }
+
+    fn query<F>(&mut self, name: &'static str, f: F) -> i64
+    where
+        F: FnOnce(&mut Self) -> i64,
+    {
+        if let Some(&value) = self.cache.get(name) {
+            return value;
+        }
+
+        // 开始收集本次查询的依赖
+        let dep_start = self.current_deps.len();
+        let value = f(self);
+        let deps: HashSet<_> = self.current_deps.drain(dep_start..).collect();
+        self.deps.insert(name, deps);
+        self.cache.insert(name, value);
+        value
+    }
+
+    fn read_input(&mut self, name: &'static str) -> i64 {
+        self.current_deps.push(name);
+        *self.inputs.get(name).unwrap_or(&0)
+    }
+}
+
+fn main() {
+    let mut qs = QuerySystem::new();
+    qs.set_input("a", 2);
+    qs.set_input("b", 3);
+
+    // 查询 `sum` 依赖 `a` 和 `b`
+    let sum = qs.query("sum", |qs| qs.read_input("a") + qs.read_input("b"));
+    println!("sum = {}", sum); // 5
+
+    // 再次查询命中缓存，不重新执行
+    let sum = qs.query("sum", |_qs| panic!("不应重新执行"));
+    println!("cached sum = {}", sum); // 5
+
+    // 修改输入 `a`：使 `sum` 缓存失效
+    qs.set_input("a", 10);
+    let sum = qs.query("sum", |qs| qs.read_input("a") + qs.read_input("b"));
+    println!("new sum = {}", sum); // 13
+}
+```
+
+**实验目标**：
+
+1. 运行程序，观察缓存命中与失效的打印顺序。
+2. 在 `sum` 查询上再叠加一个 `double` 查询，验证输入变化后 `double` 也会间接失效。
+3. 思考：如果 `invalidate` 不做递归向上失效，会出现什么 bug？
+
+> **与 rustc 的对应关系**：
+>
+> - `inputs` 表 ≈ HIR / 源码；
+> - `query` 方法 ≈ `TyCtxt` 的查询入口；
+> - `current_deps` ≈ 当前查询栈；
+> - `deps` + `invalidate` ≈ `rustc` 的 Dep Graph + Red-Green 算法的最简版本。
+
+---
+
 ## 五、局限与边界
 
 1. **并非所有查询都磁盘缓存**：某些查询（如部分 lint）为了正确性每次都会执行。
@@ -406,7 +519,7 @@ Salsa 本身是从 `rustc` 查询系统中提取出来的通用框架，被 `rus
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 编译器架构；2026-06-26 新增 `examples/incremental_practice/` 可运行增量编译实验 [P2 Deep Content Sprint](../../00_meta/02_sources/international_authority_index.md)
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-26
+**最后更新**: 2026-07-09
 **状态**: ✅ 已对齐 Rust 1.96.1 编译器内部文档
