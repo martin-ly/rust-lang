@@ -1,62 +1,17 @@
-﻿# 错误处理控制流（覆盖至 Rust 1.92.0）
+# 错误处理控制流（覆盖至 Rust 1.92.0）
+>
+> **EN**: Error Handling Control Flow
+> **Summary**: Error-handling control-flow patterns in Rust: `?` operator, `FromResidual`, `try` blocks, and boundary design.
+>
+> **权威来源**: [concept/01_foundation/08_error_handling/33_error_handling_control_flow.md](../../../concept/01_foundation/08_error_handling/33_error_handling_control_flow.md)
 
-## 📊 目录
+## 主题速览
 
-- [错误处理控制流（覆盖至 Rust 1.92.0）](#错误处理控制流覆盖至-rust-1920)
-  - [📊 目录](#-目录)
-  - [`?` 运算符与早退](#-运算符与早退)
-  - [`FromResidual` 与跨类型传播](#fromresidual-与跨类型传播)
-  - [`try` 块（稳定）](#try-块稳定)
-  - [边界设计建议](#边界设计建议)
-
-本篇聚焦 `Result`/`Option` 与 `?` 运算符、`FromResidual` 残差机制、`try` 块、错误转换与边界设计。
-
-## `?` 运算符与早退
-
-```rust
-fn read_number(s: &str) -> Result<i32, String> {
-    let num: i32 = s.trim().parse().map_err(|_| "parse".to_string())?;
-    Ok(num)
-}
-```
-
-要点：`?` 等价于 `match` 早退；自动从错误类型转换到函数返回错误类型。
-
-## `FromResidual` 与跨类型传播
-
-`?` 依赖 `Try`/`FromResidual` 将如 `Option::None`、`Result::Err` 转化为调用者返回类型的残差。
-
-```rust
-fn opt_chain(x: Option<i32>) -> Option<i32> {
-    let y = Some(1)?; // None 则直接返回 None
-    Some(x? + y)
-}
-```
-
-## `try` 块（稳定）
-
-将一段内部使用 `?` 的表达式整体化，便于在表达式位置编写错误传播逻辑。
-
-```rust
-fn sum3(a: Result<i32, &'static str>, b: Result<i32, &'static str>) -> Result<i32, &'static str> {
-    let s: Result<i32, _> = try { a? + b? };
-    s
-}
-```
-
-## 边界设计建议
-
-- 对外 API 使用语义明确的错误类型（可结合 `thiserror`）；
-- 小范围 `try` 块提升表达式可读性；
-- 仅在需要时引入 `anyhow`/`eyre` 等动态错误类型。
+- `?` 运算符与早退
+- `FromResidual` 与跨类型传播
+- `try` 块
+- 边界设计建议
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+> 本文档的通用 Rust 概念解释已迁移至 `concept/` 权威页。本 stub 仅保留导航入口。

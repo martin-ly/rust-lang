@@ -1139,3 +1139,46 @@ async fn write_with_timeout(file: &mut File, data: &[u8]) -> std::io::Result<()>
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Tokio Docs](https://tokio.rs/) · [Brown University Interactive TRPL](https://rust-book.cs.brown.edu/ch17-00-async-await.html)
+
+---
+
+## 补充视角：异步设计模式实践
+
+> 本节选编自 `crates/c06_async/docs/tier_02_guides/04_async_design_patterns_practice.md`，
+> 作为 canonical 异步模式概念页的工程实践补充。
+
+### 核心模式对比
+
+| 模式 | 核心思想 | 适用场景 | Rust 实现要点 |
+| :--- | :--- | :--- | :--- |
+| Actor | 私有状态 + 消息邮箱 | 状态机、服务边界 | `tokio::sync::mpsc` + 任务 |
+| Reactor | 事件循环 + 处理器分发 | 高并发 I/O、网络服务 | `tokio::net` + `select!` |
+| CSP | 顺序进程通过通道通信 | 数据流、流水线 | `tokio::sync::mpsc`/`broadcast` |
+
+### 结构化并发
+
+使用 `tokio::task::JoinSet` 管理同生命周期任务组，
+确保所有子任务在父任务退出前完成：
+
+```rust,ignore
+use tokio::task::JoinSet;
+
+async fn fetch_all(urls: &[&str]) -> Vec<String> {
+    let mut set = JoinSet::new();
+    for &url in urls {
+        // 实际项目需引入 reqwest 等 HTTP crate
+        set.spawn(async move { reqwest::get(url).await.unwrap().text().await.unwrap() });
+    }
+    let mut results = Vec::new();
+    while let Some(res) = set.join_next().await {
+        results.push(res.unwrap());
+    }
+    results
+}
+```
+
+### 生命周期管理要点
+
+- **优雅关闭**：使用 `tokio::sync::mpsc` 发送关闭信号，等待 `JoinSet` 清空。
+- **任务取消**：`select!` 与 `tokio::time::timeout` 结合，注意取消安全（cancellation safety）。
+- **背压**：通过有界通道限制在途任务数，防止内存无限增长。

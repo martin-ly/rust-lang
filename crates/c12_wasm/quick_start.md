@@ -14,11 +14,13 @@
 chmod +x scripts/setup.sh
 ./scripts/setup.sh
 ```
+
 **Windows:**
 
 ```cmd
 scripts\setup.bat
 ```
+
 脚本会自动：
 
 - ✅ 检查 Rust 安装
@@ -36,6 +38,7 @@ cargo build --lib
 # 构建 WASM 模块（用于浏览器）
 wasm-pack build --target web
 ```
+
 ### 3. 运行演示
 
 ```bash
@@ -45,6 +48,7 @@ python -m http.server 8080
 # 访问演示页面
 # 打开浏览器: http://localhost:8080/demo/
 ```
+
 就这么简单！🎉
 
 ---
@@ -63,11 +67,13 @@ pub fn hello(name: &str) -> String {
     format!("Hello, {}!", name)
 }
 ```
+
 ### 第 2 步：构建
 
 ```bash
 wasm-pack build --target web
 ```
+
 ### 第 3 步：在 JavaScript 中使用
 
 ```javascript
@@ -81,6 +87,7 @@ async function run() {
 
 run()
 ```
+
 ### 第 4 步：在 HTML 中使用
 
 ```html
@@ -116,6 +123,7 @@ run()
   </body>
 </html>
 ```
+
 完成！🎊
 
 ---
@@ -137,6 +145,7 @@ cargo clippy
 # 构建
 cargo build --lib
 ```
+
 ### 测试
 
 ```bash
@@ -152,6 +161,7 @@ cargo test -- --nocapture
 # WASI 测试
 cargo test --target wasm32-wasip1
 ```
+
 ### WASM 构建
 
 ```bash
@@ -164,6 +174,7 @@ wasm-pack build --target nodejs
 # 打包器目标（Webpack 等）
 wasm-pack build --target bundler
 ```
+
 ### 性能测试
 
 ```bash
@@ -173,6 +184,7 @@ cargo bench
 # 运行特定基准测试
 cargo bench array_processing
 ```
+
 ---
 
 ## 📂 项目结构速览
@@ -213,6 +225,7 @@ c12_wasm/
     ├── setup.bat
     └── build-all.sh
 ```
+
 ---
 
 ## 🎓 学习路径
@@ -256,6 +269,7 @@ lto = true           # 链接时优化
 codegen-units = 1    # 更好的优化
 strip = true         # 去除调试符号
 ```
+
 ### 技巧 2: 调试 WASM
 
 ```rust
@@ -266,6 +280,7 @@ pub fn debug_function() {
     console::log_1(&"Debug message".into());
 }
 ```
+
 ### 技巧 3: 错误处理
 
 ```rust
@@ -278,6 +293,7 @@ pub fn safe_function(x: i32) -> Result<i32, JsValue> {
     }
 }
 ```
+
 ### 技巧 4: 性能优化
 
 ```rust
@@ -293,6 +309,7 @@ pub fn process_bad(data: Vec<i32>) -> Vec<i32> {
     data.clone().into_iter().filter(|&x| x > 0).collect()
 }
 ```
+
 ---
 
 ## 🐛 常见问题
@@ -319,6 +336,7 @@ ls -lh pkg/*.wasm
 wasm-pack build --target web
 du -h pkg/c12_wasm_bg.wasm
 ```
+
 ### Q: 性能不如预期？
 
 **A**:

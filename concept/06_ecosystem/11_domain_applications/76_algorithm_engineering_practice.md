@@ -31,6 +31,7 @@
 
 ## 目录
 
+- [算法工程实践 (Algorithm Engineering Practice)](#算法工程实践-algorithm-engineering-practice)
 - [算法工程实践](#算法工程实践)
   - [目录](#目录)
   - [📐 知识结构](#-知识结构)
@@ -82,7 +83,7 @@
     - [教材](#教材)
     - [性能优化](#性能优化)
     - [生产实践](#生产实践)
-  - [**下一步**: 参见 `05_cutting_edge_algorithms.md`](#下一步-参见-05_前沿算法技术md)
+  - [**下一步**: 参见 `05_cutting_edge_algorithms.md`](#下一步-参见-05_cutting_edge_algorithmsmd)
 
 ---
 
@@ -155,6 +156,7 @@
     ├── 配置管理
     └── 灰度发布
 ```
+
 ### 多维概念对比矩阵
 
 | 工程实践           | 重要性 | 复杂度 | 适用场景   | Rust 1.92.0 |
@@ -179,6 +181,7 @@
 └── 生产阶段
     └── 生产环境实践 → 配置管理 / 灰度发布
 ```
+
 ---
 
 ## 1. 大规模系统设计
@@ -312,6 +315,7 @@ pub fn external_sort_example() -> std::io::Result<()> {
     Ok(())
 }
 ```
+
 #### Bloom Filter（大数据去重）
 
 ```rust
@@ -395,6 +399,7 @@ pub fn url_deduplication_example() {
     }
 }
 ```
+
 ### 1.2 缓存策略
 
 #### LRU Cache (多线程安全版本)
@@ -543,6 +548,7 @@ impl<K: Clone + Eq + std::hash::Hash, V: Clone> LRUCacheInner<K, V> {
     }
 }
 ```
+
 #### 缓存预热与更新策略
 
 ```rust
@@ -605,6 +611,7 @@ impl<K: Clone + Eq + std::hash::Hash + Send + Sync + 'static, V: Clone + Send + 
     }
 }
 ```
+
 ### 1.3 负载均衡
 
 #### 一致性哈希负载均衡
@@ -718,6 +725,7 @@ impl WeightedRoundRobinBalancer {
     }
 }
 ```
+
 ---
 
 ## 2. 性能调优实战
@@ -787,6 +795,7 @@ pub unsafe fn simd_dot_product(a: &[f32], b: &[f32]) -> f32 {
     total
 }
 ```
+
 #### 缓存友好的数据布局
 
 ```rust
@@ -828,6 +837,7 @@ pub fn update_particles_soa(particles: &mut ParticlesSOA, dt: f32) {
     }
 }
 ```
+
 ### 2.2 内存优化
 
 #### 对象池
@@ -913,6 +923,7 @@ pub fn object_pool_example() {
     let vec2 = pool.acquire(); // 复用对象
 }
 ```
+
 #### 内存映射文件 (mmap)
 
 ```rust
@@ -969,6 +980,7 @@ pub fn mmap_large_file_example() -> std::io::Result<()> {
     Ok(())
 }
 ```
+
 ### 2.3 I/O 优化
 
 #### 异步批量写入
@@ -1028,6 +1040,7 @@ pub async fn batch_write_example() {
     }
 }
 ```
+
 ---
 
 ## 3. 算法可靠性
@@ -1145,6 +1158,7 @@ impl CircuitBreaker {
     }
 }
 ```
+
 ### 3.2 降级策略
 
 ```rust
@@ -1227,6 +1241,7 @@ fn get_static_recommendations() -> Vec<String> {
     vec!["default1".to_string(), "default2".to_string()]
 }
 ```
+
 ### 3.3 监控与告警
 
 ```rust
@@ -1320,6 +1335,7 @@ pub struct MetricsStats {
     pub p99_latency: Duration,
 }
 ```
+
 ---
 
 ## 4. 代码质量
@@ -1390,6 +1406,7 @@ pub fn strategy_pattern_example() {
     sorter.sort(&mut data);
 }
 ```
+
 ### 4.2 单元测试
 
 #### 参数化测试
@@ -1425,6 +1442,7 @@ mod tests {
     test_sort!(test_heap_sort, HeapSort);
 }
 ```
+
 ### 4.3 性能基准测试
 
 #### Criterion 基准测试
@@ -1459,6 +1477,7 @@ fn benchmark_sorts(c: &mut Criterion) {
 criterion_group!(benches, benchmark_sorts);
 criterion_main!(benches);
 ```
+
 ---
 
 ## 5. 生产环境最佳实践
@@ -1507,6 +1526,7 @@ impl AlgorithmConfig {
     }
 }
 ```
+
 ### 5.2 灰度发布
 
 ```rust
@@ -1561,6 +1581,7 @@ fn compute_recommendations_v2(_user_id: u64) -> Vec<String> {
     vec!["new1".to_string(), "new2".to_string()]
 }
 ```
+
 ### 5.3 故障恢复
 
 ```rust
@@ -1632,6 +1653,7 @@ impl<T: Clone + Serialize + for<'de> Deserialize<'de>> SnapshotManager<T> {
     }
 }
 ```
+
 ---
 
 ## 6. 实战案例
@@ -1737,6 +1759,7 @@ impl CollaborativeFilteringEngine {
     }
 }
 ```
+
 ### 6.2 实时排行榜
 
 ```rust
@@ -1790,6 +1813,7 @@ impl Leaderboard {
     }
 }
 ```
+
 ### 6.3 分布式限流
 
 ```rust
@@ -1854,6 +1878,7 @@ pub async fn rate_limited_api(limiter: &TokenBucket, request: String) -> Result<
     }
 }
 ```
+
 ---
 
 ## 7. 参考资料

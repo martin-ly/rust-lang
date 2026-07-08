@@ -1,112 +1,24 @@
-# C07-02. 进程间通信机制（IPC Mechanisms）
+> **EN**: Inter-Process Communication (IPC) Mechanisms in Rust (c07_process example index)
+> **Summary**: A stub page pointing to the canonical concept authority for Rust IPC mechanisms. The c07_process crate provides runnable pipe, socket, shared-memory, signal, and message-queue examples.
 
-> **文档定位**: Tier 3 技术参考
-> **最后更新**: 2025-12-25
-> **Rust版本**: 1.96.1+ (Edition 2024)
-> **相关文档**: [主索引](00_master_index.md) | [FAQ](tier_01_foundations/04_faq.md) | [Glossary](tier_01_foundations/03_glossary.md)
+# C07-02. 进程间通信机制（IPC Mechanisms）（c07_process 示例索引）
 
-本章系统梳理 Rust 在进程间通信（IPC）方面的理论基础与工程实现，涵盖管道、命名管道、套接字、共享内存、信号、消息队列等主流机制。
+> **权威来源**: 管道、命名管道、套接字、共享内存、信号、消息队列等 IPC 机制的完整解释见
+> [`concept/03_advanced/02_process_ipc/05_ipc_mechanisms.md`](../../../concept/03_advanced/02_process_ipc/05_ipc_mechanisms.md)。
 
-## 📋 目录
+本文件原为 `c07_process` crate 的通用 IPC 概念教程。根据 AGENTS.md §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/03_advanced/02_process_ipc/`，此处仅保留索引与
+canonical 链接。
 
-- [C07-02. 进程间通信机制（IPC Mechanisms）](#c07-02-进程间通信机制ipc-mechanisms)
-  - [📋 目录](#-目录)
-  - [1. 管道与命名管道](#1-管道与命名管道)
-  - [2. 套接字通信](#2-套接字通信)
-  - [3. 共享内存](#3-共享内存)
-  - [4. 信号机制](#4-信号机制)
-  - [5. 消息队列](#5-消息队列)
-  - [6. 机制对比与选型建议](#6-机制对比与选型建议)
-  - [7. 小结](#7-小结)
+## 本 crate 相关示例
 
-## 1. 管道与命名管道
+- `crates/c07_process/examples/`：`std::process` 管道、Unix 域套接字、信号处理等可运行示例。
+- `crates/c07_process/src/bin/`：IPC 机制演示程序。
 
-- **管道（Pipe）**：单向通信通道，由读取端和写入端组成，数据以字节流形式传递。
-- **Rust 实现**：通过 `std::process::Command` 的 I/O 重定向实现父子进程间管道。
+## 快速导航
 
-```rust
-use std::process::{Command, Stdio};
-let mut child = Command::new("wc")
-    .stdin(Stdio::piped())
-    .spawn()?;
-```
-- **命名管道（FIFO）**：具名、可在无亲缘关系进程间通信，需依赖平台 API（如 Unix 的 `mkfifo`）。
-
-## 2. 套接字通信
-
-- **套接字（Socket）**：支持本地或网络进程间的全双工通信。
-- **Rust 实现**：`std::net::{TcpListener, TcpStream, UdpSocket}` 提供跨平台 TCP/UDP 通信。
-
-```rust
-use std::net::{TcpListener, TcpStream};
-let listener = TcpListener::bind("127.0.0.1:8080")?;
-for stream in listener.incoming() {
-    let mut stream = stream?;
-    // 处理 stream
-}
-```
-- **Unix 域套接字**：`std::os::unix::net::UnixStream` 支持本地进程间高效通信。
-
-## 3. 共享内存
-
-- **共享内存**：多个进程映射同一物理内存区域，实现高速数据交换。
-- **Rust 实现**：需依赖第三方 crate（如 `memmap2`、`shmem`），或 FFI 调用平台 API。
-
-```rust
-// 伪代码示例
-let mmap = memmap2::MmapOptions::new().map(&file)?;
-```
-- **同步问题**：共享内存需配合锁、信号量等同步原语，防止数据竞争。
-
-## 4. 信号机制
-
-- **信号（Signal）**：操作系统用于通知进程异步事件的机制。
-- **Rust 实现**：`signal-hook`、`nix::sys::signal` 等 crate 提供信号注册与处理。
-
-```rust
-use signal_hook::iterator::Signals;
-let mut signals = Signals::new(&[signal_hook::consts::SIGTERM])?;
-for sig in signals.forever() {
-    // 处理信号
-}
-```
-## 5. 消息队列
-
-- **消息队列**：内核或用户空间的 FIFO 队列，实现进程间异步消息传递。
-- **Rust 实现**：`crossbeam-channel`、`ipc-channel` 等 crate 提供高层抽象。
-
-```rust
-use crossbeam_channel::unbounded;
-let (tx, rx) = unbounded();
-tx.send("hello")?;
-let msg = rx.recv()?;
-```
-- **平台 API**：可通过 FFI 调用 POSIX 消息队列（`mq_open` 等）。
-
-## 6. 机制对比与选型建议
-
-| 机制     | 适用场景          | 跨平台 | 性能 | 复杂度 |
-| :--- | :--- | :--- | :--- | :--- || 管道     | 父子进程简单通信  | 是     | 中   | 低     |
-| 命名管道 | 无亲缘进程通信    | 否     | 中   | 中     |
-| 套接字   | 网络/本地通用     | 是     | 中高 | 中     |
-| 共享内存 | 大数据量高速交换  | 否     | 高   | 高     |
-| 信号     | 异步事件通知      | 否     | 低   | 低     |
-| 消息队列 | 异步/多生产多消费 | 否     | 中   | 中     |
-
-- **选型建议**：优先选用标准库和成熟 crate，跨平台优先考虑管道和套接字；高性能场景可用共享内存但需注意同步。
-
-## 7. 小结
-
-Rust 提供了丰富的 IPC 机制抽象，结合类型系统和所有权模型，既保证了安全性，又兼顾了性能和可移植性。
-实际工程中应根据通信模式、性能需求和平台兼容性合理选型
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| IPC 机制 | [`concept/03_advanced/02_process_ipc/05_ipc_mechanisms.md`](../../../concept/03_advanced/02_process_ipc/05_ipc_mechanisms.md) |
+| 进程模型与生命周期 | [`concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`](../../../concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md) |
+| 高级进程管理 | [`concept/03_advanced/02_process_ipc/02_advanced_process_management.md`](../../../concept/03_advanced/02_process_ipc/02_advanced_process_management.md) |

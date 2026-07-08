@@ -41,7 +41,7 @@
     - [Q: Rust 1.92.0 性能提升如何？](#q-rust-1920-性能提升如何)
     - [Q: 如何迁移到 Rust 1.92.0？](#q-如何迁移到-rust-1920)
   - [📚 相关资源](#-相关资源)
-  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
+  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1961--edition-2024-wasm-20--wasi-02)
 
 ---
 
@@ -99,6 +99,7 @@ cargo build --target wasm32-unknown-unknown --release
 # 3. 使用 wasm-pack（推荐）
 wasm-pack build --target web
 ```
+
 **推荐**: 使用 `wasm-pack` 工具，自动处理编译和绑定生成。
 
 ### Q: 编译时出现 "cannot find crate" 错误？
@@ -116,6 +117,7 @@ wasm-pack build --target web
 # 某些 crate 需要显式启用 wasm 特性
 some-crate = { version = "1.0", features = ["wasm"] }
 ```
+
 ### Q: 如何减小 WASM 二进制大小？
 
 **A**: 优化方法：
@@ -127,12 +129,14 @@ lto = true        # 链接时优化
 codegen-units = 1 # 单一代码生成单元
 strip = true      # 去除调试符号
 ```
+
 **额外工具**:
 
 ```bash
 # 使用 wasm-opt 进一步优化
 wasm-opt -Oz -o output.wasm input.wasm
 ```
+
 ---
 
 ## 🔗 JavaScript 集成问题
@@ -154,6 +158,7 @@ async function App() {
   return <div>{result}</div>
 }
 ```
+
 **注意事项**:
 
 - 必须在组件挂载后初始化
@@ -184,6 +189,7 @@ impl Person {
     }
 }
 ```
+
 ### Q: WASM 和 JavaScript 之间的性能如何？
 
 **A**: 性能对比：
@@ -214,6 +220,7 @@ impl Person {
 // 预加载示例
 <link rel="preload" href="module.wasm" as="fetch" crossorigin>
 ```
+
 ### Q: 运行时性能如何优化？
 
 **A**: 优化策略：
@@ -229,6 +236,7 @@ let mut buffer = Vec::with_capacity(1024);
 // ... 使用 buffer
 buffer.clear(); // 重用而不是重新分配
 ```
+
 ---
 
 ## 🛠️ 工具链问题
@@ -247,6 +255,7 @@ cargo install wasm-pack
 # 方法 3: 使用包管理器（macOS）
 brew install wasm-pack
 ```
+
 ### Q: wasm-bindgen 版本不匹配？
 
 **A**: 解决方法：
@@ -259,12 +268,14 @@ wasm-bindgen = "0.2"
 # 或者使用最新版本
 wasm-bindgen = "0.2"
 ```
+
 **检查版本**:
 
 ```bash
 wasm-pack --version
 cargo tree | grep wasm-bindgen
 ```
+
 ---
 
 ## ❓ 其他问题
@@ -295,6 +306,7 @@ wasm-pack build --debug
 # 运行测试
 wasm-pack test --headless --firefox
 ```
+
 ### Q: WASM 的安全性如何？
 
 **A**: 安全特性：
@@ -320,24 +332,28 @@ wasm-pack test --headless --firefox
    use c12_wasm::rust_192_features::WasmBuffer;
    let mut buffer = WasmBuffer::new(1000);
    ```
+
 2. **NonZero::div_ceil** - 安全的向上取整计算
 
    ```rust
    use c12_wasm::rust_192_features::calculate_buffer_chunks;
    let chunks = calculate_buffer_chunks(5000, NonZeroUsize::new(1024).unwrap());
    ```
+
 3. **迭代器方法特化** - 性能提升 15-25%
 
    ```rust
    use c12_wasm::rust_192_features::wasm_optimized_array_eq;
    let are_equal = wasm_optimized_array_eq(&vec1, &vec2);
    ```
+
 4. **rotate_right** - 性能提升 30-35%
 
    ```rust
    use c12_wasm::rust_192_features::wasm_rotate_data;
    wasm_rotate_data(&mut data, 3);
    ```
+
 **详细文档**: [Rust 1.92.0 WASM 改进文档](../rust_192_wasm_improvements.md)
 
 ---
@@ -368,6 +384,7 @@ wasm-pack test --headless --firefox
    rustup update stable
    rustc --version  # 应该显示 1.96.1+
    ```
+
 2. **更新配置文件**
 
    ```toml
@@ -376,6 +393,7 @@ wasm-pack test --headless --firefox
    rust-version = "1.92"
    edition = "2024"
    ```
+
 3. **利用新特性**
    - 使用 MaybeUninit 优化内存管理
    - 使用 NonZero::div_ceil 优化计算

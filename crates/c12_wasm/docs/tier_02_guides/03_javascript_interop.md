@@ -42,7 +42,7 @@
   - [🔗 Rust 1.92.0 FFI 互操作 ⭐ NEW](#-rust-1920-ffi-互操作--new)
     - [使用联合体原始引用进行安全的 FFI 互操作](#使用联合体原始引用进行安全的-ffi-互操作)
   - [📚 相关资源](#-相关资源)
-  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
+  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1961--edition-2024-wasm-20--wasi-02)
 
 ---
 
@@ -124,6 +124,7 @@ JavaScript 互操作
     ├── Fetch API
     └── Canvas API
 ```
+
 ---
 
 ## 🔗 基础集成
@@ -142,12 +143,14 @@ async function loadWasm() {
 
 loadWasm()
 ```
+
 ```javascript
 // 方式 2: 使用动态导入
 const wasmModule = await import("./pkg/hello_wasm")
 await wasmModule.default()
 const result = wasmModule.greet("World")
 ```
+
 ---
 
 ## ⚛️ React 集成
@@ -178,6 +181,7 @@ function App() {
   )
 }
 ```
+
 ### 自定义 Hook
 
 ```jsx
@@ -195,6 +199,7 @@ function useWasm() {
   return wasm
 }
 ```
+
 ---
 
 ## 🎨 Vue 集成
@@ -224,6 +229,7 @@ export default {
 }
 </script>
 ```
+
 ---
 
 ## 🟢 Node.js 集成
@@ -242,6 +248,7 @@ async function main() {
 
 main()
 ```
+
 ### ES 模块
 
 ```javascript
@@ -251,6 +258,7 @@ await init()
 const result = greet("Node.js")
 console.log(result)
 ```
+
 ---
 
 ## 📦 TypeScript 类型
@@ -266,6 +274,7 @@ export class Counter {
   readonly value: number
 }
 ```
+
 ### 使用类型
 
 ```typescript
@@ -276,6 +285,7 @@ const result: string = greet("TypeScript")
 const counter = new Counter()
 counter.increment()
 ```
+
 ---
 
 ## 🌐 Web API 集成
@@ -301,6 +311,7 @@ pub async fn fetch_url(url: &str) -> Result<JsValue, JsValue> {
     Ok(json)
 }
 ```
+
 ### Canvas API
 
 ```rust
@@ -321,6 +332,7 @@ pub fn draw_circle(canvas: &HtmlCanvasElement, x: f64, y: f64, radius: f64) {
     context.fill();
 }
 ```
+
 ---
 
 ## 🚀 实践示例
@@ -333,10 +345,12 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ```
+
 ```javascript
 import { add } from "./pkg/hello_wasm"
 const result = add(2, 3) // 5
 ```
+
 ### 示例 2: 数组处理
 
 ```rust
@@ -345,10 +359,12 @@ pub fn sum_array(arr: &[i32]) -> i32 {
     arr.iter().sum()
 }
 ```
+
 ```javascript
 import { sum_array } from "./pkg/hello_wasm"
 const result = sum_array(new Int32Array([1, 2, 3, 4, 5])) // 15
 ```
+
 ---
 
 ## 🔗 Rust 1.92.0 FFI 互操作 ⭐ NEW
@@ -376,6 +392,7 @@ let mut_raw_ref = union.get_integer_mut_raw();
 //     process_union(raw_ref);
 // }
 ```
+
 **优势**:
 
 - ✅ 允许在安全代码中使用原始引用

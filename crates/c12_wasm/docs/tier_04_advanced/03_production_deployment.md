@@ -96,6 +96,7 @@
     ├── 输入验证
     └── 资源限制
 ```
+
 ### 多维概念对比矩阵
 
 | 部署方案        | 性能 | 易用性 | 成本 | 适用场景     | Rust 1.92.0 |
@@ -116,6 +117,7 @@
 │       │   ├── 是 → NPM 发布
 │       │   └── 否 → Docker 部署
 ```
+
 ---
 
 ## 🎯 概述
@@ -132,12 +134,14 @@
 # 上传到 CDN
 aws s3 cp pkg/hello_wasm_bg.wasm s3://cdn.example.com/
 ```
+
 ### 2. NPM 发布
 
 ```bash
 # 发布到 npm
 wasm-pack publish
 ```
+
 ### 3. Docker 部署
 
 ```dockerfile
@@ -148,6 +152,7 @@ WORKDIR /app/www
 RUN npm install
 CMD ["npm", "start"]
 ```
+
 ---
 
 ## 📊 监控和调试
@@ -161,6 +166,7 @@ await init()
 const loadTime = performance.now() - start
 console.log(`WASM loaded in ${loadTime}ms`)
 ```
+
 ### 2. 错误处理
 
 ```rust
@@ -170,6 +176,7 @@ pub fn safe_function() -> Result<String, JsValue> {
     Ok("Success".to_string())
 }
 ```
+
 ---
 
 ## 🔒 安全考虑
@@ -185,12 +192,14 @@ pub fn process_input(input: &str) -> Result<String, String> {
     Ok(input.to_uppercase())
 }
 ```
+
 ### 2. 资源限制
 
 ```rust
 // 限制内存使用
 const MAX_MEMORY: usize = 100 * 1024 * 1024; // 100MB
 ```
+
 ---
 
 ## 📚 相关资源

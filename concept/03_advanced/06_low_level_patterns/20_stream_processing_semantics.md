@@ -49,7 +49,7 @@
     - [4.2 Watermark 的两种失败模式](#42-watermark-的两种失败模式)
   - [五、Trigger：结果物化的时机控制](#五trigger结果物化的时机控制)
     - [5.1 Trigger 类型](#51-trigger-类型)
-    - [5.2 累积模式（Accumulation Mode） (Beam Programming Guide — Accumulation)](#52-累积模式accumulation-mode来源-beam-programming-guide--accumulation)
+    - [5.2 累积模式（Accumulation Mode）\[来源: Beam Programming Guide — Accumulation\]](#52-累积模式accumulation-mode来源-beam-programming-guide--accumulation)
   - [六、容错语义：Exactly-Once 的形式化](#六容错语义exactly-once-的形式化)
     - [6.1 三种处理保证](#61-三种处理保证)
     - [6.2 Chandy-Lamport 分布式快照](#62-chandy-lamport-分布式快照)

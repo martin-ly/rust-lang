@@ -67,6 +67,7 @@ unsafe {
 use c12_wasm::rust_192_features::WasmObjectPool;
 let mut pool: WasmObjectPool<String> = WasmObjectPool::new(10);
 ```
+
 #### ❌ 避免做法
 
 ```rust
@@ -82,6 +83,7 @@ for i in 0..1000 {
     let obj = String::new(); // 频繁分配
 }
 ```
+
 **最佳实践要点**:
 
 - ✅ 使用 `WasmBuffer` 管理未初始化内存
@@ -117,6 +119,7 @@ wasm_rotate_data(&mut data, 3);
 let chunk_size = NonZeroUsize::new(1024).unwrap();
 let chunks = calculate_buffer_chunks(5000, chunk_size);
 ```
+
 #### ❌ 避免做法
 
 ```rust
@@ -133,6 +136,7 @@ fn rotate_right<T>(data: &mut [T], positions: usize) {
     data[positions..].reverse();
 }
 ```
+
 **最佳实践要点**:
 
 - ✅ 使用特化的迭代器比较方法
@@ -169,6 +173,7 @@ impl WasmFFIUnion {
     }
 }
 ```
+
 #### ❌ 避免做法
 
 ```rust
@@ -180,6 +185,7 @@ pub union WasmFFIUnion {
 // 直接访问，不安全
 let value = unsafe { union.integer };
 ```
+
 **最佳实践要点**:
 
 - ✅ 使用原始引用进行 FFI 操作
@@ -221,6 +227,7 @@ impl WasmBuffer {
     pub unsafe fn write(&mut self, data: &[u8]) -> usize { /* ... */ }
 }
 ```
+
 #### ❌ 避免做法
 
 ```rust
@@ -228,6 +235,7 @@ impl WasmBuffer {
 // ❌ 不要暴露内部实现细节
 // ❌ 不要使用全局可变状态
 ```
+
 **最佳实践要点**:
 
 - ✅ 模块化组织代码

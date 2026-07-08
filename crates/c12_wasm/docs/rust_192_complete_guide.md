@@ -99,6 +99,7 @@ let are_equal = wasm_optimized_array_eq(&vec1, &vec2);
 // 4. 使用 rotate_right 旋转
 wasm_rotate_data(&mut data, 3);
 ```
+
 ### 15 分钟完整示例
 
 运行完整示例：
@@ -110,6 +111,7 @@ cargo run --example rust_192_features_demo
 # 运行综合应用
 cargo run --example 12_rust_192_comprehensive_demo
 ```
+
 ---
 
 ## 📖 学习路径

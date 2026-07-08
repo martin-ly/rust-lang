@@ -64,6 +64,7 @@ unsafe {
 // 读取数据
 let data = unsafe { buffer.read(4) };
 ```
+
 **性能**: +5% 内存管理性能
 
 ---
@@ -82,6 +83,7 @@ use c12_wasm::rust_192_features::calculate_buffer_chunks;
 let chunk_size = NonZeroUsize::new(1024).unwrap();
 let chunks = calculate_buffer_chunks(5000, chunk_size);
 ```
+
 **性能**: +10% 计算性能
 
 ---
@@ -102,6 +104,7 @@ union.set_integer(12345);
 let raw_ref = union.get_integer_raw();
 let mut_raw_ref = union.get_integer_mut_raw();
 ```
+
 **安全性**: ⭐⭐⭐⭐⭐
 
 ---
@@ -119,6 +122,7 @@ let vec1 = vec![1, 2, 3, 4, 5];
 let vec2 = vec![1, 2, 3, 4, 5];
 let are_equal = wasm_optimized_array_eq(&vec1, &vec2);
 ```
+
 **性能**: +15-25% 比较性能
 
 ---
@@ -135,6 +139,7 @@ use c12_wasm::rust_192_features::wasm_rotate_data;
 let mut data = vec![1, 2, 3, 4, 5, 6, 7, 8];
 wasm_rotate_data(&mut data, 3);
 ```
+
 **性能**: +30-35% 旋转性能
 
 ---
@@ -151,6 +156,7 @@ use c12_wasm::rust_192_features::WasmDebugInfo;
 let debug_info = WasmDebugInfo::from_caller();
 println!("调用位置: {}", debug_info.format());
 ```
+
 **用途**: 调试和错误追踪
 
 ---
@@ -190,6 +196,7 @@ unsafe {
     buffer.write(b"data");
 }
 ```
+
 ### 高性能数组处理
 
 ```rust
@@ -201,6 +208,7 @@ let vec2 = vec![1, 2, 3, 4, 5];
 // 使用特化的迭代器比较
 let are_equal = wasm_optimized_array_eq(&vec1, &vec2);
 ```
+
 ### 高效数据旋转
 
 ```rust
@@ -209,6 +217,7 @@ use c12_wasm::rust_192_features::wasm_rotate_data;
 let mut data = vec![1, 2, 3, 4, 5, 6, 7, 8];
 wasm_rotate_data(&mut data, 3);
 ```
+
 ---
 
 ## 📚 相关文档

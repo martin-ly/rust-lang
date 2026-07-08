@@ -66,6 +66,7 @@
   /  单元测试   \    70% (快、稳定、廉价)
  /--------------\
 ```
+
 **核心原则**:
 
 | 原则     | 说明                 | 价值         |
@@ -102,6 +103,7 @@ pub fn fibonacci(n: u32) -> u32 {
     }
 }
 ```
+
 **测试文件**:
 
 ```rust
@@ -135,6 +137,7 @@ mod tests {
     }
 }
 ```
+
 **运行测试**:
 
 ```bash
@@ -153,6 +156,7 @@ wasm-pack test --headless --firefox -- --test "test_add"
 # 显示测试输出
 wasm-pack test --headless --firefox -- --nocapture
 ```
+
 **Cargo.toml 配置**:
 
 ```toml
@@ -165,6 +169,7 @@ crate-type = ["cdylib", "rlib"]
 [profile.test]
 opt-level = 0
 ```
+
 **测试覆盖率**:
 
 ```bash
@@ -177,6 +182,7 @@ cargo tarpaulin --target wasm32-wasip1 --out Html --output-dir coverage
 # 查看报告
 open coverage/index.html
 ```
+
 ---
 
 ### C++ + Google Test
@@ -213,6 +219,7 @@ int main(int argc, char **argv) {
     return RUN_ALL_TESTS();
 }
 ```
+
 **编译和运行**:
 
 ```bash
@@ -228,6 +235,7 @@ emcc test.cpp \
 # 运行测试
 node test.js
 ```
+
 **CMake 集成**:
 
 ```cmake
@@ -239,6 +247,7 @@ target_link_libraries(tests gtest gtest_main)
 
 add_test(NAME WasmTests COMMAND tests)
 ```
+
 ---
 
 ### AssemblyScript + as-pect
@@ -272,6 +281,7 @@ describe("String Functions", () => {
   })
 })
 ```
+
 **运行测试**:
 
 ```bash
@@ -284,6 +294,7 @@ npm test -- --filter "fibonacci"
 # 生成覆盖率报告
 npm test -- --coverage
 ```
+
 ---
 
 ## 🔗 集成测试
@@ -350,6 +361,7 @@ describe("Wasm Integration Tests", () => {
   })
 })
 ```
+
 **性能基准测试**:
 
 ```typescript
@@ -373,6 +385,7 @@ describe("Performance Comparison", () => {
   })
 })
 ```
+
 ---
 
 ### 跨运行时测试
@@ -417,6 +430,7 @@ jobs:
       - name: Run tests
         run: ./scripts/test_runtime.sh ${{ matrix.runtime }}
 ```
+
 **统一测试脚本**:
 
 ```bash
@@ -450,6 +464,7 @@ esac
 
 echo "✅ Tests passed in $RUNTIME"
 ```
+
 ---
 
 ## 🌐 端到端测试
@@ -560,6 +575,7 @@ test.describe("WASM Application E2E", () => {
   })
 })
 ```
+
 **配置文件**:
 
 ```typescript
@@ -600,6 +616,7 @@ export default defineConfig({
   },
 })
 ```
+
 ---
 
 ### 跨浏览器测试
@@ -677,6 +694,7 @@ def test_performance(driver):
 
     assert timing < 1000, f"Computation took {timing}ms, expected < 1000ms"
 ```
+
 ---
 
 ## ⚡ 性能测试
@@ -723,6 +741,7 @@ fn bench_array_operations(c: &mut Criterion) {
 criterion_group!(benches, bench_fibonacci, bench_array_operations);
 criterion_main!(benches);
 ```
+
 **运行基准测试**:
 
 ```bash
@@ -738,6 +757,7 @@ cargo bench --target wasm32-wasip1 -- --save-baseline current
 # 对比基线
 cargo bench --target wasm32-wasip1 -- --baseline current
 ```
+
 **Criterion.toml 配置**:
 
 ```toml
@@ -747,6 +767,7 @@ measurement_time = 10
 sample_size = 100
 warm_up_time = 3
 ```
+
 ---
 
 ### 内存性能测试
@@ -801,6 +822,7 @@ test("检测内存泄漏", async () => {
   expect(growthPercent).toBeLessThan(10)
 })
 ```
+
 **WebAssembly 内存监控**:
 
 ```javascript
@@ -829,6 +851,7 @@ test("WASM 线性内存增长测试", async () => {
   console.log(`Memory pages: ${pages}`)
 })
 ```
+
 ---
 
 ## 🔍 模糊测试
@@ -848,6 +871,7 @@ fuzz_target!(|data: &[u8]| {
     let _ = parse_input(data);
 });
 ```
+
 **多目标模糊测试**:
 
 ```rust
@@ -862,6 +886,7 @@ fuzz_target!(|data: &[u8]| {
     }
 });
 ```
+
 **运行模糊测试**:
 
 ```bash
@@ -884,6 +909,7 @@ cargo fuzz run parser -- -jobs=8
 cargo fuzz coverage parser
 llvm-cov show target/*/release/parser
 ```
+
 ---
 
 ### 差异测试
@@ -949,6 +975,7 @@ def test_cross_runtime_consistency():
 if __name__ == '__main__':
     test_cross_runtime_consistency()
 ```
+
 ---
 
 ## 🔄 回归测试
@@ -990,6 +1017,7 @@ test("复杂数据结构快照", () => {
   expect(processComplexData(complexData)).toMatchSnapshot()
 })
 ```
+
 **更新快照**:
 
 ```bash
@@ -999,6 +1027,7 @@ npm test -- -u
 # 更新特定测试的快照
 npm test snapshot.test.ts -- -u
 ```
+
 ---
 
 ### 金标准测试
@@ -1044,6 +1073,7 @@ fn test_json_transformation() {
     }
 }
 ```
+
 **性能回归测试**:
 
 ```bash
@@ -1071,6 +1101,7 @@ else
     echo "✅ No performance regression"
 fi
 ```
+
 ---
 
 ## 📊 属性测试
@@ -1125,6 +1156,7 @@ mod property_tests {
     }
 }
 ```
+
 ---
 
 ## 🎭 测试隔离与 Mock
@@ -1182,6 +1214,7 @@ test("Mock WASM 导入", async () => {
   expect(logBuffer.length).toBeGreaterThan(0)
 })
 ```
+
 **WASI Mock**:
 
 ```rust
@@ -1233,6 +1266,7 @@ fn test_with_mock_filesystem() -> Result<()> {
     Ok(())
 }
 ```
+
 ---
 
 ## 🚀 持续集成测试
@@ -1377,6 +1411,7 @@ jobs:
           flags: unittests
           name: codecov-umbrella
 ```
+
 ---
 
 ## 📁 测试数据管理
@@ -1405,6 +1440,7 @@ tests/
 └── integration/
     └── test_with_fixtures.rs
 ```
+
 **测试数据生成器**:
 
 ```python
@@ -1480,6 +1516,7 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+
 ---
 
 ## 🎯 最佳实践
@@ -1515,6 +1552,7 @@ if __name__ == '__main__':
    ├─ 性能测试
    └─ 回归测试
 ```
+
 ### 测试先行 (TDD)
 
 **Red-Green-Refactor 循环**:
@@ -1549,6 +1587,7 @@ fn fibonacci(n: u32) -> u32 {
     a
 }
 ```
+
 ### 测试命名约定
 
 **清晰的命名**:
@@ -1566,6 +1605,7 @@ fn test_add_zero() { /* ... */ }
 #[test]
 fn test_add_overflow() { /* ... */ }
 ```
+
 **BDD 风格**:
 
 ```rust
@@ -1575,6 +1615,7 @@ fn given_empty_input_when_processing_then_returns_empty() { /* ... */ }
 #[test]
 fn given_valid_json_when_parsing_then_returns_object() { /* ... */ }
 ```
+
 ### 测试隔离
 
 **每个测试应该独立**:
@@ -1594,6 +1635,7 @@ fn test_independent_2() {
     assert_eq!(state.value, 42);
 }
 ```
+
 ---
 
 ## 📚 参考资源

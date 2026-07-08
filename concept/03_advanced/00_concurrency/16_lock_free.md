@@ -68,6 +68,9 @@
     - [测验 2：ABA 问题（理解层）](#测验-2aba-问题理解层)
     - [测验 3：Treiber Stack 实现（应用层）](#测验-3treiber-stack-实现应用层)
     - [测验 4：Hazard Pointer vs Epoch-Based（分析层）](#测验-4hazard-pointer-vs-epoch-based分析层)
+  - [补充视角：无锁数据结构选择指南](#补充视角无锁数据结构选择指南)
+    - [数据结构选择矩阵](#数据结构选择矩阵)
+    - [内存回收策略](#内存回收策略)
 
 ---
 
@@ -1186,3 +1189,28 @@ hp[0].store(null_mut(), Ordering::SeqCst);
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [crossbeam docs](https://docs.rs/crossbeam/) · [1024cores - Lock-Free Algorithms](https://www.1024cores.net/)
+
+---
+
+## 补充视角：无锁数据结构选择指南
+
+> 本节选编自 `crates/c05_threads/docs/04_lock_free_programming.md`，
+> 作为 canonical 无锁编程概念页的工程实践补充。
+
+### 数据结构选择矩阵
+
+| 数据结构 | 访问模式 | 生产者/消费者 | 典型应用 | 注意点 |
+| :--- | :--- | :--- | :--- | :--- |
+| SPSC 队列 | FIFO | 单生产者/单消费者 | 线程间事件投递 | 无竞争时性能最高 |
+| MPSC 队列 | FIFO | 多生产者/单消费者 | 日志收集、任务分发 | 注意 ABA 问题 |
+| 无锁栈 | LIFO | 多生产者/多消费者 | 内存池、撤销栈 | 简单但竞争大 |
+| 环形缓冲区 | 固定大小 | 单生产者/单消费者 | 实时音频、网络缓冲 | 容量需预分配 |
+| 无锁哈希表 | 键值随机访问 | 多读者/多写者 | 缓存、会话表 | 实现复杂，通常依赖外部 crate |
+| 无锁 BST | 有序访问 | 多读者/多写者 | 索引、范围查询 | 内存回收最复杂 |
+
+### 内存回收策略
+
+- **引用计数**：简单，但更新原子引用计数有开销。
+- **Epoch-Based Reclamation (EBR)**：`crossbeam::epoch` 提供，适合多数场景。
+- **Hazard Pointers**：延迟更低，但实现更复杂。
+- **QSBR**：适合线程数固定且有明确静止点的系统。

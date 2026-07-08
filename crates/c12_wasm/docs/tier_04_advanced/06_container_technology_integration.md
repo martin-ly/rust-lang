@@ -143,6 +143,7 @@
 └── 安全与隔离
     └── Pod Security Standards
 ```
+
 ### 多维概念对比矩阵
 
 | 容器技术         | 性能 | 复杂度 | 适用场景   | Rust 1.92.0 |
@@ -165,6 +166,7 @@
 │   ├── 运行时选择 → RuntimeClass
 │   └── 容器接口 → CRI 插件
 ```
+
 ---
 
 ## 🎯 概述
@@ -201,6 +203,7 @@ docker version
 #   ✅ Use containerd for pulling and storing images
 #   ✅ Enable Wasm
 ```
+
 **或通过命令行配置** (`~/.docker/daemon.json`):
 
 ```json
@@ -215,6 +218,7 @@ docker version
   }
 }
 ```
+
 #### 2. 构建 Wasm 容器镜像
 
 **项目结构**:
@@ -226,6 +230,7 @@ wasm-app/
 │   └── main.rs
 └── Dockerfile
 ```
+
 **Dockerfile**:
 
 ```dockerfile
@@ -253,6 +258,7 @@ LABEL "module.wasm.image/variant" = "compat-smart"
 # 入口点
 ENTRYPOINT [ "/app.wasm" ]
 ```
+
 **构建和运行**:
 
 ```bash
@@ -268,6 +274,7 @@ docker run --rm \
 # 查看容器信息
 docker inspect my-wasm-app | grep -A 5 "Runtime"
 ```
+
 ### Docker CLI 与 WasmEdge
 
 #### 运行选项详解
@@ -304,6 +311,7 @@ docker run --runtime=io.containerd.wasmedge.v1 \
   --cpus=0.5 \
   my-app:latest
 ```
+
 ### 多架构镜像构建
 
 **使用 Docker Buildx 构建多平台镜像**:
@@ -322,6 +330,7 @@ docker buildx build \
 # 查看镜像清单
 docker buildx imagetools inspect my-registry/my-app:latest
 ```
+
 **Dockerfile 多平台优化**:
 
 ```dockerfile
@@ -352,6 +361,7 @@ FROM scratch
 COPY --from=builder /app/target/*/release/app* /app
 ENTRYPOINT ["/app"]
 ```
+
 ---
 
 ## ☸️ Kubernetes 深度集成
@@ -378,6 +388,7 @@ sudo tar -C /usr/local/bin -xzf containerd-shim-wasmedge-v1-linux-x86_64.tar.gz
 # 验证安装
 containerd-shim-wasmedge-v1 --version
 ```
+
 #### 2. 配置 containerd
 
 **编辑 `/etc/containerd/config.toml`**:
@@ -401,12 +412,14 @@ version = 2
         [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.wasmedge.options]
           BinaryName = "/usr/local/bin/containerd-shim-wasmedge-v1"
 ```
+
 **重启 containerd**:
 
 ```bash
 sudo systemctl restart containerd
 sudo systemctl status containerd
 ```
+
 #### 3. 创建 RuntimeClass
 
 **runtimeclass.yaml**:
@@ -435,6 +448,7 @@ scheduling:
       value: "ai-inference"
       effect: "NoSchedule"
 ```
+
 **应用配置**:
 
 ```bash
@@ -443,6 +457,7 @@ kubectl apply -f runtimeclass.yaml
 # 验证
 kubectl get runtimeclass
 ```
+
 ### CRI 插件集成
 
 **containerd 与 kubelet 的集成架构**:
@@ -473,6 +488,7 @@ kubectl get runtimeclass
 │ Linux Process │  │ WasmEdge Runtime │
 └───────────────┘  └──────────────────┘
 ```
+
 ### Workload 部署策略
 
 #### Deployment 示例
@@ -568,6 +584,7 @@ spec:
           value: "wasm"
           effect: "NoSchedule"
 ```
+
 #### Service 配置
 
 **wasm-service.yaml**:
@@ -608,6 +625,7 @@ spec:
   ports:
     - port: 8080
 ```
+
 #### HorizontalPodAutoscaler (HPA)
 
 **wasm-hpa.yaml**:
@@ -671,6 +689,7 @@ spec:
           periodSeconds: 15
       selectPolicy: Max
 ```
+
 #### Ingress 配置
 
 **wasm-ingress.yaml**:
@@ -709,6 +728,7 @@ spec:
         - wasm-app.example.com
       secretName: wasm-app-tls
 ```
+
 ---
 
 ## 🔧 containerd 集成
@@ -733,6 +753,7 @@ WasmEdge Runtime
     ↓ (run)
 WebAssembly Module
 ```
+
 ### runwasi 项目
 
 **runwasi** 是一个通用的 WASM 运行时容器化框架，支持多种 WASM 运行时。
@@ -760,6 +781,7 @@ sudo install -D -m 755 target/release/containerd-shim-wasmedge-v1 \
 # 验证
 containerd-shim-wasmedge-v1 --version
 ```
+
 **自定义 shim 配置**:
 
 ```rust
@@ -778,6 +800,7 @@ fn main() {
     ShimCli::run("containerd-shim-wasmedge-v1", options);
 }
 ```
+
 ---
 
 ## 📝 容器编排最佳实践
@@ -809,6 +832,7 @@ spec:
     limits.memory: 4Gi
     pods: "200" # 允许大量 Pod
 ```
+
 ### 2. 节点亲和性与污点
 
 **标记支持 Wasm 的节点**:
@@ -823,6 +847,7 @@ kubectl label nodes node-1 node-2 node-3 \
 kubectl taint nodes node-1 node-2 node-3 \
   workload=wasm:NoSchedule
 ```
+
 **Pod 配置示例**:
 
 ```yaml
@@ -858,6 +883,7 @@ spec:
       value: "wasm"
       effect: "NoSchedule"
 ```
+
 ### 3. 配置管理
 
 **ConfigMap 示例**:
@@ -887,6 +913,7 @@ data:
       }
     }
 ```
+
 ### 4. 秘密管理
 
 **Secret 示例**:
@@ -911,6 +938,7 @@ spec:
         - secretRef:
             name: wasm-app-secrets
 ```
+
 ---
 
 ## 🚀 生产环境部署
@@ -926,6 +954,7 @@ kubectl get nodes -o wide
 # 安装 containerd-shim-wasmedge
 # (在每个节点上执行，可以使用 DaemonSet 自动化)
 ```
+
 **2. 部署 DaemonSet 安装 shim**:
 
 ```yaml
@@ -974,6 +1003,7 @@ spec:
             path: /usr/local/bin
             type: Directory
 ```
+
 **3. 应用完整配置**:
 
 ```bash
@@ -993,6 +1023,7 @@ kubectl apply -f wasm-ingress.yaml -n wasm-prod
 kubectl get all -n wasm-prod
 kubectl get runtimeclass
 ```
+
 ### 滚动更新策略
 
 **wasm-deployment.yaml** (更新策略部分):
@@ -1011,6 +1042,7 @@ spec:
   # 修订历史限制
   revisionHistoryLimit: 5
 ```
+
 **执行滚动更新**:
 
 ```bash
@@ -1025,6 +1057,7 @@ kubectl rollout status deployment/wasm-http-server -n wasm-prod
 # 如果出现问题，回滚
 kubectl rollout undo deployment/wasm-http-server -n wasm-prod
 ```
+
 ---
 
 ## 📊 监控与可观测性
@@ -1050,6 +1083,7 @@ spec:
       interval: 15s
       path: /metrics
 ```
+
 **在 Wasm 应用中暴露 Prometheus 指标** (Rust 示例):
 
 ```rust
@@ -1089,6 +1123,7 @@ pub fn metrics_handler() -> String {
     String::from_utf8(buffer).unwrap()
 }
 ```
+
 ### Grafana 仪表板
 
 **示例指标查询**:
@@ -1114,6 +1149,7 @@ histogram_quantile(0.99,
   rate(http_request_duration_seconds_bucket{app="wasm-server"}[5m])
 )
 ```
+
 ### 日志聚合
 
 **Fluent Bit 配置** (采集 Wasm 容器日志):
@@ -1158,6 +1194,7 @@ data:
         Index               wasm-logs
         Type                _doc
 ```
+
 ---
 
 ## 🔒 安全与隔离
@@ -1175,6 +1212,7 @@ metadata:
     pod-security.kubernetes.io/audit: restricted
     pod-security.kubernetes.io/warn: restricted
 ```
+
 ### 2. NetworkPolicy
 
 ```yaml
@@ -1224,6 +1262,7 @@ spec:
         - protocol: TCP
           port: 443
 ```
+
 ### 3. SecurityContext
 
 ```yaml
@@ -1247,6 +1286,7 @@ spec:
           drop:
             - ALL
 ```
+
 ---
 
 ## ⚡ 性能调优
@@ -1285,6 +1325,7 @@ resources:
     memory: "512Mi"
     cpu: "2000m"
 ```
+
 ### 2. 亲和性调优
 
 ```yaml
@@ -1304,6 +1345,7 @@ spec:
         matchLabels:
           app: wasm-server
 ```
+
 ### 3. HPA 调优
 
 ```yaml
@@ -1327,6 +1369,7 @@ spec:
     scaleDown:
       stabilizationWindowSeconds: 120 # 保守缩容
 ```
+
 ---
 
 ## 🎯 实战案例
@@ -1340,6 +1383,7 @@ Internet → Ingress → Wasm API Gateway → Backend Services
                           ↓
                     (AI 推理、鉴权、限流)
 ```
+
 **完整部署**:
 
 ```yaml
@@ -1411,6 +1455,7 @@ spec:
           type: Utilization
           averageUtilization: 70
 ```
+
 ### 案例 2: 边缘 AI 推理服务
 
 **场景**: 在边缘节点运行 AI 模型推理
@@ -1464,6 +1509,7 @@ spec:
             path: /opt/ai-models
             type: Directory
 ```
+
 ### 案例 3: Serverless 函数平台
 
 **使用 Knative + WasmEdge 构建 Serverless**:
@@ -1504,6 +1550,7 @@ spec:
     - percent: 100
       latestRevision: true
 ```
+
 ---
 
 ## 📚 总结

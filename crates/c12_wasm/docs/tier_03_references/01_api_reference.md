@@ -85,6 +85,7 @@ WASM API 参考
 └── JavaScript 互操作
     └── 函数导出
 ```
+
 ---
 
 ## 🎯 概述
@@ -107,6 +108,7 @@ pub fn greet(name: &str) -> String {
     format!("Hello, {}!", name)
 }
 ```
+
 ### #[wasm_bindgen(start)]
 
 **用途**: 标记 WASM 模块初始化时执行的函数。
@@ -119,6 +121,7 @@ pub fn main() {
     console_log!("WASM module initialized");
 }
 ```
+
 ---
 
 ## 📦 类型系统
@@ -156,6 +159,7 @@ pub fn log_message(msg: &str) {
     log(msg);
 }
 ```
+
 ### Fetch API
 
 ```rust
@@ -175,6 +179,7 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
     JsFuture::from(resp.json()?).await
 }
 ```
+
 ---
 
 ## 📚 相关资源

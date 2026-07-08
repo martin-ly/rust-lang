@@ -54,6 +54,7 @@ cargo build --example 09_wasi_02_component_example --target wasm32-wasip2 --rele
 # 运行
 wasmtime target/wasm32-wasip2/release/examples/09_wasi_02_component_example.wasm
 ```
+
 ### 2. AI 推理
 
 ```bash
@@ -67,6 +68,7 @@ cargo build --example 10_ai_inference_wasinn --target wasm32-wasip1 --release
 # 运行
 wasmedge target/wasm32-wasip1/release/examples/10_ai_inference_wasinn.wasm
 ```
+
 ### 3. 加密操作
 
 ```bash
@@ -80,6 +82,7 @@ cargo build --example 11_crypto_operations --target wasm32-wasip1 --release
 # 运行
 wasmedge target/wasm32-wasip1/release/examples/11_crypto_operations.wasm
 ```
+
 ---
 
 ## 📚 学习路径
@@ -107,6 +110,7 @@ wasmedge target/wasm32-wasip1/release/examples/11_crypto_operations.wasm
   ├─ 实践 AOT 编译
   └─ 应用零拷贝技术
 ```
+
 ### 专家路径（1周）
 
 ```text
@@ -116,6 +120,7 @@ wasmedge target/wasm32-wasip1/release/examples/11_crypto_operations.wasm
   ├─ Day 5-6: 性能优化实践
   └─ Day 7: 综合项目应用
 ```
+
 ---
 
 ## 🌟 核心亮点
@@ -132,6 +137,7 @@ wasmedge target/wasm32-wasip1/release/examples/11_crypto_operations.wasm
 ✅ 密码学应用
 ✅ 性能极致优化
 ```
+
 ### 内容完整度
 
 ```text
@@ -140,6 +146,7 @@ wasmedge target/wasm32-wasip1/release/examples/11_crypto_operations.wasm
 ├─ 配置: 7 个即用配置
 └─ 质量: 98/100 ⭐⭐⭐⭐⭐
 ```
+
 ### 性能提升
 
 ```text
@@ -150,6 +157,7 @@ wasmedge target/wasm32-wasip1/release/examples/11_crypto_operations.wasm
 ├─ 二进制大小: 40% 减小（优化）
 └─ 内存占用: 2x 节省（预分配）
 ```
+
 ---
 
 ## 📖 文档导航
@@ -198,6 +206,7 @@ ls examples/
 # 10_ai_inference_wasinn.rs       ⭐ 新增
 # 11_crypto_operations.rs          ⭐ 新增
 ```
+
 ---
 
 ## 🔧 性能优化速查
@@ -211,6 +220,7 @@ lto = true            # LTO
 codegen-units = 1     # 单元优化
 strip = true          # 去除符号
 ```
+
 ### 后处理优化
 
 ```bash
@@ -219,6 +229,7 @@ wasm-opt -Oz input.wasm -o output.wasm
 
 # 可减小 40%+ 大小
 ```
+
 ### AOT 编译
 
 ```bash
@@ -227,6 +238,7 @@ wasmedgec --optimize 3 input.wasm output.so
 
 # 性能提升 3.5x，启动仅 1ms
 ```
+
 ---
 
 ## 🎓 推荐学习顺序
@@ -240,6 +252,7 @@ wasmedgec --optimize 3 input.wasm output.so
 4. 10_WasmEdge_插件系统
 5. 11_性能优化深度指南
 ```
+
 ### 对于有经验开发者
 
 ```text
@@ -250,6 +263,7 @@ wasmedgec --optimize 3 input.wasm output.so
 4. 运行所有新示例
 5. 应用到实际项目
 ```
+
 ---
 
 ## 📊 项目状态
@@ -263,6 +277,7 @@ wasmedgec --optimize 3 input.wasm output.so
 ────────────────────────────────────────
 综合评分     ████████████████████  98/100
 ```
+
 **状态**: ✅ **生产就绪 (Production-Ready)**
 
 ---

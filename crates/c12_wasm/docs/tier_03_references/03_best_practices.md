@@ -94,6 +94,7 @@ WASM 最佳实践
 └── 项目管理
     └── 项目结构
 ```
+
 ---
 
 ## 🎯 概述
@@ -119,6 +120,7 @@ pub fn add_bad(a: String, b: String) -> String {
     format!("{}", a.parse::<i32>().unwrap() + b.parse::<i32>().unwrap())
 }
 ```
+
 ### 2. 减少内存分配
 
 ```rust
@@ -133,6 +135,7 @@ pub fn process(data: &[u8]) -> Vec<u8> {
     data.to_vec()
 }
 ```
+
 ### 3. 错误处理
 
 ```rust
@@ -146,6 +149,7 @@ pub fn divide(a: f64, b: f64) -> Result<f64, String> {
     }
 }
 ```
+
 ---
 
 ## ⚡ 性能优化
@@ -158,17 +162,20 @@ opt-level = "z"      # 优化大小
 lto = true           # 链接时优化
 codegen-units = 1    # 单一代码生成单元
 ```
+
 ### 2. 使用 wasm-opt
 
 ```bash
 wasm-opt -Oz -o output.wasm input.wasm
 ```
+
 ### 3. 减少依赖
 
 ```toml
 [dependencies]
 some-crate = { version = "1.0", default-features = false }
 ```
+
 ---
 
 ## 🔐 安全实践
@@ -185,6 +192,7 @@ pub fn process_input(input: &str) -> Result<String, String> {
     Ok(input.to_uppercase())
 }
 ```
+
 ### 2. 避免内存泄漏
 
 ```rust
@@ -194,6 +202,7 @@ pub fn process_input(input: &str) -> Result<String, String> {
     // 使用 data
 } // data 在这里自动释放
 ```
+
 ---
 
 ## 📦 项目管理
@@ -209,12 +218,14 @@ project/
 ├── www/          # Web 前端
 └── tests/        # 测试
 ```
+
 ### 2. 版本管理
 
 ```toml
 [package]
 version = "0.1.0"
 ```
+
 ### 3. 测试
 
 ```rust
@@ -228,6 +239,7 @@ mod tests {
     }
 }
 ```
+
 ---
 
 ## 📚 相关资源

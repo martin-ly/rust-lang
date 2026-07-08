@@ -51,6 +51,10 @@
     - [测验 2：Stream trait（理解层）](#测验-2stream-trait理解层)
     - [测验 3：spawn\_blocking 的使用场景（应用层）](#测验-3spawn_blocking-的使用场景应用层)
     - [测验 4：async 递归（分析层）](#测验-4async-递归分析层)
+  - [补充视角：异步性能优化实践](#补充视角异步性能优化实践)
+    - [优化维度速查](#优化维度速查)
+    - [关键指标](#关键指标)
+    - [测量工具](#测量工具)
 
 ### 8.8 Waker 契约与活性
 
@@ -1668,3 +1672,35 @@ async fn traverse_dir(path: &Path) -> Vec<String> {
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Async Book](https://rust-lang.github.io/async-book/index.html) · [Brown University Interactive TRPL](https://rust-book.cs.brown.edu/ch17-00-async-await.html)
+
+---
+
+## 补充视角：异步性能优化实践
+
+> 本节选编自 `crates/c06_async/docs/tier_02_guides/05_async_performance_optimization_guide.md`，
+> 作为 canonical 异步高级主题概念页的工程实践补充。
+
+### 优化维度速查
+
+| 维度 | 技术 | 效果 | 注意点 |
+| :--- | :--- | :--- | :--- |
+| 并发 | `join!` 替代顺序 `.await` | 降低总延迟 | 确保任务间无依赖 |
+| 并发 | 合理使用 `spawn` | 利用多核 | `spawn` 有 `Send + 'static` 约束 |
+| 内存 | 避免不必要的 `Box::pin` | 减少分配 | 优先栈上 Future |
+| 内存 | 使用 `bytes::Bytes` | 减少拷贝 | 适合网络 I/O |
+| 内存 | 对象池 | 降低分配频率 | 注意生命周期管理 |
+| CPU | `spawn_blocking` | 避免阻塞运行时 | 仅用于真正的 CPU/阻塞操作 |
+| I/O | 调整缓冲区大小 | 平衡延迟与吞吐 | 通常 4KB-64KB |
+| I/O | 批量操作 | 减少系统调用 | 注意超时与尾延迟 |
+
+### 关键指标
+
+- **吞吐量 (Throughput)**：每秒处理请求数，优先通过并发与批量提升。
+- **P99 延迟**：关注长尾，通常由锁竞争、同步阻塞或过大缓冲区导致。
+- **内存占用**：异步任务句柄与通道缓冲是主要来源。
+
+### 测量工具
+
+- `tokio-console`：实时任务、资源与运行时诊断。
+- `criterion` + `tokio::test`：异步基准测试。
+- 火焰图：`perf` 或 `cargo-flamegraph` 定位热点。

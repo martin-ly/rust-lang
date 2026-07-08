@@ -214,6 +214,7 @@ cat src/wasi_examples.rs
 cargo build --target wasm32-wasip1 --release
 wasmedge target/wasm32-wasip1/release/wasi-app.wasm input.txt
 ```
+
 ---
 
 ## 🎯 快速链接
@@ -310,6 +311,7 @@ curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 rustc --version
 wasm-pack --version
 ```
+
 ### 第一个 WASM 项目
 
 ```bash
@@ -325,6 +327,7 @@ cd www
 npm install
 npm start
 ```
+
 ### 阅读建议路径
 
 ```text
@@ -348,6 +351,7 @@ npm start
 ├─ 性能优化与基准测试
 └─ 贡献代码和文档
 ```
+
 ---
 
 ## 🛠️ 实践练习

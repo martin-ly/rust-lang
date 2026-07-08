@@ -43,7 +43,7 @@
     - [分析工具](#分析工具)
     - [性能分析](#性能分析)
   - [📚 相关资源](#-相关资源)
-  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
+  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1961--edition-2024-wasm-20--wasi-02)
 
 ---
 
@@ -107,6 +107,7 @@ WASM 性能优化指南
 └── 工具推荐
     └── 分析工具
 ```
+
 ---
 
 ## 🎯 概述
@@ -132,6 +133,7 @@ lto = true           # 链接时优化
 codegen-units = 1    # 单一代码生成单元
 strip = true         # 去除调试符号
 ```
+
 ### 使用 wasm-opt
 
 ```bash
@@ -147,6 +149,7 @@ wasm-opt -O3 -o output.wasm input.wasm
 # 同时优化大小和性能
 wasm-opt -O3 --strip-debug -o output.wasm input.wasm
 ```
+
 ### 减少依赖
 
 ```toml
@@ -154,6 +157,7 @@ wasm-opt -O3 --strip-debug -o output.wasm input.wasm
 [dependencies]
 some-crate = { version = "1.0", default-features = false, features = ["needed"] }
 ```
+
 ---
 
 ## ⚡ 运行时性能优化
@@ -170,6 +174,7 @@ let vec1 = vec![1, 2, 3, 4, 5];
 let vec2 = vec![1, 2, 3, 4, 5];
 let are_equal = wasm_optimized_array_eq(&vec1, &vec2);
 ```
+
 **性能提升**:
 
 - 迭代器比较: +15-25% 性能提升
@@ -198,6 +203,7 @@ pub fn process_good(data: &[i32]) -> Vec<i32> {
     result
 }
 ```
+
 ### 重用缓冲区
 
 ```rust
@@ -216,6 +222,7 @@ pub fn process_with_reuse(data: &[u8]) -> Vec<u8> {
     })
 }
 ```
+
 ### 避免不必要的复制
 
 ```rust
@@ -229,6 +236,7 @@ pub fn good_example(s: &str) -> &str {
     s
 }
 ```
+
 ---
 
 ## 🧠 内存优化
@@ -240,6 +248,7 @@ pub fn good_example(s: &str) -> &str {
 const SMALL_SIZE: usize = 100;
 let mut buffer: [u8; SMALL_SIZE] = [0; SMALL_SIZE];
 ```
+
 ### 避免内存泄漏
 
 ```rust
@@ -249,6 +258,7 @@ let mut buffer: [u8; SMALL_SIZE] = [0; SMALL_SIZE];
     // 使用 data
 } // data 在这里自动释放
 ```
+
 ### 使用对象池
 
 ```rust
@@ -272,6 +282,7 @@ impl<T> ObjectPool<T> {
     }
 }
 ```
+
 ### Rust 1.92.0 内存优化特性 ⭐ NEW
 
 Rust 1.92.0 提供了更好的内存管理工具，特别适用于 WASM 场景：
@@ -289,6 +300,7 @@ unsafe {
 let mut pool: WasmObjectPool<String> = WasmObjectPool::new(10);
 // ... 使用对象池
 ```
+
 **性能提升**:
 
 - MaybeUninit 优化: +5% 内存管理性能
@@ -309,6 +321,7 @@ gzip -9 module.wasm
 # 使用 brotli 压缩（更好的压缩率）
 brotli -9 module.wasm
 ```
+
 ### 延迟加载
 
 ```javascript
@@ -323,12 +336,14 @@ async function loadWasmWhenNeeded() {
 const wasm = await loadWasmWhenNeeded()
 wasm.greet("World")
 ```
+
 ### 预加载
 
 ```html
 <!-- 预加载 WASM 模块 -->
 <link rel="preload" href="module.wasm" as="fetch" crossorigin />
 ```
+
 ---
 
 ## 🔧 工具推荐
@@ -349,6 +364,7 @@ cargo bloat --release --target wasm32-unknown-unknown
 # 使用 wasm-opt 分析
 wasm-opt --print-function-sizes module.wasm
 ```
+
 ---
 
 ## 📚 相关资源

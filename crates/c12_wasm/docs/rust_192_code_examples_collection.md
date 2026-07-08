@@ -70,6 +70,7 @@ unsafe {
 let data = unsafe { buffer.read(11) };
 println!("读取的数据: {:?}", data);
 ```
+
 #### 对象池用法
 
 ```rust
@@ -89,6 +90,7 @@ unsafe {
     pool.release("test".to_string());
 }
 ```
+
 ---
 
 ### 2. NonZero::div_ceil 计算示例
@@ -105,6 +107,7 @@ let total_size = 5000;
 let chunks = calculate_buffer_chunks(total_size, chunk_size);
 println!("需要 {} 个块", chunks);
 ```
+
 #### WASM 页面分配
 
 ```rust
@@ -121,6 +124,7 @@ let allocator = WasmAllocatorConfig::new(
 let pages = allocator.calculate_pages(1000000); // 1MB
 println!("需要 {} 个页面", pages);
 ```
+
 #### 数据包计算
 
 ```rust
@@ -136,6 +140,7 @@ let transfer = WasmTransferConfig::new(
 let packets = transfer.calculate_packets(5000);
 println!("需要 {} 个数据包", packets);
 ```
+
 ---
 
 ### 3. 联合体原始引用示例
@@ -158,6 +163,7 @@ let mut_ref = union.get_integer_mut_raw();
 println!("只读引用: {:p}", const_ref);
 println!("可变引用: {:p}", mut_ref);
 ```
+
 #### FFI 互操作
 
 ```rust
@@ -175,6 +181,7 @@ union.set_integer(42);
 //     process_union(union.get_integer_raw());
 // }
 ```
+
 ---
 
 ### 4. 迭代器特化示例
@@ -196,6 +203,7 @@ let eq_1_3 = wasm_optimized_array_eq(&vec1, &vec3);
 println!("vec1 == vec2: {}", eq_1_2); // true
 println!("vec1 == vec3: {}", eq_1_3); // false
 ```
+
 #### 向量比较
 
 ```rust
@@ -208,6 +216,7 @@ let vec2: Vec<i32> = (1..=1000).collect();
 let are_equal = wasm_optimized_vec_eq(&vec1, &vec2);
 println!("向量相等: {}", are_equal);
 ```
+
 ---
 
 ### 5. rotate_right 示例
@@ -226,6 +235,7 @@ wasm_rotate_data(&mut data, 3);
 println!("旋转后: {:?}", data);
 // 输出: [6, 7, 8, 1, 2, 3, 4, 5]
 ```
+
 #### 循环缓冲区
 
 ```rust
@@ -238,6 +248,7 @@ let mut buffer: WasmCircularBuffer<i32> = WasmCircularBuffer::new(10);
 buffer.rotate(3);
 println!("缓冲区内容: {:?}", buffer.buffer());
 ```
+
 ---
 
 ### 6. Location 调试示例
@@ -254,6 +265,7 @@ println!("文件: {}", debug_info.file);
 println!("行号: {}", debug_info.line);
 println!("列号: {}", debug_info.column);
 ```
+
 #### 错误追踪
 
 ```rust
@@ -270,6 +282,7 @@ fn process_data(data: &[u8]) -> Result<(), String> {
     Ok(())
 }
 ```
+
 ---
 
 ## 🔧 综合应用示例
@@ -304,6 +317,7 @@ unsafe {
 let mut pool: WasmObjectPool<Vec<u8>> = WasmObjectPool::new(10);
 // ... 使用对象池
 ```
+
 ---
 
 ### 示例 2: 优化的数据处理管道
@@ -335,6 +349,7 @@ if validate_data(&data1, &data2) {
     println!("处理后的数据: {:?}", processed);
 }
 ```
+
 ---
 
 ### 示例 3: 安全的 FFI 互操作
@@ -359,6 +374,7 @@ let raw_ptr = union.get_integer_raw();
 //     external_function(raw_ptr)
 // };
 ```
+
 ---
 
 ## 📚 相关文档

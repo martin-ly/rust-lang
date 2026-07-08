@@ -22,6 +22,7 @@ src/
 ├── serialization.rs # 序列化
 └── utils.rs        # 通用工具
 ```
+
 ## 主要类型和 Trait
 
 ### 错误处理
@@ -60,6 +61,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 ```
+
 ### 序列化
 
 ```rust
@@ -87,6 +89,7 @@ fn main() -> common::Result<()> {
     Ok(())
 }
 ```
+
 ## 特性标志
 
 | 特性 | 描述 | 依赖 |
@@ -104,12 +107,14 @@ fn main() -> common::Result<()> {
 [dependencies]
 common = { path = "../common", features = ["serde", "async"] }
 ```
+
 ## 运行方式
 
 ```bash
 # 运行测试
 cargo test -p common
 ```
+
 ## 设计原则
 
 1. **最小依赖**: 仅包含真正通用的功能

@@ -48,7 +48,7 @@
     - [内部文档](#内部文档)
     - [外部资源](#外部资源)
   - [📞 获取帮助](#-获取帮助)
-  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
+  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1961--edition-2024-wasm-20--wasi-02)
 
 ---
 
@@ -139,6 +139,7 @@
 ⭐ 质量评分: 97/100
 📅 最后更新: 2025-12-11
 ```
+
 **四层文档架构**:
 
 ```text
@@ -156,6 +157,7 @@
 │  WASI深入 + 性能优化 + 生产部署       │
 └─────────────────────────────────────┘
 ```
+
 ---
 
 ## 🏗️ 文档体系
@@ -281,6 +283,7 @@ curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 rustc --version  # 应该显示 1.90+
 wasm-pack --version
 ```
+
 ### 第一个 WASM 项目
 
 ```bash
@@ -296,6 +299,7 @@ cd www
 npm install
 npm start
 ```
+
 ### 运行示例
 
 ```bash
@@ -311,6 +315,7 @@ cargo test
 # 构建 WASM
 wasm-pack build --target web
 ```
+
 ---
 
 ## 🎓 学习路径

@@ -31,6 +31,7 @@
 
 ## 📖 目录
 
+- [高性能网络服务架构 (High-Performance Network Service Architecture)](#高性能网络服务架构-high-performance-network-service-architecture)
 - [高性能网络服务架构](#高性能网络服务架构)
   - [📖 目录](#-目录)
   - [📐 知识结构](#-知识结构)
@@ -144,6 +145,7 @@
     ├── 多队列NIC
     └── RSS/RPS/RFS
 ```
+
 ---
 
 ## 1. 零拷贝技术深度
@@ -179,6 +181,7 @@ fn traditional_file_send(mut socket: TcpStream, file_path: &str) -> std::io::Res
 //   3. CPU: 用户空间 -> 内核Socket缓冲区
 //   4. DMA: 内核Socket缓冲区 -> 网卡
 ```
+
 **性能瓶颈**:
 
 ```text
@@ -212,6 +215,7 @@ fn traditional_file_send(mut socket: TcpStream, file_path: &str) -> std::io::Res
 - 上下文切换: 4次 × ~1μs = ~4μs延迟
 - 对于1GB文件: ~131,072次循环 = 524ms!
 ```
+
 ---
 
 ### 1.2 零拷贝原理与实现
@@ -273,6 +277,7 @@ fn zero_copy_file_send(socket: &TcpStream, file: &File) -> std::io::Result<()> {
 // - 上下文切换: 2次 (从4次减少)
 // - 1GB文件传输: 从524ms → ~150ms (提升3.5倍)
 ```
+
 ---
 
 ### 1.3 Rust零拷贝实践
@@ -370,6 +375,7 @@ fn zero_copy_transfer(socket: &std::net::TcpStream, file: &std::fs::File) -> io:
     Ok(())
 }
 ```
+
 **性能对比测试**:
 
 ```rust
@@ -420,6 +426,7 @@ async fn create_test_file(path: &str, size: usize) -> io::Result<()> {
     Ok(())
 }
 ```
+
 ---
 
 ## 2. io_uring异步I/O
@@ -474,6 +481,7 @@ io_uring 模型 (Linux 5.1+):
 ✅ 支持所有 I/O 类型 (文件/网络/...)
 ✅ 减少上下文切换
 ```
+
 **io_uring 核心概念**:
 
 ```rust
@@ -517,6 +525,7 @@ fn io_uring_basics() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 ---
 
 ### 2.2 Tokio-uring集成
@@ -582,6 +591,7 @@ async fn handle_client_io_uring(stream: TcpStream) {
     println!("📤 连接关闭");
 }
 ```
+
 ---
 
 ### 2.3 高性能HTTP服务器
@@ -685,6 +695,7 @@ fn main() {
     });
 }
 ```
+
 **性能测试结果**:
 
 ```bash
@@ -705,6 +716,7 @@ Transfer/sec:     79.85MB
 Requests/sec:  156,234.12  # 仅 15万+ QPS
 提升: 2.49倍!
 ```
+
 ---
 
 ## 3. 无锁网络架构
@@ -851,6 +863,7 @@ impl From<std::io::Error> for PoolError {
     }
 }
 ```
+
 **性能基准对比**:
 
 ```rust
@@ -919,6 +932,7 @@ async fn benchmark_lock_vs_lock_free() {
     // 提升:       3.84x
 }
 ```
+
 ---
 
 ### 3.2 Per-Core架构
@@ -999,6 +1013,7 @@ async fn main() {
     server.run().await;
 }
 ```
+
 **Per-Core 架构优势**:
 
 ```text
@@ -1039,6 +1054,7 @@ Per-Core 架构:
 ✅ NUMA优化
 ✅ 线性扩展性
 ```
+
 ---
 
 ## 4. NUMA感知优化
@@ -1081,6 +1097,7 @@ Per-Core 架构:
 - Remote Memory Access: ~300ns (3x 慢!)
 - 带宽: Local > Remote (约2倍差异)
 ```
+
 ---
 
 ### 4.2 内存亲和性优化
@@ -1173,6 +1190,7 @@ impl NumaBufferPool {
     }
 }
 ```
+
 **性能测试**:
 
 ```rust
@@ -1207,6 +1225,7 @@ fn bench_numa_aware_vs_default(b: &mut Bencher) {
     // 提升: 1.61x (远程内存访问减少!)
 }
 ```
+
 ---
 
 ### 4.3 网络中断绑定
@@ -1242,6 +1261,7 @@ done
 echo "验证中断绑定:"
 cat /proc/interrupts | grep $NIC
 ```
+
 **Rust代码中设置CPU亲和性**:
 
 ```rust
@@ -1312,6 +1332,7 @@ async fn run_numa_aware_worker(node: usize) {
     }
 }
 ```
+
 ---
 
 ## 5. 多队列网络编程
@@ -1361,6 +1382,7 @@ async fn run_numa_aware_worker(node: usize) {
 ✅ 减少CPU间缓存同步
 ✅ 线性扩展性
 ```
+
 ---
 
 ### 5.2 RSS/RPS/RFS配置
@@ -1404,6 +1426,7 @@ ethtool -S $NIC | grep rx_queue
 # rx_queue_2_packets: 1235123
 # ...
 ```
+
 **RPS (Receive Packet Steering) 软件分发**:
 
 ```bash
@@ -1422,6 +1445,7 @@ for i in /sys/class/net/$NIC/queues/rx-*/rps_flow_cnt; do
     echo 4096 > $i
 done
 ```
+
 **Rust代码中利用多队列**:
 
 ```rust
@@ -1498,6 +1522,7 @@ fn bind_to_cpu(cpu_id: usize) {
     set_for_current(CoreId { id: cpu_id });
 }
 ```
+
 ---
 
 ### 5.3 XPS优化
@@ -1525,6 +1550,7 @@ for i in /sys/class/net/$NIC/queues/tx-*/xps_cpus; do
     echo "$i: $(cat $i)"
 done
 ```
+
 **性能提升**:
 
 ```text
@@ -1546,6 +1572,7 @@ done
 ✅ 延迟降低 60% (P99: 15ms → 6ms)
 ✅ CPU缓存命中率提升 45%
 ```
+
 ---
 
 ## 6. 生产级架构案例
@@ -1673,6 +1700,7 @@ struct ProxyConfig {
     max_connections: usize,
 }
 ```
+
 **性能基准 (对比 Nginx)**:
 
 ```text
@@ -1696,6 +1724,7 @@ Pingora风格架构 (io_uring + 零拷贝 + Per-Core):
 ✅ Per-Core 消除锁竞争
 ✅ NUMA感知优化内存访问
 ```
+
 ---
 
 ## 7. 性能基准测试
@@ -1752,6 +1781,7 @@ cat /proc/interrupts | grep eth0
 echo ""
 echo "✅ 基准测试完成！"
 ```
+
 ---
 
 ## 8. 最佳实践
@@ -1808,6 +1838,7 @@ echo "✅ 基准测试完成！"
                           ▼
                       选定架构 ✅
 ```
+
 ### 8.2 性能优化检查清单
 
 **必做优化** ✅:
@@ -1863,6 +1894,7 @@ sysctl -w net.ipv4.tcp_congestion_control=bbr
 
 echo "✅ 系统调优完成！"
 ```
+
 ---
 
 ## 总结

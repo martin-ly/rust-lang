@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 406,
+    "total_files": 418,
     "generated_at": "The system cannot accept the date entered.\nEnter the new date: (yy-mm-dd)"
   },
   "files": [
@@ -7118,7 +7118,7 @@
       "layer": "L1",
       "title": "Lifetimes（生命周期）",
       "positioning": "",
-      "line_count": 1444,
+      "line_count": 1473,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡",
@@ -9768,7 +9768,7 @@
       "layer": "L1",
       "title": "控制流：表达式导向的流程控制",
       "positioning": "分析 Rust **控制流结构**的设计哲学——从表达式导向（expression-oriented）的 `if`/`match`/`loop`，到 `if let`/`while let` 的模式匹配（Pattern Matching）集成，揭示 Rust 如何将控制流转化为**值生成**而非**副作用执行**。",
-      "line_count": 1576,
+      "line_count": 1607,
       "theorem_chains": [
         {
           "text": "| 控制流：表达式导向的流程控制 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -9999,7 +9999,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
-      "matrix_rows": 28,
+      "matrix_rows": 35,
       "pre_post": {
         "pre": [
           "[Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/04_type_system.md)"
@@ -12545,6 +12545,57 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\08_error_handling\\33_error_handling_control_flow.md",
+      "layer": "L1",
+      "title": "错误处理控制流（Error Handling Control Flow）",
+      "positioning": "",
+      "line_count": 70,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn read_number(s: &str) -> Result<i32, String> {     let num: i32 = s.trim().par..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn opt_chain(x: Option<i32>) -> Option<i32> {     let y = Some(1)?; // None 则直接返..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn sum3(a: Result<i32, &'static str>, b: Result<i32, &'static str>) -> Result<i3..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
+        "../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md",
+        "../04_control_flow/07_control_flow.md",
+        "../07_modules_and_items/12_functions.md",
+        "32_error_handling_basics.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 0,
+      "pre_post": {
+        "pre": [
+          "[Error Handling 基础](32_error_handling_basics.md) · [Control Flow](../04_control_flow/07_control_flow.md) · [Functions](../07_modules_and_items/12_functions.md)"
+        ],
+        "post": [
+          "[Error Handling 深入](../../02_intermediate/03_error_handling/04_error_handling.md) · [Iterator Patterns](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\09_macros_basics\\12_attributes_and_macros.md",
       "layer": "L1",
       "title": "属性与声明宏：编译期元编程基础",
@@ -14005,7 +14056,7 @@
       "layer": "L2",
       "title": "Traits（Trait 系统）",
       "positioning": "",
-      "line_count": 2848,
+      "line_count": 2961,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -14545,6 +14596,30 @@
           "lines": 19,
           "should_fail": false,
           "code_preview": "trait Drawable {     fn draw(&self); }  struct Circle; struct Rectangle;  impl D..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "trait Plugin: Send + Sync {     fn name(&self) -> &str;     fn execute(&self, in..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "struct RawData(String); struct ParsedData(Vec<i32>);  impl From<RawData> for Par..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "trait Backend {     type Row;     type Error;     fn query(&self, sql: &str) -> ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "trait Parser<'a> {     type Output: 'a;     fn parse(&self, input: &'a str) -> O..."
         }
       ],
       "sources": [],
@@ -14569,7 +14644,7 @@
       "transitions": 10,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
-      "matrix_rows": 174,
+      "matrix_rows": 184,
       "pre_post": {
         "pre": [
           "L1 类型系统（Type System） ·",
@@ -15400,7 +15475,7 @@
       "layer": "L2",
       "title": "分发机制 (Dispatch Mechanisms)",
       "positioning": "",
-      "line_count": 1986,
+      "line_count": 1987,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -15674,7 +15749,7 @@
       "layer": "L2",
       "title": "Generics（泛型系统）",
       "positioning": "",
-      "line_count": 3020,
+      "line_count": 3059,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -16268,7 +16343,7 @@
       "transitions": 8,
       "has_cognitive_path": true,
       "mermaid_blocks": 6,
-      "matrix_rows": 166,
+      "matrix_rows": 177,
       "pre_post": {
         "pre": [
           "L1 类型系统（Type System） · [L2 Trait](../00_traits/01_traits.md)",
@@ -16487,7 +16562,7 @@
       "layer": "L2",
       "title": "类型级编程 (Type-Level Programming)",
       "positioning": "",
-      "line_count": 614,
+      "line_count": 615,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -17028,7 +17103,7 @@
       "layer": "L2",
       "title": "内部可变性：编译期规则的运行时逃逸",
       "positioning": "深入分析 Rust **内部可变性**（Interior Mutability）模式",
-      "line_count": 836,
+      "line_count": 872,
       "theorem_chains": [
         {
           "text": "| 内部可变性：编译期规则的运行时逃逸 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17148,7 +17223,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 18,
+      "matrix_rows": 25,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·"
@@ -17286,7 +17361,7 @@
       "layer": "L2",
       "title": "智能指针：堆内存管理与共享语义",
       "positioning": "系统分析 Rust **智能指针（Smart Pointer）**的设计——Box（独占堆分配）、Rc/Arc（引用（Reference）计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权（Ownership）语义和适用场景。",
-      "line_count": 857,
+      "line_count": 897,
       "theorem_chains": [
         {
           "text": "| 智能指针：堆内存管理与共享语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17418,7 +17493,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 14,
+      "matrix_rows": 21,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](03_memory_management.md)"
@@ -21149,7 +21224,7 @@
       "layer": "L3",
       "title": "并发 模式：从消息 传递到锁自由的数据结构",
       "positioning": "深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权（Ownership）系统如何为并发安全（Concurrency Safety）提供编译期保证。",
-      "line_count": 1140,
+      "line_count": 1195,
       "theorem_chains": [
         {
           "text": "| 并发 模式：从消息 传递到锁自由的数据结构 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -21358,7 +21433,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 41,
+      "matrix_rows": 54,
       "pre_post": {
         "pre": [
           "[Concurrency](01_concurrency.md) · [Async](../01_async/02_async.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Closure Types](../../02_intermediate/04_types_and_conversions/07_closure_types.md)"
@@ -21597,7 +21672,7 @@
       "layer": "L3",
       "title": "无锁编程与内存模型",
       "positioning": "深入探讨 Rust 中的**无锁编程**——从原子操作（Atomic Operations）到内存序，分析 lock-free 算法的内存安全（Memory Safety）保证与性能优势。",
-      "line_count": 1189,
+      "line_count": 1215,
       "theorem_chains": [
         {
           "text": "| 无锁编程与内存模型 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -21788,7 +21863,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 34,
+      "matrix_rows": 41,
       "pre_post": {
         "pre": [
           "> [Concurrency](01_concurrency.md) ·",
@@ -21994,7 +22069,7 @@
       "layer": "L3",
       "title": "测验：并发与异步（L3 试点扩展）",
       "positioning": "L3 嵌入式互动测验——验证并发模型（Send/Sync、Mutex/Arc、channel）与异步（Async）编程（Future、Pin、await）核心概念的掌握程度。",
-      "line_count": 741,
+      "line_count": 737,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -22993,7 +23068,7 @@
       "layer": "L3",
       "title": "Async Closures（异步闭包）",
       "positioning": "",
-      "line_count": 568,
+      "line_count": 566,
       "theorem_chains": [
         {
           "text": "| async closures 提供原生异步闭包 ⟹ 简化高阶异步回调 | 掌握旧写法 `\\|x\\| async move {}` | 能用 `async \\|x\\| {}` 编写更简洁的异步回调 | 高 |",
@@ -23184,7 +23259,7 @@
       "layer": "L3",
       "title": "Async/Await 高级主题",
       "positioning": "",
-      "line_count": 1671,
+      "line_count": 1704,
       "theorem_chains": [
         {
           "text": "> **定理链编号**: T-053 Waker 活性 ⟹ T-054 Stream 安全性",
@@ -23516,7 +23591,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 98,
+      "matrix_rows": 107,
       "pre_post": {
         "pre": [
           "[Async/Await 基础](02_async.md)",
@@ -23534,7 +23609,7 @@
       "layer": "L3",
       "title": "异步模式：从 Future 到生产级并发",
       "positioning": "深入分析 Rust **异步编程的高级模式**——从 Future 状态机、Pin 保证到并发执行和取消传播，揭示 Rust async/await 如何在零运行时（Runtime）开销下实现高效并发。",
-      "line_count": 1142,
+      "line_count": 1186,
       "theorem_chains": [
         {
           "text": "| 异步模式：从 Future 到生产级并发 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -23702,6 +23777,14 @@
           "lines": 12,
           "should_fail": false,
           "code_preview": "use tokio::time::timeout;  async fn write_with_timeout(file: &mut File, data: &[..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use tokio::task::JoinSet;  async fn fetch_all(urls: &[&str]) -> Vec<String> {   ..."
         }
       ],
       "sources": [],
@@ -23719,7 +23802,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 33,
+      "matrix_rows": 37,
       "pre_post": {
         "pre": [
           "[Async](02_async.md) · [Pin](06_pin_unpin.md) · [Concurrency](../00_concurrency/01_concurrency.md)"
@@ -23736,7 +23819,7 @@
       "layer": "L3",
       "title": "Future 与 Executor 机制 (Future and Executor Mechanisms)",
       "positioning": "",
-      "line_count": 1001,
+      "line_count": 1002,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -23872,7 +23955,7 @@
       "layer": "L3",
       "title": "Rust 进程模型与生命周期",
       "positioning": "",
-      "line_count": 176,
+      "line_count": 242,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -23888,6 +23971,207 @@
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
       "matrix_rows": 0,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_process_ipc\\02_advanced_process_management.md",
+      "layer": "L3",
+      "title": "Rust 高级进程管理",
+      "positioning": "",
+      "line_count": 162,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 76,
+          "should_fail": false,
+          "code_preview": "use std::process::{Command, Stdio}; use std::sync::{Arc, Mutex}; use std::collec..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../00_concurrency/01_concurrency.md",
+        "../01_async/02_async.md",
+        "01_process_model_and_lifecycle.md",
+        "03_async_process_management.md",
+        "04_cross_platform_process_management.md",
+        "05_ipc_mechanisms.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 6,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_process_ipc\\03_async_process_management.md",
+      "layer": "L3",
+      "title": "Rust 异步进程管理",
+      "positioning": "",
+      "line_count": 165,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use tokio::process::Command;  #[tokio::main] async fn main() -> Result<(), Box<d..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "use tokio::process::Command; use tokio::time::{timeout, Duration};  async fn run..."
+        },
+        {
+          "flags": [],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "use tokio::io::{AsyncWriteExt, AsyncBufReadExt, BufReader}; use tokio::process::..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use tokio::process::Command;  async fn run_many() -> Result<(), Box<dyn std::err..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "async fn cancellable_child() -> Result<(), Box<dyn std::error::Error>> {     let..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../01_async/02_async.md",
+        "../01_async/39_future_and_executor_mechanisms.md",
+        "01_process_model_and_lifecycle.md",
+        "02_advanced_process_management.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 6,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_process_ipc\\04_cross_platform_process_management.md",
+      "layer": "L3",
+      "title": "Rust 跨平台进程管理",
+      "positioning": "",
+      "line_count": 174,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 69,
+          "should_fail": false,
+          "code_preview": "use std::process::{Command, Stdio}; use std::path::PathBuf;  #[derive(Debug, Clo..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use std::process::Command;  #[cfg(unix)] fn configure_unix(cmd: &mut Command) { ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use std::path::PathBuf;  fn config_path() -> PathBuf {     let mut path = PathBu..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../03_proc_macros/28_conditional_compilation.md",
+        "01_process_model_and_lifecycle.md",
+        "02_advanced_process_management.md",
+        "03_async_process_management.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 8,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_process_ipc\\05_ipc_mechanisms.md",
+      "layer": "L3",
+      "title": "Rust 进程间通信机制（IPC）",
+      "positioning": "",
+      "line_count": 163,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use std::process::{Command, Stdio}; use std::io::Write;  fn basic_pipe() -> Resu..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use std::os::unix::net::{UnixListener, UnixStream}; use std::io::{Read, Write}; ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "use std::net::{TcpListener, TcpStream};  fn tcp_server() -> Result<(), Box<dyn s..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// 示意：使用 memmap2 创建共享内存映射 use memmap2::MmapOptions; use std::fs::OpenOptions;  f..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use signal_hook::iterator::Signals;  fn handle_signals() -> Result<(), Box<dyn s..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
+        "../00_concurrency/01_concurrency.md",
+        "../00_concurrency/11_atomics_and_memory_ordering.md",
+        "../06_low_level_patterns/18_network_programming.md",
+        "01_process_model_and_lifecycle.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 8,
       "pre_post": {
         "pre": [],
         "post": []
@@ -27372,7 +27656,7 @@
       "layer": "L3",
       "title": "Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象",
       "positioning": "系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时（Runtime）下的 TCP/UDP 异步（Async） IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从\"怎么写\"到\"为什么这样设计\"的完整认知框架。",
-      "line_count": 974,
+      "line_count": 1075,
       "theorem_chains": [
         {
           "text": "| Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -27478,6 +27762,36 @@
           "lines": 8,
           "should_fail": true,
           "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     let r = &v;     // ❌ 编译错误: 已存在不可变..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use tokio::net::TcpStream; use std::time::Duration;  async fn configure_tcp(stre..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use tokio::net::TcpStream; use tokio::io::{AsyncReadExt, AsyncWriteExt};  async ..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use tokio::net::TcpStream; use tokio::io::{AsyncReadExt, AsyncWriteExt};  async ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use tokio::net::UdpSocket;  async fn udp_broadcast() -> std::io::Result<()> {   ..."
+        },
+        {
+          "flags": [],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "use std::time::{Duration, Instant}; use tokio::time::sleep;  struct TokenBucket ..."
         }
       ],
       "sources": [],
@@ -28455,7 +28769,7 @@
       "layer": "L4",
       "title": "类型推断：Hindley-Milner 算法与 Rust 的工业实现",
       "positioning": "深入分析 **Hindley-Milner (HM) 类型推断（Type Inference）算法**——从 λ 演算到 Rust 的工业实现，探讨 HM 的完备性、Rust 对 HM 的扩展（trait 约束、泛型（Generics）、生命周期（Lifetimes）），以及类型推断与代码可读性的平衡。",
-      "line_count": 720,
+      "line_count": 755,
       "theorem_chains": [
         {
           "text": "| 类型推断：Hindley-Milner 算法与 Rust 的工业实现 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -28545,6 +28859,12 @@
           "lines": 5,
           "should_fail": true,
           "code_preview": "fn main() {     // ❌ 编译错误: 类型不匹配     let x: i32 = \"hello\"; } ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "let v = Vec::<i32>::new(); let s = \"1,2,3\".split(',').collect::<Vec<&str>>(); le..."
         }
       ],
       "sources": [],
@@ -28561,7 +28881,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 10,
+      "matrix_rows": 16,
       "pre_post": {
         "pre": [
           "[Type Theory](02_type_theory.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md)",
@@ -38554,7 +38874,7 @@
       "layer": "L6",
       "title": "Design Patterns（设计模式）",
       "positioning": "",
-      "line_count": 2162,
+      "line_count": 2233,
       "theorem_chains": [
         {
           "text": "| **RAII** | 资源泄漏 | 确定性资源管理 ⟹ `Drop`自动调用 | 所有权（Ownership）+作用域 | 边界：`mem::forget`、引用（Reference）循环泄漏 |",
@@ -38867,6 +39187,12 @@
           "lines": 40,
           "should_fail": false,
           "code_preview": "trait Component {     fn operation(&self) -> String; }  struct ConcreteComponent..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::sync::OnceLock;  fn global_config() -> &'static Config {     static CON..."
         }
       ],
       "sources": [],
@@ -38892,7 +39218,7 @@
       "transitions": 14,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
-      "matrix_rows": 142,
+      "matrix_rows": 157,
       "pre_post": {
         "pre": [
           "[Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]"
@@ -41350,7 +41676,7 @@
       "layer": "L6",
       "title": "网络协议：QUIC/HTTP-3 与 Rust 实现",
       "positioning": "深入分析 QUIC/HTTP-3、TCP 栈和 eBPF 的 Rust 实现，揭示 Rust 的所有权（Ownership）模型如何映射到网络协议的状态机和包处理。",
-      "line_count": 420,
+      "line_count": 458,
       "theorem_chains": [
         {
           "text": "- **定理**: 网络协议：QUIC/HTTP-3 与 Rust 实现 定义 ⟹ 类型安全保证",
@@ -41452,7 +41778,7 @@
       "transitions": 12,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 44,
+      "matrix_rows": 48,
       "pre_post": {
         "pre": [
           "[Async/Await](../../03_advanced/01_async/02_async.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md)",
@@ -41471,7 +41797,7 @@
       "layer": "L6",
       "title": "高性能网络服务架构 (High-Performance Network Service Architecture)",
       "positioning": "",
-      "line_count": 1918,
+      "line_count": 1950,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -41749,6 +42075,90 @@
         ],
         "post": [
           "[Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\04_web_and_networking\\41_http_client_development.md",
+      "layer": "L6",
+      "title": "HTTP 客户端开发",
+      "positioning": "",
+      "line_count": 186,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "#[tokio::main] async fn main() -> Result<(), Box<dyn std::error::Error>> {     l..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use reqwest::Client; use std::time::Duration;  fn create_client() -> Client {   ..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use serde_json::json;  #[tokio::main] async fn main() -> Result<(), Box<dyn std:..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION, CONTENT_TYPE};  fn ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "fn interpret_status(code: u16) -> &'static str {     match code {         200..=..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "use tokio::time::{sleep, Duration};  async fn fetch_with_retry(url: &str, max_re..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "#[tokio::main] async fn main() -> Result<(), Box<dyn std::error::Error>> {     l..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use reqwest::Proxy;  fn client_with_proxy() -> Result<reqwest::Client, reqwest::..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
+        "../../03_advanced/01_async/02_async.md",
+        "../../03_advanced/06_low_level_patterns/18_network_programming.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
+        "../09_networking/02_network_security.md",
+        "18_distributed_systems.md",
+        "27_web_frameworks.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 7,
+      "pre_post": {
+        "pre": [
+          "[Async/Await](../../03_advanced/01_async/02_async.md) · [Rust 网络编程](../../03_advanced/06_low_level_patterns/18_network_programming.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)"
+        ],
+        "post": [
+          "[Web Frameworks](27_web_frameworks.md) · [Distributed Systems](18_distributed_systems.md)"
         ]
       },
       "backward_chains": 0,
@@ -43559,7 +43969,7 @@
       "layer": "L6",
       "title": "Distributed Consensus（分布式共识）",
       "positioning": "",
-      "line_count": 825,
+      "line_count": 863,
       "theorem_chains": [
         {
           "text": "- **定理**: Distributed Consensus（分布式共识） 定义 ⟹ 类型安全保证",
@@ -43664,7 +44074,7 @@
       "transitions": 12,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 46,
+      "matrix_rows": 50,
       "pre_post": {
         "pre": [
           "分布式系统 · [并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · 网络协议 · [类型系统（Type System）](../../01_foundation/02_type_system/04_type_system.md)",
@@ -44444,6 +44854,119 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\09_networking\\02_network_security.md",
+      "layer": "L6",
+      "title": "网络安全",
+      "positioning": "",
+      "line_count": 177,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "use tokio_rustls::{TlsAcceptor, rustls}; use std::sync::Arc; use std::fs;  pub f..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use rcgen::{Certificate, CertificateParams, DistinguishedName};  pub fn generate..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use jsonwebtoken::{encode, decode, Header, Validation, EncodingKey, DecodingKey}..."
+        },
+        {
+          "flags": [],
+          "lines": 25,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashMap; use std::time::{Duration, Instant};  struct RateL..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/01_async/02_async.md",
+        "../../03_advanced/06_low_level_patterns/18_network_programming.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../04_web_and_networking/18_distributed_systems.md",
+        "../04_web_and_networking/41_http_client_development.md",
+        "../07_security_and_cryptography/43_security_cryptography.md",
+        "01_advanced_network_protocols.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 5,
+      "pre_post": {
+        "pre": [
+          "[Async/Await](../../03_advanced/01_async/02_async.md) · [Rust 网络编程](../../03_advanced/06_low_level_patterns/18_network_programming.md) · [Security & Cryptography](../07_security_and_cryptography/43_security_cryptography.md)"
+        ],
+        "post": [
+          "[高级网络协议](01_advanced_network_protocols.md) · [分布式系统](../04_web_and_networking/18_distributed_systems.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\09_networking\\03_custom_protocol_implementation.md",
+      "layer": "L6",
+      "title": "自定义协议实现",
+      "positioning": "",
+      "line_count": 185,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 66,
+          "should_fail": false,
+          "code_preview": "use std::io::{self, Read, Write}; use byteorder::{BigEndian, ReadBytesExt, Write..."
+        },
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "#[derive(Debug, Clone, Copy, PartialEq)] enum ConnectionState {     Handshake,  ..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use bytes::{Bytes, BytesMut, BufMut};  fn encode_frame_zero_copy(frame: &Frame) ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
+        "../../03_advanced/01_async/02_async.md",
+        "../../03_advanced/06_low_level_patterns/18_network_programming.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
+        "../04_web_and_networking/18_distributed_systems.md",
+        "01_advanced_network_protocols.md",
+        "02_network_security.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 9,
+      "pre_post": {
+        "pre": [
+          "[Rust 网络编程](../../03_advanced/06_low_level_patterns/18_network_programming.md) · [Async/Await](../../03_advanced/01_async/02_async.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)"
+        ],
+        "post": [
+          "[高级网络协议](01_advanced_network_protocols.md) · [分布式系统](../04_web_and_networking/18_distributed_systems.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\09_testing_and_quality\\12_testing_strategies.md",
       "layer": "L6",
       "title": "Rust 测试策略：从单元测试到属性验证",
@@ -44829,7 +45352,7 @@
       "layer": "L6",
       "title": "性能优化：Rust 代码的测量与调优",
       "positioning": "> 覆盖 Rust **性能优化**的核心方法论——从基准测试（criterion）、",
-      "line_count": 1101,
+      "line_count": 1136,
       "theorem_chains": [
         {
           "text": "- **定理**: 性能优化：Rust 代码的测量与调优 定义 ⟹ 类型安全保证",
@@ -44974,7 +45497,7 @@
       "transitions": 12,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 20,
+      "matrix_rows": 27,
       "pre_post": {
         "pre": [
           "[Zero Cost Abstractions](../../01_foundation/00_start/06_zero_cost_abstractions.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)",
@@ -46867,7 +47390,7 @@
       "layer": "L6",
       "title": "算法工程实践 (Algorithm Engineering Practice)",
       "positioning": "",
-      "line_count": 1896,
+      "line_count": 1921,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -47024,6 +47547,130 @@
         ],
         "post": [
           "[Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\77_data_structures_in_rust.md",
+      "layer": "L6",
+      "title": "Rust 数据结构实践",
+      "positioning": "",
+      "line_count": 146,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "fn vec_demo() {     let mut v = Vec::new();     v.push(1);     v.push(2);      l..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::collections::VecDeque;  fn deque_demo() {     let mut dq = VecDeque::ne..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::collections::LinkedList;  fn list_demo() {     let mut list = LinkedLis..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::collections::{HashMap, HashSet};  fn hash_demo() {     let mut map = Ha..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashMap;  type Graph = HashMap<usize, Vec<usize>>;  fn add..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../01_foundation/05_collections/08_collections.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
+        "29_algorithms_competitive_programming.md",
+        "76_algorithm_engineering_practice.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 16,
+      "pre_post": {
+        "pre": [
+          "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Collections](../../01_foundation/05_collections/08_collections.md)"
+        ],
+        "post": [
+          "[算法工程实践](76_algorithm_engineering_practice.md) · [算法与竞赛编程](29_algorithms_competitive_programming.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\78_algorithm_complexity_analysis.md",
+      "layer": "L6",
+      "title": "Rust 算法复杂度分析",
+      "positioning": "",
+      "line_count": 181,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 54,
+          "should_fail": false,
+          "code_preview": "// O(1) - 常数时间 fn constant_time(arr: &[i32]) -> Option<i32> {     arr.first().co..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "// O(1) 额外空间 - 原地排序 fn bubble_sort<T: Ord>(arr: &mut [T]) {     let len = arr.le..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// Vec::push 是摊销 O(1)： // 大多数 push 只需写入元素；偶尔触发扩容，代价为 O(n)， // 但均摊到 n 次操作后，每次平均 O..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "use criterion::{black_box, criterion_group, criterion_main, Criterion};  fn fibo..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/02_type_system/04_type_system.md",
+        "../../01_foundation/05_collections/08_collections.md",
+        "../../01_foundation/07_modules_and_items/12_functions.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "29_algorithms_competitive_programming.md",
+        "76_algorithm_engineering_practice.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 11,
+      "pre_post": {
+        "pre": [
+          "[Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Functions](../../01_foundation/07_modules_and_items/12_functions.md) · [Collections](../../01_foundation/05_collections/08_collections.md)"
+        ],
+        "post": [
+          "[算法与竞赛编程](29_algorithms_competitive_programming.md) · [算法工程实践](76_algorithm_engineering_practice.md)"
         ]
       },
       "backward_chains": 0,
@@ -47221,6 +47868,814 @@
         ],
         "post": [
           "[Rust Version Tracking](05_rust_version_tracking.md) · [Rust 1.97 Preview (Beta)](rust_1_97_preview.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\rust_1_91_stabilized.md",
+      "layer": "L7",
+      "title": "Rust 1.91 稳定特性",
+      "positioning": "",
+      "line_count": 1850,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// 每次借用检查都需要完整计算 fn check_borrow() {     // 没有缓存，每次都重新计算 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "use c01_ownership_borrow_scope::rust_191_features::Rust191BorrowChecker;  let mu..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: 更智能的借用冲突检测 impl Rust191BorrowChecker {     // 内部优化：使用更高效的数据结构     ..."
+        },
+        {
+          "flags": [],
+          "lines": 35,
+          "should_fail": false,
+          "code_preview": "use c01_ownership_borrow_scope::{     Rust191BorrowChecker,     BorrowType191,  ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// 只能引用静态变量 static S: i32 = 25; const C: &i32 = &S;  // ✅ 仅支持静态变量 ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// 可以引用非静态常量 const S: i32 = 25; const C: &i32 = &S;  // ✅ Rust 1.91 支持 const D: ..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use c01_ownership_borrow_scope::ConstContextLifetimeInferencer191;  // 创建 const ..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// 配置系统示例 const MAX_CONNECTIONS: usize = 100; const BUFFER_SIZE: usize = 1024; c..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: const 函数中可以更好地处理生命周期 const fn process_lifetimes<'a, 'b>(x: &'a i32..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 每次分配都需要系统调用，性能较低 for i in 0..1000 {     let vec = Vec::with_capacity(16); // ..."
+        },
+        {
+          "flags": [],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "use c01_ownership_borrow_scope::{     OptimizedMemoryManager191,     AllocationT..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: 更快的所有权检查 fn transfer_ownership(data: Vec<i32>) -> Vec<i32> {     /..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use c01_ownership_borrow_scope::OptimizedLifetimeInferencer191;  let mut inferen..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: 更智能的生命周期推断 impl OptimizedLifetimeInferencer191 {     fn infer_life..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// 复杂函数的生命周期推断 fn complex_function<'a, 'b>(x: &'a str, y: &'b str) -> &'a str wh..."
+        },
+        {
+          "flags": [],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "use c01_ownership_borrow_scope::{     Rust191BorrowChecker,     BorrowType191, }..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: 使用 const 上下文创建配置系统 const MAX_SIZE: usize = 1024; const BUFFER_SIZE..."
+        },
+        {
+          "flags": [],
+          "lines": 28,
+          "should_fail": false,
+          "code_preview": "use c01_ownership_borrow_scope::{     OptimizedMemoryManager191,     AllocationT..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// 旧代码（Rust 1.90） let mut checker = ImprovedBorrowChecker::new(); // Rust 1.90  ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// 旧代码（Rust 1.90） static VALUE: i32 = 42; const REF: &i32 = &VALUE; // 只能引用 stat..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// 新代码（Rust 1.91） use c01_ownership_borrow_scope::OptimizedMemoryManager191; let..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// 每次类型推断都需要完整计算 fn infer_type(expr: &str) -> String {     // 没有缓存，每次都重新计算     m..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_191_features::type_checker_optimizations::OptimizedTyp..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: 更智能的类型推断 impl OptimizedTypeInferencer {     fn infer_type_cached(&..."
+        },
+        {
+          "flags": [],
+          "lines": 30,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_191_features::type_checker_optimizations::{     Optimi..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// const 上下文中的类型推断受限 const VALUE: i32 = 42; // 无法在 const 上下文中进行复杂的类型推断 ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_191_features::const_context_enhancements::ConfigSystem..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: const 上下文中的类型系统操作 const fn const_type_inference() -> &'static str ..."
+        },
+        {
+          "flags": [],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "// 配置系统示例（类型系统增强） pub struct ConfigSystem;  impl ConfigSystem {     pub const MA..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "pub struct OptimizedTypeInferencer {     /// 类型推断缓存（Rust 1.91 新增）     inference_..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_191_features::type_checker_optimizations::generic_type..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: const 上下文中的类型信息 const fn get_type_name<T>() -> &'static str {     ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: const 上下文中的类型推断 const fn const_type_inference() -> &'static str { ..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_191_features::type_checker_optimizations::OptimizedTyp..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: 使用 const 上下文中的类型系统 const fn create_typed_config() -> Config {     ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// 旧代码（Rust 1.90） // 类型推断每次都重新计算  // 新代码（Rust 1.91） use c02_type_system::rust_19..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// 新代码（Rust 1.91） const TYPE_INFO: &str = ConfigSystem::get_type_info(); // 在 co..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// const 函数中只能使用简单的表达式 const fn simple_add(a: u32, b: u32) -> u32 {     a + b } ..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use c03_control_fn::const_control_flow;  // const 函数中可以进行复杂的控制流操作 const fn const..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "pub struct Config {     pub max_retries: u32,     pub timeout_ms: u64, }  impl C..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// 使用 const 上下文创建配置系统 pub struct ControlFlowConfig {     pub max_iterations: usi..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::ops::ControlFlow;  // ControlFlow 只能携带简单的类型 fn process(data: &[i32]) ->..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use c03_control_fn::improved_control_flow; use std::ops::ControlFlow;  fn valida..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "fn early_exit_loop(data: &[i32], max: i32) -> ControlFlow<String, Vec<i32>> {   ..."
+        },
+        {
+          "flags": [],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "// 多级验证流程 fn multi_level_validation(data: &[i32]) -> ControlFlow<String, i32> { ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use c03_control_fn::function_performance;  // Rust 1.91 JIT 优化：迭代器链式操作性能提升 10-25..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91 优化：递归函数调用性能提升 fn optimized_recursive_fibonacci(n: u32) -> u32 {    ..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use c03_control_fn::optimized_conditionals;  // Rust 1.91: 可以在 const 上下文中进行更复杂的条..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: 模式匹配性能优化，编译时间减少 fn optimized_pattern_matching(value: Option<i32>) ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "const fn const_match(value: u32) -> u32 {     match value {         0 | 1 => 1, ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use c03_control_fn::optimized_loops;  // Rust 1.91 JIT 优化：迭代器循环性能提升 10-25% fn op..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: const 函数中可以使用循环 const fn const_loop_sum(n: u32) -> u32 {     let m..."
+        },
+        {
+          "flags": [],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "use c03_control_fn::function_call_optimization;  use std::collections::HashMap; ..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: 递归函数调用性能优化 fn optimized_power(base: i32, exp: u32) -> i32 {     ma..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use c03_control_fn::closure_optimization;  // Rust 1.91: 闭包捕获优化，减少内存使用 fn optimi..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: 高阶函数调用性能优化 fn optimized_higher_order_function<T, F>(data: &[T], f:..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use c03_control_fn::const_control_flow;  // 编译时配置系统 pub struct ControlFlowConfig..."
+        },
+        {
+          "flags": [],
+          "lines": 25,
+          "should_fail": false,
+          "code_preview": "use c03_control_fn::improved_control_flow; use std::ops::ControlFlow;  fn proces..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use c03_control_fn::function_performance;  fn process_data(data: &[i32]) -> Vec<..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// 旧代码（Rust 1.90） static VALUE: u32 = 10; const REF: &u32 = &VALUE; // 只能引用 stat..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// 旧代码（Rust 1.90） fn process() -> ControlFlow<(), i32> {     // 错误信息较少 }  // 新代码..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// Rust 1.91: 迭代器和函数调用自动优化 // 无需代码更改即可享受性能提升 let result: Vec<i32> = data.iter() ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/02_type_system/04_type_system.md",
+        "../../01_foundation/04_control_flow/07_control_flow.md",
+        "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "../../06_ecosystem/01_cargo/80_cargo_getting_started.md",
+        "../../06_ecosystem/09_testing_and_quality/16_testing.md",
+        "../README.md",
+        "./rust_1_91_stabilized.md",
+        "05_rust_version_tracking.md",
+        "rust_1_92_stabilized.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 19,
+      "pre_post": {
+        "pre": [
+          "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Control Flow](../../01_foundation/04_control_flow/07_control_flow.md)"
+        ],
+        "post": [
+          "[Rust 1.92 稳定特性](rust_1_92_stabilized.md) · [Rust 版本跟踪](05_rust_version_tracking.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\rust_1_92_stabilized.md",
+      "layer": "L7",
+      "title": "Rust 1.92 稳定特性",
+      "positioning": "",
+      "line_count": 1857,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 使用文档化的 MaybeUninit use std::mem::MaybeUninit;  // 创建未初始化的内存 let ..."
+        },
+        {
+          "flags": [],
+          "lines": 25,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 安全的 MaybeUninit 包装器 pub struct SafeMaybeUninit<T> {     inner: M..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 联合体原始引用 #[repr(C)] pub union Rust192Union {     pub integer: u32..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 改进的自动特征处理 pub trait Rust192Trait {     type Item;      // Rust 1..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 优化的零大小数组处理 pub struct Rust192ZeroSizedArray<T> {     _array: [T;..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 增强的高阶生命周期 pub fn rust_192_higher_ranked_lifetime<F>(f: F) where ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 关联项可以有多个边界 pub trait Rust192MultipleBounds {     // Rust 1.92.0:..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 使用文档化的 MaybeUninit use std::mem::MaybeUninit;  fn safe_uninit_ex..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 安全的联合体访问 #[repr(C)] union Data {     int: u32,     float: f32, }..."
+        },
+        {
+          "flags": [],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 关联类型可以有多个边界 pub trait TypeConverter {     // 多个边界直接在关联类型上指定     ..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 多边界与泛型结合 pub trait GenericProcessor<T> {     type Processed: Clo..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_192_features::{     TypeConverter,     StringConverter..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 增强的 HRTB 一致性规则 pub fn convert_with_lifetime<'a, F>(input: &'a st..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: HRTB 在 Trait 中的应用 pub trait HigherRankedLifetimeProcessor {     ..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_192_features::{     convert_with_lifetime,     process..."
+        },
+        {
+          "flags": [],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 改进的自动特征推断 pub struct AutoTraitExample<T> {     data: T, }  impl<..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 改进的 Sized 边界处理 pub trait SizedBoundExample {     type Output: Si..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_192_features::{     AutoTraitExample,     ImprovedAuto..."
+        },
+        {
+          "flags": [],
+          "lines": 34,
+          "should_fail": false,
+          "code_preview": "use std::mem::MaybeUninit;  // Rust 1.92.0: 文档化的 MaybeUninit 使用 pub struct SafeB..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_192_features::SafeBuffer;  let mut buffer = SafeBuffer..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::num::NonZeroU32;  let n = NonZeroU32::new(10).unwrap(); let divisor = N..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "let mut v = vec![1, 2, 3, 4, 5]; v.rotate_right(2); assert_eq!(v, vec![4, 5, 1, ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use std::panic::Location;  let location = Location::caller(); let file = locatio..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "let vec1 = vec![1, 2, 3, 4, 5]; let vec2 = vec![1, 2, 3, 4, 5];  // Rust 1.92.0:..."
+        },
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "// 之前: 使用 where 子句 pub trait OldConverter {     type Input;     type Output;    ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// 使用 NonZero::div_ceil use std::num::NonZeroU32; let result = NonZeroU32::new(1..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_192_features::{     TypeConverter,     GenericTypeConv..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// 利用迭代器特化提升性能 fn compare_vectors(vec1: &[i32], vec2: &[i32]) -> bool {     vec1..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_192_features::SafeBuffer;  let mut buffer = SafeBuffer..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "pub trait TypeConverter {     // Rust 1.92.0: 关联类型可以有多个边界     type Input: Clone ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_192_features::*;  let converter = StringConverter; let..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "pub fn process_strings<'a, F>(input: &'a str, processor: F) -> String where     ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_192_features::*;  let input = \"test string\"; let proce..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "pub struct AutoTraitExample<T> {     data: T, }  impl<T> AutoTraitExample<T> whe..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_192_features::*;  let example = AutoTraitExample::new(..."
+        },
+        {
+          "flags": [],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "pub struct TypeSafeUninitManager<T> {     storage: MaybeUninit<T>,     initializ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_192_features::*;  let mut manager = TypeSafeUninitMana..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "pub fn calculate_aligned_size<T>(count: usize, alignment: NonZeroUsize) -> usize..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_192_features::*; use std::num::NonZeroUsize;  let calc..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "pub fn compare_type_lists<T: PartialEq>(list1: &[T], list2: &[T]) -> bool {     ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use c02_type_system::rust_192_features::*;  let list1 = vec![1, 2, 3, 4, 5]; let..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// ✅ 好的做法：明确指定所有需要的边界 type Input: Clone + Send + Sync + 'static;  // ❌ 避免：边界不足 t..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// ✅ 好的做法：使用 HRTB 处理任意生命周期 F: for<'a> Fn(&'a str) -> &'a str  // ❌ 避免：不必要的生命周期约束..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// ✅ 好的做法：明确检查初始化状态 if self.initialized {     Some(unsafe { &*self.storage.as_pt..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: TrustedLen 迭代器自动特化 use std::iter::TrustedLen;  fn compare_iterat..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 特化的迭代器比较 let vec1 = vec![1, 2, 3, 4, 5]; let vec2 = vec![1, 2, 3..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 使用特化迭代器比较 use std::iter::TrustedLen;  fn fast_compare<T: Partial..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 改进的 unused_must_use #[must_use] pub fn rust_192_must_use_result(..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 更严格的 Never 类型检查 // 以下 lint 设置为默认拒绝： // - never_type_fallback_flo..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 改进的错误处理模式 use std::ops::ControlFlow;  #[must_use] fn process_res..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 组合使用 #[track_caller] 和 #[no_mangle] #[track_caller] #[unsafe(no_..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 新稳定化的 API pub fn rust_192_location_file_as_c_str_example() {    ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 增强的调用位置追踪 #[track_caller] fn debug_function(value: i32) {     le..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 新稳定化的 API pub fn rust_192_rotate_right_example() {     let mut v..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 使用 rotate_right fn rotate_buffer<T>(buffer: &mut [T], offset: us..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: iter::Repeat 的无限循环保护 use std::iter;  pub fn rust_192_repeat_exam..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 安全的重复迭代器使用 use std::iter;  fn safe_repeat_usage() {     let repe..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 高性能迭代器比较 fn compare_vectors<T: PartialEq>(a: &[T], b: &[T]) -> b..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 改进的错误处理 use std::convert::Infallible;  #[must_use] fn always_suc..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// Rust 1.92.0: 调用位置追踪 #[track_caller] fn log_error(message: &str) {     let loc..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../../crates/c02_type_system/examples/README.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/02_type_system/04_type_system.md",
+        "../../01_foundation/04_control_flow/07_control_flow.md",
+        "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "../../06_ecosystem/01_cargo/80_cargo_getting_started.md",
+        "../../06_ecosystem/09_testing_and_quality/16_testing.md",
+        "../README.md",
+        "05_rust_version_tracking.md",
+        "rust_1_91_stabilized.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 1,
+      "pre_post": {
+        "pre": [
+          "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Control Flow](../../01_foundation/04_control_flow/07_control_flow.md)"
+        ],
+        "post": [
+          "[Rust 1.91 稳定特性](rust_1_91_stabilized.md) · [Rust 版本跟踪](05_rust_version_tracking.md)"
         ]
       },
       "backward_chains": 0,

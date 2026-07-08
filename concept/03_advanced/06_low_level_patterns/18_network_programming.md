@@ -933,6 +933,107 @@ Tokio 版本是异步（Async）的，`bind` 本身通常不阻塞，但 `accept
 抽象了"接受请求并返回响应"的组件，包括 HTTP 处理函数、中间件、负载均衡器等，统一为 `call(Request) -> Future<Response>` 的接口。
 </details>
 
+## 补充：TCP/UDP 套接字实践
+
+> 本节内容由 `crates/c10_networks/docs/tier_02_guides/04_tcp_udp_programming.md` 迁移整合而来。
+
+### TCP 套接字选项
+
+```rust
+use tokio::net::TcpStream;
+use std::time::Duration;
+
+async fn configure_tcp(stream: &TcpStream) -> std::io::Result<()> {
+    stream.set_nodelay(true)?;                 // 禁用 Nagle，降低延迟
+    stream.set_linger(Some(Duration::from_secs(5)))?;
+    Ok(())
+}
+```
+
+### 半关闭连接
+
+```rust
+use tokio::net::TcpStream;
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+
+async fn half_close(mut stream: TcpStream) -> std::io::Result<()> {
+    stream.write_all(b"request\n").await?;
+    stream.shutdown().await?;                  // 关闭写端，仍可读取
+
+    let mut buf = Vec::new();
+    stream.read_to_end(&mut buf).await?;
+    Ok(())
+}
+```
+
+### 粘包处理：长度前缀帧
+
+```rust
+use tokio::net::TcpStream;
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+
+async fn send_frame(stream: &mut TcpStream, data: &[u8]) -> std::io::Result<()> {
+    let len = data.len() as u32;
+    stream.write_all(&len.to_be_bytes()).await?;
+    stream.write_all(data).await?;
+    Ok(())
+}
+
+async fn recv_frame(stream: &mut TcpStream) -> std::io::Result<Vec<u8>> {
+    let mut len_bytes = [0u8; 4];
+    stream.read_exact(&mut len_bytes).await?;
+    let len = u32::from_be_bytes(len_bytes) as usize;
+    let mut buf = vec![0u8; len];
+    stream.read_exact(&mut buf).await?;
+    Ok(buf)
+}
+```
+
+### UDP 套接字选项与广播
+
+```rust
+use tokio::net::UdpSocket;
+
+async fn udp_broadcast() -> std::io::Result<()> {
+    let socket = UdpSocket::bind("0.0.0.0:0").await?;
+    socket.set_broadcast(true)?;
+    socket.set_ttl(64)?;
+    socket.send_to(b"hello", "255.255.255.255:8080").await?;
+    Ok(())
+}
+```
+
+### 流量控制：令牌桶
+
+```rust
+use std::time::{Duration, Instant};
+use tokio::time::sleep;
+
+struct TokenBucket {
+    rate: f64,        // tokens per second
+    capacity: f64,
+    tokens: f64,
+    last_update: Instant,
+}
+
+impl TokenBucket {
+    async fn acquire(&mut self, n: f64) {
+        let now = Instant::now();
+        let elapsed = now.duration_since(self.last_update).as_secs_f64();
+        self.tokens = (self.tokens + elapsed * self.rate).min(self.capacity);
+        self.last_update = now;
+
+        if self.tokens < n {
+            let wait = (n - self.tokens) / self.rate;
+            sleep(Duration::from_secs_f64(wait)).await;
+            self.tokens = 0.0;
+        } else {
+            self.tokens -= n;
+        }
+    }
+}
+```
+
 ## 认知路径
 
 > **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象** 核心原理，通向 L2 进阶模式与 L3 工程实践。

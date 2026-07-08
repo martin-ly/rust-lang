@@ -1,114 +1,24 @@
-# C11 过程宏基础
+> **EN**: Procedural Macro Basics (c11_macro_system_proc example index)
+> **Summary**: A stub page pointing to the canonical concept authority for Rust procedural macros. The c11_macro_system_proc crate provides runnable derive/attribute/function-like macro examples.
 
-> **模块**: C11 宏系统
-> **难度**: 中级 → 高级
-> **Rust 版本**: 1.96.1+
+# C11 过程宏基础（c11_macro_system_proc 示例索引）
 
----
+> **权威来源**: 过程宏（derive / attribute / function-like）的编译期执行模型、TokenStream 操作、卫生性等完整解释见
+> [`concept/03_advanced/03_proc_macros/07_proc_macro.md`](../../../concept/03_advanced/03_proc_macros/07_proc_macro.md)。
 
-## 📋 目录
+本文件原为 `c11_macro_system_proc` crate 的通用过程宏概念教程。根据 AGENTS.md §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/03_advanced/03_proc_macros/`，此处仅保留索引与
+canonical 链接。
 
-- [C11 过程宏基础](#c11-过程宏基础)
-  - [📋 目录](#-目录)
-  - [过程宏概述](#过程宏概述)
-  - [派生宏 (Derive Macro)](#派生宏-derive-macro)
-  - [属性宏 (Attribute Macro)](#属性宏-attribute-macro)
-  - [函数宏 (Function Macro)](#函数宏-function-macro)
+## 本 crate 相关示例
 
----
+- `crates/c11_macro_system_proc/examples/`：过程宏可运行示例。
+- `crates/c11_macro_system_proc/src/bin/`：宏元编程演示程序。
 
-## 过程宏概述
+## 快速导航
 
-过程宏在编译时操作 Rust 代码的抽象语法树 (AST)。
-
-```rust
-// 三种过程宏类型
-// 1. 派生宏: #[derive(Trait)]
-// 2. 属性宏: #[attribute]
-// 3. 函数宏: macro!(...)
-```
-
----
-
-## 派生宏 (Derive Macro)
-
-```rust
-use proc_macro::TokenStream;
-use quote::quote;
-use syn::{parse_macro_input, DeriveInput};
-
-#[proc_macro_derive(CustomDebug)]
-pub fn derive_custom_debug(input: TokenStream) -> TokenStream {
-    let input = parse_macro_input!(input as DeriveInput);
-    let name = &input.ident;
-
-    let expanded = quote! {
-        impl std::fmt::Debug for #name {
-            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(f, "{} {{ ... }}", stringify!(#name))
-            }
-        }
-    };
-
-    expanded.into()
-}
-```
-
----
-
-## 属性宏 (Attribute Macro)
-
-```rust
-#[proc_macro_attribute]
-pub fn trace(attr: TokenStream, item: TokenStream) -> TokenStream {
-    let input_fn = parse_macro_input!(item as ItemFn);
-    let fn_name = &input_fn.sig.ident;
-    let fn_body = &input_fn.block;
-
-    let expanded = quote! {
-        {
-            println!("Entering: {}", stringify!(#fn_name));
-            let result = #fn_body;
-            println!("Exiting: {}", stringify!(#fn_name));
-            result
-        }
-    };
-
-    expanded.into()
-}
-```
-
----
-
-## 函数宏 (Function Macro)
-
-```rust
-#[proc_macro]
-pub fn sql(input: TokenStream) -> TokenStream {
-    let query = parse_macro_input!(input as LitStr);
-    let query_str = query.value();
-
-    // 在编译时解析 SQL 语法
-
-    quote! {
-        Query { sql: #query }
-    }.into()
-}
-```
-
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-**状态**: ✅ 100% 完成
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| 过程宏 | [`concept/03_advanced/03_proc_macros/07_proc_macro.md`](../../../concept/03_advanced/03_proc_macros/07_proc_macro.md) |
+| 宏模式 | [`concept/02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md`](../../../concept/02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md) |
+| 元编程 | [`concept/02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md`](../../../concept/02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) |

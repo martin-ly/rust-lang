@@ -157,6 +157,7 @@
 └── 性能分析工具
     └── 性能分析示例
 ```
+
 ### 多维概念对比矩阵
 
 | 优化技术       | 性能提升 | 复杂度 | 适用场景   | Rust 1.92.0 |
@@ -181,6 +182,7 @@
 │   ├── 数值计算 → SIMD
 │   └── 并行计算 → 多线程
 ```
+
 ---
 
 ## 概述
@@ -208,6 +210,7 @@
 │  - Compression                              │
 └─────────────────────────────────────────────┘
 ```
+
 ### 性能目标设定
 
 | 指标           | 良好    | 优秀     | 卓越      |
@@ -248,6 +251,7 @@ panic = "abort"          # panic 时直接终止，不展开栈
 # 依赖优化
 opt-level = "z"
 ```
+
 #### 性能优先配置
 
 ```toml
@@ -256,6 +260,7 @@ inherits = "release"
 opt-level = 3             # 性能优化而非大小
 lto = "thin"              # Thin LTO，平衡编译速度和优化效果
 ```
+
 #### 对比测试
 
 ```bash
@@ -267,6 +272,7 @@ ls -lh target/wasm32-unknown-unknown/release/*.wasm
 cargo build --profile release-perf
 ls -lh target/wasm32-unknown-unknown/release-perf/*.wasm
 ```
+
 ### 2. wasm-opt 优化
 
 ```bash
@@ -295,6 +301,7 @@ wasm-opt -Oz \
   --enable-simd \
   input.wasm -o output.wasm
 ```
+
 ### 3. 优化对比表
 
 | 配置                             | 二进制大小 | 执行速度 | 编译时间 |
@@ -328,6 +335,7 @@ AOT 编译流程:
                                        ↑
                                  启动快、性能高
 ```
+
 #### 使用 WasmEdge AOT 编译器
 
 ```bash
@@ -340,6 +348,7 @@ wasmedge output.so
 # 带优化级别的 AOT 编译
 wasmedgec --optimize 3 input.wasm output.so
 ```
+
 #### 性能提升对比
 
 | 模式         | 启动时间 | 首次执行 | 持续执行 |
@@ -366,6 +375,7 @@ wasmedgec --cpu-features avx2,sse4.2 input.wasm output.so
 # 调试信息
 wasmedgec --debug-info input.wasm output.so
 ```
+
 ### 2. JIT vs AOT 选择指南
 
 #### 何时使用 JIT
@@ -416,6 +426,7 @@ pub fn process_inplace(data: &mut [u8]) {
     }
 }
 ```
+
 #### 性能对比
 
 ```text
@@ -425,6 +436,7 @@ pub fn process_inplace(data: &mut [u8]) {
 预分配:        1.2 ms  (单次内存分配)
 原地处理:      0.8 ms  (零内存分配)  ⭐ 最快
 ```
+
 ### 2. 内存池技术
 
 ```rust
@@ -477,6 +489,7 @@ fn use_object_pool() {
     pool.release(buffer);
 }
 ```
+
 ### 3. 零分配设计模式
 
 #### 借用而非拥有
@@ -495,6 +508,7 @@ fn process_uppercase(s: &str) {
     }
 }
 ```
+
 #### 复用缓冲区
 
 ```rust
@@ -511,6 +525,7 @@ impl DataProcessor {
     }
 }
 ```
+
 ---
 
 ## 零拷贝技术
@@ -531,6 +546,7 @@ impl DataProcessor {
 │ (JS + Wasm)     │              └─────────┘
 └─────────────────┘
 ```
+
 ### 2. 实现零拷贝
 
 #### 使用 wasm-bindgen 的 Uint8Array
@@ -562,6 +578,7 @@ pub fn process_inplace(data: &mut [u8]) {
     }
 }
 ```
+
 #### JavaScript 端使用
 
 ```javascript
@@ -577,6 +594,7 @@ wasm.process_inplace(data) // 直接修改原数组
 // process_copy:    15 ms
 // process_inplace:  3 ms  ⭐
 ```
+
 ### 3. 共享内存和线程
 
 ```rust
@@ -589,6 +607,7 @@ pub fn process_shared(buffer: SharedArrayBuffer) {
     // 无需拷贝，实现真正的零拷贝
 }
 ```
+
 ---
 
 ## SIMD 优化
@@ -608,6 +627,7 @@ SIMD 处理:
      ↓
 一条指令处理 4 个数据 → 4x 性能提升
 ```
+
 ### 2. 使用 SIMD
 
 #### 启用 SIMD
@@ -620,6 +640,7 @@ packed_simd = "0.3"
 [profile.release]
 rustflags = ["-C", "target-feature=+simd128"]
 ```
+
 #### SIMD 代码示例
 
 ```rust
@@ -655,6 +676,7 @@ unsafe fn add_simd(a: &[f32], b: &[f32], result: &mut [f32]) {
     }
 }
 ```
+
 #### 性能对比
 
 ```text
@@ -663,6 +685,7 @@ unsafe fn add_simd(a: &[f32], b: &[f32], result: &mut [f32]) {
 标量版本:  8.5 ms
 SIMD 版本: 2.1 ms  ⭐ 4x 加速
 ```
+
 ### 3. SIMD 最佳实践
 
 ```rust
@@ -702,6 +725,7 @@ pub unsafe fn adjust_brightness_simd(pixels: &mut [u8], factor: f32) {
     }
 }
 ```
+
 ---
 
 ## 性能分析工具
@@ -721,6 +745,7 @@ performance.measure("wasm-execution", "wasm-start", "wasm-end")
 const measures = performance.getEntriesByName("wasm-execution")
 console.log(`Execution time: ${measures[0].duration} ms`)
 ```
+
 #### 时间分析
 
 ```javascript
@@ -732,6 +757,7 @@ console.time("computation")
 const result = wasm.compute(largeData)
 console.timeEnd("computation")
 ```
+
 ### 2. WasmEdge 性能分析
 
 ```bash
@@ -746,6 +772,7 @@ wasmedge --enable-statistics app.wasm
 # 详细分析
 wasmedge --enable-statistics --statistics-detail app.wasm
 ```
+
 ### 3. Rust 性能分析
 
 #### Criterion 基准测试
@@ -764,6 +791,7 @@ fn benchmark_function(c: &mut Criterion) {
 criterion_group!(benches, benchmark_function);
 criterion_main!(benches);
 ```
+
 ```bash
 # 运行基准测试
 cargo bench --target wasm32-wasip1
@@ -771,6 +799,7 @@ cargo bench --target wasm32-wasip1
 # 生成性能报告
 # 查看 target/criterion/report/index.html
 ```
+
 ---
 
 ## 最佳实践
@@ -808,6 +837,7 @@ if condition {
     // 使用 expensive
 }
 ```
+
 ### 2. 算法选择
 
 | 操作       | 数据量小 (< 1K) | 数据量中 (1K-100K) | 数据量大 (> 100K) |
@@ -880,6 +910,7 @@ pub unsafe fn process_v4(data: &mut [u8]) {
 }
 // 性能: 1 ms  (15x 加速) ⭐
 ```
+
 ---
 
 ## 总结
@@ -900,6 +931,7 @@ pub unsafe fn process_v4(data: &mut [u8]) {
            │ SIMD/AOT    │  锦上添花
            └─────────────┘
 ```
+
 ### 关键要点
 
 1. **先优化算法**：O(n²) 优化到 O(n log n) 比任何其他优化都重要

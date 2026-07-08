@@ -44,7 +44,7 @@
     - [示例 4: 结构体和方法](#示例-4-结构体和方法)
     - [示例 5: 完整的 WAT 文本格式示例](#示例-5-完整的-wat-文本格式示例)
   - [📚 相关资源](#-相关资源)
-  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
+  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1961--edition-2024-wasm-20--wasi-02)
 
 ---
 
@@ -115,6 +115,7 @@ WASM 基础指南
 └── 实践示例
     └── 计算和字符串处理
 ```
+
 ---
 
 ## 🎯 概述
@@ -165,6 +166,7 @@ i32.const 2  ;; 推送 2 到栈
 i32.const 3  ;; 推送 3 到栈
 i32.add      ;; 弹出两个值，相加，推送结果
 ```
+
 ---
 
 ## 📦 WASM 模块结构
@@ -193,6 +195,7 @@ i32.add      ;; 弹出两个值，相加，推送结果
 ```wat
 (memory 1)  ;; 初始大小 1 页 (64KB)
 ```
+
 ### 函数
 
 **定义**: 可执行的代码单元。
@@ -208,6 +211,7 @@ i32.add      ;; 弹出两个值，相加，推送结果
   i32.add
 )
 ```
+
 ### 表
 
 **定义**: 存储函数引用的表。
@@ -249,6 +253,7 @@ block $label
   end
 end
 ```
+
 **循环**:
 
 ```wat
@@ -257,6 +262,7 @@ loop $label
   br_if $label  ;; 条件分支回循环开始
 end
 ```
+
 ### 内存操作
 
 **加载**:
@@ -292,6 +298,7 @@ WAT (WebAssembly Text) 是 WASM 的文本表示格式。
   (export "add" (func $add))
 )
 ```
+
 ### 示例
 
 **完整示例**:
@@ -319,6 +326,7 @@ WAT (WebAssembly Text) 是 WASM 的文本表示格式。
   (export "fib" (func $fib))
 )
 ```
+
 ---
 
 ## 🚀 实践示例
@@ -349,6 +357,7 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ````
+
 **编译和使用**:
 
 ```bash
@@ -359,6 +368,7 @@ wasm-pack build --target web
 import { add } from './pkg/hello_wasm.js';
 console.log(add(2, 3)); // 输出: 5
 ```
+
 ### 示例 2: 字符串处理
 
 ```rust
@@ -396,6 +406,7 @@ pub fn reverse_string(s: &str) -> String {
     s.chars().rev().collect()
 }
 ```
+
 ### 示例 3: 数组操作
 
 ````rust
@@ -451,6 +462,7 @@ pub fn find_max(numbers: &[i32]) -> Option<i32> {
     numbers.iter().max().copied()
 }
 ````
+
 **JavaScript 使用示例**:
 
 ```javascript
@@ -468,6 +480,7 @@ console.log(calculate_average(floatArray)) // 2.5
 const maxArray = new Int32Array([10, 5, 20, 15])
 console.log(find_max(maxArray)) // 20
 ```
+
 ### 示例 4: 结构体和方法
 
 ````rust
@@ -517,6 +530,7 @@ impl Counter {
     }
 }
 ````
+
 ### 示例 5: 完整的 WAT 文本格式示例
 
 ```wat
@@ -558,6 +572,7 @@ impl Counter {
   (export "fib" (func $fib))
 )
 ```
+
 **使用 wat2wasm 编译**:
 
 ```bash
@@ -571,6 +586,7 @@ wat2wasm example.wat -o example.wasm
 wasmtime example.wasm --invoke add 2 3  # 输出: 5
 wasmtime example.wasm --invoke fib 10   # 输出: 89
 ```
+
 ---
 
 ## 📚 相关资源

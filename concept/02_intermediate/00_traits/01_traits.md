@@ -188,6 +188,14 @@
   - [1. Trait 概述](#1-trait-概述)
     - [1.1 什么是 Trait](#11-什么是-trait)
     - [1.2 Trait 的作用](#12-trait-的作用)
+  - [补充视角：crate 实践中的 Trait 系统设计模式](#补充视角crate-实践中的-trait-系统设计模式)
+    - [插件系统](#插件系统)
+    - [类型转换系统](#类型转换系统)
+    - [常见错误与最佳实践速查](#常见错误与最佳实践速查)
+  - [补充视角：关联类型的工程实践场景](#补充视角关联类型的工程实践场景)
+    - [数据库抽象层](#数据库抽象层)
+    - [Parser Combinator](#parser-combinator)
+    - [关联类型 vs 泛型参数决策](#关联类型-vs-泛型参数决策)
 
 ## 一、权威定义（Definition）
 
@@ -2845,3 +2853,114 @@ impl Drawable for Rectangle {
     }
 }
 ```
+
+---
+
+## 补充视角：crate 实践中的 Trait 系统设计模式
+
+> 本节选编自 `crates/c04_generic/docs/tier_02_guides/02_trait_system.md`，
+> 作为 canonical Trait 概念页的工程实践补充。
+
+### 插件系统
+
+利用 trait object 实现运行时插件注册表，是 trait 在大型 Rust 项目中的典型模式：
+
+```rust
+trait Plugin: Send + Sync {
+    fn name(&self) -> &str;
+    fn execute(&self, input: &str) -> String;
+}
+
+struct PluginRegistry {
+    plugins: Vec<Box<dyn Plugin>>,
+}
+
+impl PluginRegistry {
+    fn register(&mut self, plugin: Box<dyn Plugin>) {
+        self.plugins.push(plugin);
+    }
+    fn run_all(&self, input: &str) -> Vec<String> {
+        self.plugins.iter().map(|p| p.execute(input)).collect()
+    }
+}
+```
+
+### 类型转换系统
+
+`From`/`Into` trait 链可以构建声明式的类型转换管道：
+
+```rust
+struct RawData(String);
+struct ParsedData(Vec<i32>);
+
+impl From<RawData> for ParsedData {
+    fn from(raw: RawData) -> Self {
+        Self(raw.0.split(',').filter_map(|s| s.parse().ok()).collect())
+    }
+}
+
+let raw = RawData("1,2,3".into());
+let parsed: ParsedData = raw.into();
+```
+
+### 常见错误与最佳实践速查
+
+| 问题 | 原因 | 解决方案 |
+| :--- | :--- | :--- |
+| E0117 违反孤儿规则 | 同时为外部类型实现外部 trait | 使用 Newtype 包装 |
+| E0119 重叠实现 | 两个 impl 条件可能同时满足 | 利用特化或收紧 bound |
+| 对象安全错误 | trait 含泛型方法或 `Self: Sized` | 拆分 `MyTrait` 与 `MyTraitObj` |
+| 过度抽象 | 单一实现仍引入 trait | 先写具体代码，需要多态时再抽象 |
+
+---
+
+## 补充视角：关联类型的工程实践场景
+
+> 本节选编自 `crates/c04_generic/docs/tier_02_guides/03_associated_types.md`，
+> 作为 canonical Trait 概念页的工程实践补充。
+
+### 数据库抽象层
+
+关联类型让 trait 能够描述“一个存储后端对应一种行类型”的一对一关系，
+避免泛型参数在每次调用时重复指定：
+
+```rust
+trait Backend {
+    type Row;
+    type Error;
+    fn query(&self, sql: &str) -> Result<Vec<Self::Row>, Self::Error>;
+}
+
+struct PostgresBackend;
+struct PgRow;
+struct PgError;
+
+impl Backend for PostgresBackend {
+    type Row = PgRow;
+    type Error = PgError;
+    fn query(&self, _sql: &str) -> Result<Vec<Self::Row>, Self::Error> {
+        Ok(vec![PgRow])
+    }
+}
+```
+
+### Parser Combinator
+
+GAT 允许 trait 描述“返回类型依赖输入生命周期”的解析器，
+这是 lending iterator 模式的核心：
+
+```rust
+trait Parser<'a> {
+    type Output: 'a;
+    fn parse(&self, input: &'a str) -> Option<(Self::Output, &'a str)>;
+}
+```
+
+### 关联类型 vs 泛型参数决策
+
+| 维度 | 关联类型 | 泛型参数 |
+| :--- | :--- | :--- |
+| 实现次数 | 每个类型只能实现一次 | 同一类型可多次实现 |
+| 调用方标注 | 不需要 | 通常需要 |
+| 表达关系 | 一对一 | 一对多 |
+| 典型场景 | Iterator::Item、Backend::Row | Container<T>、Map<K, V> |

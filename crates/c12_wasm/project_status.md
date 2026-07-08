@@ -201,6 +201,7 @@
 ```text
 基础入门 (2-4小时) → 实践应用 (10-20小时) → 参考查阅 (按需) → 高级主题 (20-30小时)
 ```
+
 ### 2. Rust 1.92.0 最新特性
 
 展示了最新的 Rust 特性：
@@ -254,6 +255,7 @@ wasm-pack build --target web
 python -m http.server 8080
 # 访问: http://localhost:8080/demo/
 ```
+
 ### 学习路径
 
 1. **第1周**: 阅读 Tier 1 文档，运行基础示例
@@ -299,12 +301,14 @@ running 30 tests in total:
 
 test result: ok. 30 passed; 0 failed; 0 ignored
 ```
+
 ### 编译状态
 
 ```bash
 $ cargo check --lib
 Finished `dev` profile in 0.16s ✅
 ```
+
 ---
 
 ## 🏆 质量指标

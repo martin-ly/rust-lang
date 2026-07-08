@@ -136,6 +136,7 @@
 └── 告警配置
     └── Alertmanager
 ```
+
 ### 多维概念对比矩阵
 
 | 监控技术         | 功能 | 性能 | 复杂度 | 适用场景   | Rust 1.92.0 |
@@ -158,6 +159,7 @@
 │   ├── 分布式追踪 → Jaeger
 │   └── 告警 → Alertmanager
 ```
+
 ---
 
 ## 🎯 概述
@@ -195,6 +197,7 @@
 │ Prometheus   │  Loki/ELK        │  Jaeger/Zipkin      │
 └──────────────┴──────────────────┴─────────────────────┘
 ```
+
 ### 1. Metrics (指标)
 
 **用途**: 了解系统**整体**状态
@@ -246,6 +249,7 @@
 │    (可视化)       │
 └───────────────────┘
 ```
+
 ### 配置文件
 
 详见：[`deployment/monitoring/prometheus.yml`](../../deployment/monitoring/prometheus.yml)
@@ -317,6 +321,7 @@ fn metrics_handler() -> String {
     String::from_utf8(buffer).unwrap()
 }
 ```
+
 ### 关键指标
 
 #### 应用层指标
@@ -339,6 +344,7 @@ histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[5m]))
   + sum(rate(http_request_duration_seconds_bucket{le="0.4"}[5m])) / 2
 ) / sum(rate(http_request_duration_seconds_count[5m]))
 ```
+
 #### 资源指标
 
 ```promql
@@ -355,6 +361,7 @@ rate(container_cpu_usage_seconds_total{pod=~"wasm-.*"}[5m]) * 100
 rate(container_network_receive_bytes_total[5m])
 rate(container_network_transmit_bytes_total[5m])
 ```
+
 #### Kubernetes 指标
 
 ```promql
@@ -371,6 +378,7 @@ kube_pod_status_phase{pod=~"wasm-.*", phase="Running"}
 kube_horizontalpodautoscaler_status_current_replicas
 kube_horizontalpodautoscaler_spec_max_replicas
 ```
+
 ---
 
 ## 📊 Grafana 可视化
@@ -396,6 +404,7 @@ kube_horizontalpodautoscaler_spec_max_replicas
 │  P50: 10ms │            │            │                 │
 └────────────┴────────────┴────────────┴─────────────────┘
 ```
+
 #### 2. RED 方法仪表板
 
 **Rate, Errors, Duration**:
@@ -443,6 +452,7 @@ kube_horizontalpodautoscaler_spec_max_replicas
                     │  (日志查询)   │
                     └──────────────┘
 ```
+
 ### Promtail 配置
 
 ```yaml
@@ -494,6 +504,7 @@ scrape_configs:
           source: timestamp
           format: RFC3339
 ```
+
 ### 日志查询 (LogQL)
 
 ```logql
@@ -517,6 +528,7 @@ sum by (error_type) (
   count_over_time({app="wasm-microservice"} | json | level="error" [1h])
 )
 ```
+
 ### 结构化日志最佳实践
 
 ```rust
@@ -543,6 +555,7 @@ fn log_request(method: &str, path: &str, status: u16, duration_ms: u64) {
 log_request("GET", "/api/users", 200, 15);
 // 输出：{"timestamp":"2025-10-30T12:00:00Z","level":"info","message":"HTTP request",...}
 ```
+
 ---
 
 ## 🔍 分布式追踪 (Jaeger)
@@ -554,6 +567,7 @@ log_request("GET", "/api/users", 200, 15);
 ```text
 Client → Gateway → Wasm Service A → Wasm Service B → Database
 ```
+
 分布式追踪可以：
 
 - 可视化请求流程
@@ -609,6 +623,7 @@ fn call_downstream_service(req: &Request) -> Response {
     http_client.post("http://service-b/api").send()
 }
 ```
+
 ### Jaeger UI 使用
 
 **查看 Trace**:
@@ -684,6 +699,7 @@ receivers:
         auth_username: "alertmanager"
         auth_password: "password"
 ```
+
 ### 告警最佳实践
 
 #### 1. 告警分级
@@ -704,6 +720,7 @@ receivers:
 - WasmHighErrorRate        (Warning)
 - WasmDeploymentCompleted  (Info)
 ```
+
 #### 3. 避免告警疲劳
 
 - ✅ 设置合理的阈值
@@ -732,6 +749,7 @@ receivers:
 4. Saturation (饱和度)
    - CPU/内存使用率
 ```
+
 ### 2. 监控即代码 (Monitoring as Code)
 
 - ✅ 告警规则版本化
@@ -761,6 +779,7 @@ Level 4 (专家):
   ✅ 自动化根因分析
   ✅ 自愈系统
 ```
+
 ### 4. SLO/SLI/SLA
 
 **定义**:
@@ -788,6 +807,7 @@ slos:
       threshold: 0.1 # 100ms
     objective: 99.0 # 99% 的请求 < 100ms
 ```
+
 ### 5. 成本优化
 
 **监控数据存储成本**:

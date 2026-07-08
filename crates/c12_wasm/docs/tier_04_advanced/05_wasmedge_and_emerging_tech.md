@@ -133,6 +133,7 @@ WasmEdge 与新技术深入
     ├── Kubernetes 集成
     └── 边缘计算
 ```
+
 ### 多维概念对比矩阵
 
 | WASM 技术           | 性能 | 复杂度 | 适用场景     | Rust 1.92.0 |
@@ -158,6 +159,7 @@ WasmEdge 与新技术深入
 │   ├── 并行计算 → 多线程 WASM
 │   └── 云原生 → Kubernetes 集成 / 边缘计算
 ```
+
 ---
 
 ## 🎯 概述
@@ -202,6 +204,7 @@ WasmEdge 与新技术深入
 │  - 文件系统/网络/设备                │
 └─────────────────────────────────────┘
 ```
+
 ### WasmEdge 核心特性
 
 #### 1. AOT (Ahead-Of-Time) 编译
@@ -223,6 +226,7 @@ wasmedgec --enable-all your_app.wasm your_app.so
 # 运行优化版本（比直接运行 .wasm 快 2-5 倍）
 wasmedge your_app.so
 ```
+
 **性能对比**:
 
 | 方式           | 启动时间 | 执行速度 | 内存占用 |
@@ -245,6 +249,7 @@ fn main() {
     println!("File size: {} bytes", content.len());
 }
 ```
+
 **性能提升**: 读取大文件时，零拷贝可以减少 50-80% 的内存使用和时间。
 
 #### 3. 智能内存管理
@@ -264,6 +269,7 @@ wasmedge --max-memory-size=67108864 your_app.wasm
 # 启用内存统计
 wasmedge --statistics your_app.wasm
 ```
+
 ### WasmEdge 高性能机制
 
 #### JIT vs AOT 对比
@@ -321,6 +327,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 **使用 WasmEdge 运行**:
 
 ```bash
@@ -329,6 +336,7 @@ wasmedge --enable-wasi-nn \
   --enable-wasi-nn-tensorflow \
   image_classifier.wasm image.jpg
 ```
+
 ### OpenVINO 集成
 
 **优势**:
@@ -346,6 +354,7 @@ fn run_inference(input_data: &[f32]) -> Vec<f32> {
     vec![]
 }
 ```
+
 **使用 WasmEdge 运行**:
 
 ```bash
@@ -353,6 +362,7 @@ wasmedge --enable-wasi-nn \
   --enable-wasi-nn-openvino \
   inference_app.wasm
 ```
+
 ### 实际应用示例
 
 **完整示例：Rust + WASI-NN + TensorFlow**:
@@ -387,6 +397,7 @@ fn prepare_input(image_path: &str) -> Result<Vec<u8>, Box<dyn std::error::Error>
     Ok(buffer)
 }
 ```
+
 **编译和运行**:
 
 ```bash
@@ -399,6 +410,7 @@ wasmedge --enable-wasi-nn \
   target/wasm32-wasip1/release/ai_app.wasm \
   input.jpg
 ```
+
 ---
 
 ## 🌐 WASI-Crypto：密码学支持
@@ -428,12 +440,14 @@ fn main() {
     println!("Encryption completed");
 }
 ```
+
 **使用 WasmEdge 运行**:
 
 ```bash
 # 启用 WASI-Crypto 支持
 wasmedge --enable-wasi-crypto your_app.wasm
 ```
+
 ---
 
 ## 🔗 Component Model：组件化架构
@@ -466,6 +480,7 @@ pub mod data_validator {
     }
 }
 ```
+
 **组合使用**:
 
 ```bash
@@ -474,6 +489,7 @@ wasm-tools compose -o app.wasm \
   data_processor.wasm \
   data_validator.wasm
 ```
+
 ---
 
 ## ⚡ 多线程 WASM
@@ -514,12 +530,14 @@ fn main() {
     }
 }
 ```
+
 **使用 WasmEdge 运行**:
 
 ```bash
 # 启用多线程支持
 wasmedge --enable-threads your_app.wasm
 ```
+
 **性能提升**: 多线程可以将 CPU 密集型任务加速 2-4 倍（取决于核心数）。
 
 ---
@@ -600,6 +618,7 @@ impl MemoryManager {
     }
 }
 ```
+
 ### 插件系统
 
 **WasmEdge 插件架构**:
@@ -615,6 +634,7 @@ impl MemoryManager {
 ├─ WASI-Crypto 插件
 └─ 自定义插件
 ```
+
 **创建自定义插件示例**:
 
 ```rust
@@ -625,6 +645,7 @@ pub extern "C" fn wasmedge_plugin_init() -> i32 {
     0
 }
 ```
+
 ---
 
 ## 🌐 云原生应用场景
@@ -644,6 +665,7 @@ COPY target/wasm32-wasip1/release/app.wasm /app.wasm
 # 设置入口点
 ENTRYPOINT ["wasmedge", "/app.wasm"]
 ```
+
 **Kubernetes Deployment**:
 
 ```yaml
@@ -666,6 +688,7 @@ spec:
               memory: "128Mi"
               cpu: "500m"
 ```
+
 **优势**:
 
 - ✅ 快速启动（冷启动 ~1ms）
@@ -689,6 +712,7 @@ services:
     ports:
       - "8080:8080"
 ```
+
 ### 边缘计算
 
 **场景**: IoT 设备、CDN 边缘节点
@@ -725,6 +749,7 @@ fn handle_request(mut stream: TcpStream) {
     stream.write(response).unwrap();
 }
 ```
+
 ---
 
 ## 🚀 实战项目示例
@@ -754,6 +779,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 **部署**:
 
 ```bash
@@ -765,6 +791,7 @@ wasmedge --enable-wasi-nn \
   --enable-wasi-nn-tensorflow \
   target/wasm32-wasip1/release/image_service.wasm
 ```
+
 ### 示例 2: 边缘计算数据处理
 
 **功能**: 实时数据处理和过滤
@@ -790,6 +817,7 @@ fn process_data(data: &str) -> String {
     data.to_uppercase()
 }
 ```
+
 ---
 
 ## 📚 相关资源

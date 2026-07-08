@@ -135,6 +135,7 @@
 └── 监控和回滚
     └── 部署监控指标
 ```
+
 ### 多维概念对比矩阵
 
 | CI/CD 技术         | 易用性 | 功能完整性 | 性能 | 适用场景     | Rust 1.92.0 |
@@ -160,6 +161,7 @@
 │   ├── 快速回滚 → 蓝绿部署
 │   └── 渐进式发布 → 金丝雀发布
 ```
+
 ---
 
 ## 🎯 概述
@@ -229,6 +231,7 @@
 │  - Performance Tests │         │  - Rollback Support   │
 └──────────────────────┘         └──────────────────────┘
 ```
+
 ### 分支策略
 
 **GitFlow 工作流**:
@@ -242,6 +245,7 @@ main (production)
        ├─ bugfix/xxx
        └─ hotfix/xxx
 ```
+
 **部署映射**:
 
 - `main` → Production
@@ -276,6 +280,7 @@ main (production)
     cargo install cargo-audit
     cargo audit
 ```
+
 #### 2. Wasm 构建和优化
 
 ```yaml
@@ -288,6 +293,7 @@ main (production)
       target/wasm32-wasip1/release/*.wasm \
       -o app-optimized.wasm
 ```
+
 **优化效果对比**:
 
 | 阶段          | 大小   | 说明                  |
@@ -314,6 +320,7 @@ main (production)
     cache-from: type=gha
     cache-to: type=gha,mode=max
 ```
+
 #### 4. 安全扫描
 
 ```yaml
@@ -324,6 +331,7 @@ main (production)
     format: "sarif"
     output: "trivy-results.sarif"
 ```
+
 #### 5. Kubernetes 部署
 
 ```yaml
@@ -335,6 +343,7 @@ main (production)
 
     kubectl rollout status deployment/wasm-microservice -n wasm-prod
 ```
+
 ---
 
 ## 🦊 GitLab CI 配置
@@ -524,6 +533,7 @@ benchmark:
   only:
     - main
 ```
+
 ---
 
 ## ⚡ 构建优化
@@ -543,6 +553,7 @@ panic = "abort"          # 减小二进制大小
 [profile.release.package."*"]
 opt-level = "z"
 ```
+
 ### 2. 缓存策略
 
 **GitHub Actions 缓存**:
@@ -559,6 +570,7 @@ opt-level = "z"
     restore-keys: |
       ${{ runner.os }}-cargo-
 ```
+
 **效果**:
 
 - 首次构建：~5分钟
@@ -574,6 +586,7 @@ RUN cargo fetch  # 预先下载依赖
 COPY . .
 RUN cargo build --release
 ```
+
 ### 4. 并行构建
 
 ```yaml
@@ -585,6 +598,7 @@ steps:
   - name: Build for ${{ matrix.platform }}
     run: cargo build --target ${{ matrix.platform }}
 ```
+
 ---
 
 ## 🧪 测试策略
@@ -607,6 +621,7 @@ steps:
       └─────────────────────┘│
        └─────────────────────┘
 ```
+
 ### 测试配置
 
 ```yaml
@@ -631,6 +646,7 @@ test:e2e:
     - npm install -g newman
     - newman run tests/api-tests.postman_collection.json
 ```
+
 ---
 
 ## 🚀 部署策略
@@ -646,11 +662,13 @@ strategy:
     maxSurge: 2 # 最多额外创建2个 Pod
     maxUnavailable: 1 # 最多1个 Pod 不可用
 ```
+
 **流程**:
 
 ```text
 v1 v1 v1 v1 v1  →  v1 v1 v1 v1 v2  →  v1 v1 v1 v2 v2  →  ...  →  v2 v2 v2 v2 v2
 ```
+
 ### 2. 蓝绿部署 (Blue-Green)
 
 **零停机，快速回滚**:
@@ -668,6 +686,7 @@ kubectl patch service wasm-app -p '{"spec":{"selector":{"version":"green"}}}'
 # 如果有问题，立即回滚
 kubectl patch service wasm-app -p '{"spec":{"selector":{"version":"blue"}}}'
 ```
+
 ### 3. 金丝雀发布 (Canary)
 
 **逐步放量，降低风险**:
@@ -693,6 +712,7 @@ spec:
     app: wasm-app
     version: v2
 ```
+
 **Istio/Linkerd 配置**:
 
 ```yaml
@@ -720,6 +740,7 @@ spec:
             subset: v2
           weight: 10
 ```
+
 ---
 
 ## 📊 监控和回滚
@@ -745,6 +766,7 @@ histogram_quantile(0.99,
 # Pod 重启次数
 increase(kube_pod_container_status_restarts_total[5m])
 ```
+
 ### 自动回滚
 
 **Argo Rollouts 配置**:
@@ -783,6 +805,7 @@ spec:
       autoPromotionEnabled: false
       autoPromotionSeconds: 300
 ```
+
 ### 手动回滚
 
 ```bash
@@ -798,6 +821,7 @@ kubectl rollout undo deployment/wasm-app -n wasm-prod --to-revision=5
 # 监控回滚状态
 kubectl rollout status deployment/wasm-app -n wasm-prod
 ```
+
 ---
 
 ## 📋 最佳实践
@@ -810,6 +834,7 @@ Development  →  Staging  →  Production
 feature/*    develop       main/tags
 自动部署      自动部署       手动审批
 ```
+
 ### 2. 配置管理
 
 - ✅ 使用 ConfigMap 管理配置

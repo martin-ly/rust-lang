@@ -223,6 +223,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------------------- param($
 │ Prometheus + Grafana + Loki + Jaeger    │
 └─────────────────────────────────────────┘
 ```
+
 ### 2. WasmEdge 容器优势
 
 | 维度 | Linux 容器 | Wasm 容器 | 提升 |
@@ -243,6 +244,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $
 缺点：回滚较慢
 适用：日常更新
 ```
+
 **蓝绿部署 (Blue-Green)**:
 
 ```text
@@ -250,6 +252,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $
 缺点：资源占用翻倍
 适用：重要发布
 ```
+
 **金丝雀发布 (Canary)**:
 
 ```text
@@ -257,6 +260,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $
 缺点：流程复杂
 适用：高风险变更
 ```
+
 ---
 
 ## 📚 文档体系
@@ -493,6 +497,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match
 ────────────────────────────────────────
 整体完成度      ████████████████████ 100%
 ```
+
 ### 质量评分
 
 | 维度 | 分数 | 评级 |

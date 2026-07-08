@@ -1,188 +1,21 @@
-# 2.4 作用域规则
+> **EN**: Scope Management Practice Guide (c01 example index)
+> **Summary**: Stub pointing to the canonical ownership/scope authority. Practical examples remain in the c01 crate.
 
-**文档版本**: 1.0
-**适用 Rust 版本**: 1.96.1+
-**最后更新**: 2026-01-26
-**预计学习时间**: 2-4 小时
+# 2.4 作用域规则（c01 示例索引）
 
-> 本文档是作用域规则的核心导航文档。完整的实现细节请参考：[作用域管理](04_scope_management_practice.md)
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)。
 
-## 📋 目录
+本文件原为对应 crate 的通用概念教程。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-- [2.4 作用域规则](#24-作用域规则)
-  - [📋 目录](#-目录)
-  - [📖 学习目标](#-学习目标)
-  - [📐 知识结构](#-知识结构)
-    - [概念定义](#概念定义)
-    - [属性特征](#属性特征)
-    - [关系连接](#关系连接)
-    - [思维导图](#思维导图)
-  - [🎯 核心内容导航](#-核心内容导航)
-    - [1. 作用域基础](#1-作用域基础)
-    - [2. RAII 模式](#2-raii-模式)
-    - [3. Drop Trait](#3-drop-trait)
-  - [📚 完整内容](#-完整内容)
-  - [💡 快速参考](#-快速参考)
-    - [作用域速查](#作用域速查)
-  - [🔗 相关主题](#-相关主题)
-  - [🚀 下一步](#-下一步)
+## 快速导航
 
-## 📖 学习目标
-
-完成本文档后，你将能够：
-
-- ✅ 理解 Rust 的作用域规则（资源的逻辑作用域）
-- ✅ 掌握 RAII 模式和 Drop trait（资源管理的编译期证明）
-- ✅ 理解资源自动管理机制（编译期证明的资源生命周期）
-- ✅ 能够设计合理的作用域结构（逻辑证明的有效范围）
-- ✅ 掌握资源释放的时机（编译期证明的确定性析构）
-
----
-
-## 📐 知识结构
-
-### 概念定义
-
-**作用域管理实践指南 (Scope Management Practice Guide)**:
-
-- **定义**: 深入理解 Rust 作用域规则和资源管理的实践指南
-- **类型**: 实践指南文档
-- **范畴**: 所有权系统、资源管理
-- **版本**: Rust 1.96.1+
-- **相关概念**: 作用域、RAII、Drop trait、资源管理
-
-**作用域 (Scope)**:
-
-- **定义**: 资源的逻辑作用域，逻辑证明的有效范围
-- **类型**: 资源管理机制
-- **属性**: 作用域嵌套、资源自动清理、确定性析构
-- **关系**: 与所有权、RAII 相关
-
-### 属性特征
-
-**核心属性**:
-
-- **作用域基础**: 资源的逻辑作用域、作用域嵌套
-- **RAII 模式**: 资源获取即初始化、自动清理
-- **Drop trait**: 确定性析构、资源释放时机
-- **作用域结构**: 设计合理的作用域结构
-
-**性能特征**:
-
-- **零成本**: 作用域机制零运行时开销
-- **编译时证明**: 编译期逻辑证明
-- **适用场景**: 资源管理、内存安全、确定性析构
-
-### 关系连接
-
-**组合关系**:
-
-- 作用域管理实践指南 --[covers]--> 作用域规则和 RAII
-- 资源管理程序 --[uses]--> 作用域管理
-
-**依赖关系**:
-
-- 作用域管理 --[depends-on]--> 所有权系统
-- 资源管理 --[depends-on]--> 作用域管理
-
-### 思维导图
-
-```text
-作用域管理实践指南
-│
-├── 作用域基础
-│   └── 逻辑作用域
-├── RAII 模式
-│   └── 资源获取即初始化
-├── Drop trait
-│   └── 确定性析构
-└── 作用域结构
-    └── 设计原则
-```
-
----
-
-## 🎯 核心内容导航
-
-### 1. 作用域基础
-
-**核心概念**（引用一致性视角）:
-
-- 资源的逻辑作用域（逻辑证明的有效范围，非物理内存区域）
-- 作用域嵌套（逻辑关系的嵌套）
-- 离开作用域时自动清理（编译期证明的确定性析构）
-
-**详细学习**: [作用域管理完整文档](04_scope_management_practice.md)
-
-### 2. RAII 模式
-
-**概念**:
-
-- Resource Acquisition Is Initialization
-- 通过对象生命周期管理资源
-- Drop trait 的自动调用
-
-**详细学习**: [作用域管理完整文档](04_scope_management_practice.md)
-
-### 3. Drop Trait
-
-**语法**:
-
-```rust
-impl Drop for MyType {
-    fn drop(&mut self) {
-        // 清理代码
-    }
-}
-```
-
-**详细学习**: [作用域管理完整文档](04_scope_management_practice.md)
-
-## 📚 完整内容
-
-**[📖 作用域管理完整文档](04_scope_management_practice.md)**
-
-该文档包含：
-
-- ✅ 作用域基础概念
-- ✅ 变量遮蔽
-- ✅ RAII 模式详解
-- ✅ Drop trait 详解
-- ✅ 资源管理最佳实践
-- ✅ 常见模式和技巧
-
-## 💡 快速参考
-
-### 作用域速查
-
-```rust
-{
-    let s = String::from("hello");  // s 进入作用域
-    // 使用 s
-}  // s 离开作用域，drop 被自动调用
-
-// s 在此处不可用
-```
-
-## 🔗 相关主题
-
-- 📖 [2.1 所有权系统](2.1_所有权系统.md)
-- 📖 [2.2 借用检查器](2.2_借用检查器.md)
-- 📖 [2.3 生命周期](2.3_生命周期.md)
-
-## 🚀 下一步
-
-恭喜完成 Tier 2！继续学习：
-
-**[Tier 3: 高级应用层](../tier_03_references/README.md)**
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| 作用域与所有权 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
+| RAII 模式 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
+| Drop trait | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
+| 变量模型 | [concept/01_foundation/03_values_and_references/20_variable_model.md](../../../../concept/01_foundation/03_values_and_references/20_variable_model.md) |
+| 内存安全 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |

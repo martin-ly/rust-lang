@@ -118,6 +118,7 @@ WASI 深入
 └── 时间接口
     └── 时间操作
 ```
+
 ### 多维概念对比矩阵
 
 | WASM 运行时  | 性能 | 生态 | 易用性 | WASI 支持   | Rust 1.92.0 |
@@ -138,6 +139,7 @@ WASI 深入
 │       │   ├── 是 → wasmer
 │       │   └── 否 → wasmtime
 ```
+
 ---
 
 ## 🎯 概述
@@ -191,6 +193,7 @@ cargo build --target wasm32-wasip1 --release
 # 输出文件
 # target/wasm32-wasip1/release/your_app.wasm
 ```
+
 ### Cargo.toml 配置
 
 ```toml
@@ -207,6 +210,7 @@ edition = "2024"
 name = "my-app"
 path = "src/main.rs"
 ```
+
 ### 示例：简单的 WASI 程序
 
 ```rust
@@ -236,6 +240,7 @@ fn main() {
     }
 }
 ```
+
 **编译和运行**:
 
 ```bash
@@ -251,6 +256,7 @@ wasmtime run target/wasm32-wasip1/release/my_app.wasm -- input.txt
 # 使用 wasmer 运行
 wasmer run target/wasm32-wasip1/release/my_app.wasm -- input.txt
 ```
+
 ---
 
 ## 📁 文件系统
@@ -265,6 +271,7 @@ pub extern "C" fn read_file() -> String {
     fs::read_to_string("data.txt").unwrap_or_default()
 }
 ```
+
 ### 写入文件
 
 ```rust
@@ -275,6 +282,7 @@ pub extern "C" fn write_file(content: &str) {
     fs::write("output.txt", content).unwrap();
 }
 ```
+
 ---
 
 ## 🌐 网络接口
@@ -293,6 +301,7 @@ pub fn http_get(url: &str) -> String {
     response
 }
 ```
+
 ---
 
 ## ⏰ 时间接口
@@ -307,6 +316,7 @@ pub fn current_timestamp() -> u64 {
         .as_secs()
 }
 ```
+
 ---
 
 ## 🚀 实践示例
@@ -322,6 +332,7 @@ pub fn process_file(path: &str) -> String {
         .to_uppercase()
 }
 ```
+
 ### 示例 2: 使用 WasmEdge 运行 HTTP 服务器
 
 ```rust
@@ -350,6 +361,7 @@ fn main() {
     }
 }
 ```
+
 **使用 WasmEdge 运行**:
 
 ```bash
@@ -359,6 +371,7 @@ cargo build --target wasm32-wasip1 --release
 # 运行（需要网络权限）
 wasmedge --allow-net target/wasm32-wasip1/release/server.wasm
 ```
+
 ### 示例 3: 环境变量和命令行参数
 
 ```rust
@@ -380,12 +393,14 @@ fn main() {
     }
 }
 ```
+
 **运行**:
 
 ```bash
 # 设置环境变量并运行
 MY_VAR=hello wasmedge target/wasm32-wasip1/release/my_app.wasm arg1 arg2
 ```
+
 ### 示例 4: 文件系统操作
 
 ```rust
@@ -413,12 +428,14 @@ fn main() {
     }
 }
 ```
+
 **运行（需要目录访问权限）**:
 
 ```bash
 # 挂载目录
 wasmedge --dir .:/app target/wasm32-wasip1/release/my_app.wasm
 ```
+
 ---
 
 ## 🔧 运行时配置
@@ -431,6 +448,7 @@ wasmedge --dir .:/app target/wasm32-wasip1/release/my_app.wasm
 # 挂载多个目录
 wasmedge --dir .:/app --dir /tmp:/tmp target/wasm32-wasip1/release/app.wasm
 ```
+
 **网络访问**:
 
 ```bash
@@ -440,12 +458,14 @@ wasmedge --allow-net target/wasm32-wasip1/release/app.wasm
 # 只允许特定域名
 wasmedge --allow-net=example.com target/wasm32-wasip1/release/app.wasm
 ```
+
 **环境变量**:
 
 ```bash
 # 设置环境变量
 wasmedge --env "KEY1=VALUE1" --env "KEY2=VALUE2" app.wasm
 ```
+
 **资源限制**:
 
 ```bash
@@ -455,6 +475,7 @@ wasmedge --max-memory-size=67108864 app.wasm
 # 限制 CPU 时间（秒）
 wasmedge --time-limit=10 app.wasm
 ```
+
 ### wasmtime 配置
 
 ```bash
@@ -467,6 +488,7 @@ wasmtime run --cache-config cache.toml app.wasm
 # 设置网络访问
 wasmtime run --allow-net app.wasm
 ```
+
 ### wasmer 配置
 
 ```bash
@@ -479,6 +501,7 @@ wasmer run --backend=singlepass app.wasm
 wasmer compile app.wasm -o app.bin
 ./app.bin
 ```
+
 ---
 
 ## 🌐 在 Docker 中运行 WASM
@@ -490,6 +513,7 @@ FROM scratch
 COPY target/wasm32-wasip1/release/app.wasm /app.wasm
 ENTRYPOINT ["wasmedge", "/app.wasm"]
 ```
+
 ### 使用 Docker Compose
 
 ```yaml
@@ -503,6 +527,7 @@ services:
     environment:
       - MY_VAR=value
 ```
+
 ---
 
 ## 📊 性能对比

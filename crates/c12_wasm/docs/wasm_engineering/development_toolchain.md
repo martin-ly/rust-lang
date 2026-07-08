@@ -75,6 +75,7 @@
    ↓        ↓         ↓         ↓        ↓        ↓
   IDE    编译器    调试工具   优化工具  性能分析  监控
 ```
+
 **工具选择原则**:
 
 | 语言           | 推荐工具链                       | 适用场景                  |
@@ -94,6 +95,7 @@
 ```text
 Rust Source → rustc (LLVM IR) → wasm32-unknown-unknown → Wasm 模块
 ```
+
 #### 目标平台
 
 ```bash
@@ -106,6 +108,7 @@ rustup target add wasm32-wasip1
 # Emscripten 兼容
 rustup target add wasm32-unknown-emscripten
 ```
+
 #### wasm-bindgen 集成
 
 **Cargo.toml 配置**:
@@ -127,6 +130,7 @@ codegen-units = 1        # 单编译单元
 strip = true             # 剥离符号
 panic = 'abort'          # 移除 unwinding
 ```
+
 **Rust 代码示例**:
 
 ```rust
@@ -158,6 +162,7 @@ impl Counter {
     }
 }
 ```
+
 **生成的 TypeScript 类型**:
 
 ```typescript
@@ -169,6 +174,7 @@ export class Counter {
   value(): number
 }
 ```
+
 #### 构建优化
 
 **大小优化对比**:
@@ -200,6 +206,7 @@ wasm-opt pkg/mylib_bg.wasm -Oz --strip-debug -o pkg/mylib_bg.wasm
 # 4. 显示大小
 ls -lh pkg/mylib_bg.wasm
 ```
+
 ---
 
 ### Emscripten (C/C++)
@@ -209,6 +216,7 @@ ls -lh pkg/mylib_bg.wasm
 ```text
 C/C++ Source → Clang (LLVM IR) → Emscripten → Wasm + JS Glue
 ```
+
 #### 编译选项
 
 **最小化输出**:
@@ -221,6 +229,7 @@ emcc main.c -o main.html \
   -Os \
   --closure 1
 ```
+
 **调试构建**:
 
 ```bash
@@ -232,6 +241,7 @@ emcc main.c -o main.html \
   -g4 \
   --source-map-base http://localhost:8000/
 ```
+
 #### 优化级别对比
 
 | 级别 | 代码大小    | 启动时间 | 峰值性能 | 适用场景 |
@@ -271,6 +281,7 @@ export function fibonacci(n: i32): i32 {
 const ptr = memory.allocate(1024)
 memory.free(ptr)
 ```
+
 **对比分析**:
 
 | 维度     | AssemblyScript | Rust       | TypeScript |
@@ -294,11 +305,13 @@ memory.free(ptr)
 ```bash
 emcc -g4 --source-map-base=http://localhost:8000/ main.c -o main.html
 ```
+
 **Rust**:
 
 ```bash
 RUSTFLAGS="-C debuginfo=2" cargo build --target wasm32-unknown-unknown
 ```
+
 #### 调试功能
 
 **1. 断点调试**:
@@ -316,6 +329,7 @@ const memory = instance.exports.memory
 const view = new Uint8Array(memory.buffer)
 console.log(view.slice(0, 100)) // 查看前 100 字节
 ```
+
 **3. 性能监控**:
 
 ```javascript
@@ -327,6 +341,7 @@ performance.measure("wasm-compute", "wasm-start", "wasm-end")
 
 console.log(performance.getEntriesByName("wasm-compute"))
 ```
+
 ---
 
 ### WABT 工具套件
@@ -351,6 +366,7 @@ wasm-interp module.wasm --run-all-exports --trace
 # 5. wasm-validate: 验证模块
 wasm-validate module.wasm
 ```
+
 **实用案例**:
 
 ```bash
@@ -363,6 +379,7 @@ wasm-objdump -x module.wasm | grep -E "(import|export)"
 # 分析代码段大小
 wasm-objdump -h module.wasm | grep -E "Code|Data"
 ```
+
 ---
 
 ### wasm-opt 优化器
@@ -376,6 +393,7 @@ wasm-opt input.wasm -O3 -o output.wasm
 # 极限压缩
 wasm-opt input.wasm -Oz --strip-debug --strip-producers -o output.wasm
 ```
+
 **特定优化选项**:
 
 ```bash
@@ -387,6 +405,7 @@ wasm-opt input.wasm \
   --duplicate-function-elimination \ # 消除重复函数
   -o output.wasm
 ```
+
 **优化效果实测**:
 
 | 模块             | 原始大小 | -O3           | -Oz           | gzip后        |
@@ -427,6 +446,7 @@ performance.measure("wasm-compute", "compute-start", "compute-end")
 const measures = performance.getEntriesByName("wasm-compute")
 console.log("Duration:", measures[0].duration, "ms")
 ```
+
 **2. 分析火焰图**:
 
 - 🔥 JavaScript 调用 → Wasm 函数
@@ -442,6 +462,7 @@ console.log("Duration:", measures[0].duration, "ms")
 💡 优化方案：使用共享内存，减少拷贝
 ✅ 优化结果：整体性能提升 10 倍
 ```
+
 ---
 
 ### 自定义性能分析
@@ -472,6 +493,7 @@ console.log("Duration:", measures[0].duration, "ms")
   call $timer_end
 )
 ```
+
 **自动化工具**:
 
 ```python
@@ -483,6 +505,7 @@ for func in module.functions:
     inject_profiling_hooks(func)
 module.to_file("output.wasm")
 ```
+
 ---
 
 ## 📦 包管理工具
@@ -501,6 +524,7 @@ wasm-pack build --target web
 # 3. 发布到 npm
 wasm-pack publish
 ```
+
 **生成的包结构**:
 
 ```text
@@ -510,6 +534,7 @@ pkg/
 ├── my_wasm_lib_bg.wasm   # Wasm 模块
 └── my_wasm_lib.d.ts      # TypeScript 类型定义
 ```
+
 **前端集成**:
 
 ```javascript
@@ -526,6 +551,7 @@ async function main() {
 
 main()
 ```
+
 ---
 
 ### wapm
@@ -542,6 +568,7 @@ wapm install -g quickjs
 # 运行包
 wapm run quickjs script.js
 ```
+
 **发布包**:
 
 ```toml
@@ -561,6 +588,7 @@ abi = "wasi"
 name = "mylib-cli"
 module = "mylib"
 ```
+
 ---
 
 ## 🏗️ 构建系统集成
@@ -594,6 +622,7 @@ codegen-units = 1
 strip = true
 panic = 'abort'
 ```
+
 **Makefile 自动化**:
 
 ```makefile
@@ -617,6 +646,7 @@ clean:
 
 all: build optimize test
 ```
+
 ---
 
 ### CMake + Emscripten
@@ -641,6 +671,7 @@ set_target_properties(myapp PROPERTIES
 # 设置输出目录
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/dist)
 ```
+
 **构建脚本**:
 
 ```bash
@@ -654,6 +685,7 @@ emmake make -C build
 # 优化
 wasm-opt build/dist/myapp.wasm -Oz -o build/dist/myapp.wasm
 ```
+
 ---
 
 ## 💻 开发环境配置
@@ -672,6 +704,7 @@ wasm-opt build/dist/myapp.wasm -Oz -o build/dist/myapp.wasm
   ]
 }
 ```
+
 #### launch.json 配置
 
 ```json
@@ -696,6 +729,7 @@ wasm-opt build/dist/myapp.wasm -Oz -o build/dist/myapp.wasm
   ]
 }
 ```
+
 #### tasks.json 配置
 
 ```json
@@ -723,6 +757,7 @@ wasm-opt build/dist/myapp.wasm -Oz -o build/dist/myapp.wasm
   ]
 }
 ```
+
 ---
 
 ### Docker 开发环境
@@ -760,6 +795,7 @@ WORKDIR /workspace
 
 CMD ["/bin/bash"]
 ```
+
 **docker-compose.yml**:
 
 ```yaml
@@ -779,6 +815,7 @@ services:
 volumes:
   cargo-cache:
 ```
+
 **使用方法**:
 
 ```bash
@@ -794,6 +831,7 @@ wasm-pack build --target web
 # 启动开发服务器
 python3 -m http.server 8000
 ```
+
 ---
 
 ## ✅ 质量保证工具
@@ -812,6 +850,7 @@ wasm-validate --check-types module.wasm
 # 完整验证（严格模式）
 wasm-validate --pedantic module.wasm
 ```
+
 ### 静态分析
 
 **检查项**:
@@ -826,6 +865,7 @@ wasm-objdump -x module.wasm | grep "import" | sort
 # 查找潜在的性能问题
 wasm-objdump -d module.wasm | grep "call_indirect"
 ```
+
 ---
 
 ## 🎯 最佳实践
@@ -845,6 +885,7 @@ wasm-objdump -d module.wasm | grep "call_indirect"
   ├─ 启用 gzip/brotli 压缩
   └─ 运行 wasm-validate 验证
 ```
+
 ### 大小优化检查清单
 
 - [ ] 使用 `opt-level = "z"` 或 `"s"`
@@ -885,6 +926,7 @@ RUSTFLAGS="-C debuginfo=2" cargo build --target wasm32-unknown-unknown
 # 生成 source map
 wasm-bindgen --debug --keep-debug
 ```
+
 **2. 日志调试**:
 
 ```rust
@@ -895,6 +937,7 @@ pub fn debug_function(value: i32) {
     console::log_1(&format!("Value: {}", value).into());
 }
 ```
+
 **3. 内存调试**:
 
 ```javascript
@@ -904,6 +947,7 @@ await wasmModule.compute()
 const memoryAfter = instance.exports.memory.buffer.byteLength
 console.log("Memory growth:", memoryAfter - memoryBefore, "bytes")
 ```
+
 ---
 
 ## 📚 参考资源

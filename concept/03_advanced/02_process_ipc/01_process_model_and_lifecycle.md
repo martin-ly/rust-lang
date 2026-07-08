@@ -173,3 +173,116 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+
+---
+
+## 补充视角：常见进程管理代码模式
+
+> 本节选编自 `crates/c07_process/docs/process_management.md`，
+> 作为 canonical 进程模型概念页的工程实践补充。
+
+### 同步命令执行
+
+使用 `Command::output()` 一次性执行并收集标准输出/错误：
+
+```rust
+use std::process::Command;
+
+let output = Command::new("ls").arg("-la").output()?;
+if output.status.success() {
+    println!("{}", String::from_utf8_lossy(&output.stdout));
+}
+```
+
+### 流式读取子进程输出
+
+使用 `BufReader` 逐行读取，避免一次性加载大量数据：
+
+```rust
+use std::io::{BufRead, BufReader};
+use std::process::{Command, Stdio};
+
+let mut child = Command::new("ping")
+    .arg("example.com").arg("-c").arg("4")
+    .stdout(Stdio::piped())
+    .spawn()?;
+
+if let Some(stdout) = child.stdout.take() {
+    for line in BufReader::new(stdout).lines() {
+        println!("{}", line?);
+    }
+}
+let status = child.wait()?;
+```
+
+### 环境变量管理
+
+- `Command::env(key, val)`：设置/覆盖单个环境变量。
+- `Command::envs(iter)`：批量设置。
+- `Command::env_clear()`：清空继承环境，构建最小环境。
+
+---
+
+## 补充视角：Rust 1.90+ 特性与进程管理
+
+> 本节选编自 `crates/c07_process/docs/03_rust_190_features.md`，
+> 作为 canonical 进程模型概念页的工程实践补充。
+
+### 异步闭包与进程管理
+
+Rust 1.90 起异步闭包（`async || {}`）可在异步上下文中更自然地封装进程处理逻辑，
+避免手动装箱 `Future`，使 `tokio::process` 的回调式代码更简洁。
+
+### 模式匹配与进程状态
+
+`std::process::ExitStatus` 配合守卫条件（guard）可清晰处理：
+
+- 成功退出
+- 非零退出码
+- 信号终止
+
+### 迭代器与进程输出
+
+`BufReader::lines()` 配合 `filter_map` / `filter` / `take` 可流式处理子进程输出，
+避免一次性加载大量数据。
+
+### 错误处理策略
+
+- 使用 `?` 传播 I/O 错误。
+- 对 `output()` 结果显式检查 `status.success()`。
+- 将 `stderr` 纳入错误信息，便于排查。
+
+---
+
+## 补充视角：高级进程管理企业级模式
+
+> 本节选编自 `crates/c07_process/docs/12_advanced_process_management.md`，
+> 作为 canonical 进程模型概念页的工程实践补充。
+
+### 进程池（Process Pool）
+
+在高吞吐场景下，频繁创建/销毁进程代价高昂。进程池通过维护一组可复用的子进程，
+降低启动开销并提供：
+
+- 最大并发数限制（semaphore）
+- 空闲超时与自动回收
+- 健康检查与故障隔离
+- 运行统计与可观测性
+
+### 生命周期管理器
+
+将进程状态抽象为状态机：
+
+```text
+Created → Running → Waiting → Terminated
+            ↓         ↓
+          Failed   Stopping
+```
+
+通过统一的管理器处理启动、等待、终止、清理，避免资源泄漏。
+
+### 资源监控与故障恢复
+
+- 监控 CPU、内存、运行时长等指标。
+- 设置重启策略（固定延迟、指数退避、最大重试次数）。
+- 区分可恢复错误与致命错误，避免无限重启循环。

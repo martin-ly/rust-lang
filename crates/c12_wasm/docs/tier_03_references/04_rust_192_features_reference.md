@@ -62,6 +62,7 @@ impl WasmBuffer {
     pub fn capacity(&self) -> usize;
 }
 ```
+
 **性能**: +5% 内存管理性能
 
 **安全**: ⭐⭐⭐⭐⭐ 内存安全保证
@@ -91,6 +92,7 @@ impl WasmAllocatorConfig {
     pub fn calculate_pages(&self, total_bytes: usize) -> usize;
 }
 ```
+
 **性能**: +10% 计算性能
 
 **安全**: ⭐⭐⭐⭐⭐ 类型安全，无除零错误
@@ -120,6 +122,7 @@ impl WasmFFIUnion {
     pub fn get_integer(&self) -> u32;
 }
 ```
+
 **安全**: ⭐⭐⭐⭐⭐ 允许在安全代码中使用原始引用
 
 ---
@@ -136,6 +139,7 @@ impl WasmFFIUnion {
 pub fn wasm_optimized_array_eq<T: PartialEq>(arr1: &[T], arr2: &[T]) -> bool;
 pub fn wasm_optimized_vec_eq<T: PartialEq>(vec1: &Vec<T>, vec2: &Vec<T>) -> bool;
 ```
+
 **性能**: +15-25% 比较性能
 
 **适用**: `TrustedLen` 迭代器
@@ -163,6 +167,7 @@ impl<T> WasmCircularBuffer<T> {
     pub fn buffer(&self) -> &[T];
 }
 ```
+
 **性能**: +30-35% 旋转性能
 
 ---
@@ -187,6 +192,7 @@ impl WasmDebugInfo {
     pub fn format(&self) -> String;
 }
 ```
+
 **用途**: 调试和错误追踪
 
 ---

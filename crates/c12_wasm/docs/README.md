@@ -49,6 +49,7 @@ impl Point {
     }
 }
 ```
+
 ---
 
 ## 文档结构导航
@@ -100,6 +101,7 @@ pub fn process_data(data: &[u8]) -> Vec<u8> {
     data.iter().map(|b| b * 2).collect()
 }
 ```
+
 ### 2. wasm-bindgen 集成
 
 ```rust
@@ -124,6 +126,7 @@ pub fn calculate(x: f64) -> f64 {
     x.sin() * x.cos()
 }
 ```
+
 ### 3. WASI 开发
 
 ```rust
@@ -146,6 +149,7 @@ pub fn write_file(path: &str, data: &str) -> Result<(), std::io::Error> {
     Ok(())
 }
 ```
+
 ### 4. 性能优化
 
 ```toml
@@ -156,6 +160,7 @@ lto = true           # 链接时优化
 strip = true         # 去除符号
 panic = "abort"      #  panic 处理
 ```
+
 ```rust
 // 使用 wee_alloc 减少二进制大小
 #[cfg(target_arch = "wasm32")]
@@ -170,6 +175,7 @@ pub fn process_large_data(data: &[u8]) -> Result<(), JsValue> {
     Ok(())
 }
 ```
+
 ---
 
 ## 学习路径指引
@@ -190,6 +196,7 @@ wasm-pack new hello-wasm
 cd hello-wasm
 wasm-pack build
 ```
+
 - 学习 WASM 核心概念
 - 理解线性内存模型
 - 掌握基本数据类型映射
@@ -307,6 +314,7 @@ cargo run --example 06_async_fetch
 cargo run --example 07_design_patterns
 cargo run --example 08_container_microservice
 ```
+
 ### 工具链
 
 | 工具 | 用途 | 链接 |
@@ -340,6 +348,7 @@ wasmedge target/wasm32-wasip1/release/wasi-app.wasm input.txt
 # 3. 运行测试
 cargo test -p c12_wasm
 ```
+
 ---
 
 [返回模块主页](../README.md) | [返回文档中心](../../../README.md)

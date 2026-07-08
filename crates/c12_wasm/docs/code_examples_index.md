@@ -133,6 +133,7 @@ wasm-pack build --target web
 # 在 JavaScript 中使用
 import { add, greet, Counter } from './pkg/c12_wasm.js';
 ```
+
 ### 2. 编译为 WASI（本地运行）
 
 ```bash
@@ -145,6 +146,7 @@ cargo build --target wasm32-wasip1 --release
 # 使用 WasmEdge 运行
 wasmedge target/wasm32-wasip1/release/wasi-app.wasm input.txt
 ```
+
 ### 3. 运行生态库示例
 
 ```bash
@@ -157,6 +159,7 @@ cargo test design_patterns
 # 运行 Rust 1.92.0 特性测试
 cargo test rust_190_features
 ```
+
 ### 4. 运行 WasmEdge 示例
 
 ```bash
@@ -177,6 +180,7 @@ wasmedge --enable-threads app.wasm
 # 使用 WasmEdge 运行（启用 WASI-Crypto）
 wasmedge --enable-wasi-crypto app.wasm
 ```
+
 ---
 
 - ✅ 详细的文档注释

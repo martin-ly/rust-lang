@@ -63,6 +63,12 @@
     - [测验 2：Arc 引用计数（理解层）](#测验-2arc-引用计数理解层)
     - [测验 3：工作窃取模式（应用层）](#测验-3工作窃取模式应用层)
     - [测验 4：死锁预防（分析层）](#测验-4死锁预防分析层)
+  - [补充视角：并发模式选择矩阵](#补充视角并发模式选择矩阵)
+    - [模式适用场景](#模式适用场景)
+    - [决策树](#决策树)
+  - [补充视角：并发设计模式实践](#补充视角并发设计模式实践)
+    - [模式特征对比](#模式特征对比)
+    - [选择建议](#选择建议)
 
 ---
 
@@ -1137,3 +1143,56 @@ fn transfer(from: &Account, to: &Account, amount: i32) {
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Rayon Docs](https://docs.rs/rayon/) · [Brown University Interactive TRPL](https://rust-book.cs.brown.edu/ch16-00-concurrency.html)
+
+---
+
+## 补充视角：并发模式选择矩阵
+
+> 本节选编自 `crates/c05_threads/docs/03_concurrency_patterns.md`，
+> 作为 canonical 并发模式概念页的工程实践补充。
+
+### 模式适用场景
+
+| 模式 | 最佳场景 | 不适用 | 关键 crate |
+| :--- | :--- | :--- | :--- |
+| 异步迭代器 | 流式网络 I/O、事件流 | CPU 密集计算 | `futures`、`tokio::sync` |
+| 工作窃取 | CPU 密集并行计算 | I/O 等待型任务 | `rayon` |
+| 分治算法 | 排序、搜索、递归分解 | 无法分解的问题 | `rayon` |
+| 流水线 | 顺序阶段处理、数据转换 | 随机访问模式 | `crossbeam::channel` |
+| 事件驱动 | GUI、游戏循环、IoT | 硬实时系统 | `tokio`、`mio` |
+| 响应式编程 | 复杂事件流、数据绑定 | 简单顺序逻辑 | `futures`、`tokio::sync` |
+
+### 决策树
+
+1. 任务类型是 I/O 密集还是 CPU 密集？
+   - I/O 密集 → 优先考虑异步或事件驱动。
+   - CPU 密集 → 优先考虑工作窃取或分治。
+2. 是否需要跨阶段数据流？
+   - 是 → 流水线或响应式流。
+3. 状态是否集中？
+   - 是且需共享 → Actor 或 `Arc<Mutex<T>>`。
+   - 否且可分解 → Fork-Join。
+
+---
+
+## 补充视角：并发设计模式实践
+
+> 本节选编自 `crates/c09_design_pattern/docs/tier_02_guides/04_concurrency_patterns_guide.md`，
+> 作为 canonical 并发模式概念页的工程实践补充。
+
+### 模式特征对比
+
+| 模式 | 通信方式 | 状态位置 | 适用场景 | 关键 crate |
+| :--- | :--- | :--- | :--- | :--- |
+| Actor | 异步消息 | 每个 Actor 私有 | 服务边界、状态机 | `tokio`、`actix` |
+| Pipeline | 通道顺序传递 | 阶段间隔离 | 数据流、ETL | `crossbeam::channel` |
+| Fork-Join | 任务分解 + 结果合并 | 输入不可变 | 并行计算 | `rayon` |
+| 生产者-消费者 | 共享队列 | 队列共享 | 任务调度、日志 | `std::sync::mpsc` |
+| 共享状态 | `Arc<Mutex<T>>` / 原子 | 共享内存 | 计数器、缓存 | `std::sync` |
+
+### 选择建议
+
+- 状态能否被自然划分？能 → Actor 或 Pipeline。
+- 问题是否可递归分解？是 → Fork-Join。
+- 是否需要低延迟共享？是 → 共享状态 + 锁/原子操作。
+- 任务到达与处理速率不匹配？使用有界队列实现背压。

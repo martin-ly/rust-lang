@@ -112,6 +112,7 @@ jobs:
           name: wasm-${{ matrix.os }}-${{ matrix.toolchain }}
           path: target/wasm32-wasip1/release/*.wasm
 ```
+
 ### 多语言构建
 
 **Emscripten + Rust 混合**：
@@ -156,6 +157,7 @@ jobs:
           name: rust-build
           path: pkg/
 ```
+
 ---
 
 ## 优化与压缩
@@ -203,6 +205,7 @@ jobs:
             module.opt.wasm
             module.opt.wasm.br
 ```
+
 ---
 
 ## 质量门控
@@ -241,6 +244,7 @@ jobs:
       - name: Security scan
         run: cargo audit
 ```
+
 ### 测试覆盖率
 
 ```yaml
@@ -273,6 +277,7 @@ jobs:
             exit 1
           fi
 ```
+
 ---
 
 ## 性能回归检测
@@ -321,6 +326,7 @@ jobs:
             exit 1
           fi
 ```
+
 ---
 
 ## 多环境部署
@@ -380,6 +386,7 @@ jobs:
             --cache-control "max-age=31536000,immutable" \
             --content-encoding br
 ```
+
 ---
 
 ## Docker 集成
@@ -418,6 +425,7 @@ EXPOSE 8080
 
 CMD ["wasmedge", "--reactor", "/app/module.opt.wasm"]
 ```
+
 **CI 集成**：
 
 ```yaml
@@ -445,6 +453,7 @@ jobs:
           cache-from: type=registry,ref=myorg/wasm-app:buildcache
           cache-to: type=registry,ref=myorg/wasm-app:buildcache,mode=max
 ```
+
 ---
 
 ## GitLab CI/CD
@@ -535,6 +544,7 @@ deploy:production:
     name: production
     url: https://myapp.com
 ```
+
 ---
 
 ## Jenkins Pipeline
@@ -622,6 +632,7 @@ pipeline {
     }
 }
 ```
+
 ---
 
 ## 版本管理与发布
@@ -663,6 +674,7 @@ jobs:
         with:
           files: target/wasm32-wasip1/release/*.wasm
 ```
+
 ### npm 包发布
 
 ```yaml
@@ -689,6 +701,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
+
 ---
 
 ## 监控与告警
@@ -735,6 +748,7 @@ jobs:
           text: "Production deployment health check failed!"
           webhook_url: ${{ secrets.SLACK_WEBHOOK }}
 ```
+
 ---
 
 ## 批判性分析
@@ -783,6 +797,7 @@ jobs:
    - 上传 S3
    - CDN 失效
 ```
+
 **批判**：
 
 > 构建时间是纯 JS 项目的 3-5 倍。对于高频部署场景（如 Trunk-Based Development），等待时间成为开发瓶颈。
@@ -811,6 +826,7 @@ jobs:
     restore-keys: |
       ${{ runner.os }}-
 ```
+
 ### 增量构建
 
 **只构建变更模块**：
@@ -829,6 +845,7 @@ if echo "$CHANGED_FILES" | grep -q "^cpp/"; then
   emcc cpp/main.cpp -o dist/module.js
 fi
 ```
+
 ### 并行化
 
 **最大化并行度**：
@@ -843,6 +860,7 @@ jobs:
       - name: Build ${{ matrix.module }}
         run: cargo build -p ${{ matrix.module }} --target wasm32-wasip1
 ```
+
 ---
 
 ## 参考文献

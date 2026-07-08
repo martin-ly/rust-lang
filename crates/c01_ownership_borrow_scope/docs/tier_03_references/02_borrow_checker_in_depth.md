@@ -1,177 +1,21 @@
-# Tier 3: 借用检查器详解
+> **EN**: Borrow Checker In-Depth (c01 example index)
+> **Summary**: Stub pointing to the canonical borrowing authority. Practical examples remain in the c01 crate.
 
-> **文档类型**: 技术参考
-> **适用版本**: Rust 1.96.1+
-> **主题**: 借用检查器工作原理和规则
+# Tier 3: 借用检查器详解（c01 示例索引）
 
----
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)。
 
-## 目录
+本文件原为对应 crate 的通用概念参考。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-- [Tier 3: 借用检查器详解](#tier-3-借用检查器详解)
-  - [目录](#目录)
-  - [1. 借用检查器概述](#1-借用检查器概述)
-  - [2. 借用规则](#2-借用规则)
-  - [3. NLL (Non-Lexical Lifetimes)](#3-nll-non-lexical-lifetimes)
-  - [4. 借用检查算法](#4-借用检查算法)
-  - [5. 常见错误解析](#5-常见错误解析)
-    - [错误 1: Cannot borrow as mutable](#错误-1-cannot-borrow-as-mutable)
-    - [错误 2: Cannot borrow as mutable more than once](#错误-2-cannot-borrow-as-mutable-more-than-once)
-    - [错误 3: Cannot borrow as mutable because it is also borrowed as immutable](#错误-3-cannot-borrow-as-mutable-because-it-is-also-borrowed-as-immutable)
+## 快速导航
 
----
-
-## 1. 借用检查器概述
-
-借用检查器 (Borrow Checker) 是 Rust 编译器的核心组件，负责在编译时验证所有权和借用规则。
-从引用一致性视角看，借用检查器是**编译期逻辑证明系统**，通过约束求解而非内存状态检查来保证资源安全。
-
-**主要职责**（引用一致性视角）:
-
-- ✅ 检查借用规则（编译期逻辑证明）
-- ✅ 防止数据竞争（编译期排他性契约的验证）
-- ✅ 确保资源安全（编译期逻辑证明，非内存检查）
-- ✅ 验证生命周期（逻辑依赖关系的证明）
-
----
-
-## 2. 借用规则
-
-**核心规则**:
-
-1. **不可变借用规则**: 可以有多个不可变引用
-
-   ```rust
-   let s = String::from("hello");
-   let r1 = &s; // ✅
-   let r2 = &s; // ✅
-   ```
-
-2. **可变借用规则**: 只能有一个可变引用
-
-   ```rust
-   let mut s = String::from("hello");
-   let r1 = &mut s; // ✅
-   // let r2 = &mut s; // ❌ 编译错误
-   ```
-
-3. **混合借用规则**: 不能同时有可变和不可变引用
-
-   ```rust
-   let mut s = String::from("hello");
-   let r1 = &s; // ✅
-   // let r2 = &mut s; // ❌ 编译错误
-   ```
-
----
-
-## 3. NLL (Non-Lexical Lifetimes)
-
-**NLL 优化** (Rust 2018+)（引用一致性视角）:
-
-借用的生命周期不再严格基于作用域，而是基于**最后一次使用**。
-从引用一致性视角看，NLL 使用**逻辑证明**更精确地计算引用的有效范围（逻辑关系，非物理时间）。
-
-```rust
-let mut s = String::from("hello");
-
-let r1 = &s;
-let r2 = &s;
-println!("{} and {}", r1, r2);
-// r1 和 r2 在此之后不再使用
-
-let r3 = &mut s; // ✅ NLL 允许
-println!("{}", r3);
-```
-
-**传统作用域 vs NLL**:
-
-```text
-传统 (Lexical):
-let r1 = &s;      ├── r1 生命周期开始
-let r2 = &s;      │   ├── r2 生命周期开始
-...               │   │
-}                 ┴── r1, r2 生命周期结束
-
-NLL:
-let r1 = &s;      ├── r1 生命周期开始
-println!("{}", r1); ┴── r1 最后一次使用，生命周期结束
-let r2 = &mut s;  ✅ 可以可变借用
-```
-
----
-
-## 4. 借用检查算法
-
-**检查流程**:
-
-1. **建立借用图**: 分析所有借用关系
-2. **生命周期推断**: 计算引用的生命周期
-3. **冲突检测**: 检查是否违反借用规则
-4. **错误报告**: 生成友好的错误信息
-
-**示例**:
-
-```rust
-fn main() {
-    let mut x = 5;
-    let y = &mut x;   // 可变借用开始
-    *y += 1;          // 使用可变借用
-    println!("{}", x); // ❌ 借用冲突
-    //              ^
-    //              y 的借用仍在此处活跃
-}
-```
-
----
-
-## 5. 常见错误解析
-
-### 错误 1: Cannot borrow as mutable
-
-```rust
-let s = String::from("hello");
-// s.push_str(", world"); // ❌ cannot borrow as mutable
-
-let mut s = String::from("hello");
-s.push_str(", world"); // ✅
-```
-
----
-
-### 错误 2: Cannot borrow as mutable more than once
-
-```rust
-let mut s = String::from("hello");
-let r1 = &mut s;
-// let r2 = &mut s; // ❌ cannot borrow as mutable more than once
-```
-
----
-
-### 错误 3: Cannot borrow as mutable because it is also borrowed as immutable
-
-```rust
-let mut s = String::from("hello");
-let r1 = &s;
-// let r2 = &mut s; // ❌ cannot borrow
-println!("{}", r1);
-```
-
----
-
-**相关文档**:
-
-- [Tier 2: 02\_借用实践指南](../tier_02_guides/02_borrowing_practice_guide.md)
-- [Tier 4: 01\_高级生命周期模式](../tier_04_advanced/01_advanced_lifetime_patterns.md)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| 借用检查器概述 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| 借用规则 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| NLL (Non-Lexical Lifetimes) | [concept/03_advanced/02_unsafe/08_nll_and_polonius.md](../../../../concept/03_advanced/02_unsafe/08_nll_and_polonius.md) |
+| 借用检查算法 | [concept/03_advanced/02_unsafe/08_nll_and_polonius.md](../../../../concept/03_advanced/02_unsafe/08_nll_and_polonius.md) |
+| 常见借用错误 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |

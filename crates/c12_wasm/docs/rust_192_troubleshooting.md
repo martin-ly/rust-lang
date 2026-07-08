@@ -44,6 +44,7 @@
 ```text
 error[E0432]: unresolved import `c12_wasm::rust_192_features`
 ```
+
 **解决方案**:
 
 1. **检查依赖配置**:
@@ -53,18 +54,21 @@ error[E0432]: unresolved import `c12_wasm::rust_192_features`
 [dependencies]
 c12_wasm = { path = "../c12_wasm" }  # 或使用 git 路径
 ```
+
 1. **检查模块导出**:
 
 ```rust
 // 确保 lib.rs 中导出了模块
 pub mod rust_192_features;
 ```
+
 1. **重新构建**:
 
 ```bash
 cargo clean
 cargo build
 ```
+
 ---
 
 ### 问题 2: 类型推断失败
@@ -74,6 +78,7 @@ cargo build
 ```text
 error[E0283]: type annotations needed for `WasmCircularBuffer<_>`
 ```
+
 **解决方案**:
 
 ```rust
@@ -83,6 +88,7 @@ let mut buffer = WasmCircularBuffer::new(10);
 // ✅ 正确：显式指定类型
 let mut buffer: WasmCircularBuffer<i32> = WasmCircularBuffer::new(10);
 ```
+
 ---
 
 ### 问题 3: 编译错误 "unresolved import"
@@ -92,6 +98,7 @@ let mut buffer: WasmCircularBuffer<i32> = WasmCircularBuffer::new(10);
 ```text
 error[E0432]: unresolved import `std::num::NonZeroUsize`
 ```
+
 **解决方案**:
 
 ```rust
@@ -101,6 +108,7 @@ use std::num::NonZeroUsize;
 // 检查 Rust 版本
 rustc --version  // 应该显示 1.92.0 或更高
 ```
+
 ---
 
 ## ⚡ 性能问题
@@ -120,6 +128,7 @@ rustc --version  // 应该显示 1.92.0 或更高
 ```bash
 cargo build --release
 ```
+
 1. **启用 LTO**:
 
 ```toml
@@ -127,11 +136,13 @@ cargo build --release
 [profile.release]
 lto = true
 ```
+
 1. **使用 wasm-opt**:
 
 ```bash
 wasm-opt -O3 input.wasm -o output.wasm
 ```
+
 1. **验证优化**:
 
 ```bash
@@ -141,6 +152,7 @@ ls -lh pkg/*.wasm
 # 运行性能测试
 cargo bench
 ```
+
 ---
 
 ### 问题 5: 二进制大小没有减小
@@ -163,11 +175,13 @@ lto = true
 codegen-units = 1
 strip = true
 ```
+
 1. **使用 wasm-opt**:
 
 ```bash
 wasm-opt -Oz -o output.wasm input.wasm
 ```
+
 1. **检查依赖**:
 
 ```toml
@@ -176,6 +190,7 @@ wasm-opt -Oz -o output.wasm input.wasm
 [dependencies]
 some-crate = { version = "1.0", default-features = false }
 ```
+
 ---
 
 ## 🛡️ 安全问题
@@ -187,6 +202,7 @@ some-crate = { version = "1.0", default-features = false }
 ```text
 warning: unnecessary unsafe block
 ```
+
 **解决方案**:
 
 ```rust
@@ -198,6 +214,7 @@ unsafe {
 // ✅ 正确：使用安全的访问方法
 let value = union.get_integer();
 ```
+
 ---
 
 ### 问题 7: 内存安全问题
@@ -222,6 +239,7 @@ unsafe {
 // unsafe { buffer.set_len(1000); }
 // let value = buffer[0]; // 未初始化读取
 ```
+
 ---
 
 ## 🔗 集成问题
@@ -233,6 +251,7 @@ unsafe {
 ```text
 TypeError: wasm function is not a function
 ```
+
 **解决方案**:
 
 1. **确保正确初始化**:
@@ -248,6 +267,7 @@ const result = add(2, 3)
 import { add } from "./pkg/c12_wasm.js"
 const result = add(2, 3) // 错误
 ```
+
 1. **检查 wasm-bindgen 版本**:
 
 ```toml
@@ -255,6 +275,7 @@ const result = add(2, 3) // 错误
 [dependencies]
 wasm-bindgen = "0.2"  # 确保使用最新版本
 ```
+
 ---
 
 ### 问题 9: 类型转换错误
@@ -264,6 +285,7 @@ wasm-bindgen = "0.2"  # 确保使用最新版本
 ```text
 TypeError: Cannot convert undefined to number
 ```
+
 **解决方案**:
 
 ```rust
@@ -279,6 +301,7 @@ if (value !== undefined) {
     console.log(value);
 }
 ```
+
 ---
 
 ## 📚 相关文档

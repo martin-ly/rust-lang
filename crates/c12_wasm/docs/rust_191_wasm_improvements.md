@@ -103,6 +103,7 @@ fn compile_wasm() {
     // 类型检查：100%
 }
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -112,6 +113,7 @@ use c12_wasm::rust_191_features::wasm_compilation_optimizations::*;
 let stats = simulate_wasm_compilation(10000, true);
 // 类型检查：85-90% (提升 10-20%)
 ```
+
 #### 2. 借用检查器优化
 
 Rust 1.91 改进了借用检查器的内部算法，减少编译时间：
@@ -123,6 +125,7 @@ fn compile_with_optimizations() {
     // 性能提升：10-20%
 }
 ```
+
 ### 性能对比
 
 | 项目大小           | Rust 1.90 | Rust 1.91 | 编译时间减少 |
@@ -153,6 +156,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 增强的 const 上下文在 WASM 配置中的应用
@@ -176,6 +180,7 @@ Rust 1.91 允许在 const 上下文中创建对非静态常量的引用，这对
 static MAX_PAGES: usize = 65536;
 const CONFIG: &usize = &MAX_PAGES;  // ✅ 仅支持 static
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -188,6 +193,7 @@ const MAX_MEMORY_PAGES_REF: &usize = &MAX_MEMORY_PAGES;  // ✅ Rust 1.91
 const MAX_MEMORY_BYTES: usize = MAX_MEMORY_PAGES * PAGE_SIZE;
 const SIZE_REF: &usize = &MAX_MEMORY_BYTES;  // ✅ Rust 1.91
 ```
+
 #### 2. 实际应用场景
 
 ```rust
@@ -208,6 +214,7 @@ fn create_wasm_config() {
     println!("总缓冲区大小: {} bytes", WasmConfigSystem::TOTAL_BUFFER_SIZE);
 }
 ```
+
 ---
 
 ## 优化的内存分配器在 WASM 中的应用
@@ -233,6 +240,7 @@ for i in 0..10000 {
     // 使用后释放
 }
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -242,6 +250,7 @@ use c12_wasm::rust_191_features::wasm_memory_optimizations::*;
 let objects = create_small_wasm_objects();
 // 自动使用对象池，性能提升显著
 ```
+
 ### 性能对比
 
 | 对象大小    | Rust 1.90 | Rust 1.91 | 性能提升 |
@@ -279,6 +288,7 @@ fn process_wasm_data(data: &[u8]) -> Vec<u8> {
     // 在 JIT 模式下，性能提升更明显
 }
 ```
+
 ### 性能对比
 
 | 操作类型   | Rust 1.90 | Rust 1.91 | 性能提升 |
@@ -313,6 +323,7 @@ let improvement = ((size_without.total_size - size_with.total_size) as f64
 
 println!("二进制大小减少: {:.2}%", improvement);
 ```
+
 ### 优化对比
 
 | 项目类型 | Rust 1.90 | Rust 1.91 | 大小减少 |
@@ -348,6 +359,7 @@ let exec_improvement = ((stats_without.execution_time_us
 
 println!("执行时间减少: {:.2}%", exec_improvement);
 ```
+
 ---
 
 ## wasm-bindgen 集成优化
@@ -369,6 +381,7 @@ use c12_wasm::rust_191_features::wasm_bindgen_optimizations::*;
 let config = WasmBindgenConfig::optimized();
 // 使用 const 上下文进行配置计算，性能更好
 ```
+
 ---
 
 ## 实际应用示例
@@ -385,6 +398,7 @@ fn high_performance_wasm_processing() {
     println!("处理的数据量: {} bytes", processed.len());
 }
 ```
+
 ### 示例 2: WASM 配置系统
 
 ```rust
@@ -396,6 +410,7 @@ fn create_wasm_config() {
     WasmExportConfig::demonstrate();
 }
 ```
+
 ### 示例 3: 小对象高频分配
 
 ```rust
@@ -407,6 +422,7 @@ fn high_frequency_allocation() {
     println!("创建了 {} 个小对象", objects.len());
 }
 ```
+
 ---
 
 ## 迁移指南
@@ -419,6 +435,7 @@ fn high_frequency_allocation() {
 rustup update stable
 rustc --version  # 应该显示 rustc 1.91.0
 ```
+
 #### 2. 利用新特性
 
 **使用 const 上下文增强**:
@@ -433,6 +450,7 @@ const MAX_PAGES: usize = 65536;
 const CONFIG: &usize = &MAX_PAGES; // ✅ 可以引用 const
 const DOUBLE: usize = *CONFIG * 2; // ✅ 可以基于引用计算
 ```
+
 **使用优化的编译**:
 
 ```rust
@@ -440,6 +458,7 @@ const DOUBLE: usize = *CONFIG * 2; // ✅ 可以基于引用计算
 // 无需代码更改即可享受性能提升
 cargo build --target wasm32-unknown-unknown --release
 ```
+
 **使用新的 API**:
 
 ```rust
@@ -450,6 +469,7 @@ use std::io::BufRead;
 // str::split_ascii_whitespace
 // Vec::try_reserve_exact
 ```
+
 #### 3. 性能优化建议
 
 1. **利用编译优化**: 编译时间自动减少，无需额外配置

@@ -94,6 +94,7 @@
     ├── SIMD 优化
     └── 并行处理
 ```
+
 ### 多维概念对比矩阵
 
 | 优化技术      | 性能提升 | 复杂度 | 适用场景  | Rust 1.92.0 |
@@ -115,6 +116,7 @@
 │       │   ├── 是 → 并行处理
 │       │   └── 否 → wasm-opt
 ```
+
 ---
 
 ## 🎯 概述
@@ -134,12 +136,14 @@ cargo bloat --release --target wasm32-unknown-unknown
 # 按 crate 分析
 cargo bloat --release --target wasm32-unknown-unknown --crates
 ```
+
 ### wasm-opt 分析
 
 ```bash
 # 打印函数大小
 wasm-opt --print-function-sizes module.wasm
 ```
+
 ---
 
 ## 🔍 性能瓶颈识别
@@ -156,6 +160,7 @@ pub fn process_data(data: &[u8]) -> Vec<u8> {
     data.to_vec()
 }
 ```
+
 ### 2. 函数性能分析
 
 ```rust
@@ -168,6 +173,7 @@ pub fn timed_function() {
     println!("Took {:?}", duration);
 }
 ```
+
 ---
 
 ## ⚡ 高级优化技术
@@ -185,6 +191,7 @@ pub fn simd_add(a: &[f32], b: &[f32]) -> Vec<f32> {
     a.iter().zip(b.iter()).map(|(x, y)| x + y).collect()
 }
 ```
+
 ### 2. 并行处理
 
 ```rust
@@ -194,6 +201,7 @@ pub fn parallel_process(data: &[i32]) -> Vec<i32> {
     data.par_iter().map(|x| x * 2).collect()
 }
 ```
+
 ---
 
 ## 📚 相关资源

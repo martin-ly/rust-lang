@@ -2159,3 +2159,72 @@ fn main() {
     println!("{}", decorated_b.operation());
 }
 ```
+
+---
+
+## 补充视角：创建型模式在 Rust 中的实现
+
+> 本节选编自 `crates/c09_design_pattern/docs/tier_02_guides/01_creational_patterns_guide.md`，
+> 作为 canonical 设计模式概念页的工程实践补充。
+
+### Builder 变体
+
+| 变体 | 特点 | 适用场景 |
+| :--- | :--- | :--- |
+| 基本 Builder | 链式调用 + 可选字段 | 配置对象 |
+| Typestate Builder | 编译期保证必填字段 | 强类型配置 |
+| Derive Builder | 使用 `derive_builder` 宏 | 快速原型、减少样板 |
+
+### Singleton 现代实现
+
+Rust 1.70+ 推荐使用 `std::sync::OnceLock` 替代 `lazy_static`：
+
+```rust
+use std::sync::OnceLock;
+
+fn global_config() -> &'static Config {
+    static CONFIG: OnceLock<Config> = OnceLock::new();
+    CONFIG.get_or_init(|| Config::from_env())
+}
+```
+
+### 其他创建型模式速查
+
+- **Factory**：隐藏具体类型，返回 `Box<dyn Trait>` 或 `impl Trait`。
+- **Abstract Factory**：为相关产品族提供统一创建接口。
+- **Prototype**：利用 `Clone` trait 实现对象复制；注意深拷贝与浅拷贝区别。
+- **Object Pool**：复用昂贵对象，常用于数据库连接、线程池。
+
+---
+
+## 补充视角：Rust 设计模式最佳实践与反模式
+
+> 本节选编自 `crates/c09_design_pattern/docs/tier_02_guides/05_best_practices_and_antipatterns.md`，
+> 作为 canonical 设计模式概念页的工程实践补充。
+
+### Rust 特有模式
+
+| 模式 | 用途 | 实现要点 |
+| :--- | :--- | :--- |
+| Newtype | 类型区分 + 单位安全 | `struct Meters(u32);` |
+| RAII | 确定性资源释放 | 实现 `Drop`，避免 `mem::forget` |
+| Extension Trait | 为外部类型添加方法 | `trait MyExt { fn method(&self); } impl MyExt for Type {}` |
+
+### 常见反模式
+
+| 反模式 | 危害 | 替代方案 |
+| :--- | :--- | :--- |
+| God Object | 职责过重、测试困难 | 拆分为多个小结构体 + trait |
+| `Deref` 滥用 | 隐藏类型边界、违反新类型初衷 | 显式方法或 `AsRef` |
+| `clone()` 滥用 | 不必要的内存拷贝 | 借用、引用计数或共享所有权 |
+| `unwrap()` 滥用 | 生产环境 panic | `?`、显式错误处理或 `expect` 说明 |
+| 频繁字符串拼接 | 多次分配 | `String::with_capacity` + `push_str` 或 `format!` |
+| 过度使用 `Box` | 堆分配与间接调用 | 泛型参数或 `impl Trait` |
+
+### 代码审查清单
+
+- [ ] 是否优先使用类型系统证明不变量，而非运行时检查？
+- [ ] trait/object 是否真的有多个实现？没有则考虑简化。
+- [ ] 错误路径是否都被 `Result` 或 `Option` 覆盖？
+- [ ] 是否存在不必要的克隆或装箱？
+- [ ] 模式引入的抽象是否与其收益成正比？

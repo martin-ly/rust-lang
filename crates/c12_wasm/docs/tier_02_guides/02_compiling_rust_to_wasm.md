@@ -51,7 +51,7 @@
   - [🚀 Rust 1.92.0 编译优化 ⭐ NEW](#-rust-1920-编译优化--new)
     - [使用 Rust 1.92.0 特性优化编译](#使用-rust-1920-特性优化编译)
   - [📚 相关资源](#-相关资源)
-  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
+  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1961--edition-2024-wasm-20--wasi-02)
 
 ---
 
@@ -114,6 +114,7 @@ Rust 编译 WASM 指南
 └── 实践示例
     └── 函数和结构体
 ```
+
 ---
 
 ## 🎯 概述
@@ -142,6 +143,7 @@ rustup update stable
 # 验证安装
 rustc --version  # 应该显示 1.90+
 ```
+
 ### 添加 WASM 目标
 
 ```bash
@@ -151,6 +153,7 @@ rustup target add wasm32-unknown-unknown
 # 验证目标
 rustup target list | grep wasm32
 ```
+
 ### 安装 wasm-pack
 
 ```bash
@@ -163,6 +166,7 @@ cargo install wasm-pack
 # 验证安装
 wasm-pack --version
 ```
+
 ### 安装 wasm-bindgen（可选）
 
 ```bash
@@ -172,6 +176,7 @@ cargo install wasm-bindgen-cli
 # 验证安装
 wasm-bindgen --version
 ```
+
 ---
 
 ## 📦 编译流程
@@ -185,6 +190,7 @@ cargo build --target wasm32-unknown-unknown --release
 # 输出文件位置
 # target/wasm32-unknown-unknown/release/your_module.wasm
 ```
+
 **优点**: 简单直接
 **缺点**: 需要手动处理绑定和集成
 
@@ -203,6 +209,7 @@ wasm-pack build --target web
 # pkg/hello_wasm_bg.wasm
 # pkg/hello_wasm.d.ts
 ```
+
 **优点**: 自动化处理绑定和集成
 **缺点**: 需要学习 wasm-pack 配置
 
@@ -230,6 +237,7 @@ lto = true           # 链接时优化
 codegen-units = 1    # 单一代码生成单元
 strip = true         # 去除调试符号
 ```
+
 ### 优化选项
 
 **大小优化**:
@@ -239,6 +247,7 @@ strip = true         # 去除调试符号
 opt-level = "z"  # 或者 "s"
 lto = true
 ```
+
 **性能优化**:
 
 ```toml
@@ -246,6 +255,7 @@ lto = true
 opt-level = 3
 lto = "fat"
 ```
+
 ---
 
 ## 🔧 wasm-bindgen 使用
@@ -283,6 +293,7 @@ impl Counter {
     }
 }
 ```
+
 ### 类型映射
 
 | Rust 类型      | JavaScript 类型  |
@@ -323,6 +334,7 @@ impl Person {
     }
 }
 ```
+
 ---
 
 ## 📦 wasm-pack 工作流
@@ -339,6 +351,7 @@ wasm-pack test --headless --firefox
 # 3. 发布到 npm（可选）
 wasm-pack publish
 ```
+
 ### 目标选项
 
 - `--target web`: Web 浏览器环境
@@ -374,6 +387,7 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ````
+
 **编译和使用**:
 
 ```bash
@@ -384,6 +398,7 @@ wasm-pack build --target web
 import { add } from './pkg/hello_wasm';
 console.log(add(2, 3)); // 输出: 5
 ```
+
 ### 示例 2: 结构体和方法
 
 ```rust
@@ -427,6 +442,7 @@ impl Counter {
     }
 }
 ```
+
 **在 JavaScript 中使用**:
 
 ```javascript
@@ -441,6 +457,7 @@ counter.increment()
 counter.increment()
 console.log(counter.value()) // 2
 ```
+
 ### 示例 3: 数组处理
 
 ```rust
@@ -477,6 +494,7 @@ pub fn find_max(numbers: &[i32]) -> Option<i32> {
     numbers.iter().max().copied()
 }
 ```
+
 **在 JavaScript 中使用**:
 
 ```javascript
@@ -492,6 +510,7 @@ const integers = new Int32Array([10, 5, 20, 15])
 const max = find_max(integers)
 console.log(max) // 20
 ```
+
 ### 示例 4: 字符串处理
 
 ````rust
@@ -533,6 +552,7 @@ pub fn is_palindrome(s: &str) -> bool {
     s_lower == reversed
 }
 ````
+
 ### 示例 5: 使用 Web API（Fetch）
 
 ````rust
@@ -579,6 +599,7 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
     Ok(json)
 }
 ````
+
 ### 示例 6: 错误处理
 
 ````rust
@@ -611,6 +632,7 @@ pub fn safe_divide(a: f64, b: f64) -> Result<f64, JsValue> {
     }
 }
 ````
+
 ### 示例 7: 性能优化（重用缓冲区）
 
 ```rust
@@ -654,6 +676,7 @@ pub fn process_bytes_optimized(data: &[u8]) -> Vec<u8> {
     })
 }
 ```
+
 ### 完整项目示例
 
 **Cargo.toml**:
@@ -674,6 +697,7 @@ wasm-bindgen = "0.2"
 opt-level = "z"
 lto = true
 ```
+
 **src/lib.rs**:
 
 ```rust
@@ -690,6 +714,7 @@ pub fn main() {
     console_log!("WASM module initialized");
 }
 ```
+
 **编译和运行**:
 
 ```bash
@@ -703,6 +728,7 @@ wasm-pack build --target web
 #   console.log(greet("World")); // "Hello, World!"
 # </script>
 ```
+
 ---
 
 ## 🚀 Rust 1.92.0 编译优化 ⭐ NEW
@@ -732,6 +758,7 @@ let allocator = WasmAllocatorConfig::new(
     100
 );
 ```
+
 **性能提升**:
 
 - 内存管理: +5%
