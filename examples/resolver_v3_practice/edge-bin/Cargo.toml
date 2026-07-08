@@ -1,14 +1,15 @@
 [package]
 name = "edge-bin"
-version = "0.1.0"
+version.workspace = true
 edition = "2021"
 rust-version = "1.96.1"
-description = "模拟前沿组件：MSRV 1.96，复用 clap 4"
-license = "MIT OR Apache-2.0"
+description = "模拟前沿二进制：MSRV 1.96，消费 legacy-lib 与 modern-app"
+license.workspace = true
 
 [dependencies]
-clap = { version = "4", features = ["derive"] }
 legacy-lib = { path = "../legacy-lib" }
 modern-app = { path = "../modern-app" }
+serde = { workspace = true, features = ["derive", "rc"] }
+serde_json = { workspace = true }
 
 # 本 crate 属于 examples/resolver_v3_practice workspace，不在此处声明 [workspace]。
