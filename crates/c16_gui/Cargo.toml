@@ -23,7 +23,8 @@ leptos_axum = { workspace = true }
 
 # 即时模式 GUI 与原生窗口运行器
 egui = { workspace = true }
-eframe = "0.34.3"
+# 2026-07-08: 0.34.3 -> 0.35.0，修复 quick-xml RUSTSEC-2026-0194/0195 传递依赖
+eframe = "0.35.0"
 
 # Elm 风格声明式 GUI
 iced = { workspace = true }

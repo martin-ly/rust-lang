@@ -9,16 +9,19 @@
 use azure_identity::DeveloperToolsCredential;
 use azure_storage_blob::BlobServiceClient;
 use futures::TryStreamExt;
+use std::sync::Arc;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let account = std::env::var("AZURE_STORAGE_ACCOUNT").unwrap_or_else(|_| "example".into());
 
     // 使用本地开发凭证（会尝试 Azure CLI / Azure Developer CLI）。
-    let credential = DeveloperToolsCredential::new(None)?;
+    // DeveloperToolsCredential::new 已返回 Arc<DeveloperToolsCredential>，可直接作为 Arc<dyn TokenCredential>。
+    let credential: Arc<dyn azure_core::credentials::TokenCredential> =
+        DeveloperToolsCredential::new(None)?;
 
-    let service_url = format!("https://{}.blob.core.windows.net/", account);
-    let service_client = BlobServiceClient::new(&service_url, Some(credential), None)?;
+    let service_url = format!("https://{}.blob.core.windows.net/", account).parse()?;
+    let service_client = BlobServiceClient::new(service_url, Some(credential), None)?;
 
     // 列出容器；Pager 会自动处理分页。
     let mut pager = service_client.list_containers(None)?;

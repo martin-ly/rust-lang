@@ -71,9 +71,9 @@ vector = { version = "0.4.1", optional = true }
 # 禁用默认 features，避免 aws-sdk-s3 默认启用 legacy-rustls（rustls 0.21）引入 RUSTSEC-2026-0098/0099/0104
 aws-config = { version = "1.8.16", optional = true, default-features = false, features = ["default-https-client", "rt-tokio", "credentials-process", "sso"] }
 aws-sdk-s3 = { version = "1.137.0", optional = true, default-features = false, features = ["default-https-client", "rt-tokio"] }
-azure_core = { version = "0.30.0", optional = true }
-azure_identity = { version = "0.30.0", optional = true }
-azure_storage_blob = { version = "0.7.0", optional = true }
+azure_core = { version = "1.0.0", optional = true }
+azure_identity = { version = "1.0.0", optional = true }
+azure_storage_blob = { version = "1.0.0", optional = true }
 
 [target.'cfg(target_os = "linux")'.dependencies]
 # io_uring 仅 Linux 可用
