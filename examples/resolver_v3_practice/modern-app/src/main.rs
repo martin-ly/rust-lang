@@ -1,15 +1,18 @@
 //! modern-app 二进制入口。
-//!
-//! 由于 modern-app 同时依赖 legacy-lib（indexmap 1.x）和自身的 indexmap 2.x，
-//! 最终依赖图中会同时存在两个 major 版本的 indexmap。
 
 fn main() {
-    println!(
-        "modern-app: legacy_count={}, modern_count={}",
-        legacy_lib::legacy_ordered_count(),
-        modern_app::modern_ordered_count(),
-    );
+    let (legacy, modern) = modern_app::combined_flags();
+    println!("modern-app: legacy={:?}, modern={:?}", legacy, modern);
 
-    let args = <legacy_lib::LegacyArgs as clap::Parser>::parse();
-    println!("verbose: {}", args.verbose);
+    let record = modern_app::Record {
+        id: 1,
+        name: "modern".to_string(),
+    };
+    println!("modern-app: record={:?}", record);
+
+    println!(
+        "modern-app: ordered legacy={}, modern={}",
+        legacy_lib::ordered_count(),
+        modern_app::ordered_count(),
+    );
 }

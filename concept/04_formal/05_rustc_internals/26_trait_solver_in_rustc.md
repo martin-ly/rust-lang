@@ -72,8 +72,12 @@
     - [3.3 Confirmation（确认）](#33-confirmation确认)
   - [四、Fulfillment：约束求解工作队列](#四fulfillment约束求解工作队列)
   - [五、Evaluation：不约束推断变量的判断](#五evaluation不约束推断变量的判断)
-  - [六、新一代 Trait Solver](#六新一代-trait-solver)
+  - [六、旧 Solver 与新 Solver（Next-Gen）的对比](#六旧-solver-与新-solvernext-gen的对比)
+    - [6.1 架构差异](#61-架构差异)
+    - [6.2 行为差异示例：关联类型与高阶生命周期](#62-行为差异示例关联类型与高阶生命周期)
+    - [6.3 嵌套目标与 Fixpoint：推断变量的传播](#63-嵌套目标与-fixpoint推断变量的传播)
   - [七、Coinduction 与递归 Trait](#七coinduction-与递归-trait)
+  - [八、逆向推理链（Backward Reasoning）](#八逆向推理链backward-reasoning)
   - [嵌入式测验](#嵌入式测验)
     - [测验 1：什么是 obligation？](#测验-1什么是-obligation)
     - [测验 2：Selection 和 Evaluation 的主要区别是什么？](#测验-2selection-和-evaluation-的主要区别是什么)
@@ -201,17 +205,85 @@ Evaluation 只回答“这个 obligation 是否可能成立”，不会修改推
 
 ---
 
-## 六、新一代 Trait Solver
+## 六、旧 Solver 与新 Solver（Next-Gen）的对比
 
-`rustc` 正在逐步替换旧的 trait solver，新 solver 基于更统一的设计：
+旧 solver 通常被称为 **legacy** 或 **基于 flate 实现** 的 solver，其历史可以追溯到 `rustc` 早期把 `selection`、`fulfillment`、`evaluation` 作为三个独立阶段实现的时期。新 solver（next-gen，内部也称 "new trait solver"）从 Chalk 与 rust-analyzer 的实践中演化而来，目标是用统一的 canonical query + proof tree 重新表述 trait 求解，并减少 corner case。
 
-| 维度 | 旧 Solver | 新 Solver（next-gen） |
+> **定理 4** [Tier 2]: 旧 solver 将 evaluation 与 fulfillment 分离 ⟹ 候选选择阶段无法直接缓存推断约束，导致同一份约束可能被重复求值。
+>
+> **定理 5** [Tier 2]: 新 solver 引入 canonicalization 与 `AliasRelate` 目标 ⟹ 可以延迟处理含绑定变量的关联类型等价，提升对高阶边界的支持。
+>
+> **定理 6** [Tier 3]: 新 solver 与 rust-analyzer 共享核心逻辑 ⟹ 编辑器中的类型推断与编译器趋于一致，降低 IDE 与 rustc 行为漂移的风险。
+
+### 6.1 架构差异
+
+| 维度 | 旧 Solver（Legacy / Flate-Based） | 新 Solver（Next-Gen） |
 |:---|:---|:---|
-| 架构 | selection/fulfillment/evaluation 分离 | 统一的 canonical query + proof tree |
-| 递归 trait | 需要特殊处理 | 通过 coinduction 更自然支持 |
-| 缓存 | 较简单 | 更积极的缓存策略 |
-| 共享 | 难与 rust-analyzer 共享 | 已与 rust-analyzer 共享核心逻辑 |
+| 核心机制 | `selection` / `fulfillment` / `evaluation` 三阶段分离 | 统一的 canonical query + proof tree |
+| Canonicalization | trait 系统内部不做 canonicalization；候选选择需先丢弃约束，选中后再重新求值 | 每个候选 eager canonicalization；可合并候选响应并缓存推断约束 |
+| Evaluation vs Fulfillment | evaluation 缓存但不应用推断约束；fulfillment 应用约束但不缓存 | 二者合并：通过 canonical response 同时携带约束与结果 |
+| 递归 / Coinduction | 对循环目标需要特殊处理，容易 overflow 或误判 | 原生支持 coinduction，递归 trait 更自然 |
+| Alias 类型处理 | 结构性地展开 alias；遇到绑定变量时无法正确归一化 | 发出 `AliasRelate` 目标，延迟等价判断直到可归一化 |
+| 嵌套目标 | evaluation 立即处理；fulfillment 返回给调用者后续处理 | 统一 eagerly 处理，并迭代到 fixpoint |
+| 缓存 | 仅 evaluation 可缓存 | 更积极的缓存策略，约束也可复用 |
+| 共享 | 难与 rust-analyzer 共享 | 核心逻辑已与 rust-analyzer 共享 |
 | 状态 | 当前默认 | nightly 可选，逐步稳定中 |
+
+> **关键洞察**: 新 solver 不是简单优化，而是把 "候选选择" 与 "约束应用" 从两个独立系统合并为一个基于 canonical query 的系统，从而消除旧实现中 evaluation 与 fulfillment 行为不一致导致的 corner case。
+>
+> [Rustc Dev Guide — Significant changes and quirks](https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html)(<https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html>)
+
+### 6.2 行为差异示例：关联类型与高阶生命周期
+
+下面的代码展示了旧 solver 与新 solver 在**延迟 alias 等价**上的差异。该模式使用高阶生命周期（higher-ranked lifetime）与关联类型，旧 solver 会因为过早将 alias 结构展开而得到错误推断；新 solver 则生成 `AliasRelate` 目标，将判断延迟到参数环境足以归一化关联类型。
+
+```rust,ignore
+pub trait WithAssoc<'a> {
+    type Output;
+}
+
+pub trait UseIt<T> {}
+
+// 证明该 impl 时，需要推断 `for<'a> <T as WithAssoc<'a>>::Output` 的具体类型。
+// 旧 solver：在 `Output` 含绑定变量时，结构展开会失败或产生不一致推断（#102048）。
+// 新 solver：生成 AliasRelate 目标，延迟到可归一化时再求解。
+impl<T> UseIt<for<'a> fn(<T as WithAssoc<'a>>::Output)> for T
+where
+    T: for<'a> WithAssoc<'a>,
+{}
+```
+
+> **注意**: 该模式仅在 nightly 新 solver 下行为有显著差异；稳定版默认仍为旧 solver。可通过 `RUSTFLAGS="-Ztrait-solver=next"` 或 `cargo +nightly rustc -- -Ztrait-solver=next` 尝试。
+>
+> [Rustc Dev Guide — Deferred alias equality](https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#deferred-alias-equality)(<https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#deferred-alias-equality>)
+
+### 6.3 嵌套目标与 Fixpoint：推断变量的传播
+
+新 solver 的另一项改进是**统一 eagerly 处理嵌套目标**并迭代到 fixpoint。旧 solver 在 evaluation 与 fulfillment 中对嵌套目标的处理不一致：evaluation 会立即处理嵌套目标，而 fulfillment 只是把它们返回给调用者后续处理。新 solver 则会在同一个 evaluation 循环中不断更新推断变量，直到所有约束同时满足。
+
+```rust,ignore
+//  nightly 新 solver
+#![feature(trait_solver_next)]
+
+use std::fmt::Debug;
+
+trait ConstrainToU8<X> {}
+impl ConstrainToU8<u8> for () {}
+
+// 需要同时满足 X: Debug 与 (): ConstrainToU8<X>。
+// 旧 solver 某些复杂上下文中，可能因嵌套目标顺序而需要显式标注 X=u8；
+// 新 solver 通过 fixpoint 迭代，可从 (): ConstrainToU8<X> 反推 X=u8，
+// 再验证 u8: Debug。
+fn demo<X>() where X: Debug, (): ConstrainToU8<X> {}
+
+fn main() {
+    demo::<_>();
+}
+```
+
+> **关键洞察**: Fixpoint 迭代削弱了嵌套目标的求值顺序对结果的影响，使得多个相互依赖的约束可以被同时满足，而不是被处理顺序偶然决定。
+>
+> [Rustc Dev Guide — Nested goals are evaluated until reaching a fixpoint](https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#nested-goals-are-evaluated-until-reaching-a-fixpoint)(<https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#nested-goals-are-evaluated-until-reaching-a-fixpoint>)
 
 > **状态（截至 Rust 1.96）**: 新 solver 仍在 nightly 中迭代，尚未成为默认。可通过 `-Ztrait-solver=next` 尝试。
 >
@@ -240,6 +312,16 @@ where
 新 solver 使用 coinduction 来处理这类递归约束，避免无限展开。
 
 > [Rustc Dev Guide — Coinduction](https://rustc-dev-guide.rust-lang.org/solve/coinduction.html)(<https://rustc-dev-guide.rust-lang.org/solve/coinduction.html>)
+
+---
+
+## 八、逆向推理链（Backward Reasoning）
+
+> **逆向 1**: 如果某段代码在 `-Ztrait-solver=next` 下编译通过，而在默认 solver 下失败 ⟸ 很可能是因为新 solver 的 canonicalization、延迟 alias 等价或 fixpoint 求值改变了该模式的可满足性，需要检查是否涉及高阶边界、关联类型或递归 trait。
+>
+> **逆向 2**: 如果 rust-analyzer 与 `rustc` 对同一个 trait bound 给出不同推断 ⟸ 需要检查是否触及新/旧 solver 的差异区域（如别名类型 inside binders、嵌套目标顺序），因为 rust-analyzer 已逐步复用新 solver 核心逻辑。
+>
+> **逆向 3**: 如果 trait 求解出现无法解释的 overflow 或 ambiguity ⟸ 可尝试用 `-Ztrait-solver=next` 复现，并对比 proof tree 输出（`-Ztrait-solver=next` + `-Zprint-implicit-call-graph` 等 nightly 调试选项）来定位是候选合并问题还是循环目标处理问题。
 
 ---
 

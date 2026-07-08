@@ -1,4 +1,4 @@
-# 本示例覆盖根 workspace 的 resolver 配置，
-# 显式启用 MSRV-aware resolver 的 fallback 行为。
+# 显式启用 resolver v3 的 MSRV-aware fallback 行为。
+# resolver = "3" 已默认使用 fallback，此处保留用于教学演示。
 [resolver]
 incompatible-rust-versions = "fallback"

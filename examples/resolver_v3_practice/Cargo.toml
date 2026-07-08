@@ -1,3 +1,13 @@
 [workspace]
 resolver = "3"
 members = ["legacy-lib", "modern-app", "edge-bin"]
+
+[workspace.package]
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+
+[workspace.dependencies]
+bitflags = { version = "2" }
+serde = { version = "1" }
+indexmap = { version = "2" }
+serde_json = { version = "1", features = ["std"] }

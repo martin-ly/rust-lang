@@ -81,8 +81,33 @@
     - `sources/INDEX.md`
     - `sources/rfc_index.md`
     - `sources/theorem_tier_spec.md`
-  - 剩余 36 个未链接文件均为 `archive/` 历史归档，符合 AGENTS.md 规范。
+  - 后续又新增 2 个由 `crates/*/docs/` 迁移而来的权威页：
+    - `concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`
+    - `concept/06_ecosystem/09_networking/01_advanced_network_protocols.md`
+  - 剩余未链接文件均为 `archive/` 历史归档，符合 AGENTS.md 规范。
 - **mdbook 构建验证**：`mdbook build` 通过，无 orphan page 警告。
+
+### P2-Q3 深化计划持续推进（2026-07-09）
+
+- **P2-2 Trait Solver 对比**：
+  - 更新 `concept/04_formal/05_rustc_internals/26_trait_solver_in_rustc.md`，新增旧/新 trait solver 9 行对比表、行为差异示例、定理链与反向推理。
+- **P2-4 MIR / Codegen / LLVM 入门**：
+  - 新建 `concept/04_formal/05_rustc_internals/20_mir_codegen_llvm_primer.md`，覆盖 MIR CFG、MIR→codegen→LLVM IR 管线、`--emit=mir` / `--emit=llvm-ir` 用法、带注释示例。
+
+### crates/*/docs/ 合规整改 P0 完成（2026-07-09）
+
+- 按 `.kimi/RECTIFICATION_PLAN_2026_07_09.md` 第五章 P0 队列，完成 5 个高重复风险文件的整改：
+  - `crates/c05_threads/docs/01_basic_threading.md` → 摘要 + 链接到 `concept/03_advanced/00_concurrency/01_concurrency.md`
+  - `crates/c05_threads/docs/06_parallel_algorithms.md` → 摘要 + 链接到 `concept/03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md`
+  - `crates/c07_process/docs/01_process_model_and_lifecycle.md` → 摘要 + 链接到新建 `concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`
+  - `crates/c09_design_pattern/docs/rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md` → 摘要 + 链接到 `concept/06_ecosystem/03_design_patterns/02_patterns.md`
+  - `crates/c10_networks/docs/rust_190_examples_part3_advanced_protocols.md` → 摘要 + 链接到新建 `concept/06_ecosystem/09_networking/01_advanced_network_protocols.md`
+
+### Q4 2026 准备文档（2026-07-09）
+
+- 新建 `.kimi/Q4_I18N_TOOL_DECISION_2026_07_09.md`：建议保留当前 EN/Summary 方案，Q4 仅做小规模 pilot。
+- 新建 `.kimi/Q4_EXTERNAL_LINK_FIX_PLAN_2026_07_09.md`：提出 5 批外部链接自动化修复方案。
+- 新建 `.kimi/Q4_BROWN_INVENTORY_I18N_STATUS_2026_07_09.md`：8 个 Brown Inventory 文件已具备双语头，建议 Q4 标准化元数据。
 
 ### P1 权威事实修正与 Rust 1.96 覆盖缺口回填（2026-06-26）
 

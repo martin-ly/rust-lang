@@ -329,6 +329,8 @@ fn verify_vec_push_safety() {
 |:---|:---|:---|
 | [`crates/c01_ownership_borrow_scope/src/kani_examples.rs`](../../crates/c01_ownership_borrow_scope/src/kani_examples.rs) | 所有权（Ownership）/借用（Borrowing）、函数合约、循环合约、切片（Slice）最大值 | `cargo kani --manifest-path crates/c01_ownership_borrow_scope/Cargo.toml` |
 | [`crates/c02_type_system/src/kani_examples.rs`](../../crates/c02_type_system/src/kani_examples.rs) | 泛型（Generics）、trait bound、循环不变量、偶数计数 | `cargo kani --manifest-path crates/c02_type_system/Cargo.toml` |
+| [`crates/c03_control_fn/src/kani_examples.rs`](../../crates/c03_control_fn/src/kani_examples.rs) | 控制流（Control Flow）与函数、最大值函数合约、非负偶数计数循环不变量 | `cargo kani --manifest-path crates/c03_control_fn/Cargo.toml` |
+| [`crates/c04_generic/src/kani_examples.rs`](../../crates/c04_generic/src/kani_examples.rs) | 泛型函数合约、泛型循环不变量、切片查找与计数 | `cargo kani --manifest-path crates/c04_generic/Cargo.toml` |
 | [`crates/c08_algorithms/src/kani_examples.rs`](../../crates/c08_algorithms/src/kani_examples.rs) | 数组和、二分查找边界条件 | `cargo kani --manifest-path crates/c08_algorithms/Cargo.toml` |
 
 > **提示**: 由于 Kani 示例依赖 `kani` crate 的宏（Macro），普通 `cargo build` 不会编译这些模块（Module）。运行 `cargo kani` 时会自动进入 `cfg(kani)` 模式。
@@ -364,6 +366,6 @@ fn verify_vec_push_safety() {
 > **权威来源**: [Kani 官方文档](https://model-checking.github.io/kani/) · [Kani GitHub](https://github.com/model-checking/kani) · [CBMC](https://github.com/diffblue/cbmc)
 > **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Kani 0.66+ / Rust 1.96.1
 
-**文档版本**: 1.0
+**文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-26
+**最后更新**: 2026-07-09

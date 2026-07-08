@@ -1,14 +1,22 @@
 [package]
 name = "modern-app"
-version = "0.1.0"
+version.workspace = true
 edition = "2021"
 rust-version = "1.84"
-description = "模拟新组件：MSRV 1.84，使用 clap 4 与 indexmap 2"
-license = "MIT OR Apache-2.0"
+description = "模拟新组件：MSRV 1.84，通过公共依赖复用 legacy-lib/bitflags/serde"
+license.workspace = true
+
+[lib]
+name = "modern_app"
+
+[[bin]]
+name = "modern-app"
+path = "src/main.rs"
 
 [dependencies]
-clap = { version = "4", features = ["derive"] }
-indexmap = "2"
-legacy-lib = { path = "../legacy-lib" }
+legacy-lib = { path = "../legacy-lib", public = true }
+bitflags = { workspace = true, public = true }
+serde = { workspace = true, public = true, features = ["derive", "std"] }
+indexmap = { workspace = true, public = false }
 
 # 本 crate 属于 examples/resolver_v3_practice workspace，不在此处声明 [workspace]。

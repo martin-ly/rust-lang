@@ -1292,7 +1292,17 @@ fn main() {
 }
 ```
 
-> **修正**: `std::sync::Mutex` 的**毒化机制**：若持有锁的线程 panic，Mutex 标记为"poisoned"，后续 `lock()` 返回 `Err(PoisonError)`。设计理由：panic 可能使受保护数据处于不一致状态，强制调用者处理。处理模式：1) `lock().unwrap()` — 继续 panic（传播毒化）；2) `lock().unwrap_or_else(|e| e.into_inner())` — 忽略毒化，获取数据；3) `lock().unwrap_or_else(|e| { recover(e); })` — 自定义恢复。`parking_lot::Mutex`（第三方）不实现毒化，性能更好但无 panic 保护。这与 Java 的 `synchronized`（无 poison 概念，死锁检测由 JVM 提供）或 C++ 的 `std::mutex`（无 poison，但 `std::shared_lock` 有类似概念）不同——Rust 的毒化是保守安全设计。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/struct.Mutex.html)] · [来源: [parking_lot](https://docs.rs/parking_lot/)]
+> **修正**:
+> `std::sync::Mutex` 的**毒化机制**：若持有锁的线程 panic，Mutex 标记为"poisoned"，后续 `lock()` 返回 `Err(PoisonError)`。
+> 设计理由：panic 可能使受保护数据处于不一致状态，强制调用者处理。
+> 处理模式：
+>
+> 1) `lock().unwrap()` — 继续 panic（传播毒化）；
+> 2) `lock().unwrap_or_else(|e| e.into_inner())` — 忽略毒化，获取数据；
+> 3) `lock().unwrap_or_else(|e| { recover(e); })` — 自定义恢复。
+> `parking_lot::Mutex`（第三方）不实现毒化，性能更好但无 panic 保护。
+> 这与 Java 的 `synchronized`（无 poison 概念，死锁检测由 JVM 提供）或 C++ 的 `std::mutex`（无 poison，但 `std::shared_lock` 有类似概念）不同——Rust 的毒化是保守安全设计。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/struct.Mutex.html)] · [来源: [parking_lot](https://docs.rs/parking_lot/)]
 
 ### 10.4 边界测试：`std::sync::mpsc` 的多生产者单消费者限制（编译错误）
 

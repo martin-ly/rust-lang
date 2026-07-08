@@ -72,6 +72,9 @@ pub mod rust_195_features;
 pub mod rust_196_features;
 pub mod rust_197_features;
 
+/// Kani 泛型函数合约 / 泛型循环合约示例（仅在 `cargo kani` 下编译）。
+pub mod kani_examples;
+
 /// 高级泛型模式与设计模式示例模块。
 pub mod advanced_patterns;
 

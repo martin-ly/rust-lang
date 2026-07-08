@@ -38,6 +38,9 @@ pub mod rust_195_features; // Rust 1.95.0 特性 (if let guards, bool TryFrom)
 pub mod rust_196_features; // Rust 2024 Edition let chains
 pub mod rust_197_features;
 
+/// Kani 函数合约 / 循环合约示例（仅在 `cargo kani` 下编译）。
+pub mod kani_examples;
+
 pub mod rust_196_gen_examples; // gen blocks 前瞻 (nightly-only, 非 1.96 stable) // if let guards 深度解析 (Rust 1.95.0 stable)
 
 // 重新导出Rust 1.94.0新特性

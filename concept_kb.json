@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 398,
+    "total_files": 401,
     "generated_at": "The system cannot accept the date entered.\nEnter the new date: (yy-mm-dd)"
   },
   "files": [
@@ -6164,7 +6164,7 @@
       "layer": "L1",
       "title": "标准 I/O 与进程（std I/O and Process）",
       "positioning": "",
-      "line_count": 452,
+      "line_count": 450,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`std::io` 是异步的\" ⟹ 不成立。`std::io` 是同步阻塞 I/O；异步 I/O 使用 `tokio::io` 等。",
@@ -10838,7 +10838,7 @@
       "layer": "L1",
       "title": "格式化与显示（Display and Debug Formatting）",
       "positioning": "",
-      "line_count": 421,
+      "line_count": 419,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`{}` 和 `{:?}` 相同\" ⟹ 不成立。`{}` 调用 `Display`，`{:?}` 调用 `Debug`。",
@@ -11106,7 +11106,7 @@
       "layer": "L1",
       "title": "Functions（函数）",
       "positioning": "系统讲解 Rust 函数声明、参数传递、返回值、发散函数与所有权的交互，为后续 Trait、闭包、Async 打下语法基础。",
-      "line_count": 254,
+      "line_count": 255,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将函数签名、所有权移动与借用规则串联起来。",
@@ -11224,7 +11224,7 @@
       "layer": "L1",
       "title": "Use Declarations（使用声明）",
       "positioning": "系统讲解 `use` 声明的语法、作用域规则、重导出与 glob 导入，帮助学习者建立清晰的模块命名空间心智模型。",
-      "line_count": 219,
+      "line_count": 220,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `use` 声明、作用域与可见性规则串联起来。",
@@ -11333,7 +11333,7 @@
       "layer": "L1",
       "title": "Structs（结构体）",
       "positioning": "系统讲解 Rust 结构体的三种形式、字段可见性、结构体更新语法与方法基础，为后续 Trait、Enum、泛型奠定类型基础。",
-      "line_count": 227,
+      "line_count": 228,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将结构体定义、字段所有权与借用规则串联起来。",
@@ -11435,7 +11435,7 @@
       "layer": "L1",
       "title": "Enumerations（枚举）",
       "positioning": "系统讲解 Rust 枚举的定义、变体负载、Option/Result 两个核心枚举、模式匹配穷尽性检查，以及与错误处理的关系。",
-      "line_count": 229,
+      "line_count": 230,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将枚举、模式匹配与错误处理规则串联起来。",
@@ -11551,7 +11551,7 @@
       "layer": "L1",
       "title": "Implementations（实现块）",
       "positioning": "系统讲解 Rust `impl` 块的两种形式（固有实现、Trait 实现）、方法 receiver、关联函数，以及与结构体/枚举/Trait 的关系。",
-      "line_count": 224,
+      "line_count": 225,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将方法调用、receiver 选择与所有权/借用规则串联起来。",
@@ -11867,7 +11867,7 @@
       "layer": "L1",
       "title": "类型别名（Type Alias）",
       "positioning": "",
-      "line_count": 411,
+      "line_count": 409,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"类型别名会创建新类型\" ⟹ 不成立。别名与原类型完全等价，编译器不会区分。",
@@ -11995,7 +11995,7 @@
       "layer": "L1",
       "title": "静态项（Static Items）",
       "positioning": "",
-      "line_count": 400,
+      "line_count": 398,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`static` 和 `const` 完全相同\" ⟹ 不成立。`static` 有固定地址且可运行期存在；`const` 是编译期内联值。",
@@ -12113,7 +12113,7 @@
       "layer": "L1",
       "title": "常量项与常量函数（Const Items and Const Functions）",
       "positioning": "",
-      "line_count": 421,
+      "line_count": 419,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`const` 和 `let` 一样\" ⟹ 不成立。`const` 是编译期常量，无运行时地址；`let` 是运行时局部绑定。",
@@ -18739,7 +18739,7 @@
       "layer": "L2",
       "title": "联合体（Unions）",
       "positioning": "",
-      "line_count": 425,
+      "line_count": 423,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"联合体与枚举相同\" ⟹ 不成立。枚举有标签，联合体没有；枚举模式匹配安全，联合体读取需 unsafe。",
@@ -18848,7 +18848,7 @@
       "layer": "L2",
       "title": "类型转换（Type Conversions）",
       "positioning": "",
-      "line_count": 453,
+      "line_count": 451,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`as` 转换总是安全的\" ⟹ 不成立。`as` 可能截断、改变符号或产生未定义行为（如指针转换）。",
@@ -20066,7 +20066,7 @@
       "layer": "L2",
       "title": "属性分类详解（Attributes by Category）",
       "positioning": "",
-      "line_count": 462,
+      "line_count": 460,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"属性只影响运行时行为\" ⟹ 不成立。属性主要影响编译期、代码生成、诊断和链接。",
@@ -20446,7 +20446,7 @@
       "layer": "L3",
       "title": "Concurrency（并发模型）",
       "positioning": "",
-      "line_count": 1610,
+      "line_count": 1620,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 增强定理一致性（Coherence）矩阵（11行 ⟹ 推理链）、反命题决策树、6步认知路径、章节过渡、层次一致性标注",
@@ -21792,7 +21792,7 @@
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
-      "line_count": 3141,
+      "line_count": 3142,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注",
@@ -23288,6 +23288,34 @@
         ]
       },
       "backward_chains": 3,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_process_ipc\\01_process_model_and_lifecycle.md",
+      "layer": "L3",
+      "title": "Rust 进程模型与生命周期",
+      "positioning": "",
+      "line_count": 176,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/08_error_handling/32_error_handling_basics.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
+        "../00_concurrency/01_concurrency.md",
+        "../01_async/02_async.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 0,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
       "templated_chains": 0
     },
     {
@@ -27231,7 +27259,7 @@
       "layer": "L3",
       "title": "Unsafe 集合内部实现：Vec、Arc、Mutex（Unsafe Collections Internals）",
       "positioning": "",
-      "line_count": 491,
+      "line_count": 489,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"实现 Vec 只需要普通引用\" ⟹ 不成立。未初始化内存无法通过 safe 引用表达，必须使用原始指针。",
@@ -29419,7 +29447,7 @@
       "layer": "L4",
       "title": "Tree Borrows 深度解析",
       "positioning": "",
-      "line_count": 158,
+      "line_count": 162,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -29448,7 +29476,12 @@
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
         "../../07_future/00_version_tracking/rust_1_98_preview.md",
+        "../../07_future/02_stabilized_features/borrow_sanitizer.md",
+        "../../07_future/03_preview_features/31_safety_tags_preview.md",
+        "../../07_future/03_preview_features/33_autoverus_preview.md",
+        "../02_separation_logic/33_safety_tags_in_formal.md",
         "../02_separation_logic/34_borrow_sanitizer_in_formal.md",
+        "../04_model_checking/24_autoverus.md",
         "../04_model_checking/31_miri.md",
         "03_ownership_formal.md"
       ],
@@ -31679,7 +31712,7 @@
       "layer": "L4",
       "title": "Kani：Rust 有界模型检查器",
       "positioning": "将 Kani 从\"AWS 内部工具\"还原为日常安全关键代码审查与教学的标准模型检查器。",
-      "line_count": 370,
+      "line_count": 372,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -31802,7 +31835,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 27,
+      "matrix_rows": 29,
       "pre_post": {
         "pre": [
           "[Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [现代验证工具生态](22_modern_verification_tools.md)"
@@ -31819,7 +31852,7 @@
       "layer": "L4",
       "title": "Rustc 查询系统与增量编译",
       "positioning": "将 `rustc` 从“顺序 pass 流水线”还原为“按需查询 + 缓存”的真实架构，理解增量编译的底层机制。",
-      "line_count": 524,
+      "line_count": 526,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -31897,11 +31930,88 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\05_rustc_internals\\20_mir_codegen_llvm_primer.md",
+      "layer": "L4",
+      "title": "MIR、Codegen 与 LLVM IR 入门",
+      "positioning": "把 rustc 后端入口讲清楚：MIR 是什么、它如何被逐步 lower 为 LLVM IR、以及开发者如何利用 `rustc` 命令直接观察这些中间产物。",
+      "line_count": 367,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将 MIR 构建、借用检查、优化、单态化与 LLVM IR 生成串联起来。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 1** [Tier 2]: MIR 显式表达控制流图与所有权转移 ⟹ 借用检查、drop 展开与常量求值可以在统一的图上进行。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 2** [Tier 2]: MIR 经过借用检查与优化后再 lower 到 codegen ⟹ 后端无需重新理解 Rust 的高层语法与所有权规则。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 3** [Tier 2]: `rustc --emit=mir` 与 `rustc --emit=llvm-ir` 输出的是同一编译过程的不同切片 ⟹ 开发者可以通过对比二者定位优化与代码生成问题。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 4** [Tier 3]: 单态化（Monomorphization）在 MIR 层完成泛型实例化 ⟹ 每个泛型函数会生成独立的 MIR body，再独立 lower 到 LLVM IR。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 1**: \"MIR 与 LLVM IR 只是同一表示的不同名字\" ⟹ 不成立。MIR 仍保留 Rust 语义（如 `Drop`、`move`、`&mut`），而 LLVM IR 是接近机器的 SSA 形式。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"所有 Rust 代码都能被 `rustc --emit=mir` 完整观察\" ⟹ 不成立。宏展开、名字解析与部分类型检查错误发生在 MIR 生成之前；`--emit=mir` 要求源码至少通过 HIR/THIR lowering。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"LLVM IR 输出可以直接当作可移植的 Rust 后端代码使用\" ⟹ 不成立。`rustc --emit=llvm-ir` 生成的 IR 依赖 rustc 生成的内部符号、target spec 与 runtime，跨版本通常不兼容。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// example.rs pub fn max(a: i32, b: i32) -> i32 {     if a > b { a } else { b } ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../01_foundation/02_type_system/04_type_system.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
+        "../../06_ecosystem/00_toolchain/47_compiler_infrastructure.md",
+        "../../06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md",
+        "19_rustc_query_system.md"
+      ],
+      "transitions": 6,
+      "has_cognitive_path": true,
+      "mermaid_blocks": 1,
+      "matrix_rows": 11,
+      "pre_post": {
+        "pre": [
+          "[Rustc Query System](19_rustc_query_system.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)"
+        ],
+        "post": [
+          "[LLVM Backend and Code Generation](../../06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md) · [Compiler Infrastructure](../../06_ecosystem/00_toolchain/47_compiler_infrastructure.md)"
+        ]
+      },
+      "backward_chains": 3,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\05_rustc_internals\\26_trait_solver_in_rustc.md",
       "layer": "L4",
       "title": "rustc 中的 Trait Solver",
       "positioning": "把“这个类型是否实现了某 trait”这一核心问题，还原为候选装配、筛选、确认与约束求解的完整算法。",
-      "line_count": 311,
+      "line_count": 393,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -31929,6 +32039,18 @@
         },
         {
           "text": "> **反命题 3**: \"其他语言对 rustc 中的 Trait Solver 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 rustc 中的 Trait Solver 具有语言特有的形态。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 4** [Tier 2]: 旧 solver 将 evaluation 与 fulfillment 分离 ⟹ 候选选择阶段无法直接缓存推断约束，导致同一份约束可能被重复求值。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 5** [Tier 2]: 新 solver 引入 canonicalization 与 `AliasRelate` 目标 ⟹ 可以延迟处理含绑定变量的关联类型等价，提升对高阶边界的支持。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **定理 6** [Tier 3]: 新 solver 与 rust-analyzer 共享核心逻辑 ⟹ 编辑器中的类型推断与编译器趋于一致，降低 IDE 与 rustc 行为漂移的风险。",
           "type": "paragraph"
         }
       ],
@@ -31974,6 +32096,22 @@
           "flags": [
             "ignore"
           ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "pub trait WithAssoc<'a> {     type Output; }  pub trait UseIt<T> {}  // 证明该 impl..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "//  nightly 新 solver #![feature(trait_solver_next)]  use std::fmt::Debug;  trait..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "// 递归 trait：一个列表的所有元素都满足 P trait All<P> {     fn check(&self); }  impl<P> All<P>..."
@@ -31993,7 +32131,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 15,
+      "matrix_rows": 19,
       "pre_post": {
         "pre": [
           "[Type System](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Type Inference](../00_type_theory/08_type_inference.md) · [Name Resolution and HIR](35_name_resolution_and_hir.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)"
@@ -32002,7 +32140,7 @@
           "[Rustc Query System](19_rustc_query_system.md) · [Ownership Formal](../01_ownership_logic/03_ownership_formal.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -43618,6 +43756,34 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\09_networking\\01_advanced_network_protocols.md",
+      "layer": "L6",
+      "title": "Rust 高级网络协议概览",
+      "positioning": "",
+      "line_count": 137,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/01_async/02_async.md",
+        "../../05_comparative/00_paradigms/05_execution_model_isomorphism.md",
+        "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
+        "../03_design_patterns/02_patterns.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 14,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\09_testing_and_quality\\12_testing_strategies.md",
       "layer": "L6",
       "title": "Rust 测试策略：从单元测试到属性验证",
@@ -46545,7 +46711,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
-      "line_count": 71,
+      "line_count": 75,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -46882,7 +47048,7 @@
       "layer": "L7",
       "title": "BorrowSanitizer：动态别名规则验证工具",
       "positioning": "",
-      "line_count": 315,
+      "line_count": 329,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: BorrowSanitizer 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -46916,15 +47082,20 @@
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
-        "../../04_formal/01_ownership_logic/03_ownership_formal.md",
+        "../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md",
+        "../../04_formal/02_separation_logic/33_safety_tags_in_formal.md",
+        "../../04_formal/04_model_checking/24_autoverus.md",
+        "../../04_formal/04_model_checking/31_miri.md",
+        "../../04_formal/04_model_checking/32_kani.md",
         "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
-        "../03_preview_features/08_safety_tags_preview.md",
+        "../03_preview_features/31_safety_tags_preview.md",
+        "../03_preview_features/33_autoverus_preview.md",
         "../04_research_and_experimental/02_formal_methods.md"
       ],
       "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 30,
+      "matrix_rows": 35,
       "pre_post": {
         "pre": [
           "> [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) ·"
@@ -47312,7 +47483,7 @@
       "layer": "L7",
       "title": "Safety Tags 概念预研：Unsafe 契约的机器可读标注",
       "positioning": "探讨 Safety Tags 作为 Rust **unsafe 代码契约**的机器可读标注机制，从人工文档注释演进为编译器可理解、工具可验证的安全契约格式。",
-      "line_count": 650,
+      "line_count": 653,
       "theorem_chains": [
         {
           "text": "- **定理**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 定义 ⟹ 类型安全保证",
@@ -47395,12 +47566,15 @@
         "../../../docs/05_guides/05_safety_tags_guide.md",
         "../../00_meta/00_framework/methodology.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
+        "../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../00_version_tracking/05_rust_version_tracking.md",
         "../02_stabilized_features/borrow_sanitizer.md",
         "../04_research_and_experimental/01_ai_integration.md",
-        "../04_research_and_experimental/02_formal_methods.md"
+        "../04_research_and_experimental/02_formal_methods.md",
+        "20_borrowsanitizer_preview.md",
+        "33_autoverus_preview.md"
       ],
       "transitions": 8,
       "has_cognitive_path": true,
@@ -48447,7 +48621,7 @@
       "layer": "L7",
       "title": "BorrowSanitizer 概念预研：运行时借用检查工业化",
       "positioning": "探讨 BorrowSanitizer 作为 Rust **运行时（Runtime）借用（Borrowing）检查**工具的工业化路径，从 Miri 的纯解释执行扩展到编译后二进制检测的设计空间。",
-      "line_count": 660,
+      "line_count": 664,
       "theorem_chains": [
         {
           "text": "- **定理**: BorrowSanitizer 概念预研：运行时借用检查工业化 定义 ⟹ 类型安全保证",
@@ -48537,12 +48711,15 @@
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
+        "../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md",
         "../../04_formal/02_separation_logic/04_rustbelt.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../00_version_tracking/05_rust_version_tracking.md",
         "../02_stabilized_features/borrow_sanitizer.md",
-        "../04_research_and_experimental/02_formal_methods.md"
+        "../04_research_and_experimental/02_formal_methods.md",
+        "31_safety_tags_preview.md",
+        "33_autoverus_preview.md"
       ],
       "transitions": 8,
       "has_cognitive_path": true,
@@ -49144,7 +49321,7 @@
       "layer": "L7",
       "title": "Safety Tags（安全标签）预览",
       "positioning": "",
-      "line_count": 155,
+      "line_count": 156,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -49172,11 +49349,14 @@
       "sources": [],
       "cross_references": [
         "../../03_advanced/02_unsafe/03_unsafe.md",
+        "../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md",
         "../../04_formal/02_separation_logic/33_safety_tags_in_formal.md",
         "../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md",
         "../../04_formal/04_model_checking/05_verification_toolchain.md",
         "../../04_formal/04_model_checking/24_autoverus.md",
+        "../../04_formal/04_model_checking/31_miri.md",
         "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
+        "../02_stabilized_features/borrow_sanitizer.md",
         "20_borrowsanitizer_preview.md",
         "33_autoverus_preview.md",
         "https://github.com/rust-lang/rfcs/blob/master/text/3842-safety-tags.md"
@@ -49263,7 +49443,7 @@
       "layer": "L7",
       "title": "AutoVerus / Verus 预览",
       "positioning": "",
-      "line_count": 171,
+      "line_count": 172,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -49282,11 +49462,14 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md",
         "../../04_formal/02_separation_logic/33_safety_tags_in_formal.md",
         "../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md",
         "../../04_formal/04_model_checking/05_verification_toolchain.md",
         "../../04_formal/04_model_checking/24_autoverus.md",
+        "../../04_formal/04_model_checking/31_miri.md",
         "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
+        "../02_stabilized_features/borrow_sanitizer.md",
         "20_borrowsanitizer_preview.md",
         "31_safety_tags_preview.md"
       ],

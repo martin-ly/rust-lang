@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Str
 > **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [所有权（Ownership）形式化](03_ownership_formal.md) · [Miri](../04_model_checking/31_miri.md)
-> **后置延伸**: [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md)
+> **后置延伸**: [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md) · [BorrowSanitizer 预览/活跃跟踪](../../07_future/02_stabilized_features/borrow_sanitizer.md) · [Safety Tags](../../07_future/03_preview_features/31_safety_tags_preview.md) · [AutoVerus / Verus](../../07_future/03_preview_features/33_autoverus_preview.md) · [Miri](../04_model_checking/31_miri.md)
 >
 > **来源**: [Tree Borrows 论文 (PLDI 2023)](https://pldi23.sigplan.org/) · [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/mod.rs) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **内容重叠提示**: 本文与 [`archive/docs/content/academic/10_tree_borrows_guide.md`](../../../archive/docs/content/academic/10_tree_borrows_guide.md) 内容高度重叠。`docs/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
@@ -152,6 +152,10 @@ B
 ## 相关概念
 
 - [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md)
+- [BorrowSanitizer 预览/活跃跟踪](../../07_future/02_stabilized_features/borrow_sanitizer.md)
+- [Safety Tags](../../07_future/03_preview_features/31_safety_tags_preview.md) · [深度形式化](../02_separation_logic/33_safety_tags_in_formal.md)
+- [AutoVerus / Verus](../../07_future/03_preview_features/33_autoverus_preview.md) · [深度](../04_model_checking/24_autoverus.md)
+- [Miri](../04_model_checking/31_miri.md)
 - [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 - [形式化验证工具生态](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md)
 - [Rust 1.98+ 预览](../../07_future/00_version_tracking/rust_1_98_preview.md)

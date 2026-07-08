@@ -27,12 +27,13 @@
 >
 > **前置概念**:
 > [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) ·
-> [Miri](../04_expert/miri) ·
-> [Tree Borrows](../../04_formal/01_ownership_logic/03_ownership_formal.md)
+> [Miri](../../04_formal/04_model_checking/31_miri.md) ·
+> [Tree Borrows](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md)
 >
 > **后置概念**:
 > [Formal Methods](../04_research_and_experimental/02_formal_methods.md) ·
-> [Safety Tags Preview](../03_preview_features/08_safety_tags_preview.md)
+> [Safety Tags Preview](../03_preview_features/31_safety_tags_preview.md) ·
+> [AutoVerus / Verus Preview](../03_preview_features/33_autoverus_preview.md)
 >
 > **定理链**: N/A — 描述性/综述性/工具链文档
 
@@ -232,7 +233,20 @@ Safety Tags (RFC #3842)        BorrowSanitizer
 
 ---
 
-## 六、参考资源
+### 5.3 生态关系：Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows
+
+| 工具/提案 | 定位 | 与 BorrowSanitizer 的关系 | 相关链接 |
+|:---|:---|:---|:---|
+| [Safety Tags](../03_preview_features/31_safety_tags_preview.md) | `unsafe` 契约的机器可读标注 | Safety Tags 声明契约，BorrowSanitizer 在运行时验证契约执行 | [深度形式化](../../04_formal/02_separation_logic/33_safety_tags_in_formal.md) |
+| **BorrowSanitizer** | 运行时别名规则验证 | 以 Tree Borrows 为底层模型，将 Miri 的理论检查推向工程化 | [MCP #958](https://github.com/rust-lang/compiler-team/issues/958) |
+| [AutoVerus / Verus](../03_preview_features/33_autoverus_preview.md) | 基于 SMT 的功能正确性证明 | 形式化证明与动态检测互补：Verus 证明不变量，BSan 捕获实现级别名违规 | [深度](../../04_formal/04_model_checking/24_autoverus.md) |
+| [Tree Borrows](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md) | Rust 别名模型 | BSan 的检测语义直接源于 Tree Borrows；Miri 默认使用该模型 | [Miri](../../04_formal/04_model_checking/31_miri.md) · [Stacked Borrows 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) |
+
+> **关键洞察**: 这四个概念构成 Rust 安全验证的"标注—模型—检测—证明"闭环：Safety Tags 提供契约语法，Tree Borrows 提供别名语义，BorrowSanitizer 在运行时执行检测，AutoVerus/Verus 在形式化层面证明关键属性。它们与 [Miri](../../04_formal/04_model_checking/31_miri.md)、[Kani](../../04_formal/04_model_checking/32_kani.md) 等工具共同形成分层验证生态。
+
+---
+
+## 七、参考资源
 
 | 资源 | URL | 类型 |
 |:---|:---|:---|
@@ -247,7 +261,7 @@ Safety Tags (RFC #3842)        BorrowSanitizer
 
 ---
 
-> **最后更新**: 2026-06-19
+> **最后更新**: 2026-07-09
 > **下次复核**: 2026-07-03
 > **维护者**: 本项目知识库团队
 > **状态**: 🧪 活跃跟踪中

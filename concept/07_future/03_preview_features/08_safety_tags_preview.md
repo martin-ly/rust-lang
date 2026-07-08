@@ -355,9 +355,12 @@ graph TD
 ## 相关概念文件
 
 - [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) — Unsafe 边界与借用（Borrowing）规则
-- BorrowSanitizer — 运行时（Runtime）借用（Borrowing）检查验证
+- [BorrowSanitizer](../02_stabilized_features/borrow_sanitizer.md) — 运行时（Runtime）借用（Borrowing）检查验证
+- [BorrowSanitizer 预览](20_borrowsanitizer_preview.md) — 历史预览版本（内容已迁移至活跃跟踪页）
 - [Formal Methods](../04_research_and_experimental/02_formal_methods.md) — 形式化验证工具链
 - [AI Integration](../04_research_and_experimental/01_ai_integration.md) — AI 生成代码的安全边界
+- [AutoVerus / Verus 预览](33_autoverus_preview.md) — 自动化形式化证明与 `requires`/`ensures` 契约
+- [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md) — Rust 别名模型与 Miri 默认模型
 - [Version Tracking](../00_version_tracking/05_rust_version_tracking.md) — Rust 版本特性演进
 
 ---

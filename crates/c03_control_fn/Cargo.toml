@@ -21,6 +21,10 @@ anyhow = { workspace = true }
 [features]
 simd = []
 
+[lints.rust]
+# 声明 Kani 验证使用的 cfg 条件名，避免 unexpected_cfgs 警告
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(kani)'] }
+
 [dev-dependencies]
 criterion = { workspace = true }
 proptest = { workspace = true }

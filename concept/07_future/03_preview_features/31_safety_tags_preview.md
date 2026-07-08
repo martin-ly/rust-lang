@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Eva
 > **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [形式化验证](../../04_formal/04_model_checking/05_verification_toolchain.md)
-> **后置延伸**: [BorrowSanitizer](20_borrowsanitizer_preview.md) · [AutoVerus/Verus](33_autoverus_preview.md)
+> **后置延伸**: [BorrowSanitizer](20_borrowsanitizer_preview.md) · [BorrowSanitizer（活跃跟踪）](../02_stabilized_features/borrow_sanitizer.md) · [AutoVerus/Verus](33_autoverus_preview.md) · [Tree Borrows](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md)
 >
 > **来源**: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [RFC 3842 Rendered](https://github.com/rust-lang/rfcs/blob/master/text/3842-safety-tags.md) · [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [safety-tool slides](https://os-checker.github.io/slides/safety-tags) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
@@ -150,5 +150,6 @@ B
 - [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 - [形式化验证工具生态](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md)
 - [Safety Tags 深度](../../04_formal/02_separation_logic/33_safety_tags_in_formal.md)
-- [BorrowSanitizer 预览](20_borrowsanitizer_preview.md) · [深度](../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md)
+- [BorrowSanitizer 预览](20_borrowsanitizer_preview.md) · [活跃跟踪](../02_stabilized_features/borrow_sanitizer.md) · [深度](../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md)
 - [AutoVerus/Verus 预览](33_autoverus_preview.md) · [深度](../../04_formal/04_model_checking/24_autoverus.md)
+- [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md) · [Miri](../../04_formal/04_model_checking/31_miri.md)

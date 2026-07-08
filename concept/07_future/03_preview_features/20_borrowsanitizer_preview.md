@@ -345,8 +345,12 @@ fn main() {
 - [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) — Unsafe 边界与借用规则
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权系统的形式化根基
 - [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用检查的核心机制
+- [BorrowSanitizer（活跃跟踪）](../02_stabilized_features/borrow_sanitizer.md) — 最新动态与使用方式
+- [Safety Tags 预览](31_safety_tags_preview.md) — `unsafe` 契约的机器可读标注
+- [AutoVerus / Verus 预览](33_autoverus_preview.md) — 自动化形式化证明
+- [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md) — BSan 底层别名模型
 - [Formal Methods](../04_research_and_experimental/02_formal_methods.md) — 形式化验证工具链
-- RustBelt — 所有权（Ownership）的形式化证明
+- [RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) — 所有权（Ownership）的形式化证明
 - [Version Tracking](../00_version_tracking/05_rust_version_tracking.md) — Rust 版本特性演进
 
 ---
