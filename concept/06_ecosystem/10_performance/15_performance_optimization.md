@@ -70,6 +70,13 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [从 `crates\c07_process\docs\13_performance_optimization_guide.md` 迁移的补充视角](#从-cratesc07_processdocs13_performance_optimization_guidemd-迁移的补充视角)
+- [C07-13. 性能优化与调优指南](#c07-13-性能优化与调优指南)
+  - [📋 目录](#-目录-1)
+  - [1. 性能分析基础](#1-性能分析基础)
+    - [1.1 性能指标](#11-性能指标)
+    - [1.2 基准测试](#12-基准测试)
+    - [1.3 性能分析工具](#13-性能分析工具)
 
 ---
 
@@ -744,3 +751,350 @@ Release 开启优化：内联、循环展开、LTO、向量化等。Debug 关闭
 ### 反命题与边界
 
 > **反命题**: "性能优化：Rust 代码的测量与调优 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+---
+
+## 从 `crates\c07_process\docs\13_performance_optimization_guide.md` 迁移的补充视角
+
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+
+# C07-13. 性能优化与调优指南
+
+> **文档定位**: Tier 2 实践指南
+> **最后更新**: 2025-12-25
+> **Rust版本**: 1.96.1+ (Edition 2024)
+> **相关文档**: 主索引 | FAQ | Glossary
+
+## 📋 目录
+
+- [C07-13. 性能优化与调优指南](#c07-13-性能优化与调优指南)
+  - [📋 目录](#-目录)
+  - [1. 性能分析基础](#1-性能分析基础)
+    - [1.1 性能指标](#11-性能指标)
+    - [1.2 基准测试](#12-基准测试)
+    - [1.3 性能分析工具](#13-性能分析工具)
+  - [2. 进程创建优化](#2-进程创建优化)
+    - [2.1 进程池技术](#21-进程池技术)
+    - [2.2 预启动进程](#22-预启动进程)
+    - [2.3 进程复用](#23-进程复用)
+  - [3. 内存优化](#3-内存优化)
+    - [3.1 零拷贝技术](#31-零拷贝技术)
+    - [3.2 内存池管理](#32-内存池管理)
+    - [3.3 内存映射](#33-内存映射)
+  - [4. I/O 优化](#4-io-优化)
+    - [4.1 异步 I/O](#41-异步-io)
+    - [4.2 缓冲策略](#42-缓冲策略)
+    - [4.3 管道优化](#43-管道优化)
+  - [5. 并发优化](#5-并发优化)
+    - [5.1 工作窃取](#51-工作窃取)
+    - [5.2 无锁数据结构](#52-无锁数据结构)
+    - [5.3 CPU 亲和性](#53-cpu-亲和性)
+  - [6. 网络优化](#6-网络优化)
+    - [6.1 连接池](#61-连接池)
+    - [6.2 批量处理](#62-批量处理)
+    - [6.3 压缩传输](#63-压缩传输)
+  - [7. 缓存策略](#7-缓存策略)
+    - [7.1 结果缓存](#71-结果缓存)
+    - [7.2 进程缓存](#72-进程缓存)
+    - [7.3 智能缓存](#73-智能缓存)
+  - [8. 监控与调优](#8-监控与调优)
+    - [8.1 实时监控](#81-实时监控)
+    - [8.2 性能调优](#82-性能调优)
+    - [8.3 自动化优化](#83-自动化优化)
+  - [9. 实战案例](#9-实战案例)
+    - [9.1 高性能服务器](#91-高性能服务器)
+    - [9.2 批处理系统](#92-批处理系统)
+    - [9.3 实时处理系统](#93-实时处理系统)
+  - [10. 总结](#10-总结)
+    - [核心优化技术](#核心优化技术)
+    - [监控与调优](#监控与调优)
+    - [实战应用](#实战应用)
+    - [最佳实践](#最佳实践)
+
+本章深入探讨 Rust 进程管理的性能优化技术，提供全面的调优指南和实战案例。
+
+## 1. 性能分析基础
+
+### 1.1 性能指标
+
+```rust
+use std::time::{Duration, Instant};
+use std::sync::Arc;
+use tokio::sync::Mutex;
+
+// 性能指标收集器
+pub struct PerformanceMetrics {
+    pub process_creation_time: Duration,
+    pub memory_usage: usize,
+    pub cpu_usage: f64,
+    pub io_operations: u64,
+    pub network_bandwidth: u64,
+    pub error_rate: f64,
+}
+
+// 性能监控器
+pub struct PerformanceMonitor {
+    metrics: Arc<Mutex<Vec<PerformanceMetrics>>>,
+    start_time: Instant,
+}
+
+impl PerformanceMonitor {
+    pub fn new() -> Self {
+        Self {
+            metrics: Arc::new(Mutex::new(Vec::new())),
+            start_time: Instant::now(),
+        }
+    }
+
+    pub async fn record_metrics(&self, metrics: PerformanceMetrics) {
+        let mut metrics_vec = self.metrics.lock().await;
+        metrics_vec.push(metrics);
+    }
+
+    pub async fn get_average_metrics(&self) -> Option<PerformanceMetrics> {
+        let metrics_vec = self.metrics.lock().await;
+        if metrics_vec.is_empty() {
+            return None;
+        }
+
+        let count = metrics_vec.len();
+        let mut total = PerformanceMetrics {
+            process_creation_time: Duration::ZERO,
+            memory_usage: 0,
+            cpu_usage: 0.0,
+            io_operations: 0,
+            network_bandwidth: 0,
+            error_rate: 0.0,
+        };
+
+        for metrics in metrics_vec.iter() {
+            total.process_creation_time += metrics.process_creation_time;
+            total.memory_usage += metrics.memory_usage;
+            total.cpu_usage += metrics.cpu_usage;
+            total.io_operations += metrics.io_operations;
+            total.network_bandwidth += metrics.network_bandwidth;
+            total.error_rate += metrics.error_rate;
+        }
+
+        Some(PerformanceMetrics {
+            process_creation_time: total.process_creation_time / count as u32,
+            memory_usage: total.memory_usage / count,
+            cpu_usage: total.cpu_usage / count as f64,
+            io_operations: total.io_operations / count as u64,
+            network_bandwidth: total.network_bandwidth / count as u64,
+            error_rate: total.error_rate / count as f64,
+        })
+    }
+}
+```
+
+### 1.2 基准测试
+
+```rust
+use std::time::Instant;
+use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
+
+// 进程创建基准测试
+pub fn benchmark_process_creation(c: &mut Criterion) {
+    let mut group = c.benchmark_group("process_creation");
+
+    for size in [1, 10, 100, 1000].iter() {
+        group.bench_with_input(BenchmarkId::new("std_process", size), size, |b, &size| {
+            b.iter(|| {
+                for _ in 0..size {
+                    let _ = std::process::Command::new("echo")
+                        .arg("test")
+                        .output();
+                }
+            });
+        });
+
+        group.bench_with_input(BenchmarkId::new("tokio_process", size), size, |b, &size| {
+            b.iter(|| {
+                tokio::runtime::Runtime::new().unwrap().block_on(async {
+                    for _ in 0..size {
+                        let _ = tokio::process::Command::new("echo")
+                            .arg("test")
+                            .output()
+                            .await;
+                    }
+                });
+            });
+        });
+    }
+
+    group.finish();
+}
+
+// 内存使用基准测试
+pub fn benchmark_memory_usage(c: &mut Criterion) {
+    let mut group = c.benchmark_group("memory_usage");
+
+    for buffer_size in [1024, 10240, 102400, 1024000].iter() {
+        group.bench_with_input(BenchmarkId::new("vec_allocation", buffer_size), buffer_size, |b, &size| {
+            b.iter(|| {
+                let _vec = vec![0u8; size];
+            });
+        });
+
+        group.bench_with_input(BenchmarkId::new("box_allocation", buffer_size), buffer_size, |b, &size| {
+            b.iter(|| {
+                let _boxed = Box::new(vec![0u8; size]);
+            });
+        });
+    }
+
+    group.finish();
+}
+
+criterion_group!(benches, benchmark_process_creation, benchmark_memory_usage);
+criterion_main!(benches);
+```
+
+### 1.3 性能分析工具
+
+```rust
+use std::time::Instant;
+use std::sync::Arc;
+use tokio::sync::Mutex;
+
+// 性能分析器
+pub struct Profiler {
+    start_time: Instant,
+    events: Arc<Mutex<Vec<ProfilerEvent>>>,
+}
+
+#[derive(Debug, Clone)]
+pub struct ProfilerEvent {
+    pub timestamp: Instant,
+    pub event_type: EventType,
+    pub duration: Duration,
+    pub metadata: String,
+}
+
+#[derive(Debug, Clone)]
+pub enum EventType {
+    ProcessCreation,
+    ProcessExecution,
+    MemoryAllocation,
+    IoOperation,
+    NetworkOperation,
+}
+
+impl Profiler {
+    pub fn new() -> Self {
+        Self {
+            start_time: Instant::now(),
+            events: Arc::new(Mutex::new(Vec::new())),
+        }
+    }
+
+    pub async fn record_event(&self, event_type: EventType, duration: Duration, metadata: String) {
+        let event = ProfilerEvent {
+            timestamp: Instant::now(),
+            event_type,
+            duration,
+            metadata,
+        };
+
+        let mut events = self.events.lock().await;
+        events.push(event);
+    }
+
+    pub async fn generate_report(&self) -> PerformanceReport {
+        let events = self.events.lock().await;
+        let mut report = PerformanceReport::new();
+
+        for event in events.iter() {
+            match event.event_type {
+                EventType::ProcessCreation => {
+                    report.process_creation_count += 1;
+                    report.total_process_creation_time += event.duration;
+                }
+                EventType::ProcessExecution => {
+                    report.process_execution_count += 1;
+                    report.total_process_execution_time += event.duration;
+                }
+                EventType::MemoryAllocation => {
+                    report.memory_allocation_count += 1;
+                    report.total_memory_allocation_time += event.duration;
+                }
+                EventType::IoOperation => {
+                    report.io_operation_count += 1;
+                    report.total_io_operation_time += event.duration;
+                }
+                EventType::NetworkOperation => {
+                    report.network_operation_count += 1;
+                    report.total_network_operation_time += event.duration;
+                }
+            }
+        }
+
+        report.calculate_averages();
+        report
+    }
+}
+
+#[derive(Debug)]
+pub struct PerformanceReport {
+    pub process_creation_count: u64,
+    pub process_execution_count: u64,
+    pub memory_allocation_count: u64,
+    pub io_operation_count: u64,
+    pub network_operation_count: u64,
+
+    pub total_process_creation_time: Duration,
+    pub total_process_execution_time: Duration,
+    pub total_memory_allocation_time: Duration,
+    pub total_io_operation_time: Duration,
+    pub total_network_operation_time: Duration,
+
+    pub avg_process_creation_time: Duration,
+    pub avg_process_execution_time: Duration,
+    pub avg_memory_allocation_time: Duration,
+    pub avg_io_operation_time: Duration,
+    pub avg_network_operation_time: Duration,
+}
+
+impl PerformanceReport {
+    pub fn new() -> Self {
+        Self {
+            process_creation_count: 0,
+            process_execution_count: 0,
+            memory_allocation_count: 0,
+            io_operation_count: 0,
+            network_operation_count: 0,
+
+            total_process_creation_time: Duration::ZERO,
+            total_process_execution_time: Duration::ZERO,
+            total_memory_allocation_time: Duration::ZERO,
+            total_io_operation_time: Duration::ZERO,
+            total_network_operation_time: Duration::ZERO,
+
+            avg_process_creation_time: Duration::ZERO,
+            avg_process_execution_time: Duration::ZERO,
+            avg_memory_allocation_time: Duration::ZERO,
+            avg_io_operation_time: Duration::ZERO,
+            avg_network_operation_time: Duration::ZERO,
+        }
+    }
+
+    pub fn calculate_averages(&mut self) {
+        if self.process_creation_count > 0 {
+            self.avg_process_creation_time = self.total_process_creation_time / self.process_creation_count as u32;
+        }
+        if self.process_execution_count > 0 {
+            self.avg_process_execution_time = self.total_process_execution_time / self.process_execution_count as u32;
+        }
+        if self.memory_allocation_count > 0 {
+            self.avg_memory_allocation_time = self.total_memory_allocation_time / self.memory_allocation_count as u32;
+        }
+        if self.io_operation_count > 0 {
+            self.avg_io_operation_time = self.total_io_operation_time / self.io_operation_count as u32;
+        }
+        if self.network_operation_count > 0 {
+            self.avg_network_operation_time = self.total_network_operation_time / self.network_operation_count as u32;
+        }
+    }
+}
+```

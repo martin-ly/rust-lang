@@ -8069,7 +8069,7 @@
       "layer": "L1",
       "title": "Type System Basics（类型系统基础）",
       "positioning": "",
-      "line_count": 2844,
+      "line_count": 3138,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡、相关概念链接",
@@ -8523,10 +8523,17 @@
           "lines": 8,
           "should_fail": true,
           "code_preview": "struct Foo;  fn main() {     let a = Foo;     let b = Foo;     let _ = a + b; //..."
+        },
+        {
+          "flags": [],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "// 定义结构体 struct User {     username: String,     email: String,     active: bool..."
         }
       ],
       "sources": [],
       "cross_references": [
+        "../../../crates/c02_type_system/docs/tier_02_guides/01_basic_types_guide.md",
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -8543,7 +8550,7 @@
       "transitions": 16,
       "has_cognitive_path": true,
       "mermaid_blocks": 12,
-      "matrix_rows": 214,
+      "matrix_rows": 222,
       "pre_post": {
         "pre": [
           "[Ownership](../01_ownership_borrow_lifetime/01_ownership.md)"
@@ -13998,7 +14005,7 @@
       "layer": "L2",
       "title": "Traits（Trait 系统）",
       "positioning": "",
-      "line_count": 2561,
+      "line_count": 2848,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -14526,10 +14533,25 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "trait Drawable {     fn draw(&self);     fn create() -> Self where Self: Sized; ..."
+        },
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "// 定义 Trait trait Summary {     fn summarize(&self) -> String; }  // 实现 Trait st..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "trait Drawable {     fn draw(&self); }  struct Circle; struct Rectangle;  impl D..."
         }
       ],
       "sources": [],
       "cross_references": [
+        "../../../crates/c02_type_system/docs/tier_02_guides/01_basic_types_guide.md",
+        "../../../crates/c02_type_system/docs/tier_02_guides/02_compound_types_guide.md",
+        "../../../crates/c02_type_system/docs/tier_02_guides/03_generics_programming_guide.md",
         "../../../knowledge/02_intermediate/06_traits.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -14547,7 +14569,7 @@
       "transitions": 10,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
-      "matrix_rows": 162,
+      "matrix_rows": 174,
       "pre_post": {
         "pre": [
           "L1 类型系统（Type System） ·",
@@ -15652,7 +15674,7 @@
       "layer": "L2",
       "title": "Generics（泛型系统）",
       "positioning": "",
-      "line_count": 2679,
+      "line_count": 3020,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -16208,10 +16230,24 @@
           "lines": 18,
           "should_fail": false,
           "code_preview": "trait Container {     type Item;     fn get(&self) -> Option<&Self::Item>; }  st..."
+        },
+        {
+          "flags": [],
+          "lines": 68,
+          "should_fail": false,
+          "code_preview": "use std::marker::PhantomData;  // 状态标记 struct New; struct Initialized; struct Co..."
+        },
+        {
+          "flags": [],
+          "lines": 74,
+          "should_fail": false,
+          "code_preview": "use std::marker::PhantomData;  // TCP 连接状态 struct Closed; struct Listen; struct ..."
         }
       ],
       "sources": [],
       "cross_references": [
+        "../../../crates/c02_type_system/docs/tier_02_guides/03_generics_programming_guide.md",
+        "../../../crates/c02_type_system/docs/tier_02_guides/04_trait_system_guide.md",
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/02_sources/international_authority_index.md",
@@ -16232,7 +16268,7 @@
       "transitions": 8,
       "has_cognitive_path": true,
       "mermaid_blocks": 6,
-      "matrix_rows": 159,
+      "matrix_rows": 166,
       "pre_post": {
         "pre": [
           "L1 类型系统（Type System） · [L2 Trait](../00_traits/01_traits.md)",
@@ -18812,7 +18848,7 @@
       "layer": "L2",
       "title": "高级类型系统：从关联类型到类型级编程",
       "positioning": "深入分析 Rust **类型系统（Type System）的高级特性**——从 GATs、impl Trait 到类型级计算和 const generics，揭示 Rust 如何在保持编译期安全的同时提供强大的抽象能力。",
-      "line_count": 974,
+      "line_count": 1246,
       "theorem_chains": [
         {
           "text": "| 高级类型系统：从关联类型到类型级编程 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -18966,6 +19002,12 @@
           "lines": 5,
           "should_fail": true,
           "code_preview": "fn duplicate() {} fn duplicate() {}  fn main() {} ..."
+        },
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "use std::marker::PhantomData;  // 不使用 PhantomData - 编译错误 struct Slice<'a, T> {  ..."
         }
       ],
       "sources": [],
@@ -18983,7 +19025,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 28,
+      "matrix_rows": 34,
       "pre_post": {
         "pre": [
           "[Type System](../../01_foundation/02_type_system/04_type_system.md) · [Generics](../01_generics/02_generics.md) · [Traits](../00_traits/01_traits.md)"
@@ -22149,7 +22191,7 @@
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
-      "line_count": 3144,
+      "line_count": 3433,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注",
@@ -22660,6 +22702,48 @@
           "lines": 18,
           "should_fail": false,
           "code_preview": "use tokio::io::AsyncWriteExt;  async fn safe_operation() -> std::io::Result<()> ..."
+        },
+        {
+          "flags": [],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "// 线程方式 (适合 CPU 密集型) use std::thread;  fn main() {     let handle = thread::spaw..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "   // ❌ 不推荐：async 无法提升性能    async fn calculate_pi() -> f64 {        // 纯计算，无 I/O..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "   // ❌ 过度工程：引入不必要的复杂性    #[tokio::main]    async fn main() {        println!(\"H..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "   // ❌ 不推荐：阻塞整个运行时    async fn call_c_library() {        unsafe { blocking_c_fu..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "async fn expensive_operation() {     println!(\"This will NOT print immediately!\"..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// 立即开始后台执行 let handle = tokio::spawn(expensive_operation()); ..."
+        },
+        {
+          "flags": [],
+          "lines": 39,
+          "should_fail": false,
+          "code_preview": "// 用户代码：使用 .await async fn user_code() {     let result = async_operation().awai..."
         }
       ],
       "sources": [],
@@ -22689,7 +22773,7 @@
       "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 9,
-      "matrix_rows": 200,
+      "matrix_rows": 206,
       "pre_post": {
         "pre": [
           "[L2 泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md) · L1 生命周期（Lifetimes）",
@@ -27869,7 +27953,7 @@
       "layer": "L4",
       "title": "Type Theory（类型论基础）",
       "positioning": "",
-      "line_count": 1482,
+      "line_count": 1739,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构——定理一致性（Coherence）矩阵扩展至11行（带⟹推理链），新增3个反命题决策树，认知路径重构为5步递进，全章补充Wikipedia/Pierce TAPL/Cardelli引用与L1-L3层次一致性标注",
@@ -28218,7 +28302,7 @@
       "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
-      "matrix_rows": 138,
+      "matrix_rows": 163,
       "pre_post": {
         "pre": [
           "> [Type System](../../01_foundation/02_type_system/04_type_system.md) ·"
@@ -29199,7 +29283,7 @@
       "layer": "L4",
       "title": "类型系统参考（Type System Reference）",
       "positioning": "",
-      "line_count": 124,
+      "line_count": 402,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -29233,6 +29317,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../../crates/c02_type_system/docs/tier_04_advanced/01_type_theory_in_depth.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/04_types_and_conversions/20_type_system_advanced.md",
         "../../03_advanced/06_low_level_patterns/33_variables.md",
@@ -29244,7 +29329,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 22,
+      "matrix_rows": 83,
       "pre_post": {
         "pre": [
           "[Type System](../../01_foundation/02_type_system/04_type_system.md) · [Type Layout](../05_rustc_internals/42_type_layout.md) · [Variables](../../03_advanced/06_low_level_patterns/33_variables.md)"
@@ -33567,7 +33652,7 @@
       "layer": "L5",
       "title": "Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）",
       "positioning": "",
-      "line_count": 957,
+      "line_count": 1214,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 重构——添加认知路径、⟹推理链、反命题决策树、章节过渡、层次一致性（Coherence）标注",
@@ -33665,6 +33750,30 @@
           "lines": 14,
           "should_fail": false,
           "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     // ❌ 编译错误: 试图在 map 闭包中修改外部状态     ..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// Rust: 自动内存管理 fn create_string() -> String {     String::from(\"hello\") }  fn u..."
+        },
+        {
+          "flags": [],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "// Rust: 强制处理 None fn find_user(id: i32) -> Option<String> {     if id == 1 {   ..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// Rust: 可变性可控 fn add(x: i32, y: i32) -> i32 {     x + y }  fn print_number(n: i..."
+        },
+        {
+          "flags": [],
+          "lines": 28,
+          "should_fail": false,
+          "code_preview": "// Rust: 无原生 HKT，使用关联类型 trait Functor {     type Inner;     type Mapped<T>;     ..."
         }
       ],
       "sources": [],
@@ -33684,7 +33793,7 @@
       "transitions": 16,
       "has_cognitive_path": true,
       "mermaid_blocks": 8,
-      "matrix_rows": 94,
+      "matrix_rows": 101,
       "pre_post": {
         "pre": [
           "[Rust vs C++](../01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Go](../01_systems_languages/02_rust_vs_go.md) · [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)"
@@ -38445,7 +38554,7 @@
       "layer": "L6",
       "title": "Design Patterns（设计模式）",
       "positioning": "",
-      "line_count": 1871,
+      "line_count": 2162,
       "theorem_chains": [
         {
           "text": "| **RAII** | 资源泄漏 | 确定性资源管理 ⟹ `Drop`自动调用 | 所有权（Ownership）+作用域 | 边界：`mem::forget`、引用（Reference）循环泄漏 |",
@@ -38734,10 +38843,36 @@
           "lines": 3,
           "should_fail": false,
           "code_preview": "struct UserId(u64); struct ProductId(u64); ..."
+        },
+        {
+          "flags": [],
+          "lines": 65,
+          "should_fail": false,
+          "code_preview": "struct Server {     host: String,     port: u16,     timeout: u64,     max_conne..."
+        },
+        {
+          "flags": [],
+          "lines": 46,
+          "should_fail": false,
+          "code_preview": "trait Animal {     fn speak(&self); }  struct Dog; struct Cat;  impl Animal for ..."
+        },
+        {
+          "flags": [],
+          "lines": 34,
+          "should_fail": false,
+          "code_preview": "// 旧接口 struct OldLogger;  impl OldLogger {     fn log_message(&self, msg: &str) ..."
+        },
+        {
+          "flags": [],
+          "lines": 40,
+          "should_fail": false,
+          "code_preview": "trait Component {     fn operation(&self) -> String; }  struct ConcreteComponent..."
         }
       ],
       "sources": [],
       "cross_references": [
+        "../../../crates/c02_type_system/docs/tier_02_guides/03_generics_programming_guide.md",
+        "../../../crates/c02_type_system/docs/tier_02_guides/04_trait_system_guide.md",
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
         "../../00_meta/04_navigation/problem_graph.md",
@@ -38757,7 +38892,7 @@
       "transitions": 14,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
-      "matrix_rows": 137,
+      "matrix_rows": 142,
       "pre_post": {
         "pre": [
           "[Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]"
@@ -44694,7 +44829,7 @@
       "layer": "L6",
       "title": "性能优化：Rust 代码的测量与调优",
       "positioning": "> 覆盖 Rust **性能优化**的核心方法论——从基准测试（criterion）、",
-      "line_count": 747,
+      "line_count": 1101,
       "theorem_chains": [
         {
           "text": "- **定理**: 性能优化：Rust 代码的测量与调优 定义 ⟹ 类型安全保证",
@@ -44806,6 +44941,24 @@
           "lines": 10,
           "should_fail": false,
           "code_preview": "fn main() {     let data = [0u8; 32];     // ❌ 运行时 UB: _mm256_load_si256 要求 32 字..."
+        },
+        {
+          "flags": [],
+          "lines": 69,
+          "should_fail": false,
+          "code_preview": "use std::time::{Duration, Instant}; use std::sync::Arc; use tokio::sync::Mutex; ..."
+        },
+        {
+          "flags": [],
+          "lines": 59,
+          "should_fail": false,
+          "code_preview": "use std::time::Instant; use criterion::{criterion_group, criterion_main, Criteri..."
+        },
+        {
+          "flags": [],
+          "lines": 144,
+          "should_fail": false,
+          "code_preview": "use std::time::Instant; use std::sync::Arc; use tokio::sync::Mutex;  // 性能分析器 pu..."
         }
       ],
       "sources": [],

@@ -103,6 +103,33 @@
   - `crates/c09_design_pattern/docs/rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md` → 摘要 + 链接到 `concept/06_ecosystem/03_design_patterns/02_patterns.md`
   - `crates/c10_networks/docs/rust_190_examples_part3_advanced_protocols.md` → 摘要 + 链接到新建 `concept/06_ecosystem/09_networking/01_advanced_network_protocols.md`
 
+### P2-Q3 深化计划剩余任务完成（2026-07-09）
+
+- **P2-3 Cargo Resolver v3 / public = true**：
+  - 重写 `concept/06_ecosystem/01_cargo/10_public_private_deps.md` 为权威页。
+  - 完善 `examples/resolver_v3_practice/` 工作区与 README。
+- **P2-5 Kani 扩展**：
+  - 新增 `crates/c03_control_fn/src/kani_examples.rs`（函数合约 + 循环不变量）。
+  - 新增 `crates/c04_generic/src/kani_examples.rs`（泛型合约 + 泛型循环不变量）。
+  - 更新 `concept/04_formal/04_model_checking/32_kani.md` 示例导航表。
+- **P2-6 形式化工具交叉链接**：
+  - 在 `borrow_sanitizer.md`、`safety_tags_preview.md`、`autoverus_preview.md`、`tree_borrows_deep_dive.md`、`08_safety_tags_preview.md`、`20_borrowsanitizer_preview.md` 之间新增交叉引用。
+  - 整理 `concept/SUMMARY.md`。
+- **P2-9 TRPL 3rd Ed 章节映射**：
+  - 新建 `concept/00_meta/trpl_3rd_ed_mapping.md`（Ch1–Ch21 + 附录 A–G）。
+  - 更新 `concept/SUMMARY.md`。
+- **P2-10 Brown Book 研究引用**：
+  - 在 `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`、`02_borrowing.md`、`03_lifetimes.md` 新增研究引用小节。
+
+### crates/*/docs/ 合规整改 P1 完成（2026-07-09）
+
+- 完成 P1 队列 5 个文件：
+  - `crates/c02_type_system/docs/tier_03_references/03_dispatch_mechanisms_reference.md` → `concept/02_intermediate/00_traits/39_dispatch_mechanisms.md`
+  - `crates/c04_generic/docs/tier_04_advanced/04_type_level_programming.md` → `concept/02_intermediate/01_generics/39_type_level_programming.md`
+  - `crates/c06_async/docs/tier_02_guides/02_future_and_executor_mechanisms.md` → `concept/03_advanced/01_async/39_future_and_executor_mechanisms.md`
+  - `crates/c08_algorithms/docs/tier_04_advanced/04_algorithm_engineering_practice.md` → `concept/06_ecosystem/11_domain_applications/76_algorithm_engineering_practice.md`
+  - `crates/c10_networks/docs/tier_04_advanced/01_high_performance_network_service_architecture.md` → `concept/06_ecosystem/04_web_and_networking/39_high_performance_network_service_architecture.md`
+
 ### Q4 2026 准备文档（2026-07-09）
 
 - 新建 `.kimi/Q4_I18N_TOOL_DECISION_2026_07_09.md`：建议保留当前 EN/Summary 方案，Q4 仅做小规模 pilot。

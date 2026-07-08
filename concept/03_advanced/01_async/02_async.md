@@ -172,6 +172,14 @@
     - [测验 2：`.await` 的语义（理解层）](#测验-2await-的语义理解层)
     - [测验 3：运行时选择（应用层）](#测验-3运行时选择应用层)
     - [测验 4：取消安全（分析层）](#测验-4取消安全分析层)
+  - [从 `crates\c06_async\docs\tier_01_foundations\04_faq.md` 迁移的补充视角](#从-cratesc06_asyncdocstier_01_foundations04_faqmd-迁移的补充视角)
+- [C06 Async 常见问题](#c06-async-常见问题)
+  - [📑 目录](#-目录-1)
+  - [1. 基础概念](#1-基础概念)
+    - [Q1.1: `async/await` 和普通的线程有什么区别？我应该用哪个？](#q11-asyncawait-和普通的线程有什么区别我应该用哪个)
+    - [Q1.2: 什么时候不应该使用 `async/await`？](#q12-什么时候不应该使用-asyncawait)
+    - [Q1.3: `Future` 什么时候开始执行？](#q13-future-什么时候开始执行)
+    - [Q1.4: `.await` 和 `poll()` 有什么区别？](#q14-await-和-poll-有什么区别)
 
 ## 〇、认知路径（Cognitive Path）
 
@@ -3141,3 +3149,284 @@ async fn safe_operation() -> std::io::Result<()> {
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Async Book](https://rust-lang.github.io/async-book/index.html)
+
+---
+
+## 从 `crates\c06_async\docs\tier_01_foundations\04_faq.md` 迁移的补充视角
+
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+
+> **生态状态提示**：
+>
+> 本文档提及 `async-std` 与/或 `wasm32-wasi`。
+> 请注意：
+>
+> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+
+---
+
+# C06 Async 常见问题
+
+> **文档版本**: Rust 1.96.1+ | **更新日期**: 2025-12-11
+> **文档层级**: Tier 1 - 基础概念 | **文档类型**: ❓ FAQ参考
+
+---
+
+## 📑 目录
+
+- [C06 Async 常见问题](#c06-async-常见问题)
+  - [📑 目录](#-目录)
+  - [1. 基础概念](#1-基础概念)
+    - [Q1.1: `async/await` 和普通的线程有什么区别？我应该用哪个？](#q11-asyncawait-和普通的线程有什么区别我应该用哪个)
+    - [Q1.2: 什么时候不应该使用 `async/await`？](#q12-什么时候不应该使用-asyncawait)
+    - [Q1.3: `Future` 什么时候开始执行？](#q13-future-什么时候开始执行)
+    - [Q1.4: `.await` 和 `poll()` 有什么区别？](#q14-await-和-poll-有什么区别)
+    - [Q1.5: `async fn` 返回的是什么类型？](#q15-async-fn-返回的是什么类型)
+  - [2. 运行时选择](#2-运行时选择)
+    - [Q2.1: Tokio、async-std \[已归档\] 和 Smol 如何选择？](#q21-tokioasync-std-已归档-和-smol-如何选择)
+    - [Q2.2: 可以在同一项目中混用多个运行时吗？](#q22-可以在同一项目中混用多个运行时吗)
+    - [Q2.3: 如何选择单线程还是多线程运行时？](#q23-如何选择单线程还是多线程运行时)
+  - [3. Pin 与内存安全](#3-pin-与内存安全)
+    - [Q3.1: 为什么我需要 `Pin`？它看起来非常复杂](#q31-为什么我需要-pin它看起来非常复杂)
+    - [Q3.2: 什么是 `Unpin`？](#q32-什么是-unpin)
+    - [Q3.3: 如何获取 `Pin<&mut T>` 中的 `&mut T`？](#q33-如何获取-pinmut-t-中的-mut-t)
+  - [4. 性能与优化](#4-性能与优化)
+    - [Q4.1: 如何在 `async` 代码中执行 CPU 密集型任务？](#q41-如何在-async-代码中执行-cpu-密集型任务)
+    - [Q4.2: 如何优化 Tokio 运行时性能？](#q42-如何优化-tokio-运行时性能)
+    - [Q4.3: 如何测量异步代码的性能？](#q43-如何测量异步代码的性能)
+  - [5. 错误处理与调试](#5-错误处理与调试)
+    - [Q5.1: 如何在异步代码中处理错误？](#q51-如何在异步代码中处理错误)
+    - [Q5.2: 如何调试异步代码？](#q52-如何调试异步代码)
+    - [Q5.3: 如何处理 Timeout？](#q53-如何处理-timeout)
+  - [6. 设计模式与最佳实践](#6-设计模式与最佳实践)
+    - [Q6.1: 为什么我的 `Future` 没有执行？](#q61-为什么我的-future-没有执行)
+    - [Q6.2: 如何在 `Drop` 中执行异步清理？](#q62-如何在-drop-中执行异步清理)
+    - [Q6.3: 如何优雅取消异步任务？](#q63-如何优雅取消异步任务)
+  - [7. 生态系统与兼容性](#7-生态系统与兼容性)
+    - [Q7.1: Tokio 和 async-std \[已归档\] 的库可以互相使用吗？](#q71-tokio-和-async-std-已归档-的库可以互相使用吗)
+    - [Q7.2: 如何编写运行时无关的异步库？](#q72-如何编写运行时无关的异步库)
+    - [Q7.3: `async-trait` crate 是做什么的？](#q73-async-trait-crate-是做什么的)
+  - [8. 高级主题](#8-高级主题)
+    - [Q8.1: 如何手动实现 `Future`？](#q81-如何手动实现-future)
+    - [Q8.2: 如何在 trait 中定义异步方法（Rust 1.92.0）？（自 Rust 1.90 引入）](#q82-如何在-trait-中定义异步方法rust-1920自-rust-190-引入)
+    - [Q8.3: 如何实现 `AsyncDrop`？](#q83-如何实现-asyncdrop)
+  - [🔗 相关资源](#-相关资源)
+    - [官方文档](#官方文档)
+    - [推荐阅读](#推荐阅读)
+    - [社区资源](#社区资源)
+  - [📝 贡献指南](#-贡献指南)
+
+---
+
+## 1. 基础概念
+
+### Q1.1: `async/await` 和普通的线程有什么区别？我应该用哪个？
+
+**回答**:
+
+**核心区别**:
+
+| 特性  | 线程 (`std::thread`)  | `async/await` |
+| :--- | :--- | :--- |
+| **调度方式**   | 抢占式（OS 调度）            | 协作式（运行时调度） |
+| **内存开销**   | 每个线程 ~2MB 栈空间         | 每个任务 ~KB 级别    |
+| **适用场景**   | CPU 密集型任务               | I/O 密集型任务       |
+| **并发数量**   | 受限于系统资源（通常几百个） | 可轻松管理数万个任务 |
+| **上下文切换** | 较慢（需要内核态）           | 较快（用户态）       |
+
+**示例对比**:
+
+```rust
+// 线程方式 (适合 CPU 密集型)
+use std::thread;
+
+fn main() {
+    let handle = thread::spawn(|| {
+        // 计算密集型工作
+        heavy_computation()
+    });
+    handle.join().unwrap();
+}
+
+// async 方式 (适合 I/O 密集型)
+#[tokio::main]
+async fn main() {
+    let handle = tokio::spawn(async {
+        // I/O 密集型工作
+        fetch_data_from_network().await
+    });
+    handle.await.unwrap();
+}
+```
+
+**选择建议**:
+
+- **CPU 密集型任务**: 使用线程或 `rayon`（数据并行）
+- **I/O 密集型任务**: 使用 `async/await`
+- **混合场景**: 在 `async` 运行时中使用 `spawn_blocking` 执行阻塞任务
+
+**相关问题**: [Q1.2](#q12-什么时候不应该使用-asyncawait), [Q4.1](#q41-如何在-async-代码中执行-cpu-密集型任务)
+
+---
+
+### Q1.2: 什么时候不应该使用 `async/await`？
+
+**回答**:
+
+以下场景**不适合**使用 `async`:
+
+1. **纯 CPU 密集型计算**:
+
+   ```rust
+   // ❌ 不推荐：async 无法提升性能
+   async fn calculate_pi() -> f64 {
+       // 纯计算，无 I/O
+   }
+
+   // ✅ 推荐：直接使用线程或 rayon
+   fn calculate_pi_parallel() -> f64 {
+       use rayon::prelude::*;
+       // 利用多核并行计算
+   }
+   ```
+
+2. **简单的单任务程序**:
+
+   ```rust
+   // ❌ 过度工程：引入不必要的复杂性
+   #[tokio::main]
+   async fn main() {
+       println!("Hello, world!");
+   }
+
+   // ✅ 简单直接
+   fn main() {
+       println!("Hello, world!");
+   }
+   ```
+
+3. **与阻塞式 C 库交互**:
+
+   ```rust
+   // ❌ 不推荐：阻塞整个运行时
+   async fn call_c_library() {
+       unsafe { blocking_c_function() };
+   }
+
+   // ✅ 推荐：使用 spawn_blocking
+   async fn call_c_library_correctly() {
+       tokio::task::spawn_blocking(|| {
+           unsafe { blocking_c_function() }
+       }).await.unwrap();
+   }
+   ```
+
+**相关问题**: [Q1.1](#q11-asyncawait-和普通的线程有什么区别我应该用哪个), [Q4.1](#q41-如何在-async-代码中执行-cpu-密集型任务)
+
+---
+
+### Q1.3: `Future` 什么时候开始执行？
+
+**回答**:
+
+**关键点**: `Future` 是**惰性的**（lazy），只有在被 `.await` 或 `poll()` 时才开始执行。
+
+**示例**:
+
+```rust
+async fn expensive_operation() {
+    println!("This will NOT print immediately!");
+    // 耗时操作
+}
+
+async fn example() {
+    let future = expensive_operation(); // ❌ 什么也不会发生
+
+    // 只有 await 之后才开始执行
+    future.await; // ✅ 现在才打印 "This will NOT print immediately!"
+}
+```
+
+**对比 JavaScript Promise**:
+
+```javascript
+// JavaScript: Promise 立即开始执行
+const promise = fetch("https://api.example.com") // ✅ 立即开始请求
+
+// Rust: Future 惰性执行
+let future = reqwest::get("https://api.example.com") // ❌ 什么也不会发生
+future.await // ✅ 现在才开始请求
+```
+
+**实践建议**:
+
+- 如果需要后台执行，使用 `tokio::spawn`:
+
+```rust
+// 立即开始后台执行
+let handle = tokio::spawn(expensive_operation());
+```
+
+**相关问题**: [Q1.4](#q14-await-和-poll-有什么区别), [Q6.1](#q61-为什么我的-future-没有执行)
+
+---
+
+### Q1.4: `.await` 和 `poll()` 有什么区别？
+
+**回答**:
+
+**`.await`** 是高层次语法糖，**`poll()`** 是底层机制。
+
+**关系**:
+
+```text
+.await (用户代码)
+  │
+  ├── 编译器展开
+  │
+  └──> poll() (由运行时调用)
+```
+
+**示例**:
+
+```rust
+// 用户代码：使用 .await
+async fn user_code() {
+    let result = async_operation().await;
+}
+
+// 编译器生成的等价代码（简化版）
+fn user_code() -> impl Future<Output = ()> {
+    // 状态机
+    enum State {
+        Start,
+        Waiting(SomeFuture),
+        Done,
+    }
+
+    struct UserCodeFuture {
+        state: State,
+    }
+
+    impl Future for UserCodeFuture {
+        type Output = ();
+
+        fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<()> {
+            match self.state {
+                State::Start => { /* 开始 */ }
+                State::Waiting(ref mut fut) => {
+                    // 调用内部 Future 的 poll
+                    match fut.poll(cx) {
+                        Poll::Ready(val) => { /* 处理结果 */ }
+                        Poll::Pending => return Poll::Pending,
+                    }
+                }
+                State::Done => Poll::Ready(()),
+            }
+        }
+    }
+
+    UserCodeFuture { state: State::Start }
+}
+```

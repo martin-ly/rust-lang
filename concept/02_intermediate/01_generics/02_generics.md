@@ -164,6 +164,18 @@
     - [测验 3：多个 Trait Bound（应用层）](#测验-3多个-trait-bound应用层)
     - [测验 4：单态化与代码膨胀（分析层）](#测验-4单态化与代码膨胀分析层)
     - [测验 5：关联类型（分析层）](#测验-5关联类型分析层)
+  - [从 `crates\c02_type_system\docs\tier_04_advanced\02_advanced_generics_patterns.md` 迁移的补充视角](#从-cratesc02_type_systemdocstier_04_advanced02_advanced_generics_patternsmd-迁移的补充视角)
+  - [📋 目录](#-目录-1)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+    - [多维概念对比矩阵](#多维概念对比矩阵)
+    - [决策树图](#决策树图)
+  - [🎯 概述](#-概述)
+  - [1. 类型状态模式](#1-类型状态模式)
+    - [1.1 基础类型状态](#11-基础类型状态)
 
 ## 一、权威定义（Definition）
 
@@ -2676,3 +2688,332 @@ fn main() {
 
 关联类型更适合"一个类型对应一个输出类型"的场景，如迭代器（Iterator）的 `Item`。
 </details>
+
+---
+
+## 从 `crates\c02_type_system\docs\tier_04_advanced\02_advanced_generics_patterns.md` 迁移的补充视角
+
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+
+﻿# 4.2 Rust 类型系统 - 高级泛型模式
+
+> **文档类型**: Tier 4 - 高级层
+> **文档定位**: 高级泛型编程模式
+> **适用对象**: 高级开发者
+> **前置知识**: [2.3 泛型编程指南](../../../crates/c02_type_system/docs/tier_02_guides/03_generics_programming_guide.md), [2.4 Trait系统指南](../../../crates/c02_type_system/docs/tier_02_guides/04_trait_system_guide.md)
+> **最后更新**: 2025-12-11
+
+---
+
+## 📋 目录
+
+- [4.2 Rust 类型系统 - 高级泛型模式](#42-rust-类型系统---高级泛型模式)
+  - [📋 目录](#-目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
+    - [多维概念对比矩阵](#多维概念对比矩阵)
+    - [决策树图](#决策树图)
+  - [🎯 概述](#-概述)
+  - [1. 类型状态模式](#1-类型状态模式)
+    - [1.1 基础类型状态](#11-基础类型状态)
+  - [2. 类型见证模式](#2-类型见证模式)
+    - [2.1 类型见证高级应用](#21-类型见证高级应用)
+  - [3. Newtype 模式](#3-newtype-模式)
+    - [3.1 Newtype高级应用：金融系统类型安全](#31-newtype高级应用金融系统类型安全)
+  - [4. Visitor 模式](#4-visitor-模式)
+  - [5. Extension Traits](#5-extension-traits)
+  - [6. Sealed Traits](#6-sealed-traits)
+  - [7. 类型擦除](#7-类型擦除)
+  - [8. 高级组合模式](#8-高级组合模式)
+    - [8.1 HKT模拟](#81-hkt模拟)
+    - [8.2 类型级编程](#82-类型级编程)
+    - [8.3 依赖类型模拟](#83-依赖类型模拟)
+  - [9. 性能优化模式](#9-性能优化模式)
+    - [9.1 单态化](#91-单态化)
+    - [9.2 内联优化](#92-内联优化)
+    - [9.3 编译时计算](#93-编译时计算)
+    - [9.4 SIMD与泛型优化](#94-simd与泛型优化)
+    - [9.5 泛型与异构编程](#95-泛型与异构编程)
+  - [9.6 GAT高级应用案例](#96-gat高级应用案例)
+    - [案例1：零拷贝异步Stream](#案例1零拷贝异步stream)
+    - [案例2：类型安全的数据库查询构建器](#案例2类型安全的数据库查询构建器)
+    - [案例3：类型安全的单位系统](#案例3类型安全的单位系统)
+  - [9.7 类型级列表与异构集合](#97-类型级列表与异构集合)
+  - [10. 总结](#10-总结)
+  - [11. 参考资源](#11-参考资源)
+
+---
+
+## 📐 知识结构
+
+### 概念定义
+
+**高级泛型模式 (Advanced Generic Patterns)**:
+
+- **定义**: Rust 1.92.0 高级泛型编程模式，包括类型状态模式、类型见证模式、Newtype 模式、Visitor 模式、Extension Traits、Sealed Traits、类型擦除、高级组合模式等
+- **类型**: 高级层文档
+- **范畴**: 类型系统、泛型编程
+- **版本**: Rust 1.96.1+ (Edition 2024)
+- **相关概念**: 泛型模式、类型状态、Newtype、Visitor、Extension Traits、类型擦除、HKT 模拟
+
+### 属性特征
+
+**核心属性**:
+
+- **类型状态模式**: 基础类型状态、实现编译时状态机、构建器模式的类型安全版本、协议状态管理
+- **类型见证模式**: 类型见证高级应用
+- **Newtype 模式**: Newtype 高级应用（金融系统类型安全）
+- **Visitor 模式**: 访问者模式实现
+- **Extension Traits**: 扩展 Trait 模式
+- **Sealed Traits**: 密封 Trait 模式
+
+**Rust 1.92.0 新特性**:
+
+- **改进的类型状态模式**: 更简洁的类型状态实现
+- **增强的 GAT 支持**: 更好的 GAT 高级应用
+- **优化的类型级编程**: 更强大的类型级列表与异构集合
+
+**性能特征**:
+
+- **零成本抽象**: 所有模式零运行时开销
+- **编译时检查**: 编译期状态检查
+- **适用场景**: 类型安全 API、状态机、代码复用
+
+### 关系连接
+
+**组合关系**:
+
+- 高级泛型模式 --[covers]--> 多种泛型模式
+- 类型安全程序 --[uses]--> 高级泛型模式
+
+**依赖关系**:
+
+- 高级泛型模式 --[depends-on]--> 泛型系统
+- 类型安全设计 --[depends-on]--> 高级泛型模式
+
+### 思维导图
+
+```text
+高级泛型模式
+│
+├── 类型状态模式
+│   └── 编译时状态机
+├── 类型见证模式
+│   └── 类型见证
+├── Newtype 模式
+│   └── 类型安全
+├── Visitor 模式
+│   └── 访问者模式
+├── Extension Traits
+│   └── 扩展 Trait
+└── Sealed Traits
+    └── 密封 Trait
+```
+
+### 多维概念对比矩阵
+
+| 泛型模式             | 复杂度 | 性能   | 类型安全 | 适用场景   | Rust 1.92.0 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **类型状态模式**     | 中     | 零开销 | 高       | 状态机     | ✅ 改进     |
+| **Newtype 模式**     | 低     | 零开销 | 高       | 类型安全   | ✅          |
+| **Visitor 模式**     | 中     | 零开销 | 高       | 遍历结构   | ✅          |
+| **Extension Traits** | 低     | 零开销 | 高       | 扩展功能   | ✅          |
+| **Sealed Traits**    | 中     | 零开销 | 高       | 受限 Trait | ✅          |
+| **类型擦除**         | 高     | 零开销 | 中       | 动态分发   | ✅          |
+
+### 决策树图
+
+```text
+选择泛型模式
+│
+├── 是否需要状态管理？
+│   ├── 是 → 类型状态模式
+│   └── 否 → 继续判断
+│       ├── 是否需要类型安全？
+│       │   ├── 是 → Newtype 模式
+│       │   └── 否 → 继续判断
+│       │       ├── 是否需要扩展功能？
+│       │       │   ├── 是 → Extension Traits
+│       │       │   └── 否 → Visitor 模式
+```
+
+---
+
+## 🎯 概述
+
+高级泛型模式用于：
+
+- 🔒 编译时状态检查
+- 🎯 类型安全的 API
+- 🔄 灵活的代码复用
+- ⚡ 零成本抽象
+
+---
+
+## 1. 类型状态模式
+
+### 1.1 基础类型状态
+
+**设计原则**:
+
+类型状态模式(Typestate Pattern)将对象的状态编码到类型系统中，使得非法状态转换在编译时被拒绝。这是Rust零成本抽象的典型应用。
+
+**核心优势**:
+
+1. **编译时状态验证**：非法状态转换在编译时被捕获
+2. **零运行时开销**：幻影类型在编译后被擦除
+3. **API强制约束**：类型系统强制正确的使用顺序
+4. **自文档化**：类型签名清晰表达状态转换
+
+**使用类型编码状态**:
+
+```rust
+use std::marker::PhantomData;
+
+// 状态标记
+struct New;
+struct Initialized;
+struct Configured;
+struct Running;
+
+// 构建器，使用幻影类型跟踪状态
+struct Builder<State> {
+    config: Option<String>,
+    _state: PhantomData<State>,
+}
+
+impl Builder<New> {
+    fn new() -> Self {
+        Builder {
+            config: None,
+            _state: PhantomData,
+        }
+    }
+
+    fn initialize(self) -> Builder<Initialized> {
+        Builder {
+            config: self.config,
+            _state: PhantomData,
+        }
+    }
+}
+
+impl Builder<Initialized> {
+    fn configure(mut self, config: String) -> Builder<Configured> {
+        self.config = Some(config);
+        Builder {
+            config: self.config,
+            _state: PhantomData,
+        }
+    }
+}
+
+impl Builder<Configured> {
+    fn build(self) -> Builder<Running> {
+        println!("Building with config: {:?}", self.config);
+        Builder {
+            config: self.config,
+            _state: PhantomData,
+        }
+    }
+}
+
+impl Builder<Running> {
+    fn run(&self) {
+        println!("Running...");
+    }
+}
+
+fn main() {
+    let builder = Builder::<New>::new()
+        .initialize()
+        .configure(String::from("config.toml"))
+        .build();
+
+    builder.run();
+
+    // ❌ 编译错误：无法跳过状态
+    // let bad = Builder::<New>::new().build();
+}
+```
+
+**复杂状态机**:
+
+```rust
+use std::marker::PhantomData;
+
+// TCP 连接状态
+struct Closed;
+struct Listen;
+struct SynRcvd;
+struct Established;
+
+struct TcpConnection<State> {
+    socket: String,
+    _state: PhantomData<State>,
+}
+
+impl TcpConnection<Closed> {
+    fn new(socket: String) -> Self {
+        TcpConnection {
+            socket,
+            _state: PhantomData,
+        }
+    }
+
+    fn listen(self) -> TcpConnection<Listen> {
+        println!("Listening on {}", self.socket);
+        TcpConnection {
+            socket: self.socket,
+            _state: PhantomData,
+        }
+    }
+}
+
+impl TcpConnection<Listen> {
+    fn accept(self) -> TcpConnection<SynRcvd> {
+        println!("SYN received");
+        TcpConnection {
+            socket: self.socket,
+            _state: PhantomData,
+        }
+    }
+}
+
+impl TcpConnection<SynRcvd> {
+    fn acknowledge(self) -> TcpConnection<Established> {
+        println!("Connection established");
+        TcpConnection {
+            socket: self.socket,
+            _state: PhantomData,
+        }
+    }
+}
+
+impl TcpConnection<Established> {
+    fn send(&self, data: &str) {
+        println!("Sending: {}", data);
+    }
+
+    fn close(self) -> TcpConnection<Closed> {
+        println!("Connection closed");
+        TcpConnection {
+            socket: self.socket,
+            _state: PhantomData,
+        }
+    }
+}
+
+fn main() {
+    let conn = TcpConnection::<Closed>::new(String::from("127.0.0.1:8080"))
+        .listen()
+        .accept()
+        .acknowledge();
+
+    conn.send("Hello");
+    let _closed = conn.close();
+}
+```

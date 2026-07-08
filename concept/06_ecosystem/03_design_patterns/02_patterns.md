@@ -1868,3 +1868,294 @@ Typestate 最适合：
 ### 反命题与边界
 
 > **反命题**: "Design Patterns（设计模式） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+---
+
+## 从 `crates\c02_type_system\docs\tier_04_advanced\05_design_patterns_collection.md` 迁移的补充视角
+
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+
+# 4.5 Rust 类型系统 - 设计模式集
+
+> **文档类型**: Tier 4 - 高级层
+> **文档定位**: Rust 设计模式完整参考
+> **适用对象**: 中级 → 高级开发者
+> **前置知识**: [2.3 泛型编程指南](../../../crates/c02_type_system/docs/tier_02_guides/03_generics_programming_guide.md), [2.4 Trait系统指南](../../../crates/c02_type_system/docs/tier_02_guides/04_trait_system_guide.md)
+> **最后更新**: 2025-12-11
+
+---
+
+## 📋 目录
+
+- [4.5 Rust 类型系统 - 设计模式集](#45-rust-类型系统---设计模式集)
+  - [📋 目录](#-目录)
+  - [🎯 概述](#-概述)
+  - [1. 创建型模式](#1-创建型模式)
+    - [Builder 模式](#builder-模式)
+    - [Factory 模式](#factory-模式)
+  - [2. 结构型模式](#2-结构型模式)
+    - [Adapter 模式](#adapter-模式)
+    - [Decorator 模式](#decorator-模式)
+  - [3. 行为型模式](#3-行为型模式)
+    - [Strategy 模式](#strategy-模式)
+    - [Visitor 模式](#visitor-模式)
+    - [Iterator 模式](#iterator-模式)
+  - [4. Rust 特有模式](#4-rust-特有模式)
+    - [RAII (Resource Acquisition Is Initialization)](#raii-resource-acquisition-is-initialization)
+    - [Typestate 模式](#typestate-模式)
+    - [Extension Trait 模式](#extension-trait-模式)
+  - [5. 并发模式](#5-并发模式)
+    - [Actor 模式](#actor-模式)
+  - [6. 最佳实践](#6-最佳实践)
+    - [组合优于继承](#组合优于继承)
+    - [使用 Trait 对象实现多态](#使用-trait-对象实现多态)
+  - [6. 错误处理模式](#6-错误处理模式)
+    - [Result组合模式](#result组合模式)
+    - [自定义错误类型](#自定义错误类型)
+    - [Try trait模式](#try-trait模式)
+  - [7. 内存管理模式](#7-内存管理模式)
+    - [Arena分配模式](#arena分配模式)
+    - [对象池模式](#对象池模式)
+  - [8. Trait对象模式](#8-trait对象模式)
+    - [动态分发](#动态分发)
+    - [枚举分发（更高效）](#枚举分发更高效)
+  - [9. 类型安全API设计](#9-类型安全api设计)
+    - [幻影类型参数](#幻影类型参数)
+    - [Session Types](#session-types)
+  - [10. 函数式模式](#10-函数式模式)
+    - [Monad-like模式](#monad-like模式)
+    - [Lens模式（聚焦数据）](#lens模式聚焦数据)
+    - [10.1 高级函数式模式：Applicative与Monad深化](#101-高级函数式模式applicative与monad深化)
+    - [10.2 Free Monad模式](#102-free-monad模式)
+    - [10.3 Zipper模式（高效导航）](#103-zipper模式高效导航)
+    - [10.4 Optics模式（Prism与Iso）](#104-optics模式prism与iso)
+    - [10.5 Reader Monad模式（依赖注入）](#105-reader-monad模式依赖注入)
+    - [10.6 Writer Monad模式（日志累积）](#106-writer-monad模式日志累积)
+    - [10.7 State Monad模式（状态转换）](#107-state-monad模式状态转换)
+    - [10.8 并发模式深化](#108-并发模式深化)
+    - [10.9 性能优化模式集](#109-性能优化模式集)
+  - [11. 总结](#11-总结)
+  - [8. 参考资源](#8-参考资源)
+  - [**🎉 完成设计模式集学习！** 🦀](#-完成设计模式集学习-)
+
+---
+
+## 🎯 概述
+
+Rust 设计模式分类：
+
+| 类别         | 模式                              |
+| :--- | :--- |
+| **创建型**   | Builder, Factory, Singleton       |
+| **结构型**   | Adapter, Decorator, Newtype       |
+| **行为型**   | Strategy, Visitor, Iterator       |
+| **Rust特有** | RAII, Typestate, Extension Traits |
+
+---
+
+## 1. 创建型模式
+
+### Builder 模式
+
+```rust
+struct Server {
+    host: String,
+    port: u16,
+    timeout: u64,
+    max_connections: usize,
+}
+
+struct ServerBuilder {
+    host: Option<String>,
+    port: Option<u16>,
+    timeout: Option<u64>,
+    max_connections: Option<usize>,
+}
+
+impl ServerBuilder {
+    fn new() -> Self {
+        ServerBuilder {
+            host: None,
+            port: None,
+            timeout: None,
+            max_connections: None,
+        }
+    }
+
+    fn host(mut self, host: String) -> Self {
+        self.host = Some(host);
+        self
+    }
+
+    fn port(mut self, port: u16) -> Self {
+        self.port = Some(port);
+        self
+    }
+
+    fn timeout(mut self, timeout: u64) -> Self {
+        self.timeout = Some(timeout);
+        self
+    }
+
+    fn max_connections(mut self, max: usize) -> Self {
+        self.max_connections = Some(max);
+        self
+    }
+
+    fn build(self) -> Result<Server, String> {
+        Ok(Server {
+            host: self.host.ok_or("host is required")?,
+            port: self.port.unwrap_or(8080),
+            timeout: self.timeout.unwrap_or(30),
+            max_connections: self.max_connections.unwrap_or(100),
+        })
+    }
+}
+
+fn main() {
+    let server = ServerBuilder::new()
+        .host(String::from("localhost"))
+        .port(3000)
+        .timeout(60)
+        .build()
+        .unwrap();
+
+    println!("Server: {}:{}", server.host, server.port);
+}
+```
+
+### Factory 模式
+
+```rust
+trait Animal {
+    fn speak(&self);
+}
+
+struct Dog;
+struct Cat;
+
+impl Animal for Dog {
+    fn speak(&self) {
+        println!("Woof!");
+    }
+}
+
+impl Animal for Cat {
+    fn speak(&self) {
+        println!("Meow!");
+    }
+}
+
+enum AnimalType {
+    Dog,
+    Cat,
+}
+
+struct AnimalFactory;
+
+impl AnimalFactory {
+    fn create(animal_type: AnimalType) -> Box<dyn Animal> {
+        match animal_type {
+            AnimalType::Dog => Box::new(Dog),
+            AnimalType::Cat => Box::new(Cat),
+        }
+    }
+}
+
+fn main() {
+    let animals: Vec<Box<dyn Animal>> = vec![
+        AnimalFactory::create(AnimalType::Dog),
+        AnimalFactory::create(AnimalType::Cat),
+    ];
+
+    for animal in animals {
+        animal.speak();
+    }
+}
+```
+
+---
+
+## 2. 结构型模式
+
+### Adapter 模式
+
+```rust
+// 旧接口
+struct OldLogger;
+
+impl OldLogger {
+    fn log_message(&self, msg: &str) {
+        println!("[OLD] {}", msg);
+    }
+}
+
+// 新接口
+trait Logger {
+    fn log(&self, level: &str, msg: &str);
+}
+
+// Adapter
+struct LoggerAdapter {
+    old_logger: OldLogger,
+}
+
+impl Logger for LoggerAdapter {
+    fn log(&self, level: &str, msg: &str) {
+        let formatted = format!("[{}] {}", level, msg);
+        self.old_logger.log_message(&formatted);
+    }
+}
+
+fn main() {
+    let adapter = LoggerAdapter {
+        old_logger: OldLogger,
+    };
+
+    adapter.log("INFO", "Application started");
+}
+```
+
+### Decorator 模式
+
+```rust
+trait Component {
+    fn operation(&self) -> String;
+}
+
+struct ConcreteComponent;
+
+impl Component for ConcreteComponent {
+    fn operation(&self) -> String {
+        String::from("ConcreteComponent")
+    }
+}
+
+struct DecoratorA<T: Component> {
+    component: T,
+}
+
+impl<T: Component> Component for DecoratorA<T> {
+    fn operation(&self) -> String {
+        format!("DecoratorA({})", self.component.operation())
+    }
+}
+
+struct DecoratorB<T: Component> {
+    component: T,
+}
+
+impl<T: Component> Component for DecoratorB<T> {
+    fn operation(&self) -> String {
+        format!("DecoratorB({})", self.component.operation())
+    }
+}
+
+fn main() {
+    let component = ConcreteComponent;
+    let decorated_a = DecoratorA { component };
+    let decorated_b = DecoratorB { component: decorated_a };
+
+    println!("{}", decorated_b.operation());
+}
+```
