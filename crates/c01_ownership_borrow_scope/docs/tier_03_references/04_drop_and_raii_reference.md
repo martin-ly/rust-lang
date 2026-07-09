@@ -1,129 +1,22 @@
-﻿# Tier 3: Drop 与 RAII 参考
+> **EN**: Drop and RAII Reference
+> **Summary**: Reference stub pointing to the canonical ownership authority for Drop and RAII semantics.
 
-> **文档类型**: 技术参考
-> **适用版本**: Rust 1.96.1+
+# Ownership（所有权） — Crate Docs Stub
 
----
+> **权威来源**: [Ownership（所有权）](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 
-## 📊 目录
+本文件原为对应 crate 的通用概念教程/参考。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已在 `concept/` 中维护为单一权威来源；此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/` 目录。
 
-- [Tier 3: Drop 与 RAII 参考](#tier-3-drop-与-raii-参考)
-  - [📊 目录](#-目录)
-  - [Drop trait](#drop-trait)
-    - [基本使用](#基本使用)
-  - [RAII 模式](#raii-模式)
-    - [文件 RAII](#文件-raii)
-    - [锁 RAII](#锁-raii)
-  - [Drop 顺序](#drop-顺序)
+## 主题导航
 
-## Drop trait
+| 主题 | 权威来源 |
+| :--- | :--- |
+| Drop trait | [01_ownership.md#83-补充drop-的-stdmemforget-边界分析](01_ownership.md#83-补充drop-的-stdmemforget-边界分析) |
+| RAII 语义 | [01_ownership.md#61-核心定理safe-rust-无内存泄漏模循环引用](01_ownership.md#61-核心定理safe-rust-无内存泄漏模循环引用) |
+| Drop 顺序 | [01_ownership.md#82-补充c-构造函数析构函数语义-vs-rust-的所有权初始化](01_ownership.md#82-补充c-构造函数析构函数语义-vs-rust-的所有权初始化) |
 
-```rust
-pub trait Drop {
-    fn drop(&mut self);
-}
-```
+## 本地资源
 
-### 基本使用
-
-```rust
-struct CustomSmartPointer {
-    data: String,
-}
-
-impl Drop for CustomSmartPointer {
-    fn drop(&mut self) {
-        println!("Dropping CustomSmartPointer with data `{}`!", self.data);
-    }
-}
-
-fn main() {
-    let c = CustomSmartPointer {
-        data: String::from("my stuff"),
-    };
-    let d = CustomSmartPointer {
-        data: String::from("other stuff"),
-    };
-    println!("CustomSmartPointers created.");
-} // d 和 c 自动调用 drop
-```
-
----
-
-## RAII 模式
-
-**Resource Acquisition Is Initialization** - 资源获取即初始化
-
-从引用一致性视角看，RAII 模式是**资源管理的编译期证明机制**。
-资源的获取和释放由编译期证明的资源生命周期决定，而非运行时检查。
-Drop trait 的自动调用是**编译期证明的确定性析构**。
-
-### 文件 RAII
-
-```rust
-use std::fs::File;
-use std::io::Write;
-
-fn write_file() -> std::io::Result<()> {
-    let mut file = File::create("output.txt")?; // 获取资源
-    file.write_all(b"Hello")?;
-    Ok(())
-} // file 自动关闭（Drop）
-```
-
-### 锁 RAII
-
-```rust
-use std::sync::Mutex;
-
-let data = Mutex::new(0);
-{
-    let mut num = data.lock().unwrap(); // 获取锁
-    *num += 1;
-} // 锁自动释放（Drop）
-```
-
----
-
-## Drop 顺序
-
-1. 变量按声明的**相反顺序** drop
-2. 结构体字段按**声明顺序** drop
-3. 元组元素按**顺序** drop
-
-```rust
-struct Inner;
-struct Outer(Inner);
-
-impl Drop for Inner {
-    fn drop(&mut self) { println!("Dropping Inner!"); }
-}
-
-impl Drop for Outer {
-    fn drop(&mut self) { println!("Dropping Outer!"); }
-}
-
-fn main() {
-    let _outer = Outer(Inner);
-}
-// 输出:
-// Dropping Outer!
-// Dropping Inner!
-```
-
----
-
-**相关文档**:
-
-- [Tier 2: 04\_作用域管理实践](../tier_02_guides/04_scope_management_practice.md)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- [Crate README](../../../../crates/c01_ownership_borrow_scope/README.md) — 本 crate 总览与入口

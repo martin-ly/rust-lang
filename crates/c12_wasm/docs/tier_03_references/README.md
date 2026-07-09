@@ -1,47 +1,13 @@
 # Tier 3: 技术参考层
 
-> **定位**: API 参考和技术手册
-> **目标读者**: 开发参考
-> **预计学习时间**: 按需查阅
-> **完成状态**: ✅ 100% 完成
+**EN**: Advanced WebAssembly
+**Summary**: Stub redirecting to the canonical concept page for `Advanced WebAssembly`. Crate-specific API notes remain here; general explanations live in `concept/`.
 
----
+> **权威来源**: [06_ecosystem/11_domain_applications/54_webassembly_advanced.md](../../../../concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md)
 
-## 📚 文档列表
+本文件为 crate 文档占位页。通用 Rust 概念解释已迁移/整合至上方的 `concept/` 权威页；如需深入了解，请访问权威来源。
 
-| 文档  | 描述 | 状态 |
-| :--- | :--- | :--- |
-| [01_API 参考](01_api_reference.md) | wasm-bindgen API | ✅ 完成        |
-| [02\_工具链参考](02_toolchain_reference.md)                 | 工具使用手册             | ✅ 完成        |
-| [03\_最佳实践](03_best_practices.md)                     | 开发规范                 | ✅ 完成        |
-| [04_Rust 1.92.0 特性参考](04_rust_192_features_reference.md) | Rust 1.92.0 特性快速参考 | ✅ 完成        |
-| [05_Rust 1.93.0 特性参考](05_rust_193_features_reference.md) | Rust 1.93.0 特性快速参考 | ✅ 完成 ⭐ NEW |
+## 主题速览
 
----
-
-## 🎯 学习目标
-
-- ✅ 查找 API 文档
-- ✅ 了解工具使用
-- ✅ 遵循最佳实践
-
----
-
-**下一步**: [Tier 4 高级主题](../tier_04_advanced/README.md)
-
----
-
-**文档维护**: Documentation Team
-**创建日期**: 2025-10-30
-**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- 文档列表
+- 学习目标

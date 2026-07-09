@@ -127,6 +127,26 @@
     - [测验 2：Rc 与 Arc 的区别（理解层）](#测验-2rc-与-arc-的区别理解层)
     - [测验 3：Mutex 与共享可变状态（应用层）](#测验-3mutex-与共享可变状态应用层)
     - [测验 4：死锁分析（分析层）](#测验-4死锁分析分析层)
+  - [迁移内容（来自 `crates/c05_threads/docs/02_thread_synchronization.md`）](#迁移内容来自-cratesc05_threadsdocs02_thread_synchronizationmd)
+  - [🎯 同步原语核心知识图谱](#-同步原语核心知识图谱)
+    - [同步原语关系图](#同步原语关系图)
+    - [同步原语决策树](#同步原语决策树)
+  - [📊 同步原语多维对比矩阵](#-同步原语多维对比矩阵)
+    - [同步原语性能对比](#同步原语性能对比)
+    - [同步原语适用场景对比](#同步原语适用场景对比)
+    - [死锁风险对比](#死锁风险对比)
+  - [8. 最佳实践](#8-最佳实践)
+    - [8.1 锁的粒度](#81-锁的粒度)
+      - [8.1.1 细粒度锁](#811-细粒度锁)
+    - [8.2 避免死锁](#82-避免死锁)
+      - [8.2.1 锁顺序策略](#821-锁顺序策略)
+  - [迁移内容（来自 `crates/c05_threads/docs/03_synchronization_primitives.md`）](#迁移内容来自-cratesc05_threadsdocs03_synchronization_primitivesmd)
+    - [🚀 Rust 1.92.0 Mutex 性能示例](#-rust-1920-mutex-性能示例)
+    - [🚀 Rust 1.92.0 RwLock 性能示例](#-rust-1920-rwlock-性能示例)
+    - [📊 Mutex vs RwLock 性能对比](#-mutex-vs-rwlock-性能对比)
+  - [💡 思维导图：同步原语选择策略](#-思维导图同步原语选择策略)
+    - [Send/Sync 速查表](#sendsync-速查表)
+    - [Rust 1.92.0 关键改进（自 Rust 1.90 引入）](#rust-1920-关键改进自-rust-190-引入)
 
 ## 零、认知路径（Cognitive Path）
 
@@ -1617,3 +1637,468 @@ fn main() {
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Rust Atomics and Locks](https://marabos.nl/atomics/)
+
+---
+
+## 迁移内容（来自 `crates/c05_threads/docs/02_thread_synchronization.md`）
+
+> <!-- migrated from crates/c05_threads/docs/02_thread_synchronization.md -->
+>
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/02_thread_synchronization.md` 迁移至本权威页。
+
+## 🎯 同步原语核心知识图谱
+
+### 同步原语关系图
+
+```mermaid
+graph TB
+    subgraph "同步原语体系"
+        SP[Synchronization Primitives]
+
+        SP --> Locks[锁机制]
+        SP --> Signaling[信号机制]
+        SP --> Atomic[原子操作]
+
+        Locks --> Mutex[Mutex]
+        Locks --> RwLock[RwLock]
+        Locks --> Recursive[递归锁]
+
+        Signaling --> Condvar[条件变量]
+        Signaling --> Semaphore[信号量]
+        Signaling --> Barrier[屏障]
+
+        Atomic --> AtomicInt[原子整数]
+        Atomic --> AtomicBool[原子布尔]
+        Atomic --> AtomicPtr[原子指针]
+    end
+
+    subgraph "使用场景"
+        Mutex --> S1[互斥访问]
+        RwLock --> S2[读写分离]
+        Condvar --> S3[条件等待]
+        Semaphore --> S4[资源计数]
+        Barrier --> S5[阶段同步]
+        Atomic --> S6[无锁操作]
+    end
+
+    subgraph "Rust 1.92.0 增强"
+        R92[Rust 1.92.0]
+        R90 --> E1[Mutex性能提升]
+        R90 --> E2[RwLock公平性]
+        R90 --> E3[Barrier可重用]
+
+        Mutex -.优化.-> E1
+        RwLock -.改进.-> E2
+        Barrier -.增强.-> E3
+    end
+
+    style SP fill:#ff6b6b,color:#fff
+    style Locks fill:#4ecdc4,color:#fff
+    style Signaling fill:#95e1d3,color:#333
+    style Atomic fill:#ffd93d,color:#333
+```
+
+### 同步原语决策树
+
+```mermaid
+graph TD
+    Start[需要同步?] --> Q1{需要修改<br/>共享数据?}
+
+    Q1 -->|是| Q2{读写模式?}
+    Q1 -->|否| Q5{需要等待<br/>条件?}
+
+    Q2 -->|读多写少| UseRwLock[使用 RwLock]
+    Q2 -->|平衡| UseMutex[使用 Mutex]
+    Q2 -->|写多| Q3{需要递归?}
+
+    Q3 -->|是| UseRecursive[递归锁]
+    Q3 -->|否| UseMutex
+
+    Q5 -->|是| Q6{多个条件?}
+    Q5 -->|否| Q7{需要计数?}
+
+    Q6 -->|是| UseCondvar[使用 Condvar]
+    Q6 -->|否| UseBarrier[使用 Barrier]
+
+    Q7 -->|是| UseSemaphore[使用 Semaphore]
+    Q7 -->|否| UseAtomic[使用 Atomic]
+
+    style Start fill:#ff6b6b,color:#fff
+    style UseMutex fill:#51cf66,color:#fff
+    style UseRwLock fill:#339af0,color:#fff
+    style UseCondvar fill:#ffd43b,color:#333
+    style UseAtomic fill:#ff8787,color:#fff
+```
+
+---
+
+## 📊 同步原语多维对比矩阵
+
+### 同步原语性能对比
+
+| 原语          | 获取延迟 | 释放延迟 | 内存占用 | CPU开销 | 竞争性能 | Rust 1.92.0 改进 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Mutex**     | ~20ns    | ~15ns    | 40B      | 低      | 中等     | +15% ⬆️          |
+| **RwLock**    | ~25ns    | ~20ns    | 56B      | 中      | 读优     | +20% ⬆️          |
+| **Spinlock**  | ~5ns     | ~3ns     | 8B       | 高      | 低竞争优 | +10% ⬆️          |
+| **Condvar**   | ~100ns   | ~50ns    | 48B      | 中      | -        | 超时优化         |
+| **Semaphore** | ~30ns    | ~25ns    | 32B      | 低      | 中等     | 新增标准库       |
+| **Atomic**    | ~2ns     | ~2ns     | 8B       | 极低    | 优秀     | 指令优化         |
+
+### 同步原语适用场景对比
+
+| 场景         | 最佳选择  | 次优选择 | 不推荐   | Rust 1.92.0 推荐 |
+| :--- | :--- | :--- | :--- | :--- |
+| **短临界区** | Spinlock  | Mutex    | RwLock   | Mutex (优化后)   |
+| **长临界区** | Mutex     | RwLock   | Spinlock | Mutex            |
+| **读多写少** | RwLock    | Arc      | Mutex    | RwLock (公平性)  |
+| **写多读少** | Mutex     | Atomic   | RwLock   | Mutex            |
+| **条件等待** | Condvar   | Channel  | 轮询     | Condvar (超时)   |
+| **资源计数** | Semaphore | Atomic   | Mutex    | Semaphore (标准) |
+| **阶段同步** | Barrier   | Channel  | Condvar  | Barrier (可重用) |
+
+### 死锁风险对比
+
+| 原语          | 死锁风险 | 常见原因 | 预防策略 | 检测难度   |
+| :--- | :--- | :--- | :--- | :--- |
+| **Mutex**     | ⚠️ 中    | 嵌套锁   | 锁顺序   | ⭐⭐⭐     |
+| **RwLock**    | ⚠️⚠️ 高  | 升级锁   | 避免升级 | ⭐⭐⭐⭐   |
+| **Condvar**   | ⚠️⚠️ 高  | 忘记唤醒 | 超时机制 | ⭐⭐⭐⭐⭐ |
+| **Semaphore** | ⚠️ 低    | 计数错误 | 仔细管理 | ⭐⭐       |
+| **Barrier**   | ⚠️ 低    | 线程数错 | 准确计数 | ⭐⭐       |
+| **Atomic**    | ✅ 无    | -        | -        | ⭐         |
+
+## 8. 最佳实践
+
+### 8.1 锁的粒度
+
+#### 8.1.1 细粒度锁
+
+```rust,ignore
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+struct FineGrainedCounter {
+    counters: Vec<Mutex<u32>>,
+}
+
+impl FineGrainedCounter {
+    fn new(size: usize) -> Self {
+        let mut counters = Vec::new();
+        for _ in 0..size {
+            counters.push(Mutex::new(0));
+        }
+        Self { counters }
+    }
+
+    fn increment(&self, index: usize) {
+        if let Some(counter) = self.counters.get(index) {
+            if let Ok(mut value) = counter.lock() {
+                *value += 1;
+            }
+        }
+    }
+
+    fn get_total(&self) -> u32 {
+        self.counters.iter()
+            .filter_map(|c| c.lock().ok())
+            .map(|v| *v)
+            .sum()
+    }
+}
+```
+
+### 8.2 避免死锁
+
+#### 8.2.1 锁顺序策略
+
+```rust,ignore
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+struct BankAccount {
+    id: u32,
+    balance: Mutex<f64>,
+}
+
+impl BankAccount {
+    fn new(id: u32, balance: f64) -> Self {
+        Self {
+            id,
+            balance: Mutex::new(balance),
+        }
+    }
+
+    fn transfer_to(&self, other: &BankAccount, amount: f64) -> Result<(), String> {
+        if amount <= 0.0 {
+            return Err("Transfer amount must be positive".to_string());
+        }
+
+        // 按ID顺序获取锁，避免死锁
+        let (first, second) = if self.id < other.id {
+            (self, other)
+        } else {
+            (other, self)
+        };
+
+        let mut first_balance = first.balance.lock().unwrap();
+        let mut second_balance = second.balance.lock().unwrap();
+
+        if *first_balance < amount {
+            return Err("Insufficient funds".to_string());
+        }
+
+        *first_balance -= amount;
+        *second_balance += amount;
+
+        Ok(())
+    }
+}
+```
+
+---
+
+## 迁移内容（来自 `crates/c05_threads/docs/03_synchronization_primitives.md`）
+
+> <!-- migrated from crates/c05_threads/docs/03_synchronization_primitives.md -->
+>
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/03_synchronization_primitives.md` 迁移至本权威页。
+
+### 🚀 Rust 1.92.0 Mutex 性能示例
+
+```rust,ignore
+use std::sync::{Arc, Mutex};
+use std::thread;
+use std::time::Instant;
+
+fn main() {
+    println!("=== Rust 1.92.0 Mutex 性能示例 ===\n");
+
+    let num_threads = 8;
+    let operations_per_thread = 100_000;
+
+    // 创建共享计数器
+    let counter = Arc::new(Mutex::new(0u64));
+    let start = Instant::now();
+
+    let mut handles = vec![];
+
+    for tid in 0..num_threads {
+        let counter = Arc::clone(&counter);
+
+        let handle = thread::spawn(move || {
+            for _ in 0..operations_per_thread {
+                // Rust 1.92.0 优化的锁获取
+                let mut num = counter.lock().unwrap();
+                *num += 1;
+                // MutexGuard 自动释放锁（RAII）
+            }
+
+            if tid == 0 {
+                println!("线程 {} 完成", tid);
+            }
+        });
+
+        handles.push(handle);
+    }
+
+    // 等待所有线程完成
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    let duration = start.elapsed();
+    let final_value = *counter.lock().unwrap();
+    let total_ops = num_threads * operations_per_thread;
+
+    println!("\n✅ 所有线程完成");
+    println!("🎯 最终计数: {}", final_value);
+    println!("✔️  预期计数: {}", total_ops);
+    println!("⏱️  总耗时: {:?}", duration);
+    println!("📊 吞吐量: {:.2} ops/s", total_ops as f64 / duration.as_secs_f64());
+    println!("⚡ 平均延迟: {:?}/op", duration / total_ops as u32);
+
+    assert_eq!(final_value, total_ops);
+}
+```
+
+**输出示例**:
+
+```text
+=== Rust 1.92.0 Mutex 性能示例 ===
+
+线程 0 完成
+
+✅ 所有线程完成
+🎯 最终计数: 800000
+✔️  预期计数: 800000
+⏱️  总耗时: 1.234s
+📊 吞吐量: 648297.42 ops/s
+⚡ 平均延迟: 1.542µs/op
+```
+
+### 🚀 Rust 1.92.0 RwLock 性能示例
+
+```rust,ignore
+use std::sync::{Arc, RwLock};
+use std::thread;
+use std::time::Instant;
+
+fn main() {
+    println!("=== Rust 1.92.0 RwLock 性能示例 ===\n");
+
+    let num_readers = 8;
+    let num_writers = 2;
+    let reads_per_thread = 100_000;
+    let writes_per_thread = 10_000;
+
+    // 创建共享数据：配置缓存
+    let config = Arc::new(RwLock::new(vec![1, 2, 3, 4, 5]));
+    let start = Instant::now();
+
+    let mut handles = vec![];
+
+    // 启动读者线程
+    for rid in 0..num_readers {
+        let config = Arc::clone(&config);
+
+        let handle = thread::spawn(move || {
+            let mut sum = 0u64;
+            for _ in 0..reads_per_thread {
+                // Rust 1.92.0 优化的读锁（自 Rust 1.90 引入）
+                let data = config.read().unwrap();
+                sum += data.iter().sum::<i32>() as u64;
+            }
+
+            if rid == 0 {
+                println!("读者线程 {} 完成，累计: {}", rid, sum);
+            }
+        });
+
+        handles.push(handle);
+    }
+
+    // 启动写者线程
+    for wid in 0..num_writers {
+        let config = Arc::clone(&config);
+
+        let handle = thread::spawn(move || {
+            for i in 0..writes_per_thread {
+                // 写锁是独占的
+                let mut data = config.write().unwrap();
+                data[i % data.len()] += 1;
+            }
+
+            println!("写者线程 {} 完成", wid);
+        });
+
+        handles.push(handle);
+    }
+
+    // 等待所有线程完成
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    let duration = start.elapsed();
+    let final_data = config.read().unwrap();
+    let total_reads = num_readers * reads_per_thread;
+    let total_writes = num_writers * writes_per_thread;
+
+    println!("\n✅ 所有线程完成");
+    println!("🎯 最终数据: {:?}", *final_data);
+    println!("📖 总读操作: {}", total_reads);
+    println!("✏️  总写操作: {}", total_writes);
+    println!("⏱️  总耗时: {:?}", duration);
+    println!("📊 读吞吐量: {:.2} reads/s", total_reads as f64 / duration.as_secs_f64());
+    println!("📊 写吞吐量: {:.2} writes/s", total_writes as f64 / duration.as_secs_f64());
+    println!("🎯 读写比: {}:1", num_readers * reads_per_thread / (num_writers * writes_per_thread));
+}
+```
+
+**输出示例**:
+
+```text
+=== Rust 1.92.0 RwLock 性能示例（自 Rust 1.90 引入）===
+
+读者线程 0 完成，累计: 1500000
+写者线程 0 完成
+写者线程 1 完成
+
+✅ 所有线程完成
+🎯 最终数据: [2001, 2002, 2003, 2004, 2005]
+📖 总读操作: 800000
+✏️  总写操作: 20000
+⏱️  总耗时: 0.523s
+📊 读吞吐量: 1529636.71 reads/s
+📊 写吞吐量: 38240.92 writes/s
+🎯 读写比: 40:1
+```
+
+### 📊 Mutex vs RwLock 性能对比
+
+| 场景              | Mutex      | RwLock     | 性能提升  |
+| :--- | :--- | :--- | :--- || 纯读操作（8线程） | 500K ops/s | 1.5M ops/s | **+200%** |
+| 读多写少（10:1）  | 450K ops/s | 800K ops/s | **+77%**  |
+| 读写均衡（1:1）   | 400K ops/s | 350K ops/s | -12%      |
+| 纯写操作（8线程） | 300K ops/s | 200K ops/s | -33%      |
+
+> 💡 **建议**: 当读写比 > 5:1 时，使用 RwLock；否则使用 Mutex
+
+## 💡 思维导图：同步原语选择策略
+
+```mermaid
+mindmap
+  root((同步原语选择))
+    互斥访问
+      Mutex<T>
+        独占写入
+        中等竞争
+        简单场景
+      RwLock<T>
+        读多写少
+        并发读取
+        配置缓存
+    无锁编程
+      Atomic<T>
+        计数器
+        标志位
+        简单状态
+      CAS操作
+        比较交换
+        无阻塞
+        高性能
+    条件同步
+      Condvar
+        条件等待
+        事件通知
+        生产者消费者
+      Semaphore
+        资源限制
+        连接池
+        令牌桶
+    批量同步
+      Barrier
+        阶段同步
+        迭代算法
+        批处理
+```
+
+### Send/Sync 速查表
+
+| 类型         | Send                 | Sync                 | 说明         |
+| :--- | :--- | :--- | :--- || `Mutex<T>`   | ✅ (if T: Send)      | ✅ (if T: Send)      | 线程安全     |
+| `RwLock<T>`  | ✅ (if T: Send)      | ✅ (if T: Send+Sync) | 线程安全     |
+| `Rc<T>`      | ❌                   | ❌                   | 仅单线程     |
+| `Arc<T>`     | ✅ (if T: Send+Sync) | ✅ (if T: Send+Sync) | 线程安全     |
+| `Cell<T>`    | ✅ (if T: Send)      | ❌                   | 仅单线程可变 |
+| `RefCell<T>` | ✅ (if T: Send)      | ❌                   | 仅单线程可变 |
+| `AtomicU64`  | ✅                   | ✅                   | 线程安全     |
+
+### Rust 1.92.0 关键改进（自 Rust 1.90 引入）
+
+| 改进项           | 提升幅度 | 影响范围     |
+| :--- | :--- | :--- || Mutex 性能优化   | +10%     | 所有互斥场景 |
+| RwLock 读性能    | +15%     | 读密集场景   |
+| Atomic 操作优化  | +5%      | 无锁编程     |
+| Condvar 唤醒优化 | 更快响应 | 条件等待     |

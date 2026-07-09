@@ -1,58 +1,17 @@
+> **EN**: C01 所有权系统 (Ownership) (crate docs stub)
+> **Summary**: Stub pointing to the canonical authority page(s) for `C01 所有权系统 (Ownership)`. Practical examples remain in the crate.
+
 # C01 所有权系统 (Ownership)
 
-> Rust 最核心的特性 - 内存安全无垃圾回收
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)。
 
----
+本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-## 📚 学习资源
+## 主题导航
 
-### 文档
-
-- [所有权与借用检查器练习](exercises/01_borrow_checker.md)
-- [docs/04_thinking/](../docs/04_thinking) - 思维导图和决策树
-
-### 相关 Crate
-
-- [c01_ownership_borrow_scope](../c01_ownership_borrow_scope) - 详细的借用和作用域分析
-
----
-
-## 🎯 核心概念
-
-1. **所有权规则**
-   - 每个值有一个所有者
-   - 只有一个所有者
-   - 所有者离开作用域，值被释放
-2. **借用**
-   - 不可变借用: `&T`
-   - 可变借用: `&mut T`
-   - 借用检查器规则
-3. **生命周期**
-   - 显式生命周期标注
-   - 生命周期省略规则
-   - 复杂生命周期场景
-
----
-
-## 🔗 交叉引用
-
-| 概念 | 相关文档 | 相关 Crate |
-|------|----------|------------|
-| 借用检查 | [CROSS_MODULE_NAVIGATION.md](../docs/CROSS_MODULE_NAVIGATION.md) | c01_ownership_borrow_scope |
-| 智能指针 | [docs/05_guides/best_practices.md](../docs/05_guides/best_practices.md) | c04_generic |
-| 生命周期 | [docs/04_thinking/](../docs/04_thinking) | c02_type_system |
-
----
-
-**状态**: ✅ 100% 完成
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| Ownership System | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |

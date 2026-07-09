@@ -192,4 +192,32 @@ fn config_path() -> PathBuf {
 
 ---
 
+## 补充视角：跨平台命令抽象与测试策略
+
+### 跨平台 Shell 抽象
+
+当需要执行平台特定的 shell 命令时，可以封装一个 `run_shell_command` 函数，根据 `cfg!(windows)` 选择 `cmd /C` 或 `sh -c`。
+
+### 通用命令映射
+
+对常用系统命令建立平台映射表，避免在业务代码中散布 `#[cfg]`。
+
+```rust
+fn list_command() -> (&'static str, &'static [&'static str]) {
+    if cfg!(windows) { ("cmd", &["/C", "dir"]) } else { ("ls", &["-la"]) }
+}
+```
+
+### 统一抽象层
+
+将平台相关配置（默认 shell、路径分隔符、可执行扩展名、是否支持信号/进程组）封装为 `CrossPlatformConfig`，结合 `std::path::PathBuf` 与 `std::env` 减少平台分支。
+
+### 跨平台测试策略
+
+- 在 CI 中针对 `ubuntu-latest`、`macos-latest`、`windows-latest` 运行测试。
+- 对平台相关代码使用 `#[cfg(unix)]` / `#[cfg(windows)]` 条件编译测试。
+- 使用 mock 进程或内置命令（如 `echo`）减少对外部环境的依赖。
+
+---
+
 > **权威来源**: [Rust Standard Library — std::process](https://doc.rust-lang.org/std/process/) · [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)

@@ -1,107 +1,23 @@
-﻿# Tier 3: 生命周期完整参考
+> **EN**: Lifetimes Reference
+> **Summary**: Reference stub pointing to the canonical lifetimes authority. Practical examples remain in the c01 crate.
 
-> **文档类型**: 技术参考
-> **适用版本**: Rust 1.96.1+
+# Lifetimes（生命周期） — Crate Docs Stub
 
----
+> **权威来源**: [Lifetimes（生命周期）](../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 
-## 📊 目录
+本文件原为对应 crate 的通用概念教程/参考。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已在 `concept/` 中维护为单一权威来源；此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/` 目录。
 
-- [Tier 3: 生命周期完整参考](#tier-3-生命周期完整参考)
-  - [📊 目录](#-目录)
-  - [核心概念](#核心概念)
-    - [基本语法](#基本语法)
-  - [生命周期省略规则](#生命周期省略规则)
-  - ['static 生命周期](#static-生命周期)
+## 主题导航
 
-## 核心概念
+| 主题 | 权威来源 |
+| :--- | :--- |
+| 生命周期基础 | [03_lifetimes.md](03_lifetimes.md) |
+| 生命周期省略规则 | [03_lifetimes.md#23-生命周期省略规则elision-rules](03_lifetimes.md#23-生命周期省略规则elision-rules) |
+| 'static 生命周期 | [03_lifetimes.md#46-推论static-生命周期--全局泄漏数据的安全性](03_lifetimes.md#46-推论static-生命周期--全局泄漏数据的安全性) |
+| 高级生命周期 | [30_lifetimes_advanced.md](30_lifetimes_advanced.md) |
 
-生命周期是 Rust 中引用有效性的编译时保证机制。
-从引用一致性视角看，生命周期是**编译期构造的证明变量**，用于证明引用在其使用期间始终指向有效的资源。
-生命周期表示的是**逻辑关系，而非物理时间**。
+## 本地资源
 
-### 基本语法
-
-```rust
-// 生命周期标注
-fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() { x } else { y }
-}
-
-// 结构体生命周期
-struct ImportantExcerpt<'a> {
-    part: &'a str,
-}
-
-// 多个生命周期
-fn longest_with_announcement<'a, 'b>(
-    x: &'a str,
-    y: &'b str,
-    ann: &'b str,
-) -> &'a str {
-    println!("Announcement: {}", ann);
-    if x.len() > y.len() { x } else { y }
-}
-```
-
----
-
-## 生命周期省略规则
-
-**规则 1**: 每个引用参数都有独立的生命周期
-
-```rust
-// 自动推断为: fn first_word<'a>(s: &'a str) -> &'a str
-fn first_word(s: &str) -> &str {
-    &s[..1]
-}
-```
-
-**规则 2**: 如果只有一个输入生命周期，它被应用到所有输出
-
-```rust
-fn process(s: &str) -> &str { s }
-// 等价于
-fn process<'a>(s: &'a str) -> &'a str { s }
-```
-
-**规则 3**: 如果有多个输入生命周期，且其中一个是 `&self` 或 `&mut self`，则 `self` 的生命周期被应用到所有输出
-
-```rust
-impl<'a> ImportantExcerpt<'a> {
-    fn announce_and_return_part(&self, announcement: &str) -> &str {
-        println!("Attention: {}", announcement);
-        self.part // 自动使用 self 的生命周期
-    }
-}
-```
-
----
-
-## 'static 生命周期
-
-```rust
-// 字符串字面量
-let s: &'static str = "I have a static lifetime.";
-
-// 全局变量
-static GLOBAL: &str = "global";
-```
-
----
-
-**相关文档**:
-
-- [Tier 2: 03\_生命周期实践](../tier_02_guides/03_lifetimes_practice.md)
-- [Tier 4: 01\_高级生命周期模式](../tier_04_advanced/01_advanced_lifetime_patterns.md)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- [Crate README](../../../../crates/c01_ownership_borrow_scope/README.md) — 本 crate 总览与入口

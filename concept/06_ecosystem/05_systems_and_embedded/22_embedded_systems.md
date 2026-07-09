@@ -50,6 +50,9 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+  - [六、常见嵌入式目标三元组与学习路径](#六常见嵌入式目标三元组与学习路径)
+    - [常见目标三元组](#常见目标三元组)
+    - [学习路径](#学习路径)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
@@ -636,6 +639,26 @@ graph TD
 
 > **陷阱总结**: Rust 嵌入式的陷阱主要与**volatile**、**no_std**、**panic**、**并发**和**内存**相关。
 > [来源: [Rust Embedded Book — Troubleshooting](https://docs.rust-embedded.org/book/index.html)]
+
+---
+
+## 六、常见嵌入式目标三元组与学习路径
+
+> 本节内容由 [`crates/c13_embedded/docs/one_page_summary.md`](../../../crates/c13_embedded/docs/one_page_summary.md) 迁移而来，作为概念权威页的补充速查。
+
+### 常见目标三元组
+
+| 目标 | 场景 |
+|---|---|
+| `thumbv7m-none-eabi` | Cortex-M3，无操作系统，无硬浮点 |
+| `thumbv7em-none-eabihf` | Cortex-M4/M7，硬浮点 |
+| `x86_64-pc-windows-msvc` / `x86_64-unknown-linux-gnu` | Host 模拟编译与测试 |
+
+### 学习路径
+
+1. **入门**: `no_std` 环境 → 内存映射寄存器 → UART 驱动
+2. **进阶**: 中断处理 → HAL 设计模式 → FFI 与 C 互操作
+3. **高级**: RTIC 实时中断驱动 → Embassy 异步框架 → 裸机性能优化
 
 ---
 

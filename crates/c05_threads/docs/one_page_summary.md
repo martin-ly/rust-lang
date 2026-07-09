@@ -1,64 +1,20 @@
+> **EN**: C05 Threads One-Page Summary (crate docs stub)
+> **Summary**: Stub pointing to the canonical concurrency authority page. Quick-reference content has been merged into the canonical page.
+
 # C05 线程与并发 - 一页纸总结
 
-> **用途**: 快速回顾核心概念、常见坑、学习路径
-> **完整文档**: [00_MASTER_INDEX](00_master_index.md)
+> **权威来源**: [concept/03_advanced/00_concurrency/01_concurrency.md](../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 
----
+本文件原为 `c05_threads` crate 的一页纸总结。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/03_advanced/00_concurrency/01_concurrency.md`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-## 核心概念（4 条）
+## 主题导航
 
-| 概念 | 说明 |
+| 概念 | 权威来源 |
 | :--- | :--- |
-| **线程创建** | `thread::spawn`；`JoinHandle`；`move` 闭包转移所有权 |
-| **Send 与 Sync** | `Send` 可跨线程转移；`Sync` 可多线程共享引用 |
-| **同步原语** | `Mutex`、`RwLock`、`Condvar`；`Arc` 共享所有权 |
-| **原子操作** | `AtomicUsize`、`Ordering`；无锁并发 |
-
----
-
-## 常见坑与解决
-
-| 坑 | 解决 |
-| :--- | :--- |
-| 数据竞争 | 用 `Mutex`/`RwLock` 保护；确保 `Sync` |
-| 死锁 | 避免嵌套加锁；统一加锁顺序；缩短持锁时间 |
-| 假共享（False Sharing） | 缓存行对齐；`#[repr(align(64))]`；参考 [ALIGNMENT_GUIDE](../../../docs/02_reference/alignment_guide.md) |
-| `Rc` 跨线程 | 改用 `Arc`；`Rc` 非 `Send` |
-
----
-
-## 并发速选
-
-| 场景 | 选型 |
-| :--- | :--- |
-| 共享可变状态 | `Arc<Mutex<T>>` 或 `Arc<RwLock<T>>` |
-| 消息传递 | `mpsc::channel`；`crossbeam` |
-| 无锁计数/标志 | `AtomicUsize`、`AtomicBool` |
-| 多生产者 | `crossbeam` 或 `flume` |
-
----
-
-## 学习路径
-
-1. **入门** (1–2 周): 线程创建 → `Send`/`Sync` → `Mutex`/`Arc`
-2. **进阶** (2–3 周): 原子操作 → 通道 → 无锁结构
-3. **高级** (持续): 性能调优、假共享、与 C06 异步对比
-
----
-
-## 速查与练习
-
-- **速查卡**: [threads_concurrency_cheatsheet](../../../docs/02_reference/quick_reference/threads_concurrency_cheatsheet.md)
-- **RBE 练习**: [Threads](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html)
-- **Rustlings**: [20_threads](https://github.com/rust-lang/rustlings/tree/main/exercises/20_threads)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 线程创建 | [concept/03_advanced/00_concurrency/01_concurrency.md](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
+| `Send` / `Sync` | [concept/03_advanced/00_concurrency/01_concurrency.md](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
+| 同步原语 | [concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md](../../../concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md) |
+| 原子操作 | [concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md](../../../concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md) |
+| 并发模式 | [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md) |

@@ -61,6 +61,11 @@
     - [测验 2：`extern "C"` 与 ABI（理解层）](#测验-2extern-c-与-abi理解层)
     - [测验 3：FFI 类型映射（应用层）](#测验-3ffi-类型映射应用层)
     - [测验 4：跨语言所有权转移（分析层）](#测验-4跨语言所有权转移分析层)
+  - [补充：来自 `crates/c02_type_system` 互操作参考的多语言映射](#补充来自-cratesc02_type_system-互操作参考的多语言映射)
+    - [Rust 与 C 基本类型映射](#rust-与-c-基本类型映射)
+    - [暴露 Rust 函数给 C](#暴露-rust-函数给-c)
+    - [常用互操作工具链](#常用互操作工具链)
+    - [FFI 最佳实践速查](#ffi-最佳实践速查)
 
 ---
 
@@ -876,3 +881,48 @@ unsafe { process_string(ptr); }
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch19](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Rustonomicon - FFI](https://doc.rust-lang.org/nomicon/ffi.html)
+
+---
+
+## 补充：来自 `crates/c02_type_system` 互操作参考的多语言映射
+
+> 本节由原 `crates/c02_type_system/docs/tier_03_references/06_interoperability_reference.md` 合并而来，保留 Rust 与常见语言互操作类型映射速查。
+
+### Rust 与 C 基本类型映射
+
+| Rust 类型 | C 类型 | 说明 |
+| :--- | :--- | :--- |
+| `i8` / `u8` | `int8_t` / `uint8_t` | 8 位整数 |
+| `i16` / `u16` | `int16_t` / `uint16_t` | 16 位整数 |
+| `i32` / `u32` | `int32_t` / `uint32_t` | 32 位整数 |
+| `i64` / `u64` | `int64_t` / `uint64_t` | 64 位整数 |
+| `f32` / `f64` | `float` / `double` | 浮点数 |
+| `bool` | `bool` | 布尔 |
+| `*const T` / `*mut T` | `const T*` / `T*` | 裸指针 |
+
+### 暴露 Rust 函数给 C
+
+```rust
+#[no_mangle]
+pub extern "C" fn rust_add(a: i32, b: i32) -> i32 {
+    a + b
+}
+```
+
+### 常用互操作工具链
+
+| 语言 | 工具/库 | 典型场景 |
+| :--- | :--- | :--- |
+| C/C++ | `bindgen` / `cbindgen` / `cxx` | 自动生成 FFI 绑定 |
+| Python | `PyO3` / `maturin` | Python 扩展模块 |
+| JavaScript/WASM | `wasm-bindgen` | WebAssembly 互操作 |
+| Java | `jni` | JNI 绑定 |
+| Go | `cgo` | 调用 C 库 |
+
+### FFI 最佳实践速查
+
+- 所有 FFI 调用封装为 `unsafe` 薄层，对外暴露 safe API。
+- 明确类型大小与调用约定，避免布局不匹配。
+- 在边界处显式管理所有权与生命周期，防止内存泄漏或 UAF。
+
+> 完整 FFI 安全边界、不透明类型与回调模式参见本节正文。

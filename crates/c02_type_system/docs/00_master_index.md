@@ -1,116 +1,17 @@
+> **EN**: C02 类型系统 - 主索引 (crate docs stub)
+> **Summary**: Stub pointing to the canonical authority page(s) for `C02 类型系统 - 主索引`. Practical examples remain in the crate.
+
 # C02 类型系统 - 主索引
 
-> **学习导航**: C02 类型系统模块的完整学习路径和资源导航
-> **最后更新**: 2026-03-13
-> **适用版本**: Rust 1.96.1+
-> **English**: [00_MASTER_INDEX.en.md](00_MASTER_INDEX.en.md)
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/01_foundation/02_type_system/04_type_system.md`](../../../concept/01_foundation/02_type_system/04_type_system.md)。
 
----
+本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-## 📋 目录
+## 主题导航
 
-- [C02 类型系统 - 主索引](#c02-类型系统---主索引)
-  - [📋 目录](#-目录)
-  - [📚 官方资源映射](#-官方资源映射)
-  - [🎯 快速开始](#-快速开始)
-  - [📚 Tier 1-4 分层导航](#-tier-1-4-分层导航)
-  - [📦 Cargo 包管理专题](#-cargo-包管理专题)
-  - [🆕 Rust 版本特性](#-rust-版本特性)
-  - [💻 代码示例](#-代码示例)
-  - [🔗 相关文档](#-相关文档)
-
----
-
-## 📚 官方资源映射
-
-| 官方资源 | 链接 | 与本模块对应 |
-| :--- | :--- | :--- |
-| **The Rust Book** | [Ch. 10 Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) | 泛型、Trait、生命周期 |
-| **RBE 练习** | [Custom Types](https://doc.rust-lang.org/rust-by-example/custom_types.html) · [Traits](https://doc.rust-lang.org/rust-by-example/trait.html) · [Conversion](https://doc.rust-lang.org/rust-by-example/conversion.html) | 结构体、枚举、Trait、类型转换实践 |
-| **Rust Reference** | [Type system](https://doc.rust-lang.org/reference/types.html) | 类型系统规范 |
-| **Rustonomicon** | [Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html) | 型变、高级类型 |
-
-**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
-
-**一页纸总结**: [ONE_PAGE_SUMMARY.md](one_page_summary.md) — 核心概念、常见坑、速选表
-
----
-
-## 🎯 快速开始
-
-**🌱 初学者**:
-
-- [项目概览](tier_01_foundations/01_project_overview.md)
-- [术语表](tier_01_foundations/03_glossary.md)
-- [常见问题](tier_01_foundations/04_faq.md)
-
-**💻 进阶开发者**:
-
-- [基础类型指南](tier_02_guides/01_basic_types_guide.md)
-- [泛型编程指南](tier_02_guides/03_generics_programming_guide.md)
-- [Trait 系统指南](tier_02_guides/04_trait_system_guide.md)
-
-**⚡ 高级开发者**:
-
-- [类型系统规范](tier_03_references/01_type_system_specification.md)
-- [类型型变参考](tier_03_references/02_variance_reference.md)
-- [分派机制参考](tier_03_references/03_dispatch_mechanisms_reference.md)
-
----
-
-## 📚 Tier 1-4 分层导航
-
-| Tier | 层级名称 | 文档数 | 适合人群 | 入口 |
-| :--- | :--- | :--- | :--- | :--- || **Tier 1** | 基础层 | 4 个 | 初学者 | [tier_01_foundations/](../../../README.md) |
-| **Tier 2** | 核心指南层 | 多篇 | 进阶学习者 | [tier_02_guides/](tier_02_guides) |
-| **Tier 3** | 参考层 | 多篇 | 高级开发者 | [tier_03_references/](tier_03_references) |
-| **Tier 4** | 高级层 | 5 篇 | 专家/研究者 | [tier_04_advanced/](tier_04_advanced/README.md) |
-
----
-
-## 📦 Cargo 包管理专题
-
-> 注：该专题文档已迁移至项目级 [`../../../archive/cargo_package_management_from_c02/`](../../../archive/cargo_package_management_from_c02)，
-> 因为它与 `c02_type_system` 的学习主线无关。
-
----
-
-## 🆕 Rust 版本特性
-
-- [Rust 1.91 类型系统改进](rust_191_type_system_improvements.md)
-- [Rust 1.92 类型系统改进](rust_192_type_system_improvements.md)
-- [Rust 1.92 示例集合](rust_192_examples_collection.md)
-
----
-
-## 💻 代码示例
-
-```bash
-# 运行示例
-cargo run -p c02_type_system --example <example_name>
-
-# 运行所有测试
-cargo test -p c02_type_system
-```
-
----
-
-## 🔗 相关文档
-
-- **完整文档指南**: [docs/README.md](README.md) - 包含更多主题分类和导航
-- **项目根结构**: [PROJECT_STRUCTURE.md](../../../PROJECT_STRUCTURE.md)
-
----
-
-**最后更新**: 2026-02-12
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| Type System | [concept/01_foundation/02_type_system/04_type_system.md](../../../concept/01_foundation/02_type_system/04_type_system.md) |

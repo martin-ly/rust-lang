@@ -77,6 +77,11 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [补充：来自 `crates/c03_control_fn` 迭代器参考的速查要点](#补充来自-cratesc03_control_fn-迭代器参考的速查要点)
+    - [Iterator trait 核心签名](#iterator-trait-核心签名)
+    - [常用适配器与消费者速查](#常用适配器与消费者速查)
+    - [IntoIterator 与 for 循环](#intoiterator-与-for-循环)
+    - [自定义迭代器最小实现](#自定义迭代器最小实现)
 
 ---
 
@@ -1266,3 +1271,51 @@ fn main() {}
 ### 反命题与边界
 
 > **反命题**: "Rust 迭代器模式 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 补充：来自 `crates/c03_control_fn` 迭代器参考的速查要点
+
+> 本节由原 `crates/c03_control_fn/docs/tier_03_references/02_iterators_reference.md` 合并而来，保留常用 API 速查。
+
+### Iterator trait 核心签名
+
+```rust
+pub trait Iterator {
+    type Item;
+    fn next(&mut self) -> Option<Self::Item>;
+    // 约 75 个默认方法：size_hint、count、last、nth、map、filter ...
+}
+```
+
+### 常用适配器与消费者速查
+
+| 类别 | 方法 | 说明 |
+| :--- | :--- | :--- |
+| 适配器 | `map`、`filter`、`take`、`skip`、`flat_map` | 返回新迭代器，惰性求值 |
+| 适配器 | `zip`、`enumerate`、`chain`、`cycle` | 组合或索引迭代器 |
+| 消费者 | `collect`、`fold`、`reduce`、`find`、`any` | 触发实际计算并返回结果 |
+| 状态 | `peekable`、`fuse`、`by_ref` | 改变迭代器消费行为 |
+
+### IntoIterator 与 for 循环
+
+```rust
+for item in collection {
+    // 等价于：先调用 collection.into_iter()
+}
+```
+
+### 自定义迭代器最小实现
+
+```rust
+struct Counter { count: u32 }
+impl Iterator for Counter {
+    type Item = u32;
+    fn next(&mut self) -> Option<Self::Item> {
+        self.count += 1;
+        if self.count < 6 { Some(self.count) } else { None }
+    }
+}
+```
+
+> 完整推理、性能权衡与边界测试参见本节正文。

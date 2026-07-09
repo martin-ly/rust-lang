@@ -1,82 +1,19 @@
+> **EN**: Tier 3: 高级应用层 (crate docs stub)
+> **Summary**: Stub pointing to the canonical authority page(s) for `Tier 3: 高级应用层`. Practical examples remain in the crate.
+
 # Tier 3: 高级应用层
 
-**目标受众**: 已掌握核心概念，希望学习高级特性的开发者
-**学习时间**: 1-2 周
-**前置知识**: 完成 Tier 2
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)。
 
-## 目录
+本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-- [Tier 3: 高级应用层](#tier-3-高级应用层)
-  - [目录](#目录)
-  - [📚 本层文档概览](#-本层文档概览)
-    - [📖 文档列表](#-文档列表)
-  - [🎯 学习目标](#-学习目标)
-  - [📋 相关内容](#-相关内容)
-    - [现有高级文档](#现有高级文档)
-    - [安全与优化文档](#安全与优化文档)
-    - [实践文档](#实践文档)
-  - [🚀 下一步](#-下一步)
+## 主题导航
 
-## 📚 本层文档概览
-
-Tier 3 深入探讨所有权系统的高级应用，包括复杂模式、性能优化和实践技巧。
-
-### 📖 文档列表
-
-| 文档 | 描述  | 推荐度 | 预计时长 |
-| :--- | :--- | :--- | :--- |
-| [06 高级所有权模式参考](06_advanced_ownership_patterns_reference.md)     | 复杂所有权模式和设计技巧 | ⭐⭐⭐⭐⭐ | 3-4小时  |
-| [07 零成本抽象参考](07_zero_cost_abstractions_reference.md)             | 性能优化和编译器优化     | ⭐⭐⭐⭐   | 2-3小时  |
-| [08 内存安全参考](08_memory_safety_reference.md) | 内存安全的实践指南       | ⭐⭐⭐⭐⭐ | 2-3小时  |
-| [09 性能优化参考](09_performance_optimization_reference.md)                 | 所有权相关的性能优化技巧 | ⭐⭐⭐⭐   | 2-3小时  |
-
-## 🎯 学习目标
-
-完成 Tier 3 后，你将能够：
-
-- ✅ 掌握高级所有权模式
-- ✅ 理解零成本抽象的实现
-- ✅ 能够编写高性能、内存安全的代码
-- ✅ 掌握智能指针的高级用法
-- ✅ 能够设计复杂的数据结构
-
-## 📋 相关内容
-
-### 现有高级文档
-
-本层级的详细内容分布在以下现有文档中：
-
-- 📖 [高级所有权模式](06_advanced_ownership_patterns_reference.md)
-- 📖 [高级借用模式](02_borrow_checker_in_depth.md)
-- 📖 [高级生命周期](03_lifetimes_reference.md)
-- 📖 [智能指针系统](05_smart_pointer_api_reference.md)
-
-### 安全与优化文档
-
-- 📖 [内存安全保证](08_memory_safety_reference.md)
-- 📖 [并发安全](../tier_04_advanced/05_cross_thread_ownership.md)
-- 📖 [性能优化](09_performance_optimization_reference.md)
-
-### 实践文档
-
-- 📖 [设计模式](../tier_02_guides/07_hands_on_projects.md)
-- 📖 [最佳实践](../tier_01_foundations/04_faq.md)
-- 📖 [常见陷阱](../tier_01_foundations/04_faq.md)
-- 📖 [性能调优](09_performance_optimization_reference.md)
-
-## 🚀 下一步
-
-准备好学习高级特性了吗？
-
-**第一步**: [06 高级所有权模式参考](06_advanced_ownership_patterns_reference.md)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| Ownership Rules | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
+| Borrow Checker | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| Lifetimes | [concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |

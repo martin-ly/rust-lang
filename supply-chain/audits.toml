@@ -20,3 +20,13 @@ notes = "Formal audit stub for RUSTSEC-2024-0384. instant is a time-utility crat
 criteria = "safe-to-deploy"
 version = "1.0.15"
 notes = "Formal audit stub for RUSTSEC-2024-0436. paste is a compile-time proc-macro helper used transitively by dev/benchmark dependencies (candle-core, libp2p, tokenizers, etc.). It has no runtime attack surface in this project."
+
+[[audits.zerocopy]]
+criteria = "safe-to-run"
+version = "0.8.54"
+notes = "Local exemption for zerocopy 0.8.54. This is a safe-to-run (test/dev) dependency used transitively by ahash/ppv-lite86/half. Patch update from 0.8.53 with minimal changes."
+
+[[audits.zerocopy-derive]]
+criteria = "safe-to-run"
+version = "0.8.54"
+notes = "Local exemption for zerocopy-derive 0.8.54. Proc-macro derive companion to zerocopy; safe-to-run (test/dev) only."

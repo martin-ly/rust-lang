@@ -84,7 +84,83 @@ let c = b; // b 被 move，所有权转移到 c
 
 ---
 
-## 五、关联概念
+## 五、内存布局优化补充
+
+> 本节内容由 [`crates/c01_ownership_borrow_scope/docs/tier_04_advanced/04_memory_layout_optimization.md`](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/04_memory_layout_optimization.md) 迁移而来，作为 canonical 概念页的工程实践补充。
+
+### 5.1 内存对齐与 repr 属性
+
+**对齐**：类型实例的地址必须是 `align_of::<T>()` 的整数倍。标量类型通常「自然对齐」（对齐 = 大小）。
+
+```rust
+use std::mem;
+
+#[repr(C)]
+struct Aligned {
+    a: u8,
+    _padding: [u8; 7],
+    b: u64,
+}
+
+assert_eq!(mem::align_of::<Aligned>(), 8);
+assert_eq!(mem::size_of::<Aligned>(), 16);
+```
+
+常用 API：`mem::align_of::<T>()`、`mem::size_of::<T>()`、`mem::align_of_val(v)`。
+
+### 5.2 `#[repr(packed)]`
+
+无填充，字段可能未对齐，访问较慢；FFI 慎用。
+
+```rust
+#[repr(packed)]
+struct Packed {
+    a: u8,
+    b: u64,
+    c: u8,
+}
+
+// size = 10 字节 (无填充)
+```
+
+### 5.3 `#[repr(align(N))]`
+
+强制 N 字节对齐，常用于缓存行（64 字节）避免伪共享。
+
+```rust
+#[repr(align(64))] // 缓存行对齐
+struct CacheAligned {
+    data: [u8; 64],
+}
+```
+
+### 5.4 字段重排序
+
+`#[repr(Rust)]`（默认）允许编译器重排字段以减少填充。
+
+```rust
+// 自动优化
+#[repr(Rust)] // 默认
+struct Optimized {
+    b: u64, // 编译器会重排
+    a: u8,
+    c: u8,
+}
+```
+
+**建议**：大字段前置（u64 → u32 → u16 → u8）可减少填充。
+
+### 5.5 零大小类型 (ZST)
+
+```rust
+struct ZeroSized; // size = 0
+
+let v = vec![ZeroSized; 1000]; // 无内存开销
+```
+
+---
+
+## 六、关联概念
 
 | 概念 | 关系 |
 |:---|:---|

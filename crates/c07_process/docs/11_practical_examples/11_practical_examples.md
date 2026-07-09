@@ -1,3 +1,12 @@
+# C07 实践示例集
+
+> **权威来源**: [Processes & IPC](../../concept/03_advanced/02_process_ipc)
+> **文档类型**: 代码示例 / 实践项目 / 教程（crate-specific）
+
+本文件包含与 `Processes & IPC` 相关的可运行代码示例、练习项目或教程步骤。通用概念解释请查阅上方权威来源；此处仅保留 crate 级别的示例实现与学习活动。
+
+---
+
 > **生态状态提示**：
 >
 > 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：

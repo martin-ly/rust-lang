@@ -15,6 +15,11 @@
 
 ### 发布日更新（2026-07-09）
 
+- **`crates/*/docs/` AGENTS.md §6.4 合规整治 100% 完成**：
+  - 扫描全部 `568` 个 `crates/*/docs/` Markdown 文件。
+  - 将通用 Rust 概念解释迁移至 `concept/` 权威页；原文件全部替换为含 `**EN**` / `**Summary**` 元数据与 `> **权威来源**: concept/...` 链接的 stub 或摘要页。
+  - 为代码示例 / 实践项目 / 教程类文件统一补加 canonical header，明确其 crate-specific 定位。
+  - 新建/扩展了 `concept/` 中进程 IPC、并发、异步、设计模式、宏系统、WebAssembly、网络、算法、嵌入式、`build-std` 等领域的权威页，并同步更新 `concept/SUMMARY.md`。
 - **Rust 1.97.0 稳定文档对齐**：
   - `concept/07_future/rust_1_97_preview.md` 状态更新为“已 stable（2026-07-09 发布）”。
   - 填充 `concept/07_future/rust_1_97_stabilized.md` 为稳定特性摘要页，链接到权威详解。

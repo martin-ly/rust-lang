@@ -1030,3 +1030,227 @@ DP 问题常需要修改多维数组的多个元素。Rust 的借用（Borrowing
 
 自动下载竞赛题目、生成模板代码、运行样例测试、提交答案。简化了 Rust 竞赛者的工作流，与 `atcoder`/`codeforces` 等平台集成。
 </details>
+
+## 二、基础算法速查与 Rust 实现
+
+> 内容来源：`crates/c08_algorithms/docs/tier_02_guides/01_algorithms_quick_start.md`，已按 AGENTS.md §6.4 迁移至此。
+
+### 2.1 排序算法
+
+| 算法 | 平均时间 | 空间 | 稳定性 | Rust 实现要点 |
+| :--- | :--- | :--- | :--- | :--- |
+| 冒泡排序 | O(n²) | O(1) | ✅ | 双重循环，`arr.swap` |
+| 选择排序 | O(n²) | O(1) | ❌ | 每轮找最小下标 |
+| 插入排序 | O(n²) | O(1) | ✅ | 适合部分有序数据 |
+| 快速排序 | O(n log n) | O(log n) | ❌ | `split_at_mut` 避免借用冲突 |
+| 归并排序 | O(n log n) | O(n) | ✅ | 递归分治 + `Vec::with_capacity` |
+| 堆排序 | O(n log n) | O(1) | ❌ | 使用 `std::collections::BinaryHeap` |
+
+```rust
+fn quick_sort<T: Ord>(arr: &mut [T]) {
+    if arr.len() <= 1 { return; }
+    let pivot = partition(arr);
+    let (left, right) = arr.split_at_mut(pivot);
+    quick_sort(left);
+    quick_sort(&mut right[1..]);
+}
+
+fn partition<T: Ord>(arr: &mut [T]) -> usize {
+    let len = arr.len();
+    let pivot = len - 1;
+    let mut i = 0;
+    for j in 0..len - 1 {
+        if arr[j] <= arr[pivot] {
+            arr.swap(i, j);
+            i += 1;
+        }
+    }
+    arr.swap(i, pivot);
+    i
+}
+```
+
+### 2.2 搜索算法
+
+```rust
+fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
+    let mut left = 0;
+    let mut right = arr.len();
+    while left < right {
+        let mid = left + (right - left) / 2;
+        match arr[mid].cmp(target) {
+            std::cmp::Ordering::Equal => return Some(mid),
+            std::cmp::Ordering::Less => left = mid + 1,
+            std::cmp::Ordering::Greater => right = mid,
+        }
+    }
+    None
+}
+```
+
+### 2.3 使用标准库迭代器
+
+```rust
+let mut nums = vec![3, 1, 4, 1, 5, 9, 2, 6];
+nums.sort_unstable();
+let pos = nums.binary_search(&4);
+let even_squares: Vec<_> = nums.iter()
+    .filter(|&&x| x % 2 == 0)
+    .map(|&x| x * x)
+    .collect();
+```
+
+---
+
+## 补充视角：C08 算法与数据结构一页纸总结
+
+> 来源：`crates/c08_algorithms/docs/one_page_summary.md`
+> 按 AGENTS.md §6.4 迁移至此，作为 canonical 算法概念页的速查补充。
+
+### 核心概念
+
+| 概念 | 说明 |
+| :--- | :--- |
+| **集合类型** | `Vec`、`HashMap`、`BTreeMap`、`HashSet`；选型看访问模式 |
+| **迭代器** | `iter()`/`into_iter()`/`iter_mut()`；适配器 `map`/`filter`/`fold` |
+| **算法复杂度** | O(1)、O(log n)、O(n)；排序、搜索、图算法 |
+| **Rust 特色** | 零成本抽象；迭代器惰性求值；`sort_unstable` 等 |
+
+### 常见坑与解决
+
+| 坑 | 解决 |
+| :--- | :--- |
+| 迭代器消费后复用 | 用 `by_ref()` 或 `iter()` 多次；或 `collect` 再 `iter` |
+| HashMap key 无 `Hash` | 用 `BTreeMap` 或为 key 实现 `Hash` |
+| 排序稳定性 | 稳定用 `sort`；性能用 `sort_unstable` |
+| 浮点作 key | 用 `ordered_float` 或整数编码 |
+
+### 集合速选
+
+| 场景 | 选型 |
+| :--- | :--- |
+| 顺序、索引访问 | `Vec` |
+| 键值查找、无序 | `HashMap` |
+| 键值有序 | `BTreeMap` |
+| 去重、成员检测 | `HashSet`/`BTreeSet` |
+| 双端队列 | `VecDeque` |
+
+### 学习路径
+
+1. **入门** (1–2 周): Vec/HashMap → 迭代器基础 → 常用算法
+2. **进阶** (2–3 周): 排序、搜索、图、动态规划
+3. **高级** (持续): 并行算法、与 C05/C06 结合
+
+### 速查与练习
+
+- **速查卡**: [algorithms_cheatsheet](../../../docs/02_reference/quick_reference/02_algorithms_cheatsheet.md) | [collections_iterators_cheatsheet](../../../docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md)
+- **RBE 练习**: [Vectors](https://doc.rust-lang.org/rust-by-example/std/vec.html) · [HashMap](https://doc.rust-lang.org/rust-by-example/std/hash.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html)
+- **Rustlings**: [05_vecs](https://github.com/rust-lang/rustlings/tree/main/exercises/05_vecs) · [11_hashmaps](https://github.com/rust-lang/rustlings/tree/main/exercises/11_hashmaps) · [18_iterators](https://github.com/rust-lang/rustlings/tree/main/exercises/18_iterators)
+
+---
+
+## 补充视角：C08 算法与数据结构综合思维导图
+
+> 来源：`crates/c08_algorithms/docs/rust_190_comprehensive_mindmap.md`
+> 按 AGENTS.md §6.4 迁移至此，作为 canonical 算法概念页的知识拓扑补充。
+
+### 整体架构
+
+```text
+        Rust 算法与数据结构体系
+                   │
+        ┌──────────┼──────────┐
+        │          │          │
+    数据结构    算法设计   并发算法
+        │          │          │
+    ┌───┴───┐  ┌───┴───┐  ┌───┴───┐
+    │       │  │       │  │       │
+  线性   非线性 排序  搜索 并行  异步
+  Array  Tree  Sort  BFS  Rayon  Stream
+   Vec   Graph Quick DFS  par_iter async
+    │       │      │    │       │      │
+  Stack  Heap  Merge Dijkstra  join  select
+
+       ┌──────────────────────────┐
+       │   Rust 特性优势           │
+       │                          │
+       │ • 零成本抽象             │
+       │ • 所有权保证正确性       │
+       │ • 泛型无运行时开销       │
+       │ • 并发安全               │
+       └──────────────────────────┘
+```
+
+### 学习路径
+
+**初学者路径（2–3 周）**
+
+- Week 1: 基础数据结构 — `Vec`/`Array`、`Stack`/`Queue`、`HashMap`/`HashSet`
+- Week 2: 基础算法 — 排序（QuickSort/MergeSort）、二分搜索、递归与分治
+- Week 3: 树与图入门 — 二叉树遍历、BFS/DFS
+
+**进阶路径（3–4 周）**
+
+- Week 1: 高级数据结构 — 堆、`Trie`、并查集
+- Week 2: 图算法 — Dijkstra、拓扑排序、最小生成树
+- Week 3–4: 动态规划 — 背包、LCS/LIS、状态机 DP
+
+**专家路径（4–6 周）**
+
+- Week 1–2: 并发算法 — `rayon` 并行迭代、无锁数据结构、工作窃取
+- Week 3–4: 异步算法 — `Stream`、异步图遍历、并发限流
+- Week 5–6: 高级主题 — 算法优化技巧、缓存优化、SIMD 加速
+
+### 问题诊断树
+
+```text
+遇到算法问题？
+│
+├─ 性能问题
+│  ├─ 时间复杂度过高 → 优化算法、哈希表、二分搜索
+│  ├─ 空间复杂度过高 → 原地算法、滚动数组、状态压缩
+│  └─ 缓存 miss 率高 → 改善数据局部性、优先使用 Vec
+│
+├─ 正确性问题
+│  ├─ 边界条件 → 检查空数组、单元素、负数
+│  ├─ 溢出 → 使用 checked_add、u128
+│  └─ 浮点精度 → 使用有序分数、BigDecimal
+│
+├─ 并发问题
+│  ├─ 数据竞争 → Arc<Mutex>、原子操作
+│  └─ 死锁 → 避免嵌套锁、使用 RwLock
+│
+└─ Rust 特定
+   ├─ 所有权错误 → 使用引用、clone、Arc
+   └─ 生命周期错误 → 明确生命周期标注
+```
+
+### 算法选择决策树
+
+```text
+选择排序算法？
+├─ 数据量小(<50) → 插入排序
+├─ 需要稳定 → slice.sort()
+├─ 不需要稳定 → slice.sort_unstable()
+└─ 特定范围 → 计数排序/基数排序
+
+选择搜索算法？
+├─ 数据无序 → 线性搜索 / HashMap
+├─ 数据有序 → 二分搜索
+└─ 图/树结构 → DFS/BFS
+
+选择数据结构？
+├─ 需要快速随机访问 → Vec
+├─ 频繁头尾操作 → VecDeque
+├─ 频繁中间插入删除 → LinkedList
+├─ 需要 O(1) 查找 → HashMap
+├─ 需要有序 → BTreeMap
+├─ 优先级队列 → BinaryHeap
+└─ 前缀匹配 → Trie
+
+并发还是串行？
+├─ CPU 密集型、大数据 → Rayon 并行
+├─ I/O 密集型 → 异步 (tokio)
+├─ 小数据量 → 串行（避免开销）
+└─ 共享状态少 → 并行更优
+```

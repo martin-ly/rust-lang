@@ -1,24 +1,18 @@
-# Common — 待补充项
+> **EN**: Common — Pending Items
+> **Summary**: Stub pending-items tracker for the common crate docs; points to the canonical global TODO tracker.
+>
+> **权威来源**: [concept/00_meta/00_framework/todos.md](../../../concept/00_meta/00_framework/todos.md)
 
-> 记录 `common` 文档体系中尚未完成或需要改进的条目。
+# Common — Pending Items
 
----
+> 本文档是 crate 级文档占位 stub。通用 Rust 概念解释的权威来源见上方链接。
 
-## 高优先级
+## 主题速览
 
-- [ ] 补充核心概念说明
-- [ ] 完善示例代码
-- [ ] 增加常见问题
-
-## 中优先级
-
-- [ ] 补充术语表
-- [ ] 绘制知识地图
-
-## 低优先级
-
-- [ ] 翻译关键章节为英文
+- 待办事项
+- 文档改进
+- 跟踪清单
 
 ---
 
-*本文件由 `scripts/templates/crate_docs/pending_items.md` 模板生成。*
+*本文件由 crates/*/docs/ 治理流程生成，原内容已归档为 stub。*

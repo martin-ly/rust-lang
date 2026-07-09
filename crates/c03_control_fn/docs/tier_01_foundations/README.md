@@ -1,84 +1,17 @@
+> **EN**: Tier 1: 基础层 - 控制流与函数 (crate docs stub)
+> **Summary**: Stub pointing to the canonical authority page(s) for `Tier 1: 基础层 - 控制流与函数`. Practical examples remain in the crate.
+
 # Tier 1: 基础层 - 控制流与函数
 
-**难度**: ⭐
-**预计学习时间**: 2-4 小时
-**适合人群**: Rust 初学者、需要快速上手控制流与函数的开发者
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/01_foundation/04_control_flow/07_control_flow.md`](../../../../concept/01_foundation/04_control_flow/07_control_flow.md)。
 
----
+本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-## 📚 本层内容
+## 主题导航
 
-Tier 1 提供快速入门和核心概念概览，帮助您在最短时间内掌握 Rust 控制流与函数系统的基础知识。
-
-### 核心文档
-
-1. **[项目概览](01_project_overview.md)** ⭐ 推荐起点
-   - 模块目标与定位
-   - 核心特性速览
-   - 学习路径指引
-2. **[主索引导航](02_navigation.md)**
-   - 文档分类索引
-   - 学习路径规划
-   - 快速查找指南
-3. **[术语表](03_glossary.md)**
-   - 控制流核心术语
-   - 函数系统术语
-   - 闭包与迭代器术语
-4. **[常见问题](04_faq.md)**
-   - 新手常见疑问
-   - 最佳实践建议
-   - 故障排除指南
-
----
-
-## 🎯 学习目标
-
-完成 Tier 1 后，您将能够：
-
-- ✅ 理解 Rust 控制流的基本概念（if、loop、while、for、match）
-- ✅ 掌握函数定义、参数传递、返回值
-- ✅ 理解模式匹配的基本用法
-- ✅ 了解错误处理的基础机制（Result、Option）
-- ✅ 能够查阅文档并规划学习路径
-
----
-
-## ⏭️ 下一步
-
-完成 Tier 1 后，建议：
-
-1. **继续深入**: 进入 [Tier 2: 实践层](../tier_02_guides/README.md) 学习实战技巧
-2. **查阅参考**: 使用 [Tier 3: 参考层](../tier_03_references/README.md) 查找具体语法
-3. **理论深入**: 准备好后探索 [Tier 4: 高级层](../tier_04_advanced/README.md) 的高级主题
-
----
-
-## 📖 推荐学习顺序
-
-```text
-01_project_overview.md (15分钟)
-    ↓
-02_navigation.md (10分钟)
-    ↓
-03_glossary.md (20分钟)
-    ↓
-04_faq.md (30分钟)
-    ↓
-进入 Tier 2 实践指南
-```
-
----
-
-**最后更新**: 2025-12-11
-**维护状态**: 🟢 活跃维护中
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| Control Flow | [concept/01_foundation/04_control_flow/07_control_flow.md](../../../../concept/01_foundation/04_control_flow/07_control_flow.md) |

@@ -1,63 +1,24 @@
-# C09 设计模式 - 一页纸总结
+> **EN**: C09 Design Patterns — One-Page Summary (c09_design_pattern example index)
+> **Summary**: A stub page pointing to the canonical concept authority for Rust design patterns. The c09_design_pattern crate provides runnable pattern examples.
 
-> **用途**: 快速回顾核心概念、常见坑、学习路径
-> **完整文档**: [00_MASTER_INDEX](00_master_index.md)
+# C09 设计模式 - 一页纸总结（c09_design_pattern 示例索引）
 
----
+> **权威来源**: 创建型/结构型/行为型模式、Rust 惯用模式等完整解释见
+> [`concept/06_ecosystem/03_design_patterns/02_patterns.md`](../../../concept/06_ecosystem/03_design_patterns/02_patterns.md)。
 
-## 核心概念（4 条）
+本文件原为 `c09_design_pattern` crate 的通用设计模式一页纸总结。根据 AGENTS.md §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/06_ecosystem/03_design_patterns/`，此处仅保留索引与 canonical 链接。
 
-| 概念 | 说明 |
+## 本 crate 相关示例
+
+- `crates/c09_design_pattern/examples/`：设计模式可运行示例。
+- `crates/c09_design_pattern/src/bin/`：设计模式演示程序。
+
+## 快速导航
+
+| 主题 | 权威来源 |
 | :--- | :--- |
-| **创建型** | Builder、Factory、Singleton；Rust 用 `Default`、`new` 惯用 |
-| **结构型** | Adapter、Decorator、Facade；组合优于继承 |
-| **行为型** | Strategy、Observer、State；trait 对象或枚举 |
-| **Rust 特有** | Newtype、RAII、类型状态机；零成本抽象 |
-
----
-
-## 常见坑与解决
-
-| 坑 | 解决 |
-| :--- | :--- || 过度设计 | 先满足需求；模式按需引入 |
-| OOP 思维照搬 | Rust 用 trait + enum；避免继承层次 |
-| 全局可变状态 | 用 `Arc<Mutex<T>>` 或依赖注入 |
-| 模式组合复杂 | 参考 [模式组合参考](tier_03_references/04_pattern_performance_evaluation_reference.md) |
-
----
-
-## 模式速选
-
-| 场景 | 选型 |
-| :--- | :--- || 多步骤构建 | Builder |
-| 运行时多态 | `dyn Trait` 或 `enum` |
-| 可选扩展 | Decorator / Newtype |
-| 状态转换 | 类型状态机 / enum |
-| 事件通知 | Observer / channel |
-
----
-
-## 学习路径
-
-1. **入门** (1–2 周): GoF 创建型 → 结构型 → 行为型
-2. **进阶** (2–3 周): Rust 惯用模式 → 模式组合
-3. **高级** (持续): 形式化、性能评估、与 C11 互链
-
----
-
-## 速查与练习
-
-- **速查卡**: [design_patterns_cheatsheet](../../../docs/02_reference/quick_reference/design_patterns_cheatsheet.md)
-- **RBE 练习**: [Functional](https://doc.rust-lang.org/rust-by-example/fn.html) · [Structs](https://doc.rust-lang.org/rust-by-example/custom_types/structs.html) · [Enums](https://doc.rust-lang.org/rust-by-example/custom_types/enum.html)
-- **Rustlings**: 无设计模式专题；综合运用 07_structs、08_enums、15_traits
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| GoF 模式在 Rust 中的实现 | [`concept/06_ecosystem/03_design_patterns/02_patterns.md`](../../../concept/06_ecosystem/03_design_patterns/02_patterns.md) |
+| Rust 特有模式（Newtype、RAII、Typestate） | 同上 |
+| 架构与 API 设计模式 | [`concept/06_ecosystem/03_design_patterns/35_architecture_patterns.md`](../../../concept/06_ecosystem/03_design_patterns/35_architecture_patterns.md) |
+| 速查练习 | [`concept/SUMMARY.md`](../../../concept/SUMMARY.md) |

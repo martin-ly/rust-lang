@@ -133,6 +133,10 @@
     - [测验 4：`Option` 与 `Result` 转换（应用层）](#测验-4option-与-result-转换应用层)
     - [测验 5：错误处理的哲学（评价层）](#测验-5错误处理的哲学评价层)
   - [实践](#实践)
+  - [补充：来自 `crates/c03_control_fn` 错误处理参考的 API 速查](#补充来自-cratesc03_control_fn-错误处理参考的-api-速查)
+    - [Option 常用方法](#option-常用方法)
+    - [Result\<T, E\> 常用方法](#resultt-e-常用方法)
+    - [`?` 运算符传播规则](#-运算符传播规则)
 
 ## 一、权威定义（Definition）
 
@@ -2527,3 +2531,44 @@ Rust 的设计选择：
 > - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
+
+---
+
+## 补充：来自 `crates/c03_control_fn` 错误处理参考的 API 速查
+
+> 本节由原 `crates/c03_control_fn/docs/tier_03_references/05_error_handling_reference.md` 合并而来，保留 `Option` / `Result` 核心方法速查。
+
+### Option<T> 常用方法
+
+| 方法 | 签名 | 行为 |
+| :--- | :--- | :--- |
+| `is_some` / `is_none` | `(&self) -> bool` | 状态检查 |
+| `unwrap` | `(self) -> T` | 解包或 panic |
+| `unwrap_or` | `(self, T) -> T` | 提供默认值 |
+| `unwrap_or_else` | `(self, F) -> T` | 惰性默认值 |
+| `map` | `(self, F) -> Option<U>` | 值转换 |
+| `and_then` | `(self, F) -> Option<U>` | 链式 Option |
+| `or_else` | `(self, F) -> Option<T>` | 惰性替代 |
+| `take` / `replace` | `(&mut self) -> Option<T>` | 取出或替换 |
+
+### Result<T, E> 常用方法
+
+| 方法 | 签名 | 行为 |
+| :--- | :--- | :--- |
+| `is_ok` / `is_err` | `(&self) -> bool` | 状态检查 |
+| `unwrap` / `expect` | `(self) -> T` | 解包或 panic（expect 带消息） |
+| `unwrap_or_default` | `(self) -> T` | 使用 Default |
+| `map` / `map_err` | `(self, F) -> Result<U,E>` / `Result<T,F>` | 转换 Ok / Err |
+| `and_then` | `(self, F) -> Result<U,E>` | 链式 Result |
+| `or_else` | `(self, F) -> Result<T,F>` | 错误恢复 |
+
+### `?` 运算符传播规则
+
+```rust
+fn may_fail() -> Result<T, E> {
+    let v = another_may_fail()?; // 自动调用 From 转换并提前返回 Err
+    Ok(v)
+}
+```
+
+> 完整错误处理哲学、自定义错误类型与生态库对比参见本节正文。

@@ -58,9 +58,36 @@
     - [测验 3：WASM 的"WASI Preview 2"相比 Preview 1 有什么重大改进？（理解层）](#测验-3wasm-的wasi-preview-2相比-preview-1-有什么重大改进理解层)
     - [测验 4：`wit-bindgen` 在组件模型开发中起什么作用？（理解层）](#测验-4wit-bindgen-在组件模型开发中起什么作用理解层)
     - [测验 5：Rust 编译为 WASM 时，`wasm-bindgen` 与 `wit-bindgen` 分别适用于什么场景？（理解层）](#测验-5rust-编译为-wasm-时wasm-bindgen-与-wit-bindgen-分别适用于什么场景理解层)
+  - [补充视角：WasmEdge 插件系统](#补充视角wasmedge-插件系统)
+    - [插件系统架构](#插件系统架构)
+    - [插件生命周期](#插件生命周期)
+    - [官方插件概览](#官方插件概览)
+    - [自定义插件开发要点](#自定义插件开发要点)
+    - [典型应用场景](#典型应用场景)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [十二、WASM 生产级部署](#十二wasm-生产级部署)
+    - [12.1 部署形态](#121-部署形态)
+    - [12.2 监控与调试](#122-监控与调试)
+    - [12.3 安全考虑](#123-安全考虑)
+  - [十三、WASM 性能分析与优化](#十三wasm-性能分析与优化)
+    - [13.1 分析工具](#131-分析工具)
+    - [13.2 瓶颈识别](#132-瓶颈识别)
+    - [13.3 高级优化](#133-高级优化)
+  - [十四、C12 WASM 工程实践补充](#十四c12-wasm-工程实践补充)
+    - [14.1 基础概览与工具链入口（来自 `01_wasm_overview.md`）](#141-基础概览与工具链入口来自-01_wasm_overviewmd)
+    - [14.2 最佳实践清单（来自 `rust_192_best_practices.md`）](#142-最佳实践清单来自-rust_192_best_practicesmd)
+      - [性能优化清单](#性能优化清单)
+      - [安全检查清单](#安全检查清单)
+    - [14.3 综合学习路径（来自 `rust_192_complete_guide.md`）](#143-综合学习路径来自-rust_192_complete_guidemd)
+    - [14.4 迁移检查清单（来自 `rust_192_migration_guide.md`）](#144-迁移检查清单来自-rust_192_migration_guidemd)
+    - [14.5 决策树参考（来自 `wasm_decision_tree.md`）](#145-决策树参考来自-wasm_decision_treemd)
+      - [编译目标选择](#编译目标选择)
+      - [JavaScript 互操作选择](#javascript-互操作选择)
+  - [补充视角：WasmEdge 与新兴运行时扩展](#补充视角wasmedge-与新兴运行时扩展)
+  - [补充视角：WebAssembly 性能优化实践](#补充视角webassembly-性能优化实践)
+  - [补充视角：WebAssembly 开发工具链全景](#补充视角webassembly-开发工具链全景)
 
 > **Bloom 层级**: 分析 → 评价
 > **变更日志**:
@@ -855,6 +882,45 @@ fn main() {
 `wasm-bindgen` 用于浏览器环境（与 JS 互操作）。`wit-bindgen` 用于组件模型/WASI 环境（与其他 WASM 模块或宿主运行时互操作）。
 </details>
 
+## 补充视角：WasmEdge 插件系统
+
+> migrated from `crates/c12_wasm/docs/tier_04_advanced/10_wasmedge_plugin_system_development_guide.md`
+
+### 插件系统架构
+
+WasmEdge 插件系统允许在运行时扩展 WebAssembly 能力，主要分为两类：
+
+- **系统插件**：由 WasmEdge 核心提供，如 WASI-NN、WASI-Crypto。
+- **第三方插件**：开发者基于 C++ 或 Rust（`wasmedge-sdk`）自定义实现。
+
+### 插件生命周期
+
+1. **加载**：WasmEdge 在启动时动态加载共享库插件。
+2. **注册**：插件通过 `Plugin::create` 注册模块与函数。
+3. **调用**：Wasm 模块通过 import 调用插件暴露的 host 函数。
+4. **卸载**：运行时关闭时释放插件资源。
+
+### 官方插件概览
+
+| 插件 | 能力 | Rust/Wasm 使用方式 |
+|:---|:---|:---|
+| WASI-NN | 神经网络推理（GGML、PyTorch、TensorFlowLite 后端） | `wasi_nn::graph` API |
+| WASI-Crypto | 密码学操作（签名、哈希、KDF、随机数） | `wasi_crypto` 接口 |
+| WasmEdge-Process | 在受控环境中启动子进程 | host function 调用 |
+
+### 自定义插件开发要点
+
+- **内存管理**：通过 `MemoryInstance` 安全读写 Wasm 线性内存，避免越界。
+- **错误处理**：返回清晰错误码，使用 Rust `Result` 在 SDK 层转换。
+- **线程安全**：插件实现需满足 `Send + Sync` 以支持多实例并发。
+- **性能优化**：减少 host-wasm 边界切换，批量处理数据。
+
+### 典型应用场景
+
+- 边缘 AI 推理：WASI-NN + 本地 LLM 后端。
+- 安全密码学：WASI-Crypto 替代 Wasm 内自定义加密。
+- 数据库/缓存扩展：自定义插件提供连接池与缓存能力。
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust）** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
@@ -874,3 +940,205 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+## 十二、WASM 生产级部署
+
+> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/03_production_deployment.md`，已按 AGENTS.md §6.4 迁移至此。
+
+Rust WASM 模块进入生产环境时，常见部署形态与注意事项如下：
+
+### 12.1 部署形态
+
+| 方式 | 适用场景 | 关键命令/配置 |
+| :--- | :--- | :--- |
+| **CDN 部署** | 浏览器端应用 | `aws s3 cp pkg/*.wasm s3://cdn.example.com/` |
+| **NPM 发布** | Node.js 生态集成 | `wasm-pack publish` |
+| **Docker 部署** | 容器化服务端 | `FROM node:18-alpine`，复制 `pkg/` 与 `www/` |
+
+### 12.2 监控与调试
+
+- 使用浏览器 `performance.now()` 测量 WASM 加载与初始化时间。
+- 将 Rust `Result<T, JsValue>` 暴露给 JS，统一错误边界。
+
+### 12.3 安全考虑
+
+- **输入验证**：在 Rust 边界处校验长度、范围与格式。
+- **资源限制**：通过宿主环境限制线性内存大小与执行时间。
+
+```rust
+const MAX_MEMORY: usize = 100 * 1024 * 1024; // 100MB
+
+#[wasm_bindgen]
+pub fn process_input(input: &str) -> Result<String, String> {
+    if input.len() > 1000 {
+        return Err("Input too long".into());
+    }
+    Ok(input.to_uppercase())
+}
+```
+
+## 十三、WASM 性能分析与优化
+
+> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/02_performance_analysis_and_optimization.md`，已按 AGENTS.md §6.4 迁移至此。
+
+### 13.1 分析工具
+
+- **`cargo bloat --release --target wasm32-unknown-unknown`**：按函数/ crate 分析体积。
+- **`wasm-opt --print-function-sizes module.wasm`**：查看优化前的函数体积分布。
+
+### 13.2 瓶颈识别
+
+- **内存分配**：减少 `Vec` 与 `String` 在热路径上的分配；考虑使用 `bumpalo` 等分配器。
+- **函数热点**：通过浏览器 DevTools Performance 面板或 `console.time` 定位。
+
+### 13.3 高级优化
+
+| 技术 | 说明 |
+| :--- | :--- |
+| **wasm-opt** | Binaryen 优化器，减小体积并提升执行速度 |
+| **SIMD** | `wasm32` SIMD128，适用于数值计算 |
+| **并行处理** | Web Workers + `rayon`（服务端/边缘场景） |
+
+```rust
+#![cfg(target_arch = "wasm32")]
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub fn simd_add(a: &[f32], b: &[f32]) -> Vec<f32> {
+    a.iter().zip(b).map(|(x, y)| x + y).collect()
+}
+```
+
+---
+
+## 十四、C12 WASM 工程实践补充
+
+> 本节内容按 AGENTS.md §6.4 从 `crates/c12_wasm/docs/` 迁移整理，
+> 作为 canonical WebAssembly 高级概念页的工程实践补充。
+
+### 14.1 基础概览与工具链入口（来自 `01_wasm_overview.md`）
+
+- WebAssembly 是与架构无关的低级字节码，可在浏览器、服务端、边缘计算等宿主运行。
+- `wasm-bindgen` 负责生成 Rust ↔ JavaScript 的类型安全绑定。
+- `wasm-pack` 是 Rust WASM 项目的统一构建与发布入口：
+  - `wasm-pack new my-wasm-project`
+  - `wasm-pack build --target web`
+  - `wasm-pack build --target bundler`
+  - `wasm-pack build --target nodejs`
+
+### 14.2 最佳实践清单（来自 `rust_192_best_practices.md`）
+
+#### 性能优化清单
+
+- **编译时**：使用 `opt-level = "z"` 或 `"s"`、`lto = true`、`codegen-units = 1`、`strip = true`。
+- **运行时**：优先使用 `MaybeUninit` 管理未初始化内存、`NonZero::div_ceil`、迭代器特化、`rotate_right`、对象池、预分配容量。
+- **二进制**：使用 `wasm-opt -Oz/-O3`、去除未使用代码、gzip/brotli 压缩传输。
+
+#### 安全检查清单
+
+- **内存安全**：明确跟踪初始化状态，避免未初始化读取与泄漏。
+- **类型安全**：使用 `NonZero` 等强类型避免转换错误。
+- **FFI 安全**：使用原始引用、`#[repr(C)]`、提供安全封装接口，避免暴露不安全接口。
+
+### 14.3 综合学习路径（来自 `rust_192_complete_guide.md`）
+
+| 路径 | 阶段 | 重点 |
+| :--- | :--- | :--- |
+| 新手 | 第 1–5 天 | 快速参考 → 改进文档 → 运行示例 |
+| 进阶 | 第 1–3 周 | 核心特性 → 性能优化 → 综合应用 |
+| 专家 | 持续 | 证明树 → 性能基准 → 最佳实践 |
+
+### 14.4 迁移检查清单（来自 `rust_192_migration_guide.md`）
+
+1. 更新 Rust 工具链与 WASM 目标。
+2. 更新 `wasm-pack`、`wasm-opt` 等工具到兼容版本。
+3. 调整 `Cargo.toml`：优化配置、依赖版本、`default-features`。
+4. 利用新特性：`MaybeUninit`、`NonZero::div_ceil`、迭代器特化、`rotate_right`。
+5. 验证：编译通过、功能正常、性能达标、二进制大小符合预期。
+
+### 14.5 决策树参考（来自 `wasm_decision_tree.md`）
+
+#### 编译目标选择
+
+```text
+需要系统接口?
+├── 是 → wasm32-wasip1
+└── 否
+    ├── 浏览器运行? → wasm32-unknown-unknown
+    └── Node.js / 边缘计算?
+        ├── 需要 WASI 能力? → wasm32-wasip1
+        └── 否 → wasm32-unknown-unknown
+```
+
+#### JavaScript 互操作选择
+
+```text
+需要 Web API?
+├── 是 → web-sys (DOM / Fetch / Canvas / WebSocket)
+└── 否 → js-sys (JavaScript 内置对象)
+```
+
+> 更详细的组件模型、WASI、性能与安全分析参见本章前述章节。
+
+## 补充视角：WasmEdge 与新兴运行时扩展
+
+> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/05_wasmedge_and_emerging_tech.md`，已按 AGENTS.md §6.4 迁移至此。
+
+WasmEdge 是 CNCF 托管的高性能 WebAssembly 运行时，主打云原生与边缘场景。其设计要点包括：
+
+- **AOT 编译**：通过 `wasmedgec` 将 WASM 字节码预编译为原生共享库，显著降低启动延迟并提升持续执行性能。
+- **WASI 扩展**：除标准 WASI 外，WasmEdge 提供 WASI-NN（神经网络推理，支持 TensorFlow Lite、OpenVINO、GGML）与 WASI-Crypto（密码学操作），使 Rust 程序能在沙箱内调用硬件加速能力。
+- **云原生集成**：通过 containerd-shim-wasmedge 在 Kubernetes RuntimeClass 中运行 WASM 工作负载，镜像体积极小、启动时间在毫秒级。
+
+与 wasmtime 的对比：
+
+| 特性 | WasmEdge | wasmtime |
+| --- | --- | --- |
+| 维护方 | CNCF | Bytecode Alliance |
+| WASI 0.2 / 组件模型 | 扩展支持 | 完整支持 |
+| AOT 编译 | 原生支持 | 支持 |
+| 典型场景 | 边缘 AI、Serverless | 服务端组件、插件系统 |
+
+> **关键洞察**：WasmEdge 的价值在于将 Rust + WASM 的“安全沙箱”扩展到需要 AI 推理与密码学加速的边缘场景，但组件模型与跨语言互操作性仍以 wasmtime / Bytecode Alliance 生态更为成熟。
+
+## 补充视角：WebAssembly 性能优化实践
+
+> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/11_performance_optimization_in_depth_guide.md`，已按 AGENTS.md §6.4 迁移至此。
+
+Rust → WASM 的性能优化可分为编译期、运行时与跨边界三个层次：
+
+1. **编译期**
+   - Cargo profile：`opt-level = "z"` 优先体积，`opt-level = 3` 优先速度；配合 `lto = true`、`codegen-units = 1`、`panic = "abort"`。
+   - `wasm-opt`：Binaryen 优化器进一步消除死代码、内联函数、压缩体积。
+
+2. **运行时**
+   - **AOT 编译**：使用 `wasmedgec` 或 wasmtime 的 AOT 模式将 WASM 转为机器码，消除 JIT 预热。
+   - **SIMD**：通过 `std::arch::wasm32` 使用 128-bit SIMD 加速数值计算。
+
+3. **JS ↔ WASM 边界**
+   - 批量传输数据，减少跨边界调用次数。
+   - 优先使用 `&[u8]` / `&mut [u8]` 而非 `Vec<u8>`，配合 `SharedArrayBuffer` 实现零拷贝。
+   - 预分配线性内存，避免运行时频繁 `memory.grow`。
+
+优化层级优先级：算法 > 数据结构 > 编译器优化 > SIMD/AOT。
+
+## 补充视角：WebAssembly 开发工具链全景
+
+> 内容来源：`crates/c12_wasm/docs/wasm_engineering/development_toolchain.md`，已按 AGENTS.md §6.4 迁移至此。
+
+Rust WASM 工程的工具链覆盖编译、调试、优化、包管理与 IDE 支持：
+
+| 工具 | 作用 | 典型命令 |
+| --- | --- | --- |
+| `rustup target add wasm32-unknown-unknown` / `wasm32-wasip1` | 添加编译目标 | `cargo build --target wasm32-wasip1 --release` |
+| `wasm-bindgen` / `wasm-bindgen-cli` | JS 胶水与类型生成 | `wasm-bindgen --target web ...` |
+| `wasm-pack` | 构建 + 优化 + npm 包发布 | `wasm-pack build --target web` |
+| `wasm-opt` (Binaryen) | 字节码优化 | `wasm-opt -Oz input.wasm -o output.wasm` |
+| WABT (`wasm2wat`, `wasm-objdump`, `wasm-validate`) | 反汇编、验证、分析 | `wasm-validate --pedantic module.wasm` |
+| `trunk` | 纯 Rust 前端应用打包 | `trunk build --release` |
+| `cargo-component` | WASI 0.2 组件模型支持 | `cargo component build --release` |
+
+调试建议：
+
+- 浏览器调试使用 Chrome DevTools + Source Maps；Rust 侧保留调试信息：`RUSTFLAGS="-C debuginfo=2" cargo build --target wasm32-unknown-unknown`。
+- WABT 工具套件可用于分析模块结构、查找大函数、验证字节码合法性。

@@ -1,105 +1,25 @@
-# C12 WebAssembly (WASM) 模块
+> **EN**: WebAssembly (WASM) Overview (c12_wasm example index)
+> **Summary**: A stub page pointing to the canonical concept authority for Rust WebAssembly. The c12_wasm crate provides runnable WASM examples.
 
-> **模块**: C12 WASM 开发
-> **难度**: 中级
-> **Rust 版本**: 1.96.1+
+# C12 WebAssembly (WASM) 模块（c12_wasm 示例索引）
 
----
+> **权威来源**: WebAssembly 设计哲学、`wasm32` 目标、`wasm-bindgen`、`wasm-pack`、组件模型等完整解释见
+> [`concept/06_ecosystem/11_domain_applications/11_webassembly.md`](../../../concept/06_ecosystem/11_domain_applications/11_webassembly.md)。
 
-## 📋 目录
+本文件原为 `c12_wasm` crate 的通用 WASM 概念概述。根据 AGENTS.md §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/06_ecosystem/11_domain_applications/`，此处仅保留索引与 canonical 链接。
 
-- [C12 WebAssembly (WASM) 模块](#c12-webassembly-wasm-模块)
-  - [📋 目录](#-目录)
-  - [WASM 概述](#wasm-概述)
-  - [wasm-bindgen](#wasm-bindgen)
-  - [wasm-pack](#wasm-pack)
+## 本 crate 相关示例
 
----
+- `crates/c12_wasm/examples/`：WASM 可运行示例。
+- `crates/c12_wasm/src/bin/`：WASM 演示程序。
 
-## WASM 概述
+## 快速导航
 
-WebAssembly (Wasm) 是一种低级的字节码格式，可以在现代浏览器中高效运行。
-
-```rust
-// 简单的 WASM 函数
-#[wasm_bindgen]
-pub fn add(a: i32, b: i32) -> i32 {
-    a + b
-}
-
-#[wasm_bindgen]
-pub fn greet(name: &str) -> String {
-    format!("Hello, {}!", name)
-}
-```
-
----
-
-## wasm-bindgen
-
-wasm-bindgen 提供了 Rust 和 JavaScript 之间的桥梁：
-
-```rust
-use wasm_bindgen::prelude::*;
-use web_sys::console;
-
-#[wasm_bindgen]
-extern "C" {
-    #[wasm_bindgen(js_namespace = console)]
-    fn log(s: &str);
-}
-
-#[wasm_bindgen]
-pub struct Calculator {
-    value: f64,
-}
-
-#[wasm_bindgen]
-impl Calculator {
-    #[wasm_bindgen(constructor)]
-    pub fn new() -> Self {
-        Self { value: 0.0 }
-    }
-
-    pub fn add(&mut self, n: f64) {
-        self.value += n;
-    }
-
-    pub fn get_value(&self) -> f64 {
-        self.value
-    }
-}
-```
-
----
-
-## wasm-pack
-
-构建和发布 WASM 包：
-
-```bash
-# 初始化项目
-wasm-pack new my-wasm-project
-
-# 构建
-wasm-pack build --target web
-wasm-pack build --target bundler
-wasm-pack build --target nodejs
-```
-
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-**状态**: ✅ 100% 完成
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| WebAssembly 核心概念与编译模型 | [`concept/06_ecosystem/11_domain_applications/11_webassembly.md`](../../../concept/06_ecosystem/11_domain_applications/11_webassembly.md) |
+| `wasm-bindgen` 与 JS 互操作 | 同上 |
+| `wasm-pack` 构建与发布 | 同上 |
+| 高级 WASM 工程实践 | [`concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md`](../../../concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md) |
+| 速查练习 | [`concept/SUMMARY.md`](../../../concept/SUMMARY.md) |

@@ -1,3 +1,12 @@
+# 网络编程知识结构思维导图
+
+> **权威来源**: [Networking](../../concept/06_ecosystem/04_web_and_networking)
+> **文档类型**: 代码示例与实践项目（crate-specific）
+
+本文件包含与 `Networking` 相关的可运行代码示例、练习项目和实战代码。通用概念解释请查阅上方权威来源；此处仅保留 crate 级别的示例实现与学习活动。
+
+---
+
 > **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。

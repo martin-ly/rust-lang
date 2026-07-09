@@ -1,73 +1,15 @@
-> **生态状态提示**：
+> **EN**: C06 Async One-Page Summary
+> **Summary**: Quick-reference summary of Rust async programming core concepts, common pitfalls, and ecosystem choices. Detailed explanations are maintained in the canonical concept authority page.
 >
-> 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
->
-> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
-> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+> **权威来源**: [concept/03_advanced/01_async/02_async.md](../../../concept/03_advanced/01_async/02_async.md)
+
+## 主题速览
+
+- core async concepts
+- common pitfalls and solutions
+- runtime and lock/channel selection
+- learning paths
 
 ---
 
-# C06 异步编程 - 一页纸总结
-
-> **用途**: 快速回顾核心概念、常见坑、学习路径
-> **完整文档**: [00_MASTER_INDEX](00_master_index.md)
-
----
-
-## 核心概念（4 条）
-
-| 概念 | 说明 |
-| :--- | :--- |
-| **async/await** | `async fn` 返回 `Future`；`.await` 挂起与恢复 |
-| **Future** | 惰性执行；需 executor 轮询；`Pin` 自引用 |
-| **运行时** | Tokio、async-std [已归档]；`#[tokio::main]`；任务调度 |
-| **并发模型** | 多任务单线程（协作式）；与 OS 线程互补 |
-
----
-
-## 常见坑与解决
-
-| 坑 | 解决 |
-| :--- | :--- |
-| 持锁跨 `await` | 缩短锁作用域；用 `tokio::sync::Mutex` |
-| 空 Future 不执行 | 必须 `.await` 或 `spawn` 才会执行 |
-| `!Send` 跨 await 点 | 确保 `Future: Send`；避免 `Rc`/`RefCell` 跨 await |
-| 阻塞运行时 | 用 `spawn_blocking` 或 `tokio::task::block_in_place` |
-
----
-
-## 异步速选
-
-| 场景 | 选型 |
-| :--- | :--- |
-| 异步运行时 | Tokio（主流）或 smol |
-| 异步锁 | `tokio::sync::Mutex` |
-| 异步通道 | `tokio::sync::mpsc` |
-| 超时/取消 | `tokio::time::timeout`；`CancellationToken` |
-
----
-
-## 学习路径
-
-1. **入门** (1–2 周): async/await 语法 → Future 基础 → Tokio 入门
-2. **进阶** (2–4 周): 运行时原理 → Pin/Unpin → 自引用
-3. **高级** (持续): 自定义运行时、与 C05 对比选型
-
----
-
-## 速查与练习
-
-- **速查卡**: [async_patterns](../../../docs/02_reference/quick_reference/async_patterns.md)
-- **RBE 练习**: [Async](https://doc.rust-lang.org/rust-by-example/async.html)
-- **Rustlings**: 无异步专题；参考 RBE 与 C06 模块
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+*本 stub 按 [AGENTS.md](../../../AGENTS.md) §6.4 保留路径，原通用概念内容已归并至上方权威来源页。可执行代码示例见 [`crates/c06_async/src`](../../../crates/c06_async/src)。*

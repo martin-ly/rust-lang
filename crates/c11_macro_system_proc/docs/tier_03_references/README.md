@@ -1,163 +1,21 @@
 # Tier 3: 技术参考 - 宏系统参考手册
 
-**难度**: ⭐⭐⭐
-**访问模式**: 按需查阅
-**适合人群**: 需要查找宏语法或实现细节的开发者
-**状态**: ✅ 100% 完成
-**最后更新**: 2025-12-11
+**EN**: Rust Macros
+**Summary**: Stub redirecting to the canonical concept page for `Rust Macros`. Crate-specific API notes remain here; general explanations live in `concept/`.
 
----
+> **权威来源**: [03_advanced/03_proc_macros/04_macros.md](../../../../concept/03_advanced/03_proc_macros/04_macros.md)
 
-## 📚 核心文档
+本文件为 crate 文档占位页。通用 Rust 概念解释已迁移/整合至上方的 `concept/` 权威页；如需深入了解，请访问权威来源。
 
-Tier 3 提供全面、系统的宏技术参考文档，涵盖语法细节、API参考、性能特性和最佳实践，作为日常宏开发的查阅手册。
+## 主题速览
 
-### 1. [声明宏完整参考](01_declarative_macros_complete_reference.md) (568 行)
-
-**内容**:
-
-- `macro_rules!` 完整语法结构
-- 片段说明符 (Fragment Specifiers) 详解
-- 重复模式与递归限制
-- TT Munching 等高级技巧
-- 常见陷阱与解决方案
-
-**适合**:
-
-- 需要编写复杂声明宏
-- 查阅模式匹配规则
-- 解决语法歧义问题
-
----
-
-### 2. [过程宏API参考](02_procedural_macro_api_reference.md) (586 行)
-
-**内容**:
-
-- TokenStream、TokenTree 完整API
-- Span 机制与卫生性控制
-- Ident、Literal、Punct、Group
-- Diagnostic API (错误报告)
-- proc_macro vs proc_macro2
-
-**适合**:
-
-- 开发过程宏
-- 需要精确控制 Span
-- 优化错误消息位置
-
----
-
-### 3. [syn-quote参考](03_syn_quote_reference.md) (682 行)
-
-**内容**:
-
-- syn 解析 API 完整参考
-- DeriveInput、ItemFn 等核心类型
-- 属性处理与自定义解析
-- quote! 宏插值与重复语法
-- ToTokens trait 实现
-- 常见模式与最佳实践
-
-**适合**:
-
-- 使用 syn/quote 开发宏
-- 需要解析复杂 Rust 语法
-- 实现自定义解析逻辑
-
----
-
-### 4. [宏卫生性参考](04_macro_hygiene_reference.md) (532 行)
-
-**内容**:
-
-- 卫生性机制原理详解
-- 声明宏卫生性规则
-- Span 类型 (call_site, def_site, mixed_site)
-- 作用域规则与跨 crate 问题
-- 何时及如何打破卫生性
-- 调试技巧与最佳实践
-
-**适合**:
-
-- 理解宏作用域机制
-- 解决标识符冲突
-- 设计 DSL 宏
-
----
-
-## 📊 内容统计
-
-| 指标     | 数值                              |
-| :--- | :--- |
-| 文档数   | 4 个完整参考                      |
-| 总行数   | **2,368 行**                      |
-| 代码示例 | 150+ 个                           |
-| 覆盖主题 | 声明宏、过程宏、syn/quote、卫生性 |
-
----
-
-## 🎯 使用方式
-
-### 作为查阅手册
-
-**快速查阅**:
-
-- **查语法**: → [声明宏完整参考](01_declarative_macros_complete_reference.md)
-- **查API**: → [过程宏API参考](02_procedural_macro_api_reference.md)
-- **查库用法**: → [syn-quote参考](03_syn_quote_reference.md)
-- **查作用域**: → [宏卫生性参考](04_macro_hygiene_reference.md)
-
-### 系统学习
-
-**推荐阅读顺序**:
-
-1. [声明宏完整参考](01_declarative_macros_complete_reference.md) (2小时)
-2. [过程宏API参考](02_procedural_macro_api_reference.md) (2小时)
-3. [syn-quote参考](03_syn_quote_reference.md) (3小时)
-4. [宏卫生性参考](04_macro_hygiene_reference.md) (2小时)
-
-**总耗时**: 约 9 小时
-
----
-
-## ⏭️ 下一步
-
-完成 Tier 3 后，建议：
-
-1. **实践**: 结合 [Tier 2: 实践层](../tier_02_guides/README.md) 动手开发宏
-2. **深入**: 探索 [Tier 4: 高级层](../tier_04_advanced/README.md) 的元编程理论
-3. **项目**: 应用到实际项目中，如 DSL 构建或代码生成工具
-
----
-
-## 🔗 相关资源
-
-- **Tier 1**: 回到 [基础层](../tier_01_foundations/README.md) 复习概念
-- **Tier 2**: 参考 [实践层](../tier_02_guides/README.md) 查看应用场景
-- **Tier 4**: 深入 [高级层](../tier_04_advanced/README.md) 探索理论
-- **归档内容**: 查看 [archives](../archives) 获取历史技术参考
-
----
-
-## 🌟 Rust 1.93.0 宏新特性（兼容 Rust 1.90+ 特性）
-
-- ✅ 改进的宏错误消息（更精确的 Span）
-- ✅ 宏卫生性增强（mixed_site 稳定化）
-- ✅ 过程宏编译性能优化
-- ✅ 宏展开追踪改进（cargo expand）
-
----
-
-**维护状态**: 🟢 活跃维护中
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- 核心文档
+- 1. [声明宏完整参考](01_declarative_macros_complete_reference.md) (568 行)
+- 2. [过程宏API参考](02_procedural_macro_api_reference.md) (586 行)
+- 3. [syn-quote参考](03_syn_quote_reference.md) (682 行)
+- 4. [宏卫生性参考](04_macro_hygiene_reference.md) (532 行)
+- 内容统计
+- 使用方式
+- 作为查阅手册
+- 系统学习
+- ⏭️ 下一步

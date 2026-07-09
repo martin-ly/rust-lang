@@ -1,113 +1,19 @@
+> **EN**: Tier 3: 参考层 - 控制流与函数技术参考 (crate docs stub)
+> **Summary**: Stub pointing to the canonical authority page(s) for `Tier 3: 参考层 - 控制流与函数技术参考`. Practical examples remain in the crate.
+
 # Tier 3: 参考层 - 控制流与函数技术参考
 
-**难度**: ⭐⭐⭐
-**访问模式**: 按需查阅
-**适合人群**: 需要查找具体语法或实现细节的开发者
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/01_foundation/04_control_flow/07_control_flow.md`](../../../../concept/01_foundation/04_control_flow/07_control_flow.md)。
 
----
+本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-## 📚 本层内容
+## 主题导航
 
-Tier 3 提供全面、系统的技术参考文档，涵盖语法细节、标准库API、性能特性和最佳实践，作为日常开发的查阅手册。
-
-### 技术参考文档
-
-1. **[控制流参考](01_control_flow_reference.md)**
-   - 条件表达式完整语法
-   - 循环结构语法规范
-   - 分支跳转语义（break/continue/return）
-   - 控制流编译优化
-2. **[迭代器参考](02_iterators_reference.md)**
-   - Iterator trait 完整定义
-   - 适配器方法大全（map/filter/fold等）
-   - 消费器与收集器
-   - 自定义迭代器实现
-3. **[函数参考](03_functions_reference.md)**
-   - 函数签名完整语法
-   - 参数模式与生命周期
-   - 返回类型与 impl Trait
-   - 函数指针与闭包转换
-4. **[闭包参考](04_closures_reference.md)**
-   - Fn/FnMut/FnOnce trait
-   - 捕获语义（move/borrow）
-   - 闭包类型推断规则
-   - 异步闭包（Rust 1.96.1+）
-5. **[错误处理参考](05_error_handling_reference.md)**
-   - Result 与 Option API 完整文档
-   - Try trait 与 ? 运算符
-   - Error trait 实现指南
-   - 错误类型转换与传播
-
----
-
-## 🎯 使用指南
-
-### 快速查阅
-
-- **查语法**: 需要特定语法细节时，直接定位到相关章节
-- **查API**: 查找标准库方法签名与使用说明
-- **查性能**: 了解不同实现方式的性能特性
-- **查兼容性**: 确认 Rust 版本特性支持情况
-
-### 深度学习
-
-虽然定位为参考文档，但每个主题都提供：
-
-- 完整的概念解释
-- 详细的代码示例
-- 性能分析与对比
-- 常见陷阱与最佳实践
-
----
-
-## 📖 文档特色
-
-- **全面性**: 覆盖语法、API、性能、最佳实践
-- **准确性**: 对齐 Rust 1.93.0 与 Edition 2024
-- **可搜索**: 清晰的章节结构和索引
-- **示例丰富**: 每个概念配有完整代码示例
-
----
-
-## 🔗 相关资源
-
-- **Tier 1**: 回到 [基础层](../tier_01_foundations/README.md) 复习概念
-- **Tier 2**: 参考 [实践层](../tier_02_guides/README.md) 查看应用场景
-- **Tier 4**: 深入 [高级层](../tier_04_advanced/README.md) 探索理论
-
----
-
-## ⚡ 快速索引
-
-| 主题     | 文档             | 核心内容                  |
-| :--- | :--- | :--- || 控制流   | 01\_控制流参考   | if/match/loop 完整语法    |
-| 迭代器   | 02\_迭代器参考   | Iterator trait + 适配器   |
-| 函数     | 03\_函数参考     | 函数签名 + 生命周期       |
-| 闭包     | 04\_闭包参考     | Fn traits + 捕获语义      |
-| 错误处理 | 05\_错误处理参考 | Result/Option + Try trait |
-
----
-
-## 🌟 Rust 1.93.0 新特性
-
-- ✅ 异步闭包语法（`async |x| ...`）
-- ✅ `let-else` 稳定化
-- ✅ `Option::is_some_and` / `is_none_or`
-- ✅ 返回位置 impl Trait in Traits (RPITIT)
-- ✅ 从不返回类型 `!` 完全稳定
-
----
-
-**最后更新**: 2025-12-11
-**维护状态**: 🟢 活跃维护中
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| Control Flow Reference | [concept/01_foundation/04_control_flow/07_control_flow.md](../../../../concept/01_foundation/04_control_flow/07_control_flow.md) |
+| Functions | [concept/01_foundation/07_modules_and_items/12_functions.md](../../../../concept/01_foundation/07_modules_and_items/12_functions.md) |
+| Iterators | [concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md](../../../../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) |

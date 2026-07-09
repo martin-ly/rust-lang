@@ -1,62 +1,14 @@
 # Tier 2: 实践指南层
 
-> **定位**: 实践导向的模式指南
-> **目标读者**: 初学者和进阶者
-> **完成状态**: ✅ 100% (链接现有文档)
+**EN**: Design Patterns
+**Summary**: Stub redirecting to the canonical concept page for `Design Patterns`. Crate-specific API notes remain here; general explanations live in `concept/`.
 
----
+> **权威来源**: [06_ecosystem/03_design_patterns/02_patterns.md](../../../../concept/06_ecosystem/03_design_patterns/02_patterns.md)
 
-## 📚 核心指南
+本文件为 crate 文档占位页。通用 Rust 概念解释已迁移/整合至上方的 `concept/` 权威页；如需深入了解，请访问权威来源。
 
-| 主题   | 文档  | 状态 |
-| :--- | :--- | :--- |
-| **综合指南** | [COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) | ⭐⭐⭐⭐⭐ |
-| **实战示例** | [RUST_190_EXAMPLES_COLLECTION.md](../rust_190_examples_collection.md)               | ⭐⭐⭐⭐   |
-| **可观测性** | [observability.md](../observability.md)                                             | ⭐⭐⭐     |
-| **基准测试** | [benchmarking.md](../benchmarking.md)                                               | ⭐⭐⭐     |
+## 主题速览
 
----
-
-## 🔗 模式分类
-
-**创建型模式** (Creational):
-
-- 单例、工厂、建造者、原型
-
-**结构型模式** (Structural):
-
-- 适配器、装饰器、代理、外观
-
-**行为型模式** (Behavioral):
-
-- 观察者、策略、命令、状态
-
-**并发模式** (Concurrency):
-
-- Actor、Reactor、CSP、Future/Promise
-
----
-
-**返回**: [Tier 1](../tier_01_foundations/README.md) | **下一步**: [Tier 3](../tier_03_references/README.md)
-
----
-
-## 🔗 Tier 1 基础层链接
-
-**快速参考**:
-
-- [项目概览](../tier_01_foundations/01_project_overview.md) - 模块介绍、学习路径
-- [主索引导航](../tier_01_foundations/02_navigation.md) - 完整导航系统
-- [术语表](../tier_01_foundations/03_glossary.md) - 核心术语参考
-- [常见问题](../tier_01_foundations/04_faq.md) - FAQ 解答
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- 核心指南
+- 模式分类
+- Tier 1 基础层链接

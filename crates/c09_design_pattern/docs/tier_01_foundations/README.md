@@ -1,48 +1,13 @@
 # Tier 1: 基础概念层
 
-> **定位**: 快速入门和基础参考
-> **目标读者**: 所有学习者
-> **预计学习时间**: 2-4小时
-> **完成状态**: ✅ 100% 完成
+**EN**: Design Patterns
+**Summary**: Stub redirecting to the canonical concept page for `Design Patterns`. Crate-specific API notes remain here; general explanations live in `concept/`.
 
----
+> **权威来源**: [06_ecosystem/03_design_patterns/02_patterns.md](../../../../concept/06_ecosystem/03_design_patterns/02_patterns.md)
 
-## 📚 文档列表
+本文件为 crate 文档占位页。通用 Rust 概念解释已迁移/整合至上方的 `concept/` 权威页；如需深入了解，请访问权威来源。
 
-| 文档                                 | 描述                        | 状态    |
-| :--- | :--- | :--- |
-| [01\_项目概览](01_project_overview.md)     | 模块介绍、GoF模式、并发模式 | ✅ 完成 |
-| [02\_主索引导航](02_navigation.md) | 学习路径、文档导航          | ✅ 完成 |
-| [03\_术语表](03_glossary.md)         | 设计模式术语                | ✅ 完成 |
-| [04\_常见问题](04_faq.md)     | 新手常见问题                | ✅ 完成 |
+## 主题速览
 
----
-
-## 🎯 学习目标
-
-- ✅ 理解设计模式的核心概念
-- ✅ 掌握GoF 23种经典模式
-- ✅ 了解并发与异步模式
-- ✅ 规划适合自己的学习路径
-
----
-
-**下一步**: [Tier 2 实践指南](../tier_02_guides/README.md)
-
----
-
-**文档维护**: Documentation Team
-**创建日期**: 2025-10-22
-**最后更新**: 2025-12-25
-**适用版本**: Rust 1.96.1+
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- 文档列表
+- 学习目标

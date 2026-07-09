@@ -1,12 +1,16 @@
+> **EN**: c13 Embedded Systems Master Index (c13_embedded example index)
+> **Summary**: Stub master index pointing to the canonical concept authority for Rust embedded systems. Lists crate docs and source modules.
+
 # c13 嵌入式系统 - 主索引
 
-> **版本**: 1.0
-> **适用版本**: Rust 1.96.1+
-> **最后更新**: 2026-06-28
+> **权威来源**: `no_std`、裸机编程、内存映射寄存器、硬件抽象层（PAC/HAL/BSP）、实时系统、Embassy 等完整解释见
+> [`concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md`](../../../concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md)。
 
----
+本文件原为 `c13_embedded` crate 的通用嵌入式系统主索引。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/06_ecosystem/05_systems_and_embedded/`，此处仅保留索引与
+canonical 链接。具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-## 目录
+## 文档导航
 
 - [c13 嵌入式系统 - 文档指南](README.md)
 - [一页纸总结](one_page_summary.md)
@@ -14,44 +18,13 @@
 - [build-std 与自定义目标](build_std_guide.md)
 - [embedded-hal 1.0 迁移指南](embedded_hal_1_0_migration.md)
 
-## 按主题浏览
+## 主题列表
 
-### 基础
-
-- [裸机基础指南](bare_metal_guide.md) - `no_std`、启动流程、链接脚本
-- [build-std 与自定义目标](build_std_guide.md) - 自定义 target 与 `build-std`
-
-### 硬件抽象
-
-- [embedded-hal 1.0 迁移指南](embedded_hal_1_0_migration.md) - HAL trait 与迁移实践
-
-### 代码模块
-
-- `src/bare_metal_basics.rs`
-- `src/memory_mapped_registers.rs`
-- `src/uart_driver.rs`
-- `src/interrupt_handling.rs`
-- `src/hal_design_patterns.rs`
-- `src/ffi_c_interop.rs`
-- `src/rtic_framework.rs`
-- `src/embassy_framework.rs`
-
-## 编译与测试
-
-```bash
-# Host 检查
-cargo check -p c13_embedded
-
-# 运行演示
-cargo run -p c13_embedded --bin embedded_demo
-
-# 嵌入式目标
-cargo check -p c13_embedded --target thumbv7m-none-eabi --features embedded
-```
-
----
-
-**文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-28
-**状态**: ✅ 基础索引
+- `no_std`、启动流程、链接脚本
+- 内存映射 I/O（MMIO）与外设寄存器访问
+- UART 通用异步收发器
+- 中断与中断向量表
+- 硬件抽象层（HAL）trait 与迁移实践
+- FFI 与 C 代码 / 链接脚本互操作
+- RTIC 实时中断驱动框架
+- Embassy 异步嵌入式框架

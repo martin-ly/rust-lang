@@ -1,123 +1,23 @@
-﻿# Tier 4: 高级生命周期模式
+> **EN**: Advanced Lifetime Patterns
+> **Summary**: Advanced-lifetime stub pointing to the canonical authority. In-depth examples remain in the c01 crate.
 
-> **文档类型**: 高级主题
-> **难度**: ⭐⭐⭐⭐⭐
-> **适用版本**: Rust 1.96.1+
+# Lifetimes 高级主题 — Crate Docs Stub
 
----
+> **权威来源**: [Lifetimes 高级主题](../../../../concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md)
 
-## 📊 目录
+本文件原为对应 crate 的通用概念教程/参考。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已在 `concept/` 中维护为单一权威来源；此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/` 目录。
 
-- [Tier 4: 高级生命周期模式](#tier-4-高级生命周期模式)
-  - [📊 目录](#-目录)
-  - [1. 高阶生命周期](#1-高阶生命周期)
-    - [Higher-Rank Trait Bounds (HRTB)](#higher-rank-trait-bounds-hrtb)
-  - [2. 生命周期子类型](#2-生命周期子类型)
-  - [3. 协变与逆变](#3-协变与逆变)
-    - [协变 (Covariance)](#协变-covariance)
-    - [逆变 (Contravariance)](#逆变-contravariance)
-  - [4. 生命周期约束](#4-生命周期约束)
-  - [5. GAT (Generic Associated Types)](#5-gat-generic-associated-types)
+## 主题导航
 
-## 1. 高阶生命周期
+| 主题 | 权威来源 |
+| :--- | :--- |
+| 高阶生命周期 / HRTB | [30_lifetimes_advanced.md#十三lifetime-elision-的完整形式化描述](30_lifetimes_advanced.md#十三lifetime-elision-的完整形式化描述) |
+| 生命周期子类型 | [30_lifetimes_advanced.md#42-引理生命周期构成偏序集--outlives-关系可传递](30_lifetimes_advanced.md#42-引理生命周期构成偏序集--outlives-关系可传递) |
+| 协变与逆变 | [30_lifetimes_advanced.md#45-定理variance-子类型安全--生命周期替换的合法性](30_lifetimes_advanced.md#45-定理variance-子类型安全--生命周期替换的合法性) |
+| GATs | [30_lifetimes_advanced.md#十五lending-iterator-的完整-gats--hrtb-案例](30_lifetimes_advanced.md#十五lending-iterator-的完整-gats--hrtb-案例) |
 
-从引用一致性视角看，高阶生命周期（HRTB）是**类型层面的逻辑量化**，用于表达对任意生命周期的约束关系，而非内存地址的量化。
+## 本地资源
 
-### Higher-Rank Trait Bounds (HRTB)
-
-```rust
-// for<'a> 语法
-fn apply<F>(f: F)
-where
-    F: for<'a> Fn(&'a str) -> &'a str,
-{
-    let s = "hello";
-    println!("{}", f(s));
-}
-
-// 使用
-apply(|s| s);
-```
-
----
-
-## 2. 生命周期子类型
-
-从引用一致性视角看，生命周期子类型表示的是**能力范围的逻辑关系**，而非物理内存的有效时间段。
-如果 `'a: 'b`，表示 `'a` 的能力范围包含 `'b` 的能力范围。
-
-```rust
-// 'static 是所有生命周期的子类型
-fn longest<'a>(x: &'a str, y: &'static str) -> &'a str {
-    if x.len() > y.len() { x } else { y }
-}
-```
-
----
-
-## 3. 协变与逆变
-
-从引用一致性视角看，协变和逆变表示的是**能力范围的逻辑关系**，而非物理内存地址的关系。
-
-### 协变 (Covariance)
-
-```rust
-// 如果 'a: 'b，则 &'a T 可以转换为 &'b T
-fn covariant<'a, 'b: 'a>(x: &'a str) -> &'b str {
-    x
-}
-```
-
-### 逆变 (Contravariance)
-
-```rust
-// 函数参数是逆变的
-trait Trait<'a> {
-    fn method(&self, x: &'a str);
-}
-```
-
----
-
-## 4. 生命周期约束
-
-```rust
-// where 子句中的生命周期约束
-fn complex<'a, 'b, T>(x: &'a T, y: &'b T) -> &'a T
-where
-    T: 'a + 'b,
-{
-    x
-}
-```
-
----
-
-## 5. GAT (Generic Associated Types)
-
-```rust
-trait StreamingIterator {
-    type Item<'a>
-    where
-        Self: 'a;
-
-    fn next(&mut self) -> Option<Self::Item<'_>>;
-}
-```
-
----
-
-**相关文档**:
-
-- [Tier 3: 03\_生命周期参考](../tier_03_references/03_lifetimes_reference.md)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- [Crate README](../../../../crates/c01_ownership_borrow_scope/README.md) — 本 crate 总览与入口

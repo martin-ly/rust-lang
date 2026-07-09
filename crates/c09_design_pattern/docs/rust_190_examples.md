@@ -1,5 +1,12 @@
 # Rust 1.90 设计模式示例集 (Rust 1.90 Design Pattern Examples)
 
+> **权威来源**: [Design Patterns](../../concept/06_ecosystem/03_design_patterns)
+> **文档类型**: 代码示例 / 实践项目 / 教程（crate-specific）
+
+本文件包含与 `Design Patterns` 相关的可运行代码示例、练习项目或教程步骤。通用概念解释请查阅上方权威来源；此处仅保留 crate 级别的示例实现与学习活动。
+
+---
+
 > **文档定位**: 全面展示 Rust 1.90 最新特性在设计模式中的应用
 > **适用版本**: Rust 1.90+ (Edition 2024)
 > **最后更新**: 2025-10-19

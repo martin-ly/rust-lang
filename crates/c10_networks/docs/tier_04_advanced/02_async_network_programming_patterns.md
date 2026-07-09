@@ -1,161 +1,23 @@
-# 异步网络编程模式
+> **EN**: Async Network Programming Patterns (c10_networks example index)
+> **Summary**: A stub page pointing to the canonical concept authority for async network programming patterns. The c10_networks crate provides runnable async networking examples.
 
-> **文档版本**: v1.0.0
-> **更新日期**: 2025-12-11
-> **Rust 版本**: 1.96.1+
-> **文档层级**: Tier 4 - 高级主题
+# 异步网络编程模式（c10_networks 示例索引）
 
-[完整内容：Actor模式、Reactor模式、Proactor模式、CSP模式、异步流组合子、背压机制、异步取消、Future组合器、Select模式、超时处理、错误传播、资源管理、异步锁、异步通道、协程调度、工作窃取算法、异步性能优化]
+> **权威来源**: Actor/Reactor/Proactor/CSP 模式、背压、异步取消、Future 组合、Select/超时/错误传播等完整解释见
+> [`concept/06_ecosystem/09_networking/04_network_programming_quick_start.md`](../../../concept/06_ecosystem/09_networking/04_network_programming_quick_start.md)。
 
-## 📋 目录
+本文件原为 `c10_networks` crate 的通用异步网络模式教程。根据 AGENTS.md §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/06_ecosystem/09_networking/`，此处仅保留索引与 canonical 链接。
 
-- [异步网络编程模式](#异步网络编程模式)
-  - [📋 目录](#-目录)
-  - [📐 知识结构](#-知识结构)
-    - [概念定义](#概念定义)
-    - [属性特征](#属性特征)
-    - [关系连接](#关系连接)
-    - [思维导图](#思维导图)
-    - [多维概念对比矩阵](#多维概念对比矩阵)
-    - [决策树图](#决策树图)
-  - [**下一步**: 03\_分布式网络系统.md](#下一步-03_分布式网络系统md)
+## 本 crate 相关示例
 
----
+- `crates/c10_networks/examples/`：TCP/UDP、HTTP、WebSocket、QUIC 等可运行示例。
+- `crates/c10_networks/src/bin/`：网络协议与异步模式演示程序。
 
-## 📐 知识结构
+## 快速导航
 
-### 概念定义
-
-**异步网络编程模式 (Async Network Programming Patterns)**:
-
-- **定义**: Rust 1.92.0 异步网络编程模式，包括 Actor 模式、Reactor 模式、Proactor 模式、CSP 模式、异步流组合子、背压机制、异步取消、Future 组合器、Select 模式、超时处理、错误传播、资源管理、异步锁、异步通道、协程调度、工作窃取算法、异步性能优化等
-- **类型**: 高级主题文档
-- **范畴**: 网络编程、异步编程
-- **版本**: Rust 1.96.1+ (Edition 2024)
-- **相关概念**: Actor 模型、Reactor 模式、Proactor 模式、CSP、异步流、背压、Future、协程调度、工作窃取
-
-### 属性特征
-
-**核心属性**:
-
-- **Actor 模式**: 消息传递、独立 Actor
-- **Reactor 模式**: 事件循环、I/O 多路复用
-- **Proactor 模式**: 异步 I/O、完成回调
-- **CSP 模式**: 通道通信、顺序进程
-- **异步流组合子**: map、filter、fold
-- **背压机制**: 流量控制、背压传播
-- **异步取消**: 取消令牌、优雅关闭
-- **Future 组合器**: and_then、or_else、select
-- **Select 模式**: 多路选择、优先级
-- **超时处理**: 超时控制、超时取消
-- **错误传播**: 错误链、错误恢复
-- **资源管理**: RAII、异步 Drop
-- **异步锁**: Mutex、RwLock
-- **异步通道**: mpsc、broadcast
-- **协程调度**: 任务调度、优先级调度
-- **工作窃取**: 工作窃取队列、负载均衡
-- **异步性能优化**: 零拷贝、批处理、SIMD
-
-**Rust 1.92.0 新特性**:
-
-- **改进的异步闭包**: `async ||` 语法支持
-- **增强的异步运行时**: 更好的异步运行时性能
-- **优化的异步 I/O**: 更高效的异步 I/O 支持
-
-**性能特征**:
-
-- **高并发**: 支持大规模并发连接
-- **低延迟**: 异步处理降低延迟
-- **适用场景**: 高性能网络应用、实时系统、微服务架构
-
-### 关系连接
-
-**组合关系**:
-
-- 异步网络编程模式 --[covers]--> 异步网络编程完整内容
-- 高性能网络应用 --[uses]--> 异步网络编程模式
-
-**依赖关系**:
-
-- 异步网络编程模式 --[depends-on]--> 异步运行时
-- 网络应用 --[depends-on]--> 异步网络编程模式
-
-### 思维导图
-
-```text
-异步网络编程模式
-│
-├── Actor 模式
-│   └── 消息传递
-├── Reactor 模式
-│   └── 事件循环
-├── Proactor 模式
-│   └── 异步 I/O
-├── CSP 模式
-│   └── 通道通信
-├── 异步流组合子
-│   ├── map
-│   └── filter
-├── 背压机制
-│   └── 流量控制
-├── 异步取消
-│   └── 取消令牌
-├── Future 组合器
-│   └── and_then
-├── Select 模式
-│   └── 多路选择
-└── 协程调度
-    └── 工作窃取
-```
-### 多维概念对比矩阵
-
-| 异步模式          | 性能 | 复杂度 | 适用场景   | 类型安全 | Rust 1.92.0 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Actor 模式**    | 中   | 中     | 分布式系统 | ✅       | ✅          |
-| **Reactor 模式**  | 高   | 中     | 高并发 I/O | ✅       | ✅          |
-| **Proactor 模式** | 最高 | 高     | 异步 I/O   | ✅       | ✅          |
-| **CSP 模式**      | 中   | 低     | 通道通信   | ✅       | ✅          |
-| **异步流**        | 高   | 中     | 流式处理   | ✅       | ✅          |
-| **工作窃取**      | 最高 | 高     | 任务调度   | ✅       | ✅          |
-
-### 决策树图
-
-```text
-选择异步网络编程模式
-│
-├── 是否需要消息传递？
-│   ├── 是 → Actor 模式 / CSP 模式
-│   └── 否 → 继续判断
-│       ├── 是否需要高并发 I/O？
-│       │   ├── 是 → Reactor 模式 / Proactor 模式
-│       │   └── 否 → 继续判断
-│       │       ├── 是否需要流式处理？
-│       │       │   ├── 是 → 异步流组合子
-│       │       │   └── 否 → Future 组合器
-```
----
-
-**核心主题**:
-
-1. Actor模式实现
-2. Reactor/Proactor模式
-3. CSP通道模型
-4. 异步流处理
-5. 背压与流控
-6. Future组合与取消
-7. 异步错误处理
-8. 协程调度器
-9. Work Stealing算法
-10. 异步性能优化
-
-**下一步**: [03\_分布式网络系统.md](03_distributed_network_systems.md)
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| 异步网络编程模式 | [`concept/06_ecosystem/09_networking/04_network_programming_quick_start.md`](../../../concept/06_ecosystem/09_networking/04_network_programming_quick_start.md) |
+| 异步编程 | [`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md) |
+| 并发模式 | [`concept/03_advanced/00_concurrency/10_concurrency_patterns.md`](../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md) |

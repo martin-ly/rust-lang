@@ -51,6 +51,11 @@
     - [10.3 边界测试：`crossbeam::channel` 的关闭检测与迭代终止（逻辑错误）](#103-边界测试crossbeamchannel-的关闭检测与迭代终止逻辑错误)
     - [10.4 边界测试：Send/Sync 的 auto trait 边界与线程安全（编译错误）](#104-边界测试sendsync-的-auto-trait-边界与线程安全编译错误)
   - [参考来源](#参考来源)
+  - [补充视角：并发算法模式](#补充视角并发算法模式)
+    - [并发计算模型](#并发计算模型)
+    - [无锁数据结构](#无锁数据结构)
+    - [并行设计模式](#并行设计模式)
+    - [并发算法分析](#并发算法分析)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -69,6 +74,39 @@
   - [补充视角：并发设计模式实践](#补充视角并发设计模式实践)
     - [模式特征对比](#模式特征对比)
     - [选择建议](#选择建议)
+  - [迁移内容（来自 `crates/c05_threads/docs/02_message_passing.md`）](#迁移内容来自-cratesc05_threadsdocs02_message_passingmd)
+  - [🎯 消息传递核心知识图谱](#-消息传递核心知识图谱)
+    - [消息传递概念关系图](#消息传递概念关系图)
+    - [通道数据流图](#通道数据流图)
+  - [📊 通道类型多维对比](#-通道类型多维对比)
+    - [标准库 vs 第三方库对比](#标准库-vs-第三方库对比)
+    - [通道性能特征对比](#通道性能特征对比)
+    - [接收方法对比](#接收方法对比)
+  - [💡 思维导图：通道选择策略](#-思维导图通道选择策略)
+  - [📋 快速参考](#-快速参考)
+    - [常用通道API](#常用通道api)
+    - [错误类型速查](#错误类型速查)
+  - [迁移内容（来自 `crates/c05_threads/docs/05_message_passing.md`）](#迁移内容来自-cratesc05_threadsdocs05_message_passingmd)
+  - [概述](#概述)
+  - [Actor模型实现](#actor模型实现)
+    - [1. 基础Actor框架](#1-基础actor框架)
+    - [2. 高级Actor特性](#2-高级actor特性)
+      - [2.1 监督策略](#21-监督策略)
+      - [2.2 路由Actor](#22-路由actor)
+  - [高级通道通信](#高级通道通信)
+    - [1. 类型安全通道](#1-类型安全通道)
+    - [2. 背压控制通道](#2-背压控制通道)
+  - [发布订阅模式](#发布订阅模式)
+    - [1. 类型安全的事件总线](#1-类型安全的事件总线)
+    - [2. 异步事件流](#2-异步事件流)
+  - [总结](#总结)
+  - [这些模式充分利用了Rust 1.89的新特性，提供了高效、安全的消息传递解决方案](#这些模式充分利用了rust-189的新特性提供了高效安全的消息传递解决方案)
+  - [补充视角：C05 Crate 并发模式实践](#补充视角c05-crate-并发模式实践)
+    - [并行搜索提前返回](#并行搜索提前返回)
+    - [细粒度锁：分桶缓存](#细粒度锁分桶缓存)
+    - [读写锁分离的并发索引](#读写锁分离的并发索引)
+    - [基于 `MaybeUninit` 的无锁单生产者单消费者队列](#基于-maybeuninit-的无锁单生产者单消费者队列)
+    - [线程池与异步集成](#线程池与异步集成)
 
 ---
 
@@ -765,6 +803,37 @@ fn main() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 
+## 补充视角：并发算法模式
+
+> migrated from `crates/c08_algorithms/docs/tier_04_advanced/02_concurrent_algorithm_patterns.md`
+
+### 并发计算模型
+
+| 模型 | 核心思想 | Rust 表达 | 适用场景 |
+|:---|:---|:---|:---|
+| Actor 模型 | 独立计算单元通过消息传递通信 | `tokio::sync::mpsc` + 任务 | 分布式/容错系统 |
+| CSP | 通过 channel 进行同步通信 | `std::sync::mpsc` / `crossbeam::channel` | 流水线、素数筛 |
+| Reactor 模式 | 事件驱动的异步 I/O 处理 | `tokio::net::TcpListener` + `tokio::spawn` | 高并发网络服务 |
+
+### 无锁数据结构
+
+无锁（lock-free）数据结构通过原子操作（`AtomicPtr`、`AtomicUsize`）而非互斥锁实现并发访问，典型代表为 **Michael-Scott 无锁队列**。关键问题包括：
+
+- **ABA 问题**：CAS 检查通过但中间状态被修改；解决方案包括带标签指针（tagged pointer）和 Hazard Pointer。
+- **内存序**：`Acquire`/`Release` 配对保证 happens-before 关系，`SeqCst` 提供全局顺序。
+
+### 并行设计模式
+
+- **数据并行**：同一操作作用于数据的不同部分（`rayon::join` / `par_iter`）。
+- **任务并行**：独立任务分发到多个线程（`tokio::spawn`）。
+- **流水线并行**：阶段化计算通过 channel 传递中间结果。
+
+### 并发算法分析
+
+- **加速比 (Speedup)**：S(p) = T₁ / Tₚ
+- **效率 (Efficiency)**：E(p) = S(p) / p
+- **工作深度模型**：工作 (Work) = 总操作数；深度 (Span) = 关键路径长度。
+
 ## 认知路径
 
 > **认知路径**: 从 L0 基础概念出发，经由本节的 **并发 模式：从消息 传递到锁自由的数据结构** 核心原理，通向 L2 进阶模式与 L3 工程实践。
@@ -1196,3 +1265,985 @@ fn transfer(from: &Account, to: &Account, amount: i32) {
 - 问题是否可递归分解？是 → Fork-Join。
 - 是否需要低延迟共享？是 → 共享状态 + 锁/原子操作。
 - 任务到达与处理速率不匹配？使用有界队列实现背压。
+
+---
+
+## 迁移内容（来自 `crates/c05_threads/docs/02_message_passing.md`）
+
+> <!-- migrated from crates/c05_threads/docs/02_message_passing.md -->
+>
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/02_message_passing.md` 迁移至本权威页。
+
+## 🎯 消息传递核心知识图谱
+
+### 消息传递概念关系图
+
+```mermaid
+graph TB
+    subgraph "消息传递范式"
+        MP[Message Passing]
+        MP --> CSP[CSP理论]
+        MP --> Channel[通道抽象]
+        MP --> Ownership[所有权转移]
+
+        CSP --> Philosophy["不共享内存"]
+        CSP --> Comm["通过通信共享"]
+
+        Channel --> MPSC[MPSC通道]
+        Channel --> Crossbeam[crossbeam通道]
+        Channel --> Async[异步通道]
+
+        Ownership --> Send[Send Trait]
+        Ownership --> Safety[编译时安全]
+    end
+
+    subgraph "通道类型"
+        MPSC --> Unbounded[无界通道]
+        MPSC --> Bounded[有界通道]
+
+        Crossbeam --> CBUnbounded[无界]
+        Crossbeam --> CBBounded[有界]
+        Crossbeam --> Select[select!宏]
+
+        Async --> Tokio[tokio::sync]
+        Async --> AsyncStd[async_std]
+    end
+
+    subgraph "使用模式"
+        Pattern[并发模式]
+        Pattern --> ProducerConsumer[生产者-消费者]
+        Pattern --> WorkQueue[工作队列]
+        Pattern --> Pipeline[流水线]
+        Pattern --> PubSub[发布-订阅]
+    end
+
+    MPSC -.适用于.-> ProducerConsumer
+    Crossbeam -.适用于.-> WorkQueue
+    Async -.适用于.-> Pipeline
+
+    style MP fill:#ff6b6b,color:#fff
+    style Channel fill:#4ecdc4,color:#fff
+    style Pattern fill:#95e1d3,color:#333
+```
+
+### 通道数据流图
+
+```mermaid
+sequenceDiagram
+    participant P1 as 生产者1
+    participant P2 as 生产者2
+    participant Ch as 通道
+    participant C as 消费者
+
+    Note over Ch: MPSC: 多生产者单消费者
+
+    P1->>Ch: send(msg1)
+    Note over Ch: 所有权转移
+    P2->>Ch: send(msg2)
+
+    Ch->>C: recv() -> msg1
+    Note over C: 获得所有权
+
+    Ch->>C: recv() -> msg2
+
+    Note over P1,C: Rust 1.92.0: 优化的通道性能
+```
+
+---
+
+## 📊 通道类型多维对比
+
+### 标准库 vs 第三方库对比
+
+| 特性 | std::mpsc  | crossbeam  | tokio::sync | flume      |
+| :--- | :--- | :--- | :--- | :--- || **性能**        | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐    | ⭐⭐⭐⭐⭐ |
+| **功能**        | 基础       | 丰富       | 异步        | 全面       |
+| **MPMC**        | ❌         | ✅         | ✅          | ✅         |
+| **select**      | ❌         | ✅         | ✅          | ✅         |
+| **无锁**        | 部分       | ✅         | ✅          | ✅         |
+| **学习曲线**    | ⭐         | ⭐⭐⭐     | ⭐⭐⭐⭐    | ⭐⭐       |
+| **生态成熟度**  | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐  | ⭐⭐⭐⭐   |
+| **Rust 1.92.0** | ✅ 优化    | ✅ 兼容    | ✅ 最新     | ✅ 优化    |
+
+### 通道性能特征对比
+
+| 通道类型 | 延迟 | 吞吐量 | 内存     | 适用场景   |
+| :--- | :--- | :--- | :--- | :--- || **Unbounded**     | 低   | 高     | 动态增长 | 突发负载   |
+| **Bounded(N)**    | 中   | 很高   | 固定     | 稳定负载   |
+| **Rendezvous(0)** | 高   | 低     | 极小     | 同步点     |
+| **priority**      | 中   | 中     | 中       | 优先级任务 |
+
+### 接收方法对比
+
+| 方法 | 阻塞? | 超时? | 批量? | Rust 1.92.0改进 |
+| :--- | :--- | :--- | :--- | :--- || `recv()`         | ✅    | ❌    | ❌    | 性能优化        |
+| `try_recv()`     | ❌    | ❌    | ❌    | -               |
+| `recv_timeout()` | ✅    | ✅    | ❌    | 更精确          |
+| `try_iter()`     | ❌    | ❌    | ✅    | 新增            |
+| `iter()`         | ✅    | ❌    | ✅    | -               |
+
+## 💡 思维导图：通道选择策略
+
+```mermaid
+mindmap
+  root((通道选择))
+    性能需求
+      高吞吐
+        crossbeam
+        flume
+      低延迟
+        无锁实现
+        无界通道
+      内存受限
+        有界通道
+        固定容量
+
+    功能需求
+      MPSC
+        std::mpsc
+        简单场景
+      MPMC
+        crossbeam
+        复杂场景
+      select
+        crossbeam
+        多通道
+      优先级
+        自定义实现
+        priority_queue
+
+    生态要求
+      纯Rust
+        std::mpsc
+        crossbeam
+      异步
+        tokio
+        async_std
+      跨平台
+        标准库
+        成熟库
+```
+
+---
+
+## 📋 快速参考
+
+### 常用通道API
+
+| API  | 行为 | 阻塞? | 返回类型  |
+| :--- | :--- | :--- | :--- |
+| `tx.send(msg)`       | 发送消息   | 可能  | `Result<(), SendError<T>>`    |
+| `rx.recv()`          | 接收消息   | ✅    | `Result<T, RecvError>`        |
+| `rx.try_recv()`      | 非阻塞接收 | ❌    | `Result<T, TryRecvError>`     |
+| `rx.recv_timeout(d)` | 超时接收   | ✅    | `Result<T, RecvTimeoutError>` |
+| `rx.iter()`          | 迭代接收   | ✅    | `Iter<T>`                     |
+
+### 错误类型速查
+
+| 错误 | 原因 | 处理方式  |
+| :--- | :--- | :--- |
+| `SendError`                  | 接收端已关闭 | 停止发送或重连 |
+| `RecvError`                  | 发送端已关闭 | 优雅退出       |
+| `TryRecvError::Empty`        | 通道暂时为空 | 稍后重试       |
+| `TryRecvError::Disconnected` | 发送端已关闭 | 优雅退出       |
+| `RecvTimeoutError::Timeout`  | 超时未收到   | 重试或降级     |
+
+---
+
+## 迁移内容（来自 `crates/c05_threads/docs/05_message_passing.md`）
+
+> <!-- migrated from crates/c05_threads/docs/05_message_passing.md -->
+>
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/05_message_passing.md` 迁移至本权威页。
+
+## 概述
+
+本文档介绍了Rust 1.89中支持的高级消息传递模式，包括Actor模型、通道通信、发布订阅等现代并发通信机制。
+
+## Actor模型实现
+
+### 1. 基础Actor框架
+
+利用Rust 1.89的改进异步特性实现高性能Actor系统：
+
+```rust,ignore
+use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
+use tokio::sync::mpsc;
+use tokio::time::{sleep, Duration};
+
+#[derive(Debug, Clone)]
+pub enum ActorMessage {
+    Text(String),
+    Number(u64),
+    Command(String),
+    Shutdown,
+}
+
+pub trait Actor: Send + 'static {
+    type Message: Send + 'static;
+
+    async fn handle_message(&mut self, message: Self::Message);
+    async fn on_start(&mut self) {}
+    async fn on_stop(&mut self) {}
+}
+
+pub struct ActorRef<M> {
+    sender: mpsc::UnboundedSender<M>,
+}
+
+impl<M: Send + 'static> ActorRef<M> {
+    pub fn new(sender: mpsc::UnboundedSender<M>) -> Self {
+        Self { sender }
+    }
+
+    pub async fn send(&self, message: M) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        self.sender.send(message)
+            .map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>)
+    }
+
+    pub fn try_send(&self, message: M) -> Result<(), mpsc::error::TrySendError<M>> {
+        self.sender.try_send(message)
+    }
+}
+
+pub struct ActorSystem {
+    actors: Arc<Mutex<HashMap<String, Box<dyn std::any::Any + Send + Sync>>>>,
+}
+
+impl ActorSystem {
+    pub fn new() -> Self {
+        Self {
+            actors: Arc::new(Mutex::new(HashMap::new())),
+        }
+    }
+
+    pub async fn spawn<A>(&self, name: String, actor: A) -> Result<ActorRef<A::Message>, Box<dyn std::error::Error + Send + Sync>>
+    where
+        A: Actor + 'static,
+    {
+        let (sender, mut receiver) = mpsc::unbounded_channel();
+        let actor_ref = ActorRef::new(sender);
+
+        let mut actor = actor;
+        let name_clone = name.clone();
+
+        // 启动Actor任务
+        tokio::spawn(async move {
+            actor.on_start().await;
+
+            while let Some(message) = receiver.recv().await {
+                actor.handle_message(message).await;
+            }
+
+            actor.on_stop().await;
+        });
+
+        // 注册Actor
+        self.actors.lock().unwrap().insert(name, Box::new(actor_ref.clone()));
+
+        Ok(actor_ref)
+    }
+
+    pub fn get_actor<M>(&self, name: &str) -> Option<ActorRef<M>>
+    where
+        M: Send + 'static,
+    {
+        self.actors.lock().unwrap()
+            .get(name)
+            .and_then(|any| any.downcast_ref::<ActorRef<M>>())
+            .cloned()
+    }
+}
+
+// 示例Actor实现
+pub struct EchoActor {
+    name: String,
+    message_count: u64,
+}
+
+impl EchoActor {
+    pub fn new(name: String) -> Self {
+        Self {
+            name,
+            message_count: 0,
+        }
+    }
+}
+
+impl Actor for EchoActor {
+    type Message = ActorMessage;
+
+    async fn handle_message(&mut self, message: Self::Message) {
+        self.message_count += 1;
+
+        match message {
+            ActorMessage::Text(text) => {
+                println!("[{}] Echo: {}", self.name, text);
+            }
+            ActorMessage::Number(num) => {
+                println!("[{}] Number: {}", self.name, num);
+            }
+            ActorMessage::Command(cmd) => {
+                println!("[{}] Command: {}", self.name, cmd);
+            }
+            ActorMessage::Shutdown => {
+                println!("[{}] Shutting down...", self.name);
+            }
+        }
+    }
+
+    async fn on_start(&mut self) {
+        println!("[{}] Actor started", self.name);
+    }
+
+    async fn on_stop(&mut self) {
+        println!("[{}] Actor stopped, processed {} messages", self.name, self.message_count);
+    }
+}
+```
+
+### 2. 高级Actor特性
+
+#### 2.1 监督策略
+
+```rust,ignore
+use std::sync::atomic::{AtomicU32, Ordering};
+
+#[derive(Debug, Clone)]
+pub enum SupervisionStrategy {
+    OneForOne,    // 只重启失败的Actor
+    AllForOne,    // 重启所有子Actor
+    Restart,      // 重启策略
+    Stop,         // 停止策略
+}
+
+pub struct Supervisor {
+    strategy: SupervisionStrategy,
+    max_restarts: AtomicU32,
+    restart_window: Duration,
+}
+
+impl Supervisor {
+    pub fn new(strategy: SupervisionStrategy, max_restarts: u32, restart_window: Duration) -> Self {
+        Self {
+            strategy,
+            max_restarts: AtomicU32::new(max_restarts),
+            restart_window,
+        }
+    }
+
+    pub async fn supervise<A>(&self, actor: A, name: String) -> Result<ActorRef<A::Message>, Box<dyn std::error::Error + Send + Sync>>
+    where
+        A: Actor + 'static,
+    {
+        let mut restart_count = 0;
+        let start_time = std::time::Instant::now();
+
+        loop {
+            match self.spawn_actor(actor.clone(), name.clone()).await {
+                Ok(actor_ref) => return Ok(actor_ref),
+                Err(e) => {
+                    restart_count += 1;
+
+                    if restart_count > self.max_restarts.load(Ordering::Relaxed) {
+                        return Err(e);
+                    }
+
+                    if start_time.elapsed() > self.restart_window {
+                        // 重置重启计数
+                        restart_count = 0;
+                    }
+
+                    // 等待一段时间后重试
+                    sleep(Duration::from_millis(100 * restart_count)).await;
+                }
+            }
+        }
+    }
+
+    async fn spawn_actor<A>(&self, actor: A, _name: String) -> Result<ActorRef<A::Message>, Box<dyn std::error::Error + Send + Sync>>
+    where
+        A: Actor + Clone + 'static,
+    {
+        // 实际的Actor启动逻辑
+        todo!()
+    }
+}
+```
+
+#### 2.2 路由Actor
+
+```rust,ignore
+pub struct RouterActor<M> {
+    routes: HashMap<String, ActorRef<M>>,
+    routing_strategy: RoutingStrategy,
+}
+
+#[derive(Debug, Clone)]
+pub enum RoutingStrategy {
+    RoundRobin,
+    Random,
+    Hash,
+    Broadcast,
+}
+
+impl<M: Send + Clone + 'static> RouterActor<M> {
+    pub fn new(strategy: RoutingStrategy) -> Self {
+        Self {
+            routes: HashMap::new(),
+            routing_strategy,
+        }
+    }
+
+    pub fn add_route(&mut self, key: String, actor: ActorRef<M>) {
+        self.routes.insert(key, actor);
+    }
+
+    pub async fn route_message(&self, message: M, routing_key: Option<String>) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        match self.routing_strategy {
+            RoutingStrategy::RoundRobin => self.round_robin_route(message).await,
+            RoutingStrategy::Random => self.random_route(message).await,
+            RoutingStrategy::Hash => self.hash_route(message, routing_key).await,
+            RoutingStrategy::Broadcast => self.broadcast_route(message).await,
+        }
+    }
+
+    async fn round_robin_route(&self, message: M) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        // 实现轮询路由
+        todo!()
+    }
+
+    async fn random_route(&self, message: M) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        // 实现随机路由
+        todo!()
+    }
+
+    async fn hash_route(&self, message: M, routing_key: Option<String>) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        // 实现哈希路由
+        todo!()
+    }
+
+    async fn broadcast_route(&self, message: M) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        // 实现广播路由
+        for actor in self.routes.values() {
+            actor.send(message.clone()).await?;
+        }
+        Ok(())
+    }
+}
+```
+
+## 高级通道通信
+
+### 1. 类型安全通道
+
+利用Rust 1.89的改进类型系统：
+
+```rust,ignore
+use std::marker::PhantomData;
+use tokio::sync::mpsc;
+
+pub struct TypedChannel<T> {
+    sender: mpsc::UnboundedSender<T>,
+    receiver: mpsc::UnboundedReceiver<T>,
+    _phantom: PhantomData<T>,
+}
+
+impl<T: Send + 'static> TypedChannel<T> {
+    pub fn new() -> Self {
+        let (sender, receiver) = mpsc::unbounded_channel();
+        Self {
+            sender,
+            receiver,
+            _phantom: PhantomData,
+        }
+    }
+
+    pub fn sender(&self) -> TypedSender<T> {
+        TypedSender {
+            inner: self.sender.clone(),
+        }
+    }
+
+    pub fn receiver(&self) -> TypedReceiver<T> {
+        TypedReceiver {
+            inner: self.receiver.clone(),
+        }
+    }
+}
+
+pub struct TypedSender<T> {
+    inner: mpsc::UnboundedSender<T>,
+}
+
+impl<T: Send + 'static> TypedSender<T> {
+    pub async fn send(&self, message: T) -> Result<(), mpsc::error::SendError<T>> {
+        self.inner.send(message)
+    }
+
+    pub fn try_send(&self, message: T) -> Result<(), mpsc::error::TrySendError<T>> {
+        self.inner.try_send(message)
+    }
+
+    pub fn is_closed(&self) -> bool {
+        self.inner.is_closed()
+    }
+}
+
+pub struct TypedReceiver<T> {
+    inner: mpsc::UnboundedReceiver<T>,
+}
+
+impl<T: Send + 'static> TypedReceiver<T> {
+    pub async fn recv(&mut self) -> Option<T> {
+        self.inner.recv().await
+    }
+
+    pub fn try_recv(&mut self) -> Result<T, mpsc::error::TryRecvError> {
+        self.inner.try_recv()
+    }
+}
+```
+
+### 2. 背压控制通道
+
+```rust,ignore
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+pub struct BackpressureChannel<T> {
+    sender: mpsc::Sender<T>,
+    receiver: mpsc::Receiver<T>,
+    capacity: usize,
+    current_size: AtomicUsize,
+}
+
+impl<T: Send + 'static> BackpressureChannel<T> {
+    pub fn new(capacity: usize) -> Self {
+        let (sender, receiver) = mpsc::channel(capacity);
+        Self {
+            sender,
+            receiver,
+            capacity,
+            current_size: AtomicUsize::new(0),
+        }
+    }
+
+    pub async fn send(&self, message: T) -> Result<(), mpsc::error::SendError<T>> {
+        let current = self.current_size.load(Ordering::Relaxed);
+
+        if current >= self.capacity {
+            // 等待空间可用
+            while self.current_size.load(Ordering::Relaxed) >= self.capacity {
+                tokio::task::yield_now().await;
+            }
+        }
+
+        self.current_size.fetch_add(1, Ordering::Relaxed);
+        self.sender.send(message).await
+    }
+
+    pub async fn recv(&mut self) -> Option<T> {
+        let result = self.receiver.recv().await;
+        if result.is_some() {
+            self.current_size.fetch_sub(1, Ordering::Relaxed);
+        }
+        result
+    }
+
+    pub fn current_size(&self) -> usize {
+        self.current_size.load(Ordering::Relaxed)
+    }
+
+    pub fn capacity(&self) -> usize {
+        self.capacity
+    }
+}
+```
+
+## 发布订阅模式
+
+### 1. 类型安全的事件总线
+
+```rust,ignore
+use std::any::{Any, TypeId};
+use std::collections::HashMap;
+use std::sync::{Arc, RwLock};
+
+pub struct EventBus {
+    subscribers: Arc<RwLock<HashMap<TypeId, Vec<Box<dyn Any + Send + Sync>>>>>,
+}
+
+impl EventBus {
+    pub fn new() -> Self {
+        Self {
+            subscribers: Arc::new(RwLock::new(HashMap::new())),
+        }
+    }
+
+    pub fn subscribe<E: 'static + Send + Sync, F>(&self, handler: F) -> Subscription
+    where
+        F: Fn(&E) + Send + Sync + 'static,
+    {
+        let type_id = TypeId::of::<E>();
+        let handler = Box::new(handler);
+
+        self.subscribers.write().unwrap()
+            .entry(type_id)
+            .or_insert_with(Vec::new)
+            .push(handler);
+
+        Subscription { type_id }
+    }
+
+    pub fn publish<E: 'static + Send + Sync>(&self, event: E) {
+        let type_id = TypeId::of::<E>();
+
+        if let Some(subscribers) = self.subscribers.read().unwrap().get(&type_id) {
+            for subscriber in subscribers {
+                if let Some(handler) = subscriber.downcast_ref::<Box<dyn Fn(&E) + Send + Sync>>() {
+                    handler(&event);
+                }
+            }
+        }
+    }
+}
+
+pub struct Subscription {
+    type_id: TypeId,
+}
+
+// 使用示例
+#[derive(Debug, Clone)]
+pub struct UserEvent {
+    pub user_id: u64,
+    pub action: String,
+}
+
+#[derive(Debug, Clone)]
+pub struct SystemEvent {
+    pub component: String,
+    pub status: String,
+}
+
+pub async fn example_event_bus() {
+    let event_bus = EventBus::new();
+
+    // 订阅用户事件
+    let _user_sub = event_bus.subscribe(|event: &UserEvent| {
+        println!("User event: {:?}", event);
+    });
+
+    // 订阅系统事件
+    let _system_sub = event_bus.subscribe(|event: &SystemEvent| {
+        println!("System event: {:?}", event);
+    });
+
+    // 发布事件
+    event_bus.publish(UserEvent {
+        user_id: 123,
+        action: "login".to_string(),
+    });
+
+    event_bus.publish(SystemEvent {
+        component: "database".to_string(),
+        status: "connected".to_string(),
+    });
+}
+```
+
+### 2. 异步事件流
+
+```rust,ignore
+use tokio::sync::broadcast;
+use futures::stream::{Stream, StreamExt};
+
+pub struct AsyncEventStream<E> {
+    sender: broadcast::Sender<E>,
+    receiver: broadcast::Receiver<E>,
+}
+
+impl<E: Clone + Send + Sync + 'static> AsyncEventStream<E> {
+    pub fn new(capacity: usize) -> Self {
+        let (sender, receiver) = broadcast::channel(capacity);
+        Self { sender, receiver }
+    }
+
+    pub fn subscribe(&self) -> broadcast::Receiver<E> {
+        self.sender.subscribe()
+    }
+
+    pub async fn publish(&self, event: E) -> Result<usize, broadcast::error::SendError<E>> {
+        self.sender.send(event)
+    }
+
+    pub fn into_stream(self) -> impl Stream<Item = Result<E, broadcast::error::RecvError>> {
+        self.receiver
+    }
+}
+
+// 使用示例
+pub async fn example_async_stream() {
+    let event_stream = AsyncEventStream::<String>::new(100);
+
+    // 创建多个订阅者
+    let mut sub1 = event_stream.subscribe();
+    let mut sub2 = event_stream.subscribe();
+
+    // 发布事件
+    event_stream.publish("Event 1".to_string()).await.unwrap();
+    event_stream.publish("Event 2".to_string()).await.unwrap();
+
+    // 异步接收事件
+    tokio::spawn(async move {
+        while let Ok(event) = sub1.recv().await {
+            println!("Subscriber 1: {}", event);
+        }
+    });
+
+    tokio::spawn(async move {
+        while let Ok(event) = sub2.recv().await {
+            println!("Subscriber 2: {}", event);
+        }
+    });
+}
+```
+
+## 总结
+
+Rust 1.89的消息传递模式提供了：
+
+1. **Actor模型**: 完整的Actor系统实现，包括监督策略和路由
+2. **类型安全通道**: 编译时类型检查的通道通信
+3. **背压控制**: 自动流量控制机制
+4. **发布订阅**: 类型安全的事件总线
+5. **异步流**: 高性能的异步事件流
+
+这些模式充分利用了Rust 1.89的新特性，提供了高效、安全的消息传递解决方案
+---
+
+---
+
+## 补充视角：C05 Crate 并发模式实践
+
+> 来源：`crates/c05_threads/docs/rust_194_updates/01_concurrency_patterns_rust_194.md`
+> 按 AGENTS.md §6.4 迁移至此，作为 canonical 并发模式概念页的工程补充。
+> 下列模式并非 Rust 1.94 独占特性，而是使用 Rust 标准库及生态 crate 实现的常见并发工程模式。
+
+### 并行搜索提前返回
+
+使用 `std::ops::ControlFlow` 与 `rayon` 在并行迭代中实现短路：
+
+```rust,ignore
+use std::ops::ControlFlow;
+use rayon::prelude::*;
+
+fn parallel_find_first<T, P>(data: &[T], predicate: P) -> Option<&T>
+where
+    T: Sync,
+    P: Fn(&T) -> bool + Sync,
+{
+    data.par_iter().try_for_each(|item| {
+        if predicate(item) {
+            ControlFlow::Break(item)
+        } else {
+            ControlFlow::Continue(())
+        }
+    }).break_value()
+}
+
+fn parallel_all<T, P>(data: &[T], predicate: P) -> bool
+where
+    T: Sync,
+    P: Fn(&T) -> bool + Sync,
+{
+    data.par_iter().try_for_each(|item| {
+        if predicate(item) {
+            ControlFlow::Continue(())
+        } else {
+            ControlFlow::Break(())
+        }
+    }).is_continue()
+}
+```
+
+### 细粒度锁：分桶缓存
+
+将数据分散到多个独立桶中，每个桶由独立的 `RefCell` 保护，降低锁竞争：
+
+```rust,ignore
+use std::cell::{RefCell, Ref, RefMut};
+use std::collections::HashMap;
+
+pub struct FineGrainedCache<K, V> {
+    buckets: Vec<RefCell<HashMap<K, V>>>,
+}
+
+impl<K: Eq + std::hash::Hash, V: Clone> FineGrainedCache<K, V> {
+    pub fn new(bucket_count: usize) -> Self {
+        let mut buckets = Vec::with_capacity(bucket_count);
+        for _ in 0..bucket_count {
+            buckets.push(RefCell::new(HashMap::new()));
+        }
+        Self { buckets }
+    }
+
+    fn get_bucket(&self, key: &K) -> usize {
+        use std::hash::{DefaultHasher, Hash, Hasher};
+        let mut hasher = DefaultHasher::new();
+        key.hash(&mut hasher);
+        (hasher.finish() as usize) % self.buckets.len()
+    }
+
+    pub fn get(&self, key: &K) -> Option<Ref<'_, V>> {
+        let bucket = self.buckets[self.get_bucket(key)].borrow();
+        Ref::filter_map(bucket, |map| map.get(key)).ok()
+    }
+
+    pub fn get_mut(&self, key: &K) -> Option<RefMut<'_, V>> {
+        let bucket = self.buckets[self.get_bucket(key)].borrow_mut();
+        RefMut::filter(bucket, |map| map.get_mut(key)).ok()
+    }
+
+    pub fn insert(&self, key: K, value: V) {
+        self.buckets[self.get_bucket(key)].borrow_mut().insert(key, value);
+    }
+}
+```
+
+### 读写锁分离的并发索引
+
+使用 `RwLock<BTreeMap>` 作为主索引，配合热数据缓存实现读写分离：
+
+```rust,ignore
+use std::sync::{Arc, RwLock};
+use std::collections::BTreeMap;
+
+pub struct ConcurrentIndex<K, V> {
+    index: RwLock<BTreeMap<K, Vec<V>>>,
+    hot_cache: Arc<RwLock<Vec<(K, V)>>>,
+}
+
+impl<K: Ord + Clone, V: Clone> ConcurrentIndex<K, V> {
+    pub fn new() -> Self {
+        Self {
+            index: RwLock::new(BTreeMap::new()),
+            hot_cache: Arc::new(RwLock::new(Vec::with_capacity(1000))),
+        }
+    }
+
+    pub fn batch_index(&self, items: Vec<(K, V)>) {
+        let mut index = self.index.write().unwrap();
+        for (key, value) in items {
+            index.entry(key).or_default().push(value);
+        }
+    }
+
+    pub fn range_query(&self, start: &K, end: &K) -> Vec<(K, Vec<V>)> {
+        let index = self.index.read().unwrap();
+        index.range(start..=end)
+            .map(|(k, v)| (k.clone(), v.clone()))
+            .collect()
+    }
+}
+```
+
+### 基于 `MaybeUninit` 的无锁单生产者单消费者队列
+
+```rust,ignore
+use std::mem::MaybeUninit;
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::cell::UnsafeCell;
+
+pub struct LockFreeQueue<T, const N: usize> {
+    buffer: [UnsafeCell<MaybeUninit<T>>; N],
+    head: AtomicUsize,
+    tail: AtomicUsize,
+}
+
+unsafe impl<T: Send, const N: usize> Send for LockFreeQueue<T, N> {}
+unsafe impl<T: Send, const N: usize> Sync for LockFreeQueue<T, N> {}
+
+impl<T, const N: usize> LockFreeQueue<T, N> {
+    pub fn new() -> Self {
+        let buffer = unsafe {
+            let mut arr: [UnsafeCell<MaybeUninit<T>>; N] = std::mem::zeroed();
+            for i in 0..N {
+                arr[i] = UnsafeCell::new(MaybeUninit::uninit());
+            }
+            arr
+        };
+        Self {
+            buffer,
+            head: AtomicUsize::new(0),
+            tail: AtomicUsize::new(0),
+        }
+    }
+
+    pub fn enqueue(&self, value: T) -> Result<(), T> {
+        let tail = self.tail.load(Ordering::Relaxed);
+        let next_tail = (tail + 1) % N;
+        if next_tail == self.head.load(Ordering::Acquire) {
+            return Err(value);
+        }
+        unsafe {
+            (*self.buffer[tail].get()).write(value);
+        }
+        self.tail.store(next_tail, Ordering::Release);
+        Ok(())
+    }
+
+    pub fn dequeue(&self) -> Option<T> {
+        let head = self.head.load(Ordering::Relaxed);
+        if head == self.tail.load(Ordering::Acquire) {
+            return None;
+        }
+        let value = unsafe { (*self.buffer[head].get()).assume_init_read() };
+        self.head.store((head + 1) % N, Ordering::Release);
+        Some(value)
+    }
+}
+
+impl<T, const N: usize> Drop for LockFreeQueue<T, N> {
+    fn drop(&mut self) {
+        while let Some(_) = self.dequeue() {}
+    }
+}
+```
+
+### 线程池与异步集成
+
+将 CPU 密集型任务通过 `tokio::task::spawn_blocking`  offload 到线程池：
+
+```rust,ignore
+use std::future::Future;
+use tokio::task::JoinHandle;
+
+pub fn spawn_blocking<F, R>(f: F) -> JoinHandle<R>
+where
+    F: FnOnce() -> R + Send + 'static,
+    R: Send + 'static,
+{
+    tokio::task::spawn_blocking(f)
+}
+
+async fn hybrid_processing() -> Result<Vec<u8>, String> {
+    let data = tokio::fs::read("input.dat").await.map_err(|e| e.to_string())?;
+    let processed = spawn_blocking(move || {
+        data.iter().map(|b| b.wrapping_mul(2)).collect::<Vec<_>>()
+    }).await.map_err(|e| e.to_string())?;
+    tokio::fs::write("output.dat", &processed).await.map_err(|e| e.to_string())?;
+    Ok(processed)
+}
+```
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

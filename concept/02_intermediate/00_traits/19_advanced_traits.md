@@ -67,6 +67,15 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [补充：来自 `crates/c04_generic` Trait Bounds 参考的速查](#补充来自-cratesc04_generic-trait-bounds-参考的速查)
+    - [常见约束形式](#常见约束形式)
+    - [where 子句优势](#where-子句优势)
+    - [约束等价表](#约束等价表)
+  - [补充：来自 `crates/c04_generic` 关联类型参考的速查](#补充来自-cratesc04_generic-关联类型参考的速查)
+    - [关联类型 vs 泛型参数](#关联类型-vs-泛型参数)
+    - [泛型关联类型 (GAT) 示例](#泛型关联类型-gat-示例)
+    - [关联常量](#关联常量)
+    - [RPITIT（Rust 1.75+）](#rpititrust-175)
 
 ---
 
@@ -863,3 +872,85 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "高级 Trait 主题：从关联类型到特化 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 补充：来自 `crates/c04_generic` Trait Bounds 参考的速查
+
+> 本节由原 `crates/c04_generic/docs/tier_03_references/03_trait_bounds_reference.md` 合并而来，保留边界约束语法速查。
+
+### 常见约束形式
+
+| 形式 | 示例 | 说明 |
+| :--- | :--- | :--- |
+| 单约束 | `T: Display` | T 实现 Display |
+| 多约束 | `T: Display + Clone` | 同时实现多个 trait |
+| where 子句 | `where T: Display` | 复杂约束或提升可读性 |
+| 关联类型约束 | `T: Iterator<Item = u32>` | 约束关联类型 |
+| 生命周期约束 | `T: 'a` | T 至少存活 'a |
+| HRTB | `T: for<'a> Fn(&'a i32)` | 高阶 trait bound |
+
+### where 子句优势
+
+```rust
+// 约束可读性
+fn complicated<T, U>(x: T, y: U) -> i32
+where
+    T: Display + Clone,
+    U: Clone + Debug,
+    T: PartialEq<U>,
+{
+    // ...
+}
+```
+
+### 约束等价表
+
+- `fn f<T: Clone>(x: T)` ≡ `fn f<T>(x: T) where T: Clone`
+- `T: Send + Sync` 表示类型可安全跨线程共享
+
+> 完整 HRTB、约束传播与递归约束参见本节正文。
+
+---
+
+## 补充：来自 `crates/c04_generic` 关联类型参考的速查
+
+> 本节由原 `crates/c04_generic/docs/tier_03_references/04_associated_types_reference.md` 合并而来，保留关联类型、GAT 与 RPITIT 速查。
+
+### 关联类型 vs 泛型参数
+
+| 特性 | 关联类型 `type Item;` | 泛型参数 `Iterator<T>` |
+| :--- | :--- | :--- |
+| 每个类型的实现次数 | 唯一 | 可多次 |
+| 调用处类型参数 | 少 | 多 |
+| 类型推断 | 更好 | 可能需要显式指定 |
+
+### 泛型关联类型 (GAT) 示例
+
+```rust
+trait LendingIterator {
+    type Item<'a> where Self: 'a;
+    fn next<'a>(&'a self) -> Option<Self::Item<'a>>;
+}
+```
+
+### 关联常量
+
+```rust
+trait Config {
+    const MAX_SIZE: usize;
+}
+impl Config for MyConfig {
+    const MAX_SIZE: usize = 1024;
+}
+```
+
+### RPITIT（Rust 1.75+）
+
+```rust
+trait Foo {
+    fn method(&self) -> impl Iterator<Item = u8>;
+}
+```
+
+> 完整语法、使用场景与边界测试参见本节正文。

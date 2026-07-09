@@ -39,6 +39,11 @@
     - [属性特征](#属性特征)
     - [关系连接](#关系连接)
     - [思维导图](#思维导图)
+  - [补充：基础网络性能优化](#补充基础网络性能优化)
+    - [缓冲 I/O](#缓冲-io)
+    - [批量写入](#批量写入)
+    - [并发连接限制](#并发连接限制)
+    - [Tokio 零拷贝发送](#tokio-零拷贝发送)
   - [1. 零拷贝技术深度](#1-零拷贝技术深度)
     - [1.1 传统拷贝的性能问题](#11-传统拷贝的性能问题)
     - [1.2 零拷贝原理与实现](#12-零拷贝原理与实现)
@@ -145,6 +150,89 @@
     ├── 多队列NIC
     └── RSS/RPS/RFS
 ```
+
+---
+
+## 补充：基础网络性能优化
+
+> 内容来源：`crates/c10_networks/docs/tier_02_guides/05_performance_and_security_optimization.md`，已按 AGENTS.md §6.4 迁移至此。
+
+在引入零拷贝、`io_uring` 等高级技术之前，常规 Tokio 网络服务可通过以下基础手段获得显著性能提升。
+
+### 缓冲 I/O
+
+```rust
+use tokio::io::{AsyncReadExt, AsyncWriteExt, BufReader, BufWriter};
+use tokio::net::TcpStream;
+
+async fn buffered_io(stream: TcpStream) -> std::io::Result<()> {
+    let (read_half, write_half) = stream.into_split();
+    let mut reader = BufReader::with_capacity(8192, read_half);
+    let mut writer = BufWriter::with_capacity(8192, write_half);
+
+    writer.write_all(b"hello").await?;
+    writer.flush().await?;
+
+    let mut buf = String::new();
+    reader.read_to_string(&mut buf).await?;
+    Ok(())
+}
+```
+
+### 批量写入
+
+```rust
+use tokio::io::AsyncWriteExt;
+use tokio::net::TcpStream;
+
+async fn batch_write(stream: &mut TcpStream, items: &[i32]) -> std::io::Result<()> {
+    let mut buf = String::new();
+    for i in items {
+        buf.push_str(&format!("item{}\n", i));
+    }
+    stream.write_all(buf.as_bytes()).await?;
+    Ok(())
+}
+```
+
+### 并发连接限制
+
+```rust
+use std::sync::Arc;
+use tokio::net::TcpListener;
+use tokio::sync::Semaphore;
+
+async fn limited_server() -> std::io::Result<()> {
+    let listener = TcpListener::bind("127.0.0.1:8080").await?;
+    let sem = Arc::new(Semaphore::new(100));
+
+    loop {
+        let (stream, addr) = listener.accept().await?;
+        let sem = Arc::clone(&sem);
+        tokio::spawn(async move {
+            let _permit = sem.acquire().await.unwrap();
+            // handle connection...
+            println!("handling {}", addr);
+        });
+    }
+}
+```
+
+### Tokio 零拷贝发送
+
+```rust
+use tokio::fs::File;
+use tokio::io;
+use tokio::net::TcpStream;
+
+async fn send_file(mut stream: TcpStream, path: &str) -> io::Result<()> {
+    let mut file = File::open(path).await?;
+    io::copy(&mut file, &mut stream).await?;
+    Ok(())
+}
+```
+
+> **关键洞察**: `tokio::io::copy` 在 Linux 上会自动利用 `sendfile` 等内核零拷贝机制；对于跨平台场景，它回退到高效的用户态缓冲拷贝。
 
 ---
 

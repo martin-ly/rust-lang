@@ -155,6 +155,116 @@ async fn cancellable_child() -> Result<(), Box<dyn std::error::Error>> {
 ## 相关概念
 
 - [进程模型与生命周期](01_process_model_and_lifecycle.md)
+
+---
+
+## 7. 大规模并发与流控
+
+在异步运行时中管理大量子进程时，需要控制并发度、避免资源耗尽，并保证可预测的行为。
+
+### 7.1 并发度限制
+
+使用 `tokio::sync::Semaphore` 限制同时运行的子进程数量，防止因进程数过多导致文件描述符或内存耗尽。
+
+```rust
+use tokio::process::Command;
+use tokio::sync::Semaphore;
+use std::sync::Arc;
+
+pub async fn run_limited(
+    commands: Vec<Vec<String>>,
+    max: usize,
+) -> Vec<std::io::Result<std::process::Output>> {
+    let sem = Arc::new(Semaphore::new(max));
+    let mut handles = Vec::new();
+    for cmd in commands {
+        let sem = sem.clone();
+        handles.push(tokio::spawn(async move {
+            let _permit = sem.acquire().await.unwrap();
+            let mut iter = cmd.into_iter();
+            let program = iter.next().unwrap_or_default();
+            Command::new(&program).args(iter).output().await
+        }));
+    }
+    let mut results = Vec::new();
+    for h in handles {
+        results.push(h.await.unwrap());
+    }
+    results
+}
+```
+
+### 7.2 异步进程池
+
+将工作进程池与异步任务结合，通过 `tokio::sync::mpsc` 分派任务并由固定数量的 worker 顺序执行，减少进程创建开销。
+
+```rust
+use tokio::process::Command;
+use tokio::sync::mpsc;
+
+pub struct AsyncProcessPool {
+    tx: mpsc::Sender<(String, Vec<String>, mpsc::Sender<std::io::Result<std::process::Output>>)>,
+}
+
+impl AsyncProcessPool {
+    pub fn new(workers: usize) -> Self {
+        let (tx, mut rx) = mpsc::channel(128);
+        for _ in 0..workers {
+            let mut rx = rx.clone();
+            tokio::spawn(async move {
+                while let Some((program, args, reply)) = rx.recv().await {
+                    let result = Command::new(&program).args(&args).output().await;
+                    let _ = reply.send(result).await;
+                }
+            });
+        }
+        Self { tx }
+    }
+
+    pub async fn execute(
+        &self,
+        program: String,
+        args: Vec<String>,
+    ) -> std::io::Result<std::process::Output> {
+        let (reply_tx, mut reply_rx) = mpsc::channel(1);
+        self.tx.send((program, args, reply_tx)).await.unwrap();
+        reply_rx.recv().await.unwrap()
+    }
+}
+```
+
+### 7.3 优先级调度
+
+当任务具有不同优先级时，可使用 `BinaryHeap` 实现按优先级取出的调度器，高优先级任务先获得进程资源。
+
+```rust
+use std::cmp::Ordering;
+use std::collections::BinaryHeap;
+
+#[derive(Eq, PartialEq)]
+struct Task { priority: u32, seq: u64, command: String }
+
+impl Ord for Task {
+    fn cmp(&self, other: &Self) -> Ordering {
+        other.priority.cmp(&self.priority)
+            .then_with(|| self.seq.cmp(&other.seq))
+    }
+}
+impl PartialOrd for Task {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> { Some(self.cmp(other)) }
+}
+```
+
+### 7.4 超时、重试与断路器
+
+- **超时**：对所有可能长时间运行的子进程使用 `tokio::time::timeout`。
+- **重试**：对可恢复错误按固定间隔或指数退避重试，但设置最大重试次数。
+- **断路器**：当失败率达到阈值时暂停启动新进程，避免级联故障。
+
+### 7.5 优雅取消
+
+取消持有 `Child` 的任务时，`Child` 的 `Drop` 默认会 kill 但不等待。如需确保子进程完全退出，应显式调用 `kill().await` 和 `wait().await`。
+
 - [高级进程管理](02_advanced_process_management.md)
 - [Async/Await](../01_async/02_async.md)
 - [Future 与 Executor 机制](../01_async/39_future_and_executor_mechanisms.md)
@@ -162,3 +272,22 @@ async fn cancellable_child() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 > **权威来源**: [Tokio Process](https://docs.rs/tokio/latest/tokio/process/) · [Rust Async Book](https://rust-lang.github.io/async-book/)
+
+---
+
+## 补充视角：异步标准 IO 管理
+
+> 来源：`crates/c07_process/docs/async_stdio_guide.md`
+
+在异步运行时中管理子进程时，标准输入/输出/错误也需要异步化。核心要点：
+
+- 使用 `tokio::process::Command` 的 `.stdin(Stdio::piped())` / `.stdout(Stdio::piped())` 创建管道。
+- 通过 `tokio::io::AsyncWriteExt` 异步写入 stdin，`AsyncBufReadExt` 异步读取 stdout/stderr。
+- 写入完毕后必须关闭 stdin（发送 EOF），否则某些进程（如 `cat`）不会结束。
+- 使用 `tokio::time::timeout` 为长时间运行的进程设置超时，避免无限等待。
+- Windows 与 Unix 的命令、路径和环境变量存在差异，使用 `cfg!(windows)` 做条件处理。
+
+相关权威页：
+
+- [Async/Await](../01_async/02_async.md)
+- [进程模型与生命周期](01_process_model_and_lifecycle.md)

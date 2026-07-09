@@ -68,6 +68,7 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [补充视角：WebAssembly 项目的 CI/CD 实践](#补充视角webassembly-项目的-cicd-实践)
 
 ---
 
@@ -871,3 +872,24 @@ Rust 编译器进行大量优化和类型检查（LLVM 后端、单态化（Mono
 ### 反命题与边界
 
 > **反命题**: "DevOps 与 CI/CD：Rust 的持续交付工程实践 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+## 补充视角：WebAssembly 项目的 CI/CD 实践
+
+> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/07_cloud_native_ci_cd_practice.md` 与 `crates/c12_wasm/docs/wasm_engineering/cicd_integration.md`，已按 AGENTS.md §6.4 迁移至此。
+
+WASM 项目的 CI/CD 在通用 Rust 流程基础上增加以下环节：
+
+- **多目标构建**：矩阵覆盖 `wasm32-unknown-unknown`（浏览器）、`wasm32-wasip1`（WASI）、`wasm32-wasip2`（组件模型）。
+- **优化门控**：在 CI 中运行 `wasm-opt` 并监控产物体积；可设置大小上限阻止回归。
+- **质量门控**：`wasm-validate` 验证字节码；`cargo clippy --target wasm32-wasip1`；`cargo audit` 扫描依赖漏洞。
+- **多平台容器**：Docker Buildx 支持 `linux/amd64`、`linux/arm64`、`wasi/wasm`；配合 `wasmedge/wasmedge` 等轻量基础镜像。
+- **部署策略**：滚动更新、蓝绿部署、金丝雀发布；可结合 Argo Rollouts 与 Istio/Linkerd 流量分割。
+
+典型流水线阶段：
+
+```text
+Code Check → Build & Test (native + wasm) → wasm-opt → Security Scan →
+Docker Build (multi-platform) → Push → Staging → Smoke Test → Production
+```
+
+> **关键洞察**：WASM 的二进制可移植性使“一次构建、多处运行”成为可能，但工具链（wasm-pack、Binaryen、运行时版本）的矩阵管理仍是 CI 复杂度的主要来源。

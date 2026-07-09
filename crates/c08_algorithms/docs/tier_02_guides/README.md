@@ -1,67 +1,16 @@
+> **EN**: Tier 2: 实践指南层
+> **Summary**: A stub page pointing to the canonical concept authority. The c08_algorithms crate provides runnable examples for this topic; general Rust concept explanations have been migrated.
+
 # Tier 2: 实践指南层
 
-> **定位**: 实践导向的算法指南
-> **目标读者**: 初学者和进阶者
-> **预计学习时间**: 10-15小时
-> **完成状态**: ✅ 100% (链接现有文档)
+> **权威来源**: [concept/06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md](../../../../concept/06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md)
 
----
+本文件原为 `c08_algorithms` crate 的通用概念文档。根据 AGENTS.md §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md`，此处仅保留索引与 canonical 链接。
 
-## 📋 目录
+## 主题列表
 
-- [Tier 2: 实践指南层](#tier-2-实践指南层)
-  - [📋 目录](#-目录)
-  - [📚 文档列表](#-文档列表)
-  - [🔗 原有优质文档](#-原有优质文档)
-  - [🎯 学习建议](#-学习建议)
-  - [**创建日期**: 2025-10-22](#创建日期-2025-10-22)
-
-## 📚 文档列表
-
-| 文档                                         | 内容                 | 状态    |
-| :--- | :--- | :--- |
-| [01\_算法快速入门](01_algorithms_quick_start.md)     | 排序、搜索、基础算法 | ✅ 链接 |
-| [02\_数据结构实践](02_data_structures_practice.md)     | 线性表、树、图       | ✅ 链接 |
-| [03\_算法复杂度分析](03_algorithm_complexity_analysis.md) | 时间空间复杂度       | ✅ 链接 |
-| [04\_性能优化实践](04_performance_optimization_practice.md)     | 优化技巧和策略       | ✅ 链接 |
-| [05\_并行与异步算法](05_并行与异步算法.md) | Rayon/Tokio          | ✅ 链接 |
-
----
-
-## 🔗 原有优质文档
-
-**Tier 2 实践指南** - 5篇详细指南（已整合）:
-
-- [03_算法复杂度分析](03_algorithm_complexity_analysis.md) - 复杂度分析 ⭐⭐⭐
-- [02_数据结构实践](02_data_structures_practice.md) - 数据结构实现 ⭐⭐⭐
-- [05_并行与异步算法](05_并行与异步算法.md) - 异步算法 ⭐⭐⭐
-- [04_性能优化实践](04_performance_optimization_practice.md) - 性能优化 ⭐⭐⭐
-- [04_算法性能参考](../tier_03_references/04_algorithm_performance_reference.md) - 基准测试 ⭐⭐
-
----
-
-## 🎯 学习建议
-
-1. **按顺序学习**: 从算法快速入门开始
-2. **动手实践**: 每个主题都写代码
-3. **性能对比**: 使用基准测试验证优化效果
-4. **LeetCode练习**: 完成相关题目巩固
-
----
-
-**返回**: [Tier 1](../tier_01_foundations/README.md) | **下一步**: [Tier 3](../tier_03_references/README.md)
-
----
-
-**文档维护**: Documentation Team
-**创建日期**: 2025-10-22
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- 📋 目录
+- 📚 文档列表
+- 🔗 原有优质文档
+- 🎯 学习建议

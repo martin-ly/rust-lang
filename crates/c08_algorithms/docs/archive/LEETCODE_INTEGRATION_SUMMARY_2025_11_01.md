@@ -1,5 +1,12 @@
 # LeetCode 分类集成总结 (2025-11-01)
 
+> **权威来源**: [Algorithms & Data Structures](../../concept/06_ecosystem/11_domain_applications)
+> **文档类型**: 代码示例 / 实践项目 / 教程（crate-specific）
+
+本文件包含与 `Algorithms & Data Structures` 相关的可运行代码示例、练习项目或教程步骤。通用概念解释请查阅上方权威来源；此处仅保留 crate 级别的示例实现与学习活动。
+
+---
+
 > **集成日期**: 2025年11月1日
 > **Rust 版本**: 1.92.0（兼容 Rust 1.91+ 特性）
 > **状态**: ✅ 基础架构完成，持续实现中

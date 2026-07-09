@@ -29,8 +29,8 @@
 
 **变更日志**:
 
-- v1.0 (2026-05-13): 初始版本——覆盖 WASI 定位、Component Model 架构、`wit-bindgen`、能力安全、Rust `wasm32-wasip1` 或 `wasm32-wasip2` 目标
-$entry
+- v1.0 (2026-05-13):
+- 初始版本——覆盖 WASI 定位、Component Model 架构、`wit-bindgen`、能力安全、Rust `wasm32-wasip1` 或 `wasm32-wasip2` 目标 $entry
 
 ---
 
@@ -649,3 +649,22 @@ Rust 无运行时、二进制小、性能高，且所有权系统与 WASM 的沙
 ### 反命题与边界
 
 > **反命题**: "WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+## 补充视角：WASI 0.2 组件模型实战
+
+> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/09_wasi_0_2_component_model_in_depth_guide.md`，已按 AGENTS.md §6.4 迁移至此。
+
+WASI 0.2（Preview 2）的核心变化是从 POSIX 式系统调用迁移到基于组件模型（Component Model）的能力安全接口：
+
+- **WIT 接口定义**：使用 `package namespace:name@version;`、`interface`、`world`、`resource` 声明组件契约。
+- **资源（Resource）**：带构造函数、方法与显式/自动生命周期的有状态对象，映射到 Rust 的 ownership 语义。
+- **组件组合**：通过 `wasm-tools compose` 将多个组件链接为自包含应用，运行时验证导入/导出类型签名。
+- **迁移路径**：从 WASI 0.1 升级到 0.2 需要切换 target 为 `wasm32-wasip2`、引入 `wit-bindgen` / `cargo-component`、将全局文件描述符 API 替换为能力句柄 API。
+
+WIT 最佳实践：
+
+- 使用清晰的接口命名与语义化版本。
+- 使用 `record` 组织相关数据，`variant` 表达错误状态，`result<T, E>` 处理失败。
+- 批量操作与流式资源减少 host-guest 调用次数。
+
+> **关键洞察**：WASI 0.2 使 Rust 组件能够以类型安全方式被其他语言组件调用，但生态成熟度与运行时支持仍是生产落地前需要评估的边界条件。

@@ -1,5 +1,12 @@
 # Rust 1.90 算法丰富示例集 (Rich Algorithm Examples)
 
+> **权威来源**: [Algorithms & Data Structures](../../concept/06_ecosystem/11_domain_applications)
+> **文档类型**: 代码示例与实践项目（crate-specific）
+
+本文件包含与 `Algorithms & Data Structures` 相关的可运行代码示例、练习项目和实战代码。通用概念解释请查阅上方权威来源；此处仅保留 crate 级别的示例实现与学习活动。
+
+---
+
 ## 📚 目录
 
 - [Rust 1.90 算法丰富示例集 (Rich Algorithm Examples)](#rust-190-算法丰富示例集-rich-algorithm-examples)

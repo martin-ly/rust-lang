@@ -69,6 +69,10 @@
     - [7.2 移动后继续使用](#72-移动后继续使用)
     - [7.3 可变借用冲突](#73-可变借用冲突)
   - [八、权威来源索引](#八权威来源索引)
+  - [补充：来自 `crates/c03_control_fn` 函数参考的语法速查](#补充来自-cratesc03_control_fn-函数参考的语法速查)
+    - [函数 BNF 语法概要](#函数-bnf-语法概要)
+    - [参数传递语义](#参数传递语义)
+    - [返回值要点](#返回值要点)
 
 ---
 
@@ -252,3 +256,39 @@ fn main() {
 | [TRPL — Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) | ✅ 一级 | 官方入门教程 |
 | [Rust Reference — Functions](https://doc.rust-lang.org/reference/items/functions.html) | ✅ 一级 | 语言规范 |
 | [Rust By Example — Functions](https://doc.rust-lang.org/rust-by-example/fn.html) | ✅ 二级 | 交互示例 |
+
+---
+
+## 补充：来自 `crates/c03_control_fn` 函数参考的语法速查
+
+> 本节由原 `crates/c03_control_fn/docs/tier_03_references/03_functions_reference.md` 合并而来，保留函数完整语法参考。
+
+### 函数 BNF 语法概要
+
+```text
+function :=
+    function_qualifiers "fn" IDENTIFIER generic_params?
+    "(" function_parameters? ")" function_return_type? where_clause?
+    block_expression
+
+function_qualifiers :=
+    "const"? "async"? "unsafe"? ("extern" abi?)?
+```
+
+### 参数传递语义
+
+| 声明形式 | 调用侧行为 | 适用场景 |
+| :--- | :--- | :--- |
+| `fn f(x: T)` | 移动（Move）所有权 | 小类型或明确转移所有权 |
+| `fn f(x: &T)` | 不可变借用 | 只读访问 |
+| `fn f(x: &mut T)` | 可变借用 | 需要修改 |
+| `fn f(x: impl Trait)` | 静态分发单态化 | 简单泛型约束 |
+| `fn f(x: dyn Trait)` | 动态分发，胖指针 | 需要运行时多态 |
+
+### 返回值要点
+
+- 默认返回单元类型 `()`；显式返回使用 `-> T`。
+- 发散函数返回 `!`，可被强制转换为任意类型。
+- 返回 `impl Trait` 隐藏具体类型，但调用方只能使用该 trait 的方法。
+
+> 更多示例与所有权交互分析参见本节正文。

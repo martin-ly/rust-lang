@@ -1,70 +1,17 @@
+> **EN**: C02 类型系统 - 一页纸总结 (crate docs stub)
+> **Summary**: Stub pointing to the canonical authority page(s) for `C02 类型系统 - 一页纸总结`. Practical examples remain in the crate.
+
 # C02 类型系统 - 一页纸总结
 
-> **用途**: 快速回顾核心概念、常见坑、学习路径
-> **完整文档**: [00_MASTER_INDEX](00_master_index.md)
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/01_foundation/02_type_system/04_type_system.md`](../../../concept/01_foundation/02_type_system/04_type_system.md)。
 
----
+本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-## 核心概念（4 条）
+## 主题导航
 
-| 概念 | 说明 |
+| 主题 | 权威来源 |
 | :--- | :--- |
-| **基础类型** | 标量（整数、浮点、bool、char）、复合（元组、数组） |
-| **自定义类型** | `struct`、`enum`；`impl` 块实现方法 |
-| **泛型** | 类型参数 `T`；trait bounds 约束 |
-| **Trait** | 抽象行为；`impl Trait for Type`；关联类型、GATs |
-
----
-
-## 常见坑与解决
-
-| 坑 | 解决 |
-| :--- | :--- |
-| 生命周期推断失败 | 显式标注 `'a`；检查引用存活范围 |
-| 型变理解困难 | 参考 [variance_theory](../../../docs/research_notes/type_theory/variance_theory.md) |
-| Trait 对象 vs 泛型 | 运行时多态用 `dyn Trait`；编译时多态用泛型 |
-| 泛型约束过严/过松 | 按需添加 `where` 子句 |
-
----
-
-## 类型选型速查
-
-| 场景 | 选型 |
-| :--- | :--- |
-| 可选值 | `Option<T>` |
-| 成功/失败 | `Result<T, E>` |
-| 多态（编译时） | 泛型 `fn f<T: Trait>(x: T)` |
-| 多态（运行时） | `dyn Trait`、`Box<dyn Trait>` |
-| 类型转换 | `From`/`Into`、`TryFrom`/`TryInto` |
-
----
-
-## 学习路径
-
-1. **入门** (1–2 周): 基础类型 → struct/enum → 泛型基础
-2. **进阶** (2–4 周): Trait 系统 → 关联类型 → 型变
-3. **高级** (持续): GATs、形式化类型理论
-
----
-
-## 速查与练习
-
-- **速查卡**: [type_system](../../../docs/02_reference/quick_reference/type_system.md) | [generics_cheatsheet](../../../docs/02_reference/quick_reference/generics_cheatsheet.md)
-- **RBE 练习**: [Custom Types](https://doc.rust-lang.org/rust-by-example/custom_types.html) ·
-- [Traits](https://doc.rust-lang.org/rust-by-example/trait.html) ·
-- [Conversion](https://doc.rust-lang.org/rust-by-example/conversion.html)
-- **Rustlings**: [04_primitive_types](https://github.com/rust-lang/rustlings/tree/main/exercises/04_primitive_types) ·
-- [07_structs](https://github.com/rust-lang/rustlings/tree/main/exercises/07_structs) ·
-- [08_enums](https://github.com/rust-lang/rustlings/tree/main/exercises/08_enums) ·
-- [15_traits](https://github.com/rust-lang/rustlings/tree/main/exercises/15_traits)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| Type System Overview | [concept/01_foundation/02_type_system/04_type_system.md](../../../concept/01_foundation/02_type_system/04_type_system.md) |

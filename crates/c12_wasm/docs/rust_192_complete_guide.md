@@ -1,208 +1,25 @@
-# Rust 1.92.0 WASM 完整指南
+> **EN**: Rust 1.92.0 WASM Complete Guide (c12_wasm example index)
+> **Summary**: A stub page pointing to the canonical concept authority for Rust WebAssembly engineering practices. The c12_wasm crate provides runnable WASM examples.
 
-> **文档版本**: 1.0
-> **创建日期**: 2025-12-11
-> **适用版本**: Rust 1.92.0+
-> **用途**: Rust 1.92.0 特性在 WASM 开发中的完整指南
+# Rust 1.92.0 WASM 完整指南（c12_wasm 示例索引）
 
----
+> **权威来源**: Rust WebAssembly 学习路径、工具链、性能/安全速查等完整解释见
+> [`concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md`](../../../concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md)。
 
-## 📋 目录
+本文件原为 `c12_wasm` crate 的通用 WASM 综合学习指南。根据 AGENTS.md §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md`，
+此处仅保留索引与 canonical 链接。
 
-- [Rust 1.92.0 WASM 完整指南](#rust-1920-wasm-完整指南)
-  - [📋 目录](#-目录)
-  - [🎯 指南概述](#-指南概述)
-  - [📚 文档导航](#-文档导航)
-    - [核心文档](#核心文档)
-    - [思维表征方式](#思维表征方式)
-    - [实用文档](#实用文档)
-    - [参考文档](#参考文档)
-  - [🚀 快速开始](#-快速开始)
-    - [5 分钟快速上手](#5-分钟快速上手)
-    - [15 分钟完整示例](#15-分钟完整示例)
-  - [📖 学习路径](#-学习路径)
-    - [新手路径](#新手路径)
-    - [进阶路径](#进阶路径)
-    - [专家路径](#专家路径)
-  - [💡 核心特性速查](#-核心特性速查)
-  - [📊 性能优化速查](#-性能优化速查)
-  - [🛡️ 安全保证速查](#️-安全保证速查)
-  - [📚 相关文档](#-相关文档)
-    - [核心学习文档](#核心学习文档)
-    - [实践指南](#实践指南)
-    - [高级主题](#高级主题)
+## 本 crate 相关示例
 
----
+- `crates/c12_wasm/examples/`：WASM 可运行示例。
+- `crates/c12_wasm/src/bin/`：WASM 演示程序。
 
-## 🎯 指南概述
+## 快速导航
 
-本文档是 Rust 1.92.0 WASM 开发的完整指南，整合了所有相关文档和资源，提供一站式学习体验。
-
----
-
-## 📚 文档导航
-
-### 核心文档
-
-| 文档                                                         | 用途         | 难度     |
-| :--- | :--- | :--- |
-| [Rust 1.92.0 WASM 改进文档](rust_192_wasm_improvements.md) | 详细特性说明 | ⭐⭐⭐⭐ |
-| [Rust 1.92.0 WASM 快速参考](rust_192_quick_reference.md)   | 快速查找     | ⭐⭐     |
-| [Rust 1.92.0 WASM 迁移指南](rust_192_migration_guide.md)   | 迁移步骤     | ⭐⭐⭐   |
-| [Rust 1.92.0 特性对比](rust_192_feature_comparison.md)     | 版本对比     | ⭐⭐⭐   |
-| [Rust 1.92.0 最佳实践](rust_192_best_practices.md)         | 最佳实践     | ⭐⭐⭐⭐ |
-
-### 思维表征方式
-
-| 文档                                              | 用途           | 难度     |
-| :--- | :--- | :--- |
-| [WASM 思维导图集合](wasm_mind_maps.md)          | 可视化知识结构 | ⭐⭐⭐   |
-| [WASM 多维概念对比矩阵](wasm_concept_matrix.md) | 技术方案对比   | ⭐⭐⭐   |
-| [WASM 决策树图](wasm_decision_tree.md)          | 技术选型决策   | ⭐⭐⭐   |
-| [WASM 证明树图](wasm_proof_tree.md)             | 形式化证明     | ⭐⭐⭐⭐ |
-
-### 实用文档
-
-| 文档                                                               | 用途         | 难度   |
-| :--- | :--- | :--- |
-| [Rust 1.92.0 性能基准测试](rust_192_performance_benchmarks.md)   | 性能测试结果 | ⭐⭐⭐ |
-| [Rust 1.92.0 代码示例集合](rust_192_code_examples_collection.md) | 完整代码示例 | ⭐⭐⭐ |
-| [Rust 1.92.0 故障排除指南](rust_192_troubleshooting.md)          | 问题解决     | ⭐⭐⭐ |
-| [Rust 1.92.0 特性路线图](rust_192_feature_roadmap.md)            | 学习路线图   | ⭐⭐⭐ |
-
-### 参考文档
-
-| 文档                                                                 | 用途     | 难度     |
-| :--- | :--- | :--- |
-| [Rust 1.92.0 特性参考](tier_03_references/04_rust_192_features_reference.md) | API 参考 | ⭐⭐⭐⭐ |
-
----
-
-## 🚀 快速开始
-
-### 5 分钟快速上手
-
-```rust
-use c12_wasm::rust_192_features::*;
-use std::num::NonZeroUsize;
-
-// 1. 创建优化的缓冲区
-let mut buffer = WasmBuffer::new(1000);
-unsafe { buffer.write(b"Hello, WASM!"); }
-
-// 2. 使用 NonZero::div_ceil 计算
-let chunks = calculate_buffer_chunks(5000, NonZeroUsize::new(1024).unwrap());
-
-// 3. 使用迭代器特化比较
-let are_equal = wasm_optimized_array_eq(&vec1, &vec2);
-
-// 4. 使用 rotate_right 旋转
-wasm_rotate_data(&mut data, 3);
-```
-
-### 15 分钟完整示例
-
-运行完整示例：
-
-```bash
-# 运行基础演示
-cargo run --example rust_192_features_demo
-
-# 运行综合应用
-cargo run --example 12_rust_192_comprehensive_demo
-```
-
----
-
-## 📖 学习路径
-
-### 新手路径
-
-1. **第1天**: 阅读 [快速参考](rust_192_quick_reference.md)
-2. **第2-3天**: 学习 [改进文档](rust_192_wasm_improvements.md)
-3. **第4-5天**: 运行 [示例代码](../examples/rust_192_features_demo.rs)
-
-### 进阶路径
-
-1. **第1周**: 学习所有核心特性
-2. **第2周**: 应用性能优化
-3. **第3周**: 实现综合应用
-
-### 专家路径
-
-1. **深入学习**: 阅读 [证明树图](wasm_proof_tree.md)
-2. **性能优化**: 参考 [性能基准测试](rust_192_performance_benchmarks.md)
-3. **最佳实践**: 遵循 [最佳实践](rust_192_best_practices.md)
-
----
-
-## 💡 核心特性速查
-
-| 特性                  | 代码                        | 性能提升 |
-| :--- | :--- | :--- |
-| **MaybeUninit**       | `WasmBuffer::new()`         | +5%      |
-| **NonZero::div_ceil** | `calculate_buffer_chunks()` | +10%     |
-| **迭代器特化**        | `wasm_optimized_array_eq()` | +15-25%  |
-| **rotate_right**      | `wasm_rotate_data()`        | +30-35%  |
-
----
-
-## 📊 性能优化速查
-
-| 优化项       | 配置                        | 性能提升 |
-| :--- | :--- | :--- |
-| **编译优化** | `opt-level = 3, lto = true` | +20-30%  |
-| **内存优化** | `WasmBuffer`                | +5%      |
-| **计算优化** | `NonZero::div_ceil`         | +10%     |
-| **数组优化** | 迭代器特化                  | +15-25%  |
-| **数据优化** | `rotate_right`              | +30-35%  |
-
----
-
-## 🛡️ 安全保证速查
-
-| 安全方面     | Rust 1.92.0 保证   | 评分       |
-| :--- | :--- | :--- |
-| **内存安全** | MaybeUninit 文档化 | ⭐⭐⭐⭐⭐ |
-| **类型安全** | NonZero 类型保证   | ⭐⭐⭐⭐⭐ |
-| **FFI 安全** | 联合体原始引用     | ⭐⭐⭐⭐⭐ |
-| **边界安全** | 自动边界检查       | ⭐⭐⭐⭐⭐ |
-
----
-
-## 📚 相关文档
-
-### 核心学习文档
-
-- [项目概览](tier_01_foundations/01_project_overview.md) - 项目总览
-- [主索引导航](tier_01_foundations/02_navigation.md) - 完整导航
-- [常见问题](tier_01_foundations/04_faq.md) - FAQ 解答
-
-### 实践指南
-
-- [WASM 基础指南](tier_02_guides/01_wasm_basics.md) - 基础学习
-- [Rust 编译 WASM](tier_02_guides/02_compiling_rust_to_wasm.md) - 编译流程
-- [JavaScript 互操作](tier_02_guides/03_javascript_interop.md) - 集成指南
-- [性能优化指南](tier_02_guides/04_performance_optimization_guide.md) - 优化技巧
-
-### 高级主题
-
-- [WASI 深入](tier_04_advanced/01_wasi_in_depth.md) - WASI 系统接口
-- [性能分析与优化](tier_04_advanced/02_performance_analysis_and_optimization.md) - 高级优化
-- [生产级部署](tier_04_advanced/03_production_deployment.md) - 部署实践
-
----
-
-**最后更新**: 2025-12-11
-**维护者**: C12 WASM 文档团队
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| WASM 学习路径与工具链 | [`concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md`](../../../concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md) |
+| WebAssembly 核心概念 | [`concept/06_ecosystem/11_domain_applications/11_webassembly.md`](../../../concept/06_ecosystem/11_domain_applications/11_webassembly.md) |
+| WASM Target 演进 | [`concept/07_future/03_preview_features/47_wasm_target_evolution.md`](../../../concept/07_future/03_preview_features/47_wasm_target_evolution.md) |
+| 速查练习 | [`concept/SUMMARY.md`](../../../concept/SUMMARY.md) |

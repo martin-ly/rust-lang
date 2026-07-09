@@ -153,7 +153,134 @@ impl RateLimiter {
 | `X-Frame-Options` | 防止点击劫持 |
 | `X-Content-Type-Options` | 防止 MIME 嗅探 |
 
-## 7. 最佳实践
+## 7. IP 白名单与黑名单
+
+对于需要基于源地址做访问控制的场景，可维护显式的白名单/黑名单集合：
+
+```rust
+use std::collections::HashSet;
+use std::net::IpAddr;
+
+struct IpFilter {
+    whitelist: HashSet<IpAddr>,
+    blacklist: HashSet<IpAddr>,
+}
+
+impl IpFilter {
+    fn new() -> Self {
+        Self {
+            whitelist: HashSet::new(),
+            blacklist: HashSet::new(),
+        }
+    }
+
+    fn allow(&mut self, ip: IpAddr) { self.whitelist.insert(ip); }
+    fn deny(&mut self, ip: IpAddr) { self.blacklist.insert(ip); }
+
+    fn is_allowed(&self, ip: &IpAddr) -> bool {
+        if self.blacklist.contains(ip) {
+            return false;
+        }
+        if !self.whitelist.is_empty() {
+            return self.whitelist.contains(ip);
+        }
+        true
+    }
+}
+```
+
+> **关键洞察**: 黑名单优先于白名单。仅当白名单为空时，才默认允许所有非黑名单 IP，这是最常见的访问控制语义。
+
+## 8. DDoS 与慢速攻击防护
+
+### 8.1 连接速率限制
+
+结合单 IP 并发连接数与每秒连接速率，可在接入层做简单 DDoS 缓解：
+
+```rust
+use std::collections::HashMap;
+use std::net::IpAddr;
+use std::sync::Arc;
+use std::time::{Duration, Instant};
+use tokio::sync::RwLock;
+
+struct DDoSProtector {
+    connections: Arc<RwLock<HashMap<IpAddr, usize>>>,
+    times: Arc<RwLock<HashMap<IpAddr, Vec<Instant>>>>,
+    max_conns: usize,
+    max_rate: usize,
+}
+
+impl DDoSProtector {
+    fn new(max_conns: usize, max_rate: usize) -> Self {
+        Self {
+            connections: Arc::new(RwLock::new(HashMap::new())),
+            times: Arc::new(RwLock::new(HashMap::new())),
+            max_conns,
+            max_rate,
+        }
+    }
+
+    async fn should_accept(&self, ip: IpAddr) -> bool {
+        let conns = self.connections.read().await;
+        if conns.get(&ip).copied().unwrap_or(0) >= self.max_conns {
+            return false;
+        }
+        drop(conns);
+
+        let mut times = self.times.write().await;
+        let now = Instant::now();
+        let entry = times.entry(ip).or_default();
+        entry.retain(|&t| now.duration_since(t) < Duration::from_secs(1));
+        if entry.len() >= self.max_rate {
+            return false;
+        }
+        entry.push(now);
+        true
+    }
+
+    async fn on_connect(&self, ip: IpAddr) {
+        *self.connections.write().await.entry(ip).or_insert(0) += 1;
+    }
+
+    async fn on_disconnect(&self, ip: IpAddr) {
+        let mut conns = self.connections.write().await;
+        if let Some(c) = conns.get_mut(&ip) {
+            *c = c.saturating_sub(1);
+            if *c == 0 { conns.remove(&ip); }
+        }
+    }
+}
+```
+
+### 8.2 慢速攻击防护
+
+对单次读取设置超时，避免恶意客户端长时间保持连接但不发送数据：
+
+```rust
+use tokio::io::AsyncReadExt;
+use tokio::net::TcpStream;
+use tokio::time::{timeout, Duration};
+
+async fn read_with_timeout(mut stream: TcpStream) -> std::io::Result<Vec<u8>> {
+    let mut buf = vec![0u8; 1024];
+    match timeout(Duration::from_secs(30), stream.read(&mut buf)).await {
+        Ok(Ok(n)) => {
+            buf.truncate(n);
+            Ok(buf)
+        }
+        Ok(Err(e)) => Err(e),
+        Err(_) => Err(std::io::Error::new(
+            std::io::ErrorKind::TimedOut,
+            "slow read timeout",
+        )),
+    }
+}
+```
+
+> **关键洞察**: 超时是防御慢速攻击（Slowloris、慢读取）的最基本手段，应与请求体大小限制、总连接时长限制配合使用。
+
+## 9. 最佳实践
 
 - 默认启用 TLS，禁用不安全的协议版本和加密套件。
 - 不要自行实现密码学原语，使用 `ring` / `rustls`。

@@ -1,40 +1,13 @@
 # Rust 1.93.0 WASM 特性参考
 
-> **文档类型**: Tier 3 - 技术参考层
-> **文档定位**: Rust 1.93.0 特性在 WASM 中的快速参考
-> **相关文档**: [Rust 1.93 WASM 改进](../rust_193_wasm_improvements.md) | [API 参考](01_api_reference.md)
+**EN**: Rust 1.93 Stabilized Features
+**Summary**: Stub redirecting to the canonical concept page for `Rust 1.93 Stabilized Features`. Crate-specific API notes remain here; general explanations live in `concept/`.
 
-**最后更新**: 2026-02-12
-**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
+> **权威来源**: [07_future/00_version_tracking/rust_1_93_stabilized.md](../../../../concept/07_future/00_version_tracking/rust_1_93_stabilized.md)
 
----
+本文件为 crate 文档占位页。通用 Rust 概念解释已迁移/整合至上方的 `concept/` 权威页；如需深入了解，请访问权威来源。
 
-## 特性索引
+## 主题速览
 
-| 特性 | 模块 | 用途 |
-| :--- | :--- | :--- |
-| MaybeUninit 增强 | WasmBuffer193 | 内存管理 |
-| String/Vec into_raw_parts | rust_193_features | 零拷贝传递 |
-| VecDeque pop_*_if | rust_193_features | 条件弹出 |
-| slice.as_array | rust_193_features | 切片转数组 |
-| Duration::from_nanos_u128 | rust_193_features | 高精度时间 |
-| char::MAX_LEN_UTF8/UTF16 | rust_193_features | 编码缓冲区 |
-| fmt::from_fn | rust_193_features | 自定义格式化 |
-
----
-
-## 相关文档
-
-- [04_rust_192_特性参考](04_rust_192_features_reference.md) - Rust 1.92 特性
-- [Rust 1.93 兼容性深度解析](../../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- 特性索引
+- 相关文档

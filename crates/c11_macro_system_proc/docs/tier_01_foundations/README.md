@@ -1,95 +1,17 @@
 # Tier 1: 基础层 - 宏系统基础
 
-**难度**: ⭐
-**预计学习时间**: 2-4 小时
-**适合人群**: Rust 初学者、需要快速了解宏系统的开发者
+**EN**: Rust Macros
+**Summary**: Stub redirecting to the canonical concept page for `Rust Macros`. Crate-specific API notes remain here; general explanations live in `concept/`.
 
----
+> **权威来源**: [03_advanced/03_proc_macros/04_macros.md](../../../../concept/03_advanced/03_proc_macros/04_macros.md)
 
-## 📚 本层内容
+本文件为 crate 文档占位页。通用 Rust 概念解释已迁移/整合至上方的 `concept/` 权威页；如需深入了解，请访问权威来源。
 
-Tier 1 提供宏系统的快速入门和核心概念概览，帮助您在最短时间内理解 Rust 声明宏、过程宏、卫生性和元编程的基础知识。
+## 主题速览
 
-### 核心文档
-
-1. **[项目概览](01_project_overview.md)** ⭐ 推荐起点
-   - 模块目标与定位
-   - 核心主题速览
-   - 学习路径指引
-2. **[主索引导航](02_navigation.md)**
-   - 文档分类索引
-   - 学习路径规划
-   - 快速查找指南
-3. **[术语表](03_glossary.md)**
-   - 宏类型术语
-   - 声明宏与过程宏术语
-   - 卫生性与作用域概念
-   - 元编程术语
-4. **[常见问题](04_faq.md)**
-   - 新手常见疑问
-   - 调试技巧
-   - 最佳实践建议
-   - 故障排除指南
-
----
-
-## 🎯 学习目标
-
-完成 Tier 1 后，您将能够：
-
-- ✅ 理解声明宏与过程宏的区别
-- ✅ 掌握 `macro_rules!` 基础语法
-- ✅ 理解宏卫生性机制
-- ✅ 了解三种过程宏类型（Derive、Attribute、Function-like）
-- ✅ 能够查阅文档并规划学习路径
-
----
-
-## ⏭️ 下一步
-
-完成 Tier 1 后，建议：
-
-1. **继续深入**: 进入 [Tier 2: 实践层](../tier_02_guides/README.md) 学习宏开发技巧
-2. **查阅参考**: 使用 [Tier 3: 参考层](../tier_03_references/README.md) 查找具体语法
-3. **理论深入**: 准备好后探索 [Tier 4: 高级层](../tier_04_advanced/README.md) 的高级主题
-
----
-
-## 📖 推荐学习顺序
-
-```text
-01_project_overview.md (15分钟)
-    ↓
-02_navigation.md (10分钟)
-    ↓
-03_glossary.md (40分钟)
-    ↓
-04_faq.md (60分钟)
-    ↓
-进入 Tier 2 实践指南
-```
-
----
-
-## 🌟 Rust 1.93.0 宏特性（兼容 Rust 1.90+ 特性）
-
-- ✅ 改进的宏错误消息
-- ✅ 宏卫生性增强
-- ✅ 过程宏性能优化
-- ✅ cargo expand 工具改进
-
----
-
-**最后更新**: 2025-12-11
-**维护状态**: 🟢 活跃维护中
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- 本层内容
+- 核心文档
+- 学习目标
+- ⏭️ 下一步
+- 推荐学习顺序
+- Rust 1.93.0 宏特性（兼容 Rust 1.90+ 特性）

@@ -158,4 +158,60 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 
 ---
 
+## 6. 调度策略
+
+当任务到达顺序或优先级对系统行为有显著影响时，可在进程池之上引入调度策略。
+
+| 策略 | 核心思想 | 适用场景 |
+| :--- | :--- | :--- |
+| FIFO | 按任务到达顺序执行 | 公平性要求低、负载均匀 |
+| 优先级调度 | 高优先级任务优先 | 关键任务需要低延迟 |
+| 公平调度/时间片轮转 | 按时间片轮流服务 | 避免长任务独占资源 |
+| 实时调度（EDF） | 截止时间最早优先 | 有硬/软实时约束 |
+
+```rust
+use std::cmp::Ordering;
+use std::collections::BinaryHeap;
+use std::time::{Instant, Duration};
+
+#[derive(Eq, PartialEq)]
+struct DeadlineTask { deadline: Instant, command: String }
+
+impl Ord for DeadlineTask {
+    fn cmp(&self, other: &Self) -> Ordering {
+        other.deadline.cmp(&self.deadline)
+    }
+}
+impl PartialOrd for DeadlineTask {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> { Some(self.cmp(other)) }
+}
+```
+
+## 7. 进程间协调
+
+在由多个 Rust 进程组成的分布式或本地工作组中，常见协调需求包括互斥、选主和任务分配。
+
+### 7.1 分布式锁
+
+基于文件创建原子性实现的互斥锁，结合 `Drop` 自动释放，适用于同一文件系统下的多进程互斥。
+
+### 7.2 选主算法
+
+Bully 算法等经典选主协议可用于进程组中的 leader 选举；leader 负责任务分发或元数据维护。
+
+### 7.3 一致性哈希任务分配
+
+将任务 ID 哈希后映射到 worker 进程，可在 worker 加入或退出时最小化任务迁移。
+
+## 8. 容错与恢复
+
+企业级进程管理需要区分可恢复错误与致命错误，并避免无限重启循环。
+
+- **健康检查**：定期检测子进程是否存活或响应。
+- **重启策略**：固定延迟、线性退避或指数退避，并设置最大重试次数。
+- **检查点**：在关键状态点持久化 `ProcessState`，失败后可从检查点恢复。
+- **优雅关闭**：先发送 SIGTERM（或 Windows 对应事件），等待宽限期后再强制终止。
+
+---
+
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/process/) · [Tokio Process](https://docs.rs/tokio/latest/tokio/process/) · [nix crate](https://docs.rs/nix/latest/nix/sys/resource/)

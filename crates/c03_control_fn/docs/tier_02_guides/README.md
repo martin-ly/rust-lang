@@ -1,135 +1,19 @@
+> **EN**: Tier 2: 实践层 - 控制流与函数实战指南 (crate docs stub)
+> **Summary**: Stub pointing to the canonical authority page(s) for `Tier 2: 实践层 - 控制流与函数实战指南`. Practical examples remain in the crate.
+
 # Tier 2: 实践层 - 控制流与函数实战指南
 
-**难度**: ⭐⭐
-**预计学习时间**: 10-15 小时
-**适合人群**: 掌握基础后希望深入实践的开发者
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/01_foundation/04_control_flow/07_control_flow.md`](../../../../concept/01_foundation/04_control_flow/07_control_flow.md)。
 
----
+本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-## 📚 本层内容
+## 主题导航
 
-Tier 2 提供实战导向的技术指南，包含大量代码示例和最佳实践，帮助您将理论知识转化为实际开发能力。
-
-### 实践指南文档
-
-1. **[条件语句指南](01_conditionals_guide.md)**
-   - `if`/`else` 深入应用
-   - `if let` 与 `let-else` 模式
-   - 三元表达式替代方案
-   - 条件编译实战
-2. **[循环结构指南](02_loops_guide.md)**
-   - `loop`/`while`/`for` 最佳实践
-   - 迭代器驱动循环
-   - 循环标签与多层跳出
-   - 无限循环与性能
-3. **[函数系统指南](03_functions_guide.md)**
-   - 函数签名设计
-   - 泛型函数实战
-   - 高阶函数与组合
-   - 方法与关联函数
-4. **[模式匹配指南](04_pattern_matching_guide.md)**
-   - `match` 表达式深入
-   - 模式守卫与绑定
-   - 解构与通配符
-   - 穷尽性检查技巧
-5. **[错误处理指南](05_error_handling_guide.md)**
-   - `Result<T, E>` 最佳实践
-   - `Option<T>` 应用场景
-   - `?` 运算符与错误传播
-   - 自定义错误类型设计
-6. **[🔥 代码示例集合](06_code_examples.md)** ⭐ 重点推荐
-   - **16个精选示例** (基础6 + 实践6 + 高级4)
-   - 从基础到高级的完整代码示例
-   - match/循环/函数/迭代器/闭包/错误处理
-   - 每个示例包含完整代码、详细说明和运行输出
-
----
-
-## 🎯 学习目标
-
-完成 Tier 2 后，您将能够：
-
-- ✅ 熟练使用各种控制流结构解决实际问题
-- ✅ 编写清晰、高效的函数与方法
-- ✅ 掌握模式匹配的高级用法
-- ✅ 设计健壮的错误处理策略
-- ✅ 理解闭包与迭代器的实战应用
-
----
-
-## 💻 代码示例特色
-
-- **可运行**: 所有代码示例均可直接编译运行
-- **实战导向**: 源自真实项目场景
-- **最佳实践**: 遵循 Rust 1.93.1 与 Edition 2024 标准
-- **性能优化**: 标注性能关键点与优化技巧
-
----
-
-## 📖 推荐学习顺序
-
-### 方式一: 系统学习（推荐给初学者）
-
-```text
-01_conditionals_guide.md (2-3小时)
-    ↓
-02_loops_guide.md (2-3小时)
-    ↓
-03_functions_guide.md (3-4小时)
-    ↓
-04_pattern_matching_guide.md (2-3小时)
-    ↓
-05_error_handling_guide.md (2-3小时)
-    ↓
-06_code_examples.md (4-6小时) ⭐ 综合实战
-    ↓
-进入 Tier 3 技术参考
-```
-
-### 方式二: 快速实战（推荐给有基础的开发者）
-
-```text
-直接学习 06_code_examples.md
-    ↓
-按需查阅其他指南文档
-    ↓
-进入 Tier 3 技术参考
-```
-
----
-
-## 🔗 相关资源
-
-- **Tier 1**: 回顾 [基础层](../tier_01_foundations/README.md) 巩固概念
-- **Tier 3**: 查阅 [参考层](../tier_03_references/README.md) 获取详细语法
-- **Tier 4**: 探索 [高级层](../tier_04_advanced/README.md) 深入理论
-
----
-
-## ⚡ 快速索引
-
-| 主题          | 文档             | 关键概念                  | 推荐度     |
-| :--- | :--- | :--- | :--- || 条件控制      | 01\_条件语句指南 | if/else, if let, let-else | ⭐⭐⭐⭐   |
-| 循环控制      | 02\_循环结构指南 | loop, while, for, 迭代器  | ⭐⭐⭐⭐   |
-| 函数设计      | 03\_函数系统指南 | 泛型函数, 高阶函数, 方法  | ⭐⭐⭐⭐   |
-| 模式匹配      | 04\_模式匹配指南 | match, 解构, 守卫         | ⭐⭐⭐⭐   |
-| 错误处理      | 05\_错误处理指南 | Result, Option, ?         | ⭐⭐⭐⭐   |
-| 🔥 代码示例集 | 06\_代码示例集合 | **16个完整示例**          | ⭐⭐⭐⭐⭐ |
-
----
-
-**最后更新**: 2025-12-11
-**维护状态**: 🟢 活跃维护中
-
-**💡 提示**: 建议先快速浏览 [代码示例集合](06_code_examples.md) 获得整体感知，再深入学习各个专题指南
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| Control Flow | [concept/01_foundation/04_control_flow/07_control_flow.md](../../../../concept/01_foundation/04_control_flow/07_control_flow.md) |
+| Functions | [concept/01_foundation/07_modules_and_items/12_functions.md](../../../../concept/01_foundation/07_modules_and_items/12_functions.md) |
+| Pattern Matching | [concept/01_foundation/04_control_flow/40_patterns.md](../../../../concept/01_foundation/04_control_flow/40_patterns.md) |

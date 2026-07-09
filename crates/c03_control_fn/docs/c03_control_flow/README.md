@@ -1,67 +1,17 @@
+> **EN**: C03 控制流 (Control Flow) (crate docs stub)
+> **Summary**: Stub pointing to the canonical authority page(s) for `C03 控制流 (Control Flow)`. Practical examples remain in the crate.
+
 # C03 控制流 (Control Flow)
 
-> Rust 强大的流程控制能力
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/01_foundation/04_control_flow/07_control_flow.md`](../../../../concept/01_foundation/04_control_flow/07_control_flow.md)。
 
----
+本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-## 📚 学习资源
+## 主题导航
 
-### 练习
-
-- [模式匹配练习](exercises/01_pattern_matching.rs)
-
-### 相关文档
-
-- [docs/05_guides/best_practices.md](../docs/05_guides/best_practices.md) - 控制流最佳实践
-- [docs/04_thinking/decision_trees/](../docs/04_thinking) - 决策树表示
-
-### 相关 Crate
-
-- [c03_control_fn](../c03_control_fn) - 函数式控制流
-
----
-
-## 🎯 核心概念
-
-1. **条件表达式**
-   - `if` / `else if` / `else`
-   - `if let` 简化模式
-2. **循环**
-   - `loop` - 无限循环
-   - `while` - 条件循环
-   - `for` - 迭代循环
-   - `while let`
-3. **模式匹配**
-   - `match` 表达式
-   - 解构
-   - 守卫子句
-   - `@` 绑定
-4. **流程控制**
-   - `break` / `continue`
-   - 标签跳出
-   - `return`
-
----
-
-## 🔗 交叉引用
-
-| 概念 | 相关文档 | 相关 Crate |
-|------|----------|------------|
-| 模式匹配 | [docs/05_guides/best_practices.md](../docs/05_guides/best_practices.md) | c02_type_system |
-| 迭代器 | [docs/02_reference/](../docs/02_reference) | c04_generic |
-| 函数式风格 | [docs/05_guides/](../docs/05_guides) | c03_control_fn |
-
----
-
-**状态**: ✅ 100% 完成
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| Control Flow | [concept/01_foundation/04_control_flow/07_control_flow.md](../../../../concept/01_foundation/04_control_flow/07_control_flow.md) |

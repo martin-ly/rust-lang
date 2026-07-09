@@ -1,112 +1,21 @@
 # c10_networks - Rust 1.94 更新概览
 
-> **最后更新**: 2026-03-10
-> **Rust 版本**: 1.94.0
-> **Edition**: 2024
-> **状态**: ✅ 已更新
+**EN**: Rust 1.94 Stabilized Features
+**Summary**: Stub redirecting to the canonical concept page for `Rust 1.94 Stabilized Features`. Crate-specific API notes remain here; general explanations live in `concept/`.
 
----
+> **权威来源**: [07_future/00_version_tracking/rust_1_94_stabilized.md](../../../../concept/07_future/00_version_tracking/rust_1_94_stabilized.md)
 
-## 目录
+本文件为 crate 文档占位页。通用 Rust 概念解释已迁移/整合至上方的 `concept/` 权威页；如需深入了解，请访问权威来源。
 
-- [Rust 1.94 关键特性](#rust-194-关键特性)
-- [代码示例](#代码示例)
-- [迁移指南](#迁移指南)
-- [最佳实践](#最佳实践)
+## 主题速览
 
----
-
-## Rust 1.94 关键特性
-
-### 1.1 新增特性
-
-| 特性 | 说明 | 适用场景 |
-|------|------|----------|
-| 异步网络 | Rust 1.94 核心改进 | 生产环境 |
-| 生成器 | 语法增强 | 新代码开发 |
-| 性能优化 | 编译器/标准库 | 全场景 |
-
-### 1.2 Edition 2024 支持
-
-```rust
-// Cargo.toml
-[package]
-name = "c10_networks_example"
-version = "0.1.0"
-edition = "2024"
-rust-version = "1.94"
-```
----
-
-## 代码示例
-
-### 2.1 基础用法
-
-```rust
-// Rust 1.94 代码示例
-pub fn example() {
-    println!("异步网络编程");
-}
-```
-### 2.2 高级模式
-
-```rust
-// 高级使用模式
-pub fn advanced_example<T>(value: T) -> T {
-    value
-}
-```
----
-
-## 迁移指南
-
-### 3.1 从 Rust 1.93 迁移
-
-1. 更新 `Cargo.toml` 中的版本要求
-2. 检查废弃的 API
-3. 运行测试确保兼容性
-
-### 3.2 常见迁移问题
-
-| 问题 | 解决方案 |
-|------|----------|
-| 编译错误 | 参考 Rust 1.94 发布说明 |
-| 警告信息 | 使用 `cargo fix` 自动修复 |
-
----
-
-## 最佳实践
-
-### 4.1 性能优化
-
-- 利用编译器优化
-- 使用新的标准库 API
-- 遵循 Rust 惯用法
-
-### 4.2 代码质量
-
-- 运行 Clippy
-- 编写文档测试
-- 保持代码简洁
-
----
-
-## 相关文档
-
-- [Rust 1.94 发布说明](../../../docs/06_toolchain/16_rust_1.94_release_notes.md)
-- [c10_networks 主索引](../00_master_index.md)
-- [Edition 2024 指南](../../../docs/05_guides/RUST_194_MIGRATION_GUIDE.md)
-
----
-
-> 💡 **提示**: 本文档为占位符增强版本，详细内容请参考模块主文档。
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- Rust 1.94 关键特性
+- 1.1 新增特性
+- 1.2 Edition 2024 支持
+- 代码示例
+- 2.1 基础用法
+- 2.2 高级模式
+- 迁移指南
+- 3.1 从 Rust 1.93 迁移
+- 3.2 常见迁移问题
+- 最佳实践

@@ -1,200 +1,22 @@
-# 2.1 所有权系统
+> **EN**: Ownership Quick Start Guide (c01 guide index)
+> **Summary**: Stub pointing to the canonical ownership authority. Practical examples remain in the c01 crate.
 
-## 📋 目录
+# C01 所有权系统 - 快速入门指南
 
-- [2.1 所有权系统](#21-所有权系统)
-  - [📋 目录](#-目录)
-  - [📖 学习目标](#-学习目标)
-  - [🎯 核心内容导航](#-核心内容导航)
-    - [1. 所有权三大规则](#1-所有权三大规则)
-    - [2. Move 语义](#2-move-语义)
-    - [3. Copy 语义](#3-copy-语义)
-    - [4. 函数中的所有权](#4-函数中的所有权)
-  - [📚 完整内容](#-完整内容)
-  - [🎓 学习建议](#-学习建议)
-    - [学习路径](#学习路径)
-    - [重点关注](#重点关注)
-    - [配套资源](#配套资源)
-  - [💡 快速参考](#-快速参考)
-    - [所有权规则速查](#所有权规则速查)
-    - [Move vs Copy 决策树](#move-vs-copy-决策树)
-    - [常见错误速查](#常见错误速查)
-  - [🔗 相关主题](#-相关主题)
-    - [本层级](#本层级)
-    - [其他层级](#其他层级)
-  - [✅ 完成检查](#-完成检查)
-  - [🚀 下一步](#-下一步)
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)。
 
-## 📖 学习目标
+本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-完成本文档后，你将能够：
+## 快速导航
 
-- ✅ 深入理解所有权的三大规则及其实现原理（资源控制权的逻辑证明）
-- ✅ 掌握 Move 和 Copy 语义的区别和应用场景（资源控制权的转移）
-- ✅ 理解资源管理的编译期证明机制（逻辑证明，非内存分配）
-- ✅ 能够设计合理的所有权传递策略（资源控制权的逻辑转移）
-- ✅ 掌握所有权在函数和结构体中的应用（编译期证明的资源生命周期）
-
-## 🎯 核心内容导航
-
-### 1. 所有权三大规则
-
-**规则概述**（引用一致性视角）:
-
-```text
-规则 1: 每个资源都有唯一的所有者（逻辑证明）
-规则 2: 同一时间只能有一个所有者（排他控制权）
-规则 3: 所有者离开作用域时，资源被自动释放（编译期证明的资源生命周期）
-```
-
-**详细学习**: [所有权基础概念 §1.1](01_ownership_quick_start.md#11-所有权规则)
-
-### 2. Move 语义
-
-**核心概念**（引用一致性视角）:
-
-- 默认的资源控制权转移机制（逻辑转移，非物理内存）
-- 适用于需要资源管理的类型（String, Vec, Box等）
-- 零运行时开销（编译期证明，非运行时检查）
-
-**详细学习**: [移动语义 §1.2](01_ownership_quick_start.md#12-移动语义-move-semantics)
-
-### 3. Copy 语义
-
-**核心概念**:
-
-- 简单类型的按位复制
-- 适用于栈分配的类型（i32, f64, bool等）
-- 实现 Copy trait 的条件
-
-**详细学习**: [所有权基础概念 §1.1](01_ownership_quick_start.md#11-所有权规则)
-
-### 4. 函数中的所有权
-
-**关键场景**:
-
-- 参数传递的所有权转移
-- 返回值的所有权转移
-- 如何设计函数签名
-
-**详细学习**: [高级所有权模式 §5.1](01_ownership_quick_start.md#51-所有权转移模式)
-
-## 📚 完整内容
-
-本主题的完整详细内容，包括大量示例和深入解析，请参考：
-
-**[📖 所有权系统基础完整文档](01_ownership_quick_start.md)**
-
-该文档包含：
-
-- ✅ 所有权基础概念（600+ 行）（资源控制权的逻辑证明）
-- ✅ 移动语义详解（资源控制权的转移）
-- ✅ 智能指针系统（资源管理的编译期证明）
-- ✅ 资源安全保证（编译期逻辑证明，非内存检查）
-- ✅ 高级所有权模式（资源控制权的复杂逻辑关系）
-- ✅ 性能优化技巧（编译期证明的效率）
-- ✅ 常见错误和解决方案（逻辑证明的失败）
-- ✅ 最佳实践总结
-
-## 🎓 学习建议
-
-### 学习路径
-
-1. **第一遍**（2小时）: 快速浏览，理解核心概念
-2. **第二遍**（2-3小时）: 详细阅读，运行所有示例
-3. **第三遍**（1-2小时）: 实践练习，解决问题
-
-### 重点关注
-
-| 优先级          | 主题                   | 重要性 |
-| :--- | :--- | :--- |
-| 🔴 **必须掌握** | 三大规则、Move vs Copy | 基础   |
-| 🟡 **应该理解** | 函数所有权、返回值     | 常用   |
-| 🟢 **可以了解** | 高级模式、优化技巧     | 进阶   |
-
-### 配套资源
-
-**代码示例**:
-
-- 💻 **所有权示例** → [所有权系统基础](01_ownership_quick_start.md) (包含 15+ 完整示例和测试)
-- 🧪 **综合示例集** → [Rust 1.92.0 实战示例](../rust_192_examples_collection.md) (138+ 综合示例)（自 Rust 1.90 引入）| [历史版本](../rust_190_examples_collection.md)
-
-**可视化资源**:
-
-- 📊 [知识图谱](../knowledge_graph.md) - 查看所有权相关概念
-- 🧠 [思维导图](../mind_map.md) - 所有权学习路径
-
-## 💡 快速参考
-
-### 所有权规则速查
-
-```rust
-// 规则 1 & 2: 唯一所有者
-let s1 = String::from("hello");
-let s2 = s1;  // 所有权转移，s1 失效
-
-// 规则 3: 离开作用域自动释放
-{
-    let s = String::from("hello");
-}  // s 被自动释放
-
-// Copy 类型：复制而非移动
-let x = 5;
-let y = x;  // x 仍然有效
-```
-
-### Move vs Copy 决策树
-
-```text
-值的赋值
-    ↓
-类型实现了 Copy？
-    ├─ 是 → 复制值，原变量仍有效
-    └─ 否 → 移动所有权，原变量失效
-```
-
-### 常见错误速查
-
-| 错误信息              | 原因           | 解决方案                 |
-| :--- | :--- | :--- |
-| value used after move | 使用已移动的值 | 使用引用或 clone         |
-| cannot move out of    | 尝试移出借用值 | 使用 to_owned 或重新设计 |
-
-## 🔗 相关主题
-
-### 本层级
-
-- 📖 [2.2 借用检查器](2.2_借用检查器.md) - 理解借用规则
-- 📖 [2.3 生命周期](2.3_生命周期.md) - 引用的有效性
-- 📖 [2.4 作用域规则](2.4_作用域规则.md) - 资源管理
-
-### 其他层级
-
-- 🎯 [Tier 1: 快速开始](../tier_01_foundations/1_2_quick_start_guide.md) - 快速回顾
-- 🎨 [Tier 3: 高级所有权](../tier_03_references/06_advanced_ownership_patterns_reference.md) - 高级模式
-- 🔬 [Tier 4: 类型系统理论](../tier_04_advanced/06_type_system_theory.md) - 理论基础
-
-## ✅ 完成检查
-
-完成学习后，你应该能够：
-
-- [ ] 解释所有权的三大规则
-- [ ] 区分 Move 和 Copy 语义
-- [ ] 预测代码中的所有权变化
-- [ ] 设计合理的函数所有权策略
-- [ ] 解决常见的所有权编译错误
-
-## 🚀 下一步
-
-**继续学习**: [2.2 借用检查器](2.2_借用检查器.md)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| 所有权三大规则 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
+| Move 语义 | [concept/01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) |
+| Copy / Clone 语义 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [concept/02_intermediate/00_traits/01_traits.md](../../../../concept/02_intermediate/00_traits/01_traits.md) |
+| 函数与所有权 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
+| 借用与引用 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| 生命周期 | [concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |

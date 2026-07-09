@@ -1,135 +1,21 @@
 # Tier 4: 高级层 - 宏系统高级主题
 
-**难度**: ⭐⭐⭐⭐
-**预计学习时间**: 20-30 小时
-**适合人群**: 有扎实基础，希望深入宏理论和高级技术的开发者
+**EN**: Rust Macros
+**Summary**: Stub redirecting to the canonical concept page for `Rust Macros`. Crate-specific API notes remain here; general explanations live in `concept/`.
 
----
+> **权威来源**: [03_advanced/03_proc_macros/04_macros.md](../../../../concept/03_advanced/03_proc_macros/04_macros.md)
 
-## 📚 本层内容
+本文件为 crate 文档占位页。通用 Rust 概念解释已迁移/整合至上方的 `concept/` 权威页；如需深入了解，请访问权威来源。
 
-Tier 4 深入探讨宏系统的高级主题，包括元编程理论、DSL构建、代码生成优化和生产级宏开发，适合需要深度理解的开发者。
+## 主题速览
 
-### 高级主题文档
-
-1. **[宏元编程](01_macro_metaprogramming.md)**
-   - 元编程理论基础
-   - 宏的语义模型
-   - 宏展开形式化分析
-   - 宏与类型系统交互
-2. **[DSL构建实践](02_dsl_construction_practice.md)**
-   - 领域特定语言设计
-   - 语法解析策略
-   - 语义分析与验证
-   - DSL 性能优化
-3. **[代码生成优化](03_code_generation_optimization.md)**
-   - 宏生成代码优化技巧
-   - 编译时计算策略
-   - 零成本抽象验证
-   - LLVM IR 分析
-4. **[宏调试深化](04_macro_debugging_in_depth.md)**
-   - 高级调试技术
-   - 宏展开追踪
-   - 性能剖析
-   - 错误诊断策略
-5. **[生产级宏开发](05_production_grade_macro_development.md)**
-   - 宏项目架构设计
-   - 测试覆盖策略
-   - 文档与示例最佳实践
-   - 发布与维护指南
-
----
-
-## 🎯 学习目标
-
-完成 Tier 4 后，您将能够：
-
-- ✅ 理解宏的底层实现机制
-- ✅ 设计复杂的 DSL
-- ✅ 优化宏生成的代码
-- ✅ 开发生产级宏库
-- ✅ 应用元编程理论解决复杂问题
-- ✅ 调试和维护大型宏项目
-
----
-
-## 💡 核心概念
-
-### 1. 元编程理论
-
-深入分析 Rust 宏的元编程能力，探讨宏的语义模型、展开过程和类型系统交互。
-
-### 2. DSL 设计模式
-
-学习如何设计清晰、高效的领域特定语言，包括语法设计、错误处理和用户体验优化。
-
-### 3. 零成本抽象验证
-
-通过 LLVM IR 分析验证宏生成的代码是否达到零成本抽象，确保性能不打折扣。
-
-### 4. 生产级工程实践
-
-学习如何将宏项目工程化，包括测试、文档、发布和社区维护。
-
----
-
-## 📖 推荐学习顺序
-
-```text
-先决条件：完成 Tier 1-3 所有内容
-    ↓
-01_macro_metaprogramming.md (6-8小时)
-    ↓
-02_dsl_construction_practice.md (5-7小时)
-    ↓
-03_code_generation_optimization.md (4-6小时)
-    ↓
-04_macro_debugging_in_depth.md (2-3小时)
-    ↓
-05_production_grade_macro_development.md (4-6小时)
-```
-
----
-
-## 🔗 相关资源
-
-- **Tier 1-3**: 确保已掌握前置知识
-- **C02 Type System**: 理解类型系统对宏的影响
-- **C03 Control Flow**: 探索宏与控制流的交互
-- **C11 Archives**: 查阅归档的详细技术参考
-
----
-
-## ⚡ 快速索引
-
-| 主题   | 文档             | 核心技术                        |
-| :--- | :--- | :--- || 元编程 | 01\_宏元编程     | 语义模型、形式化分析、类型交互  |
-| DSL    | 02_DSL构建实践   | 语法设计、解析、验证、优化      |
-| 优化   | 03\_代码生成优化 | 编译时计算、零成本抽象、LLVM IR |
-| 调试   | 04\_宏调试深化   | 展开追踪、性能剖析、错误诊断    |
-| 工程   | 05\_生产级宏开发 | 架构、测试、文档、发布          |
-
----
-
-## 🌟 前沿技术
-
-- **Rust 1.93.0 宏优化**: 编译性能提升与错误消息改进
-- **异步宏**: 探索宏在异步编程中的应用
-- **声明宏 2.0**: 跟踪最新的宏语法提案
-- **编译器插件**: 了解 rustc 插件机制
-
----
-
-**最后更新**: 2025-12-11
-**维护状态**: 🟢 活跃维护中
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- 本层内容
+- 高级主题文档
+- 学习目标
+- 核心概念
+- 1. 元编程理论
+- 2. DSL 设计模式
+- 3. 零成本抽象验证
+- 4. 生产级工程实践
+- 推荐学习顺序
+- 相关资源

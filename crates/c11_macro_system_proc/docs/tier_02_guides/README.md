@@ -1,101 +1,17 @@
 # Tier 2: 实践层 - 宏开发实战指南
 
-**难度**: ⭐⭐
-**预计学习时间**: 10-15 小时
-**适合人群**: 掌握基础后希望深入宏开发的开发者
+**EN**: Rust Macros
+**Summary**: Stub redirecting to the canonical concept page for `Rust Macros`. Crate-specific API notes remain here; general explanations live in `concept/`.
 
----
+> **权威来源**: [03_advanced/03_proc_macros/04_macros.md](../../../../concept/03_advanced/03_proc_macros/04_macros.md)
 
-## 📚 本层内容
+本文件为 crate 文档占位页。通用 Rust 概念解释已迁移/整合至上方的 `concept/` 权威页；如需深入了解，请访问权威来源。
 
-Tier 2 提供实战导向的宏开发指南，包含大量代码示例和最佳实践，帮助您开发实用的声明宏和过程宏。
+## 主题速览
 
-### 实践指南文档
-
-1. **[声明宏实践指南](01_declarative_macros_practice_guide.md)**
-   - `macro_rules!` 深入应用
-   - 模式匹配与重复
-   - 卫生性最佳实践
-   - 常见宏模式库
-2. **[Derive 宏开发指南](02_derive_macros_development_guide.md)**
-   - Derive 宏基础
-   - trait 自动派生实现
-   - 属性参数处理
-   - 错误处理策略
-3. **[属性宏开发指南](03_attribute_macros_development_guide.md)**
-   - 属性宏基础
-   - 函数/结构体增强
-   - 条件编译与配置
-   - 代码注入技巧
-4. **[函数宏开发指南](04_function_macros_development_guide.md)**
-   - 函数式宏基础
-   - TokenStream 处理
-   - DSL 构建入门
-   - 宏生成代码
-5. **[宏调试与测试](05_macro_debugging_and_testing.md)**
-   - 宏展开调试技巧
-   - `cargo expand` 使用
-   - 宏单元测试
-   - 集成测试策略
-
----
-
-## 🎯 学习目标
-
-完成 Tier 2 后，您将能够：
-
-- ✅ 开发实用的声明宏
-- ✅ 创建自定义 Derive 宏
-- ✅ 实现属性宏与函数宏
-- ✅ 调试和测试宏代码
-- ✅ 应用宏最佳实践
-
----
-
-## 💻 代码示例特色
-
-- **可运行**: 所有代码示例均可直接编译运行
-- **实战导向**: 源自真实项目场景
-- **最佳实践**: 遵循 Rust 1.93.0 标准
-- **逐步深入**: 从简单到复杂
-
----
-
-## 📖 推荐学习顺序
-
-```text
-01_declarative_macros_practice_guide.md (3-4小时)
-    ↓
-02_derive_macros_development_guide.md (2-3小时)
-    ↓
-03_attribute_macros_development_guide.md (2-3小时)
-    ↓
-04_function_macros_development_guide.md (2-3小时)
-    ↓
-05_macro_debugging_and_testing.md (1-2小时)
-    ↓
-进入 Tier 3 技术参考
-```
-
----
-
-## 🔗 相关资源
-
-- **Tier 1**: 回顾 [基础层](../tier_01_foundations/README.md) 巩固概念
-- **Tier 3**: 查阅 [参考层](../tier_03_references/README.md) 获取详细语法
-- **Tier 4**: 探索 [高级层](../tier_04_advanced/README.md) 深入理论
-
----
-
-**最后更新**: 2025-12-11
-**维护状态**: 🟢 活跃维护中
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- 本层内容
+- 实践指南文档
+- 学习目标
+- 代码示例特色
+- 推荐学习顺序
+- 相关资源

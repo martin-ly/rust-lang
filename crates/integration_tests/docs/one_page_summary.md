@@ -1,34 +1,18 @@
-# Integration Tests — 单页总结
+> **EN**: Integration Tests — One-Page Summary
+> **Summary**: Stub one-page summary for integration test docs; points to the canonical testing concept.
+>
+> **权威来源**: [concept/06_ecosystem/09_testing_and_quality/16_testing.md](../../../concept/06_ecosystem/09_testing_and_quality/16_testing.md)
 
-> 本文档用一页纸总结 `integration_tests` 的核心概念、重点 API 和学习路径。
+# Integration Tests — One-Page Summary
 
----
+> 本文档是 crate 级文档占位 stub。通用 Rust 概念解释的权威来源见上方链接。
 
-## 1. 一句话定义
+## 主题速览
 
-`integration_tests` 是 Integration tests for Rust learning workspace。
-
-## 2. 核心知识点
-
-- **知识点 1**: 待补充
-- **知识点 2**: 待补充
-- **知识点 3**: 待补充
-
-## 3. 重点 API / 模式
-
-| 名称 | 作用 |
-|---|---|
-| `todo!()` | 待补充 |
-
-## 4. 常见误区
-
-- 误区 1：待补充
-
-## 5. 下一步学习
-
-- [00_MASTER_INDEX.md](00_master_index.md)
-- 返回 [README.md](README.md)
+- 核心概念速览
+- 学习路径
+- 快速参考
 
 ---
 
-*本文件由 `scripts/templates/crate_docs/one_page_summary.md` 模板生成。*
+*本文件由 crates/*/docs/ 治理流程生成，原内容已归档为 stub。*

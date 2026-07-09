@@ -180,6 +180,10 @@
     - [单态化与代码膨胀](#单态化与代码膨胀)
     - [缓解策略](#缓解策略)
     - [泛型 vs Trait 对象](#泛型-vs-trait-对象)
+  - [补充：来自 `crates/c04_generic` 泛型语法参考的速查](#补充来自-cratesc04_generic-泛型语法参考的速查)
+    - [类型参数命名约定](#类型参数命名约定)
+    - [泛型声明位置速查](#泛型声明位置速查)
+    - [Turbofish 语法](#turbofish-语法)
 
 ## 一、权威定义（Definition）
 
@@ -3056,3 +3060,48 @@ Rust 泛型通过单态化实现零成本抽象：编译器为每个具体类型
 | 编译时间 | 可能较长 | 较短 |
 | 同质集合 | 不直接支持 | 支持 `Vec<Box<dyn Trait>>` |
 | 推荐场景 | 性能敏感、类型有限 | 类型多、代码体积敏感 |
+
+---
+
+## 补充：来自 `crates/c04_generic` 泛型语法参考的速查
+
+> 本节由原 `crates/c04_generic/docs/tier_03_references/01_generics_syntax_reference.md` 合并而来，保留泛型声明语法速查。
+
+### 类型参数命名约定
+
+| 约定 | 含义 |
+| :--- | :--- |
+| `T` | 通用类型参数（Type） |
+| `U`, `V` | 第二、第三个类型参数 |
+| `E` | 错误类型（Error） |
+| `K`, `V` | 键、值类型（Key/Value） |
+| `N` | 常量泛型数值 |
+| `'a` | 生命周期参数 |
+
+### 泛型声明位置速查
+
+```rust
+// 函数
+fn id<T>(x: T) -> T { x }
+
+// 结构体
+struct Point<T> { x: T, y: T }
+
+// 枚举
+enum Option<T> { Some(T), None }
+
+// 实现块
+impl<T> Point<T> { /* ... */ }
+
+// 常量泛型
+struct Array<T, const N: usize> { data: [T; N] }
+```
+
+### Turbofish 语法
+
+```rust
+let v = Vec::<i32>::new();
+let x = "42".parse::<i32>().unwrap();
+```
+
+> 完整 BNF、约束传播与形式化类型论映射参见本节正文。

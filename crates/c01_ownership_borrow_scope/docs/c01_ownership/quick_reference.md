@@ -1,112 +1,23 @@
-# C01 所有权快速参考
+> **EN**: C01 Ownership Quick Reference
+> **Summary**: Quick-reference stub pointing to the canonical ownership authority. Practical examples remain in the c01 crate.
 
-> 所有权系统的核心概念速查
+# Ownership（所有权） — Crate Docs Stub
 
----
+> **权威来源**: [Ownership（所有权）](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 
-## 📋 所有权三规则
+本文件原为对应 crate 的通用概念教程/参考。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已在 `concept/` 中维护为单一权威来源；此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/` 目录。
 
-1. **每个值都有一个所有者**
-2. **同一时间只有一个所有者**
-3. **所有者离开作用域，值被释放**
+## 主题导航
 
----
+| 主题 | 权威来源 |
+| :--- | :--- |
+| 所有权三大规则 | [01_ownership.md](01_ownership.md) |
+| 借用规则 | [02_borrowing.md](02_borrowing.md) |
+| 生命周期 | [03_lifetimes.md](03_lifetimes.md) |
+| 智能指针 | [12_smart_pointers.md](../../../../concept/02_intermediate/02_memory_management/12_smart_pointers.md) |
 
-## 🔑 借用规则
+## 本地资源
 
-| 类型 | 语法 | 数量 | 可变性 |
-|------|------|------|--------|
-| 不可变借用 | `&T` | 多个 | 不可变 |
-| 可变借用 | `&mut T` | 一个 | 可变 |
-
-**规则**: 不可变借用和可变借用不能同时存在
-
----
-
-## 💡 常见模式
-
-### 1. 所有权转移
-
-```rust
-let s1 = String::from("hello");
-let s2 = s1;  // 所有权转移
-// s1 不能再使用
-```
-
-### 2. 克隆
-
-```rust
-let s1 = String::from("hello");
-let s2 = s1.clone();  // 深拷贝
-```
-
-### 3. 借用
-
-```rust
-fn calculate_length(s: &String) -> usize {
-    s.len()
-}
-```
-
-### 4. 可变借用
-
-```rust
-fn change(s: &mut String) {
-    s.push_str(" world");
-}
-```
-
----
-
-## 📝 生命周期标注
-
-```rust
-// 函数
-fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() { x } else { y }
-}
-
-// 结构体
-struct ImportantExcerpt<'a> {
-    part: &'a str,
-}
-```
-
----
-
-## 🎯 智能指针选择
-
-| 场景 | 推荐类型 | 说明 |
-|------|----------|------|
-| 堆分配 | `Box<T>` | 唯一所有权 |
-| 共享只读 | `Rc<T>` | 引用计数 |
-| 共享可变 | `Rc<RefCell<T>>` | 运行时借用检查 |
-| 线程共享 | `Arc<T>` | 原子引用计数 |
-| 延迟初始化 | `LazyLock<T>` | 线程安全延迟初始化 |
-
----
-
-## ⚠️ 常见错误
-
-| 错误 | 原因 | 解决 |
-|------|------|------|
-| use of moved value | 所有权已转移 | 使用借用或克隆 |
-| cannot borrow as mutable | 已有不可变借用 | 调整借用范围 |
-| cannot borrow as immutable | 已有可变借用 | 调整借用范围 |
-| lifetime mismatch | 生命周期不匹配 | 添加生命周期标注 |
-
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- [Crate README](../../../../crates/c01_ownership_borrow_scope/README.md) — 本 crate 总览与入口

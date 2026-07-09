@@ -61,6 +61,8 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [补充视角：设计模式中的可观测性](#补充视角设计模式中的可观测性)
+  - [补充视角：WebAssembly 可观测性实践](#补充视角webassembly-可观测性实践)
 
 ---
 
@@ -677,3 +679,41 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "日志与可观测性：Rust 服务端监控生态 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+---
+
+## 补充视角：设计模式中的可观测性
+
+> 来源：`crates/c09_design_pattern/docs/observability.md`
+
+在责任链、装饰器、代理等链式调用模式中，可观测性尤为重要：
+
+- **Span 链**：在每个处理步骤创建子 span，在聚合入口创建顶层 span，串起完整请求链路。
+- **异步上下文**：对跨 `await` 的步骤使用 `.instrument(span)` 绑定 `tracing` 上下文。
+- **失败路径**：在错误处理中记录 `error!` 并携带上下文键值，便于排查。
+- **指标**：通过 Prometheus 等暴露 RED 指标（Rate / Errors / Duration）。
+- **分布式追踪**：使用 OpenTelemetry + Jaeger/Zipkin 实现跨服务追踪，配置 1–10% 采样率。
+- **生产输出**：使用 JSON 格式结构化日志，包含 span 列表、线程 ID 等字段。
+- **性能影响**：`tracing` 在关键路径上可能引入显著开销，生产环境应仅在关键路径使用 `info` 级别并配置采样。
+
+## 补充视角：WebAssembly 可观测性实践
+
+> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/08_monitoring_and_observability_practice.md`，已按 AGENTS.md §6.4 迁移至此。
+
+WASM 工作负载的可观测性在传统三支柱基础上具有沙箱化特征：
+
+- **指标（Metrics）**：Prometheus 拉取 `/metrics`；WASM 模块可暴露模块级指标（请求数、错误率、线性内存大小）。相比容器，WASM 的内存模型单一，内存监控更直接。
+- **日志（Logs）**：推荐结构化 JSON 日志；Loki / Promtail 采集 Pod 日志，使用 LogQL 查询。
+- **追踪（Traces）**：通过 OpenTelemetry + Jaeger 追踪请求链路；WASM 模块内的 span 需注意跨 host-guest 边界的 context 传播。
+- **SLO/SLI**：定义可用性、P99 延迟、错误率目标；利用 Alertmanager 分级告警（critical / warning / info）。
+
+WASM 可观测性差异：
+
+| 维度 | 传统容器 | WASM 容器 |
+| --- | --- | --- |
+| 启动监控 | 需重点关注 | 毫秒级，几乎无需 |
+| 内存监控 | 多层复杂 | 单一线性内存 |
+| 性能开销 | 5–10% | 1–2% |
+| 指标粒度 | 容器级 | 模块级 |
+
+> **关键洞察**：WASM 的轻量与沙箱特性简化了部分监控维度，但 host-guest 边界、多运行时兼容性与 trace context 传播仍是可观测性工程的重点。

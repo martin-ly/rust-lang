@@ -1,168 +1,20 @@
+> **EN**: C05 Tier 2 Practice Guides (crate docs stub)
+> **Summary**: Stub pointing to the canonical concurrency authority pages. Practical examples remain in the c05_threads crate.
+
 # C05 Tier 2 实践指南
 
-> **目录说明**: 本目录包含 5 篇实战导向的实践指南，涵盖线程编程的核心技术和最佳实践。
+> **权威来源**: [concept/03_advanced/00_concurrency/01_concurrency.md](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 
-## 📚 指南列表
+本目录原为 `c05_threads` crate 的实践指南索引。根据 [AGENTS.md](../../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/03_advanced/00_concurrency/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-### [01. 线程基础与生命周期](01_thread_basics_and_lifetimes.md)
+## 主题导航
 
-**核心内容**:
-
-- 线程创建与启动
-- 线程生命周期管理（join, detach, parking）
-- 线程配置与优化（Builder, 线程池）
-- 错误处理与恢复（panic 处理）
-- 实战案例：并行图像处理、生产者-消费者模式
-
-**适合人群**: 初学者 → 进阶
-**预计阅读**: 30 分钟
-
----
-
-### [02. 同步原语实践](02_synchronization_primitives_practice.md)
-
-**核心内容**:
-
-- Mutex 互斥锁（基础用法、锁中毒、try_lock）
-- RwLock 读写锁（性能优势、读写分离）
-- Condvar 条件变量（等待/唤醒、超时）
-- Barrier 屏障、Once 一次性初始化
-- 实战案例：线程安全计数器、缓存系统、任务队列
-
-**适合人群**: 进阶
-**预计阅读**: 40 分钟
-
----
-
-### [03. 消息传递模式](03_message_passing_patterns.md)
-
-**核心内容**:
-
-- 标准库 Channel（send/recv、try_recv、超时）
-- 多生产者单消费者（MPSC）
-- Crossbeam Channel（MPMC、有界/无界）
-- Select 操作（多通道等待）
-- 实战模式：请求-响应、管道、扇出-扇入、发布-订阅
-
-**适合人群**: 进阶 → 高级
-**预计阅读**: 45 分钟
-
----
-
-### [04. 并行编程指南](04_parallel_programming_guide.md)
-
-**核心内容**:
-
-- Rayon 并行迭代器（par_iter 家族）
-- 并行集合操作（排序、搜索、分区）
-- 自定义并行任务（join、scope、ThreadPool）
-- 分治算法（快速排序、归并排序）
-- 数据并行模式（Map-Reduce、聚合、分组）
-
-**适合人群**: 进阶 → 高级
-**预计阅读**: 50 分钟
-
----
-
-### [05. 异步集成实践](05_async_integration_practice.md)
-
-**核心内容**:
-
-- 线程 vs 异步对比
-- spawn_blocking 桥接（CPU 密集任务卸载）
-- 混合架构设计（Web 服务 + 计算）
-- Tokio 线程池配置
-- 通道互操作（oneshot、mpsc、watch）
-
-**适合人群**: 高级
-**预计阅读**: 45 分钟
-
----
-
-## 🎯 学习路径
-
-```text
-┌─────────────────────────────────────────────────────┐
-│            推荐学习顺序                              │
-├─────────────────────────────────────────────────────┤
-│                                                     │
-│  1️⃣  线程基础与生命周期                              │
-│       ↓ (掌握线程基本概念)                           │
-│                                                     │
-│  2️⃣  同步原语实践                                    │
-│       ↓ (学习共享状态同步)                           │
-│                                                     │
-│  3️⃣  消息传递模式                                    │
-│       ↓ (掌握通信模式)                               │
-│                                                     │
-│  4️⃣  并行编程指南  OR  5️⃣  异步集成实践              │
-│       (根据需求选择)                                 │
-│                                                     │
-└─────────────────────────────────────────────────────┘
-```
-
-### 按场景选择
-
-| 你的需求                | 推荐阅读                  |
-| :--- | :--- || 我是并发新手            | 从 01 开始顺序学习        |
-| 我需要处理 CPU 密集任务 | 04 并行编程指南           |
-| 我需要处理 I/O 密集任务 | 05 异步集成实践           |
-| 我需要线程间通信        | 02 同步原语 + 03 消息传递 |
-| 我需要构建线程池        | 01 线程基础（线程池部分） |
-
----
-
-## 📖 相关文档
-
-### 前置知识
-
-- [Tier 1: 项目概览](../tier_01_foundations/01_project_overview.md)
-- [Tier 1: 术语表](../tier_01_foundations/03_glossary.md)
-- [Tier 1: 常见问题](../tier_01_foundations/04_faq.md)
-
-### 进阶阅读
-
-- [Tier 3: API 参考](../tier_03_references/README.md)
-- [Tier 4: 高级主题](../tier_04_advanced/README.md)
-
-### 外部资源
-
-- [The Rust Book - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
-- [Rust Atomics and Locks](https://marabos.nl/atomics/)
-- [Rayon Documentation](https://docs.rs/rayon)
-- [Tokio Tutorial](https://tokio.rs/tokio/tutorial)
-
----
-
-## 🔧 实践建议
-
-1. **动手实践**: 每个指南都包含可运行的代码示例，建议亲自运行和修改
-2. **性能测试**: 使用基准测试工具（如 `criterion`）验证优化效果
-3. **错误探索**: 尝试触发文档中提到的常见陷阱，加深理解
-4. **项目应用**: 将学到的模式应用到实际项目中
-
----
-
-## 📊 质量标准
-
-所有 Tier 2 文档均遵循以下标准：
-
-- ✅ **实战导向**: 包含多个可运行的完整示例
-- ✅ **性能对比**: 提供基准测试和性能分析
-- ✅ **最佳实践**: 总结业界公认的最佳实践
-- ✅ **常见陷阱**: 列举并解释常见错误
-- ✅ **内部链接**: 与其他文档良好互联
-
----
-
-**最后更新**: 2025-10-22 | **维护团队**: C05 Threads Team | **质量评分**: 95/100
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| 并发模型 | [concept/03_advanced/00_concurrency/01_concurrency.md](../../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
+| 并发模式 | [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md) |
+| 线程基础与生命周期 | [concept/03_advanced/00_concurrency/01_concurrency.md](../../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
+| 消息传递模式 | [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md) |
+| 同步原语 | [concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md](../../../../concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md) |

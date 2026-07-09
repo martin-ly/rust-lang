@@ -1853,3 +1853,483 @@ Rust 1.91/1.92 引入的语言特性需要工具链与生态库协同：
 - **Toolchain**: 升级 `rustc`/`cargo` 到对应版本以启用新 lint 与诊断；详见 [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)。
 - **Testing**: 新增行为可通过 `cargo test` 与 [Testing](../../06_ecosystem/09_testing_and_quality/16_testing.md) 验证。
 - **Cargo**: 版本特性常与 [Cargo 工作流](../../06_ecosystem/01_cargo/80_cargo_getting_started.md) 联动（例如 edition、lint 配置）。
+
+---
+
+## 补充视角：宏系统改进
+
+> 来源：`crates/c11_macro_system_proc/docs/rust_192_macro_improvements.md`
+
+Rust 1.92.0 在宏系统方面的改进方向包括：
+
+- **更精确的错误定位**：宏展开后的类型错误能够更准确地指向原始调用位置。
+- **借用检查提示**：在宏生成的代码中提供更清晰的借用检查诊断。
+- **const 上下文增强**：支持在 const 函数与表达式中更灵活地使用宏。
+- **编译器性能**：改进宏展开算法与缓存，提升大型代码库的编译速度。
+
+迁移建议：
+
+- 更新到 Rust 1.92.0 后重新验证宏展开行为。
+- 利用改进的错误消息修复历史宏中的类型不匹配问题。
+- 在适合的地方使用 const 上下文宏进行编译期计算。
+
+---
+
+## 补充视角：算法与数据结构改进
+
+> 来源：`crates/c08_algorithms/docs/rust_192_algorithms_improvements.md`
+
+Rust 1.92.0 在算法实现相关的标准库 API 上带来以下增强：
+
+- **`<[_]>::rotate_right`**：稳定化高效的切片右旋，适用于循环缓冲区等场景。
+- **`NonZero::div_ceil`**：对非零整数执行向上取整除法，便于分块与分页计算。
+- **迭代器方法特化**：提升数组与集合比较等常见操作的性能。
+- **`BTreeMap::Entry::insert_entry`**：更高效的 `BTreeMap` 插入操作，返回占用项。
+- **展开表默认启用**：即使使用 `-Cpanic=abort` 也能正确回溯。
+- **`panic::catch_unwind` 性能优化**：降低算法错误处理的开销。
+
+迁移建议：
+
+- 在需要循环移位或缓冲区轮转的场景中使用 `rotate_right` 替代手动实现。
+- 使用 `NonZero::div_ceil` 替代 `(n + d - 1) / d` 的向上取整惯用法。
+- 评估 `BTreeMap::Entry::insert_entry` 是否能简化需要同时插入与获取值的代码。
+
+---
+
+## 迁移内容（来自 `crates/c05_threads/docs/rust_192_threads_improvements.md`）
+
+> <!-- migrated from crates/c05_threads/docs/rust_192_threads_improvements.md -->
+>
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/rust_192_threads_improvements.md` 迁移至本权威页。
+
+## 概述
+
+Rust 1.92.0 在线程和并发编程方面带来了重要的改进，主要包括：
+
+1. **MaybeUninit 改进** - 更安全的并发内存管理
+2. **rotate_right** - 高效的任务队列管理
+3. **NonZero::div_ceil** - 精确的线程资源分配计算
+4. **RwLockWriteGuard::downgrade** ⭐ **新增** - 写锁降级为读锁
+5. **展开表默认启用** ⭐ **新增** - 即使使用 `-Cpanic=abort` 也能正确回溯
+6. **panic::catch_unwind 性能优化** ⭐ **新增** - 不再访问线程本地存储，性能提升
+7. **线程安全增强** - 更好的并发安全保障
+
+---
+
+## MaybeUninit 在并发编程中的应用
+
+### Rust 1.92.0 改进概述
+
+Rust 1.92.0 正式文档化了 `MaybeUninit` 的内部表示和有效性约束，这使得在并发编程中进行内存管理更加安全。
+
+```rust,ignore
+// 线程安全的未初始化缓冲区
+pub struct ThreadSafeUninitBuffer<T> {
+    buffer: Vec<MaybeUninit<T>>,
+}
+
+impl<T> ThreadSafeUninitBuffer<T> {
+    pub fn new(size: usize) -> Self {
+        // Rust 1.92.0: 使用文档化的 MaybeUninit
+        // ...
+    }
+
+    pub unsafe fn init_at(&mut self, index: usize, value: T) {
+        // Rust 1.92.0: 安全的初始化模式
+        self.buffer[index].write(value);
+    }
+}
+```
+
+---
+
+## rotate_right 在线程池管理中的应用
+
+Rust 1.92.0 稳定化了 `rotate_right` 方法，在线程池任务队列管理中可以高效地旋转任务顺序。
+
+```rust,ignore
+// 线程池任务队列
+pub struct ThreadPoolTaskQueue {
+    tasks: VecDeque<ThreadTask>,
+}
+
+impl ThreadPoolTaskQueue {
+    pub fn rotate_tasks(&mut self, count: usize) {
+        // Rust 1.92.0: 使用 rotate_right 高效旋转任务
+        let tasks_vec: Vec<_> = self.tasks.drain(..).collect();
+        let mut rotated = tasks_vec;
+        rotated.rotate_right(count);
+        self.tasks = rotated.into();
+    }
+}
+```
+
+---
+
+## NonZero::div_ceil 在线程数量计算中的应用
+
+Rust 1.92.0 稳定化了 `NonZero::div_ceil`，在计算线程池大小和资源分配时非常有用。
+
+```rust,ignore
+use std::num::NonZeroUsize;
+
+// 计算线程池大小
+pub fn calculate_thread_pool_size(
+    total_work: usize,
+    work_per_thread: NonZeroUsize,
+) -> usize {
+    // Rust 1.92.0: 使用 NonZero::div_ceil 精确计算
+    let total = NonZeroUsize::new(total_work).unwrap();
+    total.div_ceil(work_per_thread).get()
+}
+```
+
+---
+
+## 实际应用示例
+
+详细示例请参考：
+
+- 源代码实现
+- 示例代码
+
+---
+
+## 迁移指南
+
+### 从 Rust 1.91 迁移到 Rust 1.92.0
+
+1. **更新 Rust 版本**: `rustup update stable`
+2. **更新 Cargo.toml**: `rust-version = "1.92"`
+3. **利用新特性**:
+   - 使用 `MaybeUninit` 改进并发内存管理
+   - 使用 `rotate_right` 优化任务队列
+   - 使用 `NonZero::div_ceil` 精确计算线程数量
+
+---
+
+## RwLockWriteGuard::downgrade (Rust 1.92.0 新增) ⭐
+
+Rust 1.92.0 稳定化了 `RwLockWriteGuard::downgrade` 方法，允许将写锁降级为读锁。这在需要先写入然后读取的场景中非常有用。
+
+### 使用场景
+
+- **配置更新后读取**: 更新配置后立即读取，允许其他读者访问
+- **原子更新读取**: 先更新后读取，避免重新获取锁的开销
+- **性能优化**: 减少锁的获取和释放次数
+
+### 代码示例
+
+```rust,ignore
+use std::sync::{Arc, RwLock, RwLockWriteGuard};
+
+// 配置管理器示例
+pub struct ConfigManager {
+    config: Arc<RwLock<HashMap<String, String>>>,
+}
+
+impl ConfigManager {
+    /// 更新配置并立即读取（使用 downgrade 优化）
+    pub fn update_and_read(&self, key: String, value: String) -> Option<String> {
+        // 获取写锁进行更新
+        let mut write_guard = self.config.write().unwrap();
+        write_guard.insert(key.clone(), value);
+
+        // Rust 1.92.0: 降级为读锁，允许其他读者访问
+        let read_guard = RwLockWriteGuard::downgrade(write_guard);
+
+        // 读取刚写入的值（不需要重新获取锁）
+        read_guard.get(&key).cloned()
+    }
+}
+```
+
+### 性能优势
+
+- **减少锁操作**: 避免写锁释放后再获取读锁的开销
+- **提高并发性**: 降级后允许其他读者同时访问
+- **原子性保证**: 更新和读取在同一个锁保护下完成
+
+---
+
+## 展开表默认启用 (Rust 1.92.0 新增) ⭐
+
+Rust 1.92.0 中，即使使用 `-Cpanic=abort` 选项，展开表也会默认启用。这确保了在这些条件下回溯功能正常工作。
+
+### 配置说明
+
+在 `Cargo.toml` 中：
+
+```toml
+[profile.release]
+panic = "abort"  # 即使使用 abort，展开表也会启用
+```
+
+### 优势
+
+- **更好的调试体验**: 即使使用 `panic = "abort"`，也能获得完整的回溯信息
+- **生产环境友好**: 可以在生产环境中获得有用的错误信息
+- **可选择性**: 如果不需要展开表，可以使用 `-Cforce-unwind-tables=no` 显式禁用
+
+---
+
+## panic::catch_unwind 性能优化 (Rust 1.92.0 新增) ⭐
+
+Rust 1.92.0 优化了 `panic::catch_unwind` 函数，不再在入口处访问线程本地存储，提高了性能。
+
+### 性能影响
+
+- **减少开销**: 不再访问线程本地存储，减少函数调用开销
+- **提高吞吐量**: 在高频调用的场景中性能提升明显
+- **自动受益**: 所有使用 `panic::catch_unwind` 的代码自动受益
+
+### 使用示例
+
+```rust,ignore
+use std::panic;
+
+// Rust 1.92.0: 优化后的 catch_unwind 性能更好
+let result = panic::catch_unwind(|| {
+    // 可能 panic 的代码
+    risky_operation()
+});
+
+match result {
+    Ok(value) => println!("操作成功: {:?}", value),
+    Err(_) => println!("操作失败，但程序继续运行"),
+}
+```
+
+---
+
+## 总结
+
+---
+
+## 迁移内容（来自 `crates/c06_async/docs/rust_192_async_improvements.md`）
+
+> <!-- migrated from crates/c06_async/docs/rust_192_async_improvements.md -->
+>
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c06_async/docs/rust_192_async_improvements.md` 迁移至本权威页。
+
+## 概述
+
+Rust 1.92.0 在异步编程方面带来了多项改进和优化，主要包括：
+
+1. **改进的异步运行时性能**
+   - 更高效的 Future 轮询机制
+   - 优化的任务调度器
+2. **增强的异步特性**
+   - 改进的 async/await 语法支持
+   - 更好的错误处理
+3. **编译器优化**
+   - 更快的异步代码编译
+   - 改进的异步代码生成
+4. **编译器改进** ⭐ **新增**
+   - 展开表默认启用 - 即使使用 `-Cpanic=abort` 也能正确回溯
+   - 增强的宏导出验证 - 对 `#[macro_export]` 属性执行更严格的验证
+5. **性能优化** ⭐ **新增**
+   - `panic::catch_unwind` 性能优化 - 不再访问线程本地存储，异步错误处理性能提升
+
+---
+
+## Rust 1.92.0 异步改进
+
+### 1. 改进的异步运行时性能
+
+Rust 1.92.0 改进了异步运行时的性能：
+
+- **更高效的 Future 轮询**: 减少了不必要的轮询开销
+- **优化的任务调度**: 改进了任务调度器的性能
+- **更好的资源管理**: 改进了异步资源的生命周期管理
+
+#### 示例
+
+```rust,ignore
+// Rust 1.92.0 中，异步任务的调度更加高效
+use tokio::time::{sleep, Duration};
+
+async fn example_async_task() {
+    // 更高效的异步任务执行
+    sleep(Duration::from_millis(100)).await;
+    println!("异步任务完成");
+}
+
+#[tokio::main]
+async fn main() {
+    // 改进的任务调度
+    example_async_task().await;
+}
+```
+
+### 2. 增强的异步特性
+
+Rust 1.92.0 增强了异步特性的支持：
+
+- **改进的 async/await**: 更灵活的异步函数定义
+- **更好的错误处理**: 改进的异步错误传播机制
+
+#### 示例
+
+```rust,ignore
+// Rust 1.92.0 中，异步错误处理更加清晰
+use std::io;
+
+async fn async_operation() -> Result<String, io::Error> {
+    // 更清晰的错误处理
+    Ok("操作成功".to_string())
+}
+
+#[tokio::main]
+async fn main() -> Result<(), io::Error> {
+    let result = async_operation().await?;
+    println!("{}", result);
+    Ok(())
+}
+```
+
+### 3. 编译器优化
+
+Rust 1.92.0 在编译器层面进行了优化：
+
+- **更快的编译**: 改进了异步代码的编译速度
+- **更好的代码生成**: 生成更高效的异步代码
+- **改进的调试信息**: 提供更好的异步代码调试信息
+
+---
+
+## 实际应用示例
+
+### 示例 1: 高效的异步并发
+
+```rust,ignore
+use tokio::time::{sleep, Duration};
+
+async fn concurrent_tasks() {
+    let tasks: Vec<_> = (0..10)
+        .map(|i| {
+            tokio::spawn(async move {
+                sleep(Duration::from_millis(100)).await;
+                println!("任务 {} 完成", i);
+            })
+        })
+        .collect();
+
+    // Rust 1.92.0 中，并发任务的执行更加高效
+    for task in tasks {
+        task.await.unwrap();
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    concurrent_tasks().await;
+}
+```
+
+### 示例 2: 改进的错误处理
+
+```rust,ignore
+use std::io;
+
+async fn async_io_operation() -> io::Result<Vec<u8>> {
+    // Rust 1.92.0 提供更好的异步 I/O 错误处理
+    tokio::fs::read("example.txt").await
+}
+
+#[tokio::main]
+async fn main() -> io::Result<()> {
+    match async_io_operation().await {
+        Ok(data) => println!("读取成功: {} 字节", data.len()),
+        Err(e) => eprintln!("读取失败: {}", e),
+    }
+    Ok(())
+}
+```
+
+---
+
+## 迁移指南
+
+### 从 Rust 1.91 迁移到 1.92.0
+
+1. **更新 Rust 版本**: 确保使用 Rust 1.92.0 或更高版本
+2. **更新依赖**: 更新 Tokio 等异步运行时库到最新版本
+3. **检查异步代码**: 验证异步代码是否按预期工作
+4. **利用性能改进**: 考虑优化异步代码以利用性能改进
+
+### 最佳实践
+
+- 使用最新的异步特性
+- 利用性能改进优化代码
+- 保持良好的错误处理
+- 使用合适的异步运行时
+
+## 设计模式相关改进
+
+> 内容来源：`crates/c09_design_pattern/docs/rust_192_design_pattern_improvements.md`，已按 AGENTS.md §6.4 迁移至此。
+
+Rust 1.92.0 对常用设计模式的实现带来了以下改进：
+
+### 1. `MaybeUninit` 文档化
+
+`MaybeUninit` 的内部表示和有效性约束正式文档化，使对象池、单例等模式实现更可预测。
+
+```rust
+use std::mem::MaybeUninit;
+
+pub struct ObjectPool<T> {
+    pool: Vec<MaybeUninit<T>>,
+    size: usize,
+}
+
+impl<T> ObjectPool<T> {
+    pub fn new(size: usize) -> Self {
+        let mut pool = Vec::with_capacity(size);
+        unsafe { pool.set_len(size); }
+        ObjectPool { pool, size }
+    }
+
+    pub unsafe fn acquire(&mut self) -> Option<T> {
+        if self.size == 0 { return None; }
+        self.size -= 1;
+        Some(self.pool[self.size].assume_init_read())
+    }
+}
+```
+
+### 2. 关联项多边界
+
+同一关联类型可指定多个 trait 边界，策略模式等 trait 定义更灵活。
+
+```rust
+pub trait Strategy {
+    type Context: Clone + Send + Sync + 'static;
+    type Result: Clone + Send + 'static;
+    fn execute(&self, context: Self::Context) -> Self::Result;
+}
+```
+
+### 3. `Location::file_as_c_str`
+
+`std::panic::Location` 新增 `file_as_c_str`，便于在错误处理和日志中嵌入零分配的位置信息。
+
+```rust
+use std::panic::Location;
+
+pub fn log_error(error: &str) {
+    let loc = Location::caller();
+    eprintln!("[{}] error: {}", loc.file_as_c_str().to_string_lossy(), error);
+}
+```
+
+### 4. 其他改进
+
+- **Unwind tables 默认启用**：即使使用 `-Cpanic=abort` 也能正确回溯。
+- **`panic::catch_unwind` 性能优化**：提升模式化错误处理性能。
+
+### 迁移要点
+
+1. `rustup update stable`
+2. 将 `Cargo.toml` 的 `rust-version` 更新为 `"1.92"`
+3. 逐步用文档化的 `MaybeUninit` 替换未初始化内存模式。

@@ -1,51 +1,14 @@
+> **EN**: Tier 2: 实践指南层
+> **Summary**: A stub page pointing to the canonical concept authority. The c07_process crate provides runnable examples for this topic; general Rust concept explanations have been migrated.
+
 # Tier 2: 实践指南层
 
-> **定位**: 系统化实践教程
-> **目标读者**: 有基础的开发者
-> **预计学习时间**: 1-2 周
+> **权威来源**: [concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md](../../../../concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md)
 
----
+本文件原为 `c07_process` crate 的通用概念文档。根据 AGENTS.md §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`，此处仅保留索引与 canonical 链接。
 
-## 目录
+## 主题列表
 
-- [Tier 2: 实践指南层](#tier-2-实践指南层)
-  - [目录](#目录)
-  - [📚 文档列表](#-文档列表)
-  - [🎯 学习目标](#-学习目标)
-
-## 📚 文档列表
-
-| 文档                                             | 描述                   | 状态      | 预计时长 |
-| :--- | :--- | :--- | :--- || [01\_进程管理快速入门](01_process_management_quick_start.md) | 进程创建、控制、监控   | ⏳ 进行中 | 3-4 小时 |
-| [02_IPC通信实践](02_ipc_communication_practice.md)            | 管道、套接字、共享内存 | ⏳ 进行中 | 3-4 小时 |
-| [03\_异步进程管理](03_async_process_management.md)         | 异步 API 和模式        | ⏳ 进行中 | 2-3 小时 |
-| [04\_跨平台实践](04_cross_platform_practice.md)             | Windows/Linux/macOS    | ⏳ 进行中 | 2-3 小时 |
-| [05\_进程监控与诊断](05_process_monitoring_and_diagnostics.md)     | 性能监控、调试技术     | ⏳ 进行中 | 2-3 小时 |
-
----
-
-## 🎯 学习目标
-
-完成 Tier 2 后，你将能够：
-
-- ✅ 熟练创建和管理进程
-- ✅ 实现各种 IPC 通信机制
-- ✅ 使用异步 API 管理进程
-- ✅ 编写跨平台进程代码
-- ✅ 监控和诊断进程问题
-
----
-
-**维护**: Documentation Team
-**最后更新**: 2025-10-22
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- 📚 文档列表
+- 🎯 学习目标

@@ -1,47 +1,32 @@
+> **EN**: c13 Embedded Systems One-Page Summary (c13_embedded example index)
+> **Summary**: Stub one-page summary pointing to the canonical concept authority for Rust embedded systems. Common target triples and learning path migrated to the authority page.
+
 # C13 嵌入式系统 - 一页纸总结
 
-> **用途**: 快速回顾核心概念与学习路径
-> **完整文档**: [00_MASTER_INDEX](00_master_index.md)
+> **权威来源**: `no_std`、裸机编程、内存映射寄存器、硬件抽象层（PAC/HAL/BSP）、实时系统、Embassy 等完整解释见
+> [`concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md`](../../../concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md)。
 
----
+本文件原为 `c13_embedded` crate 的通用嵌入式系统速查。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/06_ecosystem/05_systems_and_embedded/`，此处仅保留索引与
+canonical 链接。具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-## 核心概念
+## 快速导航
 
-| 概念 | 说明 |
-|---|---|
-| `no_std` | 移除标准库依赖，使用 `core` 与 `alloc`（可选） |
-| MMIO | 内存映射 I/O，通过原始指针访问外设寄存器 |
-| UART | 通用异步收发器，嵌入式中最常见的串口通信 |
-| 中断 | 外设通过中断向量表通知 CPU 处理异步事件 |
-| HAL | 硬件抽象层，使用类型状态模式保证资源使用安全 |
-| FFI | 与 C 代码/链接脚本/启动文件互操作 |
+| 主题 | 权威来源 |
+| :--- | :--- |
+| Rust 嵌入式系统开发 | [`concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md`](../../../concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) |
+| 常见目标三元组与学习路径 | [`concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md#六常见嵌入式目标三元组与学习路径`](../../../concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) |
+| 交叉编译 | [`concept/06_ecosystem/05_systems_and_embedded/17_cross_compilation.md`](../../../concept/06_ecosystem/05_systems_and_embedded/17_cross_compilation.md) |
 
-## 常见目标三元组
+## 主题列表
 
-| 目标 | 场景 |
-|---|---|
-| `thumbv7m-none-eabi` | Cortex-M3，无操作系统，无硬浮点 |
-| `thumbv7em-none-eabihf` | Cortex-M4/M7，硬浮点 |
-| `x86_64-pc-windows-msvc` | Host 模拟编译与测试 |
-
-## 学习路径
-
-1. **入门**: `no_std` 环境 → 内存映射寄存器 → UART 驱动
-2. **进阶**: 中断处理 → HAL 设计模式 → FFI 与 C 互操作
-3. **高级**: RTIC 实时中断驱动 → Embassy 异步框架 → 裸机性能优化
-
-## 速查命令
-
-```bash
-# Host 检查
-cargo check -p c13_embedded
-
-# 嵌入式目标（需安装 target）
-cargo check -p c13_embedded --target thumbv7m-none-eabi --features embedded
-```
-
----
-
-**文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-28
+- `no_std` 与 `core` / `alloc`
+- 内存映射 I/O（MMIO）
+- UART 串口通信
+- 中断与中断向量表
+- 硬件抽象层（HAL）与类型状态模式
+- FFI 与 C 互操作
+- RTIC 实时中断驱动框架
+- Embassy 异步嵌入式框架
+- 常见嵌入式目标三元组
+- 入门 → 进阶 → 高级学习路径

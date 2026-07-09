@@ -44,6 +44,7 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+  - [五之一、const fn 中的浮点运算](#五之一const-fn-中的浮点运算)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -516,6 +517,38 @@ graph TD
 
 > **陷阱总结**: 数值陷阱主要与**截断**、**类型转换**、**浮点比较**、**溢出**、**索引类型**、**除零**和**位运算优先级**相关。
 > [来源: [Rust Reference — Numeric Types](https://doc.rust-lang.org/reference/types/numeric.html)]
+
+---
+
+## 五之一、const fn 中的浮点运算
+
+Rust 1.82+ 起，基本浮点操作可在 `const fn` / `const` 上下文中使用：
+
+```rust
+const PI: f64 = 3.141592653589793;
+const RADIUS: f64 = 1.5;
+const CIRCUMFERENCE: f64 = 2.0 * PI * RADIUS; // ✅
+
+const BITS: u64 = 1.0_f64.to_bits();          // ✅
+const FROM_BITS: f64 = f64::from_bits(0x3FF0000000000000); // ✅
+```
+
+**限制**:
+
+- ✅ 四则运算、取负、绝对值 (`abs`)、位模式转换 (`to_bits`/`from_bits`)
+- ❌ 超越函数 (`sqrt`, `sin`, `cos`, `ln`, `powf` 等) 仍不支持 const 上下文
+- ⚠️ `NaN` 不等于自身，`is_nan()` 在较早版本中不可用，可通过位模式检测
+
+```rust
+const fn is_nan_const(x: f64) -> bool {
+    let bits = x.to_bits();
+    (bits & 0x7FF0_0000_0000_0000 == 0x7FF0_0000_0000_0000)
+        && (bits & 0x000F_FFFF_FFFF_FFFF != 0)
+}
+```
+
+> **认知功能**: const 浮点能力使**物理常数、单位转换和简单几何计算**可在编译期完成，但需注意 IEEE 754 特殊值（NaN、±∞、±0）的语义。
+> [来源: [Rust RFC 3514](https://github.com/rust-lang/rfcs/pull/3514) · [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)]
 
 ---
 

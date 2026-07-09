@@ -1,50 +1,14 @@
+> **EN**: Tier 1: 基础概念层
+> **Summary**: A stub page pointing to the canonical concept authority. The c07_process crate provides runnable examples for this topic; general Rust concept explanations have been migrated.
+
 # Tier 1: 基础概念层
 
-> **定位**: 快速入门和基础参考
-> **目标读者**: 所有学习者
-> **预计学习时间**: 2-4 小时
+> **权威来源**: [concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md](../../../../concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md)
 
----
+本文件原为 `c07_process` crate 的通用概念文档。根据 AGENTS.md §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`，此处仅保留索引与 canonical 链接。
 
-## 目录
+## 主题列表
 
-- [Tier 1: 基础概念层](#tier-1-基础概念层)
-  - [目录](#目录)
-  - [📚 文档列表](#-文档列表)
-  - [🎯 学习目标](#-学习目标)
-
-## 📚 文档列表
-
-| 文档  | 描述  | 状态      |
-| :--- | :--- | :--- |
-| [01\_项目概览](01_project_overview.md)     | 模块介绍、学习价值、核心概念 | ⏳ 进行中 |
-| [02\_主索引导航](02_navigation.md) | 学习路径、文档导航           | ⏳ 进行中 |
-| [03\_术语表](03_glossary.md)         | 关键术语和概念定义           | ⏳ 进行中 |
-| [04\_常见问题](04_faq.md)     | 新手常见问题解答             | ⏳ 进行中 |
-
----
-
-## 🎯 学习目标
-
-完成 Tier 1 后，你将能够：
-
-- ✅ 理解进程管理的基本概念
-- ✅ 了解 IPC 通信机制
-- ✅ 掌握基本术语和定义
-- ✅ 解决常见的入门问题
-
----
-
-**维护**: Documentation Team
-**最后更新**: 2025-10-22
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- 📚 文档列表
+- 🎯 学习目标

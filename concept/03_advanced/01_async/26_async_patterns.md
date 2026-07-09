@@ -508,9 +508,39 @@ async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
   → Stream
   → 异步迭代
   → stream.next().await
+
+CPU 密集型 offload:
+  → tokio::task::spawn_blocking
+  → 将阻塞/计算任务移到独立线程池
+  → spawn_blocking(|| heavy_compute()).await?
 ```
 
-> **模式矩阵**: Rust 异步的**核心模式可以归纳为 6 类**——覆盖从简单并发到复杂流处理的大部分场景。
+> **模式矩阵**: Rust 异步的**核心模式可以归纳为 7 类**——覆盖从简单并发到复杂流处理的大部分场景。
+
+### 2.4 spawn_blocking 与混合架构
+
+异步运行时擅长 I/O 密集型任务，但不应在异步任务中执行阻塞或 CPU 密集型计算，否则会阻塞事件循环。`tokio::task::spawn_blocking` 将任务卸载到独立线程池：
+
+```rust
+use tokio::task;
+
+async fn process_image(data: Vec<u8>) -> Result<Vec<u8>, task::JoinError> {
+    task::spawn_blocking(move || {
+        // CPU 密集型或阻塞操作
+        heavy_compression(data)
+    })
+    .await
+}
+```
+
+**决策要点**:
+
+- I/O 密集 → 异步任务
+- CPU 密集 → `spawn_blocking` 或 rayon
+- 混合工作负载 → 异步 + `spawn_blocking` 组合
+
+> **认知功能**: `spawn_blocking` 是**异步与同步世界之间的桥接器**——它保留了 async/await 的编程模型，同时避免阻塞异步执行器。
+> [来源: [Tokio — spawn_blocking](https://docs.rs/tokio/latest/tokio/task/fn.spawn_blocking.html)]
 > [来源: [Async Patterns](https://rust-lang.github.io/async-book/index.html)]
 
 ---

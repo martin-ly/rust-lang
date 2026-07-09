@@ -1,5 +1,12 @@
 # Rust 1.90 丰富示例集成：知识图谱×多维矩阵×实战代码
 
+> **权威来源**: [Ownership, Borrowing & Lifetimes](../../concept/01_foundation/01_ownership_borrow_lifetime)
+> **文档类型**: 代码示例与实践项目（crate-specific）
+
+本文件包含与 `Ownership, Borrowing & Lifetimes` 相关的可运行代码示例、练习项目和实战代码。通用概念解释请查阅上方权威来源；此处仅保留 crate 级别的示例实现与学习活动。
+
+---
+
 ## 📊 目录
 
 - [Rust 1.90 丰富示例集成：知识图谱×多维矩阵×实战代码](#rust-190-丰富示例集成知识图谱多维矩阵实战代码)

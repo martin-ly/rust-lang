@@ -1,3 +1,12 @@
+# 📋 目录
+
+> **权威来源**: [Control Flow & Functions](../../concept/01_foundation/04_control_flow)
+> **文档类型**: 代码示例与实践项目（crate-specific）
+
+本文件包含与 `Control Flow & Functions` 相关的可运行代码示例、练习项目和实战代码。通用概念解释请查阅上方权威来源；此处仅保留 crate 级别的示例实现与学习活动。
+
+---
+
 ﻿# 💻 Rust 1.90 控制流与函数 - 实战示例集
 
 > **版本**: Rust 1.90 Edition 2024

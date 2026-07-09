@@ -1,42 +1,14 @@
+> **EN**: Tier 3: 技术参考层
+> **Summary**: A stub page pointing to the canonical concept authority. The c07_process crate provides runnable examples for this topic; general Rust concept explanations have been migrated.
+
 # Tier 3: 技术参考层
 
-> **定位**: 深度技术参考和 API 文档
-> **目标读者**: 进阶开发者
-> **用途**: 查阅和深入理解
+> **权威来源**: [concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md](../../../../concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md)
 
----
+本文件原为 `c07_process` crate 的通用概念文档。根据 AGENTS.md §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`，此处仅保留索引与 canonical 链接。
 
-## 📚 文档列表
+## 主题列表
 
-| 文档                                          | 描述                     | 状态      | 用途 |
-| :--- | :--- | :--- | :--- |
-| [01\_进程模型参考](01_process_models_reference.md)      | 完整的进程模型和生命周期 | ⏳ 进行中 | 参考 |
-| [02_IPC机制参考](02_ipc_mechanisms_reference.md)         | 所有 IPC 机制详解        | ⏳ 进行中 | 参考 |
-| [03_Rust192特性参考](03_Rust192特性参考.md) | Rust 1.93.0 相关特性     | ⏳ 进行中 | 参考 |
-| [04\_同步原语参考](04_synchronization_primitives_reference.md)      | 互斥锁、信号量等         | ⏳ 进行中 | 参考 |
-| [05\_性能优化参考](05_performance_optimization_reference.md)      | 性能优化技术手册         | ⏳ 进行中 | 参考 |
-
----
-
-## 🎯 内容覆盖
-
-- ✅ 完整的 API 参考
-- ✅ 技术实现细节
-- ✅ 最佳实践指南
-- ✅ 性能优化技术
-
----
-
-**维护**: Documentation Team
-**最后更新**: 2025-12-11
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- 📚 文档列表
+- 🎯 内容覆盖

@@ -1,65 +1,24 @@
-# C08 算法与数据结构 - 一页纸总结
+> **EN**: C08 Algorithms & Data Structures — One-Page Summary (c08_algorithms example index)
+> **Summary**: A stub page pointing to the canonical concept authority for Rust algorithms and collections. The c08_algorithms crate provides runnable algorithm examples.
 
-> **用途**: 快速回顾核心概念、常见坑、学习路径
-> **完整文档**: [00_MASTER_INDEX](00_master_index.md)
+# C08 算法与数据结构 - 一页纸总结（c08_algorithms 示例索引）
 
----
+> **权威来源**: 集合、迭代器、算法复杂度、数据结构等完整解释见
+> [`concept/06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md`](../../../concept/06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md)。
 
-## 核心概念（4 条）
+本文件原为 `c08_algorithms` crate 的通用算法与数据结构一页纸总结。根据 AGENTS.md §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/06_ecosystem/11_domain_applications/`，此处仅保留索引与 canonical 链接。
 
-| 概念 | 说明 |
+## 本 crate 相关示例
+
+- `crates/c08_algorithms/examples/`：算法与数据结构可运行示例。
+- `crates/c08_algorithms/src/bin/`：算法演示程序。
+
+## 快速导航
+
+| 主题 | 权威来源 |
 | :--- | :--- |
-| **集合类型** | `Vec`、`HashMap`、`BTreeMap`、`HashSet`；选型看访问模式 |
-| **迭代器** | `iter()`/`into_iter()`/`iter_mut()`；适配器 `map`/`filter`/`fold` |
-| **算法复杂度** | O(1)、O(log n)、O(n)；排序、搜索、图算法 |
-| **Rust 特色** | 零成本抽象；迭代器惰性求值；`sort_unstable` 等 |
-
----
-
-## 常见坑与解决
-
-| 坑 | 解决 |
-| :--- | :--- |
-| 迭代器消费后复用 | 用 `by_ref()` 或 `iter()` 多次；或 `collect` 再 `iter` |
-| HashMap key 无 `Hash` | 用 `BTreeMap` 或为 key 实现 `Hash` |
-| 排序稳定性 | 稳定用 `sort`；性能用 `sort_unstable` |
-| 浮点作 key | 用 `ordered_float` 或整数编码 |
-
----
-
-## 集合速选
-
-| 场景 | 选型 |
-| :--- | :--- |
-| 顺序、索引访问 | `Vec` |
-| 键值查找、无序 | `HashMap` |
-| 键值有序 | `BTreeMap` |
-| 去重、成员检测 | `HashSet`/`BTreeSet` |
-| 双端队列 | `VecDeque` |
-
----
-
-## 学习路径
-
-1. **入门** (1–2 周): Vec/HashMap → 迭代器基础 → 常用算法
-2. **进阶** (2–3 周): 排序、搜索、图、动态规划
-3. **高级** (持续): 并行算法、与 C05/C06 结合
-
----
-
-## 速查与练习
-
-- **速查卡**: [algorithms_cheatsheet](../../../docs/02_reference/quick_reference/algorithms_cheatsheet.md) | [collections_iterators_cheatsheet](../../../docs/02_reference/quick_reference/collections_iterators_cheatsheet.md)
-- **RBE 练习**: [Vectors](https://doc.rust-lang.org/rust-by-example/std/vec.html) · [HashMap](https://doc.rust-lang.org/rust-by-example/std/hash.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html)
-- **Rustlings**: [05_vecs](https://github.com/rust-lang/rustlings/tree/main/exercises/05_vecs) · [11_hashmaps](https://github.com/rust-lang/rustlings/tree/main/exercises/11_hashmaps) · [18_iterators](https://github.com/rust-lang/rustlings/tree/main/exercises/18_iterators)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 集合类型选型（`Vec`、`HashMap`、`BTreeMap`、`HashSet` 等） | [`concept/06_ecosystem/11_domain_applications/77_data_structures_in_rust.md`](../../../concept/06_ecosystem/11_domain_applications/77_data_structures_in_rust.md) |
+| 迭代器与适配器 | [`concept/06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md`](../../../concept/06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md) |
+| 算法复杂度分析 | [`concept/06_ecosystem/11_domain_applications/78_algorithm_complexity_analysis.md`](../../../concept/06_ecosystem/11_domain_applications/78_algorithm_complexity_analysis.md) |
+| 速查练习 | [`concept/SUMMARY.md`](../../../concept/SUMMARY.md) |

@@ -1,28 +1,17 @@
+> **EN**: C03 控制流与函数 - 待完善清单 (crate docs stub)
+> **Summary**: Stub pointing to the canonical authority page(s) for `C03 控制流与函数 - 待完善清单`. Practical examples remain in the crate.
+
 # C03 控制流与函数 - 待完善清单
 
-> **最后更新**: 2026-02-13
-> **追踪**: 待补充内容与改进项
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/01_foundation/04_control_flow/07_control_flow.md`](../../../concept/01_foundation/04_control_flow/07_control_flow.md)。
 
-## 待完善项
+本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-| 序号 | 项目 | 说明 | 优先级 | 状态 |
-| :--- | :--- | :--- | :--- | :--- || 1 | 错误处理边界案例 | 增补 From/Into 错误映射、anyhow vs thiserror、早返回与 RAII | 中 | ✅ |
-| 2 | 迭代器与闭包协同 | 增补迭代器与闭包在控制流中的协同示例 | 中 | ✅ |
-| 3 | async/await 互链 | 与 c06_async 的 async/await 场景互链 | 低 | ✅ |
+## 主题导航
 
-## 完成情况
-
-- [x] 错误处理边界案例补全（见 05_错误处理指南 7.5 节）
-- [x] 迭代器与闭包协同示例（见 02_循环结构指南 案例6）
-- [x] c06_async 互链（见 README 相关模块）
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| Control Flow | [concept/01_foundation/04_control_flow/07_control_flow.md](../../../concept/01_foundation/04_control_flow/07_control_flow.md) |

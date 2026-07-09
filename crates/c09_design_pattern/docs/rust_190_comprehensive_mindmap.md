@@ -1,137 +1,20 @@
-﻿# 🗺️ Rust 1.90 设计模式 - 综合思维导图
+> **EN**: Rust 1.90 Design Patterns Comprehensive Mindmap (crate docs stub)
+> **Summary**: Stub pointing to the canonical authority page for Rust design patterns.
 
-> **版本**: Rust 1.90 Edition 2024
-> **创建日期**: 2025-10-20
-> **适用人群**: 中级到高级开发者
+# 🗺️ Rust 1.90 设计模式 - 综合思维导图
 
----
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/06_ecosystem/03_design_patterns/02_patterns.md`](../../../concept/06_ecosystem/03_design_patterns/02_patterns.md)。
 
-## 📋 目录
+本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-- [🗺️ Rust 1.90 设计模式 - 综合思维导图](#️-rust-190-设计模式---综合思维导图)
-  - [📋 目录](#-目录)
-  - [🌳 整体架构](#-整体架构)
-  - [🎨 GoF设计模式](#-gof设计模式)
-    - [创建型模式](#创建型模式)
-    - [结构型模式](#结构型模式)
-    - [行为型模式](#行为型模式)
-  - [🔄 并发模式](#-并发模式)
-  - [🦀 Rust特有模式](#-rust特有模式)
-  - [📚 学习路径](#-学习路径)
-    - [Week 1-2: GoF模式](#week-1-2-gof模式)
-    - [Week 3-4: 并发模式](#week-3-4-并发模式)
-    - [Week 5-6: Rust特有](#week-5-6-rust特有)
-  - [⚖️ 模式选择决策树](#️-模式选择决策树)
+## 主题导航
 
----
-
-## 🌳 整体架构
-
-```text
-         Rust 设计模式体系
-                │
-     ┌──────────┼──────────┐
-     │          │          │
-  GoF模式   并发模式   Rust模式
-     │          │          │
- ┌───┴───┐  ┌───┴───┐  ┌───┴───┐
- │       │  │       │  │       │
-创建  结构  Actor  STM  RAII 类型状态
-Builder Adapter CSP  MVU  Newtype Builder
-```
----
-
-## 🎨 GoF设计模式
-
-### 创建型模式
-
-- **Builder**: 类型安全的渐进式构建
-- **Factory**: 特征对象工厂
-- **Singleton**: OnceLock/LazyLock
-- **Prototype**: Clone trait
-
-### 结构型模式
-
-- **Adapter**: 特征适配
-- **Decorator**: Wrapper类型
-- **Proxy**: 智能指针
-- **Facade**: 简化接口
-
-### 行为型模式
-
-- **Strategy**: 特征对象策略
-- **Observer**: 发布订阅
-- **Command**: 闭包命令
-- **State**: 类型状态模式
-
----
-
-## 🔄 并发模式
-
-- **Actor Model**: tokio/actix
-- **CSP**: channels
-- **Fork-Join**: rayon
-- **Producer-Consumer**: bounded channels
-
----
-
-## 🦀 Rust特有模式
-
-- **RAII**: 资源管理
-- **Newtype**: 类型安全
-- **Type State**: 编译期状态机
-- **Error Handling**: Result/Option链式
-
----
-
-## 📚 学习路径
-
-### Week 1-2: GoF模式
-
-- 创建型: Builder/Factory
-- 结构型: Adapter/Decorator
-- 行为型: Strategy/Observer
-
-### Week 3-4: 并发模式
-
-- Actor/CSP模型
-- 无锁数据结构
-
-### Week 5-6: Rust特有
-
-- Type State机器
-- RAII资源管理
-- 高级特征模式
-
----
-
-## ⚖️ 模式选择决策树
-
-```text
-选择设计模式？
-│
-├─ 对象创建 → Builder/Factory
-├─ 接口适配 → Adapter/Facade
-├─ 运行时多态 → Strategy/State
-├─ 并发通信 → Actor/CSP
-└─ 类型安全 → Newtype/Type State
-```
----
-
-**文档版本**: v1.0
-**最后更新**: 2025-10-20
-
----
-
-🗺️ **掌握设计模式，编写优雅Rust代码！** 🚀✨
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| 设计模式总览 | [concept/06_ecosystem/03_design_patterns/02_patterns.md](../../../concept/06_ecosystem/03_design_patterns/02_patterns.md) |
+| 并发模式 | [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md) |
+| 异步模式 | [concept/03_advanced/01_async/26_async_patterns.md](../../../concept/03_advanced/01_async/26_async_patterns.md) |
+| 形式化设计模式理论 | [concept/06_ecosystem/03_design_patterns/38_formal_design_pattern_theory.md](../../../concept/06_ecosystem/03_design_patterns/38_formal_design_pattern_theory.md) |

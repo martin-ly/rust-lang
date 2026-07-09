@@ -1,182 +1,23 @@
-# Rust 1.92.0 宏系统改进文档
+> **EN**: Rust 1.92 Macro System Improvements (c11_macro_system_proc example index)
+> **Summary**: A stub page pointing to the canonical concept authority for Rust 1.92 macro system improvements.
 
-> **文档版本**: 1.0
-> **创建日期**: 2025-12-11
-> **适用版本**: Rust 1.92.0+
-> **相关模块**: `c11_macro_system_proc`
+# Rust 1.92.0 宏系统改进文档（c11_macro_system_proc 示例索引）
 
----
+> **权威来源**: Rust 1.92.0 宏系统改进（错误定位、const 上下文、编译器性能等）已整理至
+> [`concept/07_future/00_version_tracking/rust_1_92_stabilized.md`](../../../concept/07_future/00_version_tracking/rust_1_92_stabilized.md)。
 
-## 📊 目录
+本文件原为 `c11_macro_system_proc` crate 的 Rust 1.92.0 宏系统改进记录。根据 AGENTS.md §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/07_future/00_version_tracking/`，此处仅保留索引与 canonical 链接。
 
-- [Rust 1.92.0 宏系统改进文档](#rust-1920-宏系统改进文档)
-  - [📊 目录](#-目录)
-  - [概述](#概述)
-  - [Rust 1.92.0 宏系统改进](#rust-1920-宏系统改进)
-    - [1. 改进的类型检查器（宏展开优化）](#1-改进的类型检查器宏展开优化)
-      - [示例](#示例)
-    - [2. 增强的 const 上下文（宏配置计算）](#2-增强的-const-上下文宏配置计算)
-      - [示例](#示例-1)
-    - [3. 优化的编译器性能](#3-优化的编译器性能)
-  - [实际应用示例](#实际应用示例)
-    - [示例 1: 改进的错误消息](#示例-1-改进的错误消息)
-    - [示例 2: Const 上下文宏](#示例-2-const-上下文宏)
-  - [迁移指南](#迁移指南)
-    - [从 Rust 1.91 迁移到 1.92.0](#从-rust-191-迁移到-1920)
-    - [最佳实践](#最佳实践)
-  - [参考资源](#参考资源)
-  - [**最后更新**: 2025-12-11](#最后更新-2025-12-11)
+## 本 crate 相关示例
 
----
+- `crates/c11_macro_system_proc/examples/`：过程宏可运行示例。
+- `crates/c11_macro_system_proc/src/bin/`：宏元编程演示程序。
 
-## 概述
+## 快速导航
 
-Rust 1.92.0 在宏系统方面带来了多项改进和优化，主要包括：
-
-1. **改进的类型检查器**
-   - 更精确的宏展开错误报告
-   - 改进的借用检查器性能
-2. **增强的 const 上下文**
-   - 支持更多宏配置计算场景
-3. **优化的编译器**
-   - 改进的宏展开性能
-   - 更好的错误消息
-
----
-
-## Rust 1.92.0 宏系统改进
-
-### 1. 改进的类型检查器（宏展开优化）
-
-Rust 1.92.0 改进了类型检查器，特别是在宏展开方面：
-
-- **更精确的错误定位**: 能够更准确地定位宏展开后的错误位置
-- **改进的借用检查**: 在宏展开的代码中提供更好的借用检查提示
-- **性能优化**: 类型检查器的性能提升，特别是在处理大型宏展开时
-
-#### 示例
-
-```rust
-// Rust 1.92.0 中，宏展开后的类型错误能够更精确地定位
-macro_rules! create_vec {
-    ($($x:expr),*) => {
-        vec![$($x),*]
-    };
-}
-
-// 如果类型不匹配，错误消息会指向具体的宏展开位置
-let v: Vec<i32> = create_vec![1, 2, "three"]; // 更清晰的错误消息
-```
-
-### 2. 增强的 const 上下文（宏配置计算）
-
-Rust 1.92.0 增强了 const 上下文的支持，允许在宏中执行更多的编译时计算：
-
-- **更灵活的 const 表达式**: 支持更多的 const 函数和表达式
-- **改进的宏卫生性**: 在 const 上下文中更好地处理宏展开
-
-#### 示例
-
-```rust
-// Rust 1.92.0 中，const 上下文中的宏使用更加灵活
-const fn calculate_size() -> usize {
-    // 可以使用宏进行编译时计算
-    size_of::<i32>() * 2
-}
-
-macro_rules! const_array {
-    ($size:expr) => {
-        [0u8; $size]
-    };
-}
-
-const ARR: [u8; calculate_size()] = const_array![calculate_size()];
-```
-
-### 3. 优化的编译器性能
-
-Rust 1.92.0 在编译器性能方面进行了优化：
-
-- **更快的宏展开**: 改进的宏展开算法
-- **更好的缓存机制**: 优化了宏展开结果的缓存
-- **并行编译改进**: 在多核系统上更好地利用并行编译
-
----
-
-## 实际应用示例
-
-### 示例 1: 改进的错误消息
-
-```rust
-macro_rules! assert_eq_typed {
-    ($left:expr, $right:expr) => {
-        if $left != $right {
-            panic!(
-                "断言失败: {} != {}",
-                stringify!($left),
-                stringify!($right)
-            );
-        }
-    };
-}
-
-// Rust 1.92.0 提供更清晰的错误消息
-fn test() {
-    let a = 1;
-    let b = 2;
-    assert_eq_typed!(a, b); // 错误消息更加清晰
-}
-```
-
-### 示例 2: Const 上下文宏
-
-```rust
-macro_rules! const_initializer {
-    ($val:expr) => {
-        const INIT: i32 = $val * 2;
-        INIT
-    };
-}
-
-const VALUE: i32 = const_initializer!(10); // 在 const 上下文中使用宏
-```
-
----
-
-## 迁移指南
-
-### 从 Rust 1.91 迁移到 1.92.0
-
-1. **更新 Rust 版本**: 确保使用 Rust 1.92.0 或更高版本
-2. **检查宏展开**: 验证宏展开是否按预期工作
-3. **利用新的错误消息**: 使用改进的错误消息来修复问题
-4. **优化 const 宏**: 考虑在 const 上下文中使用宏进行编译时计算
-
-### 最佳实践
-
-- 使用最新的宏特性来简化代码
-- 利用改进的错误消息进行调试
-- 在适合的地方使用 const 上下文宏
-- 保持宏的卫生性和可读性
-
----
-
-## 参考资源
-
-- [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
-- [Rust 宏系统文档](https://doc.rust-lang.org/book/ch19-06-macros.html)
-- [过程宏文档](https://doc.rust-lang.org/reference/procedural-macros.html)
-
----
-
-**最后更新**: 2025-12-11
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| Rust 1.92 稳定特性 | [`concept/07_future/00_version_tracking/rust_1_92_stabilized.md`](../../../concept/07_future/00_version_tracking/rust_1_92_stabilized.md) |
+| 过程宏 | [`concept/03_advanced/03_proc_macros/07_proc_macro.md`](../../../concept/03_advanced/03_proc_macros/07_proc_macro.md) |
+| 宏模式 | [`concept/02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md`](../../../concept/02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md) |

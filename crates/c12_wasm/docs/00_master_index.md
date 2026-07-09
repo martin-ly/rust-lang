@@ -1,67 +1,17 @@
 # C12 WebAssembly - 主索引
 
-> **适用版本**: Rust 1.96.1+ (Edition 2024)
-> **最后更新**: 2026-03-13
-> **WASM 版本**: WASM 2.0 + WASI 0.2
-> **状态**: ✅ 100% 完成
+**EN**: WebAssembly
+**Summary**: Stub redirecting to the canonical concept page for `WebAssembly`. Crate-specific API notes remain here; general explanations live in `concept/`.
 
----
+> **权威来源**: [06_ecosystem/11_domain_applications/11_webassembly.md](../../../concept/06_ecosystem/11_domain_applications/11_webassembly.md)
 
-## 📋 目录
+本文件为 crate 文档占位页。通用 Rust 概念解释已迁移/整合至上方的 `concept/` 权威页；如需深入了解，请访问权威来源。
 
-- [C12 WebAssembly - 主索引](#c12-webassembly---主索引)
-  - [📋 目录](#-目录)
-  - [快速开始](#快速开始)
-  - [核心文档](#核心文档)
-  - [版本特性](#版本特性)
-    - [Rust 1.94 WASM 特性](#rust-194-wasm-特性)
-    - [历史版本](#历史版本)
-  - [相关资源](#相关资源)
+## 主题速览
 
----
-
-## 快速开始
-
-- [📄 README](README.md) - 文档中心与快速示例
-- [📄 ONE_PAGE_SUMMARY](one_page_summary.md) - 一页纸总结
-
----
-
-## 核心文档
-
-| 文档 | 说明 |
-|------|------|
-| [WASM_CONCEPT_MATRIX.md](wasm_concept_matrix.md) | 概念矩阵 |
-| [WASM_DECISION_TREE.md](wasm_decision_tree.md) | 决策树 |
-| [WASM_MIND_MAPS.md](wasm_mind_maps.md) | 思维导图 |
-| [WASM_PROOF_TREE.md](wasm_proof_tree.md) | 证明树 |
-
----
-
-## 版本特性
-
-### Rust 1.94 WASM 特性
-
-- [RUST_193_WASM_IMPROVEMENTS.md](rust_193_wasm_improvements.md)
-
-### 历史版本
-
-- [RUST_192_WASM_IMPROVEMENTS.md](rust_192_wasm_improvements.md)
-- [RUST_191_WASM_IMPROVEMENTS.md](rust_191_wasm_improvements.md)
-
----
-
-## 相关资源
-
-- [代码示例索引](code_examples_index.md)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- 快速开始
+- 核心文档
+- 版本特性
+- Rust 1.94 WASM 特性
+- 历史版本
+- 相关资源

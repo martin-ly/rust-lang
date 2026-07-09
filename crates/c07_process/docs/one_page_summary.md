@@ -1,64 +1,25 @@
-# C07 进程管理 - 一页纸总结
+> **EN**: C07 Process Management — One-Page Summary (c07_process example index)
+> **Summary**: A stub page pointing to the canonical concept authority for Rust process management. The c07_process crate provides runnable process/IPC examples.
 
-> **用途**: 快速回顾核心概念、常见坑、学习路径
-> **完整文档**: [00_MASTER_INDEX](00_master_index.md)
+# C07 进程管理 - 一页纸总结（c07_process 示例索引）
 
----
+> **权威来源**: 进程模型、生命周期、`std::process::Command`、IPC 等完整解释见
+> [`concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`](../../../concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md)。
 
-## 核心概念（4 条）
+本文件原为 `c07_process` crate 的通用进程管理一页纸总结。根据 AGENTS.md §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/03_advanced/02_process_ipc/`，此处仅保留索引与 canonical 链接。
 
-| 概念 | 说明 |
+## 本 crate 相关示例
+
+- `crates/c07_process/examples/`：进程与 IPC 可运行示例。
+- `crates/c07_process/src/bin/`：进程管理演示程序。
+
+## 快速导航
+
+| 主题 | 权威来源 |
 | :--- | :--- |
-| **进程创建** | `Command::new()`、`spawn()`、`output()`；环境变量、工作目录 |
-| **标准 IO** | `stdin`/`stdout`/`stderr`；管道 `Stdio::piped()` |
-| **信号处理** | `signal_hook`；SIGINT、SIGTERM 等 |
-| **IPC** | 管道、Unix domain socket；跨进程通信 |
-
----
-
-## 常见坑与解决
-
-| 坑 | 解决 |
-| :--- | :--- |
-| 子进程僵尸 | `wait()` 或 `try_wait()` 回收；或 `kill_on_drop` |
-| 管道死锁 | 避免父子同时读写；用 `spawn` + 异步读取 |
-| 跨平台差异 | 用 `std::process` 抽象；信号仅 Unix |
-| 权限与沙箱 | 注意 `setuid`、chroot；生产用专用运行时 |
-
----
-
-## 进程速选
-
-| 场景 | 选型 |
-| :--- | :--- |
-| 执行命令取输出 | `Command::output()` |
-| 流式输出 | `Command::spawn()` + `stdout` 读取 |
-| 管道链 | `Command` 链式 `stdin(prev.stdout)` |
-| 超时控制 | `wait_timeout` 或 `tokio::process` |
-
----
-
-## 学习路径
-
-1. **入门** (1 周): `Command` 基础 → 标准 IO 重定向 → 错误处理
-2. **进阶** (2 周): 信号、IPC、与 C10 网络结合
-3. **高级** (持续): 异步进程、生产部署
-
----
-
-## 速查与练习
-
-- **速查卡**: [process_management_cheatsheet](../../../docs/02_reference/quick_reference/process_management_cheatsheet.md)
-- **RBE 练习**: [Process](https://doc.rust-lang.org/rust-by-example/std_misc/process.html)
-- **Rustlings**: 无进程专题；参考 RBE 与 C07 模块
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 进程创建、`Command`、`spawn`、`output` | [`concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`](../../../concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md) |
+| 标准 IO 重定向、管道 | 同上 |
+| 信号处理、SIGINT/SIGTERM | 同上 |
+| IPC、Unix domain socket | [`concept/03_advanced/02_process_ipc/05_ipc_mechanisms.md`](../../../concept/03_advanced/02_process_ipc/05_ipc_mechanisms.md) |
+| 速查练习 | [`concept/SUMMARY.md`](../../../concept/SUMMARY.md) |

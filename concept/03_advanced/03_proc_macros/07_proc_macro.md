@@ -886,6 +886,39 @@ Derive 宏不是"魔法"——它只是自动编写你本来可以手写的 `imp
 
 ---
 
+## 补充章节：代码生成优化、调试与生产级实践
+
+> 以下内容按 AGENTS.md §6.4 由 `crates/c11_macro_system_proc/docs/tier_04_advanced/` 迁移而来，作为本过程宏权威页的延伸。
+
+### 代码生成优化
+
+- 生成代码的可读性、Span 保留、内联与分配优化
+- 编译时间优化（避免递归爆炸、减少单态化）
+- 代码膨胀控制（静态/动态分发、条件编译）
+- 性能测量：`cargo llvm-lines`、`cargo bloat`、`cargo build --timings`
+
+👉 详见 [过程宏代码生成优化](29_proc_macro_code_generation_optimization.md)
+
+### 宏调试与诊断
+
+- `cargo expand` 高级用法与差异比较
+- 宏展开追踪：`eprintln!`、`RUSTC_LOG`、计时
+- 精确错误定位：`syn::Error`、`quote_spanned!`、`proc-macro-error`
+- 编译器回调与 lint（nightly）
+
+👉 详见 [宏调试与诊断](30_macro_debugging_and_diagnostics.md)
+
+### 生产级宏开发
+
+- MSRV、Edition、依赖版本策略
+- 友好错误消息与多错误聚合
+- 文档、Doc Tests、`#[doc(hidden)]`
+- 语义化版本、Changelog、CI/CD、安全审计
+
+👉 详见 [生产级宏开发](31_production_grade_macro_development.md)
+
+---
+
 ## 导航：下一步去哪？
 
 > **自检**：你当前掌握的核心概念是否已能独立应用？
@@ -896,3 +929,158 @@ Derive 宏不是"魔法"——它只是自动编写你本来可以手写的 `imp
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](../README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../../06_ecosystem/README.md) |
+
+## 七、函数宏开发实践
+
+> 内容来源：`crates/c11_macro_system_proc/docs/tier_02_guides/04_function_macros_development_guide.md`，已按 AGENTS.md §6.4 迁移至此。
+
+函数式过程宏（function-like procedural macro）看起来像函数调用，但作用于任意 TokenStream，常用于 DSL 与代码生成。
+
+### 7.1 基础结构
+
+```rust
+use proc_macro::TokenStream;
+
+#[proc_macro]
+pub fn my_macro(input: TokenStream) -> TokenStream {
+    input
+}
+```
+
+### 7.2 使用 `syn` 解析
+
+```rust
+use syn::parse::{Parse, ParseStream};
+use syn::{Ident, Token, LitStr};
+
+struct SqlQuery {
+    table: Ident,
+    _where: Token![where],
+    condition: LitStr,
+}
+
+impl Parse for SqlQuery {
+    fn parse(input: ParseStream) -> syn::Result<Self> {
+        Ok(SqlQuery {
+            table: input.parse()?,
+            _where: input.parse()?,
+            condition: input.parse()?,
+        })
+    }
+}
+
+#[proc_macro]
+pub fn sql(input: TokenStream) -> TokenStream {
+    let query = syn::parse_macro_input!(input as SqlQuery);
+    let expanded = quote::quote! {
+        format!("SELECT * FROM {} WHERE {}",
+                stringify!(#query.table), #query.condition)
+    };
+    TokenStream::from(expanded)
+}
+```
+
+### 7.3 典型用例
+
+| 用例 | 思路 |
+| :--- | :--- |
+| **SQL 查询宏** | 解析 DSL 生成格式化字符串 |
+| **JSON 宏** | 转发到 `serde_json::json!` 或自定义解析 |
+| **HTML 模板宏** | 将模板 DSL 编译为字符串/渲染代码 |
+| **正则宏** | 编译期校验正则合法性 |
+| **测试用例宏** | 展开为多个 `#[test]` 函数 |
+
+## 八、宏调试与测试
+
+> 内容来源：`crates/c11_macro_system_proc/docs/tier_02_guides/05_macro_debugging_and_testing.md`，已按 AGENTS.md §6.4 迁移至此。
+
+### 8.1 调试工具
+
+- **`cargo expand`**：查看宏展开后的完整源码。
+- **`eprintln!`**：在宏过程中打印输入/输出 TokenStream。
+- **IDE**：`rust-analyzer` 可内联显示宏展开结果。
+
+### 8.2 错误处理
+
+使用 `syn::Error::new_spanned` 产生带精确 span 的编译错误：
+
+```rust
+use syn::{Error, Data};
+
+#[proc_macro_derive(Builder)]
+pub fn derive_builder(input: TokenStream) -> TokenStream {
+    let input = syn::parse_macro_input!(input as syn::DeriveInput);
+    match &input.data {
+        Data::Struct(s) if matches!(s.fields, syn::Fields::Named(_)) => { /* ... */ }
+        _ => {
+            return Error::new_spanned(
+                input,
+                "Builder can only be derived for structs with named fields"
+            ).to_compile_error().into();
+        }
+    }
+}
+```
+
+### 8.3 测试策略
+
+| 测试类型 | 工具 | 用途 |
+| :--- | :--- | :--- |
+| 集成测试 | `#[test]` | 验证展开后的运行时行为 |
+| 编译失败测试 | `trybuild` | 断言特定错误场景必须编译失败 |
+| 快照测试 | `quote!` + 字符串比对 | 验证展开结果稳定 |
+
+```rust
+#[test]
+fn test_compile_fail() {
+    let t = trybuild::TestCases::new();
+    t.compile_fail("tests/ui/fail_*.rs");
+}
+```
+
+---
+
+## 补充视角：C11 宏系统一页纸总结
+
+> 来源：`crates/c11_macro_system_proc/docs/one_page_summary.md`
+> 按 AGENTS.md §6.4 迁移至此，作为 canonical 过程宏概念页的速查补充。
+
+### 核心概念
+
+| 概念 | 说明 |
+| :--- | :--- |
+| **声明宏** | `macro_rules!`；模式匹配；卫生性 |
+| **过程宏** | Derive、属性、函数宏；`proc-macro` crate |
+| **片段类型** | `expr`、`ident`、`ty`、`path` 等；匹配与展开 |
+| **递归宏** | 逐步展开；`$($rest)*` 重复 |
+
+### 常见坑与解决
+
+| 坑 | 解决 |
+| :--- | :--- |
+| 宏展开顺序 | 宏在编译时展开；注意作用域 |
+| 片段类型不匹配 | 用 `tt` 兜底；或拆成多规则 |
+| 过程宏编译慢 | 独立 crate；增量编译 |
+| 卫生性意外 | 用 `$crate` 引用；避免标识符冲突 |
+
+### 宏速选
+
+| 场景 | 选型 |
+| :--- | :--- |
+| 简单重复代码 | 声明宏 `macro_rules!` |
+| 自动实现 trait | `#[derive(Trait)]` 过程宏 |
+| 属性注解 | 属性过程宏 `#[attr]` |
+| 函数式语法扩展 | 函数过程宏 `macro!()` |
+| 复杂 DSL | 过程宏 + 声明宏组合 |
+
+### 学习路径
+
+1. **入门** (1–2 周): 声明宏基础 → 片段类型 → 递归宏
+2. **进阶** (2–3 周): Derive 宏 → 属性宏 → 函数宏
+3. **高级** (持续): 复杂 DSL、与 C09 框架性模式结合
+
+### 速查与练习
+
+- **速查卡**: 见本页核心概念与常见模式表格
+- **RBE 练习**: [Macros](https://doc.rust-lang.org/rust-by-example/macros.html)
+- **Rustlings**: [21_macros](https://github.com/rust-lang/rustlings/tree/main/exercises/21_macros)

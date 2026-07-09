@@ -1,144 +1,18 @@
+> **EN**: Tier 4: 高级层 - 控制流与函数高级主题 (crate docs stub)
+> **Summary**: Stub pointing to the canonical authority page(s) for `Tier 4: 高级层 - 控制流与函数高级主题`. Practical examples remain in the crate.
+
 # Tier 4: 高级层 - 控制流与函数高级主题
 
-**难度**: ⭐⭐⭐⭐
-**预计学习时间**: 20-30 小时
-**适合人群**: 有扎实基础，希望深入理论和高级技术的开发者
+> **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
+> [`concept/01_foundation/04_control_flow/07_control_flow.md`](../../../../concept/01_foundation/04_control_flow/07_control_flow.md)。
 
----
+本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
+通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
+具体可运行示例请参见本 crate 的 `examples/` 与 `src/bin/` 目录。
 
-## 📚 本层内容
+## 主题导航
 
-Tier 4 深入探讨控制流与函数系统的高级主题，包括理论基础、形式化分析、性能优化和前沿技术，适合需要深度理解的开发者。
-
-### 高级主题文档
-
-1. **[高级模式匹配](01_advanced_pattern_matching.md)**
-   - 穷尽性检查算法
-   - 模式守卫实现原理
-   - 解构优化与零成本抽象
-   - 模式匹配 vs. 多态：性能分析
-2. **[闭包深入](02_closures_in_depth.md)**
-   - 闭包内存布局与捕获机制
-   - Fn/FnMut/FnOnce trait 实现原理
-   - 闭包与函数指针转换规则
-   - 异步闭包底层实现（Rust 1.96.1+）
-3. **[函数式编程](03_functional_programming.md)**
-   - 函数式编程范式在 Rust 中的应用
-   - 高阶函数与函数组合
-   - 惰性求值与迭代器融合
-   - Monad 与 Functor 在 Rust 的映射
-4. **[错误处理进阶](04_advanced_error_handling.md)**
-   - Try trait 与 ? 运算符底层实现
-   - 错误类型设计模式（thiserror/anyhow）
-   - 跨线程错误传播
-   - 分层错误处理架构
-5. **[性能优化](05_性能优化.md)**
-   - 控制流编译优化（内联、分支预测）
-   - 迭代器零成本抽象验证
-   - 闭包性能：单态化 vs. 动态分派
-   - LLVM IR 分析与性能调优
-
----
-
-## 🎯 学习目标
-
-完成 Tier 4 后，您将能够：
-
-- ✅ 理解控制流与函数的底层实现机制
-- ✅ 分析并优化复杂控制流的性能
-- ✅ 设计高性能、类型安全的 API
-- ✅ 理解编译器优化策略
-- ✅ 应用函数式编程范式解决复杂问题
-- ✅ 设计可扩展的错误处理架构
-
----
-
-## 💡 核心概念
-
-### 1. 零成本抽象验证
-
-深入分析 Rust 如何在控制流和迭代器中实现零成本抽象，通过 LLVM IR 对比验证高层抽象与手写循环的等价性。
-
-### 2. 类型导向设计
-
-探讨如何利用 Rust 的类型系统设计更安全的控制流抽象，包括类型状态模式、幻影类型等高级技术。
-
-### 3. 编译器优化深度
-
-分析 rustc 与 LLVM 如何优化控制流，包括内联、循环展开、分支预测、尾调用优化等。
-
-### 4. 函数式编程实践
-
-展示函数式编程范式在 Rust 系统编程中的应用，平衡抽象与性能。
-
----
-
-## 📖 推荐学习顺序
-
-```text
-先决条件：完成 Tier 1-3 所有内容
-    ↓
-01_advanced_pattern_matching.md (5-6小时)
-    ↓
-02_closures_in_depth.md (4-5小时)
-    ↓
-03_functional_programming.md (6-8小时)
-    ↓
-04_advanced_error_handling.md (3-4小时)
-    ↓
-05_性能优化.md (4-6小时)
-```
-
----
-
-## 🔗 相关资源
-
-- **Tier 1-3**: 确保已掌握前置知识
-- **C02 Type System**: 深入理解类型系统对控制流的影响
-- **C05 Threads**: 探索并发控制流
-- **C06 Async**: 理解异步控制流
-
----
-
-## ⚡ 快速索引
-
-| 主题     | 文档             | 核心技术                      |
-| :--- | :--- | :--- || 模式匹配 | 01\_高级模式匹配 | 穷尽性检查、优化、性能分析    |
-| 闭包     | 02\_闭包深入     | 内存布局、trait实现、异步闭包 |
-| 函数式   | 03\_函数式编程   | 高阶函数、Monad、迭代器融合   |
-| 错误处理 | 04\_错误处理进阶 | Try trait、架构设计、跨线程   |
-| 性能     | 05\_性能优化     | LLVM IR、编译优化、基准测试   |
-
----
-
-## 🌟 前沿技术
-
-- **异步闭包** (Rust 1.96.1+): 深入分析 `async |x| ...` 的实现与性能
-- **Never Type `!`**: 完全稳定化的永不返回类型应用
-- **RPITIT**: 返回位置 impl Trait in Traits 在控制流 API 中的应用
-- **Let-Else**: 早返回模式的优化与最佳实践
-
----
-
-## 📚 延伸阅读
-
-- **Rust RFC**: 相关 RFC 文档链接
-- **LLVM 文档**: 编译优化相关资源
-- **形式化验证**: RustBelt 项目与控制流安全性证明
-- **学术论文**: 相关研究论文索引
-
----
-
-**最后更新**: 2025-12-11
-**维护状态**: 🟢 活跃维护中
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+| 主题 | 权威来源 |
+| :--- | :--- |
+| Advanced Control Flow | [concept/01_foundation/04_control_flow/07_control_flow.md](../../../../concept/01_foundation/04_control_flow/07_control_flow.md) |
+| Closures | [concept/02_intermediate/04_types_and_conversions/07_closure_types.md](../../../../concept/02_intermediate/04_types_and_conversions/07_closure_types.md) |
