@@ -1,7 +1,7 @@
 # 项目 100% 锁定完成报告
 
-**日期**: 2026-07-10  
-**范围**: 治理自动化固化（pre-commit hook、夜间报告、本地一键门禁）、最终全部门禁验证  
+**日期**: 2026-07-10
+**范围**: 治理自动化固化（pre-commit hook、夜间报告、本地一键门禁）、最终全部门禁验证
 **目标**: 将项目从“人工维护一致性”推进到“工具自动拦截回退”
 
 ---
@@ -39,15 +39,18 @@ bash scripts/run_quality_gates.sh
 ### 2.2 Pre-commit Hook
 
 新增文件：
+
 - `scripts/git_hooks/pre-commit` —— 轻量级提交前检查
 - `scripts/git_hooks/install.sh` —— 一键安装到 `.git/hooks/`
 
 安装方式：
+
 ```bash
 bash scripts/git_hooks/install.sh
 ```
 
 每次 `git commit` 前会自动检查：
+
 - 内容重叠（`detect_content_overlap.py`）
 - i18n 术语覆盖（`add_bilingual_annotations.py --mode check-only`）
 - 死链 / 跨层一致性（`kb_auditor.py --link-check`）

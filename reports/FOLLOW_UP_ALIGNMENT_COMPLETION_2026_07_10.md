@@ -1,7 +1,7 @@
 # 后续对齐收口完成报告
 
-**日期**: 2026-07-10  
-**范围**: `knowledge/` 专题套件迁移、`AGENTS.md` 与 CI 固化、`docs/` 去重政策、i18n 术语补全  
+**日期**: 2026-07-10
+**范围**: `knowledge/` 专题套件迁移、`AGENTS.md` 与 CI 固化、`docs/` 去重政策、i18n 术语补全
 **目标**: 100% 完成 `COMPREHENSIVE_ALIGNMENT_COMPLETION_2026_07_10.md` 中的后续建议
 
 ---

@@ -46732,7 +46732,7 @@
       "layer": "L6",
       "title": "Rust Web 框架对比与选型",
       "positioning": "对比分析 Rust 主流 Web 框架——Axum、Actix-web、Rocket、Poem——从架构设计、运行时（Runtime）集成、中间件机制到性能特征，建立系统化的选型决策框架。",
-      "line_count": 1004,
+      "line_count": 1039,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust Web 框架对比与选型 定义 ⟹ 类型安全保证",

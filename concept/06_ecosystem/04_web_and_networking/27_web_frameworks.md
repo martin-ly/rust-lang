@@ -19,7 +19,17 @@
 > **前置概念**: [Async](../../03_advanced/01_async/02_async.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [云原生生态](24_cloud_native.md) · [设计模式](../03_design_patterns/02_patterns.md)
 >
-> **来源**: [axum](https://docs.rs/axum/) · [actix-web](https://docs.rs/actix-web/) · [Rocket](https://rocket.rs/) · [reqwest](https://docs.rs/reqwest/latest/reqwest/) · [Tauri](https://tauri.app/) · [Dioxus](https://dioxuslabs.com/) · [Leptos](https://leptos.dev/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [axum](https://docs.rs/axum/) ·
+> [actix-web](https://docs.rs/actix-web/) ·
+> [Rocket](https://rocket.rs/) ·
+> [reqwest](https://docs.rs/reqwest/latest/reqwest/) ·
+> [Tauri](https://tauri.app/) ·
+> [Dioxus](https://dioxuslabs.com/) ·
+> [Leptos](https://leptos.dev/) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**:
@@ -562,13 +572,13 @@ TechEmpower Round 22+ 解读（JSON 序列化 / 单次查询 / 多次查询）:
 
   对比其他语言:
   ┌──────────────┬────────────────────────────────────────┐
-  │ 语言/框架    │ 相对吞吐量（归一化，越高越好）         │
+  │ 语言/框架     │ 相对吞吐量（归一化，越高越好）           │
   ├──────────────┼────────────────────────────────────────┤
   │ Rust/Actix   │ ~1.0x (基准)                           │
   │ Rust/Axum    │ ~0.95x                                 │
   │ Rust/Rocket  │ ~0.70x                                 │
   │ Go/Gin       │ ~0.55x                                 │
-  │ Go/标准库    │ ~0.50x                                 │
+  │ Go/标准库     │ ~0.50x                                 │
   │ Node/Fastify │ ~0.25x                                 │
   │ Python/FastAPI│ ~0.08x                                │
   └──────────────┴────────────────────────────────────────┘
@@ -827,7 +837,13 @@ fn app() -> Router {
 }
 ```
 
-> **修正**: axum 的路由系统要求处理函数（handler）返回实现 `IntoResponse` 的类型。`String` 实际上实现了 `IntoResponse`，但此示例展示的是更常见的问题：自定义类型未实现 `IntoResponse`，或函数签名不符合 `Fn(Request) -> Future<Output = Response>`。axum 使用 `tower::Service` trait 抽象处理函数，编译期通过宏（Macro）生成 `Service` 实现。若类型不匹配，编译错误会指出缺少 `IntoResponse` 实现。这与 Go 的 `http.HandlerFunc`（任何 `func(w, r)` 都可用）或 Python Flask 的返回值（自动 `str()` 转换）不同——Rust Web 框架在编译期验证响应类型可序列化。[来源: [axum Documentation](https://docs.rs/axum/)] · [来源: [Tower Documentation](https://docs.rs/tower/)]
+> **修正**:
+> axum 的路由系统要求处理函数（handler）返回实现 `IntoResponse` 的类型。
+> `String` 实际上实现了 `IntoResponse`，但此示例展示的是更常见的问题：自定义类型未实现 `IntoResponse`，或函数签名不符合 `Fn(Request) -> Future<Output = Response>`。
+> axum 使用 `tower::Service` trait 抽象处理函数，编译期通过宏（Macro）生成 `Service` 实现。
+> 若类型不匹配，编译错误会指出缺少 `IntoResponse` 实现。
+> 这与 Go 的 `http.HandlerFunc`（任何 `func(w, r)` 都可用）或 Python Flask 的返回值（自动 `str()` 转换）不同——Rust Web 框架在编译期验证响应类型可序列化。
+> [来源: [axum Documentation](https://docs.rs/axum/)] · [来源: [Tower Documentation](https://docs.rs/tower/)]
 
 ### 10.2 边界测试：共享状态的生命周期与 `Clone` 约束（编译错误）
 
@@ -850,7 +866,17 @@ fn app(state: Arc<AppState>) -> Router {
 }
 ```
 
-> **修正**: Web 服务器需要在多个请求处理任务间共享状态（数据库连接、配置、缓存）。`Arc<T>` 提供共享所有权（Ownership），但只给予 `&T` 访问。若需可变修改，必须使用：1) `Arc<Mutex<T>>`（互斥锁）；2) `Arc<RwLock<T>>`（读写锁）；3) 通道（channel）将修改请求发送到单线程执行器。直接修改 `Arc<T>` 内部数据会被编译器阻止——这是 Rust"共享不可变，可变不共享"原则的体现。与 Go 的 `map`（非并发安全（Concurrency Safety），需 `sync.RWMutex` 包裹）或 Node.js 的单线程事件循环（无并发修改问题）不同，Rust 在类型层面要求显式同步原语。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [axum Documentation](https://docs.rs/axum/)]
+> **修正**:
+> Web 服务器需要在多个请求处理任务间共享状态（数据库连接、配置、缓存）。
+> `Arc<T>` 提供共享所有权（Ownership），但只给予 `&T` 访问。
+> 若需可变修改，必须使用：
+>
+> 1) `Arc<Mutex<T>>`（互斥锁）；
+> 2) `Arc<RwLock<T>>`（读写锁）；
+> 3) 通道（channel）将修改请求发送到单线程执行器。
+> 直接修改 `Arc<T>` 内部数据会被编译器阻止——这是 Rust"共享不可变，可变不共享"原则的体现。
+> 与 Go 的 `map`（非并发安全（Concurrency Safety），需 `sync.RWMutex` 包裹）或 Node.js 的单线程事件循环（无并发修改问题）不同，Rust 在类型层面要求显式同步原语。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [axum Documentation](https://docs.rs/axum/)]
 
 ### 10.6 边界测试：HTTP 请求的 body 大小限制与内存 DoS（运行时 OOM）
 
@@ -868,7 +894,16 @@ fn app() -> Router {
 }
 ```
 
-> **修正**: Web 框架的默认配置通常**无请求体大小限制**，恶意客户端可发送 GB 级数据导致 OOM。安全模式：1) `axum` 的 `DefaultBodyLimit`（默认 2MB，可配置）；2) 流式处理（`axum::extract::BodyStream` 分块读取）；3) 反向代理（Nginx、Traefik）前置大小限制。Rust 的内存安全（Memory Safety）不防止 OOM——`Vec::push` 在内存不足时 panic（或 abort）。这与 Node.js 的 `body-parser`（默认 100KB 限制）、Go 的 `http.MaxBytesReader`、Python 的 Flask（`MAX_CONTENT_LENGTH`）类似——生产环境的 Web 服务必须配置请求限制。[来源: [axum Documentation](https://docs.rs/axum/)] · [来源: [OWASP DoS](https://owasp.org/www-community/attacks/Denial_of_Service)]
+> **修正**:
+> Web 框架的默认配置通常**无请求体大小限制**，恶意客户端可发送 GB 级数据导致 OOM。
+> 安全模式：
+>
+> 1) `axum` 的 `DefaultBodyLimit`（默认 2MB，可配置）；
+> 2) 流式处理（`axum::extract::BodyStream` 分块读取）；
+> 3) 反向代理（Nginx、Traefik）前置大小限制。
+> Rust 的内存安全（Memory Safety）不防止 OOM——`Vec::push` 在内存不足时 panic（或 abort）。
+> 这与 Node.js 的 `body-parser`（默认 100KB 限制）、Go 的 `http.MaxBytesReader`、Python 的 Flask（`MAX_CONTENT_LENGTH`）类似——生产环境的 Web 服务必须配置请求限制。
+> [来源: [axum Documentation](https://docs.rs/axum/)] · [来源: [OWASP DoS](https://owasp.org/www-community/attacks/Denial_of_Service)]
 
 ### 10.5 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）
 

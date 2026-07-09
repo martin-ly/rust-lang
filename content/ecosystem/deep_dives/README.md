@@ -35,18 +35,12 @@
 ---
 
 **维护者**: Rust 学习项目
-**最后更新**: 2026-05-09
+> **权威来源**: 框架深度解析请见本目录下的专题文章；通用 Rust 概念请见 [`concept/`](../../../concept/)。
 
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
-
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-07-09
+**状态**: ✅ 专题深度解析已激活 (Phase B1)
 
 ---
 
