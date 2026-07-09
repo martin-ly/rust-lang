@@ -1,14 +1,15 @@
 [package]
 name = "c06_async"
-version = "0.1.0"
-edition = "2024"
-rust-version = "1.96.1"
-authors = ["Rust Learning Community"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
 keywords = ["async", "tokio", "futures", "runtime"]
 categories = ["asynchronous", "network-programming"]
 description = "Rust asynchronous programming learning module"
-license = "MIT OR Apache-2.0"
-repository = "https://github.com/rust-lang/rust-lang-learning"
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 
 [dependencies]
 tokio = { workspace = true, features = ["tracing"] }
@@ -53,10 +54,10 @@ xtra = { version = "0.6", optional = true, features = ["tokio"] }
 
 # Observability ecosystem examples
 sentry = { version = "0.48.3", default-features = false, features = ["reqwest", "rustls", "backtrace", "contexts", "panic", "transport", "debug-images"], optional = true }
-metrics-exporter-prometheus = { version = "0.18.3", default-features = false, features = ["http-listener"], optional = true }
+metrics-exporter-prometheus = { workspace = true, features = ["http-listener"], optional = true }
 
 [target.'cfg(target_os = "linux")'.dependencies]
-glommio = "0.9.0"
+glommio = { workspace = true }
 
 [dev-dependencies]
 criterion = { workspace = true, features = ["html_reports", "async_tokio"] }

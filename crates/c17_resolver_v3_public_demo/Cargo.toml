@@ -1,10 +1,12 @@
 [package]
 name = "c17_resolver_v3_public_demo"
-version = "0.1.0"
-edition = "2024"
-rust-version = "1.96.1"
-license = "MIT OR Apache-2.0"
-authors = ["Rust Learning Community"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
 description = "Demonstration of resolver v3 and public = true for dependency feature unification"
 keywords = ["cargo", "resolver", "public-dependency", "feature-unification"]
 categories = ["development-tools::cargo-plugins", "rust-patterns"]

@@ -80,7 +80,8 @@
 
 ## 🎯 什么是类型级编程？
 
-类型级编程是在类型系统层面进行计算和推理，所有计算在编译时完成，运行时（Runtime）零开销。(Source: [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html))
+类型级编程是在类型系统层面进行计算和推理，所有计算在编译时完成，运行时（Runtime）零开销。
+(Source: [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html))
 
 **核心概念**:
 

@@ -5,8 +5,8 @@
 //! module surface performance optimization functionality ，memory optimization 、
 //! CPU性能提升、I/O性能改进等 Rust 1.90 新特性
 //! CPUperformance 、I/Operformance etc. Rust 1.90 feature
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 pub mod enhanced;
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 pub use enhanced::*;

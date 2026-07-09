@@ -16,7 +16,7 @@ use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock, Semaphore, mpsc, o
 use tokio::time::timeout;
 
 /// 增强的异步进程管理器
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct EnhancedAsyncProcessManager {
     processes: Arc<TokioRwLock<HashMap<u32, EnhancedManagedProcess>>>,
@@ -28,7 +28,7 @@ pub struct EnhancedAsyncProcessManager {
 }
 
 /// 增强的异步管理进程
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 struct EnhancedManagedProcess {
     info: ProcessInfo,
@@ -41,7 +41,7 @@ struct EnhancedManagedProcess {
 
 /// 进程输出
 /// process
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct ProcessOutput {
@@ -53,7 +53,7 @@ pub struct ProcessOutput {
 
 /// 进程性能指标
 /// process performance indicator
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct ProcessMetrics {
@@ -67,7 +67,7 @@ pub struct ProcessMetrics {
 
 /// 性能统计信息
 /// performance information
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 #[derive(Debug, Clone, Default)]
 pub struct PerformanceStats {
@@ -83,7 +83,7 @@ pub struct PerformanceStats {
 
 /// 性能监控器
 /// performance
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct PerformanceMonitor {
     metrics: Arc<TokioMutex<HashMap<u32, ProcessMetrics>>>,
@@ -92,7 +92,7 @@ pub struct PerformanceMonitor {
 
 /// 错误恢复器
 /// error recovery
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct ErrorRecovery {
     retry_policies: Arc<TokioMutex<HashMap<String, RetryPolicy>>>,
@@ -102,7 +102,7 @@ pub struct ErrorRecovery {
 
 /// 重试策略
 /// Retry strategy
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct RetryPolicy {
@@ -114,7 +114,7 @@ pub struct RetryPolicy {
 
 /// 恢复策略
 /// strategy
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 #[derive(Clone)]
 pub enum RecoveryStrategy {
@@ -126,7 +126,7 @@ pub enum RecoveryStrategy {
 
 /// 增强的异步命令
 /// async command
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 enum EnhancedAsyncCommand {
     Spawn {
         config: ProcessConfig,
@@ -158,7 +158,7 @@ enum EnhancedAsyncCommand {
     },
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl EnhancedAsyncProcessManager {
     /// 创建新的增强异步进程管理器
     /// Create new strongasyncprocessmanager
@@ -835,7 +835,7 @@ impl EnhancedAsyncProcessManager {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for PerformanceMonitor {
     fn default() -> Self {
         Self {
@@ -845,7 +845,7 @@ impl Default for PerformanceMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl PerformanceMonitor {
     pub fn new() -> Self {
         Self::default()
@@ -874,7 +874,7 @@ impl PerformanceMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for ErrorRecovery {
     fn default() -> Self {
         Self {
@@ -884,7 +884,7 @@ impl Default for ErrorRecovery {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl ErrorRecovery {
     pub fn new() -> Self {
         Self::default()

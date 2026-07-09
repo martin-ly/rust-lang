@@ -233,7 +233,7 @@ pool.release_process(pid)?;
 ### 异步操作
 
 ```rust
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use c07_process::prelude::*;
 
 #[tokio::main]

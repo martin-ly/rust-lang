@@ -13,7 +13,7 @@
 use crossbeam_queue::ArrayQueue;
 #[allow(unused_imports)]
 use crossbeam_utils::CachePadded;
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 use std::cell::UnsafeCell;
 #[allow(unused_imports)]
 use std::sync::{
@@ -21,7 +21,7 @@ use std::sync::{
     Arc,
 };
 use std::thread;
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 /// 单生产者单消费者环形缓冲区
 /// single-producer single-consumer buffering
 pub struct SpscRingBuffer<T> {
@@ -32,12 +32,12 @@ pub struct SpscRingBuffer<T> {
 }
 
 // SPSC：单生产者单消费者，基于索引原子与独占访问，声明为线程安全
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 unsafe impl<T: Send> Send for SpscRingBuffer<T> {}
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 unsafe impl<T: Send> Sync for SpscRingBuffer<T> {}
 
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 impl<T> SpscRingBuffer<T> {
     pub fn new(capacity: usize) -> Self {
         let mut buffer = Vec::with_capacity(capacity);
@@ -169,7 +169,7 @@ impl<T> SpscRingBuffer<T> {
     }
 }
 
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 /// 多生产者单消费者环形缓冲区
 /// multi-producer single-consumer buffering
 pub struct MpscRingBuffer<T> {
@@ -182,12 +182,12 @@ pub struct MpscRingBuffer<T> {
 }
 
 // MPSC：多生产者单消费者，通过 CAS 保证每个槽位独占写入
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 unsafe impl<T: Send> Send for MpscRingBuffer<T> {}
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 unsafe impl<T: Send> Sync for MpscRingBuffer<T> {}
 
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 impl<T> MpscRingBuffer<T> {
     pub fn new(capacity: usize) -> Self {
         let mut buffer = Vec::with_capacity(capacity);
@@ -311,7 +311,7 @@ impl<T> MpscRingBuffer<T> {
     }
 }
 
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 /// 多生产者多消费者环形缓冲区
 /// buffering
 pub struct MpmcRingBuffer<T> {
@@ -322,11 +322,11 @@ pub struct MpmcRingBuffer<T> {
 }
 
 // MPMC：多生产者多消费者，索引通过 CAS 竞争，槽位独占访问
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 unsafe impl<T: Send> Send for MpmcRingBuffer<T> {}
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 unsafe impl<T: Send> Sync for MpmcRingBuffer<T> {}
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 impl<T> MpmcRingBuffer<T> {
     pub fn new(capacity: usize) -> Self {
         let mut buffer = Vec::with_capacity(capacity);
@@ -469,7 +469,7 @@ impl<T> MpmcRingBuffer<T> {
     }
 }
 
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 /// 可扩展环形缓冲区
 /// buffering
 /// 支持动态扩展的环形缓冲区
@@ -480,7 +480,7 @@ pub struct ScalableRingBuffer<T> {
     capacity_per_buffer: usize,
 }
 
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 impl<T> ScalableRingBuffer<T> {
     /// 创建新的可扩展环形缓冲区
     /// Creates新的可扩展环形缓冲区
@@ -592,9 +592,9 @@ impl<T> ScalableRingBuffer<T> {
     }
 }
 
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 unsafe impl<T: Send> Send for ScalableRingBuffer<T> {}
-#[cfg(feature = "custom_ring_buffers")]
+#[cfg(feature = "custom-ring-buffers")]
 unsafe impl<T: Send> Sync for ScalableRingBuffer<T> {}
 pub struct CrossbeamRingBuffer<T> {
     queue: ArrayQueue<T>,
@@ -670,7 +670,7 @@ pub fn demonstrate_lockfree_ring_buffers() {
 
     // 为降低复杂度，仅演示稳定实现，避免自定义环缓的可变借用问题
     CrossbeamRingBuffer::<i32>::run_example();
-    #[cfg(feature = "custom_ring_buffers")]
+    #[cfg(feature = "custom-ring-buffers")]
     {
         SpscRingBuffer::<i32>::run_example();
         MpscRingBuffer::<i32>::run_example();

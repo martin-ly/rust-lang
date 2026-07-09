@@ -5,23 +5,23 @@
 //! program error handling functionality ，error recovery 、
 //! 错误链追踪、错误分类等 Rust 1.90 新特性
 //! 、classification etc. Rust 1.90 feature
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use c07_process::error::{
     ConfigError, IpcError, PlatformError, ProcessError, ResourceError, SyncError,
 };
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use c07_process::prelude::*;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use c07_process::{
     EnhancedErrorEntry, EnhancedErrorManager, ErrorManagerConfig, ErrorSeverity, RecoveryResult,
     RecoveryStrategy,
 };
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use std::collections::HashMap;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use std::time::Duration;
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 增强的错误处理演示程序");
@@ -75,7 +75,7 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_basic_error_handling(manager: &EnhancedErrorManager) -> Result<()> {
     // 创建不同类型的错误
     println!("  创建不同类型的错误...");
@@ -144,7 +144,7 @@ async fn demonstrate_basic_error_handling(manager: &EnhancedErrorManager) -> Res
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_error_recovery(manager: &EnhancedErrorManager) -> Result<()> {
     // 创建可恢复的错误
     println!("  创建可恢复的错误...");
@@ -228,7 +228,7 @@ async fn demonstrate_error_recovery(manager: &EnhancedErrorManager) -> Result<()
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_error_classification(manager: &EnhancedErrorManager) -> Result<()> {
     // 创建不同类型的错误进行分类
     println!("  创建不同类型的错误进行分类...");
@@ -319,7 +319,7 @@ async fn demonstrate_error_classification(manager: &EnhancedErrorManager) -> Res
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_error_chain_tracking(manager: &EnhancedErrorManager) -> Result<()> {
     // 创建错误链
     println!("  创建错误链...");
@@ -402,7 +402,7 @@ async fn demonstrate_error_chain_tracking(manager: &EnhancedErrorManager) -> Res
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_advanced_error_handling(manager: &EnhancedErrorManager) -> Result<()> {
     // 演示高级错误处理功能
     println!("  演示高级错误处理功能...");
@@ -534,7 +534,7 @@ async fn demonstrate_advanced_error_handling(manager: &EnhancedErrorManager) -> 
     Ok(())
 }
 
-#[cfg(not(feature = "async"))]
+#[cfg(not(feature = "async-support"))]
 fn main() {
     println!("❌ 异步功能未启用");
     println!("请使用 --features async 重新编译以启用异步功能");

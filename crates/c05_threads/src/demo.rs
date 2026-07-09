@@ -214,21 +214,21 @@ pub fn run_performance_benchmarks() {
 
     // 测试基础工作窃取
     let start = std::time::Instant::now();
-    #[cfg(feature = "work_stealing_examples")]
+    #[cfg(feature = "work-stealing-examples")]
     concurrency::work_stealing::WorkStealingScheduler::<i32>::run_example();
     let basic_work_stealing_time = start.elapsed();
     println!("基础工作窃取耗时: {:?}", basic_work_stealing_time);
 
     // 测试优先级工作窃取
     let start = std::time::Instant::now();
-    #[cfg(feature = "work_stealing_examples")]
+    #[cfg(feature = "work-stealing-examples")]
     concurrency::work_stealing::PriorityWorkStealingScheduler::<i32>::run_example();
     let priority_work_stealing_time = start.elapsed();
     println!("优先级工作窃取耗时: {:?}", priority_work_stealing_time);
 
     // 测试自适应工作窃取
     let start = std::time::Instant::now();
-    #[cfg(feature = "work_stealing_examples")]
+    #[cfg(feature = "work-stealing-examples")]
     concurrency::work_stealing::AdaptiveWorkStealingScheduler::<i32>::run_example();
     let adaptive_work_stealing_time = start.elapsed();
     println!("自适应工作窃取耗时: {:?}", adaptive_work_stealing_time);

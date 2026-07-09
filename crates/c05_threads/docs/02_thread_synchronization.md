@@ -22,22 +22,22 @@
 - 1. 概述
   - 1.1 同步原语分类
   - 1.2 死锁预防
-- 2. 互斥锁 (Mutex)
+- 1. 互斥锁 (Mutex)
   - 2.1 基本Mutex使用
   - 2.2 递归Mutex
-- 3. 读写锁 (RwLock)
+- 1. 读写锁 (RwLock)
   - 3.1 基本RwLock使用
-- 4. 条件变量 (Condition Variable)
+- 1. 条件变量 (Condition Variable)
   - 4.1 基本条件变量
-- 5. 信号量 (Semaphore)
+- 1. 信号量 (Semaphore)
   - 5.1 基本信号量
-- 6. 屏障 (Barrier)
+- 1. 屏障 (Barrier)
   - 6.1 基本屏障
-- 7. 原子操作 (Atomic)
+- 1. 原子操作 (Atomic)
   - 7.1 基本原子类型
-- 8. 最佳实践
+- 1. 最佳实践
   - 8.1 锁的粒度
   - 8.2 避免死锁
-- 9. 总结
+- 1. 总结
   - 9.1 关键要点
   - 9.2 最佳实践

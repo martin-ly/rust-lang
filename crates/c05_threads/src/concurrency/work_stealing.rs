@@ -20,7 +20,7 @@ use crossbeam_deque::{
 };
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
-#[cfg(feature = "work_stealing_examples")]
+#[cfg(feature = "work-stealing-examples")]
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -113,7 +113,7 @@ impl<T> WorkStealingScheduler<T> {
     /// 运行工作窃取示例
     /// Run example
     /// Run工作窃取Example of
-    #[cfg(feature = "work_stealing_examples")]
+    #[cfg(feature = "work-stealing-examples")]
     pub fn run_example() {
         println!("=== 工作窃取调度器示例 ===");
 
@@ -254,7 +254,7 @@ impl<T> PriorityWorkStealingScheduler<T> {
 
     /// 运行优先级工作窃取示例
     /// Run example
-    #[cfg(feature = "work_stealing_examples")]
+    #[cfg(feature = "work-stealing-examples")]
     pub fn run_example() {
         println!("=== 优先级工作窃取调度器示例 ===");
 
@@ -445,7 +445,7 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
 
     /// 运行自适应工作窃取示例
     /// Run example
-    #[cfg(feature = "work_stealing_examples")]
+    #[cfg(feature = "work-stealing-examples")]
     pub fn run_example() {
         println!("=== 自适应工作窃取调度器示例 ===");
 
@@ -587,7 +587,7 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
 
     /// 运行NUMA感知工作窃取示例
     /// Run NUMAexample
-    #[cfg(feature = "work_stealing_examples")]
+    #[cfg(feature = "work-stealing-examples")]
     pub fn run_example() {
         println!("=== NUMA感知工作窃取调度器示例 ===");
 
@@ -636,16 +636,16 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
 /// Run all example
 pub fn demonstrate_work_stealing() {
     println!("=== 工作窃取算法演示 ===");
-    #[cfg(feature = "work_stealing_examples")]
+    #[cfg(feature = "work-stealing-examples")]
     {
         WorkStealingScheduler::<i32>::run_example();
         PriorityWorkStealingScheduler::<i32>::run_example();
         AdaptiveWorkStealingScheduler::<i32>::run_example();
         NumaAwareWorkStealingScheduler::<i32>::run_example();
     }
-    #[cfg(not(feature = "work_stealing_examples"))]
+    #[cfg(not(feature = "work-stealing-examples"))]
     {
-        println!("(已跳过运行示例，启用 feature=work_stealing_examples 可开启)");
+        println!("(已跳过运行示例，启用 feature=work-stealing-examples 可开启)");
     }
 }
 

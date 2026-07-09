@@ -11,11 +11,11 @@
 
 - 快速导航
 - 1. 新手入门
-- 2. 核心功能
-- 3. 高级特性
+- 1. 核心功能
+- 1. 高级特性
 - 核心文档
 - 1. 实践指南 ([guides/](guides))
-- 2. 理论基础 ([theory/](theory))
-- 3. 参考文档 ([references/](references))
-- 4. 教程示例 ([tutorials/](tutorials/README.md))
+- 1. 理论基础 ([theory/](theory))
+- 1. 参考文档 ([references/](references))
+- 1. 教程示例 ([tutorials/](tutorials/README.md))
 - 协议实现

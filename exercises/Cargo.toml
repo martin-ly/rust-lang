@@ -1,11 +1,12 @@
 [package]
 name = "exercises"
-version = "0.1.0"
+version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
-authors = ["Rust Learning Community"]
-repository = "https://github.com/rust-lang/rust-lang-learning"
-license = "MIT OR Apache-2.0"
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+license.workspace = true
 
 [dependencies]
 tokio = { workspace = true }

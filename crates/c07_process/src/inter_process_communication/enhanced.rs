@@ -18,7 +18,7 @@ use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
 
 /// 增强的IPC管理器
 /// strongIPC manager
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct EnhancedIpcManager {
     channels: Arc<TokioRwLock<HashMap<String, EnhancedIpcChannel>>>,
@@ -30,7 +30,7 @@ pub struct EnhancedIpcManager {
 
 /// 增强的IPC通道
 /// IP Cchannel
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct EnhancedIpcChannel {
     name: String,
@@ -42,7 +42,7 @@ pub struct EnhancedIpcChannel {
 }
 
 /// 增强的连接
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub enum EnhancedConnection {
     Tcp(tokio::sync::Mutex<TcpStream>),
@@ -55,7 +55,7 @@ pub enum EnhancedConnection {
 
 /// 命名管道连接
 /// named pipe
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct NamedPipeConnection {
     read_stream: tokio::fs::File,
@@ -65,7 +65,7 @@ pub struct NamedPipeConnection {
 
 /// 共享内存连接
 /// shared memory
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct SharedMemoryConnection {
     region: Arc<tokio::sync::Mutex<memmap2::MmapMut>>,
@@ -74,7 +74,7 @@ pub struct SharedMemoryConnection {
 }
 
 /// 消息队列连接
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct MessageQueueConnection {
     queue: Arc<TokioMutex<Vec<Message<Vec<u8>>>>>,
@@ -83,7 +83,7 @@ pub struct MessageQueueConnection {
 }
 
 /// 连接池
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct ConnectionPool {
     tcp_connections: Arc<TokioMutex<HashMap<String, Vec<TcpStream>>>>,
@@ -95,7 +95,7 @@ pub struct ConnectionPool {
 
 /// IPC性能监控器
 /// IP Cperformance
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct IpcPerformanceMonitor {
     metrics: Arc<TokioMutex<HashMap<String, IpcMetrics>>>,
@@ -104,7 +104,7 @@ pub struct IpcPerformanceMonitor {
 
 /// IPC指标
 /// IP Cindicator
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub struct IpcMetrics {
@@ -120,7 +120,7 @@ pub struct IpcMetrics {
 
 /// IPC错误恢复器
 /// IP Cerror recovery
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct IpcErrorRecovery {
     retry_policies: Arc<TokioMutex<HashMap<String, IpcRetryPolicy>>>,
@@ -130,7 +130,7 @@ pub struct IpcErrorRecovery {
 
 /// IPC重试策略
 /// IPC strategy
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub struct IpcRetryPolicy {
@@ -142,7 +142,7 @@ pub struct IpcRetryPolicy {
 
 /// IPC恢复策略
 /// IPC strategy
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub enum IpcRecoveryStrategy {
     Reconnect,
@@ -153,7 +153,7 @@ pub enum IpcRecoveryStrategy {
 
 /// 通道统计信息
 /// channel
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub struct ChannelStats {
@@ -168,7 +168,7 @@ pub struct ChannelStats {
     pub created_at: Instant,
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 impl EnhancedIpcManager {
     /// 创建新的增强IPC管理器
@@ -829,7 +829,7 @@ impl EnhancedIpcManager {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl ConnectionPool {
     pub fn new(max_connections_per_endpoint: usize, connection_timeout: Duration) -> Self {
         Self {
@@ -857,7 +857,7 @@ impl ConnectionPool {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for IpcPerformanceMonitor {
     fn default() -> Self {
         Self {
@@ -867,7 +867,7 @@ impl Default for IpcPerformanceMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl IpcPerformanceMonitor {
     pub fn new() -> Self {
         Self::default()
@@ -934,7 +934,7 @@ impl IpcPerformanceMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for IpcErrorRecovery {
     fn default() -> Self {
         Self {
@@ -944,7 +944,7 @@ impl Default for IpcErrorRecovery {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl IpcErrorRecovery {
     pub fn new() -> Self {
         Self::default()

@@ -1,12 +1,12 @@
-// 需要启用 --features pcap_live
+// 需要启用 --features pcap-live
 
-#[cfg(feature = "pcap_live")]
+#[cfg(feature = "pcap-live")]
 #[tokio::main]
 async fn main() {
     run::main().await;
 }
 
-#[cfg(feature = "pcap_live")]
+#[cfg(feature = "pcap-live")]
 mod run {
     use c10_networks::sniff::tcp_stats_stream_bpf;
     use std::time::Duration;
@@ -27,10 +27,10 @@ mod run {
     }
 }
 
-#[cfg(not(feature = "pcap_live"))]
+#[cfg(not(feature = "pcap-live"))]
 fn main() {
     eprintln!(
-        "This example requires feature 'pcap_live'.\nTry: cargo run -p c10_networks --features \
-         pcap_live --example pcap_live_tcp -- \"Ethernet\" \"tcp port 80\""
+        "This example requires feature 'pcap-live'.\nTry: cargo run -p c10_networks --features \
+         pcap-live --example pcap_live_tcp -- \"Ethernet\" \"tcp port 80\""
     );
 }

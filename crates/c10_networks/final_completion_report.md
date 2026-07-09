@@ -137,6 +137,7 @@
 [dependencies]
 c10_networks = "0.1.0"
 ```
+
 ### 运行示例
 
 ```bash
@@ -149,6 +150,7 @@ cargo run --example http_client
 # WebSocket演示
 cargo run --example websocket_demo
 ```
+
 ### 运行测试
 
 ```bash
@@ -159,9 +161,10 @@ cargo test
 cargo test --test unit_tests
 cargo test --test integration_tests
 ```
+
 ## 📝 已知限制
 
-1. **可选功能**: `sniff`、`offline`、`pcap_live` 功能需要 Windows Npcap 库
+1. **可选功能**: `sniff`、`offline`、`pcap-live` 功能需要 Windows Npcap 库
 2. **文档状态**: 部分高级文档标记为"进行中"，但不影响核心功能使用
 
 ## 🎉 项目成就

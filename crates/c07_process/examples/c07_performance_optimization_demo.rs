@@ -58,11 +58,11 @@
 //!     └── 历史数据
 //!     └── data
 //!     └──
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use c07_process::performance::enhanced::*;
 use std::time::Duration;
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("🚀 C07 性能优化演示程序");
@@ -222,7 +222,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-#[cfg(not(feature = "async"))]
+#[cfg(not(feature = "async-support"))]
 fn main() {
     println!("❌ 此示例需要启用 'async' feature");
     println!("请在 Cargo.toml 中添加: features = [\"async\"]");

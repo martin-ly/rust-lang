@@ -91,6 +91,7 @@ c10_networks/
 ├── DEPLOYMENT_GUIDE.md # 部署指南
 └── SECURITY.md        # 安全指南
 ```
+
 ### docs/ 目录结构
 
 ```text
@@ -154,6 +155,7 @@ docs/
     ├── NETWORK_COMMUNICATION_CONCEPTS.md # 网络通信概念（旧版）
     └── DOCUMENTATION_ENHANCEMENT_COMPLETION_REPORT.md # 文档增强报告
 ```
+
 ### reports/ 目录结构
 
 ```text
@@ -193,6 +195,7 @@ reports/
     ├── example_validation_report.md
     └── 10_networks.md
 ```
+
 ## 📊 重组统计
 
 ### 文档分类统计
@@ -435,6 +438,7 @@ tree docs -L 2
 # 查看报告结构
 tree reports -L 1
 ```
+
 ### C. 相关工具
 
 - **文档生成**: `cargo doc`

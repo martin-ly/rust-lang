@@ -12,7 +12,7 @@ use std::time::{Duration, Instant, SystemTime};
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
 
 /// 增强的性能管理器
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Clone)]
 #[allow(dead_code)]
 pub struct EnhancedPerformanceManager {
@@ -26,7 +26,7 @@ pub struct EnhancedPerformanceManager {
 
 /// 内存监控器
 /// memory
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Clone)]
 #[allow(dead_code)]
 pub struct MemoryMonitor {
@@ -38,7 +38,7 @@ pub struct MemoryMonitor {
 
 /// CPU监控器
 /// CPU
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Clone)]
 #[allow(dead_code)]
 pub struct CpuMonitor {
@@ -50,7 +50,7 @@ pub struct CpuMonitor {
 
 /// I/O监控器
 /// I/O
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Clone)]
 #[allow(dead_code)]
 pub struct IoMonitor {
@@ -60,7 +60,7 @@ pub struct IoMonitor {
 }
 
 /// 缓存管理器
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Clone)]
 #[allow(dead_code)]
 pub struct CacheManager {
@@ -71,7 +71,7 @@ pub struct CacheManager {
 
 /// 性能优化器
 /// performance optimizer
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Clone)]
 #[allow(dead_code)]
 pub struct PerformanceOptimizer {
@@ -82,7 +82,7 @@ pub struct PerformanceOptimizer {
 
 /// 内存快照
 /// memory
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct MemorySnapshot {
@@ -98,7 +98,7 @@ pub struct MemorySnapshot {
 
 /// CPU快照
 /// CPU
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct CpuSnapshot {
@@ -112,7 +112,7 @@ pub struct CpuSnapshot {
 
 /// I/O快照
 /// I/O
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct IoSnapshot {
@@ -128,7 +128,7 @@ pub struct IoSnapshot {
 
 /// I/O统计信息
 /// I/O information
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct IoStats {
@@ -144,7 +144,7 @@ pub struct IoStats {
 }
 
 /// 缓存统计信息
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct CacheStats {
@@ -159,7 +159,7 @@ pub struct CacheStats {
 
 /// 缓存策略
 /// strategy
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct CachePolicy {
@@ -173,7 +173,7 @@ pub struct CachePolicy {
 
 /// 驱逐策略
 /// strategy
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum EvictionStrategy {
     Lru, // Least Recently Used
@@ -185,7 +185,7 @@ pub enum EvictionStrategy {
 
 /// 优化规则
 /// optimization rule
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OptimizationRule {
     pub name: String,
@@ -197,7 +197,7 @@ pub struct OptimizationRule {
 
 /// 优化条件
 /// optimization condition
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum OptimizationCondition {
     MemoryUsage(f64),   // Percentage
@@ -210,7 +210,7 @@ pub enum OptimizationCondition {
 
 /// 优化动作
 /// optimization
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum OptimizationAction {
     IncreaseCacheSize(usize),
@@ -225,7 +225,7 @@ pub enum OptimizationAction {
 
 /// 优化尝试
 /// optimization
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OptimizationAttempt {
     pub id: String,
@@ -239,7 +239,7 @@ pub struct OptimizationAttempt {
 
 /// 性能配置
 /// performance configuration
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PerformanceConfig {
     pub memory_threshold: f64,
@@ -254,7 +254,7 @@ pub struct PerformanceConfig {
 
 /// 内存泄漏检测器
 /// memory leak
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Clone)]
 #[allow(dead_code)]
 pub struct MemoryLeakDetector {
@@ -264,7 +264,7 @@ pub struct MemoryLeakDetector {
 }
 
 /// 热监控器
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Clone)]
 #[allow(dead_code)]
 pub struct ThermalMonitor {
@@ -275,7 +275,7 @@ pub struct ThermalMonitor {
 
 /// 热状态
 /// state
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub enum ThermalState {
@@ -287,7 +287,7 @@ pub enum ThermalState {
 }
 
 /// 带宽监控器
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Clone)]
 #[allow(dead_code)]
 pub struct BandwidthMonitor {
@@ -297,7 +297,7 @@ pub struct BandwidthMonitor {
 }
 
 /// 带宽快照
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct BandwidthSnapshot {
@@ -307,7 +307,7 @@ pub struct BandwidthSnapshot {
     pub peak_usage: u64,
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl EnhancedPerformanceManager {
     /// 创建新的增强性能管理器
     /// Create new strongperformancemanager
@@ -675,7 +675,7 @@ impl EnhancedPerformanceManager {
 
 /// 优化结果
 /// optimization result
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OptimizationResult {
     pub success: bool,
@@ -686,7 +686,7 @@ pub struct OptimizationResult {
 
 /// 性能报告
 /// performance
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PerformanceReport {
     pub timestamp: SystemTime,
@@ -698,7 +698,7 @@ pub struct PerformanceReport {
     pub recommendations: Vec<String>,
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for MemoryMonitor {
     fn default() -> Self {
         Self {
@@ -710,7 +710,7 @@ impl Default for MemoryMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl MemoryMonitor {
     pub fn new() -> Self {
         Self::default()
@@ -742,7 +742,7 @@ impl MemoryMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for CpuMonitor {
     fn default() -> Self {
         Self {
@@ -754,7 +754,7 @@ impl Default for CpuMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl CpuMonitor {
     pub fn new() -> Self {
         Self::default()
@@ -788,7 +788,7 @@ impl CpuMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for IoMonitor {
     fn default() -> Self {
         Self {
@@ -809,7 +809,7 @@ impl Default for IoMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl IoMonitor {
     pub fn new() -> Self {
         Self::default()
@@ -842,7 +842,7 @@ impl IoMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for CacheManager {
     fn default() -> Self {
         Self {
@@ -861,7 +861,7 @@ impl Default for CacheManager {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl CacheManager {
     pub fn new() -> Self {
         Self::default()
@@ -873,7 +873,7 @@ impl CacheManager {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for PerformanceOptimizer {
     fn default() -> Self {
         Self {
@@ -884,7 +884,7 @@ impl Default for PerformanceOptimizer {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl PerformanceOptimizer {
     pub fn new() -> Self {
         Self::default()
@@ -928,7 +928,7 @@ impl PerformanceOptimizer {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for MemoryLeakDetector {
     fn default() -> Self {
         Self {
@@ -939,14 +939,14 @@ impl Default for MemoryLeakDetector {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl MemoryLeakDetector {
     pub fn new() -> Self {
         Self::default()
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for ThermalMonitor {
     fn default() -> Self {
         Self {
@@ -957,14 +957,14 @@ impl Default for ThermalMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl ThermalMonitor {
     pub fn new() -> Self {
         Self::default()
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for BandwidthMonitor {
     fn default() -> Self {
         Self {
@@ -975,7 +975,7 @@ impl Default for BandwidthMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl BandwidthMonitor {
     pub fn new() -> Self {
         Self::default()

@@ -1,10 +1,12 @@
 [package]
 name = "c15_verification_tools"
-version = "0.1.0"
-edition = "2024"
-rust-version = "1.96.1"
-license = "MIT OR Apache-2.0"
-authors = ["Rust 学习项目团队"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
 description = "Kani / Aeneas / Prusti 验证工具实战示例 crate"
 
 [dependencies]

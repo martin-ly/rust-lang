@@ -36,6 +36,9 @@ version = "3.1.0"
 edition = "2024"
 rust-version = "1.96.1"
 license = "MIT OR Apache-2.0"
+authors = ["Rust Learning Community"]
+repository = "https://github.com/martin-ly/rust-lang"
+homepage = "https://github.com/martin-ly/rust-lang"
 
 [profile.release]
 
@@ -407,7 +410,7 @@ opentelemetry-proto = { version = "0.32.0", features = ["gen-tonic"] }
 # metrics: 指标收集库，提供高性能的指标记录
 metrics = "0.24.6"
 # metrics-exporter-prometheus: metrics的Prometheus导出器
-metrics-exporter-prometheus = "0.18.3"
+metrics-exporter-prometheus = { version = "0.18.3", default-features = false }
 
 # 2025-12-25: 时间处理最新稳定版本
 # chrono: 日期和时间处理库，支持多种日期格式和时区

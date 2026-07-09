@@ -233,6 +233,7 @@ impl AsyncNetworkClient for MyClient {
     }
 }
 ```
+
 ### 2. 异步闭包改进
 
 ```rust
@@ -243,6 +244,7 @@ let results = futures::future::try_join_all(
     })
 ).await?;
 ```
+
 ### 3. 常量泛型推断
 
 ```rust
@@ -252,6 +254,7 @@ fn process_packet(data: [u8; _]) -> NetworkResult<u32> {
     Ok(checksum)
 }
 ```
+
 ### 4. 性能优化
 
 - 零拷贝网络编程

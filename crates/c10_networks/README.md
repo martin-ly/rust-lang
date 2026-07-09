@@ -8,7 +8,7 @@
 
 ## 目录
 
-- [🦀 C10 Networks - Rust 1.96.1+ 网络编程库](#-c10-networks---rust-1960-网络编程库)
+- [🦀 C10 Networks - Rust 1.96.1+ 网络编程库](#-c10-networks---rust-1961-网络编程库)
   - [目录](#目录)
   - [🎯 最新更新 (2025-11-15) ✨](#-最新更新-2025-11-15-)
     - [📖 新版文档导航](#-新版文档导航)
@@ -208,10 +208,10 @@ cargo run -p c10_networks --example udp_custom_demo -- 127.0.0.1:9000
 cargo run -p c10_networks --features offline --example pcap_offline -- capture.pcap
 ```
 
-启用 pcap_live 实时过滤抓包（需管理员）：
+启用 pcap-live 实时过滤抓包（需管理员）：
 
 ```powershell
-cargo run -p c10_networks --features pcap_live --example pcap_live_tcp -- "Ethernet" "tcp port 80"
+cargo run -p c10_networks --features pcap-live --example pcap_live_tcp -- "Ethernet" "tcp port 80"
 ```
 
 ### 编程接口（精简）

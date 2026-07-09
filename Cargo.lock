@@ -2205,7 +2205,7 @@ dependencies = [
 
 [[package]]
 name = "c01_ownership_borrow_scope"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "common",
  "criterion",
@@ -2215,7 +2215,7 @@ dependencies = [
 
 [[package]]
 name = "c02_type_system"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "common",
  "criterion",
@@ -2228,7 +2228,7 @@ dependencies = [
 
 [[package]]
 name = "c03_control_fn"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "anyhow",
  "common",
@@ -2242,7 +2242,7 @@ dependencies = [
 
 [[package]]
 name = "c04_generic"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "anyhow",
  "common",
@@ -2257,7 +2257,7 @@ dependencies = [
 
 [[package]]
 name = "c05_threads"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "common",
  "criterion",
@@ -2281,7 +2281,7 @@ dependencies = [
 
 [[package]]
 name = "c06_async"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "actix",
  "actix-rt",
@@ -2332,7 +2332,7 @@ dependencies = [
 
 [[package]]
 name = "c07_process"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "anyhow",
  "chrono",
@@ -2358,7 +2358,7 @@ dependencies = [
 
 [[package]]
 name = "c08_algorithms"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "aho-corasick",
  "anyhow",
@@ -2387,7 +2387,7 @@ dependencies = [
 
 [[package]]
 name = "c09_design_pattern"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "common",
  "criterion",
@@ -2404,7 +2404,7 @@ dependencies = [
 
 [[package]]
 name = "c10_networks"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "aes-gcm",
  "anyhow",
@@ -2469,7 +2469,7 @@ dependencies = [
 
 [[package]]
 name = "c11_macro_system_proc"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "c11_macro_system_proc_macros",
  "common",
@@ -2482,7 +2482,7 @@ dependencies = [
 
 [[package]]
 name = "c11_macro_system_proc_macros"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2491,7 +2491,7 @@ dependencies = [
 
 [[package]]
 name = "c12_wasm"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "common",
  "criterion",
@@ -2504,7 +2504,7 @@ dependencies = [
 
 [[package]]
 name = "c13_embedded"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "bindgen",
  "cortex-m",
@@ -2528,11 +2528,11 @@ dependencies = [
 
 [[package]]
 name = "c15_verification_tools"
-version = "0.1.0"
+version = "3.1.0"
 
 [[package]]
 name = "c16_gui"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "dioxus",
  "dioxus-web",
@@ -2546,7 +2546,7 @@ dependencies = [
 
 [[package]]
 name = "c17_resolver_v3_public_demo"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "crate-b",
  "crate-c",
@@ -3090,7 +3090,7 @@ dependencies = [
 
 [[package]]
 name = "common"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "anyhow",
  "criterion",
@@ -3549,21 +3549,21 @@ dependencies = [
 
 [[package]]
 name = "crate-b"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "crate-d",
 ]
 
 [[package]]
 name = "crate-c"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "crate-d",
 ]
 
 [[package]]
 name = "crate-d"
-version = "0.1.0"
+version = "3.1.0"
 
 [[package]]
 name = "crc"
@@ -5535,7 +5535,7 @@ dependencies = [
 
 [[package]]
 name = "exercises"
-version = "0.1.0"
+version = "3.1.0"
 dependencies = [
  "futures",
  "indexmap 2.14.0",
@@ -8066,7 +8066,7 @@ dependencies = [
 
 [[package]]
 name = "integration_tests"
-version = "0.1.0"
+version = "3.1.0"
 
 [[package]]
 name = "interpolator"

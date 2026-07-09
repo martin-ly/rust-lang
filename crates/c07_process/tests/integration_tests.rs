@@ -62,7 +62,7 @@ fn test_config_defaults() {
     assert_eq!(sync_config.max_waiters, None);
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 mod async_tests {
     use super::*;
     use c07_process::AsyncProcessManager;

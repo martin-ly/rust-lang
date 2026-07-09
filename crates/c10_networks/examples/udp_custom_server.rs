@@ -1,17 +1,17 @@
-#[cfg(any(feature = "sniff", feature = "offline", feature = "pcap_live"))]
+#[cfg(any(feature = "sniff", feature = "offline", feature = "pcap-live"))]
 use c10_networks::sniff::udp_custom_server;
-#[cfg(any(feature = "sniff", feature = "offline", feature = "pcap_live"))]
+#[cfg(any(feature = "sniff", feature = "offline", feature = "pcap-live"))]
 use std::net::SocketAddr;
 
-#[cfg(not(any(feature = "sniff", feature = "offline", feature = "pcap_live")))]
+#[cfg(not(any(feature = "sniff", feature = "offline", feature = "pcap-live")))]
 fn main() {
     eprintln!(
-        "This example requires feature 'sniff' (or 'offline'/'pcap_live').\nRun: cargo run -p \
+        "This example requires feature 'sniff' (or 'offline'/'pcap-live').\nRun: cargo run -p \
          c10_networks --features sniff --example udp_custom_server -- 127.0.0.1:9000"
     );
 }
 
-#[cfg(any(feature = "sniff", feature = "offline", feature = "pcap_live"))]
+#[cfg(any(feature = "sniff", feature = "offline", feature = "pcap-live"))]
 #[tokio::main]
 async fn main() {
     let addr = std::env::args()

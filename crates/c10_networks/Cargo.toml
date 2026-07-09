@@ -1,14 +1,15 @@
 [package]
 name = "c10_networks"
-version = "0.1.0"
-edition = "2024"
-rust-version = "1.96.1"
-authors = ["Rust Learning Community"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
 keywords = ["networking", "http", "grpc", "web"]
 categories = ["network-programming", "asynchronous"]
 description = "Rust networking learning module"
-license = "MIT OR Apache-2.0"
-repository = "https://github.com/rust-lang/rust-lang-learning"
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 
 [dependencies]
 common = { workspace = true, features = ["serde", "error-trait", "async"] }
@@ -93,7 +94,7 @@ sniff = ["pcap", "pnet"]
 pcap = ["dep:pcap", "dep:pnet_packet", "dep:pnet_base"]
 pnet = ["dep:pnet_packet", "dep:pnet_base", "dep:pnet_macros_support"]
 # Sub-features for specific pcap functionality
-pcap_live = ["sniff", "pcap"]
+pcap-live = ["sniff", "pcap"]
 offline = ["sniff", "pcap"]
 libp2p = ["dep:libp2p", "dep:multibase"]
 # Kafka ecosystem examples

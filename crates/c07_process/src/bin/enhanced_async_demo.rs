@@ -5,16 +5,16 @@
 //! program async process functionality ，async 、
 //! 性能监控、错误恢复等 Rust 1.90 新特性
 //! performance 、error recovery etc. Rust 1.90 feature
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use c07_process::EnhancedAsyncProcessManager;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use c07_process::prelude::*;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use std::collections::HashMap;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use std::time::Duration;
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 增强的异步进程管理演示程序");
@@ -64,7 +64,7 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_basic_async_features(manager: &EnhancedAsyncProcessManager) -> Result<()> {
     // 创建进程配置
     let config = create_demo_config("basic_demo")?;
@@ -100,7 +100,7 @@ async fn demonstrate_basic_async_features(manager: &EnhancedAsyncProcessManager)
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_async_closures(manager: &EnhancedAsyncProcessManager) -> Result<()> {
     // 创建进程配置
     let config = create_demo_config("async_closure_demo")?;
@@ -137,7 +137,7 @@ async fn demonstrate_async_closures(manager: &EnhancedAsyncProcessManager) -> Re
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_performance_monitoring(manager: &EnhancedAsyncProcessManager) -> Result<()> {
     // 创建多个进程进行性能监控
     println!("  创建多个进程进行性能监控...");
@@ -179,7 +179,7 @@ async fn demonstrate_performance_monitoring(manager: &EnhancedAsyncProcessManage
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_error_recovery(manager: &EnhancedAsyncProcessManager) -> Result<()> {
     // 演示错误恢复机制
     println!("  演示错误恢复机制...");
@@ -214,7 +214,7 @@ async fn demonstrate_error_recovery(manager: &EnhancedAsyncProcessManager) -> Re
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_advanced_async_features(manager: &EnhancedAsyncProcessManager) -> Result<()> {
     // 演示高级异步功能
     println!("  演示高级异步功能...");
@@ -273,7 +273,7 @@ async fn demonstrate_advanced_async_features(manager: &EnhancedAsyncProcessManag
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 fn create_demo_config(name: &str) -> Result<ProcessConfig> {
     let mut env = HashMap::new();
     if cfg!(windows) {
@@ -305,7 +305,7 @@ fn create_demo_config(name: &str) -> Result<ProcessConfig> {
     })
 }
 
-#[cfg(not(feature = "async"))]
+#[cfg(not(feature = "async-support"))]
 fn main() {
     println!("❌ 异步功能未启用");
     println!("请使用 --features async 重新编译以启用异步功能");

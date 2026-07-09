@@ -61,6 +61,7 @@ tests/
 ├── test_runner.rs        # 测试运行器
 └── README.md             # 测试指南
 ```
+
 ## 🚀 快速开始
 
 ### 运行所有测试
@@ -75,6 +76,7 @@ cargo test --all
 # 运行测试并显示输出
 cargo test -- --nocapture
 ```
+
 ### 运行特定测试
 
 ```bash
@@ -99,6 +101,7 @@ cargo test --test dns_tests
 # 运行测试运行器
 cargo test --test test_runner
 ```
+
 ### 测试配置
 
 ```bash
@@ -114,6 +117,7 @@ cargo test test_packet_creation
 # 运行包含特定字符串的测试
 cargo test -- packet
 ```
+
 ## 📝 测试文件说明
 
 ### 单元测试
@@ -134,6 +138,7 @@ cargo test -- packet
 ```bash
 cargo test --test unit_tests
 ```
+
 ### 集成测试
 
 **文件**: `integration_tests.rs`
@@ -155,6 +160,7 @@ cargo test --test unit_tests
 ```bash
 cargo test --test integration_tests
 ```
+
 ### 性能测试
 
 **文件**: `performance_tests.rs`
@@ -180,6 +186,7 @@ cargo test --test integration_tests
 ```bash
 cargo test --test performance_tests
 ```
+
 ### 安全测试
 
 **文件**: `security_tests.rs`
@@ -207,6 +214,7 @@ cargo test --test performance_tests
 ```bash
 cargo test --test security_tests
 ```
+
 ### 协议测试
 
 **文件**: `protocol_tests.rs`
@@ -235,6 +243,7 @@ cargo test --test security_tests
 ```bash
 cargo test --test protocol_tests
 ```
+
 ### DNS测试
 
 **文件**: `dns_tests.rs`
@@ -251,6 +260,7 @@ cargo test --test protocol_tests
 # 需要设置环境变量
 C10_DNS_TESTS=1 cargo test --test dns_tests
 ```
+
 ### 测试运行器
 
 **文件**: `test_runner.rs`
@@ -268,12 +278,14 @@ C10_DNS_TESTS=1 cargo test --test dns_tests
 ```bash
 cargo test --test test_runner
 ```
+
 ## ⚙️ 测试配置
 
 ### 环境变量
 
 | 环境变量                   | 描述               | 默认值               |
-| :--- | :--- | :--- || `C10_SKIP_NETWORK_TESTS`   | 跳过网络相关测试   | `0`                  |
+| :--- | :--- | :--- |
+| `C10_SKIP_NETWORK_TESTS`   | 跳过网络相关测试   | `0`                  |
 | `C10_DNS_TESTS`            | 启用DNS测试        | `0`                  |
 | `C10_TCP_ADDRESS`          | TCP测试地址        | `127.0.0.1:8080`     |
 | `C10_TCP_TIMEOUT`          | TCP超时时间        | `30秒`               |
@@ -290,9 +302,10 @@ cargo test --test test_runner
 ### 测试特性
 
 | 特性        | 描述         | 测试文件               |
-| :--- | :--- | :--- || `sniff`     | 抓包功能测试 | `integration_tests.rs` |
+| :--- | :--- | :--- |
+| `sniff`     | 抓包功能测试 | `integration_tests.rs` |
 | `offline`   | 离线分析测试 | `integration_tests.rs` |
-| `pcap_live` | 实时抓包测试 | `integration_tests.rs` |
+| `pcap-live` | 实时抓包测试 | `integration_tests.rs` |
 | `tls`       | TLS功能测试  | `security_tests.rs`    |
 
 ## 🔧 测试工具
@@ -319,6 +332,7 @@ let config = TestRunnerConfig {
 let runner = TestRunner::new(config);
 let results = runner.run_all_tests();
 ```
+
 ### 测试报告
 
 测试报告生成器可以生成详细的测试报告：
@@ -329,6 +343,7 @@ use c10_networks::tests::test_runner::TestReportGenerator;
 let report = TestReportGenerator::generate_report(&results);
 println!("{}", report);
 ```
+
 ### 性能基准
 
 性能测试提供了详细的性能指标：
@@ -339,6 +354,7 @@ println!("数据包创建性能: {} ns/packet", avg_time);
 println!("HTTP请求创建性能: {} ns/request", avg_time);
 println!("WebSocket帧创建性能: {} ns/frame", avg_time);
 ```
+
 ## ❓ 常见问题
 
 ### Q: 如何跳过网络测试？
@@ -348,6 +364,7 @@ A: 设置环境变量：
 ```bash
 C10_SKIP_NETWORK_TESTS=1 cargo test
 ```
+
 ### Q: 如何运行性能测试？
 
 A: 运行性能测试套件：
@@ -355,6 +372,7 @@ A: 运行性能测试套件：
 ```bash
 cargo test --test performance_tests
 ```
+
 ### Q: 如何调试测试失败？
 
 A: 使用以下方法调试：
@@ -364,15 +382,19 @@ A: 使用以下方法调试：
    ```bash
    cargo test --test unit_tests -- --nocapture
    ```
+
 2. **运行单个测试**:
 
    ```bash
    cargo test test_packet_creation -- --nocapture
    ```
+
 3. **使用调试模式**:
+
    ```bash
    cargo test --test unit_tests -- --nocapture --test-threads=1
    ```
+
 ### Q: 如何添加新测试？
 
 A: 在相应的测试文件中添加新的测试函数：
@@ -384,6 +406,7 @@ fn test_new_functionality() {
     assert!(condition);
 }
 ```
+
 ### Q: 测试覆盖率如何查看？
 
 A: 使用 `tarpaulin` 工具查看测试覆盖率：
@@ -398,6 +421,7 @@ cargo tarpaulin --out Html
 # 查看覆盖率报告
 open tarpaulin-report.html
 ```
+
 ---
 
 **测试指南完成！** 🎉
@@ -407,6 +431,7 @@ open tarpaulin-report.html
 _最后更新: 2025年1月_
 _文档版本: v1.0_
 _维护者: C10 Networks 开发团队_
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

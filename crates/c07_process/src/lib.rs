@@ -91,7 +91,7 @@ pub use types::{
 
 pub use error::{IpcResult, ProcessResult, ResourceResult, Result, SyncResult};
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 pub use error::enhanced::{
     EnhancedErrorEntry, EnhancedErrorManager, ErrorChain, ErrorChainTracker, ErrorClassification,
     ErrorClassifier, ErrorManagerConfig, ErrorNotifier, ErrorRecovery, ErrorSeverity,
@@ -102,16 +102,16 @@ pub use error::enhanced::{
 pub use process::pool::{AutoScalingConfig, LoadBalancingStrategy, ProcessPool, ProcessPoolConfig};
 pub use process::{ProcessBuilder, ProcessGroupManager, ProcessManager};
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 pub use async_runtime::{AsyncProcessManager, AsyncProcessPool, AsyncTask, AsyncTaskScheduler};
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 pub use async_runtime::enhanced::{
     EnhancedAsyncProcessManager, PerformanceMonitor, ProcessMetrics, ProcessOutput, RetryPolicy,
 };
 
 // 为避免与 error::enhanced 中的同名类型冲突，使用别名重新导出
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 pub use async_runtime::enhanced::{
     ErrorRecovery as AsyncProcessErrorRecovery, RecoveryStrategy as AsyncProcessRecoveryStrategy,
 };
@@ -120,7 +120,7 @@ pub use inter_process_communication::{
     AsyncIpcManager, ChannelStats, IpcChannel, IpcConnector, IpcManager,
 };
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 pub use inter_process_communication::enhanced::{
     EnhancedIpcChannel, EnhancedIpcManager, IpcErrorRecovery, IpcMetrics, IpcPerformanceMonitor,
     IpcRecoveryStrategy, IpcRetryPolicy,
@@ -128,7 +128,7 @@ pub use inter_process_communication::enhanced::{
 
 pub use concurrency::{PrimitiveStats, SyncManager, SyncPrimitiveTrait};
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 pub use concurrency::enhanced::{
     AdaptiveScheduler, DeadlockDetector, DeadlockRisk, EnhancedBarrier, EnhancedMutex,
     EnhancedPrimitiveStats, EnhancedRwLock, EnhancedSemaphore, EnhancedSyncManager,
@@ -228,7 +228,7 @@ fn get_enabled_features() -> Vec<String> {
     #[allow(unused_mut)]
     let mut features = vec!["std".to_string()];
 
-    #[cfg(feature = "async")]
+    #[cfg(feature = "async-support")]
     features.push("async".to_string());
 
     #[cfg(feature = "unix")]
@@ -280,20 +280,20 @@ pub mod prelude {
     };
 
     // 增强的异步功能
-    #[cfg(feature = "async")]
+    #[cfg(feature = "async-support")]
     pub use super::async_runtime::enhanced::{
         EnhancedAsyncProcessManager, PerformanceMonitor, ProcessMetrics, ProcessOutput, RetryPolicy,
     };
 
     // 增强的IPC功能
-    #[cfg(feature = "async")]
+    #[cfg(feature = "async-support")]
     pub use super::inter_process_communication::enhanced::{
         EnhancedIpcChannel, EnhancedIpcManager, IpcErrorRecovery, IpcMetrics,
         IpcPerformanceMonitor, IpcRecoveryStrategy, IpcRetryPolicy,
     };
 
     // 增强的同步原语功能
-    #[cfg(feature = "async")]
+    #[cfg(feature = "async-support")]
     pub use super::concurrency::enhanced::{
         AdaptiveScheduler, DeadlockDetector, DeadlockRisk, EnhancedBarrier, EnhancedMutex,
         EnhancedPrimitiveStats, EnhancedRwLock, EnhancedSemaphore, EnhancedSyncManager,
@@ -301,7 +301,7 @@ pub mod prelude {
     };
 
     // 增强的错误处理功能
-    #[cfg(feature = "async")]
+    #[cfg(feature = "async-support")]
     pub use super::error::enhanced::{
         EnhancedErrorEntry, EnhancedErrorManager, ErrorChain, ErrorChainTracker,
         ErrorClassification, ErrorClassifier, ErrorManagerConfig, ErrorNotifier, ErrorSeverity,
@@ -310,7 +310,7 @@ pub mod prelude {
     };
 
     // 增强的性能优化功能
-    #[cfg(feature = "async")]
+    #[cfg(feature = "async-support")]
     pub use super::performance::enhanced::{
         CacheManager, CacheStats, CpuMonitor, CpuSnapshot, EnhancedPerformanceManager,
         EvictionStrategy, IoMonitor, IoSnapshot, IoStats, MemoryMonitor, MemorySnapshot,

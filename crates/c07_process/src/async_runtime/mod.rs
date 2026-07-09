@@ -1,31 +1,31 @@
 use crate::error::{ProcessError, ProcessResult};
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use crate::types::ResourceLimits;
 use crate::types::{ProcessConfig, ProcessInfo};
 use std::time::SystemTime;
 
 // 增强的异步功能
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 pub mod enhanced;
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use crate::types::ProcessStatus;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use std::collections::HashMap;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use std::process::ExitStatus;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use std::sync::Arc;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use std::time::Duration;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use tokio::process::Command as TokioCommand;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock, mpsc, oneshot};
 
 /// 异步进程管理器
 /// asyncprocess manager
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct AsyncProcessManager {
     processes: Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
@@ -35,7 +35,7 @@ pub struct AsyncProcessManager {
 
 /// 异步管理的进程
 /// async process
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 struct AsyncManagedProcess {
     info: ProcessInfo,
@@ -47,7 +47,7 @@ struct AsyncManagedProcess {
 
 /// 异步命令
 /// async command
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 #[allow(clippy::large_enum_variant)]
 enum AsyncCommand {
@@ -68,7 +68,7 @@ enum AsyncCommand {
     },
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 impl AsyncProcessManager {
     /// 创建新的异步进程管理器
@@ -456,7 +456,7 @@ impl AsyncProcessManager {
 
 /// 异步进程池
 /// async process
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct AsyncProcessPool {
     manager: AsyncProcessManager,
@@ -465,7 +465,7 @@ pub struct AsyncProcessPool {
     busy_processes: Arc<TokioMutex<HashMap<u32, SystemTime>>>,
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl AsyncProcessPool {
     /// 创建新的异步进程池
     /// Create new asyncprocess
@@ -556,7 +556,7 @@ use crate::process::pool::ProcessPoolStats;
 
 /// 异步任务调度器
 /// async task
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct AsyncTaskScheduler {
     task_queue: Arc<TokioMutex<Vec<AsyncTask>>>,
@@ -566,7 +566,7 @@ pub struct AsyncTaskScheduler {
 
 /// 异步任务
 /// async task
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct AsyncTask {
     pub id: u64,
@@ -575,7 +575,7 @@ pub struct AsyncTask {
     pub payload: Vec<u8>,
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 impl AsyncTaskScheduler {
     /// 创建新的异步任务调度器
@@ -639,11 +639,11 @@ impl AsyncTaskScheduler {
 }
 
 /// 非异步版本的占位符实现
-#[cfg(not(feature = "async"))]
+#[cfg(not(feature = "async-support"))]
 #[allow(dead_code)]
 pub struct AsyncProcessManager;
 
-#[cfg(not(feature = "async"))]
+#[cfg(not(feature = "async-support"))]
 impl AsyncProcessManager {
     pub async fn new() -> Self {
         Self
@@ -670,11 +670,11 @@ impl AsyncProcessManager {
     }
 }
 
-#[cfg(not(feature = "async"))]
+#[cfg(not(feature = "async-support"))]
 #[allow(dead_code)]
 pub struct AsyncProcessPool;
 
-#[cfg(not(feature = "async"))]
+#[cfg(not(feature = "async-support"))]
 impl AsyncProcessPool {
     pub async fn new(_pool_size: usize) -> ProcessResult<Self> {
         Err(ProcessError::StartFailed(
@@ -708,15 +708,15 @@ impl AsyncProcessPool {
     }
 }
 
-#[cfg(not(feature = "async"))]
+#[cfg(not(feature = "async-support"))]
 #[allow(dead_code)]
 pub struct AsyncTask;
 
-#[cfg(not(feature = "async"))]
+#[cfg(not(feature = "async-support"))]
 #[allow(dead_code)]
 pub struct AsyncTaskScheduler;
 
-#[cfg(not(feature = "async"))]
+#[cfg(not(feature = "async-support"))]
 impl AsyncTaskScheduler {
     pub fn new(_worker_count: usize) -> Self {
         Self
@@ -727,7 +727,7 @@ impl AsyncTaskScheduler {
     pub async fn add_task(&self, _task: AsyncTask) {}
 }
 
-#[cfg(all(test, feature = "async"))]
+#[cfg(all(test, feature = "async-support"))]
 mod tests {
     use super::*;
     use std::collections::HashMap;

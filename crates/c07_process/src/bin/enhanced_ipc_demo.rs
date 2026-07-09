@@ -5,10 +5,10 @@
 //! program IP Cfunctionality ，transmission 、
 //! 性能监控、错误恢复等 Rust 1.90 新特性
 //! performance 、error recovery etc. Rust 1.90 feature
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use c07_process::prelude::*;
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 增强的IPC通信演示程序");
@@ -59,7 +59,7 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_basic_ipc_features(manager: &EnhancedIpcManager) -> Result<()> {
     // 创建消息队列通道
     println!("  创建消息队列通道...");
@@ -112,7 +112,7 @@ async fn demonstrate_basic_ipc_features(manager: &EnhancedIpcManager) -> Result<
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_zero_copy_transfer(manager: &EnhancedIpcManager) -> Result<()> {
     // 创建高性能消息队列
     println!("  创建高性能消息队列...");
@@ -162,7 +162,7 @@ async fn demonstrate_zero_copy_transfer(manager: &EnhancedIpcManager) -> Result<
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_performance_monitoring(manager: &EnhancedIpcManager) -> Result<()> {
     // 创建多个通道进行性能监控
     println!("  创建多个通道进行性能监控...");
@@ -218,7 +218,7 @@ async fn demonstrate_performance_monitoring(manager: &EnhancedIpcManager) -> Res
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_error_recovery(manager: &EnhancedIpcManager) -> Result<()> {
     // 演示错误恢复机制
     println!("  演示错误恢复机制...");
@@ -264,7 +264,7 @@ async fn demonstrate_error_recovery(manager: &EnhancedIpcManager) -> Result<()> 
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_advanced_ipc_features(manager: &EnhancedIpcManager) -> Result<()> {
     // 演示高级IPC功能
     println!("  演示高级IPC功能...");
@@ -355,7 +355,7 @@ async fn demonstrate_advanced_ipc_features(manager: &EnhancedIpcManager) -> Resu
     Ok(())
 }
 
-#[cfg(not(feature = "async"))]
+#[cfg(not(feature = "async-support"))]
 fn main() {
     println!("❌ 异步功能未启用");
     println!("请使用 --features async 重新编译以启用异步功能");

@@ -82,6 +82,7 @@ cargo --version
 # 检查工具链
 rustup show
 ```
+
 ## 部署流程
 
 ### 1. 环境准备
@@ -96,6 +97,7 @@ winget install Microsoft.VisualStudio.2022.BuildTools
 # 设置执行策略（如果需要）
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
+
 #### Linux/macOS环境
 
 ```bash
@@ -106,6 +108,7 @@ sudo apt update && sudo apt install -y build-essential pkg-config libssl-dev
 # macOS
 brew install pkg-config openssl
 ```
+
 ### 2. 项目构建
 
 #### 标准构建
@@ -124,6 +127,7 @@ cargo test
 # 运行示例
 cargo run --example rust_190_async_features_demo
 ```
+
 #### 优化构建
 
 ```bash
@@ -136,6 +140,7 @@ lto = true
 codegen-units = 1
 panic = "abort"
 ```
+
 ### 3. 验证部署
 
 #### 运行验证脚本
@@ -147,10 +152,12 @@ panic = "abort"
 # 快速验证
 .\scripts\validate_rust_190_alignment.ps1 -Quick
 ```
+
 ```bash
 # Linux/macOS
 ./scripts/test_rust_190_features.sh --verbose
 ```
+
 #### 手动验证步骤
 
 ```bash
@@ -169,6 +176,7 @@ cargo fmt --package c10_networks -- --check
 # 5. Clippy检查
 cargo clippy --package c10_networks -- -D warnings
 ```
+
 ### 4. 性能基准测试
 
 #### 运行性能测试
@@ -180,6 +188,7 @@ cargo run --package c10_networks --example rust_190_performance_benchmark
 # 运行特定性能测试
 cargo bench --package c10_networks
 ```
+
 #### 性能监控
 
 ```bash
@@ -189,6 +198,7 @@ cargo run --package c10_networks --example rust_190_performance_benchmark 2>&1 |
 # CPU使用监控（Linux/macOS）
 top -p $(pgrep -f c10_networks)
 ```
+
 ### 5. 生产环境部署
 
 #### Docker部署
@@ -206,6 +216,7 @@ RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/
 COPY --from=builder /app/target/release/c10_networks /usr/local/bin/
 CMD ["c10_networks"]
 ```
+
 ```bash
 # 构建Docker镜像
 docker build -t c10_networks:latest .
@@ -213,6 +224,7 @@ docker build -t c10_networks:latest .
 # 运行容器
 docker run -p 8080:8080 c10_networks:latest
 ```
+
 #### 系统服务部署
 
 ```ini
@@ -232,6 +244,7 @@ RestartSec=5
 [Install]
 WantedBy=multi-user.target
 ```
+
 ```bash
 # 安装服务
 sudo cp c10_networks.service /etc/systemd/system/
@@ -239,6 +252,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable c10_networks
 sudo systemctl start c10_networks
 ```
+
 ### 6. 监控和日志
 
 #### 日志配置
@@ -255,6 +269,7 @@ fn main() {
     // 应用逻辑
 }
 ```
+
 #### 监控指标
 
 ```bash
@@ -268,6 +283,7 @@ journalctl -u c10_networks -f
 htop
 iotop
 ```
+
 ## 发布流程
 
 ### 1. 版本管理
@@ -279,6 +295,7 @@ iotop
 [package]
 version = "0.1.0"  # 主版本.次版本.修订版本
 ```
+
 #### 版本发布检查清单
 
 - [ ] 所有测试通过
@@ -301,6 +318,7 @@ cargo package
 # 发布
 cargo publish
 ```
+
 #### 发布验证
 
 ```bash
@@ -308,6 +326,7 @@ cargo publish
 cargo install c10_networks
 c10_networks --version
 ```
+
 ### 3. 文档发布
 
 #### 生成文档
@@ -319,6 +338,7 @@ cargo doc --package c10_networks --no-deps --open
 # 发布到docs.rs
 cargo doc --package c10_networks
 ```
+
 #### 更新README
 
 - 更新版本号
@@ -342,6 +362,7 @@ cargo update
 # 检查Rust版本
 rustup update
 ```
+
 #### 运行时错误
 
 ```bash
@@ -349,6 +370,7 @@ rustup update
 ldd target/release/c10_networks  # Linux
 otool -L target/release/c10_networks  # macOS
 ```
+
 #### 性能问题
 
 ```bash
@@ -358,6 +380,7 @@ cargo flamegraph --bin c10_networks
 # 内存分析
 valgrind --tool=memcheck ./target/release/c10_networks
 ```
+
 ### 调试工具
 
 #### 日志调试
@@ -366,6 +389,7 @@ valgrind --tool=memcheck ./target/release/c10_networks
 // 启用详细日志
 RUST_LOG=debug cargo run --package c10_networks
 ```
+
 #### 性能分析
 
 ```bash
@@ -376,6 +400,7 @@ perf report
 # 使用Instruments (macOS)
 xcrun xctrace record --template "Time Profiler" --launch ./target/release/c10_networks
 ```
+
 ## 安全考虑
 
 ### 安全最佳实践
@@ -397,6 +422,7 @@ cargo audit
 cargo install cargo-geiger
 cargo geiger
 ```
+
 ## 维护和更新
 
 ### 定期维护任务

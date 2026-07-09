@@ -1,9 +1,11 @@
 [package]
 name = "crate-d"
-version = "0.1.0"
-edition = "2024"
-rust-version = "1.96.1"
-license = "MIT OR Apache-2.0"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 description = "Crate D: shared dependency with additive features"
 publish = false
 

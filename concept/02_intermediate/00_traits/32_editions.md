@@ -34,9 +34,7 @@
 ## 反命题决策树
 
 > **反命题 1**: "Edition 会强制所有依赖同步升级" ⟹ 不成立。每个 crate 可独立选择 edition，同一编译单元内可混用不同 edition 的依赖。
-
 > **反命题 2**: "设置 `edition = "2024"` 后旧代码一定能编译" ⟹ 不成立。Edition 引入非兼容语法变更，需通过 `cargo fix --edition` 或手动调整。
-
 > **反命题 3**: "`rust-version` 与 `edition` 是同一回事" ⟹ 不成立。`edition` 控制语法/语义版本，`rust-version` 声明最低编译器版本，是不同维度的约束。
 
 ---

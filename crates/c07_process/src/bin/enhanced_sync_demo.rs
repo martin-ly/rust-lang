@@ -5,14 +5,14 @@
 //! program synchronous functionality ，lock 、
 //! 性能监控、自适应锁策略等 Rust 1.90 新特性
 //! performance 、adaptive lock strategy etc. Rust 1.90 feature
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use c07_process::prelude::*;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use c07_process::{DeadlockRisk, EnhancedSyncManager};
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use std::time::Duration;
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 增强的同步原语演示程序");
@@ -58,7 +58,7 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_basic_sync_features(manager: &EnhancedSyncManager) -> Result<()> {
     // 创建增强的互斥锁
     println!("  创建增强的互斥锁...");
@@ -119,7 +119,7 @@ async fn demonstrate_basic_sync_features(manager: &EnhancedSyncManager) -> Resul
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_deadlock_detection(manager: &EnhancedSyncManager) -> Result<()> {
     // 创建多个互斥锁用于死锁检测
     println!("  创建多个互斥锁用于死锁检测...");
@@ -167,7 +167,7 @@ async fn demonstrate_deadlock_detection(manager: &EnhancedSyncManager) -> Result
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_performance_monitoring(manager: &EnhancedSyncManager) -> Result<()> {
     // 创建高性能互斥锁
     println!("  创建高性能互斥锁...");
@@ -217,7 +217,7 @@ async fn demonstrate_performance_monitoring(manager: &EnhancedSyncManager) -> Re
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_adaptive_scheduling(manager: &EnhancedSyncManager) -> Result<()> {
     // 创建自适应互斥锁
     println!("  创建自适应互斥锁...");
@@ -266,7 +266,7 @@ async fn demonstrate_adaptive_scheduling(manager: &EnhancedSyncManager) -> Resul
     Ok(())
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 async fn demonstrate_advanced_sync_features(manager: &EnhancedSyncManager) -> Result<()> {
     // 演示高级同步功能
     println!("  演示高级同步功能...");
@@ -359,7 +359,7 @@ async fn demonstrate_advanced_sync_features(manager: &EnhancedSyncManager) -> Re
     Ok(())
 }
 
-#[cfg(not(feature = "async"))]
+#[cfg(not(feature = "async-support"))]
 fn main() {
     println!("❌ 异步功能未启用");
     println!("请使用 --features async 重新编译以启用异步功能");

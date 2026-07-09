@@ -1,13 +1,13 @@
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use c07_process::prelude::*;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use c07_process::{AsyncProcessManager, AsyncProcessPool, AsyncTask, AsyncTaskScheduler};
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use std::collections::HashMap;
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 use std::time::Duration;
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 异步进程管理演示程序");
@@ -164,7 +164,7 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-#[cfg(not(feature = "async"))]
+#[cfg(not(feature = "async-support"))]
 fn main() {
     println!("❌ 异步功能未启用");
     println!("请使用 --features async 重新编译以启用异步功能");

@@ -7,7 +7,7 @@
 
 ---
 
-﻿# Rust 1.90 网络编程实战示例大全 (Part 2)
+# Rust 1.90 网络编程实战示例大全 (Part 2)
 
 > **文档版本**: v1.0
 > **适用版本**: Rust 1.90+, Tokio 1.35+
@@ -18,8 +18,9 @@
 
 ## 📊 目录
 
+- [📊 目录](#-目录)
 - [Rust 1.90 网络编程实战示例大全 (Part 2)](#rust-190-网络编程实战示例大全-part-2)
-  - [📊 目录](#-目录)
+  - [📊 目录](#-目录-1)
   - [HTTP客户端完整示例](#http客户端完整示例)
     - [1. 功能完整的HTTP客户端](#1-功能完整的http客户端)
   - [WebSocket完整示例](#websocket完整示例)
@@ -312,6 +313,7 @@ pub async fn demo_http_client() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 ---
 
 ## WebSocket完整示例
@@ -559,6 +561,7 @@ pub async fn demo_websocket_client() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 ---
 
 ## DNS解析完整示例
@@ -819,6 +822,7 @@ pub async fn demo_dns_resolver() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 ---
 
 ## 总结

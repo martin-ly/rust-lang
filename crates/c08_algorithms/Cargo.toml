@@ -1,14 +1,15 @@
 [package]
 name = "c08_algorithms"
-version = "0.1.0"
-edition = "2024"
-rust-version = "1.96.1"
-authors = ["Rust Learning Community"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
 keywords = ["algorithms", "data-structures", "sorting", "searching"]
 categories = ["algorithms", "development-tools::testing"]
 description = "Rust algorithms learning module"
-license = "MIT OR Apache-2.0"
-repository = "https://github.com/rust-lang/rust-lang-learning"
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 autoexamples = false
 
 [dependencies]
@@ -44,7 +45,7 @@ criterion = { workspace = true }
 candle-core = { workspace = true }
 candle-nn = { workspace = true }
 egui = { workspace = true }
-eframe = { version = "0.35.0", default-features = false, features = ["default"] }
+eframe = "0.35.0"
 
 [lib]
 name = "c08_algorithms"

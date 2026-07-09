@@ -14,7 +14,7 @@ use std::time::{Duration, Instant};
 use tokio::sync::{Barrier, Mutex as TokioMutex, RwLock as TokioRwLock, Semaphore};
 
 /// 增强的同步管理器
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 pub struct EnhancedSyncManager {
     primitives: Arc<TokioRwLock<HashMap<String, Arc<dyn EnhancedSyncPrimitiveTrait>>>>,
     deadlock_detector: Arc<DeadlockDetector>,
@@ -25,7 +25,7 @@ pub struct EnhancedSyncManager {
 
 /// 增强的同步原语trait
 /// synchronous trait
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 pub trait EnhancedSyncPrimitiveTrait: Send + Sync {
     /// 获取原语名称
     fn name(&self) -> &str;
@@ -60,7 +60,7 @@ pub trait EnhancedSyncPrimitiveTrait: Send + Sync {
 
 /// 增强的互斥锁
 /// mutex
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct EnhancedMutex {
     name: String,
@@ -74,7 +74,7 @@ pub struct EnhancedMutex {
 
 /// 增强的读写锁
 /// rwlock
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct EnhancedRwLock {
     name: String,
@@ -88,7 +88,7 @@ pub struct EnhancedRwLock {
 
 /// 增强的信号量
 /// semaphore
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct EnhancedSemaphore {
     name: String,
@@ -102,7 +102,7 @@ pub struct EnhancedSemaphore {
 
 /// 增强的屏障
 /// barrier
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct EnhancedBarrier {
     name: String,
@@ -114,7 +114,7 @@ pub struct EnhancedBarrier {
     config: SyncConfig,
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 impl EnhancedSyncPrimitiveTrait for EnhancedRwLock {
     fn name(&self) -> &str {
@@ -164,7 +164,7 @@ impl EnhancedSyncPrimitiveTrait for EnhancedRwLock {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 impl EnhancedSyncPrimitiveTrait for EnhancedSemaphore {
     fn name(&self) -> &str {
@@ -214,7 +214,7 @@ impl EnhancedSyncPrimitiveTrait for EnhancedSemaphore {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl EnhancedSyncPrimitiveTrait for EnhancedBarrier {
     fn name(&self) -> &str {
         &self.name
@@ -265,7 +265,7 @@ impl EnhancedSyncPrimitiveTrait for EnhancedBarrier {
 
 /// 死锁检测器
 /// lock
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct DeadlockDetector {
     lock_graph: Arc<TokioMutex<HashMap<String, Vec<String>>>>,
@@ -276,7 +276,7 @@ pub struct DeadlockDetector {
 
 /// 同步性能监控器
 /// synchronous performance
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct SyncPerformanceMonitor {
     metrics: Arc<TokioMutex<HashMap<String, SyncPerformanceMetrics>>>,
@@ -285,7 +285,7 @@ pub struct SyncPerformanceMonitor {
 }
 
 /// 自适应调度器
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct AdaptiveScheduler {
     load_history: Arc<TokioMutex<Vec<f64>>>,
@@ -295,7 +295,7 @@ pub struct AdaptiveScheduler {
 }
 
 /// 增强的原语统计信息
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct EnhancedPrimitiveStats {
@@ -318,7 +318,7 @@ pub struct EnhancedPrimitiveStats {
 
 /// 同步性能指标
 /// synchronous performance indicator
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct SyncPerformanceMetrics {
@@ -331,14 +331,14 @@ pub struct SyncPerformanceMetrics {
     pub last_update: Instant,
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 fn now_instant() -> Instant {
     Instant::now()
 }
 
 /// 死锁风险等级
 /// lock risk grade
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub enum DeadlockRisk {
@@ -350,7 +350,7 @@ pub enum DeadlockRisk {
 
 /// 性能分析结果
 /// performanceanalysis result
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct PerformanceAnalysis {
@@ -363,7 +363,7 @@ pub struct PerformanceAnalysis {
 }
 
 /// 单个原语性能分析
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct PrimitiveAnalysis {
@@ -373,7 +373,7 @@ pub struct PrimitiveAnalysis {
 }
 
 /// 增强的互斥锁统计信息
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 struct EnhancedMutexStats {
     lock_count: AtomicUsize,
@@ -385,7 +385,7 @@ struct EnhancedMutexStats {
 }
 
 /// 增强的读写锁统计信息
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 struct EnhancedRwLockStats {
     read_lock_count: AtomicUsize,
@@ -399,7 +399,7 @@ struct EnhancedRwLockStats {
 }
 
 /// 增强的信号量统计信息
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 struct EnhancedSemaphoreStats {
     acquire_count: AtomicUsize,
@@ -411,7 +411,7 @@ struct EnhancedSemaphoreStats {
 }
 
 /// 增强的屏障统计信息
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 struct EnhancedBarrierStats {
     wait_count: AtomicUsize,
@@ -421,7 +421,7 @@ struct EnhancedBarrierStats {
     last_activity: AtomicUsize,
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 impl EnhancedSyncManager {
     /// 创建新的增强同步管理器
@@ -769,7 +769,7 @@ impl EnhancedSyncManager {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl EnhancedMutex {
     pub fn new(
         name: &str,
@@ -933,7 +933,7 @@ impl EnhancedMutex {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl EnhancedRwLock {
     /// 获取读锁
     /// lock
@@ -992,7 +992,7 @@ impl EnhancedRwLock {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl EnhancedSemaphore {
     /// 获取一个许可
     pub async fn acquire(&self) -> SyncResult<tokio::sync::OwnedSemaphorePermit> {
@@ -1023,7 +1023,7 @@ impl EnhancedSemaphore {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl EnhancedBarrier {
     /// 等待所有参与者到达屏障
     /// etc. all and to barrier
@@ -1051,7 +1051,7 @@ impl EnhancedBarrier {
     }
 }
 /// 增强的互斥锁守卫
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct EnhancedMutexGuard<'a> {
     guard: tokio::sync::MutexGuard<'a, ()>,
@@ -1059,7 +1059,7 @@ pub struct EnhancedMutexGuard<'a> {
     performance_metrics: Arc<TokioMutex<SyncPerformanceMetrics>>,
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 impl<'a> Drop for EnhancedMutexGuard<'a> {
     fn drop(&mut self) {
@@ -1077,7 +1077,7 @@ impl<'a> Drop for EnhancedMutexGuard<'a> {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 impl EnhancedSyncPrimitiveTrait for EnhancedMutex {
     fn name(&self) -> &str {
@@ -1205,7 +1205,7 @@ impl EnhancedSyncPrimitiveTrait for EnhancedMutex {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for DeadlockDetector {
     fn default() -> Self {
         Self {
@@ -1217,7 +1217,7 @@ impl Default for DeadlockDetector {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 impl DeadlockDetector {
     pub fn new() -> Self {
@@ -1287,7 +1287,7 @@ impl DeadlockDetector {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for SyncPerformanceMonitor {
     fn default() -> Self {
         Self {
@@ -1298,7 +1298,7 @@ impl Default for SyncPerformanceMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl SyncPerformanceMonitor {
     pub fn new() -> Self {
         Self::default()
@@ -1346,7 +1346,7 @@ impl SyncPerformanceMonitor {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for AdaptiveScheduler {
     fn default() -> Self {
         Self {
@@ -1358,7 +1358,7 @@ impl Default for AdaptiveScheduler {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl AdaptiveScheduler {
     pub fn new() -> Self {
         Self::default()
@@ -1603,7 +1603,7 @@ mod tests {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl SyncPerformanceMetrics {
     pub fn to_json(&self) -> serde_json::Result<String> {
         serde_json::to_string(self)
@@ -1614,7 +1614,7 @@ impl SyncPerformanceMetrics {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl EnhancedPrimitiveStats {
     pub fn to_json(&self) -> serde_json::Result<String> {
         serde_json::to_string(self)

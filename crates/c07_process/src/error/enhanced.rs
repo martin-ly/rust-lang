@@ -14,7 +14,7 @@ use std::time::{Duration, SystemTime};
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
 
 /// 增强的错误管理器
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Clone)]
 pub struct EnhancedErrorManager {
     error_history: Arc<TokioRwLock<Vec<EnhancedErrorEntry>>>,
@@ -26,7 +26,7 @@ pub struct EnhancedErrorManager {
 }
 
 /// 增强的错误条目
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EnhancedErrorEntry {
     pub id: String,
@@ -44,7 +44,7 @@ pub struct EnhancedErrorEntry {
 
 /// 错误类型
 /// error type
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum ErrorType {
     Process,
@@ -65,7 +65,7 @@ pub enum ErrorType {
 
 /// 错误严重程度
 /// degree
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum ErrorSeverity {
     Low,
@@ -77,7 +77,7 @@ pub enum ErrorSeverity {
 
 /// 错误恢复器
 /// error recovery
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct ErrorRecovery {
     recovery_strategies: Arc<TokioMutex<HashMap<ErrorType, Vec<RecoveryStrategy>>>>,
@@ -88,7 +88,7 @@ pub struct ErrorRecovery {
 
 /// 错误分类器
 /// classification
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct ErrorClassifier {
     classification_rules: Arc<TokioMutex<Vec<ClassificationRule>>>,
@@ -97,7 +97,7 @@ pub struct ErrorClassifier {
 }
 
 /// 错误链追踪器
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct ErrorChainTracker {
     error_chains: Arc<TokioMutex<HashMap<String, ErrorChain>>>,
@@ -106,7 +106,7 @@ pub struct ErrorChainTracker {
 }
 
 /// 错误通知器
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[allow(dead_code)]
 pub struct ErrorNotifier {
     notification_channels: Arc<TokioMutex<Vec<NotificationChannel>>>,
@@ -116,7 +116,7 @@ pub struct ErrorNotifier {
 
 /// 恢复策略
 /// strategy
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Clone)]
 #[allow(dead_code)]
 pub enum RecoveryStrategy {
@@ -147,7 +147,7 @@ pub enum RecoveryStrategy {
 }
 
 /// 恢复尝试
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct RecoveryAttempt {
@@ -162,7 +162,7 @@ pub struct RecoveryAttempt {
 
 /// 分类规则
 /// classification rule
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub struct ClassificationRule {
@@ -176,7 +176,7 @@ pub struct ClassificationRule {
 
 /// 错误分类
 /// classification
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct ErrorClassification {
@@ -189,7 +189,7 @@ pub struct ErrorClassification {
 }
 
 /// 错误链
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct ErrorChain {
@@ -204,7 +204,7 @@ pub struct ErrorChain {
 
 /// 通知通道
 /// channel
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub enum NotificationChannel {
@@ -232,7 +232,7 @@ pub enum NotificationChannel {
 
 /// 通知规则
 /// rule
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub struct NotificationRule {
@@ -245,7 +245,7 @@ pub struct NotificationRule {
 
 /// 通知条件
 /// condition
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub enum NotificationCondition {
@@ -258,7 +258,7 @@ pub enum NotificationCondition {
 }
 
 /// 通知
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub struct Notification {
@@ -272,7 +272,7 @@ pub struct Notification {
 
 /// 错误管理器配置
 /// errormanager configuration
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub struct ErrorManagerConfig {
@@ -287,7 +287,7 @@ pub struct ErrorManagerConfig {
 
 /// 恢复结果
 /// result
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone)]
 pub enum RecoveryResult {
     Success {
@@ -308,7 +308,7 @@ pub enum RecoveryResult {
     },
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl EnhancedErrorManager {
     /// 创建新的增强错误管理器
     /// Create new strongerrormanager
@@ -911,7 +911,7 @@ impl EnhancedErrorManager {
 
 /// 错误统计信息
 /// error information
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct ErrorStatistics {
     pub total_errors: u64,
@@ -923,7 +923,7 @@ pub struct ErrorStatistics {
 }
 
 /// 错误模式分析结果
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ErrorPatternAnalysis {
     pub total_chained_errors: usize,
@@ -935,7 +935,7 @@ pub struct ErrorPatternAnalysis {
 
 /// 错误预测
 /// forecast
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ErrorPrediction {
     pub error_type: ErrorType,
@@ -945,19 +945,19 @@ pub struct ErrorPrediction {
     pub time_window: Duration,
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 fn now_instant() -> SystemTime {
     SystemTime::now()
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl ErrorStatistics {
     pub fn new() -> Self {
         Self::default()
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for ErrorRecovery {
     fn default() -> Self {
         Self {
@@ -969,7 +969,7 @@ impl Default for ErrorRecovery {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl ErrorRecovery {
     pub fn new() -> Self {
         Self::default()
@@ -990,7 +990,7 @@ impl ErrorRecovery {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for ErrorClassifier {
     fn default() -> Self {
         Self {
@@ -1001,7 +1001,7 @@ impl Default for ErrorClassifier {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl ErrorClassifier {
     pub fn new() -> Self {
         Self::default()
@@ -1068,7 +1068,7 @@ impl ErrorClassifier {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for ErrorChainTracker {
     fn default() -> Self {
         Self {
@@ -1079,7 +1079,7 @@ impl Default for ErrorChainTracker {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl ErrorChainTracker {
     pub fn new() -> Self {
         Self::default()
@@ -1114,7 +1114,7 @@ impl ErrorChainTracker {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl Default for ErrorNotifier {
     fn default() -> Self {
         Self {
@@ -1125,7 +1125,7 @@ impl Default for ErrorNotifier {
     }
 }
 
-#[cfg(feature = "async")]
+#[cfg(feature = "async-support")]
 impl ErrorNotifier {
     pub fn new() -> Self {
         Self::default()

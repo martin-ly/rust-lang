@@ -180,8 +180,8 @@ impl AdvancedConcurrency {
 
 - `tokio`: 启用异步功能
 - `unstable`: 启用实验性特性（如 `!` 类型）
-- `custom_ring_buffers`: 启用自定义环形缓冲区
-- `work_stealing_examples`: 启用工作窃取示例
+- `custom-ring-buffers`: 启用自定义环形缓冲区
+- `work-stealing-examples`: 启用工作窃取示例
 
 ## 测试结果
 
