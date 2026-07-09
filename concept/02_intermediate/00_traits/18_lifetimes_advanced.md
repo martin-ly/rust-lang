@@ -47,7 +47,7 @@
     - 10.1 边界测试：自引用（Reference）结构体（Struct）与 `Pin`（编译错误）
     - [10.2 边界测试：生命周期（Lifetimes）边界中的 `for<'a>` HRTB（编译错误）](#102-边界测试生命周期边界中的-fora-hrtb编译错误)
     - [10.5 边界测试：闭包（Closures）捕获引用（Reference）与 `Fn` trait 的生命周期（Lifetimes）约束（编译错误）](#105-边界测试闭包捕获引用与-fn-trait-的生命周期约束编译错误)
-    - [10.6 边界测试：`impl Trait` 返回类型的生命周期捕获（编译错误）](#106-边界测试impl-trait-返回类型的生命周期捕获编译错误)
+    - [10.6 边界测试：`impl Trait` 返回类型的生命周期（Lifetimes）捕获（编译错误）](#106-边界测试impl-trait-返回类型的生命周期捕获编译错误)
     - [10.3 边界测试：lifetime bounds 与 trait object 的交互（编译错误）](#103-边界测试lifetime-bounds-与-trait-object-的交互编译错误)
   - [实践](#实践)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -308,7 +308,7 @@ impl SelfReferential {
 // └── async fn 返回 Pin<Box<dyn Future>>
 ```
 
-> **Pin 洞察**: `Pin` 是 Rust **自引用类型的解决方案**——它为 async/await、生成器等高级特性提供了内存安全（Memory Safety）保证。
+> **Pin 洞察**: `Pin` 是 Rust **自引用（Reference）类型的解决方案**——它为 async/await、生成器等高级特性提供了内存安全（Memory Safety）保证。
 > [来源: [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
 
 ---
@@ -627,7 +627,7 @@ where
 
 > **修正**:
 > 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。
-> 当闭包作为参数传递时，默认的生命周期推断可能过于具体（绑定到特定作用域），
+> 当闭包（Closures）作为参数传递时，默认的生命周期推断可能过于具体（绑定到特定作用域），
 > 导致无法满足泛型（Generics）函数的 trait bound。HRTB 在回调函数、比较器、迭代器（Iterator）适配器等高阶函数场景中至关重要，是 Rust 类型系统（Type System）表达"多态生命周期"的关键机制。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 

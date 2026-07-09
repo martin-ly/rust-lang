@@ -312,7 +312,7 @@ graph TD
 **形式化澄清**: 这是最关键的反命题。RustBelt (Jung et al. 2017, 2018) 明确将 Rust 建模为**仿射类型系统**（affine type system），而非严格线性类型系统。三个关键偏差：
 
 1. **Weakening**: Rust 允许未使用变量（warning 级别），线性逻辑禁止。 [来源: [Iris Project](https://iris-project.org/)]
-2. **内部可变性**: `UnsafeCell`、`RefCell`、`Mutex` 等允许在单所有权外壳内进行别名修改——这超越了任何纯线性/仿射逻辑的表达力，需要**分离逻辑**（Separation Logic）扩展。
+2. **内部可变性**: `UnsafeCell`、`RefCell`、`Mutex` 等允许在单所有权（Ownership）外壳内进行别名修改——这超越了任何纯线性/仿射逻辑的表达力，需要**分离逻辑**（Separation Logic）扩展。
 3. **生命周期（Lifetimes）**: 借用（Borrowing）检查器的区域系统（region system）源自 Tofte & Talpin 1994 的区域类型理论，而非 Girard 的线性逻辑。此处为 L2/02_borrowing.md "借用与生命周期" 的精确对应——借用是 L4 形式化中**分离逻辑**（L3 层）对线性逻辑的扩展，而非线性逻辑本身。
 
 ---
@@ -738,7 +738,7 @@ Cut 消除规则（线性逻辑核心元定理）:
 >
 ## 十二、Linear Haskell 与 Rust 的跨语言类型系统对比
 
-> **[学术来源: Bernardy et al. 2017, *Linear Haskell: Practical Linearity in a Higher-Order Polymorphic Language*; PLDI 2018; GHC User Guide: LinearTypes]** Linear Haskell 是 GHC 9.x+ 引入的线性类型扩展，通过**重数（multiplicity）**概念在现有 Haskell 类型系统中嵌入线性约束。
+> **[学术来源: Bernardy et al. 2017, *Linear Haskell: Practical Linearity in a Higher-Order Polymorphic Language*; PLDI 2018; GHC User Guide: LinearTypes]** Linear Haskell 是 GHC 9.x+ 引入的线性类型扩展，通过**重数（multiplicity）**概念在现有 Haskell 类型系统（Type System）中嵌入线性约束。
 
 ### 12.1 Linear Haskell 的核心语法
 
@@ -870,7 +870,7 @@ reclaim :: Lend a → End ⊸ a
 | 所有权回归 | `reclaim lend end` | 显式 reclaim，Rust 是隐式 |
 | `Drop` | 无内置对应 | Linear Haskell 通过线性约束防止泄漏 |
 
-**关键洞察**: Pure Borrow 实现了 Rust 借用模型的**理论最小内核**，同时保留了 Haskell 的优势——**纯度、惰性求值、一流多态性**。与 Rust 不同，Pure Borrow 中的借用完全在纯计算中进行，无需 `unsafe` 关键字，且支持并行状态突变（因为线性类型保证了资源不相交）。这为"函数式语言中的命令式借用"提供了新的理论路径，也可能影响未来 Rust 的 effects 系统设计。
+**关键洞察**: Pure Borrow 实现了 Rust 借用（Borrowing）模型的**理论最小内核**，同时保留了 Haskell 的优势——**纯度、惰性求值、一流多态性**。与 Rust 不同，Pure Borrow 中的借用完全在纯计算中进行，无需 `unsafe` 关键字，且支持并行状态突变（因为线性类型保证了资源不相交）。这为"函数式语言中的命令式借用"提供了新的理论路径，也可能影响未来 Rust 的 effects 系统设计。
 
 > **来源**: [PLDI 2026 — Matsushita & Ishii, "Pure Borrow: Linear Haskell Meets Rust-Style Borrowing"](https://arxiv.org/abs/2604.15290) · [Pure Borrow Artifact](https://zenodo.org/records/19622061) · 可信度: ✅
 

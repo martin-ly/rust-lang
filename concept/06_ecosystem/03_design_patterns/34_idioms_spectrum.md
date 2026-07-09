@@ -79,18 +79,18 @@
     - [12.2 惯用法效率-认知负荷象限图](#122-惯用法效率-认知负荷象限图)
     - [12.3 惯用法效率矩阵](#123-惯用法效率矩阵)
   - [十三、定理推理链](#十三定理推理链)
-    - [定理一致性矩阵（惯用法谱系专集）](#定理一致性矩阵惯用法谱系专集)
+    - [定理一致性（Coherence）矩阵（惯用法谱系专集）](#定理一致性矩阵惯用法谱系专集)
   - [十四、相关概念链接（L0-L7 映射）](#十四相关概念链接l0-l7-映射)
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
   - [十五、惯用法选择的认知路径](#十五惯用法选择的认知路径)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：惯用法谱系的编译错误](#十边界测试惯用法谱系的编译错误)
-    - [10.1 边界测试：`unwrap` 的滥用（运行时 panic）](#101-边界测试unwrap-的滥用运行时-panic)
+    - [10.1 边界测试：`unwrap` 的滥用（运行时（Runtime） panic）](#101-边界测试unwrap-的滥用运行时-panic)
     - [10.2 边界测试：`clone` 的隐式成本（逻辑错误）](#102-边界测试clone-的隐式成本逻辑错误)
     - [10.3 边界测试：Clippy 警告的编译错误等价（编译错误）](#103-边界测试clippy-警告的编译错误等价编译错误)
     - [10.4 边界测试：`String` 与 `&str` 的类型不匹配（编译错误）](#104-边界测试string-与-str-的类型不匹配编译错误)
-    - [10.5 边界测试：`Default::default()` 与类型推断的歧义（编译错误）](#105-边界测试defaultdefault-与类型推断的歧义编译错误)
+    - [10.5 边界测试：`Default::default()` 与类型推断（Type Inference）的歧义（编译错误）](#105-边界测试defaultdefault-与类型推断的歧义编译错误)
     - [10.7 边界测试：`std::mem::replace` 与 `take` 的惯用选择（逻辑错误）](#107-边界测试stdmemreplace-与-take-的惯用选择逻辑错误)
     - [10.3 边界测试：`Default` 派生与手动实现的语义差异（逻辑错误）](#103-边界测试default-派生与手动实现的语义差异逻辑错误)
     - [补充定理链](#补充定理链)
@@ -98,7 +98,7 @@
     - [测验 1：`Default` trait 的用途是什么？如何为自定义类型实现它？（理解层）](#测验-1default-trait-的用途是什么如何为自定义类型实现它理解层)
     - [测验 2：`AsRef` 与 `Borrow` trait 在语义上有什么区别？（理解层）](#测验-2asref-与-borrow-trait-在语义上有什么区别理解层)
     - [测验 3：什么是"早返回"（Early Return）模式？Rust 中通常如何实现？（理解层）](#测验-3什么是早返回early-return模式rust-中通常如何实现理解层)
-    - [测验 4：`todo!()` 和 `unimplemented!()` 宏在开发中有什么用途？（理解层）](#测验-4todo-和-unimplemented-宏在开发中有什么用途理解层)
+    - [测验 4：`todo!()` 和 `unimplemented!()` 宏（Macro）在开发中有什么用途？（理解层）](#测验-4todo-和-unimplemented-宏在开发中有什么用途理解层)
     - [测验 5：Rust 的 `must_use` 属性有什么作用？什么类型的返回值通常应该标记它？（理解层）](#测验-5rust-的-must_use-属性有什么作用什么类型的返回值通常应该标记它理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -1082,7 +1082,7 @@ quadrantChart
 | 本文件主题 | L1 基础 | L2 进阶 | L3 高级 | L4 形式化 | L5 对比 | L6 生态 | L7 前沿 |
 |:---|:---|:---|:---|:---|:---|:---|:---|
 | 词法级惯用法 | match / if let | `?` 运算符 | 宏（Macro）扩展 | λ 演算语法糖 | vs C++ 异常 | Clippy lint | 语法演进 |
-| 类型级惯用法 | struct / enum | 泛型（Generics）约束 | GATs | 类型论 | vs OCaml | derive 宏（Macro） | 类型系统扩展 |
+| 类型级惯用法 | struct / enum | 泛型（Generics）约束 | GATs | 类型论 | vs OCaml | derive 宏（Macro） | 类型系统（Type System）扩展 |
 | 接口级惯用法 | Trait 基础 | 关联类型 | 特化 | 范畴论 | vs Java 接口 | API Guidelines | Trait 系统演进 |
 | 资源级惯用法 | 所有权（Ownership） / Drop | 智能指针（Smart Pointer） | Pin / Unsafe | 分离逻辑 | vs C++ RAII | Scopeguard crate | 自定义分配器 |
 | 控制级惯用法 | loop / for | Iterator | async/await | CPS | vs JS 生成器 | itertools | gen blocks |
@@ -1281,7 +1281,7 @@ fn main() {
 }
 ```
 
-> **修正**: `std::mem::replace` 将值替换为新值，返回旧值。`std::mem::take` 是 `replace(&mut t, T::default())` 的便捷方法，要求 `T: Default`。`take` 更惯用（语义清晰："取走并留默认值"），但仅适用于实现 `Default` 的类型。对于不实现 `Default` 的类型（如某些自定义 struct），必须使用 `replace` 并显式提供新值。这与 C++ 的 `std::exchange`（C++14，类似 `replace`）或 Swift 的 `swap`（交换两个值，非替换）不同——Rust 的 `take` 是获取所有权并留默认值的惯用模式，常见于 `Option::take`（取走 `Some`，留 `None`）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.take.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **修正**: `std::mem::replace` 将值替换为新值，返回旧值。`std::mem::take` 是 `replace(&mut t, T::default())` 的便捷方法，要求 `T: Default`。`take` 更惯用（语义清晰："取走并留默认值"），但仅适用于实现 `Default` 的类型。对于不实现 `Default` 的类型（如某些自定义 struct），必须使用 `replace` 并显式提供新值。这与 C++ 的 `std::exchange`（C++14，类似 `replace`）或 Swift 的 `swap`（交换两个值，非替换）不同——Rust 的 `take` 是获取所有权（Ownership）并留默认值的惯用模式，常见于 `Option::take`（取走 `Some`，留 `None`）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.take.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：`Default` 派生与手动实现的语义差异（逻辑错误）
 

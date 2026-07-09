@@ -30,8 +30,8 @@
     - [2.1 公理语义方法对比矩阵](#21-公理语义方法对比矩阵)
   - [三、技术细节](#三技术细节)
     - [3.1 Rust 赋值规则的公理化](#31-rust-赋值规则的公理化)
-    - [3.2 所有权转移的 wp 计算](#32-所有权转移的-wp-计算)
-    - [3.3 借用规则的不变式](#33-借用规则的不变式)
+    - [3.2 所有权（Ownership）转移的 wp 计算](#32-所有权转移的-wp-计算)
+    - [3.3 借用（Borrowing）规则的不变式](#33-借用规则的不变式)
     - [3.4 unsafe 块的公理边界](#34-unsafe-块的公理边界)
   - [四、工具链映射](#四工具链映射)
     - [4.1 Prusti：Viper 后端的契约推导](#41-prustiviper-后端的契约推导)
@@ -44,7 +44,7 @@
   - [十、边界测试](#十边界测试)
     - [10.1 边界测试：wp 计算的无限 descending chain（逻辑错误）](#101-边界测试wp-计算的无限-descending-chain逻辑错误)
     - [10.2 边界测试：借用不变式违反的验证失败（验证错误）](#102-边界测试借用不变式违反的验证失败验证错误)
-    - [10.3 边界测试：unsafe 块的公理逃逸（运行时 UB）](#103-边界测试unsafe-块的公理逃逸运行时-ub)
+    - [10.3 边界测试：unsafe 块的公理逃逸（运行时（Runtime） UB）](#103-边界测试unsafe-块的公理逃逸运行时-ub)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Hoare 三元组 `{P} C {Q}` 中，P、C、Q 分别代表什么？（理解层）](#测验-1hoare-三元组-p-c-q-中pcq-分别代表什么理解层)
     - [测验 2：什么是"最弱前置条件"（Weakest Precondition, wp）？它在程序验证中的作用是什么？（理解层）](#测验-2什么是最弱前置条件weakest-precondition-wp它在程序验证中的作用是什么理解层)
@@ -59,14 +59,14 @@
     - [Step 4: 工具怎么自动验证？](#step-4-工具怎么自动验证)
     - [Step 5: 公理语义的边界在哪里？](#step-5-公理语义的边界在哪里)
   - [六、定理推理链](#六定理推理链)
-    - [6.1 定理一致性矩阵](#61-定理一致性矩阵)
+    - [6.1 定理一致性（Coherence）矩阵](#61-定理一致性矩阵)
     - [6.2 反命题决策树](#62-反命题决策树)
   - [七、工具链深度对比矩阵](#七工具链深度对比矩阵)
     - [7.1 Prusti vs Creusot vs Kani](#71-prusti-vs-creusot-vs-kani)
   - [八、更多边界测试](#八更多边界测试)
-    - [10.4 边界测试：Prusti 对泛型 Trait 的验证失败](#104-边界测试prusti-对泛型-trait-的验证失败)
+    - [10.4 边界测试：Prusti 对泛型（Generics） Trait 的验证失败](#104-边界测试prusti-对泛型-trait-的验证失败)
     - [10.5 边界测试：Kani 的路径爆炸与有界验证](#105-边界测试kani-的路径爆炸与有界验证)
-    - [10.6 边界测试：Creusot 的 Ghost 代码与零成本抽象](#106-边界测试creusot-的-ghost-代码与零成本抽象)
+    - [10.6 边界测试：Creusot 的 Ghost 代码与零成本抽象（Zero-Cost Abstraction）](#106-边界测试creusot-的-ghost-代码与零成本抽象)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
 
@@ -744,7 +744,7 @@ Prusti 将 Rust 翻译为 Viper 中间语言，使用分离逻辑自动验证内
 | **T-124: unsafe 块公理不可判定** | 允许裸指针别名 | 标准 Hoare 逻辑失效 | `unsafe` 需人工公理 | Rustonomicon · RustBelt |
 | **T-125: 循环不变式自动推断不完备** | Rice 定理 | 存在循环其不变式不可自动推断 | Prusti 对复杂循环的失效 | Rice 1953 · Cousot 1977 |
 | **T-126: 并发程序验证的 CSL 需求** | 存在数据竞争可能 | 需并发分离逻辑（CSL）| `std::sync` 的原语验证 | Brookes 2007 · RustBelt |
-| **T-127: 类型安全 → 内存安全** | Progress + Preservation | well-typed 程序不触发段错误 | Rust 的类型系统（Type System） | Pierce TAPL Ch.8 · RustBelt |
+| **T-127: 类型安全 → 内存安全（Memory Safety）** | Progress + Preservation | well-typed 程序不触发段错误 | Rust 的类型系统（Type System） | Pierce TAPL Ch.8 · RustBelt |
 | **T-128: 抽象解释的 Galois 连接** | 抽象域满足单调性 | 分析结果 sound（无漏报）| Prusti 的数值范围推断 | Cousot & Cousot 1977 |
 | **T-129: SMT 求解器的 Nelson-Oppen 组合** | 理论片段满足凸性 | 组合理论可判定 | Z3 / CVC5 在 Kani 中的使用 | Nelson & Oppen 1979 |
 

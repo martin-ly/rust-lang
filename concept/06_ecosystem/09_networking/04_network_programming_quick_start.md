@@ -19,7 +19,7 @@
 | 了解全局 | [网络协议](../04_web_and_networking/38_network_protocols.md) | 15 分钟 |
 | 动手实践 | TCP/UDP 示例与 HTTP/WebSocket 示例 | 1 小时 |
 | 技术选型 | [高级网络协议概览](01_advanced_network_protocols.md) | 30 分钟 |
-| 系统学习 | [异步编程](../../03_advanced/01_async/02_async.md) + [并发模式](../../03_advanced/00_concurrency/10_concurrency_patterns.md) | 1 周 |
+| 系统学习 | [异步（Async）编程](../../03_advanced/01_async/02_async.md) + [并发模式](../../03_advanced/00_concurrency/10_concurrency_patterns.md) | 1 周 |
 
 ## 二、学习路径总览
 
@@ -170,7 +170,7 @@ Rust 异步网络编程中常见的并发架构模式可归纳为下表：
 | :--- | :--- | :--- |
 | **Actor** | 消息传递、独立执行体 | `tokio::sync::mpsc` + task |
 | **Reactor** | 事件循环 + I/O 多路复用 | `tokio::net` / `mio` |
-| **Proactor** | 异步 I/O 完成回调 | io_uring / 运行时封装 |
+| **Proactor** | 异步 I/O 完成回调 | io_uring / 运行时（Runtime）封装 |
 | **CSP** | 通道通信的顺序进程 | `tokio::sync::{mpsc, broadcast}` |
 | **异步流** | `Stream` 组合子与背压 | `tokio-stream` / `futures::Stream` |
 | **工作窃取** | 任务调度负载均衡 | `tokio` 的 work-stealing runtime |
@@ -247,7 +247,7 @@ flowchart TD
 
 > **过渡**: 从 TCP/UDP 基础过渡到 std 与 tokio 的选择，可以根据并发需求确定异步策略。
 >
-> **过渡**: 从异步选择过渡到错误处理与超时，可以建立健壮网络客户端的基本模式。
+> **过渡**: 从异步选择过渡到错误处理（Error Handling）与超时，可以建立健壮网络客户端的基本模式。
 >
 > **过渡**: 从可运行示例过渡到生产部署，可以引入连接池、重试与可观测性等工程要素。
 >

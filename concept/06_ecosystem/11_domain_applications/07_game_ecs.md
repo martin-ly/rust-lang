@@ -336,7 +336,7 @@ graph TD
     H -.->|无冲突| I
 ```
 
-> **认知功能**: 此调度图展示了 Bevy 的帧阶段流水线与 System 依赖关系——Update 阶段内的 System Set 按 Query 签名自动分析冲突并并行执行。建议将高频 System 注册到同一阶段，利用无冲突 Query 的自动并行提升吞吐。关键洞察：`&mut T` 与 `&T` 的互斥/共享关系直接映射到 System 的串行/并行调度，借用检查器成为调度器的形式化验证后端。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> **认知功能**: 此调度图展示了 Bevy 的帧阶段流水线与 System 依赖关系——Update 阶段内的 System Set 按 Query 签名自动分析冲突并并行执行。建议将高频 System 注册到同一阶段，利用无冲突 Query 的自动并行提升吞吐。关键洞察：`&mut T` 与 `&T` 的互斥/共享关系直接映射到 System 的串行/并行调度，借用（Borrowing）检查器成为调度器的形式化验证后端。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **Bevy 调度安全**: 默认并行调度器在**编译期**收集所有 System 的 `Query` 签名，在**运行期**构建依赖图。`&mut T` vs `&T` 的冲突分析由 Rust 借用检查器保证，跨线程调度由 `Send` / `Sync` 保证。
 
 ### 2.3 wgpu：跨平台 GPU 抽象与所有权
@@ -369,7 +369,7 @@ queue.submit(std::iter::once(encoder.finish()));
 
 > **Bloom 层级**: 应用 → 分析
 
-当游戏目标平台从桌面/主机收缩到嵌入式 MCU、复古掌机或 FPGA 仿真器时，`std` 的缺失（`no_std`）成为首要约束。ECS 架构在此环境下的适配不仅涉及 API 裁剪，更触及 Rust 所有权模型的深层表达——从动态堆分配到编译期静态布局，从 `HashMap` 到固定数组，每一处替代都对应着资源受限场景下的工程权衡。
+当游戏目标平台从桌面/主机收缩到嵌入式 MCU、复古掌机或 FPGA 仿真器时，`std` 的缺失（`no_std`）成为首要约束。ECS 架构在此环境下的适配不仅涉及 API 裁剪，更触及 Rust 所有权（Ownership）模型的深层表达——从动态堆分配到编译期静态布局，从 `HashMap` 到固定数组，每一处替代都对应着资源受限场景下的工程权衡。
 
 #### 2.4.1 `no_std` 环境下 ECS 的核心约束
 
@@ -1114,7 +1114,7 @@ struct ChildOf {
 |:---|:---|:---|
 | `OnReplace::Destroy` | 关系被替换时，旧目标实体销毁 | 线性逻辑：旧资源被消耗 |
 | `OnRemove::Cascade` | 关系源实体被移除时，目标实体级联销毁 | 区域类型（Region）：内部资源随区域销毁 |
-| `OnRemove::None` | 无级联，目标实体保持独立 | 弱引用：生命周期不依赖源 |
+| `OnRemove::None` | 无级联，目标实体保持独立 | 弱引用（Reference）：生命周期（Lifetimes）不依赖源 |
 
 > **来源**: [Bevy 0.15 Release Notes] · [Bevy Relations RFC] · [Bevy ECS Internals] · [Graph-Oriented ECS Research]
 
@@ -1209,7 +1209,7 @@ fn movement_system(query: Query<&mut Position, &Velocity>) {
 // Bevy 的 Query 使用元组组合多个组件
 ```
 
-> **修正**: Bevy 的 `Query` 使用元组语法组合多个组件：`Query<(&Position, &Velocity)>`。Query 自动过滤缺少任一组件的实体，只返回拥有所有 queried 组件的实体。这与 Unity 的 `GetComponent<T>()`（运行时空引用检查）不同——Bevy 在编译期确定组件类型，运行期通过 archetype 存储实现 O(1) 查询，无类型检查开销。ECS 的内存布局（SOA - Structure of Arrays）优化缓存局部性，Rust 的类型系统（Type System）保证查询安全。[来源: [Bevy Documentation](https://docs.rs/bevy/)]
+> **修正**: Bevy 的 `Query` 使用元组语法组合多个组件：`Query<(&Position, &Velocity)>`。Query 自动过滤缺少任一组件的实体，只返回拥有所有 queried 组件的实体。这与 Unity 的 `GetComponent<T>()`（运行时（Runtime）空引用检查）不同——Bevy 在编译期确定组件类型，运行期通过 archetype 存储实现 O(1) 查询，无类型检查开销。ECS 的内存布局（SOA - Structure of Arrays）优化缓存局部性，Rust 的类型系统（Type System）保证查询安全。[来源: [Bevy Documentation](https://docs.rs/bevy/)]
 
 ### 10.2 边界测试：ECS 中的可变引用冲突（编译错误）
 

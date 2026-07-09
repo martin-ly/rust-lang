@@ -7,7 +7,7 @@
 > > **受众**: [进阶 / 工程]
 > > **Bloom 层级**: 理解 → 应用
 > > **A/S/P 标记**: **A** — Application
-> > **前置概念**: [Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md) · [Cargo 配置与环境变量](83_cargo_configuration.md) · [所有权系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> > **前置概念**: [Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md) · [Cargo 配置与环境变量](83_cargo_configuration.md) · [所有权（Ownership）系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > > **后置概念**: [交叉编译](../05_systems_and_embedded/17_cross_compilation.md) · [unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 
 ---
@@ -171,7 +171,7 @@ fn panic(_info: &PanicInfo) -> ! { loop {} }
 
 ### 类型状态模式（Type State）
 
-利用泛型将外设状态编码到类型中，编译时防止错误操作：
+利用泛型（Generics）将外设状态编码到类型中，编译时防止错误操作：
 
 ```rust
 use core::marker::PhantomData;
@@ -280,4 +280,4 @@ impl<T> Register<T> {
 |:---|:---|:---|
 | 源码构建 std ⟹ 自定义目标支持 | 编译目标平台未预编译的标准库 | 支持新硬件与操作系统 |
 | 跨 crate LTO ⟹ 更小二进制 | 链接时优化覆盖 std | 显著减少体积 |
-| 自定义 panic ⟹ 减少运行时开销 | 使用 `panic = "abort"` | 避免栈展开代码 |
+| 自定义 panic ⟹ 减少运行时（Runtime）开销 | 使用 `panic = "abort"` | 避免栈展开代码 |

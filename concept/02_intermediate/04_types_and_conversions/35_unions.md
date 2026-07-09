@@ -168,7 +168,7 @@ fn main() {
 | 特性 | `union` | `enum` |
 |:---|:---|:---|
 | 标签 | 无标签 | 有标签（discriminant） |
-| 安全性 | 读取需 unsafe | 模式匹配安全 |
+| 安全性 | 读取需 unsafe | 模式匹配（Pattern Matching）安全 |
 | 内存 | 最大字段大小 | 标签 + 最大变体大小 |
 | 用途 | FFI、内存优化 | 代数数据类型、状态机 |
 | 编译器追踪 | 不追踪活跃字段 | 追踪当前变体 |
@@ -224,7 +224,7 @@ fn main() {
 }
 ```
 
-> **错误诊断**: 代码可以编译，但运行时行为未定义。
+> **错误诊断**: 代码可以编译，但运行时（Runtime）行为未定义。
 > **修正**: 维护一个外部标签（如 C 的 tagged union），或仅读取最后写入的字段。
 > [来源: [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/reference/types/union.html)]
 
@@ -293,7 +293,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: `ManuallyDrop` 允许联合体内包含非 `Copy` 类型而不自动 drop，但开发者必须手动管理生命周期。
+> **关键洞察**: `ManuallyDrop` 允许联合体内包含非 `Copy` 类型而不自动 drop，但开发者必须手动管理生命周期（Lifetimes）。
 > [来源: [Rustonomicon — Unions](https://doc.rust-lang.org/nomicon/unions.html)]
 
 ### 6.2 边界测试：联合体大小

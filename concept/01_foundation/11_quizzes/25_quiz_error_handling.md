@@ -601,7 +601,7 @@ result
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
-| 10/10 | 🏆 错误处理已内化 | 进阶至 [L2 错误处理深度](../../02_intermediate/03_error_handling/04_error_handling.md) 或 `anyhow`/`thiserror` 生态 |
+| 10/10 | 🏆 错误处理（Error Handling）已内化 | 进阶至 [L2 错误处理深度](../../02_intermediate/03_error_handling/04_error_handling.md) 或 `anyhow`/`thiserror` 生态 |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [L1 错误处理练习](../../exercises/src/error_handling)，关注错题 |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Error Handling Basics](../08_error_handling/32_error_handling_basics.md)，完成 rustlings 对应章节 |
 | 0–3/10 | 📚 建议重新开始 | 从 [Error Handling Basics](../08_error_handling/32_error_handling_basics.md) 逐节阅读，配合 `exercises/src/error_handling/` 示例 |

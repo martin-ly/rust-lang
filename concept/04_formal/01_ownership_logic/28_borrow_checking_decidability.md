@@ -81,7 +81,7 @@ Rust 借用（Borrowing）检查器在编译期回答一个**安全判定问题*
 | **无悬垂引用（Reference）** | 引用生命周期（Lifetimes） ≤ 被引用值存活区域 | E0597 |
 | **无数据竞争** | 并发访问受 `Send`/`Sync` + 借用（Borrowing）规则约束 | E0626 |
 
-> **教学类比**：借用检查器是保守的静态过滤器——sound but incomplete：会误判一些安全程序，但不会放过不安全程序。
+> **教学类比**：借用（Borrowing）检查器是保守的静态过滤器——sound but incomplete：会误判一些安全程序，但不会放过不安全程序。
 
 ---
 

@@ -113,6 +113,13 @@
     - [11.5 与 In-place Initialization 的协同](#115-与-in-place-initialization-的协同)
     - [11.6 演进路线与跟踪](#116-演进路线与跟踪)
   - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
+    - [12.1 自定义 Allocator（`#[global_allocator]`）](#121-自定义-allocatorglobal_allocator)
+    - [12.2 `ManuallyDrop<T>` 与 `mem::forget` 的形式化分析](#122-manuallydropt-与-memforget-的形式化分析)
+    - [12.3 `Vec<T>` / `String` / `HashMap` 的内存布局与扩容策略](#123-vect--string--hashmap-的内存布局与扩容策略)
+    - [12.4 `std::alloc::System` vs `jemalloc` vs `mimalloc`](#124-stdallocsystem-vs-jemalloc-vs-mimalloc)
+    - [12.5 `MaybeUninit<T>` 与 `MaybeDangling` 的边界分析](#125-maybeuninitt-与-maybedangling-的边界分析)
+    - [12.6 `Pin<Box<T>>` 与自引用结构的形式化语义](#126-pinboxt-与自引用结构的形式化语义)
+    - [12.7 Field Projections（Pin 投影与 In-place Initialization）](#127-field-projectionspin-投影与-in-place-initialization)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
@@ -1694,7 +1701,7 @@ let s = unsafe { slot.assume_init() };
 
 **定义**：`Pin<P>` 保证 `!Unpin` 类型的内存地址不会被 safe 代码移动；`Pin<Box<T>>` 通过堆分配提供长期地址稳定性，是自引用结构的安全载体。
 
-**动机**：自引用结构（如 async 状态机、链表节点）在栈上移动会导致内部指针悬垂；Pin 将“不可移动”编码进类型系统。
+**动机**：自引用结构（如 async 状态机、链表节点）在栈上移动会导致内部指针悬垂；Pin 将“不可移动”编码进类型系统（Type System）。
 
 ```rust
 use std::pin::Pin;

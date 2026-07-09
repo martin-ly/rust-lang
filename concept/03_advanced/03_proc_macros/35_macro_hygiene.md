@@ -4,8 +4,8 @@
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+A** — Structure + Application
-> **双维定位**: S×Eva — 评估宏卫生性设计
-> **前置依赖**: [过程宏](07_proc_macro.md) · [syn/quote 参考](34_syn_quote_reference.md)
+> **双维定位**: S×Eva — 评估宏（Macro）卫生性设计
+> **前置依赖**: [过程宏（Procedural Macro）](07_proc_macro.md) · [syn/quote 参考](34_syn_quote_reference.md)
 > **后置概念**: [生产级宏开发](31_production_grade_macro_development.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md)
 > **定理链**: Hygiene ⟹ Span Selection ⟹ Name Collision Prevention
 >
@@ -28,10 +28,10 @@
     - [1.1 什么是卫生性](#11-什么是卫生性)
     - [1.2 为什么需要卫生性](#12-为什么需要卫生性)
     - [1.3 Rust 的卫生性模型](#13-rust-的卫生性模型)
-  - [2. 声明宏卫生性](#2-声明宏卫生性)
+  - [2. 声明宏（Declarative Macro）卫生性](#2-声明宏卫生性)
     - [2.1 局部变量](#21-局部变量)
     - [2.2 函数和类型](#22-函数和类型)
-    - [2.3 模块和导入](#23-模块和导入)
+    - [2.3 模块（Module）和导入](#23-模块和导入)
   - [3. 过程宏 Span](#3-过程宏-span)
     - [3.1 call\_site()](#31-call_site)
     - [3.2 def\_site()](#32-def_site)
@@ -180,7 +180,7 @@ println!("temp = {}", temp); // 10，不受影响
 **规则**:
 
 - 宏内定义的局部变量 **不会** 泄露到外部
-- 宏外的局部变量 **不会** 被宏内引用（除非通过 `$var`）
+- 宏外的局部变量 **不会** 被宏内引用（Reference）（除非通过 `$var`）
 
 ---
 
@@ -362,7 +362,7 @@ let x = gen_code!();
 
 **规则**:
 
-- 宏生成的项（函数、结构体、模块）在展开位置可见
+- 宏生成的项（函数、结构体（Struct）、模块）在展开位置可见
 - 除非明确标记 `pub`，否则不会泄露到外部
 
 ---

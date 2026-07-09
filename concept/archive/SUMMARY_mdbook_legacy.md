@@ -149,7 +149,7 @@
   - [Rust vs Swift：现代系统语言的两种路径](../05_comparative/01_systems_languages/09_rust_vs_swift.md)
   - [Rust vs Zig：现代系统语言的两种哲学](../05_comparative/01_systems_languages/10_rust_vs_zig.md)
   - [Rust vs Kotlin：静态安全的两种路径](../05_comparative/02_managed_languages/11_rust_vs_kotlin.md)
-  - [Rust vs Scala：类型系统的两种哲学](../05_comparative/02_managed_languages/12_rust_vs_scala.md)
+  - [Rust vs Scala：类型系统（Type System）的两种哲学](../05_comparative/02_managed_languages/12_rust_vs_scala.md)
   - [Rust vs C#：托管与原生之路](../05_comparative/02_managed_languages/13_rust_vs_csharp.md)
   - [Rust vs Elixir](../05_comparative/02_managed_languages/14_rust_vs_elixir.md)
   - [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](../05_comparative/02_managed_languages/15_rust_vs_typescript.md)

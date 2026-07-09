@@ -26,11 +26,11 @@
 
 > **认知路径**: 本节从 "Rust 内存模型（Memory Model）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
 
-1. **问题识别**: 为什么 Rust 内存模型值得关注？正确编写 `unsafe` 代码、FFI 和内联汇编都需要理解内存模型边界。
+1. **问题识别**: 为什么 Rust 内存模型值得关注？正确编写 `unsafe` 代码、FFI 和内联汇编（Inline Assembly）都需要理解内存模型边界。
 2. **概念建立**: 掌握抽象字节、初始化/未初始化字节、provenance 和别名规则的核心定义。
 3. **机制推理**: 通过 ⟹ 定理链将字节模型、provenance 和 UB 边界串联起来。
 4. **边界辨析**: 借助反命题/反例理解常见错误与 Rust 内存模型的适用边界。
-5. **迁移应用**: 将 Rust 内存模型与原子操作、内联汇编、Tree Borrows 等概念链接，形成跨层知识网络。
+5. **迁移应用**: 将 Rust 内存模型与原子操作（Atomic Operations）、内联汇编、Tree Borrows 等概念链接，形成跨层知识网络。
 
 ---
 
@@ -40,7 +40,7 @@
 
 > **反命题 2**: "忽略 Rust 内存模型的细节也能写出正确 unsafe 代码" ⟹ 不成立。未初始化内存读取、provenance 丢失和别名违规都是常见的 UB 来源。
 
-> **反命题 3**: "其他语言对内存模型的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权、借用和 provenance 模型具有语言特有形态。
+> **反命题 3**: "其他语言对内存模型的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）、借用（Borrowing）和 provenance 模型具有语言特有形态。
 
 ## 一、内存模型状态
 
@@ -61,8 +61,8 @@ Rust 内存的最基本单位是**字节（byte）**。与硬件字节不同，R
 
 抽象字节的区分直接影响程序是否存在未定义行为（UB）。例如：
 
-- 读取未初始化内存是 UB（除 `union` 字段和结构体 padding 外）。
-- 指针的 provenance 决定了解引用是否合法。
+- 读取未初始化内存是 UB（除 `union` 字段和结构体（Struct） padding 外）。
+- 指针的 provenance 决定了解引用（Reference）是否合法。
 
 ## 三、Provenance
 
@@ -230,7 +230,7 @@ cargo +nightly miri test
 | [Atomics and Memory Ordering](../00_concurrency/11_atomics_and_memory_ordering.md) | 并发内存语义依赖内存模型 |
 | [Inline Assembly](../05_inline_assembly/13_inline_assembly.md) | 内联汇编必须遵守内存模型约束 |
 | [Unsafe Rust](03_unsafe.md) | 内存模型主要约束 unsafe 代码 |
-| [Panic](31_panic.md) | panic 时的栈展开必须保持内存安全 |
+| [Panic](31_panic.md) | panic 时的栈展开必须保持内存安全（Memory Safety） |
 
 ---
 

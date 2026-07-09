@@ -177,7 +177,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: `LazyLock`（Rust 1.80+ 稳定）是 `static mut` 的安全替代方案，用于需要运行时初始化的全局状态。
+> **关键洞察**: `LazyLock`（Rust 1.80+ 稳定）是 `static mut` 的安全替代方案，用于需要运行时（Runtime）初始化的全局状态。
 > [来源: [std::sync::LazyLock](https://doc.rust-lang.org/std/sync/struct.LazyLock.html)]
 
 ---

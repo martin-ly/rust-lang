@@ -151,16 +151,16 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 
 - 总是为进程执行设置超时。
 - 使用 RAII 模式，依赖 `Drop` 自动释放资源。
-- 异步等待时优先使用 `tokio::time::timeout`。
+- 异步（Async）等待时优先使用 `tokio::time::timeout`。
 - 区分可恢复错误与致命错误，避免无限重启循环。
 
 ---
 
-> **L2 向下引用**: 进程池模式建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[并发模型](../00_concurrency/01_concurrency.md) 与 [异步编程](../01_async/02_async.md) 之上。
+> **L2 向下引用（Reference）**: 进程池模式建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[并发模型](../00_concurrency/01_concurrency.md) 与 [异步编程](../01_async/02_async.md) 之上。
 
 ## 相关概念
 
-- [进程模型与生命周期](01_process_model_and_lifecycle.md)
+- [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [异步进程管理](03_async_process_management.md)
 - [跨平台进程管理](04_cross_platform_process_management.md)
 - [IPC 机制](05_ipc_mechanisms.md)
@@ -286,7 +286,7 @@ async fn health_check_loop(program: &str) {
 
 > **反命题 1**: "进程池越大性能越好" ⟹ 不成立。过大的池会加剧上下文切换与内存占用，反而降低吞吐。
 >
-> **反命题 2**: "只要子进程能启动就说明健康" ⟹ 不成立。启动成功不能覆盖死锁、响应超时等运行时故障。
+> **反命题 2**: "只要子进程能启动就说明健康" ⟹ 不成立。启动成功不能覆盖死锁、响应超时等运行时（Runtime）故障。
 >
 > **反命题 3**: "故障恢复只需重启进程" ⟹ 不成立。无状态重启可能丢失上下文，需结合重试策略与幂等设计。
 >

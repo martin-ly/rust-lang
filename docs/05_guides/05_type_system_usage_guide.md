@@ -7,6 +7,7 @@
 >
 > **受众**: [进阶]
 > **内容分级**: [专家级]
+> **权威来源**: [concept/01_foundation/02_type_system/04_type_system.md](../../concept/01_foundation/02_type_system/04_type_system.md)
 
 **模块（Module）**: C02 Type System
 **创建日期**: 2026-05-12

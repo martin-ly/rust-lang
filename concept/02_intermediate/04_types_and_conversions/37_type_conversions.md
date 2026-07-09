@@ -99,7 +99,7 @@ Trait 转换:
 
 - **Coercion**：编译器“悄悄”帮你做的安全转换，比如把 `&String` 变成 `&str`。
 - **Cast**：你明确告诉编译器“我要把这个值当作另一种类型”，可能伴随数据丢失。
-- **Trait 转换**：通过标准 trait 实现可组合、可发现的类型转换，是错误处理和 API 设计的首选。
+- **Trait 转换**：通过标准 trait 实现可组合、可发现的类型转换，是错误处理（Error Handling）和 API 设计的首选。
 
 > [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
@@ -113,7 +113,7 @@ Trait 转换:
 | 显式转换 | 使用 `as` | `let x = 255u8 as i8;` | Reference |
 | 安全 trait 转换 | `From`/`Into` | `let s = String::from("hi");` | std docs |
 | 可失败转换 | `TryFrom`/`TryInto` | `let n: i32 = 300u8.try_into()?;` | std docs |
-| 盲眼实现 | 对泛型的通用转换 | `impl<T, U> Into<U> for T where U: From<T>` | std docs |
+| 盲眼实现 | 对泛型（Generics）的通用转换 | `impl<T, U> Into<U> for T where U: From<T>` | std docs |
 | 孤儿规则 | impl 受 crate 边界限制 | 不能为外部类型实现外部 trait | Reference |
 
 ---
@@ -190,7 +190,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: 可能失败的转换应使用 `TryFrom`/`TryInto`，将错误嵌入类型系统。
+> **关键洞察**: 可能失败的转换应使用 `TryFrom`/`TryInto`，将错误嵌入类型系统（Type System）。
 > [来源: [std::convert::TryFrom](https://doc.rust-lang.org/std/convert/trait.TryFrom.html)]
 
 ### 3.5 孤儿规则
@@ -366,13 +366,13 @@ graph TD
 
 ## 八、逆向推理链（Backward Reasoning）
 
-> **从编译错误/运行时症状反推定理链**:
+> **从编译错误/运行时（Runtime）症状反推定理链**:
 >
 > ```text
 > error[E0277] 类型不匹配 ⟸ 缺少 From/Into 实现或强制条件不满足 ⟸ 检查是否需要显式转换或实现 trait
 > error[E0117] 孤儿规则 ⟸ 为外部类型实现了外部 trait ⟸ 使用 newtype 包装
 > 运行时截断/溢出 ⟸ 使用了 as 而非 TryInto ⟸ 改为 try_into 并处理 Err
-> error[E0308] 期望引用得到其他类型 ⟸ 缺少 Deref 强制 ⟸ 显式借用或转换
+> error[E0308] 期望引用（Reference）得到其他类型 ⟸ 缺少 Deref 强制 ⟸ 显式借用（Borrowing）或转换
 > ```
 >
 > **诊断映射**:
@@ -419,7 +419,7 @@ D. `x.into()`
 
 A. 你自己定义的 `struct MyString(String)`
 B. 标准库类型 `Vec<u8>`
-C. 本地枚举 `enum Output { Bytes(Vec<u8>) }`
+C. 本地枚举（Enum） `enum Output { Bytes(Vec<u8>) }`
 D. 本地 newtype `struct Bytes(Vec<u8>)`
 
 <details>

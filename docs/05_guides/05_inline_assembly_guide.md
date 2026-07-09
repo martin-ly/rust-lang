@@ -10,6 +10,7 @@
 > **文档状态**: ✅ 完整
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **适用范围**: x86/x86_64, ARM/AArch64, RISC-V
+> **权威来源**: [concept/03_advanced/05_inline_assembly/13_inline_assembly.md](../../concept/03_advanced/05_inline_assembly/13_inline_assembly.md)
 
 ---
 

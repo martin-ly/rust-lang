@@ -78,7 +78,7 @@
 
 ## 一、权威定义（Definition）
 
-> Rust 标准库通过以下模块提供与操作系统交互的基础能力：
+> Rust 标准库通过以下模块（Module）提供与操作系统交互的基础能力：
 >
 > - `std::io`：标准输入输出、读写 trait（`Read`、`Write`、`BufRead`、`Seek`）。
 > - `std::fs`：文件系统操作（创建、读取、写入、删除文件和目录）。
@@ -104,7 +104,7 @@
 
 ### 1.2 直觉解释
 
-标准 I/O 和进程模块是 Rust 与“外部世界”交互的门户。无论是读取键盘输入、写入文件、启动子进程，还是获取环境变量，都通过这些模块完成。它们遵循 Rust 的核心原则：所有权、借用、`Result` 错误处理。
+标准 I/O 和进程模块是 Rust 与“外部世界”交互的门户。无论是读取键盘输入、写入文件、启动子进程，还是获取环境变量，都通过这些模块完成。它们遵循 Rust 的核心原则：所有权（Ownership）、借用（Borrowing）、`Result` 错误处理。
 
 > [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
@@ -184,7 +184,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: `PathBuf` 是可拥有的、可变的路径；`Path` 是借用的切片式路径。两者都正确处理 Windows 和 Unix 路径分隔符。
+> **关键洞察**: `PathBuf` 是可拥有的、可变的路径；`Path` 是借用的切片（Slice）式路径。两者都正确处理 Windows 和 Unix 路径分隔符。
 > [来源: [std::path](https://doc.rust-lang.org/std/path/index.html)]
 
 ### 3.4 子进程
@@ -284,7 +284,7 @@ fn main() {
 
 ### 5.1 反命题树
 
-> **反命题 1**: "`std::io` 是异步的" ⟹ 不成立。`std::io` 是同步阻塞 I/O；异步 I/O 使用 `tokio::io` 等。
+> **反命题 1**: "`std::io` 是异步（Async）的" ⟹ 不成立。`std::io` 是同步阻塞 I/O；异步 I/O 使用 `tokio::io` 等。
 > **反命题 2**: "路径字符串可以直接用 `String` 操作" ⟹ 不成立。应使用 `Path`/`PathBuf` 以保证跨平台正确性。
 > **反命题 3**: "`Command::output()` 会继承所有父进程环境" ⟹ 部分成立，但可通过 `.env()` 覆盖；默认继承。
 > **反命题 4**: "`unwrap()` 适合所有 I/O 错误处理" ⟹ 不成立。生产代码应使用 `?` 或显式匹配。
@@ -363,7 +363,7 @@ graph TD
 
 ## 八、逆向推理链（Backward Reasoning）
 
-> **从编译错误/运行时症状反推定理链**:
+> **从编译错误/运行时（Runtime）症状反推定理链**:
 >
 > ```text
 > error[E0277] Result 未处理 ⟸ I/O 操作返回 Result 但未 unwrap/? ⟸ 使用 ? 或显式 match

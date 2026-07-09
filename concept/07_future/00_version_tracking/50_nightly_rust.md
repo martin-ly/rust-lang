@@ -150,7 +150,7 @@ cargo +nightly miri test
 Miri 特别适合验证以下代码：
 
 - 包含 `unsafe` 块的自定义数据结构
-- 使用原始指针和手动内存管理
+- 使用原始指针（Raw Pointer）和手动内存管理
 - 依赖内存顺序的并发原语
 - 与 FFI 交互的边界代码
 

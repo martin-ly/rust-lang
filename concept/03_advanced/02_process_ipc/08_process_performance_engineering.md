@@ -13,7 +13,7 @@
 # Rust 进程性能工程
 
 > **权威页地位**：本页为 Rust 进程级性能工程概念的 canonical 解释来源。
-> **L2 向下引用**: 性能工程建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
+> **L2 向下引用（Reference）**: 性能工程建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
 >
 > 通用性能优化方法论请参见 [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/15_performance_optimization.md)。
 
@@ -36,7 +36,7 @@
 - **perf**：Linux 采样分析，定位热点。
 - **cargo-flamegraph**：可视化调用栈。
 - **strace/ltrace**：追踪系统调用与库调用。
-- **pprof**：运行时 CPU profiling。
+- **pprof**：运行时（Runtime） CPU profiling。
 - **dhat/heaptrack**：堆分配分析。
 
 ## 4. 优化策略
@@ -49,7 +49,7 @@
 
 ### 4.2 I/O 优化
 
-- 使用异步管道与 `tokio::process` 避免阻塞线程。
+- 使用异步（Async）管道与 `tokio::process` 避免阻塞线程。
 - 合理设置缓冲区大小，批量读写。
 - 避免父子进程同时双向写入导致的死锁。
 
@@ -161,7 +161,7 @@ flowchart TD
 
 ## 11. 相关概念
 
-- [进程模型与生命周期](01_process_model_and_lifecycle.md)
+- [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [异步进程管理](03_async_process_management.md)
 - [IPC 机制](05_ipc_mechanisms.md)
 - [进程监控与诊断](06_process_monitoring_and_diagnostics.md)

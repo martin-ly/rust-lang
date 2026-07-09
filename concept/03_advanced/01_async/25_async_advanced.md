@@ -787,7 +787,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 | **动态分发需求（类型擦除）** | `Pin<Box<dyn Future>>` | 统一存储异构 Future（如任务队列） |
 | **递归 async fn** | `Pin<Box<dyn Future>>` | 打破无限递归类型 |
 | **跨 FFI / C ABI** | `Pin<Box<dyn Future>>` | 类型擦除是跨语言边界的必要条件 |
-| **运行时任务调度** | `Pin<Box<dyn Future + Send>>` | 执行器需统一存储不同任务的 Future |
+| **运行时（Runtime）任务调度** | `Pin<Box<dyn Future + Send>>` | 执行器需统一存储不同任务的 Future |
 
 ```text
 决策框架:
@@ -1688,7 +1688,7 @@ async fn traverse_dir(path: &Path) -> Vec<String> {
 | 并发 | 合理使用 `spawn` | 利用多核 | `spawn` 有 `Send + 'static` 约束 |
 | 内存 | 避免不必要的 `Box::pin` | 减少分配 | 优先栈上 Future |
 | 内存 | 使用 `bytes::Bytes` | 减少拷贝 | 适合网络 I/O |
-| 内存 | 对象池 | 降低分配频率 | 注意生命周期管理 |
+| 内存 | 对象池 | 降低分配频率 | 注意生命周期（Lifetimes）管理 |
 | CPU | `spawn_blocking` | 避免阻塞运行时 | 仅用于真正的 CPU/阻塞操作 |
 | I/O | 调整缓冲区大小 | 平衡延迟与吞吐 | 通常 4KB-64KB |
 | I/O | 批量操作 | 减少系统调用 | 注意超时与尾延迟 |

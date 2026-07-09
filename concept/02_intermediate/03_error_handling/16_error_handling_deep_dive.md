@@ -382,7 +382,7 @@ graph TD
     style ABORT fill:#ffcdd2
 ```
 
-> **认知功能**: 错误处理的**核心判断**是"是否可恢复"——可恢复用 `Result`，不可恢复用 `panic`。
+> **认知功能**: 错误处理（Error Handling）的**核心判断**是"是否可恢复"——可恢复用 `Result`，不可恢复用 `panic`。
 > [来源: [TRPL — To panic! or Not to panic!](https://doc.rust-lang.org/book/ch09-03-to-panic-or-not-to-panic.html)]
 
 ---

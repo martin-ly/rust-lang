@@ -7,6 +7,7 @@
 >
 > **受众**: [进阶]
 > **内容分级**: [专家级]
+> **权威来源**: [concept/01_foundation/04_control_flow/07_control_flow.md](../../concept/01_foundation/04_control_flow/07_control_flow.md)
 
 **模块（Module）**: C03 Control Flow & Functions
 **创建日期**: 2026-05-12

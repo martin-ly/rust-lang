@@ -887,7 +887,7 @@ fn main() {
 | 多约束 | `T: Display + Clone` | 同时实现多个 trait |
 | where 子句 | `where T: Display` | 复杂约束或提升可读性 |
 | 关联类型约束 | `T: Iterator<Item = u32>` | 约束关联类型 |
-| 生命周期约束 | `T: 'a` | T 至少存活 'a |
+| 生命周期（Lifetimes）约束 | `T: 'a` | T 至少存活 'a |
 | HRTB | `T: for<'a> Fn(&'a i32)` | 高阶 trait bound |
 
 ### where 子句优势
@@ -923,7 +923,7 @@ where
 | :--- | :--- | :--- |
 | 每个类型的实现次数 | 唯一 | 可多次 |
 | 调用处类型参数 | 少 | 多 |
-| 类型推断 | 更好 | 可能需要显式指定 |
+| 类型推断（Type Inference） | 更好 | 可能需要显式指定 |
 
 ### 泛型关联类型 (GAT) 示例
 

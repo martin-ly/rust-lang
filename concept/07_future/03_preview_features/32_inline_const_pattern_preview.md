@@ -39,7 +39,7 @@ match x {
 }
 ```
 
-这导致开发者必须在外部定义一个命名常量，增加了样板代码，也削弱了 `match` 表达局部计算的能力。Inline Const Pattern 的目标就是将 inline const 扩展到 pattern 位置，让常量表达式可以直接参与模式匹配。
+这导致开发者必须在外部定义一个命名常量，增加了样板代码，也削弱了 `match` 表达局部计算的能力。Inline Const Pattern 的目标就是将 inline const 扩展到 pattern 位置，让常量表达式可以直接参与模式匹配（Pattern Matching）。
 
 ---
 

@@ -106,7 +106,7 @@ BorrowSanitizer 填补了 Miri 无法覆盖的**多语言场景**：当 Rust 代
 |:---|:---|
 | 2026-01 | 发布首月状态更新；确定 2026 Project Goal |
 | 2026-02 | 实现详细错误信息；提出 retag intrinsic MCP |
-| 2026-03 | 引入 shadow stack 运行时；扩展 Miri 测试套件覆盖，约 80% 通过 |
+| 2026-03 | 引入 shadow stack 运行时（Runtime）；扩展 Miri 测试套件覆盖，约 80% 通过 |
 | 2026-04 | 准备 LLVM 组件 PR；计划在春季启动 LLVM 侧 RFC |
 | 2026 下半年 | 继续在 LLVM 上游推进，目标实现 `-Zsanitizer=borrow` |
 

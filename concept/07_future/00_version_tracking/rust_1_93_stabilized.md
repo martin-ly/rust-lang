@@ -55,7 +55,7 @@ let init = MaybeUninit::assume_init_ref(&buf[..5]);
 
 ### 3.2 `String` / `Vec` 原始部分拆分
 
-`into_raw_parts` 将 `String` 或 `Vec` 拆分为原始指针、长度与容量三元组，便于与 FFI 或 Wasm 线性内存进行零拷贝交互。
+`into_raw_parts` 将 `String` 或 `Vec` 拆分为原始指针（Raw Pointer）、长度与容量三元组，便于与 FFI 或 Wasm 线性内存进行零拷贝交互。
 
 ```rust
 let v = vec![1, 2, 3];
@@ -76,7 +76,7 @@ let maybe_two = deque.pop_front_if(|x| *x == 1);
 
 ### 3.4 切片安全转固定长度数组
 
-`<[T]>::as_array` 与 `as_mut_array` 将切片安全转换为固定长度数组引用，失败时返回 `None`。
+`<[T]>::as_array` 与 `as_mut_array` 将切片（Slice）安全转换为固定长度数组引用（Reference），失败时返回 `None`。
 
 ```rust
 let bytes = b"abcd";
@@ -104,7 +104,7 @@ let len = '世'.encode_utf8(&mut buf).len();
 
 ### 3.7 `fmt::from_fn`
 
-通过闭包快速构造自定义 `Display`/`Debug` 格式化器，减少样板代码。
+通过闭包（Closures）快速构造自定义 `Display`/`Debug` 格式化器，减少样板代码。
 
 ```rust
 use std::fmt;
@@ -129,7 +129,7 @@ println!("{}", f);
 
 Rust 1.93 的新 API 对 `no_std` 和 WebAssembly 目标尤其重要：
 
-- `into_raw_parts` 允许将 `Vec`/`String` 的所有权直接交给 Wasm 宿主，避免额外拷贝。
+- `into_raw_parts` 允许将 `Vec`/`String` 的所有权（Ownership）直接交给 Wasm 宿主，避免额外拷贝。
 - `MaybeUninit::write_copy_of_slice` 在裸机缓冲区写入中减少 unsafe 代码。
 - `char::MAX_LEN_UTF8` 帮助嵌入式系统预分配固定大小的编码缓冲区。
 
@@ -146,7 +146,7 @@ pub extern "C" fn allocate_string() -> *mut u8 {
 ## 六、迁移提示
 
 - 使用 `MaybeUninit::write_copy_of_slice` 替代手动循环写入，可减少 unsafe 代码量。
-- `String`/`Vec::into_raw_parts` 与 `from_raw_parts` 配对使用，注意所有权与容量一致性。
+- `String`/`Vec::into_raw_parts` 与 `from_raw_parts` 配对使用，注意所有权与容量一致性（Coherence）。
 - `as_array` 返回 `Option`，避免手动长度检查与 `try_into` 转换。
 - 在 `no_std` 环境中，`write_copy_of_slice` 等 API 可直接在 `core` 中使用。
 

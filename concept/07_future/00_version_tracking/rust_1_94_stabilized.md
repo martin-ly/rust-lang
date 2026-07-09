@@ -35,7 +35,7 @@
 
 | 特性 | 说明 | 适用场景 |
 |------|------|----------|
-| 异步网络 | Rust 1.94 核心改进 | 生产环境 |
+| 异步（Async）网络 | Rust 1.94 核心改进 | 生产环境 |
 | 生成器 | 语法增强 | 新代码开发 |
 | 性能优化 | 编译器/标准库 | 全场景 |
 
@@ -115,7 +115,7 @@ pub fn advanced_example<T>(value: T) -> T {
 
 ---
 
-> 💡 **提示**: 本文档为占位符增强版本，详细内容请参考模块主文档。
+> 💡 **提示**: 本文档为占位符增强版本，详细内容请参考模块（Module）主文档。
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -166,7 +166,7 @@ pub fn advanced_example<T>(value: T) -> T {
 
 | 特性 | 说明 | 适用场景 |
 |------|------|----------|
-| 过程宏 | Rust 1.94 核心改进 | 生产环境 |
+| 过程宏（Procedural Macro） | Rust 1.94 核心改进 | 生产环境 |
 | 生成器集成 | 语法增强 | 新代码开发 |
 | 新语法支持 | 编译器/标准库 | 全场景 |
 
@@ -391,7 +391,7 @@ pub fn advanced_example<T>(value: T) -> T {
 
 ---
 
-> **向下引用**: 参见 [01_toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
+> **向下引用（Reference）**: 参见 [01_toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
 
 ## 过渡段
 

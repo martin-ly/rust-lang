@@ -22,7 +22,7 @@
 
 ## 一、功能动机：为什么需要 Const Trait？
 
-稳定 Rust 中的 `const fn` 已经允许在编译期执行大量计算，但它有一个关键限制：**不能在 `const fn` 中使用泛型 trait bound**。例如，以下代码在稳定 Rust 中无法编译：
+稳定 Rust 中的 `const fn` 已经允许在编译期执行大量计算，但它有一个关键限制：**不能在 `const fn` 中使用泛型（Generics） trait bound**。例如，以下代码在稳定 Rust 中无法编译：
 
 ```rust,ignore
 const fn double<T: std::ops::Add<Output = T> + Copy>(x: T) -> T {
@@ -33,8 +33,8 @@ const fn double<T: std::ops::Add<Output = T> + Copy>(x: T) -> T {
 这限制了常量求值的表达能力。开发者不得不：
 
 1. 为每种具体类型写单独的 `const fn`；
-2. 使用宏生成多份代码；
-3. 将计算推迟到运行时。
+2. 使用宏（Macro）生成多份代码；
+3. 将计算推迟到运行时（Runtime）。
 
 **Const Trait** 的目标是允许 trait 方法在 const 上下文中使用，从而使泛型常量计算成为可能。核心语法包括：
 

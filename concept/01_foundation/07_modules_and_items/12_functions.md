@@ -8,7 +8,7 @@
 > **Bloom 层级**: 记忆 → 理解
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: F×Und — 理解函数作为 Rust 行为单元的基础结构
-> **定位**: 系统讲解 Rust 函数声明、参数传递、返回值、发散函数与所有权的交互，为后续 Trait、闭包、Async 打下语法基础。
+> **定位**: 系统讲解 Rust 函数声明、参数传递、返回值、发散函数与所有权（Ownership）的交互，为后续 Trait、闭包（Closures）、Async 打下语法基础。
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/04_type_system.md) · [Statements and Expressions](../04_control_flow/41_statements_and_expressions.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
 > **后置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Closures](../00_start/15_closure_basics.md) · [Modules and Paths](11_modules_and_paths.md)
 >
@@ -25,8 +25,8 @@
 
 1. **问题识别**: 当代码重复出现时，如何封装为可复用单元？
 2. **概念建立**: 掌握 `fn`、参数列表、返回类型、`->` 语法与函数体。
-3. **机制推理**: 通过 ⟹ 定理链将函数签名、所有权移动与借用规则串联起来。
-4. **边界辨析**: 借助反命题/反例理解忘记返回表达式、移动后继续使用、可变借用冲突等错误。
+3. **机制推理**: 通过 ⟹ 定理链将函数签名、所有权移动与借用（Borrowing）规则串联起来。
+4. **边界辨析**: 借助反命题/反例理解忘记返回表达式、移动后继续使用、可变借用（Mutable Borrow）冲突等错误。
 5. **迁移应用**: 将函数与 Trait、闭包、Async 等后置概念链接，形成跨层知识网络。
 
 ---
@@ -39,7 +39,7 @@
 
 ---
 
-> **定理 1** [Tier 1]: 函数签名精确声明参数类型与返回类型 ⟹ 编译器可在调用点静态检查类型一致性。
+> **定理 1** [Tier 1]: 函数签名精确声明参数类型与返回类型 ⟹ 编译器可在调用点静态检查类型一致性（Coherence）。
 >
 > **定理 2** [Tier 1]: 函数参数默认按值传递 ⟹ 调用者需显式使用 `&T` / `&mut T` 表达借用，否则发生所有权移动。
 >
@@ -80,7 +80,7 @@
 
 > **命题 1**: 函数是 Rust 中**命名的、可复用的执行单元**，由签名（参数 + 返回类型）和函数体组成。
 >
-> **命题 2**: Rust 函数默认使用**移动语义**传递参数；借用必须通过显式引用 `&T` / `&mut T` 表达。
+> **命题 2**: Rust 函数默认使用**移动语义**传递参数；借用必须通过显式引用（Reference） `&T` / `&mut T` 表达。
 >
 > **命题 3**: 函数的返回类型不写时默认为单元类型 `()`；使用 `->` 显式声明返回类型。
 >
@@ -245,7 +245,7 @@ fn main() {
 }
 ```
 
-**修正**: 确保借用的生命周期不重叠。
+**修正**: 确保借用的生命周期（Lifetimes）不重叠。
 
 ---
 
@@ -280,10 +280,10 @@ function_qualifiers :=
 | 声明形式 | 调用侧行为 | 适用场景 |
 | :--- | :--- | :--- |
 | `fn f(x: T)` | 移动（Move）所有权 | 小类型或明确转移所有权 |
-| `fn f(x: &T)` | 不可变借用 | 只读访问 |
+| `fn f(x: &T)` | 不可变借用（Immutable Borrow） | 只读访问 |
 | `fn f(x: &mut T)` | 可变借用 | 需要修改 |
-| `fn f(x: impl Trait)` | 静态分发单态化 | 简单泛型约束 |
-| `fn f(x: dyn Trait)` | 动态分发，胖指针 | 需要运行时多态 |
+| `fn f(x: impl Trait)` | 静态分发单态化（Monomorphization） | 简单泛型（Generics）约束 |
+| `fn f(x: dyn Trait)` | 动态分发，胖指针 | 需要运行时（Runtime）多态 |
 
 ### 返回值要点
 

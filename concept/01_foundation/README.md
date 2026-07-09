@@ -268,7 +268,7 @@ Type System（理解"类型即证明"）
 
 掌握 L1 后可进入：
 
-- **L2 进阶**: Trait（类型系统延伸）、泛型（Generics）（生命周期（Lifetimes）参数化）、内存管理（所有权（Ownership）进阶）、错误处理（Result 类型）
+- **L2 进阶**: Trait（类型系统（Type System）延伸）、泛型（Generics）（生命周期（Lifetimes）参数化）、内存管理（所有权（Ownership）进阶）、错误处理（Result 类型）
 - **L4 形式化**: 线性逻辑（所有权（Ownership）数学根基）、区域类型（生命周期（Lifetimes）形式化）、分离逻辑（借用（Borrowing）形式化）
 - **L5 对比**: Rust vs C++（所有权（Ownership） vs 智能指针（Smart Pointer））
 

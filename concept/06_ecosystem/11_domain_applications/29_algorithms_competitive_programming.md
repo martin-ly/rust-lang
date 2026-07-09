@@ -1042,7 +1042,7 @@ DP 问题常需要修改多维数组的多个元素。Rust 的借用（Borrowing
 | 冒泡排序 | O(n²) | O(1) | ✅ | 双重循环，`arr.swap` |
 | 选择排序 | O(n²) | O(1) | ❌ | 每轮找最小下标 |
 | 插入排序 | O(n²) | O(1) | ✅ | 适合部分有序数据 |
-| 快速排序 | O(n log n) | O(log n) | ❌ | `split_at_mut` 避免借用冲突 |
+| 快速排序 | O(n log n) | O(log n) | ❌ | `split_at_mut` 避免借用（Borrowing）冲突 |
 | 归并排序 | O(n log n) | O(n) | ✅ | 递归分治 + `Vec::with_capacity` |
 | 堆排序 | O(n log n) | O(1) | ❌ | 使用 `std::collections::BinaryHeap` |
 
@@ -1112,9 +1112,9 @@ let even_squares: Vec<_> = nums.iter()
 | 概念 | 说明 |
 | :--- | :--- |
 | **集合类型** | `Vec`、`HashMap`、`BTreeMap`、`HashSet`；选型看访问模式 |
-| **迭代器** | `iter()`/`into_iter()`/`iter_mut()`；适配器 `map`/`filter`/`fold` |
+| **迭代器（Iterator）** | `iter()`/`into_iter()`/`iter_mut()`；适配器 `map`/`filter`/`fold` |
 | **算法复杂度** | O(1)、O(log n)、O(n)；排序、搜索、图算法 |
-| **Rust 特色** | 零成本抽象；迭代器惰性求值；`sort_unstable` 等 |
+| **Rust 特色** | 零成本抽象（Zero-Cost Abstraction）；迭代器惰性求值；`sort_unstable` 等 |
 
 ### 常见坑与解决
 
@@ -1198,7 +1198,7 @@ let even_squares: Vec<_> = nums.iter()
 **专家路径（4–6 周）**
 
 - Week 1–2: 并发算法 — `rayon` 并行迭代、无锁数据结构、工作窃取
-- Week 3–4: 异步算法 — `Stream`、异步图遍历、并发限流
+- Week 3–4: 异步（Async）算法 — `Stream`、异步图遍历、并发限流
 - Week 5–6: 高级主题 — 算法优化技巧、缓存优化、SIMD 加速
 
 ### 问题诊断树

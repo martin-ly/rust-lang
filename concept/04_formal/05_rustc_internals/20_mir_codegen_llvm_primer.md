@@ -30,7 +30,7 @@
 
 1. **问题识别**: 为什么 Rust 需要 MIR 这一层中间表示？它与 HIR、LLVM IR 有什么本质区别？
 2. **概念建立**: 掌握 MIR 的核心定义、基本块（Basic Block）结构、Place/Rvalue/Terminator 三要素。
-3. **机制推理**: 通过 ⟹ 定理链将 MIR 构建、借用检查、优化、单态化与 LLVM IR 生成串联起来。
+3. **机制推理**: 通过 ⟹ 定理链将 MIR 构建、借用（Borrowing）检查、优化、单态化（Monomorphization）与 LLVM IR 生成串联起来。
 4. **边界辨析**: 借助反命题/反例理解 MIR/codegen 的适用边界与常见观察误区。
 5. **迁移应用**: 将 MIR 与相邻概念链接，形成从 L1 到 L7 的纵向知识网络。
 
@@ -44,13 +44,13 @@
 
 ---
 
-> **定理 1** [Tier 2]: MIR 显式表达控制流图与所有权转移 ⟹ 借用检查、drop 展开与常量求值可以在统一的图上进行。
+> **定理 1** [Tier 2]: MIR 显式表达控制流图与所有权（Ownership）转移 ⟹ 借用检查、drop 展开与常量求值可以在统一的图上进行。
 >
 > **定理 2** [Tier 2]: MIR 经过借用检查与优化后再 lower 到 codegen ⟹ 后端无需重新理解 Rust 的高层语法与所有权规则。
 >
-> **定理 3** [Tier 2]: `rustc --emit=mir` 与 `rustc --emit=llvm-ir` 输出的是同一编译过程的不同切片 ⟹ 开发者可以通过对比二者定位优化与代码生成问题。
+> **定理 3** [Tier 2]: `rustc --emit=mir` 与 `rustc --emit=llvm-ir` 输出的是同一编译过程的不同切片（Slice） ⟹ 开发者可以通过对比二者定位优化与代码生成问题。
 >
-> **定理 4** [Tier 3]: 单态化（Monomorphization）在 MIR 层完成泛型实例化 ⟹ 每个泛型函数会生成独立的 MIR body，再独立 lower 到 LLVM IR。
+> **定理 4** [Tier 3]: 单态化（Monomorphization）在 MIR 层完成泛型（Generics）实例化 ⟹ 每个泛型函数会生成独立的 MIR body，再独立 lower 到 LLVM IR。
 
 ---
 
@@ -58,7 +58,7 @@
 
 > **反命题 1**: "MIR 与 LLVM IR 只是同一表示的不同名字" ⟹ 不成立。MIR 仍保留 Rust 语义（如 `Drop`、`move`、`&mut`），而 LLVM IR 是接近机器的 SSA 形式。
 
-> **反命题 2**: "所有 Rust 代码都能被 `rustc --emit=mir` 完整观察" ⟹ 不成立。宏展开、名字解析与部分类型检查错误发生在 MIR 生成之前；`--emit=mir` 要求源码至少通过 HIR/THIR lowering。
+> **反命题 2**: "所有 Rust 代码都能被 `rustc --emit=mir` 完整观察" ⟹ 不成立。宏（Macro）展开、名字解析与部分类型检查错误发生在 MIR 生成之前；`--emit=mir` 要求源码至少通过 HIR/THIR lowering。
 
 > **反命题 3**: "LLVM IR 输出可以直接当作可移植的 Rust 后端代码使用" ⟹ 不成立。`rustc --emit=llvm-ir` 生成的 IR 依赖 rustc 生成的内部符号、target spec 与 runtime，跨版本通常不兼容。
 
@@ -295,7 +295,7 @@ start:
 >
 > **逆向 2**: 如果 `--emit=mir` 输出的函数体没有预期的优化（如常量折叠、内联） ⟸ 应检查是否使用了 `-O` / `-C opt-level=3` 以及 `-Zmir-opt-level`，因为默认 `--emit=mir` 输出的是较早阶段的 MIR。
 >
-> **逆向 3**: 如果 LLVM IR 中某个泛型函数出现多次实例 ⟸ 这是单态化的正常结果；若要减少代码体积，应考虑使用 `dyn Trait`、枚举或 `#[inline(never)]` 策略，而不是试图阻止单态化发生。
+> **逆向 3**: 如果 LLVM IR 中某个泛型函数出现多次实例 ⟸ 这是单态化的正常结果；若要减少代码体积，应考虑使用 `dyn Trait`、枚举（Enum）或 `#[inline(never)]` 策略，而不是试图阻止单态化发生。
 
 ---
 

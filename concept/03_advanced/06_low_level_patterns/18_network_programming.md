@@ -1044,7 +1044,7 @@ impl TokenBucket {
 |:---|:---|:---|:---|
 | Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
-| Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+| Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 异步 I/O 安全 ⟸ mio/epoll 抽象 ⟸ 事件驱动状态机
 > 协议解析健壮 ⟸ 字节流边界 ⟸ 反序列化安全

@@ -22,10 +22,10 @@
 > **认知路径**: 本节从 "Crate 与源文件" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
 
 1. **问题识别**: 为什么 Rust 选择 crate 作为编译与分发的基本单元？它与 C/C++ 的翻译单元、Java 的包有何异同？
-2. **概念建立**: 掌握 crate、crate root、源文件、模块树、crate-level 属性等关键术语。
+2. **概念建立**: 掌握 crate、crate root、源文件、模块（Module）树、crate-level 属性等关键术语。
 3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块路径解析串联起来。
 4. **边界辨析**: 借助反命题/反例理解 `crate_type`、`no_main`、混合 crate 等边界情况。
-5. **迁移应用**: 将 crate 模型与 [Cargo workspace](../../06_ecosystem/01_cargo/78_cargo_workspaces.md)、[链接](../../03_advanced/04_ffi/27_linkage.md)、[运行时](../../03_advanced/02_unsafe/30_rust_runtime.md) 等后置概念链接。
+5. **迁移应用**: 将 crate 模型与 [Cargo workspace](../../06_ecosystem/01_cargo/78_cargo_workspaces.md)、[链接](../../03_advanced/04_ffi/27_linkage.md)、[运行时（Runtime）](../../03_advanced/02_unsafe/30_rust_runtime.md) 等后置概念链接。
 
 ---
 

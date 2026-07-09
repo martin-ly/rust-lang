@@ -1146,7 +1146,7 @@ where
 
 #### 9.3.1 基本获取与显示
 
-`Backtrace` 通过运行时栈展开（stack unwinding）捕获当前调用链：
+`Backtrace` 通过运行时（Runtime）栈展开（stack unwinding）捕获当前调用链：
 
 ```rust
 use std::backtrace::Backtrace;
@@ -2078,7 +2078,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 11.3 `eyre` / `color-eyre` / `miette` / `snafu` 生态库对比
 
-**定义**：这些 crate 在 `std::error::Error` 之上提供报告格式、错误链、自定义类型与诊断信息；`eyre` 强调零样板，`miette` 强调格式化诊断，`snafu` 强调显式错误枚举。
+**定义**：这些 crate 在 `std::error::Error` 之上提供报告格式、错误链、自定义类型与诊断信息；`eyre` 强调零样板，`miette` 强调格式化诊断，`snafu` 强调显式错误枚举（Enum）。
 
 **动机**：大型项目需要在错误类型严谨性、编译器报错可读性和运行时报告美观度之间做权衡。
 
@@ -2092,7 +2092,7 @@ fn parse() -> Result<i32> { "not a number".parse()?; Ok(0) }
 
 ### 11.4 `#[track_caller]` 与错误定位优化
 
-**定义**：`#[track_caller]` 让 panic/错误宏（如 `unwrap`、`?`）报告调用者位置，而非宏定义或库内部位置。
+**定义**：`#[track_caller]` 让 panic/错误宏（Macro）（如 `unwrap`、`?`）报告调用者位置，而非宏定义或库内部位置。
 
 **动机**：在不暴露内部实现细节的前提下，把错误信息定位到用户的代码行，提高调试效率。
 
@@ -2112,7 +2112,7 @@ fn expect_some<T>(opt: Option<T>) -> T {
 
 **定义**：`!`（never type）表示不可能返回；`Result<T, !>` 中的 `Err` 分支在类型层面不可达，因此在 `?` 或 `match` 中可被编译器优化。
 
-**动机**：在类型系统里显式表达“此操作不可能失败”，避免冗余的 `unwrap` 或虚构错误变体。
+**动机**：在类型系统（Type System）里显式表达“此操作不可能失败”，避免冗余的 `unwrap` 或虚构错误变体。
 
 ```rust
 fn infallible() -> Result<i32, !> {

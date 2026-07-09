@@ -1292,7 +1292,7 @@ fn main() {
 
 > Brown University Interactive Rust Book 的 [Ch10.3 — Validating References with Lifetimes](https://rust-book.cs.brown.edu/ch10-03-lifetime-syntax.html) 以交互方式展示生命周期标注如何阻止悬垂引用；本文件关于生命周期省略规则、结构体生命周期与 `'static` 的讨论与其对齐。Brown Book 的所有权可视化与测验设计同样基于 Will Crichton 等人 OOPSLA 2023 的 *A Grounded Conceptual Model for Ownership Types in Rust*。
 >
-> 生命周期的形式化根基可追溯至 Mads Tofte 与 Jean-Pierre Talpin 1994 年的区域类型（region types）理论，Rust 在其基础上做了命令式、可变借用与 NLL 的关键适配；Ralf Jung 等人 *RustBelt: Securing the Foundations of the Rust Programming Language*（POPL 2018）进一步将生命周期约束纳入 Iris 分离逻辑框架，证明了引用有效性定理。完整权威来源索引见 [International Authority Index](../../00_meta/02_sources/international_authority_index.md)。
+> 生命周期的形式化根基可追溯至 Mads Tofte 与 Jean-Pierre Talpin 1994 年的区域类型（region types）理论，Rust 在其基础上做了命令式、可变借用（Mutable Borrow）与 NLL 的关键适配；Ralf Jung 等人 *RustBelt: Securing the Foundations of the Rust Programming Language*（POPL 2018）进一步将生命周期约束纳入 Iris 分离逻辑框架，证明了引用有效性定理。完整权威来源索引见 [International Authority Index](../../00_meta/02_sources/international_authority_index.md)。
 
 ---
 

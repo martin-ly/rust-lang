@@ -126,7 +126,7 @@ crate-type = ["cdylib", "staticlib", "rlib"]
 | `dylib` | Rust 动态库 |
 | `cdylib` | C 兼容动态库 |
 | `staticlib` | C 兼容静态库 |
-| `proc-macro` | 过程宏 |
+| `proc-macro` | 过程宏（Procedural Macro） |
 
 ## 七、`required-features` 示例
 

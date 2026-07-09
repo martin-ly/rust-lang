@@ -99,7 +99,7 @@ Rust Reference 为许多规则附加稳定标识符，形如：
 
 ## 六、Unicode 属性示例
 
-Rust 标识符规则直接引用 Unicode 属性：
+Rust 标识符规则直接引用（Reference） Unicode 属性：
 
 | 属性 | 含义 | 应用 |
 |:---|:---|:---|

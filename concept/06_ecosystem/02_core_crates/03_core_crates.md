@@ -354,10 +354,10 @@ graph TD
 |:---|:---|:---|:---|
 | **sqlx** | 查询构建器 | 编译期 SQL 检查、async、零 ORM 开销 | async + 泛型（Generics） + 宏（Macro） |
 | **diesel** | ORM | 编译期查询验证、类型安全 schema、成熟 | 泛型（Generics） + Trait |
-| **sea-orm** | 异步 ORM |  inspired by ActiveRecord、GraphQL 友好 | async + 泛型 |
+| **sea-orm** | 异步 ORM |  inspired by ActiveRecord、GraphQL 友好 | async + 泛型（Generics） |
 | **tokio-postgres** | 底层驱动 | 纯 Rust、async、PostgreSQL 专用 | async + unsafe(极少) |
 | **mongodb** | 文档驱动 | 官方驱动、async、BSON 原生 | async + serde |
-| **redis** | KV 驱动 | 多运行时支持、集群、哨兵 | async/同步 |
+| **redis** | KV 驱动 | 多运行时（Runtime）支持、集群、哨兵 | async/同步 |
 | **surrealdb** | 多模型 | 嵌入式+分布式、SQL+GraphQL | async |
 
 **关键洞察**：sqlx 的 `query!` 宏（Macro）在编译期连接数据库验证 SQL 语法和类型，是 Rust **宏系统 + 类型安全**理念在数据库领域的延伸。
@@ -580,7 +580,7 @@ graph TD
 | **tracing** | — | Trait (Subscriber/Layer) | async Span 传播 | — | OpenTelemetry 多语言 |
 | **ring** | 类型安全 | — | unsafe (常量时间) | — | OpenSSL (C) |
 | **rayon** | 所有权（Ownership） | — | Send/Sync + unsafe | — | C++ TBB |
-| **pyo3** | 所有权 | Trait (IntoPy/PyClass) | unsafe + FFI | — | Cython |
+| **pyo3** | 所有权（Ownership） | Trait (IntoPy/PyClass) | unsafe + FFI | — | Cython |
 
 ---
 
@@ -650,7 +650,7 @@ graph TD
 | **论文/著作** | **作者/年份** | **核心贡献** | **与 Rust Crate 的关联** |
 |:---|:---|:---|:---|
 | *The Rust Programming Language* (TRPL) | Klabnik & Nichols | Rust 官方教材 | 所有 crate 的设计前提 |
-| *Serde: Serialization Framework* | github.com/serde-rs | 零成本抽象（Zero-Cost Abstraction）序列化 | serde 是 Trait + 宏的典范 |
+| *Serde: Serialization Framework* | github.com/serde-rs | 零成本抽象（Zero-Cost Abstraction）序列化 | serde 是 Trait + 宏（Macro）的典范 |
 | *Rayon: Data Parallelism in Rust* | Josh Stone / Niko, POPL 2015 workshop | 无数据竞争的数据并行 | Send/Sync + 所有权 ⇒ 安全并行 |
 | *Security Analysis of Rust Cryptography* | 2023-2025 工业审计 | Rust 密码学库安全评估 | ring/rustls 审计基础 |
 | *Tokio: An Asynchronous Rust Runtime* | tokio.rs Team | 协作式调度 + work-stealing | tokio 的调度理论 |
@@ -1184,7 +1184,7 @@ graph TD
 
 ---
 
-> **相关文件**: [问题图谱](../../00_meta/04_navigation/problem_graph.md) · [异步](../../03_advanced/01_async/02_async.md) · [并发](../../03_advanced/00_concurrency/01_concurrency.md)
+> **相关文件**: [问题图谱](../../00_meta/04_navigation/problem_graph.md) · [异步（Async）](../../03_advanced/01_async/02_async.md) · [并发](../../03_advanced/00_concurrency/01_concurrency.md)
 
 ## 十、边界测试：核心 crate 的编译错误
 

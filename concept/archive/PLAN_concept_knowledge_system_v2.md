@@ -143,7 +143,7 @@
 | 思维表征多样性 | 每文件 ≥2 种 | **4.1** | 文件审计 |
 | 知识来源标注率 | ≥80% 论断有来源 | **16.0%** | 抽样检查 |
 | 跨文件链接密度 | 每文件 ≥3 个外链 | **3+** (58/58) | 链接计数 |
-| **定理一致性矩阵** | 每核心文件 1 个 | **58/58** | 文件审计 |
+| **定理一致性（Coherence）矩阵** | 每核心文件 1 个 | **58/58** | 文件审计 |
 | **反命题树** | 每核心文件 1 个 | **58/58** | 文件审计 |
 | **认知路径** | 每核心文件 1 个 | **58/58** | 文件审计 |
 | **层间关系图谱** | 全局 1 个 | **1** | 文件审计 |
@@ -451,7 +451,7 @@
 | P17-T21 | 新增 `02_intermediate/02_memory_management/12_smart_pointers.md` | Box/Rc/Arc/RefCell/Cell、所有权（Ownership）语义、组合模式 | ✅ |
 | P17-T22 | 新增 `06_ecosystem/15_performance_optimization.md` | Criterion、flamegraph、缓存优化、SIMD、PGO | ✅ |
 | P17-T23 | 新增 `04_formal/08_type_inference.md` | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ |
-| P17-T24 | 新增 `05_comparative/08_rust_vs_javascript.md` | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ |
+| P17-T24 | 新增 `05_comparative/08_rust_vs_javascript.md` | 编译 vs 解释、所有权（Ownership） vs GC、Future vs Promise、WASM | ✅ |
 | P17-T25 | 新增 `01_foundation/05_collections/08_collections.md` | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ |
 | P17-T26 | 新增 `06_ecosystem/16_testing.md` | 单元/集成/文档测试、mockall、proptest、cargo-fuzz | ✅ |
 | P17-T27 | 新增 `03_advanced/02_unsafe/08_nll_and_polonius.md` | 非词法生命周期（Lifetimes）、数据流分析、Origin 模型 | ✅ |
@@ -488,7 +488,7 @@
 ---
 
 | P17-T31 | 新增 `03_advanced/00_concurrency/10_concurrency_patterns.md` | 线程池、消息传递、共享状态、并发模式 | ✅ |
-| P17-T32 | 新增 `05_comparative/09_rust_vs_swift.md` | 内存安全（Memory Safety）、值/引用语义、性能与生态对比 | ✅ |
+| P17-T32 | 新增 `05_comparative/09_rust_vs_swift.md` | 内存安全（Memory Safety）、值/引用（Reference）语义、性能与生态对比 | ✅ |
 | P17-T33 | 新增 `06_ecosystem/19_security_practices.md` | cargo-audit、安全编码、依赖管理、加密 | ✅ |
 | P17-T34 | 新增 `06_ecosystem/20_licensing_and_compliance.md` | 开源协议、Apache/MIT/GPL、合规实践 | ✅ |
 | P17-T35 | 新增 `07_future/21_rust_in_ai.md` | Candle、Burn、ndarray、AI/ML 生态 | ✅ |

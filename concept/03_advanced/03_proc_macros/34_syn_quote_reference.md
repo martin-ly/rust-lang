@@ -5,8 +5,8 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: S×App — 应用 syn/quote API
-> **前置依赖**: [过程宏](07_proc_macro.md) · [宏术语表](32_macro_glossary.md)
-> **后置概念**: [生产级宏开发](31_production_grade_macro_development.md) · [宏卫生性](35_macro_hygiene.md)
+> **前置依赖**: [过程宏（Procedural Macro）](07_proc_macro.md) · [宏术语表](32_macro_glossary.md)
+> **后置概念**: [生产级宏（Macro）开发](31_production_grade_macro_development.md) · [宏卫生性](35_macro_hygiene.md)
 > **定理链**: Parse Input ⟹ Transform AST ⟹ Emit Tokens
 >
 > **权威来源**: 本页为 `syn and quote Reference` 的权威概念页；crate 文档仅保留导航 stub。
@@ -60,7 +60,7 @@
     - [9.2 属性宏模式](#92-属性宏模式)
     - [9.3 函数宏模式](#93-函数宏模式)
   - [10. 最佳实践](#10-最佳实践)
-    - [10.1 错误处理](#101-错误处理)
+    - [10.1 错误处理（Error Handling）](#101-错误处理)
     - [10.2 性能优化](#102-性能优化)
     - [10.3 可测试性](#103-可测试性)
   - [认知路径](#认知路径)
@@ -80,7 +80,7 @@
 - 完整的 Rust 语法 AST
 - 灵活的解析 API
 - 精确的错误位置
-- 零成本抽象
+- 零成本抽象（Zero-Cost Abstraction）
 
 ---
 
@@ -916,7 +916,7 @@ mod tests {
 
 **相关文档**:
 
-- [声明宏完整参考](/crates/c11_macro_system_proc/docs/tier_03_references/01_declarative_macros_complete_reference.md)
+- [声明宏（Declarative Macro）完整参考](/crates/c11_macro_system_proc/docs/tier_03_references/01_declarative_macros_complete_reference.md)
 - [过程宏API参考](/crates/c11_macro_system_proc/docs/tier_03_references/02_procedural_macro_api_reference.md)
 - [宏卫生性参考](/crates/c11_macro_system_proc/docs/tier_03_references/04_macro_hygiene_reference.md)
 
@@ -933,7 +933,7 @@ mod tests {
 
 ---
 
-> **向下引用**: 参见 [17_macro_patterns](../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md)
+> **向下引用（Reference）**: 参见 [17_macro_patterns](../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md)
 
 ## 认知路径
 

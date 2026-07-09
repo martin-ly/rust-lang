@@ -331,7 +331,7 @@ fn verify_vec_push_safety() {
 | [`crates/c01_ownership_borrow_scope/src/kani_examples.rs`](../../crates/c01_ownership_borrow_scope/src/kani_examples.rs) | 所有权（Ownership）/借用（Borrowing）、函数合约、循环合约、切片（Slice）最大值 | `cargo kani --manifest-path crates/c01_ownership_borrow_scope/Cargo.toml` |
 | [`crates/c02_type_system/src/kani_examples.rs`](../../crates/c02_type_system/src/kani_examples.rs) | 泛型（Generics）、trait bound、循环不变量、偶数计数 | `cargo kani --manifest-path crates/c02_type_system/Cargo.toml` |
 | [`crates/c03_control_fn/src/kani_examples.rs`](../../crates/c03_control_fn/src/kani_examples.rs) | 控制流（Control Flow）与函数、最大值函数合约、非负偶数计数循环不变量、带前置条件的除法、线性搜索下标边界 | `cargo kani --manifest-path crates/c03_control_fn/Cargo.toml` |
-| [`crates/c04_generic/src/kani_examples.rs`](../../crates/c04_generic/src/kani_examples.rs) | 泛型函数合约、泛型循环不变量、切片查找与计数、带 `Ord` 约束的 `clamp`、泛型前缀谓词验证 | `cargo kani --manifest-path crates/c04_generic/Cargo.toml` |
+| [`crates/c04_generic/src/kani_examples.rs`](../../crates/c04_generic/src/kani_examples.rs) | 泛型（Generics）函数合约、泛型循环不变量、切片（Slice）查找与计数、带 `Ord` 约束的 `clamp`、泛型前缀谓词验证 | `cargo kani --manifest-path crates/c04_generic/Cargo.toml` |
 | [`crates/c08_algorithms/src/kani_examples.rs`](../../crates/c08_algorithms/src/kani_examples.rs) | 数组和、二分查找边界条件 | `cargo kani --manifest-path crates/c08_algorithms/Cargo.toml` |
 
 > **提示**: 由于 Kani 示例依赖 `kani` crate 的宏（Macro），普通 `cargo build` 不会编译这些模块（Module）。运行 `cargo kani` 时会自动进入 `cfg(kani)` 模式。
@@ -367,16 +367,16 @@ fn verify_vec_push_safety() {
 | 工具 / 概念 | 定位 | 权威来源 |
 |:---|:---|:---|
 | [Miri](31_miri.md) | Rust MIR 解释器，动态检测 UB，与 Kani 形成“动态 + 有界静态”互补 | [Miri GitHub](https://github.com/rust-lang/miri) |
-| [Tree Borrows](../01_ownership_logic/36_tree_borrows_deep_dive.md) | Rust 别名模型演进方向，影响 Kani 对内存安全属性的建模 | [Tree Borrows 论文/博客](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) |
+| [Tree Borrows](../01_ownership_logic/36_tree_borrows_deep_dive.md) | Rust 别名模型演进方向，影响 Kani 对内存安全（Memory Safety）属性的建模 | [Tree Borrows 论文/博客](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) |
 | [Stacked Borrows](../01_ownership_logic/36_tree_borrows_deep_dive.md) | 早期 Rust 别名模型，与 Tree Borrows 共同构成 Kani/Miri 的内存模型基础 | [Stacked Borrows 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) |
 | [Safety Tags](../02_separation_logic/33_safety_tags_in_formal.md) | RFC #3842 提案，可将 `unsafe` 安全契约转化为 Kani 假设/断言 | [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
-| [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md) | 运行时别名模型检测，与 Kani 共同覆盖“证明 + 运行期审计” | [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) |
+| [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md) | 运行时（Runtime）别名模型检测，与 Kani 共同覆盖“证明 + 运行期审计” | [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) |
 | [AutoVerus / Verus](24_autoverus.md) | SMT 演绎验证，适合需要无界完整证明的场景，与 Kani 的自动化模型检查形成选型对照 | [Verus GitHub](https://github.com/verus-lang/verus) |
 
 ---
 
 > **权威来源**: [Kani 官方文档](https://model-checking.github.io/kani/) · [Kani GitHub](https://github.com/model-checking/kani) · [CBMC](https://github.com/diffblue/cbmc)
-> **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Kani 0.66+ / Rust 1.96.1 · 2026-07-09 扩展 `c03_control_fn`、`c04_generic` Kani 示例并新增交叉引用 [P2-Q3 形式化工具示例]
+> **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Kani 0.66+ / Rust 1.96.1 · 2026-07-09 扩展 `c03_control_fn`、`c04_generic` Kani 示例并新增交叉引用（Reference） [P2-Q3 形式化工具示例]
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

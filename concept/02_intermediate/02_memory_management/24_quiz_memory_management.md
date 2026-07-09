@@ -350,7 +350,7 @@ let cell = Cell::new(vec![1, 2, 3]);
 | 场景 | 推荐 |
 |:---|:---|
 | `T: Copy`，简单值 | `Cell<T>` |
-| `T` 任意，需要引用 | `RefCell<T>` |
+| `T` 任意，需要引用（Reference） | `RefCell<T>` |
 | 多线程 | `Mutex<T>` / `RwLock<T>` / 原子类型 |
 
 **知识点**：`Cell` 是内部可变性的最低开销实现，但仅限于 `Copy` 类型。理解 `Cell` 与 `RefCell` 的权衡是高效 Rust 代码的关键。[→ 内存管理详解](03_memory_management.md)

@@ -662,7 +662,7 @@ fn init() -> i32 {
 }
 ```
 
-> **修正**: Linux 内核模块使用 `#![no_std]`，标准库（`std`）不可用，只有核心库（`core`）和分配库（`alloc`）。
+> **修正**: Linux 内核模块（Module）使用 `#![no_std]`，标准库（`std`）不可用，只有核心库（`core`）和分配库（`alloc`）。
 > `Vec`、`String`、`Box` 来自 `alloc`，但要求全局分配器——内核中的全局分配器是 `kmalloc`/`kfree` 的 Rust 封装。
 > 进一步限制：内核代码不能 panic（或 panic 必须调用 `BUG()`），不能使用 `unwrap()`，必须处理所有错误路径。
 > `rust-for-linux` 项目提供 `kernel` crate，封装内核 API（`printk`、锁、工作队列、设备驱动抽象）。
@@ -868,7 +868,7 @@ fn main() {}
 
 ## 认知路径
 
-> **认知路径**: 从 Rust 核心语言特性出发，经由 **Rust for Linux ：操作系统内核中的内存安全** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **Rust for Linux ：操作系统内核中的内存安全（Memory Safety）** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
 
 ### 核心推理链
 

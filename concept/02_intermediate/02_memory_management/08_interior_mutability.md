@@ -165,7 +165,7 @@ RefCell<T> 的运行时借用规则:
 
 > **运行时（Runtime）洞察**:
 > RefCell 的**运行时（Runtime） panic**不是 UB——它是安全的、确定性的失败模式。
-> 与 C/C++ 的未定义行为不同，Rust 的运行时检查确保即使规则被违反，程序也是安全的（虽然会崩溃）。
+> 与 C/C++ 的未定义行为不同，Rust 的运行时（Runtime）检查确保即使规则被违反，程序也是安全的（虽然会崩溃）。
 > [来源: [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/concurrency.html)]
 
 ---
@@ -677,7 +677,7 @@ fn main() {
 `Cell<T>` 和 `RefCell<T>` 的核心区别是什么？
 
 - A. `Cell` 线程安全，`RefCell` 不是
-- B. `Cell` 只能存储 `Copy` 类型，`RefCell` 提供动态借用检查
+- B. `Cell` 只能存储 `Copy` 类型，`RefCell` 提供动态借用（Borrowing）检查
 - C. `Cell` 允许多个可变引用（Mutable Reference）同时存在
 
 <details>
@@ -861,11 +861,11 @@ fn main() {
 | 单线程 + 非 Copy 类型 | `RefCell<T>` | 运行时借用检查，灵活 |
 | 多线程 + 频繁读取 | `RwLock<T>` | 读并发 |
 | 多线程 + 频繁写入 | `Mutex<T>` | 简单可靠 |
-| 多线程 + 原子操作 | `AtomicXxx` | 最高性能 |
+| 多线程 + 原子操作（Atomic Operations） | `AtomicXxx` | 最高性能 |
 | 不需要内部可变性 | `&mut T` | 编译时保证 |
 
 ### 典型组合模式
 
 - `Rc<RefCell<T>>`：单线程共享可变图/树结构。
 - `Arc<Mutex<T>>` / `Arc<RwLock<T>>`：多线程共享状态。
-- `Weak<T>`：打破 `Rc`/`Arc` 循环引用，常用于缓存键或观察者模式。
+- `Weak<T>`：打破 `Rc`/`Arc` 循环引用（Reference），常用于缓存键或观察者模式。

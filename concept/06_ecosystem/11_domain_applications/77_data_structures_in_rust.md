@@ -76,7 +76,7 @@ fn list_demo() {
 
 ## 3. 树结构
 
-- **二叉搜索树（BST）**：可用 `Box<Node>` 自引用实现，但 Rust 中更常用标准库的平衡树 `BTreeMap`/`BTreeSet`。
+- **二叉搜索树（BST）**：可用 `Box<Node>` 自引用（Reference）实现，但 Rust 中更常用标准库的平衡树 `BTreeMap`/`BTreeSet`。
 - **B 树**：`std::collections::BTreeMap` 和 `BTreeSet` 基于 B 树实现，支持有序遍历和范围查询。
 
 ```rust
@@ -233,12 +233,12 @@ flowchart TD
 
 ## 10. 所有权与数据结构设计
 
-Rust 的所有权模型直接影响数据结构实现：
+Rust 的所有权（Ownership）模型直接影响数据结构实现：
 
 - **唯一所有权**：树形结构用 `Box<Node>` 即可表达父子关系。
 - **共享可变图**：需要 `Rc<RefCell<T>>` 或 Arena + index。
 - **并发共享**：使用 `Arc<Mutex<T>>` 或并发集合如 `DashMap`。
-- **零拷贝切片**：利用 `&[T]` 和 `Vec` 的 `drain`/`split_off` 避免克隆。
+- **零拷贝切片（Slice）**：利用 `&[T]` 和 `Vec` 的 `drain`/`split_off` 避免克隆。
 
 ## 11. 最佳实践
 
@@ -268,5 +268,5 @@ Rust 的所有权模型直接影响数据结构实现：
 | 定理 | 前提 | 结论 |
 |:---|:---|:---|
 | 合适结构 ⟹ 算法效率 | 根据访问模式选择 | 时间/空间复杂度最优 |
-| 所有权清晰 ⟹ 更少 bug | Rust 借用规则约束 | 避免悬垂与数据竞争 |
-| 缓存友好布局 ⟹ 吞吐提升 | 控制结构体字段顺序 | 减少缓存未命中 |
+| 所有权清晰 ⟹ 更少 bug | Rust 借用（Borrowing）规则约束 | 避免悬垂与数据竞争 |
+| 缓存友好布局 ⟹ 吞吐提升 | 控制结构体（Struct）字段顺序 | 减少缓存未命中 |

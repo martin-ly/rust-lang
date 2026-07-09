@@ -13,7 +13,7 @@
 # Rust 进程监控与诊断
 
 > **权威页地位**：本页为 Rust 进程监控与诊断概念的 canonical 解释来源。
-> **L2 向下引用**: 进程监控实现建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
+> **L2 向下引用（Reference）**: 进程监控实现建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
 
 ## 1. 概念定义
 
@@ -195,7 +195,7 @@ async fn traced_command(program: &str, args: &[&str]) -> std::io::Result<()> {
 | :--- | :--- | :--- |
 | CPU | 80% 持续 60s | 记录 + 告警 |
 | 内存 | 500MB | 触发优雅终止 |
-| 运行时长 | 超过最大允许时间 | 强制 kill |
+| 运行时（Runtime）长 | 超过最大允许时间 | 强制 kill |
 | 退出码非 0 | 连续 3 次 | 指数退避重启 |
 
 ## 6. 诊断决策流程
@@ -217,11 +217,11 @@ flowchart TD
 - 监控文件描述符数量，防止泄漏。
 - 对监控数据设置采样间隔，避免高频轮询带来的开销。
 - 将监控事件持久化到日志或时序数据库，便于回溯。
-- 在异步运行时中优先使用 `tokio::process` + `tokio::time::interval` 做轮询。
+- 在异步（Async）运行时中优先使用 `tokio::process` + `tokio::time::interval` 做轮询。
 
 ## 8. 相关概念
 
-- [进程模型与生命周期](01_process_model_and_lifecycle.md)
+- [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [高级进程管理](02_advanced_process_management.md)
 - [异步进程管理](03_async_process_management.md)
 - [IPC 机制](05_ipc_mechanisms.md)

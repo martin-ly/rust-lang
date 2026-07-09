@@ -31,12 +31,12 @@
 
 ## 一、功能动机：为什么需要精确生命周期捕获？
 
-在 Rust 2021 Edition 及更早的版本中，`impl Trait` 返回类型会**隐式捕获所有输入生命周期**。即使返回的实际值只依赖部分参数的生命周期，编译器也会保守地将所有输入 lifetime 绑定到返回类型上。这种过度捕获（over-capture）导致两种实际问题：
+在 Rust 2021 Edition 及更早的版本中，`impl Trait` 返回类型会**隐式捕获所有输入生命周期（Lifetimes）**。即使返回的实际值只依赖部分参数的生命周期，编译器也会保守地将所有输入 lifetime 绑定到返回类型上。这种过度捕获（over-capture）导致两种实际问题：
 
 1. **API 表达能力受限**：合法代码因 lifetime 约束过强而编译失败；
-2. **不必要的堆分配**：开发者被迫用 `Box<dyn Trait>` 或 `Rc` 来“擦除” lifetime，牺牲零成本抽象。
+2. **不必要的堆分配**：开发者被迫用 `Box<dyn Trait>` 或 `Rc` 来“擦除” lifetime，牺牲零成本抽象（Zero-Cost Abstraction）。
 
-Rust 2024 Edition 引入**精确捕获（precise capturing）**规则，核心语法为 `use<'lt>`，允许函数显式声明返回类型只捕获哪些 lifetime。这一改动不改变类型安全——它只是让类型系统接受更多合法程序。
+Rust 2024 Edition 引入**精确捕获（precise capturing）**规则，核心语法为 `use<'lt>`，允许函数显式声明返回类型只捕获哪些 lifetime。这一改动不改变类型安全——它只是让类型系统（Type System）接受更多合法程序。
 
 > **版本说明**：
 >
@@ -113,8 +113,8 @@ async fn bar<'a>(x: &'a str, _y: &str) -> impl std::future::Future<Output = ()> 
 
 1. **升级到 Rust 2024 Edition**：新代码默认获得更精确的捕获规则；
 2. **显式标注 `use<'lt>`**：在跨 edition 的库中，显式标注可以提高可读性并避免意外捕获；
-3. **避免滥用**：`use<>` 仅影响 lifetime / 类型参数的捕获，不意味着可以返回悬垂引用；
-4. **测试边界**：升级 edition 后，重点测试涉及 `impl Trait` 返回类型和跨作用域借用的代码。
+3. **避免滥用**：`use<>` 仅影响 lifetime / 类型参数的捕获，不意味着可以返回悬垂引用（Reference）；
+4. **测试边界**：升级 edition 后，重点测试涉及 `impl Trait` 返回类型和跨作用域借用（Borrowing）的代码。
 
 ---
 

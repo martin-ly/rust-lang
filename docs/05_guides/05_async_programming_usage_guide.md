@@ -13,6 +13,7 @@
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]
+> **权威来源**: [concept/03_advanced/01_async/02_async.md](../../concept/03_advanced/01_async/02_async.md)
 
 ## 📑 目录 {#目录}
 >

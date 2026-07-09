@@ -355,7 +355,7 @@ TypeScript 核心特征:
   > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 ```
 
-> **认知功能**: TypeScript 的错误处理（Error Handling）依赖**约定和 linter**，Rust 的错误处理是**类型系统的一部分**——调用 `?` 的函数必须返回 Result，形成编译期传播链。
+> **认知功能**: TypeScript 的错误处理（Error Handling）依赖**约定和 linter**，Rust 的错误处理是**类型系统（Type System）的一部分**——调用 `?` 的函数必须返回 Result，形成编译期传播链。
 > [来源: [TRPL — The ? Operator](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)]
 
 ---
@@ -814,7 +814,7 @@ fn main() {
 }
 ```
 
-> **修正**: TypeScript 的 `any` 是**类型系统的逃生舱**：禁用所有类型检查，允许任意操作。Rust 无 `any` 等价物——最接近的是 `dyn Any`（运行时类型信息，需向下转型）和 `unsafe`（绕过编译器检查）。`any` 在 TypeScript 中是便利工具（快速原型、迁移遗留代码），但也是 bug 来源（类型安全丧失）。Rust 的设计拒绝 `any`：即使是 `dyn Any`，向下转型也是类型安全的（失败时返回 `None`），不会导致未定义行为。`unsafe` 是更低级的逃逸，但标记了人工审查边界。这与 Python 的动态类型（无 static type，运行时检查）或 C 的 `void*`（无类型，任意转换）不同——Rust 在类型安全上不提供"方便但危险"的捷径。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)] · [来源: [TypeScript any Type](https://www.typescriptlang.org/docs/handbook/basic-types.html#any)]
+> **修正**: TypeScript 的 `any` 是**类型系统的逃生舱**：禁用所有类型检查，允许任意操作。Rust 无 `any` 等价物——最接近的是 `dyn Any`（运行时（Runtime）类型信息，需向下转型）和 `unsafe`（绕过编译器检查）。`any` 在 TypeScript 中是便利工具（快速原型、迁移遗留代码），但也是 bug 来源（类型安全丧失）。Rust 的设计拒绝 `any`：即使是 `dyn Any`，向下转型也是类型安全的（失败时返回 `None`），不会导致未定义行为。`unsafe` 是更低级的逃逸，但标记了人工审查边界。这与 Python 的动态类型（无 static type，运行时检查）或 C 的 `void*`（无类型，任意转换）不同——Rust 在类型安全上不提供"方便但危险"的捷径。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)] · [来源: [TypeScript any Type](https://www.typescriptlang.org/docs/handbook/basic-types.html#any)]
 
 ### 10.3 边界测试：TypeScript 的结构性类型与 Rust 的名义类型（编译错误）
 

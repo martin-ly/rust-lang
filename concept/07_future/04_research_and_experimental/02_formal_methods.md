@@ -317,7 +317,7 @@ flowchart LR
 | **局限性** | 不保证功能正确性、不捕获逻辑错误 |
 | **典型工具** | `cargo check`、`cargo clippy` |
 
-Rust 的借用（Borrowing）检查器在类型检查阶段就排除了整类运行时错误（use-after-free、double-free、数据竞争），这是其他系统语言需要额外工具才能实现的。
+Rust 的借用（Borrowing）检查器在类型检查阶段就排除了整类运行时（Runtime）错误（use-after-free、double-free、数据竞争），这是其他系统语言需要额外工具才能实现的。
 
 ### 3.2 阶段二：契约检查（Contract Checking）
 
@@ -365,7 +365,7 @@ Rust 的借用（Borrowing）检查器在类型检查阶段就排除了整类运
 ## 四、Rust 的独特优势：类型即证明
 >
 
-Rust 的类型系统不仅是工程约束，更是一套**嵌入式分离逻辑（Embedded Separation Logic）**。编译器在类型检查的同时，实际上在自动构造一个关于内存和资源管理的逻辑证明。
+Rust 的类型系统（Type System）不仅是工程约束，更是一套**嵌入式分离逻辑（Embedded Separation Logic）**。编译器在类型检查的同时，实际上在自动构造一个关于内存和资源管理的逻辑证明。
 
 ### 4.1 所有权 = 分离合取 `P * Q`
 
@@ -532,7 +532,7 @@ Rust 源码 → 类型检查 → 自动分离逻辑翻译 → Iris 证明义务 
 - **模块（Module）化证明**：每个函数的证明独立于实现细节，只依赖其类型签名
 - **不安全代码支持**：对 `unsafe` 块，RefinedRust 允许程序员提供轻量级契约，工具自动验证其与周围 safe 代码的交互
 
-**示例**：以下函数无需任何额外标注即可自动验证内存安全：
+**示例**：以下函数无需任何额外标注即可自动验证内存安全（Memory Safety）：
 
 ```rust
 fn swap<T>(x: &mut T, y: &mut T) {
@@ -936,7 +936,7 @@ P 是微软和 AWS 合作开发的事件驱动状态机语言：
 - **编程模型**：将系统建模为状态机，通过事件触发状态转移
 - **模块（Module）组合**：支持状态机的层次化组合，适合微服务架构
 - **P Checker**：系统地探索状态空间，检测死锁、状态不可达和断言失败
-- **Rust 后端**：P 编译器可生成 Rust 实现骨架，保持规约与实现的一致性
+- **Rust 后端**：P 编译器可生成 Rust 实现骨架，保持规约与实现的一致性（Coherence）
 
 ### 8.3 PObserve（运行时对齐）
 >
@@ -1309,7 +1309,7 @@ graph TD
 | Prusti | 分离逻辑 (Viper) | `04_formal/04_rustbelt.md` | — | 研究 |
 | TLA+ | 时序逻辑 | —（系统级） | — | 成熟 |
 
-> **映射说明**: L4 RustBelt 提供了 Rust 核心类型系统的元理论保证；L3 Unsafe 是形式化验证工具最常应用的边界。Miri 同时服务于 L3（unsafe 开发）和 L4（borrow 模型验证）。Verus 的所有权逻辑直接继承自 L4 形式化成果。
+> **映射说明**: L4 RustBelt 提供了 Rust 核心类型系统的元理论保证；L3 Unsafe 是形式化验证工具最常应用的边界。Miri 同时服务于 L3（unsafe 开发）和 L4（borrow 模型验证）。Verus 的所有权（Ownership）逻辑直接继承自 L4 形式化成果。
 
 ---
 

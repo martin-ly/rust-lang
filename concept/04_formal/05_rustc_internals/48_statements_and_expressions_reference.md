@@ -1,7 +1,7 @@
 # 语句与表达式参考（Statements and Expressions Reference）
 
 > **EN**: Statements and Expressions Reference
-> **Summary**: Rust Reference 对语句（let、item、expression statement）与全部表达式形式（字面量、路径、块、运算符、数组、元组、结构体、调用、方法调用、字段访问、闭包、循环、范围、if、match、return、await 等）的规范定义。 Normative definitions of Rust statements and expressions: literals, paths, blocks, operators, arrays, tuples, structs, calls, method calls, field access, closures, loops, ranges, if, match, return, await, and more.
+> **Summary**: Rust Reference 对语句（let、item、expression statement）与全部表达式形式（字面量、路径、块、运算符、数组、元组、结构体（Struct）、调用、方法调用、字段访问、闭包、循环、范围、if、match、return、await 等）的规范定义。 Normative definitions of Rust statements and expressions: literals, paths, blocks, operators, arrays, tuples, structs, calls, method calls, field access, closures, loops, ranges, if, match, return, await, and more.
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -32,9 +32,9 @@
 
 ## 反命题决策树
 
-> **反命题 1**: "语句与表达式参考在所有场景下都适用" ⟹ 不成立。`unsafe` 块、常量上下文和异步上下文对某些表达式有特殊限制。
-> **反命题 2**: "忽略语句与表达式参考的细节也能写出正确代码" ⟹ 不成立。临时值生命周期、move 语义和常量求值限制都源于表达式语义。
-> **反命题 3**: "其他语言对语句与表达式的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的块表达式、match 表达式和所有权移动语义具有语言特有形态。
+> **反命题 1**: "语句与表达式参考在所有场景下都适用" ⟹ 不成立。`unsafe` 块、常量上下文和异步（Async）上下文对某些表达式有特殊限制。
+> **反命题 2**: "忽略语句与表达式参考的细节也能写出正确代码" ⟹ 不成立。临时值生命周期（Lifetimes）、move 语义和常量求值限制都源于表达式语义。
+> **反命题 3**: "其他语言对语句与表达式的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的块表达式、match 表达式和所有权（Ownership）移动语义具有语言特有形态。
 
 ## 一、语句
 
@@ -88,11 +88,11 @@ Rust 表达式按语义可分为：
 | 调用 | `f(a, b)` |
 | 方法调用 | `obj.method(a)` |
 | 字段访问 | `s.field` |
-| 闭包 | `\|x\| x + 1` |
+| 闭包（Closures） | `\|x\| x + 1` |
 | 循环 | `loop`, `while`, `while let`, `for` |
 | 范围 | `1..5`, `1..=5` |
 | `if` / `if let` | 条件分支 |
-| `match` | 模式匹配 |
+| `match` | 模式匹配（Pattern Matching） |
 | `return` | 从函数返回 |
 | `await` | 挂起 async 求值 |
 | `_` | 下划线表达式，显式丢弃值 |
@@ -136,7 +136,7 @@ let x = unsafe { *raw_ptr };
 
 在 `unsafe` 块内允许：
 
-- 解引用裸指针
+- 解引用（Reference）裸指针
 - 调用 `unsafe` 函数
 - 访问 `union` 字段
 - 访问可变 `static`

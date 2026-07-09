@@ -295,5 +295,5 @@ def check_theorem_tier(file_path):
 <details>
 <summary>✅ 答案与解析</summary>
 
-精确到章节便于读者快速定位相关内容，避免因文档庞大而找不到对应信息，也便于后续审核和更新引用。
+精确到章节便于读者快速定位相关内容，避免因文档庞大而找不到对应信息，也便于后续审核和更新引用（Reference）。
 </details>

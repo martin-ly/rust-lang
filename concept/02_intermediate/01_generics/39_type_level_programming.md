@@ -25,7 +25,7 @@
 > **文档类型**: Tier 4 - 高级主题
 > **目标读者**: 专家级开发者
 > **预计学习时间**: 6-8 小时
-> **前置知识**: 深厚的类型系统理解、编译时计算、形式逻辑
+> **前置知识**: 深厚的类型系统（Type System）理解、编译时计算、形式逻辑
 
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.96.1+
@@ -80,7 +80,7 @@
 
 ## 🎯 什么是类型级编程？
 
-类型级编程是在类型系统层面进行计算和推理，所有计算在编译时完成，运行时零开销。
+类型级编程是在类型系统层面进行计算和推理，所有计算在编译时完成，运行时（Runtime）零开销。
 
 **核心概念**:
 
@@ -592,7 +592,7 @@ impl<T, const N: usize> Array<T, N> {
 
 - [`frunk`](https://crates.io/crates/frunk) - HList 和类型级工具
 - [`typenum`](https://crates.io/crates/typenum) - 类型级数值
-- [`generic-array`](https://crates.io/crates/generic-array) - 泛型长度数组
+- [`generic-array`](https://crates.io/crates/generic-array) - 泛型（Generics）长度数组
 
 ---
 

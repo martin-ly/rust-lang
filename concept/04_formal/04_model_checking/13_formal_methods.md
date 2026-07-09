@@ -56,10 +56,10 @@
   - [十、边界测试：形式化方法的编译错误](#十边界测试形式化方法的编译错误)
     - [10.1 边界测试：`unsafe` 块的形式化验证边界（编译错误）](#101-边界测试unsafe-块的形式化验证边界编译错误)
     - [10.2 边界测试：循环不变量与编译期验证（逻辑错误）](#102-边界测试循环不变量与编译期验证逻辑错误)
-    - [10.3 边界测试：`contracts` crate 的运行时断言开销（逻辑错误）](#103-边界测试contracts-crate-的运行时断言开销逻辑错误)
+    - [10.3 边界测试：`contracts` crate 的运行时（Runtime）断言开销（逻辑错误）](#103-边界测试contracts-crate-的运行时断言开销逻辑错误)
     - [10.4 边界测试：Kani 的循环展开限制（验证失败）](#104-边界测试kani-的循环展开限制验证失败)
     - [10.5 边界测试：形式化验证的时间复杂度与路径爆炸（验证失败/超时）](#105-边界测试形式化验证的时间复杂度与路径爆炸验证失败超时)
-    - [10.8 边界测试：不可变借用与可变借用的冲突](#108-边界测试不可变借用与可变借用的冲突)
+    - [10.8 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突](#108-边界测试不可变借用与可变借用的冲突)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：形式化方法（Formal Methods）在 Rust 中的主要应用形式有哪些？（理解层）](#测验-1形式化方法formal-methods在-rust-中的主要应用形式有哪些理解层)
     - [测验 2：Kani 与 Miri 在验证目标上有什么区别？（理解层）](#测验-2kani-与-miri-在验证目标上有什么区别理解层)
@@ -515,7 +515,7 @@ fn main() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md) · 2026-07-09 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用 [P2-Q3 形式化工具交叉引用]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md) · 2026-07-09 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用（Reference） [P2-Q3 形式化工具交叉引用]
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)

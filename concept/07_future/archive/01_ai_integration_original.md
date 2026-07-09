@@ -427,7 +427,7 @@ jobs:
 | 级别 | 触发条件 | 示例 |
 |:---|:---|:---|
 | 🔴 Critical | `unsafe` 块新增且无 SAFETY 注释 | `unsafe { ptr::read(...) }` |
-| 🟠 Warning | 生命周期标注可简化 | 显式 `'a` 可被省略 |
+| 🟠 Warning | 生命周期（Lifetimes）标注可简化 | 显式 `'a` 可被省略 |
 | 🟡 Suggestion | 可替换为更高效的 API | `Vec::push` 循环 → `extend_from_slice` |
 | 🟢 Style | 不符合团队编码规范 | 缺少文档注释、命名不规范 |
 
@@ -845,7 +845,7 @@ graph LR
 > [来源: [Rust ML]]
 > **功能定位**：将人类需求、AI生成、Rust编译、形式验证和运行时（Runtime）监控串联为完整流水线。
 > **使用建议**：根据开发阶段选择工具层——Copilot加速生成，Kani/Creusot保障正确性。
-> **关键洞察**：运行时反馈回路使形式验证结果能够回流至架构设计，实现持续对齐。[来源: 💡 原创分析]
+> **关键洞察**：运行时（Runtime）反馈回路使形式验证结果能够回流至架构设计，实现持续对齐。[来源: 💡 原创分析]
 
 ---
 
@@ -902,7 +902,7 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 |:---|:---|:---|
 | Neuro-Symbolic Synthesis | 神经网络 + 符号推理（类型检查、SMT）结合 | [MIT CSAIL] |
 | Proof-Carrying Code from LLM | LLM 同时生成代码和形式化证明 | [INRIA/MSR] |
-| Rust-Specific Fine-Tuning | 在 Rust 代码库上继续预训练，强化所有权理解 | [HuggingFace StarCoder2] |
+| Rust-Specific Fine-Tuning | 在 Rust 代码库上继续预训练，强化所有权（Ownership）理解 | [HuggingFace StarCoder2] |
 
 ---
 
@@ -1157,7 +1157,7 @@ graph TD
 
 > **认知功能**: 警示AI生成Rust代码的潜在风险，打破"编译通过即安全"的迷思。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
-> **功能定位**：明确类型系统只能捕获语法错误，无法拦截逻辑错误和unsafe（Unsafe）误用。
+> **功能定位**：明确类型系统（Type System）只能捕获语法错误，无法拦截逻辑错误和unsafe（Unsafe）误用。
 > **使用建议**：对AI生成的unsafe（Unsafe）块和复杂生命周期标注必须辅以Miri和人工审计。
 > **关键洞察**：编译器是必要非充分条件——形式化验证与人工审查构成最终安全网。[来源: 💡 原创分析]
 

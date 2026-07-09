@@ -817,7 +817,7 @@ fn main() {
 
 ### 无锁数据结构
 
-无锁（lock-free）数据结构通过原子操作（`AtomicPtr`、`AtomicUsize`）而非互斥锁实现并发访问，典型代表为 **Michael-Scott 无锁队列**。关键问题包括：
+无锁（lock-free）数据结构通过原子操作（Atomic Operations）（`AtomicPtr`、`AtomicUsize`）而非互斥锁实现并发访问，典型代表为 **Michael-Scott 无锁队列**。关键问题包括：
 
 - **ABA 问题**：CAS 检查通过但中间状态被修改；解决方案包括带标签指针（tagged pointer）和 Hazard Pointer。
 - **内存序**：`Acquire`/`Release` 配对保证 happens-before 关系，`SeqCst` 提供全局顺序。
@@ -1224,7 +1224,7 @@ fn transfer(from: &Account, to: &Account, amount: i32) {
 
 | 模式 | 最佳场景 | 不适用 | 关键 crate |
 | :--- | :--- | :--- | :--- |
-| 异步迭代器 | 流式网络 I/O、事件流 | CPU 密集计算 | `futures`、`tokio::sync` |
+| 异步迭代器（Iterator） | 流式网络 I/O、事件流 | CPU 密集计算 | `futures`、`tokio::sync` |
 | 工作窃取 | CPU 密集并行计算 | I/O 等待型任务 | `rayon` |
 | 分治算法 | 排序、搜索、递归分解 | 无法分解的问题 | `rayon` |
 | 流水线 | 顺序阶段处理、数据转换 | 随机访问模式 | `crossbeam::channel` |
@@ -1786,7 +1786,7 @@ impl<M: Send + Clone + 'static> RouterActor<M> {
 
 ### 1. 类型安全通道
 
-利用Rust 1.89的改进类型系统：
+利用Rust 1.89的改进类型系统（Type System）：
 
 ```rust,ignore
 use std::marker::PhantomData;

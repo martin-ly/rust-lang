@@ -388,7 +388,7 @@ fn produce() -> T {}   // ∅ → Own(T)      （资源被产生）
 > 定理 T2（无 Double-Free）⟹
 > 定理 T3（无 Use-After-Free）⟹
 > 定理 T4（所有权唯一性 ⟹ mutable borrow 唯一性）⟹
-> 定理 T5（mutable borrow 唯一性 ⟹ 无数据竞争）⟹ 推论 C1（无所有权 ⟹ 无 Drop 责任）⟹ 推论 C2（无所有权 ⟹ 裸指针危险）⟹ 推论 C3（Safe Rust 内存安全完备性）
+> 定理 T5（mutable borrow 唯一性 ⟹ 无数据竞争）⟹ 推论 C1（无所有权 ⟹ 无 Drop 责任）⟹ 推论 C2（无所有权 ⟹ 裸指针危险）⟹ 推论 C3（Safe Rust 内存安全（Memory Safety）完备性）
 
 | 定理/引理/推论 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型错误码 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -1094,7 +1094,7 @@ fn main() {
 ```
 
 > **[来源: [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)]** `Pin<T>` 的位置不变性保证自引用结构内部指针的有效性，所有权关系不变。 ✅
-> **相关链接**：自引用结构的借用细节见 [02_borrowing.md](02_borrowing.md) §补充章节：Pin<&mut T>；异步状态机中的 Pin 用法见 [c06_async README](../../../crates/c06_async/README.md)。
+> **相关链接**：自引用结构的借用细节见 [02_borrowing.md](02_borrowing.md) §补充章节：Pin<&mut T>；异步（Async）状态机中的 Pin 用法见 [c06_async README](../../../crates/c06_async/README.md)。
 
 ---
 
@@ -1668,7 +1668,7 @@ fn greet_str(s: &str) { }
 > **Brown University Interactive Book — Understanding Ownership**
 > [https://rust-book.cs.brown.edu/ch04-00-understanding-ownership.html](https://rust-book.cs.brown.edu/ch04-00-understanding-ownership.html)
 >
-> Brown 大学交互式 Rust 教材的第 4 章（含 [4.1 What is Ownership?](https://rust-book.cs.brown.edu/ch04-01-what-is-ownership.html)、[4.2 References and Borrowing](https://rust-book.cs.brown.edu/ch04-02-references-and-borrowing.html)、[4.3 The Slice Type](https://rust-book.cs.brown.edu/ch04-03-slices.html) 与 [Fixing Ownership Errors](https://rust-book.cs.brown.edu/ch04-03-fixing-ownership-errors.html)）通过 **Aquascope** 可视化工具展示所有权转移、借用生命周期与常见编译错误的修复过程。该教学设计基于 Will Crichton、Manish Goregaokar、Daniel Patterson 等人发表于 OOPSLA 2023 的研究 *A Grounded Conceptual Model for Ownership Types in Rust*（DOI: [10.1145/3586030](https://doi.org/10.1145/3586030)），该研究从 Stack Overflow 上的真实问题中提炼出 Rust 所有权类型系统的概念模型。
+> Brown 大学交互式 Rust 教材的第 4 章（含 [4.1 What is Ownership?](https://rust-book.cs.brown.edu/ch04-01-what-is-ownership.html)、[4.2 References and Borrowing](https://rust-book.cs.brown.edu/ch04-02-references-and-borrowing.html)、[4.3 The Slice Type](https://rust-book.cs.brown.edu/ch04-03-slices.html) 与 [Fixing Ownership Errors](https://rust-book.cs.brown.edu/ch04-03-fixing-ownership-errors.html)）通过 **Aquascope** 可视化工具展示所有权转移、借用生命周期与常见编译错误的修复过程。该教学设计基于 Will Crichton、Manish Goregaokar、Daniel Patterson 等人发表于 OOPSLA 2023 的研究 *A Grounded Conceptual Model for Ownership Types in Rust*（DOI: [10.1145/3586030](https://doi.org/10.1145/3586030)），该研究从 Stack Overflow 上的真实问题中提炼出 Rust 所有权类型系统（Type System）的概念模型。
 >
 > **与本页权威解释的关系**：
 >

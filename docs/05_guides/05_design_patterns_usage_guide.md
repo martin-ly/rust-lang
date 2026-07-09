@@ -13,6 +13,7 @@
 >
 > **受众**: [进阶]
 > **内容分级**: [专家级]
+> **权威来源**: [concept/06_ecosystem/03_design_patterns/02_patterns.md](../../concept/06_ecosystem/03_design_patterns/02_patterns.md)
 
 ## 📑 目录 {#目录}
 >

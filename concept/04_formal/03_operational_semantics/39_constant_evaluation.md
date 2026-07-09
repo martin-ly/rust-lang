@@ -135,7 +135,7 @@ let arr = [0; const { 1 + 2 }]; // 长度为 3
 
 ## 六、Const 泛型
 
-const 泛型参数允许在类型系统中使用编译期常量：
+const 泛型（Generics）参数允许在类型系统（Type System）中使用编译期常量：
 
 ```rust
 struct Buffer<const N: usize> {
@@ -170,7 +170,7 @@ const fn read_raw(ptr: *const i32) -> i32 {
 | 错误信息 | 原因 | 解决 |
 |:---|:---|:---|
 | `cannot call non-const fn` | 调用了非 const 函数 | 使用 const fn 或替换实现 |
-| `mutable references are not allowed` | const 上下文不允许可变引用 | 重构算法，避免可变状态 |
+| `mutable references are not allowed` | const 上下文不允许可变引用（Mutable Reference） | 重构算法，避免可变状态 |
 | `evaluation of constant value failed` | 运行期行为在编译期失败 | 检查越界、溢出、panic |
 
 ---

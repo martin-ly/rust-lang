@@ -246,7 +246,7 @@ L4 → L1 映射中的信息损失:
 
 | 概念 | 理论层 (Why) | 模型层 (What) | 实践层 (How) | 对应上层 |
 |:---|:---|:---|:---|:---|
-| **Linear Logic** | 资源敏感推理的元理论 | 线性/仿射证明系统 | Girard 的sequent calculus | L1 所有权语义 |
+| **Linear Logic** | 资源敏感推理的元理论 | 线性/仿射证明系统 | Girard 的sequent calculus | L1 所有权（Ownership）语义 |
 | **Type Theory** | 类型即命题 (Curry-Howard) | HM / System F / 代数类型 | 类型规则、推断算法 | L1-L2 类型系统（Type System） |
 | **Ownership Formal** | 所有权操作语义 | COR、区域约束图 | 借用（Borrowing）检查器算法 | L1 编译器核心 |
 | **RustBelt** | 程序逻辑验证 | Iris 分离逻辑、Protocol | Kani/Creusot/Verus | L3 并发/unsafe 验证 |

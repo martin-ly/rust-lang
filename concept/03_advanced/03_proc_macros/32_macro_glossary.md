@@ -4,8 +4,8 @@
 > **内容分级**: [参考级]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
-> **双维定位**: S×Mem — 宏术语结构化索引
-> **前置依赖**: [过程宏](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)
+> **双维定位**: S×Mem — 宏（Macro）术语结构化索引
+> **前置依赖**: [过程宏（Procedural Macro）](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)
 > **后置概念**: [宏卫生性](35_macro_hygiene.md) · [syn/quote 参考](34_syn_quote_reference.md)
 > **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency
 >
@@ -27,7 +27,7 @@
     - [Macro (宏)](#macro-宏)
     - [Declarative Macro (声明宏)](#declarative-macro-声明宏)
     - [Procedural Macro (过程宏)](#procedural-macro-过程宏)
-  - [🔧 声明宏术语](#-声明宏术语)
+  - [🔧 声明宏（Declarative Macro）术语](#-声明宏术语)
     - [macro\_rules](#macro_rules)
     - [Pattern Matching (模式匹配)](#pattern-matching-模式匹配)
     - [Repetition (重复)](#repetition-重复)
@@ -78,14 +78,14 @@
 **特点**:
 
 - 编译时展开
-- 零运行时开销
+- 零运行时（Runtime）开销
 - 类型安全
 
 ---
 
 ### Declarative Macro (声明宏)
 
-使用 `macro_rules!` 定义的模式匹配宏。
+使用 `macro_rules!` 定义的模式匹配（Pattern Matching）宏。
 
 ```rust
 macro_rules! vec_of_strings {
@@ -150,7 +150,7 @@ macro_rules! say_hello {
 - `$name:pat` - 模式
 - `$name:stmt` - 语句
 - `$name:block` - 代码块
-- `$name:item` - 项（函数、结构体等）
+- `$name:item` - 项（函数、结构体（Struct）等）
 - `$name:tt` - 单个 token 树
 
 ```rust
@@ -312,7 +312,7 @@ pub fn my_trait_derive(input: TokenStream) -> TokenStream {
 
 - 解析 Rust 语法
 - 提供 AST 数据结构
-- 错误处理
+- 错误处理（Error Handling）
 
 ---
 
@@ -383,7 +383,7 @@ let result = using_a!(a + a); // 26，使用外部 a
 **保证**:
 
 - 宏内定义的标识符不泄露
-- 宏外标识符不被捕获（除非显式引用）
+- 宏外标识符不被捕获（除非显式引用（Reference））
 
 ---
 
@@ -498,7 +498,7 @@ fn ui_tests() {
 
 - 代码生成
 - 编译时计算
-- 零成本抽象
+- 零成本抽象（Zero-Cost Abstraction）
 
 ---
 

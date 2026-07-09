@@ -335,7 +335,7 @@ cargo check -W rust-2024-compatibility
 | **Never type** | `!` fallback 规则调整 | never type 向目标类型的强制转换更严格 | 自动，极少数需显式类型标注 |
 | **匹配** | Match ergonomics reservations | 禁止某些易混淆的 `&` + `ref` 模式组合 | 编译器报错后手动修复 |
 | **临时值** | `if let` 临时值作用域变化 | `if let Some(x) = expr()` 中临时值作用域调整 | 自动，通常无感知 |
-| **临时值** | 尾部表达式临时值作用域变化 | 块尾部表达式的临时值生命周期延长 | 自动 |
+| **临时值** | 尾部表达式临时值作用域变化 | 块尾部表达式的临时值生命周期（Lifetimes）延长 | 自动 |
 | **宏（Macro）** | `:expr` 片段指定符匹配 `const` 和 `_` | 宏更灵活 | 自动 |
 | **宏（Macro）** | 缺失片段指定符成为硬错误 | `($x)` → `($x:tt)` 必须补全 | `cargo fix` |
 | **宏（Macro）** | `macro_rules!` 支持 `pub` / `pub(crate)` | 宏可见性可控 | 可选显式声明 |
@@ -585,7 +585,7 @@ struct Array<T, const N: usize> {
 **已稳定（Rust 1.51+）**：
 
 - 整数、布尔、字符常量作为泛型（Generics）参数
-- 简单的 const 泛型表达式（`N + 1`）
+- 简单的 const 泛型（Generics）表达式（`N + 1`）
 
 **演进中**：
 
@@ -718,7 +718,7 @@ fn make_iter() -> MyIterator {
 
 - **隐藏实现细节**：类型别名不暴露具体集合类型
 - **递归类型**：`type ListNode = impl Future<Output = ListNode>`（需配合其他特性）
-- **模块边界**：crate 内部使用具体类型，对外暴露 `impl Trait` 别名
+- **模块（Module）边界**：crate 内部使用具体类型，对外暴露 `impl Trait` 别名
 
 **状态**：`type_alias_impl_trait` 已在 nightly 可用，预计 2025-2026 稳定化。
 
@@ -1055,7 +1055,7 @@ graph TD
 | **V4** | RFC 流程 | 语言变更经过社区审查 | RFC 完整 + 实现 + 稳定化报告 | 流程绕过；紧急补丁 | 设计缺陷永久化 |
 | **V5** | Deprecation 周期 | 废弃特性有迁移窗口 | `#[deprecated]` 标注 | 跳过 deprecation 直接移除 | 生态断裂 |
 
-> **⟹ 推理链**: V1-V5 构成 Rust 语言演进的**治理基础设施**。核心原则是**从不破坏现有代码**——即使引入 breaking change，也通过 Edition 机制显式隔离。这是 Rust 能从 2015 年稳定发展到今天复杂类型系统的根本前提。
+> **⟹ 推理链**: V1-V5 构成 Rust 语言演进的**治理基础设施**。核心原则是**从不破坏现有代码**——即使引入 breaking change，也通过 Edition 机制显式隔离。这是 Rust 能从 2015 年稳定发展到今天复杂类型系统（Type System）的根本前提。
 
 ---
 
@@ -1250,9 +1250,9 @@ fn fixed() {
 
 | 子目标 | 状态 | 形式模型意义 |
 | :--- | :--- | :--- |
-| **Pin Ergonomics** | 实验阶段 | `Pin<&mut T>` 的自引用场景（如异步（Async）状态机）需要显式 `unsafe` 解包；新设计旨在用类型系统自动证明"不会移动"，消除手动 `unsafe` |
+| **Pin Ergonomics** | 实验阶段 | `Pin<&mut T>` 的自引用（Reference）场景（如异步（Async）状态机）需要显式 `unsafe` 解包；新设计旨在用类型系统自动证明"不会移动"，消除手动 `unsafe` |
 | **Field Projections** | 语言实验获积极反馈 | 允许 `&mut self.field` 在更复杂的嵌套结构中自动重新借用（Borrowing），减少生命周期标注；本质是**别名分析的局部精确化**。lang team 对 Field Representing Types PR 的实验性合并反应积极，Tyler Mandry 创建了 Beyond References wiki 统筹所有相关提案（含 Alice Ryhl 的 In-place Initialization 新提案） |
-| **Reborrow Traits** | RFC 阶段 | 将重新借用规则从编译器硬编码提升为 trait 系统的一部分，使自定义智能指针（Smart Pointer）也能享受 `&mut` 的自动重借语义 |
+| **Reborrow Traits** | RFC 阶段 | 将重新借用（Borrowing）规则从编译器硬编码提升为 trait 系统的一部分，使自定义智能指针（Smart Pointer）也能享受 `&mut` 的自动重借语义 |
 
 > **关键洞察**:
 > "Beyond the `&`" 标志着 Rust 类型系统从"编译器内置规则"向"用户可扩展规则"演进。
@@ -1544,7 +1544,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 - **展示 Rust 优势**：内存安全（Memory Safety） TLS 实现，生产环境已广泛部署
 - **填补生态空白**：现代安全系统的重要基础组件
-- **RIL 独特价值**：帮助 rustls 吸引关注内存安全的组织资助
+- **RIL 独特价值**：帮助 rustls 吸引关注内存安全（Memory Safety）的组织资助
 
 **对 Rust 演进的启示**：
 

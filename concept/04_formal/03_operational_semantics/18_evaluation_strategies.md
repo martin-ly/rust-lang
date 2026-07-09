@@ -83,7 +83,7 @@
   - [四、Lambda 演算中的归约策略](#四lambda-演算中的归约策略)
     - [4.1 三种归约策略](#41-三种归约策略)
     - [4.2 Rust 的求值顺序](#42-rust-的求值顺序)
-  - [五、求值策略与类型系统的交互](#五求值策略与类型系统的交互)
+  - [五、求值策略与类型系统（Type System）的交互](#五求值策略与类型系统的交互)
     - [5.1 严格性 vs 类型系统表达能力](#51-严格性-vs-类型系统表达能力)
   - [六、反例与边界测试](#六反例与边界测试)
     - [6.1 反例：严格求值的性能陷阱](#61-反例严格求值的性能陷阱)
@@ -92,8 +92,8 @@
   - [七、跨语言求值策略对比矩阵](#七跨语言求值策略对比矩阵)
   - [八、知识来源关系](#八知识来源关系)
     - [10.3 边界测试：按值传递与 `Copy` 的交互（编译错误）](#103-边界测试按值传递与-copy-的交互编译错误)
-    - [10.4 边界测试：惰性迭代器与严格求值的混合（编译错误/逻辑错误）](#104-边界测试惰性迭代器与严格求值的混合编译错误逻辑错误)
-    - [10.5 边界测试：惰性求值与 panic 的延迟触发（运行时行为差异）](#105-边界测试惰性求值与-panic-的延迟触发运行时行为差异)
+    - [10.4 边界测试：惰性迭代器（Iterator）与严格求值的混合（编译错误/逻辑错误）](#104-边界测试惰性迭代器与严格求值的混合编译错误逻辑错误)
+    - [10.5 边界测试：惰性求值与 panic 的延迟触发（运行时（Runtime）行为差异）](#105-边界测试惰性求值与-panic-的延迟触发运行时行为差异)
     - [10.3 边界测试：按值传递与大类型的性能陷阱（编译错误/逻辑问题）](#103-边界测试按值传递与大类型的性能陷阱编译错误逻辑问题)
     - [10.3 边界测试：const fn 中的非编译期操作](#103-边界测试const-fn-中的非编译期操作)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -419,7 +419,7 @@ fn linear_move() {
 | 语言 | 默认策略 | 严格性 | 引用（Reference）传递 | 惰性机制 | 副作用管理 |
 |:---|:---|:---:|:---:|:---|:---|
 | **C** | CBV | 严格 | 指针（手动） | 无 | 无约束 |
-| **C++** | CBV | 严格 | 引用/指针 | 无（库级 `std::function`） | RAII |
+| **C++** | CBV | 严格 | 引用（Reference）/指针 | 无（库级 `std::function`） | RAII |
 | **Java** | CBR（对象）+ CBV（原始类型） | 严格 | 对象引用自动 | 无 | GC |
 | **Python** | CBR（对象）+ CBV（不可变） | 严格 | 名字绑定 | 生成器（`yield`） | GC |
 | **Haskell** | CBV-need | 非严格 | 无（纯函数） | 默认 | Monad |
@@ -436,7 +436,7 @@ fn linear_move() {
 | Normal Order 正规化定理 | [Curry & Feys 1958] · [Barendregt 1984] | ✅ | Tier 1 |
 | Rust 求值顺序 | [Rust Reference §6.2.13](https://doc.rust-lang.org/reference/introduction.html) | ✅ | Tier 1 |
 | Rust 参数传递语义 | [Rust Reference §6.2](https://doc.rust-lang.org/reference/introduction.html) | ✅ | Tier 1 |
-| Rust 线性所有权 = CBV + 线性约束 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · 原创分析 | ✅/💡 | Tier 2 |
+| Rust 线性所有权（Ownership） = CBV + 线性约束 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · 原创分析 | ✅/💡 | Tier 2 |
 | `&mut T` 编码局部可变性效果 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Moggi 1989] | ✅ | Tier 2 |
 | 跨语言对比矩阵 | [💡 原创分析] | ⚠️ | Tier 3 |
 

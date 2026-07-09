@@ -892,4 +892,4 @@ Code Check → Build & Test (native + wasm) → wasm-opt → Security Scan →
 Docker Build (multi-platform) → Push → Staging → Smoke Test → Production
 ```
 
-> **关键洞察**：WASM 的二进制可移植性使“一次构建、多处运行”成为可能，但工具链（wasm-pack、Binaryen、运行时版本）的矩阵管理仍是 CI 复杂度的主要来源。
+> **关键洞察**：WASM 的二进制可移植性使“一次构建、多处运行”成为可能，但工具链（wasm-pack、Binaryen、运行时（Runtime）版本）的矩阵管理仍是 CI 复杂度的主要来源。

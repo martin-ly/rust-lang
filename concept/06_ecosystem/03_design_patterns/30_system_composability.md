@@ -496,7 +496,7 @@ where
 
 | 维度 | `dyn Trait` | 泛型（Generics）单态化（Monomorphization） |
 |:---|:---|:---|
-| 运行时开销 | 虚表查找 + 间接调用 | 直接调用 + 内联 |
+| 运行时（Runtime）开销 | 虚表查找 + 间接调用 | 直接调用 + 内联 |
 | 二进制体积 | 一份代码 | 每种类型组合一份 |
 | 编译时间 | 较快 | 较慢（代码膨胀） |
 | 适用场景 | 类型异构集合、插件系统 | 热路径、性能敏感管道 |
@@ -619,7 +619,7 @@ fn compose_fixed<T: ReadWrite>(rw: &T) {
 }
 ```
 
-> **修正**: Rust 的 trait object（`dyn Trait`）有对象安全性限制：只能包含一个"主 trait" 和若干 auto trait（`Send`、`Sync` 等）。不能直接写 `dyn TraitA + TraitB`（除非 TraitB 是 auto trait）。这是因为 vtable 只能存储一个主 trait 的方法指针。系统设计中的"接口组合"需通过泛型（`T: TraitA + TraitB`）或创建新的组合 trait（`trait Combo: TraitA + TraitB {}`）实现。这与 Java 的多接口继承或 Go 的隐式接口不同——Rust 在类型安全和运行时效率之间做了明确权衡。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
+> **修正**: Rust 的 trait object（`dyn Trait`）有对象安全性限制：只能包含一个"主 trait" 和若干 auto trait（`Send`、`Sync` 等）。不能直接写 `dyn TraitA + TraitB`（除非 TraitB 是 auto trait）。这是因为 vtable 只能存储一个主 trait 的方法指针。系统设计中的"接口组合"需通过泛型（Generics）（`T: TraitA + TraitB`）或创建新的组合 trait（`trait Combo: TraitA + TraitB {}`）实现。这与 Java 的多接口继承或 Go 的隐式接口不同——Rust 在类型安全和运行时效率之间做了明确权衡。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：插件系统的 ABI 稳定性（运行时 UB）
 

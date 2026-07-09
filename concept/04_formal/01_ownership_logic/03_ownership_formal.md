@@ -56,7 +56,7 @@
 - 共享借用（Borrowing） `&T` = 权限 `0 < π < 1`，多个引用（Reference）权限之和 `≤ 1` [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
 - 可变借用（Mutable Borrow） `&mut T` = 临时将 `π = 1` 从原所有者处**出借**，原变量被冻结
 
-**> [L1↔L4: borrowing]** L1 中"&T 不转移所有权"对应 L4 的分数权限拆分：`&{π}x * &{ρ}x ⇔ π + ρ ≤ 1`。L1 的"&mut T 独占"对应 L4 的临时独占断言 `&mut{x} ↦_1 v`，其生命周期（Lifetimes）结束后果断归还。
+**> [L1↔L4: borrowing]** L1 中"&T 不转移所有权（Ownership）"对应 L4 的分数权限拆分：`&{π}x * &{ρ}x ⇔ π + ρ ≤ 1`。L1 的"&mut T 独占"对应 L4 的临时独占断言 `&mut{x} ↦_1 v`，其生命周期（Lifetimes）结束后果断归还。
 
 ### Step 3: 怎么证明没有悬垂指针？
 >
@@ -97,7 +97,7 @@
 - **Unsafe 代码**：除非额外提供 Iris 逻辑规约（RustBelt 方法）
 - **资源泄漏**：Rust 允许内存泄漏（`Rc` 循环引用（Reference）、`mem::forget`），形式化不禁止
 
-**> [L1↔L4: unsafe / 逻辑正确性]** L1 的 `unsafe` 块跳出了借用检查器的语法规则；L4 中必须使用更高阶并发分离逻辑（Iris）对 `unsafe` 实现进行**外在（extrinsic）**验证。这是 RustBelt 的核心贡献。
+**> [L1↔L4: unsafe / 逻辑正确性]** L1 的 `unsafe` 块跳出了借用（Borrowing）检查器的语法规则；L4 中必须使用更高阶并发分离逻辑（Iris）对 `unsafe` 实现进行**外在（extrinsic）**验证。这是 RustBelt 的核心贡献。
 
 ### 所有权状态转换图
 >
@@ -240,7 +240,7 @@ COR 的核心类型判断：
   // x 在 r 存活期间被冻结 [来源] ✅
 ```
 
-**> [L1↔L4: borrowing + lifetimes]** L1 中 `&mut x` 会冻结 `x` 直至引用离开作用域。L4 将此建模为**生命周期包含** `κ_r ⊑ κ_x`，在 `κ_r` 活跃期间 `x` 的权限被临时出借给 `r`。
+**> [L1↔L4: borrowing + lifetimes]** L1 中 `&mut x` 会冻结 `x` 直至引用（Reference）离开作用域。L4 将此建模为**生命周期包含** `κ_r ⊑ κ_x`，在 `κ_r` 活跃期间 `x` 的权限被临时出借给 `r`。
 
 ```text
 释放（Drop）:
@@ -402,7 +402,7 @@ graph TD
     style A5 fill:#ff9
 ```
 
-> **认知功能**: 此决策树界定**权限系统自动化能力的边界**。功能定位：理解编译器能自动推导什么、不能推导什么。使用建议：将借用检查器视为"内存安全自动机"，功能正确性仍需 Creusot/Verus 等外部工具。关键洞察：**自动推导擅长"禁止什么"（内存错误），人工规格擅长"要求什么"（功能意图）——二者互补而非替代**。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> **认知功能**: 此决策树界定**权限系统自动化能力的边界**。功能定位：理解编译器能自动推导什么、不能推导什么。使用建议：将借用检查器视为"内存安全（Memory Safety）自动机"，功能正确性仍需 Creusot/Verus 等外部工具。关键洞察：**自动推导擅长"禁止什么"（内存错误），人工规格擅长"要求什么"（功能意图）——二者互补而非替代**。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **分析**: 权限系统的自动化优势集中在**推导（inference）**层面——编译器自动推导生命周期（Lifetimes）约束和借用合法性。但对于**功能规格**和**活性属性**，仍需人工提供不变量。这是自动化验证的根本限制：意图无法从代码中完全反推。
 
 ### 5.3 形式化模型与实现的差距
@@ -492,7 +492,7 @@ Oxide 视角:
 | `Pin::map` 的语义保持 | 🔍 开放 | 映射函数是否保持位置稳定性需形式化证明 |
 | 自引用结构的安全构造 | ⚠️ 部分解决 | `Pin::new_unchecked` 的契约足够，但自动化验证困难 |
 
-> **关键洞察**: Pin 是 Rust 类型系统中**唯一一个将内存地址作为逻辑状态一部分**的构造。这与 C/C++ 的 `restrict`、还是 Haskell 的 `StablePtr` 都不同——Pin 不是在运行时（Runtime）追踪地址，而是在类型层面**排除移动的可能性**，从而间接保证地址恒定。
+> **关键洞察**: Pin 是 Rust 类型系统（Type System）中**唯一一个将内存地址作为逻辑状态一部分**的构造。这与 C/C++ 的 `restrict`、还是 Haskell 的 `StablePtr` 都不同——Pin 不是在运行时（Runtime）追踪地址，而是在类型层面**排除移动的可能性**，从而间接保证地址恒定。
 > **深入阅读**: Pin 的工程语义详见 [`02_async.md`](../../03_advanced/01_async/02_async.md) §8；自引用结构的安全构造见 [`03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md) §5。
 
 ---
@@ -1166,7 +1166,7 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 > 工程实践中的对应见 [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md)（unsafe 逃逸门）与 [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md)（并发安全（Concurrency Safety）的编译期保证）。
 > **过渡: L4 → L5**
 > Rust 的所有权形式化是独特的——C++ 没有系统性的所有权逻辑，Go 依赖 GC 消除所有权问题，Haskell 用纯函数隔离副作用。
-> 理解这些差异需要在形式化层面比较 "语言如何表达资源的生命周期"。
+> 理解这些差异需要在形式化层面比较 "语言如何表达资源的生命周期（Lifetimes）"。
 > 对比视角见 [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)（RAII 语义差异）与 [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/03_paradigm_matrix.md)（类型系统谱系）。
 > **过渡: L4 → L7**
 > 当前的形式化工具（RustBelt、Kani、Miri）覆盖了 Rust 安全子集的大部分，但 Polonius 的 loan-based 语义、Tree Borrows 的别名模型、以及 Effects System 的类型效应都还在演进中。形式化不是终点，而是语言设计迭代的基础。
@@ -1355,7 +1355,7 @@ fn main() {
 >
 > 1) 某些安全程序被拒绝（false positive，如交叉引用循环）；
 > 2) 某些 unsafe 代码绕过检查（程序员责任）；
-> 3) `RefCell` 运行时检查替代编译期检查。
+> 3) `RefCell` 运行时（Runtime）检查替代编译期检查。
 >
 > 研究：RustBelt 证明标准库的 unsafe 代码在形式化模型下安全；
 > Stacked Borrows / Tree Borrows 定义引用的别名规则（Miri 检查）。

@@ -5,7 +5,7 @@
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+P** — Application + Procedure
-> **双维定位**: A×App — 应用异步进程管理
+> **双维定位**: A×App — 应用异步（Async）进程管理
 > **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Async](../01_async/02_async.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
 > **后置概念**: [IPC Mechanisms](05_ipc_mechanisms.md) · [Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Modern Process Libraries](10_modern_process_libraries.md)
 > **定理链**: Async Runtime ⟹ tokio::process ⟹ Cancellation Safety
@@ -19,7 +19,7 @@
 
 ## 1. 为什么需要异步进程管理
 
-在异步运行时中管理子进程时，同步 `std::process` 会阻塞当前线程，导致整个运行时线程池被占满。`tokio::process` 将 `std::process` 的 I/O 与等待操作转移到异步任务中，从而：
+在异步运行时（Runtime）中管理子进程时，同步 `std::process` 会阻塞当前线程，导致整个运行时线程池被占满。`tokio::process` 将 `std::process` 的 I/O 与等待操作转移到异步任务中，从而：
 
 - 不阻塞工作线程
 - 支持并发管理大量子进程
@@ -163,7 +163,7 @@ async fn cancellable_child() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 相关概念
 
-- [进程模型与生命周期](01_process_model_and_lifecycle.md)
+- [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 
 ---
 

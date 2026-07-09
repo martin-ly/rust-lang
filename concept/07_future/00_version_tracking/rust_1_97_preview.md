@@ -48,7 +48,7 @@
     - [1.2 空 `export_name` 报错](#12-空-export_name-报错)
     - [1.3 `linker-messages` 默认 warn](#13-linker-messages-默认-warn)
     - [1.4 元组索引简写修复](#14-元组索引简写修复)
-    - [1.5 `pin!` 阻止隐式解引用强制](#15-pin-阻止隐式解引用强制)
+    - [1.5 `pin!` 阻止隐式解引用（Reference）强制](#15-pin-阻止隐式解引用强制)
   - [二、标准库 API](#二标准库-api)
     - [2.1 `NonZero` 位操作](#21-nonzero-位操作)
     - [2.2 `char::is_control()` const 稳定](#22-charis_control-const-稳定)

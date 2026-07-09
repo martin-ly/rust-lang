@@ -293,7 +293,7 @@ graph TD
 |:---|:---|:---|
 | 语义 | `loop {}` 非终止 | 类型正确，但无进展性（Progress 假设程序可归约） |
 | 运行时（Runtime） | 栈溢出、堆耗尽 | 类型正确，资源约束超出类型系统（Type System）表达力 |
-| 编译期 | `unsafe` / FFI | 显式绕过类型系统，类型安全承诺失效 |
+| 编译期 | `unsafe` / FFI | 显式绕过类型系统（Type System），类型安全承诺失效 |
 | 工程 | `unwrap()` panic | Safe Rust 内的受控崩溃，非 UB 但属错误 |
 
 ### 5.2 反命题 2: "所有类型系统都是 sound 的"
@@ -533,7 +533,7 @@ graph TD
     G --> G3[Subject Reduction]
 ```
 
-> **认知功能**: 本思维导图提供类型论六大知识模块（Module）的导航索引，将 λ 演算、多态性、ADT 代数语义、Variance、Rust 扩展和类型安全整合为一张定位地图。建议在学习或查阅时以此为「你在哪」的参照系。关键洞察：六轴并非独立——λ→ 是根基，System F 和 HM 是 Rust 泛型的双支柱，线性类型是所有权（Ownership）唯一性的理论来源。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
+> **认知功能**: 本思维导图提供类型论六大知识模块（Module）的导航索引，将 λ 演算、多态性、ADT 代数语义、Variance、Rust 扩展和类型安全整合为一张定位地图。建议在学习或查阅时以此为「你在哪」的参照系。关键洞察：六轴并非独立——λ→ 是根基，System F 和 HM 是 Rust 泛型（Generics）的双支柱，线性类型是所有权（Ownership）唯一性的理论来源。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -659,7 +659,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 | 类型系统 | [`../01_foundation/02_type_system/04_type_system.md`](../../01_foundation/02_type_system/04_type_system.md) | 类型论的应用（L1 映射） |
 | 泛型 | [`../02_intermediate/01_generics/02_generics.md`](../../02_intermediate/01_generics/02_generics.md) | 参数多态的应用（L2 映射） |
 | Trait | [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) | Type Class 的应用（L2 映射） |
-| 线性逻辑 | [`./01_linear_logic.md`](../01_ownership_logic/01_linear_logic.md) | 形式化同层（所有权理论来源） |
+| 线性逻辑 | [`./01_linear_logic.md`](../01_ownership_logic/01_linear_logic.md) | 形式化同层（所有权（Ownership）理论来源） |
 | 所有权形式化 | [`./03_ownership_formal.md`](../01_ownership_logic/03_ownership_formal.md) | 类型规则的扩展 |
 | RustBelt | [`./04_rustbelt.md`](../02_separation_logic/04_rustbelt.md) | 验证框架 |
 | 范式矩阵 | [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/03_paradigm_matrix.md) | 类型系统谱系 |
@@ -1316,7 +1316,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 ```
 
-- A. `'a` 是一个运行时变量，编译器在运行期检查生命周期（Lifetimes）
+- A. `'a` 是一个运行时（Runtime）变量，编译器在运行期检查生命周期（Lifetimes）
 - B. `'a` 是类型参数，与泛型参数 `T` 地位相同，但在编译期被擦除
 - C. `'a` 是一个特殊的注释，不影响代码生成
 - D. `'a` 是引用（Reference）计数器的名称
@@ -1396,7 +1396,7 @@ v = []  -- Haskell
 v = 42 : v  -- 无限列表
 ```
 
-- A. 没有区别，两者使用完全相同的类型推断算法
+- A. 没有区别，两者使用完全相同的类型推断（Type Inference）算法
 - B. Rust 无法推断 `Vec::new()` 的类型（需要显式标注），Haskell 可以推断 `[]` 为 `[a]`
 - C. Rust 的类型推断是局部的（基于表达式上下文），Haskell 的 HM 是全局的（基于整个程序）
 - D. Rust 和 Haskell 都无法推断这段代码的类型
@@ -1484,7 +1484,7 @@ process(Vec::new());  // ✅ 从参数类型推断 T = i32
 
 ## 从 `crates\c02_type_system\docs\tier_04_advanced\01_type_theory_in_depth.md` 迁移的补充视角
 
-> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏（Macro）观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
 
 # 4.1 Rust 类型系统 - 类型理论深度
 
@@ -1530,11 +1530,11 @@ process(Vec::new());  // ✅ 从参数类型推断 T = i32
   - [5. 子类型和型变](#5-子类型和型变)
     - [5.1 子类型关系](#51-子类型关系)
     - [5.2 型变规则](#52-型变规则)
-    - [5.3 生命周期的格理论](#53-生命周期的格理论)
+    - [5.3 生命周期（Lifetimes）的格理论](#53-生命周期的格理论)
   - [6. 线性类型和仿射类型](#6-线性类型和仿射类型)
     - [6.1 线性类型](#61-线性类型)
     - [6.2 仿射类型](#62-仿射类型)
-    - [6.3 所有权和借用的类型理论](#63-所有权和借用的类型理论)
+    - [6.3 所有权和借用（Borrowing）的类型理论](#63-所有权和借用的类型理论)
   - [7. 依赖类型模拟](#7-依赖类型模拟)
     - [7.1 Const Generics](#71-const-generics)
     - [7.2 类型级数值](#72-类型级数值)
@@ -1551,7 +1551,7 @@ process(Vec::new());  // ✅ 从参数类型推断 T = i32
     - [8.3 进展性](#83-进展性)
     - [8.2 类型保全性1](#82-类型保全性1)
     - [8.3 进展性1](#83-进展性1)
-    - [8.4 内存安全性](#84-内存安全性)
+    - [8.4 内存安全（Memory Safety）性](#84-内存安全性)
   - [9. 总结](#9-总结)
   - [10. 参考资源](#10-参考资源)
     - [学术论文](#学术论文)
@@ -1592,7 +1592,7 @@ process(Vec::new());  // ✅ 从参数类型推断 T = i32
 
 **性能特征**:
 
-- **零成本抽象**: 类型系统零运行时开销
+- **零成本抽象（Zero-Cost Abstraction）**: 类型系统零运行时开销
 - **编译时保证**: 编译期类型安全保证
 - **适用场景**: 类型安全、形式化验证、高级类型系统
 

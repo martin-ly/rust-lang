@@ -181,7 +181,7 @@ graph TD
 |:---|:---|:---|
 | **架构** | 中继链 + 平行链（heterogeneous sharding） | Substrate 节点完全用 Rust 编写；FRAME 宏（Macro）生成 pallet 脚手架 |
 | **合约层** | pallet-contracts（Wasm）+ ink!（Rust DSL） | ink! 是嵌入式 DSL，利用 Rust 宏（Macro）生成合约 ABI |
-| **升级机制** | 无分叉运行时升级（Wasm 替换） | `sp_version` + `wasm-builder` 的编译期版本校验 |
+| **升级机制** | 无分叉运行时（Runtime）升级（Wasm 替换） | `sp_version` + `wasm-builder` 的编译期版本校验 |
 | **形式化方向** | KILT、Interlay 等团队使用 Kani 验证 pallet | Rust 类型系统（Type System） + Kani 覆盖 unsafe 和算术边界 |
 
 ```rust,ignore
@@ -379,7 +379,7 @@ classDiagram
     note for SolidityModifier "修饰器模式:<br/>运行时检查<br/>人工审计依赖"
 ```
 
-> **认知功能**: 此类图将三种合约语言的安全机制进行**类型系统级别的对比**。Move 的 Ability 系统（默认最严格，显式放宽）与 Rust 的 Trait 系统（默认宽松，显式约束）形成对偶。Solidity 没有编译期资源语义，依赖运行时修饰器和人工审计——这是 Solidity 合约漏洞频发的根本类型论原因。
+> **认知功能**: 此类图将三种合约语言的安全机制进行**类型系统（Type System）级别的对比**。Move 的 Ability 系统（默认最严格，显式放宽）与 Rust 的 Trait 系统（默认宽松，显式约束）形成对偶。Solidity 没有编译期资源语义，依赖运行时修饰器和人工审计——这是 Solidity 合约漏洞频发的根本类型论原因。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 4.1 Move 资源模型的三要素
@@ -414,7 +414,7 @@ let coin: Coin = get_coin();
 | 维度 | Sui (Object-Centric) | Aptos (账户存储) | Rust/ink! (Wasm) |
 |:---|:---|:---|:---|
 | **状态寻址** | 对象 ID (`UID`) 全局唯一 | 账户地址 + 资源类型 | 合约存储映射 (`Mapping<K, V>`) |
-| **所有权表达** | 对象有单一 `Owner` 地址 | 资源存储在发布者账户下 | `&mut self` 独占合约状态 |
+| **所有权（Ownership）表达** | 对象有单一 `Owner` 地址 | 资源存储在发布者账户下 | `&mut self` 独占合约状态 |
 | **并行执行** | 交易显式声明输入对象，非冲突对象并行 | 区块级顺序执行（当前） | 依赖链运行时调度 |
 | **资源转移** | `transfer(object, recipient)` 显式转移 | `move_to` / `move_from` 全局操作 | 存储映射的 `insert` / `remove` |
 | **借用（Borrowing）语义** | `&T` / `&mut T` 借用对象引用（Reference） | `borrow_global<T>(addr)` 全局借用 | `&` / `&mut` 编译期借用检查 |
@@ -438,7 +438,7 @@ public fun get_balance(addr: address): u64 acquires Coin {
 | 安全维度 | Move (Sui/Aptos) | Rust (ink!/Solana) | 形式化根基 |
 |:---|:---|:---|:---|
 | **资源唯一性** | Ability 系统 + 字节码验证器 | 所有权 + `Drop`/`Clone` trait | 线性逻辑：资源不可复制、不可丢弃 |
-| **内存安全（Memory Safety）** | 字节码验证器检查引用（Reference）安全 | 编译期借用检查器 | 分离逻辑 / 别名类型系统 |
+| **内存安全（Memory Safety）** | 字节码验证器检查引用（Reference）安全 | 编译期借用（Borrowing）检查器 | 分离逻辑 / 别名类型系统 |
 | **全局状态访问** | `borrow_global` / `move_to`（显式 acquires） | 运行时存储 API（`Mapping` / `AccountInfo`）| 效果系统：全局状态作为显式 effect |
 | **并发安全（Concurrency Safety）** | Sui 对象级并行；Aptos 顺序执行 | Solana Sealevel 运行时借用检查 | 会话类型 / 区域类型 |
 | **形式化验证** | Move Prover（Boogie/Z3 后端）| Kani（Rust 模型检测）| SMT 求解 / 符号执行 |

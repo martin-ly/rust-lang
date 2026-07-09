@@ -247,7 +247,7 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 |:---|:---|:---|
 | **结构化** | 精确的错误代码、位置（span）、相关变量 | 状态空间可精确编码 |
 | **可执行性** | 错误可复现，修复可验证 | 奖励函数可自动化计算 |
-| **密集性** | 编译错误在训练数据中出现频率远高于运行时崩溃 | 提供密集奖励信号，加速收敛 |
+| **密集性** | 编译错误在训练数据中出现频率远高于运行时（Runtime）崩溃 | 提供密集奖励信号，加速收敛 |
 
 > **[Yasunaga & Liang, ICML 2021 — Break-It-Fix-It](https://doi.org/10.48550/arXiv.2106.08309)** 将编译器/类型检查器视为 critic，其输出（错误存在/不存在）构成自然的二元奖励，无需人工标注修复对。✅
 
@@ -745,7 +745,7 @@ fn correct_fix(s: &str) -> String {
 | 确定性容器与 Nix 关联 | [NixOS Wiki] · [Reproducible Builds] | ✅ | Tier 2 |
 | Compiler-Guided Decoding | [PLDI 2024/2025] | ⚠️ 前沿 | Tier 2 |
 | Rust 编译错误结构化密度优势 | [rustc-dev-guide] · 原创分析 | 💡 | Tier 3 |
-| AI 生命周期标注准确率 45% | [RustRepair-RL, 2024] | ⚠️ 前沿 | Tier 2 |
+| AI 生命周期（Lifetimes）标注准确率 45% | [RustRepair-RL, 2024] | ⚠️ 前沿 | Tier 2 |
 
 ---
 
@@ -786,7 +786,7 @@ fn predict_safe(model: &dyn Fn(&Array2<f32>) -> Array2<f32>, input: Array2<f32>)
 
 > **修正**:
 >
-> Rust 的类型系统目前无法在编译期验证张量形状（tensor shape）。
+> Rust 的类型系统（Type System）目前无法在编译期验证张量形状（tensor shape）。
 > `ndarray::Array2<f32>` 只保证二维，不保证具体维度大小。
 > 这与 Idris 的依赖类型或 Rust 的未来"const generics 扩展"形成对比——目前形状验证必须在运行时进行（`assert_eq!` 或返回 `Result`）。
 > `candle` 等 ML 框架在加载模型时验证形状，但输入数据的形状仍需应用层保证。
@@ -922,7 +922,7 @@ fn main() {
 }
 ```
 
-> **修正**: AI 工具（Copilot、ChatGPT）生成 Rust 代码时，**所有权和生命周期**是最常见的错误类型：
+> **修正**: AI 工具（Copilot、ChatGPT）生成 Rust 代码时，**所有权（Ownership）和生命周期**是最常见的错误类型：
 >
 > 1) 返回局部引用（Reference）（悬垂引用）；
 > 2) 在闭包（Closures）中错误捕获引用（Reference）（非 `'static`）；

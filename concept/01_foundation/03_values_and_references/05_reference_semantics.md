@@ -57,7 +57,7 @@
     - [7.4 Tree Borrows 模型](#74-tree-borrows-模型)
       - [7.4.1 从 Stacked Borrows 到 Tree Borrows](#741-从-stacked-borrows-到-tree-borrows)
       - [7.4.2 权限树：Foreign / Read / Write / Unique](#742-权限树foreign--read--write--unique)
-    - [7.5 `as_ref()` / `as_mut()` 与嵌套引用](#75-as_ref--as_mut-与嵌套引用)
+    - [7.5 `as_ref()` / `as_mut()` 与嵌套引用（Reference）](#75-as_ref--as_mut-与嵌套引用)
       - [7.5.1 嵌套引用的类型转换](#751-嵌套引用的类型转换)
       - 7.5.2 生命周期（Lifetimes）行为
     - [7.6 代码示例集](#76-代码示例集)
@@ -294,7 +294,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Deref 强制与借用（Borrowing）检查器的**协作关系**——Deref 强制发生在借用检查之后，因此不会绕过安全保证。
-> **关键洞察**: Deref 返回的引用**仍然受借用检查器约束**。`DerefMut::deref_mut` 返回的 `&mut self.0` 遵守所有可变引用（Mutable Reference）的规则。
+> **关键洞察**: Deref 返回的引用**仍然受借用（Borrowing）检查器约束**。`DerefMut::deref_mut` 返回的 `&mut self.0` 遵守所有可变引用（Mutable Reference）的规则。
 > [来源: [Rust Reference — Borrow Checker](https://doc.rust-lang.org/reference/statements-and-expressions.html)]
 
 ---
@@ -543,7 +543,7 @@ assert_eq!(x, 20);
 > **重要区分**: `&mut &T` 与 `&&mut T` 是完全不同的类型：
 >
 > - `&mut &T`: 一个可变引用（Mutable Reference），其目标是一个共享引用。你可以修改这个可变引用使其指向**另一个**共享引用，但不能通过它修改最终目标（因为内层是 `&T`）。
-> - `&&mut T`: 一个共享引用，其目标是一个可变引用。你不能通过外层的共享引用修改任何东西（外层是共享的），但可以通过内层的可变引用修改目标——前提是内层可变引用本身可达。
+> - `&&mut T`: 一个共享引用，其目标是一个可变引用（Mutable Reference）。你不能通过外层的共享引用修改任何东西（外层是共享的），但可以通过内层的可变引用修改目标——前提是内层可变引用本身可达。
 
 ```rust
 let mut x = 1;
@@ -1031,7 +1031,7 @@ let r: &&i32;
 }
 ```
 
-> **关键**: `&&5` 涉及**三个**值：原始值 `5`、第一层临时引用、第二层临时引用。整个链的生命周期受最弱环节（最短生命周期）限制。
+> **关键**: `&&5` 涉及**三个**值：原始值 `5`、第一层临时引用、第二层临时引用。整个链的生命周期（Lifetimes）受最弱环节（最短生命周期）限制。
 > [来源: [Rust Reference — Temporary Values](https://doc.rust-lang.org/reference/expressions.html#temporaries)]（一级来源）
 
 #### 困惑 2: `&mut &T` vs `&&mut T`
@@ -1381,7 +1381,7 @@ fn main() {}
 
 ### 测验 5：自动解引用在编译期有运行时开销吗？（理解层）
 
-**题目**: 自动解引用在编译期有运行时开销吗？
+**题目**: 自动解引用在编译期有运行时（Runtime）开销吗？
 
 <details>
 <summary>✅ 答案与解析</summary>

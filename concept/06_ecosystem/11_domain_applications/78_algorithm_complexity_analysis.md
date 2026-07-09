@@ -170,7 +170,7 @@ criterion_main!(benches);
 
 - 先关注最坏情况复杂度，再考虑平均/摊销。
 - 避免过早优化；先测量再优化。
-- 利用 Rust 的迭代器和零成本抽象保持代码简洁且高效。
+- 利用 Rust 的迭代器（Iterator）和零成本抽象（Zero-Cost Abstraction）保持代码简洁且高效。
 - 注意空间-时间权衡：有时用更多内存换取更快查询。
 
 > **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)

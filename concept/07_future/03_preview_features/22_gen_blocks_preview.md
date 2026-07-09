@@ -370,7 +370,7 @@ graph LR
 
 > **认知功能**: 此图展示 gen block 与 Stream 的**对称关系**——`gen` 对应 `Iterator`，`async gen` 对应 `Stream`。
 > **使用建议**: 同步数据流使用 `gen`；异步（Async）数据流（如网络请求序列）使用 `async gen`。
-> **关键洞察**: `async gen` 解决了当前 Rust 中**异步迭代**的语法缺失——目前需要使用 `futures::stream::unfold` 或手动实现 `Stream` trait，语法繁琐。
+> **关键洞察**: `async gen` 解决了当前 Rust 中**异步（Async）迭代**的语法缺失——目前需要使用 `futures::stream::unfold` 或手动实现 `Stream` trait，语法繁琐。
 > [来源: [Async Working Group — Streams](https://rust-lang.github.io/async-fundamentals-initiative/)]
 
 ---
@@ -624,7 +624,7 @@ fn self_referential_gen() -> impl Iterator<Item = &str> {
 > 2) 使用 `yield` 的 `'static` 值（如字面量 `&'static str`）；
 > 3) 若必须自引用（Reference），返回 `Pin<Box<dyn Iterator>>`（复杂且 API 不友好）。
 >
-> 这与 `async` 块的自引用问题相同——`async fn` 自动处理 `Pin`，但 `gen` 块的返回类型设计仍在演进。
+> 这与 `async` 块的自引用（Reference）问题相同——`async fn` 自动处理 `Pin`，但 `gen` 块的返回类型设计仍在演进。
 > `gen` 块的简化目标（消除手写 Iterator 的样板）与自引用的复杂性形成张力。
 > [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
@@ -646,7 +646,7 @@ fn early_return() -> impl Iterator<Item = i32> {
 >
 > `gen` 块中的控制流（`return`、`break`、`continue`）语义是设计中的难点：
 >
-> 1) `return` 应结束整个函数（跳出 `gen` 块）还是仅结束迭代器（`yield` 停止）？
+> 1) `return` 应结束整个函数（跳出 `gen` 块）还是仅结束迭代器（Iterator）（`yield` 停止）？
 > 2) `break` 在嵌套循环中的目标是什么？
 > 3) `?` 运算符在 `gen` 块中如何传播错误？
 > 当前设计倾向：`return` 结束整个函数（与 `async` 块一致），`break` 和 `continue` 针对最内层循环（与常规块一致），

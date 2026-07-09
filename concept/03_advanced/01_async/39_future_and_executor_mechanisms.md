@@ -83,7 +83,7 @@
 
 **Future Trait**:
 
-- **定义**: 表示异步计算的值，可能尚未完成的 Trait
+- **定义**: 表示异步（Async）计算的值，可能尚未完成的 Trait
 - **类型**: Trait
 - **范畴**: 异步编程
 - **版本**: Rust 1.39+
@@ -91,7 +91,7 @@
 
 **Executor (执行器)**:
 
-- **定义**: 负责调度和执行 Future 的运行时组件
+- **定义**: 负责调度和执行 Future 的运行时（Runtime）组件
 - **类型**: 运行时组件
 - **属性**: 任务调度、事件循环、Waker 管理
 - **关系**: 与 Future、异步运行时相关
@@ -1009,7 +1009,7 @@ impl Future for MyFuture {
 
 1. **问题识别**: 识别 async/await 背后由 Future、Poll、Waker 与执行器协作驱动的机制。
 2. **概念建立**: 掌握 Future trait 的 poll 模型、Waker 的唤醒语义与执行器调度策略。
-3. **机制推理**: 通过 Future ⟹ Poll ⟹ Waker ⟹ Executor 的定理链理解异步任务生命周期。
+3. **机制推理**: 通过 Future ⟹ Poll ⟹ Waker ⟹ Executor 的定理链理解异步任务生命周期（Lifetimes）。
 4. **边界辨析**: 辨析“async 总是更快”等反命题，理解懒执行、运行时开销与阻塞操作的危害。
 5. **迁移应用**: 将 Future/Executor 机制与性能优化、并发模式主题链接。
 

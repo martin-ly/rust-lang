@@ -1,7 +1,7 @@
 # 属性（Attributes）
 
 > **EN**: Attributes
-> **Summary**: Rust 属性系统：内置属性分类（测试、derive、诊断、代码生成、限制、类型系统、调试器）及其在 item、表达式、语句上的应用规则。 Rust attribute system: built-in attribute categories and application rules on items, expressions, and statements.
+> **Summary**: Rust 属性系统：内置属性分类（测试、derive、诊断、代码生成、限制、类型系统（Type System）、调试器）及其在 item、表达式、语句上的应用规则。 Rust attribute system: built-in attribute categories and application rules on items, expressions, and statements.
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -36,7 +36,7 @@
 
 > **反命题 2**: "忽略属性的细节也能写出正确代码" ⟹ 不成立。`#[repr(C)]`、`#[must_use]`、`#[non_exhaustive]` 等属性直接影响类型布局和接口语义。
 
-> **反命题 3**: "其他语言对属性的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 属性在词法阶段即被解析并影响宏展开和类型检查，与 C# 注解或 Java 注解的运行时反射模型不同。
+> **反命题 3**: "其他语言对属性的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 属性在词法阶段即被解析并影响宏（Macro）展开和类型检查，与 C# 注解或 Java 注解的运行时（Runtime）反射模型不同。
 
 ## 一、属性语法
 
@@ -78,7 +78,7 @@ struct Point { x: i32, y: i32 }
 | Crate | `#![feature(...)]` | 内层属性，作用于整个 crate |
 | Module | `#![allow(...)]` | 作用于当前模块 |
 | 函数 | `#[test]` | 作用于单个函数 |
-| 结构体/枚举 | `#[derive(Debug)]` | 作用于类型定义 |
+| 结构体（Struct）/枚举（Enum） | `#[derive(Debug)]` | 作用于类型定义 |
 | 字段 | `#[serde(rename = "...")]` | 作用于结构体字段 |
 | 表达式/语句 | 部分属性允许 | 如 `#[allow(unreachable_code)]` |
 
@@ -93,7 +93,7 @@ struct Point { x: i32, y: i32 }
 | `#[non_exhaustive]` | 类型系统 | 禁止外部 crate 穷尽匹配 |
 | `#[deprecated]` | 诊断 | 标记弃用 API |
 | `#[cfg(...)]` | 条件编译 | 按条件包含代码 |
-| `#[path = "..."]` | 模块 | 指定模块文件路径 |
+| `#[path = "..."]` | 模块（Module） | 指定模块文件路径 |
 | `#[no_mangle]` | 代码生成 | 禁用符号名修饰 |
 | `#[global_allocator]` | 运行时 | 指定全局分配器 |
 
@@ -137,7 +137,7 @@ struct Point;
 
 ## 五、与宏的关系
 
-过程宏（procedural macro）和声明宏（`macro_rules!`）都可生成属性。属性宏在宏展开阶段执行，可读取或替换被装饰的 item。
+过程宏（procedural macro）和声明宏（Declarative Macro）（`macro_rules!`）都可生成属性。属性宏在宏展开阶段执行，可读取或替换被装饰的 item。
 
 ```rust
 #[my_attribute_macro]
@@ -167,7 +167,7 @@ fn decorated() {}
 | [Items Reference](46_items_reference.md) | 属性修饰 item |
 | [Macros](../../03_advanced/03_proc_macros/04_macros.md) | 属性宏在宏展开阶段执行 |
 | [Conditional Compilation](../../03_advanced/03_proc_macros/28_conditional_compilation.md) | `#[cfg]` 控制条件编译 |
-| [Generics Compiler Behavior](53_generics_compiler_behavior.md) | `#[inline]` 影响单态化代码生成 |
+| [Generics Compiler Behavior](53_generics_compiler_behavior.md) | `#[inline]` 影响单态化（Monomorphization）代码生成 |
 | [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | `#[no_mangle]`、`#[link]` 用于 unsafe/FFI 场景 |
 
 ---

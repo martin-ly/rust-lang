@@ -11,8 +11,8 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 评估与优化生成代码质量
-> **前置概念**: [过程宏](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) · [泛型](../../02_intermediate/01_generics/02_generics.md)
-> **后置概念**: [生产级宏开发](31_production_grade_macro_development.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md)
+> **前置概念**: [过程宏（Procedural Macro）](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) · [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md)
+> **后置概念**: [生产级宏（Macro）开发](31_production_grade_macro_development.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md)
 >
 > **主要来源**: [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [syn crate](https://docs.rs/syn/) · [quote crate](https://docs.rs/quote/) · [proc-macro2 crate](https://docs.rs/proc-macro2/)
 >
@@ -29,9 +29,9 @@
 
 过程宏在编译期生成代码，其质量直接影响：
 
-- **编译时间**：递归展开、单态化膨胀、依赖链长度。
+- **编译时间**：递归展开、单态化（Monomorphization）膨胀、依赖链长度。
 - **二进制大小**：重复生成的泛型实现、未消除的死代码。
-- **运行时性能**：生成的代码是否可被 LLVM 内联、向量化、常量折叠。
+- **运行时（Runtime）性能**：生成的代码是否可被 LLVM 内联、向量化、常量折叠。
 - **可调试性**：错误定位精度、可读性、文档完整性。
 
 本章讨论如何在宏实现阶段控制这些因素。

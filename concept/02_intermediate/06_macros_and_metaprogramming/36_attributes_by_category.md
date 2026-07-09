@@ -88,11 +88,11 @@
 ```
 
 - 属性可以是无参的（`#[derive(Debug)]`）或带参数的（`#[cfg(target_os = "linux")]`）。
-- 内部属性通常出现在文件顶部或模块开头，影响整个范围。
+- 内部属性通常出现在文件顶部或模块（Module）开头，影响整个范围。
 
 ### 1.2 直觉解释
 
-属性就像给编译器贴的“便签”：告诉它“对这个函数特殊处理”“在这个平台才编译”“为这个东西自动生成代码”。它们不改变运行时语义（大部分情况下），但深刻影响编译期和工具链行为。
+属性就像给编译器贴的“便签”：告诉它“对这个函数特殊处理”“在这个平台才编译”“为这个东西自动生成代码”。它们不改变运行时（Runtime）语义（大部分情况下），但深刻影响编译期和工具链行为。
 
 > [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
@@ -108,7 +108,7 @@
 | 类型系统 | 影响类型推导与 trait | `derive`, `non_exhaustive`, `must_use` | Reference |
 | 测试与文档 | 标记测试、示例、文档 | `test`, `cfg(test)`, `doc`, `rustfmt::skip` | Reference |
 | 链接与 ABI | 控制符号、链接、调用约定 | `link`, `link_name`, `export_name`, `no_link` | Reference |
-| 宏与元编程 | 过程宏入口 | `proc_macro`, `proc_macro_derive`, `proc_macro_attribute` | Reference |
+| 宏与元编程 | 过程宏（Procedural Macro）入口 | `proc_macro`, `proc_macro_derive`, `proc_macro_attribute` | Reference |
 | 资源限制 | 栈大小、递归深度 | `recursion_limit`, `type_length_limit` | Reference |
 
 ---
@@ -210,7 +210,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: `derive` 自动生成 trait 实现；`non_exhaustive` 防止外部 crate 穷举枚举变体。
+> **关键洞察**: `derive` 自动生成 trait 实现；`non_exhaustive` 防止外部 crate 穷举枚举（Enum）变体。
 > [来源: [The Rust Reference — Type System Attributes](https://doc.rust-lang.org/reference/attributes/type_system.html)]
 
 ### 3.5 测试与文档属性
@@ -275,7 +275,7 @@ fn main() {
 ```
 
 > **错误诊断**: `error[E0518]: attribute should be applied to function or closure`
-> **修正**: `#[inline]` 只能用于函数、方法或闭包。
+> **修正**: `#[inline]` 只能用于函数、方法或闭包（Closures）。
 > [来源: [The Rust Reference — Code Generation Attributes](https://doc.rust-lang.org/reference/attributes/codegen.html)]
 
 ### 4.3 反例：条件编译条件拼写错误
@@ -306,7 +306,7 @@ fn main() {}
 
 | 边界 | 现状 | 理论极限 | 工程意义 |
 |:---|:---|:---|:---|
-| 自定义属性 | 过程宏支持 | 任意元数据 | 扩展编译器行为需谨慎 |
+| 自定义属性 | 过程宏（Macro）支持 | 任意元数据 | 扩展编译器行为需谨慎 |
 | 条件表达 | `cfg` 表达式 | 任意布尔组合 | 避免过度复杂的 cfg |
 | 属性作用域 | 项级/模块级 | crate 级 | 内部属性 `#![...]` 影响整个范围 |
 | 文档属性 | `doc` 控制渲染 | 丰富文档结构 | 用于 rustdoc 生成 |
@@ -369,7 +369,7 @@ graph TD
 | 只在测试时编译 | `#[cfg(test)]` | 手动条件编译 | 标准机制 |
 | 标记废弃 API | `#[deprecated(...)]` | 文档注释 alone | 编译器会产生警告 |
 | 强制处理 Result | `#[must_use]` | 无 | 防止忽略重要结果 |
-| 跨平台函数 | `#[cfg(target_os = ...)]` | 运行时 if 判断 | 零成本抽象 |
+| 跨平台函数 | `#[cfg(target_os = ...)]` | 运行时 if 判断 | 零成本抽象（Zero-Cost Abstraction） |
 
 ---
 

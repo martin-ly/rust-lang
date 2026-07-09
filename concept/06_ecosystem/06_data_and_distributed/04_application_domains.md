@@ -259,7 +259,7 @@ Rust 在 CLI 领域是最成熟的应用之一。核心优势：
 Rust 在嵌入式领域的独特价值：
 
 - **no_std**: 无标准库运行时（Runtime），适合裸机/RTOS
-- **内存安全**: 消除 C 中常见的缓冲区溢出、use-after-free
+- **内存安全（Memory Safety）**: 消除 C 中常见的缓冲区溢出、use-after-free
 - **确定性**: 无 GC、无隐式分配，满足硬实时需求
 - **现代抽象**: 泛型（Generics）、Trait、模式匹配（Pattern Matching）在裸机上的零成本使用
 
@@ -496,7 +496,7 @@ Rust 编译为 WASM 的核心优势：
 | **Yew** | 类 React | 成熟稳定、生态文档完善 | ⭐⭐⭐⭐ |
 | **Sycamore** | 细粒度响应式 | 类似 Solid.js、性能优先 | ⭐⭐⭐ |
 
-> **关键洞察**: Leptos 的**细粒度响应式**系统不在 WASM 层面做虚拟 DOM diff，而是直接在编译期生成信号（signal）依赖图。这使得其 WASM 输出体积极小，且运行时性能与手写 JavaScript 相当。
+> **关键洞察**: Leptos 的**细粒度响应式**系统不在 WASM 层面做虚拟 DOM diff，而是直接在编译期生成信号（signal）依赖图。这使得其 WASM 输出体积极小，且运行时（Runtime）性能与手写 JavaScript 相当。
 [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 > **来源**: [WebAssembly.org] · [Leptos Book] · [Dioxus Docs] · 可信度: ✅
@@ -635,7 +635,7 @@ fn move_player(
 | **区块链** | 整数溢出检查 | — | unsafe (密码学) | — | Solidity/Go |
 | **数据工程** | 内存布局 | 泛型 (DataFrame) | SIMD + 并行 | — | Python pandas |
 | **系统编程** | 裸指针 | — | unsafe + FFI | — | C 驱动开发 |
-| **桌面 GUI** | 所有权 + 生命周期（Lifetimes） | Trait (组件) | async (事件循环) | — | Electron/Flutter |
+| **桌面 GUI** | 所有权（Ownership） + 生命周期（Lifetimes） | Trait (组件) | async (事件循环) | — | Electron/Flutter |
 
 ---
 
@@ -1231,9 +1231,9 @@ graph TD
 
 - **L1 所有权**: eBPF 程序运行在内核地址空间的受限子集，无堆分配、无动态内存。Rust 的所有权模型在此退化为**静态单分配（SSA）形式**——每个变量有唯一的定义点，无别名。
 - **L3 Unsafe**: Aya 的 `#[aya_ebpf]` 宏（Macro）将 Rust 函数编译为 eBPF 字节码。Rust 代码中的 `unsafe` 对应 eBPF 验证器的**信任边界**——验证器无法验证 `bpf_probe_read` 等 helper 函数的语义正确性，只能验证其调用合法性。
-- **L4 形式化**: eBPF 验证器本身是一个**形式化证明工具**（基于抽象解释），但其证明能力有限（例如不支持循环变量分析）。Rust 的类型系统补充了验证器的不足：Rust 编译期保证的内存安全，减少了验证器需要证明的断言数量。
+- **L4 形式化**: eBPF 验证器本身是一个**形式化证明工具**（基于抽象解释），但其证明能力有限（例如不支持循环变量分析）。Rust 的类型系统（Type System）补充了验证器的不足：Rust 编译期保证的内存安全，减少了验证器需要证明的断言数量。
 
-**安全边界**: Aya 的 `aya::maps` 模块将 eBPF map 操作封装为类型安全的 API。`PerCpuArray<T>` 的类型参数 `T` 必须在编译期满足 `Pod`（Plain Old Data）约束，确保 eBPF 验证器可以推断其内存布局。
+**安全边界**: Aya 的 `aya::maps` 模块（Module）将 eBPF map 操作封装为类型安全的 API。`PerCpuArray<T>` 的类型参数 `T` 必须在编译期满足 `Pod`（Plain Old Data）约束，确保 eBPF 验证器可以推断其内存布局。
 
 > **[Aya Book](https://aya-rs.dev/book/)** eBPF 验证器在加载期证明程序安全性，Rust 类型系统在编译期证明内存安全。
 
@@ -1283,7 +1283,7 @@ graph TD
 
 **安全边界**: GUI 的**跨线程 UI 更新**是 `Send/Sync` 的典型应用场景。`iced` 的 `Command<Message>` 通过 `Send` 约束保证后台任务的结果可以安全传递回 UI 线程。`egui` 的纯函数式设计避免了跨线程问题——UI 状态完全由单线程的 `Context` 管理。
 
-> **[egui Docs](https://docs.rs/egui/latest/egui/)** 立即模式每帧重建 UI 状态，所有权模型简化为栈分配 + 借用。
+> **[egui Docs](https://docs.rs/egui/latest/egui/)** 立即模式每帧重建 UI 状态，所有权模型简化为栈分配 + 借用（Borrowing）。
 
 ---
 
@@ -1401,7 +1401,7 @@ struct AppStateFixed {
 }
 ```
 
-> **修正**: Web 服务器通常使用线程池或异步运行时处理并发请求。应用状态必须在多个线程间共享。`Rc<T>` 使用非原子引用（Reference）计数，不能跨线程；`Arc<T>` 使用原子操作（Atomic Operations），是 `Send + Sync`。Rust 编译器在编译期验证这些约束——试图将 `Rc` 状态传递给多线程框架是编译错误。这与 Node.js 的全局状态（单线程事件循环）或 Python 的 GIL（全局解释器锁）不同——Rust 的并发安全（Concurrency Safety）通过类型系统静态保证，无运行时检查开销。[来源: [Actix Documentation](https://docs.rs/actix-web/)]
+> **修正**: Web 服务器通常使用线程池或异步（Async）运行时处理并发请求。应用状态必须在多个线程间共享。`Rc<T>` 使用非原子引用（Reference）计数，不能跨线程；`Arc<T>` 使用原子操作（Atomic Operations），是 `Send + Sync`。Rust 编译器在编译期验证这些约束——试图将 `Rc` 状态传递给多线程框架是编译错误。这与 Node.js 的全局状态（单线程事件循环）或 Python 的 GIL（全局解释器锁）不同——Rust 的并发安全（Concurrency Safety）通过类型系统静态保证，无运行时检查开销。[来源: [Actix Documentation](https://docs.rs/actix-web/)]
 
 ### 10.2 边界测试：游戏引擎中的 ECS 组件查询（编译错误）
 

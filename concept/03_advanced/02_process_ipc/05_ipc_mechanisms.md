@@ -26,7 +26,7 @@
 | Unix 域套接字 | 高 | ❌ | 中 | 本地复杂通信 |
 | TCP/UDP 套接字 | 中 | ✅ | 中 | 跨网络通信 |
 | 共享内存 | 最高 | ❌ | 高 | 大数据高性能 |
-| 消息队列 | 中 | ❌ | 中 | 异步消息传递 |
+| 消息队列 | 中 | ❌ | 中 | 异步（Async）消息传递 |
 | 信号（Signal） | 低 | ❌ | 低 | 事件通知 |
 
 ## 2. 匿名管道
@@ -56,7 +56,7 @@ fn basic_pipe() -> Result<(), Box<dyn std::error::Error>> {
 
 **关键点**：
 
-- 必须调用 `take()` 获取管道所有权。
+- 必须调用 `take()` 获取管道所有权（Ownership）。
 - 写入后关闭 stdin（或 drop），否则子进程会一直等待。
 - 使用 `wait_with_output()` 同时等待进程结束并收集输出。
 
@@ -104,7 +104,7 @@ fn tcp_server() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 6. 共享内存
 
-共享内存通过多个进程映射同一物理内存区域实现高速数据交换，但需要额外同步机制（如信号量、互斥锁、原子操作）防止数据竞争：
+共享内存通过多个进程映射同一物理内存区域实现高速数据交换，但需要额外同步机制（如信号量、互斥锁、原子操作（Atomic Operations））防止数据竞争：
 
 ```rust
 // 示意：使用 memmap2 创建共享内存映射
@@ -155,7 +155,7 @@ fn handle_signals() -> Result<(), Box<dyn std::error::Error>> {
 - 异步事件通知：信号。
 - 同一主机进程/线程间消息传递：`crossbeam-channel`。
 
-> **L2 向下引用**: IPC 安全抽象建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md) 与 [错误处理](../../02_intermediate/03_error_handling/04_error_handling.md) 之上。
+> **L2 向下引用（Reference）**: IPC 安全抽象建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md) 与 [错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 之上。
 
 ## 补充视角：IPC 机制工程选型速查
 
@@ -183,7 +183,7 @@ fn handle_signals() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 相关概念
 
-- [进程模型与生命周期](01_process_model_and_lifecycle.md)
+- [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [并发模型](../00_concurrency/01_concurrency.md)
 - [原子操作与内存序](../00_concurrency/11_atomics_and_memory_ordering.md)
 - [Rust 网络编程](../06_low_level_patterns/18_network_programming.md)
@@ -238,7 +238,7 @@ fn main() -> std::io::Result<()> {
 1. **问题识别**: 识别不同 IPC 机制在延迟、吞吐、复杂度与跨网络能力上的权衡。
 2. **概念建立**: 掌握匿名管道、命名管道、Unix 域套接字、TCP/UDP、共享内存与信号的使用场景。
 3. **机制推理**: 通过机制特性 ⟹ 选型 ⟹ 安全边界的定理链进行工程决策。
-4. **边界辨析**: 辨析“共享内存总是最快”等反命题，理解同步开销与数据一致性问题。
+4. **边界辨析**: 辨析“共享内存总是最快”等反命题，理解同步开销与数据一致性（Coherence）问题。
 5. **迁移应用**: 将 IPC 与监控、安全、性能工程主题链接。
 
 ## 定理链

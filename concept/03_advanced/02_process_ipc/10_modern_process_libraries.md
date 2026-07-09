@@ -13,14 +13,14 @@
 # Rust 现代进程管理库
 
 > **权威页地位**：本页为 Rust 现代进程管理库生态的 canonical 解释来源。
-> **L2 向下引用**: 进程库的选型与封装建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
+> **L2 向下引用（Reference）**: 进程库的选型与封装建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
 
 ## 1. 核心库对比
 
 | 库 | 定位 | 关键特性 | 适用场景 |
 | :--- | :--- | :--- | :--- |
 | `std::process` | 标准库 | 同步、跨平台、零依赖 | 简单命令执行 |
-| `tokio::process` | 异步运行时 | 与 Tokio 集成、异步 I/O、超时 | 高并发异步场景 |
+| `tokio::process` | 异步（Async）运行时（Runtime） | 与 Tokio 集成、异步 I/O、超时 | 高并发异步场景 |
 | `duct` | 进程组合 | 链式管道、易读 API | shell-like 命令链 |
 | `nix` | Unix 系统调用 | fork/exec、信号、rlimit、namespace | 需要 Unix 底层控制 |
 | `sysinfo` | 系统信息 | 跨平台进程/系统监控 | 监控工具 |
@@ -173,12 +173,12 @@ flowchart TD
 - 优先使用标准库或成熟 crate，避免重复封装。
 - 根据平台支持范围选择库：`nix` 仅 Unix，`sysinfo`/`duct`/`tokio` 跨平台。
 - 锁定版本，避免使用通配符依赖。
-- 将平台相关代码隔离在 `#[cfg]` 模块中。
+- 将平台相关代码隔离在 `#[cfg]` 模块（Module）中。
 - 定期审计依赖的安全公告与维护状态。
 
 ## 12. 相关概念
 
-- [进程模型与生命周期](01_process_model_and_lifecycle.md)
+- [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [异步进程管理](03_async_process_management.md)
 - [跨平台进程管理](04_cross_platform_process_management.md)
 - [进程安全与沙箱](07_process_security_and_sandboxing.md)

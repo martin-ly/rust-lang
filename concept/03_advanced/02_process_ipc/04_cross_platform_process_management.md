@@ -104,7 +104,7 @@ impl CrossPlatformConfig {
 
 ## 3. 平台特定扩展
 
-Rust 通过 `std::os` 模块提供平台扩展 trait：
+Rust 通过 `std::os` 模块（Module）提供平台扩展 trait：
 
 - `std::os::unix::process::CommandExt`
 - `std::os::windows::process::CommandExt`
@@ -175,7 +175,7 @@ fn config_path() -> PathBuf {
 
 ### Windows 特定能力
 
-- **作业对象（Job Objects）**：将一组进程绑定到统一资源限制与生命周期管理单元。
+- **作业对象（Job Objects）**：将一组进程绑定到统一资源限制与生命周期（Lifetimes）管理单元。
 - **服务管理**：通过 `sc` 命令或 `windows-service` crate 注册/管理 Windows Service。
 - **进程优先级**：`SetPriorityClass` 设置 `IDLE` 到 `REALTIME` 优先级。
 
@@ -196,7 +196,7 @@ fn config_path() -> PathBuf {
 
 - [进程模型与生命周期](01_process_model_and_lifecycle.md)
 - [高级进程管理](02_advanced_process_management.md)
-- [异步进程管理](03_async_process_management.md)
+- [异步（Async）进程管理](03_async_process_management.md)
 - [条件编译](../03_proc_macros/28_conditional_compilation.md)
 
 ---

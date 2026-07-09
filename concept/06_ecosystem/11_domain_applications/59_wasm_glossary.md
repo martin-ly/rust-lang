@@ -48,7 +48,7 @@
     - [绑定 (Binding)](#绑定-binding)
   - [⚡ 性能优化术语](#-性能优化术语)
     - [二进制大小优化](#二进制大小优化)
-    - [运行时优化](#运行时优化)
+    - [运行时（Runtime）优化](#运行时优化)
     - [LTO (Link Time Optimization)](#lto-link-time-optimization)
     - [wasm-opt](#wasm-opt)
   - [🛠️ 工具链术语](#️-工具链术语)
@@ -78,7 +78,7 @@
 
 ### 线性内存 (Linear Memory)
 
-**定义**: WASM 模块的单一连续内存空间，用于存储数据。
+**定义**: WASM 模块（Module）的单一连续内存空间，用于存储数据。
 
 **特点**:
 
@@ -95,7 +95,7 @@
 
 - **函数**: 定义和导入的函数
 - **内存**: 线性内存定义
-- **表**: 函数引用表
+- **表**: 函数引用（Reference）表
 - **全局变量**: 全局状态
 
 ### 实例 (Instance)
@@ -223,11 +223,11 @@
 
 ### 绑定 (Binding)
 
-**定义**: 将 Rust 函数、结构体等暴露给 JavaScript。
+**定义**: 将 Rust 函数、结构体（Struct）等暴露给 JavaScript。
 
 **wasm-bindgen 提供**:
 
-- `#[wasm_bindgen]` 宏
+- `#[wasm_bindgen]` 宏（Macro）
 - 自动生成绑定代码
 - TypeScript 类型定义
 

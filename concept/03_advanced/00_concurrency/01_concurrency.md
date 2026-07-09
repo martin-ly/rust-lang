@@ -776,7 +776,7 @@ graph TD
     B4[跨线程使用 Rc] -->|编译期| E2[E0277: `Rc<T>` cannot be sent between threads safely]
 ```
 
-> **认知功能**: 错误预防检查表，可视化 unsafe impl Send/Sync 的常见陷阱与编译器的保护边界。在手动实现前逐条核对：裸指针通常安全，但 Rc/Cell/RefCell 跨线程是契约谎言。核心洞察：E0277 是类型系统在阻止 UB，而非编译器在刁难。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> **认知功能**: 错误预防检查表，可视化 unsafe impl Send/Sync 的常见陷阱与编译器的保护边界。在手动实现前逐条核对：裸指针通常安全，但 Rc/Cell/RefCell 跨线程是契约谎言。核心洞察：E0277 是类型系统（Type System）在阻止 UB，而非编译器在刁难。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [Rust Reference: Atomic types](https://doc.rust-lang.org/reference/items/associated-items.html)]
 > **下一章**：决策树给出了选择逻辑，§6 的定理一致性（Coherence）矩阵将理论根基系统化为可追踪的推理链。
 
@@ -832,7 +832,7 @@ graph TD
 | C1 | Send 不满足 | `Rc<T>`, `*mut T` 解引用（Reference）等跨线程传递 | ⟹ 编译错误 E0277 | Auto trait 推导 | — | 无（编译期强制） | E0277 |
 | C2 | Sync 不满足 | `RefCell<T>`, `Cell<T>` 跨线程共享引用（Reference） | ⟹ 跨线程读不安全 | Sync 定义 (`&T: Send`) | — | 无（编译期强制） | E0277 |
 | C3 | Mutex 误用 | 同线程重入、跨 await 持有 `std::sync::Mutex` | ⟹ 死锁 / 编译错误 | 锁协议 | — | 逻辑错误、调度时序 | — |
-| C4 | Arc 循环引用 | `Arc::clone` 成环且未使用 `Weak` | ⟹ 内存泄漏 | 引用计数语义 | — | 设计缺陷 | — |
+| C4 | Arc 循环引用（Reference） | `Arc::clone` 成环且未使用 `Weak` | ⟹ 内存泄漏 | 引用计数语义 | — | 设计缺陷 | — |
 
 > **对应标注**：T1 中"编译期排除数据竞争"为 [`01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) §3.1 "借用（Borrowing）检查器的安全性定理" 的并发延伸。
 > **[RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 一致性（Coherence）检查: `Send/Sync` 类型安全 ⟹ `Mutex`/`Channel` 运行时安全 ⟹ `Atomic` 无锁安全，形成**从编译期到运行时的**递进链。注意：死锁不在 Rust 安全保证范围内（属于活性性质，非安全性）。✅ 已验证
@@ -1286,7 +1286,7 @@ fn correct_order() {
 }
 ```
 
-> **修正**: 死锁的四个必要条件之一是"循环等待"。通过强制全局一致的锁获取顺序（如按内存地址排序），可以消除循环等待条件，从而预防死锁。Rust 的编译器无法检测运行时死锁，这是并发安全的静态分析边界。[来源: [Operating Systems: Three Easy Pieces](http://pages.cs.wisc.edu/~remzi/OSTEP/)]
+> **修正**: 死锁的四个必要条件之一是"循环等待"。通过强制全局一致的锁获取顺序（如按内存地址排序），可以消除循环等待条件，从而预防死锁。Rust 的编译器无法检测运行时死锁，这是并发安全（Concurrency Safety）的静态分析边界。[来源: [Operating Systems: Three Easy Pieces](http://pages.cs.wisc.edu/~remzi/OSTEP/)]
 
 ### 10.3 边界测试：`Mutex` 的毒化（poisoning）与错误恢复（运行时 panic）
 

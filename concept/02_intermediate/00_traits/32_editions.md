@@ -27,7 +27,7 @@
 2. **概念建立**: 掌握 Edition 的定义、版本选择规则、`cargo fix` 迁移工具与 `rust-version` 字段的区别。
 3. **机制推理**: 通过 ⟹ 定理链将编译器版本、Edition、语法行为、迁移路径串联起来。
 4. **边界辨析**: 借助反命题/反例理解 Edition 与依赖混用、最低工具链要求等边界。
-5. **迁移应用**: 将 Edition 知识与 [模块系统](../05_modules_and_visibility/10_module_system.md)、[async](../../03_advanced/01_async/25_async_advanced.md)、[发布流程](33_rust_release_process.md) 链接。
+5. **迁移应用**: 将 Edition 知识与 [模块（Module）系统](../05_modules_and_visibility/10_module_system.md)、[async](../../03_advanced/01_async/25_async_advanced.md)、[发布流程](33_rust_release_process.md) 链接。
 
 ---
 
@@ -59,8 +59,8 @@
 |:---|:---:|:---|
 | 2015 | 1.0 | 初始版本；模块路径需要 `extern crate`；trait 对象可省略 `dyn` |
 | 2018 | 1.31 | 模块系统简化（`mod` 自动解析）、路径统一为 `crate::`、NLL、`async`/await 语法准备、`dyn Trait` 必须显式 |
-| 2021 | 1.56 | prelude 新增 `TryFrom`/`TryInto`/`FromIterator`、数组实现 `IntoIterator`、panic 宏（Macro）一致性、保留语法 |
-| 2024 | 1.85+ | `if let` 临时作用域收窄、`gen` 关键字保留、异步闭包、`match` 人体工学改进、never type fallback |
+| 2021 | 1.56 | prelude 新增 `TryFrom`/`TryInto`/`FromIterator`、数组实现 `IntoIterator`、panic 宏（Macro）一致性（Coherence）、保留语法 |
+| 2024 | 1.85+ | `if let` 临时作用域收窄、`gen` 关键字保留、异步（Async）闭包（Closures）、`match` 人体工学改进、never type fallback |
 
 ### 代码示例对比
 
@@ -173,7 +173,7 @@ flowchart TD
 |:---|:---|
 | 全新项目 | 直接使用最新稳定 edition |
 | 维护期项目 | 在主要 release 或新功能开发期升级 |
-| 大量 unsafe/宏 | 预留更多时间手动审查 |
+| 大量 unsafe/宏（Macro） | 预留更多时间手动审查 |
 | 依赖链老旧的 crate | 优先升级依赖，再升级自身 edition |
 
 ---

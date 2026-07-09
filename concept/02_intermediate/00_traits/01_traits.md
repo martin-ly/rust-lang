@@ -163,6 +163,12 @@
     - [12.3 对语言特性的解锁效应](#123-对语言特性的解锁效应)
     - [12.4 迁移准备](#124-迁移准备)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
+    - [11.1 `impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）](#111-impl-trait-在-trait-定义中的使用rpitit--afit)
+    - [11.2 `Const Trait` 与 `~const` 实验特性](#112-const-trait-与-const-实验特性)
+    - [11.3 `#[fundamental]` Attribute 与 Orphan Rule 例外](#113-fundamental-attribute-与-orphan-rule-例外)
+    - [11.4 Specialization（`min_specialization`）的最新稳定状态](#114-specializationmin_specialization的最新稳定状态)
+    - [11.5 Negative Impls（`impl !Trait for T`）的形式化语义](#115-negative-implsimpl-trait-for-t的形式化语义)
+    - [11.6 Next-generation Trait Solver](#116-next-generation-trait-solver)
   - [权威来源索引](#权威来源索引)
     - [10.5 边界测试：trait 的孤儿规则与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
     - [10.6 边界测试：关联常量与泛型参数的交互（编译错误）](#106-边界测试关联常量与泛型参数的交互编译错误)
@@ -1301,7 +1307,7 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 类型论对偶辨析——区分存在类型的两种擦除层次（编译期擦除 vs 运行时擦除）及其工程后果。
+> **认知功能**: 类型论对偶辨析——区分存在类型的两种擦除层次（编译期擦除 vs 运行时（Runtime）擦除）及其工程后果。
 > **使用建议**: 返回单一实现用 `impl Trait`，异构集合用 `dyn Trait`；遇到 E0746 时沿树回溯检查分发方式选择。
 > **关键洞察**: `impl Trait` 和 `dyn Trait` 在类型论中不等价——前者是 ∃T.编译期已知(Trait(T))，后者是 ∃T.运行时已知(Trait(T))，信息隐藏的时机决定了能力边界。
 
@@ -1652,7 +1658,7 @@ fn notify<T: Summary>(item: &T) { ... }
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 泛型与单态化 | [02_generics.md](../01_generics/02_generics.md) | Trait Bounds 的载体 |
+| 泛型与单态化（Monomorphization） | [02_generics.md](../01_generics/02_generics.md) | Trait Bounds 的载体 |
 | 所有权（Ownership）与生命周期（Lifetimes） | [01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Trait 方法签名的基础约束 |
 | 类型系统基础 | [01_foundation/02_type_system/04_type_system.md](../../01_foundation/02_type_system/04_type_system.md) | Trait 的理论前提 |
 | 并发与 Send/Sync | [03_advanced/00_concurrency/01_concurrency.md](../../03_advanced/00_concurrency/01_concurrency.md) | Auto Trait 的核心应用 |
@@ -2691,7 +2697,7 @@ trait Drawable {
 
 ## 从 `crates\c02_type_system\docs\tier_02_guides\04_trait_system_guide.md` 迁移的补充视角
 
-> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏（Macro）观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
 
 # 2.4 Rust 类型系统 - Trait 系统指南
 
@@ -2769,7 +2775,7 @@ trait Drawable {
   - [14. 参考资源](#14-参考资源)
   - [Trait系统高级代码示例补充](#trait系统高级代码示例补充)
   - [🚀 异步Trait（Rust 1.75+稳定）](#-异步traitrust-175稳定)
-    - [案例：异步数据库接口](#案例异步数据库接口)
+    - [案例：异步（Async）数据库接口](#案例异步数据库接口)
   - [🎯 Trait对象高级应用](#-trait对象高级应用)
     - [案例：插件系统实现](#案例插件系统实现)
   - [📊 性能对比：静态 vs 动态分发](#-性能对比静态-vs-动态分发)

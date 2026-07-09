@@ -81,7 +81,7 @@ cargo build --target wasm32-wasip2
 
 WASI Preview 2 引入组件模型，支持：
 
-- 更强的模块化与接口定义（WIT）；
+- 更强的模块（Module）化与接口定义（WIT）；
 - 跨语言组件组合；
 - 更细粒度的 capability 管理。
 

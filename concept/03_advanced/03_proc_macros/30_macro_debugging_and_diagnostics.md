@@ -10,8 +10,8 @@
 > **层级**: L3 高级概念
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **P** — Procedure
-> **双维定位**: P×App — 宏调试与错误诊断流程
-> **前置概念**: [过程宏](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)
+> **双维定位**: P×App — 宏（Macro）调试与错误诊断流程
+> **前置概念**: [过程宏（Procedural Macro）](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)
 > **后置概念**: [生产级宏开发](31_production_grade_macro_development.md) · [rustc 编译器诊断](../../06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md)
 >
 > **主要来源**: [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html) · [cargo-expand](https://github.com/dtolnay/cargo-expand) · [rustc-dev-guide — Macro Expansion](https://rustc-dev-guide.rust-lang.org/macro-expansion.html) · [proc-macro2 crate](https://docs.rs/proc-macro2/)
@@ -27,7 +27,7 @@
 
 ## 一、核心定位
 
-宏在编译期展开，传统运行时调试器无法直接介入。因此宏开发需要专用工具链：
+宏在编译期展开，传统运行时（Runtime）调试器无法直接介入。因此宏开发需要专用工具链：
 
 - **查看展开结果**: `cargo expand`
 - **打印中间状态**: `eprintln!` / `tracing` / `RUSTC_LOG`
@@ -238,7 +238,7 @@ impl rustc_driver::Callbacks for MyCallbacks {
 - [ ] 用 `eprintln!` 打印宏输入/输出 TokenStream
 - [ ] 用 `quote_spanned!` / `syn::Error::new_spanned` 保留错误位置
 - [ ] 用 `cargo build --timings` 识别慢速 proc-macro crate
-- [ ] 用 `cargo llvm-lines` 定位单态化膨胀
+- [ ] 用 `cargo llvm-lines` 定位单态化（Monomorphization）膨胀
 - [ ] 用 `trybuild` 做编译失败快照测试
 - [ ] 用 `#[cfg(feature = "macro-debug")]` 提供可选调试输出
 

@@ -181,7 +181,7 @@ fn extract_string(value: Box<dyn Any>) -> Option<String> {
 | 语法位置 | 语言内置 | 标准库 trait |
 | 多态要求 | 需要虚函数 | 不需要；任何 `'static` 类型都可擦除 |
 | 转换失败 | 指针返回 `nullptr`，引用（Reference）抛异常 | 返回 `Option` / `Result` |
-| 运行时开销 | vtable 中存储 `type_info` | 单态化（Monomorphization）生成 `TypeId`，按需付费 |
+| 运行时（Runtime）开销 | vtable 中存储 `type_info` | 单态化（Monomorphization）生成 `TypeId`，按需付费 |
 | 类型安全 | 编译期无法保证转换成功 | `downcast_ref` 返回 `Option`，强制处理失败 |
 | 跨 crate | 依赖 ABI 兼容的 `type_info` | `TypeId` 在同一编译单元内稳定，跨进程不保证 |
 

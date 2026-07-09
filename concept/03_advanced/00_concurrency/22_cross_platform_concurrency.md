@@ -78,7 +78,7 @@ fn optimal_thread_count() -> usize {
 
 | Runtime | 线程模型 | 平台支持 | 适用场景 |
 |:---|:---|:---|:---|
-| Tokio | 多线程 work-stealing | Windows/Linux/macOS | 通用异步服务 |
+| Tokio | 多线程 work-stealing | Windows/Linux/macOS | 通用异步（Async）服务 |
 | async-std | 多线程 | 主流桌面/服务器 | 与 std 风格一致的异步 |
 | smol | 轻量 | 主流平台 | 嵌入式/低依赖 |
 | monoio | thread-per-core (io_uring) | Linux | 极致性能 |
@@ -133,7 +133,7 @@ strategy:
 | 定理 | 前提 | 结论 |
 |:---|:---|:---|
 | 平台线程模型差异 ⟹ 同步原语选择必须显式 | 不同 OS 使用不同内核对象 | 代码中应避免隐式依赖默认排序或固定线程数 |
-| 条件编译隔离平台代码 ⟹ 可维护性提升 | `#[cfg]` 将平台差异限制在最小模块 | 上层逻辑可保持平台无关 |
+| 条件编译隔离平台代码 ⟹ 可维护性提升 | `#[cfg]` 将平台差异限制在最小模块（Module） | 上层逻辑可保持平台无关 |
 | Async Runtime 依赖底层原语 ⟹ 选型前需确认目标平台 | io_uring / GCD / IOCP 支持不同 | 生产环境需验证 CI 矩阵覆盖 |
 
 ## 反命题

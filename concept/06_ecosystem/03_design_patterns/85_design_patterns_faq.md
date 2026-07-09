@@ -38,7 +38,7 @@
       - [Q4: Rust 中如何实现线程安全的单例模式？](#q4-rust-中如何实现线程安全的单例模式)
       - [Q5: 建造者模式如何保证必填字段？](#q5-建造者模式如何保证必填字段)
     - [Rust 特性](#rust-特性)
-      - [Q6: 观察者模式如何避免借用检查问题？](#q6-观察者模式如何避免借用检查问题)
+      - [Q6: 观察者模式如何避免借用（Borrowing）检查问题？](#q6-观察者模式如何避免借用检查问题)
       - [Q7: async/await vs 线程，如何选择？](#q7-asyncawait-vs-线程如何选择)
     - [实践问题](#实践问题)
       - [Q8: 如何在实际项目中应用设计模式？](#q8-如何在实际项目中应用设计模式)
@@ -122,29 +122,29 @@
 
 **A**: Rust 的设计模式实现有以下独特之处：
 
-**1. 所有权系统**:
+**1. 所有权（Ownership）系统**:
 
 - 无需担心内存泄漏
 - 借用检查器防止数据竞争
-- 生命周期系统保证安全
+- 生命周期（Lifetimes）系统保证安全
 
-**2. 零成本抽象**:
+**2. 零成本抽象（Zero-Cost Abstraction）**:
 
-- 泛型单态化，无运行时开销
+- 泛型（Generics）单态化（Monomorphization），无运行时（Runtime）开销
 - Trait 对象可选，按需使用
 - 编译时优化
 
 **3. 类型级编程**:
 
 - Typestate 模式编译时保证状态
-- 类型系统防止错误
+- 类型系统（Type System）防止错误
 - 零运行时开销
 
 **对比矩阵**:
 
 | 特性     | Java/C++   | Rust                  |
-| :--- | :--- | :--- || 内存安全 | 手动管理   | 编译时保证 ✅         |
-| 并发安全 | 需要锁     | Send/Sync 自动推导 ✅ |
+| :--- | :--- | :--- || 内存安全（Memory Safety） | 手动管理   | 编译时保证 ✅         |
+| 并发安全（Concurrency Safety） | 需要锁     | Send/Sync 自动推导 ✅ |
 | 性能开销 | 虚函数表   | 零成本抽象 ✅         |
 | 状态保证 | 运行时检查 | 编译时检查 ✅         |
 
@@ -354,7 +354,7 @@ trait Observer {
 | I/O 密集型 | ⚠️ 资源浪费      | ✅ 高效      |
 | 内存开销   | 较高（每线程栈） | 较低（协程） |
 | 上下文切换 | 操作系统调度     | 用户态调度   |
-| 适用场景   | 并行计算         | 异步 I/O     |
+| 适用场景   | 并行计算         | 异步（Async） I/O     |
 
 **相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md#asyncawait)
 
@@ -425,7 +425,7 @@ trait Observer {
 
 **Tier 1 基础**:
 
-- [项目概览](/crates/c09_design_pattern/docs/tier_01_foundations/01_project_overview.md) - 模块介绍、学习路径
+- [项目概览](/crates/c09_design_pattern/docs/tier_01_foundations/01_project_overview.md) - 模块（Module）介绍、学习路径
 - [主索引导航](/crates/c09_design_pattern/docs/tier_01_foundations/02_navigation.md) - 完整导航系统
 - [术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md) - 核心术语参考
 
@@ -465,7 +465,7 @@ trait Observer {
 
 ---
 
-> **向下引用**: 参见 [03_paradigm_matrix](../../05_comparative/00_paradigms/03_paradigm_matrix.md)
+> **向下引用（Reference）**: 参见 [03_paradigm_matrix](../../05_comparative/00_paradigms/03_paradigm_matrix.md)
 
 ## 过渡段
 
@@ -482,4 +482,4 @@ trait Observer {
 |:---|:---|:---|
 | 问题覆盖 ⟹ 减少重复询问 | 集中回答高频困惑 | 降低支持成本 |
 | 示例验证 ⟹ 答案可信 | 可运行的最小代码 | 确保 FAQ 解决方案正确 |
-| 决策规则 ⟹ 一致性 | 将 FAQ 提炼为选型原则 | 提升工程一致性 |
+| 决策规则 ⟹ 一致性（Coherence） | 将 FAQ 提炼为选型原则 | 提升工程一致性 |

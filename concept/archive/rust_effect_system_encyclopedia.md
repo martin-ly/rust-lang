@@ -30,7 +30,7 @@
   - [第一章：概念定义总表（Alphabetical Encyclopedia）](#第一章概念定义总表alphabetical-encyclopedia)
     - [1.1 Algebraic Effects（代数效应）](#11-algebraic-effects代数效应)
     - [1.2 Affine Type（仿射类型）](#12-affine-type仿射类型)
-    - [1.3 Borrow Checker（借用检查器）](#13-borrow-checker借用检查器)
+    - [1.3 Borrow Checker（借用（Borrowing）检查器）](#13-borrow-checker借用检查器)
     - [1.4 Capability（能力/权能）](#14-capability能力权能)
     - [1.5 Carried Effect（可携带效应）](#15-carried-effect可携带效应)
     - [1.6 Continuation（续延）](#16-continuation续延)
@@ -65,7 +65,7 @@
     - [4.5 generators —— 不稳定的多重性效应](#45-generators--不稳定的多重性效应)
   - [第五章：跨语言代码示例对比矩阵](#第五章跨语言代码示例对比矩阵)
     - [5.1 异常处理对比](#51-异常处理对比)
-    - [5.2 异步编程对比](#52-异步编程对比)
+    - [5.2 异步（Async）编程对比](#52-异步编程对比)
     - [5.3 状态管理对比](#53-状态管理对比)
   - [第六章：反例集（Counter-Examples）](#第六章反例集counter-examples)
     - [6.1 反例 1：Rust 无法实现的 Multi-Shot Continuation](#61-反例-1rust-无法实现的-multi-shot-continuation)
@@ -79,14 +79,14 @@
   - [第八章：工业实践案例深化](#第八章工业实践案例深化)
     - [8.1 Asterinas：Rust OS 内核的形式化验证](#81-asterinasrust-os-内核的形式化验证)
     - [8.2 verify-rust-std：标准库的形式化验证](#82-verify-rust-std标准库的形式化验证)
-    - [8.3 Rust for Linux：内核模块的安全标注](#83-rust-for-linux内核模块的安全标注)
+    - [8.3 Rust for Linux：内核模块（Module）的安全标注](#83-rust-for-linux内核模块的安全标注)
     - [8.4 Ferrocene：安全关键 Rust 编译器](#84-ferrocene安全关键-rust-编译器)
   - [第九章：形式化验证工具深化对比](#第九章形式化验证工具深化对比)
     - [9.1 工具能力矩阵](#91-工具能力矩阵)
     - [9.2 验证层次模型](#92-验证层次模型)
   - [第十章：结论与三重边界的最终形式化](#第十章结论与三重边界的最终形式化)
-    - [10.1 边界一：Carried vs Uncarried 类型系统断层](#101-边界一carried-vs-uncarried-类型系统断层)
-    - [10.2 边界二：零成本抽象与通用效应处理器的不相容性](#102-边界二零成本抽象与通用效应处理器的不相容性)
+    - [10.1 边界一：Carried vs Uncarried 类型系统（Type System）断层](#101-边界一carried-vs-uncarried-类型系统断层)
+    - [10.2 边界二：零成本抽象（Zero-Cost Abstraction）与通用效应处理器的不相容性](#102-边界二零成本抽象与通用效应处理器的不相容性)
     - [10.3 边界三：空间安全与行为安全的正交性](#103-边界三空间安全与行为安全的正交性)
     - [10.4 工程哲学总结](#104-工程哲学总结)
   - [参考文献索引（深化版）](#参考文献索引深化版)
@@ -694,7 +694,7 @@ Rust 中引用（Reference）有效的作用域标注。生命周期（Lifetimes
 | 表示法 | 区域变量 | 'a, 'static |
 | 推断方式 | 约束求解 | 基于 Hindley-Milner 扩展 |
 | 与所有权（Ownership）关系 | 借用约束 | 借用必须短于所有者 |
-| 运行时存在 | 无 | 纯编译期概念 |
+| 运行时（Runtime）存在 | 无 | 纯编译期概念 |
 | 与 GC 对比 | 静态替代 | 编译期证明而非运行时回收 |
 
 **【正例】**:
@@ -863,7 +863,7 @@ unsafe fn raw_pointer_ops() {
 ### 1.13 Ownership（所有权）
 
 **【定义】**:
-Rust 的核心内存管理纪律：每个值有且仅有一个所有者（owner）；当所有者离开作用域，值被自动释放（drop）。所有权可通过 move 转移，或通过 borrow 临时共享。
+Rust 的核心内存管理纪律：每个值有且仅有一个所有者（owner）；当所有者离开作用域，值被自动释放（drop）。所有权（Ownership）可通过 move 转移，或通过 borrow 临时共享。
 
 **【形式化描述】**:
 根据 RustBelt（Jung et al., POPL 2018），所有权在 Iris 分离逻辑中建模为**资源（resource）**：
@@ -1846,7 +1846,7 @@ Rust 的效应系统是**静态可消除效应的闭包（Closures）**——一
 
 ## 参考文献索引（深化版）
 
-| 引用 | 来源 | 权威性 | 核心贡献 |
+| 引用（Reference） | 来源 | 权威性 | 核心贡献 |
 |------|------|--------|----------|
 | EPFL 博士论文 | 形式化安全语言分类框架 | S | 三类安全机制分类 |
 | boats 博客 | "The problem of effects in Rust" | 高 | Rust 五种效应分类 |

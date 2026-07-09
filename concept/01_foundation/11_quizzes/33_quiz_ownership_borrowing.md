@@ -417,7 +417,7 @@ fn main() {
 }
 ```
 
-**知识点**：`Vec::push` 可能触发重新分配，因此 Rust 禁止在存在元素引用时修改 `Vec`。[→ 集合类型详解](../05_collections/08_collections.md)
+**知识点**：`Vec::push` 可能触发重新分配，因此 Rust 禁止在存在元素引用（Reference）时修改 `Vec`。[→ 集合类型详解](../05_collections/08_collections.md)
 
 </details>
 
@@ -515,7 +515,7 @@ shared shared
 
 ### 测验 2：在 测验：所有权、借用与生命周期（试点） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？（理解层）
 
-**题目**: 在 测验：所有权（Ownership）、借用与生命周期（Lifetimes）（试点） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？
+**题目**: 在 测验：所有权（Ownership）、借用（Borrowing）与生命周期（Lifetimes）（试点） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？
 
 <details>
 <summary>✅ 答案与解析</summary>

@@ -54,7 +54,7 @@
   - [四、示例与反例](#四示例与反例)
     - [4.1 正确示例：手动实现 Vec 的 pop](#41-正确示例手动实现-vec-的-pop)
     - [4.2 反例：读取未初始化内存](#42-反例读取未初始化内存)
-    - [4.3 反例：Arc 引用计数管理错误](#43-反例arc-引用计数管理错误)
+    - [4.3 反例：Arc 引用（Reference）计数管理错误](#43-反例arc-引用计数管理错误)
   - [五、反命题与边界分析](#五反命题与边界分析)
     - [5.1 反命题树](#51-反命题树)
     - [5.2 边界极限](#52-边界极限)
@@ -78,10 +78,10 @@
 > Rust 的标准集合（`Vec<T>`、`Arc<T>`、`Mutex<T>`）是在 `unsafe` 原语之上构建的安全抽象。它们的核心挑战包括：
 >
 > - 如何分配和管理未初始化内存（`Vec`）。
-> - 如何在共享所有权下安全释放资源（`Arc`）。
-> - 如何在运行时保证互斥访问（`Mutex`）。
+> - 如何在共享所有权（Ownership）下安全释放资源（`Arc`）。
+> - 如何在运行时（Runtime）保证互斥访问（`Mutex`）。
 >
-> 理解这些实现模式有助于掌握 Rust 内存模型、借用检查边界以及 unsafe 代码的正确使用方式。
+> 理解这些实现模式有助于掌握 Rust 内存模型、借用（Borrowing）检查边界以及 unsafe 代码的正确使用方式。
 >
 > [来源: [The Rustonomicon — Implementing Vec](https://doc.rust-lang.org/nomicon/vec.html)]
 
@@ -312,7 +312,7 @@ impl<T> Clone for BadArc<T> {
 
 ### 5.1 反命题树
 
-> **反命题 1**: "实现 Vec 只需要普通引用" ⟹ 不成立。未初始化内存无法通过 safe 引用表达，必须使用原始指针。
+> **反命题 1**: "实现 Vec 只需要普通引用" ⟹ 不成立。未初始化内存无法通过 safe 引用表达，必须使用原始指针（Raw Pointer）。
 > **反命题 2**: "Arc 的引用计数可以用普通 `usize`" ⟹ 不成立。多线程共享需要 `AtomicUsize` 和正确的内存序。
 > **反命题 3**: "Mutex 可以不使用 unsafe" ⟹ 不成立。`Mutex` 内部必须使用 `UnsafeCell` 打破借用规则。
 > **反命题 4**: "unsafe 集合的实现不需要考虑 Drop" ⟹ 不成立。必须精确追踪哪些元素已初始化，避免 double drop 或 leak。
@@ -398,7 +398,7 @@ graph TD
 | 动态数组 | `Vec<T>` | 手写 raw pointer Vec | 标准库已高度优化 |
 | 共享只读数据 | `Arc<T>` | `Rc<T>` 跨线程 | `Arc` 是线程安全的 |
 | 共享可变数据 | `Arc<Mutex<T>>` | `Arc<RefCell<T>>` 跨线程 | `RefCell` 不是 `Sync` |
-| 单线程共享 | `Rc<RefCell<T>>` | `Arc<Mutex<T>>` | 避免原子操作开销 |
+| 单线程共享 | `Rc<RefCell<T>>` | `Arc<Mutex<T>>` | 避免原子操作（Atomic Operations）开销 |
 
 ---
 

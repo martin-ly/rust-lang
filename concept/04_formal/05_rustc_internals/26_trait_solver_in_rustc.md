@@ -74,7 +74,7 @@
   - [五、Evaluation：不约束推断变量的判断](#五evaluation不约束推断变量的判断)
   - [六、旧 Solver 与新 Solver（Next-Gen）的对比](#六旧-solver-与新-solvernext-gen的对比)
     - [6.1 架构差异](#61-架构差异)
-    - [6.2 行为差异示例：关联类型与高阶生命周期](#62-行为差异示例关联类型与高阶生命周期)
+    - [6.2 行为差异示例：关联类型与高阶生命周期（Lifetimes）](#62-行为差异示例关联类型与高阶生命周期)
     - [6.3 嵌套目标与 Fixpoint：推断变量的传播](#63-嵌套目标与-fixpoint推断变量的传播)
     - [6.4 可复现的对比实验：高阶生命周期与关联类型归一化](#64-可复现的对比实验高阶生命周期与关联类型归一化)
   - [七、Coinduction 与递归 Trait](#七coinduction-与递归-trait)
@@ -214,7 +214,7 @@ Evaluation 只回答“这个 obligation 是否可能成立”，不会修改推
 >
 > **定理 5** [Tier 2]: 新 solver 引入 canonicalization 与 `AliasRelate` 目标 ⟹ 可以延迟处理含绑定变量的关联类型等价，提升对高阶边界的支持。
 >
-> **定理 6** [Tier 3]: 新 solver 与 rust-analyzer 共享核心逻辑 ⟹ 编辑器中的类型推断与编译器趋于一致，降低 IDE 与 rustc 行为漂移的风险。
+> **定理 6** [Tier 3]: 新 solver 与 rust-analyzer 共享核心逻辑 ⟹ 编辑器中的类型推断（Type Inference）与编译器趋于一致，降低 IDE 与 rustc 行为漂移的风险。
 
 ### 6.1 架构差异
 

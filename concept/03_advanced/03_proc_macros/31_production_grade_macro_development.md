@@ -10,8 +10,8 @@
 > **层级**: L3 高级概念
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
-> **双维定位**: P×Eva — 评估宏库工程实践
-> **前置概念**: [过程宏](07_proc_macro.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) · [Cargo 注册表与包发布](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md)
+> **双维定位**: P×Eva — 评估宏（Macro）库工程实践
+> **前置概念**: [过程宏（Procedural Macro）](07_proc_macro.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) · [Cargo 注册表与包发布](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md)
 > **后置概念**: [Cargo semver-checks](../../07_future/03_preview_features/46_cargo_semver_checks_preview.md) · [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/82_engineering_and_production_patterns.md)
 >
 > **主要来源**: [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Semantic Versioning](https://semver.org/) · [Keep a Changelog](https://keepachangelog.com/)

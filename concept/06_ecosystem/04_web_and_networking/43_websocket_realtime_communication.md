@@ -668,12 +668,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 | 特性           | 描述         | 适用场景   |
 | :--- | :--- | :--- || **全双工通信** | 双向实时通信 | 聊天、游戏 |
 | **低延迟**     | 减少握手开销 | 实时数据   |
-| **事件驱动**   | 异步消息处理 | 高并发     |
+| **事件驱动**   | 异步（Async）消息处理 | 高并发     |
 
 ### 最佳实践
 
 1. **心跳检测**: 定期发送 Ping/Pong 维持连接
-2. **错误处理**: 妥善处理断线重连
+2. **错误处理（Error Handling）**: 妥善处理断线重连
 3. **消息队列**: 缓冲待发送消息
 4. **状态管理**: 维护连接状态
 5. **资源清理**: 连接关闭时清理资源
@@ -702,7 +702,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ---
 
-> **向下引用**: 参见 [08_rust_vs_javascript](../../05_comparative/02_managed_languages/08_rust_vs_javascript.md)
+> **向下引用（Reference）**: 参见 [08_rust_vs_javascript](../../05_comparative/02_managed_languages/08_rust_vs_javascript.md)
 
 ## 过渡段
 

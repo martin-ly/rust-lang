@@ -7,7 +7,7 @@
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
-> **双维定位**: C×Eva — 评价异步运行时架构对目标场景的适配性
+> **双维定位**: C×Eva — 评价异步（Async）运行时（Runtime）架构对目标场景的适配性
 > **前置依赖**: [Async/Await](../../03_advanced/01_async/02_async.md) · [Async Patterns](../../03_advanced/01_async/26_async_patterns.md) · [执行模型同构](../../05_comparative/00_paradigms/05_execution_model_isomorphism.md)
 > **后置概念**: [High-Performance Network Service Architecture](39_high_performance_network_service_architecture.md)
 >

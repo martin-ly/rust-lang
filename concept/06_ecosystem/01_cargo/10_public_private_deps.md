@@ -36,7 +36,7 @@ pub fn flags() -> MyFlags { /* ... */ }
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用依赖可见性规则
 > **定位**: 解决 Rust crate 图中“依赖泄漏”问题的核心机制，使 API 稳定性与依赖演进解耦；同时说明 resolver v3 在版本选择上的 MSRV-aware 行为。
-> **对标**: [Java 模块系统](https://docs.oracle.com/javase/specs/jls/se17/html/jls-7.html) `requires transitive` / `requires` · [C++ 前置声明 vs 完整包含](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
+> **对标**: [Java 模块（Module）系统](https://docs.oracle.com/javase/specs/jls/se17/html/jls-7.html) `requires transitive` / `requires` · [C++ 前置声明 vs 完整包含](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **定理链**: 见“五、定理链”
 > **前置概念**: [Cargo Workspaces](78_cargo_workspaces.md) · [Cargo Dependency Resolution](60_cargo_dependency_resolution.md)
 

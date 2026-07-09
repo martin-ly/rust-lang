@@ -326,7 +326,7 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 | **运行时** | 内存隔离 +  Capability | Rust 类型系统（Type System） + Miri | `wasmtime` |
 | **WASI** | 能力安全（Capability-based）| 规范审查 | `wasi-common` |
 
-**关键定理**：Wasmtime 的 Rust 实现通过**编译期类型系统**（而非运行时检查）保证 Wasm 模块（Module）的内存隔离。`unsafe` 代码仅用于 Wasm 线性内存的底层访问，且被 Miri 和模糊测试双重验证。
+**关键定理**：Wasmtime 的 Rust 实现通过**编译期类型系统（Type System）**（而非运行时检查）保证 Wasm 模块（Module）的内存隔离。`unsafe` 代码仅用于 Wasm 线性内存的底层访问，且被 Miri 和模糊测试双重验证。
 
 > **来源**: [Wasmtime 文档] · [Bytecode Alliance] · [WasmCert: Isabelle Formalization] · [Wikipedia: WebAssembly](https://en.wikipedia.org/wiki/WebAssembly)
 

@@ -10,7 +10,7 @@
 > **教材对应提示**：
 >
 > 本页内容对应 [*The Rust Programming Language* 第 3 版第 17 章 “Async and Await”](https://doc.rust-lang.org/book/ch17-00-async-await.html)。
-> TRPL Ch17 提供面向初学者的 `async`/`await` 语法、Futures 与 `Pin` 入门；本文档在此基础上补充形式化语义（状态机操作语义、Pin 的 LTL 形式化）、运行时对比、取消安全、跨语言机制对比与工程反例，适合作为教材的深化与延伸阅读。
+> TRPL Ch17 提供面向初学者的 `async`/`await` 语法、Futures 与 `Pin` 入门；本文档在此基础上补充形式化语义（状态机操作语义、Pin 的 LTL 形式化）、运行时（Runtime）对比、取消安全、跨语言机制对比与工程反例，适合作为教材的深化与延伸阅读。
 > 详细节次映射见下文 [📚 权威教材对照：TRPL 3rd Ed Ch17](#-权威教材对照trpl-3rd-ed-ch17)。
 
 ---
@@ -75,7 +75,7 @@
 | [17.1](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html) | Futures and Syntax | §3.1 async fn 作为状态机、§8.1 正确示例 | `async fn` 返回 `Future`，`.await` 是挂起点 |
 | [17.2](https://doc.rust-lang.org/book/ch17-02-async-fn-and-messages.html) | Async Functions and Messages | §3.5 调度模型对比、§8.7 取消安全 | 协作式调度与消息传递模式 |
 | [17.3](https://doc.rust-lang.org/book/ch17-03-more-futures.html) | More Futures | §2.2 Future 组合子矩阵、§8.10 Stream/Sink | `join!`、`select!`、Stream 等扩展 |
-| [17.4](https://doc.rust-lang.org/book/ch17-04-pin.html) | Pinning | §3.2 Pin 的形式化语义、§7.2 Pin 使用边界 | 自引用与内存位置稳定性 |
+| [17.4](https://doc.rust-lang.org/book/ch17-04-pin.html) | Pinning | §3.2 Pin 的形式化语义、§7.2 Pin 使用边界 | 自引用（Reference）与内存位置稳定性 |
 | [17.5](https://doc.rust-lang.org/book/ch17-05-concurrency.html) | Concurrency with Async | §2.3 运行时对比矩阵、§6.1 反命题 | async 与线程/并发的选择 |
 
 > **阅读建议**：若初次接触 async Rust，可先阅读 TRPL Ch17 原文，再回本文查看形式化推导、跨语言对比与工程反例。
@@ -1934,7 +1934,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 | **场景** | **推荐** | **理由** |
 |:---|:---|:---|
 | **库内部实现** | `impl Future` / `async fn` | 最大化编译器优化，无运行时开销 |
-| **Trait 方法返回（AFIT）** | `async fn` / `→ impl Future` | 零成本抽象，调用方无感知 |
+| **Trait 方法返回（AFIT）** | `async fn` / `→ impl Future` | 零成本抽象（Zero-Cost Abstraction），调用方无感知 |
 | **动态分发需求（类型擦除）** | `Pin<Box<dyn Future>>` | 统一存储异构 Future（如任务队列） |
 | **递归 async fn** | `Pin<Box<dyn Future>>` | 打破无限递归类型 |
 | **跨 FFI / C ABI** | `Pin<Box<dyn Future>>` | 类型擦除是跨语言边界的必要条件 |
@@ -3162,7 +3162,7 @@ async fn safe_operation() -> std::io::Result<()> {
 
 ## 从 `crates\c06_async\docs\tier_01_foundations\04_faq.md` 迁移的补充视角
 
-> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏（Macro）观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
 
 > **生态状态提示**：
 >
@@ -3203,7 +3203,7 @@ async fn safe_operation() -> std::io::Result<()> {
     - [Q4.1: 如何在 `async` 代码中执行 CPU 密集型任务？](#q41-如何在-async-代码中执行-cpu-密集型任务)
     - [Q4.2: 如何优化 Tokio 运行时性能？](#q42-如何优化-tokio-运行时性能)
     - [Q4.3: 如何测量异步代码的性能？](#q43-如何测量异步代码的性能)
-  - [5. 错误处理与调试](#5-错误处理与调试)
+  - [5. 错误处理（Error Handling）与调试](#5-错误处理与调试)
     - [Q5.1: 如何在异步代码中处理错误？](#q51-如何在异步代码中处理错误)
     - [Q5.2: 如何调试异步代码？](#q52-如何调试异步代码)
     - [Q5.3: 如何处理 Timeout？](#q53-如何处理-timeout)

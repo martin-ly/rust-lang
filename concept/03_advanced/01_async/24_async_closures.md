@@ -150,7 +150,7 @@ async fn capture_examples() {
 | `async move` 闭包（Closures） | `async move \|x\| { ... }` | 按值 move 捕获 | `impl AsyncFnOnce(...) -> T` | 单次 / 可 `spawn` |
 | 普通闭包（Closures）返回 async 块 | `\|x\| async move { ... }` | 闭包按引用（Reference）捕获，async 块按值 move | `impl Fn(...) -> impl Future` | 旧生态 API |
 
-> 💡 关键直觉：`async \|x\| {}` ≠ `\|x\| async move {}`。前者返回的 `Future` 可借用（Borrowing）闭包自身，后者返回的 `Future` 拥有闭包捕获。
+> 💡 关键直觉：`async \|x\| {}` ≠ `\|x\| async move {}`。前者返回的 `Future` 可借用（Borrowing）闭包（Closures）自身，后者返回的 `Future` 拥有闭包捕获。
 
 ---
 

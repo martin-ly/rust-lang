@@ -12,7 +12,7 @@
 >
 > **来源**: [TRPL — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html) · [Rust Installation](https://www.rust-lang.org/tools/install) · [学习指南](../../00_meta/04_navigation/learning_guide.md) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/)
 > **前置概念**: N/A
-> **后置概念**: [所有权](../01_ownership_borrow_lifetime/01_ownership.md) · [借用](../01_ownership_borrow_lifetime/02_borrowing.md) · [类型系统](../02_type_system/04_type_system.md) · [模块与路径](../07_modules_and_items/11_modules_and_paths.md) · [错误处理基础](../08_error_handling/32_error_handling_basics.md) · [测试基础](../10_testing_basics/16_testing_basics.md)
+> **后置概念**: [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) · [借用（Borrowing）](../01_ownership_borrow_lifetime/02_borrowing.md) · [类型系统（Type System）](../02_type_system/04_type_system.md) · [模块（Module）与路径](../07_modules_and_items/11_modules_and_paths.md) · [错误处理（Error Handling）基础](../08_error_handling/32_error_handling_basics.md) · [测试基础](../10_testing_basics/16_testing_basics.md)
 ---
 
 ---
@@ -31,7 +31,7 @@
 
 ## 反命题决策树
 
-> **反命题 1**: "Rust 起步只需要安装一个编译器即可" ⟹ 不成立。`rustup` 管理工具链版本，`cargo` 管理项目生命周期，二者缺一不可。
+> **反命题 1**: "Rust 起步只需要安装一个编译器即可" ⟹ 不成立。`rustup` 管理工具链版本，`cargo` 管理项目生命周期（Lifetimes），二者缺一不可。
 
 > **反命题 2**: "任何 Rust 项目都必须从 `cargo new` 开始" ⟹ 不成立。单文件脚本、workspace、已有代码库都可以作为起点，选择取决于交付形态。
 
@@ -112,7 +112,7 @@ rust-version = "1.85"
 
 | 字段 | 说明 |
 |:---|:---|
-| `name` | crate 名称，用于发布与依赖引用 |
+| `name` | crate 名称，用于发布与依赖引用（Reference） |
 | `version` | 遵循 SemVer 的项目版本 |
 | `edition` | Rust 语言版本：2015/2018/2021/2024 |
 | `rust-version` | 最低支持的 `rustc` 版本 |

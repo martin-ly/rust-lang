@@ -5,7 +5,7 @@
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
-> **双维定位**: S×Eva — 评价进程抽象与生命周期
+> **双维定位**: S×Eva — 评价进程抽象与生命周期（Lifetimes）
 > **前置依赖**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Concurrency](../00_concurrency/01_concurrency.md)
 > **后置概念**: [Advanced Process Management](02_advanced_process_management.md) · [Async Process Management](03_async_process_management.md) · [IPC Mechanisms](05_ipc_mechanisms.md)
 > **定理链**: OS Process ⟹ std::process::Command ⟹ Resource Control
@@ -23,8 +23,8 @@
 
 - **进程**：操作系统分配资源和调度的基本单位，拥有独立的地址空间、代码、数据、堆栈和系统资源。
 - **Rust 抽象**：通过 `std::process` 提供跨平台进程管理，封装平台细节，保证内存与资源安全。
-- **内存隔离**：Rust 进程模型依赖操作系统的虚拟内存机制，确保进程间内存安全隔离。
-- **所有权模型**：Rust 类型系统和所有权机制防止跨进程悬垂指针和未定义行为。
+- **内存隔离**：Rust 进程模型依赖操作系统的虚拟内存机制，确保进程间内存安全（Memory Safety）隔离。
+- **所有权（Ownership）模型**：Rust 类型系统（Type System）和所有权机制防止跨进程悬垂指针和未定义行为。
 
 ### 1.2 Rust 进程抽象
 
@@ -38,7 +38,7 @@ Rust 采用 1:1 进程模型映射到操作系统进程，核心类型包括：
 ### 1.3 内存安全与所有权
 
 - **Drop 语义**：进程相关资源在作用域结束时自动释放，防止资源泄漏。
-- **错误处理**：所有进程操作均返回 `Result`，强制开发者处理失败分支。
+- **错误处理（Error Handling）**：所有进程操作均返回 `Result`，强制开发者处理失败分支。
 - **平台兼容性**：`std::process` 屏蔽平台差异，提供统一 API。
 
 ---
@@ -60,7 +60,7 @@ Created → Running → (Waiting →)* → Terminated
 
 ### 2.2 异步生命周期管理
 
-现代 Rust 异步运行时（如 Tokio）提供 `tokio::process::Command`，支持：
+现代 Rust 异步（Async）运行时（Runtime）（如 Tokio）提供 `tokio::process::Command`，支持：
 
 - 异步等待子进程完成。
 - 超时控制与自动清理。
@@ -100,7 +100,7 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 
 ## 4. Rust 的进程安全抽象
 
-> **L2 向下引用**: 进程安全抽象建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md) 与 [L2 错误处理](../../02_intermediate/03_error_handling/04_error_handling.md) 之上。
+> **L2 向下引用（Reference）**: 进程安全抽象建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md) 与 [L2 错误处理](../../02_intermediate/03_error_handling/04_error_handling.md) 之上。
 
 ### 4.1 类型安全保证
 
@@ -252,7 +252,7 @@ let status = child.wait()?;
 
 ### 异步闭包与进程管理
 
-Rust 1.90 起异步闭包（`async || {}`）可在异步上下文中更自然地封装进程处理逻辑，
+Rust 1.90 起异步闭包（Closures）（`async || {}`）可在异步上下文中更自然地封装进程处理逻辑，
 避免手动装箱 `Future`，使 `tokio::process` 的回调式代码更简洁。
 
 ### 模式匹配与进程状态
@@ -353,7 +353,7 @@ Created → Running → Waiting → Terminated
 
 - **速查卡**: [process_management_cheatsheet](../../../docs/02_reference/quick_reference/02_process_management_cheatsheet.md)
 - **RBE 练习**: [Process](https://doc.rust-lang.org/rust-by-example/std_misc/process.html)
-- **Rustlings**: 无进程专题；参考 RBE 与 C07 模块
+- **Rustlings**: 无进程专题；参考 RBE 与 C07 模块（Module）
 
 ---
 

@@ -469,7 +469,7 @@ async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
 }
 ```
 
-> **背压洞察**: **有界通道是异步背压的核心机制**——它使系统在生产者和消费者之间自动平衡负载。
+> **背压洞察**: **有界通道是异步（Async）背压的核心机制**——它使系统在生产者和消费者之间自动平衡负载。
 > [来源: [tokio::sync::mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)]
 
 ---
@@ -519,7 +519,7 @@ CPU 密集型 offload:
 
 ### 2.4 spawn_blocking 与混合架构
 
-异步运行时擅长 I/O 密集型任务，但不应在异步任务中执行阻塞或 CPU 密集型计算，否则会阻塞事件循环。`tokio::task::spawn_blocking` 将任务卸载到独立线程池：
+异步运行时（Runtime）擅长 I/O 密集型任务，但不应在异步任务中执行阻塞或 CPU 密集型计算，否则会阻塞事件循环。`tokio::task::spawn_blocking` 将任务卸载到独立线程池：
 
 ```rust
 use tokio::task;
@@ -1187,7 +1187,7 @@ async fn write_with_timeout(file: &mut File, data: &[u8]) -> std::io::Result<()>
 
 ### 结构化并发
 
-使用 `tokio::task::JoinSet` 管理同生命周期任务组，
+使用 `tokio::task::JoinSet` 管理同生命周期（Lifetimes）任务组，
 确保所有子任务在父任务退出前完成：
 
 ```rust,ignore

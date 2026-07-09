@@ -1,6 +1,6 @@
 > **内容分级**: [基础级]
 > **Rust 版本**: 1.96.1+ (Edition 2024)
-> **本节关键术语**: 类型别名（Type Alias） · 泛型类型别名（Generic Type Alias） · 关联类型（Associated Type） · 新类型模式（Newtype Pattern）
+> **本节关键术语**: 类型别名（Type Alias） · 泛型（Generics）类型别名（Generic Type Alias） · 关联类型（Associated Type） · 新类型模式（Newtype Pattern）
 
 # 类型别名（Type Alias）
 >
@@ -92,7 +92,7 @@ type AliasName<T1, T2, ...> = ExistingType<T1, T2, ...>;
 
 ### 1.2 直觉解释
 
-类型别名类似于数学中的“令 `x = 5`”：它引入了一个新的符号，但没有改变符号背后的值。在 Rust 中，`type Meters = u32;` 使得 `Meters` 和 `u32` 在类型系统中不可区分。
+类型别名类似于数学中的“令 `x = 5`”：它引入了一个新的符号，但没有改变符号背后的值。在 Rust 中，`type Meters = u32;` 使得 `Meters` 和 `u32` 在类型系统（Type System）中不可区分。
 
 > [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
@@ -273,7 +273,7 @@ fn main() {
 |:---|:---|:---|:---|
 | 类型区分 | 别名无法区分 | 新类型可区分 | 需要语义区分时用 newtype |
 | 方法实现 | 只能 impl trait | 可定义 inherent methods | 别名不适合封装行为 |
-| 递归类型 | 可间接支持 | 不能直接自引用 | 如 `type Link<T> = Option<Box<Node<T>>>;` |
+| 递归类型 | 可间接支持 | 不能直接自引用（Reference） | 如 `type Link<T> = Option<Box<Node<T>>>;` |
 | 泛型约束 | 可传递 where | 不能添加值约束 | where 子句仅用于 trait bound |
 
 ---
@@ -344,7 +344,7 @@ graph TD
 
 ## 八、逆向推理链（Backward Reasoning）
 
-> **从编译错误/运行时症状反推定理链**:
+> **从编译错误/运行时（Runtime）症状反推定理链**:
 >
 > ```text
 > 类型签名冗长难以维护 ⟸ 未使用类型别名 ⟸ 应检查重复出现的复杂类型
@@ -354,7 +354,7 @@ graph TD
 >
 > **诊断映射**:
 >
-> - `error[E0117]: only traits defined in the current crate can be implemented for arbitrary types` → 试图为外部类型的别名实现 trait，但违反了孤儿规则；应检查 impl 目标是否为本地 newtype。
+> - `error[E0117]: only traits defined in the current crate can be implemented for arbitrary types` → 试图为外部类型的别名实现 trait，但违反了孤儿规则（Orphan Rule）；应检查 impl 目标是否为本地 newtype。
 > - 代码编译通过但业务逻辑出错 → 可能混淆了语义等价的别名；考虑 newtype。
 
 ---

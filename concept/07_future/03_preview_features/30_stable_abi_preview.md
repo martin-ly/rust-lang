@@ -25,7 +25,7 @@
 Rust 的默认 ABI（`extern "Rust"`）是**不稳定**的。这意味着：
 
 - 不同编译器版本编译的动态库通常无法相互链接；
-- 结构体字段重排、枚举布局优化、单态化策略都可能随版本变化；
+- 结构体（Struct）字段重排、枚举（Enum）布局优化、单态化（Monomorphization）策略都可能随版本变化；
 - 插件系统、闭源 SDK、操作系统驱动等场景难以使用纯 Rust ABI。
 
 目前稳定 Rust 的唯一选择是 `extern "C"` + `#[repr(C)]`，这带来以下问题：
@@ -34,7 +34,7 @@ Rust 的默认 ABI（`extern "Rust"`）是**不稳定**的。这意味着：
 2. **panic 跨边界未定义**：FFI 边界 panic 是 UB；
 3. **手动转换开销**：需要在 `repr(C)` 类型和 Rust 类型之间反复转换。
 
-**Stable ABI（crabi / C Rust ABI）** 提案旨在定义一套 Rust 类型在 FFI 中的稳定布局，既兼容 C ABI，又支持 Rust 特性（如 panic 协议、trait object、闭包），从而实现 Rust 动态库跨版本安全链接。
+**Stable ABI（crabi / C Rust ABI）** 提案旨在定义一套 Rust 类型在 FFI 中的稳定布局，既兼容 C ABI，又支持 Rust 特性（如 panic 协议、trait object、闭包（Closures）），从而实现 Rust 动态库跨版本安全链接。
 
 ---
 
@@ -98,14 +98,14 @@ pub fn unstable_abi_function(x: String) -> String {
 ### 4.1 当前最佳实践
 
 1. **所有 FFI 边界使用 `extern "C"` + `#[repr(C)]`**；
-2. **不传递 `String` / `Vec` / 裸指针所有权**，使用 `CString`、长度+指针、或 `Box` 显式约定；
+2. **不传递 `String` / `Vec` / 裸指针所有权（Ownership）**，使用 `CString`、长度+指针、或 `Box` 显式约定；
 3. **panic 边界隔离**：在 FFI 边界捕获 panic（`catch_unwind`），避免 UB；
 4. **动态库插件系统**：目前建议通过 C ABI 接口暴露，或要求所有 Rust 插件用同一编译器版本构建。
 
 ### 4.2 何时关注 Stable ABI？
 
 - 设计长期稳定的 Rust SDK；
-- 操作系统驱动或内核模块；
+- 操作系统驱动或内核模块（Module）；
 - 需要跨编译器版本加载的插件系统；
 - 与 Ferrocene 等安全认证工具链配套使用。
 

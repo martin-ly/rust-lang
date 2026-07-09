@@ -35,7 +35,7 @@ trait Factory {
 这种写法有几个问题：
 
 1. **样板代码多**：每个 trait 都要声明一个关联类型；
-2. **调用方需要引用 `Self::Product`**：类型签名更复杂；
+2. **调用方需要引用（Reference） `Self::Product`**：类型签名更复杂；
 3. **关联类型冲突**：当 trait 有多个返回抽象类型的方法时，代码变得冗长。
 
 **RPITIT（Return Position Impl Trait In Traits）** 允许直接在 trait 方法中写 `impl Trait`：

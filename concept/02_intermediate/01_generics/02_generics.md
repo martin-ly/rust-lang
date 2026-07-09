@@ -144,6 +144,12 @@
     - [10.4 与 2024 Edition 的关系](#104-与-2024-edition-的关系)
   - [十一、相关概念链接](#十一相关概念链接)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
+    - [11.1 `min_specialization` 的当前状态与使用](#111-min_specialization-的当前状态与使用)
+    - [11.2 泛型代码的编译时间优化策略](#112-泛型代码的编译时间优化策略)
+    - [11.3 Type-level Programming](#113-type-level-programming)
+    - [11.4 `impl Trait` 在返回位置 vs 参数位置](#114-impl-trait-在返回位置-vs-参数位置)
+    - [11.5 Generic Associated Types（GATs）的形式化视角](#115-generic-associated-typesgats的形式化视角)
+    - [11.6 Const Generics 进阶用法](#116-const-generics-进阶用法)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：泛型规则的编译错误](#十二边界测试泛型规则的编译错误)
     - [12.1 边界测试：泛型参数未约束（编译错误）](#121-边界测试泛型参数未约束编译错误)
@@ -1879,7 +1885,7 @@ codegen-units = 16  # 更多编译单元，更高并行度
 
 ### 9.4 补充：Type-level Programming（Peano 算术与 typenum）
 
-> **[typenum 文档](https://docs.rs/typenum)** · **[generic-array 文档](https://docs.rs/generic-array)** Rust 的类型系统图灵完备，允许在类型层面进行数值计算。`typenum` 和 `generic-array` 是这一范式的工程化实现。💡
+> **[typenum 文档](https://docs.rs/typenum)** · **[generic-array 文档](https://docs.rs/generic-array)** Rust 的类型系统（Type System）图灵完备，允许在类型层面进行数值计算。`typenum` 和 `generic-array` 是这一范式的工程化实现。💡
 
 #### Peano 数编码：理论模型
 
@@ -2833,7 +2839,7 @@ fn main() {
 
 ## 从 `crates\c02_type_system\docs\tier_04_advanced\02_advanced_generics_patterns.md` 迁移的补充视角
 
-> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏（Macro）观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
 
 ﻿# 4.2 Rust 类型系统 - 高级泛型模式
 

@@ -1,7 +1,7 @@
 # 条目参考（Items Reference）
 
 > **EN**: Items Reference
-> **Summary**: Rust 语言中所有 item 种类的规范定义：模块、extern crate、use 声明、函数、类型别名、结构体、枚举、联合体、常量、静态项、trait、实现、外部块、泛型参数与关联项。 Normative definitions of all Rust item kinds: modules, extern crate, use declarations, functions, type aliases, structs, enums, unions, constants, statics, traits, implementations, extern blocks, generic parameters, and associated items.
+> **Summary**: Rust 语言中所有 item 种类的规范定义：模块（Module）、extern crate、use 声明、函数、类型别名、结构体（Struct）、枚举（Enum）、联合体、常量、静态项、trait、实现、外部块、泛型（Generics）参数与关联项。 Normative definitions of all Rust item kinds: modules, extern crate, use declarations, functions, type aliases, structs, enums, unions, constants, statics, traits, implementations, extern blocks, generic parameters, and associated items.
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -32,11 +32,11 @@
 
 ## 反命题决策树
 
-> **反命题 1**: "条目参考在所有场景下都适用" ⟹ 不成立。`unsafe` 外部块、FFI 声明和过程宏生成的 item 具有额外的语义约束。
+> **反命题 1**: "条目参考在所有场景下都适用" ⟹ 不成立。`unsafe` 外部块、FFI 声明和过程宏（Procedural Macro）生成的 item 具有额外的语义约束。
 
 > **反命题 2**: "忽略条目参考的细节也能写出正确代码" ⟹ 不成立。item 可见性、泛型参数和 trait 实现规则错误会直接导致编译失败。
 
-> **反命题 3**: "其他语言对条目参考的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的 trait、impl、泛型参数和生命周期参数构成独特的 item 体系。
+> **反命题 3**: "其他语言对条目参考的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的 trait、impl、泛型参数和生命周期（Lifetimes）参数构成独特的 item 体系。
 
 ## 一、Item 概述
 
@@ -230,7 +230,7 @@ extern "C" {
 |:---|:---|
 | [Names and Resolution](40_names_and_resolution.md) | item 是声明和名称解析的核心对象 |
 | [Attributes](47_attributes.md) | 属性修饰 item 行为 |
-| [Generics Compiler Behavior](53_generics_compiler_behavior.md) | 泛型 item 的单态化行为 |
+| [Generics Compiler Behavior](53_generics_compiler_behavior.md) | 泛型 item 的单态化（Monomorphization）行为 |
 | [Trait Solver](26_trait_solver_in_rustc.md) | trait/impl item 的解析 |
 | [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | 特定 item 需要 unsafe 上下文 |
 
@@ -245,5 +245,5 @@ extern "C" {
 >
 > **过渡**: 从泛型参数与关联项过渡到 trait 与实现，可以建立“抽象定义 + 具体实现”的 item 组合模型。
 >
-> **过渡**: 从 item 参考过渡到属性与宏系统，可以理解编译期元编程如何扩展和修饰 item 语义。
+> **过渡**: 从 item 参考过渡到属性与宏（Macro）系统，可以理解编译期元编程如何扩展和修饰 item 语义。
 >

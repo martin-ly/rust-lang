@@ -45,10 +45,10 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：日志与可观测性的编译错误](#十边界测试日志与可观测性的编译错误)
-    - [10.1 边界测试：`tracing` span 的生命周期（编译错误）](#101-边界测试tracing-span-的生命周期编译错误)
-    - [10.2 边界测试：OpenTelemetry 的全局提供者设置（运行时 panic）](#102-边界测试opentelemetry-的全局提供者设置运行时-panic)
+    - [10.1 边界测试：`tracing` span 的生命周期（Lifetimes）（编译错误）](#101-边界测试tracing-span-的生命周期编译错误)
+    - [10.2 边界测试：OpenTelemetry 的全局提供者设置（运行时（Runtime） panic）](#102-边界测试opentelemetry-的全局提供者设置运行时-panic)
     - [10.3 边界测试：结构化日志的字段类型不匹配（运行时错误）](#103-边界测试结构化日志的字段类型不匹配运行时错误)
-    - [10.4 边界测试：span 的生命周期与异步代码（编译错误/运行时丢失）](#104-边界测试span-的生命周期与异步代码编译错误运行时丢失)
+    - [10.4 边界测试：span 的生命周期与异步（Async）代码（编译错误/运行时丢失）](#104-边界测试span-的生命周期与异步代码编译错误运行时丢失)
     - [10.5 边界测试：`tracing` 的 span 泄漏与内存增长（运行时资源泄漏）](#105-边界测试tracing-的-span-泄漏与内存增长运行时资源泄漏)
     - [10.3 边界测试：tracing 的 span 生命周期与异步代码跨越 await（运行时泄漏）](#103-边界测试tracing-的-span-生命周期与异步代码跨越-await运行时泄漏)
     - [补充定理链](#补充定理链)
@@ -690,7 +690,7 @@ fn main() {
 
 - **Span 链**：在每个处理步骤创建子 span，在聚合入口创建顶层 span，串起完整请求链路。
 - **异步上下文**：对跨 `await` 的步骤使用 `.instrument(span)` 绑定 `tracing` 上下文。
-- **失败路径**：在错误处理中记录 `error!` 并携带上下文键值，便于排查。
+- **失败路径**：在错误处理（Error Handling）中记录 `error!` 并携带上下文键值，便于排查。
 - **指标**：通过 Prometheus 等暴露 RED 指标（Rate / Errors / Duration）。
 - **分布式追踪**：使用 OpenTelemetry + Jaeger/Zipkin 实现跨服务追踪，配置 1–10% 采样率。
 - **生产输出**：使用 JSON 格式结构化日志，包含 span 列表、线程 ID 等字段。
@@ -702,7 +702,7 @@ fn main() {
 
 WASM 工作负载的可观测性在传统三支柱基础上具有沙箱化特征：
 
-- **指标（Metrics）**：Prometheus 拉取 `/metrics`；WASM 模块可暴露模块级指标（请求数、错误率、线性内存大小）。相比容器，WASM 的内存模型单一，内存监控更直接。
+- **指标（Metrics）**：Prometheus 拉取 `/metrics`；WASM 模块（Module）可暴露模块级指标（请求数、错误率、线性内存大小）。相比容器，WASM 的内存模型单一，内存监控更直接。
 - **日志（Logs）**：推荐结构化 JSON 日志；Loki / Promtail 采集 Pod 日志，使用 LogQL 查询。
 - **追踪（Traces）**：通过 OpenTelemetry + Jaeger 追踪请求链路；WASM 模块内的 span 需注意跨 host-guest 边界的 context 传播。
 - **SLO/SLI**：定义可用性、P99 延迟、错误率目标；利用 Alertmanager 分级告警（critical / warning / info）。

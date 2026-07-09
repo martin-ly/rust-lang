@@ -302,7 +302,7 @@ graph TD
 
 ### 测验 5：如果 `pin` 关键字被引入 Rust，它可能如何简化自引用类型？（理解层）
 
-**题目**: 如果 `pin` 关键字被引入 Rust，它可能如何简化自引用类型？
+**题目**: 如果 `pin` 关键字被引入 Rust，它可能如何简化自引用（Reference）类型？
 
 <details>
 <summary>✅ 答案与解析</summary>

@@ -13,13 +13,13 @@
 # Rust 进程安全与沙箱
 
 > **权威页地位**：本页为 Rust 进程安全与沙箱概念的 canonical 解释来源。
-> **L2 向下引用**: 沙箱机制实现建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
+> **L2 向下引用（Reference）**: 沙箱机制实现建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
 
 ## 1. 概念定义
 
 **进程安全与沙箱 (Process Security and Sandboxing)** 通过最小权限、资源限制、隔离机制等手段，降低不可信或高敏感子进程对主机的影响。
 
-沙箱设计需要在安全性、复杂度和性能之间取得平衡。Rust 的所有权和类型系统能够在编译期消除大量内存安全类漏洞，而沙箱则主要面向运行时特权与资源边界。
+沙箱设计需要在安全性、复杂度和性能之间取得平衡。Rust 的所有权（Ownership）和类型系统（Type System）能够在编译期消除大量内存安全（Memory Safety）类漏洞，而沙箱则主要面向运行时（Runtime）特权与资源边界。
 
 ## 2. 权限最小化
 
@@ -181,11 +181,11 @@ flowchart TD
 - 将权限降级、资源限制、命名空间、seccomp 组合使用，而非依赖单一机制。
 - 对沙箱配置进行回归测试，确保合法系统调用未被误拦截。
 - 使用 Rust 的 `Result` 与 `?` 显式处理沙箱初始化失败。
-- 将平台相关安全代码隔离在 `#[cfg(target_os = "linux")]` 模块中。
+- 将平台相关安全代码隔离在 `#[cfg(target_os = "linux")]` 模块（Module）中。
 
 ## 10. 相关概念
 
-- [进程模型与生命周期](01_process_model_and_lifecycle.md)
+- [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [跨平台进程管理](04_cross_platform_process_management.md)
 - [IPC 机制](05_ipc_mechanisms.md)
 - [Rust 安全实践](../../06_ecosystem/07_security_and_cryptography/19_security_practices.md)

@@ -1,6 +1,6 @@
 > **内容分级**: [基础级]
 > **Rust 版本**: 1.96.1+ (Edition 2024)
-> **本节关键术语**: 格式化（Formatting） · `Display` trait · `Debug` trait · `format!` 宏 · 格式化字符串（Format String） · 占位符（Placeholder）
+> **本节关键术语**: 格式化（Formatting） · `Display` trait · `Debug` trait · `format!` 宏（Macro） · 格式化字符串（Format String） · 占位符（Placeholder）
 
 # 格式化与显示（Display and Debug Formatting）
 >
@@ -75,7 +75,7 @@
 
 ## 一、权威定义（Definition）
 
-> Rust 的格式化系统基于 `std::fmt` 模块，核心是 `Display` 和 `Debug` trait。`Display` 用于面向用户的格式化输出，`Debug` 用于面向程序员的调试输出。`format!`、`print!`、`println!`、`eprintln!`、`write!` 等宏都使用同一套格式化机制。
+> Rust 的格式化系统基于 `std::fmt` 模块（Module），核心是 `Display` 和 `Debug` trait。`Display` 用于面向用户的格式化输出，`Debug` 用于面向程序员的调试输出。`format!`、`print!`、`println!`、`eprintln!`、`write!` 等宏都使用同一套格式化机制。
 >
 > [来源: [std::fmt](https://doc.rust-lang.org/std/fmt/index.html)]
 
@@ -269,7 +269,7 @@ fn main() {
 ### 5.1 反命题树
 
 > **反命题 1**: "`{}` 和 `{:?}` 相同" ⟹ 不成立。`{}` 调用 `Display`，`{:?}` 调用 `Debug`。
-> **反命题 2**: "`format!` 在运行时才检查参数" ⟹ 不成立。`format!` 在编译期检查参数数量和类型。
+> **反命题 2**: "`format!` 在运行时（Runtime）才检查参数" ⟹ 不成立。`format!` 在编译期检查参数数量和类型。
 > **反命题 3**: "`Debug` 输出适合展示给用户" ⟹ 不成立。`Debug` 输出面向开发者，可能暴露内部结构。
 > **反命题 4**: "所有类型都自动实现 `Display`" ⟹ 不成立。`Display` 必须手动实现；`Debug` 可通过 `#[derive(Debug)]` 自动生成。
 
@@ -403,7 +403,7 @@ D. `{:<8}`
 
 ## 认知路径
 
-> **认知路径**: 本节从“如何将数据转换为文本”的需求出发，区分用户输出与调试输出，掌握 `format!` 宏和格式说明符，最终形成在错误处理、日志、UI 中选择正确格式化策略的能力。
+> **认知路径**: 本节从“如何将数据转换为文本”的需求出发，区分用户输出与调试输出，掌握 `format!` 宏和格式说明符，最终形成在错误处理（Error Handling）、日志、UI 中选择正确格式化策略的能力。
 >
 > 1. **问题识别**: 需要将各种类型的值输出为字符串。
 > 2. **概念建立**: `Display` 面向用户，`Debug` 面向开发者，`format!` 是通用格式化入口。

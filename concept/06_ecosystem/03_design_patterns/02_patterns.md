@@ -470,7 +470,7 @@ unsafe {
 
 **与其他语言对比**：
 
-- **Python**: `importlib` 动态导入，运行时灵活但无类型安全；Rust 的 `libloading` + trait 对象在 FFI 边界提供类型约束。
+- **Python**: `importlib` 动态导入，运行时（Runtime）灵活但无类型安全；Rust 的 `libloading` + trait 对象在 FFI 边界提供类型约束。
 - **Java**: `ServiceLoader` / OSGi 模块（Module）化；Rust 无内置类加载器，需手动管理动态库生命周期（Lifetimes）。
 - **C/C++**: `dlopen` / `LoadLibrary`；Rust 的 `libloading` 是对这些 API 的安全封装。
 
@@ -489,7 +489,7 @@ unsafe {
 - 分布式系统中的事件传播与消息总线
 - 异步（Async）任务完成通知与回调机制
 
-**核心问题**：一对多依赖关系中，如何在不硬编码订阅者列表的前提下，通知多个订阅者状态变化，同时避免所有权循环引用（Reference）导致的内存泄漏？
+**核心问题**：一对多依赖关系中，如何在不硬编码订阅者列表的前提下，通知多个订阅者状态变化，同时避免所有权（Ownership）循环引用（Reference）导致的内存泄漏？
 
 > **[GoF Design Patterns, 1994](https://en.wikipedia.org/wiki/Design_Patterns)** Observer 模式解耦了主题与观察者，使得主题无需知道观察者的具体类型。✅
 
@@ -607,7 +607,7 @@ async fn async_observer_example() {
 
 > [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)] · [Rust CLI Book](https://rust-cli.github.io/book/index.html)
 
-**关键洞察**：`broadcast` 通道解耦了生产者和消费者的生命周期（Lifetimes）——接收者可以独立存在，即使发送者已关闭，`recv()` 会返回错误而非悬垂引用。[Tokio Documentation](https://docs.rs/tokio/latest/tokio/)
+**关键洞察**：`broadcast` 通道解耦了生产者和消费者的生命周期（Lifetimes）——接收者可以独立存在，即使发送者已关闭，`recv()` 会返回错误而非悬垂引用（Reference）。[Tokio Documentation](https://docs.rs/tokio/latest/tokio/)
 
 > **[Tokio Docs — broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html)** broadcast 通道实现 fan-out：每个订阅者接收事件的独立拷贝。✅
 
@@ -741,7 +741,7 @@ fn display_system(mut reader: EventReader<TemperatureChanged>) {
 - **Go**: 使用 channel 实现发布-订阅，无所有权循环问题，但丧失了编译期类型安全（`interface{}` 类型断言）。
 
 > **来源**: [GoF Design Patterns] · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Bevy Docs] · 可信度: ✅
-> **过渡**：从动态加载的 Plugin 到事件驱动的 Observer，Rust 的模式谱系覆盖了编译期到运行时的全生命周期。理解这些实现机制后，必须警惕其对立面——反模式。
+> **过渡**：从动态加载的 Plugin 到事件驱动的 Observer，Rust 的模式谱系覆盖了编译期到运行时的全生命周期（Lifetimes）。理解这些实现机制后，必须警惕其对立面——反模式。
 [来源: [Async Book](https://rust-lang.github.io/async-book/index.html)]
 
 ### 4.7 Rust 特有高级模式
@@ -785,7 +785,7 @@ impl<'a, T> LendingIterator for Windows<'a, T> {
 
 #### Type Erasure（类型擦除）模式
 
-当需要存储异构类型且避免泛型传播时，使用类型擦除：
+当需要存储异构类型且避免泛型（Generics）传播时，使用类型擦除：
 
 ```rust,ignore
 // 手动 vtable：将任意 Write 类型擦除为统一句柄
@@ -815,7 +815,7 @@ struct WriterVTable {
 | **Cancellation Token** | 优雅取消长时间运行的异步（Async）任务 | `tokio_util::sync::CancellationToken` |
 | **Graceful Shutdown** | 运行时有序退出，完成 inflight 请求 | `tokio::select!` + `mpsc::channel` 关闭信号 |
 | **Backpressure** | 防止生产者过载消费者 | `tokio::sync::Semaphore` + bounded channel |
-| **Resource Pool** | 异步环境下的连接/对象复用 | `deadpool` / `bb8` |
+| **Resource Pool** | 异步（Async）环境下的连接/对象复用 | `deadpool` / `bb8` |
 | **Stream 适配** | 异步迭代与转换 | `futures::Stream` + `StreamExt` |
 
 ```rust,ignore
@@ -884,7 +884,7 @@ impl Drop for FooContext {
 }
 ```
 
-> **关键洞察**: FFI 安全封装的三层防线——**前置条件检查**（输入验证）、**不变式维护**（生命周期（Lifetimes）管理）、**后置条件保证**（返回值校验）。Rust 的类型系统负责编码不变式，运行时检查负责验证前置条件。
+> **关键洞察**: FFI 安全封装的三层防线——**前置条件检查**（输入验证）、**不变式维护**（生命周期（Lifetimes）管理）、**后置条件保证**（返回值校验）。Rust 的类型系统（Type System）负责编码不变式，运行时检查负责验证前置条件。
 [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 > **来源**: [The Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) · [Rust FFI Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · 可信度: ✅
@@ -1030,7 +1030,7 @@ fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> 
 - 过早将内部模块（Module）拆分为独立 crate，导致 Workspace 依赖环。
 - 过早定义 `dyn Trait` 接口，而实际调用方只有一处且性能敏感。
 - 在需求变更一次后即提取泛型工具函数，而非等待模式稳定。
-- 过早为 enum 的每个变体定义独立模块和子 Trait，导致导航成本超过收益。
+- 过早为 enum 的每个变体定义独立模块（Module）和子 Trait，导致导航成本超过收益。
 
 **代码示例：过早抽象 vs 稳定后抽象**
 
@@ -1501,7 +1501,7 @@ fn main() {
 | 编号 | 设计模式 | 安全前提 | 结论 | 失效条件 | 后果 |
 |:---|:---|:---|:---|:---|:---|
 | **P1** | RAII + Drop | 类型正确实现 `Drop` | 资源确定性释放 | `mem::forget`；循环引用 (`Rc`) | 资源泄漏 |
-| **P2** | 单态化泛型 | `T` 满足 `Trait` bound | 零运行时开销多态 | `dyn Trait` 替代；递归类型膨胀 | 性能退化 / 编译时间增加 |
+| **P2** | 单态化（Monomorphization）泛型 | `T` 满足 `Trait` bound | 零运行时开销多态 | `dyn Trait` 替代；递归类型膨胀 | 性能退化 / 编译时间增加 |
 | **P3** | 内部可变性 (`RefCell`) | 单线程使用 | 运行时 borrow 检查替代编译期 | 跨线程使用；递归 `borrow_mut` | panic（运行时崩溃） |
 | **P4** | Actor 模式 (Tokio) | 消息类型实现 `Send` | 状态隔离 + 无数据竞争 | `unsafe impl Send` 错误 | 数据竞争 |
 | **P5** | Typestate | 状态转换函数完整覆盖 | 非法状态不可达 | 缺失状态转换；`unsafe` 绕过 | 运行时 panic / 逻辑错误 |
@@ -1873,7 +1873,7 @@ Typestate 最适合：
 
 ## 从 `crates\c02_type_system\docs\tier_04_advanced\05_design_patterns_collection.md` 迁移的补充视角
 
-> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏（Macro）观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
 
 # 4.5 Rust 类型系统 - 设计模式集
 
@@ -1909,16 +1909,16 @@ Typestate 最适合：
   - [6. 最佳实践](#6-最佳实践)
     - [组合优于继承](#组合优于继承)
     - [使用 Trait 对象实现多态](#使用-trait-对象实现多态)
-  - [6. 错误处理模式](#6-错误处理模式)
-    - [Result组合模式](#result组合模式)
+  - [6. 错误处理（Error Handling）模式](#6-错误处理模式)
+    - [Result（Result）组合模式](#result组合模式)
     - [自定义错误类型](#自定义错误类型)
-    - [Try trait模式](#try-trait模式)
+    - [Try trait（Trait）模式](#try-trait模式)
   - [7. 内存管理模式](#7-内存管理模式)
     - [Arena分配模式](#arena分配模式)
     - [对象池模式](#对象池模式)
   - [8. Trait对象模式](#8-trait对象模式)
     - [动态分发](#动态分发)
-    - [枚举分发（更高效）](#枚举分发更高效)
+    - [枚举（Enum）分发（更高效）](#枚举分发更高效)
   - [9. 类型安全API设计](#9-类型安全api设计)
     - [幻影类型参数](#幻影类型参数)
     - [Session Types](#session-types)
@@ -2214,9 +2214,9 @@ fn global_config() -> &'static Config {
 
 | 反模式 | 危害 | 替代方案 |
 | :--- | :--- | :--- |
-| God Object | 职责过重、测试困难 | 拆分为多个小结构体 + trait |
+| God Object | 职责过重、测试困难 | 拆分为多个小结构体（Struct） + trait |
 | `Deref` 滥用 | 隐藏类型边界、违反新类型初衷 | 显式方法或 `AsRef` |
-| `clone()` 滥用 | 不必要的内存拷贝 | 借用、引用计数或共享所有权 |
+| `clone()` 滥用 | 不必要的内存拷贝 | 借用（Borrowing）、引用计数或共享所有权 |
 | `unwrap()` 滥用 | 生产环境 panic | `?`、显式错误处理或 `expect` 说明 |
 | 频繁字符串拼接 | 多次分配 | `String::with_capacity` + `push_str` 或 `format!` |
 | 过度使用 `Box` | 堆分配与间接调用 | 泛型参数或 `impl Trait` |

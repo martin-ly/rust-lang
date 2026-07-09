@@ -14,6 +14,7 @@
 > **状态**: ✅ 已完成
 >
 > **研究笔记写作最佳实践** → [research_notes/10_best_practices.md](../../archive/research_notes_2026_06_25/10_best_practices.md)
+> **权威来源**: [concept/06_ecosystem/03_design_patterns/37_pattern_selection_best_practices.md](../../concept/06_ecosystem/03_design_patterns/37_pattern_selection_best_practices.md)
 
 ---
 

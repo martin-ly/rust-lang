@@ -1,7 +1,7 @@
 # 泛型编译器行为：单态化、分发与类型擦除
 
 > **EN**: Generics Compiler Behavior
-> **Summary**: Rust 泛型代码的编译行为：单态化、静态分发与动态分发、类型擦除、胖指针与 VTable，以及性能权衡。 How Rust compiles generic code: monomorphization, static vs dynamic dispatch, type erasure, fat pointers, vtables, and performance trade-offs.
+> **Summary**: Rust 泛型（Generics）代码的编译行为：单态化、静态分发与动态分发、类型擦除、胖指针与 VTable，以及性能权衡。 How Rust compiles generic code: monomorphization, static vs dynamic dispatch, type erasure, fat pointers, vtables, and performance trade-offs.
 >
 > **受众**: [专家]
 > **内容分级**: [专家级]
@@ -21,9 +21,9 @@
 
 ## 认知路径
 
-> **认知路径**: 本节从 "泛型编译器行为：单态化、分发与类型擦除" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+> **认知路径**: 本节从 "泛型编译器行为：单态化（Monomorphization）、分发与类型擦除" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
 
-1. **问题识别**: 为什么泛型编译器行为在 Rust 中值得关注？它直接决定二进制大小、运行时性能和编译时间，是零成本抽象的核心。
+1. **问题识别**: 为什么泛型编译器行为在 Rust 中值得关注？它直接决定二进制大小、运行时（Runtime）性能和编译时间，是零成本抽象（Zero-Cost Abstraction）的核心。
 2. **概念建立**: 掌握单态化、静态分发、动态分发、类型擦除、胖指针和 VTable 的核心机制。
 3. **机制推理**: 通过 ⟹ 定理链将泛型函数、类型参数、实例化和分发方式串联起来。
 4. **边界辨析**: 借助反命题/反例理解单态化膨胀和动态分发开销的适用边界。

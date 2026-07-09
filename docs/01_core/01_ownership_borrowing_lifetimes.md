@@ -8,6 +8,7 @@
 > [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、RustBelt 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源**: [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 
 # 所有权、借用与生命周期：三位一体的内存安全 {#所有权借用与生命周期三位一体的内存安全}
 

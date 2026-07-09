@@ -111,7 +111,7 @@
 | `struct` / tuple / array | 所有字段/元素有效 |
 | `union` | 细节尚未确定；safe 代码可构造的值一定有效 |
 | 引用（Reference） / `Box<T>` | 对齐、非空、不悬垂、指向有效值 |
-| 宽引用/Box/裸指针 metadata | 必须与 unsized tail 类型匹配（vtable 或有效 slice 长度） |
+| 宽引用（Reference）/Box/裸指针 metadata | 必须与 unsized tail 类型匹配（vtable 或有效 slice 长度） |
 | 自定义有效范围类型 | 如 `NonNull<T>`、`NonZero<T>`，必须落在允许范围内 |
 
 ### 10. 错误使用内联汇编

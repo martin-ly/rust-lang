@@ -80,7 +80,7 @@
 | `ref` | 按引用（Reference）绑定 |
 | `return` | 从函数返回 |
 | `Self` | 正在定义或实现的类型的别名 |
-| `self` | 方法接收者或当前模块 |
+| `self` | 方法接收者或当前模块（Module） |
 | `static` | 全局变量或贯穿整个程序执行的生命周期（Lifetimes） |
 | `struct` | 定义结构体（Struct） |
 | `super` | 当前模块的父模块 |

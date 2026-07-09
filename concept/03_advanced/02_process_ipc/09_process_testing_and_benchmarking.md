@@ -13,7 +13,7 @@
 # Rust 进程测试与基准
 
 > **权威页地位**：本页为 Rust 进程测试与基准概念的 canonical 解释来源。
-> **L2 向下引用**: 进程测试技术建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
+> **L2 向下引用（Reference）**: 进程测试技术建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
 >
 > 通用 Rust 测试策略请参见 [Rust 测试策略](../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md)。
 
@@ -26,7 +26,7 @@
 | 层级 | 范围 | 典型方法 |
 | :--- | :--- | :--- |
 | 单元测试 | 单个 `Command` 调用 | `#[test]` 验证退出码/输出 |
-| 集成测试 | 进程通信、管道 | `tokio::test` 异步管道 |
+| 集成测试 | 进程通信、管道 | `tokio::test` 异步（Async）管道 |
 | 端到端测试 | 完整工作流 | 启动真实进程并验证结果 |
 
 ## 3. 进程测试技巧
@@ -92,7 +92,7 @@ fn test_sigterm_handling() {
 
 ## 4. 异步进程测试
 
-使用 `tokio::test` 与 `tokio::time::timeout` 验证异步进程生命周期：
+使用 `tokio::test` 与 `tokio::time::timeout` 验证异步进程生命周期（Lifetimes）：
 
 ```rust,ignore
 #[tokio::test]

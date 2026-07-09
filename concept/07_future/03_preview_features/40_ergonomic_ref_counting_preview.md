@@ -49,7 +49,7 @@
 
 ## 📑 目录
 
-- [Ergonomic Ref-Counting 预研：人机工学引用计数](#ergonomic-ref-counting-预研人机工学引用计数)
+- [Ergonomic Ref-Counting 预研：人机工学引用（Reference）计数](#ergonomic-ref-counting-预研人机工学引用计数)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 问题：引用计数的非人机工学](#11-问题引用计数的非人机工学)

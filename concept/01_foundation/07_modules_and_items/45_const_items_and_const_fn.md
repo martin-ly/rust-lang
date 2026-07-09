@@ -89,8 +89,8 @@ const fn function_name(args) -> ReturnType { body }
 ```
 
 - `const` 项的值必须是 **const-evaluable**（可在编译期求值）。
-- `const fn` 可在 `const` 上下文（如 `const` 项、数组长度、枚举判别值）中调用。
-- `const fn` 也可以在运行时被调用。
+- `const fn` 可在 `const` 上下文（如 `const` 项、数组长度、枚举（Enum）判别值）中调用。
+- `const fn` 也可以在运行时（Runtime）被调用。
 
 ### 1.2 直觉解释
 
@@ -107,7 +107,7 @@ const fn function_name(args) -> ReturnType { body }
 | 求值时机 | 编译期 | `const X: i32 = 1 + 2;` | Reference |
 | 内存行为 | 内联展开，无固定地址 | `const` 每次使用等价于字面量 | Reference |
 | 可变性 | 永远不可变 | 无 `const mut` | Reference |
-| 作用域 | 遵循项作用域 | 模块级或局部 | Reference |
+| 作用域 | 遵循项作用域 | 模块（Module）级或局部 | Reference |
 | 函数常量性 | `const fn` 可在 const 上下文调用 | `const fn add(a: i32, b: i32) -> i32 { a + b }` | Reference |
 | 限制 | 不能使用堆分配、I/O、随机数等运行时操作 | `const fn` 体受限 | Reference |
 
@@ -221,7 +221,7 @@ fn main() {}
 ```
 
 > **错误诊断**: `error[E0015]: cannot call non-const fn ... in constant functions`
-> **修正**: 在 `const` 上下文中使用固定大小的数组或切片；若需堆分配，使用运行时函数。
+> **修正**: 在 `const` 上下文中使用固定大小的数组或切片（Slice）；若需堆分配，使用运行时函数。
 > [来源: [The Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html)]
 
 ### 4.3 反例：试图修改 `const`
@@ -403,7 +403,7 @@ D. 返回基本类型如 `i32`
 
 ## 认知路径
 
-> **认知路径**: 本节从“在编译期完成计算”的需求出发，建立 `const` 项和 `const fn` 的概念，区分其与 `static`、`let`、普通 `fn` 的边界，最终形成在类型系统、性能和代码清晰度之间做出选择的能力。
+> **认知路径**: 本节从“在编译期完成计算”的需求出发，建立 `const` 项和 `const fn` 的概念，区分其与 `static`、`let`、普通 `fn` 的边界，最终形成在类型系统（Type System）、性能和代码清晰度之间做出选择的能力。
 >
 > 1. **问题识别**: 某些值或计算应在编译期确定，以提升运行时性能和类型表达能力。
 > 2. **概念建立**: `const` 提供编译期常量，`const fn` 提供编译期可执行函数。

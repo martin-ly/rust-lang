@@ -883,10 +883,10 @@ fn main() {
 | 场景 | 推荐方案 | 原因 |
 | :--- | :--- | :--- |
 | 单线程 + Copy 类型 | `Cell<T>` | 零开销，按值替换 |
-| 单线程 + 非 Copy 类型 | `RefCell<T>` | 运行时借用检查，灵活 |
+| 单线程 + 非 Copy 类型 | `RefCell<T>` | 运行时（Runtime）借用（Borrowing）检查，灵活 |
 | 多线程 + 频繁读取 | `RwLock<T>` | 读并发 |
 | 多线程 + 频繁写入 | `Mutex<T>` | 简单可靠 |
-| 多线程 + 原子操作 | `AtomicXxx` | 最高性能 |
+| 多线程 + 原子操作（Atomic Operations） | `AtomicXxx` | 最高性能 |
 | 不需要内部可变性 | `&mut T` | 编译时保证 |
 
 ### 典型组合模式

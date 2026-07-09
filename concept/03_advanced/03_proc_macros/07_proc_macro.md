@@ -277,7 +277,7 @@ pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
 // - 自动处理 hygiene（Span 保留）
 ```
 
-> **syn + quote**: `syn` 和 `quote` 是过程宏开发的**事实标准**——syn 负责解析，quote 负责生成。没有它们，手动操作 TokenStream 极其繁琐。
+> **syn + quote**: `syn` 和 `quote` 是过程宏（Procedural Macro）开发的**事实标准**——syn 负责解析，quote 负责生成。没有它们，手动操作 TokenStream 极其繁琐。
 > [来源: [syn Documentation](https://docs.rs/syn/latest/syn/)] · [来源: [quote Documentation](https://docs.rs/quote/latest/quote/)]
 
 ---
@@ -317,7 +317,7 @@ pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
   └── 使用 Span::mixed_site() → 混合 hygiene（Edition 2021+）
 ```
 
-> **卫生性洞察**: Rust 的**卫生宏**是语言设计的重要特性——它避免了 C 预处理器常见的命名冲突问题，使宏可以安全地在任意上下文中使用。
+> **卫生性洞察**: Rust 的**卫生宏（Macro）**是语言设计的重要特性——它避免了 C 预处理器常见的命名冲突问题，使宏可以安全地在任意上下文中使用。
 > [来源: [Rust Reference — Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)]
 
 ---
@@ -893,7 +893,7 @@ Derive 宏不是"魔法"——它只是自动编写你本来可以手写的 `imp
 ### 代码生成优化
 
 - 生成代码的可读性、Span 保留、内联与分配优化
-- 编译时间优化（避免递归爆炸、减少单态化）
+- 编译时间优化（避免递归爆炸、减少单态化（Monomorphization））
 - 代码膨胀控制（静态/动态分发、条件编译）
 - 性能测量：`cargo llvm-lines`、`cargo bloat`、`cargo build --timings`
 
@@ -1026,7 +1026,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 
 | 测试类型 | 工具 | 用途 |
 | :--- | :--- | :--- |
-| 集成测试 | `#[test]` | 验证展开后的运行时行为 |
+| 集成测试 | `#[test]` | 验证展开后的运行时（Runtime）行为 |
 | 编译失败测试 | `trybuild` | 断言特定错误场景必须编译失败 |
 | 快照测试 | `quote!` + 字符串比对 | 验证展开结果稳定 |
 
@@ -1049,7 +1049,7 @@ fn test_compile_fail() {
 
 | 概念 | 说明 |
 | :--- | :--- |
-| **声明宏** | `macro_rules!`；模式匹配；卫生性 |
+| **声明宏（Declarative Macro）** | `macro_rules!`；模式匹配（Pattern Matching）；卫生性 |
 | **过程宏** | Derive、属性、函数宏；`proc-macro` crate |
 | **片段类型** | `expr`、`ident`、`ty`、`path` 等；匹配与展开 |
 | **递归宏** | 逐步展开；`$($rest)*` 重复 |
@@ -1061,7 +1061,7 @@ fn test_compile_fail() {
 | 宏展开顺序 | 宏在编译时展开；注意作用域 |
 | 片段类型不匹配 | 用 `tt` 兜底；或拆成多规则 |
 | 过程宏编译慢 | 独立 crate；增量编译 |
-| 卫生性意外 | 用 `$crate` 引用；避免标识符冲突 |
+| 卫生性意外 | 用 `$crate` 引用（Reference）；避免标识符冲突 |
 
 ### 宏速选
 

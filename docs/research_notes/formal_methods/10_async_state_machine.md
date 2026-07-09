@@ -25,6 +25,7 @@
 > **状态**: ✅ 已完成 (Week 2 任务 P1-W2-T2)
 > **更新内容**: 添加 Future/Poll/Waker/Context 形式化定义
 > **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 4 行（异步（Async））
+> **权威来源**: [concept/03_advanced/01_async/02_async.md](../../../concept/03_advanced/01_async/02_async.md)
 
 ---
 

@@ -131,7 +131,7 @@ predicates = "3"
 | 工具 | 作用 | 安装/使用 |
 |:---|:---|:---|
 | `cargo-watch` | 文件变动自动重跑命令 | `cargo install cargo-watch`; `cargo watch -x check` |
-| `cargo-expand` | 展开宏查看生成代码 | `cargo install cargo-expand`; `cargo expand` |
+| `cargo-expand` | 展开宏（Macro）查看生成代码 | `cargo install cargo-expand`; `cargo expand` |
 | `cargo-audit` | 检查依赖安全漏洞 | `cargo install cargo-audit`; `cargo audit` |
 | `cargo-deny` | 许可证/漏洞/依赖策略检查 | `cargo install cargo-deny`; `cargo deny check` |
 | `cargo-outdated` | 列出可更新的依赖 | `cargo install cargo-outdated`; `cargo outdated` |

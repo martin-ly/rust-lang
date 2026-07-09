@@ -37,11 +37,11 @@
     - [Q: 如何减小 WASM 二进制大小？](#q-如何减小-wasm-二进制大小)
   - [🔗 JavaScript 集成问题](#-javascript-集成问题)
     - [Q: 如何在 React 中使用 WASM？](#q-如何在-react-中使用-wasm)
-    - [Q: 如何传递复杂类型（如结构体）？](#q-如何传递复杂类型如结构体)
+    - [Q: 如何传递复杂类型（如结构体（Struct））？](#q-如何传递复杂类型如结构体)
     - [Q: WASM 和 JavaScript 之间的性能如何？](#q-wasm-和-javascript-之间的性能如何)
   - [⚡ 性能优化问题](#-性能优化问题)
-    - [Q: WASM 模块加载很慢怎么办？](#q-wasm-模块加载很慢怎么办)
-    - [Q: 运行时性能如何优化？](#q-运行时性能如何优化)
+    - [Q: WASM 模块（Module）加载很慢怎么办？](#q-wasm-模块加载很慢怎么办)
+    - [Q: 运行时（Runtime）性能如何优化？](#q-运行时性能如何优化)
   - [🛠️ 工具链问题](#️-工具链问题)
     - [Q: wasm-pack 安装失败？](#q-wasm-pack-安装失败)
     - [Q: wasm-bindgen 版本不匹配？](#q-wasm-bindgen-版本不匹配)
@@ -241,7 +241,7 @@ impl Person {
 **A**: 优化策略：
 
 1. **减少内存分配**: 重用对象和缓冲区
-2. **避免不必要的复制**: 使用引用传递
+2. **避免不必要的复制**: 使用引用（Reference）传递
 3. **优化算法**: 使用更高效的算法
 4. **SIMD**: 使用 SIMD 指令（如果支持）
 
@@ -327,8 +327,8 @@ wasm-pack test --headless --firefox
 **A**: 安全特性：
 
 - ✅ **沙箱执行**: 隔离的执行环境
-- ✅ **内存安全**: Rust 编译时保证
-- ✅ **类型安全**: 强类型系统
+- ✅ **内存安全（Memory Safety）**: Rust 编译时保证
+- ✅ **类型安全**: 强类型系统（Type System）
 - ✅ **CORS 限制**: 遵循浏览器安全策略
 
 **建议**: 使用 Rust 可以避免常见的内存安全问题。
@@ -355,7 +355,7 @@ wasm-pack test --headless --firefox
    let chunks = calculate_buffer_chunks(5000, NonZeroUsize::new(1024).unwrap());
    ```
 
-3. **迭代器方法特化** - 性能提升 15-25%
+3. **迭代器（Iterator）方法特化** - 性能提升 15-25%
 
    ```rust
    use c12_wasm::rust_192_features::wasm_optimized_array_eq;

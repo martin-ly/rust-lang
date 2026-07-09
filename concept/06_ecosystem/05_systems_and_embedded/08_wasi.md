@@ -202,7 +202,7 @@ sequenceDiagram
     Note over Host,Cap: 与 Rust 所有权同构:<br/>能力句柄 ≈ 所有权变量<br/>move = 所有权转移<br/>drop = 资源释放<br/>范围外访问 = 编译错误
 ```
 
-> **认知功能**: 此序列图将 WASI 的**能力安全模型**与 Rust 的**所有权模型**进行同构映射。步骤 1-2 对应所有权转移（`move`），步骤 3-4 对应正常借用（Borrowing）（`&T`），步骤 5-6 对应越界访问被拒绝（编译错误），步骤 7-8 对应 `drop` 析构。这种可视化帮助 Rust 程序员利用已有的所有权直觉理解 WASI 的安全模型。
+> **认知功能**: 此序列图将 WASI 的**能力安全模型**与 Rust 的**所有权（Ownership）模型**进行同构映射。步骤 1-2 对应所有权转移（`move`），步骤 3-4 对应正常借用（Borrowing）（`&T`），步骤 5-6 对应越界访问被拒绝（编译错误），步骤 7-8 对应 `drop` 析构。这种可视化帮助 Rust 程序员利用已有的所有权直觉理解 WASI 的安全模型。
 
 ### 4.2 WIT（Wasm Interface Types）
 >
@@ -429,7 +429,7 @@ fn escape_sandbox() {
 ```
 
 > **运行时（Runtime）错误**: WASI 能力检查器返回 `ENOTCAPABLE`（无能力）。
-> **与 Rust 所有权的同构**: 这类似于 Rust 编译器阻止无所有权变量的访问——WASI 在运行时强制执行相同的逻辑，但边界是"能力句柄"而非"所有权变量"。
+> **与 Rust 所有权的同构**: 这类似于 Rust 编译器阻止无所有权变量的访问——WASI 在运行时（Runtime）强制执行相同的逻辑，但边界是"能力句柄"而非"所有权变量"。
 > **关键洞察**: Rust 的所有权检查在编译期，WASI 的能力检查在运行时，二者形成**互补的安全层**。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 8.4 反例：WIT 类型不匹配导致组件组合失败
@@ -658,7 +658,7 @@ Rust 无运行时、二进制小、性能高，且所有权系统与 WASM 的沙
 WASI 0.2（Preview 2）的核心变化是从 POSIX 式系统调用迁移到基于组件模型（Component Model）的能力安全接口：
 
 - **WIT 接口定义**：使用 `package namespace:name@version;`、`interface`、`world`、`resource` 声明组件契约。
-- **资源（Resource）**：带构造函数、方法与显式/自动生命周期的有状态对象，映射到 Rust 的 ownership 语义。
+- **资源（Resource）**：带构造函数、方法与显式/自动生命周期（Lifetimes）的有状态对象，映射到 Rust 的 ownership 语义。
 - **组件组合**：通过 `wasm-tools compose` 将多个组件链接为自包含应用，运行时验证导入/导出类型签名。
 - **迁移路径**：从 WASI 0.1 升级到 0.2 需要切换 target 为 `wasm32-wasip2`、引入 `wit-bindgen` / `cargo-component`、将全局文件描述符 API 替换为能力句柄 API。
 

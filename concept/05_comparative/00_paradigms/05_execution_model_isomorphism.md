@@ -301,7 +301,7 @@ sequenceDiagram
 | 调度时机 | 惰性（仅 poll 时执行） | 立即（创建后开始执行） |
 | 调度器 | 外部 executor（Tokio / smol [历史: async-std [已归档]]） | Go 运行时（Runtime）内置 |
 | 并行性 | async 本身不产生并行 | goroutine 自动分配到多核 |
-| 内存布局 | 状态机在栈/调用者内存中内联 | 独立栈，运行时管理 |
+| 内存布局 | 状态机在栈/调用者内存中内联 | 独立栈，运行时（Runtime）管理 |
 | 跨 await 状态 | 显式（Pin + 状态机） | 隐式（栈保存全部状态） |
 | 取消语义 | 协作式取消（poll 返回后丢弃） | 无原生取消（需 context） |
 
@@ -410,7 +410,7 @@ let received = rx.recv().unwrap(); // 所有权转移到 received
 
 ## 七、Actor 模型
 
-> [Hewitt 1973, Actix docs](https://www.ijcai.org/Proceedings/73/Papers/027B.pdf)：命名实体与异步邮箱
+> [Hewitt 1973, Actix docs](https://www.ijcai.org/Proceedings/73/Papers/027B.pdf)：命名实体与异步（Async）邮箱
 
 ### 7.1 Rust Actor 的实现原理
 

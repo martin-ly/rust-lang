@@ -309,7 +309,7 @@ let r2 = &(x + 1); // ❌ x + 1 是 value expression，不能取引用
 // 正确: let temp = x + 1; let r2 = &temp;
 ```
 
-> **与 C++ 的对比**: C++ 允许 `int& r = (x + 1);` 绑定到临时对象（const 引用延长生命周期（Lifetimes）），Rust 完全禁止此操作——这是 Rust "显式优于隐式"设计哲学的体现。
+> **与 C++ 的对比**: C++ 允许 `int& r = (x + 1);` 绑定到临时对象（const 引用（Reference）延长生命周期（Lifetimes）），Rust 完全禁止此操作——这是 Rust "显式优于隐式"设计哲学的体现。
 
 ---
 
@@ -610,7 +610,7 @@ Rust 编译器要求所有变量在使用前必须初始化。读取未初始化
 | [Felleisen & Flatt — PLAI](https://cs.brown.edu/~sk/Publications/Books/ProgLangs/) | 环境模型与存储模型在教学中的区分 |
 | [Harper — PFPL](https://www.cs.cmu.edu/~rwh/pfpl/) | 命令式语言的存储语义与变量绑定形式化 |
 | [Pierce — TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) | 引用类型、线性类型与别名控制 |
-| [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/popl18/) | Rust 所有权模型的 Iris 分离逻辑形式化 |
+| [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/popl18/) | Rust 所有权（Ownership）模型的 Iris 分离逻辑形式化 |
 | [TRPL — Variables and Mutability](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) | Rust 变量绑定与可变性实践 |
 
 ## 总结

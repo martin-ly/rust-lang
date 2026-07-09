@@ -82,7 +82,7 @@ impl SpiDevice<u8> for MySpi {
 
 1.0 明确区分两种 SPI 使用模式：
 
-| 类型 | 所有权 | CS 管理 | 适用场景 |
+| 类型 | 所有权（Ownership） | CS 管理 | 适用场景 |
 |:---|:---|:---|:---|
 | `SpiBus` | 独占总线 | 手动控制 CS | 单一设备、高性能 |
 | `SpiDevice` | 共享总线 | 自动 CS 管理 | 多设备、安全易用 |
@@ -124,14 +124,14 @@ async fn read_sensor(spi: &mut impl SpiDevice<u8>, drdy: &mut impl Wait) {
 
 ### 3.1 Embassy 是什么
 
-Embassy 是 Rust 嵌入式生态的 **async/await 运行时**，允许在裸机（bare-metal）环境中使用异步编程模型。
+Embassy 是 Rust 嵌入式生态的 **async/await 运行时（Runtime）**，允许在裸机（bare-metal）环境中使用异步编程模型。
 
 ### 3.2 v0.5 关键特性
 
 | 特性 | 说明 | 状态 |
 |:---|:---|:---:|
 | **Stable Rust 支持** | MSRV 1.75，无需 nightly | ✅ |
-| **Time Driver** | 硬件定时器驱动异步 Timer/Ticker | ✅ |
+| **Time Driver** | 硬件定时器驱动异步（Async） Timer/Ticker | ✅ |
 | **USB 协议栈** | 全栈 async USB device/host | ✅ |
 | **TCP/UDP 网络** | async smoltcp 集成 | ✅ |
 | **WiFi/BLE** | CYW43、nrf-softdevice 绑定 | ✅ |
@@ -224,7 +224,7 @@ impl SpiDevice<u8> for MySpi {
 >
 > **过渡**: 从 trait 签名变化过渡到驱动代码更新，可以建立版本迁移的影响范围评估方法。
 >
-> **过渡**: 从代码更新过渡到 CI 与硬件验证，可以确保迁移后的行为一致性。
+> **过渡**: 从代码更新过渡到 CI 与硬件验证，可以确保迁移后的行为一致性（Coherence）。
 >
 
 ## 定理链

@@ -1,7 +1,7 @@
 # 模式参考（Patterns Reference）
 
 > **EN**: Patterns Reference
-> **Summary**: Rust 模式系统的规范：模式位置、可反驳/不可反驳模式、各种模式形式（字面量、标识符、通配符、范围、引用、结构体、元组、数组、or、guard 等）及其绑定规则。 Normative description of Rust patterns: pattern positions, refutable/irrefutable patterns, all pattern forms, and binding rules.
+> **Summary**: Rust 模式系统的规范：模式位置、可反驳/不可反驳模式、各种模式形式（字面量、标识符、通配符、范围、引用（Reference）、结构体（Struct）、元组、数组、or、guard 等）及其绑定规则。 Normative description of Rust patterns: pattern positions, refutable/irrefutable patterns, all pattern forms, and binding rules.
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -22,7 +22,7 @@
 
 > **认知路径**: 本节从 "模式参考（Patterns Reference）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
 
-1. **问题识别**: 为什么模式参考在 Rust 中值得关注？模式匹配是 Rust 控制流和数据解构的核心，穷尽性检查保障了安全性。
+1. **问题识别**: 为什么模式参考在 Rust 中值得关注？模式匹配（Pattern Matching）是 Rust 控制流和数据解构的核心，穷尽性检查保障了安全性。
 2. **概念建立**: 掌握模式位置、可反驳性、各种模式形式和绑定规则。
 3. **机制推理**: 通过 ⟹ 定理链将值、模式匹配、绑定和解构串联起来。
 4. **边界辨析**: 借助反命题/反例理解常见错误与模式参考的适用边界。
@@ -32,11 +32,11 @@
 
 ## 反命题决策树
 
-> **反命题 1**: "模式参考在所有场景下都适用" ⟹ 不成立。`unsafe` 代码中的裸指针解引用、FFI 类型和过程宏生成的模式可能超出常规模式检查范围。
+> **反命题 1**: "模式参考在所有场景下都适用" ⟹ 不成立。`unsafe` 代码中的裸指针解引用、FFI 类型和过程宏（Procedural Macro）生成的模式可能超出常规模式检查范围。
 
 > **反命题 2**: "忽略模式参考的细节也能写出正确代码" ⟹ 不成立。不可反驳模式误用、绑定模式错误和穷尽性检查失败都会导致编译错误。
 
-> **反命题 3**: "其他语言对模式参考的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权移动、引用模式和 `@` 绑定具有语言特有语义。
+> **反命题 3**: "其他语言对模式参考的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）移动、引用模式和 `@` 绑定具有语言特有语义。
 
 ## 一、模式位置
 
@@ -78,8 +78,8 @@ if let Some(y) = opt {  // OK：if let 允许可反驳模式
 | 引用 | 匹配引用 | `&x`, `&mut y` |
 | 结构体 | 按字段解构 | `Point { x, y }` |
 | 元组 | 按位置解构 | `(a, b, c)` |
-| 数组/切片 | 匹配数组或可变长度切片 | `[a, b, ..]` |
-| 枚举变体 | 匹配枚举 | `Some(x)`, `None` |
+| 数组/切片（Slice） | 匹配数组或可变长度切片 | `[a, b, ..]` |
+| 枚举（Enum）变体 | 匹配枚举 | `Some(x)`, `None` |
 | `@` 绑定 | 同时匹配并绑定 | `e @ 1..=10` |
 | `\|` 或模式 | 多个模式之一 | `1 \| 2 \| 3` |
 | `..` / `..=` | 忽略剩余字段或范围边界 | `Point { x, .. }` |
@@ -110,7 +110,7 @@ match x {
 }
 ```
 
-> 在 2024 Edition 之前，`ref`/`ref mut` 在 `match` 中常见；现代 Rust 更推荐通过类型系统显式使用 `&` / `&mut` 模式。
+> 在 2024 Edition 之前，`ref`/`ref mut` 在 `match` 中常见；现代 Rust 更推荐通过类型系统（Type System）显式使用 `&` / `&mut` 模式。
 
 ```rust
 // 推荐写法

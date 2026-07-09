@@ -1,5 +1,5 @@
 > **内容分级**: [专家级]
-> **本节关键术语**: 外部排序 (External Sorting) · Bloom Filter · LRU Cache · 一致性哈希 (Consistent Hashing) · SIMD · Criterion 基准测试 — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
+> **本节关键术语**: 外部排序 (External Sorting) · Bloom Filter · LRU Cache · 一致性（Coherence）哈希 (Consistent Hashing) · SIMD · Criterion 基准测试 — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 
 # 算法工程实践 (Algorithm Engineering Practice)
@@ -58,7 +58,7 @@
       - [对象池](#对象池)
       - [内存映射文件 (mmap)](#内存映射文件-mmap)
     - [2.3 I/O 优化](#23-io-优化)
-      - [异步批量写入](#异步批量写入)
+      - [异步（Async）批量写入](#异步批量写入)
   - [3. 算法可靠性](#3-算法可靠性)
     - [3.1 容错设计](#31-容错设计)
       - [重试机制](#重试机制)

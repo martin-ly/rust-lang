@@ -24,26 +24,26 @@
 
 - [Rust 1.90 网络特性参考](#rust-190-网络特性参考)
   - [目录](#目录)
-  - [1. 异步特性增强](#1-异步特性增强)
+  - [1. 异步（Async）特性增强](#1-异步特性增强)
     - [1.1 异步Trait稳定化（RPITIT）](#11-异步trait稳定化rpitit)
-    - [1.2 异步闭包改进](#12-异步闭包改进)
-    - [1.3 async fn in trait生命周期推断](#13-async-fn-in-trait生命周期推断)
+    - [1.2 异步闭包（Closures）改进](#12-异步闭包改进)
+    - [1.3 async fn in trait（Trait）生命周期推断](#13-async-fn-in-trait生命周期推断)
   - [2. GATs在网络编程中的应用](#2-gats在网络编程中的应用)
-    - [泛型关联类型（Generic Associated Types）](#泛型关联类型generic-associated-types)
+    - [泛型（Generics）关联类型（Generic Associated Types）](#泛型关联类型generic-associated-types)
   - [3. let-else模式匹配](#3-let-else模式匹配)
-    - [网络错误处理](#网络错误处理)
+    - [网络错误处理（Error Handling）](#网络错误处理)
   - [4. impl Trait增强](#4-impl-trait增强)
     - [返回类型优化](#返回类型优化)
   - [5. 常量泛型改进](#5-常量泛型改进)
     - [固定大小缓冲区](#固定大小缓冲区)
-  - [6. 迭代器组合子增强](#6-迭代器组合子增强)
+  - [6. 迭代器（Iterator）组合子增强](#6-迭代器组合子增强)
     - [网络数据处理](#网络数据处理)
   - [7. 错误处理改进](#7-错误处理改进)
     - [网络错误类型](#网络错误类型)
   - [8. 网络专用特性应用](#8-网络专用特性应用)
     - [Edition 2024 特性（1.85.0+ stable）](#edition-2024-特性1850-stable)
   - [9. 性能优化特性](#9-性能优化特性)
-    - [零成本抽象](#零成本抽象)
+    - [零成本抽象（Zero-Cost Abstraction）](#零成本抽象)
   - [10. 实战示例集](#10-实战示例集)
     - [完整HTTP客户端（Rust 1.90特性集成）](#完整http客户端rust-190特性集成)
     - [WebSocket服务器（完整特性）](#websocket服务器完整特性)
@@ -57,7 +57,7 @@
 
 ### 1.1 异步Trait稳定化（RPITIT）
 
-Rust 1.75.0+稳定化了async fn in trait，无需`async-trait`宏：
+Rust 1.75.0+稳定化了async fn in trait，无需`async-trait`宏（Macro）：
 
 ```rust
 /// 异步网络客户端Trait (Rust 1.75+)
@@ -732,11 +732,11 @@ pub async fn modern_websocket_server() -> std::io::Result<()> {
 
 ---
 
-> **向下引用**: 参见 [01_toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
+> **向下引用（Reference）**: 参见 [01_toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
 
 ## 过渡段
 
-> **过渡**: 从版本上下文过渡到特性概览，可以理解 1.90 在异步与类型系统方面的重点改进。
+> **过渡**: 从版本上下文过渡到特性概览，可以理解 1.90 在异步与类型系统（Type System）方面的重点改进。
 >
 > **过渡**: 从 RPITIT 与异步闭包过渡到网络应用场景，可以评估这些特性对实际代码的影响。
 >

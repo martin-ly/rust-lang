@@ -110,7 +110,7 @@ Rust 宏 hygiene:
 | **Rust** | `macro_rules!` + 过程宏（Procedural Macro） | ✅ 完全卫生 | ✅ 展开后类型检查 | AST / Token |
 | **C** | `#define` | ❌ 文本替换 | ❌ 无 | 文本 |
 | **C++** | 模板 + 宏（Macro） | ⚠️ 部分 | ⚠️ 复杂错误 | AST（模板） |
-| **Lisp** | 宏（代码即数据） | ✅ 符号隔离 | ⚠️ 展开后检查 | S-expression |
+| **Lisp** | 宏（Macro）（代码即数据） | ✅ 符号隔离 | ⚠️ 展开后检查 | S-expression |
 | **Nim** | 宏 + 模板 | ✅ 卫生 | ✅ 编译期执行 | AST |
 
 ### 2.3 宏展开在编译管道中的位置
@@ -393,7 +393,7 @@ graph TD
 > [来源: [proc_macro2 crate docs](https://docs.rs/proc-macro2/latest/proc_macro2/)]
 > [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 > 编写或使用过程宏（Procedural Macro）时，应始终意识到 TokenStream 解析可能失败，生成的 impl 仍需编译器二次检查。
-> 核心洞察：过程宏的"安全"仅限于 Token 语法合法性，语义类型安全是编译器后续阶段的保证。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> 核心洞察：过程宏（Procedural Macro）的"安全"仅限于 Token 语法合法性，语义类型安全是编译器后续阶段的保证。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [Rust Reference: Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)]
 > **[RFC 1566: Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)** Procedural macros operate on `TokenStream` before type checking, implementing a restricted compiler-plugin model for derive, attribute, and function-like macros. ✅ 已验证
 
@@ -714,7 +714,7 @@ graph TD
 
 ---
 
-<!-- 层级一致性: L0 认知脚手架 → L1 实践 → L2 概念 → L3 理论 — 六步递进模拟学习者心路历程 -->
+<!-- 层级一致性（Coherence）: L0 认知脚手架 → L1 实践 → L2 概念 → L3 理论 — 六步递进模拟学习者心路历程 -->
 
 ## 八、认知路径（Cognitive Path）
 
@@ -1900,7 +1900,7 @@ fn foo() {}
 | 解析完整函数签名（泛型（Generics）、where、async） | ✅ | ❌ | 过程宏通过 `syn` 解析 `ItemFn.sig`；声明宏（Declarative Macro）无类型化 AST 访问能力 |
 | 遍历/修改函数体内部 AST 节点 | ✅ | ❌ | `syn::Fold` 或手动替换 `stmts`；声明宏（Declarative Macro）只能做 token 模式匹配 |
 | 生成带 hygiene 的唯一标识符 | ✅ | ✅ | 二者均基于编译器 hygiene 机制，内部变量不污染外部 |
-| 在函数前后注入代码并保留签名 | ✅ | ⚠️ 极困难 | 声明宏可包裹表达式，但无法可靠包裹 item 并保留完整签名 |
+| 在函数前后注入代码并保留签名 | ✅ | ⚠️ 极困难 | 声明宏（Declarative Macro）可包裹表达式，但无法可靠包裹 item 并保留完整签名 |
 | 操作任意 item（fn / struct / impl / mod） | ✅ | ❌ | 属性宏接收完整 item TokenStream；声明宏仅匹配 token 树片段 |
 | 编译错误定位到宏参数具体位置 | ✅（`Span`） | ⚠️ 有限 | `proc_macro_error2` 提供精确 Span；声明宏错误指向宏调用处 |
 | 代码可读性 / 可维护性 | ⚠️ 需学习 syn/quote | ✅ 简单直观 | 声明宏语法更简洁，但能力天花板显著低于过程宏 |
@@ -1936,7 +1936,7 @@ macro_rules! trace_fn {
 ```
 
 > **[The Little Book of Rust Macros](https://veykril.github.io/tlborm/)** `macro_rules!` 的片段分类器（`expr`、`ty`、`ident`、`path` 等）匹配语法范畴而非语义实体。对于函数定义这类结构复杂、分支众多的语法结构，声明宏的模式匹配能力迅速耗尽，这正是过程宏的设计动机。✅ 已验证
-> **[Rust Reference: Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html)** 声明宏不支持递归下降解析复杂语法结构（如完整函数签名含泛型与 where 子句），也无法在匹配后对内部节点做结构化遍历。✅ 已验证
+> **[Rust Reference: Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html)** 声明宏不支持递归下降解析复杂语法结构（如完整函数签名含泛型（Generics）与 where 子句），也无法在匹配后对内部节点做结构化遍历。✅ 已验证
 > **[RFC 1566: Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)** 过程宏被引入的核心动机之一，正是弥补 `macro_rules!` 在复杂 AST 变换场景下的能力缺口。✅ 已验证
 > **跨层映射**: 本文件属性宏示例 ↔ [`01_foundation/02_type_system/04_type_system.md`](../../01_foundation/02_type_system/04_type_system.md) § 泛型与 trait bound（签名保留中的泛型参数）
 > **跨层映射**: 本文件 `Fold` trait ↔ [`04_formal/02_type_theory.md`](../../04_formal/00_type_theory/02_type_theory.md) § 语法树归纳定义（AST 递归结构的归纳遍历）

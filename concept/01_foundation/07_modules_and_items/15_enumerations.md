@@ -7,8 +7,8 @@
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 理解 → 应用
 > **A/S/P 标记**: **S+P** — Structure + Procedure
-> **双维定位**: F×App — 掌握枚举作为带标签联合类型的表达力
-> **定位**: 系统讲解 Rust 枚举的定义、变体负载、Option/Result 两个核心枚举、模式匹配穷尽性检查，以及与错误处理的关系。
+> **双维定位**: F×App — 掌握枚举（Enum）作为带标签联合类型的表达力
+> **定位**: 系统讲解 Rust 枚举的定义、变体负载、Option/Result 两个核心枚举、模式匹配（Pattern Matching）穷尽性检查，以及与错误处理（Error Handling）的关系。
 > **前置概念**: [Type System](../02_type_system/04_type_system.md) · [Structs](14_structs.md) · [Pattern Matching](../04_control_flow/40_patterns.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
 > **后置概念**: [Error Handling Basics](../08_error_handling/32_error_handling_basics.md) · [Result and Option Deep Dive](../../02_intermediate/03_error_handling/04_error_handling.md) · [Algebraic Data Types](../../04_formal/00_type_theory/02_type_theory.md)
 >
@@ -26,7 +26,7 @@
 1. **问题识别**: 当变量只能处于若干互斥状态之一时，如何用类型安全地表达？
 2. **概念建立**: 掌握枚举定义、变体负载、`Option`、`Result`、穷尽性检查。
 3. **机制推理**: 通过 ⟹ 定理链将枚举、模式匹配与错误处理规则串联起来。
-4. **边界辨析**: 借助反命题/反例理解未处理 `None`、`if let` 误用、变体所有权移动等问题。
+4. **边界辨析**: 借助反命题/反例理解未处理 `None`、`if let` 误用、变体所有权（Ownership）移动等问题。
 5. **迁移应用**: 将枚举与错误处理、代数数据类型、形式化语义等后置概念链接。
 
 ---
@@ -41,9 +41,9 @@
 
 > **定理 1** [Tier 1]: 枚举是带标签联合类型 ⟹ 其值恰好属于一个变体，编译器可在 `match` 中强制穷尽所有可能。
 >
-> **定理 2** [Tier 1]: `Option<T>` 显式区分“有值”与“无值” ⟹ 替代空指针，消除解引用空指针的运行时错误。
+> **定理 2** [Tier 1]: `Option<T>` 显式区分“有值”与“无值” ⟹ 替代空指针，消除解引用（Reference）空指针的运行时（Runtime）错误。
 >
-> **定理 3** [Tier 1]: `Result<T, E>` 显式区分“成功”与“失败” ⟹ 错误处理成为类型系统的一部分，不可静默忽略。
+> **定理 3** [Tier 1]: `Result<T, E>` 显式区分“成功”与“失败” ⟹ 错误处理成为类型系统（Type System）的一部分，不可静默忽略。
 
 ---
 

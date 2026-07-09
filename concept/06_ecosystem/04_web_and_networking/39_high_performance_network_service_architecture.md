@@ -316,7 +316,7 @@ fn traditional_file_send(mut socket: TcpStream, file_path: &str) -> std::io::Res
 | :--- | :--- | :--- | :--- | :--- || `sendfile()`         | 3次 (减少1次CPU拷贝) | 2次        | 文件→Socket | 2.2+          |
 | `splice()`           | 2次 (减少2次CPU拷贝) | 2次        | 管道转发    | 2.6.17+       |
 | `mmap()` + `write()` | 3次                  | 4次        | 文件映射    | 所有          |
-| `MSG_ZEROCOPY`       | 2次 (真正零拷贝)     | 异步通知   | 大数据传输  | 4.14+         |
+| `MSG_ZEROCOPY`       | 2次 (真正零拷贝)     | 异步（Async）通知   | 大数据传输  | 4.14+         |
 
 **sendfile 实现**:
 

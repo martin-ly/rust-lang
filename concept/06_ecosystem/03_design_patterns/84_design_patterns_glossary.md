@@ -33,7 +33,7 @@
 - [设计模式基础](#设计模式基础)
 - [GoF 23 种模式](#gof-23-种模式)
 - [Rust 特有概念](#rust-特有概念)
-- [并发与异步](#并发与异步)
+- [并发与异步（Async）](#并发与异步)
 
 ---
 
@@ -41,7 +41,7 @@
 
 ### 设计模式 (Design Pattern)
 
-在软件设计中反复出现的问题的通用、可复用解决方案。Rust 中的模式实现强调**编译期保证**与**零成本抽象**。
+在软件设计中反复出现的问题的通用、可复用解决方案。Rust 中的模式实现强调**编译期保证**与**零成本抽象（Zero-Cost Abstraction）**。
 
 - **创建型**: 对象/值创建机制（5 种）
 - **结构型**: 对象组合方式（7 种）
@@ -49,7 +49,7 @@
 
 ### GoF (Gang of Four)
 
-《设计模式：可复用面向对象软件的基础》的四位作者，书中总结了 23 种经典设计模式。Rust 没有继承，因此通常用 **trait + enum + 泛型** 实现等价结构。
+《设计模式：可复用面向对象软件的基础》的四位作者，书中总结了 23 种经典设计模式。Rust 没有继承，因此通常用 **trait + enum + 泛型（Generics）** 实现等价结构。
 
 ---
 
@@ -66,11 +66,11 @@
 | | Bridge | trait + 组合替代继承 | [Architecture Patterns](35_architecture_patterns.md) |
 | | Composite | enum + 递归结构 | [Design Patterns](02_patterns.md) |
 | | Decorator | 泛型包装 / `Deref` | [Formal Design Pattern Theory](38_formal_design_pattern_theory.md) |
-| | Facade | 模块级 API 封装 | [System Design Principles](05_system_design_principles.md) |
+| | Facade | 模块（Module）级 API 封装 | [System Design Principles](05_system_design_principles.md) |
 | | Flyweight | `Arc` + 共享不可变数据 | [Pattern Implementation Comparison](36_pattern_implementation_comparison.md) |
-| | Proxy | trait object / 生命周期守卫 | [Design Patterns](02_patterns.md) |
+| | Proxy | trait object / 生命周期（Lifetimes）守卫 | [Design Patterns](02_patterns.md) |
 | **行为型** | Observer | `Weak<dyn Fn>` / broadcast channel | [Design Patterns](02_patterns.md) |
-| | Strategy | 泛型单态化 / `dyn Trait` | [Pattern Implementation Comparison](36_pattern_implementation_comparison.md) |
+| | Strategy | 泛型单态化（Monomorphization） / `dyn Trait` | [Pattern Implementation Comparison](36_pattern_implementation_comparison.md) |
 | | State | enum + `match` / Typestate | [Design Patterns](02_patterns.md) |
 | | Command | trait + `Vec<Box<dyn Command>>` | [Design Patterns](02_patterns.md) |
 | | Chain of Responsibility | `Iterator` + `and_then` | [Design Patterns](02_patterns.md) |
@@ -87,7 +87,7 @@
 
 ### Trait 对象
 
-运行时多态机制，通过 `dyn Trait` 实现动态分派。相比泛型静态分派有虚函数开销，但支持异构集合。
+运行时（Runtime）多态机制，通过 `dyn Trait` 实现动态分派。相比泛型静态分派有虚函数开销，但支持异构集合。
 
 ```rust
 pub trait Greeter {
@@ -103,7 +103,7 @@ pub fn greet_all(greeters: &[&dyn Greeter]) {
 
 ### Typestate 模式
 
-使用类型系统在编译时保证状态转换合法，零运行时开销。
+使用类型系统（Type System）在编译时保证状态转换合法，零运行时开销。
 
 ```rust
 use std::marker::PhantomData;
@@ -139,7 +139,7 @@ impl Email<Verified> {
 
 ### 零成本抽象 (Zero-Cost Abstraction)
 
-抽象不引入运行时开销；泛型单态化、迭代器链、`const` 计算均遵循此原则。详见 [零成本抽象](../../01_foundation/00_start/06_zero_cost_abstractions.md)。
+抽象不引入运行时开销；泛型单态化、迭代器（Iterator）链、`const` 计算均遵循此原则。详见 [零成本抽象](../../01_foundation/00_start/06_zero_cost_abstractions.md)。
 
 ### OnceLock / LazyLock
 
@@ -197,8 +197,8 @@ pub trait SimpleFuture {
 | 术语 | 一句话定义 | 在 Rust 中的典型实现 |
 |:---|:---|:---|
 | **RAII** | 资源获取即初始化，离开作用域自动释放 | `Drop` trait |
-| **Newtype** | 用单字段结构体区分同底层类型的不同语义 | `struct Meters(u64)` |
-| **Deref 多态** | 通过自定义解引用让类型表现得像另一种类型 | `Deref` / `DerefMut` |
+| **Newtype** | 用单字段结构体（Struct）区分同底层类型的不同语义 | `struct Meters(u64)` |
+| **Deref 多态** | 通过自定义解引用（Reference）让类型表现得像另一种类型 | `Deref` / `DerefMut` |
 | **Capability** | 将权限编码进类型，调用时需提供能力证明 | `Capability<P>` + PhantomData |
 | **Session Type** | 在类型层面保证协议状态转换合法 | Typestate + PhantomData |
 | **Backpressure** | 防止生产者压垮消费者的流量控制 | `tokio::sync::Semaphore` / bounded channel |

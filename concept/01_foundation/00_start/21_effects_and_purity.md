@@ -91,7 +91,7 @@
 | **缓存/记忆化** | 结果可安全缓存 | 缓存可能导致错误行为 |
 | **调试** | 局部分析即可 | 需要全局状态追踪 |
 
-> **关键洞察**: Haskell 追求全局引用透明（所有副作用通过 Monad 显式化）；Rust 采用局部引用透明策略——在函数内部允许副作用，但通过类型系统（Type System）限制副作用的传播范围。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> **关键洞察**: Haskell 追求全局引用（Reference）透明（所有副作用通过 Monad 显式化）；Rust 采用局部引用透明策略——在函数内部允许副作用，但通过类型系统（Type System）限制副作用的传播范围。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
@@ -630,7 +630,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-主要体现在 `unsafe`（标记不安全效果）、`async`（标记异步（Async）效果）、`const`（标记编译期效果），通过类型系统显式标记效果。
+主要体现在 `unsafe`（标记不安全效果）、`async`（标记异步（Async）效果）、`const`（标记编译期效果），通过类型系统（Type System）显式标记效果。
 </details>
 
 ---

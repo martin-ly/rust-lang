@@ -8,7 +8,7 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: F×App — 掌握 `impl` 块将行为绑定到类型的机制
-> **定位**: 系统讲解 Rust `impl` 块的两种形式（固有实现、Trait 实现）、方法 receiver、关联函数，以及与结构体/枚举/Trait 的关系。
+> **定位**: 系统讲解 Rust `impl` 块的两种形式（固有实现、Trait 实现）、方法 receiver、关联函数，以及与结构体（Struct）/枚举（Enum）/Trait 的关系。
 > **前置概念**: [Structs](14_structs.md) · [Enumerations](15_enumerations.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Functions](12_functions.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
 > **后置概念**: [Generics](../../02_intermediate/01_generics/02_generics.md) · [Type Conversions](../../02_intermediate/04_types_and_conversions/37_type_conversions.md) · [Advanced Traits](../../02_intermediate/00_traits/19_advanced_traits.md)
 >
@@ -25,9 +25,9 @@
 
 1. **问题识别**: 当类型需要附带行为时，如何组织方法与函数？
 2. **概念建立**: 掌握 `impl` 块、`self` / `&self` / `&mut self`、关联函数、Trait `impl`。
-3. **机制推理**: 通过 ⟹ 定理链将方法调用、receiver 选择与所有权/借用规则串联起来。
+3. **机制推理**: 通过 ⟹ 定理链将方法调用、receiver 选择与所有权（Ownership）/借用（Borrowing）规则串联起来。
 4. **边界辨析**: 借助反命题/反例理解在 `&self` 中修改字段、方法调用后继续使用、Orphan Rule 等问题。
-5. **迁移应用**: 将 `impl` 与泛型、类型转换、高级 Trait 等后置概念链接。
+5. **迁移应用**: 将 `impl` 与泛型（Generics）、类型转换、高级 Trait 等后置概念链接。
 
 ---
 
@@ -116,7 +116,7 @@ fn main() {
 | Receiver | 调用方式 | 所有权 |
 |:---|:---|:---|
 | `self` | `obj.method()` | 获取所有权 |
-| `&self` | `obj.method()` | 不可变借用 |
+| `&self` | `obj.method()` | 不可变借用（Mutable Borrow） |
 | `&mut self` | `obj.method()` | 可变借用 |
 
 ```rust

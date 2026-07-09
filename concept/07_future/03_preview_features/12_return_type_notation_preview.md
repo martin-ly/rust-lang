@@ -75,7 +75,7 @@
   - [十、边界测试：Return Type Notation 预览的编译错误](#十边界测试return-type-notation-预览的编译错误)
     - [10.1 边界测试：RTN 在类型位置使用（编译错误）](#101-边界测试rtn-在类型位置使用编译错误)
     - [10.2 边界测试：RTN 用于非 AFIT/RPITIT 方法（编译错误）](#102-边界测试rtn-用于非-afitrpitit-方法编译错误)
-    - [10.3 边界测试：RTN 与 const/type 泛型方法（编译错误）](#103-边界测试rtn-与-consttype-泛型方法编译错误)
+    - [10.3 边界测试：RTN 与 const/type 泛型（Generics）方法（编译错误）](#103-边界测试rtn-与-consttype-泛型方法编译错误)
     - [10.4 边界测试：RTN 与缺少 `feature(return_type_notation)`（编译错误）](#104-边界测试rtn-与缺少-featurereturn_type_notation编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)

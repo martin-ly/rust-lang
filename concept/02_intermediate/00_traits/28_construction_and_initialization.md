@@ -233,7 +233,7 @@ construct_T: Args → T ∪ ⊥
 
 异常或失败时返回 ⊥。
 
-Rust 的构造可以形式化为**结构体字段的元组构造**：
+Rust 的构造可以形式化为**结构体（Struct）字段的元组构造**：
 
 ```text
 Point::new(x, y) = Point { x, y }

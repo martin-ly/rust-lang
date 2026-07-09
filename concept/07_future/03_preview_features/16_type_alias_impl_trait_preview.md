@@ -4,7 +4,7 @@
 >
 > **EN**: Type Alias Impl Trait (TAIT) Preview
 > **Summary**: Preview of Type Alias Impl Trait (TAIT), which allows `impl Trait` inside type aliases to hide concrete types while preserving zero-cost abstraction; stabilized in Rust 1.75.0.
-> **状态**: ✅ Rust 1.75.0 已稳定；关联类型位置与模块级抽象可用
+> **状态**: ✅ Rust 1.75.0 已稳定；关联类型位置与模块（Module）级抽象可用
 > **Rust 属性标记**: `#[stable_since_1_75]`
 > **跟踪版本**: stable 1.75.0
 > **预计稳定**: 已稳定
@@ -24,7 +24,7 @@
 
 在稳定 Rust 中，`impl Trait` 只能出现在函数参数和返回类型的位置。当需要在多个函数之间共享一个“隐藏具体类型、但暴露 trait bound”的类型时，开发者通常面临两种选择：
 
-1. **使用 `Box<dyn Trait>`**：引入运行时动态分发和堆分配，破坏零成本抽象；
+1. **使用 `Box<dyn Trait>`**：引入运行时（Runtime）动态分发和堆分配，破坏零成本抽象（Zero-Cost Abstraction）；
 2. **暴露具体类型**：泄露实现细节，导致 API 脆弱（如返回 `std::iter::Map<...>` 这类难以命名的类型）。
 
 **Type Alias Impl Trait（TAIT）** 允许在类型别名中使用 `impl Trait`：
@@ -88,7 +88,7 @@ impl Iterator for Counter {
 
 1. **模块级或关联类型位置**：TAIT 不能用于局部变量；
 2. **具体类型必须唯一确定**：所有返回/使用 TAIT 的位置必须能推导出同一个底层类型；
-3. **不支持递归类型**：`type Recursive = impl Display;` 若其实现为自引用类型会导致编译错误；
+3. **不支持递归类型**：`type Recursive = impl Display;` 若其实现为自引用（Reference）类型会导致编译错误；
 4. **可见性约束**：TAIT 定义的具体类型对外部模块隐藏，只能在定义它的模块内被确定。
 
 ---
@@ -97,7 +97,7 @@ impl Iterator for Counter {
 
 | 场景 | 稳定 Rust 1.74 及之前 | Rust 1.75+ with TAIT |
 |:---|:---|:---|
-| 隐藏迭代器类型 | `Box<dyn Iterator<Item = T>>` | `type MyIter = impl Iterator<Item = T>` |
+| 隐藏迭代器（Iterator）类型 | `Box<dyn Iterator<Item = T>>` | `type MyIter = impl Iterator<Item = T>` |
 | 跨函数共享隐藏类型 | 暴露具体类型或使用 trait object | 类型别名 + `impl Trait` |
 | 性能 | 动态分发 / 堆分配 | 静态分发 / 零成本 |
 | API 稳定性 | 具体类型变更会破坏 API | 只暴露 trait bound，更稳定 |
@@ -105,7 +105,7 @@ impl Iterator for Counter {
 ### 3.1 迁移建议
 
 1. **优先在库 API 中使用 TAIT**：隐藏内部迭代器、解析器、状态机等复杂类型；
-2. **不要用 TAIT 隐藏生命周期**：TAIT 不能替代正确的 lifetime 标注；
+2. **不要用 TAIT 隐藏生命周期（Lifetimes）**：TAIT 不能替代正确的 lifetime 标注；
 3. **注意版本门槛**：TAIT 要求 Rust 1.75.0+，若需支持旧版本仍应使用 `Box<dyn>`；
 4. **避免递归定义**：TAIT 不支持自引用或无限递归类型，需要时改用 `Box` 或显式 GAT。
 

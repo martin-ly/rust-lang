@@ -60,7 +60,7 @@
     - [10.1 边界测试：BorrowSanitizer 的别名分析误报（编译错误/运行时（Runtime）检测）](#101-边界测试borrowsanitizer-的别名分析误报编译错误运行时检测)
     - [10.2 边界测试：Sanitizer 与优化的交互（运行时（Runtime）检测丢失）](#102-边界测试sanitizer-与优化的交互运行时检测丢失)
     - [10.3 边界测试：BorrowSanitizer 与 FFI 的交互盲区（运行时（Runtime）漏报）](#103-边界测试borrowsanitizer-与-ffi-的交互盲区运行时漏报)
-    - [10.6 边界测试：BorrowSanitizer 与 `unsafe` 块内的合法别名（运行时误报）](#106-边界测试borrowsanitizer-与-unsafe-块内的合法别名运行时误报)
+    - [10.6 边界测试：BorrowSanitizer 与 `unsafe` 块内的合法别名（运行时（Runtime）误报）](#106-边界测试borrowsanitizer-与-unsafe-块内的合法别名运行时误报)
     - [10.5 边界测试：BorrowSanitizer 与 Miri 的检测范围差异（UB 漏检）](#105-边界测试borrowsanitizer-与-miri-的检测范围差异ub-漏检)
     - [10.3 边界测试：BorrowSanitizer 的插桩盲区与优化代码（UB 漏检）](#103-边界测试borrowsanitizer-的插桩盲区与优化代码ub-漏检)
     - [补充定理链](#补充定理链)
@@ -342,7 +342,7 @@ fn main() {
 
 ## 相关概念文件
 
-- [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) — Unsafe 边界与借用规则
+- [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) — Unsafe 边界与借用（Borrowing）规则
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权系统的形式化根基
 - [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用检查的核心机制
 - [BorrowSanitizer（活跃跟踪）](../02_stabilized_features/borrow_sanitizer.md) — 最新动态与使用方式

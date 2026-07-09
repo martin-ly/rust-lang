@@ -233,7 +233,7 @@ use std::collections::*;          // 导入所有公共项
 pub use shapes::circle; // 外部用户可通过 crate::circle 访问
 ```
 
-**知识点**：`use` 只是创建别名，不复制代码。`pub use` 是构建 crate 公共 API 的常用技巧。[→ 模块系统详解](../07_modules_and_items/11_modules_and_paths.md)
+**知识点**：`use` 只是创建别名，不复制代码。`pub use` 是构建 crate 公共 API 的常用技巧。[→ 模块（Module）系统详解](../07_modules_and_items/11_modules_and_paths.md)
 
 </details>
 

@@ -41,7 +41,7 @@
 | Lifetime capture in RPIT | `impl Trait` 生命周期（Lifetimes）捕获规则更精确 | stable |
 | `if let` 临时作用域收窄 | 临时值在 `if let` 条件中的生命周期（Lifetimes）缩短 | stable |
 | 尾表达式临时作用域 | 块尾表达式的临时值作用域收窄到语句结束 | stable |
-| `Macro` 与 `unsafe` 块优先级 | 宏调用不再无条件优先于 `unsafe` 块 | stable |
+| `Macro` 与 `unsafe` 块优先级 | 宏（Macro）调用不再无条件优先于 `unsafe` 块 | stable |
 
 > **注意**: `gen {}` 块和 `gen fn` 目前仍是 nightly-only 特性（`feature(gen_blocks)`），不在 2024 Edition stable 范围内。
 

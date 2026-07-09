@@ -7,7 +7,7 @@
 > **内容分级**: [综述级]
 > **Bloom 层级**: 理解 → 应用 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure
-> **前置概念**: [异步编程](../../03_advanced/01_async/02_async.md) · [并发模式](../../03_advanced/00_concurrency/10_concurrency_patterns.md) · [网络协议](../04_web_and_networking/38_network_protocols.md)
+> **前置概念**: [异步（Async）编程](../../03_advanced/01_async/02_async.md) · [并发模式](../../03_advanced/00_concurrency/10_concurrency_patterns.md) · [网络协议](../04_web_and_networking/38_network_protocols.md)
 > **后置概念**: [高性能网络服务架构](../04_web_and_networking/39_high_performance_network_service_architecture.md) · [网络安全](02_network_security.md)
 
 ---
@@ -256,7 +256,7 @@ flowchart TD
 
 ---
 
-> **L5 向下引用**: 协议选型可结合 [Rust vs Go：线性所有权 vs CSP 过程逻辑](../../05_comparative/01_systems_languages/02_rust_vs_go.md) 中的并发与通信模型对比进行理解。
+> **L5 向下引用（Reference）**: 协议选型可结合 [Rust vs Go：线性所有权（Ownership） vs CSP 过程逻辑](../../05_comparative/01_systems_languages/02_rust_vs_go.md) 中的并发与通信模型对比进行理解。
 
 ---
 
@@ -275,6 +275,6 @@ flowchart TD
 
 | 定理 | 前提 | 结论 |
 |:---|:---|:---|
-| 类型状态 ⟹ 更少运行时错误 | 将协议阶段编码为类型 | 非法状态转移被编译器拦截 |
+| 类型状态 ⟹ 更少运行时（Runtime）错误 | 将协议阶段编码为类型 | 非法状态转移被编译器拦截 |
 | 零拷贝解析 ⟹ 高吞吐 | 直接引用原始缓冲区 | 减少数据拷贝开销 |
 | 属性测试 ⟹ 协议符合性 | 自动生成输入验证解析器 | 发现边界情况缺陷 |

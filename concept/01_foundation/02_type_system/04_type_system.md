@@ -2454,7 +2454,7 @@ struct Handle<T> {
 }
 ```
 
-> **相关链接**：完整分析见 §11.2；与所有权和 FFI 的交互见 [01_ownership.md](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) §8.3。
+> **相关链接**：完整分析见 §11.2；与所有权（Ownership）和 FFI 的交互见 [01_ownership.md](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) §8.3。
 
 ### 补充：Discriminant 与内存布局
 
@@ -3003,7 +3003,7 @@ error[E0369]: cannot add `Foo` to `Foo`
 
 ## 从 `crates\c02_type_system\docs\tier_02_guides\02_compound_types_guide.md` 迁移的补充视角
 
-> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏（Macro）观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
 
 # 2.2 Rust 类型系统 - 复合类型指南
 
@@ -3079,7 +3079,7 @@ error[E0369]: cannot add `Foo` to `Foo`
     - [案例 1: 图形系统](#案例-1-图形系统)
     - [案例 2: 用户系统](#案例-2-用户系统)
     - [案例 3: 状态机](#案例-3-状态机)
-    - [案例 4: 错误处理](#案例-4-错误处理)
+    - [案例 4: 错误处理（Error Handling）](#案例-4-错误处理)
   - [7. 常见陷阱与最佳实践](#7-常见陷阱与最佳实践)
     - [7.1 常见陷阱](#71-常见陷阱)
     - [7.2 最佳实践](#72-最佳实践)

@@ -22,13 +22,13 @@
 
 ## 一、功能动机：跨 await 点持有的危险
 
-异步 Rust 的核心机制是 `.await` 点：当 future 遇到 `.await` 时，它可能将控制权交还给 executor，当前任务被挂起。如果某个 async 函数在挂起前持有了以下类型的值，就可能引入运行时故障：
+异步 Rust 的核心机制是 `.await` 点：当 future 遇到 `.await` 时，它可能将控制权交还给 executor，当前任务被挂起。如果某个 async 函数在挂起前持有了以下类型的值，就可能引入运行时（Runtime）故障：
 
-- `std::cell::RefCell` 的 `Ref` / `RefMut`：跨 await 时仍持有借用，其他任务可能 panic；
+- `std::cell::RefCell` 的 `Ref` / `RefMut`：跨 await 时仍持有借用（Borrowing），其他任务可能 panic；
 - `std::sync::MutexGuard` / `RwLockReadGuard`：跨 await 时仍持有锁，可能导致死锁；
 - 某些 `unsafe` 或 raw handle：挂起期间可能因资源状态变化而 UB。
 
-`must_not_suspend` lint 的目标就是在编译期警告这类危险持有。它不影响类型系统，而是作为**静态分析工具**帮助开发者发现 async 代码中的常见反模式。
+`must_not_suspend` lint 的目标就是在编译期警告这类危险持有。它不影响类型系统（Type System），而是作为**静态分析工具**帮助开发者发现 async 代码中的常见反模式。
 
 ---
 

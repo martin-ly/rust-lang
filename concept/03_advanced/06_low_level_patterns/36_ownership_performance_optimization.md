@@ -8,7 +8,7 @@
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+P** — Application + Procedure
-> **定位**: 从所有权视角出发，系统梳理避免不必要拷贝、使用写时复制、优化内存布局、零拷贝解析与移动语义的最佳实践。
+> **定位**: 从所有权（Ownership）视角出发，系统梳理避免不必要拷贝、使用写时复制、优化内存布局、零拷贝解析与移动语义的最佳实践。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md)
 > **后置概念**: [Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md) · [Zero-Copy Parsing](15_zero_copy_parsing.md)
 
@@ -26,7 +26,7 @@
   - [四、零拷贝解析](#四零拷贝解析)
   - [五、移动语义优化](#五移动语义优化)
   - [六、栈与堆选择](#六栈与堆选择)
-  - [七、枚举与 Option 布局优化](#七枚举与-option-布局优化)
+  - [七、枚举（Enum）与 Option 布局优化](#七枚举与-option-布局优化)
   - [八、缓存局部性](#八缓存局部性)
   - [九、常见反模式](#九常见反模式)
   - [认知路径](#认知路径)
@@ -36,7 +36,7 @@
 
 ## 一、避免不必要的 Clone
 
-优先使用引用（`&str`、`&[T]`）代替拥有所有权的类型（`String`、`Vec<T>`），避免堆分配。
+优先使用引用（Reference）（`&str`、`&[T]`）代替拥有所有权的类型（`String`、`Vec<T>`），避免堆分配。
 
 ```rust
 // ❌ 不必要的 clone
@@ -52,7 +52,7 @@ fn process(data: &str) {}
 
 ## 二、Copy on Write (Cow)
 
-`std::borrow::Cow` 在不需要修改时零成本借用，需要修改时才克隆。
+`std::borrow::Cow` 在不需要修改时零成本借用（Borrowing），需要修改时才克隆。
 
 ```rust
 use std::borrow::Cow;
@@ -70,7 +70,7 @@ fn normalize<'a>(input: &'a str) -> Cow<'a, str> {
 
 ## 三、内存布局优化
 
-字段按对齐要求排序，可减少结构体填充（padding）。
+字段按对齐要求排序，可减少结构体（Struct）填充（padding）。
 
 ```rust
 // ❌ 24 字节（含填充）
@@ -84,7 +84,7 @@ struct Optimized { b: u64, a: u8, c: u8 }
 
 ## 四、零拷贝解析
 
-使用切片引用原始数据，避免 `Vec<u8>` 分配。
+使用切片（Slice）引用原始数据，避免 `Vec<u8>` 分配。
 
 ```rust
 fn parse_header(data: &[u8]) -> Option<u32> {
@@ -169,7 +169,7 @@ let matrix: Vec<f64> = vec![0.0; n * 1024];
 
 > **反命题 1**: "Clone 总是性能问题" ⟹ 不成立。小数据或不可变共享场景下 clone 可能更简单且可接受。
 >
-> **反命题 2**: "零拷贝总是最优" ⟹ 不成立。零拷贝常引入复杂生命周期约束，可能增加维护成本。
+> **反命题 2**: "零拷贝总是最优" ⟹ 不成立。零拷贝常引入复杂生命周期（Lifetimes）约束，可能增加维护成本。
 >
 > **反命题 3**: "栈分配总是比堆分配快" ⟹ 不成立。大数据结构在栈上拷贝或传递可能反而更慢。
 >
