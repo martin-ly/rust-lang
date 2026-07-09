@@ -49,7 +49,7 @@
       - [LRU Cache (多线程安全版本)](#lru-cache-多线程安全版本)
       - [缓存预热与更新策略](#缓存预热与更新策略)
     - [1.3 负载均衡](#13-负载均衡)
-      - [一致性（Coherence）哈希负载均衡](#一致性哈希负载均衡)
+      - [一致性哈希负载均衡](#一致性哈希负载均衡)
   - [2. 性能调优实战](#2-性能调优实战)
     - [2.1 CPU 优化](#21-cpu-优化)
       - [SIMD 优化](#simd-优化)
@@ -58,7 +58,7 @@
       - [对象池](#对象池)
       - [内存映射文件 (mmap)](#内存映射文件-mmap)
     - [2.3 I/O 优化](#23-io-优化)
-      - [异步（Async）批量写入](#异步批量写入)
+      - [异步批量写入](#异步批量写入)
   - [3. 算法可靠性](#3-算法可靠性)
     - [3.1 容错设计](#31-容错设计)
       - [重试机制](#重试机制)
@@ -83,7 +83,6 @@
     - [教材](#教材)
     - [性能优化](#性能优化)
     - [生产实践](#生产实践)
-  - [**下一步**: 参见 `05_cutting_edge_algorithms.md`](#下一步-参见-05_cutting_edge_algorithmsmd)
   - [过渡段](#过渡段)
   - [定理链](#定理链)
 
@@ -1910,6 +1909,7 @@ pub async fn rate_limited_api(limiter: &TokenBucket, request: String) -> Result<
 **生产案例**: 推荐系统、排行榜、限流
 
 **下一步**: 参见 `05_cutting_edge_algorithms.md`
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

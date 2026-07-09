@@ -48,7 +48,7 @@
     - [绑定 (Binding)](#绑定-binding)
   - [⚡ 性能优化术语](#-性能优化术语)
     - [二进制大小优化](#二进制大小优化)
-    - [运行时（Runtime）优化](#运行时优化)
+    - [运行时优化](#运行时优化)
     - [LTO (Link Time Optimization)](#lto-link-time-optimization)
     - [wasm-opt](#wasm-opt)
   - [🛠️ 工具链术语](#️-工具链术语)

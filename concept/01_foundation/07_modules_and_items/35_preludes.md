@@ -12,7 +12,15 @@
 > **前置依赖**: [Modules and Paths](11_modules_and_paths.md) · [Attributes and Macros](../09_macros_basics/12_attributes_and_macros.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
 > **后置概念**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md)
 > **定理链**: N/A — 语言规范/综述性文档
-> **主要来源**: [Rust Reference — Preludes](https://doc.rust-lang.org/reference/names/preludes.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **主要来源**:
+>
+> [Rust Reference — Preludes](https://doc.rust-lang.org/reference/names/preludes.html) ·
+> [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) ·
+> [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 >
 > **来源**: [Rust Reference — Preludes](https://doc.rust-lang.org/reference/names/preludes.html) · [Rust Reference — `no_std`](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute) · [Rust Reference — `no_implicit_prelude`](https://doc.rust-lang.org/reference/names/preludes.html#the-no_implicit_prelude-attribute)
@@ -24,9 +32,7 @@
 ---
 
 > **过渡**: 从 Preludes（预导入模块（Module）） 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
-
 > **过渡**: 在建立 Preludes（预导入模块（Module）） 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
-
 > **过渡**: 最后，将 Preludes（预导入模块（Module）） 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
 ---

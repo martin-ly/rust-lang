@@ -35,7 +35,7 @@
     - [关系连接](#关系连接)
     - [思维导图](#思维导图)
   - [🔗 基础集成](#-基础集成)
-    - [加载 WASM 模块（Module）](#加载-wasm-模块)
+    - [加载 WASM 模块](#加载-wasm-模块)
   - [⚛️ React 集成](#️-react-集成)
     - [基本用法](#基本用法)
     - [自定义 Hook](#自定义-hook)
@@ -43,7 +43,7 @@
     - [Vue 基本用法](#vue-基本用法)
   - [🟢 Node.js 集成](#-nodejs-集成)
     - [Node.js 基本用法](#nodejs-基本用法)
-    - [ES 模块（Module）](#es-模块)
+    - [ES 模块](#es-模块)
   - [📦 TypeScript 类型](#-typescript-类型)
     - [使用类型](#使用类型)
   - [🌐 Web API 集成](#-web-api-集成)
@@ -53,9 +53,8 @@
     - [示例 1: 简单计算](#示例-1-简单计算)
     - [示例 2: 数组处理](#示例-2-数组处理)
   - [🔗 Rust 1.92.0 FFI 互操作 ⭐ NEW](#-rust-1920-ffi-互操作--new)
-    - [使用联合体原始引用（Reference）进行安全的 FFI 互操作](#使用联合体原始引用进行安全的-ffi-互操作)
+    - [使用联合体原始引用进行安全的 FFI 互操作](#使用联合体原始引用进行安全的-ffi-互操作)
   - [📚 相关资源](#-相关资源)
-  - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1961--edition-2024-wasm-20--wasi-02)
   - [过渡段](#过渡段)
   - [定理链](#定理链)
 
@@ -435,6 +434,7 @@ let mut_raw_ref = union.get_integer_mut_raw();
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
 **适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

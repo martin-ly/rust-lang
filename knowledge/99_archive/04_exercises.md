@@ -1681,7 +1681,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Official Docs](https://doc.rust-lang.org/)(https://doc.rust-lang.org/)
+> **权威来源**: [Rust Official Docs](https://doc.rust-lang.org/)(<https://doc.rust-lang.org/>)
 
 ---
 
