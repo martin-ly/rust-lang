@@ -166,6 +166,12 @@ cargo test --workspace
 
 # mdbook 构建（输出到 book/，不应提交）
 mdbook build
+
+# 本地一键运行全部 9 个质量门
+bash scripts/run_quality_gates.sh
+
+# 安装 pre-commit hook（会在每次 commit 前自动跑重叠/i18n/死链检查）
+bash scripts/git_hooks/install.sh
 ```
 
 ### 5.1 CI 九大质量门
@@ -202,6 +208,8 @@ mdbook build
 | 死链检查 | 每次大规模合并后 | `scripts/kb_auditor.py` |
 | 归档审计 | 每季度 | 人工 + 脚本 |
 | 版本页中心化管理 | Rust 新版本发布时 | `concept/07_future/rust_1_XX_*.md` |
+| 夜间质量报告 | 每天 | `.github/workflows/nightly_quality_report.yml` |
+| pre-commit 检查 | 每次本地提交 | `scripts/git_hooks/pre-commit` |
 
 ---
 

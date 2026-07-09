@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Pre-commit hook for the Rust knowledge base.
+# Install with: bash scripts/git_hooks/install.sh
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+cd "$ROOT"
+
+echo "=== Running pre-commit quality checks ==="
+
+# 1. Content overlap detection
+python scripts/detect_content_overlap.py >/dev/null 2>&1 || {
+    echo "❌ Content overlap check failed. Run 'python scripts/detect_content_overlap.py' for details."
+    exit 1
+}
+
+# 2. Bilingual annotation / i18n term coverage
+python scripts/add_bilingual_annotations.py --mode check-only >/dev/null 2>&1 || {
+    echo "❌ i18n term coverage check failed. Run 'python scripts/add_bilingual_annotations.py --mode check-only' for details."
+    exit 1
+}
+
+# 3. Knowledge base link / cross-layer consistency check
+python scripts/kb_auditor.py --link-check >/dev/null 2>&1 || {
+    echo "❌ KB auditor link check failed. Run 'python scripts/kb_auditor.py --link-check' for details."
+    exit 1
+}
+
+echo "✅ Pre-commit quality checks passed."
