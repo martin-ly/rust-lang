@@ -324,6 +324,7 @@
   - [WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）](06_ecosystem/05_systems_and_embedded/08_wasi.md)
   - [derive(Parser)](06_ecosystem/01_cargo/09_cargo_script.md)
   - [Cargo `public = true` 与 Resolver v3（公共/私有依赖）](06_ecosystem/01_cargo/10_public_private_deps.md)
+  - [Resolver v3 与 `public = true` 的 feature unification 演示](06_ecosystem/01_cargo/11_resolver_v3_public_feature_unification.md)
   - [WebAssembly 生态：Rust 的浏览器外运行时（Runtime）](06_ecosystem/11_domain_applications/11_webassembly.md)
   - [Rust 测试策略：从单元测试到属性验证](06_ecosystem/09_testing_and_quality/12_testing_strategies.md)
   - [日志与可观测性：Rust 服务端监控生态](06_ecosystem/00_toolchain/13_logging_observability.md)

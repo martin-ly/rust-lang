@@ -74,6 +74,7 @@
     - [7.1 反命题树](#71-反命题树)
     - [7.2 边界极限](#72-边界极限)
   - [八、权威来源索引](#八权威来源索引)
+  - [相关工具交叉索引](#相关工具交叉索引)
 
 ---
 
@@ -290,11 +291,22 @@ graph TD
 | [Tree Borrows Blog](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) | ✅ 二级 | Tree Borrows 设计说明 |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) | ✅ 二级 | unsafe Rust 实践指南 |
 
+## 相关工具交叉索引
+
+| 工具 / 概念 | 定位 | 权威来源 |
+|:---|:---|:---|
+| [Tree Borrows](../01_ownership_logic/36_tree_borrows_deep_dive.md) | Rust 别名模型演进方向；Miri 默认使用的内存模型 | [Tree Borrows 论文/博客](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) |
+| [Stacked Borrows](../01_ownership_logic/36_tree_borrows_deep_dive.md) | 早期 Rust 别名模型，Miri 中可通过 `-Zmiri-stacked-borrows` 启用 | [Stacked Borrows 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) |
+| [Safety Tags](../02_separation_logic/33_safety_tags_in_formal.md) | 将 `unsafe` 安全契约结构化，未来可与 Miri 动态检查联动 | [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
+| [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md) | 原生执行速度下的别名模型运行时检测，填补 Miri 在多语言场景的空缺 | [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) |
+| [Kani](32_kani.md) | 有界模型检查器，与 Miri 形成“动态 UB 检测 + 有界形式化证明”互补 | [Kani 官方文档](https://model-checking.github.io/kani/) |
+| [AutoVerus / Verus](24_autoverus.md) | SMT 演绎验证，可证明 Miri 无法穷尽的功能正确性 | [Verus GitHub](https://github.com/verus-lang/verus) |
+
 ---
 
 > **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html), [Miri](https://github.com/rust-lang/miri)
-> **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Rust 1.96.1 / Miri nightly
+> **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Rust 1.96.1 / Miri nightly · 2026-07-09 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用 [P2-Q3 形式化工具交叉引用]
 
-**文档版本**: 1.0
+**文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-26
+**最后更新**: 2026-07-09

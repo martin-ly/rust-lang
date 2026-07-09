@@ -224,7 +224,8 @@ serde = { workspace = true, public = false, features = ["derive"] }
 
 ### 7.3 可运行示例
 
-完整代码与运行说明见 [`examples/resolver_v3_practice`](../../../examples/resolver_v3_practice/)。
+- **feature unification 与 `public = true` 的最小可运行演示**：[`crates/c17_resolver_v3_public_demo`](../../../crates/c17_resolver_v3_public_demo/)，配套概念说明见 [Resolver v3 与 `public = true` 的 feature unification 演示](11_resolver_v3_public_feature_unification.md)。
+- **resolver v3 MSRV-aware 解析演示**：[`examples/resolver_v3_practice`](../../../examples/resolver_v3_practice/)。
 
 ---
 

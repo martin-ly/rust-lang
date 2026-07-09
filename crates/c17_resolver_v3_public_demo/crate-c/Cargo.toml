@@ -1,0 +1,14 @@
+[package]
+name = "crate-c"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.96.1"
+license = "MIT OR Apache-2.0"
+description = "Crate C: publicly depends on crate-d with the alloc feature"
+publish = false
+
+[dependencies]
+crate-d = { path = "../crate-d", features = ["alloc"], public = true }
+
+[lints.rust]
+missing_docs = "allow"

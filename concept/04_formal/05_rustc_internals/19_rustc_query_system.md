@@ -82,6 +82,10 @@
     - [4.3 增量编译不生效的常见原因](#43-增量编译不生效的常见原因)
     - [4.4 动手实验：修改-对比](#44-动手实验修改-对比)
     - [4.5 动手实验：实现最小查询系统](#45-动手实验实现最小查询系统)
+    - [4.6 动手实验：调用 rustc 内部查询 type\_of 与 predicates\_of](#46-动手实验调用-rustc-内部查询-type_of-与-predicates_of)
+      - [查询调用链示例](#查询调用链示例)
+      - [伪代码：在 `rustc_driver` 回调中调用查询](#伪代码在-rustc_driver-回调中调用查询)
+      - [对应 rustc 源码位置](#对应-rustc-源码位置)
   - [五、局限与边界](#五局限与边界)
   - [六、与 Salsa 的关系](#六与-salsa-的关系)
   - [嵌入式测验](#嵌入式测验)
@@ -427,6 +431,66 @@ fn main() {
 
 ---
 
+### 4.6 动手实验：调用 rustc 内部查询 type_of 与 predicates_of
+
+前面的实验从外部观察增量编译效果。如果想深入 `rustc` 内部，可以直接调用 `TyCtxt` 提供的查询接口。由于这些 API 属于 nightly 内部实现，下面给出**伪代码 + 源码参考**，帮助你在阅读或修改 `rustc` 时定位真实调用点。
+
+#### 查询调用链示例
+
+当 `rustc` 分析一个函数或类型项时，会按需触发如下查询链：
+
+```mermaid
+graph TD
+    A[Driver: run_compiler] --> B[analysis]
+    B --> C[collect_mod_item_types]
+    C --> D[type_of def_id]
+    D --> E[hir_type hir_id]
+    D --> F[generics_of def_id]
+    F --> G[predicates_of def_id]
+    G --> H[explicit_predicates_of def_id]
+    H --> I[inferred_outlives_of def_id]
+```
+
+> **关键洞察**: `type_of` 与 `predicates_of` 不是普通函数，而是**查询**。它们会被缓存、追踪依赖，并参与 Red-Green 增量判定。
+
+#### 伪代码：在 `rustc_driver` 回调中调用查询
+
+```rust,ignore
+// 伪代码：在 rustc 内部（nightly + #![feature(rustc_private)]）调用查询。
+// 这段代码不能直接用 stable cargo 编译，仅供理解调用方式。
+use rustc_middle::ty::{Ty, TyCtxt, GenericPredicates};
+use rustc_span::def_id::DefId;
+
+fn inspect_item(tcx: TyCtxt<'_>, def_id: DefId) {
+    // 查询该项的类型（对函数是签名，对静态项是声明类型等）
+    let ty: Ty<'_> = tcx.type_of(def_id).instantiate_identity();
+    println!("type_of({:?}) = {:?}", def_id, ty);
+
+    // 查询该项的 where-clause / 谓词集合
+    let predicates: GenericPredicates<'_> = tcx.predicates_of(def_id);
+    println!("predicates_of({:?}) = {:?}", def_id, predicates.predicates);
+}
+```
+
+#### 对应 rustc 源码位置
+
+| 查询 | 定义位置 | 实现位置 |
+|:---|:---|:---|
+| `type_of` | `compiler/rustc_middle/src/query/mod.rs` | `compiler/rustc_hir_analysis/src/collect/type_of.rs` |
+| `predicates_of` | `compiler/rustc_middle/src/query/mod.rs` | `compiler/rustc_hir_analysis/src/collect/predicates_of.rs` |
+| `generics_of` | `compiler/rustc_middle/src/query/mod.rs` | `compiler/rustc_hir_analysis/src/collect/generics_of.rs` |
+| 驱动入口 | — | `compiler/rustc_interface/src/queries.rs` |
+
+> **注意**: 查询签名在不同 nightly 版本中会有微调（例如 `instantiate_identity` 的引入），阅读时请以上游 master 为准。
+
+**实验目标**：
+
+1. 在本地克隆 `rust-lang/rust`，按 [Rustc Dev Guide — Building](https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html) 编译 stage1 编译器。
+2. 在 `compiler/rustc_hir_analysis/src/collect/type_of.rs` 的 `type_of` 实现中插入 `tracing` 日志，观察它何时被触发。
+3. 对比 `tcx.type_of(def_id)` 与直接读取 HIR 类型节点的区别：前者会走查询缓存，后者不会。
+
+---
+
 ## 五、局限与边界
 
 1. **并非所有查询都磁盘缓存**：某些查询（如部分 lint）为了正确性每次都会执行。
@@ -517,9 +581,9 @@ Salsa 本身是从 `rustc` 查询系统中提取出来的通用框架，被 `rus
 ---
 
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 编译器架构；2026-06-26 新增 `examples/incremental_practice/` 可运行增量编译实验 [P2 Deep Content Sprint](../../00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 编译器架构；2026-06-26 新增 `examples/incremental_practice/` 可运行增量编译实验 [P2 Deep Content Sprint](../../00_meta/02_sources/international_authority_index.md)；2026-07-09 新增 4.6 节 `type_of` / `predicates_of` 查询调用链实践 [P2-Q3 2026]
 
-**文档版本**: 1.2
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**文档版本**: 1.3
+**对应 Rust 版本**: 1.96.1+ / nightly 1.99 (Edition 2024)
 **最后更新**: 2026-07-09
 **状态**: ✅ 已对齐 Rust 1.96.1 编译器内部文档

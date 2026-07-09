@@ -185,6 +185,24 @@ cargo bench -p c04_generic
 4. 研究 GAT 的高级用法
 5. 理解 Trait 对象 vs 泛型的选择
 
+## 形式化验证示例
+
+本 crate 包含 Kani 泛型函数合约与泛型循环不变量示例，详见 [`src/kani_examples.rs`](src/kani_examples.rs)。
+这些示例使用 `#[cfg(kani)]` 保护，仅在运行 `cargo kani` 时编译，不影响常规的 `cargo build/test/check`。
+
+| 示例 | 覆盖内容 |
+|:---|:---|
+| `find_index` | 泛型切片查找的后置条件（`#[kani::ensures]`） |
+| `verify_count_occurrences_generic` | 泛型循环不变量 |
+| `clamp` | 带 `Ord` 约束的泛型函数前置/后置条件 |
+| `verify_all_positive_prefix_generic` | 泛型循环不变量与全称量词 |
+
+相关概念页：
+
+- [Kani：Rust 有界模型检查器](../../concept/04_formal/04_model_checking/32_kani.md)
+- [现代 Rust 验证工具生态（2025-2026）](../../concept/04_formal/04_model_checking/22_modern_verification_tools.md)
+- [Generics（泛型系统）](../../concept/02_intermediate/01_generics/02_generics.md)
+
 ## 相关文档
 
 - [Rust Book - Generics](https://doc.rust-lang.org/book/ch10-00-generics.html)
@@ -197,7 +215,7 @@ cargo bench -p c04_generic
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-07-09
+**状态**: ✅ 权威来源对齐完成 (Batch 8) · 新增 Kani 泛型形式化验证示例导航

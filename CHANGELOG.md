@@ -42,13 +42,21 @@
   - `cargo update` 锁定 0 个包。
   - `python scripts/detect_content_overlap.py` 发现 0 对潜在重复。
 
-### P2-Q3 深化计划启动（2026-07-09）
+### P2-Q3 深化计划完成（2026-07-09）
 
-- **P2-11 TRPL Ch17 对照索引**：
-  - 在 `concept/03_advanced/01_async/02_async.md` 新增“TRPL 3rd Ed Ch17”对照索引表，将本文章节映射到官方教材第 17 章节次，方便学习者按 TRPL 顺序复习。
-- **P2-1 rustc 查询系统动手实验**：
-  - 在 `concept/04_formal/05_rustc_internals/19_rustc_query_system.md` 新增 §4.5“动手实验：实现最小查询系统”。
-  - 提供一个自包含的 Rust 程序，模拟 `rustc` 查询系统的缓存、依赖追踪与失效机制。
+全部 11 项滚动深化任务已完成：
+
+- **P2-11 TRPL Ch17 对照索引**：在 `concept/03_advanced/01_async/02_async.md` 顶部新增 TRPL 3rd Ed Ch17 提示框与权威教材对照表。
+- **P2-9 TRPL 全章映射表**：新建 `docs/01_learning/learning_mvp_path.md`，覆盖 TRPL 3rd Ed 全部 22 章与 `concept/` 权威页的映射。
+- **P2-1 rustc 查询系统动手实验**：在 `concept/04_formal/05_rustc_internals/19_rustc_query_system.md` 新增调用 `type_of`/`predicates_of` 查询的 Mermaid 调用链图与 `rustc_driver` 伪代码示例。
+- **P2-5 Kani 合约示例扩展**：在 `crates/c03_control_fn/src/kani_examples.rs` 和 `crates/c04_generic/src/kani_examples.rs` 新增函数合约（`requires`/`ensures`）与循环不变量示例。
+- **P2-10 Brown Book 所有权引用**：在 `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md` 新增 Brown University Interactive Book 学术背景引用小节。
+- **P2-2 Trait Solver 对比实验**：在 `concept/04_formal/05_rustc_internals/26_trait_solver_in_rustc.md` 新增 old solver vs `-Znext-solver=globally` 的可复现对比示例与表格。
+- **P2-6 形式化工具交叉索引**：在 `concept/04_formal/04_model_checking/` 的 `13_formal_methods.md`、`22_modern_verification_tools.md`、`31_miri.md`、`32_kani.md` 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用表。
+- **P2-3 Cargo resolver v3 / `public = true` 示例**：新建 `crates/c17_resolver_v3_public_demo/` 可运行 workspace 与 `concept/06_ecosystem/01_cargo/11_resolver_v3_public_feature_unification.md` 配套概念页。
+- **P2-7 Sea-ORM 2.0 迁移评估**：输出 `reports/SEA_ORM_2_0_MIGRATION_ASSESSMENT_2026_07_09.md`，结论为 2.0 stable 尚未发布，保持 `2.0.0-rc.42`。
+- **P2-8 生态目标再确认**：输出 `reports/ECOSYSTEM_TARGET_RECONFIRMATION_2026_07_09.md`，确认 AFIDT 仍为 nightly、dynosaur 0.3.1 stable、wasm32-wasip2 Tier 2。
+- **P2-4 MIR / Codegen / LLVM 入门**：`concept/04_formal/05_rustc_internals/20_mir_codegen_llvm_primer.md` 已在 crates/docs 整治阶段创建并补入 SUMMARY。
 
 ### 知识库质量风险清零（2026-07-09）
 

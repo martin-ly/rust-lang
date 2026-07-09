@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 458,
+    "total_files": 459,
     "generated_at": "The system cannot accept the date entered.\nEnter the new date: (yy-mm-dd)"
   },
   "files": [
@@ -5342,12 +5342,14 @@
       "layer": "L0",
       "title": "TRPL 3rd Ed 章节映射",
       "positioning": "",
-      "line_count": 2,
+      "line_count": 6,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
-      "cross_references": [],
+      "cross_references": [
+        "../../docs/01_learning/learning_mvp_path.md"
+      ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
@@ -33730,7 +33732,7 @@
       "layer": "L4",
       "title": "形式化方法在 Rust 中的应用",
       "positioning": "探讨形式化验证工具在 Rust 生态中的应用——从 Kani 的模型检查到 Creusot 的演绎验证，分析如何用数学方法证明 Rust 代码正确性。",
-      "line_count": 743,
+      "line_count": 757,
       "theorem_chains": [
         {
           "text": "| 形式化方法在 Rust 中的应用 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -33815,14 +33817,20 @@
         "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
+        "../01_ownership_logic/36_tree_borrows_deep_dive.md",
         "../02_separation_logic/04_rustbelt.md",
         "../02_separation_logic/11_separation_logic.md",
-        "05_verification_toolchain.md"
+        "../02_separation_logic/33_safety_tags_in_formal.md",
+        "../02_separation_logic/34_borrow_sanitizer_in_formal.md",
+        "05_verification_toolchain.md",
+        "24_autoverus.md",
+        "31_miri.md",
+        "32_kani.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 11,
+      "matrix_rows": 18,
       "pre_post": {
         "pre": [
           ">"
@@ -33931,7 +33939,7 @@
       "layer": "L4",
       "title": "现代 Rust 验证工具生态（2025-2026）",
       "positioning": "利用大语言模型（LLM）自动生成 Verus 证明注解，降低形式化验证的门槛。",
-      "line_count": 514,
+      "line_count": 527,
       "theorem_chains": [
         {
           "text": "| 现代 Rust 验证工具生态（2025-2026） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -34017,22 +34025,25 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/02_stabilized_features/borrow_sanitizer.md",
+        "../01_ownership_logic/36_tree_borrows_deep_dive.md",
         "../02_separation_logic/04_rustbelt.md",
+        "../02_separation_logic/33_safety_tags_in_formal.md",
+        "../02_separation_logic/34_borrow_sanitizer_in_formal.md",
         "../03_operational_semantics/15_hoare_logic.md",
         "05_verification_toolchain.md",
+        "24_autoverus.md",
         "31_miri.md",
         "32_kani.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 32,
+      "matrix_rows": 40,
       "pre_post": {
         "pre": [
           "[Verification Toolchain](05_verification_toolchain.md) · [Hoare 逻辑](../03_operational_semantics/15_hoare_logic.md) · [RustBelt](../02_separation_logic/04_rustbelt.md)",
@@ -34355,7 +34366,7 @@
       "layer": "L4",
       "title": "Miri：Rust 未定义行为动态检测器",
       "positioning": "将 Miri 从“nightly 玩具”还原为日常 unsafe 代码审查与教学的标准工具。",
-      "line_count": 301,
+      "line_count": 313,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -34403,13 +34414,16 @@
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../01_ownership_logic/36_tree_borrows_deep_dive.md",
+        "../02_separation_logic/33_safety_tags_in_formal.md",
         "../02_separation_logic/34_borrow_sanitizer_in_formal.md",
-        "22_modern_verification_tools.md"
+        "22_modern_verification_tools.md",
+        "24_autoverus.md",
+        "32_kani.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 34,
+      "matrix_rows": 41,
       "pre_post": {
         "pre": [
           "[Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)"
@@ -34426,7 +34440,7 @@
       "layer": "L4",
       "title": "Kani：Rust 有界模型检查器",
       "positioning": "将 Kani 从\"AWS 内部工具\"还原为日常安全关键代码审查与教学的标准模型检查器。",
-      "line_count": 372,
+      "line_count": 384,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -34542,14 +34556,17 @@
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
+        "../01_ownership_logic/36_tree_borrows_deep_dive.md",
+        "../02_separation_logic/33_safety_tags_in_formal.md",
         "../02_separation_logic/34_borrow_sanitizer_in_formal.md",
         "22_modern_verification_tools.md",
+        "24_autoverus.md",
         "31_miri.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 29,
+      "matrix_rows": 36,
       "pre_post": {
         "pre": [
           "[Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [现代验证工具生态](22_modern_verification_tools.md)"
@@ -34566,7 +34583,7 @@
       "layer": "L4",
       "title": "Rustc 查询系统与增量编译",
       "positioning": "将 `rustc` 从“顺序 pass 流水线”还原为“按需查询 + 缓存”的真实架构，理解增量编译的底层机制。",
-      "line_count": 526,
+      "line_count": 590,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -34613,6 +34630,14 @@
           "flags": [
             "ignore"
           ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// 伪代码：在 rustc 内部（nightly + #![feature(rustc_private)]）调用查询。 // 这段代码不能直接用 stable..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
           "lines": 3,
           "should_fail": false,
           "code_preview": "// 示例：在 CI 中关闭增量编译 std::env::set_var(\"CARGO_INCREMENTAL\", \"0\"); ..."
@@ -34630,8 +34655,8 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
-      "matrix_rows": 24,
+      "mermaid_blocks": 3,
+      "matrix_rows": 29,
       "pre_post": {
         "pre": [
           "[Type System](../../01_foundation/02_type_system/04_type_system.md) · [Type Inference](../00_type_theory/08_type_inference.md) · [NLL and Polonius](../../03_advanced/02_unsafe/08_nll_and_polonius.md)"
@@ -34725,7 +34750,7 @@
       "layer": "L4",
       "title": "rustc 中的 Trait Solver",
       "positioning": "把“这个类型是否实现了某 trait”这一核心问题，还原为候选装配、筛选、确认与约束求解的完整算法。",
-      "line_count": 393,
+      "line_count": 449,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -34826,6 +34851,14 @@
           "flags": [
             "ignore"
           ],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "pub trait WithAssoc<'a> {     type Output; }  pub trait UseIt<T> {}  impl<T> Use..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "// 递归 trait：一个列表的所有元素都满足 P trait All<P> {     fn check(&self); }  impl<P> All<P>..."
@@ -34845,7 +34878,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 19,
+      "matrix_rows": 22,
       "pre_post": {
         "pre": [
           "[Type System](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Type Inference](../00_type_theory/08_type_inference.md) · [Name Resolution and HIR](35_name_resolution_and_hir.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)"
@@ -39608,7 +39641,7 @@
       "layer": "L6",
       "title": "Cargo `public = true` 与 Resolver v3",
       "positioning": "解决 Rust crate 图中“依赖泄漏”问题的核心机制，使 API 稳定性与依赖演进解耦；同时说明 resolver v3 在版本选择上的 MSRV-aware 行为。",
-      "line_count": 242,
+      "line_count": 243,
       "theorem_chains": [
         {
           "text": "| Resolver v3 启用 `fallback` ⟹ MSRV 兼容版本优先 | workspace 存在 `rust-version` 约束 | 依赖解析不会选择超过成员 MSRV 的版本 | 高 |",
@@ -39645,6 +39678,7 @@
       "sources": [],
       "cross_references": [
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "11_resolver_v3_public_feature_unification.md",
         "60_cargo_dependency_resolution.md",
         "78_cargo_workspaces.md"
       ],
@@ -39659,6 +39693,39 @@
         ],
         "post": [
           "[Cargo Workspaces](78_cargo_workspaces.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\01_cargo\\11_resolver_v3_public_feature_unification.md",
+      "layer": "L6",
+      "title": "Resolver v3 与 `public = true` 的 feature unification 演示",
+      "positioning": "把“resolver v3 + public dependency”从概念落到可运行的 Cargo workspace，观察 `cargo tree -e features` 的实际输出。",
+      "line_count": 178,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../../docs/06_toolchain/06_toml_v11_cargo_guide.md",
+        "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
+        "10_public_private_deps.md",
+        "60_cargo_dependency_resolution.md",
+        "76_cargo_196_features.md",
+        "78_cargo_workspaces.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 5,
+      "pre_post": {
+        "pre": [
+          "[Cargo Dependency Resolution](60_cargo_dependency_resolution.md) · [Cargo `public = true` 与 Resolver v3](10_public_private_deps.md) · [Cargo Workspaces](78_cargo_workspaces.md)"
+        ],
+        "post": [
+          "[Cargo 1.96 新特性](76_cargo_196_features.md)"
         ]
       },
       "backward_chains": 0,
@@ -44900,7 +44967,7 @@
       "layer": "L6",
       "title": "WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）",
       "positioning": "",
-      "line_count": 671,
+      "line_count": 672,
       "theorem_chains": [
         {
           "text": "> **⟹ 推理链**: W1（沙箱）+ W2（能力）构成**运行时（Runtime）隔离**，W3（WIT）+ W4（Rust）构成**编译期类型安全**，W5（组合）构成**架构级兼容性**。五层联合使 Component Model 成为目前最安全的软件组合模型之一。",
@@ -56669,7 +56736,7 @@
       "layer": "L7",
       "title": "WASM Target Evolution Preview",
       "positioning": "",
-      "line_count": 142,
+      "line_count": 143,
       "theorem_chains": [
         {
           "text": "| WASM Target Evolution Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",

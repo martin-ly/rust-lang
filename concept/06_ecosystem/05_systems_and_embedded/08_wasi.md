@@ -29,8 +29,9 @@
 
 **变更日志**:
 
+- v1.1 (2026-07-09): 重新确认 Rust 工具链状态——`wasm32-wasip2` 自 Rust 1.82（2024-10-17）起为 Tier 2 目标；旧目标名 `wasm32-wasi` 已在 Rust 1.84（2025-01-09）移除；当前 stable Rust 1.96.1 同时提供 `wasm32-wasip1` 与 `wasm32-wasip2`；WASI 0.2 已稳定，WASI 0.3 仍在开发。
 - v1.0 (2026-05-13):
-- 初始版本——覆盖 WASI 定位、Component Model 架构、`wit-bindgen`、能力安全、Rust `wasm32-wasip1` 或 `wasm32-wasip2` 目标 $entry
+  - 初始版本——覆盖 WASI 定位、Component Model 架构、`wit-bindgen`、能力安全、Rust `wasm32-wasip1` 或 `wasm32-wasip2` 目标
 
 ---
 

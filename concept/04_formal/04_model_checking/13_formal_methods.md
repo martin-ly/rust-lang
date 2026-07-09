@@ -51,6 +51,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [相关工具交叉索引](#相关工具交叉索引)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：形式化方法的编译错误](#十边界测试形式化方法的编译错误)
     - [10.1 边界测试：`unsafe` 块的形式化验证边界（编译错误）](#101-边界测试unsafe-块的形式化验证边界编译错误)
@@ -497,15 +498,28 @@ fn main() {
 - [Separation Logic](../02_separation_logic/11_separation_logic.md) — 分离逻辑
 - [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) — unsafe Rust
 
+## 相关工具交叉索引
+
+本节将形式化方法工具与内存模型概念横向链接，便于按场景选择验证策略。
+
+| 工具 / 概念 | 定位 | 权威来源 |
+|:---|:---|:---|
+| [Kani](32_kani.md) | Rust 有界模型检查器，基于 CBMC 符号执行验证安全属性 | [Kani 官方文档](https://model-checking.github.io/kani/) |
+| [Miri](31_miri.md) | Rust MIR 解释器，动态检测 UB（含 Stacked/Tree Borrows） | [Miri GitHub](https://github.com/rust-lang/miri) |
+| [Tree Borrows](../01_ownership_logic/36_tree_borrows_deep_dive.md) | Rust 别名模型演进方向，比 Stacked Borrows 更宽松 | [Tree Borrows 论文/博客](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) |
+| [Safety Tags](../02_separation_logic/33_safety_tags_in_formal.md) | RFC #3842 提案，将 `unsafe` 安全契约结构化、机器可读 | [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
+| [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md) | 运行时（Runtime）别名模型检测，面向 Rust/C/C++ 互操作 | [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) |
+| [AutoVerus / Verus](24_autoverus.md) | SMT 演绎验证与 LLM 辅助自动证明生态 | [Verus GitHub](https://github.com/verus-lang/verus) · [AutoVerus 论文](https://arxiv.org/abs/2409.13082) |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md) · 2026-07-09 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用 [P2-Q3 形式化工具交叉引用]
 
-**文档版本**: 1.0
+**文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-22
+**最后更新**: 2026-07-09
 **状态**: ✅ 概念文件创建完成
 
 ---

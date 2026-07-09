@@ -76,6 +76,7 @@
     - [6.1 架构差异](#61-架构差异)
     - [6.2 行为差异示例：关联类型与高阶生命周期](#62-行为差异示例关联类型与高阶生命周期)
     - [6.3 嵌套目标与 Fixpoint：推断变量的传播](#63-嵌套目标与-fixpoint推断变量的传播)
+    - [6.4 可复现的对比实验：高阶生命周期与关联类型归一化](#64-可复现的对比实验高阶生命周期与关联类型归一化)
   - [七、Coinduction 与递归 Trait](#七coinduction-与递归-trait)
   - [八、逆向推理链（Backward Reasoning）](#八逆向推理链backward-reasoning)
   - [嵌入式测验](#嵌入式测验)
@@ -253,7 +254,7 @@ where
 {}
 ```
 
-> **注意**: 该模式仅在 nightly 新 solver 下行为有显著差异；稳定版默认仍为旧 solver。可通过 `RUSTFLAGS="-Ztrait-solver=next"` 或 `cargo +nightly rustc -- -Ztrait-solver=next` 尝试。
+> **注意**: 该模式仅在 nightly 新 solver 下行为有显著差异；稳定版默认仍为旧 solver。historically 可通过 `-Ztrait-solver=next` 尝试；当前 nightly 已改为 `-Znext-solver=globally`（coherence 模式为 `-Znext-solver=coherence`）。
 >
 > [Rustc Dev Guide — Deferred alias equality](https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#deferred-alias-equality)(<https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#deferred-alias-equality>)
 
@@ -285,9 +286,64 @@ fn main() {
 >
 > [Rustc Dev Guide — Nested goals are evaluated until reaching a fixpoint](https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#nested-goals-are-evaluated-until-reaching-a-fixpoint)(<https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#nested-goals-are-evaluated-until-reaching-a-fixpoint>)
 
-> **状态（截至 Rust 1.96）**: 新 solver 仍在 nightly 中迭代，尚未成为默认。可通过 `-Ztrait-solver=next` 尝试。
+> **状态（截至 Rust 1.99 nightly）**: 新 solver 仍在迭代，尚未成为默认。historical flag 为 `-Ztrait-solver=next`；当前 nightly 使用 `-Znext-solver=globally`。
 >
 > [Rustc Dev Guide — Next-gen trait solving](https://rustc-dev-guide.rust-lang.org/solve/trait-solving.html)(<https://rustc-dev-guide.rust-lang.org/solve/the-solver.html>)
+
+---
+
+### 6.4 可复现的对比实验：高阶生命周期与关联类型归一化
+
+下面给出一个可在 nightly 直接复现的最小示例。它在**旧 solver 下编译失败**，在**新 solver 下编译通过**，差异来源于新 solver 对“绑定变量内部的关联类型投影”采用延迟归一化（`AliasRelate`）。
+
+```rust,ignore
+pub trait WithAssoc<'a> {
+    type Output;
+}
+
+pub trait UseIt<T> {}
+
+impl<T> UseIt<for<'a> fn(<T as WithAssoc<'a>>::Output)> for T
+where
+    T: for<'a> WithAssoc<'a>,
+{}
+
+struct Foo;
+impl<'a> WithAssoc<'a> for Foo {
+    type Output = &'a ();
+}
+
+fn need<T>(t: T)
+where
+    T: for<'a> WithAssoc<'a>,
+    T: UseIt<for<'a> fn(<T as WithAssoc<'a>>::Output)>,
+{}
+
+fn main() {
+    need(Foo);
+}
+```
+
+在 nightly 上分别执行：
+
+```bash
+# 旧 solver（默认）
+rustc +nightly --edition 2024 -Znext-solver=no trait_solver_cmp.rs
+
+# 新 solver（全局启用）
+rustc +nightly --edition 2024 -Znext-solver=globally trait_solver_cmp.rs
+```
+
+> **历史 flag 名称**: 在 1.96/1.97 nightly 中该 flag 为 `-Ztrait-solver=next`；当前 nightly 已改为 `-Znext-solver=globally`，coherence 模式为 `-Znext-solver=coherence`。
+
+**预期结果**：
+
+| Solver | 结果 |
+|:---|:---|
+| 旧 solver | error[E0277]: the trait bound `Foo: UseIt<for<'a> fn(&'a ())>` is not satisfied |
+| 新 solver | 编译通过（仅可能有 unused variable 警告） |
+
+旧 solver 会过早尝试在 `for<'a>` binder 内部把 `<T as WithAssoc<'a>>::Output` 结构展开，无法识别它归一化为 `&'a ()`；新 solver 生成 `AliasRelate` 目标，将等价判断延迟到参数环境足以归一化关联类型时再求解。
 
 ---
 
@@ -317,11 +373,11 @@ where
 
 ## 八、逆向推理链（Backward Reasoning）
 
-> **逆向 1**: 如果某段代码在 `-Ztrait-solver=next` 下编译通过，而在默认 solver 下失败 ⟸ 很可能是因为新 solver 的 canonicalization、延迟 alias 等价或 fixpoint 求值改变了该模式的可满足性，需要检查是否涉及高阶边界、关联类型或递归 trait。
+> **逆向 1**: 如果某段代码在 `-Znext-solver=globally`（historical flag: `-Ztrait-solver=next`）下编译通过，而在默认 solver 下失败 ⟸ 很可能是因为新 solver 的 canonicalization、延迟 alias 等价或 fixpoint 求值改变了该模式的可满足性，需要检查是否涉及高阶边界、关联类型或递归 trait。
 >
 > **逆向 2**: 如果 rust-analyzer 与 `rustc` 对同一个 trait bound 给出不同推断 ⟸ 需要检查是否触及新/旧 solver 的差异区域（如别名类型 inside binders、嵌套目标顺序），因为 rust-analyzer 已逐步复用新 solver 核心逻辑。
 >
-> **逆向 3**: 如果 trait 求解出现无法解释的 overflow 或 ambiguity ⟸ 可尝试用 `-Ztrait-solver=next` 复现，并对比 proof tree 输出（`-Ztrait-solver=next` + `-Zprint-implicit-call-graph` 等 nightly 调试选项）来定位是候选合并问题还是循环目标处理问题。
+> **逆向 3**: 如果 trait 求解出现无法解释的 overflow 或 ambiguity ⟸ 可尝试用 `-Znext-solver=globally`（historical flag: `-Ztrait-solver=next`）复现，并对比 proof tree 输出（`-Znext-solver=globally` + `-Zprint-implicit-call-graph` 等 nightly 调试选项）来定位是候选合并问题还是循环目标处理问题。
 
 ---
 
@@ -384,9 +440,9 @@ Obligation 是需要被证明的 trait reference，例如 `i32: Clone` 或 `T: D
 ---
 
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
-> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 trait solver 文档
+> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 trait solver 文档；2026-07-09 新增 6.4 节旧/新 solver 可复现对比实验并更新 nightly flag 名称 [P2-Q3 2026]
 
-**文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-06-21
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.1+ / nightly 1.99 (Edition 2024)
+**最后更新**: 2026-07-09
 **状态**: ✅ 已对齐 Rust 1.96.1 trait solver 文档

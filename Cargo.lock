@@ -2545,6 +2545,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "c17_resolver_v3_public_demo"
+version = "0.1.0"
+dependencies = [
+ "crate-b",
+ "crate-c",
+ "crate-d",
+]
+
+[[package]]
 name = "cache-padded"
 version = "1.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3537,6 +3546,24 @@ checksum = "8b2a41393f66f16b0823bb79094d54ac5fbd34ab292ddafb9a0456ac9f87d201"
 dependencies = [
  "libc",
 ]
+
+[[package]]
+name = "crate-b"
+version = "0.1.0"
+dependencies = [
+ "crate-d",
+]
+
+[[package]]
+name = "crate-c"
+version = "0.1.0"
+dependencies = [
+ "crate-d",
+]
+
+[[package]]
+name = "crate-d"
+version = "0.1.0"
 
 [[package]]
 name = "crc"

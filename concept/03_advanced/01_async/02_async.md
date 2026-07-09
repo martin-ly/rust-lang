@@ -2428,8 +2428,8 @@ impl AsyncProcessor for MyProcessor {
 
 ```text
 1. AFIT 方法不能直接用 dyn Trait（类型擦除问题）
-   解决: 使用 `async_trait` crate（当前 stable 主流）、`dynosaur 0.3.1`（stable 兼容的 dyn async trait 宏），或手动 Box::pin
-   注意: 原生 AFIDT（`async fn in dyn trait`）仍处于 nightly 实验性，跟踪 issue [rust-lang/rust#133119](https://github.com/rust-lang/rust/issues/133119)
+   解决: 使用 `async_trait` crate（当前 stable 主流）、`dynosaur 0.3.1`（stable 兼容的 dyn async trait 宏，MSRV 1.75），或手动 Box::pin
+   注意: 原生 AFIDT（`async fn in dyn trait`）截至 2026-07-09 仍未进入 stable Rust。Rust 1.96.1 stable 下含 `async fn` 的 trait 不是 dyn-compatible；nightly 上仍需 `#![feature(async_fn_in_dyn_trait)]` 且编译器标记其为 incomplete feature。跟踪 issue [rust-lang/rust#133119](https://github.com/rust-lang/rust/issues/133119)。
 
 2. 关联类型生命周期推断可能复杂
    解决: 显式标注或简化签名

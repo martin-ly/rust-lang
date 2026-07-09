@@ -50,6 +50,7 @@
     - [BorrowSanitizer（运行时借用检查 Sanitizer）](#borrowsanitizer运行时借用检查-sanitizer)
     - [Verus（Microsoft 演绎验证器）](#verusmicrosoft-演绎验证器)
   - [嵌入式测验](#嵌入式测验)
+  - [相关工具交叉索引](#相关工具交叉索引)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -452,9 +453,21 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 > **权威来源**: [AutoVerus arXiv 2025] · [Kani 0.65 Release Notes](https://model-checking.github.io/kani/) · [ESBMC GitHub](https://github.com/esbmc/esbmc) · [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [TrustInSoft](https://trust-in-soft.com/)
 > **文档版本**: 1.1
 > **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-> **最后更新**: 2026-06-26
-> **权威来源对齐变更日志**: 2026-06-26 新增 Kani 独立概念页 `./32_kani.md` 交叉链接 [P2 Deep Content Sprint](../../00_meta/02_sources/international_authority_index.md)
+> **最后更新**: 2026-07-09
+> **权威来源对齐变更日志**: 2026-07-09 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用 [P2-Q3 形式化工具交叉引用]
 > **状态**: ✅ 现代验证工具生态补全
+
+## 相关工具交叉索引
+
+| 工具 / 概念 | 定位 | 权威来源 |
+|:---|:---|:---|
+| [Kani](32_kani.md) | Rust 有界模型检查器 | [Kani 官方文档](https://model-checking.github.io/kani/) |
+| [Miri](31_miri.md) | Rust MIR 解释器，动态检测 UB | [Miri GitHub](https://github.com/rust-lang/miri) |
+| [Tree Borrows](../01_ownership_logic/36_tree_borrows_deep_dive.md) | Rust 别名模型演进方向 | [Tree Borrows 论文/博客](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) |
+| [Stacked Borrows](../01_ownership_logic/36_tree_borrows_deep_dive.md) | 早期 Rust 别名模型 | [Stacked Borrows 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) |
+| [Safety Tags](../02_separation_logic/33_safety_tags_in_formal.md) | `unsafe` 安全契约机器可读标注（RFC #3842） | [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
+| [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md) | 运行时别名模型检测 | [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) |
+| [AutoVerus / Verus](24_autoverus.md) | SMT 演绎验证与 LLM 辅助自动证明 | [Verus GitHub](https://github.com/verus-lang/verus) · [AutoVerus 论文](https://arxiv.org/abs/2409.13082) |
 
 ## 认知路径
 

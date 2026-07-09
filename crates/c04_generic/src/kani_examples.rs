@@ -54,3 +54,58 @@ fn verify_count_occurrences_generic() {
 
     assert_eq!(count, slice.iter().filter(|&&x| x == target).count());
 }
+
+/// 示例 3：泛型函数合约 —— 将值限制在闭区间 `[low, high]` 内
+///
+/// 要求 `T` 支持全序比较；前置条件保证 `low <= high`。
+/// 后置条件保证返回值落在闭区间 `[low, high]` 内。
+#[cfg(kani)]
+#[kani::requires(low <= high)]
+#[kani::ensures(|result| *result >= low && *result <= high)]
+fn clamp<T>(value: T, low: T, high: T) -> T
+where
+    T: Ord,
+{
+    if value < low {
+        low
+    } else if value > high {
+        high
+    } else {
+        value
+    }
+}
+
+/// 验证 `clamp` 的泛型函数合约
+#[cfg(kani)]
+#[kani::proof]
+fn verify_clamp_contract() {
+    let value: i16 = kani::any();
+    let low: i16 = kani::any();
+    let high: i16 = kani::any();
+    let _ = clamp(value, low, high);
+}
+
+/// 示例 4：泛型循环不变量 —— 验证切片前缀均满足谓词
+///
+/// 使用 `#[kani::loop_invariant]` 证明：遍历过程中所有已访问元素
+/// 都满足给定条件，且下标始终合法。
+#[cfg(kani)]
+#[kani::proof]
+#[kani::unwind(5)]
+fn verify_all_positive_prefix_generic() {
+    let arr: [i16; 4] = [kani::any(), kani::any(), kani::any(), kani::any()];
+    kani::assume(kani::forall!(|i in 0..4| arr[i] > 0));
+
+    let mut i = 0usize;
+    #[kani::loop_invariant(i <= arr.len())]
+    #[kani::loop_invariant(
+        kani::forall!(|j in 0..i| arr[j] > 0)
+    )]
+    while i < arr.len() {
+        assert!(arr[i] > 0);
+        i += 1;
+    }
+
+    assert_eq!(i, arr.len());
+    assert!(arr.iter().all(|&x| x > 0));
+}

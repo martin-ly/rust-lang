@@ -4,6 +4,7 @@
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+> - 截至 2026-07-09：`wasm32-wasip2` 自 Rust 1.82 起为 **Tier 2** 目标；旧 `wasm32-wasi` 目标已在 Rust 1.84 移除；当前 stable Rust 1.96.1 仍同时提供 `wasm32-wasip1` 与 `wasm32-wasip2`。
 > **前置概念**: N/A
 >
 ---

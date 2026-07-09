@@ -19,6 +19,7 @@ members = [
     "crates/c14_semantic_web",
     "crates/c15_verification_tools",
     "crates/c16_gui",
+    "crates/c17_resolver_v3_public_demo",
     "crates/common",
     "crates/integration_tests",
     "exercises",
@@ -458,7 +459,8 @@ memoffset = "0.9.1"
 # 2025-12-11: 数据库和存储最新稳定版本
 # sea-orm: 异步动态ORM，支持多种数据库后端
 # 2026-06-19: 2.0.0-rc.40 -> 2.0.0-rc.41
-# 2026-07-09: cargo update 自动解析至 2.0.0-rc.42（stable 仍未发布）
+# 2026-07-09: cargo update 自动解析至 2.0.0-rc.42
+# 2026-07-09: Sea-ORM 2.0 stable 仍未发布（crates.io max_stable_version = 1.1.20）
 sea-orm = { version = "2.0.0-rc.42", features = [
     "sqlx-postgres",      # PostgreSQL支持
     "runtime-tokio-rustls", # tokio运行时和rustls支持
