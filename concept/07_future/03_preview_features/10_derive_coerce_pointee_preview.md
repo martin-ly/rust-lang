@@ -1,6 +1,6 @@
 # 派生 CoercePointee 预研：智能指针的自动类型强制
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [示例级 — 已补充代码]
 >
 > **EN**: Derive CoercePointee Preview
 > **Summary**: Preview of the `CoercePointee` derive for custom smart-pointer types.
@@ -36,14 +36,14 @@
 
 ## 📑 目录
 
-- [派生 CoercePointee 预研：智能指针（Smart Pointer）的自动类型强制](#派生-coercepointee-预研智能指针的自动类型强制)
+- [派生 CoercePointee 预研：智能指针的自动类型强制](#派生-coercepointee-预研智能指针的自动类型强制)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 问题：自定义智能指针（Smart Pointer）的样板代码](#11-问题自定义智能指针的样板代码)
+    - [1.1 问题：自定义智能指针的样板代码](#11-问题自定义智能指针的样板代码)
     - [1.2 CoerceUnsized 与 DispatchFromDyn](#12-coerceunsized-与-dispatchfromdyn)
     - [1.3 `#[derive(CoercePointee)]` 方案](#13-derivecoercepointee-方案)
   - [二、技术细节](#二技术细节)
-    - [2.1 派生宏（Macro）的展开逻辑](#21-派生宏的展开逻辑)
+    - [2.1 派生宏的展开逻辑](#21-派生宏的展开逻辑)
     - [2.2 约束条件](#22-约束条件)
     - [2.3 与现有 Trait 的交互](#23-与现有-trait-的交互)
   - [三、安全分析](#三安全分析)
@@ -58,8 +58,8 @@
     - [10.1 边界测试：非 `#[repr(transparent)]` 类型的 CoercePointee（编译错误）](#101-边界测试非-reprtransparent-类型的-coercepointee编译错误)
     - [10.2 边界测试：多字段 struct 的 CoercePointee 尝试（编译错误）](#102-边界测试多字段-struct-的-coercepointee-尝试编译错误)
     - [10.3 边界测试：CoercePointee 与自定义 DST 的元数据（编译错误）](#103-边界测试coercepointee-与自定义-dst-的元数据编译错误)
-    - [10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期（Lifetimes）交互（编译错误）](#104-边界测试phantomdata-与-coercepointee-的生命周期交互编译错误)
-    - [10.4 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）](#104-边界测试coercepointee-与智能指针的自动转换编译错误未来特性)
+    - [10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期交互（编译错误）](#104-边界测试phantomdata-与-coercepointee-的生命周期交互编译错误)
+    - [10.5 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）](#105-边界测试coercepointee-与智能指针的自动转换编译错误未来特性)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`CoercePointee` trait 的作用是什么？它解决了智能指针的什么问题？（理解层）](#测验-1coercepointee-trait-的作用是什么它解决了智能指针的什么问题理解层)
@@ -154,6 +154,44 @@ struct MyBox<T: ?Sized> {
 // 编译器自动展开为：
 // impl<T, U> CoerceUnsized<MyBox<U>> for MyBox<T> where T: Unsize<U> { ... }
 // impl<T, U> DispatchFromDyn<MyBox<U>> for MyBox<T> where T: Unsize<U> { ... }
+```
+
+完整可运行的 nightly 示例：
+
+```rust,ignore
+#![feature(derive_coerce_pointee)]
+
+use std::marker::CoercePointee;
+use std::ops::Deref;
+
+// ✅ 正确：repr(transparent) + CoercePointee 派生
+#[derive(CoercePointee)]
+#[repr(transparent)]
+struct MyBox<T: ?Sized>(Box<T>);
+
+impl<T: ?Sized> Deref for MyBox<T> {
+    type Target = T;
+    fn deref(&self) -> &T {
+        &self.0
+    }
+}
+
+trait Greet {
+    fn greet(&self);
+}
+
+impl Greet for i32 {
+    fn greet(&self) {
+        println!("hello {self}");
+    }
+}
+
+fn main() {
+    let b: MyBox<i32> = MyBox(Box::new(42));
+    // MyBox<i32> → MyBox<dyn Greet> 自动强制转换
+    let d: MyBox<dyn Greet> = b;
+    d.greet(); // hello 42
+}
 ```
 
 > **设计原则**:
@@ -378,7 +416,10 @@ struct MyBox<T: ?Sized> {
 }
 
 fn main() {
-    let s: MyBox<str> = todo!();
+    let _s: MyBox<i32> = MyBox {
+        ptr: std::ptr::null(),
+        _marker: std::marker::PhantomData,
+    };
 }
 ```
 
@@ -431,7 +472,10 @@ fn main() {
     // ❌ 编译错误: CoercePointee 要求 T 的元数据与标准 DST 兼容
     // 若 T 是自定义 DST（非 str、slice、dyn Trait），
     // 元数据布局可能不匹配
-    let s: MyBox<str> = todo!();
+    let _s: MyBox<str> = MyBox {
+        ptr: std::ptr::null::<u8>() as *const str,
+        _marker: std::marker::PhantomData,
+    };
 }
 ```
 
@@ -474,7 +518,7 @@ fn main() {
 > [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
-### 10.4 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）
+### 10.5 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）
 
 ```rust,ignore
 // 概念代码: CoercePointee（提案中，1.83+ nightly）

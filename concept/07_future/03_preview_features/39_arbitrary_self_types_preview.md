@@ -1,6 +1,6 @@
 # Arbitrary Self Types 预览：自定义方法接收器
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [示例级 — 已补充代码]
 >
 > **EN**: Arbitrary Self Types Preview
 > **Summary**: Preview of arbitrary self types: extending method receivers beyond `&self`, `&mut self`, and `Box<Self>`.
@@ -36,7 +36,7 @@
   - [三、使用场景](#三使用场景)
     - [场景 1：内核编程（Rust for Linux）](#场景-1内核编程rust-for-linux)
     - [场景 2：嵌入式寄存器映射](#场景-2嵌入式寄存器映射)
-    - [场景 3：自定义智能指针（Smart Pointer）](#场景-3自定义智能指针)
+    - [场景 3：自定义智能指针](#场景-3自定义智能指针)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 安全边界](#41-安全边界)
     - [4.2 设计决策](#42-设计决策)
@@ -45,7 +45,7 @@
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Arbitrary Self Types 允许什么目前不允许的操作？（理解层）](#测验-1arbitrary-self-types-允许什么目前不允许的操作理解层)
-    - [测验 2：这个特性对自定义智能指针（Smart Pointer）有什么意义？（理解层）](#测验-2这个特性对自定义智能指针有什么意义理解层)
+    - [测验 2：这个特性对自定义智能指针有什么意义？（理解层）](#测验-2这个特性对自定义智能指针有什么意义理解层)
     - [测验 3：`Receiver` trait 在这个特性中起什么作用？（理解层）](#测验-3receiver-trait-在这个特性中起什么作用理解层)
     - [测验 4：Arbitrary Self Types 与 `Deref` 有什么关系？（理解层）](#测验-4arbitrary-self-types-与-deref-有什么关系理解层)
     - [测验 5：这个特性目前的状态是什么？（理解层）](#测验-5这个特性目前的状态是什么理解层)
@@ -80,6 +80,25 @@ impl MyType {
 }
 ```
 
+稳定 Rust 中已支持的接收器示例：
+
+```rust
+use std::rc::Rc;
+
+struct Counter(i32);
+
+impl Counter {
+    fn value(self: Rc<Self>) -> i32 {
+        self.0
+    }
+}
+
+fn main() {
+    let c = Rc::new(Counter(42));
+    assert_eq!(c.value(), 42);
+}
+```
+
 ### 1.2 Arbitrary Self Types 提案
 >
 > **[来源: [Rust Internals Forum](https://internals.rust-lang.org/)]**
@@ -100,6 +119,38 @@ impl MyType {
 
     // 使用 RefCell
     fn by_refcell(self: RefCell<Self>) {}
+}
+```
+
+nightly `arbitrary_self_types` 自定义指针示例：
+
+```rust,ignore
+#![feature(arbitrary_self_types)]
+
+use std::ops::Receiver;
+
+struct TaggedPtr<T> {
+    ptr: *const T,
+    tag: u8,
+}
+
+impl<T> Receiver for TaggedPtr<T> {
+    type Target = T;
+}
+
+struct Sensor(u32);
+
+impl Sensor {
+    // 以自定义指针类型作为方法接收器
+    fn read(self: TaggedPtr<Self>) -> u32 {
+        unsafe { (*self.ptr).0 }
+    }
+}
+
+fn main() {
+    let s = Sensor(42);
+    let ptr = TaggedPtr { ptr: &s, tag: 1 };
+    assert_eq!(ptr.read(), 42);
 }
 ```
 

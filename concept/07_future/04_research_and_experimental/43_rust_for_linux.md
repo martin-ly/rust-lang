@@ -1,7 +1,7 @@
 # Rust for Linux ：操作系统内核中的内存安全
 
 > **内容重叠提示**: 本文与 [`docs/04_research/04_rust_for_linux.md`](../../../docs/04_research/04_rust_for_linux.md) 内容高度重叠。`docs/` 版本已改为重定向页；`concept/` 版本为项目权威主轨。
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [示例级 — 已补充代码]
 >
 > **EN**: Operating Systems
 > **Summary**: Operating Systems. Core Rust concept covering mechanism analysis, in-depth analysis, FFI interoperability.
@@ -54,7 +54,7 @@
     - [10.2 边界测试：内核锁的原子顺序与 `unsafe` 封装（编译错误）](#102-边界测试内核锁的原子顺序与-unsafe-封装编译错误)
     - [10.3 边界测试：内核模块（Module）的 `no_std` 与 `alloc` 的谨慎使用（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-的谨慎使用编译错误)
     - 10.4 边界测试：内核锁的 `spinlock` 与睡眠的互斥（运行时（Runtime）死锁）
-    - [10.3 边界测试：内核模块（Module）的 `no_std` 与 alloc 限制（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-限制编译错误)
+    - [10.5 边界测试：内核模块（Module）的 `no_std` 与 alloc 限制（编译错误）](#105-边界测试内核模块的-no_std-与-alloc-限制编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust for Linux 项目的核心目标是什么？（理解层）](#测验-1rust-for-linux-项目的核心目标是什么理解层)
@@ -230,6 +230,54 @@ Rust for Linux 项目结构:
       pub read: Option<unsafe extern "C" fn(...) -> ssize_t>,
       // ...
   }
+```
+
+稳定 Rust 可编译的 `#![no_std]` 库示例：
+
+```rust
+#![no_std]
+
+pub fn add(left: u64, right: u64) -> u64 {
+    left + right
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_works() {
+        assert_eq!(add(2, 2), 4);
+    }
+}
+```
+
+nightly 内核模块概念骨架（需要 Linux 源码与 `kernel` crate）：
+
+```rust,ignore
+#![no_std]
+#![no_main]
+
+extern crate alloc;
+
+use kernel::prelude::*;
+
+module! {
+    type: MyModule,
+    name: "my_module",
+    author: "Rust for Linux",
+    description: "A minimal kernel module",
+    license: "GPL",
+}
+
+struct MyModule;
+
+impl kernel::Module for MyModule {
+    fn init(_module: &'static ThisModule) -> Result<Self> {
+        pr_info!("Hello from Rust module!\n");
+        Ok(MyModule)
+    }
+}
 ```
 
 > **绑定洞察**: 自动绑定生成是 Rust for Linux **规模化的关键**——它使数千个 C API 可以被 Rust 调用。
@@ -762,7 +810,7 @@ fn buggy_function() {
 > [来源: [Rust for Linux](https://rust-for-linux.com/)] ·
 > [来源: [Linux Kernel Locking](https://docs.kernel.org/kernel-hacking/locking.html)]
 
-### 10.3 边界测试：内核模块的 `no_std` 与 alloc 限制（编译错误）
+### 10.5 边界测试：内核模块的 `no_std` 与 alloc 限制（编译错误）
 
 ```rust,ignore
 #![no_std]

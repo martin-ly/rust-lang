@@ -1,7 +1,7 @@
 # Unsafe Fields 预研：字段级安全边界的精确标注
 
 > **内容重叠提示**: 本文与 [`docs/05_guides/05_unsafe_fields_preview.md`](../../../docs/05_guides/05_unsafe_fields_preview.md) 内容高度重叠。`docs/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [示例级 — 已补充代码]
 >
 > **EN**: Unsafe Fields Preview
 > **Summary**: Preview of unsafe fields: marking individual fields as requiring unsafe access.
@@ -66,7 +66,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Unsafe Fields 预览的编译错误](#十边界测试unsafe-fields-预览的编译错误)
     - [10.1 边界测试：unsafe 字段的显式访问要求（编译错误）](#101-边界测试unsafe-字段的显式访问要求编译错误)
-    - [10.2 边界测试：unsafe 字段与 Drop 的交互（运行时（Runtime） UB）](#102-边界测试unsafe-字段与-drop-的交互运行时-ub)
+    - [10.2 边界测试：unsafe 字段与 Drop 的交互（运行时 UB）](#102-边界测试unsafe-字段与-drop-的交互运行时-ub)
     - [10.3 边界测试：unsafe 字段与 `#[repr(C)]` 的交互（编译错误）](#103-边界测试unsafe-字段与-reprc-的交互编译错误)
     - [10.4 边界测试：unsafe 字段与不变式的文档化（逻辑错误）](#104-边界测试unsafe-字段与不变式的文档化逻辑错误)
     - [补充定理链](#补充定理链)
@@ -205,6 +205,53 @@ impl RawBuffer {
 > 2. `unsafe` 字段的**地址取址**（`&self.unsafe_field`）也需要 unsafe
 > 3. 结构体（Struct）的**字面量构造**中初始化 unsafe 字段需要 unsafe 块
 > 4. `unsafe` 不影响字段的**类型**，只影响**访问权限**
+
+当前稳定 Rust 中等价的写法（无字段级 unsafe，所有访问都是 safe，依赖文档约定）：
+
+```rust
+use std::mem::MaybeUninit;
+
+struct MiniVec<T> {
+    data: Box<[MaybeUninit<T>]>,
+    len: usize,
+}
+
+impl<T> MiniVec<T> {
+    fn push(&mut self, value: T) {
+        let cap = self.data.len();
+        if self.len == cap { panic!("capacity exceeded"); }
+        self.data[self.len].write(value);
+        self.len += 1;
+    }
+}
+```
+
+nightly `unsafe_fields` 预览写法：
+
+```rust,ignore
+#![feature(unsafe_fields)]
+
+use std::mem::MaybeUninit;
+
+struct MiniVec<T> {
+    // SAFETY: data[0..len) 必须处于有效状态
+    unsafe data: Box<[MaybeUninit<T>]>,
+    // SAFETY: len <= data.len()
+    unsafe len: usize,
+}
+
+impl<T> MiniVec<T> {
+    fn push(&mut self, value: T) {
+        unsafe {
+            // 对 unsafe 字段的读写必须位于 unsafe 上下文中
+            let cap = self.data.len();
+            if self.len == cap { panic!("capacity exceeded"); }
+            self.data[self.len].write(value);
+            self.len += 1;
+        }
+    }
+}
+```
 
 ---
 

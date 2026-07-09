@@ -266,8 +266,10 @@ impl AsyncDrop for AsyncFile {
 | `Box::as_ptr` / `Box::as_mut_ptr` | #157876 | 不物化引用（Reference）的原始指针（Raw Pointer）访问，对 aliasing model 更友好 |
 | `hex_literal_case` (rustfmt) | [rustfmt #6935](https://github.com/rust-lang/rustfmt/pull/6935) | 十六进制字面量大小写风格配置 |
 
-```rust
-// 1.98+ 使用示例（概念性，当前需 nightly 或等待稳定）
+```rust,ignore
+// 1.98+ API 预览（当前需 nightly，稳定化后可直接使用）
+#![feature(float_algebraic, int_format_into, nonzero_from_str_radix, box_as_ptr)]
+
 use std::num::NonZeroU32;
 
 fn demo_198_apis() {
@@ -280,6 +282,24 @@ fn demo_198_apis() {
     let ptr: *mut i32 = boxed.as_mut_ptr();
     unsafe { *ptr = 100; }
     assert_eq!(*boxed, 100);
+}
+```
+
+以下 API 在当前稳定版（1.96.1）中已可用：
+
+```rust
+fn demo_stable_apis() {
+    // 整数平方根（1.84 稳定）
+    assert_eq!(10i32.isqrt(), 3);
+
+    // Strict Provenance：创建无来源指针（1.84 稳定）
+    let addr = 0x1000usize;
+    let p = std::ptr::without_provenance::<u8>(addr);
+    assert!(!p.is_null());
+
+    // NonZero 的整数平方根（1.84 稳定）
+    let nz = std::num::NonZeroU32::new(9).unwrap();
+    assert_eq!(nz.isqrt().get(), 3);
 }
 ```
 

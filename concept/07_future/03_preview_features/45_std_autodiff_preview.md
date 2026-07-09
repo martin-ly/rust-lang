@@ -1,6 +1,6 @@
 # `std::autodiff`：Rust 官方自动微分前沿追踪
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [示例级 — 已补充代码]
 >
 > **EN**: Std Autodiff Preview
 > **Summary**: Std Autodiff Preview: emerging Rust language feature or ecosystem trend.
@@ -76,26 +76,21 @@ tch-rs: 绑定 PyTorch Autograd（C++ 运行时）
 ```rust,ignore
 #![feature(autodiff)]
 
-use std::autodiff::{forward, reverse};
-
-// 反向模式自动微分（深度学习常用）
-#[reverse]
-fn loss_fn(params: &[f64; 3], x: f64, y_true: f64) -> f64 {
-    let y_pred = params[0] * x * x + params[1] * x + params[2];
-    (y_pred - y_true).powi(2)
+// 前向模式自动微分：标量函数求导
+#[autodiff_forward(d_square, Dual, Dual)]
+fn square(x: f64) -> f64 {
+    x * x
 }
 
 fn main() {
-    let params = [1.0, 2.0, 3.0];
-    let x = 2.0;
-    let y_true = 5.0;
-
-    // 编译器自动生成 backward 版本:
-    // fn loss_fn_rev(params, x, y_true) -> (f64, [f64; 3]) // (loss, d_loss/d_params)
-    let (loss, grads) = loss_fn.grad(&params, x, y_true);
-    println!("loss = {loss}, ∇params = {grads:?}");
+    // d_square(x, seed) 同时返回原函数值和导数
+    let (value, derivative) = d_square(3.0, 1.0);
+    assert_eq!(value, 9.0);
+    assert_eq!(derivative, 6.0);
 }
 ```
+
+> **说明**: `#[autodiff_forward(NAME, INPUT_ACTIVITIES..., OUTPUT_ACTIVITY)]` 是 nightly 真实语法（`feature(autodiff)`）。`Dual` 表示对该参数求导，`Const` 表示常数。运行时需要 `-Zautodiff=Enable` 且编译器启用 Enzyme 支持。
 
 ### 2.2 前向模式 vs 反向模式
 
@@ -105,15 +100,19 @@ fn main() {
 | **反向模式** | 输入多、输出少（如神经网络训练）| O(计算图节点数) | O(1) 次前向 + 1 次反向 |
 
 ```rust,ignore
-// 前向模式: 同时计算值和导数
-#[forward]
-fn f(x: f64) -> f64 { x.sin() }
-// 生成: f(x) -> (f64, f64) = (sin(x), cos(x))
+#![feature(autodiff)]
 
-// 反向模式: 先正向建图，再反向传播梯度
-#[reverse]
-fn g(x: f64, y: f64) -> f64 { x * y + x.powi(2) }
-// 生成: g.grad(x, y) -> (f64, (f64, f64)) = (value, (∂g/∂x, ∂g/∂y))
+// 反向模式自动微分（多输入、单输出常用）
+#[autodiff_reverse(d_rosenbrock, Dual, Dual, Active)]
+fn rosenbrock(x: f64, y: f64) -> f64 {
+    (1.0 - x).powi(2) + 100.0 * (y - x.powi(2)).powi(2)
+}
+
+fn main() {
+    // 反向模式：为每个 Dual 输入生成一个 shadow 参数传入 seed
+    let (value, dx) = d_rosenbrock(1.0, 1.0, 3.0, 1.0);
+    println!("value = {value}, ∂f/∂x = {dx}");
+}
 ```
 
 ### 2.3 与现有生态的对比

@@ -1,6 +1,6 @@
 # Specialization：Trait 实现的精确化与重叠解析
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [示例级 — 已补充代码]
 >
 > **EN**: Specialization Preview
 > **Summary**: Preview of trait specialization: allowing overlapping impls with a default/fallback.
@@ -48,7 +48,7 @@
 - [Specialization：Trait 实现的精确化与重叠解析](#specializationtrait-实现的精确化与重叠解析)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 问题：泛型（Generics）实现的表达力限制](#11-问题泛型实现的表达力限制)
+    - [1.1 问题：泛型实现的表达力限制](#11-问题泛型实现的表达力限制)
     - [1.2 特化的设计：更精确的实现优先](#12-特化的设计更精确的实现优先)
     - [1.3 与 Coherence 的交互](#13-与-coherence-的交互)
   - [二、技术细节](#二技术细节)
@@ -64,14 +64,14 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：特化（Specialization）的编译错误](#十边界测试特化specialization的编译错误)
-    - [10.1 边界测试：重叠实现与孤儿规则（Orphan Rule）（编译错误）](#101-边界测试重叠实现与孤儿规则编译错误)
+    - [10.1 边界测试：重叠实现与孤儿规则（编译错误）](#101-边界测试重叠实现与孤儿规则编译错误)
     - [10.2 边界测试：`default` 方法与最终实现的冲突（编译错误）](#102-边界测试default-方法与最终实现的冲突编译错误)
     - [10.3 边界测试：特化与关联类型的冲突（编译错误）](#103-边界测试特化与关联类型的冲突编译错误)
-    - [10.4 边界测试：特化的交互与 trait 一致性（Coherence）（编译错误）](#104-边界测试特化的交互与-trait-一致性编译错误)
-    - [10.3 边界测试：特化（specialization）的 soundness 问题与编译错误（编译错误）](#103-边界测试特化specialization的-soundness-问题与编译错误编译错误)
+    - [10.4 边界测试：特化的交互与 trait 一致性（编译错误）](#104-边界测试特化的交互与-trait-一致性编译错误)
+    - [10.5 边界测试：特化（specialization）的 soundness 问题与编译错误（编译错误）](#105-边界测试特化specialization的-soundness-问题与编译错误编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：什么是"特化"（Specialization）？它与当前 Rust 的泛型（Generics）实现有什么区别？（理解层）](#测验-1什么是特化specialization它与当前-rust-的泛型实现有什么区别理解层)
+    - [测验 1：什么是"特化"（Specialization）？它与当前 Rust 的泛型实现有什么区别？（理解层）](#测验-1什么是特化specialization它与当前-rust-的泛型实现有什么区别理解层)
     - [测验 2：为什么 Rust 的特化比 C++ 的模板特化更难设计？（理解层）](#测验-2为什么-rust-的特化比-c-的模板特化更难设计理解层)
     - [测验 3：`default impl` 语法在特化中有什么作用？（理解层）](#测验-3default-impl-语法在特化中有什么作用理解层)
     - [测验 4：特化对性能优化有什么帮助？（理解层）](#测验-4特化对性能优化有什么帮助理解层)
@@ -232,6 +232,35 @@ impl<T: Debug> ToDebug for &T {
 
 > **语法要点**: `default` 关键字是特化的**核心机制**——它标记了可以被特化覆盖的方法。没有 `default` 的方法在特化实现中必须保持兼容。
 > [来源: [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844)]
+
+`min_specialization` 完整示例：
+
+```rust,ignore
+#![feature(min_specialization)]
+
+trait Describe {
+    fn describe(&self) -> &'static str;
+}
+
+// 默认实现：对所有类型生效
+impl<T> Describe for T {
+    default fn describe(&self) -> &'static str {
+        "generic"
+    }
+}
+
+// 为具体类型提供特化实现
+impl Describe for str {
+    fn describe(&self) -> &'static str {
+        "string slice"
+    }
+}
+
+fn main() {
+    assert_eq!(42.describe(), "generic");
+    assert_eq!("hello".describe(), "string slice");
+}
+```
 
 ---
 
@@ -612,7 +641,7 @@ fn main() {
 > [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
-### 10.3 边界测试：特化（specialization）的 soundness 问题与编译错误（编译错误）
+### 10.5 边界测试：特化（specialization）的 soundness 问题与编译错误（编译错误）
 
 ```rust,ignore
 #![feature(specialization)]

@@ -1,6 +1,6 @@
 # Const Trait Impl 预研：常量上下文中的 Trait 泛化
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [示例级 — 已补充代码]
 >
 > **EN**: Const Trait Impl Preview
 > **Summary**: Preview of const trait implementations (`const Trait`) for compile-time generic code.
@@ -65,7 +65,7 @@
     - [10.1 边界测试：const 上下文中调用非 const 方法（编译错误）](#101-边界测试const-上下文中调用非-const-方法编译错误)
     - [10.2 边界测试：trait bound 的 const 兼容性（编译错误）](#102-边界测试trait-bound-的-const-兼容性编译错误)
     - [10.6 边界测试：`~const` bound 与默认实现的交互（编译错误）](#106-边界测试const-bound-与默认实现的交互编译错误)
-    - [10.5 边界测试：const trait 的默认实现与泛型（Generics）约束（编译错误）](#105-边界测试const-trait-的默认实现与泛型约束编译错误)
+    - [10.5 边界测试：const trait 的默认实现与泛型约束（编译错误）](#105-边界测试const-trait-的默认实现与泛型约束编译错误)
     - [10.3 边界测试：`~const` 边界的语法演进与兼容性（编译错误）](#103-边界测试const-边界的语法演进与兼容性编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -157,6 +157,34 @@ graph TD
   - T: Add        → T 在**运行时**实现了 Add
   - T: ~const Add → T 在**编译期**也实现了 Add（即 const impl）
   - ~const 是"可选的 const"——如果 T 有 const impl，则在 const 上下文可用
+```
+
+完整 nightly 示例：
+
+```rust,ignore
+#![feature(const_trait_impl)]
+
+#[const_trait]
+trait Add {
+    fn add(&self, other: &Self) -> Self;
+}
+
+impl const Add for i32 {
+    fn add(&self, other: &Self) -> Self {
+        *self + *other
+    }
+}
+
+// ~const Add 表示"若 T 有 const impl，则可在 const 上下文中使用"
+const fn sum<T: ~const Add>(a: T, b: T) -> T {
+    a.add(&b)
+}
+
+const TOTAL: i32 = sum(3, 4);
+
+fn main() {
+    assert_eq!(TOTAL, 7);
+}
 ```
 
 > **效果系统视角**: `~const` 是 Rust 向**显式效果追踪**迈出的第一步。未来可能扩展为 `~async`、`~unsafe` 等更通用的效果限定。

@@ -1,6 +1,6 @@
 # BorrowSanitizer：动态别名规则验证工具
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [示例级 — 已补充代码]
 > **EN**: BorrowSanitizer (BSan) — Dynamic aliasing rule verification for Rust
 > **Summary**: BorrowSanitizer (BSan) — Dynamic aliasing rule verification for Rust: emerging Rust language feature or ecosystem trend.
 > **来源**: [BorrowSanitizer MCP](https://github.com/rust-lang/compiler-team/issues/958) · [Rust Project Goals 2026 — BorrowSanitizer](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) · [BorrowSanitizer 官方站点](https://borrowsanitizer.com/) · [形式化验证工具](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -150,7 +150,31 @@ RUSTFLAGS="-Zsanitizer=borrow" cargo +nightly run
 RUSTFLAGS="-Zsanitizer=borrow" cargo +nightly test -p my-unsafe-crate
 ```
 
-### 3.2 cargo-bsan 插件 (未来)
+### 3.2 可编译示例
+
+以下代码遵循 Tree Borrows 规则，BSan 运行时不会报错：
+
+```rust
+fn reborrow_ok() {
+    let mut x = 0i32;
+    let r1 = &mut x;
+    let r2 = &mut *r1; // reborrow：r1 暂时被禁用
+    *r2 += 1;
+}
+```
+
+以下代码会在 BSan 下触发别名违规报告（编译通过，运行时报错）：
+
+```rust,no_run
+unsafe fn aliasing_violation() {
+    let mut x = 0i32;
+    let r = &mut x as *mut i32;
+    let _a = &mut *r;
+    let _b = &mut *r; // 违反 Tree Borrows：同一原始指针上的重叠可变引用
+}
+```
+
+### 3.3 cargo-bsan 插件 (未来)
 
 ```bash
 # 预计 2026 年下半年可用
