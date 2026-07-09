@@ -59006,7 +59006,7 @@
       "layer": "L7",
       "title": "Safety Tags（安全标签）预览",
       "positioning": "",
-      "line_count": 164,
+      "line_count": 156,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59067,7 +59067,7 @@
       "layer": "L7",
       "title": "Inline Const Pattern 预览（Rust 1.98+ Nightly）",
       "positioning": "",
-      "line_count": 261,
+      "line_count": 251,
       "theorem_chains": [
         {
           "text": "| Inline Const Pattern Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -59153,7 +59153,7 @@
       "matrix_rows": 9,
       "pre_post": {
         "pre": [
-          "> [Const Generics](../../02_intermediate/01_generics/02_generics.md) ·",
+          "[Const Generics](../../02_intermediate/01_generics/02_generics.md) · [Pattern Matching](../../01_foundation/04_control_flow/07_control_flow.md) · [Patterns](../../01_foundation/04_control_flow/40_patterns.md) · [Const Items and Const Fn](../../01_foundation/07_modules_and_items/45_const_items_and_const_fn.md)",
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)",
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)",
           "N/A"
@@ -59170,7 +59170,7 @@
       "layer": "L7",
       "title": "AutoVerus / Verus 预览",
       "positioning": "",
-      "line_count": 180,
+      "line_count": 172,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59221,7 +59221,7 @@
       "layer": "L7",
       "title": "`must_not_suspend` Lint Preview",
       "positioning": "",
-      "line_count": 238,
+      "line_count": 231,
       "theorem_chains": [
         {
           "text": "| `must_not_suspend` Lint Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -59413,7 +59413,7 @@
       "layer": "L7",
       "title": "特质中返回位置 impl Trait（RPITIT）预览",
       "positioning": "",
-      "line_count": 265,
+      "line_count": 258,
       "theorem_chains": [
         {
           "text": "| RPITIT Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
