@@ -8,6 +8,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价并发设计在不同平台下的可移植性
+> **L2 基础入口**: [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md)
 > **前置依赖**: [Concurrency](01_concurrency.md) · [Conditional Compilation](../03_proc_macros/28_conditional_compilation.md)
 > **后置概念**: [Rust for Linux](../../07_future/04_research_and_experimental/43_rust_for_linux.md)
 >

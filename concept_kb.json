@@ -695,15 +695,20 @@
       "layer": "L0",
       "title": "通用 PL 基座路线图：Rust 在编程语言坐标系中的位置",
       "positioning": "",
-      "line_count": 129,
+      "line_count": 144,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反命题"
+        }
+      ],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
         "../../../archive/reports/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md",
         "../../01_foundation/00_start/21_effects_and_purity.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../01_foundation/02_type_system/22_data_abstraction_spectrum.md",
         "../../01_foundation/03_values_and_references/20_variable_model.md",
@@ -716,7 +721,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 33,
+      "matrix_rows": 39,
       "pre_post": {
         "pre": [
           "[Type System](../../01_foundation/02_type_system/04_type_system.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)"
@@ -1447,7 +1452,7 @@
       "layer": "L0",
       "title": "Concept Audit Guide（概念审计指南）",
       "positioning": "",
-      "line_count": 80,
+      "line_count": 104,
       "theorem_chains": [
         {
           "text": "| 08 Concept Audit Guide 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -1470,8 +1475,8 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
-      "matrix_rows": 2,
+      "mermaid_blocks": 1,
+      "matrix_rows": 9,
       "pre_post": {
         "pre": [],
         "post": []
@@ -1590,7 +1595,7 @@
       "layer": "L0",
       "title": "内容分级与受众标签体系",
       "positioning": "",
-      "line_count": 142,
+      "line_count": 158,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -1599,7 +1604,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 15,
+      "matrix_rows": 19,
       "pre_post": {
         "pre": [],
         "post": []
@@ -1650,8 +1655,13 @@
       "layer": "L0",
       "title": "模板去同质化指南",
       "positioning": "",
-      "line_count": 75,
-      "theorem_chains": [],
+      "line_count": 92,
+      "theorem_chains": [
+        {
+          "text": "| `scripts/kb_auditor.py` | 检查模板化 ⟹ 标记、元数据完整性 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
@@ -1664,7 +1674,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 7,
+      "matrix_rows": 12,
       "pre_post": {
         "pre": [
           "[Bilingual Template](../01_terminology/bilingual_template.md) · [Concept Consistency Audit Checklist](concept_consistency_audit_checklist.md)"
@@ -1848,7 +1858,7 @@
       "layer": "L0",
       "title": "基础知识缺口补全总索引",
       "positioning": "",
-      "line_count": 135,
+      "line_count": 142,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3845,7 +3855,7 @@
       "layer": "L0",
       "title": "场景决策树图谱（Scenario Decision Tree Atlas）",
       "positioning": "",
-      "line_count": 136,
+      "line_count": 142,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3911,7 +3921,7 @@
       "layer": "L0",
       "title": "示例与反例图谱（Example and Counterexample Atlas）",
       "positioning": "",
-      "line_count": 125,
+      "line_count": 131,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3978,7 +3988,7 @@
       "layer": "L0",
       "title": "逻辑推理图谱（Logical Reasoning Atlas）",
       "positioning": "",
-      "line_count": 116,
+      "line_count": 124,
       "theorem_chains": [
         {
           "text": "> **Summary**: A navigational index of theorem chains, inference rules, proof/verification paths, and formal correspondences across the Rust concept hierarchy. 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。",
@@ -4039,6 +4049,10 @@
         {
           "text": "| `Pin<T>` + `Unpin` ⟹ 自引用类型安全移动 | ⟹ | 固定位置保证 | [Pin and Unpin](../../03_advanced/01_async/06_pin_unpin.md) |",
           "type": "table_row"
+        },
+        {
+          "text": "| ⟹ | 前提保证结论 | 所有权 ⟹ 无 use-after-free |",
+          "type": "table_row"
         }
       ],
       "anti_propositions": [],
@@ -4077,12 +4091,12 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 3,
-      "matrix_rows": 23,
+      "matrix_rows": 27,
       "pre_post": {
         "pre": [],
         "post": []
       },
-      "backward_chains": 1,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -4090,7 +4104,7 @@
       "layer": "L0",
       "title": "层间映射图谱（Inter-Layer Mapping Atlas）",
       "positioning": "",
-      "line_count": 112,
+      "line_count": 116,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -5368,7 +5382,7 @@
       "layer": "L0",
       "title": "概念-权威来源对齐图谱（Concept-Source Alignment Atlas）",
       "positioning": "",
-      "line_count": 138,
+      "line_count": 145,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -5431,7 +5445,7 @@
       "layer": "L0",
       "title": "推理判定树图谱（Reasoning Judgment Tree Atlas）",
       "positioning": "",
-      "line_count": 147,
+      "line_count": 154,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -5469,7 +5483,7 @@
       "layer": "L0",
       "title": "缺口与行动计划（Gap and Action Plan）",
       "positioning": "",
-      "line_count": 116,
+      "line_count": 124,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -5516,7 +5530,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 50,
+      "matrix_rows": 54,
       "pre_post": {
         "pre": [],
         "post": []
@@ -13012,7 +13026,7 @@
       "layer": "L1",
       "title": "错误处理控制流（Error Handling Control Flow）",
       "positioning": "",
-      "line_count": 250,
+      "line_count": 253,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -22987,7 +23001,7 @@
       "layer": "L3",
       "title": "Cross-Platform Concurrency（跨平台并发）",
       "positioning": "",
-      "line_count": 88,
+      "line_count": 130,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -23002,10 +23016,17 @@
           "lines": 15,
           "should_fail": false,
           "code_preview": "#[cfg(target_os = \"windows\")] fn optimal_thread_count() -> usize {     std::env:..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::sync::atomic::{AtomicUsize, Ordering};  static COUNTER: AtomicUsize = A..."
         }
       ],
       "sources": [],
       "cross_references": [
+        "../../02_intermediate/02_memory_management/12_smart_pointers.md",
         "../../07_future/04_research_and_experimental/43_rust_for_linux.md",
         "../03_proc_macros/28_conditional_compilation.md",
         "01_concurrency.md"
@@ -23013,7 +23034,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 5,
+      "matrix_rows": 11,
       "pre_post": {
         "pre": [
           "[Concurrency](01_concurrency.md) · [Conditional Compilation](../03_proc_macros/28_conditional_compilation.md)"
@@ -26165,33 +26186,16 @@
       "layer": "L3",
       "title": "Unsafe Rust 模式：安全抽象的核心技术",
       "positioning": "",
-      "line_count": 32,
-      "theorem_chains": [
-        {
-          "text": "> **反命题 1**: \"Unsafe Rust 模式 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
-          "type": "paragraph"
-        },
-        {
-          "text": "> **反命题 2**: \"忽略 Unsafe Rust 模式 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 Unsafe Rust 模式 规则被违反的直接信号。",
-          "type": "paragraph"
-        },
-        {
-          "text": "> **反命题 3**: \"其他语言对 Unsafe Rust 模式 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Unsafe Rust 模式 具有语言特有的形态。",
-          "type": "paragraph"
-        }
-      ],
-      "anti_propositions": [
-        {
-          "title": "## 反命题"
-        }
-      ],
+      "line_count": 18,
+      "theorem_chains": [],
+      "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
         "03_unsafe.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": true,
+      "has_cognitive_path": false,
       "mermaid_blocks": 0,
       "matrix_rows": 0,
       "pre_post": {
@@ -30533,7 +30537,7 @@
       "layer": "L3",
       "title": "变量（Variables）",
       "positioning": "",
-      "line_count": 128,
+      "line_count": 178,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -30575,6 +30579,24 @@
           "lines": 17,
           "should_fail": false,
           "code_preview": "fn random_bool() -> bool { true }  fn initialization_example() {     let init_af..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "let x = 5; let x = x + 1; // 新变量 x，类型可以不同 let x = \"shadowed\"; // x 现在是 &str ..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "let s = &String::from(\"temp\"); // ❌ 悬垂引用：临时值在语句结束即 drop ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "let mut x = 0; unsafe {     let r = &mut x as *mut i32;     *r = 1; } ..."
         }
       ],
       "sources": [],
@@ -30590,7 +30612,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 7,
+      "matrix_rows": 17,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Move Semantics](../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) · [Memory Model](../02_unsafe/29_memory_model.md)"
@@ -30607,7 +30629,7 @@
       "layer": "L3",
       "title": "可见性与隐私（Visibility and Privacy）",
       "positioning": "",
-      "line_count": 148,
+      "line_count": 200,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -30649,6 +30671,24 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "pub use self::implementation::api;  mod implementation {     pub mod api {      ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "mod inner {     pub fn public_fn() {}     fn private_fn() {} }  pub use inner::p..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// crate-a pub struct Foo {     pub(crate) internal: i32, // 对 crate-b 不可见 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "#[cfg(test)] mod tests {     use super::*;      #[test]     fn test_internal() {..."
         }
       ],
       "sources": [],
@@ -30661,7 +30701,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 11,
       "pre_post": {
         "pre": [
@@ -30679,7 +30719,7 @@
       "layer": "L3",
       "title": "所有权性能优化",
       "positioning": "从所有权视角出发，系统梳理避免不必要拷贝、使用写时复制、优化内存布局、零拷贝解析与移动语义的最佳实践。",
-      "line_count": 105,
+      "line_count": 157,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -30712,6 +30752,24 @@
           "lines": 4,
           "should_fail": false,
           "code_preview": "fn consume(data: Vec<u8>) -> usize {     data.len() // data 被移入，无拷贝开销 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "use std::mem::size_of;  assert_eq!(size_of::<Box<u32>>(), size_of::<Option<Box<u..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// ❌ 16 字节（padding） enum Bad { A(u8, u64) }  // ✅ 16 字节但利用更紧凑：将大字段对齐在前 enum Good..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// ❌ 数组 of pointers：cache miss 高 let matrix: Vec<Box<[f64; 1024]>> = vec![...; n..."
         }
       ],
       "sources": [],
@@ -30726,7 +30784,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "matrix_rows": 10,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md)"
@@ -34274,7 +34332,7 @@
       "layer": "L4",
       "title": "常量求值（Constant Evaluation）",
       "positioning": "",
-      "line_count": 142,
+      "line_count": 186,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -34304,6 +34362,24 @@
           "lines": 3,
           "should_fail": false,
           "code_preview": "const fn square(x: i32) -> i32 { x * x } const VALUE: i32 = square(12); ..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "let arr = [0; const { 1 + 2 }]; // 长度为 3 ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "struct Buffer<const N: usize> {     data: [u8; N], }  let b = Buffer::<1024> { d..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "const fn read_raw(ptr: *const i32) -> i32 {     unsafe { *ptr } } ..."
         }
       ],
       "sources": [],
@@ -34318,7 +34394,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 24,
+      "matrix_rows": 28,
       "pre_post": {
         "pre": [
           "[Type System](../../01_foundation/02_type_system/04_type_system.md) · [Expressions](../../01_foundation/04_control_flow/07_control_flow.md) · [Functions](../../01_foundation/04_control_flow/07_control_flow.md)"
@@ -36705,7 +36781,7 @@
       "layer": "L4",
       "title": "泛型编译器行为：单态化、分发与类型擦除",
       "positioning": "",
-      "line_count": 149,
+      "line_count": 173,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将泛型函数、类型参数、实例化和分发方式串联起来。",
@@ -36753,6 +36829,12 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "// 减少膨胀：公共非泛型入口 + 小型泛型包装 pub fn process_value(value: &dyn MyTrait) {     // 非泛型主..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn make_iter() -> impl Iterator<Item = i32> {     (0..10).map(|x| x * 2) } ..."
         }
       ],
       "sources": [],
@@ -36769,7 +36851,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 26,
+      "matrix_rows": 32,
       "pre_post": {
         "pre": [
           "[Generics](../../02_intermediate/01_generics/02_generics.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)"
@@ -36786,7 +36868,7 @@
       "layer": "L4",
       "title": "符号约定（Notation）",
       "positioning": "",
-      "line_count": 117,
+      "line_count": 141,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -36821,7 +36903,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 7,
+      "matrix_rows": 19,
       "pre_post": {
         "pre": [
           "[Programming Language Foundations](../04_model_checking/23_programming_language_foundations.md)"
@@ -54381,10 +54463,29 @@
       "layer": "L7",
       "title": "Rust 2024 Edition (1.85.0+ stable)",
       "positioning": "",
-      "line_count": 67,
+      "line_count": 110,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 2021 Edition：需要显式 async 块 let f = |x| async move { x + 1 };  // 2024 Edition：..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 2021 Edition：临时值生命周期可能延续到 if 块外 if let Some(x) = get_temp().as_ref() { /* ......"
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "let x = match condition {     true => return,     false => 42, }; // 2024 Editio..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../../knowledge/06_ecosystem/02_edition_2024.md",
@@ -54398,7 +54499,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 6,
+      "matrix_rows": 13,
       "pre_post": {
         "pre": [
           "[Rust Version Tracking](../00_version_tracking/05_rust_version_tracking.md) · [Async](../../03_advanced/01_async/02_async.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)"
