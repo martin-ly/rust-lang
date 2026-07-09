@@ -1,4 +1,4 @@
-# Rust 1.98 Nightly 前瞻速查表 {#rust-198-nightly-前瞻速查表}
+# Rust 1.98 Nightly 前瞻速查表 (Rust 198 Nightly Preview Cheatsheet) {#rust-198-nightly-前瞻速查表}
 
 > **EN**: Rust 198 Nightly Preview Cheatsheet
 > **Summary**: Rust 1.98 Nightly 前瞻速查表 Rust 198 Nightly Preview Cheatsheet.
@@ -17,7 +17,7 @@
 
 ## 目录 {#目录}
 
-- [Rust 1.98 Nightly 前瞻速查表 {#rust-198-nightly-前瞻速查表}](#rust-198-nightly-前瞻速查表-rust-198-nightly-前瞻速查表)
+- [Rust 1.98 Nightly 前瞻速查表 (Rust 198 Nightly Preview Cheatsheet) {#rust-198-nightly-前瞻速查表}](#rust-198-nightly-前瞻速查表-rust-198-nightly-preview-cheatsheet-rust-198-nightly-前瞻速查表)
   - [目录 {#目录}](#目录-目录)
   - [语言特性 {#语言特性}](#语言特性-语言特性)
     - [`gen` 块 — 原生生成器 {#gen-块-原生生成器}](#gen-块--原生生成器-gen-块-原生生成器)

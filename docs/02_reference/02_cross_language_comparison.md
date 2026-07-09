@@ -1,4 +1,4 @@
-# Rust 与 C++/Go/Python 跨语言对比 {#rust-与-cgopython-跨语言对比}
+# Rust 与 C++/Go/Python 跨语言对比 (Cross Language Comparison) {#rust-与-cgopython-跨语言对比}
 
 > **EN**: Cross Language Comparison
 > **Summary**: Rust 与 C++/Go/Python 跨语言对比 Cross Language Comparison. (stub/archive redirect)
@@ -18,39 +18,6 @@
 - v1.1 (2026-05-19): 补全权威来源标注（Rust Reference / RFC、C++ ISO / cppreference、Go Spec、学术论文），添加 Haskell 对标索引。
 
 ---
-
-## 目录 {#目录}
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-- [Rust 与 C++/Go/Python 跨语言对比 {#rust-与-cgopython-跨语言对比}](#rust-与-cgopython-跨语言对比-rust-与-cgopython-跨语言对比)
-  - [目录 {#目录}](#目录-目录)
-  - [内存管理 {#内存管理}](#内存管理-内存管理)
-    - [内存管理代码对比示例 {#内存管理代码对比示例}](#内存管理代码对比示例-内存管理代码对比示例)
-    - [内存管理形式化对比 {#内存管理形式化对比}](#内存管理形式化对比-内存管理形式化对比)
-  - [并发模型 {#并发模型}](#并发模型-并发模型)
-    - [并发代码对比示例 {#并发代码对比示例}](#并发代码对比示例-并发代码对比示例)
-    - [并发模型形式化对比 {#并发模型形式化对比}](#并发模型形式化对比-并发模型形式化对比)
-  - [错误处理 {#错误处理}](#错误处理-错误处理)
-    - [错误处理代码对比示例 {#错误处理代码对比示例}](#错误处理代码对比示例-错误处理代码对比示例)
-    - [错误处理形式化对比 {#错误处理形式化对比}](#错误处理形式化对比-错误处理形式化对比)
-  - [类型系统 {#类型系统}](#类型系统-类型系统)
-    - [泛型代码对比示例 {#泛型代码对比示例}](#泛型代码对比示例-泛型代码对比示例)
-    - [类型系统形式化对比 {#类型系统形式化对比}](#类型系统形式化对比-类型系统形式化对比)
-  - [生态与工具链 {#生态与工具链}](#生态与工具链-生态与工具链)
-    - [工具链代码对比示例 {#工具链代码对比示例}](#工具链代码对比示例-工具链代码对比示例)
-  - [📊 综合对比矩阵 {#综合对比矩阵}](#-综合对比矩阵-综合对比矩阵)
-  - [🔗 形式化文档链接 {#形式化文档链接}](#-形式化文档链接-形式化文档链接)
-    - [Rust 形式化基础 {#rust-形式化基础}](#rust-形式化基础-rust-形式化基础)
-    - [权威来源索引 {#权威来源索引-1}](#权威来源索引-权威来源索引-1)
-      - [Rust（一级来源） {#rust一级来源}](#rust一级来源-rust一级来源)
-      - [C++（一级/二级来源） {#c一级二级来源}](#c一级二级来源-c一级二级来源)
-      - [Go（一级来源） {#go一级来源}](#go一级来源-go一级来源)
-      - [Haskell（二级来源，Trait / 类型系统对标） {#haskell二级来源trait-类型系统对标}](#haskell二级来源trait--类型系统对标-haskell二级来源trait-类型系统对标)
-      - [Python（三级来源） {#python三级来源}](#python三级来源-python三级来源)
-  - [相关文档 {#相关文档}](#相关文档-相关文档)
-  - [Rust 1.95+ 更新 {#rust-195-更新}](#rust-195-更新-rust-195-更新)
-  - [权威来源索引 {#权威来源索引-1}](#权威来源索引-权威来源索引-1-1)
 
 ---
 
@@ -127,29 +94,8 @@ process_string(s)  # 引用传递
 print(s)           # 仍然可用
 ```
 
-### 内存管理形式化对比 {#内存管理形式化对比}
-
-> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
-| 语言 | 形式化模型 | 安全保证 | 形式化证明 |
-| :--- | :--- | :--- | :--- |
-| **Rust** | 线性类型 + 分离逻辑 | 编译期 | [所有权（Ownership）唯一性定理](../research_notes/formal_methods/10_ownership_model.md)、[内存安全（Memory Safety）定理](../research_notes/formal_methods/10_ownership_model.md) |
-| **C++** | 无统一形式化 | 运行时（Runtime）/程序员 | 无官方形式化证明 |
-| **Go** | 标记-清除 GC | 运行时 | GC 正确性证明 |
-| **Python** | 引用（Reference）计数 + GC | 运行时 | 无官方形式化证明 |
-
-> **来源: [Rust Reference: Ownership](https://doc.rust-lang.org/reference/)** Rust 所有权规则由编译器在类型检查和借用（Borrowing）检查阶段强制执行，对应线性逻辑中的资源唯一性公理。 ✅
-> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)** Safe Rust 内存安全（Memory Safety）（无 UAF / 无 DF / 无数据竞争）已在 Iris 分离逻辑框架中得到机器检验证明。 ✅
-> **来源: [C++ Reference: std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr)** C++ `unique_ptr` 提供运行时 RAII 管理，但编译器不检查 use-after-move，无统一形式化安全保证。 ✅
-> **来源: [Go Spec: Memory Model](https://go.dev/ref/mem)** Go 依赖并发标记-清除 GC，内存安全由运行时保证，无编译期形式化验证。 ✅
-
-**Rust 形式化定义**:
-
-- 所有权规则: $\forall v. \text{唯一拥有者}(v)$ ([规则 1](../research_notes/formal_methods/10_ownership_model.md))
-- 移动语义: $\text{move}(x, y) \rightarrow \Omega(x) = \text{Moved} \land \Omega(y) = \text{Owned}$ ([规则 2](../research_notes/formal_methods/10_ownership_model.md))
-
----
-
+> 本节通用概念解释请参见 `concept/` 对应权威页。
+>
 ## 并发模型 {#并发模型}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -257,30 +203,8 @@ t2.join()
 print(f"结果: {counter}")
 ```
 
-### 并发模型形式化对比 {#并发模型形式化对比}
-
-> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
-| 语言 | 并发安全（Concurrency Safety）机制 | 数据竞争检测 | 形式化保证 |
-| :--- | :--- | :--- | :--- |
-| **Rust** | Send/Sync Trait | 编译期 | [数据竞争自由定理](../research_notes/formal_methods/10_borrow_checker_proof.md) |
-| **C++** | 手动同步 | 运行时工具 (TSan) | 无编译期保证 |
-| **Go** | Channel + Mutex | 运行时工具 (race detector) | 无编译期保证 |
-| **Python** | GIL + 手动锁 | 运行时工具 | GIL 保证解释器状态安全 |
-
-> **来源: [Rust Reference: Send and Sync](https://doc.rust-lang.org/reference/)** `Send` 表示值可安全跨线程转移所有权，`Sync` 表示值可安全跨线程共享引用（`&T: Send`）。 ✅
-> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)** Send/Sync 的语义在 Iris 中被形式化为协议验证：独占权限完整传递 ⇒ 无数据竞争。 ✅
-> **[Go Spec: Concurrency](https://go.dev/ref/spec#Go_statements)** Go 推荐 "Do not communicate by sharing memory; instead, share memory by communicating"（CSP 模型），但编译器不保证数据竞争自由。 ✅
-> **[C++ Reference: thread](https://en.cppreference.com/w/cpp/thread)** C++11 `std::thread` + 手动 `std::mutex` 同步，数据竞争检测依赖 TSan 等运行时工具。 ✅
-
-**Rust 形式化定义**:
-
-- Send Trait: 跨线程转移所有权 ([Def SEND1](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md))
-- Sync Trait: 跨线程共享引用 ([Def SYNC1](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md))
-- 数据竞争自由: $\text{DataRaceFree}(P)$ ([定理 1](../research_notes/formal_methods/10_borrow_checker_proof.md))
-
----
-
+> 本节通用概念解释请参见 `concept/` 对应权威页。
+>
 ## 错误处理 {#错误处理}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -398,29 +322,8 @@ except Exception as e:
     print(f"错误: {e}")
 ```
 
-### 错误处理形式化对比 {#错误处理形式化对比}
-
-> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
-| 语言 | 错误类型 | 强制处理 | 传播机制 | 形式化保证 |
-| :--- | :--- | :--- | :--- | :--- |
-| **Rust** | `Result<T, E>` / `Option<T>` | 编译期强制 | `?` 操作符 | 类型系统保证处理 |
-| **C++** | 异常 / 错误码 | 否 | throw/catch | 无形式化保证 |
-| **Go** | `error` 接口 | 习惯性 | 显式返回 | 无编译期保证 |
-| **Python** | 异常 | 否 | raise/try | 无编译期保证 |
-
-> **来源: [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/)** `?` 操作符是 `match` 的语法糖，要求所在函数返回类型与 `Result`/`Option` 相容，由类型系统强制保证错误处理路径存在。 ✅
-> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** Rust 的 `Result<T, E>` 将错误显式编码在类型中，编译器拒绝忽略 `Result` 的代码。 ✅
-> **[Go Spec: Errors](https://go.dev/ref/spec#Errors)** Go 的 `error` 是内置接口类型，错误处理为惯用模式（`if err != nil`），但编译器不强制检查。 ✅
-> **[C++ Reference: Exception handling](https://en.cppreference.com/w/cpp/language/exceptions)** C++ 异常处理依赖运行时栈展开，无编译期强制，且存在异常安全（Exception Safety）的复杂子问题。 ✅
-
-**Rust 错误传播形式化**:
-
-- `?` 操作符: $\text{query}(e) \equiv \text{match } e \text{ with Ok}(v) \rightarrow v \mid \text{Err}(e) \rightarrow \text{return}$ ([Def QUERY1](../research_notes/formal_methods/10_borrow_checker_proof.md))
-- 与借用检查器兼容: `?` 所在函数返回类型与 `e` 的 `E` 相容 ([定理 QUERY-T1](../research_notes/formal_methods/10_borrow_checker_proof.md))
-
----
-
+> 本节通用概念解释请参见 `concept/` 对应权威页。
+>
 ## 类型系统 {#类型系统}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -489,29 +392,8 @@ def max_val(a, b):
 result = max_val(10, 20)
 ```
 
-### 类型系统形式化对比 {#类型系统形式化对比}
-
-> **来源: [ACM](https://dl.acm.org/)**
-
-| 语言 | 类型系统（Type System） | 泛型实现 | 类型安全 | 形式化证明 |
-| :--- | :--- | :--- | :--- | :--- |
-| **Rust** | 线性类型 + Trait | 单态化（Monomorphization） | 编译期 | [类型安全定理](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
-| **C++** | 模板元编程 | 编译期实例化 | 编译期 | 无官方形式化 |
-| **Go** | 结构类型 | 单态化（1.18+） | 编译期 | 无官方形式化 |
-| **Python** | 动态类型 | 不适用 | 运行时 | 无形式化 |
-
-> **来源: [Rust Reference: Types](https://doc.rust-lang.org/reference/)** Rust 类型系统基于 HM 推断 + Trait solving，泛型通过单态化实现零成本抽象（Zero-Cost Abstraction）。 ✅
-> **[C++ Reference: Templates](https://en.cppreference.com/w/cpp/templates)** C++ 模板是图灵完备的编译期元编程系统，但无官方形式化语义，错误信息 notoriously 复杂。 ✅
-> **[Go Spec: Types](https://go.dev/ref/spec#Types)** Go 1.18+ 泛型基于类型参数和类型集（type sets），实现为编译期单态化，与 Rust 类似但表达能力较弱（无特化）。 ✅
-> **[Pierce, "Types and Programming Languages" (TAPL)](https://www.cis.upenn.edu/~bcpierce/tapl/)** Rust 的类型系统理论基础：HM 推断、子类型、参数多态，与 ML 家族同源。 ⚠️（教科书级参考）
-
-**Rust 类型系统形式化**:
-
-- Trait 约束: $\Gamma \vdash T: \text{Trait}$ ([Trait 形式化](../research_notes/formal_methods/10_ownership_model.md))
-- 生命周期（Lifetimes）子类型: $\ell_2 <: \ell_1$ 当 $\ell_1 \supseteq \ell_2$ (Def 1.4)
-
----
-
+> 本节通用概念解释请参见 `concept/` 对应权威页。
+>
 ## 生态与工具链 {#生态与工具链}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**

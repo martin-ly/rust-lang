@@ -1,4 +1,4 @@
-# AI + Rust 生态指南 {#ai-rust-生态指南}
+# AI + Rust 生态指南 (Ai Rust Ecosystem Guide) {#ai-rust-生态指南}
 
 > **EN**: Ai Rust Ecosystem Guide
 > **Summary**: AI + Rust 生态指南 Ai Rust Ecosystem Guide. (stub/archive redirect)
@@ -18,7 +18,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [AI + Rust 生态指南 {#ai-rust-生态指南}](#ai--rust-生态指南-ai-rust-生态指南)
+- [AI + Rust 生态指南 (Ai Rust Ecosystem Guide) {#ai-rust-生态指南}](#ai--rust-生态指南-ai-rust-ecosystem-guide-ai-rust-生态指南)
   - [📑 目录 {#目录}](#-目录-目录)
   - [文档定位 {#文档定位}](#文档定位-文档定位)
   - [一、AI 辅助 Rust 开发 {#一ai-辅助-rust-开发}](#一ai-辅助-rust-开发-一ai-辅助-rust-开发)
@@ -38,10 +38,6 @@
     - [4.5 本地 LLM 推理 (llm crate) {#45-本地-llm-推理-llm-crate}](#45-本地-llm-推理-llm-crate-45-本地-llm-推理-llm-crate)
     - [4.6 并发数据加载器 {#46-并发数据加载器}](#46-并发数据加载器-46-并发数据加载器)
   - [五、RAG 索引建议 {#五rag-索引建议}](#五rag-索引建议-五rag-索引建议)
-  - [六、最佳实践 {#六最佳实践}](#六最佳实践-六最佳实践)
-    - [6.1 内存管理 {#61-内存管理}](#61-内存管理-61-内存管理)
-    - [6.2 批量处理 {#62-批量处理}](#62-批量处理-62-批量处理)
-    - [6.3 错误处理 {#63-错误处理}](#63-错误处理-63-错误处理)
   - [七、后续计划（扩展方向） {#七后续计划扩展方向}](#七后续计划扩展方向-七后续计划扩展方向)
   - [八、使用场景 {#八使用场景}](#八使用场景-八使用场景)
     - [场景1: AI 辅助 Rust 学习 {#场景1-ai-辅助-rust-学习}](#场景1-ai-辅助-rust-学习-场景1-ai-辅助-rust-学习)
@@ -425,73 +421,8 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
 
 ---
 
-## 六、最佳实践 {#六最佳实践}
+> 本节通用概念解释请参见 `concept/` 对应权威页。
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-### 6.1 内存管理 {#61-内存管理}
-
-> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
-```rust,ignore
-use candle_core::{Device, Tensor};
-
-fn process_large_tensor() -> candle_core::Result<()> {
-    let device = Device::Cpu;
-
-    // 使用 no_grad 上下文避免保存梯度
-    {
-        let input = Tensor::zeros((1000, 1000), candle_core::DType::F32, &device)?;
-        let output = input.matmul(&input)?;
-        println!("输出: {:?}", output.shape());
-    } // 张量在这里被释放
-
-    Ok(())
-}
-```
-
-### 6.2 批量处理 {#62-批量处理}
-
-> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
-```rust,ignore
-fn batch_inference(model: &dyn Model, inputs: &[Tensor]) -> Vec<Tensor> {
-    const BATCH_SIZE: usize = 32;
-
-    inputs
-        .chunks(BATCH_SIZE)
-        .map(|batch| {
-            let batched = Tensor::stack(batch, 0).unwrap();
-            model.forward(&batched)
-        })
-        .collect()
-}
-```
-
-### 6.3 错误处理 {#63-错误处理}
-
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
-
-```rust,ignore
-use thiserror::Error;
-
-#[derive(Error, Debug)]
-enum AIError {
-    #[error("模型加载错误: {0}")]
-    ModelLoad(String),
-
-    #[error("推理错误: {0}")]
-    Inference(String),
-
-    #[error("张量错误: {0}")]
-    Tensor(#[from] candle_core::Error),
-}
-
-type Result<T> = std::result::Result<T, AIError>;
-```
-
----
-
 ## 七、后续计划（扩展方向） {#七后续计划扩展方向}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

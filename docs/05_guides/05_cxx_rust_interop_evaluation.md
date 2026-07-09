@@ -1,4 +1,4 @@
-# C++ ↔ Rust 互操作评估 {#c-rust-互操作评估}
+# C++ ↔ Rust 互操作评估 (Cxx Rust Interop Evaluation) {#c-rust-互操作评估}
 
 > **EN**: Cxx Rust Interop Evaluation
 > **Summary**: C++ ↔ Rust 互操作评估 Cxx Rust Interop Evaluation. (stub/archive redirect)
@@ -16,38 +16,6 @@
 > **内容分级**: [专家级]
 
 ---
-
-## 📑 目录 {#目录}
-
-- [C++ ↔ Rust 互操作评估 {#c-rust-互操作评估}](#c--rust-互操作评估-c-rust-互操作评估)
-  - [📑 目录 {#目录}](#-目录-目录)
-  - [1. 背景与目标 {#1-背景与目标}](#1-背景与目标-1-背景与目标)
-  - [2. 现有方案对比 {#2-现有方案对比}](#2-现有方案对比-2-现有方案对比)
-  - [3. `cxx` 的安全绑定原理 {#3-cxx-的安全绑定原理}](#3-cxx-的安全绑定原理-3-cxx-的安全绑定原理)
-  - [4. 场景：将 Rust 库集成到 C++ {#4-场景将-rust-库集成到-c}](#4-场景将-rust-库集成到-c-4-场景将-rust-库集成到-c)
-  - [5. 场景：将 C++ 库暴露给 Rust {#5-场景将-c-库暴露给-rust}](#5-场景将-c-库暴露给-rust-5-场景将-c-库暴露给-rust)
-  - [6. 限制与边界 {#6-限制与边界}](#6-限制与边界-6-限制与边界)
-  - [7. 安全考量 {#7-安全考量}](#7-安全考量-7-安全考量)
-  - [8. 与 Rust for Linux 的关系 {#8-与-rust-for-linux-的关系}](#8-与-rust-for-linux-的关系-8-与-rust-for-linux-的关系)
-  - [9. 代码示例 {#9-代码示例}](#9-代码示例-9-代码示例)
-    - [9.1 Rust 调用 C++ {#91-rust-调用-c}](#91-rust-调用-c-91-rust-调用-c)
-    - [9.2 C++ 调用 Rust {#92-c-调用-rust}](#92-c-调用-rust-92-c-调用-rust)
-  - [10. 总结 {#10-总结}](#10-总结-10-总结)
-  - [📋 复查记录 {#复查记录}](#-复查记录-复查记录)
-  - [相关概念 {#相关概念}](#相关概念-相关概念)
-  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
-
-## 1. 背景与目标 {#1-背景与目标}
->
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
-Rust 2026 Project Goal 明确将 **C++ ↔ Rust Interoperability** 列为核心目标之一。其动机在于：
-
-- **渐进式迁移**：大型企业代码库无法一夜之间用 Rust 重写，需要安全的互操作桥梁。
-- **生态复用**：C++ 拥有数十年积累的库生态（游戏引擎、数据库、操作系统内核），Rust 需要能够无缝调用。
-- **安全加固**：将 C++ 中高风险模块（Module）（如解析器、网络协议栈）逐步替换为 Rust，同时保持 ABI 兼容。
-
-> **RFC 状态**: 相关设计仍在 `rust-lang/rfcs` 讨论中，暂无正式 RFC 编号。当前以 `cxx` 和 `autocxx` 社区方案为主流实践。
 
 ---
 
@@ -163,41 +131,9 @@ sequenceDiagram
 
 ---
 
-## 7. 安全考量 {#7-安全考量}
+> 本节通用概念解释请参见 `concept/` 对应权威页。
+> 本节通用概念解释请参见 `concept/` 对应权威页。
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
-C++ ↔ Rust 互操作的本质是在两个拥有不同内存安全（Memory Safety）模型的语言之间建立桥梁。核心原则是：
-
-1. **`unsafe` 的最小化**：`cxx` 将 `unsafe` 集中在自动生成的 FFI 层，用户代码应尽量避免手写 `unsafe`。
-2. **不信任 C++ 输入**：从 C++ 传递的任何指针或长度参数都应在 Rust 侧进行边界检查。
-3. **ABI 一致性（Coherence）**：确保双方使用相同的调用约定（如 `extern "C"`）和内存对齐规则。
-4. **Panic 安全**：Rust `panic!` 在跨越 FFI 边界时属于**未定义行为**（UB），务必使用 `catch_unwind` 或 `std::panic::set_hook` 进行隔离。
-
-```mermaid
-graph TD
-    A[用户 Rust 代码] -->|safe| B[cxx 生成的封装层]
-    B -->|safe| C[自动生成的 unsafe FFI]
-    C -->|unsafe| D[C++ 代码]
-    style C fill:#f96,stroke:#333,stroke-width:2px
-    style A fill:#9f9,stroke:#333,stroke-width:2px
-```
-
----
-
-## 8. 与 Rust for Linux 的关系 {#8-与-rust-for-linux-的关系}
->
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
-Rust for Linux 项目是 C ↔ Rust 互操作在**操作系统内核**这一极端场景下的实践：
-
-- **目标**：在 Linux 内核中允许编写 Rust 驱动和子系统，与现有的 C 内核代码共存。
-- **差异**：内核场景没有 `std`，甚至没有完整的 `alloc`，且禁用 panic 展开（`panic = "abort"`）。
-- **互操作机制**：内核使用基于 `bindgen` 的手写 `unsafe` FFI 绑定，而非 `cxx`。这是因为内核需要极度精细的控制，且 C++ 不在内核主线的技术栈中。
-- **共同目标**：Rust 2026 Project Goal 中的 C++ 互操作与 Rust for Linux 的 C 互操作互为补充，共同验证 Rust 在大型遗留代码库中的可行性。
-
----
-
 ## 9. 代码示例 {#9-代码示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**

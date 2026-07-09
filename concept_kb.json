@@ -56328,7 +56328,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../reports/RUST_198_NIGHTLY_PROBE_2026_06_28.md",
+        "../../../archive/reports/2026_07/RUST_198_NIGHTLY_PROBE_2026_06_28.md",
         "../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md",
         "../../04_formal/02_separation_logic/33_safety_tags_in_formal.md",
         "../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md",

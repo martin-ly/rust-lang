@@ -1,82 +1,31 @@
-# Rust 1.98.0 API 候选 Nightly 探测报告
+# Rust 1.98 Nightly API 探测报告（2026-06-28）
 
-> **探测日期**: 2026-06-28
-> **工具链**: `rustc 1.98.0-nightly (ce9954c0c 2026-06-26)`
-> **探测脚本**: `scripts/probe_rust_198_apis.rs`
-> **探测方式**: 直接调用 `rustc --edition 2024` 编译临时片段，不使用任何 feature gate
-
----
-
-## 探测结果总览
-
-| 指标 | 数值 |
-|---|---|
-| 候选 API 总数 | 17 |
-| 当前 nightly 已可用 | 11 |
-| 仍不可用 / 需要 feature gate | 6 |
+> **EN**: Rust 1.98 Nightly API Probe Report (2026-06-28)
+> **Summary**: 使用 `rustc 1.98.0-nightly (2026-06-26)` 对 17 项候选 API 进行无 feature gate 编译探测的结果汇总。
+> **来源**: [concept/07_future/rust_1_98_preview.md](../concept/07_future/00_version_tracking/rust_1_98_preview.md) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 
 ---
 
-## 已可用 API（11 项）
+## 探测环境
 
-| # | API | 说明 |
+- **rustc**: `1.98.0-nightly (2026-06-26)`
+- **探测脚本**: [`scripts/probe_rust_198_apis.rs`](../scripts/probe_rust_198_apis.rs)
+- **探测方式**: 在无 `feature gate` 条件下尝试编译调用候选 API
+
+## 结果摘要
+
+| 状态 | 数量 | 代表 API |
 |---|---|---|
-| 1 | `i32::isqrt` | 有符号整数平方根 |
-| 2 | `u32::isqrt` | 无符号整数平方根 |
-| 3 | `ptr::with_exposed_provenance` | 暴露 provenance 的指针构造 |
-| 4 | `ptr::without_provenance` | 无 provenance 的指针构造 |
-| 5 | `ptr::dangling` | 悬空对齐指针 |
-| 6 | `Ipv6Addr::is_unique_local` / `is_unicast_link_local` | IPv6 地址分类辅助方法 |
-| 7 | `CStr::from_bytes_until_nul` | 从字节构造 CStr（遇第一个 NUL 停止）|
-| 8 | `std::ffi::FromBytesUntilNulError` | `from_bytes_until_nul` 错误类型 |
-| 9 | `std::pin::pin!` | 栈上 pin 宏 |
-| 10 | `impl From<bool> for f32 / f64` | 布尔到浮点转换 |
-| 11 | `Waker::noop` | 无操作 Waker（返回 `&Waker`）|
+| ✅ 已可用 | 11 | `i32::isqrt`、`u32::isqrt`、`ptr::with_exposed_provenance`、`ptr::without_provenance`、`ptr::dangling`、`Ipv6Addr::is_unique_local`、`CStr::from_bytes_until_nul`、`std::pin::pin!`、`From<bool> for f32/f64`、`Waker::noop` |
+| ❌ 仍不可用 | 6 | `Pin::as_deref_mut`、`NonZeroI32::isqrt`、`Vec::into_non_null`、`Box::into_non_null`、`VecDeque::truncate_front`、`VecDeque::retain_back` |
+
+## 关键发现
+
+- `i32::isqrt` 等整数平方根 API 已在 nightly 可用，预计进入 1.98.0 stable。
+- Provenance 相关 API（`with_exposed_provenance`、`without_provenance`、`dangling`）已在 nightly 可用，是 strict provenance 迁移的重要信号。
+- `Pin::as_deref_mut` 在当前 nightly 仍不存在，说明 Pin ergonomics 仍在演进，教学中应保持保守。
+- 从 1.97.0 推迟的 `Box::into_non_null`、`Vec::into_non_null`、`VecDeque::truncate_front`、`VecDeque::retain_back` 仍未稳定，代码中需继续保留等效实现。
 
 ---
 
-## 不可用 API（6 项）
-
-| # | API | 当前状态 |
-|---|---|---|
-| 1 | `Pin::as_deref_mut` | 方法不存在（可能仍在设计或未合并） |
-| 2 | `NonZeroI32::isqrt` | 仅 `NonZero<u*>` 提供 `isqrt`，有符号版本未实现 |
-| 3 | `Vec::into_non_null` | 方法不存在（`box_vec_non_null` feature 下仍不稳定） |
-| 4 | `Box::into_non_null` | 仍不稳定，需 `#![feature(box_vec_non_null)]` |
-| 5 | `VecDeque::truncate_front` | 仍不稳定，需 `#![feature(vec_deque_truncate_front)]` |
-| 6 | `VecDeque::retain_back` | 方法不存在 |
-
----
-
-## 与 Rust 1.97.0 的关联
-
-以下 4 项原本是 Rust 1.97.0 的候选 API，但在当前 nightly 仍未稳定，预计推迟到 **1.98.0 或更晚**：
-
-- `Vec::into_non_null`
-- `Box::into_non_null`
-- `VecDeque::truncate_front`
-- `VecDeque::retain_back`
-
-代码中已保留等效实现，发布日需根据官方 Release Notes 决定是否切换。
-
----
-
-## 结论与建议
-
-1. **1.98.0 候选 API 中约 65%（11/17）在当前 nightly 已可用**，这些 API 有较大概率进入 1.98.0 stable。
-2. **Pin ergonomics 相关 API（`Pin::as_deref_mut`）** 仍在快速演进，建议继续跟踪官方 Pin ergonomics project goal，不要提前在教学内容中承诺具体签名。
-3. **`NonZeroI32::isqrt` 缺失** 属于对称性缺口，可关注 `rust-lang/rust` issue 是否会在后续补齐。
-4. **推迟自 1.97.0 的 4 项 API** 仍需保留 fallback 实现，并在 1.97.0 发布后继续跟踪其 1.98.0 状态。
-
----
-
-## 复现命令
-
-```bash
-rustc --edition 2024 scripts/probe_rust_198_apis.rs -o /tmp/probe_198
-/tmp/probe_198
-```
-
----
-
-*本报告由 `scripts/probe_rust_198_apis.rs` 自动生成，仅供参考。最终稳定 API 集合以 Rust 官方 Release Notes 为准。*
+*本报告作为 `concept/07_future/rust_1_98_preview.md` 的配套探测记录，随 nightly 版本迭代持续更新。*

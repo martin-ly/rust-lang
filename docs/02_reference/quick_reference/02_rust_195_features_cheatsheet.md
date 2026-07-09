@@ -1,4 +1,4 @@
-# Rust 1.95.0 特性与 API 速查表 {#rust-1950-特性与-api-速查表}
+# Rust 1.95.0 特性与 API 速查表 (Rust 195 Features Cheatsheet) {#rust-1950-特性与-api-速查表}
 
 > **EN**: Rust 195 Features Cheatsheet
 > **Summary**: Rust 1.95.0 特性与 API 速查表 Rust 195 Features Cheatsheet. (stub/archive redirect)
@@ -16,7 +16,7 @@
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [Rust 1.95.0 特性与 API 速查表 {#rust-1950-特性与-api-速查表}](#rust-1950-特性与-api-速查表-rust-1950-特性与-api-速查表)
+- [Rust 1.95.0 特性与 API 速查表 (Rust 195 Features Cheatsheet) {#rust-1950-特性与-api-速查表}](#rust-1950-特性与-api-速查表-rust-195-features-cheatsheet-rust-1950-特性与-api-速查表)
   - [📑 目录 {#目录}](#-目录-目录)
   - [一、语言特性 {#一语言特性}](#一语言特性-一语言特性)
     - [1. `cfg_select!` 宏 {#1-cfg\_select-宏}](#1-cfg_select-宏-1-cfg_select-宏)
@@ -360,35 +360,8 @@ const fn check_control(cf: ControlFlow<i32, ()>) -> bool {
 ---
 
 ## 五、与 Rust 2024 Edition 的关联 {#五与-rust-2024-edition-的关联}
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1.95.0 中的 `if let` guards 是对 2024 Edition `let chains` 的自然延伸：
-
-| 特性 | 稳定版本 | 适用场景 |
-|------|----------|----------|
-| `let chains` | 1.88.0 (2024 Edition) | `if` / `while` 条件 |
-| `if let` guards | 1.95.0 | `match` arm 守卫 |
-| `cfg_select!` | 1.95.0 | 编译期条件选择 |
-
-建议 **Rust 2024 Edition** 用户优先采用上述特性以获得最佳 ergonomics。
-
----
-
-> **提示**: 本速查表仅列出 Rust 1.95.0 的**新增**特性与 API。完整的标准库文档请查阅 [doc.rust-lang.org](https://doc.rust-lang.org/std/)。
----
-
-> **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
-
----
-
+> **权威来源**: [Rust Edition 指南](../../../concept/07_future/01_edition_roadmap/44_edition_guide.md)
+> 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
