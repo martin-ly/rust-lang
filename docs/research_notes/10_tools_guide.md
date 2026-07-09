@@ -901,7 +901,7 @@ cargo expand > expanded.rs
 > **[Rust Tools Team](https://www.rust-lang.org/governance/teams/dev-tools)**
 > **来源: [Rust Reference - Compiler](https://doc.rust-lang.org/reference/)**
 > **[ACM - Developer Tooling Survey](https://dl.acm.org/)**
-> **[IEEE - Software Engineering Environment](https://ieeexplore.ieee.org/)**
+> **[IEEE - Software Engineering Environment](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

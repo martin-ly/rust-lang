@@ -177,7 +177,7 @@ my-project/
 
 > **注意**: 提交 `vendor/` 到仓库会显著增大体积，但能保证完全离线构建。
 >
-> [Cargo Book — cargo vendor](https://doc.rust-lang.org/cargo/reference/commands/cargo-vendor.html)(<https://doc.rust-lang.org/cargo/commands/cargo-vendor.html>)
+> [Cargo Book — cargo vendor](https://doc.rust-lang.org/cargo/commands/cargo-vendor.html)(<https://doc.rust-lang.org/cargo/commands/cargo-vendor.html>)
 
 ---
 

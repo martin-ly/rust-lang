@@ -414,7 +414,7 @@ fn main() {
 ```markdown
 ### 概念定义 {#概念定义-1}
 
-> **[POPL - Programming Languages Research](https://popl.sigplan.org/)**
+> **[POPL - Programming Languages Research](https://popl.sigplan.org/) <!-- link: known-broken -->**
 
 **概念名称**: [概念名称]
 
@@ -622,7 +622,7 @@ fn main() {
 ```markdown
 ### 概念矩阵 {#概念矩阵}
 
-> **[POPL - Programming Languages Research](https://popl.sigplan.org/)**
+> **[POPL - Programming Languages Research](https://popl.sigplan.org/) <!-- link: known-broken -->**
 
 | 维度1 | 维度2 | 维度3 | 综合评估 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |

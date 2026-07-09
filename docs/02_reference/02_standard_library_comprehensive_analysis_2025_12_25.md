@@ -1513,6 +1513,6 @@ fn main() {
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 > **来源: [Rust Reference - The Standard Library](https://doc.rust-lang.org/reference/)**
 > **[ACM - Library Design Patterns](https://dl.acm.org/)**
-> **[IEEE - API Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - API Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 
 ---

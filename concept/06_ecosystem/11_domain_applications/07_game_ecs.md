@@ -137,7 +137,7 @@ erDiagram
 
 > **认知功能**: 此 ER 图帮助建立 ECS 数据模型的关系骨架——World 作为中心枢纽组织 Entity、Component 与 System 的关联，理解这一点是设计缓存友好架构的起点。建议在实现自定义 ECS 存储时，先画出版本化的 ER 图验证组件访问路径的合理性。关键洞察：System 不直接持有 Component，而是通过 World 间接查询，这种间接性是并行调度安全的前提。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
-> **思维表征说明**: `erDiagram` 是 Mermaid 的**实体关系图**语法，与 `classDiagram` 不同——它强调**实体间的 cardinality（基数）关系**（`||--o{` 表示一对多），天然适合表达 ECS 中「一个 World 包含多个 Entity」「一个 Entity 拥有多个 Component」「一个 System 查询多个 Component」的关系。这与 `graph TD` 层次图（展示概念分类）形成互补——ER 图展示的是**数据模型中的实体关联**。 [Bevy ECS Docs](https://bevyengine.org/learn/book/ecs/); [Chen, *The Entity-Relationship Model*, 1976](https://doi.org/10.1145/320434.320440)
+> **思维表征说明**: `erDiagram` 是 Mermaid 的**实体关系图**语法，与 `classDiagram` 不同——它强调**实体间的 cardinality（基数）关系**（`||--o{` 表示一对多），天然适合表达 ECS 中「一个 World 包含多个 Entity」「一个 Entity 拥有多个 Component」「一个 System 查询多个 Component」的关系。这与 `graph TD` 层次图（展示概念分类）形成互补——ER 图展示的是**数据模型中的实体关联**。 [Bevy ECS Docs](https://bevyengine.org/learn/book/); [Chen, *The Entity-Relationship Model*, 1976](https://doi.org/10.1145/320434.320440)
 
 ### 1.2 极简 ECS 实现示例
 >
@@ -262,7 +262,7 @@ classDiagram
 ```
 
 > **认知功能**: 此 classDiagram 从类型系统（Type System）视角固化 ECS 的静态结构——Component 是数据 trait，System 是行为 trait，Query 是借用（Borrowing）检查的代理。建议在深入 Bevy 源码前，以此图为锚点理解泛型（Generics）参数的传播路径。关键洞察：Archetype 不是类型层次的节点，而是运行期存储优化的产物，这解释了为何 ECS 能在零成本抽象（Zero-Cost Abstraction）下实现 SOA 布局。[💡 原创分析](../../00_meta/00_framework/methodology.md)
-> **思维表征说明**: 此 `classDiagram` 从**类型系统（Type System）**视角展示 ECS 架构——`World` 是容器根，`Entity` 是标识符，`Component` 是数据 trait，`System` 是行为 trait，`Query` 是借用（Borrowing）检查的代理，`Archetype` 是存储优化结构。`-->` 表示组合关系，`..>` 表示依赖关系，`<|--` 表示继承。这种表征帮助程序员理解「ECS 不是 OOP 的替代品，而是数据导向的重新组织」。 [Bevy ECS Docs](https://bevyengine.org/learn/book/ecs/); [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/)
+> **思维表征说明**: 此 `classDiagram` 从**类型系统（Type System）**视角展示 ECS 架构——`World` 是容器根，`Entity` 是标识符，`Component` 是数据 trait，`System` 是行为 trait，`Query` 是借用（Borrowing）检查的代理，`Archetype` 是存储优化结构。`-->` 表示组合关系，`..>` 表示依赖关系，`<|--` 表示继承。这种表征帮助程序员理解「ECS 不是 OOP 的替代品，而是数据导向的重新组织」。 [Bevy ECS Docs](https://bevyengine.org/learn/book/); [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/)
 
 ### 1.2 缓存友好性与 SoA 存储
 >
@@ -1157,7 +1157,7 @@ struct ChildOf {
 | 核心库谱系 | [`./03_core_crates.md`](../02_core_crates/03_core_crates.md) | `bevy`、`wgpu`、`rapier` 等 crate |
 | 应用领域 | [`./04_application_domains.md`](../06_data_and_distributed/04_application_domains.md) | 游戏作为 L6 应用域 |
 
-> **[Bevy Book](https://bevyengine.org/learn/book/); [Bevy ECS Docs](https://bevyengine.org/learn/book/ecs/); [Fyrox Docs](https://fyrox-rs.github.io/); [wgpu Documentation](https://docs.rs/wgpu/latest/wgpu/); [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/)** 游戏开发分析基于官方引擎文档和 DOD 研究。✅
+> **[Bevy Book](https://bevyengine.org/learn/book/); [Bevy ECS Docs](https://bevyengine.org/learn/book/); [Fyrox Docs](https://fyrox-rs.github.io/); [wgpu Documentation](https://docs.rs/wgpu/latest/wgpu/); [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/)** 游戏开发分析基于官方引擎文档和 DOD 研究。✅
 > **来源: [Wikipedia — Entity component system; Richard Fabian — Data-Oriented Design; Niko Matsakis Blog](https://en.wikipedia.org/wiki/Entity_component_system%3B_Richard_Fabian_%E2%80%94_Data_Oriented_Design%3B_Niko_Matsakis_Blog)** ECS 和 DOD 概念参考了权威定义和核心开发者博客。✅
 > **[Rust Concurrency Book; Rayon Docs; Rust Book Ch.16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)** 并发渲染分析基于 Rust 并发安全（Concurrency Safety）的核心文献。✅
 ---

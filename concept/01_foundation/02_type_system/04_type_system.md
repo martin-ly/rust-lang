@@ -2173,7 +2173,7 @@ Rust 名义类型的刚性:
 
 > **[TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)** TypeScript 的接口是纯粹结构的——只要对象满足接口的 shape，就自动兼容，无需显式声明 `implements`。✅ 三级来源
 > **[Go Language Specification](https://go.dev/ref/spec)** Go 的 interface 是结构类型的典型代表：类型自动满足 interface，只要它实现了所有方法。✅ 三级来源
-> **[Haskell 2010 Report](https://web.archive.org/web/*/https://www.haskell.org/definition/haskell2010/)** Haskell 的 Type Class 需要显式 `instance` 声明，与 Rust trait 同为名义系统。✅ 一级来源
+> **[Haskell 2010 Report](https://www.haskell.org/definition/haskell2010/)** Haskell 的 Type Class 需要显式 `instance` 声明，与 Rust trait 同为名义系统。✅ 一级来源
 > **[C++20 Concepts](https://en.cppreference.com/w/cpp/concepts)** C++20 Concepts 是结构类型的回归：模板约束由「类型是否满足 expression 要求」自动判定，无需显式「实现」某个 concept。✅ 一级来源
 
 **关键观察**：

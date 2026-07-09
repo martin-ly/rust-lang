@@ -647,7 +647,7 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
 > **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
 > **来源: [Rust Embedded WG](https://rust-embedded.github.io/book/)**
 > **来源: [Embassy Book](https://embassy.dev/book/)**
-> **[IEEE - Embedded Software](https://ieeexplore.ieee.org/)**
+> **[IEEE - Embedded Software](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 > **来源: [ACM](https://dl.acm.org/)**
 > **来源: [IEEE](https://standards.ieee.org/)**

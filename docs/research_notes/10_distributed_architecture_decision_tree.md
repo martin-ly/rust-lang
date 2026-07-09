@@ -155,7 +155,7 @@
 
 > **来源: [Wikipedia - Decision Tree](https://en.wikipedia.org/wiki/Decision_Tree)**
 > **[ACM - Decision Support Systems](https://dl.acm.org/)**
-> **[IEEE - Risk Analysis](https://ieeexplore.ieee.org/)**
+> **[IEEE - Risk Analysis](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
 ---

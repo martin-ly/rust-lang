@@ -210,7 +210,7 @@ crater run start=master end=pr-branch
 - 检测回归并提供可视化对比；
 - 是 Rust 编译器性能优化的重要依据。
 
-> [Rustc Dev Guide — Performance testing](https://web.archive.org/web/*/https://rustc-dev-guide.rust-lang.org/tests/profiling.html)(<https://rustc-dev-guide.rust-lang.org/tests/intro.html#performance-testing>)
+> [Rustc Dev Guide — Performance testing](https://rustc-dev-guide.rust-lang.org/tests/profiling.html)(<https://rustc-dev-guide.rust-lang.org/tests/intro.html#performance-testing>)
 
 ---
 

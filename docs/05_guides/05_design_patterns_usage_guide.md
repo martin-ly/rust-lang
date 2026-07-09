@@ -2445,7 +2445,7 @@ where
 > **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
 > **来源: [Wikipedia - Gang of Four](https://en.wikipedia.org/wiki/Gang_of_Four)**
 > **来源: [Wikipedia - Anti-pattern](https://en.wikipedia.org/wiki/Anti_pattern)**
-> **[IEEE - Software Architecture Patterns](https://ieeexplore.ieee.org/)**
+> **[IEEE - Software Architecture Patterns](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[ACM - Design Patterns in Rust](https://dl.acm.org/)**
 > **[Gamma et al. 1994 - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**

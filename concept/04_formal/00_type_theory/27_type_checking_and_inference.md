@@ -98,7 +98,7 @@
 
 > **关键洞察**: Rust 的类型检查 = 为每个节点计算类型 + 生成并求解一组约束。
 >
-> [Rustc Dev Guide — HIR Type checking](https://web.archive.org/web/*/https://rustc-dev-guide.rust-lang.org/type-checking.html)(<https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html>)
+> [Rustc Dev Guide — HIR Type checking](https://rustc-dev-guide.rust-lang.org/type-checking.html)(<https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html>)
 
 ---
 

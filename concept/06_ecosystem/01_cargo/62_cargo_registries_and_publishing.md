@@ -177,7 +177,7 @@ Cargo 支持多种 token 存储方式：
 
 > **安全建议**: 在 CI 中使用环境变量或凭据提供者，避免把 token 提交到仓库。
 >
-> [Cargo Book — Authentication](https://doc.rust-lang.org/cargo/reference/authentication.html)(<https://doc.rust-lang.org/cargo/reference/config.html#credentials>)
+> [Cargo Book — Authentication](https://doc.rust-lang.org/cargo/reference/registry-authentication.html)(<https://doc.rust-lang.org/cargo/reference/config.html#credentials>)
 
 ---
 

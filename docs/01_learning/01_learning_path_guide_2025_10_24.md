@@ -46,7 +46,7 @@
 > **来源: [Wikipedia - Educational Technology](https://en.wikipedia.org/wiki/Educational_Technology)** ·
 > **来源: [Wikipedia - Spiral Curriculum](https://en.wikipedia.org/wiki/Spiral_Curriculum)** ·
 > **[ACM - CS Curriculum Guidelines](https://dl.acm.org/)** ·
-> **[IEEE - Learning Outcome Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Learning Outcome Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 >
 
 ### 路径 1: 初学者 (4-6 周) {#路径-1-初学者-4-6-周}

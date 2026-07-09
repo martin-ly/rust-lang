@@ -260,7 +260,7 @@ impl<T> Register<T> {
 ## 参考
 
 - [Cargo build-std 文档](https://doc.rust-lang.org/cargo/reference/unstable.html#build-std)
-- [The Embedonomicon - build-std](https://web.archive.org/web/*/https://docs.rust-embedded.org/embedonomicon/build-std.html)
+- [The Embedonomicon - build-std](https://docs.rust-embedded.org/embedonomicon/build-std.html)
 - [Rust Embedded Working Group](https://github.com/rust-embedded/wg)
 
 > **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)

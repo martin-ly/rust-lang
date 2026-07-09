@@ -321,7 +321,7 @@ cargo bench -p c10_networks --bench async_ecosystem_benchmarks
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **[Linux Kernel Documentation - io_uring](https://docs.rs/linux/latest/linux/)**
 > **[ACM - High-Performance Async I/O](https://dl.acm.org/)**
-> **[IEEE - Operating System I/O Optimization](https://ieeexplore.ieee.org/)**
+> **[IEEE - Operating System I/O Optimization](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[tokio-rs - tokio-uring](https://docs.rs/tokio/latest/tokio/)**
 > **来源: [Rust Reference - Async I/O](https://doc.rust-lang.org/reference/)**
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**

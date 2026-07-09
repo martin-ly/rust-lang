@@ -23,7 +23,7 @@
 > **来源**: [Rust for Linux](https://rust-for-linux.com/) ·
 > [Linux Kernel Rust Documentation](https://www.kernel.org/doc/html/latest/rust/index.html) ·
 > [LWN — Rust in the Linux Kernel](https://lwn.net/Articles/829858/) ·
-> [Rust CVE Database](https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=rust) ·
+> [Rust CVE Database](https://nvd.nist.gov/vuln/search/results?form_type=Basic&results_type=overview&search_type=all&isCpeNameSearch=false&query=rust) ·
 > [Google — Rust in the Linux Kernel](https://security.googleblog.com/2021/04/rust-in-linux-kernel.html)
 
 ## 📑 目录

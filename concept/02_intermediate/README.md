@@ -10,7 +10,7 @@
 > **来源: [TRPL Ch10](https://doc.rust-lang.org/book/ch10-00-generics.html)** ·
 > **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_programming)** ·
 > **来源: [Wikipedia - Trait-based Programming](https://en.wikipedia.org/wiki/Trait-based_programming)** ·
-> **[Microsoft Rust Training - Advanced Topics](https://learn.microsoft.com/en-us/training/paths/rust/)**
+> **[Microsoft Rust Training - Advanced Topics](https://learn.microsoft.com/en-us/training/browse/?products=rust)**
 > **本节关键术语**: 进阶概念 (Intermediate) · 特征 (Trait) · 泛型 (Generics) · 生命周期 (Lifetime) · 智能指针 (Smart Pointer) — [完整对照表](../00_meta/01_terminology/terminology_glossary.md)
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)

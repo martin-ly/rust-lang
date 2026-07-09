@@ -72,7 +72,7 @@
 - provider 负责安全地存储和检索 token；
 - 使用认证 registry **必须**配置 credential provider（公共 registry 除外）。
 
-> [Cargo Book — Registry Authentication](https://doc.rust-lang.org/cargo/reference/authentication.html)(<https://doc.rust-lang.org/cargo/reference/registry-authentication.html>)
+> [Cargo Book — Registry Authentication](https://doc.rust-lang.org/cargo/reference/registry-authentication.html)(<https://doc.rust-lang.org/cargo/reference/registry-authentication.html>)
 
 ---
 

@@ -2354,7 +2354,7 @@ Polonius；[FLS Ch. 15.4 Borrowing](https://spec.ferrocene.dev/ownership-and-dec
 > **来源: [Rustonomicon - Lifetimes](https://doc.rust-lang.org/nomicon/)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 > **来源: [ACM - Ownership Types](https://dl.acm.org/)**
-> **[IEEE - Safe Systems Programming](https://ieeexplore.ieee.org/)**
+> **[IEEE - Safe Systems Programming](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

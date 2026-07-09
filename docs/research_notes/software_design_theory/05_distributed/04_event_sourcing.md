@@ -379,7 +379,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 > **来源: [Wikipedia - CQRS](https://en.wikipedia.org/wiki/CQRS)**
 > **[Martin Fowler - Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)**
 > **[ACM - Event-Driven Architecture](https://dl.acm.org/)**
-> **[IEEE - Distributed Data Patterns](https://ieeexplore.ieee.org/)**
+> **[IEEE - Distributed Data Patterns](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
 > **来源: [Wikipedia - Software Architecture](https://en.wikipedia.org/wiki/Software_Architecture)**
 > **[ACM - Design Patterns Survey](https://dl.acm.org/)**

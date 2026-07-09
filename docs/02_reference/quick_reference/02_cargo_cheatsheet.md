@@ -17,7 +17,7 @@
 > **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)** ·
 > **来源: [Wikipedia - Package Manager](https://en.wikipedia.org/wiki/Package_Manager)** ·
 > **[ACM - Dependency Management](https://dl.acm.org/)** ·
-> **[IEEE - Software Build Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Software Build Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 
 - [📦 Cargo 速查卡 {#cargo-速查卡}](#-cargo-速查卡-cargo-速查卡)
   - [📋 目录 {#目录}](#-目录-目录)

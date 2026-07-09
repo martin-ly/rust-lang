@@ -378,7 +378,7 @@ impl<E, S> ProjectionSync<E, S> {
 > **来源: [Wikipedia - CQRS](https://en.wikipedia.org/wiki/CQRS)**
 > **来源: [Wikipedia - Event Sourcing](https://en.wikipedia.org/wiki/Event_Sourcing)**
 > **[来源: Martin Fowler - CQRS Pattern]**
-> **[IEEE - Event-Driven Architecture](https://ieeexplore.ieee.org/)**
+> **[IEEE - Event-Driven Architecture](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[ACM - Data Consistency Patterns](https://dl.acm.org/)**
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**

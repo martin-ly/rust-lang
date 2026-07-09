@@ -41,7 +41,7 @@ ECS 的三元组定义：
 - **Component（组件）**: 纯数据结构（如 `Transform`、`Velocity`、`Health`），可被附加到实体上
 - **System（系统）**: 处理组件数据的函数，由调度器并行执行
 
-> [Bevy Engine Official Docs — ECS Core Concepts](https://bevyengine.org/learn/book/ecs/)(<https://bevyengine.org/learn/quick-start/getting-started/ecs/>)
+> [Bevy Engine Official Docs — ECS Core Concepts](https://bevyengine.org/learn/book/)(<https://bevyengine.org/learn/quick-start/getting-started/ecs/>)
 
 Bevy 的 ECS 实现采用 **Archetype（原型）存储** 模型，这是其性能优势的核心来源。具有相同组件组合的实体被存储在连续的内存块中，从而实现极致的 CPU 缓存友好性。
 
@@ -478,7 +478,7 @@ app.add_systems(Update,
 );
 ```
 
-> [Bevy Docs — States](https://bevyengine.org/learn/book/states/)(<https://bevyengine.org/learn/>)
+> [Bevy Docs — States](https://bevyengine.org/learn/book/)(<https://bevyengine.org/learn/>)
 
 ---
 
@@ -665,7 +665,7 @@ fn update_score(mut score: ResMut<Score>, query: Query<&Health, With<Player>>) {
 - **Component**: 每个实体可有一个，存储在 Archetype 中
 - **Resource**: 全局唯一一个，存储在 `World` 的独立资源表中
 
-> [Bevy Docs — Resources](https://bevyengine.org/learn/book/resources/)(<https://bevyengine.org/learn/quick-start/getting-started/resources/>)
+> [Bevy Docs — Resources](https://bevyengine.org/learn/book/)(<https://bevyengine.org/learn/quick-start/getting-started/resources/>)
 
 ### 6.2 EventReader / EventWriter：类型安全事件总线 {#62-eventreader-eventwriter类型安全事件总线}
 

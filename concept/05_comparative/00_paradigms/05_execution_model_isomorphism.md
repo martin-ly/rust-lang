@@ -404,7 +404,7 @@ let received = rx.recv().unwrap(); // 所有权转移到 received
 > 但在**内存模型层面不同构**：
 > Rust 的 move 语义使 channel 通信变成了**线性通道**（值只能存在于一个地方），而 Go 的拷贝语义允许值在发送后继续存在于发送方栈上。
 > 这导致 Rust channel 在编译期即可排除 use-after-send 错误，Go 则需依赖 GC 和程序员约定。
-> [Hoare 1978](https://doi.org/10.1145/359576.359585); [Go Concurrency Patterns](https://web.archive.org/web/*/https://go.dev/wiki/ConcurrencyPatterns); [rustvsgo.com](https://www.rustvsgo.com/)
+> [Hoare 1978](https://doi.org/10.1145/359576.359585); [Go Concurrency Patterns](https://go.dev/wiki/ConcurrencyPatterns); [rustvsgo.com](https://www.rustvsgo.com/)
 
 ---
 
@@ -525,7 +525,7 @@ Rust 的事件驱动模型是**显式的**：
 程序员需选择 executor（Tokio / smol [历史: async-std [已归档]]）并理解 poll 语义。
 Go 的事件驱动是**隐式的**：`netpoller` 集成在运行时，goroutine 的阻塞 I/O 自动被转换为事件驱动。
 
-> **同构性评价**: Tokio 的 Reactor 与 Go 的 netpoller 在**epoll/kqueue 层面同构**——二者都基于操作系统的事件通知机制。但在**用户接口层面不同构**：Rust 要求显式 `async/await` + executor 选择，Go 将事件驱动透明化为阻塞语义。 [Tokio Internals; Go Runtime 文档](https://web.archive.org/web/*/https://tokio.rs/tokio/topics/runtime)
+> **同构性评价**: Tokio 的 Reactor 与 Go 的 netpoller 在**epoll/kqueue 层面同构**——二者都基于操作系统的事件通知机制。但在**用户接口层面不同构**：Rust 要求显式 `async/await` + executor 选择，Go 将事件驱动透明化为阻塞语义。 [Tokio Internals; Go Runtime 文档](https://tokio.rs/tokio/topics/runtime)
 
 ---
 

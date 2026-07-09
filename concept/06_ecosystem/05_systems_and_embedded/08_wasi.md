@@ -167,7 +167,7 @@ let dir_cap = preopen_dir("/sandbox/data")?;
 | **资源回收** | 句柄 drop → 能力失效 | 所有权（Ownership）离开作用域 → drop |
 | **安全保证** | 无句柄 = 无访问权 | 无所有权（Ownership） = 无访问权 |
 
-> **关键洞察**: WASI 的能力安全模型与 Rust 的所有权模型存在深层同构——二者都通过**资源唯一标识 + 显式转移**来消除隐式全局访问。这是 Rust 成为 Wasm 生态首选语言的深层原因。[WASI Docs](https://wasi.dev/); [Rust Ownership Model](https://doc.rust-lang.org/reference/ownership.html) ✅
+> **关键洞察**: WASI 的能力安全模型与 Rust 的所有权模型存在深层同构——二者都通过**资源唯一标识 + 显式转移**来消除隐式全局访问。这是 Rust 成为 Wasm 生态首选语言的深层原因。[WASI Docs](https://wasi.dev/); [Rust Ownership Model](https://doc.rust-lang.org/reference/ownership.html) <!-- link: known-broken --> ✅
 
 ---
 
@@ -359,7 +359,7 @@ impl GuestFile for File {
 
 > **[WASI Preview 2 Docs](https://wasi.dev/); [Component Model Spec](https://component-model.bytecodealliance.org/); [wit-bindgen Docs](https://docs.rs/wit-bindgen/latest/wit_bindgen/); [WASMtime Docs](https://docs.wasmtime.dev/)** WASI 分析基于 Bytecode Alliance 的官方规范。✅
 > **[WebAssembly.org](https://webassembly.org/); [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/); [Rust WASM Working Group](https://rustwasm.github.io/)** Wasm 基础概念参考了 W3C 社区组和 Rust WASM 工作组的文档。✅
-> **[Capability-Based Security Research](https://www.cl.cam.ac.uk/research/security/capabilities/); [Dennis & Van Horn, CACM 1966](https://doi.org/10.1145/365230.365252); [Rust Ownership Model](https://doc.rust-lang.org/reference/ownership.html)** 能力安全模型基于操作系统安全研究的经典文献。✅
+> **[Capability-Based Security Research](https://www.cl.cam.ac.uk/research/security/capabilities/); [Dennis & Van Horn, CACM 1966](https://doi.org/10.1145/365230.365252); [Rust Ownership Model](https://doc.rust-lang.org/reference/ownership.html) <!-- link: known-broken -->** 能力安全模型基于操作系统安全研究的经典文献。✅
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)

@@ -1283,7 +1283,7 @@ fn pgo_workflow() {
 > **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
 > **来源: [Rust Reference - Compiler Plugins](https://doc.rust-lang.org/reference/)**
 > **[ACM - Compiler Frontend Design](https://dl.acm.org/)**
-> **[IEEE - Code Generation Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Code Generation Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[Nicholas Nethercote - How to Speed Up the Rust Compiler](https://nnethercote.github.io/2022/10/27/how-to-speed-up-the-rust-compiler-in-october-2022.html)**
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**

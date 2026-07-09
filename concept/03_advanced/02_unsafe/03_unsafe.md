@@ -1520,7 +1520,7 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
           └── 否 → Miri（最精确的 Rust 语义检测）
 ```
 
-> **[LLVM Sanitizers Docs](https://web.archive.org/web/*/https://llvm.org/docs/SanitizerCoverage.html)** ASan 使用影子内存（shadow memory）检测堆/栈/全局变量的越界访问，运行时开销约 2x，是 C/C++/Rust FFI 项目的首选工具。 ✅ 已验证
+> **[LLVM Sanitizers Docs](https://llvm.org/docs/SanitizerCoverage.html)** ASan 使用影子内存（shadow memory）检测堆/栈/全局变量的越界访问，运行时开销约 2x，是 C/C++/Rust FFI 项目的首选工具。 ✅ 已验证
 > **[Valgrind Documentation](https://valgrind.org/docs/)** Valgrind 的 memcheck 通过 JIT 重编译检测未初始化读取和内存泄漏，无需重编译目标程序，但运行速度极慢（10x~50x）。 ✅ 已验证
 > **[TSan Documentation](https://clang.llvm.org/docs/ThreadSanitizer.html)** TSan 使用 happens-before 向量时钟检测数据竞争，对 Rust 的 `std::sync` 原子操作（Atomic Operations）和锁结构均有效，但要求所有代码都经过插桩。 ✅ 已验证
 > **跨层映射**: `L3::Miri` ↔ [`L6::工具链`](../../06_ecosystem/00_toolchain/01_toolchain.md) CI 集成 · [`L4::形式化`](../../04_formal/02_separation_logic/04_rustbelt.md) 操作语义动态验证

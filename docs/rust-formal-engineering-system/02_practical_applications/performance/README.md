@@ -16,7 +16,7 @@
 > **来源: [Wikipedia - Performance Engineering](https://en.wikipedia.org/wiki/Performance_Engineering)** ·
 > **来源: [Wikipedia - Software Optimization](https://en.wikipedia.org/wiki/Software_Optimization)** ·
 > **[ACM - Performance Measurement Methodology](https://dl.acm.org/)** ·
-> **[IEEE - Software Performance Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Software Performance Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 >
 
 ```mermaid

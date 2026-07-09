@@ -40,7 +40,7 @@
     - [思维导图](#思维导图)
   - [1. Future Trait 详解](#1-future-trait-详解)
     - [1.1 Future 的定义](#11-future-的定义)
-    - [1.2 Poll 枚举](#12-poll-枚举)
+    - [1.2 Poll 枚举（Enum）](#12-poll-枚举)
     - [1.3 Context 和 Waker](#13-context-和-waker)
   - [2. Poll 与 Waker 机制](#2-poll-与-waker-机制)
     - [2.1 完整执行流程](#21-完整执行流程)
@@ -969,7 +969,7 @@ impl Future for MyFuture {
 
 ### 外部资源
 
-- [Async Book - Pinning](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html)
+- [Async Book - Pinning](https://rust-lang.github.io/async-book/04_pinning/index.html)
 - [Tokio Internals](https://tokio.rs/blog/2019-10-scheduler)
 
 ---

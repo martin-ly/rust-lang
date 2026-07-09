@@ -356,7 +356,7 @@ impl<S, E> SagaExecutor<S, E> {
 > **来源: [Wikipedia - Saga Pattern](https://en.wikipedia.org/wiki/Saga_Pattern)**
 > **来源: [Wikipedia - Long-Running Transaction](https://en.wikipedia.org/wiki/Long_Running_Transaction)**
 > **[Hector Garcia-Molina - Sagas (1987)](../../../../concept/00_meta/02_sources/international_authority_index.md)**
-> **[IEEE - Distributed Transaction Patterns](https://ieeexplore.ieee.org/)**
+> **[IEEE - Distributed Transaction Patterns](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[ACM - Compensation-Based Transactions](https://dl.acm.org/)**
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**

@@ -420,7 +420,7 @@ impl CircuitBreaker {
 > **来源: [Wikipedia - Circuit Breaker Pattern](https://en.wikipedia.org/wiki/Circuit_Breaker_Pattern)**
 > **来源: [Wikipedia - Fault Tolerance](https://en.wikipedia.org/wiki/Fault_Tolerance)**
 > **[来源: Martin Fowler - Circuit Breaker]**
-> **[IEEE - Resilient Software Architecture](https://ieeexplore.ieee.org/)**
+> **[IEEE - Resilient Software Architecture](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[ACM - Fault-Tolerant Design Patterns](https://dl.acm.org/)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

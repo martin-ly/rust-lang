@@ -428,7 +428,7 @@ fn main() {
     let r1 = &mut x as *mut i32;
     let r2 = &mut x as *mut i32;
     unsafe {
-        // ❌ 运行时 UB: 根据规范，两个可变指针指向同一位置且都被使用
+        // ❌ 运行时（Runtime） UB: 根据规范，两个可变指针指向同一位置且都被使用
         // 具体是否为 UB 取决于使用的内存模型（Stacked Borrows / Tree Borrows / Rust Spec）
         *r1 = 1;
         *r2 = 2;

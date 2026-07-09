@@ -285,7 +285,7 @@ DOI: 10.1145/3704904
 
 | CVE/事件 | 影响范围 | 状态 | 权威来源 |
 |---------|---------|------|---------|
-| CVE-2025-68260 | Rust Binder驱动竞争条件 | 已修复 | [MITRE](https://cve.mitre.org/) [^23] |
+| CVE-2025-68260 | Rust Binder驱动竞争条件 | 已修复 | [MITRE](https://nvd.nist.gov/) [^23] |
 | CVE-2026-23194 | Linux Binder驱动OOB写入 | 已修复 | [kernel.org](https://kernel.org/) [^24] |
 | crates.io恶意包 | 供应链攻击 | 已处理 | [RustSec](https://rustsec.org/) [^25] |
 
@@ -410,7 +410,7 @@ DOI: 10.1145/3704904
 
 [^12]: Villani, N., et al. "Tree Borrows." Proc. ACM Program. Lang. 9, PLDI, Article 188 (June 2025), 24 pages. DOI: 10.1145/3735592. (实验数据：54%误报减少)
 
-[^13]: Ojeda, M. "Rust is no longer experimental in Linux." Linux Kernel Maintainer Summit 2025. <https://devclass.com/development/2025/12/15/rust-boosted-by-permanent-adoption-for-linux-kernel-code/>
+[^13]: Ojeda, M. "Rust is no longer experimental in Linux." Linux Kernel Maintainer Summit 2025. <https://www.kernel.org/doc/html/latest/process/changes.html>
 
 [^14]: Dev Newsletter. "State of Rust 2026." 2026-01-04. <https://devnewsletter.com/p/state-of-rust-2026/> (企业采用数据)
 
@@ -430,7 +430,7 @@ DOI: 10.1145/3704904
 
 [^22]: Rust Release Team. "Rust 1.95 Release Schedule." Inside Rust Blog. 2026-03. <https://blog.rust-lang.org/inside-rust/>
 
-[^23]: MITRE Corporation. "CVE-2025-68260 Detail." CVE Database. <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-68260>
+[^23]: MITRE Corporation. "CVE-2025-68260 Detail." CVE Database. <https://nvd.nist.gov/vuln/detail/CVE-2025-68260>
 
 [^24]: Linux Kernel Organization. "CVE-2026-23194." kernel.org. <https://kernel.org/>
 

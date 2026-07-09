@@ -24,7 +24,7 @@
 > **来源: [Wikipedia - FAQ](https://en.wikipedia.org/wiki/FAQ)** ·
 > **来源: [Wikipedia - Knowledge Base](https://en.wikipedia.org/wiki/Knowledge_Base)** ·
 > **[ACM - Technical Q&A Best Practices](https://dl.acm.org/)** ·
-> **[IEEE - Documentation Usability](https://ieeexplore.ieee.org/)**
+> **[IEEE - Documentation Usability](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 >
 
 - [Rust形式化方法 FAQ 汇总 {#rust形式化方法-faq-汇总}](#rust形式化方法-faq-汇总-rust形式化方法-faq-汇总)

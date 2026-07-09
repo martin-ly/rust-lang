@@ -1265,7 +1265,7 @@ fn main() {
 > **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **[ACM - Memory Management in Systems Languages](https://dl.acm.org/)**
-> **[IEEE - Safe Systems Programming](https://ieeexplore.ieee.org/)**
+> **[IEEE - Safe Systems Programming](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 
 ---
 

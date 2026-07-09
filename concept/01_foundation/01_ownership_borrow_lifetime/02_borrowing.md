@@ -218,7 +218,7 @@
 
 > **[来源: [Rust Reference: References](https://doc.rust-lang.org/reference/types.html#reference-types)]** Rust 引用分 `&T`（共享只读）和 `&mut T`（独占可写），由编译器在类型检查和借用检查阶段强制执行。 ✅
 > **[C++ Reference: Reference](https://en.cppreference.com/w/cpp/language/reference)** C++ 引用 `T&` 语义上为别名，编译器不检查别名-可变冲突，use-after-free 和 data race 为未定义行为 (UB)。 ✅
-> **[Haskell GHC User Guide: ST](https://web.archive.org/web/*/https://downloads.haskell.org/ghc/latest/docs/users_guide/libs.html)** Haskell `ST` monad 通过类型系统（Type System）封装可变状态（`STRef`），但同一 `STRef` 的别名访问不触发编译错误，依赖纯函数隔离保证安全。 ✅
+> **[Haskell GHC User Guide: ST](https://downloads.haskell.org/ghc/latest/docs/users_guide/libs.html)** Haskell `ST` monad 通过类型系统（Type System）封装可变状态（`STRef`），但同一 `STRef` 的别名访问不触发编译错误，依赖纯函数隔离保证安全。 ✅
 > **[Go Spec: Pointers](https://go.dev/ref/spec#Pointers)** Go 指针 `*T` 允许任意别名和可变访问，内存安全（Memory Safety）由 GC 保证，但 data race 需依赖运行时（Runtime） race detector 检测。 ✅
 
 ### 2.3 借用状态转换矩阵

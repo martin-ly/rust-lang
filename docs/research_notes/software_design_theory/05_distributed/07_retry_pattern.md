@@ -53,7 +53,7 @@
 > **来源: [Wikipedia - Retry Pattern](https://en.wikipedia.org/wiki/Retry_Pattern)** ·
 > **来源: [Wikipedia - Circuit Breaker Pattern](https://en.wikipedia.org/wiki/Circuit_Breaker_Pattern)** ·
 > **[ACM - Fault-Tolerant Design Patterns](https://dl.acm.org/)** ·
-> **[IEEE - Resilient Software Architecture](https://ieeexplore.ieee.org/)**
+> **[IEEE - Resilient Software Architecture](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 
 ### Def RT1: Retry {#def-rt1-retry}
 

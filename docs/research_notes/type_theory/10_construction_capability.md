@@ -354,7 +354,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 > **[Pierce 2002 - Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 > **[ACM - Type System Research](https://dl.acm.org/)**
 > **来源: [IEEE - Type Safety Verification](https://standards.ieee.org/)**
-> **[POPL - Type Theory Advances](https://popl.sigplan.org/)**
+> **[POPL - Type Theory Advances](https://popl.sigplan.org/) <!-- link: known-broken -->**
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 > **来源: [Wikipedia - Type Constructor](https://en.wikipedia.org/wiki/Type_Constructor)**
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**

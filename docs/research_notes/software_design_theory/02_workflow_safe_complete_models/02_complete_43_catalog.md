@@ -1141,7 +1141,7 @@ pub fn update_optimistic(
 > **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
 > **来源: [Wikipedia - Software Architecture](https://en.wikipedia.org/wiki/Software_Architecture)**
 > **[ACM - Design Patterns Survey](https://dl.acm.org/)**
-> **[IEEE - Software Design Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Software Design Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 > **[Martin Fowler - Patterns of Enterprise Application Architecture](https://martinfowler.com/books/eaa.html)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**

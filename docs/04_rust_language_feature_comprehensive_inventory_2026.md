@@ -152,7 +152,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Programming Language Features](https://en.wikipedia.org/wiki/Programming_Language_Features)** ·
 > **来源: [Wikipedia - Language Evolution](https://en.wikipedia.org/wiki/Language_Evolution)** ·
-> **[ACM - Language Feature Taxonomy](https://dl.acm.org/)** · **[IEEE - Language Standardization](https://ieeexplore.ieee.org/)**
+> **[ACM - Language Feature Taxonomy](https://dl.acm.org/)** · **[IEEE - Language Standardization](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 
 ### 00.1 分析方法论 {#001-分析方法论}
 

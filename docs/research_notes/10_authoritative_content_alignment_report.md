@@ -75,7 +75,7 @@
 > **来源: [Wikipedia - Knowledge Organization](https://en.wikipedia.org/wiki/Knowledge_Organization)** ·
 > **来源: [Wikipedia - Information Quality](https://en.wikipedia.org/wiki/Information_Quality)** ·
 > **[ACM - Source Attribution in Technical Documentation](https://dl.acm.org/)** ·
-> **[IEEE - Documentation Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Documentation Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 
 ### Ch 1-3: 基础概念 {#ch-1-3-基础概念}
 

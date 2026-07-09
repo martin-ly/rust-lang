@@ -16,7 +16,7 @@
 > **后置概念**: [Custom Allocators](../06_low_level_patterns/14_custom_allocators.md) · [Type Layout](../../04_formal/05_rustc_internals/42_type_layout.md) · [Separation Logic](../../04_formal/02_separation_logic/11_separation_logic.md)
 >
 > **主要来源**: [The Rustonomicon — Implementing Vec](https://doc.rust-lang.org/nomicon/vec.html) ·
-> [The Rustonomicon — Implementing Arc and Mutex](https://doc.rust-lang.org/nomicon/arc-mutex.html) ·
+> [The Rustonomicon — Implementing Arc and Mutex](https://doc.rust-lang.org/nomicon/index.html) ·
 > [The Rust Reference — Raw Pointers](https://doc.rust-lang.org/reference/types/pointer.html) ·
 > [std::alloc](https://doc.rust-lang.org/std/alloc/index.html)
 >
@@ -209,7 +209,7 @@ impl<T> Drop for MyArc<T> {
 ```
 
 > **关键洞察**: `Arc` 使用原子引用计数管理共享所有权（Ownership）。`Release`/`Acquire` 内存序保证 drop 时能看到之前所有对数据的写入。
-> [来源: [The Rustonomicon — Arc and Mutex](https://doc.rust-lang.org/nomicon/arc-mutex.html)]
+> [来源: [The Rustonomicon — Arc and Mutex](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 3.3 Mutex 的核心结构
 
@@ -239,7 +239,7 @@ impl<T> MyMutex<T> {
 ```
 
 > **关键洞察**: `Mutex<T>` 是 `Sync` 的（当 `T: Send`），因为它通过锁保证每次只有一个线程访问 `T`。`UnsafeCell` 是内部可变性的基础原语。
-> [来源: [The Rustonomicon — Arc and Mutex](https://doc.rust-lang.org/nomicon/arc-mutex.html)]
+> [来源: [The Rustonomicon — Arc and Mutex](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -282,7 +282,7 @@ fn main() {
 
 > **错误诊断**: 代码可编译，但运行时（Runtime）行为未定义。
 > **修正**: 使用 `ptr::write` 初始化后再读取。
-> [来源: [Unsafe Code Guidelines — Validity of References](https://rust-lang.github.io/unsafe-code-guidelines/reference/types/reference.html)]
+> [来源: [Unsafe Code Guidelines — Validity of References](https://rust-lang.github.io/unsafe-code-guidelines/reference/types.html)]
 
 ### 4.3 反例：Arc 引用计数管理错误
 
@@ -304,7 +304,7 @@ impl<T> Clone for BadArc<T> {
 
 > **错误诊断**: 代码可编译，但会导致 use-after-free 或 double free。
 > **修正**: 每次 clone 必须原子地增加引用计数；drop 时仅在计数归零时释放。
-> [来源: [The Rustonomicon — Arc](https://doc.rust-lang.org/nomicon/arc-mutex.html)]
+> [来源: [The Rustonomicon — Arc](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
 
@@ -424,7 +424,7 @@ graph TD
 ## 九、来源与延伸阅读
 
 - [The Rustonomicon — Implementing Vec](https://doc.rust-lang.org/nomicon/vec.html)
-- [The Rustonomicon — Implementing Arc and Mutex](https://doc.rust-lang.org/nomicon/arc-mutex.html)
+- [The Rustonomicon — Implementing Arc and Mutex](https://doc.rust-lang.org/nomicon/index.html)
 - [The Rust Reference — Raw Pointers](https://doc.rust-lang.org/reference/types/pointer.html)
 - [std::alloc](https://doc.rust-lang.org/std/alloc/index.html)
 - [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)

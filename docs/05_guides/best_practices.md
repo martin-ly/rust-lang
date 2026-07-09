@@ -23,7 +23,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Software Development Best Practices](https://en.wikipedia.org/wiki/Software_Development_Best_Practices)** ·
 > **[ACM - Code Quality Metrics](https://dl.acm.org/)** ·
-> **[IEEE - Software Engineering Standards](https://ieeexplore.ieee.org/)** ·
+> **[IEEE - Software Engineering Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->** ·
 > **[Rust Project Guidelines](https://www.rust-lang.org/policies)**
 
 - [Rust 项目最佳实践指南 {#rust-项目最佳实践指南}](#rust-项目最佳实践指南-rust-项目最佳实践指南)
@@ -2183,7 +2183,7 @@ graph TD
 > **来源: [Wikipedia - Software Quality](https://en.wikipedia.org/wiki/Software_Quality)**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **[ACM - Code Quality Metrics](https://dl.acm.org/)**
-> **[IEEE - Software Engineering Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Software Engineering Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[Google Style Guides](https://google.github.io/styleguide/)**
 > **[Microsoft Secure Coding Guidelines](https://learn.microsoft.com/en-us/azure/security/develop/secure-design)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**

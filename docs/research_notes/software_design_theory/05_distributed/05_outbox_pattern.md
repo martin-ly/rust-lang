@@ -49,7 +49,7 @@
 ## 1. 概念定义 (Def) {#1-概念定义-def}
 
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Outbox Pattern](https://en.wikipedia.org/wiki/Outbox_Pattern)** · **来源: [Wikipedia - Event Sourcing](https://en.wikipedia.org/wiki/Event_Sourcing)** · **[ACM - Distributed Transaction Patterns](https://dl.acm.org/)** · **[IEEE - Message Delivery Guarantees](https://ieeexplore.ieee.org/)**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Outbox Pattern](https://en.wikipedia.org/wiki/Outbox_Pattern)** · **来源: [Wikipedia - Event Sourcing](https://en.wikipedia.org/wiki/Event_Sourcing)** · **[ACM - Distributed Transaction Patterns](https://dl.acm.org/)** · **[IEEE - Message Delivery Guarantees](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 
 ### Def OB1: Outbox {#def-ob1-outbox}
 

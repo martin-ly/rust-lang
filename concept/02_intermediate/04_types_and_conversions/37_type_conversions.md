@@ -151,7 +151,7 @@ fn main() {
 ```
 
 > **关键洞察**: `as` 转换可能截断数值或改变位模式，应谨慎使用。
-> [来源: [The Rust Reference — Cast Expressions](https://doc.rust-lang.org/reference/expressions/cast-expr.html)]
+> [来源: [The Rust Reference — Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)]
 
 ### 3.3 `From` / `Into`
 
@@ -386,7 +386,7 @@ graph TD
 ## 九、来源与延伸阅读
 
 - [The Rust Reference — Type Conversions](https://doc.rust-lang.org/reference/type-coercions.html)
-- [The Rust Reference — Cast Expressions](https://doc.rust-lang.org/reference/expressions/cast-expr.html)
+- [The Rust Reference — Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)
 - [std::convert::From](https://doc.rust-lang.org/std/convert/trait.From.html)
 - [std::convert::TryFrom](https://doc.rust-lang.org/std/convert/trait.TryFrom.html)
 - [Rust By Example — Conversion](https://doc.rust-lang.org/rust-by-example/conversion.html)

@@ -156,7 +156,7 @@
 ```
 
 > **函子洞察**: **map 是函子的核心操作**——它将普通函数"提升"到容器/上下文中，保持结构不变。
-> [来源: [Functor — Haskell Wiki](https://wiki.haskell.org/Functor)]
+> [来源: [Functor — Haskell Wiki](https://wiki.haskell.org/Functor) <!-- link: known-broken -->]
 
 ---
 

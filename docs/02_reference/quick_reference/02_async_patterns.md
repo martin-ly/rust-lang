@@ -1289,7 +1289,7 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [Wikipedia - Future/Promise](https://en.wikipedia.org/wiki/Future/Promise)**
 > **来源: [Wikipedia - Coroutine](https://en.wikipedia.org/wiki/Coroutine)**
-> **[IEEE - Concurrent Language Constructs](https://ieeexplore.ieee.org/)**
+> **[IEEE - Concurrent Language Constructs](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[ACM - Async Programming Patterns](https://dl.acm.org/)**
 > **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 > **来源: [TRPL Ch. 17 - Async and Await](https://doc.rust-lang.org/book/ch17-00-async-await.html)**

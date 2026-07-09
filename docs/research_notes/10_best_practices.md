@@ -552,7 +552,7 @@ fn main() {
 
 #### 四级标题（小节） {#四级标题小节}
 
-> **[IEEE - Programming Language Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Programming Language Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 ```
 
 ### 2. 使用列表和表格 {#2-使用列表和表格}
@@ -882,7 +882,7 @@ git commit -m "添加所有权模型形式化研究笔记
 > **来源: [Wikipedia - Code Review](https://en.wikipedia.org/wiki/Code_Review)**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **[ACM - Code Quality](https://dl.acm.org/)**
-> **[IEEE - Software Engineering Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Software Engineering Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

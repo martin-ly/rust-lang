@@ -17,7 +17,7 @@
 > **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)** ·
 > **来源: [Wikipedia - Unit Testing](https://en.wikipedia.org/wiki/Unit_Testing)** ·
 > **[ACM - Test-Driven Development](https://dl.acm.org/)** ·
-> **[IEEE - Software Testing Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Software Testing Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 
 - [🧪 Rust 测试速查卡 {#rust-测试速查卡}](#-rust-测试速查卡-rust-测试速查卡)
   - [📋 目录 {#目录}](#-目录-目录)
@@ -1890,7 +1890,7 @@ pub fn get_test_db() -> Option<&'static TestDatabase> {
 > **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
 > **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**
 > **[ACM - Software Testing Methods](https://dl.acm.org/)**
-> **[IEEE - Test Coverage Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Test Coverage Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

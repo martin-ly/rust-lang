@@ -73,10 +73,10 @@
 |---|---|---|---|
 | [17.0](https://doc.rust-lang.org/book/ch17-00-async-await.html) | Async/Await 概览 | §〇 认知路径、§一 权威定义 | 建立 Future / async / await 的整体图景 |
 | [17.1](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html) | Futures and Syntax | §3.1 async fn 作为状态机、§8.1 正确示例 | `async fn` 返回 `Future`，`.await` 是挂起点 |
-| [17.2](https://doc.rust-lang.org/book/ch17-02-async-fn-and-messages.html) | Async Functions and Messages | §3.5 调度模型对比、§8.7 取消安全 | 协作式调度与消息传递模式 |
+| [17.2](https://doc.rust-lang.org/book/ch17-02-async-fn-and-messages.html) <!-- link: known-broken --> | Async Functions and Messages | §3.5 调度模型对比、§8.7 取消安全 | 协作式调度与消息传递模式 |
 | [17.3](https://doc.rust-lang.org/book/ch17-03-more-futures.html) | More Futures | §2.2 Future 组合子矩阵、§8.10 Stream/Sink | `join!`、`select!`、Stream 等扩展 |
-| [17.4](https://doc.rust-lang.org/book/ch17-04-pin.html) | Pinning | §3.2 Pin 的形式化语义、§7.2 Pin 使用边界 | 自引用（Reference）与内存位置稳定性 |
-| [17.5](https://doc.rust-lang.org/book/ch17-05-concurrency.html) | Concurrency with Async | §2.3 运行时（Runtime）对比矩阵、§6.1 反命题 | async 与线程/并发的选择 |
+| [17.4](https://doc.rust-lang.org/book/ch17-04-pin.html) <!-- link: known-broken --> | Pinning | §3.2 Pin 的形式化语义、§7.2 Pin 使用边界 | 自引用（Reference）与内存位置稳定性 |
+| [17.5](https://doc.rust-lang.org/book/ch17-05-concurrency.html) <!-- link: known-broken --> | Concurrency with Async | §2.3 运行时（Runtime）对比矩阵、§6.1 反命题 | async 与线程/并发的选择 |
 
 > **阅读建议**：若初次接触 async Rust，可先阅读 TRPL Ch17 原文，再回本文查看形式化推导、跨语言对比与工程反例。
 
@@ -724,9 +724,9 @@ graph LR
 
 > **来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)** Rust `async/await` 基于 `Future` trait 和编译器状态机转换，承诺零成本抽象（Zero-Cost Abstraction）。 ✅
 > **[C++ Reference: Coroutines](https://en.cppreference.com/w/cpp/language/coroutines)** C++20 Coroutines 通过 `co_await`/`co_yield`/`co_return` 和 promise 类型实现，编译器生成状态机，与 Rust 类似但自定义能力更强。 ✅
-> **[Haskell GHC User Guide: Concurrent Haskell](https://downloads.haskell.org/ghc/latest/docs/users_guide/parallel.html)** Haskell 异步通过 `IO` monad 和 `forkIO` 实现，纯函数隔离保证并发安全（Concurrency Safety），但运行时依赖 GC 和 thunk 求值。 ✅
+> **[Haskell GHC User Guide: Concurrent Haskell](https://downloads.haskell.org/ghc/latest/docs/users_guide/parallel.html) <!-- link: known-broken -->** Haskell 异步通过 `IO` monad 和 `forkIO` 实现，纯函数隔离保证并发安全（Concurrency Safety），但运行时依赖 GC 和 thunk 求值。 ✅
 > **[Go Spec: Goroutines](https://go.dev/ref/spec#Go_statements)** Go goroutine 是轻量级线程，由运行时 M:N 调度，内存占用约 2KB 起，阻塞不影响其他 goroutine。 ✅
-> **[Without Boats, "Pin and Suffering"](https://web.archive.org/web/*/https://without.boats/blog/pin-and-suffering/)** Rust `Pin<T>` 的设计是为了安全表达自引用结构，这是 Rust 异步与 C++20 Coroutines 的关键差异之一。 ✅
+> **[Without Boats, "Pin and Suffering"](https://without.boats/blog/pin-and-suffering/)** Rust `Pin<T>` 的设计是为了安全表达自引用结构，这是 Rust 异步与 C++20 Coroutines 的关键差异之一。 ✅
 
 ---
 
@@ -1925,7 +1925,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 ```
 
 > **来源**: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [without.boats blog: The cost of dynamic dispatch in Rust]
-> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats blog: "The cost of dynamic dispatch in Rust"](https://web.archive.org/web/*/https://without.boats/blog/the-cost-of-dynamic-dispatch/); [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/dynamic-dispatch.html)
+> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats blog: "The cost of dynamic dispatch in Rust"](https://without.boats/blog/the-cost-of-dynamic-dispatch/); [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/dynamic-dispatch.html)
 
 **何时选择哪种：API 边界 vs 内部实现**
 

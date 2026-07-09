@@ -14,7 +14,7 @@
 > **[Rust Compiler Team](https://www.rust-lang.org/governance/teams/compiler)** · **[rustc_parallel_frontend 跟踪 Issue](https://github.com/rust-lang/rust/issues/48685)** ·
 > **[Rust Compiler Development Guide](https://rustc-dev-guide.rust-lang.org/)** · **[Nicholas Nethercote - How to Speed Up the Rust Compiler](https://nnethercote.github.io/2022/10/27/how-to-speed-up-the-rust-compiler-in-october-2022.html)** ✅ ·
 > **来源: [Wikipedia - Parallel Computing](https://en.wikipedia.org/wiki/Parallel_Computing)** · **来源: [Wikipedia - Compiler Optimization](https://en.wikipedia.org/wiki/Compiler_Optimization)** ·
-> **[ACM - Parallel Compilation Techniques](https://dl.acm.org/)** · **[IEEE - Multi-Core Software Standards](https://ieeexplore.ieee.org/)**
+> **[ACM - Parallel Compilation Techniques](https://dl.acm.org/)** · **[IEEE - Multi-Core Software Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]

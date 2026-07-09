@@ -513,7 +513,7 @@ let g = move || println!("{}", x);  // 捕获方式？
 
 > **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [concept/知识体系]
 >
-## L3 高级层：并发与异步（8 题） 题目基于 TRPL Ch16 (并发), Rust Async Book / 2025; [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/); [RFC 2394 / 2018](https://rust-lang.github.io/rfcs/2394-async-await.html); Herlihy & Shavit — The Art of Multiprocessor Programming (2020)
+## L3 高级层：并发与异步（8 题） 题目基于 TRPL Ch16 (并发), Rust Async Book / 2025; [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/); [RFC 2394 / 2018](https://rust-lang.github.io/rfcs/2394-async_await.html); Herlihy & Shavit — The Art of Multiprocessor Programming (2020)
 
 > **来源: [The Rust Async Book](https://rust-lang.github.io/async-book/index.html) / RustBelt / Herlihy & Shavit** 并发安全基于 `Send`/`Sync` 类型系统保证，异步基于 Future 状态机。
 

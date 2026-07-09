@@ -1511,7 +1511,7 @@ ust
 > **来源: [Wikipedia - Mathematical Proof](https://en.wikipedia.org/wiki/Mathematical_Proof)**
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 > **[ACM - Proof Assistant Survey](https://dl.acm.org/)**
-> **[IEEE - Verification Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Verification Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
 > **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**

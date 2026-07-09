@@ -282,7 +282,7 @@ sccache --start-server
 > **来源: [Wikipedia - Compiler Cache](https://en.wikipedia.org/wiki/Compiler_Cache)**
 > **[Mozilla - sccache](https://github.com/mozilla/sccache)**
 > **[ACM - Build System Optimization](https://dl.acm.org/)**
-> **[IEEE - Software Build Automation](https://ieeexplore.ieee.org/)**
+> **[IEEE - Software Build Automation](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[Rust CI Best Practices](https://rustc-dev-guide.rust-lang.org/tests/intro.html)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

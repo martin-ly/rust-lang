@@ -229,7 +229,7 @@
 
 ### 理论背景 {#理论背景}
 
-> **[IEEE - Type Safety](https://ieeexplore.ieee.org/)**
+> **[IEEE - Type Safety](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -243,7 +243,7 @@
 
 ### Curry-Howard 对应 (Stanford CS242 Lecture 16-20) {#curry-howard-对应-stanford-cs242-lecture-16-20}
 
-> **[POPL - Type Theory Advances](https://popl.sigplan.org/)**
+> **[POPL - Type Theory Advances](https://popl.sigplan.org/) <!-- link: known-broken -->**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > **课程**: Stanford CS242: Programming Languages
@@ -983,7 +983,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 
 ### University of Cambridge (剑桥大学) {#university-of-cambridge-剑桥大学}
 
-> **[IEEE - Type Safety](https://ieeexplore.ieee.org/)**
+> **[IEEE - Type Safety](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 
 **课程**: Computer Science Tripos (Rust部分)
 
@@ -1008,7 +1008,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 
 ### EPFL (瑞士洛桑联邦理工学院) {#epfl-瑞士洛桑联邦理工学院}
 
-> **[POPL - Type Theory Advances](https://popl.sigplan.org/)**
+> **[POPL - Type Theory Advances](https://popl.sigplan.org/) <!-- link: known-broken -->**
 
 **课程**: Concurrent and Parallel Programming
 
@@ -1041,7 +1041,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 
 ## 🔬 形式化定义 {#形式化定义}
 
-> **[IEEE - Type Safety](https://ieeexplore.ieee.org/)**
+> **[IEEE - Type Safety](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -3479,7 +3479,7 @@ $。
 
 ## 🆕 Rust 1.96.1 更新内容 {#rust-1960-更新内容}
 
-> **[POPL - Type Theory Advances](https://popl.sigplan.org/)**
+> **[POPL - Type Theory Advances](https://popl.sigplan.org/) <!-- link: known-broken -->**
 > **发布日期**: 2026-03-05
 > **最后更新**: 2026-03-05
 > **状态**: ✅ 已整合
@@ -3920,7 +3920,7 @@ fn truncate_front(&mut self, len: usize)
 > **来源: [Wikipedia - Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_Calculus)**
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 > **来源: [Wikipedia - Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley_Milner_Type_System)**
-> **[IEEE - Advanced Type System Features](https://ieeexplore.ieee.org/)**
+> **[IEEE - Advanced Type System Features](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[ACM - Type Systems for Memory Safety](https://dl.acm.org/)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 > **来源: [PLDI 2023 - Aeneas](https://www.sigplan.org/Conferences/PLDI/)**
@@ -3931,7 +3931,7 @@ fn truncate_front(&mut self, len: usize)
 > **来源: [Wikipedia - Type Inference](https://en.wikipedia.org/wiki/Type_Inference)**
 > **来源: [Wikipedia - Dependent Type](https://en.wikipedia.org/wiki/Dependent_Type)**
 > **[ACM - Type Soundness Proofs](https://dl.acm.org/)**
-> **[IEEE - Type Safety Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Type Safety Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **来源: [POPL 2020 - Oxide](https://www.sigplan.org/Conferences/POPL/)**
 > **[POPL 2021 - Rust Verification Tools](https://popl21.sigplan.org/)**
 > **[PLDI 2021 - Rust Verification](https://pldi21.sigplan.org/)**

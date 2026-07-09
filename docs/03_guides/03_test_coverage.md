@@ -305,7 +305,7 @@ A: 这是已知问题。尝试：
 > **来源: [Wikipedia - Code Coverage](https://en.wikipedia.org/wiki/Code_Coverage)**
 > **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
 > **[ACM - Test Coverage Metrics](https://dl.acm.org/)**
-> **[IEEE - Software Quality Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Software Quality Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[来源: Rust Book - Testing]**
 > **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
 > **[Martin Fowler - Test Coverage](../../concept/00_meta/02_sources/international_authority_index.md)**

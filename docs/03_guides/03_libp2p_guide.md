@@ -324,7 +324,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 > **来源: [Wikipedia - Distributed Hash Table](https://en.wikipedia.org/wiki/Distributed_Hash_Table)**
 > **[libp2p Specification](https://specs.libp2p.io/)**
 > **[ACM - Peer-to-Peer Networking](https://dl.acm.org/)**
-> **[IEEE - Decentralized Network Protocols](https://ieeexplore.ieee.org/)**
+> **[IEEE - Decentralized Network Protocols](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[Protocol Labs - libp2p Docs](https://docs.rs/protocol/latest/protocol/)**
 > **来源: [Rust Reference - Networking](https://doc.rust-lang.org/reference/)**
 

@@ -178,7 +178,7 @@
 5. **异步 Rust 的学术论文**（如 async/await 语义、Future/poll 形式化）可专门整理。
 6. **形式化验证工具的最新进展**（RefinedRust、Verus、Miri 论文）需持续跟踪。
 
-> **权威来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) | [Aeneas](https://aeneas-verification.github.io/) | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3) | [ACM DL](https://dl.acm.org/) | [IEEE Xplore](https://ieeexplore.ieee.org/) | [Springer](https://link.springer.com/) | [arXiv](https://arxiv.org/)
+> **权威来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) | [Aeneas](https://aeneas-verification.github.io/) | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3) | [ACM DL](https://dl.acm.org/) | [IEEE Xplore](https://ieeexplore.ieee.org/) <!-- link: known-broken --> | [Springer](https://link.springer.com/) | [arXiv](https://arxiv.org/)
 
 ## 相关概念 {#相关概念}
 

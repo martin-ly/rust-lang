@@ -23,7 +23,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)** ·
 > **来源: [Wikipedia - Error Detection and Correction](https://en.wikipedia.org/wiki/Error_Detection_and_Correction)** ·
-> **[ACM - Error Handling Patterns](https://dl.acm.org/)** · **[IEEE - Fault-Tolerant Software Design](https://ieeexplore.ieee.org/)**
+> **[ACM - Error Handling Patterns](https://dl.acm.org/)** · **[IEEE - Fault-Tolerant Software Design](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 
 - [Rust 错误处理决策树 {#rust-错误处理决策树}](#rust-错误处理决策树-rust-错误处理决策树)
   - [目录 {#目录}](#目录-目录)
@@ -3848,7 +3848,7 @@ mod examples {
 > **来源: [Wikipedia - Error Detection and Correction](https://en.wikipedia.org/wiki/Error_Detection_and_Correction)**
 > **来源: [Wikipedia - Fault Tolerance](https://en.wikipedia.org/wiki/Fault_Tolerance)**
 > **来源: [Wikipedia - Recovery Block](https://en.wikipedia.org/wiki/Recovery_Block)**
-> **[IEEE - Fault-Tolerant Software Design](https://ieeexplore.ieee.org/)**
+> **[IEEE - Fault-Tolerant Software Design](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[ACM - Error Handling Patterns](https://dl.acm.org/)**
 > **来源: [Rust Reference - Error Handling](https://doc.rust-lang.org/reference/)**
 > **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
@@ -3874,7 +3874,7 @@ mod examples {
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 > **来源: [Wikipedia - Decision Tree](https://en.wikipedia.org/wiki/Decision_Tree)**
 > **[ACM - Decision Support Systems](https://dl.acm.org/)**
-> **[IEEE - Risk Analysis](https://ieeexplore.ieee.org/)**
+> **[IEEE - Risk Analysis](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)**
 > **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**

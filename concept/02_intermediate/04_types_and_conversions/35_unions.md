@@ -16,8 +16,8 @@
 > **后置概念**: [Interior Mutability](../02_memory_management/08_interior_mutability.md) · [Custom Allocators](../../03_advanced/06_low_level_patterns/14_custom_allocators.md) · [Memory Layout](../../04_formal/05_rustc_internals/42_type_layout.md)
 >
 > **主要来源**: [The Rust Reference — Unions](https://doc.rust-lang.org/reference/items/unions.html) ·
-> [The Rustonomicon — Unions](https://doc.rust-lang.org/nomicon/unions.html) ·
-> [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/reference/types/union.html)
+> [The Rustonomicon — Unions](https://doc.rust-lang.org/nomicon/other-reprs.html) ·
+> [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/reference/types.html)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 
@@ -226,7 +226,7 @@ fn main() {
 
 > **错误诊断**: 代码可以编译，但运行时（Runtime）行为未定义。
 > **修正**: 维护一个外部标签（如 C 的 tagged union），或仅读取最后写入的字段。
-> [来源: [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/reference/types/union.html)]
+> [来源: [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/reference/types.html)]
 
 ### 4.3 反例：为非 Copy 字段实现 Copy
 
@@ -294,7 +294,7 @@ fn main() {
 ```
 
 > **关键洞察**: `ManuallyDrop` 允许联合体内包含非 `Copy` 类型而不自动 drop，但开发者必须手动管理生命周期（Lifetimes）。
-> [来源: [Rustonomicon — Unions](https://doc.rust-lang.org/nomicon/unions.html)]
+> [来源: [Rustonomicon — Unions](https://doc.rust-lang.org/nomicon/other-reprs.html)]
 
 ### 6.2 边界测试：联合体大小
 
@@ -359,8 +359,8 @@ graph TD
 ## 九、来源与延伸阅读
 
 - [The Rust Reference — Unions](https://doc.rust-lang.org/reference/items/unions.html)
-- [The Rustonomicon — Unions](https://doc.rust-lang.org/nomicon/unions.html)
-- [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/reference/types/union.html)
+- [The Rustonomicon — Unions](https://doc.rust-lang.org/nomicon/other-reprs.html)
+- [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/reference/types.html)
 - [The Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)
 
 ---

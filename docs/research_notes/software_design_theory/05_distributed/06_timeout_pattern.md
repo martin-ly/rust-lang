@@ -436,7 +436,7 @@ impl TimeoutHttpClient {
 
 > **来源: [Wikipedia - Timeout (computing)](https://en.wikipedia.org/wiki/Timeout_(computing))**
 > **来源: [Wikipedia - Distributed Computing](https://en.wikipedia.org/wiki/Distributed_Computing)**
-> **[IEEE - Distributed System Design](https://ieeexplore.ieee.org/)**
+> **[IEEE - Distributed System Design](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[ACM - Timeout Pattern in Distributed Systems](https://dl.acm.org/)**
 > **[来源: Martin Kleppmann - Designing Data-Intensive Applications]**
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**

@@ -28,7 +28,7 @@
 > **来源: [Rust Reference - Error Codes](https://doc.rust-lang.org/reference/)** ·
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)** ·
 > **[ACM - Compiler Error Message Design](https://dl.acm.org/)** ·
-> **[IEEE - Programming Language Diagnostics](https://ieeexplore.ieee.org/)**
+> **[IEEE - Programming Language Diagnostics](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 
 - [Rust 编译器错误码映射文档 {#rust-编译器错误码映射文档}](#rust-编译器错误码映射文档-rust-编译器错误码映射文档)
   - [目录 {#目录}](#目录-目录)
@@ -2611,7 +2611,7 @@ Rust 1.94 对错误诊断进行了多项改进：
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 > **来源: [Wikipedia - Error Message](https://en.wikipedia.org/wiki/Error_Message)**
 > **来源: [Wikipedia - Diagnostic (medicine)](https://en.wikipedia.org/wiki/Diagnostic_(medicine))**
-> **[IEEE - Programming Language Diagnostics](https://ieeexplore.ieee.org/)**
+> **[IEEE - Programming Language Diagnostics](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[ACM - Compiler Error Message Design](https://dl.acm.org/)**
 > **来源: [Rust Reference - Error Codes](https://doc.rust-lang.org/reference/)**
 > **[Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**

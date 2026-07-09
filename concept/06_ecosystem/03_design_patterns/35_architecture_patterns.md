@@ -19,7 +19,7 @@
 ---
 
 > **来源**: [Hexagonal Architecture — Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/) ·
-> [Onion Architecture — Jeffrey Palermo](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) ·
+> [Onion Architecture — Jeffrey Palermo](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) <!-- link: known-broken --> ·
 > [Clean Architecture — Robert C. Martin](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) ·
 > [Martin Fowler — Enterprise Architecture Patterns](https://martinfowler.com/books/eaa.html) ·
 > [Serverless Architectures — AWS](https://aws.amazon.com/serverless/) ·
@@ -114,7 +114,7 @@
 ```
 
 > **来源**: [Fowler — EAA](https://martinfowler.com/books/eaa.html) · [Evans — DDD](https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215)
-> [来源: [Palermo — Onion](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)] · [来源: [Martin — Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)]
+> [来源: [Palermo — Onion](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) <!-- link: known-broken -->] · [来源: [Martin — Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)]
 
 ### 1.2 六边形架构 / 端口与适配器（Hexagonal / Ports & Adapters）
 >
@@ -155,7 +155,7 @@
 
 ### 1.3 洋葱架构（Onion Architecture）
 >
-> **[Jeffrey Palermo — Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)** 洋葱架构是分层架构的演进，核心思想是**领域模型位于最内层**，所有依赖都指向中心。外层定义接口，内层实现接口——与经典分层架构的依赖方向完全相反。
+> **[Jeffrey Palermo — Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) <!-- link: known-broken -->** 洋葱架构是分层架构的演进，核心思想是**领域模型位于最内层**，所有依赖都指向中心。外层定义接口，内层实现接口——与经典分层架构的依赖方向完全相反。
 
 ```text
          ┌───────────────┐
@@ -174,7 +174,7 @@
               ↑ 依赖方向（全部指向中心）
 ```
 
-> **来源**: [Palermo — Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) · [Palermo — Onion Architecture Part 3](https://jeffreypalermo.com/blog/the-onion-architecture-part-3/)
+> **来源**: [Palermo — Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) <!-- link: known-broken --> · [Palermo — Onion Architecture Part 3](https://jeffreypalermo.com/blog/the-onion-architecture-part-3/)
 
 ### 1.4 整洁架构（Clean Architecture）
 >
@@ -241,7 +241,7 @@
 | **Rust 适配性** | 良好 | 优秀（Trait 即端口）| 优秀 | 优秀 | 良好（cargo-lambda）|
 | **主要来源** | Fowler EAA | Cockburn | Palermo | Martin | AWS / Azure / GCP |
 
-> **来源**: [Cockburn — Hexagonal](https://alistair.cockburn.us/hexagonal-architecture/) · [Palermo — Onion](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) · [Martin — Clean](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) · [AWS — Serverless](https://aws.amazon.com/serverless/)
+> **来源**: [Cockburn — Hexagonal](https://alistair.cockburn.us/hexagonal-architecture/) · [Palermo — Onion](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) <!-- link: known-broken --> · [Martin — Clean](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) · [AWS — Serverless](https://aws.amazon.com/serverless/)
 
 ---
 
@@ -608,7 +608,7 @@ impl OrderRepository for PostgresOrderRepository {
 }
 ```
 
-> **来源**: [来源: [Palermo — Onion](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)]
+> **来源**: [来源: [Palermo — Onion](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) <!-- link: known-broken -->]
 
 ### 5.2 依赖方向
 >
@@ -631,7 +631,7 @@ impl OrderRepository for PostgresOrderRepository {
   - 洋葱架构的 Domain Model 是真正的"零依赖"核心
 ```
 
-> **来源**: [Palermo — Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) · [Palermo — Onion Architecture Part 3](https://jeffreypalermo.com/blog/the-onion-architecture-part-3/)
+> **来源**: [Palermo — Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) <!-- link: known-broken --> · [Palermo — Onion Architecture Part 3](https://jeffreypalermo.com/blog/the-onion-architecture-part-3/)
 
 ---
 
@@ -745,7 +745,7 @@ Rust 实现共性: 所有四种架构都可以用 Rust 的 trait + 模块系统�
   - 编译器保证 = cargo workspace 依赖约束
 ```
 
-> **来源**: [Martin — Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) · [Cockburn — Hexagonal](https://alistair.cockburn.us/hexagonal-architecture/) · [Palermo — Onion](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)
+> **来源**: [Martin — Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) · [Cockburn — Hexagonal](https://alistair.cockburn.us/hexagonal-architecture/) · [Palermo — Onion](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) <!-- link: known-broken -->
 
 ---
 

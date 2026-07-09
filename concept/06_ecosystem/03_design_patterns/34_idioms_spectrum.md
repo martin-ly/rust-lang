@@ -886,7 +886,7 @@ let app = ServiceBuilder::new()
 
 ### 9.3
 
-> [Bevy ECS docs](https://web.archive.org/web/*/https://bevyengine.org/learn/book/ecs/); [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/) ECS 系统图与 Archetype
+> [Bevy ECS docs](https://bevyengine.org/learn/book/ecs/); [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/) ECS 系统图与 Archetype
 > **惯用**: 用 ECS（Entity-Component-System）将数据（Component）与行为（System）分离，通过 Archetype 实现缓存友好布局。
 
 ```rust,ignore

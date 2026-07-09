@@ -478,7 +478,7 @@ graph LR
 > **来源: [Wikipedia - Mind Map](https://en.wikipedia.org/wiki/Mind_Map)**
 > **来源: [Wikipedia - Concept Map](https://en.wikipedia.org/wiki/Concept_Map)**
 > **[ACM - Knowledge Visualization](https://dl.acm.org/)**
-> **[Tony Buzan - Mind Mapping](https://www.tonybuzan.com/)**
+> **[Tony Buzan - Mind Mapping](https://www.tonybuzan.com/) <!-- link: known-broken -->**
 > **来源: [RustBelt: Securing the Foundations of the Rust Programming Language](https://plv.mpi-sws.org/rustbelt/popl18/)**
 > **来源: [Iris: Higher-Order Concurrent Separation Logic](https://plv.mpi-sws.org/iris/)**
 

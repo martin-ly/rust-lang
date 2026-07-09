@@ -85,7 +85,7 @@ fn demo() {
 
 - **Pin Ergonomics / Reborrow Traits**: Project Goals 2026 旗舰目标 "Beyond the &"，预计 1.99+。
 - **Field Projections**: `field_of!` 宏与 FRTs 已合并，逐步推进。
-- **BorrowSanitizer**: 运行时 Tree Borrows 违规检测，LLVM RFC 已发布。
+- **BorrowSanitizer**: 运行时（Runtime） Tree Borrows 违规检测，LLVM RFC 已发布。
 - **Safety Tags**: unsafe 契约的机器可读标注，RFC 讨论中。
 
 ---

@@ -585,7 +585,7 @@ Pin 使用场景决策树
 > **来源: [Wikipedia - Software Design](https://en.wikipedia.org/wiki/Software_Design)**
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 > **[ACM - Software Architecture](https://dl.acm.org/)**
-> **[IEEE - Design Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Design Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[来源: Martin Fowler - Patterns]**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

@@ -15,7 +15,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Rustonomicon — Trait Objects](https://doc.rust-lang.org/nomicon/trait-objects.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Rustonomicon — Trait Objects](https://doc.rust-lang.org/nomicon/index.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ---
 
@@ -168,5 +168,5 @@ fn make_iter() -> impl Iterator<Item = i32> {
 
 ---
 
-> **权威来源**: [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Rustonomicon — Trait Objects](https://doc.rust-lang.org/nomicon/trait-objects.html)
+> **权威来源**: [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Rustonomicon — Trait Objects](https://doc.rust-lang.org/nomicon/index.html)
 > **内容分级**: [专家级]

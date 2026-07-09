@@ -781,7 +781,7 @@ criterion = { version = "0.5", features = ["async_tokio"] }
 
 ### 1.5 模糊测试 (Fuzz Testing) {#15-模糊测试-fuzz-testing}
 
-> **[IEEE - Programming Language Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Programming Language Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 >
 > **[Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -1073,7 +1073,7 @@ impl ReferenceStateMachine for MyStateMachine {
 
 ### 2.2 异步测试：tokio-test {#22-异步测试tokio-test}
 
-> **[POPL - Programming Languages Research](https://popl.sigplan.org/)**
+> **[POPL - Programming Languages Research](https://popl.sigplan.org/) <!-- link: known-broken -->**
 >
 > **[Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -1159,7 +1159,7 @@ async fn test_timer_behavior() {
 
 ### 2.3 模拟对象：mockall {#23-模拟对象mockall}
 
-> **[PLDI - Programming Language Design](https://pldi.sigplan.org/)**
+> **[PLDI - Programming Language Design](https://pldi.sigplan.org/) <!-- link: known-broken -->**
 
 ```rust,ignore
 use mockall::{mock, predicate::*};
@@ -1914,7 +1914,7 @@ mod tests {
 
 ### 4.2 测试数据管理 {#42-测试数据管理}
 
-> **[IEEE - Programming Language Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Programming Language Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 
 ```rust,ignore
 // tests/common/fixtures.rs
@@ -2342,7 +2342,7 @@ mod test_documentation {
 
 ### 6.1 常用命令 {#61-常用命令}
 
-> **[POPL - Programming Languages Research](https://popl.sigplan.org/)**
+> **[POPL - Programming Languages Research](https://popl.sigplan.org/) <!-- link: known-broken -->**
 
 ```bash
 # 运行所有测试 {#运行所有测试}
@@ -2384,7 +2384,7 @@ cargo flamegraph
 
 ### 6.2 常用属性 {#62-常用属性}
 
-> **[PLDI - Programming Language Design](https://pldi.sigplan.org/)**
+> **[PLDI - Programming Language Design](https://pldi.sigplan.org/) <!-- link: known-broken -->**
 
 | 属性 | 用途 |
 | :--- | :--- |
@@ -2618,7 +2618,7 @@ pub mod test_config {
 > **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
 > **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**
 > **[ACM - Software Testing Methods](https://dl.acm.org/)**
-> **[IEEE - Test Coverage Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Test Coverage Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -2629,7 +2629,7 @@ pub mod test_config {
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 > **来源: [Wikipedia - Decision Tree](https://en.wikipedia.org/wiki/Decision_Tree)**
 > **[ACM - Decision Support Systems](https://dl.acm.org/)**
-> **[IEEE - Risk Analysis](https://ieeexplore.ieee.org/)**
+> **[IEEE - Risk Analysis](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
 > **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**

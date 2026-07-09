@@ -20,7 +20,7 @@
 > **来源: [Wikipedia - Modular Programming](https://en.wikipedia.org/wiki/Modular_Programming)** ·
 > **来源: [Wikipedia - Namespace](https://en.wikipedia.org/wiki/Namespace)** ·
 > **[ACM - Module System Design](https://dl.acm.org/)** ·
-> **[IEEE - Software Modularity Standards](https://ieeexplore.ieee.org/)**
+> **[IEEE - Software Modularity Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 
 - [📦 Rust 模块系统速查卡 {#rust-模块系统速查卡}](#-rust-模块系统速查卡-rust-模块系统速查卡)
   - [📋 目录 {#目录}](#-目录-目录)

@@ -662,7 +662,7 @@ timeline
 > Rust 的内存安全（Memory Safety）保证阻止了 UAF/溢出等"经典"漏洞，但逻辑错误（如 `copy_from_user()` 返回值检查遗漏）仍然可被利用。
 > 这要求 Rust 内核开发者不仅关注内存安全（Memory Safety），还要关注**逻辑正确性的形式化验证**。
 > [来源: [Linux Kernel Mailing List](https://lore.kernel.org/linux-crypto/)] ·
-> [来源: [CVE-2026-31431](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-31431)] · 可信度: ✅
+> [来源: [CVE-2026-31431](https://nvd.nist.gov/vuln/detail/CVE-2026-31431)] · 可信度: ✅
 
 ---
 

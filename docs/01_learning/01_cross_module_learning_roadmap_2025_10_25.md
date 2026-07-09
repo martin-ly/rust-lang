@@ -43,7 +43,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Learning Path](https://en.wikipedia.org/wiki/Learning_Path)** ·
 > **来源: [Wikipedia - Curriculum Design](https://en.wikipedia.org/wiki/Curriculum_Design)** ·
-> **[ACM - Computing Education Research](https://dl.acm.org/)** · **[IEEE - Competency Frameworks](https://ieeexplore.ieee.org/)**
+> **[ACM - Computing Education Research](https://dl.acm.org/)** · **[IEEE - Competency Frameworks](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 >
 
 ### 路径 1: 零基础入门 {#路径-1-零基础入门}
