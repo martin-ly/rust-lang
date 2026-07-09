@@ -33,9 +33,7 @@
 ## 反命题决策树
 
 > **反命题 1**: "名字参考在所有场景下都适用" ⟹ 不成立。过程宏（Procedural Macro）生成的名字、FFI 符号和 `unsafe` 外部块中的名字具有特殊的解析和链接行为。
-
 > **反命题 2**: "忽略名字参考的细节也能写出正确代码" ⟹ 不成立。命名空间隔离错误、`use` 冲突和可见性违规是常见的编译错误来源。
-
 > **反命题 3**: "其他语言对名字参考的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的四层命名空间、`Self`/`self`/`super` 路径和 crate 相对路径具有独特性。
 
 ## 一、命名空间
@@ -154,10 +152,6 @@ fn main() {
 | [Preludes](../../01_foundation/07_modules_and_items/35_preludes.md) | prelude 是隐式名字注入机制 |
 | [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | `unsafe` 符号和 FFI 名字有特殊规则 |
 
----
-
-> **权威来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Rust Reference — Namespaces and Scopes](https://doc.rust-lang.org/reference/names/namespaces.html) · [Rust Reference — Paths](https://doc.rust-lang.org/reference/paths.html) · [rustc-dev-guide — Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
-> **内容分级**: [研究级]
 ---
 
 > **权威来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Rust Reference — Namespaces and Scopes](https://doc.rust-lang.org/reference/names/namespaces.html) · [Rust Reference — Paths](https://doc.rust-lang.org/reference/paths.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/)

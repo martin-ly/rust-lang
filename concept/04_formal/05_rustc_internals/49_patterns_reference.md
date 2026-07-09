@@ -33,9 +33,7 @@
 ## 反命题决策树
 
 > **反命题 1**: "模式参考在所有场景下都适用" ⟹ 不成立。`unsafe` 代码中的裸指针解引用（Reference）、FFI 类型和过程宏（Procedural Macro）生成的模式可能超出常规模式检查范围。
-
 > **反命题 2**: "忽略模式参考的细节也能写出正确代码" ⟹ 不成立。不可反驳模式误用、绑定模式错误和穷尽性检查失败都会导致编译错误。
-
 > **反命题 3**: "其他语言对模式参考的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）移动、引用模式和 `@` 绑定具有语言特有语义。
 
 ## 一、模式位置
@@ -154,10 +152,6 @@ fn get_rgb(c: Color) -> u32 {
 | [Names and Resolution](40_names_and_resolution.md) | 模式中的标识符是新的绑定 |
 | [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | union 和裸指针解引用需要 unsafe |
 
----
-
-> **权威来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [Rust Reference — Match Expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html) · [Rust Reference — Let Statements](https://doc.rust-lang.org/reference/statements.html#let-statements) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
-> **内容分级**: [研究级]
 ---
 
 > **权威来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Rust Reference — Match Expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html) · [Rust Reference — Let Statements](https://doc.rust-lang.org/reference/statements.html#let-statements) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/)

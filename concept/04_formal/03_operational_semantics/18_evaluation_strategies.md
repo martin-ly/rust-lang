@@ -53,9 +53,7 @@
 ---
 
 > **过渡**: 从 求值策略 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
-
 > **过渡**: 在建立 求值策略 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
-
 > **过渡**: 最后，将 求值策略 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
 ---
@@ -442,16 +440,6 @@ fn linear_move() {
 
 ---
 
-> **权威来源**:
->
-> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
-> [Pierce TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
-> [Harper PFPL](https://www.cs.cmu.edu/~rwh/pfpl/) ·
-> [Barendregt — The Lambda Calculus](https://www.amazon.com/Lambda-Calculus-Its-Syntax-Studies/dp/0444875085) ·
-> [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
->
-> **文档版本**: 1.0
-> **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 通用 PL 基座层
 
@@ -682,7 +670,7 @@ Rust 的惰性是局部的（仅在迭代器适配器链中），最终必须通
 
 ---
 
-> **权威来源**: [Verus](https://github.com/verus-lang/verus) · [Kani](https://model-checking.github.io/kani/) · [Pierce — TAPL, §5-§11](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Harper — PFPL, Part III](https://www.cs.cmu.edu/~rwh/pfpl/) · [Wadler 1984 — Why Calculating is Better than Scheming](https://doi.org/10.1093/comjnl/27.2.115) · [Plotkin 1975 — Call-by-Name, Call-by-Value and the λ-Calculus](<https://doi.org/10.1016/0304-3975(75)> · [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
+> **权威来源**: [Verus](https://github.com/verus-lang/verus) · [Kani](https://model-checking.github.io/kani/) · [Pierce — TAPL, §5-§11](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Harper — PFPL, Part III](https://www.cs.cmu.edu/~rwh/pfpl/) · [Wadler 1984 — Why Calculating is Better than Scheming](https://doi.org/10.1093/comjnl/27.2.115) · [Plotkin 1975 — Call-by-Name, Call-by-Value and the λ-Calculus](https://doi.org/10.1016/0304-3975(75)90017-1) · [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0

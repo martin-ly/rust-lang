@@ -34,9 +34,7 @@
 ## 反命题决策树
 
 > **反命题 1**: "泛型在所有场景下都零成本" ⟹ 不成立。单态化会导致代码体积膨胀和编译时间增加。
-
 > **反命题 2**: "动态分发总是比静态分发慢" ⟹ 不成立。在特定场景下，`dyn Trait` 可以减少缓存失效和代码体积，反而提升整体性能。
-
 > **反命题 3**: "单态化代码可以直接等价替换为 trait object" ⟹ 不成立。trait object 有对象安全限制，且丢失类型信息。
 
 ## 一、单态化 Monomorphization
@@ -166,10 +164,6 @@ fn make_iter() -> impl Iterator<Item = i32> {
 | [Application Binary Interface](38_application_binary_interface.md) | trait object 的 ABI |
 | [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | VTable 和类型擦除涉及 unsafe |
 
----
-
-> **权威来源**: [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Rustonomicon — Trait Objects](https://doc.rust-lang.org/nomicon/index.html)
-> **内容分级**: [专家级]
 ---
 
 > **权威来源**: [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Rustonomicon — Trait Objects](https://doc.rust-lang.org/nomicon/index.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)

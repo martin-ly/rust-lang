@@ -33,9 +33,7 @@
 ## 反命题决策树
 
 > **反命题 1**: "属性在所有场景下都适用" ⟹ 不成立。某些属性只在特定 item 类型或 nightly 编译器上有效，错误使用会触发编译错误。
-
 > **反命题 2**: "忽略属性的细节也能写出正确代码" ⟹ 不成立。`#[repr(C)]`、`#[must_use]`、`#[non_exhaustive]` 等属性直接影响类型布局和接口语义。
-
 > **反命题 3**: "其他语言对属性的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 属性在词法阶段即被解析并影响宏（Macro）展开和类型检查，与 C# 注解或 Java 注解的运行时（Runtime）反射模型不同。
 
 ## 一、属性语法
@@ -170,10 +168,6 @@ fn decorated() {}
 | [Generics Compiler Behavior](53_generics_compiler_behavior.md) | `#[inline]` 影响单态化（Monomorphization）代码生成 |
 | [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | `#[no_mangle]`、`#[link]` 用于 unsafe/FFI 场景 |
 
----
-
-> **权威来源**: [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html) · [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
-> **内容分级**: [研究级]
 ---
 
 > **权威来源**: [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/)

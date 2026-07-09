@@ -660,7 +660,7 @@ struct RaftNode {
 // 分区恢复后，需通过 term 比较解决冲突，但期间可能写入冲突数据
 ```
 
-> **修正**: Raft 共识算法在**网络分区**（network partition）时保证安全性：1) 需要多数派（majority）才能当选 leader；2) 分区后，小分区无法选举（无法达到多数）；3) 大分区继续服务，但小分区不可用。极端情况：1) 对称分区（各 50%）→ 双方无法选举，完全不可用；2) 领导者隔离 → 旧 leader 在小分区继续接收写入（但未提交），恢复后回滚。这与 Paxos（类似多数派原则）或 PBFT（拜占庭容错，容忍恶意节点）不同——Raft 牺牲部分可用性换取一致性（CAP 定理的 CP 系统）。Rust 实现（`raft-rs`、`openraft`）需注意：1) 心跳超时和选举超时的配置（网络延迟）；2) 预投票（PreVote）防止 term 无限递增；3) 成员变更（joint consensus）的复杂性。[来源: [Raft Paper](https://raft.github.io/raft.pdf)] · [来源: [openraft Documentation](https://docs.rs/openraft/)]
+> **修正**: Raft 共识算法在**网络分区**（network partition）时保证安全性：1) 需要多数派（majority）才能当选 leader；2) 分区后，小分区无法选举（无法达到多数）；3) 大分区继续服务，但小分区不可用。极端情况：1) 对称分区（各 50%）→ 双方无法选举，完全不可用；2) 领导者隔离 → 旧 leader 在小分区继续接收写入（但未提交），恢复后回滚。这与 Paxos（类似多数派原则）或 PBFT（拜占庭容错，容忍恶意节点）不同——Raft 牺牲部分可用性换取一致性（Coherence）（CAP 定理的 CP 系统）。Rust 实现（`raft-rs`、`openraft`）需注意：1) 心跳超时和选举超时的配置（网络延迟）；2) 预投票（PreVote）防止 term 无限递增；3) 成员变更（joint consensus）的复杂性。[来源: [Raft Paper](https://raft.github.io/raft.pdf)] · [来源: [openraft Documentation](https://docs.rs/openraft/)]
 
 ### 10.3 边界测试：Raft 的日志不一致与快照安装（运行时一致性风险）
 
