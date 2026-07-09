@@ -4,7 +4,7 @@
 > **本节关键术语**: Cargo · Crate · Package · Manifest · `Cargo.toml` — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Getting Started
-> **Summary**: Cargo 的定位与入门：安装验证、`cargo new` 创建 package、构建运行、依赖管理基础，以及 Cargo 在 Rust 工具链中的角色。
+> **Summary**: A beginner-oriented guide to Cargo 1.96.1+: verifying the toolchain, creating a package with `cargo new`/`cargo init`, building/running/checking, adding dependencies, and choosing between binary, library, script, and workspace projects.
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 应用
 > **A/S/P 标记**: **P** — Practice
@@ -15,9 +15,7 @@
 
 ---
 
-> **来源**: [Cargo Book — Getting Started](https://doc.rust-lang.org/cargo/getting-started/index.html) · · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> [Cargo Book — First Steps with Cargo](https://doc.rust-lang.org/cargo/getting-started/first-steps.html) ·
-> [Cargo Book — Why Cargo Exists](https://doc.rust-lang.org/cargo/index.html)
+> **来源**: [Cargo Book — Getting Started](https://doc.rust-lang.org/cargo/getting-started/index.html) · [Cargo Book — First Steps with Cargo](https://doc.rust-lang.org/cargo/getting-started/first-steps.html) · [Cargo Book — Why Cargo Exists](https://doc.rust-lang.org/cargo/index.html)
 
 ---
 
@@ -33,13 +31,21 @@
 | 测试与文档 | `cargo test`、`cargo doc`、`cargo bench` |
 | 发布 | `cargo publish` 将 package 发布到 crates.io |
 
-## 二、为什么需要 Cargo
+## 二、安装验证
 
-Rust 项目通常由多个 crate 和大量依赖组成。手工调用 `rustc` 管理依赖、feature、版本极其复杂。Cargo 提供声明式配置（`Cargo.toml`）和统一工作流，使项目可复现、可协作、可扩展。
+安装 Rust 后，确认工具链版本：
+
+```bash
+rustc --version   # rustc 1.96.1 (or newer)
+cargo --version   # cargo 1.96.1 (or newer)
+```
+
+建议使用 `rustup` 管理工具链，并通过 `rustup update` 保持最新稳定版。
 
 ## 三、创建第一个 Package
 
 ```bash
+# 创建二进制（可执行）package
 cargo new hello_cargo --bin
 cd hello_cargo
 cargo run
@@ -55,7 +61,23 @@ hello_cargo/
     └── main.rs
 ```
 
-## 四、核心命令速览
+如果想在现有目录中初始化，可使用 `cargo init`：
+
+```bash
+mkdir my_project && cd my_project
+cargo init --name my_project
+```
+
+## 四、二进制 vs 库 vs 其他形态
+
+| 形态 | 创建命令 | 入口文件 | 典型用途 |
+|:---|:---|:---|:---|
+| 二进制 | `cargo new --bin` | `src/main.rs` | CLI、服务、应用 |
+| 库 | `cargo new --lib` | `src/lib.rs` | 可被其他 crate 依赖 |
+| Cargo Script | 单文件 `*.rs` | 文件本身 | 快速脚本、原型 |
+| Workspace | 多 crate | 见 [Cargo Workspaces](78_cargo_workspaces.md) | 大型项目、monorepo |
+
+## 五、核心命令速览
 
 | 命令 | 作用 |
 |:---|:---|
@@ -65,21 +87,80 @@ hello_cargo/
 | `cargo test` | 运行测试 |
 | `cargo doc` | 生成 rustdoc 文档 |
 | `cargo add <crate>` | 添加依赖 |
+| `cargo clippy` | 运行 lint 检查 |
+| `cargo fmt` | 格式化代码 |
 
-## 五、Cargo.toml 初识
+## 六、Cargo.toml 初识
 
 ```toml
 [package]
 name = "hello_cargo"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.96.1"
+license = "MIT OR Apache-2.0"
+description = "A minimal Cargo getting-started package"
 
 [dependencies]
 ```
 
 - `[package]` 描述当前 package 元数据。
 - `[dependencies]` 声明外部依赖。
-- `edition` 指定 Rust 语言版本（2024、2021、2018 等）。
+- `edition = "2024"` 指定 Rust 语言版本；Edition 2024 隐式使用 **resolver v3**。
+- `rust-version` 声明最低支持的 Rust 版本（MSRV）。
+
+显式声明 resolver 也是允许的：
+
+```toml
+[package]
+name = "hello_cargo"
+version = "0.1.0"
+edition = "2024"
+resolver = "3"
+```
+
+## 七、添加依赖
+
+```bash
+# 添加 serde 并启用 derive feature
+cargo add serde --features derive
+
+# 添加 tokio 并启用 full feature
+cargo add tokio --features full
+```
+
+执行后 `Cargo.toml` 会自动更新：
+
+```toml
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.40", features = ["full"] }
+```
+
+## 八、Lockfile 与可复现构建
+
+首次构建后 Cargo 会生成 `Cargo.lock`，记录解析出的精确版本。对于二进制项目，应将 `Cargo.lock` 提交到版本控制；对于纯库项目，通常不提交。详见 [Cargo Workflow](81_cargo_workflow.md)。
+
+## 九、何时选择哪种项目形态？
+
+```mermaid
+flowchart TD
+    Start([开始新项目]) --> Q1{是否需要复用代码？}
+    Q1 -->|是，作为库被引用| Lib[使用 cargo new --lib]
+    Q1 -->|否，只是可执行程序| Q2{是否单文件即可？}
+    Q2 -->|是| Script[Cargo Script 单文件]
+    Q2 -->|否| Bin[使用 cargo new --bin]
+    Lib --> Q3{项目会增长为多个 crate？}
+    Bin --> Q3
+    Q3 -->|是| Workspace[迁移到 Cargo Workspace]
+    Q3 -->|否| Keep[保持单 package]
+```
+
+- Cargo Script 详情见 [Cargo Script](09_cargo_script.md)。
+- 多 crate 管理见 [Cargo Workspaces](78_cargo_workspaces.md)。
+- resolver v3 与 `public = true` 示例见 [`crates/c17_resolver_v3_public_demo`](../../../crates/c17_resolver_v3_public_demo/)。
+
+> **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Go](../../05_comparative/01_systems_languages/02_rust_vs_go.md)
 
 ---
 

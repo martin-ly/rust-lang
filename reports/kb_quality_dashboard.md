@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-09T01:26:11.426473+00:00
+> 生成时间: 2026-07-09T01:42:10.376670+00:00
 > 扫描文件数: 459
 
 ## 全局指标
@@ -8,11 +8,11 @@
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
 | 总文件数 | 459 | 27 | ✅ |
-| 总定理链 (⟹) | 1920 | ≥270 | ✅ |
+| 总定理链 (⟹) | 1934 | ≥270 | ✅ |
 | 总反命题 | 710 | ≥40 | ✅ |
-| 总 Mermaid 图 | 562 | ≥50 | ✅ |
-| 编译验证代码块 | 4325 | ≥150 | ✅ |
-| 定理矩阵总行 | 18614 | — | — |
+| 总 Mermaid 图 | 589 | ≥50 | ✅ |
+| 编译验证代码块 | 4371 | ≥150 | ✅ |
+| 定理矩阵总行 | 18923 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 277 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
@@ -25,7 +25,7 @@
 
 | 层级 | 文件数 | 平均 ⟹/文件 | 平均过渡段/文件 | 认知路径 | ⟸/文件 | 模板化 | 前置覆盖 | 后置覆盖 | 双标签 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| L0 | 63 | 5.2 | 3.1 | 35/63 (55%) | 0.1 | 0 | 14/63 | 13/63 | 45/63 |
+| L0 | 63 | 5.4 | 3.1 | 35/63 (55%) | 0.1 | 0 | 14/63 | 13/63 | 45/63 |
 | L1 | 55 | 4.7 | 5.6 | 55/55 (100%) | 1.8 | 0 | 55/55 | 55/55 | 55/55 |
 | L2 | 38 | 5.1 | 5.6 | 36/38 (94%) | 2.4 | 0 | 38/38 | 38/38 | 38/38 |
 | L3 | 57 | 3.6 | 2.9 | 37/57 (64%) | 1.3 | 0 | 43/57 | 43/57 | 43/57 |
@@ -47,8 +47,8 @@
 | E:\_src\rust-lang\concept\03_advanced\02_process_ipc\02_advanced_process_management.md | L3 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 缺失前置概念; 缺失后置概念; 反向推理不足 (⟸ 0 < 2); 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\03_advanced\02_process_ipc\03_async_process_management.md | L3 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 缺失前置概念; 缺失后置概念; 反向推理不足 (⟸ 0 < 2); 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\03_advanced\02_process_ipc\04_cross_platform_process_management.md | L3 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 缺失前置概念; 缺失后置概念; 反向推理不足 (⟸ 0 < 2); 缺失受众标签; 缺失内容分级标签 |
-| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\05_ipc_mechanisms.md | L3 | 缺失认知路径; 缺失反命题; 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
-| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\06_process_monitoring_and_diagnostics.md | L3 | 缺失认知路径; 缺失反命题; 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
+| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\05_ipc_mechanisms.md | L3 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 缺失前置概念; 缺失后置概念; 反向推理不足 (⟸ 0 < 2); 缺失受众标签; 缺失内容分级标签 |
+| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\06_process_monitoring_and_diagnostics.md | L3 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 缺失前置概念; 缺失后置概念; 反向推理不足 (⟸ 0 < 2); 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\03_advanced\02_process_ipc\07_process_security_and_sandboxing.md | L3 | 缺失认知路径; 缺失反命题; 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\03_advanced\02_process_ipc\08_process_performance_engineering.md | L3 | 缺失认知路径; 缺失反命题; 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\03_advanced\02_process_ipc\09_process_testing_and_benchmarking.md | L3 | 缺失认知路径; 缺失反命题; 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
@@ -67,6 +67,7 @@
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\37_pattern_selection_best_practices.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失前置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\38_formal_design_pattern_theory.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失前置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\39_frontier_research_and_innovative_patterns.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失前置概念; 缺失受众标签; 缺失内容分级标签 |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\82_engineering_and_production_patterns.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\84_design_patterns_glossary.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\85_design_patterns_faq.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\39_high_performance_network_service_architecture.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
@@ -81,6 +82,8 @@
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\60_wasm_faq.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\61_wasm_javascript_interop.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\76_algorithm_engineering_practice.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+| E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\79_cutting_edge_algorithms.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+| E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\80_formal_algorithm_theory.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_90_stabilized.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_91_stabilized.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_92_stabilized.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失内容分级标签 |
@@ -142,14 +145,14 @@
 | E:\_src\rust-lang\concept\00_meta\04_navigation\self_assessment.md | L0 | 2242 | 1 | 0 | 0 | 1 | 0 | 56 | 6 | ✅ | ❌ | ❌ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\01_concept_definition_atlas.md | L0 | 473 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\02_attribute_relationship_atlas.md | L0 | 450 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
-| E:\_src\rust-lang\concept\00_meta\knowledge_topology\03_scenario_decision_tree_atlas.md | L0 | 25 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
-| E:\_src\rust-lang\concept\00_meta\knowledge_topology\04_example_counterexample_atlas.md | L0 | 25 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
-| E:\_src\rust-lang\concept\00_meta\knowledge_topology\05_logical_reasoning_atlas.md | L0 | 25 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
-| E:\_src\rust-lang\concept\00_meta\knowledge_topology\06_inter_layer_mapping_atlas.md | L0 | 98 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
+| E:\_src\rust-lang\concept\00_meta\knowledge_topology\03_scenario_decision_tree_atlas.md | L0 | 136 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
+| E:\_src\rust-lang\concept\00_meta\knowledge_topology\04_example_counterexample_atlas.md | L0 | 125 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
+| E:\_src\rust-lang\concept\00_meta\knowledge_topology\05_logical_reasoning_atlas.md | L0 | 116 | 15 | 1 | 0 | 0 | 3 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
+| E:\_src\rust-lang\concept\00_meta\knowledge_topology\06_inter_layer_mapping_atlas.md | L0 | 112 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\07_intra_layer_mapping_atlas.md | L0 | 314 | 244 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
-| E:\_src\rust-lang\concept\00_meta\knowledge_topology\08_concept_source_alignment_atlas.md | L0 | 50 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
-| E:\_src\rust-lang\concept\00_meta\knowledge_topology\09_reasoning_judgment_tree_atlas.md | L0 | 25 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
-| E:\_src\rust-lang\concept\00_meta\knowledge_topology\10_gap_and_action_plan.md | L0 | 82 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
+| E:\_src\rust-lang\concept\00_meta\knowledge_topology\08_concept_source_alignment_atlas.md | L0 | 138 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
+| E:\_src\rust-lang\concept\00_meta\knowledge_topology\09_reasoning_judgment_tree_atlas.md | L0 | 147 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
+| E:\_src\rust-lang\concept\00_meta\knowledge_topology\10_gap_and_action_plan.md | L0 | 116 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\kg_ontology_v2.md | L0 | 319 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | None |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\kg_tlo_alignment.md | L0 | 238 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\00_meta\placeholders\placeholder_generic.md | L0 | 22 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
@@ -260,16 +263,16 @@
 | E:\_src\rust-lang\concept\03_advanced\01_async\25_async_advanced.md | L3 | 1707 | 4 | 3 | 0 | 1 | 1 | 40 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\01_async\26_async_patterns.md | L3 | 1215 | 3 | 3 | 0 | 3 | 1 | 22 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\01_async\39_future_and_executor_mechanisms.md | L3 | 1002 | 0 | 0 | 0 | 0 | 0 | 17 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
-| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\01_process_model_and_lifecycle.md | L3 | 335 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | ❌ | ❌ | ❌ | None | None |
-| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\02_advanced_process_management.md | L3 | 218 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | ❌ | ❌ | ❌ | None | None |
-| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\03_async_process_management.md | L3 | 294 | 0 | 0 | 0 | 0 | 0 | 8 | 0 | ❌ | ❌ | ❌ | None | None |
-| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\04_cross_platform_process_management.md | L3 | 224 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | ❌ | ❌ | ❌ | None | None |
-| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\05_ipc_mechanisms.md | L3 | 185 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | ❌ | ❌ | ❌ | None | None |
-| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\06_process_monitoring_and_diagnostics.md | L3 | 93 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | ❌ | ❌ | ❌ | None | None |
-| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\07_process_security_and_sandboxing.md | L3 | 80 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
-| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\08_process_performance_engineering.md | L3 | 74 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
-| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\09_process_testing_and_benchmarking.md | L3 | 72 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
-| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\10_modern_process_libraries.md | L3 | 61 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\01_process_model_and_lifecycle.md | L3 | 366 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\02_advanced_process_management.md | L3 | 260 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\03_async_process_management.md | L3 | 333 | 0 | 0 | 0 | 0 | 1 | 9 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\04_cross_platform_process_management.md | L3 | 261 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\05_ipc_mechanisms.md | L3 | 227 | 0 | 0 | 0 | 0 | 1 | 6 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\06_process_monitoring_and_diagnostics.md | L3 | 225 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\07_process_security_and_sandboxing.md | L3 | 189 | 0 | 0 | 0 | 0 | 1 | 7 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\08_process_performance_engineering.md | L3 | 165 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\09_process_testing_and_benchmarking.md | L3 | 194 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\03_advanced\02_process_ipc\10_modern_process_libraries.md | L3 | 182 | 0 | 0 | 0 | 0 | 1 | 6 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\03_advanced\02_unsafe\00_before_formal.md | L3 | 171 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\03_advanced\02_unsafe\03_unsafe.md | L3 | 3427 | 14 | 2 | 0 | 4 | 10 | 63 | 3 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\02_unsafe\08_nll_and_polonius.md | L3 | 831 | 3 | 3 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
@@ -404,13 +407,13 @@
 | E:\_src\rust-lang\concept\06_ecosystem\01_cargo\72_cargo_security_cves.md | L6 | 476 | 4 | 0 | 0 | 3 | 1 | 0 | 8 | ✅ | ✅ | ✅ | 进阶 / 工程 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\01_cargo\76_cargo_196_features.md | L6 | 264 | 3 | 0 | 0 | 0 | 0 | 1 | 6 | ❌ | ✅ | ✅ | 进阶 / 工程 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\01_cargo\78_cargo_workspaces.md | L6 | 268 | 3 | 0 | 0 | 0 | 0 | 0 | 6 | ❌ | ✅ | ✅ | 中级 → 高级 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\80_cargo_getting_started.md | L6 | 88 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 初学者 | 参考级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\81_cargo_workflow.md | L6 | 97 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\82_cargo_guide_practices.md | L6 | 91 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\83_cargo_configuration.md | L6 | 90 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\84_cargo_commands_reference.md | L6 | 82 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\85_cargo_manifest_targets.md | L6 | 100 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\86_cargo_registry_internals.md | L6 | 97 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 参考级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\80_cargo_getting_started.md | L6 | 169 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | ❌ | ✅ | ✅ | 初学者 | 参考级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\81_cargo_workflow.md | L6 | 170 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\82_cargo_guide_practices.md | L6 | 166 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\83_cargo_configuration.md | L6 | 180 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\84_cargo_commands_reference.md | L6 | 168 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\85_cargo_manifest_targets.md | L6 | 170 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 参考级 |
+| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\86_cargo_registry_internals.md | L6 | 160 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 参考级 |
 | E:\_src\rust-lang\concept\06_ecosystem\01_cargo\87_build_std.md | L6 | 150 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | ❌ | ✅ | ✅ | 进阶 / 工程 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\02_core_crates\03_core_crates.md | L6 | 1342 | 8 | 0 | 0 | 2 | 6 | 17 | 3 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\02_patterns.md | L6 | 3075 | 11 | 0 | 0 | 2 | 5 | 45 | 14 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
@@ -428,8 +431,8 @@
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\41_workflow_theory.md | L6 | 1391 | 6 | 0 | 0 | 3 | 0 | 17 | 12 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\42_api_design_patterns.md | L6 | 1298 | 6 | 0 | 0 | 3 | 0 | 19 | 12 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\73_pattern_composition_algebra.md | L6 | 726 | 6 | 0 | 0 | 3 | 0 | 15 | 12 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
-| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\82_engineering_and_production_patterns.md | L6 | 70 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
-| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\84_design_patterns_glossary.md | L6 | 383 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\82_engineering_and_production_patterns.md | L6 | 298 | 0 | 0 | 0 | 0 | 0 | 7 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\84_design_patterns_glossary.md | L6 | 231 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\85_design_patterns_faq.md | L6 | 457 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\18_distributed_systems.md | L6 | 814 | 6 | 0 | 0 | 3 | 1 | 9 | 12 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\24_cloud_native.md | L6 | 791 | 4 | 0 | 0 | 3 | 1 | 8 | 8 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
@@ -489,8 +492,8 @@
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\76_algorithm_engineering_practice.md | L6 | 1921 | 0 | 0 | 0 | 0 | 0 | 22 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\77_data_structures_in_rust.md | L6 | 146 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | ❌ | ✅ | ✅ | 进阶 | 进阶 |
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\78_algorithm_complexity_analysis.md | L6 | 181 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | ❌ | ✅ | ✅ | 进阶 | 进阶 |
-| E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\79_cutting_edge_algorithms.md | L6 | 58 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\80_formal_algorithm_theory.md | L6 | 69 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 形式化级 |
+| E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\79_cutting_edge_algorithms.md | L6 | 217 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | ❌ | ✅ | ✅ | 专家 | 综述级 |
+| E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\80_formal_algorithm_theory.md | L6 | 239 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | ❌ | ✅ | ✅ | 专家 | 形式化级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\05_rust_version_tracking.md | L7 | 2583 | 6 | 0 | 0 | 1 | 3 | 9 | 8 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\50_nightly_rust.md | L7 | 128 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | ❌ | ✅ | ✅ | 初学者 | 研究级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_90_stabilized.md | L7 | 726 | 0 | 0 | 0 | 0 | 0 | 14 | 0 | ❌ | ❌ | ❌ | None | None |

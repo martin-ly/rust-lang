@@ -1,5 +1,6 @@
 > **EN**: Process Model and Lifecycle in Rust
 > **Summary**: A canonical guide to Rust's process abstraction, lifecycle management, resource control, and IPC safety guarantees, grounded in `std::process` and modern async runtimes.
+> **Rust Version**: 1.96.1+
 
 # Rust 进程模型与生命周期
 
@@ -176,6 +177,19 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 
 ---
 
+## 10. 进程生命周期状态机（Mermaid）
+
+```mermaid
+flowchart LR
+    Created["Command::spawn()<br/>Created"] --> Running["Running"]
+    Running --> Waiting["wait() / wait_with_output()<br/>Waiting"]
+    Waiting --> Terminated["Terminated"]
+    Running --> Killed["kill()<br/>Killed"]
+    Killed --> Terminated
+```
+
+---
+
 ## 补充视角：常见进程管理代码模式
 
 > 本节选编自 `crates/c07_process/docs/process_management.md`，
@@ -332,3 +346,20 @@ Created → Running → Waiting → Terminated
 - **速查卡**: [process_management_cheatsheet](../../../docs/02_reference/quick_reference/02_process_management_cheatsheet.md)
 - **RBE 练习**: [Process](https://doc.rust-lang.org/rust-by-example/std_misc/process.html)
 - **Rustlings**: 无进程专题；参考 RBE 与 C07 模块
+
+---
+
+## 11. 可运行示例：执行命令并收集输出
+
+```rust,editable
+use std::process::Command;
+
+fn main() -> std::io::Result<()> {
+    let output = Command::new("echo")
+        .args(["Rust", "1.96.1+"])
+        .output()?;
+    assert!(output.status.success());
+    println!("{}", String::from_utf8_lossy(&output.stdout));
+    Ok(())
+}
+```

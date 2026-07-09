@@ -1,5 +1,6 @@
 > **EN**: Async Process Management in Rust
 > **Summary**: Managing child processes inside Rust's async runtime: tokio::process, async I/O, timeouts, cancellation, and structured concurrency.
+> **Rust Version**: 1.96.1+
 
 # Rust 异步进程管理
 
@@ -275,6 +276,25 @@ impl PartialOrd for Task {
 
 ---
 
+## 8. 异步进程生命周期（Mermaid）
+
+```mermaid
+flowchart TD
+    Start["tokio::process::Command"] --> Spawn["spawn()"]
+    Spawn --> Concurrent{"需要同时管理多个子进程?"}
+    Concurrent -->|是| JoinSet["JoinSet / Semaphore"]
+    Concurrent -->|否| Single["单个 Child"]
+    Single --> IO["异步读写 stdin/stdout/stderr"]
+    JoinSet --> IO
+    IO --> Timeout{"是否超时?"}
+    Timeout -->|是| Kill["kill().await + wait().await"]
+    Timeout -->|否| Wait["wait().await"]
+    Kill --> Cleanup["统一清理"]
+    Wait --> Cleanup
+```
+
+---
+
 ## 补充视角：异步标准 IO 管理
 
 > 来源：`crates/c07_process/docs/async_stdio_guide.md`
@@ -291,3 +311,22 @@ impl PartialOrd for Task {
 
 - [Async/Await](../01_async/02_async.md)
 - [进程模型与生命周期](01_process_model_and_lifecycle.md)
+
+---
+
+## 9. 可运行示例：带取消的异步 select
+
+```rust,ignore
+use tokio::process::Command;
+use tokio::time::{timeout, Duration};
+
+async fn run_with_cancellation() -> std::io::Result<()> {
+    let mut child = Command::new("sleep").arg("30").spawn()?;
+    let result = timeout(Duration::from_secs(2), child.wait()).await;
+    if result.is_err() {
+        child.kill().await?;
+        child.wait().await?;
+    }
+    Ok(())
+}
+```

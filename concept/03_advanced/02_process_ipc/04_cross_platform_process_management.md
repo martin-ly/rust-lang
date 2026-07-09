@@ -1,5 +1,6 @@
 > **EN**: Cross-Platform Process Management in Rust
 > **Summary**: Writing portable process-management code across Windows, Linux, and macOS using std::process, platform extensions, and conditional compilation.
+> **Rust Version**: 1.96.1+
 
 # Rust 跨平台进程管理
 
@@ -221,3 +222,39 @@ fn list_command() -> (&'static str, &'static [&'static str]) {
 ---
 
 > **权威来源**: [Rust Standard Library — std::process](https://doc.rust-lang.org/std/process/) · [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)
+
+---
+
+## 8. 跨平台抽象决策流程（Mermaid）
+
+```mermaid
+flowchart TD
+    Start["需要跨平台进程功能"] --> Q1{"是否仅需基础 spawn/wait/IO?"}
+    Q1 -->|是| Std["使用 std::process"]
+    Q1 -->|否| Q2{"是否需要异步?"}
+    Q2 -->|是| Tokio["tokio::process"]
+    Q2 -->|否| Q3{"是否需要 shell 式管道?"}
+    Q3 -->|是| Duct["duct"]
+    Q3 -->|否| Q4{"是否需要 Unix 底层控制?"}
+    Q4 -->|是| Nix["nix crate + cfg(unix)"]
+    Q4 -->|否| WinAPI["windows crate + cfg(windows)"]
+```
+
+---
+
+## 9. 可运行示例：跨平台路径处理
+
+```rust,editable
+use std::path::PathBuf;
+
+fn config_path() -> PathBuf {
+    let base = std::env::var("HOME")
+        .map(PathBuf::from)
+        .unwrap_or_else(|_| PathBuf::from("."));
+    base.join(".config").join("app.toml")
+}
+
+fn main() {
+    println!("config path: {}", config_path().display());
+}
+```

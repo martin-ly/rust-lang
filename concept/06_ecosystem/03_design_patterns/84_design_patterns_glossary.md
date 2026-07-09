@@ -1,382 +1,231 @@
 > **EN**: Design Patterns Glossary
-> **Summary**: Authoritative concept page for `C09 设计模式 - 术语表`. Content migrated from `crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md`.
+> **Summary**: Canonical glossary for Rust design patterns: GoF classifications, Rust idioms, concurrency/async terms, and cross-links to authoritative concept pages.
 >
 > **权威来源**: 本页为 `Design Patterns Glossary` 的权威概念页；crate 文档仅保留导航 stub。
 
 # C09 设计模式 - 术语表
 
 > **文档类型**: Tier 1 - 基础层
-> **文档定位**: 设计模式核心术语快速参考，快速入门必备
-> **项目状态**: ✅ 完整完成
-> **相关文档**: [项目概览](/crates/c09_design_pattern/docs/tier_01_foundations/01_project_overview.md) | [主索引导航](/crates/c09_design_pattern/docs/tier_01_foundations/02_navigation.md) | [常见问题](/crates/c09_design_pattern/docs/tier_01_foundations/04_faq.md) | [完整术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md)
+> **文档定位**: 设计模式核心术语快速参考
+> **项目状态**: ✅ 活跃维护
+> **相关文档**: [Design Patterns](02_patterns.md) · [Pattern Implementation Comparison](36_pattern_implementation_comparison.md) · [Pattern Selection Best Practices](37_pattern_selection_best_practices.md) · [Architecture Patterns](35_architecture_patterns.md) · [Engineering and Production Patterns](82_engineering_and_production_patterns.md) · [Frontier Research and Innovative Patterns](39_frontier_research_and_innovative_patterns.md) · [Algorithm Engineering Practice](../11_domain_applications/76_algorithm_engineering_practice.md)
 
-**最后更新**: 2025-12-25
+**最后更新**: 2026-07-09
 **适用版本**: Rust 1.96.1+ (Edition 2024)
 **文档类型**: 📚 基础参考
 
 ---
 
-## 📋 目录
+## 快速索引
 
-- [C09 设计模式 - 术语表](#c09-设计模式---术语表)
-  - [📋 目录](#-目录)
-  - [📊 快速索引](#-快速索引)
-  - [🎯 核心概念](#-核心概念)
-    - [设计模式基础](#设计模式基础)
-      - [设计模式 (Design Pattern)](#设计模式-design-pattern)
-      - [GoF (Gang of Four)](#gof-gang-of-four)
-    - [GoF 23种模式分类](#gof-23种模式分类)
-      - [创建型模式 (5种)](#创建型模式-5种)
-      - [结构型模式 (7种)](#结构型模式-7种)
-      - [行为型模式 (11种)](#行为型模式-11种)
-    - [Rust 特有概念](#rust-特有概念)
-      - [Trait 对象](#trait-对象)
-      - [零成本抽象 (Zero-Cost Abstraction)](#零成本抽象-zero-cost-abstraction)
-      - [Typestate 模式](#typestate-模式)
-      - [GATs (Generic Associated Types)](#gats-generic-associated-types)
-      - [OnceLock](#oncelock)
-    - [并发与异步](#并发与异步)
-      - [Actor 模式](#actor-模式)
-      - [Reactor 模式](#reactor-模式)
-      - [CSP (Communicating Sequential Processes)](#csp-communicating-sequential-processes)
-      - [Future](#future)
-      - [async/await](#asyncawait)
-  - [📚 完整术语表](#-完整术语表)
-  - [🔗 相关资源](#-相关资源)
-    - [内部文档](#内部文档)
-  - [**文档状态**: ✅ 活跃维护](#文档状态--活跃维护)
-
----
-
-## 📊 快速索引
-
-**按字母顺序**:
-
-[A](#actor-模式) | [B](#建造者模式-builder) | [C](#csp-communicating-sequential-processes) | [D](#设计模式-design-pattern) | [F](#future) | [G](#gof-gang-of-four) | [O](#观察者模式-observer) | [R](#reactor-模式) | [S](#单例模式-singleton) | [T](#trait-对象) | [Z](#零成本抽象-zero-cost-abstraction)
+**按字母顺序**: [A](#actor-模式) · [B](#builder-模式) · [C](#command-模式) · [D](#dependency-injection) · [F](#factory-模式) · [G](#gof-gang-of-four) · [N](#newtype-模式) · [O](#observer-模式) · [R](#reactor-模式) · [S](#singleton-模式) · [T](#trait-对象) · [V](#visitor-模式)
 
 **按类别跳转**:
 
 - [设计模式基础](#设计模式基础)
-- [GoF 23种模式分类](#gof-23种模式分类)
+- [GoF 23 种模式](#gof-23-种模式)
 - [Rust 特有概念](#rust-特有概念)
 - [并发与异步](#并发与异步)
 
 ---
 
-## 🎯 核心概念
+## 设计模式基础
 
-### 设计模式基础
+### 设计模式 (Design Pattern)
 
-#### 设计模式 (Design Pattern)
+在软件设计中反复出现的问题的通用、可复用解决方案。Rust 中的模式实现强调**编译期保证**与**零成本抽象**。
 
-**定义**: 在软件设计中反复出现的问题的通用解决方案，是一套被反复使用、经过分类的代码设计经验总结。
+- **创建型**: 对象/值创建机制（5 种）
+- **结构型**: 对象组合方式（7 种）
+- **行为型**: 对象间通信方式（11 种）
 
-**分类**:
+### GoF (Gang of Four)
 
-- **创建型**: 对象创建机制（5种）
-- **结构型**: 对象组合方式（7种）
-- **行为型**: 对象间通信方式（11种）
-
-**Rust 特点**: 需要考虑所有权、借用、生命周期
-
-**相关**: [项目概览](/crates/c09_design_pattern/docs/tier_01_foundations/01_project_overview.md) | [](tier_01_foundations/03_glossary.md完整术语表)
+《设计模式：可复用面向对象软件的基础》的四位作者，书中总结了 23 种经典设计模式。Rust 没有继承，因此通常用 **trait + enum + 泛型** 实现等价结构。
 
 ---
 
-#### GoF (Gang of Four)
+## GoF 23 种模式
 
-**定义**: 《设计模式：可复用面向对象软件的基础》一书的四位作者，书中总结了 23 种经典设计模式。
-
-**23种模式**:
-
-- **创建型 (5)**: 单例、工厂方法、抽象工厂、建造者、原型
-- **结构型 (7)**: 适配器、桥接、组合、装饰器、外观、享元、代理
-- **行为型 (11)**: 责任链、命令、解释器、迭代器、中介者、备忘录、观察者、状态、策略、模板方法、访问者
-
-**相关**: [项目概览](/crates/c09_design_pattern/docs/tier_01_foundations/01_project_overview.md) | [](tier_01_foundations/03_glossary.md完整术语表)
+| 分类 | 模式 | Rust 实现关键词 | 权威页 |
+|:---|:---|:---|:---|
+| **创建型** | Singleton | `OnceLock` / `LazyLock` | [Design Patterns](02_patterns.md) |
+| | Factory | `match` + enum / `dyn Trait` | [Design Patterns](02_patterns.md) |
+| | Abstract Factory | trait 组合 + 注册表 | [Design Patterns](02_patterns.md) |
+| | Builder | Typestate / 消费型链式调用 | [Pattern Implementation Comparison](36_pattern_implementation_comparison.md) |
+| | Prototype | `Clone` trait | [Design Patterns](02_patterns.md) |
+| **结构型** | Adapter | `From` / `Deref` / wrapper | [Design Patterns](02_patterns.md) |
+| | Bridge | trait + 组合替代继承 | [Architecture Patterns](35_architecture_patterns.md) |
+| | Composite | enum + 递归结构 | [Design Patterns](02_patterns.md) |
+| | Decorator | 泛型包装 / `Deref` | [Formal Design Pattern Theory](38_formal_design_pattern_theory.md) |
+| | Facade | 模块级 API 封装 | [System Design Principles](05_system_design_principles.md) |
+| | Flyweight | `Arc` + 共享不可变数据 | [Pattern Implementation Comparison](36_pattern_implementation_comparison.md) |
+| | Proxy | trait object / 生命周期守卫 | [Design Patterns](02_patterns.md) |
+| **行为型** | Observer | `Weak<dyn Fn>` / broadcast channel | [Design Patterns](02_patterns.md) |
+| | Strategy | 泛型单态化 / `dyn Trait` | [Pattern Implementation Comparison](36_pattern_implementation_comparison.md) |
+| | State | enum + `match` / Typestate | [Design Patterns](02_patterns.md) |
+| | Command | trait + `Vec<Box<dyn Command>>` | [Design Patterns](02_patterns.md) |
+| | Chain of Responsibility | `Iterator` + `and_then` | [Design Patterns](02_patterns.md) |
+| | Iterator | `Iterator` trait / GATs | [Formal Design Pattern Theory](38_formal_design_pattern_theory.md) |
+| | Template Method | trait 默认实现 | [Design Patterns](02_patterns.md) |
+| | Visitor | trait + enum `accept` | [Design Patterns](02_patterns.md) |
+| | Mediator | 消息通道 / Actor | [Microservice Patterns](31_microservice_patterns.md) |
+| | Memento | `Clone` + 序列化快照 | [Design Patterns](02_patterns.md) |
+| | Interpreter | 递归下降 / enum AST | [Design Patterns](02_patterns.md) |
 
 ---
 
-### GoF 23种模式分类
+## Rust 特有概念
 
-#### 创建型模式 (5种)
+### Trait 对象
 
-**单例模式 (Singleton)**: 确保一个类只有一个实例，并提供全局访问点。
+运行时多态机制，通过 `dyn Trait` 实现动态分派。相比泛型静态分派有虚函数开销，但支持异构集合。
 
-**Rust 实现**: `OnceLock`, `LazyLock` (Rust 1.96.1+)
+```rust
+pub trait Greeter {
+    fn greet(&self) -> &'static str;
+}
+
+pub fn greet_all(greeters: &[&dyn Greeter]) {
+    for g in greeters {
+        println!("{}", g.greet());
+    }
+}
+```
+
+### Typestate 模式
+
+使用类型系统在编译时保证状态转换合法，零运行时开销。
+
+```rust
+use std::marker::PhantomData;
+
+pub struct Unverified;
+pub struct Verified;
+
+pub struct Email<State> {
+    address: String,
+    _state: PhantomData<State>,
+}
+
+impl Email<Unverified> {
+    pub fn new(address: &str) -> Self {
+        Self { address: address.to_string(), _state: PhantomData }
+    }
+
+    pub fn verify(self) -> Result<Email<Verified>, &'static str> {
+        if self.address.contains('@') {
+            Ok(Email { address: self.address, _state: PhantomData })
+        } else {
+            Err("invalid email")
+        }
+    }
+}
+
+impl Email<Verified> {
+    pub fn send(&self) {
+        println!("sending to {}", self.address);
+    }
+}
+```
+
+### 零成本抽象 (Zero-Cost Abstraction)
+
+抽象不引入运行时开销；泛型单态化、迭代器链、`const` 计算均遵循此原则。详见 [零成本抽象](../../01_foundation/00_start/06_zero_cost_abstractions.md)。
+
+### OnceLock / LazyLock
+
+标准库提供的线程安全单次初始化类型，常用来实现 Singleton 模式。
 
 ```rust
 use std::sync::OnceLock;
 
-static INSTANCE: OnceLock<Config> = OnceLock::new();
+pub struct Config {
+    pub timeout_ms: u64,
+}
 
-fn get_instance() -> &'static Config {
-    INSTANCE.get_or_init(|| Config::new())
+static CONFIG: OnceLock<Config> = OnceLock::new();
+
+pub fn config() -> &'static Config {
+    CONFIG.get_or_init(|| Config { timeout_ms: 1000 })
 }
 ```
 
-**工厂模式 (Factory)**: 对象创建接口，封装对象创建逻辑。
-
-**建造者模式 (Builder)**: 复杂对象构建，使用 Typestate 模式保证完整性。
-
-**原型模式 (Prototype)**: 对象克隆，使用 `Clone` trait。
-
-**抽象工厂模式 (Abstract Factory)**: 创建相关对象族。
-
 ---
 
-#### 结构型模式 (7种)
+## 并发与异步
 
-**适配器模式 (Adapter)**: 接口转换，使不兼容的接口能够协同工作。
+### Actor 模式
 
-**装饰器模式 (Decorator)**: 动态添加功能，零成本包装。
+并发计算模型：每个 Actor 独立处理邮箱消息，无共享状态。Rust 中可用 `tokio::mpsc` 或 `actix` 实现。
 
-**代理模式 (Proxy)**: 控制访问，延迟加载。
+### Reactor 模式
 
-**外观模式 (Facade)**: 简化接口，封装子系统。
+事件驱动的并发模型，通过事件循环和多路复用处理 I/O。Tokio 运行时基于此模式。
 
-**桥接模式 (Bridge)**: 抽象与实现分离。
+### CSP (Communicating Sequential Processes)
 
-**组合模式 (Composite)**: 树形结构，递归枚举。
+通过通道通信的并发模型。Rust 提供 `std::sync::mpsc`、`crossbeam` 和 `tokio::sync::mpsc`。
 
-**享元模式 (Flyweight)**: 共享对象节省内存，`Arc` + 内存池。
+### Future / async/await
 
----
-
-#### 行为型模式 (11种)
-
-**观察者模式 (Observer)**: 事件驱动，一对多依赖关系。
-
-**策略模式 (Strategy)**: 算法切换，Trait对象或泛型。
-
-**状态模式 (State)**: 状态机，Typestate 模式。
-
-**命令模式 (Command)**: 请求封装，闭包或 Trait。
-
-**责任链模式 (Chain of Responsibility)**: 请求链式处理。
-
-**迭代器模式 (Iterator)**: 遍历集合，`Iterator` trait（标准库）。
-
-**模板方法模式 (Template Method)**: 算法框架，Trait + 默认实现。
-
-**访问者模式 (Visitor)**: 操作与结构分离。
-
-**中介者模式 (Mediator)**: 对象间交互，消息通道。
-
-**备忘录模式 (Memento)**: 状态保存，Clone + 序列化。
-
-**解释器模式 (Interpreter)**: 语言解释，递归下降。
-
----
-
-### Rust 特有概念
-
-#### Trait 对象
-
-**定义**: 运行时多态机制，通过 `dyn Trait` 实现动态分派。
-
-**特点**:
-
-- 运行时开销（虚函数表）
-- 类型擦除
-- 灵活但有性能代价
-
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表)
-
----
-
-#### 零成本抽象 (Zero-Cost Abstraction)
-
-**定义**: 抽象不会带来运行时开销，编译后与手写的底层代码性能相同。
-
-**Rust 实现**:
-
-- 泛型单态化
-- 内联优化
-- 编译时计算
-
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表)
-
----
-
-#### Typestate 模式
-
-**定义**: 使用 Rust 的类型系统在编译时保证状态转换的正确性。
-
-**特点**:
-
-- 编译时验证
-- 零运行时开销
-- 防止非法状态转换
-
-**应用**: Builder 模式、状态机
-
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表)
-
----
-
-#### GATs (Generic Associated Types)
-
-**定义**: 泛型关联类型，允许关联类型带有泛型参数。
-
-**应用**: 观察者模式的借用视图
-
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表)
-
----
-
-#### OnceLock
-
-**定义**: Rust 1.96.1+ 标准库提供的线程安全的单次初始化类型（自 Rust 1.90 引入）。
-
-**用途**: 全局单例、延迟初始化
-
-**vs lazy_static**: 标准库支持，无需外部依赖
-
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表)
-
----
-
-### 并发与异步
-
-#### Actor 模式
-
-**定义**: 并发计算模型，每个 Actor 是独立的计算单元，通过消息传递通信。
-
-**特点**:
-
-- 消息传递，无共享状态
-- 每个 Actor 有独立的邮箱
-- 异步消息处理
-
-**Rust 实现**: `tokio::mpsc`, `actix`
-
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [Actor/Reactor分析](/crates/c09_design_pattern/docs/actor_reactor_patterns.md)
-
----
-
-#### Reactor 模式
-
-**定义**: 事件驱动的并发模型，通过事件循环和回调处理多个事件源。
-
-**特点**:
-
-- 事件多路复用（epoll/kqueue）
-- 单线程高并发
-- 回调驱动
-
-**Rust 中**: Tokio 运行时基于 Reactor 模式
-
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [Actor/Reactor分析](/crates/c09_design_pattern/docs/actor_reactor_patterns.md)
-
----
-
-#### CSP (Communicating Sequential Processes)
-
-**定义**: 并发编程模型，通过通道（Channel）进行通信。
-
-**特点**:
-
-- 进程通过通道通信
-- 不共享内存
-- Golang 的并发模型
-
-**Rust 实现**: `std::sync::mpsc`, `crossbeam`
-
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [CSP vs Async](/crates/c09_design_pattern/docs/csp_vs_async_analysis.md)
-
----
-
-#### Future
-
-**定义**: 表示一个异步计算，可能尚未完成。
-
-**Rust 中**: `Future` trait
+`Future` 表示尚未完成的异步计算；`async/await` 是编译器状态机语法糖。
 
 ```rust
-pub trait Future {
+use std::future::Future;
+use std::pin::Pin;
+use std::task::{Context, Poll};
+
+pub trait SimpleFuture {
     type Output;
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
 ```
 
-**状态机**: async/await 编译为状态机
+---
 
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表)
+## 术语速查表
+
+| 术语 | 一句话定义 | 在 Rust 中的典型实现 |
+|:---|:---|:---|
+| **RAII** | 资源获取即初始化，离开作用域自动释放 | `Drop` trait |
+| **Newtype** | 用单字段结构体区分同底层类型的不同语义 | `struct Meters(u64)` |
+| **Deref 多态** | 通过自定义解引用让类型表现得像另一种类型 | `Deref` / `DerefMut` |
+| **Capability** | 将权限编码进类型，调用时需提供能力证明 | `Capability<P>` + PhantomData |
+| **Session Type** | 在类型层面保证协议状态转换合法 | Typestate + PhantomData |
+| **Backpressure** | 防止生产者压垮消费者的流量控制 | `tokio::sync::Semaphore` / bounded channel |
+
+## 模式选择决策树
+
+```text
+面临设计问题
+│
+├─ 需要创建复杂对象？
+│  ├─ 需要分步验证必填字段 → Builder / Typestate
+│  └─ 需要运行时选择具体类型 → Factory / Abstract Factory
+│
+├─ 需要为类型添加行为或包装？
+│  ├─ 不改变接口语义 → Decorator / Adapter
+│  └─ 控制访问或延迟加载 → Proxy
+│
+├─ 需要运行时切换算法？
+│  ├─ 性能关键 → 泛型 Strategy
+│  └─ 需要异构集合 → dyn Trait Strategy
+│
+├─ 状态转换容易遗漏？
+│  └─ enum + match / Typestate State Machine
+│
+└─ 需要一对多通知？
+   ├─ 同步 → Observer + Weak
+   └─ 异步 → broadcast channel / event-listener
+```
 
 ---
 
-#### async/await
-
-**定义**: Rust 的异步编程语法糖，使异步代码看起来像同步代码。
-
-**工作原理**: 编译器将 async 函数转换为状态机
-
-**相关**: [](tier_01_foundations/03_glossary.md完整术语表) | [异步等价理论](/crates/c09_design_pattern/docs/async_sync_equivalence_theory.md)
-
----
-
-## 📚 完整术语表
-
-本文档提供了核心术语的快速参考。如需查看完整的术语表（包含形式化理论、高级概念等），请参阅：
-
-- **[完整术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md)** - 包含所有术语的详细定义和示例
-
-**完整术语表包含**:
-
-- ✅ 设计模式基础（本文档已覆盖）
-- ✅ GoF 23种模式（本文档已覆盖）
-- ✅ Rust 特性（本文档已覆盖）
-- ✅ 并发与异步（本文档已覆盖）
-- 📚 形式化理论（CPS 变换、Monad、状态机、语义等价、Pin）
-- 📚 高级概念（RPITIT、类型擦除、Extension Trait）
-
----
-
-## 🔗 相关资源
-
-### 内部文档
-
-**Tier 1 基础**:
-
-- [项目概览](/crates/c09_design_pattern/docs/tier_01_foundations/01_project_overview.md) - 模块介绍、学习路径
-- [主索引导航](/crates/c09_design_pattern/docs/tier_01_foundations/02_navigation.md) - 完整导航系统
-- [常见问题](/crates/c09_design_pattern/docs/tier_01_foundations/04_faq.md) - FAQ 解答
-
-**核心资源**:
-
-- [完整术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md) - 所有术语详细定义
-- [FAQ](/crates/c09_design_pattern/docs/tier_01_foundations/04_faq.md) - 常见问题解答
-- [综合指南](/crates/c09_design_pattern/docs/rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md) - 完整模式指南
-
-**深度理论**:
-
-- [形式化理论体系](/crates/c09_design_pattern/docs/tier_04_advanced/README.md) - 高级主题
-- [Actor/Reactor模式](/crates/c09_design_pattern/docs/actor_reactor_patterns.md) - 并发模式深入
-- [CSP vs Async](/crates/c09_design_pattern/docs/csp_vs_async_analysis.md) - 并发模型对比
-
----
-
-**下一步**: 阅读 [常见问题](/crates/c09_design_pattern/docs/tier_01_foundations/04_faq.md) 或 [主索引导航](/crates/c09_design_pattern/docs/tier_01_foundations/02_navigation.md) 继续学习！
-
----
-
-**文档维护**: Documentation Team
-**创建日期**: 2025-12-25
-**最后更新**: 2025-12-25
-**适用版本**: Rust 1.96.1+
-**文档状态**: ✅ 活跃维护
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-07-09 将内部链接迁移至 `concept/` 权威页，补全 Rust 代码示例、术语表与决策树
 
-**文档版本**: 1.1
+**文档版本**: 2.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
-
----
-
-> **向下引用**: 参见 [03_paradigm_matrix](../../05_comparative/00_paradigms/03_paradigm_matrix.md)
+**状态**: ✅ 权威页（canonical）

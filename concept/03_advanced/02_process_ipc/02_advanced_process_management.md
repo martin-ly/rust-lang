@@ -1,5 +1,6 @@
 > **EN**: Advanced Process Management in Rust
 > **Summary**: Enterprise-grade process patterns in Rust: process pools, load balancing, health checks, resource quotas, and fault recovery, built on `std::process` and `tokio::process`.
+> **Rust Version**: 1.96.1+
 
 # Rust 高级进程管理
 
@@ -215,3 +216,44 @@ Bully 算法等经典选主协议可用于进程组中的 leader 选举；leader
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/process/) · [Tokio Process](https://docs.rs/tokio/latest/tokio/process/) · [nix crate](https://docs.rs/nix/latest/nix/sys/resource/)
+
+---
+
+## 9. 进程池与故障恢复流程（Mermaid）
+
+```mermaid
+flowchart TD
+    Task["任务到达"] --> Acquire["获取信号量 permit"]
+    Acquire --> Borrow{池中是否有<br/>健康进程?}
+    Borrow -->|是| Reuse["复用已有进程"]
+    Borrow -->|否| Spawn["新建子进程"]
+    Reuse --> Execute["执行任务"]
+    Spawn --> Execute
+    Execute --> Health{健康检查<br/>是否通过?}
+    Health -->|是| Return["归还进程到池"]
+    Health -->|否| Recover{"可恢复错误?"}
+    Recover -->|是| Retry["按退避策略重启"]
+    Recover -->|否| Drain["丢弃并告警"]
+    Retry --> Acquire
+    Return --> Release["释放 permit"]
+```
+
+---
+
+## 10. 可运行示例：健康检查循环
+
+```rust,ignore
+use tokio::process::Command;
+use tokio::time::{interval, Duration};
+
+async fn health_check_loop(program: &str) {
+    let mut tick = interval(Duration::from_secs(5));
+    loop {
+        tick.tick().await;
+        match Command::new(program).output().await {
+            Ok(out) if out.status.success() => println!("{} is healthy", program),
+            _ => println!("{} is unhealthy", program),
+        }
+    }
+}
+```

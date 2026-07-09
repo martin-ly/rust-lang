@@ -3832,16 +3832,60 @@
       "layer": "L0",
       "title": "场景决策树图谱（Scenario Decision Tree Atlas）",
       "positioning": "",
-      "line_count": 25,
+      "line_count": 136,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
-      "cross_references": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../01_foundation/08_error_handling/13_panic_and_abort.md",
+        "../../01_foundation/08_error_handling/32_error_handling_basics.md",
+        "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/00_traits/39_dispatch_mechanisms.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../02_intermediate/02_memory_management/03_memory_management.md",
+        "../../02_intermediate/02_memory_management/08_interior_mutability.md",
+        "../../02_intermediate/02_memory_management/11_cow_and_borrowed.md",
+        "../../02_intermediate/02_memory_management/12_smart_pointers.md",
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
+        "../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/00_concurrency/10_concurrency_patterns.md",
+        "../../03_advanced/00_concurrency/11_atomics_and_memory_ordering.md",
+        "../../03_advanced/00_concurrency/16_lock_free.md",
+        "../../03_advanced/01_async/02_async.md",
+        "../../03_advanced/01_async/06_pin_unpin.md",
+        "../../03_advanced/01_async/24_async_closures.md",
+        "../../03_advanced/01_async/26_async_patterns.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
+        "../../03_advanced/02_unsafe/12_unsafe_rust_patterns.md",
+        "../../03_advanced/03_proc_macros/07_proc_macro.md",
+        "../../03_advanced/04_ffi/05_rust_ffi.md",
+        "../../03_advanced/04_ffi/09_ffi_advanced.md",
+        "../../03_advanced/04_ffi/27_linkage.md",
+        "../../03_advanced/06_low_level_patterns/14_custom_allocators.md",
+        "../../03_advanced/06_low_level_patterns/15_zero_copy_parsing.md",
+        "../../03_advanced/06_low_level_patterns/17_type_erasure.md",
+        "../../04_formal/05_rustc_internals/38_application_binary_interface.md",
+        "../../05_comparative/01_systems_languages/18_cpp_abi_object_model.md",
+        "../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md",
+        "../../06_ecosystem/01_cargo/60_cargo_dependency_resolution.md",
+        "../../06_ecosystem/01_cargo/78_cargo_workspaces.md",
+        "../../06_ecosystem/01_cargo/80_cargo_getting_started.md",
+        "../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md",
+        "../../07_future/03_preview_features/46_cargo_semver_checks_preview.md",
+        "01_concept_definition_atlas.md",
+        "02_attribute_relationship_atlas.md",
+        "06_inter_layer_mapping_atlas.md",
+        "09_reasoning_judgment_tree_atlas.md"
+      ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "mermaid_blocks": 3,
+      "matrix_rows": 27,
       "pre_post": {
         "pre": [],
         "post": []
@@ -3854,16 +3898,61 @@
       "layer": "L0",
       "title": "示例与反例图谱（Example and Counterexample Atlas）",
       "positioning": "",
-      "line_count": 25,
+      "line_count": 125,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
-      "cross_references": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../01_foundation/02_type_system/04_type_system.md",
+        "../../01_foundation/03_values_and_references/05_reference_semantics.md",
+        "../../01_foundation/04_control_flow/07_control_flow.md",
+        "../../01_foundation/05_collections/08_collections.md",
+        "../../01_foundation/06_strings_and_text/09_strings_and_text.md",
+        "../../01_foundation/07_modules_and_items/11_modules_and_paths.md",
+        "../../01_foundation/08_error_handling/13_panic_and_abort.md",
+        "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../02_intermediate/02_memory_management/08_interior_mutability.md",
+        "../../02_intermediate/02_memory_management/12_smart_pointers.md",
+        "../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md",
+        "../../02_intermediate/04_types_and_conversions/07_closure_types.md",
+        "../../02_intermediate/04_types_and_conversions/14_newtype_and_wrapper.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md",
+        "../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/00_concurrency/11_atomics_and_memory_ordering.md",
+        "../../03_advanced/00_concurrency/16_lock_free.md",
+        "../../03_advanced/01_async/02_async.md",
+        "../../03_advanced/01_async/06_pin_unpin.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
+        "../../03_advanced/03_proc_macros/07_proc_macro.md",
+        "../../03_advanced/04_ffi/05_rust_ffi.md",
+        "../../04_formal/01_ownership_logic/01_linear_logic.md",
+        "../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md",
+        "../../04_formal/02_separation_logic/04_rustbelt.md",
+        "../../04_formal/02_separation_logic/11_separation_logic.md",
+        "../../04_formal/04_model_checking/31_miri.md",
+        "../../04_formal/04_model_checking/32_kani.md",
+        "../../05_comparative/00_paradigms/05_execution_model_isomorphism.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
+        "../../06_ecosystem/02_core_crates/03_core_crates.md",
+        "../../06_ecosystem/03_design_patterns/02_patterns.md",
+        "../../07_future/01_edition_roadmap/19_rust_edition_preview.md",
+        "01_concept_definition_atlas.md",
+        "03_scenario_decision_tree_atlas.md",
+        "05_logical_reasoning_atlas.md",
+        "09_reasoning_judgment_tree_atlas.md"
+      ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "mermaid_blocks": 1,
+      "matrix_rows": 52,
       "pre_post": {
         "pre": [],
         "post": []
@@ -3876,21 +3965,106 @@
       "layer": "L0",
       "title": "逻辑推理图谱（Logical Reasoning Atlas）",
       "positioning": "",
-      "line_count": 25,
+      "line_count": 116,
       "theorem_chains": [
         {
-          "text": "> **Summary**: 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。 Theorem chains (⟹/⟸), inference rules, proof/verification paths, and formal correspondences.",
+          "text": "> **Summary**: A navigational index of theorem chains, inference rules, proof/verification paths, and formal correspondences across the Rust concept hierarchy. 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。",
           "type": "paragraph"
+        },
+        {
+          "text": "| 单一所有权 ⟹ 无 use-after-free | ⟹ | 每个值有唯一 owner，drop 时释放 | [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 所有权转移 ⟹ moved-from 状态不可再用 | ⟹ | 赋值/传参会 move 非 `Copy` 值 | [Move Semantics](../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 借用 ⟹ 别名互斥 | ⟹ | `&T` 与 `&mut T` 不能共存 | [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 生命周期 ⟹ 引用不悬垂 | ⟹ | 编译期证明被引用数据比引用活得更长 | [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 借用检查可判定性 ⟹ NLL/Polonius 演进 | ⟹ | 三代 borrow checker 的判定问题 | [Borrow Checking Decidability](../../04_formal/01_ownership_logic/28_borrow_checking_decidability.md) |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 类型良构 ⟹ trait bound 可满足 | ⟹ | 类型参数必须实现所需 trait | [Traits](../../02_intermediate/00_traits/01_traits.md), [Generics](../../02_intermediate/01_generics/02_generics.md) |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 泛型单态化 ⟹ 零成本抽象 | ⟹ | 编译期展开为具体类型 | [Generics](../../02_intermediate/01_generics/02_generics.md) |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 子类型/变型 ⟹ 协变/逆变安全 | ⟹ | 生命周期与泛型的变型规则 | [Subtype Variance](../../04_formal/00_type_theory/06_subtype_variance.md) |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 类型推断 ⟹ 约束求解 | ⟹ | `typeck` + trait solver + region constraints | [Type Checking and Inference](../../04_formal/00_type_theory/27_type_checking_and_inference.md) |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 类型推断复杂度 ⟹ PSPACE | ⟹ | HM 立方时间 vs Rust 高阶多态 | [Type Inference Complexity](../../04_formal/00_type_theory/29_type_inference_complexity.md) |",
+          "type": "table_row"
+        },
+        {
+          "text": "| `Send` + `Sync` ⟹ 无线程数据竞争 | ⟹ | 编译期通过 marker trait 保证 | [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) |",
+          "type": "table_row"
+        },
+        {
+          "text": "| `Mutex<T>` / `RwLock<T>` ⟹ 内部可变性 + 互斥 | ⟹ | 运行时保证单一写者 | [Interior Mutability](../../02_intermediate/02_memory_management/08_interior_mutability.md) |",
+          "type": "table_row"
+        },
+        {
+          "text": "| Atomic + Memory Ordering ⟹ happens-before | ⟹ | 无锁算法的同步基础 | [Atomics and Memory Ordering](../../03_advanced/00_concurrency/11_atomics_and_memory_ordering.md) |",
+          "type": "table_row"
+        },
+        {
+          "text": "| `Pin<T>` + `Unpin` ⟹ 自引用类型安全移动 | ⟹ | 固定位置保证 | [Pin and Unpin](../../03_advanced/01_async/06_pin_unpin.md) |",
+          "type": "table_row"
         }
       ],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
-      "cross_references": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../02_intermediate/02_memory_management/08_interior_mutability.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/00_concurrency/11_atomics_and_memory_ordering.md",
+        "../../03_advanced/01_async/06_pin_unpin.md",
+        "../../04_formal/00_type_theory/02_type_theory.md",
+        "../../04_formal/00_type_theory/06_subtype_variance.md",
+        "../../04_formal/00_type_theory/08_type_inference.md",
+        "../../04_formal/00_type_theory/27_type_checking_and_inference.md",
+        "../../04_formal/00_type_theory/29_type_inference_complexity.md",
+        "../../04_formal/01_ownership_logic/01_linear_logic.md",
+        "../../04_formal/01_ownership_logic/03_ownership_formal.md",
+        "../../04_formal/01_ownership_logic/28_borrow_checking_decidability.md",
+        "../../04_formal/02_separation_logic/04_rustbelt.md",
+        "../../04_formal/02_separation_logic/11_separation_logic.md",
+        "../../04_formal/02_separation_logic/33_safety_tags_in_formal.md",
+        "../../04_formal/03_operational_semantics/12_denotational_semantics.md",
+        "../../04_formal/03_operational_semantics/15_hoare_logic.md",
+        "../../04_formal/03_operational_semantics/17_operational_semantics.md",
+        "01_concept_definition_atlas.md",
+        "03_scenario_decision_tree_atlas.md",
+        "06_inter_layer_mapping_atlas.md",
+        "09_reasoning_judgment_tree_atlas.md"
+      ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "mermaid_blocks": 3,
+      "matrix_rows": 23,
       "pre_post": {
         "pre": [],
         "post": []
@@ -3903,40 +4077,47 @@
       "layer": "L0",
       "title": "层间映射图谱（Inter-Layer Mapping Atlas）",
       "positioning": "",
-      "line_count": 98,
+      "line_count": 112,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../01_foundation/00_start/00_start.md",
         "../../01_foundation/00_start/06_zero_cost_abstractions.md",
-        "../../01_foundation/00_start/15_closure_basics.md",
-        "../../01_foundation/00_start/21_effects_and_purity.md",
-        "../../01_foundation/00_start/34_pl_prerequisites.md",
-        "../../01_foundation/00_start/37_operators_and_symbols.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
-        "../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md",
-        "../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md",
-        "../../01_foundation/02_type_system/14_coercion_and_casting.md",
-        "../../01_foundation/02_type_system/22_data_abstraction_spectrum.md",
-        "../../01_foundation/02_type_system/31_never_type.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../01_foundation/02_type_system/04_type_system.md",
         "../../01_foundation/03_values_and_references/05_reference_semantics.md",
-        "../../01_foundation/03_values_and_references/20_variable_model.md",
         "../../01_foundation/04_control_flow/07_control_flow.md",
-        "../../01_foundation/04_control_flow/40_patterns.md",
-        "../../01_foundation/04_control_flow/41_statements_and_expressions.md",
-        "../../01_foundation/05_collections/08_collections.md",
-        "../../01_foundation/05_collections/17_collections_advanced.md",
-        "../../01_foundation/06_strings_and_text/09_strings_and_text.md",
-        "../../01_foundation/06_strings_and_text/18_strings_and_encoding.md",
-        "../../01_foundation/07_modules_and_items/11_modules_and_paths.md",
-        "../../01_foundation/07_modules_and_items/35_preludes.md",
-        "../../01_foundation/07_modules_and_items/38_crates_and_source_files.md",
-        "../../01_foundation/07_modules_and_items/39_items.md",
-        "../../01_foundation/08_error_handling/13_panic_and_abort.md",
-        "../../01_foundation/08_error_handling/32_error_handling_basics.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
         "../../01_foundation/10_testing_basics/16_testing_basics.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../02_intermediate/02_memory_management/08_interior_mutability.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/00_concurrency/16_lock_free.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
+        "../../03_advanced/06_low_level_patterns/18_network_programming.md",
+        "../../04_formal/00_type_theory/02_type_theory.md",
+        "../../04_formal/02_separation_logic/04_rustbelt.md",
+        "../../04_formal/04_model_checking/31_miri.md",
+        "../../04_formal/05_rustc_internals/19_rustc_query_system.md",
+        "../../04_formal/05_rustc_internals/26_trait_solver_in_rustc.md",
+        "../../04_formal/05_rustc_internals/42_type_layout.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "../../06_ecosystem/00_toolchain/47_compiler_infrastructure.md",
+        "../../06_ecosystem/04_web_and_networking/27_web_frameworks.md",
+        "../../06_ecosystem/05_systems_and_embedded/25_cli_development.md",
+        "../../06_ecosystem/05_systems_and_embedded/56_c_to_rust_translation.md",
+        "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
+        "../../07_future/00_version_tracking/05_rust_version_tracking.md",
+        "../../07_future/01_edition_roadmap/19_rust_edition_preview.md",
+        "../../07_future/03_preview_features/09_parallel_frontend_preview.md",
+        "../../07_future/03_preview_features/35_ferrocene_preview.md",
+        "../../07_future/04_research_and_experimental/03_evolution.md",
         "../00_framework/comprehensive_rust_mapping.md",
         "../00_framework/cpp_rust_engineering_roadmap.md",
         "../00_framework/pattern_semantic_space_index.md",
@@ -3944,12 +4125,14 @@
         "../04_navigation/career_landscape.md",
         "../04_navigation/inter_layer_map.md",
         "../04_navigation/intra_layer_model_map.md",
+        "03_scenario_decision_tree_atlas.md",
+        "07_intra_layer_mapping_atlas.md",
         "kg_ontology_v2.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 70,
+      "mermaid_blocks": 1,
+      "matrix_rows": 54,
       "pre_post": {
         "pre": [],
         "post": []
@@ -5172,16 +5355,57 @@
       "layer": "L0",
       "title": "概念-权威来源对齐图谱（Concept-Source Alignment Atlas）",
       "positioning": "",
-      "line_count": 50,
+      "line_count": 138,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
-      "cross_references": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../01_foundation/02_type_system/04_type_system.md",
+        "../../01_foundation/05_collections/08_collections.md",
+        "../../01_foundation/06_strings_and_text/18_strings_and_encoding.md",
+        "../../01_foundation/07_modules_and_items/11_modules_and_paths.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../02_intermediate/02_memory_management/08_interior_mutability.md",
+        "../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md",
+        "../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/00_concurrency/11_atomics_and_memory_ordering.md",
+        "../../03_advanced/01_async/02_async.md",
+        "../../03_advanced/01_async/06_pin_unpin.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
+        "../../03_advanced/02_unsafe/29_memory_model.md",
+        "../../03_advanced/04_ffi/05_rust_ffi.md",
+        "../../04_formal/00_type_theory/02_type_theory.md",
+        "../../04_formal/00_type_theory/29_type_inference_complexity.md",
+        "../../04_formal/01_ownership_logic/01_linear_logic.md",
+        "../../04_formal/02_separation_logic/04_rustbelt.md",
+        "../../04_formal/03_operational_semantics/30_aeneas_symbolic_semantics.md",
+        "../../04_formal/04_model_checking/31_miri.md",
+        "../../04_formal/05_rustc_internals/48_statements_and_expressions_reference.md",
+        "../../04_formal/05_rustc_internals/51_names_reference.md",
+        "../../05_comparative/00_paradigms/05_execution_model_isomorphism.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md",
+        "../../06_ecosystem/01_cargo/78_cargo_workspaces.md",
+        "../../06_ecosystem/04_web_and_networking/38_network_protocols.md",
+        "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
+        "../../07_future/01_edition_roadmap/19_rust_edition_preview.md",
+        "../../07_future/03_preview_features/08_safety_tags_preview.md",
+        "../../07_future/03_preview_features/11_const_trait_impl_preview.md",
+        "../02_sources/topic_authority_alignment_map.md",
+        "../04_navigation/05_cross_reference_matrix.md",
+        "../placeholders/placeholder_generic.md"
+      ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 24,
+      "mermaid_blocks": 1,
+      "matrix_rows": 66,
       "pre_post": {
         "pre": [],
         "post": []
@@ -5194,16 +5418,32 @@
       "layer": "L0",
       "title": "推理判定树图谱（Reasoning Judgment Tree Atlas）",
       "positioning": "",
-      "line_count": 25,
+      "line_count": 147,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
-      "cross_references": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../02_intermediate/02_memory_management/08_interior_mutability.md",
+        "../../02_intermediate/02_memory_management/12_smart_pointers.md",
+        "../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/00_concurrency/10_concurrency_patterns.md",
+        "../../03_advanced/01_async/06_pin_unpin.md",
+        "../../04_formal/02_separation_logic/04_rustbelt.md",
+        "../../04_formal/04_model_checking/31_miri.md",
+        "../../04_formal/04_model_checking/32_kani.md",
+        "01_concept_definition_atlas.md",
+        "03_scenario_decision_tree_atlas.md",
+        "04_example_counterexample_atlas.md",
+        "05_logical_reasoning_atlas.md"
+      ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "mermaid_blocks": 5,
+      "matrix_rows": 13,
       "pre_post": {
         "pre": [],
         "post": []
@@ -5216,20 +5456,21 @@
       "layer": "L0",
       "title": "缺口与行动计划（Gap and Action Plan）",
       "positioning": "",
-      "line_count": 82,
+      "line_count": 116,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../../AGENTS.md",
         "../../01_foundation/00_start/00_start.md",
         "../../01_foundation/00_start/06_zero_cost_abstractions.md",
         "../../01_foundation/00_start/15_closure_basics.md",
         "../../01_foundation/00_start/34_pl_prerequisites.md",
         "../../01_foundation/00_start/36_keywords.md",
         "../../01_foundation/00_start/37_operators_and_symbols.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md",
-        "../../01_foundation/01_ownership_borrow_lifetime/28_ownership_inventories_brown_book.md",
         "../../01_foundation/02_type_system/10_numerics.md",
         "../../01_foundation/02_type_system/14_coercion_and_casting.md",
         "../../01_foundation/02_type_system/31_never_type.md",
@@ -5246,17 +5487,23 @@
         "../../01_foundation/08_error_handling/32_error_handling_basics.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
         "../../01_foundation/10_testing_basics/16_testing_basics.md",
-        "../../01_foundation/11_quizzes/24_quiz_type_system.md",
-        "../../01_foundation/11_quizzes/25_quiz_error_handling.md",
-        "../../01_foundation/11_quizzes/26_quiz_modules_testing.md",
-        "../../01_foundation/11_quizzes/27_quiz_closures_iterators.md",
-        "../../01_foundation/11_quizzes/29_quiz_pl_foundations.md",
-        "../../01_foundation/11_quizzes/33_quiz_ownership_borrowing.md"
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../03_advanced/01_async/02_async.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
+        "../../04_formal/00_type_theory/02_type_theory.md",
+        "../../04_formal/01_ownership_logic/01_linear_logic.md",
+        "../../07_future/00_version_tracking/05_rust_version_tracking.md",
+        "../00_framework/todos.md",
+        "../01_terminology/bilingual_template_v2.md",
+        "../03_audit/concept_consistency_audit_checklist.md",
+        "../03_audit/quality_dashboard_v2.md",
+        "../03_audit/template_deduplication_guide.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 38,
+      "mermaid_blocks": 1,
+      "matrix_rows": 50,
       "pre_post": {
         "pre": [],
         "post": []
@@ -24319,7 +24566,7 @@
       "layer": "L3",
       "title": "Rust 进程模型与生命周期",
       "positioning": "",
-      "line_count": 335,
+      "line_count": 366,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -24334,6 +24581,14 @@
           "lines": 15,
           "should_fail": false,
           "code_preview": "use std::io::{BufRead, BufReader}; use std::process::{Command, Stdio};  let mut ..."
+        },
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "use std::process::Command;  fn main() -> std::io::Result<()> {     let output = ..."
         }
       ],
       "sources": [],
@@ -24347,7 +24602,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 15,
       "pre_post": {
         "pre": [],
@@ -24361,7 +24616,7 @@
       "layer": "L3",
       "title": "Rust 高级进程管理",
       "positioning": "",
-      "line_count": 218,
+      "line_count": 260,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -24376,6 +24631,14 @@
           "lines": 16,
           "should_fail": false,
           "code_preview": "use std::cmp::Ordering; use std::collections::BinaryHeap; use std::time::{Instan..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use tokio::process::Command; use tokio::time::{interval, Duration};  async fn he..."
         }
       ],
       "sources": [],
@@ -24390,7 +24653,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 11,
       "pre_post": {
         "pre": [],
@@ -24404,7 +24667,7 @@
       "layer": "L3",
       "title": "Rust 异步进程管理",
       "positioning": "",
-      "line_count": 294,
+      "line_count": 333,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -24455,6 +24718,14 @@
           "lines": 16,
           "should_fail": false,
           "code_preview": "use std::cmp::Ordering; use std::collections::BinaryHeap;  #[derive(Eq, PartialE..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use tokio::process::Command; use tokio::time::{timeout, Duration};  async fn run..."
         }
       ],
       "sources": [],
@@ -24466,7 +24737,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 6,
       "pre_post": {
         "pre": [],
@@ -24480,7 +24751,7 @@
       "layer": "L3",
       "title": "Rust 跨平台进程管理",
       "positioning": "",
-      "line_count": 224,
+      "line_count": 261,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -24507,6 +24778,14 @@
           "lines": 4,
           "should_fail": false,
           "code_preview": "fn list_command() -> (&'static str, &'static [&'static str]) {     if cfg!(windo..."
+        },
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use std::path::PathBuf;  fn config_path() -> PathBuf {     let base = std::env::..."
         }
       ],
       "sources": [],
@@ -24518,7 +24797,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 8,
       "pre_post": {
         "pre": [],
@@ -24532,7 +24811,7 @@
       "layer": "L3",
       "title": "Rust 进程间通信机制（IPC）",
       "positioning": "",
-      "line_count": 185,
+      "line_count": 227,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -24565,6 +24844,14 @@
           "lines": 13,
           "should_fail": false,
           "code_preview": "use signal_hook::iterator::Signals;  fn handle_signals() -> Result<(), Box<dyn s..."
+        },
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "use std::io::Write; use std::process::{Command, Stdio};  fn main() -> std::io::R..."
         }
       ],
       "sources": [],
@@ -24578,7 +24865,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 15,
       "pre_post": {
         "pre": [],
@@ -24592,28 +24879,66 @@
       "layer": "L3",
       "title": "Rust 进程监控与诊断",
       "positioning": "",
-      "line_count": 93,
+      "line_count": 225,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
         {
-          "flags": [],
-          "lines": 14,
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
           "should_fail": false,
-          "code_preview": "fn is_alive(pid: u32) -> bool {     #[cfg(unix)]     {         use nix::sys::sig..."
+          "code_preview": "#[cfg(unix)] fn is_alive(pid: u32) -> bool {     use nix::sys::signal::{kill, Si..."
+        },
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 64,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashMap; use std::process::{Child, Command, Stdio}; use st..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use sysinfo::{System, SystemExt, ProcessExt};  fn print_top_memory_processes() {..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use std::fs;  fn read_proc_stat(pid: u32) -> Option<String> {     fs::read_to_st..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use tracing::{info, warn}; use std::process::Stdio; use tokio::process::Command;..."
         }
       ],
       "sources": [],
       "cross_references": [
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
+        "../00_concurrency/01_concurrency.md",
         "01_process_model_and_lifecycle.md",
         "02_advanced_process_management.md",
         "03_async_process_management.md",
-        "05_ipc_mechanisms.md"
+        "05_ipc_mechanisms.md",
+        "08_process_performance_engineering.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 5,
+      "mermaid_blocks": 1,
+      "matrix_rows": 10,
       "pre_post": {
         "pre": [],
         "post": []
@@ -24626,21 +24951,82 @@
       "layer": "L3",
       "title": "Rust 进程安全与沙箱",
       "positioning": "",
-      "line_count": 80,
+      "line_count": 189,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "#[cfg(unix)] use std::os::unix::process::CommandExt; use std::process::Command; ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_os = \"linux\")] fn drop_unneeded_caps() -> Result<(), caps::CapsErro..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "#[cfg(unix)] fn set_child_limits() -> Result<(), Box<dyn std::error::Error>> {  ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_os = \"linux\")] fn move_to_cgroup(pid: u32, cgroup: &str) -> std::io..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_os = \"linux\")] fn enter_new_namespace() -> Result<(), Box<dyn std::..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "#[cfg(unix)] fn chroot_to(path: &str) -> std::io::Result<()> {     std::env::set..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use seccompiler::{compile_from_json, BpfProgram};  fn load_seccomp_filter(json_p..."
+        }
+      ],
       "sources": [],
       "cross_references": [
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../06_ecosystem/07_security_and_cryptography/19_security_practices.md",
+        "../00_concurrency/01_concurrency.md",
         "01_process_model_and_lifecycle.md",
         "04_cross_platform_process_management.md",
-        "05_ipc_mechanisms.md"
+        "05_ipc_mechanisms.md",
+        "08_process_performance_engineering.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "mermaid_blocks": 1,
+      "matrix_rows": 10,
       "pre_post": {
         "pre": [],
         "post": []
@@ -24653,20 +25039,49 @@
       "layer": "L3",
       "title": "Rust 进程性能工程",
       "positioning": "",
-      "line_count": 74,
+      "line_count": 165,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_os = \"linux\")] use nix::fcntl::{splice, SpliceFFlags};  #[cfg(targe..."
+        },
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "use std::process::Command; use std::time::Instant;  fn main() {     const N: u32..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use criterion::{black_box, criterion_group, criterion_main, Criterion}; use std:..."
+        }
+      ],
       "sources": [],
       "cross_references": [
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../06_ecosystem/10_performance/15_performance_optimization.md",
+        "../00_concurrency/01_concurrency.md",
         "01_process_model_and_lifecycle.md",
         "03_async_process_management.md",
-        "05_ipc_mechanisms.md"
+        "05_ipc_mechanisms.md",
+        "06_process_monitoring_and_diagnostics.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 6,
       "pre_post": {
         "pre": [],
@@ -24680,21 +25095,66 @@
       "layer": "L3",
       "title": "Rust 进程测试与基准",
       "positioning": "",
-      "line_count": 72,
+      "line_count": 194,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "use std::process::{Child, Command};  struct ProcessGuard(Child);  impl ProcessGu..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "#[cfg(unix)] #[test] fn test_sigterm_handling() {     use std::process::Command;..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "#[tokio::test] async fn test_async_command_timeout() {     use tokio::process::C..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use criterion::{criterion_group, criterion_main, Criterion}; use std::process::C..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "#[tokio::test] async fn stress_spawn_limited() {     use tokio::process::Command..."
+        }
+      ],
       "sources": [],
       "cross_references": [
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md",
         "../../06_ecosystem/09_testing_and_quality/17_benchmarking.md",
+        "../00_concurrency/01_concurrency.md",
         "01_process_model_and_lifecycle.md",
         "02_advanced_process_management.md",
-        "03_async_process_management.md"
+        "03_async_process_management.md",
+        "08_process_performance_engineering.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 4,
       "pre_post": {
         "pre": [],
@@ -24708,13 +25168,65 @@
       "layer": "L3",
       "title": "Rust 现代进程管理库",
       "positioning": "",
-      "line_count": 61,
+      "line_count": 182,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use std::process::Command;  fn main() -> std::io::Result<()> {     let output = ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use tokio::process::Command; use tokio::time::{timeout, Duration};  #[tokio::mai..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use duct::cmd;  fn count_rust_files() -> std::io::Result<String> {     let outpu..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "#[cfg(unix)] fn set_nofile_limit(soft: u64, hard: u64) -> Result<(), Box<dyn std..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "use sysinfo::{System, SystemExt, ProcessExt};  fn print_self_memory() {     let ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use daemonize::Daemonize;  fn daemonize_with_pid_file() -> std::io::Result<()> {..."
+        }
+      ],
       "sources": [],
       "cross_references": [
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../06_ecosystem/02_core_crates/03_core_crates.md",
+        "../00_concurrency/01_concurrency.md",
         "01_process_model_and_lifecycle.md",
         "03_async_process_management.md",
         "04_cross_platform_process_management.md",
@@ -24722,8 +25234,8 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 10,
+      "mermaid_blocks": 1,
+      "matrix_rows": 17,
       "pre_post": {
         "pre": [],
         "post": []
@@ -40360,7 +40872,7 @@
       "layer": "L6",
       "title": "Cargo 入门（Cargo Getting Started）",
       "positioning": "让初学者在 5 分钟内理解 Cargo 是什么、能做什么、如何创建并运行第一个 Rust package。",
-      "line_count": 88,
+      "line_count": 169,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -40368,15 +40880,19 @@
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/04_navigation/learning_mvp_path.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
         "../00_toolchain/01_toolchain.md",
+        "09_cargo_script.md",
         "60_cargo_dependency_resolution.md",
         "64_cargo_manifest_reference.md",
+        "78_cargo_workspaces.md",
         "81_cargo_workflow.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 13,
+      "mermaid_blocks": 1,
+      "matrix_rows": 20,
       "pre_post": {
         "pre": [
           "[Toolchain](../00_toolchain/01_toolchain.md) · [Rust Installation](../../00_meta/04_navigation/learning_mvp_path.md)"
@@ -40393,7 +40909,7 @@
       "layer": "L6",
       "title": "Cargo 工作流（Cargo Workflow）",
       "positioning": "覆盖从“创建 package”到“在团队中维护依赖锁定”的完整日常流程。",
-      "line_count": 97,
+      "line_count": 170,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -40401,6 +40917,8 @@
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../01_foundation/07_modules_and_items/11_modules_and_paths.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
         "60_cargo_dependency_resolution.md",
         "78_cargo_workspaces.md",
         "80_cargo_getting_started.md",
@@ -40409,7 +40927,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 16,
+      "matrix_rows": 24,
       "pre_post": {
         "pre": [
           "[Cargo Getting Started](80_cargo_getting_started.md) · [Modules and Paths](../../01_foundation/07_modules_and_items/11_modules_and_paths.md)"
@@ -40426,25 +40944,30 @@
       "layer": "L6",
       "title": "Cargo 指南实践（Cargo Guide Practices）",
       "positioning": "把 Cargo 官方指南中散落在多章的“怎么做”聚合为一份实践速查。",
-      "line_count": 91,
+      "line_count": 166,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
         "../00_toolchain/28_devops_and_ci_cd.md",
         "../09_testing_and_quality/12_testing_strategies.md",
         "../10_performance/15_performance_optimization.md",
+        "10_public_private_deps.md",
+        "11_resolver_v3_public_feature_unification.md",
         "60_cargo_dependency_resolution.md",
         "65_cargo_profiles_and_lints.md",
+        "72_cargo_security_cves.md",
         "81_cargo_workflow.md",
         "83_cargo_configuration.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 15,
+      "mermaid_blocks": 1,
+      "matrix_rows": 16,
       "pre_post": {
         "pre": [
           "[Cargo Workflow](81_cargo_workflow.md) · [Cargo Dependency Resolution](60_cargo_dependency_resolution.md) · [Testing Strategies](../09_testing_and_quality/12_testing_strategies.md)"
@@ -40461,14 +40984,17 @@
       "layer": "L6",
       "title": "Cargo 配置与环境变量（Cargo Configuration）",
       "positioning": "把 Cargo 的“配置”与“环境变量”两大参考章节集中为一份可查阅权威页。",
-      "line_count": 90,
+      "line_count": 180,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
         "../05_systems_and_embedded/17_cross_compilation.md",
+        "61_cargo_source_replacement.md",
         "62_cargo_registries_and_publishing.md",
         "63_cargo_authentication_and_cache.md",
         "81_cargo_workflow.md",
@@ -40477,7 +41003,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 11,
+      "matrix_rows": 26,
       "pre_post": {
         "pre": [
           "[Cargo Workflow](81_cargo_workflow.md) · [Cargo Registries and Publishing](62_cargo_registries_and_publishing.md) · [Cargo Authentication and Cache](63_cargo_authentication_and_cache.md)"
@@ -40494,14 +41020,19 @@
       "layer": "L6",
       "title": "Cargo 命令参考（Cargo Commands Reference）",
       "positioning": "覆盖开发者日常最高频的 Cargo 命令，作为官方命令参考的浓缩权威页。",
-      "line_count": 82,
+      "line_count": 168,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
         "../00_toolchain/28_devops_and_ci_cd.md",
+        "09_cargo_script.md",
+        "66_cargo_subcommands_and_plugins.md",
+        "76_cargo_196_features.md",
         "80_cargo_getting_started.md",
         "81_cargo_workflow.md",
         "83_cargo_configuration.md",
@@ -40511,7 +41042,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 28,
+      "matrix_rows": 51,
       "pre_post": {
         "pre": [
           "[Cargo Getting Started](80_cargo_getting_started.md) · [Cargo Workflow](81_cargo_workflow.md) · [Cargo Configuration](83_cargo_configuration.md)"
@@ -40528,22 +41059,25 @@
       "layer": "L6",
       "title": "Cargo Manifest 目标与元数据（Cargo Manifest Targets）",
       "positioning": "补充 `64_cargo_manifest_reference.md` 未涉及的 target、rust-version、pkgid 等子主题。",
-      "line_count": 100,
+      "line_count": 170,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
         "59_cargo_build_scripts.md",
         "64_cargo_manifest_reference.md",
+        "78_cargo_workspaces.md",
         "81_cargo_workflow.md",
         "84_cargo_commands_reference.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 15,
+      "matrix_rows": 30,
       "pre_post": {
         "pre": [
           "[Cargo Manifest Reference](64_cargo_manifest_reference.md) · [Cargo Workflow](81_cargo_workflow.md)"
@@ -40560,13 +41094,15 @@
       "layer": "L6",
       "title": "Cargo Registry 内部机制（Cargo Registry Internals）",
       "positioning": "为需要自建 registry、审计依赖来源或集成内部凭证系统的团队提供权威参考。",
-      "line_count": 97,
+      "line_count": 160,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
         "../07_security_and_cryptography/19_security_practices.md",
         "61_cargo_source_replacement.md",
         "62_cargo_registries_and_publishing.md",
@@ -40577,7 +41113,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 5,
+      "matrix_rows": 28,
       "pre_post": {
         "pre": [
           "[Cargo Registries and Publishing](62_cargo_registries_and_publishing.md) · [Cargo Authentication and Cache](63_cargo_authentication_and_cache.md) · [Cargo Configuration](83_cargo_configuration.md)"
@@ -43740,22 +44276,75 @@
       "layer": "L6",
       "title": "工程实践与生产级模式",
       "positioning": "",
-      "line_count": 70,
+      "line_count": 298,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 66,
+          "should_fail": false,
+          "code_preview": "use std::sync::atomic::{AtomicUsize, Ordering}; use std::sync::Mutex; use std::t..."
+        },
+        {
+          "flags": [],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "use std::thread; use std::time::Duration;  pub fn with_retry<F, T, E>(mut op: F,..."
+        },
+        {
+          "flags": [],
+          "lines": 37,
+          "should_fail": false,
+          "code_preview": "use std::sync::atomic::{AtomicUsize, Ordering}; use std::sync::Mutex; use std::t..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use tracing::{info, instrument};  #[instrument] pub async fn handle_order(order_..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "#[derive(Debug, Clone, PartialEq)] pub struct SanitizedEmail(String);  impl Sani..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "use arc_swap::ArcSwap; use std::sync::Arc;  pub struct AppConfig {     pub max_r..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "use tokio::sync::mpsc;  pub async fn server_loop(     mut requests: mpsc::Receiv..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../11_domain_applications/76_algorithm_engineering_practice.md",
+        "05_system_design_principles.md",
         "31_microservice_patterns.md",
         "32_event_driven_architecture.md",
-        "35_architecture_patterns.md"
+        "35_architecture_patterns.md",
+        "36_pattern_implementation_comparison.md",
+        "37_pattern_selection_best_practices.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "matrix_rows": 10,
       "pre_post": {
         "pre": [
           "[Architecture Patterns](35_architecture_patterns.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)"
@@ -43772,40 +44361,53 @@
       "layer": "L6",
       "title": "C09 设计模式 - 术语表",
       "positioning": "",
-      "line_count": 383,
+      "line_count": 231,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
         {
           "flags": [],
-          "lines": 8,
+          "lines": 10,
           "should_fail": false,
-          "code_preview": "use std::sync::OnceLock;  static INSTANCE: OnceLock<Config> = OnceLock::new();  ..."
+          "code_preview": "pub trait Greeter {     fn greet(&self) -> &'static str; }  pub fn greet_all(gre..."
         },
         {
           "flags": [],
-          "lines": 5,
+          "lines": 30,
           "should_fail": false,
-          "code_preview": "pub trait Future {     type Output;     fn poll(self: Pin<&mut Self>, cx: &mut C..."
+          "code_preview": "use std::marker::PhantomData;  pub struct Unverified; pub struct Verified;  pub ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use std::sync::OnceLock;  pub struct Config {     pub timeout_ms: u64, }  static..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll};  pub..."
         }
       ],
       "sources": [],
       "cross_references": [
-        "../../05_comparative/00_paradigms/03_paradigm_matrix.md",
-        "/crates/c09_design_pattern/docs/actor_reactor_patterns.md",
-        "/crates/c09_design_pattern/docs/async_sync_equivalence_theory.md",
-        "/crates/c09_design_pattern/docs/csp_vs_async_analysis.md",
-        "/crates/c09_design_pattern/docs/rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md",
-        "/crates/c09_design_pattern/docs/tier_01_foundations/01_project_overview.md",
-        "/crates/c09_design_pattern/docs/tier_01_foundations/02_navigation.md",
-        "/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md",
-        "/crates/c09_design_pattern/docs/tier_01_foundations/04_faq.md",
-        "/crates/c09_design_pattern/docs/tier_04_advanced/README.md"
+        "../../01_foundation/00_start/06_zero_cost_abstractions.md",
+        "../11_domain_applications/76_algorithm_engineering_practice.md",
+        "02_patterns.md",
+        "05_system_design_principles.md",
+        "31_microservice_patterns.md",
+        "35_architecture_patterns.md",
+        "36_pattern_implementation_comparison.md",
+        "37_pattern_selection_best_practices.md",
+        "38_formal_design_pattern_theory.md",
+        "39_frontier_research_and_innovative_patterns.md",
+        "82_engineering_and_production_patterns.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "matrix_rows": 31,
       "pre_post": {
         "pre": [],
         "post": []
@@ -51090,21 +51692,49 @@
       "layer": "L6",
       "title": "前沿算法技术",
       "positioning": "",
-      "line_count": 58,
+      "line_count": 217,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 56,
+          "should_fail": false,
+          "code_preview": "use std::collections::hash_map::DefaultHasher; use std::hash::{Hash, Hasher};  p..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 32,
+          "should_fail": false,
+          "code_preview": "// 需 `rand` crate pub struct LaplaceMechanism {     epsilon: f64,     sensitivit..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 30,
+          "should_fail": false,
+          "code_preview": "// 需 `rand` crate use rand::Rng;  pub fn simulated_annealing<S, E, N, C>(     mu..."
+        }
+      ],
       "sources": [],
       "cross_references": [
+        "../03_design_patterns/39_frontier_research_and_innovative_patterns.md",
+        "../03_design_patterns/82_engineering_and_production_patterns.md",
+        "29_algorithms_competitive_programming.md",
         "46_machine_learning_ecosystem.md",
         "51_quantum_computing_rust.md",
         "76_algorithm_engineering_practice.md",
-        "78_algorithm_complexity_analysis.md"
+        "77_data_structures_in_rust.md",
+        "78_algorithm_complexity_analysis.md",
+        "80_formal_algorithm_theory.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 6,
+      "matrix_rows": 12,
       "pre_post": {
         "pre": [
           "[算法复杂度分析](78_algorithm_complexity_analysis.md) · [算法工程实践](76_algorithm_engineering_practice.md)"
@@ -51121,21 +51751,50 @@
       "layer": "L6",
       "title": "形式化算法理论",
       "positioning": "",
-      "line_count": 69,
+      "line_count": 239,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 32,
+          "should_fail": false,
+          "code_preview": "/// 前置条件：arr 按升序排列 /// 后置条件：返回 target 的索引，若不存在则返回 Err(插入位置) /// 循环不变式：答案（若存在）始终位..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use std::ptr::NonNull;  /// { arr 非空 } -> 返回首元素 { 返回值 == arr[0] } pub fn first_o..."
+        },
+        {
+          "flags": [],
+          "lines": 30,
+          "should_fail": false,
+          "code_preview": "#[cfg(kani)] mod verification {     use super::*;      #[kani::proof]     fn ver..."
+        },
+        {
+          "flags": [],
+          "lines": 38,
+          "should_fail": false,
+          "code_preview": "/// 不变量：每个入队元素最终按 FIFO 顺序出队 pub struct FifoQueue<T> {     inner: std::collection..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../04_formal/03_operational_semantics/15_hoare_logic.md",
         "../../04_formal/04_model_checking/13_formal_methods.md",
+        "../03_design_patterns/38_formal_design_pattern_theory.md",
+        "29_algorithms_competitive_programming.md",
         "76_algorithm_engineering_practice.md",
-        "78_algorithm_complexity_analysis.md"
+        "77_data_structures_in_rust.md",
+        "78_algorithm_complexity_analysis.md",
+        "79_cutting_edge_algorithms.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 9,
+      "matrix_rows": 12,
       "pre_post": {
         "pre": [
           "[算法复杂度分析](78_algorithm_complexity_analysis.md) · [形式化方法](../../04_formal/04_model_checking/13_formal_methods.md) · [Hoare 逻辑](../../04_formal/03_operational_semantics/15_hoare_logic.md)"

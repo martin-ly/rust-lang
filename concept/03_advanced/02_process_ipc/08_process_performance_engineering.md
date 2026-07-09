@@ -1,9 +1,11 @@
 > **EN**: Process Performance Engineering in Rust
 > **Summary**: Performance analysis, profiling tools, zero-copy IPC, process pool optimization, and production monitoring for Rust process management.
+> **Rust Version**: 1.96.1+
 
 # Rust 进程性能工程
 
 > **权威页地位**：本页为 Rust 进程级性能工程概念的 canonical 解释来源。
+> **L2 向下引用**: 性能工程建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
 >
 > 通用性能优化方法论请参见 [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/15_performance_optimization.md)。
 
@@ -49,23 +51,112 @@
 - **sendfile**：文件到 socket 的高效传输。
 - **mmap**：大文件共享访问，减少 `read`/`write` 次数。
 
+```rust,ignore
+#[cfg(target_os = "linux")]
+use nix::fcntl::{splice, SpliceFFlags};
+
+#[cfg(target_os = "linux")]
+fn zero_copy_pipe(read_fd: i32, write_fd: i32, len: usize) -> nix::Result<usize> {
+    splice(read_fd, None, write_fd, None, len, SpliceFFlags::empty())
+}
+```
+
 ## 5. 进程池性能
 
 - 池大小应根据 CPU 核心数、I/O 密集度和外部资源限制调整。
 - 使用有界队列防止任务无限堆积。
 - 监控队列深度、worker 利用率、任务等待时间。
 
-## 6. 生产监控
+## 6. 进程创建延迟基准
+
+下面是一个仅使用标准库测量 `Command::spawn()` 延迟的可复现示例：
+
+```rust,editable
+use std::process::Command;
+use std::time::Instant;
+
+fn main() {
+    const N: u32 = 100;
+    let start = Instant::now();
+    for i in 0..N {
+        let mut child = Command::new("echo")
+            .arg(format!("iteration {}", i))
+            .spawn()
+            .expect("spawn failed");
+        let _ = child.wait();
+    }
+    let elapsed = start.elapsed();
+    println!(
+        "spawn {} processes in {:?}; avg {:?}",
+        N,
+        elapsed,
+        elapsed / N
+    );
+}
+```
+
+## 7. Criterion 基准套件
+
+使用 Criterion 建立可重复的基准，例如比较不同 IPC 机制的小包延迟：
+
+```rust,ignore
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use std::process::{Command, Stdio};
+
+fn bench_pipe_latency(c: &mut Criterion) {
+    c.bench_function("pipe_round_trip", |b| {
+        b.iter(|| {
+            let output = Command::new("echo")
+                .arg(black_box("payload"))
+                .stdout(Stdio::piped())
+                .output()
+                .unwrap();
+            black_box(output.stdout);
+        })
+    });
+}
+
+criterion_group!(benches, bench_pipe_latency);
+criterion_main!(benches);
+```
+
+## 8. 性能调优闭环
+
+```mermaid
+flowchart TD
+    A["定义 SLA 与指标"] --> B["建立基线"]
+    B --> C["定位瓶颈"]
+    C --> D{瓶颈类型}
+    D -->|创建开销| E["进程池 / 预创建"]
+    D -->|I/O 阻塞| F["异步化 / 批量 / 零拷贝"]
+    D -->|内存占用| G["限制 rlimit / cgroups"]
+    E --> H["回归验证"]
+    F --> H
+    G --> H
+    H --> I{是否达标?}
+    I -->|否| C
+    I -->|是| J["固化配置与监控"]
+```
+
+## 9. 生产监控
 
 - 暴露进程创建/退出速率、活跃进程数、退出码分布。
 - 使用 Prometheus 等指标系统建立基线与告警。
 - 定期进行回归测试，防止性能退化。
 
-## 7. 相关概念
+## 10. 最佳实践
+
+- 在优化前先测量，避免过早优化。
+- 优先使用 `tokio::process` 处理高并发 I/O。
+- 对共享内存等高性能 IPC 必须配合同步原语防止数据竞争。
+- 将基准测试纳入 CI，检测每次合并的性能回归。
+
+## 11. 相关概念
 
 - [进程模型与生命周期](01_process_model_and_lifecycle.md)
 - [异步进程管理](03_async_process_management.md)
 - [IPC 机制](05_ipc_mechanisms.md)
+- [进程监控与诊断](06_process_monitoring_and_diagnostics.md)
 - [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/15_performance_optimization.md)
 
 ---

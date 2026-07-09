@@ -1,5 +1,6 @@
 > **EN**: Inter-Process Communication Mechanisms in Rust
 > **Summary**: IPC patterns in Rust: anonymous pipes, named pipes, Unix sockets, TCP/UDP sockets, shared memory, message queues, and signal handling.
+> **Rust Version**: 1.96.1+
 
 # Rust 进程间通信机制（IPC）
 
@@ -182,3 +183,44 @@ fn handle_signals() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 > **权威来源**: [Rust Standard Library — std::process](https://doc.rust-lang.org/std/process/) · [Rust Standard Library — std::net](https://doc.rust-lang.org/std/net/) · [signal-hook crate](https://docs.rs/signal-hook/) · [memmap2 crate](https://docs.rs/memmap2/)
+
+---
+
+## 10. IPC 选型决策流程（Mermaid）
+
+```mermaid
+flowchart TD
+    Start["选择 IPC 机制"] --> Q1{"通信双方是否有亲缘关系?"}
+    Q1 -->|是| Pipe["匿名管道<br/>std::process Stdio"]
+    Q1 -->|否| Q2{"是否在同一主机?"}
+    Q2 -->|否| Socket["TCP/UDP Socket"]
+    Q2 -->|是| Q3{"是否需要最高性能?"}
+    Q3 -->|是| SHM["共享内存 + 原子/信号量"]
+    Q3 -->|否| Q4{"是否需要双向流?"}
+    Q4 -->|是| UDS["Unix Domain Socket"]
+    Q4 -->|否| FIFO["命名管道 / 消息队列"]
+```
+
+---
+
+## 11. 可运行示例：父子匿名管道
+
+```rust,editable
+use std::io::Write;
+use std::process::{Command, Stdio};
+
+fn main() -> std::io::Result<()> {
+    let mut child = Command::new("cat")
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .spawn()?;
+
+    if let Some(mut stdin) = child.stdin.take() {
+        writeln!(stdin, "hello pipe")?;
+    }
+
+    let output = child.wait_with_output()?;
+    println!("{}", String::from_utf8_lossy(&output.stdout));
+    Ok(())
+}
+```

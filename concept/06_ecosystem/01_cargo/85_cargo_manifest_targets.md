@@ -4,7 +4,7 @@
 > **本节关键术语**: Cargo Target · Lib Target · Bin Target · Test Target · Example Target · Bench Target · Rust Version · Package ID Specification — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Manifest Targets
-> **Summary**: Cargo `Cargo.toml` 中的 target 定义：lib、bin、test、example、bench，以及 `rust-version`、`package` 元数据和 Package ID Specification。
+> **Summary**: Cargo `Cargo.toml` target definitions for Rust 1.96.1+: lib, bin, test, example, bench targets, `rust-version`, Package ID Specifications, and per-target configuration.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **P** — Practice
@@ -15,10 +15,7 @@
 
 ---
 
-> **来源**: [Cargo Book — The Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) · · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> [Cargo Book — Cargo Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html) ·
-> [Cargo Book — Rust Version](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field) ·
-> [Cargo Book — Package ID Specifications](https://doc.rust-lang.org/cargo/reference/pkgid-spec.html)
+> **来源**: [Cargo Book — The Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) · [Cargo Book — Cargo Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html) · [Cargo Book — Rust Version](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field) · [Cargo Book — Package ID Specifications](https://doc.rust-lang.org/cargo/reference/pkgid-spec.html)
 
 ---
 
@@ -35,7 +32,9 @@
 | test | `tests/*.rs` | 集成测试 |
 | bench | `benches/*.rs` | 基准测试 |
 
-## 二、显式声明 Target
+## 二、自动发现 vs 显式声明
+
+Cargo 默认按约定路径自动发现 target。当需要覆盖默认路径、名称或配置时，使用显式声明：
 
 ```toml
 [[bin]]
@@ -45,9 +44,21 @@ path = "src/server.rs"
 [[test]]
 name = "integration"
 path = "tests/integration/main.rs"
+
+[[example]]
+name = "demo"
+required-features = ["serde"]
 ```
 
-显式声明可覆盖默认路径和名称。
+显式声明可覆盖默认路径和名称，也可禁用自动发现：
+
+```toml
+[package]
+autobins = false
+autoexamples = false
+autotests = false
+autobenches = false
+```
 
 ## 三、`rust-version` 字段
 
@@ -61,7 +72,7 @@ rust-version = "1.96"
 
 - 声明 package 所需的最低 Rust 版本。
 - Cargo 会在工具链版本过低时给出明确错误。
-- 不影响依赖解析，仅作为元数据与编译前置检查。
+- resolver v3 会利用 `rust-version` 进行 MSRV-aware 版本选择。
 
 ## 四、Package ID Specification
 
@@ -79,6 +90,13 @@ name@version:source_url
 - `cargo tree -p <spec>`
 - `cargo metadata --format-version 1 | jq '.packages[] | .id'`
 
+示例：
+
+```bash
+cargo tree -p serde@1.0.217
+cargo update -p tokio --precise 1.42.0
+```
+
 ## 五、Target 配置项
 
 常见 target 级配置：
@@ -91,7 +109,59 @@ name@version:source_url
 | `bench` | 是否作为 benchmark 编译 |
 | `doc` | 是否包含在文档中 |
 | `edition` | 该 target 使用的 edition |
-| `crate-type` | lib 的 crate 类型：`lib`, `bin`, `cdylib`, `staticlib`, `rlib` 等 |
+| `crate-type` | lib 的 crate 类型 |
+| `required-features` | 构建前必须启用的 features |
+
+## 六、Lib 的 `crate-type`
+
+```toml
+[lib]
+name = "mylib"
+crate-type = ["cdylib", "staticlib", "rlib"]
+```
+
+| 类型 | 用途 |
+|:---|:---|
+| `lib` / `rlib` | Rust 静态库（默认） |
+| `dylib` | Rust 动态库 |
+| `cdylib` | C 兼容动态库 |
+| `staticlib` | C 兼容静态库 |
+| `proc-macro` | 过程宏 |
+
+## 七、`required-features` 示例
+
+```toml
+[features]
+default = []
+serde = ["dep:serde"]
+
+[[bin]]
+name = "cli-with-serde"
+path = "src/cli_with_serde.rs"
+required-features = ["serde"]
+```
+
+未启用 `serde` 时，`cargo build` 不会编译该 binary target。
+
+## 八、Target 选择决策表
+
+| 需求 | 推荐 Target |
+|:---|:---|
+| 提供可复用 Rust API | `src/lib.rs`（lib） |
+| 提供 CLI 入口 | `src/main.rs`（bin） |
+| 多个 CLI 工具 | `src/bin/*.rs`（multi-bin） |
+| 演示库用法 | `examples/*.rs` |
+| 集成测试 | `tests/*.rs` |
+| 性能基准 | `benches/*.rs` |
+| 暴露给 C/Python | `[lib] crate-type = ["cdylib"]` |
+
+## 九、与 Workspace 的关联
+
+在 workspace 中，target 输出目录统一在 workspace root 的 `target/` 下，但每个 member 仍独立声明自己的 target。Workspace root 的 `[profile]` 与 `[workspace.lints]` 会影响所有成员 target。
+
+详见 [Cargo Workspaces](78_cargo_workspaces.md) 与 [Cargo Build Scripts](59_cargo_build_scripts.md)。
+
+> **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Go](../../05_comparative/01_systems_languages/02_rust_vs_go.md)
 
 ---
 
